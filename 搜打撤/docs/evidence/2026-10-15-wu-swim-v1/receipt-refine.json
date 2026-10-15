@@ -1,0 +1,24 @@
+{
+  "status": "candidate-not-approved-not-installed",
+  "date": "2026-10-15",
+  "tool": "built-in image_gen",
+  "request": "精致泳衣；脸对照现行立绘；露额头",
+  "references": [
+    {
+      "role": "edit-target",
+      "path": ".tmp/imagegen/wu-swim-v1-20261015/wu-swim-v1.png"
+    },
+    {
+      "sha256": "71948F3902351F877DE9A8375AF33358DC44975CE2965F57D5B4C2D123CF43DC",
+      "role": "face-identity",
+      "path": "搜打撤/game/assets/portraits/full/wu.webp"
+    }
+  ],
+  "prompt": "prompt-refine.txt",
+  "style": "game-v1.0",
+  "output": {
+    "sha256": "FF3E9D7ADF553067D99182097AF7D5DDF3CC72908B87EBCC053F8E022A853EAB",
+    "bytes": 2381736,
+    "path": ".tmp/imagegen/wu-swim-v1-20261015/wu-swim-v1-refined.png"
+  }
+}

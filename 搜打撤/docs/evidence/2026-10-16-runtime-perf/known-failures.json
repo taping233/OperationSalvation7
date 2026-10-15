@@ -1,0 +1,12 @@
+{
+  "testFile": "tests/battle-entry-view.test.js",
+  "status": "4 failures in extended check; outside this task's active ownership",
+  "cases": [
+    { "title": "preserves decoded winter scenery through simplified entry and rerenders, restoring it on modal return without retrying GPU frames", "location": "52:58", "expected": "3 world scenery layers", "actual": "2 world scenery layers" },
+    { "title": "keeps truly failed winter scenery hidden and reports the failure while simplified combat remains available", "location": "132:19", "expected": "painted layers unavailable warning", "actual": "0 warning calls" },
+    { "title": "allows late decoded scenery after an explicit timeout fallback without undoing the simplified choice", "location": "52:58", "expected": "3 world scenery layers", "actual": "2 world scenery layers" },
+    { "title": "ignores a departed battle background decode when the next battle already owns its scenery", "location": "52:58", "expected": "3 world scenery layers", "actual": "2 world scenery layers" }
+  ],
+  "scopeEvidence": "Test line 25 supplies an independent Art.decodeIn no-op; Icons.rich is also replaced. This file does not execute this task's optimized implementations.",
+  "action": "Preserve battle task ownership; do not change expectations or claim this test passed."
+}

@@ -1,0 +1,17 @@
+{
+  "prompt": "prompt-eyes.txt",
+  "request": "恢复上一版白星泳衣；保留露额头；眼睛对现行立绘精修",
+  "output": {
+    "path": ".tmp/imagegen/wu-swim-v1-20261015/wu-swim-v1-stars-eyes.png",
+    "bytes": 2375233,
+    "sha256": "B20F17FBD6DA34B582821C8A1827779E037A95835338F4FA61B0542875D429D0"
+  },
+  "status": "candidate-not-approved-not-installed",
+  "references": [
+    ".tmp/imagegen/wu-swim-v1-20261015/wu-swim-v1-refined.png",
+    ".tmp/imagegen/wu-swim-v1-20261015/wu-swim-v1.png",
+    "搜打撤/game/assets/portraits/full/wu.webp"
+  ],
+  "tool": "built-in image_gen",
+  "date": "2026-10-15"
+}

@@ -1,0 +1,97 @@
+[
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\layers\\backdrop.webp",
+    "bytes": 124270,
+    "sha256": "a02440d99e07d998df27ba8109ece4259f840bdf1f38fe903e75b1b484c4ec0a",
+    "format": "WEBP",
+    "size": [
+      1660,
+      948
+    ]
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\layers\\foreground.webp",
+    "bytes": 42410,
+    "sha256": "4ee16c5ea65b7d410c49d7161943e8ac112ed77d4658d6ee6f85423b96bf1de9",
+    "format": "WEBP",
+    "size": [
+      1659,
+      948
+    ]
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\layers\\ground.webp",
+    "bytes": 111678,
+    "sha256": "ad03856b5dbe71747077848f50350bda1bebad4aae31e2ab9cb31f4fd098613b",
+    "format": "WEBP",
+    "size": [
+      1660,
+      948
+    ]
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\preview.png",
+    "bytes": 120169,
+    "sha256": "8190c63598f1c18020e6b8392964e95a7dde46e69f88b5168968404316129191",
+    "format": "JPEG",
+    "size": [
+      1280,
+      720
+    ]
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\browser-verification.json",
+    "bytes": 367,
+    "sha256": "377c6092fb4d2eea2cf2afe12f099703f08f1432629181b917795614af6f34f9"
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\hand-rest.png",
+    "bytes": 117715,
+    "sha256": "b99140af255c9ecf9cc85632941d2a30a6d47aafb1c1fa3e7add1e5b97b13d88"
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\hand-hover.png",
+    "bytes": 119202,
+    "sha256": "ffa168826401e7ca3e4cec31bc987745b09f3d30bd3250f7d55964cb0bbc9128"
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\hand-verification.json",
+    "bytes": 4803,
+    "sha256": "49e16773f390e494f3e9df1257819b8efe806dcd039f4ecf940c19bc504159ff"
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\hand-size-rest.png",
+    "bytes": 130777,
+    "sha256": "7c62b348c04ead25a6e4c9565f945921cd775a85a02051a0cedbb43b9c40fd7f"
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\hand-size-hover.png",
+    "bytes": 131492,
+    "sha256": "1db1ba99720d7fff31cadd77abcb701a3d0a2cc16c6762a509bf7d304189e118"
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\hand-size-verification.json",
+    "bytes": 5515,
+    "sha256": "5d42f37b0aeda26035e5e3d1b9e6b2adc6e9ea30066f308f0aef5d5ee605d464"
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\scene-seam.png",
+    "bytes": 139358,
+    "sha256": "bc99e1d34902d357ada8b29ea078d5c093a9f62d416cc72b68ee36970e6bceed"
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\scene-seam-verification.json",
+    "bytes": 1412,
+    "sha256": "d27d18e4a44c39bcdfe9d32002c5808638c54866c78a1c8faab3a6f4496e21cd"
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\controls-layout.png",
+    "bytes": 134888,
+    "sha256": "b07719930546e9e2cd44fb3c5575f80ac090f7d50f76189698dd3aa2d9435bf7"
+  },
+  {
+    "path": "docs\\evidence\\2026-10-15-battle-stage-reset\\controls-layout-verification.json",
+    "bytes": 5488,
+    "sha256": "2c939a550f714d0e8b8702e2bd7d25cc77fc95a64c149b79a7cef5cc812dfe77"
+  }
+]

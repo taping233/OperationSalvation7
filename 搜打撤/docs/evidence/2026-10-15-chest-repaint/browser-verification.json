@@ -1,0 +1,89 @@
+{
+  "origin": "http://127.0.0.1:5200/",
+  "platform": "Codex in-app browser",
+  "scene": "devJumpNode(chest-medium), test run without slot persistence",
+  "input": "Native click 领取宝箱, then native click card 收下",
+  "opening": {
+    "cards": 3,
+    "events": [
+      {
+        "frame": "0",
+        "ms": 68,
+        "phase": "charging",
+        "src": "http://127.0.0.1:5200/assets/scenes/chests/safe-simple-v7/frame-00.webp"
+      },
+      {
+        "frame": "1",
+        "ms": 849,
+        "phase": "opening",
+        "src": "http://127.0.0.1:5200/assets/scenes/chests/safe-simple-v7/frame-00.webp"
+      },
+      {
+        "frame": "2",
+        "ms": 957,
+        "phase": "opening",
+        "src": "http://127.0.0.1:5200/assets/scenes/chests/safe-simple-v7/frame-01.webp"
+      },
+      {
+        "frame": "3",
+        "ms": 1064,
+        "phase": "opening",
+        "src": "http://127.0.0.1:5200/assets/scenes/chests/safe-simple-v7/frame-01.webp"
+      },
+      {
+        "frame": "4",
+        "ms": 1172,
+        "phase": "opening",
+        "src": "http://127.0.0.1:5200/assets/scenes/chests/safe-simple-v7/frame-02.webp"
+      },
+      {
+        "frame": "5",
+        "ms": 1273,
+        "phase": "opening",
+        "src": "http://127.0.0.1:5200/assets/scenes/chests/safe-simple-v7/frame-02.webp"
+      },
+      {
+        "frame": "6",
+        "ms": 1380,
+        "phase": "burst",
+        "src": "http://127.0.0.1:5200/assets/scenes/chests/safe-simple-v7/frame-03.webp"
+      },
+      {
+        "frame": "7",
+        "ms": 1484,
+        "phase": "burst",
+        "src": "http://127.0.0.1:5200/assets/scenes/chests/safe-simple-v7/frame-03.webp"
+      },
+      {
+        "frame": "8",
+        "ms": 1588,
+        "phase": "burst",
+        "src": "http://127.0.0.1:5200/assets/scenes/chests/safe-simple-v7/frame-03.webp"
+      },
+      {
+        "frame": "9",
+        "ms": 1692,
+        "phase": "settle",
+        "src": "http://127.0.0.1:5200/assets/scenes/chests/safe-simple-v7/frame-03.webp"
+      },
+      {
+        "frame": "10",
+        "ms": 1793,
+        "phase": "settle",
+        "src": "http://127.0.0.1:5200/assets/scenes/chests/safe-simple-v7/frame-03.webp"
+      }
+    ],
+    "stage": "cards"
+  },
+  "beforeCardClaim": {
+    "coins": 0,
+    "owned": 5
+  },
+  "afterCardClaim": {
+    "coins": 0,
+    "notice": "1 张已入背包 · 2 张已永久放弃",
+    "owned": 6,
+    "remainingChoices": 0
+  },
+  "errors": []
+}

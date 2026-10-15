@@ -1,0 +1,35 @@
+{
+  "recipe_version": "manual-20260913-candidate",
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, solo, waist-up character portrait, white background, looking at viewer, head and hair accessories fully inside the frame, crop at waist.\n\nSilver-white hair in a high ponytail tied with a blue satin bow, parted bangs revealing both cyan-blue eyes, pale skin, confident smile showing a small fang. Ordinary black round sunglasses rest on her head. A black rose hair ornament is attached beside her left temple, on the right side of the image. Black-gray off-shoulder long-sleeved dress with layered ruffles and a black waist tie. A black straight sword stays sheathed diagonally on her back, fixed by a black strap. Its wrapped grip and angular pommel rise behind her right shoulder, on the left side of the image. Her arms rest at her sides.\n\nHer extremely long white hair is drawn with fine individual strands, and several thin locks dissolve into flowing line work against the background. limited palette, blue theme, flat color, film grain",
+  "uc": "lowres, worst quality, low quality, jpeg artifacts, blurry, bad anatomy, bad hands, extra digits, fewer digits, extra fingers, missing fingers, malformed hands, fused fingers, extra limbs, extra arms, extra legs, deformed, mutated, disfigured, bad proportions, long neck, distorted face, ugly, text, watermark, signature, logo",
+  "artist_chain": "1.2::miv4t::, 0.8::quasarcake::",
+  "model": "nai-diffusion-4-5-full",
+  "seed": 15102027,
+  "width": 832,
+  "height": 1216,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "source_manual": "C:/Users/太平/xwechat_files/wxid_l4rna79xolo712_c0f8/msg/file/2026-09/NovelAI生图功能手册-AI接手版.md",
+  "identity_source": "docs/character-bible/wu.md; game/assets/portraits/full/wu.webp",
+  "references_uploaded": [],
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-half-20261015\\wu-half-manual.png",
+  "default_style_sha256": "eed984ab1449e9c51860913fe44cdc9342fbeaf159b474b3f9a6a7dedde04487",
+  "default_style_modified": false,
+  "status": "generated",
+  "sha256": "6d7c46c43a9f7d71217ffbdccdc2e22361eec2b29b416d6df65b5fcdb05e64ed",
+  "verification": {
+    "http": 200,
+    "dimensions": [
+      832,
+      1216
+    ],
+    "default_style_unchanged": true,
+    "integration": "candidate only, not installed"
+  }
+}

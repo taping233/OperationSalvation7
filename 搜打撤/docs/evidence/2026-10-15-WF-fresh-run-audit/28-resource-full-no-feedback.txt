@@ -1,0 +1,36 @@
+- main:
+  - generic "持有金币":
+    - text: 金币
+    - generic: "23"
+  - generic "攻击力":
+    - text: 攻击
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 33/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - generic: 资源补给
+    - heading "物资投放点" [level=3]
+    - article:
+      - button "放大查看木材":
+        - img "木材"
+        - generic: 资源
+        - generic: ·古朴
+        - generic: 木材
+        - generic: 木材 ×1。
+      - button "收下"
+    - article:
+      - button "放大查看一把钥匙":
+        - img "一把钥匙"
+        - generic: 资源
+        - generic: ·古朴
+        - generic: 一把钥匙
+        - generic: 解锁大门。
+      - button "收下" [active]
+    - complementary "奖励操作":
+      - button "继续探索":
+        - generic: 继续探索
+    - button "整理背包"
+    - generic: 两张资源卡中选择一张，未领取时保留在此处

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-arknights-art-ui-skill-r2",
+  "date": "2026-10-15",
+  "owner": "Friday",
+  "goal": "继续精读未完资料，以具体图文和动效证据迭代个人方舟美术UI技能",
+  "paths": [
+    "docs/evidence/2026-10-15-WF-arknights-art-ui-skill-r2"
+  ],
+  "doneWhen": [
+    "新增已核读案例与有证据的设计方法，并更新来源阅读状态",
+    "技能校验与安装一致性核对通过，登记释放"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "技能验证器通过；7文件UTF-8、11内部链接及锚点、17来源条目与元数据核对通过；安装SHA一致且旧版已保留",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "站酷部分图文受限；未观看原动效或书内全文；未独立复验第三方测量与当前客户端行为"
+  ],
+  "updatedAt": "2026-10-15T09:47:27.500Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

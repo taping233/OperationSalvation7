@@ -1,0 +1,32 @@
+{
+  "version": "v1.2",
+  "changedOrAdded": [
+    "SKILL.md",
+    "assets/trial-space-v11-text-only.png",
+    "references/iteration.md",
+    "references/prompt-recipe.md",
+    "references/space-comparison-v12.md",
+    "references/space-study-20261015.md",
+    "references/style-prompt.md",
+    "references/trial-space-v11-prompt.txt"
+  ],
+  "installedSha256": {
+    "SKILL.md": "83c3d0500a66a615cbc26926d71ed98184eb57b1593ad82be5a8b7de018669e6",
+    "assets/trial-space-v11-text-only.png": "d0baf129f50488a651472100f870b8771d774f4127d5703c9c497e7c77e371c7",
+    "references/iteration.md": "f5dc74fbdaca07ef03cf42d46f80237ce27b21bdd2992fb6e0a78aa786c44222",
+    "references/prompt-recipe.md": "4614b635a7a76d219ecb00fb783bcffa0da8be4a7b400e14bf1c2ba593ac8366",
+    "references/space-comparison-v12.md": "0d50b9d382aaf92871a5b5f2f20ae867a79381d34b795b90afd11e4a27524007",
+    "references/space-study-20261015.md": "df75cc3050e2f16897481c018619bb94f9cfc8edd2632fd9cd025780d61302ca",
+    "references/style-prompt.md": "7db22f239c0b02a05d3d58815f2fc65117b4aa2eb5f39fca914f2f91d9e680ee",
+    "references/trial-space-v11-prompt.txt": "2a39ac34a88544d839f7b0e7fe739543e8ab44e21bf2fc4996050963370dcaf1"
+  },
+  "originalFilesBeforeRevision": 44,
+  "protectedOriginalFilesVerified": 39,
+  "checks": [
+    "quick_validate passed",
+    "new relative links resolved",
+    "installed hashes match candidate",
+    "all unaffected original hashes retained"
+  ],
+  "generation": "No v1.2 sample generated; effect unverified"
+}

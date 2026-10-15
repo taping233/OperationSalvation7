@@ -1,0 +1,109 @@
+{
+  "status": "imported",
+  "processing": "Equal-cell cropping, +32px row-two origin alignment, lossless RGBA WebP encoding. Generated alpha preserved, no keying/repainting.",
+  "assets": [
+    {
+      "path": "scenes/chests/safe-v3/frame-00.webp",
+      "bytes": 157146,
+      "sha256": "b029725de37e904ee8726b3ead3399e3b5bd4c733759d0beac8f26708bde5f9a",
+      "size": [
+        512,
+        512
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "path": "scenes/chests/safe-v3/frame-01.webp",
+      "bytes": 160084,
+      "sha256": "687fc971191beef529970441b5f366d3e4d376f819ae46df56823a5b1eab6d6e",
+      "size": [
+        512,
+        512
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "path": "scenes/chests/safe-v3/frame-02.webp",
+      "bytes": 166360,
+      "sha256": "85d7a132d3ddc80104736beb0adec7b987eccf7491b7487c3fd5be08a92eba2c",
+      "size": [
+        512,
+        512
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "path": "scenes/chests/safe-v3/frame-03.webp",
+      "bytes": 186094,
+      "sha256": "b7d4f342dab135386e1cd75dc2da3ee363374ac4cc2953139f9a02903026aa12",
+      "size": [
+        512,
+        512
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "path": "scenes/chests/safe-v3/frame-04.webp",
+      "bytes": 212570,
+      "sha256": "d536e5375de048ccf198ef173300b4b8f06f93408db3193b707c0dfe72b4d6b2",
+      "size": [
+        512,
+        512
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "path": "scenes/chests/safe-v3/frame-05.webp",
+      "bytes": 200750,
+      "sha256": "1c3c4e0e1315f04982d0d4fb0a6c4472b4340600dcb1a164eb02e35ee7476c4e",
+      "size": [
+        512,
+        512
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "path": "scenes/chests/safe-v3/burst.webp",
+      "bytes": 244272,
+      "sha256": "95a12c162983e69c0e3176bade0a313ad1e8400b663442e9d557e5d54bec87b3",
+      "size": [
+        640,
+        640
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "local_source": "game/art-source/chests/safe-v3/safe-atlas.png",
+      "sha256": "f2b0bc60150504f3c1ce8aa2388c1f8f146414129e7dec1fe8f7724313e4b3cc",
+      "tool": "built-in imagegen"
+    },
+    {
+      "local_source": "game/art-source/chests/safe-v3/burst-source.png",
+      "sha256": "3b304b342bc449e9017695b695af3ae672579423256b1698e852af9862dc9fa3",
+      "tool": "built-in imagegen"
+    }
+  ]
+}

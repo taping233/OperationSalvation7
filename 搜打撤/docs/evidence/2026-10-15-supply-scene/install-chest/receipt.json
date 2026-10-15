@@ -1,0 +1,30 @@
+{
+  "source": "game/art-source/scenes/supply-petal-20261015/interior-searcher-imagegen.png",
+  "source_sha256": "f1f33d95dadcc1436bd8908aa2746a45c4f34df3f892f0d44ac7ceb4adadc905",
+  "outputs": [
+    {
+      "path": "scenes/scene-chest-anime-v2.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "bytes": 135098,
+      "sha256": "841f161e1076e0b4444172f92cf31536cd9d97e5c68718fb15d3d1b88f45e783",
+      "previous_sha256": "a700049497eb50c330dc628aac57ecb10c24d192e606ba430232e904273f6cec",
+      "backup": "docs\\evidence\\2026-10-15-supply-scene\\install-chest\\previous-scene.webp"
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-anime-v2.webp",
+      "size": [
+        448,
+        252
+      ],
+      "bytes": 17862,
+      "sha256": "dd8171ff2e052b4be0390176b1b383c174aadcb95e291b741ba1c37a8d46e5eb",
+      "previous_sha256": "1d47f1b0601136967f01fc0696f867274027b111f2e0da0e12cc7f6171fbedc5",
+      "backup": "docs\\evidence\\2026-10-15-supply-scene\\install-chest\\previous-thumb.webp"
+    }
+  ],
+  "tests": "Skipped at user request",
+  "browser": "Skipped at user request"
+}

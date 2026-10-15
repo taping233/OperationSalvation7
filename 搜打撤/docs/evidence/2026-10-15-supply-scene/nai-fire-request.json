@@ -1,0 +1,63 @@
+{
+  "status": "generated",
+  "recipe_version": "2.0",
+  "cleanup_version": "1.0",
+  "request": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\n1person, adult traveler with short blue hair, gray winter jacket and an orange backpack set on the bench. Sitting on a curved station bench, leaning forward and warming both gloved hands over a small portable fire brazier, quiet rest. Visible orange flames inside a low metal fire bowl, kettle on a side bracket. A sheltered campsite inside an abandoned futuristic elevated transit waiting hall in winter. One broken curved translucent windscreen wraps around the warm little camp like a crescent, torn canopy above, a folded blanket on the bench.\n\nWide game environment illustration for campfire rest, calm warmth and recovery in a cold futuristic city.\n\n16:9 horizontal. Diagonal wide view from the station entrance, strong two-point perspective. A large dark structural rib crops the near left edge; floor seams lead to the traveler and fire at middle-left. Crescent bench recedes into room depth. Tall open arch reveals distant snow-covered elevated city terraces. Right 40 percent quieter cool architecture for game choices, lower-left floor quiet for narration. Person about 30 percent of image height, full seated silhouette, believable human scale.\n\nWinter blue hour, cold teal and slate blue city, warm amber fire lights hands and face and ivory canopy underside, warm light concentrated at camp. Large coherent shadows, sparse snow at open edge, interior dry, matte synthetic panels and broad architectural forms, inviting stillness.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1024,
+      "height": 576,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 101524025,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, multiple people, standing, fighting, medieval, stone castle, old european buildings, wooden cabin, huge bonfire, fire on bench, huge kettle, dense rubble, crowded equipment, logo",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\n1person, adult traveler with short blue hair, gray winter jacket and an orange backpack set on the bench. Sitting on a curved station bench, leaning forward and warming both gloved hands over a small portable fire brazier, quiet rest. Visible orange flames inside a low metal fire bowl, kettle on a side bracket. A sheltered campsite inside an abandoned futuristic elevated transit waiting hall in winter. One broken curved translucent windscreen wraps around the warm little camp like a crescent, torn canopy above, a folded blanket on the bench.\n\nWide game environment illustration for campfire rest, calm warmth and recovery in a cold futuristic city.\n\n16:9 horizontal. Diagonal wide view from the station entrance, strong two-point perspective. A large dark structural rib crops the near left edge; floor seams lead to the traveler and fire at middle-left. Crescent bench recedes into room depth. Tall open arch reveals distant snow-covered elevated city terraces. Right 40 percent quieter cool architecture for game choices, lower-left floor quiet for narration. Person about 30 percent of image height, full seated silhouette, believable human scale.\n\nWinter blue hour, cold teal and slate blue city, warm amber fire lights hands and face and ivory canopy underside, warm light concentrated at camp. Large coherent shadows, sparse snow at open edge, interior dry, matte synthetic panels and broad architectural forms, inviting stillness.",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, multiple people, standing, fighting, medieval, stone castle, old european buildings, wooden cabin, huge bonfire, fire on bench, huge kettle, dense rubble, crowded equipment, logo",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [],
+  "output": "game\\art-source\\scenes\\fire-shelter-20261015\\nai-fire-draft.png",
+  "ratio": "16:9",
+  "concept": "废弃高架候车厅的弧形挡风营火",
+  "runtime_installed": false,
+  "seed": 101524025,
+  "sha256": "055eda8e0bfb0ae74f0685b05d82442b8b9ab286adda2e16414b67194fdea1d6"
+}

@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-15",
+  "method": "Codex In-app Browser actual clicks + rendered DOM and screenshot inspection",
+  "viewport": {
+    "width": 1280,
+    "height": 720,
+    "override": false
+  },
+  "origin": "http://127.0.0.1:5200",
+  "artifact": "field-supply-demo.html",
+  "observations": [
+    {
+      "name": "预览不加入",
+      "preview": "便携电源",
+      "count": "0 / 2",
+      "reviewDisabled": true
+    },
+    {
+      "name": "加入两件",
+      "preview": "封装急救包",
+      "count": "2 / 2",
+      "reviewDisabled": false,
+      "action": "从清单移除 −"
+    },
+    {
+      "name": "移除一件",
+      "count": "1 / 2"
+    },
+    {
+      "name": "缺货仍可浏览",
+      "preview": "净水滤芯",
+      "count": "2 / 2",
+      "addDisabled": true,
+      "reason": "净水滤芯缺货，无法加入清单。"
+    },
+    {
+      "name": "核对覆盖层",
+      "dialogOpen": true,
+      "list": [
+        "便携电源× 1",
+        "封装急救包× 1"
+      ],
+      "visual": "Scene remains visible to the left"
+    },
+    {
+      "name": "取消",
+      "dialogOpen": false,
+      "preview": "净水滤芯",
+      "count": "2 / 2"
+    },
+    {
+      "name": "最终CSS修正后重验提交",
+      "dialogOpen": false,
+      "count": "0 / 2",
+      "reviewDisabled": true,
+      "result": "已演示登记 2 件：封装急救包、便携电源。",
+      "actionBottom": 674.1,
+      "resultBottom": 705.3,
+      "horizontalOverflow": false
+    }
+  ],
+  "status": "passed",
+  "scope": "Same-session single application; no independent user/agent validation or game integration",
+  "screenshots": "Viewed through browser screenshot tool; local file export blocked by browser data-URL policy; not bypassed"
+}

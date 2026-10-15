@@ -1,0 +1,58 @@
+{
+  "brokenImages": [],
+  "figureBottom": 442.6750183105469,
+  "layers": [
+    {
+      "mask": "none",
+      "name": "scene-layer backdrop",
+      "rect": {
+        "bottom": 720,
+        "height": 720,
+        "left": 0,
+        "right": 1280,
+        "top": 0,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "source": "/@fs/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-battle-stage-reset/layers/backdrop.webp"
+    },
+    {
+      "mask": "linear-gradient(rgba(0, 0, 0, 0) 43%, rgb(0, 0, 0) 52%)",
+      "name": "scene-layer ground",
+      "rect": {
+        "bottom": 720.0000305175781,
+        "height": 590.4000244140625,
+        "left": 0,
+        "right": 1280,
+        "top": 129.60000610351562,
+        "width": 1280,
+        "x": 0,
+        "y": 129.60000610351562
+      },
+      "source": "/@fs/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-battle-stage-reset/layers/ground.webp"
+    },
+    {
+      "mask": "none",
+      "name": "scene-layer foreground",
+      "rect": {
+        "bottom": 720,
+        "height": 720,
+        "left": 0,
+        "right": 1280,
+        "top": 0,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "source": "/@fs/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-battle-stage-reset/layers/foreground.webp"
+    }
+  ],
+  "renderer": "webgl",
+  "scrollY": 0,
+  "viewport": [
+    1280,
+    720
+  ],
+  "logs": []
+}

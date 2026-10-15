@@ -1,0 +1,22 @@
+{
+  "recipe_version": "1.7",
+  "artist_chain": "1.2::miv4t::, 0.8::quasarcake::",
+  "style_block": "anime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.",
+  "base_uc": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views",
+  "verification": [
+    "v1.7 style exact match",
+    "UC unchanged",
+    "6 prompt tests passed",
+    "docs:check passed, 458 links"
+  ],
+  "client_model": "nai-diffusion-4-5-full",
+  "client_parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "generated": false
+}

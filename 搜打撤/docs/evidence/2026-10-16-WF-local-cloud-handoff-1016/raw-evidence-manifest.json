@@ -1,0 +1,20 @@
+[
+  {
+    "path": "full-tests.json",
+    "bytes": 1597731,
+    "sha256": "933396313c6dd14af89f4a1721b59e32a2effc432db7ec44627716b302d1ef4c",
+    "acquisition": "本轮 npm test 输出，原件保留在本机证据目录"
+  },
+  {
+    "path": "full-tests-unsandboxed.json",
+    "bytes": 1475304,
+    "sha256": "93a02b8dcf89ceee4276a2c269a7466219cbb053b8ea8e22016c03df4b06700e",
+    "acquisition": "本轮 npm test 输出，原件保留在本机证据目录"
+  },
+  {
+    "path": "full-tests-unsandboxed.log",
+    "bytes": 361243,
+    "sha256": "64b314cdcb3af91691ba43ba0d2499705a7a29fe82db5928edc2343a5d318f60",
+    "acquisition": "本轮 npm test 输出，原件保留在本机证据目录"
+  }
+]

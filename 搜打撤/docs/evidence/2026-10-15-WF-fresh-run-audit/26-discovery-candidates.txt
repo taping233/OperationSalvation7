@@ -1,0 +1,64 @@
+- complementary:
+  - navigation "远征工具":
+    - button "背包：携带卡牌 15/16" [disabled]:
+      - img "bag"
+      - generic: 背包
+      - strong: 15/16
+      - generic: B
+    - button "安全格：保护物资 2/2" [disabled]:
+      - img "lock"
+      - generic: 安全格
+      - strong: 2/2
+    - button "消耗口袋：待复原卡牌 7" [disabled]:
+      - img "cards"
+      - generic: 消耗口袋
+      - strong: "7"
+    - button "map 定位 F" [disabled]:
+      - img "map"
+      - generic: 定位
+      - generic: F
+    - button "map 总览 G" [disabled]:
+      - img "map"
+      - generic: 总览
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic "持有金币":
+    - generic: "19"
+  - generic "攻击力":
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 30/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "question 发现":
+    - heading "question 发现" [level=3]:
+      - img "question"
+      - text: 发现
+    - generic: 第 1 回合 · 能量 2/2
+    - paragraph: 选择 1 张置入手牌
+    - paragraph: 战斗内临时牌 · 战后消散
+    - button "发现 雷殛，选择 1 张置入手牌" [active]:
+      - generic: "2"
+      - img "雷殛"
+      - generic: 法术
+      - generic: ·传说
+      - generic: 雷殛
+      - generic: 造成 7 点法术伤害；你的墓地中每有 1 张法术牌，本牌伤害增加 1 点。
+    - button "发现 斗神酒，选择 1 张置入手牌":
+      - generic: "0"
+      - img "斗神酒"
+      - generic: 道具
+      - generic: ·传说
+      - generic: 斗神酒
+      - generic: 你回复 99 点生命。
+    - button "发现 混沌之眼，选择 1 张置入手牌":
+      - generic: "0"
+      - img "混沌之眼"
+      - generic: 装备
+      - generic: ·传说
+      - generic: 混沌之眼
+      - generic: 对战开始时，你的生命上限增加 10 点，牌库上限增加 5 张。

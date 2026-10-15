@@ -1,0 +1,30 @@
+{
+  "source": "game/art-source/scenes/fire-shelter-20261015/fire-three-faces.png",
+  "source_sha256": "9c98c95433ccb02d3036702a99cf93a6aeef5b71262392dc871337ae77a0b7d0",
+  "outputs": [
+    {
+      "path": "scenes/scene-fire-anime-v2.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "bytes": 79890,
+      "sha256": "d346d8ce3664fe5dcda6eaf64979127ced4d4c9c50cbf04447445e52c033b708",
+      "previous_sha256": "c5b94b3504146d292b4db06b39d462aafd33336a39ba960a41a04043e0ad6c0a",
+      "backup": "docs\\evidence\\2026-10-15-supply-scene\\install-fire-faces-v3\\previous-scene.webp"
+    },
+    {
+      "path": "thumbs/scenes/scene-fire-anime-v2.webp",
+      "size": [
+        448,
+        252
+      ],
+      "bytes": 13546,
+      "sha256": "f0e100bc2193634172d9a43ebe0243c6ca7724f5012bf15bd43e4e33a9f1eb7c",
+      "previous_sha256": "f27225927e72cbf20588884db3802f34a57f969abe55af297b0294e03910fac6",
+      "backup": "docs\\evidence\\2026-10-15-supply-scene\\install-fire-faces-v3\\previous-thumb.webp"
+    }
+  ],
+  "tests": "Skipped at user request",
+  "browser": "Skipped at user request"
+}

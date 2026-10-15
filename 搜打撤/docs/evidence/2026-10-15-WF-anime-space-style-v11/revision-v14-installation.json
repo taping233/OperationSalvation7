@@ -1,0 +1,27 @@
+{
+  "version": "v1.4",
+  "changed": [
+    "SKILL.md",
+    "references/iteration.md",
+    "references/prompt-recipe.md",
+    "references/space-comparison-v14.md",
+    "references/style-prompt.md",
+    "references/trial-space-v14-prompt.txt"
+  ],
+  "sha256": {
+    "SKILL.md": "9b0c4ba07837581176652d9c22b587fdaaeb4c67d37668724ddfb4c160bc02c4",
+    "references/iteration.md": "4ea1891e1489ab876e518ee9214197b2c2b2301fa1ed74573412a46311e122af",
+    "references/prompt-recipe.md": "0d93ee15491b662b17f898b6be155b80bff0ba14acb64e3785c298d2c39444b5",
+    "references/space-comparison-v14.md": "54ed38496031f108145afd912c1988f41a8962a65babe1b2256035e1eb206957",
+    "references/style-prompt.md": "1a0a81053be424720bccf51945294d82d9048b034dc9d31a9aea0fc19119e4c8",
+    "references/trial-space-v14-prompt.txt": "866c892c0ca907d2631bc14e8aea51a3337c19f27edf93fec9644e19fbc7f610"
+  },
+  "protectedOriginalFiles": 45,
+  "checks": [
+    "frontmatter valid",
+    "relative links resolved",
+    "installed hashes match",
+    "other original files retained"
+  ],
+  "experiment": "multiple variables changed; no image input"
+}

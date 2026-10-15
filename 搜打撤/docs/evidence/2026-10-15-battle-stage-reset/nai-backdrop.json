@@ -1,0 +1,61 @@
+{
+  "status": "generated",
+  "recipe_version": "2.0",
+  "cleanup_version": "1.0",
+  "request": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\nno humans, winter futuristic city transit district, broad modular buildings and elevated automated monorail tracks, pale slate blue sky, distant megastructures, tiny warm amber window accents, science fiction city, snow on horizontal roofs\n\nIndependent BACKGROUND layer of a side-view 2D card battle stage. Architecture and sky only, no foreground objects, no characters, no UI.\n\nWide landscape 16:9. Fixed camera looking horizontally down a spacious transit plaza, horizon at 48 percent height. Buildings frame the left and right, central vista stays open. The bottom third is quiet distant blue haze, no close pavement.\n\nCold overcast winter daylight, readable large silhouettes, muted cool gray and blue masses, a few warm ochre accents, matte modern composite and concrete materials.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 10150151,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, person, character, medieval, castle, gothic arch, old brick factory, cobblestones, giant signs, logo, UI, close foreground, busy tiny detail",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\nno humans, winter futuristic city transit district, broad modular buildings and elevated automated monorail tracks, pale slate blue sky, distant megastructures, tiny warm amber window accents, science fiction city, snow on horizontal roofs\n\nIndependent BACKGROUND layer of a side-view 2D card battle stage. Architecture and sky only, no foreground objects, no characters, no UI.\n\nWide landscape 16:9. Fixed camera looking horizontally down a spacious transit plaza, horizon at 48 percent height. Buildings frame the left and right, central vista stays open. The bottom third is quiet distant blue haze, no close pavement.\n\nCold overcast winter daylight, readable large silhouettes, muted cool gray and blue masses, a few warm ochre accents, matte modern composite and concrete materials.",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, person, character, medieval, castle, gothic arch, old brick factory, cobblestones, giant signs, logo, UI, close foreground, busy tiny detail",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [],
+  "output": "docs\\evidence\\2026-10-15-battle-stage-reset\\nai\\backdrop.png",
+  "method": "NAI guarded client; separate layer draft, then built-in repaint",
+  "seed": 10150151,
+  "sha256": "83600ed48c347cbcfe1aa16796250de029b640399086b8d56aaeb041986e4de4"
+}

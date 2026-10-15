@@ -1,0 +1,59 @@
+[
+  {
+    "layer": "backdrop",
+    "tool": "built-in imagegen",
+    "intent": "NAI draft repaint",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a13ff6-f481-7ab2-b352-2ba66951208d\\exec-824e0be9-24fa-4482-9073-0b40aaa01b53.png",
+    "original_sha256": "e0defc5c47939508ec21d177df6f471eefb8c66cb8d117b7c9e21ff6782f8257",
+    "output": "docs\\evidence\\2026-10-15-battle-stage-reset\\layers\\backdrop.webp",
+    "sha256": "a02440d99e07d998df27ba8109ece4259f840bdf1f38fe903e75b1b484c4ec0a",
+    "size": [
+      1660,
+      948
+    ],
+    "bytes": 124270,
+    "alpha": [
+      255,
+      255
+    ],
+    "acquisition": "Built-in imagegen edit of the matching nai draft; WebP encoding only, no compositing or alpha editing in Python"
+  },
+  {
+    "layer": "ground",
+    "tool": "built-in imagegen",
+    "intent": "NAI draft repaint",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a13ff6-f481-7ab2-b352-2ba66951208d\\exec-f28319a0-dca1-4f30-9d17-ab150bec1841.png",
+    "original_sha256": "0ba8b4d59b291ca3f1d3293410afbf07cd38afb8d665ab1f3ac65eca14e7a41b",
+    "output": "docs\\evidence\\2026-10-15-battle-stage-reset\\layers\\ground.webp",
+    "sha256": "ad03856b5dbe71747077848f50350bda1bebad4aae31e2ab9cb31f4fd098613b",
+    "size": [
+      1660,
+      948
+    ],
+    "bytes": 111678,
+    "alpha": [
+      0,
+      255
+    ],
+    "acquisition": "Built-in imagegen edit of the matching nai draft; WebP encoding only, no compositing or alpha editing in Python"
+  },
+  {
+    "layer": "foreground",
+    "tool": "built-in imagegen",
+    "intent": "NAI draft repaint",
+    "original": "C:\\Users\\太平\\.codex\\generated_images\\01a13ff6-f481-7ab2-b352-2ba66951208d\\exec-2c79da30-5aef-4502-adda-cd363f668957.png",
+    "original_sha256": "648bb9383b50a17e7d98db7d72a9a5835f5b3b9b99fd3a08a46bb27efa2ddb79",
+    "output": "docs\\evidence\\2026-10-15-battle-stage-reset\\layers\\foreground.webp",
+    "sha256": "4ee16c5ea65b7d410c49d7161943e8ac112ed77d4658d6ee6f85423b96bf1de9",
+    "size": [
+      1659,
+      948
+    ],
+    "bytes": 42410,
+    "alpha": [
+      0,
+      255
+    ],
+    "acquisition": "Built-in imagegen edit of the matching nai draft; WebP encoding only, no compositing or alpha editing in Python"
+  }
+]

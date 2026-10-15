@@ -1,0 +1,26 @@
+{
+  "approval": "老板：实装吧（最新递进景深版本）",
+  "skin": {
+    "character": "wu",
+    "id": "beach",
+    "name": "盛夏·水枪"
+  },
+  "source": ".tmp\\imagegen\\wu-swim-nai-20261015\\wu-swim-depth.png",
+  "sourceSha256": "d6a70f8b84c9c3e4c80befd2f5bef696ef3f727d204d9ed8bedd7fadc49d35c7",
+  "backup": ".tmp\\imagegen\\wu-swim-nai-20261015\\before-install-wu-beach.webp",
+  "backupSha256": "ab6ef6ca97605bae477829103297195127eca98efcee31237060b9eaff626b1f",
+  "target": {
+    "path": "portraits/full/wu-beach.webp",
+    "ext": "webp",
+    "license": "项目自有（AI 生成）",
+    "bytes": 269020,
+    "sha256": "04115135ab99bcbbbe77c6472610e5a948759f6750655130ce02bf0dd88c0828",
+    "source": "docs/evidence/2026-10-15-wu-swim-nai/installed.json"
+  },
+  "dimensions": [
+    1660,
+    948
+  ],
+  "encoding": "Pillow RGB WebP quality=92 method=6",
+  "references": "Existing skin mapping retained; only image and its manifest entry changed"
+}

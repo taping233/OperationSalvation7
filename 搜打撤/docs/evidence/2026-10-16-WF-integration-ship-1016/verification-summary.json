@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-15T17:32:31.517Z",
+  "codeCommit": "b3820ca6e83762c8a073ed7ae03234b301576007",
+  "codeFiles": 234,
+  "frozen": {
+    "exitCode": 0,
+    "outcome": "passed",
+    "report": "docs/evidence/2026-10-16-WF-integration-ship-1016/2026-10-15T17-25-19.753Z-b8543a65-staged.json",
+    "reportSha256": "171e72bb626fe5e31d966f6de1c8d69bd901959acaca480b8d009629351610f7",
+    "files": 441,
+    "passed": 4028,
+    "skipped": 16,
+    "environment": {
+      "VITEST_MAX_FORKS": "2",
+      "VITEST_MIN_FORKS": "1"
+    },
+    "gateReceiptReusedByNormalHook": true
+  },
+  "ordinary": {
+    "files": 441,
+    "passed": 4032,
+    "failed": 0,
+    "skipped": 12,
+    "unhandledErrors": 0
+  },
+  "build": "Vite generated; postbuild exits1 on four pre-existing budget categories. See build-budget-comparison.json",
+  "browser": "unavailable; see browser-limitation.json",
+  "privacy": {
+    "texts": 576,
+    "findings": 0
+  },
+  "unverified": [
+    "Remote push and archive pending at documentation commit time"
+  ]
+}

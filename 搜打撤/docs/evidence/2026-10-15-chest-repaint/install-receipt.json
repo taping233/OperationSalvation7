@@ -1,0 +1,46 @@
+{
+  "status": "installed",
+  "owner_approval": "2026-10-15 老板：实装吧",
+  "assets": [
+    {
+      "path": "scenes/chests/safe-simple-v7/frame-00.webp",
+      "ext": "webp",
+      "license": "项目原创（老板授权 NAI 草稿＋内置 imagegen 透明素材）",
+      "bytes": 199562,
+      "sha256": "cd9f549102b33b3f2e8a5a6d81b17349bffa38c0e14c9a13a7f9ebea2e1188c9",
+      "source": "docs/evidence/2026-10-15-chest-repaint/simple-preview-receipt.json"
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7/frame-01.webp",
+      "ext": "webp",
+      "license": "项目原创（老板授权 NAI 草稿＋内置 imagegen 透明素材）",
+      "bytes": 183892,
+      "sha256": "19830d5e7080c42488874aba116b5dc6be5dda8e5fbcf4f8ac54ea83bd089996",
+      "source": "docs/evidence/2026-10-15-chest-repaint/simple-preview-receipt.json"
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7/frame-02.webp",
+      "ext": "webp",
+      "license": "项目原创（老板授权 NAI 草稿＋内置 imagegen 透明素材）",
+      "bytes": 180958,
+      "sha256": "3fde8e2b661dafe6c1bcf25f0929d98df1413825ccfbfb911a1688a256ad1f8e",
+      "source": "docs/evidence/2026-10-15-chest-repaint/simple-preview-receipt.json"
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7/frame-03.webp",
+      "ext": "webp",
+      "license": "项目原创（老板授权 NAI 草稿＋内置 imagegen 透明素材）",
+      "bytes": 239750,
+      "sha256": "d3c9f87e322e6beadbff73dc82bef748a03a29ddbd3c88279603e473c7defcc3",
+      "source": "docs/evidence/2026-10-15-chest-repaint/simple-preview-receipt.json"
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7/burst.webp",
+      "ext": "webp",
+      "license": "项目原创（老板授权 NAI 草稿＋内置 imagegen 透明素材）",
+      "bytes": 141710,
+      "sha256": "64107ff0efcb2dab6cf420e0d4a43d0edda404ed6ee8c778bfdda3a484ced423",
+      "source": "docs/evidence/2026-10-15-chest-repaint/simple-preview-receipt.json"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "skillValidator": "passed",
+  "utf8LocalLinksAndAnchors": "passed",
+  "localLinkCount": 11,
+  "metadata": "passed",
+  "sourceRows": 17,
+  "installedBaselineUnchanged": true,
+  "fileCount": 7,
+  "changedFiles": [
+    "SKILL.md",
+    "references/art-principles.md",
+    "references/case-studies.md",
+    "references/page-recipes.md",
+    "references/sources.md",
+    "references/ui-principles.md"
+  ],
+  "stageSha256": {
+    "SKILL.md": "40758245c2979a929a48d34166bec9c62ee4003d7e8f71d9fbff36992b77dbc9",
+    "agents/openai.yaml": "6277ab09087488420e02b70832262bc40c35552db148f9d0bf1b4fb021941396",
+    "references/art-principles.md": "646a430a2af9f888b35e3cc861c475f88afe548b91ca8c6e6ff8ad6bb6b6f5b4",
+    "references/case-studies.md": "847016b669be9b7a55590baaa28912560d05afa3aab4c1a611994028dbb6af69",
+    "references/page-recipes.md": "c4c686e7d1befa5628c15ddd824cf285ad0cff8003ff159a6291d15c68f107cc",
+    "references/sources.md": "40ce99cd4f81d8e0d72e76b4ade0fce629a30b71af0a214e217fc7f375cb36a9",
+    "references/ui-principles.md": "27b92c39b724f8ad706e13ccecb74ed422e5dfedc7201cf28267d07bb9b1b425"
+  },
+  "installed": {
+    "path": "C:\\Users\\太平\\.codex\\skills\\arknights-art-ui-design",
+    "sha256Match": true,
+    "fileCount": 7,
+    "backup": "C:\\Users\\太平\\.codex\\visualizations\\2026\\10\\15\\01a13ee0-8bb1-72a1-a490-af4e95527fd7\\iteration-02\\before\\arknights-art-ui-design"
+  }
+}

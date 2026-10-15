@@ -1,0 +1,32 @@
+{
+  "signalA": [
+    {
+      "opacity": "0.620585",
+      "playState": "running",
+      "transform": "matrix(1, 0, 0, 1, 0, -22.8398)"
+    },
+    {
+      "opacity": "0.345419",
+      "playState": "running",
+      "transform": "matrix(1, 0, 0, 1, 0, -78.8398)"
+    }
+  ],
+  "signalB": [
+    {
+      "opacity": "0.3118",
+      "playState": "running",
+      "transform": "matrix(1, 0, 0, 1, 0, -82.0672)"
+    },
+    {
+      "opacity": "0.604868",
+      "playState": "running",
+      "transform": "matrix(1, 0, 0, 1, 0, -26.0672)"
+    }
+  ],
+  "coveredStates": [
+    "paused",
+    "paused",
+    "paused",
+    "paused"
+  ]
+}

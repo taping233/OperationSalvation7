@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-integration-ship-1016",
+  "date": "2026-10-16",
+  "owner": "Codex-handoff",
+  "goal": "修复33项当前集成失败，保留未知素材与NAI，正常冻结门提交推送并按远端SHA传输",
+  "paths": [
+    "docs/evidence/2026-10-16-WF-integration-ship-1016"
+  ],
+  "doneWhen": [
+    "集成失败逐项有依据修复，正常完整测试和冻结门通过",
+    "明确完成范围正常提交推送并核实完整commit和tree",
+    "远端不可变归档校验并传输或报告真实传输阻塞"
+  ],
+  "stage": "testing",
+  "checks": [
+    "Full clean snapshot: 4032 passed, 0 failed, 12 existing skipped",
+    "Vite output generated; postbuild budget failed in four pre-existing categories",
+    "Exact frozen full gate: 4028 passed,16 existing skipped,0 errors; normal pre-commit reused receipt",
+    "Code committed b3820ca6e83762c8a073ed7ae03234b301576007"
+  ],
+  "unverified": [
+    "Push/remote SHA/archive pending",
+    "Built-in browser unavailable for new IME/aria live check"
+  ],
+  "updatedAt": "2026-10-15T17:32:31.525Z"
+}

@@ -1,0 +1,57 @@
+- main:
+  - text: 金币 攻击 ENTER THE CITY
+  - dialog:
+    - text: 选择出征人物
+    - navigation "出征步骤":
+      - button "01 模式"
+      - generic: 02 人物
+      - button "03 整备"
+    - img "无"
+    - complementary:
+      - heading "无" [level=2]
+      - generic: 当前选择
+      - paragraph:
+        - text: 生命上限
+        - generic: "35"
+        - text: · 基础攻击
+        - generic: "4"
+      - generic: 物理进攻
+      - paragraph: 潜行 · 流血 · 连击
+      - paragraph:
+        - text: 刺击 · 每回合一次
+        - text: 1 费 · 造成 2 点固定伤害 · 不消耗卡牌
+      - generic "熟练成长 · Lv.1"
+      - generic "卡牌消耗规则 · 随时重看"
+      - paragraph: 普通卡打出后进入消耗口袋，不会在下一场自动回手；初始攻击、职业卡与衍生卡打出后直接消散。主动丢弃不会进入消耗口袋，无法复原。火堆可复原部分消耗卡，道具与装备不能在火堆复原；能源结晶可按顺序复原。撤离时消耗口袋每张仅 1/3 概率带回。首脑战使用独立牌库，规则在入场前另作说明。
+      - generic: 皮肤
+      - button "标准 ✓" [pressed]:
+        - generic: 标准
+        - text: ✓
+      - button "春日·机车":
+        - generic: 春日·机车
+      - button "新春·旗袍":
+        - generic: 新春·旗袍
+      - button "盛夏·水枪":
+        - generic: 盛夏·水枪
+      - button "cards 完整人物卡池（17 张）":
+        - img "cards"
+        - text: 完整人物卡池（17 张）
+    - button "✓ 无 无" [pressed]:
+      - text: ✓
+      - img "无"
+      - generic: 无
+    - button "常无欲 常无欲":
+      - img "常无欲"
+      - generic: 常无欲
+    - button "白塔 白塔":
+      - img "白塔"
+      - generic: 白塔
+    - button "黑像 黑像":
+      - img "黑像"
+      - generic: 黑像
+    - button "星月 星月":
+      - img "星月"
+      - generic: 星月
+    - button "返回基地" [active]:
+    - button "下一步：选择卡牌":
+      - generic: 下一步：选择卡牌

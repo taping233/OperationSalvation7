@@ -1,0 +1,50 @@
+{
+  "version": "v1.4",
+  "tool": "built-in image_gen",
+  "imageInputs": [],
+  "independentSamePromptCalls": 3,
+  "allDisplayed": true,
+  "prompt": "prompt-v14.txt",
+  "promptCharacters": 1054,
+  "promptSha256": "866c892c0ca907d2631bc14e8aea51a3337c19f27edf93fec9644e19fbc7f610",
+  "changedVariables": [
+    "Chinese language",
+    "style block before content",
+    "shorter content description",
+    "larger face and upper-body framing"
+  ],
+  "causalComparison": "not a single-variable experiment",
+  "samples": [
+    {
+      "sample": 1,
+      "output": "C:\\Users\\太平\\.codex\\generated_images\\01a13ef9-b6d1-7d91-95a9-a593603d4d0d\\exec-30356558-0997-43ff-b886-dabfc74c3c86.png",
+      "bytes": 2542863,
+      "sha256": "bd8171efd6c7aecc52f496f0c3b5080852d848bcbb7bb962d1334a737dc88dea",
+      "observation": "Larger face and visor; fragmented suit and helmet highlights, dense station rendering, foreground hand and film blur remain."
+    },
+    {
+      "sample": 2,
+      "output": "C:\\Users\\太平\\.codex\\generated_images\\01a13ef9-b6d1-7d91-95a9-a593603d4d0d\\exec-d8c164b6-a482-428b-947a-b19f0c57f8b3.png",
+      "bytes": 2360894,
+      "sha256": "c2660f74a9f7447a0e6776077e9a4008a35e29b99cbd786fb57b6aa6c25ee2a4",
+      "observation": "Face and flowers have stronger visual priority; scratch-like suit patches, many hair strands, dense construction marks and foreground blur remain."
+    },
+    {
+      "sample": 3,
+      "output": "C:\\Users\\太平\\.codex\\generated_images\\01a13ef9-b6d1-7d91-95a9-a593603d4d0d\\exec-d9941d56-c741-4157-858c-6a49ab50e96e.png",
+      "bytes": 2468724,
+      "sha256": "d3e6fab1bf1f6649b7502c291ce5fb0b2fc5c0a6be80da0b18049c87930c2ef3",
+      "observation": "Clearer large iris color regions and close facial framing; the glove remains blurred, suit planes fragmented and equipment physically rendered."
+    }
+  ],
+  "conclusion": "Facial framing moved closer to the source; the core rendering mismatch persists across all three. Prompt shortening/front-loading did not demonstrate a clear style improvement in this round.",
+  "remaining": [
+    "fragmented and mottled suit light shapes",
+    "dense machinery shading and seam marks",
+    "fine hair strands",
+    "photographic foreground blur"
+  ],
+  "userRating": "not received",
+  "positiveBaseline": "unchanged",
+  "iterationLogSha256": "7cfb332a618fc3b7541cd1df054a2fd9f8032040e0f763d55fdcbf2dfd9022db"
+}

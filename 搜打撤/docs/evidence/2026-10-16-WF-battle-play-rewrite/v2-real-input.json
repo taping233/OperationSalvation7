@@ -1,0 +1,16 @@
+[
+  {
+    "endDisabled": true,
+    "phase": "enemy",
+    "selected": 0,
+    "step": "end-turn-input"
+  },
+  {
+    "endDisabled": false,
+    "forecast": "预计承伤 10 · 余 21 生命",
+    "header": "第 2 回合你的行动",
+    "phase": "player",
+    "player": "无你31/35 攻 4",
+    "step": "next-turn"
+  }
+]

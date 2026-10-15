@@ -1,0 +1,61 @@
+{
+  "status": "generated",
+  "recipe_version": "2.0",
+  "cleanup_version": "1.0",
+  "request": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\nno humans, two sparse near-camera edge fragments from a winter futuristic transit plaza: a short dark modular railing base in the extreme lower left, a low snow-capped composite curb fragment at the extreme lower right\n\nIndependent FOREGROUND overlay layer for a 2D combat stage, only a few side-edge props. Background and ground will be supplied separately.\n\nWide landscape 16:9, plain pure white empty background. Keep the entire central 78 percent of the image completely empty white. Objects only touch extreme left and right bottom corners and remain below the lowest third. No continuous floor strip, no arch, no top frame.\n\nCold blue gray matte material, restrained warm ochre edge accent, broad simple shadow masses, snow catches the same overcast winter skylight.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 10150153,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, person, character, city, skyline, scenery, landscape, full floor, full railing across center, center object, UI, ornate, foliage",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\nno humans, two sparse near-camera edge fragments from a winter futuristic transit plaza: a short dark modular railing base in the extreme lower left, a low snow-capped composite curb fragment at the extreme lower right\n\nIndependent FOREGROUND overlay layer for a 2D combat stage, only a few side-edge props. Background and ground will be supplied separately.\n\nWide landscape 16:9, plain pure white empty background. Keep the entire central 78 percent of the image completely empty white. Objects only touch extreme left and right bottom corners and remain below the lowest third. No continuous floor strip, no arch, no top frame.\n\nCold blue gray matte material, restrained warm ochre edge accent, broad simple shadow masses, snow catches the same overcast winter skylight.",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, person, character, city, skyline, scenery, landscape, full floor, full railing across center, center object, UI, ornate, foliage",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [],
+  "output": "docs\\evidence\\2026-10-15-battle-stage-reset\\nai\\foreground.png",
+  "method": "NAI guarded client; separate layer draft, then built-in repaint",
+  "seed": 10150153,
+  "sha256": "bfa24817a14cfa923c12c44eaba9950d27f6c5fa9c87fa564942b5a9a9b12ba0"
+}

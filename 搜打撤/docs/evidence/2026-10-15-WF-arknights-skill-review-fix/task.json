@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-arknights-skill-review-fix",
+  "date": "2026-10-15",
+  "owner": "Friday",
+  "goal": "修订方舟技能自审三项并完成单次应用验证",
+  "paths": [
+    "docs/evidence/2026-10-15-WF-arknights-skill-review-fix"
+  ],
+  "doneWhen": [
+    "精确视觉锚点与应用例可复用，样例当前窗口实操通过，技能校验及安装一致性通过"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "技能验证器、24处内部链接、UTF8、17项来源、安装SHA一致性及样例当前窗口实操通过；docs检查452链接无发现",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "同会话单次应用，未作独立前向测试；未验客户端性能或其他尺寸；截图文件导出受浏览器URL策略阻止"
+  ],
+  "updatedAt": "2026-10-15T12:02:55.760Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

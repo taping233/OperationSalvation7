@@ -1,0 +1,91 @@
+- main:
+  - text: 金币 攻击 ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "返回基地":
+    - heading "基地" [level=2]
+    - generic: 档案 / 01
+    - generic "基地物资":
+      - generic "木材 0":
+        - generic: "0"
+        - generic: 木材
+        - text: 木材
+      - generic "口粮 0":
+        - generic: "0"
+        - generic: 口粮
+        - text: 口粮
+      - generic "钥匙 0":
+        - generic: "0"
+        - generic: 钥匙
+        - text: 钥匙
+      - generic "储备币 0":
+        - generic: "0"
+        - generic: 储备币
+        - text: 储备币
+    - main:
+      - heading "后勤仓库" [level=2]
+      - button "木材 ↗"
+      - button "口粮 ↗"
+      - button "交易所 ↗"
+      - generic: 2 / 25 格
+      - button "扩建 ↗"
+      - navigation "战利品用途":
+        - button "全部" [pressed]:
+          - generic: ▦
+          - generic: 全部
+        - button "战斗卡牌":
+          - generic: ✦
+          - generic: 战斗卡牌
+        - button "消耗物品":
+          - generic: ▣
+          - generic: 消耗物品
+        - button "归档培养":
+          - generic: ◈
+          - generic: 归档培养
+      - textbox "搜索仓库卡牌":
+        - /placeholder: 搜索卡牌
+      - combobox "筛选卡牌类型":
+        - option "全部类型" [selected]
+        - option "资源"
+      - combobox "筛选卡牌品质":
+        - option "全部品质" [selected]
+        - option "古朴"
+        - option "稀有"
+      - generic: 2 种
+      - region "战利品卡牌":
+        - generic "向下滚动浏览卡牌":
+          - button "选择木材，持有1张" [pressed]:
+            - img "木材"
+            - generic: 资源
+            - generic: ·古朴
+            - generic: 木材
+            - generic: 木材 ×1。
+            - strong: ×1
+          - button "选择两把钥匙，持有1张":
+            - img "两把钥匙"
+            - generic: 资源
+            - generic: ·稀有
+            - generic: 两把钥匙
+            - generic: 钥匙 ×2。
+            - strong: ×1
+      - complementary "当前浏览卡牌":
+        - generic: 当前浏览
+        - generic: 木材
+        - generic: 1 张
+        - button "查看详情 ↗"
+    - navigation "基地房间":
+      - button "基地":
+        - generic: 基地
+      - button "配置":
+        - generic: 配置
+      - button "后勤 当前房间" [pressed]:
+        - generic: 后勤
+        - generic: 当前房间
+      - button "交易所":
+        - generic: 交易所
+      - button "收藏室 1项奖励可领取":
+        - generic: 收藏室
+        - emphasis: "1"
+      - button "建设":
+        - generic: 建设
+      - button "庭院":
+        - generic: 庭院

@@ -1,0 +1,19 @@
+{
+  "phaseA": {
+    "animation": "homeCityBloom",
+    "duration": "6s",
+    "opacity": "0.639144",
+    "playState": "running",
+    "transform": "matrix(0.961965, 0, 0, 0.961965, 0, 0)"
+  },
+  "phaseB": {
+    "animation": "homeCityBloom",
+    "duration": "6s",
+    "opacity": "0.630749",
+    "playState": "running",
+    "transform": "matrix(0.956718, 0, 0, 0.956718, 0, 0)"
+  },
+  "covered": "paused",
+  "keyboardFocusDuration": "3s",
+  "scope": "CSS animation and computed styles; not a frame-rate measurement"
+}

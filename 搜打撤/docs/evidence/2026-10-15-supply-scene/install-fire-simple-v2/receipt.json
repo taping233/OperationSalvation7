@@ -1,0 +1,30 @@
+{
+  "source": "game/art-source/scenes/fire-shelter-20261015/fire-three-simple.png",
+  "source_sha256": "878a1310bdf26cc69b9759997cb0f4e408496e3bf90551c90e1dcbc2401707f5",
+  "outputs": [
+    {
+      "path": "scenes/scene-fire-anime-v2.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "bytes": 79408,
+      "sha256": "c5b94b3504146d292b4db06b39d462aafd33336a39ba960a41a04043e0ad6c0a",
+      "previous_sha256": "8caa4081437a54ec4d60bf9eb267cac89c01bbc0ca6735d43ba86af5a6c5013a",
+      "backup": "docs\\evidence\\2026-10-15-supply-scene\\install-fire-simple-v2\\previous-scene.webp"
+    },
+    {
+      "path": "thumbs/scenes/scene-fire-anime-v2.webp",
+      "size": [
+        448,
+        252
+      ],
+      "bytes": 13080,
+      "sha256": "f27225927e72cbf20588884db3802f34a57f969abe55af297b0294e03910fac6",
+      "previous_sha256": "58a52e6bb430bf262e443c70b6defa7f4cdcc4b7cca829a4c40baf9103862a11",
+      "backup": "docs\\evidence\\2026-10-15-supply-scene\\install-fire-simple-v2\\previous-thumb.webp"
+    }
+  ],
+  "tests": "Skipped at user request",
+  "browser": "Skipped at user request"
+}

@@ -1,0 +1,20 @@
+{
+  "skillValidator": "passed",
+  "utf8AndLocalLinks": "passed",
+  "metadataAndInvocation": "passed",
+  "fileCount": 6,
+  "sha256": {
+    "agents/openai.yaml": "6277ab09087488420e02b70832262bc40c35552db148f9d0bf1b4fb021941396",
+    "references/art-principles.md": "674d04cce1924dbb501b3b25feff1f875964700533456ab2cdf6b6f57f23f7a7",
+    "references/case-studies.md": "24386cb2ea1b8018ba2f77688bf15f1467ca846439a3a5a5c70e4fc1c512ba55",
+    "references/sources.md": "26a81e78674351ea84af12b24acc82073ca6cdc044500e89b9d4e679f60be3ae",
+    "references/ui-principles.md": "04ba902c23730769cc5e9cf88e1d264b69b1f1eb27f43038c3b7224f3af94a07",
+    "SKILL.md": "773307d059e56f08affd2f83dbeeb2777de8b2adf48ce6c774eaff485b2ff593"
+  },
+  "installed": {
+    "path": "C:\\Users\\太平\\.codex\\skills\\arknights-art-ui-design",
+    "fileCount": 6,
+    "sha256Match": true
+  },
+  "projectDocsCheck": "passed"
+}

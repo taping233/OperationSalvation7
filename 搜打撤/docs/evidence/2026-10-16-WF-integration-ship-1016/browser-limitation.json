@@ -1,0 +1,12 @@
+{
+  "platform": "Codex IAB mcp__cua_repl",
+  "attempts": 2,
+  "error": "trusted Node process exited unexpectedly; kernel reset, rerun your request",
+  "newProductionChanges": [
+    "battle.layers.js aria-disabled",
+    "game.boot.js IME Escape guard"
+  ],
+  "verified": "真实DOM/键盘回归测试",
+  "unverified": "本新任务新增两处修复的当前窗口实页/读屏",
+  "noFallback": "未切外部浏览器或headless"
+}

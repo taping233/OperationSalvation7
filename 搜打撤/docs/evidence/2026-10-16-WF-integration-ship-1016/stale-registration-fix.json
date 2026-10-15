@@ -1,0 +1,52 @@
+{
+  "reason": "四个被局部.gitignore保留于本机的旧raw候选没有正式运行引用，原清单错误将其列为运行素材；仅移除清单条目，不删除或加入Git",
+  "removed": [
+    {
+      "path": "scenes/chests/large-rig-v1/frame-14.webp",
+      "ext": "webp",
+      "bytes": 1020406,
+      "sha256": "c53d350b83cf17394a76f4c1bf6b478dcee0915d5dd2db46f405aea00dbb94ac",
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-15.webp",
+      "ext": "webp",
+      "bytes": 1033864,
+      "sha256": "081f52a3965dbc551a3d14a03e9403d374077fde0e54d1b4e8c12c6d7a851b05",
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-16.webp",
+      "ext": "webp",
+      "bytes": 1040916,
+      "sha256": "2b99084e67d8a733029ff476f796ebc89d67a86a9fb5ad2568e1822a88cfe65f",
+      "license": "项目自有（自制/AI 生成）"
+    },
+    {
+      "path": "scenes/chests/large-rig-v1/frame-17.webp",
+      "ext": "webp",
+      "bytes": 1040916,
+      "sha256": "2b99084e67d8a733029ff476f796ebc89d67a86a9fb5ad2568e1822a88cfe65f",
+      "license": "项目自有（自制/AI 生成）"
+    }
+  ],
+  "preserved": [
+    {
+      "path": "game/assets/scenes/chests/large-rig-v1/frame-14.webp",
+      "sha256": "c53d350b83cf17394a76f4c1bf6b478dcee0915d5dd2db46f405aea00dbb94ac"
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-v1/frame-15.webp",
+      "sha256": "081f52a3965dbc551a3d14a03e9403d374077fde0e54d1b4e8c12c6d7a851b05"
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-v1/frame-16.webp",
+      "sha256": "2b99084e67d8a733029ff476f796ebc89d67a86a9fb5ad2568e1822a88cfe65f"
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-v1/frame-17.webp",
+      "sha256": "2b99084e67d8a733029ff476f796ebc89d67a86a9fb5ad2568e1822a88cfe65f"
+    }
+  ],
+  "count": 1422
+}

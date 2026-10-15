@@ -1,0 +1,36 @@
+- complementary:
+  - navigation "远征工具":
+    - button "背包：携带卡牌 15/16":
+      - img "bag"
+      - generic: 背包
+      - strong: 15/16
+      - generic: B
+    - button "安全格：保护物资 2/2":
+      - img "lock"
+      - generic: 安全格
+      - strong: 2/2
+    - button "消耗口袋：待复原卡牌 9":
+      - img "cards"
+      - generic: 消耗口袋
+      - strong: "9"
+    - button "map 定位 F":
+      - img "map"
+      - generic: 定位
+      - generic: F
+    - button "map 总览 G":
+      - img "map"
+      - generic: 总览
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic "持有金币":
+    - generic: "24"
+  - generic "攻击力":
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 33/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT

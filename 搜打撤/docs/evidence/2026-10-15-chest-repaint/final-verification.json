@@ -1,0 +1,15 @@
+{
+  "targetedTests": {
+    "core": 85,
+    "animation": 7,
+    "total": 92
+  },
+  "eslint": "passed",
+  "css": "passed",
+  "ownAssetIssues": [],
+  "hashMismatches": [],
+  "globalAssetAuditErrors": 91,
+  "globalAuditBoundary": "Existing unregistered and other working-tree assets remain outside this task; no debt baseline changed.",
+  "fullBuild": "not run",
+  "commit": "not requested"
+}

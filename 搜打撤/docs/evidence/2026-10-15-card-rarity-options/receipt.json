@@ -1,0 +1,45 @@
+{
+  "status": "concept-preview-delivered",
+  "date": "2026-10-15",
+  "tool": "built-in image_gen",
+  "outputs": [
+    {
+      "key": "a-archive",
+      "label": "A · 典藏纸本",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13e37-782b-7a72-af77-61f18e99a70e\\exec-61335dfe-e049-4c33-815a-76d4ce1bd0bc.png",
+      "path": "docs/previews/card-rarity-options-20261015/a-archive-v2.png",
+      "bytes": 2702938,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "2f285b4dc57d4de858250f6524c226d7c9e1a8f8bf3278d9b048c06dbc9ab09f"
+    },
+    {
+      "key": "b-relic",
+      "label": "B · 古器圣物",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13e37-782b-7a72-af77-61f18e99a70e\\exec-ae23aa76-3a95-4311-8ae5-7f8ad277a4f0.png",
+      "path": "docs/previews/card-rarity-options-20261015/b-relic-v2.png",
+      "bytes": 2676124,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "67427d02f36f99c57ac5d6b7194a6eec635f2d8c4fcfc537866c2a044b16d638"
+    },
+    {
+      "key": "c-immersive",
+      "label": "C · 精装全幅",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13e37-782b-7a72-af77-61f18e99a70e\\exec-081388b4-90a6-4ca2-9f4c-d91729e0f945.png",
+      "path": "docs/previews/card-rarity-options-20261015/c-immersive-v2.png",
+      "bytes": 2621230,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "6ae8ac55b10bf03ea587b1ce875334e8bb39362f51f8a6b3ebd42801a147f051"
+    }
+  ],
+  "verification": {
+    "returnedImagesViewed": true,
+    "localImageReferences": 6,
+    "htmlSections": 3,
+    "gameIntegration": false,
+    "browserAcceptance": false,
+    "browserLimitation": "Prior built-in browser security-policy rejection; no retry or workaround."
+  }
+}

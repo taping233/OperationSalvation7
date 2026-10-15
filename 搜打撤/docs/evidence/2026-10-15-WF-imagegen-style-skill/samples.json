@@ -1,0 +1,18 @@
+[
+  {
+    "round": 1,
+    "path": "C:/Users/太平/.codex/generated_images/01a13eea-0a8b-7a42-9ab8-8e24f0337d21/exec-987a1d1e-58ae-4807-a182-b64bac45adf6.png",
+    "bytes": 2599661,
+    "sha256": "047aa4e585179c1281fc8ad7f565a25c7c7675da9561a57b22660a879418bacc",
+    "status": "rejected",
+    "acquisition": "内置image_gen返回原件；保留原路径"
+  },
+  {
+    "round": 2,
+    "path": "C:/Users/太平/.codex/generated_images/01a13eea-0a8b-7a42-9ab8-8e24f0337d21/exec-4096b46c-086c-4710-bb1c-114f2979ca25.png",
+    "bytes": 1876129,
+    "sha256": "8549c92ca7d35e96b0d9baea0b361da5c38e35505458c30fd49363df6a26b228",
+    "status": "rejected",
+    "acquisition": "内置image_gen返回原件；保留原路径"
+  }
+]

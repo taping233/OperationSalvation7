@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-15",
+  "inputRoles": [
+    "style",
+    "style",
+    "style",
+    "composition-and-content"
+  ],
+  "references": [
+    {
+      "path": "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+      "sha256": "00C849F3C520136C58DC4486A61A3FE974F177517617D358A0FB141467CEC015"
+    },
+    {
+      "path": "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+      "sha256": "7136E99EBA61DD8F6790CEEB4AE5C9D31D0D2AC3D2D3DD8D0E133929AC276F86"
+    },
+    {
+      "path": "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png",
+      "sha256": "A69C7B2905B6B20067D4995B058EAA42156EAF971D917D04B87590CF16B86FD1"
+    },
+    {
+      "path": "D:/素材/代号柒/.tmp/imagegen/wu-swim-v1-20261015/composition-reference.png",
+      "sha256": "64DAB9A719CF5306E5C5E76103F1F30CF672B867793AFDF8B4A59CF127ECE4C5"
+    }
+  ],
+  "tool": "built-in image_gen",
+  "acquisition": "Copied built-in image_gen output and user clipboard attachment; original style references remain in personal skill assets",
+  "status": "candidate-not-approved-not-installed",
+  "observation": "Composition preserved; opaque covering strokes stronger; hair/water still contain fine fragments; top stock remains close to crop.",
+  "prompt": "prompt.txt",
+  "output": {
+    "path": ".tmp/imagegen/wu-swim-v1-20261015/wu-swim-v1.png",
+    "bytes": 2480100,
+    "sha256": "8D00F229270E299BDC42FB2895A7C94CC48AB960379EE9BFC56E32AC04372060"
+  },
+  "gameDefaultStyle": "1.0"
+}

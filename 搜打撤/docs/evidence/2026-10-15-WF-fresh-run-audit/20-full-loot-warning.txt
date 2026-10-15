@@ -1,0 +1,61 @@
+- complementary:
+  - navigation "远征工具":
+    - button "背包：携带卡牌 16/16" [disabled]:
+      - img "bag"
+      - generic: 背包
+      - strong: 16/16
+      - generic: B
+    - button "安全格：保护物资 2/2" [disabled]:
+      - img "lock"
+      - generic: 安全格
+      - strong: 2/2
+    - button "消耗口袋：待复原卡牌 5" [disabled]:
+      - img "cards"
+      - generic: 消耗口袋
+      - strong: "5"
+    - button "map 定位 F" [disabled]:
+      - img "map"
+      - generic: 定位
+      - generic: F
+    - button "map 总览 G" [disabled]:
+      - img "map"
+      - generic: 总览
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic "持有金币":
+    - generic: "10"
+  - generic "攻击力":
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "archive 收获 · 小型物资箱 · 第 1 / 1":
+    - generic: 小型物资箱
+    - heading "搜刮完成" [level=3]
+    - img "coin"
+    - text: "+1"
+    - generic: 离开时获得
+    - article:
+      - button "放大查看感染射线" [active]:
+        - generic: "1"
+        - img "感染射线"
+        - generic: 法术
+        - generic: ·古朴
+        - generic: 感染射线
+        - generic: 造成 4 点法术伤害；对目标附加 1 层随机诅咒。
+      - button "整理背包" [disabled]
+    - paragraph:
+      - img "bag"
+      - text: 背包 16/16 格：按当前卡牌顺序预计可收 0 张、1 张放不下；批量领取时实际结果按逐张容量判定，放不下的会散落。 背包内最低估值：「冰刺」1 币。
+    - complementary "奖励操作":
+      - paragraph: 放弃剩余 1 张卡牌？
+      - button "继续领取"
+      - button "确认放弃"
+    - img "bag"
+    - text: 16/16 格
+    - button "整理背包"

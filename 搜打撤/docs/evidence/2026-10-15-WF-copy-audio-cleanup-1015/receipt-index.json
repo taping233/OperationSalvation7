@@ -1,0 +1,31 @@
+{
+  "rawLocalRecords": [
+    {
+      "path": "deletion-journal.local.jsonl",
+      "bytes": 1235118,
+      "sha256": "780c8981c8a87322bb9c3a2815efde8990dc44d0da7878faac7079b9bad912b2",
+      "acquisition": "保留在本机本目录；本轮审计/删除当场生成的原始清单，不自动进入Git"
+    },
+    {
+      "path": "deletion-plan.local.json",
+      "bytes": 4421276,
+      "sha256": "342f5be4672dac428a560682122530433ec436279f4bd4ed9a0180d82f53a81b",
+      "acquisition": "保留在本机本目录；本轮审计/删除当场生成的原始清单，不自动进入Git"
+    },
+    {
+      "path": "preservation-manifest.local.json",
+      "bytes": 250863,
+      "sha256": "17df497c6dcad913a72781db361c8f38360f0e313bfb83c6ffb892d457064dd7",
+      "acquisition": "保留在本机本目录；本轮审计/删除当场生成的原始清单，不自动进入Git"
+    },
+    {
+      "path": "protected-originals.local.json",
+      "bytes": 1385352,
+      "sha256": "2cfed08f1973714b1f13394e722a135da7f89ec52630c3919c8826d36f44b1cf",
+      "acquisition": "保留在本机本目录；本轮审计/删除当场生成的原始清单，不自动进入Git"
+    }
+  ],
+  "retainedContentDirectory": "preserved/",
+  "preservation": "按SHA256去重另存792件文件；额外归档一条只读音乐硬链接；其余5300个受保护原件留在原位",
+  "allRetainedSha256Match": true
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>公共渲染性能定向验证</title>
+<style>body{font:16px system-ui;background:#171c24;color:#e9eef6;padding:32px}pre{white-space:pre-wrap}img{width:64px}button{padding:8px}#fixture{display:none}</style>
+<h1>公共渲染性能定向验证</h1><p>当前内置窗口；合成基准，不读写存档。</p><pre id="result">运行中</pre>
+<div id="fixture"></div><script type="module">
+import { rich as before } from './baseline-rich.js';
+import '../../../game/src/core/icons-bitmap.js';
+import SDT from '../../../game/src/core/sdt-facade.js';
+import { decodeImagesIn } from '../../../game/src/core/image-decode.js';
+const after = SDT.Icons.rich;
+const median = values => [...values].sort((a,b) => a-b)[Math.floor(values.length/2)];
+const time = (fn, text) => { const start=performance.now(); for(let i=0;i<15000;i++)fn(text);return performance.now()-start; };
+const text='<section class="page"><p>当前回合造成 12 点攻击伤害，剩余 30 点生命。</p></section>'.repeat(5);
+const samples={before:[],after:[]}; time(before,text);time(after,text);
+for(let run=0;run<7;run++)for(const kind of run%2?['after','before']:['before','after'])samples[kind].push(time(kind==='before'?before:after,text));
+const image=document.createElement('img');image.src='/assets/ui/icons/heart.png';
+const nativeDecode=image.decode.bind(image);let decodeCalls=0;
+image.decode=()=>{decodeCalls++;return nativeDecode();};document.body.append(image);
+for(let i=0;i<20;i++)decodeImagesIn(document.body);
+await nativeDecode();await new Promise(requestAnimationFrame);await new Promise(requestAnimationFrame);
+const fixture=document.getElementById('fixture');
+fixture.innerHTML='<button aria-label="[[icon:heart]] 生命">[[icon:heart]] 生命</button>';
+await new Promise(requestAnimationFrame);await new Promise(requestAnimationFrame);
+const report={url:location.href,viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio},
+  iterationsPerSample:15000,samples,beforeMedianMs:median(samples.before),afterMedianMs:median(samples.after),
+  reduction:1-median(samples.after)/median(samples.before),decode:{refreshes:20,calls:decodeCalls,visible:getComputedStyle(image).visibility,naturalWidth:image.naturalWidth},
+  hydration:{icons:fixture.querySelectorAll('img.ic').length,label:fixture.querySelector('button').getAttribute('aria-label')}};
+report.passed=decodeCalls===1&&report.decode.visible==='visible'&&report.decode.naturalWidth>0&&report.hydration.icons===1&&report.hydration.label==='生命';
+document.getElementById('result').textContent=JSON.stringify(report,null,2);
+</script></html>

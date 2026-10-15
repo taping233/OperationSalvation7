@@ -1,0 +1,53 @@
+{
+  "owner": "Codex-handoff",
+  "task": "WF-integration-ship-1016",
+  "agents": {
+    "entry_extraction": [
+      "tests/e4-async-entry.test.js",
+      "tests/extraction-flow.test.js",
+      "game/src/run/game.run.class-choice.page.js",
+      "game/src/run/game.run.altar.js"
+    ],
+    "boot_accessibility": [
+      "tests/boot.test.js",
+      "tests/ui-accessibility-regression.test.js",
+      "game/src/battle/view/battle.layers.js"
+    ],
+    "node_rewards": [
+      "tests/map-travel-path.test.js",
+      "tests/node-retrigger.test.js",
+      "tests/node-reward-state.test.js",
+      "game/src/run/map-travel-path.js",
+      "game/src/run/node-reward-state.js"
+    ],
+    "copy_migration": [
+      "tests/bag-structured-use.test.js",
+      "tests/base-hub-business-lifecycle-audit.test.js",
+      "tests/departure-stack-lifecycle-review.test.js",
+      "tests/nightshift-u10-teardown-guards.test.js",
+      "tests/e8-card-inventory.test.js",
+      "tests/m-batch-production.test.js",
+      "tests/helpers/e8-card-inventory.js"
+    ],
+    "asset_contracts": [
+      "tests/runtime-asset-aliases.test.js",
+      "tests/runtime-asset-redundancy.test.js",
+      "scripts/runtime-asset-aliases.mjs",
+      "scripts/runtime-asset-redundancy.mjs"
+    ]
+  },
+  "primary": [
+    "scripts/gate-plan.mjs",
+    "shared index",
+    "registry",
+    "freeze gates",
+    "secret/privacy scan",
+    "archive transfer"
+  ],
+  "constraints": [
+    "No old thread messaging",
+    "No new features/art",
+    "No unknown file deletion",
+    "Only primary stages/commits/pushes"
+  ]
+}

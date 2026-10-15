@@ -1,0 +1,22 @@
+- main:
+  - generic "持有金币":
+    - text: 金币
+    - generic: "2"
+  - generic "攻击力":
+    - text: 攻击
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - text: 外围荒地
+    - generic: 第 1 层
+    - region "地点说明":
+      - heading "层间闸门" [level=2]
+      - region "事件叙述": 穿过闸门后将离开当前区域，继续深入城市。
+    - region "可用操作":
+      - button "进入第2层 · 风雪哨线 →" [active]:
+        - generic: 进入第2层 · 风雪哨线
+        - text: →

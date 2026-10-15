@@ -1,0 +1,35 @@
+- main:
+  - generic "持有金币":
+    - text: 金币
+    - generic: "24"
+  - generic "攻击力":
+    - text: 攻击
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 33/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - text: 污染核心
+    - generic: 第 4 层
+    - region "地点说明":
+      - heading "污染祭坛" [level=2]
+      - region "事件叙述": 弃掉背包中 3 张卡牌激活祭坛，任选一项奖励；也可以不弃牌，直接献上 2 枚员工通行证A碎片换取能力卡
+    - region "可用操作":
+      - button "弃 3 张 · 激活祭坛 激活后二选一：① 复原 3 张消耗卡 + 回复 10 血；② 随机获取 1 张传说卡和 1 张装备卡 →":
+        - generic: 弃 3 张 · 激活祭坛
+        - generic: 激活后二选一：① 复原 3 张消耗卡 + 回复 10 血；② 随机获取 1 张传说卡和 1 张装备卡
+        - text: →
+      - button "献上 2 枚员工通行证A碎片（不弃牌） 获得 1 张本职业随机能力卡（现有碎片 4） →" [active]:
+        - generic: 献上 2 枚员工通行证A碎片（不弃牌）
+        - generic: 获得 1 张本职业随机能力卡（现有碎片 4）
+        - text: →
+      - button "献祭道具 · 复原卡牌 背包里没有道具卡——先弄到一张道具卡，再回来献祭复原 不可选" [disabled]:
+        - generic: 献祭道具 · 复原卡牌
+        - generic: 背包里没有道具卡——先弄到一张道具卡，再回来献祭复原
+        - text: 不可选
+      - button "离开 祭坛保持沉睡——回到当前格子，稍后再来 →":
+        - generic: 离开
+        - generic: 祭坛保持沉睡——回到当前格子，稍后再来
+        - text: →

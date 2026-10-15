@@ -1,0 +1,50 @@
+- complementary:
+  - navigation "远征工具":
+    - button "背包：携带卡牌 16/16" [disabled]:
+      - img "bag"
+      - generic: 背包
+      - strong: 16/16
+      - generic: B
+    - button "安全格：保护物资 2/2" [disabled]:
+      - img "lock"
+      - generic: 安全格
+      - strong: 2/2
+    - button "消耗口袋：待复原卡牌 4" [disabled]:
+      - img "cards"
+      - generic: 消耗口袋
+      - strong: "4"
+    - button "map 定位 F" [disabled]:
+      - img "map"
+      - generic: 定位
+      - generic: F
+    - button "map 总览 G" [disabled]:
+      - img "map"
+      - generic: 总览
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 冻土遗迹
+    - generic: 第 3 层 / 4
+  - generic "持有金币":
+    - generic: "4"
+  - generic "攻击力":
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "cards 支付代价：为【快意恩仇】选择":
+    - heading "cards 支付代价：为【快意恩仇】选择" [level=3]:
+      - img "cards"
+      - text: 支付代价：为【快意恩仇】选择
+    - generic: 第 1 回合 · 能量 2/2
+    - paragraph: 还需支付：1 张初始攻击作为支付代价 · 已选 1 张
+    - button "选择 初始攻击" [active]:
+      - generic: "1"
+      - img "初始攻击"
+      - generic: 武术
+      - generic: ·初始
+      - generic: 初始攻击
+      - generic: 造成等同于你的攻击力的攻击伤害。
+    - paragraph: 已选手牌和本次牌/燃料不在候选池中；选取后会作为支付代价消耗。

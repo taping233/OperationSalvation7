@@ -1,0 +1,30 @@
+{
+  "source": "game/art-source/scenes/fire-shelter-20261015/fire-three-travelers.png",
+  "source_sha256": "d6ae6badcdfd7d2a9e1565c569133161662155d047367addf34f434474d081f1",
+  "outputs": [
+    {
+      "path": "scenes/scene-fire-anime-v2.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "bytes": 201278,
+      "sha256": "8caa4081437a54ec4d60bf9eb267cac89c01bbc0ca6735d43ba86af5a6c5013a",
+      "previous_sha256": "a1c29a75786798a8adc23f50f8c9f2e321adf545bf0e3f293928654741ca64cf",
+      "backup": "docs\\evidence\\2026-10-15-supply-scene\\install-fire\\previous-scene.webp"
+    },
+    {
+      "path": "thumbs/scenes/scene-fire-anime-v2.webp",
+      "size": [
+        448,
+        252
+      ],
+      "bytes": 24220,
+      "sha256": "58a52e6bb430bf262e443c70b6defa7f4cdcc4b7cca829a4c40baf9103862a11",
+      "previous_sha256": "cdf3a634ad349dbcefec156ad51179b1f27c185900f5809be1647a9012a945e6",
+      "backup": "docs\\evidence\\2026-10-15-supply-scene\\install-fire\\previous-thumb.webp"
+    }
+  ],
+  "tests": "Skipped at user request",
+  "browser": "Skipped at user request"
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "path": "game/css/winter.css",
+    "beforeSha256": "9acce1ebe99170dfebf51e8a5878230e0b543d8acfa5b8eed911c485e5de8d19",
+    "afterSha256": "2821de618828d3b6fa9b4053eee019286f0465caded7f346b84977e25604924c",
+    "removed": [
+      "#overlay .battle-stage.sts .sts-foe:not(.dead) .sts-nameplate"
+    ]
+  },
+  {
+    "path": "game/css/expedition-battle.css",
+    "beforeSha256": "0f6e5a1cff1188819dc69ed7314006aee0e1f22878567dc97dc44dd4ec6bc918",
+    "afterSha256": "e424aaf7dc285aa6c767ff75dfd62c280a104bc4f413d1e7156ef0647c6beaf3",
+    "removed": [
+      "#overlay .battle-stage.sts .sts-foe:not(.dead) .sts-nameplate",
+      "body #overlay .battle-stage.sts.battle-sts .sts-foe:not(.dead) .sts-nameplate"
+    ]
+  },
+  {
+    "path": "game/css/page-battle-ui.css",
+    "beforeSha256": "7960b495174e5f85ed9f69ba32fa5614ee00b1938835a4b671b2a8fe84107414",
+    "afterSha256": "2888d269a8997bab9a21ff773b9eb5db605620170037d38ee19616383eef45ea",
+    "removed": [
+      "body #overlay .battle-stage.sts.battle-sts .sts-foe:not(.dead) .sts-nameplate"
+    ]
+  },
+  {
+    "path": "game/css/feedback-oct12.css",
+    "beforeSha256": "5a3e71fa1820b60035eda18d7805f0aace88f15951e0a0c4a20f1ea97f1a1392",
+    "afterSha256": "656586628f7816777a358ae657e48f7cfae532dc3cab806a56bf8c9adf8f2503",
+    "removed": [
+      "body #overlay#overlay#overlay [data-act=\"btSlam\"]",
+      "body #overlay#overlay#overlay [data-act=\"btSlam\"] > .ic",
+      "body #overlay#overlay#overlay [data-act=\"btSlam\"]:disabled"
+    ]
+  }
+]

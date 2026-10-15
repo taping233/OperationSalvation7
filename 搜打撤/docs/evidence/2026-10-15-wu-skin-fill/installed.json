@@ -1,0 +1,63 @@
+{
+  "items": [
+    {
+      "id": "casual",
+      "target": {
+        "path": "portraits/full/wu-casual-v14.webp",
+        "ext": "webp",
+        "license": "项目自有（AI 生成）",
+        "bytes": 366400,
+        "sha256": "377ac979dcfdc04292e7332326864fb3cccee5defe02537c089653afa6e77f0d",
+        "source": "docs/evidence/2026-10-15-wu-skin-fill/installed.json"
+      },
+      "dimensions": [
+        1429,
+        1101
+      ],
+      "source": ".tmp\\imagegen\\wu-skin-fill-20261015\\casual-expanded.png",
+      "sourceSha256": "f411c57172eab2898c563301bde81af7fdc4cfbae2b405c1bd16c412e7c8e57b",
+      "backup": ".tmp\\imagegen\\wu-skin-fill-20261015\\casual-before.webp",
+      "backupSha256": "5718066ab6489e9671ae2f61f9ef948fbfa1ad12acd736bb54b0ae38b9d20ede"
+    },
+    {
+      "id": "spring",
+      "target": {
+        "path": "portraits/full/wu-spring-v15.webp",
+        "ext": "webp",
+        "license": "项目自有（AI 生成）",
+        "bytes": 329108,
+        "sha256": "ec37a0b208a58a39df729ea289cf68075e485c58f44b42583b4fe249ddec83ad",
+        "source": "docs/evidence/2026-10-15-wu-skin-fill/installed.json"
+      },
+      "dimensions": [
+        1429,
+        1101
+      ],
+      "source": ".tmp\\imagegen\\wu-skin-fill-20261015\\spring-expanded.png",
+      "sourceSha256": "d3b9c18be1532b15395f8e26444af7082bd1883319b9d8e5be1506bedbcb61fe",
+      "backup": ".tmp\\imagegen\\wu-skin-fill-20261015\\spring-before.webp",
+      "backupSha256": "067206e74f16369751f40e4d03459bc46d439730fe2502c69ca6e504270f365e"
+    },
+    {
+      "id": "beach",
+      "target": {
+        "path": "portraits/full/wu-beach.webp",
+        "ext": "webp",
+        "license": "项目自有（AI 生成）",
+        "bytes": 378674,
+        "sha256": "027f6fb049a6966a9f3c7662b012075d3f5c7533e9e39fc95c5147a38ccb232a",
+        "source": "docs/evidence/2026-10-15-wu-skin-fill/installed.json"
+      },
+      "dimensions": [
+        1428,
+        1102
+      ],
+      "source": ".tmp\\imagegen\\wu-skin-fill-20261015\\beach-expanded.png",
+      "sourceSha256": "245af444fdcd93dedad68969a9ad6a1f25a79c7f7f88c8537cf4013593f0cc27",
+      "backup": ".tmp\\imagegen\\wu-skin-fill-20261015\\beach-before.webp",
+      "backupSha256": "04115135ab99bcbbbe77c6472610e5a948759f6750655130ce02bf0dd88c0828"
+    }
+  ],
+  "encoding": "Pillow RGB WebP quality=92 method=6; no resize/crop",
+  "countChanged": false
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-local-cloud-handoff-1016",
+  "date": "2026-10-16",
+  "owner": "Codex-handoff",
+  "goal": "在开发结束后核实完成归属，执行正常门禁并提交推送，按远端不可变SHA交接云端",
+  "paths": [
+    "docs/evidence/2026-10-16-WF-local-cloud-handoff-1016"
+  ],
+  "doneWhen": [
+    "开发结束和提交范围稳定且归属明确",
+    "正常门禁通过并核实远端commit与tree",
+    "远端源码归档传输或报告具体阻塞"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "两个当前任务均已完成，25条完成源码指纹及156条当前源码指纹无漂移",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "正常权限全量3998通过33失败12跳过，17测试文件未通过",
+      "result": "failed"
+    },
+    {
+      "kind": "manual",
+      "description": "待推送373文本blob启发式扫描未命中密钥规则",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "未暂存提交推送；集成契约和未确认归属需先解决；未运行冻结门构建远端CI或源码归档传输"
+  ],
+  "updatedAt": "2026-10-15T16:40:13.810Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

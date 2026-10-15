@@ -1,0 +1,109 @@
+{
+  "selection": "board-v2-receipt.json",
+  "items": [
+    {
+      "id": "city",
+      "button": "mStart",
+      "original": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-retry\\city-v7.png",
+      "originalSha256": "7610b5528fe8a2c5b140f98c680a39b40a12816032e1ffe727f766de43bd0c70",
+      "path": "game/assets/ui/home-nodes-1015/city-v1.webp",
+      "sha256": "4c3e0e15d025b7cc5704804ba67c97c7bb67720b302182831dfb940a0d30af86",
+      "bytes": 49844,
+      "dimensions": [
+        384,
+        384
+      ],
+      "conversion": "aspect-fit with transparent padding; lossless RGBA WebP"
+    },
+    {
+      "id": "guide",
+      "button": "mGuide",
+      "original": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\guide-v3.png",
+      "originalSha256": "68416dfe72c592184af0c2591530e3cd4b82db39aaf3898a7b3b33c20f870e3a",
+      "path": "game/assets/ui/home-nodes-1015/guide-v1.webp",
+      "sha256": "568897bc83f154510af3a347a9c4fa07eb1cd57312dcf378be8fec5cd5c2ca8f",
+      "bytes": 65420,
+      "dimensions": [
+        384,
+        384
+      ],
+      "conversion": "aspect-fit with transparent padding; lossless RGBA WebP"
+    },
+    {
+      "id": "achievement",
+      "button": "mAch",
+      "original": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\achievement-v6.png",
+      "originalSha256": "12f19ec49c164e4da6fe64c557430072bdb3d8f6eb9b23aa2b17ca89cc81058c",
+      "path": "game/assets/ui/home-nodes-1015/achievement-v1.webp",
+      "sha256": "7ec93116785ca71abdcb466c01b106d1c1c5e672af4746b6692156fbf5e155bf",
+      "bytes": 48170,
+      "dimensions": [
+        384,
+        384
+      ],
+      "conversion": "aspect-fit with transparent padding; lossless RGBA WebP"
+    },
+    {
+      "id": "photo",
+      "button": "btnCardLib",
+      "original": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\photo-v3.png",
+      "originalSha256": "4726f99641b29e09502364d517b1dfe30cd674f75f06c7b4fbf53093a61c2b04",
+      "path": "game/assets/ui/home-nodes-1015/photo-v1.webp",
+      "sha256": "099df45d76d0e38bc427a80bfb9923048ce044a8d58df80cde5b52cfa762933c",
+      "bytes": 46178,
+      "dimensions": [
+        384,
+        384
+      ],
+      "conversion": "aspect-fit with transparent padding; lossless RGBA WebP"
+    },
+    {
+      "id": "settings",
+      "button": "mSettings",
+      "original": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\settings-v3.png",
+      "originalSha256": "52f540f598b4efa4286a6580bf2edd619a53d578a76c3b7f8ff0280993af1d0c",
+      "path": "game/assets/ui/home-nodes-1015/settings-v1.webp",
+      "sha256": "8ea74c456a7854fac323d7ce0172bb0196215645d64728de8da8f206d2c1383e",
+      "bytes": 48950,
+      "dimensions": [
+        384,
+        384
+      ],
+      "conversion": "aspect-fit with transparent padding; lossless RGBA WebP"
+    },
+    {
+      "id": "credits",
+      "button": "mCredits",
+      "original": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\credits-v3.png",
+      "originalSha256": "2dbf6fa25616ff541612a9ef7dbf9205b2d84dccee8c9e8f158e67e70135144a",
+      "path": "game/assets/ui/home-nodes-1015/credits-v1.webp",
+      "sha256": "9dee1f9db360ad33777d83f6ad36834c34fe1b9f3966ad99dddb866e3afaa8a6",
+      "bytes": 57702,
+      "dimensions": [
+        384,
+        384
+      ],
+      "conversion": "aspect-fit with transparent padding; lossless RGBA WebP"
+    },
+    {
+      "id": "exit",
+      "button": "btnTitleExit",
+      "original": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\exit-v3.png",
+      "originalSha256": "a064ee1fb48e96e1f23e0e2ca255bb40c6b27af0e0516874da80f2d26120cbbe",
+      "path": "game/assets/ui/home-nodes-1015/exit-v1.webp",
+      "sha256": "6935a8b1882f68f03967b3a46262911970598d5f05d954a96ae2f53148d685fc",
+      "bytes": 69606,
+      "dimensions": [
+        384,
+        384
+      ],
+      "conversion": "aspect-fit with transparent padding; lossless RGBA WebP"
+    }
+  ],
+  "previousFileHashes": {
+    "game\\index.html": "7306e0e440eefbd8ed8206cbcc3ff0d531635a915ba9c00689c9f6127296f1fa",
+    "game\\css\\home-polish.css": "8e193021bf7994ec0dc6a650bde7843c5c056cc54b98b7abcdd9f5762e6c363a",
+    "game\\assets\\asset-manifest.json": "3b9b58ba075180d296b1604f9ff2a4188b02b0029b7bbef904f2017c23d14fee"
+  },
+  "manifestPreviousEntriesPreserved": true
+}

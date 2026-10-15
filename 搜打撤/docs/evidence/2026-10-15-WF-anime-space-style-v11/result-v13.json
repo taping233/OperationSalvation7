@@ -1,0 +1,44 @@
+{
+  "version": "v1.3",
+  "tool": "built-in image_gen",
+  "imageInputs": [],
+  "samePromptIndependentCalls": 3,
+  "allSamplesDisplayed": true,
+  "prompt": "prompt-v13.txt",
+  "promptSha256": "b604f6ec786a9a134586c344916ad57a581824a3203f9fb166bebea92a54fd7c",
+  "sceneText": "verbatim from v1.1/v1.2",
+  "styleText": "installed v1.3 verbatim",
+  "samples": [
+    {
+      "sample": 1,
+      "output": "C:\\Users\\太平\\.codex\\generated_images\\01a13ef9-b6d1-7d91-95a9-a593603d4d0d\\exec-197bb88a-cd17-4c83-9232-b36bceb97f2a.png",
+      "bytes": 2431089,
+      "sha256": "7ba1ad8b58b753689d37dc1cdc222ec75ae7260876aad41fd878cc1eaf241bc9",
+      "observation": "Anime face and coherent chest-box mass; striped sleeve folds, scratched pale surfaces, outlined station joints and strong foreground film blur persist."
+    },
+    {
+      "sample": 2,
+      "output": "C:\\Users\\太平\\.codex\\generated_images\\01a13ef9-b6d1-7d91-95a9-a593603d4d0d\\exec-b532336f-15f3-4259-866a-67b41f39f685.png",
+      "bytes": 2388165,
+      "sha256": "087ccbb1cefb9f2d4d9924fd3a49f753c70d6bc77d307a1291c0dd3576214d9d",
+      "observation": "Open readable eyes and larger connected light sleeve areas; repeated fold bands, flyaway hair, dense equipment joints and foreground blur persist."
+    },
+    {
+      "sample": 3,
+      "output": "C:\\Users\\太平\\.codex\\generated_images\\01a13ef9-b6d1-7d91-95a9-a593603d4d0d\\exec-d161586e-7c23-4683-b4cc-eb791e5560d5.png",
+      "bytes": 2518455,
+      "sha256": "5a8e504695b6b5bf2296d21958ddb1ed3c14d61012361adc4a18b7760eff39b8",
+      "observation": "Chest equipment is relatively simply grouped; suit planes remain fragmented, station engineering dense, small hair marks and foreground blur persist."
+    }
+  ],
+  "conclusion": "The central mismatch remains in all three samples. Some focal simplification is visible, but stable improvement or reference-style fidelity is not established.",
+  "remaining": [
+    "striped fold modeling and fragmented pale suit shapes",
+    "dense hair strands and equipment seams",
+    "photographic foreground blur",
+    "overall material rendering remains heavier than the supplied reference"
+  ],
+  "userRating": "not received",
+  "baseline": "original selected historical baseline retained; these trials are not positive style anchors",
+  "iterationLogSha256": "0a5bbed11a8ca2e7783f18d1d68d60a9c15afb35c04c698573e78c9e02066ebb"
+}

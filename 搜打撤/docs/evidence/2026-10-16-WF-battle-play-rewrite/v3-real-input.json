@@ -1,0 +1,83 @@
+[
+  {
+    "selected": 1,
+    "step": "keyboard-select",
+    "targets": 2
+  },
+  {
+    "selected": 0,
+    "step": "keyboard-cancel",
+    "targets": 0
+  },
+  {
+    "blocked": 5,
+    "energy": "0/2",
+    "foes": [
+      {
+        "dead": true,
+        "text": "联邦射手  攻 50/3"
+      },
+      {
+        "dead": false,
+        "text": "联邦射手 攻 51/3"
+      }
+    ],
+    "player": "无你35/35 攻 4 ·  甲 6",
+    "step": "drag-and-skill"
+  },
+  {
+    "energy": "0/2",
+    "selected": 0,
+    "step": "blocked-card-click"
+  },
+  {
+    "count": 5,
+    "energy": "0/2",
+    "forecast": "预计承伤 0 · 余 35 生命",
+    "player": "无你35/35 攻 4 ·  甲 6",
+    "positions": [
+      {
+        "key": "1",
+        "scale": "1",
+        "x": "-380px"
+      },
+      {
+        "key": "2",
+        "scale": "1",
+        "x": "-190px"
+      },
+      {
+        "key": "3",
+        "scale": "1",
+        "x": "0px"
+      },
+      {
+        "key": "5",
+        "scale": "1",
+        "x": "190px"
+      },
+      {
+        "key": "6",
+        "scale": "1",
+        "x": "380px"
+      }
+    ],
+    "step": "final-reflow-after-consumption"
+  },
+  {
+    "disabled": true,
+    "phase": "enemy",
+    "step": "final-enemy-lock"
+  },
+  {
+    "enabled": true,
+    "header": "第 2 回合你的行动",
+    "player": "无你35/35 攻 4 ·  甲 1",
+    "step": "final-next-turn"
+  },
+  {
+    "mode": "pick-veil",
+    "step": "victory-result",
+    "text": "密封物资箱战斗胜利领取宝箱后，从 3 张卡牌中选择 1 张\n    \n    密封物资箱领取后开启\n  领取宝箱\n    待领取宝箱 · 1 个"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "icons": 7,
+  "ownManifestAndHashes": "passed",
+  "ownAssetIssues": [],
+  "globalAssetAudit": {
+    "passed": false,
+    "unrelatedErrors": 91,
+    "historicalWarnings": 618
+  },
+  "scope": "Homepage icon assets and references only; global unrelated asset debt not repaired"
+}

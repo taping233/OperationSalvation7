@@ -1,0 +1,24 @@
+{
+  "animation": "现有 Pixi 战斗动画 · 独立方案",
+  "brokenImages": [],
+  "containers": [
+    {
+      "overflow": "clip",
+      "scrollTop": 0
+    },
+    {
+      "overflow": "clip",
+      "scrollTop": 0
+    }
+  ],
+  "energy": "3",
+  "renderer": "webgl",
+  "scrollY": 0,
+  "shadeZ": "3",
+  "turn": "01",
+  "viewport": [
+    1280,
+    720
+  ],
+  "logs": []
+}

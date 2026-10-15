@@ -1,0 +1,24 @@
+- main:
+  - generic "持有金币":
+    - text: 金币
+    - generic: "23"
+  - generic "攻击力":
+    - text: 攻击
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 33/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "退出，返回地图" [active]:
+    - text: 污染核心
+    - generic: 第 4 层
+    - region "地点说明":
+      - heading "休整完毕" [level=2]
+      - region "事件叙述": 生命回复 8 点 · 33/35。本次没有复原卡牌。
+    - region "可用操作":
+      - button "继续探索 本处休整已经完成 ◇":
+        - generic: 继续探索
+        - generic: 本处休整已经完成
+        - text: ◇

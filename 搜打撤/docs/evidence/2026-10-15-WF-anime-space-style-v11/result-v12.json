@@ -1,0 +1,32 @@
+{
+  "version": "v1.2",
+  "tool": "built-in image_gen",
+  "imageInputs": [],
+  "sceneText": "verbatim v1.1 scene",
+  "styleText": "installed v1.2 verbatim",
+  "prompt": "prompt-v12.txt",
+  "promptSha256": "9133aa8ee92dcc397c8159d5d00595321ec6ac2f132678c1c727d87d4418f144",
+  "output": "C:\\Users\\太平\\.codex\\generated_images\\01a13ef9-b6d1-7d91-95a9-a593603d4d0d\\exec-66eab366-95d9-433d-8da2-17e7dcbf7b9b.png",
+  "outputBytes": 2609476,
+  "outputSha256": "d60787b884b8258d1541d510fb2c49e9b2d0bd3a6b58548ec780eaefa6e2499b",
+  "observation": {
+    "improvements": [
+      "fewer scratch-like bright flecks on the suit",
+      "more continuous sleeve and equipment color regions",
+      "station main cylindrical form more coherent"
+    ],
+    "remaining": [
+      "cloth highlights remain more fragmented than the supplied reference",
+      "hair strands and equipment detail remain too dense",
+      "overall finish is heavier and more realistically rendered than the supplied reference",
+      "foreground glove still has photographic softening"
+    ],
+    "limits": "one independent text-only sample; composition is stochastic; not proof of stable improvement; no user rating yet"
+  },
+  "validationStatusSha256": {
+    "references/style-prompt.md": "9161f2128d191d61f78bab4c5f640931f6117ca855c49ada8fb2b73f5fed6ca8",
+    "references/space-comparison-v12.md": "3805b9521f3193c593dc864c936563aa869c45917db80979a986b03c8b146317",
+    "references/space-study-20261015.md": "cb9a382baa612fd24b6c93eb8efc5231263c1f7aa2a15fbc10e2b92bd44c8444",
+    "references/iteration.md": "edf876b355b5fe47ebfa5729a1c436787348e508556b6bc50116a87f9361e0bb"
+  }
+}

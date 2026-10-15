@@ -1,0 +1,575 @@
+{
+  "actions": [
+    {
+      "detail": "档位01真实正常出征，经地图进入两名射手遭遇；重载后真实读档恢复同一战斗入场样本。",
+      "type": "real-input"
+    },
+    {
+      "detail": "当前窗口稳定画面，角色贴地、血条上置，完整手牌未超战场底界。",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "not-collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "data-asset-key": "battle-normal"
+      },
+      "identity": "{\"data-asset-key\":\"battle-normal\"}",
+      "key": "stage",
+      "rect": {
+        "height": 901.6875,
+        "width": 1603,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".battle-stage",
+      "styles": {
+        "background-color": "rgb(131, 154, 172)",
+        "border-radius": "0px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "1080px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1920px"
+      },
+      "tag": "DIV",
+      "text": "第 1 回合你的行动\n        \n         选项\n          \n           撤离（判负）\n           设置\n        \n      \n      \n        \n        无你35/35 攻 4\n           刺击12 点固定伤害\n          \n        \n        \n        攻击 5攻击 · 5联邦射手"
+    },
+    {
+      "attributes": {
+        "id": "btSelf"
+      },
+      "identity": "{\"id\":\"btSelf\"}",
+      "key": "units",
+      "rect": {
+        "height": 317.26043701171875,
+        "width": 500.9375,
+        "x": 158.625,
+        "y": 237.11459350585935
+      },
+      "selector": ".sts-unit",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "380px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "600px"
+      },
+      "tag": "DIV",
+      "text": "无你35/35 攻 4\n           刺击12 点固定伤害"
+    },
+    {
+      "attributes": {
+        "data-eidx": "0"
+      },
+      "identity": "{\"data-eidx\":\"0\"}",
+      "key": "units",
+      "rect": {
+        "height": 283.8645935058594,
+        "width": 208.71875,
+        "x": 887.2396240234375,
+        "y": 270.51043701171875
+      },
+      "selector": ".sts-unit",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "340px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "249.994px"
+      },
+      "tag": "DIV",
+      "text": "攻击 5攻击 · 5联邦射手 攻 53/3"
+    },
+    {
+      "attributes": {
+        "data-eidx": "1"
+      },
+      "identity": "{\"data-eidx\":\"1\"}",
+      "key": "units",
+      "rect": {
+        "height": 283.8645935058594,
+        "width": 208.71875,
+        "x": 1228.385498046875,
+        "y": 270.51043701171875
+      },
+      "selector": ".sts-unit",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "340px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "249.994px"
+      },
+      "tag": "DIV",
+      "text": "攻击 5攻击 · 5联邦射手 攻 53/3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"无你35/35 攻 4\",\"class\":\"sts-nameplate\"}",
+      "key": "names",
+      "rect": {
+        "height": 71.10417175292969,
+        "width": 192.02084350585935,
+        "x": 313.0833435058594,
+        "y": 150.98959350585938
+      },
+      "selector": ".sts-nameplate",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(244, 247, 250)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "85.1653px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "229.994px"
+      },
+      "tag": "DIV",
+      "text": "无你35/35 攻 4"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"联邦射手 攻 53/3\",\"class\":\"sts-nameplate\"}",
+      "key": "names",
+      "rect": {
+        "height": 51.75,
+        "width": 175.3229217529297,
+        "x": 903.9323120117188,
+        "y": 203.73959350585935
+      },
+      "selector": ".sts-nameplate",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(244, 247, 250)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "61.9838px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "209.994px"
+      },
+      "tag": "DIV",
+      "text": "联邦射手 攻 53/3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"联邦射手 攻 53/3\",\"class\":\"sts-nameplate\"}",
+      "key": "names",
+      "rect": {
+        "height": 51.75,
+        "width": 175.3229217529297,
+        "x": 1245.078125,
+        "y": 203.73959350585935
+      },
+      "selector": ".sts-nameplate",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(244, 247, 250)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "61.9838px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "209.994px"
+      },
+      "tag": "DIV",
+      "text": "联邦射手 攻 53/3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"1\\n    \\n    \\n    \\n    \\n    武术初始\\n    \\n    初始攻击\\n    造成等同于你的攻击力的攻击伤害。\\n    \\n    \\n    \\n    \\n    1\\n  ×5详情\\n    \\n    \\n    1\\n    \\n    \\n    \\n    \\n    武术古朴\\n    \\n    箭雨\\n    对全体敌人造成（你的攻击力 - 1）点攻击伤害。\\n    \\n    \\n    -\",\"class\":\"bt-hand sts-hand\"}",
+      "key": "hand",
+      "rect": {
+        "height": 325.60418701171875,
+        "width": 1077.0208740234375,
+        "x": 250.46875,
+        "y": 529.3333740234375
+      },
+      "selector": ".sts-hand",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "389.994px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "none",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1290.01px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    \n    \n    \n    武术初始\n    \n    初始攻击\n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    \n    \n    1\n  ×5详情\n    \n    \n    1\n    \n    \n    \n    \n    武术古朴\n    \n    箭雨\n    对全体敌人造成（你的攻击力 - 1）点攻击伤害。\n    \n    \n    -"
+    },
+    {
+      "attributes": {
+        "data-hand-index": "1",
+        "data-uid": "omv9qfj1mu3hht"
+      },
+      "identity": "{\"data-uid\":\"omv9qfj1mu3hht\",\"data-hand-index\":\"1\"}",
+      "key": "cards",
+      "rect": {
+        "height": 325.60418701171875,
+        "width": 217.0729217529297,
+        "x": 250.4713592529297,
+        "y": 549.370849609375
+      },
+      "selector": ".sts-hand .bt-card",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "4px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "389.994px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)",
+        "visibility": "visible",
+        "width": "260px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    \n    \n    \n    武术初始\n    \n    初始攻击\n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    \n    \n    1\n  ×5详情"
+    },
+    {
+      "attributes": {
+        "data-hand-index": "2",
+        "data-uid": "omv9qfj1meg53c"
+      },
+      "identity": "{\"data-uid\":\"omv9qfj1meg53c\",\"data-hand-index\":\"2\"}",
+      "key": "cards",
+      "rect": {
+        "height": 325.60418701171875,
+        "width": 217.0729217529297,
+        "x": 394.0734252929687,
+        "y": 549.370849609375
+      },
+      "selector": ".sts-hand .bt-card",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "4px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "389.994px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)",
+        "visibility": "visible",
+        "width": "260px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    \n    \n    \n    武术古朴\n    \n    箭雨\n    对全体敌人造成（你的攻击力 - 1）点攻击伤害。\n    \n    \n    -1\n    \n    2\n  详情"
+    },
+    {
+      "attributes": {
+        "data-hand-index": "3",
+        "data-uid": "omv9qfj1mabmo0"
+      },
+      "identity": "{\"data-uid\":\"omv9qfj1mabmo0\",\"data-hand-index\":\"3\"}",
+      "key": "cards",
+      "rect": {
+        "height": 325.60418701171875,
+        "width": 217.07296752929688,
+        "x": 536.8406372070312,
+        "y": 549.370849609375
+      },
+      "selector": ".sts-hand .bt-card",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "4px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "389.994px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)",
+        "visibility": "visible",
+        "width": "260px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    \n    \n    \n    武术古朴\n    \n    迅疾箭\n    造成（你的攻击力 - 1）点攻击伤害，抽 1 张牌。\n    抽 1\n    \n    -1\n    \n    2\n  详情"
+    },
+    {
+      "attributes": {
+        "data-hand-index": "4",
+        "data-uid": "omv9qfj1mdmxlc"
+      },
+      "identity": "{\"data-uid\":\"omv9qfj1mdmxlc\",\"data-hand-index\":\"4\"}",
+      "key": "cards",
+      "rect": {
+        "height": 325.60418701171875,
+        "width": 217.0729217529297,
+        "x": 680.4427490234375,
+        "y": 549.370849609375
+      },
+      "selector": ".sts-hand .bt-card",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "4px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "389.994px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)",
+        "visibility": "visible",
+        "width": "260px"
+      },
+      "tag": "DIV",
+      "text": "0\n    \n    \n    \n    \n    法术古朴\n    \n    屏障修复\n    你获得 6 点护甲；若你打出本牌前没有护甲，本牌变为 0 费。\n    甲 6\n    \n    \n    \n    \n  详情"
+    },
+    {
+      "attributes": {
+        "data-hand-index": "5",
+        "data-uid": "omv9qfj1mmjrfd"
+      },
+      "identity": "{\"data-uid\":\"omv9qfj1mmjrfd\",\"data-hand-index\":\"5\"}",
+      "key": "cards",
+      "rect": {
+        "height": 325.60418701171875,
+        "width": 217.0729217529297,
+        "x": 824.0447998046875,
+        "y": 549.370849609375
+      },
+      "selector": ".sts-hand .bt-card",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "4px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "389.994px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)",
+        "visibility": "visible",
+        "width": "260px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    \n    \n    \n    武术稀有\n    \n    影噬\n    本回合，你偷取 1 名敌人的攻击力，直到该敌人的攻击力降至 1 点。\n    \n    \n    \n    \n    3\n  详情"
+    },
+    {
+      "attributes": {
+        "data-hand-index": "6",
+        "data-uid": "omv9qgky04p0ku"
+      },
+      "identity": "{\"data-uid\":\"omv9qgky04p0ku\",\"data-hand-index\":\"6\"}",
+      "key": "cards",
+      "rect": {
+        "height": 325.60418701171875,
+        "width": 217.0729217529297,
+        "x": 966.81201171875,
+        "y": 549.370849609375
+      },
+      "selector": ".sts-hand .bt-card",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "4px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "389.994px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)",
+        "visibility": "visible",
+        "width": "260px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    \n    \n    \n    武术侠客\n    \n    潜匿\n    你进入潜行状态，持续 1 回合，并抽 1 张牌。\n    抽 1\n    \n    \n    \n    3\n  详情"
+    },
+    {
+      "attributes": {
+        "data-hand-index": "7",
+        "data-uid": "omv9qgnbajw5nz"
+      },
+      "identity": "{\"data-uid\":\"omv9qgnbajw5nz\",\"data-hand-index\":\"7\"}",
+      "key": "cards",
+      "rect": {
+        "height": 325.60418701171875,
+        "width": 217.0729217529297,
+        "x": 1110.4140625,
+        "y": 549.370849609375
+      },
+      "selector": ".sts-hand .bt-card",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "4px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "389.994px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "matrix(1, 0, 0, 1, 0, 24)",
+        "visibility": "visible",
+        "width": "260px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    \n    \n    \n    武术侠客\n    \n    不变应万变-改\n    本牌在你的手牌中时，变为你上一张打出的武术牌的复制，且费用为 1 费。\n    \n    \n    \n    \n    3\n  详情"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"BUTTON\",\"text\":\"结束回合\",\"class\":\"ov-btn ok sts-end-turn\"}",
+      "key": "turn",
+      "rect": {
+        "height": 56.77083587646485,
+        "width": 200.375,
+        "x": 1362.5521240234375,
+        "y": 784.8125
+      },
+      "selector": "[data-act=\"btEnd\"]",
+      "styles": {
+        "background-color": "rgb(225, 188, 124)",
+        "border-radius": "3px",
+        "color": "rgb(36, 48, 58)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "22px",
+        "height": "67.9975px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "16px 20px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "240px"
+      },
+      "tag": "BUTTON",
+      "text": "结束回合"
+    }
+  ],
+  "observedAt": "2026-10-15T16:27:19.006Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.5,
+      "height": 956,
+      "width": 1603
+    }
+  },
+  "scene": "battle-v3-resting",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-16-WF-battle-play-rewrite/v3-final.png"
+  ],
+  "selectors": [
+    {
+      "key": "stage",
+      "selector": ".battle-stage"
+    },
+    {
+      "key": "units",
+      "selector": ".sts-unit"
+    },
+    {
+      "key": "names",
+      "selector": ".sts-nameplate"
+    },
+    {
+      "key": "hand",
+      "selector": ".sts-hand"
+    },
+    {
+      "key": "cards",
+      "selector": ".sts-hand .bt-card"
+    },
+    {
+      "key": "turn",
+      "selector": "[data-act=\"btEnd\"]"
+    }
+  ]
+}

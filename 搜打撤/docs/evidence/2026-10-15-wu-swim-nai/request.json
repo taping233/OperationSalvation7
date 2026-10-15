@@ -1,0 +1,200 @@
+{
+  "status": "generated",
+  "recipe_version": "2.0",
+  "request": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\n1girl, solo, sitting sideways on the edge of a waterfront pier, looking back at viewer, smiling with a small fang. Holding a large orange and white toy water gun over her shoulder; her other hand braces on the pier behind her.\n\nWide summer swimsuit skin illustration, full body.\n\nGirl occupies the right two thirds. One bare leg stretches toward the lower left, kicking an arc of water; the other leg bends down into the sea. Long ponytail flows to the right. Open blue sea fills the left half, modern coastal city and mountains on the horizon, a few palm leaves above.\n\nBright summer sunlight, clear blue sky and white clouds, sparkling turquoise water, cool shadows and warm skin highlights.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 15102061,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, child, loli, nude, nipples, black dress, sword, boots, stockings, hair over one eye, extra legs, extra arms, real firearm",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, slender tall figure, fair skin, silver white long hair, high ponytail tied with a blue ribbon bow, parted bangs exposing forehead and both eyes, cyan blue eyes. Navy blue one-piece swimsuit patterned with large white stars, loose white long-sleeved jacket slipped off shoulders, barefoot.",
+          "uc": "",
+          "center": {
+            "x": 0.67,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\n1girl, solo, sitting sideways on the edge of a waterfront pier, looking back at viewer, smiling with a small fang. Holding a large orange and white toy water gun over her shoulder; her other hand braces on the pier behind her.\n\nWide summer swimsuit skin illustration, full body.\n\nGirl occupies the right two thirds. One bare leg stretches toward the lower left, kicking an arc of water; the other leg bends down into the sea. Long ponytail flows to the right. Open blue sea fills the left half, modern coastal city and mountains on the horizon, a few palm leaves above.\n\nBright summer sunlight, clear blue sky and white clouds, sparkling turquoise water, cool shadows and warm skin highlights.",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, slender tall figure, fair skin, silver white long hair, high ponytail tied with a blue ribbon bow, parted bangs exposing forehead and both eyes, cyan blue eyes. Navy blue one-piece swimsuit patterned with large white stars, loose white long-sleeved jacket slipped off shoulders, barefoot.",
+              "centers": [
+                {
+                  "x": 0.67,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, child, loli, nude, nipples, black dress, sword, boots, stockings, hair over one eye, extra legs, extra arms, real firearm",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.67,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-swim-20261015\\wu-swim-nai.png",
+  "references": [
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu-beach.webp",
+      "sha256": "ab6ef6ca97605bae477829103297195127eca98efcee31237060b9eaff626b1f",
+      "use": "visually inspected; described in text; not uploaded"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+      "sha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc",
+      "use": "visually inspected; described in text; not uploaded"
+    }
+  ],
+  "previous_attempt": {
+    "status": "failed",
+    "recipe_version": "2.0",
+    "request": {
+      "input": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\n1girl, solo, sitting sideways on the edge of a waterfront pier, looking back at viewer, smiling with a small fang. Holding a large orange and white toy water gun over her shoulder; her other hand braces on the pier behind her.\n\nWide summer swimsuit skin illustration, full body.\n\nGirl occupies the right two thirds. One bare leg stretches toward the lower left, kicking an arc of water; the other leg bends down into the sea. Long ponytail flows to the right. Open blue sea fills the left half, modern coastal city and mountains on the horizon, a few palm leaves above.\n\nBright summer sunlight, clear blue sky and white clouds, sparkling turquoise water, cool shadows and warm skin highlights.",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 6.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": true,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 15102061,
+        "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, child, loli, nude, nipples, black dress, sword, boots, stockings, hair over one eye, extra legs, extra arms, real firearm",
+        "characterPrompts": [
+          {
+            "prompt": "adult woman, slender tall figure, fair skin, silver white long hair, high ponytail tied with a blue ribbon bow, parted bangs exposing forehead and both eyes, cyan blue eyes. Navy blue one-piece swimsuit patterned with large white stars, loose white long-sleeved jacket slipped off shoulders, barefoot.",
+            "uc": "",
+            "center": {
+              "x": 0.67,
+              "y": 0.5
+            },
+            "enabled": true
+          }
+        ],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\n1girl, solo, sitting sideways on the edge of a waterfront pier, looking back at viewer, smiling with a small fang. Holding a large orange and white toy water gun over her shoulder; her other hand braces on the pier behind her.\n\nWide summer swimsuit skin illustration, full body.\n\nGirl occupies the right two thirds. One bare leg stretches toward the lower left, kicking an arc of water; the other leg bends down into the sea. Long ponytail flows to the right. Open blue sea fills the left half, modern coastal city and mountains on the horizon, a few palm leaves above.\n\nBright summer sunlight, clear blue sky and white clouds, sparkling turquoise water, cool shadows and warm skin highlights.",
+            "char_captions": [
+              {
+                "char_caption": "adult woman, slender tall figure, fair skin, silver white long hair, high ponytail tied with a blue ribbon bow, parted bangs exposing forehead and both eyes, cyan blue eyes. Navy blue one-piece swimsuit patterned with large white stars, loose white long-sleeved jacket slipped off shoulders, barefoot.",
+                "centers": [
+                  {
+                    "x": 0.67,
+                    "y": 0.5
+                  }
+                ]
+              }
+            ]
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, child, loli, nude, nipples, black dress, sword, boots, stockings, hair over one eye, extra legs, extra arms, real firearm",
+            "char_captions": [
+              {
+                "char_caption": "",
+                "centers": [
+                  {
+                    "x": 0.67,
+                    "y": 0.5
+                  }
+                ]
+              }
+            ]
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-swim-20261015\\wu-swim-nai.png",
+    "references": [
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu-beach.webp",
+        "sha256": "ab6ef6ca97605bae477829103297195127eca98efcee31237060b9eaff626b1f",
+        "use": "visually inspected; described in text; not uploaded"
+      },
+      {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+        "sha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc",
+        "use": "visually inspected; described in text; not uploaded"
+      }
+    ],
+    "error_type": "SystemExit",
+    "error": "NAI HTTP 000：网络瞬断，稍候重试"
+  },
+  "seed": 15102061,
+  "sha256": "bf764218e3b82762c97e6e8ba8f040fddbd6741f991aa75b70667a9c2c71f964"
+}

@@ -1,0 +1,27 @@
+{
+  "version": "v1.5",
+  "changed": [
+    "SKILL.md",
+    "references/iteration.md",
+    "references/prompt-recipe.md",
+    "references/space-comparison-v15.md",
+    "references/style-prompt.md",
+    "references/trial-space-v15-prompt.txt"
+  ],
+  "sha256": {
+    "SKILL.md": "87bcc8af66ce54c5974c6ea980fda28049b80fe8bb18843cd4df210b9e88af6a",
+    "references/iteration.md": "3a35d777440c2460614fcac4bfaf116d6ba2db54e8724dac143c251b00303633",
+    "references/prompt-recipe.md": "17d225cee93abeb022526b687ccec6ce8fa5f0247dccc4e5910609d925003d05",
+    "references/space-comparison-v15.md": "8942ee2f8d184dad8d0b41442e0a3f2e1ad695b90bc1f501dff5a805c71dda93",
+    "references/style-prompt.md": "3c445151560f4e48f148ad1f923f86e87328b7e56cbcd7eedc9d1ffd9077c01c",
+    "references/trial-space-v15-prompt.txt": "cd9de1aa21705ee1c07e818bc7f256033129eaa0d163dfb34f75b16e53ac4e5b"
+  },
+  "protectedOriginalFiles": 47,
+  "checks": [
+    "frontmatter valid",
+    "relative links resolved",
+    "installed hashes match",
+    "other originals retained"
+  ],
+  "requestedAspect": "16:9 landscape, this trial only"
+}

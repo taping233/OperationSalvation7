@@ -1,0 +1,14 @@
+{
+  "platform": "Codex in-app browser via mcp__cua_repl",
+  "url": "http://127.0.0.1:5200/",
+  "tabId": "2",
+  "viewport": [1280, 720],
+  "scope": "current window only",
+  "images": {"expected": 7, "loaded": 7, "naturalDimensions": [384, 384]},
+  "cssSizes": {"city": 96, "guide": 80, "achievement": 88, "photo": 88, "settings": 64, "credits": 64, "exit": 64},
+  "input": "Real browser button clicks: open settings, return; open credits, return",
+  "visual": "All seven illustrations visible; labels readable; no image stretching or broken-image indicators; existing layout retained",
+  "consoleErrorsAtHome": [],
+  "screenshot": "Current-window built-in-browser screenshot emitted in this chat; not exported to a local image file",
+  "notCovered": ["full gameplay", "other viewport sizes", "every homepage route"]
+}

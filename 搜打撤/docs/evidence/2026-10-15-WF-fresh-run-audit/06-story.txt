@@ -1,0 +1,24 @@
+- main:
+  - generic "持有金币":
+    - text: 金币
+    - generic: "2"
+  - generic "攻击力":
+    - text: 攻击
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "退出，返回地图" [active]:
+    - text: 风雪哨线
+    - generic: 第 2 层
+    - region "事件与叙事":
+      - heading "最后一盏引路灯" [level=2]
+      - region "事件叙述": 冰霜化开后，新旧漆面的边缘同时显了出来。这不是画错的箭头，而是某次改道留下的两套路线。
+    - region "事件选项":
+      - paragraph: 本段见闻已永久记录；下一次探索可继续这条线索。
+      - button "记下并离开 ◇":
+        - generic: 记下并离开
+        - text: ◇

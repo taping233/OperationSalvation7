@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>隘口补给站 · 原创应用样例</title>
+<style>
+:root{--paper:#e4e1d6;--ink:#252c2a;--muted:#59615b;--accent:#9a3f28;--line:#a8ada0}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei",sans-serif}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #385e71;outline-offset:3px}button:disabled{cursor:default}header{display:flex;justify-content:space-between;align-items:center;margin:0 3.4vw;padding:18px 0;border-bottom:1px solid var(--ink);font-size:13px;letter-spacing:.08em}header strong{font-size:17px;letter-spacing:.12em}.serial{font-family:monospace;letter-spacing:.06em}main{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,31%);gap:5vw;padding:24px 3.4vw 16px;min-height:calc(100vh - 60px)}.scene{position:relative;min-height:500px;isolation:isolate;overflow:hidden}.landscape{position:absolute;inset:20% 0 0;width:100%;height:80%;z-index:-1}.eyebrow{color:var(--muted);font-size:12px;letter-spacing:.18em}h1{font-size:clamp(40px,5.7vw,78px);line-height:1.07;letter-spacing:.06em;margin:18px 0 14px;font-weight:900}.intro{max-width:25em;font-size:14px;line-height:1.9;color:#49524a;margin:0}.scene-number{position:absolute;top:30%;right:3%;font:140px/1 monospace;color:#b3b9aa;letter-spacing:-.1em;z-index:-1}.cargo{position:absolute;left:4%;top:42%;width:86%;height:47%;filter:drop-shadow(10px 18px 8px #38453126)}.scene-note{position:absolute;left:0;bottom:4px;border-left:4px solid var(--accent);padding:0 0 0 12px;font-size:12px;color:#525d52;line-height:1.7}.manifest{display:flex;flex-direction:column;border-top:4px solid var(--ink)}.section-head{display:flex;align-items:end;justify-content:space-between;padding:15px 0 16px;border-bottom:1px solid var(--line)}.section-head h2{margin:0;font-size:22px}.section-head span{color:var(--muted);font-size:12px}.rows{display:grid}.item{position:relative;display:grid;grid-template-columns:32px 1fr auto;align-items:center;gap:10px;width:100%;background:transparent;color:var(--ink);text-align:left;border:0;border-bottom:1px solid var(--line);padding:12px 10px;min-height:64px}.item[aria-pressed="true"]{background:#f3f0e6;box-shadow:inset 4px 0 var(--accent)}.item strong{display:block;font-size:16px}.item small{display:block;font-size:12px;color:var(--muted);margin-top:5px}.item .tag{font-size:11px}.item .code{font-family:monospace;font-size:12px;color:var(--muted)}.item[data-id="filter"] .tag{color:#735426}.detail{padding:16px 0;min-height:154px}.detail label{font-size:11px;letter-spacing:.16em;color:var(--muted)}.detail h3{font-size:22px;margin:8px 0}.detail p{font-size:13px;line-height:1.65;margin:0;max-width:32em;color:#4e574e}.add{margin-top:12px;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:8px 17px;min-height:38px}.add:disabled{color:#65705f;border-color:#9ba492}.feedback{font-size:12px;color:#5d482f;min-height:26px;line-height:1.7;margin:0 0 10px}.footer{margin-top:auto;padding-top:16px;border-top:1px solid var(--ink)}.count{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;margin-bottom:12px}.count output{font-family:monospace;font-size:25px}.primary{border:0;background:var(--accent);color:#fff9ef;padding:13px 20px;width:100%;font-weight:700;display:flex;justify-content:space-between;align-items:center}.primary:disabled{background:#7c8177;color:#fff}.demo-note{font-size:11px;color:var(--muted);line-height:1.6;margin:12px 0 0}
+dialog{position:fixed;inset:0 0 0 auto;margin:0;width:min(450px,93vw);height:100%;max-height:100%;border:0;border-left:5px solid var(--accent);padding:32px;background:#f0ede2;color:var(--ink)}dialog::backdrop{background:#14211d46}dialog h2{font-size:28px;margin:15px 0 8px}dialog p{font-size:13px;line-height:1.8;color:var(--muted)}dialog ul{list-style:none;padding:0;margin:28px 0}dialog li{padding:18px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}dialog li:last-child{border-bottom:1px solid var(--line)}dialog .close{border:1px solid #899181;background:transparent;padding:12px 18px;width:100%;margin-top:14px;color:var(--ink)}.quantity{color:var(--accent);font-family:monospace}#complete{font-size:12px;line-height:1.6;font-weight:700;color:#3c5c3d}#complete:empty{display:none}.footer:has(#complete:not(:empty)) .demo-note{display:none}
+@media(max-width:820px){main{grid-template-columns:minmax(0,1fr);gap:28px}.scene{min-height:490px}h1{font-size:54px}.cargo{top:42%}.manifest{max-width:none}.detail{min-height:0}}
+@media(prefers-reduced-motion:no-preference){dialog[open]{animation:arrive .18s ease-out}@keyframes arrive{from{transform:translateX(20px);opacity:.5}to{transform:none;opacity:1}}}
+</style>
+<header><strong>山隘运输局 / 07</strong><span class="serial">交接档案 26—1015</span></header>
+<main>
+<section class="scene" aria-label="山隘补给场景">
+<div class="eyebrow">北线中继 · 货物交接处</div><h1>隘口<br>补给站</h1>
+<p class="intro">穿过最后一道山口之前，<br>为下一段路留下余量。</p><div class="scene-number" aria-hidden="true">07</div>
+<svg class="landscape" viewBox="0 0 800 560" preserveAspectRatio="none" aria-hidden="true"><path d="M-20 220L180 90 290 185 440 20 650 195 820 60V560H-20Z" fill="#c6ccbd"/><path d="M-20 300L130 220 350 310 540 130 820 320V560H-20Z" fill="#aab6a4"/><path d="M-20 460L300 350 590 400 820 315V560H-20Z" fill="#879b87"/><path d="M350 560L670 322 700 325 440 560Z" fill="#c1c5ae"/><g fill="none" stroke="#e5e7d6" opacity=".5"><path d="M-10 385Q180 260 380 370T820 340M-10 405Q180 280 380 390T820 360M-10 425Q180 300 380 410T820 380"/></g></svg>
+<svg class="cargo" viewBox="0 0 600 350" role="img" aria-label="原创运输箱图形">
+<path d="M36 261L310 185 567 250 285 338Z" fill="#4b5b4c" opacity=".35"/>
+<path d="M92 105L292 49 476 103 275 167Z" fill="#ddd8ba"/><path d="M92 105L275 167V307L92 242Z" fill="#888d78"/><path d="M275 167L476 103V238L275 307Z" fill="#b5b79a"/>
+<path d="M124 96L156 87 336 148 304 157V297L275 307V167Z" fill="#263e38"/><path d="M387 76L420 86 222 148 190 137V277L157 266V126Z" fill="#344a40"/>
+<path d="M92 111L275 174 476 109M275 174V300" fill="none" stroke="#f0ebd6" stroke-width="3" opacity=".6"/>
+<path d="M326 179L435 146V214L326 249Z" fill="#eee9cf"/><text id="crate-code" x="344" y="204" transform="rotate(-17 344 204)" font-family="monospace" font-size="24" fill="#934327">MED / 01</text><path d="M345 219L414 197" stroke="#66735a" stroke-width="5"/>
+<path d="M108 197L142 209V227L108 215Z" fill="#9a3f28"/><path d="M454 167L468 163V215L454 219Z" fill="#9a3f28"/>
+</svg>
+<div class="scene-note">运输标记 → 封装结构 → 交接清单<br><span class="serial">原创视觉练习 · 无外部图片与字体</span></div>
+</section>
+<section class="manifest" aria-labelledby="manifest-title">
+<div class="section-head"><h2 id="manifest-title">可交接物资</h2><span>本次限选 2 件</span></div>
+<div class="rows">
+<button class="item" data-id="med" aria-pressed="true"><span class="code">01</span><span><strong>封装急救包</strong><small>医疗 / 耐候封装</small></span><span class="tag">可选</span></button>
+<button class="item" data-id="cell" aria-pressed="false"><span class="code">02</span><span><strong>便携电源</strong><small>能源 / 运输锁扣</small></span><span class="tag">可选</span></button>
+<button class="item" data-id="filter" aria-pressed="false"><span class="code">03</span><span><strong>净水滤芯</strong><small>生存 / 独立密封</small></span><span class="tag">缺货</span></button>
+</div>
+<div class="detail"><label>当前预览</label><h3 id="detail-title">封装急救包</h3><p id="detail-copy">防潮封装，可放入随行运输箱。外层保留易辨认的医疗编号。</p><button class="add" id="add">加入清单 ＋</button></div>
+<p class="feedback" id="feedback" role="status">浏览物资不会加入清单。</p>
+<div class="footer"><div class="count"><span>已选物资</span><output id="count" aria-live="polite">0 / 2</output></div><button class="primary" id="review" disabled><span>查看交接清单</span><span aria-hidden="true">↗</span></button><p class="demo-note">设计样例，仅演示本页状态；不连接游戏数据。</p><p id="complete" role="status"></p></div>
+</section>
+</main>
+<dialog id="sheet" aria-labelledby="sheet-title"><div class="eyebrow">交接确认 · 07</div><h2 id="sheet-title">核对本次物资</h2><p>确认以下清单后完成演示登记。取消可回到原来的预览与选择。</p><ul id="selected-items"></ul><button class="primary" id="confirm"><span>确认演示登记</span><span aria-hidden="true">→</span></button><button class="close" id="cancel">返回修改</button><p class="demo-note">这里的确认只改变当前样例状态。</p></dialog>
+<script>
+const goods={
+ med:{name:"封装急救包",copy:"防潮封装，可放入随行运输箱。外层保留易辨认的医疗编号。",mark:"MED / 01",available:true},
+ cell:{name:"便携电源",copy:"带运输锁扣的独立电源。供电接口收于封盖内，便于山路转运。",mark:"PWR / 02",available:true},
+ filter:{name:"净水滤芯",copy:"独立密封的过滤组件。本次库存不足，可查看说明，无法加入交接清单。",mark:"WTR / 03",available:false}
+};
+const chosen=new Set();let focusId="med";
+const byId=id=>document.getElementById(id);
+function render(){
+ document.querySelectorAll(".item").forEach(button=>{
+  const id=button.dataset.id;button.setAttribute("aria-pressed",String(id===focusId));
+  button.querySelector(".tag").textContent=chosen.has(id)?"已加入":goods[id].available?"可选":"缺货";
+ });
+ const item=goods[focusId];byId("detail-title").textContent=item.name;byId("detail-copy").textContent=item.copy;byId("crate-code").textContent=item.mark;
+ byId("count").textContent=chosen.size+" / 2";
+ byId("review").disabled=chosen.size===0;
+ byId("add").disabled=!item.available;
+ byId("add").textContent=!item.available?"库存不足":chosen.has(focusId)?"从清单移除 −":"加入清单 ＋";
+}
+document.querySelectorAll(".item").forEach(button=>button.addEventListener("click",()=>{
+ focusId=button.dataset.id;byId("feedback").textContent=goods[focusId].available?"正在预览；加入清单才会计入数量。":"净水滤芯缺货，无法加入清单。";render();
+}));
+byId("add").addEventListener("click",()=>{
+ if(!goods[focusId].available)return;
+ if(chosen.has(focusId)){chosen.delete(focusId);byId("feedback").textContent="已从清单移除 "+goods[focusId].name+"。";}
+ else if(chosen.size<2){chosen.add(focusId);byId("feedback").textContent="已加入 "+goods[focusId].name+"。";}
+ else{byId("feedback").textContent="清单已满，请先移除一件物资。";}
+ byId("complete").textContent="";render();
+});
+byId("review").addEventListener("click",()=>{
+ byId("selected-items").replaceChildren();
+ chosen.forEach(id=>{const li=document.createElement("li"),name=document.createElement("span"),quantity=document.createElement("span");name.textContent=goods[id].name;quantity.textContent="× 1";quantity.className="quantity";li.append(name,quantity);byId("selected-items").append(li);});
+ byId("sheet").showModal();
+});
+byId("cancel").addEventListener("click",()=>byId("sheet").close());
+byId("confirm").addEventListener("click",()=>{
+ const total=chosen.size;const names=[...chosen].map(id=>goods[id].name).join("、");
+ byId("sheet").close();chosen.clear();render();byId("feedback").textContent="演示清单已清空，可继续选择。";
+ byId("complete").textContent="已演示登记 "+total+" 件："+names+"。";
+});
+</script>
+</html>

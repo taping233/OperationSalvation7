@@ -1,0 +1,159 @@
+{
+  "stageSha256": {
+    "agents/openai.yaml": "6277ab09087488420e02b70832262bc40c35552db148f9d0bf1b4fb021941396",
+    "assets/field-supply-demo.html": "26850de065ba177f23c3f6a0e1fe0edd0d2fdab4712950e039fc8eff90d47488",
+    "references/art-principles.md": "a5b6c834d65d8ea0ae93939806de9566a78bf74d926919dbf865c7174aad30d4",
+    "references/case-studies.md": "52ce0b4408eb14b2411275965375bab6a7cf15587c94e302d8c2a1e1c1c60005",
+    "references/page-recipes.md": "a87f6697d956b06a0ad8c7cfaed25b8bc258b6cbffe13478e8a7d5ba8a0bf538",
+    "references/sources.md": "493cf005a15b35f146f7f828aacfd406c22b5543a9785965b089bf2705b235d1",
+    "references/ui-principles.md": "2e3ba1a5e8c2d4236cf3eed7e775b0e2f1cd9dcde5184b307f65a27ec6776334",
+    "references/worked-example.md": "a92bcef616156465705d5f2b3171d9ccf7aa8b11dcf2260240265902481fe35d",
+    "SKILL.md": "9a33064d7f28bbd07394b8a408b39af332a923d61688a4290f0202402ef84efd"
+  },
+  "changedFiles": [
+    "assets/field-supply-demo.html",
+    "references/art-principles.md",
+    "references/case-studies.md",
+    "references/page-recipes.md",
+    "references/sources.md",
+    "references/ui-principles.md",
+    "references/worked-example.md",
+    "SKILL.md"
+  ],
+  "utf8": "passed",
+  "internalLinks": [
+    {
+      "file": "SKILL.md",
+      "link": "references/sources.md"
+    },
+    {
+      "file": "SKILL.md",
+      "link": "references/ui-principles.md"
+    },
+    {
+      "file": "SKILL.md",
+      "link": "references/art-principles.md"
+    },
+    {
+      "file": "SKILL.md",
+      "link": "references/page-recipes.md"
+    },
+    {
+      "file": "SKILL.md",
+      "link": "references/case-studies.md"
+    },
+    {
+      "file": "SKILL.md",
+      "link": "references/worked-example.md"
+    },
+    {
+      "file": "references\\art-principles.md",
+      "link": "case-studies.md"
+    },
+    {
+      "file": "references\\art-principles.md",
+      "link": "case-studies.md#v01"
+    },
+    {
+      "file": "references\\art-principles.md",
+      "link": "case-studies.md#v04"
+    },
+    {
+      "file": "references\\art-principles.md",
+      "link": "worked-example.md"
+    },
+    {
+      "file": "references\\case-studies.md",
+      "link": "sources.md"
+    },
+    {
+      "file": "references\\case-studies.md",
+      "link": "worked-example.md"
+    },
+    {
+      "file": "references\\page-recipes.md",
+      "link": "worked-example.md"
+    },
+    {
+      "file": "references\\page-recipes.md",
+      "link": "case-studies.md"
+    },
+    {
+      "file": "references\\sources.md",
+      "link": "case-studies.md#v03"
+    },
+    {
+      "file": "references\\ui-principles.md",
+      "link": "case-studies.md"
+    },
+    {
+      "file": "references\\ui-principles.md",
+      "link": "sources.md"
+    },
+    {
+      "file": "references\\ui-principles.md",
+      "link": "case-studies.md#v03"
+    },
+    {
+      "file": "references\\ui-principles.md",
+      "link": "case-studies.md#v02"
+    },
+    {
+      "file": "references\\ui-principles.md",
+      "link": "worked-example.md"
+    },
+    {
+      "file": "references\\worked-example.md",
+      "link": "../assets/field-supply-demo.html"
+    },
+    {
+      "file": "references\\worked-example.md",
+      "link": "case-studies.md#v01"
+    },
+    {
+      "file": "references\\worked-example.md",
+      "link": "case-studies.md#v02"
+    },
+    {
+      "file": "references\\worked-example.md",
+      "link": "case-studies.md#v03"
+    }
+  ],
+  "sourceIndex": "S01-S17 retained",
+  "application": "IAB actual input, current window 1280x720; preview, add/remove, unavailable, cancel, submit passed; final action/result visible",
+  "limits": [
+    "Same-session application, no independent forward test",
+    "No other sizes, game integration or performance measured"
+  ],
+  "sizes": {
+    "beforeTextBytes": 44558,
+    "afterTextBytes": 29185,
+    "beforeEntryBytes": 5504,
+    "afterEntryBytes": 3187,
+    "allFiles": 9,
+    "allBytes": 41394
+  },
+  "installed": {
+    "status": "passed",
+    "sha256": {
+      "agents/openai.yaml": "6277ab09087488420e02b70832262bc40c35552db148f9d0bf1b4fb021941396",
+      "assets/field-supply-demo.html": "26850de065ba177f23c3f6a0e1fe0edd0d2fdab4712950e039fc8eff90d47488",
+      "references/art-principles.md": "a5b6c834d65d8ea0ae93939806de9566a78bf74d926919dbf865c7174aad30d4",
+      "references/case-studies.md": "52ce0b4408eb14b2411275965375bab6a7cf15587c94e302d8c2a1e1c1c60005",
+      "references/page-recipes.md": "a87f6697d956b06a0ad8c7cfaed25b8bc258b6cbffe13478e8a7d5ba8a0bf538",
+      "references/sources.md": "493cf005a15b35f146f7f828aacfd406c22b5543a9785965b089bf2705b235d1",
+      "references/ui-principles.md": "2e3ba1a5e8c2d4236cf3eed7e775b0e2f1cd9dcde5184b307f65a27ec6776334",
+      "references/worked-example.md": "a92bcef616156465705d5f2b3171d9ccf7aa8b11dcf2260240265902481fe35d",
+      "SKILL.md": "9a33064d7f28bbd07394b8a408b39af332a923d61688a4290f0202402ef84efd"
+    },
+    "backup": "C:\\Users\\太平\\.codex\\visualizations\\2026\\10\\15\\01a13ee0-8bb1-72a1-a490-af4e95527fd7\\iteration-04\\before\\arknights-art-ui-design"
+  },
+  "quickValidate": "passed",
+  "demoScriptSyntax": "passed",
+  "screenshotExport": "Blocked: browser only permits http/https navigation; attempted data-image export rejected. No bypass attempted. Current-window screenshots viewed in tool; reusable HTML and actual-input records retained.",
+  "docsCheck": {
+    "status": "passed",
+    "checkedRelativeLinks": 452,
+    "findings": []
+  }
+}

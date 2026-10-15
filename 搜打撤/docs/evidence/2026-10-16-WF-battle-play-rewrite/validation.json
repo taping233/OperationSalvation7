@@ -1,0 +1,57 @@
+{
+  "task": "WF-battle-play-rewrite-1016",
+  "sourceHashes": [
+    {
+      "path": "game/css/battle-stage.css",
+      "sha256": "d465e6b2c789afa1078a68117ef47fc0d2740db4e9a721f878ecf0e822250416"
+    },
+    {
+      "path": "game/css/battle.css",
+      "sha256": "d1027ab77254185b563fbe9c638bd54518046ee38c5e44501c1648e595effd62"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "d4897a6f7502fa65620764e1c04db0e54b9ce9ffb308c505f9f9a88cb5b1e6d1"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "d4853d6219d1f42b4fe58a8134736a7fb28f4dd5ca9632347fbf87c9bbfcef13"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-layout.js",
+      "sha256": "2995997134c53d985786ff5faaa3a04530ba8b87596967ab65c6d161885ce6f5"
+    },
+    {
+      "path": "tests/battle-hand-layout.test.js",
+      "sha256": "71851fb363f680d1de1d97f7b01d7c1502e5487eca77ed56af29888219392175"
+    },
+    {
+      "path": "tests/battle-decision-readability.test.js",
+      "sha256": "38b0c7e02602661740c225ca8ee11c984e37a5f6b997f7da70c0a66030fa1e04"
+    },
+    {
+      "path": "tests/battle-entry-view.test.js",
+      "sha256": "f0675eedaafce242b73a8cdc6dd2654cf9de5fe29e38cda84e28a7076aa7097e"
+    },
+    {
+      "path": "docs/production/art/VISUAL-BIBLE.md",
+      "sha256": "61092607b1e3567528ef522e0793b800f3931aa6e4a601282638bc4745a0e7bc"
+    }
+  ],
+  "tests": {
+    "status": "passed",
+    "files": 13,
+    "cases": 170,
+    "execSession": 63070
+  },
+  "docsCheck": {
+    "status": "passed",
+    "links": 469
+  },
+  "cssParse": "passed",
+  "diffCheck": "passed",
+  "fullSuite": "not-run",
+  "build": "not-run",
+  "commit": "not-authorized-in-this-chat",
+  "browserScope": "Codex IAB current window 1603x956"
+}

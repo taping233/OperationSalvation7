@@ -1,0 +1,21 @@
+{
+  "version": "v1.3",
+  "files": [
+    "SKILL.md",
+    "references/iteration.md",
+    "references/prompt-recipe.md",
+    "references/space-comparison-v13.md",
+    "references/style-prompt.md",
+    "references/trial-space-v13-prompt.txt"
+  ],
+  "sha256": {
+    "SKILL.md": "645f9c7a00a92d7d80f569615e26651ed3f93ecc7ce9f7eb48a523019bcc78be",
+    "references/iteration.md": "e48b57f6b764477a10361b872d1f5220945985837d7e46a521d146994fa67d21",
+    "references/prompt-recipe.md": "7850f771c7d8246c76432d146da65a3a3e4c252162ab136c348cb0f87353ad46",
+    "references/space-comparison-v13.md": "bdd611825e3f320feb70a2122c265f705579d4a477d9ef3edbe0b872bda2fb93",
+    "references/style-prompt.md": "4d27139eeae8e351fb72a0e3e8f84a02121adabb2245cbd07fd60e2fe444778c",
+    "references/trial-space-v13-prompt.txt": "b604f6ec786a9a134586c344916ad57a581824a3203f9fb166bebea92a54fd7c"
+  },
+  "protectedOriginalFiles": 43,
+  "validation": "candidate frontmatter, overlay relative links, installation hashes and untouched originals passed"
+}

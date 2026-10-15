@@ -1,0 +1,47 @@
+- main:
+  - generic "持有金币":
+    - text: 金币
+    - generic: "15"
+  - generic "攻击力":
+    - text: 攻击
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 30/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "bag 背包":
+    - button "关闭背包" [active]:
+    - navigation:
+      - button "随身背包":
+        - generic: "16"
+      - button "安全格":
+        - generic: 2/2
+      - button "消耗口袋":
+        - generic: "7"
+      - generic: DEPOT
+    - generic: DEPOT
+    - heading "背包" [level=2]:
+      - text: 背包
+      - button:
+    - generic: 容量
+    - generic: "16"
+    - generic: /16
+    - text: 金币
+    - generic: "15"
+    - text: 物资估值
+    - generic: "0"
+    - img "gem"
+    - text: 碎片
+    - generic: 4/2
+    - button "全部"
+    - button "招式"
+    - button "生物"
+    - button "装备"
+    - button "道具"
+    - button "资源"
+    - button "物资"
+    - button:
+    - button:
+    - paragraph: 点击查看详情 · 按住拖动整理 · 拖到左栏盾钮存入安全格
+    - paragraph: （随身背包是空的）

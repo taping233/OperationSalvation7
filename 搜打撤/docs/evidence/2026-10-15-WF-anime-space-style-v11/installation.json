@@ -1,0 +1,25 @@
+{
+  "target": "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush",
+  "modifiedOrAdded": [
+    "SKILL.md",
+    "assets/space-study-20261015-1.png",
+    "assets/space-study-20261015-2.png",
+    "references/iteration.md",
+    "references/prompt-recipe.md",
+    "references/space-study-20261015.md",
+    "references/style-prompt.md"
+  ],
+  "baselineFiles": 41,
+  "retainedOriginalFiles": 37,
+  "installedSha256": {
+    "SKILL.md": "b6861ad67303cc2d503f4e7c46949c78d7e970738a26c0cf96d6c3e2faabe4c9",
+    "assets/space-study-20261015-1.png": "632d9e1dcbc759184f34781f3b0cc7f6932603bad1ca792386bc509d41cf04ab",
+    "assets/space-study-20261015-2.png": "bbf823920d2d61989e9f3ba6e4554db6df46692250f3afed85566d8b8d844421",
+    "references/iteration.md": "b23ec13dbb8f25a502a191896b9b4059f42a23500dd714237e7747d169f795dd",
+    "references/prompt-recipe.md": "2eae36327c2e5b823500a8c6d2f5dfd1265eb31c9b5fcf52085e8ce2d116397f",
+    "references/space-study-20261015.md": "0192d00cf046aa730076dbde8791b5848b64855dfa497bf24d811f16ec8aff02",
+    "references/style-prompt.md": "7c6a6311b0205c1d72b5045b65c8bed30b149ea268ecd6fe9ea113c235bcda7f"
+  },
+  "validation": "quick_validate passed; unchanged originals and installed hashes verified",
+  "generation": "not yet run; must use prompt only, no input images"
+}

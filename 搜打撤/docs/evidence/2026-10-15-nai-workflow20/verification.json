@@ -1,0 +1,25 @@
+{
+  "recipe_version": "2.0",
+  "visual_baseline": "restored v1.7",
+  "checks": [
+    "v2.0 identity",
+    "artist/style/UC byte-for-byte equal to restored v1.7",
+    "client model/sampling unchanged",
+    "documented example: character slot; prepared/generated receipt; request matches generation args",
+    "documented example: empty character list; prepared/generated receipt; request matches generation args",
+    "documented failure path preserves failed request and re-raises"
+  ],
+  "network_generation": false,
+  "game_changes": false,
+  "test_method": "offline; documented example executed with mocked generation and in-memory receipts",
+  "targeted_tests": {
+    "test_nai_prompt_clean": 6,
+    "test_nai_multichar": 4,
+    "result": "passed"
+  },
+  "docs_check": {
+    "passed": true,
+    "checked_links": 459
+  },
+  "status": "complete-uncommitted"
+}

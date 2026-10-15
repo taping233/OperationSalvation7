@@ -1,0 +1,11 @@
+{
+  "key": "WF-copy-audio-cleanup-1015",
+  "cells": [
+    "Friday（旧副本与音乐中间文件清理 WF-copy-audio-cleanup-1015）",
+    "`.tmp/zzz-base-observe-1012/`、`.tmp/WF-battle-ui-runtime/`、`.tmp/selection-map-observe-1011/`、`.tmp/selection-map-repair-1012/`；两版battle-full-loop证据目录内固定18份中间WAV；自有证据 `docs/evidence/2026-10-15-WF-copy-audio-cleanup-1015/`",
+    "老板明确批准前两类清理；先另存源码/脚本/报告/独有素材并核验SHA，音乐工程/音源/最终混音/母带原位保留；旧端口5335/5337/5338/5346无监听、旧PID37600不存在",
+    "2026-10-15",
+    "编辑中；只处理固定清单；不动主线源码和其他会话改动、不启服、不结束任何进程、不build、不提交"
+  ],
+  "sha256": "d1f5d3e5b74a45999ebaf693276b6877cbbdc6d35464d070c9bbdfa9efd83935"
+}

@@ -1,0 +1,63 @@
+{
+  "status": "generated",
+  "recipe_version": "2.0",
+  "cleanup_version": "1.0",
+  "request": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\n1person, adult scavenger, crouching, leaning forward, head down, back view, rummaging. BOTH HANDS INSIDE A LARGE OPEN STORAGE CRATE. The open crate is directly in front of the kneeling person; raised lid and visible ration packets inside. One hand lifts a packet while the other searches the contents. Short slate winter jacket, dark trousers, compact orange backpack. Abandoned futuristic parcel depot interior. Wide-open cupboard doors behind the person, two fully pulled-out drawers, discarded empty packets and folders scattered across the floor. Forced sliding entrance at left, cold winter light, small amber emergency lamp above lockers.\n\nWide game environment illustration for entering a building and rummaging for supplies left behind.\n\n16:9 landscape, eye-level wide view from just inside the doorway. Strong architectural perspective, doorway at far left, scavenger and open searchable crate at middle-left, entire kneeling figure visible and small within the room, about one third of image height. Search-worthy lockers above the character, readable hands interacting with crate contents. Right 40 percent quiet darker room depth for interface choices. Lower 25 percent quiet walkable floor for narrative overlay. Objects realistically human-scale, clear foreground middle ground and rear wall.\n\nCold pale teal daylight slants through the forced door, warm muted amber emergency light over a few orange supply containers. Matte ivory wall panels, slate blue shadows, synthetic materials. Sparse snow only at the threshold, interior dry. Large readable forms, restrained details, calm intriguing atmosphere.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1024,
+      "height": 576,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 101524020,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, multiple people, looking at viewer, portrait, standing pose, posing, sitting idle, looking over shoulder, looking back, hands away from box, closed crate, closed lockers, outdoor main scene, train, capsule, flower, medieval, castle, wooden treasure chest, piles of gold, supermarket full of goods, abundant stock, logo",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\n1person, adult scavenger, crouching, leaning forward, head down, back view, rummaging. BOTH HANDS INSIDE A LARGE OPEN STORAGE CRATE. The open crate is directly in front of the kneeling person; raised lid and visible ration packets inside. One hand lifts a packet while the other searches the contents. Short slate winter jacket, dark trousers, compact orange backpack. Abandoned futuristic parcel depot interior. Wide-open cupboard doors behind the person, two fully pulled-out drawers, discarded empty packets and folders scattered across the floor. Forced sliding entrance at left, cold winter light, small amber emergency lamp above lockers.\n\nWide game environment illustration for entering a building and rummaging for supplies left behind.\n\n16:9 landscape, eye-level wide view from just inside the doorway. Strong architectural perspective, doorway at far left, scavenger and open searchable crate at middle-left, entire kneeling figure visible and small within the room, about one third of image height. Search-worthy lockers above the character, readable hands interacting with crate contents. Right 40 percent quiet darker room depth for interface choices. Lower 25 percent quiet walkable floor for narrative overlay. Objects realistically human-scale, clear foreground middle ground and rear wall.\n\nCold pale teal daylight slants through the forced door, warm muted amber emergency light over a few orange supply containers. Matte ivory wall panels, slate blue shadows, synthetic materials. Sparse snow only at the threshold, interior dry. Large readable forms, restrained details, calm intriguing atmosphere.",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, multiple people, looking at viewer, portrait, standing pose, posing, sitting idle, looking over shoulder, looking back, hands away from box, closed crate, closed lockers, outdoor main scene, train, capsule, flower, medieval, castle, wooden treasure chest, piles of gold, supermarket full of goods, abundant stock, logo",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [],
+  "output": "game\\art-source\\scenes\\supply-petal-20261015\\nai-interior-searcher-v2.png",
+  "ratio": "16:9",
+  "concept": "人物蹲下翻箱，柜门及抽屉敞开，搜寻建筑内遗留物资",
+  "runtime_installed": false,
+  "seed": 101524020,
+  "sha256": "5c0956e3099ed03324a5299b4e97e8f67cb07a87d0792fad386cbb338013c6e5"
+}

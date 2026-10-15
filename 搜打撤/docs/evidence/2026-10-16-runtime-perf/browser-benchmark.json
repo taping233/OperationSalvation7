@@ -1,0 +1,43 @@
+{
+  "url": "http://127.0.0.1:5200/@fs/D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/docs/evidence/2026-10-16-runtime-perf/browser-benchmark.html",
+  "viewport": {
+    "width": 1280,
+    "height": 720,
+    "dpr": 1.5
+  },
+  "iterationsPerSample": 15000,
+  "samples": {
+    "before": [
+      56.89999999990687,
+      48.699999999953434,
+      56.39999999990687,
+      53.300000000046566,
+      52.799999999813735,
+      50.300000000046566,
+      53.0999999998603
+    ],
+    "after": [
+      10.600000000093132,
+      10.5,
+      9.100000000093132,
+      9.5,
+      9,
+      9.100000000093132,
+      9.100000000093132
+    ]
+  },
+  "beforeMedianMs": 53.0999999998603,
+  "afterMedianMs": 9.100000000093132,
+  "reduction": 0.8286252354026916,
+  "decode": {
+    "refreshes": 20,
+    "calls": 1,
+    "visible": "visible",
+    "naturalWidth": 128
+  },
+  "hydration": {
+    "icons": 1,
+    "label": "生命"
+  },
+  "passed": true
+}

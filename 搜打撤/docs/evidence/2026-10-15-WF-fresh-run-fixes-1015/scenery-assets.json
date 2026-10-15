@@ -1,0 +1,44 @@
+[
+  {
+    "key": "frozen-ruins-1015",
+    "tool": "built-in image_gen",
+    "prompt": "frozen-ruins-prompt.txt",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13e9e-67fb-7e60-bd8f-6f612af7aaff\\exec-3a77437e-6bb4-4710-bbe0-1a4681900327.png",
+    "sourceSha256": "3b70c7ca11d8859a60799fec693a7d3eac47b6d08388234b669c9e06b612e861",
+    "sourceBytes": 2259991,
+    "sourceSize": [
+      1672,
+      941
+    ],
+    "runtime": "game/assets/scenes/battle/frozen-ruins-1015.webp",
+    "bytes": 194026,
+    "sha256": "28bffc69088702a0676d9c823d3a42a4eb57ae2de0aa09b4b110ee15c9b37379",
+    "size": [
+      1600,
+      900
+    ],
+    "encoding": "Existing Pillow wallpaper encoding workflow: RGB; 1600x900 LANCZOS delivery resample only, no crop or repaint; WebP quality87 method6",
+    "reference": "game/assets/scenes/battle/winter-street-1011-v2.webp"
+  },
+  {
+    "key": "contaminated-core-1015",
+    "tool": "built-in image_gen",
+    "prompt": "contaminated-core-prompt.txt",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13e9e-67fb-7e60-bd8f-6f612af7aaff\\exec-5aea5dd5-9762-4215-a85a-b2014724a274.png",
+    "sourceSha256": "78e2f6770da8a441a62fd297aec3e11049e8a2bb29cefb6dec6aefed0c19b7ef",
+    "sourceBytes": 2321946,
+    "sourceSize": [
+      1672,
+      941
+    ],
+    "runtime": "game/assets/scenes/battle/contaminated-core-1015.webp",
+    "bytes": 192968,
+    "sha256": "f8164af14613afdc981a902d4f8ece8822073cca0850bcd467da19ef524c1868",
+    "size": [
+      1600,
+      900
+    ],
+    "encoding": "Existing Pillow wallpaper encoding workflow: RGB; 1600x900 LANCZOS delivery resample only, no crop or repaint; WebP quality87 method6",
+    "reference": "game/assets/scenes/battle/winter-street-1011-v2.webp"
+  }
+]

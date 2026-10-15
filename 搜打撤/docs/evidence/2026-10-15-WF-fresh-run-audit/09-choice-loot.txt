@@ -1,0 +1,77 @@
+- complementary:
+  - navigation "远征工具":
+    - button "背包：携带卡牌 11/16" [disabled]:
+      - img "bag"
+      - generic: 背包
+      - strong: 11/16
+      - generic: B
+    - button "安全格：保护物资 2/2" [disabled]:
+      - img "lock"
+      - generic: 安全格
+      - strong: 2/2
+    - button "消耗口袋：待复原卡牌 3" [disabled]:
+      - img "cards"
+      - generic: 消耗口袋
+      - strong: "3"
+    - button "map 定位 F" [disabled]:
+      - img "map"
+      - generic: 定位
+      - generic: F
+    - button "map 总览 G" [disabled]:
+      - img "map"
+      - generic: 总览
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 风雪哨线
+    - generic: 第 2 层 / 4
+  - generic "持有金币":
+    - generic: "1"
+  - generic "攻击力":
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "archive 搜刮！战斗胜利 · 密封物资箱 · 第 1 / 1":
+    - generic: 密封物资箱
+    - heading "战斗胜利" [level=3]
+    - img "coin"
+    - text: "+1"
+    - generic: 已获得
+    - article:
+      - button "放大查看霜月斩" [active]:
+        - generic: "2"
+        - img "霜月斩"
+        - generic: 武术
+        - generic: ·史诗
+        - generic: 霜月斩
+        - generic: 造成（你的攻击力 + 2）点攻击伤害；对目标附加冰冻与禁疗，持续 1 回合。
+      - generic: 已入背包
+    - article:
+      - button "放大查看生命箭":
+        - generic: "1"
+        - img "生命箭"
+        - generic: 武术
+        - generic: ·古朴
+        - generic: 生命箭
+        - generic: 造成（你的攻击力 - 1）点攻击伤害；随机获得 1 张卡牌。
+      - generic: 已散落
+    - article:
+      - button "放大查看格挡":
+        - generic: "1"
+        - img "格挡"
+        - generic: 武术
+        - generic: ·古朴
+        - generic: 格挡
+        - generic: 本回合，你受到的每段伤害降为 1 点。
+      - generic: 已散落
+    - generic "本战卡牌去向"
+    - complementary "奖励操作":
+      - button "继续探索":
+        - generic: 继续探索
+    - img "bag"
+    - text: 11/16 格
+    - button "整理背包"
+    - status: 1 张已入背包 · 2 张已散落

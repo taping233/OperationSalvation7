@@ -1,0 +1,79 @@
+{
+  "baselineCommit": "a330d25f47",
+  "beforeSha256": "c043e3e20da6a564c0006c1a8fa8c60322492d09c5716ff52b7f1d230cafd408",
+  "afterSha256": "c8c66dda18b0b7d43c08e7fac90f35f1672e9693775892e1d7116158bf18aa46",
+  "environment": {
+    "node": "v24.13.0",
+    "platform": "win32",
+    "harness": "vm + jsdom; synthetic CPU benchmark, not browser FPS"
+  },
+  "equivalenceSamples": 6,
+  "plainRich": {
+    "iterationsPerSample": 15000,
+    "beforeMs": [
+      62.82250000000022,
+      70.69320000000016,
+      84.26859999999988,
+      63.90099999999984,
+      64.50369999999975,
+      71.43690000000015,
+      62.10480000000007
+    ],
+    "afterMs": [
+      14.949399999999969,
+      15.773299999999836,
+      13.325000000000273,
+      12.484400000000278,
+      13.478000000000065,
+      12.021499999999833,
+      12.976599999999962
+    ],
+    "beforeMedianMs": 64.50369999999975,
+    "afterMedianMs": 13.325000000000273,
+    "reduction": 0.7934227028837055
+  },
+  "mutationResults": {
+    "siblings": {
+      "before": {
+        "contains": 159600,
+        "walks": 400,
+        "visited": 800,
+        "elapsedMs": 65.89449999999988
+      },
+      "after": {
+        "contains": 0,
+        "walks": 400,
+        "visited": 800,
+        "elapsedMs": 27.176100000000133
+      }
+    },
+    "attributes": {
+      "before": {
+        "contains": 159600,
+        "walks": 400,
+        "visited": 800,
+        "elapsedMs": 53.91679999999997
+      },
+      "after": {
+        "contains": 0,
+        "walks": 0,
+        "visited": 0,
+        "elapsedMs": 0.5610999999998967
+      }
+    },
+    "text": {
+      "before": {
+        "contains": 159600,
+        "walks": 400,
+        "visited": 400,
+        "elapsedMs": 66.08200000000033
+      },
+      "after": {
+        "contains": 0,
+        "walks": 0,
+        "visited": 0,
+        "elapsedMs": 0.5045999999997548
+      }
+    }
+  }
+}

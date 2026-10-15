@@ -1,0 +1,155 @@
+{
+  "status": "preview-encoded",
+  "direction": "Owner selected 灰白＋石墨黑，少量朱红点睛; simple safe with empty luminous interior.",
+  "items": [
+    {
+      "role": "closed",
+      "source": "game/art-source/chests/safe-simple-v7/closed.png",
+      "prompt_record": "game/art-source/chests/safe-simple-v7/imagegen-request.json",
+      "local_source": "game/art-source/chests/safe-simple-v7/closed.png",
+      "sha256": "30f72eaeaee24d3295c273cd8bc32c445ab988f4526729c12e6038565f9000c1"
+    },
+    {
+      "role": "crack",
+      "source": "C:/Users/太平/.codex/generated_images/01a14007-0162-7603-a140-79f54236520e/exec-eb6187cc-f979-476e-b161-2eefb934a85b.png",
+      "prompt": "Production animation keyframe of the EXACT same simple hand-painted safe. Image 1 is CLOSED pose, image 2 is OPEN pose; preserve their approved PALETTE choice (warm gray-white, graphite, tiny vermilion handle tip), the same simple round charcoal knob with a single index mark, short rectangular lever, simple left hinges and quiet large painterly planes. Same fixed camera, same body size and SAME BODY POSITION in the same square transparent canvas, matching closed frame roof and right side panel corners. Only front door pose and its local illumination change. Keep shape simple and carefully painted; do NOT add mechanical detail, bolts, screws, brass, gold, saturated blue, gradients of chrome, or global texture. Interior is empty. No reward objects. Genuine transparent background, no floor, backdrop, text, labels, divider or checkerboard. Door begins swinging LEFT outward only 12 degrees; almost closed, exterior knob and red-ended lever still fully readable. A thin concentrated PEARLY WHITE seam shines through the right edge. It is white light with a faint warm blush, no gold halo.",
+      "local_source": "game/art-source/chests/safe-simple-v7/crack-source.png",
+      "sha256": "0e31280facd0f60e99719b0daf4db6a8eddc386ad3a7458498d9b63c3bfbc73a"
+    },
+    {
+      "role": "half",
+      "source": "C:/Users/太平/.codex/generated_images/01a14007-0162-7603-a140-79f54236520e/exec-4aa2552c-912a-48c1-87bf-243d6e37262e.png",
+      "prompt": "Production animation keyframe of the EXACT same simple hand-painted safe. Image 1 is CLOSED pose, image 2 is OPEN pose; preserve their approved PALETTE choice (warm gray-white, graphite, tiny vermilion handle tip), the same simple round charcoal knob with a single index mark, short rectangular lever, simple left hinges and quiet large painterly planes. Same fixed camera, same body size and SAME BODY POSITION in the same square transparent canvas, matching closed frame roof and right side panel corners. Only front door pose and its local illumination change. Keep shape simple and carefully painted; do NOT add mechanical detail, bolts, screws, brass, gold, saturated blue, gradients of chrome, or global texture. Interior is empty. No reward objects. Genuine transparent background, no floor, backdrop, text, labels, divider or checkerboard. Door swings LEFT outward 42 degrees, halfway between the two supplied poses. The same graphite body remains motionless and the exterior knob/lever are visible in perspective on the moving pale door. Partial empty inner compartment visible, concentrated pearly white light at the inner rear corner with two small glints. Preserve the same door dimensions, attached left hinge, and plain thick edge.",
+      "local_source": "game/art-source/chests/safe-simple-v7/half-source.png",
+      "sha256": "91b5c6a062e358be513868b2adfbde7cd268d9ae4e1df0b4fa98aa98e08ecb82"
+    },
+    {
+      "role": "open",
+      "source": "game/art-source/chests/safe-simple-v7/open.png",
+      "prompt_record": "game/art-source/chests/safe-simple-v7/imagegen-request.json",
+      "local_source": "game/art-source/chests/safe-simple-v7/open.png",
+      "sha256": "45645f67ebe451f829de40174c8aaf5efd55d107081afc18c0ffed9be1c7658e"
+    },
+    {
+      "role": "burst",
+      "source": "C:/Users/太平/.codex/generated_images/01a14007-0162-7603-a140-79f54236520e/exec-6adc37c1-2845-48f3-a306-e7178d5d10d2.png",
+      "prompt": "Use case: stylized-concept. One standalone game opening-flash VFX sprite, TRUE transparent alpha background. Only a compact pearly WHITE light eruption with faint warm-gray and blush edges. One very small bright irregular core slightly below center, three broad tapering painted rays spreading upward, a few short curved translucent sweeps, and FIVE sparsely spaced uneven four-point glints drifting outward. Opaque economical anime painted light shapes, varied firm and fading edges, lots of fully transparent empty space, airy and elegant. A moment of surprise, not fireworks. Soft glow only near core; rays and glints stay distinct. No dense particles, gold/yellow/orange, circles, full rings, grain, fog covering canvas, realistic lens flare, chest, safe, objects, treasure, floor, background field, letters, text or watermark. Entire effect fits inside square canvas with 16 percent transparent margins. Semitransparent edges fade to alpha0.",
+      "local_source": "game/art-source/chests/safe-simple-v7/burst-source.png",
+      "sha256": "defb4950c384c2c4080187b8453c06857a18400b0fd63df7eaf1033db9bd1aac"
+    }
+  ],
+  "tool": "built-in imagegen transparent assets; NAI design draft in nai-request.json",
+  "runtime_installed": false,
+  "assets": [
+    {
+      "path": "game/art-source/chests/safe-simple-v7/preview/frame-00.webp",
+      "sha256": "cd9f549102b33b3f2e8a5a6d81b17349bffa38c0e14c9a13a7f9ebea2e1188c9",
+      "bytes": 199562,
+      "source": "game/art-source/chests/safe-simple-v7/closed.png",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "processing": {
+        "scale": 0.7215332581736189,
+        "offset": [
+          0,
+          0
+        ],
+        "body_anchor": [
+          803,
+          118,
+          711
+        ]
+      }
+    },
+    {
+      "path": "game/art-source/chests/safe-simple-v7/preview/frame-01.webp",
+      "sha256": "19830d5e7080c42488874aba116b5dc6be5dda8e5fbcf4f8ac54ea83bd089996",
+      "bytes": 183892,
+      "source": "game/art-source/chests/safe-simple-v7/crack-source.png",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "processing": {
+        "scale": 0.5039684594781578,
+        "offset": [
+          4,
+          2
+        ],
+        "body_anchor": [
+          1141,
+          164,
+          1013
+        ]
+      }
+    },
+    {
+      "path": "game/art-source/chests/safe-simple-v7/preview/frame-02.webp",
+      "sha256": "3fde8e2b661dafe6c1bcf25f0929d98df1413825ccfbfb911a1688a256ad1f8e",
+      "bytes": 180958,
+      "source": "game/art-source/chests/safe-simple-v7/half-source.png",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "processing": {
+        "scale": 0.50043183870989,
+        "offset": [
+          0,
+          4
+        ],
+        "body_anchor": [
+          1157,
+          163,
+          1018
+        ]
+      }
+    },
+    {
+      "path": "game/art-source/chests/safe-simple-v7/preview/frame-03.webp",
+      "sha256": "d3c9f87e322e6beadbff73dc82bef748a03a29ddbd3c88279603e473c7defcc3",
+      "bytes": 239750,
+      "source": "game/art-source/chests/safe-simple-v7/open.png",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "processing": {
+        "scale": 0.7143058799615293,
+        "offset": [
+          -3,
+          3
+        ],
+        "body_anchor": [
+          815,
+          115,
+          714
+        ]
+      }
+    },
+    {
+      "path": "game/art-source/chests/safe-simple-v7/preview/burst.webp",
+      "sha256": "64107ff0efcb2dab6cf420e0d4a43d0edda404ed6ee8c778bfdda3a484ced423",
+      "bytes": 141710,
+      "source": "game/art-source/chests/safe-simple-v7/burst-source.png",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "processing": {
+        "size": [
+          640,
+          640
+        ]
+      }
+    }
+  ],
+  "loop": {
+    "path": "game/art-source/chests/safe-simple-v7/preview/opening-loop.webp",
+    "sha256": "77b27bdfa3644e89d00ba65bd5aba868f2ab8786d005b7ba27a92a0f09664d37",
+    "bytes": 803662
+  },
+  "technical_processing": "Isotropic registration using stationary case right edge; alpha preserved, lossless encoding. No repaint, keying or generated light composited into frames."
+}

@@ -1,0 +1,23 @@
+- main:
+  - generic "持有金币":
+    - text: 金币
+    - generic: "3"
+  - generic "攻击力":
+    - text: 攻击
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - button "退出，返回地图" [active]:
+    - text: 冻土遗迹
+    - generic: 第 3 层
+    - region "事件与叙事":
+      - heading "巷口修鞋匠" [level=2]
+      - region "事件叙述": 获得员工通行证A碎片；复原 1 张卡牌。
+    - region "事件选项":
+      - button "获取并离开 ◇":
+        - generic: 获取并离开
+        - text: ◇

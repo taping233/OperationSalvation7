@@ -1,0 +1,61 @@
+- complementary:
+  - navigation "远征工具":
+    - button "背包：携带卡牌 6/16" [disabled]:
+      - img "bag"
+      - generic: 背包
+      - strong: 6/16
+      - generic: B
+    - button "安全格：保护物资 0/2" [disabled]:
+      - img "lock"
+      - generic: 安全格
+      - strong: 0/2
+    - button "消耗口袋：待复原卡牌 2" [disabled]:
+      - img "cards"
+      - generic: 消耗口袋
+      - strong: "2"
+    - button "map 定位 F" [disabled]:
+      - img "map"
+      - generic: 定位
+      - generic: F
+    - button "map 总览 G" [disabled]:
+      - img "map"
+      - generic: 总览
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 外围荒地
+    - generic: 第 1 层 / 4
+  - generic "持有金币":
+    - generic: "0"
+  - generic "攻击力":
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 31/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "archive 搜刮！战斗胜利 · 小型物资箱 · 第 1 / 1":
+    - generic: 小型物资箱
+    - heading "战斗胜利" [level=3]
+    - img "coin"
+    - text: "+1"
+    - generic: 离开时获得
+    - article:
+      - button "放大查看冰冻药水":
+        - generic: "0"
+        - img "冰冻药水"
+        - generic: 道具
+        - generic: ·稀有
+        - generic: 冰冻药水
+        - generic: 对目标附加冰冻，持续 1 回合。
+      - button "收下"
+    - generic "本战卡牌去向" [active]
+    - paragraph: 进入消耗口袋：追斩、冰刺
+    - paragraph: 直接消散：初始攻击
+    - paragraph: 仍在背包：初始攻击、初始攻击、初始攻击、初始攻击、龙焰射线、法力光波、熔岩爆破、金蝉脱壳、不变应万变-改
+    - complementary "奖励操作":
+      - button "离开":
+        - generic: 离开
+    - img "bag"
+    - text: 6/16 格
+    - button "整理背包"

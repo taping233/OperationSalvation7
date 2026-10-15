@@ -1,0 +1,125 @@
+{
+  "status": "candidate-board-not-integrated",
+  "assembly": "Pillow layout only; original assets not repainted, recolored or masked",
+  "board": {
+    "path": "home-icons-board-v2.png",
+    "dimensions": [
+      2080,
+      1270
+    ],
+    "sha256": "be1974cd0cffb982622e48a59e46adcf13df02eb84aca592a2da697f3e36ae0b",
+    "bytes": 651372
+  },
+  "items": [
+    {
+      "id": "city",
+      "label": "进入城市",
+      "source": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\..\\2026-10-15-home-nodes-retry\\city-v7.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "7610b5528fe8a2c5b140f98c680a39b40a12816032e1ffe727f766de43bd0c70",
+      "bytes": 782400,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "guide",
+      "label": "生存指南",
+      "source": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\guide-v3.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "68416dfe72c592184af0c2591530e3cd4b82db39aaf3898a7b3b33c20f870e3a",
+      "bytes": 914548,
+      "alphaExtrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "id": "achievement",
+      "label": "成就总览",
+      "source": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\achievement-v6.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "12f19ec49c164e4da6fe64c557430072bdb3d8f6eb9b23aa2b17ca89cc81058c",
+      "bytes": 622150,
+      "alphaExtrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "id": "photo",
+      "label": "照相馆",
+      "source": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\photo-v3.png",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "sha256": "4726f99641b29e09502364d517b1dfe30cd674f75f06c7b4fbf53093a61c2b04",
+      "bytes": 741765,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "settings",
+      "label": "设置",
+      "source": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\settings-v3.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "52f540f598b4efa4286a6580bf2edd619a53d578a76c3b7f8ff0280993af1d0c",
+      "bytes": 744667,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "credits",
+      "label": "制作名单",
+      "source": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\credits-v3.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "2dbf6fa25616ff541612a9ef7dbf9205b2d84dccee8c9e8f158e67e70135144a",
+      "bytes": 861184,
+      "alphaExtrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "id": "exit",
+      "label": "退出游戏",
+      "source": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-15-home-nodes-set\\exit-v3.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "a064ee1fb48e96e1f23e0e2ca255bb40c6b27af0e0516874da80f2d26120cbbe",
+      "bytes": 1031113,
+      "alphaExtrema": [
+        0,
+        254
+      ]
+    }
+  ],
+  "preservedUnchanged": [
+    "city",
+    "guide",
+    "photo"
+  ]
+}

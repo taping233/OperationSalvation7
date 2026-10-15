@@ -1,0 +1,21 @@
+{
+  "channel": "built-in image_gen",
+  "reference": "C:/Users/太平/AppData/Local/Temp/codex-clipboard-821626f6-5e0e-40c2-a080-ddb8fae27a38.png",
+  "assets": [
+    {
+      "key": "trail-a",
+      "prompt": "Create one horizontal HAND PAINTED MAP PATH asset on real transparent RGBA canvas. Input is the user's precise reference crop showing a broad grey painted road between circular nodes. Match THE ROAD's thick, opaque layered PAINT BAND quality. Do not paint the nodes. A broad nearly straight charcoal-grey band with a gentle low bend and uneven rubbed edges. One lighter broken upper edge and darker lower edge. Canvas 1536x1024; path from (100,512) to (1436,512), overall opaque band thickness 95 to 130px, approximate y range 430..590. Thick ribbon with visible irregular contour, filled graphite grey body, one pale grey ridge and dark grey trough, flat 2D dry brush. Its dark and light edges describe paint overlap, never metallic bevel or 3D tube. No soft fog, glow, mist, bloom, blur, gradient cloud or particles. Truly transparent outside single solid painted band. No black background, checkerboard, words, icons, arrows, objects, branches. Ends remain broad and blunt with slightly frayed paint so road can meet a node; no needle thin tapered ends. Grey pigment must be visible on near-black game background.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-a4ee0b8d-e903-41ec-9164-a5d3b2245c77.png"
+    },
+    {
+      "key": "trail-b",
+      "prompt": "Create one horizontal HAND PAINTED MAP PATH asset on real transparent RGBA canvas. Input is the user's precise reference crop showing a broad grey painted road between circular nodes. Match THE ROAD's thick, opaque layered PAINT BAND quality. Do not paint the nodes. A broad slightly kinked graphite-grey band with two subtle asymmetric bends. Unequal parallel broad brush passes overlap, a narrow darker crease through part of it. Canvas 1536x1024; path from (100,512) to (1436,512), overall opaque band thickness 95 to 130px, approximate y range 430..590. Thick ribbon with visible irregular contour, filled graphite grey body, one pale grey ridge and dark grey trough, flat 2D dry brush. Its dark and light edges describe paint overlap, never metallic bevel or 3D tube. No soft fog, glow, mist, bloom, blur, gradient cloud or particles. Truly transparent outside single solid painted band. No black background, checkerboard, words, icons, arrows, objects, branches. Ends remain broad and blunt with slightly frayed paint so road can meet a node; no needle thin tapered ends. Grey pigment must be visible on near-black game background.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-3426e2f0-3a08-43b2-98cf-7d7858173d42.png"
+    },
+    {
+      "key": "trail-c",
+      "prompt": "Create one horizontal HAND PAINTED MAP PATH asset on real transparent RGBA canvas. Input is the user's precise reference crop showing a broad grey painted road between circular nodes. Match THE ROAD's thick, opaque layered PAINT BAND quality. Do not paint the nodes. A broad soft-S graphite-grey band with low amplitude, one long dry-brush seam and several small worn nicks at its margins. Canvas 1536x1024; path from (100,512) to (1436,512), overall opaque band thickness 95 to 130px, approximate y range 430..590. Thick ribbon with visible irregular contour, filled graphite grey body, one pale grey ridge and dark grey trough, flat 2D dry brush. Its dark and light edges describe paint overlap, never metallic bevel or 3D tube. No soft fog, glow, mist, bloom, blur, gradient cloud or particles. Truly transparent outside single solid painted band. No black background, checkerboard, words, icons, arrows, objects, branches. Ends remain broad and blunt with slightly frayed paint so road can meet a node; no needle thin tapered ends. Grey pigment must be visible on near-black game background.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-5cafc6cb-abf2-4092-9466-3a5c0416aa66.png"
+    }
+  ]
+}

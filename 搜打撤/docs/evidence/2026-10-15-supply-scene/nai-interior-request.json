@@ -1,0 +1,63 @@
+{
+  "status": "generated",
+  "recipe_version": "2.0",
+  "cleanup_version": "1.0",
+  "request": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\nscenery, no humans, interior. Inside an abandoned futuristic urban parcel distribution depot just after someone forced the entrance. Half-open wall lockers, tilted plastic transit bins, a few forgotten sealed ration packs and medical cases on a broad sorting counter. A pried-open automatic sliding door on the left reveals the winter city. One small amber emergency lamp still works above the counter. A fallen ceiling panel and a tipped trolley suggest interrupted daily life and a place worth searching, not a treasure room.\n\nWide game environment illustration for entering a building and rummaging for supplies left behind.\n\n16:9 landscape, eye-level wide view from just inside the doorway. Strong architectural perspective, doorway at far left, search-worthy lockers and counter at upper-middle-left. Right 40 percent quiet darker room depth for interface choices. Lower 25 percent quiet walkable floor for narrative overlay. Objects realistically human-scale, clear foreground middle ground and rear wall.\n\nCold pale teal daylight slants through the forced door, warm muted amber emergency light over a few orange supply containers. Matte ivory wall panels, slate blue shadows, synthetic materials. Sparse snow only at the threshold, interior dry. Large readable forms, restrained details, calm intriguing atmosphere.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1024,
+      "height": 576,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 101524018,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, girl, outdoor main scene, train, capsule, flower, medieval, castle, wooden treasure chest, piles of gold, supermarket full of goods, abundant stock, logo",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\nscenery, no humans, interior. Inside an abandoned futuristic urban parcel distribution depot just after someone forced the entrance. Half-open wall lockers, tilted plastic transit bins, a few forgotten sealed ration packs and medical cases on a broad sorting counter. A pried-open automatic sliding door on the left reveals the winter city. One small amber emergency lamp still works above the counter. A fallen ceiling panel and a tipped trolley suggest interrupted daily life and a place worth searching, not a treasure room.\n\nWide game environment illustration for entering a building and rummaging for supplies left behind.\n\n16:9 landscape, eye-level wide view from just inside the doorway. Strong architectural perspective, doorway at far left, search-worthy lockers and counter at upper-middle-left. Right 40 percent quiet darker room depth for interface choices. Lower 25 percent quiet walkable floor for narrative overlay. Objects realistically human-scale, clear foreground middle ground and rear wall.\n\nCold pale teal daylight slants through the forced door, warm muted amber emergency light over a few orange supply containers. Matte ivory wall panels, slate blue shadows, synthetic materials. Sparse snow only at the threshold, interior dry. Large readable forms, restrained details, calm intriguing atmosphere.",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, girl, outdoor main scene, train, capsule, flower, medieval, castle, wooden treasure chest, piles of gold, supermarket full of goods, abundant stock, logo",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [],
+  "output": "game\\art-source\\scenes\\supply-petal-20261015\\nai-interior-draft.png",
+  "ratio": "16:9",
+  "concept": "闯入未来城市配送站，翻找遗留物资",
+  "runtime_installed": false,
+  "seed": 101524018,
+  "sha256": "b2fc49c06f0a3562141fcaa8fe9d387077c2d6825428212d5d9309b75e7cef68"
+}

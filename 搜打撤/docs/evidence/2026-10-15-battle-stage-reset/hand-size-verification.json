@@ -1,0 +1,199 @@
+{
+  "rest": {
+    "battlefieldHit": "0",
+    "cards": [
+      {
+        "card": {
+          "bottom": 783.3374938964844,
+          "height": 280,
+          "left": 326.6625061035156,
+          "right": 513.3250122070312,
+          "top": 503.3374938964844,
+          "width": 186.6625061035156,
+          "x": 326.6625061035156,
+          "y": 503.3374938964844
+        },
+        "index": 0,
+        "name": "初始攻击",
+        "title": {
+          "bottom": 685.3250122070312,
+          "height": 20,
+          "left": 393.4875183105469,
+          "right": 451.2250175476074,
+          "top": 665.3250122070312,
+          "width": 57.73749923706055,
+          "x": 393.4875183105469,
+          "y": 665.3250122070312
+        },
+        "titleBeforeNextCard": true,
+        "titleHit": "0",
+        "titleWithinWindow": true,
+        "transform": "matrix(1, 0, 0, 1, 0, 150)"
+      },
+      {
+        "card": {
+          "bottom": 783.3374938964844,
+          "height": 280,
+          "left": 459.9875183105469,
+          "right": 646.6500244140625,
+          "top": 503.3374938964844,
+          "width": 186.6625061035156,
+          "x": 459.9875183105469,
+          "y": 503.3374938964844
+        },
+        "index": 1,
+        "name": "格挡",
+        "title": {
+          "bottom": 686.0875244140625,
+          "height": 20,
+          "left": 541.2374877929688,
+          "right": 570.1124877929688,
+          "top": 666.0875244140625,
+          "width": 28.875,
+          "x": 541.2374877929688,
+          "y": 666.0875244140625
+        },
+        "titleBeforeNextCard": true,
+        "titleHit": "1",
+        "titleWithinWindow": true,
+        "transform": "matrix(1, 0, 0, 1, 0, 150)"
+      },
+      {
+        "card": {
+          "bottom": 783.3374938964844,
+          "height": 280,
+          "left": 593.3125,
+          "right": 779.9750061035156,
+          "top": 503.3374938964844,
+          "width": 186.6625061035156,
+          "x": 593.3125,
+          "y": 503.3374938964844
+        },
+        "index": 2,
+        "name": "冰刺",
+        "title": {
+          "bottom": 686.0875244140625,
+          "height": 20,
+          "left": 674.5625,
+          "right": 703.4375,
+          "top": 666.0875244140625,
+          "width": 28.875,
+          "x": 674.5625,
+          "y": 666.0875244140625
+        },
+        "titleBeforeNextCard": true,
+        "titleHit": "2",
+        "titleWithinWindow": true,
+        "transform": "matrix(1, 0, 0, 1, 0, 150)"
+      },
+      {
+        "card": {
+          "bottom": 783.3374938964844,
+          "height": 280,
+          "left": 726.6375122070312,
+          "right": 913.3000183105468,
+          "top": 503.3374938964844,
+          "width": 186.6625061035156,
+          "x": 726.6375122070312,
+          "y": 503.3374938964844
+        },
+        "index": 3,
+        "name": "火球",
+        "title": {
+          "bottom": 685.9625244140625,
+          "height": 20,
+          "left": 807.8125,
+          "right": 836.6499996185303,
+          "top": 665.9625244140625,
+          "width": 28.837499618530273,
+          "x": 807.8125,
+          "y": 665.9625244140625
+        },
+        "titleBeforeNextCard": true,
+        "titleHit": "3",
+        "titleWithinWindow": true,
+        "transform": "matrix(1, 0, 0, 1, 0, 150)"
+      },
+      {
+        "card": {
+          "bottom": 783.3374938964844,
+          "height": 280,
+          "left": 859.9625244140625,
+          "right": 1046.625030517578,
+          "top": 503.3374938964844,
+          "width": 186.6625061035156,
+          "x": 859.9625244140625,
+          "y": 503.3374938964844
+        },
+        "index": 4,
+        "name": "鬼魅之刃",
+        "title": {
+          "bottom": 686.4125366210938,
+          "height": 20,
+          "left": 927.2750244140624,
+          "right": 984.950023651123,
+          "top": 666.4125366210938,
+          "width": 57.67499923706055,
+          "x": 927.2750244140624,
+          "y": 666.4125366210938
+        },
+        "titleBeforeNextCard": true,
+        "titleHit": "4",
+        "titleWithinWindow": true,
+        "transform": "matrix(1, 0, 0, 1, 0, 150)"
+      }
+    ],
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "hover": {
+    "overlapHit": "0",
+    "rect": {
+      "bottom": 683.3374938964844,
+      "height": 280,
+      "left": 326.6625061035156,
+      "right": 513.3250122070312,
+      "top": 403.3374938964844,
+      "width": 186.6625061035156,
+      "x": 326.6625061035156,
+      "y": 403.3374938964844
+    },
+    "ruleFits": true,
+    "transform": "matrix(1, 0, 0, 1, 0, 0)",
+    "zIndex": "12"
+  },
+  "leave": {
+    "hovered": 0,
+    "selected": true,
+    "transform": "matrix(1, 0, 0, 1, 0, 150)"
+  },
+  "final": {
+    "brokenImages": [],
+    "defaultTransforms": [
+      "matrix(1, 0, 0, 1, 0, 150)",
+      "matrix(1, 0, 0, 1, 0, 150)",
+      "matrix(1, 0, 0, 1, 0, 150)",
+      "matrix(1, 0, 0, 1, 0, 150)",
+      "matrix(1, 0, 0, 1, 0, 150)"
+    ],
+    "renderer": "webgl",
+    "scrollContainers": [
+      0,
+      0
+    ],
+    "scrollY": 0,
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "logs": [],
+  "inputMethod": "Codex in-app browser pointer movement, locator click and DOM geometry reads; no forced pseudo-class",
+  "staticChecks": {
+    "jsSyntax": "passed",
+    "cssParseNodes": 160,
+    "taskReadmeLinks": "passed"
+  }
+}

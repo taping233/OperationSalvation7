@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-arknights-art-ui-skill-r3",
+  "date": "2026-10-15",
+  "owner": "Friday",
+  "goal": "补完可取得的方舟原图和动态资料，迭代技能并明确外部正文缺口",
+  "paths": [
+    "docs/evidence/2026-10-15-WF-arknights-art-ui-skill-r3"
+  ],
+  "doneWhen": [
+    "可取得资料实际核读，技能写入有价值的新判断",
+    "校验、安装与阅读状态更新完成，受限正文如实登记"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "公开正文及7张主题图、15张UI练习图、29段GIF连续选帧已核读；技能结构、14内部链接锚点、来源和元数据通过；安装SHA一致，旧版保留",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "书内访谈按老板要求排除；旁支插图未逐项复核；客户端输入性能与第三方参数未独立实测，S12口播未另听"
+  ],
+  "updatedAt": "2026-10-15T10:32:33.034Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

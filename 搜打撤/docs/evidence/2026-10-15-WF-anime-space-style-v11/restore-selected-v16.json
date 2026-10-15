@@ -1,0 +1,35 @@
+{
+  "selected": "v1.6 sample1",
+  "selection": {
+    "selected": "v1.6 sample1",
+    "rgbaPixelsEqual": true,
+    "size": [
+      1672,
+      941
+    ],
+    "attachmentSha256": "2ea5f30a5c257f9e464b4d9e6b9d31b5262d279a2cf174456298c72e4b1cf2f3",
+    "originalSha256": "14d83d1516d77ec2f46a93dbdc4c23916f0b7f27c3c8296dbf7f4582bb799f24",
+    "originalPromptSha256": "48b46e1ee87ea30b707469c132be4af79a130b1455f9f378c1ef8d9a77b2fe53",
+    "styleBlockSha256": "5483a19d9eb913656c80dc8ecb63ddc24605a2439178bc96bff83ddc20ba958d"
+  },
+  "changed": [
+    "SKILL.md",
+    "assets/selected-space-v16.png",
+    "references/iteration.md",
+    "references/style-prompt.md"
+  ],
+  "sha256": {
+    "SKILL.md": "d27d77039c88cd31a0e0766ba708658989fa1a3e81190bf479fb33736ddb88ef",
+    "assets/selected-space-v16.png": "2ea5f30a5c257f9e464b4d9e6b9d31b5262d279a2cf174456298c72e4b1cf2f3",
+    "references/iteration.md": "ff680f21d5f8ec2adebce1c951cd30d4950d28a72ddced4dd08d5fa61557171d",
+    "references/style-prompt.md": "a565129610cbcbe2896801e4b4df3013367b9f0f2d9373790b10d91a5b5918c6"
+  },
+  "protectedOriginalFiles": 52,
+  "checks": [
+    "pixel match",
+    "original full prompt retained",
+    "style block wording retained",
+    "skill structure and references valid",
+    "unaffected original hashes retained"
+  ]
+}

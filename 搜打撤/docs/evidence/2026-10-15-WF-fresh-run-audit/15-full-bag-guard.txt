@@ -1,0 +1,142 @@
+- main:
+  - generic "持有金币":
+    - text: 金币
+    - generic: "8"
+  - generic "攻击力":
+    - text: 攻击
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - heading "补给站" [level=2]:
+      - text: 补给站
+      - button:
+    - generic "远征资源":
+      - generic: 金币
+      - generic: "4"
+      - emphasis: 币
+      - generic: 容量
+      - generic: 16/16
+      - emphasis: 格
+    - generic "商店商品":
+      - button "查看影噬详情":
+        - generic: "1"
+        - img "影噬"
+        - generic: 武术
+        - generic: ·稀有
+        - generic: 影噬
+        - generic: 本回合，你偷取 1 名敌人的攻击力，直到该敌人的攻击力降至 1 点。
+        - strong:
+          - img "coin"
+          - text: "3"
+      - button "查看冰冻药水详情":
+        - generic: "0"
+        - img "冰冻药水"
+        - generic: 道具
+        - generic: ·稀有
+        - generic: 冰冻药水
+        - generic: 对目标附加冰冻，持续 1 回合。
+        - generic: 已持有 1
+        - strong:
+          - img "coin"
+          - text: "3"
+      - button "查看连续射击详情":
+        - generic: "1"
+        - img "连续射击"
+        - generic: 武术
+        - generic: ·史诗
+        - generic: 连续射击
+        - generic: 对目标造成 2 点固定伤害；本回合你此前每打出 1 张招式，本牌的伤害效果触发 1 次。
+        - generic: 已售出
+        - strong: 已购
+      - button "查看充能射线详情":
+        - generic: "1"
+        - img "充能射线"
+        - generic: 法术
+        - generic: ·稀有
+        - generic: 充能射线
+        - generic: 造成 5 点法术伤害；本牌在你的手牌中时，你每注能 1 张卡牌，本牌伤害增加 2 点。
+        - strong:
+          - img "coin"
+          - text: "3"
+      - button "查看割蚀详情":
+        - generic: "1"
+        - img "割蚀"
+        - generic: 武术
+        - generic: ·古朴
+        - generic: 割蚀
+        - generic: 使 1 名敌人的攻击力降低 2 点，持续 3 回合；对该敌人附加 1 层流血。
+        - strong:
+          - img "coin"
+          - text: "2"
+      - button "查看不稳定射线详情" [pressed]:
+        - generic: "1"
+        - img "不稳定射线"
+        - generic: 法术
+        - generic: ·古朴
+        - generic: 不稳定射线
+        - generic: 造成 4-6 点法术伤害。
+        - strong:
+          - img "coin"
+          - text: "2"
+      - button "查看能量饮料详情":
+        - generic: "0"
+        - img "能量饮料"
+        - generic: 道具
+        - generic: ·古朴
+        - generic: 能量饮料
+        - generic: 你回复 6 点生命。
+        - strong:
+          - img "coin"
+          - text: "2"
+      - button "查看初始攻击详情":
+        - generic: "1"
+        - img "初始攻击"
+        - generic: 武术
+        - generic: ·初始
+        - generic: 初始攻击
+        - generic: 造成等同于你的攻击力的攻击伤害。
+        - generic: 持有 2 · 余 5
+        - strong:
+          - img "coin"
+          - text: "1"
+      - button "查看神秘货箱详情":
+        - img "dice"
+        - generic: ？
+        - generic: 随机卡牌
+        - generic: 神秘货箱
+        - generic: 购买后揭晓
+        - strong:
+          - img "coin"
+          - text: "3"
+    - complementary "行商服务":
+      - text: 冬境行商
+      - paragraph:
+        - text: “风雪还没停。
+        - text: 带上用得着的，再走吧。”
+      - button "出售卡牌 暂无可出售卡牌 →":
+        - generic: 出售卡牌
+        - generic: 暂无可出售卡牌
+        - generic: →
+      - button "bag 整理背包":
+        - img "bag"
+        - text: 整理背包
+    - dialog "当前商品详情":
+      - button "返回商品货架"
+      - button "收起商品详情" [active]: ×
+      - generic: "1"
+      - img "不稳定射线"
+      - generic: 法术
+      - generic: ·古朴
+      - generic: 不稳定射线
+      - generic: 造成 4-6 点法术伤害。
+      - strong: 背包装不下：16/16 格
+      - button "背包装不下" [disabled]
+      - button "整理背包"
+    - generic: 已购入「连续射击」 · 剩余 4 币
+    - button "arrow 离开补给站":
+      - img "arrow"
+      - text: 离开补给站

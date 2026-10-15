@@ -1,0 +1,214 @@
+/* ============================================================
+ * 罗德岛终端皮肤 · 最后加载的全局美术层
+ * 几何：切角（非圆角）、细线框、角标；配色：石墨黑 / 纯白 / 天蓝 / 信号黄
+ * 字型：中文 HarmonyOS 粗体 + 宽字距，西文数字 Oxanium / Rajdhani
+ * 动效：硬切入场（clip 扫入）、位移+亮边反馈，不用弹跳与发光糖水
+ * ============================================================ */
+
+/* ---------- 全局控件 ---------- */
+button, [role="button"] { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible,
+#overlay :focus-visible { outline: 2px solid var(--ak-blue); outline-offset: 2px; }
+#overlay:focus { outline: 2px solid var(--ak-blue); outline-offset: -4px; }
+input[type="range"] { accent-color: var(--ak-blue); }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--ak-blue); }
+select { background: var(--ak-graphite); color: var(--ak-text); border: 1px solid var(--ak-line-hi); border-radius: 0; }
+input[type="text"], input[type="search"], input[type="number"], input:not([type]), textarea {
+  background: rgba(6,7,9,.7); color: var(--ak-white); border: 1px solid var(--ak-line-hi); border-radius: 0; }
+input:focus, textarea:focus, select:focus { border-color: var(--ak-blue); box-shadow: 0 0 0 1px var(--ak-blue); }
+::placeholder { color: var(--ak-dim); letter-spacing: 1px; }
+h1, h2, h3 { font-family: var(--font-ui); }
+
+/* ---------- 弹层 / 对话框：切角面板 + 左上白标 + 底部细蓝线 ---------- */
+#overlay { background: rgba(5,6,8,.82); backdrop-filter: blur(6px) saturate(.8); }
+#overlay.opaque { background: var(--ak-ink); }
+#overlay.room-view, #overlay.bag-full { background: var(--ak-ink); }
+#overlay .card {
+  background: var(--ak-tex-noise), var(--ak-tex-grid) 0 0 / 32px 32px, linear-gradient(180deg, #23272b, #14161a);
+  border: 1px solid var(--ak-line-hi); border-radius: 0; clip-path: var(--ak-clip);
+  box-shadow: var(--ak-bevel); animation: akCardIn .26s var(--ease-entrance); }
+#overlay .card::before { content: ''; position: absolute; top: 0; left: 0; right: auto; width: 56px; height: 3px;
+  background: var(--ak-white); }
+#overlay .card::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; pointer-events: none;
+  background: linear-gradient(90deg, var(--ak-blue) 0 72px, var(--ak-line) 72px); }
+@keyframes akCardIn { from { opacity: 0; transform: translateY(14px) scaleY(.96); clip-path: inset(0 0 100% 0); } to { opacity: 1; } }
+#overlay.room-view .card.room, #overlay .card.bag-page, #overlay .card.page {
+  clip-path: none; background: var(--ak-tex-grid) 0 0 / 32px 32px, radial-gradient(ellipse at 88% -8%, rgba(31,178,255,.13), transparent 55%), linear-gradient(180deg, #181b1e, #0b0c0e 80%); }
+#overlay.room-view .card.room::before, #overlay.room-view .card.room::after,
+#overlay .card.bag-page::before, #overlay .card.bag-page::after, #overlay .card.page::after { display: none; }
+#overlay h2 { color: var(--ak-white); font-weight: 800; font-size: 20px; letter-spacing: .28em; text-shadow: none;
+  display: inline-block; padding-left: 14px; border-left: 5px solid var(--ak-blue); line-height: 1.15; }
+#overlay h2.bad { color: var(--ak-red); border-left-color: var(--ak-red); text-shadow: none; }
+#overlay .card > h2, #overlay .card h2:first-child { display: block; text-align: left; margin-bottom: 16px; }
+.ov-stats b, .gold, .ov-stats b.gold { color: var(--ak-yellow); font-family: var(--font-num); }
+
+/* ---------- 按钮：切角白底黑字主动作，描边次动作 ---------- */
+.ov-btn, .hs-btn, .menu-btn, .mini-btn {
+  position: relative; border-radius: 0; font-weight: 700; letter-spacing: .18em; text-transform: none;
+  color: var(--ak-white); background: linear-gradient(180deg, #2b2f34, #191c1f);
+  border: 1px solid var(--ak-line-hi); clip-path: var(--ak-clip-sm); box-shadow: var(--ak-bevel);
+  transition: background .14s var(--ease-pop), color .14s, transform .14s var(--ease-pop), border-color .14s; overflow: hidden; }
+.ov-btn::after, .hs-btn::after, .menu-btn::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 38%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent); transform: translateX(-130%) skewX(-20deg); pointer-events: none; }
+.ov-btn:hover:not(:disabled)::after, .hs-btn:hover:not(:disabled)::after, .menu-btn:hover:not(:disabled)::after { animation: akSweep .55s var(--ease-snap); }
+.ov-btn:hover:not(:disabled), .hs-btn:hover:not(:disabled), .menu-btn:hover:not(:disabled) {
+  filter: none; background: var(--ak-white); color: #0b0c0e; border-color: #fff; transform: translateX(3px); }
+.ov-btn:active:not(:disabled), .hs-btn:active:not(:disabled), .menu-btn:active:not(:disabled) { transform: translateX(1px) scale(.985); }
+.ov-btn.ok, .hs-btn.ok, .menu-btn.primary { background: var(--ak-yellow); color: #14120a; border-color: var(--ak-yellow); }
+.ov-btn.ok:hover:not(:disabled), .hs-btn.ok:hover:not(:disabled), .menu-btn.primary:hover:not(:disabled) { background: #fff3b0; color: #14120a; }
+.ov-btn:disabled, .hs-btn:disabled, .menu-btn:disabled { opacity: .38; background: repeating-linear-gradient(135deg, #202326 0 6px, #1a1c1f 6px 12px); color: var(--ak-dim); }
+.tp0 { --fc1: #4b4f55; --fc2: #15171a; } .tp1 { --fc1: #594b4a; --fc2: #1a1415; }
+.tp2 { --fc1: #4a5a50; --fc2: #121816; } .tp3 { --fc1: #4a5663; --fc2: #121519; }
+.tp4 { --fc1: #5b5a47; --fc2: #19180f; } .tp5 { --fc1: #54485f; --fc2: #16111a; }
+.tp6 { --fc1: #5a5f66; --fc2: #1a1c1f; } .tp7 { --fc1: #4a5a5e; --fc2: #121719; }
+.rv0 { --gem: #8c949a; } .rv1 { --gem: #6fd08a; } .rv2 { --gem: #4fb4ff; } .rv3 { --gem: #b48cff; }
+.rv4 { --gem: #ffc933; } .rv6 { --gem: #f5f6f3; } .rv7 { --gem: #ffb7e0; }
+
+/* ---------- 通用动效：界面级入场统一为「扫入」 ---------- */
+.ak-enter { animation: akScanIn .38s var(--ease-entrance) both; }
+.ak-enter > * { animation: akSlideUp .4s var(--ease-entrance) both; }
+.ak-enter > *:nth-child(2) { animation-delay: .04s; } .ak-enter > *:nth-child(3) { animation-delay: .08s; }
+.ak-enter > *:nth-child(4) { animation-delay: .12s; } .ak-enter > *:nth-child(5) { animation-delay: .16s; }
+
+/* ---------- 浮层提示 ---------- */
+[data-tip]:hover::after, .tooltip, #tooltip, .tip-pop { border-radius: 0; }
+#tooltip, .tooltip, .tip-pop { background: rgba(8,9,11,.96); border: 1px solid var(--ak-line-hi); border-left: 3px solid var(--ak-blue);
+  color: var(--ak-text); box-shadow: 0 10px 28px rgba(0,0,0,.6); }
+
+/* ============================================================
+ * 界面级签名：基地 / 选人 / 商店 / 部署 / 设置 / 存档 / 事件 / 战斗 / 图鉴
+ * 统一语法：标题块（蓝竖条 + 宽字距）、页签（斜切 + 黄下划线）、卡片（切角 + 顶部白标）
+ * ============================================================ */
+
+/* —— 页头 —— */
+#overlay :is(.hub-head, .pg-head, .library-head, .bag-head, .data-pg-head) h2 {
+  font-weight: 800; letter-spacing: .3em; color: var(--ak-white); border-left: 5px solid var(--ak-blue); padding-left: 14px; text-shadow: none; }
+#overlay :is(.hub-head, .pg-head, .library-head, .data-pg-head) { border-bottom: 1px solid var(--ak-line);
+  background: linear-gradient(90deg, rgba(31,178,255,.07), transparent 40%); position: relative; }
+#overlay :is(.hub-head, .pg-head, .library-head):not(.event-themed *)::after { content: ''; position: absolute; left: 0; bottom: -1px; width: 96px; height: 2px; background: var(--ak-blue); }
+#overlay :is(.hub-back, .pg-back, .cls2-back, .dep-back, .ag-back) { background: var(--ak-white); color: #0b0c0e; border: 0; border-radius: 0;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); font-weight: 800; letter-spacing: .2em; transition: background .14s, transform .14s var(--ease-pop); }
+#overlay :is(.hub-back, .pg-back, .cls2-back, .dep-back, .ag-back):hover { background: var(--ak-yellow); transform: translateX(-4px); }
+
+/* —— 页签 —— */
+#overlay .hub-tabs { gap: 2px; border-bottom: 1px solid var(--ak-line); }
+#overlay .hub-tab { position: relative; border-radius: 0; background: rgba(255,255,255,.03); color: var(--ak-sub); border: 0;
+  clip-path: var(--ak-clip-tab); padding-right: 26px; font-weight: 700; letter-spacing: .18em; transition: background .16s, color .16s, transform .16s var(--ease-pop); }
+#overlay .hub-tab:hover { background: rgba(255,255,255,.1); color: var(--ak-white); transform: translateY(-2px); }
+#overlay .hub-tab.on, #overlay .hub-tab[aria-selected="true"], #overlay .hub-tab.active { background: var(--ak-white); color: #0b0c0e; }
+#overlay .hub-tab.on::after, #overlay .hub-tab[aria-selected="true"]::after, #overlay .hub-tab.active::after {
+  content: ''; position: absolute; left: 0; right: 12px; bottom: 0; height: 3px; background: var(--ak-yellow); }
+#overlay .hub-res { font-family: var(--font-num); color: var(--ak-yellow); letter-spacing: .05em; font-weight: 700; }
+
+/* —— 卡片面板（基地各页内的 hub-card / dep-card / 设置分组） —— */
+#overlay :is(.hub-card, .dep-card, .settings-group, .class-dossier, .class-command, .slot-card, .node-panel, .shop-board, .library-inspector) {
+  border-radius: 0; background: var(--ak-tex-noise), linear-gradient(180deg, rgba(40,44,49,.92), rgba(20,22,25,.94));
+  border: 1px solid var(--ak-line); border-top: 2px solid var(--ak-line-hi); box-shadow: var(--ak-bevel), 0 10px 26px rgba(0,0,0,.4);
+  clip-path: var(--ak-clip-sm); }
+#overlay :is(.hub-card, .dep-card, .slot-card, .shop-slot, .lib-item, .evt-opt):hover { border-top-color: var(--ak-blue); }
+#overlay :is(.slot-card, .shop-slot, .lib-item, .evt-opt, .dep-card) { transition: transform .18s var(--ease-pop), border-color .18s, box-shadow .18s; }
+#overlay :is(.slot-card, .shop-slot, .evt-opt):hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(0,0,0,.55), 0 0 0 1px var(--ak-blue); }
+#overlay .hub-card h3, #overlay .set-h { font-weight: 800; letter-spacing: .24em; color: var(--ak-white); }
+#overlay .set-en, #overlay .node-kicker, #overlay .cls2-eyebrow, #overlay .class-dossier-kicker { font-family: var(--font-label); font-weight: 700;
+  letter-spacing: .38em; text-transform: uppercase; color: var(--ak-yellow); font-size: 11px; }
+#overlay .shop-price-tag, #overlay .dep-n { font-family: var(--font-num); font-weight: 700; color: var(--ak-yellow); }
+#overlay .shop-soldout { background: repeating-linear-gradient(135deg, rgba(0,0,0,.72) 0 8px, rgba(236,75,63,.28) 8px 16px); color: #fff; letter-spacing: .4em; font-weight: 800; }
+
+/* —— 存档位 —— */
+.slot-page::before { background: var(--ak-tex-hex) 0 0 / 56px 97px; opacity: .55; }
+.slot-card-cta { background: var(--ak-yellow); color: #14120a; font-weight: 800; letter-spacing: .3em; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%); }
+
+/* —— 选人 —— */
+#overlay .cls2-page { background: var(--ak-tex-grid) 0 0 / 32px 32px, linear-gradient(180deg, #14171a, #08090b); }
+#overlay .cls2-name { font-weight: 800; letter-spacing: .26em; color: var(--ak-white); text-shadow: 0 2px 0 rgba(0,0,0,.6); }
+#overlay .cls2-panel { border-radius: 0; background: linear-gradient(90deg, rgba(10,12,14,.9), rgba(10,12,14,.55)); border: 0; border-left: 4px solid var(--ak-white); clip-path: var(--ak-clip-sm); }
+#overlay .cls2-confirm { background: var(--ak-yellow); color: #14120a; border: 0; border-radius: 0; font-weight: 800; letter-spacing: .4em;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%); transition: transform .16s var(--ease-pop), background .16s; }
+#overlay .cls2-confirm:hover { background: #fff3b0; transform: translateX(6px); }
+#overlay .cls2-strip > * { border-radius: 0; clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%); transition: transform .16s var(--ease-pop), filter .16s; }
+#overlay .cls2-strip > *:hover { transform: translateY(-4px); }
+#overlay .cls2-stats { font-family: var(--font-num); letter-spacing: .06em; }
+
+/* —— 设置 —— */
+#overlay .settings-page .chk { padding: 6px 10px; border-left: 2px solid transparent; transition: background .14s, border-color .14s; }
+#overlay .settings-page .chk:hover { background: rgba(31,178,255,.08); border-left-color: var(--ak-blue); }
+
+/* —— 事件 / 节点 —— */
+#overlay .node-pg:not(.event-themed) .node-panel::before { background: linear-gradient(90deg, var(--ak-yellow) 0 64px, var(--ak-line) 64px); height: 3px; left: 0; right: 0; top: 0; width: auto; }
+#overlay .evt-opt { border-radius: 0; }
+#overlay .evt-opt:hover { border-left-color: var(--ak-blue); }
+
+/* —— 战斗（杀戮尖塔式布局 + 方舟配色） —— */
+body #overlay .battle-stage.sts { background: var(--ak-tex-grid) 0 0 / 32px 32px, radial-gradient(ellipse at 50% 100%, rgba(31,178,255,.10), transparent 60%), linear-gradient(180deg, #14171a, #08090b); }
+body #overlay .battle-stage.sts .sts-topbar { background: linear-gradient(180deg, rgba(8,9,11,.96), rgba(8,9,11,.7)); border-bottom: 1px solid var(--ak-line-hi); }
+body #overlay .battle-stage.sts .sts-topbar::after { content: ''; position: absolute; left: 0; bottom: -1px; width: 140px; height: 2px; background: var(--ak-blue); }
+.sts-nameplate { font-weight: 800; letter-spacing: .18em; clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%); border-radius: 0; }
+.sts-intent { font-family: var(--font-num); font-weight: 700; border-radius: 0; background: rgba(8,9,11,.85); border: 1px solid var(--ak-line-hi); border-left: 3px solid var(--ak-red); clip-path: var(--ak-clip-sm); }
+.sts-energy { font-family: var(--font-num); font-weight: 800; border-radius: 0; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: linear-gradient(160deg, var(--ak-blue-hi), var(--ak-blue) 55%, var(--ak-blue-deep)); color: #03121b; border: 0; box-shadow: none; filter: drop-shadow(0 0 10px var(--ak-blue-glow)); }
+.sts-end-turn { background: var(--ak-yellow); color: #14120a; border: 0; border-radius: 0; font-weight: 800; letter-spacing: .3em;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px)); transition: transform .14s var(--ease-pop), background .14s; box-shadow: none; }
+.sts-end-turn:hover:not(:disabled) { background: #fff3b0; transform: translateY(-3px); }
+.sts-end-turn:active:not(:disabled) { transform: translateY(1px) scale(.98); }
+.sts-hand .hs-card { transition: transform .2s var(--ease-pop), filter .2s; }
+.sts-hand .hs-card:hover { filter: brightness(1.12) drop-shadow(0 0 14px var(--ak-blue-glow)); }
+
+/* —— 图鉴 / 工坊 —— */
+#overlay .lib-item.on, #overlay .lib-item.selected { outline: 2px solid var(--ak-blue); outline-offset: 2px; }
+#overlay .library-inspector { border-left: 3px solid var(--ak-yellow); }
+
+/* —— 加载 —— */
+.page-loading { background: var(--ak-tex-grid) 0 0 / 32px 32px, var(--ak-ink); }
+.page-loading-copy { font-family: var(--font-label); letter-spacing: .5em; text-transform: uppercase; color: var(--ak-white); }
+.page-loading-copy::after { content: ''; display: block; height: 3px; margin-top: 12px; background: linear-gradient(90deg, var(--ak-blue) 30%, var(--ak-line) 30%); background-size: 200% 100%; animation: akLoad 1.2s var(--ease-snap) infinite; }
+@keyframes akLoad { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+
+/* ============================================================
+ * 参考图落地（主界面终端 / 干员卡 / 集成战略式 HUD 与叙事选项）
+ * 次强调色：绯红 --ak-crimson，用于事件、危险、BOSS；蓝/黄仍是功能色
+ * ============================================================ */
+:root { --ak-crimson: #d4283c; --ak-crimson-deep: #5a0f1a; --ak-teal: #18c9b0; }
+
+/* —— 顶部 HUD：蓝标签条 + 黄/青资源条（对应参考「目标生命值 / 指挥等级 / 源石锭」） —— */
+#resHud .chip-mini { height: 34px; border-left: 0; background: linear-gradient(90deg, rgba(14,16,18,.9), rgba(30,33,37,.78)); padding-left: 0; gap: 0; }
+#resHud .chip-mini .res-ic { width: 38px; height: 34px; padding: 7px; box-sizing: border-box; flex: none; filter: none; }
+#resHud .res-gold .res-ic { background: linear-gradient(180deg, #e2b61c, #a8800a); }
+#resHud .res-atk .res-ic { background: linear-gradient(180deg, #e0463a, #8f231b); }
+#resHud .chip-mini b { font-size: 20px; font-style: italic; }
+#hpHud { clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%); background: linear-gradient(90deg, #12161a, rgba(32,36,40,.9)); }
+.hp-hud-label { color: #04121b; background: var(--ak-blue) !important; padding: 2px 10px 2px 8px !important; margin-bottom: 2px; }
+#hpHud #hpText { font-style: italic; }
+
+/* —— 底部栏（参考「收藏品 / 干员 / 编队」黑色矿块） —— */
+#sidebar { background: #0b0c0e; border-top: 1px solid var(--ak-line-hi); box-shadow: inset 0 3px 0 var(--ak-blue); }
+#sidebar .panel, #sidebar #bagBtn { clip-path: none; border: 0; background: linear-gradient(180deg, #202327, #121416); box-shadow: inset 0 0 0 1px var(--ak-line); }
+#sidebar .panel::before { width: 3px; height: 100%; background: var(--ak-white); }
+#bagBtn { background: var(--ak-tex-hatch), linear-gradient(180deg, #2a2e33, #15171a); }
+#bagBtn .bag-label::after { content: 'COLLECTION'; display: block; font: 700 9px var(--font-label); letter-spacing: .3em; color: var(--ak-dim); margin-top: 2px; }
+
+/* —— 干员卡（参考：斜切竖卡，底部黑色斜带 + 等级环 + 名字右下） —— */
+#overlay .cls2-strip > *, .cls2-face { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 26px), calc(100% - 14px) 100%, 0 100%); position: relative; overflow: hidden; }
+#overlay .cls2-strip > *::after { content: ''; position: absolute; left: -4%; right: -4%; bottom: 0; height: 34%; background: linear-gradient(0deg, #0a0b0c 62%, transparent); transform: skewY(-6deg); transform-origin: 100% 100%; pointer-events: none; }
+#overlay .cls2-strip > *.on, #overlay .cls2-strip > *.active, #overlay .cls2-strip > *[aria-selected="true"] { box-shadow: 0 0 0 2px var(--ak-yellow); transform: translateY(-6px); }
+
+/* —— 叙事选项条（参考「以开端铸造钥匙」：暗色横条，淡出左缘，右侧骰面） —— */
+#overlay .evt-opt { clip-path: none; border: 0; border-top: 1px solid var(--ak-line-hi); border-left: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.0), rgba(10,11,13,.92) 14%, rgba(10,11,13,.92) 100%); padding: 16px 70px 16px 40px; position: relative; text-align: left; }
+#overlay .evt-opt::before { content: ''; position: absolute; left: 14px; top: 50%; width: 10px; height: 10px; background: var(--ak-white); transform: translateY(-50%) rotate(45deg); }
+#overlay .evt-opt::after { content: ''; position: absolute; right: 18px; top: 50%; width: 38px; height: 38px; transform: translateY(-50%);
+  background: var(--ak-chevrons) center / 100% no-repeat; opacity: .25; transition: opacity .16s, transform .16s var(--ease-pop); }
+#overlay .evt-opt:hover { background: linear-gradient(90deg, rgba(31,178,255,.0), rgba(31,178,255,.18) 14%, rgba(10,11,13,.94) 100%); }
+#overlay .evt-opt:hover::before { background: var(--ak-blue); }
+#overlay .evt-opt:hover::after { opacity: .9; transform: translateY(-50%) translateX(6px); }
+#overlay .evt-opt b { font-size: 17px; font-weight: 800; letter-spacing: .14em; color: var(--ak-white); }
+#overlay .evt-opt span { display: block; margin-top: 5px; font-size: 13px; color: var(--ak-sub); }
+#overlay .evt-opt.bad::before, #overlay .evt-opt.danger::before { background: var(--ak-crimson); }
+#overlay .node-panel { border-top: 0; }
+#overlay .node-pg:not(.event-themed) .node-kicker::before { content: ''; display: inline-block; width: 28px; height: 2px; margin-right: 10px; vertical-align: middle; background: var(--ak-crimson); }
+.scene-line p { border-left: 2px solid var(--ak-crimson); padding-left: 14px; line-height: 1.9; }
+
+/* —— 主页：右侧选项盘增加红青双色细边（参考主界面「编队 / 干员 / 采购」的暗红底） —— */
+#title.home-composed .home-secondary .home-plate { --plate-fill: linear-gradient(270deg, rgba(90,15,26,.55), rgba(12,14,17,.86) 55%); }
+#title.home-composed .home-library { --plate-accent: var(--ak-teal); }
+#title.home-composed .home-settings { --plate-accent: var(--ak-blue); }
+#title.home-composed .home-brand::after { content: ''; display: block; height: 2px; margin-top: 10px; width: 70%; background: linear-gradient(90deg, var(--ak-yellow) 0 56px, var(--ak-line-hi) 56px); }

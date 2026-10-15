@@ -1,0 +1,28 @@
+{
+  "plannedFiles": 10031,
+  "plannedBytes": 2249531012,
+  "copyFiles": 10013,
+  "wavFiles": 18,
+  "wavBytes": 1203840960,
+  "savedUniqueFiles": 792,
+  "savedBytes": 68133239,
+  "protectedOriginalFiles": 5300,
+  "manifests": [
+    {
+      "path": "docs/evidence/2026-10-15-WF-copy-audio-cleanup-1015/preservation-manifest.local.json",
+      "bytes": 250863,
+      "sha256": "17df497c6dcad913a72781db361c8f38360f0e313bfb83c6ffb892d457064dd7"
+    },
+    {
+      "path": "docs/evidence/2026-10-15-WF-copy-audio-cleanup-1015/protected-originals.local.json",
+      "bytes": 1385352,
+      "sha256": "2cfed08f1973714b1f13394e722a135da7f89ec52630c3919c8826d36f44b1cf"
+    },
+    {
+      "path": "docs/evidence/2026-10-15-WF-copy-audio-cleanup-1015/deletion-plan.local.json",
+      "bytes": 4421276,
+      "sha256": "342f5be4672dac428a560682122530433ec436279f4bd4ed9a0180d82f53a81b"
+    }
+  ],
+  "method": "logical file bytes; all script/report/code files saved; byte-identical mainline media retained in place"
+}

@@ -1,0 +1,2970 @@
+{
+  "before": [
+    {
+      "cls": "home-composed",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "width",
+          "1920px"
+        ],
+        [
+          "height",
+          "1080px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "16px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "title"
+    },
+    {
+      "cls": "home-tool home-wallpaper-view",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "width",
+          "153.986px"
+        ],
+        [
+          "height",
+          "55.995px"
+        ],
+        [
+          "color",
+          "rgb(245, 246, 243)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "18px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "btnTitleWallpaperView"
+    },
+    {
+      "cls": "home-wordmark",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "489.208px"
+        ],
+        [
+          "height",
+          "227.169px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "32px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "home-plate home-start",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "537.597px"
+        ],
+        [
+          "height",
+          "107.993px"
+        ],
+        [
+          "color",
+          "rgb(20, 18, 10)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "mStart"
+    },
+    {
+      "cls": "home-plate home-guide",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "440.818px"
+        ],
+        [
+          "height",
+          "72px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "mGuide"
+    },
+    {
+      "cls": "home-plate home-ach",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "380.137px"
+        ],
+        [
+          "height",
+          "89.9963px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "mAch"
+    },
+    {
+      "cls": "home-plate home-library",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "422.388px"
+        ],
+        [
+          "height",
+          "89.9963px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "btnCardLib"
+    },
+    {
+      "cls": "home-plate home-settings",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "363.249px"
+        ],
+        [
+          "height",
+          "57.9863px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "mSettings"
+    },
+    {
+      "cls": "home-plate home-makers",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "363.249px"
+        ],
+        [
+          "height",
+          "57.9863px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "mCredits"
+    },
+    {
+      "cls": "home-plate home-exit",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "363.249px"
+        ],
+        [
+          "height",
+          "57.9863px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "btnTitleExit"
+    },
+    {
+      "cls": "home-tool muted",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "55.995px"
+        ],
+        [
+          "height",
+          "55.995px"
+        ],
+        [
+          "color",
+          "rgb(245, 246, 243)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "btnTitleMute"
+    },
+    {
+      "cls": "home-tool home-inbox",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "136.948px"
+        ],
+        [
+          "height",
+          "55.995px"
+        ],
+        [
+          "color",
+          "rgb(245, 246, 243)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "18px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "mInbox"
+    },
+    {
+      "cls": "home-tool home-wallpaper",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "width",
+          "127.366px"
+        ],
+        [
+          "height",
+          "55.995px"
+        ],
+        [
+          "color",
+          "rgb(245, 246, 243)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "18px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "btnTitleWallpaper"
+    },
+    {
+      "cls": "archive-back home-credits-back",
+      "css": [
+        [
+          "display",
+          "inline-flex"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "64px"
+        ],
+        [
+          "height",
+          "58px"
+        ],
+        [
+          "color",
+          "rgb(235, 235, 235)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "18px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "title-ver",
+      "css": [
+        [
+          "display",
+          "none"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(196, 199, 201)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "10px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    }
+  ],
+  "after": [
+    {
+      "cls": "home-composed",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "width",
+          "1920px"
+        ],
+        [
+          "height",
+          "1080px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "16px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "title"
+    },
+    {
+      "cls": "home-tool home-wallpaper-view",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "width",
+          "153.999px"
+        ],
+        [
+          "height",
+          "55.995px"
+        ],
+        [
+          "color",
+          "rgb(245, 246, 243)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "18px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "btnTitleWallpaperView"
+    },
+    {
+      "cls": "home-wordmark",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "489.208px"
+        ],
+        [
+          "height",
+          "227.174px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "32px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "home-plate home-start",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "537.592px"
+        ],
+        [
+          "height",
+          "107.998px"
+        ],
+        [
+          "color",
+          "rgb(20, 18, 10)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "mStart"
+    },
+    {
+      "cls": "home-plate home-guide",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "440.823px"
+        ],
+        [
+          "height",
+          "71.99px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "mGuide"
+    },
+    {
+      "cls": "home-plate home-ach",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "380.15px"
+        ],
+        [
+          "height",
+          "89.9938px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "mAch"
+    },
+    {
+      "cls": "home-plate home-library",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "422.396px"
+        ],
+        [
+          "height",
+          "89.9938px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "btnCardLib"
+    },
+    {
+      "cls": "home-plate home-settings",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "363.256px"
+        ],
+        [
+          "height",
+          "57.9913px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "mSettings"
+    },
+    {
+      "cls": "home-plate home-makers",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "363.256px"
+        ],
+        [
+          "height",
+          "57.9913px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "mCredits"
+    },
+    {
+      "cls": "home-plate home-exit",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "363.256px"
+        ],
+        [
+          "height",
+          "57.9913px"
+        ],
+        [
+          "color",
+          "rgb(241, 240, 238)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "btnTitleExit"
+    },
+    {
+      "cls": "home-tool muted",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "55.995px"
+        ],
+        [
+          "height",
+          "55.995px"
+        ],
+        [
+          "color",
+          "rgb(245, 246, 243)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "13.3333px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "btnTitleMute"
+    },
+    {
+      "cls": "home-tool home-inbox",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "width",
+          "136.981px"
+        ],
+        [
+          "height",
+          "55.995px"
+        ],
+        [
+          "color",
+          "rgb(245, 246, 243)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "18px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "mInbox"
+    },
+    {
+      "cls": "home-tool home-wallpaper",
+      "css": [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "width",
+          "127.374px"
+        ],
+        [
+          "height",
+          "55.995px"
+        ],
+        [
+          "color",
+          "rgb(245, 246, 243)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "18px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": "btnTitleWallpaper"
+    },
+    {
+      "cls": "archive-back home-credits-back",
+      "css": [
+        [
+          "display",
+          "inline-flex"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "64px"
+        ],
+        [
+          "height",
+          "58px"
+        ],
+        [
+          "color",
+          "rgb(235, 235, 235)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "18px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "title-ver",
+      "css": [
+        [
+          "display",
+          "none"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(196, 199, 201)"
+        ],
+        [
+          "background-color",
+          "rgba(0, 0, 0, 0)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "10px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    },
+    {
+      "cls": "",
+      "css": [
+        [
+          "display",
+          "block"
+        ],
+        [
+          "position",
+          "static"
+        ],
+        [
+          "width",
+          "auto"
+        ],
+        [
+          "height",
+          "auto"
+        ],
+        [
+          "color",
+          "rgb(236, 236, 236)"
+        ],
+        [
+          "background-color",
+          "rgba(29, 31, 33, 0.79)"
+        ],
+        [
+          "font-family",
+          "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+        ],
+        [
+          "font-size",
+          "12px"
+        ],
+        [
+          "border-radius",
+          "0px"
+        ]
+      ],
+      "id": ""
+    }
+  ],
+  "differences": [
+    {
+      "before": {
+        "cls": "home-tool home-wallpaper-view",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "absolute"
+          ],
+          [
+            "width",
+            "153.986px"
+          ],
+          [
+            "height",
+            "55.995px"
+          ],
+          [
+            "color",
+            "rgb(245, 246, 243)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "18px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "btnTitleWallpaperView"
+      },
+      "after": {
+        "cls": "home-tool home-wallpaper-view",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "absolute"
+          ],
+          [
+            "width",
+            "153.999px"
+          ],
+          [
+            "height",
+            "55.995px"
+          ],
+          [
+            "color",
+            "rgb(245, 246, 243)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "18px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "btnTitleWallpaperView"
+      }
+    },
+    {
+      "before": {
+        "cls": "home-wordmark",
+        "css": [
+          [
+            "display",
+            "block"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "489.208px"
+          ],
+          [
+            "height",
+            "227.169px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "32px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": ""
+      },
+      "after": {
+        "cls": "home-wordmark",
+        "css": [
+          [
+            "display",
+            "block"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "489.208px"
+          ],
+          [
+            "height",
+            "227.174px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "32px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": ""
+      }
+    },
+    {
+      "before": {
+        "cls": "home-plate home-start",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "537.597px"
+          ],
+          [
+            "height",
+            "107.993px"
+          ],
+          [
+            "color",
+            "rgb(20, 18, 10)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "mStart"
+      },
+      "after": {
+        "cls": "home-plate home-start",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "537.592px"
+          ],
+          [
+            "height",
+            "107.998px"
+          ],
+          [
+            "color",
+            "rgb(20, 18, 10)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "mStart"
+      }
+    },
+    {
+      "before": {
+        "cls": "home-plate home-guide",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "440.818px"
+          ],
+          [
+            "height",
+            "72px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "mGuide"
+      },
+      "after": {
+        "cls": "home-plate home-guide",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "440.823px"
+          ],
+          [
+            "height",
+            "71.99px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "mGuide"
+      }
+    },
+    {
+      "before": {
+        "cls": "home-plate home-ach",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "380.137px"
+          ],
+          [
+            "height",
+            "89.9963px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "mAch"
+      },
+      "after": {
+        "cls": "home-plate home-ach",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "380.15px"
+          ],
+          [
+            "height",
+            "89.9938px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "mAch"
+      }
+    },
+    {
+      "before": {
+        "cls": "home-plate home-library",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "422.388px"
+          ],
+          [
+            "height",
+            "89.9963px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "btnCardLib"
+      },
+      "after": {
+        "cls": "home-plate home-library",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "422.396px"
+          ],
+          [
+            "height",
+            "89.9938px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "btnCardLib"
+      }
+    },
+    {
+      "before": {
+        "cls": "home-plate home-settings",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "363.249px"
+          ],
+          [
+            "height",
+            "57.9863px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "mSettings"
+      },
+      "after": {
+        "cls": "home-plate home-settings",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "363.256px"
+          ],
+          [
+            "height",
+            "57.9913px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "mSettings"
+      }
+    },
+    {
+      "before": {
+        "cls": "home-plate home-makers",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "363.249px"
+          ],
+          [
+            "height",
+            "57.9863px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "mCredits"
+      },
+      "after": {
+        "cls": "home-plate home-makers",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "363.256px"
+          ],
+          [
+            "height",
+            "57.9913px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "mCredits"
+      }
+    },
+    {
+      "before": {
+        "cls": "home-plate home-exit",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "363.249px"
+          ],
+          [
+            "height",
+            "57.9863px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "btnTitleExit"
+      },
+      "after": {
+        "cls": "home-plate home-exit",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "363.256px"
+          ],
+          [
+            "height",
+            "57.9913px"
+          ],
+          [
+            "color",
+            "rgb(241, 240, 238)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "13.3333px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "btnTitleExit"
+      }
+    },
+    {
+      "before": {
+        "cls": "home-tool home-inbox",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "136.948px"
+          ],
+          [
+            "height",
+            "55.995px"
+          ],
+          [
+            "color",
+            "rgb(245, 246, 243)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "18px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "mInbox"
+      },
+      "after": {
+        "cls": "home-tool home-inbox",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "relative"
+          ],
+          [
+            "width",
+            "136.981px"
+          ],
+          [
+            "height",
+            "55.995px"
+          ],
+          [
+            "color",
+            "rgb(245, 246, 243)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "18px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "mInbox"
+      }
+    },
+    {
+      "before": {
+        "cls": "home-tool home-wallpaper",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "absolute"
+          ],
+          [
+            "width",
+            "127.366px"
+          ],
+          [
+            "height",
+            "55.995px"
+          ],
+          [
+            "color",
+            "rgb(245, 246, 243)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "18px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "btnTitleWallpaper"
+      },
+      "after": {
+        "cls": "home-tool home-wallpaper",
+        "css": [
+          [
+            "display",
+            "flex"
+          ],
+          [
+            "position",
+            "absolute"
+          ],
+          [
+            "width",
+            "127.374px"
+          ],
+          [
+            "height",
+            "55.995px"
+          ],
+          [
+            "color",
+            "rgb(245, 246, 243)"
+          ],
+          [
+            "background-color",
+            "rgba(0, 0, 0, 0)"
+          ],
+          [
+            "font-family",
+            "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif"
+          ],
+          [
+            "font-size",
+            "18px"
+          ],
+          [
+            "border-radius",
+            "0px"
+          ]
+        ],
+        "id": "btnTitleWallpaper"
+      }
+    }
+  ]
+}

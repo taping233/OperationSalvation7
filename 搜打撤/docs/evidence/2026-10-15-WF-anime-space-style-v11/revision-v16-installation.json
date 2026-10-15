@@ -1,0 +1,28 @@
+{
+  "version": "v1.6",
+  "changed": [
+    "SKILL.md",
+    "references/iteration.md",
+    "references/prompt-recipe.md",
+    "references/space-comparison-v16.md",
+    "references/style-prompt.md",
+    "references/trial-space-v16-prompt.txt"
+  ],
+  "sha256": {
+    "SKILL.md": "9ac4e4a504d0a4061b8155e40c01cc8bee91d766d03425f3827d44d9571f66c2",
+    "references/iteration.md": "e901ea3b21969d265ac57d2c5136daa02c2f5d3066deb417b774a60b6719b92d",
+    "references/prompt-recipe.md": "7fa47db7ccfe2abf7787a49112568e7ba618e6fa651dbd8116f1178201d4fff8",
+    "references/space-comparison-v16.md": "a72389b28de2655762ed4cd22d0298fd22b70c40be2a755259360ff76e436b88",
+    "references/style-prompt.md": "e505ffd1169dadb686128b8684684fdb9fcd88f2ba4d972502aa010554f18634",
+    "references/trial-space-v16-prompt.txt": "48b46e1ee87ea30b707469c132be4af79a130b1455f9f378c1ef8d9a77b2fe53"
+  },
+  "protectedOriginalFiles": 49,
+  "checks": [
+    "frontmatter valid",
+    "relative links resolved",
+    "installed hashes match",
+    "other originals retained"
+  ],
+  "contentComparedToV15": "identical; only style block changed",
+  "imageInputs": []
+}

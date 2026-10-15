@@ -1,0 +1,66 @@
+[
+  {
+    "file": "game/src/core/art.js",
+    "sha256": "7f161d92495690aecc15bd3fa5d6d0dd4b7828252d80c3af1d9b459e4259c9d3"
+  },
+  {
+    "file": "game/src/core/icons-bitmap.js",
+    "sha256": "c8c66dda18b0b7d43c08e7fac90f35f1672e9693775892e1d7116158bf18aa46"
+  },
+  {
+    "file": "game/src/core/icon-hydration.js",
+    "sha256": "e84bb33f03882a86aa971edb1a7b7c3ef223afdcc080fc322cb12e11dad364c6"
+  },
+  {
+    "file": "game/src/core/image-decode.js",
+    "sha256": "5d2cab3cf14e1a20d04d418f18266d52e8d8aa5c0f5341f1a8c300556258d97d"
+  },
+  {
+    "file": "scripts/css-redundancy-audit.mjs",
+    "sha256": "43db735953dd1cf2110d8079d593622eb8cd3ee78b6695803f355903bac0187d"
+  },
+  {
+    "file": "tests/icon-hydration.test.js",
+    "sha256": "e4a21fbd67323582e54abad05da99f67d1dbd2e9fc0452a0f79dab2136d0094c"
+  },
+  {
+    "file": "tests/image-decode.test.js",
+    "sha256": "11ce438ae874cf2286fec39abe145ffabff30e1b5129f5f7c3846af2c830fdfc"
+  },
+  {
+    "file": "tests/css-redundancy-audit.test.js",
+    "sha256": "d30431adfee19797606fa93eacd35f32c1e13efb351a40934d51bb844d3ae79a"
+  },
+  {
+    "file": "game/css/entry-events.css",
+    "sha256": "3f8206b6fdeb71c67fd55498c1d3807aecfba37dacc1b85d754238d4557fb214"
+  },
+  {
+    "file": "game/css/expedition.css",
+    "sha256": "9b8b2003a218f190cd5b8fcfac55071b548cbdda70027ef0f15d0e0950fb030b"
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "sha256": "815efdfc7f9a346f023d58e015918303c30341407901ae3353fcfa3e3405f9f9"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "sha256": "9b57efe9e1155680aacaead2c14e30d7864b4a4ca548521d323446f9ad3ef0a1"
+  },
+  {
+    "file": "game/css/expedition-shop.css",
+    "sha256": "838a35789b6a3ccd6a71f71388aecd3f86e4c44215e75f8ef0abfe1f4b807bd2"
+  },
+  {
+    "file": "game/css/map-cover.css",
+    "sha256": "18207169b4f262d12e6e5aa5eb6accb57cdb6a07299d38dcc56330ebe568c09c"
+  },
+  {
+    "file": "game/css/page-expedition-hud.css",
+    "sha256": "7662bc1d0e87b589cc8ac23e78f6899b9515a04b4932acf334ffd03ba2a84128"
+  },
+  {
+    "file": "game/css/home-polish.css",
+    "sha256": "ce6216ad0506bc492d4dff65f88eab8bb5488efa1bc32f5c89b41d462e47cd29"
+  }
+]

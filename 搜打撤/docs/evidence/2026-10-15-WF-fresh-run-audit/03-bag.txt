@@ -1,0 +1,101 @@
+- main:
+  - generic "持有金币":
+    - text: 金币
+    - generic: "1"
+  - generic "攻击力":
+    - text: 攻击
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "bag 背包":
+    - button "关闭背包" [active]:
+    - navigation:
+      - button "随身背包":
+        - generic: "9"
+      - button "安全格":
+        - generic: 0/2
+      - button "消耗口袋":
+        - generic: "0"
+      - generic: DEPOT
+    - generic: DEPOT
+    - heading "背包" [level=2]:
+      - text: 背包
+      - button:
+    - generic: 容量
+    - generic: "9"
+    - generic: /16
+    - text: 金币
+    - generic: "0"
+    - text: 物资估值
+    - generic: "0"
+    - button "全部"
+    - button "招式"
+    - button "生物"
+    - button "装备"
+    - button "道具"
+    - button "资源"
+    - button "物资"
+    - button:
+    - button:
+    - paragraph: 点击查看详情 · 按住拖动整理 · 拖到左栏盾钮存入安全格
+    - generic: "1"
+    - img "初始攻击"
+    - generic: 武术
+    - generic: ·初始
+    - generic: 初始攻击
+    - generic: 造成等同于你的攻击力的攻击伤害。
+    - generic: ×5
+    - generic: "2"
+    - img "龙焰射线"
+    - generic: 法术
+    - generic: ·古朴
+    - generic: 龙焰射线
+    - generic: 注能（1）：
+    - text: 造成 11 点法术伤害。
+    - generic: "1"
+    - img "法力光波"
+    - generic: 法术
+    - generic: ·古朴
+    - generic: 法力光波
+    - generic: 造成 5 点法术伤害。
+    - generic: "2"
+    - img "熔岩爆破"
+    - generic: 法术
+    - generic: ·稀有
+    - generic: 熔岩爆破
+    - generic: 造成 9 点法术伤害，并获得 1 张「二次爆炸」。
+    - generic: "0"
+    - img "金蝉脱壳"
+    - generic: 武术
+    - generic: ·侠客
+    - generic: 金蝉脱壳
+    - generic: 消耗你的所有手牌，并抽 3 张牌。
+    - generic: ×2
+    - generic: "1"
+    - img "不变应万变-改"
+    - generic: 武术
+    - generic: ·侠客
+    - generic: 不变应万变-改
+    - generic: 本牌在你的手牌中时，变为你上一张打出的武术牌的复制，且费用为 1 费。
+    - generic: "0"
+    - img "冰冻药水"
+    - generic: 道具
+    - generic: ·稀有
+    - generic: 冰冻药水
+    - generic: 对目标附加冰冻，持续 1 回合。
+    - generic: 可用
+    - generic: "2"
+    - img "追斩"
+    - generic: 武术
+    - generic: ·稀有
+    - generic: 追斩
+    - generic: 造成等同于你的攻击力的攻击伤害；本回合你每打出 1 张其他武术牌，本牌费用减少 1 点。
+    - generic: "1"
+    - img "冰刺"
+    - generic: 法术
+    - generic: ·古朴
+    - generic: 冰刺
+    - generic: 造成 2 点法术伤害；对目标附加冰冻。

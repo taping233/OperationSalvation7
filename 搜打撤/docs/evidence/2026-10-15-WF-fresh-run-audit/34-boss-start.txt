@@ -1,0 +1,119 @@
+- complementary:
+  - navigation "远征工具":
+    - button "背包：携带卡牌 15/16" [disabled]:
+      - img "bag"
+      - generic: 背包
+      - strong: 15/16
+      - generic: B
+    - button "安全格：保护物资 2/2" [disabled]:
+      - img "lock"
+      - generic: 安全格
+      - strong: 2/2
+    - button "消耗口袋：待复原卡牌 9" [disabled]:
+      - img "cards"
+      - generic: 消耗口袋
+      - strong: "9"
+    - button "map 定位 F" [disabled]:
+      - img "map"
+      - generic: 定位
+      - generic: F
+    - button "map 总览 G" [disabled]:
+      - img "map"
+      - generic: 总览
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic "持有金币":
+    - generic: "24"
+  - generic "攻击力":
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 33/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - generic: 冬核深处 · 首脑遭遇
+    - generic: 第 1 回合
+    - generic: 你的行动
+    - generic "gear 选项":
+      - img "gear"
+      - text: 选项
+    - generic: 点击手牌查看 · 拖拽直接使用
+    - generic: 无
+    - generic: 你
+    - generic: 33/35
+    - img "swords"
+    - text: 攻 4
+    - button "异能领主的意图：攻击·偶数回合庇幕 · 8。点击查看完整说明" [active]:
+      - img "crystal"
+      - generic: 攻击 8
+      - generic: 攻击·偶数回合庇幕 · 8
+    - img "boss_elem"
+    - generic: 异能领主
+    - img "swords"
+    - text: 攻 8
+    - img "crystal"
+    - text: 元素庇幕
+    - generic: 48/48
+    - generic: 能量
+    - generic: "2"
+    - generic: /2
+    - generic "职业技能与手牌分栏":
+      - button "刺击 1 能量 · 每回合一次":
+        - text: 刺击
+        - generic: 1 能量 · 每回合一次
+    - generic "抽牌堆":
+      - button "牌库：回音箭×1，初始攻击×3，寻宝×1，火球×2，生命箭×1，坚守×2，摸索×2，不变应万变-改×1，血箭×1，熔岩爆破×1（点击查看）": 15牌库
+    - generic "弃牌与消耗":
+      - generic: 0弃牌
+      - button "墓地：（空）（被消耗的牌 · 不参与洗回 · 点击查看）":
+        - img "skull"
+        - text: 0消耗
+    - button "初始攻击 · 1 费。费用 1 · 点击查看大卡，确认使用后选敌人；也可直接拖到敌人身上使用":
+      - text: "1"
+      - generic: "1"
+      - img "初始攻击"
+      - generic: 武术
+      - generic: ·初始
+      - generic: 初始攻击
+      - generic: 造成等同于你的攻击力的攻击伤害。
+      - generic: ×2
+      - img "swords"
+    - button "血箭 · 1 费。费用 1 · 点击查看大卡，确认使用后选敌人；也可直接拖到敌人身上使用":
+      - text: "2"
+      - generic: "1"
+      - img "血箭"
+      - generic: 武术
+      - generic: ·古朴
+      - generic: 血箭
+      - generic: 造成（你的攻击力 - 1）点攻击伤害；对目标附加 1 层流血。
+      - img "swords"
+    - button "致命穿刺 · 1 费。费用 1 · 点击查看大卡，确认使用后选敌人；也可直接拖到敌人身上使用":
+      - text: "3"
+      - generic: "1"
+      - img "致命穿刺"
+      - generic: 武术
+      - generic: ·古朴
+      - generic: 致命穿刺
+      - generic "完整卡牌规则，可滚动阅读":
+        - generic: 造成（你的攻击力 + 1）点攻击伤害；若目标处于流血状态，本次伤害增加 2 点，并对目标附加破甲，持续 1 回合。
+      - img "swords"
+    - button "寻宝 · 1 费。费用 1 · 点击查看大卡，确认使用后选敌人；也可直接拖到敌人身上使用":
+      - text: "4"
+      - generic: "1"
+      - img "寻宝"
+      - generic: 法术
+      - generic: ·古朴
+      - generic: 寻宝
+      - generic: 造成 4 点法术伤害，并发现 1 张卡牌。
+      - img "swords"
+    - generic "战术操作":
+      - button "bag 背包":
+        - img "bag"
+        - text: 背包
+      - button "skip 结束回合":
+        - img "skip"
+        - text: 结束回合

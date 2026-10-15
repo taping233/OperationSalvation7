@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-15T08:31:27.4351501+00:00",
+  "checkedPorts": [
+    5335,
+    5337,
+    5338,
+    5346
+  ],
+  "listeners": [],
+  "recordedPid37600Exists": false,
+  "processesStopped": [],
+  "method": "netstat返回成功；仅核对固定旧端口与记录PID，未终止进程"
+}

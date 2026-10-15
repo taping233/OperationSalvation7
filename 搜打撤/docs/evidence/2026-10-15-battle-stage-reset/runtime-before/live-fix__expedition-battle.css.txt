@@ -1,0 +1,143 @@
+/* 冬境战斗舞台：只负责层级、可读性和反馈，不接触战斗规则。 */
+/* 正式场景由本场分层资源接管，加载中仅保留中性底，不借用地图外圈背景。 */   /* 09-25：#overlay 改 :where() 降特异性，让 battle.css 的首脑 [data-asset-key]::after 差分 tint 能压过本条 */
+/* 2026-09-13 留言：底部黑底压缩——压暗段下移到 85% 线，70~85% 露出战场背景 */
+/* 2026-09-13 老板口令：背景图 16:9 零余量无法滑动，改为在 67% 脚线处加一层前景地板平面
+   （暖沥青调半透明、顶缘 1.2% 软过渡），人与怪踩在平面上，原路面 86% 内容透出保留 */   /* 09-25：排除氛围尘层（battle.css absolute + inset:0，被强改 relative 后尘点从顶部飘出裁剪区） */
+/* 2026-09-18 留言「药水栏还是不能用」根因：上行的通配 z-index:1 让 .bt-potions 与场景层
+   .sts-arena 同层且 DOM 靠前——透明的场景画布把顶栏点击全部吃掉（看得见点不着）。
+   药水栏整体抬到场景之上：容器继续穿透点击，chip 本体可点。 */   /* 09-25：补 color，辉光 currentColor 不再吃继承灰白 */
+#overlay .battle-stage.sts .sts-foe:not(.dead) .sts-nameplate { border-color:rgba(218,167,151,.42); background:linear-gradient(180deg,rgba(30,16,21,.7),rgba(9,10,10,.9)); }
+/* 09-25：意图胶囊改锚名牌上缘（bottom 64px ≈ 名牌高约 50px + winter 悬挂 6px + 8px 间距）——
+   原顶:-42px 挂在含整幅立绘的槽位顶，立绘不可见时胶囊悬空在半空 */
+
+/* 2026-09-13 留言：HUD 渐变底前半全透明（85% 舞台高度≈自身 50% 处才渐深），去掉原 69% 处 border-top 细线 */
+@media (prefers-reduced-motion:reduce) {
+}
+
+/* winter.css contains legacy calibration rules with !important. These are the
+   final battle-stage contract and intentionally win because this sheet is last. */
+
+/* 主舞台布局：顶栏信息、中央对峙、底部战术台三段职责明确。 */
+/* 09-25 二波 C 组：双方立绘接地影——drop-shadow 沿立绘 alpha 轮廓落到底面 */
+/* 09-25 二波 C 组：手牌区深色渐变托盘 + 顶部金线（inset hairline），托出"战术台"层次 */
+/* 09-25：本钮已与砸击按钮同收 .sts-hand-tools（battle.css，flex 横排）——原同格钉位
+   margin-left:4px 会把分栏钮直接压在砸击钮身上（z-index 8 盖 6，挡住砸击图），规则删除 */
+
+/* 战斗全屏边界：不继承通用弹窗的居中/动画位移，顶部牌堆和底部战术台始终留在视口内。 */
+
+/* 选目标时建立明确的“合法目标/其他单位”层级，避免与单位常驻蓝光混淆。 */
+/* 点选卡牌后舞台仍处于 player 阶段，直接依据可选目标类展示目标轮廓。 */
+
+/* Battle sample: battlefield above, actual energy/card/turn decisions below. */
+#overlay .card:has(.battle-decision) { display:flex; flex-direction:column; width:min(1320px,calc(var(--game-layout-width, 100vw) * 0.94)); max-height:calc(var(--game-layout-height, 100vh) * 0.9); padding:0!important; overflow:hidden!important; background:#12212af5!important; border:1px solid #acc1cb55!important; border-radius:0; }
+#overlay .card:has(.battle-decision) > h2 { display:none; }
+#overlay .card:has(.battle-decision) #ovBody { display:flex; flex:1; min-height:0; overflow:hidden; }
+#overlay .battle-decision { display:flex; flex-direction:column; width:100%; min-height:0; max-height:calc(var(--game-layout-height, 100vh) * 0.9); }
+#overlay .battle-decision-head { flex:0 0 auto; display:flex; justify-content:space-between; align-items:center; gap:24px; padding:24px 30px; background:#19323c; border-bottom:1px solid #acc1cb33; }
+#overlay .battle-decision-head h3 { margin:0; font-size:28px; color:#e4edf0; }
+#overlay .battle-decision-head > span { font-size:18px; color:#b9cbd4; white-space:nowrap; }
+#overlay .battle-decision-content { min-height:0; overflow:auto; overscroll-behavior:contain; padding:20px 30px; }
+#overlay .battle-decision-content .ov-stats, #overlay .battle-decision-content .ov-note { font-size:18px; line-height:1.6; color:#c4d3da; }
+#overlay .battle-decision-content .bt-hand { padding:24px 12px; min-height:0; gap:22px; align-items:flex-start; }
+#overlay .battle-decision-content button.bt-card { appearance:none; background:transparent; border:0; padding:0; color:inherit; cursor:pointer; }
+#overlay .battle-decision-content .choice-list { display:grid; gap:14px; }
+#overlay .battle-decision-content .choice-opt { text-align:left; font-size:20px; padding:16px 22px; background:#1b3441; border:1px solid #acc1cb44; min-height:58px; }
+#overlay .battle-decision-actions { flex:0 0 auto; padding:18px 30px; background:#0e1820; border-top:1px solid #acc1cb33; }
+#overlay .battle-decision-actions .ov-btns { margin:0; }
+#overlay .battle-decision-actions .ov-btn { min-height:48px; font-size:19px; }
+#overlay .battle-decision-actions .ov-btn.ok { background:#e0c986; color:#14212a; border-color:#e0c986; }
+#overlay .battle-decision-content .battle-decision-source { color:#b9cbd4; font-size:17px; margin:0 0 8px; }
+#overlay .battle-decision-content .bt-gy-list { display:flex; flex-wrap:wrap; gap:22px; max-height:none; border:0; padding:12px 0; }
+#overlay .battle-decision-content .battle-pile-card { position:relative; display:block; padding:0; background:none; border:0; }
+#overlay .battle-decision-content .battle-bag-section + .battle-bag-section { margin-top:28px; border-top:1px solid #acc1cb33; padding-top:20px; }
+#overlay .battle-decision-content .battle-bag-section h4 { margin:0; color:#e4edf0; font-size:22px; }
+#overlay .battle-decision-content .battle-bag-section h4 span { margin-left:16px; font-size:17px; font-weight:400; color:#b9cbd4; }
+
+/* Battle-only temporary gain: retain the shared queue and show the object beside the arena. */
+#cardGet[data-combat="true"] { inset:76px 24px auto auto; width:290px; min-height:0; height:auto; padding:18px 20px; gap:12px; background:#122631f2; border:1px solid #a8c2cc66; box-shadow:0 14px 38px #0007; border-radius:0; }
+#cardGet[data-combat="true"] .lg-beam, #cardGet[data-combat="true"] .lg-name { display:none; }
+#cardGet[data-combat="true"] .lg-kicker { font-size:16px; letter-spacing:.1em; text-shadow:none; color:#d8e4e8; }
+#cardGet[data-combat="true"] .lg-card .hs-card { width:160px; }
+#cardGet[data-combat="true"] .lg-reason { font-size:16px; color:#c2d3db; line-height:1.5; }
+#cardGet[data-combat="true"] .lg-hint { font-size:15px; color:#b0c7d3; }
+#cardGet[data-combat="true"]:has(.rv-prism) { border-color:#c5dcdb; background:linear-gradient(135deg,#1d364af2,#33314cf2); }
+
+/* 三组操作台的显式格位：旧手牌/技能的第二列钉位不可沿用。 */
+body #overlay .battle-decision-content .bt-settings { display:grid; gap:20px; padding:10px 0; font-size:20px; }
+body #overlay .battle-decision-content .bt-settings .chk { display:flex; align-items:center; gap:14px; }
+body #overlay .battle-decision-content .bt-settings input { width:22px; height:22px; accent-color:#e0c986; }
+body #overlay .battle-decision-content .bt-hand { display:flex; flex-wrap:wrap; justify-content:center; }
+body #overlay .battle-decision-content .bt-card:focus-visible,
+body #overlay .battle-decision-content .battle-pile-card:focus-visible { outline:3px solid #e0c986; outline-offset:5px; }
+
+/* 战斗已有战术台背包入口，地图浮钮不得盖住结束回合或附加面板。 */
+
+/* 仅景层本身按arena裁边；角色、目标与意图仍可越出arena。 */
+
+/* 设置与空战斗背包是短面板；有卡列表仍使用原滚动/固定footer。 */
+body #overlay .card:has(.battle-decision-compact) { width:min(900px,calc(var(--game-layout-width, 100vw) * .82)); height:auto; }
+body #overlay .battle-decision-compact { flex:0 1 auto; }
+body #overlay .battle-decision-compact .battle-decision-content { flex:0 1 auto; padding:30px 38px; }
+body #overlay .battle-decision-compact .bt-settings { justify-content:center; }
+body #overlay .battle-decision-compact .battle-decision-actions .ov-btns { display:flex; justify-content:center; }
+body #overlay .battle-decision-compact .battle-decision-actions .ov-btn { flex:0 0 auto; width:auto; min-width:220px; }
+
+/* 参考STS2边缘分组：数字与技能费用分工，保留已成立三列几何。 */
+/* STS1候选/背景退让与STS2牌库网格：本项目支付/注能/编组原创适配。 */
+body #overlay .battle-decision-summary { flex:0 0 auto; padding:14px 30px; background:#213b46; border-bottom:1px solid #a8bdc333; }
+body #overlay .battle-decision-summary .ov-stats { margin:0; font-size:19px; line-height:1.55; color:#d1e1e5; }
+body #overlay .battle-decision-summary .ov-stats b { color:#f0da9c; }
+body #overlay .battle-decision-content { background:linear-gradient(180deg,#11232b,#101c24); }
+body #overlay .battle-decision[data-decision-kind="discover"] .bt-hand { display:flex; justify-content:center; align-items:center; gap:32px; padding:26px 16px 34px; }
+body #overlay .battle-decision[data-decision-kind="discover"] .bt-card .hs-card { width:220px; }
+body #overlay .battle-decision[data-decision-kind="discover"] .bt-card { position:relative; padding:10px; border-bottom:2px solid #b5ccd24d; }
+body #overlay .battle-decision-content button.bt-card:hover { outline:2px solid #e4d49c; outline-offset:5px; filter:brightness(1.06); }
+body #overlay .battle-decision-content :is(.bt-hand,.bt-gy-list,.battle-bag-grid) { gap:24px; }
+body #overlay .battle-decision[data-decision-kind="formation"] .bt-hand,
+body #overlay .battle-decision[data-decision-kind="hand-select"] .bt-hand,
+body #overlay .battle-decision[data-decision-kind="pile"] .bt-gy-list { display:grid; grid-template-columns:repeat(auto-fit,190px); justify-content:center; align-items:start; padding:20px 0; }
+body #overlay .battle-decision:is([data-decision-kind="formation"],[data-decision-kind="hand-select"],[data-decision-kind="pile"]) .hs-card { width:190px; }
+body #overlay .battle-decision[data-decision-kind="formation"] .bt-card.sel { outline:3px solid #e4d49c; outline-offset:5px; background:#d6c58c10; box-shadow:none; }
+body #overlay .battle-decision[data-decision-kind="formation"] .bt-card.sel::after { content:'已编入'; position:absolute; background:#e4d49c; color:#172831; font-size:15px; font-weight:700; }
+body #overlay .battle-decision[data-decision-kind="choice"] .choice-list { grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:20px; padding:20px 0; }
+body #overlay .battle-decision[data-decision-kind="choice"] .choice-opt { min-height:120px; border-left:3px solid #d6c58c; line-height:1.6; }
+body #overlay .battle-decision-actions .ov-btns { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:14px; }
+body #overlay .battle-decision-actions .ov-btn { flex:0 1 auto; min-width:190px; }
+body #overlay .battle-decision-actions .ov-btn.ok { order:2; }
+body #overlay .battle-decision-content .bt-count { background:#14252ee8; color:#d9e6e8; border:1px solid #a4bbc555; }
+body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-grid { display:flex; flex-wrap:wrap; align-items:flex-start; padding:18px 0; }
+body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-slot .hs-card { width:185px; }
+#cardGet[data-combat="true"] .lg-card { padding:9px; background:#0b1b2366; }
+#cardGet[data-combat="true"][data-rarity="传说"] { border-left:3px solid #e4c778; }
+#cardGet[data-combat="true"][data-rarity="棱彩"] { border-left:3px solid #c8e8e7; }
+
+body #overlay .battle-decision[data-decision-kind="discover"] .bt-card { width:240px; flex:0 0 240px; box-sizing:border-box; }
+body #overlay .battle-decision:is([data-decision-kind="formation"],[data-decision-kind="hand-select"],[data-decision-kind="pile"]) :is(.bt-card,.battle-pile-card) { position:relative; width:190px; min-width:0; }
+
+/* 附加壳只有候选内容滚动，解除legacy discover内卡阵高度上限。 */
+body #overlay .card:has(.battle-decision) .battle-decision-content .bt-hand { max-height:none; overflow:visible; }
+/* 编组状态放在卡面之外，保留整张卡的正文可读区。 */
+body #overlay .battle-decision[data-decision-kind="formation"] .bt-card { padding-bottom:34px; box-sizing:content-box; overflow:visible; }
+body #overlay .battle-decision[data-decision-kind="formation"] .bt-card.sel::after { left:0; right:0; bottom:0; padding:5px 0; }
+
+/* true模式沿room产生满页卡：短战斗设置专门解除room外壳尺寸，不触其他决策。 */
+body #overlay.room-view:has(.battle-decision-compact[data-decision-kind="settings"]) { align-items:center; justify-content:center; padding:36px; }
+body #overlay.room-view .card.room:has(.battle-decision-compact[data-decision-kind="settings"]) {
+  position:relative; inset:auto; width:min(800px,calc(var(--game-layout-width,100vw) - 96px));
+  height:auto; min-height:0; max-height:calc(var(--game-layout-height,100vh) - 72px);
+  flex:0 1 auto; align-self:center; justify-content:flex-start; margin:auto; padding:0!important;
+}
+body #overlay.room-view .card.room:has(.battle-decision-compact[data-decision-kind="settings"]) #ovBody {
+  width:100%; height:auto; min-height:0; max-width:none; margin:0; flex:0 1 auto;
+}
+body #overlay .battle-decision-compact[data-decision-kind="settings"] { width:100%; height:auto; min-height:0; }
+body #overlay .battle-decision-compact[data-decision-kind="settings"] .battle-decision-content { padding:24px 36px; }
+body #overlay .battle-decision-compact[data-decision-kind="settings"] .bt-settings { width:100%; grid-template-columns:minmax(0,1fr); justify-content:stretch; gap:0; padding:0; }
+body #overlay .battle-decision-compact[data-decision-kind="settings"] .chk { min-height:58px; width:100%; padding:8px 0; border-bottom:1px solid #b7cbd32b; font-size:20px; line-height:1.5; box-sizing:border-box; }
+body #overlay .battle-decision-compact[data-decision-kind="settings"] .bt-settings .ov-note { margin:16px 0 0; font-size:16px; line-height:1.6; }
+
+/* 战斗重建：StS2战场几何 + 方舟边缘信息层级；1920×1080统一逻辑画布。 */
+/* 敌我共用底线，在名牌与抬起的手牌之间保留垂直阅读间距。 */
+body #overlay .battle-stage.sts.battle-sts .sts-foe:not(.dead) .sts-nameplate { box-sizing:border-box;width:100%;min-width:0;max-width:300px;position:relative!important;inset:auto!important;margin:12px auto 0;padding:10px 12px;border:1px solid var(--tactical-line)!important;border-radius:2px;background:var(--tactical-surface)!important;box-shadow:none;color:var(--tactical-ink);text-align:center;text-shadow:none; }
+/* 意图挂在角色头上，结果反馈仍贴着受击对象。 */
+/* 两侧工具独立锚定；中央手牌不参与工具布局。 */

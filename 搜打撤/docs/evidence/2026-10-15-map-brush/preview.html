@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>地图手绘路径与节点光效</title>
+<style>
+html,body{margin:0;min-height:100%;background:#081115;color:#c8d3ce;font:15px system-ui}
+header{position:absolute;top:26px;left:40px;pointer-events:none}h1{font-size:21px;font-weight:500;margin:0 0 8px}p{margin:0;color:#7f928d;font-size:13px}canvas{display:block;width:100vw;height:100vh}
+</style>
+<header><h1>地图 · 手绘路径与节点光效</h1><p>取消节点边框 · 三种宽笔路径 · 当前与可达节点常驻光效</p></header>
+<canvas id="preview"></canvas>
+<script type="module">
+const root='/@fs/D:/素材/代号柒/搜打撤/game/';
+await import(root+'src/core/sdt-facade.js');
+const {drawMapNodeBadge,prepareMapNodeArt}=await import(root+'src/core/map-node-art.js');
+const {drawMapBrushRoad,mapBrushVariant}=await import(root+'src/core/map-brush-art.js');
+const canvas=document.getElementById('preview'),ctx=canvas.getContext('2d');
+const types=['battle','event','shop','chest','fire','door','altar','resource'];
+const labels=['遭遇战','事件','商店','物资点','火堆','闸门','祭坛','材料'];
+await prepareMapNodeArt();
+function draw(){
+  const w=innerWidth,h=innerHeight,dpr=devicePixelRatio||1;
+  canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);
+  ctx.fillStyle='#081115';ctx.fillRect(0,0,w,h);
+  const size=Math.min(1,w/1100),top=160;
+  types.forEach((type,i)=>{
+    const x=w*(.14+(i%4)*.24),y=top+Math.floor(i/4)*145;
+    ctx.save();ctx.translate(x,y);ctx.scale(size,size);
+    const state=i===0?'current':i===1?'legal':'selected';
+    drawMapNodeBadge(ctx,type,labels[i]+(i===0?' · 当前':i===1?' · 可前往':''),state);ctx.restore();
+  });
+  for(let variant=0;variant<3;variant++){
+    let key=String(variant);while(mapBrushVariant(key)!==variant)key+='x';
+    const y=Math.min(h-155,440)+variant*56;
+    const from={x:w*.16,y},to={x:w*.84,y};
+    const section={from,to,c1:{x:w*.4,y:y-12},c2:{x:w*.6,y:y+12}};
+    ctx.save();drawMapBrushRoad(ctx,{edgeKey:key,section},1,{alpha:1});ctx.restore();
+    ctx.fillStyle='#7f928d';ctx.font='13px system-ui';ctx.fillText(String.fromCharCode(65+variant),w*.1,y+5);
+  }
+}
+draw();document.fonts.ready.then(draw);window.addEventListener('resize',draw);
+</script></html>

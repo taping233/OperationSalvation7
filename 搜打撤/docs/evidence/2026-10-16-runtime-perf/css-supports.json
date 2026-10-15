@@ -1,0 +1,68 @@
+[
+  {
+    "file": "game/css/expedition-rewards.css",
+    "property": "background",
+    "supported": true,
+    "value": "linear-gradient(155deg,#a9d4b416,transparent 42%),linear-gradient(0deg,#17684644,#07141199 52%,#07141155)"
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "property": "border",
+    "supported": true,
+    "value": "1px solid #b1ddc34d"
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "property": "margin-block",
+    "supported": true,
+    "value": "0"
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "property": "min-height",
+    "supported": true,
+    "value": "100%"
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "property": "justify-content",
+    "supported": true,
+    "value": "flex-start"
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "property": "justify-content",
+    "supported": true,
+    "value": "flex-start"
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "property": "flex",
+    "supported": true,
+    "value": "1 0 auto"
+  },
+  {
+    "file": "game/css/home-polish.css",
+    "property": "width",
+    "supported": true,
+    "value": "82%"
+  },
+  {
+    "file": "game/css/home-polish.css",
+    "property": "height",
+    "supported": true,
+    "value": "72px"
+  },
+  {
+    "file": "game/css/home-polish.css",
+    "property": "color",
+    "supported": true,
+    "value": "#dbeaf0"
+  },
+  {
+    "file": "game/css/home-polish.css",
+    "property": "animation",
+    "supported": true,
+    "value": "homeHeaderTrace 13s linear infinite"
+  }
+]

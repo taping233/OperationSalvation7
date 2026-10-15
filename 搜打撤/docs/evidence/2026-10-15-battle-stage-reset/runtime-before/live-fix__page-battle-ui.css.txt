@@ -1,0 +1,163 @@
+/* ═══════════════════════════════════════════════════════════════════
+   战斗界面 DOM 覆盖层美术升级（2026-09-24）——对标 page-expedition-hud /
+   page-slot-select 定稿语言：① 冷青统一调色+暖金 #e6cb76 装饰（金发丝线/
+   封条顶线/金短线标题）② 信息排版仪式感（眉题金化、数值表格数字、敌我语义
+   色保留：敌=暖、我=冷）③ 交互三档节奏 + hover 提亮 + 按压快按慢弹 +
+   :focus-visible 金线焦点环 ④ 光标自查（cursor-art 白名单已全覆盖，无新增
+   可点元素）。
+   作用域：仅战斗 DOM 覆盖层——#overlay .card.battle 内的 .sts-topbar /
+   .bt-pile / .sts-intent / .sts-hud 底部战术台（能量球/分栏钮/砸击钮/战术
+   按钮）/ .bt-infuse / .bt-potions，以及战斗中弹层容器（.card.discover
+   发现/抉择、.bt-gy-* 墓地、.bt-settings、.choice-list——这些类只在战斗
+   语境出现，已逐一核实）。.card.chest 结算页与 .bt-hand 通用卡格容器
+   （chests/bag/altar 复用）不碰；卡牌本体（.bt-card/.hs-card card-v3 域）
+   零接触；画布（#game / .sts-figure 立绘）零接触；page-expedition-hud.css
+   已占用的侧栏选择器不重复。
+   老板定版让路（winter.css 尾批 !important，本文件不覆盖）：
+   ① 回合条融入背景（sts-topbar 透明/绝对定位/文字描边色）
+   ② 名牌透明化（sts-nameplate 无框无底）
+   ③ 战场状态文字条隐藏（sts-arena-caption display:none）
+   ④ 发现/选卡磨砂玻璃面板（.card.discover 卡格容器）
+   ⑤ 药水栏纸白底+近黑字（09-13 定版）。
+   硬约束：战斗高频渲染——新增样式零常驻循环动画、零 filter 动画、不用大面积
+   shadow；新增过渡只走 transform/opacity/色彩，统一收在 .18s fast 档，
+   不加慢入场动画（战斗内克制，出入场仅既有结算/演出类保留）。只覆盖不删除。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── T0 统一节奏变量：fast=色彩/光晕/小位移（战斗唯一档），press=按下快进时长
+   （只装 <time>，供 transition-duration 用；松手沿 fast 曲线回弹即"快按慢弹"） ── */
+
+/* 2026-10-03: one height budget for encounter, arena and persistent actions.
+   The body selector overrides winter.css's old negative unit baseline. */
+
+/* ═════════ W1 顶栏信息条 .sts-topbar：老板定版「回合条融入背景」透明态不覆盖；
+   只补一条底缘金封条线（两端渐隐、静态不呼吸）与数值排版 ═════════ */
+
+/* W1b 「第 N 回合」数值：表格数字排版（winter 定版暖字色不覆盖） */
+/* 阶段圆点语义色保留（绿/红/金=战况语义），只收一点辉光半径 */
+
+/* ═════════ W2 牌堆徽章 .bt-pile：冷青档案章 + 金色数值 + 三态 ═════════ */
+/* 可点牌堆（牌库/墓地）：hover 金线上浮；filter 一律不进过渡（性能红线） */
+
+/* ═════════ W3 敌人意图条：冷底金边档案胶囊（战场状态条已被老板定版隐藏，
+   名牌透明化定版不覆盖——本块不碰 caption / nameplate） ═════════ */
+/* 敌方攻击徽：暖米金表格数字（意图条同族） */
+/* 词缀小徽：冷底暖金字（档案批注语言） */
+
+/* ═════════ W4 能量球 + 手牌分栏钮 + 砸击钮 ═════════ */
+
+/* 能量球：金环描亮一档（球体贴图语义不动），数值表格数字 */
+
+/* 手牌分栏钮：冷青档案钮；has-more 提示改静态金强调——压掉 battle.css 的
+   handPageReminder 无限循环（战斗高频场景红线），信息由金边+金晕静态保留 */
+
+/* 砸击钮：保留攻击橙红语义，hover 从整片 brightness 换成金橙描边+微光（省 filter） */
+
+/* ═════════ W5 战术按钮组（背包/撤离/设置 + 结束回合）：金 hover 三态 ═════════ */
+/* 幽灵键 hover：暖金描边 + 冷底提亮 + 上浮（同 #topBtns 定稿语言） */
+/* 撤离键 hover 保留警示红语义（判负入口，不做金） */
+/* 按压：快进 + 松手沿 fast 回弹（快按慢弹） */
+/* 结束回合（主操作金钮）：hover 金晕提亮，不用 filter；按压下沉 */
+
+/* ═════════ W6 注能 / 点选提示条 .bt-infuse：档案横条 + 左缘金标 ═════════ */
+
+/* ═════════ W7 药水栏 .bt-potions：纸白底+近黑字是老板定版语义，不 retint；
+   只统一过渡节奏 + 补按压回弹（拖拽 aim-lift 态不参与） ═════════ */
+
+/* ═════════ W8 战斗中弹层容器（发现/抉择/墓地/战斗设置）：容器层轻触 ═════════ */
+
+/* 墓地/牌库列表：档案表格化（发丝分隔 + 冷青灰元信息）；discover 卡格容器
+   的间距/分隔线是 09-15 定版磨砂玻璃面板语言，不碰 */
+.bt-gy-list { border-top-color: rgba(170,174,177,.16); }
+.bt-gy-row { border-bottom-color: rgba(170,174,177,.1); }
+.bt-gy-row b { color: #f1f1f1; }
+.bt-gy-row .bt-gy-meta { color: #92979a; font-variant-numeric: tabular-nums; }
+/* 战斗设置行卡片：hover 金线反馈 */
+.bt-settings .chk {
+  transition: background var(--bt-fast), border-color var(--bt-fast);
+}
+.bt-settings .chk:hover { border-color: rgba(230,203,118,.4); }
+/* 抉择选项钮：与战术幽灵键同族三态（.card.discover 只在战斗语境出现） */
+#overlay .card.discover .choice-list .ov-btn {
+  transition: color var(--bt-fast), border-color var(--bt-fast),
+    background var(--bt-fast), box-shadow var(--bt-fast), transform var(--bt-fast);
+}
+#overlay .card.discover .choice-list .ov-btn:hover:not(:disabled) {
+  filter: none;
+  color: #f4f4f4;
+  border-color: rgba(230,203,118,.62);
+  background: rgba(21,23,24,.88);
+  box-shadow: 0 0 10px rgba(230,203,118,.16);
+  transform: translateY(-1px);
+}
+#overlay .card.discover .choice-list .ov-btn:active:not(:disabled) {
+  transform: translateY(0) scale(.97);
+  transition-duration: var(--bt-press);
+}
+
+/* ═════════ T2 焦点态：键盘导航金线焦点环（战斗全部可焦元素） ═════════ */
+#overlay .card.discover .choice-list .ov-btn:focus-visible,
+.bt-settings input[type="checkbox"]:focus-visible {
+  outline: 1px solid #e6cb76cc;
+  outline-offset: 4px;   /* 09-25：2→4px，大尺寸光标贴点时金环不再被光标本体盖住中心 */
+  box-shadow: 0 0 0 1px #101112, 0 0 12px rgba(230,203,118,.35);
+}
+
+/* ═════════ T6 光标自查：战斗可点元素全部在 cursor-art.css 白名单内
+   （button:not(:disabled) / .bt-pile.clickable / .bt-card / .bt-potion.need-target
+   的瞄准十字 / :disabled 不可用光标），本文件无新增可点元素，不加光标规则。 ═════════ */
+
+/* ═══════════════════════════════════════════════════════════════════
+   2026-09-25 二波 B 组（对抗/备战域美术大修·第二波）
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── B1 牌堆三徽章：拉开间距 + 数值后小字归属标签（牌库/弃牌/消耗，
+   标签由 battle.piles.view.js 渲染 .bt-pile-cap）── */
+
+/* ── B2 「我方 / 敌方意图」侧标签：10px→12px、提亮 #b2b5b8、加黑影
+   （原规则在 expedition-battle.css，本文件在 <head> 中后置，同特异性直接接管）── */
+
+/* ── B3 BOSS 战场地底图：切 boss-arena（expedition-battle.css 行10 用同特异性接管了
+   boss 底图，本文件在 <head> 末位、同特异性后置取胜；首层图未落盘时自动退回下层 URL）── */
+
+/* ═══════════════════════════════════════════════════════════════════
+   2026-10-15 三波（重制）：战斗「行动档案」二游化重皮肤（Friday）
+   老板对第一版（同日 C1–C9 温和迭代）判定「太丑」，推倒重来。
+   参考语言：星穹铁道式干净深色战斗面板 × 方舟硬朗切角结构 × PGR 式
+   斜切宣示主钮。三色纪律：金=我方动作/主操作，红=敌意/危险，
+   青=能量/我方状态；其余一律中性石墨蓝。几何家族：动作件=左上斜切
+   （指向敌方），信息件=对角硬切角。零 JS、零 DOM 改动、零循环动画，
+   过渡只 transform/opacity/色彩；卡牌本体、canvas、药水栏（老板定版
+   纸白）、冻结 battle.css 零接触。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── R0 令牌与全局氛围：面板色、三色、加深深侧晕让战场更「上镜」 ── */
+
+/* ── R1 顶栏：深色指挥条 + 金 kicker + 大回合数 + 状态徽标按语义换色 ── */
+
+/* ── R2 战场讯标：默认（我方行动教学）耳语化；真实状态=金左缘档案签 ── */
+
+/* ── R3 单位档案牌：对角硬切角面板 + 左缘 3px 身份条（我=青、敌=红），
+   名字加重、攻徽中性化、血条收窄重上色、季度刻度隐去 ── */
+body #overlay .battle-stage.sts.battle-sts .sts-foe:not(.dead) .sts-nameplate {
+  border: 0 !important; border-radius: 0;
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 12px);
+  background: linear-gradient(180deg, var(--bx-panel-2), var(--bx-panel)) !important;
+  box-shadow: none !important; position: relative !important;
+}
+
+/* ── R4 意图章：平行四边形危险告示（红体+红数字），冻结换青；
+   章下渐隐发丝线锚回单位 ── */
+
+/* ── R5 底部指挥台：连续深色台面 + 顶缘金封条 + 斜纹工业质感（静态） ── */
+
+/* ── R6 能量核心：青色辉光六边核 + 金色瞄准角框（二游 lock-on 记号） ── */
+
+/* ── R7 战术技能件：左上斜切家族（动作指向敌方），青左缘换金系图标条 ── */
+
+/* ── R8 结束回合：斜切宣示主钮（金底墨字、加重字距），敌 方阶段灰阶退让 ── */
+
+/* ── R9 牌堆徽章：对角切角档案章，金数值 + 冷灰归属小签 ── */
+
+/* ── R10 注能条与手牌：注能=金左缘档案横条；同名堆叠章=金签；
+   悬停聚焦（其余牌退后一档）沿用上一版结论 ── */

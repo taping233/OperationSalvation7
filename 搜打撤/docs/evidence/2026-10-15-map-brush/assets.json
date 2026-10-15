@@ -1,0 +1,233 @@
+[
+  {
+    "path": "game/assets/scenes/map-brush-1015/battle.webp",
+    "bytes": 46598,
+    "sha256": "7eb923261af7dd1731ee3c067cdfd8cba8fbda8bf7660221c58e04283cd100d1",
+    "size": [
+      256,
+      256
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-3726ed21-3f8e-4ef5-a373-a04c346bc27f.png",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "cc3eb7b7a36eaf07d4df413a47fbf7742c9443ab26c5c5b0488ab66fc1607c3a",
+    "method": "内置 image_gen；原稿保留；等比缩放，lossless RGBA WebP，不重抠不改色",
+    "runtime": false
+  },
+  {
+    "path": "game/assets/scenes/map-brush-1015/event.webp",
+    "bytes": 47946,
+    "sha256": "3f6692ea3a797b2db0d395d3d0e626a867b24d6c509f5aecd307a1497bb27303",
+    "size": [
+      256,
+      256
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-bab0f6ba-5c18-4c84-87b5-6bd71e863c37.png",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "5ce147337f40f5d03b4a984362ea57e45d68d1825cdf185a4213711058124a0b",
+    "method": "内置 image_gen；原稿保留；等比缩放，lossless RGBA WebP，不重抠不改色",
+    "runtime": false
+  },
+  {
+    "path": "game/assets/scenes/map-brush-1015/shop.webp",
+    "bytes": 52390,
+    "sha256": "525dbdd58baad4114e6e87606b986255fa11dc93ad06750da1ad6ef220fe496a",
+    "size": [
+      256,
+      256
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-b1b18092-2c63-4bae-82f6-24c511ea3f5e.png",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "5c8453e21f694ccfd846e84b05f2c187e08440c870818f6158a39f95b09657b2",
+    "method": "内置 image_gen；原稿保留；等比缩放，lossless RGBA WebP，不重抠不改色",
+    "runtime": false
+  },
+  {
+    "path": "game/assets/scenes/map-brush-1015/supply.webp",
+    "bytes": 41252,
+    "sha256": "3b75695118d1421ecce22ce9b76cb6c24b9a5b72619673c5b67cb765b656d148",
+    "size": [
+      256,
+      256
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-e745a0d7-0cc6-41e8-9c6e-5a9339e1c621.png",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "e98f321ea33b30b6f9363d0f23a089cd8c21a13740699669a9b17ffa32bb1bc4",
+    "method": "内置 image_gen；原稿保留；等比缩放，lossless RGBA WebP，不重抠不改色",
+    "runtime": false
+  },
+  {
+    "path": "game/assets/scenes/map-brush-1015/fire.webp",
+    "bytes": 52952,
+    "sha256": "a4535012ecc2ad150017c43838639c7e8d107ee07dec2c552cbd0b088e24aacf",
+    "size": [
+      256,
+      256
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-2f296d5d-69c6-4b40-bdf6-9cfbf6c96b87.png",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "aced81030c012c1ef7aef135b5458fc8e340776dc132690f91b9519d2bf919b7",
+    "method": "内置 image_gen；原稿保留；等比缩放，lossless RGBA WebP，不重抠不改色",
+    "runtime": false
+  },
+  {
+    "path": "game/assets/scenes/map-brush-1015/passage.webp",
+    "bytes": 44968,
+    "sha256": "cdb4fd0a9f2c035c9522588e5f47c6ffd8b32cf08b0ee0b1d2189d9eae73c4e1",
+    "size": [
+      256,
+      256
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-d603be15-941b-4748-9243-66a6018f44de.png",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "a1e14a2243f4086e31ed04787160ef0efdacfdb5faf5c39d717a585044f845d9",
+    "method": "内置 image_gen；原稿保留；等比缩放，lossless RGBA WebP，不重抠不改色",
+    "runtime": false
+  },
+  {
+    "path": "game/assets/scenes/map-brush-1015/altar.webp",
+    "bytes": 44474,
+    "sha256": "052a3dc3283913a4882abf2d9572795351437ad7185e5a4b4238e4a104a560e0",
+    "size": [
+      256,
+      256
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-8d87299f-fcc5-43a8-9fd8-7cd8b8f5ef54.png",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "a6a3ac0dc6ee15952bd0e3bfb7a57c01e3ba395f9c2e1688e03f01c51cfcd744",
+    "method": "内置 image_gen；原稿保留；等比缩放，lossless RGBA WebP，不重抠不改色",
+    "runtime": false
+  },
+  {
+    "path": "game/assets/scenes/map-brush-1015/resource.webp",
+    "bytes": 45954,
+    "sha256": "ab94cf950cc5b3504cb838ed8ebc0fe25efd4d4ffb4db2fed352dd0113c45807",
+    "size": [
+      256,
+      256
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-575a3b7d-1373-42ba-8669-194571a59db1.png",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "sourceSha256": "607099938c323750691484f44b837653b78b4159889bacf153d631fae763f080",
+    "method": "内置 image_gen；原稿保留；等比缩放，lossless RGBA WebP，不重抠不改色",
+    "runtime": false
+  },
+  {
+    "path": "game/assets/scenes/map-brush-1015/trail-a.webp",
+    "bytes": 108416,
+    "sha256": "efe8f48313cd11d5459798875a3079748affd883a8d4b819baa83b3234d0a248",
+    "size": [
+      1024,
+      683
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-a4ee0b8d-e903-41ec-9164-a5d3b2245c77.png",
+    "sourceSize": [
+      1536,
+      1024
+    ],
+    "sourceSha256": "d2a7ea4052fb1201a019fb24b5bfd8c22232c879288da2935946872c0c1d20dc",
+    "method": "内置 image_gen；原稿保留；等比缩放，lossless RGBA WebP，不重抠不改色",
+    "runtime": true
+  },
+  {
+    "path": "game/assets/scenes/map-brush-1015/trail-b.webp",
+    "bytes": 119624,
+    "sha256": "d4496861e7279bef185d0b51c9bcde84830adab44f950a4ce7dde9e050d6aa29",
+    "size": [
+      1024,
+      683
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-3426e2f0-3a08-43b2-98cf-7d7858173d42.png",
+    "sourceSize": [
+      1536,
+      1024
+    ],
+    "sourceSha256": "95ab34bf0c63465b00f79c92a2f9d22bb4b6718fb7c8986dacde9f5c4a39efa9",
+    "method": "内置 image_gen；原稿保留；等比缩放，lossless RGBA WebP，不重抠不改色",
+    "runtime": true
+  },
+  {
+    "path": "game/assets/scenes/map-brush-1015/trail-c.webp",
+    "bytes": 113940,
+    "sha256": "19de4d15633c62fcf0dd70cf2bcafd958175334fbdb4be4102f2863b0eadc7b8",
+    "size": [
+      1024,
+      683
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13fde-7de1-79e2-973e-8a0a40740155\\exec-5cafc6cb-abf2-4092-9466-3a5c0416aa66.png",
+    "sourceSize": [
+      1536,
+      1024
+    ],
+    "sourceSha256": "44c55d370f6683348bc23a26d3a4fa554ce6fafeaf5f69a69e2a8b0cadeea8ec",
+    "method": "内置 image_gen；原稿保留；等比缩放，lossless RGBA WebP，不重抠不改色",
+    "runtime": true
+  }
+]

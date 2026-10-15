@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-10-15T17:22:47.331Z",
+  "remoteBaseline": {
+    "commit": "3d02437e4c3cf6fb4a55f8a05b409932ec35daae",
+    "source": "Parent independently verified remote build baseline",
+    "packageMiB": 143.61,
+    "entryGzipKiB": 314.5,
+    "initialJsGzipKiB": 359.9,
+    "cssGzipKiB": 208.4
+  },
+  "current": {
+    "source": "Isolated selected index snapshot Of9ADu, manifest corrected; build-clean-snapshot.log",
+    "packageMiB": 144.58,
+    "entryGzipKiB": 329.6,
+    "initialJsGzipKiB": 375,
+    "cssGzipKiB": 200.1
+  },
+  "limits": {
+    "packageMiB": 112,
+    "entryGzipKiB": 270,
+    "initialJsGzipKiB": 310,
+    "cssGzipKiB": 136
+  },
+  "result": "Vite output generated; npm run build exit 1 from four existing budget categories. No budget changes or bypass. Normal staged/pre-commit gate excludes build."
+}

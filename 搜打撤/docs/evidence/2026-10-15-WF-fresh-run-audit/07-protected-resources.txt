@@ -1,0 +1,49 @@
+- main:
+  - generic "持有金币":
+    - text: 金币
+    - generic: "3"
+  - generic "攻击力":
+    - text: 攻击
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "bag 背包":
+    - button "关闭背包" [active]:
+    - navigation:
+      - button "随身背包":
+        - generic: "10"
+      - button "安全格":
+        - generic: 2/2
+      - button "消耗口袋":
+        - generic: "1"
+      - generic: DEPOT
+    - generic: DEPOT
+    - heading "背包" [level=2]:
+      - text: 背包
+      - button:
+    - generic: 容量
+    - generic: "10"
+    - generic: /16
+    - text: 金币
+    - generic: "3"
+    - text: 物资估值
+    - generic: "0"
+    - img "gem"
+    - text: 碎片
+    - generic: 1/2
+    - paragraph: 宠物阿七押运中 · 撤离失败也运回基地 · 拖到左栏背包钮取出
+    - img "木材"
+    - generic: 资源
+    - generic: ·古朴
+    - generic: 木材
+    - generic: 木材 ×1。
+    - generic: 押运
+    - img "两把钥匙"
+    - generic: 资源
+    - generic: ·稀有
+    - generic: 两把钥匙
+    - generic: 钥匙 ×2。
+    - generic: 押运

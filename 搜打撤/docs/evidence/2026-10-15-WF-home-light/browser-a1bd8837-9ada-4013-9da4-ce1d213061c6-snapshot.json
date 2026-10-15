@@ -1,0 +1,369 @@
+{
+  "actions": [
+    {
+      "detail": "进入城市→返回主菜单，键盘Shift+Tab聚焦进入城市，壁纸1→2→1；未进入存档。",
+      "type": "real-input"
+    },
+    {
+      "detail": "当前窗口两壁纸光效、局部亮核与文本可读性检查",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "mStart"
+      },
+      "identity": "{\"id\":\"mStart\"}",
+      "key": "menu",
+      "rect": {
+        "height": 72,
+        "width": 358.3999938964844,
+        "x": 84.4749984741211,
+        "y": 287.0375061035156
+      },
+      "selector": "#title .home-plate",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(20, 18, 10)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "108px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "22px 30px 22px 25px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "537.6px"
+      },
+      "tag": "BUTTON",
+      "text": "进入城市\n            \n          01"
+    },
+    {
+      "attributes": {
+        "id": "mGuide"
+      },
+      "identity": "{\"id\":\"mGuide\"}",
+      "key": "menu",
+      "rect": {
+        "height": 48,
+        "width": 293.88751220703125,
+        "x": 84.4749984741211,
+        "y": 372.3625183105469
+      },
+      "selector": "#title .home-plate",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(241, 240, 238)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "72px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "12px 35px 12px 16px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "440.831px"
+      },
+      "tag": "BUTTON",
+      "text": "生存指南\n          02"
+    },
+    {
+      "attributes": {
+        "id": "mAch"
+      },
+      "identity": "{\"id\":\"mAch\"}",
+      "key": "menu",
+      "rect": {
+        "height": 60,
+        "width": 253.4375,
+        "x": 942.0875244140624,
+        "y": 230.40000915527344
+      },
+      "selector": "#title .home-plate",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(241, 240, 238)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "90px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "12px 16px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "380.156px"
+      },
+      "tag": "BUTTON",
+      "text": "成就总览\n          03"
+    },
+    {
+      "attributes": {
+        "id": "btnCardLib"
+      },
+      "identity": "{\"id\":\"btnCardLib\"}",
+      "key": "menu",
+      "rect": {
+        "height": 60,
+        "width": 281.6000061035156,
+        "x": 913.9249877929688,
+        "y": 305.0625
+      },
+      "selector": "#title .home-plate",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(241, 240, 238)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "90px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "12px 16px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "422.4px"
+      },
+      "tag": "BUTTON",
+      "text": "照相馆\n          04"
+    },
+    {
+      "attributes": {
+        "id": "mSettings"
+      },
+      "identity": "{\"id\":\"mSettings\"}",
+      "key": "menu",
+      "rect": {
+        "height": 38.66250228881836,
+        "width": 242.1750030517578,
+        "x": 953.3500366210938,
+        "y": 390.3875122070313
+      },
+      "selector": "#title .home-plate",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(241, 240, 238)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "57.9937px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "6px 14px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "363.262px"
+      },
+      "tag": "BUTTON",
+      "text": "设置\n          05"
+    },
+    {
+      "attributes": {
+        "id": "mCredits"
+      },
+      "identity": "{\"id\":\"mCredits\"}",
+      "key": "menu",
+      "rect": {
+        "height": 38.66250228881836,
+        "width": 242.1750030517578,
+        "x": 953.3500366210938,
+        "y": 433.0500183105469
+      },
+      "selector": "#title .home-plate",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(241, 240, 238)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "57.9937px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "6px 14px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "363.262px"
+      },
+      "tag": "BUTTON",
+      "text": "制作名单\n          06"
+    },
+    {
+      "attributes": {
+        "id": "btnTitleExit"
+      },
+      "identity": "{\"id\":\"btnTitleExit\"}",
+      "key": "menu",
+      "rect": {
+        "height": 38.66250228881836,
+        "width": 242.1750030517578,
+        "x": 953.3500366210938,
+        "y": 475.7124938964844
+      },
+      "selector": "#title .home-plate",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(241, 240, 238)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "57.9937px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "6px 14px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "363.262px"
+      },
+      "tag": "BUTTON",
+      "text": "退出游戏\n          07"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"SECTION\",\"text\":\"进入城市\\n            \\n          01\\n          \\n            \\n            生存指南\\n          02\",\"class\":\"home-command\"}",
+      "key": "groups",
+      "rect": {
+        "height": 326.76251220703125,
+        "width": 358.3999938964844,
+        "x": 84.4749984741211,
+        "y": 93.5999984741211
+      },
+      "selector": "#title .home-command, #title .home-support",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(241, 240, 238)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "490.144px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "537.6px"
+      },
+      "tag": "SECTION",
+      "text": "进入城市\n            \n          01\n          \n            \n            生存指南\n          02"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"ASIDE\",\"text\":\"成就总览\\n          03\\n          \\n            \\n            照相馆\\n          04\\n        \\n        \\n          \\n            \\n            设置\\n          05\\n          \\n            \\n            制作名单\\n          06\\n     \",\"class\":\"home-support\"}",
+      "key": "groups",
+      "rect": {
+        "height": 283.9750061035156,
+        "width": 281.6000061035156,
+        "x": 913.9249877929688,
+        "y": 230.40000915527344
+      },
+      "selector": "#title .home-command, #title .home-support",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(241, 240, 238)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "425.962px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "422.4px"
+      },
+      "tag": "ASIDE",
+      "text": "成就总览\n          03\n          \n            \n            照相馆\n          04\n        \n        \n          \n            \n            设置\n          05\n          \n            \n            制作名单\n          06\n     "
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"IMG\",\"text\":\"\",\"class\":\"\"}",
+      "key": "title",
+      "rect": {
+        "height": 151.4499969482422,
+        "width": 326.1375427246094,
+        "x": 84.39099884033203,
+        "y": 94.26699829101562
+      },
+      "selector": "#title .home-wordmark img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(241, 240, 238)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "32px",
+        "height": "227.175px",
+        "line-height": "0px",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "489.206px"
+      },
+      "tag": "IMG",
+      "text": ""
+    }
+  ],
+  "observedAt": "2026-10-15T13:46:50.529Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "home-light",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-15-WF-home-light/after.png",
+    "docs/evidence/2026-10-15-WF-home-light/ensemble.png"
+  ],
+  "selectors": [
+    {
+      "key": "menu",
+      "selector": "#title .home-plate"
+    },
+    {
+      "key": "groups",
+      "selector": "#title .home-command, #title .home-support"
+    },
+    {
+      "key": "title",
+      "selector": "#title .home-wordmark img"
+    }
+  ]
+}

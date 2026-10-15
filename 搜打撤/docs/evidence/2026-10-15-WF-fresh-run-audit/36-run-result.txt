@@ -1,0 +1,74 @@
+- complementary:
+  - navigation "远征工具":
+    - button "背包：携带卡牌 15/16" [disabled]:
+      - img "bag"
+      - generic: 背包
+      - strong: 15/16
+      - generic: B
+    - button "安全格：保护物资 2/2" [disabled]:
+      - img "lock"
+      - generic: 安全格
+      - strong: 2/2
+    - button "消耗口袋：待复原卡牌 9" [disabled]:
+      - img "cards"
+      - generic: 消耗口袋
+      - strong: "9"
+    - button "map 定位 F" [disabled]:
+      - img "map"
+      - generic: 定位
+      - generic: F
+    - button "map 总览 G" [disabled]:
+      - img "map"
+      - generic: 总览
+      - generic: G
+- main:
+  - navigation "远征章节":
+    - generic: 污染核心
+    - generic: 第 4 层 / 4
+  - generic "持有金币":
+    - generic: "24"
+  - generic "攻击力":
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 0/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog "skull 撤离失败":
+    - heading "skull 撤离失败" [level=2]:
+      - img "skull"
+      - text: 撤离失败
+    - paragraph: 生命归零 · 远征到此为止
+    - paragraph:
+      - img "cross"
+      - text: 散失：卡牌 22 张（含 【一捆木材】、【骷髅王剑】） · 口袋散失 9 张
+    - generic: 损失物资
+    - text: "0"
+    - generic: 抢运回基地
+    - text: 2 张
+    - generic: 安全格占用
+    - text: 2/2
+    - paragraph:
+      - img "medal"
+      - text: 熟练度成长
+    - generic "熟练度 83%"
+    - paragraph: 本局 +5 XP · 75/90 · 差 15 点升级 · 回基地人物页签可查看
+    - paragraph:
+      - img "lock"
+      - text: 宠物阿七抢运回基地
+    - img "木材"
+    - generic: 资源
+    - generic: ·古朴
+    - generic: 木材
+    - generic: 木材 ×1。
+    - img "两把钥匙"
+    - generic: 资源
+    - generic: ·稀有
+    - generic: 两把钥匙
+    - generic: 钥匙 ×2。
+    - button "home 回基地" [active]:
+      - img "home"
+      - text: 回基地
+    - button "skull 再出发":
+      - img "skull"
+      - text: 再出发

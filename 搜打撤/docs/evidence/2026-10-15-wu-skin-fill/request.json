@@ -1,0 +1,32 @@
+{
+  "approval": "老板：看一下现在人物皮肤容器的比例，扩图填满，三个皮肤都是",
+  "container": {
+    "logicalWidth": 838,
+    "logicalHeight": 646,
+    "ratio": 1.2972136222910218,
+    "source": "Codex in-app browser current window .pv12-agent-image-stage"
+  },
+  "items": [
+    {
+      "id": "casual",
+      "asset": "portraits/full/wu-casual-v14.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a13fd0-6e19-7992-a3dc-4c6d1a283626/exec-458a8ca1-08f2-44b9-b6b0-f5e990633df2.png",
+      "prompt": "OUTPAINT this approved game illustration vertically to a canvas aspect ratio of exactly 419:323 (approximately 1.297:1, e.g. 1676x1292). Keep the original image at its full original width, without cropping any of the original left or right edges. Add new painted content ABOVE AND BELOW the existing image so the canvas becomes taller. Preserve the existing central illustration as faithfully as possible: character's face, expression, hair, pose, body proportions, clothes, props, composition, original scale relative to canvas width, and hand-painted anime broad brushwork. Do NOT zoom in, stretch, redesign the face, move the person, change clothes or replace scene. Seamlessly continue the same setting, light, perspective and painterly color masses into added areas. No blank margins, solid bars, mirror padding, duplicated patterns, frames, text, watermarks or UI. Return one complete approximately 13:10 landscape image that fills every edge. Keep her sunglasses, blue shirt, black shorts, boots and motorcycle completely unchanged. Extend the spring tree canopy and soft blue sky upward; extend the motorcycle lower engine/wheel and street/pavement downward in consistent perspective. Do not turn this into a different pose or bike.",
+      "reference": "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu-casual-v14.webp"
+    },
+    {
+      "id": "spring",
+      "asset": "portraits/full/wu-spring-v15.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a13fd0-6e19-7992-a3dc-4c6d1a283626/exec-9d45dfba-8ac1-413d-a9a3-ad8b1b82e91e.png",
+      "prompt": "OUTPAINT this approved game illustration vertically to a canvas aspect ratio of exactly 419:323 (approximately 1.297:1, e.g. 1676x1292). Keep the original image at its full original width, without cropping any of the original left or right edges. Add new painted content ABOVE AND BELOW the existing image so the canvas becomes taller. Preserve the existing central illustration as faithfully as possible: character's face, expression, hair, pose, body proportions, clothes, props, composition, original scale relative to canvas width, and hand-painted anime broad brushwork. Do NOT zoom in, stretch, redesign the face, move the person, change clothes or replace scene. Seamlessly continue the same setting, light, perspective and painterly color masses into added areas. No blank margins, solid bars, mirror padding, duplicated patterns, frames, text, watermarks or UI. Return one complete approximately 13:10 landscape image that fills every edge. Keep her face, silver hair, red gold-trimmed qipao, teacup, seated pose, chair, table and red flowing cloth unchanged. Extend the upper window/room structure, hanging lantern and plum branches naturally upward; extend the snowy lit floor, fabric train and soft shadows downward. Preserve cool winter light and warm red accents.",
+      "reference": "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu-spring-v15.webp"
+    },
+    {
+      "id": "beach",
+      "asset": "portraits/full/wu-beach.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a13fd0-6e19-7992-a3dc-4c6d1a283626/exec-ea93e8ae-c5a4-4c9f-a5e7-25c8cadaf8ee.png",
+      "prompt": "OUTPAINT this approved game illustration vertically to a canvas aspect ratio of exactly 419:323 (approximately 1.297:1, e.g. 1676x1292). Keep the original image at its full original width, without cropping any of the original left or right edges. Add new painted content ABOVE AND BELOW the existing image so the canvas becomes taller. Preserve the existing central illustration as faithfully as possible: character's face, expression, hair, pose, body proportions, clothes, props, composition, original scale relative to canvas width, and hand-painted anime broad brushwork. Do NOT zoom in, stretch, redesign the face, move the person, change clothes or replace scene. Seamlessly continue the same setting, light, perspective and painterly color masses into added areas. No blank margins, solid bars, mirror padding, duplicated patterns, frames, text, watermarks or UI. Return one complete approximately 13:10 landscape image that fills every edge. Keep her refined face, silver ponytail and blue bow, normal leg proportions and seated pose, blue white-star swimsuit, white jacket, orange-white toy watergun and current gradual near-to-far focus unchanged. Extend airy summer sky and sparse palm canopy upward; extend the pier boards and nearby clear turquoise water downward with coherent perspective. Nearby water/splash remain clear, distant scenery only gently softer. No giant foreground foot, no uniform background blur.",
+      "reference": "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu-beach.webp"
+    }
+  ]
+}

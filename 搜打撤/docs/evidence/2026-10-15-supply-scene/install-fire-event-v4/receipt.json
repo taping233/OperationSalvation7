@@ -1,0 +1,30 @@
+{
+  "source": "game/art-source/scenes/fire-shelter-20261015/fire-event-match.png",
+  "source_sha256": "b8d0025dcc453dbb8c2aac4e43e5ebd30d255077b07f8bcd9e8e9c6322573090",
+  "outputs": [
+    {
+      "path": "scenes/scene-fire-anime-v2.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "bytes": 191192,
+      "sha256": "89eb513aae29cf0fc6602f38798f97894cc0ab95022ce59d2ff90cde6443a21d",
+      "previous_sha256": "d346d8ce3664fe5dcda6eaf64979127ced4d4c9c50cbf04447445e52c033b708",
+      "backup": "docs\\evidence\\2026-10-15-supply-scene\\install-fire-event-v4\\previous-scene.webp"
+    },
+    {
+      "path": "thumbs/scenes/scene-fire-anime-v2.webp",
+      "size": [
+        448,
+        252
+      ],
+      "bytes": 24132,
+      "sha256": "4ad5311ee3d6f8b1462bc161ee17db1ef45d5b74a7d7aed2d663ef58cbf370b6",
+      "previous_sha256": "f0e100bc2193634172d9a43ebe0243c6ca7724f5012bf15bd43e4e33a9f1eb7c",
+      "backup": "docs\\evidence\\2026-10-15-supply-scene\\install-fire-event-v4\\previous-thumb.webp"
+    }
+  ],
+  "tests": "Skipped at user request",
+  "browser": "Skipped at user request"
+}

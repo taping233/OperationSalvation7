@@ -1,0 +1,422 @@
+{
+  "task": "WF-fresh-run-audit-1015",
+  "createdAtUtc": "2026-10-15T07:27:33.4420685Z",
+  "origin": "http://127.0.0.1:5315/",
+  "slot": 1,
+  "platform": "Codex In-app Browser",
+  "input": "real clicks, drags, keys; read-only DOM",
+  "sharedPlay": "Human user also played part of the run; unobserved extra progress excluded from agent input counts",
+  "result": "four layers; final boss defeat on turn 6; returned to base; 2 protected resource cards verified; hunter reward claimed",
+  "headAtReport": "a330d25f476e7955e38ce352436af8d510071a37",
+  "sourceFingerprintScope": "report-time working files, not a frozen initial game build",
+  "artifacts": [
+    {
+      "path": "01-first-battle-loot.png",
+      "bytes": 36872,
+      "sha256": "24912ecf1e7204a9481f9b95d1648a2934699ade6c617dcef89093bc4924898b",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "01-first-battle-loot.txt",
+      "bytes": 1955,
+      "sha256": "f236e3265c21b730a9418666935cae4596b111e816d06389ec7124f175924597",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "02-camp-before.png",
+      "bytes": 86602,
+      "sha256": "47b0341459e42adf3d89c0228a3c257fd1e0c23b64cef66fbc4f4852f8f35513",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "02-camp-before.txt",
+      "bytes": 942,
+      "sha256": "c8eb0b8ae78697a204fd3761e4dd6ebffbfe32889afcadceb39626d8a96de893",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "03-bag.png",
+      "bytes": 54979,
+      "sha256": "87f26baf7c59755a313c7065a4ab6b26cf0771f1e60983a4f762b5f084070dcc",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "03-bag.txt",
+      "bytes": 2889,
+      "sha256": "bad9ed7f4376b1a8d34dfd833c2548dc3ee73a722cee2e034fe5be523daf1bc6",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "04-safe-pocket.png",
+      "bytes": 24429,
+      "sha256": "14f83ae30dae02e33e8af16e2cdea9f6f5141b5466fecf9aa112c5edef483c94",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "04-safe-pocket.txt",
+      "bytes": 1118,
+      "sha256": "36206d21f2ab18bc9efb20971d507d8c0e727717e8bc26ef70124430c68f9e8a",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "05-gate.png",
+      "bytes": 90155,
+      "sha256": "e0b0fdac0498ca0f9853707a99cbe4425c0722b0e658e84e65a6211ab715054f",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "05-gate.txt",
+      "bytes": 690,
+      "sha256": "d0630664d65f47e6a33ac05542326804c779d6598bc55d26837cd98277615d41",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "06-story.png",
+      "bytes": 73826,
+      "sha256": "f00d00c209b3b50947697667d2ec7d554b91931578fc19d3026fb9d21613685a",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "06-story.txt",
+      "bytes": 870,
+      "sha256": "f5be9ec64eb5088a08f3fc346669bd3e9345bb10720833d30013a5376dd979a3",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "07-protected-resources.txt",
+      "bytes": 1249,
+      "sha256": "0cca5e0d096ff05c8f0633529d2c6fc67df2db00a6732d29dff397aa9c7a76c6",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "08-energy-drink.txt",
+      "bytes": 4418,
+      "sha256": "e3e764aba1bb28332968bce569567a1203939ba01ffb099009c11ecc32086d3e",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "09-choice-loot.txt",
+      "bytes": 2384,
+      "sha256": "1760d99a519e201a72b1aae3048b9f7c7313736ab8a5538241f66816b830d96b",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "10-left-rewards-not-found.png",
+      "bytes": 40604,
+      "sha256": "cb58a1388c70d629248a636d93aa36af92af68fbc8b08ad60d3bfce16882cd92",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "10-left-rewards-not-found.txt",
+      "bytes": 942,
+      "sha256": "9b497d02ded2450fb5f1a162868369d6ec8a286bcf45888ed719e4e4e7ba5331",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "11-repeated-fragment.txt",
+      "bytes": 698,
+      "sha256": "1ec06b4d6a19d1e0f036eb935d4e932f7e1397e5d0297f1dcf009d3e65cdd0f5",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "12-repair-before.txt",
+      "bytes": 1167,
+      "sha256": "42030c718128869d6e60be626df5f44b6a617b631edc11e22b2714a0e28238b3",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "13-offscreen-infusion.json",
+      "bytes": 320,
+      "sha256": "59115d3cd1aae73ef8311ededc740fcb90271a1d6d957ffcaa3dd2b764eac896",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "14-healing-result.txt",
+      "bytes": 5848,
+      "sha256": "d8734a3083f5be810f720a3ee1526e2c2bb6b56c268511d203d1f2049626093e",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "15-full-bag-guard.txt",
+      "bytes": 4522,
+      "sha256": "cb46cef136e356eceb1781cb47c75d68379a518286247dbda2260aa5e3ea56f8",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "16-full-event-after.txt",
+      "bytes": 942,
+      "sha256": "c96b498f069564c4ea63745ff042fe2cdc46147f57ea7ddce250738a6a17ee9e",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "17-full-event-missing-reward.png",
+      "bytes": 47914,
+      "sha256": "03d87ff0c582eaffad844cda35ee39ffad4655c37381a09dc554af6365b3b509",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "17-full-event-missing-reward.txt",
+      "bytes": 1335,
+      "sha256": "5d6e693bc77dfaa5bf736fd93290877c8d1a1c23f6959f474f8305d5b7a532a0",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "18-equipment-active-surface.txt",
+      "bytes": 3998,
+      "sha256": "b57b21c384fbf962248510ef651474b556237e7a9d37b8a97e1bebe1c525fb42",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "19-payment-no-cancel.txt",
+      "bytes": 1687,
+      "sha256": "a8e52506e76f65a0d61f80b06f6190cfcd09f32cf182bf606120ffefe9c8be22",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "20-full-loot-warning.txt",
+      "bytes": 1980,
+      "sha256": "31846e3714cc85f0b27c905139a3338f438d8cafad5c4bb775d545c4966de9fa",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "21-filter-empty-message.txt",
+      "bytes": 1184,
+      "sha256": "887531994bbd7e2d424d429205ecba197f042150d50ad6795b22fc6e3731ad0f",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "22-tactics-filter-empty.png",
+      "bytes": 37269,
+      "sha256": "76b0e74323a5b816c8b70d6c7f3c0fb60284dbc477eb7525413dfc5a962abf3c",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "22-tactics-filter-empty.txt",
+      "bytes": 1184,
+      "sha256": "d8754ca2baadd0e5879f4ae11293f2ccdadb385c71c2aa087e8a24ca46da8730",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "23-discard-wrong-trigger.txt",
+      "bytes": 1377,
+      "sha256": "1ec6f221d824c6bf65453a88962d3f047e9b456dd20535e66dd42ea45b61cf51",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "24-pass-b-no-use.txt",
+      "bytes": 1360,
+      "sha256": "6d661600ee2e3067c0782ba6ea84ca487f95b85b5af33e181b01441c099cf17f",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "25-pass-b-battle-result.txt",
+      "bytes": 4205,
+      "sha256": "268015003e223a0600d9c7de314d5df80ef303d0b4d9712aea88fd14903b0248",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "26-discovery-candidates.txt",
+      "bytes": 2057,
+      "sha256": "98d628f789e15f6218f1e11cc6d50c74a70c8546192ea69e86ef8ed6b57091ab",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "27-full-camp-no-restore.txt",
+      "bytes": 761,
+      "sha256": "2b9ff59795f27e0d4bb3da2122113e47af55b55326ee9ac48ee8c411f9e28c26",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "28-resource-full-no-feedback.txt",
+      "bytes": 1046,
+      "sha256": "09b08cec356e6b67942cdff9666e900b4ab8976360c1b9a866db7f6b8d851674",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "29-altar-before.txt",
+      "bytes": 1834,
+      "sha256": "394cb42d67425d578ddecd3bcff0d7d48ea20da7597127ba6dcc54d338fbe576",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "30-altar-full-after.txt",
+      "bytes": 1834,
+      "sha256": "9aa6870f8ec671f26ab2965defdc6aa43b262a3002a4bf0d65765a60d3315a7d",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "31-altar-after-reward.txt",
+      "bytes": 1505,
+      "sha256": "b9b7b30dc7f0dfcb409bee39d370bac837f26b6c04ec4c385858ef2324979ea8",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "32-altar-stuck-console.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "32-altar-stuck.png",
+      "bytes": 140758,
+      "sha256": "e5f21541f4921ba97a2fa1be0c6872eda4ee704c5ec05b1d761df7887dacb043",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "32-altar-stuck.txt",
+      "bytes": 1505,
+      "sha256": "8682127cfb432679f83793a5416f011808ff07272c3c2f2f010b5b112be5121a",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "33-altar-reload-recovered.txt",
+      "bytes": 943,
+      "sha256": "3a71a804a01ee0f3d0f4fce559c2bd09006a45b90aa12ed4b2be4fdf1cbabc3b",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "34-boss-start.png",
+      "bytes": 177320,
+      "sha256": "6c500260f86791f971ada030e051bf44b6b072ab166ee7a838f690ff68de8352",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "34-boss-start.txt",
+      "bytes": 4191,
+      "sha256": "b061cf8c57b997278ed08a44c5088af4b11f2347e2d3c005628c1628bdc9baf6",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "35-boss-before-lethal.png",
+      "bytes": 182136,
+      "sha256": "0b79533aa3e10b96ca102f2c7cd933afe0ecaabd107d4682593c1536ce97f790",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "35-boss-before-lethal.txt",
+      "bytes": 4631,
+      "sha256": "44a5794c520345b6132b345a9bfb2d322649e08a6b8f9b7cde821a7c11b023a1",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "36-run-result.png",
+      "bytes": 63527,
+      "sha256": "119fd1cd91dc414bbf1765ac08b3ee9c03eeca3273993435754679a27da83e98",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "36-run-result.txt",
+      "bytes": 2131,
+      "sha256": "e383f67ac7cf4b272c92bdd28f201dfd7f6edbf129c6055599c2fc63ae32d7e1",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "37-base-warehouse.png",
+      "bytes": 119491,
+      "sha256": "046223ef73e0c0235fecb9f191befd605d15bb859c5740b0493aafd22c8f7666",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "37-base-warehouse.txt",
+      "bytes": 2828,
+      "sha256": "7da123df5c8aeb6def60700c8010c35459dd34d291af319dcd1a1dd3556a2e23",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "38-warehouse-wood-no-navigation.txt",
+      "bytes": 2819,
+      "sha256": "6febcc5f8d303ccbb0660930f9533783f6c88762e7057b53edc174300f1c40aa",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "39-achievement-reward.png",
+      "bytes": 92231,
+      "sha256": "c0a396f444ff75a6ec58a8e629473b2cc7feef9da65f4e932e38a1831aaa1c0c",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "39-achievement-reward.txt",
+      "bytes": 2687,
+      "sha256": "72aebbafd897df4b27dfbea1c62df1a9668c4513d9bf13e8c97de7c2b945e515",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "40-final-base.png",
+      "bytes": 117417,
+      "sha256": "7704b912ad5709db4c7d12e71c1c9b11059cec388d44bc058ab307ec67c5e608",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "40-final-base.txt",
+      "bytes": 1588,
+      "sha256": "2ab827df89941f0349c5f5bac77e56109ae7d66b8f1bc0d645bfad3bae468813",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "40-final-console.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "source": "Codex IAB screenshot / read-only DOM / recorded observation"
+    },
+    {
+      "path": "README.md",
+      "bytes": 16651,
+      "sha256": "b5ebb4783d60f3bba3695a4f099d1c424c8994cc1c639a80908a80e7e0113550",
+      "source": "Friday review report"
+    }
+  ],
+  "sources": [
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "sha256": "13317e4013629ee7168f52c366246200d03abb5cf807a13738d4baa580979177"
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "sha256": "18575b0942f705175f5cc95c0b0664ca5b5f0fd08a779bf2c5209b4f80551b3e"
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "sha256": "9317f937599b3df3e04ee97286984f98a210ca57ba561588e09a5beb4f4e281d"
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "sha256": "2f7c4530d9d778d226296ad219d024e8bc5a6ced8e0ab5aeacb6bbf987352b74"
+    },
+    {
+      "path": "game/src/hub/game.bag.js",
+      "sha256": "fa3448994144f65019c476c7996d79b5e407fb8965bc4f79382a865fa0205fb1"
+    },
+    {
+      "path": "game/src/hub/game.bag.view2.js",
+      "sha256": "67ee01779031d5230a345427e39ddffd49e87731a00d33a768ac95e249bfd9a5"
+    },
+    {
+      "path": "game/src/hub/game.bag.rules.js",
+      "sha256": "22f2044ce50d75fdef9a5826a4e4239eae8555555232f6a258f2c7c8198ec260"
+    },
+    {
+      "path": "game/src/hub/hub.warehouse.js",
+      "sha256": "93560f4e118c562feebe83cea64451f86040260256209a56092ddfb526dfc82e"
+    },
+    {
+      "path": "game/src/hub/game.hub.pages.js",
+      "sha256": "e4a16d08d1dda7e07e5496009754239d9c85cdb190f3b8bab21eb0913aac9408"
+    },
+    {
+      "path": "game/src/battle/bag/battle.equipment.js",
+      "sha256": "cf6200dac1dcc2a4b392003d608ab005655462f80bed9ac0016f5d114057cd74"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "sha256": "e7c8a9e42e2985ba717f07f4d898ed580d3e9647d7a1501a4e03ed70b95bbf89"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "0accccaccbb0fe852ebba12692c7f5eba96bbb29746015d409435090c6f5548f"
+    },
+    {
+      "path": "game/src/ui/term-tips.js",
+      "sha256": "d12b84edaf6699d95378fdbd9295fa82f12af397c36ac8590d7c89cb75099004"
+    }
+  ]
+}

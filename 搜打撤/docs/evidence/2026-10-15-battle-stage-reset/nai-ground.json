@@ -1,0 +1,61 @@
+{
+  "status": "generated",
+  "recipe_version": "2.0",
+  "cleanup_version": "1.0",
+  "request": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\nno humans, empty broad winter science fiction transit plaza pavement, matte dark slate composite slabs, thin snow banks only along extreme left and right edges, broad pale blue reflected skylight\n\nIndependent GROUND PLANE layer for a side-view 2D combat stage, architecture and sky will be supplied separately. Draw the floor only.\n\nWide landscape 16:9. Camera horizon at 48 percent height. Upper half is blank plain white without architecture. Ground occupies lower half, extends beyond all bottom edges. Wide unobstructed horizontal standing area at 62 percent height. Gentle perspective slab joints converge at center horizon. No wall or raised platform.\n\nOvercast cold blue daylight. Muted blue gray matte floor, broad calm painted value groups. Snow limited to side edges. No glossy wet reflections.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 10150152,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, person, character, buildings, skyline, furniture, railing, stairs, UI, cobblestone, heavy cracks, tiny paving, busy texture",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\nno humans, empty broad winter science fiction transit plaza pavement, matte dark slate composite slabs, thin snow banks only along extreme left and right edges, broad pale blue reflected skylight\n\nIndependent GROUND PLANE layer for a side-view 2D combat stage, architecture and sky will be supplied separately. Draw the floor only.\n\nWide landscape 16:9. Camera horizon at 48 percent height. Upper half is blank plain white without architecture. Ground occupies lower half, extends beyond all bottom edges. Wide unobstructed horizontal standing area at 62 percent height. Gentle perspective slab joints converge at center horizon. No wall or raised platform.\n\nOvercast cold blue daylight. Muted blue gray matte floor, broad calm painted value groups. Snow limited to side edges. No glossy wet reflections.",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, person, character, buildings, skyline, furniture, railing, stairs, UI, cobblestone, heavy cracks, tiny paving, busy texture",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [],
+  "output": "docs\\evidence\\2026-10-15-battle-stage-reset\\nai\\ground.png",
+  "method": "NAI guarded client; separate layer draft, then built-in repaint",
+  "seed": 10150152,
+  "sha256": "e7923013138a2130f13d10b4d6b0365b188b8989c90d976df6e0ce3e2c70ead5"
+}

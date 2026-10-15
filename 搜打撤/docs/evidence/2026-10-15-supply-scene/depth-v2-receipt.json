@@ -1,0 +1,12 @@
+{
+  "tool": "built-in imagegen",
+  "input": "game/art-source/scenes/supply-petal-20261015/interior-searcher-imagegen.png",
+  "output": "game/art-source/scenes/supply-petal-20261015/interior-searcher-depth-v2.png",
+  "size": [
+    1672,
+    941
+  ],
+  "sha256": "cb49808dab5d4e9742b8a53d81fbc0ff7e375b448366e50416f713759f5b556f",
+  "runtime_installed": false,
+  "review": "Foreground doorway and conveyor frame a deeper room; curved conveyor, floor seams and door light guide toward searching character. User approval pending."
+}

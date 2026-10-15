@@ -1,0 +1,22 @@
+{
+  "toml": "passed",
+  "non_target_structure": "unchanged",
+  "non_target_bytes": "preserved",
+  "backup": ".codex\\config.toml.bak-nai-profile-20261015-215723",
+  "sha256": "118471aeea80ae8cddb522e5a9eed3a2b05d58c8db66c8256c8d56539dc880a6",
+  "fresh_profile_probe": {
+    "profile": "project-network",
+    "http": 200
+  },
+  "existing_chat": "Network remains restricted until the host adopts the new permission profile",
+  "proxy": "http://127.0.0.1:12450",
+  "sandbox_probe": {
+    "proxy_tcp": 10013,
+    "direct": "DNS 11001"
+  },
+  "approved_network_probe": {
+    "proxy_tcp": 0,
+    "direct_http": 200,
+    "proxy_http": 200
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "status": "generated",
+  "recipe_version": "2.0",
+  "cleanup_version": "1.0",
+  "request": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\nscenery, no humans. A futuristic emergency supply capsule unfolded like a mechanical flower beneath a sweeping elevated monorail. Three broad ivory composite shell panels open around a low circular platform, sheltering sealed orange ration cases, a medical container and neatly stacked supply crates. A small suspended amber worklight makes this unattended cache feel like a tiny welcoming island in an abandoned winter city.\n\nWide game environment illustration, a discoverable supply point, futuristic urban exploration.\n\n16:9 landscape, eye-level three-quarter wide view. Capsule entirely visible in upper-left and middle-left, spanning roughly 35 percent of image width, not a close-up product. Rail curves from upper left toward distant center. Open quiet dark architecture on right 40 percent for interface overlay, quiet foreground lower 25 percent. Clear walkable approach and strong foreground middle ground distance.\n\nCold pale turquoise winter daylight, muted blue-gray architecture, ivory shell, concentrated amber-orange accents. Thin snow along ledges, clear wet ground reflecting warm light. Large readable shapes, sparse structural detail, calm atmospheric depth.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1024,
+      "height": 576,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 101524017,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, character, girl, medieval, fantasy castle, ornate treasure chest, golden treasure, overgrown jungle, crowded objects, tiny unreadable machinery, fisheye, isometric, logo",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\nscenery, no humans. A futuristic emergency supply capsule unfolded like a mechanical flower beneath a sweeping elevated monorail. Three broad ivory composite shell panels open around a low circular platform, sheltering sealed orange ration cases, a medical container and neatly stacked supply crates. A small suspended amber worklight makes this unattended cache feel like a tiny welcoming island in an abandoned winter city.\n\nWide game environment illustration, a discoverable supply point, futuristic urban exploration.\n\n16:9 landscape, eye-level three-quarter wide view. Capsule entirely visible in upper-left and middle-left, spanning roughly 35 percent of image width, not a close-up product. Rail curves from upper left toward distant center. Open quiet dark architecture on right 40 percent for interface overlay, quiet foreground lower 25 percent. Clear walkable approach and strong foreground middle ground distance.\n\nCold pale turquoise winter daylight, muted blue-gray architecture, ivory shell, concentrated amber-orange accents. Thin snow along ledges, clear wet ground reflecting warm light. Large readable shapes, sparse structural detail, calm atmospheric depth.",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, character, girl, medieval, fantasy castle, ornate treasure chest, golden treasure, overgrown jungle, crowded objects, tiny unreadable machinery, fisheye, isometric, logo",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [],
+  "output": "game/art-source/scenes/supply-petal-20261015/nai-draft.png",
+  "concept": "高架下的花瓣式补给舱",
+  "ratio": "16:9",
+  "runtime_installed": false,
+  "seed": 101524017,
+  "sha256": "a42513de17b74acfee54015bd3adb5c4ab4ef9aa4a9f457e88d18212efe61a9f"
+}

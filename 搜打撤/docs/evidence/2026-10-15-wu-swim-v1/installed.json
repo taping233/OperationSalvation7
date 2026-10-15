@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-15",
+  "approval": "老板：替换进游戏里",
+  "skin": {
+    "character": "wu",
+    "id": "beach",
+    "name": "盛夏·水枪"
+  },
+  "source": ".tmp/imagegen/wu-swim-v1-20261015/wu-swim-v1-stars-eyes.png",
+  "sourceSha256": "b20f17fbd6da34b582821c8a1827779e037a95835338f4fa61b0542875d429d0",
+  "target": {
+    "path": "portraits/full/wu-beach.webp",
+    "ext": "webp",
+    "license": "项目自有（AI 生成）",
+    "bytes": 341540,
+    "sha256": "ab6ef6ca97605bae477829103297195127eca98efcee31237060b9eaff626b1f",
+    "source": "docs/evidence/2026-10-15-wu-swim-v1/installed.json"
+  },
+  "dimensions": [
+    1672,
+    941
+  ],
+  "backup": ".tmp/imagegen/wu-swim-v1-20261015/before-install-wu-beach.webp",
+  "backupSha256": "17c2e98bf7381a39b2561d3cbda220453c9f3310beb30fd6ee287a22ba9b2f46",
+  "encoding": "Pillow WebP quality=92 method=6 RGB; original dimensions",
+  "references": "Existing skin mapping and generated art-manifest already reference this path; no mapping/code change required.",
+  "cache": "Existing assetUrl build-version cache invalidation retained; current verification uses fresh browser navigation."
+}

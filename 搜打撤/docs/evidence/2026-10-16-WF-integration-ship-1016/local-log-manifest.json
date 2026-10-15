@@ -1,0 +1,143 @@
+{
+  "at": "2026-10-15T17:32:31.527Z",
+  "evidence": [
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/2026-10-15T16-51-41.750Z-6441ab2a-staged.json",
+      "bytes": 2895666,
+      "sha256": "74a4757666d20896dd00088605fc00aa52be25ff81d399217b9101b1f2c8739d",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/2026-10-15T16-51-41.750Z-6441ab2a-staged.log",
+      "bytes": 31295,
+      "sha256": "e37f8a53d09d8d5f0fd7cebed7ce65712a04c2d4ca69d4cdb9a5b4a4ef4e97f5",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/2026-10-15T16-58-22.707Z-b80391e3-staged.json",
+      "bytes": 3052693,
+      "sha256": "2783e05dc3384e5906264a38090255bcac68851d11aa579e2c4953cf94da1371",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/2026-10-15T16-58-22.707Z-b80391e3-staged.log",
+      "bytes": 30515,
+      "sha256": "2bc48f4b9ea5bb0c83a2332756ce7770723408199537bdc10f64a10f9ba3cbc4",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/2026-10-15T17-06-02.358Z-e5db1853-staged.json",
+      "bytes": 2897664,
+      "sha256": "3aadc884e30dff28742ed161e276dc0d4291a806631257b86d814ae4f59fa7c3",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/2026-10-15T17-06-02.358Z-e5db1853-staged.log",
+      "bytes": 31455,
+      "sha256": "e6252bc56cc114c0b99f17a25823984125fadad4a4aafc4d961ab67926c42e26",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/2026-10-15T17-21-49.506Z-dea81c7a-staged.json",
+      "bytes": 2897664,
+      "sha256": "6f87607240310408c8b1a3e250e94f12f66fdc784e6540f4dad157d9a3f26f5a",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/2026-10-15T17-21-49.506Z-dea81c7a-staged.log",
+      "bytes": 31455,
+      "sha256": "0f5aec50d2e82be0c26b68aabf8ba42cf81f1f5650e9260c185c5293c58b0817",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/2026-10-15T17-25-19.753Z-b8543a65-staged.json",
+      "bytes": 3052693,
+      "sha256": "171e72bb626fe5e31d966f6de1c8d69bd901959acaca480b8d009629351610f7",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/2026-10-15T17-25-19.753Z-b8543a65-staged.log",
+      "bytes": 30512,
+      "sha256": "96964eb316f8990a9aa1c20e962beee28c0413b348d58dacb3fae1cc812e0f4d",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/build-clean-snapshot.log",
+      "bytes": 22899,
+      "sha256": "8f36db6784d1caf60d48addf3d47775472935d52898d9fe654bedaca5edc9726",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/combined-target.log",
+      "bytes": 6557,
+      "sha256": "174bb002450b679f4f0ca00e0d7c91690da8ed0e27b97635288586632aa40869",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/final-staged-two-forks.log",
+      "bytes": 45282,
+      "sha256": "57da982d39d6c479d90bbc83a46acb5228fb60dcc18d51c0bc6d317ab9e42909",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/final-staged.log",
+      "bytes": 46332,
+      "sha256": "d9e02a56c0b364d7d0b9116a828dfb573df2bcd8aa749c15c1ff6cac40b1957c",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/frozen-final.log",
+      "bytes": 36649,
+      "sha256": "7c8264cbec28ca4725826f58992c037f8e2c87c348ebdb5d87b3b9fb9c9b9cff",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/frozen-release.log",
+      "bytes": 37687,
+      "sha256": "23db9c774c358e213ec6edddd60235f58b283dda5c3c37580a0166b987a32689",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/frozen-run.log",
+      "bytes": 37543,
+      "sha256": "8a43ab7d889957f9c25ad0f479e40902a1f3bad5c47569a87e361f28bb5f04f1",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/full-clean-snapshot-final.json",
+      "bytes": 1463204,
+      "sha256": "164af7f44c9388eafde83c28ce8df64d20c1669d5445f92ebd7270108f546133",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/full-clean-snapshot-final.log",
+      "bytes": 88750,
+      "sha256": "9da7b363663d81196f3b339e3daf2ba6cf5602d6d483f569ad167b808bfd8128",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/full-clean-snapshot-serial.json",
+      "bytes": 1463702,
+      "sha256": "d7be629192c91d5e519881e81982e5875fc440408087491007a29a1bc5a4ebda",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/full-clean-snapshot-serial.log",
+      "bytes": 86882,
+      "sha256": "d2cd06afe1243fb30824c4d9823eb65d64e6ab7466fcb28b656d2b9523daa3c7",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/full-clean-snapshot.json",
+      "bytes": 1465149,
+      "sha256": "6e49591e23d0727ac1e6b687da086e0e659fcf06a39b9a4727490fcfbb62e28a",
+      "obtained": "Local isolated gate output; excluded from Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-integration-ship-1016/full-clean-snapshot.log",
+      "bytes": 87840,
+      "sha256": "fa6f6d1b240c57ee5d2c354c9eb0b5bcddbcfcc00dd062942915cd5dc1d0ff07",
+      "obtained": "Local isolated gate output; excluded from Git"
+    }
+  ]
+}

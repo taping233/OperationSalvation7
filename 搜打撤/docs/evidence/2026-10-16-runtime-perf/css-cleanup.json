@@ -1,0 +1,355 @@
+[
+  {
+    "file": "game/css/entry-events.css",
+    "beforeSha256": "479c508346eeb7f02d7d48f8e0ccc6badf71f492949f7200363a8ce84ca54d88",
+    "afterSha256": "3f8206b6fdeb71c67fd55498c1d3807aecfba37dacc1b85d754238d4557fb214",
+    "beforeBytes": 22398,
+    "afterBytes": 22309,
+    "removed": [
+      {
+        "kind": "retired-button",
+        "line": 133,
+        "before": "body:has(#overlay :is(.entry-scene,.entry-reward-scene)) #bagBtnFloat { display:none; }"
+      }
+    ]
+  },
+  {
+    "file": "game/css/expedition.css",
+    "beforeSha256": "aa750542e9251dfe19c321913f870ec633cab945698c42866e1120f14f5376b8",
+    "afterSha256": "9b8b2003a218f190cd5b8fcfac55071b548cbdda70027ef0f15d0e0950fb030b",
+    "beforeBytes": 23108,
+    "afterBytes": 22309,
+    "removed": [
+      {
+        "kind": "retired-button",
+        "line": 319,
+        "before": "#bagBtnFloat.bag-full { box-shadow: 0 0 0 2px #ce8873, 0 4px 18px #0a0b0c88; }"
+      },
+      {
+        "kind": "retired-button",
+        "line": 320,
+        "before": "#bagBtnFloat.bag-full::after { content: '满'; position: absolute; top: -6px; right: -6px; padding: 1px 6px; border-radius: var(--radius-panel); background: #ce8873; color: #1a1c1e; font: 700 10px/1.4 ui-monospace, monospace; }"
+      },
+      {
+        "kind": "retired-button",
+        "line": 322,
+        "before": "#bagBtnFloat.bag-full { animation: bagFullBreath 2.2s ease-in-out infinite; }"
+      },
+      {
+        "kind": "retired-button",
+        "line": 324,
+        "before": "body.reduce-motion #bagBtnFloat.bag-full { animation: none; }"
+      },
+      {
+        "kind": "retired-button",
+        "line": 325,
+        "before": "#bagBtnFloat.bag-full { animation: none; }"
+      },
+      {
+        "kind": "retired-animation",
+        "line": 323,
+        "before": "@keyframes bagFullBreath { 50% { transform: scale(1.055); } }"
+      }
+    ]
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "beforeSha256": "81f88646717ca7175f305b010ed6ddba1908296335e6e4e4cd8691e2fad6811c",
+    "afterSha256": "815efdfc7f9a346f023d58e015918303c30341407901ae3353fcfa3e3405f9f9",
+    "beforeBytes": 27361,
+    "afterBytes": 27157,
+    "removed": [
+      {
+        "kind": "retired-button",
+        "line": 174,
+        "before": "body:has(#overlay:not([hidden]) .reward-replica) #bagBtnFloat { display:none; }"
+      },
+      {
+        "kind": "overwritten-declaration",
+        "selector": "body #overlay .card:has(.reward-replica) .reward-replica .reward-unit",
+        "property": "background",
+        "value": "none",
+        "line": 139,
+        "start": 14358,
+        "end": 14375,
+        "survivor": {
+          "file": "game/css/expedition-rewards.css",
+          "line": 257,
+          "value": "linear-gradient(155deg,#a9d4b416,transparent 42%),linear-gradient(0deg,#17684644,#07141199 52%,#07141155)"
+        },
+        "bytes": 15,
+        "before": "background:none; "
+      },
+      {
+        "kind": "overwritten-declaration",
+        "selector": "body #overlay .card:has(.reward-replica) .reward-replica .reward-unit",
+        "property": "border",
+        "value": "0",
+        "line": 139,
+        "start": 14348,
+        "end": 14358,
+        "survivor": {
+          "file": "game/css/expedition-rewards.css",
+          "line": 256,
+          "value": "1px solid #b1ddc34d"
+        },
+        "bytes": 8,
+        "before": "border:0; "
+      },
+      {
+        "kind": "overwritten-declaration",
+        "selector": "body #overlay .card:has(.reward-replica) .reward-replica .reward-objects",
+        "property": "margin-block",
+        "value": "auto",
+        "line": 138,
+        "start": 14052,
+        "end": 14071,
+        "survivor": {
+          "file": "game/css/expedition-rewards.css",
+          "line": 253,
+          "value": "0"
+        },
+        "bytes": 17,
+        "before": "margin-block:auto; "
+      },
+      {
+        "kind": "overwritten-declaration",
+        "selector": "body #overlay .card:has(.reward-replica) .reward-replica .reward-objects",
+        "property": "min-height",
+        "value": "0",
+        "line": 138,
+        "start": 14021,
+        "end": 14035,
+        "survivor": {
+          "file": "game/css/expedition-rewards.css",
+          "line": 253,
+          "value": "100%"
+        },
+        "bytes": 12,
+        "before": "min-height:0; "
+      },
+      {
+        "kind": "overwritten-declaration",
+        "selector": "body #overlay .card:has(.reward-replica) .reward-replica .reward-objects",
+        "property": "justify-content",
+        "value": "safe center",
+        "line": 138,
+        "start": 13957,
+        "end": 13986,
+        "survivor": {
+          "file": "game/css/expedition-rewards.css",
+          "line": 253,
+          "value": "flex-start"
+        },
+        "bytes": 27,
+        "before": "justify-content:safe center; "
+      },
+      {
+        "kind": "overwritten-declaration",
+        "selector": "body #overlay .card:has(.reward-replica) .reward-replica .reward-objects",
+        "property": "justify-content",
+        "value": "center",
+        "line": 138,
+        "start": 13933,
+        "end": 13957,
+        "survivor": {
+          "file": "game/css/expedition-rewards.css",
+          "line": 253,
+          "value": "flex-start"
+        },
+        "bytes": 22,
+        "before": "justify-content:center; "
+      },
+      {
+        "kind": "overwritten-declaration",
+        "selector": "body #overlay .card:has(.reward-replica) .reward-replica .reward-objects",
+        "property": "flex",
+        "value": "none",
+        "line": 138,
+        "start": 13883,
+        "end": 13894,
+        "survivor": {
+          "file": "game/css/expedition-rewards.css",
+          "line": 253,
+          "value": "1 0 auto"
+        },
+        "bytes": 9,
+        "before": "flex:none; "
+      }
+    ]
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "beforeSha256": "bbd437cf9e4d19db05c64c44fe7dd938b0a74827685807eb7bd0f06057781ee1",
+    "afterSha256": "9b57efe9e1155680aacaead2c14e30d7864b4a4ca548521d323446f9ad3ef0a1",
+    "beforeBytes": 28887,
+    "afterBytes": 28822,
+    "removed": [
+      {
+        "kind": "retired-button",
+        "line": 133,
+        "before": "body:has(#overlay .cls-pool-page) #bagBtnFloat { display:none; }"
+      }
+    ]
+  },
+  {
+    "file": "game/css/expedition-shop.css",
+    "beforeSha256": "b2307aabad2cdaf87e9243319f39e2cba39fbf1ae0576360fbf0c885531a4dc9",
+    "afterSha256": "838a35789b6a3ccd6a71f71388aecd3f86e4c44215e75f8ef0abfe1f4b807bd2",
+    "beforeBytes": 17970,
+    "afterBytes": 17897,
+    "removed": [
+      {
+        "kind": "retired-button",
+        "line": 98,
+        "before": "body:has(#overlay:not([hidden]) .shop-pg) #bagBtnFloat { display:none; }"
+      }
+    ]
+  },
+  {
+    "file": "game/css/map-cover.css",
+    "beforeSha256": "49f1dd24d204e4ad46371017ec4ba2552944f93dc4c26982bf623133ef8ec805",
+    "afterSha256": "18207169b4f262d12e6e5aa5eb6accb57cdb6a07299d38dcc56330ebe568c09c",
+    "beforeBytes": 9510,
+    "afterBytes": 9324,
+    "removed": [
+      {
+        "kind": "retired-button",
+        "line": 102,
+        "before": "body:not(.lobby):not(.scene-battle-3d) #bagBtnFloat { background: #2a2d30; border: 1px solid #a8acaf; border-radius: 0; box-shadow: 3px 3px 0 #0e0f1040; color: #f1f0ee; }"
+      },
+      {
+        "kind": "retired-button",
+        "line": 103,
+        "before": "body:not(.lobby):not(.scene-battle-3d) :is(#topBtns button, #bagBtnFloat, #routePanel button):focus-visible { outline: 2px solid #f1d67f; outline-offset: 4px; }"
+      }
+    ]
+  },
+  {
+    "file": "game/css/page-expedition-hud.css",
+    "beforeSha256": "9ba345bf95b9e43229f028465824dc9366d8fc7d49d68e2c78b670a6b5956029",
+    "afterSha256": "7662bc1d0e87b589cc8ac23e78f6899b9515a04b4932acf334ffd03ba2a84128",
+    "beforeBytes": 37367,
+    "afterBytes": 36040,
+    "removed": [
+      {
+        "kind": "retired-button",
+        "line": 46,
+        "before": "body:not(.scene-battle-3d) #bagBtnFloat { bottom:calc(188px + 12px)!important; }"
+      },
+      {
+        "kind": "retired-button",
+        "line": 66,
+        "before": "body:not(.lobby):not(.scene-battle-3d) #bagBtnFloat { right:24px!important; bottom:24px!important; }"
+      },
+      {
+        "kind": "retired-button",
+        "line": 95,
+        "before": "body:not(.lobby):not(.scene-battle-3d):not(:has(#overlay:not([hidden]))) #bagBtnFloat { display:none; }"
+      },
+      {
+        "kind": "retired-button",
+        "line": 109,
+        "before": "#sidebar, #topBtns, #resHud, #logPanel, #bagBtnFloat {\r\n  --exh-fast: .18s cubic-bezier(.33, 1, .68, 1);\r\n  --exh-lift: .32s cubic-bezier(.3, 1.4, .45, 1);\r\n  --exh-press: .09s ease-out;\r\n}"
+      },
+      {
+        "kind": "retired-button",
+        "line": 332,
+        "before": "#bagBtnFloat {\r\n  background: linear-gradient(180deg, rgba(17,18,20,.9), rgba(13,14,15,.92));\r\n  border-color: rgba(170,174,177,.3); border-radius:0;\r\n  box-shadow: 0 4px 14px rgba(7,7,8,.4), inset 0 1px 0 rgba(223,224,226,.05);\r\n  transition: background var(--exh-fast), border-color var(--exh-fast), color var(--exh-fast),\r\n    box-shadow var(--exh-fast), transform var(--exh-fast);\r\n}"
+      },
+      {
+        "kind": "retired-button",
+        "line": 339,
+        "before": "#bagBtnFloat:hover {\r\n  background: rgba(21,23,24,.92);\r\n  border-color: rgba(230,203,118,.6);\r\n  color: #f4f4f4;\r\n  box-shadow: 0 6px 16px rgba(7,7,8,.45), 0 0 10px rgba(230,203,118,.15);\r\n  transform: translateY(-2px);\r\n}"
+      },
+      {
+        "kind": "retired-button",
+        "line": 346,
+        "before": "#bagBtnFloat:active {\r\n  transform: translateY(0) scale(.95);\r\n  transition-duration: var(--exh-press);\r\n}"
+      },
+      {
+        "kind": "retired-button",
+        "line": 350,
+        "before": "#bagBtnFloat #bagCountFloat { color: #f4e2a5; font-variant-numeric: tabular-nums; font-family: 'Cascadia Code', monospace; }"
+      },
+      {
+        "kind": "retired-button",
+        "line": 353,
+        "before": "#sidebar .route-option:focus-visible,\r\n#topBtns button:focus-visible,\r\n#bagBtnFloat:focus-visible,\r\n#logPanel .log-toggle:focus-visible {\r\n  outline: 1px solid #e6cb76cc;\r\n  outline-offset: 2px;\r\n  box-shadow: 0 0 0 1px #101112, 0 0 12px rgba(230,203,118,.35);\r\n}"
+      }
+    ]
+  },
+  {
+    "file": "game/css/home-polish.css",
+    "beforeSha256": "5f668d5eab9e725e1a6cf13c0268b83f6a11d1d6d67b0e2a3a7c281e8dc5047a",
+    "afterSha256": "ce6216ad0506bc492d4dff65f88eab8bb5488efa1bc32f5c89b41d462e47cd29",
+    "beforeBytes": 38108,
+    "afterBytes": 38009,
+    "removed": [
+      {
+        "kind": "overwritten-declaration",
+        "selector": "body #title.home-composed .home-primary .home-guide",
+        "property": "width",
+        "value": "100%",
+        "line": 248,
+        "start": 17475,
+        "end": 17488,
+        "survivor": {
+          "file": "game/css/home-polish.css",
+          "line": 275,
+          "value": "82%"
+        },
+        "bytes": 11,
+        "before": "width: 100%; "
+      },
+      {
+        "kind": "overwritten-declaration",
+        "selector": "body #title.home-composed .home-primary .home-guide",
+        "property": "height",
+        "value": "82px",
+        "line": 248,
+        "start": 17461,
+        "end": 17475,
+        "survivor": {
+          "file": "game/css/home-polish.css",
+          "line": 275,
+          "value": "72px"
+        },
+        "bytes": 12,
+        "before": "height: 82px; "
+      },
+      {
+        "kind": "overwritten-declaration",
+        "selector": "body #title.home-composed .home-collection .home-line-icon",
+        "property": "color",
+        "value": "#e0d6bd",
+        "line": 224,
+        "start": 15648,
+        "end": 15664,
+        "survivor": {
+          "file": "game/css/home-polish.css",
+          "line": 309,
+          "value": "#dbeaf0"
+        },
+        "bytes": 14,
+        "before": "color: #e0d6bd; "
+      },
+      {
+        "kind": "overwritten-declaration",
+        "selector": "body #title.home-composed .home-brand::after",
+        "property": "animation",
+        "value": "homeRule 1.3s var(--ease-entrance) .5s both",
+        "line": 95,
+        "start": 5339,
+        "end": 5395,
+        "survivor": {
+          "file": "game/css/home-polish.css",
+          "line": 212,
+          "value": "homeHeaderTrace 13s linear infinite"
+        },
+        "bytes": 54,
+        "before": "animation: homeRule 1.3s var(--ease-entrance) .5s both; "
+      }
+    ]
+  }
+]

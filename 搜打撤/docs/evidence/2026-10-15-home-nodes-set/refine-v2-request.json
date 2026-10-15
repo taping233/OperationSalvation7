@@ -1,0 +1,55 @@
+{
+  "copies": {
+    "achievement-v6.png": "exec-17d4f0ab-a059-4184-861c-50e37952e5dd.png",
+    "settings-v2.png": "exec-53a6df15-01ae-4ac0-b1e8-d574f40323e2.png",
+    "settings-v3.png": "exec-3aa8fb76-7b05-4ed0-bd4a-b394a4ce569a.png",
+    "credits-v2.png": "exec-95254b57-4cb8-4ca8-bf0d-bbeb77ef76ed.png",
+    "credits-v3.png": "exec-ca34a236-6191-4855-b4cf-214259aa287d.png",
+    "exit-v3.png": "exec-66df8015-7ebd-485d-a88a-19d35d382c00.png"
+  },
+  "items": [
+    [
+      "city",
+      "进入城市",
+      "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-home-nodes-set/../2026-10-15-home-nodes-retry/city-v7.png"
+    ],
+    [
+      "guide",
+      "生存指南",
+      "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-home-nodes-set/guide-v3.png"
+    ],
+    [
+      "achievement",
+      "成就总览",
+      "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-home-nodes-set/achievement-v6.png"
+    ],
+    [
+      "photo",
+      "照相馆",
+      "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-home-nodes-set/photo-v3.png"
+    ],
+    [
+      "settings",
+      "设置",
+      "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-home-nodes-set/settings-v3.png"
+    ],
+    [
+      "credits",
+      "制作名单",
+      "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-home-nodes-set/credits-v3.png"
+    ],
+    [
+      "exit",
+      "退出游戏",
+      "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-15-home-nodes-set/exit-v3.png"
+    ]
+  ],
+  "output": "home-icons-board-v2.png",
+  "receipt": "board-v2-receipt.json",
+  "subtitle": "七项设计 · 第二版",
+  "preserve": [
+    "city",
+    "guide",
+    "photo"
+  ]
+}

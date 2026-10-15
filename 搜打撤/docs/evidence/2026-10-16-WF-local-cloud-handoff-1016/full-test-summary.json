@@ -1,0 +1,805 @@
+{
+  "total": 4043,
+  "passed": 3893,
+  "failed": 148,
+  "pending": 2,
+  "failedSuites": 68,
+  "failures": [
+    {
+      "file": "acceptance-gate.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 混树（他人在途未跟踪）拒绝 staged 验证",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-eY6FoC/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） GATE_MANIFEST_OK=1 显式放行并给出定向计划（与无主阻断共用逃生口）",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-iAmDtJ/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 强制full仍在编译前拒绝混树，不执行任一步骤",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-M5nr46/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 干净暂存强制full执行编译、静态检查和未过滤测试（隔离门跳过素材审计）",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-LRxqeD/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 正常commit --only hook保留门索引，只隔离full Vitest的foreign Git夹具环境",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-rGfWqv/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） target Vitest同样隔离repo-local Git环境，保留其他变量且不改调用环境",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-52hP01/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 不把配置文件或源码误判为同名前缀备份的父路径",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-d88x7e/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 强制full也在编译前拒绝无主暂存物品",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-0Nga3O/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 强制full在compile-narrative.mjs失败时阻断，绝不执行Vitest",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-fJiEMY/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 强制full在check-syntax.mjs失败时阻断，绝不执行Vitest",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-OOoZdr/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 强制full在validate-data.mjs失败时阻断，绝不执行Vitest",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-EPPw5x/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 强制full在check-types.mjs失败时阻断，绝不执行Vitest",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-Gkgt03/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 强制full在eslint.js失败时阻断，绝不执行Vitest",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-j7UFtn/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 纯资产quick空测试列表只跑编译与静态检查（隔离门跳过素材审计）",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-ZyQhYM/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 强制full也阻断未跟踪质量配置eslint.config.js",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-QZZJiq/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        },
+        {
+          "title": "混树拒绝与 GATE_MANIFEST_OK 逃生口（10-02 补，机制补全） 强制full也阻断未跟踪质量配置jsconfig.strict-ui.json",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-mixed-TYWKBm/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError "
+        }
+      ]
+    },
+    {
+      "file": "agent-batch-llm-timeout.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "agent-batch --policy llm：真走 LLM 工厂 + 超时后旧 runner 收口 桩端点每局各命中一次，两局记录均为 timeout 而非 already-running",
+          "message": "AssertionError: LLM 桩命中 0 次（应为 2：两局各发起一次决策）: expected +0 to be 2 // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\agent-batch-llm-timeout.test.js:57:63\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/"
+        }
+      ]
+    },
+    {
+      "file": "agent-llm.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "LLM decide 契约 合法动作直接返回协议动作",
+          "message": "AssertionError: expected { type: 'ui', name: 'evtChoice', …(3) } to deeply equal { type: 'ui', name: 'evtChoice', …(1) }\n    at D:\\素材\\代号柒\\搜打撤\\tests\\agent-llm.test.js:81:20\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9"
+        },
+        {
+          "title": "LLM decide 契约 垃圾回复带错误重试，第二次拿到合法动作",
+          "message": "AssertionError: expected { type: 'ui', name: 'evtChoice', …(3) } to deeply equal { type: 'move', li: 1, idx: 2 }\n    at D:\\素材\\代号柒\\搜打撤\\tests\\agent-llm.test.js:90:20\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%"
+        },
+        {
+          "title": "LLM decide 契约 回复动作不在清单内时重试后退化（非法形状被协议拒绝）",
+          "message": "AssertionError: expected +0 to be 3 // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\agent-llm.test.js:110:29\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hoo"
+        }
+      ]
+    },
+    {
+      "file": "asset-audit.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "incremental asset registration gate runs the repository CLI without a build or document writes and rejects bad arguments",
+          "message": "AssertionError:   ERROR unlisted: scenes/chests/boss-rig-v1/frame-00.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-01.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-02.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame"
+        }
+      ]
+    },
+    {
+      "file": "bag-structured-use.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "背包结构化道具用法 复原时受背包空位限制，剩余卡继续留在消耗区",
+          "message": "AssertionError: expected \"spy\" to be called with arguments: [ StringContaining \"剩 2 张留在口袋\", 'ok' ]\n\nReceived: \n\n  1st spy call:\n\n  [\n-   StringContaining \"剩 2 张留在口袋\",\n-   \"ok\",\n+   \"使用道具卡【<b>旧名</b>】\",\n+   \"sys\",\n  ]\n\n  2nd spy call:\n\n  [\n-   StringContaining \"剩 2 张留在口袋\",\n+   \"[[icon:gem]] 复原了消耗区中的 <b>1</b> 张卡牌：消耗卡（背包已满"
+        }
+      ]
+    },
+    {
+      "file": "base-hub-business-lifecycle-audit.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "预览以后数量改变不会按更新整堆意外扣钥匙",
+          "message": "AssertionError: expected \"spy\" to be called with arguments: [ '口袋数量已变化，请重新打开详情', 'warn' ]\n\nReceived: \n\n  1st spy call:\n\n  [\n-   \"口袋数量已变化，请重新打开详情\",\n+   \"消耗区数量已变化，请重新打开详情\",\n    \"warn\",\n  ]\n\n\nNumber of calls: 1\n\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4"
+        }
+      ]
+    },
+    {
+      "file": "boot.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "启动链（DOMContentLoaded → showTitle） 运行时按 mapSeed 重建局部几何，并以稳定节点提交移动事务",
+          "message": "AssertionError: expected 180 to be 120 // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\boot.test.js:424:52\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks"
+        },
+        {
+          "title": "启动链（DOMContentLoaded → showTitle） enterLayer 将入口与可走分支一起构图，隐藏节点不占据画面",
+          "message": "AssertionError: expected 540.4411764705883 to be less than or equal to 530\n    at D:\\素材\\代号柒\\搜打撤\\tests\\boot.test.js:582:24\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "启动链（DOMContentLoaded → showTitle） 战斗指向卡先放大，确认使用后支持Esc取消与目标结算",
+          "message": "AssertionError: expected null not to be null\n    at D:\\素材\\代号柒\\搜打撤\\tests\\boot.test.js:609:59\n    at runNextTicks (node:internal/process/task_queues:64:5)\n    at processTimers (node:internal/timers:538:9)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/run"
+        },
+        {
+          "title": "启动链（DOMContentLoaded → showTitle） 唯一敌人时也先看大卡，使用和目标确认前不打出",
+          "message": "AssertionError: expected null not to be null\n    at D:\\素材\\代号柒\\搜打撤\\tests\\boot.test.js:656:59\n    at runNextTicks (node:internal/process/task_queues:64:5)\n    at processTimers (node:internal/timers:538:9)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/run"
+        },
+        {
+          "title": "启动链（DOMContentLoaded → showTitle） 卡牌大页 Esc 关闭与加载态强关：输入法组合态（isComposing / keyCode 229）不误触",
+          "message": "AssertionError: expected false to be true // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\boot.test.js:684:35\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        }
+      ]
+    },
+    {
+      "file": "departure-stack-lifecycle-review.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "新手可调整推荐装配 首次整备在出发按钮之前明示普通牌消耗与防御破甲准备",
+          "message": "AssertionError: expected '用过的牌去哪了？所有用过的牌都进入消耗区，复原后可以再用。复原方法在背包查…' to contain '初始攻击、职业卡与衍生卡用后直接消散'\n    at D:\\素材\\代号柒\\搜打撤\\tests\\departure-stack-lifecycle-review.test.js:78:31\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n"
+        }
+      ]
+    },
+    {
+      "file": "docs-consistency.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "文档一致性守卫 可复制 task 直接字段示例通过适配及真实任务模型，关闭仍为完成未提交",
+          "message": "Error: EPERM: operation not permitted, rename 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-doc-task-example-BlLVMB\\docs\\evidence\\2026-10-02-WF-example\\task.json.352637f7-b72f-48bb-a0ff-a9f7e3ee465b.workflow-tmp' -> 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3"
+        }
+      ]
+    },
+    {
+      "file": "e4-async-entry.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "E4 real async entry chains (render/storage ports stubbed) guards class grant transition (normal)",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:178:5\n    at processTicksAndReje"
+        },
+        {
+          "title": "E4 real async entry chains (render/storage ports stubbed) guards class grant transition (new-run)",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:178:5\n    at processTicksAndReje"
+        },
+        {
+          "title": "E4 real async entry chains (render/storage ports stubbed) guards class grant transition (title)",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:178:5\n    at processTicksAndReje"
+        },
+        {
+          "title": "E4 real async entry chains (render/storage ports stubbed) guards class grant transition (resolved-then-new-run)",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:178:5\n    at processTicksAndReje"
+        },
+        {
+          "title": "E4 real async entry chains (render/storage ports stubbed) guards class grant transition (resolved-then-transition)",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:178:5\n    at processTicksAndReje"
+        },
+        {
+          "title": "迟到选角操作失效 旧pickClass不能修改新页面或新局（title）",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:248:5\n    at processTicksAndReje"
+        },
+        {
+          "title": "迟到选角操作失效 旧pickClass不能修改新页面或新局（new-run）",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:248:5\n    at processTicksAndReje"
+        },
+        {
+          "title": "迟到选角操作失效 旧pickClass不能修改新页面或新局（replaced-page）",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:248:5\n    at processTicksAndReje"
+        },
+        {
+          "title": "迟到选角操作失效 整备保存前废弃旧人物confirm闭包（slot）",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:260:5\n    at processTicksAndReje"
+        },
+        {
+          "title": "迟到选角操作失效 整备保存前废弃旧人物confirm闭包（new-run）",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:260:5\n    at processTicksAndReje"
+        },
+        {
+          "title": "迟到选角操作失效 整备保存前废弃旧人物confirm闭包（confirmation-owner）",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:260:5\n    at processTicksAndReje"
+        }
+      ]
+    },
+    {
+      "file": "e8-card-inventory.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "E8 isolated production inventory changes only approved IDs (E8 bag heal + M batch onPlay) by adding rules, leaving every other full card untouched",
+          "message": "Error: migration: changed IDs differ from approved IDs; extra=tt12-backupcell; missing=\n    at compareMigrationInventories (D:\\素材\\代号柒\\搜打撤\\tests\\helpers\\e8-card-inventory.js:142:11)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e8-card-inventory.test.js:184:51\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%8"
+        },
+        {
+          "title": "E8 isolated production inventory 神灯只批准已知生产副本的 armor:5 删除及精确 M11 声明",
+          "message": "AssertionError: expected [Function] to throw error including 'tt3-magic-lamp changed beyond approve…' but got 'migration: changed IDs differ from ap…'\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1420:16)\n    at"
+        }
+      ]
+    },
+    {
+      "file": "extraction-flow.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "三张献祭完成后到达整理页，仓库满仍能完成整理并回基地",
+          "message": "TypeError: Cannot read properties of undefined (reading 'ovBody')\n    at Object.<anonymous> (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.altar.js:443:17)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\extraction-flow.test.js:75:46\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%B"
+        },
+        {
+          "title": "取消献祭回到撤离点，继续深入恢复地图状态且不丢卡",
+          "message": "TypeError: Cannot read properties of undefined (reading 'ovBody')\n    at Object.<anonymous> (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.altar.js:443:17)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\extraction-flow.test.js:96:11\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%B"
+        }
+      ]
+    },
+    {
+      "file": "m-batch-production.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "M batch production boot preserves every original ID and only changes explicitly migrated fields",
+          "message": "AssertionError: tt12-backupcell: expected [ 'desc' ] to deeply equal []\n    at D:\\素材\\代号柒\\搜打撤\\tests\\m-batch-production.test.js:58:73\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4"
+        }
+      ]
+    },
+    {
+      "file": "map-travel-path.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "known map travel path 入城闸门：未进入补给页时除脚下格外全部不可达，进入后立即恢复",
+          "message": "AssertionError: expected null to deeply equal [ { li: +0, idx: 1 } ]\n    at D:\\素材\\代号柒\\搜打撤\\tests\\map-travel-path.test.js:38:48\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3"
+        }
+      ]
+    },
+    {
+      "file": "nightshift-u10-teardown-guards.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "U10 H4 cinematics 发卡队列续棒守卫 战斗获得按显示时上下文分层，后续队列回到地图不会沿用战斗样式",
+          "message": "AssertionError: expected '点击收起 · 稍后自动收起' to be '点击任意处继续' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\nightshift-u10-teardown-guards.test.js:140:58\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/"
+        }
+      ]
+    },
+    {
+      "file": "node-retrigger.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "节点完成/离开后的消耗时机（2026-09-20 定版） 收益完成即锁；商店离开才锁；返回均不重复触发",
+          "message": "AssertionError: expected 'modal' to be 'idle' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\node-retrigger.test.js:151:24\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        }
+      ]
+    },
+    {
+      "file": "node-reward-state.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "入口补给与节点收益保存事务 入城闸门：未进入补给页且未领过卡时拦住脚下格，进入或领卡后解除",
+          "message": "AssertionError: expected true to be false // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\node-reward-state.test.js:74:35\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5"
+        }
+      ]
+    },
+    {
+      "file": "perf-ledger-port-occupancy.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "INFRA-06 CDP 端口被占：报错退出、不杀进程 127.0.0.1 上端口被外部占用时脚本不杀任何进程、以明确报错退出",
+          "message": "Error: 自有监听器在脚本执行前已不可达（EACCES）\n    at livenessWitness (D:\\素材\\代号柒\\搜打撤\\tests\\perf-ledger-port-occupancy.test.js:68:9)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\perf-ledger-port-occupancy.test.js:105:19\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9"
+        },
+        {
+          "title": "INFRA-06 CDP 端口被占：报错退出、不杀进程 0.0.0.0 上端口被外部占用时脚本不杀任何进程、以明确报错退出",
+          "message": "Error: 自有监听器在脚本执行前已不可达（EACCES）\n    at livenessWitness (D:\\素材\\代号柒\\搜打撤\\tests\\perf-ledger-port-occupancy.test.js:68:9)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\perf-ledger-port-occupancy.test.js:105:19\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9"
+        },
+        {
+          "title": "INFRA-06 CDP 端口被占：报错退出、不杀进程 ::1 上端口被外部占用时脚本不杀任何进程、以明确报错退出",
+          "message": "AssertionError: 脚本执行前必须独立确认自有 IPv6 监听器: expected false to be true // Object.is equality\n    at livenessWitness (D:\\素材\\代号柒\\搜打撤\\tests\\perf-ledger-port-occupancy.test.js:65:67)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\perf-ledger-port-occupancy.test.js:105:19\n  "
+        },
+        {
+          "title": "INFRA-06 CDP 端口被占：报错退出、不杀进程 空闲端口通过预检后才发现 Edge 缺失，并释放自己的探测 socket",
+          "message": "AssertionError: expected '[perf-ledger] 自起隔离 dev server（worktre…' to match /找不到 Edge/\n    at D:\\素材\\代号柒\\搜打撤\\tests\\perf-ledger-port-occupancy.test.js:125:24\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%"
+        },
+        {
+          "title": "INFRA-06 CDP 端口被占：报错退出、不杀进程 无效 CDP 端口 not-a-port 在浏览器发现前拒绝",
+          "message": "AssertionError: expected '[perf-ledger] 自起隔离 dev server（worktre…' to match /CDP 端口 .* 无效/\n    at D:\\素材\\代号柒\\搜打撤\\tests\\perf-ledger-port-occupancy.test.js:135:24\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6"
+        },
+        {
+          "title": "INFRA-06 CDP 端口被占：报错退出、不杀进程 无效 CDP 端口 0 在浏览器发现前拒绝",
+          "message": "AssertionError: expected '[perf-ledger] 自起隔离 dev server（worktre…' to match /CDP 端口 .* 无效/\n    at D:\\素材\\代号柒\\搜打撤\\tests\\perf-ledger-port-occupancy.test.js:135:24\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6"
+        },
+        {
+          "title": "INFRA-06 CDP 端口被占：报错退出、不杀进程 无效 CDP 端口 65536 在浏览器发现前拒绝",
+          "message": "AssertionError: expected '[perf-ledger] 自起隔离 dev server（worktre…' to match /CDP 端口 .* 无效/\n    at D:\\素材\\代号柒\\搜打撤\\tests\\perf-ledger-port-occupancy.test.js:135:24\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6"
+        }
+      ]
+    },
+    {
+      "file": "runtime-asset-aliases.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "byte-identical chest output aliases all currently omitted frames have equal canonical bytes and static timeline references",
+          "message": "AssertionError: expected 'import { sdtDefine } from \\'../core/s…' to contain 'new URL(\\'../../assets/scenes/chests/…'\n    at D:\\素材\\代号柒\\搜打撤\\tests\\runtime-asset-aliases.test.js:73:24\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.j"
+        }
+      ]
+    },
+    {
+      "file": "runtime-asset-redundancy.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "reviewed production-only asset omissions contains exactly the 56 independently reviewed paths, never sprite-v1, skins, fonts or active scenery",
+          "message": "AssertionError: expected [ …(5) ] to deeply equal []\n    at D:\\素材\\代号柒\\搜打撤\\tests\\runtime-asset-redundancy.test.js:53:30\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%"
+        }
+      ]
+    },
+    {
+      "file": "scripts-contract.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "映射完整性守卫：新脚本必须显式登记 每个脚本都已映射专属测试或登记豁免",
+          "message": "AssertionError: 新脚本须在 acceptance-gate.mjs 的 WORKFLOW_TESTS 加映射（推荐，定向更快），或加入 EXEMPT_SCRIPTS 豁免（接受语法契约+引用搜索下限）。未登记：scripts/css-redundancy-audit.mjs: expected [ 'scripts/css-redundancy-audit.mjs' ] to deeply equal []\n    at D:\\素材\\代号柒\\搜打撤\\tests\\scripts-contract.test.js:32:8\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5"
+        }
+      ]
+    },
+    {
+      "file": "setup-commit-gate.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "提交门禁安装的 primary checkout 边界 primary 从 root cwd 安装到自身本地配置",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-gate-setup-ExrP9b\\primary init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-setup-ExrP9b/primary/.git/co"
+        },
+        {
+          "title": "提交门禁安装的 primary checkout 边界 primary 从 project cwd 安装到自身本地配置",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-gate-setup-mZhlzy\\primary init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-setup-mZhlzy/primary/.git/co"
+        },
+        {
+          "title": "提交门禁安装的 primary checkout 边界 primary 从 nested cwd 安装到自身本地配置",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-gate-setup-6zJB2h\\primary init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-setup-6zJB2h/primary/.git/co"
+        },
+        {
+          "title": "提交门禁安装的 primary checkout 边界 从其他仓库 cwd 调用 primary 脚本仍只修改脚本所属仓库",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-gate-setup-tRyNvj\\primary init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-setup-tRyNvj/primary/.git/co"
+        },
+        {
+          "title": "提交门禁安装的 primary checkout 边界 linked worktree 拒绝安装且不改共享配置或其 hook 文件",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-gate-setup-tTNFrr\\primary init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-gate-setup-tTNFrr/primary/.git/co"
+        }
+      ]
+    },
+    {
+      "file": "ui-accessibility-regression.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "核心卡牌交互的键盘与读屏契约 战斗手牌提供 button 语义和 Enter/Space 操作",
+          "message": "AssertionError: expected '/* ESM 垫片：window.SDT 命名空间的模块内引用（由 mai…' to contain 'rec.card.setAttribute(\\'role\\', \\'but…'\n    at D:\\素材\\代号柒\\搜打撤\\tests\\ui-accessibility-regression.test.js:24:20\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-h"
+        }
+      ]
+    },
+    {
+      "file": "web-up.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "web-up HTTP 就绪判断 同时验证项目页面和两种关键图片才判定 ready",
+          "message": "AssertionError: expected 'offline' to be 'ready' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\web-up.test.js:82:26\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/"
+        },
+        {
+          "title": "web-up HTTP 就绪判断 HTTP 200 不能单独证明这是本项目：{\"type\":\"text/html\",\"body\":\"<!doctype html><title>别的项目</title>\"}",
+          "message": "AssertionError: expected 'offline' to be 'foreign' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\web-up.test.js:92:68\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dis"
+        },
+        {
+          "title": "web-up HTTP 就绪判断 HTTP 200 不能单独证明这是本项目：{\"type\":\"text/html\",\"body\":\"<title>冬日猜想</title>\"}",
+          "message": "AssertionError: expected 'offline' to be 'foreign' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\web-up.test.js:92:68\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dis"
+        },
+        {
+          "title": "web-up HTTP 就绪判断 HTTP 200 不能单独证明这是本项目：{\"type\":\"text/plain\",\"body\":\"<!doctype html><title>升格会的冬日猜想</title><script type=\\\"module\\\" src=\\\"./src/main.js\\\"></script>\"}",
+          "message": "AssertionError: expected 'offline' to be 'foreign' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\web-up.test.js:92:68\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dis"
+        },
+        {
+          "title": "web-up HTTP 就绪判断 图片类型、签名或状态错误时不能 ready：/assets/ui/icons/dice.png",
+          "message": "AssertionError: expected 'offline' to be 'unhealthy' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\web-up.test.js:105:26\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/"
+        },
+        {
+          "title": "web-up HTTP 就绪判断 图片类型、签名或状态错误时不能 ready：/assets/ui/icons/dice.png",
+          "message": "AssertionError: expected 'offline' to be 'unhealthy' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\web-up.test.js:105:26\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/"
+        },
+        {
+          "title": "web-up HTTP 就绪判断 图片类型、签名或状态错误时不能 ready：/assets/ui/icons/dice.png",
+          "message": "AssertionError: expected 'offline' to be 'unhealthy' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\web-up.test.js:105:26\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/"
+        },
+        {
+          "title": "web-up HTTP 就绪判断 图片类型、签名或状态错误时不能 ready：/assets/portraits/battle/wu.webp",
+          "message": "AssertionError: expected 'offline' to be 'unhealthy' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\web-up.test.js:105:26\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/"
+        },
+        {
+          "title": "web-up HTTP 就绪判断 图片类型、签名或状态错误时不能 ready：/assets/portraits/battle/wu.webp",
+          "message": "AssertionError: expected 'offline' to be 'unhealthy' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\web-up.test.js:105:26\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/"
+        },
+        {
+          "title": "web-up HTTP 就绪判断 图片类型、签名或状态错误时不能 ready：/assets/portraits/battle/wu.webp",
+          "message": "AssertionError: expected 'offline' to be 'unhealthy' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\web-up.test.js:105:26\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/"
+        },
+        {
+          "title": "web-up HTTP 就绪判断 图片类型、签名或状态错误时不能 ready：/assets/portraits/battle/wu.webp",
+          "message": "AssertionError: expected 'offline' to be 'unhealthy' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\web-up.test.js:105:26\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/"
+        }
+      ]
+    },
+    {
+      "file": "workflow-browser.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "内置浏览器证据适配 拒绝证据目录通过 junction 指到项目其他位置或项目外",
+          "message": "Error: EPERM: operation not permitted, symlink 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-browser-evidence-Qk3FQ5' -> 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-browser-evidence-HZdOUd\\docs\\evidence\\2026-09-30-test'\n"
+        }
+      ]
+    },
+    {
+      "file": "workflow-cli-integration.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "流程入口集成 直接任务字段可预览、创建、更新和收官，不准备临时JSON且仍校验归属",
+          "message": "AssertionError: expected 1 to be +0 // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\workflow-cli-integration.test.js:68:42\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E"
+        }
+      ]
+    },
+    {
+      "file": "workflow-gate-receipt.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "冻结 index 成功报告的严格复用 静态资产审计锁完整资产目录与债务登记，质量配置变更范围也进指纹",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-iWxQau/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 标准 npm .bin 文件链接保留文本与目标字节，隔离副本摘要一致",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-KGDxVr/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 相同目标字节也锁定链接文本，并在 POSIX 锁定执行位",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-g3IQcb/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 拒绝越界 .bin 链接",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-0D3KdP/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 拒绝绝对路径 .bin 链接",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-LQYA0a/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 拒绝悬空 .bin 链接",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-lnzEEf/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 拒绝目录 .bin 链接",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-6AGsY7/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 拒绝自循环 .bin 链接",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-ZYAnm1/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 拒绝缓存 .bin 链接",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-TaI63a/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 拒绝包内链接、链式文件链接与目录中转链接",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-19lPPN/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 拒绝依赖包目录链接，包括无需管理员权限的 Windows junction",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-veO67C/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 带真实 .bin 链接的隔离验收可复用，目标字节变化使报告失效",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-wrTVAs/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 真实隔离报告可复用；证据、状态暂存和纯状态 HEAD 前进不废弃代码证据",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-79nRRU/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 提交门在真实混树中 --reuse 成功，不用逃生变量且不改源 index",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-8njf5m/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 失败、中断、skip、未结束、运行中变更与快照改写一律拒绝",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-YT5Cbz/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 有文档输入的动态测试保守锁项目文档，scope列出共同验收文件",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-zSw5Rd/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 源码、依赖字节、环境和日志变化拒绝复用，缓存写入不污染依赖证据",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-k5IFAx/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        },
+        {
+          "title": "冻结 index 成功报告的严格复用 环境与验收模式变化分别失败关闭",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-receipt-test-rbrFFm/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeErro"
+        }
+      ]
+    },
+    {
+      "file": "workflow-handoff.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "任务定向接手简报 生命周期分类保留审计，完成未提交保护归属但不计编辑占用；已决不计活账",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-handoff-PE3Eo9/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (no"
+        },
+        {
+          "title": "任务定向接手简报 只对当前编辑属地校验路径，不把历史叙述、划线属地和纯数字日期当异常",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-handoff-68hKS7/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (no"
+        },
+        {
+          "title": "任务定向接手简报 任务 id 与登记 WF-id 同向，目录边界不包含 cards2，JSON 明确省略",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-handoff-wv8msY/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (no"
+        },
+        {
+          "title": "任务定向接手简报 缺任务记录明确 not-found，不随意回退最近任务或展示其他域 Git",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-handoff-pp29Te/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (no"
+        },
+        {
+          "title": "任务定向接手简报 嵌套仓库、Windows 分隔符、中文、空格及改名前路径正确保留",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-handoff-ct1REx/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (no"
+        },
+        {
+          "title": "任务定向接手简报 人读摘要保持短，不输出全部工作树、记忆 JSON、历史整账或日志",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-handoff-ohKPQv/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (no"
+        },
+        {
+          "title": "任务定向接手简报 摘要严格只读，不修改 index、台账或任务记录；范围逃逸拒绝",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-handoff-ljYiAw/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (no"
+        },
+        {
+          "title": "任务定向接手简报 重复任务 id 明确 ambiguous，小元数据无效/过大记录只统计跳过",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-handoff-2Cu5Zp/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (no"
+        },
+        {
+          "title": "任务定向接手简报 定向保留本任务活账引用提交疑点，其他任务未确认提交只计省略",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-handoff-Wd5zIM/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (no"
+        },
+        {
+          "title": "sweep 中断任务检测 超龄非终态任务列为候选并核对登记簿活跃行，坏元数据单独报",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-handoff-Iw2u4p/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (no"
+        },
+        {
+          "title": "sweep 中断任务检测 终态任务与阈值内的新鲜任务不列为候选",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-handoff-Cco4Qh/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (no"
+        }
+      ]
+    },
+    {
+      "file": "workflow-memory.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "只读动态记忆入口 ZCode索引主题经junction越过项目库仍拒读，both不能报告完整检索",
+          "message": "Error: EPERM: operation not permitted, symlink 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-memory-test-uVlcBK\\outside-library' -> 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-memory-test-uVlcBK\\.zcode\\cli\\memories\\proje"
+        }
+      ]
+    },
+    {
+      "file": "workflow-scope.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "验收指纹按范围复用 显式full的预检、执行与报告都保持full；只执行临时fixture runner",
+          "message": "Error: Command failed: git -c core.autocrlf=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-workflow-scope-ETwcvd/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeEr"
+        }
+      ]
+    },
+    {
+      "file": "workflow-ship.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "ship 收官落库一条龙 干净树：无提交计划但不报错",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-ZeLb7K -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-ZeLb7K/."
+        },
+        {
+          "title": "ship 收官落库一条龙 混合树：两笔分组+unknown/excluded 分流+FULL 预估",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-UQR38o -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-UQR38o/."
+        },
+        {
+          "title": "ship 收官落库一条龙 staged 预检命中 REGISTRY 无主物品即阻断（26a5254 防线前移）",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-aVnkwl -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-aVnkwl/."
+        },
+        {
+          "title": "ship 收官落库一条龙 apply 全链：两笔真实提交落库且工作树只剩 unknown/excluded",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-W5NFyc -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-W5NFyc/."
+        },
+        {
+          "title": "ship 收官落库一条龙 超长路径清单与中文、空格、通配符字面路径仍按代码和文档两笔提交",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-FpiwZr -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-FpiwZr/."
+        },
+        {
+          "title": "ship 收官落库一条龙 计划外已暂存内容阻断，不能随默认打包混入",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-5qAtLK -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-5qAtLK/."
+        },
+        {
+          "title": "ship 收官落库一条龙 缺失、failed/skip、坏JSON/结构/日志/来源报告均typed blocked，预检不声称当前可复用",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-uRK0BM -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-uRK0BM/."
+        },
+        {
+          "title": "ship 收官落库一条龙 第二组hook失败返回完成commit与剩余stage，重试只给只读下一步",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-NZ43Sd -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-NZ43Sd/."
+        },
+        {
+          "title": "ship 收官落库一条龙 缺少计划确认、文件变化或 index 变化均在写前拒绝",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-JyW7CP -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-JyW7CP/."
+        },
+        {
+          "title": "ship 收官落库一条龙 编辑占用与 doing 任务只列在途，完成未提交归属允许打包",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-nMR3P4 -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-nMR3P4/."
+        },
+        {
+          "title": "ship 收官落库一条龙 表头前的活跃登记保护源码与证据目录，不混入完成提交",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-rCa9OW -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-rCa9OW/."
+        },
+        {
+          "title": "ship 收官落库一条龙 待决未跟踪目录、证据二进制与大件不默认落库",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-XNciZ4 -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-XNciZ4/."
+        },
+        {
+          "title": "ship 收官落库一条龙 已有后续文档组暂存时只提交当前组，不把它并进代码笔",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-VcivPE -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-VcivPE/."
+        },
+        {
+          "title": "ship 收官落库一条龙 门禁失败保留已暂存现场，不回滚或继续第二组",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-3RE6ee -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-3RE6ee/."
+        },
+        {
+          "title": "ship 收官落库一条龙 预览后任务重新变为 doing 时写前拒绝，保护在途源码",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-rduVgR -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-rduVgR/."
+        },
+        {
+          "title": "ship 收官落库一条龙 首笔 hook 改写后续同路径 index blob 时不覆盖并发内容",
+          "message": "Error: Command failed: git -C C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-ship-test-PUIdBr -c core.quotepath=false init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-ship-test-PUIdBr/."
+        }
+      ]
+    },
+    {
+      "file": "workflow-staged.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "Git index 隔离验收 普通门与隔离门共用真实 scripts-only 计划，未暂存 package 内容不会泄漏",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-ebjC2d/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 真实资产 quick 不调用 Vitest，隔离验收执行审计并拒绝新增未登记素材",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-fSiYPL/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 stat-only 刷新（并发 git status/add 同内容）不使隔离验收 invalidated",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-eEo8YC/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 真实 workflow staged --plan 在冻结Git视图内可执行，且不借用源工作树/index",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-QgMIVZ/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 只导出暂存字节，排除不同的工作树和未跟踪文件，源 index 没有副作用",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-5zsKUR/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 删除与重命名沿用冻结 gate 定向选择，不再被隔离入口覆写 full",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-5YBZmT/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 锁不匹配或额外安装包阻断，不安装、不将失败写成通过",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-mAk7AU/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 拒绝 symlink 与 gitlink index 项",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-Ml78L9/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 失败命令与检查改写快照均不冒充通过",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-jDuV2O/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 运行期间 index 实质改动使结果失效，保留别人新 index（stat-only 触碰不算，见前一条测试）",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-bNv3Kl/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 文档路径 skip 明确未运行检查，不标通过",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-lSaQja/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 空index仅skip，不是passed或可复用报告，计划与执行均给安全下一步",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-rnFzVG/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 检查被信号终止也返回失败退出码",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-WDPkbE/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 检查命令exit0但收尾输入证明失败不返回passed",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-pdT05H/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        },
+        {
+          "title": "Git index 隔离验收 依赖版本证据不符阻断，即使工作树锁看起来相符",
+          "message": "Error: Command failed: git init -q\nerror: could not write config file C:/Users/太平/AppData/Local/Packages/sandbox.{36214384-3657-4e61-9fd0-9775864480b9}/AC/Temp/sdt-staged-test-bK6kEK/.git/config: Permission denied\nfatal: could not set 'core.repositoryformatversion' to '0'\n\n    at genericNodeError (node:internal/errors:"
+        }
+      ]
+    },
+    {
+      "file": "workflow-task.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "单一任务执行记录 close必须声明检查与未验证项，完成是负责人手工判断并保留未提交",
+          "message": "Error: EPERM: operation not permitted, rename 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-task-test-ezp8s4\\docs\\evidence\\2026-09-30-WF-small\\task.json.20bc5026-b48b-46bf-bbd5-d710ebb2e133.workflow-tmp' -> 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-"
+        },
+        {
+          "title": "单一任务执行记录 passed报告核实退出码/信号/错误/稳定指纹，不将exit0自动等同完成",
+          "message": "Error: EPERM: operation not permitted, rename 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-task-test-FTLOsh\\docs\\evidence\\2026-09-30-WF-small\\task.json.ddaa4c98-8eeb-401a-86b7-3f7c886266ce.workflow-tmp' -> 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-"
+        },
+        {
+          "title": "单一任务执行记录 隔离报告可收官，但index/依赖/快照变化或skip仍拒绝",
+          "message": "Error: EPERM: operation not permitted, rename 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-task-test-jPUtqH\\docs\\evidence\\2026-09-30-WF-small\\task.json.f196ee13-ce85-4b5c-8137-e805f45f622c.workflow-tmp' -> 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-"
+        }
+      ]
+    },
+    {
+      "file": "workflow-tools.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "台账写入边界 表头前的并发登记也算活账，更新时保留其位置和其他行",
+          "message": "Error: EPERM: operation not permitted, rename 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-workflow-test-k6v107\\docs\\PARALLEL-REGISTRY.md.c1013f27-d7e9-4df0-bbc6-bd1851170155.workflow-tmp' -> 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-977586448"
+        },
+        {
+          "title": "台账写入边界 预览不写，应用只改自有行，并保留中文/其他会话与 CRLF",
+          "message": "Error: EPERM: operation not permitted, rename 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-workflow-test-ieetD1\\docs\\PARALLEL-REGISTRY.md.ffdc9444-9323-4583-9611-56e801120275.workflow-tmp' -> 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-977586448"
+        },
+        {
+          "title": "台账写入边界 明确收官后移入历史表，保留相邻活账；已关闭编号不能重新登记",
+          "message": "Error: EPERM: operation not permitted, rename 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-workflow-test-Dsb8m4\\docs\\PARALLEL-REGISTRY.md.87aa872f-a7eb-450a-bc65-12c3d5f97b65.workflow-tmp' -> 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-977586448"
+        },
+        {
+          "title": "台账写入边界 待拍板收官保留编号与明确结果，编号不可变更",
+          "message": "Error: EPERM: operation not permitted, rename 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Temp\\sdt-workflow-test-QkA9By\\docs\\PENDING.md.86fddd69-af7d-441a-b7d7-c69994bdab14.workflow-tmp' -> 'C:\\Users\\太平\\AppData\\Local\\Packages\\sandbox.{36214384-3657-4e61-9fd0-9775864480b9}\\AC\\Te"
+        }
+      ]
+    }
+  ]
+}

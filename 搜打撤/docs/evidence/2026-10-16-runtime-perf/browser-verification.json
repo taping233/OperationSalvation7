@@ -1,0 +1,48 @@
+{
+  "photo": {
+    "buttons": [
+      "查看照片：禁咒I，棱彩",
+      "查看照片：禁咒II，棱彩",
+      "查看照片：禁咒III，棱彩",
+      "查看照片：禁咒IV，棱彩"
+    ],
+    "images": [
+      {
+        "complete": true,
+        "src": "assets/thumbs/cards/curse-drain.webp?art=curse-rough-20261010&v=0.60.0",
+        "width": 448
+      },
+      {
+        "complete": true,
+        "src": "assets/thumbs/cards/curse-freeze.webp?art=curse-rough-20261010&v=0.60.0",
+        "width": 448
+      },
+      {
+        "complete": true,
+        "src": "assets/thumbs/cards/curse-venom.webp?art=curse-rough-20261010&v=0.60.0",
+        "width": 448
+      },
+      {
+        "complete": true,
+        "src": "assets/thumbs/cards/curse-silence.webp?art=curse-rough-20261010&v=0.60.0",
+        "width": 448
+      }
+    ],
+    "search": "禁咒",
+    "url": "http://127.0.0.1:5200/",
+    "viewport": {
+      "dpr": 1.5,
+      "height": 956,
+      "width": 1603
+    }
+  },
+  "gameErrors": [],
+  "realInput": [
+    "打开照相馆",
+    "选择法术分类",
+    "搜索禁咒，四张结果"
+  ],
+  "constructedInput": [
+    "独立微基准：普通文本转换、图片20次重复解码请求、图标DOM新增"
+  ]
+}

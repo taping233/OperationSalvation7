@@ -1,0 +1,165 @@
+{
+  "hover": {
+    "rect": {
+      "bottom": 683.3374938964844,
+      "height": 190,
+      "left": 612.6625366210938,
+      "right": 739.3250350952148,
+      "top": 493.3374938964844,
+      "width": 126.6624984741211,
+      "x": 612.6625366210938,
+      "y": 493.3374938964844
+    },
+    "ruleFits": true,
+    "ruleText": "造成 2 点法术伤害；对目标附加冰冻。",
+    "transform": "matrix(1, 0, 0, 1, 0, 0)"
+  },
+  "leave": {
+    "hovered": 0,
+    "transform": "matrix(1, 0, 0, 1, 0, 170)"
+  },
+  "selectedLeave": {
+    "focusVisible": false,
+    "hovered": 0,
+    "selected": true,
+    "transform": "matrix(1, 0, 0, 1, 0, 170)"
+  },
+  "careerUsed": {
+    "disabled": true,
+    "discard": "4",
+    "energy": "1",
+    "foeHp": "20",
+    "status": "本回合已用"
+  },
+  "keyboard": {
+    "card": "1",
+    "focusVisible": true,
+    "transform": "matrix(1, 0, 0, 1, 0, 0)"
+  },
+  "final": {
+    "brokenImages": [],
+    "cards": [
+      {
+        "frame": "initial",
+        "frameSource": "assets/ui/card-frames/paper-1015/initial.webp?v=dev",
+        "layout": "split",
+        "name": "初始攻击，1能量",
+        "rect": {
+          "bottom": 796.6708374023438,
+          "height": 190,
+          "left": 348.6875,
+          "right": 475.3499984741211,
+          "top": 606.6708374023438,
+          "width": 126.6624984741211,
+          "x": 348.6875,
+          "y": 606.6708374023438
+        },
+        "ruleFits": true,
+        "transform": "matrix(1, 0, 0, 1, 0, 170)"
+      },
+      {
+        "frame": "common",
+        "frameSource": "assets/ui/card-frames/paper-1015/common.webp?v=dev",
+        "layout": "split",
+        "name": "格挡，1能量",
+        "rect": {
+          "bottom": 796.6708374023438,
+          "height": 190,
+          "left": 480.6750183105469,
+          "right": 607.337516784668,
+          "top": 606.6708374023438,
+          "width": 126.6624984741211,
+          "x": 480.6750183105469,
+          "y": 606.6708374023438
+        },
+        "ruleFits": true,
+        "transform": "matrix(1, 0, 0, 1, 0, 170)"
+      },
+      {
+        "frame": "common",
+        "frameSource": "assets/ui/card-frames/paper-1015/common.webp?v=dev",
+        "layout": "split",
+        "name": "冰刺，1能量",
+        "rect": {
+          "bottom": 796.6708374023438,
+          "height": 190,
+          "left": 612.6625366210938,
+          "right": 739.3250350952148,
+          "top": 606.6708374023438,
+          "width": 126.6624984741211,
+          "x": 612.6625366210938,
+          "y": 606.6708374023438
+        },
+        "ruleFits": true,
+        "transform": "matrix(1, 0, 0, 1, 0, 170)"
+      },
+      {
+        "frame": "token",
+        "frameSource": "assets/ui/card-frames/paper-1015/token.webp?v=dev",
+        "layout": "split",
+        "name": "火球，1能量",
+        "rect": {
+          "bottom": 796.6708374023438,
+          "height": 190,
+          "left": 744.6500244140625,
+          "right": 871.3125228881836,
+          "top": 606.6708374023438,
+          "width": 126.6624984741211,
+          "x": 744.6500244140625,
+          "y": 606.6708374023438
+        },
+        "ruleFits": true,
+        "transform": "matrix(1, 0, 0, 1, 0, 170)"
+      },
+      {
+        "frame": "wu",
+        "frameSource": "assets/ui/card-frames/paper-1015/wu.webp?v=dev",
+        "layout": "split",
+        "name": "鬼魅之刃，1能量",
+        "rect": {
+          "bottom": 796.6708374023438,
+          "height": 190,
+          "left": 876.6375122070312,
+          "right": 1003.3000106811523,
+          "top": 606.6708374023438,
+          "width": 126.6624984741211,
+          "x": 876.6375122070312,
+          "y": 606.6708374023438
+        },
+        "ruleFits": true,
+        "transform": "matrix(1, 0, 0, 1, 0, 170)"
+      }
+    ],
+    "career": {
+      "effect": "2 点固定伤害",
+      "name": "刺击",
+      "rect": {
+        "bottom": 670.0000228881836,
+        "height": 95.9749984741211,
+        "left": 146.66250610351562,
+        "right": 309.9875030517578,
+        "top": 574.0250244140625,
+        "width": 163.3249969482422,
+        "x": 146.66250610351562,
+        "y": 574.0250244140625
+      }
+    },
+    "renderer": "webgl",
+    "scrollContainers": [
+      0,
+      0
+    ],
+    "scrollY": 0,
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "logs": [],
+  "inputMethod": "Codex in-app browser; CDP Input.dispatchMouseEvent for pointer hover/leave, browser locator clicks and keyboard input for remaining paths; no forced pseudo-class or DOM-dispatched input",
+  "staticChecks": {
+    "jsSyntax": "passed",
+    "cssParseNodes": 160,
+    "taskReadmeLinks": "passed"
+  }
+}

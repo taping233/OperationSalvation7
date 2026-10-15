@@ -1,0 +1,34 @@
+{
+  "model": "nai-diffusion-4-5-full",
+  "seed": 15102027,
+  "width": 832,
+  "height": 1216,
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "identity_source": "game/assets/portraits/full/wu.webp",
+  "references_uploaded": [],
+  "recipe_version": "scheme-b-candidate",
+  "artist_chain": "1.1::miv4t::, 0.2::quasarcake::",
+  "prompt": "1.1::miv4t::, 0.2::quasarcake::\n\nanime illustration, clean game character sprite, fine colored clean contours, smooth cel shading, flat soft shading planes, expressive hair strands, flowing fabric contours, detailed clothing structures, clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones, restrained overall saturation, selective vivid accents, clean sharp edge detail, no rough brush strokes. no text.\n\n1girl, solo, silver-white long hair, high ponytail tied with a blue satin bow, parted bangs, both cyan-blue eyes visible, pale skin, confident smile, small fang. Ordinary black round sunglasses resting on top of her head, thin smooth frames. Black rose hair accessory clearly visible at her left temple (viewer right). Black-gray off-shoulder long-sleeved dress, layered neckline ruffles, black waist tie, diagonal black sword strap. A sheathed black straight sword secured against her back, scabbard running down her back. Angular pommel and black wrapped hilt rising behind her right shoulder (viewer left). The sword stays behind the torso, hands empty.\n\nWaist-up character portrait, eye-level, slight three-quarter turn, looking at viewer. Centered head and torso, entire ponytail root and accessories within frame, generous white margin above head, crop at waist. Arms relaxed beside torso. Pure white background, no scenery, neutral studio light. Matte black cloth, small gray reflections on sunglass lenses, blue ribbon as the color accent.",
+  "uc": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, full body, hair over one eye, holding sword, extra people, colored background, steampunk goggles, rough brush strokes, scribble, messy linework, jagged outlines, painterly sketch texture",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-half-20261015\\wu-half-scheme-b.png",
+  "default_style_sha256": "eed984ab1449e9c51860913fe44cdc9342fbeaf159b474b3f9a6a7dedde04487",
+  "default_style_modified": false,
+  "status": "generated",
+  "sha256": "8b67af99393a42f20e19ed122e6967ee0fde733d149ab69b6d34fb6332c11d35",
+  "verification": {
+    "http": 200,
+    "size": [
+      832,
+      1216
+    ],
+    "default_style_unchanged": true,
+    "visual": "半身白底；线条与平涂明显，笔刷纹理减少，面部和衣服体积也更简化。普通墨镜、黑蔷薇存在；花饰仍偏头顶，剑柄仍在画面右侧。审美待反馈，未接入。"
+  }
+}

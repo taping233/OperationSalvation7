@@ -1,0 +1,44 @@
+{
+  "time": "2026-10-15T16:34:14.607Z",
+  "evidence": [
+    {
+      "file": "docs/evidence/2026-10-16-WF-battle-play-rewrite/validation.json",
+      "keys": [
+        "task",
+        "sourceHashes",
+        "tests",
+        "docsCheck",
+        "cssParse",
+        "diffCheck",
+        "fullSuite",
+        "build",
+        "commit",
+        "browserScope"
+      ],
+      "entries": 9
+    },
+    {
+      "file": "docs/evidence/2026-10-16-runtime-perf/source-fingerprints.json",
+      "keys": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "entries": 16
+    }
+  ],
+  "mismatches": []
+}

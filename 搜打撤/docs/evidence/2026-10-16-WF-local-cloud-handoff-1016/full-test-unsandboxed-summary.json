@@ -1,0 +1,242 @@
+{
+  "total": 4043,
+  "passed": 3998,
+  "failed": 33,
+  "pending": 12,
+  "failures": [
+    {
+      "file": "asset-audit.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "incremental asset registration gate runs the repository CLI without a build or document writes and rejects bad arguments",
+          "message": "AssertionError:   ERROR unlisted: scenes/chests/boss-rig-v1/frame-00.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-01.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-02.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-03.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-04.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-05.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-06.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-07.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-08.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-09.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-10.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-11.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-12.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-13.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-14.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-15.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-16.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/boss-rig-v1/frame-17.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/class-rig-v1/frame-00.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/class-rig-v1/frame-01.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/class-rig-v1/frame-02.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/class-rig-v1/frame-03.webp (no manifest registration)\n  ERROR unlisted: scenes/chests/class-rig-v1/frame-04.webp (no manifest registration)\n  ERROR unlisted: scenes"
+        }
+      ]
+    },
+    {
+      "file": "bag-structured-use.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "背包结构化道具用法 复原时受背包空位限制，剩余卡继续留在消耗区",
+          "message": "AssertionError: expected \"spy\" to be called with arguments: [ StringContaining \"剩 2 张留在口袋\", 'ok' ]\n\nReceived: \n\n  1st spy call:\n\n  [\n-   StringContaining \"剩 2 张留在口袋\",\n-   \"ok\",\n+   \"使用道具卡【<b>旧名</b>】\",\n+   \"sys\",\n  ]\n\n  2nd spy call:\n\n  [\n-   StringContaining \"剩 2 张留在口袋\",\n+   \"[[icon:gem]] 复原了消耗区中的 <b>1</b> 张卡牌：消耗卡（背包已满，剩 2 张留在消耗区）\",\n    \"ok\",\n  ]\n\n\nNumber of calls: 2\n\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1355:10)\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1029:14)\n    at Proxy.methodWrapper (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/chai/index.js:1686:25)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\bag-structured-use.test.js:123:25\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)"
+        }
+      ]
+    },
+    {
+      "file": "base-hub-business-lifecycle-audit.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "预览以后数量改变不会按更新整堆意外扣钥匙",
+          "message": "AssertionError: expected \"spy\" to be called with arguments: [ '口袋数量已变化，请重新打开详情', 'warn' ]\n\nReceived: \n\n  1st spy call:\n\n  [\n-   \"口袋数量已变化，请重新打开详情\",\n+   \"消耗区数量已变化，请重新打开详情\",\n    \"warn\",\n  ]\n\n\nNumber of calls: 1\n\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1355:10)\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1029:14)\n    at Proxy.methodWrapper (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/chai/index.js:1686:25)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\base-hub-business-lifecycle-audit.test.js:156:79\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        }
+      ]
+    },
+    {
+      "file": "boot.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "启动链（DOMContentLoaded → showTitle） 运行时按 mapSeed 重建局部几何，并以稳定节点提交移动事务",
+          "message": "AssertionError: expected 180 to be 120 // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\boot.test.js:424:52\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "启动链（DOMContentLoaded → showTitle） enterLayer 将入口与可走分支一起构图，隐藏节点不占据画面",
+          "message": "AssertionError: expected 540.4411764705883 to be less than or equal to 530\n    at D:\\素材\\代号柒\\搜打撤\\tests\\boot.test.js:582:24\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "启动链（DOMContentLoaded → showTitle） 战斗指向卡先放大，确认使用后支持Esc取消与目标结算",
+          "message": "AssertionError: expected null not to be null\n    at D:\\素材\\代号柒\\搜打撤\\tests\\boot.test.js:609:59\n    at runNextTicks (node:internal/process/task_queues:64:5)\n    at processTimers (node:internal/timers:538:9)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "启动链（DOMContentLoaded → showTitle） 唯一敌人时也先看大卡，使用和目标确认前不打出",
+          "message": "AssertionError: expected null not to be null\n    at D:\\素材\\代号柒\\搜打撤\\tests\\boot.test.js:656:59\n    at runNextTicks (node:internal/process/task_queues:64:5)\n    at processTimers (node:internal/timers:538:9)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "启动链（DOMContentLoaded → showTitle） 卡牌大页 Esc 关闭与加载态强关：输入法组合态（isComposing / keyCode 229）不误触",
+          "message": "AssertionError: expected false to be true // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\boot.test.js:684:35\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        }
+      ]
+    },
+    {
+      "file": "departure-stack-lifecycle-review.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "新手可调整推荐装配 首次整备在出发按钮之前明示普通牌消耗与防御破甲准备",
+          "message": "AssertionError: expected '用过的牌去哪了？所有用过的牌都进入消耗区，复原后可以再用。复原方法在背包查…' to contain '初始攻击、职业卡与衍生卡用后直接消散'\n    at D:\\素材\\代号柒\\搜打撤\\tests\\departure-stack-lifecycle-review.test.js:78:31\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)"
+        }
+      ]
+    },
+    {
+      "file": "e4-async-entry.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "E4 real async entry chains (render/storage ports stubbed) guards class grant transition (normal)",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:178:5\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "E4 real async entry chains (render/storage ports stubbed) guards class grant transition (new-run)",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:178:5\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "E4 real async entry chains (render/storage ports stubbed) guards class grant transition (title)",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:178:5\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "E4 real async entry chains (render/storage ports stubbed) guards class grant transition (resolved-then-new-run)",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:178:5\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "E4 real async entry chains (render/storage ports stubbed) guards class grant transition (resolved-then-transition)",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:178:5\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "迟到选角操作失效 旧pickClass不能修改新页面或新局（title）",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:248:5\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "迟到选角操作失效 旧pickClass不能修改新页面或新局（new-run）",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:248:5\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "迟到选角操作失效 旧pickClass不能修改新页面或新局（replaced-page）",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:248:5\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "迟到选角操作失效 整备保存前废弃旧人物confirm闭包（slot）",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:260:5\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "迟到选角操作失效 整备保存前废弃旧人物confirm闭包（new-run）",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:260:5\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "迟到选角操作失效 整备保存前废弃旧人物confirm闭包（confirmation-owner）",
+          "message": "TypeError: Cannot read properties of undefined (reading 'playerMaxHp')\n    at render (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:77:42)\n    at openClassChoice (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.class-choice.page.js:434:3)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e4-async-entry.test.js:260:5\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        }
+      ]
+    },
+    {
+      "file": "e8-card-inventory.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "E8 isolated production inventory changes only approved IDs (E8 bag heal + M batch onPlay) by adding rules, leaving every other full card untouched",
+          "message": "Error: migration: changed IDs differ from approved IDs; extra=tt12-backupcell; missing=\n    at compareMigrationInventories (D:\\素材\\代号柒\\搜打撤\\tests\\helpers\\e8-card-inventory.js:142:11)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e8-card-inventory.test.js:184:51\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)"
+        },
+        {
+          "title": "E8 isolated production inventory 神灯只批准已知生产副本的 armor:5 删除及精确 M11 声明",
+          "message": "AssertionError: expected [Function] to throw error including 'tt3-magic-lamp changed beyond approve…' but got 'migration: changed IDs differ from ap…'\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1420:16)\n    at Proxy.<anonymous> (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1029:14)\n    at Proxy.methodWrapper (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/chai/index.js:1686:25)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\e8-card-inventory.test.js:206:10\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)"
+        }
+      ]
+    },
+    {
+      "file": "extraction-flow.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "三张献祭完成后到达整理页，仓库满仍能完成整理并回基地",
+          "message": "TypeError: Cannot read properties of undefined (reading 'ovBody')\n    at Object.<anonymous> (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.altar.js:443:17)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\extraction-flow.test.js:75:46\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        },
+        {
+          "title": "取消献祭回到撤离点，继续深入恢复地图状态且不丢卡",
+          "message": "TypeError: Cannot read properties of undefined (reading 'ovBody')\n    at Object.<anonymous> (D:\\素材\\代号柒\\搜打撤\\game\\src\\run\\game.run.altar.js:443:17)\n    at D:\\素材\\代号柒\\搜打撤\\tests\\extraction-flow.test.js:96:11\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        }
+      ]
+    },
+    {
+      "file": "m-batch-production.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "M batch production boot preserves every original ID and only changes explicitly migrated fields",
+          "message": "AssertionError: tt12-backupcell: expected [ 'desc' ] to deeply equal []\n    at D:\\素材\\代号柒\\搜打撤\\tests\\m-batch-production.test.js:58:73\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)"
+        }
+      ]
+    },
+    {
+      "file": "map-travel-path.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "known map travel path 入城闸门：未进入补给页时除脚下格外全部不可达，进入后立即恢复",
+          "message": "AssertionError: expected null to deeply equal [ { li: +0, idx: 1 } ]\n    at D:\\素材\\代号柒\\搜打撤\\tests\\map-travel-path.test.js:38:48\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)"
+        }
+      ]
+    },
+    {
+      "file": "nightshift-u10-teardown-guards.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "U10 H4 cinematics 发卡队列续棒守卫 战斗获得按显示时上下文分层，后续队列回到地图不会沿用战斗样式",
+          "message": "AssertionError: expected '点击收起 · 稍后自动收起' to be '点击任意处继续' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\nightshift-u10-teardown-guards.test.js:140:58\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        }
+      ]
+    },
+    {
+      "file": "node-retrigger.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "节点完成/离开后的消耗时机（2026-09-20 定版） 收益完成即锁；商店离开才锁；返回均不重复触发",
+          "message": "AssertionError: expected 'modal' to be 'idle' // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\node-retrigger.test.js:151:24\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20"
+        }
+      ]
+    },
+    {
+      "file": "node-reward-state.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "入口补给与节点收益保存事务 入城闸门：未进入补给页且未领过卡时拦住脚下格，进入或领卡后解除",
+          "message": "AssertionError: expected true to be false // Object.is equality\n    at D:\\素材\\代号柒\\搜打撤\\tests\\node-reward-state.test.js:74:35\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)"
+        }
+      ]
+    },
+    {
+      "file": "runtime-asset-aliases.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "byte-identical chest output aliases all currently omitted frames have equal canonical bytes and static timeline references",
+          "message": "AssertionError: expected 'import { sdtDefine } from \\'../core/s…' to contain 'new URL(\\'../../assets/scenes/chests/…'\n    at D:\\素材\\代号柒\\搜打撤\\tests\\runtime-asset-aliases.test.js:73:24\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)"
+        }
+      ]
+    },
+    {
+      "file": "runtime-asset-redundancy.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "reviewed production-only asset omissions contains exactly the 56 independently reviewed paths, never sprite-v1, skins, fonts or active scenery",
+          "message": "AssertionError: expected [ …(5) ] to deeply equal []\n    at D:\\素材\\代号柒\\搜打撤\\tests\\runtime-asset-redundancy.test.js:53:30\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)"
+        }
+      ]
+    },
+    {
+      "file": "scripts-contract.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "映射完整性守卫：新脚本必须显式登记 每个脚本都已映射专属测试或登记豁免",
+          "message": "AssertionError: 新脚本须在 acceptance-gate.mjs 的 WORKFLOW_TESTS 加映射（推荐，定向更快），或加入 EXEMPT_SCRIPTS 豁免（接受语法契约+引用搜索下限）。未登记：scripts/css-redundancy-audit.mjs: expected [ 'scripts/css-redundancy-audit.mjs' ] to deeply equal []\n    at D:\\素材\\代号柒\\搜打撤\\tests\\scripts-contract.test.js:32:8\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)"
+        }
+      ]
+    },
+    {
+      "file": "ui-accessibility-regression.test.js",
+      "message": "",
+      "failures": [
+        {
+          "title": "核心卡牌交互的键盘与读屏契约 战斗手牌提供 button 语义和 Enter/Space 操作",
+          "message": "AssertionError: expected '/* ESM 垫片：window.SDT 命名空间的模块内引用（由 mai…' to contain 'rec.card.setAttribute(\\'role\\', \\'but…'\n    at D:\\素材\\代号柒\\搜打撤\\tests\\ui-accessibility-regression.test.js:24:20\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26\n    at file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)\n    at runTest (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)\n    at runSuite (file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1729:8)"
+        }
+      ]
+    }
+  ]
+}
