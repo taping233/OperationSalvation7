@@ -1,0 +1,64 @@
+{
+  "code": {
+    "commit": "f6bdaf669e294b24d6c467f2421334105a6b8b2f",
+    "gateReport": "docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-42-26.497Z-e40c60a6-staged.json",
+    "gateMode": "full",
+    "files": 257
+  },
+  "css": {
+    "commit": "d4e34ec2dca8e274b2d473716b2c99f913db505f",
+    "files": 24,
+    "removedDeclarations": 593,
+    "tests": {
+      "files": 11,
+      "passed": 183
+    },
+    "gate": "pure CSS: skip; human targeted/computed/static checks recorded"
+  },
+  "tools": {
+    "commit": "058dd7f1c51cb0ed6aca7acb1ef4b3838ac394dd",
+    "files": 6,
+    "gateMode": "quick",
+    "gateReport": "docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-10-07.249Z-a8fd9382-staged.json",
+    "tests": {
+      "files": 1,
+      "passed": 46
+    },
+    "offlineNai": {
+      "passed": 24,
+      "skipped": 1
+    },
+    "toml": "parsed with existing tomli; config content not edited this run"
+  },
+  "documentation": {
+    "files": 1128,
+    "commit": "查询本文件所在Git提交；不写入自引用SHA"
+  },
+  "sourceHead": "058dd7f1c51cb0ed6aca7acb1ef4b3838ac394dd",
+  "validation": {
+    "runtime": {
+      "files": 431,
+      "passed": 3934,
+      "skipped": 16
+    },
+    "css": {
+      "files": 11,
+      "passed": 183
+    },
+    "toolGate": {
+      "files": 1,
+      "passed": 46
+    },
+    "nai": {
+      "passed": 24,
+      "skipped": 1
+    }
+  },
+  "deleted": {
+    "trackedHistoricalMedia": 743,
+    "trackedPerfRecords": 13,
+    "trackedMartialArt": 4,
+    "approvedUntrackedV6Files": 2
+  },
+  "pushed": false
+}

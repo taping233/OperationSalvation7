@@ -1,0 +1,59 @@
+{
+  "sources": [
+    {
+      "path": "game/art-source/characters/wu-chibi-v2-20261014/setup-master.png",
+      "bytes": 1882989,
+      "sha256": "98f2b33ea4c0dbab618da63894c787c01c20f5995ace73bf61944104dc620c86",
+      "acquisition": "本聊天Codex内置image_gen；本地原稿按.gitignore保留，不进Git"
+    },
+    {
+      "path": "game/art-source/characters/wu-chibi-v2-20261014/body-underpaint.png",
+      "bytes": 1869248,
+      "sha256": "b7aee0a8235bf50ef8377b3cec8a4344d3c9ad7c411b5d1dca9c9ca4eb40d893",
+      "acquisition": "本聊天Codex内置image_gen；本地原稿按.gitignore保留，不进Git"
+    },
+    {
+      "path": "game/art-source/characters/wu-chibi-v2-20261014/legs-underpaint.png",
+      "bytes": 1904312,
+      "sha256": "326f4b8e63028a0930247936d5bc292bd672b8e5600fbde1afa7fe124f50c9d2",
+      "acquisition": "本聊天Codex内置image_gen；本地原稿按.gitignore保留，不进Git"
+    }
+  ],
+  "runtime": [
+    {
+      "path": "chibi/wu-v2/setup.webp",
+      "ext": "webp",
+      "bytes": 528284,
+      "sha256": "c456a4b056476a73f8d25373033690fb5f4ab6dc87cddcfe2141266736c94e47",
+      "license": "老板授权项目角色素材；Codex内置image_gen生成及透明无损编码",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
+      "path": "chibi/wu-v2/body-underpaint.webp",
+      "ext": "webp",
+      "bytes": 516170,
+      "sha256": "0a050443ce37acd219746a3ae55c177d37d4528812675f14833f525f33afbb4e",
+      "license": "老板授权项目角色素材；Codex内置image_gen生成及透明无损编码",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    },
+    {
+      "path": "chibi/wu-v2/legs-underpaint.webp",
+      "ext": "webp",
+      "bytes": 539972,
+      "sha256": "3ed0012a771a7d81d3fad9e226939389bba8f3f58bc14b3d01b0aa2b2119aba7",
+      "license": "老板授权项目角色素材；Codex内置image_gen生成及透明无损编码",
+      "source": "docs/evidence/2026-10-14-WF-base-chibi/README.md"
+    }
+  ],
+  "canvas": [
+    1024,
+    1536
+  ],
+  "runtimeCanvas": [
+    768,
+    1152
+  ],
+  "channel": "Codex内置image_gen",
+  "reference": "game/assets/portraits/full/wu.webp",
+  "referenceSha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc"
+}

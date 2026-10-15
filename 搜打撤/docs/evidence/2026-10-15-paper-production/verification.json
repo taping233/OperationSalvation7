@@ -1,0 +1,9 @@
+{
+  "tests": {"files":["card-face-presentation","card-reading-typography","contracts","architecture-boundaries"],"passed":73,"scope":"全种子卡库共用模板、13框映射、资源隐藏费用、费用独立上层、传说/棱彩光层、全文与转义、公共依赖边界"},
+  "eslint": "cards.view.js及卡面专测通过",
+  "docs": "docs:check通过；自有diff检查通过",
+  "finalCssFeedback": "光层蒙版与模糊分层后，两份卡面/阅读定向补验32项通过；自有源码/数据/清单diff检查通过，清单JSON内容在换行修复中保持不变",
+  "assets": {"selected":14,"scopeIssues":0,"globalOk":false,"globalErrorsAtCheck":94,"detail":"asset-scope.json；范围外资产登记问题未修改"},
+  "browser": {"source":"Codex内置浏览器当前窗口","url":"http://127.0.0.1:5200/","input":"真实点击进入城市、档位01、后勤、箭雨详情及关闭；未购买、出牌或改卡库","observed":"正式仓库5张卡和详情显示纸框/纸面；费用层z-index9高于框层7；框图及纸面已加载；详情可读并可返回","raritiesShown":["古朴","稀有"],"consoleErrors":0},
+  "notRun": ["构建","提交","战斗出牌复验","其他窗口尺寸","本轮全部高品质/职业实页交互"]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "cat",
+  "name": "招财猫",
+  "model": "nai-diffusion-4-5-full",
+  "recipe": "1.3",
+  "width": 1024,
+  "height": 1024,
+  "steps": 28,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nAn original lucky merchant cat, a living orange-and-ivory longhair rather than a ceramic figurine. It sits upright with a broad plume tail curling around its paws; one front paw is raised in a small inviting gesture and the other rests lightly on a single old copper coin. Amber eyes, short whiskers, a narrow white blaze and a confident half-smile give it a clever shopkeeper personality. A dark red braided collar holds a small patinated bronze bell and a tiny jade bead. Its coat has layered warm stripes, a soft cream chest ruff and believable feline proportions. The coin is a quiet accessory, never larger than the paw.\n\nOriginal high-quality painterly character concept for a fantasy card-game companion selection screen. Rich, memorable design with coherent anatomy, tactile materials and a readable silhouette at small display size.\n\nA single complete character in a lively three-quarter view, centered in a square 1024 by 1024 canvas, occupying about 75 percent of the frame. Entire silhouette visible with clean margins. Plain matte warm-gray background with only a faint contact shadow, no landscape, frame, lettering or other characters.\n\nBurnt orange, ivory, red cord, copper and jade; warm side lighting, large plush fur masses with selected fine whiskers and subtle scratched metal.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "uc": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, ceramic statue, maneki-neko toy, human, humanoid, extra paws, extra tails, oversized coin, giant eyes, cropped body, complex background, typography, border",
+  "naiImageReferences": [],
+  "seed": 317117240,
+  "source": "docs\\evidence\\2026-10-13-WF-pets-nai-six\\source\\cat.png",
+  "sha256": "9c9fa63d6700289ef16b8634b91cee58866cf03c5cac2303b82b8258a0e25ab3",
+  "bytes": 1371703
+}

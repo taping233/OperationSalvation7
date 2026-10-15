@@ -1,0 +1,347 @@
+{
+  "createdAt": "2026-10-14T15:22:27.702Z",
+  "sourceWorktree": "D:\\素材\\代号柒\\.tmp\\friday-cloud-review-integration-20261014",
+  "sourceHead": "2d1e7d9af7fe03a513a4e6c076a10ae278806c4a",
+  "reports": 4,
+  "records": 44,
+  "bytes": 14076796,
+  "verified": true,
+  "files": [
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T05-34-12.913Z-82bed44c-staged.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T05-34-12.913Z-82bed44c-staged.json",
+      "bytes": 3202599,
+      "sha256": "749018f036b1912dc6a2a61448339c1f5d10d5e6bc81dc49051e33de01a704de",
+      "type": "unique-staged-report"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T06-08-20.869Z-5907e3db-staged.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T06-08-20.869Z-5907e3db-staged.json",
+      "bytes": 3203094,
+      "sha256": "713c566ea3c720f869338e780b91a973745413080694f366c0c748424049e34b",
+      "type": "unique-staged-report"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T06-16-45.531Z-4d415bc7-staged.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T06-16-45.531Z-4d415bc7-staged.json",
+      "bytes": 3351549,
+      "sha256": "ad6db0f4787d9525e3887f33e5405851673fe36b291a86ff88e23cf48e219f7b",
+      "type": "unique-staged-report"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/docs/evidence/2026-10-14-WF-retired-art-1014/2026-10-14T06-39-13.455Z-a0f6c6b6-staged.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/docs/evidence/2026-10-14-WF-retired-art-1014/2026-10-14T06-39-13.455Z-a0f6c6b6-staged.json",
+      "bytes": 3335970,
+      "sha256": "8a8f7a1cc9dd72fed129a96cee533d3309a62a00122244bfc6a38741d3ec6fd2",
+      "type": "unique-staged-report"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/art-manifest-comparison.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/art-manifest-comparison.json",
+      "bytes": 233,
+      "sha256": "74f079eb636b510b940df61a55be203ce7f62806d4c66245eb4a4d0da19eb421",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/build-real-upstream-summary.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/build-real-upstream-summary.json",
+      "bytes": 444,
+      "sha256": "29b622052d87487363c3bf81a6d9f1b8e090712df82017216af3d8e19b8bd00c",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/build-real-upstream.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/build-real-upstream.log",
+      "bytes": 29947,
+      "sha256": "1b09724be5eb86b19922e0f08726ea7dc648baadd07815c2a5080aa4e341703e",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/close-integration.mjs",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/close-integration.mjs",
+      "bytes": 2821,
+      "sha256": "9af194eec8a55300b236bb301c9d867674979fa3e492ed5e18ad268bb89f1e65",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/close-retirement.mjs",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/close-retirement.mjs",
+      "bytes": 3627,
+      "sha256": "173c022ae468b824deb4ae3caf4aaa817c5abe22b4727f8fc6498eac51988a02",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/docs-check-integration.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/docs-check-integration.json",
+      "bytes": 2036,
+      "sha256": "2b91e91e7da560f2c6c37d5f9734a8e5be2682d0c9a65e4bd1b240956fc7a8dc",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/frozen-plan.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/frozen-plan.json",
+      "bytes": 24038,
+      "sha256": "61bccdfe9b2c52c8d6593e2b591acf79eccc220af9980ca997604de63e6fd64c",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/frozen-result-controlled.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/frozen-result-controlled.json",
+      "bytes": 3065,
+      "sha256": "d5aa9738eb89f2897384c1a555d34e2c6aef4b2f9a786e9b3b0ebfc7b5982629",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/frozen-result-retry.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/frozen-result-retry.json",
+      "bytes": 2981,
+      "sha256": "6a4fe8873c2ce095ee57c3ad0ac4b5fa4506cf9f3f79439fbc26c48b2496b319",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/frozen-result.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/frozen-result.json",
+      "bytes": 2981,
+      "sha256": "364cac9b85503251ad1c8c9b45c11a7171728129ce03f1ee8065889191d2e053",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/integration-close.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/integration-close.json",
+      "bytes": 585,
+      "sha256": "684275e57e2882738ce828ca331004434b6e643a673830df21a8021ccea7d549",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/integration-registry-close.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/integration-registry-close.json",
+      "bytes": 367,
+      "sha256": "4b0b99f7310f54cd3623f4f45b2c4034189b90a2b64245723aea40d948b36dfd",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/integration-registry.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/integration-registry.json",
+      "bytes": 455,
+      "sha256": "73ecc4cff9df003719b8154d7a602351dedf64eeba26d616cc58165568320347",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/integration-secret-scan-root.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/integration-secret-scan-root.json",
+      "bytes": 19714,
+      "sha256": "ee17665892209ad38493479d43898e36f1e9b7e0e41a81c429146d4b17e4afad",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/integration-secret-scan.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/integration-secret-scan.json",
+      "bytes": 19679,
+      "sha256": "66dea551db290ab6b256b030390cb72cef8fc083c167ef9d6eba01c93afcb2a2",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/migrate-retired-art.mjs",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/migrate-retired-art.mjs",
+      "bytes": 1772,
+      "sha256": "ca095d154af69c45af080c7927119cbc65335c75c60b2876936bcf1b0edbd988",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/npm-ci-official.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/npm-ci-official.log",
+      "bytes": 151,
+      "sha256": "218eaed0c097a7e887516ab66c5bcc257880f2ef92f792f661c20f8bd4280073",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/original-workspace-state.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/original-workspace-state.json",
+      "bytes": 338166,
+      "sha256": "b14871c4238b8d52637234d20eff207b880cee3e6e6c9fc9ce71aacaf165fb96",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/port-native-diagnosis.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/port-native-diagnosis.json",
+      "bytes": 1719,
+      "sha256": "a712ebc9ced2724e203a8967dc9824e85ae92de33201a3b99af810aea0fb544e",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/port-target-before.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/port-target-before.log",
+      "bytes": 6340,
+      "sha256": "79ff71cf52b1009fedf66e85b61db6de81f9155104dccd1ae755e6543e3a0c04",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/port-target-final.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/port-target-final.log",
+      "bytes": 3992,
+      "sha256": "85f94cd282ee3885a0d4252661d1117cdbd4e69f6bbb9f30aa931092331fe223",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/port-target-wildcard-fixed.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/port-target-wildcard-fixed.log",
+      "bytes": 2721,
+      "sha256": "8f1b04948970fedf87918c1ac2355c4eac367f10b074473b7f512bb83e29d811",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/prepare-retirement.mjs",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/prepare-retirement.mjs",
+      "bytes": 2530,
+      "sha256": "482e73cad7afbb74b84a843ceca1f98b559880744998981cee9caebddc74ddeb",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/preserve-original-retirement.mjs",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/preserve-original-retirement.mjs",
+      "bytes": 2402,
+      "sha256": "81bde9f4ab7e423d8ef97e8e8655444c6b73c359f845f4dc43248309f207ce99",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-asset-check.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-asset-check.log",
+      "bytes": 152,
+      "sha256": "0a23143fba7bdbfa26f66b3b6435693a7a573c56836eb37b86943570c3bec1fa",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-build-final-escalated.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-build-final-escalated.log",
+      "bytes": 30038,
+      "sha256": "1a1d2883d883dfa3bfbdf49b2628ed35d645e462bbd0885e36a0618ced0f2885",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-build-final.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-build-final.log",
+      "bytes": 1751,
+      "sha256": "6b486b63e39f6c4629a5fac330c762da2eba6a373621d6a713807257dad8b901",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-build.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-build.log",
+      "bytes": 30038,
+      "sha256": "70fcc52c65754d5036083eddca83f245fe51377ee828dd4d77df2b3c1437e062",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-check.mjs",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-check.mjs",
+      "bytes": 2925,
+      "sha256": "6573b157963a551472abe62db8bf589313e4dd355fd1dcaeaa882d87b82db0d7",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-close.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-close.json",
+      "bytes": 628,
+      "sha256": "6a100e20c4be6a6d5031d1056a6bc084a0d8ae7fa5859f59631106887660617a",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-gate-plan.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-gate-plan.json",
+      "bytes": 13793,
+      "sha256": "76996f02aa7728b5657125e9da58e02e7083caab13ea0c8a72d3ee5cecc201d2",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-original-before.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-original-before.json",
+      "bytes": 326897,
+      "sha256": "0cac54dd1481a01a2fefcc69239467e8c5b74fad5e6459a81355835dff82666d",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-registry-close.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-registry-close.json",
+      "bytes": 421,
+      "sha256": "e370520806d6c4d81ef28d77e64f49214214a96c6711b44b920d866bd364b46f",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-registry.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-registry.json",
+      "bytes": 297,
+      "sha256": "e888c4c17d8fa9bbbbbb3a5af228659360eddaf4abf8b790ec6bb0e2727e3870",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-secret-scan.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-secret-scan.json",
+      "bytes": 5063,
+      "sha256": "6bb337f62ec83981bb30c5cb7fae5ffc9b4a1553fe582e61197aa510c304105c",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-staged-result.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-staged-result.json",
+      "bytes": 916,
+      "sha256": "e0a8264e6dc0bac324d57a9cab9300654767542d3a89d46d293b3e82c283378c",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/retirement-target.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/retirement-target.log",
+      "bytes": 466,
+      "sha256": "87a9d7824f38c156c6f540671dbdf3ff9fcfd5fa76b33a4ca1919da4ec4c0a50",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/secret-scan-final.json",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/secret-scan-final.json",
+      "bytes": 19948,
+      "sha256": "98b29ee5bfbea36548c4e139e7ee68320d758c3e36286d2075f807845e56c4cc",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/secret-scan.py",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/secret-scan.py",
+      "bytes": 4750,
+      "sha256": "ff676fdf819920dbe1f4a220c052027edd5e3374b8e6245aa051979460c1622d",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/.tmp/verify-controlled-receipt.mjs",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/.tmp/verify-controlled-receipt.mjs",
+      "bytes": 744,
+      "sha256": "25aaf0fbdb985bcfe65c8059194fdec21cff060d1cc6998741e991685fd60042",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T05-34-12.913Z-82bed44c-staged.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T05-34-12.913Z-82bed44c-staged.log",
+      "bytes": 20517,
+      "sha256": "900e7cc97a3b142355fc343b0929d284b2e934cf209e306c3c731e25d91e328b",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T06-08-20.869Z-5907e3db-staged.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T06-08-20.869Z-5907e3db-staged.log",
+      "bytes": 19442,
+      "sha256": "cec94dbea9afe0b7bd5c2803f32e9f35a67e8feb4f19ac7ff0da160980f9b591",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T06-16-45.531Z-4d415bc7-staged.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/docs/evidence/2026-10-14-WF-cloud-review-integration-1014/2026-10-14T06-16-45.531Z-4d415bc7-staged.log",
+      "bytes": 18500,
+      "sha256": "16fc32b69db0ad52ea64e664c6dea833555d670c36206a60cc9ea30313d2b100",
+      "type": "ignored-record"
+    },
+    {
+      "source": ".tmp/friday-cloud-review-integration-20261014/搜打撤/docs/evidence/2026-10-14-WF-retired-art-1014/2026-10-14T06-39-13.455Z-a0f6c6b6-staged.log",
+      "preserved": "搜打撤/docs/evidence/2026-10-14-WF-approved-storage-cleanup/preserved/搜打撤/docs/evidence/2026-10-14-WF-retired-art-1014/2026-10-14T06-39-13.455Z-a0f6c6b6-staged.log",
+      "bytes": 13532,
+      "sha256": "38554e900464e98b157d85186c23eb0086ea2b3916080379ba4e4886cfc7fc81",
+      "type": "ignored-record"
+    }
+  ]
+}

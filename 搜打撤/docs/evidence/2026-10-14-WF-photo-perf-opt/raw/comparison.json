@@ -1,0 +1,77 @@
+{
+  "displayParametersMatch": true,
+  "viewport": {
+    "width": 683,
+    "height": 956,
+    "dpr": 1.25
+  },
+  "rows": [
+    {
+      "action": "btnCardLib",
+      "beforeN": 10,
+      "afterN": 5,
+      "beforeMedianMs": 198.20000000298023,
+      "afterMedianMs": 153.29999999701977,
+      "reductionPercent": 22.6538849673488,
+      "beforeRangeMs": [
+        113.6000000089407,
+        278.79999999701977
+      ],
+      "afterRangeMs": [
+        129.70000000298023,
+        242.4000000059605
+      ]
+    },
+    {
+      "action": "libType1",
+      "beforeN": 10,
+      "afterN": 5,
+      "beforeMedianMs": 122.8999999910593,
+      "afterMedianMs": 106.09999999403954,
+      "reductionPercent": 13.66965012061996,
+      "beforeRangeMs": [
+        69.80000001192093,
+        152.59999999403954
+      ],
+      "afterRangeMs": [
+        93.79999999701975,
+        126.79999999701975
+      ]
+    },
+    {
+      "action": "libType0",
+      "beforeN": 10,
+      "afterN": 5,
+      "beforeMedianMs": 144.85000000149012,
+      "afterMedianMs": 126.20000000298025,
+      "reductionPercent": 12.875388331596833,
+      "beforeRangeMs": [
+        80.79999999701977,
+        276.3999999910593
+      ],
+      "afterRangeMs": [
+        101,
+        168.70000000298023
+      ]
+    }
+  ],
+  "visualAnimationParametersUnchanged": true,
+  "afterSlowFilterReads": [
+    {
+      "duration": 1.1000000089406967,
+      "read": "offsetHeight",
+      "stack": "Error\n    at HTMLDivElement.get [as offsetHeight] (<anonymous>:39:121)\n    at syncLibTileIntrinsicSize (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:503:17)\n    at renderLibGrid (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:701:3)\n    at http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:836:5\n    at action (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:91:71)\n    at HTMLDivElement.<anonymous> (http://localhost:5200/src/ui/ui.js?t=1791994248364:50:16)",
+      "start": 16142
+    }
+  ],
+  "observedLongTasks": {
+    "beforeAcross30Actions": 40,
+    "afterAcross15Actions": 24
+  },
+  "notes": [
+    "presentMs is trusted click to two rAF callbacks after DOM update, not hardware screen presentation or FPS",
+    "Cold module load and explicit warmup are excluded; five reopen/filter rounds per batch",
+    "Two earlier pairs had DPR mismatch and are excluded; intermediate implementation after-fixed is diagnostic only",
+    "Sequential before/after/before batches; no randomised order or statistical significance claim"
+  ]
+}

@@ -33,10 +33,21 @@
     "本地生产构建未运行；后续远端CI另核验",
     "本任务为工程阶段记录，推送与Library交付由同会话随后执行并以最终平台结果为准"
   ],
-  "updatedAt": "2026-10-13T17:15:49.289Z",
+  "updatedAt": "2026-10-14T07:47:26.011436+00:00",
   "closure": {
     "kind": "manual",
     "doneWhenConfirmed": true,
     "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  },
+  "delivery": {
+    "status": "committed",
+    "commit": "e82895d5ecc4420ffbf64878d9eb6b850ae926db",
+    "verifiedAt": "2026-10-14T07:47:26.011436+00:00",
+    "head": "bf6129520b55e28698c749ce7dbc6d327b85866a",
+    "evidence": "docs/evidence/2026-10-14-WF-ledger-cleanup-1014/README.md",
+    "limits": [
+      "仅确认本地HEAD包含提交；不新增远端、CI、Library或实页通过结论",
+      "stage保留原执行收官状态，交付事实以delivery和实时Git为准"
+    ]
   }
 }

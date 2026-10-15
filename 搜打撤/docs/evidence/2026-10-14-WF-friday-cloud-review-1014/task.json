@@ -48,10 +48,21 @@
     "Vitest/mocker大版本安全升级未实施；未执行公开依赖图audit",
     "修复尚待真实上游历史接入、正常钩子提交、推送与对应CI"
   ],
-  "updatedAt": "2026-10-13T19:07:24.112278+00:00",
+  "updatedAt": "2026-10-14T07:47:26.011436+00:00",
   "closure": {
     "kind": "manual",
     "doneWhenConfirmed": true,
     "statement": "完成本轮确认缺陷修复和实际体验审查，开放风险已明确，不代表全项目所有质量门通过"
+  },
+  "delivery": {
+    "status": "committed",
+    "commit": "367db7c1a7dd149c7e8088bd4ae4e2d9e7debd12",
+    "verifiedAt": "2026-10-14T07:47:26.011436+00:00",
+    "head": "bf6129520b55e28698c749ce7dbc6d327b85866a",
+    "evidence": "docs/evidence/2026-10-14-WF-ledger-cleanup-1014/README.md",
+    "limits": [
+      "仅确认本地HEAD包含提交；不新增远端、CI、Library或实页通过结论",
+      "stage保留原执行收官状态，交付事实以delivery和实时Git为准"
+    ]
   }
 }

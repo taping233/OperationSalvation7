@@ -1,0 +1,8 @@
+{
+  "path": "game/art-source/card-frame-study-1014/rare-light-preview.png",
+  "sha256": "73b97cf1bd94a35630949282e8596f1f5053823b719e6ff3e3541462a11005bb",
+  "bytes": 1417481,
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-2d4423c4-5853-483a-8bde-b32b8ac7966d.png",
+  "recovery": "复制source到path并核对SHA256；PNG由现有*.png规则排除Git",
+  "scope": "仅gallery.html的稀有元素爆裂样例；未改正式游戏素材，未测试、未构建、未提交"
+}

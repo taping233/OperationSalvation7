@@ -1,0 +1,28 @@
+{
+  "mode": "pan",
+  "elapsedMs": 6002.7,
+  "viewport": {
+    "cssWidth": 1603,
+    "cssHeight": 808.19,
+    "bufferWidth": 2004,
+    "bufferHeight": 1010,
+    "dpr": 1.25
+  },
+  "rendererScope": "SDT.Renderer.draw calls only; does not include Pixi frame compositing or other browser painting.",
+  "frameCallbacks": 863,
+  "rafHz": 143.77,
+  "rafMetricLabel": "rAF callback rate; not screen FPS",
+  "screenFps": null,
+  "frameMedianMs": 6.9,
+  "frameP95Ms": 7.1,
+  "over20msPercent": 0,
+  "drawCalls": 863,
+  "drawHz": 143.77,
+  "drawMedianMs": 0.2,
+  "drawP95Ms": 0.4,
+  "drawMaxMs": 0.7,
+  "longTasks": 0,
+  "longTaskMaxMs": null,
+  "loopTicks": 863,
+  "visible": true
+}

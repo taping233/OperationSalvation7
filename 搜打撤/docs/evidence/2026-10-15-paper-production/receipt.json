@@ -1,0 +1,331 @@
+{
+  "request": "docs/evidence/2026-10-15-paper-careers-simple/request.json",
+  "frames": {
+    "initial": {
+      "path": "ui/card-frames/paper-1015/initial.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        57.0,
+        61.5,
+        411.0,
+        650.5
+      ]
+    },
+    "common": {
+      "path": "ui/card-frames/paper-1015/common.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        57.0,
+        66.0,
+        411.0,
+        646.0
+      ]
+    },
+    "rare": {
+      "path": "ui/card-frames/paper-1015/rare.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        56.5,
+        65.5,
+        411.0,
+        646.0
+      ]
+    },
+    "epic": {
+      "path": "ui/card-frames/paper-1015/epic.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        57.5,
+        62.5,
+        411.0,
+        642.5
+      ]
+    },
+    "legendary": {
+      "path": "ui/card-frames/paper-1015/legendary.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        56.5,
+        65.5,
+        399.5,
+        639.0
+      ]
+    },
+    "prism": {
+      "path": "ui/card-frames/paper-1015/prism.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        58.0,
+        73.0,
+        404.5,
+        625.0
+      ]
+    },
+    "token": {
+      "path": "ui/card-frames/paper-1015/token.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        57.0,
+        66.0,
+        410.5,
+        645.5
+      ]
+    },
+    "wu": {
+      "path": "ui/card-frames/paper-1015/wu.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        58.5,
+        67.5,
+        410.5,
+        645.0
+      ]
+    },
+    "xingyue": {
+      "path": "ui/card-frames/paper-1015/xingyue.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        59.0,
+        62.5,
+        411.0,
+        649.5
+      ]
+    },
+    "changwuyu": {
+      "path": "ui/card-frames/paper-1015/changwuyu.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        60.5,
+        66.5,
+        406.0,
+        639.0
+      ]
+    },
+    "baita": {
+      "path": "ui/card-frames/paper-1015/baita.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        58.5,
+        62.0,
+        410.0,
+        650.0
+      ]
+    },
+    "heixiang": {
+      "path": "ui/card-frames/paper-1015/heixiang.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        58.0,
+        65.0,
+        382.5,
+        636.0
+      ]
+    },
+    "neutral": {
+      "path": "ui/card-frames/paper-1015/neutral.webp",
+      "width": 512,
+      "height": 768,
+      "opening": [
+        57.0,
+        61.5,
+        411.0,
+        650.5
+      ]
+    }
+  },
+  "assets": [
+    {
+      "path": "ui/card-frames/paper-1015/initial.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 105624,
+      "sha256": "e9a8c4854370de18e05ca552a2880e7a70a75f85b67c18f22f0887a11bee16a2",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/common.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 113986,
+      "sha256": "ec369250d4ac6e1a40306c1000f3fe75773ca7a21015e32ffa781a38e37867f6",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/rare.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 124704,
+      "sha256": "c9a16e40bc710b41a433319356059dea71e86a47f3e97c00270a61d16cb73e6d",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/epic.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 148072,
+      "sha256": "aabae03f47c5b104a79e07229fe7f3e5fd3f18376d3274879ef077d8aa57be87",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/legendary.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 198322,
+      "sha256": "0c907b17b7a99ce5fe648425dd5a9b6249bc2adba35d0b90a153a7630f263d1a",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/prism.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 188376,
+      "sha256": "dac0d2c4512a2b1f4da3d592bc2625b6bfe5f5360f2786d0cda394bd3d65d81c",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/token.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 111706,
+      "sha256": "4152890a669679a61872078a8abfa22eb4f361c23cf3de9eaf55987e60015879",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/wu.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 109956,
+      "sha256": "b03ead8c11a2a44f1a25e3337824c03daa37067ac11be70363624b72f3f1b7f7",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/xingyue.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 104462,
+      "sha256": "017972b0552e0e74e653f7fadbfe58d69ccbb2ba1f0219e69491f923f73a8bca",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/changwuyu.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 103544,
+      "sha256": "940e81ce0da48ae69ac5d8052f5730e6d4a19ee88fed4abb8a85e5396577a723",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/baita.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 123356,
+      "sha256": "1a707ee4cb1c53dc58b5474aa4efca159f3b377b566da19f5a0aa9eca364bbca",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/heixiang.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 140302,
+      "sha256": "f78bd8229a336e252cad38f751af5bf3460d21494f96b223260f0ba17ecc73b7",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/neutral.webp",
+      "ext": "webp",
+      "license": "老板授权原创纸边卡框；Codex内置image_gen重绘",
+      "bytes": 105624,
+      "sha256": "e9a8c4854370de18e05ca552a2880e7a70a75f85b67c18f22f0887a11bee16a2",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    },
+    {
+      "path": "ui/card-frames/paper-1015/interior.webp",
+      "ext": "webp",
+      "license": "老板授权原创手绘纸面；Codex内置image_gen生成",
+      "bytes": 69756,
+      "sha256": "f172a651f7abad5ba0f6f72e5516fedab0ee85b31e945fda17689ba82b8830d9",
+      "source": "docs/evidence/2026-10-15-paper-production/receipt.json"
+    }
+  ],
+  "provenance": [
+    {
+      "key": "initial",
+      "raw": "game/art-source/card-paper-rarity-20261015/initial.png",
+      "rawSha256": "ed9b9813778f33588b8e6e0cbdeefd97b290d17fd848a534fa96a1b71281c8ab"
+    },
+    {
+      "key": "common",
+      "raw": "game/art-source/card-paper-rarity-20261015/common.png",
+      "rawSha256": "d943b1a74ce5a1c82fae4c01e2155c0ea4dbd10c727cee30b6cfaf09090c5f2e"
+    },
+    {
+      "key": "rare",
+      "raw": "game/art-source/card-paper-rarity-20261015/rare.png",
+      "rawSha256": "df3369f3374fd5b1de52e439ac93470339eead34c8a2374db8d7a9d54931e8db"
+    },
+    {
+      "key": "epic",
+      "raw": "game/art-source/card-paper-rarity-20261015/epic-rich.png",
+      "rawSha256": "88a2ebfc5e5a94261d8e43b401e9aa65227f0284586cee6bbe6e442d401c3c79"
+    },
+    {
+      "key": "legendary",
+      "raw": "game/art-source/card-paper-rarity-20261015/legendary-rich.png",
+      "rawSha256": "0f0cd0683d8e1a617584848725b0b5b2b76356839171d430f98487416fa4c947"
+    },
+    {
+      "key": "prism",
+      "raw": "game/art-source/card-paper-rarity-20261015/prism-rich.png",
+      "rawSha256": "571a8a1ac481bd7aa04012926aad9c058c69f5521d4196c6d444d3c4634f1059"
+    },
+    {
+      "key": "token",
+      "raw": "game/art-source/card-paper-rarity-20261015/token.png",
+      "rawSha256": "4babe29b57380e89822f54e14b9ac01e3daf1189d9e0bd29bfa5e2d2fcb1c179"
+    },
+    {
+      "key": "wu",
+      "raw": "game/art-source/card-paper-rarity-20261015/career-wu-simple.png",
+      "rawSha256": "8a66ac457997bf16cfc1bbb5b67b920a3dd0cd2fb11b2f9b745661cb1337e23c"
+    },
+    {
+      "key": "xingyue",
+      "raw": "game/art-source/card-paper-rarity-20261015/career-xingyue-simple.png",
+      "rawSha256": "7198ab9a378e9e610619b9caf9495df9e88566728d9dcaf1a38486e3eb79062a"
+    },
+    {
+      "key": "changwuyu",
+      "raw": "game/art-source/card-paper-rarity-20261015/career-changwuyu-simple-final.png",
+      "rawSha256": "f73fa467ec68c9510819c25a533e3d45978e2d9733a1f4f14c306c5d0c0d2820"
+    },
+    {
+      "key": "baita",
+      "raw": "game/art-source/card-paper-rarity-20261015/career-baita-simple-final.png",
+      "rawSha256": "4b3acf30bcff98b918127b927ee9059e5f88767b3466a3e1146e5d549fd445c3"
+    },
+    {
+      "key": "heixiang",
+      "raw": "game/art-source/card-paper-rarity-20261015/career-heixiang-simple-final.png",
+      "rawSha256": "284ac376766f1c7d84977e6c464c6dad1df575727a3c9bfe34ce4d7a44b6a99a"
+    },
+    {
+      "key": "neutral",
+      "raw": "game/art-source/card-paper-rarity-20261015/initial.png",
+      "rawSha256": "ed9b9813778f33588b8e6e0cbdeefd97b290d17fd848a534fa96a1b71281c8ab"
+    }
+  ],
+  "backup": ".tmp/imagegen/2026-10-15-paper-production",
+  "neutral": "无人物职业卡复用素纸初始框，保留职业语义"
+}

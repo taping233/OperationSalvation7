@@ -1,0 +1,10 @@
+game/src/agent/agent.state.js:12:import { collectUiActions, collectActionKeys, overlayBody, overlayVisible } from './agent.surface.js';
+game/src/agent/agent.state.js:303:function observe() {
+game/src/agent/agent.state.js:309:  const uiActions = collectUiActions();
+game/src/agent/agent.state.js:363:function bustSigCache() { sigCacheT = -1e9; }
+game/src/agent/agent.state.js:364:function settleSignature() {
+game/src/agent/agent.state.js:382:export { observe, settleSignature, bustSigCache, phaseOf, markUiFailure };
+game/src/agent/agent.surface.js:40:function collectUiActions() {
+game/src/agent/agent.surface.js:118:export { collectUiActions, collectActionKeys, findUiElement, overlayVisible, overlayBody };
+game/src/agent/agent.runner.js:13:import { observe, settleSignature, bustSigCache, markUiFailure } from './agent.state.js';
+game/src/agent/agent.runner.js:303:  bustSigCache();   // 状态已被 act 改写：作废 before 写入的 TTL 缓存，首轮探测立即可见

@@ -1,0 +1,251 @@
+[
+  {
+    "file": "game/src/hub/hub.archive.js",
+    "beforeSha256": "6ae64ed5b5458588e98487d54d089080df17a7ffce9dc25ad3b8530d9b40c97f",
+    "afterSha256": "bb4db75bb2c02a828710bdda484b771c85bde59026fcdeeba11b44c94c79957b",
+    "removedBytes": 3479,
+    "symbols": [
+      {
+        "name": "cardBackGalleryHTML",
+        "action": "remove",
+        "line": 6
+      },
+      {
+        "name": "storyArchiveHTML",
+        "action": "remove",
+        "line": 35
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "bb4db75bb2c02a828710bdda484b771c85bde59026fcdeeba11b44c94c79957b"
+  },
+  {
+    "file": "game/src/hub/hub.facilities.js",
+    "beforeSha256": "39bf6dcdcf9f3c16517246c452d6d648931076286fed3fe1526960257a4af2df",
+    "afterSha256": "00fc9dfc2a3a0f49daeacf7141da597fde24a5b3b6c102d892c24827b193f87c",
+    "removedBytes": 330,
+    "symbols": [
+      {
+        "name": "logisticsTabsHTML",
+        "action": "remove",
+        "line": 7
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "00fc9dfc2a3a0f49daeacf7141da597fde24a5b3b6c102d892c24827b193f87c"
+  },
+  {
+    "file": "game/src/hub/hub.visuals.js",
+    "beforeSha256": "860a1e9ddbc7cc60bcd55542bfec20ea4ea8d8665c7393363409b74fedea314d",
+    "afterSha256": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78",
+    "removedBytes": 1177,
+    "symbols": [
+      {
+        "name": "materialIllustration",
+        "action": "remove",
+        "line": 19
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78"
+  },
+  {
+    "file": "game/src/hub/hub.warehouse.js",
+    "beforeSha256": "e695f72cff6bf4b3e51eba5814c57d742fd2391ec362580fc023cf375d9640c7",
+    "afterSha256": "93560f4e118c562feebe83cea64451f86040260256209a56092ddfb526dfc82e",
+    "removedBytes": 74,
+    "symbols": [
+      {
+        "name": "pocketWarehouseHTML",
+        "action": "remove",
+        "line": 70
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "93560f4e118c562feebe83cea64451f86040260256209a56092ddfb526dfc82e"
+  },
+  {
+    "file": "game/src/hub/hub.presentation.js",
+    "beforeSha256": "ab295fd50246dfb69dd72688c2659b906d70bdb2dd9cc0f181ae268e0ddbfa3f",
+    "afterSha256": "364bbc0b5dfe309ca947d3fd2d3369a9038826a5caf0586af121e4618dece461",
+    "removedBytes": 346,
+    "symbols": [
+      {
+        "name": "animateReader",
+        "action": "remove",
+        "line": 103
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "364bbc0b5dfe309ca947d3fd2d3369a9038826a5caf0586af121e4618dece461"
+  },
+  {
+    "file": "game/src/core/map-node-glow.js",
+    "beforeSha256": "ecd375b59aea553b276c2e37af0e4f3d4bcbdb0a757c0e7f67cf7cff6321183c",
+    "afterSha256": "ade0ca6cf9a32339c05fc5fe924ed890f939915dbab6db30a83ed3b382dd1507",
+    "removedBytes": 77,
+    "symbols": [
+      {
+        "name": "GLOW_BREATH_PERIOD_S",
+        "action": "remove",
+        "line": 11
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "ade0ca6cf9a32339c05fc5fe924ed890f939915dbab6db30a83ed3b382dd1507"
+  },
+  {
+    "file": "scripts/acceptance-gate.mjs",
+    "beforeSha256": "0d19a6a40447f15a99809d94f3ad7b48a71c0566da0ca9c934dd98b7383891f2",
+    "afterSha256": "b6c3ad5a53e5478d74922cf5505afeaf2eb6be7afca995825020f54a399070b8",
+    "removedBytes": 7,
+    "symbols": [
+      {
+        "name": "formatDirtyReport",
+        "action": "localize",
+        "line": 62
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "f3bd5d6bf16bdb9c80f74f02afcc39a82c8764120eaa3e9a57ff9a0a1eec2cac"
+  },
+  {
+    "file": "scripts/gate-plan.mjs",
+    "beforeSha256": "cefcf51ad1a596ec61b3ae243b62d9bffbae6e5c2536b0e54db482080d25ac2b",
+    "afterSha256": "1d2300116ad390299a04341a6c66e914f7b04a86bdb6e585580a22a24f54bda2",
+    "removedBytes": 7,
+    "symbols": [
+      {
+        "name": "isQualityConfigPath",
+        "action": "localize",
+        "line": 74
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "1d2300116ad390299a04341a6c66e914f7b04a86bdb6e585580a22a24f54bda2"
+  },
+  {
+    "file": "scripts/impact-query.mjs",
+    "beforeSha256": "bff91aa0c301560792967c39a8cf128b086cf7f44ea960b0ac458f5c87be0d66",
+    "afterSha256": "a9d3f6e7c4a6509d00c83eb047b54ffe49a19ea844b52845626b586184503435",
+    "removedBytes": 7,
+    "symbols": [
+      {
+        "name": "scanLooseEdges",
+        "action": "localize",
+        "line": 33
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "a9d3f6e7c4a6509d00c83eb047b54ffe49a19ea844b52845626b586184503435"
+  },
+  {
+    "file": "scripts/runtime-asset-redundancy.mjs",
+    "beforeSha256": "66fac3fac34d2526e3ad165404c305cd631ff864ba1a861f7170cec1721b84d7",
+    "afterSha256": "2a30cddbd4c9a3185b6e8fff05a2857bcc8419097e017a98000d73ad9cd3451a",
+    "removedBytes": 14,
+    "symbols": [
+      {
+        "name": "hasOpaqueRuntimeSourcePaths",
+        "action": "localize",
+        "line": 46
+      },
+      {
+        "name": "readRuntimeReviewSources",
+        "action": "localize",
+        "line": 56
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "01cda0540f9488a52fe1e020688fc2f6217e301f64780ee40a60dcd25b4a582b"
+  },
+  {
+    "file": "scripts/workflow-dependencies.mjs",
+    "beforeSha256": "534fa5b554dbfc112c8f683d9ba4c9aa837bc0d53b76e1c7660f3346c0fb129b",
+    "afterSha256": "e8d73af8dd2b626300e78d8863eef5e5d3e7086bf2b1aca1919e109063eaf4d7",
+    "removedBytes": 7,
+    "symbols": [
+      {
+        "name": "INPUT_CONTRACTS",
+        "action": "localize",
+        "line": 29
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "e8d73af8dd2b626300e78d8863eef5e5d3e7086bf2b1aca1919e109063eaf4d7"
+  },
+  {
+    "file": "scripts/workflow-evidence.mjs",
+    "beforeSha256": "8e4f98911df056b0ef3d4f7d08be371aa3ef9b9073c081eb5bfdb6ddec2ba4d0",
+    "afterSha256": "9ec0fca23a27972c533f0b88624455d44700c6799b37157a9119230c59334192",
+    "removedBytes": 14,
+    "symbols": [
+      {
+        "name": "WATCHED",
+        "action": "localize",
+        "line": 10
+      },
+      {
+        "name": "STATE_FILES",
+        "action": "localize",
+        "line": 11
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "9ec0fca23a27972c533f0b88624455d44700c6799b37157a9119230c59334192"
+  },
+  {
+    "file": "scripts/workflow-gate-receipt.mjs",
+    "beforeSha256": "a7d9956f363b4b584abe1bd200a55c58d6740ca2a0d69f6afde458436f908f22",
+    "afterSha256": "d9d3307cda3fe30ce97a320136a85352dc0accc19332f96f362d0bce83d2207b",
+    "removedBytes": 7,
+    "symbols": [
+      {
+        "name": "DEPENDENCY_CACHES",
+        "action": "localize",
+        "line": 11
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "d9d3307cda3fe30ce97a320136a85352dc0accc19332f96f362d0bce83d2207b"
+  },
+  {
+    "file": "scripts/workflow-ledger.mjs",
+    "beforeSha256": "c946d12ee43c0e8571461a7b981af572733839652a7aec0a7d437372b5d87c4f",
+    "afterSha256": "3769564ecce57cffb2e2318e78f04b70213c996bbf11d0757da4f74c2bee2b12",
+    "removedBytes": 7,
+    "symbols": [
+      {
+        "name": "LEDGERS",
+        "action": "localize",
+        "line": 6
+      }
+    ],
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "3769564ecce57cffb2e2318e78f04b70213c996bbf11d0757da4f74c2bee2b12"
+  },
+  {
+    "file": "game/src/hub/game.hub.runtime.js",
+    "beforeSha256": "2e6987cc1d22ac1fb71638ede1f1471e38ccac1fc254b8d2256065310a1b7f65",
+    "afterSha256": "f2a29860e94e0625b17da6ee11fde313106b5381a2441d1fef4cf18f9a32f8bd",
+    "note": "align bindArchive signature after removing unused legacy card-back renderer",
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "f2a29860e94e0625b17da6ee11fde313106b5381a2441d1fef4cf18f9a32f8bd"
+  },
+  {
+    "file": "tests/hub-archive-v3.test.js",
+    "beforeSha256": "59c00b04ab0ac42d4989a5b3040d65828cee541ecaa46409ee5ec39acd8ae15b",
+    "afterSha256": "43790e41462220c005cba86198018320d7bb17366c4a9e4a5301e2970e0594e1",
+    "note": "align bindArchive signature after removing unused legacy card-back renderer",
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "43790e41462220c005cba86198018320d7bb17366c4a9e4a5301e2970e0594e1"
+  },
+  {
+    "file": "game/src/hub/hub.archive-v3.js",
+    "beforeSha256": "692c893a05a14df727cd84629fd29725afe90ccf51eb1fe7946a0e6782e5acf1",
+    "afterSha256": "848f1eca823675bfe5c89ac6fff4b1b31392102e975790efc5fd840b0a04b10f",
+    "note": "align bindArchive signature after removing unused legacy card-back renderer",
+    "phase": "initial dead-code cleanup",
+    "finalSha256": "848f1eca823675bfe5c89ac6fff4b1b31392102e975790efc5fd840b0a04b10f"
+  }
+]

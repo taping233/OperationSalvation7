@@ -1,0 +1,266 @@
+{
+  "platform": "Codex In-app Browser",
+  "origin": "http://localhost:5200/",
+  "viewport": {
+    "height": 720,
+    "width": 1280
+  },
+  "properties": 25,
+  "summary": [
+    {
+      "label": "photo",
+      "beforeRecords": 840,
+      "afterRecords": 840,
+      "rawDifferences": 0,
+      "pageDifferences": 0
+    },
+    {
+      "label": "title",
+      "beforeRecords": 208,
+      "afterRecords": 208,
+      "rawDifferences": 5,
+      "pageDifferences": 5
+    },
+    {
+      "label": "settings",
+      "beforeRecords": 276,
+      "afterRecords": 276,
+      "rawDifferences": 1,
+      "pageDifferences": 0
+    },
+    {
+      "label": "slots",
+      "beforeRecords": 491,
+      "afterRecords": 491,
+      "rawDifferences": 11,
+      "pageDifferences": 1
+    },
+    {
+      "label": "base",
+      "beforeRecords": 88,
+      "afterRecords": 88,
+      "rawDifferences": 0,
+      "pageDifferences": 0
+    },
+    {
+      "label": "personnel",
+      "beforeRecords": 126,
+      "afterRecords": 126,
+      "rawDifferences": 0,
+      "pageDifferences": 0
+    },
+    {
+      "label": "warehouse",
+      "beforeRecords": 264,
+      "afterRecords": 264,
+      "rawDifferences": 0,
+      "pageDifferences": 0
+    },
+    {
+      "label": "trade",
+      "beforeRecords": 287,
+      "afterRecords": 287,
+      "rawDifferences": 0,
+      "pageDifferences": 0
+    },
+    {
+      "label": "archive",
+      "beforeRecords": 107,
+      "afterRecords": 107,
+      "rawDifferences": 0,
+      "pageDifferences": 0
+    },
+    {
+      "label": "upgrade",
+      "beforeRecords": 126,
+      "afterRecords": 126,
+      "rawDifferences": 0,
+      "pageDifferences": 0
+    },
+    {
+      "label": "courtyard",
+      "beforeRecords": 102,
+      "afterRecords": 102,
+      "rawDifferences": 0,
+      "pageDifferences": 0
+    }
+  ],
+  "rawComparisons": [
+    {
+      "label": "photo",
+      "before": 840,
+      "after": 840,
+      "changes": []
+    },
+    {
+      "label": "title",
+      "before": 208,
+      "after": 208,
+      "changes": [
+        {
+          "key": "#title>div:nth-child(17)>aside:nth-child(2)::before",
+          "property": "background-image",
+          "before": "radial-gradient(at 12% 0px, rgba(200, 221, 243, 0.15), rgba(0, 0, 0, 0) 62%), linear-gradient(145deg, rgba(38, 60, 85, 0.17), rgba(9, 18, 32, 0.45))",
+          "after": "radial-gradient(at 12% 0px, rgba(200, 221, 243, 0.24), rgba(0, 0, 0, 0) 62%), linear-gradient(145deg, rgba(38, 60, 85, 0.17), rgba(9, 18, 32, 0.45))"
+        },
+        {
+          "key": "#title>div:nth-child(17)>aside:nth-child(2)::before",
+          "property": "border-top-color",
+          "before": "rgba(232, 243, 255, 0.22)",
+          "after": "rgba(199, 231, 255, 0.5)"
+        },
+        {
+          "key": "#title>div:nth-child(17)>aside:nth-child(2)::after",
+          "property": "width",
+          "before": "42px",
+          "after": "96px"
+        },
+        {
+          "key": "#btnCardLib>i:nth-child(3)",
+          "property": "background-image",
+          "before": "radial-gradient(150px, rgba(127, 213, 255, 0.24), rgba(0, 0, 0, 0) 70%), linear-gradient(90deg, rgba(0, 0, 0, 0) calc(100% - 6px), rgb(31, 178, 255) calc(100% - 6px)), linear-gradient(260deg, rgba(31, 178, 255, 0.22), rgba(14, 16, 19, 0.9) 60%)",
+          "after": "radial-gradient(150px at 223px 45px, rgba(127, 213, 255, 0.24), rgba(0, 0, 0, 0) 70%), linear-gradient(90deg, rgba(0, 0, 0, 0) calc(100% - 6px), rgb(31, 178, 255) calc(100% - 6px)), linear-gradient(260deg, rgba(31, 178, 255, 0.22), rgba(14, 16, 19, 0.9) 60%)"
+        },
+        {
+          "key": "#mSettings>i:nth-child(3)",
+          "property": "background-image",
+          "before": "radial-gradient(150px, rgba(127, 213, 255, 0.24), rgba(0, 0, 0, 0) 70%), linear-gradient(90deg, rgba(0, 0, 0, 0) calc(100% - 6px), rgb(31, 178, 255) calc(100% - 6px)), linear-gradient(260deg, rgba(31, 178, 255, 0.22), rgba(14, 16, 19, 0.9) 60%)",
+          "after": "radial-gradient(150px at 223px 34px, rgba(127, 213, 255, 0.24), rgba(0, 0, 0, 0) 70%), linear-gradient(90deg, rgba(0, 0, 0, 0) calc(100% - 6px), rgb(31, 178, 255) calc(100% - 6px)), linear-gradient(260deg, rgba(31, 178, 255, 0.22), rgba(14, 16, 19, 0.9) 60%)"
+        }
+      ]
+    },
+    {
+      "label": "settings",
+      "before": 276,
+      "after": 276,
+      "changes": [
+        {
+          "key": "#btnCardLib>i:nth-child(3)",
+          "property": "background-image",
+          "before": "radial-gradient(150px, rgba(127, 213, 255, 0.24), rgba(0, 0, 0, 0) 70%), linear-gradient(90deg, rgba(0, 0, 0, 0) calc(100% - 6px), rgb(31, 178, 255) calc(100% - 6px)), linear-gradient(260deg, rgba(31, 178, 255, 0.22), rgba(14, 16, 19, 0.9) 60%)",
+          "after": "radial-gradient(150px at 223px 45px, rgba(127, 213, 255, 0.24), rgba(0, 0, 0, 0) 70%), linear-gradient(90deg, rgba(0, 0, 0, 0) calc(100% - 6px), rgb(31, 178, 255) calc(100% - 6px)), linear-gradient(260deg, rgba(31, 178, 255, 0.22), rgba(14, 16, 19, 0.9) 60%)"
+        }
+      ]
+    },
+    {
+      "label": "slots",
+      "before": 491,
+      "after": 491,
+      "changes": [
+        {
+          "key": "#title>div:nth-child(17)>section:nth-child(1)::after",
+          "property": "width",
+          "before": "42.2812px",
+          "after": "42px"
+        },
+        {
+          "key": "#mStart::before",
+          "property": "background-color",
+          "before": "rgb(246, 234, 193)",
+          "after": "rgb(246, 233, 191)"
+        },
+        {
+          "key": "#mStart>span:nth-child(6)",
+          "property": "border-top-color",
+          "before": "rgba(20, 18, 10, 0.61)",
+          "after": "rgba(20, 18, 10, 0.6)"
+        },
+        {
+          "key": "#mStart>span:nth-child(6)",
+          "property": "color",
+          "before": "rgba(20, 18, 10, 0.61)",
+          "after": "rgba(20, 18, 10, 0.6)"
+        },
+        {
+          "key": "#mStart>i:nth-child(7)",
+          "property": "background-image",
+          "before": "radial-gradient(circle at 255px 59px, rgba(191, 232, 255, 0.12) 0px, rgba(191, 232, 255, 0.12) 421.871px, rgba(217, 241, 255, 0.9) 455.871px, rgba(0, 0, 0, 0) 457.871px)",
+          "after": "radial-gradient(circle at 255px 59px, rgba(191, 232, 255, 0.12) 0px, rgba(191, 232, 255, 0.12) 439.218px, rgba(217, 241, 255, 0.9) 473.218px, rgba(0, 0, 0, 0) 475.218px)"
+        },
+        {
+          "key": "#title>div:nth-child(17)>aside:nth-child(2)::before",
+          "property": "background-image",
+          "before": "radial-gradient(at 12% 0px, rgba(200, 221, 243, 0.15), rgba(0, 0, 0, 0) 62%), linear-gradient(145deg, rgba(38, 60, 85, 0.17), rgba(9, 18, 32, 0.45))",
+          "after": "radial-gradient(at 12% 0px, rgba(200, 221, 243, 0.165), rgba(0, 0, 0, 0) 62%), linear-gradient(145deg, rgba(38, 60, 85, 0.17), rgba(9, 18, 32, 0.45))"
+        },
+        {
+          "key": "#title>div:nth-child(17)>aside:nth-child(2)::before",
+          "property": "border-top-color",
+          "before": "rgba(232, 243, 255, 0.22)",
+          "after": "rgba(223, 240, 255, 0.263)"
+        },
+        {
+          "key": "#title>div:nth-child(17)>aside:nth-child(2)::after",
+          "property": "width",
+          "before": "42px",
+          "after": "50.0062px"
+        },
+        {
+          "key": "#btnCardLib>i:nth-child(3)",
+          "property": "background-image",
+          "before": "radial-gradient(150px, rgba(127, 213, 255, 0.24), rgba(0, 0, 0, 0) 70%), linear-gradient(90deg, rgba(0, 0, 0, 0) calc(100% - 6px), rgb(31, 178, 255) calc(100% - 6px)), linear-gradient(260deg, rgba(31, 178, 255, 0.22), rgba(14, 16, 19, 0.9) 60%)",
+          "after": "radial-gradient(150px at 223px 45px, rgba(127, 213, 255, 0.24), rgba(0, 0, 0, 0) 70%), linear-gradient(90deg, rgba(0, 0, 0, 0) calc(100% - 6px), rgb(31, 178, 255) calc(100% - 6px)), linear-gradient(260deg, rgba(31, 178, 255, 0.22), rgba(14, 16, 19, 0.9) 60%)"
+        },
+        {
+          "key": "#mSettings>i:nth-child(3)",
+          "property": "background-image",
+          "before": "radial-gradient(150px, rgba(127, 213, 255, 0.24), rgba(0, 0, 0, 0) 70%), linear-gradient(90deg, rgba(0, 0, 0, 0) calc(100% - 6px), rgb(31, 178, 255) calc(100% - 6px)), linear-gradient(260deg, rgba(31, 178, 255, 0.22), rgba(14, 16, 19, 0.9) 60%)",
+          "after": "radial-gradient(150px at 223px 34px, rgba(127, 213, 255, 0.24), rgba(0, 0, 0, 0) 70%), linear-gradient(90deg, rgba(0, 0, 0, 0) calc(100% - 6px), rgb(31, 178, 255) calc(100% - 6px)), linear-gradient(260deg, rgba(31, 178, 255, 0.22), rgba(14, 16, 19, 0.9) 60%)"
+        },
+        {
+          "key": "#ovBody>div:nth-child(1)>div:nth-child(5)>article:nth-child(1)",
+          "property": "border-top-color",
+          "before": "rgb(214, 189, 112)",
+          "after": "rgb(177, 164, 114)"
+        }
+      ]
+    },
+    {
+      "label": "base",
+      "before": 88,
+      "after": 88,
+      "changes": []
+    },
+    {
+      "label": "personnel",
+      "before": 126,
+      "after": 126,
+      "changes": []
+    },
+    {
+      "label": "warehouse",
+      "before": 264,
+      "after": 264,
+      "changes": []
+    },
+    {
+      "label": "trade",
+      "before": 287,
+      "after": 287,
+      "changes": []
+    },
+    {
+      "label": "archive",
+      "before": 107,
+      "after": 107,
+      "changes": []
+    },
+    {
+      "label": "upgrade",
+      "before": 126,
+      "after": 126,
+      "changes": []
+    },
+    {
+      "label": "courtyard",
+      "before": 102,
+      "after": 102,
+      "changes": []
+    }
+  ],
+  "interpretation": "photo/base/personnel/warehouse/trade/archive/upgrade/courtyard全记录零差异；settings自身零差异，背景首页保留鼠标局部光；slots自身一处边框正处hover过渡，背景首页保留点击波纹/注意力过渡；title五处为注意力高亮与鼠标坐标，不将交互状态差异记作样式回归",
+  "limits": [
+    "战斗、选角和结算未逐页实玩；同文件同条件胜出声明哈希覆盖本轮所有删除",
+    "未改变窗口尺寸，未构建"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "head": "bf6129520b55e28698c749ce7dbc6d327b85866a",
+  "beforePending": 18,
+  "afterPending": 10,
+  "kept": [
+    40,
+    38,
+    9,
+    10,
+    16,
+    24,
+    28,
+    31,
+    32,
+    33
+  ],
+  "backlog": [
+    2,
+    13,
+    19,
+    23,
+    26,
+    37
+  ],
+  "resolved": [
+    27,
+    30
+  ],
+  "partialResolved": [
+    31
+  ],
+  "deliveryVerified": [
+    {
+      "file": "docs/evidence/2026-10-14-WF-retired-art-1014/task.json",
+      "commit": "1da9f7db4e0cd523cf5d8794853aad442e42690b"
+    },
+    {
+      "file": "docs/evidence/2026-10-14-WF-cloud-review-integration-1014/task.json",
+      "commit": "367db7c1a7dd149c7e8088bd4ae4e2d9e7debd12"
+    },
+    {
+      "file": "docs/evidence/2026-10-14-WF-friday-cloud-review-1014/task.json",
+      "commit": "367db7c1a7dd149c7e8088bd4ae4e2d9e7debd12"
+    },
+    {
+      "file": "docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/task.json",
+      "commit": "e2e42ec3ed889ca8bd3e712738f2352319eea4eb"
+    },
+    {
+      "file": "docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/task.json",
+      "commit": "e82895d5ecc4420ffbf64878d9eb6b850ae926db"
+    },
+    {
+      "file": "docs/evidence/2026-10-13-WF-friday-clean-ship-1013/task.json",
+      "commit": "7c1f058963d94e838d36b3f4b51a1f217093471d"
+    },
+    {
+      "file": "docs/evidence/2026-10-13-WF-ship-pathspec-1013/task.json",
+      "commit": "b2dbe48d2131d2bf8bc2f2f8065b1ff56574d5bc"
+    }
+  ],
+  "retainedLocalCount": 1647,
+  "originalHashes": {
+    "docs/PENDING.md": "744b8d7490398d7a9f05ebf3bd05457efd5f078ba7bf4bf756eb7a7e6ad7ac6d",
+    "docs/PARALLEL-REGISTRY.md": "a534022767fb2dae606d05f932a59c42858036fd8d19df3ac8f62eb35e7944a4",
+    "docs/roadmap.md": "9f47ee5dbbdd4c89e9299b85232eaf98d61c4bab26fff4162353a8d2ed48e639",
+    "docs/STATUS.md": "f88f82cc59915f9cbb6ea57b375680602a927c7064e6bb39dee5bc523ded1ea4",
+    "docs/evidence/2026-10-14-WF-retired-art-1014/task.json": "dbaa47ac90ea2b80049f5a00da8cab5f5c136d431efc77a34e38fc21db520ff2",
+    "docs/evidence/2026-10-14-WF-cloud-review-integration-1014/task.json": "d1610d196ff7c594ace5ab85c0e8fb3fb8194c5a2248fb9447d529cd7e1ab0d2",
+    "docs/evidence/2026-10-14-WF-friday-cloud-review-1014/task.json": "8e76b51e6a1532edc67b1713abb1363a180395598aa5d80a4e2cdda15db2f435",
+    "docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/task.json": "4b2fb19c3dd8ea9953002a885bb13ef5d804a01b939ff6d0ac7d484d0fe64b9b",
+    "docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/task.json": "54d9d9c9aef85ceed27ec4a532eef3aff15223dd38a3b4002deb444837d8301d",
+    "docs/evidence/2026-10-13-WF-friday-clean-ship-1013/task.json": "396ea08af5b3dc9db784c6d716f7a05bb459a1705140629a9e0f5a89b80d88a8",
+    "docs/evidence/2026-10-13-WF-ship-pathspec-1013/task.json": "9e786c27e18b73ac6ba89c57366487131736b9e656a1bcb13b0dfc08ef037139"
+  },
+  "verification": {
+    "docsCheck": {
+      "passed": true,
+      "relativeLinks": 421,
+      "findings": 0
+    },
+    "archiveOriginals": 11,
+    "pendingOpen": 10,
+    "registryEditing": 0,
+    "registryCompletedUncommitted": 2,
+    "gitDiffCheck": "passed",
+    "index": "unchanged-empty"
+  }
+}

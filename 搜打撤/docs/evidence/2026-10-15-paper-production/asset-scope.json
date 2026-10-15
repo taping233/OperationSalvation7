@@ -1,0 +1,572 @@
+{
+  "selectedAssets": 14,
+  "scopeIssues": [],
+  "globalErrors": [
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-00.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a5c7dbf3af9c1c8658e1d29bd8f9a5dae6266eb3b563db35769847d0402c0017"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-01.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "71b3d5f8b6e550dc577ab7c6ae84c89e0f06bcb012da92a607549f8b47e6ec47"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-02.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9e94cef07429148adbe9a865b2d5875d337868f9d482df8f276abbb3af63ec10"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-03.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4e6b90c3e542aeeefed32b92e37563c30a3f62a9213944762ad6b091ad8efd50"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-04.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "64254b71c17393ef7838b136970c5ddfb0d6728784c3e3b321570254ae590f92"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-05.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "bdb220011adfb0f0207cef770fc3f38def52543a0b6c7a28ef43d78dd9fcd182"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-06.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "70341fceda7e157ea72d776f5eee1827648e73f7a8fa040012fd9c2d6d0974e9"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-07.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "beb16152a7318df90b65566e46e13d0157527953e4919062a4d49801dbadd374"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-08.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "0b518b0866e6a37ca1ac9d4394c75b3411e3d28c881e8503a9bcb878b0060a12"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-09.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e81b8edd7326e239fc755d37fb5e957a8bf72e6ca43fa16c05c135c326e85707"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-10.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a926e237ec44046988dd072ca2f928e97ea32edc23bd29d32d00cf85d6d5db5a"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-11.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "54c4da4384d65bd99ac56fee02dbd025b435223affe0dadc1638403b8c9ddd06"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-12.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6b6a4b02a961d5f251ccc710951ac629df9011070851b71f83a2e0d2ed7f6936"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-13.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3e890e8d46c5f9148704e46d92406edfc41ae918f088fc69883e5f42845360b7"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-14.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b2d919bb934dd96fd5c80d658aae322284a3863fbe52e4fee0a2057bd95c9436"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-15.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b20b5aeaaa69a6d0d39c8e0cf8fba75d89ae7199b9629f9f825b70d4fa0fcb5a"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-16.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3d7f37462660595014d1f9f5ec3f5b5b5dfcda9545a4b22799f32f5431830f12"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/boss-rig-v1/frame-17.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ff76fa090b90757af1d41b1ee170e84fde815128dee9c152be77d1e0c260e94c"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-00.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "2e835546abc178b23dd25728cc9c9c24eddd0e01744edf272d6f29cd5dcf5fe1"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-01.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "5b4d87f311fb4c31a1dee59e41da3e7ca16928d4ad36dc83f0e3a59c15121070"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-02.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "120c41c9d6552086890ff77a939a393c28258321b57917fe8bc56b6256078738"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-03.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c80f642c0a5ff1d79b8140f00b3816bc9b02fc5019a595c6b7c61f208e7569e5"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-04.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6fffbf9bd2b09383d12fae719e3e21606a8cf693e0507ec4643e0345f99cf0a4"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-05.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6db9b1b7d911a8424091ed6602695571d191f58c7863e44dfe4279c6bbbad738"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-06.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "16b67cf12527715ce3685aebb1edefcef927bc2ba292be7274643b1be40dbec0"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-07.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "27dfe37fff14d9a5e2c6d5769acb436656ce924bd53b0fd634dcaa000eb5dc73"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-08.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6cd010743f43be1e202b58985c3f840e5b7f9dc2746f81cdf1b4ac1213acc9b3"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-09.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "1271efe2d2996842d5f313fcd400af59f49ac76f2fdbd2ea379970f4b5eba1d0"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-10.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ef1ce126b4f3752f57ed5eed7db4836127c9f1a94a9e95a92d1378798f98df59"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-11.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9afedb8cfd63b6500c35c71fcd2acddcf1b6931880e111b5c425ebe76357c8c4"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-12.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "372b4b1e79821f36aaa202f6a59bea0b680436fc0849ebcc0afe65319e431277"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-13.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "038ed8a50db5fb9c5bd147a73d6a20bd0faaeb8a7a1dd17812f1420ba3223c51"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-14.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "4fd45eb7142ea7630331610057edf4199ac60fa1362e141f3cf8165ce1d3e782"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-15.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c9426791503c95bc8b92bd1584a3decff7cab612bc75beea2621e39490376762"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-16.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "754079083d24d7b25009d51faac8d3a4bb88487afc51fbfed13b45464d4954bf"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/class-rig-v1/frame-17.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e38cfba1884d72b8b71a3dab0beaf8b2ec555333b262e9f5b089af969853d926"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-00.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c675dd8a71d766a4a22aa97390e0799fa485e1bea2e6d6923e041a8a7f210c58"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-01.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "444c4bf62aeb609c515158291b101e97111376d57f8fd737bbf6d665f6e59b7e"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-02.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "083e2528c37e23cd8bf7786006b64bf526a4c826bafdc4e082d2cf35dd87389e"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-03.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "fc4df55ab2756618d52aee67e0a5e58d56177b0f88020a7489c21439ec9dd12d"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-04.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "eb6965eedc0bb9c1df98adbb6486bcf8cf84c46d1c6ea93e953be93413392eae"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-05.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "09aec1a14f240dcc4dd6af42a0052e336e9142d3fec9254ea4cc6ef277415c4a"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-06.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c0d30445880fa3ac0ba1cbffcb3f417721ecb3c168005922cfa2d273ac773345"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-07.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "f85722fd071d1611b6107c435cc3cc1e9337e2ed018193411cd7ffe3b31059d2"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-08.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "0064e061cc2ed7315c4e137563b2c9d455e8ecc2e08b6461401d7f8846fb2026"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-09.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "97812ad5e0c31710d695a03f1655302391aed95d9f99d51b3ce9035cc885ab2a"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-10.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a66011129450a234e5c6af19f6335a7f9a5eecaf97115f4cbc834e6866a75218"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-11.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "658411aff8e280bd8af56b930d839de2d50d4b7a7512e4c82531105758986d79"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-12.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "aa82173a3b224a86811c0d2579926f7f7bf543d0744ee269367aee06cc425685"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-13.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3cbd12e13be0af459320f3668d78582ed935b4000ff6d6e8312cd534be4e6445"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-14.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a93634bccff023b384e00255b244eaecaf9dc9365692cddc66e3f946cb15adcc"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-15.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7962c9b58276bdc352c73703f641a4ac4ce297579d73381cfbab4145afd4e760"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-16.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "201ef9622b380abdcc8e9df5c3b65d35f6e37215dd26eb8e20b0691887c73f01"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/large-rig-v1/frame-17.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ca49f6870338289124b34aef9111e9d2dde8afc5dff0e8df2565d7dd37d42fe9"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-00.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7a22626a1faa384d25f13b061f45f967d87c3b30b34ce51fd6e1f0989a58faf6"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-01.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "160107e3415938abb509a04ade0e37fb1eb692adf4a7e0bac94f825f4880ddd0"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-02.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "28148c52f1349ef625a19884daeec152436087ae15e84c95f5aded9c7b83e5c0"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-03.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "66c58c35da035ae5e36fa65fc8b0eb89e5c917a268128d1480d2aa5189c4f2a2"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-04.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d3ce4d18bc889dcd42d69ec5b7782f3f896c6d00e4c4f29e4f54c57c827a57c1"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-05.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b48ded5fa4301715203973e8a17eaab82e27954bbb0514d135bfdc25e8653309"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-06.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "06dc359e539544d849f671fcdffa89724962ef8d948b3d7c40685b9d9a7d3a2c"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-07.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b7b2c0298aaa8a7e1358cef2d2b188776fe288eb675adee7af9ba00fc158434f"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-08.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "03305fba4fdc296ceffd5e98397b5576ca0dfae5b03d4c9386358f55f5720bca"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-09.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "eec7635b6d5639742141b1926a9eeeae878ff1262d498256b6374a479d2e6742"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-10.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "fc976c7790f3140866d7a82e043a6c5a8e4cdad8c57feff871f373f6c846e91d"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-11.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d1551077fe0a5aed79c70eeb2c70a901f838c7dcf33716f9b60fbf800810462b"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-12.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e1e04cca57d14bf265769eebb94c99cff066fbee246f10910e0f85faa1fdb92f"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-13.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "292f05aaa35154d5d5fa11b964326568caaac0bb79303c3a8e472071bd5e561c"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-14.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6b3683f217ad0ea890dae6dfc225394d11cdc31e5c11119c30ca6cc0050a384f"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-15.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7d2f6401b2a8a00e080c7738be31383cf3b8c6eb345cd25ee3b4a6c8ad4b6469"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-16.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "e62b279f9f96732641d4c640c89e79fe28ce60e067b2b691d085b695f952eb93"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/medium-rig-v1/frame-17.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "ce529d82cd08ebfda267f258959cfdc12aaece1b1a49d7aff419c40c743af17d"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-00.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "8ad673745a36adca7ca2fbb14390a0631d6dc2a1c04ed3bf29143b2562f13685"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-01.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "057cc543b21fb40412df4abdfdefa711ef47a431403d75868247e886e696d3f2"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-02.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "911d45ba3d9777dbabcb06307994fbab282b2295d6709478d1e88277d41565f9"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-03.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "b774183bc0efc8b0addad077ad506c485d5e91d66294ce4a166b243b2e1d956d"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-04.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "81628c38aa5dc0d869e015bbaabfd036d4f5a20b935c36452186f39e9b93a045"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-05.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "974f8de3e3e9f46270e118b6b73f1ddb8861a895d1bdf553a8151403d6793129"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-06.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "661dd191416c4b2e7bb5a3a051d307a74d10d7bb2aafc1585aa61414719b8e0c"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-07.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d325e5c17a32b9df806a0cebe5011377803a274faa98a14062b66e15418217fe"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-08.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "72dd0d522414d9839e1aeed550e11223b5229d15ae46b4b38e6447ecce7a6d3d"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-09.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c4ffbff45142119891a65713d1c3fc3d973ba2d0375902c13716fb0c9e10b67c"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-10.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "1d41bf8f507c242b6bdd0c9eae8a947e47a5ac8cce1d9b4f2b751d443285e884"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-11.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7253e1ce38866c437693349cd7c292a86f017d49f9e83b64f225bd3a5d05d59e"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-12.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "7326e6456e32c9b8c6dc70e5fc8c333c8cd32d9aaaf0aebfdeb6600c4cadb327"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-13.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "6fd8e0291557c059817dbade56dbbecc6a24d20a9e0df22c076dd37d943cf660"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-14.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "0ebdec1c0f8f2dd6f8e3ceb65410cd3ffff8546c24b59ad4be903b9f949d8085"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-15.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "a742b390624d01094acfa8895706f2d596de8a8275ae48094b1dfe9cc8505ffd"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-16.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3135626f347a07027bae9940b5870fda817300410311f83de688eb020daf49eb"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/chests/small-rig-v1/frame-17.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "c237eccc40ae2fa64536c5404691aee95abc1c81d917e5978527642ea7279407"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/entry/threshold-cardstyle-1011-v1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "189b902ca4751c4b019daa9847ee6864540e4863024e13cd8590abd36ff203a6"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/entry/winter-arrival-1011-v1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "d05db6feb3d83111096a32ff6d9771ec34ee497e216945bbdd8f4a9e36e57cf7"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/entry/winter-arrival-1011-v2.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "3517aad7ffcc6017ba403bbbb31dda225221392f63da25b8c66319b96154ff31"
+    },
+    {
+      "code": "unlisted",
+      "path": "scenes/map-nodes/resource-symbol-1015-v1.webp",
+      "detail": "no manifest registration",
+      "fingerprint": "9425b2a147575a35eef626684d5d3eb6316307dbd45c1e926abfb3c55fd41d88"
+    }
+  ],
+  "globalWarningCount": 618,
+  "globalOk": false
+}

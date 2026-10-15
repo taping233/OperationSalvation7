@@ -1,0 +1,25 @@
+[
+  {
+    "id": "lean-index",
+    "command": "C:\\Users\\太平\\AppData\\Local/npm-cache/_npx\\c1fcf7089634e7d8\\node_modules\\leantoken\\bin\\native\\x86_64-pc-windows-msvc\\leantoken.exe",
+    "args": [
+      "--root",
+      "D:\\素材\\代号柒\\搜打撤",
+      "--database",
+      "D:\\素材\\代号柒\\搜打撤\\node_modules\\.cache\\agent-tools-trial\\leantoken.sqlite",
+      "--tokenizer",
+      "o200k_base",
+      "--index-include",
+      "game/src/**",
+      "--index-include",
+      "game/tools/**",
+      "--index-include",
+      "tests/**",
+      "index",
+      "--json"
+    ],
+    "seconds": 6.952,
+    "exit": 0,
+    "bytes": 328
+  }
+]

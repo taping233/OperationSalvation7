@@ -1,0 +1,9 @@
+{
+  "tool": "image_gen (built-in)",
+  "prompt": "Use case: precise-object-edit. Input image 1 is the edit target: existing rare game card frame. Repaint the FOUR MAIN RAILS from silver gray to clearly BLUE: medium cobalt / muted azure main planes, deep navy edges and shadows, broad light blue painted highlights. Keep the small blue rose at top center and its two leaves, recolor leaves cool blue. Preserve the exact 1024x1536 portrait canvas, same rail thickness, same outer silhouette and exact inner aperture positions. Do not squeeze, stretch, thin or thicken the frame or rose. Keep existing restrained hand-painted anime block-brush style with broad opaque planes and simple hard edges; no added ornaments or extra detail. Entire interior aperture AND exterior must be genuinely alpha transparent, with no black/gray background or haze. This is ONE reusable transparent frame overlay only. No text, card illustration, UI, watermark. Make the complete border unmistakably BLUE, not merely the rose.",
+  "references": [
+    "D:/素材/代号柒/搜打撤/game/art-source/card-frame-study-1014/rare.png"
+  ],
+  "source": "C:/Users/太平/.codex/generated_images/01a13c0e-5097-78e2-95bf-a3b333c47843/exec-c8158618-379d-422b-a8ac-4ff4461468ac.png",
+  "asset": "game/assets/ui/card-frames/split-1014/rare.webp"
+}

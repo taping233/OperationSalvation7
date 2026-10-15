@@ -30,10 +30,21 @@
   "unverified": [
     "主仓大包提交尚未执行；打包任务继续分批归属与冻结门"
   ],
-  "updatedAt": "2026-10-13T12:20:35.410Z",
+  "updatedAt": "2026-10-14T07:47:26.011436+00:00",
   "closure": {
     "kind": "manual",
     "doneWhenConfirmed": true,
     "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  },
+  "delivery": {
+    "status": "committed",
+    "commit": "b2dbe48d2131d2bf8bc2f2f8065b1ff56574d5bc",
+    "verifiedAt": "2026-10-14T07:47:26.011436+00:00",
+    "head": "bf6129520b55e28698c749ce7dbc6d327b85866a",
+    "evidence": "docs/evidence/2026-10-14-WF-ledger-cleanup-1014/README.md",
+    "limits": [
+      "仅确认本地HEAD包含提交；不新增远端、CI、Library或实页通过结论",
+      "stage保留原执行收官状态，交付事实以delivery和实时Git为准"
+    ]
   }
 }

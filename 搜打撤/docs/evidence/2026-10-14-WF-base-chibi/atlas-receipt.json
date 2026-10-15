@@ -1,0 +1,162 @@
+{
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13aec-f743-7181-a10b-53ba80dc2dd8\\exec-97295f9a-8b14-459c-bffe-fd5d763fc2ab.png",
+  "sha256": "73032fc2ecfa1e9fce6c6e603fcde427155c04bdee9f4bbe87f1c284f1b66a50",
+  "size": [
+    1774,
+    887
+  ],
+  "parts": [
+    {
+      "path": "head.webp",
+      "cell": [
+        0,
+        0
+      ],
+      "crop": [
+        44,
+        64,
+        423,
+        442
+      ],
+      "size": [
+        379,
+        378
+      ],
+      "bytes": 54268,
+      "sha256": "6aff36fff7805a4ee4498817f4fd3c6aad97195f2bd03585bf0405599ba8bb86"
+    },
+    {
+      "path": "hair.webp",
+      "cell": [
+        1,
+        0
+      ],
+      "crop": [
+        82,
+        5,
+        429,
+        443
+      ],
+      "size": [
+        347,
+        438
+      ],
+      "bytes": 50494,
+      "sha256": "b6fbf8adbac7f1952cc015562446a02574675c744f8e44ff750a708411dad0a2"
+    },
+    {
+      "path": "body.webp",
+      "cell": [
+        2,
+        0
+      ],
+      "crop": [
+        29,
+        21,
+        434,
+        438
+      ],
+      "size": [
+        405,
+        417
+      ],
+      "bytes": 37612,
+      "sha256": "9ff84c6bb9922d514c4ddbc094e21def16789b09aca4752b6bd892b16f03cdc4"
+    },
+    {
+      "path": "arm-back.webp",
+      "cell": [
+        3,
+        0
+      ],
+      "crop": [
+        136,
+        30,
+        317,
+        443
+      ],
+      "size": [
+        181,
+        413
+      ],
+      "bytes": 22112,
+      "sha256": "9cc3a70ff2aea1e708a96b1ec00f3410272932695c3782410bb0e5459f0d1008"
+    },
+    {
+      "path": "arm-front.webp",
+      "cell": [
+        0,
+        1
+      ],
+      "crop": [
+        128,
+        29,
+        317,
+        430
+      ],
+      "size": [
+        189,
+        401
+      ],
+      "bytes": 22066,
+      "sha256": "017059e2e4b8d79396a95b6274e3a0ddee46438b5179e1236df6ea5afe21d0dc"
+    },
+    {
+      "path": "leg-back.webp",
+      "cell": [
+        1,
+        1
+      ],
+      "crop": [
+        158,
+        11,
+        300,
+        438
+      ],
+      "size": [
+        142,
+        427
+      ],
+      "bytes": 17922,
+      "sha256": "9bad5435f675126b15580bd8321810d298786c8717ccc2e2cc715cce4a6d6c79"
+    },
+    {
+      "path": "leg-front.webp",
+      "cell": [
+        2,
+        1
+      ],
+      "crop": [
+        141,
+        11,
+        284,
+        438
+      ],
+      "size": [
+        143,
+        427
+      ],
+      "bytes": 16956,
+      "sha256": "a14dfba73af75383fc5ab775f594b08c77289f1a83a04b531c197a57a2d62e3c"
+    },
+    {
+      "path": "sword.webp",
+      "cell": [
+        3,
+        1
+      ],
+      "crop": [
+        91,
+        10,
+        377,
+        426
+      ],
+      "size": [
+        286,
+        416
+      ],
+      "bytes": 15700,
+      "sha256": "62ead52e2e3514ba58b38b1e78e7ea2c3e5cefd80bb9e29425e5dec51de047c9"
+    }
+  ]
+}

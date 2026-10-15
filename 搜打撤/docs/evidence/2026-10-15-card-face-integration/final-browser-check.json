@@ -1,0 +1,855 @@
+{
+  "surface": "Codex in-app browser",
+  "viewport": "current window only",
+  "scenes": "base pages real navigation; run nodes use existing non-slot devJumpNode via task toolbar; all-category fixture uses production cardHTML",
+  "checks": [
+    {
+      "host": "interface-all-22",
+      "constructed": true,
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "initial",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "初始攻击",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "寒冰剑",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "rare",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "元素爆裂",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "epic",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "阿猫的礼物",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "legendary",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "斩杀",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "token",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "火球",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "金蝉脱壳",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "prism",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "白梅落影·妄",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "金蝉脱壳",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "heixiang",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "铁甲阵",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "baita",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "奥术弹",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "xingyue",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "沐愈光辉",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "changwuyu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "暗影射击",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "neutral",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "金蝉脱壳",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "金蝉脱壳",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "token",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "火球",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "寒冰剑",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "epic",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "金疮药",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "木材",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "token",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "联邦巡防兵",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "token",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "临时救护站",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "prism",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "白梅落影·妄",
+          "rootRatio": 0.6667
+        }
+      ]
+    },
+    {
+      "host": "run-shop",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "生命箭",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "木材",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "摸索",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "割蚀",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "rare",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "流血药水",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "epic",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "正午决战",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "能量饮料",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "initial",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "初始攻击",
+          "rootRatio": 0.6667
+        }
+      ]
+    },
+    {
+      "host": "bag",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "initial",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "初始攻击",
+          "rootRatio": 0.6667
+        }
+      ]
+    },
+    {
+      "host": "battle-inspector",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "initial",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "初始攻击",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "initial",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "初始攻击",
+          "rootRatio": 0.6667
+        }
+      ]
+    },
+    {
+      "host": "battle-focus",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "initial",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "初始攻击",
+          "rootRatio": 0.6667
+        }
+      ]
+    },
+    {
+      "host": "battle-drag",
+      "input": "native pointer drag",
+      "result": "energy 2 to 1; stack 5 to 4; one archer defeated",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "initial",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "初始攻击",
+          "rootRatio": 0.6667
+        }
+      ]
+    },
+    {
+      "host": "rewards",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "魔法新发现",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "冰刺",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "epic",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "深海咒印",
+          "rootRatio": 0.6667
+        }
+      ]
+    },
+    {
+      "host": "departure",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "治愈",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "rare",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "影噬",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "rare",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "充能射线",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "rare",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "飞身劈",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "迅疾箭",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "initial",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "初始攻击",
+          "rootRatio": 0.6667
+        }
+      ]
+    },
+    {
+      "host": "departure-card-pool",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "飞刃偷袭",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "飞刃偷袭",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "金蝉脱壳",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "偷袭",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "鬼魅之刃",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "快意恩仇",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "流星箭雨",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "潜匿",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "剑仙形态",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "prism",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "白梅落影·妄",
+          "rootRatio": 0.6667
+        }
+      ]
+    },
+    {
+      "host": "warehouse",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "治愈",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "rare",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "影噬",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "rare",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "充能射线",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "rare",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "飞身劈",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "迅疾箭",
+          "rootRatio": 0.6667
+        }
+      ]
+    },
+    {
+      "host": "warehouse-zoom",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "治愈",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "rare",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "影噬",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "rare",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "充能射线",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "rare",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "飞身劈",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "迅疾箭",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "治愈",
+          "rootRatio": 0.6667
+        }
+      ]
+    },
+    {
+      "host": "person-pool",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "飞刃偷袭",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "金蝉脱壳",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "偷袭",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "wu",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "鬼魅之刃",
+          "rootRatio": 0.6667
+        }
+      ]
+    },
+    {
+      "host": "person-prism",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "prism",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "白梅落影·妄",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "prism",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "无量仙剑·云风",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "prism",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "天剑诛魔·云阳",
+          "rootRatio": 0.6667
+        }
+      ],
+      "animation": {
+        "halo": "cardPrismHalo",
+        "opacity": "0.547184",
+        "title": "none"
+      }
+    },
+    {
+      "host": "base-shop",
+      "cards": [
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "穿刺",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "法杖",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "rare",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "口粮",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "木材",
+          "rootRatio": 0.6667
+        },
+        {
+          "artFraction": 0.53,
+          "costFont": "\"Card Oxanium\", sans-serif",
+          "frame": "common",
+          "frameInside": true,
+          "frameReady": true,
+          "layout": "split",
+          "name": "穿刺",
+          "rootRatio": 0.6667
+        }
+      ]
+    }
+  ]
+}

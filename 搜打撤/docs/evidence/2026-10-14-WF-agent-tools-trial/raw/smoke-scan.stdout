@@ -1,0 +1,2917 @@
+{
+  "schemaVersion": "smokinggun.scan-report.v2",
+  "tool": {
+    "name": "smokinggun",
+    "version": "5.0.0"
+  },
+  "repository": {
+    "root": ".",
+    "revision": null,
+    "dirty": true
+  },
+  "inventory": {
+    "schemaVersion": "smokinggun.repository-inventory.v1",
+    "languages": [
+      {
+        "language": "javascript",
+        "files": 353,
+        "extensions": [
+          ".js"
+        ]
+      },
+      {
+        "language": "typescript",
+        "files": 4,
+        "extensions": [
+          ".ts"
+        ]
+      }
+    ],
+    "manifests": [],
+    "packageManagers": [],
+    "tests": [],
+    "benchmarks": [],
+    "generated": [
+      "generated/art-manifest.js",
+      "generated/narrative-events.js",
+      "generated/thumb-manifest.js"
+    ],
+    "ignored": [
+      ".git",
+      ".hg",
+      ".next",
+      ".nuxt",
+      ".svn",
+      ".turbo",
+      ".venv",
+      "__pycache__",
+      "build",
+      "coverage",
+      "dist",
+      "node_modules",
+      "target",
+      "vendor",
+      "venv"
+    ],
+    "digest": "2ef5789f9d64f0df8eade9ae5c82d50b51049af26a05acd63a82d5e4bb5033c7"
+  },
+  "sourceDigest": "7c4aafdb0081cda4e3f42899a7305e71709e4404642171d7ba7e7d388a374135",
+  "configDigest": "30faffe983fb20ca44ed3b5a093493629abc3955d0604d7139765762686ea33d",
+  "findings": [
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_9f72ecb53786e7cb",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "sort-in-loop",
+      "language": "javascript",
+      "kind": "sort-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "high",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_0150d17d985e8e52",
+        "sg_0610b1f98a74e8ed",
+        "sg_b9df4c2727ca7cce"
+      ],
+      "message": "Tree-sitter found sorting inside iterative code.",
+      "suggestion": "Move sorting out of the loop or use a heap/binary-search strategy if intermediate order is needed.",
+      "location": {
+        "path": "core/characters.js",
+        "startLine": 23,
+        "startColumn": 0,
+        "endLine": 23,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "sort cost depends on collection size"
+      ],
+      "evidence": [
+        "smokinggun.structural:sort-in-loop"
+      ],
+      "complexity": {
+        "current": "O(n log n) per iteration",
+        "expected": "one sort or ordered lookup"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_8aaf3ec2eb3ca3f3",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "sort-in-loop",
+      "language": "javascript",
+      "kind": "sort-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "high",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found sorting inside iterative code.",
+      "suggestion": "Move sorting out of the loop or use a heap/binary-search strategy if intermediate order is needed.",
+      "location": {
+        "path": "run/map-generator.js",
+        "startLine": 118,
+        "startColumn": 0,
+        "endLine": 118,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "sort cost depends on collection size"
+      ],
+      "evidence": [
+        "smokinggun.structural:sort-in-loop"
+      ],
+      "complexity": {
+        "current": "O(n log n) per iteration",
+        "expected": "one sort or ordered lookup"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_fdb7acd63b0739d0",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_a0226425c524ed92"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "agent/agent.policy.js",
+        "startLine": 157,
+        "startColumn": 0,
+        "endLine": 157,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_b300c784b0cc5c6e",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_9020be733fb19fb4"
+      ],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "audio/sfx-audition.js",
+        "startLine": 112,
+        "startColumn": 0,
+        "endLine": 112,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_7d4531c3a73e1494",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "battle/bag/battle.bag.js",
+        "startLine": 188,
+        "startColumn": 0,
+        "endLine": 188,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_a6ead0e5704918c1",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "cards/card-description-links.js",
+        "startLine": 50,
+        "startColumn": 0,
+        "endLine": 50,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_9f1ddb57b610c710",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_56bd7b3a032ae464"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "game.boot.js",
+        "startLine": 325,
+        "startColumn": 0,
+        "endLine": 325,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_031f3121b5657255",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "home/home.commands.js",
+        "startLine": 27,
+        "startColumn": 0,
+        "endLine": 27,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_2a37f2a187fb933d",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "hub/base-chibi-skin.js",
+        "startLine": 7,
+        "startColumn": 0,
+        "endLine": 7,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_55269d128e5d2642",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_8aebcbbcf9695ca9"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "ui/achievement-gallery.js",
+        "startLine": 92,
+        "startColumn": 0,
+        "endLine": 92,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_7fbe1f9f91e28257",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "sort-in-loop",
+      "language": "javascript",
+      "kind": "sort-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "high",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_abdd631d3ccd317c",
+        "sg_b3753bbf4b0c2056"
+      ],
+      "message": "Tree-sitter found sorting inside iterative code.",
+      "suggestion": "Move sorting out of the loop or use a heap/binary-search strategy if intermediate order is needed.",
+      "location": {
+        "path": "core/characters.js",
+        "startLine": 32,
+        "startColumn": 0,
+        "endLine": 32,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "sort cost depends on collection size"
+      ],
+      "evidence": [
+        "smokinggun.structural:sort-in-loop"
+      ],
+      "complexity": {
+        "current": "O(n log n) per iteration",
+        "expected": "one sort or ordered lookup"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_a886b26f7c1bb8e1",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "sort-in-loop",
+      "language": "javascript",
+      "kind": "sort-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "high",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found sorting inside iterative code.",
+      "suggestion": "Move sorting out of the loop or use a heap/binary-search strategy if intermediate order is needed.",
+      "location": {
+        "path": "run/map-generator.js",
+        "startLine": 120,
+        "startColumn": 0,
+        "endLine": 120,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "sort cost depends on collection size"
+      ],
+      "evidence": [
+        "smokinggun.structural:sort-in-loop"
+      ],
+      "complexity": {
+        "current": "O(n log n) per iteration",
+        "expected": "one sort or ordered lookup"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_a0226425c524ed92",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_fdb7acd63b0739d0"
+      ],
+      "message": "Collection operation find appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "agent/agent.policy.js",
+        "startLine": 157,
+        "startColumn": 22,
+        "endLine": 157,
+        "endColumn": 94
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_9020be733fb19fb4",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_b300c784b0cc5c6e"
+      ],
+      "message": "Collection operation filter appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "audio/sfx-audition.js",
+        "startLine": 112,
+        "startColumn": 84,
+        "endLine": 112,
+        "endColumn": 120
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_9e2d1f4f3edc3f8d",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_6893f8d15fc83012"
+      ],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "battle/bag/battle.bag.js",
+        "startLine": 201,
+        "startColumn": 0,
+        "endLine": 201,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_4ff73aa914b75b2c",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_6ffad8acad1ca42b"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "cards/card-description-links.js",
+        "startLine": 59,
+        "startColumn": 0,
+        "endLine": 59,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_56bd7b3a032ae464",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_9f1ddb57b610c710"
+      ],
+      "message": "Collection operation find appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "game.boot.js",
+        "startLine": 325,
+        "startColumn": 19,
+        "endLine": 325,
+        "endColumn": 69
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_c1fa7dcef1db4770",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_286983cf3276b3c3"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "home/home.commands.js",
+        "startLine": 58,
+        "startColumn": 0,
+        "endLine": 58,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_038f434fa9881170",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_758f20130542d570"
+      ],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "hub/base-chibi-skin.js",
+        "startLine": 22,
+        "startColumn": 0,
+        "endLine": 22,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_8aebcbbcf9695ca9",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_55269d128e5d2642"
+      ],
+      "message": "Collection operation includes appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "ui/achievement-gallery.js",
+        "startLine": 92,
+        "startColumn": 100,
+        "endLine": 92,
+        "endColumn": 155
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_c154e1bb7fa11e06",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "sort-in-loop",
+      "language": "javascript",
+      "kind": "sort-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "high",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found sorting inside iterative code.",
+      "suggestion": "Move sorting out of the loop or use a heap/binary-search strategy if intermediate order is needed.",
+      "location": {
+        "path": "core/renderer.js",
+        "startLine": 196,
+        "startColumn": 0,
+        "endLine": 196,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "sort cost depends on collection size"
+      ],
+      "evidence": [
+        "smokinggun.structural:sort-in-loop"
+      ],
+      "complexity": {
+        "current": "O(n log n) per iteration",
+        "expected": "one sort or ordered lookup"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_32b69c0a7145386f",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "sort-in-loop",
+      "language": "javascript",
+      "kind": "sort-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "high",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found sorting inside iterative code.",
+      "suggestion": "Move sorting out of the loop or use a heap/binary-search strategy if intermediate order is needed.",
+      "location": {
+        "path": "run/map-generator.js",
+        "startLine": 125,
+        "startColumn": 0,
+        "endLine": 125,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "sort cost depends on collection size"
+      ],
+      "evidence": [
+        "smokinggun.structural:sort-in-loop"
+      ],
+      "complexity": {
+        "current": "O(n log n) per iteration",
+        "expected": "one sort or ordered lookup"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_aa60d4ed83ab508f",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_769d7cfce9e3c91a"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "agent/agent.policy.js",
+        "startLine": 189,
+        "startColumn": 0,
+        "endLine": 189,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_03bae84e8998524c",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "audio/sound.js",
+        "startLine": 144,
+        "startColumn": 0,
+        "endLine": 144,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_6893f8d15fc83012",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_9e2d1f4f3edc3f8d"
+      ],
+      "message": "Collection operation filter appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "battle/bag/battle.bag.js",
+        "startLine": 201,
+        "startColumn": 21,
+        "endLine": 201,
+        "endColumn": 93
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_6ffad8acad1ca42b",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_4ff73aa914b75b2c"
+      ],
+      "message": "Collection operation includes appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "cards/card-description-links.js",
+        "startLine": 59,
+        "startColumn": 11,
+        "endLine": 59,
+        "endColumn": 32
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_bd9ffe74b4b1fe38",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "game.boot.js",
+        "startLine": 349,
+        "startColumn": 0,
+        "endLine": 349,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_286983cf3276b3c3",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_c1fa7dcef1db4770"
+      ],
+      "message": "Collection operation includes appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "home/home.commands.js",
+        "startLine": 58,
+        "startColumn": 34,
+        "endLine": 58,
+        "endColumn": 80
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_758f20130542d570",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_038f434fa9881170"
+      ],
+      "message": "Collection operation map appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "hub/base-chibi-skin.js",
+        "startLine": 22,
+        "startColumn": 16,
+        "endLine": 22,
+        "endColumn": 32
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_1c3217cf5f6a680f",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "ui/overlay.js",
+        "startLine": 392,
+        "startColumn": 0,
+        "endLine": 392,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_0610b1f98a74e8ed",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_0150d17d985e8e52",
+        "sg_9f72ecb53786e7cb",
+        "sg_b9df4c2727ca7cce"
+      ],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "core/characters.js",
+        "startLine": 23,
+        "startColumn": 0,
+        "endLine": 23,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_acb24538febce008",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "sort-in-loop",
+      "language": "javascript",
+      "kind": "sort-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "high",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found sorting inside iterative code.",
+      "suggestion": "Move sorting out of the loop or use a heap/binary-search strategy if intermediate order is needed.",
+      "location": {
+        "path": "run/map-generator.js",
+        "startLine": 242,
+        "startColumn": 0,
+        "endLine": 242,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "sort cost depends on collection size"
+      ],
+      "evidence": [
+        "smokinggun.structural:sort-in-loop"
+      ],
+      "complexity": {
+        "current": "O(n log n) per iteration",
+        "expected": "one sort or ordered lookup"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_769d7cfce9e3c91a",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_aa60d4ed83ab508f"
+      ],
+      "message": "Collection operation find appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "agent/agent.policy.js",
+        "startLine": 189,
+        "startColumn": 22,
+        "endLine": 189,
+        "endColumn": 84
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_6b70cc5b78e82142",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "audio/sound.js",
+        "startLine": 150,
+        "startColumn": 0,
+        "endLine": 150,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_6d2ac3b59eb93068",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "battle/bag/battle.piles.js",
+        "startLine": 23,
+        "startColumn": 0,
+        "endLine": 23,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_390f981bb6baf45f",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "cards/card-rules.capability.js",
+        "startLine": 115,
+        "startColumn": 0,
+        "endLine": 115,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_539470caa0e243a4",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_3e55640b762c2b55"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "home/home.commands.js",
+        "startLine": 63,
+        "startColumn": 0,
+        "endLine": 63,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_3ad6419e5be75443",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_21676c9646d6cd24"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "hub/base-departure.commands.js",
+        "startLine": 65,
+        "startColumn": 0,
+        "endLine": 65,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_738243a1963c3979",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_3c8787c90c2667bb"
+      ],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "ui/page-motion-profiles.js",
+        "startLine": 88,
+        "startColumn": 0,
+        "endLine": 88,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_0150d17d985e8e52",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_0610b1f98a74e8ed",
+        "sg_9f72ecb53786e7cb",
+        "sg_b9df4c2727ca7cce"
+      ],
+      "message": "Collection operation sort appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "core/characters.js",
+        "startLine": 23,
+        "startColumn": 29,
+        "endLine": 24,
+        "endColumn": 77
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_742ed86b7cb3d409",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "run/chests.js",
+        "startLine": 134,
+        "startColumn": 0,
+        "endLine": 134,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_9685f5956a5989aa",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_f6450157ef364fc3"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "agent/agent.policy.js",
+        "startLine": 215,
+        "startColumn": 0,
+        "endLine": 215,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_fadab4150dfc87bd",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_37df820c2c0700d3"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "battle/core/battle.draw.js",
+        "startLine": 46,
+        "startColumn": 0,
+        "endLine": 46,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_a1176272cc0f1142",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_5268354a875ff877"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "cards/card-rules.capability.js",
+        "startLine": 135,
+        "startColumn": 0,
+        "endLine": 135,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_3e55640b762c2b55",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_539470caa0e243a4"
+      ],
+      "message": "Collection operation includes appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "home/home.commands.js",
+        "startLine": 63,
+        "startColumn": 9,
+        "endLine": 63,
+        "endColumn": 59
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_21676c9646d6cd24",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_3ad6419e5be75443"
+      ],
+      "message": "Collection operation indexOf appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "hub/base-departure.commands.js",
+        "startLine": 65,
+        "startColumn": 22,
+        "endLine": 65,
+        "endColumn": 50
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_3c8787c90c2667bb",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_738243a1963c3979"
+      ],
+      "message": "Collection operation filter appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "ui/page-motion-profiles.js",
+        "startLine": 88,
+        "startColumn": 18,
+        "endLine": 88,
+        "endColumn": 100
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_b9df4c2727ca7cce",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_0150d17d985e8e52",
+        "sg_0610b1f98a74e8ed",
+        "sg_9f72ecb53786e7cb"
+      ],
+      "message": "Collection operation filter appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "core/characters.js",
+        "startLine": 23,
+        "startColumn": 29,
+        "endLine": 23,
+        "endColumn": 75
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_a0505d878a4fe55d",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "run/chests.js",
+        "startLine": 254,
+        "startColumn": 0,
+        "endLine": 254,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_f6450157ef364fc3",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_9685f5956a5989aa"
+      ],
+      "message": "Collection operation find appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "agent/agent.policy.js",
+        "startLine": 215,
+        "startColumn": 22,
+        "endLine": 215,
+        "endColumn": 90
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_37df820c2c0700d3",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_fadab4150dfc87bd"
+      ],
+      "message": "Collection operation includes appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "battle/core/battle.draw.js",
+        "startLine": 46,
+        "startColumn": 32,
+        "endLine": 46,
+        "endColumn": 70
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_5268354a875ff877",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_a1176272cc0f1142"
+      ],
+      "message": "Collection operation includes appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "cards/card-rules.capability.js",
+        "startLine": 135,
+        "startColumn": 64,
+        "endLine": 135,
+        "endColumn": 102
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_5777c80f0097cb1a",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_6a951e3fc86345f2"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "home/home.commands.js",
+        "startLine": 67,
+        "startColumn": 0,
+        "endLine": 67,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_4eaf6a866d2eba61",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "hub/base.js",
+        "startLine": 293,
+        "startColumn": 0,
+        "endLine": 293,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_1c82cd3a57793db3",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_5cd229ee457c4485"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "ui/page-motion-profiles.js",
+        "startLine": 90,
+        "startColumn": 0,
+        "endLine": 90,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_98a775d6a8d608e9",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_8115de4baba0504f",
+        "sg_abdd631d3ccd317c",
+        "sg_b3753bbf4b0c2056"
+      ],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "core/characters.js",
+        "startLine": 30,
+        "startColumn": 0,
+        "endLine": 30,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_07a34e855d54e5f8",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "run/chests.js",
+        "startLine": 273,
+        "startColumn": 0,
+        "endLine": 273,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_320b49706f69796c",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_4cc2b2e6cfca61fd",
+        "sg_967523ccc6399aef"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "agent/agent.policy.js",
+        "startLine": 259,
+        "startColumn": 0,
+        "endLine": 259,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_a387f71da19a4627",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_2f93264dd3ca398a"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "battle/core/battle.draw.js",
+        "startLine": 173,
+        "startColumn": 0,
+        "endLine": 173,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_0b2076d060f187d3",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "cards/card-rules.capability.js",
+        "startLine": 140,
+        "startColumn": 0,
+        "endLine": 140,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_6a951e3fc86345f2",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_5777c80f0097cb1a"
+      ],
+      "message": "Collection operation find appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "home/home.commands.js",
+        "startLine": 67,
+        "startColumn": 17,
+        "endLine": 67,
+        "endColumn": 68
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_f447e9d3903ee285",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "hub/base.js",
+        "startLine": 295,
+        "startColumn": 0,
+        "endLine": 295,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_5cd229ee457c4485",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_1c82cd3a57793db3"
+      ],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "ui/page-motion-profiles.js",
+        "startLine": 90,
+        "startColumn": 0,
+        "endLine": 90,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_8115de4baba0504f",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_98a775d6a8d608e9",
+        "sg_abdd631d3ccd317c",
+        "sg_b3753bbf4b0c2056"
+      ],
+      "message": "Collection operation filter appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "core/characters.js",
+        "startLine": 30,
+        "startColumn": 34,
+        "endLine": 30,
+        "endColumn": 92
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_0dca1e4738a7a3a3",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "run/chests.js",
+        "startLine": 303,
+        "startColumn": 0,
+        "endLine": 303,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_967523ccc6399aef",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_320b49706f69796c",
+        "sg_4cc2b2e6cfca61fd"
+      ],
+      "message": "Collection operation find appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "agent/agent.policy.js",
+        "startLine": 259,
+        "startColumn": 21,
+        "endLine": 259,
+        "endColumn": 110
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_2f93264dd3ca398a",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_a387f71da19a4627"
+      ],
+      "message": "Collection operation includes appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "battle/core/battle.draw.js",
+        "startLine": 173,
+        "startColumn": 11,
+        "endLine": 173,
+        "endColumn": 29
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_296b29720d3a7d77",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "cards/card-rules.capability.js",
+        "startLine": 143,
+        "startColumn": 0,
+        "endLine": 143,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_ad77f7f4cd7cc08a",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "home/home.commands.js",
+        "startLine": 73,
+        "startColumn": 0,
+        "endLine": 73,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_466bb82d0e059101",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_dee59a30e08a8aa4"
+      ],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "hub/base.js",
+        "startLine": 297,
+        "startColumn": 0,
+        "endLine": 297,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_adc4905fdccccbac",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "ui/route-overlay.js",
+        "startLine": 76,
+        "startColumn": 0,
+        "endLine": 76,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_b3753bbf4b0c2056",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_7fbe1f9f91e28257",
+        "sg_8115de4baba0504f",
+        "sg_98a775d6a8d608e9",
+        "sg_abdd631d3ccd317c"
+      ],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "core/characters.js",
+        "startLine": 31,
+        "startColumn": 0,
+        "endLine": 31,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_6a3d01482a4e35bf",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "run/game.run.altar.js",
+        "startLine": 98,
+        "startColumn": 0,
+        "endLine": 98,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_4cc2b2e6cfca61fd",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_320b49706f69796c",
+        "sg_967523ccc6399aef"
+      ],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "agent/agent.policy.js",
+        "startLine": 260,
+        "startColumn": 0,
+        "endLine": 260,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_9f42d0de21e3c240",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "battle/core/battle.enemy-phase.js",
+        "startLine": 150,
+        "startColumn": 0,
+        "endLine": 150,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_86779262daf653f0",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "membership-in-loop",
+      "language": "javascript",
+      "kind": "membership-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found a membership or search operation inside iterative code.",
+      "suggestion": "Consider a Set/Map or precomputed lookup if equality and ordering semantics allow it.",
+      "location": {
+        "path": "cards/card-rules.capability.js",
+        "startLine": 154,
+        "startColumn": 0,
+        "endLine": 154,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the right-hand collection type and size are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:membership-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_7228e6409bf67cdc",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "nested-or-callback-loop",
+      "language": "javascript",
+      "kind": "nested-or-callback-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found an iterative region inside another iterative region.",
+      "suggestion": "Check whether indexing, grouping, batching, or a single-pass algorithm can remove repeated scans.",
+      "location": {
+        "path": "home/home.commands.js",
+        "startLine": 79,
+        "startColumn": 0,
+        "endLine": 79,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "input bounds, runtime frequency, and dependency between the iterations are unknown"
+      ],
+      "evidence": [
+        "smokinggun.structural:nested-or-callback-loop"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_dee59a30e08a8aa4",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_466bb82d0e059101"
+      ],
+      "message": "Collection operation filter appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "hub/base.js",
+        "startLine": 297,
+        "startColumn": 22,
+        "endLine": 297,
+        "endColumn": 76
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 2"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_bd85e290b04029cc",
+      "scanner": "smokinggun.structural",
+      "scannerVersion": "1.0.0",
+      "ruleId": "repeated-scan",
+      "language": "javascript",
+      "kind": "repeated-scan",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [],
+      "message": "Tree-sitter found a collection transform inside iterative code.",
+      "suggestion": "Consider precomputing an index/grouping or combining passes.",
+      "location": {
+        "path": "ui/route-overlay.js",
+        "startLine": 78,
+        "startColumn": 0,
+        "endLine": 78,
+        "endColumn": 1
+      },
+      "assumptions": [
+        "the transform may traverse a collection once per enclosing iteration"
+      ],
+      "evidence": [
+        "smokinggun.structural:repeated-scan"
+      ],
+      "complexity": {
+        "current": "repeated iteration",
+        "expected": "indexed or batched access"
+      }
+    },
+    {
+      "schemaVersion": "smokinggun.finding.v2",
+      "id": "sg_abdd631d3ccd317c",
+      "scanner": "smokinggun.typescript-semantic",
+      "scannerVersion": "1.0.0",
+      "ruleId": "typescript-collection-operation-in-loop",
+      "language": "typescript",
+      "kind": "typescript-collection-operation-in-loop",
+      "claimClass": "theoretical-estimate",
+      "severity": "medium",
+      "confidence": "candidate",
+      "status": "unvalidated",
+      "relatedFindings": [
+        "sg_7fbe1f9f91e28257",
+        "sg_8115de4baba0504f",
+        "sg_98a775d6a8d608e9",
+        "sg_b3753bbf4b0c2056"
+      ],
+      "message": "Collection operation filter appears inside a loop; the receiver type is unresolved.",
+      "suggestion": "Inspect the receiver type and consider a precomputed lookup or one-pass transformation.",
+      "location": {
+        "path": "core/characters.js",
+        "startLine": 31,
+        "startColumn": 23,
+        "endLine": 31,
+        "endColumn": 60
+      },
+      "assumptions": [
+        "receiver type was unknown",
+        "enclosing loop depth: 1"
+      ],
+      "evidence": [
+        "smokinggun.typescript-semantic:typescript-collection-operation-in-loop"
+      ],
+      "complexity": {
+        "current": "repeated work per enclosing loop",
+        "expected": "indexed, batched, or one-pass work"
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "scanner": "smokinggun.structural",
+      "version": "1.0.0",
+      "language": "mixed",
+      "filesDiscovered": 357,
+      "filesAnalyzed": 357,
+      "skippedFiles": [],
+      "parseStatus": "complete"
+    },
+    {
+      "scanner": "smokinggun.tree-sitter",
+      "version": "0.26.11",
+      "language": "javascript",
+      "filesDiscovered": 353,
+      "filesAnalyzed": 353,
+      "skippedFiles": [],
+      "parseStatus": "complete"
+    },
+    {
+      "scanner": "smokinggun.tree-sitter",
+      "version": "0.26.11",
+      "language": "typescript",
+      "filesDiscovered": 4,
+      "filesAnalyzed": 4,
+      "skippedFiles": [],
+      "parseStatus": "complete"
+    },
+    {
+      "scanner": "smokinggun.typescript-semantic",
+      "version": "1.0.0",
+      "language": "typescript-javascript",
+      "filesDiscovered": 357,
+      "filesAnalyzed": 357,
+      "skippedFiles": [],
+      "parseStatus": "partial",
+      "reason": "The TypeScript context index reached its per-kind evidence limit. TypeScript sources were analyzed from immutable bytes without a captured project configuration or library set."
+    }
+  ],
+  "diagnostics": [
+    {
+      "schemaVersion": "smokinggun.problem.v1",
+      "code": "typescript-context-truncated",
+      "message": "The TypeScript context index reached its per-kind evidence limit.",
+      "recovery": "Use a narrower --only scope before relying on complete symbol, reference, or call context."
+    },
+    {
+      "schemaVersion": "smokinggun.problem.v1",
+      "code": "typescript-project-context-partial",
+      "message": "TypeScript sources were analyzed from immutable bytes without a captured project configuration or library set.",
+      "recovery": "Treat type resolution as partial until tsconfig, project references, and compiler libraries enter the snapshot."
+    },
+    {
+      "schemaVersion": "smokinggun.problem.v1",
+      "code": "findings-truncated",
+      "message": "Emitted 80 of 427 findings due to the configured limit.",
+      "recovery": "Increase maxFindings to review the remaining findings."
+    }
+  ],
+  "timings": {
+    "startedAt": "2026-10-14T15:36:16.382Z",
+    "durationMs": 5937.5549
+  },
+  "assumptions": [
+    "Structural findings are candidates; type, caller, workload, and runtime evidence were not inferred.",
+    "Structural rule coverage is limited to syntax-backed nested-loop and in-loop membership, sort, and transform rules; fallback-only recursion, I/O, and render rules are disabled."
+  ],
+  "nextAction": "Inspect the first candidate from each represented repository area; ordering is deterministic, not runtime importance.",
+  "filesModified": [],
+  "rawArtifacts": []
+}

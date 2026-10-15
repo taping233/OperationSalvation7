@@ -1,0 +1,18 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Edit this image only for depth of field, visual focus and secondary brightness. Preserve EXACT face, expression, hair, pose, anatomy, clothes, falcon, hood-removing hand action, framing and painting style. Make the face/eyes/mouth, raised fingertips and leather hood the crisply defined focal plane. Clearly soften the distant snowy pine forest with selective defocus, merging branches and snow fragments into quiet large blue-gray masses; strongest smoothing immediately behind the head, retaining recognizable trees without fog. Middle-distance stone balustrade and window frame mildly out of focus, retain their structural top/side planes and perspective, reduce stone surface detail. Slight near-camera defocus on bottom knees/coat edges and extreme frame edges. Fur mantle dimmer muted ivory, reduce its highlight contrast and soften secondary fur tufts into grouped curved forms; do not shrink/change silhouette. Falcon eye/beak sharp, chest and wings softer with fewer feather marks. Warm window glow softer and subdued. Gently improve face illumination within existing upper-left soft light, retaining tan skin and coherent shadows. Clearly visible depth separation like a carefully composed commercial anime wallpaper, while retaining opaque broad brush planes. No global blur, fog veil, bloom, bokeh dots, noise, new objects or text. Preserve all identity and design; only selective sharpness/edge contrast/light hierarchy changes.",
+  "references": [
+    "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-12-WF-four-character-skins/previews/heixiang-winter-hunt-v5.webp"
+  ],
+  "status": "review-candidate-not-integrated",
+  "source": "C:/Users/太平/.codex/generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-bf0da311-2f97-4e52-a976-34daf422cf99.png",
+  "size": [
+    1672,
+    941
+  ],
+  "preview": "previews/heixiang-winter-hunt-v6.webp",
+  "sourceBase": "C:/Users/太平/.codex",
+  "sourceRelativeToCodexHome": "generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-bf0da311-2f97-4e52-a976-34daf422cf99.png",
+  "sourceSha256": "c7473721036bc2a7f6a78b9d52db52686f706984f5f7a0d2e4b7ba92891a2d5c",
+  "previewSha256": "c8defc3c47f1778ff8a9c1b99150f2c20690727f7a41be5c4220bda4618bbbd2"
+}

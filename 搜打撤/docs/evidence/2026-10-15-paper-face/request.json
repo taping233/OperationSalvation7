@@ -1,0 +1,12 @@
+{
+  "tool": "image_gen (built-in)",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-36dd6ded-6e82-42ac-9597-36d433707182.png",
+  "prompt": "Use case: stylized-concept. Generate one reusable rectangular PAINTED PAPER SURFACE texture, portrait 1024x1536. Intended as the blank reading area behind game card text, matching a matte hand-painted anime sketchbook collage. Uniform quiet warm off-white / pale warm gray paper base, a few extremely broad low-contrast gray-beige opaque brush swaths along the outer edges, subtle irregular strokes showing brush coverage. Central 85 percent must be calm and very light for readable dark text. Matte painted 2D surface with broad handmade color masses and restrained edges. No realistic paper micrograin, no speckled noise, no distressed scratches, no stains, no lines, no symbols, no text, no frame or decorations. A blank filled rectangular backdrop, edge to edge with no transparency, no dark vignettes. Color and material should match the off-white torn paper in input1; borrow only its matte painting, not its blue tape, brush strokes or border geometry.",
+  "asset": "game/art-source/card-paper-rarity-20261015/interior.png",
+  "changes": [
+    "说明区改手绘纸面；费用为纸签油墨",
+    "类型标签移到53%图文分割处",
+    "增加品级色带与文字印签",
+    "棱彩边缘光、动态扫光与卡名渐变"
+  ]
+}

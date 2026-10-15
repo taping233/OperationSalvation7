@@ -1,0 +1,1893 @@
+{
+  "method": "仅顶层规则；同选择器或后加载且增加 body 前缀的选择器；逐属性核对 important，条件规则与动画不动",
+  "inputs": [
+    {
+      "file": "game/css/title-p0.css",
+      "sha256": "314571a376c51431d2c1871b1344202e88bf40dd2b36fa889a58a9c91b27fd8f"
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "sha256": "1fc79e632c252f2547552efad30d2dd1c431afab6bfb6365e891b0bcc3393c0f"
+    }
+  ],
+  "removed": [
+    {
+      "file": "game/css/title-p0.css",
+      "line": 5,
+      "selectors": [
+        "#title.home-composed"
+      ],
+      "property": "--home-gold",
+      "value": "#f1d67f",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed",
+          "line": 265,
+          "value": "var(--ak-yellow)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 43,
+      "selectors": [
+        "#title.home-composed::after"
+      ],
+      "property": "background",
+      "value": "linear-gradient(90deg, #121315e8 0%, #131416bf 24%, #13141600 43%, #13141600 66%, #13141673 100%),\r\n    linear-gradient(0deg, #121315bf, transparent 25%, transparent 86%, #12131566)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed::after",
+          "line": 22,
+          "value": "radial-gradient(ellipse 46% 38% at 52% 0%, #bcd6ff29, transparent 72%),\r\n    radial-gradient(ellipse 82% 84% at 52% 50%, transparent 56%, #05060a8f 100%),\r\n    linear-gradient(90deg, #121315c4 0%, #13141682 22%, #13141600 42%, #13141600 66%, #13141666 100%),\r\n    linear-gradient(0deg, #12131599, transparent 25%, transparent 86%, #12131566)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 48,
+      "selectors": [
+        "#title.home-composed .home-edge-band"
+      ],
+      "property": "height",
+      "value": "44px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-edge-band",
+          "line": 296,
+          "value": "30px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 49,
+      "selectors": [
+        "#title.home-composed .home-edge-band"
+      ],
+      "property": "background",
+      "value": "#c8b26a45",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-edge-band",
+          "line": 296,
+          "value": "rgba(6,8,10,.5)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 55,
+      "selectors": [
+        "#title.home-composed .home-edge-band::after"
+      ],
+      "property": "background",
+      "value": "linear-gradient(180deg, #e2e3e41c, #1c1e208f 35%, #1416177d)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-edge-band::after",
+          "line": 269,
+          "value": "linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.45))",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 59,
+      "selectors": [
+        "#title.home-composed .home-edge-band-top"
+      ],
+      "property": "height",
+      "value": "calc(44px + var(--band-bleed))",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-edge-band-top",
+          "line": 297,
+          "value": "calc(30px + var(--band-bleed))",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 68,
+      "selectors": [
+        "#title.home-composed .home-band-track b"
+      ],
+      "property": "color",
+      "value": "#ebd280ab",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-band-track b",
+          "line": 271,
+          "value": "var(--ak-yellow)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 69,
+      "selectors": [
+        "#title.home-composed .home-edge-band-top .home-band-track"
+      ],
+      "property": "top",
+      "value": "calc(10px + var(--band-bleed))",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-edge-band-top .home-band-track",
+          "line": 299,
+          "value": "calc(8px + var(--band-bleed))",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 72,
+      "selectors": [
+        "#title.home-composed .home-brand"
+      ],
+      "property": "padding",
+      "value": "12px 16px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-brand",
+          "line": 205,
+          "value": "0",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 79,
+      "selectors": [
+        "#title.home-composed .home-wordmark img"
+      ],
+      "property": "filter",
+      "value": "drop-shadow(.65px 0 0 #eaebecc9) drop-shadow(-.65px 0 0 #eaebecc9)\r\n    drop-shadow(0 .65px 0 #eaebecc9) drop-shadow(0 -.65px 0 #eaebecc9)\r\n    drop-shadow(0 2px 2px #12141580)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-wordmark img",
+          "line": 92,
+          "value": "drop-shadow(0 0 1px #fff) drop-shadow(0 0 5px #d3e4ff73) drop-shadow(0 4px 6px #0d0f1299)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 85,
+      "selectors": [
+        "#title.home-composed .home-primary"
+      ],
+      "property": "gap",
+      "value": "24px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-primary",
+          "line": 229,
+          "value": "20px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 88,
+      "selectors": [
+        "#title.home-composed .home-secondary"
+      ],
+      "property": "top",
+      "value": "auto",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-secondary",
+          "line": 207,
+          "value": "auto",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 89,
+      "selectors": [
+        "#title.home-composed .home-secondary"
+      ],
+      "property": "gap",
+      "value": "17px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-secondary",
+          "line": 207,
+          "value": "14px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 96,
+      "selectors": [
+        "#title.home-composed .home-secondary .home-plate"
+      ],
+      "property": "height",
+      "value": "78px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-secondary .home-plate",
+          "line": 209,
+          "value": "90px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 98,
+      "selectors": [
+        "#title.home-composed .home-plate"
+      ],
+      "property": "--plate-fill",
+      "value": "#2a2d30d0",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-plate",
+          "line": 272,
+          "value": "rgba(14,16,19,.82)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 98,
+      "selectors": [
+        "#title.home-composed .home-plate"
+      ],
+      "property": "--plate-accent",
+      "value": "#b6bbbf",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-plate",
+          "line": 272,
+          "value": "var(--ak-white)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 98,
+      "selectors": [
+        "#title.home-composed .home-plate"
+      ],
+      "property": "--plate-edge",
+      "value": "#0e0f10",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-plate",
+          "line": 272,
+          "value": "rgba(255,255,255,.32)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 99,
+      "selectors": [
+        "#title.home-composed .home-plate"
+      ],
+      "property": "--plate-shape",
+      "value": "polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-plate",
+          "line": 273,
+          "value": "polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px))",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 110,
+      "selectors": [
+        "#title.home-composed .home-plate::before",
+        "#title.home-composed .home-plate::after"
+      ],
+      "property": "z-index",
+      "value": "-1",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-plate::before",
+          "line": 145,
+          "value": "-2",
+          "important": false
+        },
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-plate::after",
+          "line": 145,
+          "value": "-2",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 112,
+      "selectors": [
+        "#title.home-composed .home-plate::before",
+        "#title.home-composed .home-plate::after"
+      ],
+      "property": "background",
+      "value": "var(--plate-edge)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-plate::before",
+          "line": 232,
+          "value": "rgba(255,255,255,.17)",
+          "important": false
+        },
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-plate::after",
+          "line": 278,
+          "value": "linear-gradient(90deg, var(--plate-accent) 0 4px, transparent 4px), var(--plate-fill)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 115,
+      "selectors": [
+        "#title.home-composed .home-plate::before"
+      ],
+      "property": "filter",
+      "value": "drop-shadow(5px 5px 0 #0e0f109e)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-plate::before",
+          "line": 276,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 115,
+      "selectors": [
+        "#title.home-composed .home-plate::before"
+      ],
+      "property": "transition",
+      "value": "filter .16s ease",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-plate::before",
+          "line": 145,
+          "value": "transform var(--home-touch-time) var(--home-touch-ease), background-color var(--home-touch-time) var(--home-touch-ease), filter var(--home-touch-time) var(--home-touch-ease)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 118,
+      "selectors": [
+        "#title.home-composed .home-plate::after"
+      ],
+      "property": "inset",
+      "value": "2px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-plate::after",
+          "line": 233,
+          "value": "1px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 119,
+      "selectors": [
+        "#title.home-composed .home-plate::after"
+      ],
+      "property": "background",
+      "value": "linear-gradient(90deg, var(--plate-accent) 0 5px, transparent 5px), var(--plate-fill)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-plate::after",
+          "line": 278,
+          "value": "linear-gradient(90deg, var(--plate-accent) 0 4px, transparent 4px), var(--plate-fill)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 122,
+      "selectors": [
+        "#title.home-composed .home-plate::after"
+      ],
+      "property": "transition",
+      "value": "filter .16s ease",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-plate::after",
+          "line": 145,
+          "value": "transform var(--home-touch-time) var(--home-touch-ease), background-color var(--home-touch-time) var(--home-touch-ease), filter var(--home-touch-time) var(--home-touch-ease)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 125,
+      "selectors": [
+        "#title.home-composed .home-primary .home-plate::before"
+      ],
+      "property": "inset",
+      "value": "-4px 5px 4px -5px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-primary .home-plate::before",
+          "line": 274,
+          "value": "0",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 125,
+      "selectors": [
+        "#title.home-composed .home-primary .home-plate::before"
+      ],
+      "property": "background",
+      "value": "#cfd0d2",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-primary .home-plate::before",
+          "line": 274,
+          "value": "rgba(255,255,255,.14)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 128,
+      "selectors": [
+        "#title.home-composed .home-secondary .home-plate::before"
+      ],
+      "property": "inset",
+      "value": "-2px 4px 3px -3px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-secondary .home-plate::before",
+          "line": 275,
+          "value": "0",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 128,
+      "selectors": [
+        "#title.home-composed .home-secondary .home-plate::before"
+      ],
+      "property": "background",
+      "value": "#bfc1c29c",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-secondary .home-plate::before",
+          "line": 275,
+          "value": "rgba(255,255,255,.14)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 131,
+      "selectors": [
+        "#title.home-composed .home-secondary .home-plate::after"
+      ],
+      "property": "background",
+      "value": "linear-gradient(90deg, transparent calc(100% - 9px), var(--plate-accent) calc(100% - 9px)), var(--plate-fill)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-secondary .home-plate::after",
+          "line": 280,
+          "value": "linear-gradient(90deg, transparent calc(100% - 4px), var(--plate-accent) calc(100% - 4px)), var(--plate-fill)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 133,
+      "selectors": [
+        "#title.home-composed .home-plate:hover"
+      ],
+      "property": "transform",
+      "value": "translate(-3px, -3px)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-plate:hover",
+          "line": 143,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 134,
+      "selectors": [
+        "#title.home-composed .home-plate:hover::before"
+      ],
+      "property": "filter",
+      "value": "drop-shadow(8px 8px 0 #0e0f109e)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-plate:hover::before",
+          "line": 277,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 135,
+      "selectors": [
+        "#title.home-composed .home-plate:hover::after"
+      ],
+      "property": "filter",
+      "value": "brightness(1.08)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-plate:hover::after",
+          "line": 283,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 136,
+      "selectors": [
+        "#title.home-composed .home-plate:active"
+      ],
+      "property": "transform",
+      "value": "translate(2px, 2px)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-plate:active",
+          "line": 143,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 141,
+      "selectors": [
+        "#title.home-composed .home-button-copy"
+      ],
+      "property": "gap",
+      "value": "5px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-button-copy",
+          "line": 245,
+          "value": "4px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 142,
+      "selectors": [
+        "#title.home-composed .home-button-cn"
+      ],
+      "property": "letter-spacing",
+      "value": ".07em",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-button-cn",
+          "line": 287,
+          "value": ".16em",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 143,
+      "selectors": [
+        "#title.home-composed .home-button-cn"
+      ],
+      "property": "text-shadow",
+      "value": "0 2px 5px #0e0f1061",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-button-cn",
+          "line": 287,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 146,
+      "selectors": [
+        "#title.home-composed .home-line-icon"
+      ],
+      "property": "stroke-width",
+      "value": "1.7",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-line-icon",
+          "line": 307,
+          "value": "1.6",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 147,
+      "selectors": [
+        "#title.home-composed .home-line-icon"
+      ],
+      "property": "color",
+      "value": "var(--plate-accent)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-line-icon",
+          "line": 307,
+          "value": "var(--ak-white)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 150,
+      "selectors": [
+        "#title.home-composed .home-start"
+      ],
+      "property": "--plate-fill",
+      "value": "linear-gradient(105deg, #b18b34dd, #d6ae2add)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-start",
+          "line": 238,
+          "value": "linear-gradient(105deg, #c59d45, #e9d189 72%)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 150,
+      "selectors": [
+        "#title.home-composed .home-start"
+      ],
+      "property": "--plate-accent",
+      "value": "#fce391",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-start",
+          "line": 296,
+          "value": "#14120a",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 154,
+      "selectors": [
+        "#title.home-composed .home-start .home-button-cn"
+      ],
+      "property": "font-size",
+      "value": "34px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-start .home-button-cn",
+          "line": 236,
+          "value": "var(--home-ui-title)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 154,
+      "selectors": [
+        "#title.home-composed .home-start .home-button-cn"
+      ],
+      "property": "letter-spacing",
+      "value": ".045em",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-start .home-button-cn",
+          "line": 302,
+          "value": ".3em",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 158,
+      "selectors": [
+        "#title.home-composed .home-guide"
+      ],
+      "property": "--plate-fill",
+      "value": "#26292cd0",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-guide",
+          "line": 231,
+          "value": "rgba(8,16,28,.65)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 163,
+      "selectors": [
+        "#title.home-composed .home-ach"
+      ],
+      "property": "--plate-accent",
+      "value": "#f1d67f",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-ach",
+          "line": 306,
+          "value": "var(--ak-yellow)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 168,
+      "selectors": [
+        "#title.home-composed .home-exit"
+      ],
+      "property": "--plate-accent",
+      "value": "#cfa397",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-exit",
+          "line": 305,
+          "value": "var(--ak-red)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 168,
+      "selectors": [
+        "#title.home-composed .home-exit"
+      ],
+      "property": "--plate-fill",
+      "value": "#393039d0",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-exit",
+          "line": 305,
+          "value": "rgba(30,14,14,.84)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 175,
+      "selectors": [
+        "#title.home-composed .home-tool"
+      ],
+      "property": "--tool-shape",
+      "value": "polygon(9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%, 0 9px)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-tool",
+          "line": 310,
+          "value": "polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 176,
+      "selectors": [
+        "#title.home-composed .home-tool"
+      ],
+      "property": "height",
+      "value": "46px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-tool",
+          "line": 261,
+          "value": "56px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 179,
+      "selectors": [
+        "#title.home-composed .home-tool"
+      ],
+      "property": "color",
+      "value": "#e9e9e9",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-tool",
+          "line": 310,
+          "value": "var(--ak-white)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 183,
+      "selectors": [
+        "#title.home-composed .home-tool::before"
+      ],
+      "property": "inset",
+      "value": "-3px 3px 3px -3px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-tool::before",
+          "line": 311,
+          "value": "0",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 184,
+      "selectors": [
+        "#title.home-composed .home-tool::before"
+      ],
+      "property": "background",
+      "value": "#cfd0d2",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-tool::before",
+          "line": 311,
+          "value": "rgba(255,255,255,.18)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 185,
+      "selectors": [
+        "#title.home-composed .home-tool::before"
+      ],
+      "property": "filter",
+      "value": "drop-shadow(3px 3px 0 #0e0f109e)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-tool::before",
+          "line": 311,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 185,
+      "selectors": [
+        "#title.home-composed .home-tool::before"
+      ],
+      "property": "transition",
+      "value": "filter .16s ease",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-tool::before",
+          "line": 266,
+          "value": "transform var(--home-touch-time) var(--home-touch-ease), filter var(--home-touch-time) var(--home-touch-ease), color var(--home-touch-time) var(--home-touch-ease)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 188,
+      "selectors": [
+        "#title.home-composed .home-tool::after"
+      ],
+      "property": "inset",
+      "value": "0",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-tool::after",
+          "line": 312,
+          "value": "1px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 189,
+      "selectors": [
+        "#title.home-composed .home-tool::after"
+      ],
+      "property": "background",
+      "value": "linear-gradient(90deg, var(--home-gold) 0 3px, transparent 3px), #191b1da6",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-tool::after",
+          "line": 312,
+          "value": "linear-gradient(90deg, var(--ak-white) 0 3px, transparent 3px), rgba(12,14,17,.86)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 193,
+      "selectors": [
+        "#title.home-composed .home-tool::after"
+      ],
+      "property": "transition",
+      "value": "filter .16s ease",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-tool::after",
+          "line": 266,
+          "value": "transform var(--home-touch-time) var(--home-touch-ease), filter var(--home-touch-time) var(--home-touch-ease), color var(--home-touch-time) var(--home-touch-ease)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 195,
+      "selectors": [
+        "#title.home-composed .home-tool:hover"
+      ],
+      "property": "transform",
+      "value": "translate(-2px, -2px)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-tool:hover",
+          "line": 313,
+          "value": "translateY(-3px)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 196,
+      "selectors": [
+        "#title.home-composed .home-tool:hover::before"
+      ],
+      "property": "filter",
+      "value": "drop-shadow(5px 5px 0 #0e0f109e)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-tool:hover::before",
+          "line": 314,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 200,
+      "selectors": [
+        "#title.home-composed .home-tool svg"
+      ],
+      "property": "width",
+      "value": "23px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-tool svg",
+          "line": 275,
+          "value": "26px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 200,
+      "selectors": [
+        "#title.home-composed .home-tool svg"
+      ],
+      "property": "height",
+      "value": "23px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-tool svg",
+          "line": 275,
+          "value": "26px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 203,
+      "selectors": [
+        "#title.home-composed .home-wallpaper b"
+      ],
+      "property": "color",
+      "value": "var(--home-gold)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-wallpaper b",
+          "line": 315,
+          "value": "var(--ak-yellow)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 207,
+      "selectors": [
+        "#title.home-composed .home-wallpaper-view"
+      ],
+      "property": "width",
+      "value": "auto",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-wallpaper-view",
+          "line": 279,
+          "value": "var(--home-view-width)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 228,
+      "selectors": [
+        "#title.home-composed .home-credits-dialog"
+      ],
+      "property": "border",
+      "value": "2px solid #26292c",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-credits-dialog",
+          "line": 316,
+          "value": "1px solid var(--ak-line-hi)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 229,
+      "selectors": [
+        "#title.home-composed .home-credits-dialog"
+      ],
+      "property": "background",
+      "value": "#ebeced",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-credits-dialog",
+          "line": 316,
+          "value": "var(--ak-panel)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 229,
+      "selectors": [
+        "#title.home-composed .home-credits-dialog"
+      ],
+      "property": "color",
+      "value": "#26292c",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-credits-dialog",
+          "line": 316,
+          "value": "var(--ak-white)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 229,
+      "selectors": [
+        "#title.home-composed .home-credits-dialog"
+      ],
+      "property": "box-shadow",
+      "value": "9px 9px 0 #0e0f1080",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-credits-dialog",
+          "line": 316,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 235,
+      "selectors": [
+        "#title.home-composed .home-credits-back"
+      ],
+      "property": "color",
+      "value": "#26292c",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-credits-back",
+          "line": 317,
+          "value": "var(--ak-blue-hi)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 238,
+      "selectors": [
+        "#title.home-composed .home-credits-dialog h2"
+      ],
+      "property": "letter-spacing",
+      "value": ".12em",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-credits-dialog h2",
+          "line": 318,
+          "value": ".3em",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 241,
+      "selectors": [
+        "#title.home-composed .home-makers-list"
+      ],
+      "property": "border-bottom",
+      "value": "2px solid #ceb66b",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-makers-list",
+          "line": 319,
+          "value": "2px solid var(--ak-yellow)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 244,
+      "selectors": [
+        "#title.home-composed .home-makers-list dt"
+      ],
+      "property": "color",
+      "value": "#555b61",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-makers-list dt",
+          "line": 320,
+          "value": "var(--ak-sub)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 246,
+      "selectors": [
+        "#title.home-composed .home-makers-list dd"
+      ],
+      "property": "text-shadow",
+      "value": "0 3px 6px #0e0f1066",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed .home-makers-list dd",
+          "line": 321,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 247,
+      "selectors": [
+        "#title.home-composed .home-snow"
+      ],
+      "property": "opacity",
+      "value": ".32",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-snow",
+          "line": 50,
+          "value": ".5",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 251,
+      "selectors": [
+        "#title.home-composed #warmupTip"
+      ],
+      "property": "background",
+      "value": "#191b1ded",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed #warmupTip",
+          "line": 322,
+          "value": "rgba(10,12,14,.92)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 251,
+      "selectors": [
+        "#title.home-composed #warmupTip"
+      ],
+      "property": "border",
+      "value": "1px solid #acb1b56b",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/title-p0.css",
+          "selector": "#title.home-composed #warmupTip",
+          "line": 322,
+          "value": "1px solid var(--ak-line-hi)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 253,
+      "selectors": [
+        "#title.home-composed #warmupTip .warmup-head"
+      ],
+      "property": "font-size",
+      "value": "12px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed #warmupTip .warmup-head",
+          "line": 292,
+          "value": "13px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 254,
+      "selectors": [
+        "#title.home-composed #warmupTip .warmup-reason"
+      ],
+      "property": "font-size",
+      "value": "10px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed #warmupTip .warmup-reason",
+          "line": 293,
+          "value": "11px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 267,
+      "selectors": [
+        "#title.home-composed::before"
+      ],
+      "property": "opacity",
+      "value": ".5",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed::before",
+          "line": 16,
+          "value": ".34",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 268,
+      "selectors": [
+        "#title.home-composed .home-edge-band"
+      ],
+      "property": "background",
+      "value": "rgba(8,10,12,.62)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-edge-band",
+          "line": 296,
+          "value": "rgba(6,8,10,.5)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 268,
+      "selectors": [
+        "#title.home-composed .home-edge-band"
+      ],
+      "property": "height",
+      "value": "40px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-edge-band",
+          "line": 296,
+          "value": "30px",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 279,
+      "selectors": [
+        "#title.home-composed .home-plate::after"
+      ],
+      "property": "transition",
+      "value": "background .18s var(--ease-pop)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-plate::after",
+          "line": 145,
+          "value": "transform var(--home-touch-time) var(--home-touch-ease), background-color var(--home-touch-time) var(--home-touch-ease), filter var(--home-touch-time) var(--home-touch-ease)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 281,
+      "selectors": [
+        "#title.home-composed .home-plate:hover"
+      ],
+      "property": "transform",
+      "value": "translateX(10px)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-plate:hover",
+          "line": 143,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 282,
+      "selectors": [
+        "#title.home-composed .home-secondary .home-plate:hover"
+      ],
+      "property": "transform",
+      "value": "translateX(-10px)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-secondary .home-plate:hover",
+          "line": 143,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 285,
+      "selectors": [
+        "#title.home-composed .home-secondary .home-plate:hover::after"
+      ],
+      "property": "background",
+      "value": "linear-gradient(90deg, transparent calc(100% - 6px), var(--ak-blue) calc(100% - 6px)), linear-gradient(260deg, rgba(31,178,255,.22), rgba(14,16,19,.9) 60%)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-secondary .home-plate:hover::after",
+          "line": 158,
+          "value": "linear-gradient(90deg, transparent calc(100% - 4px), var(--plate-accent) calc(100% - 4px)), var(--plate-fill)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 286,
+      "selectors": [
+        "#title.home-composed .home-plate:active"
+      ],
+      "property": "transform",
+      "value": "translateX(4px) scale(.99)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-plate:active",
+          "line": 143,
+          "value": "none",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 288,
+      "selectors": [
+        "#title.home-composed .home-button-copy::after"
+      ],
+      "property": "letter-spacing",
+      "value": ".38em",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-button-copy::after",
+          "line": 246,
+          "value": ".16em",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 288,
+      "selectors": [
+        "#title.home-composed .home-button-copy::after"
+      ],
+      "property": "color",
+      "value": "var(--ak-sub)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-button-copy::after",
+          "line": 246,
+          "value": "#c3ccd3",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 289,
+      "selectors": [
+        "#title.home-composed .home-start .home-button-copy::after"
+      ],
+      "property": "content",
+      "value": "'SORTIE  ·  DEPLOY'",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-start .home-button-copy::after",
+          "line": 248,
+          "value": "'ENTER THE CITY'",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 289,
+      "selectors": [
+        "#title.home-composed .home-start .home-button-copy::after"
+      ],
+      "property": "color",
+      "value": "#14120a",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-start .home-button-copy::after",
+          "line": 248,
+          "value": "#14120a",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 289,
+      "selectors": [
+        "#title.home-composed .home-start .home-button-copy::after"
+      ],
+      "property": "opacity",
+      "value": ".7",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-start .home-button-copy::after",
+          "line": 248,
+          "value": ".78",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 292,
+      "selectors": [
+        "#title.home-composed .home-library .home-button-copy::after"
+      ],
+      "property": "content",
+      "value": "'ARCHIVE'",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-library .home-button-copy::after",
+          "line": 249,
+          "value": "'PHOTO STUDIO'",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 296,
+      "selectors": [
+        "#title.home-composed .home-start"
+      ],
+      "property": "--plate-fill",
+      "value": "linear-gradient(105deg, #d9ae1c, var(--ak-yellow) 70%)",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-start",
+          "line": 238,
+          "value": "linear-gradient(105deg, #c59d45, #e9d189 72%)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 297,
+      "selectors": [
+        "#title.home-composed .home-start::before"
+      ],
+      "property": "background",
+      "value": "#fff6c2",
+      "important": true,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-start::before",
+          "line": 239,
+          "value": "#f6e9bf",
+          "important": true
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 298,
+      "selectors": [
+        "#title.home-composed .home-start:hover::before"
+      ],
+      "property": "background",
+      "value": "#fff",
+      "important": true,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-start:hover::before",
+          "line": 240,
+          "value": "#fff",
+          "important": true
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 299,
+      "selectors": [
+        "#title.home-composed .home-start::after"
+      ],
+      "property": "background",
+      "value": "linear-gradient(105deg, #e0b414, var(--ak-yellow) 70%)",
+      "important": true,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-start::after",
+          "line": 241,
+          "value": "linear-gradient(105deg, #c9a24a, #e9d189 72%)",
+          "important": true
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 300,
+      "selectors": [
+        "#title.home-composed .home-start:hover::after"
+      ],
+      "property": "background",
+      "value": "linear-gradient(105deg, #ffe375, #fff2b0 70%)",
+      "important": true,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-start:hover::after",
+          "line": 242,
+          "value": "linear-gradient(105deg, #c9a24a, #e9d189 72%)",
+          "important": true
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 302,
+      "selectors": [
+        "#title.home-composed .home-start .home-button-cn"
+      ],
+      "property": "font-size",
+      "value": "36px",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-start .home-button-cn",
+          "line": 236,
+          "value": "var(--home-ui-title)",
+          "important": false
+        }
+      ]
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "line": 303,
+      "selectors": [
+        "#title.home-composed .home-start .home-arrow"
+      ],
+      "property": "animation",
+      "value": "akNudge 1.4s var(--ease-snap) infinite",
+      "important": false,
+      "winners": [
+        {
+          "file": "game/css/home-polish.css",
+          "selector": "body #title.home-composed .home-start .home-arrow",
+          "line": 308,
+          "value": "none",
+          "important": false
+        }
+      ]
+    }
+  ]
+}

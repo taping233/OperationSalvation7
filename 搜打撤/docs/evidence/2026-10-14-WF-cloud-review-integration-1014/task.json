@@ -35,10 +35,21 @@
   "unverified": [
     "包体预算四项仍失败；本轮未验证游戏实页；远端CI由父线程监控"
   ],
-  "updatedAt": "2026-10-14T06:29:16.726Z",
+  "updatedAt": "2026-10-14T07:47:26.011436+00:00",
   "closure": {
     "kind": "manual",
     "doneWhenConfirmed": true,
     "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  },
+  "delivery": {
+    "status": "committed",
+    "commit": "367db7c1a7dd149c7e8088bd4ae4e2d9e7debd12",
+    "verifiedAt": "2026-10-14T07:47:26.011436+00:00",
+    "head": "bf6129520b55e28698c749ce7dbc6d327b85866a",
+    "evidence": "docs/evidence/2026-10-14-WF-ledger-cleanup-1014/README.md",
+    "limits": [
+      "仅确认本地HEAD包含提交；不新增远端、CI、Library或实页通过结论",
+      "stage保留原执行收官状态，交付事实以delivery和实时Git为准"
+    ]
   }
 }

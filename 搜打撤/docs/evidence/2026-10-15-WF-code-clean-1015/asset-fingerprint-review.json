@@ -1,0 +1,56 @@
+{
+  "normalization": "CRLF to LF only; other byte changes remain checked",
+  "review": "sound gain/filter only; icon coin uses active gold-is7-v2; removed dead hub renderers; menu/map-return and ui bag-button removal do not select old assets; vfx line-ending change only",
+  "changes": [
+    {
+      "file": "game/src/core/map-node-art.js",
+      "old": "bd0900e2beafd724ea423c3c7a4cefc1f534e20c1186a3e26eda33c4885d426e",
+      "next": "95f5a2a4371acb7ebf1b8bb36288b1456129056b59985d1be9e42fbdbc850c63"
+    },
+    {
+      "file": "game/src/core/renderer.js",
+      "old": "18bd91c46bf9bf835b4eca9f6c82c6ef7b21e5a41f73dc9d4800c3db064ec9a5",
+      "next": "8f7ed333fec94237ffdd8188f724717912ca7e0a94c06ce9b4f7ac551d4f8511"
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "old": "d2264edba3b40bb0421cd144f514f482b41b1e6303d99e392eefef9d137aa72d",
+      "next": "f5053d38817ddaee067ff0c42e5677694641340fd210722c189a4ecdbee2a4a7"
+    },
+    {
+      "file": "game/src/battle/view/battle.vfx.js",
+      "old": "a6c81e273be090085e19f0d9474af149da32fd945445e18e732b9bdb78e0f019",
+      "next": "a439f13c5433f7dfc936a9e7a8c4bfe56350f745e17a69e2661b783d4d667e28"
+    },
+    {
+      "file": "game/src/core/icons-bitmap.js",
+      "old": "af20452d69ef4fc0048c1518606e7ff94df19fe6315a6f771b63a7a8f7ef0571",
+      "next": "c043e3e20da6a564c0006c1a8fa8c60322492d09c5716ff52b7f1d230cafd408"
+    },
+    {
+      "file": "game/src/hub/hub.presentation.js",
+      "old": "ab295fd50246dfb69dd72688c2659b906d70bdb2dd9cc0f181ae268e0ddbfa3f",
+      "next": "364bbc0b5dfe309ca947d3fd2d3369a9038826a5caf0586af121e4618dece461"
+    },
+    {
+      "file": "game/src/hub/hub.visuals.js",
+      "old": "860a1e9ddbc7cc60bcd55542bfec20ea4ea8d8665c7393363409b74fedea314d",
+      "next": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78"
+    },
+    {
+      "file": "game/src/ui/game.menu.js",
+      "old": "1ab6b2e8e4bd332fc664b5bb805ccdf8ced245d7fcbdadf51d76245a69617816",
+      "next": "2fd52c620d412462dea4ba35553152f7c06f5017887fe29dd53ce6eebb85b83b"
+    },
+    {
+      "file": "game/src/ui/ui.js",
+      "old": "bfe2f452fba54816b686e6a90ff87c071d277ddb8606c3dda455cc3053b9c998",
+      "next": "e40a8eac1adb5e3a834a417c174a5d2513eadab5d55bf0b07804bd1e87b3d6a1"
+    },
+    {
+      "file": "game/src/hub/game.bag.view2.js",
+      "next": "67ee01779031d5230a345427e39ddffd49e87731a00d33a768ac95e249bfd9a5",
+      "reason": "new bag view builds card HTML; active card art remains same; no excluded frames/map/transition paths selected"
+    }
+  ]
+}

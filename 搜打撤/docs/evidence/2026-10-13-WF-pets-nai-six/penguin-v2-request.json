@@ -1,0 +1,16 @@
+{
+  "id": "penguin",
+  "name": "小企鹅咕嘎",
+  "model": "nai-diffusion-4-5-full",
+  "recipe": "1.3",
+  "width": 1024,
+  "height": 1024,
+  "steps": 28,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nAn original young expedition penguin with a round but anatomically believable body, slate-black back, bright ivory belly, pale facial crescents, short ochre beak and wide webbed feet. It strides forward with one flipper lifted in greeting and the other holding a tiny canvas supply pouch; its mustard wool scarf whips gently behind. A small blue-gray crystal is stitched into the pouch clasp, hinting at the extra safe storage it brings to the party. Warm brown eyes and a determined open-beak chirp make it cheerful without turning it into a plush toy. Show the full tail, both flippers and both feet.\n\nOriginal high-quality painterly character concept for a fantasy card-game companion selection screen. Rich, memorable design with coherent anatomy, tactile materials and a readable silhouette at small display size.\n\nA single complete character in a lively three-quarter view, centered in a square 1024 by 1024 canvas, occupying about 75 percent of the frame. Entire silhouette visible with clean margins. Plain matte warm-gray background with only a faint contact shadow, no landscape, frame, lettering or other characters.\n\nSlate black, ivory, mustard cloth and one cool blue crystal; crisp cool light, broad feather sheen, woven scarf texture and scuffed pouch seams.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "uc": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, humanoid, duck, puffin, polar bear, extra flippers, extra feet, giant eyes, plush toy, cropped body, complex background, typography, border",
+  "naiImageReferences": [],
+  "seed": 504514347,
+  "source": "docs\\evidence\\2026-10-13-WF-pets-nai-six\\source\\penguin-v2.png",
+  "sha256": "61669bc44ae7750bf151ac31a22882def21ddc82692d384bd92741df2400431f",
+  "bytes": 1348238
+}

@@ -1,0 +1,20 @@
+{
+  "files": [
+    {
+      "path": "game/src/ui/base-design-preview-v6.js",
+      "bytes": 7296,
+      "sha256": "a0de50006d366047a605802be6f7a01e1b8367117a6c04c48582f17d77ba5e16",
+      "sourceImporters": [],
+      "status": "awaiting explicit path approval; file retained"
+    },
+    {
+      "path": "game/src/hub/hub.navigation-v6.js",
+      "bytes": 1716,
+      "sha256": "62255064d31753dfc26fac445efca93e221f37fe555ef0c3ceb66f4cafcd23b0",
+      "sourceImporters": [
+        "ui/base-design-preview-v6.js"
+      ],
+      "status": "awaiting explicit path approval; file retained"
+    }
+  ]
+}

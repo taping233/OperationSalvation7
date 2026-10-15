@@ -1,0 +1,15 @@
+{
+  "screenshot": {
+    "path": "warehouse.png",
+    "bytes": 117251,
+    "sha256": "caea88fa982b98fc75da0ba02bc812652e88b6213b7deacb2206ba1e1eb74e54",
+    "source": "Codex In-app Browser current viewport"
+  },
+  "excludedIntermediateEvidence": [],
+  "backpack": {
+    "path": "backpack.png",
+    "bytes": 36691,
+    "sha256": "0b69ebd0739d5bcd6229a9f150427d75a1984d8f5f9d9d9845313ad5044b5dd1",
+    "source": "Codex In-app Browser; real saved-slot load and bag toolbar click; current viewport"
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "selection": "本轮六张第一版内置重绘，非可爱版或后续Q版",
+  "jobs": [
+    {
+      "id": "dog",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a13ae1-54ce-73e0-8c64-7cb3dcde601a\\exec-85517f9f-c1f8-4469-8ec2-cf1edcd95d57.png",
+      "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/dog.png",
+      "sourceSha256": "367c54d4e33ad5ac1b7b01cc9840c06ba0952e5cab17ad09c957dce1478e8eb8",
+      "rawBytes": 1531574,
+      "outputPath": "game/assets/icons/base-v3/companion-dog.webp",
+      "outputSha256": "0a39e7667cea645753e944eef2c7ff56c0faacbd764008eedfaec0a7a59542ce",
+      "outputBytes": 103532,
+      "size": [
+        720,
+        720
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "falcon",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a13ae1-54ce-73e0-8c64-7cb3dcde601a\\exec-e9c8b75e-07fd-47e5-83d8-f3bf79d830ad.png",
+      "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/falcon.png",
+      "sourceSha256": "37d23584965b548d91d1790cf7e958c8a2cb3f9e3481438774a8e4d04e63402e",
+      "rawBytes": 1557407,
+      "outputPath": "game/assets/icons/base-v3/companion-falcon.webp",
+      "outputSha256": "654a1845ca519a63de6756cab3f7fbe51332ec54fa3366cf19954ae9861dfbfc",
+      "outputBytes": 121038,
+      "size": [
+        720,
+        720
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "cat",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a13ae1-54ce-73e0-8c64-7cb3dcde601a\\exec-0084af10-b1bd-449b-95bf-7291d2899699.png",
+      "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/cat.png",
+      "sourceSha256": "bbe12328ac9d7dfdcc0d966b141e4662fbc0ac50b83bf7a3bc497fd777d474f1",
+      "rawBytes": 1582040,
+      "outputPath": "game/assets/icons/base-v3/companion-cat.webp",
+      "outputSha256": "7989e27d3417b26eb1cadee613a8d838ea6e62561d44d3cc4154fb2bc21aa71a",
+      "outputBytes": 122060,
+      "size": [
+        720,
+        720
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "robot",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a13ae1-54ce-73e0-8c64-7cb3dcde601a\\exec-a73eaf6b-d5b8-4d15-8532-0b47c031bcb2.png",
+      "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/robot.png",
+      "sourceSha256": "80413522e13d00e4893201e284c7530866184c61fe228ad74349b689f1318b5b",
+      "rawBytes": 830896,
+      "outputPath": "game/assets/icons/base-v3/companion-robot.webp",
+      "outputSha256": "d2ecf7f8a255ff359f38a784b635315c13048eff140258c6143b5d1d070ada67",
+      "outputBytes": 74566,
+      "size": [
+        720,
+        720
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "fire",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a13ae1-54ce-73e0-8c64-7cb3dcde601a\\exec-0af9e60d-6f48-4af7-b87f-32a53bbe494d.png",
+      "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/fire.png",
+      "sourceSha256": "bac534aece39f4fd5759e83ea04835f29b8a1d03e7947bd7b142d787f2f297c9",
+      "rawBytes": 983556,
+      "outputPath": "game/assets/icons/base-v3/companion-fire.webp",
+      "outputSha256": "d8354206ee1f5d8403d206f6e2d6a634535660b9d8a50dc14a2e0d5e516a4621",
+      "outputBytes": 73100,
+      "size": [
+        720,
+        720
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "penguin",
+      "generatedSource": "C:\\Users\\太平\\.codex\\generated_images\\01a13ae1-54ce-73e0-8c64-7cb3dcde601a\\exec-03e9167c-86e4-40c3-93ee-46c6bbc91b9e.png",
+      "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/penguin.png",
+      "sourceSha256": "ce913e1973b6f3b61ba70005c42fd2ec0522abef63b13305d29505a17df30e4a",
+      "rawBytes": 1491649,
+      "outputPath": "game/assets/icons/base-v3/companion-penguin.webp",
+      "outputSha256": "455176e51bbf6e65e11e36f23c3ee544ed56bd81d1bf6216cb31175432995230",
+      "outputBytes": 105994,
+      "size": [
+        720,
+        720
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ]
+}

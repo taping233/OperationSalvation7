@@ -1,0 +1,13 @@
+game/src\game.boot.js
+game/src\run\game.run.flow.js
+game/src\core\map-reveals.js
+game/src\core\camera.js
+game/src\core\renderer.js
+game/src\core\render-scheduler.js
+game/src\core\perf-probe.local.js
+tests\map-travel-motion.test.js
+tests\node-flow-confirmation.test.js
+tests\perf-probe-summary.test.js
+tests\r6-story-flow.repro.test.js
+tests\render-scheduler.test.js
+tests\renderer-resource-lifecycle.test.js

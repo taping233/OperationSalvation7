@@ -1,0 +1,745 @@
+{
+  "actions": [
+    {
+      "action": "btnCardLib",
+      "done": true,
+      "end": 16788.20000000298,
+      "presentMs": 265.90000000596046,
+      "scheduled": true,
+      "start": 16522.20000000298,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType1",
+      "done": true,
+      "end": 17675.90000000596,
+      "presentMs": 132.59999999403954,
+      "start": 17543.30000001192,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType0",
+      "done": true,
+      "end": 18114.40000000596,
+      "presentMs": 119,
+      "start": 17995.40000000596,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "btnCardLib",
+      "done": true,
+      "end": 19479.60000000894,
+      "presentMs": 184.4000000059605,
+      "scheduled": true,
+      "start": 19295.20000000298,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType1",
+      "done": true,
+      "end": 20297,
+      "presentMs": 118.69999998807909,
+      "start": 20178.30000001192,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType0",
+      "done": true,
+      "end": 20819.70000000298,
+      "presentMs": 144.29999999701977,
+      "start": 20675.40000000596,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "btnCardLib",
+      "done": true,
+      "end": 22165.70000000298,
+      "presentMs": 191.79999999701977,
+      "scheduled": true,
+      "start": 21973.90000000596,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType1",
+      "done": true,
+      "end": 24084.80000001192,
+      "presentMs": 69.80000001192093,
+      "start": 24015,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType0",
+      "done": true,
+      "end": 24318,
+      "presentMs": 80.79999999701977,
+      "start": 24237.20000000298,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "btnCardLib",
+      "done": true,
+      "end": 25320.10000000894,
+      "presentMs": 149.29999999701977,
+      "scheduled": true,
+      "start": 25170.80000001192,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType1",
+      "done": true,
+      "end": 25888.90000000596,
+      "presentMs": 107.20000000298025,
+      "start": 25781.70000000298,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType0",
+      "done": true,
+      "end": 26275.40000000596,
+      "presentMs": 112.90000000596046,
+      "start": 26162.5,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "btnCardLib",
+      "done": true,
+      "end": 27165.10000000894,
+      "presentMs": 113.6000000089407,
+      "scheduled": true,
+      "start": 27051.5,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType1",
+      "done": true,
+      "end": 27678.30000001192,
+      "presentMs": 98.40000000596046,
+      "start": 27579.90000000596,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType0",
+      "done": true,
+      "end": 28045,
+      "presentMs": 104,
+      "start": 27941,
+      "viewport": {
+        "dpr": 1.25,
+        "height": 956,
+        "width": 683
+      }
+    }
+  ],
+  "animations": [
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    }
+  ],
+  "longTasks": [
+    {
+      "duration": 152,
+      "start": 16563.20000000298
+    },
+    {
+      "duration": 97,
+      "start": 17542.90000000596
+    },
+    {
+      "duration": 83,
+      "start": 17995.20000000298
+    },
+    {
+      "duration": 105,
+      "start": 19319.90000000596
+    },
+    {
+      "duration": 94,
+      "start": 20176.80000001192
+    },
+    {
+      "duration": 95,
+      "start": 20675
+    },
+    {
+      "duration": 92,
+      "start": 22008.20000000298
+    },
+    {
+      "duration": 57,
+      "start": 24014.90000000596
+    },
+    {
+      "duration": 54,
+      "start": 24237
+    },
+    {
+      "duration": 86,
+      "start": 25188.70000000298
+    },
+    {
+      "duration": 77,
+      "start": 25781.5
+    },
+    {
+      "duration": 73,
+      "start": 26162.30000001192
+    },
+    {
+      "duration": 62,
+      "start": 27068.60000000894
+    },
+    {
+      "duration": 68,
+      "start": 27579.60000000894
+    },
+    {
+      "duration": 69,
+      "start": 27940.80000001192
+    }
+  ],
+  "reads": [
+    {
+      "duration": 31.599999994039536,
+      "read": "_checkPageBg",
+      "start": 16576.40000000596
+    },
+    {
+      "duration": 35.1000000089407,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at update (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:20:41)\n    at bindPhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:38:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:818:25)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 16609
+    },
+    {
+      "duration": 14.100000008940697,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:826:3)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 16648.20000000298
+    },
+    {
+      "duration": 17.799999997019768,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibFilterUI (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:733:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:828:3)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 16662.90000000596
+    },
+    {
+      "duration": 17.5,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLElement.get [as offsetWidth] (<anonymous>:39:121)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:680:24)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 17544.20000000298
+    },
+    {
+      "duration": 24.69999998807907,
+      "read": "clientWidth",
+      "stack": "Error\n    at HTMLDivElement.get [as clientWidth] (<anonymous>:39:121)\n    at Object.play (http://127.0.0.1:5307/src/hub/photo-studio-navigation.js:105:56)\n    at replayStudioMotion (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:534:13)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:694:5)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 17565.30000001192
+    },
+    {
+      "duration": 10.799999997019768,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:707:3)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 17609.20000000298
+    },
+    {
+      "duration": 16,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLElement.get [as offsetWidth] (<anonymous>:39:121)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:680:24)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 17996.70000000298
+    },
+    {
+      "duration": 22.30000001192093,
+      "read": "clientWidth",
+      "stack": "Error\n    at HTMLDivElement.get [as clientWidth] (<anonymous>:39:121)\n    at Object.play (http://127.0.0.1:5307/src/hub/photo-studio-navigation.js:105:56)\n    at replayStudioMotion (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:534:13)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:694:5)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 18015.5
+    },
+    {
+      "duration": 4.399999991059303,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:707:3)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 18055.60000000894
+    },
+    {
+      "duration": 27.30000001192093,
+      "read": "_checkPageBg",
+      "start": 19326
+    },
+    {
+      "duration": 23.299999997019768,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at update (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:20:41)\n    at bindPhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:38:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:818:25)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 19354.20000000298
+    },
+    {
+      "duration": 9.400000005960464,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:826:3)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 19379.5
+    },
+    {
+      "duration": 12.5,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibFilterUI (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:733:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:828:3)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 19389.30000001192
+    },
+    {
+      "duration": 15.799999997019768,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLElement.get [as offsetWidth] (<anonymous>:39:121)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:680:24)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 20179.10000000894
+    },
+    {
+      "duration": 24,
+      "read": "clientWidth",
+      "stack": "Error\n    at HTMLDivElement.get [as clientWidth] (<anonymous>:39:121)\n    at Object.play (http://127.0.0.1:5307/src/hub/photo-studio-navigation.js:105:56)\n    at replayStudioMotion (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:534:13)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:694:5)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 20197.80000001192
+    },
+    {
+      "duration": 10.700000002980232,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:707:3)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 20240
+    },
+    {
+      "duration": 14.699999988079073,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLElement.get [as offsetWidth] (<anonymous>:39:121)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:680:24)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 20676.80000001192
+    },
+    {
+      "duration": 30.100000008940697,
+      "read": "clientWidth",
+      "stack": "Error\n    at HTMLDivElement.get [as clientWidth] (<anonymous>:39:121)\n    at Object.play (http://127.0.0.1:5307/src/hub/photo-studio-navigation.js:105:56)\n    at replayStudioMotion (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:534:13)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:694:5)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 20694
+    },
+    {
+      "duration": 10,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:707:3)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 20741.5
+    },
+    {
+      "duration": 22.19999998807907,
+      "read": "_checkPageBg",
+      "start": 22014.30000001192
+    },
+    {
+      "duration": 15.799999997019768,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at update (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:20:41)\n    at bindPhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:38:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:818:25)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 22037.40000000596
+    },
+    {
+      "duration": 4.5,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:826:3)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 22055.10000000894
+    },
+    {
+      "duration": 14,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibFilterUI (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:733:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:828:3)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 22060.10000000894
+    },
+    {
+      "duration": 11.599999994039536,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLElement.get [as offsetWidth] (<anonymous>:39:121)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:680:24)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 24015.60000000894
+    },
+    {
+      "duration": 14,
+      "read": "clientWidth",
+      "stack": "Error\n    at HTMLDivElement.get [as clientWidth] (<anonymous>:39:121)\n    at Object.play (http://127.0.0.1:5307/src/hub/photo-studio-navigation.js:105:56)\n    at replayStudioMotion (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:534:13)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:694:5)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 24029.40000000596
+    },
+    {
+      "duration": 3.200000002980232,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:707:3)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 24056.10000000894
+    },
+    {
+      "duration": 10,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLElement.get [as offsetWidth] (<anonymous>:39:121)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:680:24)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 24238
+    },
+    {
+      "duration": 12,
+      "read": "clientWidth",
+      "stack": "Error\n    at HTMLDivElement.get [as clientWidth] (<anonymous>:39:121)\n    at Object.play (http://127.0.0.1:5307/src/hub/photo-studio-navigation.js:105:56)\n    at replayStudioMotion (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:534:13)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:694:5)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 24250
+    },
+    {
+      "duration": 3.1000000089406967,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:707:3)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 24274.5
+    },
+    {
+      "duration": 19.900000005960464,
+      "read": "_checkPageBg",
+      "start": 25192.90000000596
+    },
+    {
+      "duration": 17.600000008940697,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at update (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:20:41)\n    at bindPhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:38:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:818:25)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 25213.5
+    },
+    {
+      "duration": 9.5,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:826:3)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 25233
+    },
+    {
+      "duration": 12.200000002980232,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibFilterUI (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:733:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:828:3)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 25242.90000000596
+    },
+    {
+      "duration": 14.400000005960464,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLElement.get [as offsetWidth] (<anonymous>:39:121)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:680:24)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 25782.40000000596
+    },
+    {
+      "duration": 20.200000002980232,
+      "read": "clientWidth",
+      "stack": "Error\n    at HTMLDivElement.get [as clientWidth] (<anonymous>:39:121)\n    at Object.play (http://127.0.0.1:5307/src/hub/photo-studio-navigation.js:105:56)\n    at replayStudioMotion (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:534:13)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:694:5)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 25799.40000000596
+    },
+    {
+      "duration": 7.599999994039536,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:707:3)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 25834.80000001192
+    },
+    {
+      "duration": 12.200000002980232,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLElement.get [as offsetWidth] (<anonymous>:39:121)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:680:24)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 26163.60000000894
+    },
+    {
+      "duration": 20,
+      "read": "clientWidth",
+      "stack": "Error\n    at HTMLDivElement.get [as clientWidth] (<anonymous>:39:121)\n    at Object.play (http://127.0.0.1:5307/src/hub/photo-studio-navigation.js:105:56)\n    at replayStudioMotion (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:534:13)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:694:5)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 26177.90000000596
+    },
+    {
+      "duration": 7.699999988079071,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:707:3)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 26213.30000001192
+    },
+    {
+      "duration": 15.100000008940697,
+      "read": "_checkPageBg",
+      "start": 27072.70000000298
+    },
+    {
+      "duration": 11.5,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at update (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:20:41)\n    at bindPhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:38:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:818:25)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 27088.30000001192
+    },
+    {
+      "duration": 3.0999999940395355,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:826:3)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 27100.90000000596
+    },
+    {
+      "duration": 9.299999997019768,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibFilterUI (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:733:3)\n    at renderCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:828:3)\n    at Module.openCardLibrary (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:159:3)\n    at open (http://127.0.0.1:5307/src/hub/game.cardslib.js?t=1791994095084:104:40)",
+      "start": 27104.40000000596
+    },
+    {
+      "duration": 14.599999994039536,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLElement.get [as offsetWidth] (<anonymous>:39:121)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:680:24)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 27580.80000001192
+    },
+    {
+      "duration": 13.5,
+      "read": "clientWidth",
+      "stack": "Error\n    at HTMLDivElement.get [as clientWidth] (<anonymous>:39:121)\n    at Object.play (http://127.0.0.1:5307/src/hub/photo-studio-navigation.js:105:56)\n    at replayStudioMotion (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:534:13)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:694:5)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 27597.70000000298
+    },
+    {
+      "duration": 3.299999997019768,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:707:3)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 27626.40000000596
+    },
+    {
+      "duration": 12.5,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLElement.get [as offsetWidth] (<anonymous>:39:121)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:680:24)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 27942.40000000596
+    },
+    {
+      "duration": 15.5,
+      "read": "clientWidth",
+      "stack": "Error\n    at HTMLDivElement.get [as clientWidth] (<anonymous>:39:121)\n    at Object.play (http://127.0.0.1:5307/src/hub/photo-studio-navigation.js:105:56)\n    at replayStudioMotion (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:534:13)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:694:5)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 27957.20000000298
+    },
+    {
+      "duration": 3.900000005960465,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at updatePhotoStudioTabMarker (http://127.0.0.1:5307/src/hub/photo-studio-tabs.js:9:14)\n    at syncStudioTabMarker (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:537:3)\n    at syncLibTileIntrinsicSize (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:505:3)\n    at renderLibGrid (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:707:3)\n    at http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:842:5\n    at action (http://127.0.0.1:5307/src/hub/game.cardslib.page.js?t=1791994095084:91:71)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5307/src/ui/ui.js?t=1791994095084:50:16)",
+      "start": 27989
+    }
+  ],
+  "viewport": {
+    "dpr": 1.25,
+    "height": 956,
+    "width": 683
+  }
+}

@@ -1,0 +1,8 @@
+tests\agent-provenance-stopreason.test.js
+tests\agent-command-results.test.js
+tests\agent-runner-abort.test.js
+tests\agent-runner-driver-restore.test.js
+game/src\agent\agent.surface.js
+game/src\agent\agent.js
+game/src\agent\agent.runner.js
+game/src\agent\agent.state.js

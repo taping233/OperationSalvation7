@@ -1,0 +1,23 @@
+{
+  "purpose": "参考板稀有卡样式试接；正式游戏素材保持当前版本",
+  "tool": "image_gen (built-in)",
+  "prompt": "Use case: stylized-concept. Create ONE NEW STYLE PROPOSAL for a reusable transparent portrait game-card frame, 1024x1536. Inputs 1, 2, 3 are DRAWING-STYLE references only: broad opaque directional strokes, muted colored grays, lively tapered contour accents, selective simplified anime illustration finish. Borrow the painting grammar, never the people, costumes, letters or watermarks. Input 4 is the OLD REJECTED frame: borrow only portrait rectangular card proportion and blue-rose identity. Completely redesign its bulky rails and material.\nDesign: a light, delicate hand-painted anime rose frame. Very slender continuous muted slate-blue borders about 18-25 pixels wide, subtly curved and tapering near four corners, much larger clean rectangular transparent aperture. Flat painted bands and a few flowing slim thorn stems; gently pointed leaf silhouettes integrated at corners. One small cobalt-blue rose at top center drawn with 6-8 broad curved petal strokes, a short graceful blue ribbon taper under it, a couple of simple side leaves. Sparse asymmetry and handmade edges give a lively anime illustration feel. Four sides stay visually quiet; top rose gets the clearest selective drawing. Border must feel like a painted botanical illustration, NOT heavy armor, metal, stone, crystal, gemstone or a carved picture frame. No thick bevels, large angular triangular facets, plastic shine, elaborate filigree or dense texture.\nMedium: matte hand-painted anime block-brush illustration, large connected opaque color masses appropriate to each leaf/petal, few wide directional swipes, grouped 2-3 tone shadows, concise colored contour marks, slightly unfinished brush endings. Mostly muted gray-blue, richer cobalt concentrated on rose and a few short blue strokes; small soft pale-blue accents only. No glossy 3D rendering, no rim glow, no polished vector perfection, no all-over noise.\nEntire central aperture and outside of frame are truly alpha transparent, including every space between ornamental strokes. One empty frame overlay only, no card illustration, no person, no backing panel, no text, number, cost badge, watermark or UI. All frame parts remain inside canvas. This is a lightweight anime-style proposal to show the owner.",
+  "source": "C:/Users/太平/.codex/generated_images/01a13c0e-5097-78e2-95bf-a3b333c47843/exec-2d4423c4-5853-483a-8bde-b32b8ac7966d.png",
+  "asset": "game/art-source/card-frame-study-1014/rare-light-preview.png",
+  "placement": {
+    "canvas": [
+      1024,
+      1536
+    ],
+    "aperture": [
+      82,
+      118,
+      864,
+      1355
+    ],
+    "displayWidth": 274.962963,
+    "displayLeft": -22.018519,
+    "displayTop": -31.685185,
+    "scaleMode": "等比"
+  }
+}

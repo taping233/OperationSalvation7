@@ -1,0 +1,261 @@
+{
+  "storageBeforeSha256": "63ba748b1db2950df4178c2a58d794b57cc580c0329412fcd00444559d942864",
+  "storageAfterSha256": "63ba748b1db2950df4178c2a58d794b57cc580c0329412fcd00444559d942864",
+  "storageUnchanged": true,
+  "artifacts": [
+    {
+      "path": "raw/battle-scene.cpuprofile",
+      "bytes": 146295,
+      "sha256": "472dbb42d5c1ed086551fc5a59527ae611fef7763ed10f9015eb05629b07de92",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/battle-scene.flameox.json",
+      "bytes": 132053,
+      "sha256": "f0a5a26010a58dc9c07a925c507234dbbb4b0cf1e4b244fd757ea35b456b8b06",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/battle-scene.json",
+      "bytes": 768,
+      "sha256": "2f7919da3c2e593b20ef9d39d4267bc589e4c917ed17e212c866567ed2caa9f5",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/browser-errors.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/layout-read-timings.json",
+      "bytes": 5921,
+      "sha256": "aa4da057d3495f7fa9d89a87592a03bd0b99fa1b5b16e4e67ded94ea7a394103",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/map-load.cpuprofile",
+      "bytes": 8092,
+      "sha256": "11cd9d370f1f2bd2529360a816dbf09250fc3925ba302a2633df1c25a2641a22",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/map-load.flameox.json",
+      "bytes": 29268,
+      "sha256": "8f1a9d0cffcec27912d52b159b5621f8bae31fe6512f9fe20e5a89f26464d7fd",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/map-pan-probe.json",
+      "bytes": 672,
+      "sha256": "fe25bb18acc42534c444ec492777b5bc06502d8b395eb42fa3428a57a7dcb950",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/map-pan.cpuprofile",
+      "bytes": 173982,
+      "sha256": "270740e909ea34d2174e415ca74005f7faa9850a29459adcb4a514489e847a3f",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/map-pan.flameox.json",
+      "bytes": 40662,
+      "sha256": "b421c39783d7d78e0436886bf8d60b585617e7fff5200f8e8cc379e9a8760bae",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/map-pan.png",
+      "bytes": 66899,
+      "sha256": "5846a39fbd25737ab479c44766da546bdba545e6585838ff37ab26d9472b6c7b",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-bg-timings.json",
+      "bytes": 653,
+      "sha256": "9e07b0dc808bd6141f6c4a8171b5276acad59e438695b4b640f877d948d149f9",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-filter-1.cpuprofile",
+      "bytes": 9379,
+      "sha256": "b0728899d3b184673d3466791287e64c67c78c6848d760a71b6ceb15260951e1",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-filter-1.flameox.json",
+      "bytes": 31763,
+      "sha256": "a1525bee4d40ec6afcb46e702a692b2f1642443ca447f25236135b728d00ddfb",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-filter-2.cpuprofile",
+      "bytes": 10574,
+      "sha256": "f64b60831bc2326701e6dff5cf86680a0932e261edba4a82fadc81ed317edb7a",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-filter-2.flameox.json",
+      "bytes": 34406,
+      "sha256": "9194dfc68b432c01bb155cedcdc53dd8c56fa479932ac887c27d37724741cd43",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-idle.cpuprofile",
+      "bytes": 91981,
+      "sha256": "c12edd73f5bac4986d4c848b9aa31a3dc5cc1247be0b55afb790493829edd932",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-idle.flameox.json",
+      "bytes": 25814,
+      "sha256": "a72361cffc09c4d792c110516e3e6f9d651bd027cdf6052e83a055af63d150ce",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-layout.png",
+      "bytes": 153376,
+      "sha256": "d38c81413a6785013d48f5a75275fbabc352e28e3319d8ebcfbe02888881d4d6",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-open.cpuprofile",
+      "bytes": 98215,
+      "sha256": "559faa51fee131115980d36cdd81f073300d13f6047a1d1fab7ecf4cd1ff7386",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-open.flameox.json",
+      "bytes": 35557,
+      "sha256": "d69afe57c0ad56b7cab38a1b73606d48b2530e25cc8b3cb9059a44b326ce1eed",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-probe.json",
+      "bytes": 2491,
+      "sha256": "6f743c92a7c78477355c9d642f0483a2def305713b62679d08e90eb80301671e",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-repeat-1.ax.txt",
+      "bytes": 674,
+      "sha256": "088b9106991b2bc7290013474a05db1f4f662bcebcc7f5703de34357dbdb1434",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-repeat-1.cpuprofile",
+      "bytes": 9719,
+      "sha256": "ab830172ae08711e6b5cd68504875a74884ccc37ef1b79264aea41e1a9420ed5",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-repeat-1.flameox.json",
+      "bytes": 36715,
+      "sha256": "b940e5e92434a75d8a3311a9dc51e476144ccc6aa87a9108164f71deeca52682",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-repeat-2.ax.txt",
+      "bytes": 5263,
+      "sha256": "e266bd46e54e8cf6e53cab564ebda070f9b5912e3622d1a6ebe446780b9703b2",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-repeat-2.cpuprofile",
+      "bytes": 13965,
+      "sha256": "79c0837055fd1e83fcd1b19a9fe9d25909103b78ccc83363cf66b2573d82e01f",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-repeat-2.flameox.json",
+      "bytes": 43454,
+      "sha256": "04f297314fe1090247190984b20e188a03abc02084ecd26a307cc897f07b648a",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-repeat-3.ax.txt",
+      "bytes": 258,
+      "sha256": "9f580bca2d1698b1e4a2ceaf52cb6644a39ee61fc3a84a79ea07356772101c29",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-repeat-3.cpuprofile",
+      "bytes": 14940,
+      "sha256": "26dc3a23e38d74af5ae1dfd0803c9f90820e9bc32c96cc154787c38a4467ea3a",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/photo-repeat-3.flameox.json",
+      "bytes": 50407,
+      "sha256": "31646736865fd6f3add0e63f5f87536dca1e55380ed62fbf2873136cd89d41ef",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/title-idle.cpuprofile",
+      "bytes": 110884,
+      "sha256": "c7ebe7b024a84fd8b1a978b21e6e74d977fa7b439b2011420aa625f07aecb711",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    },
+    {
+      "path": "raw/title-idle.flameox.json",
+      "bytes": 13545,
+      "sha256": "ea3e80054ca3a362e0e9fbcb1f8c9448946c988a1aa68ca48009582d2080b34e",
+      "archived": true,
+      "source": "当前Codex内置浏览器CPU/探针采样或Flameox本地离线分析"
+    }
+  ],
+  "sourceReadSnapshot": [
+    {
+      "path": "game/src/ui/overlay.js",
+      "sha256": "10a2465a9de0b4c48b9c234896f329a24fc2f9c9b759babbd6683d5085b7a5d9"
+    },
+    {
+      "path": "game/src/hub/photo-studio-tabs.js",
+      "sha256": "d0f418ebac1e101e757ba888b5004c83e88d7d7cdd5f46999176e97d5fb5c3b7"
+    },
+    {
+      "path": "game/src/hub/photo-studio-navigation.js",
+      "sha256": "23f8903ab5072946b5082fba267c924997becb2c88450b508c2f70577c17342d"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.page.js",
+      "sha256": "e49af3d069eff64431663139179f86c9e1bc1533a502812e3dae7ce0575649e1"
+    },
+    {
+      "path": "game/src/run/game.session.bag.js",
+      "sha256": "3e032a72224e267ca9c49809760efc37ca27b9a72d3b8a16905ffe8ceee98bce"
+    }
+  ],
+  "recordedAt": "2026-10-14T23:52:52.7722267+08:00"
+}

@@ -1,0 +1,15 @@
+game/src/hub/base-mutation.js:29: * @returns {{ok: true, value: TValue} | {ok: false, code: 'SAVE_FAILED'}}
+game/src/hub/base-mutation.js:31:export function commitBaseMutation(current, prepare, persist) {
+game/src/hub/base-mutation.js:39:  if (!persist(prepared)) return { ok: false, code: 'SAVE_FAILED' };
+tests/base-mutation.test.js:2:import { commitBaseMutation } from '../game/src/hub/base-mutation.js';
+tests/base-mutation.test.js:77:    localStorage.setItem(Base.SLOT_KEY(1), JSON.stringify(external));
+tests/base-mutation.test.js:85:    localStorage.setItem('sdt-tx-v1-slot1', '{}');
+tests/base-mutation.test.js:144:    expect(commitBaseMutation(state, draft => { draft.bag.count--; return 1; }, persist)).toEqual({ ok: false, code: 'SAVE_FAILED' });
+tests/base-mutation.test.js:147:    expect(() => commitBaseMutation(state, () => { throw new Error('prepare'); }, persist)).toThrow('prepare');
+tests/base-mutation.test.js:148:    expect(() => commitBaseMutation(state, async draft => { draft.bag.count--; }, persist)).toThrow('synchronous');
+game/src/hub/base.js:8:import { commitBaseMutation } from './base-mutation.js';
+game/src/hub/base.js:103:        if (!localStorage.getItem(SLOT_KEY(i))) localStorage.setItem(SLOT_KEY(i), legacy);
+game/src/hub/base.js:152:      localStorage.setItem(SLOT_KEY(slot), raw);
+game/src/hub/base.js:185:    const result = commitBaseMutation(data, prepare, save);
+game/src/hub/base.js:223:    const result = commitBaseMutation(data, prepare, save);
+game/src/hub/base.js:329:    localStorage.setItem(SLOT_KEY(i), raw);

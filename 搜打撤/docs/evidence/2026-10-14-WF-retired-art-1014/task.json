@@ -30,10 +30,21 @@
     "游戏实页缺图及最终像素受内置浏览器能力不可用阻塞；源码/构建检查不等同实页验收",
     "构建编译通过但四项包体预算仍失败；更广审查优化及远端CI由父线程处理"
   ],
-  "updatedAt": "2026-10-14T06:46:07.192Z",
+  "updatedAt": "2026-10-14T07:47:26.011436+00:00",
   "closure": {
     "kind": "manual",
     "doneWhenConfirmed": true,
     "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  },
+  "delivery": {
+    "status": "committed",
+    "commit": "1da9f7db4e0cd523cf5d8794853aad442e42690b",
+    "verifiedAt": "2026-10-14T07:47:26.011436+00:00",
+    "head": "bf6129520b55e28698c749ce7dbc6d327b85866a",
+    "evidence": "docs/evidence/2026-10-14-WF-ledger-cleanup-1014/README.md",
+    "limits": [
+      "仅确认本地HEAD包含提交；不新增远端、CI、Library或实页通过结论",
+      "stage保留原执行收官状态，交付事实以delivery和实时Git为准"
+    ]
   }
 }

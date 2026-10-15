@@ -1,0 +1,48 @@
+game/src/core/render-scheduler.js:3:  // idleFps 档已删除（迭代评审 09-20 D-P3 死代码清理）：!active 分支在 shouldDraw 头部
+game/src/core/render-scheduler.js:24:  shouldDraw(now, { covered = false, active = false } = {}) {
+game/src/core/render-scheduler.js:25:    if (covered) return false;
+game/src/core/render-scheduler.js:62:const renderScheduler = new RenderScheduler({ activeFps: 120 });
+game/src/core/render-scheduler.js:63:sdtDefine('RenderScheduler', renderScheduler);
+game/src/core/render-scheduler.js:65:export { RenderScheduler, renderScheduler };
+game/src/game.boot.js:17:import { renderScheduler } from './core/render-scheduler.js';
+game/src/game.boot.js:47:      hoverFrame = requestAnimationFrame(() => {
+game/src/game.boot.js:77:          renderScheduler.invalidate();
+game/src/game.boot.js:107:      if (game.hover) renderScheduler.invalidate();
+game/src/game.boot.js:150:        if (game.hover) renderScheduler.invalidate();
+game/src/game.boot.js:162:      renderScheduler.invalidate();
+game/src/game.boot.js:216:        case 'camRotateL': cam.angle -= .2; renderScheduler.invalidate(); break;
+game/src/game.boot.js:217:        case 'camRotateR': cam.angle += .2; renderScheduler.invalidate(); break;
+game/src/game.boot.js:218:        case 'camOverview': cam.frameExploration(game, true); renderScheduler.invalidate(); break;
+game/src/game.boot.js:219:        case 'camFocus': cam.frameExploration(game); renderScheduler.invalidate(); break;
+game/src/game.boot.js:221:        case 'nodeNumbers': game.toggles.index = !game.toggles.index; if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index; renderScheduler.invalidate(); break;
+game/src/game.boot.js:241:        renderScheduler.invalidate();
+game/src/game.boot.js:264:      cam.frameExploration(game); renderScheduler.invalidate();
+game/src/game.boot.js:364:    renderScheduler.invalidate();
+game/src/game.boot.js:374:    renderScheduler.invalidate();
+game/src/game.boot.js:406:    renderScheduler.invalidate();
+game/src/game.boot.js:415:      if (game.hover) renderScheduler.invalidate();
+game/src/game.boot.js:426:      renderScheduler.invalidate();
+game/src/game.boot.js:470:    // 250ms setTimeout）仍会触发本函数，node 无 requestAnimationFrame 直接裸引即炸
+game/src/game.boot.js:472:    if (typeof requestAnimationFrame !== "function") return;
+game/src/game.boot.js:478:    loopFrame = requestAnimationFrame(now => {
+game/src/game.boot.js:496:  renderScheduler.setWake(requestLoopFrame);
+game/src/game.boot.js:513:    // 也并入 covered 停画（旧逻辑给战斗页留 60fps 重绘是 backdrop blur 时代的注释，已过时）。
+game/src/game.boot.js:518:    const covered = document.hidden || (!ov.hidden &&
+game/src/game.boot.js:521:    if (covered) wasCanvasCovered = true;
+game/src/game.boot.js:524:      renderScheduler.invalidate();
+game/src/game.boot.js:557:    if (!renderScheduler.shouldDraw(now, { covered, active })) {
+game/src/game.boot.js:592:    renderScheduler.invalidate();
+game/src/game.boot.js:691:        (typeof requestAnimationFrame === 'function' ? requestAnimationFrame : setTimeout)(flushTitleRoots);
+game/src/game.boot.js:762:        .then(({ installPerfProbe }) => installPerfProbe({ SDT, game, canvas, renderScheduler }))
+tests/render-scheduler.test.js:7:    expect(scheduler.shouldDraw(0)).toBe(true);
+tests/render-scheduler.test.js:8:    expect(scheduler.shouldDraw(16)).toBe(false);
+tests/render-scheduler.test.js:9:    expect(scheduler.shouldDraw(340)).toBe(false);
+tests/render-scheduler.test.js:11:    expect(scheduler.shouldDraw(341)).toBe(true);
+tests/render-scheduler.test.js:12:    expect(scheduler.shouldDraw(40, { active: true })).toBe(true);
+tests/render-scheduler.test.js:13:    expect(scheduler.shouldDraw(47, { active: true })).toBe(false);
+tests/render-scheduler.test.js:14:    expect(scheduler.shouldDraw(49, { active: true })).toBe(true);
+tests/render-scheduler.test.js:15:    expect(scheduler.shouldDraw(50)).toBe(true); // 活动结束补最终静态帧
+tests/render-scheduler.test.js:16:    expect(scheduler.shouldDraw(1000)).toBe(false);
+tests/render-scheduler.test.js:21:    expect(scheduler.shouldDraw(0, { covered: true })).toBe(false);
+tests/render-scheduler.test.js:22:    expect(scheduler.shouldDraw(1)).toBe(true);
+tests/render-scheduler.test.js:41:      if (scheduler.shouldDraw(now, { active: true })) draws.push(now);

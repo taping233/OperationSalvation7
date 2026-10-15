@@ -1,0 +1,369 @@
+diff --git a/搜打撤/docs/performance.md b/搜打撤/docs/performance.md
+index d1c9f702..3cddcc11 100644
+--- a/搜打撤/docs/performance.md
++++ b/搜打撤/docs/performance.md
+@@ -21,6 +21,8 @@
+ - 标题或不透明全屏页面覆盖地图时不调用 Renderer。
+ - 静态天空、棋盘、渐变和壁纸继续复用缓存；资源完成加载后使调度器失效并补绘。
+ - HUD 仅在对应字段变化时写入 DOM。
++- 照相馆分类标记在同一帧合并更新；换选复用标签尺寸，尺寸观察器或窗口变化重新测量。网格入场沿用重绘前的宽度，避免替换内容后立即读宽度；无样式的旧计数 `.bump` 状态不再触发布局读取。
++- 照相馆卡牌图片由美术队列加载，不进入弹层 CSS 背景就绪检测。保持现有视觉的同窗口前后对照见[照相馆布局读取优化](evidence/2026-10-14-WF-photo-perf-opt/README.md)。
+ 
+ ## 历史 Electron 基准（冻结）
+ 
+diff --git a/搜打撤/game/src/hub/game.cardslib.page.js b/搜打撤/game/src/hub/game.cardslib.page.js
+index 64619391..e3d2f566 100644
+--- a/搜打撤/game/src/hub/game.cardslib.page.js
++++ b/搜打撤/game/src/hub/game.cardslib.page.js
+@@ -502,7 +502,6 @@ function syncLibTileIntrinsicSize(grid) {
+   const tile = grid.querySelector('.lib-item .lib-cardwrap')?.parentElement;
+   const h = tile?.offsetHeight || 0;
+   if (h > 0) grid.style.setProperty('--lib-tile-h', `${h}px`);
+-  syncStudioTabMarker();
+ }
+ 
+ // 照片定位（键盘方向键 / 选片台翻看）：直接把目标壳滚入视野，
+@@ -653,6 +652,10 @@ function bindLibGridNavigation() {
+ function renderLibGrid({ reason = 'filter', direction = 0, reset = false } = {}) {
+   if (!cardPageOpen || !isCurrentLibPage()) return;
+   rememberLibBrowse();
++  // Capture the existing grid before DOM/style changes; category changes keep its width.
++  const grid = document.getElementById('libGrid');
++  const gridWidth = grid?.clientWidth;
++  if (grid) libMotion.leaveGrid(grid, { reason, direction });
+   clearTimeout(libSearchTimer);
+   libSearchTimer = null;
+   if (libPreviewTimer) clearTimeout(libPreviewTimer);
+@@ -672,16 +675,8 @@ function renderLibGrid({ reason = 'filter', direction = 0, reset = false } = {})
+     // 全量时隐藏「陈列」组（09-23 计数语义：馆藏=总量，陈列只在筛选分家后有意义）
+     const showWrap = resultCount.closest('.lib-show');
+     if (showWrap) showWrap.hidden = (n === libCards.length);
+-    // 数量真的变了才播脉冲（重绘时数字没变就别闪）
+-    const changed = resultCount.textContent !== String(n);
+     resultCount.textContent = n;
+-      if (changed) {
+-      resultCount.classList.remove('bump');
+-      void resultCount.offsetWidth;
+-      resultCount.classList.add('bump');
+-    }
+   }
+-  const grid = document.getElementById('libGrid');
+   if (grid) {
+     clearTimeout(libHoloTimer);
+     libHoloTimer = null;
+@@ -689,9 +684,8 @@ function renderLibGrid({ reason = 'filter', direction = 0, reset = false } = {})
+     grid.classList.toggle('is-empty', !filtered.length);
+     resetLibArtWarmup();
+     // （函数首行已 stopLibTileObserver，此处无重建语句，重复调用必为空操作——2026-10-02 审计 A 档删）
+-    libMotion.leaveGrid(grid, { reason, direction });
+     grid.innerHTML = libGridContentsHTML(filtered);
+-    replayStudioMotion(grid, { reason, direction });
++    replayStudioMotion(grid, { reason, direction, width: gridWidth });
+     // 上下滚动模式（09-24）：筛选重绘后回顶，否则沿用旧滚动位置会从半截行开始看
+     grid.scrollTop = 0;
+     rebuildLibNodeMap(grid);
+diff --git a/搜打撤/game/src/hub/photo-studio-navigation.js b/搜打撤/game/src/hub/photo-studio-navigation.js
+index df7bb3b4..a69c769a 100644
+--- a/搜打撤/game/src/hub/photo-studio-navigation.js
++++ b/搜打撤/game/src/hub/photo-studio-navigation.js
+@@ -83,7 +83,7 @@ export function createPhotoStudioMotion() {
+       const release = () => cancel(layer);
+       animation.finished.then(release, release);
+     },
+-    play(node, { reason = 'filter', direction = 0, axis = 'x', delay = 0, surface = 'grid' } = {}) {
++    play(node, { reason = 'filter', direction = 0, axis = 'x', delay = 0, surface = 'grid', width } = {}) {
+       if (!node) return;
+       cancel(node);
+       delete node.dataset.studioMotion;
+@@ -102,7 +102,7 @@ export function createPhotoStudioMotion() {
+         frames = [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)' }];
+       } else if (surface === 'grid') {
+         // Every photo refresh enters from the left, regardless of filter or tab direction.
+-        const travel = Math.max(64, Math.min(160, node.clientWidth * .18));
++        const travel = Math.max(64, Math.min(160, (width ?? node.clientWidth) * .18));
+         frames = [{ opacity: 0, transform: `translateX(${-travel}px)` }, { opacity: 1, transform: 'translateX(0)' }];
+       }
+       const animation = node.animate(frames, { duration: surface === 'grid' ? motionTiming.regionEnter : duration, delay, easing: motionEasing.enter, fill: 'backwards' });
+diff --git a/搜打撤/game/src/hub/photo-studio-tabs.js b/搜打撤/game/src/hub/photo-studio-tabs.js
+index 29d034b6..5f9918f9 100644
+--- a/搜打撤/game/src/hub/photo-studio-tabs.js
++++ b/搜打撤/game/src/hub/photo-studio-tabs.js
+@@ -1,23 +1,50 @@
+-// Only the small category strip is observed; the photograph grid keeps its own lifecycle.
+-export function updatePhotoStudioTabMarker(tabs) {
++// Coalesce page construction, filters and resize into one read-before-write pass.
++const pendingMarkers = new WeakMap();
++const markerGeometry = new WeakMap();
++function paintPhotoStudioTabMarker(tabs, refresh) {
++  const active = tabs?.querySelector('.type-tab.on');
++  if (!active) return;
++  let geometry = markerGeometry.get(tabs);
++  if (refresh || !geometry?.has(active)) {
++    geometry = new Map([...tabs.querySelectorAll('.type-tab')].map(tab => [tab, {
++      width: tab.offsetWidth, left: tab.offsetLeft, top: tab.offsetTop, height: tab.offsetHeight,
++    }]));
++    markerGeometry.set(tabs, geometry);
++  }
++  const { width, left, top, height } = geometry.get(active);
++  if (!width) return;
+   tabs?.querySelectorAll('.type-tab').forEach(tab => {
+     const selected = tab.classList.contains('on');
+     tab.setAttribute('aria-selected', String(selected));
+     tab.tabIndex = selected ? 0 : -1;
+   });
+-  const active = tabs?.querySelector('.type-tab.on');
+-  if (!active?.offsetWidth) return;
+-  tabs.style.setProperty('--studio-tab-x', `${active.offsetLeft}px`);
+-  tabs.style.setProperty('--studio-tab-y', `${active.offsetTop + active.offsetHeight - 2}px`);
+-  tabs.style.setProperty('--studio-tab-width', String(active.offsetWidth));
++  tabs.style.setProperty('--studio-tab-x', `${left}px`);
++  tabs.style.setProperty('--studio-tab-y', `${top + height - 2}px`);
++  tabs.style.setProperty('--studio-tab-width', String(width));
+   tabs.dataset.studioMarker = 'ready';
+ }
+ 
++export function updatePhotoStudioTabMarker(tabs, refresh = false) {
++  if (!tabs) return;
++  const pending = pendingMarkers.get(tabs);
++  if (pending) { pending.refresh ||= refresh; return; }
++  const view = tabs.ownerDocument.defaultView;
++  if (!view?.requestAnimationFrame) { paintPhotoStudioTabMarker(tabs, refresh); return; }
++  const work = { frame: 0, refresh };
++  const frame = view.requestAnimationFrame(() => {
++    if (pendingMarkers.get(tabs) !== work) return;
++    pendingMarkers.delete(tabs);
++    if (tabs.isConnected) paintPhotoStudioTabMarker(tabs, work.refresh);
++  });
++  work.frame = frame;
++  pendingMarkers.set(tabs, work);
++}
++
+ export function bindPhotoStudioTabMarker(tabs) {
+   if (!tabs) return () => {};
+   const view = tabs.ownerDocument.defaultView;
+   let disposed = false;
+-  const update = () => { if (!disposed) updatePhotoStudioTabMarker(tabs); };
++  const update = () => { if (!disposed) updatePhotoStudioTabMarker(tabs, true); };
+   const navigate = event => {
+     if (event.isComposing || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+     const buttons = [...tabs.querySelectorAll('.type-tab')];
+@@ -38,6 +65,10 @@ export function bindPhotoStudioTabMarker(tabs) {
+   update();
+   return () => {
+     disposed = true;
++    const work = pendingMarkers.get(tabs);
++    if (work) view?.cancelAnimationFrame?.(work.frame);
++    pendingMarkers.delete(tabs);
++    markerGeometry.delete(tabs);
+     observer?.disconnect();
+     tabs.removeEventListener('keydown', navigate);
+     view?.removeEventListener('resize', update);
+diff --git a/搜打撤/game/src/ui/overlay.js b/搜打撤/game/src/ui/overlay.js
+index 349d1ada..4ee51e5b 100644
+--- a/搜打撤/game/src/ui/overlay.js
++++ b/搜打撤/game/src/ui/overlay.js
+@@ -172,6 +172,8 @@ export const overlayMethods = {
+     this._cancelPageBg?.();
+     const host = this.el.ovBody.querySelector('[data-asset-key]');
+     if (!host) return;
++    // Photo IMG loading is owned by the card-art queue, not a CSS background.
++    if (host.tagName === 'IMG' && host.closest('.photo-studio-v3')) return;
+     const m = /url\("?([^")]+)"?\)/.exec(getComputedStyle(host).backgroundImage || '');
+     if (!m) return;
+     const url = m[1];
+diff --git a/搜打撤/tests/overlay-dialog.test.js b/搜打撤/tests/overlay-dialog.test.js
+index 8c0210c0..6f7aeb85 100644
+--- a/搜打撤/tests/overlay-dialog.test.js
++++ b/搜打撤/tests/overlay-dialog.test.js
+@@ -1,4 +1,4 @@
+-import { describe, expect, it, beforeEach } from 'vitest';
++import { describe, expect, it, beforeEach, vi } from 'vitest';
+ 
+ window.SDT = {
+   Icons: { rich: value => value },
+@@ -34,6 +34,21 @@ describe('overlay dialog accessibility contract', () => {
+     UI.init();
+   });
+ 
++  it('照相馆卡牌IMG跳过背景样式读取，房间背景仍保留加载检测', () => {
++    const style = vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue({ backgroundImage: 'url("/room.webp")' });
++    try {
++      UI.el.ovBody.innerHTML = '<div class="photo-studio-v3"><img data-asset-key="card-art"></div>';
++      UI._checkPageBg();
++      expect(style).not.toHaveBeenCalled();
++      UI.el.ovBody.innerHTML = '<div class="node-pg" data-asset-key="room-art"></div>';
++      UI._checkPageBg();
++      expect(style).toHaveBeenCalledOnce();
++      expect(UI.el.ovBody.firstElementChild.classList.contains('bg-loading')).toBe(true);
++      UI._cancelPageBg();
++      expect(UI.el.ovBody.firstElementChild.classList.contains('bg-loading')).toBe(false);
++    } finally { UI._cancelPageBg?.(); style.mockRestore(); }
++  });
++
+   it('sets dialog semantics, isolates the background, traps Tab, and restores the opener', async () => {
+     const opener = document.getElementById('opener');
+     opener.focus();
+diff --git a/搜打撤/tests/photo-studio-presentation.test.js b/搜打撤/tests/photo-studio-presentation.test.js
+index 109a0855..078697e0 100644
+--- a/搜打撤/tests/photo-studio-presentation.test.js
++++ b/搜打撤/tests/photo-studio-presentation.test.js
+@@ -1,7 +1,26 @@
+-import { describe, it, expect } from 'vitest';
++// @vitest-environment jsdom
++import { describe, it, expect, vi } from 'vitest';
+ import { photoMountFor } from '../game/src/hub/photo-studio-presentation.js';
++import { createPhotoStudioMotion } from '../game/src/hub/photo-studio-navigation.js';
+ 
+ describe('照相馆稀有度装裱映射', () => {
++  it('网格用重绘前宽度保留入场距离，重绘后不再触发布局读取', async () => {
++    const grid = document.createElement('div');
++    Object.defineProperty(grid, 'clientWidth', { get() { throw new Error('post-write layout read'); } });
++    let finish;
++    const finished = new Promise(resolve => { finish = resolve; });
++    const animation = { finished, cancel: vi.fn() };
++    grid.animate = vi.fn(() => animation);
++    const motion = createPhotoStudioMotion();
++    motion.play(grid, { reason: 'tab', surface: 'grid', width: 500 });
++    expect(grid.animate.mock.calls[0][0]).toEqual([
++      { opacity: 0, transform: 'translateX(-90px)' },
++      { opacity: 1, transform: 'translateX(0)' },
++    ]);
++    motion.cancelAll();
++    expect(animation.cancel).toHaveBeenCalledOnce();
++    finish(); await finished;
++  });
+   it('为每种馆藏稀有度提供稳定的装裱身份与名称', () => {
+     const cases = [
+       ['初始', 'proof', '初印'],
+diff --git a/搜打撤/tests/photo-studio-tabs.test.js b/搜打撤/tests/photo-studio-tabs.test.js
+index 7228504c..f5099dcd 100644
+--- a/搜打撤/tests/photo-studio-tabs.test.js
++++ b/搜打撤/tests/photo-studio-tabs.test.js
+@@ -1,12 +1,24 @@
+ // @vitest-environment jsdom
+-import { afterEach, describe, expect, it } from 'vitest';
+-import { bindPhotoStudioTabMarker } from '../game/src/hub/photo-studio-tabs.js';
++import { afterEach, beforeEach, describe, expect, it } from 'vitest';
++import { bindPhotoStudioTabMarker, updatePhotoStudioTabMarker } from '../game/src/hub/photo-studio-tabs.js';
+ 
+ const originalObserver = window.ResizeObserver;
+ const releases = [];
++const originalFrame = window.requestAnimationFrame;
++const originalCancel = window.cancelAnimationFrame;
++let frames;
++let nextFrame;
++beforeEach(() => {
++  frames = new Map(); nextFrame = 0;
++  window.requestAnimationFrame = callback => { frames.set(++nextFrame, callback); return nextFrame; };
++  window.cancelAnimationFrame = id => frames.delete(id);
++});
++const flushFrames = () => { const queued = [...frames.values()]; frames.clear(); queued.forEach(callback => callback()); };
+ afterEach(() => {
+   releases.splice(0).forEach(release => release());
+   window.ResizeObserver = originalObserver;
++  window.requestAnimationFrame = originalFrame;
++  window.cancelAnimationFrame = originalCancel;
+   document.body.replaceChildren();
+ });
+ 
+@@ -16,11 +28,12 @@ function fixture(firstWidth = 60) {
+   document.body.append(tabs);
+   const boxes = [{ x: 0, y: 4, width: firstWidth, height: 35 }, { x: 80, y: 4, width: 78, height: 35 }];
+   const buttons = [...tabs.children];
++  const measurements = { widths: 0 };
+   buttons.forEach((button, index) => Object.defineProperties(button, {
+     offsetLeft: { get: () => boxes[index].x }, offsetTop: { get: () => boxes[index].y },
+-    offsetWidth: { get: () => boxes[index].width }, offsetHeight: { get: () => boxes[index].height },
++    offsetWidth: { get: () => { measurements.widths++; return boxes[index].width; } }, offsetHeight: { get: () => boxes[index].height },
+   }));
+-  return { tabs, buttons, boxes };
++  return { tabs, buttons, boxes, measurements };
+ }
+ 
+ function observerMock() {
+@@ -39,11 +52,13 @@ describe('照相馆分类标记的布局与销毁', () => {
+     const instances = observerMock();
+     const { tabs, buttons, boxes } = fixture();
+     releases.push(bindPhotoStudioTabMarker(tabs));
++    flushFrames();
+     expect(instances[0].targets).toEqual([tabs, ...buttons]);
+     buttons[0].classList.remove('on');
+     buttons[1].classList.add('on');
+     Object.assign(boxes[1], { x: 24, y: 48, width: 96, height: 40 });
+     instances[0].notify();
++    flushFrames();
+     expect(tabs.style.getPropertyValue('--studio-tab-x')).toBe('24px');
+     expect(tabs.style.getPropertyValue('--studio-tab-y')).toBe('86px');
+     expect(tabs.style.getPropertyValue('--studio-tab-width')).toBe('96');
+@@ -53,9 +68,11 @@ describe('照相馆分类标记的布局与销毁', () => {
+     const instances = observerMock();
+     const { tabs, boxes } = fixture(0);
+     releases.push(bindPhotoStudioTabMarker(tabs));
++    flushFrames();
+     expect(tabs.dataset.studioMarker).toBeUndefined();
+     boxes[0].width = 72;
+     instances[0].notify();
++    flushFrames();
+     expect(tabs.dataset.studioMarker).toBe('ready');
+     expect(tabs.style.getPropertyValue('--studio-tab-width')).toBe('72');
+   });
+@@ -64,10 +81,12 @@ describe('照相馆分类标记的布局与销毁', () => {
+     const instances = observerMock();
+     const { tabs, boxes } = fixture();
+     const release = bindPhotoStudioTabMarker(tabs);
++    flushFrames();
+     release();
+     boxes[0].width = 180;
+     window.dispatchEvent(new Event('resize'));
+     instances[0].notify();
++    flushFrames();
+     expect(instances[0].disconnected).toBe(true);
+     expect(tabs.style.getPropertyValue('--studio-tab-width')).toBe('60');
+   });
+@@ -76,9 +95,46 @@ describe('照相馆分类标记的布局与销毁', () => {
+     window.ResizeObserver = undefined;
+     const { tabs, boxes } = fixture();
+     releases.push(bindPhotoStudioTabMarker(tabs));
++    flushFrames();
+     boxes[0].width = 84;
+     window.dispatchEvent(new Event('resize'));
++    flushFrames();
+     expect(tabs.style.getPropertyValue('--studio-tab-width')).toBe('84');
+     expect(() => bindPhotoStudioTabMarker(null)()).not.toThrow();
+   });
++
++  it('同轮构建、筛选和resize只排一次更新，关页取消未执行的标记', () => {
++    const instances = observerMock();
++    const { tabs, buttons } = fixture();
++    const release = bindPhotoStudioTabMarker(tabs);
++    releases.push(release);
++    updatePhotoStudioTabMarker(tabs);
++    instances[0].notify();
++    expect(frames.size).toBe(1);
++    buttons[0].classList.remove('on'); buttons[1].classList.add('on');
++    flushFrames();
++    expect(tabs.style.getPropertyValue('--studio-tab-x')).toBe('80px');
++    updatePhotoStudioTabMarker(tabs);
++    const late = [...frames.values()][0];
++    release();
++    expect(frames.size).toBe(0);
++    buttons[1].classList.remove('on'); buttons[0].classList.add('on');
++    late();
++    expect(tabs.style.getPropertyValue('--studio-tab-x')).toBe('80px');
++  });
++  it('换选复用尺寸，标签变宽或换行由尺寸观察器重新测量', () => {
++    const instances = observerMock();
++    const { tabs, buttons, boxes, measurements } = fixture();
++    releases.push(bindPhotoStudioTabMarker(tabs)); flushFrames();
++    const initialReads = measurements.widths;
++    buttons[0].classList.remove('on'); buttons[1].classList.add('on');
++    updatePhotoStudioTabMarker(tabs); flushFrames();
++    expect(measurements.widths).toBe(initialReads);
++    expect(tabs.style.getPropertyValue('--studio-tab-x')).toBe('80px');
++    Object.assign(boxes[1], { x: 24, y: 48, width: 96 });
++    instances[0].notify(); flushFrames();
++    expect(measurements.widths).toBeGreaterThan(initialReads);
++    expect(tabs.style.getPropertyValue('--studio-tab-x')).toBe('24px');
++    expect(tabs.style.getPropertyValue('--studio-tab-width')).toBe('96');
++  });
+ });

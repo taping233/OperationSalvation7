@@ -1,0 +1,182 @@
+{
+  "assets": [
+    {
+      "key": "initial",
+      "label": "初始",
+      "path": "game/art-source/card-paper-rarity-20261015/initial.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-d6d05d94-5ce5-47ba-8a09-7b42d5803e48.png",
+      "sha256": "ed9b9813778f33588b8e6e0cbdeefd97b290d17fd848a534fa96a1b71281c8ab",
+      "bytes": 1421364,
+      "width": 1024,
+      "height": 1536,
+      "opening": [
+        114,
+        123,
+        936,
+        1424
+      ],
+      "display": {
+        "width": 289.01216545012164,
+        "left": -32.175182481751825,
+        "top": -34.715328467153284,
+        "apertureHeight": 367.1922141119221
+      }
+    },
+    {
+      "key": "common",
+      "label": "古朴",
+      "path": "game/art-source/card-paper-rarity-20261015/common.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-2846b4b3-baf1-4ead-8cb2-1bffda6653ae.png",
+      "sha256": "d943b1a74ce5a1c82fae4c01e2155c0ea4dbd10c727cee30b6cfaf09090c5f2e",
+      "bytes": 1434338,
+      "width": 1024,
+      "height": 1536,
+      "opening": [
+        114,
+        132,
+        936,
+        1424
+      ],
+      "display": {
+        "width": 289.01216545012164,
+        "left": -32.175182481751825,
+        "top": -37.25547445255474,
+        "apertureHeight": 364.65206812652065
+      }
+    },
+    {
+      "key": "rare",
+      "label": "稀有",
+      "path": "game/art-source/card-paper-rarity-20261015/rare.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-36e582c6-e7db-4789-870e-2dfd3ef6f26e.png",
+      "sha256": "df3369f3374fd5b1de52e439ac93470339eead34c8a2374db8d7a9d54931e8db",
+      "bytes": 1479258,
+      "width": 1024,
+      "height": 1536,
+      "opening": [
+        113,
+        131,
+        935,
+        1423
+      ],
+      "display": {
+        "width": 289.01216545012164,
+        "left": -31.89294403892944,
+        "top": -36.97323600973236,
+        "apertureHeight": 364.65206812652065
+      }
+    },
+    {
+      "key": "epic",
+      "label": "史诗",
+      "path": "game/art-source/card-paper-rarity-20261015/epic.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-fa412b26-5636-40a3-af2e-c040dacd4f0d.png",
+      "sha256": "3810a5b9beeccc9b40242f6efccd2e9261b320cf12d17de650a30e63a65c9442",
+      "bytes": 1490558,
+      "width": 1024,
+      "height": 1536,
+      "opening": [
+        114,
+        132,
+        935,
+        1423
+      ],
+      "display": {
+        "width": 289.36419001218025,
+        "left": -32.214372716199755,
+        "top": -37.30085261875761,
+        "apertureHeight": 364.81364190012175
+      }
+    },
+    {
+      "key": "legendary",
+      "label": "传说",
+      "path": "game/art-source/card-paper-rarity-20261015/legendary.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-19c2e98b-ba49-4fc6-92b9-b22e741feeba.png",
+      "sha256": "90fa893d4a551cdb3e0042801a2fe00e3b264ace8cc15807e6ceb8a7dff53db8",
+      "bytes": 1489337,
+      "width": 1024,
+      "height": 1536,
+      "opening": [
+        114,
+        132,
+        936,
+        1423
+      ],
+      "display": {
+        "width": 289.01216545012164,
+        "left": -32.175182481751825,
+        "top": -37.25547445255474,
+        "apertureHeight": 364.3698296836983
+      }
+    },
+    {
+      "key": "prism",
+      "label": "棱彩",
+      "path": "game/art-source/card-paper-rarity-20261015/prism.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-c0674744-67fb-42b4-8e1b-36bd6f67b2fb.png",
+      "sha256": "20b82ba1676f6f2663d82a7796085f466decf59e3275e49673204c29c8e74a23",
+      "bytes": 1461061,
+      "width": 1024,
+      "height": 1536,
+      "opening": [
+        114,
+        132,
+        935,
+        1424
+      ],
+      "display": {
+        "width": 289.36419001218025,
+        "left": -32.214372716199755,
+        "top": -37.30085261875761,
+        "apertureHeight": 365.09622411693056
+      }
+    },
+    {
+      "key": "token",
+      "label": "衍生",
+      "path": "game/art-source/card-paper-rarity-20261015/token.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-4a36d99a-8486-4023-ad47-8a91429a3428.png",
+      "sha256": "4babe29b57380e89822f54e14b9ac01e3daf1189d9e0bd29bfa5e2d2fcb1c179",
+      "bytes": 1436529,
+      "width": 1024,
+      "height": 1536,
+      "opening": [
+        114,
+        132,
+        935,
+        1423
+      ],
+      "display": {
+        "width": 289.36419001218025,
+        "left": -32.214372716199755,
+        "top": -37.30085261875761,
+        "apertureHeight": 364.81364190012175
+      }
+    },
+    {
+      "key": "career",
+      "label": "职业",
+      "path": "game/art-source/card-paper-rarity-20261015/career.png",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-f048830f-355a-4aba-a570-fb182114a890.png",
+      "sha256": "d2c4b3fecc5541ff93e94bbec533cf4642c84f2681338423f5f98f758565a6a7",
+      "bytes": 1448764,
+      "width": 1024,
+      "height": 1536,
+      "opening": [
+        114,
+        131,
+        936,
+        1424
+      ],
+      "display": {
+        "width": 289.01216545012164,
+        "left": -32.175182481751825,
+        "top": -36.97323600973236,
+        "apertureHeight": 364.93430656934305
+      }
+    }
+  ],
+  "recovery": "各PNG不进Git，按source复制到path并核对SHA256",
+  "scope": "参考板候选；未测试、未构建、未提交"
+}

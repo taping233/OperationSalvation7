@@ -1,0 +1,28 @@
+{
+  "tool": "Codex built-in image_gen",
+  "transparent_background": true,
+  "reference": "C:/Users/太平/.codex/skills/arknights-node-icons/references/native-black-gallery.png",
+  "base": "Use case: stylized-concept. Asset: ONE original 2D symbolic weather node icon for a dark fantasy game's save-slot picker. Input image is STYLE REFERENCE ONLY: the black gallery of Arknights Blackflow node icons. Learn its small silhouettes, negative spaces, weak dark discs, lighting and sparse vertical marks, do NOT copy animals or organs. Square canvas, genuine transparent RGBA outside icon and fading halo. Central main motif occupies 40–48% of canvas width/height; irregular near-black cool circular support occupies 55–60%; sparse local glow up to 70%. Leave generous transparent margins. 2D few-color flat silhouette painting, selective bright edges, paper-grain subtle texture, thin luminous veils. Bright motif has directional lit surfaces, a single localized color halo interpenetrating the weak dark disc, a few tiny particles and broken vertical light traces. NO border frame, no badge enclosure, no gold octagonal square, no lettering, no labels, no checkerboard, no rectangular background, no 3D metal, no smooth jewel, no thick brush strokes, no uniformly glowing ring, no entire-canvas fog. All five weather icons in this series should share scale and restrained ivory/cold-dark/champagne palette. Subject: ",
+  "subjects": [
+    [
+      "晴",
+      "An asymmetric pale ivory solar disc with a dark off-center crescent cutout and five irregular short tapered ray shards; champagne gold light on its upper left, muted amber haze only behind that side. Recognizable SUN / SUNNY weather."
+    ],
+    [
+      "多云",
+      "Two overlapping simplified ivory cloud lobes, dark negative space separating them, a partial small pale gold sun peeking from upper right. Restrained warm gold glow upper right fading into muted blue-gray underneath. Recognizable PARTLY CLOUDY weather."
+    ],
+    [
+      "雨",
+      "A compact asymmetric ivory cloud silhouette with three separate thin elongated falling rain droplets, descending at slightly different heights, dark gaps between droplets. Muted steel blue localized glow beneath the left of cloud, very pale blue highlights on rain. Recognizable RAIN weather."
+    ],
+    [
+      "雷",
+      "A small asymmetrical ivory storm cloud split by a single angular pale champagne lightning slash descending diagonally through dark negative space; localized pale lavender and restrained warm gold light at lightning root. Recognizable THUNDERSTORM weather."
+    ],
+    [
+      "雪",
+      "One asymmetric six-branch ice crystal, simplified ivory broad facets with dark blue-gray negative spaces, only a few short branch forks, a tiny offset ice shard. Localized desaturated icy blue glow on lower right and ivory lit upper edges. Recognizable SNOW weather."
+    ]
+  ]
+}

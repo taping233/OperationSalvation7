@@ -1,0 +1,129 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://localhost:5200/?perfProbe=1".
+1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: localhost:5200/?perfProbe=1
+	2 container overlay
+		127 container
+			128 button 关闭照相馆
+			129 tab group 照片分类
+				130 tab (selected, settable, boolean) Description: 全部，268张, Value: 1, ID: libType0
+				131 tab (selectable, settable, boolean) Description: 武术，64张, Value: 0, ID: libType1
+				132 tab (selectable, settable, boolean) Description: 法术，79张, Value: 0, ID: libType2
+				133 tab (selectable, settable, boolean) Description: 生物，25张, Value: 0, ID: libType3
+				134 tab (selectable, settable, boolean) Description: 道具，20张, Value: 0, ID: libType4
+				135 tab (selectable, settable, boolean) Description: 装备，34张, Value: 0, ID: libType5
+				136 tab (selectable, settable, boolean) Description: 事件，19张, Value: 0, ID: libType6
+				137 tab (selectable, settable, boolean) Description: 能力，12张, Value: 0, ID: libType7
+				138 tab (selectable, settable, boolean) Description: 资源，15张, Value: 0, ID: libType8
+			139 heading 照相馆, Value: 2
+				140 text 照相馆
+			141 container 馆藏 268 张照片
+				142 text 馆藏  268  张照片
+			143 container 馆藏照片
+				144 container 照片搜索与筛选
+					145 text field (settable) Description: 搜索卡牌, ID: cardSearch
+					146 button (collapsed) Description: 按稀有度筛选，不限稀有度, Help: 稀有度 · 全部, Secondary Actions: Expand
+						147 text 稀有度 · 全部
+					148 button (collapsed) Description: 照片排序，稀有度, Help: 排序 · 稀有度, Secondary Actions: Expand
+						149 text 排序 · 稀有度
+					150 button (collapsed) Description: 按人物筛选，不限人物, Help: 人物 · 全部, Secondary Actions: Expand
+						151 text 人物 · 全部
+				152 container Description: 全部，268张, ID: libGrid
+					153 button 查看照片：禁咒I，棱彩
+						154 image 禁咒I
+						155 text 禁咒I
+						156 text 法术
+						157 text 棱彩
+					158 button 查看照片：禁咒II，棱彩
+						159 image 禁咒II
+						160 text 禁咒II
+						161 text 法术
+						162 text 棱彩
+					163 button 查看照片：禁咒III，棱彩
+						164 image 禁咒III
+						165 text 禁咒III
+						166 text 法术
+						167 text 棱彩
+					168 button 查看照片：禁咒IV，棱彩
+						169 image 禁咒IV
+						170 text 禁咒IV
+						171 text 法术
+						172 text 棱彩
+					173 button 查看照片：白梅落影·妄，棱彩
+						174 image 白梅落影·妄
+						175 text 白梅落影·妄
+						176 text 能力
+						177 text 棱彩
+					178 button 查看照片：博览者的狂语，棱彩
+						179 image 博览者的狂语
+						180 text 博览者的狂语
+						181 text 能力
+						182 text 棱彩
+					183 button 查看照片：充能火山，棱彩
+						184 image 充能火山
+						185 text 充能火山
+						186 text 能力
+						187 text 棱彩
+					188 button 查看照片：花开两面，棱彩
+						189 image 花开两面
+						190 text 花开两面
+						191 text 能力
+						192 text 棱彩
+					193 button 查看照片：禁术解放，棱彩
+						194 image 禁术解放
+						195 text 禁术解放
+						196 text 能力
+						197 text 棱彩
+					198 button 查看照片：浪掷风吟，棱彩
+						199 image 浪掷风吟
+						200 text 浪掷风吟
+						201 text 能力
+						202 text 棱彩
+					203 button 查看照片：青龙化身，棱彩
+						204 image 青龙化身
+						205 text 青龙化身
+						206 text 能力
+						207 text 棱彩
+					208 button 查看照片：深渊主宰·妲莉薇特，棱彩
+						209 image 深渊主宰·妲莉薇特
+						210 text 深渊主宰·妲莉薇特
+						211 text 能力
+						212 text 棱彩
+					213 button 查看照片：圣剑化身，棱彩
+						214 image 圣剑化身
+						215 text 圣剑化身
+						216 text 能力
+						217 text 棱彩
+					218 button 查看照片：受缚之残影，棱彩
+						219 image 受缚之残影
+						220 text 受缚之残影
+						221 text 能力
+						222 text 棱彩
+					223 button 查看照片：天剑诛魔·云阳，棱彩
+						224 image 天剑诛魔·云阳
+						225 text 天剑诛魔·云阳
+						226 text 能力
+						227 text 棱彩
+					228 button 查看照片：无量仙剑·云风，棱彩
+						229 image 无量仙剑·云风
+						230 text 无量仙剑·云风
+						231 text 能力
+						232 text 棱彩
+			233 container 选中卡牌详情
+				234 container libPreview
+					235 heading 禁咒I, Value: 3
+						236 text 禁咒I
+					237 text 法术
+					238 container 藏品类别：棱彩
+						239 text 棱彩
+					240 text 费用
+					241 text 0
+					242 container
+						243 text 你抽到本牌时，夺取第一名存活敌人的  1  点 攻击力。
+					244 button (disabled) 上一片
+					245 button 定位当前照片
+					246 container 当前筛选结果中的第1张，共268张
+						247 text 1 / 268
+					248 button 下一片
+					249 button 查看大图与背签
+		126 button (collapsed) Description: 展开性能探针, Secondary Actions: Expand
+
+The focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: localhost:5200/?perfProbe=1

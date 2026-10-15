@@ -1,0 +1,250 @@
+{
+  "sourceReadSnapshot": [
+    {
+      "path": "game/src/hub/base.js",
+      "sha256": "f14e7d36faca09b35cc8cf621ba529b16b38f86fcc4c5e06e0377f99e71a6834"
+    },
+    {
+      "path": "game/src/hub/base-mutation.js",
+      "sha256": "88601f7a606e91275a692e929d96697b80ad88512b4ccf53b0a4ced14e6050f6"
+    },
+    {
+      "path": "game/src/core/render-scheduler.js",
+      "sha256": "a698340dc9a192991d00a53dfea5b27c21f2fc3bbee330c0834643670ad19c32"
+    },
+    {
+      "path": "game/src/game.boot.js",
+      "sha256": "6797c364cbed0d1a023b0f712fd72adb400c8347af4a0329e51f006220d2c1e8"
+    },
+    {
+      "path": "game/src/agent/agent.state.js",
+      "sha256": "608758fb1404e2f7c00119171f94e765f19b46275aa3cdf1111af404cc77c7ea"
+    },
+    {
+      "path": "game/src/agent/agent.runner.js",
+      "sha256": "e5b7eb06c51ccc097138bfd3c694838eafbec444e09f435e0e1bb3c5c26ffd6a"
+    },
+    {
+      "path": "game/src/agent/agent.surface.js",
+      "sha256": "0fd42c1e8b97c71a941895c8a541426eaee990fb54263ba9b7eca2c59357c496"
+    },
+    {
+      "path": "game/src/core/characters.js",
+      "sha256": "debf1abce843de26a49adbfaab9b2a8190740939c61bd3ae03a0fe6502afdc7c"
+    },
+    {
+      "path": "game/src/run/map-generator.js",
+      "sha256": "41315bf016634efc081e22739b638ada1b1c35b8589dc7d06a1dbea8cb873b41"
+    },
+    {
+      "path": "game/src/core/renderer.js",
+      "sha256": "79838f491b7c87d9528cd5e2c833d9c25767077a178d0c1000f1ac61f59eb10c"
+    },
+    {
+      "path": "game/src/agent/agent.policy.js",
+      "sha256": "4c0128ef43e8650fd354bb6c0a5f280fdc04bf252fdbff23f588eec0d4b34dcb"
+    },
+    {
+      "path": "game/src/battle/bag/battle.bag.js",
+      "sha256": "d7af81550214e3462d3b9709bcf05c2f34698028eab4a4b31dbdfc066df3d8d3"
+    }
+  ],
+  "recordedAt": "2026-10-14T23:39:56.8654199+08:00",
+  "artifacts": [
+    {
+      "path": "raw/compare-metrics.json",
+      "bytes": 3861,
+      "sha256": "ced9879f9188b1f8051588b5dc656a086b094d4c81e23742fe45d76a150bc588"
+    },
+    {
+      "path": "raw/executables.json",
+      "bytes": 555,
+      "sha256": "4b5f94334e81f97ffce07fe4b8f025fe84d85339970195ec238c15daf91e5de5"
+    },
+    {
+      "path": "raw/index-metrics.json",
+      "bytes": 659,
+      "sha256": "46d52db296ec6761183e36f75132387b580e0ea475be3e694f8e3ecd16769411"
+    },
+    {
+      "path": "raw/lean-agent.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/lean-agent.stdout",
+      "bytes": 8607,
+      "sha256": "4b117c00d766a0ddfd2cebf3cd8fac49f7cf3d0de9e0b56abe0ab9ee135e6fed"
+    },
+    {
+      "path": "raw/lean-chinese.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/lean-chinese.stdout",
+      "bytes": 884,
+      "sha256": "d263b7ade7945cb77338562815b19d54a04631870d9bf4270eb5e116cef9efc4"
+    },
+    {
+      "path": "raw/lean-coverage.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/lean-coverage.stdout",
+      "bytes": 1219,
+      "sha256": "fad58328daab3a609e656d92937b5bcdb0afc26162b0e4c34867bb9b3819406e"
+    },
+    {
+      "path": "raw/lean-index.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/lean-index.stdout",
+      "bytes": 328,
+      "sha256": "e18f292e56d6242c681e09154d4a75c25673a68d40fc1cdcf3a7c265d3815627"
+    },
+    {
+      "path": "raw/lean-render-focused.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/lean-render-focused.stdout",
+      "bytes": 8230,
+      "sha256": "ad72c17b851f6d25fee8b73ec6520a3431c985773b2d2fea4265317e2de41998"
+    },
+    {
+      "path": "raw/lean-render.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/lean-render.stdout",
+      "bytes": 4974,
+      "sha256": "f979e2d1f7438796c9749e15cff1df8c61a12787d6991a67114c5620bb641f92"
+    },
+    {
+      "path": "raw/lean-save-focused.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/lean-save-focused.stdout",
+      "bytes": 7695,
+      "sha256": "d2ba73f8e0f4e95134b80f0ee3ba5b4a34de5f02bf6e6c2dcf0817bad901d8ec"
+    },
+    {
+      "path": "raw/lean-save.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/lean-save.stdout",
+      "bytes": 2057,
+      "sha256": "6a7c77d5f6dd1df7da683a5e64f35523d7c16cde4519be3567ac8d4d94a17528"
+    },
+    {
+      "path": "raw/lean-savings.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/lean-savings.stdout",
+      "bytes": 5069,
+      "sha256": "e92a844e82ffca5ea0b17166f029796f63b3b36c94a172bce1aa6a953de596c7"
+    },
+    {
+      "path": "raw/native-discovery-metrics.json",
+      "bytes": 735,
+      "sha256": "4e58982021911a0bb6cbb1321a6c15c36a74d7ab5c55e9a3f3f75753b2e6852f"
+    },
+    {
+      "path": "raw/query-metrics.json",
+      "bytes": 4117,
+      "sha256": "f5e142b6911cdc73776d7c443daf2148edf0544d81f13d0eb30348b51d6d0f5e"
+    },
+    {
+      "path": "raw/rg-agent.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/rg-agent.stdout",
+      "bytes": 986,
+      "sha256": "cbe0fa6b42708e3ff0e753861bceae8cde4beb2b7e1c84eb3085b715bbdc83b7"
+    },
+    {
+      "path": "raw/rg-discovery-agent.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/rg-discovery-agent.stdout",
+      "bytes": 270,
+      "sha256": "e0f0882015d267627dd9f6fbda221fb3d3b86da5645ddc22bd55de129ef24c97"
+    },
+    {
+      "path": "raw/rg-discovery-render.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/rg-discovery-render.stdout",
+      "bytes": 408,
+      "sha256": "c6c943848bbc281c4990d120e68e7c746633b62cbd3d141ffd4bf226899e7edb"
+    },
+    {
+      "path": "raw/rg-discovery-save.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/rg-discovery-save.stdout",
+      "bytes": 946,
+      "sha256": "5b149e2d7758ef77decd4e58990067253ac21b8bad861450573631c44f84944d"
+    },
+    {
+      "path": "raw/rg-render.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/rg-render.stdout",
+      "bytes": 4408,
+      "sha256": "896f1817c341b6cbfb640cd69ee57dfa9571114ff8a8c36e93c76b426c44f4a9"
+    },
+    {
+      "path": "raw/rg-save.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/rg-save.stdout",
+      "bytes": 1559,
+      "sha256": "7dd80789e2d47c9f6a2993dfd27e51845646b891dd189edf5e5ccea05cac161c"
+    },
+    {
+      "path": "raw/run.mjs",
+      "bytes": 4176,
+      "sha256": "c7511951ed16c5ba97cd1a6beba98f70a4264d4055b8245987506c39af968daf"
+    },
+    {
+      "path": "raw/scan-metrics.json",
+      "bytes": 420,
+      "sha256": "90fa168e0ff786324ef281b8189240c6fc3667f9f0d47c7ac7c19ec973dd545e"
+    },
+    {
+      "path": "raw/smoke-scan.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "raw/smoke-scan.stdout",
+      "bytes": 97932,
+      "sha256": "ecdcd0f636dab7a0c068902437829f79e1ba66c843e18765d9b44114f9f2d8ce"
+    }
+  ]
+}

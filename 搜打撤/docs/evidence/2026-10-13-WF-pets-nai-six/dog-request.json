@@ -1,0 +1,16 @@
+{
+  "id": "dog",
+  "name": "汪汪狗",
+  "model": "nai-diffusion-4-5-full",
+  "recipe": "1.3",
+  "width": 1024,
+  "height": 1024,
+  "steps": 28,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nAn original young expedition dog, sturdy and unmistakably canine, with a compact shepherd-like body, thick cream fur, broad charcoal patches across its back and one floppy ear, warm amber eyes, a dark nose and a gently open mouth. One ear stands upright while the other folds forward. A weathered burgundy trail scarf is tied loosely around its neck; a small brushed-brass compass tag hangs from a plain leather collar. One front paw is lifted as if volunteering to lead the party. Give the fur distinct soft clumps and the paws believable weight. Its expression is loyal, brave and a little mischievous.\n\nOriginal high-quality painterly character concept for a fantasy card-game companion selection screen. Rich, memorable design with coherent anatomy, tactile materials and a readable silhouette at small display size.\n\nA single complete character in a lively three-quarter view, centered in a square 1024 by 1024 canvas, occupying about 75 percent of the frame. Entire silhouette visible with clean margins. Plain matte warm-gray background with only a faint contact shadow, no landscape, frame, lettering or other characters.\n\nCream and graphite fur, burgundy cloth and muted brass; cool blue-gray light from upper left, warm reflected light on the muzzle. Painted fur strands, worn woven cloth and a few sharp metal glints.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "uc": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, wolf, fox, human, humanoid, armor, blue eyes, fangs, extra paws, duplicate tail, giant ears, cropped body, complex background, typography, border",
+  "naiImageReferences": [],
+  "seed": 932431389,
+  "source": "docs\\evidence\\2026-10-13-WF-pets-nai-six\\source\\dog.png",
+  "sha256": "cc9906bdad6512e8f05f82964fa789fbbaf552576a49b8c3ca92ae0f67a52178",
+  "bytes": 1407832
+}

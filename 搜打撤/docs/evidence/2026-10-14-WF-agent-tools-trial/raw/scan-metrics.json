@@ -1,0 +1,19 @@
+[
+  {
+    "id": "smoke-scan",
+    "command": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\太平\\AppData\\Local/npm-cache/_npx\\13c8f15e04497dd0\\node_modules\\smokinggun\\dist\\bin\\smokinggun.js",
+      "scan",
+      "game/src",
+      "--format",
+      "json",
+      "--max-findings",
+      "80",
+      "--non-interactive"
+    ],
+    "seconds": 7.452,
+    "exit": 0,
+    "bytes": 97932
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "source": "Codex 内置浏览器当前窗口，http://127.0.0.1:5200/",
+  "computedStyleComparison": {
+    "elementAndPseudoRecords": 663,
+    "properties": 25,
+    "differences": 0,
+    "scope": "首页稳定态；不将逐帧变化的动画数值混入静态比较"
+  },
+  "interactionChecks": [
+    "只看壁纸隐藏菜单",
+    "恢复界面重新展开菜单",
+    "壁纸1→2→1",
+    "制作名单打开→返回主页"
+  ],
+  "tests": {
+    "files": [
+      "tests/home-menu-motion.test.js",
+      "tests/css-asset-minification.test.js"
+    ],
+    "passed": 8,
+    "failed": 0
+  },
+  "cssParse": "passed",
+  "keyframes": {
+    "homeCoverIn": "仅保留最后生效的定义",
+    "akNudge": "全 game/tests 的 CSS/JS/HTML 搜索仅剩自身后移除"
+  },
+  "sha256": "4cc04e8c0a0c3470b81f684da6adac140b063bc6ba7bd9aef3b17dcfbd7bc53f",
+  "unverified": [
+    "未运行全量测试或构建",
+    "未逐个进入全部首页目的页面；未修改路由或交互JS"
+  ],
+  "finalInteractionObservation": {
+    "records": 663,
+    "rawPropertyDifferences": 11,
+    "explanation": "完成真实点击后的焦点/鼠标进入右侧控制台，触发原有attention高亮、控件局部鼠标坐标；扫光背景位置与标尺动画也随时间变化。此前同交互状态比较25项属性零差异；最终截图确认菜单完整恢复，未将点击后动态值当作样式回归。"
+  }
+}

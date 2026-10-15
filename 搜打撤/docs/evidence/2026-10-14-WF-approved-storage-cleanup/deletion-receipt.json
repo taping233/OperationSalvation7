@@ -1,0 +1,207 @@
+{
+  "status": "complete",
+  "startedAt": "2026-10-14T15:24:24.0905075Z",
+  "targets": [
+    {
+      "relative": ".tmp/package-exe-1005",
+      "absolute": "D:\\素材\\代号柒\\.tmp\\package-exe-1005",
+      "bytes": 1279399152,
+      "files": 10796
+    },
+    {
+      "relative": ".tmp/friday-cloud-review-integration-20261014",
+      "absolute": "D:\\素材\\代号柒\\.tmp\\friday-cloud-review-integration-20261014",
+      "bytes": 1608262198,
+      "files": 23746
+    },
+    {
+      "relative": "搜打撤/desktop-app/dist/experience-20261014",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\desktop-app\\dist\\experience-20261014",
+      "bytes": 608161621,
+      "files": 1625
+    },
+    {
+      "relative": "搜打撤/desktop-app/node_modules",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\desktop-app\\node_modules",
+      "bytes": 469895302,
+      "files": 7390
+    },
+    {
+      "relative": "搜打撤/desktop-app/game",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\desktop-app\\game",
+      "bytes": 223450807,
+      "files": 1551
+    },
+    {
+      "relative": "搜打撤/node_modules/.cache/exe-fix-1014",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\node_modules\\.cache\\exe-fix-1014",
+      "bytes": 617748005,
+      "files": 1685
+    },
+    {
+      "relative": "搜打撤/node_modules/.cache/electron-v44.1.0-win32-x64.zip",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\node_modules\\.cache\\electron-v44.1.0-win32-x64.zip",
+      "bytes": 157848806,
+      "files": 1
+    },
+    {
+      "relative": "SoudacheGodot/.godot",
+      "absolute": "D:\\素材\\代号柒\\SoudacheGodot\\.godot",
+      "bytes": 204677230,
+      "files": 661
+    }
+  ],
+  "preservedFiles": 48,
+  "preservedBytes": 14076796,
+  "projectBytesBefore": 16400513792,
+  "protected": [
+    {
+      "path": "搜打撤/package.json",
+      "sha256": "765b11e639e664c177d7f906897380c86f3714136f567c538bb84d7d5917f1a8"
+    },
+    {
+      "path": "搜打撤/package-lock.json",
+      "sha256": "cf5f518d457900498106fc83890d8b3c45a1bc79a464d06afe6644da7ffc9e74"
+    },
+    {
+      "path": "搜打撤/vite.config.js",
+      "sha256": "ff2471da525ff46700401b99d4fc716d8dcda657f4259b771663d8e1a26b5dd3"
+    },
+    {
+      "path": "搜打撤/game/index.html",
+      "sha256": "4e8364ef2229989ceab0b7458ab8f472f666516ec4e880cd74a5983424b3fb07"
+    },
+    {
+      "path": "搜打撤/game/src/main.js",
+      "sha256": "b27a866ff5152d7222d510289171df213ef09c6d33a3162b579048d85d8c068c"
+    },
+    {
+      "path": "搜打撤/game/version.json",
+      "sha256": "94665dfeec69a32b128efa8162829561b99873d5bddd2fd79116ed1189aa5316"
+    },
+    {
+      "path": "搜打撤/game/src/ui/achievement-medals.js",
+      "sha256": "78bbdbf29831ecbe7a158ed62c50aecb983220d7dcc46022e33bb55459f7fb6a"
+    },
+    {
+      "path": "搜打撤/game/src/hub/game.cardslib.js",
+      "sha256": "744486dda776d5c59f8bf734322a03416339f61f6631939b132c7bfda222fcf1"
+    },
+    {
+      "path": "搜打撤/node_modules/vite/package.json",
+      "sha256": "08aa811517022c5b83c52c63dc435d2aa725a64fe4e3cfa6f351affa6b9ed9de"
+    },
+    {
+      "path": "搜打撤/node_modules/pixi.js-legacy/package.json",
+      "sha256": "fff8e0aa60bedffd52499450cb1ec6ca0ea275a4e239755cd31ea86e90f5b733"
+    },
+    {
+      "path": "搜打撤/desktop-app/dist/搜打撤-代号7-音乐版-20261005.exe",
+      "sha256": "69e76301c46f0e15160a8c2288ee5db9379d15f5fa509c6a2e6c1152d8e50225"
+    }
+  ],
+  "webBefore": [
+    {
+      "path": "/",
+      "status": 200,
+      "type": [
+        "text/html"
+      ]
+    },
+    {
+      "path": "/src/main.js",
+      "status": 200,
+      "type": [
+        "text/javascript"
+      ]
+    },
+    {
+      "path": "/src/ui/achievement-medals.js",
+      "status": 200,
+      "type": [
+        "text/javascript"
+      ]
+    },
+    {
+      "path": "/src/hub/game.cardslib.js",
+      "status": 200,
+      "type": [
+        "text/javascript"
+      ]
+    },
+    {
+      "path": "/assets/ui/icons/dice.png",
+      "status": 200,
+      "type": [
+        "image/png"
+      ]
+    },
+    {
+      "path": "/assets/portraits/battle/wu.webp",
+      "status": 200,
+      "type": [
+        "image/webp"
+      ]
+    }
+  ],
+  "webPid": 23856,
+  "deleted": [
+    ".tmp/package-exe-1005",
+    ".tmp/friday-cloud-review-integration-20261014",
+    "搜打撤/desktop-app/dist/experience-20261014",
+    "搜打撤/desktop-app/node_modules",
+    "搜打撤/desktop-app/game",
+    "搜打撤/node_modules/.cache/exe-fix-1014",
+    "搜打撤/node_modules/.cache/electron-v44.1.0-win32-x64.zip",
+    "SoudacheGodot/.godot"
+  ],
+  "webAfter": [
+    {
+      "path": "/",
+      "status": 200,
+      "type": [
+        "text/html"
+      ]
+    },
+    {
+      "path": "/src/main.js",
+      "status": 200,
+      "type": [
+        "text/javascript"
+      ]
+    },
+    {
+      "path": "/src/ui/achievement-medals.js",
+      "status": 200,
+      "type": [
+        "text/javascript"
+      ]
+    },
+    {
+      "path": "/src/hub/game.cardslib.js",
+      "status": 200,
+      "type": [
+        "text/javascript"
+      ]
+    },
+    {
+      "path": "/assets/ui/icons/dice.png",
+      "status": 200,
+      "type": [
+        "image/png"
+      ]
+    },
+    {
+      "path": "/assets/portraits/battle/wu.webp",
+      "status": 200,
+      "type": [
+        "image/webp"
+      ]
+    }
+  ],
+  "completedAt": "2026-10-14T15:24:31.5888381Z",
+  "deletedBytes": 5169443121,
+  "projectBytesAfter": 11228966728,
+  "preservedHashesAfter": "all-match",
+  "protectedHashesAfter": "all-match"
+}

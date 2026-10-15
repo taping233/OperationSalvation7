@@ -1,0 +1,45 @@
+{
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-c8158618-379d-422b-a8ac-4ff4461468ac.png",
+  "original": {
+    "path": "game/art-source/card-frame-study-1014/rare.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-c8158618-379d-422b-a8ac-4ff4461468ac.png",
+    "sha256": "88420dfb245276c2d067f5af6f7177fb4640a35bd178077a9a86fbc39d8e0840",
+    "bytes": 1212072,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      123,
+      156,
+      902,
+      1380
+    ],
+    "rails": {
+      "left": 87,
+      "right": 87,
+      "top": 87,
+      "bottom": 87
+    },
+    "previewRails": {
+      "left": 25.91,
+      "right": 25.91,
+      "top": 25.91,
+      "bottom": 25.91
+    },
+    "preview": {
+      "width": 304.9653,
+      "left": -36.6316,
+      "top": -46.4596,
+      "apertureHeight": 364.5289
+    }
+  },
+  "runtime": {
+    "path": "ui/card-frames/split-1014/rare.webp",
+    "ext": "webp",
+    "license": "老板授权项目卡框；Codex内置image_gen重绘",
+    "bytes": 128600,
+    "sha256": "62eab8bfe92e6f52dffe374f2df4e454eef14d566f1ff577ac8adc2825dc4f86",
+    "source": "docs/evidence/2026-10-15-rare-blue/request.json"
+  },
+  "backup": ".tmp/imagegen/2026-10-15-rare-blue",
+  "validation": "仅导入所需尺寸/透明开口读取；未测试、未实页验收、未构建、未提交"
+}

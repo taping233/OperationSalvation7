@@ -1,0 +1,19 @@
+{
+  "artifact": "desktop-app/dist/experience-20261014/搜打撤-代号7.exe",
+  "bytes": 293306974,
+  "sha256": "9e64dfc8fa6317e8d1d589c4b62b737e1ee73ba9e0fb27d17cbcc3bac24d03fa",
+  "sourceHead": "3d02437e4c3cf6fb4a55f8a05b409932ec35daae",
+  "version": "0.60.0",
+  "electron": "44.1.0",
+  "builderExit": 0,
+  "packageCheck": {
+    "asar": "four required files verified",
+    "gameVersion": "0.60.0",
+    "htmlReferences": 14,
+    "missing": []
+  },
+  "performanceBudget": "failed; user explicitly approved local experience EXE",
+  "actualGameplay": "not tested",
+  "status": "deleted at explicit user request on 2026-10-14",
+  "reportedFailure": "achievement images absent; photo studio page load failed; unresolved"
+}

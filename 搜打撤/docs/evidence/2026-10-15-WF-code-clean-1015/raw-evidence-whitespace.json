@@ -1,0 +1,22 @@
+{
+  "reason": "原始历史补丁包含上下文空行，原始交接/目录快照含末尾空行；保持原始字节及历史哈希，不对原始证据做格式重写",
+  "rawFiles": [
+    {
+      "path": "搜打撤/docs/evidence/2026-10-12-WF-four-character-skins/HANDOFF-CURRENT.md",
+      "sha256": "9feadb5f11352c1dd1ac18d753c546fdad2974ebe01a42ddf003f3fee3829605"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-14-WF-ledger-cleanup-1014/worktrees-before.txt",
+      "sha256": "f871208bcd49c929be4d456e360040540d65251d5343bf44fc7f0e005356d017"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-14-WF-photo-perf-opt/raw/self-diff.patch",
+      "sha256": "9a0293aea8c59e7fecfa8f929e6190fdac725c532253440db874f6f64c1be58b"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-15-WF-battle-redesign/README.md",
+      "sha256": "9fe1680e2c3e5e4d2d9e615e46de5b5a2ced481d22b55bffd003d97830558b25"
+    }
+  ],
+  "remainingDocumentationDiffCheck": "passed"
+}

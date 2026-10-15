@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen (built-in)",
+  "prompt": "Use case: precise-object-edit. Input1 is Baita's MAGIC BOOK career card frame. Recolor it to GREEN AND YELLOW, keeping the open spellbook at top, closed book at lower right, bookmarks, paper layers, magic ink marks and exact alpha-transparent aperture. All blue/cyan/slate-blue accents must become GREEN: book covers deep forest/emerald green, tape and magical ink swipes leafy green with grouped dark-green shadows. Book pages become pale warm YELLOW / yellowed ivory with broad ochre fold shadows; ribbon bookmarks and selected accent strokes become GOLDEN YELLOW. Some muted cream paper rails remain so it belongs to the paper-collage card family. Dominant accent impression is GREEN + YELLOW, absolutely no blue, cyan, purple or teal. Same 1024x1536 canvas, original proportions and locations; no new objects or geometry changes. Preserve hand-painted anime paper collage, broad opaque shapes and selective refined contours, matte surfaces and quiet text opening. No glossy metal, gems, realism, text, card illustration, opaque backing or haze. True alpha inside and outside.",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-ad49c494-812a-40d5-a5d0-63586117be8a.png",
+  "reference": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-584330d6-fee7-4ed8-b24e-42d65fc93fbe.png",
+  "filename": "career-baita-green-yellow.png",
+  "pigment": "#3b6635",
+  "accent": "#e5d578",
+  "note": "绿黄配色 · 魔法书与书签"
+}

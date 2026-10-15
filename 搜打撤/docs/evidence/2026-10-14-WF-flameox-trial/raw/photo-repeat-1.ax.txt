@@ -1,0 +1,13 @@
+Browser tab: 1, Title: "升格会的冬日猜想 v0.60.0", URL: "http://localhost:5200/?perfProbe=1".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 13, 16, 21, 24, 28, 31, 34
++							41 text ENTER THE CITY
++							42 text BRIEFING
++							43 text ACHIEVEMENTS
++							44 text PHOTO STUDIO
++							45 text SYSTEM
++							46 text CREDITS
++							47 text DISCONNECT
++	48 container 照相馆：正在整理收藏档案
++		49 text 正在整理收藏档案
+The focused UI element is 22 button 照相馆 PHOTO STUDIO, ID: btnCardLib

@@ -1,0 +1,645 @@
+[
+  {
+    "file": "game/css/base-archive-facilities-v12.css",
+    "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12-display .hs-card",
+    "declaration": "height:322px",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base-camp-rework.css",
+    "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card-face .hs-card",
+    "declaration": "height:100%",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base-camp-rework.css",
+    "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-v2 .stash-cell .hs-card",
+    "declaration": "height:100%",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base-camp-rework.css",
+    "selector": "#overlay #hubMain.pg.hub.base-camp .person-pool-card .hs-card",
+    "declaration": "height:100%",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base-collection-v4.css",
+    "selector": "#overlay #hubMain.pg.hub.base-camp .collection-card .hs-card",
+    "declaration": "height:100%",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base-logistics-trade-v12.css",
+    "selector": "& .warehouse-card-art .hs-card",
+    "declaration": "height:auto!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base-logistics-trade-v12.css",
+    "selector": "& .warehouse-card-art .hs-card",
+    "declaration": "min-height:0!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base-logistics-trade-v12.css",
+    "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .trade-v12 :is(.trade-v5-thumb,.trade-v5-art) .hs-card",
+    "declaration": "height:298px",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base-logistics-trade-v12.css",
+    "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .trade-v12 .trade-v5-thumb .hs-card",
+    "declaration": "height:298px",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base-logistics-trade-v12.css",
+    "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .trade-v12 .trade-v5-art .hs-card",
+    "declaration": "height:246px",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base-logistics-trade-v12.css",
+    "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .trade-v12 .trade-v5-art .hs-card",
+    "declaration": "height:246px",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base-personnel-v12.css",
+    "selector": "& .pool-card-art > .hs-card",
+    "declaration": "height:auto!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base-personnel-v12.css",
+    "selector": "& .pool-card-art > .hs-card",
+    "declaration": "min-height:0!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base.css",
+    "selector": ".bag-view .bag-slot .hs-card",
+    "declaration": "height: 14em",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base.css",
+    "selector": ".bag-view .bag-slot .hs-card",
+    "declaration": "max-height: 100%",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/base.css",
+    "selector": ".bag-view .bag-slot .hs-card",
+    "declaration": "box-shadow: 0 2px 5px rgba(0,0,0,.5)",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "selector": "body:has(#viewport) #overlay .battle-stage.battle-sts .sts-hand .hs-card",
+    "declaration": "height:auto!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "selector": "body:has(#viewport) #overlay .battle-stage.battle-sts .sts-hand .hs-card",
+    "declaration": "min-height:0!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "selector": "body:has(#viewport) #overlay .bt-hand-detail-art .hs-card",
+    "declaration": "height:auto!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "selector": "body:has(#viewport) #overlay .bt-hand-detail-art .hs-card",
+    "declaration": "min-height:0!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "selector": "body:has(#viewport) #overlay .bt-hand-detail-body:has(.bt-hand-detail-copy) .hs-card .hsc-desc",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "selector": "body:has(#viewport) #overlay .battle-stage.sts.battle-sts .sts-hand .hs-card .hsc-desc",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "selector": "body:has(#viewport) #overlay .battle-stage.sts.battle-sts .sts-hand .bt-slot:is(:hover,:focus-within) .hs-card:is([data-rule-density=\"normal\"],[data-rule-density=\"long\"]) .hsc-desc",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "selector": "body:has(#viewport) #overlay .battle-stage.battle-sts .sts-hand .hs-card :is(.hsc-name,.hsc-cost)",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/battle.css",
+    "selector": ".bt-start-equip-card .hs-card",
+    "declaration": "box-shadow:0 6px 24px rgba(0,0,0,.55)",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/battle.css",
+    "selector": ".sts-hand .hsc-desc .bt-rulehint",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/card-v3.css",
+    "selector": ".hs-card .hsc-kw span",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/cards.css",
+    "selector": ".hsc-cost",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/cards.css",
+    "selector": ".hsc-art",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/cards.css",
+    "selector": ".hsc-art .ic",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/cards.css",
+    "selector": ".hsc-name",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/cards.css",
+    "selector": ".hsc-type",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/cards.css",
+    "selector": ".hsc-kw",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/cards.css",
+    "selector": ".hsc-kw span",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/cards.css",
+    "selector": ".hsc-kw .ic",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/cards.css",
+    "selector": ".hsc-kw .kw-draw",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/cards.css",
+    "selector": ".hsc-kw .kw-infuse",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/cards.css",
+    "selector": ".hsc-kw .kw-infuse.alt",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/character-pool-cover.css",
+    "selector": "#overlay .card.page .pg.cls-pool-page .pool-card-button .hsc-art::after",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/departure-cover.css",
+    "selector": "#overlay .card.page #depMain.departure-cover :is(.dep-card-face, .bag-cell) > .hs-card",
+    "declaration": "height: 100% !important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/departure-cover.css",
+    "selector": "#overlay .card.page #depMain.departure-cover :is(.dep-card-face, .bag-cell) > .hs-card",
+    "declaration": "min-height: 0",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/departure-cover.css",
+    "selector": "#overlay .card.page #depMain.departure-cover :is(.dep-card-face, .bag-cell) > .hs-card",
+    "declaration": "max-height: 100%",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/departure-selected.css",
+    "selector": "& #depPool .dep-card-face .hs-card",
+    "declaration": "min-height:0",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/departure-selected.css",
+    "selector": "& #depPool .dep-card-face .hs-card",
+    "declaration": "height:auto",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/departure-selected.css",
+    "selector": "& #depPool .dep-card-face .hs-card",
+    "declaration": "aspect-ratio:272/406",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/departure-selected.css",
+    "selector": "& #depBag .bag-cell > .hs-card",
+    "declaration": "min-height:0",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/departure-selected.css",
+    "selector": "& #depBag .bag-cell > .hs-card",
+    "declaration": "height:auto",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/departure-selected.css",
+    "selector": "& #depBag .bag-cell > .hs-card",
+    "declaration": "aspect-ratio:272/406",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/entry-events.css",
+    "selector": "body:has(#viewport) #overlay .event-scene .fire-result-cards .hs-card",
+    "declaration": "height:auto",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/entry-events.css",
+    "selector": "body:has(#viewport) #overlay .event-scene .fire-result-cards .hs-card",
+    "declaration": "aspect-ratio:272/406",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "selector": "body #overlay .card.bag-page .pk-card .hs-card",
+    "declaration": "height:196px",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "selector": "body #overlay .card.bag-page .bag-reference .pk-card .hs-card",
+    "declaration": "height:224px",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "selector": "#overlay .hub-page .stash-cell .hs-card",
+    "declaration": "height:auto",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "selector": "#overlay .hub-page .stash-cell .hs-card",
+    "declaration": "aspect-ratio:10/14",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "selector": "#overlay .hub-page .stash-cell .hs-card",
+    "declaration": "box-shadow:none",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "selector": "#overlay .hub-page .stash-cell .hs-card",
+    "declaration": "border-radius:0",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "selector": "#overlay .hub-page .pocket-thumb .hs-card",
+    "declaration": "box-shadow:none",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "selector": "#overlay .hub-page .pocket-thumb .hs-card",
+    "declaration": "border-radius:0",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "selector": "#overlay .hub-page .shelf-item .shelf-visual .hs-card",
+    "declaration": "box-shadow:none",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "selector": "#overlay .hub-page .shelf-item .shelf-visual .hs-card",
+    "declaration": "border-radius:0",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-library.css",
+    "selector": "body.cardlib-open #cardZoom .cz-card .hs-card",
+    "declaration": "box-shadow:\r\n    0 26px 84px rgba(0,0,0,.72),\r\n    0 0 72px rgba(225,198,109,.30),\r\n    0 0 0 1px rgba(225,198,109,.28)!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "selector": "body:has(#viewport) #overlay .result-pg .ext-cards .hs-card",
+    "declaration": "height:auto",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "selector": "body:has(#viewport) #overlay .result-pg .ext-cards .hs-card",
+    "declaration": "aspect-ratio:272/406",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "selector": "body:has(#viewport) #overlay .reward-replica .reward-card .hs-card",
+    "declaration": "min-height:0",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "selector": "body:has(#viewport) #overlay .reward-replica .reward-card .hs-card",
+    "declaration": "height:auto",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "selector": "body:has(#viewport) #overlay .reward-replica .reward-card .hs-card",
+    "declaration": "aspect-ratio:272/406",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "#overlay .pg.cls-pool-page .pool-cell .hs-card",
+    "declaration": "height:auto",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "#overlay .pg.cls-pool-page .pool-cell .hsc-art",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "#overlay .pg.cls-pool-page .pool-cell .hsc-art::after",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "#overlay .pg.cls-pool-page .pool-card-button .hsc-art::after",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "#overlay .pg.cls-pool-page .pool-cell .hs-card",
+    "declaration": "height:auto",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "#overlay .pg.cls-pool-page .pool-cell .hs-card",
+    "declaration": "aspect-ratio:5 / 7",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "#overlay .pg.cls-pool-page .pool-card-button .hs-card",
+    "declaration": "display:flex",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "#overlay .pg.cls-pool-page .pool-card-button .hs-card",
+    "declaration": "height:auto",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "#overlay .pg.cls-pool-page .pool-card-button .hs-card",
+    "declaration": "aspect-ratio:5 / 7",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "#overlay .pg.cls-pool-page .pool-card-button .hs-card",
+    "declaration": "border-radius:0",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "#overlay .pg.cls-pool-page .pool-card-button .hsc-art::after",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "body #overlay .card.page .pg.cls-pool-page .hs-card,\nbody:has(#overlay .cls-pool-page) #cardZoom:not(.cz-photo) .hs-card",
+    "declaration": "grid-template-rows:54% 12% 27% 7% !important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "body #overlay .card.page .pg.cls-pool-page .hs-card,\nbody:has(#overlay .cls-pool-page) #cardZoom:not(.cz-photo) .hs-card",
+    "declaration": "min-height:0 !important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "body #overlay .card.page .pg.cls-pool-page .hs-card .hsc-name",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "body:has(#overlay .cls-pool-page) #cardZoom:not(.cz-photo) .hs-card .hsc-name",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "body #overlay .card.page .pg.cls-pool-page .hs-card .hsc-name span",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "body:has(#overlay .cls-pool-page) #cardZoom:not(.cz-photo) .hs-card .hsc-name span",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "body #overlay .card.page .pg.cls-pool-page .hs-card .hsc-desc",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "body:has(#overlay .cls-pool-page) #cardZoom:not(.cz-photo) .hs-card .hsc-desc",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "body #overlay .card.page .pg.cls-pool-page .hs-card .hsc-kw",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "selector": "body:has(#overlay .cls-pool-page) #cardZoom:not(.cz-photo) .hs-card .hsc-kw",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/expedition-shop.css",
+    "selector": "body:has(#viewport) #overlay .shop-pg.shop-market .shop-preview .hs-card",
+    "declaration": "min-height:0",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/expedition-shop.css",
+    "selector": "body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card",
+    "declaration": "min-height:0",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/feedback-oct12.css",
+    "selector": ".departure-drag-card .hs-card",
+    "declaration": "height:auto",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/feedback-oct12.css",
+    "selector": ".departure-drag-card .hs-card",
+    "declaration": "aspect-ratio:5/7",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/feedback-oct12.css",
+    "selector": "& :is(#depPool .dep-card-face .hs-card,#depBag .bag-cell > .hs-card)",
+    "declaration": "height:auto!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/feedback-oct12.css",
+    "selector": "& :is(#depPool .dep-card-face .hs-card,#depBag .bag-cell > .hs-card)",
+    "declaration": "min-height:0!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/feedback-oct12.css",
+    "selector": "& :is(#depPool .dep-card-face .hs-card,#depBag .bag-cell > .hs-card)",
+    "declaration": "aspect-ratio:272/406!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/feedback-oct12.css",
+    "selector": "body #overlay#overlay#overlay .reward-card .hs-card",
+    "declaration": "height:auto!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/feedback-oct12.css",
+    "selector": "body #overlay#overlay#overlay .reward-card .hs-card",
+    "declaration": "min-height:0!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/feedback-oct12.css",
+    "selector": "body #overlay#overlay#overlay .reward-card .hs-card",
+    "declaration": "aspect-ratio:272/406!important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/hub-stash-cover.css",
+    "selector": "#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cell .hsc-val",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/inventory-zoom.css",
+    "selector": "body:has(#viewport) #cardZoom.inventory-zoom .cz-card > .hs-card",
+    "declaration": "height:100%",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/overlays.css",
+    "selector": ".pk-card .hs-card",
+    "declaration": "height: 14em",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/overlays.css",
+    "selector": ".hsc-cost.cost-mod",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/overlays.css",
+    "selector": ".hsc-cost.cost-mod.mod-down",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/overlays.css",
+    "selector": ".hsc-cost.cost-mod.mod-up",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/page-expedition-hud.css",
+    "selector": ".expedition-feedback-cards .hs-card",
+    "declaration": "height:216px",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/page-rewards-bag-help.css",
+    "selector": "#overlay .card.bag-page .pk-card .hs-card",
+    "declaration": "box-shadow: 0 4px 12px rgba(7,7,8,.45)",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/page-stash.css",
+    "selector": "#overlay #hubMain .hub-page:has(> .hub-two > .hub-card > .stash-scroll) .stash-cell .hsc-val",
+    "reason": "shared face owns card internals"
+  },
+  {
+    "file": "game/css/tactical-card-redesign.css",
+    "selector": "body[data-ui-cover-context='ordinary'] #overlay .card.battle .sts-hand .hs-card",
+    "declaration": "height: 14em !important",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/winter.css",
+    "selector": ".hs-card:hover",
+    "declaration": "box-shadow:0 8px 20px #0e0f1099",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/winter.css",
+    "selector": "#overlay .bag-view .bag-slot .flip-face.flip-front .hs-card",
+    "declaration": "height:100%",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/winter.css",
+    "selector": "#overlay .bag-view .bag-slot .flip-face.flip-front .hs-card",
+    "declaration": "max-height:none",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/winter.css",
+    "selector": "#overlay .bag-view .bag-slot .flip-face.flip-front .hs-card",
+    "declaration": "box-shadow:none",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/winter.css",
+    "selector": "#overlay .card.battle-bag .battle-bag-slot .hs-card",
+    "declaration": "height:calc(100% - 9cqw)",
+    "reason": "shared card shape/material"
+  },
+  {
+    "file": "game/css/winter.css",
+    "selector": "#overlay .card.battle-bag .battle-bag-slot .hs-card",
+    "declaration": "box-shadow:none",
+    "reason": "shared card shape/material"
+  }
+]

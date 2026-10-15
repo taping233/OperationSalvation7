@@ -1,0 +1,160 @@
+{
+  "surface": "Codex in-app browser",
+  "viewport": "current window only",
+  "groups": [
+    {
+      "cards": [
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "初始攻击",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "寒冰剑",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "元素爆裂",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "阿猫的礼物",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "斩杀",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "火球",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "金蝉脱壳",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "白梅落影·妄",
+          "rulesFit": true
+        }
+      ],
+      "group": "rarity",
+      "prism": {
+        "haloAnimation": "prism-halo",
+        "haloOpacity": "0.53309",
+        "sheenAnimation": "prism-sheen",
+        "titleAnimation": "prism-title"
+      }
+    },
+    {
+      "cards": [
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "金蝉脱壳",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "铁甲阵",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "奥术弹",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "沐愈光辉",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "暗影射击",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "金蝉脱壳",
+          "rulesFit": true
+        }
+      ],
+      "group": "career"
+    },
+    {
+      "cards": [
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "金蝉脱壳",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "火球",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "寒冰剑",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "金疮药",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "木材",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "联邦巡防兵",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "爱心救济站",
+          "rulesFit": true
+        },
+        {
+          "frameRatioPreserved": true,
+          "images": true,
+          "name": "白梅落影·妄",
+          "rulesFit": true
+        }
+      ],
+      "group": "types"
+    }
+  ],
+  "prismHaloOpacityChanged": true
+}

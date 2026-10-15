@@ -1,0 +1,16 @@
+{
+  "id": "fire",
+  "name": "火焰精灵",
+  "model": "nai-diffusion-4-5-full",
+  "recipe": "1.3",
+  "width": 1024,
+  "height": 1024,
+  "steps": 28,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nAn original tiny living ember spirit, an expressive rounded charcoal core surrounded by layered tongues of flame shaped like leaves and swept hair. Two bright copper eyes and a small playful mouth glow from within the dark core. It floats in a lively upward spiral, with two little ember hands extended and a tapered trailing flame instead of feet. The flame has coherent physical flow: a pale gold inner heat, orange middle body and deep crimson outer tips, with a few sparse sparks. Keep the main silhouette clear and singular, like a loyal companion that could fit in two hands, neither a human child nor a face pasted onto a bonfire.\n\nOriginal high-quality painterly character concept for a fantasy card-game companion selection screen. Rich, memorable design with coherent anatomy, tactile materials and a readable silhouette at small display size.\n\nA single complete character in a lively three-quarter view, centered in a square 1024 by 1024 canvas, occupying about 75 percent of the frame. Entire silhouette visible with clean margins. Plain matte warm-gray background with only a faint contact shadow, no landscape, frame, lettering or other characters.\n\nPale gold, vivid orange, crimson and charcoal; luminous center balanced by dark painted ember planes, crisp hot accents and restrained smoke wisps.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "uc": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, humanoid, fire monster, many faces, separate floating heads, extra limbs, candle, campfire, giant eyes, cropped body, complex background, typography, border",
+  "naiImageReferences": [],
+  "seed": 741853118,
+  "source": "docs\\evidence\\2026-10-13-WF-pets-nai-six\\source\\fire.png",
+  "sha256": "55811dc19df7651de1c324e39619e18dc0942b6a314b247b008a06f70b536ab0",
+  "bytes": 1094071
+}

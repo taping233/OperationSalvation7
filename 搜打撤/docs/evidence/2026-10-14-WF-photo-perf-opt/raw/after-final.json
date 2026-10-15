@@ -1,0 +1,601 @@
+{
+  "actions": [
+    {
+      "action": "btnCardLib",
+      "done": true,
+      "end": 8844.60000000894,
+      "presentMs": 129.70000000298023,
+      "scheduled": true,
+      "start": 8714.90000000596,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType1",
+      "done": true,
+      "end": 9376.40000000596,
+      "presentMs": 93.79999999701975,
+      "start": 9282.60000000894,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType0",
+      "done": true,
+      "end": 9784.20000000298,
+      "presentMs": 101,
+      "start": 9683.20000000298,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "btnCardLib",
+      "done": true,
+      "end": 10819.10000000894,
+      "presentMs": 147.5,
+      "scheduled": true,
+      "start": 10671.60000000894,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType1",
+      "done": true,
+      "end": 11342.30000001192,
+      "presentMs": 106.09999999403954,
+      "start": 11236.10000000894,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType0",
+      "done": true,
+      "end": 11756.10000000894,
+      "presentMs": 128.6000000089407,
+      "start": 11627.5,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "btnCardLib",
+      "done": true,
+      "end": 12746.40000000596,
+      "presentMs": 153.29999999701977,
+      "scheduled": true,
+      "start": 12593.10000000894,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType1",
+      "done": true,
+      "end": 13274.60000000894,
+      "presentMs": 125.70000000298025,
+      "start": 13148.90000000596,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType0",
+      "done": true,
+      "end": 13840.10000000894,
+      "presentMs": 126.20000000298025,
+      "start": 13713.90000000596,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "btnCardLib",
+      "done": true,
+      "end": 15084.30000001192,
+      "presentMs": 242.4000000059605,
+      "scheduled": true,
+      "start": 14841.90000000596,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType1",
+      "done": true,
+      "end": 15732.20000000298,
+      "presentMs": 101.29999999701975,
+      "start": 15630.90000000596,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType0",
+      "done": true,
+      "end": 16219.10000000894,
+      "presentMs": 124.5,
+      "start": 16094.60000000894,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "btnCardLib",
+      "done": true,
+      "end": 17609.10000000894,
+      "presentMs": 218.29999999701977,
+      "scheduled": true,
+      "start": 17390.70000000298,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType1",
+      "done": true,
+      "end": 18341,
+      "presentMs": 126.79999999701975,
+      "start": 18214.20000000298,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    },
+    {
+      "action": "libType0",
+      "done": true,
+      "end": 18851.80000001192,
+      "presentMs": 168.70000000298023,
+      "start": 18683.10000000894,
+      "viewport": {
+        "dpr": 1.2499999701976776,
+        "height": 956,
+        "width": 683
+      }
+    }
+  ],
+  "animations": [
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    },
+    {
+      "frames": [
+        {
+          "opacity": 0,
+          "transform": "translateX(-160px)"
+        },
+        {
+          "opacity": 1,
+          "transform": "translateX(0)"
+        }
+      ],
+      "id": "libGrid",
+      "options": {
+        "delay": 0,
+        "duration": 360,
+        "easing": "cubic-bezier(.22,1,.36,1)",
+        "fill": "backwards"
+      }
+    }
+  ],
+  "longTasks": [
+    {
+      "duration": 62,
+      "start": 8740.300000011921
+    },
+    {
+      "duration": 68,
+      "start": 9281.90000000596
+    },
+    {
+      "duration": 62,
+      "start": 9683.10000000894
+    },
+    {
+      "duration": 77,
+      "start": 10695.30000001192
+    },
+    {
+      "duration": 61,
+      "start": 10801.70000000298
+    },
+    {
+      "duration": 83,
+      "start": 11235.80000001192
+    },
+    {
+      "duration": 76,
+      "start": 11627.30000001192
+    },
+    {
+      "duration": 67,
+      "start": 12625.10000000894
+    },
+    {
+      "duration": 81,
+      "start": 13148.20000000298
+    },
+    {
+      "duration": 78,
+      "start": 13713.30000001192
+    },
+    {
+      "duration": 55,
+      "start": 13873.90000000596
+    },
+    {
+      "duration": 117,
+      "start": 14875.80000001192
+    },
+    {
+      "duration": 83,
+      "start": 15629
+    },
+    {
+      "duration": 79,
+      "start": 16092.70000000298
+    },
+    {
+      "duration": 50,
+      "start": 16267.5
+    },
+    {
+      "duration": 52,
+      "start": 16374.80000001192
+    },
+    {
+      "duration": 57,
+      "start": 16461.20000000298
+    },
+    {
+      "duration": 74,
+      "start": 16703.10000000894
+    },
+    {
+      "duration": 70,
+      "start": 16931.90000000596
+    },
+    {
+      "duration": 110,
+      "start": 17423.5
+    },
+    {
+      "duration": 58,
+      "start": 17650.70000000298
+    },
+    {
+      "duration": 109,
+      "start": 18211.90000000596
+    },
+    {
+      "duration": 106,
+      "start": 18681.20000000298
+    },
+    {
+      "duration": 62,
+      "start": 18787.80000001192
+    }
+  ],
+  "reads": [
+    {
+      "duration": 0,
+      "read": "_checkPageBg",
+      "start": 8744.60000000894
+    },
+    {
+      "duration": 19.100000008940697,
+      "read": "offsetHeight",
+      "stack": "Error\n    at HTMLDivElement.get [as offsetHeight] (<anonymous>:39:121)\n    at syncLibTileIntrinsicSize (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:503:17)\n    at renderCardLibrary (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:820:3)\n    at Module.openCardLibrary (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:159:3)\n    at open (http://localhost:5200/src/hub/game.cardslib.js?t=1791994276827:104:40)",
+      "start": 8745.5
+    },
+    {
+      "duration": 18.700000002980232,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:10:18\n    at Array.map (<anonymous>)\n    at paintPhotoStudioTabMarker (http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:9:64)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:37:27",
+      "start": 9376.60000000894
+    },
+    {
+      "duration": 21.900000005960464,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:10:18\n    at Array.map (<anonymous>)\n    at paintPhotoStudioTabMarker (http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:9:64)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:37:27",
+      "start": 9785.5
+    },
+    {
+      "duration": 0.09999999403953552,
+      "read": "_checkPageBg",
+      "start": 10700.60000000894
+    },
+    {
+      "duration": 25.899999991059303,
+      "read": "offsetHeight",
+      "stack": "Error\n    at HTMLDivElement.get [as offsetHeight] (<anonymous>:39:121)\n    at syncLibTileIntrinsicSize (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:503:17)\n    at renderCardLibrary (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:820:3)\n    at Module.openCardLibrary (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:159:3)\n    at open (http://localhost:5200/src/hub/game.cardslib.js?t=1791994276827:104:40)",
+      "start": 10701.60000000894
+    },
+    {
+      "duration": 15.600000008940697,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:10:18\n    at Array.map (<anonymous>)\n    at paintPhotoStudioTabMarker (http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:9:64)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:37:27",
+      "start": 11342.5
+    },
+    {
+      "duration": 14.5,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:10:18\n    at Array.map (<anonymous>)\n    at paintPhotoStudioTabMarker (http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:9:64)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:37:27",
+      "start": 11757.30000001192
+    },
+    {
+      "duration": 0,
+      "read": "_checkPageBg",
+      "start": 12630
+    },
+    {
+      "duration": 21.5,
+      "read": "offsetHeight",
+      "stack": "Error\n    at HTMLDivElement.get [as offsetHeight] (<anonymous>:39:121)\n    at syncLibTileIntrinsicSize (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:503:17)\n    at renderCardLibrary (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:820:3)\n    at Module.openCardLibrary (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:159:3)\n    at open (http://localhost:5200/src/hub/game.cardslib.js?t=1791994276827:104:40)",
+      "start": 12630.80000001192
+    },
+    {
+      "duration": 18.599999994039536,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:10:18\n    at Array.map (<anonymous>)\n    at paintPhotoStudioTabMarker (http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:9:64)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:37:27",
+      "start": 13274.80000001192
+    },
+    {
+      "duration": 19.5,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:10:18\n    at Array.map (<anonymous>)\n    at paintPhotoStudioTabMarker (http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:9:64)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:37:27",
+      "start": 13841.80000001192
+    },
+    {
+      "duration": 0,
+      "read": "_checkPageBg",
+      "start": 14882.40000000596
+    },
+    {
+      "duration": 36,
+      "read": "offsetHeight",
+      "stack": "Error\n    at HTMLDivElement.get [as offsetHeight] (<anonymous>:39:121)\n    at syncLibTileIntrinsicSize (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:503:17)\n    at renderCardLibrary (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:820:3)\n    at Module.openCardLibrary (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:159:3)\n    at open (http://localhost:5200/src/hub/game.cardslib.js?t=1791994276827:104:40)",
+      "start": 14883.30000001192
+    },
+    {
+      "duration": 1.1000000089406967,
+      "read": "offsetHeight",
+      "stack": "Error\n    at HTMLDivElement.get [as offsetHeight] (<anonymous>:39:121)\n    at syncLibTileIntrinsicSize (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:503:17)\n    at renderLibGrid (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:701:3)\n    at http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:836:5\n    at action (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:91:71)\n    at HTMLDivElement.<anonymous> (http://localhost:5200/src/ui/ui.js?t=1791994248364:50:16)",
+      "start": 16142
+    },
+    {
+      "duration": 20.700000002980232,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:10:18\n    at Array.map (<anonymous>)\n    at paintPhotoStudioTabMarker (http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:9:64)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:37:27",
+      "start": 16220.5
+    },
+    {
+      "duration": 0,
+      "read": "_checkPageBg",
+      "start": 17439.60000000894
+    },
+    {
+      "duration": 33.5,
+      "read": "offsetHeight",
+      "stack": "Error\n    at HTMLDivElement.get [as offsetHeight] (<anonymous>:39:121)\n    at syncLibTileIntrinsicSize (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:503:17)\n    at renderCardLibrary (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:820:3)\n    at Module.openCardLibrary (http://localhost:5200/src/hub/game.cardslib.page.js?t=1791994276827:159:3)\n    at open (http://localhost:5200/src/hub/game.cardslib.js?t=1791994276827:104:40)",
+      "start": 17440.80000001192
+    },
+    {
+      "duration": 1.0999999940395355,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:10:18\n    at Array.map (<anonymous>)\n    at paintPhotoStudioTabMarker (http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:9:64)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:37:27",
+      "start": 18341.10000000894
+    },
+    {
+      "duration": 25.299999997019768,
+      "read": "offsetWidth",
+      "stack": "Error\n    at HTMLButtonElement.get [as offsetWidth] (<anonymous>:39:121)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:10:18\n    at Array.map (<anonymous>)\n    at paintPhotoStudioTabMarker (http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:9:64)\n    at http://localhost:5200/src/hub/photo-studio-tabs.js?t=1791994276827:37:27",
+      "start": 18854.30000001192
+    }
+  ],
+  "viewport": {
+    "dpr": 1.2499999701976776,
+    "height": 956,
+    "width": 683
+  }
+}

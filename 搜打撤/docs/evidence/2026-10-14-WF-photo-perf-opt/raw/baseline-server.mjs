@@ -1,0 +1,10 @@
+import { createServer } from 'vite';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+const root=process.cwd();
+const files=['game/src/hub/game.cardslib.page.js','game/src/hub/photo-studio-tabs.js','game/src/hub/photo-studio-navigation.js','game/src/ui/overlay.js'];
+const before=new Map(files.map(file=>[path.resolve(root,file).replaceAll('\\','/'),readFileSync(path.join(root,'node_modules/.cache/photo-perf-opt',path.basename(file)+'.before'),'utf8')]));
+const server=await createServer({cacheDir:path.join(root,'node_modules/.cache/photo-perf-opt/vite-baseline'),server:{host:'127.0.0.1',port:5307,strictPort:true},plugins:[{name:'photo-perf-frozen-baseline',enforce:'pre',load(id){return before.get(id.split('?')[0].replaceAll('\\','/'));}}]});
+await server.listen();
+console.log(JSON.stringify({pid:process.pid,port:5307,cwd:root,baselineFiles:files}));
+process.on('SIGINT',async()=>{await server.close();process.exit(0);});

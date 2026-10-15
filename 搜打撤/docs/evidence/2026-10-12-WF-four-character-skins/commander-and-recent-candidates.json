@@ -1,0 +1,106 @@
+{
+  "latest": "previews/heixiang-commander-clean-v2.webp",
+  "status": "review-candidate-not-integrated",
+  "assets": [
+    {
+      "tool": "built-in image_gen",
+      "prompt": "Edit this single landscape 16:9 illustration. Preserve EXACT man's facial identity, confident smirk, deep tan skin, slicked-back black/silver hair, huge physique, burgundy hunting formalwear, falcon, and hand lifting falcon hood. Preserve achieved soft depth of field and warm/cool lighting. Four specific improvements:\n1 COMPOSITION: back the camera off slightly and lower the seated subject within the frame so ALL HAIR AND TOP OF HEAD are completely visible, with a clear 6-8% image-height breathing space ABOVE the highest hair tip. Do not shrink him into a distant landscape; face remains large/readable, adult proportions unchanged. Both hands and bird head fully visible.\n2 REMOVE USELESS DETAIL: replace ornate tiny feather-shaped brooch by one simple gold clasp; remove dangling decorative chains from the glove, remove extra tiny straps and decorative waist pouch hardware. Keep only functional glove, falcon hood and its single strap. Merge small cloth crease triangles into main broad flowing folds. Fur in several broad plush groups, bird wing in coherent feather groups with few selective accents, not dense little facets.\n3 MATERIAL QUALITY: keep hand-painted anime broad opaque brush finish. Burgundy coat visibly heavy matte velvet through broad deep shadow pools and muted directional nap highlight swaths; sharp thick collar/cuff construction and clear sewn gold edge band. Cream fur soft-volume clumps with selective fluffy broken contour, not hard stone chips. Glove thick dark leather with broad bent-knuckle creases and one economical reflected sheen. Gold clasp one crisp warm highlight against dark side plane. Skin broad clean warm/cool planes, face/eyes precise. No photoreal texture, grain, glossy 3D, surface scratch network or all-over tiny highlights.\n4 NEW FOREGROUND: a near-camera dark walnut banquet table corner crosses only lower-left/bottom edge, occupying roughly 10-15% image area. Visible top/side thickness with correct perspective, deliberately out of focus. On that near corner ONE small crystal stem glass of amber wine and a folded dark burgundy napkin, softly blurred and subdued. Table edge partially occludes lower coat/knee to establish tangible near/middle/far depth, NEVER blocks face, arms, hood or falcon. No plate clutter, no flowers or more props. Face/raised fingers/hood and bird eye at focal plane. Middle stone railing mildly soft, distant pines/window more defocused but recognizable, no fog veil. Face first visual focal point; foreground is low contrast. Keep consistent upper-left light and spatial contacts. No writing, borders, watermark.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-12-WF-four-character-skins/previews/heixiang-winter-hunt-v6.webp"
+      ],
+      "status": "review-candidate-not-integrated",
+      "source": "C:/Users/太平/.codex/generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-06c6cdfe-7574-4dc7-91a8-b6aa6be9b025.png",
+      "preview": "previews/heixiang-winter-hunt-v7.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "sourceBase": "C:/Users/太平/.codex",
+      "sourceRelativeToCodexHome": "generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-06c6cdfe-7574-4dc7-91a8-b6aa6be9b025.png",
+      "sourceSha256": "86ed1adb38dcf9c8961609972e012f80a27675ea8a8968371debc7a69178ebc9",
+      "previewSha256": "bc399c7dd975756952bfad974759f1b00f6e6543910c34747e70ddee241c18d3"
+    },
+    {
+      "tool": "built-in image_gen",
+      "prompt": "Repaint image 1 in the actual hand-painted anime style of images 2/3/4/5. Preserve image 1 EXACT face/identity/expression/skin color, complete uncropped head with headroom, body proportions, seated pose, falcon and hood-removing hands, burgundy costume, single-shoulder ivory mantle, foreground table corner/glass/napkin placements, and winter lodge perspective. Images 2-5 are painting grammar only, NEVER their person/costume/pose. Current image 1's smooth realistic materials and photographic blur are WRONG and must be replaced.\n\nFOREGROUND FIX: remove the heavy Gaussian photographic defocus. Table rim must be readable, clear top/side thickness in perspective, long broad opaque wood-color strokes, NO fine wood grain. Glass has clearly recognizable bowl, stem and base, wine level expressed by one amber mass and a couple restrained painted light marks, NO sparkling bokeh/glossy refraction. Napkin clearly readable folded burgundy shape. Foreground only mildly softer than face, edges painted softly/broken in places, about 20% reduced sharpness; no melted smear. Maintain foreground occlusion and depth.\n\nSTYLE FIX THROUGHOUT: use reference 2's big directional opaque curved/elongated brush strokes and coherent hair masses; reference 3's large quiet dark-cloth regions and selective structural lines; reference 4's simplified finish; reference 5's game anime treatment. Coat 3-5 flowing burgundy plane groups with broad dark sweeps and short irregular brush endings, quiet interiors. Fur large curved cream masses with sparse hand-drawn edge accents, NOT fine fluffy fur rendering or tiny triangles. Pants large charcoal planes with principal bend folds. Falcon wings/chest grouped dark gray shapes with a few deliberate feather accents, eyes/beak selectively crisp. Skin clean broad planes with restrained warm/cool turns and few tapered colored lines at nose/lids/jaw, no glossy sculpted lip or realistic skin shading. Gold single broad highlight, no polished 3D material.\nBackground pine groups/window/stone also PAINTED broad simplified shapes, muted and softer in edges, not a blurred photograph. Keep identifiable depth and contact, quiet blue-gray masses, no creamy lens bokeh, no fog veil. Face and essential fingers/hood remain the most precise. Mostly muted colored grays, localized burgundy and gold; preserve original warm upper-left light. Handmade broken edges, intentional brush coverage and large resting regions across character AND environment. No noise/grain filter, glossy gradients, photoreal wood/glass/fur, dense tiny faceted shading or evenly traced flat vector outlines. Substantial style repaint, not just add texture. No text/watermark.",
+      "references": [
+        "C:/Users/太平/.codex/generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-06c6cdfe-7574-4dc7-91a8-b6aa6be9b025.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/selected-baseline-v03.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp"
+      ],
+      "status": "review-candidate-not-integrated",
+      "source": "C:/Users/太平/.codex/generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-8953f5fb-e026-4902-9155-8aa6af21ca16.png",
+      "preview": "previews/heixiang-winter-hunt-v8.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "sourceBase": "C:/Users/太平/.codex",
+      "sourceRelativeToCodexHome": "generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-8953f5fb-e026-4902-9155-8aa6af21ca16.png",
+      "sourceSha256": "7677174a1c810f25c06643d5f9669d1f90164e2aeec9b73d2169d4b167326e87",
+      "previewSha256": "b7079e9ed384e6e8dff5370b7c5c0f68239191e3e8f0be846b126ad29d3d8fc6"
+    },
+    {
+      "tool": "built-in image_gen",
+      "prompt": "Simple modest OUTPAINT of this exact image, landscape 16:9. Keep its exact muted color grade, burgundy, ivory, dark charcoal and cool snowy blue-gray relationships, warm window light, original broad hand-painted rendering and original amount of background softness. Keep the same man face, hairstyle, smile, skin tone, muscular proportions, clothing/accessories, both hands lifting falcon hood, falcon, seated pose and scene. Extend the view only a little, primarily ABOVE so the full top of his hair is reconstructed and completely visible with a small comfortable head margin; modestly extend left/right and below to maintain 16:9 framing. Original character remains large and dominant, roughly 90% of current relative scale, not a distant full-body shot. Seamlessly continue existing snowy pines, stone railing, lodge wall/window and red curtain along the new canvas margins; below continue original dark trousers/coat/chair simply. Preserve existing content as closely as possible; do not redesign or beautify the face, costume or pose. No new table, wineglass, decorations, extra props, foreground additions, new blur or color grading. No global repaint or added detail; just naturally extend existing picture in its own palette and painting style. No text, watermark or frame.",
+      "references": [
+        "C:/Users/太平/AppData/Local/Temp/codex-clipboard-d3e52e90-ac33-465f-a584-d4d44f639ed2.png"
+      ],
+      "status": "review-candidate-not-integrated",
+      "source": "C:/Users/太平/.codex/generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-34c26dea-040e-4faa-b15f-bf4a3070978f.png",
+      "preview": "previews/heixiang-hunt-outpaint-v1.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "sourceBase": "C:/Users/太平/.codex",
+      "sourceRelativeToCodexHome": "generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-34c26dea-040e-4faa-b15f-bf4a3070978f.png",
+      "sourceSha256": "38c80ec32644c5baecce8804c227584211cbfd5d7f45b6116584c6069aa3dc0f",
+      "previewSha256": "5f8c3700ac4413127ec3dd770e66624ee3211f12a1b3d83fc0759e2b81bb97f9"
+    },
+    {
+      "tool": "built-in image_gen",
+      "prompt": "Create one substantially new original HEIXIANG skin, landscape 16:9, inspired by the cohesive snow-campaign military outfit organization of Arknights Hellagur's Octopath Illusion. Identity image 1; image 2 ONLY exact muted burgundy/ivory/charcoal/cool snowy blue-gray color mood, not aristocratic clothes or pose; images 3/4/5 are OUR broad opaque anime brush painting grammar. Original human man, never Hellagur's silver long hair or animal ears.\n\nTHEME: SNOW FRONTIER FIELD COMMANDER. Near medium three-quarter standing portrait from fully visible head with 7% top margin to upper thighs, character large and dominant. He stands behind a low ammunition crate used as a field planning table, both thick hands unfolding a large weathered cream paper campaign map; one corner lifts slightly in the cold wind. Head turns to viewer with his recognizable restrained confident tooth-showing smirk, as if he has just decided the next move. Strong shoulder/torso shape, face is primary focus, map-opening hands second.\n\nFACE precisely match image 1's original brow-eye spacing, lively amber eye shapes, cheek breadth, compact nose/mouth and tapered chin. Deep gray-brown tan skin, massive broad adult male shoulders, thick neck and muscular arms. Slicked-back short black hair with silver-gray forelock, shaved sides, forehead exposed; compact stitched vertical scar on HIS LEFT cheek/viewer right. No older long stern aristocratic face, chibi or thin pretty boy.\n\nMILITARY DESIGN inspired by the ACTUAL white/red field-officer structure, not adding more fancy jewelry: heavy IVORY military greatcoat worn open, deep BURGUNDY collar and broad burgundy inner lining, asymmetric wind-blown long coat tails; charcoal fitted high-collar officer tunic beneath, one broad dark leather waist belt and cross-body map-case strap, understated gold shoulder-board edges and a single small ribbon bar. NO fur mantle, ruffled tie, wine, falcon, eagle brooch or banquet curtain. Dark leather gloves with readable fingers, restrained burgundy cuffs, charcoal trousers. A stout simple ceremonial saber in scabbard at hip, hilt partly visible near belt, not a giant sword; a useful dark leather map case at waist. Outfit detail clustered at collar/shoulder/ribbon, coat surfaces mostly quiet large shapes. Strong white-coat/red-lining/black-uniform layering and functional military silhouette.\n\nENVIRONMENT: winter battlefield waystation, low broken road-sign post and two VERY QUIET indistinct shield-bearing patrol silhouettes far behind, sparse dark crows receding as small sky strokes. Foreground crate top/side planes and near map edge lightly soft, coherent perspective/contacts. Middle commander clear, distant ruined arch and snow pine shapes noticeably softer and lower contrast but recognizable. No photoreal creamy blur, no crowded battlefield or elaborate rubble. A modest wind-blown burgundy signal pennant attached to one broken post repeats coat color. Character not shrunk into a full scenery panorama. Face lit softly from upper left, main ivory coat darker/quieter than face focal contrasts, clear cool snow shadows.\n\nPAINTING exactly our supplied 3/4/5 references: large connected opaque color masses, broad directional curved/elongated brush sweeps with visible coverage and broken endings, coherent hair clusters, broad main cloth folds, quiet interior fields. Selective anime face/eyes/fingertips refined. No tiny triangle mosaic, dense feather/fur/hair textures, glossy realistic metal/leather, smooth beauty gradients, noise filter or evenly outlined flat vector fill. Background and foreground share same handmade painting grammar. Distinguish wool coat by thick broad fold planes, leather by few bent edges/reflections, paper by clear fold/crease and edges, metal by one restrained highlight. Mostly muted colored grays, localized burgundy and warm gold. No UI, words, watermark, emblems copied from Arknights or text on map.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/heixiang.webp",
+        "C:/Users/太平/.codex/generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-34c26dea-040e-4faa-b15f-bf4a3070978f.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/selected-baseline-v03.png"
+      ],
+      "designReference": "https://www.9game.cn/mrfz/5091160.html",
+      "status": "review-candidate-not-integrated",
+      "source": "C:/Users/太平/.codex/generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-5d12e46b-107d-4a23-b735-b47d09402a33.png",
+      "preview": "previews/heixiang-commander-v1.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "sourceBase": "C:/Users/太平/.codex",
+      "sourceRelativeToCodexHome": "generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-5d12e46b-107d-4a23-b735-b47d09402a33.png",
+      "sourceSha256": "80aa3474f7b0a9f3ebf7e4e33f819b999c716c00c4e7bd5fc0780e27446dfe98",
+      "previewSha256": "ccf5c7a71d80c16ad30c28cc13ab35e439ba385f80c1ba7fbe6280ac97f270ac"
+    },
+    {
+      "tool": "built-in image_gen",
+      "prompt": "Recompose and repaint the BACKGROUND/ENVIRONMENT of this HEIXIANG military skin into a clean commercial anime wallpaper layout, while preserving the exact man's FACE, hair, deep tan skin, large muscular physique, cream military greatcoat with burgundy lining, dark tunic, shoulder boards/ribbon and saber, and both hands unfolding the campaign map. Entire head with comfortable top margin, same recognizable tooth-showing expression. Landscape 16:9.\n\nUse a snowy mountain-pass composition inspired by the large framing masses in the Albedo Snowy Peaks wallpaper: ONE broad dark blue-gray rock face at far left margin, ONE broad dark slate rock mass at far right margin, a quiet pale blue-gray open central distance, two distant layered mountain silhouettes. Keep rock shapes broad with just a few structural planes; no rock chip texture, scattered rubble, trees or ruins. Place the large commander slightly left of center, face about x44% y22%, torso fills most height. Low near charcoal map-table/crate with clear top and side planes spans bottom edge, map and hands readable. Right half behind him has quiet spatial depth and restful sky, not a cluttered army. Dark side rocks frame inward, distant mountain diagonals guide toward face without crossing his head. No character shrink into a giant landscape.\n\nDELETE ALL previous background soldiers, banners/pennants, crows, broken archways, road signs, scattered equipment boxes, dense snow pines and tiny snowy rubble. Scene conveys quiet winter field planning through uniform/map alone. Foreground one useful map table only. Background near rocks slightly softer than face and much lower detail, far mountain shapes visibly softer with reduced contrast, a painterly edge hierarchy not blurry fog. A few broad snow caps on rock top planes enough, no speckled snowflakes. Gentle coherent upper-left daylight, face brightest focal attention, cream coat quiet, subdued burgundy lining accent.\n\nRendering throughout remains OUR hand-painted anime style: broad directional opaque curved/elongated paint sweeps, large connected quiet color masses and grouped hard-edge light/shadow, handmade broken edges, face/eyes and map-holding fingertips selectively clear. No fine fabric/rock textures, glossy polished materials, dense tiny angular faceting, photographic lens blur or noise/grain. Coherent perspective and occlusion, map top support must make physical sense. No new props, no text/watermark or copied logos. Strong clean silhouette and intentional negative space. Substantial new background and layout, not minor decluttering of old battlefield.",
+      "references": [
+        "C:/Users/太平/.codex/generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-5d12e46b-107d-4a23-b735-b47d09402a33.png"
+      ],
+      "compositionReference": "https://wall.alphacoders.com/big.php?i=1210593",
+      "status": "review-candidate-not-integrated",
+      "source": "C:/Users/太平/.codex/generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-2947f8e9-c137-4eb8-a623-932f15616990.png",
+      "preview": "previews/heixiang-commander-clean-v2.webp",
+      "size": [
+        1672,
+        941
+      ],
+      "sourceBase": "C:/Users/太平/.codex",
+      "sourceRelativeToCodexHome": "generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-2947f8e9-c137-4eb8-a623-932f15616990.png",
+      "sourceSha256": "2735e0867bc7b55a7efab1b835959cf0eacfa4db62b3c982ad70fcce41b2092d",
+      "previewSha256": "b91a1afdb7af881ff579d4a21f24c5f0de70a7724248745dcc7ad315fb337a01"
+    }
+  ]
+}

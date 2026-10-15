@@ -1,0 +1,1782 @@
+[
+  {
+    "file": "game/css/ak-skin.css",
+    "line": 153,
+    "selector": ".sts-hand .hs-card",
+    "declarations": [
+      "transition:transform .2s var(--ease-pop), filter .2s"
+    ]
+  },
+  {
+    "file": "game/css/ak-skin.css",
+    "line": 154,
+    "selector": ".sts-hand .hs-card:hover",
+    "declarations": [
+      "filter:brightness(1.12) drop-shadow(0 0 14px var(--ak-blue-glow))"
+    ]
+  },
+  {
+    "file": "game/css/base-archive-facilities-v12.css",
+    "line": 55,
+    "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12-display .hs-card",
+    "declarations": [
+      "width:230px",
+      "max-width:none",
+      "margin:0",
+      "font-size:var(--base-type-label,19px)"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-rework.css",
+    "line": 17,
+    "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card .hs-card",
+    "declarations": [
+      "width:100%",
+      "font-size:13px"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-rework.css",
+    "line": 19,
+    "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card-face .hs-card",
+    "declarations": [
+      "width:100%"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-rework.css",
+    "line": 75,
+    "selector": "#overlay #hubMain.pg.hub.base-camp .warehouse-v2 .stash-cell .hs-card",
+    "declarations": [
+      "width:100%",
+      "max-width:none",
+      "font-size:12px"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-rework.css",
+    "line": 138,
+    "selector": "#overlay #hubMain.pg.hub.base-camp .person-pool-card .hs-card",
+    "declarations": [
+      "width:100%",
+      "max-width:none",
+      "font-size:12px"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-rework.css",
+    "line": 251,
+    "selector": "#overlay #depMain.pg.hub.camp-detail .bag-cell .hs-card",
+    "declarations": [
+      "width:80%",
+      "max-width:none"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-roster.css",
+    "line": 194,
+    "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] .pv-body > .hs-card.lg",
+    "declarations": [
+      "width:100%",
+      "max-width:246px",
+      "margin:0 auto",
+      "font-size:23px"
+    ]
+  },
+  {
+    "file": "game/css/base-camp-roster.css",
+    "line": 226,
+    "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=\"true\"] .pool-card-button .hs-card",
+    "declarations": [
+      "width:100%",
+      "margin:0",
+      "font-size:calc(var(--camp-pool-card) / 10)"
+    ]
+  },
+  {
+    "file": "game/css/base-camp.css",
+    "line": 134,
+    "selector": "#overlay #hubMain.pg.hub.base-camp .stash-cell .hs-card",
+    "declarations": [
+      "font-size:14px"
+    ]
+  },
+  {
+    "file": "game/css/base-camp.css",
+    "line": 146,
+    "selector": "#overlay #hubMain.pg.hub.base-camp .pocket-thumb .hs-card",
+    "declarations": [
+      "font-size:8px"
+    ]
+  },
+  {
+    "file": "game/css/base-camp.css",
+    "line": 186,
+    "selector": "#overlay #hubMain.pg.hub.base-camp .shelf-visual .hs-card",
+    "declarations": [
+      "font-size:15px",
+      "transform:none"
+    ]
+  },
+  {
+    "file": "game/css/base-camp.css",
+    "line": 248,
+    "selector": "#overlay #hubMain.pg.hub.base-camp .coll-slot .hs-card",
+    "declarations": [
+      "font-size:10px"
+    ]
+  },
+  {
+    "file": "game/css/base-camp.css",
+    "line": 281,
+    "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card .hs-card",
+    "declarations": [
+      "font-size:12px",
+      "transform:none"
+    ]
+  },
+  {
+    "file": "game/css/base-camp.css",
+    "line": 289,
+    "selector": "#overlay #depMain.pg.hub.camp-detail .bag-cell .hs-card",
+    "declarations": [
+      "position:relative",
+      "inset:auto",
+      "margin:0",
+      "font-size:12px",
+      "transform:none"
+    ]
+  },
+  {
+    "file": "game/css/base-collection-v4.css",
+    "line": 15,
+    "selector": "#overlay #hubMain.pg.hub.base-camp .collection-card .hs-card",
+    "declarations": [
+      "width:100%",
+      "max-width:none",
+      "font-size:12px"
+    ]
+  },
+  {
+    "file": "game/css/base-logistics-trade-v12.css",
+    "line": 45,
+    "selector": "& .warehouse-card-art .hs-card",
+    "declarations": [
+      "box-sizing:border-box",
+      "flex:0 0 74%!important",
+      "width:74%!important",
+      "max-width:none!important",
+      "font-size:16px",
+      "margin:0"
+    ]
+  },
+  {
+    "file": "game/css/base-logistics-trade-v12.css",
+    "line": 114,
+    "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .trade-v12 :is(.trade-v5-thumb,.trade-v5-art) .hs-card",
+    "declarations": [
+      "flex:none",
+      "width:210px",
+      "margin:0"
+    ]
+  },
+  {
+    "file": "game/css/base-logistics-trade-v12.css",
+    "line": 119,
+    "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .trade-v12 .trade-v5-thumb .hs-card",
+    "declarations": [
+      "width:210px"
+    ]
+  },
+  {
+    "file": "game/css/base-logistics-trade-v12.css",
+    "line": 121,
+    "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .trade-v12 .trade-v5-art .hs-card",
+    "declarations": [
+      "width:174px"
+    ]
+  },
+  {
+    "file": "game/css/base-logistics-trade-v12.css",
+    "line": 127,
+    "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .trade-v12 .trade-v5-art .hs-card",
+    "declarations": [
+      "width:174px"
+    ]
+  },
+  {
+    "file": "game/css/base-personnel-v12.css",
+    "line": 134,
+    "selector": "& .pool-card-art > .hs-card",
+    "declarations": [
+      "width:100%!important",
+      "max-width:none!important",
+      "min-width:0!important",
+      "margin:0",
+      "transform:none",
+      "font-size:16px"
+    ]
+  },
+  {
+    "file": "game/css/base.css",
+    "line": 332,
+    "selector": ".bag-view .bag-slot .hs-card",
+    "declarations": [
+      "width:10em",
+      "font-size:clamp(8.5px, calc(var(--game-layout-width, 100vw) * 0.008), 10.5px)",
+      "max-width:100%"
+    ]
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "line": 3,
+    "selector": "body:has(#viewport) #overlay .battle-stage.battle-sts .sts-hand .hs-card",
+    "declarations": [
+      "width:220px!important",
+      "font-size:22px!important",
+      "margin:0!important"
+    ]
+  },
+  {
+    "file": "game/css/battle-hand-overhaul.css",
+    "line": 76,
+    "selector": "body:has(#viewport) #overlay .bt-hand-detail-art .hs-card",
+    "declarations": [
+      "width:420px!important",
+      "font-size:42px!important",
+      "max-width:100%",
+      "filter:drop-shadow(0 10px 24px #0009)"
+    ]
+  },
+  {
+    "file": "game/css/battle.css",
+    "line": 389,
+    "selector": ".sts-hand .hs-card.sm",
+    "declarations": [
+      "font-size:11px"
+    ]
+  },
+  {
+    "file": "game/css/battle.css",
+    "line": 479,
+    "selector": ".sts-hand .hs-card.sm",
+    "declarations": [
+      "font-size:16px"
+    ]
+  },
+  {
+    "file": "game/css/battle.css",
+    "line": 510,
+    "selector": ".sts-cardfly .hs-card",
+    "declarations": [
+      "font-size:16px"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 24,
+    "selector": ".hs-card[data-card-layout=\"split\"]",
+    "declarations": [
+      "display:grid",
+      "grid-template-columns:minmax(0,1fr)",
+      "grid-template-rows:53% 47%",
+      "container-type:inline-size",
+      "position:relative",
+      "isolation:isolate",
+      "box-sizing:border-box",
+      "height:auto",
+      "min-height:0",
+      "aspect-ratio:232 / 364",
+      "padding:0",
+      "border:0",
+      "border-radius:.22em",
+      "background:#1c252e",
+      "overflow:visible",
+      "box-shadow:none",
+      "font-family:var(--font-ui, 'HarmonyOS Sans SC', sans-serif)"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 31,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-art",
+    "declarations": [
+      "grid-row:1",
+      "position:relative",
+      "display:flex",
+      "align-items:center",
+      "justify-content:center",
+      "width:100%",
+      "height:100%",
+      "min-height:0",
+      "margin:0",
+      "padding:0",
+      "overflow:hidden",
+      "border:0",
+      "border-radius:.22em .22em 0 0",
+      "background:#242a35",
+      "z-index:0"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 36,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-art img",
+    "declarations": [
+      "display:block",
+      "width:100%",
+      "height:100%",
+      "padding:0"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 37,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-art > .ic",
+    "declarations": [
+      "width:50%",
+      "height:50%"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 38,
+    "selector": ".hs-card[data-card-id=\"tt7-goldencicada\"] .hsc-art img",
+    "declarations": [
+      "object-position:48% 38%"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 39,
+    "selector": ".hs-card[data-card-layout=\"split\"].tp2 .hsc-art img",
+    "declarations": [
+      "object-position:50% 0"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 40,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-copy",
+    "declarations": [
+      "grid-row:2",
+      "position:relative",
+      "display:flex",
+      "flex-direction:column",
+      "min-height:0",
+      "padding:10.34cqw 6.03cqw 5.6cqw",
+      "box-sizing:border-box",
+      "background:linear-gradient(#26323c, #1d2730 48%, #1c252e)",
+      "z-index:3"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 45,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-name",
+    "declarations": [
+      "display:block",
+      "position:relative",
+      "flex:none",
+      "width:100%",
+      "min-height:0",
+      "height:auto",
+      "margin:0",
+      "padding:0",
+      "border:0",
+      "background:none",
+      "box-shadow:none",
+      "clip-path:none",
+      "text-align:center",
+      "font-size:9.05cqw",
+      "line-height:1.35",
+      "font-weight:700",
+      "letter-spacing:.065em",
+      "color:#d8dfe1",
+      "overflow-wrap:anywhere",
+      "white-space:normal"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 51,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-name span",
+    "declarations": [
+      "color:inherit"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 52,
+    "selector": ".hs-card[data-card-layout=\"split\"][data-rarity=\"古朴\"] .hsc-name",
+    "declarations": [
+      "color:#e9e8e1"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 53,
+    "selector": ".hs-card[data-card-layout=\"split\"][data-rarity=\"稀有\"] .hsc-name",
+    "declarations": [
+      "color:#9ed5f5"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 54,
+    "selector": ".hs-card[data-card-layout=\"split\"][data-rarity=\"史诗\"] .hsc-name",
+    "declarations": [
+      "color:#ddbcf5"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 55,
+    "selector": ".hs-card[data-card-layout=\"split\"][data-rarity=\"衍生\"] .hsc-name",
+    "declarations": [
+      "color:#b5d9d4"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 56,
+    "selector": ".hs-card[data-card-layout=\"split\"][data-rarity=\"职业\"] .hsc-name",
+    "declarations": [
+      "color:#dce6ed"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 57,
+    "selector": ".hs-card[data-card-layout=\"split\"][data-rarity=\"传说\"] .hsc-name span,\n.hs-card[data-card-layout=\"split\"][data-rarity=\"棱彩\"] .hsc-name span",
+    "declarations": [
+      "color:transparent",
+      "background-clip:text",
+      "-webkit-background-clip:text",
+      "-webkit-text-stroke:0",
+      "text-shadow:none"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 62,
+    "selector": ".hs-card[data-card-layout=\"split\"][data-rarity=\"传说\"] .hsc-name span",
+    "declarations": [
+      "background-image:linear-gradient(105deg,#cd9a4a,#ffe8b1 38%,#f5d992 60%,#d8ac5d)"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 65,
+    "selector": ".hs-card[data-card-layout=\"split\"][data-rarity=\"棱彩\"] .hsc-name span",
+    "declarations": [
+      "background-image:linear-gradient(105deg,#f4b9df,#fff0c5 25%,#baf4e0 45%,#bcd6ff 68%,#e7c8ff 85%,#ffe7f8)",
+      "background-size:180% 100%",
+      "animation:cardPrismTitle 7s ease-in-out infinite alternate"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 69,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-desc",
+    "declarations": [
+      "display:block",
+      "flex:1",
+      "min-height:0",
+      "width:100%",
+      "height:auto",
+      "max-height:none",
+      "margin:6.46cqw 0 0",
+      "padding:0",
+      "border:0",
+      "background:none",
+      "box-shadow:none",
+      "color:#d2d9da",
+      "font-size:6.03cqw",
+      "line-height:1.65",
+      "text-align:center",
+      "overflow:auto",
+      "overscroll-behavior:contain",
+      "scrollbar-width:thin",
+      "scrollbar-color:#69818d transparent"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 75,
+    "selector": ".hs-card[data-card-layout=\"split\"][data-rule-density=\"dense\"] .hsc-desc,\n.hs-card[data-card-layout=\"split\"][data-rule-density=\"very-dense\"] .hsc-desc",
+    "declarations": [
+      "margin-top:4.3cqw",
+      "font-size:5.6cqw",
+      "line-height:1.55"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 79,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-desc > span",
+    "declarations": [
+      "display:block",
+      "white-space:pre-wrap",
+      "overflow-wrap:anywhere"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 80,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-desc :is(.d-num, .d-term, .d-kw)",
+    "declarations": [
+      "font-family:inherit",
+      "font-size:1em",
+      "font-style:normal"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 81,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-desc .d-num",
+    "declarations": [
+      "color:#e5c790",
+      "font-weight:700"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 82,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-desc .d-term",
+    "declarations": [
+      "color:inherit",
+      "font-weight:400"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 83,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-desc .d-term[data-term]",
+    "declarations": [
+      "color:var(--card-copy-term)",
+      "font-weight:600"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 84,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-desc .d-kw",
+    "declarations": [
+      "color:var(--card-copy-keyword)",
+      "font-weight:700"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 85,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-desc:focus-visible",
+    "declarations": [
+      "outline:1px solid #b8d4e0",
+      "outline-offset:2px"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 86,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-desc .bt-rulehint",
+    "declarations": [
+      "display:block",
+      "margin-top:.35em",
+      "color:#ffe9a0",
+      "font-weight:700"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 87,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-type",
+    "declarations": [
+      "position:absolute",
+      "inset:53% 2px auto",
+      "transform:translateY(-50%)",
+      "z-index:6",
+      "height:10.77cqw",
+      "display:flex",
+      "align-items:center",
+      "justify-content:center",
+      "background:none",
+      "border:0",
+      "padding:0",
+      "margin:0",
+      "line-height:1",
+      "white-space:nowrap"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 92,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-type:before,\n.hs-card[data-card-layout=\"split\"] .hsc-type:after",
+    "declarations": [
+      "content:''",
+      "height:1px",
+      "flex:1",
+      "background:linear-gradient(90deg,#58697620,#81939e88)"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 96,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-type:after",
+    "declarations": [
+      "transform:scaleX(-1)"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 97,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-type-label",
+    "declarations": [
+      "position:relative",
+      "isolation:isolate",
+      "min-width:50cqw",
+      "height:10.77cqw",
+      "padding:0 6cqw",
+      "display:flex",
+      "align-items:center",
+      "justify-content:center",
+      "gap:3.88cqw",
+      "background:#667782",
+      "clip-path:polygon(7% 0,93% 0,100% 50%,93% 100%,7% 100%,0 50%)"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 102,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-type-label:before",
+    "declarations": [
+      "content:''",
+      "position:absolute",
+      "inset:1px",
+      "z-index:-1",
+      "background:#26323c",
+      "clip-path:polygon(7% 0,93% 0,100% 50%,93% 100%,7% 100%,0 50%)"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 106,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-type-primary",
+    "declarations": [
+      "color:#e0e5e5",
+      "font-size:5.17cqw",
+      "letter-spacing:.14em"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 107,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-type-secondary",
+    "declarations": [
+      "color:#aebbc3",
+      "font-size:4.74cqw",
+      "letter-spacing:.08em"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 108,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-type-secondary:before",
+    "declarations": [
+      "content:'·'",
+      "padding-right:3.45cqw",
+      "color:#798b97"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 109,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-cost",
+    "declarations": [
+      "position:absolute",
+      "top:-5.17cqw",
+      "left:-7.76cqw",
+      "width:19.83cqw",
+      "height:21.98cqw",
+      "display:grid",
+      "place-items:center",
+      "box-sizing:border-box",
+      "padding-bottom:1.29cqw",
+      "z-index:8",
+      "border:0",
+      "border-radius:0",
+      "background:none",
+      "transform:none",
+      "box-shadow:none",
+      "font:700 13.36cqw/1 'Card Oxanium', sans-serif",
+      "font-variant-numeric:lining-nums tabular-nums",
+      "color:#f1eee1",
+      "text-shadow:0 2px 1px #0b1115",
+      "isolation:isolate"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 116,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-cost:before,\n.hs-card[data-card-layout=\"split\"] .hsc-cost:after",
+    "declarations": [
+      "content:''",
+      "position:absolute",
+      "z-index:-1",
+      "pointer-events:none",
+      "clip-path:polygon(15% 0,85% 0,100% 13%,100% 75%,50% 100%,0 75%,0 13%)"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 121,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-cost:before",
+    "declarations": [
+      "inset:0",
+      "background:#a5b7bc"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 122,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-cost:after",
+    "declarations": [
+      "inset:.86cqw .86cqw 1.29cqw",
+      "background:linear-gradient(135deg,#354852,#1b2b35 65%)"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 123,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-cost.mod-down",
+    "declarations": [
+      "color:#a4e3b8"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 124,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-cost.mod-down:after",
+    "declarations": [
+      "background:linear-gradient(135deg,#315844,#15392d)"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 125,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-cost.mod-up",
+    "declarations": [
+      "color:#f0a494"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 126,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-cost.mod-up:after",
+    "declarations": [
+      "background:linear-gradient(135deg,#653c32,#3d211d)"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 127,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-frame",
+    "declarations": [
+      "position:absolute",
+      "left:var(--frame-left)",
+      "top:var(--frame-top)",
+      "width:var(--frame-width)",
+      "height:auto",
+      "max-width:none",
+      "padding:0",
+      "margin:0",
+      "border:0",
+      "object-fit:contain",
+      "z-index:5",
+      "pointer-events:none",
+      "filter:drop-shadow(1px 3px 2px #0008)"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 132,
+    "selector": ".hs-card[data-card-layout=\"split\"] :is(.hsc-dmg,.hsc-val)",
+    "declarations": [
+      "display:none"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 133,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-kw",
+    "declarations": [
+      "display:flex",
+      "gap:.25em",
+      "flex-wrap:wrap",
+      "justify-content:center",
+      "margin-top:.3em"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 134,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-kw span",
+    "declarations": [
+      "font-size:5.6cqw",
+      "color:#c5d5de"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 135,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-kw .ic",
+    "declarations": [
+      "width:1em",
+      "height:1em"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 136,
+    "selector": ".hs-card[data-card-layout=\"split\"][data-has-description=\"true\"] .hsc-kw",
+    "declarations": [
+      "display:none"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 137,
+    "selector": ".hs-card[data-card-layout=\"split\"] .hsc-prism-halo",
+    "declarations": [
+      "position:absolute",
+      "inset:-12.9cqw",
+      "border-radius:.34em",
+      "padding:1.29cqw",
+      "background:conic-gradient(from 20deg,#f6b8dc,#efd99e,#9de7c9,#9ccaf3,#c1a5f1,#f6b8dc)",
+      "mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)",
+      "mask-composite:exclude",
+      "-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)",
+      "-webkit-mask-composite:xor",
+      "opacity:.78",
+      "filter:blur(3px)",
+      "pointer-events:none",
+      "z-index:4",
+      "animation:cardPrismHalo 6s ease-in-out infinite alternate"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 145,
+    "selector": ".hs-card[data-card-layout=\"split\"][data-rarity=\"棱彩\"] .hsc-frame",
+    "declarations": [
+      "filter:drop-shadow(0 0 5px #a9dfff99) drop-shadow(0 0 10px #c1a8ed66)"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 146,
+    "selector": ".hs-card[data-card-layout=\"split\"] .rv-beam",
+    "declarations": [
+      "position:absolute",
+      "inset:0",
+      "overflow:hidden",
+      "pointer-events:none",
+      "z-index:2"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 147,
+    "selector": ".hs-card[data-card-layout=\"split\"] .rv-beam:before",
+    "declarations": [
+      "content:''",
+      "position:absolute",
+      "top:-15%",
+      "left:-110%",
+      "width:70%",
+      "height:130%",
+      "background:linear-gradient(90deg,transparent,#edc3f22e 30%,#e8f7f837 50%,#bbdafa25 70%,transparent)",
+      "transform:skewX(-22deg)",
+      "animation:cardPrismSheen 7s ease-in-out infinite"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 156,
+    "selector": ".hs-card[data-card-layout=\"split\"] :is(.hsc-name span,.hsc-prism-halo,.rv-beam:before)",
+    "declarations": [
+      "animation:none"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 158,
+    "selector": "body.reduce-motion .hs-card[data-card-layout=\"split\"] :is(.hsc-name span,.hsc-prism-halo,.rv-beam:before)",
+    "declarations": [
+      "animation:none"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 160,
+    "selector": ":is(#overlay,#cardZoom,#cardPreview) :is(.pk-card,.shop-slot,.stash-cell,.shelf-visual,.pocket-thumb,.cz-card):has(.hs-card)",
+    "declarations": [
+      "overflow:visible"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 161,
+    "selector": "#overlay :is(.pk-card,.shop-slot,.stash-cell):has(> .hs-card)",
+    "declarations": [
+      "padding:18% 15% 13%"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 162,
+    "selector": "#overlay :is(.pk-card,.shop-slot,.stash-cell) > .hs-card",
+    "declarations": [
+      "max-width:100%"
+    ]
+  },
+  {
+    "file": "game/css/card-layout-selected.css",
+    "line": 163,
+    "selector": "#overlay .sts-hand .hs-card",
+    "declarations": [
+      "margin-top:1.7em",
+      "margin-bottom:.8em"
+    ]
+  },
+  {
+    "file": "game/css/card-v3.css",
+    "line": 16,
+    "selector": ".hs-card .hsc-art img[src*=\"expedition-starters\"],.hs-card .hsc-art img[src*=\"wu-\"]",
+    "declarations": [
+      "object-position:50% 28%"
+    ]
+  },
+  {
+    "file": "game/css/cards.css",
+    "line": 2,
+    "selector": ".hs-card",
+    "declarations": [
+      "position:relative",
+      "width:10em",
+      "font-size:14px",
+      "box-sizing:border-box",
+      "user-select:none"
+    ]
+  },
+  {
+    "file": "game/css/cards.css",
+    "line": 3,
+    "selector": ".hs-card.sm",
+    "declarations": [
+      "font-size:12px"
+    ]
+  },
+  {
+    "file": "game/css/cards.css",
+    "line": 4,
+    "selector": ".hs-card.lg",
+    "declarations": [
+      "font-size:24px"
+    ]
+  },
+  {
+    "file": "game/css/cards.css",
+    "line": 5,
+    "selector": ".hs-card.xl",
+    "declarations": [
+      "font-size:30px"
+    ]
+  },
+  {
+    "file": "game/css/character-pool-cover.css",
+    "line": 46,
+    "selector": "#overlay .card.page .pg.cls-pool-page .pv-body .hs-card.lg",
+    "declarations": [
+      "margin:0 auto",
+      "font-size:20px"
+    ]
+  },
+  {
+    "file": "game/css/character-pool-cover.css",
+    "line": 70,
+    "selector": "#overlay .card.page .pg.cls-pool-page .pool-card-button .hs-card",
+    "declarations": [
+      "margin:0",
+      "font-size:16px"
+    ]
+  },
+  {
+    "file": "game/css/departure-cover.css",
+    "line": 113,
+    "selector": "#overlay .card.page #depMain.departure-cover .dep-card .hs-card",
+    "declarations": [
+      "font-size:calc(var(--dep-pool-card-w) / 10)"
+    ]
+  },
+  {
+    "file": "game/css/departure-cover.css",
+    "line": 117,
+    "selector": "#overlay .card.page #depMain.departure-cover :is(.dep-card-face, .bag-cell) > .hs-card",
+    "declarations": [
+      "width:100%",
+      "box-sizing:border-box"
+    ]
+  },
+  {
+    "file": "game/css/departure-cover.css",
+    "line": 150,
+    "selector": "#overlay .card.page #depMain.departure-cover .bag-cell .hs-card",
+    "declarations": [
+      "font-size:12.4px"
+    ]
+  },
+  {
+    "file": "game/css/departure-selected.css",
+    "line": 37,
+    "selector": "& #depPool .dep-card-face .hs-card",
+    "declarations": [
+      "position:relative",
+      "inset:auto",
+      "width:100%",
+      "max-width:100%",
+      "margin:0",
+      "font-size:16px",
+      "transform:none"
+    ]
+  },
+  {
+    "file": "game/css/departure-selected.css",
+    "line": 45,
+    "selector": "& #depBag .bag-cell > .hs-card",
+    "declarations": [
+      "position:relative",
+      "inset:auto",
+      "flex:none",
+      "width:100%",
+      "max-width:100%",
+      "margin:0",
+      "font-size:16px",
+      "transform:none"
+    ]
+  },
+  {
+    "file": "game/css/entry-events.css",
+    "line": 27,
+    "selector": "body:has(#viewport) #overlay .event-scene .fire-result-cards .hs-card",
+    "declarations": [
+      "width:200px",
+      "font-size:12px"
+    ]
+  },
+  {
+    "file": "game/css/entry-events.css",
+    "line": 102,
+    "selector": "#overlay .card.page .entry-card-preview .hs-card",
+    "declarations": [
+      "font-size:30px"
+    ]
+  },
+  {
+    "file": "game/css/expedition-battle.css",
+    "line": 205,
+    "selector": "#cardGet[data-combat=\"true\"] .lg-card .hs-card",
+    "declarations": [
+      "width:160px"
+    ]
+  },
+  {
+    "file": "game/css/expedition-battle.css",
+    "line": 281,
+    "selector": "body #overlay .battle-decision[data-decision-kind=\"discover\"] .bt-card .hs-card",
+    "declarations": [
+      "width:220px"
+    ]
+  },
+  {
+    "file": "game/css/expedition-battle.css",
+    "line": 288,
+    "selector": "body #overlay .battle-decision:is([data-decision-kind=\"formation\"],[data-decision-kind=\"hand-select\"],[data-decision-kind=\"pile\"]) .hs-card",
+    "declarations": [
+      "width:190px"
+    ]
+  },
+  {
+    "file": "game/css/expedition-battle.css",
+    "line": 298,
+    "selector": "body #overlay .battle-decision[data-decision-kind=\"bag\"] .battle-bag-slot .hs-card",
+    "declarations": [
+      "width:185px"
+    ]
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "line": 36,
+    "selector": "body #overlay .card.bag-page .pk-card .hs-card",
+    "declarations": [
+      "font-size:14px",
+      "width:140px",
+      "flex:none",
+      "margin:0"
+    ]
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "line": 64,
+    "selector": "body #overlay .card.bag-page .bag-reference .pk-card .hs-card",
+    "declarations": [
+      "width:160px",
+      "font-size:16px"
+    ]
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "line": 161,
+    "selector": "#overlay .hub-page .stash-cell .hs-card",
+    "declarations": [
+      "width:100%",
+      "font-size:clamp(11px, calc(var(--game-layout-width, 100vw) * 0.009000000000000001), 13px)"
+    ]
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "line": 176,
+    "selector": "#overlay .hub-page .pocket-thumb .hs-card",
+    "declarations": [
+      "font-size:3.7px"
+    ]
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "line": 214,
+    "selector": "#overlay .hub-shop .shelf-item .shelf-visual .hs-card",
+    "declarations": [
+      "font-size:8px"
+    ]
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "line": 218,
+    "selector": "#overlay .hub-page .shelf-item .shelf-visual .hs-card",
+    "declarations": [
+      "font-size:6.6px"
+    ]
+  },
+  {
+    "file": "game/css/expedition-library.css",
+    "line": 111,
+    "selector": "body.cardlib-open #cardZoom.cz-neg .cz-card .hsc-art img",
+    "declarations": [
+      "filter:invert(1) hue-rotate(180deg) sepia(.12)"
+    ]
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "line": 51,
+    "selector": "body:has(#viewport) #overlay .result-pg .ext-cards .hs-card",
+    "declarations": [
+      "width:200px",
+      "font-size:12px"
+    ]
+  },
+  {
+    "file": "game/css/expedition-rewards.css",
+    "line": 142,
+    "selector": "body:has(#viewport) #overlay .reward-replica .reward-card .hs-card",
+    "declarations": [
+      "width:100%",
+      "max-width:none",
+      "font-size:16px"
+    ]
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "line": 113,
+    "selector": "#overlay .pg.cls-pool-page .pool-cell .hs-card",
+    "declarations": [
+      "position:relative",
+      "z-index:1",
+      "width:100%",
+      "font-size:clamp(14.2px,calc(var(--game-layout-width, 100vw) * 0.0102),15px)"
+    ]
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "line": 214,
+    "selector": "#overlay .pg.cls-pool-page .pool-side .pv-body .hs-card",
+    "declarations": [
+      "margin:0 auto"
+    ]
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "line": 239,
+    "selector": "#overlay .pg.cls-pool-page .pool-cell .hs-card",
+    "declarations": [
+      "width:100%",
+      "font-size:14px"
+    ]
+  },
+  {
+    "file": "game/css/expedition-roster.css",
+    "line": 243,
+    "selector": "#overlay .pg.cls-pool-page .pool-card-button .hs-card",
+    "declarations": [
+      "width:100%"
+    ]
+  },
+  {
+    "file": "game/css/expedition-shop.css",
+    "line": 37,
+    "selector": "body:has(#viewport) #overlay .shop-pg.shop-market .shop-preview .hs-card",
+    "declarations": [
+      "flex:none",
+      "width:min(174px,calc((100cqh - 46px) * 272 / 406))",
+      "max-width:78%",
+      "margin:0",
+      "font-size:13px",
+      "pointer-events:none"
+    ]
+  },
+  {
+    "file": "game/css/expedition-shop.css",
+    "line": 38,
+    "selector": "#overlay .shop-pg.shop-market .shop-preview .hs-card:is(.rv4,.rv7,.rv-prism)",
+    "declarations": [
+      "margin:0"
+    ]
+  },
+  {
+    "file": "game/css/expedition-shop.css",
+    "line": 65,
+    "selector": "body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card",
+    "declarations": [
+      "width:350px",
+      "max-width:none",
+      "font-size:23px"
+    ]
+  },
+  {
+    "file": "game/css/feedback-oct12.css",
+    "line": 5,
+    "selector": ".departure-drag-card .hs-card",
+    "declarations": [
+      "width:100%"
+    ]
+  },
+  {
+    "file": "game/css/feedback-oct12.css",
+    "line": 40,
+    "selector": "& :is(#depPool .dep-card-face .hs-card,#depBag .bag-cell > .hs-card)",
+    "declarations": [
+      "width:88%!important",
+      "max-width:88%!important",
+      "min-width:0!important",
+      "margin:0 auto",
+      "box-sizing:border-box",
+      "font-size:12px"
+    ]
+  },
+  {
+    "file": "game/css/home-scene.css",
+    "line": 1,
+    "selector": ".home-display__card>.hs-card",
+    "declarations": [
+      "position:absolute",
+      "left:50%",
+      "top:50%",
+      "margin:0!important",
+      "transform:translate(-50%,-50%) scale(.60)",
+      "transform-origin:center",
+      "flex:none"
+    ]
+  },
+  {
+    "file": "game/css/hub-stash-cover.css",
+    "line": 39,
+    "selector": "#overlay .card.page #hubMain.pg.hub.hub-cover .stash-workspace .stash-cell .hs-card",
+    "declarations": [
+      "font-size:14px"
+    ]
+  },
+  {
+    "file": "game/css/hub-stash-cover.css",
+    "line": 48,
+    "selector": "#overlay .card.page #hubMain.pg.hub.hub-cover .stash-view-pocket .pocket-thumb .hs-card",
+    "declarations": [
+      "font-size:6.8px"
+    ]
+  },
+  {
+    "file": "game/css/hub.css",
+    "line": 117,
+    "selector": ".stash-pop-card .hs-card",
+    "declarations": [
+      "font-size:12px"
+    ]
+  },
+  {
+    "file": "game/css/hub.css",
+    "line": 166,
+    "selector": ".coll-cards .hs-card",
+    "declarations": [
+      "font-size:8px"
+    ]
+  },
+  {
+    "file": "game/css/inventory-zoom.css",
+    "line": 10,
+    "selector": "body:has(#viewport) #cardZoom.inventory-zoom .cz-card > .hs-card",
+    "declarations": [
+      "width:100%"
+    ]
+  },
+  {
+    "file": "game/css/overlays.css",
+    "line": 26,
+    "selector": ".pk-card .hs-card",
+    "declarations": [
+      "width:10em",
+      "font-size:clamp(9px, calc(var(--game-layout-width, 100vw) * 0.008199999999999999), 11px)",
+      "max-width:100%"
+    ]
+  },
+  {
+    "file": "game/css/overlays.css",
+    "line": 471,
+    "selector": ".doom-cards .hs-card",
+    "declarations": [
+      "font-size:9.5px"
+    ]
+  },
+  {
+    "file": "game/css/page-deploy.css",
+    "line": 452,
+    "selector": "#overlay #depMain .dep-card .hs-card",
+    "declarations": [
+      "font-size:calc(var(--dep-card-w) / 10)"
+    ]
+  },
+  {
+    "file": "game/css/page-expedition-hud.css",
+    "line": 110,
+    "selector": ".expedition-feedback-cards .hs-card",
+    "declarations": [
+      "width:154px",
+      "font-size:15.4px",
+      "flex:none",
+      "pointer-events:none"
+    ]
+  },
+  {
+    "file": "game/css/page-shop.css",
+    "line": 162,
+    "selector": "#overlay #hubMain.hub-shop .shelf-item .shelf-visual .hs-card",
+    "declarations": [
+      "font-size:10px"
+    ]
+  },
+  {
+    "file": "game/css/roster-reference.css",
+    "line": 39,
+    "selector": "#overlay .card.page .pg.cls2-page.roster-reference .cls2-example-art .hs-card",
+    "declarations": [
+      "width:140px",
+      "margin:0",
+      "font-size:14px",
+      "transform:none"
+    ]
+  },
+  {
+    "file": "game/css/scenes.css",
+    "line": 116,
+    "selector": ".bag-ghost .hs-card",
+    "declarations": [
+      "font-size:13px"
+    ]
+  },
+  {
+    "file": "game/css/scenes.css",
+    "line": 440,
+    "selector": ".sell-item.no .hs-card",
+    "declarations": [
+      "filter:grayscale(.75) brightness(.72)"
+    ]
+  },
+  {
+    "file": "game/css/tactical-card-redesign.css",
+    "line": 4,
+    "selector": "body[data-ui-cover-context='ordinary'] #overlay .card.battle .sts-hand .hs-card",
+    "declarations": [
+      "width:10em!important",
+      "font-size:14px!important"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 31,
+    "selector": ".hs-card,.card-tile",
+    "declarations": [
+      "box-shadow:0 4px 12px #0f101170"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 106,
+    "selector": "#cardPreview .hs-card",
+    "declarations": [
+      "transform:scale(1.5)",
+      "transform-origin:center center"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 108,
+    "selector": "#overlay .lib-cardwrap:where(:not(.studio-photo)) .hs-card",
+    "declarations": [
+      "width:100%",
+      "font-size:clamp(11px,calc(var(--game-layout-width, 100vw) * 0.0095),14px)"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 109,
+    "selector": "#overlay .card.chest .bt-hand .hs-card",
+    "declarations": [
+      "font-size:20px"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 110,
+    "selector": "#overlay .card.chest .bt-hand[data-n=\"5\"] .hs-card",
+    "declarations": [
+      "font-size:17px"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 111,
+    "selector": "#overlay .card.chest .bt-hand[data-n=\"6\"] .hs-card,\n#overlay .card.chest .bt-hand:not([data-n]) .hs-card",
+    "declarations": [
+      "font-size:16px"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 389,
+    "selector": "#cardPreview .hs-card",
+    "declarations": [
+      "transform:scale(1.22)"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 416,
+    "selector": ".dep-card .hs-card",
+    "declarations": [
+      "font-size:10px"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 429,
+    "selector": ".bag-cell .hs-card",
+    "declarations": [
+      "position:absolute",
+      "left:50%",
+      "top:50%",
+      "transform:translate(-50%,-50%)",
+      "font-size:6.6px",
+      "margin:0"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 478,
+    "selector": ".bag-cell .hs-card",
+    "declarations": [
+      "font-size:7.6px"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 491,
+    "selector": "#cardZoom .cz-card .hs-card",
+    "declarations": [
+      "font-size:34px"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 787,
+    "selector": "#overlay .sc-shop .shop-slot .hs-card",
+    "declarations": [
+      "width:100%",
+      "max-width:190px"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 808,
+    "selector": "#overlay .bag-view .bag-slot .flip-face.flip-front .hs-card",
+    "declarations": [
+      "width:100%",
+      "max-width:none",
+      "font-size:calc((100cqw - 9cqw)/10)"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 877,
+    "selector": "#overlay .card.battle-bag .battle-bag-slot .hs-card",
+    "declarations": [
+      "margin:4.5cqw",
+      "width:calc(100% - 9cqw)",
+      "font-size:calc((100cqw - 9cqw)/10)"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 996,
+    "selector": "#overlay .card.discover .bt-hand .hs-card",
+    "declarations": [
+      "font-size:18px"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 998,
+    "selector": "#overlay .card.discover .bt-hand.sac-hand .hs-card",
+    "declarations": [
+      "font-size:14px"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 1084,
+    "selector": ".ammo-teach .at-card .hs-card",
+    "declarations": [
+      "font-size:11px",
+      "transform:scale(.92)"
+    ]
+  },
+  {
+    "file": "game/css/winter.css",
+    "line": 1103,
+    "selector": "#overlay .result-pg .ext-card .hs-card",
+    "declarations": [
+      "font-size:12px"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/career/frames.css",
+    "line": 2,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6",
+    "declarations": [
+      "--rose-frame:url('./neutral.svg')",
+      "--rose-top:9.852217%",
+      "--rose-right:11.764706%",
+      "--rose-bottom:9.852217%",
+      "--rose-left:11.764706%"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/career/frames.css",
+    "line": 3,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6.cf0",
+    "declarations": [
+      "--rose-frame:url('./heixiang.svg')"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/career/frames.css",
+    "line": 4,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6.cf1",
+    "declarations": [
+      "--rose-frame:url('./wu.svg')"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/career/frames.css",
+    "line": 5,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6.cf2",
+    "declarations": [
+      "--rose-frame:url('./baita.svg')"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/career/frames.css",
+    "line": 6,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6.cf3",
+    "declarations": [
+      "--rose-frame:url('./xingyue.svg')"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/career/frames.css",
+    "line": 7,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6.cf4",
+    "declarations": [
+      "--rose-frame:url('./changwuyu.svg')"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/rose/frames.css",
+    "line": 2,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card",
+    "declarations": [
+      "--rose-frame:url('./initial.svg')",
+      "--rose-top:9.19118cqw",
+      "--rose-right:5.88235cqw",
+      "--rose-bottom:6.25000cqw",
+      "--rose-left:4.04412cqw"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/rose/frames.css",
+    "line": 3,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv1",
+    "declarations": [
+      "--rose-frame:url('../rose-painterly-1012/common.webp')",
+      "--rose-top:9.118774%",
+      "--rose-right:11.647059%",
+      "--rose-bottom:7.816092%",
+      "--rose-left:9.647059%"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/rose/frames.css",
+    "line": 4,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv2",
+    "declarations": [
+      "--rose-frame:url('../rose-painterly-1012/rare.webp')",
+      "--rose-top:9.111792%",
+      "--rose-right:11.764706%",
+      "--rose-bottom:7.733538%",
+      "--rose-left:9.529412%"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/rose/frames.css",
+    "line": 5,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv3",
+    "declarations": [
+      "--rose-frame:url('../rose-painterly-1012/epic.webp')",
+      "--rose-top:10.821485%",
+      "--rose-right:13.438257%",
+      "--rose-bottom:8.846761%",
+      "--rose-left:12.227603%"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/rose/frames.css",
+    "line": 6,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv4",
+    "declarations": [
+      "--rose-frame:url('../rose-painterly-1012/legendary.webp')",
+      "--rose-top:12.205045%",
+      "--rose-right:14.883149%",
+      "--rose-bottom:10.414972%",
+      "--rose-left:13.530135%"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/rose/frames.css",
+    "line": 7,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv5",
+    "declarations": [
+      "--rose-frame:url('./token.svg')",
+      "--rose-top:9.19118cqw",
+      "--rose-right:5.88235cqw",
+      "--rose-bottom:6.25000cqw",
+      "--rose-left:4.04412cqw"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/rose/frames.css",
+    "line": 8,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6",
+    "declarations": [
+      "--rose-frame:url('./class.svg')",
+      "--rose-top:9.19118cqw",
+      "--rose-right:5.88235cqw",
+      "--rose-bottom:6.25000cqw",
+      "--rose-left:4.04412cqw"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/rose/frames.css",
+    "line": 9,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card:is(.rv7,.rv-prism)",
+    "declarations": [
+      "--rose-frame:url('../rose-painterly-1012/prism.webp')",
+      "--rose-top:13.651591%",
+      "--rose-right:17.005076%",
+      "--rose-bottom:12.060302%",
+      "--rose-left:15.989848%"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/rose/frames.css",
+    "line": 10,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card::before",
+    "declarations": [
+      "content:''!important",
+      "display:block!important",
+      "position:absolute!important",
+      "inset:calc(-1 * var(--rose-top)) calc(-1 * var(--rose-right)) calc(-1 * var(--rose-bottom)) calc(-1 * var(--rose-left))!important",
+      "width:auto!important",
+      "height:auto!important",
+      "padding:0!important",
+      "border:0!important",
+      "border-radius:0!important",
+      "background:var(--rose-frame) center / 100% 100% no-repeat!important",
+      "box-shadow:none!important",
+      "clip-path:none!important",
+      "-webkit-mask:none!important",
+      "mask:none!important",
+      "animation:none!important",
+      "opacity:1!important",
+      "z-index:2!important",
+      "pointer-events:none!important",
+      "filter:drop-shadow(2px 5px 3px #0009)"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/rose/frames.css",
+    "line": 11,
+    "selector": "body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card .rv-beam",
+    "declarations": [
+      "display:none!important"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/rose/frames.css",
+    "line": 13,
+    "selector": "body:has(#viewport) #overlay .warehouse-card-art:has(.hs-card)",
+    "declarations": [
+      "display:flex!important",
+      "align-items:center",
+      "justify-content:center",
+      "overflow:visible!important"
+    ]
+  },
+  {
+    "file": "game/css/card-frames/rose/frames.css",
+    "line": 14,
+    "selector": "body:has(#viewport) #overlay .warehouse-card-art .hs-card",
+    "declarations": [
+      "width:74%!important",
+      "height:auto!important",
+      "min-height:0!important",
+      "aspect-ratio:272/406",
+      "flex:0 0 74%"
+    ]
+  }
+]

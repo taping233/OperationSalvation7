@@ -1,0 +1,16 @@
+{
+  "id": "fire",
+  "name": "火焰精灵",
+  "model": "nai-diffusion-4-5-full",
+  "recipe": "1.3",
+  "width": 1024,
+  "height": 1024,
+  "steps": 28,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nAn original tiny magical fire sprite, a SINGLE BRIGHT FLAME SHAPED CREATURE with a flowing teardrop silhouette. Its body is entirely fire, with a rounded golden center and three curved orange-red tongues rising from the top like a windblown crown; two small side flickers and a tapered lower point are continuous with the same flame body. Two small amber eyes are visible within the golden center, giving it an impish friendly expression. There is no separate head, skin, hair, torso, egg, rock, coal or dark sphere. It hovers diagonally as if darting forward, trailing only three tiny sparks. Make the complete luminous creature comfortably fit inside the canvas with wide margins on every side. Rich painterly variation in the translucent heat and crisp broken outer flame edges.\n\nOriginal high-quality painterly character concept for a fantasy card-game companion selection screen. Rich, memorable design with coherent anatomy, tactile materials and a readable silhouette at small display size.\n\nA single complete character in a lively three-quarter view, centered in a square 1024 by 1024 canvas, occupying about 75 percent of the frame. Entire silhouette visible with clean margins. Plain matte warm-gray background with only a faint contact shadow, no landscape, frame, lettering or other characters.\n\nDominant luminous butter-yellow and bright orange, with restrained crimson at the outer tips and a few warm smoky accents. Keep the entire main body light and fiery, not black; layered painted flame planes and a clear silhouette.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "uc": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, humanoid, girl, boy, baby, child, person, human face, hair, skin, clothes, arms, hands, legs, egg, egg shell, coal, rock, black sphere, dark orb, candle, campfire, fire monster, many faces, separate floating heads, cropped flame, giant eyes, cropped body, complex background, typography, border",
+  "naiImageReferences": [],
+  "seed": 438709190,
+  "source": "docs\\evidence\\2026-10-13-WF-pets-nai-six\\source\\fire-v3.png",
+  "sha256": "e7a8ec6121bb7d83ada8fe0a5b7edcc2b9f3ea6b52c2882a2c5501317609db55",
+  "bytes": 960745
+}

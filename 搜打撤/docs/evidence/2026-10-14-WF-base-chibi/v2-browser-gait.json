@@ -1,0 +1,367 @@
+{
+  "source": "Codex in-app browser; real walk button input",
+  "samples": [
+    {
+      "back": [
+        767.433,
+        1454.141
+      ],
+      "backPlanted": false,
+      "direction": -1,
+      "front": [
+        596.096,
+        1493
+      ],
+      "frontPlanted": true,
+      "phase": 580.5690750561229,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 973.9699200000006
+    },
+    {
+      "back": [
+        783.819,
+        1475.419
+      ],
+      "backPlanted": false,
+      "direction": -1,
+      "front": [
+        582.218,
+        1493
+      ],
+      "frontPlanted": true,
+      "phase": 581.00950468,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 969.0912000000004
+    },
+    {
+      "back": [
+        772.143,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        567.156,
+        1493
+      ],
+      "frontPlanted": true,
+      "phase": 581.4875467510952,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 963.7958399999992
+    },
+    {
+      "back": [
+        753.602,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        550.245,
+        1491.765
+      ],
+      "frontPlanted": false,
+      "phase": 582.0759995543472,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 957.2774399999992
+    },
+    {
+      "back": [
+        737.373,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        567.671,
+        1468.162
+      ],
+      "frontPlanted": false,
+      "phase": 582.5910474202859,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 951.5721599999996
+    },
+    {
+      "back": [
+        719.998,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        614.006,
+        1448.627
+      ],
+      "frontPlanted": false,
+      "phase": 583.142494428694,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 945.46368
+    },
+    {
+      "back": [
+        699.163,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        667.001,
+        1474.556
+      ],
+      "frontPlanted": false,
+      "phase": 583.8037455168842,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 938.13888
+    },
+    {
+      "back": [
+        679.456,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        672.442,
+        1493
+      ],
+      "frontPlanted": true,
+      "phase": 584.4292041149795,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 931.2105599999998
+    },
+    {
+      "back": [
+        659.768,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        652.754,
+        1493
+      ],
+      "frontPlanted": true,
+      "phase": 585.0540560607003,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 924.2889599999996
+    },
+    {
+      "back": [
+        668.105,
+        1458.412
+      ],
+      "backPlanted": false,
+      "direction": -1,
+      "front": [
+        634.213,
+        1493
+      ],
+      "frontPlanted": true,
+      "phase": 585.642508863952,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 917.7705599999996
+    },
+    {
+      "back": [
+        711.657,
+        1434.247
+      ],
+      "backPlanted": false,
+      "direction": -1,
+      "front": [
+        616.838,
+        1493
+      ],
+      "frontPlanted": true,
+      "phase": 586.19395587236,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 911.6620800000002
+    },
+    {
+      "back": [
+        757.187,
+        1446.083
+      ],
+      "backPlanted": false,
+      "direction": -1,
+      "front": [
+        600.629,
+        1493
+      ],
+      "frontPlanted": true,
+      "phase": 586.7083970859244,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 905.9635200000008
+    },
+    {
+      "back": [
+        783.597,
+        1474.468
+      ],
+      "backPlanted": false,
+      "direction": -1,
+      "front": [
+        583.234,
+        1493
+      ],
+      "frontPlanted": true,
+      "phase": 587.2604507467069,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 899.8483200000009
+    },
+    {
+      "back": [
+        770.865,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        565.878,
+        1493
+      ],
+      "frontPlanted": true,
+      "phase": 587.8112911027405,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 893.7465599999997
+    },
+    {
+      "back": [
+        753.49,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        550.224,
+        1491.696
+      ],
+      "frontPlanted": false,
+      "phase": 588.3627381111486,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 887.6380800000002
+    },
+    {
+      "back": [
+        736.095,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        570.439,
+        1465.83
+      ],
+      "frontPlanted": false,
+      "phase": 588.9147917719309,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 881.5228800000001
+    },
+    {
+      "back": [
+        712.928,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        634.514,
+        1452.385
+      ],
+      "frontPlanted": false,
+      "phase": 589.6500544498085,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 873.3782399999994
+    },
+    {
+      "back": [
+        692.074,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        676.055,
+        1486.123
+      ],
+      "frontPlanted": false,
+      "phase": 590.3119121903728,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 866.0467200000011
+    },
+    {
+      "back": [
+        673.533,
+        1478
+      ],
+      "backPlanted": true,
+      "direction": -1,
+      "front": [
+        666.52,
+        1493
+      ],
+      "frontPlanted": true,
+      "phase": 590.9003649936247,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 859.5283200000009
+    },
+    {
+      "back": [
+        656.34,
+        1476.995
+      ],
+      "backPlanted": false,
+      "direction": -1,
+      "front": [
+        647.997,
+        1493
+      ],
+      "frontPlanted": true,
+      "phase": 591.488211144502,
+      "scale": 2.4,
+      "skin": "true",
+      "state": "walk",
+      "x": 853.0166399999994
+    }
+  ],
+  "controlPointComparisons": 20,
+  "maxControlPointDriftCSSPx": 0.0003121874984799433
+}

@@ -1,0 +1,17 @@
+{
+  "platform": "Codex In-app Browser",
+  "origin": "http://localhost:5200/",
+  "window": "当前窗口，未设置尺寸覆盖",
+  "input": "真实点击：标题、档位01、基地、收藏室、卡背、猎手皮纸预览、成就目标、故事、建设、后勤",
+  "results": {
+    "collection": "通过",
+    "cardBackPreview": "猎手皮纸预览切换成功；未解锁应用按钮仍禁用",
+    "achievementTarget": "猎手定位成功，当前进度0/10",
+    "storyDirectory": "0/3段；未记录段落按钮禁用",
+    "upgrade": "背包16至17格，木材0/2，确认扩建禁用",
+    "warehouse": "5张卡牌显示，当前卡牌与查看详情入口存在",
+    "browserErrors": []
+  },
+  "limits": ["未验证已有见闻正文播放", "仅覆盖本轮清理路径；其他功能复用原任务证据"],
+  "screenshot": "warehouse.png"
+}

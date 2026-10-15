@@ -1,0 +1,241 @@
+{
+  "at": "2026-10-15T07:14:05.461Z",
+  "sourceSha256": "a9e3e45f26b469a55b557637ef6e00caaa4a46610a2a19d7da2a63139da6c4d9",
+  "scope": "主工作树已完成改动与交付资料；独立云端/导出工作树、原稿和原验收缺口保持原边界",
+  "rows": [
+    {
+      "key": "WF-home-css-coordination-1015",
+      "cells": [
+        "Friday（首页CSS清理 WF-home-css-coordination-1015）",
+        "`game/css/title-p0.css`；`docs/evidence/2026-10-15-WF-home-css-cleanup/`；聊天01a13e37-5915-7490-ac18-166000b29ccb；home-polish.css无改动",
+        "经老板授权协调独占首页CSS，移除98条被覆盖声明、旧同名入场动画及零引用箭头动画，保留原级联顺序与现行效果",
+        "2026-10-15",
+        "完成未提交、编辑释放；663条元素/伪元素记录×25项计算样式零差异；定向2套8项通过；当前窗口壁纸查看/恢复、两壁纸切换与名单开关通过；未build/全量/提交"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-code-clean-1015",
+      "cells": [
+        "Friday（冗余代码清理与提交 WF-code-clean-1015）",
+        "`game/src/`、`game/css/`（新增授权清理其他界面被覆盖样式；首页已完成补丁另组纳入）、`scripts/`、`game/tools/` 定向冗余；完成未提交代码/资产/文档打包；证据 `docs/evidence/2026-10-15-WF-code-clean-1015/`；沿用5200，不创建服务",
+        "老板授权清理前后端冗余、提交全部已完成改动；先核对静态引用与原完成归属，保留候选原稿、待拍板目录和中间文件；新文件删除先列清单确认",
+        "2026-10-15",
+        "编辑中；接续已暂停 WF-ship-gate-1015 的打包；开场时无其他编辑；首页会话已完成并释放，98条声明与2组动画的原证据保留；本轮接续其余界面同文件同条件的无效覆写；保留原 index 两文件，核对后合并提交；不推送"
+      ],
+      "state": "editing",
+      "isBlocking": true,
+      "isOpen": true
+    },
+    {
+      "key": "WF-ark-event-board-1015",
+      "cells": [
+        "Friday（方舟事件整页重画 WF-ark-event-board-1015）",
+        "`game/css/entry-events.css`（v1→v5 迭代后等价重写 353→219 行：共享基底 + 单一「事件体系页当前态」段 + 入城镜像段，作用域 `:is(.sc-event,.sc-fire,.sc-pickup)`+entry-scene）；`game/src/ui/node-scene-view.js`（事件体系页顶栏：仅左上退出键）、`game/src/run/game.run.scenes.js`（nodeShell 注册 eventExit：事件/入城/火堆/物资点四类，退出=关页不消耗，setBagReturnHook 清理）；证据 `docs/evidence/2026-10-15-WF-ark-event-board/`；复用5200，无新服务",
+        "老板参考 IS7 黑流树海事件整页多轮迭代：v1 实心暗板→v2 近黑+亮顶边+删背包浮钮→v3 纠偏极性（**深字压白亮条**+青环锚）→v4 老板「比例不对」去框重排（白带+空气+场景上副文字）→v5 实测三修（事件页 overlay 是 .room-view z100 致 HUD 提层 25 失效改 105 并解锁攻击 chip；副文字局部衬底；叙事块上移+白题）。追加令落地：删背包浮钮；入城补给/火堆/物资点并入体系；左上退出键复用地图 #topBtns 按钮语言；金币/攻击复用真 #resHud 提层常驻不经页面重画；老板令删除旧样式冗余——墨迹撕边整段与各层中间态已清，等价重写，门/祭坛/商店/撤离基底不动",
+        "2026-10-15",
+        "净版完成未提交、编辑释放；清理后定向测试 6 文件 59 项全绿（node-retrigger 共享树红经隔离工作树两轮定性为他人在途 M 改动，隔离环境含本人最新文件全绿）；样式页已在新窗口交付（恶魔交易，HUD z105 右上可见）待老板观感验收；按老板指示不跑验证；不 build、不提交"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-fog-silhouette-1015",
+      "cells": [
+        "Friday（迷雾剪影与节点色环 WF-fog-silhouette-1015）",
+        "`game/src/core/renderer.js`、`game/src/core/map-node-art.js`（叠加 WF-map-node-glow 在途未提交改动之上）；证据 `docs/evidence/2026-10-15-WF-fog-silhouette/`；复用5200，无新服务；顺带 `npm install` 增量修补共享 node_modules 缺件（+8包，5200 复验 HTTP 200）",
+        "老板批准地图呈现两连改：①迷雾改「黑色模糊+微光晕」剪影可见（中间版暗剪影+?被否，定稿获老板验收），结构可见类型未知，纯渲染层不动 pickNode/揭示逻辑（09-09 迷雾政策的 10-15 修订）；②节点类型色环+路径三轮迭代定稿（「不好看」→光刻线「太简单」→亮芯沿路渐变+点划节奏+双层辉光），全部静态绘制不碰空闲零绘制口径",
+        "2026-10-15",
+        "完成未提交、编辑释放；check:syntax 412 过、改动文件 ESLint 零告警（全量 4 error 在 game.bag.js 他人属地）、定向 vitest 全绿（4 文件39项+lifecycle/glow 复验11项）、实页节点测试局验证含剪影不可交互与选中态光轨；未核项见证据 README；不 build、不提交"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-map-node-glow-1015",
+      "cells": [
+        "Friday（地图辉光与入城闸门 WF-map-node-glow-1015）",
+        "`game/src/core/map-node-glow.js`（新增）、`game/src/core/map-node-art.js`、`game/src/core/renderer.js`（辉光绘制与 nodeGeo 闸门缓存键）；`game/src/run/node-reward-state.js`、`game.run.altar.js`、`map-travel-path.js`、`game.run.flow.js`、`game/src/game.boot.js`、`game/src/agent/agent.state.js`；`tests/map-node-glow.test.js`（新增）、`tests/node-reward-state.test.js`、`tests/map-travel-path.test.js`；复用5200，无新服务",
+        "两项老板指令：①当前/可前往地图节点辉光——常驻青色光晕+状态变化约 5.5 秒呼吸收束，窗口驱动复用 map-reveals 口径不破坏空闲零绘制，reduce-motion 仅静态；②入城节点必须先进入才能前往其他节点——entrySupplyGate（打开过补给页或领过卡即解锁，旧档按 taken 推断），点击/悬停/可达边/面板「可前往」/moveTo/agent 观测面同源生效，闸门时观测面只留 reenter",
+        "2026-10-15",
+        "完成未提交、编辑释放；定向 62 项+ESLint 通过；辉光驱动器曾污染 renderer-resource-lifecycle 计时器断言已修复，并以隔离工作树对照 HEAD 定性——共享树 node-retrigger/agent-scenes 两处红为其他会话未提交 M 改动所致（隔离环境含本任务改动全绿）；实页未验；不 build、不提交"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-ship-gate-1015",
+      "cells": [
+        "Friday（打包提交与提交门修复 WF-ship-gate-1015）",
+        "删除执行：`docs/evidence/perf-probe-photo/`、`docs/evidence/perf-probe-run/`、martial 4 图（PENDING #33 已批清单）；`game/assets/asset-manifest.json`（删 4 ghost+补登 94 新资产）、`game/data/art-mapping.json` 与 `tests/card-art-coverage.test.js` 白名单收窄、`game/src/generated/art-manifest.js`/`thumb-manifest.js` 同步；门禁修复（子代理B）：`scripts/setup-commit-gate.mjs` 对应专测 Windows 环境、`tests/build-output-contract.test.js`、`tests/pipeline-completion-contract.test.js`、`tests/agent-tool-lifecycle.test.js`、`tests/battle-decision-readability.test.js`、`scripts/runtime-asset-redundancy-review.mjs` 12 指纹刷新、`tests/runtime-asset-aliases.test.js` unlinkSync；（子代理A）：`tests/departure-browse-state.test.js`、`tests/agent-console-jump.test.js` 及追加仓库域 3 文件断言对齐 WF-zoom-blur 新行为；本表与 PENDING #33 回写",
+        "老板授权「该提交的提交，该删除的删除」+「完成后梳理全项目」；全量提交门首跑暴露 17+3 文件失败，已全部修复至绿；ship 两次试跑因暂存删除 pathspec 与门禁红被拒，未产生提交；老板转入连续编辑，打包窗口关闭，index 已复位清空",
+        "2026-10-15",
+        "编辑释放；原打包窗口关闭，2026-10-15 由 WF-code-clean-1015 接续核对与提交；旧验证不替代本轮 index 门。Node fs.rmSync 删除语义疑点仍见 roadmap；无新服务，5200 属 WF-mainline-up"
+      ],
+      "state": "editing",
+      "isBlocking": true,
+      "isOpen": true
+    },
+    {
+      "key": "WF-zoom-blur-delay-1015",
+      "cells": [
+        "Friday（卡特写模糊延时修复 WF-zoom-blur-delay-1015）",
+        "`game/css/winter.css` 仅 `#cardZoom .cz-backdrop` 两规则；`game/css/interface-motion.css` 仅 #cardZoom 揭幕两条；`game/css/feedback-oct12.css` 仅招式池块；`game/src/hub/hub.warehouse.js` 点卡行为调整（前三者叠加于在途未提交改动之上）；复用5200，无新服务",
+        "模糊延时两轮根因：①幕布自身 czFade 逐帧动画（已去）；②共用界面切换给 #cardZoom 整体挂 uiVeilInA 320ms/uiVeilOut 180ms 揭幕，父级透明度动画拖全屏 18px 模糊逐帧重算且全局生效（老板实测各界面均有延迟）——揭幕改为仅照相馆保留（其幕布无模糊），普通卡特写幕布瞬时满强度进出；招式卡按老板指令两轮放大至 .78 档、卡片 max-width 285、hs-card 字号 15px、框比 272/406 自适应防变形；仓库点卡改仅选中浏览，「查看详情」与页脚操作全保留（中途误删已恢复，git diff 核对净变更）",
+        "2026-10-15",
+        "完成未提交、编辑释放；按老板明示免实页验证，语法检查 411 文件通过、揭幕关键帧无死引用；若单帧毛刺仍可感，剩余嫌疑为 18px 实时模糊本身的光栅成本，待老板反馈再降半径或改静态幕布"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-battle-console-1015",
+      "cells": [
+        "Friday（战斗指挥台审美迭代 WF-battle-console-1015）",
+        "`game/css/page-battle-ui.css`「2026-10-15 三波（重制）」段（仅此一文件，当前无主属地）；证据 `docs/evidence/2026-10-15-WF-battle-console/`；复用5200，无新服务",
+        "老板对第一版判「太丑」推倒重来：按二游语言重做皮肤（星铁干净面板×方舟切角×PGR 斜切主钮），三色纪律金=动作/红=敌意/青=能量；纯 CSS，零 JS/卡牌本体/canvas/药水栏改动",
+        "2026-10-15",
+        "完成未提交、编辑释放、观感待老板验收；实页两回合过渡+悬停+computed 核验通过；不碰卡框会话属地与冻结 battle.css；不build、不提交"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-feedback-1015",
+      "cells": [
+        "Friday（留言修复 WF-feedback-1015）",
+        "`game/src/hub/hub.presentation.js`、`game.hub.runtime.js`、`game.hub.depart.js`、`hub.courtyard-runtime.js`；`game/src/audio/sound.js`；`game/src/run/game.run.class-choice.js`；`game/css/inventory-zoom.css`、`cover-details.css`、`winter.css`、`departure-selected.css`、`base-camp.css`、`expedition-library.css`；`tests/hub-courtyard-v3.test.js`、`class-choice-lazy-entry.test.js`",
+        "导入7条留言，合并6项修复；保留既有完成未提交补丁；复用5200，无新服务",
+        "2026-10-15",
+        "完成未提交、编辑释放；117项定向与ESLint通过，当前窗口真实输入与大图/数量计算样式核验通过；声音主观听感未核；证据 `docs/evidence/2026-10-15-WF-feedback/`"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-card-split-1014",
+      "cells": [
+        "Friday（卡牌分区参考板 WF-card-split-1014）",
+        "`docs/previews/card-split-20261014/`；复用5200，本会话不创建服务",
+        "上半卡面、下半文字参考板；复用卡图与职业/蔷薇外框",
+        "2026-10-14",
+        "完成未提交、编辑释放；全种类22张样板，13款等宽重绘框至 `game/art-source/card-frame-study-1014/`；原比例、图片/文字容纳与棱彩动态检查通过，证据 `docs/evidence/2026-10-14-card-split-reference/`；仅参考板，未接入游戏、未构建、无新服务"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-base-chibi-1014",
+      "cells": [
+        "Friday（基地小人试作 WF-base-chibi-1014）",
+        "`game/src/hub/base-chibi*.js`、`game/css/base-chibi.css`；保留上轮 `hub.home-v3.js`、`game.hub.runtime.js`挂载；`game/assets/chibi/wu-v1/`保留、`wu-v2/`三图及清单三条；`game/art-source/characters/wu-chibi-v2-20261014/.gitignore`与本地大原稿；`game/chibi-preview.html`、`game/src/ui/chibi-preview.js`；`tests/base-chibi*.test.js`；`docs/evidence/2026-10-14-WF-base-chibi/`",
+        "完整Q版原画→同画布分层→隐藏衣身/腿补绘→姿势定格及三动作白底样机；复用5200，无新服务",
+        "2026-10-14",
+        "白底v2完成未提交、编辑释放；384709像素同坐标复原差异0，13项定向+41项契约/架构哨兵通过；真实三动作/点击恢复待机、主要姿势与控制点采样、无浏览器error；观感待老板查看，不宣称方舟成品标准；正式基地未扩展v2接入，不build、不提交"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-cloud-git-handoff-1014",
+      "cells": [
+        "Friday（私有 Git 导出 WF-cloud-git-handoff-1014）",
+        "既有 Temp 工作树 `C:/Users/太平/AppData/Local/Temp/codename7-readonly-audit-20261014/github-actions-handoff-worktree`；分支 `handoff-git-bf612952-1014`",
+        "老板授权继续228a448e，固定bf612952一次性私有Git导出；[证据](evidence/2026-10-14-WF-cloud-git-handoff-1014/README.md)",
+        "2026-10-14",
+        "已交付、编辑释放；228a448e已推送，Actions38558563950成功，32分片及清单齐全；证据与本行完成未提交；无新服务/端口，既有工作树和分支保留"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-nai-network-open-1013",
+      "cells": [
+        "Friday（NAI工具与项目网络 WF-nai-network-open-1013）",
+        "`tools/nai_gen.py`；`tools/tests/test_nai_guard.py`；`tools/NAI-PROMPTS.md`；根 `.codex/config.toml`",
+        "合并网络授权、代理修正与通用词对照的现行未提交归属；证据docs/evidence/2026-10-13-wu-nai45-prompt-compare/README.md",
+        "2026-10-14核对",
+        "完成未提交、编辑占用释放；四文件实时Git仍为M，未混入运行包；原测试结果见来源，本轮不重测工具、不改配置"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-ledger-cleanup-1014",
+      "cells": [
+        "Friday（台账清理 WF-ledger-cleanup-1014）",
+        "`docs/PENDING.md`；`docs/PARALLEL-REGISTRY.md`；`docs/roadmap.md`；`docs/STATUS.md`；`docs/archive/README.md`；`docs/archive/WF-ledger-cleanup-1014/`；`docs/evidence/2026-10-14-WF-ledger-cleanup-1014/`；`docs/evidence/2026-10-13-WF-friday-clean-ship-1013/task.json`；`docs/evidence/2026-10-13-WF-ship-pathspec-1013/task.json`；`docs/evidence/2026-10-14-WF-retired-art-1014/task.json`；`docs/evidence/2026-10-14-WF-cloud-review-integration-1014/task.json`；`docs/evidence/2026-10-14-WF-friday-cloud-review-1014/task.json`；`docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/task.json`；`docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/task.json`",
+        "核对提交、归档历史记录、修正现行未结事项",
+        "2026-10-14",
+        "完成未提交、编辑占用释放；文档守卫421链接零问题、11份原文哈希一致、台账解析与diff检查通过；仅文档与交付记录，不提交、不删除、不启动服务"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-producer-v1-1014",
+      "cells": [
+        "Friday 制作人首版 WF-producer-v1-1014",
+        "game/src/battle/view/battle.layers.js；game/src/battle/view/battle.hand-inspector.js；game/css/expedition-battle.css；game/css/battle-hand-overhaul.css；game/src/cards/cards.view.js；game/css/card-layout-selected.css；game/src/ui/inventory-zoom.js；game/css/inventory-zoom.css；战斗就绪屏障独占 game/src/battle/view/battle.presentation-ready.js、battle.view.js、game/src/battle/runtime/battle.action-runner.js、game/src/battle/core/battle.engine.js及 action-runner/entry-view/readiness 专测；相关新增/既有 tests；资源边界 scripts/runtime-asset-redundancy-review.mjs 仅已核 layers SHA；提交门安装修复独占 scripts/setup-commit-gate.mjs 与专测；父独占 tests/e2-view-hp.test.js、tests/boot.test.js、tests/e7-rule-warning-view.test.js 仅 ready 接口测试替身对齐；docs/development.md、docs/cards/card-display.md、本表与本版证据",
+        "新真实 Git 树 friday/cloud-quality-20261014 承接已验191项差异；按实际体验及官方同功能画面对比改善战术信息、手牌可读性和文字呈现，保留玩法、现有皮肤、角色和资源；两实施者文件互不交叉",
+        "2026-10-14",
+        "完成未提交；用户13:15 UTC要求停止开发并收尾同步；源码冻结，第二产物e77ae2实机左卡hover与移出通过，键盘focus受阻、拖拽/支付多击/长规则本版未核；自有preview PID147和177/8139均已停止核验；等待正常提交门与GitHub/本地同步"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-cloud-review-next-1014",
+      "cells": [
+        "Friday 云端第二轮审查 WF-cloud-review-next-1014",
+        "bf612952 主线快照；hub/menu/quick-nav 与发布过滤既有修改保留；完整补丁与 SHA 在仓库外 cloud-review-next.meta",
+        "bug 修复、基地懒加载、生产冗余过滤及普通实页验收已收口；PV/录屏暂停",
+        "2026-10-14",
+        "完成未提交；生产包 143.52 MiB，四项预算仍红；代码类失败已补验，两个 workflow 用例因无 .git 阻塞；本轮编辑释放，新审查沿下行占用"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-cloud-deep-review-1014",
+      "cells": [
+        "Friday 云端深入审查 WF-cloud-deep-review-1014",
+        "生命周期：ui/cinematics.js、ui/term-tips.js、ui/comm-feed.js 及专属测试；启动叶拆分：run/game.run.altar.js、run/game.session.js、hub/game.hub.depart.js、ui/game.menu.js 指定消费、新 class-choice 模块、architecture-graph lazy guard、docs/architecture 与 src/README 对应段及 tests；CSS：先只读审计，编辑具体路径另协调；游戏商店/背包：run/game.run.shop.js、定向 tests、docs/rules 商店段；战斗规则首批：combat.js、effect-steps.m1/m2.js、两测试已冻结450项通过；战斗运行态续审：runtime/rules 未完整读审模块续审，battle.bag.js consumed还原grave UID及猛击规则入口、runtime.effects.js frozen符文映射与专属测试获准，其余逐文件协调；地图：map-graph.js 与 map-connectivity.test.js 获准编辑，其余 map-*、layeredMap、node-reward-state、session.map/board 只读复现；音频：audio/sound.js、sound.music.player.js、新测试与 audio-system 对应段；存档：hub/base.js、game.storage.js、versioned-slot-reader.js、session 错误消息及 clearSlot/clearAllSlots、menu 删除/重开/全清结果消费、新测试与 save-format（09:46 已冻结10文件），保留 classChoiceEntry 同步返回契约；事件撤离：flow.js、game.nest.js、新事件/研究所生命周期测试及 r6-story-flow mock 兼容，追加 altar.js、scenes.js、chests.js 回调身份与保存顺序，其他25域文件只读审查；全项目覆盖清单已交付；基地库存：game.hub.pages.js、ui/inventory-zoom.js、hub.warehouse.js、game.hub.runtime.js、collection.commands.js 与新测试；照相馆：game.cardslib.page.js、card-photo-notes.js、card-description-links.js 及新测试；渲染输入：core/input.js、art.js、renderer.js、game.boot.js 两处 resize 取整及新测试；开发工具/CI/预览：agent-batch.mjs、agent-evolve.mjs、agent-supervise.mjs、agent.runner.js、agent.policy.js doorNoLookHp参数路径与专属测试获准策略/取消/进程结果/环形记录契约修复，追加 vite.config.js 清理失败中止、perf-budget.cjs 缺失入口拒绝通过及专属测试；工具首批已冻结128项；pipeline/agent/preview剩余续审，agent.scenes.runtime.js环形记录ID、agent-supervise.mjs产物归属、scripts/iab-drive.mjs序列化/超时契约与专属测试获准，其余逐文件协调；基地/出征续审：base-departure.commands.js、departure.summary/view-updates.js、game.hub.depart/preparation.js、departure.drag.js、game.hub.home-scene.js、game.bag.js、game.bag.drag.js、home.commands.js、runtime整备装配抽adapter与新测试获准身份和异步边界修复，四域其余未审路径续审；卡牌数据续审：card-rarity.js 循环来源防护、cards.sync.face-refresh.js/cards.sync.js seedBatch及8个明确迁移函数保存失败和marker/own-key保护及新测试获准，card-rules.capability.js非onPlay未支持perFoe拒绝门及新测试；game.notes.js/core/notes.js获准同marker pending before/after恢复保护；menu wipeNotes失败消费及反馈关闭状态恢复由全局UI独占；cards与library残余续审；全局UI/boot剩余域续审，overlay.js焦点时序、character-idle.js关闭释放、game.boot.js bindInput丢捕获/失焦取消及专属测试获准，其他编辑逐文件协调；battle-view20模块续审，battle.frames.js资源生命周期、battle.layers.js手牌key、btSafeMove所在overlays排除stored及专属测试获准；父补读mapData/node-info/map-node-art、两shop呈现与perf-probe；父独占Base销售函数/trade-v5完整key及shop carry临时DOM清理、3交易测试，6文件冻结，定向111/52项分别绿待集成；恢复固定bf desktop-app/package-lock.json原字节由restore worker独占；父独占本表、development 本轮行为段及 PENDING 新增43/44玩法兼容决策项",
+        "按老板 10-14 最新要求继续确定缺陷复现、修复和性能优化；保留上一轮补丁，不并发 build/全量测试；共享 docs 逐段协调",
+        "2026-10-14",
+        "首轮联合验收及生产实页已完成；追加性能优化：PNG发布派生经核需复杂引用重写，收益低而不实施，源码零改；DEV真按需仅game.run.js/新loader/game.boot.js/dev实现必要段/专测，agent-console-jump及boot.test仅首次冷入口改等待；新增Canvas兼容获老板11:22明确批准：package/lock同版legacy依赖、battle.frames及新battle.frame-renderer、vite按需chunk、专测和原frames桩准确调整；源码原件保留，不并发build。父协调gate映射和文档，完成后再次唯一验收；09:20–09:29:30 实页窗口已完成且15输入SHA一致；真实 Git 已于12:11 UTC完整接回并清单整合，原Git环境用例13/13通过；本轮源码编辑释放给制作人首版，保留所有已完成未提交修复"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    },
+    {
+      "key": "WF-final-gate-1014",
+      "cells": [
+        "Friday 提交阻塞收尾 WF-final-gate-1014",
+        "Git fixture 隔离由验收者独占 scripts/acceptance-gate.mjs、tests/acceptance-gate.test.js；tests/agent-scenes.test.js 非渲染异步 ready 替身已完成48项定向通过，无生产代码变更；父独占本表与 producer-v1 证据",
+        "用户13:33 UTC批准仅修复正常提交门阻塞，不扩展功能、美术；首次全量30项失败现场保留，不绕过门禁",
+        "2026-10-14",
+        "完成未提交；Git环境7套194项通过，场景与真实ready屏障5套48项通过；仅工具/测试变化，等待正常全量提交门复验、GitHub推送及安全本地同步"
+      ],
+      "state": "complete-uncommitted",
+      "isBlocking": false,
+      "isOpen": true
+    }
+  ]
+}

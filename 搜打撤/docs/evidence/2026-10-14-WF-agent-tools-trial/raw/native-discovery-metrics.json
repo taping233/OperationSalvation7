@@ -1,0 +1,44 @@
+[
+  {
+    "id": "rg-discovery-save",
+    "command": "rg",
+    "args": [
+      "-l",
+      "commitBaseMutation|SAVE_FAILED",
+      "game/src",
+      "game/tools",
+      "tests"
+    ],
+    "seconds": 0.078,
+    "exit": 0,
+    "bytes": 946
+  },
+  {
+    "id": "rg-discovery-render",
+    "command": "rg",
+    "args": [
+      "-l",
+      "renderScheduler|shouldDraw",
+      "game/src",
+      "game/tools",
+      "tests"
+    ],
+    "seconds": 0.074,
+    "exit": 0,
+    "bytes": 408
+  },
+  {
+    "id": "rg-discovery-agent",
+    "command": "rg",
+    "args": [
+      "-l",
+      "settleSignature|bustSigCache|collectUiActions",
+      "game/src",
+      "game/tools",
+      "tests"
+    ],
+    "seconds": 0.08,
+    "exit": 0,
+    "bytes": 270
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "reason": "大于1MB的原始隔离验收报告只留本地；沿source命令可重跑，时间/路径会变化",
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-27-07.086Z-e5659d7f-staged.json",
+      "bytes": 2977790,
+      "sha256": "67da630f711712f8bb2faefbeb8e978fc487bf1dd28525fca7215a7ba96210c0",
+      "outcome": "failed",
+      "source": "node scripts/workflow.mjs staged --task WF-code-clean-1015 --json"
+    },
+    {
+      "path": "docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-36-33.044Z-44f26dd1-staged.json",
+      "bytes": 2980139,
+      "sha256": "03754a4ee66ecc7aecabd5d1aa4c4030d55e800ebadd3c8a62a105725b4f6640",
+      "outcome": "failed",
+      "source": "node scripts/workflow.mjs staged --task WF-code-clean-1015 --json"
+    },
+    {
+      "path": "docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-42-26.497Z-e40c60a6-staged.json",
+      "bytes": 3133079,
+      "sha256": "193756f6bf0119afcfcea3fd7b36805fd08c0d02ed1a874bb10f0dd07971a795",
+      "outcome": "passed",
+      "source": "node scripts/workflow.mjs staged --task WF-code-clean-1015 --json"
+    },
+    {
+      "path": "docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-07-12.000Z-a53807c9-staged.json",
+      "bytes": 2931203,
+      "sha256": "954346663ff19d338c17a6bc6325f1c642cc26eedc351dd9512a6463f8f87da2",
+      "outcome": "failed",
+      "source": "node scripts/workflow.mjs staged --task WF-code-clean-1015 --json"
+    },
+    {
+      "path": "docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-10-07.249Z-a8fd9382-staged.json",
+      "bytes": 3084290,
+      "sha256": "b4d011007d5b6dd0b0435621313828481b88b1345947eb618b5d1ea3a0c9ff11",
+      "outcome": "passed",
+      "source": "node scripts/workflow.mjs staged --task WF-code-clean-1015 --json"
+    }
+  ]
+}

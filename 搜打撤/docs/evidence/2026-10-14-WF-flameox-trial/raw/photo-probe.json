@@ -1,0 +1,98 @@
+{
+  "mode": "page",
+  "elapsedMs": 6007,
+  "viewport": {
+    "cssWidth": 1603,
+    "cssHeight": 901.69,
+    "bufferWidth": 2004,
+    "bufferHeight": 1127,
+    "dpr": 1.25
+  },
+  "rendererScope": "SDT.Renderer.draw calls only; does not include Pixi frame compositing or other browser painting.",
+  "frameCallbacks": 855,
+  "rafHz": 142.33,
+  "rafMetricLabel": "rAF callback rate; not screen FPS",
+  "screenFps": null,
+  "frameMedianMs": 6.9,
+  "frameP95Ms": 7.1,
+  "over20msPercent": 0.12,
+  "drawCalls": 0,
+  "drawHz": 0,
+  "drawMedianMs": null,
+  "drawP95Ms": null,
+  "drawMaxMs": null,
+  "longTasks": 0,
+  "longTaskMaxMs": null,
+  "loopTicks": 23,
+  "visible": true,
+  "pageStart": {
+    "mechanism": "collection",
+    "mechanismSignature": "[\"overlay\",\"\",[\"card-library-page\",\"pg\",\"photo-studio-v3\",\"studio-archive\",\"studio-index-layout\",\"studio-unified\"],[\"page\"]]",
+    "foregroundRootId": null,
+    "foregroundSemanticClasses": [
+      "card-library-page",
+      "pg",
+      "photo-studio-v3",
+      "studio-archive",
+      "studio-index-layout",
+      "studio-unified"
+    ],
+    "foregroundOverlayModes": [
+      "page"
+    ],
+    "domElements": 1053,
+    "images": 19,
+    "imageComplete": 19,
+    "imageDecoded": 19,
+    "canvases": 2,
+    "canvasSizes": [
+      {
+        "width": 560,
+        "height": 112
+      },
+      {
+        "width": 2004,
+        "height": 1127
+      }
+    ]
+  },
+  "pageEnd": {
+    "mechanism": "collection",
+    "mechanismSignature": "[\"overlay\",\"\",[\"card-library-page\",\"pg\",\"photo-studio-v3\",\"studio-archive\",\"studio-index-layout\",\"studio-unified\"],[\"page\"]]",
+    "foregroundRootId": null,
+    "foregroundSemanticClasses": [
+      "card-library-page",
+      "pg",
+      "photo-studio-v3",
+      "studio-archive",
+      "studio-index-layout",
+      "studio-unified"
+    ],
+    "foregroundOverlayModes": [
+      "page"
+    ],
+    "domElements": 1053,
+    "images": 19,
+    "imageComplete": 19,
+    "imageDecoded": 19,
+    "canvases": 2,
+    "canvasSizes": [
+      {
+        "width": 560,
+        "height": 112
+      },
+      {
+        "width": 2004,
+        "height": 1127
+      }
+    ]
+  },
+  "resourceTiming": {
+    "entriesAvailableAtStart": 250,
+    "entriesAvailableAtEnd": 250,
+    "entriesDuringSample": 0,
+    "transferBytesDuringSample": 0,
+    "possibleBufferTruncation": true,
+    "note": "Resource Timing entries are browser-buffered and may be truncated; this count is not a full asset inventory."
+  }
+}

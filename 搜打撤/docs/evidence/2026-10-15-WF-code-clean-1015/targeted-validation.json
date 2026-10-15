@@ -1,0 +1,25 @@
+{
+  "targeted": {
+    "files": 12,
+    "passed": 106,
+    "log": "node_modules/.cache/WF-code-clean-1015/targeted-fixes.log",
+    "sha256": "bb339232d9c887f6505f655a03c20f06d9759b24c6e9cd486cc945ab5509f491"
+  },
+  "bagCompatibility": {
+    "files": 4,
+    "passed": 64,
+    "log": "node_modules/.cache/WF-code-clean-1015/bag-compatibility.log",
+    "sha256": "40f78fc8c26882aa414977781dab8322d660520a1b3b329a6f15caac886a0744"
+  },
+  "nai": {
+    "executed": 25,
+    "passed": 24,
+    "skipped": 1,
+    "skipReason": "Windows不支持POSIX目录fsync契约"
+  },
+  "fullRunEnvironment": {
+    "VITEST_MAX_FORKS": "4",
+    "VITEST_MIN_FORKS": "1",
+    "reason": "前两轮出现onTaskUpdate通信超时，降低同机测试并发；未改变套件选择或超时上限"
+  }
+}

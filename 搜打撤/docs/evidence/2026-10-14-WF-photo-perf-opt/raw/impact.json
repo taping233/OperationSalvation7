@@ -1,0 +1,712 @@
+
+> codename7-soudache-game@0.60.0 impact
+> node scripts/impact-query.mjs game/src/hub/game.cardslib.page.js game/src/hub/photo-studio-tabs.js game/src/hub/photo-studio-navigation.js game/src/ui/overlay.js --json
+
+{
+  "paths": [
+    "game/src/hub/game.cardslib.page.js",
+    "game/src/hub/photo-studio-navigation.js",
+    "game/src/hub/photo-studio-tabs.js",
+    "game/src/ui/overlay.js"
+  ],
+  "missingPaths": [],
+  "registry": {
+    "activeRowCount": 12,
+    "editingRowCount": 4,
+    "completedRowCount": 8,
+    "settledRowCount": 0,
+    "hits": [
+      {
+        "session": "Friday（照相馆性能 WF-photo-perf-opt-1014）",
+        "status": "编辑中；无build、无提交，源码目标实时无他人占用；新建本聊天测试标签页",
+        "matched": [
+          "game/src/hub/game.cardslib.page.js",
+          "game/src/ui/overlay.js"
+        ],
+        "state": "editing",
+        "isBlocking": true,
+        "action": "coordinate-editing"
+      }
+    ],
+    "rows": [
+      {
+        "session": "Friday（照相馆性能 WF-photo-perf-opt-1014）",
+        "status": "编辑中；无build、无提交，源码目标实时无他人占用；新建本聊天测试标签页",
+        "matter": "老板授权保留现视觉优化布局读取；修改前后同窗口真实输入对照，复用5200",
+        "tokens": [
+          "game/src/hub/game.cardslib.page.js",
+          "photo-studio-tabs.js",
+          "photo-studio-navigation.js",
+          "game/src/ui/overlay.js",
+          "docs/performance.md",
+          "docs/evidence/2026-10-14-WF-photo-perf-opt"
+        ],
+        "state": "editing",
+        "isBlocking": true,
+        "isOpen": true
+      },
+      {
+        "session": "Friday（卡牌分区参考板 WF-card-split-1014）",
+        "status": "完成未提交、编辑释放；全种类22张样板，13款等宽重绘框至 `game/art-source/card-frame-study-1014/`；原比例、图片/文字容纳与棱彩动态检查通过，证据 `docs/evidence/2026-10-14-card-split-reference/`；仅参考板，未接入游戏、未构建、无新服务",
+        "matter": "上半卡面、下半文字参考板；复用卡图与职业/蔷薇外框",
+        "tokens": [
+          "docs/previews/card-split-20261014"
+        ],
+        "state": "complete-uncommitted",
+        "isBlocking": false,
+        "isOpen": true
+      },
+      {
+        "session": "Friday（基地小人试作 WF-base-chibi-1014）",
+        "status": "编辑中；内置image_gen正在制作新完整Q版基准；保留失败版，不build、不提交、不安装依赖、不扩展基地接入",
+        "matter": "老板授权按完整原画→同画布分层复原→绑定极限检查→动作循环的流程返工；仅白底制作，复用5200",
+        "tokens": [
+          "game/css/base-chibi.css",
+          "hub.home-v3.js",
+          "game.hub.runtime.js",
+          "game/assets/chibi/wu-v1",
+          "wu-v2",
+          "game/chibi-preview.html",
+          "game/src/ui/chibi-preview.js",
+          "docs/evidence/2026-10-14-WF-base-chibi"
+        ],
+        "state": "editing",
+        "isBlocking": true,
+        "isOpen": true
+      },
+      {
+        "session": "Friday（本地网页版 WF-local-web-1014）",
+        "status": "已交付、服务保留供老板使用；入口、PNG/WebP及战斗renderer模块响应有效；进程记录 `node_modules/.cache/web-up-5200.json`",
+        "matter": "老板要求拉起本地网页版；`npm run web -- --skip-compile` 独立后台启动；EXE准备期间补齐锁定依赖后重启",
+        "tokens": [],
+        "state": "editing",
+        "isBlocking": true,
+        "isOpen": true
+      },
+      {
+        "session": "Friday（私有 Git 导出 WF-cloud-git-handoff-1014）",
+        "status": "已交付、编辑释放；228a448e已推送，Actions38558563950成功，32分片及清单齐全；证据与本行完成未提交；无新服务/端口，既有工作树和分支保留",
+        "matter": "老板授权继续228a448e，固定bf612952一次性私有Git导出；[证据](evidence/2026-10-14-WF-cloud-git-handoff-1014/README.md)",
+        "tokens": [],
+        "state": "complete-uncommitted",
+        "isBlocking": false,
+        "isOpen": true
+      },
+      {
+        "session": "Friday（NAI工具与项目网络 WF-nai-network-open-1013）",
+        "status": "完成未提交、编辑占用释放；四文件实时Git仍为M，未混入运行包；原测试结果见来源，本轮不重测工具、不改配置",
+        "matter": "合并网络授权、代理修正与通用词对照的现行未提交归属；证据docs/evidence/2026-10-13-wu-nai45-prompt-compare/README.md",
+        "tokens": [
+          "tools/nai_gen.py",
+          "tools/tests/test_nai_guard.py",
+          "tools/NAI-PROMPTS.md",
+          ".codex/config.toml"
+        ],
+        "state": "complete-uncommitted",
+        "isBlocking": false,
+        "isOpen": true
+      },
+      {
+        "session": "Friday（台账清理 WF-ledger-cleanup-1014）",
+        "status": "完成未提交、编辑占用释放；文档守卫421链接零问题、11份原文哈希一致、台账解析与diff检查通过；仅文档与交付记录，不提交、不删除、不启动服务",
+        "matter": "核对提交、归档历史记录、修正现行未结事项",
+        "tokens": [
+          "docs/PENDING.md",
+          "docs/PARALLEL-REGISTRY.md",
+          "docs/roadmap.md",
+          "docs/STATUS.md",
+          "docs/archive/README.md",
+          "docs/archive/WF-ledger-cleanup-1014",
+          "docs/evidence/2026-10-14-WF-ledger-cleanup-1014",
+          "docs/evidence/2026-10-13-WF-friday-clean-ship-1013/task.json",
+          "docs/evidence/2026-10-13-WF-ship-pathspec-1013/task.json",
+          "docs/evidence/2026-10-14-WF-retired-art-1014/task.json",
+          "docs/evidence/2026-10-14-WF-cloud-review-integration-1014/task.json",
+          "docs/evidence/2026-10-14-WF-friday-cloud-review-1014/task.json",
+          "docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/task.json",
+          "docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/task.json"
+        ],
+        "state": "complete-uncommitted",
+        "isBlocking": false,
+        "isOpen": true
+      },
+      {
+        "session": "Friday 制作人首版 WF-producer-v1-1014",
+        "status": "完成未提交；用户13:15 UTC要求停止开发并收尾同步；源码冻结，第二产物e77ae2实机左卡hover与移出通过，键盘focus受阻、拖拽/支付多击/长规则本版未核；自有preview PID147和177/8139均已停止核验；等待正常提交门与GitHub/本地同步",
+        "matter": "新真实 Git 树 friday/cloud-quality-20261014 承接已验191项差异；按实际体验及官方同功能画面对比改善战术信息、手牌可读性和文字呈现，保留玩法、现有皮肤、角色和资源；两实施者文件互不交叉",
+        "tokens": [
+          "game/src/battle/view/battle.layers.js",
+          "game/src/battle/view/battle.hand-inspector.js",
+          "game/css/expedition-battle.css",
+          "game/css/battle-hand-overhaul.css",
+          "game/src/cards/cards.view.js",
+          "game/css/card-layout-selected.css",
+          "game/src/ui/inventory-zoom.js",
+          "game/css/inventory-zoom.css",
+          "game/src/battle/view/battle.presentation-ready.js",
+          "battle.view.js",
+          "game/src/battle/runtime/battle.action-runner.js",
+          "game/src/battle/core/battle.engine.js及",
+          "action-runner/entry-view/readiness",
+          "相关新增/既有",
+          "scripts/runtime-asset-redundancy-review.mjs",
+          "scripts/setup-commit-gate.mjs",
+          "tests/e2-view-hp.test.js",
+          "tests/boot.test.js",
+          "tests/e7-rule-warning-view.test.js",
+          "docs/development.md",
+          "docs/cards/card-display.md"
+        ],
+        "state": "complete-uncommitted",
+        "isBlocking": false,
+        "isOpen": true
+      },
+      {
+        "session": "Friday云端实页baseline验收（capture_cloud_game_baseline）",
+        "status": "baseline23组与修后12组已完成并暂停素材；保留自有Vite5307供代码功能回归；无.git导致handoff受阻；正式云端Terminal路由实机跑通",
+        "matter": "固定源码2d1e7d9a真实试玩/取材，不build、不改游戏源码；实际云端原生PID40，命令node node_modules/vite/bin/vite.js --host 0.0.0.0 --port 5307 --strictPort；证据service.json",
+        "tokens": [
+          "证据仓库外cloud-game-captures/baseline-2d1e7d9a"
+        ],
+        "state": "editing",
+        "isBlocking": true,
+        "isOpen": true
+      },
+      {
+        "session": "Friday 云端第二轮审查 WF-cloud-review-next-1014",
+        "status": "完成未提交；生产包 143.52 MiB，四项预算仍红；代码类失败已补验，两个 workflow 用例因无 .git 阻塞；本轮编辑释放，新审查沿下行占用",
+        "matter": "bug 修复、基地懒加载、生产冗余过滤及普通实页验收已收口；PV/录屏暂停",
+        "tokens": [
+          "hub/menu/quick-nav"
+        ],
+        "state": "complete-uncommitted",
+        "isBlocking": false,
+        "isOpen": true
+      },
+      {
+        "session": "Friday 云端深入审查 WF-cloud-deep-review-1014",
+        "status": "首轮联合验收及生产实页已完成；追加性能优化：PNG发布派生经核需复杂引用重写，收益低而不实施，源码零改；DEV真按需仅game.run.js/新loader/game.boot.js/dev实现必要段/专测，agent-console-jump及boot.test仅首次冷入口改等待；新增Canvas兼容获老板11:22明确批准：package/lock同版legacy依赖、battle.frames及新battle.frame-renderer、vite按需chunk、专测和原frames桩准确调整；源码原件保留，不并发build。父协调gate映射和文档，完成后再次唯一验收；09:20–09:29:30 实页窗口已完成且15输入SHA一致；真实 Git 已于12:11 UTC完整接回并清单整合，原Git环境用例13/13通过；本轮源码编辑释放给制作人首版，保留所有已完成未提交修复",
+        "matter": "按老板 10-14 最新要求继续确定缺陷复现、修复和性能优化；保留上一轮补丁，不并发 build/全量测试；共享 docs 逐段协调",
+        "tokens": [
+          "ui/cinematics.js",
+          "ui/term-tips.js",
+          "ui/comm-feed.js",
+          "run/game.run.altar.js",
+          "run/game.session.js",
+          "hub/game.hub.depart.js",
+          "ui/game.menu.js",
+          "docs/architecture",
+          "src/README",
+          "游戏商店/背包",
+          "run/game.run.shop.js",
+          "docs/rules",
+          "combat.js",
+          "effect-steps.m1/m2.js",
+          "runtime/rules",
+          "battle.bag.js",
+          "runtime.effects.js",
+          "map-graph.js",
+          "map-connectivity.test.js",
+          "session.map/board",
+          "audio/sound.js",
+          "sound.music.player.js",
+          "hub/base.js",
+          "game.storage.js",
+          "versioned-slot-reader.js",
+          "clearSlot/clearAllSlots",
+          "删除/重开/全清结果消费",
+          "flow.js",
+          "game.nest.js",
+          "新事件/研究所生命周期测试及",
+          "altar.js",
+          "scenes.js",
+          "chests.js",
+          "game.hub.pages.js",
+          "ui/inventory-zoom.js",
+          "hub.warehouse.js",
+          "game.hub.runtime.js",
+          "collection.commands.js",
+          "game.cardslib.page.js",
+          "card-photo-notes.js",
+          "card-description-links.js",
+          "core/input.js",
+          "art.js",
+          "renderer.js",
+          "game.boot.js",
+          "开发工具/CI/预览",
+          "agent-batch.mjs",
+          "agent-evolve.mjs",
+          "agent-supervise.mjs",
+          "agent.runner.js",
+          "agent.policy.js",
+          "doorNoLookHp参数路径与专属测试获准策略/取消/进程结果/环形记录契约修复",
+          "vite.config.js",
+          "perf-budget.cjs",
+          "pipeline/agent/preview剩余续审",
+          "scripts/iab-drive.mjs序列化/超时契约与专属测试获准",
+          "基地/出征续审",
+          "base-departure.commands.js",
+          "departure.summary/view-updates.js",
+          "game.hub.depart/preparation.js",
+          "departure.drag.js",
+          "game.hub.home-scene.js",
+          "game.bag.js",
+          "game.bag.drag.js",
+          "home.commands.js",
+          "card-rarity.js",
+          "cards.sync.face-refresh.js/cards.sync.js",
+          "seedBatch及8个明确迁移函数保存失败和marker/own-key保护及新测试获准",
+          "game.notes.js/core/notes.js获准同marker",
+          "before/after恢复保护",
+          "全局UI/boot剩余域续审",
+          "bindInput丢捕获/失焦取消及专属测试获准",
+          "父补读mapData/node-info/map-node-art",
+          "父独占Base销售函数/trade-v5完整key及shop",
+          "定向111/52项分别绿待集成",
+          "desktop-app/package-lock.json原字节由restore",
+          "新增43/44玩法兼容决策项"
+        ],
+        "state": "complete-uncommitted",
+        "isBlocking": false,
+        "isOpen": true
+      },
+      {
+        "session": "Friday 提交阻塞收尾 WF-final-gate-1014",
+        "status": "完成未提交；Git环境7套194项通过，场景与真实ready屏障5套48项通过；仅工具/测试变化，等待正常全量提交门复验、GitHub推送及安全本地同步",
+        "matter": "用户13:33 UTC批准仅修复正常提交门阻塞，不扩展功能、美术；首次全量30项失败现场保留，不绕过门禁",
+        "tokens": [
+          "scripts/acceptance-gate.mjs",
+          "tests/acceptance-gate.test.js",
+          "tests/agent-scenes.test.js"
+        ],
+        "state": "complete-uncommitted",
+        "isBlocking": false,
+        "isOpen": true
+      }
+    ],
+    "auditRows": []
+  },
+  "reverse": {
+    "direct": [
+      "game/src/hub/game.cardslib.js",
+      "game/src/ui/ui.js",
+      "tests/battle-settlement-retry.test.js",
+      "tests/event-callback-lifecycle-audit.test.js",
+      "tests/expedition-page-lifecycle.test.js",
+      "tests/four-player-event-regressions.test.js",
+      "tests/full-review-regressions-world.test.js",
+      "tests/nightshift-u10-teardown-guards.test.js",
+      "tests/photo-page-lifecycle-audit.test.js",
+      "tests/photo-studio-tabs.test.js"
+    ],
+    "transitive": [
+      {
+        "file": "game/src/game.boot.js",
+        "depth": 2
+      },
+      {
+        "file": "game/src/hub/game.bag.js",
+        "depth": 2
+      },
+      {
+        "file": "game/src/hub/game.hub.depart.js",
+        "depth": 2
+      },
+      {
+        "file": "game/src/hub/game.hub.pages.js",
+        "depth": 2
+      },
+      {
+        "file": "game/src/hub/game.hub.runtime.js",
+        "depth": 2
+      },
+      {
+        "file": "game/src/main.js",
+        "depth": 2
+      },
+      {
+        "file": "game/src/run/game.nest.js",
+        "depth": 2
+      },
+      {
+        "file": "game/src/run/game.run.altar.js",
+        "depth": 2
+      },
+      {
+        "file": "game/src/run/game.run.class-choice.page.js",
+        "depth": 2
+      },
+      {
+        "file": "game/src/run/game.run.flow.js",
+        "depth": 2
+      },
+      {
+        "file": "game/src/run/game.run.scenes.js",
+        "depth": 2
+      },
+      {
+        "file": "game/src/ui/quick-nav.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/bag-pouch-capacity.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/boot.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/card-library-lazy-boundary.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/card-library-performance-contract.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/departure-real-session-review.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/e5-session-recovery.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/extraction-session-resume.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/four-player-capacity-text.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/full-review-regressions-hub.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/game-session-elapsed.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/global-ui-character-lifecycle.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/global-ui-completion.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/global-ui-feedback-state-lifecycle.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/global-ui-settings-notes.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/hub-flow-regression.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/hub-lazy-entry.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/nest-regression.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/nest-settlement-transaction.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/overlay-dialog.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/photo-zoom-lifecycle.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/r5a-session-menu.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/save-recovery-session-feedback.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/save-slot-delete-results.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/terminal-death.test.js",
+        "depth": 2
+      },
+      {
+        "file": "tests/terminal-retry-copy.test.js",
+        "depth": 2
+      },
+      {
+        "file": "game/src/agent/agent.console.js",
+        "depth": 3
+      },
+      {
+        "file": "game/src/agent/agent.runner.js",
+        "depth": 3
+      },
+      {
+        "file": "game/src/hub/game.hub.js",
+        "depth": 3
+      },
+      {
+        "file": "game/src/run/game.run.class-choice.js",
+        "depth": 3
+      },
+      {
+        "file": "game/src/run/game.run.dev.js",
+        "depth": 3
+      },
+      {
+        "file": "game/src/run/game.run.js",
+        "depth": 3
+      },
+      {
+        "file": "game/tools/agent-batch.mjs",
+        "depth": 3
+      },
+      {
+        "file": "tests/agent-console-jump.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/agent-scenes.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/bag-item-rule-baseline.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/bag-page-lifecycle-review.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/bag-structured-rule-migration.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/bag-structured-use.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/base-hub-business-lifecycle-audit.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/base-inventory-lifecycle-audit.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/departure-browse-state.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/departure-class-confirmation.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/departure-stack-lifecycle-review.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/e4-async-entry.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/e8-card-migration.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/extraction-first-explore-xp.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/extraction-flow.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/extraction-receipt.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/extraction-recovery-ui.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/extraction-settlement.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/first-explore-marking.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/game-canvas-resize.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/global-boot-pointer-lifecycle.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/home-async-lifecycle.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/hub-pages-rework.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/hub-upgrade-render.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/map-travel-motion.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/nest-node-lifecycle-audit.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/node-flow-confirmation.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/node-retrigger.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/potion-tip.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/quick-nav-async.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/r6-story-flow.repro.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/r7a-scenes-integration.test.js",
+        "depth": 3
+      },
+      {
+        "file": "tests/sys03-altar-restore-txn.test.js",
+        "depth": 3
+      },
+      {
+        "file": "game/src/agent/agent.js",
+        "depth": 4
+      },
+      {
+        "file": "game/src/agent/agent.scenes.runtime.js",
+        "depth": 4
+      },
+      {
+        "file": "game/src/hub/game.bag.settle.js",
+        "depth": 4
+      },
+      {
+        "file": "game/src/run/game.run.dev-loader.js",
+        "depth": 4
+      },
+      {
+        "file": "tests/agent-command-results.test.js",
+        "depth": 4
+      },
+      {
+        "file": "tests/agent-console-async-entry.test.js",
+        "depth": 4
+      },
+      {
+        "file": "tests/agent-provenance-stopreason.test.js",
+        "depth": 4
+      },
+      {
+        "file": "tests/agent-runner-abort.test.js",
+        "depth": 4
+      },
+      {
+        "file": "tests/agent-runner-driver-restore.test.js",
+        "depth": 4
+      },
+      {
+        "file": "tests/class-choice-lazy-entry.test.js",
+        "depth": 4
+      },
+      {
+        "file": "tests/dev-console-lifecycle.test.js",
+        "depth": 4
+      },
+      {
+        "file": "game/src/agent/agent.scenes.js",
+        "depth": 5
+      },
+      {
+        "file": "tests/battle-settlement-recovery.test.js",
+        "depth": 5
+      },
+      {
+        "file": "tests/dev-tools-lazy-entry.test.js",
+        "depth": 5
+      },
+      {
+        "file": "tests/nightshift-u10-settle-transition.test.js",
+        "depth": 5
+      },
+      {
+        "file": "tests/agent-scenes-lazy-boundary.test.js",
+        "depth": 6
+      }
+    ],
+    "srcCount": 26,
+    "testCount": 77
+  },
+  "plan": {
+    "mode": "quick",
+    "paths": [
+      "game/src/hub/game.cardslib.page.js",
+      "game/src/hub/photo-studio-navigation.js",
+      "game/src/hub/photo-studio-tabs.js",
+      "game/src/ui/overlay.js"
+    ],
+    "reasons": [
+      "game/src/ui/overlay.js 影响面较广，快速门只运行直接测试；完整门由 CI/阶段收尾承担"
+    ],
+    "tests": [
+      "tests/architecture-boundaries.test.js",
+      "tests/battle-settlement-retry.test.js",
+      "tests/boot.test.js",
+      "tests/card-library-lazy-boundary.test.js",
+      "tests/card-library-performance-contract.test.js",
+      "tests/contracts.test.js",
+      "tests/event-callback-lifecycle-audit.test.js",
+      "tests/expedition-page-lifecycle.test.js",
+      "tests/four-player-event-regressions.test.js",
+      "tests/full-review-regressions-world.test.js",
+      "tests/hub-flow-regression.test.js",
+      "tests/hub-lazy-entry.test.js",
+      "tests/nightshift-u10-teardown-guards.test.js",
+      "tests/photo-page-lifecycle-audit.test.js",
+      "tests/photo-studio-tabs.test.js"
+    ]
+  },
+  "commands": {
+    "targeted": "npm run test:target -- tests/architecture-boundaries.test.js tests/battle-settlement-retry.test.js tests/boot.test.js tests/card-library-lazy-boundary.test.js tests/card-library-performance-contract.test.js tests/contracts.test.js tests/event-callback-lifecycle-audit.test.js tests/expedition-page-lifecycle.test.js tests/four-player-event-regressions.test.js tests/full-review-regressions-world.test.js tests/hub-flow-regression.test.js tests/hub-lazy-entry.test.js tests/nightshift-u10-teardown-guards.test.js tests/photo-page-lifecycle-audit.test.js tests/photo-studio-tabs.test.js",
+    "verify": "npm run --silent workflow -- verify --paths game/src/hub/game.cardslib.page.js,game/src/hub/photo-studio-navigation.js,game/src/hub/photo-studio-tabs.js,game/src/ui/overlay.js --plan"
+  }
+}

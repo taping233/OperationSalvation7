@@ -26,10 +26,21 @@
   "unverified": [
     "最终归档与Library上传由同会话随后交付，实际ID和最终SHA以平台结果为准；未做新的视觉验收或自然游玩"
   ],
-  "updatedAt": "2026-10-13T17:53:39.090Z",
+  "updatedAt": "2026-10-14T07:47:26.011436+00:00",
   "closure": {
     "kind": "manual",
     "doneWhenConfirmed": true,
     "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  },
+  "delivery": {
+    "status": "committed",
+    "commit": "e2e42ec3ed889ca8bd3e712738f2352319eea4eb",
+    "verifiedAt": "2026-10-14T07:47:26.011436+00:00",
+    "head": "bf6129520b55e28698c749ce7dbc6d327b85866a",
+    "evidence": "docs/evidence/2026-10-14-WF-ledger-cleanup-1014/README.md",
+    "limits": [
+      "仅确认本地HEAD包含提交；不新增远端、CI、Library或实页通过结论",
+      "stage保留原执行收官状态，交付事实以delivery和实时Git为准"
+    ]
   }
 }

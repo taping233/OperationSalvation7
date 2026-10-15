@@ -1,0 +1,50 @@
+{
+  "tool": "built-in image_gen",
+  "feedback": "老板要求修正黑像雪夜猎宴的画风与脸。服装、猎鹰、坐姿与场景保持。",
+  "status": "review-candidate-not-integrated",
+  "iterations": [
+    {
+      "version": 3,
+      "prompt": "EDIT image 1, produce one landscape 16:9 illustration with the SAME winter hunt banquet scene, seated pose, framing, burgundy formal coat, ivory fur mantle/cravat/trousers, tall red boots, falcon on glove, champagne glass, brooch and chair. Change only FACE LIKENESS and PAINTING LANGUAGE. Image 2 is authoritative HEIXIANG FACE AND PHYSIQUE, not costume. Image 3 is PAINTING STYLE ONLY, never copy its person.\nFACE correction: carefully reconstruct the exact face in image 2 at the sitting head angle of image 1. Image 1 has incorrectly become an older square-jawed stern generic aristocrat. Use original anime face: original cheek breadth, shorter compact nose, smaller tapered chin, original brow-eye distance and lively almond AMBER eyes, thick black brows with the original confident lift, slightly asymmetrical teasing grin showing a little upper teeth as in original. Keep dark tan gray-brown complexion; retain black slicked back short hair with broad silver-gray frontal lock and shaved sides, fully exposed forehead, original compact stitched scar on HIS LEFT cheek/viewer right. No heavy cheekbone carving, long chiseled nose, deep eye sockets, rigid pressed mouth or exaggerated elongated jaw. This is the same man in reference 2, not a new handsome archetype. Large neck and shoulders retained.\nREPAINT whole image in the exact broad hand-painted anime grammar of image 3: large opaque color masses, limited BROAD directional curved or elongated strokes, quiet base-color regions, coherent grouped hard-edge shadows and handmade broken edges. The current tiny angular facet patchwork is wrong. Merge it. Coat: broad flowing burgundy planes following shoulder, chest and long tails, 3-5 main folds; trousers broad cream masses with major tension folds only. Fur: several big curved ivory locks grouped into the collar silhouette, no hundreds of triangles. Hair: coherent substantial locks, quiet black base and one broad silver-gray turn, a few tapered ends. Falcon: broad white/gray wing masses and selective contour, no individual feather texture everywhere. Window, stone and snow/pines: sparse large shapes with correct perspective; near support clear, far forms quieter, not photography or fog blur.\nFACE and HAND: unmistakable anime proportions and clear expressive lids; simple colored iris masses and a few crisp highlights, economical nose and mouth. A few tapered colored structural accents at lids, nose underside and jaw-neck transition, broad clean cheeks. Keep essential anatomy, no sculpted glossy skin. Mostly muted colored grays with concentrated burgundy and warm gold. No grain/noise filter, polished splash-art gradients, microfacet mosaic, even vector tracing or pervasive tiny highlights. A soft coherent upper-left light. Preserve clothing design and all narrative elements, no text, watermark or UI.",
+      "references": [
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-12-WF-four-character-skins/previews/heixiang-winter-hunt-v2.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/heixiang.webp",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/selected-baseline-v03.png"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-e412415b-d6ba-4f4e-890d-f3d5ab5423f2.png",
+      "status": "intermediate-limited-improvement",
+      "size": [
+        1672,
+        941
+      ],
+      "preview": "previews/heixiang-winter-hunt-v3.webp",
+      "sourceBase": "C:/Users/太平/.codex",
+      "sourceRelativeToCodexHome": "generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-e412415b-d6ba-4f4e-890d-f3d5ab5423f2.png",
+      "sourceSha256": "409725ebf12365890383aa41da4cca752912f4e3430a6f4c084bbbf1103b07fd",
+      "previewSha256": "0645ca97fbb57da8bdec11045a484e0d26d4eaa1f59099ea31477f64cab80abe"
+    },
+    {
+      "version": 4,
+      "prompt": "Repaint illustration 5 completely in the hand-painted anime style of images 1 and 2, correcting the man's face using identity 3. Preserve the winter banquet CLOTHING DESIGN, seated reclining action, champagne glass, falcon, chair, snowy terrace, burgundy/ivory palette and landscape 16:9 layout of image 5, but NONE of its existing facial design or tiny triangular surface rendering is a style reference. Redraw forms using fresh large opaque strokes. This is not a subtle face touchup.\n\nIdentity 3 is the adult full-body HEIXIANG. Accurately reproduce HIS face in the scene: his original head silhouette, eyebrow angles, open amber eye shapes, compact nose, cheek planes, tapered chin, wide asymmetric tooth-showing confident smirk, stitched line on viewer-right cheek, slicked-back charcoal short hair with broad silver forelock and exposed forehead. Gray-brown deep tan skin, thick adult neck, immense shoulders and arms. Image 4 confirms his actual eye/eyebrow/scar and smirking character shapes ONLY: it is a CHIBI avatar, so do not borrow its huge head, round face or body proportions. Scale the facial features to ADULT image 3. The long thin glaring eyes, angular elderly aristocrat face and tight thin lips of image 5 are wrong and must be replaced.\n\nPainting 1 is the exact brushwork target: flat opaque coverage in broad irregular elongated curved sweeps, large quiet base fields, decisive grouped hard-edged shadow, selective tapered colored structural lines. Painting 2 shows game-wide anime face treatment and selective detail. Do not borrow either person's identity. Give the burgundy coat a few long following-the-cloth dark brush sweeps and large untextured areas. Cream trousers are broad planes with only major knee/hip folds. Ivory mantle is large plush curved masses with several deliberate soft broken edges, not a collection of tiny triangular fur spikes. Head hair is 5-8 substantial sculpted anime locks with broad opaque swaths. Falcon feathers are simplified into wing and chest groups. Stone and distant snow trees are broadly painted, sparse, low contrast and subordinate. Face, hands and brooch receive selective refinement. Anime face remains clear and lively with simple nose/mouth and clean cheek planes. One upper-left soft main light, coherent contact/perspective. No fine brocade patterns, scratches, random gray shards, texture noise, commercial glossy gradients or uniformly traced vector outlines. Hand-painted color masses with real directional brushwork, not polished realism. Full fresh repaint, substantial change in painting language while preserving the skin design. No text or watermark.",
+      "references": [
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/selected-baseline-v03.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/wu.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/heixiang.webp",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/avatars/heixiang.webp",
+        "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-12-WF-four-character-skins/previews/heixiang-winter-hunt-v2.webp"
+      ],
+      "source": "C:/Users/太平/.codex/generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-c75d62e3-f9bb-4b1c-b646-e55392a8d6a5.png",
+      "status": "latest-review-candidate",
+      "size": [
+        1672,
+        941
+      ],
+      "preview": "previews/heixiang-winter-hunt-v4.webp",
+      "sourceBase": "C:/Users/太平/.codex",
+      "sourceRelativeToCodexHome": "generated_images/01a12c3e-80fa-7eb3-8ccd-864a6f49d5c7/exec-c75d62e3-f9bb-4b1c-b646-e55392a8d6a5.png",
+      "sourceSha256": "3f8b5f7a74dcf73a848a1974552d783e0854de8be9ad067f51359adadeb23ad7",
+      "previewSha256": "bd0d80e8174c38276e826d804b77ca60985969aba735d6906bab2fe807d8009d"
+    }
+  ],
+  "visualReview": "v4相比v2露齿坏笑更接近原角色，面部转向原眉眼；衣料大面有所合并，但毛领与部分背景仍有碎面，画风匹配待老板审阅。"
+}

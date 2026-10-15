@@ -1,0 +1,427 @@
+{
+  "actions": [
+    {
+      "detail": "真实点击档位01、人物切换与放大、庭院开声及大雨、出征及下一步、整备卡牌放大；无合成事件",
+      "type": "real-input"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "not-collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "<div id=\"cardZoom\" role=\"dialog\" aria-modal=\"true\" aria-label=\"初始攻击大图与备注\" tabindex=\"-1\"><div class=\"cz-backdrop\" aria-hidden=\"true\"></div>\n        <sp",
+      "key": "zoom",
+      "rect": {
+        "height": 718.875,
+        "width": 1278,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#cardZoom",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(227, 230, 228)"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    武术初始\n    \n    初始攻击\n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    \n    \n    \n  \n        \n           备注\n          暂无备注\n        \n        \n        Esc 或点击背景收回"
+    },
+    {
+      "attributes": {},
+      "identity": "<span>剩余 <b class=\"dep-own\">1</b></span>",
+      "key": "quantity",
+      "rect": {
+        "height": 19.4375,
+        "width": 32.85000228881836,
+        "x": 64.4749984741211,
+        "y": 504.9125061035156
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(212, 223, 233)"
+      },
+      "tag": "SPAN",
+      "text": "剩余 1"
+    },
+    {
+      "attributes": {},
+      "identity": "<b class=\"dep-own\">1</b>",
+      "key": "quantity",
+      "rect": {
+        "height": 18.399999618530273,
+        "width": 8.675000190734863,
+        "x": 88.6500015258789,
+        "y": 504.9125061035156
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(212, 223, 233)"
+      },
+      "tag": "B",
+      "text": "1"
+    },
+    {
+      "attributes": {},
+      "identity": "<span>已带 <b class=\"dep-picked-count\">0</b></span>",
+      "key": "quantity",
+      "rect": {
+        "height": 19.4375,
+        "width": 32.1875,
+        "x": 176.0625,
+        "y": 504.9125061035156
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(241, 205, 131)"
+      },
+      "tag": "SPAN",
+      "text": "已带 0"
+    },
+    {
+      "attributes": {},
+      "identity": "<b class=\"dep-picked-count\">0</b>",
+      "key": "quantity",
+      "rect": {
+        "height": 18.399999618530273,
+        "width": 8.012499809265137,
+        "x": 200.2375030517578,
+        "y": 504.9125061035156
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(241, 205, 131)"
+      },
+      "tag": "B",
+      "text": "0"
+    },
+    {
+      "attributes": {},
+      "identity": "<span>剩余 <b class=\"dep-own\">1</b></span>",
+      "key": "quantity",
+      "rect": {
+        "height": 19.4375,
+        "width": 32.85000228881836,
+        "x": 250.40000915527344,
+        "y": 504.9125061035156
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(212, 223, 233)"
+      },
+      "tag": "SPAN",
+      "text": "剩余 1"
+    },
+    {
+      "attributes": {},
+      "identity": "<b class=\"dep-own\">1</b>",
+      "key": "quantity",
+      "rect": {
+        "height": 18.399999618530273,
+        "width": 8.675000190734863,
+        "x": 274.57501220703125,
+        "y": 504.9125061035156
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(212, 223, 233)"
+      },
+      "tag": "B",
+      "text": "1"
+    },
+    {
+      "attributes": {},
+      "identity": "<span>已带 <b class=\"dep-picked-count\">0</b></span>",
+      "key": "quantity",
+      "rect": {
+        "height": 19.4375,
+        "width": 32.1875,
+        "x": 361.9875183105469,
+        "y": 504.9125061035156
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(241, 205, 131)"
+      },
+      "tag": "SPAN",
+      "text": "已带 0"
+    },
+    {
+      "attributes": {},
+      "identity": "<b class=\"dep-picked-count\">0</b>",
+      "key": "quantity",
+      "rect": {
+        "height": 18.399999618530273,
+        "width": 8.012499809265137,
+        "x": 386.1625061035156,
+        "y": 504.9125061035156
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(241, 205, 131)"
+      },
+      "tag": "B",
+      "text": "0"
+    },
+    {
+      "attributes": {},
+      "identity": "<span>剩余 <b class=\"dep-own\">1</b></span>",
+      "key": "quantity",
+      "rect": {
+        "height": 19.4375,
+        "width": 32.85000228881836,
+        "x": 436.3250122070313,
+        "y": 504.9125061035156
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(212, 223, 233)"
+      },
+      "tag": "SPAN",
+      "text": "剩余 1"
+    },
+    {
+      "attributes": {},
+      "identity": "<b class=\"dep-own\">1</b>",
+      "key": "quantity",
+      "rect": {
+        "height": 18.399999618530273,
+        "width": 8.675000190734863,
+        "x": 460.5,
+        "y": 504.9125061035156
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(212, 223, 233)"
+      },
+      "tag": "B",
+      "text": "1"
+    },
+    {
+      "attributes": {},
+      "identity": "<span>已带 <b class=\"dep-picked-count\">0</b></span>",
+      "key": "quantity",
+      "rect": {
+        "height": 19.4375,
+        "width": 32.1875,
+        "x": 547.9125366210938,
+        "y": 504.9125061035156
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(241, 205, 131)"
+      },
+      "tag": "SPAN",
+      "text": "已带 0"
+    },
+    {
+      "attributes": {},
+      "identity": "<b class=\"dep-picked-count\">0</b>",
+      "key": "quantity",
+      "rect": {
+        "height": 18.399999618530273,
+        "width": 8.012499809265137,
+        "x": 572.0875244140625,
+        "y": 504.9125061035156
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(241, 205, 131)"
+      },
+      "tag": "B",
+      "text": "0"
+    },
+    {
+      "attributes": {},
+      "identity": "<span>剩余 <b class=\"dep-own\">1</b></span>",
+      "key": "quantity",
+      "rect": {
+        "height": 19.4375,
+        "width": 32.85000228881836,
+        "x": 64.4749984741211,
+        "y": 777.5375366210938
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(212, 223, 233)"
+      },
+      "tag": "SPAN",
+      "text": "剩余 1"
+    },
+    {
+      "attributes": {},
+      "identity": "<b class=\"dep-own\">1</b>",
+      "key": "quantity",
+      "rect": {
+        "height": 18.399999618530273,
+        "width": 8.675000190734863,
+        "x": 88.6500015258789,
+        "y": 777.5375366210938
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(212, 223, 233)"
+      },
+      "tag": "B",
+      "text": "1"
+    },
+    {
+      "attributes": {},
+      "identity": "<span>已带 <b class=\"dep-picked-count\">0</b></span>",
+      "key": "quantity",
+      "rect": {
+        "height": 19.4375,
+        "width": 32.1875,
+        "x": 176.0625,
+        "y": 777.5375366210938
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(241, 205, 131)"
+      },
+      "tag": "SPAN",
+      "text": "已带 0"
+    },
+    {
+      "attributes": {},
+      "identity": "<b class=\"dep-picked-count\">0</b>",
+      "key": "quantity",
+      "rect": {
+        "height": 18.399999618530273,
+        "width": 8.012499809265137,
+        "x": 200.2375030517578,
+        "y": 777.5375366210938
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(241, 205, 131)"
+      },
+      "tag": "B",
+      "text": "0"
+    },
+    {
+      "attributes": {},
+      "identity": "<span>剩余 <b class=\"dep-own\">1</b></span>",
+      "key": "quantity",
+      "rect": {
+        "height": 19.4375,
+        "width": 32.85000228881836,
+        "x": 250.40000915527344,
+        "y": 777.5375366210938
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(212, 223, 233)"
+      },
+      "tag": "SPAN",
+      "text": "剩余 1"
+    },
+    {
+      "attributes": {},
+      "identity": "<b class=\"dep-own\">1</b>",
+      "key": "quantity",
+      "rect": {
+        "height": 18.399999618530273,
+        "width": 8.675000190734863,
+        "x": 274.57501220703125,
+        "y": 777.5375366210938
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(212, 223, 233)"
+      },
+      "tag": "B",
+      "text": "1"
+    },
+    {
+      "attributes": {},
+      "identity": "<span>已带 <b class=\"dep-picked-count\">0</b></span>",
+      "key": "quantity",
+      "rect": {
+        "height": 19.4375,
+        "width": 32.1875,
+        "x": 361.9875183105469,
+        "y": 777.5375366210938
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(241, 205, 131)"
+      },
+      "tag": "SPAN",
+      "text": "已带 0"
+    },
+    {
+      "attributes": {},
+      "identity": "<b class=\"dep-picked-count\">0</b>",
+      "key": "quantity",
+      "rect": {
+        "height": 18.399999618530273,
+        "width": 8.012499809265137,
+        "x": 386.1625061035156,
+        "y": 777.5375366210938
+      },
+      "selector": ".dep-quantity span,.dep-quantity b",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "color": "rgb(241, 205, 131)"
+      },
+      "tag": "B",
+      "text": "0"
+    }
+  ],
+  "observedAt": "2026-10-14T20:27:45.597Z",
+  "page": {
+    "origin": "http://localhost:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 779,
+      "width": 1278
+    }
+  },
+  "scene": "feedback-departure-card-and-quantity",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-15-WF-feedback/personnel-card-zoom.png",
+    "docs/evidence/2026-10-15-WF-feedback/departure-quantity.png",
+    "docs/evidence/2026-10-15-WF-feedback/departure-card-zoom.png",
+    "docs/evidence/2026-10-15-WF-feedback/courtyard-rain.png"
+  ],
+  "selectors": [
+    {
+      "key": "zoom",
+      "selector": "#cardZoom"
+    },
+    {
+      "key": "quantity",
+      "selector": ".dep-quantity span,.dep-quantity b"
+    }
+  ]
+}

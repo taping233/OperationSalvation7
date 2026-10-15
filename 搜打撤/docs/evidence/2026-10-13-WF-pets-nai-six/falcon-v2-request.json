@@ -1,0 +1,16 @@
+{
+  "id": "falcon",
+  "name": "猎鹰宝宝",
+  "model": "nai-diffusion-4-5-full",
+  "recipe": "1.3",
+  "width": 1024,
+  "height": 1024,
+  "steps": 28,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nAn original juvenile scout falcon with a proud compact raptor silhouette, both wings HALF FOLDED close to the body with every wing tip entirely visible, hooked slate beak, alert golden eyes and strong yellow talons. Its head and mantle are deep chestnut brown; the cream chest has fine dark flecks; the long tail has clear alternating bands. A lightweight indigo leather flight harness crosses the shoulders and carries one tiny sealed brass map tube, suggesting a trusted aerial messenger. Perch on a single narrow weathered branch stub in a calm three-quarter pose. Preserve the anatomy and feather groups of a real falcon while giving the face a curious, friendly character. Leave generous clear space above and beside both wings.\n\nOriginal high-quality painterly character concept for a fantasy card-game companion selection screen. Rich, memorable design with coherent anatomy, tactile materials and a readable silhouette at small display size.\n\nA single complete character in a lively three-quarter view, centered in a square 1024 by 1024 canvas, occupying about 75 percent of the frame. Entire silhouette visible with clean margins. Plain matte warm-gray background with only a faint contact shadow, no landscape, frame, lettering or other characters.\n\nChestnut, cream, muted indigo and aged brass; directional pale sky light, broad feather planes with selective fine barb details around the face and primaries.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "uc": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, owl, parrot, eagle crest, human, humanoid, extra wings, extra legs, disconnected talons, giant eyes, spread wings, cropped wings, wing tips outside frame, cropped body, complex background, typography, border",
+  "naiImageReferences": [],
+  "seed": 945386322,
+  "source": "docs\\evidence\\2026-10-13-WF-pets-nai-six\\source\\falcon-v2.png",
+  "sha256": "6b6c642ff5c0e16f20c1facade748b96c6888c2041840deb78952848a312097a",
+  "bytes": 1274607
+}

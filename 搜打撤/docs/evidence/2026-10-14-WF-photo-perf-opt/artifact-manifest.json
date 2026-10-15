@@ -1,0 +1,249 @@
+{
+  "artifacts": [
+    {
+      "path": "raw/after-final.json",
+      "bytes": 18394,
+      "sha256": "d315806e79415422772b19cf45acf0ee1f6372d9e2158bb2fd0d7881ba5b06d4",
+      "archived": true
+    },
+    {
+      "path": "raw/after-final.png",
+      "bytes": 44022,
+      "sha256": "64ba7c3f0c1307096b43b8e54533b4e62d27ddf38656944dfcdce58d4bf6d53e",
+      "archived": true
+    },
+    {
+      "path": "raw/after-fixed.json",
+      "bytes": 17623,
+      "sha256": "8d233c47f38ac39a22bbf5dccef3fda515a12a119da86126b6918f3a62b4056c",
+      "archived": true
+    },
+    {
+      "path": "raw/after-fixed.png",
+      "bytes": 44314,
+      "sha256": "7d31d9f253cd0ddd771bc85210106144f5a217964c01bf917694800a245526a6",
+      "archived": true
+    },
+    {
+      "path": "raw/after-valid.json",
+      "bytes": 17194,
+      "sha256": "c7537fe8a5d5a43f125ed98202bc27fa5b5d2a37f13134fed88dd7cdd305d0e6",
+      "archived": true
+    },
+    {
+      "path": "raw/after-valid.png",
+      "bytes": 42254,
+      "sha256": "1d1f333b12107a8ab1415a1fb5641506d6c2b40f82290f877004d79de42d0e6a",
+      "archived": true
+    },
+    {
+      "path": "raw/after.json",
+      "bytes": 16935,
+      "sha256": "f4391d325597b4e83f3b21d37b5028b9dcae9496033934e4687f9d290ae7a5a0",
+      "archived": true
+    },
+    {
+      "path": "raw/after.png",
+      "bytes": 44346,
+      "sha256": "398d87527e3e10664a74c49172e8b9b3be32a47a172fb730d99a438dbbd7e165",
+      "archived": true
+    },
+    {
+      "path": "raw/baseline-server.mjs",
+      "bytes": 952,
+      "sha256": "787e2a4ffe2961851a99a71f4ba01b39b20c9263c0c29f8811d6183b04043e5e",
+      "archived": true
+    },
+    {
+      "path": "raw/before-confirm.json",
+      "bytes": 47535,
+      "sha256": "f555153dcc4109c57160c99821eab710199c588e80157761dc184b837a164b30",
+      "archived": true
+    },
+    {
+      "path": "raw/before-confirm.png",
+      "bytes": 45137,
+      "sha256": "995508c833a2920d570eb2204152b50a8bf17d5eee0f5e43ae9fee83fcd604ab",
+      "archived": true
+    },
+    {
+      "path": "raw/before-fixed.json",
+      "bytes": 42811,
+      "sha256": "f73a636d6df459d32eb29a2e2bd5b659eb9b0d90893143db1a8f94adbe131033",
+      "archived": true
+    },
+    {
+      "path": "raw/before-fixed.png",
+      "bytes": 42928,
+      "sha256": "b63ae591aa774826f986a393623e388cf0f9768f8c63cf8587b923524889eda2",
+      "archived": true
+    },
+    {
+      "path": "raw/before-valid.json",
+      "bytes": 38211,
+      "sha256": "95a83980b2e065604b5d81a0f97d8c7f2d02965d2fe19d7af15640966ff25632",
+      "archived": true
+    },
+    {
+      "path": "raw/before-valid.png",
+      "bytes": 44391,
+      "sha256": "fc6533b76a439c072b6db619f90d99fadd40e93162c186d29ee4ff88739cb816",
+      "archived": true
+    },
+    {
+      "path": "raw/before.json",
+      "bytes": 38243,
+      "sha256": "89375822dbcc8e3e4a9add4e720e3e996bb88526edf5659e3c1a4de6b083674a",
+      "archived": true
+    },
+    {
+      "path": "raw/before.png",
+      "bytes": 43419,
+      "sha256": "c89f7d0bf88246d63b08ce77bc2c87b1029d5b32e23f529781ffa8936c7925ac",
+      "archived": true
+    },
+    {
+      "path": "raw/browser-checks.json",
+      "bytes": 477,
+      "sha256": "01d940ba165ebf409c670bfc7223612c3eef0aa4291eb95bd9c57972c9a3d775",
+      "archived": true
+    },
+    {
+      "path": "raw/cleanup.json",
+      "bytes": 200,
+      "sha256": "cf4cf725e9442228ede339a041edec1ba9d19f30ee68293344765869de4bb57d",
+      "archived": true
+    },
+    {
+      "path": "raw/comparison.json",
+      "bytes": 2556,
+      "sha256": "1d1e7428e6f3ca1f568fa2989bb068ed9957c89c8b84b8a541a5905fac96439e",
+      "archived": true
+    },
+    {
+      "path": "raw/docs-check.json",
+      "bytes": 1988,
+      "sha256": "60220715b9f87624d95f52d6ea19aff0cc893e0532a05ad9e26db1d49cf81cac",
+      "archived": true
+    },
+    {
+      "path": "raw/game.cardslib.page.js.before",
+      "bytes": 66317,
+      "sha256": "e49af3d069eff64431663139179f86c9e1bc1533a502812e3dae7ce0575649e1",
+      "archived": true
+    },
+    {
+      "path": "raw/impact.json",
+      "bytes": 25592,
+      "sha256": "517393eb43c288bd11b27dae0c0a049d3c3c967b5820709601f6bfa44f5493f9",
+      "archived": true
+    },
+    {
+      "path": "raw/instrument.js",
+      "bytes": 3127,
+      "sha256": "1368d57c2d6a1b7fd7a7a8f22b6efa1cd56eb5197e9671b34cc9d495e63a133f",
+      "archived": true
+    },
+    {
+      "path": "raw/lint.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archived": true
+    },
+    {
+      "path": "raw/marker-check.json",
+      "bytes": 176,
+      "sha256": "6105977c3244d7954198b68fce5676ea9fd6f2ed3ba0d9448c86deb9b62e28b8",
+      "archived": true
+    },
+    {
+      "path": "raw/overlay.js.before",
+      "bytes": 24030,
+      "sha256": "10a2465a9de0b4c48b9c234896f329a24fc2f9c9b759babbd6683d5085b7a5d9",
+      "archived": true
+    },
+    {
+      "path": "raw/photo-studio-navigation.js.before",
+      "bytes": 5848,
+      "sha256": "23f8903ab5072946b5082fba267c924997becb2c88450b508c2f70577c17342d",
+      "archived": true
+    },
+    {
+      "path": "raw/photo-studio-tabs.js.before",
+      "bytes": 2046,
+      "sha256": "d0f418ebac1e101e757ba888b5004c83e88d7d7cdd5f46999176e97d5fb5c3b7",
+      "archived": true
+    },
+    {
+      "path": "raw/self-diff.patch",
+      "bytes": 18536,
+      "sha256": "9a0293aea8c59e7fecfa8f929e6190fdac725c532253440db874f6f64c1be58b",
+      "archived": true
+    },
+    {
+      "path": "raw/summarize.mjs",
+      "bytes": 2543,
+      "sha256": "1425c709aa315a8f9f8bf8c569ac51e6189ba18151d1c3157cbe63941798c722",
+      "archived": true
+    },
+    {
+      "path": "raw/syntax.log",
+      "bytes": 126,
+      "sha256": "59f0b69f26c92eab83127670d4bd321c2680fe9c2fa7b70ad44f0c79ffba1611",
+      "archived": true
+    },
+    {
+      "path": "raw/tests-final.log",
+      "bytes": 924,
+      "sha256": "8870f0205d56aad1835fe6445e2db4375bcc990c74eab9597ef88bde696558e0",
+      "archived": true
+    },
+    {
+      "path": "raw/tests.log",
+      "bytes": 15581,
+      "sha256": "8337adeef523239994fa43ac1d36f927cad7d067ca5ff3400971a379a4224dab",
+      "archived": true
+    },
+    {
+      "path": "raw/typecheck.log",
+      "bytes": 425,
+      "sha256": "197e373976283bb529eef771e81a62332afc070fa1c7a9384f59b474bb1bc3ed",
+      "archived": true
+    }
+  ],
+  "finalSourceSha256": [
+    {
+      "path": "game/src/hub/game.cardslib.page.js",
+      "sha256": "cf8d88c1dc13394469b7b686865977a8602d73d13546f76e4e10d1bab60fa531"
+    },
+    {
+      "path": "game/src/hub/photo-studio-tabs.js",
+      "sha256": "722162bf5802f1140b7bf7694b895b11658674e28909eaf8ac4b41def12c7b22"
+    },
+    {
+      "path": "game/src/hub/photo-studio-navigation.js",
+      "sha256": "2185879b35000041103ba8adfa3b4986193f6f4a4f31df277bfce7c1b8a66570"
+    },
+    {
+      "path": "game/src/ui/overlay.js",
+      "sha256": "937ced052187dd1fc7cc66bff298c6de1b55fc108898f254adcee5263b77898c"
+    },
+    {
+      "path": "tests/photo-studio-tabs.test.js",
+      "sha256": "8014d43bde2b21a6725f7066313c75cf0bccc353f277e2502a7430c99070e9ec"
+    },
+    {
+      "path": "tests/photo-studio-presentation.test.js",
+      "sha256": "3d826dc508ab4b0bf1c1cf564f0440dcce1a0c55cebdd2ab5efa8b8f9a7fc313"
+    },
+    {
+      "path": "tests/overlay-dialog.test.js",
+      "sha256": "2799ca4ea0b5e76ac3c4fb977dc22d7a41fd109d56ae2938b8f17cef29801583"
+    },
+    {
+      "path": "docs/performance.md",
+      "sha256": "72a8f34922020b98a149bb9a81e248df61442336de764f39fe8d9233dec60e53"
+    }
+  ],
+  "recordedAt": "2026-10-15T00:23:43.4345709+08:00"
+}

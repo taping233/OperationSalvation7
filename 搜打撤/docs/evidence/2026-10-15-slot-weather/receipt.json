@@ -1,0 +1,97 @@
+[
+  {
+    "slot": 1,
+    "weather": "晴",
+    "generated": "C:\\Users\\太平\\.codex\\generated_images\\01a13c37-6a66-7cd0-85da-a3cd131ba197\\exec-fbb27e17-c4a8-4e45-b036-f811f354d91d.png",
+    "original": "game/art-source/slot-weather-20261015/sunny-v1.png",
+    "originalBytes": 954750,
+    "originalSha256": "fa1cc288018894a2dc5b68648b327f55738cb6ee2c2d0a2c383f004ae3b8427b",
+    "originalSize": [
+      1254,
+      1254
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "asset": "game/assets/ui/slot-weather/sunny-v1.webp",
+    "sha256": "fa4831a614e8445460734dceb52c054bed22c6b01370c1aacb9292bfdb3746c2",
+    "bytes": 68902
+  },
+  {
+    "slot": 2,
+    "weather": "多云",
+    "generated": "C:\\Users\\太平\\.codex\\generated_images\\01a13c37-6a66-7cd0-85da-a3cd131ba197\\exec-7ee9a941-ef1e-4e82-95e4-afabd2ae8ad1.png",
+    "original": "game/art-source/slot-weather-20261015/partly-cloudy-v1.png",
+    "originalBytes": 941830,
+    "originalSha256": "f6829bdcd61d6d313f135adf16220e5b1ee441b3afaed970b412919c83a7bced",
+    "originalSize": [
+      1254,
+      1254
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "asset": "game/assets/ui/slot-weather/partly-cloudy-v1.webp",
+    "sha256": "ae0a4016512b06daf7a1ff43bcf7f26cd834f7b0a893171b309d91e413e3521c",
+    "bytes": 64090
+  },
+  {
+    "slot": 3,
+    "weather": "雨",
+    "generated": "C:\\Users\\太平\\.codex\\generated_images\\01a13c37-6a66-7cd0-85da-a3cd131ba197\\exec-bfca5839-f0e1-4dc6-badf-ef83717af890.png",
+    "original": "game/art-source/slot-weather-20261015/rain-v1.png",
+    "originalBytes": 681956,
+    "originalSha256": "58f5872b905fd5d6440def648adfd20f53ed545438157390dd184576f49ecbfd",
+    "originalSize": [
+      1254,
+      1254
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "asset": "game/assets/ui/slot-weather/rain-v1.webp",
+    "sha256": "c9d49a6786b0914a1e4174285f9cd2b37cc6096049608afad93d88452f0e44f0",
+    "bytes": 47544
+  },
+  {
+    "slot": 4,
+    "weather": "雷",
+    "generated": "C:\\Users\\太平\\.codex\\generated_images\\01a13c37-6a66-7cd0-85da-a3cd131ba197\\exec-963cf38c-604f-40b5-9cbd-b56ab3ddc705.png",
+    "original": "game/art-source/slot-weather-20261015/thunder-v1.png",
+    "originalBytes": 1047506,
+    "originalSha256": "23382ba906c5a62194ec3266fdcd758864ba5aeaec191573abdc302b546975e7",
+    "originalSize": [
+      1254,
+      1254
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "asset": "game/assets/ui/slot-weather/thunder-v1.webp",
+    "sha256": "fa3fc896250f12eb54e8d52ca7a0ab80fb6b115194a5293c046103152765e96b",
+    "bytes": 75124
+  },
+  {
+    "slot": 5,
+    "weather": "雪",
+    "generated": "C:\\Users\\太平\\.codex\\generated_images\\01a13c37-6a66-7cd0-85da-a3cd131ba197\\exec-e94ee731-71a4-4b8b-8e27-b5051345abbc.png",
+    "original": "game/art-source/slot-weather-20261015/snow-v1.png",
+    "originalBytes": 860434,
+    "originalSha256": "0e198a47226fa1b7ed05745e0fec3e7837713d5730c39f5d4a266a23010e7c96",
+    "originalSize": [
+      1254,
+      1254
+    ],
+    "alphaRange": [
+      0,
+      255
+    ],
+    "asset": "game/assets/ui/slot-weather/snow-v1.webp",
+    "sha256": "e5756c78c6b6bc3dc6bc3495e6568507fa5c4d49b1e08c63a439bf23e1cf72b7",
+    "bytes": 60878
+  }
+]

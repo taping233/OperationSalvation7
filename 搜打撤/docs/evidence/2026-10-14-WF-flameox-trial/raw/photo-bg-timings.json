@@ -1,0 +1,37 @@
+{
+  "longTasks": [
+    {
+      "duration": 67,
+      "start": 28397.40000000596
+    },
+    {
+      "duration": 190,
+      "start": 28819.5
+    },
+    {
+      "duration": 84,
+      "start": 30067.20000000298
+    },
+    {
+      "duration": 95,
+      "start": 31170.30000001192
+    }
+  ],
+  "timings": [
+    {
+      "durationMs": 117.79999999701975,
+      "name": "_checkPageBg",
+      "start": 28834.70000000298
+    },
+    {
+      "durationMs": 21.900000005960464,
+      "name": "_checkPageBg",
+      "start": 30073.90000000596
+    },
+    {
+      "durationMs": 25.099999994039536,
+      "name": "_checkPageBg",
+      "start": 31175.40000000596
+    }
+  ]
+}

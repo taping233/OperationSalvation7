@@ -1,0 +1,7 @@
+/* Career frames only override effective 职业 (rv6). Current mapping: docs/cards/career-frames.md. */
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6 { --rose-frame:url('./neutral.svg'); --rose-top:9.852217%; --rose-right:11.764706%; --rose-bottom:9.852217%; --rose-left:11.764706%; }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6.cf0 { --rose-frame:url('./heixiang.svg'); }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6.cf1 { --rose-frame:url('./wu.svg'); }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6.cf2 { --rose-frame:url('./baita.svg'); }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6.cf3 { --rose-frame:url('./xingyue.svg'); }
+body:has(#viewport) :is(#viewport, #overlay, #cardZoom, #cardPreview, body) .hs-card.rv6.cf4 { --rose-frame:url('./changwuyu.svg'); }

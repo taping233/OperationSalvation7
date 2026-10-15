@@ -1,0 +1,226 @@
+{
+  "tool": "image_gen (built-in)",
+  "scope": "老板授权纸边统一实装；五人减饰与统一块面画法，常无欲紫黑、黑像黑红右侧巨剑/顶部盾牌、白塔黄绿、星月黑黄",
+  "references": [
+    "D:/素材/代号柒/搜打撤/game/art-source/card-paper-rarity-20261015/initial.png",
+    "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+    "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+    "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+  ],
+  "items": [
+    {
+      "key": "initial",
+      "label": "初始",
+      "detail": "Warm gray-white bare torn-paper frame. REMOVE both blue tape pieces and all rich blue pigment swipes/drops. Keep only a few understated charcoal-gray painted folds and short faded ink marks. Quiet introductory tier, same paper silhouette and opening.",
+      "prompt": "Use case: precise-object-edit. Input 1 is the approved hand-painted paper-and-ink game card FRAME, and is the geometric and drawing-style master. Produce ONE alternate rarity version. Preserve the EXACT same 1024x1536 canvas, torn paper rails, inner transparent aperture, outer rail positions, rail width, handmade edges, material and broad brush finish. Do not make higher rarities heavier or more detailed. Change only tape, accent ink color and specified small stamp. Keep matte 2D anime sketchbook brushwork, muted colored grays and limited richer pigment accents. No metal bevels, shiny gems, 3D gloss, glow, filigree, all-over grain, tiny scratches, person or illustration. Interior and exterior must be genuine alpha transparency. Empty reusable frame overlay only. No text, letters, numbers, costs or watermark.\nVERSION: Warm gray-white bare torn-paper frame. REMOVE both blue tape pieces and all rich blue pigment swipes/drops. Keep only a few understated charcoal-gray painted folds and short faded ink marks. Quiet introductory tier, same paper silhouette and opening.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-d6d05d94-5ce5-47ba-8a09-7b42d5803e48.png",
+      "note": "裸纸边 · 灰白折痕"
+    },
+    {
+      "key": "common",
+      "label": "古朴",
+      "detail": "Off-white torn-paper frame with ONLY ONE small matte gray-brown tape tab in the same upper-left position. Remove the lower-right tape tab. Replace cobalt ink with one SHORT muted gray-brown brush stroke on upper right and faint lower-left marks. Same simple paper folds, no stamp.",
+      "prompt": "Use case: precise-object-edit. Input 1 is the approved hand-painted paper-and-ink game card FRAME, and is the geometric and drawing-style master. Produce ONE alternate rarity version. Preserve the EXACT same 1024x1536 canvas, torn paper rails, inner transparent aperture, outer rail positions, rail width, handmade edges, material and broad brush finish. Do not make higher rarities heavier or more detailed. Change only tape, accent ink color and specified small stamp. Keep matte 2D anime sketchbook brushwork, muted colored grays and limited richer pigment accents. No metal bevels, shiny gems, 3D gloss, glow, filigree, all-over grain, tiny scratches, person or illustration. Interior and exterior must be genuine alpha transparency. Empty reusable frame overlay only. No text, letters, numbers, costs or watermark.\nVERSION: Off-white torn-paper frame with ONLY ONE small matte gray-brown tape tab in the same upper-left position. Remove the lower-right tape tab. Replace cobalt ink with one SHORT muted gray-brown brush stroke on upper right and faint lower-left marks. Same simple paper folds, no stamp.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-2846b4b3-baf1-4ead-8cb2-1bffda6653ae.png",
+      "note": "单片灰褐胶带 · 短笔划"
+    },
+    {
+      "key": "rare",
+      "label": "稀有",
+      "source": "C:/Users/太平/.codex/generated_images/01a13c0e-5097-78e2-95bf-a3b333c47843/exec-36e582c6-e7db-4789-870e-2dfd3ef6f26e.png",
+      "prompt": "Use case: stylized-concept. Create ONE portrait collectible game card border STYLE PROPOSAL, transparent reusable empty overlay, 1024x1536. Inputs 1-3 are drawing-style references ONLY: hand-painted anime illustration, broad opaque directional strokes, coherent simplified masses, grouped colored shadows, sparse expressive tapered contours, confident handmade edges. Do not copy their people, clothes, text or watermarks. Adapt this painting grammar to the frame. Border should be light and slender, quiet enough to support anime card art. Its continuous structural edge is approximately 18-24 pixels thick, with a few local accents. Keep a large rectangular central opening, roughly x90..934, y130..1455; decorative forms may project outward, only slightly into the opening. Mostly muted colored grays with richer color concentrated in a few small accents; selective drawing rather than tiny textures. Matte painted 2D forms. Avoid heavy armor, beveled metal, shiny gems, glossy 3D, ornate European filigree, roses, vines, dense micro-detail, triangular facet mosaics and all-over grain. Actual alpha transparency throughout the interior and exterior; no opaque background, haze or backing sheet. No card artwork, character, text, number, cost icon or UI. All frame parts contained inside canvas.\nTHEME: A lightly torn matte paper-and-ink frame with an editorial anime sketchbook feel. Four narrow pale warm-gray paper strips form a simple rectangle, a few irregular torn contour breaks and visible blunt painted overlaps. Two small muted indigo-blue paper tape tabs hold the upper left and lower right corners. A confident asymmetrical cobalt brush swipe crosses only the upper border near the right side, another short stroke accents the lower left. A few charcoal-blue ink marks describe folds and edge turns. Corners feel casual, handcrafted and crisp. Paper strips are only the border, never a full page behind the opening. No large illustration or busy scribbles; keep sides mostly calm.",
+      "note": "蓝色对角胶带 · 宽笔扫痕"
+    },
+    {
+      "key": "epic",
+      "label": "史诗",
+      "detail": "PURPLE, moderately ornate: TWO clearly visible offset layers of pale torn paper, the inner thin backing layer in muted lilac. FOUR distinct small purple tape patches, one at each corner, diagonally arranged, with the upper-left and lower-right patches overlapping a second short violet strip. A medium flat purple DIAMOND ink seal on a small paper tab at TOP CENTER (about 70px wide). One thin hand-painted violet bracket line along the top and bottom rails, two short curved ink flourishes by the seal, and two tiny folded lilac paper corner tips. More carefully articulated folds and tape overlaps than the input rare version. Side rails remain calm. Decoration covers about twice the accent area of rare, without widening the main paper rails.",
+      "prompt": "Use case: precise-object-edit. Input1 is the APPROVED rare paper-and-ink card border. Design ONE HIGHER RARITY tier as a true visual escalation of the same anime paper-collage theme. Same 1024x1536 canvas and EXACT SAME inner rectangular transparent opening, rail positions, basic paper silhouette and natural proportions. Preserve the slender torn-paper foundation; add decoration by layering along the paper edges and projecting into the outside margin, never obstruct the inner card aperture. This owner wants higher rarity to have MORE DESIGNED ELEMENTS and MORE REFINED DRAWING, not merely color swaps and a tiny stamp. Increase carefully drawn folds, layered silhouettes and selected smaller accents while keeping the broad hand-painted anime masses, matte colored shadows, handmade contours and clear hierarchy. All inner aperture and exterior gaps genuinely ALPHA TRANSPARENT. Frame overlay only: no card illustration, people, text, numbers, watermark or UI. No beveled metal, armor, stone, gemstone, glossy 3D or photoreal texture; this is illustration of crafted paper, tapes, pigment, stamps and flat ribbon bookmarks. No baked glow; application handles animated light.\nTIER: PURPLE, moderately ornate: TWO clearly visible offset layers of pale torn paper, the inner thin backing layer in muted lilac. FOUR distinct small purple tape patches, one at each corner, diagonally arranged, with the upper-left and lower-right patches overlapping a second short violet strip. A medium flat purple DIAMOND ink seal on a small paper tab at TOP CENTER (about 70px wide). One thin hand-painted violet bracket line along the top and bottom rails, two short curved ink flourishes by the seal, and two tiny folded lilac paper corner tips. More carefully articulated folds and tape overlaps than the input rare version. Side rails remain calm. Decoration covers about twice the accent area of rare, without widening the main paper rails.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-32126ffb-ec1c-4f75-903e-21aa17a61586.png",
+      "filename": "epic-rich.png",
+      "note": "双层纸边 · 四角拼贴 · 菱形主纹"
+    },
+    {
+      "key": "legendary",
+      "label": "传说",
+      "detail": "GOLDEN OCHRE, richly designed: THREE offset paper layers: warm ivory main rails, a visible slim cream underlayer and a ochre-tinted backing layer. FOUR ornate but FLAT illustrated paper corner assemblies, each composed of a gold tape patch, small fan-folded paper corner and a short curved matte golden pigment accent. TOP CENTER has a prominent stamped SUN-WHEEL medallion on a round ivory paper seal, about 100px across, with a tiny ochre ribbon tab hanging OUTSIDE the rail. BOTTOM CENTER echoes it with a smaller diamond paper seal. Thin carefully drawn ochre ink double-rules run over much of the top and bottom rails, and one short rhythmic line-and-dot flourish appears at each side midpoint. More selected fine contour accents and clearer crafted folds than epic, with quiet areas between decoration clusters. Gold is matte paint and ink, never metal. Visibly richer silhouette and stronger central crest hierarchy than epic.",
+      "prompt": "Use case: precise-object-edit. Input1 is the APPROVED rare paper-and-ink card border. Design ONE HIGHER RARITY tier as a true visual escalation of the same anime paper-collage theme. Same 1024x1536 canvas and EXACT SAME inner rectangular transparent opening, rail positions, basic paper silhouette and natural proportions. Preserve the slender torn-paper foundation; add decoration by layering along the paper edges and projecting into the outside margin, never obstruct the inner card aperture. This owner wants higher rarity to have MORE DESIGNED ELEMENTS and MORE REFINED DRAWING, not merely color swaps and a tiny stamp. Increase carefully drawn folds, layered silhouettes and selected smaller accents while keeping the broad hand-painted anime masses, matte colored shadows, handmade contours and clear hierarchy. All inner aperture and exterior gaps genuinely ALPHA TRANSPARENT. Frame overlay only: no card illustration, people, text, numbers, watermark or UI. No beveled metal, armor, stone, gemstone, glossy 3D or photoreal texture; this is illustration of crafted paper, tapes, pigment, stamps and flat ribbon bookmarks. No baked glow; application handles animated light.\nTIER: GOLDEN OCHRE, richly designed: THREE offset paper layers: warm ivory main rails, a visible slim cream underlayer and a ochre-tinted backing layer. FOUR ornate but FLAT illustrated paper corner assemblies, each composed of a gold tape patch, small fan-folded paper corner and a short curved matte golden pigment accent. TOP CENTER has a prominent stamped SUN-WHEEL medallion on a round ivory paper seal, about 100px across, with a tiny ochre ribbon tab hanging OUTSIDE the rail. BOTTOM CENTER echoes it with a smaller diamond paper seal. Thin carefully drawn ochre ink double-rules run over much of the top and bottom rails, and one short rhythmic line-and-dot flourish appears at each side midpoint. More selected fine contour accents and clearer crafted folds than epic, with quiet areas between decoration clusters. Gold is matte paint and ink, never metal. Visibly richer silhouette and stronger central crest hierarchy than epic.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-f3428069-f769-44c4-8ab9-30fc7b53d884.png",
+      "filename": "legendary-rich.png",
+      "note": "三层装裱 · 四角折纸 · 日轮主纹"
+    },
+    {
+      "key": "prism",
+      "label": "棱彩",
+      "detail": "PASTEL CYAN/PINK/LILAC, the MOST elaborately designed tier: FOUR visible staggered paper/vellum layers around the same fixed aperture, with warm white main rails and slim pale cyan, lavender and blush offset edges. Each of FOUR CORNERS has TWO overlapping differently colored tape tabs and a carefully folded pointed paper accent, giving eight tape pieces in total. TOP CENTER has a prominent FOUR-POINT STAR paper crest about 115px across, layered in white, lilac and pale cyan with smaller flat stamped star shapes to either side. BOTTOM CENTER echoes with a smaller layered geometric star seal and two short thin outward-facing ribbon bookmarks. Add elegant sparse CONSTELLATION INK linework: three tiny connected dots per side, a little diamond at each side midpoint, and a thin three-color broken rule on the upper and lower rails. Most refined selected drawing and color layering of the series, with crisp small paper folds and expressive broad pigment strokes remaining. Multicolor accents distributed across all four sides make the rarity unmistakable at thumbnail scale. No sparkly particle cloud, no shiny foil or neon, no glow baked in. Preserve calm aperture and legible broad forms.",
+      "prompt": "Use case: precise-object-edit. Input1 is the APPROVED rare paper-and-ink card border. Design ONE HIGHER RARITY tier as a true visual escalation of the same anime paper-collage theme. Same 1024x1536 canvas and EXACT SAME inner rectangular transparent opening, rail positions, basic paper silhouette and natural proportions. Preserve the slender torn-paper foundation; add decoration by layering along the paper edges and projecting into the outside margin, never obstruct the inner card aperture. This owner wants higher rarity to have MORE DESIGNED ELEMENTS and MORE REFINED DRAWING, not merely color swaps and a tiny stamp. Increase carefully drawn folds, layered silhouettes and selected smaller accents while keeping the broad hand-painted anime masses, matte colored shadows, handmade contours and clear hierarchy. All inner aperture and exterior gaps genuinely ALPHA TRANSPARENT. Frame overlay only: no card illustration, people, text, numbers, watermark or UI. No beveled metal, armor, stone, gemstone, glossy 3D or photoreal texture; this is illustration of crafted paper, tapes, pigment, stamps and flat ribbon bookmarks. No baked glow; application handles animated light.\nTIER: PASTEL CYAN/PINK/LILAC, the MOST elaborately designed tier: FOUR visible staggered paper/vellum layers around the same fixed aperture, with warm white main rails and slim pale cyan, lavender and blush offset edges. Each of FOUR CORNERS has TWO overlapping differently colored tape tabs and a carefully folded pointed paper accent, giving eight tape pieces in total. TOP CENTER has a prominent FOUR-POINT STAR paper crest about 115px across, layered in white, lilac and pale cyan with smaller flat stamped star shapes to either side. BOTTOM CENTER echoes with a smaller layered geometric star seal and two short thin outward-facing ribbon bookmarks. Add elegant sparse CONSTELLATION INK linework: three tiny connected dots per side, a little diamond at each side midpoint, and a thin three-color broken rule on the upper and lower rails. Most refined selected drawing and color layering of the series, with crisp small paper folds and expressive broad pigment strokes remaining. Multicolor accents distributed across all four sides make the rarity unmistakable at thumbnail scale. No sparkly particle cloud, no shiny foil or neon, no glow baked in. Preserve calm aperture and legible broad forms.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-fe33838d-e07b-47a3-82b6-14c9edac3d6d.png",
+      "filename": "prism-rich.png",
+      "note": "多层彩纸 · 双重胶带 · 星轨主纹"
+    },
+    {
+      "key": "token",
+      "label": "衍生",
+      "detail": "Light gray torn-paper frame, gray-teal ink. Keep two diagonal tape tabs in same locations but reduce their LENGTH to about two-thirds, leaving paper rail unchanged. Upper-right pigment is one short gray-teal swatch with a simple dashed rectangular ink stamp beside it, like a temporary attached note. Six broad dashes, no letters. Faint short teal accent at lower left.",
+      "prompt": "Use case: precise-object-edit. Input 1 is the approved hand-painted paper-and-ink game card FRAME, and is the geometric and drawing-style master. Produce ONE alternate rarity version. Preserve the EXACT same 1024x1536 canvas, torn paper rails, inner transparent aperture, outer rail positions, rail width, handmade edges, material and broad brush finish. Do not make higher rarities heavier or more detailed. Change only tape, accent ink color and specified small stamp. Keep matte 2D anime sketchbook brushwork, muted colored grays and limited richer pigment accents. No metal bevels, shiny gems, 3D gloss, glow, filigree, all-over grain, tiny scratches, person or illustration. Interior and exterior must be genuine alpha transparency. Empty reusable frame overlay only. No text, letters, numbers, costs or watermark.\nVERSION: Light gray torn-paper frame, gray-teal ink. Keep two diagonal tape tabs in same locations but reduce their LENGTH to about two-thirds, leaving paper rail unchanged. Upper-right pigment is one short gray-teal swatch with a simple dashed rectangular ink stamp beside it, like a temporary attached note. Six broad dashes, no letters. Faint short teal accent at lower left.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-4a36d99a-8486-4023-ad47-8a91429a3428.png",
+      "note": "短灰青胶带 · 虚线印记"
+    },
+    {
+      "key": "career",
+      "label": "职业",
+      "detail": "Representative of the swordswoman Wu career identity, as a style example: cool off-white paper, slate blue-black tape in same two diagonal positions, dark blue brush swipes with one subdued cobalt accent. Add ONE SMALL flat charcoal ink stamp at upper-right swipe shaped like a simplified crossed pair of slender sword silhouettes, drawn with four economical brush marks. No roses or metal sculpture. This stamp lies on the paper/tape area and doesn't obstruct the aperture.",
+      "prompt": "Use case: precise-object-edit. Produce ONE COMPLETE TRANSPARENT CAREER CARD FRAME, 1024x1536. Input1 is the QUIET PAPER FRAME geometry/master. Keep its original pale torn-paper foundation geometry, but repaint the paper surface itself in broad ivory/gray-beige opaque planes and quiet hand-painted folds, with no fine grain. Preserve exact four rail positions and inner transparent opening (x114..936, y123..1424), original rail thickness and simple paper silhouette. Inputs2-4 are drawing-style references ONLY: hand-painted anime built from broad connected opaque color masses, directional swipes and blunt dabs, grouped 2-3 tone shadows, selective economical contour accents, matte colored grays with concentrated accents. No people or costume copying. Do NOT use the previously overdecorated career frames as the style baseline.\nOWNER CORRECTION: Much LESS ornament, and a UNIFIED anime block-brush finish. Add just ONE SMALL character anchor near the top rail (about 95px wide, 60px high), plus at most ONE tiny related corner accent and two short broad colored swipes. Leave more than 80 percent of the rail length as quiet paper. No winding decorations along both side rails, no repeated tiny ornaments, no extra layers around whole frame, no detailed texture or realistic objects. All motifs must share a simplified painted 2D grammar: 2-3 opaque broad planes, handmade edges, maximum 3-5 short contour marks. The main object MUST look like a few confident brush shapes, NOT photoreal paper collage, botanical illustration, intricately modeled props or detailed stamps. Tiny motif can sit on/just outside top rail; keep aperture clear. True alpha inside aperture and outside frame. No card illustration, text, numbers, cost badge, watermark, fake grain, glow, bevels or 3D.\nANCHOR: Wu: BLACK ROSE AND BLUE RIBBON. One small rose with 5-6 BROAD chunky curved black/charcoal petal strokes and one flat gray-violet shadow turn, a single cobalt-blue ribbon fold behind it with two short quiet tails following the top rail only. A tiny blue tape/ribbon stroke at lower-right corner. No individual petal veining, fine spiral petal network, foliage, scattered petals or long ribbon loops. Rose/ribbon painterly and simple.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-ba9842a9-ba31-48e2-b602-d29a8405e585.png",
+      "note": "概括黑蔷薇 · 一笔蓝丝带",
+      "filename": "career-wu-simple.png",
+      "pigment": "#354a6d",
+      "accent": "#b9cce7",
+      "symbol": "❀",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/art-source/card-paper-rarity-20261015/initial.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    },
+    {
+      "key": "career-wu",
+      "label": "无",
+      "cardIndex": 0,
+      "note": "概括黑蔷薇 · 一笔蓝丝带",
+      "pigment": "#354a6d",
+      "accent": "#b9cce7",
+      "symbol": "❀",
+      "prompt": "Use case: precise-object-edit. Produce ONE COMPLETE TRANSPARENT CAREER CARD FRAME, 1024x1536. Input1 is the QUIET PAPER FRAME geometry/master. Keep its original pale torn-paper foundation geometry, but repaint the paper surface itself in broad ivory/gray-beige opaque planes and quiet hand-painted folds, with no fine grain. Preserve exact four rail positions and inner transparent opening (x114..936, y123..1424), original rail thickness and simple paper silhouette. Inputs2-4 are drawing-style references ONLY: hand-painted anime built from broad connected opaque color masses, directional swipes and blunt dabs, grouped 2-3 tone shadows, selective economical contour accents, matte colored grays with concentrated accents. No people or costume copying. Do NOT use the previously overdecorated career frames as the style baseline.\nOWNER CORRECTION: Much LESS ornament, and a UNIFIED anime block-brush finish. Add just ONE SMALL character anchor near the top rail (about 95px wide, 60px high), plus at most ONE tiny related corner accent and two short broad colored swipes. Leave more than 80 percent of the rail length as quiet paper. No winding decorations along both side rails, no repeated tiny ornaments, no extra layers around whole frame, no detailed texture or realistic objects. All motifs must share a simplified painted 2D grammar: 2-3 opaque broad planes, handmade edges, maximum 3-5 short contour marks. The main object MUST look like a few confident brush shapes, NOT photoreal paper collage, botanical illustration, intricately modeled props or detailed stamps. Tiny motif can sit on/just outside top rail; keep aperture clear. True alpha inside aperture and outside frame. No card illustration, text, numbers, cost badge, watermark, fake grain, glow, bevels or 3D.\nANCHOR: Wu: BLACK ROSE AND BLUE RIBBON. One small rose with 5-6 BROAD chunky curved black/charcoal petal strokes and one flat gray-violet shadow turn, a single cobalt-blue ribbon fold behind it with two short quiet tails following the top rail only. A tiny blue tape/ribbon stroke at lower-right corner. No individual petal veining, fine spiral petal network, foliage, scattered petals or long ribbon loops. Rose/ribbon painterly and simple.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-ba9842a9-ba31-48e2-b602-d29a8405e585.png",
+      "filename": "career-wu-simple.png",
+      "card": {
+        "id": "tt7-goldencicada",
+        "name": "金蝉脱壳",
+        "type": "武术",
+        "rarity": "职业",
+        "cost": 0,
+        "description": "消耗你的所有手牌，并抽 3 张牌。",
+        "art": "cards/martial-tt7-goldencicada.webp",
+        "caption": "无 · 侠客"
+      },
+      "group": "career",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/art-source/card-paper-rarity-20261015/initial.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    },
+    {
+      "key": "career-xingyue",
+      "label": "星月",
+      "cardIndex": 3,
+      "note": "黑黄配色 · 两三色面满月与残月",
+      "pigment": "#79600f",
+      "accent": "#f0d56e",
+      "symbol": "☽",
+      "prompt": "Use case: precise-object-edit. Produce ONE COMPLETE TRANSPARENT CAREER CARD FRAME, 1024x1536. Input1 is the QUIET PAPER FRAME geometry/master. Keep its original pale torn-paper foundation geometry, but repaint the paper surface itself in broad ivory/gray-beige opaque planes and quiet hand-painted folds, with no fine grain. Preserve exact four rail positions and inner transparent opening (x114..936, y123..1424), original rail thickness and simple paper silhouette. Inputs2-4 are drawing-style references ONLY: hand-painted anime built from broad connected opaque color masses, directional swipes and blunt dabs, grouped 2-3 tone shadows, selective economical contour accents, matte colored grays with concentrated accents. No people or costume copying. Do NOT use the previously overdecorated career frames as the style baseline.\nOWNER CORRECTION: Much LESS ornament, and a UNIFIED anime block-brush finish. Add just ONE SMALL character anchor near the top rail (about 95px wide, 60px high), plus at most ONE tiny related corner accent and two short broad colored swipes. Leave more than 80 percent of the rail length as quiet paper. No winding decorations along both side rails, no repeated tiny ornaments, no extra layers around whole frame, no detailed texture or realistic objects. All motifs must share a simplified painted 2D grammar: 2-3 opaque broad planes, handmade edges, maximum 3-5 short contour marks. The main object MUST look like a few confident brush shapes, NOT photoreal paper collage, botanical illustration, intricately modeled props or detailed stamps. Tiny motif can sit on/just outside top rail; keep aperture clear. True alpha inside aperture and outside frame. No card illustration, text, numbers, cost badge, watermark, fake grain, glow, bevels or 3D.\nANCHOR: Xingyue: FULL MOON AND CRESCENT, BLACK + YELLOW. Keep simple charcoal-black paper rails with broad dark-gray painted folds. Top center one small warm yellow full circle drawn in two FLAT opaque yellow/ochre planes, NO crater detail or photographic texture. Lower-right one smaller flat yellow crescent with one broad ochre shadow turn. Two short quiet yellow pigment swipes only. No orbital dot chains, repeated crescents, stars, blue, cyan or purple.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-ed9da6d8-5d2a-4cb8-a9ed-196efedf1802.png",
+      "filename": "career-xingyue-simple.png",
+      "card": {
+        "id": "tt7-holyglow",
+        "name": "沐愈光辉",
+        "type": "法术",
+        "rarity": "职业",
+        "cost": 1,
+        "description": "将你的生命回复至 12 点。",
+        "art": "cards/spell-tt7-holyglow.webp",
+        "caption": "星月 · 牧师"
+      },
+      "group": "career",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/art-source/card-paper-rarity-20261015/initial.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png"
+      ]
+    },
+    {
+      "key": "career-changwuyu",
+      "label": "常无欲",
+      "cardIndex": 4,
+      "note": "紫黑纸边 · 单枚眼形",
+      "pigment": "#69427c",
+      "accent": "#cfafe9",
+      "symbol": "◉",
+      "prompt": "Use case: precise-object-edit. Input1 is the current simplified CAREER FRAME. Preserve its exact 1024x1536 canvas, paper-rail geometry, original transparent aperture and unified hand-painted anime broad-block finish: two or three opaque planes per object, quiet handmade edges, minimal short structural marks. True alpha inside and outside. Keep ornaments sparse. No fine grain, realistic materials, filigree, 3D bevels, text, card illustration, background haze or baked glow.\nCHANGE: Recolor the ENTIRE main paper rails to PURPLE AND BLACK, not pale ivory. Quiet matte near-black charcoal foundation, broad muted deep-violet faces and a few restrained medium-purple highlights. Retain the single small eye on the top rail: two black-violet eyelid strokes and a simple amber iris oval/pupil; no realistic iris detail. One short purple swipe at lower-left. Dominant overall border impression PURPLE + BLACK, no pale white main rails. Keep sparse composition exactly.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-09424105-686f-4b76-8723-f68fb7172c81.png",
+      "filename": "career-changwuyu-simple-final.png",
+      "card": {
+        "id": "tt3sp-shadowshot",
+        "name": "暗影射击",
+        "type": "法术",
+        "rarity": "职业",
+        "cost": 1,
+        "description": "造成 3 点法术伤害；若目标处于诅咒状态，本牌额外施放 1 次。",
+        "art": "cards/spell-tt3sp-shadowshot.webp",
+        "caption": "常无欲 · 降临者"
+      },
+      "group": "career",
+      "references": [
+        "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-29a8126a-efdc-4a28-b5c2-dd295f0db15a.png"
+      ]
+    },
+    {
+      "key": "career-baita",
+      "label": "白塔",
+      "cardIndex": 2,
+      "note": "黄绿纸边 · 概括魔法书",
+      "pigment": "#416c33",
+      "accent": "#e6d56c",
+      "symbol": "▤",
+      "prompt": "Use case: precise-object-edit. Input1 is the current simplified CAREER FRAME. Preserve its exact 1024x1536 canvas, paper-rail geometry, original transparent aperture and unified hand-painted anime broad-block finish: two or three opaque planes per object, quiet handmade edges, minimal short structural marks. True alpha inside and outside. Keep ornaments sparse. No fine grain, realistic materials, filigree, 3D bevels, text, card illustration, background haze or baked glow.\nCHANGE: Recolor the ENTIRE main paper rails to YELLOW AND GREEN, not pale gray-white: muted buttery yellow main planes, sage/forest-green folds and green edge accents, broad quiet matte color blocks. Retain the small open magic book at top center, pale-yellow two-page masses and deep-green cover/spine, one short golden-yellow bookmark. Keep only the short green and yellow swipes already present, no new closed book or decorative motifs. Overall border clearly YELLOW + GREEN; no blue/cyan/teal, no white/gray dominant rails. Maintain simplified anatomy of book and paper folds.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-682b041b-335d-409f-86f5-66d0f5a1c7dc.png",
+      "filename": "career-baita-simple-final.png",
+      "card": {
+        "id": "tt7-arcanebolt",
+        "name": "奥术弹",
+        "type": "法术",
+        "rarity": "职业",
+        "cost": 0,
+        "description": "造成 1 点法术伤害，并抽 1 张牌。",
+        "art": "cards/spell-tt7-arcanebolt.webp",
+        "caption": "白塔 · 法师"
+      },
+      "group": "career",
+      "previousSource": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-584330d6-fee7-4ed8-b24e-42d65fc93fbe.png",
+      "references": [
+        "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-a78ea3a5-a95a-496b-bda0-29ad7f825bd3.png"
+      ]
+    },
+    {
+      "key": "career-heixiang",
+      "label": "黑像",
+      "cardIndex": 1,
+      "note": "黑红纸边 · 最右侧巨剑 · 顶部盾牌",
+      "pigment": "#7b3c37",
+      "accent": "#deaaa0",
+      "symbol": "⚔",
+      "prompt": "Use case: precise-object-edit. Input1 is the current simplified CAREER FRAME. Preserve its exact 1024x1536 canvas, paper-rail geometry, original transparent aperture and unified hand-painted anime broad-block finish: two or three opaque planes per object, quiet handmade edges, minimal short structural marks. True alpha inside and outside. Keep ornaments sparse. No fine grain, realistic materials, filigree, 3D bevels, text, card illustration, background haze or baked glow.\nCHANGE: Heixiang requires BLACK AND RED full-frame palette, a GIANT SWORD on the FAR-RIGHT FRAME RAIL, and a small SHIELD on TOP CENTER. Input2 is ONLY the preferred right-side sword LAYOUT reference; do not copy its textured realistic material or detail. Remove input1's sword lying across the top. Paint main rails matte charcoal-black with broad dark crimson folds and just two red pigment swipes. A vertically oriented massive broad sword spans the far-right rail, hilt at upper-right and tip at lower-right, staying outside the card aperture. Blade is two or three simple charcoal/warm-gray opaque faces, one sparse blunt edge highlight, flat black grip with one red plane, short crossguard; NO grip grooves, cracks, scratches, bevels or detailed metal. Top-center SHIELD is a small simple pointed-bottom silhouette about 100px wide, with a black outer shape and one red inner plane, only one quiet gray edge mark, no heraldic symbol or engraving. Preserve quiet left and bottom rails. Sword and shield use SAME economical anime block brushwork as the paper folds. Overall BLACK + RED impression, no pale white paper rails.",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-37b5d792-0d6b-4e41-8864-54ad1a112aae.png",
+      "filename": "career-heixiang-simple-final.png",
+      "card": {
+        "id": "tt7-ironphalanx",
+        "name": "铁甲阵",
+        "type": "武术",
+        "rarity": "职业",
+        "cost": 2,
+        "description": "你获得 10 点护甲；将 5 张随机卡牌洗入你的牌库，并使这些牌的费用均减少 1 点。",
+        "art": "cards/martial-tt7-ironphalanx.webp",
+        "caption": "黑像 · 战士"
+      },
+      "group": "career",
+      "references": [
+        "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-d2edd1bf-98bd-416e-b707-8aa5bd639768.png",
+        "D:/素材/代号柒/搜打撤/game/art-source/card-paper-rarity-20261015/career-heixiang.png"
+      ]
+    }
+  ]
+}
