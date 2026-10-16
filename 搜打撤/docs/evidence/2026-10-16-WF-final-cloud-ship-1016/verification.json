@@ -1,0 +1,102 @@
+{
+  "sourceCommit": "37df47beb964b13e1e527cd5c9edb8b322cc2fe8",
+  "sourceTree": "bd3cc4461122a252e6211393ee4f0f203cfc1feb",
+  "remoteMasterVerified": "37df47beb964b13e1e527cd5c9edb8b322cc2fe8",
+  "baseline": "2d881711bd03e2cad0d6608820afa4ec9f427a58",
+  "gate": {
+    "outcome": "passed",
+    "exitCode": 0,
+    "mode": "full",
+    "totals": {
+      "testFiles": "500 passed (500)",
+      "tests": "4767 passed | 16 skipped (4783)"
+    },
+    "unhandledErrors": 0,
+    "report": "docs/evidence/2026-10-16-WF-final-cloud-ship-1016/2026-10-16T15-32-57.322Z-cf0f8c7b-staged.json",
+    "reportBytes": 3351605,
+    "reportSha256": "7220a273305a0a55e8c2d33ccf5b85472306e4e79610a9a1b06a949d7abb2d56",
+    "snapshotTrackedMutations": [],
+    "indexUnchanged": true,
+    "command": "VITEST_MAX_FORKS=4 VITEST_MIN_FORKS=1 npm run --silent workflow -- staged --task WF-final-cloud-ship-1016 --date 2026-10-16 --json",
+    "note": "Large full report/log remain local; normal pre-commit exactly reused its receipt. No bypass or timeout changes."
+  },
+  "build": {
+    "viteProduced": true,
+    "npmBuildExit": 1,
+    "postbuild": "failed-four-existing-budgets",
+    "packageMiB": 139.91,
+    "entryGzipKiB": 301.9,
+    "initialJsGzipKiB": 347.3,
+    "cssGzipKiB": 200.7,
+    "thresholds": {
+      "packageMiB": 112,
+      "entryGzipKiB": 270,
+      "initialJsGzipKiB": 310,
+      "cssGzipKiB": 136
+    },
+    "startup": "6/40",
+    "omissions": 195,
+    "logSha256": "a82595497dd97b61cd1d11b5b406f31e56bb0cd64cb556c78fa4644d34ce7d97",
+    "source": "isolated complete tracked source snapshot; local untracked rig/weather candidates excluded"
+  },
+  "browser": {
+    "platform": "Codex built-in cua",
+    "attempts": 2,
+    "result": "blocked",
+    "error": "trusted Node process exited unexpectedly; kernel reset, rerun your request",
+    "unverified": [
+      "latest common battle transition",
+      "latest supply v6 animation timing",
+      "self/area field release",
+      "infusion gameplay",
+      "second wallpaper real input"
+    ],
+    "reusedEvidence": [
+      "WF-random-card-results",
+      "WF-reward-separate-1016",
+      "WF-general-transition-1016"
+    ],
+    "newPlaySession": false
+  },
+  "docs": {
+    "cleanSnapshotLinks": 481,
+    "findings": 0
+  },
+  "assets": {
+    "cleanSnapshotErrors": 0,
+    "unchangedHistoricalWarnings": 617,
+    "checkExit": 0
+  },
+  "environment": {
+    "localNode": "24.13.0",
+    "localVitest": "3.2.7",
+    "ciConfiguredNode": "22",
+    "maxForks": 4,
+    "minForks": 1
+  },
+  "fixes": [
+    "supply frame duration selected before frame index advances",
+    "nest emergency tests fixed ordinary/gift pools; three cat gifts correctly create three extra cards",
+    "six resource consumer fingerprints re-reviewed with omissions/guards unchanged",
+    "generated art manifest rebuilt without untracked candidates",
+    "over-budget raw reference links converted to local paths plus retrieval/hash records"
+  ],
+  "preserved": [
+    ".codex/config.toml and four NAI backups; credentials unchanged",
+    "tools/NAI source, settings, tests and NAI-PROMPTING.md remain local",
+    "desktop-app/main.js and package.json frozen local changes",
+    "three historical quartermaster write-attempt counter artifacts",
+    "all untracked art-source, obsolete rigs/weather assets, PV, design candidates and intermediate reports",
+    "incomplete WF-arknights-skill-forward-test experiment"
+  ],
+  "services": "No local service started, restarted or stopped; existing preview records retained as history/resources",
+  "transfer": {
+    "requirement": "complete source plus official assets at final commit; no old checkout assumed",
+    "supported": [
+      "private GitHub authenticated full archive or clone at exact SHA",
+      "first-party ChatGPT Library host file-create / prepare / finalize tools discovered; not uploaded"
+    ],
+    "rejectedHistoricalAssumption": "Private shallow Git handoff workflow remained in API inventory but its master file returned 404; not used",
+    "newThirdPartyUpload": false
+  }
+}

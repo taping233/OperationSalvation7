@@ -8,11 +8,25 @@
 
 ## 活跃登记
 
+当前无源码编辑占用。老板已明确本地没有进行中修改，本轮已完成工作统一落库；旧预览服务资源保留，见近期已释放原登记，未据历史PID停止进程。
 
+| 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
+|---|---|---|---|---|
 
+## 无主物品（只记录勿动，等认领/处置）
 
+| 物品 | 现象 | 发现时间 | 备注 |
+|---|---|---|---|
+| `docs/evidence/2026-10-02-staged-check/`大报告 | 原9d4b5ef隔离门证据，超过1MB留本地 | 10-03 | 已有证据来源，不是无主代码；保留原位，不纳入Git |
+| 根`.codex/config.toml.bak-nai-*`三个备份与`nul` | 当前Git未跟踪；备份关联NAI试验，nul内容/归属未核实 | 2026-10-14 | 仅登记，不删除；NAI备份不等同待提交配置 |
 
+## 近期已释放
 
+### 2026-10-16 最终本地收尾销账 WF-final-cloud-ship-1016
+
+老板明确本地无进行中修改并授权全部完成改动提交推送；正式源码 `37df47beb964b13e1e527cd5c9edb8b322cc2fe8` 已核对远端master，验证与保留边界见 [收官证据](evidence/2026-10-16-WF-final-cloud-ship-1016/README.md)。本轮编辑占用释放；NAI/原始及候选/冻结桌面/未完成技能实验不纳入。旧服务仅保留历史与资源，不表示已停止。11项待拍板原账不改、不虚假销为完成。
+
+以下原活跃登记整体转作历史：不再表示当前编辑占用，原完成/待验收/候选及资源事实保留。
 
 Friday（白塔黑像第二壁纸，聊天01a144c7），2026-10-16：自有 `docs/evidence/2026-10-16-baita-heixiang-nai45/`、`game/assets/reconstruction/wallpaper-baita-heixiang-1016.webp`、`game/assets/asset-manifest.json`本图条目、`game/src/ui/title-wallpaper.js`、`game/css/title-p0.css`本图选择器、`tests/title-wallpaper.test.js`；编辑中。老板授权最新修脸候选接入首页第二张，现第一张雪原公路保留，沿原切换/偏好存储，定向与当前窗口内置浏览器核验；不build、不提交，复用5200服务不认领。
 
@@ -65,14 +79,13 @@ Friday（首页图标预览服务 WF-home-icons-install-1015）：工作目录D:
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
-| Friday（最终云端交接 WF-final-cloud-ship-1016） | 全部完成未提交源码/正式资源/台账；证据 docs/evidence/2026-10-16-WF-final-cloud-ship-1016/ | 老板授权统一核对、补验、销账、正常提交推送；本机配置/NAI/原始与候选保留，不开启下一轮试玩 | 2026-10-16 | 编辑中 |
 | Friday（轨道站实机预览服务 WF-battle-platform-live-1016） | 隔离Vite5318/PID42064/exec46471，工作目录D:/素材/代号柒/搜打撤；Codex内置浏览器tab5 | 保留老板当前战斗预览，源码编辑已释放；服务由本会话创建，后续停止前核对身份 | 2026-10-16 | 已交付预览，资源保留；原5200未动，不build、不提交 |
 | Friday（网页版启动 01a13e37） | 工作目录 `D:\素材\代号柒\搜打撤`；5200 / PID 7404；`node_modules/.cache/web-up-5200.json` | 老板要求打开网页版，使用现有 web-up 启动器后台启动，入口及 PNG/WebP 响应有效；服务保留供老板使用 | 2026-10-15 | 已释放；服务历史保留，未停止服务；创建会话 01a13e37-5915-7490-ac18-166000b29ccb；未改游戏源码 |
 | Friday（拉起主线 Vite WF-mainline-up-1015） | 工作目录 `D:/素材/代号柒/搜打撤`；端口5200；PID26504；本会话创建 | 老板要求拉起主线；`npm run web` 独立后台启动，叙事编译后探针（入口/PNG/WebP）通过；启动时5200无监听，登记内旧PID23856已不在，未动他人记录 | 2026-10-15 | 已释放；服务历史保留，未停止服务；进程记录 `node_modules/.cache/web-up-5200.json`，收官由本会话核实身份后停止 |
 | Friday（本地网页版 WF-local-web-1014） | 工作目录 `D:/素材/代号柒/搜打撤`；端口5200；PID23856；本聊天创建 | 老板要求拉起本地网页版；`npm run web -- --skip-compile` 独立后台启动；EXE准备期间补齐锁定依赖后重启 | 2026-10-14 | 已释放；服务历史保留，未停止服务；原时点入口、PNG/WebP及战斗renderer模块响应有效；进程记录 `node_modules/.cache/web-up-5200.json` |
 | Friday云端实页baseline验收（capture_cloud_game_baseline） | 只读源码；独立Vite5307，启动于Friday云端Xfce Terminal窗口35651587；证据仓库外cloud-game-captures/baseline-2d1e7d9a | 固定源码2d1e7d9a真实试玩/取材，不build、不改游戏源码；实际云端原生PID40，命令node node_modules/vite/bin/vite.js --host 0.0.0.0 --port 5307 --strictPort；证据service.json | 2026-10-14 | 已释放；服务历史保留，未停止服务；原baseline23组与修后12组已完成并暂停素材；保留自有Vite5307供代码功能回归；无.git导致handoff受阻；正式云端Terminal路由实机跑通 |
 
-## 无主物品（只记录勿动，等认领/处置）
+原无主表四项完成记录已查到已提交证据（基线含b3820ca6），转入历史保留；清理行为不在本轮重新执行：
 
 | 物品 | 现象 | 发现时间 | 备注 |
 |---|---|---|---|
@@ -80,10 +93,7 @@ Friday（首页图标预览服务 WF-home-icons-install-1015）：工作目录D:
 | Friday（追加清理 WF-secondary-cleanup-1015） | `docs/evidence/2026-10-15-WF-secondary-cleanup/`；固定745件删除清单见收据 | 按老板授权删除旧音乐EXE、运行ZIP与743张总录渲染/QA图，约519.95MiB；Word/3份PDF/数据/脚本及ZIP清单保留 | 完成未提交、占用释放；14件保留文件SHA256一致，5200原PID23856与HTTP200保留；未改游戏、未提交或推送 |
 | Friday（获批4.8GiB清理 WF-approved-storage-cleanup-1014） | 固定8项及保存档案见 `docs/evidence/2026-10-14-WF-approved-storage-cleanup/README.md` | 按老板明确授权删除约4.814GiB；四份独有报告及44份记录共13.42MiB已保存，48件哈希复核一致 | 完成未提交、占用释放；项目约10.46GiB；5200原PID23856保留，6项HTTP及11件保护文件哈希通过；其他候选保留，无提交或推送 |
 | Friday（EXE诊断与删除 WF-local-exe-fix-1014） | 原交付 `desktop-app/dist/experience-20261014/搜打撤-代号7.exe`；诊断现场 `node_modules/.cache/exe-fix-1014` 与 `desktop-app/node_modules/.cache` | 老板改为删除EXE并盘点清理项；目标EXE已按明确指示删除，其余只读盘点 | 已释放；8139/PID31112已核身份停止并复核无监听，5200/PID23856保留；诊断副本局部检查未复现原故障，不记修复通过；未改游戏/桌面源码，缓存与旧包保留待授权 |
-| `docs/evidence/2026-10-02-staged-check/`大报告 | 原9d4b5ef隔离门证据，超过1MB留本地 | 10-03 | 已有证据来源，不是无主代码；保留原位，不纳入Git |
-| 根`.codex/config.toml.bak-nai-*`三个备份与`nul` | 当前Git未跟踪；备份关联NAI试验，nul内容/归属未核实 | 2026-10-14 | 仅登记，不删除；NAI备份不等同待提交配置 |
 
-## 近期已释放
 
 Friday（战斗通用过场接线 WF-battle-common-transition-1016，聊天01a14535），2026-10-16：完成未提交、编辑释放。战斗/首脑接回 enterNode；移除独立全屏插画与右滑揭幕，资源保护保留紧凑失败提示；移除 city-run 专用动画/字号覆盖，沿共用切幕样式与980ms。属地：game.run.flow.js、game.run.altar.js、game.run.scenes.js、battle.presentation-ready.js、general-transition.js、battle.css、camp-entry.css、对应测试、development.md对应段及自有证据。此前119项通过仅覆盖接线与独立过场移除；老板要求最终样式后不再检测，已直接生产构建并打包成功。产物 desktop-app/dist/搜打撤-代号7.exe；本地依赖与desktop-app/game已生成，资产索引沿构建自动更新；无新增服务、未启动EXE、不提交。证据 docs/evidence/2026-10-16-WF-battle-common-transition/。
 

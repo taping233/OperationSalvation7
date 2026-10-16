@@ -19,10 +19,23 @@
     "正常提交门通过且远端精确SHA确认",
     "本机配置、NAI设置、原始及候选文件保留"
   ],
-  "stage": "doing",
-  "checks": [],
-  "unverified": [
-    "最终远端CI与生产体积预算待核对"
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "result": "passed",
+      "description": "源码正常提交门通过并已核对远端master精确SHA；完整验证见verification.json"
+    }
   ],
-  "updatedAt": "2026-10-16T15:23:37.712299+00:00"
+  "unverified": [
+    "四项既有构建体积预算仍超限",
+    "内置浏览器初始化失败，最新场景实页待云端核验",
+    "最终文档提交远端CI待最后回执核对"
+  ],
+  "updatedAt": "2026-10-16T15:38:58.324026+00:00",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按授权完成收尾；完整门通过，预算及浏览器边界明确披露"
+  }
 }
