@@ -1,0 +1,97 @@
+# NAI 提示词组合
+
+画师链与风格文本统一由 [nai_style.py](../../../tools/nai_style.py) 提供。当前默认为 **v2.1（追加质量词）**，沿用v2.0的画师串、风格文本和通用负面，在基础正向提示词末尾追加 `QUALITY_BLOCK`，保留重复的 `masterpiece`。画法沿已恢复的v1.7：保留细彩线、概括上色、衣装结构与叠层节奏，脸与手势优先。画师链保持 `1.2::miv4t::, 0.8::quasarcake::`。旧v1.8、v1.9、手册配方与V5分槽图保留为历史候选；当轮明确指定的参考与临时覆盖优先。
+
+两张参考的取舍：无的脸、比例与服装以新立绘为准，黑裙保留较概括的明暗面；群像用于线条层次、衣装细节的选择和构图节奏，不引入额外角色。参考的亮背景不覆盖用户指定的雪夜灯光。各图路径与 SHA256 见[参考配置](../../evidence/2026-10-15-nai-snow-night/v4-reference-config.json)。
+
+## 组合方式
+
+1. 基础提示词：`build_prompt(人数/用途/主要动作, 环境/构图/光色)`；人脸、发色、服装不在双人基础词中重复堆叠。
+2. 每个角色：`char_prompts=[{'prompt': 身份外貌, 'uc': 该角色专属排除, 'center': {'x': 0.3, 'y': 0.5}}, ...]`。角色按画面从左到右排列；需要固定位置时传 `use_coords=True`。V4/4.5 官方定位为 5×5 网格，坐标是构图引导，不能当像素定位保证。
+3. `build_uc(本图专属排除)`：保留手指异常基线，按实际错误补少量词。双人图不加 `solo`，黑色衣服不在共用负面里排除，窗外雪景不全局排除 `snow`。亮度分别描述室内和室外，不只写笼统的 `dark`。
+4. 关键标签靠前；用短自然语言交代人物与物体的关系。权重采用 `1.2::内容::` 等闭合语法，只在实际遗漏时小幅增加。画师权重保持原样。
+
+V4.5 的基础正面与所有角色正面**合计约 512 个 T5 token**，不能给每个角色各算 512。词数不能精确代替分词计数；多个角色要先分配总预算，再写身份与场景。负面内容也应单独核对总预算。权重语法、标点与内部特殊标记的处理可能使本地原始 T5 计数和服务端有效计数不同，保留余量。示例原始文本由 Google T5 分词数据本地测算，第二版正面合计 389；第一版 556，被老板判定效果差并保留为对照，见[本轮记录](../../evidence/2026-10-15-nai-snow-night/README.md)。
+
+生成仍由 [nai_gen.py](../../../tools/nai_gen.py) 执行；旧 `char_prompt` 单人调用兼容，多人调用与旧参数互斥。默认模型、步数、CFG、采样器、节流与额度机制沿现有客户端。客户端关闭自动质量与负面预设；共享正向构建器手动追加 `high complexity, masterpiece, best quality, highly detailed, very aesthetic, masterpiece`，按老板2026-10-16要求保留重复词，不做正向去重。`location` 等环境词按场景决定，立绘不自动带环境。
+
+## 新批次操作流程
+
+1. **确定用途和身份**：只读对应人物页的现行段并查看认可参考。立绘写清全身/半身、裁切与背景；动作卡围绕动作发生点组织镜头；物件卡突出物体形状和用途；场景图明确空间与光源。不把立绘站姿、白底、脚下地面或道具完整入框要求带到所有用途。
+2. **分槽构建**：基础词由 `nai_prompt_clean.build_asset_prompt()` 组合人数/主要动作、用途、构图、单图光色材质，自动引用当前画师与风格；角色槽只写身份外貌与本人专属排除。动作、位置与构图在基础词中说明，身份不重复堆叠；无人物图用空角色列表。半身图不调用会追加全身背景的立绘 helper。多人需要明确施受关系时再按本文多人规则写角色动作。
+3. **写可核对的锚点**：用普通圆墨镜、黑蔷薇的附着部位、入鞘背剑及肩后露柄等具体描述；必要时同时写角色侧和画面侧。以实际画面核验方向和配饰是否兑现，不把自然语言当作位置保证。按本图错误追加少量负面词，不把某张的修正全局化。
+4. **准备请求与对照**：生成前记录实际模型、固定整数种子、尺寸、全部请求参数、基础正负面、角色槽与参考设置。默认模型/采样仍由客户端维护；需V5时显式传入，不因换分槽自动改模型。同模型/种子/尺寸/采样/参考条件下，每轮只改一类变量；换模型或同时改多项时标为整体方案比较。锁种子用于控制随机输入，不保证跨模型或改词后构图相同。
+5. **单张生成并保存**：只走现有 `nai_gen` / `nai_guard`，一轮默认一张，沿用节流、额度与失败即停规则。请求先保存为prepared，成功后记录原图路径、SHA256和generated；失败保留请求及失败状态，不自动刷图。原始请求快照不随共享配方改写；认可反馈与助手观察分开记录，候选未经确认不替换游戏素材。
+
+本流程仅吸收旧手册的组织与复现方法。`limited palette`、`film grain`、`flat color`、`gradient background`、长发细线句及手册UC均不注入当前默认；若单图明确要求，按该图用途记录。模型能力、额度和参数支持以现行客户端及核实依据为准，旧手册不是实时接口规范。
+
+### 可复用请求与回执示例
+
+在专属证据目录保存脚本，使用现有Python环境；以下假定脚本位于 `docs/evidence/<任务>/`。`character_appearance`、`scene_action`、`purpose`、`composition`、`light_material`、`extra_uc`、`references`、`output`、`seed`、`model` 由当次任务填写。`references` 记录实际来源、SHA256、用途与上传设置；本例不上传参考。全量payload不含凭据，不记录token；如使用Vibe，另记源图/编码哈希及强度，不把缓存编码复制进Git。
+
+```python
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / 'tools'))
+import nai_gen
+import nai_prompt_clean as style
+
+prompt = style.build_asset_prompt(
+    scene_action, purpose_layer=purpose, composition_layer=composition,
+    light_material_layer=light_material)
+uc = style.build_uc(extra_uc)
+characters = ([{'prompt': character_appearance, 'uc': '',
+                'center': {'x': .5, 'y': .5}}] if character_appearance else [])
+request = nai_gen.build_payload(prompt, uc, width=832, height=1216,
+                               seed=seed, model=model, char_prompts=characters)
+receipt = Path(__file__).with_name('request.json')
+assert not receipt.exists() and not Path(output).exists(), 'Use a new candidate path.'
+record = dict(status='prepared', recipe_version=style.RECIPE_VERSION,
+              cleanup_version=style.CLEANUP_VERSION, request=request,
+              references=references, output=str(output))
+def save():
+    receipt.write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding='utf-8')
+save()
+try:
+    path, actual_seed = nai_gen.generate_image(
+        prompt, uc, width=832, height=1216, seed=request['parameters']['seed'],
+        model=model, out=output, char_prompts=characters)
+except BaseException as error:
+    record.update(status='failed', error_type=type(error).__name__)
+    save()
+    raise
+record.update(status='generated', seed=actual_seed,
+              sha256=hashlib.sha256(Path(path).read_bytes()).hexdigest())
+save()
+```
+
+生成后在该回执补充画面命中项、偏差与老板反馈。大于1MB的原图不进Git，回执保留相对路径、SHA256及获取方式。完整请求与原图配套保存；历史文本实验的版本号不足以判断使用了哪段风格词。实例契约离线验证见[本轮证据](../../evidence/2026-10-15-nai-workflow20/verification.json)，没有因流程更新额外出图。
+
+## 雪夜共餐示例
+
+使用现行无及光牧星月身份：无在左拿包子靠近嘴边，星月在右舀汤；暖灯照亮两人脸与桌面，封闭窗外是近黑城市及少量飘雪。未来城市用现代合成材料和建筑轮廓表达。人物用中景放大，食物辅助叙事；角色站姿、白底、祝祷动作与手提星灯不随立绘带入本图。
+
+当前双参考示例见[生成脚本](../../evidence/2026-10-15-nai-snow-night/prepare_reference_example.py)和[可复制提示词](../../evidence/2026-10-15-nai-snow-night/prompt-v4.txt)。v2/v3 为历史对照，原始请求分别冻结，不随共享配方重写。先用固定 seed 出样，核对角色、吃饭动作、窗内外明暗和画风；对照实验一次改一类变量，用户改变风格目标后另起新样本，不把它称为单变量对照。提示词结构验证不能代替审美验证，单张成功不能证明双人稳定性。
+
+## 显式氛围参考
+
+[nai_vibe.py](../../../tools/nai_vibe.py) 调用官方 `/ai/encode-vibe`；按原图内容、模型与信息提取设置缓存并校验编码，复用时不再次发编码请求。编码与生成共用现有跨进程节流，不绕过冷却或未知请求状态。缓存损坏停止，不自动重新扣费。默认无参考；调用者须显式把 `vibes=[{'encoding': 编码, 'strength': 强度}, ...]` 传给客户端。
+
+本轮老板明确授权上传两张原图并消耗约 4 Anlas 编码，设置为信息提取 1.0、群像强度 0.30、无强度 0.35，总强度 0.65。这是样本参数而非稳定最优值。氛围参考会影响构图、配色乃至人物特征，不等同于专门的人物身份锁定；需检查多余角色、白底、站姿和服装混入。不得把信息提取降至很低当作“只取画风”：V4+ 降低时先损失高频纹理，可能留下更多构图。
+
+多人互动只在存在施受关系或互相接触时考虑 `source#动作` / `target#动作`，并核对官方支持的动作标签；本例是分别进食，使用各自角色槽的动作词。原创人物不能用模型未学过的角色名替代发型、眼色、服装锚点；只写 Wu/Xingyue 不提供身份保证。
+
+## 网络依据
+
+- [官方多人指南](https://docs.novelai.net/en/image/multiplecharacters/)：场景/画风用基础提示，各角色独立提示与负面；位置顺序和自然语言相互呼应。
+- [官方提示词基础](https://docs.novelai.net/en/image/basics/)：自然语言可与标签结合，重要内容放前半段，避免重复占用上下文。
+- [官方权重语法](https://docs.novelai.net/en/image/strengthening-weakening/)：数值权重须闭合；负权重与 UC 各有用途，不默认堆叠极端权重。
+- [官方质量词](https://docs.novelai.net/en/image/qualitytags/)及[负面内容](https://docs.novelai.net/en/image/undesiredcontent/)：预设随模型不同；本项目手动配方按用途组合，不照搬长排除表。
+- [官方模型说明](https://docs.novelai.net/en/image/models/)：V4/4.5 基础词与所有角色词共享约 512 个 T5 token。
+- 老板指定的[衡鲍 NAI 4.5 教程](https://www.bilibili.com/video/BV1TeMbzwExw/)：已读自动中文字幕全文；对应章节约 13:02 提示词、17:45 权重、38:01 多人、40:30 定位、42:02 互动。自动字幕存在识别错误，括号倍率等数值按官方文档核对，不把教程中的词条强度推测写成模型事实。
+- [官方画风教程](https://docs.novelai.net/en/image/tutorial-artstyles/)：画风词前置，通用审美质量词可能与指定风格冲突；媒介词本身也不是画风保证。
+- [官方氛围参考说明](https://docs.novelai.net/en/image/vibetransfer/)与[接口契约](https://image.novelai.net/docs/doc.json)：参考强度、信息提取、编码费用与缓存、编码及生成字段。

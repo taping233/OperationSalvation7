@@ -1,0 +1,97 @@
+{
+  "status": "generated",
+  "source": "../2026-10-16-nai-v32-dinner/request.json",
+  "artist_chain": "0.5::ask (askzy)::",
+  "request": {
+    "input": "1girl, solo, adult woman, sitting at a dining table, eating rice and braised meat, gentle smile, small fang, looking at the meat held by her chopsticks.\n\nWide waist-up view, slightly low camera. Her complete head, ponytail base, both hands, rice bowl and chopstick tips fit inside the canvas. Her left hand supports a small white porcelain rice bowl from below at chest height, below her chin; a modest portion of rice stays inside the bowl. Her right hand holds a pair of chopsticks, pinching one small bite-sized piece of braised meat at their tips just in front of her slightly open mouth. A small visible gap separates the meat from her lips. The bowl stays below her face; neither hand obscures her face. Left hand supporting the rice bowl, right hand using chopsticks; the chopstick tips and single small piece of meat remain visible beside her mouth. Her black rose hair ornament sits above her own left temple, on screen-right, separate from the sunglasses on top of her head. A small soup bowl and food plate sit in the lower-left foreground, below her hands. A black sheathed straight sword rests against the rear wall, behind her, away from her hands and food. Modern apartment kitchen, warm pendant lamp, cool night light through the window.\n\nWarm light softly illuminates her face and both hands; cool window fill stays subdued. Small porcelain highlights, matte black cloth.\n\n0.5::ask (askzy)::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Construct clothing from broad, opaque interlocking color planes with a few deliberate brush accents. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Use clear grouped shadows, angular cloth folds and subtle brush texture. Keep fine linework selective around the eyes, fingers and accessories; let larger painted shapes carry the hair and fabric. Skin has delicate restrained transitions; black cloth remains matte, glass and ceramic receive small material-specific highlights. Restrained metal reflections, controlled material highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Avoid uniform polished gradients across every surface. Rich but controlled color, restrained colors, precise focal detail, quieter background detail. For character scenes, softly illuminated face and hands remain the focal points; keep the face and hands clearly readable.\n\nvery aesthetic, masterpiece, no text",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 3058649506,
+      "negative_prompt": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+          "uc": "",
+          "center": {
+            "x": 0.68,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, adult woman, sitting at a dining table, eating rice and braised meat, gentle smile, small fang, looking at the meat held by her chopsticks.\n\nWide waist-up view, slightly low camera. Her complete head, ponytail base, both hands, rice bowl and chopstick tips fit inside the canvas. Her left hand supports a small white porcelain rice bowl from below at chest height, below her chin; a modest portion of rice stays inside the bowl. Her right hand holds a pair of chopsticks, pinching one small bite-sized piece of braised meat at their tips just in front of her slightly open mouth. A small visible gap separates the meat from her lips. The bowl stays below her face; neither hand obscures her face. Left hand supporting the rice bowl, right hand using chopsticks; the chopstick tips and single small piece of meat remain visible beside her mouth. Her black rose hair ornament sits above her own left temple, on screen-right, separate from the sunglasses on top of her head. A small soup bowl and food plate sit in the lower-left foreground, below her hands. A black sheathed straight sword rests against the rear wall, behind her, away from her hands and food. Modern apartment kitchen, warm pendant lamp, cool night light through the window.\n\nWarm light softly illuminates her face and both hands; cool window fill stays subdued. Small porcelain highlights, matte black cloth.\n\n0.5::ask (askzy)::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Construct clothing from broad, opaque interlocking color planes with a few deliberate brush accents. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Use clear grouped shadows, angular cloth folds and subtle brush texture. Keep fine linework selective around the eyes, fingers and accessories; let larger painted shapes carry the hair and fabric. Skin has delicate restrained transitions; black cloth remains matte, glass and ceramic receive small material-specific highlights. Restrained metal reflections, controlled material highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Avoid uniform polished gradients across every surface. Rich but controlled color, restrained colors, precise focal detail, quieter background detail. For character scenes, softly illuminated face and hands remain the focal points; keep the face and hands clearly readable.\n\nvery aesthetic, masterpiece, no text",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+              "centers": [
+                {
+                  "x": 0.68,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.68,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "scope": "Single sample removing quasarcake/rella only; shared v3.2 defaults unchanged.",
+  "validation": {
+    "full_payload_diff_guard": "passed; only artist chain and synchronized caption changed"
+  },
+  "output_relative": ".tmp/nai/nai-v5-ask-only-20261016/wu-ask05.png",
+  "size": [
+    1344,
+    768
+  ],
+  "sha256": "df7570443e9b8118b2b7add1507209537236f92063c751688d33fe151aaf4f1d",
+  "bytes": 1148729
+}

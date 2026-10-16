@@ -1,0 +1,20 @@
+{
+  "positive_raw_t5_counts": [
+    268,
+    74,
+    65
+  ],
+  "positive_total": 407,
+  "unchanged_from_v2": [
+    "artist_chain",
+    "subject",
+    "scene",
+    "characters",
+    "all_parameters",
+    "negative_prompts"
+  ],
+  "changed": [
+    "shared_style_text"
+  ],
+  "recipe_version": "1.6"
+}

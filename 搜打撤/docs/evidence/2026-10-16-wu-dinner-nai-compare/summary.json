@@ -1,0 +1,47 @@
+{
+  "model": "nai-diffusion-4-5-full",
+  "seed": 3058649506,
+  "size": [
+    1216,
+    832
+  ],
+  "results": [
+    {
+      "name": "A-no-artist",
+      "sha256": "827461c3cc1bdc9cbe3f53b2e52344b4265c27fa059631dab920b92c78dc60c0",
+      "path": ".tmp/nai/wu-dinner-diagnosis-20261016/A-no-artist.png",
+      "review": "黑蔷薇和墨镜存在；夹肉动作未落实，前景食物过大。"
+    },
+    {
+      "name": "B-ask-ciloranko",
+      "sha256": "f61d524a4d0a1564d496255f4417f1a473175b2a3f8ccdc8d9c760055986d92b",
+      "path": ".tmp/nai/wu-dinner-diagnosis-20261016/B-ask-ciloranko.png",
+      "review": "线条较简洁；夹肉动作存在，黑蔷薇缺失。"
+    },
+    {
+      "name": "C-quasarcake-ask",
+      "sha256": "78b2b3a51c2d84e3bb1697b5e5630a350e046aa0dcecc87c0c19e4bdb113b926",
+      "path": ".tmp/nai/wu-dinner-diagnosis-20261016/C-quasarcake-ask.png",
+      "review": "墨镜、黑蔷薇与夹肉动作同时出现；原版夸张前景仍在。"
+    },
+    {
+      "name": "D-simple-prompt",
+      "sha256": "89ad4f9c7511ea713237978e5c3d37f301c8fab6f888e3e5d98c3b81d4f64cc4",
+      "path": ".tmp/nai/wu-dinner-diagnosis-20261016/D-simple-prompt.png",
+      "review": "前景收住，墨镜与黑蔷薇存在；多出高领，筷子和持物关系仍需修正。"
+    },
+    {
+      "name": "E-config",
+      "sha256": "af9410b1d14d8a69e74497f2786f55c52c3570a6e91cd08ce1e049c02388925b",
+      "path": ".tmp/nai/wu-dinner-diagnosis-20261016/E-config.png",
+      "review": "降低CFG并关闭Variety+；大前景与黑蔷薇缺失仍在。"
+    },
+    {
+      "name": "F-combined",
+      "sha256": "859610fd53969ea920beb4818aafd1b0220d01ffdd3d517387f1f151994818da",
+      "path": ".tmp/nai/wu-dinner-diagnosis-20261016/F-combined.png",
+      "review": "精简提示词加C画师链；构图收住且头饰可见，多出高领，肉停在碗边而非嘴边。"
+    }
+  ],
+  "conclusion": "本种子下，精简提示词最明显地改善前景比例和头饰呈现；画师链影响画法与细节取舍，配置单改未解决主要问题。D同时调整场景、质量词和角色描述，E同时改变CFG与Variety+，不能归因到某一个词或参数。未跨种子复验，不推断稳定命中率。"
+}

@@ -1,0 +1,102 @@
+{
+  "status": "generated",
+  "recipe_version": "3.0",
+  "artist_chain": "0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::",
+  "source": {
+    "path": "game/assets/reconstruction/wallpaper-wu-1004.webp",
+    "sha256": "0ce34acb0c698d911266b69615b45ffe812997e5c08bb62337dfd3149b05644d",
+    "size": [
+      2048,
+      768
+    ]
+  },
+  "scope": "Text-to-image reinterpretation of current default title wallpaper, not an exact edit or NAI payload reproduction. Source viewed locally, not uploaded. Same 8:3 aspect at ordinary-size 1536x576; v3.0 recipe with single-scene kitchen->snowy scenery substitution; homepage long gown override. No game replacement or shared default changes.",
+  "request": {
+    "input": "1girl, solo, adult woman, seated on scattered book pages beside a frozen lake in a snowy outdoor library, holding one red rose, looking at viewer, quiet composed expression, closed mouth.\n\nVery wide panoramic composition, full seated figure near the center, complete head and gown inside the canvas. Her torso rises upright near center-left; bent legs extend diagonally toward screen-right under a floor-length black off-shoulder ruffled gown. Her right palm presses flat onto the pages at screen-left beside her hip, supporting her weight. Her left hand holds the stem of one red rose at chest height on screen-right, the blossom below her shoulder, away from her face. Right hand supporting her on the pages, left hand holding a single red rose. Her silver high ponytail flows down onto the pages toward screen-left. Black ankle boots peek from the hem at screen-right. A long black sheathed straight sword lies horizontally on the pages behind her hips, extending toward screen-right; neither hand touches it. An open book rests on a small stack in the lower-left foreground. Loose pages spread beneath her and across the icy shore. Snow-covered leaning wooden bookshelves stand among tall bare winter trees on both sides of the frozen lake. Distant shelves and conifers fade into pale winter mist. Cold silver-blue-gray snow and ice, charcoal black gown, small blue ribbon accent, one red rose accent. Soft overcast winter daylight, quiet serious atmosphere, subtle icy reflections, light falling snow. No interface or lettering.\n\nCool diffuse daylight, matte dark cloth, softly lit face, subdued distant detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Construct hair and clothing from broad, opaque interlocking color planes with a few deliberate brush accents. Use clear grouped shadows, angular cloth folds and subtle brush texture. Keep fine linework selective around the eyes, fingers and accessories; let larger painted shapes carry the hair, fabric and snowy scenery. Skin has delicate restrained transitions; black cloth remains matte, glass and ceramic receive small material-specific highlights. Alternate crisp focal edges with softer background edges while keeping contours complete. Avoid uniform polished gradients across every surface. Rich but controlled color, precise focal detail, quieter background detail.\n\nhigh complexity, very aesthetic, masterpiece, no text",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1536,
+      "height": 576,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 3058649506,
+      "negative_prompt": "lowres, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, overexposure, excessive bloom, plastic rendering, text logo, multiple girls, indoor kitchen, dining table, rice bowl, chopsticks, holding sword, sunglasses covering eyes, goggles, cropped head, cropped feet",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, fair skin, cyan eyes, long silver-white hair in a high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, black round sunglasses resting on top of her head, thin frames, small black rose hair ornament above her own left temple, black off-shoulder long-sleeved floor-length gown, layered ruffled neckline, waist sash, flowing long skirt, bare shoulders, black ankle boots",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, adult woman, seated on scattered book pages beside a frozen lake in a snowy outdoor library, holding one red rose, looking at viewer, quiet composed expression, closed mouth.\n\nVery wide panoramic composition, full seated figure near the center, complete head and gown inside the canvas. Her torso rises upright near center-left; bent legs extend diagonally toward screen-right under a floor-length black off-shoulder ruffled gown. Her right palm presses flat onto the pages at screen-left beside her hip, supporting her weight. Her left hand holds the stem of one red rose at chest height on screen-right, the blossom below her shoulder, away from her face. Right hand supporting her on the pages, left hand holding a single red rose. Her silver high ponytail flows down onto the pages toward screen-left. Black ankle boots peek from the hem at screen-right. A long black sheathed straight sword lies horizontally on the pages behind her hips, extending toward screen-right; neither hand touches it. An open book rests on a small stack in the lower-left foreground. Loose pages spread beneath her and across the icy shore. Snow-covered leaning wooden bookshelves stand among tall bare winter trees on both sides of the frozen lake. Distant shelves and conifers fade into pale winter mist. Cold silver-blue-gray snow and ice, charcoal black gown, small blue ribbon accent, one red rose accent. Soft overcast winter daylight, quiet serious atmosphere, subtle icy reflections, light falling snow. No interface or lettering.\n\nCool diffuse daylight, matte dark cloth, softly lit face, subdued distant detail.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Construct hair and clothing from broad, opaque interlocking color planes with a few deliberate brush accents. Use clear grouped shadows, angular cloth folds and subtle brush texture. Keep fine linework selective around the eyes, fingers and accessories; let larger painted shapes carry the hair, fabric and snowy scenery. Skin has delicate restrained transitions; black cloth remains matte, glass and ceramic receive small material-specific highlights. Alternate crisp focal edges with softer background edges while keeping contours complete. Avoid uniform polished gradients across every surface. Rich but controlled color, precise focal detail, quieter background detail.\n\nhigh complexity, very aesthetic, masterpiece, no text",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, fair skin, cyan eyes, long silver-white hair in a high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, black round sunglasses resting on top of her head, thin frames, small black rose hair ornament above her own left temple, black off-shoulder long-sleeved floor-length gown, layered ruffled neckline, waist sash, flowing long skirt, bare shoulders, black ankle boots",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, overexposure, excessive bloom, plastic rendering, text logo, multiple girls, indoor kitchen, dining table, rice bowl, chopsticks, holding sword, sunglasses covering eyes, goggles, cropped head, cropped feet",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output_relative": ".tmp/nai/home-nai45-20261016/wu-snow-library.png",
+  "size": [
+    1536,
+    576
+  ],
+  "sha256": "d7f8f590d86b1883676df248ed6fbfbb742c0c508f42ce3a0eccf5d5dabefb93",
+  "bytes": 1630104
+}

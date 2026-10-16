@@ -1,0 +1,90 @@
+{
+  "status": "generated",
+  "recipe_version": "3.1",
+  "purpose": "User requested Wu eating dinner with NAI 4.5; preserve v3.1 style, artist chain and previous sampling. Preview only.",
+  "identity_reference": "game/assets/portraits/full/wu.webp (inspected in this conversation, not uploaded)",
+  "comparison_note": "Model and scene changed together at user request; not a single-variable comparison. Shared defaults remain unchanged.",
+  "request": {
+    "input": "1girl, solo, sitting at a dining table, eating dinner, upper body, three-quarter view, looking at viewer, cheerful confident smile, small fang. She holds a steamed bun near her mouth with one hand; the other hand rests beside a bowl of hot soup on the table.\n\nWide landscape illustration. The woman occupies the right half, her face, hands and bun clearly visible. A bowl of soup, a small plate of buns and chopsticks sit on the table in the foreground. Quiet modern kitchen in the background with simple cabinetry and a closed window.\n\nWarm indoor light illuminates her face and silver ponytail. Cool blue evening light remains outside the window. Matte charcoal clothing, ceramic bowl with a small highlight, soft steam rising above the soup. Broad quiet background shapes keep attention on her expression and eating gesture.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Construct clothing from broad, opaque interlocking color planes with a few deliberate brush accents. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Use clear grouped shadows, angular cloth folds and subtle brush texture. Keep fine linework selective around the eyes, fingers and accessories; let larger painted shapes carry the hair and fabric. Skin has delicate restrained transitions; black cloth remains matte, glass and ceramic receive small material-specific highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Avoid uniform polished gradients across every surface. Rich but controlled color, precise focal detail, quieter background detail.\n\nvery aesthetic, masterpiece, no text",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 2048,
+      "height": 1152,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1787339500,
+      "negative_prompt": "lowres, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, overexposure, excessive bloom, plastic rendering, text logo, witch hat, wizard hat, stockings, hair over one eye, multiple girls, rose on cheek, flower earrings, holding sword, unsheathed sword, food covering face",
+      "characterPrompts": [
+        {
+          "prompt": "1 girl, adult woman, silver_hair, cyan blue eyes, high ponytail, blue satin ribbon bow at ponytail base, parted bangs, both eyes visible, confident smile, small fang, black round sunglasses on top of head, black rose hair ornament above her left temple near the sunglasses, black grey off shoulder long sleeved dress, layered ruffled neckline and cuffs, black waist tie, a black straight longsword fully sheathed and strapped diagonally across her back, black wrapped sword hilt visible above her right shoulder",
+          "uc": "",
+          "center": {
+            "x": 0.6,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, sitting at a dining table, eating dinner, upper body, three-quarter view, looking at viewer, cheerful confident smile, small fang. She holds a steamed bun near her mouth with one hand; the other hand rests beside a bowl of hot soup on the table.\n\nWide landscape illustration. The woman occupies the right half, her face, hands and bun clearly visible. A bowl of soup, a small plate of buns and chopsticks sit on the table in the foreground. Quiet modern kitchen in the background with simple cabinetry and a closed window.\n\nWarm indoor light illuminates her face and silver ponytail. Cool blue evening light remains outside the window. Matte charcoal clothing, ceramic bowl with a small highlight, soft steam rising above the soup. Broad quiet background shapes keep attention on her expression and eating gesture.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Construct clothing from broad, opaque interlocking color planes with a few deliberate brush accents. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Use clear grouped shadows, angular cloth folds and subtle brush texture. Keep fine linework selective around the eyes, fingers and accessories; let larger painted shapes carry the hair and fabric. Skin has delicate restrained transitions; black cloth remains matte, glass and ceramic receive small material-specific highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Avoid uniform polished gradients across every surface. Rich but controlled color, precise focal detail, quieter background detail.\n\nvery aesthetic, masterpiece, no text",
+          "char_captions": [
+            {
+              "char_caption": "1 girl, adult woman, silver_hair, cyan blue eyes, high ponytail, blue satin ribbon bow at ponytail base, parted bangs, both eyes visible, confident smile, small fang, black round sunglasses on top of head, black rose hair ornament above her left temple near the sunglasses, black grey off shoulder long sleeved dress, layered ruffled neckline and cuffs, black waist tie, a black straight longsword fully sheathed and strapped diagonally across her back, black wrapped sword hilt visible above her right shoulder",
+              "centers": [
+                {
+                  "x": 0.6,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, overexposure, excessive bloom, plastic rendering, text logo, witch hat, wizard hat, stockings, hair over one eye, multiple girls, rose on cheek, flower earrings, holding sword, unsheathed sword, food covering face",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.6,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-style-step1-20261016\\wu-v31-dinner45.png",
+  "sha256": "56d2bd6246adbb91646d492ad59170026b8e68a4fa6d3d6c3851aa157ab6208f"
+}

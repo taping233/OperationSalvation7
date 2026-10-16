@@ -1,0 +1,95 @@
+{
+  "status": "generated",
+  "recipe_version": "2.0",
+  "override": "Omit STYLE_BLOCK and painterly portrait tail for this candidate only; retain artist block and UC.",
+  "request": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, solo, full body character portrait, standing, arms relaxed at her sides, legs crossed at the ankles, facing viewer, entire ponytail and both boots inside the canvas. A single sheathed black straight longsword is strapped diagonally across her back; its black wrapped grip and angular crossguard rise behind her right shoulder (left side of the image), the pointed scabbard ends below her left knee. Plain white background, no scenery, no text.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1278087392,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, blue star patterned skirt lining, holding sword, unsheathed sword, stockings, tights, cropped feet",
+      "characterPrompts": [
+        {
+          "prompt": "Adult woman, tall slender build, fair skin, slightly full thighs and calves, cyan blue eyes, confident smile with a small fang, parted bangs exposing both eyes. Long silver white hair in a high ponytail tied with a blue satin bow. Black rose above her left temple (right side of the image), black round goggles with dark lenses resting on top of her head. Black and charcoal off shoulder long sleeve dress, layered ruffles at neckline, cuffs and irregular above knee skirt, black waist tie. Bare legs, black ankle boots.",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\n1girl, solo, full body character portrait, standing, arms relaxed at her sides, legs crossed at the ankles, facing viewer, entire ponytail and both boots inside the canvas. A single sheathed black straight longsword is strapped diagonally across her back; its black wrapped grip and angular crossguard rise behind her right shoulder (left side of the image), the pointed scabbard ends below her left knee. Plain white background, no scenery, no text.",
+          "char_captions": [
+            {
+              "char_caption": "Adult woman, tall slender build, fair skin, slightly full thighs and calves, cyan blue eyes, confident smile with a small fang, parted bangs exposing both eyes. Long silver white hair in a high ponytail tied with a blue satin bow. Black rose above her left temple (right side of the image), black round goggles with dark lenses resting on top of her head. Black and charcoal off shoulder long sleeve dress, layered ruffles at neckline, cuffs and irregular above knee skirt, black waist tie. Bare legs, black ankle boots.",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, blue star patterned skirt lining, holding sword, unsheathed sword, stockings, tights, cropped feet",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-no-style-20261016.png",
+  "references": [
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\wu.webp",
+      "sha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc",
+      "purpose": "Local visual identity inspection only; not uploaded; no Vibe"
+    }
+  ],
+  "sha256": "cdf5a3855f65b0e1ee0c74cf97ad4d768f5766c65a377a3c28e10f18530050a0"
+}

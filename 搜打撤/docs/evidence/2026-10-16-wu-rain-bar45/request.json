@@ -1,0 +1,113 @@
+{
+  "status": "generated",
+  "recipe_version": "3.3",
+  "source_page": "https://www.bilibili.com/opus/1257909738195124224",
+  "source_image_index": 2,
+  "source_image_url": "https://i0.hdslb.com/bfs/new_dyn/d104e7e6fe81325129d4cf654495b89013712042.png",
+  "scene_action": "1girl, solo,\nupper body, close shot, leaning on counter, head rest, cheek rest, bored, half-closed eyes, looking at viewer,\nbar, indoor, wooden counter, cocktail glass, drink, window, rain, raindrops on glass, night, bar shelves in background, blurry background, depth of field,\nwarm interior lighting, rim lighting, atmospheric lighting, moody lighting,\n\nA girl sits at a wooden bar counter beside a rain-streaked window, resting her cheek on her hand. Warm ambient lights illuminate the amber drinks on the counter against the dark rainy night outside.",
+  "optional_quality": "high complexity, highly detailed",
+  "request": {
+    "input": "1girl, solo,\nupper body, close shot, leaning on counter, head rest, cheek rest, bored, half-closed eyes, looking at viewer,\nbar, indoor, wooden counter, cocktail glass, drink, window, rain, raindrops on glass, night, bar shelves in background, blurry background, depth of field,\nwarm interior lighting, rim lighting, atmospheric lighting, moody lighting,\n\nA girl sits at a wooden bar counter beside a rain-streaked window, resting her cheek on her hand. Warm ambient lights illuminate the amber drinks on the counter against the dark rainy night outside.\n\nhigh complexity, highly detailed\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1216,
+      "height": 832,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1354599803,
+      "negative_prompt": "blurry, lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, overexposure, excessive bloom, plastic rendering, text logo",
+      "characterPrompts": [
+        {
+          "prompt": "1girl, pale skin, cyan blue eyes, silver white long hair, high ponytail, parted bangs, both eyes visible, blue satin ribbon bow tied around the ponytail base. Black round sunglasses resting on top of her head, dark lenses with small gray highlights. Black rose hair ornament on her left temple (right side of image). Off-shoulder charcoal black long-sleeved dress, layered neckline ruffles, black waist sash, black diagonal sword back strap. A black straight sword in its black sheath is strapped diagonally across her back, black cross-wrapped grip and angular crossguard behind her right shoulder. Empty hands.",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo,\nupper body, close shot, leaning on counter, head rest, cheek rest, bored, half-closed eyes, looking at viewer,\nbar, indoor, wooden counter, cocktail glass, drink, window, rain, raindrops on glass, night, bar shelves in background, blurry background, depth of field,\nwarm interior lighting, rim lighting, atmospheric lighting, moody lighting,\n\nA girl sits at a wooden bar counter beside a rain-streaked window, resting her cheek on her hand. Warm ambient lights illuminate the amber drinks on the counter against the dark rainy night outside.\n\nhigh complexity, highly detailed\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "1girl, pale skin, cyan blue eyes, silver white long hair, high ponytail, parted bangs, both eyes visible, blue satin ribbon bow tied around the ponytail base. Black round sunglasses resting on top of her head, dark lenses with small gray highlights. Black rose hair ornament on her left temple (right side of image). Off-shoulder charcoal black long-sleeved dress, layered neckline ruffles, black waist sash, black diagonal sword back strap. A black straight sword in its black sheath is strapped diagonally across her back, black cross-wrapped grip and angular crossguard behind her right shoulder. Empty hands.",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "blurry, lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, overexposure, excessive bloom, plastic rendering, text logo",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": ".tmp/nai/wu-rain-bar45-20261016.png",
+  "references": [
+    {
+      "path": "搜打撤/game/assets/portraits/full/wu.webp",
+      "sha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc",
+      "purpose": "Identity inspected locally; not uploaded"
+    }
+  ],
+  "seed": 1354599803,
+  "sha256": "5654d3003cffe0e2d293e0aa921e480d6296e6f9e55e5cf8abcbb4a94f1e88c2",
+  "visual_review": {
+    "verified": [
+      "雨夜酒吧",
+      "暖光",
+      "托腮"
+    ],
+    "deviations": [
+      "柜台横向而非纵深透视",
+      "头部高于原图",
+      "背剑方向反向且剑柄过大"
+    ],
+    "user_feedback": "视角不对；已对照原图诊断，未重新生成"
+  }
+}

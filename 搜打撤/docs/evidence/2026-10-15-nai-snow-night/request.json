@@ -1,0 +1,108 @@
+{
+  "input": "1.2::miv4t::, 0.8::quasarcake::\n\n1.35::painterly, no lineart, broad brush strokes::, anime illustration, opaque paint, large color blocks, hard-edged shadows, muted colors. Complete silhouettes, grouped hair locks and cloth planes, quiet surfaces; selectively refined anime faces and hands, sparse colored structural accents. very aesthetic, masterpiece, no text.\n\n1.2::2girls::, eating, sitting, indoors, winter night, window, snowfall, wide shot, three-quarter view, cinematic composition, depth.\n\nGame key visual: a diagonal dining table in a futuristic city apartment. Silver-haired woman sits nearer on the left, blonde woman farther right. One amber lamp lights their faces and steaming food against deep teal shadows. A large window fills the background: near-black city towers, snow-covered rooftops, windblown snowflakes lit outside the glass. Warm intimate interior, pitch-dark snowy city. Broad painted light and shadow shapes; faces remain readable.",
+  "model": "nai-diffusion-4-5-full",
+  "action": "generate",
+  "parameters": {
+    "params_version": 3,
+    "width": 1344,
+    "height": 768,
+    "scale": 6.5,
+    "sampler": "k_euler_ancestral",
+    "steps": 28,
+    "variety_plus": true,
+    "n_samples": 1,
+    "ucPresetId": "none",
+    "qualityPresetId": "none",
+    "autoSmea": false,
+    "straight_alpha": false,
+    "dynamic_thresholding": false,
+    "controlnet_strength": 1,
+    "legacy": false,
+    "legacy_v3_extend": false,
+    "legacy_uc": false,
+    "add_original_image": true,
+    "cfg_rescale": 0.0,
+    "noise_schedule": "karras",
+    "use_coords": true,
+    "normalize_reference_strength_multiple": true,
+    "inpaintImg2ImgStrength": 1.0,
+    "seed": 15102026,
+    "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, cel shading, smooth airbrush, lineart, thick outlines, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, excessive detail, tiny paint facets, dense hair strands, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, daylight, bright exterior, neon city, snow indoors, crowd, extra people, duplicate, extra arms, fused hands, symmetrical composition, blue waist sash, yellow hair, monochrome",
+    "characterPrompts": [
+      {
+        "prompt": "girl, silver long hair, high ponytail, blue hair ribbon, blue eyes, black rose, round sunglasses on head, parted bangs, black off-shoulder ruffled dress, black waist sash, fang, playful smile, holding steamed bun, eating, looking at another, sheathed black sword on back",
+        "uc": "blonde hair, golden eyes, crescent hair ornament, green cape, white dress, hair over one eye, handheld sword",
+        "center": {
+          "x": 0.3,
+          "y": 0.5
+        },
+        "enabled": true
+      },
+      {
+        "prompt": "girl, pale blonde hair, blunt bangs, long low side braid, golden eyes, white clerical dress, dark teal capelet, gold trim, calm expression, holding spoon, eating soup, looking at another. White crescent hairpin lies flat above bangs on viewer-right.",
+        "uc": "silver hair, blue eyes, ponytail on top of head, sunglasses, black rose, black dress, purple eyes, halo, angry, exaggerated grin",
+        "center": {
+          "x": 0.7,
+          "y": 0.3
+        },
+        "enabled": true
+      }
+    ],
+    "v4_prompt": {
+      "caption": {
+        "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\n1.35::painterly, no lineart, broad brush strokes::, anime illustration, opaque paint, large color blocks, hard-edged shadows, muted colors. Complete silhouettes, grouped hair locks and cloth planes, quiet surfaces; selectively refined anime faces and hands, sparse colored structural accents. very aesthetic, masterpiece, no text.\n\n1.2::2girls::, eating, sitting, indoors, winter night, window, snowfall, wide shot, three-quarter view, cinematic composition, depth.\n\nGame key visual: a diagonal dining table in a futuristic city apartment. Silver-haired woman sits nearer on the left, blonde woman farther right. One amber lamp lights their faces and steaming food against deep teal shadows. A large window fills the background: near-black city towers, snow-covered rooftops, windblown snowflakes lit outside the glass. Warm intimate interior, pitch-dark snowy city. Broad painted light and shadow shapes; faces remain readable.",
+        "char_captions": [
+          {
+            "char_caption": "girl, silver long hair, high ponytail, blue hair ribbon, blue eyes, black rose, round sunglasses on head, parted bangs, black off-shoulder ruffled dress, black waist sash, fang, playful smile, holding steamed bun, eating, looking at another, sheathed black sword on back",
+            "centers": [
+              {
+                "x": 0.3,
+                "y": 0.5
+              }
+            ]
+          },
+          {
+            "char_caption": "girl, pale blonde hair, blunt bangs, long low side braid, golden eyes, white clerical dress, dark teal capelet, gold trim, calm expression, holding spoon, eating soup, looking at another. White crescent hairpin lies flat above bangs on viewer-right.",
+            "centers": [
+              {
+                "x": 0.7,
+                "y": 0.3
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": true,
+      "use_order": true
+    },
+    "v4_negative_prompt": {
+      "caption": {
+        "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, cel shading, smooth airbrush, lineart, thick outlines, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, excessive detail, tiny paint facets, dense hair strands, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, daylight, bright exterior, neon city, snow indoors, crowd, extra people, duplicate, extra arms, fused hands, symmetrical composition, blue waist sash, yellow hair, monochrome",
+        "char_captions": [
+          {
+            "char_caption": "blonde hair, golden eyes, crescent hair ornament, green cape, white dress, hair over one eye, handheld sword",
+            "centers": [
+              {
+                "x": 0.3,
+                "y": 0.5
+              }
+            ]
+          },
+          {
+            "char_caption": "silver hair, blue eyes, ponytail on top of head, sunglasses, black rose, black dress, purple eyes, halo, angry, exaggerated grin",
+            "centers": [
+              {
+                "x": 0.7,
+                "y": 0.3
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": true,
+      "use_order": true
+    },
+    "deliberate_euler_ancestral_bug": false,
+    "prefer_brownian": true
+  }
+}

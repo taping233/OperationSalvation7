@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-16",
+  "docs_check": {
+    "exit_code": 0,
+    "checked_relative_links": 485,
+    "findings": []
+  },
+  "owned_diff_check": {
+    "exit_code": 0
+  },
+  "visual_review": "image_gen returned image inspected; remaining deviations recorded in README.md and receipt.json; awaiting user feedback",
+  "source_integrity_and_links": {
+    "ok": true,
+    "files_verified": [
+      "game/art-source/style-winter-painterly-20261016/reference.png",
+      "game/art-source/style-winter-painterly-20261016/reference.webp",
+      "game/art-source/style-winter-painterly-20261016/composition-target.png",
+      "game/art-source/style-winter-painterly-20261016/iteration-3.png",
+      "game/art-source/style-winter-painterly-20261016/iteration-3.webp"
+    ],
+    "checked_local_links": 12,
+    "all_png_originals_gitignored": true
+  },
+  "not_run": [
+    "game tests",
+    "build",
+    "in-game browser acceptance"
+  ],
+  "runtime_assets_changed": false,
+  "committed": false
+}

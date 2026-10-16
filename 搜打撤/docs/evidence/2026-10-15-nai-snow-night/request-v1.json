@@ -1,0 +1,108 @@
+{
+  "input": "1.2::miv4t::, 0.8::quasarcake::\n\n2girls, side-by-side, sitting, eating, indoors, night, window, snowfall, table, food, steam, warm lighting, scenery. Landscape game promotional illustration, medium-wide three-quarter view. Wu sits on the left and Xingyue on the right, sharing a quiet meal at a small table.\n\nA modern room in a futuristic city, matte composite walls and a large window. An amber pendant lamp above the table lights both faces, hands and steaming bowls. Wu holds a steamed bun near her mouth; Xingyue raises a spoonful of soup. The closed window frames a nearly black city, faint building silhouettes and sparse snowflakes caught by indoor light. The exterior remains much darker than the room. Group the lamp, faces and food as one warm focal area against cool charcoal shadows. Both faces and eating gestures are clearly visible; the tabletop separates their hands.\n\nvery aesthetic, masterpiece, no text, painterly, anime illustration, opaque brush strokes, broad color masses, hard-edged shadows.\n\nComplete readable silhouettes; coherent volumes built with broad directional paint planes. Group hair into substantial locks and cloth into a few structural folds, with quiet interior areas. Use muted colored grays with concentrated richer accents and a clear light-shadow grouping. Refine anime eyes, faces, hands and story props selectively; simplify the surroundings. Keep economical colored structural lines and varied handmade edges.",
+  "model": "nai-diffusion-4-5-full",
+  "action": "generate",
+  "parameters": {
+    "params_version": 3,
+    "width": 1344,
+    "height": 768,
+    "scale": 6.5,
+    "sampler": "k_euler_ancestral",
+    "steps": 28,
+    "variety_plus": true,
+    "n_samples": 1,
+    "ucPresetId": "none",
+    "qualityPresetId": "none",
+    "autoSmea": false,
+    "straight_alpha": false,
+    "dynamic_thresholding": false,
+    "controlnet_strength": 1,
+    "legacy": false,
+    "legacy_v3_extend": false,
+    "legacy_uc": false,
+    "add_original_image": true,
+    "cfg_rescale": 0.0,
+    "noise_schedule": "karras",
+    "use_coords": true,
+    "normalize_reference_strength_multiple": true,
+    "inpaintImg2ImgStrength": 1.0,
+    "seed": 15102026,
+    "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, flat cel shading, smooth airbrush, clean closed lineart, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, excessive detail, tiny paint facets, dense hair strands, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, daylight, sunset, bright exterior, neon city, snow indoors, crowd, extra people, duplicate, floating cutlery, extra arms, fused hands",
+    "characterPrompts": [
+      {
+        "prompt": "1girl, silver hair, long hair, high ponytail, blue ribbon, blue eyes, black rose hair ornament, black round sunglasses on head, parted bangs, black off-shoulder long-sleeved ruffled dress, black waist sash, small fang, confident smile. She sits on the left, turned slightly toward her companion, holding a steamed bun near her mouth. A black sheathed straight sword is slung behind her right shoulder.",
+        "uc": "blonde hair, golden eyes, crescent hair ornament, green cape, white dress, hair over one eye, handheld sword",
+        "center": {
+          "x": 0.3,
+          "y": 0.5
+        },
+        "enabled": true
+      },
+      {
+        "prompt": "1girl, pale blonde hair, blunt bangs, long side braid, low tied hair, golden eyes, white crescent hairpin, white high-neck clerical dress, dark teal capelet, gold trim. Her white crescent hairpin lies flat above her bangs on the viewer-right side of her head. She sits on the right, calmly watching her companion while raising a spoonful of soup to her lips.",
+        "uc": "silver hair, blue eyes, ponytail on top of head, sunglasses, black rose, black dress, purple eyes, halo, angry, exaggerated grin",
+        "center": {
+          "x": 0.7,
+          "y": 0.5
+        },
+        "enabled": true
+      }
+    ],
+    "v4_prompt": {
+      "caption": {
+        "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\n2girls, side-by-side, sitting, eating, indoors, night, window, snowfall, table, food, steam, warm lighting, scenery. Landscape game promotional illustration, medium-wide three-quarter view. Wu sits on the left and Xingyue on the right, sharing a quiet meal at a small table.\n\nA modern room in a futuristic city, matte composite walls and a large window. An amber pendant lamp above the table lights both faces, hands and steaming bowls. Wu holds a steamed bun near her mouth; Xingyue raises a spoonful of soup. The closed window frames a nearly black city, faint building silhouettes and sparse snowflakes caught by indoor light. The exterior remains much darker than the room. Group the lamp, faces and food as one warm focal area against cool charcoal shadows. Both faces and eating gestures are clearly visible; the tabletop separates their hands.\n\nvery aesthetic, masterpiece, no text, painterly, anime illustration, opaque brush strokes, broad color masses, hard-edged shadows.\n\nComplete readable silhouettes; coherent volumes built with broad directional paint planes. Group hair into substantial locks and cloth into a few structural folds, with quiet interior areas. Use muted colored grays with concentrated richer accents and a clear light-shadow grouping. Refine anime eyes, faces, hands and story props selectively; simplify the surroundings. Keep economical colored structural lines and varied handmade edges.",
+        "char_captions": [
+          {
+            "char_caption": "1girl, silver hair, long hair, high ponytail, blue ribbon, blue eyes, black rose hair ornament, black round sunglasses on head, parted bangs, black off-shoulder long-sleeved ruffled dress, black waist sash, small fang, confident smile. She sits on the left, turned slightly toward her companion, holding a steamed bun near her mouth. A black sheathed straight sword is slung behind her right shoulder.",
+            "centers": [
+              {
+                "x": 0.3,
+                "y": 0.5
+              }
+            ]
+          },
+          {
+            "char_caption": "1girl, pale blonde hair, blunt bangs, long side braid, low tied hair, golden eyes, white crescent hairpin, white high-neck clerical dress, dark teal capelet, gold trim. Her white crescent hairpin lies flat above her bangs on the viewer-right side of her head. She sits on the right, calmly watching her companion while raising a spoonful of soup to her lips.",
+            "centers": [
+              {
+                "x": 0.7,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": true,
+      "use_order": true
+    },
+    "v4_negative_prompt": {
+      "caption": {
+        "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, flat cel shading, smooth airbrush, clean closed lineart, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, excessive detail, tiny paint facets, dense hair strands, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, daylight, sunset, bright exterior, neon city, snow indoors, crowd, extra people, duplicate, floating cutlery, extra arms, fused hands",
+        "char_captions": [
+          {
+            "char_caption": "blonde hair, golden eyes, crescent hair ornament, green cape, white dress, hair over one eye, handheld sword",
+            "centers": [
+              {
+                "x": 0.3,
+                "y": 0.5
+              }
+            ]
+          },
+          {
+            "char_caption": "silver hair, blue eyes, ponytail on top of head, sunglasses, black rose, black dress, purple eyes, halo, angry, exaggerated grin",
+            "centers": [
+              {
+                "x": 0.7,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": true,
+      "use_order": true
+    },
+    "deliberate_euler_ancestral_bug": false,
+    "prefer_brownian": true
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "status": "generated",
+  "source": "https://novelai.net/explore/image/30a9cedf-68d2-4730-b0d2-e5041b28c396",
+  "purpose": "Second Wu preview: reduced outlines, layered brushwork and soft/hard edges; high temple rose. Not integrated.",
+  "previous_request": "request.json",
+  "identity_reference": "game/assets/portraits/full/wu.webp (inspected locally, not uploaded)",
+  "comparison": "Same seed, model, dimensions and sampling; style and rose placement revised together at user request.",
+  "request": {
+    "input": "1girl, solo, three-quarter view, cowboy shot, standing among blue flowers at night, looking at viewer, confident smile, one hand resting lightly on her waist. Her long silver ponytail flows to the side in a gentle breeze. Quiet starry sky, softly glowing blue petals and a few drifting lights; the face remains clearly illuminated.\n\n1.5::painterly anime illustration, painting (medium), visible brush strokes::, 1.3::opaque broad brushwork, edge variation::.\nPaint the figure and flowers with layered opaque pigment, broad directional strokes and overlapping color planes. Build volume through grouped shadow masses, reflected color and short painted midtone transitions. Hair is made of substantial silver locks with broad grey-blue shadow planes and irregular brushed highlights. Paint the dark dress as matte charcoal fabric with broad fold planes and visible bristle marks, its edges described by neighboring colors rather than ink. Keep only a few fine marks at the eyes, mouth and fingers. Alternate sharp focal edges at the eyes, rose and selected folds with softer turning edges on cheeks, arms and hair; let a few shadow edges merge into the night. Show deliberate individual brush accents and overlapping paint at changes of plane. The skin has subtle warm-cool modelling, the cloth stays matte, and the flowers form loosely brushed masses. The face and hands remain carefully resolved, while the larger hair, clothing and background shapes carry the brushwork. medium complexity.\nThe black rose is a hair ornament attached high above her LEFT temple, on the viewer's RIGHT, immediately beside the sunglasses near the ponytail base. Keep the rose entirely above the outer eyebrow and clear of her cheek and ear.\n\nvery aesthetic, masterpiece, no text",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 7.0,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1792340444,
+      "negative_prompt": "lowres, aliasing, bad anatomy, bad hands, extra fingers, extra arms, text, watermark, signature, witch hat, wizard hat, holding sword, unsheathed sword, star patterned skirt lining, stockings, hair over one eye, multiple girls, thick black outlines, uniform outlines, heavy lineart, inked contours, cel shading, flat shading, vector art, flat color, smooth airbrush, plastic rendering, cheek flower, flower earrings, rose on cheek, mosaic texture",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, pale skin, cyan blue eyes, silver white long hair, high ponytail, blue satin ribbon bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses resting on top of head, black rose hair ornament high above her left temple near the crown, above eyebrow level, black grey off shoulder long sleeved dress, layered ruffled neckline and cuffs, black waist tie, short irregular layered ruffled skirt, bare thighs, a straight black longsword fully sheathed and strapped diagonally across her back, black wrapped sword hilt visible above her right shoulder",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, three-quarter view, cowboy shot, standing among blue flowers at night, looking at viewer, confident smile, one hand resting lightly on her waist. Her long silver ponytail flows to the side in a gentle breeze. Quiet starry sky, softly glowing blue petals and a few drifting lights; the face remains clearly illuminated.\n\n1.5::painterly anime illustration, painting (medium), visible brush strokes::, 1.3::opaque broad brushwork, edge variation::.\nPaint the figure and flowers with layered opaque pigment, broad directional strokes and overlapping color planes. Build volume through grouped shadow masses, reflected color and short painted midtone transitions. Hair is made of substantial silver locks with broad grey-blue shadow planes and irregular brushed highlights. Paint the dark dress as matte charcoal fabric with broad fold planes and visible bristle marks, its edges described by neighboring colors rather than ink. Keep only a few fine marks at the eyes, mouth and fingers. Alternate sharp focal edges at the eyes, rose and selected folds with softer turning edges on cheeks, arms and hair; let a few shadow edges merge into the night. Show deliberate individual brush accents and overlapping paint at changes of plane. The skin has subtle warm-cool modelling, the cloth stays matte, and the flowers form loosely brushed masses. The face and hands remain carefully resolved, while the larger hair, clothing and background shapes carry the brushwork. medium complexity.\nThe black rose is a hair ornament attached high above her LEFT temple, on the viewer's RIGHT, immediately beside the sunglasses near the ponytail base. Keep the rose entirely above the outer eyebrow and clear of her cheek and ear.\n\nvery aesthetic, masterpiece, no text",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, pale skin, cyan blue eyes, silver white long hair, high ponytail, blue satin ribbon bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses resting on top of head, black rose hair ornament high above her left temple near the crown, above eyebrow level, black grey off shoulder long sleeved dress, layered ruffled neckline and cuffs, black waist tie, short irregular layered ruffled skirt, bare thighs, a straight black longsword fully sheathed and strapped diagonally across her back, black wrapped sword hilt visible above her right shoulder",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, aliasing, bad anatomy, bad hands, extra fingers, extra arms, text, watermark, signature, witch hat, wizard hat, holding sword, unsheathed sword, star patterned skirt lining, stockings, hair over one eye, multiple girls, thick black outlines, uniform outlines, heavy lineart, inked contours, cel shading, flat shading, vector art, flat color, smooth airbrush, plastic rendering, cheek flower, flower earrings, rose on cheek, mosaic texture",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-field-of-flowers-20261016\\wu-field-of-flowers-v2.png",
+  "sha256": "de3ab824051f636d403187403b00abefb067537a8db3bd5e6faed78c9a36e1df"
+}

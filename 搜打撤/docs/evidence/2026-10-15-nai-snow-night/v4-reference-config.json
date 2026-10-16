@@ -1,0 +1,26 @@
+{
+  "references": [
+    {
+      "path": ".tmp\\nai\\snow-night-20261015\\style-reference-hd.jpg",
+      "source_sha256": "8d45f3116d6475e5c959060ee967825722de6a0203de62446f819a7a35879bd6",
+      "strength": 0.3,
+      "role": "layered composition, colored linework and selective detail",
+      "encoding_sha256": "7eaa32e80526da1987c17c86d6e0268a43eb5a55bd1901ff1c65d75fe6b944e9"
+    },
+    {
+      "path": ".tmp\\nai\\snow-night-20261015\\wu-reference-user.png",
+      "source_sha256": "0800bceae0d4dc2ef986a3fb4741e1cb1bb3a700f6e7024d29a8d4b39608662d",
+      "strength": 0.35,
+      "role": "Wu appearance, proportions and grouped dark cloth planes",
+      "encoding_sha256": "f44f6d50616428a1ca4e29d5bf86b75ba855caa08c3927ec6fc8617c8731a1e0"
+    }
+  ],
+  "information_extracted": 1.0,
+  "recipe_version": "1.7",
+  "positive_raw_t5_counts": [
+    278,
+    81,
+    65
+  ],
+  "artist_chain": "1.2::miv4t::, 0.8::quasarcake::"
+}

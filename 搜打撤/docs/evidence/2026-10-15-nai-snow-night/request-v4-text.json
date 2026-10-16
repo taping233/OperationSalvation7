@@ -1,0 +1,108 @@
+{
+  "input": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\n2girls, eating together, sitting, medium shot, waist up, three-quarter view, indoors, winter night, window, warm lamplight, snow. Character-focused game key visual.\n\nA modern city apartment at night. Two women fill the foreground around a small diagonal table: silver-haired woman on the left eating a steamed bun, blonde woman on the right eating soup. Flowing hair and overlapping sleeves lead toward their faces and hands. One amber lamp lights the meal and warm skin against cool charcoal shadows. Behind them, a closed window reveals a pitch-black city, dim building silhouettes, snow-covered rooftops and windblown snow outside the glass. Intimate, elegant, lively. Keep the two faces large and readable; food is a supporting detail.",
+  "model": "nai-diffusion-4-5-full",
+  "action": "generate",
+  "parameters": {
+    "params_version": 3,
+    "width": 1344,
+    "height": 768,
+    "scale": 6.5,
+    "sampler": "k_euler_ancestral",
+    "steps": 28,
+    "variety_plus": true,
+    "n_samples": 1,
+    "ucPresetId": "none",
+    "qualityPresetId": "none",
+    "autoSmea": false,
+    "straight_alpha": false,
+    "dynamic_thresholding": false,
+    "controlnet_strength": 1,
+    "legacy": false,
+    "legacy_v3_extend": false,
+    "legacy_uc": false,
+    "add_original_image": true,
+    "cfg_rescale": 0.0,
+    "noise_schedule": "karras",
+    "use_coords": true,
+    "normalize_reference_strength_multiple": true,
+    "inpaintImg2ImgStrength": 1.0,
+    "seed": 15102026,
+    "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, daylight, bright exterior, white background, blank background, snow indoors, crowd, background people, duplicate characters, giant food, extra arms, fused hands, chibi, contact sheet, starry sky, stars, blue waist sash",
+    "characterPrompts": [
+      {
+        "prompt": "girl, silver long hair, high ponytail, blue hair ribbon, blue eyes, black rose, round sunglasses on head, parted bangs, black off-shoulder long-sleeved ruffled dress, black waist sash, fang, playful smile, holding steamed bun, eating, looking at another, sheathed black sword on back",
+        "uc": "blonde hair, golden eyes, crescent hair ornament, green cape, white dress, hair over one eye, handheld sword",
+        "center": {
+          "x": 0.3,
+          "y": 0.5
+        },
+        "enabled": true
+      },
+      {
+        "prompt": "girl, pale blonde hair, blunt bangs, long low side braid, golden eyes, white clerical dress, dark teal capelet, gold trim, calm expression, holding spoon, eating soup, looking at another. White crescent hairpin lies flat above bangs on viewer-right.",
+        "uc": "silver hair, blue eyes, ponytail on top of head, sunglasses, black rose, black dress, purple eyes, halo, angry, exaggerated grin",
+        "center": {
+          "x": 0.7,
+          "y": 0.5
+        },
+        "enabled": true
+      }
+    ],
+    "v4_prompt": {
+      "caption": {
+        "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nanime illustration, delicate colored linework, painterly shading, layered composition. Expressive hair strands and flowing fabric contours; detailed clothing structures over economical color planes. Clear anime eyes, subtle facial shading, matte materials. Cool neutral midtones with selective vivid accents; fluid rhythms and varied edge detail. Faces and gestures anchor the composition. no text.\n\n2girls, eating together, sitting, medium shot, waist up, three-quarter view, indoors, winter night, window, warm lamplight, snow. Character-focused game key visual.\n\nA modern city apartment at night. Two women fill the foreground around a small diagonal table: silver-haired woman on the left eating a steamed bun, blonde woman on the right eating soup. Flowing hair and overlapping sleeves lead toward their faces and hands. One amber lamp lights the meal and warm skin against cool charcoal shadows. Behind them, a closed window reveals a pitch-black city, dim building silhouettes, snow-covered rooftops and windblown snow outside the glass. Intimate, elegant, lively. Keep the two faces large and readable; food is a supporting detail.",
+        "char_captions": [
+          {
+            "char_caption": "girl, silver long hair, high ponytail, blue hair ribbon, blue eyes, black rose, round sunglasses on head, parted bangs, black off-shoulder long-sleeved ruffled dress, black waist sash, fang, playful smile, holding steamed bun, eating, looking at another, sheathed black sword on back",
+            "centers": [
+              {
+                "x": 0.3,
+                "y": 0.5
+              }
+            ]
+          },
+          {
+            "char_caption": "girl, pale blonde hair, blunt bangs, long low side braid, golden eyes, white clerical dress, dark teal capelet, gold trim, calm expression, holding spoon, eating soup, looking at another. White crescent hairpin lies flat above bangs on viewer-right.",
+            "centers": [
+              {
+                "x": 0.7,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": true,
+      "use_order": true
+    },
+    "v4_negative_prompt": {
+      "caption": {
+        "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, daylight, bright exterior, white background, blank background, snow indoors, crowd, background people, duplicate characters, giant food, extra arms, fused hands, chibi, contact sheet, starry sky, stars, blue waist sash",
+        "char_captions": [
+          {
+            "char_caption": "blonde hair, golden eyes, crescent hair ornament, green cape, white dress, hair over one eye, handheld sword",
+            "centers": [
+              {
+                "x": 0.3,
+                "y": 0.5
+              }
+            ]
+          },
+          {
+            "char_caption": "silver hair, blue eyes, ponytail on top of head, sunglasses, black rose, black dress, purple eyes, halo, angry, exaggerated grin",
+            "centers": [
+              {
+                "x": 0.7,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": true,
+      "use_order": true
+    },
+    "deliberate_euler_ancestral_bug": false,
+    "prefer_brownian": true
+  }
+}

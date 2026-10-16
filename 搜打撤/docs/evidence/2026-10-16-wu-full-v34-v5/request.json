@@ -1,0 +1,97 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "cleanup_version": "1.0",
+  "request": {
+    "input": "1girl, solo, full body, standing, crossed legs, arms at sides, looking at viewer, confident smile, small fang.\n\nA single complete full-length game character portrait on a plain white background.\n\nVertical composition, centered figure. Entire ponytail, sword hilt, scabbard tip and both boots inside the canvas, with a little clear margin above the head and below the feet. Hands relaxed beside the skirt. One sheathed straight black longsword strapped diagonally across her back: hilt above her right shoulder (screen left), scabbard tip behind her left leg (screen right), ending just below the knee.\n\nSoft cool daylight, clear facial features, silver hair highlights, restrained black and charcoal clothing with blue ribbon accents.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1634052026,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, cropped head, cropped feet, out of frame, multiple swords, holding sword, drawn sword, blue star pattern, stockings, pantyhose, thighhighs, floor-length dress, hair over one eye",
+      "characterPrompts": [
+        {
+          "prompt": "young adult woman, tall slender build, fair skin, slightly full thighs and calves, aqua blue eyes, silver white long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, black round goggles on top of head, dark round lenses with soft gray reflections, black rose hair ornament above her left temple (screen right). Black charcoal off-shoulder long-sleeved dress, layered ruffles at neckline and cuffs, black tied waist, above-knee asymmetrical layered ruffled skirt, bare legs, black ankle boots. Black back sword strap, straight narrow black scabbard, angular black crossguard, black cross-wrapped sword grip, faceted pommel, single metal band near scabbard tip.",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, full body, standing, crossed legs, arms at sides, looking at viewer, confident smile, small fang.\n\nA single complete full-length game character portrait on a plain white background.\n\nVertical composition, centered figure. Entire ponytail, sword hilt, scabbard tip and both boots inside the canvas, with a little clear margin above the head and below the feet. Hands relaxed beside the skirt. One sheathed straight black longsword strapped diagonally across her back: hilt above her right shoulder (screen left), scabbard tip behind her left leg (screen right), ending just below the knee.\n\nSoft cool daylight, clear facial features, silver hair highlights, restrained black and charcoal clothing with blue ribbon accents.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "young adult woman, tall slender build, fair skin, slightly full thighs and calves, aqua blue eyes, silver white long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, black round goggles on top of head, dark round lenses with soft gray reflections, black rose hair ornament above her left temple (screen right). Black charcoal off-shoulder long-sleeved dress, layered ruffles at neckline and cuffs, black tied waist, above-knee asymmetrical layered ruffled skirt, bare legs, black ankle boots. Black back sword strap, straight narrow black scabbard, angular black crossguard, black cross-wrapped sword grip, faceted pommel, single metal band near scabbard tip.",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, cropped head, cropped feet, out of frame, multiple swords, holding sword, drawn sword, blue star pattern, stockings, pantyhose, thighhighs, floor-length dress, hair over one eye",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "references": [
+    {
+      "path": "game/assets/portraits/full/wu.webp",
+      "sha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc",
+      "purpose": "Visual identity checked locally; not uploaded",
+      "uploaded": false
+    }
+  ],
+  "output": ".tmp\\nai\\wu-full-v34-v5-20261016.png",
+  "seed": 1634052026,
+  "sha256": "2a2680f0d8b54e4c0a38349d775782959a71afe62480a033b44d0336123b8595"
+}

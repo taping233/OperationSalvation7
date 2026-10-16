@@ -1,0 +1,90 @@
+{
+  "status": "generated",
+  "recipe_version": "3.1",
+  "source": "dinner45-free-request.json",
+  "purpose": "User requested V5 landscape dinner preview. Same positive/negative text, artist chain, identity, seed and sampling as V4.5 free sample; V5 Full and 1344x768 normal-size landscape. Shared defaults unchanged; not integrated.",
+  "identity_reference": "game/assets/portraits/full/wu.webp (already inspected, not uploaded)",
+  "request": {
+    "input": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nvery aesthetic, masterpiece, no text",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 3058649506,
+      "negative_prompt": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+          "uc": "",
+          "center": {
+            "x": 0.68,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nvery aesthetic, masterpiece, no text",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+              "centers": [
+                {
+                  "x": 0.68,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.68,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-style-step1-20261016\\wu-v31-dinner5-wide-free.png",
+  "sha256": "c1682db3a68667af78a1d2130f3918374e1b1483679f7fbeae86440896128f00"
+}

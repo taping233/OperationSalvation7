@@ -1,0 +1,99 @@
+{
+  "status": "generated",
+  "recipe_version": "3.4",
+  "variant": {
+    "artists": "0.9::reoen::, 0.5::ask (askzy)::"
+  },
+  "request": {
+    "input": "1girl, solo, adult woman, upper body, leaning on counter, head resting sideways on her folded forearm, looking at viewer, half-closed eyes, faint smile, relaxed melancholy.\n\nIntimate eye-level close-up along a wooden bar counter. Her face and black-clad shoulder fill the right half; her cheek nearly touches the counter, one relaxed hand beneath her lips. A sharp crystal tumbler of amber whisky and ice stands immediately left of her face. A second large glass is cropped and heavily out of focus in the lower-left foreground. Rain-streaked window fills the left background; blurred illuminated bottle shelves on the right.\n\nRainy night bar, amber and dark brown palette, warm golden backlight outlining silver hair, dim softly illuminated face, luminous refracted ice, wet glass droplets, glossy wooden counter reflecting the amber glass, shallow depth of field, cinematic bokeh, highly detailed.\n\n0.9::reoen::, 0.5::ask (askzy)::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1216,
+      "height": 832,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1710164523,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, standing, full body, drinking, holding glass, open mouth, daylight, extra people",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, red eyes, silver white hair, thick black forelock falling diagonally across one eye, chin-length loose side locks, black tied-back ponytail, two short curved black horns, angular white geometric halo floating behind her head, small black ear piercings, black high-collar jacket, long sleeves, layered cloth folds",
+          "uc": "",
+          "center": {
+            "x": 0.72,
+            "y": 0.53
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, adult woman, upper body, leaning on counter, head resting sideways on her folded forearm, looking at viewer, half-closed eyes, faint smile, relaxed melancholy.\n\nIntimate eye-level close-up along a wooden bar counter. Her face and black-clad shoulder fill the right half; her cheek nearly touches the counter, one relaxed hand beneath her lips. A sharp crystal tumbler of amber whisky and ice stands immediately left of her face. A second large glass is cropped and heavily out of focus in the lower-left foreground. Rain-streaked window fills the left background; blurred illuminated bottle shelves on the right.\n\nRainy night bar, amber and dark brown palette, warm golden backlight outlining silver hair, dim softly illuminated face, luminous refracted ice, wet glass droplets, glossy wooden counter reflecting the amber glass, shallow depth of field, cinematic bokeh, highly detailed.\n\n0.9::reoen::, 0.5::ask (askzy)::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, red eyes, silver white hair, thick black forelock falling diagonally across one eye, chin-length loose side locks, black tied-back ponytail, two short curved black horns, angular white geometric halo floating behind her head, small black ear piercings, black high-collar jacket, long sleeves, layered cloth folds",
+              "centers": [
+                {
+                  "x": 0.72,
+                  "y": 0.53
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, standing, full body, drinking, holding glass, open mouth, daylight, extra people",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.72,
+                  "y": 0.53
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\rain-bar-experiment-20261016\\D-reoen-ask.png",
+  "references": [
+    {
+      "source": "C:\\Users\\太平\\AppData\\Local\\Temp\\codex-clipboard-58d6dbec-0633-4708-9786-07d89f4152e1.png",
+      "sha256": "6f26f56da40675003f99e2f07ced435927f3efc08c5a779e38677b84f95da9dc",
+      "usage": "Visual analysis for composition, appearance and lighting; not uploaded"
+    }
+  ],
+  "reference_current": "C:/Users/太平/AppData/Local/Temp/codex-clipboard-bf3dd922-cc09-4063-b9eb-e692b78e0d7f.png",
+  "acquisition": "nai_gen / nai_guard; textual reference analysis, no uploaded image",
+  "sha256": "feee7cf8ee958eddff7a504601db97bcdb4a29b78efdb7dfdd8a0d5c02e3fb7a"
+}

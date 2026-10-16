@@ -1,0 +1,16 @@
+{
+  "status": "offline-passed",
+  "docs_check": {"passed": true, "checked_relative_links": 472, "findings": 0},
+  "checks": {
+    "style_matches_authorized_changes_only": true,
+    "artist_unchanged": true,
+    "uc_unchanged": true,
+    "quality_only_removed_complexity": true,
+    "nai_gen_byte_identical": true,
+    "sampling_original": true
+  },
+  "existing_prompt_tests": {
+    "passed": 6
+  },
+  "visual_validation": "not generated; aesthetic effect unverified"
+}

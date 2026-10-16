@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-16",
+  "baseline": "63c4309060:搜打撤/docs/production/art/ART-STYLE-V1.md",
+  "restoredDefault": "块面厚涂 v1.0",
+  "checks": {
+    "v1BodyMatchesHeadIgnoringLineEndings": true,
+    "currentEntriesPointToV1": true,
+    "scopedGitDiffCheck": "passed",
+    "docsCheck": {
+      "ok": true,
+      "checkedRelativeLinks": 489,
+      "findings": 0
+    }
+  },
+  "scope": "仅画风规范及入口文档；未修改运行素材、个人技能或NAI配方；未提交"
+}

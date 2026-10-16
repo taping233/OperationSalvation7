@@ -1,0 +1,6 @@
+{
+  "path": ".tmp\\nai\\snow-night-20261015\\wu-xingyue-snow-night-v5.png",
+  "sha256": "ec8e5f703c82f10640aa0431f4e6eca141e130abf972a3fc9ad091c107cb1f59",
+  "acquisition": "NAI tools/nai_gen.py; request-v5-text.json plus v5-reference-config.json",
+  "recipe_version": "1.7"
+}

@@ -1,0 +1,112 @@
+{
+  "status": "generated",
+  "recipe_version": "3.0",
+  "artist_override": "0.9::mivt::",
+  "request": {
+    "input": "1girl, solo, half body, upper body character portrait, looking at viewer, confident smile, small fang. A relaxed standing pose in a slight three-quarter view; face turned toward the viewer.\n\nA single finished game character illustration of Wu.\n\nVertical waist-up composition cropped at the hips. Entire head, ponytail root, hair bow, shoulders and waist stay inside the frame with comfortable margins. Arms rest naturally by her sides and continue below the crop. Sword remains sheathed on her back, with its black hilt visible behind her right shoulder (on the left side of the image). Plain warm light-gray background, no scenery.\n\nSoft neutral daylight, restrained cool shadows, bright clear face, matte charcoal fabric, broad silver hair color planes, blue ribbon as the color accent.\n\n0.9::mivt::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Construct hair and clothing from broad, opaque interlocking color planes with a few deliberate brush accents. Use clear grouped shadows, angular cloth folds and subtle brush texture. Keep fine linework selective around the eyes, fingers and accessories; let larger painted shapes carry the hair and fabric. Skin has delicate restrained transitions; black cloth remains matte. Alternate crisp focal edges with softer background edges while keeping contours complete. Avoid uniform polished gradients across every surface. Rich but controlled color, precise focal detail, quieter background detail.\n\nhigh complexity, very aesthetic, masterpiece, no text",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 832,
+      "height": 1216,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1771065016,
+      "negative_prompt": "lowres, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, overexposure, excessive bloom, plastic rendering, text logo, full body, feet, knees, multiple girls, holding sword, unsheathed sword, hair over one eye, blue star pattern, scenery, cropped head, cropped hair bow",
+      "characterPrompts": [
+        {
+          "prompt": "1girl, pale skin, cyan blue eyes, silver white long hair, high ponytail, parted bangs, both eyes visible, blue satin ribbon bow tied around the ponytail base. Black round sunglasses resting on top of her head, dark lenses with small gray highlights. Black rose hair ornament on her left temple (right side of image). Off-shoulder charcoal black long-sleeved dress, layered neckline ruffles, black waist sash, black diagonal sword back strap. Confident cheerful smile showing a small fang. A black straight sword in its black sheath is strapped diagonally across her back, black cross-wrapped grip and angular crossguard behind her right shoulder. Empty hands.",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, half body, upper body character portrait, looking at viewer, confident smile, small fang. A relaxed standing pose in a slight three-quarter view; face turned toward the viewer.\n\nA single finished game character illustration of Wu.\n\nVertical waist-up composition cropped at the hips. Entire head, ponytail root, hair bow, shoulders and waist stay inside the frame with comfortable margins. Arms rest naturally by her sides and continue below the crop. Sword remains sheathed on her back, with its black hilt visible behind her right shoulder (on the left side of the image). Plain warm light-gray background, no scenery.\n\nSoft neutral daylight, restrained cool shadows, bright clear face, matte charcoal fabric, broad silver hair color planes, blue ribbon as the color accent.\n\n0.9::mivt::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Construct hair and clothing from broad, opaque interlocking color planes with a few deliberate brush accents. Use clear grouped shadows, angular cloth folds and subtle brush texture. Keep fine linework selective around the eyes, fingers and accessories; let larger painted shapes carry the hair and fabric. Skin has delicate restrained transitions; black cloth remains matte. Alternate crisp focal edges with softer background edges while keeping contours complete. Avoid uniform polished gradients across every surface. Rich but controlled color, precise focal detail, quieter background detail.\n\nhigh complexity, very aesthetic, masterpiece, no text",
+          "char_captions": [
+            {
+              "char_caption": "1girl, pale skin, cyan blue eyes, silver white long hair, high ponytail, parted bangs, both eyes visible, blue satin ribbon bow tied around the ponytail base. Black round sunglasses resting on top of her head, dark lenses with small gray highlights. Black rose hair ornament on her left temple (right side of image). Off-shoulder charcoal black long-sleeved dress, layered neckline ruffles, black waist sash, black diagonal sword back strap. Confident cheerful smile showing a small fang. A black straight sword in its black sheath is strapped diagonally across her back, black cross-wrapped grip and angular crossguard behind her right shoulder. Empty hands.",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, overexposure, excessive bloom, plastic rendering, text logo, full body, feet, knees, multiple girls, holding sword, unsheathed sword, hair over one eye, blue star pattern, scenery, cropped head, cropped hair bow",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": ".tmp/nai/wu-half-mivt45-20261016.png",
+  "references": [
+    {
+      "path": "搜打撤/game/assets/portraits/full/wu.webp",
+      "sha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc",
+      "purpose": "Identity inspected locally; not uploaded"
+    }
+  ],
+  "seed": 1771065016,
+  "sha256": "9ad16fe6ec3250404be6d673e9b3d4959c14d68168edbb35351fede0108974f4",
+  "visual_review": {
+    "verified": [
+      "单人半身",
+      "银白高马尾",
+      "圆墨镜",
+      "黑蔷薇",
+      "蓝缎带",
+      "背剑"
+    ],
+    "deviations": [
+      "额外生成双角且角尖出框",
+      "增加高领内搭",
+      "瞳孔带红色"
+    ],
+    "user_approval": "pending"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "status": "generated",
+  "source": "https://novelai.net/explore/image/30a9cedf-68d2-4730-b0d2-e5041b28c396",
+  "purpose": "Wu preview using Field of flowers painting method; not integrated",
+  "identity_reference": "game/assets/portraits/full/wu.webp (inspected locally, not uploaded)",
+  "parameter_note": "Original published steps/CFG/seed/sampler reused; landscape dimensions chosen for this preview; Karras/rescale/variety inherited explicitly from current client, not claimed as original metadata.",
+  "request": {
+    "input": "1girl, solo, three-quarter view, cowboy shot, standing among blue flowers at night, looking at viewer, confident smile, one hand resting lightly on her waist. Her long silver ponytail flows to the side in a gentle breeze. Quiet starry sky, softly glowing blue petals and a few drifting lights; the face remains clearly illuminated.\n\nAn illustration with clean but slightly textured linework with some mistakes being more sketch like, painterly rendering, with hair and organic forms treated as cohesive painted masses rather than collections of outlined strands. Strong silhouettes with minimal contouring, forms defined primarily by color masses, tonal separation, reflected light, and soft-to-hard edge variation. Hair consists of broad flowing locks with irregular painted highlights and shadow masses, with only a few selective strand accents. No dense strand linework, no uniform black outlines, no rigid cel-shading. Use lost-and-found edges, where some contours are crisp and others dissolve naturally into surrounding forms. Organic surfaces should be similarly rendered through volume, color, and brushwork rather than internal outlines. medium complexity on only the hair, ultra complexity for the rest of the image.\n\nvery aesthetic, masterpiece, no text",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 7.0,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1792340444,
+      "negative_prompt": "lowres, aliasing, bad anatomy, bad hands, extra fingers, extra arms, text, watermark, signature, witch hat, wizard hat, holding sword, unsheathed sword, star patterned skirt lining, stockings, hair over one eye, multiple girls",
+      "characterPrompts": [
+        {
+          "prompt": "adult woman, pale skin, cyan blue eyes, silver white long hair, high ponytail, blue satin ribbon bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses resting on top of head, black rose beside her left temple, black grey off shoulder long sleeved dress, layered ruffled neckline and cuffs, black waist tie, short irregular layered ruffled skirt, bare thighs, a straight black longsword fully sheathed and strapped diagonally across her back, black wrapped sword hilt visible above her right shoulder",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, three-quarter view, cowboy shot, standing among blue flowers at night, looking at viewer, confident smile, one hand resting lightly on her waist. Her long silver ponytail flows to the side in a gentle breeze. Quiet starry sky, softly glowing blue petals and a few drifting lights; the face remains clearly illuminated.\n\nAn illustration with clean but slightly textured linework with some mistakes being more sketch like, painterly rendering, with hair and organic forms treated as cohesive painted masses rather than collections of outlined strands. Strong silhouettes with minimal contouring, forms defined primarily by color masses, tonal separation, reflected light, and soft-to-hard edge variation. Hair consists of broad flowing locks with irregular painted highlights and shadow masses, with only a few selective strand accents. No dense strand linework, no uniform black outlines, no rigid cel-shading. Use lost-and-found edges, where some contours are crisp and others dissolve naturally into surrounding forms. Organic surfaces should be similarly rendered through volume, color, and brushwork rather than internal outlines. medium complexity on only the hair, ultra complexity for the rest of the image.\n\nvery aesthetic, masterpiece, no text",
+          "char_captions": [
+            {
+              "char_caption": "adult woman, pale skin, cyan blue eyes, silver white long hair, high ponytail, blue satin ribbon bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses resting on top of head, black rose beside her left temple, black grey off shoulder long sleeved dress, layered ruffled neckline and cuffs, black waist tie, short irregular layered ruffled skirt, bare thighs, a straight black longsword fully sheathed and strapped diagonally across her back, black wrapped sword hilt visible above her right shoulder",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, aliasing, bad anatomy, bad hands, extra fingers, extra arms, text, watermark, signature, witch hat, wizard hat, holding sword, unsheathed sword, star patterned skirt lining, stockings, hair over one eye, multiple girls",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-field-of-flowers-20261016\\wu-field-of-flowers.png",
+  "sha256": "e9217be7ff46e18dbeb5f7cfa9733e8d1c652980dd2bc197cc3ed56ba0ac34b4"
+}

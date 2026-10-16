@@ -1,0 +1,91 @@
+{
+  "status": "generated",
+  "source": "D:\\素材\\代号柒\\.tmp\\nai\\wu-dinner-quasarcake-only-20261016.request.json",
+  "change": "Remove artist only",
+  "request": {
+    "input": "1girl, solo, indoor, eating dinner, sitting, upper body, 1.8::close composition, tight framing, filling the frame::, 1.5::wide angle perspective, foreshortening, from below, dutch angle::, 1.4::holding rice bowl, holding chopsticks, lifting food toward mouth::, wooden dining table, rice, braised meat, vegetable soup, steam, small apartment, pendant lamp, kitchen counter, kettle, window, night, warm light, cool window light, backlighting, rim lighting, cinematic lighting.\n\nA low angle view from the near corner of a small dining table captures Character 1 leaning forward eagerly over her dinner. The camera is just above tabletop height and tilted slightly, looking diagonally across the table toward her face. She holds a small white rice bowl close to her chest in her left hand; her right hand brings chopsticks with one piece of braised meat toward her smiling mouth. Her face, both hands and the food form a close triangular composition. A steaming soup bowl appears large and partly cropped in the lower left foreground; a plate of food leads diagonally toward her, without covering her face or hands. A warm pendant lamp illuminates her face and dinner, while the dark blue window and a quiet kitchen recede behind her. A black sheathed straight sword rests against the rear wall, separate from the eating utensils.\n\nultra complexity, masterpiece, best quality, highly detailed, very aesthetic, masterpiece, no text",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1216,
+      "height": 832,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 3058649506,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, blurry, upscaled, artistic error, film grain, scan artifacts, very displeasing, chromatic aberration, halftone, logo, too many watermarks, negative space, blank page, multiple girls, holding sword, sword on table, blue star patterned skirt lining, standing, extra arms, extra hands, duplicate bowl",
+      "characterPrompts": [
+        {
+          "prompt": "Adult woman, tall slender build, fair skin, cyan blue eyes, confident face with a small fang. Silver white long hair in a high ponytail tied with a blue satin bow, parted bangs exposing both eyes. Black rose above her left temple (right side of the image), 1.6::black round sunglasses on top of her head, smooth solid dark tinted lenses, thin black circular frames::, two round glass lenses joined by a narrow bridge, sunglasses pushed up into her hair above her forehead, both eyes unobstructed. Black and charcoal off shoulder long sleeve dress with layered ruffles at the neckline and cuffs, black waist tie, irregular above knee ruffled skirt.",
+          "uc": "goggles, steampunk goggles, mesh lenses, perforated lenses, opaque metal discs, sunglasses covering eyes",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, indoor, eating dinner, sitting, upper body, 1.8::close composition, tight framing, filling the frame::, 1.5::wide angle perspective, foreshortening, from below, dutch angle::, 1.4::holding rice bowl, holding chopsticks, lifting food toward mouth::, wooden dining table, rice, braised meat, vegetable soup, steam, small apartment, pendant lamp, kitchen counter, kettle, window, night, warm light, cool window light, backlighting, rim lighting, cinematic lighting.\n\nA low angle view from the near corner of a small dining table captures Character 1 leaning forward eagerly over her dinner. The camera is just above tabletop height and tilted slightly, looking diagonally across the table toward her face. She holds a small white rice bowl close to her chest in her left hand; her right hand brings chopsticks with one piece of braised meat toward her smiling mouth. Her face, both hands and the food form a close triangular composition. A steaming soup bowl appears large and partly cropped in the lower left foreground; a plate of food leads diagonally toward her, without covering her face or hands. A warm pendant lamp illuminates her face and dinner, while the dark blue window and a quiet kitchen recede behind her. A black sheathed straight sword rests against the rear wall, separate from the eating utensils.\n\nultra complexity, masterpiece, best quality, highly detailed, very aesthetic, masterpiece, no text",
+          "char_captions": [
+            {
+              "char_caption": "Adult woman, tall slender build, fair skin, cyan blue eyes, confident face with a small fang. Silver white long hair in a high ponytail tied with a blue satin bow, parted bangs exposing both eyes. Black rose above her left temple (right side of the image), 1.6::black round sunglasses on top of her head, smooth solid dark tinted lenses, thin black circular frames::, two round glass lenses joined by a narrow bridge, sunglasses pushed up into her hair above her forehead, both eyes unobstructed. Black and charcoal off shoulder long sleeve dress with layered ruffles at the neckline and cuffs, black waist tie, irregular above knee ruffled skirt.",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, blurry, upscaled, artistic error, film grain, scan artifacts, very displeasing, chromatic aberration, halftone, logo, too many watermarks, negative space, blank page, multiple girls, holding sword, sword on table, blue star patterned skirt lining, standing, extra arms, extra hands, duplicate bowl",
+          "char_captions": [
+            {
+              "char_caption": "goggles, steampunk goggles, mesh lenses, perforated lenses, opaque metal discs, sunglasses covering eyes",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-dinner-diagnosis-20261016\\A-no-artist.png",
+  "sha256": "827461c3cc1bdc9cbe3f53b2e52344b4265c27fa059631dab920b92c78dc60c0",
+  "visual_review": "黑蔷薇和墨镜存在；夹肉动作未落实，前景食物过大。",
+  "output_relative_to_project_root": ".tmp/nai/wu-dinner-diagnosis-20261016/A-no-artist.png",
+  "acquisition": "Run .tmp/nai/wu-dinner-diagnosis-20261016.py for A-E or wu-dinner-diagnosis-combined-20261016.py for F through nai_gen/nai_guard."
+}

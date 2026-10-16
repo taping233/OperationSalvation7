@@ -1,0 +1,18 @@
+{
+  "default_payload_matches_approved_sampling": true,
+  "artist_style_quality_match_approved": true,
+  "scene_specific_content_not_global": true,
+  "offline_tests": {
+    "run": 32,
+    "passed": 31,
+    "skipped": 1,
+    "skip_reason": "POSIX-only fsync contract on Windows"
+  },
+  "new_generation_performed": false,
+  "docs_check": {
+    "ok": true,
+    "checkedRelativeLinks": 472,
+    "findings": []
+  },
+  "diff_check": true
+}

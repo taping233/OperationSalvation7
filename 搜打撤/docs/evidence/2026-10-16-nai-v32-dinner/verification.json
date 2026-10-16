@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "checks": [
+    "shared artist chain/style in final payload",
+    "selective repetition preserved",
+    "V5 model and landscape size",
+    "UC and identity unchanged",
+    "seed and sampling retained",
+    "image SHA256"
+  ],
+  "existing_prompt_tests": 6,
+  "visual_review": "inspected; candidate awaits user feedback"
+}

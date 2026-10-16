@@ -1,0 +1,91 @@
+{
+  "status": "generated",
+  "source": "D:\\素材\\代号柒\\.tmp\\nai\\wu-dinner-quasarcake-only-20261016.request.json",
+  "change": "Simplify camera, light and object wording; emphasize black rose",
+  "request": {
+    "input": "quasarcake\n\n1girl, solo, seated at a dinner table, medium close-up, three-quarter view, slightly low camera, level horizon. Her face and both hands are fully visible. Her right hand holds one pair of chopsticks, lifting one piece of braised meat toward her mouth. Her left hand supports one small white bowl of rice below her chin. Relaxed confident smile, small fang. A small soup bowl and one plate sit at the bottom edge of the frame, below her hands. Warm pendant light, cool blue night window, simple apartment dining room. One black sheathed straight sword leans against the back wall.\n\nmasterpiece, best quality, very aesthetic, no text",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1216,
+      "height": 832,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 3058649506,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, blurry, upscaled, artistic error, film grain, scan artifacts, very displeasing, chromatic aberration, halftone, logo, too many watermarks, negative space, blank page, multiple girls, holding sword, sword on table, blue star patterned skirt lining, standing, extra arms, extra hands, duplicate bowl",
+      "characterPrompts": [
+        {
+          "prompt": "Adult woman, fair skin, cyan blue eyes, silver-white long high ponytail tied with a blue satin bow, parted bangs, both eyes visible. 1.4::one black rose hair ornament above her left temple::, 1.4::black round sunglasses resting on top of her head::, two smooth dark glass lenses in thin black circular frames. Black off-shoulder long-sleeved dress, ruffled neckline and cuffs, black waist tie.",
+          "uc": "goggles, steampunk goggles, mesh lenses, perforated lenses, opaque metal discs, sunglasses covering eyes",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "quasarcake\n\n1girl, solo, seated at a dinner table, medium close-up, three-quarter view, slightly low camera, level horizon. Her face and both hands are fully visible. Her right hand holds one pair of chopsticks, lifting one piece of braised meat toward her mouth. Her left hand supports one small white bowl of rice below her chin. Relaxed confident smile, small fang. A small soup bowl and one plate sit at the bottom edge of the frame, below her hands. Warm pendant light, cool blue night window, simple apartment dining room. One black sheathed straight sword leans against the back wall.\n\nmasterpiece, best quality, very aesthetic, no text",
+          "char_captions": [
+            {
+              "char_caption": "Adult woman, fair skin, cyan blue eyes, silver-white long high ponytail tied with a blue satin bow, parted bangs, both eyes visible. 1.4::one black rose hair ornament above her left temple::, 1.4::black round sunglasses resting on top of her head::, two smooth dark glass lenses in thin black circular frames. Black off-shoulder long-sleeved dress, ruffled neckline and cuffs, black waist tie.",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, blurry, upscaled, artistic error, film grain, scan artifacts, very displeasing, chromatic aberration, halftone, logo, too many watermarks, negative space, blank page, multiple girls, holding sword, sword on table, blue star patterned skirt lining, standing, extra arms, extra hands, duplicate bowl",
+          "char_captions": [
+            {
+              "char_caption": "goggles, steampunk goggles, mesh lenses, perforated lenses, opaque metal discs, sunglasses covering eyes",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-dinner-diagnosis-20261016\\D-simple-prompt.png",
+  "sha256": "89ad4f9c7511ea713237978e5c3d37f301c8fab6f888e3e5d98c3b81d4f64cc4",
+  "visual_review": "前景收住，墨镜与黑蔷薇存在；多出高领，筷子和持物关系仍需修正。",
+  "output_relative_to_project_root": ".tmp/nai/wu-dinner-diagnosis-20261016/D-simple-prompt.png",
+  "acquisition": "Run .tmp/nai/wu-dinner-diagnosis-20261016.py for A-E or wu-dinner-diagnosis-combined-20261016.py for F through nai_gen/nai_guard."
+}

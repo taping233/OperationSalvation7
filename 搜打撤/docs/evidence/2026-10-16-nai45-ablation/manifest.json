@@ -1,0 +1,770 @@
+{
+  "status": "complete",
+  "model": "nai-diffusion-4-5-full",
+  "seed": 3058649506,
+  "size": [
+    1216,
+    832
+  ],
+  "scope": "Fixed scene, identity, negative prompt, seed and all sampling. Artist-chain/complexity experiment. One seed only; no stability claim. Six new requests, two reused outputs. Shared defaults unchanged.",
+  "items": [
+    {
+      "id": "A",
+      "label": "Original 4 / no complexity",
+      "artist_chain": "0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::",
+      "high_complexity": false,
+      "difference": "baseline",
+      "request": {
+        "input": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nvery aesthetic, masterpiece, no text",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1216,
+          "height": 832,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 3058649506,
+          "negative_prompt": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+          "characterPrompts": [
+            {
+              "prompt": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+              "uc": "",
+              "center": {
+                "x": 0.68,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nvery aesthetic, masterpiece, no text",
+              "char_captions": [
+                {
+                  "char_caption": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "status": "reused",
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-style-step1-20261016\\wu-v31-dinner45-free.png",
+      "sha256": "f1f0f70303e4f16128e9d4b8bee790a281c2678d19cff5c01b5e928ce59b7960",
+      "source_receipt": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-nai-style-step1\\dinner45-free-request.json",
+      "output_relative": ".tmp/nai/wu-style-step1-20261016/wu-v31-dinner45-free.png",
+      "assistant_observation": "原四人链基线，黑蔷薇可见，肉块偏大且马尾裁切。"
+    },
+    {
+      "id": "B",
+      "label": "Original 4 / HIGH",
+      "artist_chain": "0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::",
+      "high_complexity": true,
+      "difference": "A + high complexity",
+      "request": {
+        "input": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nhigh complexity, very aesthetic, masterpiece, no text",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1216,
+          "height": 832,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 3058649506,
+          "negative_prompt": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+          "characterPrompts": [
+            {
+              "prompt": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+              "uc": "",
+              "center": {
+                "x": 0.68,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nhigh complexity, very aesthetic, masterpiece, no text",
+              "char_captions": [
+                {
+                  "char_caption": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "status": "generated",
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\nai45-ablation-20261016\\B.png",
+      "sha256": "0698d5a850ca11b5b3af6038143d6b932713a64ef3936d0207267139c468efa3",
+      "output_relative": ".tmp/nai/nai45-ablation-20261016/B.png",
+      "assistant_observation": "目测与A接近；加复杂度词没有明显风格跃迁。"
+    },
+    {
+      "id": "C",
+      "label": "Original 4 + ASK 0.2 / no complexity",
+      "artist_chain": "0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::, 0.2::ask (askzy)::",
+      "high_complexity": false,
+      "difference": "A + ASK 0.2",
+      "request": {
+        "input": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::, 0.2::ask (askzy)::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nvery aesthetic, masterpiece, no text",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1216,
+          "height": 832,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 3058649506,
+          "negative_prompt": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+          "characterPrompts": [
+            {
+              "prompt": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+              "uc": "",
+              "center": {
+                "x": 0.68,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::, 0.2::ask (askzy)::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nvery aesthetic, masterpiece, no text",
+              "char_captions": [
+                {
+                  "char_caption": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "status": "generated",
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\nai45-ablation-20261016\\C.png",
+      "sha256": "6760f0c6248f4613f2340e1b3701a145790e68fccdba1faba6a55c9df66c6ed6",
+      "output_relative": ".tmp/nai/nai45-ablation-20261016/C.png",
+      "assistant_observation": "低权重ASK改变脸部神态与构图，仍有细线与分明色面。"
+    },
+    {
+      "id": "D",
+      "label": "Original 4 + ASK 0.2 / HIGH",
+      "artist_chain": "0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::, 0.2::ask (askzy)::",
+      "high_complexity": true,
+      "difference": "B + ASK 0.2 / C + high complexity",
+      "request": {
+        "input": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::, 0.2::ask (askzy)::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nhigh complexity, very aesthetic, masterpiece, no text",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1216,
+          "height": 832,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 3058649506,
+          "negative_prompt": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+          "characterPrompts": [
+            {
+              "prompt": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+              "uc": "",
+              "center": {
+                "x": 0.68,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::, 0.2::ask (askzy)::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nhigh complexity, very aesthetic, masterpiece, no text",
+              "char_captions": [
+                {
+                  "char_caption": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "status": "reused",
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\wu-style-step1-20261016\\wu-dinner45-ask02-high-complexity.png",
+      "sha256": "026a16af8ccd32f158a002be56f5379170df8a57cde445ce6ea17108b1a913c5",
+      "source_receipt": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-nai-style-step1\\dinner45-ask02-request.json",
+      "output_relative": ".tmp/nai/wu-style-step1-20261016/wu-dinner45-ask02-high-complexity.png",
+      "assistant_observation": "已交付ASK0.2+复杂度组，用于后四组消融的参照。"
+    },
+    {
+      "id": "E",
+      "label": "Original 4 + ASK 0.5 / HIGH",
+      "artist_chain": "0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::, 0.5::ask (askzy)::",
+      "high_complexity": true,
+      "difference": "D: ASK 0.2 -> 0.5",
+      "request": {
+        "input": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::, 0.5::ask (askzy)::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nhigh complexity, very aesthetic, masterpiece, no text",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1216,
+          "height": 832,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 3058649506,
+          "negative_prompt": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+          "characterPrompts": [
+            {
+              "prompt": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+              "uc": "",
+              "center": {
+                "x": 0.68,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::, 0.5::ask (askzy)::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nhigh complexity, very aesthetic, masterpiece, no text",
+              "char_captions": [
+                {
+                  "char_caption": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "status": "generated",
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\nai45-ablation-20261016\\E.png",
+      "sha256": "c1f3e2d20127354a6b5a35967242f55edf1c86815b5a3fde4e79301b182e69c2",
+      "output_relative": ".tmp/nai/nai45-ablation-20261016/E.png",
+      "assistant_observation": "ASK0.5改变托碗位置、脸部和发束；总体画法仍接近D。"
+    },
+    {
+      "id": "F",
+      "label": "No piromizu + ASK 0.2 / HIGH",
+      "artist_chain": "0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.2::ask (askzy)::",
+      "high_complexity": true,
+      "difference": "D: remove piromizu",
+      "request": {
+        "input": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.2::ask (askzy)::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nhigh complexity, very aesthetic, masterpiece, no text",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1216,
+          "height": 832,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 3058649506,
+          "negative_prompt": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+          "characterPrompts": [
+            {
+              "prompt": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+              "uc": "",
+              "center": {
+                "x": 0.68,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.2::ask (askzy)::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nhigh complexity, very aesthetic, masterpiece, no text",
+              "char_captions": [
+                {
+                  "char_caption": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "status": "generated",
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\nai45-ablation-20261016\\F.png",
+      "sha256": "d4cd0c7b3651d443a6190789546cb403f0790cbf7f4268cdb3228b1675e7f07d",
+      "output_relative": ".tmp/nai/nai45-ablation-20261016/F.png",
+      "assistant_observation": "去piromizu后外观与头发变化明显，黑蔷薇漏画，衣装偏移。"
+    },
+    {
+      "id": "G",
+      "label": "No gomzi + ASK 0.2 / HIGH",
+      "artist_chain": "0.9::quasarcake::, 0.5::rella::, 0.3::piromizu::, 0.2::ask (askzy)::",
+      "high_complexity": true,
+      "difference": "D: remove gomzi",
+      "request": {
+        "input": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.3::piromizu::, 0.2::ask (askzy)::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nhigh complexity, very aesthetic, masterpiece, no text",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1216,
+          "height": 832,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 3058649506,
+          "negative_prompt": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+          "characterPrompts": [
+            {
+              "prompt": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+              "uc": "",
+              "center": {
+                "x": 0.68,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.5::rella::, 0.3::piromizu::, 0.2::ask (askzy)::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nhigh complexity, very aesthetic, masterpiece, no text",
+              "char_captions": [
+                {
+                  "char_caption": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "status": "generated",
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\nai45-ablation-20261016\\G.png",
+      "sha256": "4f3e33c3eba39fc9a9089a31833d8748e6e2b39cb8179b6373dcb27fc10779c2",
+      "output_relative": ".tmp/nai/nai45-ablation-20261016/G.png",
+      "assistant_observation": "去gomzi后头饰仍在，服装更暗，武器形制偏移；不能单独归纳该画师职责。"
+    },
+    {
+      "id": "H",
+      "label": "rella 0.8 + ASK 0.2 / HIGH",
+      "artist_chain": "0.9::quasarcake::, 0.8::rella::, 0.4::gomzi::, 0.3::piromizu::, 0.2::ask (askzy)::",
+      "high_complexity": true,
+      "difference": "D: rella 0.5 -> 0.8",
+      "request": {
+        "input": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.8::rella::, 0.4::gomzi::, 0.3::piromizu::, 0.2::ask (askzy)::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nhigh complexity, very aesthetic, masterpiece, no text",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1216,
+          "height": 832,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": false,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 3058649506,
+          "negative_prompt": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+          "characterPrompts": [
+            {
+              "prompt": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+              "uc": "",
+              "center": {
+                "x": 0.68,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, adult woman, silver hair, cyan eyes, black off-shoulder dress, sitting, eating, smile, open mouth, fang, looking at food.\nWide waist-up view, slightly low camera. Her complete head and hands fit inside the canvas. Her left hand holds a small white bowl of rice at chest height. Her right hand holds chopsticks pinching one piece of braised meat before her mouth. Small soup bowl and food plate at lower left. Black sheathed sword rests against the rear wall. Modern apartment kitchen, warm pendant lamp, cool night window light.\n0.9::quasarcake::, 0.8::rella::, 0.4::gomzi::, 0.3::piromizu::, 0.2::ask (askzy)::\narknights, game promotional illustration, painterly anime illustration. Complete clean silhouettes, carefully resolved face and hands. Broad opaque color planes, grouped shadows, angular cloth folds, subtle brush texture. Hair consists of broad flowing locks with irregular painted highlights and shadow masses. Fine linework is selective around eyes and fingers. Delicate skin transitions, matte black cloth, small ceramic highlights. Use lost-and-found edges, with crisp focal edges and softer turning edges. Rich controlled color, quieter background detail.\nhigh complexity, very aesthetic, masterpiece, no text",
+              "char_captions": [
+                {
+                  "char_caption": "adult woman, fair skin, cyan eyes, silver long hair, high ponytail, blue satin bow at ponytail base, parted bangs, both eyes visible, small fang, black round sunglasses on head, black rose above her left temple, black off-shoulder long-sleeved dress, layered ruffled neckline and cuffs, black waist sash, bare shoulders and collarbones",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, worst quality, bad quality, bad anatomy, bad hands, extra fingers, missing fingers, extra arms, duplicate bowl, oversized bowl, sunglasses covering eyes, goggles, hair covering eyes, high collar, holding sword, sword on table, text, watermark, signature, multiple girls, cropped head, overexposure, excessive bloom, plastic skin",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.68,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": false,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "status": "generated",
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\nai45-ablation-20261016\\H.png",
+      "sha256": "4c89e10f64d3059d74d095cab3a6fcaff5fcda6f355d75602d00dd9e4ebb0ce4",
+      "output_relative": ".tmp/nai/nai45-ablation-20261016/H.png",
+      "assistant_observation": "rella0.8组头饰仍在，暗色衣料更集中；仍未呈现明显的整体风格跃迁。"
+    }
+  ],
+  "board": "D:\\素材\\代号柒\\.tmp\\nai\\nai45-ablation-20261016\\comparison-A-H.jpg",
+  "board_sha256": "02e4b6622b5d5b37dea068ca8ff58cec8e28eeb12c0cd967fc18e10e41fd0364",
+  "board_relative": ".tmp/nai/nai45-ablation-20261016/comparison-A-H.jpg",
+  "validation": {
+    "images": 8,
+    "new_requests": 6,
+    "reused": 2,
+    "all_image_dimensions_and_sha256": "passed",
+    "parameter_diff_guards": "passed before dispatch; only declared positive-text changes",
+    "visual_review": "A-H contact sheet and generated B/C/E/F/G originals inspected; observations are assistant judgement, not user approval",
+    "limitations": "Single seed; composition shifts with prompt changes; no stable per-artist attribution; no default changes"
+  }
+}

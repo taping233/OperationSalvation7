@@ -1,0 +1,31 @@
+NAI 4.5 Full | 1344x768 | seed 15102026 | recipe 1.6
+
+BASE PROMPT
+
+1.2::miv4t::, 0.8::quasarcake::
+
+1.7::painterly, acrylic paint (medium)::, 1.3::no lineart::, limited palette. Broad opaque brushwork constructs complete silhouettes and large light-shadow masses. Anime faces and eyes, chunky curved hair locks, broad cloth planes, selective colored accents. Paint over secondary details with a few confident strokes; leave quiet surfaces. Handmade edges, simplified painted background, no text.
+
+1.2::2girls::, eating, sitting, indoors, winter night, window, snowfall, wide shot, three-quarter view, cinematic composition, depth.
+
+Game key visual: a diagonal dining table in a futuristic city apartment. Silver-haired woman sits nearer on the left, blonde woman farther right. One amber lamp lights their faces and steaming food against deep teal shadows. A large window fills the background: near-black city towers, snow-covered rooftops, windblown snowflakes lit outside the glass. Warm intimate interior, pitch-dark snowy city. Broad painted light and shadow shapes; faces remain readable.
+
+BASE UNDESIRED CONTENT
+
+lowres, worst quality, bad quality, jpeg artifacts, cel shading, smooth airbrush, lineart, thick outlines, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, excessive detail, tiny paint facets, dense hair strands, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, daylight, bright exterior, neon city, snow indoors, crowd, extra people, duplicate, extra arms, fused hands, symmetrical composition, blue waist sash, yellow hair, monochrome
+
+WU / B3
+
+girl, silver long hair, high ponytail, blue hair ribbon, blue eyes, black rose, round sunglasses on head, parted bangs, black off-shoulder ruffled dress, black waist sash, fang, playful smile, holding steamed bun, eating, looking at another, sheathed black sword on back
+
+CHARACTER UNDESIRED CONTENT
+
+blonde hair, golden eyes, crescent hair ornament, green cape, white dress, hair over one eye, handheld sword
+
+XINGYUE / D2
+
+girl, pale blonde hair, blunt bangs, long low side braid, golden eyes, white clerical dress, dark teal capelet, gold trim, calm expression, holding spoon, eating soup, looking at another. White crescent hairpin lies flat above bangs on viewer-right.
+
+CHARACTER UNDESIRED CONTENT
+
+silver hair, blue eyes, ponytail on top of head, sunglasses, black rose, black dress, purple eyes, halo, angry, exaggerated grin

@@ -1,0 +1,57 @@
+{
+  "files": [
+    {
+      "role": "master_reference",
+      "source": "C:\\Users\\太平\\AppData\\Local\\Temp\\codex-clipboard-75d17713-f184-4ec2-9f29-363c458540c1.png",
+      "png": "game/art-source/style-winter-painterly-20261016/reference.png",
+      "png_bytes": 2281500,
+      "png_sha256": "4b90f6d6952af56af1aaa0d1e822f96184e4b4793886c1865fe54f06ac9b53ef",
+      "dimensions": [
+        1216,
+        832
+      ],
+      "acquisition": "User attachment copied unchanged",
+      "png_git": "excluded by local .gitignore",
+      "webp": "game/art-source/style-winter-painterly-20261016/reference.webp",
+      "webp_bytes": 336222,
+      "webp_sha256": "1214e05f6755c95f539728e96f056bb06bc16bfcd784abaa5c65afcf6b4c0e8b",
+      "webp_encoding": "Pillow WebP quality=95 method=6, unchanged dimensions"
+    },
+    {
+      "role": "edit_target",
+      "source": "C:\\Users\\太平\\AppData\\Local\\Temp\\codex-clipboard-2453a4ed-74a5-41ad-9c58-fdb99262cd9f.png",
+      "png": "game/art-source/style-winter-painterly-20261016/composition-target.png",
+      "png_bytes": 3225484,
+      "png_sha256": "a1f4162744c3ac5a9cdfebb8647097a5b4eff23e4134d82769824d7f8fc45b78",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "acquisition": "User attachment copied unchanged",
+      "png_git": "excluded by local .gitignore"
+    },
+    {
+      "role": "output_source",
+      "source": "C:\\Users\\太平\\.codex\\generated_images\\01a1449e-f552-7553-b05b-eccc8796fa81\\exec-28b20687-a686-441f-abfa-cc01df3c63c6.png",
+      "png": "game/art-source/style-winter-painterly-20261016/iteration-3.png",
+      "png_bytes": 2874234,
+      "png_sha256": "e94c69d3a370107569496131594b4fc0a5c7aff076a55cd09e983039f14a72b9",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "acquisition": "Built-in image_gen output copied unchanged",
+      "png_git": "excluded by local .gitignore",
+      "webp": "game/art-source/style-winter-painterly-20261016/iteration-3.webp",
+      "webp_bytes": 554310,
+      "webp_sha256": "86bf6bca35a222a6578a04f5ad40364a56dc581e245cc74774b8c785e508e275",
+      "webp_encoding": "Pillow WebP quality=95 method=6, unchanged dimensions"
+    }
+  ],
+  "running_assets_changed": false,
+  "default_style": "docs/production/art/ART-STYLE.md",
+  "visual_review": {
+    "improved": "More irregular snow and guardrail brush shapes",
+    "remaining": "Dense road grain, excessive fine hair lines and partly repetitive snow; candidate not yet approved"
+  }
+}
