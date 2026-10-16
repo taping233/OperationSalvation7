@@ -498,8 +498,8 @@
   #overlay .scene[data-asset-key]::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:linear-gradient(90deg,rgba(9,9,9,.94),rgba(9,9,9,.72) 46%,rgba(9,9,9,.34)); }
   #overlay .scene[data-asset-key] > * { z-index:1; }
 
-  /* 预战遭遇页与实际战场共用现行冬城四层。 */
-  #overlay { --battle-winter-bg:url('../assets/scenes/battle/winter-transit-1011/foreground.webp'),url('../assets/scenes/battle/winter-transit-1011/ground.webp'),url('../assets/scenes/battle/winter-transit-1011/mid.webp'),url('../assets/scenes/battle/winter-transit-1011/far.webp'); }
+  /* 预战遭遇页与实际战场共用本轮简约轨道站三层。 */
+  #overlay { --battle-winter-bg:url('../assets/scenes/battle/platform-minimal-1016/foreground.webp'),url('../assets/scenes/battle/platform-minimal-1016/ground.webp'),url('../assets/scenes/battle/platform-minimal-1016/far.webp'); }
   #overlay .scene[data-asset-key="scene-battle-bg"] { background-image:var(--battle-winter-bg); }
   #overlay .scene[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.webp'); }
   #overlay .scene[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }

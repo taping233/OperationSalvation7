@@ -16,7 +16,7 @@ import { captureBattleContext } from '../battle/battle-loader.js';
     const bagGrid = body.querySelector('.bag-grid');
     if (!bagGrid) return;
     const sameRun = captureBattleContext(game), cards = game.ownedCards;
-    const current = () => sameRun() && game.ownedCards === cards && bagGrid.isConnected
+    const current = () => sameRun() && !game.battleActive && game.ownedCards === cards && bagGrid.isConnected
       && body === UI.el.ovBody && body.querySelector('.bag-grid') === bagGrid
       && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
     bagGrid.addEventListener('keydown', e => {

@@ -82,6 +82,7 @@ for (;;) {
 - `endTurn []` / `flee []`；`pickChoice [i]` / `pickDiscover [i]`；`pickHandSelect [uid]` / `skipHandSelect []`
 - `selectDeckCard [uid]` / `confirmDeck []` / `cancelDeck []`（BOSS 编组）
 - `usePotion [uid]` / `useItem [uid, 侧]`（侧=敌人下标或 "self"）/ `openBag []` / `cancelPendingTarget []`
+- `openBag` 保留兼容命令名，战斗中返回拒绝；观察动作面不再提供开背包动作。地图背包与 `sys:discardCard` 同样受战斗禁用约束，独立药水与手牌道具仍按原战斗规则执行。
 - `bagSlam []`：**背包砸击**（2 费 · 4 点固定伤 · 不吃手牌）→ 进入选目标态后 `resolveSlam [i]`，`cancelInteraction []` 退出
 - `resolveDart [i]`：血毒双镖第二镖（dartPending 态的出口）
 - `useEquipSkill [装备uid]`：**装备主动技能**（observe.battle.equipped 含 uid/used/passive）

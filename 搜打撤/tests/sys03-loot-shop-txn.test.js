@@ -1,3 +1,4 @@
+import { continueChestRewards, collectOverviewCoins } from './helpers/chest-actions.js';
 /* SYS-03 物资事务审计（2026-10-03 老板 SYS-03）：搜刮页与商店买卖的事务顺序。
  * 2026-10-12 领奖改为先查看再确认；grantCard 返回值仍决定入包/散落，
  * chestSkip 经剩余确认后结算金币，商店缺币/满包仍拒绝成交。
@@ -92,7 +93,7 @@ async function revealFirst(game, kind = 'small') {
   vi.resetModules();   // chests.js 顶层捕获 window.SDT：每个用例重载模块以绑定本用例的 SDT/DOM
   const { SDT: chestFacade } = await import('../game/src/run/chests.js');
   chestFacade.Chests.open(game, [{ kind }]);
-  document.querySelector('[data-act="chestClaim"]').click();
+  document.querySelector('[data-act="chestNext"]').click();
   const reveal = document.querySelector('[data-eps-search]');
   expect(reveal).not.toBeNull();
   reveal.click();   // 搜索演出点击立即揭晓 → render() 注册查看与领取动作
@@ -179,7 +180,7 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     expect(grantCalls.length).toBeGreaterThan(callsAfterTake1);
     expect(grantCalls.filter(n => n === CARD_A.name)).toHaveLength(1);   // 已拾取的 A 不重复发
     expect(game.state).toBe('modal');   // 结果留原位供核对
-    ovBody.querySelector('[data-act="chestContinue"]').click();
+    continueChestRewards(acts);
     expect(game.state).toBe('idle');
   });
 
@@ -199,15 +200,17 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     await revealFirst(game);
     acts.chestTake();   // 全部收下（含放不下的），重绘后请求也必须守住事务边界。
     expect(ownedCards.map(o => o.card.name)).toEqual([CARD_A.name]);
-    expect(game.gainCoins).toHaveBeenCalledTimes(1);
+    collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
     expect(game.gainCoins).toHaveBeenCalledWith(7);
     expect(ovBody.querySelector('.reward-final')).toBeNull();
-    expect(ovBody.querySelector('.reward-notice').textContent).toContain('放不下');
+    expect(ovBody.querySelector('.reward-capacity-note').textContent).toContain('放不下');
     expect(ovBody.querySelector('[data-act="chestContinue"]')).toBeNull();
     ovBody.querySelector('[data-act="chestSkip"]').click();
     ovBody.querySelector('[data-act="chestLeave"]').click();
-    expect(ovBody.querySelector('.reward-final').textContent).toContain('1 张已永久放弃');
-    ovBody.querySelector('[data-act="chestContinue"]').click();
+    expect(ovBody.querySelector('.cqo-box-status').textContent).toContain('已收下 1 张');
+    expect(ovBody.querySelector('.cqo-box-complete').disabled).toBe(true);
+    expect(ownedCards).toHaveLength(1);
+    continueChestRewards(acts);
     expect(game.state).toBe('idle');
   });
 
@@ -224,7 +227,7 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     await revealFirst(game, 'medium');
     ovBody.querySelector('[data-act="chestSelect"]').click();
     acts.chestTake();       // 三选一不能由隐藏的批量动作越权收三张
-    acts.chestContinue();   // 尚有待领对象不能跳过离开确认
+    continueChestRewards(acts);   // 尚有待领对象不能跳过离开确认
     expect(grantCalls).toHaveLength(0);
     expect(game.state).toBe('modal');
     const pick = () => ovBody.querySelector('[data-act="chestPick"]');
@@ -249,10 +252,10 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     ovBody.querySelector('[data-act="chestPick"]').click();
     expect(ownedCards).toHaveLength(1);
     expect(game.gainCoins).not.toHaveBeenCalled();
-    ovBody.querySelector('[data-act="chestCoins"]').click();
-    expect(game.gainCoins).toHaveBeenCalledTimes(1);
+    collectOverviewCoins(acts);
+    collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
     expect(game.state).toBe('modal');
-    ovBody.querySelector('[data-act="chestContinue"]').click();
+    continueChestRewards(acts);
     expect(game.state).toBe('idle');
 
     // 第二只箱：放弃分支
@@ -267,8 +270,8 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     ovBody.querySelector('[data-act="chestSkip"]').click();
     ovBody.querySelector('[data-act="chestLeave"]').click();
     expect(ownedCards).toHaveLength(0);            // 卡散落
-    expect(game.gainCoins).toHaveBeenCalledTimes(1); // 币是无主物，跳过也收
-    ovBody.querySelector('[data-act="chestContinue"]').click();
+    collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1); // 币是无主物，跳过也收
+    continueChestRewards(acts);
     expect(game.state).toBe('idle');
   });
 });
@@ -282,7 +285,7 @@ describe('宝箱开启帧与唯一揭晓', () => {
     const show = vi.spyOn(facade.UI, 'showOverlay');
     facade.Chests.open(game, chests);
     show.mockClear();
-    facade.UI.el.ovBody.querySelector('[data-act="chestClaim"]').click();
+    facade.UI.el.ovBody.querySelector('[data-act="chestNext"]').click();
     return { facade, show };
   }
 
@@ -316,7 +319,7 @@ describe('宝箱开启帧与唯一揭晓', () => {
     ovBody.querySelector('[data-act="chestTake"]').click();
     vi.advanceTimersByTime(2000);
     expect(game.ownedCards).toHaveLength(2);
-    expect(game.gainCoins).toHaveBeenCalledTimes(1);
+    collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
   });
 
   it('开启中跳过后进下一箱，旧帧timer不串新箱或重复领奖', async () => {
@@ -328,13 +331,13 @@ describe('宝箱开启帧与唯一揭晓', () => {
     ovBody.querySelector('[data-act="chestReveal"]').click();
     const staleTake = acts.chestTake;
     ovBody.querySelector('[data-act="chestTake"]').click();
-    ovBody.querySelector('[data-act="chestContinue"]').click();
+    continueChestRewards(acts);
     staleTake();   // a departed box cannot claim the next box before its reveal
     vi.advanceTimersByTime(500);
-    expect(ovBody.querySelector('.chest-offer-card img').getAttribute('src')).toBe('closed.webp');
+    expect(ovBody.querySelector('.cqo-box:not(:disabled) .cqo-box-art img').getAttribute('src')).toBe('closed.webp');
     expect(ovBody.querySelector('[data-act="chestSelect"]')).toBeNull();
     expect(game.ownedCards).toHaveLength(2);
-    expect(game.gainCoins).toHaveBeenCalledTimes(1);
+    collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
   });
 
   it('开启中挂起到背包，旧timer不抢面板，恢复原结果不重抽或提前发放', async () => {
@@ -352,7 +355,7 @@ describe('宝箱开启帧与唯一揭晓', () => {
     expect(game.ownedCards).toHaveLength(0);
     ovBody.querySelector('[data-act="chestTake"]').click();
     expect(game.ownedCards).toHaveLength(2);
-    expect(game.gainCoins).toHaveBeenCalledTimes(1);
+    collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
   });
 
   it('减少动态直接静态揭晓，帧等待不阻塞收取', async () => {
@@ -391,13 +394,13 @@ describe('宝箱开启帧与唯一揭晓', () => {
     try {
       // Reopen uses the unchanged presentation-only turbo switch; no card rules change.
       window.SDT.Chests.open(game, [{ kind:'small' }]);
-      ovBody.querySelector('[data-act="chestClaim"]').click();
+      ovBody.querySelector('[data-act="chestNext"]').click();
       vi.advanceTimersByTime(0);
       expect(ovBody.querySelector('.reward-head')).not.toBeNull();
       expect(game.ownedCards).toHaveLength(0);
       ovBody.querySelector('[data-act="chestTake"]').click();
       expect(game.ownedCards).toHaveLength(2);
-      expect(game.gainCoins).toHaveBeenCalledTimes(1);
+      collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
     } finally { setTurbo(false); }
   });
 });
@@ -491,7 +494,7 @@ describe('SYS-03 商店买卖事务序（game.run.shop.js）', () => {
     shopMod = await import('../game/src/run/game.run.shop.js');
     const { game, acts, ownedCards, logs } = makeShop({ coins: 3 });
     acts.shopInspect({ i: 0 });
-    expect(document.querySelector('.shop-detail .tone-limited').textContent).toBe('余额不足：还差 2 币');
+    expect(document.querySelector('.shop-detail .tone-limited').textContent).toBe('还差 2 币');
     expect(document.querySelector('.shop-detail-buy').disabled).toBe(true);
     expect(document.querySelector('.shop-detail-buy').getAttribute('aria-disabled')).toBe('true');
     acts.buyCard({ i: 1 });   // 9 币的卡只有 3 币

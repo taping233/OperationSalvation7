@@ -37,12 +37,12 @@ afterEach(() => {
   actions.clear();
 });
 
-it('shows one short target instruction and clears auxiliary keyboard help on cancel', () => {
+it('highlights targets without reviving the retired secondary caption and clears access on cancel', () => {
   UI.el.ovBody.innerHTML = '<div class="sts-arena-caption"><span data-battle-detail="选择手牌，或结束回合">选择手牌，或结束回合</span></div><div class="sts-hand"><button class="bt-card" data-uid="view-0"></button></div><div class="bt-foe" data-eidx="0"></div><div class="bt-foe" data-eidx="1"></div>';
   selectCardByClick('view-0');
   const caption = UI.el.ovBody.querySelector('.sts-arena-caption span');
-  expect(caption.textContent).toBe('【初始攻击】· 选择 高亮敌人 · Esc 取消');
-  expect(caption.getAttribute('aria-label')).toContain('方向键切换目标');
+  expect(caption.textContent).toBe('选择手牌，或结束回合');
+  expect(caption.hasAttribute('aria-label')).toBe(false);
   expect(UI.el.ovBody.querySelectorAll('.can-target')).toHaveLength(2);
   cancelClickSelection();
   expect(caption.textContent).toBe('选择手牌，或结束回合');

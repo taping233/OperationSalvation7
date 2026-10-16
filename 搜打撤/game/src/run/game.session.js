@@ -145,6 +145,9 @@ function createRunSavePayload() {
   });
   if (snapshotResult.ok && !game.nestActive) snapshotResult = validateMapSnapshot(snapshotResult.value, { layerIdx: game.layerIdx, trackPos: game.trackPos });
   if (!snapshotResult.ok) return null;
+  const chestReward = SDT.Chests?.serialize?.(game) || null;
+  const nodeChestRewards = { ...(game.nodeChestRewards || {}) };
+  if (chestReward) nodeChestRewards[`${game.layerIdx},${game.trackPos}`] = chestReward;
   return {
     seed: Random.seed, rngState: Random.snapshot(),
     mapSeed: game.mapSeed ?? Random.seed,
@@ -172,7 +175,7 @@ function createRunSavePayload() {
     bossPlan: (game.bossPlan == null ? null : game.bossPlan),   // 本层首脑预案（进层 roll 一次存全层，2026-09-13 老板拍板）
     altarItemSacrificed: !!game.altarItemSacrificed,   // 第四层祭坛道具献祭一次性锁（2026-09-19 老板定版）
     shopStocks: game.shopStocks || {},   // 各商店货架（按格子/门持久，防关门重刷，2026-09-19 审计 D-1）
-    chestReward: SDT.Chests?.serialize?.(game) || null,
+    chestReward, nodeChestRewards,
     entrySupply: game.entrySupply || null,
     nodeRewards: game.nodeRewards || {},
     runBattleStats: snapshotRunBattles(identity?.ok ? identity.value.runId : null),
@@ -364,6 +367,8 @@ function restoreGame(slot) {
   game.pendingEventLoot = null;
   game.entrySupply = s.entrySupply || null;
   game.nodeRewards = s.nodeRewards || {};
+  game.nodeChestRewards = s.nodeChestRewards || {};
+  if (s.chestReward) game.nodeChestRewards[`${s.chestReward.layerIdx},${s.chestReward.trackPos}`] = s.chestReward;
   game.discoveredPairs = new Set(s.discovered || []);
   game.elapsed = s.elapsed || 0;
   game.altarItemSacrificed = !!s.altarItemSacrificed;   // 祭坛道具献祭一次性锁（旧档无字段 → false）
@@ -428,8 +433,6 @@ function restoreGame(slot) {
   }
   else if (s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
     if (SDT.Battle.restore(game, s.battle)) {
-      // 读档恢复的战斗没经过 resolveCell：本格按已触发处理，撤退/胜利后不重复触发
-      if (game.visited) game.visited[game.layerIdx + ',' + game.trackPos] = 1;
       saveGame();   // 恢复后立刻回写，防二次退出丢进度
     }
   }
@@ -506,6 +509,7 @@ function newRun(mode, picks, options = {}) {
   game.pendingEventLoot = null;
   game.entrySupply = null;
   game.nodeRewards = {};
+  game.nodeChestRewards = {};
   game.myClass = null;
   game.characterId = null;
   game.classCard = null;

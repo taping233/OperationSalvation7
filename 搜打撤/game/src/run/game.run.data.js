@@ -12,14 +12,13 @@ const NODE_BG = DATA.scenes.nodeBg;
 const PICKUP_BG = DATA.scenes.pickupBg;
 const CLASS_STORY = DATA.scenes.classStory;
 const WINTER_BATTLE_LAYERS = Object.freeze([
-  new URL('../../assets/scenes/battle/winter-transit-1011/far.webp', import.meta.url).href,
-  new URL('../../assets/scenes/battle/winter-transit-1011/mid.webp', import.meta.url).href,
-  new URL('../../assets/scenes/battle/winter-transit-1011/ground.webp', import.meta.url).href,
-  new URL('../../assets/scenes/battle/winter-transit-1011/foreground.webp', import.meta.url).href,
+  new URL('../../assets/scenes/battle/platform-minimal-1016/far.webp', import.meta.url).href,
+  new URL('../../assets/scenes/battle/platform-minimal-1016/ground.webp', import.meta.url).href,
+  new URL('../../assets/scenes/battle/platform-minimal-1016/foreground.webp', import.meta.url).href,
 ]);
   const PRELOAD_SCENES = Object.freeze({
     battle: WINTER_BATTLE_LAYERS[0],
-    // The encounter fallback and boss entrances reuse the current winter-city scenery.
+    // 遭遇战与全部首脑入口预取同一套新冬季站台场景。
     bossGeneral: WINTER_BATTLE_LAYERS[0],
     bossOrc: WINTER_BATTLE_LAYERS[0],
     bossElement: WINTER_BATTLE_LAYERS[0],

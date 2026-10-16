@@ -1,3 +1,4 @@
+import { continueChestRewards } from './helpers/chest-actions.js';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 // U10（2026-09-29 夜班）：teardown 后触发面守卫批量收口（find-E-0120 H1-H4）。
@@ -63,10 +64,10 @@ describe('U10 H2 chests 逐卡揭晓音效守卫', () => {
     };
     const { SDT: chestFacade } = await import('../game/src/run/chests.js');
     chestFacade.Chests.open(game, [{ kind: 'small' }]);
-    ovBody.querySelector('[data-act="chestClaim"]').click();
+    ovBody.querySelector('[data-act="chestNext"]').click();
     ovBody.querySelector('[data-eps-search]').click();        // 立即揭晓 → scheduleRevealSfx 挂 140ms 定时器（无句柄）
     ovBody.querySelector('[data-act="chestTake1"]').click();
-    ovBody.querySelector('[data-act="chestContinue"]').click(); // 单卡已领完，继续探索使 cur 失活
+    continueChestRewards(acts); // 单卡已领完，继续探索使 cur 失活
     expect(chestFacade.Chests.isOpen()).toBe(false);
     expect(vi.getTimerCount()).toBeGreaterThan(0);             // 揭晓音效定时器仍待触发
     vi.stubGlobal('document', undefined);

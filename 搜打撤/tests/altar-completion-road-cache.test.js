@@ -34,11 +34,14 @@ describe('祭坛状态参与地图道路裁剪缓存', () => {
     Object.assign(game, flags);
     const pending = road(), count = Object.keys(game.visited).length;
     expect(pending).toBeTruthy(); expect(road()).toBe(pending);
+    const previousSection = pending.section;
     game[field] = value;
     const completed = road();
     expect(Object.keys(game.visited)).toHaveLength(count);
-    expect(completed).not.toBe(pending);
-    expect(completed.section.to.x).toBeGreaterThan(pending.section.to.x);
+    // The renderer reuses the descriptor, replacing only its geometry.
+    expect(completed).toBe(pending);
+    expect(completed.section).not.toBe(previousSection);
+    expect(completed.section).toEqual(previousSection); // Both states retain the same full node icon and status label.
     expect(road()).toBe(completed);
   });
 });

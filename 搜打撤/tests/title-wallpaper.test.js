@@ -29,7 +29,7 @@ describe('home wallpaper preference', () => {
     expect(title.querySelector('.title-inner').hasAttribute('inert')).toBe(true);
     expect(viewButton.getAttribute('aria-pressed')).toBe('true');
     expect(viewButton.textContent).toContain('恢复界面');
-    expect(selection()).toBe('ensemble');
+    expect(selection()).toBe('snow-road');
     viewButton.click();
     expect(title.classList.contains('wallpaper-only')).toBe(false);
     expect(title.querySelector('.title-inner').hasAttribute('inert')).toBe(false);
@@ -37,18 +37,20 @@ describe('home wallpaper preference', () => {
     expect({ ...localStorage }).toEqual(stored);
   });
 
-  it('keeps the snow cover by default and cycles both directions without changing game saves', async () => {
+  it('keeps the switch available with one current wallpaper without changing game saves', async () => {
     localStorage.setItem('game-save-fixture', 'untouched');
     await boot();
-    expect(selection()).toBe('snow');
+    expect(selection()).toBe('snow-road');
+    expect(button().disabled).toBe(false);
+    expect(button().hidden).toBe(false);
     button().click();
-    expect(selection()).toBe('ensemble');
-    expect(button().getAttribute('aria-label')).toContain('当前第2张');
-    expect(button().textContent).toContain('2/2');
-    expect(localStorage.getItem('sdt-title-wallpaper')).toBe('ensemble');
+    expect(selection()).toBe('snow-road');
+    expect(button().getAttribute('aria-label')).toContain('当前第1张，共1张');
+    expect(button().textContent).toContain('1/1');
+    expect(localStorage.getItem('sdt-title-wallpaper')).toBe('snow-road');
     button().click();
-    expect(selection()).toBe('snow');
-    expect(button().textContent).toContain('1/2');
+    expect(selection()).toBe('snow-road');
+    expect(button().textContent).toContain('1/1');
     expect(localStorage.getItem('game-save-fixture')).toBe('untouched');
   });
 
@@ -79,22 +81,22 @@ describe('home wallpaper preference', () => {
     } finally { vi.useRealTimers(); }
   });
 
-  it('restores the second wallpaper on a new page load', async () => {
+  it('restores the current wallpaper on a new page load', async () => {
     await boot();
     button().click();
     vi.resetModules();
     document.body.innerHTML = html;
     await boot();
-    expect(selection()).toBe('ensemble');
-    expect(button().textContent).toContain('2/2');
+    expect(selection()).toBe('snow-road');
+    expect(button().textContent).toContain('1/1');
   });
 
-  it('uses the first wallpaper for an unknown saved preference', async () => {
-    localStorage.setItem('sdt-title-wallpaper', 'retired');
+  it.each(['snow', 'ensemble', 'retired'])('uses the new wallpaper for retired or unknown preference %s', async preference => {
+    localStorage.setItem('sdt-title-wallpaper', preference);
     await boot();
-    expect(selection()).toBe('snow');
+    expect(selection()).toBe('snow-road');
     button().click();
-    expect(selection()).toBe('ensemble');
+    expect(selection()).toBe('snow-road');
   });
 
   it('still switches when preference storage is unavailable', async () => {
@@ -102,8 +104,8 @@ describe('home wallpaper preference', () => {
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('blocked'); });
     await boot();
     button().click();
-    expect(selection()).toBe('ensemble');
+    expect(selection()).toBe('snow-road');
     button().click();
-    expect(selection()).toBe('snow');
+    expect(selection()).toBe('snow-road');
   });
 });

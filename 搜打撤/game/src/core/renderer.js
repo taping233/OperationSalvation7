@@ -1,11 +1,11 @@
-import { drawMapBrushRoad } from './map-brush-art.js';
+import { drawMapBrushRoad, mapBrushRoadInView } from './map-brush-art.js';
 
 import { font, hash2 } from './renderer.primitives.js';
 import { revealProgress } from './map-reveals.js';
 import { ease } from './motion-primitives.js';
 import { renderScheduler } from './render-scheduler.js';
 import { mapNodeInfo } from './node-info.js';
-import { isConsumedMapNode } from './map-node-state.js';
+import { isConsumedMapNode, mapNodeStatus } from './map-node-state.js';
 import { createMapCityAtmosphere } from './map-city-atmosphere.js';
 import { drawMapNodeBadge, drawMapFogBadge, drawMapTraveller, mapViewportScale, prepareMapNodeArt } from './map-node-art.js';
 import { noteGlowPulse, glowPulse } from './map-node-glow.js';
@@ -121,6 +121,17 @@ const SDT = window.SDT;
   let vignetteKey = '';
   let vignetteGrad = null;
   const mapRoadCache = new WeakMap();
+  const renderedLabelBounds = new Map();
+  let labelBoundsGame = null, labelBoundsNodes = null, labelBoundsLayer = null;
+
+  // The input layer combines these real painted text bounds with its icon hit radius.
+  // Only bounds from the current revealed layer are exposed, never fog silhouettes.
+  function nodeLabelBounds(game,node) {
+    if(labelBoundsGame!==game||labelBoundsNodes!==game.nodes||labelBoundsLayer!==game.layerIdx||node.li!==game.layerIdx)return null;
+    const key=`${node.li},${node.idx}`;
+    if(Object.keys(game.seen||{}).length&&game.seen[key]!==1)return null;
+    return renderedLabelBounds.get(key)||null;
+  }
 
 
   const isCurrentNode = (game, n) => n.li === game.layerIdx && n.idx === game.trackPos;
@@ -294,11 +305,12 @@ const SDT = window.SDT;
   const mapEdgeKey=(a,b)=>[mapKey(a),mapKey(b)].sort().join('|');
 
   // Artwork and type names remain small relative to the complete viewport.
-  function drawIcons(ctx,game){
-    const z=game.cam.zoom,g=nodeGeo(game),unit=mapViewportScale(game.cam.viewW);
+  function drawIcons(ctx,game,g,statuses,path){
+    const z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW);
+    renderedLabelBounds.clear();labelBoundsGame=game;labelBoundsNodes=game.nodes;labelBoundsLayer=game.layerIdx;
     const travel=getMapTravelPresentation(game);
     const preview=travel?.path?.at(-1)||getExpeditionPreview(game)||game.moveTarget;
-    const path=selectedMapPath(game),onPath=new Set(path.map(mapKey));
+    const onPath=new Set(path.map(mapKey));
     const reduced=SDT.Motion?.reduceMotion?.()||false;
     const glowSig=`${game.layerIdx},${game.trackPos}:${[...g.legalKeys].join(';')}`;
     // 呼吸窗口只在活跃对局的站立态武装：被动重绘（resize 重烘焙/测试极简 mock）不触发，
@@ -323,20 +335,24 @@ const SDT = window.SDT;
       const supply=game.entrySupply;
       const entryPending=supply?.layerIdx===n.li&&supply.trackPos===n.idx&&(supply.taken?.length||0)<(supply.cardIds?.length||0);
       const completed=isConsumedMapNode(game,n);
+      const status=statuses.get(key);
       const type=entryPending?'event':door?'door':n.def.type;
-      const name=entryPending?'入城补给':mapNodeInfo(game,n)[0];
+      const name=entryPending?'入城补给':mapNodeInfo(game,n,status)[0];
       const state=current?'current':selected?'selected':routed?'route':legal?'legal':game.visited?.[key]?'visited':'known';
       const rv=reduced?1:revealProgress(key,game.time||0);
       const detailScale=primary?Math.min(1,Math.max(.65,z)):Math.min(1,Math.max(.25,z*.65));
       const scale=unit*detailScale*(rv<1?.75+.25*rv:1)/z;
       ctx.save();ctx.translate(n.x,n.y);ctx.scale(scale,scale);ctx.globalAlpha=rv<1?Math.min(1,rv*1.4):1;
-      drawMapNodeBadge(ctx,type,name,state,{
+      const labelBounds=drawMapNodeBadge(ctx,type,name,state,{
         completed,reachable:legal,
+        status,statusScale:1/detailScale,
         note:game.noteMap?.has(`${game.map?.boardId}|${key}`),
         showLabel:current||selected||(type!=='blank'&&!routed&&(legal?z>=.65:z>=.85)),
         time:game.time||0,pulse:glowPulse(game.time||0),
       });
       ctx.restore();
+      if(labelBounds)renderedLabelBounds.set(key,{left:n.x+labelBounds.left*scale,right:n.x+labelBounds.right*scale,
+        top:n.y+labelBounds.top*scale,bottom:n.y+labelBounds.bottom*scale});
     }
   }
 
@@ -353,7 +369,7 @@ const SDT = window.SDT;
   function mapCurvePath(c){
     const p=new Path2D();p.moveTo(c.from.x,c.from.y);p.bezierCurveTo(c.c1.x,c.c1.y,c.c2.x,c.c2.y,c.to.x,c.to.y);return p;
   }
-  function clippedMapRoad(from,to,game,unit){
+  function clippedMapRoad(from,to,game,unit,statuses){
     const z=game.cam.zoom,len=Math.hypot(to.x-from.x,to.y-from.y);
     if(len<1)return null;
     const selected=getExpeditionPreview(game)||game.moveTarget;
@@ -361,8 +377,9 @@ const SDT = window.SDT;
       const marked=isCurrentNode(game,n)||(selected?.li===n.li&&selected?.idx===n.idx);
       const supply=game.entrySupply;
       const pending=supply?.layerIdx===n.li&&supply.trackPos===n.idx&&(supply.taken?.length||0)<(supply.cardIds?.length||0);
-      if(!pending&&(n.def?.type==='blank'||isConsumedMapNode(game,n)))return {x:24*unit/z,top:24*unit/z,bottom:(marked?52:24)*unit/z};
-      return {x:(marked?60:56)*unit/z,top:56*unit/z,bottom:78*unit/z};
+      const hasStatus=!!statuses.get(mapKey(n)).label;
+      if(!pending&&!hasStatus&&(n.def?.type==='blank'||isConsumedMapNode(game,n)))return {x:24*unit/z,top:24*unit/z,bottom:(marked?52:24)*unit/z};
+      return {x:(marked?60:56)*unit/z,top:56*unit/z,bottom:(hasStatus?100:78)*unit/z};
     };
     const outside=(p,n,box)=>Math.abs(p.x-n.x)>Math.min(box.x,len*.32)||p.y-n.y < -Math.min(box.top,len*.32)||p.y-n.y > Math.min(box.bottom,len*.32);
     const exit=(origin,target)=>{
@@ -375,33 +392,45 @@ const SDT = window.SDT;
     return {curve,start,end,section,path:mapCurvePath(section)};
   }
 
-  function drawLinks(ctx,game){
-    const g=nodeGeo(game),z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW),curLi=game.layerIdx;
+  function drawLinks(ctx,game,g,statuses,path){
+    const z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW),curLi=game.layerIdx;
+    const view={left:game.cam.cx-game.cam.viewW/(2*z),right:game.cam.cx+game.cam.viewW/(2*z),
+      top:game.cam.cy-game.cam.viewH/(2*z),bottom:game.cam.cy+game.cam.viewH/(2*z)};
     const preview=getExpeditionPreview(game)||game.moveTarget;
     const selectedKey=preview?mapKey(preview):'';
-    const contentKey=`${Object.keys(game.visited||{}).length}:${game.entrySupply?.taken?.length||0}:${!!game.altarActivated}:${!!game.altarRewardPending}`;
+    const contentKey=`${Object.keys(game.visited||{}).length}:${game.entrySupply?.taken?.length||0}:${!!game.altarActivated}:${!!game.altarRewardPending}:${g.nodes.map(n=>`${mapKey(n)}:${statuses.get(mapKey(n)).id}`).join(';')}`;
     let cached=mapRoadCache.get(g);
-    if(!cached||cached.zoom!==z||cached.viewW!==game.cam.viewW||cached.selectedKey!==selectedKey||cached.contentKey!==contentKey){
+    if(!cached){
       const roads=[],known=new Map(g.nodes.map(n=>[mapKey(n),n])),done=new Set();
       for(const n of g.nodes){
         if(n.li!==curLi)continue;
         for(const [li,idx] of game.layerData[n.li]?.logical[n.idx]?.next||[]){
           const q=known.get(`${li},${idx}`);if(!q||li!==curLi)continue;
           const edgeKey=mapEdgeKey(n,q);if(done.has(edgeKey))continue;done.add(edgeKey);
-          const road=clippedMapRoad(n,q,game,unit);if(!road)continue;
+          if(Math.hypot(q.x-n.x,q.y-n.y)<1)continue;
           const fromKey=mapKey(n),toKey=mapKey(q),currentKey=`${game.layerIdx},${game.trackPos}`;
           const legal=(fromKey===currentKey&&g.legalKeys.has(toKey))||(toKey===currentKey&&g.legalKeys.has(fromKey));
-          roads.push({...road,edgeKey,fromKey,toKey,legal});
+          roads.push({curve:mapTravelCurve(n,q),from:n,to:q,edgeKey,fromKey,toKey,legal,paint:null});
         }
       }
-      cached={zoom:z,viewW:game.cam.viewW,selectedKey,contentKey,roads};mapRoadCache.set(g,cached);
+      cached={roads};mapRoadCache.set(g,cached);
     }
-    const path=selectedMapPath(game),planned=new Map();
+    const planned=new Map();
     for(let i=1;i<path.length;i++)planned.set(mapEdgeKey(path[i-1],path[i]),mapKey(path[i-1]));
     const travel=getMapTravelPresentation(game),moving=travel?.phase==='moving';
     ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
-    for (const road of g.fogRoads) drawMapBrushRoad(ctx,road,unit/z,{alpha:.12});
-    for(const road of cached.roads){
+    for (const road of g.fogRoads) drawMapBrushRoad(ctx,road,unit/z,{alpha:.12,view});
+    for(const descriptor of cached.roads){
+      if(!mapBrushRoadInView(descriptor.curve,unit/z,view))continue;
+      // Keep one paint object/canvas per edge across zoom and content changes.
+      // Offscreen edges catch up lazily when panned back into the viewport.
+      if(!descriptor.paint||descriptor.zoom!==z||descriptor.viewW!==game.cam.viewW
+          ||descriptor.selectedKey!==selectedKey||descriptor.contentKey!==contentKey){
+        descriptor.paint=Object.assign(descriptor.paint||{},clippedMapRoad(descriptor.from,descriptor.to,game,unit,statuses),
+          {edgeKey:descriptor.edgeKey,fromKey:descriptor.fromKey,toKey:descriptor.toKey,legal:descriptor.legal});
+        Object.assign(descriptor,{zoom:z,viewW:game.cam.viewW,selectedKey,contentKey});
+      }
+      const road=descriptor.paint;
       const chosen=planned.has(road.edgeKey),legal=road.legal;
       const color=chosen?'#79c9c4':legal?'#c7d1ca':'#b9c8c2';
       drawMapBrushRoad(ctx,road,unit/z,{alpha:chosen?(moving?.45:.95):legal?.8:.45});
@@ -416,7 +445,7 @@ const SDT = window.SDT;
       for(let i=1;i<travel.path.length;i++){
         if(i>travel.segmentIndex)break;
         const a=travel.path[i-1],b=travel.path[i];if(a.li!==curLi||b.li!==curLi)continue;
-        const road=cached.roads.find(r=>r.edgeKey===mapEdgeKey(a,b));if(!road)continue;
+        const road=cached.roads.find(r=>r.edgeKey===mapEdgeKey(a,b))?.paint;if(!road)continue;
         const progress=i<travel.segmentIndex?1:Math.max(0,Math.min(1,travel.progress));
         const forward=mapKey(a)===road.fromKey;
         const start=forward?road.start:Math.max(road.start,1-progress),end=forward?Math.min(road.end,progress):road.end;
@@ -435,9 +464,8 @@ const SDT = window.SDT;
 
   // ---------- 火堆结点（辉光环 + 摇曳火焰） ----------
   // ---------- 编号（当前环结点，顶部长小字） ----------
-  function drawIndexes(ctx, game) {
+  function drawIndexes(ctx, game, g) {
     if (!game.toggles.index) return;
-    const g = nodeGeo(game);
     ctx.font = font(game.cam, 9);
     ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
     ctx.fillStyle = 'rgba(255,255,255,0.6)';
@@ -450,8 +478,8 @@ const SDT = window.SDT;
   }
 
   // The confirmed old portrait and pointer identify the real position at rest and in motion.
-  function drawPlayer(ctx,game){
-    const n=nodeGeo(game).nodes.find(n=>isCurrentNode(game,n));
+  function drawPlayer(ctx,game,g){
+    const n=g.nodes.find(n=>isCurrentNode(game,n));
     const p=game.pos||(n&&{x:n.x,y:n.y});if(!p)return;
     const z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW),travel=getMapTravelPresentation(game);
     drawMapTraveller(ctx,p.x+44*unit/z,p.y-38*unit/z,z,
@@ -479,10 +507,14 @@ const SDT = window.SDT;
     ctx.scale(cam.zoom, cam.zoom);
     ctx.translate(-cam.cx, -cam.cy);
 
-    drawLinks(ctx, game);
-    drawIcons(ctx, game);
-    drawPlayer(ctx, game);
-    drawIndexes(ctx, game);
+    // Projection lives for one draw only: in-place reward edits are visible on
+    // the next frame, while labels, clipping and badges share this frame's work.
+    const g=nodeGeo(game),statuses=new Map(g.nodes.map(n=>[mapKey(n),mapNodeStatus(game,n)]));
+    const path=selectedMapPath(game);
+    drawLinks(ctx, game, g, statuses, path);
+    drawIcons(ctx, game, g, statuses, path);
+    drawPlayer(ctx, game, g);
+    drawIndexes(ctx, game, g);
 
     ctx.restore();
 
@@ -508,6 +540,7 @@ const SDT = window.SDT;
     backdropFadeFrame = 0; backdropFadeDriving = false;
     backdropCanvas = null; backdropFade.snap = null;
     geo = null; vignetteGrad = null;
+    renderedLabelBounds.clear();labelBoundsGame=null;labelBoundsNodes=null;labelBoundsLayer=null;
     mapAtmosphere.onload = null;
   }
 
@@ -530,5 +563,5 @@ const SDT = window.SDT;
     return true;
   }
 
-  SDT.Renderer = { draw, dispose, warm, prepare };
+  SDT.Renderer = { draw, dispose, warm, prepare, nodeLabelBounds };
   if (import.meta.hot) import.meta.hot.dispose(dispose);

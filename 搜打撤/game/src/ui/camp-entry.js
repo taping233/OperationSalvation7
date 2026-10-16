@@ -1,6 +1,7 @@
 // 基地初次展开独立编排；只保留选档画面的短暂装饰副本，不接管存档或焦点。
 import '../../css/camp-entry.css';
 import { waitPageVisual } from './page-visual-ready.js';
+import { mapImageReady } from '../core/map-image-ready.js';
 const CUT_SCENES = {
   camp: new URL('../../assets/scenes/transition-camp-v2.webp', import.meta.url).href,
   photo: new URL('../../assets/scenes/transition-photo-v2.webp', import.meta.url).href,
@@ -119,6 +120,17 @@ export function createCityCut({ archive = '基地档案', title = '返回基地'
 
 export const cityCutDuration = 980;
 
+// The curtain's own artwork must be ready before the destination is revealed.
+// A failed decorative image falls back to the cut's opaque colour and lettering.
+export async function prepareCityCut(cut, { signal } = {}) {
+  const image = cut?.querySelector('.camp-entry-scenery img');
+  if (!image || signal?.aborted) return false;
+  const ready = await mapImageReady(image, { signal, timeout: 3000 });
+  if (signal?.aborted) return false;
+  if (!ready) { image.style.display = 'none'; cut.dataset.scenery = 'fallback'; }
+  return true;
+}
+
 // A mounted city cut holds its first pose until the destination's representative assets settle.
 export function playPreparedCut(page, cut, duration = cityCutDuration, onFinish) {
   const overlay = page?.closest('#overlay');
@@ -139,9 +151,10 @@ export function playPreparedCut(page, cut, duration = cityCutDuration, onFinish)
   });
   observer.observe(overlay, { childList: true, subtree: true, attributes: true,
     attributeFilter: ['hidden', 'data-ui-closing'] });
-  waitPageVisual(page, { signal: controller.signal, extraRoots: [cut], background: window.SDT?.UI?._pageBgReady })
-    .then(ready => {
-      if (!ready || finished) return;
+  Promise.all([prepareCityCut(cut, { signal: controller.signal }),
+    waitPageVisual(page, { signal: controller.signal, background: window.SDT?.UI?._pageBgReady })])
+    .then(([cutReady, ready]) => {
+      if (!cutReady || !ready || finished) return;
       cut.classList.remove('page-cut-waiting');
       timer = setTimeout(finish, duration);
     }).catch(finish);
@@ -183,9 +196,10 @@ export function enterCamp(overlay, ghost, reduced) {
     if (cleanup === finish) cleanup = null;
   };
   cleanup = finish;
-  waitPageVisual(overlay, { signal: controller.signal, extraRoots: cut ? [cut] : [], background: window.SDT?.UI?._pageBgReady })
-    .then(ready => {
-      if (!ready || cleanup !== finish || !overlay.querySelector('#hubMain')) return;
+  Promise.all([cut ? prepareCityCut(cut, { signal: controller.signal }) : true,
+    waitPageVisual(overlay, { signal: controller.signal, background: window.SDT?.UI?._pageBgReady })])
+    .then(([cutReady, ready]) => {
+      if (!cutReady || !ready || cleanup !== finish || !overlay.querySelector('#hubMain')) return;
       overlay.dataset.campEntry = '1';
       cut?.classList.remove('page-cut-waiting');
       removeIdentity = ghost ? transferIdentity(overlay, ghost) : null;

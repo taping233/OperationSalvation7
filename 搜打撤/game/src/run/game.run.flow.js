@@ -19,11 +19,12 @@ import { isTurbo } from '../core/turbo.js';
 import { renderScheduler } from '../core/render-scheduler.js';
 import { findMapTravelPath, setMapTravelPresentation } from './map-travel-path.js';
 import { createTravelMotion, createArrivalFeedback } from './map-travel-motion.js';
-import { cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openChestsOnCell, openFixedRewardsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene } from './game.run.scenes.js';
-import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal, openEntrySupply } from './game.run.altar.js';
+import { cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openChestsOnCell, openFixedRewardsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene, resumeChestsOnCell } from './game.run.scenes.js';
+import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal, openEntrySupply, resumeNodeRestore } from './game.run.altar.js';
 import { bindNodeEvent, nodeEventAt, claimResourceReward, entrySupplyAt, entrySupplyGate, nodeActionBinding, resourceRewardAt } from './node-reward-state.js';
 import { createEventCardChoiceController } from './event-card-choice.js';
 import { rewardExitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
+import { nodeChestRewardAt } from './chest-reward-save.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -191,6 +192,18 @@ function resolveCell() {
   game.visited = game.visited || {};
   const vKey = game.layerIdx + ',' + idx;
   const consumed = !!game.visited[vKey];
+  const pendingReward = nodeChestRewardAt(game);
+  if (pendingReward) {
+    UI.beginRoom();
+    const resumed = pendingReward.context?.battleSettlement
+      ? bagSlots.resumeBattleRewards?.(pendingReward) : resumeChestsOnCell(pendingReward);
+    if (!resumed) {
+      game.state = 'idle'; UI.hideOverlay();
+      UI.log('待领奖励暂未恢复，已保留在当前节点，请重试', 'warn');
+    }
+    return;
+  }
+  if (resumeNodeRestore()) { UI.beginRoom(); return; }
   if (resumeEventCardChoice()) { UI.beginRoom(); return; }
   // The actual entry cell owns its pending supply; old saves have no synthetic reward.
   const supply = entrySupplyAt(game);
@@ -204,8 +217,7 @@ function resolveCell() {
     return;
   }
   // 首脑格：击败首脑由战斗收尾写 visited（bag.js），祭坛未激活时可再来。
-  // 击败后的巢穴不可再战（重打首脑会反复领传说保底），按 bossKilled 拦截而非 visited
-  //（离开未击败的首脑格也会被 moveTo 写 visited，不能据此锁格）。
+  // 击败后的巢穴不可再战；待领战利品已在上方按节点恢复。
   if (def && def.type === 'boss' && game.bossKilled) {
     UI.log('[[icon:skull]] 首脑已被击破，巢穴已经空了', 'dim');
     UI.beginRoom(); openSafeNode();
@@ -341,10 +353,7 @@ function runInstant(def, after) {
       // 2026-09-06 #11：资源格改为把「木材」以卡牌形式入包（可拖动/点击）
       const card = SDT.Cards.all().find(c => c.id === 'tt-wood');
       const cnt = def.n || 1;
-      openPickupPage('wood', `木材卡 ×${cnt}`, () => {
-        for (let i = 0; i < cnt && card; i++) grantEventCard(card);
-        done();
-      });
+      openFixedRewardsOnCell(Array.from({ length:cnt }, () => card).filter(Boolean), '木材补给', { consumeNode:true });
     } break;
     // 物资点：搜索建筑内遗留物资，70% 小宝箱（随机 1 张）/ 30% 中宝箱（3 选 1）。
     case 'chest': openNodeDecision({ tone:'pickup', title:'遗留物资', sub:'你闯进一间废弃配送站。敞开的柜门和散落的包装之间，或许还有值得带走的东西。',
@@ -356,18 +365,12 @@ function runInstant(def, after) {
       // 2026-09-06 #11：口粮同样以卡牌形式入包
       const card = SDT.Cards.all().find(c => c.id === 'tt-rations');
       const cnt = MAP.items.rations.count || 1;
-      openPickupPage('rations', `口粮卡 ×${cnt}`, () => {
-        for (let i = 0; i < cnt && card; i++) grantEventCard(card);
-        done();
-      });
+      openFixedRewardsOnCell(Array.from({ length:cnt }, () => card).filter(Boolean), '口粮补给', { consumeNode:true });
     } break;
     case 'key': {
       // 2026-09-09 老板 #1：物资点资源一律以卡牌形式入包（钥匙与木材/口粮同口径）
       const card = SDT.Cards.all().find(c => c.id === 'tt-key');
-      openPickupPage('key', `钥匙卡 ×1`, () => {
-        if (card) grantEventCard(card);
-        done();
-      });
+      openFixedRewardsOnCell([card].filter(Boolean), '钥匙补给', { consumeNode:true });
     } break;
     case 'fire':
       openFireRest(done);   // 数值沿用原火堆规则，确认休整才执行。
@@ -627,7 +630,7 @@ async function triggerEventCard(card, current) {
       tone: 'event', asset: sceneMeta[2], icon: '[[icon:dice]]', title: card.name,
       sub: esc((narrative && narrative.intro) || card.desc || '神秘事件发生了……'),
       body: optHTML,
-      foot:'<button class="ov-btn" data-act="evtBag">整理背包</button><p class="reward-notice" data-event-capacity role="status"></p>',
+      foot:'<button class="ov-btn" data-act="evtReturn">返回地图</button><button class="ov-btn" data-act="evtBag">整理背包</button><p class="reward-notice" data-event-capacity role="status"></p>',
     });
     const active = eventPageBinding(choices ? 'evtChoice' : 'evtNext', current);
     UI.act('evtChoice', (d) => {
@@ -657,6 +660,7 @@ async function triggerEventCard(card, current) {
       if (game.state !== 'modal') finishInstant();   // 同上（旧事件 default 分支此前漏收尾）
     });
     UI.act('evtBag', () => { if (!evtSettled && active()) bagSlots.showBackpack(); });
+    UI.act('evtReturn', () => { if (!evtSettled && active()) closeEventFlow(); });
     UI.refresh(game);
   };
   renderEventPage();

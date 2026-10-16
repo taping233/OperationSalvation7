@@ -62,14 +62,14 @@ const tick = (ms = 0) => new Promise(r => setTimeout(r, ms));
 
 const clickAct = (act) => {
   const el = document.querySelector(`[data-act="${act}"]`);
-  if (el && !el.disabled && !el.closest('[hidden]')) { el.click(); return true; }
+  if (el && !el.disabled && !el.closest('[hidden], [inert], [aria-hidden="true"]')) { el.click(); return true; }
   return false;
 };
 async function sweep(max = 120) {
   for (let i = 0; i < max; i++) {
     await tick(30);
     if (game.state === 'idle') return;
-    for (const act of ['flowContinue', 'chestClaim', 'chestReveal', 'chestCoins', 'chestContinue', 'chestTake', 'chestTake1', 'chestPick', 'chestSkip', 'chestLeave', 'chestSelect', 'pickupGo', 'closeShop',
+    for (const act of ['flowContinue', 'chestOverviewCoins', 'chestFinish', 'chestNext', 'chestReveal', 'chestCoins', 'chestContinue', 'chestTake', 'chestTake1', 'chestPick', 'chestSkip', 'chestLeave', 'chestSelect', 'pickupGo', 'closeShop',
       'blankSafeDone', 'evtNext', 'evtChoice', 'resTake', 'resSkip', 'nodeChestSearch', 'fireRestGo', 'fireDone', 'stayHere', 'goDoor']) {
       if (clickAct(act)) break;
     }
@@ -229,6 +229,57 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     expect(moveTo(li, nextIdx)).toBe(true);
     await sweep();
     expect(game.visited[key]).toBe(1);
+  });
+  it.each(['wood','rations','key'])('%s满包可暂离、真实存读档与离开重进保留未领奖；腾格领取只结算一次', async kind => {
+    const session = await import('../game/src/run/game.session.js');
+    const { RunStorage } = await import('../game/src/hub/game.storage.js');
+    const slot=4; session._set_active_slot(slot);window.SDT.Base.use(slot);
+    try {
+      newRun('standard',[],{skipClassChoice:true});game.myClass='武';game.characterId='wu';game.state='idle';
+      const idx=game.layerData[0].logical.findIndex(cell=>(cell.next||[]).some(([li])=>li===0));
+      const neighbor=game.layerData[0].logical[idx].next.find(([li])=>li===0)[1];
+      const originalDef=game.layerData[0].logical[idx].def;
+      game.layerData[0].logical[idx].def={type:kind,n:1};game.layerData[0].logical[neighbor].def={type:'entrance',name:'测试安全位置',extraction:false};
+      enterLayer(0,idx);game.entrySupply=null;
+      const eligible=window.SDT.Cards.all().filter(card=>card.type==='法术');
+      const unique=[...new Map(eligible.map(card=>[card.name,card])).values()].slice(0,game.bagCap());
+      game.ownedCards=unique.map((card,i)=>({uid:`full-${i}`,card:{...card}}));
+      expect(game.usedSlots()).toBe(game.bagCap());
+      expect(reenterCell()).toBe(true);
+      const key=`0,${idx}`,pending=JSON.parse(JSON.stringify(game.nodeChestRewards[key]));
+      game.layerData[0].logical[idx].def=originalDef; // 旧资源入口不是现行地图生成类型；待领记录独立于地图投影。
+      expect(pending.current.cards).toHaveLength(1);expect(game.visited[key]).toBeFalsy();
+      expect(clickAct('chestReturn')).toBe(true);expect(game.state).toBe('idle');
+      expect(moveTo(0,neighbor)).toBe(true);await tick(30);
+      expect(session.saveGame()).toBe(true);
+      expect(session.loadGame(slot).ok).toBe(true);
+      expect(game.trackPos).toBe(neighbor);expect(game.nodeChestRewards[key]).toEqual(pending);
+      game.ownedCards.pop();
+      expect(moveTo(0,idx)).toBe(true);await tick(30);
+      expect(document.querySelector('[data-act="chestTake1"]')).toBeTruthy();
+      expect(clickAct('chestTake1')).toBe(true);expect(clickAct('chestContinue')).toBe(true);
+      expect(game.visited[key]).toBe(1);expect(game.nodeChestRewards[key]).toBeUndefined();
+      const count=game.ownedCards.length;reenterCell();await tick(30);expect(game.ownedCards.length).toBe(count);
+    } finally { session._set_active_slot(null);RunStorage.remove(slot); }
+  });
+  it('门旁商队关闭重进保留购买记录，穿门后旧店关闭且旧购买动作失效', async () => {
+    newRun('standard',[],{skipClassChoice:true});game.myClass='武';game.characterId='wu';game.state='idle';game.entrySupply=null;game.coins=999;
+    const door=game.layerData[0].doors[0],idx=door.at,key=`0,${idx}`;
+    game.layerData[0].logical[idx].def={...game.layerData[0].logical[idx].def,type:'shop'};
+    enterLayer(0,idx);reenterCell();await tick(30);
+    expect(clickAct('doorShop')).toBe(true);
+    const stockKey=`door:${door.pair}`,stock=game.shopStocks[stockKey];
+    const buyIndex=stock.findIndex(slot=>slot.card&&!slot.empty&&!slot.sold&&!slot.mystery&&slot.shaReplenish==null);
+    expect(buyIndex).toBeGreaterThanOrEqual(0);
+    window.SDT.UI._acts.buyCard({i:String(buyIndex)});
+    expect(stock[buyIndex].sold).toBe(true);
+    const oldBuy=window.SDT.UI._acts.buyCard,coins=game.coins,before=JSON.stringify(stock);
+    expect(clickAct('closeShop')).toBe(true);reenterCell();await tick(30);expect(clickAct('doorShop')).toBe(true);
+    expect(JSON.stringify(game.shopStocks[stockKey])).toBe(before);expect(game.visited[key]).toBeFalsy();
+    expect(clickAct('closeShop')).toBe(true);reenterCell();await tick(30);expect(clickAct('goDoor')).toBe(true);
+    expect(game.visited[key]).toBe(1);oldBuy({i:String(buyIndex)});expect(game.coins).toBe(coins);
+    enterLayer(0,idx);reenterCell();await tick(30);
+    expect(document.querySelector('[data-act="doorShop"]')).toBeNull();
   });
   it('F38 真实新局保存/读取保留轮换开关，旧快照与旧种子档缺字段均继续旧遭遇', async () => {
     const session = await import('../game/src/run/game.session.js');

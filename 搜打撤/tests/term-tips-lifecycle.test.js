@@ -5,6 +5,7 @@ beforeAll(async () => {
   await import('../game/src/ui/term-tips.js');
 });
 beforeEach(() => {
+  vi.spyOn(Element.prototype, 'getClientRects').mockReturnValue([{ x:0, y:0, width:80, height:20 }]);
   document.body.insertAdjacentHTML('beforeend', '<span id="term" data-term="poison">中毒</span>');
 });
 afterEach(() => {

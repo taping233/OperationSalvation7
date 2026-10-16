@@ -492,8 +492,12 @@
 
 /* 词条讲解浮框（09-20 老板：特殊词条触摸时自绘文字框讲解——形态/中毒等诅咒/祝福/机制词/敌方词缀）
  * 单例 fixed 挂 body（term-tips.js），跟随触发词条定位；视觉走药水提示栏同族纸白底+近黑字（09-13 定版口径） */
-.term-tip { position: fixed; z-index: 9999; pointer-events: none;
-  width: max-content; max-width: min(calc(var(--game-layout-width, 100vw) * 0.88), 420px);
+.ui-tip-anchor { position: relative; display: inline-flex; max-width: 100%; vertical-align: middle; }
+.ui-tip-anchor > :disabled { pointer-events: none; }
+.ui-tip-anchor:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.term-tip { position: fixed; z-index: 9999; pointer-events: none; box-sizing: border-box;
+  width: max-content; max-width: min(calc(var(--game-layout-width, 100vw) * 0.88), 420px, var(--term-tip-max-width, 420px));
+  max-height: var(--term-tip-max-height, calc(var(--game-layout-height, 100vh) - 16px)); overflow: auto; overflow-wrap: anywhere;
   padding: 8px 14px; border: 1px solid rgba(122,111,84,.45); border-radius:0;
   background: rgba(244,244,244,.96); color: #1c1a16;
   font-size: clamp(12px, calc(var(--game-layout-width, 100vw) * 0.012), 13.5px); line-height: 1.65;
@@ -501,6 +505,12 @@
 .term-tip img, .term-tip svg { width: 15px; height: 15px; vertical-align: -2px; margin-right: 3px; }
 .term-tip b { color: #5a4514; }
 .term-tip .term-tip-sep { color: #ae9c60; padding: 0 2px; }
+.term-tip.is-action-tip { width: 380px; padding: 16px 18px; border: 1px solid rgba(255,255,255,.22); border-radius: 12px;
+  background: rgba(22,32,41,.76); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  color: #e7eff3; box-shadow: 0 10px 30px rgba(4,10,16,.3); font-size: 20px; line-height: 1.5; }
+.term-tip.is-action-tip > b { display: block; margin-bottom: 8px; color: #ecdfc0; font-size: 24px; }
+.term-tip.is-action-tip > .term-tip-text { display: block; }
+.term-tip.is-action-tip > small { display: block; margin-top: 10px; color: #c6ced3; font-size: 18px; line-height: 1.5; }
 .term-tip[hidden] { display: none; }
 
 /* ═══ 统一弹层壳 .ov-shell（2026-09-25 UI 统一批·中心）═══

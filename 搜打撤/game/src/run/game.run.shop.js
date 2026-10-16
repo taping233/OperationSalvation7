@@ -2,6 +2,7 @@ import { Random } from '../core/random.js';
 import { esc } from '../core/shared.js';
 import { descRich } from '../cards/cards.view.js';
 import { hopPoint, decayOsc, ease } from '../core/motion-primitives.js';
+import { captureShopBrowseState, restoreShopBrowseState } from './shop-browse-state.js';
 
 let openBackpack;
 export function configureShopRuntime({ openBag }) {
@@ -31,6 +32,7 @@ function createShopController({
   let inspectionMotion = null;
   const currentSession = session => session && session === shopSession && game.state === 'modal'
     && game.shopStock === session.stock && game.ownedCards === session.ownedCards
+    && game.layerIdx === session.layerIdx && game.trackPos === session.trackPos
     && game.seed === session.seed && SDT.Base?.slot === session.slot;
   function cancelInspectionMotion() {
     if (inspectionClose) clearTimeout(inspectionClose.timer);
@@ -119,7 +121,8 @@ function createShopController({
     } else {
       game.shopStock = generateShopStock();
     }
-    shopSession = { stock: game.shopStock, ownedCards: game.ownedCards, seed: game.seed, slot: SDT.Base?.slot };
+    shopSession = { stock: game.shopStock, ownedCards: game.ownedCards, seed: game.seed, slot: SDT.Base?.slot,
+      layerIdx:game.layerIdx, trackPos:game.trackPos };
     bagReturn = null;
     shopNotice = '';
     selectedShopIndex = null;
@@ -150,9 +153,10 @@ function createShopController({
     const exhausted = slot.sold || (slot.shaReplenish != null && slot.shaReplenish <= 0);
     const hasMoney = game.coins >= slot.price;
     const fits = slot.card && (game.canReceiveCard ? game.canReceiveCard(slot.card) : game.canAcceptCard ? game.canAcceptCard(slot.card) : true);
+    const moneyStatus = !hasMoney ? `还差 ${slot.price - game.coins} 币` : '';
+    const capacityStatus = !fits ? `背包装不下：${usedSlots()}/${bagCap()} 格` : '';
     const status = exhausted ? (slot.mystery ? `已购入「${slot.card?.name || '卡牌'}」，已放入本次远征背包` : '本站已售出')
-      : !hasMoney ? `余额不足：还差 ${slot.price - game.coins} 币`
-        : !fits ? `背包装不下：${usedSlots()}/${bagCap()} 格` : '去向：本次远征背包';
+      : [moneyStatus, capacityStatus].filter(Boolean).join(' · ') || '去向：本次远征背包';
     const unavailable = !hasMoney || !fits;
     const buyAct = slot.shaReplenish != null ? 'buySha' : 'buyCard';
     const rules = slot.mystery && !slot.sold ? '购买后随机揭晓一张卡牌；本次查看不会提前揭晓。'
@@ -163,9 +167,11 @@ function createShopController({
       <div class="shop-detail-scroll"><div class="shop-detail-art">${slot.mystery && !slot.sold ? '<div class="shop-card-mystery">[[icon:dice]]<b>？</b><span>神秘货箱</span><small>购买后随机揭晓一张卡</small></div>' : slot.card ? cardHTML(slot.card) : ''}</div>
       ${hasLongRules && (!slot.mystery || slot.sold) ? `<details class="shop-detail-rules"><summary>完整规则</summary><p>${rules}</p></details>` : ''}</div>
       <div class="shop-detail-actions">
-      <div class="shop-detail-facts"><strong class="${exhausted ? 'tone-complete' : unavailable ? 'tone-limited' : 'tone-ready'}">${status}</strong></div>
+      <div class="shop-detail-facts">${exhausted ? `<strong class="tone-complete">${esc(status)}</strong>`
+        : unavailable ? `${moneyStatus ? `<strong class="tone-limited">${esc(moneyStatus)}</strong>` : ''}${capacityStatus ? `<strong class="tone-limited">${esc(capacityStatus)}</strong>` : ''}`
+          : `<strong class="tone-ready">${status}</strong>`}</div>
       ${exhausted ? '<button type="button" class="shop-detail-done" data-act="shopCloseInspect">继续浏览</button>' : `<button type="button" class="shop-detail-buy${unavailable ? ' short' : ''}" data-act="${buyAct}" data-i="${selectedShopIndex}"${unavailable ? ` disabled aria-disabled="true" title="${esc(status)}"` : ''}>${unavailable ? !hasMoney ? '金币不足' : '背包装不下' : slot.free ? '免费领取' : `购买 · ${slot.price} 币`}</button>`}
-      ${!exhausted && hasMoney && !fits ? '<button type="button" class="shop-detail-bag" data-act="shopOpenBag">整理背包</button>' : ''}</div>`;
+      ${!exhausted && !fits ? '<button type="button" class="shop-detail-bag" data-act="shopOpenBag">整理背包</button>' : ''}</div>`;
   }
 
   // 买不起/装不下时的货位即时反馈（2026-09-19 留言 #1：点了没反应像"买不了"）：
@@ -324,7 +330,7 @@ function createShopController({
         </aside>
         <aside class="shop-detail" role="dialog" aria-label="当前商品详情"${selectedShopIndex == null ? ' hidden' : ''}>${shopDetailHTML()}</aside>
         </div>
-        <footer class="shop-market-footer"><span class="shop-live" id="shopLive" aria-live="polite">${shopNotice}</span><button class="shop-back" data-act="closeShop">[[icon:arrow]] 离开补给站</button></footer>
+        <footer class="shop-market-footer"><span class="shop-live" id="shopLive" aria-live="polite">${shopNotice}</span><span class="shop-return-note">移动离开前可再次进入</span><button class="shop-back" data-act="closeShop">[[icon:arrow]] 返回地图</button></footer>
       </div>`, 'page');
     const shopRoot = document.querySelector('.shop-replica');
     registerShopActs(shopRoot);
@@ -506,17 +512,27 @@ function createShopController({
     register('shopOpenBag', () => {
       // 关闭背包后回到商店当前页（主商店/收购台），不再踢回地图
       const returnPage = shopPage;
+      const browseState = captureShopBrowseState(root, UI.el.ovBody, selectedShopIndex != null);
+      cancelInspectionMotion();
       const onReturn = () => {
         if (bagReturn !== onReturn || version !== pageVersion || !currentSession(session)) return;
         // 普通背包关闭时仍留有退出中的 .bag-view；减少动态时弹层已同步清空。
         if (!document.querySelector('.bag-view') && !UI.el?.overlay?.hidden) return;
         bagReturn = null;
         (returnPage === 'sell' ? renderSellPage : renderShop)();
+        const restoredVersion = pageVersion;
+        const selector = returnPage === 'sell' ? '.shop-exchange' : '.shop-market';
+        const restoredRoot = UI.el.ovBody.querySelector(selector);
+        // showOverlay queues its initial focus first; restore after it on this page only.
+        requestAnimationFrame(() => {
+          if (pageVersion !== restoredVersion || !currentSession(session) || !restoredRoot?.isConnected
+            || UI.el.overlay.hidden || UI.el.ovBody.querySelector(selector) !== restoredRoot) return;
+          restoreShopBrowseState(restoredRoot, UI.el.ovBody, browseState);
+        });
       };
       bagReturn = onReturn;
       openBackpack(onReturn);
-      // 战斗背包接口 SDT.Battle.commands.openBag 只在战斗内可用，非战斗态直接调会抛
-      // TypeError（实测：reading 'isBoss'）；showBackpack 是它的通用外壳，战斗中会自己转过去。
+      // 商店经通用入口整理背包；战斗期间通用入口与战斗命令均拒绝打开。
     });
     register('buyCard', data => {
       const slot = game.shopStock[+data.i];

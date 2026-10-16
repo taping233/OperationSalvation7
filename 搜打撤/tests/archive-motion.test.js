@@ -1,6 +1,8 @@
 import { afterEach, expect, it, vi } from 'vitest';
 import { enterArchive, clearArchiveMotion } from '../game/src/ui/archive-motion.js';
 import { captureArchiveExit, enterCamp, clearCampEntry, enterAchievementCut } from '../game/src/ui/camp-entry.js';
+// This suite verifies handoff ownership/timing; cold artwork is tested by page-loading.
+vi.mock('../game/src/core/map-image-ready.js', () => ({ mapImageReady: () => Promise.resolve(true) }));
 
 afterEach(() => {
   clearArchiveMotion(document.getElementById('overlay'));

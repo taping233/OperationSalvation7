@@ -10,6 +10,8 @@
 
 新素材应记录来源与授权；已有字体、音效和卡图的来源说明分别见本目录下的 `fonts/`、`sfx/` 和 `cards/items/`。替换或删除素材前，先检查实际引用、来源记录及对应的视觉回归。
 
+首页当前使用 `reconstruction/wallpaper-snow-road-1016.webp`（老板指定雪原公路图，保持1672×941原尺寸），设置页沿用同图；切换壁纸功能保留，当前列表为1张。原 `wallpaper-wu-1004.webp` 与 `wallpaper-ensemble-1005.webp` 已退出首页选项、保留文件作退役存档。来源与哈希见[接入记录](../../docs/evidence/2026-10-16-home-snow-road/receipt.json)。
+
 无的“春日·机车”“新春·旗袍”“盛夏·水枪”分别使用 `portraits/full/wu-casual-v14.webp`、`wu-spring-v15.webp`、`wu-beach.webp`，三图均已按当前人物大图容器约1.30:1补绘上下场景并实装；来源、备份和逐图预览见[扩图记录](../../docs/evidence/2026-10-15-wu-skin-fill/README.md)。泳装此前的NAI构图及默认v1.0重绘过程见[泳装来源](../../docs/evidence/2026-10-15-wu-swim-nai/README.md)。
 
 常无欲的战斗Sprite使用 portraits/frames/changwuyu/sprite-v1/（animations.json维护帧序和时长），静态兜底与新待机一致；四动作实装来源见 [10-10实装记录](../../docs/evidence/2026-10-10-changwuyu-install/README.md)。

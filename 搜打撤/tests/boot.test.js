@@ -653,11 +653,10 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
       expect(card.classList.contains('click-selected')).toBe(true);
       expect(key(document, 'Escape').defaultPrevented).toBe(true);
       expect(face.getAttribute('aria-pressed')).toBe('false');
-      // Shift+Enter remains an explicit inspector shortcut; normal play needs no inspector button.
+      // The full card is readable inline; Shift+Enter no longer opens a second inspector.
       key(face, 'Enter', { shiftKey: true });
-      expect(document.querySelector('.bt-hand-detail')).not.toBeNull();
+      expect(document.querySelector('.bt-hand-detail')).toBeNull();
       expectUnspent();
-      key(document, 'Escape');
       card.click();
       expect(card.classList.contains('click-selected')).toBe(true);
       expect(document.querySelector('.bt-hand-detail')).toBeNull();

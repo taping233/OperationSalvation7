@@ -1,7 +1,7 @@
 // Keep the reading size stable; fit a hand by changing overlap, not card typography.
 const CARD_WIDTH = 260;
 const PREFERRED_STEP = 190;
-const REST_DROP = 284;
+const REST_DROP = 64;
 export function handDisplayLayout(index, count, width) {
   if (!Number.isInteger(count) || count < 1 || count > 9 || !Number.isInteger(index) || index < 0 || index >= count) {
     throw new RangeError('Battle hand layout supports one to nine groups');

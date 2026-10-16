@@ -204,42 +204,42 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
   ],
   consumerFingerprints: {
     "shadowed-card-art": {
-      "game/src/core/art.js": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1",
+      "game/src/core/art.js": "65b909a1848ee71c64cec39c8d709475fc0532896754c034b3d2710d0ec62f6a",
       "game/src/core/data-loader.js": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be",
       "game/data/art-mapping.json": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99"
     },
     "retired-scenes": {
       "game/data/art-mapping.json": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99",
-      "game/src/core/art.js": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1",
-      "game/src/run/chests.js": "a993d5ed443b8d6b5521d82be2dd22ca202382a4626647f4290c6299da36a021",
+      "game/src/core/art.js": "65b909a1848ee71c64cec39c8d709475fc0532896754c034b3d2710d0ec62f6a",
+      "game/src/run/chests.js": "fd2d26a4a13805ab9ac4df57853eac3d010de746dc0f29fd95d2fcb1f3be4149",
       "game/src/run/chest-opening-art.js": "6ea623ee1a706248f743e143c0c5fca5026de400056a0761f8c8ef29d6b65079",
-      "game/src/run/game.run.data.js": "6f89d00a6116d2ec0171e1cd1ae73272af0c8879f5557fd2921e507f9b55c9db",
-      "game/src/run/game.run.scenes.js": "c49bbb277679f39eee25201ce928560d8a159413a74a6ab59d7e9efeb026635d",
-      "game/src/battle/view/battle.scenery.js": "def5fdf4843c3fc8b5eb0226e8859b6ff14ee72c9b12d24481a9a93d22647dba",
+      "game/src/run/game.run.data.js": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8",
+      "game/src/run/game.run.scenes.js": "0373fc9bdf673db7783d0f6b331d2c4a4842d94af320ca04beb29a780b5936e8",
+      "game/src/battle/view/battle.scenery.js": "bcbff054eb7c23c6a7336c868c5f2a0b2b14e6406628a7bd64a9349935b8172f",
       "game/src/run/game.session.death.js": "5f48ef82cf0269cc012528c17d956357134b5af3899373b9c39e2b9267737f87",
       "game/css/entry-events.css": "0d488a1c0174cf7b0c77702e178937ef4a5ba5238b88adf70727f89a7f71185b",
-      "game/css/scenes.css": "6d10a0d68c80397b9ff599ff631dc66c0b91984cc205b736dbf7716df05cfb70"
+      "game/css/scenes.css": "e02105ca8bc13b66df7f8d07d584dc05c209a4e2e906a8bd05f340d567a15c3e"
     },
     "chests": {
-      "game/src/run/chests.js": "a993d5ed443b8d6b5521d82be2dd22ca202382a4626647f4290c6299da36a021",
+      "game/src/run/chests.js": "fd2d26a4a13805ab9ac4df57853eac3d010de746dc0f29fd95d2fcb1f3be4149",
       "game/src/run/chest-opening-art.js": "6ea623ee1a706248f743e143c0c5fca5026de400056a0761f8c8ef29d6b65079"
     },
     "frames": {
-      "game/src/battle/view/battle.frames.js": "3749586baaf1cbb45f00af3eccbd14e2963a0b98ac483c69b10a6c7b557eb904",
+      "game/src/battle/view/battle.frames.js": "b71c39e052d62bd38591745d6621b66aab67edbcee64ab66326b2d23b628ce82",
       "game/src/battle/view/battle.frame-catalog.js": "7396a3a49f206d63e16e5ed8bab02d4d5fbd39e7ef934c354f1dc0fcda756bd0",
       "game/src/battle/view/battle.frame-catalog-changwuyu.js": "774594287f6417bf0ffba60f77817ffc7dff42d5d78f937f6c13c72973a4a77d",
       "game/src/battle/view/battle.frame-catalog-three-role.js": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
     },
     "map": {
-      "game/src/core/map-node-art.js": "2142595cfe18a9b47db627e03e10d4db1d868c66367751571c3e028e3bf8f0ac",
-      "game/src/core/renderer.js": "74fb995da22653b8a5e7b4c3b86fab9e6f6bcccae40982118174ca428de394be",
+      "game/src/core/map-node-art.js": "2cd3d6ffee8c3b53076db63cfb4d776ac94953129daeccafbd9fcbdf2a39b4f4",
+      "game/src/core/renderer.js": "9fcc01942a8ca3a115bb5008cd4c97eae79c4a2d46e5a3cdf97f2f214f342867",
       "game/src/core/map-city-atmosphere.js": "70c7ce669d14bb5c55261a17c412b843a8616e9732b544bb03c18376cbf3a5fb",
-      "game/src/core/art.js": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1",
+      "game/src/core/art.js": "65b909a1848ee71c64cec39c8d709475fc0532896754c034b3d2710d0ec62f6a",
       "game/src/core/data-loader.js": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be"
     },
     "transitions": {
-      "game/src/ui/camp-entry.js": "104ad905fee3feed9279f3f86ce56550a0d306ab80ce110faab66a899ed40fde",
-      "game/src/core/art.js": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1",
+      "game/src/ui/camp-entry.js": "45512ff38fd159adbdad17ee62622a2a7dddb5f3d4c347e5bc759e5c7d2e8520",
+      "game/src/core/art.js": "65b909a1848ee71c64cec39c8d709475fc0532896754c034b3d2710d0ec62f6a",
       "game/src/core/data-loader.js": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be"
     }
   },
@@ -251,12 +251,12 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/card-design-options-v2.html": "cead324bf47437043376cfb40dcc7cec7c9fde1e0bda644a4da356e240a5f9ee",
     "game/src/audio/sfx-audition.js": "e2a5dbbfc72747a51f1023a70bccd4f8ed33785126e0433a2ab2473881bdebdc",
     "game/src/audio/sound.bank.js": "81b9bdf76f7440c6adccdc757b10a1240201830d76f8b4dea695dc9812b0fdf4",
-    "game/src/audio/sound.js": "f5053d38817ddaee067ff0c42e5677694641340fd210722c189a4ecdbee2a4a7",
-    "game/src/battle/view/battle.frames.js": "3749586baaf1cbb45f00af3eccbd14e2963a0b98ac483c69b10a6c7b557eb904",
-    "game/src/battle/view/battle.layers.js": "7041764eea55ce1e147afb10fc2e494e43ab2c493617d0cf88b6bdb185770575",
+    "game/src/audio/sound.js": "ce1634f1b6b7af4230e3e95e74ab1ca86a5f667673e79236d42fa8c31a4457ef",
+    "game/src/battle/view/battle.frames.js": "b71c39e052d62bd38591745d6621b66aab67edbcee64ab66326b2d23b628ce82",
+    "game/src/battle/view/battle.layers.js": "a2661d60343129a0e19566738d01c0a0c60e096441b15bb22a4360cc9ad39ec7",
     "game/src/battle/view/battle.vfx.js": "a439f13c5433f7dfc936a9e7a8c4bfe56350f745e17a69e2661b783d4d667e28",
     "game/src/cards/card-frame-presentation.js": "79ef8241faad2ed89bb1c19b6866f0e352ddd43e9498d1e0842e436335099d9a",
-    "game/src/core/art.js": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1",
+    "game/src/core/art.js": "65b909a1848ee71c64cec39c8d709475fc0532896754c034b3d2710d0ec62f6a",
     "game/src/core/icons-bitmap.js": "c8c66dda18b0b7d43c08e7fac90f35f1672e9693775892e1d7116158bf18aa46",
     "game/src/home/home.scene.js": "abbbd5aaabc4afae047302bc2e7bd62858fbc7a6386b1505e60b46dcbe957604",
     "game/src/hub/base-chibi-v2.skin.js": "53a4a3e47e3b01b53d134776a0ee62335f5253e714edc5e775ca16c733906f86",

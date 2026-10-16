@@ -1,5 +1,5 @@
 // 只校验恢复消费者的结构前提；不查卡库、不修剪资产、不改变标量默认。
-import { restoreChestReward } from '../run/chest-reward-save.js';
+import { restoreChestReward, validNodeChestRewards, matchingChestRewards } from '../run/chest-reward-save.js';
 import { validEntrySupply, validNodeRewards } from '../run/node-reward-state.js';
 const record = value => value !== null && typeof value === 'object' &&
   (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
@@ -35,6 +35,9 @@ function runFields(data, prefix = '', checkpoint = false) {
     if (data[key] != null && !record(data[key])) return bad(prefix + key);
   }
   if (!checkpoint && data.chestReward != null && !restoreChestReward(data, data.chestReward)) return bad(prefix + 'chestReward');
+  if (!checkpoint && data.nodeChestRewards != null && !validNodeChestRewards(data, data.nodeChestRewards)) return bad(prefix + 'nodeChestRewards');
+  const currentReward = data.nodeChestRewards?.[`${data.layerIdx},${data.trackPos}`];
+  if (!checkpoint && data.chestReward && currentReward && !matchingChestRewards(data, data.chestReward, currentReward)) return bad(prefix + 'chestReward/nodeChestRewards');
   if (!checkpoint && data.entrySupply != null && !validEntrySupply(data.entrySupply)) return bad(prefix + 'entrySupply');
   if (!checkpoint && data.nodeRewards != null && !validNodeRewards(data.nodeRewards)) return bad(prefix + 'nodeRewards');
   for (const [key, stock] of Object.entries(data.shopStocks || {})) {

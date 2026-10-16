@@ -348,7 +348,7 @@
     "small": {
       "name": "小型物资箱",
       "icon": "[[icon:archive]]",
-      "cards": 1,
+      "pickFrom": 3,
       "coins": [
         1,
         1

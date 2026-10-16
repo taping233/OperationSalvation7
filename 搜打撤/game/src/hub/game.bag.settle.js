@@ -16,6 +16,7 @@ import { bagSlots } from './game.bag.bridge.js';
 import { validBattleRewardContinuation } from '../run/chest-reward-save.js';
 let restoreBattleReward = null;
 export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || false;
+bagSlots.resumeBattleRewards = resumeBattleRewards;
   // ---------- 战后结算（battle.js 回调） ----------
   // win = true 胜利 / false 战败 / null 撤退。
   // 小怪战：使用过的卡进消耗区；BOSS 战：卡牌完好保留；
@@ -179,10 +180,20 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
       UI.refresh(game);
     };
     // 开完宝箱后的续流：普通战/首脑战（第四层 boss 格发起）都回待机
-    const settle = () => {
+    const settle = (preserveRewards = false) => {
+      settlement.parkingRewards ||= preserveRewards;
+      const parking = settlement.parkingRewards;
       if (settlement.commitPromise) return settlement.commitPromise;
       settlement.commitPromise = (async () => {
         if (!sameRun()) return false;
+        if (settlement.victoryCommitted) {
+          game.state = parking ? 'modal' : 'idle';
+          if (saveGame() === false && getActiveSlot()) return retry();
+          settlement.phase = parking ? 'chests' : 'done';
+          UI.refresh(game);
+          if (!parking) teachAmmoOnce();
+          return true;
+        }
         if (!settlement.rewardsApplied) {
           // 宠物蛋保底计数和完成节点都进入 afterBase/afterRun，不先写任一存档。
           // 无档位胜利的计数（2026-09-29 收敛）经宠物蛋命令走内存推进+尝试保存的旧语义。
@@ -246,6 +257,10 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
         }
 
         settlement.phase = 'done';
+        settlement.victoryCommitted = true;
+        if (settlement.activeRewardContinuation) settlement.activeRewardContinuation.progressCommitted = true;
+        const pendingReward = parking ? SDT.Chests.serialize?.(game) : null;
+        if (pendingReward) (game.nodeChestRewards ||= {})[`${game.layerIdx},${game.trackPos}`] = pendingReward;
         if (settlement.retryAction && UI._acts?.battleSettleRetry === settlement.retryAction) {
           UI.act('battleSettleRetry', undefined);
         }
@@ -256,7 +271,10 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
         settlement.retryButton = null;
         settlement.retryAction = null;
         UI.refresh(game);
-        teachAmmoOnce();   // 首胜后一次性说明「卡牌是消耗品」
+        if (parking) {
+          settlement.phase = 'chests'; game.state = 'modal';
+          SDT.Chests.resume();
+        } else teachAmmoOnce();   // 首胜后一次性说明「卡牌是消耗品」
         return true;
       })().catch(error => sameRun() ? retry(error) : false).finally(() => { settlement.commitPromise = null; });
       return settlement.commitPromise;
@@ -291,6 +309,8 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
     if (!sameRun()) return false;
     if (settlement.phase === 'pocket') settlement.phase = 'transitioned';
     if (settlement.phase === 'transitioned') {
+    game.visited ||= {};
+    game.visited[`${settlement.node.layerIdx},${settlement.node.trackPos}`] = 1;
     UI.log(opts.isBoss ? '[[icon:trophy]] <b>BOSS战胜利！</b>' : '[[icon:trophy]] 战斗胜利！', 'ok');
     // 需求 #13：击败首脑后，第四层终局撤离点无条件放行
     // 2026-10-02 老板：日志「第五层」系旧五层布局残留，主图四层定版后统一为「第四层」
@@ -336,10 +356,21 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
         ...(opts.name ? { name:opts.name } : {}), ...(opts.encounterId ? { encounterId:opts.encounterId } : {}) },
       victoryProgress:settlement.victoryProgress || null, progressRecorded:!!settlement.progressRecorded,
       extraLegendaryPrepared:!!settlement.extraLegendaryPrepared,
+      progressCommitted:!!settlement.victoryCommitted,
     });
+    const beforeMapReturn = async continuation => {
+      if (settlement.victoryCommitted) return true;
+      settlement.activeRewardContinuation = continuation;
+      // 与原胜利 Base+Run 事务共用节点幂等键；afterRun 同时保留未领奖快照。
+      continuation.progressCommitted = true;
+      const committed = await settle(true);
+      if (!committed) continuation.progressCommitted = false;
+      return committed;
+    };
     const afterRewards = async () => {
       if (settlement.phase === 'done') return true;
       if (!sameRun() || settlement.phase === 'extraRewards') return false;
+      settlement.parkingRewards = false;
       settlement.chestsCompleted = true;
       // 普通战利品领完后才掷原有额外传说骰；固定结果先进入同一 Run 的待领奖快照。
       // 满包、刷新和保存重试都不能吞卡或重掷，领取/明确放弃后才提交胜利与首胜教学。
@@ -375,7 +406,7 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
             settlement.extraRewardSnapshot = null;
             settlement.phase = 'rewardsReady';
             return afterRewards();
-          });
+          }, { beforeMapReturn });
           if (opened && settlement.slotId && saveGame() === false) {
             settlement.phase = 'rewardsReady';
             return retry(new Error('额外传说待领奖快照未保存'));
@@ -400,6 +431,7 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
       UI.log(`[[icon:archive]] 战利品掉落：${SDT.Chests.dropText(all)}`, 'loot');
       SDT.Chests.open(game, all, afterRewards, {
         battleSettlement: rewardContinuation(),
+        beforeMapReturn,
         battleSummary: { defeated: (opts.foeNames || []).length, hp: game.hp, maxHp: game.maxHp, cardOutcome: settlement.cardOutcome },
       });
       if (settlement.phase === 'rewardsReady') settlement.phase = 'chests';
@@ -426,15 +458,28 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
       ownerSeed:game.seed, runToken:game.discoveredPairs, receiptChecked:true,
       attempt:null, rewardsApplied:false, victoryProgress:continuation.victoryProgress,
       progressRecorded:continuation.progressRecorded, extraLegendaryPrepared:continuation.extraLegendaryPrepared === true };
+    settlement.victoryCommitted = continuation.progressCommitted === true;
     settlements.set(opts, settlement);
+    const beforeMapReturn = async current => {
+      // 复用正常收尾事务，但保留已揭晓快照及领奖页；已提交的胜利不再累加进度。
+      if (settlement.victoryCommitted) return true;
+      settlement.activeRewardContinuation = current;
+      current.progressCommitted = true;
+      settlement.parkingRewards = true;
+      settlement.phase = 'saving';
+      const committed = await onBattleEnd(opts, [], true, []);
+      if (!committed) current.progressCommitted = false;
+      return committed === true;
+    };
     return SDT.Chests.restore(game, saved, () => {
       // The saved bag already contains card consumption and any claimed rewards.
       // Resume any remaining fixed reward before the idempotent Base+Run victory transaction.
       if (settlement.phase === 'done') return true;
       settlement.chestsCompleted = true;
+      settlement.parkingRewards = false;
       settlement.phase = 'rewardsReady';
       return onBattleEnd(opts, [], true, []);
-    });
+    }, { beforeMapReturn });
   };
   }
 

@@ -427,7 +427,9 @@ function characterArt(value, full=false, useDefault=false) {
       return new Promise((resolve) => {
         const scheduleNext = () => {
           const run = () => {
-            if (document.body?.classList.contains('cardlib-open') || foregroundImagesPending()) {
+            if (document.hidden || document.body?.dataset.state === 'moving'
+                || navigator.scheduling?.isInputPending?.()
+                || document.body?.classList.contains('cardlib-open') || foregroundImagesPending()) {
               setTimeout(scheduleNext, 160);
               return;
             }
@@ -444,7 +446,13 @@ function characterArt(value, full=false, useDefault=false) {
             try {
               const response = await fetch(url, { cache: 'force-cache', priority: 'low' });
               if (!response.ok) throw new Error(`HTTP ${response.status}`);
-              await response.arrayBuffer();
+              // Drain encoded bytes without assembling a second full ArrayBuffer
+              // for every asset; consuming to EOF still populates the HTTP cache.
+              if (response.body?.getReader) {
+                const reader = response.body.getReader();
+                try { while (!(await reader.read()).done) { /* cache only */ } }
+                finally { reader.releaseLock(); }
+              } else await response.arrayBuffer();
               prefetchedUrls.add(url);
             } catch (error) {
               console.warn('[warmup] 美术资源预取失败', url, error);

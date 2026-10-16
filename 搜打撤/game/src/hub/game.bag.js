@@ -17,7 +17,7 @@ import { decorateInventoryZoom } from '../ui/inventory-zoom.js';
 function captureBagView(rootFor = null) {
   const sameRun = captureBattleContext(game), cards = game.ownedCards, body = UI.el.ovBody;
   const root = body?.firstElementChild, zoom = document.getElementById('cardZoom');
-  return () => sameRun() && game.ownedCards === cards && game.runActive && game.state === 'modal'
+  return () => sameRun() && !game.battleActive && game.ownedCards === cards && game.runActive && game.state === 'modal'
     && !UI.el.overlay.hidden && !UI.el.overlay.classList?.contains('closing')
     && (!body || (UI.el.ovBody === body && body.firstElementChild === (rootFor ? rootFor() : root)))
     && (rootFor || document.getElementById('cardZoom') === zoom);
@@ -31,6 +31,7 @@ let requestedBagSection = null;
 let bagZone = 'bag', bagFilter = 'all', bagSortKey = 'rarity';
 let bagReceipt = null;
 function showBackpackSection(section) {
+  if (game.battleActive) return;
   requestedBagSection = ['safe', 'pocket'].includes(section) ? section : 'main';
   showBackpack();
 }
@@ -51,6 +52,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
   }
 
   function useOwnedCard(uid) {
+    if (game.battleActive) return false;
     const i = game.ownedCards.findIndex(o => o.uid === uid);
     if (i < 0) return;
     const card = game.ownedCards[i].card;
@@ -198,6 +200,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
 
   // 整堆移动：背包格 ⇄ 安全格（同名卡一起移动）
   function moveStackSafe(name, toSafe) {
+    if (game.battleActive) return false;
     // 初始牌「初始攻击」不能带出背包：不入安全格（也就不会经宠物运回仓库）
     if (toSafe && name === SDT.Cards.SHA.name) {
       UI.log('[[icon:cross]] 初始牌「初始攻击」无法移出背包——每局固定携带，不入安全格 / 仓库', 'warn');
@@ -248,6 +251,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
 
   // 把 srcName 的堆移到 beforeName 之前（beforeName 缺省 = 移到末尾）
   function moveStackOrder(srcName, beforeName) {
+    if (game.battleActive) return false;
     syncCardOrder();
     const ord = game.cardOrder.filter(n => n !== srcName);
     const di = beforeName ? ord.indexOf(beforeName) : -1;
@@ -279,6 +283,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
   }
 
   function discardOwnedCard(name, fromSafe) {
+    if (game.battleActive) return false;
     if (name === SDT.Cards.SHA.id || name === SDT.Cards.SHA.name) {
       UI.log('[[icon:pen]] 初始牌「初始攻击」不可丢弃', 'warn');
       return false;
@@ -652,6 +657,10 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     decorateInventoryZoom(card);
   }
   function showBackpack(refreshOnly) {
+    if (game.battleActive) {
+      UI.log('[[icon:lock]] 战斗中无法打开背包；战斗结束后可回地图整理', 'warn');
+      return;
+    }
     // 卡牌特写浮层挂在 body（overlay 之外）：此时按 B / 点背包按钮 = 先收回特写，
     // 不动背包——否则背包关闭后特写残留在局内画面上
     if (!refreshOnly) {
@@ -670,15 +679,6 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     // 旧版直接拦截是因为关背包会吞掉后续奖励，现在用 Chests.suspend/resume 保住流程
     if (!refreshOnly && SDT.Chests && SDT.Chests.isOpen && SDT.Chests.suspend && SDT.Chests.isOpen()) {
       bagOverChest = SDT.Chests.suspend();
-    }
-    if (game.battleActive) {
-      // 2026-09-09 老板：战斗中也能开背包用道具——转给战斗背包（again 按 B = 关闭）
-      if (SDT.Battle && SDT.Battle.commands && SDT.Battle.commands.openBag) {
-        SDT.Battle.commands.openBag();
-        return;
-      }
-      UI.log('[[icon:lock]] 战斗中无法打开背包；请使用手牌完成战斗或撤退', 'warn');
-      return;
     }
     if (!refreshOnly && backpackOpen && game.state === 'modal' && !UI.el.overlay.hidden) {
       closeBackpack();

@@ -33,7 +33,8 @@ describe('A6-MENU-01 右键留言识别器补齐基地商店页签名', () => {
 
 describe('A3-ALTAR-01 祭坛道具献祭路径的复原页跟祭坛身份', () => {
   it('openPocketRestore 道具路径传 opts，不落默认营火休整', () => {
-    expect(altar).toMatch(/openPocketRestore\(Math\.min\(2, restorableN\), \(\) => \{ saveGame\(\); openAltarRitual\(def\); \}, \{\s*tone: 'altar'/);
+    expect(altar).toMatch(/openPocketRestore\(record\.total, done, \{\s*tone:'altar'/);
+    expect(altar).toContain('restoreRecord:record');
   });
 });
 

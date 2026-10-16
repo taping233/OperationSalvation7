@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, rmSync, chmodSync } from 'node:fs';
 import { execSync } from 'node:child_process';
+import { availableParallelism } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { collectVerifiedRuntimeAssetAliases } from './scripts/runtime-asset-aliases.mjs';
@@ -288,6 +289,9 @@ export default defineConfig({
     // pool+分环境必须绑定生效（10-01 实测归因）：任单独一项 ≈55s 无收益——forks 进程冷启动贵，
     // 但 forks 池切掉 93 个零 DOM 文件的 jsdom 后进程初始化大头消失，全量 55.2s→45.0s（-18.5%）。
     pool: 'forks',
+    // 每个DOM worker独立加载jsdom与游戏模块；高逻辑核数主机也限制并发进程，避免内存争用拖住RPC回报。
+    maxWorkers: Math.max(1, Math.min(4, availableParallelism() - 1)),
+    minWorkers: 1,
     include: ['tests/**/*.test.js'],
     // 零 DOM 全局命中的测试切 node 环境。甄别口径：rg 扫 document/window/localStorage/createElement/
     // requestAnimationFrame 等 DOM 全局关键词零命中 + 全量实证（7 个误报已剔除：battle-architecture/

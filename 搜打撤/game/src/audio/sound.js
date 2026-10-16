@@ -51,10 +51,10 @@ import { SceneMusicPlayer } from './sound.music.player.js';
     clickComp.threshold.value = -14; clickComp.ratio.value = 4;
     clickGain.connect(clickComp); clickComp.connect(sfxGain);
     loadClicks();
+    loadJsfx();
     loadHovers();
     loadSwitches();
     loadBattle();
-    loadJsfx();
     return true;
   }
 

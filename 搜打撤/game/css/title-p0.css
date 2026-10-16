@@ -5,34 +5,28 @@
   color: var(--home-text); isolation: isolate;
   background: linear-gradient(180deg, #989a9c 0%, #7a7e81 24%, #1b1d1f 100%);
 }
-#title.home-composed[data-home-wallpaper="ensemble"] { background: #141617; }
 #title.home-composed .home-scene {
   position: absolute; inset: 0; z-index: 0; pointer-events: none; isolation: isolate;
 }
 #title.home-composed .title-wallpaper-extension {
   position: absolute; inset: -4%; z-index: 0; pointer-events: none;
-  background: url('../assets/reconstruction/wallpaper-wu-1004.webp?v=snow-expanded-1009') center / cover no-repeat;
+  background: url('../assets/reconstruction/wallpaper-snow-road-1016.webp?v=1016b') center / cover no-repeat;
   filter: blur(40px) brightness(.7); opacity: 1;
   transition: opacity .5s ease-in-out;
 }
-#title.home-composed[data-home-wallpaper="ensemble"] .title-wallpaper-extension {
-  background-image: url('../assets/reconstruction/wallpaper-ensemble-1005.webp?v=ensemble-final-1005');
-}
 #title.home-composed .title-bg {
-  /* Center the snow portrait between the menus; the blurred layer fills its left edge. */
+  /* Keep the road and right-side portrait aligned with the source composition. */
   inset: 0; z-index: 1;
-  background: url('../assets/reconstruction/wallpaper-wu-1004.webp?v=snow-expanded-1009') calc(37.5% + calc(var(--game-layout-width, 100vw) * 0.125)) 56px / cover no-repeat;
-  mask-image: linear-gradient(180deg, transparent 56px, #000000 76px);
+  background: url('../assets/reconstruction/wallpaper-snow-road-1016.webp?v=1016b') center / cover no-repeat;
+  mask-image: none;
   filter: none; transform: none; opacity: 1;
   transition: opacity .5s ease-in-out;
 }
 #title.home-composed .title-bg-alternate {
   inset: 0;
-  background: url('../assets/reconstruction/wallpaper-ensemble-1005.webp?v=ensemble-final-1005') center / cover no-repeat;
+  background: none;
   mask-image: none; opacity: 0;
 }
-#title.home-composed[data-home-wallpaper="ensemble"] .title-bg { opacity: 0; }
-#title.home-composed[data-home-wallpaper="ensemble"] .title-bg-alternate { opacity: 1; }
 #title.home-composed::before,
 #title.home-composed .title-bg::before,
 #title.home-composed .title-bg::after,

@@ -30,6 +30,7 @@ import { shuffleCards } from '../bag/battle.deck.js';
 import '../bag/battle.piles.js';
 import { isAreaEffect, targetSideFor, unplayableReasonFor, itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { rejectUnsupportedCard } from '../effects/battle.rule-guard.js';
+import { inspectCardRuleCapability } from '../../cards/card-rules.capability.js';
 
 import { createBattleExecutionSession } from '../runtime/battle.execution-session.js';
 import { createBattleActionRunner } from '../runtime/battle.action-runner.js';
@@ -60,6 +61,7 @@ import { createTriggerRunner } from '../effects/battle.triggers.m2.js';
 
 /* —— 自 battle.core 壳迁入的共享引擎件（原 head/tail，按原文件顺序）—— */
 const executionSession = createBattleExecutionSession();
+export { getCardPlayAvailability, submitCardPlay };
 const { actionQueue, stagedDeathFx, handSelectQueue, choiceQueue } = executionSession;
 function hasPendingEndTurn() { return executionSession.turnEndPending; }
 function deferEndTurn(resume) {
@@ -899,56 +901,111 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     return unplayableReasonFor(card, mode, { handCards, selfCard: card });
   }
 
-  function play(uid, side, forceDirect) {
-    // 迟到/非法 uid 必须在任何交互状态变更前拒绝；否则会顺带取消当前药水点选。
-    if (!hand.includes(uid)) return;
-    if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || viewingDeck) return;
-    // 回合结束链等待目标时只接受它自己的目标提交，不能开始新的玩家动作。
-    if (hasPendingEndTurn() && interactionOf('card')?.uid !== uid) return;
-    // 玩家命令只能提交当前手牌。内部直接释放继续直接走 queueCardExecution，
-    // 保留牌与弃牌洗回重抽后 uid 会重新位于 hand，因此仍可再次合法使用。
+  function inspectCardPlay(uid) {
+    const fail = (code, message, card = null) => ({ card, reason:{ code, message } });
+    if (!hand.includes(uid)) return fail('NOT_IN_HAND', '这张牌已不在当前手牌中');
+    if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || viewingDeck) return fail('INPUT_BUSY', '当前动作或选择尚未结束');
+    if (hasPendingEndTurn() && interactionOf('card')?.uid !== uid) return fail('TURN_END_PENDING', '回合结束流程正在等待原目标');
     const entry = findEffectiveCard(uid);
-    if (!entry) return;
+    if (!entry) return fail('CARD_MISSING', '当前卡牌暂不可用');
     const card = entry.card;
-    if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
+    const capability = inspectCardRuleCapability(card);
+    if (!capability.ok) return fail(capability.kind === 'invalid' ? 'RULE_INVALID' : 'RULE_UNSUPPORTED', capability.kind === 'invalid' ? '规则格式非法' : '规则尚未支持', card);
     const why = unplayableReason(card);
-    if (why) { G.log(`[[icon:cross]] 【${esc(card.name)}】无法打出：${why}`, 'warn'); return; }
+    if (why) return fail('CARD_UNPLAYABLE', `【${card.name}】无法打出：${why}`, card);
     const effCost = effCostOf(card, uid);
-    if (effCost > energy) { G.log(`[[icon:bolt]] 能量不足：【${esc(card.name)}】需要 ${effCost} 点能量`, 'warn'); return; }
-    // 需求 #18：装备最多同时装配 2 件（圣剑化身「装备上限 +1」生效），超编拒打
+    if (effCost > energy) return fail('INSUFFICIENT_ENERGY', `能量不足：【${card.name}】需要 ${effCost} 点能量`, card);
     if (card.type === '装备') {
       const cap = equipCap();
       const worn = equipped.filter(e => !e.passive).length;
-      if (worn >= cap) {
-        G.log(`[[icon:tools]] 最多同时装配 <b>${cap}</b> 件装备（已装配 ${worn} 件）——本场无法再穿戴`, 'warn');
-        return;
-      }
+      if (worn >= cap) return { card, cap, worn, reason:{ code:'EQUIPMENT_FULL', message:`最多同时装配 ${cap} 件装备（已装配 ${worn} 件）——本场无法再穿戴` } };
     }
+    return { card, reason:null };
+  }
+  function infusionChoiceReason(uid, card) {
+    if (hasPendingEndTurn()) return { code:'TURN_END_PENDING', message:'回合结束流程中不能开始新的注能选择' };
+    const need = infuseOf(card);
+    const others = hand.filter(handUid => handUid !== uid && !infusionFuelReason(handUid));
+    return others.length < need ? { code:'INFUSION_MATERIALS', message:`手牌不足：【${card.name}】注能(${need}) 需要消耗 ${need} 张手牌，当前只有 ${others.length} 张可选` } : null;
+  }
+  /** @returns {import('../battle.play-submission.types.js').CardPlayRejected} */
+  const cardPlayRejected = (uid, reason) => Object.freeze({ status:'rejected', uid, battleToken:battleState.token, reason:Object.freeze(reason) });
+  const cardPlayNeedsInput = (uid, kind) => Object.freeze({ status:'needs-input', kind, uid, battleToken:battleState.token });
+  /**
+   * @param {import('../battle.play-submission.types.js').CardPlayUid} uid
+   * @param {string|number|null} [side]
+   * @param {boolean} [forceDirect]
+   * @returns {import('../battle.play-submission.types.js').CardPlayAvailability}
+   */
+  function getCardPlayAvailability(uid, side = undefined, forceDirect = false) {
+    if (!G?.battleActive) return cardPlayRejected(uid, { code:'NO_ACTIVE_BATTLE', message:'当前战斗已经结束' });
+    const check = inspectCardPlay(uid);
+    if (check.reason) return cardPlayRejected(uid, check.reason);
+    const card = check.card;
+    if (!forceDirect && side == null && infuseOf(card) > 0) {
+      const reason = infusionChoiceReason(uid, card);
+      return reason ? cardPlayRejected(uid, reason) : Object.freeze({ status:'ready', uid, battleToken:battleState.token });
+    }
+    const need = targetSide(card);
+    const pending = interactionOf('card');
+    const fuel = pending?.uid === uid ? pending.fuelUids || [] : [];
+    const needsTarget = need === 'enemy' && (side == null || side === 'self' || !foes[+side] || foes[+side].dead)
+      || need === 'self' && side !== 'self';
+    const reason = needsTarget ? null : execPlayFlow.getExecutionAvailability(uid, card, fuel, freeCast.has(uid));
+    return reason ? cardPlayRejected(uid, reason) : Object.freeze({ status:'ready', uid, battleToken:battleState.token });
+  }
+  function performCardPlay(uid, side, forceDirect, submission = false) {
+    if (submission && !G?.battleActive) return cardPlayRejected(uid, { code:'NO_ACTIVE_BATTLE', message:'当前战斗已经结束' });
+    const check = inspectCardPlay(uid);
+    if (check.reason) {
+      const ruleRejected = ['RULE_INVALID','RULE_UNSUPPORTED'].includes(check.reason.code);
+      if (ruleRejected) rejectUnsupportedCard(check.card, { warn:warnCardRuleRejection });
+      else if (check.reason.code === 'EQUIPMENT_FULL') G.log(`[[icon:tools]] 最多同时装配 <b>${check.cap}</b> 件装备（已装配 ${check.worn} 件）——本场无法再穿戴`, 'warn');
+      else if (!['NOT_IN_HAND','INPUT_BUSY','TURN_END_PENDING','CARD_MISSING'].includes(check.reason.code)) G.log(`${check.reason.code === 'INSUFFICIENT_ENERGY' ? '[[icon:bolt]]' : '[[icon:cross]]'} ${esc(check.reason.message)}`, 'warn');
+      return submission ? cardPlayRejected(uid, check.reason) : ruleRejected ? false : undefined;
+    }
+    const card = check.card;
     // 只清「上一张卡」的指向槽；背包砸击/血毒双镖/道具点选等非卡牌点选态有自己的生命周期
     // （R3-0：待选期间打出别的卡不吞砸击选择态），一并清会把它们顺带取消。
     const staleCard = interactionOf('card');
     if (staleCard && staleCard.uid !== uid) clearTargetSession();
     // 09-20 老板定版（取代需求 #15 的「点卡直打」）：注能卡点卡先进注能态——
     // 注能条内提供「不注能直接打出」；拖拽到目标（side 非空）与该直打钮（forceDirect）仍直接打出
-    if (!forceDirect && side == null && infuseOf(card) > 0) { beginInfuse(uid); return; }
+    if (!forceDirect && side == null && infuseOf(card) > 0) {
+      beginInfuse(uid);
+      if (!submission) return;
+      return infusing?.uid === uid ? cardPlayNeedsInput(uid, 'infusion')
+        : cardPlayRejected(uid, infusionChoiceReason(uid, card) || { code:'INFUSION_UNAVAILABLE', message:'当前无法进入注能选择' });
+    }
     // 目标校验：指向性卡必须拖到对应目标（点卡只是锁定提示，不会打出）
     const need = targetSide(card);
     let target = null;
     const isFree = freeCast.has(uid);
     const pendingCard = interactionOf('card');
     if (need === 'enemy') {
-      if (side == null || side === 'self') { beginCardTargeting(uid, card, alive().map(foe => foe.id)); return; }
+      if (side == null || side === 'self') { beginCardTargeting(uid, card, alive().map(foe => foe.id)); return submission ? cardPlayNeedsInput(uid, 'target') : undefined; }
       target = foes[+side];
-      if (!target || target.dead) { beginCardTargeting(uid, card, alive().map(foe => foe.id)); return; }
+      if (!target || target.dead) { beginCardTargeting(uid, card, alive().map(foe => foe.id)); return submission ? cardPlayNeedsInput(uid, 'target') : undefined; }
     } else if (need === 'self') {
-      if (side !== 'self') { beginCardTargeting(uid, card, ['self']); return; }
+      if (side !== 'self') { beginCardTargeting(uid, card, ['self']); return submission ? cardPlayNeedsInput(uid, 'target') : undefined; }
     } else {
       target = alive()[0] || null;
     }
     if (pendingCard) set$interaction(null);   // 交互正常结算：清卡牌槽（不 cancelTargeting，RESOLVING 迁移接管阶段）
     set$pendingHint('');
     // 「杀化为X」战斗规则：打出的初始攻击以目标卡形态结算（uid 沿用，弃牌簿记不变）
+    if (submission) return execPlayFlow.submitCardExecution(uid, card, pendingCard?.fuelUids || [], target, isFree);
     queueCardExecution(uid, card, pendingCard?.fuelUids || [], target, isFree);
+  }
+  function play(uid, side, forceDirect) { return performCardPlay(uid, side, forceDirect); }
+  /**
+   * @param {import('../battle.play-submission.types.js').CardPlayUid} uid
+   * @param {string|number|null} [side]
+   * @param {boolean} [forceDirect]
+   * @returns {import('../battle.play-submission.types.js').CardPlaySubmission}
+   */
+  function submitCardPlay(uid, side = undefined, forceDirect = false) {
+    return /** @type {import('../battle.play-submission.types.js').CardPlaySubmission} */ (performCardPlay(uid, side, forceDirect, true));
   }
   // v0.32 堆叠手牌：点击传入手牌 uid——按 uid 精确 toggle（N1 修复，2026-09-25 老板定版）：
   // 点已选中的那张=取消它（per-uid delete，同叠/别叠的其他已选张不受影响）；
@@ -986,9 +1043,9 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (infN <= 0) return;
     const effCost = effCostOf(card, uid);
     if (effCost > energy) { G.log(`[[icon:bolt]] 能量不足：【${esc(card.name)}】注能打出需要 ${effCost} 点能量`, 'warn'); return; }
-    const others = hand.filter(h => h !== uid && !infusionFuelReason(h));
-    if (others.length < infN) {
-      G.log(`[[icon:flask]] 手牌不足：【${esc(card.name)}】注能(${infN}) 需要消耗 ${infN} 张手牌，当前只有 ${others.length} 张可选`, 'warn');
+    const choiceIssue = infusionChoiceReason(uid, card);
+    if (choiceIssue) {
+      G.log(`[[icon:flask]] ${esc(choiceIssue.message)}`, 'warn');
       return;
     }
     clearTargetSession(uid);

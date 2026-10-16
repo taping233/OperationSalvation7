@@ -1,18 +1,14 @@
 // 场景选择与站脚线为纯配置；画面解码、观察器与清理仍由战斗视图持有。
-const bridge = Object.freeze({ key:'winter-bridge',
-  far:new URL('../../../assets/scenes/battle/stage-reset-1015/backdrop.webp',import.meta.url).href,
-  ground:new URL('../../../assets/scenes/battle/stage-reset-1015/ground.webp',import.meta.url).href,
-  foreground:new URL('../../../assets/scenes/battle/stage-reset-1015/foreground.webp',import.meta.url).href,
-  aspect:16/9,footLine:.615,stageLayers:true });
-const street = Object.freeze({key:'winter-street',image:new URL('../../../assets/scenes/battle/winter-street-1011-v2.webp',import.meta.url).href,aspect:1672/941,footLine:.74});
-const ruins = Object.freeze({key:'frozen-ruins',image:new URL('../../../assets/scenes/battle/frozen-ruins-1015.webp',import.meta.url).href,aspect:16/9,footLine:.74});
-const core = Object.freeze({key:'contaminated-core',image:new URL('../../../assets/scenes/battle/contaminated-core-1015.webp',import.meta.url).href,aspect:16/9,footLine:.74});
+const platform = Object.freeze({ key:'winter-platform-minimal',
+  far:new URL('../../../assets/scenes/battle/platform-minimal-1016/far.webp',import.meta.url).href,
+  ground:new URL('../../../assets/scenes/battle/platform-minimal-1016/ground.webp',import.meta.url).href,
+  foreground:new URL('../../../assets/scenes/battle/platform-minimal-1016/foreground.webp',import.meta.url).href,
+  aspect:1672/941,footLine:.68,stageLayers:true });
 
 export function selectBattleScenery({layerIdx=0,isBoss=false}={}) {
-  if (isBoss || layerIdx >= 3) return core;
-  if (layerIdx === 2) return ruins;
-  if (layerIdx === 1) return street;
-  return bridge;
+  // 层号与首脑参数保留原接口；当前所有战场共用本轮新站台三层场景。
+  void layerIdx; void isBoss;
+  return platform;
 }
 
 // 只在本场首次挂载时捕获层号；面板返回、重绘或旧解码回调不读取实时地图层。

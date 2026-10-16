@@ -1,3 +1,4 @@
+import { continueChestRewards } from './helpers/chest-actions.js';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const state = vi.hoisted(() => ({
@@ -189,8 +190,8 @@ describe('真实战斗奖励刷新续流', () => {
       expect(draw).toHaveBeenCalledTimes(drawCount);
     };
     reload();
-    expect(document.querySelector('.chest-offer-page')).not.toBeNull();
-    state.actions.chestClaim(); state.actions.chestReveal();
+    expect(document.querySelector('.cqo-overview')).not.toBeNull();
+    state.actions.chestNext(); state.actions.chestReveal();
     state.actions.chestSelect({ i:0 }); state.actions.chestTake1({ i:0 });
     expect(disk.chestReward.current.taken).toEqual([0]);
     reload();
@@ -200,11 +201,11 @@ describe('真实战斗奖励刷新续流', () => {
     expect(disk.chestReward.current.taken).toEqual([0,1]);
     reload();
     if (isBoss) state.commitResponses.push({ ok:false, code:'WRITE_FAILED', message:'restored reward retry' });
-    state.actions.chestContinue();
+    continueChestRewards(state.actions);
     if (isBoss) {
       expect(state.commands.commitAttempt).not.toHaveBeenCalled();
       state.actions.chestTake1({ i:0 });
-      state.actions.chestContinue();
+      continueChestRewards(state.actions);
     }
     await vi.waitFor(() => expect(state.commands.commitAttempt).toHaveBeenCalledTimes(1));
     if (isBoss) {
@@ -221,7 +222,7 @@ describe('真实战斗奖励刷新续流', () => {
     expect(window.SDT.Base.data.eggBattles).toBe(1);
     expect(state.game.visited['0,1']).toBe(1);
     expect(state.transition).toHaveBeenCalledTimes(1);
-    state.actions.chestContinue();
+    continueChestRewards(state.actions);
     expect(state.commands.commitAttempt).toHaveBeenCalledTimes(isBoss ? 2 : 1);
     expect(state.game.coins).toBe(1);
   });

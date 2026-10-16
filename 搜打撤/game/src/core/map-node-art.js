@@ -125,7 +125,33 @@ function drawMapNodeGlow(ctx,type,state,time,pulse){
   ctx.fillStyle=glow;ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.fill();ctx.restore();
 }
 
-export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=false,showLabel=true,time=0,pulse=0,reachable=false}={}) {
+const NODE_LABEL_FONT='600 18px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub",sans-serif';
+const NODE_STATUS_FONT='600 14px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub",sans-serif';
+const CONTENT_STATUS_INK={
+  incomplete:{ink:'#e0e6e3',background:'#20282cf5',line:'#6c7b80'},
+  pending:{ink:'#eed09a',background:'#302719f5',line:'#a47e3f'},
+  completed:{ink:'#abc3b8',background:'#1a2824f5',line:'#4d6b5f'},
+  'shop-open':{ink:'#9bd2bd',background:'#172d28f5',line:'#477a69'},
+  'shop-closed':{ink:'#afbeb7',background:'#202824f5',line:'#52655b'},
+};
+
+// Content labels have their own opaque support. Position/reachability glow never
+// changes this state colour, and faded visited artwork does not fade the words.
+function drawMapContentStatus(ctx,status,top,scale) {
+  if(!status?.label)return null;
+  const ink=CONTENT_STATUS_INK[status.id]||CONTENT_STATUS_INK.incomplete;
+  ctx.save();ctx.translate(0,top);ctx.scale(scale,scale);
+  ctx.font=NODE_STATUS_FONT;ctx.textAlign='center';ctx.textBaseline='middle';
+  const width=Math.ceil(ctx.measureText(status.label).width)+20,height=24;
+  ctx.fillStyle=ink.background;ctx.fillRect(-width/2,0,width,height);
+  ctx.strokeStyle=ink.line;ctx.lineWidth=.8;ctx.strokeRect(-width/2+.4,.4,width-.8,height-.8);
+  ctx.fillStyle=ink.ink;ctx.fillText(status.label,0,height/2+.5);
+  ctx.restore();
+  return {left:-width*scale/2,right:width*scale/2,top,bottom:top+height*scale};
+}
+
+export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=false,showLabel=true,time=0,pulse=0,reachable=false,status=null,statusScale=1}={}) {
+  const baseAlpha=ctx.globalAlpha;
   const style=mapNodeAppearance(state);ctx.globalAlpha*=style.alpha;
   const glowState=state==='current'?'current':state==='legal'||reachable?'legal':null;
   if(glowState)drawMapNodeGlow(ctx,type,glowState,time,pulse);
@@ -133,11 +159,13 @@ export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=fals
   if(!empty){const support=mapNodeSupport(type);if(support)ctx.drawImage(support,-64,-64,128,128);}
   if(getMapNodeArt(type)) drawMapNodeArt(ctx,type,0,0,empty?18:32);
   else if(!drawMapNativeSymbol(ctx,type,0,0,3.1,nativeInk(type))) drawTacticalIcon(ctx,type,0,0,2.8,nativeInk(type));
+  let labelBounds=null;
+  const labelY=empty?27:44,labelHeight=empty?18:20;
   if(showLabel){
-    ctx.font='600 18px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub",sans-serif';
+    ctx.font=NODE_LABEL_FONT;
     ctx.textAlign='center';ctx.textBaseline='middle';
     const width=Math.ceil(ctx.measureText(label).width+12);
-    const labelY=empty?27:44,labelHeight=empty?18:20;
+    labelBounds={left:-width/2,right:width/2,top:labelY,bottom:labelY+labelHeight};
     if(state==='current'){
       ctx.strokeStyle='#78c8be88';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(-width/2,labelY+labelHeight+3);ctx.lineTo(width/2,labelY+labelHeight+3);ctx.stroke();
     }
@@ -150,6 +178,13 @@ export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=fals
     ctx.save();ctx.fillStyle='#0a171c';ctx.beginPath();ctx.arc(30,27,10,0,Math.PI*2);ctx.fill();
     ctx.strokeStyle='#9bbdb1';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(25,27);ctx.lineTo(29,31);ctx.lineTo(35,23);ctx.stroke();ctx.restore();
   }
+  ctx.globalAlpha=baseAlpha;
+  const statusTop=(showLabel?labelY+labelHeight:empty?22:39)+6*statusScale;
+  const statusBounds=drawMapContentStatus(ctx,status,statusTop,statusScale);
+  if(!labelBounds)return statusBounds;
+  if(!statusBounds)return labelBounds;
+  return {left:Math.min(labelBounds.left,statusBounds.left),right:Math.max(labelBounds.right,statusBounds.right),
+    top:labelBounds.top,bottom:statusBounds.bottom};
 }
 
 // 迷雾剪影徽章（2026-10-15 老板）：未揭示节点渲染为「黑色模糊+微光晕」——结构可见、

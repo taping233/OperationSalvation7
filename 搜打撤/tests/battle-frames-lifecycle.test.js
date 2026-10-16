@@ -103,6 +103,19 @@ describe('battle frame lifecycle', () => {
   });
   afterEach(async () => { pixi.finishLoad?.(); pixi.finishUnload?.(); await hide(); vi.restoreAllMocks(); });
 
+  it('measures the figure once when a ticker update advances a frame', async () => {
+    const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+    await attach(document.getElementById('ovBody'));
+    await finishFrames('changwuyu');
+    expect(play('atk')).toBe(true);
+    const reads = vi.spyOn(document.querySelector('.sts-figure'), 'getBoundingClientRect');
+    reads.mockClear();
+    clock.mockReturnValue(1001 + timelineFor('changwuyu','atk').dur[0]);
+    pixi.tick();
+    expect(reads).toHaveBeenCalledTimes(1);
+    expect(document.getElementById('unitFrames').dataset.action).toBe('atk');
+  });
+
   it.each(Object.entries(runtimeSequences).map(([role, sequence]) =>
     [role, [...new Set(Object.values(sequence).flat())].map(name => name.split('/').at(-1))],
   ))('requests only the delivered %s frame URLs, in declared loading order', async (role, names) => {

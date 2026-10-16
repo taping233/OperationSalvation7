@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 const state = vi.hoisted(() => ({ snap: null, card: null, scale: 1 }));
-const commands = vi.hoisted(() => ({ playCard: vi.fn(), bagSlam: vi.fn(), slamSkill: vi.fn(), resolveSlam: vi.fn(), useItem: vi.fn(), cancelPendingTarget: vi.fn() }));
+const commands = vi.hoisted(() => ({ getCardPlayAvailability: vi.fn(), submitCardPlay: vi.fn(() => ({ status: 'needs-input' })), playCard: vi.fn(), bagSlam: vi.fn(), slamSkill: vi.fn(), resolveSlam: vi.fn(), useItem: vi.fn(), cancelPendingTarget: vi.fn() }));
 const inspect = vi.hoisted(() => vi.fn());
 vi.mock('../game/src/battle/core/battle.core.js', () => ({
   commands, getSnapshot: () => state.snap,
@@ -48,28 +48,30 @@ beforeEach(() => {
   document.elementFromPoint = vi.fn((x, y) => x >= 1100 && x <= 1300 && y >= 300 && y <= 650 ? foe : surface);
   state.card = { name: '测试牌', cost: 1, side: 'enemy' };
   state.snap = { battleToken: 'drag-battle', phase: BATTLE_PHASES.PLAYER, energy: 3, hand: ['drag-card'], foes: [{ hp: 20, dead: false }] };
+  commands.getCardPlayAvailability.mockImplementation(() => state.snap.energy < state.card.cost
+    ? { status:'rejected', reason:{ message:'能量不足' } } : { status:'ready' });
 });
-afterEach(() => { Aim.cancelAim(); Aim.cancelClickSelection(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
+function settleReturn() { for (let i = 0; frames.size && i < 200; i++) step(); }
+afterEach(() => { Aim.cancelAim(); Aim.cancelClickSelection(); settleReturn(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
-it('keeps a tap resting, selects a target, and takes up only after six CSS pixels', () => {
-  begin(); expect(card.classList.contains('aim-lift')).toBe(false);
-  move(323, 951); step(); expect(card.style.transform).toBe('');
+it('picks a hand card up immediately and keeps following after an in-hand release', () => {
+  begin(); expect(card.classList.contains('aim-lift')).toBe(true);
+  move(323, 951); step(); expect(card.style.transform).toContain('translate3d');
   release(323, 951); expect(inspect).not.toHaveBeenCalled();
-  expect(Aim.clickSelectedUid).toBe('drag-card');
-  expect(commands.playCard).not.toHaveBeenCalled();
-  begin(); move(327, 950); expect(card.classList.contains('aim-lift')).toBe(true);
+  expect(Aim.aim.leftDown).toBe(false); expect(Aim.aim.mode).toBe('drag');
+  expect(commands.submitCardPlay).not.toHaveBeenCalled();
+  Aim.cancelAim(); settleReturn(); settleReturn(); expect(card.style.transform).toBe('');
 });
 
 it('anchors at the card centre and follows with the source position rate instead of teleporting', () => {
   begin(210, 950); move(610, 850); step(); step();
-  expect(Aim.aim.tgt).toEqual({ x: 300, y: -100 });
-  expect(Aim.aim.cur.x).toBeGreaterThan(0); expect(Aim.aim.cur.x).toBeLessThan(300);
-  expect(Aim.aim.cur.y).toBeLessThan(0);
+  expect(Aim.aim.motion.x).toBeGreaterThan(310); expect(Aim.aim.motion.x).toBeLessThan(610);
+  expect(Aim.aim.motion.y).toBeLessThan(950);
 });
 
-it('converts pointer coordinates into scaled layout units and reduces motion to direct positioning', () => {
+it('keeps screen-space following and suppresses pickup flash with reduced motion at scale two', () => {
   state.scale = 2; reduced = true; begin(); move(610, 850); step();
-  expect(Aim.aim.cur).toEqual({ x: 150, y: -50 });
+  expect(Aim.aim.motion.x).toBeGreaterThan(310); expect(Aim.aim.motion.x).toBeLessThan(610);
   expect(card.classList.contains('card-pickup-flash')).toBe(false);
 });
 
@@ -78,47 +80,50 @@ it('enters source play zone before a target is hovered and highlights only the r
   expect(Aim.aim.hover).toBeNull(); expect(document.getElementById('aimArrow')).not.toBeNull();
   move(1200, 450); step(); expect(foe.classList.contains('drag-over')).toBe(true);
   move(1050, 450); step(); expect(foe.classList.contains('drag-over')).toBe(false);
-  release(1050, 450); expect(commands.playCard).not.toHaveBeenCalled(); expect(card.style.transform).toBe('');
+  release(1050, 450); expect(commands.submitCardPlay).not.toHaveBeenCalled();
+  expect(Aim.aim.mode).toBe('clickTarget');
+  Aim.cancelAim(); settleReturn(); expect(card.style.transform).toBe('');
 });
 
 it('commits a fast valid release even when no queued pointer frame has run', () => {
   begin(); move(1200, 450); release(1200, 450);
-  expect(commands.playCard).toHaveBeenCalledExactlyOnceWith('drag-card', 0);
+  expect(commands.submitCardPlay).toHaveBeenCalledExactlyOnceWith('drag-card', 0, false);
   expect(Aim.aim).toBeNull(); expect(document.getElementById('aimArrow')).toBeNull();
-  release(1200, 450); expect(commands.playCard).toHaveBeenCalledTimes(1);
+  release(1200, 450); expect(commands.submitCardPlay).toHaveBeenCalledTimes(1);
 });
 
 it('does not play stale, dead, blocked or foreign-pointer drops', () => {
-  begin(); move(1200, 450, 2); release(1200, 450, 2); expect(Aim.aim.moved).toBe(false);
-  state.snap.foes[0].dead = true; release(1200, 450); expect(commands.playCard).not.toHaveBeenCalled();
+  begin(); move(1200, 450, 2); release(1200, 450, 2); expect(Aim.aim).toMatchObject({ lastX:320, lastY:950 });
+  state.snap.foes[0].dead = true; release(1200, 450); expect(commands.submitCardPlay).not.toHaveBeenCalled();
+  Aim.cancelAim(); settleReturn();
   state.snap.foes[0].dead = false; state.snap.energy = 0; begin(); release(1200, 450);
-  expect(commands.playCard).not.toHaveBeenCalled();
+  expect(commands.submitCardPlay).not.toHaveBeenCalled();
   state.snap.energy = 3; begin(); state.snap = { ...state.snap, battleToken: 'new-battle' }; release(1200, 450);
-  expect(commands.playCard).not.toHaveBeenCalled(); expect(Aim.aim).toBeNull();
+  expect(commands.submitCardPlay).not.toHaveBeenCalled(); expect(Aim.aim).toBeNull();
 });
 
 it('processes fast untargeted drops before cancelling the target session and excludes the hand/HUD', () => {
   state.card.side = null; begin(); release(800, 700);
-  expect(commands.playCard).toHaveBeenCalledExactlyOnceWith('drag-card', undefined);
-  commands.playCard.mockClear(); begin(); document.elementFromPoint.mockReturnValue(card); release(800, 700);
-  expect(commands.playCard).not.toHaveBeenCalled();
+  expect(commands.submitCardPlay).toHaveBeenCalledExactlyOnceWith('drag-card', undefined, false);
+  commands.submitCardPlay.mockClear(); begin(); document.elementFromPoint.mockReturnValue(card); release(800, 700);
+  expect(commands.submitCardPlay).not.toHaveBeenCalled();
   begin(); document.elementFromPoint.mockReturnValue(document.querySelector('.sts-hud')); release(800, 700);
-  expect(commands.playCard).not.toHaveBeenCalled();
+  expect(commands.submitCardPlay).not.toHaveBeenCalled();
 });
 
 it('requires a self-target drop on the player rather than an arbitrary empty point', () => {
-  state.card.side = 'self'; begin(); release(800, 700); expect(commands.playCard).not.toHaveBeenCalled();
+  state.card.side = 'self'; begin(); release(800, 700); expect(commands.submitCardPlay).not.toHaveBeenCalled();
   begin(); document.elementFromPoint.mockReturnValue(document.getElementById('btSelf')); release(800, 700);
-  expect(commands.playCard).toHaveBeenCalledExactlyOnceWith('drag-card', 'self');
+  expect(commands.submitCardPlay).toHaveBeenCalledExactlyOnceWith('drag-card', 'self', false);
 });
 
 it.each(['pointercancel', 'lostpointercapture', 'blur', 'resize', 'compositionstart'])('cleans up safely on %s', type => {
   begin(); move(1200, 450); step();
   const target = type === 'lostpointercapture' ? UI.el.overlay : type === 'compositionstart' ? document : window;
   target.dispatchEvent(type.includes('pointer') ? pointer(type, 1200, 450) : new Event(type));
-  expect(Aim.aim).toBeNull(); expect(card.style.transform).toBe('');
+  expect(Aim.aim).toBeNull(); settleReturn(); expect(card.style.transform).toBe('');
   expect(foe.classList.contains('drag-over')).toBe(false); expect(frames.size).toBe(0);
-  expect(commands.playCard).not.toHaveBeenCalled();
+  expect(commands.submitCardPlay).not.toHaveBeenCalled();
 });
 
 it('does not leak Escape/Tab to other combat handlers, but respects IME composition', () => {
@@ -130,19 +135,19 @@ it('does not leak Escape/Tab to other combat handlers, but respects IME composit
 
 it('cancels when returning to the source bottom cancel zone and when the active card detaches', () => {
   begin(); move(1200, 450); step(); move(1200, 1060); step(); expect(Aim.aim).toBeNull();
-  expect(commands.playCard).not.toHaveBeenCalled();
+  expect(commands.submitCardPlay).not.toHaveBeenCalled();
   begin(); card.remove(); move(1200, 450); step(); expect(Aim.aim).toBeNull();
 });
 
 it('also cancels an untargeted card after it passes back through the intermediate zone', () => {
   state.card.side = null; begin(); move(800, 700); step();
-  move(800, 880); step(); expect(Aim.aim.mode).toBe('drag');
-  move(800, 1060); step(); expect(Aim.aim).toBeNull(); expect(commands.playCard).not.toHaveBeenCalled();
+  move(800, 880); step(); expect(Aim.aim.mode).toBe('multi');
+  move(800, 1060); step(); expect(Aim.aim).toBeNull(); expect(commands.submitCardPlay).not.toHaveBeenCalled();
 });
 
 it('refreshes target data across a compatible redraw and cancels a changed hand slot', () => {
   begin(); move(1200, 450); step(); expect(Aim.canPreserveAim(state.snap)).toBe(true);
   Aim.resumeAimAfterRender({ ...state.snap }); step(); expect(Aim.aim.hover?.idx).toBe(0);
   card.parentElement.style.setProperty('--fx', 'changed'); Aim.resumeAimAfterRender(state.snap);
-  expect(Aim.aim).toBeNull(); expect(commands.playCard).not.toHaveBeenCalled();
+  expect(Aim.aim).toBeNull(); expect(commands.submitCardPlay).not.toHaveBeenCalled();
 });

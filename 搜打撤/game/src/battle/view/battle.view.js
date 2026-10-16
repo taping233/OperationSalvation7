@@ -11,6 +11,9 @@ import { groupHandCards, orderHandGroups, createStableHandSlots } from '../core/
 import { getPace, setPace } from '../runtime/battle.pace.js';
 import { schedulePresentationMs } from '../runtime/battle.clock.js';
 import { renderCombatPiles } from './battle.piles.view.js';
+import { careerSkillButtonHTML } from './battle.skill-view.js';
+import { battleDiscoverBodyHTML } from './battle.discover-view.js';
+import { createDiscoverInputGate } from './battle.discover-input.js';
 import { forecastEnemyTurn } from './battle.turn-forecast.js';
 import { createBattleSceneryCapture } from './battle.scenery.js';
 import { attach as attachUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
@@ -20,13 +23,13 @@ import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView, 
 import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, HAND_PAGE_SIZE } from './battle.layers.js';
 import { spawnFloats } from './battle.vfx.js';
 import { captureBattleView, animateBattleTransition } from './battle.anim.view.js';
-import { aim, aimPlayedAt, selectCardByClick, showHandCardDetails, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, setClickSelectedUid, updateClickSelectionUI } from './battle.aim.js';
-import { syncHandInspector } from './battle.hand-inspector.js';
+import { aim, aimPlayedAt, selectCardByClick, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, setClickSelectedUid, updateClickSelectionUI } from './battle.aim.js';
 import { createBattleEntryGate, waitForBattleImages } from './battle.presentation-ready.js';
 import { presentVictory } from './battle.victory.js';
 import { showThoughtBubble } from './battle.hover.js';
 
 const captureBattleScenery = createBattleSceneryCapture();
+const battleEnergyArt = new URL('../../../assets/ui/battle-controls-glass-1016/energy.webp', import.meta.url).href;
 let sceneryConfig = null;
 let sceneryStage = null, sceneryToken = null, sceneryWorld = null, sceneryFront = null;
 let sceneryReady = null;
@@ -188,7 +191,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   const openGrave = commands.openGrave;
   const openDeckView = commands.openDeckView;
   const closeDeckView = commands.closeDeckView;
-  const openBagCmd = commands.openBag;
   const cancelPendingTarget = commands.cancelPendingTarget;
   const pickDiscover = commands.pickDiscover;
   const pickChoice = commands.pickChoice;
@@ -208,6 +210,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   // 发现选卡的飞入起点（2026-09-10 留言 #36）：发现浮层会整块替换战斗视图，抽卡动画取样不到
   // 旧手牌位——点中候选卡的瞬间记下它的屏幕矩形，让新卡从「被选中的那张卡」飞回手牌
   let discoverSrcRect = null;
+  const discoverInput = createDiscoverInputGate();
 
   function combatStateCopy(snapshot) {
     const { phase = 'player', energy = 0, hand = [], infusing, choosing, handSelecting,
@@ -319,7 +322,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     syncBattleSlot(stage, previous, next, '.sts-options');
     syncBattleSlot(stage, previous, next, '.sts-hud-l');
     syncBattleSlot(stage, previous, next, '.sts-hud-r');
-    syncBattleSlot(stage, previous, next, '.sts-arena-caption');
     syncBattleSlot(stage, previous, next, ':scope > .bt-infuse:not(.bt-pick)', ':scope > .bt-infuse.bt-pick, .sts-hud');
     syncBattleSlot(stage, previous, next, ':scope > .bt-infuse.bt-pick', '.sts-hud');
     syncBattleSlot(stage, previous, next, '.sts-energy-wrap');
@@ -329,7 +331,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     stage._battleTemplate = next;
   }
   function render(snapshot = getSnapshot()) {
-    syncHandInspector(snapshot);
     // 出牌/抽牌动画事件提前取样：无事件时跳过 prevView 采样（整手牌 outerHTML 序列化+逐张布局读
     // 只被飞行动画消费，能量/角标等高频渲染纯浪费）。两个消费点（updateHand/animateBattleTransition）
     // 对 prev 均空值安全。
@@ -343,6 +344,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       pendingTarget, viewingGrave, viewingBag, dreadShown, deckSelection,
       potionBar, pendingItem, slamPending, dartPending, viewingDeck,
     } = snapshot;
+    if (!discovering) discoverInput.reset();
     if (aim && !preserveAim) cancelAim();
     UI.hideTooltip();   // U8：重渲染摘换手牌节点时 mouseleave 不触发，防 tooltip 残留
     // 战斗中弹层接管（墓地/背包/抉择/选牌/发现）：序列帧层挂在 overlay 直下不随 ovBody
@@ -386,7 +388,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
           ${SDT.Cards.cardHTML(o.card, 'sm')}
         </button>`).join('');
       const paymentName = handSelecting.payment?.card?.name;
-      const handAction = handSelecting.act === 'play' ? '打出（不扣费）' : handSelecting.act === 'copy' ? '复制（原牌保留）' : isPayment ? '作为支付代价' : '消耗';
+      const handAction = handSelecting.act === 'play' ? '打出（不扣费）' : handSelecting.act === 'copy' ? '复制（原牌保留）'
+        : handSelecting.act === 'zero' ? '下回合零费（原牌保留）' : isPayment ? '作为支付代价' : '消耗';
       const paymentSelected = handSelecting.selectedUids?.length || 0;
       const paymentLabel = isPayment
         ? `支付代价${paymentName ? `：为【${esc(paymentName)}】选择` : ''}`
@@ -404,6 +407,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       return;
     }
     if (discovering) {
+      const inputTicket = discoverInput.bind(snapshot);
+      if (!inputTicket) return;
       const discoverAction = {
         play: '选择 1 张免费施放', potion: '选择 1 张免费施放',
         playKeep: '选中牌免费施放，其余候选置入手牌',
@@ -414,34 +419,57 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       const discoverModifiers = [
         discovering.zeroCost ? '所选牌费用变为 0' : '',
         discovering.priceArmor ? '同时按所选牌估值获得护甲' : '',
-        discovering.costDecayPerTurn > 0 ? `所选牌每回合费用 -${discovering.costDecayPerTurn}` : '',
+        discovering.costDecayPerTurn > 0 ? `所选牌每回合费用 -${discovering.costDecayPerTurn}` : discovering.decayEachTurn ? '所选牌每回合费用 -1' : '',
+        discovering.consumeTempAtTurn ? '所选临时牌在下回合开始时消耗' : '',
+        discovering.swapPair ? '两张发现牌入手后交换费用' : '',
       ].filter(Boolean);
       const fromDeckBottom = discovering.deckBottom && discovering.deckBottomUids?.length;
       const discoverNote = fromDeckBottom
         ? '来自当前牌库底 · 选中牌以本场临时副本入手，战后消散'
         : '战斗内临时牌 · 战后消散';
-      const optsHTML = discovering.options.map((option, i) => {
+      const candidates = discovering.options.map((option, i) => {
         const sourceUid = fromDeckBottom ? discovering.deckBottomUids[i] : null;
         const source = sourceUid ? findCard(sourceUid) : null;
         const c = source?.card || option;
         const sourceNote = source
           ? (SDT.game?.ownedCards?.some(entry => entry.uid === sourceUid) ? '随身牌来源' : '本场临时牌来源')
           : '';
-        return `
-        <button type="button" class="bt-card" data-act="btDiscover" data-i="${i}" aria-label="发现 ${escAttr(c.name)}，${escAttr(discoverAction)}" title="${escAttr(`${c.name}${c.desc ? '：' + c.desc : ''}——${discoverAction}${sourceNote ? ' · ' + sourceNote : ''}`)}">
-          ${SDT.Cards.cardHTML(c, 'sm')}
-          ${c.type === '装备' && (c.rules?.equip?.battleStart?.length || /对战开始时/.test(c.desc || '')) ? '<span class="bt-rulehint">战中穿戴也立即生效：打出时补发开战效果。本场临时牌战后消散。</span>' : ''}
-        </button>`;
-      }).join('');
-      showBattleDecision('[[icon:question]] 发现', `
-        ${discoverSource ? `<p class="battle-decision-source">来自【${esc(discoverSource)}】</p>` : ''}
-        <p class="ov-stats">${discoverAction}${discovering.n > 1 ? ` · 还需发现 ${discovering.n} 次` : ''}</p>
-        <p class="ov-note">${discoverNote}${discoverModifiers.length ? ` · ${discoverModifiers.join(' · ')}` : ''}</p>
-        <div class="bt-hand">${optsHTML}</div>`, 'discover', snapshot);
+        return { card:c, sourceNote, equipmentNote:c.type === '装备' && (c.rules?.equip?.battleStart?.length || /对战开始时/.test(c.desc || ''))
+          ? '战中穿戴时立即补发开战效果' : '' };
+      });
+      showBattleDecision('[[icon:question]] 发现', battleDiscoverBodyHTML({
+        candidates, cardHTML:(card, size) => SDT.Cards.cardHTML(card, size), action:discoverAction,
+        remaining:discovering.n, source:discoverSource, note:discoverNote, modifiers:discoverModifiers, pageToken:inputTicket.pageToken,
+      }), 'discover', snapshot);
+      const page = UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="discover"]');
+      const panel = page?.querySelector('[data-battle-discover]');
+      const buttons = [...(page?.querySelectorAll('[data-act="btDiscover"]') || [])];
+      const isCurrentPage = () => inputTicket.isCurrent() && !!page?.isConnected && !UI.el?.overlay?.hidden
+        && UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="discover"]') === page
+        && panel?.getAttribute('data-discover-page') === inputTicket.pageToken;
+      const progress = page?.querySelector('.battle-discover-progress');
+      const progressHTML = progress?.innerHTML || '';
+      // A bounded visual update follows only this DOM page; no delayed callback
+      // can unlock a replacement page or restart the round's admission deadline.
+      const paintInputReadiness = () => {
+        if (!isCurrentPage()) return;
+        const opening = inputTicket.remainingMs() > 0;
+        panel.setAttribute('aria-busy', String(opening));
+        buttons.forEach(button => {
+          if (opening) button.setAttribute('aria-disabled', 'true');
+          else button.removeAttribute('aria-disabled');
+        });
+        if (progress) progress.innerHTML = opening ? '候选展开中' : progressHTML;
+        if (opening) requestAnimationFrame(paintInputReadiness);
+      };
+      if (typeof requestAnimationFrame === 'function') paintInputReadiness();
       UI.act('btDiscover', (d) => {
-        const el = document.querySelector(`.bt-card[data-act="btDiscover"][data-i="${d.i}"]`);
-        if (el) { discoverSrcRect = uiRect(el); }   // 布局口径：消费端喂 transform
-        pickDiscover(d.i);
+        if (!isCurrentPage()) return;
+        const index = Number(d?.i);
+        const el = buttons.find(button => button.dataset.i === String(index) && button.dataset.discoverPage === d?.discoverPage);
+        if (!el?.isConnected || !page.contains(el) || !inputTicket.trySubmit(getSnapshot(), d?.discoverPage, index)) return;
+        discoverSrcRect = uiRect(el);   // 布局口径：消费端喂 transform
+        pickDiscover(index);
       });
       UI.refresh(SDT.game);
       return;
@@ -547,7 +575,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         </div></details>
       </div>
       <div class="sts-arena">
-        <div class="sts-arena-caption" aria-live="polite"><span>${esc(combatState.detail)}</span></div>
         <div data-unit-mount="self"></div>
         <div class="sts-allies" data-unit-mount="allies"></div>
         <div class="sts-foes" data-unit-mount="foes"></div>
@@ -558,14 +585,14 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         <div class="sts-resource-dock">
         <div class="sts-hud-l" aria-label="抽牌堆">${drawPileHTML}</div>
         <div class="sts-energy-wrap">
-          <div class="sts-energy" title="能量：每回合固定 ${maxEnergy} 费">[[icon:bolt]] <b>${energy}</b><span>/${maxEnergy}</span></div>
+          <div class="sts-energy" role="group" tabindex="0" aria-label="能量 ${energy}，每回合 ${maxEnergy}" data-ui-tip data-ui-tip-title="能量" data-ui-tip-text="打出卡牌与使用职业技能时消耗。" data-ui-tip-note="回合开始恢复至 ${maxEnergy} 点">
+            <img class="battle-energy-emblem" src="${escAttr(battleEnergyArt)}" alt="" draggable="false" decoding="async"><b>${energy}</b><span>/${maxEnergy}</span>
+          </div>
         </div>
         </div>
         <div class="sts-hand-tools" aria-label="职业技能与手牌分栏">
-          <button class="bt-slam-btn${slamPending ? ' active' : ''}" data-act="btSlam" data-skill-state="${skillState}" aria-label="${escAttr(`${slamSkillInfo.name}，${slamSkillInfo.cost}费，${skillAvailability}，${skillEffect}；每回合一次`)}"
-            ${busy || infusingNow || slamSkillInfo.used || (energy < slamSkillInfo.cost && !slamPending) ? 'disabled' : ''}
-            title="${escAttr(slamSkillInfo.hint)}${slamSkillInfo.needsTarget
-              ? ' · 每回合一次 · 按住拖到敌人身上松手直接释放，也可点击后再点敌人' : ' · 每回合一次 · 点击立即生效'}">${slamSkillInfo.kind === 'fixed' ? '<svg class="battle-skill-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="m22 2 7 1-1 7-14 14-6-6Z" fill="#d9f3ff" stroke="#63b9e0" stroke-width="1.6"/><path d="m25 6-13 14M6 16l10 10M9 23l-5 5M2 27l3 3" fill="none" stroke="#e8c16e" stroke-width="3" stroke-linecap="round"/></svg>' : `[[icon:${slamSkillInfo.icon}]]`} <span class="battle-skill-copy"><b>${esc(slamSkillInfo.name)}</b></span><span class="battle-skill-cost"><b>${slamSkillInfo.cost}</b><small>费</small></span><span class="battle-skill-status"><span class="battle-skill-availability">${esc(skillAvailability)}</span><span>${esc(skillEffect)}</span></span></button>
+          ${careerSkillButtonHTML({ skill:slamSkillInfo, state:skillState, availability:skillAvailability, effect:skillEffect,
+            disabled:busy || infusingNow || slamSkillInfo.used || (energy < slamSkillInfo.cost && !slamPending) })}
           ${handPages > 1 ? `<button class="bt-hand-page has-more" data-act="btHandPage" aria-label="还有另一栏手牌，当前第 ${handPage + 1} 栏，共 ${handPages} 栏"
             title="手牌分栏：每栏最多 ${HAND_PAGE_SIZE} 叠，放不下的进第二栏——点击切换第一栏/第二栏">[[icon:cards]] 第 ${handPage + 1}/${handPages} 栏</button>` : ''}
         </div>
@@ -573,15 +600,9 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         <div class="bt-hand sts-hand" role="group" aria-label="当前手牌"></div>
         <div class="sts-tactics" aria-label="战术操作">
           <p class="bt-turn-forecast${turnForecast.lethal ? ' lethal' : ''}" aria-live="polite" title="${escAttr(turnForecast.note)}"><span class="bt-forecast-damage">估算承伤 <b>${turnForecast.damage}</b></span><span class="bt-forecast-hp">余 <b>${turnForecast.hpAfter}</b> 生命</span>${turnForecast.lethal ? '<span class="bt-forecast-warning">可能致死</span>' : ''}<span class="bt-forecast-note">未计随从攻击与回合末触发</span></p>
-          <div class="sts-tactics-secondary">
-            <button class="ov-btn ghost${mode === 'boss' ? ' dis' : ''}" data-act="btBag" ${busy || infusingNow ? 'disabled' : ''}
-              ${mode === 'boss' ? 'title="BOSS 战为牌库制：道具与资源不参战，背包不可打开"' : 'title="打开战斗背包（B）"'}>[[icon:bag]] 背包</button>
-          </div>
           <button class="ov-btn ${busy || infusingNow ? '' : 'ok'} sts-end-turn" data-act="btEnd" ${busy || infusingNow ? 'disabled' : ''}>结束回合</button>
         </div>
        </div>`, snapshot.battleToken);
-    const caption = UI.el.ovBody.querySelector('.sts-arena-caption span');
-    if (caption) caption.dataset.battleDetail = combatState.detail;
     updateClickSelectionUI();   // 复用舞台也恢复已结束的点选提示；底层目标状态仍由战斗命令管理。
     // 手牌分栏切换（2026-09-10 留言 #27）
     UI.act('btHandPage', () => { handPage = (handPage + 1) % handPages; render(); });
@@ -664,19 +685,10 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     UI.act('btGrave', openGrave);
     UI.act('btDeck', openDeckView);
     UI.act('btDeckBack', closeDeckView);
-    UI.act('btBag', () => {
-      if (getSnapshot().opts.isBoss) {
-        UI.log('[[icon:lock]] BOSS 战为牌库制：道具与资源不参战，背包不可打开', 'warn');
-        SDT.Sound.sfx('deny');
-        return;
-      }
-      openBagCmd();
-    });
     UI.act('btSlam', () => {
       if (Date.now() - aimPlayedAt < 300) return;   // 拖拽松手刚砸完，忽略残留 click（同药水栏口径）
       bagSlam();
     });   // 背包砸击按钮（2026-09-16 老板：改回按钮形态，置于手牌左侧）；09-20 老板：支持按住拖到敌人身上松手释放
-    UI.act('btCardDetails', (d) => showHandCardDetails(d.uid));
     UI.act('btInfuseStart', (d) => commands.beginInfusion(d.uid));
     UI.act('btInfuseDirect', (d) => playDirect(d.uid));   // 09-20 老板定版：注能条内不注能直打
     UI.act('btInfuseGo', confirmInfuse);
@@ -785,7 +797,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         onFallback: () => { hideUnitFrames(); },
       });
     }
-    syncHandInspector(snapshot);
     discoverSrcRect = null;
     if (preserveAim) resumeAimAfterRender(snapshot);
     // 牌局动画：离场克隆飞行 / 手牌区随回合显隐 / 能量与牌堆脉冲

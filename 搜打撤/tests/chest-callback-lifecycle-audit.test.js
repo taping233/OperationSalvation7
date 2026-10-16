@@ -23,14 +23,14 @@ beforeEach(async () => {
   await import('../game/src/run/chests.js'); Chests = window.SDT.Chests;
 });
 afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); delete window.SDT; });
-function open() { Chests.open(game, [{ kind: 'small' }], vi.fn(), { onCell: true }); actions.chestClaim(); }
+function open() { Chests.open(game, [{ kind: 'small' }], vi.fn(), { onCell: true }); actions.chestNext(); }
 
 describe('宝箱回调与探索身份审计', () => {
   it('未领取宝箱不自动开箱，旧领取动作不能跨局发起开箱', () => {
     Chests.open(game, [{ kind:'small' }], vi.fn(), { onCell:true });
-    const oldClaim = actions.chestClaim;
+    const oldClaim = actions.chestNext;
     vi.advanceTimersByTime(5000);
-    expect(UI.el.ovBody.querySelector('.chest-offer-page')).not.toBeNull();
+    expect(UI.el.ovBody.querySelector('.cqo-overview')).not.toBeNull();
     expect(UI.el.ovBody.querySelector('[data-act="chestSelect"]')).toBeNull();
     game.discoveredPairs = new Set(); oldClaim();
     expect(UI.el.ovBody.querySelector('[data-eps-search]')).toBeNull();
@@ -39,7 +39,7 @@ describe('宝箱回调与探索身份审计', () => {
 
   it('领取宝箱双击只启动一次，未领奖前不发卡或金币', () => {
     Chests.open(game, [{ kind:'small' }], vi.fn(), { onCell:true });
-    const claim = actions.chestClaim, draws = drawn.mock.calls.length;
+    const claim = actions.chestNext, draws = drawn.mock.calls.length;
     claim(); claim();
     expect(Chests.serialize(game).current.rewardStage).toBe('opening');
     expect(drawn).toHaveBeenCalledTimes(draws);

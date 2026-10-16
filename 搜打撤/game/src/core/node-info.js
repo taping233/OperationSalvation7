@@ -1,7 +1,7 @@
 // Shared, presentation-only labels for map nodes and expedition routes.
-import { isConsumedMapNode } from './map-node-state.js';
+import { mapNodeStatus } from './map-node-state.js';
 export const NODE_INFO = {
-  blank: ['空白节点', '内容已消耗 · 仍可通行', 'map', 'quiet'],
+  blank: ['空白节点', '沿道路继续探索', 'map', 'quiet'],
   battle: ['遭遇战', '准备迎敌 · 胜利后搜刮', 'swords', 'danger'],
   boss: ['首脑', '终局挑战 · 检查随身卡牌', 'skull', 'danger'],
   chest: ['物资点', '搜寻卡牌与补给', 'gem', 'gold'],
@@ -20,15 +20,15 @@ export const NODE_INFO = {
   entrance: ['入口', '已建立的行进路线', 'flag', 'safe'],
 };
 
-export function mapNodeInfo(game, node) {
+export function mapNodeInfo(game, node, current = mapNodeStatus(game, node)) {
   const door = game.layerData?.[node?.li]?.doors?.some(item => item.at === node.idx) ||
     game.doorKeys?.has(`${node?.li},${node?.idx}`);
   const type = door ? 'door' : node?.def?.type;
   const info = NODE_INFO[type] || ['已知地点', '查看当前已知区域', 'map', 'quiet'];
-  if (type === 'altar' && game.altarActivated && game.altarRewardPending) {
-    return [info[0], '已激活 · 回赠待领取', info[2], info[3]];
-  }
-  return isConsumedMapNode(game, node)
-    ? [`${info[0]} · 已完成`, '已探索 · 内容已消耗，仍可通行', info[2], 'quiet']
-    : info;
+  const supply = game.entrySupply;
+  const entry = supply?.layerIdx === node?.li && supply.trackPos === node?.idx
+    && Array.isArray(supply.cardIds) && Array.isArray(supply.taken) && supply.taken.length < supply.cardIds.length;
+  const name = entry && current.id === 'pending' ? '入城补给' : node?.def?.type === 'shop' && door ? '闸门商队' : info[0];
+  return current.id === 'transit' ? info
+    : [name, `${current.label} · ${current.detail}`, info[2], current.tone];
 }

@@ -54,6 +54,16 @@ afterEach(() => {
 });
 
 describe('SFX mute and audio instance lifecycle', () => {
+  it('prepares UI confirmation samples before the longer battle sample queue', async () => {
+    const sound = await importSound();
+    sound.ensure();
+    for (let i=0;i<800;i++) await Promise.resolve();
+    const urls = fetch.mock.calls.map(([url]) => url);
+    const confirm = urls.findIndex(url => url.includes('/jsfxr/confirm.wav'));
+    const battle = urls.findIndex(url => url.includes('/battle/'));
+    expect(confirm).toBeGreaterThanOrEqual(0);
+    expect(battle).toBeGreaterThan(confirm);
+  });
   it('silences already scheduled samples/tones and restores the user volume', async () => {
     const sound = await importSound(() => new Promise(() => {}));
     sound.ensure(); sound.sfx('danger');

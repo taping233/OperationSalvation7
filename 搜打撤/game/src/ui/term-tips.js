@@ -2,8 +2,8 @@
 /* 词条讲解浮框（2026-09-20 老板：特殊词条触摸时要有我们自己绘制的文字框描述讲解，如形态/中毒等诅咒）
  * 全局单例 + 事件委托：卡面描述高亮词（descRich 输出的 data-term）与战斗状态角标（bt-curse/bt-buff、
  * 诅咒之刃 chips、敌方狂乱角标）统一由 document 级委托接管，渲染点零改动自动生效。
- * 交互口径与药水自绘提示栏一致（09-20 定版）：桌面悬停即显、移开即收；触屏按下即显、松手收起。
- * 点在词条上只讲解——捕获层拦掉 click，防止顺手触发卡面特写/出牌。
+ * 桌面悬停或键盘聚焦显示；触屏按下显示、松手收起。data-ui-tip 提供动态动作说明。
+ * 只有 data-term 的 click 被拦截；动态动作说明保留按钮的原始点击与拖动。
  * 讲解文案以机制代码为底稿：诅咒/祝福 = combat.js CURSE_META/BUFF_META；注能 = 出牌结算 fuel 链；
  * 发现 = 三选一置入手牌；消耗 = 墓地不洗回；主动技能 = 装备穿戴后角色信息区按钮发动（每场一次）；
  * 狂乱 = battle.core AFFIX 表。 */
@@ -78,54 +78,152 @@ export function termKeyFor(word) { return TERM_ALIAS[word] || null; }
  */
 function termMeta(key) { return TERM_TIPS[key] || null; }
 
+/** @typedef {TermMeta & {note?: string, dynamic?: boolean}} TipMeta */
 /** @type {HTMLDivElement|null} */
 let tipEl = null;
 /** @type {Element|null} */
 let curEl = null;
+/** @type {Element|null} */
+let hoverEl = null;
+/** @type {Element|null} */
+let focusEl = null;
+/** @type {Element|null} */
+let describedEl = null;
 /** @type {number|null} */
 let pressedPointer = null;
+/** @type {number|null} */
+let followFrame = null;
+let contentKey = '';
+
+/** @param {Element} el @returns {TipMeta|null} */
+function metaFor(el) {
+  if (!el.hasAttribute('data-ui-tip')) return termMeta(el.getAttribute('data-term') || '');
+  const name = el.getAttribute('data-ui-tip-title') || '';
+  const text = el.getAttribute('data-ui-tip-text') || '';
+  return name || text ? { name, text, note:el.getAttribute('data-ui-tip-note') || '', dynamic:true } : null;
+}
+
+/** @param {Element|null} el @returns {el is Element} */
+function isLive(el) {
+  return el !== null && el.isConnected && !el.closest('[hidden], [inert], [aria-hidden="true"]')
+    && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+}
+
+/** Remove only this tooltip's token, preserving other accessibility descriptions. */
+function unlinkDescription() {
+  if (!describedEl) return;
+  const ids = (describedEl.getAttribute('aria-describedby') || '').split(/\s+/).filter(id => id && id !== 'sdt-term-tip');
+  if (ids.length) describedEl.setAttribute('aria-describedby', ids.join(' '));
+  else describedEl.removeAttribute('aria-describedby');
+  describedEl = null;
+}
+
+/** @param {Element} el */
+function linkDescription(el) {
+  const target = el.hasAttribute('tabindex') || el.matches('button, a, input')
+    ? el : el.querySelector('button, a, input, [tabindex]') || el;
+  if (describedEl === target) return;
+  unlinkDescription();
+  const ids = (target.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
+  target.setAttribute('aria-describedby', [...new Set([...ids, 'sdt-term-tip'])].join(' '));
+  describedEl = target;
+}
 
 /** 惰性创建全局讲解浮框（单例，挂在 document.body）。
  * @returns {HTMLDivElement}
  */
 function ensureTip() {
-  if (tipEl) return tipEl;
+  if (tipEl?.isConnected) return tipEl;
   tipEl = document.createElement('div');
+  tipEl.id = 'sdt-term-tip';
   tipEl.className = 'term-tip';
   tipEl.setAttribute('role', 'tooltip');
   tipEl.hidden = true;
   document.body.appendChild(tipEl);
+  contentKey = '';
   return tipEl;
 }
 
-/** 弹出词条讲解框并按视觉坐标定位（zoom 换算口径见 ui-scale 头注）。
- * @param {Element} el  带 data-term 属性的词条元素
- * @returns {void}
- */
-function show(el) {
-  const meta = termMeta(/** @type {string} */ (el.getAttribute('data-term')));
-  if (!meta) return;
-  if (curEl === el && tipEl && !tipEl.hidden) return;   // 同一词条重复 over 不重算
-  curEl = el;
-  const tip = ensureTip();
+/** @param {HTMLDivElement} tip @param {TipMeta} meta */
+function renderContent(tip, meta) {
+  const key = JSON.stringify(meta);
+  if (key === contentKey) return;
+  contentKey = key;
+  tip.replaceChildren();
+  tip.classList.toggle('is-action-tip', !!meta.dynamic);
   const icon = meta.icon && SDT.Icons && /** @type {{img?: (name: string) => string}} */ (SDT.Icons).img ? /** @type {{img: (name: string) => string}} */ (SDT.Icons).img(meta.icon) : '';
-  tip.innerHTML = `${icon}<b>${meta.name}</b><span class="term-tip-sep">——</span>${meta.text}`;
-  tip.hidden = false;
-  // 定位：ui-scale zoom 挂 html，视觉 px ÷ scale = CSS 布局 px（fixed 定位走布局坐标）
+  if (icon) tip.insertAdjacentHTML('beforeend', icon);
+  const title = document.createElement('b'); title.textContent = meta.name; tip.appendChild(title);
+  if (meta.dynamic) {
+    const text = document.createElement('span'); text.className = 'term-tip-text'; text.textContent = meta.text; tip.appendChild(text);
+    if (meta.note) { const note = document.createElement('small'); note.textContent = meta.note; tip.appendChild(note); }
+  } else {
+    const separator = document.createElement('span'); separator.className = 'term-tip-sep'; separator.textContent = '——';
+    tip.append(separator, document.createTextNode(meta.text));
+  }
+}
+
+/** Body-mounted fixed positioning escapes transformed/clipped battle descendants.
+ * @param {Element} el @param {HTMLDivElement} tip
+ */
+function positionTip(el, tip) {
   const sc = scale() || 1;
+  const vw = Math.min(BASE_W, window.innerWidth / sc), vh = Math.min(BASE_H, window.innerHeight / sc);
+  const inset = 8;
+  tip.style.setProperty('--term-tip-max-width', `${Math.max(1, vw - inset * 2)}px`);
+  tip.style.setProperty('--term-tip-max-height', `${Math.max(1, vh - inset * 2)}px`);
   const r = el.getBoundingClientRect();
-  const vw = BASE_W, vh = BASE_H;
   const x = r.left / sc, y = r.top / sc, w = r.width / sc, h = r.height / sc;
   const tw = tip.offsetWidth, th = tip.offsetHeight;
-  const left = Math.min(Math.max(x + w / 2 - tw / 2, 8), Math.max(8, vw - tw - 8));
-  let top = y - th - 8;
-  if (top < 8) top = Math.min(y + h + 8, vh - th - 8);
+  /** @param {number} value @param {number} size @param {number} bound */
+  const clamp = (value, size, bound) => Math.min(Math.max(value, inset), Math.max(inset, bound - size - inset));
+  const left = clamp(x + w / 2 - tw / 2, tw, vw);
+  const above = y - inset, below = vh - y - h - inset;
+  const top = clamp(above >= th || above >= below ? y - th - inset : y + h + inset, th, vh);
   tip.style.left = `${Math.round(left)}px`;
   tip.style.top = `${Math.round(top)}px`;
 }
 
+/** Active only while a tooltip is visible: follow animation transforms and live action state. */
+function followAnchor() {
+  followFrame = null;
+  if (!curEl || !tipEl || tipEl.hidden) return;
+  const meta = isLive(curEl) && metaFor(curEl);
+  if (!meta) { hide(); return; }
+  renderContent(tipEl, meta); positionTip(curEl, tipEl);
+  if (typeof window.requestAnimationFrame === 'function') followFrame = window.requestAnimationFrame(followAnchor);
+}
+
+// Observe only during display. Removed/replaced anchors disappear at the mutation boundary.
+const anchorObserver = new MutationObserver(() => { if (curEl && !isLive(curEl)) hide(); });
+
+/** @param {Element} el */
+function show(el) {
+  const meta = isLive(el) && metaFor(el);
+  if (!meta) { hide(); return; }
+  const tip = ensureTip();
+  // Overlay background isolation may have marked this passive body sibling inert.
+  tip.removeAttribute('inert');
+  curEl = el; renderContent(tip, meta); linkDescription(el);
+  tip.hidden = false; positionTip(el, tip);
+  anchorObserver.observe(document.body, { childList:true, subtree:true, attributes:true, attributeFilter:['hidden', 'inert', 'aria-hidden'] });
+  if (followFrame === null && typeof window.requestAnimationFrame === 'function') followFrame = window.requestAnimationFrame(followAnchor);
+}
+
 /** 收起浮框并清除当前词条引用。@returns {void} */
-function hide() { pressedPointer = null; curEl = null; if (tipEl) tipEl.hidden = true; }
+function hide() {
+  pressedPointer = null; curEl = null; hoverEl = null; focusEl = null;
+  if (followFrame !== null) window.cancelAnimationFrame(followFrame);
+  followFrame = null; anchorObserver.disconnect(); unlinkDescription();
+  if (tipEl) tipEl.hidden = true;
+}
+
+function syncTrigger() {
+  if (!isLive(hoverEl)) hoverEl = null;
+  if (!isLive(focusEl)) focusEl = null;
+  const trigger = hoverEl || focusEl;
+  if (trigger) show(trigger); else hide();
+}
 
 /** 自事件目标向上找最近的带 data-term 的词条元素。
  * @param {EventTarget|null} t
@@ -133,20 +231,34 @@ function hide() { pressedPointer = null; curEl = null; if (tipEl) tipEl.hidden =
  */
 function closestTerm(t) { return t && /** @type {Element} */ (t).closest ? /** @type {Element} */ (t).closest('[data-term]') : null; }
 
+/** @param {EventTarget|null} t @returns {Element|null} */
+function closestTrigger(t) { return t && /** @type {Element} */ (t).closest ? /** @type {Element} */ (t).closest('[data-term], [data-ui-tip]') : null; }
+
 /** document 级事件委托接管全部词条触发（悬停即显/按压即显/点击只讲解/滚动收起）。 */
 function initTermTips() {
-  // 桌面：悬停即显，移到非词条处即收（pointerover else 分支 = mouseleave 语义的委托版）
   document.addEventListener('pointerover', (e) => {
-    const t = closestTerm(e.target);
-    if (t) show(t); else hide();
+    hoverEl = closestTrigger(e.target); syncTrigger();
   });
-  // 触屏：按下即显，松手收起；释放监听只挂一次，导航/失焦清除按压归属。
+  document.addEventListener('pointerout', (e) => {
+    if (closestTrigger(e.target) === closestTrigger(e.relatedTarget)) return;
+    hoverEl = closestTrigger(e.relatedTarget); syncTrigger();
+  });
+  document.addEventListener('focusin', (e) => {
+    focusEl = closestTrigger(e.target); syncTrigger();
+  });
+  document.addEventListener('focusout', (e) => {
+    focusEl = closestTrigger(e.relatedTarget); syncTrigger();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !e.isComposing) hide();
+  });
+  // 动作说明的鼠标悬停不随松键清除；触屏和原词条沿用按下显示、松手收起。
   document.addEventListener('pointerdown', (e) => {
-    const t = closestTerm(e.target);
+    const t = closestTrigger(e.target);
     if (!t) return;
     if (e.button !== 0 && e.pointerType === 'mouse') return;
     show(t);
-    pressedPointer = e.pointerId;
+    pressedPointer = e.pointerType === 'mouse' && t.hasAttribute('data-ui-tip') ? null : e.pointerId;
   });
   /** @param {PointerEvent} e */
   const end = e => { if (pressedPointer !== null && e.pointerId === pressedPointer) hide(); };
@@ -160,8 +272,10 @@ function initTermTips() {
   }, true);
   // 滚动即收（capture 覆盖内部滚动容器）
   window.addEventListener('scroll', hide, true);
+  window.addEventListener('resize', () => { if (curEl && tipEl && !tipEl.hidden) positionTip(curEl, tipEl); });
   document.addEventListener('sdt-overlay-mode', hide);
   document.addEventListener('sdt-overlay-close', hide);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) hide(); });
   window.addEventListener('blur', hide);
 }
 

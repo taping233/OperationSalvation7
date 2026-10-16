@@ -8,14 +8,22 @@
 
 - **身高与体态**：身高约170厘米，身形修长；大腿与小腿略显丰润，膝部和脚踝自然收束，皮肤白皙。
 - **脸与神态**：青蓝色眼睛，额前碎刘海露出双眼；带笑、自信，嘴角露小尖牙。
-- **头发与头饰**：银白色长发束成高马尾，蓝色缎带蝴蝶结系在马尾根部；黑蔷薇位于角色左侧头发边（画面右侧），靠近太阳穴上方。黑色圆形护目镜架在头顶，深色镜片带灰白反光。
-- **服装**：黑灰色露肩长袖连衣裙，领口、袖口和裙摆有层叠荷叶边，腰间黑色系带收腰；裙摆在膝上，呈不规则层叠轮廓。本版没有可见蓝星纹内衬。
+- **头发与头饰**：银白色长发束成高马尾，蓝色缎带蝴蝶结系在马尾根部；黑蔷薇位于角色左侧头发边（画面右侧），靠近太阳穴上方。黑色圆框墨镜架在头顶，普通眼镜结构，两片深色圆镜片、细镜框与镜腿；镜片带灰白反光。2026-10-16 老板再次明确为墨镜，生图使用 `sunglasses`，护目镜加入人物专属负面。
+- **服装**：黑灰色露肩长袖短裙，领口、袖口和裙摆有层叠荷叶边，腰间黑色系带收腰；前后及两侧裙摆均止于膝上，大腿与膝盖清楚露出。层叠荷叶边只在短裙范围内形成不规则轮廓，不延长后摆，不带拖尾。本版没有可见蓝星纹内衬。
 - **腿脚与姿态**：裸腿，穿黑色短靴；双手自然垂落，双腿交错站立。
 - **武器形制**：背负一把黑色直身长剑，连鞘全长约120厘米，其中柄与护手部分约25厘米、鞘身约95厘米。剑柄缠黑色交叉纹握带，柄首呈棱角分明的多面锥形；护手向两侧展开，略向剑身方向折斜，中央有菱形凸起。剑鞘细长、扁直，整体黑色，带灰色棱面高光，下段有一道金属箍，末端收成尖锐的多面形。
 - **背负方式**：长剑入鞘斜背，以黑色背带固定；剑柄从角色右肩后上方露出，鞘尖从左侧裙摆后延伸至小腿上段，约在膝下15厘米处。
 - **画风**：新图统一沿[游戏默认画风 v1.0](../production/art/ART-STYLE-V1.md)；本版运行立绘的黑白灰与蓝色点睛仅用于描述当前图。皮肤配色、服装和构图按老板当次指定图，不套黑裙或站姿。
 
 身高与剑长为本轮按画面比例确认的约值，不是模型测量值；剑刃藏在鞘内，刃面细节尚未确定。下方旧文字保留为修订史，冲突的裙长、头饰、画风与姿态不拼入本版；未定背景不由画面推断。
+
+### 现行头饰与服装提示词（2026-10-16 明确墨镜及短裙边界）
+
+头饰正向：`black round sunglasses on head, thin black round frames, dark tinted lenses, sunglasses pushed up onto her hair`。双眼完整露出；墨镜架在头顶。
+
+正向：`black charcoal off-shoulder long-sleeved short dress, layered ruffles at neckline and cuffs, black tied waist, short layered ruffled skirt, front, back and side hems all end above the knees, thighs and knees clearly visible, bare legs, black ankle boots`。
+
+人物专属负面：`goggles, ski goggles, swimming goggles, aviator goggles, safety goggles, long skirt, high-low skirt, long back hem, dress train, floor-length dress, blue star pattern, stockings, pantyhose, thighhighs`。新请求用此头饰与服装段，不使用 `goggles` 正向或含糊的 `asymmetrical layered ruffled skirt`；不继承下方历史版小腿后摆。完整身份继续组合上方现行锚点，画师与画法沿当次指定配方。
 
 ## 当前角色数据（core/characters.js）
 

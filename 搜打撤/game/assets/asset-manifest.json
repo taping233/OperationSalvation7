@@ -1,8 +1,16 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1424,
+  "count": 1441,
   "assets": [
+    {
+      "path": "reconstruction/wallpaper-snow-road-1016.webp",
+      "ext": "webp",
+      "bytes": 569196,
+      "sha256": "6595b1ca0f0c84ca438da2688501d1f0a0886e297fa16b6bf7c98cd2302407ef",
+      "license": "项目AI生成素材（老板指定本图实装首页）",
+      "source": "docs/evidence/2026-10-16-home-snow-road/receipt.json"
+    },
     {
       "path": "home-prototype/room-direction-candidate.webp",
       "ext": "webp",
@@ -11950,6 +11958,134 @@
       "bytes": 42410,
       "sha256": "4ee16c5ea65b7d410c49d7161943e8ac112ed77d4658d6ee6f85423b96bf1de9",
       "source": "docs/evidence/2026-10-15-battle-stage-reset/repaint-assets.json"
+    },
+    {
+      "path": "scenes/battle/platform-minimal-1016/far.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置imagegen，老板认可简约轨道站概念的分层）",
+      "bytes": 34880,
+      "sha256": "719a8b430d36940d7ae920eb663273430ef100caf191556c478ac55663428257",
+      "source": "docs/evidence/2026-10-16-WF-battle-platform-minimal/request.json"
+    },
+    {
+      "path": "scenes/battle/platform-minimal-1016/ground.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置imagegen，老板认可简约轨道站概念的分层）",
+      "bytes": 91286,
+      "sha256": "60f301fc649f3cae899be2bdcb682554e878ff5d2d3980c4e3ea225c93cf9e3c",
+      "source": "docs/evidence/2026-10-16-WF-battle-platform-minimal/request.json"
+    },
+    {
+      "path": "scenes/battle/platform-minimal-1016/foreground.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置imagegen，老板认可简约轨道站概念的分层）",
+      "bytes": 52976,
+      "sha256": "c7d73002402739fe92a1bcff4db27a131fd0a967ff9cbb569fe2ac64fb31f2fa",
+      "source": "docs/evidence/2026-10-16-WF-battle-platform-minimal/request.json"
+    },
+    {
+      "path": "ui/battle-skills-1016/fixed.webp",
+      "ext": "webp",
+      "bytes": 68248,
+      "sha256": "4752dca1c97aff7152ce10f6fa6759947a678eca8d488a7f79e34e3b5c70ebac",
+      "license": "项目原创（老板授权内置 imagegen 绘制技能图标；参考板仅作画法参考）",
+      "source": "docs/evidence/2026-10-16-WF-battle-platform-live/skill-icons/receipt.json"
+    },
+    {
+      "path": "ui/battle-skills-1016/attack.webp",
+      "ext": "webp",
+      "bytes": 128006,
+      "sha256": "13b31a1a60989349fe8dafcd2abd1f456b277e2f66bdb746e1c01b597df01f19",
+      "license": "项目原创（老板授权内置 imagegen 绘制技能图标；参考板仅作画法参考）",
+      "source": "docs/evidence/2026-10-16-WF-battle-platform-live/skill-icons/receipt.json"
+    },
+    {
+      "path": "ui/battle-skills-1016/acquire.webp",
+      "ext": "webp",
+      "bytes": 138676,
+      "sha256": "d8889ae6565efa6ee4c3fc5ed24b5fb34e39dfdd294417cbe6ec5f125de49a5a",
+      "license": "项目原创（老板授权内置 imagegen 绘制技能图标；参考板仅作画法参考）",
+      "source": "docs/evidence/2026-10-16-WF-battle-platform-live/skill-icons/receipt.json"
+    },
+    {
+      "path": "ui/battle-skills-1016/fireball.webp",
+      "ext": "webp",
+      "bytes": 113632,
+      "sha256": "ac756fca95558aa214c2b6a807efeff34d75725c35aff87fc2a3863b9a82fe59",
+      "license": "项目原创（老板授权内置 imagegen 绘制技能图标；参考板仅作画法参考）",
+      "source": "docs/evidence/2026-10-16-WF-battle-platform-live/skill-icons/receipt.json"
+    },
+    {
+      "path": "ui/battle-skills-1016/heal.webp",
+      "ext": "webp",
+      "bytes": 115716,
+      "sha256": "825cc211186e618b2ca3e667a46042e6f43f699ad8d6b414e73834b402dcb305",
+      "license": "项目原创（老板授权内置 imagegen 绘制技能图标；参考板仅作画法参考）",
+      "source": "docs/evidence/2026-10-16-WF-battle-platform-live/skill-icons/receipt.json"
+    },
+    {
+      "path": "ui/battle-skills-1016/spell.webp",
+      "ext": "webp",
+      "bytes": 128856,
+      "sha256": "7e03783f184ed23525554401b3dfc0137b8d69642fe1cda61bd18c0b1b18435f",
+      "license": "项目原创（老板授权内置 imagegen 绘制技能图标；参考板仅作画法参考）",
+      "source": "docs/evidence/2026-10-16-WF-battle-platform-live/skill-icons/receipt.json"
+    },
+    {
+      "path": "ui/battle-controls-glass-1016/fixed.webp",
+      "ext": "webp",
+      "bytes": 32660,
+      "sha256": "15edacbf0f247668b920ea7a2891bb12785bf34fb5f436efb6e62220172531af",
+      "license": "项目原创（老板授权内置 imagegen 全新绘制透明HUD符号，无外部素材复制）",
+      "source": "docs/evidence/2026-10-16-WF-battle-glass-1016/icons/receipt.json"
+    },
+    {
+      "path": "ui/battle-controls-glass-1016/attack.webp",
+      "ext": "webp",
+      "bytes": 66072,
+      "sha256": "ef365e201a9bdae9069f06398eb97ea6ce3d2600bd037001c3f400fa071e2b09",
+      "license": "项目原创（老板授权内置 imagegen 全新绘制透明HUD符号，无外部素材复制）",
+      "source": "docs/evidence/2026-10-16-WF-battle-glass-1016/icons/receipt.json"
+    },
+    {
+      "path": "ui/battle-controls-glass-1016/acquire.webp",
+      "ext": "webp",
+      "bytes": 54526,
+      "sha256": "806bb7eaff94a5d84b9d2c5d8ff527c82d7674ab3f4956c31115164632ca9485",
+      "license": "项目原创（老板授权内置 imagegen 全新绘制透明HUD符号，无外部素材复制）",
+      "source": "docs/evidence/2026-10-16-WF-battle-glass-1016/icons/receipt.json"
+    },
+    {
+      "path": "ui/battle-controls-glass-1016/fireball.webp",
+      "ext": "webp",
+      "bytes": 51878,
+      "sha256": "d649ad43aa233b1e6267ca19cbf9b118c9392a24924143c9dcf1ec64f6f98838",
+      "license": "项目原创（老板授权内置 imagegen 全新绘制透明HUD符号，无外部素材复制）",
+      "source": "docs/evidence/2026-10-16-WF-battle-glass-1016/icons/receipt.json"
+    },
+    {
+      "path": "ui/battle-controls-glass-1016/heal.webp",
+      "ext": "webp",
+      "bytes": 30994,
+      "sha256": "e754b94e93f83eec582ba00f1b0c4075d3f4e358397f242dd79539091007e809",
+      "license": "项目原创（老板授权内置 imagegen 全新绘制透明HUD符号，无外部素材复制）",
+      "source": "docs/evidence/2026-10-16-WF-battle-glass-1016/icons/receipt.json"
+    },
+    {
+      "path": "ui/battle-controls-glass-1016/spell.webp",
+      "ext": "webp",
+      "bytes": 37804,
+      "sha256": "ac80ab7578c28177d999410c54ce31f05951423a3b0b7e6e3cbf93f9fee80d5a",
+      "license": "项目原创（老板授权内置 imagegen 全新绘制透明HUD符号，无外部素材复制）",
+      "source": "docs/evidence/2026-10-16-WF-battle-glass-1016/icons/receipt.json"
+    },
+    {
+      "path": "ui/battle-controls-glass-1016/energy.webp",
+      "ext": "webp",
+      "bytes": 53362,
+      "sha256": "c54aa8b843b7d8c6a69c7baa1bbf50bc896f3ac2af0b99260ac09c02793ccae9",
+      "license": "项目原创（老板授权内置 imagegen 全新绘制透明HUD符号，无外部素材复制）",
+      "source": "docs/evidence/2026-10-16-WF-battle-glass-1016/icons/receipt.json"
     }
   ],
   "verified": "2026-10-05"

@@ -127,11 +127,11 @@ it('keeps folded hand names synchronized with their printed faces and intent in 
   const cards = [...stage().querySelectorAll('.sts-hand .bt-card')];
   expect(cards.length).toBeGreaterThan(0);
   cards.forEach(card => {
-    expect(card.querySelector('.bt-rest-name')?.textContent).toBe(card.querySelector('.hsc-name')?.textContent);
-    expect(card.querySelector('.bt-rest-name')?.getAttribute('aria-hidden')).toBe('true');
+    expect(card.querySelector('.bt-rest-name')).toBeNull();
+    expect(card.querySelector('.hsc-name')?.textContent).toBeTruthy();
     expect(card.parentElement.dataset.act).toBe('btPlay');
     expect(card.parentElement.dataset.uid).toBe(card.dataset.uid);
-    expect(card.parentElement.style.getPropertyValue('--hand-rest')).toBe('284px');
+    expect(card.parentElement.style.getPropertyValue('--hand-rest')).toBe('64px');
   });
   const foe = stage().querySelector('.sts-foe');
   const intent = foe.querySelector('.sts-intent');
@@ -284,12 +284,12 @@ it('cancels an actual payment action on departure without charging or reviving i
 });
 
 
-it.each([[1,'winter-street'],[2,'frozen-ruins'],[3,'contaminated-core']])('mounts one decoded scene on layer %s and keeps it across rendering and modal return', async (layerIdx,key) => {
+it.each([[1,'winter-platform-minimal'],[2,'winter-platform-minimal'],[3,'winter-platform-minimal']])('mounts one decoded scene on layer %s and keeps it across rendering and modal return', async (layerIdx,key) => {
   const game=start([], {layerIdx}); await flush();
   expect(stage().dataset.sceneryKey).toBe(key);
   const world=overlay.querySelector('.battle-scene-world');
-  expect(world.hidden).toBe(false);expect(world.querySelectorAll('.battle-scene-layer')).toHaveLength(1);
-  expect(world.querySelector('.scene-static')).not.toBeNull();expect(overlay.querySelector('.battle-scene-foreground')).toBeNull();
+  expect(world.hidden).toBe(false);expect(world.querySelectorAll('.battle-scene-layer')).toHaveLength(2);
+  expect(world.querySelector('.scene-static')).toBeNull();expect(overlay.querySelector('.battle-scene-foreground')).not.toBeNull();
   const decoded=HTMLImageElement.prototype.decode.mock.calls.length;
   game.layerIdx=0;BattleSession.commands.setPendingHint('static-render');frame();await flush();
   expect(overlay.querySelector('.battle-scene-world')).toBe(world);
@@ -297,20 +297,21 @@ it.each([[1,'winter-street'],[2,'frozen-ruins'],[3,'contaminated-core']])('mount
   BattleSession.commands.openGrave();frame();await flush();expect(scenery()).toEqual([null,null]);
   BattleSession.commands.closeGrave();frame();await flush();
   expect(stage().dataset.sceneryKey).toBe(key);
-  expect(overlay.querySelectorAll('.battle-scene-layer')).toHaveLength(1);
-  expect(overlay.querySelector('.battle-scene-foreground')).toBeNull();
+  expect(overlay.querySelectorAll('.battle-scene-layer')).toHaveLength(2);
+  expect(overlay.querySelector('.battle-scene-foreground')).not.toBeNull();
 });
 
 it('does not let a late decoded static scene reveal itself in a newer boss battle', async () => {
   const oldDecode=deferred();
-  HTMLImageElement.prototype.decode.mockImplementation(function () { return this.src.includes('frozen-ruins') ? oldDecode.promise : Promise.resolve(); });
+  HTMLImageElement.prototype.decode.mockReturnValue(oldDecode.promise);
   start([], {layerIdx:2});await flush();const oldWorld=overlay.querySelector('.battle-scene-world');
   expect(oldWorld.hidden).toBe(true);
+  HTMLImageElement.prototype.decode.mockResolvedValue();
   start([], {layerIdx:0,isBoss:true});await flush();
   const current=overlay.querySelector('.battle-scene-world');
-  expect(stage().dataset.sceneryKey).toBe('contaminated-core');expect(current.hidden).toBe(false);
+  expect(stage().dataset.sceneryKey).toBe('winter-platform-minimal');expect(current.hidden).toBe(false);
   expect(oldWorld.isConnected).toBe(false);
   oldDecode.resolve();await flush();
   expect(oldWorld.hidden).toBe(true);expect(overlay.querySelector('.battle-scene-world')).toBe(current);
-  expect(overlay.querySelector('.battle-scene-foreground')).toBeNull();
+  expect(overlay.querySelector('.battle-scene-foreground')).not.toBeNull();
 });

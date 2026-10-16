@@ -19,6 +19,28 @@ const open = item => {
   return document.getElementById('cardZoom');
 };
 
+it('coalesces warehouse image load bursts into one layout refresh and ignores departed pages', async () => {
+  base.data.stash = [{card,count:2}];
+  Object.assign(base,{stashUsed:()=>2,stashCap:()=>25});
+  window.SDT.Cards.cardHTML=item=>item.name;
+  const feature=await import('../game/src/hub/hub.warehouse.js');
+  document.querySelector('.hub-page').innerHTML=feature.warehouseHTML();
+  feature.bindWarehouse({ui,base,sound:{tick:vi.fn()}});
+  const browser=document.querySelector('[data-card-browser]'), track=browser.querySelector('.card-browser-track');
+  const width=vi.fn(()=>1000), frames=[];
+  Object.defineProperty(track,'clientWidth',{get:width});
+  vi.stubGlobal('requestAnimationFrame',fn=>{frames.push(fn);return frames.length;});
+  const image=document.createElement('img'); track.firstElementChild.append(image);
+  try {
+    for(let i=0;i<100;i++)image.dispatchEvent(new Event('load'));
+    expect(width).not.toHaveBeenCalled(); expect(frames).toHaveLength(1);
+    frames[0]();expect(width).toHaveBeenCalledTimes(1);
+    image.dispatchEvent(new Event('load'));expect(frames).toHaveLength(2);
+    document.querySelector('.warehouse-v3').remove();
+    frames[1]();expect(width).toHaveBeenCalledTimes(1);
+  } finally {vi.unstubAllGlobals();}
+});
+
 beforeEach(async () => {
   vi.resetModules(); vi.useFakeTimers();
   for (const port of Object.values(ports)) port.mockReset();

@@ -17,7 +17,7 @@ function shop({ save = () => true, stored = false, coins = 20, canReceive = () =
     const button = event.target.closest('[data-act]');
     if (button) acts[button.dataset.act]?.(button.dataset);
   });
-  const UI = { act: (name, handler) => { acts[name] = handler; },
+  const UI = { el: { ovBody: host, overlay: host }, act: (name, handler) => { acts[name] = handler; },
     showOverlay: (_title, html) => { host.innerHTML = html; }, hideOverlay: vi.fn(),
     refresh: vi.fn(), log: vi.fn(), registerHelp: vi.fn(), helpBtn: () => '' };
   const SDT = { Base: { slot: 1 }, Cards: { isSellable: item => !!item.sellable, sellPrice: item => item.value || 0 },
@@ -33,6 +33,14 @@ function shop({ save = () => true, stored = false, coins = 20, canReceive = () =
 afterEach(() => { document.body.replaceChildren(); vi.useRealTimers(); vi.restoreAllMocks(); configureShopRuntime({ openBag: undefined }); });
 
 describe('局内商店事务及旧页面动作', () => {
+  it('玩家已离开商店坐标时，仍连接着的旧购买动作也不能扣币或成交', () => {
+    const { acts, game, saveGame } = shop();
+    const buy = acts.buyCard, before = JSON.stringify(game.ownedCards);
+    game.layerIdx = 0; game.trackPos = 8;
+    buy({ i:0 });
+    expect(game.coins).toBe(20);expect(game.shopStock[0].sold).toBe(false);
+    expect(JSON.stringify(game.ownedCards)).toBe(before);expect(saveGame).not.toHaveBeenCalled();
+  });
   it.each(['buyCard', 'buySha', 'sellCard'])('%s 保存失败仍沿用局内检查点契约，币与背包/库存同步推进', action => {
     const { acts, game, owned, SDT, saveGame } = shop({ save: () => false });
     acts.openSell();
@@ -160,7 +168,7 @@ describe('局内商店事务及旧页面动作', () => {
   it('减少动态关闭背包后立即清空弹层，也能正常且仅一次返回商店', () => {
     const { acts, UI, host } = shop();
     let onReturn;
-    UI.el = { overlay: { hidden: false } };
+    UI.el = { ovBody: host, overlay: { hidden: false } };
     configureShopRuntime({ openBag: callback => { onReturn = callback; host.innerHTML = '<section class="bag-view">背包</section>'; } });
     acts.shopOpenBag(); host.replaceChildren(); UI.el.overlay.hidden = true;
     onReturn(); const current = host.firstElementChild;

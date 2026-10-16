@@ -67,7 +67,7 @@ describe('药摊与装备征用的可恢复选择', () => {
     UI._acts.evtChoice({ i:'0' });
     const pending = JSON.parse(JSON.stringify(H.game.nodeRewards['0,1']));
     const old = UI._acts.eventCardPick;
-    expect(H.game.visited).toEqual({});
+    expect(H.game.visited).toEqual({ '0,1':1 });
     expect(UI.el.ovBody.querySelector('[data-event-capacity]').textContent).toContain('放不下');
     UI.el.ovBody.querySelector('[data-act="eventCardPick"]').click();
     expect(H.game.ownedCards).toHaveLength(0);
@@ -100,7 +100,7 @@ describe('药摊与装备征用的可恢复选择', () => {
     const coins = H.game.coins;
     H.random = vi.fn(() => 0.1);
     UI._acts.eventExit();
-    expect(H.game.state).toBe('idle'); expect(H.game.visited).toEqual({});
+    expect(H.game.state).toBe('idle'); expect(H.game.visited).toEqual({ '0,1':1 });
     expect(takeBagReturnHook()).toBeNull();
     await vi.advanceTimersByTimeAsync(400);
     expect(UI.el.overlay.hidden).toBe(true);

@@ -6,7 +6,7 @@ import { Random } from '../../core/random.js';
 import * as Combat from '../core/combat.js';
 import { itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
-import { G, foes, mode, energy, busy, infusing, discovering, choosing, handSelecting, viewingGrave, selectingDeck, viewingBag, pstat, floats, consumed, grave, hand, cardAnims, delayed, set$energy, set$viewingBag, battleState } from '../runtime/battle.runtime.js';
+import { G, foes, mode, energy, busy, infusing, discovering, choosing, handSelecting, viewingGrave, selectingDeck, pstat, floats, consumed, grave, hand, cardAnims, delayed, set$energy, set$viewingBag, battleState } from '../runtime/battle.runtime.js';
 import { slamSkillFor } from './battle.slam-skill.js';
 import { removeUid } from './battle.piles.js';
 
@@ -33,9 +33,7 @@ export function createBattleBag({
     return cnt;
   }
 
-  // ---------- 战斗背包（2026-09-09 老板：战斗中也能开背包使用道具） ----------
-  // 道具在战斗内直接生效于战局：回复类回血、能源结晶复原消耗堆、神秘药水随机效果、
-  // 口粮/木材入库；其余道具（通行证等涉及获得卡牌的）战斗内不可用，回地图再使。
+  // 战斗道具快捷栏独立于地图背包；战斗期间禁用背包页面。
   function battleBagItems() {
     return (G.ownedCards || []).filter(o => o.card && o.card.type === '道具' && !o.safe);
   }
@@ -475,13 +473,8 @@ export function createBattleBag({
     useItem(uid, null);
   }
   function openBag() {
-    if (selectingDeck) { G.log('[[icon:lock]] 编组牌库时不能打开背包', 'warn'); return; }
-    if (infusing || discovering || choosing || handSelecting) {
-      G.log('[[icon:hourglass]] 当前效果结算中，稍候再打开背包', 'warn');
-      return;
-    }
-    set$viewingBag(!viewingBag);   // 再按一次 B / 再点一次按钮 = 关闭
-    requestBattleRender();
+    G?.log('[[icon:lock]] 战斗中无法打开背包；战斗结束后可回地图整理', 'warn');
+    return false;
   }
   function closeBag() {
     set$viewingBag(false);

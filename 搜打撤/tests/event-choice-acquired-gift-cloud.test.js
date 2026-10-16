@@ -1,7 +1,6 @@
 // Real session/loadGame/RunStorage, event flow/choice, fixed rewards and Chests.
 // Canvas, narrative lookup and presentation are isolated; no browser/player data.
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { writeFileSync } from 'node:fs';
 import { RULES } from '../game/src/core/rules.js';
 vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative:async()=>null,lastLampNarrative:async()=>null }));
 vi.mock('../game/src/home/story.commands.js', () => ({ storyCommands:{ inspect:()=>({ok:true,value:{kind:'complete'}}) } }));
@@ -95,7 +94,7 @@ describe('装备征用阿猫整体交接固定待领奖',()=>{
     else vi.spyOn(Chests,'restore').mockImplementation(()=>{if(failure==='throw-before')throw new Error('before adoption');return false;});
     try{
       acts.eventCardPick({i:0});expect(ownCount(apollo.id)).toBe(0);expect(ownCount(bonus.id)).toBe(0);expect(session.game.nodeRewards[key].taken).toBeNull();
-      expect(session.game.visited[key]).toBeUndefined();expect(session.game.coins).toBe(15);expect(Random.snapshot()).toEqual(rng);
+      expect(session.game.visited[key]).toBe(1);expect(session.game.coins).toBe(15);expect(Random.snapshot()).toEqual(rng);
       expect(saved().nodeRewards[key]).toEqual(before.nodeRewards[key]);expect(saved().chestReward).toBeNull();expect(UI.el.ovBody.querySelector('[data-event-capacity]').textContent).toMatch(/保留/);
     }finally{if(failure==='missing')Chests.restore=originalRestore;if(failure==='missing-serialize')Chests.serialize=originalSerialize;}
   });
@@ -116,8 +115,6 @@ describe('装备征用阿猫整体交接固定待领奖',()=>{
     for(const attempt of attempts){expect(attempt.nodeRewards[key]).toMatchObject({taken:0,paidCoins:3});expect(attempt.visited[key]).toBe(1);expect(attempt.chestReward.current.cards[0].id).toBe(apollo.id);}
     if(failedWrites.length===2){expect(localStorage.getItem(RunStorage.key(1))).toBe(beforeRaw);expect(session.game.nodeRewards[key].taken).toBe(0);expect(Chests.serialize(session.game).current.cards[0].id).toBe(apollo.id);}
     else{expect(saved().nodeRewards[key].taken).toBe(0);expect(saved().chestReward.current.cards[0].id).toBe(apollo.id);}
-    const summarize=run=>({coins:run.coins,nodeReward:run.nodeRewards[key],consumed:run.visited[key]===1,chestReward:run.chestReward,mainCardOwned:run.ownedCards.filter(owned=>owned.card.id===apollo.id).length});
-    writeFileSync(`docs/evidence/2026-10-16-reward-atomicity-audit/quartermaster-write-attempts-${failedWrites.join('-')}.json`,JSON.stringify({failedWrites,attempts:attempts.map(summarize),durableBeforeRetry:summarize(saved()),memoryBeforeRetry:summarize(session.createRunSavePayload())},null,2)+'\n');
     failure.mockRestore();expect(session.saveGame()).toBe(true);reload();acts.chestTake1({i:0});expect(ownCount(apollo.id)).toBe(1);expect(session.game.coins).toBe(15);
   });
 

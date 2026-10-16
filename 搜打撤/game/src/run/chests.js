@@ -4,10 +4,11 @@ import { Random } from '../core/random.js';
 import { previewCardRewards } from '../core/card-capacity.js';
 import { esc, escAttr } from '../core/shared.js';
 import { rewardSceneHTML, rewardExitHTML } from '../ui/reward-scene-view.js';
+import { chestRewardOverviewHTML, chestRewardFrameHTML } from '../ui/chest-reward-overview.js';
 import { turboMs, isTurbo } from '../core/turbo.js';
 import { serializeChestReward, restoreChestReward } from './chest-reward-save.js';
 import { bagSlots } from '../hub/game.bag.bridge.js';
-import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE_CLOSED } from './chest-opening-art.js';
+import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from './chest-opening-art.js';
 
   const SDT = window.SDT;
   const UI = SDT.UI;
@@ -18,16 +19,38 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
   let idx = 0;         // 已开到第几个
   let onDone = null;   // 全部开完后的续流回调
   let saveContext = null;
+  let rewardScreen = 'overview', overviewMode = true;
   let saveBinding = null;
+  let parked = false;
+  let beforeMapReturn = null, returningToMap = false;
   let rewardZoom = null;
   let noticeFailure = null, suspendedBag = null;
   const clearNoticeContext = () => { noticeFailure = null; suspendedBag = null; };
   const closeRewardZoom = () => { rewardZoom?._closeCardZoom?.(true); rewardZoom = null; };
   const bindSave = game => ({ seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos, runToken:game.discoveredPairs, slotId:SDT.Base?.slot });
-  const isCurrentRewardRun = () => !!G && !!saveBinding && saveBinding.seed === G.seed &&
+  const isCurrentRewardRun = () => !parked && !!G && !!saveBinding && saveBinding.seed === G.seed &&
     saveBinding.layerIdx === G.layerIdx && saveBinding.trackPos === G.trackPos &&
     saveBinding.runToken === G.discoveredPairs && saveBinding.slotId === SDT.Base?.slot;
-  const persistReward = () => { if (isCurrentRewardRun() && (saveContext?.onCell || saveContext?.battleSettlement)) G.persistSave?.(); };
+  const persistReward = () => {
+    if (!isCurrentRewardRun() || !(saveContext?.onCell || saveContext?.battleSettlement)) return;
+    const saved = serializeChestReward(G, queue, idx, cur, saveContext, { screen:rewardScreen });
+    if (saved) (G.nodeChestRewards ||= {})[`${G.layerIdx},${G.trackPos}`] = saved;
+    G.persistSave?.();
+  };
+  async function returnToMap() {
+    if (!isCurrentRewardRun() || !cur || G.state !== 'modal' || returningToMap) return false;
+    returningToMap = true;
+    try {
+      if (beforeMapReturn && !await beforeMapReturn(saveContext?.battleSettlement)) return false;
+      if (!isCurrentRewardRun() || !cur) return false;
+      if (overviewMode) rewardScreen = 'overview';
+      persistReward();
+      closeRewardZoom(); cancelPresentation(); searchSeq++;
+      parked = true;
+      UI.hideOverlay(); G.state = 'idle'; G.persistSave?.(); UI.refresh(G);
+      return true;
+    } finally { returningToMap = false; }
+  }
   let searchSeq = 0;   // 搜索演出代次：过期定时器不得再渲染（连开多箱/提前结束时防串台）
   let searchTimer = null, openingTimer = null, openingPresentation = null;
 
@@ -126,7 +149,7 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
   // 掷一个宝箱的完整内容：cards=开出的卡（中宝箱为 3 选 1 候选），coins=内含币
   function rollContents(kind, isClass) {
     const K = KINDS()[kind] || KINDS().small;
-    const c = { kind, cards: [], coins: 0, isClass: !!isClass };
+    const c = { kind, cards: [], coins: 0, isClass: !!isClass, claimMode:K.pickFrom ? 'one' : 'all' };
     const seen = panelSeen();
     const rollPetEgg = () => {
       const eggRate = SDT.Base.petEggDropChance();
@@ -188,7 +211,7 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
     // 大宝箱 / 首脑宝箱保底至少 1 张「史诗」+。未达标就重掷最后一张非宠物蛋卡（目标档内挑卡，
     // 该档暂无可用卡则逐档上探；全部失败则保持原结果）。职业宝箱走上面独立分支，不参与。
     const riOfCard = (card) => Math.max(0, SDT.Cards.RARITIES.indexOf(card.rarity));
-    const needRi = K.pickFrom ? SDT.Cards.RARITIES.indexOf('稀有')
+    const needRi = kind === 'medium' ? SDT.Cards.RARITIES.indexOf('稀有')
       : (kind === 'large' || kind === 'boss') ? SDT.Cards.RARITIES.indexOf('史诗') : -1;
     let upgradeIndex = -1;
     for (let i = c.cards.length - 1; i >= 0; i--) {
@@ -278,83 +301,156 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
       .join('，');
   }
 
-  // ---------- 开箱 UI（逐个弹窗，全部开完调 onDone） ----------
+  // 宝箱总览持有整批进度；卡牌弹层的关闭不结束节点或胜利续流。
   function open(game, chests, done, opts) {
     clearNoticeContext();
     cancelPresentation();
     const K = Object.assign({ resourceOnly: false }, opts || {});
     G = game;
+    parked = false;
+    beforeMapReturn = K.beforeMapReturn || null;
     saveContext = { onCell:!!K.onCell, consumeNode:!!K.consumeNode,
       ...(K.battleSettlement ? { battleSettlement:K.battleSettlement } : {}) };
     saveBinding = bindSave(game);
     queue = chests.map((chest, i) => ({ ...chest, battleSummary: i === 0 ? K.battleSummary || null : null }));
-    idx = 0;
+    idx = 0; cur = null; overviewMode = true; rewardScreen = 'overview';
     onDone = done || null;
     G.state = 'modal';
-    next();
+    if (!queue.length) { finishQueue(); return; }
+    prepareBox(0);
+    persistReward();
+    renderChestOffer();
   }
 
-  function next() {
+  const boxResolved = box => !!box && box.cards.every((_, i) => box.taken.has(i) || box.lost.has(i))
+    && (!box.coins || box.coinsReceived);
+  const allBoxesResolved = () => queue.length > 0 && queue.every(box => box.completed || boxResolved(box.reward));
+  const cardsResolved = box => !!box && box.rewardStage !== 'chest' && box.rewardStage !== 'opening'
+    && box.cards.every((_, i) => box.taken.has(i) || box.lost.has(i));
+  const pendingBox = slot => !slot.completed && !cardsResolved(slot.reward);
+  function nextPendingBoxIndex() {
+    const opened = queue.findIndex(slot => pendingBox(slot) && slot.reward && slot.reward.rewardStage !== 'chest');
+    return opened >= 0 ? opened : queue.findIndex(pendingBox);
+  }
+  const compactNotice = notice => String(notice || '').replaceAll('本次远征背包', '背包').replaceAll('，整理背包后可重试', '');
+
+  function finishQueue() {
     clearNoticeContext();
     closeRewardZoom();
     cancelPresentation();
-    if (idx >= queue.length) {
-      searchSeq++;              // 作废未播完的搜索演出，避免收尾后又被旧定时器拉回浮层
-      UI.hideOverlay();
-      G.state = 'idle';
-      cur = null;
-      queue = [];   // 开完即清：isOpen 用 queue.length 判终态，残留会恒 true 锁死背包
-      saveContext = null;
-      saveBinding = null;
-      const cb = onDone;
-      onDone = null;
-      if (cb) cb();
-      return;
-    }
-    cur = rollContents(queue[idx].kind, queue[idx].isClass);
-    cur.selected = null;
-    cur.lost = new Set();
-    cur.coinsReceived = false;
+    if (G.nodeChestRewards) delete G.nodeChestRewards[`${G.layerIdx},${G.trackPos}`];
+    searchSeq++;              // 作废未播完的搜索演出，避免收尾后又被旧定时器拉回浮层
+    UI.hideOverlay();
+    G.state = 'idle';
+    cur = null;
+    queue = [];   // 清除活动领奖引用，再调用一次原续流。
+    saveContext = null;
+    saveBinding = null;
+    const cb = onDone;
+    onDone = null;
+    if (cb) cb();
+  }
+
+  function prepareBox(index) {
+    const slot = queue[index];
+    if (!slot || slot.completed) return false;
+    if (!slot.reward) slot.reward = Object.assign(rollContents(slot.kind, slot.isClass), {
+      selected:null, taken:new Set(), lost:new Set(), coinsReceived:false,
+      leaveConfirm:false, notice:'', battleSummary:slot.battleSummary || null, rewardStage:'chest',
+    });
+    idx = index + 1; cur = slot.reward;
+    return true;
+  }
+
+  function next() {
+    if (!boxResolved(cur)) return;
+    queue[idx - 1].completed = true;
+    if (!overviewMode) { finishQueue(); return; }
+    closePicker();
+  }
+
+  function closePicker() {
+    closeRewardZoom(); cancelPresentation(); searchSeq++;
+    queue[idx - 1].completed = boxResolved(cur);
     cur.leaveConfirm = false;
-    cur.notice = '';
-    cur.isClass = !!queue[idx].isClass;
-    cur.battleSummary = queue[idx].battleSummary || null;
-    cur.rewardStage = 'chest';
-    idx++;
-    persistReward();   // 在揭晓前冻结本箱内容与RNG；刷新不再重掷。
-    renderChestOffer();
+    rewardScreen = 'overview';
+    persistReward(); renderChestOffer();
+  }
+
+  function overviewHTML() {
+    const nextIndex = nextPendingBoxIndex();
+    const nextBox = queue[nextIndex]?.reward;
+    return chestRewardOverviewHTML({
+      title:queue.some(box => box.battleSummary) ? '战斗胜利' : '本次收获',
+      source:'奖励总览', complete:allBoxesResolved(),
+      coins:queue.reduce((sum, slot) => {
+        sum.total += slot.reward?.coins || 0;
+        if (!slot.reward?.coinsReceived) sum.pending += slot.reward?.coins || 0;
+        return sum;
+      }, { total:0, pending:0 }),
+      primaryAction:nextIndex < 0 ? null : { index:nextIndex, label:nextBox && nextBox.rewardStage !== 'chest' ? '继续领取' : '打开宝箱' },
+      progress:{ pending:queue.filter(pendingBox).length, total:queue.length },
+      notice:cur?.taken?.size && cur.notice?.includes('已入') ? `已收下 ${cur.taken.size} 张${boxResolved(cur) ? '' : ' · 还有奖励'}` : '',
+      boxes:queue.map((slot, index) => {
+        const K = KINDS()[slot.kind] || KINDS().small;
+        const box = slot.reward;
+        const complete = !!slot.completed || cardsResolved(box);
+        const choice = box ? box.claimMode === 'one' : !!K.pickFrom;
+        return { index, name:slot.isClass ? '职业补给箱' : K.name,
+          art:`<img src="${escAttr(chestArtOf(slot))}" alt="" draggable="false">`,
+          rule:choice ? `${K.pickFrom || box?.choiceCount || box?.cards.length || 3} 张中选 1 张` : `${K.cards || box?.cards.length || 0} 张 · 可全部领取`,
+          status:complete ? box?.taken?.size ? `已收下 ${box.taken.size} 张`
+            : box?.lost?.size ? '卡牌已放弃' : '已完成'
+            : box?.taken?.size ? `已收下 ${box.taken.size} 张 · 待领`
+              : box && box.rewardStage !== 'chest' ? '待继续领取' : '待开启',
+          completed:complete, opened:!!box && box.rewardStage !== 'chest', active:index === idx - 1 };
+      }),
+      footer:`<span>[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span>`,
+    });
+  }
+
+  function bindOverview() {
+    const surface = UI.el?.ovBody?.querySelector('.cqo-overview');
+    const active = () => isCurrentRewardRun() && rewardScreen === 'overview' && G.state === 'modal'
+      && !!surface && UI.el?.ovBody?.querySelector('.cqo-overview') === surface && !UI.el?.overlay?.hidden;
+    const openBox = index => {
+      if (!active() || !Number.isInteger(index) || !queue[index] || !pendingBox(queue[index]) || !prepareBox(index)) return;
+      if (noticeFailure?.box !== cur) clearNoticeContext();
+      rewardScreen = 'cards';
+      if (cur.rewardStage === 'chest') {
+        cur.rewardStage = 'opening'; persistReward(); renderSearch();
+      } else { persistReward(); renderCurrentStage(); }
+    };
+    UI.act('chestOpen', d => openBox(Number(d.i)));
+    UI.act('chestNext', () => openBox(nextPendingBoxIndex()));
+    UI.act('chestOverviewCoins', () => {
+      if (!active()) return;
+      for (const slot of queue) {
+        if (slot.reward?.coins && !slot.reward.coinsReceived) collectCoinsOnce(slot.reward);
+        if (boxResolved(slot.reward)) slot.completed = true;
+      }
+      persistReward(); renderChestOffer();
+    });
+    UI.act('chestReturn', () => { if (active()) return returnToMap(); });
+    UI.act('chestOverviewBag', () => { if (active()) bagSlots.showBackpack(); });
+    UI.act('chestFinish', () => { if (active() && allBoxesResolved()) finishQueue(); });
   }
 
   function renderChestOffer() {
     cancelPresentation();
-    const sequence = ++searchSeq;
-    const offeredBox = cur;
-    const K = KINDS()[cur.kind];
-    const name = cur.isClass ? '职业补给箱' : K.name;
-    const body = rewardSceneHTML({
-      title:cur.battleSummary ? '战斗胜利' : '获得宝箱',
-      source:`${name}${queue.length > 1 ? ` · ${idx}/${queue.length}` : ''}`,
-      rule:K.pickFrom ? `领取宝箱后，从 ${cur.cards.length} 张卡牌中选择 1 张` : '领取宝箱后揭晓卡牌',
-      cards:chestOfferHTML({ name, src:chestArtOf(cur) }),
-      actions:'<button type="button" class="reward-claim chest-claim-action" data-act="chestClaim">领取宝箱</button>',
-      footer:`<span class="reward-capacity">待领取宝箱 · ${queue.length - idx + 1} 个</span>`,
-      className:'reward-v14 chest-offer-page', count:1,
+    searchSeq++;
+    const nextIndex = nextPendingBoxIndex();
+    UI.showOverlay('[[icon:archive]] 奖励总览', chestRewardFrameHTML({ overview:overviewHTML() }), 'chest', {
+      initialFocus:nextIndex >= 0 ? `[data-act="chestOpen"][data-i="${nextIndex}"]`
+        : allBoxesResolved() ? '[data-act="chestFinish"]' : '[data-act="chestOverviewCoins"]',
     });
-    UI.showOverlay(`[[icon:archive]] 奖励宝箱 · 第 ${idx} / ${queue.length}`, body, 'chest');
     markChestTier(cur);
-    const surface = UI.el?.ovBody?.querySelector('.chest-offer-page');
-    UI.act('chestClaim', () => {
-      if (!isCurrentRewardRun() || cur !== offeredBox || sequence !== searchSeq || cur.rewardStage !== 'chest'
-        || !surface || UI.el?.ovBody?.querySelector('.chest-offer-page') !== surface || UI.el?.overlay?.hidden) return;
-      cur.rewardStage = 'opening';
-      persistReward();
-      renderSearch();
-    });
+    bindOverview();
     UI.refresh(G);
   }
 
   function renderCurrentStage() {
-    if (cur.rewardStage === 'chest') renderChestOffer();
+    if (overviewMode && rewardScreen === 'overview') renderChestOffer();
     else if (cur.rewardStage === 'opening') { cur.rewardStage = 'cards'; render(); persistReward(); }
     else render();
   }
@@ -383,9 +479,11 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
       });
     }
     globalThis.__probe?.('rs', `tok=${tok} t=${Date.now()} kind=${cur.kind}`);
-    UI.showOverlay(`[[icon:archive]] 搜寻物资 · ${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
+    const opening = `
       <p class="evt-sts-desc">${cur.isClass ? '职业补给：本职业专属卡牌' : '正在解锁封存物资。'}</p>
-      ${safeOpeningHTML({ kind:cur.isClass ? 'class' : cur.kind, src:chestArtOf(cur), animated:context.frames.length > 1 })}`, 'chest');
+      ${safeOpeningHTML({ kind:cur.isClass ? 'class' : cur.kind, src:chestArtOf(cur), animated:context.frames.length > 1 })}`;
+    UI.showOverlay(`[[icon:archive]] 开启${K.name}`, chestRewardFrameHTML({ overview:overviewHTML(), picker:opening, label:'开启宝箱' }), 'chest');
+    UI.act('chestClosePicker', () => { if (isCurrentPresentation(context)) closePicker(); });
     context.surface = UI.el?.ovBody?.querySelector('[data-eps-search]');
     markChestTier(cur);
     // W6-01 事实更正（2026-09-27 R2）：battle.lifecycle.js:135 的三元式
@@ -412,15 +510,17 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
     const lost = cur.lost || (cur.lost = new Set());
     // 阿猫附赠追加在原候选之后，不参与原三选一的永久放弃。
     const choiceCount = cur.choiceCount ?? cur.cards.length;
-    const isChoice = index => !!K.pickFrom && index < choiceCount;
-    const isPick = !!K.pickFrom && cur.cards.some((_, i) => isChoice(i) && !taken.has(i) && !lost.has(i));
+    const choice = cur.claimMode === 'one';
+    const isChoice = index => choice && index < choiceCount;
+    const isPick = choice && cur.cards.some((_, i) => isChoice(i) && !taken.has(i) && !lost.has(i));
     const selected = Number.isInteger(cur.selected) ? cur.selected : null;
     const cardsHTML = cur.cards.map((card, i) => {
       const got = taken.has(i), dropped = lost.has(i);
       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
       const action = got || dropped
         ? `<span class="reward-unit-state">${got ? '已入背包' : '已永久放弃'}</span>`
-        : `<button type="button" class="reward-claim${fits ? '' : ' needs-room'}" data-act="${fits ? isChoice(i) ? 'chestPick' : 'chestTake1' : 'chestOpenBag'}" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>${fits ? '收下' : '整理背包'}</button>`;
+        : fits ? `<button type="button" class="reward-claim" data-act="${isChoice(i) ? 'chestPick' : 'chestTake1'}" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>收下</button>`
+          : '<span class="reward-unit-state needs-room">当前放不下</span>';
       return `<article class="reward-unit${got ? ' got' : dropped ? ' dropped' : ''}" data-reward-rarity="${escAttr(rewardRarity(card))}">
         <button type="button" class="reward-card" data-act="chestSelect" data-i="${i}" aria-label="放大查看${escAttr(card.name || '卡牌')}" title="放大查看">${SDT.Cards.cardHTML(card)}</button>${action}</article>`;
     }).join('');
@@ -428,8 +528,7 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
     // 按实际顺序模拟同名分堆/占格；成功收到珍珠盒后，后续资源可使用其扩格。
     const rest = cur.cards.filter((c, i) => !taken.has(i) && !lost.has(i));
     let cant = 0, canTake = 0;
-    // 三选一（2026-09-19 审计 P2-8）：满包时逐张预检——全部收不下则给警示与「只收金币离开」，
-    // 点选被拒时留在面板（旧实现照常 next()，选中的卡被静默吞掉）
+    // 逐张判断当前候选；满格仍可能通过同名叠放领取，不能用格数直接禁用。
     const pickNoFit = isPick && !cur.cards.some((c, i) => isChoice(i) && !taken.has(i) && !lost.has(i) && (G.canReceiveCard ? G.canReceiveCard(c) : true));
     if (!isPick) {
       ({ canTake, cant } = previewCardRewards(rest, {
@@ -447,40 +546,36 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
     } else if (!actualFailure && G.canReceiveCard && rest.some(c => notice === `「${c.name}」当前放不下，整理背包后可重试` && G.canReceiveCard(c))) {
       notice = '';
     }
-    // 体验线切片4（2026-09-28，源自 Tarkov value-per-slot 心智模型）：满包时给出"最低价已装卡"参照，
-    // 让"值不值得为战利品让路"变成一眼对比（替换操作仍走背包/商店，这里只给判断依据）
-    const cheapestOwned = (G.ownedCards || [])
-      .filter(o => o.card && !(SDT.Base.isSha ? SDT.Base.isSha(o.card) : false))
-      .map(o => ({ name: o.card.name, price: SDT.Cards.sellPrice(o.card) }))
-      .sort((a, b) => a.price - b.price)[0];
-    const cheapHint = cheapestOwned
-      ? ` 背包内最低估值：「${esc(cheapestOwned.name)}」${cheapestOwned.price} 币。`
-      : '';
-    const warnLine = pickNoFit
-      ? `<p class="chest-warn">[[icon:bag]] 背包 ${G.usedSlots()}/${G.bagCap()} 格：当前候选都放不下。整理背包后可返回同一选择。</p>`
-      : cant > 0
-      ? `<p class="chest-warn">[[icon:bag]] 背包 ${G.usedSlots()}/${G.bagCap()} 格：按当前卡牌顺序预计可收 ${canTake} 张、${cant} 张放不下；批量领取时按逐张容量判定，放不下的保留在本页，可整理后再领。${cheapHint}</p>`
-      : '';
+    const noneFit = rest.length > 0 && !rest.some(card => !G.canReceiveCard || G.canReceiveCard(card));
+    const informationalNotice = notice && !bulkCapacityNotice
+      && !cur.cards.some(card => notice === `「${card.name}」当前放不下，整理背包后可重试`);
+    const capacityNote = actualFailure || informationalNotice ? compactNotice(notice)
+      : pickNoFit ? '当前候选都放不下，奖励保留。'
+        : cant > 0 ? `预计可收 ${canTake} 张 · ${cant} 张待整理，奖励保留。` : compactNotice(notice);
     const finished = rest.length === 0;
-    const ops = cur.leaveConfirm
+    const leaveConfirmation = cur.leaveConfirm
       ? `<div class="reward-leave-confirm"><p>永久放弃剩余 ${rest.length} 张卡牌？离开后无法找回。</p><button type="button" class="reward-secondary" data-act="chestStay">继续领取</button><button type="button" class="reward-secondary danger" data-act="chestLeave">确认放弃</button></div>`
-      : rewardExitHTML(finished ? 'chestContinue' : 'chestSkip', finished ? (idx < queue.length ? `下一批奖励 · 剩余 ${queue.length - idx} 批` : '继续探索') : '返回地图');
-    const bulk = !finished && !isPick && !cur.leaveConfirm && rest.length > 1
-      ? `<button type="button" class="reward-secondary" data-act="chestTake">全部收下${cant ? ' · 放不下的保留' : ''}</button>` : '';
+      : '';
+    const ops = finished && !overviewMode ? rewardExitHTML('chestContinue', '继续探索') : '';
+    const bulk = !finished && !isPick && !cur.leaveConfirm && rest.length > 1 && (!noneFit || (!overviewMode && cur.coins && !cur.coinsReceived))
+      ? '<button type="button" class="reward-secondary" data-act="chestTake">全部收下</button>' : '';
     const outcome = cur.battleSummary?.cardOutcome;
     const details = outcome ? `<details class="loot-outcome"><summary>本战卡牌去向</summary>${[['进入消耗区',outcome.pocket],['直接消散',outcome.gone],['仍在背包',outcome.retained]].map(([label,names]) => `<p><b>${label}</b>：${names.length ? names.map(esc).join('、') : '无'}</p>`).join('')}</details>` : '';
-    const coins = cur.coins ? `<article class="reward-unit reward-coin-unit${cur.coinsReceived ? ' got' : ''}" aria-label="金币奖励"><div class="reward-coin-art" aria-hidden="true">[[icon:coin]]</div><div class="reward-coin-amount">×${cur.coins}</div>${cur.coinsReceived ? '<span class="reward-unit-state">已获得</span>' : `<button type="button" class="reward-claim" data-act="chestCoins"${cur.leaveConfirm ? ' disabled' : ''}>收下</button>`}</article>` : '';
-    const footer = `<span class="reward-capacity">[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span><button type="button" class="reward-bag" data-act="chestOpenBag">整理背包</button>${notice && !finished ? `<span class="reward-notice" role="status">${esc(notice)}</span>` : ''}${finished ? `<span class="reward-final" role="status">${taken.size} 张已入背包${lost.size ? ` · ${lost.size} 张已永久放弃` : ''}</span>` : ''}`;
-    const body = rewardSceneHTML({
+    const coins = !overviewMode && cur.coins ? `<article class="reward-unit reward-coin-unit${cur.coinsReceived ? ' got' : ''}" aria-label="金币奖励"><div class="reward-coin-art" aria-hidden="true">[[icon:coin]]</div><div class="reward-coin-amount">×${cur.coins}</div>${cur.coinsReceived ? '<span class="reward-unit-state">已获得</span>' : `<button type="button" class="reward-claim" data-act="chestCoins"${cur.leaveConfirm ? ' disabled' : ''}>收下</button>`}</article>` : '';
+    const finalNotice = [taken.size ? `${taken.size} 张已入背包` : '', lost.size ? `${lost.size} 张已永久放弃` : '',
+      !overviewMode && cur.coins ? cur.coinsReceived ? '金币已入账' : '金币待领取' : ''].filter(Boolean).join(' · ') || '已处理';
+    const footer = `<span class="reward-capacity">[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span>${!finished ? `<button type="button" class="reward-bag${noneFit ? ' is-primary' : ''}" data-act="chestOpenBag">整理背包</button>` : ''}${!boxResolved(cur) && !cur.leaveConfirm ? '<button type="button" class="reward-bag" data-act="chestReturn">返回地图 · 保留奖励</button>' : ''}${!finished && !cur.leaveConfirm ? '<button type="button" class="reward-bag danger" data-act="chestSkip" data-cancel="false">放弃剩余卡牌</button>' : ''}${capacityNote && !finished && !cur.leaveConfirm ? `<span class="reward-capacity-note" role="status">${esc(capacityNote)}</span>` : ''}${finished ? `<span class="reward-final" role="status">${esc(finalNotice)}</span>` : ''}${leaveConfirmation}`;
+    const picker = rewardSceneHTML({
       title:cur.title || (cur.battleSummary ? '战斗胜利' : isPick ? '选择收获' : '搜刮完成'),
       source:`${cur.source || (cur.isClass ? '职业补给' : K.name)}${queue.length > 1 ? ` · ${idx}/${queue.length}` : ''}`,
       rule:finished ? '' : isPick ? '任选 1 张，其余卡牌永久放弃，无法找回' : cur.cards.length > 1 ? '奖励可分别领取' : '',
       cards:cardsHTML || (coins ? '' : '<p class="reward-empty">这里没有奖励</p>'),
-      actions:`${ops}${bulk}`, coins, footer, warning:warnLine, details, count:cur.cards.length + (cur.coins ? 1 : 0),
+      actions:`${ops}${bulk}`, coins, footer, warning:'', details, count:cur.cards.length + (coins ? 1 : 0),
       className:`reward-v14${taken.size || lost.size ? ' no-anim' : ''}`,
     });
+    const body = overviewMode ? chestRewardFrameHTML({ overview:overviewHTML(), picker, label:cur.isClass ? '职业补给' : K.name }) : picker;
     const currentBody = UI.el?.ovBody;
-    if (currentBody?.querySelector('.reward-v14')) {
+    if (currentBody?.querySelector('.reward-v14') && !UI.el?.overlay?.hidden) {
       const scrollTop = currentBody.querySelector('.loot-scroll')?.scrollTop || 0;
       const hadFocus = currentBody.contains(document.activeElement);
       currentBody.innerHTML = SDT.Icons.rich(body);
@@ -495,7 +590,9 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
     const surface = UI.el?.ovBody?.querySelector('.reward-v14');
     const isLiveReward = () => isCurrentRewardRun() && cur === renderedBox && G.state === 'modal' &&
       !!surface && UI.el?.ovBody?.querySelector('.reward-v14') === surface && !UI.el?.overlay?.hidden;
+    UI.act('chestClosePicker', () => { if (overviewMode && isLiveReward()) closePicker(); });
     UI.act('chestTake', () => { if (isLiveReward() && !isPick && !cur.leaveConfirm) takeAll(); });
+    UI.act('chestReturn', () => { if (isLiveReward()) return returnToMap(); });
     UI.act('chestCoins', () => {
       if (!isLiveReward() || cur.leaveConfirm || cur.coinsReceived) return;
       collectCoinsOnce();
@@ -514,7 +611,7 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
       const source = UI.el.ovBody.querySelector(`[data-act="chestSelect"][data-i="${i}"]`);
       UI.showCardZoom?.(card, { from:source, returnFocus:source, hideNote:true, presentation:'expedition',
-        footer:available ? `<button class="ov-btn ok" data-act="${fits ? isChoice(i) ? 'chestPick' : 'chestTake1' : 'chestOpenBag'}" data-i="${i}">${fits ? '收下' : '整理背包'}</button>` : '' });
+        footer:available ? fits ? `<button class="ov-btn ok" data-act="${isChoice(i) ? 'chestPick' : 'chestTake1'}" data-i="${i}">收下</button>` : '<span class="reward-unit-state needs-room">当前放不下</span>' : '' });
       rewardZoom = document.getElementById('cardZoom');
     });
     UI.act('chestTake1', (d) => {
@@ -529,7 +626,8 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
         cur.taken.add(i);
         persistReward();
         cur.notice = `「${card.name}」已入本次远征背包`;
-        render();
+        if (overviewMode && cur.cards.every((_, j) => taken.has(j) || lost.has(j))) closePicker();
+        else render();
       } else { cur.notice = `「${card.name}」当前放不下，整理背包后可重试`; render(true); }
     });
     UI.act('chestSkip', () => {
@@ -538,18 +636,19 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
         cur.leaveConfirm = true;
         cur.notice = '';
         render();
-      } else { collectCoinsOnce(); next(); }
+      } else { if (!overviewMode) collectCoinsOnce(); next(); }
     });
     UI.act('chestStay', () => { if (isLiveReward()) { cur.leaveConfirm = false; render(); } });
     UI.act('chestLeave', () => {
       if (!isLiveReward() || !cur.leaveConfirm) return;
       cur.cards.forEach((_, i) => { if (!cur.taken.has(i)) cur.lost.add(i); });
-      collectCoinsOnce();
+      if (!overviewMode) collectCoinsOnce();
       UI.log('（未收取的卡牌已永久放弃，无法找回）', 'dim');
       cur.leaveConfirm = false;
       cur.notice = '剩余卡牌已永久放弃';
       persistReward();
-      render();
+      if (overviewMode) closePicker();
+      else render();
     });
     UI.act('chestContinue', () => {
       if (!isLiveReward() || cur.cards.some((_, i) => !cur.taken.has(i) && !cur.lost.has(i))) return;
@@ -571,7 +670,8 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
       cur.cards.forEach((_, other) => { if (isChoice(other) && other !== i) cur.lost.add(other); });
       persistReward();
       cur.notice = `「${card.name}」已入本次远征背包`;
-      render();
+      if (overviewMode && cur.cards.every((_, j) => taken.has(j) || lost.has(j))) closePicker();
+      else render();
     });
     UI.refresh(G);
   }
@@ -615,18 +715,19 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
       if (grantRewardCard(card)) taken.add(i);
       else grantFailed = true;
     });
-    collectCoinsOnce();
+    if (!overviewMode) collectCoinsOnce();
     if (!cur.cards.length && !cur.coins) UI.log('（空的——早被别的拾荒者搬空了……）', 'dim');
     const pending = cur.cards.filter((_, i) => !taken.has(i) && !cur.lost.has(i)).length;
     cur.notice = `已入背包 ${taken.size} 张${pending ? `，${pending} 张放不下，整理背包后可重试` : ''}`;
     persistReward();
-    render(grantFailed);
+    if (overviewMode && !pending) closePicker();
+    else render(grantFailed);
   }
 
-  function collectCoinsOnce() {
-    if (!cur || cur.coinsReceived) return;
-    if (cur.coins) G.gainCoins(cur.coins);
-    cur.coinsReceived = true;
+  function collectCoinsOnce(box = cur) {
+    if (!box || box.coinsReceived) return;
+    if (box.coins) G.gainCoins(box.coins);
+    box.coinsReceived = true;
     persistReward();
   }
 
@@ -656,15 +757,18 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
   }
   function serialize(game) {
     if (G !== game || !isCurrentRewardRun()) return null;
-    return serializeChestReward(game, queue, idx, cur, saveContext);
+    return serializeChestReward(game, queue, idx, cur, saveContext, { screen:rewardScreen });
   }
-  function restore(game, saved, done) {
+  function restore(game, saved, done, opts = {}) {
     const value = restoreChestReward(game, saved);
     if (!value) return false;
     clearNoticeContext();
     closeRewardZoom();
     cancelPresentation(); searchSeq++;
-    G = game; queue = value.queue; idx = value.index; cur = value.current;
+    G = game; parked = false; queue = value.queue; idx = value.index; cur = value.current;
+    overviewMode = !(cur.source || cur.title);
+    rewardScreen = overviewMode ? value.screen : 'cards';
+    beforeMapReturn = opts.beforeMapReturn || null;
     saveContext = value.context; onDone = done; G.state = 'modal';
     saveBinding = bindSave(game);
     renderCurrentStage(); persistReward(); return true;

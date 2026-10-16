@@ -21,6 +21,7 @@
 - `BattleSession` / `window.SDT.Battle.start(game, enemies, options)`：开始战斗；后者是兼容门面。
 - `window.SDT.Battle.getSnapshot()`：取得战斗只读快照。
 - `window.SDT.Battle.commands`：统一战斗命令，包括出牌、注能、结束回合、逃跑和墓地操作。
+- 出牌视图通过 `commands.getCardPlayAvailability(uid, side?, forceDirect?)` 只读查询当前可用性，通过 `submitCardPlay` 接收拒绝、等待输入或带回执的入队结果；原 `playCard` 返回语义保留。入队回执按场次、UID和动作序号区分，源牌扣费并移出手牌后即确认提交，后续效果取消不改写该事实。类型见 `battle.play-submission.types.d.ts`，细节见[提交合同](evidence/2026-10-16-WF-battle-play-feedback-1016/core-contract.md)。
 - `configureGameRuntime()`：由启动模块注入界面跳转，避免 `game.session` 反向依赖页面模块。
 - `game.session.browser.js`：只由 `game.boot.js` 调用 `createGameCanvas(document)`；canvas、ctx 和日志端口注入 session kernel。kernel 可在无 DOM 的 Node 环境导入，尚保留 MAP/FX 的兼容门面依赖。
 - `configureCardNavigation()`：由基地模块注入卡牌页面关闭与刷新行为。
@@ -34,6 +35,8 @@
 - `game.cardslib.js`：卡牌库轻门面；首次进入照相馆或制作坊时动态加载 `game.cardslib.page.js`。页面及其制作坊、照片道具、性能探针、图片预热和共享模块保持在门面之后，避免静态依赖回到首屏；制作坊写开关保持关闭。`ui/ui.js` 组合 `overlay.js`、`cinematics.js`、`hud.js`。
 - `game.hub.preparation.js`：基地整备控制器，通过数据、视图、导航和错误处理端口装配 `preparation.commands.js` / `preparation.view.js`；不读取 `SDT`、`UI`、`document` 或 `window`。页面 dispose 会阻止过期异步返回继续更新 UI。
 - `game.run.data.js`：场景、事件与职业叙事授权数据；`game.run.shop.js`：商店进货、购买和出售；`game.run.js`：移动、格子、事件、祭坛与撤离流程。
+- `shop-browse-state.js` 只捕获商店背包往返的DOM浏览位置、详情规则展开与焦点动作标识；控制器在同会话和新页面身份仍有效时恢复，不写入对局状态或存档。
+- `battle/view/battle.scenery.js` 按本场 token 固定场景配置。当前普通战与首脑战统一使用 `platform-minimal-1016` 的远景、透明站台地面与透明前景；`game.run.data.js` 预载同一组三图。分层模式按完整画幅叠放，人物站位与战斗动作仍由原视图和动画层持有；本轮接入及待统一验收范围见[场景记录](evidence/2026-10-16-WF-battle-platform-minimal/README.md)。
 - `game.hub.js` 是基地轻门面，选档后首次进入才动态加载 `game.hub.runtime.js`；后者装配出征整备、页签与中立桥；`game.bag.js` 装配拖拽、战后结算与背包中立桥。基地与照相馆的待开页请求通过 `ui/page-entry-cancellation.js` 互斥，返回标题、选档或更新导航会取消旧请求；加载失败可重试，档案状态不复制。基地样式仍静态加载。对应切片以 `game.hub.*.js`、`game.bag.*.js` 命名；切片通过桥互调，contracts 检查循环依赖。
 - `run/game.run.altar.js` 保留祭坛、火堆、撤离恢复的同步入口，并把 `openClassChoice()` 转交给选角轻门面 `run/game.run.class-choice.js`；人物与卡池页面 `game.run.class-choice.page.js` 及人物翻页动效仅在实际请求选角时动态装载，无标题/基地 idle 预取。入口 Promise 在页面就绪后完成；出征切幕等待该结果。`loadGame()` 仍同步返回恢复/持久化结果，未选角存档另附 `classChoiceEntry` 供选档 await，Promise 不写入游戏或存档状态。选角下载与其他待开页互斥；取消、换档/换局和来源宿主变化废弃旧结果，失败保留 pending run 与可重试入口。
 - 基地 `home.scene.js` 与 Pixi 在首次打开基地场景时动态加载；请求序号和挂载节点检查阻止已关闭页面的加载结果继续挂载。稳定卡牌数据打为 `game-card-catalog` 缓存分块，仍是同步启动依赖，计入首屏脚本预算。预算值由 `scripts/perf-budget.cjs` 维护，实际产物大小与构建状态见对应任务证据。
@@ -58,6 +61,10 @@
 - `battle.resolution.js`：完整单卡结算，显式接收当前状态查询与伤害、抽牌、回复、护甲、延迟效果等命名端口；引擎负责适配现有运行时。模块本身不读取全局状态，不直接修改运行时字段。
 - `battle.snapshot.js`：按输入值构造视图快照；引擎负责收集输入和维护签名缓存。保留原有快照字段和复制/冻结层级，不宣称任意嵌套对象都已深冻结。
 - `battle.view.js`（渲染壳）+ `battle.overlays/layers/vfx/anim/aim/hover.js` 六片：只读取 `getSnapshot()` 快照、渲染 DOM、派发 `commands` 并向核心注册渲染器；viewApi 反取已改 core 具名直引。
+- `battle.layers.js` 在当前手牌差分前捕获卡面/规则区焦点及阅读滚动位置，更新后按原牌组、存活近邻交接；空栏回退分栏钮或选项，不自动聚焦结束回合。正常舞台差分不重复摘挂已连接的同一手牌层，跨场次或选择面板不继承这份局部焦点。
+- `battle/view/battle.discover-view.js` 为战斗发现的纯呈现切片，接收候选及卡面渲染器，专属样式只作用于发现决策；候选生成和选择效果继续由发现流程持有。`battle.aim.js` 的鼠标拎牌、停靠、目标选择和归位共用一条动画时钟，Enter确认复用当前鼠标目标会话；提交前解除active aim，再按核心回执管理待提交姿态。手牌层在采样出牌位置后用原始play事件释放姿态，同帧打出又回手时仍释放；本地源码依据与网页适配见[参考记录](evidence/2026-10-16-WF-battle-return-1016/drag-reference.md)。
+- `battle/view/battle.discover-input.js` 维护发现页的UI输入门：同轮语义快照复用展开期限，每次页面绑定分配标识，提交前核验最新快照并锁定本轮；不抽牌、不改选择效果或存档。页面标识通过候选data属性传入普通UI动作委托。
+- `ui/term-tips.js` 维护挂在body的公共解释单例：`data-term`用于既有词条，`data-ui-tip`与title/text/note属性提供动态控件说明，动态说明不拦截控件点击。战斗职业技能和能量沿此入口；已禁用技能通过外层锚点接受说明聚焦，发动条件仍在原按钮。
 - `renderer.js`：Canvas 地图编排与视觉特效；`renderer.primitives.js` 提供纯绘图工具；`render-scheduler.js` 决定何时绘制。
 - `audio/sound.js`：音频门面，装配 `sound.music.catalog.js`、`sound.music.player.js` 与 `sound.scape.js`。原创配乐按场景加载和切换；短音效优先采样，缺位或未解码时回退程序化合成。具体曲目与混音行为见[音频说明](audio-system.md)。
 - `motion.js`：基于 Motion Mini 的 DOM 微动效门面，并统一处理减少动态效果偏好。

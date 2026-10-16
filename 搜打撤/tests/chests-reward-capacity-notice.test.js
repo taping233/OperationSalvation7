@@ -1,3 +1,4 @@
+import { continueChestRewards } from './helpers/chest-actions.js';
 // Real reward controller, grantEventCard, bag capacity/stacking and JSON storage.
 // Backpack presentation is a port; removing wood below constructs the discard result.
 import { readFileSync } from 'node:fs';
@@ -25,12 +26,13 @@ const cards = [
 const acts = {};
 let Chests, Bag, scenes;
 const fill = n => Array.from({ length:n }, (_,i)=>({ uid:`fill-${i}`, card:{ id:`fill-${i}`, name:`已有卡${i}`, type:'法术', rarity:'古朴' } }));
-const notice = () => H.UI.el.ovBody.querySelector('.reward-notice')?.textContent || '';
+const visibleNotice = {"「致命穿刺」当前放不下，整理背包后可重试":"「致命穿刺」当前放不下","已入背包 1 张，2 张放不下，整理背包后可重试":"已入背包 1 张，2 张放不下","「黑市装备」已入本次远征背包":"「黑市装备」已入背包"};
+const notice = () => H.UI.el.ovBody.querySelector('.reward-capacity-note, .reward-final')?.textContent || '';
 const count = id => H.game.ownedCards.filter(owned=>owned.card.id===id).length;
 const payload = () => ({ seed:H.game.seed, layerIdx:H.game.layerIdx, trackPos:H.game.trackPos,
   ownedCards:H.game.ownedCards, inventory:H.game.inventory, usedPocket:[], chestReward:Chests.serialize(H.game) });
 function frozen({ kind='small', rewards=cards, taken=[], message='', source }={}) {
-  return { version:1, seed:7, layerIdx:0, trackPos:1, queue:[{ kind }], index:1, context:{ onCell:true },
+  return { version:1, screen:'cards', seed:7, layerIdx:0, trackPos:1, queue:[{ kind }], index:1, context:{ onCell:true },
     current:{ kind, cards:rewards, coins:0, coinsReceived:false, taken, lost:[], rewardStage:'cards', notice:message, source } };
 }
 function open(options) { expect(Chests.restore(H.game,frozen(options),()=>{})).toBe(true); }
@@ -80,7 +82,7 @@ describe('整理背包返回时奖励容量 notice 与真实容量同步', () =>
     else open();
     acts.chestTake();
     expect(Bag.usedSlots()).toBe(18);
-    expect(notice()).toBe('已入背包 2 张，1 张放不下，整理背包后可重试');
+    expect(notice()).toBe('已入背包 2 张，1 张放不下');
     const rng=Random.snapshot(), grants=H.game.grantCard.mock.calls.length;
     const current=JSON.stringify(Chests.serialize(H.game)), saves=H.game.persistSave.mock.calls.length;
     organizeWood();
@@ -98,10 +100,10 @@ describe('整理背包返回时奖励容量 notice 与真实容量同步', () =>
 
   it('仅腾出部分容量，刷新放不下数量但不把仍待领取的卡计入已领取', () => {
     H.game.ownedCards=fill(16); open(); acts.chestTake();
-    expect(notice()).toBe('已入背包 1 张，2 张放不下，整理背包后可重试');
+    expect(notice()).toBe('已入背包 1 张，2 张放不下');
     organizeWood();
-    expect(notice()).toBe('已入背包 1 张，1 张放不下，整理背包后可重试');
-    expect(H.UI.el.ovBody.querySelector('.chest-warn')?.textContent).toContain('预计可收 1 张、1 张放不下');
+    expect(notice()).toBe('预计可收 1 张 · 1 张待整理，奖励保留。');
+    expect(H.UI.el.ovBody.querySelector('.reward-capacity-note')?.textContent).toContain('1 张待整理');
     expect(Chests.serialize(H.game).current.taken).toEqual([0]);
     expect(count('spell')).toBe(0); expect(count('pierce')).toBe(0);
   });
@@ -109,7 +111,7 @@ describe('整理背包返回时奖励容量 notice 与真实容量同步', () =>
   it('未腾空间返回时仍保留容量失败，不因重绘清空', () => {
     open(); acts.chestTake(); const message=notice();
     acts.chestOpenBag(); Chests.resume();
-    expect(notice()).toBe(message); expect(Bag.usedSlots()).toBe(18);
+    expect(notice()).toBe(visibleNotice[message] || message); expect(Bag.usedSlots()).toBe(18);
   });
 
   it.each(['small','medium'])('%s实际grant拒收优先于乐观容量端口，普通重绘/无变化返回不能擦除', kind => {
@@ -117,9 +119,9 @@ describe('整理背包返回时奖励容量 notice 与真实容量同步', () =>
     expect(H.game.canReceiveCard(cards[2])).toBe(true);
     acts[kind==='medium'?'chestPick':'chestTake1']({ i:2 });
     const message='「致命穿刺」当前放不下，整理背包后可重试';
-    expect(notice()).toBe(message);
-    acts.chestCoins(); expect(notice()).toBe(message);
-    acts.chestOpenBag(); Chests.resume(); expect(notice()).toBe(message);
+    expect(notice()).toBe(visibleNotice[message] || message);
+    acts.chestCoins(); expect(notice()).toBe(visibleNotice[message] || message);
+    acts.chestOpenBag(); Chests.resume(); expect(notice()).toBe(visibleNotice[message] || message);
     expect(count('pierce')).toBe(0);
   });
 
@@ -128,12 +130,12 @@ describe('整理背包返回时奖励容量 notice 与真实容量同步', () =>
     H.game.grantCard.mockImplementation((card,opts)=>card.id===cards[0].id&&scenes.grantEventCard(card,opts));
     acts.chestTake();
     const message='已入背包 1 张，2 张放不下，整理背包后可重试';
-    expect(notice()).toBe(message); expect(Bag.usedSlots()).toBe(17);
+    expect(notice()).toBe(visibleNotice[message] || message); expect(Bag.usedSlots()).toBe(17);
     expect(H.game.canReceiveCard(cards[1])).toBe(true);
-    acts.chestOpenBag(); Chests.resume(); expect(notice()).toBe(message);
+    acts.chestOpenBag(); Chests.resume(); expect(notice()).toBe(visibleNotice[message] || message);
     organizeWood(); expect(notice()).toBe('已入背包 1 张'); expect(Bag.usedSlots()).toBe(16);
     H.UI.el.ovBody.querySelector('[data-act="chestTake"]').click();
-    expect(notice()).toBe(message);
+    expect(notice()).toBe(visibleNotice[message] || message);
     expect(Chests.serialize(H.game).current.taken).toEqual([0]);
   });
 
@@ -141,7 +143,7 @@ describe('整理背包返回时奖励容量 notice 与真实容量同步', () =>
     open(); H.game.grantCard.mockReturnValue(false); acts.chestTake();
     expect(notice()).toContain('放不下');
     open({ message:'已入背包 0 张，3 张放不下，整理背包后可重试' });
-    expect(notice()).toBe('已入背包 0 张，1 张放不下，整理背包后可重试');
+    expect(notice()).toBe('预计可收 2 张 · 1 张待整理，奖励保留。');
     open({ message:'存档失败，请重试' }); expect(notice()).toBe('存档失败，请重试');
     expect(H.game.grantCard).toHaveBeenCalledTimes(3);
   });
@@ -161,12 +163,12 @@ describe('整理背包返回时奖励容量 notice 与真实容量同步', () =>
       SDT.Cards={ ...oldCards, RARITIES:['古朴','稀有','史诗','传说'], randomDropCard:()=>cards[0] };
       SDT.MAP.chestKinds.small={ name:'小宝箱', cards:1 };
       open({ rewards:[cards[0]] }); H.game.grantCard.mockReturnValue(false); acts.chestTake();
-      expect(notice()).toBe('已入背包 0 张，1 张放不下，整理背包后可重试');
+      expect(notice()).toBe('已入背包 0 张，1 张放不下');
       Chests.open(H.game,[{kind:'small'},{kind:'small'}],()=>{},{onCell:true});
-      acts.chestClaim(); acts.chestReveal(); expect(notice()).toBe('');
+      acts.chestNext(); acts.chestReveal(); expect(notice()).toBe('');
       acts.chestTake(); expect(notice()).toContain('1 张放不下');
-      acts.chestSkip(); acts.chestLeave(); acts.chestContinue();
-      acts.chestClaim(); acts.chestReveal();
+      acts.chestSkip(); acts.chestLeave(); continueChestRewards(acts);
+      acts.chestNext(); acts.chestReveal();
       expect(notice()).toBe(''); expect(H.UI.el.ovBody.querySelector('.chest-warn')).toBeNull();
     } finally { SDT.Base=oldBase; SDT.Cards=oldCards; SDT.MAP.chestKinds.small=oldKind; }
   });
@@ -174,9 +176,9 @@ describe('整理背包返回时奖励容量 notice 与真实容量同步', () =>
   it.each(['small','medium'])('%s单卡失败：只清除现在确实可收的对应待领卡提示', kind => {
     H.game.ownedCards=fill(17); open({ kind });
     acts[kind==='medium'?'chestPick':'chestTake1']({ i:2 });
-    expect(notice()).toBe('「致命穿刺」当前放不下，整理背包后可重试');
+    expect(notice()).toBe('「致命穿刺」当前放不下');
     organizeWood();
-    expect(notice()).toBe(''); expect(count('pierce')).toBe(0);
+    expect(notice()).toBe(kind === 'small' ? '预计可收 1 张 · 2 张待整理，奖励保留。' : ''); expect(count('pierce')).toBe(0);
     expect(H.UI.el.ovBody.querySelector(`[data-act="${kind==='medium'?'chestPick':'chestTake1'}"][data-i="2"]`)).toBeTruthy();
   });
 
@@ -187,7 +189,7 @@ describe('整理背包返回时奖励容量 notice 与真实容量同步', () =>
     const message=notice(); expect(message).toContain('「致命穿刺」当前放不下');
     expect(H.game.canReceiveCard(resource)).toBe(true);
     acts.chestOpenBag(); Chests.resume();
-    expect(notice()).toBe(message); expect(count('pierce')).toBe(0);
+    expect(notice()).toBe(visibleNotice[message] || message); expect(count('pierce')).toBe(0);
   });
 
   it('已满同名三张堆实际拒收时，不能因旧预检把同名当免费格而清掉失败', () => {
@@ -195,16 +197,16 @@ describe('整理背包返回时奖励容量 notice 与真实容量同步', () =>
     open({ rewards:[cards[0],cards[2]] }); H.UI.el.ovBody.querySelector('[data-act="chestTake"]').click();
     expect(H.game.canReceiveCard(cards[2])).toBe(false);
     expect(Bag.usedSlots()).toBe(18);
-    expect(H.UI.el.ovBody.querySelector('[data-act="chestOpenBag"][data-i="1"]')).toBeTruthy();
-    expect(H.UI.el.ovBody.querySelector('.chest-warn')?.textContent).toContain('0 张、1 张放不下');
-    expect(notice()).toBe('已入背包 1 张，1 张放不下，整理背包后可重试');
+    expect(H.UI.el.ovBody.querySelector('[data-act="chestOpenBag"]')).toBeTruthy();
+    expect(H.UI.el.ovBody.querySelector('.reward-capacity-note')?.textContent).toContain('1 张放不下');
+    expect(notice()).toBe('已入背包 1 张，1 张放不下');
     acts.chestOpenBag(); Chests.resume();
-    expect(notice()).toBe('已入背包 1 张，1 张放不下，整理背包后可重试');
+    expect(notice()).toBe('已入背包 1 张，1 张放不下');
     expect(count('pierce')).toBe(3);
   });
 
   it.each(['「黑市装备」已入本次远征背包','保存失败，请重试','已入背包 2 张，存档放不下，请检查存储空间'])('保留非容量状态：%s', message => {
-    open({ message }); organizeWood(); expect(notice()).toBe(message);
+    open({ message }); organizeWood(); expect(notice()).toBe(visibleNotice[message] || message);
     expect(Chests.serialize(H.game).current.notice).toBe(message);
   });
 

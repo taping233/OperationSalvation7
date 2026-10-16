@@ -16,7 +16,9 @@ import { hashSeed } from '../core/random-core.js';
 import { createShopController } from './game.run.shop.js';
 import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
+import { bagSlots } from '../hub/game.bag.bridge.js';
 import { nodeActionBinding } from './node-reward-state.js';
+import { claimNodeRestore, finishNodeRestore, nodeRestoreAt } from './node-restore-state.js';
 import { selectEncounterSpec } from './encounter-selector.js';
 import { turboMs } from '../core/turbo.js';
 import { reduceMotion } from '../core/motion.js';
@@ -421,9 +423,9 @@ export function resumeChestsOnCell(saved) {
 }
 
 // 固定奖励复用宝箱的逐张领取与存档恢复，不重新掷卡，也不因容量不足丢失。
-export function openFixedRewardsOnCell(cards, source) {
+export function openFixedRewardsOnCell(cards, source, { consumeNode = false } = {}) {
   const saved = { version:1, seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos,
-    queue:[{ kind:'small' }], index:1, context:{ onCell:true },
+    queue:[{ kind:'small' }], index:1, context:{ onCell:true, consumeNode },
     current:{ kind:'small', cards:cards.filter(Boolean), coins:0, coinsReceived:false,
       taken:[], lost:[], source, title:'领取奖励' } };
   setBagReturnHook(null);
@@ -471,7 +473,9 @@ export const FIRE_RESTORABLE = (card) => card.type !== '道具' && card.type !==
 // opts = { title, icon, tone, sub }：2026-09-19 留言 #21——复原页不再一律伪装成
 // 「营火休整」（修鞋铺等事件里复原时跳成火堆页观感）；不传 opts 保持火堆口径
 export function openPocketRestore(picks, done, opts = {}, transaction = null) {
-  const txn = transaction || { left: picks, finished: false, current: captureBattleContext(game) };
+  const record = opts.restoreRecord;
+  if (record && nodeRestoreAt(game) !== record) return false;
+  const txn = transaction || { left: record?.left ?? picks, finished: false, current: captureBattleContext(game) };
   if (txn.finished || !txn.current()) return;
   game.state = 'modal';
   // 背包返回恢复本页并保留剩余复原次数（09-30 深审 WORLD-002）：关闭背包不再兜底回
@@ -486,7 +490,7 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
     const focusedName = focused?.dataset.name;
     const focusedIndex = oldButtons.indexOf(focused);
     const scrollTop = surface?.querySelector('.pocket-restore-content')?.scrollTop ?? 0;
-    const left = txn.left;
+    const left = record?.left ?? txn.left;
     const list = restorable();
     const blockedN = game.usedPocket.length - list.length;
     const title = opts.title || '营火休整';
@@ -507,7 +511,7 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
         <p class="ov-note">${opts.sub != null ? opts.sub : '<span class="eps-fate">复原=撤离全额带回，否则每张仅 1/3 幸存</span>'}${blockedN ? ` · 道具/装备共 ${blockedN} 张不可复原` : ''}</p>
       </div>
       <div class="battle-decision-content pocket-restore-content"><div class="bt-hand fire-restore-hand">${cardsHTML}</div></div>
-      <footer class="battle-decision-actions"><div class="ov-btns"><button type="button" class="ov-btn ok fire-done-btn" data-act="fireDone" aria-label="继续旅程，结束复原并返回地图"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button></div></footer>
+      <footer class="battle-decision-actions"><div class="ov-btns">${record ? `<button type="button" class="ov-btn ok" data-act="restoreReturn">返回地图 · 保留 ${left} 次复原</button><button type="button" class="ov-btn" data-act="restoreBag">整理背包</button><button type="button" class="ov-btn fire-done-btn" data-act="fireDone">结束复原${left ? ' · 放弃剩余次数' : ''}</button>` : '<button type="button" class="ov-btn ok fire-done-btn" data-act="fireDone" aria-label="继续旅程，结束复原并返回地图"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>'}</div></footer>
       </section>`, 'discover');
     surface = UI.el?.ovBody?.firstElementChild;
     surface?.querySelectorAll('.pocket-restore-art [tabindex]').forEach(el => el.removeAttribute('tabindex'));
@@ -521,9 +525,11 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
     const active = nodeActionBinding(game, UI, 'fireDone');
     const renderedSurface = surface;
     const live = () => active() && txn.current() && !txn.finished &&
+      (!record || game.nodeRewards?.[`${game.layerIdx},${game.trackPos}`] === record) &&
       (!renderedSurface || UI.el?.ovBody?.firstElementChild === renderedSurface);
     const finish = () => {
       if (!live()) return;
+      if (record && !finishNodeRestore(game, record)) return;
       txn.finished = true;
       setBagReturnHook(null);
       UI.hideOverlay();
@@ -532,21 +538,38 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
     UI.act('restoreOne', (d) => {
       if (!live()) return;
       const p = game.usedPocket.find(x => x.card.name === d.name && FIRE_RESTORABLE(x.card));
-      if (!p || txn.left <= 0) return;
+      if (!p || (record?.left ?? txn.left) <= 0) return;
       // 2026-09-06 #18：背包满时不能复原
       const card = p.card;
       if (!game.canReceiveCard(card)) { UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}），无法复原`, 'warn'); SDT.Sound.sfx('deny'); return; }
-      p.count--;
-      if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
-      game.ownedCards.push({ uid: newUid(), card: { ...card } });
-      txn.left--;
+      if (record) {
+        if (!claimNodeRestore(game, record, { name:d.name, isRestorable:FIRE_RESTORABLE,
+          canReceive:c => game.canReceiveCard(c), newUid })) return;
+        saveGame();
+      } else {
+        p.count--;
+        if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
+        game.ownedCards.push({ uid: newUid(), card: { ...card } });
+        txn.left--;
+      }
       SDT.Sound.sfx('cardRestore');
       UI.log(`[[icon:sparkles]] 【<b>${esc(card.name)}</b>】已复原，回到背包`, 'ok');
-      if (txn.left <= 0) finish(); else render();
+      if ((record?.left ?? txn.left) <= 0) finish(); else render();
     });
     UI.act('fireDone', finish);
+    if (record) {
+      UI.act('restoreReturn', () => {
+        if (!live()) return;
+        txn.finished = true;
+        setBagReturnHook(null);
+        UI.hideOverlay();
+        finishInstant();
+      });
+      UI.act('restoreBag', () => { if (live()) bagSlots.showBackpack(); });
+    }
   };
   render();
+  return true;
 }
 
 // ---------- 角色选择（开局从全部角色中自由选 1，与 5 张初始攻击一起获得 1 张该角色随机卡） ----------

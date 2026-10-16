@@ -1,5 +1,5 @@
 import { reduceMotion } from '../core/motion.js';
-import { createCityCut, cityCutDuration } from './camp-entry.js';
+import { createCityCut, cityCutDuration, prepareCityCut } from './camp-entry.js';
 import '../../css/page-loading.css';
 import { waitPageVisual } from './page-visual-ready.js';
 
@@ -41,6 +41,7 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
     if (cityCut) cut = createCityCut({ archive: '馆藏档案', title,
       subtitle: 'PHOTO STUDIO / 冬日影像档案', edition: 'WINTER RECORDS / VII',
       destination: 'PHOTO STUDIO', watermark: 'PHOTO', scene: 'photo' });
+    if (cut) { cut.classList.add('page-cut-waiting'); cover.append(cut); }
   } else {
     cover.innerHTML = '<div class="page-loading-copy"><small>WINTER ARCHIVE</small><h2></h2><p></p><div class="page-loading-track" aria-hidden="true"><i></i><i></i><i></i></div></div>';
     cover.querySelector('h2').textContent = title;
@@ -60,6 +61,7 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
   const started = performance.now();
   const operation = { promise: null };
   pending = operation;
+  const cutController = new AbortController();
   let released = false;
   const releaseInput = () => {
     if (released) return;
@@ -69,6 +71,7 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
     else if (previousBusy !== undefined) busyHost?.setAttribute('aria-busy', previousBusy);
   };
   const cleanup = () => {
+    cutController.abort();
     cover.remove();
     releaseInput();
     if (pending === operation) pending = null;
@@ -79,15 +82,20 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
   signal?.addEventListener('abort', onAbort, { once: true });
   operation.promise = (async () => {
     try {
+      // Artwork loading and destination preparation overlap under the painted
+      // curtain; neither can reveal the page before the other is ready.
+      const curtainReady = cut ? prepareCityCut(cut, { signal: cutController.signal }) : Promise.resolve(true);
       await nextFrame(signal);
       await nextFrame(signal);
       if (signal?.aborted) return false;
       const prepared = performance.now();
       const result = await Promise.race([Promise.resolve().then(open), cancelled]);
       if (signal?.aborted) return false;
+      if (result === false) return false;
       const mounted = performance.now();
       if (result !== false) await Promise.race([
-        waitPageVisual(document.getElementById('ovBody'), { signal, background: window.SDT?.UI?._pageBgReady }),
+        Promise.all([curtainReady,
+          waitPageVisual(document.getElementById('ovBody'), { signal, background: window.SDT?.UI?._pageBgReady })]),
         cancelled,
       ]);
       if (signal?.aborted) return false;
@@ -100,8 +108,9 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
         }));
       }
       if (!reduceMotion()) {
-        // 准备期间保留来源画面；就绪后才挂上切幕，避免暂停首帧先遮成黑屏。
-        if (cut && result !== false) cover.append(cut);
+        // The ready curtain has already painted; reveal only after the destination
+        // and its first-screen resources have settled underneath it.
+        if (cut && result !== false) cut.classList.remove('page-cut-waiting');
         // Initialize the destination while it is still covered. Starting it after
         // cleanup would hide an already visible page again and look like a refresh.
         if (result !== false && !signal?.aborted) onRevealStart?.();

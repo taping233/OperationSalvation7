@@ -127,7 +127,14 @@ export function bindWarehouse({ ui, base, sound, openCard }) {
     if (item && browser.contains(item) && !item.hidden) select(item.dataset.browserKey);
   });
   browser.querySelector('.card-browser-track').addEventListener('scroll', event => { if (currentWarehouse()) state.scrollTop = event.target.scrollTop; }, { passive:true });
-  browser.addEventListener('load', () => { if (currentWarehouse()) refreshWarehouseBrowser(browser); }, true);
+  let artRefreshFrame = 0;
+  browser.addEventListener('load', () => {
+    if (!currentWarehouse() || artRefreshFrame) return;
+    artRefreshFrame = requestAnimationFrame(() => {
+      artRefreshFrame = 0;
+      if (currentWarehouse()) refreshWarehouseBrowser(browser);
+    });
+  }, true);
   refreshWarehouseBrowser(browser);
   bindCardNavigation(browser.querySelector('.card-browser-track'), '[data-browser-key]', { activate: false });
   for (const input of root.querySelectorAll('[data-warehouse-filter]')) input.addEventListener(input.tagName === 'SELECT' ? 'change' : 'input', () => { if (!currentWarehouse()) return; state[input.dataset.warehouseFilter] = input.value; update(true); });

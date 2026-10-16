@@ -226,7 +226,7 @@ it('奖励② 传说+装备：满包时两张保留，整理后领取一次并�
   expect(game.altarRewardPending).toBe(false);   // 固定奖励已交由持久化领奖页接管
   acts.chestTake();
   expect(window.SDT.Chests.serialize(game).current).toMatchObject({ taken:[], lost:[] });
-  expect(document.body.textContent).toContain('放不下的保留');
+  expect(document.body.textContent).toContain('2 张放不下');
   st.bagCapN = 10;
   window.SDT.Chests.resume();
   const take = acts.chestTake;

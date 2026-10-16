@@ -103,6 +103,40 @@ describe('前台未完成图片让路', () => {
 });
 
 describe('后台预取批次调度', () => {
+  it.each(['hidden', 'moving', 'input'])('%s期间让出后台批次，恢复后继续原清单', async reason => {
+    const hidden = vi.spyOn(document, 'hidden', 'get').mockReturnValue(reason === 'hidden');
+    document.body.dataset.state = reason === 'moving' ? 'moving' : 'idle';
+    const input = vi.fn(() => reason === 'input');
+    Object.defineProperty(navigator, 'scheduling', { configurable: true, value: { isInputPending: input } });
+    try {
+      const done = Art.prefetchBatched(['deferred.webp']);
+      idle.shift()(); expect(requests).toHaveLength(0);
+      hidden.mockReturnValue(false); document.body.dataset.state = 'idle'; input.mockReturnValue(false);
+      vi.advanceTimersByTime(160); idle.shift()(); expect(requests).toHaveLength(1);
+      requests[0].resolve({ ok: true, arrayBuffer: async () => new ArrayBuffer(0) });
+      await flush(); idle.shift()(); await done;
+    } finally { delete navigator.scheduling; delete document.body.dataset.state; }
+  });
+  it('流式耗尽响应后才计入完成，不分配完整ArrayBuffer，失败释放reader并可重试', async () => {
+    const read = vi.fn().mockResolvedValueOnce({ done: false, value: new Uint8Array(4) }).mockResolvedValueOnce({ done: true });
+    const releaseLock = vi.fn(), arrayBuffer = vi.fn(), progress = vi.fn();
+    const done = Art.prefetchBatched(['stream.webp'], progress);
+    idle.shift()();
+    requests[0].resolve({ ok: true, body: { getReader: () => ({ read, releaseLock }) }, arrayBuffer });
+    await flush(); idle.shift()(); await done;
+    expect(read).toHaveBeenCalledTimes(2); expect(releaseLock).toHaveBeenCalledTimes(1);
+    expect(arrayBuffer).not.toHaveBeenCalled(); expect(progress.mock.calls.at(-1)).toEqual([1, 1]);
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const failedRead = vi.fn().mockRejectedValue(new Error('disconnected'));
+    const failed = Art.prefetchBatched(['broken-stream.webp']); idle.shift()();
+    requests[1].resolve({ ok: true, body: { getReader: () => ({ read: failedRead, releaseLock }) } });
+    await flush(); idle.shift()(); await failed;
+    expect(releaseLock).toHaveBeenCalledTimes(2);
+    const retry = Art.prefetchBatched(['stream.webp', 'broken-stream.webp']); idle.shift()();
+    expect(requests.map(r => r.url)).toEqual(['stream.webp','broken-stream.webp','broken-stream.webp']);
+    requests[2].resolve({ ok: true, arrayBuffer: async () => new ArrayBuffer(0) });
+    await flush(); idle.shift()(); await retry;
+  });
   it('每批至多4条低优先级fetch，整批完成后才排下一批，不创建解码Image', async () => {
     const image = vi.fn(); vi.stubGlobal('Image', image);
     const progress = vi.fn(), urls = Array.from({ length: 9 }, (_, i) => `asset-${i}.webp`);

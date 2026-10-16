@@ -1,3 +1,4 @@
+import { continueChestRewards } from './helpers/chest-actions.js';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 const card = { id: 'fixture-card', name: '测试补给卡', rarity: '古朴', type: '法术', desc: '测试', cost: 0 };
@@ -84,12 +85,12 @@ describe('宝箱点击链路', () => {
 
     const { SDT: chestFacade } = await import('../game/src/run/chests.js');
     chestFacade.Chests.open(game, [{ kind: 'small' }]);
-    expect(ovBody.querySelector('.chest-offer-page')).not.toBeNull();
+    expect(ovBody.querySelector('.cqo-overview')).not.toBeNull();
     expect(ovBody.querySelector('[data-act="chestSelect"]')).toBeNull();
     vi.advanceTimersByTime(5000);
     expect(ovBody.querySelector('[data-eps-search]')).toBeNull();
     expect(ownedCards).toHaveLength(0);
-    ovBody.querySelector('[data-act="chestClaim"]').click();
+    ovBody.querySelector('[data-act="chestNext"]').click();
     expect(ovBody.querySelector('[data-eps-search]')).not.toBeNull();
     ovBody.querySelector('[data-eps-search]').click();
     expect(ovBody.querySelector('[data-act="chestSelect"]')).not.toBeNull();
@@ -111,10 +112,10 @@ describe('宝箱点击链路', () => {
     expect(close).toHaveBeenCalledWith(true);
     expect(document.getElementById('cardZoom')).toBeNull();
     expect(ownedCards).toHaveLength(1);
-    expect(ovBody.querySelector('.reward-unit.got .reward-card')).not.toBeNull();
+    expect(ovBody.querySelector('.cqo-box-complete')).not.toBeNull();
     expect(ovBody.querySelector('[data-act="chestTake1"]')).toBeNull();
-    expect(ovBody.querySelector('.reward-final').textContent).toContain('1 张已入背包');
-    ovBody.querySelector('[data-act="chestContinue"]').click();
+    expect(ovBody.querySelector('.cqo-notice').textContent).toContain('已收下 1 张');
+    continueChestRewards(acts);
     expect(game.state).toBe('idle');
     expect(overlay.hidden).toBe(true);
     expect(window.SDT.Base.recordPetEggChestResult).toHaveBeenCalledTimes(1);

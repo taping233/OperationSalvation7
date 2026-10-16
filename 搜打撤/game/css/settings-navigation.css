@@ -9,16 +9,12 @@
   --settings-ease: var(--motion-ease-enter,cubic-bezier(.22,1,.36,1));
   --linked-touch-time: var(--home-ui-feedback);
   --linked-touch-ease: var(--home-ui-ease);
-  --settings-wallpaper: url('../assets/reconstruction/wallpaper-wu-1004.webp?v=snow-expanded-1009');
+  --settings-wallpaper: url('../assets/reconstruction/wallpaper-snow-road-1016.webp?v=1016b');
   --settings-wallpaper-position: center;
   width: 100%; height: 100%; padding: 0;
   display: flex; flex-direction: column;
   position: relative; isolation: isolate; overflow: hidden;
   background: #11171f;
-}
-#overlay .pg.settings-page.settings-tabbed[data-settings-wallpaper="ensemble"] {
-  --settings-wallpaper: url('../assets/reconstruction/wallpaper-ensemble-1005.webp?v=ensemble-final-1005');
-  --settings-wallpaper-position: 51% center;
 }
 #overlay .pg.settings-page.settings-tabbed[data-settings-category="general"],
 #overlay .settings-tabbed #settings-tab-general { --settings-tint: var(--home-ui-gold); --settings-category-tint: 204,181,139; }

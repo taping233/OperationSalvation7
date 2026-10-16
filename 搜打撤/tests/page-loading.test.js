@@ -1,7 +1,9 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('../game/src/core/motion.js', () => ({ reduceMotion: vi.fn(() => false) }));
+vi.mock('../game/src/core/map-image-ready.js', () => ({ mapImageReady: vi.fn(async () => true) }));
 import { reduceMotion } from '../game/src/core/motion.js';
+import { mapImageReady } from '../game/src/core/map-image-ready.js';
 import { runPageLoading } from '../game/src/ui/page-loading.js';
 
 describe('shared page loading cover', () => {
@@ -10,6 +12,7 @@ describe('shared page loading cover', () => {
     vi.stubGlobal('requestAnimationFrame', fn => setTimeout(() => fn(performance.now()), 16));
     vi.stubGlobal('cancelAnimationFrame', clearTimeout);
     reduceMotion.mockReturnValue(false);
+    mapImageReady.mockResolvedValue(true);
     document.body.innerHTML = '<main id="viewport"><button>进入</button></main>';
   });
   afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals(); });
@@ -99,7 +102,7 @@ describe('shared page loading cover', () => {
     expect(document.querySelector('.page-loading')).toBeNull();
   });
 
-  it('keeps preparation free of a cut, then reveals once and allows immediate cancellation', async () => {
+  it('paints the prepared cut before mounting, holds until the page is ready, then reveals once', async () => {
     const controller = new AbortController();
     let mount;
     const reveal = vi.fn(() => expect(document.querySelector('.page-loading').classList.contains('leaving')).toBe(false));
@@ -109,11 +112,12 @@ describe('shared page loading cover', () => {
     expect(reveal).not.toHaveBeenCalled();
     expect(document.querySelector('.page-loading--city')).not.toBeNull();
     expect(document.querySelector('.page-loading-copy')).toBeNull();
-    expect(document.querySelector('.camp-entry-cut')).toBeNull();
+    expect(document.querySelector('.camp-entry-cut').classList.contains('page-cut-waiting')).toBe(true);
     mount('ready');
     await vi.advanceTimersByTimeAsync(48);   // 挂载后先过目标首帧视觉就绪，再揭幕一次
     expect(reveal).toHaveBeenCalledOnce();
     expect(document.querySelector('.camp-entry-cut')).not.toBeNull();
+    expect(document.querySelector('.camp-entry-cut').classList.contains('page-cut-waiting')).toBe(false);
     expect(document.querySelector('.page-loading').classList.contains('leaving')).toBe(true);
     await vi.advanceTimersByTimeAsync(800);
     expect(document.querySelector('.page-loading')).not.toBeNull();
@@ -123,7 +127,7 @@ describe('shared page loading cover', () => {
     expect(document.getElementById('viewport').hasAttribute('aria-busy')).toBe(false);
   });
 
-  it('uses the transparent city preparation route when reduced motion disables its cut', async () => {
+  it('uses the static city preparation route when reduced motion disables its cut', async () => {
     reduceMotion.mockReturnValue(true);
     const reveal = vi.fn();
     const pending = runPageLoading({ title: '照相馆', detail: '正在整理馆藏', presentation: 'city-cut',
@@ -134,6 +138,35 @@ describe('shared page loading cover', () => {
     await vi.runAllTimersAsync();
     await expect(pending).resolves.toBe('ready');
     expect(reveal).toHaveBeenCalledOnce();
+    expect(document.querySelector('.page-loading')).toBeNull();
+  });
+
+  it('prepares the page under a waiting cold curtain and aborts before revealing it', async () => {
+    let ready;
+    mapImageReady.mockImplementationOnce(() => new Promise(resolve => { ready = resolve; }));
+    const controller = new AbortController(), open = vi.fn(), reveal=vi.fn();
+    const pending = runPageLoading({ title:'照相馆', detail:'正在准备', presentation:'city-cut', signal:controller.signal, open, onRevealStart:reveal });
+    await vi.advanceTimersByTimeAsync(500);
+    expect(open).toHaveBeenCalledOnce();
+    expect(reveal).not.toHaveBeenCalled();
+    expect(document.querySelector('.camp-entry-cut.page-cut-waiting')).not.toBeNull();
+    controller.abort(); await expect(pending).resolves.toBe(false);
+    ready(true); await Promise.resolve();
+    expect(document.querySelector('.page-loading')).toBeNull();
+    expect(reveal).not.toHaveBeenCalled();
+  });
+
+  it('keeps a failed decorative image on the opaque fallback and still opens the page', async () => {
+    mapImageReady.mockResolvedValue(false);
+    const open = vi.fn(() => {
+      expect(document.querySelector('.camp-entry-cut').dataset.scenery).toBe('fallback');
+      expect(document.querySelector('.camp-entry-scenery img').style.display).toBe('none');
+      return 'ready';
+    });
+    const pending = runPageLoading({title:'照相馆',detail:'正在准备',presentation:'city-cut',open});
+    await vi.runAllTimersAsync();
+    await expect(pending).resolves.toBe('ready');
+    expect(open).toHaveBeenCalledOnce();
     expect(document.querySelector('.page-loading')).toBeNull();
   });
 });

@@ -20,7 +20,9 @@ const other = i => ({ ...ordinary, id:`other-${i}`, name:`别的卡${i}` });
 const copies = (card,n,flags={}) => Array.from({ length:n },(_,i)=>({ uid:`${card.id}-${i}-${JSON.stringify(flags)}`, card, ...flags }));
 const acts = {};
 let Bag, Chests, scenes;
-const snapshot = () => JSON.stringify(H.game);
+// Reopening rewards legitimately refreshes the node checkpoint; projection must
+// leave the bag, gameplay fields and RNG unchanged.
+const snapshot = () => JSON.stringify({ ...H.game, nodeChestRewards:undefined });
 function arrange(ownedCards=[],used=18) {
   H.game.ownedCards=ownedCards;
   H.game.inventory=Array.from({ length:used-Bag.cardStacks(false).length },(_,i)=>({ name:`物资${i}`, count:1 }));
@@ -165,7 +167,7 @@ describe('奖励页使用同一顺序预估，排除领取/放弃且区分原选
     const filtered=rewards.filter((_,i)=>i>1);
     expect(projection(filtered).acceptedIndices).toEqual([0]);expect(projection(filtered).blockedIndices).toEqual([1]);
     const before=snapshot(),rng=Random.snapshot();open({rewards,taken:[0],lost:[1]});
-    expect(H.UI.el.ovBody.querySelector('.chest-warn')?.textContent).toContain('预计可收 1 张、1 张放不下');
+    expect(H.UI.el.ovBody.querySelector('.reward-capacity-note')?.textContent).toContain('预计可收 1 张 · 1 张待整理');
     expect(snapshot()).toBe(before);expect(Random.snapshot()).toEqual(rng);expect(H.game.grantCard).not.toHaveBeenCalled();
     acts.chestTake();expect(H.game.grantCard.mock.calls.map(([card])=>card.id)).toEqual([ordinary.id,other('last').id]);
     expect(Chests.serialize(H.game).current).toMatchObject({taken:[0,2],lost:[1]});
@@ -173,7 +175,7 @@ describe('奖励页使用同一顺序预估，排除领取/放弃且区分原选
   it('choiceCount后的可收gift不能掩盖原三选一候选全部拒收',()=>{
     arrange(copies(pearl,1));const before=snapshot();
     open({kind:'medium',rewards:[ordinary,resource('gift')],choiceCount:1});
-    expect(H.UI.el.ovBody.querySelector('.chest-warn')?.textContent).toContain('当前候选都放不下');
+    expect(H.UI.el.ovBody.querySelector('.reward-capacity-note')?.textContent).toContain('当前候选都放不下');
     expect(H.UI.el.ovBody.querySelector('[data-act="chestTake"]')).toBeNull();
     expect(H.UI.el.ovBody.querySelector('[data-act="chestTake1"][data-i="1"]')).toBeTruthy();
     expect(snapshot()).toBe(before);expect(H.game.grantCard).not.toHaveBeenCalled();
@@ -181,7 +183,7 @@ describe('奖励页使用同一顺序预估，排除领取/放弃且区分原选
   it('原选择解决后，只按顺序预估已有gift，不重抽、不重发原奖励',()=>{
     const chosen=other('chosen');arrange(copies(chosen,1),17);
     open({kind:'medium',rewards:[chosen,other('lost'),ordinary,other('gift')],taken:[0],lost:[1],choiceCount:2});
-    expect(H.UI.el.ovBody.querySelector('.chest-warn')?.textContent).toContain('预计可收 1 张、1 张放不下');
+    expect(H.UI.el.ovBody.querySelector('.reward-capacity-note')?.textContent).toContain('预计可收 1 张 · 1 张待整理');
     expect(H.UI.el.ovBody.querySelector('[data-act="chestTake"]')).toBeTruthy();
     const rng=Random.snapshot();acts.chestTake();
     expect(H.game.grantCard.mock.calls.map(([card])=>card.id)).toEqual([ordinary.id,other('gift').id]);

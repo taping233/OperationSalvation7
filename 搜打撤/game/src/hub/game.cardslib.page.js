@@ -39,6 +39,7 @@ import { game } from '../run/game.session.js';
 import { characterName } from '../core/characters.js';
 import { PHOTO_NOTE_PLACEHOLDER, photoNoteFor, photoNotePending, savePhotoNoteResult, exportNotes } from '../cards/card-photo-notes.js';
 import { photoMountFor } from './photo-studio-presentation.js';
+import { createPhotoCatalogCache } from './photo-studio-catalog-cache.js';
 import { CARD_DESIGNER_WRITES_ENABLED, Sfx, cardPageOpen, setCardPageOpen, configureCardPageClosers, cancelPendingCardPageEntry } from './game.cardslib.common.js';
 import {
   photoFpsEnabled, configurePhotoFps, stopPhotoFpsProbe, samplePhotoFps,
@@ -132,6 +133,26 @@ function rememberLibBrowse() {
 
 function refreshLibRenderContext(catalog) {
   libRenderContext = createCardRenderContext(catalog);
+}
+
+const libCatalogCache = createPhotoCatalogCache();
+const libTileMetrics = new Map();
+function refreshLibCatalog() {
+  libCatalogCache.update(SDT.Cards.all(), SDT.Art?.cardIcon, catalog => {
+    libTileMetrics.clear();
+    libCatalog = catalog.slice();
+    refreshLibRenderContext(libCatalog);
+    const seenIds = new Set();
+    libCards = libCatalog.filter(c => {
+      if (c.id === 'tt-token-color' || seenIds.has(c.id)) return false;
+      seenIds.add(c.id); return true;
+    });
+    _libSearchText = new WeakMap(libCards.map(c => [c, `${c.name || ''}\n${c.desc || ''}\n${displayCardDescription(c.desc, c.id)}`.toLowerCase()]));
+    libCardById = new Map(libCards.map(card => [card.id, card]));
+    libDescriptionRenderer = createCardDescriptionRenderer(libCatalog);
+    libTileHTMLByCard = new WeakMap();
+    _libFilteredCache = null; _libFilteredKey = '';
+  });
 }
 
 function libRarityOf(card) {
@@ -499,9 +520,16 @@ function rebuildLibNodeMap(grid) {
 // 09-29 实测瓦片高度随列宽浮动但同一视宽下全距仅 ~4px（271 张 320~323px），量一张即够。
 function syncLibTileIntrinsicSize(grid) {
   if (!grid) return;
+  const key = `${window.innerWidth}:${window.innerHeight}:${libFilter.tab === '全部'}:${document.fonts?.status}`;
+  const cached = libTileMetrics.get(key);
+  if (cached) { grid.style.setProperty('--lib-tile-h', `${cached}px`); return; }
   const tile = grid.querySelector('.lib-item .lib-cardwrap')?.parentElement;
   const h = tile?.offsetHeight || 0;
-  if (h > 0) grid.style.setProperty('--lib-tile-h', `${h}px`);
+  if (h > 0) {
+    grid.style.setProperty('--lib-tile-h', `${h}px`);
+    libTileMetrics.set(key, h);
+    while (libTileMetrics.size > 16) libTileMetrics.delete(libTileMetrics.keys().next().value);
+  }
 }
 
 // 照片定位（键盘方向键 / 选片台翻看）：直接把目标壳滚入视野，
@@ -746,22 +774,7 @@ function renderCardLibrary() {
   // 员工通行证A是碎片合成材料（特殊收藏品），不进卡牌库（2026-09-16 留言「在卡牌库中删除员工通行证a」）
   // Catalog membership/order and rarity lookups share one shallow snapshot for
   // this page refresh. Designer saves/imports reopen through this function.
-  libCatalog = SDT.Cards.all().slice();
-  refreshLibRenderContext(libCatalog);
-  const seenIds = new Set();
-  libCards = libCatalog.filter(c => {
-    if (c.id === 'tt-token-color' || seenIds.has(c.id)) return false;
-    seenIds.add(c.id);
-    return true;
-  });
-  _libSearchText = new WeakMap(libCards.map(c => [c, `${c.name || ''}\n${c.desc || ''}\n${displayCardDescription(c.desc, c.id)}`.toLowerCase()]));
-  libCardById = new Map(libCards.map(card => [card.id, card]));
-  libDescriptionRenderer = createCardDescriptionRenderer(libCatalog);
-  libTileHTMLByCard = new WeakMap();
-  // 库内容刷新即失效筛选缓存：防止卡牌增删/改卡后命中旧缓存
-  // （旧缓存键只含 libCards.length，同张数的内容变化会读到陈旧列表）
-  _libFilteredCache = null;
-  _libFilteredKey = '';
+  refreshLibCatalog();
   // 上一页的窗口化观察器在 showOverlay 换网格前先停掉（新网格由 observeLibTiles 重挂）
   stopLibTileObserver();
   const counts = libCategoryCounts();
@@ -1046,7 +1059,7 @@ export async function preparePhotoStudioEntry(signal) {
   const cleanup = [];
   let finish;
   const timeout = new Promise(resolve => { finish = resolve; });
-  const timer = setTimeout(finish, 220);
+  const timer = setTimeout(finish, 2200);
   const abort = () => finish();
   signal?.addEventListener('abort', abort, { once: true });
   try {
@@ -1101,21 +1114,10 @@ function releaseLibPageResources(removePageClass = false) {
   stopLibTileObserver();
   resetLibArtWarmup();
   invalidateLibShellWork();   // 关页丢弃余壳队列（idle 批次不再向已拆除的网格补壳）
-  libTileHTMLByCard = new WeakMap();   // 全局卡目录仍持有 key 对象，关闭时释放缓存模板字符串
-  libRenderContext = null;
-  libCatalog = [];
-  libCards = [];
-  libCardById.clear();
-  _libSearchText = new WeakMap();
-  _libFilteredCache = null;
-  _libFilteredKey = '';
-  libCategoryCache = null;
-  libCategoryCacheCards = null;
-  libCategoryCacheKey = '';
-  libDescriptionRenderer = createCardDescriptionRenderer();
+  // Keep only the current catalogue's derived data/templates for a later visit.
+  // refreshLibCatalog replaces them together whenever data or artwork changes.
   libCardNodeById.clear();
   libShellNodeById.clear();
-  libFilteredPositionById.clear();
   _prevSelectedWrap = null;
   libRenderedFilter = null;
   if (removePageClass) document.body.classList.remove('cardlib-open');

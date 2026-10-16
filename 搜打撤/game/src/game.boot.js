@@ -22,7 +22,7 @@ import { nodeHitRadius } from './core/camera.js';
 import { storeGet, storeSet } from './core/storage.js';
 import { renderMiniMap } from './run/game.session.js';
 import { getExpeditionPreview, setExpeditionPreview } from './run/expedition.view.js';
-import { isConsumedMapNode } from './core/map-node-state.js';
+import { mapNodeStatus } from './core/map-node-state.js';
 import { findMapTravelPath } from './run/map-travel-path.js';
 import './agent/agent.js';   // SDT.Agent 接口链（observe/act/step）：随启动挂载，供外部决策端驱动
 import './ui/quick-nav.js';  // 全页面快捷进入键（Alt+数字系，非法状态拒绝并提示）
@@ -367,8 +367,10 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       if (fogOn && !game.seen[n.li + ',' + n.idx]) continue;
       const d = Math.hypot(n.x - wx, n.y - wy);
       const radius = nodeHitRadius(cam.zoom, MIN_NODE_HIT_PX);
+      const label = SDT.Renderer?.nodeLabelBounds?.(game, n);
+      const labelHit = label && wx >= label.left && wx <= label.right && wy >= label.top && wy <= label.bottom;
       const nLegal = legal.some(q => q.li === n.li && q.idx === n.idx);
-      if (d <= radius && ((preferReachable && nLegal && !bestLegal) || nLegal === bestLegal && d < bd)) {
+      if ((d <= radius || labelHit) && ((preferReachable && nLegal && !bestLegal) || nLegal === bestLegal && d < bd)) {
         bd = d; best = n; bestLegal = nLegal;
       }
     }
@@ -469,9 +471,10 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       if (eIdx >= 0) lines.push(`[[icon:door]] 出生入口：${loc.layer.entranceNames[eIdx]}`);
       if (door) lines.push(`[[icon:door]] 环间门${door.reverse ? '（返回）' : ''}${door.exit ? ' / 撤离出口' : ''} ⇄ ${game.layerData[door.toLayer]?.name || '下一层'}`);
       if (altarE) lines.push('[[icon:crystal]] 污染核心入口');
-      if (isConsumedMapNode(game, node)) lines.push(`${TYPE_NAME[def.type] || def.type} · 已完成 · 内容已消耗，仍可通行`);
-      else if (def && def.type !== 'entrance') lines.push(`事件：${TYPE_NAME[def.type] || def.type}${def.n ? `（+${def.n}币）` : ''}`);
+      const content = mapNodeStatus(game, node);
+      if (def && def.type !== 'entrance') lines.push(`地点：${TYPE_NAME[def.type] || def.type}${def.type === 'coin' && def.n ? `（+${def.n}币）` : ''}`);
       else if (eIdx < 0 && !door && !altarE) lines.push('普通格');
+      if (content.label) lines.push(`${content.label} · ${content.detail}`);
     } else {
       title = node.def.name || '中央区';
       if (node.def.type === 'boss') lines.push('经由污染核心挑战（M1 实装战斗）');
@@ -479,7 +482,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     }
     const note = SDT.Notes.get(MAP.boardId, node.li, node.idx);
     if (note) lines.push(`[[icon:notes]] ${note}`);
-    lines.push('点击结点可编辑备注');
+    lines.push('点击查看地点');
     return [title, lines];
   }
 
@@ -695,13 +698,13 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     const titleDirtyRoots = new Set();
     const flushTitleRoots = () => {
       titleFlushQueued = false;
-      const roots = Array.from(titleDirtyRoots).filter(Boolean);
+      const roots = new Set([...titleDirtyRoots].filter(root => root.isConnected));
       titleDirtyRoots.clear();
-      roots.forEach((root, i) => {
-        if (!root.isConnected) return;
-        if (roots.some((parent, j) => j !== i && parent !== root && parent.contains && parent.contains(root))) return;
-        stripNativeTitles(root);
-      });
+      for (const root of roots) {
+        let parent = root.parentElement;
+        while (parent && !roots.has(parent)) parent = parent.parentElement;
+        if (!parent) stripNativeTitles(root);
+      }
     };
     const titleObserver = new MutationObserver((muts) => {
       for (const m of muts) {
@@ -794,8 +797,8 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       im.decoding = 'async';
       im.src = new URL('../assets/scenes/hub-wallpaper.webp', import.meta.url).href;
     };
-    if ('requestIdleCallback' in window) requestIdleCallback(warmHubWallpaper, { timeout: 4000 });
-    else setTimeout(warmHubWallpaper, 2000);
+    if ('requestIdleCallback' in window) window.requestIdleCallback(warmHubWallpaper, { timeout: 4000 });
+    else window.setTimeout(warmHubWallpaper, 2000);
     // 启动时完整预取原图与缩略图文件；只解码首轮场景，其他美术在显示前再按需解码。
     const warmupTip = document.getElementById('warmupTip');
     const warmupBar = document.getElementById('warmupBar');

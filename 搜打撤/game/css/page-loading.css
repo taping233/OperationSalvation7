@@ -17,13 +17,13 @@
 .page-loading.leaving { animation: pageLoadOut .18s var(--ease-fly) both; pointer-events: none; }
 @keyframes pageLoadPulse { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
 @keyframes pageLoadOut { to { opacity: 0; } }
-/* 照相馆准备期间保留来源画面，就绪后才播放成就同款切幕。 */
-.page-loading.page-loading--city { background: transparent; overflow: hidden; }
+/* 先画出切幕并保持首姿；目标页就绪后统一揭幕。 */
+.page-loading.page-loading--city { background: #10191f; overflow: hidden; }
 .page-loading.page-loading--city::before { content: none; }
 body:has(.page-loading--city:not(.leaving)) #overlay:has(.studio-unified) { visibility: hidden; }
 .page-loading--city::after {
   content: attr(data-loading-detail); position: absolute; top: 72%;
-  color: #c2c5c8; font: 14px/1.8 var(--font-ui); letter-spacing: .1em;
+  color: #c2c5c8; font: 14px/1.8 var(--font-ui); letter-spacing: .1em; z-index: 40;
 }
 .page-loading.page-loading--city.leaving { background: transparent; animation: none; }
 .page-loading--city.leaving::after { content: none; }

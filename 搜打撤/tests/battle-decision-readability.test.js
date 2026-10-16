@@ -12,7 +12,7 @@ function declarations(css, selector) {
   let result = '';
   postcss.parse(css).walkRules(rule => {
     // Exact selectors keep a shared comma rule from masking a later standalone override.
-    if (!result && rule.selector === selector) result = rule.nodes.filter(node => node.type === 'decl')
+    if (rule.selector === selector) result = rule.nodes.filter(node => node.type === 'decl')
       .map(node => `${node.prop}:${node.value}${node.important ? '!important' : ''}`).join(';');
   });
   return result;
@@ -25,9 +25,9 @@ describe('battle decision reading CSS contract', () => {
     expect(slot).toContain('var(--fx,0px)');
     expect(slot).toContain('260px * var(--fs,1)');
     expect(slot).not.toContain('rotate(');
-    expect(declarations(battle, `${stage} .bt-card:not(.aim-lift)`)).toContain('var(--hand-rest,284px)');
+    expect(declarations(battle, `${stage} .bt-card:not(.aim-lift)`)).toContain('var(--hand-rest,64px)');
     expect(declarations(battle, liftSelector)).toContain('translateY(0)');
-    expect(declarations(battle, liftSelector)).toContain('scale(1.05)');
+    expect(declarations(battle, liftSelector)).not.toContain('scale(');
     expect(hand).not.toMatch(/bt-hand-inspect/);
   });
 
@@ -55,11 +55,9 @@ describe('battle decision reading CSS contract', () => {
     dom.window.close();
   });
 
-  it('keeps the secondary instruction below the header in a separate interaction-free lane', () => {
+  it('keeps the battlefield free of the retired secondary selection caption', () => {
     const caption = declarations(battle, `${stage} .sts-arena-caption`);
-    expect(caption).toContain('left:50%');
-    expect(caption).toContain('z-index:12');
-    expect(caption).toContain('pointer-events:none');
+    expect(caption).toBe('');
   });
 
   it('keeps card copy sizing out of the hand skin while detail reading keeps the shared tokens', () => {
@@ -73,32 +71,26 @@ describe('battle decision reading CSS contract', () => {
   });
 
   it('keeps object labels on a local dark reading surface and career controls at the player feet', () => {
-    expect(declarations(battle, `${stage} .sts-nameplate`)).toContain('background:var(--battle-panel)');
+    expect(declarations(battle, `${stage} .sts-nameplate`)).toContain('background:none');
     expect(declarations(battle, `${stage} .sts-hp>span`)).toContain('font-size:22px');
     expect(declarations(battle, `${stage} .sts-intent`)).toContain('position:relative');
     expect(declarations(battle, `${stage} .sts-intent`)).not.toContain('100% + 120px');
-    expect(declarations(battle, `${stage} .sts-resource-dock`)).toContain('max-width:260px');
+    expect(declarations(battle, `${stage} .sts-resource-dock`)).toContain('max-width:320px');
     expect(declarations(battle, `${stage} .sts-energy>b`)).toContain('font-size:52px');
-    expect(declarations(battle, `${stage} #btSelf>.sts-hand-tools`)).toContain('left:50%');
-    expect(declarations(battle, `${stage} #btSelf>.sts-hand-tools`)).toContain('bottom:-142px');
+    expect(declarations(battle, `${stage} #btSelf>.sts-hand-tools`)).toContain('left:4px');
+    expect(declarations(battle, `${stage} #btSelf>.sts-hand-tools`)).toContain('top:calc(100% - 170px)');
   });
 
-  it('labels a folded card without changing the shared printed face or intercepting the card input', () => {
-    const restName = declarations(battle, `${stage} .bt-rest-name`);
-    expect(restName).toContain('top:54px');
-    expect(restName).toContain('var(--hand-visible-width,174px)');
-    expect(restName).toContain('pointer-events:none');
-    expect(restName).toContain('width:min(var(--hand-visible-width,174px),174px)');
-    expect(restName).toContain('border-top:2px');
-    expect(restName).not.toContain('border-left:2px');
-    expect(battle).toContain('.bt-slot:is(:hover,:has(:focus-visible)) .bt-rest-name');
-    expect(battle).toContain('.bt-card:is(.click-selected,.aim-lift) .bt-rest-name{opacity:0}');
+  it('reads the printed card directly without an overlapping folded-name label', () => {
+    expect(declarations(battle, `${stage} .bt-rest-name`)).toBe('');
+    expect(declarations(battle, `${stage} .bt-card:not(.aim-lift)`)).toContain('64px');
+    expect(declarations(battle, liftSelector)).toContain('translateY(0)');
     expect(battle).not.toMatch(/\.hsc-(?:name|cost|desc)\s*\{/);
     expect(battle).not.toContain('!important');
   });
 
   it('keeps compact enemy HUDs, wrapping compound intentions and local details outside layout flow', () => {
-    expect(declarations(battle, `${stage} .sts-nameplate`)).toContain('padding:10px 12px');
+    expect(declarations(battle, `${stage} .sts-nameplate`)).toContain('padding:0');
     expect(declarations(battle, `${stage} .sts-headrow>b`)).toContain('overflow-wrap:anywhere');
     expect(declarations(battle, `${stage} .sts-intent`)).toContain('flex-wrap:wrap');
     expect(declarations(battle, `${stage} .bt-intent-part`)).toContain('display:inline-grid');
@@ -126,14 +118,12 @@ describe('battle decision reading CSS contract', () => {
     expect(declarations(battle, `${stage} .sts-hand`)).toContain('position:absolute');
   });
 
-  it('keeps skill copy and detail controls readable while the existing disabled action stays legible', () => {
-    expect(declarations(battle, `${stage} .battle-skill-status`)).toContain('font-size:20px');
-    expect(declarations(battle, `${stage} .battle-skill-copy>span`)).toContain('font-size:20px');
-    expect(declarations(battle, `${stage} .battle-skill-availability`)).toContain('font-size:20px');
+  it('keeps the skill icon, fee and disabled state legible with the explanation supplied by hover/focus', () => {
+    expect(declarations(battle, `${stage} .battle-skill-help`)).toContain('width:104px');
+    expect(declarations(battle, `${stage} .battle-skill-fee`)).toContain('22px');
+    expect(declarations(battle, `${stage} .battle-skill-art`)).toContain('pointer-events:none');
     expect(declarations(battle, `${stage} .bt-slam-btn:disabled`)).toContain('opacity:1');
-    expect(declarations(battle, `${stage} .bt-slam-btn[data-skill-state="unaffordable"] .battle-skill-availability`)).toContain('color:');
-    const details = declarations(battle, `${stage} .bt-detail-chip,${stage} .bt-infchip`);
-    expect(details).toContain('font-size:20px'); expect(details).toContain('min-height:40px');
+    expect(declarations(battle, `${stage} .bt-slam-btn:disabled .battle-skill-art`)).toContain('opacity:.4');
     expect(declarations(battle, `${stage} .bt-infchip`)).toContain('top:56px');
     expect(declarations(battle, `${stage} .bt-turn-forecast b`)).toContain('font-size:30px');
   });

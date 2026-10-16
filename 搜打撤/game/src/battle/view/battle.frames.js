@@ -54,6 +54,7 @@ let pollTimer = 0;
 let renderHoldT = 0;
 let lifecycle = 0;
 let releasePromise = null;
+let tickGeometry = null;
 
 function cancelTextureRecord(record) {
   if (record.cancelled) return;
@@ -369,7 +370,7 @@ function applyFrame(name) {
   const host = document.getElementById('unitFrames');
   if (host) host.dataset.frame = used;
   setTexture(tex);
-  layout();
+  if (!tickGeometry) layout();
   wakeRenderer();
 }
 
@@ -440,11 +441,14 @@ function advance(now) {
 
 function tickLoop() {
   if (!cur || document.hidden) return;
-  advance(performance.now());
+  const geometry = cur.fig && uiRect(cur.fig);
+  tickGeometry = geometry;
+  try { advance(performance.now()); }
+  finally { tickGeometry = null; }
   if (cur && cur.fig) {
-    const r = uiRect(cur.fig);   // 与 lastRect（布局口径）同尺比较
+    const r = geometry;   // 同一 tick 切帧与 DOM 跟随共用一次布局读取
     const lr = cur.lastRect;
-    if (!lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
+    if (cur.dirty || !lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
       layout(r);
       wakeRenderer();   // DOM 位移中（抖动/沉浮）持续跟随渲染
     }
@@ -475,7 +479,7 @@ function startLoop() {
       if (!r || !r.width) return;
       const lr = cur.lastRect;
       if (!lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
-        layout();
+        layout(r);
         wakeRenderer(500);
       }
     }, POLL_MS);

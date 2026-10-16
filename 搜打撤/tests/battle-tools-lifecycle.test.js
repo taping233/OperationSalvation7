@@ -106,14 +106,13 @@ describe('battle tools template ownership', () => {
     expect(expectUniqueTools()).not.toBe(oldTools);
     expect(oldTools.isConnected).toBe(false); expect(oldSkill.isConnected).toBe(false);
     expect(skill().dataset.skillState).toBe('ready');
-    expect(skill().textContent).toContain('可用');
-    expect(skill().textContent).not.toContain('结算中');
+    expect(skill().getAttribute('aria-label')).toContain('可用');
+    expect(skill().getAttribute('aria-label')).not.toContain('结算中');
     for (let i = 0; i < 5; i++) { render(); expectUniqueTools(); }
   });
 
   it.each([
     ['grave', 'btGrave', 'btGraveBack'],
-    ['bag', 'btBag', 'btBagBack'],
     ['settings', 'btSettings', 'btSettingsBack'],
   ])('keeps one fresh set after repeated %s open/return and incremental patches', (_kind, open, close) => {
     start();
@@ -127,6 +126,17 @@ describe('battle tools template ownership', () => {
       expectUniqueTools(); expect(oldTools.isConnected).toBe(false);
       render(); expectUniqueTools();
     }
+  });
+
+  it('普通战背包按钮与命令均被锁定，手牌和独立道具快捷栏不受影响', () => {
+    start();
+    const current = stage(), before = [...snapshot().hand];
+    const bagButton = current.querySelector('[data-act="btBag"]');
+    expect(bagButton).toBeNull();
+    expect(BattleSession.commands.openBag()).toBe(false);
+    expect(actions.has('btBag')).toBe(false); // 战斗不注册可绕过通用入口的背包动作。
+    expect(snapshot().viewingBag).toBe(false);expect(stage()).toBe(current);
+    expect(snapshot().hand).toEqual(before);expectUniqueTools();
   });
 
   it('returns from the real lamp enemy-target choice with one ready set through the next turn', async () => {
@@ -149,6 +159,7 @@ describe('battle tools template ownership', () => {
     start();
     BattleSession.commands.playCard('tt3-treasure-hunt', 0); await settle();
     expect(snapshot().discovering?.options.length).toBeGreaterThan(0); expect(stage()).toBeNull();
+    await new Promise(resolve => setTimeout(resolve, 360));
     UI.el.ovBody.querySelector('[data-act="btDiscover"][data-i="0"]').click(); await settle();
     expect(snapshot().discovering).toBeNull(); expectUniqueTools();
     set$energy(0); render();
@@ -202,7 +213,7 @@ describe('battle tools template ownership', () => {
     expectUniqueTools({ ready: false }); expect(skill().dataset.skillState).toBe('used');
     UI.el.ovBody.querySelector('[data-act="btSettings"]').click();
     UI.el.ovBody.querySelector('[data-act="btSettingsBack"]').click();
-    expectUniqueTools({ ready: false }); expect(skill().textContent).toContain('已使用');
+    expectUniqueTools({ ready: false }); expect(skill().getAttribute('aria-label')).toContain('已使用');
     skill().click(); await settle(); expect(snapshot().energy).toBe(energy - 1);
     BattleSession.commands.endTurn(); await settle();
     expectUniqueTools(); expect(skill().dataset.skillState).toBe('ready');

@@ -29,7 +29,7 @@ describe('expedition view route projection', () => {
     const route = expeditionRoutes(g).find(r => r.idx === 1);
     expect(route.cleared).toBe(true);
     expect(route.tone).toBe('quiet');
-    expect(route.hint).toContain('已探索');
+    expect(route.hint).toContain('已完成');
   });
 
   it('目标和低血量目标文案随状态变化', () => {
@@ -68,7 +68,7 @@ describe('expedition view route projection', () => {
     });
     const routes = expeditionRoutes(g);
     expect(routes.map(r => r.name)).toEqual(['遭遇战 · 路线1', '遭遇战 · 路线2']);
-    expect(routes.map(r => r.ariaLabel)).toEqual(['遭遇战 · 路线1（节点 2）', '遭遇战 · 路线2（节点 3）']);
+    expect(routes.map(r => r.ariaLabel)).toEqual(['遭遇战 · 路线1（节点 2） · 未完成', '遭遇战 · 路线2（节点 3） · 未完成']);
     expect(routes.map(r => r.idx)).toEqual([1, 2]);
   });
 
@@ -112,18 +112,18 @@ describe('expedition view DOM rendering', () => {
     setExpeditionPreview(g, g.nodes[1]);
     renderExpeditionPanel(null, g, icon => icon);
     let strip = document.querySelector('.expedition-map-preview');
-    expect(strip.querySelector('b').textContent).toBe('遭遇战 · 已完成');
+    expect(strip.querySelector('b').textContent).toBe('遭遇战');
     expect(strip.querySelector('.empty-node-icon')).toBeNull();
     expect(strip.querySelector('.map-node-painted')).not.toBeNull();
-    expect(strip.textContent).toContain('内容已消耗');
+    expect(strip.textContent).toContain('内容已结算');
     expect(strip.querySelector('[data-route-enter]').disabled).toBe(false);
     g.trackPos = 1;
     setExpeditionPreview(g, g.nodes[1]);
     renderExpeditionPanel(null, g, icon => icon);
     strip = document.querySelector('.expedition-map-preview');
-    expect(strip.querySelector('b').textContent).toBe('遭遇战 · 已完成');
+    expect(strip.querySelector('b').textContent).toBe('遭遇战');
     expect(strip.querySelector('.empty-node-icon')).toBeNull();
-    expect(strip.querySelector('[data-route-enter]').disabled).toBe(false);
+    expect(strip.querySelector('[data-route-enter]').disabled).toBe(true);
     expect(document.querySelector('.expedition-toolbar-location')).toBeNull();
     expect(strip.querySelectorAll('.map-node-painted')).toHaveLength(1);
   });
@@ -193,7 +193,7 @@ describe('expedition view DOM rendering', () => {
     expect(strip.querySelector('[data-route-enter]')).toBe(enter);
     g.visited['0,1'] = 1;
     renderExpeditionPanel(null, g, icon => icon);
-    expect(strip.textContent).toContain('已探索');
+    expect(strip.textContent).toContain('已完成');
     g.layerData[0].doors = [{ at: 1, reverse: false }];
     renderExpeditionPanel(null, g, icon => icon);
     expect(strip.textContent).toContain('层间闸门');

@@ -1,8 +1,24 @@
+import { continueChestRewards } from './helpers/chest-actions.js';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { serializeChestReward, restoreChestReward } from '../game/src/run/chest-reward-save.js';
+import { serializeChestReward, restoreChestReward, nodeChestRewardAt } from '../game/src/run/chest-reward-save.js';
 import { validateRunSave } from '../game/src/hub/run-save-validation.js';
 afterEach(()=>{vi.useRealTimers();delete window.SDT;document.body.innerHTML='';});
 describe('G03 揭晓宝箱持久化',()=>{
+  it('异地保存的待领奖励按节点恢复；坐标、种子与领取索引坏档拒绝读取',()=>{
+    const game={seed:17,layerIdx:1,trackPos:2};
+    const current={kind:'small',cards:[{id:'a',name:'补给'}],coins:2,coinsReceived:true,taken:new Set([0]),lost:new Set()};
+    const saved=serializeChestReward(game,[{kind:'small'},{kind:'small'}],1,current,{onCell:true,consumeNode:true});
+    const away={...game,trackPos:8,nodeChestRewards:{'1,2':saved}};
+    expect(validateRunSave(away).ok).toBe(true);
+    expect(nodeChestRewardAt(away)).toBeNull();
+    expect(nodeChestRewardAt({...away,trackPos:2})).toEqual(saved);
+    const conflict={...game,chestReward:saved,nodeChestRewards:{'1,2':{...saved,current:{...saved.current,taken:[]}}}};
+    expect(validateRunSave(conflict)).toMatchObject({ok:false,preserveRun:true});
+    for(const broken of [{...saved,trackPos:'2'},{...saved,seed:18},{...saved,layerIdx:-1},
+      {...saved,current:{...saved.current,taken:[1]}}]) {
+      expect(validateRunSave({...away,nodeChestRewards:{'1,2':broken}})).toMatchObject({ok:false,preserveRun:true});
+    }
+  });
   it('揭晓未领、部分领取、收金币的快照可复原，进度不重置',()=>{
     const game={seed:17,layerIdx:1,trackPos:2};
     const cur={kind:'small',cards:[{id:'a',name:'法力药水'},{id:'b',name:'法杖'}],coins:2,coinsReceived:false,taken:new Set(),lost:new Set()};
@@ -36,9 +52,9 @@ describe('G03 揭晓宝箱持久化',()=>{
     draw.mockImplementation(()=>alternate);const calls=draw.mock.calls.length;
     expect(Chests.restore(game,saved,()=>{})).toBe(true);expect(draw).toHaveBeenCalledTimes(calls);
     vi.advanceTimersByTime(5000);
-    expect(body.querySelector('.chest-offer-page')).not.toBeNull();
+    expect(body.querySelector('.cqo-overview')).not.toBeNull();
     expect(body.textContent).not.toContain('原奖励');
-    acts.chestClaim();
+    acts.chestNext();
     const opening=JSON.parse(JSON.stringify(Chests.serialize(game)));
     expect(opening.current.rewardStage).toBe('opening');
     expect(Chests.restore(game,opening,()=>{})).toBe(true);
@@ -46,9 +62,20 @@ describe('G03 揭晓宝箱持久化',()=>{
     expect(body.textContent).toContain('原奖励');expect(body.textContent).not.toContain('重抽奖励');
     acts.chestSelect({i:0});acts.chestTake1({i:0});expect(game.grantCard).toHaveBeenCalledTimes(1);
     const taken=JSON.parse(JSON.stringify(Chests.serialize(game)));
+    acts.chestReturn();
+    expect(game.state).toBe('idle');expect(Chests.isOpen()).toBe(false);expect(Chests.serialize(game)).toBeNull();
+    expect(game.nodeChestRewards['0,1'].current.taken).toEqual([0]);
+    const parked=JSON.parse(JSON.stringify(game.nodeChestRewards));
+    game.trackPos=3;
+    Chests.open(game,[{kind:'small'}],()=>{},{onCell:true});
+    acts.chestReturn();
+    expect(Object.keys(game.nodeChestRewards)).toEqual(['0,1','0,3']);
+    expect(game.nodeChestRewards['0,1']).toEqual(parked['0,1']);
+    game.trackPos=1;
     game.seed=18;expect(Chests.serialize(game)).toBeNull();game.seed=17;
     game.discoveredPairs=new Set();expect(Chests.serialize(game)).toBeNull();game.discoveredPairs=undefined;
     Chests.restore(game,taken,()=>{});acts.chestTake1({i:0});expect(game.grantCard).toHaveBeenCalledTimes(1);
-    acts.chestContinue();expect(game.gainCoins).toHaveBeenCalledTimes(1);expect(Chests.serialize(game)).toBeNull();
+    continueChestRewards(acts);expect(game.gainCoins).toHaveBeenCalledTimes(1);expect(Chests.serialize(game)).toBeNull();
+    expect(game.nodeChestRewards['0,1']).toBeUndefined();expect(game.nodeChestRewards['0,3']).toBeTruthy();
   });
 });

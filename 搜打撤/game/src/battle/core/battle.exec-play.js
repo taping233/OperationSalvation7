@@ -8,6 +8,7 @@ import { removeUid } from '../bag/battle.piles.js';
 import { targetSideFor } from '../effects/battle.target-rules.js';
 import { throwIfActionCancelled } from '../runtime/battle.staged-playback.js';
 import { rejectUnsupportedCard } from '../effects/battle.rule-guard.js';
+import { inspectCardRuleCapability } from '../../cards/card-rules.capability.js';
 import { isHandPaymentCandidate } from './battle.hand-selection.js';
 import { G, foes, mode, hand, discard, played, consumed, grave, energy, delayed, cardAnims, freeCast, infuseFuels, consumeFireballN, allSpellsInfused, growthNames, killAtkUp, playerCurseImmune, arrowRune, nextSpellTwice, poisonOnSpell, playedMovesThisTurn, playedMartialThisTurn, activeActionSignal, battleState, effectiveHandMax, set$hand, set$energy, set$infuseFuels, set$nextSpellTwice, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$playerCurseImmune, set$allSpellsInfused, set$consumeFireballN, set$stealthStrike, set$lastPlayedType, set$playedMovesThisTurn, set$playedMartialThisTurn, set$activeActionSignal, set$handSelecting, nextActionSeq } from '../runtime/battle.runtime.js';
 
@@ -31,19 +32,15 @@ export function createBattleExecPlay({
     requestBattleRender();
     return true;
   }
-  function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null) {
-    const submittedCard = card;
-    card = effectiveExecutionCard(uid, card);
-    if (rejectMissingTransform(card)) return false;
-    if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
+  function inspectExecution(uid, submittedCard, fuelUids, freeCost, requirementsPaid = false, paymentUids = []) {
+    const card = effectiveExecutionCard(uid, submittedCard);
+    const fail = (code, message) => ({ card, reason:{ code, message } });
+    if (card?._battleTransformMissing) return fail('MISSING_TRANSFORM', `转换目标「${card._battleTransformMissing}」缺失，暂时无法使用`);
+    const capability = inspectCardRuleCapability(card);
+    if (!capability.ok) return fail(capability.kind === 'invalid' ? 'RULE_INVALID' : 'RULE_UNSUPPORTED', capability.kind === 'invalid' ? '规则格式非法' : '规则尚未支持');
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
-    // M3：infused 打出门（注能 N 后才能打出——felguard/raydragon 式卡面 infuse 门的规则表达）
     const infusedGate = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'infused');
-    if (infusedGate && !(fuelUids || []).length && !freeCost) {
-      G.log(`[[icon:cross]] 【${esc(card.name)}】需要先注能才能打出`, 'warn');
-      requestBattleRender();
-      return false;
-    }
+    if (infusedGate && !(fuelUids || []).length && !freeCost) return fail('INFUSION_REQUIRED', `【${card.name}】需要先注能才能打出`);
     if (handRequirement && !requirementsPaid) {
       const excludedUids = [...new Set([uid, ...(fuelUids || [])])];
       const handUids = new Set(hand);
@@ -57,45 +54,120 @@ export function createBattleExecPlay({
         });
       });
       if (available.length < handRequirement.count) {
-        G.log(`[[icon:cross]] 【${esc(card.name)}】无法打出：手牌支付不足，需要 ${handRequirement.count} 张${handRequirement.type ? `「${esc(handRequirement.type)}」` : ''}，现有 ${available.length} 张`, 'warn');
-        return false;
+        return fail('PAYMENT_INSUFFICIENT', `【${card.name}】无法打出：手牌支付不足，需要 ${handRequirement.count} 张${handRequirement.type ? `「${handRequirement.type}」` : ''}，现有 ${available.length} 张`);
       }
+      return { card, handRequirement, excludedUids, paymentNeeded:true };
+    }
+    if (handRequirement && requirementsPaid && paymentUids.length !== handRequirement.count) return fail('PAYMENT_INVALID', '手牌支付数量无效，本次未打出');
+    return { card, handRequirement, paymentNeeded:false };
+  }
+  function getExecutionAvailability(uid, card, fuelUids, freeCost) {
+    return inspectExecution(uid, card, fuelUids, freeCost).reason || null;
+  }
+  function createSubmission(uid) {
+    const battleToken = battleState.token;
+    /** @type {import('../battle.play-submission.types.js').CardPlaySubmission|null} */
+    let result = null;
+    /** @type {import('../battle.play-submission.types.js').CardPlayReceipt|null} */
+    let receipt = null;
+    /** @type {((value:import('../battle.play-submission.types.js').CardPlayFinal)=>void)|null} */
+    let resolveSettled = null;
+    let completed = false;
+    /** @param {'committed'|'rejected'|'cancelled'} status @param {import('../battle.play-submission.types.js').CardPlayReason} [reason] */
+    const settle = (status, reason) => {
+      if (!receipt || completed) return;
+      completed = true;
+      if (status === 'committed') resolveSettled?.(Object.freeze({ status, uid, battleToken, receipt }));
+      else resolveSettled?.(Object.freeze({ status, uid, battleToken, receipt,
+        reason:Object.freeze(reason || { code:'ACTION_CANCELLED', message:'本次出牌已取消' }) }));
+    };
+    return {
+      get result() { return result; },
+      reject(code, message) {
+        const reason = { code, message };
+        if (receipt) settle('rejected', reason);
+        else result = Object.freeze({ status:'rejected', uid, battleToken, reason:Object.freeze(reason) });
+      },
+      needsInput() { result = Object.freeze({ status:'needs-input', kind:'payment', uid, battleToken }); },
+      queued(value) {
+        receipt = Object.freeze({ ...value, uid });
+        const settled = new Promise(/** @param {(value:import('../battle.play-submission.types.js').CardPlayFinal)=>void} resolve */ resolve => { resolveSettled = resolve; });
+        result = Object.freeze({ status:'queued', uid, battleToken, receipt, settled });
+      },
+      commit() { settle('committed'); },
+      error(error) {
+        const cancelled = error?.name === 'BattleActionCancelledError' || error?.name === 'AbortError';
+        settle(cancelled ? 'cancelled' : 'rejected', { code:cancelled ? 'ACTION_CANCELLED' : 'EXECUTION_ERROR', message:cancelled ? '本次出牌已取消' : '本次打出未完成，请重试' });
+      },
+    };
+  }
+  /** @returns {import('../battle.play-submission.types.js').CardPlaySubmission} */
+  function submitCardExecution(uid, card, fuelUids, target, freeCost) {
+    const submission = createSubmission(uid);
+    try { queueCardExecution(uid, card, fuelUids, target, freeCost, false, [], null, submission); }
+    catch (error) {
+      if (submission.result?.status === 'queued') submission.error(error);
+      else submission.reject('SUBMISSION_ERROR', '本次出牌未接收，请重试');
+      console.error('[battle] 出牌提交异常：', error);
+    }
+    return /** @type {import('../battle.play-submission.types.js').CardPlaySubmission} */ (submission.result);
+  }
+  function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null, submission = null) {
+    const submittedCard = card;
+    const check = inspectExecution(uid, card, fuelUids, freeCost, requirementsPaid, paymentUids);
+    card = check.card;
+    if (check.reason) {
+      submission?.reject(check.reason.code, check.reason.message);
+      if (check.reason.code === 'MISSING_TRANSFORM') rejectMissingTransform(card);
+      else if (['RULE_INVALID','RULE_UNSUPPORTED'].includes(check.reason.code)) rejectUnsupportedCard(card, { warn:warnCardRuleRejection });
+      else if (check.reason.code !== 'PAYMENT_INVALID') {
+        G.log(`[[icon:cross]] ${esc(check.reason.message)}`, 'warn');
+        if (check.reason.code === 'INFUSION_REQUIRED') requestBattleRender();
+      }
+      return false;
+    }
+    const { handRequirement } = check;
+    if (check.paymentNeeded) {
+      const excludedUids = check.excludedUids;
       set$handSelecting({
         act: 'payment', mandatory: true, n: handRequirement.count, type: handRequirement.type || null,
         excludedUids, selectedUids: [],
         payment: { uid, card, fuelUids: [...(fuelUids || [])], target, freeCost, onResolved },
       });
+      submission?.needsInput();
       requestBattleRender();
       return false;
     }
-    if (handRequirement && requirementsPaid && paymentUids.length !== handRequirement.count) return false;
     const battleToken = battleState.token;
     const receipt = Object.freeze({ battleToken, actionSeq: nextActionSeq() });
+    submission?.queued(receipt);
     // 返回动作 promise：调用方（如极速符文回环）可 await 出牌完成
     return queueBattleAction(async signal => {
-      const resolved = await execPlay(uid, submittedCard, fuelUids, target, freeCost, signal, receipt, paymentUids);
+      const resolved = await execPlay(uid, submittedCard, fuelUids, target, freeCost, signal, receipt, paymentUids, submission);
       throwIfActionCancelled(signal);
       if (resolved && onResolved && G?.battleActive) onResolved();
-    }, '出牌动作');
+    }, '出牌动作', submission ? error => submission.error(error) : null);
   }
 
-  async function execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids = []) {
+  async function execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids = [], submission = null) {
     set$activeActionSignal(signal);
     try {
     throwIfActionCancelled(signal);
     // Every producer, including free selections and automatic releases, uses the
     // same effective face. Resolve again here before any payment or UID movement.
     card = effectiveExecutionCard(uid, card);
-    if (rejectMissingTransform(card)) return false;
+    if (rejectMissingTransform(card)) { submission?.reject('MISSING_TRANSFORM', '转换目标缺失，本次未施放'); return false; }
     // Recheck after queueing: rules may have changed before payment is committed.
-    if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
+    if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) { submission?.reject('RULE_REJECTED', '规则格式非法或尚未支持'); return false; }
     // Revalidate before any payment: a queued transform can invalidate chosen fuel.
     if ((fuelUids || []).some(fuelUid => infusionFuelReason?.(fuelUid))) {
+      submission?.reject('FUEL_INVALID', '注能材料已失效，本次打出未扣费');
       G.log('[[icon:cross]] 注能材料已失效，本次打出未扣费', 'warn');
       requestBattleRender();
       return false;
     }
     if (!freeCost && effCostOf(card, uid) > energy) {
+      submission?.reject('INSUFFICIENT_ENERGY', `能量不足：【${card.name}】本次未扣费或消耗手牌`);
       G.log(`[[icon:bolt]] 能量不足：【${esc(card.name)}】本次未扣费或消耗手牌`, 'warn');
       requestBattleRender();
       return false;
@@ -116,6 +188,7 @@ export function createBattleExecPlay({
           return candidate;
         });
       if (!validPayment) {
+        submission?.reject('PAYMENT_INVALID', `【${card.name}】手牌支付未完成，本次打出已取消`);
         G.log(`[[icon:cross]] 【${esc(card.name)}】手牌支付未完成，本次打出已取消`, 'warn');
         return false;
       }
@@ -148,6 +221,7 @@ export function createBattleExecPlay({
     const effCost = effCostOf(card, uid);
     if (effCost !== card.cost) G.log(`[[icon:sparkles]] <b>费用变化</b>：【${esc(card.name)}】按 <b>${effCost}</b> 费打出（原 ${card.cost} 费）`, 'sys');
     if (!freeCost && effCost > energy) {
+      submission?.reject('INSUFFICIENT_ENERGY', `能量不足：【${card.name}】未打出`);
       G.log(`[[icon:bolt]] 能量不足：【${esc(card.name)}】未打出`, 'warn');
       requestBattleRender();
       return false;
@@ -156,6 +230,7 @@ export function createBattleExecPlay({
     played.push(uid);
     SDT.Sound.sfx('card');
     removeUid(hand, uid);
+    submission?.commit();
     cardAnims.push({
       kind: 'play', uid, name: card.name, type: card.type,
       side: targetSideFor(card, SDT.Cards.DMG_TYPES),
@@ -317,5 +392,5 @@ export function createBattleExecPlay({
     }
   }
 
-  return { queueCardExecution };
+  return { queueCardExecution, submitCardExecution, getExecutionAvailability };
 }

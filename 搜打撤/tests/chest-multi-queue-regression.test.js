@@ -1,3 +1,4 @@
+import { continueChestRewards } from './helpers/chest-actions.js';
 import { afterEach, expect, it, vi } from 'vitest';
 
 afterEach(() => { vi.useRealTimers(); delete window.SDT; document.body.innerHTML = ''; });
@@ -39,8 +40,8 @@ it('multi-chest leave and take actions advance exactly once per box', async () =
   };
   const { SDT } = await import('../game/src/run/chests.js');
   SDT.Chests.open(game, [{kind:'small'}, {kind:'small'}], done);
-  expect(UI.el.ovTitle.textContent).toContain('第 1 / 2');
-  ovBody.querySelector('[data-act="chestClaim"]').click();
+  expect(ovBody.querySelector('.cqo-progress').getAttribute('aria-label')).toBe('2 箱待领，共 2 箱');
+  ovBody.querySelector('[data-act="chestNext"]').click();
   ovBody.querySelector('[data-act="chestReveal"]').click();
   const previews = [...ovBody.querySelectorAll('[data-act="chestSelect"]')];
   const claims = [...ovBody.querySelectorAll('[data-act="chestTake1"]')];
@@ -60,16 +61,16 @@ it('multi-chest leave and take actions advance exactly once per box', async () =
   ovBody.querySelector('[data-act="chestSkip"]').click();
   expect(ovBody.querySelector('[data-act="chestLeave"]')).not.toBeNull();
   ovBody.querySelector('[data-act="chestLeave"]').click();
-  expect(ovBody.querySelector('[data-act="chestContinue"]')).not.toBeNull();
-  ovBody.querySelector('[data-act="chestContinue"]').click();
-  expect(UI.el.ovTitle.textContent).toContain('第 2 / 2');
+  expect(ovBody.querySelector('.cqo-overview')).not.toBeNull();
+  continueChestRewards(actions);
+  expect(ovBody.querySelector('.cqo-progress').getAttribute('aria-label')).toBe('1 箱待领，共 2 箱');
   expect(ovBody.querySelector('[data-act="chestSelect"]')).toBeNull();
-  ovBody.querySelector('[data-act="chestClaim"]').click();
+  ovBody.querySelector('[data-act="chestNext"]').click();
   ovBody.querySelector('[data-act="chestReveal"]').click();
   expect(ovBody.querySelector('[data-act="chestTake"]')).not.toBeNull();
   ovBody.querySelector('[data-act="chestTake"]').click();
   expect(game.grantCard).toHaveBeenCalledTimes(2);
-  ovBody.querySelector('[data-act="chestContinue"]').click();
+  continueChestRewards(actions);
   expect(done).toHaveBeenCalledTimes(1);
   expect(game.state).toBe('idle');
   expect(overlay.hidden).toBe(true);

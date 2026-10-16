@@ -1,3 +1,4 @@
+import { validNodeRestore } from './node-restore-state.js';
 const ids = value => Array.isArray(value) && value.every(id => typeof id === 'string' && id.length > 0);
 const coordinate = value => Number.isInteger(value) && value >= 0;
 
@@ -77,6 +78,7 @@ export function validNodeRewards(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
   return Object.entries(value).every(([key, item]) => {
     if (!/^\d+,\d+$/.test(key) || !item || item.version !== 1) return false;
+    if (item.type === 'restore') return validNodeRestore(item);
     if (item.type === 'event') return typeof item.eventId === 'string' && item.eventId.length > 0;
     if (item.type === 'event-choice') return validEventChoiceReward(item);
     if (item.type === 'resource') return ids(item.cardIds) && item.cardIds.length <= 2

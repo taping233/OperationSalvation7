@@ -13,6 +13,7 @@ const motionSheet = /new URL\('([^']+\.css)'/.exec(motionLoader)?.[1];
 if (!motionSheet) throw new Error('Runtime motion stylesheet was not resolved');
 stylesheetPaths.push(path.normalize(path.join('game/src/ui', motionSheet)));
 function loadSheet(file, ancestors = []) {
+  file = file.replaceAll('\\', '/');
   if (ancestors.includes(file)) throw new Error(`Cyclic stylesheet import: ${file}`);
   const root = postcss.parse(readFileSync(file, 'utf8'), { from: file });
   const imported = [];

@@ -243,8 +243,8 @@ describe('discovery source presentation and restoration copy', () => {
       expect(candidate.textContent).toContain('不朽斩');
       expect(candidate.textContent).not.toContain('初始攻击');
     }
-    expect(candidates[0].title).toContain('随身牌来源');
-    expect(candidates[1].title).toContain('本场临时牌来源');
+    expect(candidates[0].getAttribute('aria-label')).toContain('随身牌来源');
+    expect(candidates[1].getAttribute('aria-label')).toContain('本场临时牌来源');
     expect(UI.el.ovBody.textContent).toContain('来自当前牌库底 · 选中牌以本场临时副本入手，战后消散');
     expect(JSON.stringify(options)).toBe(beforeOptions);
     expect(JSON.stringify(game.ownedCards)).toBe(beforeOwned);

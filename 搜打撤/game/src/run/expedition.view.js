@@ -1,6 +1,7 @@
 import { esc } from '../core/shared.js';
 import { mapNodeInfo } from '../core/node-info.js';
-import { isConsumedMapNode } from '../core/map-node-state.js';
+import { isConsumedMapNode, mapNodeStatus } from '../core/map-node-state.js';
+import '../../css/map-node-status.css';
 import { mapNodeArtHTML, mapNodeIconDataUrl } from '../core/map-node-art.js';
 import { findMapTravelPath, getMapTravelPresentation } from './map-travel-path.js';
 export { findMapTravelPath, getMapTravelPresentation, mapTravelCurve, mapTravelPoint } from './map-travel-path.js';
@@ -28,6 +29,7 @@ export function expeditionRoutes(game) {
     unique.add(idx);
     const door = layer.doors?.find(d => d.at === idx);
     const cleared = isConsumedMapNode(game, { li, idx, def: cell.def });
+    const content = mapNodeStatus(game, { li, idx, def:cell.def });
     const [name, hint, icon, tone] = mapNodeInfo(game, { li, idx, def:cell.def });
     const plan=game.routePlan?.status==='applied' && game.routePlan.layerIndex===li && current.id===game.routePlan.startNodeId ? game.routePlan : null;
     const role=!cleared && plan && cell.id===plan.supplyNodeId?'supply':!cleared && plan && cell.id===plan.riskNodeId?'risk':null;
@@ -35,9 +37,9 @@ export function expeditionRoutes(game) {
     const routeHint=role==='supply'?'已知物资节点 · 具体收获进入后决定':role==='risk'?'已知战斗风险 · 胜利后按现有规则结算':hint;
     return [{ li, idx, baseName: routeName, name:routeName, icon, tone: cleared ? 'quiet' : tone,
       door: !!(door && !door.reverse),   // W1-10：前进层间闸门卡给专属高亮钩子
-      hint: cleared ? '已探索 · 内容已消耗，仍可通行' : door?.reverse ? '返回上一片区域' : routeHint,
+      hint: content.id === 'pending' ? hint : cleared ? hint : door?.reverse ? '返回上一片区域' : routeHint,
       direction: door ? (door.reverse ? 'return' : 'deeper') : cleared ? 'return' : 'explore',
-      cleared, selected: (getExpeditionPreview(game) || game.moveTarget)?.li === li &&
+      contentState:content.id, contentLabel:content.label, cleared, selected: (getExpeditionPreview(game) || game.moveTarget)?.li === li &&
         (getExpeditionPreview(game) || game.moveTarget)?.idx === idx }];
   });
   // 同一屏可能有多条同类型路线（例如两个相邻遭遇战）。只显示“遭遇战”会让
@@ -50,7 +52,7 @@ export function expeditionRoutes(game) {
     const count = sameNameCount.get(route.baseName) || 0;
     const ordinal = (sameNameSeen.set(route.baseName, (sameNameSeen.get(route.baseName) || 0) + 1).get(route.baseName));
     const label = count > 1 ? `${route.baseName} · 路线${ordinal}` : route.baseName;
-    return { ...route, name: label, ariaLabel: `${label}（节点 ${route.idx + 1}）` };
+    return { ...route, name: label, ariaLabel: `${label}（节点 ${route.idx + 1}）${route.contentLabel ? ` · ${route.contentLabel}` : ''}` };
   });
 }
 
@@ -149,7 +151,9 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   const isCurrent = preview?.li === game.layerIdx && preview?.idx === game.trackPos;
   const selectedDoor = selectedNode && game.layerData?.[selectedNode.li]?.doors?.some(d => d.at === selectedNode.idx);
   const selectedSpent = isConsumedMapNode(game, selectedNode);
-  const completedLocalAltar = isCurrent && selectedSpent && selectedNode?.def?.type === 'altar';
+  const content = mapNodeStatus(game, selectedNode);
+  const pending = content.id === 'pending';
+  const completedLocal = isCurrent && !selectedDoor && ['completed','shop-closed'].includes(content.id);
   const supply = game.entrySupply;
   const selectedSupply = selectedNode && supply?.layerIdx === selectedNode.li && supply.trackPos === selectedNode.idx &&
     (supply.taken?.length || 0) < (supply.cardIds?.length || 0);
@@ -157,9 +161,9 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
     ? mapNodeInfo(game, selectedNode)
     : [];
   const name = selectedSupply ? '入城补给' : route?.name || nodeName;
-  const hint = selectedSupply ? '待领取职业补给' : route?.hint || nodeHint;
+  const hint = content.label ? content.detail : route?.hint || nodeHint;
   const status = moving && preview ? `前往中 · ${Math.min(travel.segmentIndex, travel.path.length - 1)}/${travel.path.length - 1} 段` : travel?.phase === 'arrived' && isCurrent ? '已抵达' : isCurrent ? '当前位置' : reachable ? '可以前往' : '暂不可前往';
-  const danger = !selectedSpent && !selectedDoor && ['battle','boss','elite','battleElite'].includes(selectedNode?.def?.type);
+  const danger = !pending && !selectedSpent && !selectedDoor && ['battle','boss','elite','battleElite'].includes(selectedNode?.def?.type);
   const lowLife = danger && game.hp > 0 && game.hp / game.maxHp <= .25;
   const cam = game.cam;
   const previousInset = cam?.detailInset || 0;
@@ -167,13 +171,19 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   if (cam?.frameExploration && previousInset !== cam.detailInset && cam.frameMode !== 'manual') {
     cam.frameExploration(game, cam.frameMode === 'overview');
   }
-  const key = JSON.stringify([game.state, preview?.li, preview?.idx, route?.name, name, hint, status, danger, lowLife, completedLocalAltar]);
+  const actionLabel = completedLocal ? content.id === 'shop-closed' ? '本店交易已结束' : '本地内容已完成'
+    : pending ? isCurrent ? '继续领奖' : '前往领奖'
+      : isCurrent && selectedDoor ? '查看闸门'
+        : content.id === 'shop-open' ? isCurrent ? '进入商店' : '前往商店'
+          : isCurrent ? '查看本地内容' : '进入该地点';
+  const key = JSON.stringify([game.state, preview?.li, preview?.idx, route?.name, name, hint, status, content.id, content.detail, actionLabel, danger, lowLife, completedLocal]);
   if (strip.dataset.viewKey === key) return;
   strip.dataset.viewKey = key;
   strip.dataset.nodeState = moving && preview ? 'moving' : isCurrent ? 'current' : reachable ? 'reachable' : 'unreachable';
+  strip.dataset.contentState = content.id;
   strip.hidden = !name;
   strip.dataset.nodeTone = danger ? 'danger' : 'neutral';
-  strip.setAttribute('aria-label', selectedSupply ? `${name}（节点 ${selectedNode.idx + 1}）` : route?.ariaLabel || name || '地点预览');
+  strip.setAttribute('aria-label', selectedSupply ? `${name}（节点 ${selectedNode.idx + 1}） · ${content.label}` : route?.ariaLabel || `${name || '地点预览'}${content.label ? ` · ${content.label}` : ''}`);
   const displayType = selectedSupply ? 'event' : selectedDoor ? 'door' : selectedNode?.def?.type;
   const paintedIcon = name && mapNodeArtHTML(displayType);
   const glyph = name && !paintedIcon && mapNodeIconDataUrl(displayType);
@@ -184,9 +194,10 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
       <button type="button" class="expedition-preview-close" data-route-close="1" aria-label="关闭地点预览">×</button>
     </header>
     <div class="expedition-preview-content">
+      ${content.label ? `<span class="expedition-node-status" data-content-state="${esc(content.id)}"><span aria-hidden="true" class="expedition-node-status-dot"></span>${esc(content.label)}</span>` : ''}
       <p class="expedition-preview-hint">${esc(hint || '')}</p>
       ${!reachable && !isCurrent ? '<p class="expedition-preview-condition">需要先到达与此处相连的地点。</p>' : ''}
       ${lowLife ? '<p class="expedition-preview-risk">生命偏低，建议先恢复再迎战。</p>' : ''}
     </div>
-    <button type="button" class="expedition-preview-enter" data-route-enter="1" ${game.state !== 'idle' || (!reachable && !isCurrent) || completedLocalAltar ? 'disabled' : ''}><span>${completedLocalAltar ? '本地内容已完成' : isCurrent ? '查看本地内容' : '进入该地点'}</span><span aria-hidden="true">→</span></button>` : '';
+    <button type="button" class="expedition-preview-enter" data-route-enter="1" ${game.state !== 'idle' || (!reachable && !isCurrent) || completedLocal ? 'disabled' : ''}><span>${esc(actionLabel)}</span><span aria-hidden="true">→</span></button>` : '';
 }

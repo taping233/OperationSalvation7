@@ -1,8 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { descRich } from '../game/src/cards/cards.view.js';
+afterEach(() => vi.restoreAllMocks());
 
 describe('潜行卡面词条', () => {
   it('潜匿与破隐说明都接入独立讲解，点击词条不触发卡牌', () => {
+    vi.spyOn(Element.prototype, 'getClientRects').mockReturnValue([{ x:0, y:0, width:80, height:20 }]);
     document.body.innerHTML = `<button id="card">${descRich('进入潜行状态 1 回合；潜行状态下的下一次攻击伤害翻倍。')}</button>`;
     const terms = [...document.querySelectorAll('[data-term="stealth"]')];
     expect(terms).toHaveLength(2);

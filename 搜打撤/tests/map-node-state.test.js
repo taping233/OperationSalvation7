@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { isConsumedMapNode } from '../game/src/core/map-node-state.js';
+import { isConsumedMapNode, mapNodeStatus } from '../game/src/core/map-node-state.js';
 import { drawTacticalIcon } from '../game/src/core/renderer.icons.js';
 import { getMapNodeArt, mapNodeArtHTML } from '../game/src/core/map-node-art.js';
 import { mapNodeInfo, NODE_INFO } from '../game/src/core/node-info.js';
@@ -17,9 +17,11 @@ describe('已消耗地图节点展示', () => {
   it.each(['battle', 'shop', 'coin', 'wood', 'chest', 'rations', 'key', 'fire', 'event', 'resource'])('%s 完成结算后保留原类型并标注完成，未消费前保留原说明', type => {
     expect(isConsumedMapNode(game(), node(type))).toBe(true);
     expect(isConsumedMapNode(game({ visited: {} }), node(type))).toBe(false);
-    expect(mapNodeInfo(game(), node(type))[0]).toBe(`${NODE_INFO[type][0]} · 已完成`);
+    expect(mapNodeInfo(game(), node(type))[0]).toBe(NODE_INFO[type][0]);
+    expect(mapNodeStatus(game(), node(type)).label).toBe(type === 'shop' ? '已离店' : '已完成');
     expect(mapNodeInfo(game(), node(type))[2]).toBe(NODE_INFO[type][2]);
-    expect(mapNodeInfo(game({ visited:{} }), node(type))).toEqual(NODE_INFO[type]);
+    expect(mapNodeInfo(game({ visited:{} }), node(type))[0]).toBe(NODE_INFO[type][0]);
+    expect(mapNodeStatus(game({ visited:{} }), node(type)).label).toBe(type === 'shop' ? '营业中' : '未完成');
   });
 
   it.each(['entrance', 'door', 'emergencyExit', 'extraction'])('已访问 %s 仍保留可用地点图标', type => {
@@ -37,8 +39,9 @@ describe('已消耗地图节点展示', () => {
   ])('祭坛%s：按激活/待领三态投影，不把visited误当领奖完成', (_label, state, completed) => {
     const source = game(state), before = JSON.stringify(source);
     expect(isConsumedMapNode(source, node('altar'))).toBe(completed);
-    expect(mapNodeInfo(source, node('altar'))[0]).toBe(completed ? '祭坛 · 已完成' : '祭坛');
-    if (state.altarActivated && state.altarRewardPending) expect(mapNodeInfo(source, node('altar'))[1]).toBe('已激活 · 回赠待领取');
+    expect(mapNodeInfo(source, node('altar'))[0]).toBe('祭坛');
+    expect(mapNodeStatus(source, node('altar')).label).toBe(completed ? '已完成' : state.altarRewardPending ? '待领奖' : '未完成');
+    if (state.altarActivated && state.altarRewardPending) expect(mapNodeInfo(source, node('altar'))[1]).toBe('待领奖 · 可回地图整理，回到此节点继续领取。');
     expect(JSON.stringify(source)).toBe(before);
   });
 

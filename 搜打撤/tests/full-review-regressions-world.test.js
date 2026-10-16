@@ -179,7 +179,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     H.cards = [{ id: 'ev19-quartermaster', type: '事件', name: '装备征用令' }, ...Array.from({ length: 3 }, (_, i) => ({ id: `equip${i}`, name: `装备${i}`, type: '装备', rarity: '古朴' }))];
     H.game.layerData[0].logical[1].def.type = 'event';
     await flow.runEventDeck(); UI._acts.evtChoice({ i: 0 });
-    expect(H.game.coins).toBe(6); expect(H.game.visited['0,1']).toBeUndefined();
+    expect(H.game.coins).toBe(6); expect(H.game.visited['0,1']).toBe(1);
     const pending = H.game.nodeRewards['0,1'];
     expect(pending).toMatchObject({ type:'event-choice', eventId:'ev19-quartermaster', paidCoins:3, taken:null });
     const candidateIds = [...pending.cardIds];

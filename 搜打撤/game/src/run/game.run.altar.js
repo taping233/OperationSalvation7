@@ -10,6 +10,7 @@ import { installExpeditionFeedback } from '../ui/expedition-feedback.js';
 import { openClassChoice as requestClassChoicePage } from './game.run.class-choice.js';
 import { rewardSceneHTML } from '../ui/reward-scene-view.js';
 import { claimEntrySupply, entrySupplyAt, nodeActionBinding } from './node-reward-state.js';
+import { beginNodeRestore, nodeRestoreAt } from './node-restore-state.js';
 import { bagSlots } from '../hub/game.bag.bridge.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { esc, escAttr } from '../core/shared.js';
@@ -185,6 +186,7 @@ export function openDoorModal(door, cellDef) {
   game.state = 'modal';
   game.discoveredPairs.add(door.pair);
   const target = game.layerData[door.toLayer] || { name: `第${door.toLayer + 1}层` };
+  const shopOpen = () => cellDef?.type === 'shop' && !game.visited?.[`${game.layerIdx},${game.trackPos}`];
   // 2026-09-09 需求 #13：只能在第三层（紧急撤离点）与第四层（终局撤离点）撤离——
   // 环间门不再提供撤离选项，只能向深处走
   nodeShell({
@@ -192,7 +194,7 @@ export function openDoorModal(door, cellDef) {
     sub: door.reverse ? '这条通路返回已探索的区域。' : '穿过闸门后进入下一层。确认前可返回当前层检查遗漏，或先整理背包。',
     body:
       nodeOpt('goDoor', `${door.reverse ? '返回' : '进入'}${target.name}`, '', 'ok') +
-      (cellDef && cellDef.type === 'shop' ? nodeOpt('doorShop', '逛商队', '闸门旁的拾荒商队还在营业') : ''),
+      (shopOpen() ? nodeOpt('doorShop', '逛商队', '闸门旁的拾荒商队还在营业') : ''),
     foot:'<button class="ov-btn" data-act="doorBag">整理背包</button><button class="ov-btn" data-act="doorBack">返回当前层</button>',
   });
   const active = altarPageBinding('goDoor');
@@ -203,6 +205,7 @@ export function openDoorModal(door, cellDef) {
   UI.act('goDoor', () => {
     if (!active() || entering) return;
     entering = true;
+    if (cellDef?.type === 'shop') consumeCurrentCell();
     setBagReturnHook(null);
     UI.hideOverlay();
     UI.log(`穿过隔离闸门 → <b>${target.name}</b>`, 'sys');
@@ -210,14 +213,24 @@ export function openDoorModal(door, cellDef) {
     enterLayer(door.toLayer, door.arriveAt, { glideCam: true });
     SDT.Sound.sfx('layerEnter');
   });
-  UI.act('doorShop', () => { if (active() && !entering) openShop('door:' + door.pair); });
+  UI.act('doorShop', () => { if (active() && !entering && shopOpen()) openShop('door:' + door.pair); });
   UI.refresh(game);
 }
 
 // ---------- 第四层终局：祭坛格（弃3激活选奖励）→ 首脑格 → 终局撤离点 ----------
 // 祭坛：弃掉背包 3 张牌激活后二选一奖励；集齐 2 枚员工通行证A碎片可不走弃牌直接换能力卡。
 // 激活（或兑换）成功才算触发过本格；离开未激活可再来。首脑格必须先激活祭坛。
+export function resumeNodeRestore() {
+  const record = nodeRestoreAt(game);
+  if (!record) return false;
+  const done = record.source === 'altar-offering' ? () => { saveGame(); openAltarRitual(); } : finishInstant;
+  return openPocketRestore(record.total, done, {
+    tone:'altar', icon:'[[icon:crystal]]', title:'祭坛回赠 · 复原', restoreRecord:record,
+  });
+}
+
 export function openAltarRitual(def) {
+  if (resumeNodeRestore()) return;
   game.state = 'modal';
   // 需求（2026-09-13 老板）：祭坛的选项和奖励只能选一次——激活后不再重复展示弃3/碎片等
   // 激活选项：奖励未领取时重进直接进回赠面板；奖励已领取则本格视为完全消耗
@@ -262,17 +275,16 @@ export function openAltarRitual(def) {
     if (!active() || game.altarActivated) return;
     if (game.altarItemSacrificed) { UI.log('[[icon:crystal]] 这座祭坛的道具献祭已经受理过了', 'warn'); return; }
     if (!sacrificeCards('道具').length) { UI.log('[[icon:bag]] 背包里没有道具卡可供献祭', 'warn'); return; }
-    const restorableN = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).length;
+    const restorableN = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).reduce((sum, p) => sum + p.count, 0);
     if (!game.usedPocket.length || !restorableN) { UI.log('[[icon:bag]] 消耗区里没有可复原的卡牌——先去战斗吧', 'warn'); return; }
     openBagSacrifice(1, (chosen) => {
       game.altarItemSacrificed = true;   // 确认献祭才上锁；取消献祭不上锁
+      beginNodeRestore(game, { source:'altar-offering', picks:Math.min(2, restorableN) });
       SDT.Sound.sfx('altarOffer');
       UI.log(`[[icon:crystal]] 献上道具【<b>${esc(chosen[0].card.name)}</b>】——从消耗区复原卡牌（本祭坛的道具献祭已用完）`, 'loot');
       saveGame();
       // 祭坛道具路径的复原页跟祭坛身份，不落默认「营火休整」（同 openAltarReward 口径）
-      openPocketRestore(Math.min(2, restorableN), () => { saveGame(); openAltarRitual(def); }, {
-        tone: 'altar', icon: '[[icon:crystal]]', title: '祭坛回赠 · 复原',
-      });
+      resumeNodeRestore();
     }, () => openAltarRitual(def), '道具');
   });
   UI.act('altarOn3', () => {
@@ -328,7 +340,7 @@ function openAltarReward() {
   game.altarRewardPending = true;
   // 2026-09-10 留言 #33：消耗区没有可复原卡牌（或全是不可复原的道具/装备）时，
   // 选项①要如实标注——否则选了它只会看到空列表，感觉「无法复原」
-  const restorableN = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).length;
+  const restorableN = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).reduce((sum, p) => sum + p.count, 0);
   const restoreOpt = restorableN
     ? nodeOpt('altarRewardRestore', '① 复原 3 张消耗卡 + 回复 10 血', `从消耗区挑选卡牌复原回背包（现有 ${restorableN} 张可复原${restorableN < 3 ? '，不足 3 张时全复原' : ''}），并回复 10 点生命`, 'ok')
     : nodeOpt('altarRewardRestoreOff', '① 复原 3 张消耗卡 + 回复 10 血', '消耗区里没有可复原的卡牌（道具/装备类消耗不可复原）——此项不可选', '', 'disabled title="消耗区里没有可复原的卡牌，请选奖励②"');
@@ -343,14 +355,13 @@ function openAltarReward() {
   const active = altarPageBinding('altarRewardLeave');
   UI.act('altarRewardRestore', async () => {
     if (!active() || !game.altarRewardPending || !restorableN) return;
-    game.altarRewardPending = false;   // 领取即消耗：奖励只能选一次
-    const before = game.hp;
-    game.heal(10);
-    UI.log(`[[icon:heart]] 祭坛回赠：回复 <b>${Math.max(0, game.hp - before)}</b> 点生命（${game.hp}/${game.maxHp}）`, 'heal');
+    const record = beginNodeRestore(game, { source:'altar-reward', picks:Math.min(3, restorableN) });
+    if (!record) return;
+    game.altarRewardPending = false;   // 选择已锁定，未用完的次数由节点复原记录接管。
+    UI.log(`[[icon:heart]] 祭坛回赠：回复 <b>${record.hpGain}</b> 点生命（${game.hp}/${game.maxHp}）`, 'heal');
+    saveGame();
     UI.hideOverlay();
-    openPocketRestore(3, () => { saveGame(); finishInstant(); }, {
-      tone: 'altar', icon: '[[icon:crystal]]', title: '祭坛回赠 · 复原',
-    });
+    resumeNodeRestore();
   });
   UI.act('altarRewardLoot', () => {
     if (!active() || !game.altarRewardPending) return;

@@ -300,7 +300,9 @@ describe('事件等待与回调生命周期审计', () => {
     scenes.openFixedRewardsOnCell(H.cards, '测试三选一');
     const saved = window.SDT.Chests.serialize(H.game);
     saved.queue[0].kind = saved.current.kind = 'medium';
-    scenes.resumeChestsOnCell(saved);
+    saved.current.claimMode = 'one'; saved.current.choiceCount = 3;
+    saved.queue[0].reward = saved.current;
+    expect(scenes.resumeChestsOnCell(saved)).toBe(true);
     expect(UI.el.ovBody.textContent).toContain('其余卡牌永久放弃，无法找回');
     UI._acts.chestPick({ i:'1' });
     const after = window.SDT.Chests.serialize(H.game);

@@ -37,6 +37,7 @@ export function createEventCardChoiceController({
         </button>` : '<p class="reward-notice">这张候选卡暂时不可用，奖励已保留。</p>').join('')}</div>
         <p class="loot-footer-note">点击一张卡牌选择获得；未领取前退出可返回此节点继续选择</p>`,
       foot:`<span class="reward-capacity">[[icon:bag]] ${esc(capacity)}</span>
+        <button type="button" class="ov-btn" data-act="eventCardReturn">返回地图</button>
         <button type="button" class="ov-btn" data-act="eventCardBag">整理背包</button>
         <p class="reward-notice" data-event-capacity role="status" aria-live="polite">${esc(notice || (noFit ? '当前候选都放不下，请先整理背包；候选和已支付的货币会保留。' : ''))}</p>`,
     });
@@ -45,6 +46,7 @@ export function createEventCardChoiceController({
     const active = () => current() && binding() && game.nodeRewards?.[key] === record && record.taken === null
       && (!page || UI.el?.ovBody?.firstElementChild === page);
     UI.act('eventCardBag', () => { if (active()) bagSlots.showBackpack(); });
+    UI.act('eventCardReturn', () => { if (active()) close(); });
     UI.act('eventCardPick', data => {
       if (!active()) return false;
       const index = Number(data.i), card = cards[index];
@@ -113,6 +115,7 @@ export function createEventCardChoiceController({
     const record = game.nodeRewards[key] = {
       version:1, type:'event-choice', eventId, cardIds:cards.map(card => card.id), paidCoins:spec.paidCoins, taken:null,
     };
+    consumeCurrentCell(); // 事件选项已确定；未领取候选仍由上方 resume 入口承接。
     game.state = 'modal';
     const saved = saveGame();
     const notice = saved === false && getActiveSlot()

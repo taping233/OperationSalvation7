@@ -23,7 +23,7 @@ vi.mock('../game/src/hub/bag-return-hook.js', () => ({ setBagReturnHook: vi.fn()
 vi.mock('../game/src/battle/battle-loader.js', () => ({ startBattle: vi.fn() }));
 vi.mock('../game/src/core/turbo.js', () => ({ isTurbo: () => false }));
 vi.mock('../game/src/core/render-scheduler.js', () => ({ renderScheduler: { invalidate: vi.fn() } }));
-vi.mock('../game/src/run/game.run.altar.js', () => ({ openDoorModal: vi.fn(), openFireRest: vi.fn(), openAltarRitual: vi.fn(), openBossGate: vi.fn(), openEmergencyModal: vi.fn() }));
+vi.mock('../game/src/run/game.run.altar.js', () => ({ openDoorModal: vi.fn(), openFireRest: vi.fn(), openAltarRitual: vi.fn(), openBossGate: vi.fn(), openEmergencyModal: vi.fn(), resumeNodeRestore:vi.fn(() => false) }));
 window.SDT = { UI: { refresh: vi.fn(), log: vi.fn(), beginRoom: vi.fn(), act: vi.fn(), hideOverlay: vi.fn() }, Meta: { track: vi.fn() } };
 const { moveTo } = await import('../game/src/run/game.run.flow.js');
 const { getMapTravelPresentation, mapTravelPoint } = await import('../game/src/run/map-travel-path.js');

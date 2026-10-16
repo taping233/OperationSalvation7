@@ -38,6 +38,23 @@ function inspect(name = potion.name) { document.querySelector(`[data-act="inspec
 function pointer(type, target, id = 1, x = 20) { const event = new Event(type, { bubbles: true, cancelable: true }); Object.assign(event, { pointerId: id, button: 0, clientX: x, clientY: 20 }); target.dispatchEvent(event); }
 function startDrag() { const source = document.querySelector('[data-stack="木材卡"]'); pointer('pointerdown', source); pointer('pointermove', window, 1, 200); frames.at(-1)(); return source; }
 describe('背包旧详情/页面回调与正常返回', () => {
+  it.each([false, true])('战斗中的通用背包入口拒绝打开/刷新（刷新=%s），不转发旧战斗背包命令', refresh => {
+    ui.hideOverlay(); H.game.battleActive = true;
+    const openBag = vi.fn(); window.SDT.Battle = { commands:{ openBag } };
+    const before = ui.el.ovBody.innerHTML;
+    bag.showBackpack(refresh);
+    expect(ui.el.overlay.hidden).toBe(true);expect(ui.el.ovBody.innerHTML).toBe(before);
+    expect(openBag).not.toHaveBeenCalled();expect(ui.log).toHaveBeenCalledWith(expect.stringContaining('战斗中无法打开背包'), 'warn');
+  });
+  it('战斗已经接管时，旧背包详情和底层丢弃/跨区/排序入口不能变更卡牌', async () => {
+    inspect(); const use = ui._acts.useDetailCard;
+    H.game.battleActive = true;
+    const { bagSlots } = await import('../game/src/hub/game.bag.bridge.js');
+    const before = JSON.stringify(H.game.ownedCards);
+    use();expect(H.game.discardCard(potion.name)).toBe(false);
+    bagSlots.moveStackSafe(potion.name, true);bagSlots.moveStackOrder(potion.name, spell.name);
+    expect(JSON.stringify(H.game.ownedCards)).toBe(before);expect(H.game.heal).not.toHaveBeenCalled();expect(H.save).not.toHaveBeenCalled();
+  });
   it.each(['slot', 'seed', 'owned-instance', 'same-seed-run', 'page', 'zoom'])('%s变化后旧道具详情不能使用新卡或关闭新详情', change => {
     inspect(); const oldUse = ui._acts.useDetailCard;
     if (change === 'slot') window.SDT.Base.slot = 2;

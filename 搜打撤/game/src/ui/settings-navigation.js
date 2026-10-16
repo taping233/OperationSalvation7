@@ -14,7 +14,7 @@ const CATEGORIES = [
 // Move existing controls into panels without replacing their nodes or action hooks.
 export function initSettingsNavigation(root) {
   if (!root) return;
-  root.dataset.settingsWallpaper = document.getElementById('title')?.dataset.homeWallpaper === 'ensemble' ? 'ensemble' : 'snow';
+  root.dataset.settingsWallpaper = document.getElementById('title')?.dataset.homeWallpaper || 'snow-road';
   if (root.classList.contains('settings-tabbed')) return;
   root.classList.add('settings-tabbed');
   const layout = root.querySelector('.settings-layout');

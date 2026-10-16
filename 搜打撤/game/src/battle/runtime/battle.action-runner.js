@@ -13,7 +13,7 @@ export function createBattleActionRunner({
   preparePresentation,
   onIdle = () => {},
 }) {
-  return function queueBattleAction(execute, label = '战斗动作') {
+  return function queueBattleAction(execute, label = '战斗动作', onError = null) {
     const battleToken = getBattleState().token;
     const generation = session.generation;
     const queue = session.actionQueue;
@@ -49,6 +49,7 @@ export function createBattleActionRunner({
       finally { if (getActiveActionSignal() === signal) setActiveActionSignal(null); }
     })
       .catch(error => {
+        onError?.(error);
         if (error?.name !== 'BattleActionCancelledError') console.error(`[battle] ${label}异常：`, error);
       })
       .finally(async () => {

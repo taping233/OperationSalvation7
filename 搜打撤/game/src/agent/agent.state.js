@@ -188,7 +188,6 @@ function battleActions(snap) {
     push('playDirect', [uid]);
   }
   push('endTurn', []);
-  push('openBag', []);
   push('flee', []);
   // 背包技能：按职业 1-2 费（2026-10-02 老板五职业分化）不吃手牌——手牌卡手时的硬通货
   push('bagSlam', []);

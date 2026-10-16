@@ -86,8 +86,8 @@ check('事件·二选一与三选一分支', (() => {
 })(), true);
 check('兼容·未知事件仍走旧效果', /return null;/.test(gameSource) && /applyEventEffect\(card\)/.test(gameSource), true);
 // 2026-10-01（ROOT-06）：bossCleanupPending 已随整理背包（Item 16）退役；现行契约是
-// 09-09 定版「战斗中开背包转战斗背包」（hub/game.bag.js）。
-check('BOSS·战斗阶段背包入口转战斗背包', /if \(game\.battleActive\) \{[\s\S]{0,200}?SDT\.Battle\.commands\.openBag\(\)/.test(src('hub/game.bag.js')), true);
+// 战斗期间通用背包拒绝打开；局内整理只在非战斗地点进行。
+check('战斗阶段背包入口拒绝打开', /if \(game\.battleActive\) return false;/.test(src('hub/game.bag.js')), true);
 check('BOSS·胜利领奖完成后直接保存结算', (() => {
   // 核对现行领奖续流的代码结构，不把历史注释文字当作玩法契约。
   const tree = parse(src('hub/game.bag.settle.js'), { ecmaVersion: 'latest', sourceType: 'module' });
