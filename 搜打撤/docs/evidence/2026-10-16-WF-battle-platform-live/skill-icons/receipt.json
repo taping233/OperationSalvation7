@@ -1,0 +1,332 @@
+{
+  "date": "2026-10-16",
+  "generation": "built-in image_gen",
+  "processing": "RGBA conversion if needed, full-canvas Lanczos resize to 512x512, lossless WebP encoding; no cropping, masking, recolouring or compositing",
+  "icons": {
+    "fixed": {
+      "request": {
+        "kind": "fixed",
+        "source": "C:/Users/太平/.codex/generated_images/01a1436d-3cc7-7510-8a69-9265b93f90a4/exec-ab5797d5-65f6-490a-8433-19dc3baf2c0b.png",
+        "prompt": "Use case: stylized-concept.\nAsset type: one original game HUD skill icon, square 1024 x 1024 RGBA PNG with real transparent background.\nReference image 1 is a STYLE REFERENCE BOARD ONLY: use the flat, few-colour illustrated visual language of its Black Flow forest node icons. It is not an edit target and its labels, arrangements, original symbols, and source artwork must NOT be copied.\nDesign a single memorable, asymmetric two-dimensional silhouette. Use only a few deliberate opaque colour fields with selective soft edges. The subject should occupy about 55–65% of the canvas width so its identity survives at 64–80px HUD display. Behind the subject is one near-black, almost-round irregular support about 66% of canvas width: incomplete softly uneven perimeter, dark distinguishable from the subject, not a hard circular button and not an outlined badge. One small local light focus connects the lit part of the subject to a restrained nearby glow, fading through the support edge to genuine alpha zero. Keep generous transparent space outside. No background rectangle, no checkerboard, no other objects, no title, no letters, no numerals, no watermark.\nPainting: flat graphic hand-painted concept illustration as on the reference board, carefully chosen positive and negative shapes, understated local grain only. No shiny 3D metal, bevel, folded triangular facets, photorealistic materials, weapon inventory render, stock SVG icon, all-around bright halo, full luminous ring, symmetric ornamental emblem, tiny engraving, particle shower, or extra light source. The support and light are subordinate to the readable core silhouette.\n\nSkill: 刺击 / fixed. Core image: a single ivory-blue sharply tapering blade-like shard thrust diagonally from lower left into a narrow torn rift at upper right. The rift is an irregular two-lipped dark opening shaped by the impact, not a second weapon or emblem. Distinguish the long, clean tapered thrust and the small split at its tip. Use muted cold bone, deep blue-grey and near-black; a concentrated pale turquoise flash only where the tip parts the opening. No handle, crossguard, conventional small sword, crossed weapons, circle of sparks or multiple spikes. The silhouette must read as one directed piercing action.\nStructural revision: Reference image 2 is the first attempt to REPLACE, not an accepted final. Redesign it more compactly: the entire piercing subject stays within the central 60% of the square and the almost-round near-black support within the central 60–64%. Leave roughly 16% genuinely transparent canvas margin on all four edges. Replace the sprawling flame-like blade plume with a shorter solid tapering blade shard, a clean open negative slit at its tip, and just one subordinate split lip. The primary bright shape must be narrow and simple rather than a broad textured flame or giant corner-to-corner slash. Make the near-black support darker and less blue; keep the luminous area local at the upper-right piercing point. The complete icon must read as one compact illustrated object at small size, with no micro-cracks, shredded wisps or extended dark rift at the canvas edges. Use the reference board's concentrated silhouettes and sparse marks.",
+        "referenced_image_paths": [
+          "C:/Users/太平/.codex/skills/arknights-node-icons/references/native-black-gallery.png",
+          "C:/Users/太平/.codex/generated_images/01a1436d-3cc7-7510-8a69-9265b93f90a4/exec-ef5ef8fe-d0a3-4839-ae63-78fa47240a63.png"
+        ],
+        "tool": "image_gen.imagegen",
+        "transparent_background": true
+      },
+      "source": {
+        "path": "C:\\Users\\太平\\.codex\\generated_images\\01a1436d-3cc7-7510-8a69-9265b93f90a4\\exec-ab5797d5-65f6-490a-8433-19dc3baf2c0b.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 550776,
+        "sha256": "578d623f02b448be7baf5619ba3156af7d89d35c1524e6fe631c7beb7ad4da95"
+      },
+      "output": {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\ui\\battle-skills-1016\\fixed.webp",
+        "size": [
+          512,
+          512
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 68248,
+        "sha256": "4752dca1c97aff7152ce10f6fa6759947a678eca8d488a7f79e34e3b5c70ebac"
+      },
+      "small_preview": {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-WF-battle-platform-live\\skill-icons\\preview-fixed.webp",
+        "size": [
+          96,
+          96
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 4734,
+        "sha256": "c7ff5cb367b363737a3dc2ddb89934e025c4533730a64ebdc2558e07180282a2"
+      }
+    },
+    "attack": {
+      "request": {
+        "kind": "attack",
+        "source": "C:/Users/太平/.codex/generated_images/01a1436d-3cc7-7510-8a69-9265b93f90a4/exec-cd06454c-18f3-474f-816d-887905edbf9d.png",
+        "prompt": "Use case: stylized-concept.\nAsset type: one original game HUD skill icon, square 1024 x 1024 RGBA PNG with real transparent background.\nReference image 1 is a STYLE REFERENCE BOARD ONLY: use the flat, few-colour illustrated visual language of its Black Flow forest node icons. It is not an edit target and its labels, arrangements, original symbols, and source artwork must NOT be copied.\nDesign a single memorable, asymmetric two-dimensional silhouette. Use only a few deliberate opaque colour fields with selective soft edges. The subject should occupy about 55–65% of the canvas width so its identity survives at 64–80px HUD display. Behind the subject is one near-black, almost-round irregular support about 66% of canvas width: incomplete softly uneven perimeter, dark distinguishable from the subject, not a hard circular button and not an outlined badge. One small local light focus connects the lit part of the subject to a restrained nearby glow, fading through the support edge to genuine alpha zero. Keep generous transparent space outside. No background rectangle, no checkerboard, no other objects, no title, no letters, no numerals, no watermark.\nPainting: flat graphic hand-painted concept illustration as on the reference board, carefully chosen positive and negative shapes, understated local grain only. No shiny 3D metal, bevel, folded triangular facets, photorealistic materials, weapon inventory render, stock SVG icon, all-around bright halo, full luminous ring, symmetric ornamental emblem, tiny engraving, particle shower, or extra light source. The support and light are subordinate to the readable core silhouette.\n\nSkill: 猛击 / attack. Core image: a blunt heavy wedge-like impact mass falling from upper left into a broad broken black slab, forcing one large offset crack downward and a short unequal lifted slab edge. A compact, squat, jagged silhouette with weight and compression; no long blade and no fire. Use desaturated brick red, ash ivory, charcoal; one small warm impact-white light at the point where the mass splits the slab. The crack and offset slab fragments form one connected strike image, not a shower of separate debris or a generic explosion. Avoid a literal hammer handle or fist emblem.\nCompact HUD framing: keep the complete support and local spill within the central 64–68% of the square, leave about 16% transparent margins, and let only the single defining subject edge overlap the dark support. Use three to five large intentional colour masses, not a complex textured picture. Do not copy the other skill icons; this icon needs its own silhouette.",
+        "referenced_image_paths": [
+          "C:/Users/太平/.codex/skills/arknights-node-icons/references/native-black-gallery.png"
+        ],
+        "tool": "image_gen.imagegen",
+        "transparent_background": true
+      },
+      "source": {
+        "path": "C:\\Users\\太平\\.codex\\generated_images\\01a1436d-3cc7-7510-8a69-9265b93f90a4\\exec-cd06454c-18f3-474f-816d-887905edbf9d.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 1018096,
+        "sha256": "696e075e9b3b76e0912e28ab4d24a8c7a66507a494c3db181138fa54ab97fdd3"
+      },
+      "output": {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\ui\\battle-skills-1016\\attack.webp",
+        "size": [
+          512,
+          512
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 128006,
+        "sha256": "13b31a1a60989349fe8dafcd2abd1f456b277e2f66bdb746e1c01b597df01f19"
+      },
+      "small_preview": {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-WF-battle-platform-live\\skill-icons\\preview-attack.webp",
+        "size": [
+          96,
+          96
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 7282,
+        "sha256": "e4caff67a3a53803e43549a42724a3d3f4b28d08f953636bd1109be17c366033"
+      }
+    },
+    "acquire": {
+      "request": {
+        "kind": "acquire",
+        "source": "C:/Users/太平/.codex/generated_images/01a1436d-3cc7-7510-8a69-9265b93f90a4/exec-56d8e672-b148-4235-8fa1-c682399c49b6.png",
+        "prompt": "Use case: stylized-concept.\nAsset type: one original game HUD skill icon, square 1024 x 1024 RGBA PNG with real transparent background.\nReference image 1 is a STYLE REFERENCE BOARD ONLY: use the flat, few-colour illustrated visual language of its Black Flow forest node icons. It is not an edit target and its labels, arrangements, original symbols, and source artwork must NOT be copied.\nDesign a single memorable, asymmetric two-dimensional silhouette. Use only a few deliberate opaque colour fields with selective soft edges. The subject should occupy about 55–65% of the canvas width so its identity survives at 64–80px HUD display. Behind the subject is one near-black, almost-round irregular support about 66% of canvas width: incomplete softly uneven perimeter, dark distinguishable from the subject, not a hard circular button and not an outlined badge. One small local light focus connects the lit part of the subject to a restrained nearby glow, fading through the support edge to genuine alpha zero. Keep generous transparent space outside. No background rectangle, no checkerboard, no other objects, no title, no letters, no numerals, no watermark.\nPainting: flat graphic hand-painted concept illustration as on the reference board, carefully chosen positive and negative shapes, understated local grain only. No shiny 3D metal, bevel, folded triangular facets, photorealistic materials, weapon inventory render, stock SVG icon, all-around bright halo, full luminous ring, symmetric ornamental emblem, tiny engraving, particle shower, or extra light source. The support and light are subordinate to the readable core silhouette.\n\nSkill: 搜刮 / acquire. Core image: three unequal torn pale pages being peeled apart from one dark gathered crease, like a single caught bundle revealing a concealed page. One taller curved page opens to upper left, one short middle page and one longer cut page pulls to lower right; preserve distinct negative slots between them. This should communicate peeling open, searching and drawing out a find, not a book, flower, feather, fan-shaped logo or stack of rectangular cards. Use aged ivory, muted petrol grey and charcoal; one small pale teal-gold glint at the revealed crease. No written marks, map, arrows, hands, extra objects or repeated equal petals.\nCompact HUD framing: keep the complete support and local spill within the central 64–68% of the square, leave about 16% transparent margins, and let only the single defining subject edge overlap the dark support. Use three to five large intentional colour masses, not a complex textured picture. Do not copy the other skill icons; this icon needs its own silhouette.",
+        "referenced_image_paths": [
+          "C:/Users/太平/.codex/skills/arknights-node-icons/references/native-black-gallery.png"
+        ],
+        "tool": "image_gen.imagegen",
+        "transparent_background": true
+      },
+      "source": {
+        "path": "C:\\Users\\太平\\.codex\\generated_images\\01a1436d-3cc7-7510-8a69-9265b93f90a4\\exec-56d8e672-b148-4235-8fa1-c682399c49b6.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 1175900,
+        "sha256": "b94371b9789658b343976e9985144c9a63e829d490b025174279435a114faeea"
+      },
+      "output": {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\ui\\battle-skills-1016\\acquire.webp",
+        "size": [
+          512,
+          512
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 138676,
+        "sha256": "d8889ae6565efa6ee4c3fc5ed24b5fb34e39dfdd294417cbe6ec5f125de49a5a"
+      },
+      "small_preview": {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-WF-battle-platform-live\\skill-icons\\preview-acquire.webp",
+        "size": [
+          96,
+          96
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 7284,
+        "sha256": "02d9315fd313aaa8979913cc03d18784d7bfa7c0d58692ff13b78fc56a916c34"
+      }
+    },
+    "fireball": {
+      "request": {
+        "kind": "fireball",
+        "source": "C:/Users/太平/.codex/generated_images/01a1436d-3cc7-7510-8a69-9265b93f90a4/exec-8b4e23e7-6ec5-4779-b7c7-1f0a01fecc4c.png",
+        "prompt": "Use case: stylized-concept.\nAsset type: one original game HUD skill icon, square 1024 x 1024 RGBA PNG with real transparent background.\nReference image 1 is a STYLE REFERENCE BOARD ONLY: use the flat, few-colour illustrated visual language of its Black Flow forest node icons. It is not an edit target and its labels, arrangements, original symbols, and source artwork must NOT be copied.\nDesign a single memorable, asymmetric two-dimensional silhouette. Use only a few deliberate opaque colour fields with selective soft edges. The subject should occupy about 55–65% of the canvas width so its identity survives at 64–80px HUD display. Behind the subject is one near-black, almost-round irregular support about 66% of canvas width: incomplete softly uneven perimeter, dark distinguishable from the subject, not a hard circular button and not an outlined badge. One small local light focus connects the lit part of the subject to a restrained nearby glow, fading through the support edge to genuine alpha zero. Keep generous transparent space outside. No background rectangle, no checkerboard, no other objects, no title, no letters, no numerals, no watermark.\nPainting: flat graphic hand-painted concept illustration as on the reference board, carefully chosen positive and negative shapes, understated local grain only. No shiny 3D metal, bevel, folded triangular facets, photorealistic materials, weapon inventory render, stock SVG icon, all-around bright halo, full luminous ring, symmetric ornamental emblem, tiny engraving, particle shower, or extra light source. The support and light are subordinate to the readable core silhouette.\n\nSkill: 火球 / fireball. Core image: one compact, clenched ember core with a lobed, almost clenched-flower silhouette, and a single broad asymmetric flame tail streaming to lower left. The hot core leans toward upper right and has one deliberate dark cut exposing its compressed structure; three or four broad interlocking colour fields, not many tongues of fire. Use muted dark rust, burnt orange and one concentrated warm ivory focal patch in the core; one-directional restrained warm glow. No surrounding fire ring, sun, meteor photograph, particles, electric arcs, blade, or multiple projectiles.\nCompact HUD framing: keep the complete support and local spill within the central 64–68% of the square, leave about 16% transparent margins, and let only the single defining subject edge overlap the dark support. Use three to five large intentional colour masses, not a complex textured picture. Do not copy the other skill icons; this icon needs its own silhouette.",
+        "referenced_image_paths": [
+          "C:/Users/太平/.codex/skills/arknights-node-icons/references/native-black-gallery.png"
+        ],
+        "tool": "image_gen.imagegen",
+        "transparent_background": true
+      },
+      "source": {
+        "path": "C:\\Users\\太平\\.codex\\generated_images\\01a1436d-3cc7-7510-8a69-9265b93f90a4\\exec-8b4e23e7-6ec5-4779-b7c7-1f0a01fecc4c.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 840967,
+        "sha256": "e8d6f5737050aeb2363e37bd97c700aa819cf94a5087e5e0aaef58ba774024ba"
+      },
+      "output": {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\ui\\battle-skills-1016\\fireball.webp",
+        "size": [
+          512,
+          512
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 113632,
+        "sha256": "ac756fca95558aa214c2b6a807efeff34d75725c35aff87fc2a3863b9a82fe59"
+      },
+      "small_preview": {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-WF-battle-platform-live\\skill-icons\\preview-fireball.webp",
+        "size": [
+          96,
+          96
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 7090,
+        "sha256": "aead8f1ccc5c19ca4eb9c4c5ba90d6fbcdd5e514433af319e83e2377e3ba9b95"
+      }
+    },
+    "heal": {
+      "request": {
+        "kind": "heal",
+        "source": "C:/Users/太平/.codex/generated_images/01a1436d-3cc7-7510-8a69-9265b93f90a4/exec-f755f69e-78e0-43e4-b92f-69aeb58bb198.png",
+        "prompt": "Use case: stylized-concept.\nAsset type: one original game HUD skill icon, square 1024 x 1024 RGBA PNG with real transparent background.\nReference image 1 is a STYLE REFERENCE BOARD ONLY: use the flat, few-colour illustrated visual language of its Black Flow forest node icons. It is not an edit target and its labels, arrangements, original symbols, and source artwork must NOT be copied.\nDesign a single memorable, asymmetric two-dimensional silhouette. Use only a few deliberate opaque colour fields with selective soft edges. The subject should occupy about 55–65% of the canvas width so its identity survives at 64–80px HUD display. Behind the subject is one near-black, almost-round irregular support about 66% of canvas width: incomplete softly uneven perimeter, dark distinguishable from the subject, not a hard circular button and not an outlined badge. One small local light focus connects the lit part of the subject to a restrained nearby glow, fading through the support edge to genuine alpha zero. Keep generous transparent space outside. No background rectangle, no checkerboard, no other objects, no title, no letters, no numerals, no watermark.\nPainting: flat graphic hand-painted concept illustration as on the reference board, carefully chosen positive and negative shapes, understated local grain only. No shiny 3D metal, bevel, folded triangular facets, photorealistic materials, weapon inventory render, stock SVG icon, all-around bright halo, full luminous ring, symmetric ornamental emblem, tiny engraving, particle shower, or extra light source. The support and light are subordinate to the readable core silhouette.\n\nSkill: 圣疗 / heal. Core image: two unequal, softly sculpted hand-like supporting silhouettes curve toward each other and gently cradle one small off-centre living light seed. One palm rises from lower left and the other from lower right, leaving a clear breathing gap above the seed. They should read as calm protection and restoration, not a medical cross, heart, flower or symmetrical wings. Use muted sage green, bone ivory and deep petrol-black; a single warm pale mint light focus in the seed, faintly lighting the inward-facing edges only. Keep the gestures broadly drawn with minimal finger division; no bracelets, ring halo, starburst, ornate religious crest or floating particles.\nCompact HUD framing: keep the complete support and local spill within the central 64–68% of the square, leave about 16% transparent margins, and let only the single defining subject edge overlap the dark support. Use three to five large intentional colour masses, not a complex textured picture. Do not copy the other skill icons; this icon needs its own silhouette.",
+        "referenced_image_paths": [
+          "C:/Users/太平/.codex/skills/arknights-node-icons/references/native-black-gallery.png"
+        ],
+        "tool": "image_gen.imagegen",
+        "transparent_background": true
+      },
+      "source": {
+        "path": "C:\\Users\\太平\\.codex\\generated_images\\01a1436d-3cc7-7510-8a69-9265b93f90a4\\exec-f755f69e-78e0-43e4-b92f-69aeb58bb198.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 986558,
+        "sha256": "62cd97e92b59ed8f2d260b0e94df98acddb905baa237e5cfbb91c40846f870d9"
+      },
+      "output": {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\ui\\battle-skills-1016\\heal.webp",
+        "size": [
+          512,
+          512
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 115716,
+        "sha256": "825cc211186e618b2ca3e667a46042e6f43f699ad8d6b414e73834b402dcb305"
+      },
+      "small_preview": {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-WF-battle-platform-live\\skill-icons\\preview-heal.webp",
+        "size": [
+          96,
+          96
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 6868,
+        "sha256": "f52530c851cea415b8cb33c7ba08a6b1ffcda8418eff3ca0ab5936ab1f2c855d"
+      }
+    },
+    "spell": {
+      "request": {
+        "kind": "spell",
+        "source": "C:/Users/太平/.codex/generated_images/01a1436d-3cc7-7510-8a69-9265b93f90a4/exec-0ed0d4e5-584f-45df-b2c5-fd6acb67af8e.png",
+        "prompt": "Use case: stylized-concept.\nAsset type: one original game HUD skill icon, square 1024 x 1024 RGBA PNG with real transparent background.\nReference image 1 is a STYLE REFERENCE BOARD ONLY: use the flat, few-colour illustrated visual language of its Black Flow forest node icons. It is not an edit target and its labels, arrangements, original symbols, and source artwork must NOT be copied.\nDesign a single memorable, asymmetric two-dimensional silhouette. Use only a few deliberate opaque colour fields with selective soft edges. The subject should occupy about 55–65% of the canvas width so its identity survives at 64–80px HUD display. Behind the subject is one near-black, almost-round irregular support about 66% of canvas width: incomplete softly uneven perimeter, dark distinguishable from the subject, not a hard circular button and not an outlined badge. One small local light focus connects the lit part of the subject to a restrained nearby glow, fading through the support edge to genuine alpha zero. Keep generous transparent space outside. No background rectangle, no checkerboard, no other objects, no title, no letters, no numerals, no watermark.\nPainting: flat graphic hand-painted concept illustration as on the reference board, carefully chosen positive and negative shapes, understated local grain only. No shiny 3D metal, bevel, folded triangular facets, photorealistic materials, weapon inventory render, stock SVG icon, all-around bright halo, full luminous ring, symmetric ornamental emblem, tiny engraving, particle shower, or extra light source. The support and light are subordinate to the readable core silhouette.\n\nSkill: 惩戒 / spell. Core image: a broad, tapering judgement beam plunges vertically down from an uneven cut upper opening into a small dark split below. Two unequal offset dark edge-shapes compress its upper sides, making a severe hanging wedge of light with one decisive downward tip. The shape must read as descending judgement and compression, not an arrow icon, sword, lightning bolt, cross, torch or symmetric badge. Use muted mauve-violet, cold ivory and charcoal; the one concentrated pale light is at the lower tip where it wedges into the dark split, with restrained violet spill nearby. No luminous full ring, celestial ornament, multiple beams, fine runes or particle shower.\nCompact HUD framing: keep the complete support and local spill within the central 64–68% of the square, leave about 16% transparent margins, and let only the single defining subject edge overlap the dark support. Use three to five large intentional colour masses, not a complex textured picture. Do not copy the other skill icons; this icon needs its own silhouette.",
+        "referenced_image_paths": [
+          "C:/Users/太平/.codex/skills/arknights-node-icons/references/native-black-gallery.png"
+        ],
+        "tool": "image_gen.imagegen",
+        "transparent_background": true
+      },
+      "source": {
+        "path": "C:\\Users\\太平\\.codex\\generated_images\\01a1436d-3cc7-7510-8a69-9265b93f90a4\\exec-0ed0d4e5-584f-45df-b2c5-fd6acb67af8e.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 1111668,
+        "sha256": "ced7b70204caa97c04cd63af45516cc0b3b48ad933079937efafa0cec18aae65"
+      },
+      "output": {
+        "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\ui\\battle-skills-1016\\spell.webp",
+        "size": [
+          512,
+          512
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 128856,
+        "sha256": "7e03783f184ed23525554401b3dfc0137b8d69642fe1cda61bd18c0b1b18435f"
+      },
+      "small_preview": {
+        "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-WF-battle-platform-live\\skill-icons\\preview-spell.webp",
+        "size": [
+          96,
+          96
+        ],
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "bytes": 7376,
+        "sha256": "b4fc835ad4f2dac756ee7fb7e6c1870cf5ffa80196f64c10d6219e25750589aa"
+      }
+    }
+  }
+}

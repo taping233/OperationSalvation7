@@ -1,0 +1,623 @@
+{
+  "actions": [
+    {
+      "type": "real-input",
+      "detail": "真实隔离新档01恢复对局；鼠标点击人物左侧技能，再点第一敌人：3/3→1/3，能量2→1，技能已使用。"
+    },
+    {
+      "type": "hover",
+      "inputKind": "real-input",
+      "detail": "鼠标点击技能后停留按钮：DOM :hover=true、focus-visible=false，说明visibility=visible；移至目标后隐藏。"
+    },
+    {
+      "type": "real-input",
+      "detail": "点击初始攻击，完整卡面抬起；点第二敌人击倒，能量1→0；点击结束回合，下一回合玩家35/35→25/35，技能重新可用。"
+    },
+    {
+      "type": "static-inspection",
+      "detail": "姓名行text为空、display:none、height:0；上方只有攻4/攻击5；独立详情入口与顶部选牌提示均0。选中卡片top328.57、脚下血条bottom326.88，无相交。"
+    },
+    {
+      "type": "screenshot",
+      "detail": "当前958×786窗口，截图裁去539px以下黑色未使用区域，保留完整958×539游戏舞台。"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"index\":0,\"id\":\"\",\"class\":\"battle-stage sts battle-sts bt-entrance has-painted-scenery phase-player\"}",
+      "key": "stage",
+      "rect": {
+        "height": 538.8624877929688,
+        "width": 957.9874877929688,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".battle-stage",
+      "styles": {
+        "display": "block",
+        "height": "1079.97px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1919.98px"
+      },
+      "tag": "DIV",
+      "text": "第 2 回合你的行动\n        \n         选项\n          \n           撤离（判负）\n           设置\n        \n      \n      \n        25/35 攻 4\n          \n    \n    1\n    \n    刺击1 费 · 造成 2 点固定伤害 · 不消耗卡牌可用 · 每回合一次 · 点击后选择敌人\n  \n   "
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":0,\"id\":\"\",\"class\":\"sts-headrow\"}",
+      "key": "names",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".sts-headrow",
+      "styles": {
+        "display": "none",
+        "height": "auto",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "auto"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":1,\"id\":\"\",\"class\":\"sts-headrow\"}",
+      "key": "names",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".sts-headrow",
+      "styles": {
+        "display": "none",
+        "height": "auto",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "auto"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":2,\"id\":\"\",\"class\":\"sts-headrow\"}",
+      "key": "names",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".sts-headrow",
+      "styles": {
+        "display": "none",
+        "height": "auto",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "hidden",
+        "width": "auto"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":3,\"id\":\"\",\"class\":\"sts-headrow\"}",
+      "key": "names",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".sts-headrow",
+      "styles": {
+        "display": "none",
+        "height": "auto",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "auto"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":0,\"id\":\"\",\"class\":\"sts-nameplate\"}",
+      "key": "above",
+      "rect": {
+        "height": 27.524999618530273,
+        "width": 131.71250915527344,
+        "x": 178.61875915527344,
+        "y": 73.2750015258789
+      },
+      "selector": ".sts-nameplate",
+      "styles": {
+        "display": "block",
+        "height": "55.1649px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "263.975px"
+      },
+      "tag": "DIV",
+      "text": "攻 4"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":1,\"id\":\"\",\"class\":\"sts-nameplate\"}",
+      "key": "above",
+      "rect": {
+        "height": 27.73750114440918,
+        "width": 120.9625015258789,
+        "x": 498.1437683105469,
+        "y": 103
+      },
+      "selector": ".sts-nameplate",
+      "styles": {
+        "display": "block",
+        "height": "55.5908px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "242.43px"
+      },
+      "tag": "DIV",
+      "text": "攻击 5 基础攻击 5攻击 · 5"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":2,\"id\":\"\",\"class\":\"sts-nameplate\"}",
+      "key": "above",
+      "rect": {
+        "height": 11.574999809265137,
+        "width": 120.95000457763672,
+        "x": 634.0750122070312,
+        "y": 119.1624984741211
+      },
+      "selector": ".sts-nameplate",
+      "styles": {
+        "display": "block",
+        "height": "23.1983px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "hidden",
+        "width": "242.405px"
+      },
+      "tag": "DIV",
+      "text": "攻击 5 基础攻击 5攻击 · 5"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":3,\"id\":\"\",\"class\":\"sts-nameplate\"}",
+      "key": "above",
+      "rect": {
+        "height": 27.73750114440918,
+        "width": 120.95000457763672,
+        "x": 769.9874877929688,
+        "y": 103
+      },
+      "selector": ".sts-nameplate",
+      "styles": {
+        "display": "block",
+        "height": "55.5908px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "242.405px"
+      },
+      "tag": "DIV",
+      "text": "攻击 5 基础攻击 5攻击 · 5"
+    },
+    {
+      "attributes": {
+        "aria-label": "无"
+      },
+      "identity": "{\"index\":0,\"id\":\"\",\"class\":\"sts-figure\"}",
+      "key": "figures",
+      "rect": {
+        "height": 189.6000061035156,
+        "width": 299.3625183105469,
+        "x": 94.79375457763672,
+        "y": 109.7750015258789
+      },
+      "selector": ".sts-figure",
+      "styles": {
+        "display": "block",
+        "height": "379.992px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "599.975px"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "aria-label": "联邦射手"
+      },
+      "identity": "{\"index\":1,\"id\":\"\",\"class\":\"sts-figure\"}",
+      "key": "figures",
+      "rect": {
+        "height": 159.66250610351562,
+        "width": 120.9625015258789,
+        "x": 498.1499938964844,
+        "y": 139.71250915527344
+      },
+      "selector": ".sts-figure",
+      "styles": {
+        "display": "block",
+        "height": "319.992px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "242.43px"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "aria-label": "联邦射手"
+      },
+      "identity": "{\"index\":2,\"id\":\"\",\"class\":\"sts-figure\"}",
+      "key": "figures",
+      "rect": {
+        "height": 171.1100311279297,
+        "width": 140.964111328125,
+        "x": 622.8549194335938,
+        "y": 140.86802673339844
+      },
+      "selector": ".sts-figure",
+      "styles": {
+        "display": "block",
+        "height": "319.992px",
+        "opacity": "0.18",
+        "transform": "matrix(0.945415, 0.166702, -0.166702, 0.945415, -2.43107, 13.7873)",
+        "visibility": "hidden",
+        "width": "242.405px"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "aria-label": "联邦射手"
+      },
+      "identity": "{\"index\":3,\"id\":\"\",\"class\":\"sts-figure\"}",
+      "key": "figures",
+      "rect": {
+        "height": 159.66250610351562,
+        "width": 120.95000457763672,
+        "x": 769.9874877929688,
+        "y": 139.71250915527344
+      },
+      "selector": ".sts-figure",
+      "styles": {
+        "display": "block",
+        "height": "319.992px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "242.405px"
+      },
+      "tag": "DIV",
+      "text": ""
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":0,\"id\":\"\",\"class\":\"sts-unit-vitals\"}",
+      "key": "hp",
+      "rect": {
+        "height": 22.512500762939453,
+        "width": 131.71250915527344,
+        "x": 178.61875915527344,
+        "y": 304.3625183105469
+      },
+      "selector": ".sts-unit-vitals",
+      "styles": {
+        "display": "block",
+        "height": "45.119px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "263.975px"
+      },
+      "tag": "DIV",
+      "text": "25/35"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":1,\"id\":\"\",\"class\":\"sts-unit-vitals\"}",
+      "key": "hp",
+      "rect": {
+        "height": 22.512500762939453,
+        "width": 114.75,
+        "x": 501.25,
+        "y": 304.3625183105469
+      },
+      "selector": ".sts-unit-vitals",
+      "styles": {
+        "display": "block",
+        "height": "45.119px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "229.979px"
+      },
+      "tag": "DIV",
+      "text": "1/3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":2,\"id\":\"\",\"class\":\"sts-unit-vitals\"}",
+      "key": "hp",
+      "rect": {
+        "height": 5.575000286102295,
+        "width": 114.75,
+        "x": 637.1749877929688,
+        "y": 304.3625183105469
+      },
+      "selector": ".sts-unit-vitals",
+      "styles": {
+        "display": "block",
+        "height": "11.1733px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "hidden",
+        "width": "229.979px"
+      },
+      "tag": "DIV",
+      "text": "0/3"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":3,\"id\":\"\",\"class\":\"sts-unit-vitals\"}",
+      "key": "hp",
+      "rect": {
+        "height": 22.512500762939453,
+        "width": 114.75,
+        "x": 773.0875244140625,
+        "y": 304.3625183105469
+      },
+      "selector": ".sts-unit-vitals",
+      "styles": {
+        "display": "block",
+        "height": "45.119px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "229.979px"
+      },
+      "tag": "DIV",
+      "text": "3/3"
+    },
+    {
+      "attributes": {
+        "aria-label": "刺击，1费，可用，2 点固定伤害；每回合一次",
+        "data-skill-state": "ready"
+      },
+      "identity": "{\"index\":0,\"id\":\"\",\"class\":\"bt-slam-btn\"}",
+      "key": "skill",
+      "rect": {
+        "height": 51.88750076293945,
+        "width": 51.88750076293945,
+        "x": 100.7750015258789,
+        "y": 223.52500915527344
+      },
+      "selector": "[data-act=\"btSlam\"]",
+      "styles": {
+        "display": "block",
+        "height": "103.992px",
+        "opacity": "1",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "103.992px"
+      },
+      "tag": "BUTTON",
+      "text": "1\n    \n    刺击1 费 · 造成 2 点固定伤害 · 不消耗卡牌可用 · 每回合一次 · 点击后选择敌人"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"index\":0,\"id\":\"battleSkillTip\",\"class\":\"battle-skill-tip\"}",
+      "key": "skill-tooltip",
+      "rect": {
+        "height": 104.1875,
+        "width": 164.65000915527344,
+        "x": 160.83750915527344,
+        "y": 197.36875915527344
+      },
+      "selector": ".battle-skill-tip",
+      "styles": {
+        "display": "flex",
+        "height": "208.81px",
+        "opacity": "0",
+        "transform": "none",
+        "visibility": "hidden",
+        "width": "329.987px"
+      },
+      "tag": "SPAN",
+      "text": "刺击1 费 · 造成 2 点固定伤害 · 不消耗卡牌可用 · 每回合一次 · 点击后选择敌人"
+    },
+    {
+      "attributes": {
+        "aria-label": "初始攻击 · 1 费。费用 1 · 点击选择敌人；也可直接拖到敌人身上使用"
+      },
+      "identity": "{\"index\":0,\"id\":\"\",\"class\":\"bt-card compact need-target\"}",
+      "key": "cards",
+      "rect": {
+        "height": 194.5874786376953,
+        "width": 129.72500610351562,
+        "x": 264.43438720703125,
+        "y": 388.1958312988281
+      },
+      "selector": ".bt-card",
+      "styles": {
+        "display": "block",
+        "height": "389.987px",
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 100)",
+        "visibility": "visible",
+        "width": "259.992px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    \n    \n    \n    武术初始\n    \n    初始攻击\n    造成等同于你的攻击力的攻击伤害。\n    \n    \n    \n    \n    1\n  初始攻击×5"
+    },
+    {
+      "attributes": {
+        "aria-label": "基础开发 · 1 费。费用 1 · 点击选择自己；也可直接拖到左侧人物使用"
+      },
+      "identity": "{\"index\":1,\"id\":\"\",\"class\":\"bt-card compact need-target\"}",
+      "key": "cards",
+      "rect": {
+        "height": 194.5874786376953,
+        "width": 129.72500610351562,
+        "x": 359.2364807128906,
+        "y": 388.1958312988281
+      },
+      "selector": ".bt-card",
+      "styles": {
+        "display": "block",
+        "height": "389.987px",
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 100)",
+        "visibility": "visible",
+        "width": "259.992px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    \n    \n    \n    法术古朴\n    \n    基础开发\n    随机获得 2 张 0 费招式。\n    \n    \n    \n    \n    \n  基础开发"
+    },
+    {
+      "attributes": {
+        "aria-label": "不稳定射线 · 1 费。费用 1 · 点击选择敌人；也可直接拖到敌人身上使用"
+      },
+      "identity": "{\"index\":2,\"id\":\"\",\"class\":\"bt-card compact need-target\"}",
+      "key": "cards",
+      "rect": {
+        "height": 194.5874786376953,
+        "width": 129.72500610351562,
+        "x": 454.0385437011719,
+        "y": 388.1958312988281
+      },
+      "selector": ".bt-card",
+      "styles": {
+        "display": "block",
+        "height": "389.987px",
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 100)",
+        "visibility": "visible",
+        "width": "259.992px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    \n    \n    \n    法术古朴\n    \n    不稳定射线\n    造成 4-6 点法术伤害。\n    \n    \n    \n    \n    \n  不稳定射线"
+    },
+    {
+      "attributes": {
+        "aria-label": "盗宝 · 1 费。费用 1 · 点击选择自己；也可直接拖到左侧人物使用"
+      },
+      "identity": "{\"index\":3,\"id\":\"\",\"class\":\"bt-card compact need-target\"}",
+      "key": "cards",
+      "rect": {
+        "height": 194.5874786376953,
+        "width": 129.72500610351562,
+        "x": 548.8406372070312,
+        "y": 388.1958312988281
+      },
+      "selector": ".bt-card",
+      "styles": {
+        "display": "block",
+        "height": "389.987px",
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 100)",
+        "visibility": "visible",
+        "width": "259.992px"
+      },
+      "tag": "DIV",
+      "text": "1\n    \n    \n    \n    \n    武术侠客\n    \n    盗宝\n    发现 1 张装备牌。\n    \n    \n    \n    \n    3\n  盗宝"
+    }
+  ],
+  "observedAt": "2026-10-16T09:01:30.319Z",
+  "page": {
+    "origin": "http://127.0.0.1:5318",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 786,
+      "width": 958
+    }
+  },
+  "scene": "轨道站战斗：去姓名，脚下血条，人物左侧图标技能，手牌留白",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-16-WF-battle-platform-live/03-final-layout.png",
+    "docs/evidence/2026-10-16-WF-battle-platform-live/04-skill-tooltip.png",
+    "docs/evidence/2026-10-16-WF-battle-platform-live/05-card-selected-final.png",
+    "docs/evidence/2026-10-16-WF-battle-platform-live/06-next-turn.png"
+  ],
+  "selectors": [
+    {
+      "key": "stage",
+      "selector": ".battle-stage"
+    },
+    {
+      "key": "names",
+      "selector": ".sts-headrow"
+    },
+    {
+      "key": "above",
+      "selector": ".sts-nameplate"
+    },
+    {
+      "key": "figures",
+      "selector": ".sts-figure"
+    },
+    {
+      "key": "hp",
+      "selector": ".sts-unit-vitals"
+    },
+    {
+      "key": "skill",
+      "selector": "[data-act=\"btSlam\"]"
+    },
+    {
+      "key": "skill-tooltip",
+      "selector": ".battle-skill-tip"
+    },
+    {
+      "key": "cards",
+      "selector": ".bt-card"
+    },
+    {
+      "key": "old-details",
+      "selector": "[data-act=\"btCardDetails\"],.bt-detail-chip"
+    },
+    {
+      "key": "old-caption",
+      "selector": ".sts-arena-caption"
+    }
+  ]
+}

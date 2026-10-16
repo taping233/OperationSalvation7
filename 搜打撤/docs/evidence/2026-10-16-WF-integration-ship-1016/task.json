@@ -12,16 +12,38 @@
     "明确完成范围正常提交推送并核实完整commit和tree",
     "远端不可变归档校验并传输或报告真实传输阻塞"
   ],
-  "stage": "testing",
+  "stage": "partial",
   "checks": [
-    "Full clean snapshot: 4032 passed, 0 failed, 12 existing skipped",
-    "Vite output generated; postbuild budget failed in four pre-existing categories",
-    "Exact frozen full gate: 4028 passed,16 existing skipped,0 errors; normal pre-commit reused receipt",
-    "Code committed b3820ca6e83762c8a073ed7ae03234b301576007"
+    {
+      "kind": "manual",
+      "description": "Normal full4032/0/12; exact frozenfull4028/0/16,0 errors; normal pre-commit reused exact receipt; code234+docs450 files committed and normal master push remote commit/tree verified.",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "Immutable GitHub tarball829285387 bytes,13377 blobs verified;20 parts and whole archive SHA256 manifest retained locally.",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "Vite postbuild four pre-existing budgets failed; same values confirmed in remote Vite-quality CI. No threshold changes.",
+      "result": "failed"
+    },
+    {
+      "kind": "manual",
+      "description": "Library prepared helper cannot discover prepare_uploads; no remote uploads created. Built-in browser unavailable. Main CI pending.",
+      "result": "unverified"
+    }
   ],
   "unverified": [
-    "Push/remote SHA/archive pending",
-    "Built-in browser unavailable for new IME/aria live check"
+    "Library transfer requires working prepared-upload helper environment; archive ready locally",
+    "Live IME/card accessibility browser verification blocked by built-in browser initialization",
+    "Four budget debts and pending mainCI retained for cloud iteration"
   ],
-  "updatedAt": "2026-10-15T17:32:31.525Z"
+  "updatedAt": "2026-10-15T17:41:54.179Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
 }

@@ -1,0 +1,138 @@
+{
+  "observedAt": "2026-10-16T14:06:13.461Z",
+  "sourceCommit": "256dc29fb4063dbf4962cd09ce4e0b1d7ef78466",
+  "attempts": [
+    {
+      "result": "docs/evidence/2026-10-16-WF-completed-commit-1016/gate-result-escalated.json",
+      "report": "docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-48-17.941Z-f2f8b882-staged.json",
+      "reportSha256": "abac52fd55d839a91ce3ffddf19f53341aa222dda29ad0bbd62efde6102ffb66",
+      "reportBytes": 3150607,
+      "log": "docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-48-17.941Z-f2f8b882-staged.log",
+      "logSha256": "2e476516dae57976ea57f1c8d8819de06485a643abee18a4509d391215c49073",
+      "validation": {
+        "executed": true,
+        "passed": false,
+        "reusableReceipt": false,
+        "reason": "STAGED_INVALIDATED"
+      },
+      "summary": [
+        "⎯⎯⎯⎯⎯⎯ Failed Tests 197 ⎯⎯⎯⎯⎯⎯",
+        "⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯",
+        " Test Files  41 failed | 454 passed (495)",
+        "      Tests  197 failed | 4533 passed | 16 skipped (4746)",
+        "     Errors  2 errors",
+        "   Duration  163.20s (transform 33.65s, setup 0ms, collect 383.05s, tests 1308.95s, environment 1000.55s, prepare 134.99s)",
+        "[gate] FAIL：全量 Vitest 失败（exit 1）"
+      ]
+    },
+    {
+      "result": "docs/evidence/2026-10-16-WF-completed-commit-1016/gate-result-repaired.json",
+      "report": "docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-29-49.679Z-05d5722a-staged.json",
+      "reportSha256": "69f3a7acf2c7fe1446fcced21d83c9c5869616ff31c7c42789344528c23d302f",
+      "reportBytes": 3118263,
+      "log": "docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-29-49.679Z-05d5722a-staged.log",
+      "logSha256": "0594ddf08aba61c00ddbf29896890ef6b0eb76862dce5907bdb29cb3140e41da",
+      "validation": {
+        "executed": true,
+        "passed": false,
+        "reusableReceipt": false,
+        "reason": "STAGED_INVALIDATED"
+      },
+      "summary": [
+        "⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯",
+        " Test Files  495 passed (495)",
+        "      Tests  4730 passed | 16 skipped (4746)",
+        "     Errors  2 errors",
+        "   Duration  192.13s (transform 18.35s, setup 0ms, collect 232.84s, tests 1198.84s, environment 1689.41s, prepare 191.77s)",
+        "[gate] FAIL：全量 Vitest 失败（exit 1）"
+      ]
+    },
+    {
+      "result": "docs/evidence/2026-10-16-WF-completed-commit-1016/gate-result-bounded.json",
+      "report": "docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-36-13.432Z-d9e909a6-staged.json",
+      "reportSha256": "78a744377f89f1376770d7dd62c074c805f5070e8751a993e275600d592017d1",
+      "reportBytes": 3118538,
+      "log": "docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-36-13.432Z-d9e909a6-staged.log",
+      "logSha256": "4c57d949f6e6aa49a760e157ca6f441756c60f355bef6fdecc10e23a690e557b",
+      "validation": {
+        "executed": true,
+        "passed": false,
+        "reusableReceipt": false,
+        "reason": "STAGED_INVALIDATED"
+      },
+      "summary": [
+        "⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯",
+        " Test Files  495 passed (495)",
+        "      Tests  4730 passed | 16 skipped (4746)",
+        "     Errors  1 error",
+        "   Duration  296.90s (transform 8.79s, setup 0ms, collect 96.57s, tests 479.58s, environment 419.66s, prepare 70.44s)",
+        "[gate] FAIL：全量 Vitest 失败（exit 1）"
+      ]
+    },
+    {
+      "result": "docs/evidence/2026-10-16-WF-completed-commit-1016/gate-result-final.json",
+      "report": "docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-44-04.372Z-009b62e3-staged.json",
+      "reportSha256": "33795844cd381534c44ad7dc490dfbfc86cb149e9f498282b27f09b950936772",
+      "reportBytes": 3118538,
+      "log": "docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-44-04.372Z-009b62e3-staged.log",
+      "logSha256": "00e067bb848cbcbe424f44df98840eaf476c39ec1cb232a1eb693116db59ba9c",
+      "validation": {
+        "executed": true,
+        "passed": false,
+        "reusableReceipt": false,
+        "reason": "STAGED_INVALIDATED"
+      },
+      "summary": [
+        " Test Files  495 passed (495)",
+        "      Tests  4730 passed | 16 skipped (4746)",
+        "   Duration  365.51s (transform 8.53s, setup 0ms, collect 122.08s, tests 517.99s, environment 577.93s, prepare 90.73s)",
+        "[gate] PASS：full 验收完成"
+      ]
+    },
+    {
+      "result": "docs/evidence/2026-10-16-WF-completed-commit-1016/gate-result-sealed.json",
+      "report": "docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-54-11.804Z-937bd0f9-staged.json",
+      "reportSha256": "df85eb733cc0fcccbab0d5b16a1ef2dedb6d7d3e32e030e15356f316cee12701",
+      "reportBytes": 3274689,
+      "log": "docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-54-11.804Z-937bd0f9-staged.log",
+      "logSha256": "b07115f757dbadccd431a424a9db603d2fb169492ca2bbd25fd8b6d86fe86b32",
+      "validation": {
+        "executed": true,
+        "passed": true,
+        "reusableReceipt": true,
+        "reason": "STAGED_PASSED"
+      },
+      "summary": [
+        " Test Files  495 passed (495)",
+        "      Tests  4730 passed | 16 skipped (4746)",
+        "   Duration  418.41s (transform 20.91s, setup 0ms, collect 152.70s, tests 731.47s, environment 535.97s, prepare 90.29s)",
+        "[gate] PASS：full 验收完成"
+      ]
+    }
+  ],
+  "resourceDiagnosis": {
+    "logicalCpus": 20,
+    "defaultForks": 19,
+    "observedFreeMemoryGiB": 2.94,
+    "totalMemoryGiB": 15.67,
+    "change": "Vitest forks capped at min(4, availableParallelism-1), at least 1; minWorkers=1",
+    "limits": "Resource contention is inferred from default concurrency and repeat RPC timeouts; no per-worker peak memory trace. Test and RPC timeouts unchanged."
+  },
+  "reportsOver1MiB": "Retained locally and excluded from Git by project policy; SHA256 above; regenerate with npm run --silent workflow -- staged --task WF-completed-commit-1016 --json against the reviewed source index and locked dependency bytes.",
+  "checks": {
+    "syntax": "428 project files passed",
+    "types": "8 configurations passed",
+    "eslint": "passed",
+    "browser": "Native IAB drag and chest resume; constructed no-slot fixtures explicitly declared",
+    "build": "not run in mixed tree",
+    "push": "not authorized; not run",
+    "remoteCI": "not checked for these local commits"
+  },
+  "teardownRepair": "Hub wallpaper preheat uses window-owned idle/timer scheduling, so closing a DOM window cancels its pending timer instead of invoking Image after environment teardown.",
+  "snapshotRepair": "The quartermaster transaction test no longer overwrites three historical audit JSON files on every run. All save-failure, retry, restore and duplicate-grant assertions remain; the next sealed run must have no tracked mutations.",
+  "exclusions": [
+    "Later second-wallpaper, chest-v6 and general-transition deltas remain unstaged; see retained-in-flight.json",
+    "91 unregistered dormant chest frames retained without staging",
+    "Active art, source art/candidates, unknown configuration and NAI/PV tools, intermediate files excluded"
+  ]
+}

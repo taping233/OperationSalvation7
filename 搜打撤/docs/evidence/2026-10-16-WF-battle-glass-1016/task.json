@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-battle-glass-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "实现已批准的战斗场景比例、玻璃HUD、能量/技能符号、公共解释栏与拖牌反馈迭代，验证留最后统一",
+  "paths": [
+    "game/src/battle/view/battle.view.js",
+    "game/src/battle/view/battle.layers.js",
+    "game/src/battle/view/battle.hand-layout.js",
+    "game/src/battle/view/battle.aim.js",
+    "game/src/battle/view/battle.skill-view.js",
+    "game/src/ui/term-tips.js",
+    "game/css/battle-stage.css",
+    "game/css/overlays.css",
+    "game/assets/asset-manifest.json",
+    "docs/rules.md",
+    "docs/architecture.md",
+    "game/assets/ui/battle-controls-glass-1016",
+    "docs/evidence/2026-10-16-WF-battle-glass-1016"
+  ],
+  "doneWhen": [
+    "重复卡牌名称条撤下，人物/场景比例与固定控件玻璃材质实施",
+    "七枚新符号生成并接入；职业技能/能量复用公共body说明",
+    "拖牌改为单链直接跟随、保持抓取点、取消平滑归位；出牌规则保留",
+    "按老板要求只交付实现，测试与实机留最后统一，并登记未覆盖范围"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "本轮未运行测试、lint、类型/语法检查、build、浏览器或性能采样",
+    "当前窗口场景比例、脚点、玻璃对比度、说明遮挡与避让",
+    "技能/能量hover、聚焦、禁用与发动；旧词条点击行为",
+    "拖牌跟手、目标/空地释放、取消/再次抓取/重绘与退出中断",
+    "首脑、盟友与多页手牌"
+  ],
+  "updatedAt": "2026-10-16T09:23:30.778Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "已授权实现完成，待最后统一验证；不把代码/图稿自审或素材SHA当作实机通过。"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "observedAt": "2026-10-16T12:40:01.348Z",
+  "source": [
+    {
+      "file": "game/src/hub/photo-studio-catalog-cache.js",
+      "sha256": "45cb473fc2782137374c8c9caa2a16f85c7a5890d0b06d153f3c9281acac82a9"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "sha256": "68510cb7718dae6b4699c02c1e1fd74822a4c89ff8e0cb22930a9a1cec9d47e8"
+    },
+    {
+      "file": "game/src/ui/camp-entry.js",
+      "sha256": "45512ff38fd159adbdad17ee62622a2a7dddb5f3d4c347e5bc759e5c7d2e8520"
+    },
+    {
+      "file": "game/src/ui/page-loading.js",
+      "sha256": "d1722a8b15b2b9f175515f94d7df99ec376dfbc1522269471a4c6ad3ea9632d0"
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "sha256": "b3e558481adb003ad9745579d382e5dea7cc4171df55a26648193c3e03d3b410"
+    },
+    {
+      "file": "game/src/hub/hub.warehouse.js",
+      "sha256": "1979ff2b7dd1cae16692cc6eea8bf253d855a2404cfbbc2c951cb6319641821a"
+    },
+    {
+      "file": "game/src/game.boot.js",
+      "sha256": "773e82d42e562a7e44c4e0e711ff02aa2e20262a29c1460dcbf6568336a2ce73"
+    },
+    {
+      "file": "game/src/battle/view/battle.aim.js",
+      "sha256": "7e311079b55bbc77758a9c92e214c5d1d8b9e50a5434a765d937545c55f66bee"
+    },
+    {
+      "file": "game/src/battle/view/battle.frames.js",
+      "sha256": "b71c39e052d62bd38591745d6621b66aab67edbcee64ab66326b2d23b628ce82"
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "sha256": "ce1634f1b6b7af4230e3e95e74ab1ca86a5f667673e79236d42fa8c31a4457ef"
+    },
+    {
+      "file": "tests/photo-studio-catalog-cache.test.js",
+      "sha256": "83fde6bed756910b910ea6cd32089a55c3dea9cbe3b98ad366c16d2e559acdfc"
+    },
+    {
+      "file": "tests/page-loading.test.js",
+      "sha256": "65bb0241ae94831f132fc9671b3e3f139e9da8d2defb9d652566fb78f40b4506"
+    },
+    {
+      "file": "tests/battle-frames-lifecycle.test.js",
+      "sha256": "576ae748cf964811ae4c9227c791a941e6cb7d3bba833a4cedc816750bd960b4"
+    },
+    {
+      "file": "tests/sound-lifecycle.test.js",
+      "sha256": "096db2b4b067307d8b8ba663d0f56dc8ca4a4e2eceeae265ac42179eb3771748"
+    },
+    {
+      "file": "tests/base-inventory-lifecycle-audit.test.js",
+      "sha256": "e5eb2fabc7f0cfb7fa7c1c9ad835d01b5506840e2d450684c042882fc42dbaef"
+    }
+  ],
+  "deletion": {
+    "deleted": 11,
+    "preserved": 13,
+    "hashesVerified": true
+  },
+  "tests": [
+    {
+      "file": "wide-tests.json",
+      "passed": 130,
+      "failed": 0,
+      "failures": []
+    },
+    {
+      "file": "transition-tests-final.json",
+      "passed": 87,
+      "failed": 1,
+      "failures": [
+        {
+          "suite": "D:/素材/代号柒/搜打撤/tests/boot.test.js",
+          "name": "启动链（DOMContentLoaded → showTitle） 战斗数字键/点选与内层卡面键盘输入共享选中、取消和目标结算"
+        }
+      ]
+    },
+    {
+      "file": "boot-before-tests.json",
+      "passed": 19,
+      "failed": 1,
+      "failures": [
+        {
+          "suite": "D:/素材/代号柒/搜打撤/tests/boot.test.js",
+          "name": "启动链（DOMContentLoaded → showTitle） 战斗数字键/点选与内层卡面键盘输入共享选中、取消和目标结算"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "syntax": "passed: 428 project files",
+    "types": "passed: 8 configurations",
+    "eslint": "passed: 14 edited JavaScript files",
+    "docs": "see docs-check.json"
+  },
+  "boundaries": [
+    "No build/full suite/CI",
+    "No commit/push/publish",
+    "Current IAB window only; test tab closed; existing service retained"
+  ]
+}

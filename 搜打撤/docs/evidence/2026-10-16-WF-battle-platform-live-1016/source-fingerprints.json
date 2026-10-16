@@ -1,0 +1,37 @@
+{
+  "observedAt": "2026-10-16T09:03:12.634Z",
+  "scope": "五JS定向ESLint通过后的最终输入；CSS实页已观察",
+  "files": [
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "6d6adf8da733e25c70d3e5430c501191e5a5bb4386877cf3e58db206b25ba17a"
+    },
+    {
+      "path": "game/src/battle/view/battle.aim.js",
+      "sha256": "0149a3cc8b9b3926bd0b1152de9c7a9076d71b0c345d651cb7afd2d67c28d3be"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "b33938766ebef4416624a46b3ce966f5433fa7dc4cde5bdc92187d48e4d543c4"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-layout.js",
+      "sha256": "f567134ffb01919e236330681c808a4888a687ed17ebe9e6e6056ae96698d64c"
+    },
+    {
+      "path": "game/src/battle/view/battle.skill-view.js",
+      "sha256": "3a4de2ba2b071b8c7f21513a2690f4a3f794b4d54267d7927d87ffd050a19c6e"
+    },
+    {
+      "path": "game/css/battle-stage.css",
+      "sha256": "d3bfca8e7210f5b21ae013e842a476eab766b5131708b1bbfe513763910edd21"
+    }
+  ],
+  "preview": {
+    "origin": "http://127.0.0.1:5318",
+    "cwd": "D:/素材/代号柒/搜打撤",
+    "execSession": 46471,
+    "pid": 42064,
+    "retained": "供老板继续查看当前战斗，编辑占用已释放"
+  }
+}

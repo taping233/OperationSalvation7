@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-battle-platform-live-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "完成老板当前窗口追加的战斗呈现调整：脚下血条、左侧图标技能、手牌空间、取消详情/选牌提示/姓名，保留攻击力",
+  "paths": [
+    "game/src/battle/view/battle.view.js",
+    "game/src/battle/view/battle.aim.js",
+    "game/src/battle/view/battle.layers.js",
+    "game/src/battle/view/battle.hand-layout.js",
+    "game/src/battle/view/battle.skill-view.js",
+    "game/css/battle-stage.css",
+    "game/assets/ui/battle-skills-1016",
+    "game/assets/asset-manifest.json",
+    "docs/rules.md",
+    "docs/evidence/2026-10-16-WF-battle-platform-live",
+    "docs/evidence/2026-10-16-WF-battle-platform-live-1016"
+  ],
+  "doneWhen": [
+    "当前窗口新战斗场景接入追加要求",
+    "真实输入确认技能、选牌与换回合保持工作；源级静态检查按本块范围执行",
+    "全量测试明确留最后，预览服务继续登记"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "Vitest、全量静态检查和build按老板要求留最后",
+    "其余五种技能、键盘聚焦说明、首脑、盟友、多页手牌未实机覆盖"
+  ],
+  "updatedAt": "2026-10-16T09:03:12.633Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "实现和当前窗口定向输入完成；实际证据及旧异常修复见 ../2026-10-16-WF-battle-platform-live/README.md，schema通过不代替实页判断。"
+  }
+}

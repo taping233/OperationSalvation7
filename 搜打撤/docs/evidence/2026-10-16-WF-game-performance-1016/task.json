@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-game-performance-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "优化地图绘制热路径、道路缩放缓存与后台预热调度，保持玩法和画质",
+  "paths": [
+    "game/src/core/map-brush-art.js",
+    "game/src/core/map-node-state.js",
+    "game/src/core/node-info.js",
+    "game/src/core/renderer.js",
+    "game/src/core/art.js",
+    "game/src/run/node-restore-state.js",
+    "tests/map-render-performance.test.js",
+    "tests/art-preload-scheduling.test.js",
+    "tests/node-restore-state.test.js",
+    "docs/performance.md",
+    "docs/evidence/2026-10-16-WF-game-performance-1016"
+  ],
+  "doneWhen": [
+    "热点同条件基准改善且定向回归通过",
+    "当前窗口内置浏览器验证并记录覆盖边界"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "8套87项定向回归及433文件语法8套类型定向ESLint通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "内置浏览器热点前后基准、纹理对照、商店4断言、地图真实缩放拖动及6秒平移静止采样通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "docs检查478链接通过，相关diff空白检查通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "扩展旧节点与路径测试15项文案断言失败，14项在修改前已复现；另1项对应本轮未改的现行提示，详见报告",
+    "未运行完整新档、战斗实玩、多尺寸、生产构建或全量测试；未提交推送，无对应远端CI"
+  ],
+  "updatedAt": "2026-10-16T11:59:41.231Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

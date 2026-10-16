@@ -1,0 +1,50 @@
+{
+  "observedAt": "2026-10-16T09:23:30.780Z",
+  "kind": "implementation-only-not-validation",
+  "files": [
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "2dfbd126e4cd9b4ab432535be4f6533fae9b609ea59f2960c302e0f249ea0892"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "dfdff04259b86dc37acc0c973bc8eb19ca9bca84d9812634feac167409a30043"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-layout.js",
+      "sha256": "0dc3d1828946a16113e5410deda60eaf74f70aa31c758ac6d8f8445dea72d795"
+    },
+    {
+      "path": "game/src/battle/view/battle.aim.js",
+      "sha256": "f512d15525aeb0df87ca48fb741a4b0a9d25020ebf9dede90584475a55780e38"
+    },
+    {
+      "path": "game/src/battle/view/battle.skill-view.js",
+      "sha256": "40ec8a918f745571cc01b58cea12925d804d325187387464fd611aa408c2b58b"
+    },
+    {
+      "path": "game/src/ui/term-tips.js",
+      "sha256": "5303b2031394baa8275da7d63a90f05d2956c5d8dd23e7522bc2c1791e863850"
+    },
+    {
+      "path": "game/css/battle-stage.css",
+      "sha256": "daf67b8d375cad88d2a123e8afca26fc045c29295e78002840f19024457a8c5f"
+    },
+    {
+      "path": "game/css/overlays.css",
+      "sha256": "8c4054780dabe1c0d5f92e07f000827ebbfd6b8cab8b7b95aa69c31f79e285b9"
+    },
+    {
+      "path": "game/assets/asset-manifest.json",
+      "sha256": "b48115da69aae8729a44f7e7ef2bc8148c571203a0a6c7e424ea56b3ca35172c"
+    },
+    {
+      "path": "docs/rules.md",
+      "sha256": "ee83785cf26446d3b19ae2796c958e13e5e866f24f129ca540663bdd4c1f50dd"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "2d7b41b9edddebbff04632d2324442416a28076331c922839005434f77b46ef4"
+    }
+  ]
+}

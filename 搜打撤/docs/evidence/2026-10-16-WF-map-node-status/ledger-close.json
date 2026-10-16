@@ -1,0 +1,8 @@
+{
+  "cells": [
+    "Friday（地图节点状态 WF-map-node-status-1016）",
+    "game/src/core/map-node-state.js、node-info.js、renderer.js、map-node-art.js；game/src/run/expedition.view.js；game/src/game.boot.js节点命中/提示；game/css/map-node-status.css；docs/map-travel.md；自有记录",
+    "地图/详情/悬停统一未完成、待领奖、已完成、营业中/已离店状态；文字区可选中；待领优先，迷雾与通行节点不贴未完成，门旁店离店不阻断闸门",
+    "完成未提交，编辑释放；老板要求最后统一验证，本块未运行测试、静态检查、实页或build；无新服务、素材及存档字段，未提交/推送"
+  ]
+}

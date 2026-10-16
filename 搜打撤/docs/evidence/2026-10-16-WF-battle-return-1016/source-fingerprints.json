@@ -1,0 +1,34 @@
+{
+  "observedAt": "2026-10-16T10:41:17.572Z",
+  "kind": "implementation-only-not-validation",
+  "files": [
+    {
+      "path": "game/src/battle/view/battle.aim.js",
+      "sha256": "b27ea43db16cf8cccbaec0b8f8148c72bee88dd5b43fd562992b80923a780f6e"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "f2a838c850af2f9064a2c093dc9070e6f7a24cc16a2705569415a2ee2fa75cfa"
+    },
+    {
+      "path": "game/src/battle/view/battle.discover-view.js",
+      "sha256": "9260c0ebe51a259ba7f79f9feee1bb3568d530809e3f5572fd52c4643d84d4f5"
+    },
+    {
+      "path": "game/css/battle-discover.css",
+      "sha256": "2fa7e8da9eb290ac2fa6fc4f1ee8b2a464a9f3013a1ba31ccaf72025f4e407a5"
+    },
+    {
+      "path": "game/css/battle-stage.css",
+      "sha256": "ca3a033765bb0fc14be8845947f1cbfb9f499fc0c2b71a256d9801a62439c377"
+    },
+    {
+      "path": "docs/rules.md",
+      "sha256": "393c7b393d0a3fab5a1f2e289118411fdeb61698c464bf6cd38e60a10b490e4f"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "97750c5f46ae47fca25ae92bc70109256c5e4cffece0fc9ea7bf905ecac2ae6d"
+    }
+  ]
+}

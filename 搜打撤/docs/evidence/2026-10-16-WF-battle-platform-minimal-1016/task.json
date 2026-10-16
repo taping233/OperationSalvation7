@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-battle-platform-minimal-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "将老板认可的简约内置生图轨道站制作成三层并接入全部战斗，测试最后统一",
+  "paths": [
+    "game/assets/scenes/battle/platform-minimal-1016",
+    "game/src/battle/view/battle.scenery.js",
+    "game/src/run/game.run.data.js",
+    "game/css/battle-stage.css",
+    "game/css/scenes.css",
+    "game/assets/asset-manifest.json",
+    "docs/architecture.md",
+    "docs/evidence/2026-10-16-WF-battle-platform-minimal"
+  ],
+  "doneWhen": [
+    "本轮概念内置生成三层素材并保存到游戏消费目录",
+    "普通战与首脑选景、预载与战前背景指向新图，保留人物动作",
+    "实现交付，测试/静态检查/实页按老板要求最后统一"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "按老板要求，本块测试/静态检查/build/实页均留最后统一；尚未核验场景脚点、遮挡与交互"
+  ],
+  "updatedAt": "2026-10-16T07:59:42.832Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

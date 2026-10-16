@@ -1,0 +1,8 @@
+{
+  "cells": [
+    "Friday（节点与背包规则 WF-expedition-renewal-1016）",
+    "game/src/run/节点与宝箱；game/src/hub/game.bag.js、game.bag.drag.js、game.bag.settle.js、run-save-validation.js；game/src/battle/背包入口；agent.state.js；map-node-state.js；chest-reward-overview.js/.css；game/data/map.json；相关tests及现行规则/存档文档；docs/evidence/2026-10-16-WF-expedition-renewal/",
+    "首块规则及追加批准的奖励总览→点击宝箱→卡牌弹层→返回奖励界面已接入；各箱进度单独保存，旧固定奖励兼容；老板要求测试留到最后统一执行",
+    "完成未提交，编辑释放；待最后统一测试/静态检查/当前窗口实页验收。此前定向结果仅覆盖奖励总览修正前输入，阶段全量已中止；复用5200，无本会话新服务，无build、提交或推送"
+  ]
+}

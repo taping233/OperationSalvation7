@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-game-performance-wide-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "跨启动、照相馆、基地、战斗、音频与后台循环审计并优化经测量确认的性能热点",
+  "paths": [
+    "game/src/hub/photo-studio-catalog-cache.js",
+    "game/src/hub/game.cardslib.page.js",
+    "game/src/ui/camp-entry.js",
+    "game/src/ui/page-loading.js",
+    "game/css/page-loading.css",
+    "game/src/hub/hub.warehouse.js",
+    "game/src/game.boot.js",
+    "game/src/battle/view/battle.aim.js",
+    "game/src/battle/view/battle.frames.js",
+    "game/src/audio/sound.js",
+    "tests/photo-studio-catalog-cache.test.js",
+    "tests/page-loading.test.js",
+    "tests/battle-frames-lifecycle.test.js",
+    "tests/sound-lifecycle.test.js",
+    "tests/base-inventory-lifecycle-audit.test.js",
+    "game/chibi-preview.html",
+    "tests/base-chibi.test.js",
+    "tests/base-chibi-v2.test.js",
+    "tests/base-chibi-gait.test.js",
+    "game/css/base-chibi.css",
+    "game/src/ui/chibi-preview.js",
+    "game/src/hub/base-chibi.js",
+    "game/src/hub/base-chibi-v2.skin.js",
+    "game/src/hub/base-chibi-v2.art.js",
+    "game/src/hub/base-chibi-skin.js",
+    "game/src/hub/base-chibi-gait.js",
+    "docs/performance.md",
+    "docs/evidence/2026-10-16-WF-game-performance-wide-1016"
+  ],
+  "doneWhen": [
+    "主要域均有审计和验证结论，确认热点落实修复",
+    "同窗口前后基准与跨域回归完成并列明未覆盖项"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "217项定向测试通过，语法428文件、8配置类型、14文件ESLint与文档检查通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "同窗口照相馆前后五轮基准、慢图等待、重开及标准首战真实拖牌验证",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "11件授权删除且13件素材SHA保留，已复核",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "1项既有启动Shift+Enter详情断言失败；本轮前快照同样失败",
+      "result": "failed"
+    }
+  ],
+  "unverified": [
+    "未执行build、本地全量测试、远端CI、全角色和完整远征长时跑测；首次冷开仍有78ms长任务"
+  ],
+  "updatedAt": "2026-10-16T12:41:43.105Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

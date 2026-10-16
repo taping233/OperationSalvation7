@@ -1,0 +1,22 @@
+{
+  "url": "http://127.0.0.1:5200/",
+  "platform": "Codex in-app browser",
+  "input": "AX真实点击壁纸按钮、只看壁纸/恢复界面、设置；未修改设置",
+  "settings": {
+    "selection": "snow-road",
+    "wallpaper": "url('/assets/reconstruction/wallpaper-snow-road-1016.webp')"
+  },
+  "errors": [],
+  "final": {
+    "count": "1/1",
+    "image": "url(\"http://127.0.0.1:5200/assets/reconstruction/wallpaper-snow-road-1016.webp?v=1016b\")",
+    "switchVisible": "flex",
+    "viewport": {
+      "height": 956,
+      "width": 1523
+    },
+    "wallpaper": "snow-road",
+    "errors": [],
+    "note": "最终图替换后刷新，真实点击切换按钮，当前窗口截图；只看壁纸和设置交互复用同一逻辑的前次验证"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "observedAt": "2026-10-16T10:19:54.944Z",
+  "kind": "implementation-only-not-validation",
+  "files": [
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "sha256": "acf5c45094a5f154b67de810187f3688b9da029b0b07d09abda3cf97c360fb99"
+    },
+    {
+      "path": "game/src/run/shop-browse-state.js",
+      "sha256": "9196f43d04d1e5038d64789b95c204b5382f40c9cf227eec01b98fd4e67ad40c"
+    },
+    {
+      "path": "game/css/expedition-shop.css",
+      "sha256": "7a48edce740018db45de6d34b1c3852b551757defc79d112c24bd3fc298c48bd"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "c9b43e6682451b409c9eb63c945a8b7eb796be291fb8e564fc8f9100ee3b132d"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-battle-return-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "落实已批准的战斗发现大卡界面、真实STS2参考拖牌流程与退镜头/拉开阵营，测试最后统一",
+  "paths": [
+    "game/src/battle/view/battle.aim.js",
+    "game/src/battle/view/battle.view.js",
+    "game/src/battle/view/battle.discover-view.js",
+    "game/css/battle-discover.css",
+    "game/css/battle-stage.css",
+    "docs/rules.md",
+    "docs/architecture.md",
+    "docs/evidence/2026-10-16-WF-battle-return-1016"
+  ],
+  "doneWhen": [
+    "独立发现玻璃大卡层接入，额外候选与连续次数保留",
+    "实际本地源码对照下恢复起拖/过线/75%停靠/松空点击/取消归位，记录网页适配",
+    "场景额外缩放取消，双方缩小并分开，保留既有HUD与手牌空间",
+    "按老板要求仅实现交付，保留未核项并释放编辑"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "本轮未运行测试、lint、语法/类型检查、build、浏览器或性能采样",
+    "拖牌完整状态机、点击抑制、长按跨页面、缩放与键盘/注能/技能/药水兼容",
+    "发现各act/额外候选/连续次数/牌底、长规则、滚动与焦点",
+    "当前窗口普通/首脑/友军/多敌取景、接地、遮挡和命中"
+  ],
+  "updatedAt": "2026-10-16T10:41:17.571Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "授权实现完成，人工源码对照不代表实页或测试通过；统一验证留最后。"
+  }
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "path": "game/src/core/renderer.js",
+    "sha256": "9FCC01942A8CA3A115BB5008CD4C97EAE79C4A2D46E5A3CDF97F2F214F342867",
+    "length": 30546
+  },
+  {
+    "path": "game/src/core/map-brush-art.js",
+    "sha256": "A85D68AA77317FDA337DA588AE467258C8F964FC9AECFFB2B14BEE576E87F1F8",
+    "length": 4559
+  },
+  {
+    "path": "game/src/core/map-node-state.js",
+    "sha256": "6C82FC63E101D6FE2FBC2D2999AF8A9EAC3F3DFAB8B8D7D9F9ED8F192EADD8E3",
+    "length": 4137
+  },
+  {
+    "path": "game/src/core/node-info.js",
+    "sha256": "BFC577869DE56182E25F55EE993A1702FB2706C0923F92FA5F751097B36709D6",
+    "length": 2239
+  },
+  {
+    "path": "game/src/core/art.js",
+    "sha256": "65B909A1848EE71C64CEC39C8D709475FC0532896754C034B3D2710D0EC62F6A",
+    "length": 32301
+  },
+  {
+    "path": "game/src/run/node-restore-state.js",
+    "sha256": "EE362370ABA4D198AAA82BFDDDE1EBC7F900936307AF9AC6DAFC4D516A93E3F3",
+    "length": 2890
+  },
+  {
+    "path": "tests/map-render-performance.test.js",
+    "sha256": "AE211C083ACEBB1C21929A2640C1CB340C7A6458BA678D6DF118E7588938288D",
+    "length": 5931
+  },
+  {
+    "path": "tests/art-preload-scheduling.test.js",
+    "sha256": "B7702F95E9B0E72EA80343A2A851315E45607A05D1FA8463CFA29AADDA9BA6E4",
+    "length": 11902
+  }
+]

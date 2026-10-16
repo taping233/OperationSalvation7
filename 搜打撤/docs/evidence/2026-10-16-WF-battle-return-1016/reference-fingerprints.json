@@ -1,0 +1,31 @@
+{
+  "observedAt": "2026-10-16T10:29:44.192Z",
+  "source": "本机既有反编译参考，未核实游戏发行版本，不声称官方开放源码或最新版",
+  "files": [
+    {
+      "path": "D:/素材/杀戮尖塔2源码/sts2-decompiled/MegaCrit.Sts2.Core.Nodes.Combat/NMouseCardPlay.cs",
+      "bytes": 27661,
+      "sha256": "8a5313cf9d3f3d1d3dd2721a0f4c49532354aab54841f98a405a6dd5e0f9c358"
+    },
+    {
+      "path": "D:/素材/杀戮尖塔2源码/sts2-decompiled/MegaCrit.Sts2.Core.Nodes.Combat/NCardPlay.cs",
+      "bytes": 24069,
+      "sha256": "c7952fe9619713989140907ff5781815aedde770fa866a9509337b418713ce15"
+    },
+    {
+      "path": "D:/素材/杀戮尖塔2源码/sts2-decompiled/MegaCrit.Sts2.Core.Nodes.Combat/NTargetManager.cs",
+      "bytes": 36607,
+      "sha256": "7dd9a465de27878d97ea576cfad5a5e10bcabe6437497963d242338fe3e3c300"
+    },
+    {
+      "path": "D:/素材/杀戮尖塔2源码/sts2-decompiled/MegaCrit.Sts2.Core.Nodes.Combat/NPlayerHand.cs",
+      "bytes": 85265,
+      "sha256": "9caae72471adc2310fc19b691e22992a51852b8918a95cb707ba3bc899402b82"
+    },
+    {
+      "path": "D:/素材/杀戮尖塔2源码/sts2-decompiled/MegaCrit.Sts2.Core.Nodes.Cards.Holders/NHandCardHolder.cs",
+      "bytes": 44376,
+      "sha256": "df6df636bfb01081a31ffdbacc6fba065c55ba868ca2a1ead87389318eecc6af"
+    }
+  ]
+}

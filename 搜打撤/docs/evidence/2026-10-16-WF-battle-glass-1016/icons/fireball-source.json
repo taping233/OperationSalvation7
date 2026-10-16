@@ -1,0 +1,9 @@
+{
+  "kind": "fireball",
+  "tool": "image_gen.imagegen",
+  "transparent_background": true,
+  "referenced_image_paths": [],
+  "prompt": "Use case: logo-brand.\nAsset type: one original minimal flat symbol for a smoky-grey glass game HUD button. Generate a square RGBA PNG with a truly transparent background. This is the SYMBOL ONLY; no button container.\nVisual specification: crisp broad two-dimensional filled shapes and clean intentional transparent negative space, sparse simple silhouette, consistent medium visual weight at 48–72px display. The entire visible mark occupies roughly the central 68–72% of the square, with balanced transparent margins. Use cold ivory white as the main fill and light champagne gold as one subordinate fill; at most one tiny low-saturation pale teal accent. Keep only two or three flat opaque colour masses with clean edges. No black, dark disc, dark backplate, round support, frame, border, square background, cast shadow, outer glow, halo, fog, particles, outlines around the whole mark, bevel, gradient, metallic rendering, glossy 3D, illustrated material, engraving, microtexture, text, digits, letters, or watermark. Any separation described below is genuinely transparent negative space, never painted black. Do not draw an actual glass button or scene.\n\nSkill fireball: one compact broad ivory fire core and ONE short champagne flame tail swept toward lower-left, together forming a single clean asymmetric flame silhouette. Retain one large transparent crescent cut to separate core from tail. No repeated tiny flame tongues, full fire ring, meteor illustration, sun, rays, glowing aura, particle trail or long streak. A short, dense, easy-to-recognise elemental symbol with no background.",
+  "output": "game/assets/ui/battle-controls-glass-1016/fireball.webp",
+  "source": "C:/Users/太平/.codex/generated_images/01a1436d-3cc7-7510-8a69-9265b93f90a4/exec-a6ff51d7-b8f5-4b6c-a80b-3bd7ef3044db.png"
+}

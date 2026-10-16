@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-reward-experience-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "实施已批准的领奖节奏、待领进度/反馈、底栏容量与玻璃界面调整，测试留最后统一",
+  "paths": [
+    "game/src/ui/chest-reward-overview.js",
+    "game/src/run/chests.js",
+    "game/css/chest-reward-overview.css",
+    "docs/rules.md",
+    "docs/evidence/2026-10-16-WF-reward-experience-1016"
+  ],
+  "doneWhen": [
+    "总览主动作随进度变化，显式点击才开箱，不提前抽箱",
+    "完整待领箱计数及实际领取原箱反馈接入，容量和整理集中底栏",
+    "奖励总览/卡牌弹层玻璃样式与固定头脚实施",
+    "按老板要求仅交付实现，列出最后统一验证的范围并释放编辑"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "本轮未运行测试、lint、类型/语法检查、build、浏览器或性能采样",
+    "多箱、三选一/全拿、金币/附赠、部分领取/全放弃、满包与叠放",
+    "暂离/重进/读档、固定奖励出口",
+    "当前窗口玻璃观感、头脚高度、滚动、焦点和按钮交互"
+  ],
+  "updatedAt": "2026-10-16T09:55:32.310Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "授权实现完成，人工源码复核不替代测试或实页通过；统一验证留最后。"
+  }
+}

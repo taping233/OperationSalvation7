@@ -1,0 +1,78 @@
+{
+  "actions": [
+    {
+      "detail": "无存档槽standard测试局，通过项目devForceBattle进入遭遇战；本证据不代表普通地图开战路径。",
+      "type": "static-inspection"
+    },
+    {
+      "detail": "内置浏览器原生拖动初始攻击至首个拾荒者；3/3目标倒下，能量2→1，手牌5→4。零rAF快速松手由单元测试覆盖。",
+      "type": "real-input"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "not-collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "overlay"
+      },
+      "identity": "{\"id\":\"overlay\"}",
+      "key": "battle",
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#overlay",
+      "styles": {
+        "background-color": "rgb(12, 13, 15)",
+        "border-radius": "0px",
+        "color": "rgb(227, 230, 228)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "1080px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1920px"
+      },
+      "tag": "DIV",
+      "text": "×\n        \n        \n      \n      \n      \n      \n        \n          \n          第 1 回合你的行动\n        \n         选项\n          \n           撤离（判负）\n           设置\n        \n      \n      \n        30/30 攻 4\n      "
+    }
+  ],
+  "observedAt": "2026-10-16T13:28:54.534Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "integration-battle-native-drag",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-16-WF-completed-commit-1016/battle-drag.png"
+  ],
+  "selectors": [
+    {
+      "key": "battle",
+      "selector": "#overlay"
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "actions": [
+    {
+      "detail": "当前窗口原生滚轮缩放与原生拖动；性能按钮采样",
+      "type": "real-input"
+    },
+    {
+      "detail": "SDT.Agent.scenes.run(shop)构造无档位测试局并自动收口，非真实新档开局",
+      "type": "synthetic-event"
+    },
+    {
+      "detail": "地图验收及四条道路纹理左右对照",
+      "type": "screenshot"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "id": "game"
+      },
+      "identity": "{\"id\":\"game\"}",
+      "key": "map",
+      "rect": {
+        "height": 767.8500366210938,
+        "width": 1523,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "#game",
+      "styles": {
+        "background-color": "rgb(8, 13, 17)",
+        "border-radius": "0px",
+        "color": "rgb(227, 230, 228)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "968.005px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1920px"
+      },
+      "tag": "CANVAS",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "id": "expeditionChapter"
+      },
+      "identity": "{\"id\":\"expeditionChapter\"}",
+      "key": "chapter",
+      "rect": {
+        "height": 46.462501525878906,
+        "width": 269.6875,
+        "x": 626.65625,
+        "y": 13.475000381469728
+      },
+      "selector": "#expeditionChapter",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(240, 240, 237)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "58.5739px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "none",
+        "transform": "matrix(1, 0, 0, 1, -169.993, 0)",
+        "visibility": "visible",
+        "width": "339.987px"
+      },
+      "tag": "NAV",
+      "text": "外围荒地第 1 层 / 4"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"NAV\",\"text\":\"背包1/16B\\n        安全格0/2\\n        消耗区0\\n        \\n        定位F\\n        总览G\",\"class\":\"expedition-toolbar\"}",
+      "key": "toolbar",
+      "rect": {
+        "height": 88.0374984741211,
+        "width": 1465.9000244140625,
+        "x": 28.55000114440918,
+        "y": 768.6500244140625
+      },
+      "selector": ".expedition-toolbar",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(214, 226, 229)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "110.986px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1848.02px"
+      },
+      "tag": "NAV",
+      "text": "背包1/16B\n        安全格0/2\n        消耗区0\n        \n        定位F\n        总览G"
+    }
+  ],
+  "observedAt": "2026-10-16T11:59:09.447Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1523
+    }
+  },
+  "scene": "performance-map-zoom-drag-idle",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-16-WF-game-performance-1016/map-verified.png",
+    "docs/evidence/2026-10-16-WF-game-performance-1016/roads-ab.png"
+  ],
+  "selectors": [
+    {
+      "key": "map",
+      "selector": "#game"
+    },
+    {
+      "key": "chapter",
+      "selector": "#expeditionChapter"
+    },
+    {
+      "key": "toolbar",
+      "selector": ".expedition-toolbar"
+    }
+  ]
+}

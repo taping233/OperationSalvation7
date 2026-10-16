@@ -1,0 +1,34 @@
+{
+  "observedAt": "2026-10-16T10:56:51.314Z",
+  "kind": "implementation-only-not-validation",
+  "files": [
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "be1db5a62abe5b3d5e8037adf2d21ee4ebe119218639990d2e03f1dd70856b96"
+    },
+    {
+      "path": "game/src/battle/view/battle.aim.js",
+      "sha256": "bb24095a5c80b21b4b4a82f5ac4a5bc6405847e41c32aa4ac7ca9df9cb784610"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "a832c5a48db15d35282890b2c003c14310413493cc68a6bdf4a999dfc3554063"
+    },
+    {
+      "path": "game/src/battle/view/battle.discover-input.js",
+      "sha256": "f2e7be6119fbbf22e61efd4f2426afea6c0359fd816d96fe77fdaf0eb4b03bda"
+    },
+    {
+      "path": "game/src/battle/view/battle.discover-view.js",
+      "sha256": "68006b904ce17d526e4d9371085de299cb960977e70ee104198514cd7611d586"
+    },
+    {
+      "path": "docs/rules.md",
+      "sha256": "8f599e02231c7dcb8707eb3fbcabe22162e1e54820fd550c914acd825b642ff5"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "5f2371ee0b19f19d92b3bf82d7637a28019292cb5914904e918e27d683422b9d"
+    }
+  ]
+}

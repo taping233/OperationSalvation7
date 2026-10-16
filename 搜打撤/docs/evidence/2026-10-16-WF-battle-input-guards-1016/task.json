@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-battle-input-guards-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "修复老板批准的前四项输入/提示缺口，测试留最后统一",
+  "paths": [
+    "game/src/battle/view/battle.layers.js",
+    "game/src/battle/view/battle.aim.js",
+    "game/src/battle/view/battle.view.js",
+    "game/src/battle/view/battle.discover-input.js",
+    "game/src/battle/view/battle.discover-view.js",
+    "docs/rules.md",
+    "docs/architecture.md",
+    "docs/evidence/2026-10-16-WF-battle-input-guards-1016"
+  ],
+  "doneWhen": [
+    "规则阅读键不触发出牌，真实卡面/数字/注能入口保留",
+    "连续发现有页面/轮次/一次提交及展开保护，不改变候选/效果",
+    "自然法杖zero提示准确，禁用技能外壳不作为any落点",
+    "仅实现交付并登记未验证范围、释放编辑，不扩第五项"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "本轮未运行测试、lint、语法/类型检查、build或内置浏览器",
+    "规则阅读键/真实卡面/数字/注能，动态提示外壳与普通立绘落点",
+    "发现350ms、快连点、重复/同样候选轮次、无关重绘、旧回调/旧dataset、退出/换战斗",
+    "自然法杖及其他选牌动作、候选呈现与飞入起点"
+  ],
+  "updatedAt": "2026-10-16T10:56:51.305Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "授权实现完成，人工源码复核不替代测试或实页通过；统一验证留最后。"
+  }
+}

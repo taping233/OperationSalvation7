@@ -1,0 +1,31 @@
+{
+  "after": [
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-reward-atomicity-audit\\quartermaster-write-attempts-1.json",
+      "Hash": "9B780988D241A7F18099752AEE998A1CDF3FB3C7AAD0B62304F534052F0A0777"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-reward-atomicity-audit\\quartermaster-write-attempts-2.json",
+      "Hash": "A3E0D430182637F31A5729A04253CEB9ECBDF9158350C383645F0F71E00DC151"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-reward-atomicity-audit\\quartermaster-write-attempts-1-2.json",
+      "Hash": "71976C980BB8BC538D3222C0C6A74874C256B4266B8E9D756FD87284345BF249"
+    }
+  ],
+  "before": [
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-reward-atomicity-audit\\quartermaster-write-attempts-1.json",
+      "Hash": "9B780988D241A7F18099752AEE998A1CDF3FB3C7AAD0B62304F534052F0A0777"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-reward-atomicity-audit\\quartermaster-write-attempts-2.json",
+      "Hash": "A3E0D430182637F31A5729A04253CEB9ECBDF9158350C383645F0F71E00DC151"
+    },
+    {
+      "Path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-16-reward-atomicity-audit\\quartermaster-write-attempts-1-2.json",
+      "Hash": "71976C980BB8BC538D3222C0C6A74874C256B4266B8E9D756FD87284345BF249"
+    }
+  ],
+  "unchanged": true
+}

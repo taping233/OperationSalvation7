@@ -1,0 +1,22 @@
+{
+  "observedAt": "2026-10-16T09:55:32.311Z",
+  "kind": "implementation-only-not-validation",
+  "files": [
+    {
+      "path": "game/src/ui/chest-reward-overview.js",
+      "sha256": "5c9804f660d36b9b1b3dbbb94b23f1f48f7ff06ff0389a25a45ecd78b6e48deb"
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "sha256": "4dd652c68d3b7bcd40e8f68db3f07794d3b8bdb4cd79db7b05f8c8c9396a7328"
+    },
+    {
+      "path": "game/css/chest-reward-overview.css",
+      "sha256": "b4f0a34338dec01379dcd7a5e8e7a3e00d6c9d4a640f5542e7a5eadb9e82e307"
+    },
+    {
+      "path": "docs/rules.md",
+      "sha256": "c760eaaf13ae55c63c720bd39fbf10063950ead27010a7908186a4a51bc30749"
+    }
+  ]
+}

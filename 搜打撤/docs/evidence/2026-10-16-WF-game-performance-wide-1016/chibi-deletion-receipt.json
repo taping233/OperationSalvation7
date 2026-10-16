@@ -1,0 +1,152 @@
+{
+  "deleted": [
+    {
+      "path": "game/chibi-preview.html",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\chibi-preview.html",
+      "bytes": 3233,
+      "sha256": "EE207ED087848D4F35567299AB640422271A7CC74D33C3A712AAB67B61E92196"
+    },
+    {
+      "path": "tests/base-chibi.test.js",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\tests\\base-chibi.test.js",
+      "bytes": 3547,
+      "sha256": "2121A82EA34E7BD72DC42008A38EAE4332E4365F4AD09040309F48DEB3A00B41"
+    },
+    {
+      "path": "tests/base-chibi-v2.test.js",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\tests\\base-chibi-v2.test.js",
+      "bytes": 1936,
+      "sha256": "1C97E789E36D59822D248A42CB0D810ADDBD87184F72AB94023C447E560E435F"
+    },
+    {
+      "path": "tests/base-chibi-gait.test.js",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\tests\\base-chibi-gait.test.js",
+      "bytes": 2895,
+      "sha256": "64355A4F9219CF8F64B8FE843D86CDB2E1EC82768B4FBE64F77EE3C465C53F81"
+    },
+    {
+      "path": "game/css/base-chibi.css",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\css\\base-chibi.css",
+      "bytes": 4838,
+      "sha256": "994E3C0903E6FE75908B6201F3078D9FABC2DFEB9E45FBB5B95C1DA147DCC9F6"
+    },
+    {
+      "path": "game/src/ui/chibi-preview.js",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\src\\ui\\chibi-preview.js",
+      "bytes": 1346,
+      "sha256": "213E7AB06AE8380A73BF0503A278DC74EC3604C15B2016214B84EA531B6802FC"
+    },
+    {
+      "path": "game/src/hub/base-chibi.js",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\src\\hub\\base-chibi.js",
+      "bytes": 6839,
+      "sha256": "5920894F4E087300ED5499D7F1E73A29C4D89D088AF3D93ED84452972659900B"
+    },
+    {
+      "path": "game/src/hub/base-chibi-v2.skin.js",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\src\\hub\\base-chibi-v2.skin.js",
+      "bytes": 8542,
+      "sha256": "53A4A3E47E3B01B53D134776A0EE62335F5253E714EDC5E775CA16C733906F86"
+    },
+    {
+      "path": "game/src/hub/base-chibi-v2.art.js",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\src\\hub\\base-chibi-v2.art.js",
+      "bytes": 6590,
+      "sha256": "F65904C24D620F95E47E57AA0E44818FA599BD4DD0731D08BC31DC30B7441DC2"
+    },
+    {
+      "path": "game/src/hub/base-chibi-skin.js",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\src\\hub\\base-chibi-skin.js",
+      "bytes": 5178,
+      "sha256": "05FEBD50137529900CB35C34C3B8175A1BD4E0DEED6687BEE12EEA2F0307E6FD"
+    },
+    {
+      "path": "game/src/hub/base-chibi-gait.js",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\src\\hub\\base-chibi-gait.js",
+      "bytes": 5360,
+      "sha256": "E6FEA475D690624F68662134F7A97EFEB2682E7BBE121390CA1C64987D5061E4"
+    }
+  ],
+  "preserved": [
+    {
+      "path": "game/assets/chibi/wu-v2/SOURCE.md",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v2\\SOURCE.md",
+      "bytes": 438,
+      "sha256": "8E97F728E21D6FC7EE00EF0998316FF8250D37B497A4B2520F80D0D0B3A13864"
+    },
+    {
+      "path": "game/assets/chibi/wu-v2/setup.webp",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v2\\setup.webp",
+      "bytes": 528284,
+      "sha256": "C456A4B056476A73F8D25373033690FB5F4AB6DC87CDDCFE2141266736C94E47"
+    },
+    {
+      "path": "game/assets/chibi/wu-v2/legs-underpaint.webp",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v2\\legs-underpaint.webp",
+      "bytes": 539972,
+      "sha256": "3ED0012A771A7D81D3FAD9E226939389BBA8F3F58BC14B3D01B0AA2B2119ABA7"
+    },
+    {
+      "path": "game/assets/chibi/wu-v2/body-underpaint.webp",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v2\\body-underpaint.webp",
+      "bytes": 516170,
+      "sha256": "0A050443CE37ACD219746A3AE55C177D37D4528812675F14833F525F33AFBB4E"
+    },
+    {
+      "path": "game/assets/chibi/wu-v1/sword.webp",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v1\\sword.webp",
+      "bytes": 15700,
+      "sha256": "62EAD52E2E3514BA58B38B1E78E7EA2C3E5CEFD80BB9E29425E5DEC51DE047C9"
+    },
+    {
+      "path": "game/assets/chibi/wu-v1/SOURCE.md",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v1\\SOURCE.md",
+      "bytes": 279,
+      "sha256": "0C4B317A8F028B94F2E3F5770E9328B67F0A621E6F19D23BC9AF691E357F9C8D"
+    },
+    {
+      "path": "game/assets/chibi/wu-v1/leg-front.webp",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v1\\leg-front.webp",
+      "bytes": 16956,
+      "sha256": "A14DFBA73AF75383FC5AB775F594B08C77289F1A83A04B531C197A57A2D62E3C"
+    },
+    {
+      "path": "game/assets/chibi/wu-v1/leg-back.webp",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v1\\leg-back.webp",
+      "bytes": 17922,
+      "sha256": "9BAD5435F675126B15580BD8321810D298786C8717CCC2E2CC715CCE4A6D6C79"
+    },
+    {
+      "path": "game/assets/chibi/wu-v1/head.webp",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v1\\head.webp",
+      "bytes": 54268,
+      "sha256": "6AFF36FFF7805A4EE4498817F4FD3C6AAD97195F2BD03585BF0405599BA8BB86"
+    },
+    {
+      "path": "game/assets/chibi/wu-v1/hair.webp",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v1\\hair.webp",
+      "bytes": 50494,
+      "sha256": "B6FBF8ADBAC7F1952CC015562446A02574675C744F8E44FF750A708411DAD0A2"
+    },
+    {
+      "path": "game/assets/chibi/wu-v1/body.webp",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v1\\body.webp",
+      "bytes": 37612,
+      "sha256": "9FF84C6BB9922D514C4DDBC094E21DEF16789B09ACA4752B6BD892B16F03CDC4"
+    },
+    {
+      "path": "game/assets/chibi/wu-v1/arm-front.webp",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v1\\arm-front.webp",
+      "bytes": 22066,
+      "sha256": "017059E2E4B8D79396A95B6274E3A0DDEE46438B5179E1236DF6EA5AFE21D0DC"
+    },
+    {
+      "path": "game/assets/chibi/wu-v1/arm-back.webp",
+      "absolute": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\chibi\\wu-v1\\arm-back.webp",
+      "bytes": 22112,
+      "sha256": "9CC3A70FF2AEA1E708A96B1EC00F3410272932695C3782410BB0E5459F0D1008"
+    }
+  ],
+  "scope": "user approved code/preview/tests only; keep all art",
+  "verifiedAt": "2026-10-16T20:07:12.5302822+08:00"
+}

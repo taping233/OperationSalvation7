@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-shop-continuity-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "完成已批准的商店购买限制、背包返回浏览上下文与返回地图文案改动，测试留最后统一",
+  "paths": [
+    "game/src/run/game.run.shop.js",
+    "game/src/run/shop-browse-state.js",
+    "game/css/expedition-shop.css",
+    "docs/architecture.md",
+    "docs/evidence/2026-10-16-WF-shop-continuity-1016"
+  ],
+  "doneWhen": [
+    "缺币与装不下并列说明，容量限制不再掩藏整理入口",
+    "同店有效背包返回恢复滚动、规则展开和焦点，防旧页面覆盖",
+    "返回地图文案准确表达移动前可重进，不改变交易及关店规则",
+    "仅交付实现，登记最终统一验证范围并释放编辑"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "本轮未运行测试、lint、语法/类型检查、build或内置浏览器",
+    "购买限制组合、免费/售出/神秘商品",
+    "主店/收购台背包往返、展开规则、滚动与焦点、减少动态效果",
+    "换店/换档/离店后旧恢复失效、地图重进及移动关店"
+  ],
+  "updatedAt": "2026-10-16T10:19:54.942Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "授权实现完成，人工源码复核不代表实页或测试通过；统一验证留最后。"
+  }
+}

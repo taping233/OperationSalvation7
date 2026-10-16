@@ -1,0 +1,122 @@
+[
+  [
+    "(idle) :0",
+    16817778
+  ],
+  [
+    "(program) :0",
+    1714852
+  ],
+  [
+    "(garbage collector) :0",
+    45083
+  ],
+  [
+    "getBoundingClientRect :0",
+    31457
+  ],
+  [
+    "syncLibTileIntrinsicSize hub/game.cardslib.page.js:500",
+    25517
+  ],
+  [
+    "get ready :0",
+    20327
+  ],
+  [
+    "grid.addEventListener.passive hub/game.cardslib.page.js:612",
+    9585
+  ],
+  [
+    "getAnimations :0",
+    9438
+  ],
+  [
+    "tick ui/home-fx.js:187",
+    8155
+  ],
+  [
+    "requestAnimationFrame :0",
+    6376
+  ],
+  [
+    "insertAdjacentHTML :0",
+    4736
+  ],
+  [
+    " src/game.boot.js?t=1792151567551:519",
+    3239
+  ],
+  [
+    "querySelectorAll :0",
+    2721
+  ],
+  [
+    "claimMountedTiles hub/game.cardslib.page.js:474",
+    1657
+  ],
+  [
+    "_findCancelBtn ui/overlay.js:334",
+    1619
+  ],
+  [
+    "createTreeWalker :0",
+    1595
+  ],
+  [
+    " hub/game.cardslib.page.js:752",
+    1584
+  ],
+  [
+    "showOverlay ui/overlay.js:49",
+    1582
+  ],
+  [
+    " ui/page-loading.js:80",
+    1580
+  ],
+  [
+    "tick experience/pocket-strip.js:52",
+    1579
+  ],
+  [
+    "libFiltered hub/game.cardslib.page.js:167",
+    1578
+  ],
+  [
+    "stablePhotoStyle hub/game.cardslib.photo-props.js:43",
+    1578
+  ],
+  [
+    " hub/game.cardslib.page.js:986",
+    1564
+  ],
+  [
+    "f :128",
+    1555
+  ],
+  [
+    "richDescriptionFragment cards/cards.view.js?t=1792142364054:22",
+    1548
+  ],
+  [
+    " src/game.boot.js?t=1792151567551:507",
+    1528
+  ],
+  [
+    "setTimeout :0",
+    1523
+  ],
+  [
+    "p :128",
+    1482
+  ],
+  [
+    "pumpLibArtQueue hub/game.cardslib.art-warm.js:35",
+    1472
+  ],
+  [
+    "scheduleNextLoop src/game.boot.js?t=1792151567551:513",
+    1359
+  ]
+]

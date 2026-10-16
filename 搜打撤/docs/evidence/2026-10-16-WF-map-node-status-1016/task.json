@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-map-node-status-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "统一地图节点未完成/待领奖/已完成/营业中及已离店状态，测试按老板要求最后统一",
+  "paths": [
+    "game/src/core/map-node-state.js",
+    "game/src/core/node-info.js",
+    "game/src/core/renderer.js",
+    "game/src/core/map-node-art.js",
+    "game/src/run/expedition.view.js",
+    "game/src/game.boot.js",
+    "game/css/map-node-status.css",
+    "docs/map-travel.md",
+    "docs/evidence/2026-10-16-WF-map-node-status"
+  ],
+  "doneWhen": [
+    "地图标签、节点详情与悬停提示使用同一内容状态",
+    "待领优先，位置/可达独立，迷雾不泄露类型，纯通行节点不贴未完成",
+    "实现交付，全部测试/静态检查/实页验收留待最后统一执行"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "老板要求本块测试/静态检查/实页验收留到最后统一进行，本版实现尚未验证"
+  ],
+  "updatedAt": "2026-10-16T07:16:33.355Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

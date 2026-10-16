@@ -1,0 +1,91 @@
+[
+  {
+    "file": "game/src/audio/sound.js",
+    "previous": [
+      "f5053d38817ddaee067ff0c42e5677694641340fd210722c189a4ecdbee2a4a7",
+      "ce1634f1b6b7af4230e3e95e74ab1ca86a5f667673e79236d42fa8c31a4457ef"
+    ],
+    "sha256": "ce1634f1b6b7af4230e3e95e74ab1ca86a5f667673e79236d42fa8c31a4457ef"
+  },
+  {
+    "file": "game/src/battle/view/battle.frames.js",
+    "previous": [
+      "3749586baaf1cbb45f00af3eccbd14e2963a0b98ac483c69b10a6c7b557eb904",
+      "b71c39e052d62bd38591745d6621b66aab67edbcee64ab66326b2d23b628ce82"
+    ],
+    "sha256": "b71c39e052d62bd38591745d6621b66aab67edbcee64ab66326b2d23b628ce82"
+  },
+  {
+    "file": "game/src/battle/view/battle.layers.js",
+    "previous": [
+      "7041764eea55ce1e147afb10fc2e494e43ab2c493617d0cf88b6bdb185770575",
+      "a2661d60343129a0e19566738d01c0a0c60e096441b15bb22a4360cc9ad39ec7"
+    ],
+    "sha256": "a2661d60343129a0e19566738d01c0a0c60e096441b15bb22a4360cc9ad39ec7"
+  },
+  {
+    "file": "game/src/core/art.js",
+    "previous": [
+      "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1",
+      "65b909a1848ee71c64cec39c8d709475fc0532896754c034b3d2710d0ec62f6a"
+    ],
+    "sha256": "65b909a1848ee71c64cec39c8d709475fc0532896754c034b3d2710d0ec62f6a"
+  },
+  {
+    "file": "game/src/run/chests.js",
+    "previous": [
+      "a993d5ed443b8d6b5521d82be2dd22ca202382a4626647f4290c6299da36a021",
+      "a993d5ed443b8d6b5521d82be2dd22ca202382a4626647f4290c6299da36a021"
+    ],
+    "sha256": "fd2d26a4a13805ab9ac4df57853eac3d010de746dc0f29fd95d2fcb1f3be4149"
+  },
+  {
+    "file": "game/src/run/game.run.data.js",
+    "previous": [
+      "6f89d00a6116d2ec0171e1cd1ae73272af0c8879f5557fd2921e507f9b55c9db"
+    ],
+    "sha256": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8"
+  },
+  {
+    "file": "game/src/run/game.run.scenes.js",
+    "previous": [
+      "c49bbb277679f39eee25201ce928560d8a159413a74a6ab59d7e9efeb026635d"
+    ],
+    "sha256": "0373fc9bdf673db7783d0f6b331d2c4a4842d94af320ca04beb29a780b5936e8"
+  },
+  {
+    "file": "game/src/battle/view/battle.scenery.js",
+    "previous": [
+      "def5fdf4843c3fc8b5eb0226e8859b6ff14ee72c9b12d24481a9a93d22647dba"
+    ],
+    "sha256": "bcbff054eb7c23c6a7336c868c5f2a0b2b14e6406628a7bd64a9349935b8172f"
+  },
+  {
+    "file": "game/css/scenes.css",
+    "previous": [
+      "6d10a0d68c80397b9ff599ff631dc66c0b91984cc205b736dbf7716df05cfb70"
+    ],
+    "sha256": "e02105ca8bc13b66df7f8d07d584dc05c209a4e2e906a8bd05f340d567a15c3e"
+  },
+  {
+    "file": "game/src/core/map-node-art.js",
+    "previous": [
+      "2142595cfe18a9b47db627e03e10d4db1d868c66367751571c3e028e3bf8f0ac"
+    ],
+    "sha256": "2cd3d6ffee8c3b53076db63cfb4d776ac94953129daeccafbd9fcbdf2a39b4f4"
+  },
+  {
+    "file": "game/src/core/renderer.js",
+    "previous": [
+      "74fb995da22653b8a5e7b4c3b86fab9e6f6bcccae40982118174ca428de394be"
+    ],
+    "sha256": "9fcc01942a8ca3a115bb5008cd4c97eae79c4a2d46e5a3cdf97f2f214f342867"
+  },
+  {
+    "file": "game/src/ui/camp-entry.js",
+    "previous": [
+      "104ad905fee3feed9279f3f86ce56550a0d306ab80ce110faab66a899ed40fde"
+    ],
+    "sha256": "45512ff38fd159adbdad17ee62622a2a7dddb5f3d4c347e5bc759e5c7d2e8520"
+  }
+]

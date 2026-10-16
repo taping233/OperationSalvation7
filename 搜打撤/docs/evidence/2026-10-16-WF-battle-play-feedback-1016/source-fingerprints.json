@@ -1,0 +1,46 @@
+{
+  "observedAt": "2026-10-16T11:18:43.9895034Z",
+  "kind": "implementation-only-not-validation",
+  "files": [
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "sha256": "a9248f483f6ab3400ca7519bab42caf2994cf41d311db274c98967b257a71f51"
+    },
+    {
+      "path": "game/src/battle/core/battle.core.js",
+      "sha256": "8177666bba952e23b8475abcf91367808d24ea9541031d2d119c28575ae29908"
+    },
+    {
+      "path": "game/src/battle/core/battle.exec-play.js",
+      "sha256": "5799a8fb5f369d9c8d76e50d572e875993ee460e8135b814a8e981eac92c1bc7"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.action-runner.js",
+      "sha256": "0d2ee1aa8a55d81e66f8848b2cf1f2c90ca9213da53e49f0d328f2bf4c37f84e"
+    },
+    {
+      "path": "game/src/battle/battle.play-submission.types.d.ts",
+      "sha256": "ea763bcf232d21df404f0f70fd434bf92c35dd1f39d1a793a109cf750fbe11ff"
+    },
+    {
+      "path": "game/src/battle/view/battle.aim.js",
+      "sha256": "d16c3a0074ac132e0a2e4d3d77b2fa591a7121ab4d974f0e41f05997815eca3d"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "a2661d60343129a0e19566738d01c0a0c60e096441b15bb22a4360cc9ad39ec7"
+    },
+    {
+      "path": "docs/rules.md",
+      "sha256": "20aa8e887f4204fbccb18c9a4de7a58075d7735f41c14a89fc1850edbb3e3f1e"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "a27bfe26283f7ec8ae322d7ddbf34f7e516dfc4b92d5a3be413e9a9d51790536"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-battle-play-feedback-1016/core-contract.md",
+      "sha256": "e34b54985e17216a14ce508d5806e1668dca5c601989ecfbdd0d4f2ef857e7f7"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-16",
+  "authorization": "老板指定PNG接入首页，原有壁纸退役，保留切换功能供以后安装其他壁纸",
+  "source": {
+    "path": "C:\\Users\\太平\\.codex\\generated_images\\01a14489-de98-7f00-9212-75dbef54de9d\\exec-962df0b8-363b-44e7-9aa2-1974d08e141b.png",
+    "bytes": 3015144,
+    "sha256": "52b0b7e49f31cc99a674ab740b91c7d2979e942b162affee8f0124a56131eccd",
+    "size": [
+      1672,
+      941
+    ],
+    "acquisition": "老板消息提供的本机generated_images PNG；原图不复制入Git"
+  },
+  "output": {
+    "path": "reconstruction/wallpaper-snow-road-1016.webp",
+    "ext": "webp",
+    "bytes": 569196,
+    "sha256": "6595b1ca0f0c84ca438da2688501d1f0a0886e297fa16b6bf7c98cd2302407ef",
+    "license": "项目AI生成素材（老板指定本图实装首页）",
+    "source": "docs/evidence/2026-10-16-home-snow-road/receipt.json",
+    "size": [
+      1672,
+      941
+    ],
+    "encoding": "Pillow WebP quality 95 method 6；保持原尺寸，无裁切、重绘或调色"
+  },
+  "retired": [
+    {
+      "path": "reconstruction/wallpaper-wu-1004.webp",
+      "sha256": "0ce34acb0c698d911266b69615b45ffe812997e5c08bb62337dfd3149b05644d",
+      "status": "退出首页选项，原文件保留"
+    },
+    {
+      "path": "reconstruction/wallpaper-ensemble-1005.webp",
+      "sha256": "b66deda30f427f0ce646519df2e5e259e29ea26aa6dc9f5097e7946ee1c5e608",
+      "status": "退出首页选项，原文件保留"
+    }
+  ],
+  "supersededSelections": [
+    {
+      "source": {
+        "path": "C:\\Users\\太平\\.codex\\generated_images\\01a144a9-2ead-71a3-bc8f-6c537b3159b4\\exec-941f3bec-fa55-4482-8a81-566bf09fbfb6.png",
+        "bytes": 2627796,
+        "sha256": "b1932614a97badae961c0713be7825d0f981eaa9d410ec368760c72ce355f8d4",
+        "size": [
+          1672,
+          941
+        ],
+        "acquisition": "老板消息提供的本机generated_images PNG；原图不复制入Git"
+      },
+      "output": {
+        "path": "reconstruction/wallpaper-snow-road-1016.webp",
+        "ext": "webp",
+        "bytes": 464546,
+        "sha256": "5f3f575bb7b67397de07dd4218d25053f435c97da62d3bebcff2abc1a89b8813",
+        "license": "项目AI生成素材（老板指定本图实装首页）",
+        "source": "docs/evidence/2026-10-16-home-snow-road/receipt.json",
+        "size": [
+          1672,
+          941
+        ],
+        "encoding": "Pillow WebP quality 95 method 6；保持原尺寸，无裁切、重绘或调色"
+      },
+      "reason": "老板本轮追加指定新PNG替换；不保留在切换列表"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-battle-play-feedback-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "完成老板批准的出牌回执与失败归位、鼠标Enter确认、手牌差分焦点交接，测试留最后统一",
+  "paths": [
+    "game/src/battle/core/battle.engine.js",
+    "game/src/battle/core/battle.core.js",
+    "game/src/battle/core/battle.exec-play.js",
+    "game/src/battle/runtime/battle.action-runner.js",
+    "game/src/battle/battle.play-submission.types.d.ts",
+    "game/src/battle/view/battle.aim.js",
+    "game/src/battle/view/battle.layers.js",
+    "docs/rules.md",
+    "docs/architecture.md",
+    "docs/PARALLEL-REGISTRY.md",
+    "docs/evidence/2026-10-16-WF-battle-play-feedback-1016"
+  ],
+  "doneWhen": [
+    "核心提供同源只读可用性和结构化提交回执，旧playCard语义保留",
+    "拒绝时反馈原因并归回当前手牌，选择接管不按失败取消",
+    "Enter复用当前鼠标合法目标，隔离阅读/控件/组合输入和长按",
+    "手牌差分保留原卡面或规则焦点，组移除转近邻，外部焦点不抢回",
+    "仅实现交付，登记未验证范围并释放编辑占用"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "本轮未运行测试、lint、语法/类型检查、build、内置浏览器或性能采样",
+    "同步拒绝、目标/注能/支付、入队后拒绝/取消、提交后胜利/异常及旧接口兼容",
+    "同帧打出又回手、同组代表UID变化、跨场次和旧回执的姿态释放",
+    "鼠标Enter合法/空目标、长按、组合输入、卡面/规则/其他控件的按键隔离",
+    "手牌差分焦点、阅读滚动、邻牌/空栏交接及外部焦点保持"
+  ],
+  "updatedAt": "2026-10-16T11:16:19Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "授权实现完成；人工源码复核不替代测试或实页通过，全部运行验证留最后统一。"
+  }
+}

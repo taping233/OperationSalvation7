@@ -1,0 +1,629 @@
+{
+  "actions": [
+    {
+      "detail": "标题页点击照相馆；本轮另验证三次关闭重开、分类/搜索/大图，设置、成就、基地入口。",
+      "type": "real-input"
+    },
+    {
+      "detail": "受控前后基准直接调用页面挂载；慢图用CDP拦截过场图片请求，等待姿态存在且未揭幕，放行后首屏16图就绪。",
+      "type": "synthetic-event"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"DIV\",\"text\":\"全部\\n    \\n    武术\\n    \\n    法术\\n    \\n    生物\\n    \\n    道具\\n    \\n    装备\\n    \\n    事件\\n    \\n    能力\\n    \\n    资源\\n    \\n        照相馆馆藏 268 张照片\\n      \\n      \\n        \\n          \\n          \\n          \\n        \\n        \\n\",\"class\":\"pg card-library-page photo-studio-v3 studio-index-layout studio-unified studio-archive\"}",
+      "key": "photo",
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".studio-unified",
+      "styles": {
+        "background-color": "rgb(21, 29, 25)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "1080px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1920px"
+      },
+      "tag": "DIV",
+      "text": "全部\n    \n    武术\n    \n    法术\n    \n    生物\n    \n    道具\n    \n    装备\n    \n    事件\n    \n    能力\n    \n    资源\n    \n        照相馆馆藏 268 张照片\n      \n      \n        \n          \n          \n          \n        \n        \n"
+    },
+    {
+      "attributes": {
+        "id": "libGrid"
+      },
+      "identity": "{\"id\":\"libGrid\"}",
+      "key": "grid",
+      "rect": {
+        "height": 546.0250244140625,
+        "width": 807.4000244140625,
+        "x": 53.32500076293945,
+        "y": 141.97500610351562
+      },
+      "selector": "#libGrid",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "grid",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "819.037px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "24px 24px 40px 0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1211.1px"
+      },
+      "tag": "DIV",
+      "text": "禁咒I法术棱彩\n      \n    \n      \n        \n        \n        禁咒II法术棱彩\n      \n    \n      \n        \n        \n        禁咒III法术棱彩\n      \n    \n      \n        \n        \n        禁咒IV法术棱彩\n      \n    \n      \n        \n "
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-tt8-curse1"
+      },
+      "identity": "{\"data-asset-key\":\"card-tt8-curse1\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 64.01250457763672,
+        "y": 175.33750915527344
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-tt8-curse2"
+      },
+      "identity": "{\"data-asset-key\":\"card-tt8-curse2\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 267.8625183105469,
+        "y": 175.33750915527344
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-tt8-curse3"
+      },
+      "identity": "{\"data-asset-key\":\"card-tt8-curse3\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 471.7124938964844,
+        "y": 175.33750915527344
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-tt8-curse4"
+      },
+      "identity": "{\"data-asset-key\":\"card-tt8-curse4\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 675.5625,
+        "y": 175.33750915527344
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-tt8-hero-assassin"
+      },
+      "identity": "{\"data-asset-key\":\"card-tt8-hero-assassin\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 64.01250457763672,
+        "y": 446.75
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-tt8-hero-mage"
+      },
+      "identity": "{\"data-asset-key\":\"card-tt8-hero-mage\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 267.8625183105469,
+        "y": 446.75
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-hero-volcano"
+      },
+      "identity": "{\"data-asset-key\":\"card-hero-volcano\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 471.7124938964844,
+        "y": 446.75
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-hero-summoner"
+      },
+      "identity": "{\"data-asset-key\":\"card-hero-summoner\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 675.5625,
+        "y": 446.75
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-tt8-hero-warlock"
+      },
+      "identity": "{\"data-asset-key\":\"card-tt8-hero-warlock\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 64.01250457763672,
+        "y": 718.1625366210938
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-hero-sacredrain"
+      },
+      "identity": "{\"data-asset-key\":\"card-hero-sacredrain\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 267.8625183105469,
+        "y": 718.1625366210938
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-hero-warrior"
+      },
+      "identity": "{\"data-asset-key\":\"card-hero-warrior\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 471.7124938964844,
+        "y": 718.1625366210938
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-hero-abysssovereign"
+      },
+      "identity": "{\"data-asset-key\":\"card-hero-abysssovereign\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 675.5625,
+        "y": 718.1625366210938
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-hero-sacredsword"
+      },
+      "identity": "{\"data-asset-key\":\"card-hero-sacredsword\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 64.01250457763672,
+        "y": 989.5750122070312
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-tt8-hero-sealer"
+      },
+      "identity": "{\"data-asset-key\":\"card-tt8-hero-sealer\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 267.8625183105469,
+        "y": 989.5750122070312
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-tt8-hero-ranger"
+      },
+      "identity": "{\"data-asset-key\":\"card-tt8-hero-ranger\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 471.7124938964844,
+        "y": 989.5750122070312
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    },
+    {
+      "attributes": {
+        "data-asset-key": "card-tt8-hero-sword"
+      },
+      "identity": "{\"data-asset-key\":\"card-tt8-hero-sword\"}",
+      "key": "first-images",
+      "rect": {
+        "height": 150.4875030517578,
+        "width": 150.4875030517578,
+        "x": 675.5625,
+        "y": 989.5750122070312
+      },
+      "selector": "#libGrid img",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(229, 221, 205)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "13.3333px",
+        "height": "225.731px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "225.731px"
+      },
+      "tag": "IMG",
+      "text": ""
+    }
+  ],
+  "observedAt": "2026-10-16T12:38:12.358Z",
+  "page": {
+    "origin": "http://127.0.0.1:5200",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "scene": "photo-studio-unified-entry-final",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-16-WF-game-performance-wide-1016/photo-ready.png",
+    "docs/evidence/2026-10-16-WF-game-performance-wide-1016/curtain-cold-wait.png"
+  ],
+  "selectors": [
+    {
+      "key": "photo",
+      "selector": ".studio-unified"
+    },
+    {
+      "key": "grid",
+      "selector": "#libGrid"
+    },
+    {
+      "key": "first-images",
+      "selector": "#libGrid img"
+    }
+  ]
+}

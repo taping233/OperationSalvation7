@@ -1,0 +1,11 @@
+{
+  "state": {
+    "artReady": false,
+    "pageMounted": false,
+    "pageVisibility": null,
+    "revealing": false,
+    "waiting": true
+  },
+  "intercepted": 1,
+  "note": "Final implementation: artwork and target prepare concurrently; reveal remains blocked while cut artwork is held."
+}

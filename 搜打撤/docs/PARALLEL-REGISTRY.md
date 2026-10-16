@@ -8,114 +8,66 @@
 
 ## 活跃登记
 
-Friday 云端本轮并行属地（WF-cloud-play-eight-hours-1016，独立云端副本）：基地子任务持有 base-framework-v7/base-home-v7/base-personnel-v12/base-logistics-trade-v12.css、hub.home-v3.js、game.hub.runtime.js及专测（首批已完成待实机）；战斗子任务持有 battle-stage.css/battle.css 与 battle.hand-layout/layers/view.js呈现层及专测；远征子任务持有 game.run.altar.js 的入城补给文案/呈现、expedition-rewards.css 的 entry-supply-strips 作用域与专测；性能首批已完成，文件清单见独立performance-review/handoff.json。父任务统一共享台账/浏览器/最终构建；服务5300现由独立runner关闭watch/HMR，PID167，同桌面窗口35651587，手动刷新才更新。全部未提交，不改本地仓库。
+Friday（免注能效果结算 WF-infuse-free-1016，聊天01a144bf），2026-10-16：game/src/battle/core/battle.exec-play.js 注能状态判定、tests/infuse-free-play.test.js、docs/rules.md 本轮说明及 docs/evidence/2026-10-16-WF-infuse-free/；修复灵能召唤等免注能实例只跳过材料却不触发注能效果的问题，编辑中；不build、不提交、不操作已有服务。
 
+Friday（随机卡牌结果展示 WF-random-card-results-1016，聊天01a144fe），2026-10-16：`game/src/battle/core/battle.draw.js`发牌事件元数据、`game/src/battle/view/battle.anim.view.js`结果呈现、独立`battle.card-results.js`与专测、`game/css/battle.css`仅结果栏新增选择器、`docs/evidence/2026-10-16-WF-random-card-results/`；编辑中。随机获得/洗入/释放显示实际卡名、数量与去向；保留已有改动，复用5200服务不认领，不build、不提交。
 
-Friday（云端八小时实机迭代 WF-cloud-play-eight-hours-1016），2026-10-16：云端隔离仓库 OperationSalvation7-f0e84c5d 的 Vite 游戏范围；父任务统一协调子代理属地，实机使用当前云端内置浏览器 tab7 / 127.0.0.1:5300。服务由云端桌面 Terminal 窗口35651587启动，npm主PID40，启动脚本 /workspace/shared/run-code7.sh；只管理本服务。基线 f0e84c5d / tree869f3477，游戏修改已获老板明确授权，重点战斗UI反复实机对照及全流程细节/性能。编辑中；新任务，不操作本地工作区或旧对话。
-
-
-
-dot（云端同步与环境准备 WF-cloud-sync-f0e84c5d），2026-10-15 UTC：仅当前云端隔离工作区 `/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d`。最终 GitHub 基线 f0e84c5dc34afcbc1176b1519258d2c3010c62cb / tree 869f3477c070304d5e6a96cfba395c42ab143e80，归档、全部13377个Blob及干净浅Git基线已校验；Node22.23.3官方包SHA256通过，锁依赖 npm ci 成功（258包、Node22.23.3/npm10.9.9，工作区缓存）。属地仅本条、同任务环境证据及隔离开发服务；不修改游戏、不触碰本地旧会话属地，不提交/推送，内置浏览器由主会话负责。隔离 Vite 的沙箱内监听可启动，但其他工具调用无法连接；受审核的非沙箱启动被运行时只读挂载错误阻断。全部本次尝试均已退出，无可交付服务；环境准备已交付、文件编辑占用释放，后续服务由主会话协调。
-
-Codex-handoff（集成修复与交接 WF-integration-ship-1016，聊天01a14055），2026-10-16：老板追加授权在本新任务修复33项失败后正常提交推送与远端SHA归档传输。主会话统筹素材/脚本映射、共享index与门禁；本任务5名子代理分别限定入口与撤离、boot与可访问性测试、地图节点奖励、文案与迁移测试，精确属地见 `docs/evidence/2026-10-16-WF-integration-ship-1016/dispatch.json`。子任务已完成并释放编辑；33项集成失败已修复，完整测试4032/0/12；代码已正常提交b3820ca6，冻结full4028通过/16既有跳过/0错误，隐私检查无发现；主会话正在提交已完成证据并正常推送。生产构建四项既有预算超限如实交云端，不扩大性能重构；不唤起旧对话，不删未知文件，不动NAI增量，不全量add。
+Friday（白塔黑像第二壁纸，聊天01a144c7），2026-10-16：自有 `docs/evidence/2026-10-16-baita-heixiang-nai45/`、`game/assets/reconstruction/wallpaper-baita-heixiang-1016.webp`、`game/assets/asset-manifest.json`本图条目、`game/src/ui/title-wallpaper.js`、`game/css/title-p0.css`本图选择器、`tests/title-wallpaper.test.js`；编辑中。老板授权最新修脸候选接入首页第二张，现第一张雪原公路保留，沿原切换/偏好存储，定向与当前窗口内置浏览器核验；不build、不提交，复用5200服务不认领。
 
 
 
 
+
+
+Friday（无雪原公路内置方舟重绘 01a14489），2026-10-16：自有 `docs/evidence/2026-10-16-wu-snow-road-nai45/` 与根 `.tmp/art/wu-snow-road-builtin-arknights-20261016/`；编辑中，老板授权用内置生图对v6图做明日方舟风格精修并提升分辨率；锁定人物比例/动作/墨镜及冷灰雪原构图，目标4K横图，实际尺寸生成后检查。不改共享配方、不接游戏、不提交，无服务。
+
+
+Friday（无全身v3.4 V5 01a14487），2026-10-16：属地 `docs/character-bible/wu.md`、`docs/evidence/2026-10-16-wu-full-v34-v5/` 与根 `.tmp/nai/wu-full-v34-v5-20261016.png`；完成未提交，编辑占用释放。首张HTTP200、832×1216，老板指出后摆过长；现行服装提示词及后续脚本已明确前后两侧均膝上短裙并排除长后摆/拖尾，原图与request.json冻结；docs:check通过，短裙修订尚未出图验证；不接游戏、不提交，无服务。
+
+Friday（无画风对照 WF-wu-style-AD-1016，聊天01a1447d），2026-10-16：属地 `docs/evidence/2026-10-16-wu-style-AD/`、根 `.tmp/nai/wu-style-AD-20261016/` 与本聊天仓库外 `arknights-style` 画廊；编辑中，NAI四张候选（现行/A向/D主导A+D/日间），只读共享配方与现行人设，不接游戏、不提交；复用本聊天画廊5347服务，收官保留供老板选图。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Friday（无半身ASK 01a1445b），2026-10-16：已交付单张NAI V5半身候选，批次去piromizu/gomzi、ASK 0.5；1024×1536首轮HTTP402，免费档832×1216 HTTP200，已实看、SHA256与完整请求见 `docs/evidence/2026-10-16-wu-half-ask/`；原图根 `.tmp/nai/wu-half-ask-20261016.png` 不入Git。编辑占用释放，新增证据完成未提交；不改共享配方、不接游戏、无服务、未提交。
+
+
+
+
+
+
+
+
+
+
+
+Friday（NAI质量词 01a1438b），2026-10-16：`tools/nai_style.py`、`tools/nai_prompt_clean.py`、`tools/NAI-PROMPTS.md`、`docs/production/art/NAI-PROMPTING.md`；按老板要求向共享正向配方追加质量词并保留重复masterpiece，v2.1；完成未提交、编辑占用释放，仅本轮增量，不接管既有未提交内容；四个共享构建器离线核对质量词末尾与重复项通过，定向diff检查通过；无生图、无服务、未提交。
+
+Friday（无立绘去画法候选 01a1438b），2026-10-16：属地 `docs/evidence/2026-10-16-wu-no-style/` 与根 `.tmp/nai/wu-no-style-20261016.png`；NAI 单张临时省略 STYLE_BLOCK，保留画师串/UC/参数，不改共享配方、不接入游戏；已交付，编辑占用释放；HTTP200，832×1216，原图及SHA256见request.json；无服务、未测试、未提交。
+
+Friday（本地网页版启动，聊天01a1435f），2026-10-16：应老板要求保留后台 Vite 服务供使用；工作目录 `D:\素材\代号柒\搜打撤`，地址 `http://127.0.0.1:5200/`。首轮沙箱启动 PID26384 后服务失联，内置浏览器落到错误页，查看错误页又被 data: 协议限制；经老板授权在沙箱外执行 `npm run web -- --skip-compile` 恢复，启动器返回 PID13976（沙箱内进程列表不可见，勿据此判断退出）。独立后续请求确认入口、PNG 图标、WebP 立绘均200；当前 Codex 内置浏览器 tab2 实见主菜单并截图，已标记保留。服务资源保留，日志 `node_modules/.cache/web-up-5200.log`；启动自动编译 narrative，无手动游戏代码编辑、无提交。此前同端口记录为历史时点，不据此操作旧进程。
 
 Friday（网页版启动 WF-web-open-1016，聊天01a1404b），2026-10-16：应老板要求保留 Vite 服务供使用；工作目录 `D:\素材\代号柒\搜打撤`，地址 `http://127.0.0.1:5200/`，exec 会话14282。服务已就绪，Codex 内置浏览器已显示主菜单；系统进程查询未返回 Node PID，以 exec 会话追踪，不认领其他进程。无代码编辑、未提交；npm predev 自动执行 narrative:compile。
 
-Friday（正式战斗样式冲突修正 WF-battle-live-cascade-1015，聊天01a13ff6），2026-10-15：game/css/battle-stage.css、winter.css、expedition-battle.css、page-battle-ui.css、feedback-oct12.css；自有实装脚本与证据。老板要求查看当前正式页，已定位限宽/敌方名牌/技能网格冲突；编辑中，保留当前战斗进度，仅当前窗口定向反馈，不跑全量验收、不build、不提交，无新服务。
-
-Friday（战斗设计实装 WF-battle-stage-install-1015，聊天01a13ff6），2026-10-15：game/src/battle/view/{battle.view,battle.layers,battle.hand-layout,battle.scenery}.js；game/css/battle-stage.css及旧布局规则来源，精确路径见自有runtime-install-receipt.json；game/index.html；game/assets/scenes/battle/stage-reset-1015/及asset-manifest；相关契约/说明与自有证据。正式入口、紧凑牌堆能量、人物旁技能、直立叠牌与三层场景已接入，旧布局选择器清退；完成未提交、编辑释放、待老板验收。老板明确不用验收，本轮未启动实页/测试/构建；复用5200，无新服务，不提交/推送/发布，现有未提交行为修复保留。
-
-Friday（战斗方案控件排布 WF-battle-controls-layout-1015，聊天01a13ff6），2026-10-15：docs/previews/battle-stage-reset-20261015/；docs/evidence/2026-10-15-battle-stage-reset/。抽牌堆宽120→82、职业技能挂到人物左侧，手牌280→260并保留标题/叠放/悬停；当前窗口牌堆点击、技能选敌/已用、五张标题、悬停整卡/回落、资源日志与CSS/链接检查通过。完成未提交、编辑释放；证据controls-layout.png与controls-layout-verification.json。复用5200，无新服务，不改正式游戏/共享卡牌，不build、不提交。
-
-Friday（战斗场景衔接 WF-battle-scene-seam-1015，聊天01a13ff6），2026-10-15：docs/previews/battle-stage-reset-20261015/style.css；docs/evidence/2026-10-15-battle-stage-reset/。地板底对齐至82%画幅，远沿与建筑基座对齐并局部alpha过渡；当前窗口实页/图层矩形/资源日志、CSS解析与定向链接检查通过。完成未提交、编辑释放；证据scene-seam.png与scene-seam-verification.json。复用5200，无新服务，不改正式游戏/卡牌/角色动画或三层源图，不build、不提交。
-
-Friday（战斗方案手牌放大 WF-battle-hand-size-1015，聊天01a13ff6），2026-10-15：docs/previews/battle-stage-reset-20261015/；docs/evidence/2026-10-15-battle-stage-reset/。手牌放大约47%、默认露出费用/标题并横向叠放；当前窗口五张标题边界/命中、悬停置顶/完整展开、选中后移出回落与战场输入穿透通过，资源/日志无错误，JS/CSS与定向链接检查通过。完成未提交、编辑释放；证据hand-size-rest.png、hand-size-hover.png与hand-size-verification.json。复用5200，无新服务、不改正式游戏或共享卡面、不build、不提交。
-
-Friday（战斗方案手牌返修 WF-battle-hand-preview-1015，聊天01a13ff6），2026-10-15：docs/previews/battle-stage-reset-20261015/；docs/evidence/2026-10-15-battle-stage-reset/。职业技能突出、手牌直立下沉/悬停上浮与离开回落，已只读接入共用cardHTML/正式插画与卡框样式；当前窗口内置鼠标输入、点击选中后回落、键盘展开与刺击选敌/已用状态通过，资源/日志无错误，JS语法与CSS160节点解析通过。完成未提交、编辑释放；本轮证据hand-rest.png、hand-hover.png与hand-verification.json。复用5200，无新服务、不改正式游戏或共享卡面、不build、不提交。
-
-Friday（宝箱动画重绘 WF-chest-repaint-1015，聊天01a14007），2026-10-15：老板已确认灰白＋石墨黑＋少量朱红配色并明确“实装吧”；safe-simple-v7四张开合帧＋独立白光接入，前序复杂蓝金稿均未采用。属地 game/src/run/chests.js 动画呈现段（保留他人奖励/背包修复）、game/src/run/chest-opening-art.js、game/css/chest-opening.css、game/assets/scenes/chests/safe-simple-v7/、manifest对应五条、game/art-source/chests/、docs/previews/chest-safe-20261015/、docs/evidence/2026-10-15-chest-repaint/；旧candidate-code保留.tmp。编辑中，复用5200，无新服务，不build、不提交。
-
-
-
-
-
-Friday（战斗重设计方案 WF-battle-stage-reset-1015，聊天01a13ff6），2026-10-15：docs/previews/battle-stage-reset-20261015/；docs/evidence/2026-10-15-battle-stage-reset/。独立设计稿与NAI→内置重绘三层已交付，直接复用现有Pixi战斗动画；当前窗口实页、选牌/目标/施法/回合切换/图层开关、资源/日志与JS/CSS解析通过；docs检查466链接通过。完成未提交、编辑释放，方案审美与旧样式清退清单待老板确认；复用5200，无新服务、不改正式游戏、不build、不提交。证据见同目录README、browser-verification.json及preview.png。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Friday（方舟技能独立应用测试 WF-arknights-skill-forward-test），2026-10-15：独立测试原型业务通过后，老板否决其美术审美，继续分析与迭代。个人 arknights-art-ui-design、iteration-05、同任务trial-02由父会话编辑；子代理只审查trial-01/visual-review.md，失败样本保留。增加真实视觉对照、媒介选择与美术验收；编辑中，复用5200，无新服务，不改游戏、不提交。
-
-
-
-
 Friday（首页图标预览服务 WF-home-icons-install-1015）：工作目录D:/素材/代号柒/搜打撤，5200/PID18468，本聊天创建，独立后台windowsHide，node_modules/.cache/web-up-5200.json；七图实装首页已在内置浏览器打开，已交付服务、保留供老板查看，文件编辑占用释放；未build、提交或推送。
-
-
-
-
-
-
-
-
-Friday（首页图标补齐 WF-home-icons-set-1015）：老板认可city-v7后授权补齐六项，书/成就已生成；随后反馈色调一致、缺创意和细节，旧提示停止继续生成，转为第三轮全局技能定向修订（已校验通过），记录在 `docs/evidence/2026-10-15-home-nodes-retry/`；生成件仍在本聊天generated_images，未接入首页/运行清单，不build、不提交、无服务；编辑释放，整套待重新设计。
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
-| Friday（NAI 续改 WF-nai-snow-night-1015b） | tools/nai_style.py；tools/nai_gen.py；tools/nai_vibe.py；tools/tests/test_nai_vibe.py；docs/production/art/NAI-PROMPTING.md；docs/evidence/2026-10-15-nai-snow-night/ | 老板追加高清群像与无的参考：删除冲突旧词，新增显式氛围编码/缓存，双参考雪夜共餐出样；画师链保持 | 2026-10-15 | 编辑中 |
-| Friday（卡框重绘接管 WF-card-style-directions-1015） | docs/previews/card-style-directions-20261015/；docs/evidence/2026-10-15-card-style-directions/ | 接管原聊天最后中断任务；仅重绘四种透明边框，固定元素爆裂原图、文字、费用、分隔与排版，供老板挑选 | 2026-10-15 | 编辑中；聊天01a13e9c；复用5200，无新服务，不改正式卡面，不build、不提交；错误整卡方案已停用 |
-| Friday（新号45项整改 WF-fresh-run-fixes-1015） | rewards奖励/地图、inventory背包/后勤/新手、battle战斗/结算/章节；精确范围见 `docs/evidence/2026-10-15-WF-fresh-run-fixes-1015/PLAN.md`；主会话同步docs/rules、save-format、map-travel及交付状态 | 45项均有对应实现；五项玩法拍板沿用；[交付及验证边界](evidence/2026-10-15-WF-fresh-run-fixes-1015/HANDOFF.md) | 2026-10-15 完成未提交、编辑/服务释放；接班聊天01a13ee3三名Sol中限定复核未发现漏接，REV补验4项通过、docs-check448链接及自有diff检查通过，原分域测试证据保留；老板要求不用实页验证，画面/真实输入及成功撤离实玩待老板验收；5316/PID18960/exec29747已中断且无监听；不build、不提交、不删文件 |
-| Friday（网页版启动 01a13e37） | 工作目录 `D:\素材\代号柒\搜打撤`；5200 / PID 7404；`node_modules/.cache/web-up-5200.json` | 老板要求打开网页版，使用现有 web-up 启动器后台启动，入口及 PNG/WebP 响应有效；服务保留供老板使用 | 2026-10-15 | 已交付服务；创建会话 01a13e37-5915-7490-ac18-166000b29ccb；未改游戏源码 |
-| Friday（事件入场参考对比板 WF-entry-events-board-1015） | `docs/previews/entry-events-20261015/index.html`（新增，仅参考板）；图片引用指向 10-11 选图研究既有证据图（`/@fs/` 绝对路径）；复用5200，无新服务 | 老板要在内置浏览器看「方舟进入事件时」的对比参考（事件入场整页，非节点小图标）：板含 IS7 事件整页实机、IS6 场景插画、STS2 Ranwid 事件实机、本作 winter-arrival 两版；板内观察结论沿用 10-11 已验证研究记录。顺带查明：5200 Vite root 为 `game/`，`/docs/...` 路径一律回退游戏首页——此前 gallery 链接打开见游戏页即此因，docs 下页面须经 `/@fs/` 绝对路径访问 | 2026-10-15 | 已交付；内置浏览器已打开并核实四板块五图全部加载（`/@fs/D:/素材/.../docs/previews/entry-events-20261015/index.html`）；IS6 原图 >1MB 被 .gitignore 排除仅本机可看；不接入游戏、不测试、不提交 |
-| Friday（拉起主线 Vite WF-mainline-up-1015） | 工作目录 `D:/素材/代号柒/搜打撤`；端口5200；PID26504；本会话创建 | 老板要求拉起主线；`npm run web` 独立后台启动，叙事编译后探针（入口/PNG/WebP）通过；启动时5200无监听，登记内旧PID23856已不在，未动他人记录 | 2026-10-15 | 服务运行中，供老板使用；进程记录 `node_modules/.cache/web-up-5200.json`，收官由本会话核实身份后停止 |
-| Friday（本地网页版 WF-local-web-1014） | 工作目录 `D:/素材/代号柒/搜打撤`；端口5200；PID23856；本聊天创建 | 老板要求拉起本地网页版；`npm run web -- --skip-compile` 独立后台启动；EXE准备期间补齐锁定依赖后重启 | 2026-10-14 | 已交付、服务保留供老板使用；入口、PNG/WebP及战斗renderer模块响应有效；进程记录 `node_modules/.cache/web-up-5200.json` |
-| Friday云端实页baseline验收（capture_cloud_game_baseline） | 只读源码；独立Vite5307，启动于Friday云端Xfce Terminal窗口35651587；证据仓库外cloud-game-captures/baseline-2d1e7d9a | 固定源码2d1e7d9a真实试玩/取材，不build、不改游戏源码；实际云端原生PID40，命令node node_modules/vite/bin/vite.js --host 0.0.0.0 --port 5307 --strictPort；证据service.json | 2026-10-14 | baseline23组与修后12组已完成并暂停素材；保留自有Vite5307供代码功能回归；无.git导致handoff受阻；正式云端Terminal路由实机跑通 |
-
+| Friday（轨道站实机预览服务 WF-battle-platform-live-1016） | 隔离Vite5318/PID42064/exec46471，工作目录D:/素材/代号柒/搜打撤；Codex内置浏览器tab5 | 保留老板当前战斗预览，源码编辑已释放；服务由本会话创建，后续停止前核对身份 | 2026-10-16 | 已交付预览，资源保留；原5200未动，不build、不提交 |
+| Friday（网页版启动 01a13e37） | 工作目录 `D:\素材\代号柒\搜打撤`；5200 / PID 7404；`node_modules/.cache/web-up-5200.json` | 老板要求打开网页版，使用现有 web-up 启动器后台启动，入口及 PNG/WebP 响应有效；服务保留供老板使用 | 2026-10-15 | 已释放；服务历史保留，未停止服务；创建会话 01a13e37-5915-7490-ac18-166000b29ccb；未改游戏源码 |
+| Friday（拉起主线 Vite WF-mainline-up-1015） | 工作目录 `D:/素材/代号柒/搜打撤`；端口5200；PID26504；本会话创建 | 老板要求拉起主线；`npm run web` 独立后台启动，叙事编译后探针（入口/PNG/WebP）通过；启动时5200无监听，登记内旧PID23856已不在，未动他人记录 | 2026-10-15 | 已释放；服务历史保留，未停止服务；进程记录 `node_modules/.cache/web-up-5200.json`，收官由本会话核实身份后停止 |
+| Friday（本地网页版 WF-local-web-1014） | 工作目录 `D:/素材/代号柒/搜打撤`；端口5200；PID23856；本聊天创建 | 老板要求拉起本地网页版；`npm run web -- --skip-compile` 独立后台启动；EXE准备期间补齐锁定依赖后重启 | 2026-10-14 | 已释放；服务历史保留，未停止服务；原时点入口、PNG/WebP及战斗renderer模块响应有效；进程记录 `node_modules/.cache/web-up-5200.json` |
+| Friday云端实页baseline验收（capture_cloud_game_baseline） | 只读源码；独立Vite5307，启动于Friday云端Xfce Terminal窗口35651587；证据仓库外cloud-game-captures/baseline-2d1e7d9a | 固定源码2d1e7d9a真实试玩/取材，不build、不改游戏源码；实际云端原生PID40，命令node node_modules/vite/bin/vite.js --host 0.0.0.0 --port 5307 --strictPort；证据service.json | 2026-10-14 | 已释放；服务历史保留，未停止服务；原baseline23组与修后12组已完成并暂停素材；保留自有Vite5307供代码功能回归；无.git导致handoff受阻；正式云端Terminal路由实机跑通 |
 
 ## 无主物品（只记录勿动，等认领/处置）
 
@@ -130,10 +82,170 @@ Friday（首页图标补齐 WF-home-icons-set-1015）：老板认可city-v7后�
 
 ## 近期已释放
 
+Friday（完成改动提交 WF-completed-commit-1016，聊天01a14487），2026-10-16：已按老板授权修复集成并正常提交源码 `256dc29fb4063dbf4962cd09ce4e0b1d7ef78466`（170件，相关现行文档同组），证据 `docs/evidence/2026-10-16-WF-completed-commit-1016/README.md`；编辑占用释放。197项断言失败已修复，最终完整隔离门495套/4730项通过、16项既有跳过、0未处理错误；测试fork上限4，未调超时/阈值。原生内置浏览器验证拖牌和宝箱续领。既有完成证据按组随本轮提交；后续第二壁纸/宝箱v6/通用过场、在途生图、91旧宝箱帧、无主配置/工具/候选与中间文件保留。未build/推送，原5200服务未动，自建测试页已关。此前任务行中的完成未提交为当时历史，本轮实际源码范围见source-index-inventory.json。
+
+Friday（三箱开箱帧实装 WF-chest-install-v6-1016，聊天01a144bf），2026-10-16：game/src/run/chest-opening-art.js、chests.js开箱呈现段、game/css/chest-opening.css、game/assets/scenes/chests/supply-opening-v6/、asset-manifest.json本轮16项、game/assets/README.md本轮说明、tests/chest-opening-art.test.js及docs/evidence/2026-10-16-WF-chest-install-v6/；完成未提交、编辑占用释放。老板已授权接入三档常规箱及特效；保留职业/首脑旧箱、掉落/金币独立领取、跳过/读档与过期保护，定向验证和当前内置浏览器验收，不build、不提交、不操作已有服务。 User subsequently requested installation only, no checks; all further checks stopped. Three chest sets and four FX frames installed and registered; no build, staging, commit, new service, or save changes. No test/browser pass claimed.
+
+Friday（三箱开箱动画帧与特效 WF-chest-opening-v6-1016，聊天01a144bf），2026-10-16：自有game/art-source/chests/three-kinds-opening-1016-v6/与docs/evidence/2026-10-16-WF-chest-opening-v6/；完成未提交、编辑占用释放。老板要求按三箱现稿画动画帧并有特效；以default-touch-v5作身份参考，生成每箱闭合/解锁/半开/全开四关键帧及独立开箱闪光帧，保留透明背景和默认宽笔画法，裁切导出帧并制作动画预览；不接运行、不提交，无服务。 Delivered: 12 chest keyframes + 4 separate FX frames, 640px RGBA, lossless PNG/WebP and 8 animation previews; visual/alpha/encoding verified, hashes recorded; no in-game installation or services.
+
+Friday（宝箱轻混默认v1画法 WF-chest-default-touch-1016，聊天01a144bf），2026-10-16：自有game/art-source/chests/three-kinds-default-touch-1016-v5/与docs/evidence/2026-10-16-WF-chest-default-touch/；完成未提交、编辑占用释放。老板要求在透明细化版上加入一点游戏默认画风，按现行ART-STYLE-V1与原5/8画法参考轻叠宽笔、硬边明暗和覆盖笔触，保留三档配色、箱体结构及透明背景；只出候选，不接运行、不提交，无服务。 Three 1254px RGBA candidates delivered; source-5/source-8 painting references; alpha and uncut silhouette passed, prompts/SHA saved. No runtime installation.
+
+Friday（宝箱沿方舟节点原板重画 WF-chest-node-v3-1016，聊天01a144bf），2026-10-16：仅自有game/art-source/chests/three-kinds-node-style-1016-v3/与docs/evidence/2026-10-16-WF-chest-node-v3/；完成未提交、编辑占用释放。老板否定v2嘈杂及配色，点名arknights-node-icons；已实看原板，内置imagegen以原板直接参考重画三种常规箱，先核小箱再扩另外两档。少色二维形体/近黑承托/局部光，先交候选，不接游戏、不提交，无服务。 Final: transparent-detail-v4; no node backing; minor clasp/seam/lock details per subsequent user feedback. Three RGBA files visually inspected; alpha/border verified; prompts and SHA256 saved. Not installed.
+
+Friday（明日方舟宝箱彩色稀有度重画 WF-chest-arknights-v2-1016，聊天01a144bf），2026-10-16：自有game/art-source/chests/three-kinds-arknights-1016-v2/与docs/evidence/2026-10-16-WF-chest-arknights-v2/；完成未提交、编辑占用释放。老板否定上一版并要求明日方舟画风、颜色与稀有度区分；内置imagegen重做三种常规箱候选，先交图，不改运行贴图/掉落/存档/动画，不提交，无服务。 三图已实看，透明RGBA与不透明边界检查通过；原图排除Git，提示词/来源/SHA256回执已保存；灰绿古朴、钴蓝稀有、金橙传说，尚未接游戏或制作开箱动作。
+
+Friday（常规三类宝箱重画 WF-chest-three-redraw-1016，聊天01a144bf），2026-10-16：仅自有game/art-source/chests/three-kinds-redraw-1016/及docs/evidence/2026-10-16-WF-chest-three-redraw-1016/；完成未提交、编辑占用释放。内置imagegen分别生成小型物资箱、密封物资箱、军用保险柜透明候选，灰白/石墨黑/朱红与块面画法；本轮先交三张供老板看，不接运行素材、不改掉落/动画/manifest、不提交，无服务。 三张1254×1254 RGBA已实看，透明及主体边界核对通过；候选原图排除Git，提示词与SHA256回执已保存，未制作开箱帧。
+
+Friday（金币与物资箱分开奖励 WF-reward-separate-1016，聊天01a144bf），2026-10-16：game/src/run/chests.js、chest-reward-save.js、game/src/ui/chest-reward-overview.js、game/css/chest-reward-overview.css、tests/reward-coins-overview.test.js、docs/rules.md及自有docs/evidence/2026-10-16-WF-reward-separate-1016/；完成未提交、编辑占用释放。金币移至总览独立领取，物资箱仅处理卡牌，保留已确定掉落和防重领；不提交、不build、不动已有index与服务。 72项定向通过，ESLint通过，20项旧容量失败与修改前基线完全一致；内置浏览器当前窗口隔离场景真实点击与分栏截图通过，未验完整自然对局/真实存档刷新；复用5200，无新服务。
+
+Friday（首页雪原公路壁纸 WF-home-snow-road-1016），2026-10-16：完成未提交、编辑释放；自有 `game/index.html`、`game/css/{title-p0,settings-navigation,winter}.css`、`game/src/ui/{title-wallpaper,settings-navigation}.js`、`tests/title-wallpaper.test.js`、`game/assets/reconstruction/wallpaper-snow-road-1016.webp`、清单本轮条目及素材说明、自有 `docs/evidence/2026-10-16-home-snow-road/`。按老板最终指定exec-962df0b8图替换，1672×941/WebP569196字节，旧两图退役保留存档；切换功能和按钮保留1/1。8项定向测试、语法/自有diff、489链接docs:check、本轮素材SHA与审计零错误通过；素材全局95项范围外未登记错误未处理。Codex内置浏览器5200当前1523×956实看最终图、真实点击切换与只看壁纸/恢复界面及设置，控制台零error，详见证据。复用服务无新进程，不build、不提交。
+
+Friday（恢复游戏默认画风 WF-restore-default-art-v1-1016，聊天01a144b9），2026-10-16：完成未提交、编辑释放；属地 `docs/production/art/{ART-STYLE.md,ART-STYLE-V1.md,ART-DIRECTION-BRIEF.md,VISUAL-BIBLE.md}` 的本轮恢复增量与 `docs/evidence/2026-10-16-restore-default-art-v1/`。按老板要求恢复块面厚涂v1.0，全文与变更前HEAD一致，现行入口已核对，雪原试案及来源保留；docs:check通过（489链接0问题）、定向diff检查通过。证据见自有目录verification.json；未改运行素材、个人技能或NAI配方，无服务、未提交。此前雪原更新登记保留为当时历史。
+
+Friday（全域性能续优 WF-game-performance-wide-1016，聊天01a14487），2026-10-16：完成未提交、编辑释放；增量属地 `game/src/hub/{game.cardslib.page,photo-studio-catalog-cache,hub.warehouse}.js`、`ui/{page-loading,camp-entry}.js`、`battle/view/{battle.aim,battle.frames}.js`、`game.boot.js`、`audio/sound.js`、`css/page-loading.css`、5份对应测试与 `docs/performance.md`。公共切幕等待图像和目标页就绪后揭幕；照相馆五轮同步准备中位数33.6→15.6ms；慢图等待、三次重开、设置/成就/基地、标准首战真实拖牌与Esc取消已验。217测试通过，1项既有启动详情断言失败由本轮前快照同样复现；语法428文件、8配置类型、14文件lint及文档检查通过。按老板确认删除11件小人独立实现，13件素材SHA不变。证据 `docs/evidence/2026-10-16-WF-game-performance-wide-1016/README.md`；保留所有既有改动，未build/提交，临时内置tab2已关，复用5200服务保留。
+
+Friday（游戏默认画风更新 WF-winter-painterly-style-1016，聊天01a1449e），2026-10-16：完成未提交、编辑释放；自有 `docs/production/art/ART-STYLE.md`、`ART-STYLE-V1.md` 历史标注、`ART-DIRECTION-BRIEF.md` 与 `VISUAL-BIBLE.md` 默认画风段、`docs/evidence/2026-10-16-winter-painterly-style/`、`game/art-source/style-winter-painterly-20261016/`。按老板授权将原雪原参考的细线人物/手绘绘景设为新默认，保存原参考、完整提示词、1672×941第三版与SHA；第三版路面颗粒/发丝等剩余偏差已记录，候选待反馈。docs:check（485链接0问题）及自有diff检查通过，来源与范围见证据；未改NAI配方、个人技能或运行素材，无服务、游戏测试、build、实页验收或提交。
+
+Friday（无雪原公路V5人物放大 01a14489），2026-10-16：完成未提交、编辑释放；自有 `docs/evidence/2026-10-16-wu-snow-road-nai45/` 与根 `.tmp/nai/wu-snow-road-nai5-20261016-v6.png`。对照原附件限定大前景头部，坐标改0.9/0.5，V5单张1344×768 HTTP200；payload一致性、PNG完整性/尺寸、SHA256及实看通过。头部放大、双眼下巴完整、侧歪头与冷灰光色保留；仍略窄于原附件且道路消失点偏左，待审阅。无生成进程与服务，不改共享配方、不接游戏、不提交。
+
+Friday（无雪原公路V5冷光定位 01a14489），2026-10-16：完成未提交、编辑释放；自有 `docs/evidence/2026-10-16-wu-snow-road-nai45/` 与根 `.tmp/nai/wu-snow-road-nai5-20261016-v5.png`。去正向粉光、冷灰倒影、右上紧裁切侧歪头并启用坐标0.95/0.25；V5单张1344×768 HTTP200，payload一致性/PNG完整性/尺寸/实看通过，SHA256见回执。粉光压住，人物移到右上但脸偏小且裁切过紧，待老板审阅；无生成进程与服务、不改共享配方、不接游戏、不提交。
+
+Friday（无雪原公路NAI V5 01a14489），2026-10-16：完成未提交、编辑释放；自有 `docs/evidence/2026-10-16-wu-snow-road-nai45/` 与根 `.tmp/nai/wu-snow-road-nai5-20261016.png`。按老板要求去多余动作并用NAI V5 Full单张1344×768，HTTP200，payload一致性、PNG完整性/尺寸、SHA256及实看通过；立柱/扶柱动作消失，墨镜保留，湿路反光出现；人物仍比预设右侧四分之一宽，V5待审阅。无生成进程与服务、不改共享配方、不接游戏、不提交。
+
+Friday（无雪原公路v3生图 01a14489），2026-10-16：完成未提交、编辑释放；自有 `docs/evidence/2026-10-16-wu-snow-road-nai45/` 与根 `.tmp/nai/wu-snow-road-nai45-20261016-v3.png`。背景v3单张NAI4.5/1344×768 HTTP200，payload与准备请求一致，PNG完整性/尺寸及实看通过，SHA256见回执。阴云、平原、积雪护栏与断续线改善；路面反光不足、地平线偏低，意外生成右侧立柱与扶柱动作，待老板审阅。无生成进程与服务、不改共享配方、不接游戏、不提交；docs:check前轮其他任务缺失链接问题保留。
+
+Friday（全面性能优化 WF-game-performance-1016，聊天01a14487），2026-10-16：`core/{renderer,map-brush-art,map-node-state,node-info,art}.js`、`run/node-restore-state.js` 仅本轮性能增量，保留相关既有节点呈现/命中/复原实现；`tests/map-render-performance.test.js`、`tests/art-preload-scheduling.test.js`、`docs/performance.md` 与 [证据](evidence/2026-10-16-WF-game-performance-1016/README.md)。完成未提交、编辑释放；48节点/额外300字段受控绘制10.647→0.510ms、连续缩放39.245→10.080ms；实页受控平移draw p95 0.6ms、静止6秒零绘制、真实滚轮/拖动及商店4断言通过，浏览器error空。8套87项/语法433文件/类型8套/定向lint/docs478链接通过；扩展15项既有文案断言不一致单列报告。测试tab已关闭，复用5200无新服务；未全量、构建、战斗实玩、多尺寸、提交或推送。
+
+Friday（无雪原公路背景v3 01a14489），2026-10-16：完成未提交、编辑释放；自有 `docs/evidence/2026-10-16-wu-snow-road-nai45/` 的背景v3请求与文本。仅改v2背景正负词，强调厚云低平雪原、磨损断续标线、积雪波形钢护栏及湿路纵向反光，排除山丘/大片粉天/粗实线/细栏杆；背景单域差异断言及T5预算478/313通过，人物/画师/参数保留。v3已准备未出图；上轮docs:check受其他活跃性能任务缺失README两处链接影响，未动他人记录；无生成进程与服务、不接游戏、不提交。
+
+Friday（无雪原公路v2生图 01a14489），2026-10-16：完成未提交、编辑释放；自有 `docs/evidence/2026-10-16-wu-snow-road-nai45/` 与根 `.tmp/nai/wu-snow-road-nai45-20261016-v2.png`。按已准备v2单张NAI4.5/1344×768，HTTP200；实际payload与准备请求一致，PNG完整性/尺寸/SHA256及实看通过。墨镜、右侧紧裁切、高地平线与粉色湿路反光出现；马尾仍占中部、中央线为连续实线，待老板审阅。无生成进程与服务，不改共享配方、不接游戏、不提交。
+
+Friday（无雪原公路提示词修订 01a14489），2026-10-16：完成未提交、编辑释放；自有增量 `docs/character-bible/wu.md` 墨镜段及 `docs/evidence/2026-10-16-wu-snow-road-nai45/` v2。对照原图修正右侧紧裁切、消失点、湿路与反光；现行人设明确黑色圆框墨镜，人物负向排除五类护目镜。仅改请求提示词字段的断言、墨镜正负向检查及本地T5预算478/285通过；v2已准备未生成，旧请求保留，不改共享配方、不接游戏、不提交，无服务。
+
+Friday（无雪原公路 NAI4.5 01a14489），2026-10-16：完成未提交、编辑释放；自有 `docs/evidence/2026-10-16-wu-snow-road-nai45/` 与根 `.tmp/nai/wu-snow-road-nai45-20261016-free.png`。按附件隐写元数据构图换现行四画师链及无，2048×1152首轮HTTP402，免费档1344×768 HTTP200；PNG尺寸/完整性、SHA256及实看通过，完整请求已保留；右侧人物露出更多身体，背剑柄侧未兑现，待老板审阅。无运行生成进程、无服务，不改共享配方、不接游戏、不提交。
+
+Friday（NAI4.5酒吧配方实验 01a14472），2026-10-16：编辑释放、完成未提交；自有 `docs/evidence/2026-10-16-nai45-rain-bar-experiment/`、根 `.tmp/nai/rain-bar-experiment-20261016/`。A-F六张均HTTP200、PNG尺寸校验、SHA256及实看；A-D画师对照、C/E仅CFG5.5→4.5、F按老板最新指示仅保留quasarcake0.9/rella0.5（CFG5.5），完整请求分别保存。图片均大于1MB不入Git，尚未确认最终推荐配方；无运行生成进程、无服务、不改共享配方、不接游戏、不提交。
+
+Friday（NAI4.5雨夜酒吧去画师 01a14472），2026-10-16：完成未提交、编辑释放；沿用自有 `docs/evidence/2026-10-16-nai45-rain-bar/`，新图根 `.tmp/nai/rain-bar-nai45-no-artists-20261016.png`（1.71MB不入Git）。按老板要求仅去画师链，程序断言其余payload与首张一致；v3.4、NAI4.5 Full、1216×832、同seed，HTTP200、PNG与尺寸验证、SHA256、实看完成；黑额发仍未兑现，老板未确认。无服务、不改共享配方、不接游戏、不提交。
+
+Friday（NAI4.5雨夜酒吧 01a14472），2026-10-16：完成未提交、编辑释放；自有 `docs/evidence/2026-10-16-nai45-rain-bar/`，原图根 `.tmp/nai/rain-bar-nai45-20261016.png`（1.84MB不入Git）。NAI4.5 Full，1216×832，HTTP200、尺寸与PNG验证、SHA256及实看完成；命中趴桌/雨窗/暖金酒吧，黑色额发未兑现，老板未确认。完整请求见request.json；无服务、不接游戏、不提交。
+
+Friday（NAI负面冲突清理 01a1445b），2026-10-16：完成未提交，编辑释放；自有增量 `tools/nai_style.py`、`tools/NAI-PROMPTS.md`、`docs/production/art/NAI-PROMPTING.md`、`docs/evidence/2026-10-16-nai-negative-conflict-cleanup/`。通用v3.4移除blurry/overexposure/excessive bloom，6项离线测试、三项精确移除及双入口一致性、docs:check、diff检查通过；无生图、服务、提交或推送。
+
+Friday（NAI通用词与酒吧图 01a1445b），2026-10-16：通用v3.3完成未提交，编辑释放；自有增量 `tools/nai_style.py`、`tools/NAI-PROMPTS.md`、`docs/production/art/NAI-PROMPTING.md` 及 `docs/evidence/2026-10-16-nai-common-prompt-update/`。6项离线测试/docs:check/diff检查通过。NAI4.5酒吧图HTTP200、已实看，原图根 `.tmp/nai/wu-rain-bar45-20261016.png` 不入Git，证据 `docs/evidence/2026-10-16-wu-rain-bar45/`；老板反馈视角不对，已对照诊断、未重画，不接游戏。无服务、未提交。
+
+Friday（无半身三画师45 01a1445b），2026-10-16：已交付截图三画师yoneyama mai1.1/miv4t0.9/lack0.7、NAI4.5半身候选，832×1216、HTTP200、已实看；完整payload仅替换画师一致性断言通过。证据 `docs/evidence/2026-10-16-wu-half-yoneyama-miv4t-lack45/`；原图根 `.tmp/nai/wu-half-yoneyama-miv4t-lack45-20261016.png` 不入Git，回执含SHA256。编辑释放、完成未提交，不改共享配方、不接游戏、无服务、未提交。
+
+Friday（无半身mivt45 01a1445b），2026-10-16：已交付NAI4.5/mivt0.9单张半身候选，832×1216、HTTP200、已实看；仅画师替换的完整payload一致性断言通过，出现额外双角/红瞳/高领内搭。新增证据 `docs/evidence/2026-10-16-wu-half-mivt45/`，原图根 `.tmp/nai/wu-half-mivt45-20261016.png` 不入Git，回执含SHA256；编辑释放、完成未提交，不改共享配方、不接游戏、无服务、未提交。
+
+Friday（无半身quasarcake45 01a1445b），2026-10-16：已交付单张NAI4.5/quasarcake0.9半身候选，832×1216、HTTP200、已实看；共享画法已删厨房/玻璃陶瓷描述，默认模型和画师未改。自有增量 `tools/nai_style.py`、`docs/production/art/NAI-PROMPTING.md`、`docs/evidence/2026-10-16-wu-half-quasarcake45/`；原图根 `.tmp/nai/wu-half-quasarcake45-20261016.png` 不入Git，回执含SHA256。离线断言/diff检查/docs:check通过；完成未提交、编辑释放，不接游戏、无服务、未提交。
+
+Friday（首页NAI4.5 01a1444c），2026-10-16：候选已HTTP200生成、1536×576、原图实看；雪林书架/红玫瑰/黑长裙出现，但身份、手部、剑尺度及散页构图明显偏离，不算首页还原通过。完整请求/原图与源图SHA/获取方式见 `docs/evidence/2026-10-16-home-nai45/`，原图根 `.tmp/nai/home-nai45-20261016/`。完成未提交、编辑释放，无自动续刷/游戏替换/默认修改/服务/build/提交。
+
+Friday（恢复NAI v3.0 01a1444c），2026-10-16：老板明确要求恢复v3.0，属地 `tools/nai_style.py`、`tools/NAI-PROMPTS.md`、`docs/production/art/NAI-PROMPTING.md`、`docs/evidence/2026-10-16-nai-restore-v30/`；配方按step1/before.json恢复四画师/画法/质量尾/UC，保留关系写作原则与历史样图。五项配方常量与快照逐字核对、6项整理器测试、docs:check（475链接0问题）通过；完成未提交、编辑释放，无生图/服务/提交。
+
+Friday（V5仅ASK对照 01a1444c），2026-10-16：`docs/evidence/2026-10-16-nai-v5-ask-only/` 与根 `.tmp/nai/nai-v5-ask-only-20261016/`；去quasarcake/rella、仅ASK0.5样图已HTTP200生成并实看，1344×768，完整payload断言仅画师链变化，SHA/尺寸见request.json。老板随后要求恢复v3.0，试图留档；完成未提交、编辑释放，无默认修改/游戏接入/服务/提交。
+
+Friday（NAI v3.2 V5吃饭 01a1444c），2026-10-16：老板授权默认链更新为quasarcake0.9/rella0.5/ASK0.5；`tools/nai_style.py`增补克制配色/材质高光/人物脸手焦点，`tools/NAI-PROMPTS.md`、`docs/production/art/NAI-PROMPTING.md`同步；自有证据 `docs/evidence/2026-10-16-nai-v32-dinner/`。V5单张1344×768、HTTP200，手碗筷嘴关系与关键重复已写入实际请求；原图实看，黑蔷薇可见、马尾顶部仍裁切。6项整理器测试、实际payload/UC/身份/采样/哈希断言、docs:check（474链接0问题）通过；完成未提交、编辑释放，不接管原有未提交增量，候选待老板反馈。原图根 `.tmp/nai/nai-v32-dinner-20261016/`，无服务/build/提交。
+
+Friday（NAI关系原则 01a1444c），2026-10-16：已更新 `docs/production/art/NAI-PROMPTING.md` 人物/双手/视线/道具关系、关键锚点适度重复、参考正向词按层选用原则及 `tools/NAI-PROMPTS.md` 对应导航；保留画师链，元数据缺失不推断无画师，说明正向保留重复与负面整理器现有去重边界。docs:check通过（473链接、0问题）；完成未提交、编辑释放，仅本轮文档增量，不改共享配方/客户端，无生图/服务/提交。
+
+Friday（NAI画师续试 01a1444c），2026-10-16：接替01a14419未完成指令，去piromizu/gomzi、ASK0.5；4.5吃饭候选I已生成，HTTP200、1216×832、完整payload定向对比与SHA256通过、原图实看；黑蔷薇缺失及衣装偏移见 `docs/evidence/2026-10-16-nai45-ask05-pair/README.md`，完整请求见同目录request.json，原图根 `.tmp/nai/nai45-ask05-pair-20261016/I.png`。完成未提交、编辑释放，exec34440正常结束；候选待老板反馈，共享默认未改，无游戏接入/服务/build/提交。
+
+Friday（NAI4.5消融 01a14419），2026-10-16：8组对照已完成，新生B/C/E/F/G/H六张均HTTP200，A/D核对完整请求与SHA256后复用；固定4.5、1216×832、28步、CFG5.5及seed3058649506，仅比较画师组合/强度与复杂度词。全部尺寸/哈希核对、对照板实看完成，单种子观察不代表稳定画师分工，候选待老板选择；完整请求、相对路径/SHA256与观察见 `docs/evidence/2026-10-16-nai45-ablation/manifest.json`，原图/对照板在根 `.tmp/nai/nai45-ablation-20261016/`。完成未提交、编辑释放；exec16866已正常结束，无端口、无默认修改、无游戏接入、无测试/build/提交。
+
+Friday（NAI提示词第一步 01a14419），2026-10-16：老板授权的头发/边缘句替换、厨房遗留与high complexity移除已完成，v3.1效果待出图确认。自有增量 `tools/nai_style.py`、`tools/NAI-PROMPTS.md`、`docs/production/art/NAI-PROMPTING.md`、`docs/evidence/2026-10-16-nai-style-step1/`；完成未提交、编辑释放，不接管原有未提交内容。6项现有整理器测试通过，6项定向断言确认修改范围/原画师链/UC/客户端字节与参数，docs:check通过；before.json与verification.json留证，无生图/服务/提交。
+
+Friday（NAI默认定稿 01a143ac），2026-10-16：老板确认附件对应V5横版，已固化NAI v3.0四画师/画法/通用UC/质量尾，nai_gen默认V5、2048×1152、CFG5.5、28步、Euler Ancestral、Karras、Rescale0、Variety+关闭。完成未提交，编辑释放；自有增量：`tools/nai_style.py`、`tools/nai_gen.py`、`tools/tests/test_nai_guard.py`、`tools/NAI-PROMPTS.md`、`docs/production/art/NAI-PROMPTING.md`、`docs/evidence/2026-10-16-nai-default-wide/`。31项离线通过、1项POSIX专属跳过，默认payload与认可请求对齐、docs:check通过；无新生图/服务/提交，内置v1.0独立保留。
+
+Friday（NAI吃饭对照 01a143ac），2026-10-16：已交付六张NAI4.5固定种子对照（无画师/两组画师链/精简提示词/CFG与Variety+/组合）；原图根 `.tmp/nai/wu-dinner-diagnosis-20261016/`，全部HTTP200、1216×832、SHA256核对通过，逐张实看；完整请求、相对路径与结论见 `docs/evidence/2026-10-16-wu-dinner-nai-compare/`。单种子证据，未验证稳定命中率；编辑释放，无端口、不接游戏、不提交。
+
+Friday（战斗无效背包入口清理 WF-battle-bag-entry-1016），2026-10-16：老板批准移除永久禁用的战斗背包按钮；属地 `game/src/battle/view/battle.view.js` 与 `game/css/battle-stage.css`，只移除按钮、空容器、对应动作注册及两条专用样式，B 键禁用提示与技能/药水保留。完成未提交、编辑释放；记录 `docs/evidence/2026-10-16-WF-expedition-renewal/README.md` 战斗入口段，按要求未测试、静态检查、实页或build；无新服务，无提交/推送，旧按钮存在断言留待最后统一验证时同步。
+
+### 2026-10-16 旧任务占用销账
+
+Friday 云端本轮并行属地（WF-cloud-play-eight-hours-1016，独立云端副本）：基地子任务持有 base-framework-v7/base-home-v7/base-personnel-v12/base-logistics-trade-v12.css、hub.home-v3.js、game.hub.runtime.js及专测（首批已完成待实机）；战斗子任务持有 battle-stage.css/battle.css 与 battle.hand-layout/layers/view.js呈现层及专测；远征子任务持有 game.run.altar.js 的入城补给文案/呈现、expedition-rewards.css 的 entry-supply-strips 作用域与专测；性能首批已完成，文件清单见独立performance-review/handoff.json。父任务统一共享台账/浏览器/最终构建；服务5300现由独立runner关闭watch/HMR，PID167，同桌面窗口35651587，手动刷新才更新。全部未提交，不改本地仓库。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+Friday（云端八小时实机迭代 WF-cloud-play-eight-hours-1016），2026-10-16：云端隔离仓库 OperationSalvation7-f0e84c5d 的 Vite 游戏范围；父任务统一协调子代理属地，实机使用当前云端内置浏览器 tab7 / 127.0.0.1:5300。服务由云端桌面 Terminal 窗口35651587启动，npm主PID40，启动脚本 /workspace/shared/run-code7.sh；只管理本服务。基线 f0e84c5d / tree869f3477，游戏修改已获老板明确授权，重点战斗UI反复实机对照及全流程细节/性能。编辑中；新任务，不操作本地工作区或旧对话。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+dot（云端同步与环境准备 WF-cloud-sync-f0e84c5d），2026-10-15 UTC：仅当前云端隔离工作区 `/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d`。最终 GitHub 基线 f0e84c5dc34afcbc1176b1519258d2c3010c62cb / tree 869f3477c070304d5e6a96cfba395c42ab143e80，归档、全部13377个Blob及干净浅Git基线已校验；Node22.23.3官方包SHA256通过，锁依赖 npm ci 成功（258包、Node22.23.3/npm10.9.9，工作区缓存）。属地仅本条、同任务环境证据及隔离开发服务；不修改游戏、不触碰本地旧会话属地，不提交/推送，内置浏览器由主会话负责。隔离 Vite 的沙箱内监听可启动，但其他工具调用无法连接；受审核的非沙箱启动被运行时只读挂载错误阻断。全部本次尝试均已退出，无可交付服务；环境准备已交付、文件编辑占用释放，后续服务由主会话协调。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+Friday（正式战斗样式冲突修正 WF-battle-live-cascade-1015，聊天01a13ff6），2026-10-15：game/css/battle-stage.css、winter.css、expedition-battle.css、page-battle-ui.css、feedback-oct12.css；自有实装脚本与证据。老板要求查看当前正式页，已定位限宽/敌方名牌/技能网格冲突；编辑中，保留当前战斗进度，仅当前窗口定向反馈，不跑全量验收、不build、不提交，无新服务。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+Friday（战斗设计实装 WF-battle-stage-install-1015，聊天01a13ff6），2026-10-15：game/src/battle/view/{battle.view,battle.layers,battle.hand-layout,battle.scenery}.js；game/css/battle-stage.css及旧布局规则来源，精确路径见自有runtime-install-receipt.json；game/index.html；game/assets/scenes/battle/stage-reset-1015/及asset-manifest；相关契约/说明与自有证据。正式入口、紧凑牌堆能量、人物旁技能、直立叠牌与三层场景已接入，旧布局选择器清退；完成未提交、编辑释放、待老板验收。老板明确不用验收，本轮未启动实页/测试/构建；复用5200，无新服务，不提交/推送/发布，现有未提交行为修复保留。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+Friday（战斗方案控件排布 WF-battle-controls-layout-1015，聊天01a13ff6），2026-10-15：docs/previews/battle-stage-reset-20261015/；docs/evidence/2026-10-15-battle-stage-reset/。抽牌堆宽120→82、职业技能挂到人物左侧，手牌280→260并保留标题/叠放/悬停；当前窗口牌堆点击、技能选敌/已用、五张标题、悬停整卡/回落、资源日志与CSS/链接检查通过。完成未提交、编辑释放；证据controls-layout.png与controls-layout-verification.json。复用5200，无新服务，不改正式游戏/共享卡牌，不build、不提交。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+Friday（战斗场景衔接 WF-battle-scene-seam-1015，聊天01a13ff6），2026-10-15：docs/previews/battle-stage-reset-20261015/style.css；docs/evidence/2026-10-15-battle-stage-reset/。地板底对齐至82%画幅，远沿与建筑基座对齐并局部alpha过渡；当前窗口实页/图层矩形/资源日志、CSS解析与定向链接检查通过。完成未提交、编辑释放；证据scene-seam.png与scene-seam-verification.json。复用5200，无新服务，不改正式游戏/卡牌/角色动画或三层源图，不build、不提交。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+Friday（战斗方案手牌放大 WF-battle-hand-size-1015，聊天01a13ff6），2026-10-15：docs/previews/battle-stage-reset-20261015/；docs/evidence/2026-10-15-battle-stage-reset/。手牌放大约47%、默认露出费用/标题并横向叠放；当前窗口五张标题边界/命中、悬停置顶/完整展开、选中后移出回落与战场输入穿透通过，资源/日志无错误，JS/CSS与定向链接检查通过。完成未提交、编辑释放；证据hand-size-rest.png、hand-size-hover.png与hand-size-verification.json。复用5200，无新服务、不改正式游戏或共享卡面、不build、不提交。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+Friday（战斗方案手牌返修 WF-battle-hand-preview-1015，聊天01a13ff6），2026-10-15：docs/previews/battle-stage-reset-20261015/；docs/evidence/2026-10-15-battle-stage-reset/。职业技能突出、手牌直立下沉/悬停上浮与离开回落，已只读接入共用cardHTML/正式插画与卡框样式；当前窗口内置鼠标输入、点击选中后回落、键盘展开与刺击选敌/已用状态通过，资源/日志无错误，JS语法与CSS160节点解析通过。完成未提交、编辑释放；本轮证据hand-rest.png、hand-hover.png与hand-verification.json。复用5200，无新服务、不改正式游戏或共享卡面、不build、不提交。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+Friday（宝箱动画重绘 WF-chest-repaint-1015，聊天01a14007），2026-10-15：老板已确认灰白＋石墨黑＋少量朱红配色并明确“实装吧”；safe-simple-v7四张开合帧＋独立白光接入，前序复杂蓝金稿均未采用。属地 game/src/run/chests.js 动画呈现段（保留他人奖励/背包修复）、game/src/run/chest-opening-art.js、game/css/chest-opening.css、game/assets/scenes/chests/safe-simple-v7/、manifest对应五条、game/art-source/chests/、docs/previews/chest-safe-20261015/、docs/evidence/2026-10-15-chest-repaint/；旧candidate-code保留.tmp。编辑中，复用5200，无新服务，不build、不提交。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+Friday（战斗重设计方案 WF-battle-stage-reset-1015，聊天01a13ff6），2026-10-15：docs/previews/battle-stage-reset-20261015/；docs/evidence/2026-10-15-battle-stage-reset/。独立设计稿与NAI→内置重绘三层已交付，直接复用现有Pixi战斗动画；当前窗口实页、选牌/目标/施法/回合切换/图层开关、资源/日志与JS/CSS解析通过；docs检查466链接通过。完成未提交、编辑释放，方案审美与旧样式清退清单待老板确认；复用5200，无新服务、不改正式游戏、不build、不提交。证据见同目录README、browser-verification.json及preview.png。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+Friday（方舟技能独立应用测试 WF-arknights-skill-forward-test），2026-10-15：独立测试原型业务通过后，老板否决其美术审美，继续分析与迭代。个人 arknights-art-ui-design、iteration-05、同任务trial-02由父会话编辑；子代理只审查trial-01/visual-review.md，失败样本保留。增加真实视觉对照、媒介选择与美术验收；编辑中，复用5200，无新服务，不改游戏、不提交。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+Friday（首页图标补齐 WF-home-icons-set-1015）：老板认可city-v7后授权补齐六项，书/成就已生成；随后反馈色调一致、缺创意和细节，旧提示停止继续生成，转为第三轮全局技能定向修订（已校验通过），记录在 `docs/evidence/2026-10-15-home-nodes-retry/`；生成件仍在本聊天generated_images，未接入首页/运行清单，不build、不提交、无服务；编辑释放，整套待重新设计。
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+| Friday（NAI 续改 WF-nai-snow-night-1015b） | tools/nai_style.py；tools/nai_gen.py；tools/nai_vibe.py；tools/tests/test_nai_vibe.py；docs/production/art/NAI-PROMPTING.md；docs/evidence/2026-10-15-nai-snow-night/ | 老板追加高清群像与无的参考：删除冲突旧词，新增显式氛围编码/缓存，双参考雪夜共餐出样；画师链保持 | 2026-10-15 | 编辑中 |
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+| Friday（卡框重绘接管 WF-card-style-directions-1015） | docs/previews/card-style-directions-20261015/；docs/evidence/2026-10-15-card-style-directions/ | 接管原聊天最后中断任务；仅重绘四种透明边框，固定元素爆裂原图、文字、费用、分隔与排版，供老板挑选 | 2026-10-15 | 编辑中；聊天01a13e9c；复用5200，无新服务，不改正式卡面，不build、不提交；错误整卡方案已停用 |
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+| Friday（新号45项整改 WF-fresh-run-fixes-1015） | rewards奖励/地图、inventory背包/后勤/新手、battle战斗/结算/章节；精确范围见 `docs/evidence/2026-10-15-WF-fresh-run-fixes-1015/PLAN.md`；主会话同步docs/rules、save-format、map-travel及交付状态 | 45项均有对应实现；五项玩法拍板沿用；[交付及验证边界](evidence/2026-10-15-WF-fresh-run-fixes-1015/HANDOFF.md) | 2026-10-15 完成未提交、编辑/服务释放；接班聊天01a13ee3三名Sol中限定复核未发现漏接，REV补验4项通过、docs-check448链接及自有diff检查通过，原分域测试证据保留；老板要求不用实页验证，画面/真实输入及成功撤离实玩待老板验收；5316/PID18960/exec29747已中断且无监听；不build、不提交、不删文件 |
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+| Friday（事件入场参考对比板 WF-entry-events-board-1015） | `docs/previews/entry-events-20261015/index.html`（新增，仅参考板）；图片引用指向 10-11 选图研究既有证据图（`/@fs/` 绝对路径）；复用5200，无新服务 | 老板要在内置浏览器看「方舟进入事件时」的对比参考（事件入场整页，非节点小图标）：板含 IS7 事件整页实机、IS6 场景插画、STS2 Ranwid 事件实机、本作 winter-arrival 两版；板内观察结论沿用 10-11 已验证研究记录。顺带查明：5200 Vite root 为 `game/`，`/docs/...` 路径一律回退游戏首页——此前 gallery 链接打开见游戏页即此因，docs 下页面须经 `/@fs/` 绝对路径访问 | 2026-10-15 | 已交付；内置浏览器已打开并核实四板块五图全部加载（`/@fs/D:/素材/.../docs/previews/entry-events-20261015/index.html`）；IS6 原图 >1MB 被 .gitignore 排除仅本机可看；不接入游戏、不测试、不提交 |
+
+2026-10-16 老板确认现无其他任务，统一销去旧编辑占用并交本会话接管；原成果、未提交归属、待验收及服务记录保留，销账不表示工作完成或服务已停止。
+
+
+Codex-handoff（集成修复与交接 WF-integration-ship-1016，聊天01a14055），2026-10-16：234代码/450证据文件已正常提交推送master f0e84c5dc34afcbc1176b1519258d2c3010c62cb，tree 869f3477c070304d5e6a96cfba395c42ab143e80，远端API核对一致。普通完整4032/0/12，冻结full4028/0/16无错误并由正常pre-commit复用；四项既有构建预算失败保留交云端。13377 blob远端归档校验通过、20分卷已留_tmp-handoff-20261015/f0e84c5d；Library助手无法发现prepare_uploads，未创建远端上传。编辑/索引释放，无本任务端口服务；旧5200服务保留。NAI与未知候选未动。后置收官记录未纳入已固定远端快照。
+
 Codex-handoff（本地云端交接检查 WF-local-cloud-handoff-1016，聊天01a14055），2026-10-16：检查结束、编辑释放、交接未完成。两个当前任务均已结束，25条完成源码与156条当前输入指纹匹配；正常权限全量3998通过/33失败/12跳过（17文件），工作树91张未登记候选保留。未改游戏/测试、未暂存/提交/推送/打包/传输；NAI增量、本机配置及未知归属原样保留。详见 `docs/evidence/2026-10-16-WF-local-cloud-handoff-1016/README.md` 与失败摘要；自有检查证据完成未提交，不认领其他任务。
 
 | 会话/来源 | 属地 | 事项 | 状态 |
 |---|---|---|---|
+| Friday（战斗提交反馈 WF-battle-play-feedback-1016） | core/battle.engine.js、battle.core.js、battle.exec-play.js；runtime/battle.action-runner.js；battle.play-submission.types.d.ts；view/battle.aim.js、battle.layers.js；docs/rules.md、architecture.md；自有evidence目录，精确清单见task.json | 权威可用性/提交回执与拒绝归位、鼠标Enter确认、手牌差分焦点交接；收口可选注能直打、同帧打出又回手姿态及手牌层自替换失焦 | 完成未提交、编辑释放，三个子代理已冻结；仅人工源码/接口交叉复核，未运行测试、lint、语法/类型检查、build、浏览器或性能采样，待最后统一验证；保留旧出牌接口/规则/动画抵消，无新素材/服务/进程，未提交或推送 |
+| Friday（战斗输入保护 WF-battle-input-guards-1016） | battle.layers.js键盘；battle.aim.js的aimHoverAt；battle.view.js选牌提示/发现handler；battle.discover-input.js；battle.discover-view.js页面标识；docs/rules.md、architecture.md；自有evidence目录 | 阅读键来源隔离、发现页token/350ms/一次提交保护、自然法杖zero准确提示、禁用技能外壳any落点屏蔽 | 完成未提交、编辑释放；仅人工源码/接口交叉复核，未运行测试、lint、语法/类型检查、build或浏览器，待最后统一验证；原发奖/抽样/战斗数值和第五项范围均未改，无新素材/服务，未提交或推送 |
+| Friday（战斗返修 WF-battle-return-1016） | battle.aim.js；battle.view.js发现分支；battle.discover-view.js；battle-discover.css；battle-stage.css几何；docs/rules.md、architecture.md；自有evidence目录 | 独立发现玻璃大卡层，按本地STS2参考恢复拖牌状态机与75%停靠/松空点击确认，场景退镜头/缩立绘/阵营拉开；已补缩放坐标和长按click串台护栏 | 完成未提交、编辑释放；仅人工源码/样式对照，未运行测试、lint、语法/类型检查、build、浏览器或性能采样，待最后统一验证；无新素材/服务/进程，未提交或推送 |
+| Friday（商店连续选购 WF-shop-continuity-1016） | game/src/run/game.run.shop.js详情/底栏/背包返回局部；shop-browse-state.js；game/css/expedition-shop.css对应局部；docs/architecture.md；自有evidence目录 | 并列购买限制、装不下时保留整理入口、背包往返滚动/展开/焦点恢复、返回地图文案；价格/库存/交易/关店规则保持 | 完成未提交、编辑释放；人工源码复核后补长规则展开恢复，未运行测试、lint、语法/类型检查、build或浏览器，待最后统一验证；无新素材/服务/进程，未提交或推送 |
+| Friday（奖励体验 WF-reward-experience-1016） | game/src/ui/chest-reward-overview.js；game/src/run/chests.js呈现/动作；game/css/chest-reward-overview.css；docs/rules.md；自有evidence目录 | 主动作随开箱进度、完整待领箱计数、原箱实际领取反馈、底部容量与整理收敛、总览/卡牌玻璃布局；保留显式开箱与原发奖/存档/节点事务 | 完成未提交、编辑释放，子代理冻结；仅人工源码自审与限定只读复核，未运行测试、lint、语法/类型检查、build或浏览器，待最后统一验证；无新素材/服务/进程，未提交或推送 |
+| Friday（战斗玻璃与交互 WF-battle-glass-1016） | battle-stage.css；battle.view/layers/hand-layout/aim/skill-view.js；ui/term-tips.js；overlays.css公共说明区；game/assets/ui/battle-controls-glass-1016七枚及清单新增项；docs/rules.md、architecture.md；自有evidence目录 | 按老板批准撤重复名称、扩大场景/人物、透明模糊玻璃控件、七枚全新符号、公共body说明与拖牌直接跟随/保留抓点/平滑取消；只改呈现和输入反馈 | 完成未提交、编辑释放，三子代理已冻结；仅人工源码/图稿自审与资产元数据登记，未运行测试、lint、类型/语法检查、build或浏览器；待最后统一验证，不能沿用上一轮实页结论；复用5318预览资源单独登记，无新进程、提交或推送 |
+| Friday（轨道站战斗实机 WF-battle-platform-live-1016） | game/src/battle/view/{battle.view,battle.aim,battle.layers,battle.hand-layout,battle.skill-view}.js；game/css/battle-stage.css；game/assets/ui/battle-skills-1016六枚与asset-manifest新增项；docs/rules.md；自有evidence目录 | 脚下血条、场景上移、手牌留空、人物左侧图标技能与悬停说明；撤下卡牌详情/顶部选牌提示/人物姓名，保留攻击力并合并普通敌人重复攻击行 | 完成未提交、编辑释放；当前窗口真实技能/点选出牌/换回合和五JS定向ESLint通过，旧遗留调用异常已修复并保留记录；统一测试仍待最后，首脑/盟友/其余技能未实机覆盖；5318预览服务单独保留登记，无build、提交或推送 |
 | Friday（战斗试玩三版整改 WF-battle-play-rewrite-1016，聊天01a1404b） | game/css/{battle-stage,battle}.css；game/src/battle/view/battle.{hand-layout,layers,view}.js；tests/battle-{hand-layout,decision-readability,entry-view}.test.js；docs/production/art/VISUAL-BIBLE.md；docs/evidence/2026-10-16-WF-battle-play-rewrite/及-1016/规范浏览器快照 | 三版精简与试玩整改：固定阅读尺寸、修正透明命中层、完整手牌与消耗后收拢、血条上置及场景贴地、删除重复角标/教程/熟练度/粒子；13文件170项、CSS解析、自有diff、docs-check469链接通过；当前内置窗口真实普通战两回合胜利、点选/取消/拖拽/技能/护甲/输入锁/收拢通过，页面error日志0条 | 2026-10-16 完成未提交、编辑释放；复用本聊天5200服务供老板使用；不build、不提交、不删文件。旧01a13ff6战斗现有实现保留并对相关渲染链复测，不据此认领其全部非本轮属地/素材。未覆盖其他角色、召唤物、多尺寸及首脑全战；交接见自有HANDOFF.md |
 
 Friday（整体性能优化 WF-runtime-perf-1016，聊天01a14050），2026-10-16：game/src/core/{icons-bitmap,icon-hydration,art,image-decode}.js；scripts/css-redundancy-audit.mjs；tests/{icon-hydration,image-decode,css-redundancy-audit}.test.js；game/css/{entry-events,expedition,expedition-rewards,expedition-roster,expedition-shop,map-cover,page-expedition-hud,home-polish}.css 仅自有清理增量；docs/performance.md 及 [证据/交接](evidence/2026-10-16-runtime-perf/README.md)。完成未提交、编辑释放：116项定向/语法/8套类型/定向lint/docs468链接通过；内置浏览器合成文本微基准中位53.1→9.1ms、20次刷新只解码1次；实页照相馆法术搜索四图就绪、error空。扩展 battle-entry-view 的4项既有场景断言失败已记录，未触及其活跃属地；未全量/战斗实玩/构建/提交/推送，保留所有他人现场；复用5200无新服务，两验证标签页已关闭；源码指纹见自有证据。
@@ -331,6 +443,11 @@ Friday（Codex 地图天气 01a13c12），2026-10-15：game/css/expedition-map.c
 
 | 会话/来源 | 属地 | 事项 | 状态 |
 |---|---|---|---|
+| Friday（通用过场 WF-general-transition-1016） | game/src/ui/general-transition.js、camp-entry.js；run/game.run.scenes.js；battle/view/battle.presentation-ready.js；game/css/battle.css；两battle-entry测试；通用过场图及manifest本图条目；docs/development.md对应段；自有evidence | NAI起稿+内置重绘，已按老板反馈恢复原图左侧虚化；战斗/首脑入口与资源等待共用远征画面 | 完成未提交、编辑释放；5套82项及末版3套41项通过，lint/docs/diff通过；当前内置窗口构造过场与真实简化按钮通过，未完整实战；本图登记校验通过，工作区另有95项资产审计错误；无build/新服务/提交。证据docs/evidence/2026-10-16-WF-general-transition-1016/ |
+| Friday（NAI画法单变量 WF-nai-style-trial-a-1016） | docs/evidence/2026-10-16-nai-style-trial-a/；根.tmp/nai/wu-dinner-v5-style-trial-a-20261016.png | 单张HTTP200；同种子仅换画法，请求差异断言与共享默认指纹核对通过；视觉比较记录于README | 2026-10-16 完成未提交，编辑占用释放；候选未选为默认，无服务 |
+| Friday（简约轨道站战斗场景 WF-battle-platform-minimal-1016） | game/assets/scenes/battle/platform-minimal-1016/{far,ground,foreground}.webp；game/src/battle/view/battle.scenery.js；game/src/run/game.run.data.js战斗预载；game/css/battle-stage.css、scenes.css战斗背景；game/assets/asset-manifest.json新增三条；docs/architecture.md；自有记录 | 认可概念经内置生图制作三层并接入普通战/首脑战，预载与战前背景同步；地面后沿修订一次，人物与动作保留；生成提示词与编码来源见request/receipt | 完成未提交，编辑释放；未执行测试、lint、类型/语法检查、build或内置浏览器验收，按老板要求最后统一。无新服务、无提交/推送；原图>1MB留本机生成目录，运行WebP均<1MB |
+| Friday（地图节点状态 WF-map-node-status-1016） | game/src/core/map-node-state.js、node-info.js、renderer.js、map-node-art.js；game/src/run/expedition.view.js；game/src/game.boot.js节点命中/提示；game/css/map-node-status.css；docs/map-travel.md；自有记录 | 地图/详情/悬停统一未完成、待领奖、已完成、营业中/已离店状态；文字区可选中；待领优先，迷雾与通行节点不贴未完成，门旁店离店不阻断闸门 | 完成未提交，编辑释放；老板要求最后统一验证，本块未运行测试、静态检查、实页或build；无新服务、素材及存档字段，未提交/推送 |
+| Friday（节点与背包规则 WF-expedition-renewal-1016） | game/src/run/节点与宝箱；game/src/hub/game.bag.js、game.bag.drag.js、game.bag.settle.js、run-save-validation.js；game/src/battle/背包入口；agent.state.js；map-node-state.js；chest-reward-overview.js/.css；game/data/map.json；相关tests及现行规则/存档文档；docs/evidence/2026-10-16-WF-expedition-renewal/ | 首块规则及追加批准的奖励总览→点击宝箱→卡牌弹层→返回奖励界面已接入；各箱进度单独保存，旧固定奖励兼容；老板要求测试留到最后统一执行 | 完成未提交，编辑释放；待最后统一测试/静态检查/当前窗口实页验收。此前定向结果仅覆盖奖励总览修正前输入，阶段全量已中止；复用5200，无本会话新服务，无build、提交或推送 |
 | Friday（旧副本与音乐中间文件清理 WF-copy-audio-cleanup-1015） | `.tmp/zzz-base-observe-1012/`、`.tmp/WF-battle-ui-runtime/`、`.tmp/selection-map-observe-1011/`、`.tmp/selection-map-repair-1012/`；两版battle-full-loop证据目录内固定18份中间WAV；自有证据 `docs/evidence/2026-10-15-WF-copy-audio-cleanup-1015/` | 老板明确批准前两类清理；先另存源码/脚本/报告/独有素材并核验SHA，音乐工程/音源/最终混音/母带原位保留；旧端口5335/5337/5338/5346无监听、旧PID37600不存在 | 2026-10-15 完成未提交、编辑释放；4份副本与18份WAV清理完成，792件另存+1条只读链接归档，5300个原件与全部归档SHA一致；旧端口前后无活动；证据见自有README；未启停服务、未build、未提交 |
 | Friday（NAI 提示词 WF-nai-snow-night-1015） | tools/nai_style.py；tools/nai_gen.py；tools/tests/test_nai_multichar.py；docs/production/art/NAI-PROMPTING.md；docs/evidence/2026-10-15-nai-snow-night/ | 画师链保持，教程字幕读完，双人槽与 v1.5 提示词完成；原图及局限见 docs/evidence/2026-10-15-nai-snow-night/README.md；28 通过/1 平台跳过，docs:check 通过，未接入游戏 | 完成未提交；编辑占用释放，第二版为待老板反馈样本，不代表画风通过 |
 | Friday（卡牌品质三方向对比 WF-card-rarity-options-1015） | docs/previews/card-rarity-options-20261015/；docs/evidence/2026-10-15-card-rarity-options/ | A典藏纸本、B古器圣物、C精装全幅各三档共九卡；老板否决首轮后按现行追斩/初始攻击/寻宝宽笔块面重绘；独立概念对比页 | 2026-10-15 完成未提交、编辑释放；三套第二轮已展示并存源/SHA/提示词；仅静态概念稿，未接入正式卡面，未实页；无新服务/build/提交；首轮已否决留档 |

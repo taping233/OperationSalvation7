@@ -1,0 +1,59 @@
+{
+  "longTasks": [
+    {
+      "duration": 82,
+      "start": 1479.7999999970198
+    },
+    {
+      "duration": 50,
+      "start": 1565.1000000089407
+    },
+    {
+      "duration": 53,
+      "start": 2237.6000000089407
+    }
+  ],
+  "note": "Direct page mount + explicit layout/readiness in a disposable tab; excludes facade/cut duration; synthetic calls, no save writes.",
+  "samples": [
+    {
+      "layoutMs": 19.899999991059303,
+      "mountedImages": 16,
+      "readyMs": 265.59999999403954,
+      "shells": 268,
+      "syncMs": 44.20000000298023
+    },
+    {
+      "layoutMs": 0.3999999910593033,
+      "mountedImages": 16,
+      "readyMs": 135,
+      "shells": 268,
+      "syncMs": 42.79999999701977
+    },
+    {
+      "layoutMs": 0.5,
+      "mountedImages": 16,
+      "readyMs": 105.90000000596046,
+      "shells": 268,
+      "syncMs": 25.5
+    },
+    {
+      "layoutMs": 0.4000000059604645,
+      "mountedImages": 16,
+      "readyMs": 103.69999998807909,
+      "shells": 268,
+      "syncMs": 26.69999998807907
+    },
+    {
+      "layoutMs": 0.5,
+      "mountedImages": 16,
+      "readyMs": 132.8999999910593,
+      "shells": 268,
+      "syncMs": 33.599999994039536
+    }
+  ],
+  "viewport": {
+    "dpr": 1.25,
+    "height": 720,
+    "width": 1280
+  }
+}

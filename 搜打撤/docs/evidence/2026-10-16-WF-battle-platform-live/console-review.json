@@ -1,0 +1,31 @@
+{
+  "cutoff": "2026-10-16T08:59:35.253Z",
+  "allCaptured": [
+    {
+      "level": "error",
+      "message": "[battle] 渲染异常已兜底： ReferenceError: syncHandInspector is not defined\n    at render (http://127.0.0.1:5318/src/battle/view/battle.view.js?t=1792139064921:768:5)\n    at flushBattleRender (http://127.0.0.1:5318/src/battle/core/battle.engine.js:89:14)",
+      "timestamp": "2026-10-16T08:26:28.718Z",
+      "url": "http://127.0.0.1:5318/src/core/diagnostics.local.js"
+    },
+    {
+      "level": "error",
+      "message": "[battle] 渲染异常已兜底： ReferenceError: syncHandInspector is not defined\n    at render (http://127.0.0.1:5318/src/battle/view/battle.view.js?t=1792139064921:768:5)\n    at flushBattleRender (http://127.0.0.1:5318/src/battle/core/battle.engine.js:89:14)",
+      "timestamp": "2026-10-16T08:27:31.154Z",
+      "url": "http://127.0.0.1:5318/src/core/diagnostics.local.js"
+    },
+    {
+      "level": "error",
+      "message": "[battle] 刺击异常： ReferenceError: syncHandInspector is not defined\n    at render (http://127.0.0.1:5318/src/battle/view/battle.view.js?t=1792139064921:768:5)\n    at preparePresentation (http://127.0.0.1:5318/src/battle/core/battle.engine.js:1035:68)\n    at Object.execute (http://127.0.0.1:5318/src/battle/runtime/battle.action-runner.js:34:47)\n    at drain (http://127.0.0.1:5318/src/battle/core/battle.actions.js:29:36)\n    at Object.enqueue (http://127.0.0.1:5318/src/battle/core/battle.actions.js:48:10)\n    at queueBattleAction (http://127.0.0.1:5318/src/battle/runtime/battle.action-runner.js:25:11)\n    at resolveSlamSkill (http://127.0.0.1:5318/src/battle/bag/battle.bag.js:386:5)\n    at Object.resolveSlam (http://127.0.0.1:5318/src/battle/bag/battle.bag.js:371:5)\n    at resolveSlam (http://127.0.0.1:5318/src/battle/core/battle.engine.js:378:41)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:5318/src/battle/view/battle.layers.js?t=1792139064921:717:51)",
+      "timestamp": "2026-10-16T08:27:50.144Z",
+      "url": "http://127.0.0.1:5318/src/core/diagnostics.local.js"
+    },
+    {
+      "level": "error",
+      "message": "[battle] 渲染异常已兜底： ReferenceError: syncHandInspector is not defined\n    at render (http://127.0.0.1:5318/src/battle/view/battle.view.js?t=1792139064921:768:5)\n    at flushBattleRender (http://127.0.0.1:5318/src/battle/core/battle.engine.js:89:14)",
+      "timestamp": "2026-10-16T08:27:50.157Z",
+      "url": "http://127.0.0.1:5318/src/core/diagnostics.local.js"
+    }
+  ],
+  "afterCutoff": [],
+  "knownEarlierFailure": "08:26–08:27遗留syncHandInspector引用异常已修正；本次最终截图之后没有新增error/warn。"
+}

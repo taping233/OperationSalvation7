@@ -1,0 +1,8 @@
+{
+  "cells": [
+    "Friday（简约轨道站战斗场景 WF-battle-platform-minimal-1016）",
+    "game/assets/scenes/battle/platform-minimal-1016/{far,ground,foreground}.webp；game/src/battle/view/battle.scenery.js；game/src/run/game.run.data.js战斗预载；game/css/battle-stage.css、scenes.css战斗背景；game/assets/asset-manifest.json新增三条；docs/architecture.md；自有记录",
+    "认可概念经内置生图制作三层并接入普通战/首脑战，预载与战前背景同步；地面后沿修订一次，人物与动作保留；生成提示词与编码来源见request/receipt",
+    "完成未提交，编辑释放；未执行测试、lint、类型/语法检查、build或内置浏览器验收，按老板要求最后统一。无新服务、无提交/推送；原图>1MB留本机生成目录，运行WebP均<1MB"
+  ]
+}

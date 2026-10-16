@@ -1,0 +1,380 @@
+{
+  "log": "docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-48-17.941Z-f2f8b882-staged.log",
+  "summary": {
+    "filesFailed": 41,
+    "filesPassed": 454,
+    "failed": 197,
+    "passed": 4533,
+    "skipped": 16,
+    "unhandledErrors": 2
+  },
+  "failuresByFile": {
+    "tests/altar-completion-road-cache.test.js": [
+      "祭坛状态参与地图道路裁剪缓存 > 领取回赠改变待领标记时不依赖visited数量变化重算端点；相同状态仍复用",
+      "祭坛状态参与地图道路裁剪缓存 > 碎片直接激活祭坛时不依赖visited数量变化重算端点；相同状态仍复用"
+    ],
+    "tests/altar-node-completion-view.test.js": [
+      "祭坛完成态的地图信息与脚下入口 > 未激活仍可查看本地内容，不误写已完成，离开返回保留状态",
+      "祭坛完成态的地图信息与脚下入口 > 已激活待领奖仍可查看本地内容，不误写已完成，离开返回保留状态",
+      "祭坛完成态的地图信息与脚下入口 > 已激活且无待领奖时显示完成，只禁用脚下查看，卡牌/标记/visited不变",
+      "祭坛完成态的地图信息与脚下入口 > 无visited数量变化的待领→完成→待领切换能使预览缓存失效",
+      "祭坛完成态的地图信息与脚下入口 > 完成祭坛仍能直接进入/离开，现有多跳路径不穿越祭坛规则不变",
+      "祭坛完成态的地图信息与脚下入口 > 普通完成节点的脚下查看与层门兼容不受祭坛投影影响"
+    ],
+    "tests/archive-motion.test.js": [
+      "cleans the old handoff before a second camp entry and leaves the new entry alive"
+    ],
+    "tests/battle-decision-readability.test.js": [
+      "battle decision reading CSS contract > keeps straight shared-card hosts and distinct resting and reading states",
+      "battle decision reading CSS contract > keeps the secondary instruction below the header in a separate interaction-free lane",
+      "battle decision reading CSS contract > keeps object labels on a local dark reading surface and career controls at the player feet",
+      "battle decision reading CSS contract > labels a folded card without changing the shared printed face or intercepting the card input",
+      "battle decision reading CSS contract > keeps compact enemy HUDs, wrapping compound intentions and local details outside layout flow",
+      "battle decision reading CSS contract > keeps skill copy and detail controls readable while the existing disabled action stays legible"
+    ],
+    "tests/battle-drag-reference.test.js": [
+      "keeps a tap resting, selects a target, and takes up only after six CSS pixels",
+      "anchors at the card centre and follows with the source position rate instead of teleporting",
+      "converts pointer coordinates into scaled layout units and reduces motion to direct positioning",
+      "enters source play zone before a target is hovered and highlights only the real target",
+      "commits a fast valid release even when no queued pointer frame has run",
+      "does not play stale, dead, blocked or foreign-pointer drops",
+      "processes fast untargeted drops before cancelling the target session and excludes the hand/HUD",
+      "requires a self-target drop on the player rather than an arbitrary empty point",
+      "cleans up safely on pointercancel",
+      "cleans up safely on lostpointercapture",
+      "cleans up safely on blur",
+      "cleans up safely on resize",
+      "cleans up safely on compositionstart",
+      "does not leak Escape/Tab to other combat handlers, but respects IME composition",
+      "cancels when returning to the source bottom cancel zone and when the active card detaches",
+      "also cancels an untargeted card after it passes back through the intermediate zone",
+      "refreshes target data across a compatible redraw and cancels a changed hand slot"
+    ],
+    "tests/battle-engine-facade.test.js": [
+      "battle.engine 导出面守卫 > 具名导出集合与基线逐字一致（增删须显式更新本清单）"
+    ],
+    "tests/battle-entry-view.test.js": [
+      "keeps folded hand names synchronized with their printed faces and intent in the same enemy HUD group",
+      "mounts one decoded scene on layer 1 and keeps it across rendering and modal return",
+      "mounts one decoded scene on layer 2 and keeps it across rendering and modal return",
+      "mounts one decoded scene on layer 3 and keeps it across rendering and modal return",
+      "does not let a late decoded static scene reveal itself in a newer boss battle"
+    ],
+    "tests/battle-hand-inspector.test.js": [
+      "clicking with 1 enemies only inspects; explicit use still requires target confirmation",
+      "clicking with 2 enemies only inspects; explicit use still requires target confirmation",
+      "keeps untargeted cards read-only until explicit use, and a repeated old confirmation cannot spend twice",
+      "opens from number/Enter keys, traps focus and blocks combat hotkeys until Escape restores the hand",
+      "selects a target on one face pointer tap and suppresses the following synthetic click",
+      "selects a target on one bridge pointer tap and suppresses the following synthetic click",
+      "starts self-target equipment selection from the stable folded slot without spending or requiring a second click",
+      "routes rapid folded-slot infusion picks to distinct UIDs in one shared material stack",
+      "keeps unavailable cards readable and prevents stale confirmations after a battle switch",
+      "removes the inspector and restores inert state when the whole overlay is hidden",
+      "inspects infusion cards and materials before either entering or changing the selection",
+      "keeps distinct hand groups keyed by cost and removes only the card actually played",
+      "keeps distinct hand groups keyed by id and removes only the card actually played",
+      "keeps distinct hand groups keyed by desc and removes only the card actually played",
+      "leaves the original playable when its generated zero-cost copy is played first",
+      "keeps short card rules in the single large card without a redundant full-rule hand entry",
+      "renders every long-rule condition through the shared safe rich-text copy without spending or changing focus contracts",
+      "keeps a long enemy name intact and exposes base attack through keyboard intent details without confirming a target",
+      "presents 侠客 skill effect, available state and fee without changing its action",
+      "presents 战士 skill effect, available state and fee without changing its action",
+      "presents 法师 skill effect, available state and fee without changing its action",
+      "presents 牧师 skill effect, available state and fee without changing its action",
+      "presents 降临者 skill effect, available state and fee without changing its action",
+      "presents skill target selection, once-per-turn use and restored readiness through the existing command chain",
+      "retains the self target label and Enter action across redraw and a modal return",
+      "renders real unit icon bitmaps synchronously before observer/rAF hydration and reuses unchanged sections"
+    ],
+    "tests/battle-hand-layout.test.js": [
+      "keeps 1 hand groups inside the 1920 canvas and their identity strips separated",
+      "keeps 2 hand groups inside the 1920 canvas and their identity strips separated",
+      "keeps 3 hand groups inside the 1920 canvas and their identity strips separated",
+      "keeps 4 hand groups inside the 1920 canvas and their identity strips separated",
+      "keeps 5 hand groups inside the 1920 canvas and their identity strips separated",
+      "keeps 6 hand groups inside the 1920 canvas and their identity strips separated",
+      "keeps 7 hand groups inside the 1920 canvas and their identity strips separated",
+      "keeps 8 hand groups inside the 1920 canvas and their identity strips separated",
+      "keeps 9 hand groups inside the 1920 canvas and their identity strips separated",
+      "folds the resting hand below 85% of the canvas while a focused card can remain fully visible"
+    ],
+    "tests/battle-infusion-action-layout.test.js": [
+      "discovery source presentation and restoration copy > projects both owned and temporary deck-bottom UIDs without changing cards or discovery state"
+    ],
+    "tests/battle-potion-bar-layout.test.js": [
+      "battle potion left-anchor cascade > overrides the original centered bar transform in the complete loaded cascade",
+      "battle potion left-anchor cascade > keeps the visible tooltip anchored to the bar instead of half its own width left",
+      "battle potion left-anchor cascade > retains the more specific reset when the later runtime hidden-tip rule matches",
+      "battle potion left-anchor cascade > reproduces both original horizontal offsets when only the canonical resets are removed"
+    ],
+    "tests/battle-scenery.test.js": [
+      "selects layer index 0 as winter-bridge",
+      "selects layer index 1 as winter-street",
+      "selects layer index 2 as frozen-ruins",
+      "selects layer index 3 as contaminated-core",
+      "uses the contaminated core for bosses and never overlays winter layers onto static scenes",
+      "captures the layer and boss identity once per battle token, with explicit opts taking priority"
+    ],
+    "tests/battle-settlement-retry.test.js": [
+      "真实战斗奖励刷新续流 > 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=false）",
+      "真实战斗奖励刷新续流 > 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=true）"
+    ],
+    "tests/battle-tools-lifecycle.test.js": [
+      "battle tools template ownership > replaces retained disabled tools with the fresh ready template after a full redraw",
+      "battle tools template ownership > 普通战背包按钮与命令均被锁定，手牌和独立道具快捷栏不受影响",
+      "battle tools template ownership > returns from real discovery with one current set and preserves subsequent updates",
+      "battle tools template ownership > spends for the real skill once after repeated returns, retains used state, then resets next turn"
+    ],
+    "tests/boot.test.js": [
+      "启动链（DOMContentLoaded → showTitle） > 战斗数字键/点选与内层卡面键盘输入共享选中、取消和目标结算"
+    ],
+    "tests/chest-callback-lifecycle-audit.test.js": [
+      "宝箱回调与探索身份审计 > 未领取宝箱不自动开箱，旧领取动作不能跨局发起开箱",
+      "宝箱回调与探索身份审计 > 领取宝箱双击只启动一次，未领奖前不发卡或金币",
+      "宝箱回调与探索身份审计 > 搜索等待期间run-token变化后旧揭晓不能覆盖新局",
+      "宝箱回调与探索身份审计 > 搜索等待期间location变化后旧揭晓不能覆盖新局",
+      "宝箱回调与探索身份审计 > 搜索等待期间slot变化后旧揭晓不能覆盖新局",
+      "宝箱回调与探索身份审计 > 已揭晓奖励run-token变化后旧领取不能发奖或写盘",
+      "宝箱回调与探索身份审计 > 已揭晓奖励location变化后旧领取不能发奖或写盘",
+      "宝箱回调与探索身份审计 > 已揭晓奖励slot变化后旧领取不能发奖或写盘",
+      "宝箱回调与探索身份审计 > 已揭晓奖励new-page变化后旧领取不能发奖或写盘",
+      "宝箱回调与探索身份审计 > 背包合法挂起/恢复不重抽，旧页动作失效且现页逐张领取只发一次",
+      "宝箱回调与探索身份审计 > 新局不再视旧箱为可恢复，resume不会把旧奖励盖回新页",
+      "宝箱回调与探索身份审计 > 领取后普通保存失败仍保留当前已领取事实，重试保存不重复发奖"
+    ],
+    "tests/chest-click-flow.test.js": [
+      "宝箱点击链路 > 放大阅读可安全关闭，从独立或特写按钮领取后原位保留（特写领取=true）",
+      "宝箱点击链路 > 放大阅读可安全关闭，从独立或特写按钮领取后原位保留（特写领取=false）"
+    ],
+    "tests/chest-multi-queue-regression.test.js": [
+      "multi-chest leave and take actions advance exactly once per box"
+    ],
+    "tests/chests-reward-capacity-notice.test.js": [
+      "整理背包返回时奖励容量 notice 与真实容量同步 > 普通宝箱：18/18批量领2张，丢木材回17/18只保留领取成功事实",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > 地下商场黑市：18/18批量领2张，丢木材回17/18只保留领取成功事实",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > 仅腾出部分容量，刷新放不下数量但不把仍待领取的卡计入已领取",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > small实际grant拒收优先于乐观容量端口，普通重绘/无变化返回不能擦除",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > medium实际grant拒收优先于乐观容量端口，普通重绘/无变化返回不能擦除",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > 批量真实拒收不被预测清空；实际整理后可校准，同样失败串再次发生须重新显示",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > restore清除旧实例拒收显示状态，旧容量串可校准但非容量错误不受影响",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > 整理后按B关闭的第二次suspend不覆盖首次背包指纹",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > 重新open及next换箱不会继承另一箱的实际拒收标记",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > small单卡失败：只清除现在确实可收的对应待领卡提示",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > medium单卡失败：只清除现在确实可收的对应待领卡提示",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > 另有资源卡能收时，不能清除仍放不下的普通卡失败提示",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > 已满同名三张堆实际拒收时，不能因旧预检把同名当免费格而清掉失败",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > 保留非容量状态：「黑市装备」已入本次远征背包",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > 保留非容量状态：保存失败，请重试",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > 保留非容量状态：已入背包 2 张，存档放不下，请检查存储空间",
+      "整理背包返回时奖励容量 notice 与真实容量同步 > 保存旧容量串后普通JSON重载，按17/18校准，不重抽/不重发已领卡"
+    ],
+    "tests/docs-consistency.test.js": [
+      "文档一致性守卫 > 现行文档（docs 根）的相对链接无死链"
+    ],
+    "tests/event-callback-lifecycle-audit.test.js": [
+      "事件等待与回调生命周期审计 > F06 三选一明确永久放弃，其余候选刷新后仍不可领取"
+    ],
+    "tests/expedition-battle-presentation.test.js": [
+      "shows one short target instruction and clears auxiliary keyboard help on cancel"
+    ],
+    "tests/expedition-view.test.js": [
+      "expedition view route projection > 已访问普通节点仍可通行但标为已探索；门、撤离点保留专用状态",
+      "expedition view route projection > 同名相邻路线获得稳定的可视与无障碍区分，并保留节点索引",
+      "expedition view DOM rendering > 已消耗的相邻节点与脚下节点保留原类型并明确已完成，仍可进入",
+      "expedition view DOM rendering > 相同状态保留预览节点，已探索与门身份变化后更新单节点内容"
+    ],
+    "tests/extra-legend-reward-persistence.test.js": [
+      "战后额外传说先持久化待领奖，再原子完成胜利 > 战后暂离先幂等提交击杀和XP；异地存档与读档续领奖不重复结算胜利",
+      "战后额外传说先持久化待领奖，再原子完成胜利 > 暂离提交失败保留领奖与重试；重试成功后的活动/按节点快照同步提交标记，读档不再结算",
+      "战后额外传说先持久化待领奖，再原子完成胜利 > 满16格保留确定传说，刷新/整理/已领刷新不重掷，首胜教学最后出现（boss=true）",
+      "战后额外传说先持久化待领奖，再原子完成胜利 > 满16格保留确定传说，刷新/整理/已领刷新不重掷，首胜教学最后出现（boss=false）",
+      "战后额外传说先持久化待领奖，再原子完成胜利 > 普通箱已领取后刷新，保留普通奖励并只在接续后掷一次首脑额外传说",
+      "战后额外传说先持久化待领奖，再原子完成胜利 > 非首脑/巨兽未命中不误发额外卡：{\"isBoss\":false,\"foeNames\":[\"普通敌人\"]}",
+      "战后额外传说先持久化待领奖，再原子完成胜利 > 非首脑/巨兽未命中不误发额外卡：{\"isBoss\":false,\"foeNames\":[\"荒渊巨兽\"]}",
+      "战后额外传说先持久化待领奖，再原子完成胜利 > 传说空池不抛错、不丢已领普通奖励，也不多消耗选卡骰",
+      "战后额外传说先持久化待领奖，再原子完成胜利 > 固定领奖接收器reject后可重试，仍只发原传说",
+      "战后额外传说先持久化待领奖，再原子完成胜利 > 固定领奖接收器throw-after-adoption后可重试，仍只发原传说",
+      "战后额外传说先持久化待领奖，再原子完成胜利 > 额外传说初次落盘失败时停在可重试阶段，恢复写入仍是原卡原骰",
+      "战后额外传说先持久化待领奖，再原子完成胜利 > 确定传说领取后真实Run写失败，原attempt恢复重试不重掷、不重复发卡"
+    ],
+    "tests/four-player-chest-reload.test.js": [
+      "G03 揭晓宝箱持久化 > 恢复真实开箱控制器沿用已展示奖励，不重抽或重复领取"
+    ],
+    "tests/map-node-state.test.js": [
+      "已消耗地图节点展示 > battle 完成结算后保留原类型并标注完成，未消费前保留原说明",
+      "已消耗地图节点展示 > shop 完成结算后保留原类型并标注完成，未消费前保留原说明",
+      "已消耗地图节点展示 > coin 完成结算后保留原类型并标注完成，未消费前保留原说明",
+      "已消耗地图节点展示 > wood 完成结算后保留原类型并标注完成，未消费前保留原说明",
+      "已消耗地图节点展示 > chest 完成结算后保留原类型并标注完成，未消费前保留原说明",
+      "已消耗地图节点展示 > rations 完成结算后保留原类型并标注完成，未消费前保留原说明",
+      "已消耗地图节点展示 > key 完成结算后保留原类型并标注完成，未消费前保留原说明",
+      "已消耗地图节点展示 > fire 完成结算后保留原类型并标注完成，未消费前保留原说明",
+      "已消耗地图节点展示 > event 完成结算后保留原类型并标注完成，未消费前保留原说明",
+      "已消耗地图节点展示 > resource 完成结算后保留原类型并标注完成，未消费前保留原说明",
+      "已消耗地图节点展示 > 祭坛激活后奖励待选：按激活/待领三态投影，不把visited误当领奖完成",
+      "已消耗地图节点展示 > 祭坛激活且奖励选择已完成：按激活/待领三态投影，不把visited误当领奖完成",
+      "已消耗地图节点展示 > 祭坛旧档激活且无待领标记：按激活/待领三态投影，不把visited误当领奖完成",
+      "已消耗地图节点展示 > 祭坛真实激活不依赖visited：按激活/待领三态投影，不把visited误当领奖完成"
+    ],
+    "tests/map-travel-path.test.js": [
+      "known map travel path > treats pending entry supply as an endpoint and restores blank travel after collection"
+    ],
+    "tests/nightshift-u10-teardown-guards.test.js": [
+      "U10 H2 chests 逐卡揭晓音效守卫 > 揭晓后 document 拆除，音效定时器安全短路，不抛 document 引用错"
+    ],
+    "tests/node-retrigger.test.js": [
+      "节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发"
+    ],
+    "tests/r7a-qa-live.test.js": [
+      "loads isolated real view, plays one card, ends and exits without storage writes"
+    ],
+    "tests/retired-scenes-publication.test.js": [
+      "exact retired scene publication review > fingerprints the scene constructors and DATA mapping, preserving all current scene variants"
+    ],
+    "tests/reward-capacity-preview.test.js": [
+      "奖励页使用同一顺序预估，排除领取/放弃且区分原选择与已掷附赠 > 过滤后pending下标独立，不把原已领/已放弃卡重新发放",
+      "奖励页使用同一顺序预估，排除领取/放弃且区分原选择与已掷附赠 > choiceCount后的可收gift不能掩盖原三选一候选全部拒收",
+      "奖励页使用同一顺序预估，排除领取/放弃且区分原选择与已掷附赠 > 原选择解决后，只按顺序预估已有gift，不重抽、不重发原奖励"
+    ],
+    "tests/runtime-asset-redundancy.test.js": [
+      "reviewed production-only asset omissions > contains 56 previous paths, 90 retired chest frames, 19 retired scenes and 30 shadowed card files",
+      "reviewed production-only asset omissions > omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs",
+      "reviewed production-only asset omissions > retains shadowed card files after override, renderer or data-loader changes and rejects restored lazy references"
+    ],
+    "tests/selftest-paths.test.js": [
+      "ROOT-06 零依赖自测入口（域目录路径） > node game/selftest.js 跑完输出自测结果，退出码 0，无 ENOENT"
+    ],
+    "tests/shop-transaction-lifecycle.test.js": [
+      "局内商店事务及旧页面动作 > 整理背包正常返回保留货架，但换店后旧背包返回回调不能抢新页面",
+      "局内商店事务及旧页面动作 > 离开背包或帮助改看其他节点后，旧返回动作不覆盖当前页",
+      "局内商店事务及旧页面动作 > 减少动态关闭背包后立即清空弹层，也能正常且仅一次返回商店"
+    ],
+    "tests/skull-sword-effective-session.test.js": [
+      "BOSS逐UID变形含临时初始牌，卡面/详情/aria/选敌同源且重复回手不污染原卡",
+      "不朽斩不能选作注能材料，禁用原因与详情一致，拒绝不扣费不移牌"
+    ],
+    "tests/stealth-term.test.js": [
+      "潜行卡面词条 > 潜匿与破隐说明都接入独立讲解，点击词条不触发卡牌"
+    ],
+    "tests/sys03-altar-restore-txn.test.js": [
+      "奖励② 传说+装备：满包时两张保留，整理后领取一次并可继续探索"
+    ],
+    "tests/sys03-loot-shop-txn.test.js": [
+      "SYS-03 搜刮页事务序（chests.js） > 满包整理通过背包命令入口，返回后保留所选卡与待领状态",
+      "SYS-03 搜刮页事务序（chests.js） > chestTake1 满包拒绝：grantCard false 不入包不标记，卡保持可点（可再点）",
+      "SYS-03 搜刮页事务序（chests.js） > chestTake1 成功后标记已收，takeAll 不重复发放已拾取卡",
+      "SYS-03 搜刮页事务序（chests.js） > takeAll 满包时保留未入包卡，金币只领一次，明确放弃后才离开",
+      "SYS-03 搜刮页事务序（chests.js） > 三选一（chestPick）满包拒绝：不 next、币不发、面板保留可腾格重选",
+      "SYS-03 搜刮页事务序（chests.js） > 三选一成功只领取卡牌，金币独立收下；明确放弃仍结算金币一次",
+      "宝箱开启帧与唯一揭晓 > 手动揭晓取消原780ms自动timer，同箱只揭晓一次且不会重复排音效",
+      "宝箱开启帧与唯一揭晓 > 依次播放开启帧，最终帧结束前不公开牌，领奖才发卡和金币一次",
+      "宝箱开启帧与唯一揭晓 > 开启中跳过后进下一箱，旧帧timer不串新箱或重复领奖",
+      "宝箱开启帧与唯一揭晓 > 开启中挂起到背包，旧timer不抢面板，恢复原结果不重抽或提前发放",
+      "宝箱开启帧与唯一揭晓 > 减少动态直接静态揭晓，帧等待不阻塞收取",
+      "宝箱开启帧与唯一揭晓 > 切到其他节点面板作废开启timer，不抢新界面或提前领奖",
+      "宝箱开启帧与唯一揭晓 > turbo直接到静态结果，卡和币仍只由领取动作发放",
+      "SYS-03 商店买卖事务序（game.run.shop.js） > 缺币拒绝：不扣币、不标记 sold、无卡入包"
+    ],
+    "tests/term-tips-lifecycle.test.js": [
+      "term tooltip pointer lifecycle > does not accumulate release listeners across ordinary presses or cancellations",
+      "term tooltip pointer lifecycle > only releases the current pointer when another finger ends",
+      "term tooltip pointer lifecycle > forgets a cancelled press on navigation, so its late release cannot hide a new hover",
+      "term tooltip pointer lifecycle > releases a long press even after its term is removed (pointerup)",
+      "term tooltip pointer lifecycle > releases a long press even after its term is removed (pointercancel)"
+    ],
+    "tests/xart-z1-batch1.test.js": [
+      "A3-ALTAR-01 祭坛道具献祭路径的复原页跟祭坛身份 > openPocketRestore 道具路径传 opts，不落默认营火休整"
+    ]
+  },
+  "errors": [
+    "AssertionError: expected { …(9) } not to be { …(9) } // Object.is equality",
+    "AssertionError: expected '完成前可回地图整理后重进。' to be '献祭激活 · 选择回赠' // Object.is equality",
+    "AssertionError: expected '可回地图整理，回到此节点继续领取。' to be '已激活 · 回赠待领取' // Object.is equality",
+    "AssertionError: expected '祭坛' to be '祭坛 · 已完成' // Object.is equality",
+    "AssertionError: expected true to be false // Object.is equality",
+    "AssertionError: expected 'preparing' to be '1' // Object.is equality",
+    "AssertionError: expected 'transform:translateY(var(--hand-rest,…' to contain 'var(--hand-rest,284px)'",
+    "AssertionError: expected '' to contain 'left:50%'",
+    "AssertionError: expected 'position:absolute;left:50%;top:auto;b…' to contain 'background:var(--battle-panel)'",
+    "AssertionError: expected '' to contain 'top:54px'",
+    "AssertionError: expected 'position:absolute;left:50%;top:auto;b…' to contain 'padding:10px 12px'",
+    "AssertionError: expected '' to contain 'font-size:20px'",
+    "TypeError: commands.getCardPlayAvailability is not a function",
+    "AssertionError: expected [ 'R', 'accrueGrowth', …(70) ] to deeply equal [ 'R', 'accrueGrowth', …(68) ]",
+    "AssertionError: expected undefined to be '初始攻击' // Object.is equality",
+    "AssertionError: expected 'winter-platform-minimal' to be 'winter-street' // Object.is equality",
+    "AssertionError: expected 'winter-platform-minimal' to be 'frozen-ruins' // Object.is equality",
+    "AssertionError: expected 'winter-platform-minimal' to be 'contaminated-core' // Object.is equality",
+    "AssertionError: expected false to be true // Object.is equality",
+    "TypeError: Cannot read properties of null (reading 'click')",
+    "AssertionError: expected null not to be null",
+    "AssertionError: expected null to be 'inspect-card' // Object.is equality",
+    "AssertionError: expected { uid: 'inspect-card', …(35) } to be null",
+    "TypeError: Cannot read properties of null (reading 'textContent')",
+    "AssertionError: expected '未选择人物，自己，按 Enter 确认目标' to be '自己，按 Enter 确认目标' // Object.is equality",
+    "AssertionError: expected  to have a length of 1 but got +0",
+    "AssertionError: expected 64 to be 284 // Object.is equality",
+    "AssertionError: expected 698 to be greater than or equal to 918",
+    "AssertionError: expected '' to contain '随身牌来源'",
+    "AssertionError: expected [ { …(4) }, { …(4) } ] to deep equally contain ObjectContaining{…}",
+    "AssertionError: expected [ { …(4) }, { …(4) }, { …(4) } ] to deep equally contain ObjectContaining{…}",
+    "AssertionError: expected { …(4) } to match object { file: 'game/css/battle.css', …(1) }",
+    "AssertionError: expected 'winter-platform-minimal' to be 'winter-bridge' // Object.is equality",
+    "AssertionError: the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string",
+    "AssertionError: expected '\\n    \\n    1\\n    \\n    ' to contain '可用'",
+    "TypeError: Cannot read properties of null (reading 'disabled')",
+    "AssertionError: expected { options: [ { …(10) }, …(2) ], …(15) } to be null",
+    "AssertionError: expected '\\n    \\n    1\\n    ✓\\n    ' to contain '已使用'",
+    "TypeError: claim is not a function",
+    "TypeError: actions.chestClaim is not a function",
+    "AssertionError: expected '[[icon:archive]] 宝箱奖励' to contain '第 1 / 2'",
+    "AssertionError: expected '' to be '已入背包 2 张，1 张放不下，整理背包后可重试' // Object.is equality",
+    "AssertionError: expected '' to be '已入背包 1 张，2 张放不下，整理背包后可重试' // Object.is equality",
+    "AssertionError: expected '' to be '「致命穿刺」当前放不下，整理背包后可重试' // Object.is equality",
+    "AssertionError: expected '' to contain '放不下'",
+    "AssertionError: expected '' to contain '1 张放不下'",
+    "AssertionError: expected '' to be '已入背包 0 张，1 张放不下，整理背包后可重试' // Object.is equality",
+    "AssertionError: expected '' to contain '「致命穿刺」当前放不下'",
+    "AssertionError: expected null to be truthy",
+    "AssertionError: expected '' to be '「黑市装备」已入本次远征背包' // Object.is equality",
+    "AssertionError: expected '' to be '保存失败，请重试' // Object.is equality",
+    "AssertionError: expected '' to be '已入背包 2 张，存档放不下，请检查存储空间' // Object.is equality",
+    "AssertionError: expected '' to be '已入背包 2 张' // Object.is equality",
+    "AssertionError: expected [ …(5) ] to deeply equal []",
+    "AssertionError: expected '\\n    测试三选一领取奖励奖励可分别领取\\n    \\n       …' to contain '其余卡牌永久放弃，无法找回'",
+    "AssertionError: expected '选择手牌，或结束回合' to be '【初始攻击】· 选择 高亮敌人 · Esc 取消' // Object.is equality",
+    "AssertionError: expected '已完成 · 内容已结算，仍可通行。' to contain '已探索'",
+    "AssertionError: expected [ '遭遇战 · 路线1（节点 2） · 未完成', …(1) ] to deeply equal [ Array(2) ]",
+    "AssertionError: expected '遭遇战' to be '遭遇战 · 已完成' // Object.is equality",
+    "AssertionError: expected '\\n    \\n      \\n      可以前往遭遇战\\n      …' to contain '已探索'",
+    "TypeError: state.actions.chestClaim is not a function",
+    "AssertionError: expected '商店' to be '商店 · 已完成' // Object.is equality",
+    "AssertionError: expected '金币' to be '金币 · 已完成' // Object.is equality",
+    "AssertionError: expected '木材' to be '木材 · 已完成' // Object.is equality",
+    "AssertionError: expected '物资点' to be '物资点 · 已完成' // Object.is equality",
+    "AssertionError: expected '口粮' to be '口粮 · 已完成' // Object.is equality",
+    "AssertionError: expected '钥匙' to be '钥匙 · 已完成' // Object.is equality",
+    "AssertionError: expected '火堆' to be '火堆 · 已完成' // Object.is equality",
+    "AssertionError: expected '未知事件' to be '未知事件 · 已完成' // Object.is equality",
+    "AssertionError: expected '物资格' to be '物资格 · 已完成' // Object.is equality",
+    "AssertionError: expected '待领奖 · 可回地图整理，回到此节点继续领取。' to be '已激活 · 回赠待领取' // Object.is equality",
+    "AssertionError: expected '可回地图整理，回到此节点继续领取。' to be '待领取职业补给' // Object.is equality",
+    "AssertionError: expected 'modal' to be 'idle' // Object.is equality",
+    "AssertionError: expected undefined to be true // Object.is equality",
+    "AssertionError: game/src/core/art.js: expected '65b909a1848ee71c64cec39c8d709475fc053…' to be 'df02fc4d728391263fdb442f03002fa6e5f99…' // Object.is equality",
+    "AssertionError: expected [ …(4) ] to deeply equal []",
+    "AssertionError: expected +0 to be 30 // Object.is equality",
+    "AssertionError: 自测未通过：",
+    "TypeError: Cannot read properties of undefined (reading 'ovBody')",
+    "TypeError: Cannot read properties of undefined (reading 'querySelector')",
+    "TypeError: Cannot read properties of null (reading 'querySelector')",
+    "TypeError: Cannot read properties of null (reading 'hidden')",
+    "AssertionError: expected '\\n    祭坛回赠 · 传说卡与装备卡领取奖励奖励可分别领取\\n    …' to contain '放不下的保留'",
+    "AssertionError: expected '还差 2 币' to be '余额不足：还差 2 币' // Object.is equality",
+    "AssertionError: expected '/* ==================================…' to match /openPocketRestore\\(Math\\.min\\(2, rest…/",
+    "Error: [vitest-worker]: Timeout calling \"onTaskUpdate\""
+  ]
+}

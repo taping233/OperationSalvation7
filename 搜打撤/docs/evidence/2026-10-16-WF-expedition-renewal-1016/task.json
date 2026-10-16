@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-expedition-renewal-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "落实首块节点/背包规则及获批宝箱总览→开箱卡牌弹层→返回奖励界面流程；测试按老板要求留到最后统一进行",
+  "paths": [
+    "game/src/run",
+    "game/src/hub/game.bag.js",
+    "game/src/hub/game.bag.settle.js",
+    "game/src/battle/bag/battle.bag.js",
+    "game/src/battle/view/battle.view.js",
+    "game/src/agent/agent.state.js",
+    "game/src/hub/run-save-validation.js",
+    "game/src/core/map-node-state.js",
+    "game/src/ui/chest-reward-overview.js",
+    "game/css/chest-reward-overview.css",
+    "game/data/map.json",
+    "tests",
+    "docs/rules.md",
+    "docs/save-format.md",
+    "docs/agent-protocol.md",
+    "docs/evidence/2026-10-16-WF-expedition-renewal"
+  ],
+  "doneWhen": [
+    "战斗各背包入口不能打开或操作背包",
+    "未完成节点可返回地图整理并重进，候选和领取进度不刷新不重复",
+    "战斗完成与事件选择阻止重刷，商店移动离开前可重进",
+    "宝箱总览、按箱型领取和独立卡牌弹层已接入，关闭卡牌返回奖励界面",
+    "实现交付，测试与实页按老板要求留到最后统一验证"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [],
+  "unverified": [
+    "老板要求奖励总览修正后的测试/静态检查/实页留到最后统一进行；阶段全量已中止，旧定向不覆盖本版"
+  ],
+  "updatedAt": "2026-10-16T07:07:06.861Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

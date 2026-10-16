@@ -1,0 +1,62 @@
+{
+  "channel": "builtin-imagegen",
+  "reference": "C:/Users/太平/.codex/generated_images/01a1436b-a680-73f0-bc69-f8b149b25bef/exec-488d8aa1-f72d-45ff-94ee-f9fc6b664f18.png",
+  "referenceSha256": "cb4d8c62633282683ef6161b9ca85ca3bbb19c5c18dfd9e8af2ca13ca13db4d3",
+  "items": [
+    {
+      "path": "scenes/battle/platform-minimal-1016/far.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置imagegen，老板认可简约轨道站概念的分层）",
+      "bytes": 34880,
+      "sha256": "719a8b430d36940d7ae920eb663273430ef100caf191556c478ac55663428257",
+      "source": "docs/evidence/2026-10-16-WF-battle-platform-minimal/request.json",
+      "original": "C:\\Users\\太平\\.codex\\generated_images\\01a1436b-a680-73f0-bc69-f8b149b25bef\\exec-55fcb9f8-3bbb-476a-8d4d-02a8a2e89179.png",
+      "originalSha256": "c614290b0168e0d3e0c22c5ed382581b66091102ebea73b3498745bd62092c55",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "alphaExtrema": null
+    },
+    {
+      "path": "scenes/battle/platform-minimal-1016/ground.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置imagegen，老板认可简约轨道站概念的分层）",
+      "bytes": 91286,
+      "sha256": "60f301fc649f3cae899be2bdcb682554e878ff5d2d3980c4e3ea225c93cf9e3c",
+      "source": "docs/evidence/2026-10-16-WF-battle-platform-minimal/request.json",
+      "original": "C:\\Users\\太平\\.codex\\generated_images\\01a1436b-a680-73f0-bc69-f8b149b25bef\\exec-b4dd56f8-4c86-4d94-99c0-7f0d8121cec3.png",
+      "originalSha256": "abc9d1010f0612a2ce63725c934a300ef8420b0100c37a9d9e99bf114da552cd",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "path": "scenes/battle/platform-minimal-1016/foreground.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置imagegen，老板认可简约轨道站概念的分层）",
+      "bytes": 52976,
+      "sha256": "c7d73002402739fe92a1bcff4db27a131fd0a967ff9cbb569fe2ac64fb31f2fa",
+      "source": "docs/evidence/2026-10-16-WF-battle-platform-minimal/request.json",
+      "original": "C:\\Users\\太平\\.codex\\generated_images\\01a1436b-a680-73f0-bc69-f8b149b25bef\\exec-e65c3ba0-e675-4790-b317-4c09fe238b08.png",
+      "originalSha256": "e57b7596d7c0db8faab8693cd7cd2e520781f1a50405f7f67563d5415146979c",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ],
+  "manifestCount": 1427
+}
