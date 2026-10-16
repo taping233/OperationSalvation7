@@ -1,0 +1,62 @@
+{
+  "iteration": 2,
+  "status": "implementation-ready-awaiting-parent-real-pointer-verification",
+  "baseline": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "checks": {
+    "targetTests": {
+      "files": 8,
+      "passed": 128,
+      "failed": 0,
+      "log": "target-tests-r2.log"
+    },
+    "eslint": {
+      "passed": true,
+      "log": "eslint-r2.log"
+    },
+    "nodeSyntax": {
+      "passed": true,
+      "scope": [
+        "battle.layers.js"
+      ]
+    },
+    "postcss": {
+      "passed": true,
+      "nodes": 159
+    },
+    "ownDiffWhitespace": {
+      "passed": true
+    }
+  },
+  "browser": {
+    "operator": "parent task",
+    "performedByThisWorker": false,
+    "r1Evidence": [
+      "../2026-10-16-WF-cloud-play-eight-hours/screenshots/27-battle-default-after-r1.png",
+      "../2026-10-16-WF-cloud-play-eight-hours/screenshots/28-battle-hover-after-r1.png"
+    ],
+    "parentObserved": [
+      "resting hand folded",
+      "HUD readable",
+      "hover complete without crop"
+    ],
+    "r2Pending": [
+      "one pointer tap from folded bottom bridge",
+      "direct drag from bottom bridge",
+      "left/centre/right hover sweep"
+    ]
+  },
+  "limits": [
+    "DOM event simulation does not prove actual browser hit testing",
+    "one parent-observed click failure has no event-target trace; bridge input gap is verified statically and by constructed regression",
+    "full test suite/build/remote CI/multi-size not run"
+  ],
+  "sha256": {
+    "game/css/battle-stage.css": "92762b097987754ab66c43eb75c62e3f9b9185d32514424a655df51b237f56f0",
+    "game/src/battle/view/battle.hand-layout.js": "706562cd5559ec0a8edae122c152a638dc5c23ce0a89c5ac1f619dc9f1253f6b",
+    "game/src/battle/view/battle.layers.js": "1830224b1a7ec8c0f7212bbc4229e015fe9ad977df5f9b06b01a77dda6a2f6e3",
+    "tests/battle-hand-layout.test.js": "00a6c24875d7b077faca8c2a6d998ecf2b6581a29089ac436c575c3a6cfee7da",
+    "tests/battle-decision-readability.test.js": "5b5f258726c1afca450570ceb9bbfeaf5b552c288c5b19fff1bc54fb6c6da59e",
+    "tests/battle-entry-view.test.js": "3f5a9fd757dac891d91a5da5d3762eb1ef202210684950747f169d2a9a46cbaf",
+    "tests/battle-hand-inspector.test.js": "3ca574ba71f86665da53d60e77cad2f38b0013eb9c3f08e140d565feb548864e"
+  }
+}

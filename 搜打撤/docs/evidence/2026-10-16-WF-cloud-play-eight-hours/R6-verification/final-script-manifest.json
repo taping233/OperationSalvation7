@@ -1,0 +1,54 @@
+[
+  {
+    "path": "collect_build_metrics.mjs",
+    "sha256": "c158f324c82e1425a256946eaca02460169987134b28eb0abb10a585f8604387"
+  },
+  {
+    "path": "copy_git_metadata.py",
+    "sha256": "a430c5b32ad4ff7190c3ed586bc6b8440c02d83da25e92ecdb7f3dae5e7892d3"
+  },
+  {
+    "path": "dependencies.py",
+    "sha256": "1fd6c2455804f1791bc6817dfa706214913cbba39d9766aebffac70a9e41d755"
+  },
+  {
+    "path": "diagnose_index.py",
+    "sha256": "9aea4d5180f311110b73bd4e6d02aa814cfd6d57a9e7c1934bbfc95ee5d0ccd2"
+  },
+  {
+    "path": "finalize_report.py",
+    "sha256": "294953a14dc33de6110783de1615e9d67d8ca550a7031147ce5e5a1c43b9b31b"
+  },
+  {
+    "path": "inspect_snapshot.py",
+    "sha256": "356099a17df9f3c381ce6826933cbeba2e157dcd627bc9a9405aecce265d4325"
+  },
+  {
+    "path": "preflight_asset_review.mjs",
+    "sha256": "ef74d62a1bb83d2ed29f84eaff5140335865935d32ab50bdebe5c4b4319006c1"
+  },
+  {
+    "path": "prepare_checks.py",
+    "sha256": "e2352586073f6b27afd695a497a5c571c4ef96876fef063c5973b26ebd9b2aba"
+  },
+  {
+    "path": "run_auxiliary.py",
+    "sha256": "83a7cc14b8db29938a022ad86893db01717b311aed4b9b594549987fd97477ce"
+  },
+  {
+    "path": "run_checks.py",
+    "sha256": "8d3afa69870567ee141fd32a463bd54972257828b0df255ca197e3ac26b7eae8"
+  },
+  {
+    "path": "snapshot.py",
+    "sha256": "b2af3c038b32a7b2473c5e040fc98bee5a27da8db02a9c9c975a32394779eba9"
+  },
+  {
+    "path": "verify_assets.mjs",
+    "sha256": "8d4a6ab90f1db1618a7058bcc5e588072a6179bdeb3c5607ac6b540e1e8d0f92"
+  },
+  {
+    "path": "verify_frozen_inputs.py",
+    "sha256": "c983c86abff0af645df623703231c19c810950dc0b0b601065709c4de1dce2de"
+  }
+]

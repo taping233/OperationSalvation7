@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const state = vi.hoisted(() => ({
   game: null, saveGame: null, payloadFactory: null, transition: null, actions: null, chestDone: null,
-  activeSlot: 1, runId: 'test-run', commands: null, commandOptions: null, readReceipt: null,
+  extraReward:null, activeSlot: 1, runId: 'test-run', commands: null, commandOptions: null, readReceipt: null,
   commitResponses: [], commitApplied: false, pending: null, setPending: null, clearPending: null, random: null,
 }));
 
@@ -38,6 +38,7 @@ beforeEach(() => {
   vi.resetModules();
   state.actions = {};
   state.chestDone = null;
+  state.extraReward = null;
   state.activeSlot = 1;
   state.runId = 'test-run';
   state.game ||= {};
@@ -88,11 +89,12 @@ beforeEach(() => {
         return { eggBattles: B.data.eggBattles, persisted: false };
       }),
     },
-    Cards: { SHA: { id: 'starter-attack' }, all: () => [{ id: 'legend', rarity: '传说' }], isRandomObtainable: () => true, cardHTML: () => '' },
+    Cards: { SHA: { id: 'starter-attack' }, all: () => [{ id: 'legend', name:'额外传说', type:'装备', rarity: '传说' }], isRandomObtainable: () => true, cardHTML: () => '' },
     Meta: { track: vi.fn(), xpMultiplier: () => 1, publishBattleProgress: vi.fn() },
     Chests: {
       rollDrops: vi.fn(() => [{ kind: 'small' }]), dropText: () => '小宝箱',
       open: vi.fn((_game, _drops, done) => { state.chestDone = done; }),
+      restore:vi.fn((_game, saved, done) => { state.extraReward = { saved, done }; return true; }),
     },
   };
 });
@@ -115,7 +117,17 @@ it('forwards the real battle review and boss identity to death settlement withou
 async function openAndFinishChest(onBattleEnd, opts) {
   await onBattleEnd(opts, [], true, []);
   expect(state.chestDone).toBeTypeOf('function');
-  return state.chestDone();
+  return finishChestRewards();
+}
+
+// 模拟玩家完成普通箱，再逐张领取独立持久化的额外传说；事务断言仍覆盖真实续流。
+async function finishChestRewards() {
+  const result = await state.chestDone();
+  if (!state.extraReward) return result;
+  const { saved, done } = state.extraReward;
+  state.extraReward = null;
+  saved.current.cards.forEach(card => state.game.grantCard(card));
+  return done();
 }
 
 async function mountRealRetryOverlay() {
@@ -189,6 +201,11 @@ describe('真实战斗奖励刷新续流', () => {
     reload();
     if (isBoss) state.commitResponses.push({ ok:false, code:'WRITE_FAILED', message:'restored reward retry' });
     state.actions.chestContinue();
+    if (isBoss) {
+      expect(state.commands.commitAttempt).not.toHaveBeenCalled();
+      state.actions.chestTake1({ i:0 });
+      state.actions.chestContinue();
+    }
     await vi.waitFor(() => expect(state.commands.commitAttempt).toHaveBeenCalledTimes(1));
     if (isBoss) {
       await vi.waitFor(() => expect(state.actions.battleSettleRetry).toBeTypeOf('function'));
@@ -295,7 +312,7 @@ describe('战后结算事务接线与失败重试', () => {
     await Promise.all([first, duplicate]);
     expect(window.SDT.Chests.open).toHaveBeenCalledTimes(1);
 
-    await state.chestDone();
+    await finishChestRewards();
     expect(state.game.grantCard).toHaveBeenCalledTimes(1);
     expect(state.game.visited['0,1']).toBe(1);
     expect(state.commands.createAttempt).toHaveBeenCalledTimes(1);
@@ -306,7 +323,7 @@ describe('战后结算事务接线与失败重试', () => {
       afterRun: { visited: { '0,1': 1 }, layerIdx: 0, trackPos: 1 }, elapsedDelta: 10,
     });
     expect(window.SDT.Base.data.eggBattles).toBe(0);
-    expect(state.saveGame).not.toHaveBeenCalled();
+    expect(state.saveGame).toHaveBeenCalledTimes(1); // 额外传说待领奖先写普通Run快照
     expect(window.SDT.Base.save).not.toHaveBeenCalled();
     expect(state.game.state).toBe('battleSettlement');
     expect(state.pending).toEqual({ slotId: 1, runId: 'test-run' });

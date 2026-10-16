@@ -398,9 +398,6 @@
     background: rgba(10, 12, 14, .94); color: var(--ak-white); clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%); font-size: 13px; letter-spacing: 1px;
     box-shadow: 0 8px 26px rgba(0, 0, 0, .45); pointer-events: none; opacity: 1; transition: opacity .6s; }
   .rmb-hint-toast.out { opacity: 0; }
-#routePanel { border-color: var(--ak-line); border-top: 2px solid var(--ak-yellow); }
-#routePanel .route-title { color: var(--ak-white); font-weight: 800; letter-spacing: .3em; font-size: 13px; }
-#routePanel .route-help { margin-top: 5px; color: var(--ak-sub); font-size: 12px; line-height: 1.5; }
 #devPanel[hidden] { display: none !important; }
 
 /* ── 罗德岛终端 · 全局原子：硬切角标签、标题、危险条纹 ── */

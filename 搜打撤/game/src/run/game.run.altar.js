@@ -126,15 +126,16 @@ export function openEntrySupply() {
   supply.entered = true;   // 记录打开状态；移动闸门仅在补给全部领取后解锁。
   game.state = 'modal';
   let saveFailed = saveGame() === false;
+  let claimNotice = '';
   const cards = () => supply.cardIds.map(id => SDT.Cards.all().find(card => card.id === id));
   const isCurrent = () => entrySupplyAt(game) === supply;
   const finish = () => { setBagReturnHook(null); UI.hideOverlay(); finishInstant(); };
   const showResult = () => {
     const complete = supply.taken.length === supply.cardIds.length;
-    UI.showOverlay('', rewardSceneHTML({ className:`pg entry-reward-scene entry-supply-strips${complete ? ' reward-complete' : ''}`, title:'随行补给', source:characterName(game.myClass), count:supply.cardIds.length - supply.taken.length,
-      cards:complete ? '<div class="entry-reward-complete"><span class="entry-complete-symbol" aria-hidden="true">[[icon:exit]]</span><p>已领取所有奖励</p><button type="button" class="entry-complete-confirm" data-act="clsEntryContinue" aria-label="继续探索">✓</button></div>' : cards().map((card, i) => supply.taken.includes(i) ? '' : card ? `<article class="reward-unit"><button class="reward-card" data-act="clsEntryCard" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button><div class="entry-reward-label">${esc(card.name)}</div><div class="entry-reward-amount"><span>×</span>1</div><button type="button" class="reward-claim" data-act="entrySupplyTake" data-i="${i}">收下</button></article>` : '<p class="reward-empty">该职业补给暂不可用</p>').join(''),
-      actions:'',
-      footer:`<button class="reward-bag" data-act="entrySupplyBag">整理背包</button>${saveFailed ? '<p class="entry-save-warning" role="status">当前进度未保存，请查看存档错误提示。</p>' : ''}${supply.taken.length < supply.cardIds.length ? '<span class="reward-notice">领完全部入城补给后才能前往其他地点；放不下时请先整理背包</span>' : ''}`,
+    UI.showOverlay('', rewardSceneHTML({ className:`pg entry-reward-scene entry-supply-strips${complete ? ' reward-complete' : ''}`, title:'随行补给', source:characterName(game.myClass), rule:complete ? '补给已齐备，确认后继续探索' : '点卡面查看详情，逐张收下补给', count:supply.cardIds.length - supply.taken.length,
+      cards:complete ? '<div class="entry-reward-complete"><span class="entry-complete-symbol" aria-hidden="true">[[icon:exit]]</span><p>已领取所有奖励</p><button type="button" class="entry-complete-confirm" data-act="clsEntryContinue"><span aria-hidden="true">✓</span> 继续探索</button></div>' : cards().map((card, i) => supply.taken.includes(i) ? '' : card ? `<article class="reward-unit"><button class="reward-card" data-act="clsEntryCard" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button><div class="entry-reward-label">${esc(card.name)}</div><div class="entry-reward-amount"><span>×</span>1</div><button type="button" class="reward-claim" data-act="entrySupplyTake" data-i="${i}">收下</button></article>` : '<p class="reward-empty">该职业补给暂不可用</p>').join(''),
+      actions:`<div class="entry-supply-status" role="status" aria-live="polite"><span>入城准备</span><b>${supply.taken.length} / ${supply.cardIds.length}</b><p>补给已领取</p><small>${complete ? '确认后踏入风雪' : '领完全部补给后可继续探索'}</small></div>`,
+      footer:`<button class="reward-bag" data-act="entrySupplyBag">整理背包</button>${saveFailed ? '<p class="entry-save-warning" role="status">当前进度未保存，请查看存档错误提示。</p>' : ''}${complete ? '' : `<span class="reward-notice" role="status">${claimNotice || '领完全部入城补给后才能前往其他地点；放不下时请先整理背包'}</span>`}`,
     }), 'page');
     const active = nodeActionBinding(game, UI, complete ? 'clsEntryContinue' : 'entrySupplyBag');
     UI.act('clsEntryContinue', () => { if (isCurrent() && active() && supply.taken.length === supply.cardIds.length) finish(); });
@@ -151,7 +152,13 @@ export function openEntrySupply() {
     if (!Number.isInteger(index)) return;
     const received = claimEntrySupply(game, { findCard:id => SDT.Cards.all().find(card => card.id === id),
       canReceive:card => game.canReceiveCard ? game.canReceiveCard(card) : usedSlots() < bagCap(), newUid, index });
-    if (!received.length) { UI.log('[[icon:bag]] 当前补给未领取，请整理背包后再试', 'warn'); return; }
+    if (!received.length) {
+      claimNotice = '当前补给未领取，仍保留在入口。请整理背包后再试。';
+      UI.log('[[icon:bag]] 当前补给未领取，请整理背包后再试', 'warn');
+      showResult();
+      return;
+    }
+    claimNotice = '';
     document.getElementById('cardZoom')?._closeCardZoom?.(true);
     if (supply.taken.length === supply.cardIds.length) consumeCurrentCell();
     saveFailed = saveGame() === false;
@@ -161,8 +168,8 @@ export function openEntrySupply() {
   setBagReturnHook(() => { if (isCurrent()) openEntrySupply(); });
   if (supply.taken.length) { showResult(); return true; }
   nodeShell({ tone:'entry', asset:'scene-door-bg', icon:'', title:'入城补给',
-    sub:'随行的职业补给已留在城门旁。收下所需的卡牌，再踏入风雪。',
-    body:nodeOpt('clsEntryReveal','查看职业补给',`可领取最多 ${supply.cardIds.length} 张${esc(characterName(game.myClass))}的职业卡，放不下的保留在入口。`),
+    sub:'随行的职业补给已留在城门旁。领完全部补给，再踏入风雪。',
+    body:nodeOpt('clsEntryReveal','查看职业补给',`本次补给共 ${supply.cardIds.length} 张${esc(characterName(game.myClass))}的职业卡，全部领取后才能继续探索；放不下时可先整理背包。`),
     foot:saveFailed ? '<p class="entry-save-warning">当前进度未保存，请查看存档错误提示。</p>' : '',
   });
   const active = nodeActionBinding(game, UI, 'clsEntryReveal');
@@ -234,7 +241,7 @@ export function openAltarRitual(def) {
       fragOpt +
       (game.altarItemSacrificed
         ? nodeOpt('altarItemUsed', '献祭道具 · 已用过', '这座祭坛的道具献祭已受理过一次，不再 repeat——换其他方式激活，或直接离开', '', 'disabled title="道具献祭每座祭坛限一次"')
-        : game.ownedCards.some(o => o.card.type === '道具')
+        : sacrificeCards('道具').length > 0
           ? nodeOpt('altarItemRestore', '献祭道具 · 复原卡牌', '献祭 1 张道具卡，从消耗区复原 2 张卡牌（每座祭坛限一次）')
           : nodeOpt('altarItemNoItem', '献祭道具 · 复原卡牌', '背包里没有道具卡——先弄到一张道具卡，再回来献祭复原', '', 'disabled title="背包里没有道具卡"')) +
       nodeOpt('altarLeave', '离开', '祭坛保持沉睡——回到当前格子，稍后再来'),
@@ -254,7 +261,7 @@ export function openAltarRitual(def) {
   UI.act('altarItemRestore', () => {
     if (!active() || game.altarActivated) return;
     if (game.altarItemSacrificed) { UI.log('[[icon:crystal]] 这座祭坛的道具献祭已经受理过了', 'warn'); return; }
-    if (!game.ownedCards.some(o => o.card.type === '道具')) { UI.log('[[icon:bag]] 背包里没有道具卡可供献祭', 'warn'); return; }
+    if (!sacrificeCards('道具').length) { UI.log('[[icon:bag]] 背包里没有道具卡可供献祭', 'warn'); return; }
     const restorableN = game.usedPocket.filter(p => FIRE_RESTORABLE(p.card)).length;
     if (!game.usedPocket.length || !restorableN) { UI.log('[[icon:bag]] 消耗区里没有可复原的卡牌——先去战斗吧', 'warn'); return; }
     openBagSacrifice(1, (chosen) => {
@@ -270,7 +277,7 @@ export function openAltarRitual(def) {
   });
   UI.act('altarOn3', () => {
     if (!active() || game.altarActivated) return;
-    if (game.ownedCards.length < 3) { UI.log('[[icon:bag]] 背包卡牌不足 3 张，无法激活祭坛', 'warn'); return; }
+    if (sacrificeCards().length < 3) { UI.log('[[icon:bag]] 背包卡牌不足 3 张，无法激活祭坛', 'warn'); return; }
     openBagSacrifice(3, (chosen) => {
       markActivated();
       game.altarRewardPending = true;
@@ -400,21 +407,33 @@ export function openBossGate() {
   UI.refresh(game);
 }
 
+// 献祭只支付普通随身背包；安全格或容器内卡牌需先由玩家移回背包。
+function canSacrificeCard(owned, filterType) {
+  return !!owned?.card && !owned.safe && !owned.stored && !owned.pouchOf
+    && (!filterType || owned.card.type === filterType);
+}
+function sacrificeCards(filterType) { return game.ownedCards.filter(owned => canSacrificeCard(owned, filterType)); }
+
 // 背包献祭选卡器（2026-09-06 #26）：从背包选 n 张卡，确认后消耗并回调
 // onCancel：取消时的回流（缺省回祭坛面板）
 function openBagSacrifice(n, done, onCancel, filterType) {
   game.state = 'modal';
   const sel = new Set();
   const back = onCancel || (() => openAltarRitual(curLayer()?.logical?.[game.trackPos]?.def));
-  const eligible = filterType ? game.ownedCards.filter(o => o.card.type === filterType) : game.ownedCards;
+  let eligible = [];
   const slotId = getActiveSlot(), seed = game.seed, runToken = game.discoveredPairs, map = game.layerData;
   const layerIdx = game.layerIdx, trackPos = game.trackPos;
   const current = () => getActiveSlot() === slotId && game.seed === seed && game.discoveredPairs === runToken &&
     game.layerData === map && game.layerIdx === layerIdx && game.trackPos === trackPos;
   let finished = false;
+  let hand = null;
   const render = () => {
     if (finished || !current()) return;
+    const scrollTop = hand?.scrollTop ?? 0;
     game.state = 'modal';
+    eligible = sacrificeCards(filterType);
+    const allowed = new Set(eligible.map(owned => owned.uid));
+    for (const uid of sel) if (!allowed.has(uid)) sel.delete(uid);
     setBagReturnHook(render);
     // 2026-09-10 留言 #31/#32：原文字行看不清也看不到卡面——改为真卡面网格（口径同火堆复原），
     // 点卡选中/取消，选中卡挂黄铜图钉角标
@@ -426,16 +445,20 @@ function openBagSacrifice(n, done, onCancel, filterType) {
       </button>`).join('');
     UI.showOverlay('[[icon:crystal]] 选择要献祭的卡牌', `
       <p class="ov-note">选择 <b>${n}</b> 张${filterType ? `<b>${escAttr(filterType)}</b>卡` : '卡牌'}献祭（已选 <b>${sel.size}</b>）</p>
+      <p class="ov-note">仅可献祭普通随身背包卡牌；安全格和容器内的卡牌需先移回背包。</p>
       <div class="bt-hand sac-hand">${rows || '<p class="ov-empty">背包里没有符合条件的卡牌</p>'}</div>
       <div class="scene-ops">
         <button class="ov-btn ok" data-act="sacConfirm" ${sel.size !== n ? 'disabled' : ''}>[[icon:crystal]] 确认献祭</button>
         <button class="ov-btn" data-act="sacCancel">[[icon:exit]] 取消</button>
       </div>`, 'discover');
+    // 重绘会替换滚动容器；只延续本次选牌的位置，新会话从顶部开始。
+    hand = UI.el?.ovBody?.querySelector('.sac-hand');
+    if (hand) hand.scrollTop = scrollTop;
     const active = altarPageBinding('sacConfirm');
     UI.act('sacPick', (d) => {
       if (finished || !active()) return;
       const o = eligible.find(x => x.uid === d.uid);
-      if (!o) return;
+      if (!o || !game.ownedCards.includes(o) || !canSacrificeCard(o, filterType)) return;
       if (sel.has(o.uid)) sel.delete(o.uid);
       else if (sel.size < n) sel.add(o.uid);
       Sfx.tick();
@@ -448,8 +471,8 @@ function openBagSacrifice(n, done, onCancel, filterType) {
     });
     UI.act('sacConfirm', () => {
       if (finished || !active()) return;
-      const chosen = eligible.filter(o => sel.has(o.uid) && game.ownedCards.includes(o));
-      if (chosen.length !== n) return;
+      const chosen = eligible.filter(o => sel.has(o.uid) && game.ownedCards.includes(o) && canSacrificeCard(o, filterType));
+      if (chosen.length !== n) { render(); return; }
       finished = true;
       setBagReturnHook(null);
       game.ownedCards = game.ownedCards.filter(o => !sel.has(o.uid));
@@ -489,7 +512,7 @@ export function openEmergencyModal() {
       UI.refresh(game);
       return;
     }
-    const payment = emergencyExitPaymentState(game.ownedCards.length);
+    const payment = emergencyExitPaymentState(sacrificeCards().length);
     nodeShell({
       tone: 'exit', icon: '[[icon:cross]]', title: '紧急撤离点',
       sub: '紧急信标过载——撤离前必须献祭 3 张卡牌作为代价',
@@ -503,7 +526,7 @@ export function openEmergencyModal() {
     const active = altarPageBinding('stayHere');
     UI.act('payExit', () => {
       if (!active()) return;
-      if (!emergencyExitPaymentState(game.ownedCards.length).canPay) {
+      if (!emergencyExitPaymentState(sacrificeCards().length).canPay) {
         UI.log('[[icon:cross]] 背包卡牌不足 3 张，无法支付紧急撤离的代价', 'warn');
         SDT.Sound.sfx('error');
         return;
@@ -719,7 +742,7 @@ function renderExtractStash() {
           ${extractLeft.length ? `<button class="ov-btn ok" data-act="exAll" ${room > 0 && totalLeft <= room ? '' : 'disabled'}
             style="width:100%">[[icon:archive]] 全部入库（${Math.min(totalLeft, room)}/${totalLeft} 张可入）</button>` : ''}
           <div class="dep-foot" style="margin-top:10px">
-            ${extractLeft.length ? '<button class="ov-btn ok" data-act="exSmart" style="width:100%;margin-top:8px">[[icon:sparkles]] 智能整理（优先价值最高 · 上限仓库空格）</button>' : ''}
+            ${extractLeft.length ? '<button class="ov-btn ok" data-act="exSmart" style="width:100%;margin-top:8px" title="按仓库剩余空格，优先入库价值最高的卡牌" aria-label="按仓库剩余空格，优先入库价值最高的卡牌">[[icon:sparkles]] 优先入库高价值卡</button>' : ''}
             <button id="btnDeploy" data-act="exFinish">[[icon:check]] 完成整理${extractLeft.length ? `（${totalLeft} 张将丢失）` : ''}</button>
           </div>
         </section>
@@ -796,7 +819,7 @@ function showExtractDone(receipt) {
   extractLeft = null;
   // 跑局记录改读同一回执：结局/层/行动/时长以回执为准（SYS-02 唯一事实源）
   SDT.Agent?.recorder?.recordRun(r.outcome || (game.bossKilled ? 'clear' : 'extract'),
-    { receipt, carriedCards: (game.ownedCards || []).map(o => ({ card: o.card, count: 1 })) });
+    { receipt, savedCards: Array.isArray(r.savedCards) ? r.savedCards : [] });
   const s = Math.floor(Number(r.durationSec) || 0);
   const timeStr = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
   const wasClear = r.outcome === 'clear';
@@ -806,7 +829,7 @@ function showExtractDone(receipt) {
   const gainRow = `<p class="result-line"><span class="ov-note">[[icon:sparkles]] 本局真实入库 <b>${net.cardsStashed ?? 0}</b> 张 · 消耗区带回 <b>${net.pocketKept ?? 0}</b> 张 ·
     [[icon:wood]] 木材 ×<b>${net.wood ?? 0}</b> · [[icon:bread]] 口粮 ×<b>${net.rations ?? 0}</b> · [[icon:medal]] 首探经验 <b class="gold">+${r.firstExplore?.xp ?? 0}</b></span></p>`;
   const lossRow = (loss.lostCount || loss.pocketLost)
-    ? `<p class="ov-note">[[icon:cross]] 散失：未入库 ${loss.lostCount || 0} 张${loss.lostNotable?.length ? `（${loss.lostNotable.map(c => `【${esc(c.name)}】×${c.count}`).join('、')}）` : ''} · 消耗区散失 ${loss.pocketLost || 0} 张</p>`
+    ? `<p class="ov-note">[[icon:cross]] 散失：未入库 ${loss.lostCount || 0} 张${loss.lostNotable?.length ? `（其中传说/史诗包括：${loss.lostNotable.map(c => `【${esc(c.name)}】×${c.count}`).join('、')}）` : ''} · 消耗区散失 ${loss.pocketLost || 0} 张</p>`
     : '';
   nodeShell({
     tone: 'exit',

@@ -1,0 +1,76 @@
+{
+  "at": "2026-10-16T00:06:27Z",
+  "status": "read-only-preparation-not-publication",
+  "repository": {
+    "full_name": "taping233/OperationSalvation7",
+    "private": true,
+    "default_branch": "master",
+    "permissions": {
+      "push": true,
+      "admin": true
+    }
+  },
+  "remote": {
+    "master": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+    "base_tree": "869f3477c070304d5e6a96cfba395c42ab143e80",
+    "master_matches_local_baseline": true
+  },
+  "connector": {
+    "bulk_push_or_path_upload_tool": false,
+    "create_blob_content": "actual string only; utf-8 or base64",
+    "create_tree_elements": "arbitrary object array; GitHub API documents inline UTF-8 content support",
+    "inline_tree_content_live_write_tested": false,
+    "request_body_size_limit": "not exposed; not live-write tested"
+  },
+  "binary_stat": {
+    "frames": 263,
+    "frames_bytes": 22340844,
+    "frames_max_bytes": 202160,
+    "frames_base64_chars": 29788120,
+    "wu_bytes": 1011996,
+    "wu_base64_chars": 1349328,
+    "room_bytes": 607272,
+    "room_base64_chars": 809696,
+    "runtime_binary_count": 265,
+    "runtime_binary_bytes": 23960112,
+    "runtime_binary_base64_chars": 31947144
+  },
+  "observed_stdout_truncation": {
+    "requested_base64_chars": 1349328,
+    "received_chars": 1048606,
+    "max_output_tokens_requested": 1500000,
+    "complete": false,
+    "conclusion": "single complete-file stdout is unsafe for Wu; use bounded chunks"
+  },
+  "wu_chunked_read_proof": {
+    "path": "game/assets/portraits/personnel/wu-default-cutout-v1.webp",
+    "bytes": 1011996,
+    "git_blob_sha": "ef9054695ebea5f36f0dad7cfa31fc46c00114b3",
+    "sha256": "68fe23ed56b3b9fee7e3fbfef64546ddc260da282897b87703034446b00432de",
+    "mtime_ns": 1792095686395235300,
+    "chunks": [
+      {
+        "offset": 0,
+        "raw_bytes": 393216,
+        "base64_chars": 524288
+      },
+      {
+        "offset": 393216,
+        "raw_bytes": 393216,
+        "base64_chars": 524288
+      },
+      {
+        "offset": 786432,
+        "raw_bytes": 225564,
+        "base64_chars": 300752
+      }
+    ],
+    "assembled_chars": 1349328,
+    "reconstructed_git_blob_sha": "ef9054695ebea5f36f0dad7cfa31fc46c00114b3",
+    "remote_write_performed": false
+  },
+  "remote_mutations_performed": [],
+  "tests_or_builds_run": false,
+  "source_files_changed": false,
+  "index_changed": false
+}

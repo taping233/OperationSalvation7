@@ -43,10 +43,42 @@ export function claimEntrySupply(game, { findCard, canReceive, newUid, index:onl
   return received;
 }
 
+// Event choices keep candidate IDs and payment in the same run snapshot as coins/cards.
+export function validEventChoiceReward(item) {
+  return !!item && item.version === 1 && item.type === 'event-choice'
+    && ['ev19-potions', 'ev19-quartermaster'].includes(item.eventId)
+    && ids(item.cardIds) && item.cardIds.length > 0 && item.cardIds.length <= 3
+    && new Set(item.cardIds).size === item.cardIds.length
+    && item.paidCoins === (item.eventId === 'ev19-quartermaster' ? 3 : 0)
+    && (item.taken === null || (Number.isInteger(item.taken) && item.taken >= 0 && item.taken < item.cardIds.length));
+}
+
+export function eventChoiceRewardAt(game) {
+  const item = game.nodeRewards?.[`${game.layerIdx},${game.trackPos}`];
+  return validEventChoiceReward(item) && item.taken === null ? item : null;
+}
+
+export function nodeEventAt(game) {
+  const item = game.nodeRewards?.[`${game.layerIdx},${game.trackPos}`];
+  return item?.version === 1 && ['event', 'event-choice'].includes(item.type)
+    && typeof item.eventId === 'string' && item.eventId.length > 0 ? item : null;
+}
+
+export function bindNodeEvent(game, eventId) {
+  const existing = nodeEventAt(game);
+  if (existing) return existing;
+  game.nodeRewards ||= {};
+  const record = { version:1, type:'event', eventId };
+  game.nodeRewards[`${game.layerIdx},${game.trackPos}`] = record;
+  return record;
+}
+
 export function validNodeRewards(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
   return Object.entries(value).every(([key, item]) => {
     if (!/^\d+,\d+$/.test(key) || !item || item.version !== 1) return false;
+    if (item.type === 'event') return typeof item.eventId === 'string' && item.eventId.length > 0;
+    if (item.type === 'event-choice') return validEventChoiceReward(item);
     if (item.type === 'resource') return ids(item.cardIds) && item.cardIds.length <= 2
       && (item.taken === null || (Number.isInteger(item.taken) && item.taken >= 0 && item.taken < item.cardIds.length));
     if (item.type === 'fire') return [item.hpBefore,item.hpAfter,item.hpGain].every(n => Number.isFinite(n) && n >= 0)

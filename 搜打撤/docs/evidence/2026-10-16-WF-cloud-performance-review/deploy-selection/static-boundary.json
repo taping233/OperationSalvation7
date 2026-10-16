@@ -1,0 +1,70 @@
+{
+  "checkedAt": "2026-10-15T18:34:31.193Z",
+  "method": "Current source closure compared with the two edited hub files at HEAD, verified unchanged at handoff. Every other worker source is current in both graphs; no source writes, bundler or tree-shaking",
+  "entries": [
+    "game/src/ui/title-credits.js",
+    "game/src/ui/title-wallpaper.js",
+    "game/src/main.js",
+    "game/src/ui/cover-context.js"
+  ],
+  "beforeModules": 214,
+  "afterModules": 204,
+  "removed": [
+    {
+      "path": "game/src/hub/game.hub.depart.js",
+      "bytes": 27643
+    },
+    {
+      "path": "game/src/hub/game.hub.bridge.js",
+      "bytes": 619
+    },
+    {
+      "path": "game/src/hub/departure.view-updates.js",
+      "bytes": 7011
+    },
+    {
+      "path": "game/src/hub/hub.presentation.js",
+      "bytes": 21438
+    },
+    {
+      "path": "game/src/hub/base-motion-v4.js",
+      "bytes": 1958
+    },
+    {
+      "path": "game/src/ui/card-browser.js",
+      "bytes": 4026
+    },
+    {
+      "path": "game/src/hub/departure.summary.js",
+      "bytes": 3510
+    },
+    {
+      "path": "game/src/hub/hub.home-v3.js",
+      "bytes": 4943
+    },
+    {
+      "path": "game/src/hub/hub.home-icons-v10.js",
+      "bytes": 1082
+    },
+    {
+      "path": "game/src/ui/departure-transition.js",
+      "bytes": 2612
+    },
+    {
+      "path": "game/src/hub/departure.drag.js",
+      "bytes": 3428
+    }
+  ],
+  "added": [
+    {
+      "path": "game/src/hub/departure.selection-state.js",
+      "bytes": 284
+    }
+  ],
+  "sourceBytesRemoved": 78270,
+  "sourceBytesAdded": 284,
+  "departureInInitialGraph": false,
+  "runtimeInInitialGraph": false,
+  "measuredBundleSavings": null,
+  "limitation": "This proves source reachability only; production compressed bytes require the parent integrated build"
+}

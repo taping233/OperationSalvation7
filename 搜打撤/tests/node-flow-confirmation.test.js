@@ -8,7 +8,7 @@ vi.mock('../game/src/run/game.run.scenes.js', () => ({
   nodeOpt:(act, label) => `<button data-act="${act}">${label}</button>`, buildEncounter:st.encounter,
   openBattleCell:st.battle, openChestsOnCell:st.chests, enterNode:st.enter,
   finishInstant:() => { st.game.state = 'idle'; }, consumeCurrentCell:vi.fn(), consumeCell:vi.fn(), cancelLegacyChainMove:vi.fn(),
-  grantEventCard:vi.fn(), openBlankSafePage:st.safe, openPickupPage:vi.fn(), openPocketRestore:vi.fn(), openShop:vi.fn(), preloadCellScene:vi.fn(),
+  grantEventCard:vi.fn(), openBlankSafePage:st.safe, openFixedRewardsOnCell:vi.fn(), openPickupPage:vi.fn(), openPocketRestore:vi.fn(), openShop:vi.fn(), preloadCellScene:vi.fn(),
 }));
 vi.mock('../game/src/run/game.run.altar.js', () => ({ openEntrySupply:st.supply, openDoorModal:vi.fn(), openFireRest:vi.fn(), openAltarRitual:vi.fn(), openBossGate:vi.fn(), openEmergencyModal:vi.fn() }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ _set_cardPageOpen:vi.fn() }));

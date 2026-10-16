@@ -17,6 +17,7 @@ describe('ROOT-06 零依赖自测入口（域目录路径）', () => {
     const out = (r.stdout || '') + (r.stderr || '');
     expect(out).not.toMatch(/ENOENT/);
     expect(r.status, `自测未通过：\n${out.slice(-2000)}`).toBe(0);
+    expect(out).toContain('✔ 档位概览仅展示游玩时间与已解锁成就');
     expect(out).toContain('全部通过');
   });
 });

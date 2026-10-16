@@ -1,0 +1,24 @@
+--- a/game/src/agent/agent.runner.js
++++ b/game/src/agent/agent.runner.js
+@@ -62,11 +62,17 @@
+ // turbo 步进的 defer 全部吃节流会让每步膨胀到秒级；MessageChannel 不受 timer
+ // 节流（实机实测 10 次 1ms）。无 MessageChannel 的极简环境再退 setTimeout(0)
+ const channelPump = (typeof MessageChannel === 'function') ? (() => {
+-  const ch = new MessageChannel();   // eslint-disable-line no-undef
++  let ch = null;
+   const queue = [];
+-  ch.port1.onmessage = () => { const job = queue.shift(); if (job) job(); };
+-  ch.port1.start?.();
+-  return (resolve) => { queue.push(resolve); ch.port2.postMessage(null); };
++  return (resolve) => {
++    if (!ch) {
++      ch = new MessageChannel();   // eslint-disable-line no-undef
++      ch.port1.onmessage = () => { const job = queue.shift(); if (job) job(); };
++      ch.port1.start?.();
++    }
++    queue.push(resolve);
++    ch.port2.postMessage(null);
++  };
+ })() : null;
+ const defer = () => (typeof globalThis.setImmediate === 'function')
+   ? new Promise(resolve => globalThis.setImmediate(resolve))

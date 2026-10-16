@@ -1,0 +1,50 @@
+{
+  "status": "completed-uncommitted; parent visual acceptance pending",
+  "files": [
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "baselineSha256": "6dcdadc6b27bdead891dbbd18be4b132ca110322d9aa54699235f80dc25f4eac",
+      "sha256": "c49bbb277679f39eee25201ce928560d8a159413a74a6ab59d7e9efeb026635d",
+      "delta": "scenes.delta.diff"
+    },
+    {
+      "path": "game/css/expedition-rewards.css",
+      "baselineSha256": "23fe5f15f19f3309036f81760fc9dd042516b0542467b26073821281c71c7800",
+      "sha256": "c76f0428e2324705c2f7b02d70be30c86e2ea27675535ce6b2125027ae1ed8ba",
+      "delta": "styles.delta.diff"
+    },
+    {
+      "path": "game/src/ui/overlay.js",
+      "baselineSha256": "86776d4cc5cb7d407fa4da6c4a43b2a07ac8eeba996badb81a6b5808b08bc24e",
+      "sha256": "266b8a1adccecce25207cf70bec046a072358c765e7ecd67f4d54144c0778be8",
+      "delta": "overlay.delta.diff"
+    },
+    {
+      "path": "tests/sys03-altar-restore-txn.test.js",
+      "baselineSha256": "c52e50d4ca516ea32ae2c6fe71ef60eb21671234685896643cafdec716915a40",
+      "sha256": "7bd1a0ebab1eaab7d38e65cd9cc92d6c558d8725001a9e774492e8ef03001684",
+      "delta": "sys03.delta.diff"
+    },
+    {
+      "path": "tests/pocket-restore-interface.test.js",
+      "sha256": "d4eefbdd6893efcf8cd52908072bdc746026886e1334540ad79544c1d10415bd",
+      "newFile": true
+    }
+  ],
+  "preservationChecks": {
+    "scenesBeforeRestoreUnchanged": true,
+    "scenesAfterRestoreUnchanged": true,
+    "restoreBusinessFinishAndGrantUnchanged": true,
+    "existingRewardsCssUnchanged": true
+  },
+  "tests": {
+    "files": 16,
+    "passed": 184,
+    "failed": 0
+  },
+  "browserUsed": false,
+  "servicesStarted": false,
+  "buildRun": false,
+  "realPlayerSaveAccessed": false,
+  "fingerprintsUpdated": false
+}

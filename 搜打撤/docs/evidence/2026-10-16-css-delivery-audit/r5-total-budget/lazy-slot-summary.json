@@ -1,0 +1,32 @@
+{
+  "recommendedSuffix": {
+    "missing": [],
+    "eagerGzip": 136822,
+    "lazyGzip": 25823,
+    "initialSaving": 24754,
+    "totalDelta": 1069,
+    "totalCssAfter": 201905,
+    "slots": 1,
+    "files": 16
+  },
+  "extendedHubClass": {
+    "missing": [],
+    "eagerGzip": 121572,
+    "lazyGzip": 43733,
+    "initialSaving": 40004,
+    "totalDelta": 3729,
+    "totalCssAfter": 204565,
+    "slots": 3,
+    "files": 21
+  },
+  "htmlMenuPages": {
+    "missing": [],
+    "eagerGzip": 153820,
+    "lazyGzip": 9526,
+    "initialSaving": 7756,
+    "totalDelta": 1770,
+    "totalCssAfter": 202606,
+    "slots": 1,
+    "files": 4
+  }
+}

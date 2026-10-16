@@ -10,6 +10,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { canReceiveCardFromBag } from '../game/src/core/card-capacity.js';
 
 const source = (file) => readFileSync(resolve(process.cwd(), `game/src/${file}`), 'utf8');
 const importedModules = (code) => [...code.matchAll(/^import\s+(?:\{[^}]*\}\s+from\s+)?'\.\/([\w.]+)\.js';/gm)].map(m => m[1]);
@@ -23,7 +24,7 @@ it('满包拒绝新卡，只允许普通背包已有未满堆合并', () => {
   const text = source('run/game.session.js');
   const body = text.match(/function canReceiveCard\(card\) \{([\s\S]*?)\n {2}\}/)[1];
   const game = { ownedCards: [] };
-  const receive = new Function('game', 'stackCapOf', 'canAcceptCard', `return function(card) {${body}}`)(game, () => 3, () => false);
+  const receive = new Function('game', 'canReceiveCardFromBag', 'canAcceptCard', `return function(card) {${body}}`)(game, canReceiveCardFromBag, () => false);
   const card = { name: '测试卡' };
   expect(receive(card)).toBe(false);
   game.ownedCards = [{ card, safe: true }, { card, stored: true }];

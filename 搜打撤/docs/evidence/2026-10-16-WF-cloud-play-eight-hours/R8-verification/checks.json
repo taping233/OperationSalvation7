@@ -1,0 +1,141 @@
+[
+  {
+    "name": "environment",
+    "command": [
+      "node",
+      "--version"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r8-20261016/snapshot/\u641c\u6253\u64a4",
+    "exitCode": 0,
+    "startedAt": "2026-10-16T00:52:55.849996+00:00",
+    "endedAt": "2026-10-16T00:52:55.860270+00:00",
+    "durationSeconds": 0.01,
+    "log": "logs/environment.log"
+  },
+  {
+    "name": "npm-environment",
+    "command": [
+      "npm",
+      "--version"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r8-20261016/snapshot/\u641c\u6253\u64a4",
+    "exitCode": 0,
+    "startedAt": "2026-10-16T00:52:55.861073+00:00",
+    "endedAt": "2026-10-16T00:52:56.041642+00:00",
+    "durationSeconds": 0.181,
+    "log": "logs/npm-environment.log"
+  },
+  {
+    "name": "dependency-tree",
+    "command": [
+      "npm",
+      "ls",
+      "--depth=0"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r8-20261016/snapshot/\u641c\u6253\u64a4",
+    "exitCode": 0,
+    "startedAt": "2026-10-16T00:52:56.042297+00:00",
+    "endedAt": "2026-10-16T00:52:56.703714+00:00",
+    "durationSeconds": 0.661,
+    "log": "logs/dependency-tree.log"
+  },
+  {
+    "name": "syntax",
+    "command": [
+      "npm",
+      "run",
+      "check:syntax"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r8-20261016/snapshot/\u641c\u6253\u64a4",
+    "exitCode": 0,
+    "startedAt": "2026-10-16T00:52:56.704524+00:00",
+    "endedAt": "2026-10-16T00:52:58.402128+00:00",
+    "durationSeconds": 1.698,
+    "log": "logs/syntax.log"
+  },
+  {
+    "name": "data",
+    "command": [
+      "npm",
+      "run",
+      "validate:data"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r8-20261016/snapshot/\u641c\u6253\u64a4",
+    "exitCode": 0,
+    "startedAt": "2026-10-16T00:52:58.402965+00:00",
+    "endedAt": "2026-10-16T00:52:59.113063+00:00",
+    "durationSeconds": 0.71,
+    "log": "logs/data.log"
+  },
+  {
+    "name": "types",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r8-20261016/snapshot/\u641c\u6253\u64a4",
+    "exitCode": 0,
+    "startedAt": "2026-10-16T00:52:59.116074+00:00",
+    "endedAt": "2026-10-16T00:53:00.198479+00:00",
+    "durationSeconds": 1.082,
+    "log": "logs/types.log"
+  },
+  {
+    "name": "lint",
+    "command": [
+      "npm",
+      "run",
+      "lint"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r8-20261016/snapshot/\u641c\u6253\u64a4",
+    "exitCode": 0,
+    "startedAt": "2026-10-16T00:53:00.199123+00:00",
+    "endedAt": "2026-10-16T00:53:12.523540+00:00",
+    "durationSeconds": 12.324,
+    "log": "logs/lint.log"
+  },
+  {
+    "name": "docs",
+    "command": [
+      "npm",
+      "run",
+      "docs:check",
+      "--",
+      "--json"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r8-20261016/snapshot/\u641c\u6253\u64a4",
+    "exitCode": 0,
+    "startedAt": "2026-10-16T00:53:12.524667+00:00",
+    "endedAt": "2026-10-16T00:53:13.019636+00:00",
+    "durationSeconds": 0.495,
+    "log": "logs/docs.log"
+  },
+  {
+    "name": "test",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r8-20261016/snapshot/\u641c\u6253\u64a4",
+    "exitCode": 0,
+    "startedAt": "2026-10-16T00:53:13.020588+00:00",
+    "endedAt": "2026-10-16T00:55:25.132006+00:00",
+    "durationSeconds": 132.112,
+    "log": "logs/test.log"
+  },
+  {
+    "name": "build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r8-20261016/snapshot/\u641c\u6253\u64a4",
+    "exitCode": 1,
+    "startedAt": "2026-10-16T00:55:25.136068+00:00",
+    "endedAt": "2026-10-16T00:55:40.456882+00:00",
+    "durationSeconds": 15.321,
+    "log": "logs/build.log"
+  }
+]

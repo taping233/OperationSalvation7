@@ -1,0 +1,14 @@
+{
+  "consumers": {
+    "game/src/hub/hub.personnel.js": {
+      "old": "bccbf662e90ee2abf21061bdbfb71ec847bb9f137911291be9c4fc86f4224ba9",
+      "new": "f68d650a722b678804055d5656fcf96725bf1bd0c1dbea3d252b4d11e21773c6"
+    },
+    "game/src/hub/hub.presentation.js": {
+      "old": "364bbc0b5dfe309ca947d3fd2d3369a9038826a5caf0586af121e4618dece461",
+      "new": "eb0f264f8c8f2cfbed1cd008156f73da707c8477393e7e90b20a61f9d54f5cb3"
+    }
+  },
+  "review": "Parent inspected exact two-line presentation diff: copy portraitAlpha with revealed image and unchanged-src branch only. Personnel adds alpha marker to already reviewed private default-wu portrait map. No new asset paths or change to retired-path selection. CSS scope isolates alpha=true and removes multiply for that image.",
+  "scriptSha256": "f5f2b23865857ec5d16c01b9c3939649624c841715e414fcbeaf4368462f5a19"
+}

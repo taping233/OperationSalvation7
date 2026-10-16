@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-10-15T22:44:56.059Z",
+  "passed": 5,
+  "checks": [
+    {
+      "name": "R5 ten published CSS exact metadata",
+      "status": "passed"
+    },
+    {
+      "name": "Control-group-normalized marginal savings",
+      "status": "passed"
+    },
+    {
+      "name": "Lazy split retains total CSS accounting",
+      "status": "passed"
+    },
+    {
+      "name": "Every local evidence file remains under 1MB",
+      "status": "passed"
+    },
+    {
+      "name": "Retained prior audit untouched",
+      "status": "passed"
+    }
+  ],
+  "syntax": "node --check passed for four added analysis scripts",
+  "notRun": [
+    "Vite build",
+    "service",
+    "browser",
+    "game tests",
+    "full tests"
+  ],
+  "docsCheck": {
+    "ok": true,
+    "checkedRelativeLinks": 461,
+    "findings": [],
+    "scope": "Repository current-doc guard; evidence directory is outside that guard"
+  },
+  "manualEvidenceLinks": {
+    "checked": 5,
+    "passed": true
+  }
+}

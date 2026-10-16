@@ -23,16 +23,19 @@ import { validatePendingExtraction } from '../hub/extraction.commands.js';
 import { createTerminalCommands } from '../hub/terminal.commands.js';
 import { createGameMenuController } from '../ui/game.menu.js';
 import { openDataPage } from '../agent/agent.data.js';   // W1-01：经 deps 注入 menu（menu 保持无静态导入）
+import { resetRunCounters, restoreRunBattles, snapshotRunBattles } from '../agent/agent.recorder.js';
 import { ensureBattleReady } from '../battle/battle-loader.js';
 import { Random } from '../core/random.js';
 import { GENERATOR_VERSION, LAYOUT_VERSION } from './map-generator.js';
 import { createMapSnapshot, planMapRestore, validateMapSnapshot } from './map-snapshot.js';
 import { game, runtime, MAP, cam, curLayer, cellCenter } from './game.session.kernel.js';
 import { MODES, modeCfg, applyModeRules } from './game.session.modes.js';
-import { assertZones, cardStacks, canAcceptCard, safeCap, safeUsed, stackCapOf, refreshCardClones, PEARL_BOX_ID } from './game.session.bag.js';
+import { assertZones, cardStacks, canAcceptCard, safeCap, safeUsed, refreshCardClones, PEARL_BOX_ID } from './game.session.bag.js';
+import { canReceiveCardFromBag } from '../core/card-capacity.js';
 import { clampIndex, installDerived, buildNewRunDerived } from './game.session.map.js';
 import { markSeen } from './game.session.board.js';
 import { createDeathSettlement } from './game.session.death.js';
+import { eventChoiceRewardAt } from './node-reward-state.js';
 
 // ---------- 档位与终局代数（会话内可变绑定；跨模块只经访问器读写） ----------
 let activeSlot = null;                // 当前游玩的档位（1..5），标题界面为 null
@@ -61,12 +64,9 @@ const { doDeath } = createDeathSettlement({
 
   // 背包能否再收这张卡：同名堆未满 → 并入不占新格；堆已满 → 需要一个空格。
   // 本函数留在本文件且保持原缩进形态：tests/run-architecture.test.js 以源文本正则
-  // 提取函数体做纯逻辑断言（new Function 注入 game/stackCapOf/canAcceptCard）。
+  // 提取薄包装，注入 game/共享纯判定/canAcceptCard 验证与预估共用规则。
   function canReceiveCard(card) {
-    if (!card) return false;
-    const owned = game.ownedCards.filter(o => !o.safe && !o.stored && o.card.name === card.name).length;
-    if (owned > 0 && owned % stackCapOf(card) !== 0) return true;
-    return canAcceptCard(card);
+    return canReceiveCardFromBag(card, { ownedCards:game.ownedCards, canAcceptCard });
   }
 game.canReceiveCard = canReceiveCard; // 叠放上限感知的收卡判定（#7）
 
@@ -138,6 +138,7 @@ function migrateOldSave() {
 // 同步时长、不调用 Base.save，也不写 RunStorage。
 function createRunSavePayload() {
   assertZones();
+  const identity = activeSlot ? RunStorage.readIdentity(activeSlot) : null;
   let snapshotResult = game.nestActive ? { ok: true, value: null } : createMapSnapshot({
     mapSeed: game.mapSeed, generatorVersion: game.generatorVersion, layoutVersion: game.layoutVersion, layerData: game.layerData,
     routeVersion: game.routeVersion, routePlan: game.routePlan,
@@ -174,6 +175,7 @@ function createRunSavePayload() {
     chestReward: SDT.Chests?.serialize?.(game) || null,
     entrySupply: game.entrySupply || null,
     nodeRewards: game.nodeRewards || {},
+    runBattleStats: snapshotRunBattles(identity?.ok ? identity.value.runId : null),
     elapsed: game.elapsed,
     slot: activeSlot, savedAt: Date.now(),
     // 战斗中退出/关窗（beforeunload）：只写战斗入场检查点；读档从本场战斗开头重开
@@ -307,6 +309,8 @@ function restoreGame(slot) {
     UI.log(`[[icon:cross]] ${accepted.message}，原档已保留`, 'warn');
     return accepted;
   }
+  const identity = RunStorage.readIdentity(slot);
+  restoreRunBattles(s.runBattleStats, identity.ok ? identity.value.runId : null);
   game.seed = Random.restore(s.rngState || s.seed);
   if (plan.source !== 'nest') installDerived(plan.layerData, plan.mapSeed, plan.generatorVersion, plan.layoutVersion, plan.routeVersion, plan.routePlan);
   SDT.Base.use(slot);   // 该档位的基地数据（仓库/熟练度/成就/卡背）
@@ -415,6 +419,13 @@ function restoreGame(slot) {
     }
     UI.log('[[icon:archive]] 已恢复揭晓的宝箱奖励，内容与已领取进度不变', 'ok');
   }
+  else if (eventChoiceRewardAt(game)) {
+    if (!runtime.resumeEventCardChoice()) {
+      game.state = 'modal';
+      UI.log('[[icon:cross]] 未领事件奖励恢复未完成，候选与付款记录已保留，请重新进入此档位', 'warn');
+      return { ok:false, code:'EVENT_CHOICE_RESTORE_FAILED', preserveRun:true };
+    }
+  }
   else if (s.battle && SDT.Battle && typeof SDT.Battle.restore === 'function') {
     if (SDT.Battle.restore(game, s.battle)) {
       // 读档恢复的战斗没经过 resolveCell：本格按已触发处理，撤退/胜利后不重复触发
@@ -471,6 +482,7 @@ function newRun(mode, picks, options = {}) {
     return false;
   }
   terminalGeneration++;
+  resetRunCounters();
   game.seed = Random.reseed();
   game.mapSeed = game.seed;
   game.encounterRotationVersion = 1;   // 仅新局启用同层编组轮换；旧档缺省继续原遭遇。

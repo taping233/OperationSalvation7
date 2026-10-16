@@ -1,0 +1,104 @@
+{
+  "timestampUTC": "2026-10-15T19:49:11.688087+00:00",
+  "scope": "药摊/装备征用固定候选、黑市固定待领奖、普通事件节点ID绑定及最小读档恢复钩子",
+  "files": {
+    "game/src/run/event-card-choice.js": "c2e4629812a10261b4d8beb2620c78b860267c20a29ca45b9f419a5b0b797606",
+    "game/src/run/game.run.flow.js": "7587599bb28253857d5b5dfd89f93706548d7800978d8995b71ec53636e76b6e",
+    "game/src/run/node-reward-state.js": "7a69543367c38643fbaddd4a81c9c9f3af2ae6d0fb19ec72fa18ddb0639aa426",
+    "game/src/run/game.session.js": "1e9de29b8bfdc4c89ef4aedb5f147a70f08fdc16d7151a9ef5cee8cf895ff57f",
+    "game/src/run/game.session.kernel.js": "6cc5d6206dcf9fe30ecef4e24b6404046296d0195f718e98ca31c4e1c9f4bbf5",
+    "game/src/run/game.run.js": "a0bb9b3b7b4252795ed6f1ba0119c5b44d8311162b9de627006dea5393beb4c7",
+    "game/src/game.boot.js": "4a05c31dc96b05a452b5f900aaa4406105e1de4bad7617157acfa082d16e5348",
+    "tests/event-choice-recovery-cloud.test.js": "19706e879b55aed2fadb4aa664422609d0bf28697b53e9034846f8c067ef4ed6",
+    "tests/event-choice-session-resume-cloud.test.js": "425dbf7f002ff571108870445db10778d82b2281f057870576c6f366a7908705",
+    "docs/save-format.md": "cc52124d3221842a40336d0ccc72ff7cf36c1a78a23b594a2e1c3e182c49bf00",
+    "tests/event-callback-lifecycle-audit.test.js": "75bd921f7664311453b8687bc4fc49171b8158b9d9baae22b909ad7daad0619f",
+    "tests/event-node-binding-cloud.test.js": "0867fd1af37420feb4086c930fad866108784b84a5b2837aff53c784d3e6e038"
+  },
+  "checks": [
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/event-choice-recovery-cloud.test.js tests/event-choice-session-resume-cloud.test.js tests/event-callback-lifecycle-audit.test.js tests/node-reward-state.test.js tests/run-architecture.test.js tests/extraction-session-resume.test.js tests/entry-supply-presentation.test.js tests/menu-recovery-entry.test.js tests/save-recovery-session-feedback.test.js tests/game-session-browser-boundary.test.js tests/fresh-run-map-encounters.test.js --reporter=dot",
+      "result": "passed",
+      "files": 11,
+      "tests": 83
+    },
+    {
+      "command": "ESLint on all 9 owned source/test files",
+      "result": "passed"
+    },
+    {
+      "command": "node scripts/check-syntax.mjs",
+      "result": "passed",
+      "projectFiles": 422
+    },
+    {
+      "command": "node scripts/check-types.mjs",
+      "result": "passed",
+      "configs": 8
+    },
+    {
+      "command": "npm run --silent docs:check -- --json",
+      "result": "passed",
+      "checkedRelativeLinks": 461,
+      "findings": []
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/event-choice-recovery-cloud.test.js tests/event-choice-session-resume-cloud.test.js tests/event-callback-lifecycle-audit.test.js tests/node-reward-state.test.js tests/run-architecture.test.js tests/extraction-session-resume.test.js tests/entry-supply-presentation.test.js tests/menu-recovery-entry.test.js tests/save-recovery-session-feedback.test.js tests/game-session-browser-boundary.test.js tests/fresh-run-map-encounters.test.js tests/chest-callback-lifecycle-audit.test.js --reporter=dot",
+      "result": "passed",
+      "files": 12,
+      "tests": 97,
+      "batch": "black-market-fixed-rewards"
+    },
+    {
+      "command": "ESLint on black-market changed source/test files",
+      "result": "passed"
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/event-node-binding-cloud.test.js tests/event-choice-recovery-cloud.test.js tests/event-choice-session-resume-cloud.test.js tests/event-callback-lifecycle-audit.test.js tests/node-reward-state.test.js tests/run-architecture.test.js tests/extraction-session-resume.test.js tests/entry-supply-presentation.test.js tests/menu-recovery-entry.test.js tests/save-recovery-session-feedback.test.js tests/game-session-browser-boundary.test.js tests/fresh-run-map-encounters.test.js tests/chest-callback-lifecycle-audit.test.js --reporter=dot",
+      "result": "passed",
+      "files": 13,
+      "tests": 103,
+      "batch": "node-event-id-binding"
+    },
+    {
+      "command": "ESLint on all 11 owned source/test files",
+      "result": "passed",
+      "batch": "node-event-id-binding"
+    },
+    {
+      "command": "node scripts/check-syntax.mjs",
+      "result": "passed",
+      "projectFiles": 422,
+      "batch": "node-event-id-binding"
+    },
+    {
+      "command": "node scripts/check-types.mjs",
+      "result": "passed",
+      "configs": 8,
+      "batch": "node-event-id-binding"
+    },
+    {
+      "command": "npm run --silent docs:check -- --json",
+      "result": "passed",
+      "checkedRelativeLinks": 461,
+      "findings": [],
+      "batch": "node-event-id-binding"
+    },
+    {
+      "command": "git diff --check on owned files",
+      "result": "passed",
+      "batch": "node-event-id-binding"
+    }
+  ],
+  "notRun": [
+    "browser/manual gameplay (parent owns current built-in browser)",
+    "build",
+    "full test suite"
+  ],
+  "externalStateChanges": false,
+  "historicalBaselineProbe": {
+    "command": "node node_modules/vitest/vitest.mjs run --config docs/evidence/2026-10-16-run-lifecycle-audit/vitest.audit.config.mjs --reporter=verbose",
+    "resultBeforeBlackMarketFix": "4/4 documented loss behaviors reproduced",
+    "note": "The black-market bug assertion is a pre-fix diagnostic snapshot; current acceptance uses tests/event-choice-recovery-cloud.test.js."
+  }
+}

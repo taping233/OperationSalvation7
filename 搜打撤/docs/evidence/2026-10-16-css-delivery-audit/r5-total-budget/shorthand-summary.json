@@ -1,0 +1,78 @@
+{
+  "warning": "Hypothetical upper bound only: same selector branch, condition, importance dominance and shorthand reset coverage. Does not validate fallback values, CSSOM dependencies, or every modern shorthand reset property. No production change.",
+  "totalGzip": 197087,
+  "saving": 3749,
+  "removed": 620,
+  "results": [
+    {
+      "file": "battle-CMeGAmXR.css",
+      "before": 2217,
+      "after": 2217,
+      "saving": 0,
+      "removed": 0
+    },
+    {
+      "file": "game.cardslib-DL1ME_Cs.css",
+      "before": 13367,
+      "after": 13267,
+      "saving": 100,
+      "removed": 17
+    },
+    {
+      "file": "game.menu-COmXXeJI.css",
+      "before": 9387,
+      "after": 9387,
+      "saving": 0,
+      "removed": 0
+    },
+    {
+      "file": "home-djRd51SW.css",
+      "before": 1973,
+      "after": 1973,
+      "saving": 0,
+      "removed": 0
+    },
+    {
+      "file": "home-layers-CGeD3b0U.css",
+      "before": 1771,
+      "after": 1757,
+      "saving": 14,
+      "removed": 0
+    },
+    {
+      "file": "home-menu-motion-ChDSp1Xr.css",
+      "before": 973,
+      "after": 965,
+      "saving": 8,
+      "removed": 0
+    },
+    {
+      "file": "home-polish-8Wc6XNpi.css",
+      "before": 6599,
+      "after": 6551,
+      "saving": 48,
+      "removed": 0
+    },
+    {
+      "file": "index-BzlIbwSi.css",
+      "before": 161576,
+      "after": 158025,
+      "saving": 3551,
+      "removed": 603
+    },
+    {
+      "file": "interface-motion-Cm3pw1Zg.css",
+      "before": 971,
+      "after": 970,
+      "saving": 1,
+      "removed": 0
+    },
+    {
+      "file": "motion-transitions-BdxbKqrz.css",
+      "before": 2002,
+      "after": 1975,
+      "saving": 27,
+      "removed": 0
+    }
+  ]
+}

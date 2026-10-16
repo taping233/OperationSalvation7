@@ -69,9 +69,7 @@
   border:0; border-top:1px solid #c6cdc245; background:#e6e1d6; color:#303731;
   box-shadow:0 14px 28px #11161338; backdrop-filter:none;
 }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters > div .warehouse-use-tabs { border:0; margin:0; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters > div :is(button,select) { color:#4f594f; border-color:#78817340; }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-more-filters > div .warehouse-use-tabs button.on { color:#252e27; border-bottom-color:#63705f; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-purpose {
   display:flex; align-items:center; flex-wrap:wrap; gap:18px; justify-content:space-between;
   margin:0 0 24px; padding:14px 0; border:0; border-bottom:1px solid var(--camp-line); background:none;
@@ -112,7 +110,6 @@
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-categories-v7 :is(.on,.is-selected,[aria-pressed="true"]) { color:var(--base-v7-accent); background:none; }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-categories-v7 :is(.on,.is-selected,[aria-pressed="true"])::before { background:var(--base-v7-accent); }
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-categories-v7 button:hover { color:var(--camp-ink); }
-#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3:has(> .warehouse-categories-v7) .warehouse-use-tabs { display:none; }
 
 /* 人物：横向名册配合整张白底立绘与资料画布。 */
 #overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .hub-page:has(> .personnel-v2) { --camp-bg:#20282e; --camp-paper:#20282e; --camp-line:#edf1ef24; --camp-accent:#8bd0df; --camp-action:#2f6372; --camp-action-hover:#407d8e; background:#20282e; }

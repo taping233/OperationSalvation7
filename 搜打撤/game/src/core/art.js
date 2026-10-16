@@ -9,6 +9,7 @@ import THUMB_MANIFEST from '../generated/thumb-manifest.js';
 import { esc } from './shared.js';
 import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
 import { decodeImagesIn } from './image-decode.js';
+import { createForegroundImageYield } from './art-preload-plan.js';
 
   
   const ROOT = 'assets/';
@@ -422,10 +423,11 @@ function characterArt(value, full=false, useDefault=false) {
       let done = grand - list.length;
       if (onProgress && grand) onProgress(done, grand);
       let i = 0;
+      const foregroundImagesPending = createForegroundImageYield();
       return new Promise((resolve) => {
         const scheduleNext = () => {
           const run = () => {
-            if (document.body?.classList.contains('cardlib-open')) {
+            if (document.body?.classList.contains('cardlib-open') || foregroundImagesPending()) {
               setTimeout(scheduleNext, 160);
               return;
             }
@@ -440,7 +442,7 @@ function characterArt(value, full=false, useDefault=false) {
           i += slice.length;
           Promise.all(slice.map(async (url) => {
             try {
-              const response = await fetch(url, { cache: 'force-cache' });
+              const response = await fetch(url, { cache: 'force-cache', priority: 'low' });
               if (!response.ok) throw new Error(`HTTP ${response.status}`);
               await response.arrayBuffer();
               prefetchedUrls.add(url);

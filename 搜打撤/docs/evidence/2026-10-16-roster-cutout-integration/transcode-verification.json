@@ -1,0 +1,213 @@
+{
+  "task": "roster-cutout-lossless-format-only-20261016",
+  "status": "candidate-only-blocked-by-size-gate",
+  "created_at_utc": "2026-10-15T21:43:21.461672+00:00",
+  "source_manifest": "docs/previews/roster-cutouts-20261016/manifest.json",
+  "source_manifest_sha256": "e51467f7b589fb4e216ebe97f4e88c21868ba41c35cf43ab37e7fbe35b59e04e",
+  "encoder": {
+    "pillow": "12.3.0",
+    "libwebp": "1.6.0",
+    "parameters": {
+      "format": "WEBP",
+      "lossless": true,
+      "quality": 100,
+      "method": 6,
+      "exact": true
+    },
+    "note": "quality controls lossless compression effort here; exact preserves RGB even beneath alpha=0"
+  },
+  "limits": {
+    "exclusive_candidate_bytes": 1048576
+  },
+  "assets": [
+    {
+      "id": "heixiang",
+      "variant": "v1",
+      "production_original": {
+        "file": "game/assets/portraits/full/heixiang.webp",
+        "sha256": "d8b76ee16b7d6bc85db83298a603f845fea39f139e42f97f41ebe9972fd50caa",
+        "manifest_hash_matches": true,
+        "bytes": 190598
+      },
+      "generated_provenance": {
+        "path": "/workspace/scratch/b7a53a06c872/generated_images/exec-3f49f2b0-5bbb-4484-920f-5fed085777e3.png",
+        "exists": true,
+        "sha256": "b210efbff0e60a54b23ef1d9d0fc0f397eecba65216972ca4a797a2cf3262531",
+        "matches_preview_png": true,
+        "method": "built-in image_gen; transparent_background=true; no programmatic background extraction",
+        "prompt": "Use case: background-extraction\nAsset type: existing painted game character full-body portrait, transparent cutout candidate\nEdit target: the single attached local source image heixiang.webp. Perform only background removal: replace the plain white exterior background with genuine alpha transparency. Preserve the entire 1024x1536 source canvas, all original subject pixels, full head-to-boots framing, existing placement and scale.\nKeep invariant: the exact same male face, expression, brown skin, black-and-gray spiky hair, gold eyes, orange torn scarf including its pale fabric ends, dark tactical armor, both gloved hands, the silver cup in the raised hand, saucer in the other hand, enormous sword over his back including sword handle and entire blade down his right side, belts, pouches, boots, and angular painted brushwork. Keep gaps around props transparent only where they are actually empty background. White/gray paint on sword, cup, scarf and armor is subject and must remain.\nDo not repaint, redesign, sharpen, restyle, relight, recolor, modify the face or fingers, add details, remove props, crop, rescale or change the composition. No new shadow, checkerboard, floor or backdrop. Output a real transparent-background image with the original illustration unchanged."
+      },
+      "input": {
+        "file": "docs/previews/roster-cutouts-20261016/heixiang-cutout-v1.png",
+        "sha256": "b210efbff0e60a54b23ef1d9d0fc0f397eecba65216972ca4a797a2cf3262531",
+        "bytes": 1897915,
+        "mode": "RGBA",
+        "dimensions": [
+          1024,
+          1536
+        ],
+        "rgba_sha256": "b87d47c8ae7dce2d5b3bf2a67abba74686ddff5eff7d0f6d3eeedb9ec6f04f21"
+      },
+      "candidate": {
+        "file": "/workspace/shared/roster-cutouts-lossless-20261016/heixiang-cutout-v1.webp",
+        "sha256": "fe2ec452fdae5732dc9ef75d1fbeb60ae2cb5a605ac8470d09b01df19c1c3c0f",
+        "bytes": 1160262,
+        "mode": "RGBA",
+        "dimensions": [
+          1024,
+          1536
+        ],
+        "rgba_sha256": "b87d47c8ae7dce2d5b3bf2a67abba74686ddff5eff7d0f6d3eeedb9ec6f04f21",
+        "webp_chunks": [
+          {
+            "name": "VP8L",
+            "bytes": 1160242
+          }
+        ],
+        "size_gate_overage_bytes": 111686,
+        "proposed_runtime_path": "game/assets/portraits/personnel/heixiang-default-cutout-v1.webp"
+      },
+      "verification": {
+        "dimensions_equal": true,
+        "mode_equal": true,
+        "decoded_rgba_bytes_equal": true,
+        "decoded_alpha_bytes_equal": true,
+        "rgba_differing_values": 0,
+        "alpha_extrema": [
+          0,
+          254
+        ],
+        "alpha_nonzero_bbox": [
+          0,
+          0,
+          1008,
+          1536
+        ],
+        "alpha_gte_128_bbox": [
+          35,
+          12,
+          987,
+          1527
+        ],
+        "input_png_unchanged": true,
+        "production_original_unchanged": true,
+        "candidate_under_1_mib": false,
+        "after_outside_repository_move_rgba_bytes_equal": true,
+        "after_outside_repository_move_sha256_matches": true
+      },
+      "suggested_personnel_bounds": [
+        1024,
+        1536,
+        35,
+        12,
+        987,
+        1527
+      ],
+      "bytes_impact": {
+        "candidate_addition": 1160262,
+        "delta_from_png": -737653,
+        "detail_request_delta_from_old_portrait": 969664,
+        "production_original_remains": true,
+        "candidate_vs_png_ratio": 0.611335
+      },
+      "suggested_personnel_style": "--portrait-height:0.932752;--portrait-bottom:3.453465%;--portrait-center:-49.902344%;"
+    },
+    {
+      "id": "xingyue",
+      "variant": "v2",
+      "production_original": {
+        "file": "game/assets/portraits/full/xingyue.webp",
+        "sha256": "77c4a09b76804cf7cce78075dd610c7e2ebbdcfac67c5c2a1105eddae228eca3",
+        "manifest_hash_matches": true,
+        "bytes": 180912
+      },
+      "generated_provenance": {
+        "path": "/workspace/scratch/b7a53a06c872/generated_images/exec-2ec38402-8b23-4192-91d4-a310c75b4a61.png",
+        "exists": true,
+        "sha256": "e833816d8873064da53b60fb053d0f21848d9449c03797c66725ec1a5264caec",
+        "matches_preview_png": true,
+        "method": "built-in image_gen; transparent_background=true; no programmatic background extraction",
+        "prompt": "Use case: background-extraction.\n精确透明抠图修正，只有一张输入原图 xingyue.webp，它是必须完全保真的编辑目标。\n只把这张原图里纯白的外部空背景变为真实透明 alpha；保持原始1024×1536画布及所有内容的原坐标。禁止重新绘制角色。请逐像素保留原有可见的图画内容：原来的淡雅低对比度、粗块水彩/厚涂笔触、柔和色彩、边缘线、皮肤色、面部五官、服装纹路和构图都不得变化。\n特别保留：原有同一张脸、浅金短发和月牙发夹、左右长发辫及右侧完整发尾、胸前举起的手及每根手指、另一手与提灯、灯中星光、整件白色裙子及灰白褶皱、披肩与靴子。\n唯一的改动是删掉外部白背景和确实为空背景的内部缝隙。与物体相关的白色/浅色区域完整保留。背景移除后的轮廓外不应有任何新白边、灰边、黑边、外发光、宽模糊光晕、地板或投影。不要提高饱和度、亮度、对比、清晰度，不要加强线稿，不要更改任何道具、手指、脸、姿势、体型、衣服或特效。不要添加绘画内容。\n输出真正透明PNG：空背景完全透明，主体实心区域不透明，只有原画本来存在的半透明特效和抗锯齿边缘可以半透明。"
+      },
+      "input": {
+        "file": "docs/previews/roster-cutouts-20261016/xingyue-cutout-v2.png",
+        "sha256": "e833816d8873064da53b60fb053d0f21848d9449c03797c66725ec1a5264caec",
+        "bytes": 1784637,
+        "mode": "RGBA",
+        "dimensions": [
+          1024,
+          1536
+        ],
+        "rgba_sha256": "0225766f3a008148379f0d8263982335cc471ef755a027e1a076dbb35071c41a"
+      },
+      "candidate": {
+        "file": "/workspace/shared/roster-cutouts-lossless-20261016/xingyue-cutout-v2.webp",
+        "sha256": "1080af951dc4f24f960b70cee726b9decf4279dc8a2b0df7ca633b77e3670be7",
+        "bytes": 1103162,
+        "mode": "RGBA",
+        "dimensions": [
+          1024,
+          1536
+        ],
+        "rgba_sha256": "0225766f3a008148379f0d8263982335cc471ef755a027e1a076dbb35071c41a",
+        "webp_chunks": [
+          {
+            "name": "VP8L",
+            "bytes": 1103142
+          }
+        ],
+        "size_gate_overage_bytes": 54586,
+        "proposed_runtime_path": "game/assets/portraits/personnel/xingyue-default-cutout-v2.webp"
+      },
+      "verification": {
+        "dimensions_equal": true,
+        "mode_equal": true,
+        "decoded_rgba_bytes_equal": true,
+        "decoded_alpha_bytes_equal": true,
+        "rgba_differing_values": 0,
+        "alpha_extrema": [
+          0,
+          254
+        ],
+        "alpha_nonzero_bbox": [
+          63,
+          18,
+          959,
+          1522
+        ],
+        "alpha_gte_128_bbox": [
+          79,
+          21,
+          954,
+          1509
+        ],
+        "input_png_unchanged": true,
+        "production_original_unchanged": true,
+        "candidate_under_1_mib": false,
+        "after_outside_repository_move_rgba_bytes_equal": true,
+        "after_outside_repository_move_sha256_matches": true
+      },
+      "suggested_personnel_bounds": [
+        1024,
+        1536,
+        79,
+        21,
+        954,
+        1509
+      ],
+      "bytes_impact": {
+        "candidate_addition": 1103162,
+        "delta_from_png": -681475,
+        "detail_request_delta_from_old_portrait": 922250,
+        "production_original_remains": true,
+        "candidate_vs_png_ratio": 0.618144
+      },
+      "suggested_personnel_style": "--portrait-height:0.949677;--portrait-bottom:2.330645%;--portrait-center:-50.439453%;"
+    }
+  ],
+  "all_decode_identity_checks_pass": true,
+  "all_under_1_mib": false,
+  "total_candidate_bytes": 2263424,
+  "candidate_storage_reason": "Both exact WebPs exceed 1MiB; keep binary candidates outside the repository and preserve original PNGs in the existing ignored preview area.",
+  "total_detail_request_delta_from_originals": 1891914
+}

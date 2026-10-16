@@ -1,0 +1,36 @@
+{
+  "productionFilesChanged": [
+    "game/src/run/game.run.altar.js"
+  ],
+  "newTest": "tests/sacrifice-scroll-stability.test.js",
+  "addedProductionLines": 5,
+  "priorSourcePreservedOutsideFiveLinePickerPatch": true,
+  "ordinaryBagFilterAndPaymentAndPersistenceUnchanged": true,
+  "cssChanged": false,
+  "red": {
+    "testFiles": 1,
+    "failed": 5,
+    "passed": 1,
+    "cause": "New .sac-hand scrollTop is 0 after every render"
+  },
+  "green": {
+    "testFiles": 1,
+    "passed": 6,
+    "failed": 0
+  },
+  "targetedRegression": {
+    "testFiles": 7,
+    "passed": 84,
+    "failed": 0,
+    "log": "tests.log"
+  },
+  "eslint": "pass; source and new test only",
+  "syntax": "pass; source and new test only",
+  "browser": "Not run by this worker; parent owns built-in-browser verification",
+  "testGeometry": "jsdom fixture of parent-observed scrollHeight=1952 and clientHeight=592; this is not rendered-layout evidence",
+  "keyboardCoverage": "Native-keyboard-generated click shape (MouseEvent detail=0) through real UI click delegate; jsdom does not execute Enter/Space default activation",
+  "services": "none created",
+  "fullSuite": "not run",
+  "build": "not run",
+  "commit": "not run"
+}

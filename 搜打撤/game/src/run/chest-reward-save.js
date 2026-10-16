@@ -29,6 +29,7 @@ export function restoreChestReward(game, saved) {
   const c = saved.current;
   if (!c || !['small','medium','large','class','boss'].includes(c.kind) || !Array.isArray(c.cards) || c.cards.some(card => !card || typeof card.name !== 'string')
     || !Number.isFinite(c.coins) || c.coins < 0 || typeof c.coinsReceived !== 'boolean') return null;
+  if (c.choiceCount !== undefined && (!Number.isInteger(c.choiceCount) || c.choiceCount < 1 || c.choiceCount > c.cards.length)) return null;
   const validIndices = list => Array.isArray(list) && list.every(i => Number.isInteger(i) && i >= 0 && i < c.cards.length);
   if (!validIndices(c.taken) || !validIndices(c.lost) || c.taken.some(i => c.lost.includes(i))) return null;
   if (c.rewardStage != null && !['chest','opening','cards'].includes(c.rewardStage)) return null;

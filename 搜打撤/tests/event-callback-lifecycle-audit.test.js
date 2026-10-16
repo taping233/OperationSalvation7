@@ -128,7 +128,9 @@ describe('事件等待与回调生命周期审计', () => {
     UI.showOverlay('背包', '<main>背包</main>', 'page'); returnFromBag();
     expect(UI.el.ovBody.textContent).toContain('已尝试 4/5');
     oldTry(); expect(H.game.coins).toBe(6);
-    UI._acts.eventGambleTry(); expect(H.game.coins).toBe(3); expect(H.game.ownedCards).toHaveLength(3);
+    UI._acts.eventGambleTry(); expect(H.game.coins).toBe(3); expect(H.game.ownedCards).toHaveLength(0);
+    expect(window.SDT.Chests.serialize(H.game).current.cards).toHaveLength(3);
+    UI._acts.chestTake(); expect(H.game.ownedCards).toHaveLength(3);
   });
   it('合法的迟到叙事仍可显示，多选事件由真实点击确认后结算一次', async () => {
     let resolveNarrative;

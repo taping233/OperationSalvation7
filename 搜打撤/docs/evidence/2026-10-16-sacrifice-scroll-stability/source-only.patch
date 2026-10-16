@@ -1,0 +1,23 @@
+--- a/game/src/run/game.run.altar.js
++++ b/game/src/run/game.run.altar.js
+@@ -426,8 +426,10 @@
+   const current = () => getActiveSlot() === slotId && game.seed === seed && game.discoveredPairs === runToken &&
+     game.layerData === map && game.layerIdx === layerIdx && game.trackPos === trackPos;
+   let finished = false;
++  let hand = null;
+   const render = () => {
+     if (finished || !current()) return;
++    const scrollTop = hand?.scrollTop ?? 0;
+     game.state = 'modal';
+     eligible = sacrificeCards(filterType);
+     const allowed = new Set(eligible.map(owned => owned.uid));
+@@ -449,6 +451,9 @@
+         <button class="ov-btn ok" data-act="sacConfirm" ${sel.size !== n ? 'disabled' : ''}>[[icon:crystal]] 确认献祭</button>
+         <button class="ov-btn" data-act="sacCancel">[[icon:exit]] 取消</button>
+       </div>`, 'discover');
++    // 重绘会替换滚动容器；只延续本次选牌的位置，新会话从顶部开始。
++    hand = UI.el?.ovBody?.querySelector('.sac-hand');
++    if (hand) hand.scrollTop = scrollTop;
+     const active = altarPageBinding('sacConfirm');
+     UI.act('sacPick', (d) => {
+       if (finished || !active()) return;

@@ -83,9 +83,13 @@ function unplayableReasonFor(card, mode, ctx) {
   if (card.type === '资源') return '资源卡无法在对战中打出（资源在背包中使用或出售）';
   if (card.type === '事件') return '事件卡只能在棋盘的事件格中触发，无法打出';
   if (card.type === '生物') return '生物卡是敌人图鉴，记录敌人信息，无法打出';
+  const battle = card && card.rules && card.rules.battle;
+  // 原始复制卡仅在手牌内响应新打出的武术；变形后 findCard 返回被复制卡，自动解除此门。
+  if (card.id === 'tt7-imitate' || battle?.hosted?.includes('imitate')) {
+    return '先打出一张武术牌，使本牌变形';
+  }
   // 封印之牌（受缚之残影/封印肢体1-4/化形后的深渊主宰，2026-09-16 定版）：
   // 抽到无效果也无法打出——集齐 5 张封印之牌后由 battle.core 破封化形
-  const battle = card && card.rules && card.rules.battle;
   const structuredRequirements = battle && Array.isArray(battle.requirements) ? battle.requirements : null;
   if (structuredRequirements
     ? structuredRequirements.some(rule => rule.kind === 'unplayable')

@@ -1,0 +1,17 @@
+const channelPump = (typeof MessageChannel === 'function') ? (() => {
+  let ch = null;
+  const queue = [];
+  return (resolve) => {
+    if (!ch) {
+      ch = new MessageChannel();   // eslint-disable-line no-undef
+      ch.port1.onmessage = () => { const job = queue.shift(); if (job) job(); };
+      ch.port1.start?.();
+    }
+    queue.push(resolve);
+    ch.port2.postMessage(null);
+  };
+})() : null;
+const defer = () => (typeof globalThis.setImmediate === 'function')
+  ? new Promise(resolve => globalThis.setImmediate(resolve))
+  : (channelPump ? new Promise(channelPump) : new Promise(resolve => setTimeout(resolve, 0)));
+

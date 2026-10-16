@@ -1,0 +1,6 @@
+{
+  "consumer": "game/src/hub/hub.personnel.js",
+  "sha256": "bccbf662e90ee2abf21061bdbfb71ec847bb9f137911291be9c4fc86f4224ba9",
+  "review": "Exact diff reviewed: one frozen literal map for wu default configuration portrait to portraits/personnel/wu-default-cutout-v1.webp via assetUrl; other skins/characters fall back unchanged to art.skinUrl; body bounds update only. New file exists in current manifest, no retired paths restored.",
+  "scriptSha256": "d28100e4f5a8bb4c05ff520114e085be060968d1c10629c22d4f95bba19e80df"
+}

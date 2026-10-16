@@ -1,0 +1,202 @@
+{
+  "at": "2026-10-15T22:04:48.648Z",
+  "input": {
+    "capacity": 16,
+    "usedSlots": 15,
+    "coinsAfterAlreadyPaying3": 15,
+    "candidateIds": [
+      "tt2-apollo",
+      "other1",
+      "other2"
+    ],
+    "bonusPool": [
+      "bonus"
+    ]
+  },
+  "finalSaved": {
+    "seed": 7,
+    "layerIdx": 0,
+    "trackPos": 1,
+    "discoveredPairs": {},
+    "ownedCards": [
+      {
+        "uid": "filler-0",
+        "card": {
+          "id": "filler-0",
+          "name": "已有不同卡0",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-1",
+        "card": {
+          "id": "filler-1",
+          "name": "已有不同卡1",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-2",
+        "card": {
+          "id": "filler-2",
+          "name": "已有不同卡2",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-3",
+        "card": {
+          "id": "filler-3",
+          "name": "已有不同卡3",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-4",
+        "card": {
+          "id": "filler-4",
+          "name": "已有不同卡4",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-5",
+        "card": {
+          "id": "filler-5",
+          "name": "已有不同卡5",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-6",
+        "card": {
+          "id": "filler-6",
+          "name": "已有不同卡6",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-7",
+        "card": {
+          "id": "filler-7",
+          "name": "已有不同卡7",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-8",
+        "card": {
+          "id": "filler-8",
+          "name": "已有不同卡8",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-9",
+        "card": {
+          "id": "filler-9",
+          "name": "已有不同卡9",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-10",
+        "card": {
+          "id": "filler-10",
+          "name": "已有不同卡10",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-11",
+        "card": {
+          "id": "filler-11",
+          "name": "已有不同卡11",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-12",
+        "card": {
+          "id": "filler-12",
+          "name": "已有不同卡12",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-13",
+        "card": {
+          "id": "filler-13",
+          "name": "已有不同卡13",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "filler-14",
+        "card": {
+          "id": "filler-14",
+          "name": "已有不同卡14",
+          "type": "法术",
+          "rarity": "古朴"
+        }
+      },
+      {
+        "uid": "gift-1",
+        "card": {
+          "id": "tt2-apollo",
+          "name": "阿猫的礼物",
+          "rarity": "史诗",
+          "type": "装备",
+          "cost": 0
+        }
+      }
+    ],
+    "state": "idle",
+    "coins": 15,
+    "nodeRewards": {
+      "0,1": {
+        "version": 1,
+        "type": "event-choice",
+        "eventId": "ev19-quartermaster",
+        "cardIds": [
+          "tt2-apollo",
+          "other1",
+          "other2"
+        ],
+        "paidCoins": 3,
+        "taken": 0
+      }
+    },
+    "visited": {
+      "0,1": 1
+    },
+    "layerData": [
+      {
+        "logical": []
+      }
+    ]
+  },
+  "chestReward": null,
+  "canResume": false,
+  "logs": [
+    "[[icon:archive]] 获得卡牌【<b>阿猫的礼物</b>】",
+    "[[icon:bolt]] <b>阿猫的礼物</b>：随机获取触发，附赠另 1 张随机卡牌",
+    "[[icon:bag]] 背包放不下（16/16 格；新普通牌需通用空格，同名未满仍可叠放），【附赠测试卡】未领取，请整理背包后重试"
+  ],
+  "browserUsed": false,
+  "playerStorageTouched": false
+}

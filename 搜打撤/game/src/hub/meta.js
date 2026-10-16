@@ -136,22 +136,27 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
     const m = collMsById(id);
     if (!m || isCollClaimed(id) || !collMsReached(m)) return { ok: false };
     const cards = [];
+    const catalog = SDT.Cards.all() || [];
+    // 整套奖励可兑现后才抽取/提交；缺卡不能把一次性领取资格换成部分奖励。
+    // 传说卡与「员工通行证」同池：稀有度传说且可随机获得，按 id 不重复。
+    const pool = m.reward.legend ? catalog.filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c)) : [];
+    const egg = m.reward.egg ? catalog.find(c => c.id === (SDT.Base.PET_EGG_ID || 'pet-egg')) : null;
+    if (m.reward.legend && new Set(pool.map(c => c.id)).size < m.reward.legend) {
+      return { ok: false, why: 'unavailable', msg: `传说奖励卡池不足 ${m.reward.legend} 种，奖励尚未领取——请恢复卡库后重试` };
+    }
+    if (m.reward.egg && !egg) {
+      return { ok: false, why: 'unavailable', msg: '奖励宠物蛋暂时不在卡库中，奖励尚未领取——请恢复卡库后重试' };
+    }
     if (m.reward.legend) {
-      // 传说卡与「员工通行证」同池：稀有度传说且可随机获得
-      const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
       const taken = new Set();
       for (let k = 0; k < m.reward.legend; k++) {
         const free = pool.filter(c => !taken.has(c.id));
-        if (!free.length) break;
         const got = free[Math.floor(Random.random('coll') * free.length)];
         taken.add(got.id);
         cards.push({ card: { ...got }, count: 1 });
       }
     }
-    if (m.reward.egg) {
-      const egg = (SDT.Cards.all() || []).find(c => c.id === (SDT.Base.PET_EGG_ID || 'pet-egg'));
-      if (egg) cards.push({ card: { ...egg }, count: 1 });
-    }
+    if (egg) cards.push({ card: { ...egg }, count: 1 });
     if (cards.length && SDT.Base.stashRoom() < cards.reduce((a, c) => a + (c.count || 1), 0)) {
       return { ok: false, why: 'full', msg: '仓库容量不足——先卖出或扩建卡牌仓库再来领取' };
     }
@@ -234,7 +239,8 @@ import { LEVEL_MAX, addXpToProgress, xpForNext } from './meta-progression.js';
     const cards = [];
     if (a.reward.card) {
       const c = SDT.Cards.all().find(x => x.id === a.reward.card);
-      if (c) cards.push({ card: { ...c }, count: 1 });
+      if (!c) return { ok: false, why: 'unavailable', msg: '成就奖励卡暂时不在卡库中，奖励尚未领取——请恢复卡库后重试' };
+      cards.push({ card: { ...c }, count: 1 });
     }
     if (cards.length && SDT.Base.stashRoom() < 1) {
       return { ok: false, why: 'full', msg: '仓库容量不足——先卖出或扩建卡牌仓库再来领取' };

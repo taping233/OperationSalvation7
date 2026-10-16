@@ -1,0 +1,146 @@
+{
+  "status": "completed-uncommitted",
+  "sourceFrozen": true,
+  "files": [
+    {
+      "path": "game/src/ui/game.menu.js",
+      "sha256": "cea11326c01a46240c7f902d37a667d528589502fe743652145ffe7654573010"
+    },
+    {
+      "path": "game/src/ui/game.menu.pages.js",
+      "sha256": "6aedf6a0a140865a1eb986428225920f48ee88cad6d13c9b257520f67c4051b6"
+    },
+    {
+      "path": "game/src/game.boot.js",
+      "sha256": "8cb7e4fc4238c5d78f3daa897a10e0aca232b1968fff1a9b8f371fc4aaec0e7a"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "a42e44077e091a1f3b920e688da4d54e6b9e1118d675b26ff676f69dd8c8227c"
+    },
+    {
+      "path": "game/src/README.md",
+      "sha256": "43a9b6b13b358b9ea61f6920b0a0a1c3efb4d0809a8c0e2d5189141d39a2516f"
+    },
+    {
+      "path": "tests/helpers/menu-controller.js",
+      "sha256": "f6cef4e67a0fa09b44d738592faefe882d2a984d549e2dc4ac65b125d3d9afea"
+    },
+    {
+      "path": "tests/menu-pages-lazy-entry.test.js",
+      "sha256": "6aad38b3eeab4325b15e573d8438d1937e1f7e239712c4ebf116ee13f6f14331"
+    },
+    {
+      "path": "tests/global-boot-pointer-lifecycle.test.js",
+      "sha256": "5d41ce01444e28ece4f1e590a4d61965bf86d0207b3c4e7ec58b9145faefd895"
+    },
+    {
+      "path": "tests/save-slot-delete-results.test.js",
+      "sha256": "3d665390bb19adf7348651397279bb722e284cac973b90bb5f8cc8fab1e1aedf"
+    },
+    {
+      "path": "tests/hub-lazy-entry.test.js",
+      "sha256": "5bfb00c4bf0dcbba8a7f6ff4749fa0b1daaa2da4badf6f5864033ff989e7f4d1"
+    },
+    {
+      "path": "tests/xart-z1-batch2.test.js",
+      "sha256": "fddc83ffc21a6003b822f018f5e56864588454f2fc29a26f950fb7049bd08c37"
+    },
+    {
+      "path": "tests/agent-command-results.test.js",
+      "sha256": "325cb2bcf82f8c8c4098d0ac78ecd94d08751b98d1825db56fac486192a595ee"
+    },
+    {
+      "path": "tests/base-corrupt-field.test.js",
+      "sha256": "6216bb0da4adf147c8f949fd2372ed9e6fc79604057d72aebf394f7225825672"
+    },
+    {
+      "path": "tests/e4-async-entry.test.js",
+      "sha256": "3b0a43e10df728e89bbd7c174f854028f850213a602e2b83b9adde1a5fc0fbdf"
+    },
+    {
+      "path": "tests/e5-session-recovery.test.js",
+      "sha256": "afce9054aa87ff3fa8c5d957bade84f9c7fb19659650eb102e4d3fd359239e9f"
+    },
+    {
+      "path": "tests/full-review-regressions-world.test.js",
+      "sha256": "5a495324e6438cc9312ec166425139ad258451854347ebb87b5aab828323d3a2"
+    },
+    {
+      "path": "tests/global-ui-feedback-state-lifecycle.test.js",
+      "sha256": "7d6d8a42c1d6622c8df92cb751bb49732edad573c3a6ae7fa26415cf69a97d4c"
+    },
+    {
+      "path": "tests/global-ui-settings-notes.test.js",
+      "sha256": "ddf59e1ba1ed151d66941e824928df210fe2863c86d162a7e7faafbae93b7bb4"
+    },
+    {
+      "path": "tests/leave-run-menu.test.js",
+      "sha256": "d82454228dddc1b91bb33aa71c6b129114f3b19e79286c85799e28825706234f"
+    },
+    {
+      "path": "tests/menu-recovery-entry.test.js",
+      "sha256": "87d223dbe19dcb8b76622ce6100dc2cf85d07ebb41a05c71c1bbd3f7f61129f2"
+    },
+    {
+      "path": "tests/r5a-session-menu.test.js",
+      "sha256": "8215c3e88401586679daac12874c35e0b58e1883d398c55a59a611703226be6d"
+    },
+    {
+      "path": "tests/r7b-feedback.test.js",
+      "sha256": "3a318d9d58d5cf135e0ec75d9c72d7275e8cdd128c1994e79965dd488c7b8e08"
+    },
+    {
+      "path": "tests/settings-page.test.js",
+      "sha256": "e866eecaf0aa39fce8d9b1899b0c99b6048ee99c120a01f8e700d10de577bbae"
+    },
+    {
+      "path": "tests/terminal-settlement.test.js",
+      "sha256": "a829a11735277f83290391bf096747d6a061d0ce97f04984bb9a550e6298c8da"
+    }
+  ],
+  "verification": {
+    "target": {
+      "files": 25,
+      "tests": 319,
+      "failed": 0,
+      "log": "final-target-tests.log"
+    },
+    "syntax": {
+      "files": 425,
+      "exit": 0,
+      "log": "syntax.log"
+    },
+    "typecheck": {
+      "configs": 8,
+      "exit": 0,
+      "log": "typecheck.log"
+    },
+    "lint": {
+      "exit": 0,
+      "log": "lint.log"
+    },
+    "docs": {
+      "pages": 49,
+      "relativeLinks": 461,
+      "findings": 0,
+      "log": "docs-check.json"
+    }
+  },
+  "unverified": [
+    "Normal build and gzip delta must be measured by parent verification worker",
+    "Current built-in browser cold/hot page navigation must be verified by parent",
+    "R2 asset consumer approval fingerprints require parent diff review"
+  ],
+  "boundaries": [
+    "No browser, service, save, Git, budget or build changes",
+    "No game.session or stats modifications",
+    "Existing materialized-panel fixtures keep original assertions; dedicated facade tests exercise cold imports and retry"
+  ],
+  "notes": [
+    "29/32 original implementations are byte-identical moves",
+    "openSettings/openSlotPicker only exclude their own menu cancellation owner",
+    "quitGame cancels pending menu/page presentation before its existing synchronous save/exit behavior",
+    "New module is dynamically imported only after a menu action, no idle warm import"
+  ]
+}

@@ -6,6 +6,7 @@ export function isConsumedMapNode(game, node) {
   const isDoor = game.doorKeys?.has(`${node.li},${node.idx}`) ||
     game.layerData?.[node.li]?.doors?.some(door => door.at === node.idx);
   if (isDoor) return false;
+  if (node.def?.type === 'altar') return !!game.altarActivated && !game.altarRewardPending;
   if (node.def?.type === 'boss') return !!game.bossKilled;
   return CONSUMABLE_TYPES.has(node.def?.type) && !!game.visited?.[`${node.li},${node.idx}`];
 }

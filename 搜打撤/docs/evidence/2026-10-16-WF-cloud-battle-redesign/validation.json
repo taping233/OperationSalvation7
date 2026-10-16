@@ -1,0 +1,58 @@
+{
+  "iteration": 1,
+  "status": "implementation-ready-awaiting-parent-browser-verification",
+  "baseline": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "checks": {
+    "targetTests": {
+      "files": 7,
+      "passed": 108,
+      "failed": 0,
+      "log": "target-tests.log"
+    },
+    "eslint": {
+      "passed": true,
+      "log": "eslint.log"
+    },
+    "nodeSyntax": {
+      "passed": true,
+      "scope": [
+        "battle.hand-layout.js",
+        "battle.layers.js",
+        "battle-entry-view.test.js"
+      ]
+    },
+    "postcss": {
+      "passed": true,
+      "rules": 157
+    },
+    "ownDiffWhitespace": {
+      "passed": true
+    }
+  },
+  "browser": {
+    "operator": "parent task",
+    "performedByThisWorker": false,
+    "pending": [
+      "resting hand",
+      "left/right hover",
+      "bottom-edge pointer down/drag",
+      "target selection",
+      "turn/settlement"
+    ]
+  },
+  "outOfScopeNotRun": [
+    "full test suite",
+    "build",
+    "new browser/service",
+    "commit/push",
+    "multi-size"
+  ],
+  "sha256": {
+    "game/css/battle-stage.css": "587e93336e7a4e40448d6c863ea0d251375255b3ef7da630c7e23f7fbe213d68",
+    "game/src/battle/view/battle.hand-layout.js": "706562cd5559ec0a8edae122c152a638dc5c23ce0a89c5ac1f619dc9f1253f6b",
+    "game/src/battle/view/battle.layers.js": "a95ca50b62bc8ddfa8c06fa5cc04d64dae668b6cd3c8eadd00ac4dc1f9db6d3c",
+    "tests/battle-hand-layout.test.js": "00a6c24875d7b077faca8c2a6d998ecf2b6581a29089ac436c575c3a6cfee7da",
+    "tests/battle-decision-readability.test.js": "c8a28224670ed70a9603fc4c4239583838bb243697c711c3da842976880ea367",
+    "tests/battle-entry-view.test.js": "9c28bbf9a2843b2f4386da2c6b8ef890295bd2d2b846b1cdbc88b89726404eab"
+  }
+}

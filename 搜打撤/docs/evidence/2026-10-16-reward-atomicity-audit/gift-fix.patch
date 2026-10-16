@@ -1,0 +1,127 @@
+diff --git "a/\346\220\234\346\211\223\346\222\244/game/src/run/chest-reward-save.js" "b/\346\220\234\346\211\223\346\222\244/game/src/run/chest-reward-save.js"
+index 3c82064..95acea6 100644
+--- "a/\346\220\234\346\211\223\346\222\244/game/src/run/chest-reward-save.js"
++++ "b/\346\220\234\346\211\223\346\222\244/game/src/run/chest-reward-save.js"
+@@ -29,6 +29,7 @@ export function restoreChestReward(game, saved) {
+   const c = saved.current;
+   if (!c || !['small','medium','large','class','boss'].includes(c.kind) || !Array.isArray(c.cards) || c.cards.some(card => !card || typeof card.name !== 'string')
+     || !Number.isFinite(c.coins) || c.coins < 0 || typeof c.coinsReceived !== 'boolean') return null;
++  if (c.choiceCount !== undefined && (!Number.isInteger(c.choiceCount) || c.choiceCount < 1 || c.choiceCount > c.cards.length)) return null;
+   const validIndices = list => Array.isArray(list) && list.every(i => Number.isInteger(i) && i >= 0 && i < c.cards.length);
+   if (!validIndices(c.taken) || !validIndices(c.lost) || c.taken.some(i => c.lost.includes(i))) return null;
+   if (c.rewardStage != null && !['chest','opening','cards'].includes(c.rewardStage)) return null;
+diff --git "a/\346\220\234\346\211\223\346\222\244/game/src/run/chests.js" "b/\346\220\234\346\211\223\346\222\244/game/src/run/chests.js"
+index 8b3265e..e9d92c9 100644
+--- "a/\346\220\234\346\211\223\346\222\244/game/src/run/chests.js"
++++ "b/\346\220\234\346\211\223\346\222\244/game/src/run/chests.js"
+@@ -403,16 +403,19 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+ 
+   function render() {
+     const K = KINDS()[cur.kind];
+-    const isPick = !!K.pickFrom;   // 中宝箱：3 选 1
+     const taken = cur.taken || (cur.taken = new Set());
+     const lost = cur.lost || (cur.lost = new Set());
++    // 阿猫附赠追加在原候选之后，不参与原三选一的永久放弃。
++    const choiceCount = cur.choiceCount ?? cur.cards.length;
++    const isChoice = index => !!K.pickFrom && index < choiceCount;
++    const isPick = !!K.pickFrom && cur.cards.some((_, i) => isChoice(i) && !taken.has(i) && !lost.has(i));
+     const selected = Number.isInteger(cur.selected) ? cur.selected : null;
+     const cardsHTML = cur.cards.map((card, i) => {
+       const got = taken.has(i), dropped = lost.has(i);
+       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
+       const action = got || dropped
+         ? `<span class="reward-unit-state">${got ? '已入背包' : '已永久放弃'}</span>`
+-        : `<button type="button" class="reward-claim${fits ? '' : ' needs-room'}" data-act="${fits ? isPick ? 'chestPick' : 'chestTake1' : 'chestOpenBag'}" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>${fits ? '收下' : '整理背包'}</button>`;
++        : `<button type="button" class="reward-claim${fits ? '' : ' needs-room'}" data-act="${fits ? isChoice(i) ? 'chestPick' : 'chestTake1' : 'chestOpenBag'}" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>${fits ? '收下' : '整理背包'}</button>`;
+       return `<article class="reward-unit${got ? ' got' : dropped ? ' dropped' : ''}" data-reward-rarity="${escAttr(rewardRarity(card))}">
+         <button type="button" class="reward-card" data-act="chestSelect" data-i="${i}" aria-label="放大查看${escAttr(card.name || '卡牌')}" title="放大查看">${SDT.Cards.cardHTML(card)}</button>${action}</article>`;
+     }).join('');
+@@ -499,17 +502,18 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
+       const source = UI.el.ovBody.querySelector(`[data-act="chestSelect"][data-i="${i}"]`);
+       UI.showCardZoom?.(card, { from:source, returnFocus:source, hideNote:true, presentation:'expedition',
+-        footer:available ? `<button class="ov-btn ok" data-act="${fits ? isPick ? 'chestPick' : 'chestTake1' : 'chestOpenBag'}" data-i="${i}">${fits ? '收下' : '整理背包'}</button>` : '' });
++        footer:available ? `<button class="ov-btn ok" data-act="${fits ? isChoice(i) ? 'chestPick' : 'chestTake1' : 'chestOpenBag'}" data-i="${i}">${fits ? '收下' : '整理背包'}</button>` : '' });
+       rewardZoom = document.getElementById('cardZoom');
+     });
+     UI.act('chestTake1', (d) => {
+-      if (!isLiveReward() || isPick || cur.leaveConfirm) return;
++      if (!isLiveReward() || cur.leaveConfirm) return;
+       const i = Number(d.i);
++      if (isChoice(i)) return;
+       const card = cur.cards[i];
+       if (!card || cur.taken.has(i) || cur.lost.has(i)) return;
+       closeRewardZoom();
+       cur.selected = i;
+-      if (G.grantCard(card, { silent: true })) {   // grantEventCard：同名并入 / 容量判定都在里面（搜刮页自带揭晓，不再叠加获得演出）
++      if (grantRewardCard(card)) {   // 同名并入 / 容量判定仍由 grantEventCard 负责
+         cur.taken.add(i);
+         persistReward();
+         cur.notice = `「${card.name}」已入本次远征背包`;
+@@ -543,15 +547,16 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+     UI.act('chestPick', (d) => {
+       if (!isLiveReward() || !isPick || cur.leaveConfirm) return;
+       const i = Number(d.i);
++      if (!isChoice(i)) return;
+       const card = cur.cards[i];
+       if (!card || cur.taken.has(i) || cur.lost.has(i)) return;
+       closeRewardZoom();
+       cur.selected = i;
+       // 放不下时留在面板（grantCard 内部已播报「背包已满」）：玩家可腾格重选或走「只收金币离开」，
+       // 不得照常 next()——否则三选一被静默吞卡（2026-09-19 审计 P2-8）
+-      if (!G.grantCard(card, { silent: true })) { cur.notice = `「${card.name}」当前放不下，整理背包后可重试`; render(); return; }
++      if (!grantRewardCard(card)) { cur.notice = `「${card.name}」当前放不下，整理背包后可重试`; render(); return; }
+       cur.taken.add(i);
+-      cur.cards.forEach((_, other) => { if (other !== i) cur.lost.add(other); });
++      cur.cards.forEach((_, other) => { if (isChoice(other) && other !== i) cur.lost.add(other); });
+       persistReward();
+       cur.notice = `「${card.name}」已入本次远征背包`;
+       render();
+@@ -580,11 +585,20 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+     });
+   }
+ 
++  // 附赠先追加到同一快照，再与本体 taken 一起保存；不因当前容量丢弃或重掷。
++  function grantRewardCard(card) {
++    const box = cur;
++    return G.grantCard(card, { silent: true, deferAcquiredCard: extra => {
++      box.choiceCount ??= box.cards.length;
++      box.cards.push({ ...extra });
++    } });
++  }
++
+   function takeAll() {
+     const taken = cur.taken;
+     cur.cards.forEach((card, i) => {
+       if (taken.has(i) || cur.lost.has(i)) return;
+-      if (G.grantCard(card, { silent: true })) taken.add(i);
++      if (grantRewardCard(card)) taken.add(i);
+     });
+     collectCoinsOnce();
+     if (!cur.cards.length && !cur.coins) UI.log('（空的——早被别的拾荒者搬空了……）', 'dim');
+diff --git "a/\346\220\234\346\211\223\346\222\244/game/src/run/game.run.scenes.js" "b/\346\220\234\346\211\223\346\222\244/game/src/run/game.run.scenes.js"
+index 18f9f8a..74e82f6 100644
+--- "a/\346\220\234\346\211\223\346\222\244/game/src/run/game.run.scenes.js"
++++ "b/\346\220\234\346\211\223\346\222\244/game/src/run/game.run.scenes.js"
+@@ -459,7 +459,9 @@ export function grantEventCard(tpl, opts = {}) {
+     if (pool.length) {
+       const got = pool[Math.floor(Random.random('loot') * pool.length)];
+       UI.log('[[icon:bolt]] <b>阿猫的礼物</b>：随机获取触发，附赠另 1 张随机卡牌', 'loot');
+-      grantEventCard(got);   // 池内已排除自身，无递归风险
++      // 宝箱可把已掷定附赠保留为独立待领卡；本体与附赠各自记领取状态。
++      if (typeof opts.deferAcquiredCard === 'function') opts.deferAcquiredCard(got);
++      else grantEventCard(got);   // 旧非宝箱入口保留原行为；池内排除自身，无递归风险
+     }
+   }
+   return true;
+--- a/搜打撤/docs/save-format.md
++++ b/搜打撤/docs/save-format.md
+@@ -26,7 +26,7 @@
+ 
+ 移动事务只在稳定节点落点后保存：对局进入 `moving` 状态时不写档；页面刷新、退出或崩溃后恢复到上一次已完成的 `layerIdx` / `trackPos`。动画完成后才递增 `turn`、结算节点事件并写入存档。
+ 
+-宝箱奖励快照的 current.rewardStage 保存 chest（待领取宝箱）、opening（已领取，正在开箱）或 cards（卡牌/金币领奖）。待领取快照恢复宝箱页；已领取但尚在演出的快照直接恢复卡牌页，沿用已冻结奖励；缺字段的旧快照按卡牌领奖处理。
++宝箱奖励快照的 current.rewardStage 保存 chest（待领取宝箱）、opening（已领取，正在开箱）或 cards（卡牌/金币领奖）。待领取快照恢复宝箱页；已领取但尚在演出的快照直接恢复卡牌页，沿用已冻结奖励；缺字段的旧快照按卡牌领奖处理。 current.choiceCount 为附赠追加前的原候选数量（可选正整数，不大于 cards 长度）；阿猫附赠追加到 cards 并独立领取，三选一只放弃该边界内的其他候选，旧快照缺字段时按原 cards 全长处理。
+ 
+ ## 节点事件的未领候选
+ 

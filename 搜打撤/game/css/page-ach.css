@@ -46,8 +46,6 @@
   opacity: .2;
   transition: opacity var(--ach-fast);
 }
-#overlay #hubMain.hub-ach .hub-page > .collection-panel::before,
-#overlay #hubMain.hub-ach .hub-page > .coll-room::before { opacity: .48; }
 /* W1b 角标编号 01/02：短金线引导 + 暖金小字（档案编号仪式，同 upgrade W1b） */
 #overlay #hubMain.hub-ach .hub-page > .hub-card::after {
   content: '0' counter(ach-panel);
@@ -106,27 +104,8 @@
 }
 #overlay #hubMain.hub-ach .hub-page > .hub-card > h3 .set-tip b { color: #d6d8d9; }
 /* 职业收藏室说明段：灰青正文 + 提亮强调 */
-#overlay #hubMain.hub-ach .coll-room .ov-note { color: #9a9ea0; line-height: 1.75; letter-spacing: .02em; }
-#overlay #hubMain.hub-ach .coll-room .ov-note b { color: #d6d8d9; }
 
 /* ═════════ W3 收藏档案室命令条：金标线索引 + 档案章数字（archive-command） ═════════ */
-
-#overlay #hubMain.hub-ach .collection-command {
-  border-color: rgba(188,193,196,.18); border-left-color: var(--gold-main);
-  background: linear-gradient(110deg, rgba(27,29,31,.96), rgba(16,17,18,.96));
-}
-#overlay #hubMain.hub-ach .collection-command .section-kicker { color: var(--gold-main); }
-#overlay #hubMain.hub-ach .collection-command h3 {
-  text-shadow: 0 2px 18px rgba(8,8,9,.7), 0 0 4px rgba(230,203,118,.2);
-}
-#overlay #hubMain.hub-ach .collection-command p { color: #9da1a3; }
-#overlay #hubMain.hub-ach .collection-command-stats > span {
-  border-color: rgba(170,174,177,.2); background: rgba(11,11,12,.55);
-}
-#overlay #hubMain.hub-ach .collection-command-stats b {
-  color: #f6e6af;
-  text-shadow: 0 0 10px rgba(230,203,118,.22);
-}
 
 /* ═════════ W4 收藏子页签：金线激活态 + 端点光点 ═════════ */
 
@@ -233,136 +212,25 @@
 /* ═════════ W6 职业收藏室：金量槽流光 + 里程碑三态 + 收藏格金线 ═════════ */
 
 /* W6a 总进度金量槽：暗槽 + var(--gold-main) 金量（同 upgrade W3b）+ 缓慢流光 */
-#overlay #hubMain.hub-ach .coll-room .base-bar {
-  background: rgba(11,12,13,.92);
-  border: 1px solid rgba(230,203,118,.24);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.5);
-}
-#overlay #hubMain.hub-ach .coll-room .base-bar i {
-  position: relative; overflow: hidden;
-  background: linear-gradient(90deg, #8a7442, var(--gold-main) 55%, #f1dd9b);
-  box-shadow: 0 0 8px rgba(230,203,118,.3);
-}
-#overlay #hubMain.hub-ach .coll-room .base-bar i::after {
-  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 40%;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgba(235,233,227,.34), transparent);
-  transform: translateX(-120%);
-  animation: achSweep 3.8s ease-in-out infinite;
-}
 @keyframes achSweep {
   from { transform: translateX(-120%); }
   to { transform: translateX(340%); }
 }
 
 /* W6b 里程碑行：普通=暗档；reach=最亮召唤（金晕呼吸）；done=沉淀暖金 */
-#overlay #hubMain.hub-ach .coll-ms {
-  position: relative; overflow: hidden;
-  border-color: rgba(170,174,177,.14); border-radius:0;
-  background: linear-gradient(180deg, rgba(18,19,20,.66), rgba(13,14,15,.72));
-  transition: border-color var(--ach-fast), background var(--ach-fast), box-shadow var(--ach-fast);
-}
-#overlay #hubMain.hub-ach .coll-ms b { color: #d6d8d9; letter-spacing: 1px; }
-#overlay #hubMain.hub-ach .coll-ms .rw { color: #9da1a3; }
-#overlay #hubMain.hub-ach .coll-ms .dim {
-  color: #9da1a3; font-variant-numeric: tabular-nums; letter-spacing: .06em;
-}
-#overlay #hubMain.hub-ach .coll-ms .got { color: #babec1; letter-spacing: .06em; }
 /* 已领取：沉淀暖金（弱于可领取一档） */
-#overlay #hubMain.hub-ach .coll-ms.done {
-  border-color: rgba(230,203,118,.28);
-  background: linear-gradient(180deg, rgba(38,33,22,.42), rgba(17,18,20,.74));
-}
-#overlay #hubMain.hub-ach .coll-ms.done b { color: #ebdeb6; }
 /* 可领取（reach）：金边 + 左缘金标 + 呼吸金晕——收藏室最亮元素 */
-#overlay #hubMain.hub-ach .coll-ms.reach {
-  border-color: rgba(230,203,118,.62);
-  background: linear-gradient(90deg, rgba(230,203,118,.12), rgba(230,203,118,.028) 46%, rgba(16,18,19,.6));
-  box-shadow: inset 2px 0 0 var(--gold-main), 0 0 16px rgba(230,203,118,.12);
-}
-#overlay #hubMain.hub-ach .coll-ms.reach::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  box-shadow: 0 0 22px rgba(230,203,118,.16), inset 0 0 26px rgba(230,203,118,.05);
-  animation: achSummon 2.6s ease-in-out infinite alternate;
-}
-#overlay #hubMain.hub-ach .coll-ms.reach:hover {
-  border-color: rgba(230,203,118,.8);
-  box-shadow: inset 2px 0 0 var(--gold-main), 0 0 20px rgba(230,203,118,.18);
-}
-#overlay #hubMain.hub-ach .coll-ms.reach b { color: #e2e1dd; }
 
 /* W6c 分组题行：金短线引导（人物名仪式）+ 计数小字 */
-#overlay #hubMain.hub-ach .coll-group-head { position: relative; }
-#overlay #hubMain.hub-ach .coll-group-head b::before {
-  content: ''; display: inline-block; width: 12px; height: 1px; margin-right: 8px;
-  vertical-align: .32em;
-  background: linear-gradient(90deg, transparent, #e6cb76a8);
-  box-shadow: 0 0 4px #e6cb7655;
-}
-#overlay #hubMain.hub-ach .coll-group-head b { color: #e5e4e1; }
-#overlay #hubMain.hub-ach .coll-group-head .dim { color: #92979a; letter-spacing: .03em; }
 
 /* 五份人物档案各有身份与真实收藏计数，空槽仍只表示未知卡牌。 */
-#overlay #hubMain.hub-ach .coll-room .coll-group {
-  margin-top: 18px; padding: 14px 16px 18px;
-  border: 1px solid rgba(170,174,177,.18); border-left: 3px solid var(--role-accent, #e6cb76);
-  background: linear-gradient(180deg, rgba(25,27,29,.88), rgba(16,18,19,.9));
-}
-#overlay #hubMain.hub-ach .coll-room .coll-group-head {
-  display: grid; grid-template-columns: minmax(110px, auto) minmax(0, 1fr) auto;
-  align-items: center; gap: 16px; margin: 0 0 12px; padding-bottom: 11px;
-  border-bottom: 1px solid rgba(170,174,177,.2);
-}
-#overlay #hubMain.hub-ach .coll-room .coll-group-identity { display: flex; align-items: baseline; gap: 10px; }
-#overlay #hubMain.hub-ach .coll-room .coll-group-identity b { font-size: 21px; letter-spacing: 2px; }
-#overlay #hubMain.hub-ach .coll-room .coll-group-identity b::before { background: var(--role-accent, #e6cb76); }
-#overlay #hubMain.hub-ach .coll-room .coll-group-identity small { color: var(--role-accent, #e6cb76); font-size: 12px; }
-#overlay #hubMain.hub-ach .coll-room .coll-group-head .dim { color: #babdc0; font-size: 13px; line-height: 1.5; }
-#overlay #hubMain.hub-ach .coll-room .coll-group-count {
-  color: #e1dfd9; font-size: 22px; line-height: 1; font-variant-numeric: tabular-nums;
-}
-#overlay #hubMain.hub-ach .coll-room .coll-group-count small { color: #b1b5b7; font-size: 12px; font-weight: 500; }
-#overlay #hubMain.hub-ach .coll-room .coll-slot.off { width: 70px; height: 96px; }
 
 /* W6d 已收藏格：hover 金线点亮 + 金晕（卡牌本体不动；位移/按压沿用 page-hub W5c） */
-#overlay #hubMain.hub-ach .coll-slot.on {
-  transition: transform var(--ach-lift), border-color var(--ach-lift), box-shadow var(--ach-lift);
-}
-#overlay #hubMain.hub-ach .coll-slot.on:hover {
-  border-color: rgba(230,203,118,.75);
-  box-shadow: 0 6px 18px rgba(7,7,8,.45), 0 0 14px rgba(230,203,118,.22);
-}
-#overlay #hubMain.hub-ach .coll-slot.on:active { transform: translateY(0) scale(.97); transition-duration: .08s; }
 
 /* ═════════ W7 卡背图鉴：装备中金晕 + hover 金线（锁定暗档语义不动） ═════════ */
-
-#overlay #hubMain.hub-ach .back-card {
-  transition: border-color var(--ach-lift), transform var(--ach-lift),
-    box-shadow var(--ach-lift), background var(--ach-lift);
-}
-#overlay #hubMain.hub-ach .back-card:hover:not(.locked) {
-  border-color: var(--gold-main);
-  box-shadow: 0 8px 20px rgba(7,7,8,.4), 0 0 12px rgba(230,203,118,.12);
-}
 /* 装备中：金边 + 常亮金晕（页内第二亮，仅次于可领取） */
-#overlay #hubMain.hub-ach .back-card.on {
-  border-color: var(--gold-main);
-  box-shadow: inset 0 0 0 1px rgba(230,203,118,.25), 0 0 16px rgba(230,203,118,.18);
-}
-#overlay #hubMain.hub-ach .back-card.on b { color: #e2e1dd; }
-#overlay #hubMain.hub-ach .back-card:active:not(.locked) { transform: translateY(0) scale(.98); transition-duration: .08s; }
 
 /* 卡背本体优先：宽窗四枚一排，第二排自然居中，不改变解锁与装备语义。 */
-#overlay #hubMain.hub-ach .collection-panel .back-grid {
-    width: 100%; max-width: 1000px; margin-inline: auto;
-    justify-content: center; gap: 18px;
-  }
-#overlay #hubMain.hub-ach .collection-panel .back-card {
-    flex: 0 0 220px; width: 220px; min-height: 260px; padding: 16px 14px; gap: 9px;
-  }
-#overlay #hubMain.hub-ach .collection-panel .back-thumb { width: 100px; height: 140px; }
-#overlay #hubMain.hub-ach .collection-panel .back-card b { font-size: 15.5px; }
-#overlay #hubMain.hub-ach .collection-panel .back-card .dim { font-size: 12px; line-height: 1.45; }
 
 /* ═════════ T2 焦点态：键盘导航金线焦点环（与 page-hub.css T2 同语言，
    双保险写死在本作用域内） ═════════ */
@@ -393,23 +261,6 @@
 #overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(4) { animation-delay: .15s; }
 #overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(5) { animation-delay: .2s; }
 #overlay #hubMain.hub-ach .hub-page.page-in .ach-list .ach-row:nth-child(6) { animation-delay: .25s; }
-#overlay #hubMain.hub-ach .hub-page.page-in .coll-ms-list .coll-ms {
-  animation: achRowIn .45s cubic-bezier(.22, 1, .36, 1) backwards;
-}
-#overlay #hubMain.hub-ach .hub-page.page-in .coll-ms-list .coll-ms:nth-child(2) { animation-delay: .05s; }
-#overlay #hubMain.hub-ach .hub-page.page-in .coll-ms-list .coll-ms:nth-child(3) { animation-delay: .1s; }
-#overlay #hubMain.hub-ach .hub-page.page-in .coll-ms-list .coll-ms:nth-child(4) { animation-delay: .15s; }
-#overlay #hubMain.hub-ach .hub-page.page-in .coll-ms-list .coll-ms:nth-child(5) { animation-delay: .2s; }
-#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card {
-  animation: achRowIn .45s cubic-bezier(.22, 1, .36, 1) backwards;
-}
-#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(2) { animation-delay: .04s; }
-#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(3) { animation-delay: .08s; }
-#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(4) { animation-delay: .12s; }
-#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(5) { animation-delay: .16s; }
-#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(6) { animation-delay: .2s; }
-#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(7) { animation-delay: .24s; }
-#overlay #hubMain.hub-ach .hub-page.page-in .back-grid .back-card:nth-child(8) { animation-delay: .28s; }
 @keyframes achRowIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
@@ -437,19 +288,6 @@
 
 /* W9a 见闻纪念档案条：并入收藏档案室标题卡的一行（JS 收成 .story-strip），
    金短线引导 + 主辅层级（标签金、正文冷青灰） */
-#overlay #hubMain.hub-ach .collection-command .story-strip {
-  display: flex; align-items: baseline; gap: 10px;
-  margin-top: 10px; padding-top: 9px;
-  border-top: 1px solid rgba(170,174,177,.14);
-  font-size: 12px; line-height: 1.7; color: #9a9fa2;
-}
-#overlay #hubMain.hub-ach .collection-command .story-strip .ss-tag {
-  flex: none; display: inline-flex; align-items: center; gap: 5px;
-  color: var(--gold-main); letter-spacing: 1px;
-  padding-right: 12px;
-  background: linear-gradient(270deg, transparent, rgba(230,203,118,.4)) right center / 10px 1px no-repeat;
-}
-#overlay #hubMain.hub-ach .collection-command .story-strip .ss-tag .ic { width: 13px; height: 13px; }
 
 /* W9b 0/26 空态「剪影陈列」：深色铭牌卡阵（悬停见名与条件），
    网格自适应流式排布，页面高度随内容收敛（不再铺 26 行灰名单） */

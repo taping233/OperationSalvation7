@@ -1,0 +1,748 @@
+--- a/game/src/battle/core/battle.core.js
++++ b/game/src/battle/core/battle.core.js
+@@ -12,7 +12,7 @@
+   battleRestartCheckpoint, set$energy, set$interaction, set$viewingGrave, set$viewingDeck,
+   set$pendingHint, bindBattleRenderer, showDread, takeBattleFloats, takeBattleCardAnims,
+ } from '../runtime/battle.runtime.js';
+-import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, getBattleLiveness, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover, slamSkill } from './battle.engine.js';
++import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, getBattleLiveness, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover, slamSkill } from './battle.engine.js';
+ import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
+ import { endTurn, surrender } from './battle.enemy-phase.js';
+ /* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染由注入的视图完成） */
+@@ -441,5 +441,5 @@
+ const BattleSession = Object.freeze({ start, getSnapshot, commands, serialize, restore });
+ 
+ // 批5 理顺：battle.view 拆片后按名直引（viewApi 原样保留给既有消费方与测试）
+-export { AFFIX_META, Combat, R, aegisBlocked, effCostOf, findCard, infuseOf, markDreadShown, pileTip, refillDrawPile, takeFloats, takeCardAnims, targetSide, unplayableReason, matchHandSelectKey, handCurseSpecs, getPreviewContext };
++export { AFFIX_META, Combat, R, aegisBlocked, effCostOf, findCard, findEffectiveCard, infusionFuelReason, infuseOf, markDreadShown, pileTip, refillDrawPile, takeFloats, takeCardAnims, targetSide, unplayableReason, matchHandSelectKey, handCurseSpecs, getPreviewContext };
+ export { BattleSession, commands, configureBattleRenderer, getSnapshot, getBattleLiveness, viewApi };
+--- a/game/src/battle/core/battle.engine.js
++++ b/game/src/battle/core/battle.engine.js
+@@ -118,10 +118,10 @@
+     readState: () => ({
+       game: G, granted, hand, consumed, discoverQueue, cardOverrides,
+       unlimitedRune, zeroFeeUntil, turn, pstat, spellCost1, meleeCost1,
+-      lastPlayedType, playedMartialThisTurn, playedMovesThisTurn, pdef,
++      lastPlayedType, playedMartialThisTurn, playedMovesThisTurn, pdef, shaTransform,
+     }),
+   });
+-const { findCard, drawOf, infuseOf, effCostOf, handCurseSpecs, queueSwapCostDiscover, swapCardCosts } = cardInspection;
++const { findCard, findEffectiveCard, infusionFuelReason, drawOf, infuseOf, effCostOf, handCurseSpecs, queueSwapCostDiscover, swapCardCosts } = cardInspection;
+ /* 治理批次 3：敌方生命周期簇与抽牌/发牌/自动出牌簇迁至 battle.foe-lifecycle.js / battle.draw.js。
+  * 此处装配端口；resolveCard/applyTextEffects/triggersM2 为下方晚定义常量，以惰性包装传入。 */
+ const { resolveFoeDefeat, sweepDead, nestPhase } = createBattleFoeLifecycle({
+@@ -381,7 +381,7 @@
+ function openBag() { return bag.openBag(); }
+ function closeBag() { return bag.closeBag(); }
+ 
+-export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, getBattleLiveness, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, slamSkill, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse, deferEndTurn, hasPendingEndTurn };
++export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, getBattleLiveness, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, slamSkill, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse, deferEndTurn, hasPendingEndTurn };
+ 
+ /* —— 六段正文（原行 606-2479，逐字）—— */
+   // ---------- 生效时刻 / 持续时间 / 生效条件（设计者 2026-09-02 定版） ----------
+@@ -894,6 +894,7 @@
+   // （普通战斗没有牌库与墓地概念）；道具卡只能在普通战斗中使用。
+   // 2026-09-09 老板 #14：手牌代价（消耗 N 张 X / 选择 N 张手牌）不足时同样不可打出。
+   function unplayableReason(card) {
++    if (card?._battleTransformMissing) return `转换目标「${card._battleTransformMissing}」缺失，暂时无法使用`;
+     const handCards = hand.map(u => { const o = findCard(u); return o ? { uid: u, card: o.card } : null; }).filter(Boolean);
+     return unplayableReasonFor(card, mode, { handCards, selfCard: card });
+   }
+@@ -906,7 +907,7 @@
+     if (hasPendingEndTurn() && interactionOf('card')?.uid !== uid) return;
+     // 玩家命令只能提交当前手牌。内部直接释放继续直接走 queueCardExecution，
+     // 保留牌与弃牌洗回重抽后 uid 会重新位于 hand，因此仍可再次合法使用。
+-    const entry = findCard(uid);
++    const entry = findEffectiveCard(uid);
+     if (!entry) return;
+     const card = entry.card;
+     if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
+@@ -947,12 +948,7 @@
+     if (pendingCard) set$interaction(null);   // 交互正常结算：清卡牌槽（不 cancelTargeting，RESOLVING 迁移接管阶段）
+     set$pendingHint('');
+     // 「杀化为X」战斗规则：打出的初始攻击以目标卡形态结算（uid 沿用，弃牌簿记不变）
+-    let playCard = card;
+-    if (shaTransform && (card.name === '初始攻击' || card.name === '杀')) {
+-      const tpl = SDT.Cards.all().find(c => c.name === shaTransform);
+-      if (tpl) playCard = { ...tpl };
+-    }
+-    queueCardExecution(uid, playCard, pendingCard?.fuelUids || [], target, isFree);
++    queueCardExecution(uid, card, pendingCard?.fuelUids || [], target, isFree);
+   }
+   // v0.32 堆叠手牌：点击传入手牌 uid——按 uid 精确 toggle（N1 修复，2026-09-25 老板定版）：
+   // 点已选中的那张=取消它（per-uid delete，同叠/别叠的其他已选张不受影响）；
+@@ -963,11 +959,11 @@
+     if (!infusing || uid === infusing.uid) return;
+     const entry = findCard(uid);
+     if (!entry) return;
+-    // 「无法用于注能」（不朽斩等）不能被选作注能牺牲品
+-    if (/无法用于注能/.test(String(entry.card.desc || ''))) return;
++    // Allow removing a previously picked card even if a transform made it illegal.
+     if (infusing.picked.has(uid)) {
+       infusing.picked.delete(uid);
+     } else {
++      if (infusionFuelReason(uid)) return;
+       const groupUids = hand.filter(h => {
+         if (h === infusing.uid) return false;
+         const o = findCard(h);
+@@ -982,7 +978,7 @@
+   function beginInfuse(uid) {
+     if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || viewingDeck || hasPendingEndTurn()) return;
+     if (!hand.includes(uid)) return;
+-    const entry = findCard(uid);
++    const entry = findEffectiveCard(uid);
+     if (!entry) return;
+     const card = entry.card;
+     if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
+@@ -990,7 +986,7 @@
+     if (infN <= 0) return;
+     const effCost = effCostOf(card, uid);
+     if (effCost > energy) { G.log(`[[icon:bolt]] 能量不足：【${esc(card.name)}】注能打出需要 ${effCost} 点能量`, 'warn'); return; }
+-    const others = hand.filter(h => h !== uid);
++    const others = hand.filter(h => h !== uid && !infusionFuelReason(h));
+     if (others.length < infN) {
+       G.log(`[[icon:flask]] 手牌不足：【${esc(card.name)}】注能(${infN}) 需要消耗 ${infN} 张手牌，当前只有 ${others.length} 张可选`, 'warn');
+       return;
+@@ -1005,6 +1001,13 @@
+     if (!infusing || infusing.picked.size !== infusing.need) { SDT.Sound.sfx('deny'); return; }
+     const { uid, card } = infusing;
+     const fuel = [...infusing.picked];
++    const invalid = fuel.filter(fuelUid => infusionFuelReason(fuelUid));
++    if (invalid.length) {
++      invalid.forEach(fuelUid => infusing.picked.delete(fuelUid));
++      G.log('[[icon:cross]] 注能材料已失效，请重新选择可用手牌', 'warn');
++      requestBattleRender();
++      return;
++    }
+     set$infusing(null);
+     SDT.Sound.sfx('confirm');
+     if (targetSide(card) === 'enemy' && alive().length > 1) {
+@@ -1088,7 +1091,7 @@
+   // —— 出牌结算长流程（queueCardExecution + execPlay）已拆出 battle.exec-play.js：工厂注入 + 一行转发 shim（具名导出面不变）——
+   const execPlayFlow = createBattleExecPlay({
+     warnCardRuleRejection,
+-    requestBattleRender, findCard, fireConsumeTriggers, effCostOf,
++    requestBattleRender, findCard, infusionFuelReason, fireConsumeTriggers, effCostOf,
+     resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
+     takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate, checkElementSealProgress,
+     beginDartStrike, sweepDead, finish, processChoice, processDiscoverQueue, queueBattleAction,
+--- a/game/src/battle/core/battle.exec-play.js
++++ b/game/src/battle/core/battle.exec-play.js
+@@ -16,7 +16,7 @@
+ 
+ export function createBattleExecPlay({
+   warnCardRuleRejection = message => G.log(message, 'warn'),
+-  requestBattleRender, findCard, fireConsumeTriggers, effCostOf,
++  requestBattleRender, findCard, infusionFuelReason, fireConsumeTriggers, effCostOf,
+   resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
+   takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate, checkElementSealProgress,
+   beginDartStrike, sweepDead, finish, processChoice, processDiscoverQueue, queueBattleAction,
+@@ -73,6 +73,12 @@
+     throwIfActionCancelled(signal);
+     // Recheck after queueing: rules may have changed before payment is committed.
+     if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
++    // Revalidate before any payment: a queued transform can invalidate chosen fuel.
++    if ((fuelUids || []).some(fuelUid => infusionFuelReason?.(fuelUid))) {
++      G.log('[[icon:cross]] 注能材料已失效，本次打出未扣费', 'warn');
++      requestBattleRender();
++      return false;
++    }
+     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
+     if (handRequirement) {
+       const handUids = new Set(hand);
+--- a/game/src/battle/effects/battle.card-inspection.js
++++ b/game/src/battle/effects/battle.card-inspection.js
+@@ -35,6 +35,32 @@
+     const entry = state.game.ownedCards.find(o => o.uid === uid) || state.granted.find(o => o.uid === uid) || null;
+     if (entry) repairLegacyTT7Card(entry.card);
+     return entry;
++  };
++
++  // Keep UID/ownership and raw overrides intact: this is a battle-only query view.
++  // Match the existing play-time order: per-UID override first, then the latest
++  // starter transform rule. A non-starter override is never transformed again.
++  const findEffectiveCard = uid => {
++    const state = readState();
++    const found = findCard(uid);
++    if (!found) return null;
++    const base = state.game.ownedCards.find(entry => entry.uid === uid)
++      || state.granted.find(entry => entry.uid === uid);
++    const entry = base && base !== found ? { ...base, ...found, uid } : found;
++    const transform = state.shaTransform;
++    if (!transform || !['初始攻击', '杀'].includes(entry.card.name)) return entry;
++    const template = cards.all?.().find(card => card.name === transform);
++    return { ...entry, card: template ? { ...template }
++      : { ...entry.card, _battleTransformMissing: transform } };
++  };
++
++  const infusionFuelReason = uid => {
++    const state = readState();
++    if (!state.hand.includes(uid)) return '这张牌已离开手牌';
++    const entry = findEffectiveCard(uid);
++    if (!entry) return '找不到这张手牌';
++    if (entry.card._battleTransformMissing) return `转换目标「${entry.card._battleTransformMissing}」缺失，暂时无法使用`;
++    return /无法用于注能/.test(String(entry.card.desc || '')) ? '本牌无法用于注能' : '';
+   };
+ 
+   const drawOf = card => +(card.draw || 0) || cards.deriveDraw(card) || 0;
+@@ -118,5 +144,5 @@
+     state.game.log(`[[icon:sparkles]] <b>交换费用</b>：【${esc(a.card.name)}】费用变为 <b>${costA}</b>，【${esc(b.card.name)}】费用变为 <b>${costB}</b>`, 'sys');
+   }
+ 
+-  return { findCard, drawOf, infuseOf, effCostOf, handCurseSpecs, queueSwapCostDiscover, swapCardCosts };
++  return { findCard, findEffectiveCard, infusionFuelReason, drawOf, infuseOf, effCostOf, handCurseSpecs, queueSwapCostDiscover, swapCardCosts };
+ }
+--- a/game/src/battle/view/battle.aim.js
++++ b/game/src/battle/view/battle.aim.js
+@@ -6,7 +6,7 @@
+ import { esc } from '../../core/shared.js';
+ import { openHandInspector, closeHandInspector } from './battle.hand-inspector.js';
+ import '../../../css/battle-hand-overhaul.css';
+-import { commands, getSnapshot, getBattleLiveness, effCostOf, findCard, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
++import { commands, getSnapshot, getBattleLiveness, effCostOf, findEffectiveCard as findCard, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
+   const play = commands.playCard;
+   const bagSlam = commands.bagSlam;             // 需求 #9：背包砸击
+   const slamSkillOf = commands.slamSkill;       // 2026-10-02 老板：砸击换五职业分化技能（含牧师翻面态）
+--- a/game/src/battle/view/battle.hand-inspector.js
++++ b/game/src/battle/view/battle.hand-inspector.js
+@@ -1,6 +1,6 @@
+ import { displayCardDescription } from '../../cards/card-description-text.js';
+ import { descRich } from '../../cards/cards.view.js';
+-import { effCostOf, findCard, getSnapshot, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
++import { effCostOf, findEffectiveCard as findCard, infusionFuelReason, getSnapshot, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
+ 
+ let active = null;
+ const inHand = (snapshot, uid) => snapshot.hand?.includes(uid);
+@@ -12,6 +12,7 @@
+   if (snapshot.infusing) {
+     if (snapshot.infusing.uid === uid) return { reason: '不能用正在注能的牌作为材料' };
+     const picked = snapshot.infusing.picked.includes(uid);
++    if (!picked && infusionFuelReason(uid)) return { reason: infusionFuelReason(uid) };
+     if (!picked && snapshot.infusing.picked.length >= snapshot.infusing.need) return { reason: '注能材料已选满' };
+     return { kind: 'infusion', label: picked ? '取消这张材料' : '选作注能材料', detail: '只调整材料选择；确认发动后才消耗。' };
+   }
+--- a/game/src/battle/view/battle.layers.js
++++ b/game/src/battle/view/battle.layers.js
+@@ -43,7 +43,7 @@
+   }
+   return true;
+ }
+-import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, findCard, infuseOf, targetSide, unplayableReason, handCurseSpecs } from '../core/battle.core.js';
++import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, findEffectiveCard as findCard, infusionFuelReason, infuseOf, targetSide, unplayableReason, handCurseSpecs } from '../core/battle.core.js';
+   const resolveSlam = commands.resolveSlam;
+   const resolveDart = commands.resolveDart;   // 血毒双镖二段点选（2026-09-16 留言）
+   const useItemCmd = commands.useItem;
+@@ -191,13 +191,13 @@
+     const pickedN = infusingNow ? g.uids.filter(u => infusing.picked.includes(u)).length : 0;
+     const targeted = !infusingNow && pendingTarget && pendingTarget.uid === uid;
+     const effCost = effCostOf(g.card, uid);
+-    const blocked = infusingNow ? null : unplayableReason(g.card);   // 无法使用的卡：虚化禁用
+-    const blockedReason = infusingNow ? '' : blocked || (busy ? '当前动作正在结算' : effCost > energy ? `能量不足：需要 ${effCost}，当前 ${energy}` : '');
++    const blocked = infusingNow ? (!isSelf && infusionFuelReason(uid)) : unplayableReason(g.card);   // 无法使用的卡：虚化禁用
++    const blockedReason = blocked || (infusingNow ? '' : busy ? '当前动作正在结算' : effCost > energy ? `能量不足：需要 ${effCost}，当前 ${energy}` : '');
+     const rawSide = (!infusingNow && !blocked) ? targetSide(g.card) : null;
+     // 2026-09-09 老板 #7：招式若无对敌方施加的效果，拖到敌我中间空地即可打出（side 'any'）
+     const side = rawSide || (blocked || infusingNow ? null : 'any');
+     let cls = '';
+-    if (infusingNow) cls = isSelf ? ' infuse-self' : (pickedN ? ' sel' : '');
++    if (infusingNow) cls = isSelf ? ' infuse-self' : blocked ? ' off' : (pickedN ? ' sel' : '');
+     else if (blocked) cls = ' off';
+     else if (targeted) cls = ' targeting';
+     else if ((effCost > energy || busy)) cls = ' off';
+@@ -209,7 +209,7 @@
+     const amount = dynamic ? +(dynamic.amount ?? g.card.dmg ?? 0) : 0;
+     const ruleHint = dynamic ? `当前 ${hits} 段 × ${amount} 基础伤害，共 ${hits * amount}；目标防御与加成另计。` : cardRuleHint(g.card, mode);
+     const tip = infusingNow
+-      ? (isSelf ? '正在注能的卡牌 · 详情按钮查看规则' : `点击选择注能材料${g.uids.length > 1 ? ` · 本叠还有 ${g.uids.length} 张` : ''}`)
++      ? (isSelf ? '正在注能的卡牌 · 详情按钮查看规则' : blocked || `点击选择注能材料${g.uids.length > 1 ? ` · 本叠还有 ${g.uids.length} 张` : ''}`)
+       : blocked
+         ? `无法打出：${blocked} · 详情按钮查看完整规则`
+         : infuseOf(g.card) > 0
+--- a/game/src/battle/view/battle.overlays.js
++++ b/game/src/battle/view/battle.overlays.js
+@@ -4,8 +4,9 @@
+ const UI = window.SDT.UI;
+ import { esc } from '../../core/shared.js';
+ import { escAttr } from '../../core/shared.js';
++import { battleStartExplanation } from '../../cards/card-battle-start-explanation.js';
+ import { displayCardDescription } from '../../cards/card-description-text.js';
+-import { commands, getSnapshot, AFFIX_META, R, findCard } from '../core/battle.core.js';
++import { commands, getSnapshot, AFFIX_META, R, findEffectiveCard as findCard } from '../core/battle.core.js';
+   const closeBagCmd = commands.closeBag;
+   const useItemCmd = commands.useItem;
+   const closeGrave = commands.closeGrave;
+@@ -60,6 +61,7 @@
+     <h4>${esc(stack.card.name)}</h4>
+     <p class="battle-decision-inspect-meta">${esc(stack.card.type || '卡牌')} · ${stack.card.cost ?? 0} 费 · ${stack.count} 张</p>
+     <p class="battle-decision-inspect-rules">${esc(displayCardDescription(stack.card.desc || '暂无规则描述', stack.card.id))}</p>
++    ${battleStartExplanation(stack.card) ? `<p class="ov-note">${esc(battleStartExplanation(stack.card))}</p>` : ''}
+   </aside>`;
+ }
+ function installPileInspection(stacks) {
+--- a/game/src/battle/view/battle.view.js
++++ b/game/src/battle/view/battle.view.js
+@@ -15,7 +15,7 @@
+ import { createBattleSceneryCapture } from './battle.scenery.js';
+ import { attach as attachUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
+ import { isHandPaymentCandidate, matchesHandSelectKey } from '../core/battle.hand-selection.js';
+-import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCostOf, findCard, markDreadShown, pileTip, refillDrawPile, takeCardAnims, unplayableReason } from '../core/battle.core.js';
++import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCostOf, findCard as findStoredCard, findEffectiveCard as findCard, markDreadShown, pileTip, refillDrawPile, takeCardAnims, unplayableReason } from '../core/battle.core.js';
+ import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView, showBattleDecision } from './battle.overlays.js';
+ import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, HAND_PAGE_SIZE } from './battle.layers.js';
+ import { spawnFloats } from './battle.vfx.js';
+@@ -361,14 +361,15 @@
+       const handUids = isPayment ? new Set(hand) : null;
+       const excludedUids = isPayment ? new Set(handSelecting.excludedUids || []) : null;
+       const selectedUids = isPayment ? new Set(handSelecting.selectedUids || []) : null;
+-      const pool = hand.map(findCard).filter(o => {
++      // Preserve existing payment/type eligibility; only the rendered face is transformed.
++      const pool = hand.map(findStoredCard).filter(o => {
+         if (!o) return false;
+         if (!isPayment) return matchesHandSelectKey(o.card, handSelecting.type);
+         return isHandPaymentCandidate({
+           uid: o.uid, handUids, card: o.card, type: handSelecting.type,
+           excludedUids, selectedUids,
+         });
+-      });
++      }).map(entry => findCard(entry.uid) || entry);
+       const optsHTML = pool.map(o => `
+         <button type="button" class="bt-card" data-act="btPickHand" data-uid="${o.uid}" aria-label="选择 ${escAttr(o.card.name)}" title="点击选择">
+           ${SDT.Cards.cardHTML(o.card, 'sm')}
+--- a/game/src/ui/inventory-zoom.js
++++ b/game/src/ui/inventory-zoom.js
+@@ -1,4 +1,5 @@
+ import { esc } from '../core/shared.js';
++import { battleStartExplanation } from '../cards/card-battle-start-explanation.js';
+ import { descRich } from '../cards/cards.view.js';
+ import '../../css/inventory-zoom.css';
+ 
+@@ -10,9 +11,10 @@
+   const acts = window.SDT.UI?._acts || {};
+   const names = new Set(['stashCollectToggle', 'stashCollectOne', 'stashCollectAll', ...[...zoom.querySelectorAll('.cz-foot [data-act]')].map(button => button.dataset.act)]);
+   zoom._inventoryActions = Object.fromEntries([...names].map(name => [name, acts[name]]).filter(([, handler]) => typeof handler === 'function'));
++  const startHint = battleStartExplanation(card);
+   const info = document.createElement('article');
+   info.className = 'inventory-zoom-info';
+-  info.innerHTML = `<header><h2>${esc(card.name)}</h2><small>${esc(card.type || '')} · ${esc(card.rarity || '')}</small></header><section class="inventory-zoom-effect"><h3>卡牌效果</h3><div class="inventory-zoom-rules card-rules-copy">${descRich(description, card.id)}</div></section>`;
++  info.innerHTML = `<header><h2>${esc(card.name)}</h2><small>${esc(card.type || '')} · ${esc(card.rarity || '')}</small></header><section class="inventory-zoom-effect"><h3>卡牌效果</h3><div class="inventory-zoom-rules card-rules-copy">${descRich(description, card.id)}</div>${startHint ? `<p class="inventory-zoom-start-hint">${esc(startHint)}</p>` : ''}</section>`;
+   zoom.querySelector('.cz-card')?.insertAdjacentElement('afterend', info);
+   const close = zoom.querySelector('.cz-close');
+   if (close) info.prepend(close);
+--- /dev/null
++++ b/game/src/cards/card-battle-start-explanation.js
+@@ -0,0 +1,6 @@
++// Display-only context; do not change canonical execution descriptions.
++export function battleStartExplanation(card) {
++  const isStartEquip = card?.type === '装备' &&
++    (card.rules?.equip?.battleStart?.length || /对战开始时/.test(String(card.desc || '')));
++  return isStartEquip ? '仅在 BOSS 战编入本场牌库时，开战自动生效；普通战不触发。' : '';
++}
+--- /dev/null
++++ b/tests/battle-effective-card.test.js
+@@ -0,0 +1,64 @@
++import { describe, expect, it } from 'vitest';
++import { createBattleCardInspection } from '../game/src/battle/effects/battle.card-inspection.js';
++
++const starter = () => ({ id: 'starter-attack', name: '初始攻击', type: '武术', cost: 1,
++  dmg: 0, dmgType: 'attack', desc: '攻（+0）' });
++const immortal = () => ({ id: 'immortal-token', name: '不朽斩', type: '武术', cost: 1,
++  dmg: 1, dmgType: 'attack', desc: '攻（+1），永远被保留在手牌中，无法用于注能' });
++const dragon = () => ({ id: 'dragon-token', name: '青龙偃月斩', type: '武术', cost: 2,
++  dmg: 3, dmgType: 'attack', desc: '攻（+3）' });
++function setup() {
++  const owned = { uid: 's1', baseUid: 'origin-1', card: starter(), safe: true };
++  const temporary = { uid: 'boss-sha-7-1', card: starter() };
++  const templates = [immortal(), dragon()];
++  const state = { game: { ownedCards: [owned] }, granted: [temporary], hand: [owned.uid, temporary.uid],
++    cardOverrides: new Map(), shaTransform: null, consumed: [], discoverQueue: [], zeroFeeUntil: new Map(), turn: 2,
++    unlimitedRune: false, pstat: { status: {} }, pdef: { armor: 0 },
++    playedMartialThisTurn: 0, playedMovesThisTurn: 0 };
++  const inspection = createBattleCardInspection({ cards: { all: () => templates,
++    deriveDraw: () => 0, deriveInfuse: () => 0 }, readState: () => state, curseMeta: {} });
++  return { state, inspection, owned, temporary, templates };
++}
++describe('approved effective-card contract', () => {
++  it('keeps raw findCard and original entry metadata while resolving every starter UID', () => {
++    const { state, inspection, owned, temporary } = setup();
++    state.shaTransform = '不朽斩';
++    const raw = JSON.stringify(owned);
++    const effective = inspection.findEffectiveCard(owned.uid);
++    expect(effective).toMatchObject({ uid: 's1', baseUid: 'origin-1', safe: true,
++      card: { id: 'immortal-token', name: '不朽斩', dmg: 1 } });
++    expect(inspection.findEffectiveCard(temporary.uid)).toMatchObject({ uid: temporary.uid,
++      card: { id: 'immortal-token' } });
++    expect(inspection.findCard(owned.uid)).toBe(owned);
++    expect(JSON.stringify(owned)).toBe(raw);
++    expect(state.cardOverrides.size).toBe(0);
++    expect(inspection.infusionFuelReason(owned.uid)).toContain('无法用于注能');
++  });
++  it('uses current rule with override-before-transform order and original UID zero-fee state', () => {
++    const { state, inspection, owned } = setup();
++    state.shaTransform = '不朽斩';
++    state.cardOverrides.set(owned.uid, { ...starter(), cost: 0 });
++    expect(inspection.findEffectiveCard(owned.uid).card.cost).toBe(1);
++    state.zeroFeeUntil.set(owned.uid, 2);
++    expect(inspection.effCostOf(inspection.findEffectiveCard(owned.uid).card, owned.uid)).toBe(0);
++    state.cardOverrides.set(owned.uid, { ...dragon(), cost: 0 });
++    expect(inspection.findEffectiveCard(owned.uid).card.name).toBe('青龙偃月斩');
++    expect(inspection.findEffectiveCard(owned.uid).card.cost).toBe(0);
++    expect(inspection.findEffectiveCard(owned.uid).baseUid).toBe('origin-1');
++    state.cardOverrides.delete(owned.uid);
++    state.shaTransform = '青龙偃月斩';
++    expect(inspection.findEffectiveCard(owned.uid).card.name).toBe('青龙偃月斩');
++    expect(inspection.infusionFuelReason(owned.uid)).toBe('');
++  });
++  it('returns unavailable target reason and does not mutate original card when template is missing', () => {
++    const { state, inspection, owned } = setup();
++    const before = JSON.stringify(owned);
++    state.shaTransform = '不存在的转换目标';
++    expect(inspection.findEffectiveCard(owned.uid).card.name).toBe('初始攻击');
++    expect(inspection.infusionFuelReason(owned.uid)).toContain('不存在的转换目标');
++    expect(JSON.stringify(owned)).toBe(before);
++    state.shaTransform = null;
++    expect(inspection.findEffectiveCard(owned.uid).card).toBe(owned.card);
++    expect(inspection.infusionFuelReason(owned.uid)).toBe('');
++  });
++});
+--- /dev/null
++++ b/tests/card-battle-start-explanation.test.js
+@@ -0,0 +1,25 @@
++import { describe, expect, it } from 'vitest';
++import { battleStartExplanation } from '../game/src/cards/card-battle-start-explanation.js';
++import { decorateInventoryZoom } from '../game/src/ui/inventory-zoom.js';
++
++describe('开战装备库存说明', () => {
++  it('文本与结构化开战装备同样说明BOSS编入条件，不改原描述', () => {
++    const card = { id: 'sword', name: '骷髅王剑', type: '装备', desc: '对战开始时，你的初始攻击化为不朽斩。' };
++    const before = JSON.stringify(card);
++    expect(battleStartExplanation(card)).toContain('BOSS 战编入本场牌库');
++    expect(battleStartExplanation(card)).toContain('普通战不触发');
++    expect(battleStartExplanation({ type: '装备', desc: '', rules: { equip: { battleStart: [{ op: 'armor', amount: 1 }] } } })).toBe(battleStartExplanation(card));
++    expect(battleStartExplanation({ ...card, type: '武术' })).toBe('');
++    expect(battleStartExplanation({ type: '装备', desc: '攻 +1' })).toBe('');
++    expect(JSON.stringify(card)).toBe(before);
++  });
++  it('库存/背包共用大图装饰器显示可见说明，重复打开不重复附加', () => {
++    window.SDT ||= {}; window.SDT.UI = { _acts: {} };
++    document.body.innerHTML = '<div id="cardZoom"><div class="cz-card"></div><footer class="cz-foot"></footer></div>';
++    const card = { name: '骷髅王剑', type: '装备', desc: '对战开始时，初始攻击化为不朽斩。' };
++    decorateInventoryZoom(card); decorateInventoryZoom(card);
++    expect(document.querySelectorAll('.inventory-zoom-start-hint')).toHaveLength(1);
++    expect(document.querySelector('.inventory-zoom-start-hint').textContent).toBe(battleStartExplanation(card));
++    document.body.replaceChildren();
++  });
++});
+--- /dev/null
++++ b/tests/skull-sword-effective-session.test.js
+@@ -0,0 +1,290 @@
++import { afterEach, beforeEach, expect, it, vi } from 'vitest';
++// 本文件验输入，资源就绪由 battle-entry-readiness 专门控制未兑现的加载 Promise 验证。
++vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({ createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false, ready: () => true }), waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }) }));
++
++const rich = value => String(value || '').replace(/\[\[icon:[^\]]+\]\]/g, '');
++const actions = new Map();
++const UI = {
++  el: {}, _lastMode: null,
++  showOverlay(title, html, mode) { this.el.ovBody.innerHTML = rich(html); this.el.overlay.hidden = false; this._lastMode = mode; },
++  hideOverlay() { this.el.overlay.hidden = true; }, hideTooltip() {}, showTooltip() {}, refresh() {}, log() {},
++  act: (name, fn) => actions.set(name, fn),
++};
++window.SDT = {
++  UI, Icons: { img: () => '', rich, TYPE_ART: {} },
++  Sound: { music() {}, sfx() {}, setDucked() {}, setBoss() {} },
++  Art: { has: () => false, monsterArt: () => '', classArt: () => '', cutoutFigures() {}, decodeIn() {}, warm() {}, collectCardAssets: () => [] },
++  Meta: { track() {} }, Motion: { reduceMotion: () => true },
++  MAP: { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
++};
++await import('../game/src/cards/cards.js');
++const { BattleSession, configureBattleRenderer, findEffectiveCard, infusionFuelReason, findCard } = await import('../game/src/battle/core/battle.core.js');
++const { render } = await import('../game/src/battle/view/battle.view.js');
++const Aim = await import('../game/src/battle/view/battle.aim.js');
++const { closeHandInspector } = await import('../game/src/battle/view/battle.hand-inspector.js');
++const { clearFeedback } = await import('../game/src/battle/view/battle.feedback.js');
++const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
++const engine = await import('../game/src/battle/core/battle.engine.js');
++const Cards = window.SDT.Cards;
++Cards.ensureSha(); Cards.ensureStarters(); Cards.ensureTabletop(); Cards.ensureDmgTypes(); Cards.ensureEffectFields();
++const mockedIcons = window.SDT.Icons;
++await import('../game/src/core/icons-bitmap.js');
++window.SDT.Icons = mockedIcons;
++const originalRaf = window.requestAnimationFrame;
++const originalAnimate = Element.prototype.animate;
++let frames, game;
++const panel = () => document.querySelector('.bt-hand-detail');
++function flush() { for (let i = 0; frames.length && i < 30; i++) frames.shift()(performance.now()); }
++async function settle() {
++  for (let i = 0; i < 100; i++) {
++    flush(); await new Promise(resolve => setTimeout(resolve, 5));
++    const s = BattleSession.getSnapshot();
++    if (!s.busy && !s.actionQueueLength) { flush(); return; }
++  }
++  throw new Error('战斗动作没有收口');
++}
++beforeEach(async () => {
++  // 拖拽松手后的 300ms click 吞噬是生产交互窗口；各用例不共享该手势。
++  if (Date.now() - Aim.aimPlayedAt < 300) await new Promise(resolve => setTimeout(resolve, 310));
++  frames = [];
++  window.requestAnimationFrame = callback => { frames.push(callback); return frames.length; };
++  Element.prototype.animate = () => ({ finished: Promise.resolve(), cancel() {}, onfinish: null });
++  document.body.innerHTML = '<div id="overlay"><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
++  UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
++  UI.el.ovBody.addEventListener('click', event => {
++    const button = event.target.closest('[data-act]');
++    if (button && !button.closest('[inert]')) actions.get(button.dataset.act)?.(button.dataset);
++  });
++});
++afterEach(async () => {
++  closeHandInspector({ restoreFocus: false }); Aim.cancelAim(); Aim.cancelClickSelection(); clearFeedback();
++  if (game?.battleActive) { BattleSession.commands.cancelInfusion(); BattleSession.commands.flee(); }
++  await settle();
++  frames = []; actions.clear(); window.requestAnimationFrame = originalRaf; Element.prototype.animate = originalAnimate;
++});
++
++
++const canonical = id => structuredClone(Cards.all().find(card => card.id === id));
++async function swordBattle(boss = true, sword = true, extraIds = []) {
++  const cards = [...(sword ? ['tt3-immortal-blade'] : []), 'tt3sp-silverthorn',
++    'starter-attack', 'starter-attack', 'starter-attack', 'starter-attack', ...extraIds];
++  game = { ownedCards: cards.map((id, i) => ({ uid: `sword-${i}`, baseUid: `base-${i}`, card: canonical(id) })),
++    inventory: [], usedPocket: [], hp: 100, maxHp: 100, atk: 4, spellPower: 0, coins: 0,
++    myClass: null, state: 'idle', battleActive: false, log() {}, heal() {}, addItem() {}, onBattleEnd() {} };
++  window.SDT.game = game;
++  window.SDT.MAP.rules.battleStartDraw = 99;
++  runtime.set$lastDeckSel([]);
++  BattleSession.start(game, [{ id: 'sword-foe', name: '骷髅剑靶', hp: 1000, atk: 0 }],
++    { isBoss: boss, directBossStart: boss });
++  await settle();
++  return game.ownedCards.filter(entry => entry.card.id === 'starter-attack').map(entry => entry.uid);
++}
++function effectiveNode() { return [...UI.el.ovBody.querySelectorAll('.sts-hand .bt-card')]
++  .find(node => findEffectiveCard(node.dataset.uid)?.card.name === '不朽斩'); }
++
++it('BOSS逐UID变形含临时初始牌，卡面/详情/aria/选敌同源且重复回手不污染原卡', async () => {
++  const originals = await swordBattle();
++  const ownedBefore = JSON.stringify(game.ownedCards);
++  const transformed = BattleSession.getSnapshot().hand.filter(uid => findCard(uid)?.card.id === 'starter-attack');
++  expect(transformed).toHaveLength(5);
++  expect(transformed.some(uid => uid.startsWith('boss-sha-'))).toBe(true);
++  for (const uid of transformed) { expect(findEffectiveCard(uid).uid).toBe(uid); expect(findEffectiveCard(uid).card.name).toBe('不朽斩'); }
++  let node = effectiveNode();
++  expect(node.querySelector('.bt-rest-name').textContent).toBe('不朽斩');
++  expect(node.querySelector('.hsc-name').textContent).toContain('不朽斩');
++  expect(node.getAttribute('aria-label')).toContain('不朽斩');
++  expect(node.querySelector('.bt-detail-chip').getAttribute('aria-label')).toContain('不朽斩');
++  const representative = node.dataset.uid;
++  Aim.startAim({ button: 0, isPrimary: true, pointerId: 71, clientX: 200, clientY: 600 }, node);
++  expect(Aim.aim.uid).toBe(representative);
++  expect(Aim.aim.card.name).toBe('不朽斩');
++  expect(Aim.aim.card.dmg).toBe(1);
++  Aim.cancelAim();
++  Aim.showHandCardDetails(representative);
++  expect(panel().getAttribute('aria-label')).toBe('不朽斩：卡牌详情');
++  expect(panel().textContent).toContain('无法用于注能');
++  closeHandInspector();
++  Aim.selectCardByClick(representative, false, { autoSingleTarget: false });
++  expect(UI.el.ovBody.querySelector('.sts-arena-caption').textContent).toContain('不朽斩');
++  expect(UI.el.ovBody.querySelector('.sts-arena-caption span').getAttribute('aria-label')).toContain('不朽斩');
++  Aim.cancelClickSelection();
++  const before = BattleSession.getSnapshot();
++  BattleSession.commands.playCard(originals[0], 0); await settle();
++  BattleSession.commands.playCard(originals[0], 0); await settle();
++  const after = BattleSession.getSnapshot();
++  expect(after.foes[0].hp).toBe(before.foes[0].hp - 10);
++  expect(after.energy).toBe(before.energy - 2);
++  expect(after.hand).toContain(originals[0]);
++  expect(after.hand.filter(uid => uid === originals[0])).toHaveLength(1);
++  expect(after.grave).not.toContain(originals[0]);
++  expect(JSON.stringify(game.ownedCards)).toBe(ownedBefore);
++  BattleSession.commands.flee(); await settle();
++  expect(findEffectiveCard(originals[0]).card.name).toBe('初始攻击');
++  expect(JSON.stringify(game.ownedCards)).toBe(ownedBefore);
++});
++
++it('不朽斩不能选作注能材料，禁用原因与详情一致，拒绝不扣费不移牌', async () => {
++  const originals = await swordBattle();
++  const before = BattleSession.getSnapshot();
++  const main = game.ownedCards.find(entry => entry.card.infuse > 0).uid;
++  BattleSession.commands.beginInfusion(main); await settle();
++  BattleSession.commands.selectInfusion(originals[0]); await settle();
++  expect(BattleSession.getSnapshot().infusing.picked).toEqual([]);
++  expect(infusionFuelReason(originals[0])).toContain('无法用于注能');
++  const node = effectiveNode();
++  expect(node.classList.contains('off')).toBe(true);
++  expect(node.querySelector('.hs-card').getAttribute('aria-disabled')).toBe('true');
++  expect(node.getAttribute('aria-label')).toContain('无法用于注能');
++  Aim.showHandCardDetails(node.dataset.uid);
++  expect(panel().querySelector('.bt-hand-detail-use').disabled).toBe(true);
++  expect(panel().querySelector('.bt-hand-detail-action-note').textContent).toContain('无法用于注能');
++  closeHandInspector();
++  expect(BattleSession.getSnapshot().energy).toBe(before.energy);
++  expect(BattleSession.getSnapshot().hand).toEqual(before.hand);
++});
++
++it('材料已选后变形：确认前重验并清除非法选择，原卡和能量不动', async () => {
++  const originals = await swordBattle();
++  runtime.set$shaTransform(null);
++  const main = game.ownedCards.find(entry => entry.card.infuse > 0).uid;
++  BattleSession.commands.beginInfusion(main);
++  BattleSession.commands.selectInfusion(originals[0]);
++  expect(BattleSession.getSnapshot().infusing.picked).toEqual([originals[0]]);
++  const before = BattleSession.getSnapshot();
++  runtime.set$shaTransform('不朽斩');
++  BattleSession.commands.confirmInfusion(); await settle();
++  const after = BattleSession.getSnapshot();
++  expect(after.infusing.picked).toEqual([]);
++  expect(after.hand).toEqual(before.hand);
++  expect(after.energy).toBe(before.energy);
++});
++
++it('缺失变形模板fail-closed，拒绝出牌与材料，保持原UID和背包', async () => {
++  const originals = await swordBattle();
++  runtime.set$shaTransform('不存在的转换目标');
++  const before = BattleSession.getSnapshot();
++  expect(engine.unplayableReason(findEffectiveCard(originals[0]).card)).toContain('不存在的转换目标');
++  expect(infusionFuelReason(originals[0])).toContain('不存在的转换目标');
++  BattleSession.commands.playCard(originals[0], 0); await settle();
++  expect(BattleSession.getSnapshot().hand).toEqual(before.hand);
++  expect(BattleSession.getSnapshot().energy).toBe(before.energy);
++  expect(BattleSession.getSnapshot().foes[0].hp).toBe(before.foes[0].hp);
++});
++
++it('普通战持有剑仍不触发，下次普通战不继承前场变形', async () => {
++  await swordBattle(); BattleSession.commands.flee(); await settle();
++  const originals = await swordBattle(false);
++  expect(runtime.shaTransform).toBeNull();
++  expect(BattleSession.getSnapshot().equipped).toEqual([]);
++  expect(BattleSession.getSnapshot().hand).not.toContain('sword-0');
++  for (const uid of originals) expect(findEffectiveCard(uid).card.name).toBe('初始攻击');
++  const before = BattleSession.getSnapshot();
++  BattleSession.commands.playCard(originals[0], 0); await settle();
++  expect(BattleSession.getSnapshot().foes[0].hp).toBe(before.foes[0].hp - 4);
++  expect(BattleSession.getSnapshot().hand).not.toContain(originals[0]);
++});
++
++it('注能进入动作队列后才变形：最终支付屏障拒绝，不扣能量、不移牌', async () => {
++  const originals = await swordBattle();
++  runtime.set$shaTransform(null);
++  const main = game.ownedCards.find(entry => entry.card.infuse > 0).uid;
++  const before = BattleSession.getSnapshot();
++  // The real queue starts synchronously; hold its presentation boundary so the
++  // transformation happens after admission and before the payment commit.
++  let release;
++  const ready = new Promise(resolve => { release = resolve; });
++  configureBattleRenderer(() => ready);
++  try {
++    engine.queueCardExecution(main, findCard(main).card, [originals[0]], runtime.foes[0], false);
++    runtime.set$shaTransform('不朽斩');
++    release(true);
++    await settle();
++  } finally { configureBattleRenderer(render); }
++  const after = BattleSession.getSnapshot();
++  expect(after.hand).toEqual(before.hand);
++  expect(after.energy).toBe(before.energy);
++  expect(after.foes[0].hp).toBe(before.foes[0].hp);
++});
++
++it('原UID免能量与非初始override优先级沿用，后登记青龙形态替换不朽规则', async () => {
++  const originals = await swordBattle();
++  const uid = originals[0];
++  runtime.cardOverrides.set(uid, { ...findCard(uid).card, cost: 0 });
++  expect(findEffectiveCard(uid).card.cost).toBe(1);
++  runtime.zeroFeeUntil.set(uid, runtime.turn);
++  const before = BattleSession.getSnapshot();
++  BattleSession.commands.playCard(uid, 0); await settle();
++  expect(BattleSession.getSnapshot().energy).toBe(before.energy);
++  expect(BattleSession.getSnapshot().foes[0].hp).toBe(before.foes[0].hp - 5);
++  const dragon = Cards.all().find(card => card.name === '青龙偃月斩');
++  expect(dragon).toBeTruthy();
++  runtime.set$shaTransform(dragon.name);
++  expect(findEffectiveCard(uid).card.name).toBe(dragon.name);
++  expect(infusionFuelReason(uid)).toBe('');
++  runtime.cardOverrides.set(uid, { ...dragon, cost: 0 });
++  runtime.set$shaTransform('不朽斩');
++  expect(findEffectiveCard(uid).card.name).toBe(dragon.name);
++  expect(findEffectiveCard(uid).card.cost).toBe(0);
++  expect(findEffectiveCard(uid).uid).toBe(uid);
++  expect(findEffectiveCard(uid).baseUid).toBe(game.ownedCards.find(entry => entry.uid === uid).baseUid);
++  expect(game.ownedCards.find(entry => entry.uid === uid).baseUid).toBeTruthy();
++});
++
++it('真实青龙化身在剑后生效、再穿戴剑覆盖青龙：解析与结算沿用最后登记规则', async () => {
++  const originals = await swordBattle(true, true, ['tt8-hero-warrior']);
++  const hero = game.ownedCards.find(entry => entry.card.id === 'tt8-hero-warrior');
++  expect(findEffectiveCard(originals[0]).card.name).toBe('不朽斩');
++  BattleSession.commands.playCard(hero.uid, null); await settle();
++  expect(runtime.shaTransform).toBe('青龙偃月斩');
++  expect(findEffectiveCard(originals[0]).card.name).toBe('青龙偃月斩');
++  const sword = game.ownedCards.find(entry => entry.card.id === 'tt3-immortal-blade');
++  BattleSession.commands.playCard(sword.uid, 'self'); await settle();
++  expect(runtime.shaTransform).toBe('不朽斩');
++  expect(findEffectiveCard(originals[0]).card.name).toBe('不朽斩');
++});
++
++it('BOSS仅持有但未编入剑：初始攻击不变形', async () => {
++  await swordBattle(false); BattleSession.commands.flee(); await settle();
++  window.SDT.MAP.rules.bossDeckSize = 1;
++  try {
++    runtime.set$lastDeckSel([]);
++    BattleSession.start(game, [{ id: 'sword-unselected', name: '未编入验证靶', hp: 1000, atk: 0 }], { isBoss: true });
++    const main = game.ownedCards.find(entry => entry.card.infuse > 0).uid;
++    BattleSession.commands.selectDeckCard(main);
++    BattleSession.commands.confirmDeck(); await settle();
++    expect(runtime.shaTransform).toBeNull();
++    expect(BattleSession.getSnapshot().equipped).toEqual([]);
++    for (const uid of BattleSession.getSnapshot().hand.filter(uid => findCard(uid)?.card.id === 'starter-attack')) {
++      expect(findEffectiveCard(uid).card.name).toBe('初始攻击');
++    }
++  } finally { window.SDT.MAP.rules.bossDeckSize = 15; }
++});
++
++it('注能入口只统计可用材料，四张不朽斩不能凑足两张燃料', async () => {
++  await swordBattle();
++  const main = game.ownedCards.find(entry => entry.card.infuse > 0);
++  main.card = { ...main.card, infuse: 2 };
++  const before = BattleSession.getSnapshot();
++  BattleSession.commands.beginInfusion(main.uid); await settle();
++  expect(BattleSession.getSnapshot().infusing).toBeNull();
++  expect(BattleSession.getSnapshot().energy).toBe(before.energy);
++  expect(BattleSession.getSnapshot().hand).toEqual(before.hand);
++});
++
++it('其他手牌支付保持原有初始攻击资格，同时选牌面显示有效不朽斩', async () => {
++  const originals = await swordBattle(true, true, ['tt7-thundergrudge']);
++  const source = game.ownedCards.find(entry => entry.card.id === 'tt7-thundergrudge');
++  BattleSession.commands.playCard(source.uid, 0); await settle();
++  expect(BattleSession.getSnapshot().handSelecting?.act).toBe('payment');
++  const choices = [...document.querySelectorAll('[data-act="btPickHand"]')];
++  expect(choices).toHaveLength(5);
++  for (const choice of choices) {
++    expect(choice.textContent).toContain('不朽斩');
++    expect(choice.getAttribute('aria-label')).toContain('不朽斩');
++  }
++  BattleSession.commands.pickHandSelect(originals[0]);
++  BattleSession.commands.pickHandSelect(originals[1]); await settle();
++  expect(BattleSession.getSnapshot().handSelecting).toBeNull();
++  expect(BattleSession.getSnapshot().hand).not.toContain(originals[0]);
++  expect(BattleSession.getSnapshot().hand).not.toContain(originals[1]);
++});
+--- a/tests/battle-engine-facade.test.js
++++ b/tests/battle-engine-facade.test.js
+@@ -12,7 +12,7 @@
+ const BASELINE_EXPORTS = [
+   'requestBattleRender', 'interactionOf', 'cloneData', 'cardIdentity', 'R', 'alive',
+   'intentFor', 'drawCards', 'resolveFoeDefeat', 'sweepDead', 'nestPhase', 'grantSha',
+-  'findCard', 'infuseOf', 'effCostOf', 'swapCardCosts', 'restore', 'finish',
++  'findCard', 'findEffectiveCard', 'infusionFuelReason', 'infuseOf', 'effCostOf', 'swapCardCosts', 'restore', 'finish',
+   'cancelInteraction', 'flee', 'handCurseSpecs', 'getSnapshot', 'snapshotSignature',
+   'getBattleLiveness',
+   'processDelayed', 'accrueGrowth', 'resolveCard', 'resolveCardWithFeedback',
+@@ -32,7 +32,7 @@
+     expect(Object.keys(Engine).sort()).toEqual([...BASELINE_EXPORTS].sort());
+   });
+ 
+-  it('基线数量 = 68', () => {
+-    expect(BASELINE_EXPORTS.length).toBe(68);
++  it('基线数量 = 70', () => {
++    expect(BASELINE_EXPORTS.length).toBe(70);
+   });
+ });

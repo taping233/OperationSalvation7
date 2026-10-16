@@ -1,0 +1,55 @@
+{
+  "providedOriginalBaseline": {
+    "packageMiB": 144.58,
+    "entryKiB": 329.6,
+    "initialKiB": 375,
+    "cssKiB": 200.1,
+    "precision": "rounded values supplied by parent; provenance not independently re-established"
+  },
+  "r1Reaudited": {
+    "files": 1337,
+    "packageBytes": 134703281,
+    "duplicateBytes": 16540,
+    "entryGzipBytes": 318421,
+    "initialJsGzipBytes": 364924,
+    "cssGzipBytes": 205912
+  },
+  "r2": {
+    "files": 1337,
+    "packageBytes": 134668788,
+    "duplicateBytes": 16540,
+    "entryGzipBytes": 319981,
+    "initialJsGzipBytes": 366484,
+    "cssGzipBytes": 199213
+  },
+  "r3": {
+    "files": 1322,
+    "packageBytes": 126673218,
+    "duplicateBytes": 16540,
+    "entryGzipBytes": 294989,
+    "initialJsGzipBytes": 341492,
+    "cssGzipBytes": 200290
+  },
+  "r4": {
+    "files": 1292,
+    "packageBytes": 125385273,
+    "duplicateBytes": 16540,
+    "entryGzipBytes": 294909,
+    "initialJsGzipBytes": 341412,
+    "cssGzipBytes": 200538
+  },
+  "deltaR4MinusR3": {
+    "files": -30,
+    "packageBytes": -1287945,
+    "duplicateBytes": 0,
+    "entryGzipBytes": -80,
+    "initialJsGzipBytes": -80,
+    "cssGzipBytes": 248
+  },
+  "budgets": {
+    "packageBytesMax": 117440512,
+    "entryGzipBytesMax": 276480,
+    "initialJsGzipBytesMax": 317440,
+    "cssGzipBytesMax": 139264
+  }
+}

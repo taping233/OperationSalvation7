@@ -1,0 +1,1108 @@
+{
+  "at": "2026-10-15T21:50:36.071Z",
+  "productionModules": true,
+  "browserUsed": false,
+  "playerStorageTouched": false,
+  "traces": [
+    {
+      "case": "missing-achievement-card",
+      "input": {
+        "id": "labScore2",
+        "reward": "tt3-thunderblast",
+        "catalogHasReward": false,
+        "state": {
+          "wood": 0,
+          "stash": [],
+          "achClaimed": {},
+          "collClaimed": {}
+        }
+      },
+      "result": {
+        "ok": true,
+        "msg": "[[icon:trophy]] 领取成就奖励【实验数据·银】："
+      },
+      "saved": {
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 0,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 1,
+            "ts": 1792101036022
+          }
+        },
+        "petSel": "dog",
+        "collection": {},
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [],
+          "reviveKills": 0,
+          "turnMovesMax": 0,
+          "battleEquipsMax": 0,
+          "extracts": 0,
+          "deaths": 0,
+          "kills": 0,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [],
+          "bestRunCoins": 0,
+          "stashTotal": 0,
+          "labTotalScore": 1500
+        },
+        "achClaimed": {
+          "labScore2": true
+        },
+        "collClaimed": {},
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 3,
+          "requests": {}
+        },
+        "version": 2
+      },
+      "afterRestoringCatalogRetry": {
+        "ok": false
+      }
+    },
+    {
+      "case": "missing-collection-egg",
+      "input": {
+        "id": "mAll",
+        "collectionProgress": 68,
+        "collectionTotal": 68,
+        "catalogHasEgg": false
+      },
+      "result": {
+        "ok": true,
+        "msg": "[[icon:sparkles]] 领取职业收藏奖励【收藏 68 张】：[[icon:crystal]] 宠物蛋 ×1"
+      },
+      "saved": {
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 0,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 1,
+            "ts": 1792101036040
+          }
+        },
+        "petSel": "dog",
+        "collection": {
+          "tt3-flame-storm": {
+            "name": "风暴火球",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-nature-form": {
+            "name": "满月形态",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-holy-shield": {
+            "name": "圣盾",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-nuke-ray": {
+            "name": "致命射线",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-petal": {
+            "name": "花瓣法阵",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-firm-barrier": {
+            "name": "坚冰结界",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3sp-devour": {
+            "name": "吞噬",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3sp-shadowshot": {
+            "name": "暗影射击",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-throwblade": {
+            "name": "飞刃偷袭",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-goldencicada": {
+            "name": "金蝉脱壳",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-sneak": {
+            "name": "偷袭",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-ghostblade": {
+            "name": "鬼魅之刃",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-thundergrudge": {
+            "name": "快意恩仇",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-meteorrain": {
+            "name": "流星箭雨",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-stealth": {
+            "name": "潜匿",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-swordimmortal": {
+            "name": "剑仙形态",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "cc-unmoved": {
+            "name": "不变应万变",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-marchrush": {
+            "name": "急行军",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-bulwark": {
+            "name": "坚盾",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-armup": {
+            "name": "武装",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-whirlwind": {
+            "name": "旋风斩",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-demonbreaker": {
+            "name": "破甲重斩",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-fullstrike": {
+            "name": "全力一击",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-ironphalanx": {
+            "name": "铁甲阵",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-bloodpoison": {
+            "name": "血毒双镖",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-silence": {
+            "name": "禁言术",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "cc-demon": {
+            "name": "恶魔之力",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-holyglow": {
+            "name": "沐愈光辉",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-holyheal": {
+            "name": "圣光治愈",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-provoke": {
+            "name": "扰敌",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-bloodpotion": {
+            "name": "噬血术",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-smite": {
+            "name": "惩击",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-arcanebolt": {
+            "name": "奥术弹",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-energize": {
+            "name": "聚能",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-frozenight": {
+            "name": "冰封千里",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-stratagem": {
+            "name": "法师锦囊",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-bladebloom": {
+            "name": "永恒绽放",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-recruit": {
+            "name": "征召",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-elementstorm": {
+            "name": "元素风暴",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-burnharvest": {
+            "name": "爆燃火球",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-twinfireball": {
+            "name": "三重火球",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-abysscurse": {
+            "name": "深渊诅咒",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-meteorstrong": {
+            "name": "星陨之力",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt8-hero-assassin": {
+            "name": "白梅落影·妄",
+            "rarity": "稀有",
+            "ts": 1
+          },
+          "tt8-hero-sword": {
+            "name": "无量仙剑·云风",
+            "rarity": "稀有",
+            "ts": 1
+          },
+          "tt8-hero-ranger": {
+            "name": "天剑诛魔·云阳",
+            "rarity": "古朴",
+            "ts": 1
+          },
+          "tt8-hero-warrior": {
+            "name": "青龙化身",
+            "rarity": "稀有",
+            "ts": 1
+          },
+          "tt8-hero-guardian": {
+            "name": "圣剑化身",
+            "rarity": "古朴",
+            "ts": 1
+          },
+          "tt8-hero-priest": {
+            "name": "浪掷风吟",
+            "rarity": "棱彩",
+            "ts": 1
+          },
+          "tt8-hero-warlock": {
+            "name": "禁术解放",
+            "rarity": "稀有",
+            "ts": 1
+          },
+          "tt8-hero-mage": {
+            "name": "博览者的狂语",
+            "rarity": "稀有",
+            "ts": 1
+          },
+          "tt8-hero-summoner": {
+            "name": "花开两面",
+            "rarity": "棱彩",
+            "ts": 1
+          },
+          "tt8-hero-sealer": {
+            "name": "受缚之残影",
+            "rarity": "棱彩",
+            "ts": 1
+          },
+          "tt8-hero-descender": {
+            "name": "充能火山",
+            "rarity": "古朴",
+            "ts": 1
+          },
+          "tt7-livingwater": {
+            "name": "圣光之源",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-darkfort": {
+            "name": "黑暗吊坠",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-arcanescroll": {
+            "name": "奥术残卷",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-ironcharge": {
+            "name": "厉兵秣马",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-maxsupply": {
+            "name": "法力补给",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-imitate": {
+            "name": "不变应万变-改",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "cmtn1gfhczzj": {
+            "name": "厄运",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "cmtn1i64j7y7": {
+            "name": "盗宝",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "cmtn1lbhbqi4": {
+            "name": "充能火球",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "cmtn1ntxzoc4": {
+            "name": "火焰形态",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "cmtn1p9vb5au": {
+            "name": "千变万化",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "cmtn1r10xnl1": {
+            "name": "黑暗形态",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "cmtn1wnhhym": {
+            "name": "江湖救急-改",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt8-abyss-sovereign": {
+            "name": "深渊主宰·妲莉薇特",
+            "rarity": "棱彩",
+            "ts": 1
+          }
+        },
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [],
+          "reviveKills": 0,
+          "turnMovesMax": 0,
+          "battleEquipsMax": 0,
+          "extracts": 0,
+          "deaths": 0,
+          "kills": 0,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [],
+          "bestRunCoins": 0,
+          "stashTotal": 0
+        },
+        "achClaimed": {},
+        "collClaimed": {
+          "mAll": true
+        },
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 3,
+          "requests": {}
+        },
+        "version": 2
+      }
+    },
+    {
+      "case": "short-legend-pool",
+      "input": {
+        "id": "m45",
+        "promised": 2,
+        "eligibleLegendIds": [
+          "tt3-frostfall"
+        ],
+        "collectionProgress": 45
+      },
+      "result": {
+        "ok": true,
+        "msg": "[[icon:sparkles]] 领取职业收藏奖励【收藏 45 张】：[[icon:medal]] 传说卡 ×2"
+      },
+      "saved": {
+        "wood": 0,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 0,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [
+          {
+            "card": {
+              "id": "tt3-frostfall",
+              "name": "剑荡妖邪",
+              "cost": 2,
+              "rarity": "传说",
+              "type": "武术",
+              "desc": "攻+5，选择手牌中 1 张武术卡直接释放。",
+              "dmg": 5,
+              "dmgType": "attack",
+              "value": 5,
+              "rules": {
+                "version": 1,
+                "battle": {
+                  "hosted": [
+                    "choose-and-cast-melee"
+                  ]
+                }
+              }
+            },
+            "count": 1
+          }
+        ],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 1,
+            "ts": 1792101036055
+          }
+        },
+        "petSel": "dog",
+        "collection": {
+          "tt3-flame-storm": {
+            "name": "风暴火球",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-nature-form": {
+            "name": "满月形态",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-holy-shield": {
+            "name": "圣盾",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-nuke-ray": {
+            "name": "致命射线",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-petal": {
+            "name": "花瓣法阵",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-firm-barrier": {
+            "name": "坚冰结界",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3sp-devour": {
+            "name": "吞噬",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3sp-shadowshot": {
+            "name": "暗影射击",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-throwblade": {
+            "name": "飞刃偷袭",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-goldencicada": {
+            "name": "金蝉脱壳",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-sneak": {
+            "name": "偷袭",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-ghostblade": {
+            "name": "鬼魅之刃",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-thundergrudge": {
+            "name": "快意恩仇",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-meteorrain": {
+            "name": "流星箭雨",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-stealth": {
+            "name": "潜匿",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-swordimmortal": {
+            "name": "剑仙形态",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "cc-unmoved": {
+            "name": "不变应万变",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-marchrush": {
+            "name": "急行军",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-bulwark": {
+            "name": "坚盾",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-armup": {
+            "name": "武装",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-whirlwind": {
+            "name": "旋风斩",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-demonbreaker": {
+            "name": "破甲重斩",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-fullstrike": {
+            "name": "全力一击",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-ironphalanx": {
+            "name": "铁甲阵",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-bloodpoison": {
+            "name": "血毒双镖",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-silence": {
+            "name": "禁言术",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "cc-demon": {
+            "name": "恶魔之力",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-holyglow": {
+            "name": "沐愈光辉",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-holyheal": {
+            "name": "圣光治愈",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-provoke": {
+            "name": "扰敌",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-bloodpotion": {
+            "name": "噬血术",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-smite": {
+            "name": "惩击",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-arcanebolt": {
+            "name": "奥术弹",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-energize": {
+            "name": "聚能",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-frozenight": {
+            "name": "冰封千里",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-stratagem": {
+            "name": "法师锦囊",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-bladebloom": {
+            "name": "永恒绽放",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-recruit": {
+            "name": "征召",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-elementstorm": {
+            "name": "元素风暴",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-burnharvest": {
+            "name": "爆燃火球",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-twinfireball": {
+            "name": "三重火球",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-abysscurse": {
+            "name": "深渊诅咒",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt7-meteorstrong": {
+            "name": "星陨之力",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt8-hero-assassin": {
+            "name": "白梅落影·妄",
+            "rarity": "稀有",
+            "ts": 1
+          },
+          "tt8-hero-sword": {
+            "name": "无量仙剑·云风",
+            "rarity": "稀有",
+            "ts": 1
+          }
+        },
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [],
+          "reviveKills": 0,
+          "turnMovesMax": 0,
+          "battleEquipsMax": 0,
+          "extracts": 0,
+          "deaths": 0,
+          "kills": 0,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [],
+          "bestRunCoins": 0,
+          "stashTotal": 0
+        },
+        "achClaimed": {},
+        "collClaimed": {
+          "m45": true
+        },
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 3,
+          "requests": {}
+        },
+        "version": 2
+      }
+    },
+    {
+      "case": "malformed-array-marker",
+      "input": {
+        "id": "m5",
+        "collClaimed": [],
+        "wood": 0,
+        "collectionProgress": 5
+      },
+      "first": {
+        "ok": true,
+        "msg": "[[icon:sparkles]] 领取职业收藏奖励【收藏 5 张】：[[icon:wood]] 木材 ×3"
+      },
+      "firstMemory": true,
+      "savedFirst": {
+        "wood": 3,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 0,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 1,
+            "ts": 1792101036068
+          }
+        },
+        "petSel": "dog",
+        "collection": {
+          "tt3-flame-storm": {
+            "name": "风暴火球",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-nature-form": {
+            "name": "满月形态",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-holy-shield": {
+            "name": "圣盾",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-nuke-ray": {
+            "name": "致命射线",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-petal": {
+            "name": "花瓣法阵",
+            "rarity": "职业",
+            "ts": 1
+          }
+        },
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [],
+          "reviveKills": 0,
+          "turnMovesMax": 0,
+          "battleEquipsMax": 0,
+          "extracts": 0,
+          "deaths": 0,
+          "kills": 0,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [],
+          "bestRunCoins": 0,
+          "stashTotal": 0
+        },
+        "achClaimed": {},
+        "collClaimed": [],
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 3,
+          "requests": {}
+        },
+        "version": 2,
+        "characters": {
+          "wu": {
+            "lv": 1,
+            "xp": 0
+          },
+          "changwuyu": {
+            "lv": 1,
+            "xp": 0
+          },
+          "baita": {
+            "lv": 1,
+            "xp": 0
+          },
+          "heixiang": {
+            "lv": 1,
+            "xp": 0
+          },
+          "xingyue": {
+            "lv": 1,
+            "xp": 0
+          }
+        }
+      },
+      "second": {
+        "ok": true,
+        "msg": "[[icon:sparkles]] 领取职业收藏奖励【收藏 5 张】：[[icon:wood]] 木材 ×3"
+      },
+      "savedSecond": {
+        "wood": 6,
+        "rations": 0,
+        "keys": 0,
+        "bagUp": 0,
+        "safeUp": 0,
+        "stashUp": 0,
+        "coins": 0,
+        "nestUnlocked": false,
+        "runes": [],
+        "nestBagUp": 0,
+        "eggPity": 0,
+        "stash": [],
+        "pocket": [],
+        "pets": {
+          "dog": {
+            "lv": 1,
+            "ts": 1792101036068
+          }
+        },
+        "petSel": "dog",
+        "collection": {
+          "tt3-flame-storm": {
+            "name": "风暴火球",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-nature-form": {
+            "name": "满月形态",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-holy-shield": {
+            "name": "圣盾",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-nuke-ray": {
+            "name": "致命射线",
+            "rarity": "职业",
+            "ts": 1
+          },
+          "tt3-petal": {
+            "name": "花瓣法阵",
+            "rarity": "职业",
+            "ts": 1
+          }
+        },
+        "selMode": "standard",
+        "classes": {},
+        "stats": {
+          "nestBossKills": [],
+          "reviveKills": 0,
+          "turnMovesMax": 0,
+          "battleEquipsMax": 0,
+          "extracts": 0,
+          "deaths": 0,
+          "kills": 0,
+          "actions": 0,
+          "playSeconds": 0,
+          "bossKills": [],
+          "bestRunCoins": 0,
+          "stashTotal": 0
+        },
+        "achClaimed": {},
+        "collClaimed": [],
+        "collXp": {},
+        "backs": {
+          "classic": true
+        },
+        "backSel": "classic",
+        "home": {
+          "owned": {},
+          "placements": [],
+          "displays": []
+        },
+        "appearance": {
+          "characterSkins": {},
+          "selectedSkins": {}
+        },
+        "goals": {
+          "tracked": [],
+          "presets": {}
+        },
+        "story": {
+          "flags": {},
+          "outcomes": {}
+        },
+        "_m01": {
+          "revision": 4,
+          "requests": {}
+        },
+        "version": 2,
+        "characters": {
+          "wu": {
+            "lv": 1,
+            "xp": 0
+          },
+          "changwuyu": {
+            "lv": 1,
+            "xp": 0
+          },
+          "baita": {
+            "lv": 1,
+            "xp": 0
+          },
+          "heixiang": {
+            "lv": 1,
+            "xp": 0
+          },
+          "xingyue": {
+            "lv": 1,
+            "xp": 0
+          }
+        }
+      }
+    }
+  ]
+}

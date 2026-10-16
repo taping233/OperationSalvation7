@@ -1,0 +1,190 @@
+{
+  "assetExclusions": 195,
+  "assetPublicationVerified": true,
+  "assetWarnings": [],
+  "authorFinalFingerprintsVerified": 8,
+  "auxiliaryExitCodes": {
+    "asset-publication": 0,
+    "build-metrics": 0,
+    "index-semantics": 0,
+    "post-integrity": 0
+  },
+  "buildBudgetFailures": [
+    "构建体积 119.60 MiB > 112.00 MiB",
+    "入口 JS gzip 289.9 KiB > 270.0 KiB",
+    "首屏 JS gzip 335.4 KiB > 310.0 KiB",
+    "CSS gzip 196.7 KiB > 136.0 KiB"
+  ],
+  "buildMetrics": {
+    "cssGzipBytes": 201452,
+    "duplicateBytes": 16540,
+    "entryGzipBytes": 296902,
+    "files": 1293,
+    "initialJsGzipBytes": 343405,
+    "packageBytes": 125404820
+  },
+  "buildOutputUnchangedAcrossSecondFull": true,
+  "checkedAt": "2026-10-16T00:04:15.504536+00:00",
+  "deltaR7MinusR6": {
+    "cssGzipBytes": 246,
+    "duplicateBytes": 0,
+    "entryGzipBytes": 1024,
+    "files": 0,
+    "initialJsGzipBytes": 1024,
+    "packageBytes": 7829
+  },
+  "earlierFailuresPreserved": true,
+  "formalExitCodes": {
+    "build": 1,
+    "data": 0,
+    "dependency-tree": 0,
+    "docs": 0,
+    "environment": 0,
+    "lint": 0,
+    "npm-environment": 0,
+    "syntax": 0,
+    "test": 1,
+    "types": 0
+  },
+  "fullEvidenceRoot": "/workspace/shared/cloud-iteration-verification-r7-20261016",
+  "initialOrdinaryFull": {
+    "exitCode": 1,
+    "failed": 3,
+    "filesFailed": 3,
+    "filesPassed": 489,
+    "filesTotal": 492,
+    "log": "logs/test.log",
+    "passed": 4692,
+    "skipped": 2,
+    "total": 4697,
+    "unhandled": 0
+  },
+  "inspectionFinalSha256": "5ede79e3981ab8c83ffe9408e3c736a1123c4213c82ecd1e19afdb10ee70eac2",
+  "notCovered": [
+    "Post-freeze source edits, future commits and remote CI",
+    "Browser/service and sustained play verification"
+  ],
+  "ordinaryFullTestsPass": true,
+  "secondOrdinaryFull": {
+    "command": [
+      "npm",
+      "test"
+    ],
+    "configurationAndTimeoutsUnchanged": true,
+    "cwd": "/workspace/shared/cloud-iteration-verification-r7-20261016/snapshot/搜打撤",
+    "durationSeconds": 189.218,
+    "endedAt": "2026-10-16T00:03:49.327246+00:00",
+    "exitCode": 0,
+    "log": "logs/test-second-full.log",
+    "name": "test-second-full",
+    "originalFullLogSha256": "18d0caea6332143aca5c7f343a0a167d3225a83a91830661fea6afe66cf59fdb",
+    "originalFullLogUnchanged": true,
+    "parentContext": "Static BOSS R1 UI, no browser actions/restart/other checks for the duration",
+    "results": {
+      "failed": 0,
+      "filesFailed": 0,
+      "filesPassed": 492,
+      "filesTotal": 492,
+      "passed": 4695,
+      "skipped": 2,
+      "total": 4697,
+      "unhandled": 0
+    },
+    "startedAt": "2026-10-16T00:00:40.108849+00:00"
+  },
+  "snapshotIntegrityVerified": true,
+  "sourceAddedPathsAfterFreeze": [
+    {
+      "bytes": 61443,
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/78-pearl-store-keyboard-after.png",
+      "sha256": "d34465603ef83df29b19865357d654e231d2dacc940d94d754e6c649241db9db"
+    },
+    {
+      "bytes": 48390,
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/79-altar-completed-preview-after.png",
+      "sha256": "ec4d18d805debf5db0c4ae6f0f5d2e00351439ee1d2f4abc60a771be177d58ca"
+    },
+    {
+      "bytes": 139641,
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/80-boss-immortal-hand-after.png",
+      "sha256": "e55a3ba1ca8aacc9fa379096c0d30153fd88ed422fa2c611c9ed8cc5b8c65945"
+    },
+    {
+      "bytes": 1230,
+      "path": "搜打撤/docs/evidence/2026-10-16-skull-sword-start-audit/pile-summary-r3/README.md",
+      "sha256": "28eb8cbfb2731980cb97d9e92a69b314a62ebc40e29eb438292e609e1af8bfb3"
+    },
+    {
+      "bytes": 22625,
+      "path": "搜打撤/docs/evidence/2026-10-16-skull-sword-start-audit/pile-summary-r3/before/game/src/battle/core/battle.core.js",
+      "sha256": "823e2c016cfcbc30ca3f0ab9118a1f9589fbc77a1ef2d4ef56675c3d95d8568f"
+    },
+    {
+      "bytes": 14175,
+      "path": "搜打撤/docs/evidence/2026-10-16-skull-sword-start-audit/pile-summary-r3/before/game/src/battle/view/battle.preview.js",
+      "sha256": "ad785616a1cb19fd45b88b87cdf3be6d75aa685184b49723fe43e746f52242c8"
+    },
+    {
+      "bytes": 20689,
+      "path": "搜打撤/docs/evidence/2026-10-16-skull-sword-start-audit/pile-summary-r3/before/tests/r3-a-preview.test.js",
+      "sha256": "6d00a7324c01bac4d98dc7acd49a352cc3cb1a8940dd5e0865db645478375242"
+    },
+    {
+      "bytes": 26640,
+      "path": "搜打撤/docs/evidence/2026-10-16-skull-sword-start-audit/pile-summary-r3/before/tests/skull-sword-effective-session.test.js",
+      "sha256": "42457ff602117abe20baf93d0fd3cc52b02ea4dd9489306d4a8ab1d1800f8aa1"
+    },
+    {
+      "bytes": 1018,
+      "path": "搜打撤/docs/evidence/2026-10-16-skull-sword-start-audit/pile-summary-r3/source-change-sha256.json",
+      "sha256": "1fab66296eba08e29f81a31fc25c6dcdf7726a8c0dfb209a70d316e346788610"
+    },
+    {
+      "bytes": 6379,
+      "path": "搜打撤/docs/evidence/2026-10-16-skull-sword-start-audit/pile-summary-r3/source-change.patch",
+      "sha256": "ba548fa573637d5710561e26c90de18a74368cd7613145f9b551f24bf5b1ff3b"
+    }
+  ],
+  "sourceChangesAfterFreeze": [
+    {
+      "afterSha256": "48880a03067e9cdd33e9bd75da79726dc1a98cf6509f3c6d473c9e70289fc130",
+      "beforeSha256": "81888cb45b90195f70b97fe2d6a58faef009016ff65be8c956a959002f6468e2",
+      "path": "搜打撤/docs/PARALLEL-REGISTRY.md"
+    },
+    {
+      "afterSha256": "80a8e9725281e34ed372bd78045c54a436d5652495f5d60a5d24001380e75b60",
+      "beforeSha256": "d0f5eb58f47b1e427828735e0a381a02e83aae77cad4b64bb7fba0cddeb5744c",
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/PLAYLOG.md"
+    },
+    {
+      "afterSha256": "0df25eec9921e5f19bdec3c111f6850306a47f0f213f876305b9e4db649d2335",
+      "beforeSha256": "823e2c016cfcbc30ca3f0ab9118a1f9589fbc77a1ef2d4ef56675c3d95d8568f",
+      "path": "搜打撤/game/src/battle/core/battle.core.js"
+    },
+    {
+      "afterSha256": "320b6629e974707f45ec2d37b89b2994b7e64977fff9c1844c6c90344127301f",
+      "beforeSha256": "ad785616a1cb19fd45b88b87cdf3be6d75aa685184b49723fe43e746f52242c8",
+      "path": "搜打撤/game/src/battle/view/battle.preview.js"
+    },
+    {
+      "afterSha256": "ba3d1f943f193666454510600f25dc34705194521dc982668b8752331d567252",
+      "beforeSha256": "6d00a7324c01bac4d98dc7acd49a352cc3cb1a8940dd5e0865db645478375242",
+      "path": "搜打撤/tests/r3-a-preview.test.js"
+    },
+    {
+      "afterSha256": "1fe40086afca241fbcb9ce6c34142aefff10246249441755b67fc55751df916f",
+      "beforeSha256": "42457ff602117abe20baf93d0fd3cc52b02ea4dd9489306d4a8ab1d1800f8aa1",
+      "path": "搜打撤/tests/skull-sword-effective-session.test.js"
+    }
+  ],
+  "sourceManifestSha256": "54344d79e7d41f9caa608e6434878e7bf73fba81321dc776e150f4ed80fbb102",
+  "staticGatesPass": true,
+  "testFilesFailed": 0,
+  "testFilesPassed": 492,
+  "testFilesTotal": 492,
+  "testsFailed": 0,
+  "testsPassed": 4695,
+  "testsSkipped": 2,
+  "testsTotal": 4697,
+  "unhandledErrors": 0
+}

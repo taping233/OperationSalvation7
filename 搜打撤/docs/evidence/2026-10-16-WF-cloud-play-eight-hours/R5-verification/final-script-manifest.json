@@ -1,0 +1,42 @@
+[
+  {
+    "path": "collect_build_metrics.mjs",
+    "sha256": "89a6defc48b2f233ab3440b0e9dcff7cbd188d0a3a6ad12c06d3c20841656398"
+  },
+  {
+    "path": "copy_git_metadata.py",
+    "sha256": "a23dd92d8bf375077352fc1a446a724da8d7a5c66854f470b027306846cf2cf1"
+  },
+  {
+    "path": "dependencies.py",
+    "sha256": "f251e4f8a4b6fe527b453cc119c38e1ee77400042348aad868d476ec52258106"
+  },
+  {
+    "path": "diagnose_index.py",
+    "sha256": "d8250de342c2a0301aa7c57f861b7570a7fe5f412ae09255fd4784af9b42d00a"
+  },
+  {
+    "path": "finalize_report.py",
+    "sha256": "f223d5f510f0555b716b4b57c37642a60e6c90bf32da03647a5b6d08108c8408"
+  },
+  {
+    "path": "inspect_snapshot.py",
+    "sha256": "a055cb0beac447bfea7783385806330f971f47a1f516b4654aa6ea272ade040f"
+  },
+  {
+    "path": "run_auxiliary.py",
+    "sha256": "0197e19f27ebdd6c503828fa26aff62fb86009742cbb929cd316fda872bc2945"
+  },
+  {
+    "path": "run_checks.py",
+    "sha256": "86fe29d3bef617a767118211c9e410afb298dea96c4bd4a53c294580d846e283"
+  },
+  {
+    "path": "snapshot.py",
+    "sha256": "f6a451a6bf076e917bc18c060f0b1d3199b037aaa5d1c5d786e054466ea5f0ea"
+  },
+  {
+    "path": "verify_assets.mjs",
+    "sha256": "df68356bfedc3caa09e41b0c0196f8c32a94b4afc9d3e4f37660e05ea7b7d472"
+  }
+]

@@ -1,0 +1,948 @@
+{
+  "exportedAt": "2026-10-16T00:28:39.277Z",
+  "runs": [
+    {
+      "id": "run-mv9yucve-fly7v",
+      "ts": 1792094581418,
+      "driver": "human",
+      "provenance": {
+        "driver": "human",
+        "agentDriver": null,
+        "interventions": []
+      },
+      "stopReason": null,
+      "outcome": "death",
+      "why": "你倒下了",
+      "seed": 3233831128,
+      "mode": "standard",
+      "class": "侠客",
+      "characterId": "wu",
+      "maxLayer": 4,
+      "node": 16,
+      "turns": 30,
+      "coins": 15,
+      "hpLeft": -5,
+      "durationSec": 5660,
+      "bossKilled": false,
+      "firstExploreXp": 0,
+      "firstExploreMoves": 30,
+      "netTake": {
+        "cardsStashed": 3,
+        "pocketKept": 0,
+        "wood": 0,
+        "rations": 0
+      },
+      "losses": {
+        "lostCount": 19,
+        "lostNotable": [
+          {
+            "name": "正午决战",
+            "rarity": "史诗",
+            "count": 1
+          },
+          {
+            "name": "能源结晶",
+            "rarity": "史诗",
+            "count": 1
+          },
+          {
+            "name": "银河之旅",
+            "rarity": "传说",
+            "count": 1
+          }
+        ],
+        "pocketLost": 12
+      },
+      "battles": {
+        "fought": 1,
+        "won": 0
+      },
+      "lastBattles": [
+        {
+          "w": 0,
+          "li": 4,
+          "node": 16,
+          "foe": "肃清总督",
+          "hp": -5,
+          "turn": 31,
+          "round": 1,
+          "mode": "lose",
+          "nPlayed": 7,
+          "nUsed": 0,
+          "deck": [
+            "包扎",
+            "不变应万变-改",
+            "寻宝图",
+            "迅疾箭",
+            "江湖救急-改",
+            "箭雨",
+            "魔法新发现",
+            "飞刃偷袭",
+            "寻宝图",
+            "正午决战",
+            "草甲",
+            "箭雨",
+            "孢子城墙",
+            "银河之旅",
+            "法杖"
+          ],
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null
+        }
+      ],
+      "carried": [
+        {
+          "name": "木材",
+          "rarity": "古朴",
+          "type": "资源",
+          "count": 1,
+          "value": 2
+        },
+        {
+          "name": "三把钥匙",
+          "rarity": "史诗",
+          "type": "资源",
+          "count": 2,
+          "value": 6
+        }
+      ],
+      "carriedValue": 14,
+      "receipt": {
+        "version": 1,
+        "outcome": "death",
+        "bossKilled": false,
+        "layersReached": 4,
+        "actions": 30,
+        "firstExplore": {
+          "moves": 30,
+          "xp": 0
+        },
+        "netTake": {
+          "cardsStashed": 3,
+          "pocketKept": 0,
+          "wood": 0,
+          "rations": 0
+        },
+        "losses": {
+          "lostCount": 19,
+          "lostNotable": [
+            {
+              "name": "正午决战",
+              "rarity": "史诗",
+              "count": 1
+            },
+            {
+              "name": "能源结晶",
+              "rarity": "史诗",
+              "count": 1
+            },
+            {
+              "name": "银河之旅",
+              "rarity": "传说",
+              "count": 1
+            }
+          ],
+          "pocketLost": 12
+        },
+        "runCoins": 15,
+        "durationSec": 5660
+      }
+    },
+    {
+      "id": "run-mva26fdb-kreto",
+      "runId": "run-2-28c26dad-3a2c-4806-b355-78d964b63970",
+      "ts": 1792100183375,
+      "driver": "human",
+      "provenance": {
+        "driver": "human",
+        "agentDriver": null,
+        "interventions": []
+      },
+      "stopReason": null,
+      "outcome": "extract",
+      "why": "",
+      "seed": 2411854697,
+      "mode": "standard",
+      "class": "法师",
+      "characterId": "baita",
+      "maxLayer": 3,
+      "node": 12,
+      "turns": 22,
+      "coins": 21,
+      "hpLeft": 35,
+      "durationSec": 2894,
+      "bossKilled": false,
+      "firstExploreXp": 64,
+      "firstExploreMoves": 22,
+      "netTake": {
+        "cardsStashed": 14,
+        "pocketKept": 2,
+        "wood": 0,
+        "rations": 0
+      },
+      "losses": {
+        "lostCount": 0,
+        "lostNotable": [],
+        "pocketLost": 14
+      },
+      "battles": {
+        "fought": 6,
+        "won": 6
+      },
+      "lastBattles": [
+        {
+          "w": 1,
+          "foe": "联邦射手+联邦射手",
+          "mode": "win",
+          "li": 1,
+          "node": 3,
+          "hp": 35,
+          "turn": 2,
+          "round": 1,
+          "nPlayed": 2,
+          "nUsed": 0,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "foe": "联邦射手+联邦机动兵",
+          "mode": "win",
+          "li": 2,
+          "node": 1,
+          "hp": 35,
+          "turn": 6,
+          "round": 1,
+          "nPlayed": 4,
+          "nUsed": 0,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "foe": "变异雪狼+甲壳变异体+反抗组织掷弹兵",
+          "mode": "win",
+          "li": 3,
+          "node": 14,
+          "hp": 35,
+          "turn": 16,
+          "round": 1,
+          "nPlayed": 2,
+          "nUsed": 2,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "foe": "变异雪狼+甲壳变异体+反抗组织掷弹兵",
+          "mode": "win",
+          "li": 3,
+          "node": 7,
+          "hp": 34,
+          "turn": 18,
+          "round": 1,
+          "nPlayed": 5,
+          "nUsed": 0,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "li": 3,
+          "node": 9,
+          "foe": "变异雪狼",
+          "hp": 34,
+          "turn": 20,
+          "round": 1,
+          "mode": "win",
+          "nPlayed": 1,
+          "nUsed": 1,
+          "deck": null,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null
+        },
+        {
+          "w": 1,
+          "li": 3,
+          "node": 11,
+          "foe": "反抗组织掷弹兵+变异雪狼+甲壳变异体",
+          "hp": 35,
+          "turn": 22,
+          "round": 1,
+          "mode": "win",
+          "nPlayed": 4,
+          "nUsed": 1,
+          "deck": null,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null
+        }
+      ],
+      "carried": [
+        {
+          "name": "治愈",
+          "rarity": "古朴",
+          "type": "法术",
+          "count": 1,
+          "value": 2
+        },
+        {
+          "name": "影噬",
+          "rarity": "稀有",
+          "type": "武术",
+          "count": 1,
+          "value": 3
+        },
+        {
+          "name": "永恒绽放",
+          "rarity": "职业",
+          "type": "法术",
+          "count": 1,
+          "value": 3
+        },
+        {
+          "name": "大量木材",
+          "rarity": "稀有",
+          "type": "资源",
+          "count": 1,
+          "value": 4
+        },
+        {
+          "name": "江湖救急",
+          "rarity": "史诗",
+          "type": "武术",
+          "count": 1,
+          "value": 4
+        },
+        {
+          "name": "两把钥匙",
+          "rarity": "稀有",
+          "type": "资源",
+          "count": 1,
+          "value": 4
+        },
+        {
+          "name": "寻宝图",
+          "rarity": "古朴",
+          "type": "装备",
+          "count": 1,
+          "value": 2
+        },
+        {
+          "name": "大量木材",
+          "rarity": "稀有",
+          "type": "资源",
+          "count": 1,
+          "value": 4
+        },
+        {
+          "name": "法力补给",
+          "rarity": "职业",
+          "type": "法术",
+          "count": 1,
+          "value": 3
+        },
+        {
+          "name": "血箭",
+          "rarity": "古朴",
+          "type": "武术",
+          "count": 1,
+          "value": 2
+        },
+        {
+          "name": "神灯",
+          "rarity": "史诗",
+          "type": "法术",
+          "count": 1,
+          "value": 4
+        },
+        {
+          "name": "基础开发",
+          "rarity": "古朴",
+          "type": "法术",
+          "count": 1,
+          "value": 1
+        },
+        {
+          "name": "命运钟表",
+          "rarity": "史诗",
+          "type": "装备",
+          "count": 1,
+          "value": 4
+        },
+        {
+          "name": "矿工炸药",
+          "rarity": "古朴",
+          "type": "装备",
+          "count": 1,
+          "value": 2
+        }
+      ],
+      "carriedValue": 42,
+      "receipt": {
+        "version": 1,
+        "outcome": "extract",
+        "bossKilled": false,
+        "layersReached": 3,
+        "actions": 22,
+        "firstExplore": {
+          "moves": 22,
+          "xp": 64
+        },
+        "netTake": {
+          "cardsStashed": 14,
+          "pocketKept": 2,
+          "wood": 0,
+          "rations": 0
+        },
+        "losses": {
+          "lostCount": 0,
+          "lostNotable": [],
+          "pocketLost": 14
+        },
+        "runCoins": 21,
+        "durationSec": 2894
+      }
+    },
+    {
+      "id": "run-mva86rxv-129j0",
+      "runId": "run-2-b8abe3ed-028c-44e6-be83-bbeb0fad055d",
+      "ts": 1792110277364,
+      "driver": "human",
+      "provenance": {
+        "driver": "human",
+        "agentDriver": null,
+        "interventions": []
+      },
+      "stopReason": null,
+      "outcome": "clear",
+      "why": "",
+      "seed": 2770223673,
+      "mode": "standard",
+      "class": "法师",
+      "characterId": "baita",
+      "maxLayer": 4,
+      "node": 12,
+      "turns": 54,
+      "coins": 15,
+      "hpLeft": 10,
+      "durationSec": 8337,
+      "bossKilled": true,
+      "firstExploreXp": 100,
+      "firstExploreMoves": 40,
+      "netTake": {
+        "cardsStashed": 23,
+        "pocketKept": 16,
+        "wood": 0,
+        "rations": 0
+      },
+      "losses": {
+        "lostCount": 3,
+        "lostNotable": [
+          {
+            "name": "迷之匣",
+            "rarity": "史诗",
+            "count": 1
+          }
+        ],
+        "pocketLost": 34
+      },
+      "battles": {
+        "fought": 12,
+        "won": 12
+      },
+      "lastBattles": [
+        {
+          "w": 1,
+          "foe": "联邦巡防兵+联邦巡防兵+联邦巡防兵",
+          "mode": "win",
+          "li": 2,
+          "node": 11,
+          "hp": 37,
+          "turn": 13,
+          "round": 1,
+          "nPlayed": 6,
+          "nUsed": 0,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "foe": "联邦射手+联邦射手",
+          "mode": "win",
+          "li": 2,
+          "node": 9,
+          "hp": 37,
+          "turn": 15,
+          "round": 2,
+          "nPlayed": 4,
+          "nUsed": 0,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "foe": "变异雪狼+甲壳变异体+反抗组织掷弹兵",
+          "mode": "win",
+          "li": 3,
+          "node": 3,
+          "hp": 36,
+          "turn": 19,
+          "round": 2,
+          "nPlayed": 6,
+          "nUsed": 0,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "foe": "甲壳变异体+反抗组织掷弹兵",
+          "mode": "win",
+          "li": 3,
+          "node": 7,
+          "hp": 37,
+          "turn": 23,
+          "round": 1,
+          "nPlayed": 4,
+          "nUsed": 0,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "foe": "反抗组织掷弹兵+变异雪狼",
+          "mode": "win",
+          "li": 3,
+          "node": 8,
+          "hp": 37,
+          "turn": 24,
+          "round": 1,
+          "nPlayed": 2,
+          "nUsed": 0,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "foe": "变异雪狼",
+          "mode": "win",
+          "li": 3,
+          "node": 11,
+          "hp": 40,
+          "turn": 27,
+          "round": 1,
+          "nPlayed": 2,
+          "nUsed": 0,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "foe": "滋生异变体+滋生异变体",
+          "mode": "win",
+          "li": 4,
+          "node": 2,
+          "hp": 40,
+          "turn": 31,
+          "round": 3,
+          "nPlayed": 8,
+          "nUsed": 0,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "foe": "巨兽「荒渊」",
+          "mode": "win",
+          "li": 4,
+          "node": 8,
+          "hp": 40,
+          "turn": 39,
+          "round": 3,
+          "nPlayed": 7,
+          "nUsed": 0,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "foe": "腐蚀异变体+腐蚀异变体",
+          "mode": "win",
+          "li": 4,
+          "node": 10,
+          "hp": 19,
+          "turn": 41,
+          "round": 3,
+          "nPlayed": 5,
+          "nUsed": 0,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": null
+        },
+        {
+          "w": 1,
+          "foe": "异能领主",
+          "mode": "win",
+          "li": 4,
+          "node": 11,
+          "hp": 5,
+          "turn": 54,
+          "round": 7,
+          "nPlayed": 8,
+          "nUsed": 2,
+          "hits": null,
+          "dmg": null,
+          "waste": null,
+          "potions": null,
+          "fleeT": null,
+          "startHp": null,
+          "startCards": null,
+          "deck": [
+            "寻宝图",
+            "命运钟表",
+            "奥术残卷",
+            "寻宝图",
+            "流光斩",
+            "挖宝",
+            "神秘召唤",
+            "百炼青虹剑",
+            "急速跑鞋",
+            "邪能护体",
+            "割蚀",
+            "珍珠盒",
+            "破甲箭",
+            "沉船宝盒",
+            "骷髅王剑"
+          ]
+        }
+      ],
+      "carried": [
+        {
+          "name": "命运钟表",
+          "rarity": "史诗",
+          "type": "装备",
+          "count": 1,
+          "value": 4
+        },
+        {
+          "name": "奥术残卷",
+          "rarity": "职业",
+          "type": "装备",
+          "count": 1,
+          "value": 3
+        },
+        {
+          "name": "寻宝图",
+          "rarity": "古朴",
+          "type": "装备",
+          "count": 1,
+          "value": 2
+        },
+        {
+          "name": "急速跑鞋",
+          "rarity": "稀有",
+          "type": "装备",
+          "count": 1,
+          "value": 1
+        },
+        {
+          "name": "精神药水",
+          "rarity": "稀有",
+          "type": "道具",
+          "count": 1,
+          "value": 3
+        },
+        {
+          "name": "精神药水",
+          "rarity": "稀有",
+          "type": "道具",
+          "count": 1,
+          "value": 3
+        },
+        {
+          "name": "初始攻击",
+          "rarity": "初始",
+          "type": "武术",
+          "count": 1,
+          "value": 1
+        },
+        {
+          "name": "初始攻击",
+          "rarity": "初始",
+          "type": "武术",
+          "count": 1,
+          "value": 1
+        },
+        {
+          "name": "珍珠盒",
+          "rarity": "稀有",
+          "type": "装备",
+          "count": 1,
+          "value": 3
+        },
+        {
+          "name": "沉船宝盒",
+          "rarity": "史诗",
+          "type": "装备",
+          "count": 1,
+          "value": 4
+        },
+        {
+          "name": "三把钥匙",
+          "rarity": "史诗",
+          "type": "资源",
+          "count": 1,
+          "value": 6
+        },
+        {
+          "name": "骷髅王剑",
+          "rarity": "传说",
+          "type": "装备",
+          "count": 1,
+          "value": 5
+        },
+        {
+          "name": "致命穿刺",
+          "rarity": "古朴",
+          "type": "武术",
+          "count": 1,
+          "value": 2
+        },
+        {
+          "name": "挖宝",
+          "rarity": "古朴",
+          "type": "武术",
+          "count": 1,
+          "value": 2
+        },
+        {
+          "name": "沉船宝盒",
+          "rarity": "史诗",
+          "type": "装备",
+          "count": 1,
+          "value": 4
+        },
+        {
+          "name": "冰刺",
+          "rarity": "古朴",
+          "type": "法术",
+          "count": 1,
+          "value": 1
+        },
+        {
+          "name": "法力奔涌",
+          "rarity": "传说",
+          "type": "法术",
+          "count": 1,
+          "value": 5
+        },
+        {
+          "name": "嗜血刃",
+          "rarity": "史诗",
+          "type": "武术",
+          "count": 1,
+          "value": 4
+        },
+        {
+          "name": "初始攻击",
+          "rarity": "初始",
+          "type": "武术",
+          "count": 1,
+          "value": 1
+        },
+        {
+          "name": "一把钥匙",
+          "rarity": "古朴",
+          "type": "资源",
+          "count": 1,
+          "value": 2
+        },
+        {
+          "name": "神秘召唤",
+          "rarity": "史诗",
+          "type": "法术",
+          "count": 1,
+          "value": 4
+        },
+        {
+          "name": "致命穿刺",
+          "rarity": "古朴",
+          "type": "武术",
+          "count": 1,
+          "value": 2
+        },
+        {
+          "name": "穿刺",
+          "rarity": "古朴",
+          "type": "武术",
+          "count": 1,
+          "value": 3
+        },
+        {
+          "name": "毒箭",
+          "rarity": "古朴",
+          "type": "武术",
+          "count": 1,
+          "value": 2
+        },
+        {
+          "name": "迷之匣",
+          "rarity": "史诗",
+          "type": "装备",
+          "count": 1,
+          "value": 2
+        },
+        {
+          "name": "挖宝",
+          "rarity": "古朴",
+          "type": "武术",
+          "count": 1,
+          "value": 2
+        },
+        {
+          "name": "铜币",
+          "rarity": "古朴",
+          "type": "资源",
+          "count": 1,
+          "value": 3
+        },
+        {
+          "name": "员工通行证B",
+          "rarity": "史诗",
+          "type": "道具",
+          "count": 1,
+          "value": 4
+        },
+        {
+          "name": "斩杀",
+          "rarity": "传说",
+          "type": "武术",
+          "count": 1,
+          "value": 5
+        }
+      ],
+      "carriedValue": 84,
+      "receipt": {
+        "version": 1,
+        "outcome": "clear",
+        "bossKilled": true,
+        "layersReached": 4,
+        "actions": 54,
+        "firstExplore": {
+          "moves": 40,
+          "xp": 100
+        },
+        "netTake": {
+          "cardsStashed": 23,
+          "pocketKept": 16,
+          "wood": 0,
+          "rations": 0
+        },
+        "losses": {
+          "lostCount": 3,
+          "lostNotable": [
+            {
+              "name": "迷之匣",
+              "rarity": "史诗",
+              "count": 1
+            }
+          ],
+          "pocketLost": 34
+        },
+        "runCoins": 15,
+        "durationSec": 8337
+      }
+    }
+  ]
+}

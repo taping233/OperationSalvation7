@@ -10,3 +10,6 @@ output/
 _backups/
 desktop-app/dist-log.txt
 __pycache__/
+
+# Local Vite/Vitest caches are reproducible, not delivery evidence.
+.vite-cache/

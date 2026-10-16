@@ -1,0 +1,7 @@
+{
+  "file": "game/src/run/chests.js",
+  "before": "fc0db9ad86f6888fe2558420bcfd0055d36bebce86ce60729f787dee28db2094",
+  "after": "1f2bf43237d46ba763646329e63a6a378f400c565cbcaed98f25ddcdf6a05435",
+  "delta": "../2026-10-16-reward-capacity-notice/notice-only.patch",
+  "review": "Only read-only displayed capacity notice derivation and footer string; no asset source, URL, lookup or fallback change. Two existing opaque references refreshed."
+}

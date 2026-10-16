@@ -136,9 +136,9 @@ export const M04_VISUAL_PACK = freeze({
   assets: [
     {
       id: "home-room-candidate",
-      path: "home-prototype/room-direction-candidate.png",
+      path: "home-prototype/room-direction-candidate.webp",
       url: new URL(
-        "../../assets/home-prototype/room-direction-candidate.png",
+        "../../assets/home-prototype/room-direction-candidate.webp",
         import.meta.url,
       ).href,
       width: 1216,
@@ -148,7 +148,7 @@ export const M04_VISUAL_PACK = freeze({
       layer: "room-back",
       status: "candidate",
       provenance:
-        "NovelAI V5 direction sample, seed 731942861, original pixels preserved",
+        "NovelAI V5 direction sample, seed 731942861, lossless WebP with original pixels preserved",
     },
     asset(
       "home-room-back-proto",

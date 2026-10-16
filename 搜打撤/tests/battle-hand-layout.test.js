@@ -9,11 +9,23 @@ it.each([1,2,3,4,5,6,7,8,9])('keeps %i hand groups inside the 1920 canvas and th
     expect(Math.abs(slot.rot)).toBeLessThanOrEqual(3);
     expect(slot.y).toBeLessThanOrEqual(27);
     expect(slot.scale).toBe(1);
+    expect(slot.rest).toBe(284);
     expect(slot.visibleWidth).toBeGreaterThanOrEqual(120);
     if (index < count - 1) expect(slot.x + 8 + slot.visibleWidth + 6).toBeLessThan(row[index + 1].x + 8);
   });
   expect(row[0].x + row.at(-1).x).toBe(0);
   expect(row[0].y).toBe(row.at(-1).y);
+});
+
+it('folds the resting hand below 85% of the canvas while a focused card can remain fully visible', () => {
+  const slot = handDisplayLayout(0, 6, 1290);
+  const height = 1080, cardHeight = 390, bottom = 56;
+  const restingTop = height - bottom - cardHeight + slot.rest;
+  expect(restingTop).toBeGreaterThanOrEqual(height * .85);
+  expect(height - restingTop).toBeGreaterThanOrEqual(150);
+  const focusedTop = height - bottom - cardHeight * 1.05;
+  expect(focusedTop).toBeGreaterThan(0);
+  expect(focusedTop + cardHeight * 1.05).toBeLessThan(height);
 });
 
 it('fits dense hands by overlap while keeping a readable card size', () => {

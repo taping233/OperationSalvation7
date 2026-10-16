@@ -2,14 +2,16 @@
 const UI = window.SDT.UI;
 const SDT = window.SDT;
 import { TYPE_NAME } from './hub/game.notes.js';
+import { menuPageLoading, cancelPendingMenuPageOpen } from './ui/game.menu.js';
 import { MAP } from './run/game.session.js';
 import { SLOT_COUNT, buildDerived, cam, canvas, configureGameRuntime, ctx, dpr, game, hasRun, migrateOldSave, openLeaveMenu, openSettings, openTitleGuide, saveGame, setLobby, showTitle, startNewGame, _set_dpr, _set_cam } from './run/game.session.js';
-import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition, resumeChestsOnCell } from './run/game.run.js';
+import { bindRunMixins, devForceBattle, devJumpNode, moveTo, openDevConsole, reenterCell, openClassChoice, openShop, showRunTransition, resumeChestsOnCell, resumeEventCardChoice } from './run/game.run.js';
 import { entrySupplyGate } from './run/node-reward-state.js';
 import { devToolsLoading, cancelPendingDevTools } from './run/game.run.dev-loader.js';
 import { PRELOAD_SCENES } from './run/game.run.data.js';
 import { resumeExtraction } from './run/game.run.altar.js';
 import { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS } from './core/performance-budgets.js';
+import { planStartupArtPreload } from './core/art-preload-plan.js';
 import { openBaseHub, baseHubLoading } from './hub/game.hub.js';
 import { bindBagMixins, resumeBattleRewards, showBackpack, showBackpackSection, setBagReturnHook } from './hub/game.bag.js';
 import { configureShopRuntime } from './run/game.run.shop.js';
@@ -31,7 +33,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
   configureGameRuntime({
     ...createGameCanvas(document),
     log: (message, kind) => UI.log(message, kind),
-    openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction, resumeChestsOnCell, resumeBattleRewards,
+    openClassChoice, openBaseHub, rebuildNotes, resize: () => resize(), showRunTransition, syncDevVisibility, resumeExtraction, resumeChestsOnCell, resumeBattleRewards, resumeEventCardChoice,
   });
   configureShopRuntime({ openBag: (onReturn) => {
     setBagReturnHook(onReturn);
@@ -178,6 +180,13 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
         e.preventDefault();
         e.stopImmediatePropagation();
         cancelPendingDevTools();
+        return;
+      }
+      if (e.key === 'Escape' && menuPageLoading) {
+        if (e.isComposing || e.keyCode === 229) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        cancelPendingMenuPageOpen();
         return;
       }
       if (e.key === 'Escape' && (cardPageLoading || baseHubLoading)) {
@@ -795,11 +804,12 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     if (sceneUrls.length > PERFORMANCE_BUDGETS.startupPreloadMax) {
       throw new Error(`首轮场景预热超预算：${sceneUrls.length}/${PERFORMANCE_BUDGETS.startupPreloadMax}`);
     }
-    const urls = [...new Set([
-      ...sceneUrls,
-      ...SDT.Art.collectThumbnailAssets(),
-      ...SDT.Art.collectManifestAssets(),
-    ])];
+    const urls = planStartupArtPreload({
+      sceneUrls,
+      figureUrls: SDT.Art.collectCardAssets?.([]) || [],
+      thumbnailUrls: SDT.Art.collectThumbnailAssets(),
+      manifestUrls: SDT.Art.collectManifestAssets(),
+    });
     if (warmupTip && urls.length) {
       warmupTip.hidden = false;
       const sceneSet = new Set(sceneUrls);

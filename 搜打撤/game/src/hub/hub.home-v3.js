@@ -5,7 +5,7 @@ import '../../css/base-home-v7.css';
 export function actionModeName(id) { return id === 'elite' ? '直入敌腹' : '正常入城'; }
 function baseAffairsHTML(base, pendingRewards) {
   const rows = [];
-  if (!base.data.ammoTaught) rows.push(`<button type="button" class="base-home-affair base-home-first-objective" data-act="deploy"><span class="base-home-affair-copy"><b>首次目标：带回一份收获</b><small>先出征整备 → 正常入城探索 → 撤离带回资源卡，在后勤使用后扩建。先留空格领取战利品。</small></span><span aria-hidden="true">→</span></button>`);
+  if (!base.data.ammoTaught) rows.push(`<button type="button" class="base-home-affair base-home-first-objective" data-act="deploy"><span class="base-home-affair-copy"><b>首次目标：带回一份收获</b><small>正常入城探索，撤离带回资源卡；在后勤使用后，再去建设扩建。背包记得留空格。</small></span><span aria-hidden="true">→</span></button>`);
   const facilities = [
     { id:'stash', name:'基地仓库', ready:base.canUpgradeStash?.(), have:base.stashCap?.() || 0 },
     { id:'bag', name:'出征背包', ready:base.canUpgradeBag?.(), have:base.bagCap?.() || 0 },

@@ -1,0 +1,17 @@
+{
+  "updates": [
+    [
+      "game/src/run/chests.js",
+      "ffed546ca3c783b413028184908e4479c516dbfcd6b744d82cf4523040c1a601",
+      "a993d5ed443b8d6b5521d82be2dd22ca202382a4626647f4290c6299da36a021",
+      2
+    ],
+    [
+      "game/src/battle/view/battle.layers.js",
+      "9196a64ce8f64e75620fffbcddf01c5fc1effaeda763551c1859841d09bfb475",
+      "7041764eea55ce1e147afb10fc2e494e43ab2c493617d0cf88b6bdb185770575",
+      1
+    ]
+  ],
+  "review": "Full source deltas read. Chests only actual-failure notice guards and suspend/resume bag fingerprint, no asset path. Layers effective-card existing template lookup and infusion legality only; existing Art/cardHTML mapping remains, no new URL constructor/fallback or retired-asset mapping. Pure templates remain existing runtime catalog."
+}

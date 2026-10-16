@@ -1,0 +1,79 @@
+{
+  "at": "2026-10-15T22:20:22.167989+00:00",
+  "baselineHead": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "status": "complete-uncommitted",
+  "files": [
+    {
+      "path": "game/src/hub/game.bag.settle.js",
+      "beforeSha256": "f64b4bdce1d6348599b278214e6d0c44bdc5c3b57e935edebaf0896b4d63abca",
+      "afterSha256": "c091a8fa1ba5ba680b3aae2979429df8fa011dc5b1b1a0e4d0204efe288280b2"
+    },
+    {
+      "path": "tests/battle-settlement-retry.test.js",
+      "beforeSha256": "d1c63f7c5e0737f8e335ad80746f75d77408cc3bbc746463a88f26b400545d15",
+      "afterSha256": "af8e33302c97a42bff0a8a70a57c1bebc348671e1efb6eb9910bc9084568fb9e"
+    },
+    {
+      "path": "tests/battle-settlement-recovery.test.js",
+      "beforeSha256": "429b7b92abb01b9b3c6036294b0c3b9cd2eb4bb2069e97f20e9c77bf18092a99",
+      "afterSha256": "86b27fffe2423b209b42f99cf7ad81410a91a20d5fdecbcb3b03fd022dd11195"
+    },
+    {
+      "path": "tests/extra-legend-reward-persistence.test.js",
+      "beforeSha256": null,
+      "afterSha256": "39d9377ebcf4950336dbd538a26ae397776a8d7b2471ceb34f8791c21d04a36b"
+    }
+  ],
+  "readOnlyDependencies": [
+    {
+      "path": "game/src/run/chests.js",
+      "sha256": "fc0db9ad86f6888fe2558420bcfd0055d36bebce86ce60729f787dee28db2094"
+    },
+    {
+      "path": "game/src/run/chest-reward-save.js",
+      "sha256": "f850db5fb27eb7eb5279d33dcd96c019ba16499faba8d499fc1c8906180a3e34"
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "sha256": "6dcdadc6b27bdead891dbbd18be4b132ca110322d9aa54699235f80dc25f4eac"
+    },
+    {
+      "path": "game/src/run/event-card-choice.js",
+      "sha256": "7fde11bcddf27c4efbed22720a39f92902edd6b677eeffec5b72e0361a8ca3a0"
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "sha256": "32bf9c15ab789137aa11c2647fdf9fd38b346fbb0329f2a2927db3a9f27113da"
+    },
+    {
+      "path": "game/src/hub/game.storage.js",
+      "sha256": "129427f83d7e13d51b07cc6baa65568584aac15a6b72ef79a4c37c7a4def001f"
+    }
+  ],
+  "patch": {
+    "path": "docs/evidence/2026-10-16-extra-legend-rewards/extra-legend-fix.patch",
+    "sha256": "1d41431e75ebeafe1987221d99ad6f840ca25c30eabf48f8919633c322bf0272"
+  },
+  "checks": {
+    "targetTests": {
+      "files": 13,
+      "passed": 148,
+      "failed": 0,
+      "skipped": 0
+    },
+    "newRegressionTests": 10,
+    "eslint": "passed: 4 owned files",
+    "types": "passed: 8 project configs",
+    "syntax": "passed: 425 project files",
+    "diffCheck": "passed",
+    "docsCheck": "passed: 461 checked root/current-document relative links, 0 findings; evidence directory excluded by checker"
+  },
+  "notRun": [
+    "browser",
+    "real-player-save",
+    "service-management",
+    "build",
+    "full-test-suite",
+    "commit"
+  ]
+}

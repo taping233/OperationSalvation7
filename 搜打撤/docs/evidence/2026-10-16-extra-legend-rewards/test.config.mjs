@@ -1,0 +1,1 @@
+export default { cacheDir:'node_modules/.cache/extra-legend-rewards', test:{ environment:'jsdom', include:['tests/extra-legend-reward-persistence.test.js'], pool:'forks', maxWorkers:1, minWorkers:1 } };

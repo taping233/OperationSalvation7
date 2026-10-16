@@ -1,0 +1,29 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤
+
+stdout | docs/evidence/2026-10-16-damage-preview-audit/repro.test.js > read-only damage preview audit: intentionally reproduce the current gaps > 奥术弹: preview unknown, isolated production resolver deals 1 and grants 初始攻击 in normal battle
+奥术弹 {"preview":"unknown","realResolverDamage":1,"draws":[["grantSha",1]]}
+
+stdout | docs/evidence/2026-10-16-damage-preview-audit/repro.test.js > read-only damage preview audit: intentionally reproduce the current gaps > 爆燃火球: false exact 7 versus resolver 9 at spellPower 2
+爆燃火球 {"preview":7,"realResolverDamage":9}
+
+stdout | docs/evidence/2026-10-16-damage-preview-audit/repro.test.js > read-only damage preview audit: intentionally reproduce the current gaps > 充能射线: false exact 5 versus resolver 9 after 2 prior infusions
+充能射线 {"preview":5,"realResolverDamage":9}
+
+stdout | docs/evidence/2026-10-16-damage-preview-audit/repro.test.js > read-only damage preview audit: intentionally reproduce the current gaps > 暗影射击: false exact 3 versus resolver 6 on a cursed target
+暗影射击 {"preview":3,"realResolverDamage":6}
+
+stdout | docs/evidence/2026-10-16-damage-preview-audit/repro.test.js > read-only damage preview audit: intentionally reproduce the current gaps > 友军先手: current forecast 6; after the documented allied attack phase forecast 0
+友军先手 {"initialForecast":6,"forecastAfterDocumentedAlliedPhase":0,"note":"按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。"}
+
+ ✓ docs/evidence/2026-10-16-damage-preview-audit/repro.test.js > read-only damage preview audit: intentionally reproduce the current gaps > 奥术弹: preview unknown, isolated production resolver deals 1 and grants 初始攻击 in normal battle 13ms
+ ✓ docs/evidence/2026-10-16-damage-preview-audit/repro.test.js > read-only damage preview audit: intentionally reproduce the current gaps > 爆燃火球: false exact 7 versus resolver 9 at spellPower 2 2ms
+ ✓ docs/evidence/2026-10-16-damage-preview-audit/repro.test.js > read-only damage preview audit: intentionally reproduce the current gaps > 充能射线: false exact 5 versus resolver 9 after 2 prior infusions 1ms
+ ✓ docs/evidence/2026-10-16-damage-preview-audit/repro.test.js > read-only damage preview audit: intentionally reproduce the current gaps > 暗影射击: false exact 3 versus resolver 6 on a cursed target 1ms
+ ✓ docs/evidence/2026-10-16-damage-preview-audit/repro.test.js > read-only damage preview audit: intentionally reproduce the current gaps > 友军先手: current forecast 6; after the documented allied attack phase forecast 0 1ms
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  06:28:28
+   Duration  789ms (transform 322ms, setup 0ms, collect 452ms, tests 20ms, environment 0ms, prepare 100ms)
+

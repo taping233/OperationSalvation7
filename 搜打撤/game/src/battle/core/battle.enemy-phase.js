@@ -9,7 +9,7 @@ import { waitForFeedback, waitMs } from '../view/battle.feedback.js';
 import { demoMs } from '../runtime/battle.pace.js';
 import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$lastPersistAt, clearTargetHint, transitionTo, cancelTargetingState } from '../runtime/battle.runtime.js';
 import { recordBattleDamage } from './battle.summary.js';
-import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, effCostOf, finish, fireTurnEndTriggers, fireConsumeTriggers, deferEndTurn, hasPendingEndTurn } from './battle.engine.js';
+import { processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, findEffectiveCard, effCostOf, finish, fireTurnEndTriggers, fireConsumeTriggers, deferEndTurn, hasPendingEndTurn } from './battle.engine.js';
 import { restoreAtkDown } from '../effects/effect-steps.m2.js';
 
   // 敌方步进演出节拍在 vitest 环境归零（比照 battle.engine.js 的 SURGE_WAVE_MS 先例）：
@@ -40,7 +40,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
     }
     if (swiftRune && hand.length) {
       const u0 = hand[0];
-      const o = findCard(u0);
+      const o = findEffectiveCard(u0);
       if (o && !unplayableReason(o.card) && effCostOf(o.card, u0) <= energy) {
         G.log('[[icon:bolt]] <b>极速符文</b>：回合结束，打出最左侧的手牌', 'sys');
         // 打出及其后续选牌/抉择/发现完成后才移交敌方阶段；不能在首张牌收尾时跨过弹层。

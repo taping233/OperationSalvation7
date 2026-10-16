@@ -13,7 +13,7 @@ await import('../game/src/hub/base.js');
 const session=await import('../game/src/run/game.session.js');
 const { Random }=await import('../game/src/core/random.js');
 const { RunStorage }=await import('../game/src/hub/game.storage.js');
-const { createGameMenuController }=await import('../game/src/ui/game.menu.js');
+const { createGameMenuController }=await import('./helpers/menu-controller.js');
 
 beforeAll(()=>{
   Object.assign(window.SDT.UI,{log(){},refresh(){},clearLog(){},hideOverlay(){},hideScreen(){},showScreen(){},showOverlay(){},act(){},registerHelp(){},helpBtn(){return'';}});

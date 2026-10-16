@@ -2,7 +2,7 @@
 import { game } from './game.session.js';
 import { grantEventCard, openShop, showRunTransition, resumeChestsOnCell } from './game.run.scenes.js';
 import { openClassChoice } from './game.run.altar.js';
-import { moveTo, reenterCell } from './game.run.flow.js';
+import { moveTo, reenterCell, resumeEventCardChoice } from './game.run.flow.js';
 import {
   devForceBattle as devForceBattleImpl,
   devJumpNode as devJumpNodeImpl,
@@ -19,4 +19,4 @@ function devForceBattle(...args) { return devForceBattleImpl(...args); }
 function devJumpNode(...args) { return devJumpNodeImpl(...args); }
 function openDevConsole(...args) { return openDevConsoleImpl(...args); }
 
-export { bindRunMixins, moveTo, reenterCell, openClassChoice, openShop, showRunTransition, resumeChestsOnCell, devForceBattle, devJumpNode, openDevConsole };
+export { resumeEventCardChoice, bindRunMixins, moveTo, reenterCell, openClassChoice, openShop, showRunTransition, resumeChestsOnCell, devForceBattle, devJumpNode, openDevConsole };

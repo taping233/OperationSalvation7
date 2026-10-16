@@ -1,6 +1,6 @@
 import { displayCardDescription } from '../../cards/card-description-text.js';
 import { descRich } from '../../cards/cards.view.js';
-import { effCostOf, findCard, getSnapshot, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
+import { effCostOf, findEffectiveCard as findCard, infusionFuelReason, getSnapshot, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
 
 let active = null;
 const inHand = (snapshot, uid) => snapshot.hand?.includes(uid);
@@ -12,6 +12,7 @@ function actionFor(uid, snapshot) {
   if (snapshot.infusing) {
     if (snapshot.infusing.uid === uid) return { reason: '不能用正在注能的牌作为材料' };
     const picked = snapshot.infusing.picked.includes(uid);
+    if (!picked && infusionFuelReason(uid)) return { reason: infusionFuelReason(uid) };
     if (!picked && snapshot.infusing.picked.length >= snapshot.infusing.need) return { reason: '注能材料已选满' };
     return { kind: 'infusion', label: picked ? '取消这张材料' : '选作注能材料', detail: '只调整材料选择；确认发动后才消耗。' };
   }

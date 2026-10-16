@@ -1,0 +1,22 @@
+diff --git a/docs/evidence/2026-10-16-safe-pearl-access/game.bag.before.txt b/game/src/hub/game.bag.js
+index c6eafa1..8334e41 100644
+--- a/docs/evidence/2026-10-16-safe-pearl-access/game.bag.before.txt
++++ b/game/src/hub/game.bag.js
+@@ -599,7 +599,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
+     const closeZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
+     const btns = [];
+     if (usable) btns.push('<button class="ov-btn ok" data-act="useDetailCard">使用这张道具</button>');
+-    if (card.id === 'tt2-pearlbox' && !safeFlag) btns.push('<button class="ov-btn ok" data-act="pearlStoreZoom">[[icon:gem]] 打开珍珠盒</button>');
++    if (card.id === 'tt2-pearlbox') btns.push('<button class="ov-btn ok" data-act="pearlStoreZoom">[[icon:gem]] 打开珍珠盒</button>');
+     if (card.id === 'tt7-stratagem' && !safeFlag) btns.push('<button class="ov-btn ok" data-act="pouchStoreZoom">[[icon:cards]] 打开锦囊（存放法术 ×3）</button>');
+     if (card.id === 'tt-token-gold' && st.count >= 3) btns.push('<button class="ov-btn ok" data-act="craftColorToken">合成员工通行证A（3 张 B → 1 张 A）</button>');
+     if (card.id === 'tt-token-color' && (game.fragments || 0) >= 2) btns.push('<button class="ov-btn ok" data-act="craftColorTokenByFragments">合成员工通行证A（2 碎片 + 1 通行证A）</button>');
+@@ -621,7 +621,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
+     bagAct('useDetailCard', () => { closeZoom(); useOwnedCard(st.uids[0]); });
+     if (safeFlag) bagAct('zoomMoveToBag', () => { closeZoom(); moveStackSafe(card.name, false); });
+     else if (!isSha) bagAct('zoomMoveToSafe', () => { closeZoom(); moveStackSafe(card.name, true); });
+-    if (card.id === 'tt2-pearlbox' && !safeFlag) bagAct('pearlStoreZoom', () => { closeZoom(); openPearlStore(); });
++    if (card.id === 'tt2-pearlbox') bagAct('pearlStoreZoom', () => { closeZoom(); openPearlStore(); });
+     if (card.id === 'tt7-stratagem' && !safeFlag) bagAct('pouchStoreZoom', () => { closeZoom(); openPouchStore(); });
+     bagAct('detailDiscard', () => { closeZoom(); showDiscardConfirm(card.name, safeFlag); });
+     bagAct('craftColorToken', () => {

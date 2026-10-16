@@ -1,0 +1,14 @@
+{
+  "productionFilesChanged": [
+    "game/css/expedition-rewards.css"
+  ],
+  "newTest": "tests/sacrifice-layout-readability.test.js",
+  "cssBeforeSha256": "71838208f783f2b9ad446af4f7abce38a4fec0b8e433498407ba0c5af00d8b8c",
+  "cssAfterSha256": "23fe5f15f19f3309036f81760fc9dd042516b0542467b26073821281c71c7800",
+  "unrelatedCssPreservedByteForByte": true,
+  "altarLogicUnchanged": true,
+  "addedCssLines": 19,
+  "browserVerification": "not run; parent will verify in the third-run altar",
+  "build": "not run",
+  "commit": "not run"
+}

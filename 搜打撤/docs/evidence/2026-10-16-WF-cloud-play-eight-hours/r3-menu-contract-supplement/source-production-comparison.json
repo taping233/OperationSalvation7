@@ -1,0 +1,98 @@
+{
+  "checkedAt": "2026-10-15T21:04:40.906791+00:00",
+  "otherProductionInputChanges": [],
+  "sourceAddedPathsFromR3Freeze": [
+    {
+      "bytes": 13650,
+      "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/final-target.log",
+      "productionInput": false,
+      "sha256": "ac83010a256b8f26c0718e8c6ede35fdb003a9a29bca73e87f8c2c8a195ee99b"
+    },
+    {
+      "bytes": 99,
+      "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/lint.log",
+      "productionInput": false,
+      "sha256": "7125f194612fcff2f454c05d848e7cb71facc1967b4d5017e25b34fdee3ba74f"
+    },
+    {
+      "bytes": 1257,
+      "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/selftest.log",
+      "productionInput": false,
+      "sha256": "8deecdd2e5b1e1e1f34d9995c977678ec427e5265e59846504bcd1bbad1099e1"
+    },
+    {
+      "bytes": 428,
+      "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/syntax.log",
+      "productionInput": false,
+      "sha256": "a484bee492c4bc0041a0af0732e74fcb1a9cd79bb667bd5b158326e4ea1da01c"
+    },
+    {
+      "bytes": 976,
+      "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/handoff.json",
+      "productionInput": false,
+      "sha256": "24d60c958c7ee5c6be20159000ee6fd1305dfdf3df9e29dff8ccd20e74a810da"
+    },
+    {
+      "bytes": 828,
+      "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/evidence-sha256.json",
+      "productionInput": false,
+      "sha256": "2f3444ab9d50a76d989e17ecad3b2a038b7b93469531ee8eac650e353707eaf2"
+    },
+    {
+      "bytes": 1725,
+      "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/first-target.log",
+      "productionInput": false,
+      "sha256": "dec04c1ca5c1cf108fd99b37631e686e7d757ce5ce24a6119695763eb1dc2580"
+    },
+    {
+      "bytes": 2544,
+      "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/README.md",
+      "productionInput": false,
+      "sha256": "511cd017039d728f6af418e84ebce350d40c7330c70f32afe41c6ff86263d2e4"
+    },
+    {
+      "bytes": 88690,
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/44-layer-gate-after-r2.png",
+      "productionInput": false,
+      "sha256": "29f6772caa27566c9bd721891be485a23d7d2a0b7d5c7326f3185b220c513ef9"
+    }
+  ],
+  "sourceChangesFromR3Freeze": [
+    {
+      "afterSha256": "c48d931695b32cd9c15eff4f26b9ef9168a73ce43aa766e7009337d38cbf71ed",
+      "approved": false,
+      "beforeSha256": "c5d53760bd920a75dbee7a7e9457261877084519976330edc81cdbae5784ba80",
+      "path": "搜打撤/docs/PARALLEL-REGISTRY.md",
+      "productionInput": false
+    },
+    {
+      "afterSha256": "2af852171b1e6030b9b1a5af14060f11279343bd8aa785c9fa6001164dfd1561",
+      "approved": false,
+      "beforeSha256": "50b295ee0613776e798db669f1bac9caa380b30cdca653980f95a4b8b9069c75",
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/PLAYLOG.md",
+      "productionInput": false
+    },
+    {
+      "afterSha256": "16a71bbe7c8553d3cf9d6ced1f574145cb500c0c7025692e5cb6368a47b38db1",
+      "approved": true,
+      "beforeSha256": "bd9d7764c73b2cd7d5eafb4c32271d98d25fdc9e63763ba2ad24dfc3aa63762f",
+      "path": "搜打撤/game/selftest.js",
+      "productionInput": false
+    },
+    {
+      "afterSha256": "c62edc376f76266b62eb4eb58c47dbc811e6e4fb3b32e8d3a43a43e5a61ddd36",
+      "approved": true,
+      "beforeSha256": "3560e80f06681ed03957af37bb23bf76a52f0ae09fb3b6794a98c628ee732137",
+      "path": "搜打撤/tests/agent-console-jump.test.js",
+      "productionInput": false
+    },
+    {
+      "afterSha256": "afdc98e0d7ff3d12d68c9fb64ea674ac42a3cdd483bb626268efccacdfcd2454",
+      "approved": true,
+      "beforeSha256": "7965309e95f861a4d3ae920a7f5300f45604407471c9b57ea5d0cd2adffc98a5",
+      "path": "搜打撤/tests/selftest-paths.test.js",
+      "productionInput": false
+    }
+  ],
+  "sourceFilesCopiedOnlyFromExplicitAllowlist": true
+}

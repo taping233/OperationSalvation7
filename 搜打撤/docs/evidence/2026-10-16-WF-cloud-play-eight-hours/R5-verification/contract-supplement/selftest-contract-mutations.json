@@ -1,0 +1,66 @@
+{
+  "checkedAt": "2026-10-15T22:31:56.144Z",
+  "sandbox": "/tmp/r5-selftest-contract-cCL4ww",
+  "results": [
+    {
+      "name": "baseline",
+      "expectedExit": 0,
+      "actualExit": 0,
+      "passed": true,
+      "contracts": [
+        "✔ BOSS·胜利领奖完成后直接保存结算",
+        "✔ BOSS·整理背包页已彻底移除（showBossPackCleanup 零调用）"
+      ]
+    },
+    {
+      "name": "comment-reworded",
+      "expectedExit": 0,
+      "actualExit": 0,
+      "passed": true,
+      "contracts": [
+        "✔ BOSS·胜利领奖完成后直接保存结算",
+        "✔ BOSS·整理背包页已彻底移除（showBossPackCleanup 零调用）"
+      ]
+    },
+    {
+      "name": "wrong-save-phase",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "passed": true,
+      "contracts": [
+        "✘ BOSS·胜利领奖完成后直接保存结算: 期望 true，得到 false",
+        "✔ BOSS·整理背包页已彻底移除（showBossPackCleanup 零调用）"
+      ]
+    },
+    {
+      "name": "missing-await",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "passed": true,
+      "contracts": [
+        "✘ BOSS·胜利领奖完成后直接保存结算: 期望 true，得到 false",
+        "✔ BOSS·整理背包页已彻底移除（showBossPackCleanup 零调用）"
+      ]
+    },
+    {
+      "name": "bypassed-settlement",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "passed": true,
+      "contracts": [
+        "✘ BOSS·胜利领奖完成后直接保存结算: 期望 true，得到 false",
+        "✔ BOSS·整理背包页已彻底移除（showBossPackCleanup 零调用）"
+      ]
+    },
+    {
+      "name": "cleanup-reintroduced",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "passed": true,
+      "contracts": [
+        "✘ BOSS·胜利领奖完成后直接保存结算: 期望 true，得到 false",
+        "✘ BOSS·整理背包页已彻底移除（showBossPackCleanup 零调用）: 期望 true，得到 false"
+      ]
+    }
+  ]
+}

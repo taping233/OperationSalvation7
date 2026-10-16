@@ -1,0 +1,113 @@
+{
+  "scope": "Read-only production references captured while candidate encoding runs; no production writes by this task",
+  "files": [
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "bytes": 22231,
+      "sha256": "f68d650a722b678804055d5656fcf96725bf1bd0c1dbea3d252b4d11e21773c6",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/src/hub/hub.presentation.js",
+      "bytes": 21592,
+      "sha256": "eb0f264f8c8f2cfbed1cd008156f73da707c8477393e7e90b20a61f9d54f5cb3",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/css/base-personnel-v12.css",
+      "bytes": 28543,
+      "sha256": "4e290572f6993d505867128464326987c93c2dad8ad63656d9f1f4045d051bad",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/src/core/art.js",
+      "bytes": 31754,
+      "sha256": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/asset-manifest.json",
+      "bytes": 507912,
+      "sha256": "3cc06d32aa0680700a03dbe18e92d22d85bf87086a2d20e3a0174eaf063170a7",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "tests/hub-personnel-portrait.test.js",
+      "bytes": 8423,
+      "sha256": "17da4ceb33d2f9ba93011c2206d1d1ceb20c4a90dadfb0e321b18bf0e1be25fa",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/portraits/full/heixiang.webp",
+      "bytes": 190598,
+      "sha256": "d8b76ee16b7d6bc85db83298a603f845fea39f139e42f97f41ebe9972fd50caa",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/portraits/full/xingyue.webp",
+      "bytes": 180912,
+      "sha256": "77c4a09b76804cf7cce78075dd610c7e2ebbdcfac67c5c2a1105eddae228eca3",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/portraits/full/baita.webp",
+      "bytes": 327278,
+      "sha256": "ab6ab3c9f5c6e185b2d71ac7b719dd970fd259436f2675d163d2ea4aa849b218",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/portraits/full/changwuyu.webp",
+      "bytes": 204422,
+      "sha256": "156d3889d6b4c92d95d29eb67440d951f0234b5f325c22d4f3ee27027180a1ff",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/portraits/full/wu.webp",
+      "bytes": 150636,
+      "sha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/portraits/full/wu-casual-v14.webp",
+      "bytes": 366400,
+      "sha256": "377ac979dcfdc04292e7332326864fb3cccee5defe02537c089653afa6e77f0d",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/portraits/full/wu-spring-v15.webp",
+      "bytes": 329108,
+      "sha256": "ec37a0b208a58a39df729ea289cf68075e485c58f44b42583b4fe249ddec83ad",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/portraits/full/wu-beach.webp",
+      "bytes": 378674,
+      "sha256": "027f6fb049a6966a9f3c7662b012075d3f5c7533e9e39fc95c5147a38ccb232a",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/portraits/battle/heixiang.webp",
+      "bytes": 108472,
+      "sha256": "2834728e40be8d320bc1ebdea3e6505f8fe2bc77f6876e8a1929256a6e276186",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/portraits/battle/xingyue.webp",
+      "bytes": 102702,
+      "sha256": "277535cf8adfa08ba1e996f7285cfcbd46225522514bfd45dd4d80f867fc6c4b",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/portraits/avatars/heixiang.webp",
+      "bytes": 111060,
+      "sha256": "557a9d4ffe504b1fff00b81f72e7f41583a9918d0cac8396b4294771380fc169",
+      "unchanged_since_capture": true
+    },
+    {
+      "path": "game/assets/portraits/avatars/xingyue.webp",
+      "bytes": 258720,
+      "sha256": "9385c5e0576dfb9ca711006f062311fff6e12ae66c22d924082c61e2dd182dd1",
+      "unchanged_since_capture": true
+    }
+  ]
+}

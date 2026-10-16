@@ -1,0 +1,7 @@
+{
+  "timeUTC": "2026-10-15T21:58:22.959331+00:00",
+  "path": "game/src/ui/ui.js",
+  "before": "e40a8eac1adb5e3a834a417c174a5d2513eadab5d55bf0b07804bd1e87b3d6a1",
+  "after": "8a1eb7d22e5fea5bb874aec022f240c090e550da8192093f5d42ab64c7fb642d",
+  "review": "Compared complete delta with immutable R4 source. Only Image probe request lifetime/close cleanup and callback record changed. Existing photoFullSrc source from Art.cardIcon remains unchanged; no new dynamic asset construction or old-path fallback. Full source assets and candidate mappings unchanged. Updated only this opaque consumer hash after review."
+}

@@ -1,0 +1,16 @@
+{
+  "scope": [
+    "game/index.html (inline startup guard only)",
+    "tests/startup-guard.test.js",
+    "docs/evidence/2026-10-16-late-startup-guard/"
+  ],
+  "unchangedOutsideInlineGuard": true,
+  "preexistingIndexChanges": "Two NotoSans font preload removals already present before this task; preserved unchanged.",
+  "indexBeforeSha256": "d547f85be215cd0a50a9d615aea8bca717c70685800be4b1d3516d649f567262",
+  "indexAfterSha256": "885b972686d0c60d01823068c465671ccca53a2fe7f55a0a2238a49e3203621c",
+  "inlineGuardSha256": "109b1a3382e384da342b84db3ba03cd4e2e104620dcfeaed468a00819d71c1fe",
+  "testSha256": "86b7977fc53941702372c0106d4bba45e94cbc1d2450f21c624a064cdf131719",
+  "patchSha256": "961d6b42e09fc4a464637fbfa1dbbc484c1f5621ed0413374357d4b851168fa1",
+  "productionWriteFrozenAtUtc": "2026-10-15T22:07:26Z",
+  "browserServiceBuildCommitActions": "None performed by this task"
+}

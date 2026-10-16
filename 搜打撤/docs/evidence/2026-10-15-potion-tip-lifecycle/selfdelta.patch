@@ -1,0 +1,93 @@
+--- game/src/battle/view/battle.view.js.before
++++ game/src/battle/view/battle.view.js
+@@ -32,6 +32,12 @@
+ let sceneryReady = null;
+ const battleEntry = createBattleEntryGate();
+ let sceneryObserver = null, sceneryHideObserver = null, sceneryFrame = 0;
++let activePotionTipCleanup = null;
++function clearPotionTip() {
++  const cleanup = activePotionTipCleanup;
++  activePotionTipCleanup = null;
++  cleanup?.();
++}
+ function clearBattleScenery() {
+   sceneryObserver?.disconnect(); sceneryObserver = null;
+   sceneryHideObserver?.disconnect(); sceneryHideObserver = null;
+@@ -148,12 +154,14 @@
+   layoutBattleScenery();
+   return sceneryReady;
+ }
+-const clearSceneryOnMode = event => { if (event.detail !== 'battle') { clearBattleScenery(); battleEntry.cancel(); } };
++const clearSceneryOnMode = event => { clearPotionTip(); if (event.detail !== 'battle') { clearBattleScenery(); battleEntry.cancel(); } };
++const closeBattlePresentation = () => { clearPotionTip(); battleEntry.cancel(); };
+ document.addEventListener('sdt-overlay-mode', clearSceneryOnMode);
+-document.addEventListener('sdt-overlay-close', battleEntry.cancel);
++document.addEventListener('sdt-overlay-close', closeBattlePresentation);
+ if (import.meta.hot) import.meta.hot.dispose(() => {
+   document.removeEventListener('sdt-overlay-mode', clearSceneryOnMode);
+-  document.removeEventListener('sdt-overlay-close', battleEntry.cancel);
++  document.removeEventListener('sdt-overlay-close', closeBattlePresentation);
++  clearPotionTip();
+   clearBattleScenery(); battleEntry.dispose();
+ });
+ 
+@@ -250,6 +258,7 @@
+     const nextNode = next.querySelector(selector);
+     if ((oldNode?.outerHTML || '') === (nextNode?.outerHTML || '')) return;
+     const liveNode = stage.querySelector(selector);
++    if (selector === ':scope > .bt-potions') clearPotionTip();
+     if (!nextNode) { liveNode?.remove(); return; }
+     const replacement = nextNode.cloneNode(true);
+     if (liveNode) liveNode.replaceWith(replacement);
+@@ -262,6 +271,7 @@
+       && stage?.matches('.battle-stage.sts') && stage._battleToken === token
+       && stage._battleTemplate && stage.isConnected;
+     if (!canReuse) {
++      clearPotionTip();
+       clearBattleScenery();
+       UI.showOverlay('', html, 'battle');
+       const fresh = body.firstElementChild;
+@@ -285,6 +295,7 @@
+     const previous = stage._battleTemplate;
+     // 战场皮肤属于场次；异常切换时回到 showOverlay，保证背景与模式标志同步。
+     if (stage.dataset.assetKey !== next.dataset.assetKey || stage.dataset.boss !== next.dataset.boss) {
++      clearPotionTip();
+       clearBattleScenery();
+       UI.showOverlay('', html, 'battle');
+       const fresh = body.firstElementChild;
+@@ -698,16 +709,24 @@
+       });
+     });
+     // 药水自绘文字提示栏（09-20 老板：悬停 / 触摸药水即出说明，不用系统 title）——
+-    // 挂在 .bt-potions 容器内贴药水栏正下方；触屏按下即显，松手收起（once 防残留）
++    // 挂在 .bt-potions 容器内贴药水栏正下方；任一终止事件同时解绑 up/cancel，换栏/离页也清理。
+     const potionTip = body.querySelector('[data-potion-tip]');
+     if (potionTip) {
+       const showPotionTip = (p) => {
++        if (!potionTip.isConnected) return;
++        clearPotionTip();
++        activePotionTipCleanup = hidePotionTip;
+         potionTip.innerHTML = p.usable === false
+           ? `${SDT.Icons.img('flask')} 【<b>${esc(p.name)} ×${p.count}</b>】${esc(p.desc)}（不可使用——${esc(p.why)}）`
+           : `${SDT.Icons.img('flask')} 【<b>${esc(p.name)} ×${p.count}</b>】${esc(p.desc)}${p.aim === 'enemy' ? '——点击或拖到敌人身上使用' : '——点击直接使用'}`;
+         potionTip.hidden = false;
+       };
+-      const hidePotionTip = () => { potionTip.hidden = true; };
++      const hidePotionTip = () => {
++        potionTip.hidden = true;
++        document.removeEventListener('pointerup', hidePotionTip);
++        document.removeEventListener('pointercancel', hidePotionTip);
++        if (activePotionTipCleanup === hidePotionTip) activePotionTipCleanup = null;
++      };
+       body.querySelectorAll('.bt-potion').forEach(el => {
+         if (el.dataset.tipBound) return;
+         el.dataset.tipBound = '1';
+@@ -718,7 +737,7 @@
+         el.addEventListener('pointerdown', (e) => {
+           if (e.button !== 0 && e.pointerType === 'mouse') return;
+           const p = potionAt();
+-          if (!p) return;
++          if (!p || !potionTip.isConnected) return;
+           showPotionTip(p);
+           document.addEventListener('pointerup', hidePotionTip, { once: true });
+           document.addEventListener('pointercancel', hidePotionTip, { once: true });

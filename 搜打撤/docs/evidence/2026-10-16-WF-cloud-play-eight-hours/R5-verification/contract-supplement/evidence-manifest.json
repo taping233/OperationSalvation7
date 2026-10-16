@@ -1,0 +1,97 @@
+[
+  {
+    "bytes": 3713,
+    "path": "REPORT.md",
+    "sha256": "4d8e5653ddf95369930df083389041f1aeef694bc61ec69be20bbb54b5f5a901"
+  },
+  {
+    "bytes": 2553,
+    "path": "summary.json",
+    "sha256": "36687b4fb6e100e455e00657998c341fad841e669628c84aa110642179f0d06d"
+  },
+  {
+    "bytes": 1495,
+    "path": "checks.json",
+    "sha256": "0851690240a86f3921871bb923658ec5cf5191fedd68b2f93b73256f530a0c49"
+  },
+  {
+    "bytes": 2444,
+    "path": "preparation.json",
+    "sha256": "4836f5f66cb1d2f2155278d74f385971969e967ecf3a48086b4bd39471536d53"
+  },
+  {
+    "bytes": 2194,
+    "path": "config-integrity.json",
+    "sha256": "6702aed6d0771e5d248a88af692bd0dd3ca81f8d6d85303e7d9f92cc247fc08f"
+  },
+  {
+    "bytes": 955,
+    "path": "supplement-input-delta.json",
+    "sha256": "279c023dbbd309b0f148dc1297d9d551a32eebe81d061cc74a9d1d30c8425894"
+  },
+  {
+    "bytes": 2080,
+    "path": "post-validation-integrity.json",
+    "sha256": "632032290a94a56c31107834c018ad6e9b3cd1f4f03e001cbbf62ef984ac6c8e"
+  },
+  {
+    "bytes": 852,
+    "path": "log-manifest.json",
+    "sha256": "0bb42c109249336220473f1cdc58bef28683341b9cec91fc37d5cd709758da9d"
+  },
+  {
+    "bytes": 5345,
+    "path": "repair.patch",
+    "sha256": "57ccd1b2031da1799fe937afcd16bd3c3434aa978cff123ea041f1f103e04c70"
+  },
+  {
+    "bytes": 3372,
+    "path": "README.md",
+    "sha256": "ab46af6598fd0d97ff5a55cbb12d9d8393733224ec485bacefbd28134d6293b0"
+  },
+  {
+    "bytes": 2098,
+    "path": "verification-summary.json",
+    "sha256": "eed8a3213d993889801ce9625cfd9c2d7d82590255d82d886b0c8c03885e45d2"
+  },
+  {
+    "bytes": 2008,
+    "path": "selftest-contract-mutations.json",
+    "sha256": "ae0591710a27c189d4b4216838116a216e5c0407ca521f937e18f34cebef8515"
+  },
+  {
+    "bytes": 386,
+    "path": "scripts-manifest.json",
+    "sha256": "8923da70fdd9e33756e0d590806906dbffceb4b3ab59ed364f13e7ef965d1081"
+  },
+  {
+    "bytes": 814,
+    "path": "logs/lint.log",
+    "sha256": "58da11349c4d197b8a127a6db0c59ad47af81c010f399d9176d9707273231948"
+  },
+  {
+    "bytes": 0,
+    "path": "logs/patch-apply.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "bytes": 0,
+    "path": "logs/patch-check.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "bytes": 354,
+    "path": "logs/selftest-lint.log",
+    "sha256": "6abca9135ce4767ea8708cba17043e7ad67ab44eea393c3e14cf5ff954ebdf41"
+  },
+  {
+    "bytes": 1523,
+    "path": "logs/selftest.log",
+    "sha256": "b118a2d0baf983d71aa33d1bc44c58d367080fbee33a5d251b00f01bc35ed905"
+  },
+  {
+    "bytes": 198243,
+    "path": "logs/test.log",
+    "sha256": "9782161182b632a7a1054575f71f66eebfb15fecf7e09122e03c7dbb310c0106"
+  }
+]

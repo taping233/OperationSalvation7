@@ -11,8 +11,6 @@
 <link rel="preload" as="font" type="font/ttf" href="assets/fonts/HarmonyOS_Sans_SC_Regular.ttf" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cascadia-code-400.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/oxanium-latin-700-normal.woff2" crossorigin />
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-400.woff2" crossorigin />
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/notosans-sc-700.woff2" crossorigin />
 <title>升格会的冬日猜想</title>
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/cards.css" />
@@ -317,15 +315,35 @@
 </div>
 
 <script>
-  // 启动失败兜底（迭代评审 09-20 D-P3；W5-02 0926 重做）：main.js 以 type=module 加载，
-  // 404/解析失败不会触发 window.onerror——轮询 window.SDT 代替裸 3s 计时：
-  //   3s 未就绪 → 中性「加载中」提示（不再引导清缓存）；
-  //   SDT 就绪（不论多晚）→ 撤销提示并停表（慢启动误报自愈，旧版永不移除）；
-  //   12s 仍未就绪 → 升级为失败条，附刷新指引与关闭钮。
+  // 启动看护：3s 未就绪显示中性提示，12s 后提示耗时较长，继续等待晚就绪自愈。
+  // SDT 命名空间早于完整启动创建；标题控件已绑定且游戏离开 boot 才视为就绪。
+  // SCRIPT/LINK 的真实资源错误单独报告，不被慢启动提示或就绪检查抹掉。
   (function () {
     var bar = null;
+    var barTone = null;
+    var guardTimer = null;
     var started = Date.now();
-    function makeBar(text, tone) {
+    function removeBar() {
+      if (bar && bar.isConnected) bar.remove();
+      bar = null;
+    }
+    function stopTimer() {
+      if (guardTimer !== null) clearInterval(guardTimer);
+      guardTimer = null;
+    }
+    function stopGuard() {
+      stopTimer();
+      window.removeEventListener('error', onResourceError, true);
+      window.removeEventListener('pagehide', dismiss);
+    }
+    function dismiss() {
+      removeBar();
+      stopGuard();
+    }
+    function showBar(text, tone, closable) {
+      if (barTone === tone) return;         // 只在提示阶段改变时更新，不每 400ms 重建
+      removeBar();
+      barTone = tone;
       var el = document.createElement('div');
       el.textContent = text;
       el.style.cssText = 'position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:9999;'
@@ -334,34 +352,39 @@
             ? 'background:#3a1216;color:#ffd9d4;border:1px solid #a4524a;'
             : 'background:#12262f;color:#b2c4c9;border:1px solid #48667455;')
         + 'font:13px/1.6 system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.5)';
-      document.body.appendChild(el);
-      return el;
-    }
-    window.addEventListener('error', function (e) {
-      if (e && e.target && (e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK') && !bar) {
-        bar = makeBar('资源加载失败——请刷新页面重试', 'fail');
+      if (closable) {
+        var close = document.createElement('button');
+        close.textContent = '×';
+        close.setAttribute('aria-label', '收起启动提示');
+        close.style.cssText = 'margin-left:12px;background:none;border:0;color:inherit;font:inherit;cursor:pointer';
+        close.addEventListener('click', dismiss);
+        el.appendChild(close);
       }
-    }, true);
-    var guardTimer = setInterval(function () {
-      if (window.SDT) {                     // 就绪即自愈：撤销误报条并停止看护
-        if (bar && bar.isConnected) bar.remove();
-        bar = null;
-        clearInterval(guardTimer);         // 回调内 this 是 Window，clearInterval(this) 从未生效（09-30 深审 WORLD-005）
+      document.body.appendChild(el);
+      bar = el;
+    }
+    function onResourceError(e) {
+      if (e && e.target && (e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK')) {
+        stopTimer();                       // 已证实失败，不再用计时或就绪覆盖它
+        showBar('资源加载失败——请刷新页面重试', 'fail', true);
+      }
+    }
+    window.addEventListener('error', onResourceError, true);
+    window.addEventListener('pagehide', dismiss);
+    guardTimer = setInterval(function () {
+      var sdt = window.SDT;
+      var title = document.getElementById('title');
+      if (sdt && sdt.game && sdt.game.state && sdt.game.state !== 'boot'
+          && title && title.dataset.controlsBound === 'true') {
+        removeBar();                       // 晚就绪也撤条停表，真实资源错误仍可报告
+        stopTimer();
         return;
       }
       var elapsed = Date.now() - started;
-      if (!bar && elapsed >= 3000 && elapsed < 12000) {
-        bar = makeBar('资源加载中……首次启动需要预热美术素材，请稍候', 'wait');
-      } else if (elapsed >= 12000) {
-        if (bar && bar.isConnected) bar.remove();
-        bar = makeBar('加载失败——请刷新页面重试；多次失败可检查网络后重启浏览器', 'fail');
-        var close = document.createElement('button');
-        close.textContent = '×';
-        close.title = '收起提示';
-        close.style.cssText = 'margin-left:12px;background:none;border:0;color:inherit;font:inherit;cursor:pointer';
-        close.addEventListener('click', function () { bar.remove(); bar = null; });
-        bar.appendChild(close);
-        clearInterval(guardTimer);         // 失败条定格，不再轮询
+      if (elapsed >= 12000) {
+        showBar('加载耗时较长——仍在等待启动完成；可继续稍候，或刷新页面重试', 'slow', true);
+      } else if (elapsed >= 3000) {
+        showBar('资源加载中……首次启动需要预热美术素材，请稍候', 'wait', false);
       }
     }, 400);
   })();

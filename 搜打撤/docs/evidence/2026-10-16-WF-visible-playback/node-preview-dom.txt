@@ -1,0 +1,44 @@
+- complementary:
+  - navigation "远征工具":
+    - button "背包：携带卡牌 10/16":
+      - img "bag"
+      - generic: 背包
+      - strong: 10/16
+      - generic: B
+    - button "安全格：保护物资 0/2":
+      - img "lock"
+      - generic: 安全格
+      - strong: 0/2
+    - button "消耗区：已消耗卡牌 0":
+      - img "cards"
+      - generic: 消耗区
+      - strong: "0"
+    - button "map 定位 F":
+      - img "map"
+      - generic: 定位
+      - generic: F
+    - button "map 总览 G":
+      - img "map"
+      - generic: 总览
+      - generic: G
+  - region "遭遇战 · 路线2（节点 6）":
+    - generic: 可以前往
+    - generic: 遭遇战 · 路线2
+    - button "关闭地点预览": ×
+    - paragraph: 准备迎敌 · 胜利后搜刮
+    - button "进入该地点":
+      - generic: 进入该地点
+      - generic: →
+- main:
+  - navigation "远征章节":
+    - generic: 风雪哨线
+    - generic: 第 2 层 / 4
+  - generic "持有金币":
+    - generic: "1"
+  - generic "攻击力":
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - generic "生命值":
+    - generic: 35/35
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT

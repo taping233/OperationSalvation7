@@ -1,0 +1,324 @@
+--- a/scripts/visible-playback.mjs
++++ b/scripts/visible-playback.mjs
+@@ -1,6 +1,6 @@
+ // Pure visible-DOM planner + bounded built-in-tab runner. No browser bootstrap,
+ // page evaluation, storage, game API, synthetic input, timers or external clients.
+-export const VISIBLE_PLAYBACK_VERSION = '20261016-r2.2';
++export const VISIBLE_PLAYBACK_VERSION = '20261016-r2.3';
+ const LABELS = ['领取宝箱', '继续探索', '返回地图', '进入该地点', '收下'];
+ const tidy = value => value.replace(/\s+/gu, ' ').trim();
+ const canonical = name => tidy(name).replace(/^✓\s*/u, '').replace(/\s*→$/u, '')
+@@ -46,7 +46,7 @@
+   return { text, buttons, summary: { fingerprint: fingerprint(text), characters: text.length,
+     headings: nodesOf(text, 'heading').map(node => node.name).slice(0, 12),
+     buttons: buttons.map(({ name, disabled }) => ({ name, disabled })),
+-    excerpt: text.split('\n').filter(line => /领取|奖励|收下|探索|地图|地点|搜寻|休整|选择|放弃|删除|错误/u.test(line)).slice(0, 16).join('\n').slice(0, 1800) } };
++    excerpt: text.split('\n').filter(line => /领取|奖励|收下|探索|地图|地点|前往中|搜寻|休整|选择|放弃|删除|错误/u.test(line)).slice(0, 16).join('\n').slice(0, 1800) } };
+ }
+ 
+ /** Only known acquisition/finished transitions qualify. Unknown states stop.
+@@ -98,6 +98,13 @@
+     label = buttons.some(node => node.label === '继续探索') ? '继续探索' : '返回地图'; state = 'completed';
+   } else if (preview) { label = '进入该地点'; state = 'selected-reachable-location'; }
+   else {
++    const entries = buttons.filter(node => node.label === '进入该地点');
++    const traveling = text.split('\n').some(line => /^\s*-\s+(?:text|generic|status):\s*前往中\s*·\s*\d+\s*\/\s*\d+\s*段(?:\s|$)/u.test(line));
++    if (traveling && entries.length === 1 && entries[0].disabled
++      && buttons.filter(node => node.name === '关闭地点预览').length === 1 && !dialogs.length) {
++      return { kind: 'wait', reason: 'known-travel-transition', state: 'traveling', summary,
++        waitFor: { role: 'button', name: entries[0].name, state: 'hidden', disabled: true } };
++    }
+     const heading = nodesOf(text, 'heading').find(node => /搜寻物资/u.test(node.name));
+     if (heading && /正在解锁封存物资|职业补给：本职业专属卡牌/u.test(text)) {
+       return { kind: 'wait', reason: 'known-chest-animation', state: 'opening-chest', summary,
+@@ -115,7 +122,8 @@
+ }
+ 
+ /** Caller supplies its existing authorized tab. maxSteps is 1..8 (default 4).
+- * Uses domSnapshot/getByRole and locator count/isEnabled/isVisible/click/waitFor.
++ * Uses domSnapshot/getByRole/locator and count/isEnabled/isVisible/click/waitFor/and.
++ * All conditional waits share a 10-second wall-clock budget and 8-wait limit.
+  * Every attempted real click gets before/after summaries. No retry after errors.
+  */
+ export async function runVisibleSteps(tab, options = {}) {
+@@ -126,22 +134,34 @@
+   if (options.seenFingerprints && (!Array.isArray(options.seenFingerprints) || options.seenFingerprints.some(value => typeof value !== 'string'))) return result('invalid-options', null);
+   if (!Number.isInteger(maxSteps) || maxSteps < 1 || maxSteps > 8 || !Number.isFinite(timeoutMs) || timeoutMs <= 0 || timeoutMs > 30000) return result('invalid-options', null);
+   if (!tab?.playwright?.domSnapshot || !tab.playwright.getByRole) return result('unsupported-tab', null);
+-  let snapshot;
++  let snapshot, waitDeadline;
++  const settle = async (plan, target = plan.waitFor, observedLocator, failureReason = 'wait-error') => {
++    if (waits.length >= 8) return 'wait-limit';
++    const now = Date.now();
++    waitDeadline ??= now + 10000;
++    const waitTimeoutMs = Math.min(timeoutMs, waitDeadline - now);
++    if (waitTimeoutMs <= 0) return 'wait-budget-exhausted';
++    const wait = { before: plan.summary, target, timeoutMs: waitTimeoutMs, result: 'pending' };
++    waits.push(wait);
++    try {
++      let locator = observedLocator || tab.playwright.getByRole(target.role, { name: target.name, exact: true });
++      // Intersection disappears when this exact observed button is either
++      // removed/renamed or no longer disabled. Never click to finish travel.
++      if (target.disabled) locator = locator.and(tab.playwright.locator(':disabled'));
++      await locator.waitFor({ state: target.state, timeoutMs: waitTimeoutMs });
++      snapshot = await tab.playwright.domSnapshot();
++      wait.after = inspect(snapshot).summary; wait.result = 'settled';
++    } catch (error) { wait.result = 'error'; wait.error = String(error); return failureReason; }
++    if (wait.after.fingerprint === wait.before.fingerprint) return 'animation-not-settled';
++    return null;
++  };
+   try { snapshot = await tab.playwright.domSnapshot(); } catch (error) { return result('snapshot-error', null, { error: String(error) }); }
+   for (;;) {
+     let plan = planVisibleStep(snapshot, { ...options, seenFingerprints: seen });
+     if (plan.kind === 'stop') return result(plan.reason, plan);
+     if (plan.kind === 'wait') {
+-      const wait = { before: plan.summary, target: plan.waitFor, result: 'pending' };
+-      waits.push(wait);
+-      try {
+-        await tab.playwright.getByRole(plan.waitFor.role, { name: plan.waitFor.name, exact: true }).waitFor({ state: 'hidden', timeoutMs });
+-        snapshot = await tab.playwright.domSnapshot();
+-        wait.after = inspect(snapshot).summary; wait.result = 'settled';
+-      } catch (error) { wait.result = 'error'; wait.error = String(error); return result('wait-error', plan); }
+-      if (wait.after.fingerprint === wait.before.fingerprint) return result('animation-not-settled', plan);
+-      // An unchanged animation must not produce an unbounded observation loop.
+-      if (waits.length >= 8) return result('wait-limit', plan);
++      const reason = await settle(plan);
++      if (reason) return result(reason, plan);
+       continue;
+     }
+     if (steps.length >= maxSteps) return result('max-steps', plan);
+@@ -161,15 +181,31 @@
+     } catch (error) { step.result = 'error'; step.error = String(error); }
+     try { snapshot = await tab.playwright.domSnapshot(); step.after = inspect(snapshot).summary; }
+     catch (error) { return result('snapshot-error-after-click', plan, { error: String(error) }); }
+-    if (preflightReason) return result(preflightReason, planVisibleStep(snapshot, { ...options, seenFingerprints: seen }),
+-      preflightReason === 'live-button-disappeared' ? { refreshed: true } : {});
++    if (preflightReason) {
++      const refreshedPlan = planVisibleStep(snapshot, { ...options, seenFingerprints: seen });
++      // Only a specifically identified visible transition can resume a vanished
++      // button attempt. A different action, choice or unknown page returns control.
++      if (preflightReason === 'live-button-disappeared' && refreshedPlan.kind === 'wait') {
++        step.refreshed = true;
++        const reason = await settle(refreshedPlan);
++        if (reason) return result(reason, refreshedPlan, { refreshed: true });
++        continue;
++      }
++      return result(preflightReason, refreshedPlan, preflightReason === 'live-button-disappeared' ? { refreshed: true } : {});
++    }
+     if (step.result === 'error') return result('click-error', plan);
+-    if (step.after.fingerprint === step.before.fingerprint) {
+-      // Wait for the exact observed button to leave; never blindly click again.
+-      try {
+-        await locator.waitFor({ state: 'hidden', timeoutMs });
+-        snapshot = await tab.playwright.domSnapshot(); step.after = inspect(snapshot).summary; step.waitedForButtonHidden = true;
+-      } catch (error) { step.waitError = String(error); return result('no-visible-progress', planVisibleStep(snapshot)); }
++    const afterPlan = planVisibleStep(snapshot, { ...options, seenFingerprints: [] });
++    if (afterPlan.kind === 'action' && afterPlan.action.name === plan.action.name && afterPlan.state === plan.state) {
++      // Closing UI can change unrelated controls while retaining the old button.
++      // Wait once for that already-clicked button; never click it a second time.
++      const priorWaitCount = waits.length;
++      const reason = await settle(afterPlan, { role: 'button', name: plan.action.name, state: 'hidden' }, locator, 'no-visible-progress');
++      step.after = inspect(snapshot).summary;
++      if (waits.length > priorWaitCount) {
++        step.waitedForButtonHidden = waits.at(-1).result === 'settled';
++        if (waits.at(-1).error) step.waitError = waits.at(-1).error;
++      }
++      if (reason) return result(reason, planVisibleStep(snapshot, { ...options, seenFingerprints: seen }));
+     }
+   }
+ }
+--- a/tests/visible-playback.test.js
++++ b/tests/visible-playback.test.js
+@@ -1,5 +1,5 @@
+ import { readFileSync } from 'node:fs';
+-import { describe, expect, it } from 'vitest';
++import { afterEach, describe, expect, it, vi } from 'vitest';
+ import { VISIBLE_PLAYBACK_VERSION, planVisibleStep, runVisibleSteps } from '../scripts/visible-playback.mjs';
+ 
+ const button = (name, suffix = '') => `- button "${name}"${suffix}`;
+@@ -8,8 +8,11 @@
+ const done = reward([button('继续探索'), '- status: 1 张已入背包']);
+ const fixture = name => readFileSync(`docs/evidence/2026-10-16-WF-visible-playback/fixtures/${name}.txt`, 'utf8');
+ const preview = ['- text: 可以前往', button('关闭地点预览'), button('进入该地点')].join('\n');
++const travel = ['- text: 前往中 · 1/1 段', button('关闭地点预览'), button('进入该地点', ' [disabled]')].join('\n');
++const animation = name => `- heading "搜寻物资 · ${name}"\n- paragraph: 正在解锁封存物资。`;
++afterEach(() => vi.restoreAllMocks());
+ 
+-function fakeTab(snapshots, { clickError = null, waitError = null, clickAdvance = true, count = 1, enabled = true, visible = true } = {}) {
++function fakeTab(snapshots, { clickError = null, waitError = null, clickAdvance = true, count = 1, enabled = true, visible = true, onWait } = {}) {
+   let index = 0;
+   const calls = [];
+   const tab = { playwright: {
+@@ -21,9 +24,11 @@
+         async isEnabled() { return enabled; },
+         async isVisible() { return visible; },
+         async click(args) { calls.push(['click', options.name, args]); if (clickError) throw clickError; if (clickAdvance) index = Math.min(index + 1, snapshots.length - 1); },
+-        async waitFor(args) { calls.push(['waitFor', options.name, args]); if (waitError) throw waitError; index = Math.min(index + 1, snapshots.length - 1); },
++        async waitFor(args) { calls.push(['waitFor', options.name, args]); onWait?.(); if (waitError) throw waitError; index = Math.min(index + 1, snapshots.length - 1); },
++        and(other) { calls.push(['and', options.name, other.selector]); return this; },
+       };
+     },
++    locator(selector) { calls.push(['selector', selector]); return { selector }; },
+   } };
+   return { tab, calls };
+ }
+@@ -71,7 +76,7 @@
+   });
+   it('recognizes a fixed single reward only with both observed heading and single-box dialog', () => {
+     const snapshot = fixture('fixed-single-reward-dom');
+-    expect(VISIBLE_PLAYBACK_VERSION).toBe('20261016-r2.2');
++    expect(VISIBLE_PLAYBACK_VERSION).toBe('20261016-r2.3');
+     expect(planVisibleStep(snapshot)).toMatchObject({ kind: 'action', action: { label: '收下' } });
+     expect(planVisibleStep(snapshot.replace('领取奖励', '未知事件')).kind).toBe('stop');
+     expect(planVisibleStep(snapshot.replace('小型物资箱', '未知奖励箱')).kind).toBe('stop');
+@@ -134,6 +139,19 @@
+     const snapshot = '- heading "搜寻物资 · 小宝箱"\n- paragraph: 正在解锁封存物资。';
+     expect(planVisibleStep(snapshot)).toMatchObject({ kind: 'wait', waitFor: { role: 'heading', name: '搜寻物资 · 小宝箱', state: 'hidden' } });
+   });
++  it('waits for travel only with explicit progress, one disabled entry and one preview close', () => {
++    expect(planVisibleStep(travel)).toMatchObject({ kind: 'wait', reason: 'known-travel-transition', state: 'traveling',
++      waitFor: { role: 'button', name: '进入该地点', state: 'hidden', disabled: true } });
++    for (const snapshot of [travel.replace('前往中 · 1/1 段', '准备迎敌'), travel.replace('[disabled]', ''),
++      travel.replace(button('关闭地点预览'), ''), travel.replace('- text:', '- paragraph: 帮助说明：'), `${travel}\n${button('进入该地点', ' [disabled]')}`,
++      `${travel}\n${button('关闭地点预览')}`, `${travel}\n- dialog "未知界面"`]) {
++      expect(planVisibleStep(snapshot).kind).toBe('stop');
++    }
++  });
++  it.each([['- heading "选择收获"', 'card-choice'], [button('结束回合'), 'protected-action'],
++    ['- text: 保存失败', 'visible-error'], ['- region "事件选项"', 'event-or-irreversible-choice']])('does not wait through a protected travel page: %s', (suffix, reason) => {
++    expect(planVisibleStep(`${travel}\n${suffix}`)).toMatchObject({ kind: 'stop', reason });
++  });
+   it('ref changes do not evade the loop guard', () => {
+     const first = planVisibleStep(`${offer}\n- generic [ref=e1]`);
+     expect(planVisibleStep(`${offer}\n- generic [ref=e2]`, { seenFingerprints: [first.summary.fingerprint] }).reason).toBe('loop-detected');
+@@ -179,7 +197,7 @@
+   it('waits for a still-present clicked button once, then stops unchanged DOM', async () => {
+     const { tab, calls } = fakeTab([offer], { clickAdvance: false });
+     const result = await runVisibleSteps(tab);
+-    expect(result.reason).toBe('loop-detected');
++    expect(result.reason).toBe('animation-not-settled');
+     expect(calls.filter(call => call[0] === 'click')).toHaveLength(1);
+     expect(calls.filter(call => call[0] === 'waitFor')).toHaveLength(1);
+   });
+@@ -197,21 +215,21 @@
+     expect(calls.some(call => call[0] === 'click')).toBe(false);
+   });
+   it('reclassifies one fresh DOM after live count zero and returns without clicking again', async () => {
+-    const leaving = fixture('reward-leaving-dom'), map = fixture('map-after-reward-dom');
+-    const { tab, calls } = fakeTab([done, leaving, map], { count: index => index === 1 ? 0 : 1 });
+-    // The third snapshot observes completion of an independently running transition.
++    const map = fixture('map-after-reward-dom');
++    const { tab, calls } = fakeTab([done, map], { count: 0 });
++    // The second snapshot observes completion of an independently running transition.
+     const domSnapshot = tab.playwright.domSnapshot;
+     let reads = 0;
+     tab.playwright.domSnapshot = async () => {
+       const value = await domSnapshot();
+-      return ++reads === 3 ? map : value;
++      return ++reads === 2 ? map : value;
+     };
+     const result = await runVisibleSteps(tab);
+     expect(result).toMatchObject({ status: 'stopped', reason: 'live-button-disappeared', refreshed: true, final: { kind: 'stop', reason: 'unknown-state' } });
+-    expect(result.steps.map(step => step.result)).toEqual(['clicked', 'not-clicked']);
+-    expect(result.steps[1].liveCount).toBe(0);
+-    expect(calls.filter(call => call[0] === 'click')).toHaveLength(1);
+-    expect(reads).toBe(3);
++    expect(result.steps.map(step => step.result)).toEqual(['not-clicked']);
++    expect(result.steps[0].liveCount).toBe(0);
++    expect(calls.some(call => call[0] === 'click')).toBe(false);
++    expect(reads).toBe(2);
+   });
+   it('does not retry a disappeared button even if the refreshed DOM offers an allowed action', async () => {
+     const { tab, calls } = fakeTab([done, fixture('fixed-single-reward-dom')], { count: 0 });
+@@ -238,6 +256,91 @@
+     expect(result.steps[0].result).toBe('clicked');
+     expect(calls.filter(call => call[0] === 'click')).toHaveLength(1);
+   });
++  it('settles explicit travel in the same run using the disabled locator intersection', async () => {
++    const { tab, calls } = fakeTab([preview, travel, '- heading "未知决策"']);
++    const result = await runVisibleSteps(tab);
++    expect(result.reason).toBe('unknown-state');
++    expect(result.steps.map(step => step.action.label)).toEqual(['进入该地点']);
++    expect(result.waits).toHaveLength(1);
++    expect(calls).toContainEqual(['selector', ':disabled']);
++    expect(calls).toContainEqual(['and', '进入该地点', ':disabled']);
++    expect(calls).toContainEqual(['waitFor', '进入该地点', { state: 'hidden', timeoutMs: 5000 }]);
++  });
++  it('does not spend an extra click after travel consumes the last allowed action', async () => {
++    const { tab, calls } = fakeTab([preview, travel, offer]);
++    const result = await runVisibleSteps(tab, { maxSteps: 1 });
++    expect(result.reason).toBe('max-steps');
++    expect(result.waits).toHaveLength(1);
++    expect(calls.filter(call => call[0] === 'click')).toHaveLength(1);
++  });
++  it.each([['- heading "选择收获"', 'card-choice'], [button('结束回合'), 'protected-action'],
++    ['- heading "2"', 'unknown-state']])('stops without input after travel resolves to %s', async (arrival, reason) => {
++    const { tab, calls } = fakeTab([travel, arrival]);
++    const result = await runVisibleSteps(tab);
++    expect(result.reason).toBe(reason);
++    expect(result.waits).toHaveLength(1);
++    expect(calls.some(call => call[0] === 'click')).toBe(false);
++  });
++  it('waits once on a closing clicked button even when unrelated UI changed the fingerprint', async () => {
++    const leaving = fixture('reward-leaving-dom'), map = fixture('map-after-reward-dom');
++    const { tab, calls } = fakeTab([done, leaving, map], { count: index => index === 1 ? 0 : 1 });
++    const result = await runVisibleSteps(tab);
++    expect(result.reason).toBe('unknown-state');
++    expect(result.steps).toHaveLength(1);
++    expect(result.steps[0]).toMatchObject({ result: 'clicked', waitedForButtonHidden: true });
++    expect(result.waits).toHaveLength(1);
++    expect(calls.filter(call => call[0] === 'click')).toHaveLength(1);
++  });
++  it('returns a new protected decision immediately even when the old clicked button remains', async () => {
++    const { tab, calls } = fakeTab([done, `${done}\n- heading "选择收获"`]);
++    const result = await runVisibleSteps(tab);
++    expect(result.reason).toBe('card-choice');
++    expect(result.waits).toHaveLength(0);
++    expect(calls.filter(call => call[0] === 'click')).toHaveLength(1);
++  });
++  it('resumes a disappeared button only through a newly observed known wait, without retrying', async () => {
++    const { tab, calls } = fakeTab([offer, animation('小宝箱'), '- heading "选择收获"'], { count: 0 });
++    const snapshots = [offer, animation('小宝箱'), '- heading "选择收获"'];
++    tab.playwright.domSnapshot = async () => snapshots.shift();
++    const result = await runVisibleSteps(tab);
++    expect(result.reason).toBe('card-choice');
++    expect(result.steps[0]).toMatchObject({ result: 'not-clicked', refreshed: true });
++    expect(result.waits).toHaveLength(1);
++    expect(calls.some(call => call[0] === 'click')).toBe(false);
++  });
++  it('shares a ten-second wall-clock budget across all conditional waits', async () => {
++    let now = 100;
++    vi.spyOn(Date, 'now').mockImplementation(() => now);
++    const { tab, calls } = fakeTab([travel, animation('小宝箱'), animation('密封物资箱'), reward()], { onWait() { now += now === 100 ? 6000 : 4000; } });
++    const result = await runVisibleSteps(tab, { timeoutMs: 7000 });
++    expect(result.reason).toBe('wait-budget-exhausted');
++    expect(result.waits.map(wait => wait.timeoutMs)).toEqual([7000, 4000]);
++    expect(calls.filter(call => call[0] === 'waitFor')).toHaveLength(2);
++    expect(calls.some(call => call[0] === 'click')).toBe(false);
++  });
++  it('caps one individual wait at the shared ten-second budget even with a larger action timeout', async () => {
++    const { tab, calls } = fakeTab([travel, '- heading "未知决策"']);
++    await runVisibleSteps(tab, { timeoutMs: 30000 });
++    expect(calls).toContainEqual(['waitFor', '进入该地点', { state: 'hidden', timeoutMs: 10000 }]);
++  });
++  it('charges post-click closing waits to the same total budget as animation waits', async () => {
++    let now = 100;
++    vi.spyOn(Date, 'now').mockImplementation(() => now);
++    const { tab, calls } = fakeTab([done, `${done}\n- text: 工具栏已更新`, animation('小宝箱'), animation('密封物资箱')],
++      { onWait() { now += now === 100 ? 6000 : 4000; } });
++    const result = await runVisibleSteps(tab);
++    expect(result.reason).toBe('wait-budget-exhausted');
++    expect(result.waits.map(wait => wait.timeoutMs)).toEqual([5000, 4000]);
++    expect(result.steps[0]).toMatchObject({ result: 'clicked', waitedForButtonHidden: true });
++    expect(calls.filter(call => call[0] === 'click')).toHaveLength(1);
++  });
++  it('bounds changing known animation snapshots to eight waits', async () => {
++    const { tab, calls } = fakeTab(Array.from({ length: 10 }, (_, index) => animation(`箱${index}`)));
++    const result = await runVisibleSteps(tab);
++    expect(result.reason).toBe('wait-limit');
++    expect(result.waits).toHaveLength(8);
++    expect(calls.some(call => call[0] === 'click')).toBe(false);
++  });
+   it('returns control on an animation wait error', async () => {
+     const animation = '- heading "搜寻物资 · 小宝箱"\n- paragraph: 正在解锁封存物资。';
+     const { tab } = fakeTab([offer, animation], { waitError: new Error('timeout') });

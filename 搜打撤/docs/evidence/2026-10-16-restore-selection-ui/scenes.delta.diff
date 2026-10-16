@@ -1,0 +1,68 @@
+--- game/src/run/game.run.scenes.js (received baseline)
++++ game/src/run/game.run.scenes.js (restore UI)
+@@ -478,32 +478,50 @@
+   // idle 导致节点未消耗、火堆奖励可被反复重领
+   setBagReturnHook(() => openPocketRestore(picks, done, opts, txn));
+   const restorable = () => game.usedPocket.filter(p => FIRE_RESTORABLE(p.card));
++  let surface;
+   const render = () => {
+     if (txn.finished || !txn.current()) return;
++    const oldButtons = [...(surface?.querySelectorAll('button[data-act="restoreOne"]') || [])];
++    const focused = surface?.contains(document.activeElement) ? document.activeElement : null;
++    const focusedName = focused?.dataset.name;
++    const focusedIndex = oldButtons.indexOf(focused);
++    const scrollTop = surface?.querySelector('.pocket-restore-content')?.scrollTop ?? 0;
+     const left = txn.left;
+     const list = restorable();
+     const blockedN = game.usedPocket.length - list.length;
++    const title = opts.title || '营火休整';
++    const icon = opts.icon || '[[icon:fire]]';
+     const cardsHTML = list.length
+       ? list.map(p => `
+-          <div class="bt-card fire-restore-card${left <= 0 ? ' off' : ''}" data-act="restoreOne" data-name="${escAttr(p.card.name)}"
++          <button type="button" class="bt-card fire-restore-card${left <= 0 ? ' off' : ''}" data-act="restoreOne" data-cancel="false" data-name="${escAttr(p.card.name)}" ${left <= 0 ? 'disabled' : ''}
++            aria-label="${escAttr(`${p.card.name}，消耗区剩余 ${p.count} 张，复原 1 张回背包`)}" aria-description="${escAttr(p.card.desc || '')}"
+             title="${escAttr(p.card.desc || p.card.name)}——点击复原一张回背包">
+-            ${SDT.Cards.cardHTML(p.card, 'sm')}
+-            ${p.count > 1 ? `<span class="bt-count" title="同名卡牌还剩 ${p.count} 张">×${p.count}</span>` : ''}
+-          </div>`).join('')
++            <span class="pocket-restore-art" aria-hidden="true">${SDT.Cards.cardHTML(p.card, 'sm')}</span>
++            <span class="pocket-restore-caption"><b>${esc(p.card.name)}</b><span>复原 1 张 · 剩余 ${p.count} 张</span></span>
++          </button>`).join('')
+       : `<p class="ov-empty">（消耗区里没有可复原的卡牌${blockedN ? `——另有 ${blockedN} 张道具/装备不可在此复原` : ''}）</p>`;
+-    nodeShell({
+-      tone: opts.tone || 'fire', icon: opts.icon || '[[icon:fire]]', title: opts.title || '营火休整',
+-      sub: (opts.sub != null ? opts.sub : `还可从消耗区中复原 <b>${left}</b> 张（最多 ${picks} 张）· 点击卡牌复原` +
+-        // 体验线切片2（2026-09-28）：复原的机会成本可见——不复原的消耗卡撤离时每张仅 1/3 幸存
+-        ` · <span class="eps-fate">复原=撤离全额带回，否则每张仅 1/3 幸存</span>`) +
+-        (blockedN ? ` · 道具/装备共 ${blockedN} 张不可复原` : ''),
+-      body: `<div class="bt-hand fire-restore-hand">${cardsHTML}</div>`,
+-      foot: `<button class="ov-btn ok fire-done-btn" data-act="fireDone"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>`,
+-    });
++    UI.showOverlay(`${icon} ${title}`, `<section class="battle-decision pocket-restore" data-decision-kind="pocket-restore">
++      <header class="battle-decision-head"><h3>${icon} ${title}</h3><span>消耗区 · ${list.length} 种可复原卡牌</span></header>
++      <div class="battle-decision-summary">
++        <p class="ov-note" role="status" aria-live="polite" aria-atomic="true">还可复原 <b>${left}</b> 张（最多 ${picks} 张）· 点击卡牌立即复原 1 张</p>
++        <p class="ov-note">${opts.sub != null ? opts.sub : '<span class="eps-fate">复原=撤离全额带回，否则每张仅 1/3 幸存</span>'}${blockedN ? ` · 道具/装备共 ${blockedN} 张不可复原` : ''}</p>
++      </div>
++      <div class="battle-decision-content pocket-restore-content"><div class="bt-hand fire-restore-hand">${cardsHTML}</div></div>
++      <footer class="battle-decision-actions"><div class="ov-btns"><button type="button" class="ov-btn ok fire-done-btn" data-act="fireDone" aria-label="继续旅程，结束复原并返回地图"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button></div></footer>
++      </section>`, 'discover');
++    surface = UI.el?.ovBody?.firstElementChild;
++    surface?.querySelectorAll('.pocket-restore-art [tabindex]').forEach(el => el.removeAttribute('tabindex'));
++    const content = surface?.querySelector('.pocket-restore-content');
++    if (content) content.scrollTop = scrollTop;
++    if (focused) {
++      const buttons = [...surface.querySelectorAll('button[data-act="restoreOne"]')];
++      (buttons.find(button => button.dataset.name === focusedName)
++        || buttons[Math.min(focusedIndex, buttons.length - 1)] || surface.querySelector('[data-act="fireDone"]'))?.focus({ preventScroll:true });
++    }
+     const active = nodeActionBinding(game, UI, 'fireDone');
+-    const surface = UI.el?.ovBody?.firstElementChild;
++    const renderedSurface = surface;
+     const live = () => active() && txn.current() && !txn.finished &&
+-      (!surface || UI.el?.ovBody?.firstElementChild === surface);
++      (!renderedSurface || UI.el?.ovBody?.firstElementChild === renderedSurface);
+     const finish = () => {
+       if (!live()) return;
+       txn.finished = true;

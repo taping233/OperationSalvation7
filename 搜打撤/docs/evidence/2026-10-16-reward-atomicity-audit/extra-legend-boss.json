@@ -1,0 +1,185 @@
+{
+  "at": "2026-10-15T22:02:52.894Z",
+  "input": {
+    "isBoss": true,
+    "usedSlots": 16,
+    "capacity": 16,
+    "grantCardResult": false
+  },
+  "finished": true,
+  "grantCalls": [
+    [
+      {
+        "id": "legend",
+        "name": "首脑保底传说",
+        "rarity": "传说",
+        "type": "装备"
+      }
+    ]
+  ],
+  "stateAfter": {
+    "state": "idle",
+    "visited": {
+      "0,1": 1
+    },
+    "ownedCardsCount": 16
+  },
+  "afterRun": {
+    "seed": "seed-1",
+    "layerIdx": 0,
+    "trackPos": 1,
+    "visited": {
+      "0,1": 1
+    },
+    "ownedCards": [
+      {
+        "uid": "full-0",
+        "card": {
+          "id": "full-0",
+          "name": "已有卡0",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-1",
+        "card": {
+          "id": "full-1",
+          "name": "已有卡1",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-2",
+        "card": {
+          "id": "full-2",
+          "name": "已有卡2",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-3",
+        "card": {
+          "id": "full-3",
+          "name": "已有卡3",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-4",
+        "card": {
+          "id": "full-4",
+          "name": "已有卡4",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-5",
+        "card": {
+          "id": "full-5",
+          "name": "已有卡5",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-6",
+        "card": {
+          "id": "full-6",
+          "name": "已有卡6",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-7",
+        "card": {
+          "id": "full-7",
+          "name": "已有卡7",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-8",
+        "card": {
+          "id": "full-8",
+          "name": "已有卡8",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-9",
+        "card": {
+          "id": "full-9",
+          "name": "已有卡9",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-10",
+        "card": {
+          "id": "full-10",
+          "name": "已有卡10",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-11",
+        "card": {
+          "id": "full-11",
+          "name": "已有卡11",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-12",
+        "card": {
+          "id": "full-12",
+          "name": "已有卡12",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-13",
+        "card": {
+          "id": "full-13",
+          "name": "已有卡13",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-14",
+        "card": {
+          "id": "full-14",
+          "name": "已有卡14",
+          "type": "法术"
+        }
+      },
+      {
+        "uid": "full-15",
+        "card": {
+          "id": "full-15",
+          "name": "已有卡15",
+          "type": "法术"
+        }
+      }
+    ],
+    "chestReward": null
+  },
+  "logs": [
+    [
+      "[[icon:trophy]] <b>BOSS战胜利！</b>",
+      "ok"
+    ],
+    [
+      "[[icon:exit]] 首脑已击破——第四层的<b>终局撤离点</b>已解锁，可无条件撤离",
+      "loot"
+    ],
+    [
+      "[[icon:archive]] 战利品掉落：小宝箱",
+      "loot"
+    ],
+    [
+      "[[icon:trophy]] 首脑宝库开启：额外奖励 <b>1 张传说卡</b>！",
+      "loot"
+    ]
+  ],
+  "scope": "Real game.bag.settle controller; command persistence ports are stubbed successful, not real browser or player storage"
+}

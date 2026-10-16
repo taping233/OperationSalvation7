@@ -1,0 +1,14 @@
+[
+  {
+    "path": "prepare_contract_supplement.py",
+    "sha256": "6e02a929de0fcf785a59a6e094ec5305ef04af0a564f8687e887e0e5da4b4bd1"
+  },
+  {
+    "path": "run_checks.py",
+    "sha256": "5b64a34d057f9330a909d86c7428689ca05879a8b343bd35aad980b9b54a7c3d"
+  },
+  {
+    "path": "finalize_supplement.py",
+    "sha256": "4fe94b13d058fd44ffc375dcde75b4c32d34e5179df7619e61b1c189b6be25f4"
+  }
+]

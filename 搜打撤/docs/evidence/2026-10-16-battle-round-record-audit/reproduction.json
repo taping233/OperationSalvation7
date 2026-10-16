@@ -1,0 +1,51 @@
+{
+  "source": "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/run-data-ui-export-213829.json",
+  "sourceSha256": "6a423b217fab4e98699bd5be1509414ae41de87fe5070da6b37ae6bbf9a37779",
+  "sourceExportedAt": "2026-10-15T21:38:29.851Z",
+  "observedExportRounds": [
+    [
+      1
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  ],
+  "red": {
+    "total": 7,
+    "failed": 5,
+    "passed": 2,
+    "log": "red-test.log"
+  },
+  "greenSameCases": {
+    "total": 7,
+    "passed": 7,
+    "log": "green-test.log"
+  },
+  "finalRoundCases": {
+    "total": 8,
+    "passed": 8,
+    "log": "final-round-test.log"
+  },
+  "relatedIncludingSevenRoundCases": {
+    "files": 5,
+    "total": 68,
+    "passed": 68,
+    "log": "targeted-test.log"
+  },
+  "scope": "synthetic jsdom with real BattleSession commands; no post-patch UI claim",
+  "finalFiles": {
+    "game/src/battle/core/battle.lifecycle.js": "362970eeec579a9779cc35c690f6ea1131f48e5ef82bfe5e3ff396d8f34104ce",
+    "tests/battle-round-recording.test.js": "9bfb0471312ec06a46134d73f8faf618d729f19f946ff650228f63de93183b5f"
+  },
+  "finalRelatedIncludingEightRoundCases": {
+    "files": 5,
+    "total": 69,
+    "passed": 69,
+    "log": "final-targeted-test.log"
+  }
+}

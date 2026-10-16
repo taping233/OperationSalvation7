@@ -1,0 +1,135 @@
+{
+  "method": "Unique literal anchors map source top-level declarations to frozen R4 emitted declarations. Only mapped spans are counted. Gzip ablation is diagnostic, not a production rebuild.",
+  "bundleFile": "/workspace/shared/cloud-iteration-verification-r4-20261016/snapshot/搜打撤/desktop-app/game/assets/js/index-BGYbVOUG.js",
+  "groups": {
+    "game/src/ui/comm-feed.js": {
+      "sourceBytes": 7015,
+      "sourceGzip": 3487,
+      "sha256": "57de567954cdb050c2c84f5cb6abbca8aa85fe78c33a1fa5e19b1d1b3806e19e",
+      "symbols": [
+        {
+          "name": "commRowHTML",
+          "anchor": "<div class=\"comm-row\"",
+          "emittedName": "g$",
+          "start": 360562,
+          "end": 360770,
+          "bytes": 208,
+          "gzip": 147
+        },
+        {
+          "name": "appendCommRow",
+          "anchor": "transform .3s var(--ease-pop)",
+          "emittedName": "xh",
+          "start": 360770,
+          "end": 361403,
+          "bytes": 633,
+          "gzip": 358
+        },
+        {
+          "name": "commTypingHTML",
+          "anchor": "<div class=\"comm-typing\" aria-label=\"传输中\">传输中<i></i><i></i><i></i></div>",
+          "emittedName": "y$",
+          "start": 361403,
+          "end": 361498,
+          "bytes": 107,
+          "gzip": 107
+        },
+        {
+          "name": "setTyping",
+          "anchor": ".comm-typing",
+          "emittedName": "$d",
+          "start": 361498,
+          "end": 361619,
+          "bytes": 121,
+          "gzip": 129
+        },
+        {
+          "name": "commProgressHTML",
+          "anchor": "<div class=\"comm-progress\" role=\"progressbar\" aria-valuemax=\"",
+          "emittedName": "v$",
+          "start": 361619,
+          "end": 361846,
+          "bytes": 227,
+          "gzip": 181
+        },
+        {
+          "name": "setProgress",
+          "anchor": ".comm-progress",
+          "emittedName": "$h",
+          "start": 361846,
+          "end": 362050,
+          "bytes": 204,
+          "gzip": 179
+        },
+        {
+          "name": "DEMO_MSGS",
+          "anchor": "链路已建立——<b>撤离窗口</b>开启，倒计时 04:00",
+          "emittedName": "Fi",
+          "start": 362056,
+          "end": 362481,
+          "bytes": 601,
+          "gzip": 424
+        },
+        {
+          "name": "mountCommDemo",
+          "anchor": ".comm-demo-close",
+          "emittedName": "w$",
+          "start": 362482,
+          "end": 363561,
+          "bytes": 1098,
+          "gzip": 646
+        }
+      ],
+      "emittedBytes": 3199,
+      "ablationEntryGzipDelta": 1235,
+      "concatenatedGzip": 1697
+    },
+    "game/src/cards/card-description-text.js": {
+      "sourceBytes": 35125,
+      "sourceGzip": 9753,
+      "sha256": "63e8c460d46c1c6faacf6fc462379c99fa260d719beaa4f0f5b429baf425c641",
+      "symbols": [
+        {
+          "name": "descriptions",
+          "anchor": "选择 2 个目标（可以重复）：对第 1 个目标造成（你的攻击力 + 1）点攻击伤害，并附加 1 层流血；对第 2 个目标造成（你的攻击力 + 1）点攻击伤害，并附加 1 层中毒。",
+          "emittedName": "tS",
+          "start": 166111,
+          "end": 182609,
+          "bytes": 33532,
+          "gzip": 9355
+        }
+      ],
+      "emittedBytes": 33532,
+      "ablationEntryGzipDelta": 9330,
+      "concatenatedGzip": 9355
+    },
+    "game/src/run/lab.ending.js": {
+      "sourceBytes": 3976,
+      "sourceGzip": 2078,
+      "sha256": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c",
+      "symbols": [
+        {
+          "name": "PAGES",
+          "anchor": "研究所深处，巨大的身影在白光中崩解。所主的生命信号归零——感染源的核心样本，到手了。",
+          "emittedName": "Zi",
+          "start": 539090,
+          "end": 539423,
+          "bytes": 579,
+          "gzip": 436
+        },
+        {
+          "name": "playLabEnding",
+          "anchor": "')\"></div>\n        <div class=\"lab-end-shade\"></div>\n        <div class=\"lab-end-text\"><span class=\"lab-end-typed\"></span><i class=\"lab-end-cue\">▼</i></div>\n      </div>",
+          "emittedName": "GT",
+          "start": 539424,
+          "end": 540940,
+          "bytes": 1523,
+          "gzip": 808
+        }
+      ],
+      "emittedBytes": 2102,
+      "ablationEntryGzipDelta": 982,
+      "concatenatedGzip": 1262
+    }
+  }
+}

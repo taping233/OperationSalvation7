@@ -1,0 +1,12 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤
+
+ ✓ docs/evidence/2026-10-16-reward-atomicity-audit/extra-legend.test.js > full bag rejects extra legendary but battle settlement still finalizes without a pending reward (boss=true) 65ms
+ ✓ docs/evidence/2026-10-16-reward-atomicity-audit/extra-legend.test.js > full bag rejects extra legendary but battle settlement still finalizes without a pending reward (boss=false) 6ms
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  07:02:51
+   Duration  939ms (transform 112ms, setup 0ms, collect 72ms, tests 73ms, environment 459ms, prepare 94ms)
+

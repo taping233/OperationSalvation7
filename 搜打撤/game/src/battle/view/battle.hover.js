@@ -36,7 +36,7 @@ import { getSnapshot, Combat, getPreviewContext } from '../core/battle.core.js';
       const killSummary = defeated.length
         ? `，预计击败 ${defeated.length} 名：${[...new Set(defeated)].map(esc).join('、')}`
         : '';
-      main = `[[icon:${defeated.length ? 'skull' : 'bolt'}]] 精确伤害：<b>${d.total}</b> 点${Combat.TYPE_NAME[d.type]} ${segments}${killSummary}`;
+      main = `[[icon:${defeated.length ? 'skull' : 'bolt'}]] 直接伤害：<b>${d.total}</b> 点${Combat.TYPE_NAME[d.type]} ${segments}${killSummary}`;
       const details = [`费${result.cost}`];
       if (d.blockedBy === 'aegis') details.push('元素庇幕完全减免');
       if (d.blockedBy === 'protected') details.push('存活护卫者庇护，伤害偏转');

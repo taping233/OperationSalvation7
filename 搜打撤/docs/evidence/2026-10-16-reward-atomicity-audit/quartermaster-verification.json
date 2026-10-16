@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-15T22:12:20.583738+00:00",
+  "sources": [
+    {
+      "path": "game/src/run/event-card-choice.js",
+      "beforeSha256": "c2e4629812a10261b4d8beb2620c78b860267c20a29ca45b9f419a5b0b797606",
+      "afterSha256": "7fde11bcddf27c4efbed22720a39f92902edd6b677eeffec5b72e0361a8ca3a0",
+      "bytes": 6681
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "beforeSha256": "7587599bb28253857d5b5dfd89f93706548d7800978d8995b71ec53636e76b6e",
+      "afterSha256": "32bf9c15ab789137aa11c2647fdf9fd38b346fbb0329f2a2927db3a9f27113da",
+      "bytes": 54783
+    },
+    {
+      "path": "docs/save-format.md",
+      "beforeSha256": "e8189b0d15d71105cf5eac169b456cedeccdea427afb2ce4fed30addc22b6252",
+      "afterSha256": "a49408a75e1198955fa377069777cd694537b6402433d03a2366f83756338389",
+      "bytes": 14405
+    },
+    {
+      "path": "tests/event-choice-acquired-gift-cloud.test.js",
+      "afterSha256": "90afb1def52e08c27c7e19f6544071ddc4369456183d32442590f83364f9e6bd",
+      "bytes": 13291
+    }
+  ],
+  "targetedTests": {
+    "files": 5,
+    "tests": 55,
+    "passed": true
+  },
+  "newRegressionTests": 13,
+  "eslintPassed": true,
+  "typecheckConfigsPassed": 8,
+  "nodeCheckPassed": true,
+  "diffCheckPassed": true,
+  "docs": {
+    "links": 461,
+    "findings": 0
+  },
+  "realLoadGame": true,
+  "realRunStorage": true,
+  "browserRun": false,
+  "buildRun": false,
+  "playerStorageTouched": false
+}

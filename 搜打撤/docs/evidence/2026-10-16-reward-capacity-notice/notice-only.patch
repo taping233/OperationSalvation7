@@ -1,0 +1,27 @@
+--- a/game/src/run/chests.js
++++ b/game/src/run/chests.js
+@@ -435,6 +435,15 @@
+         else cant++;
+       });
+     }
++    // 容量失败是当前状态；保留领取事实，并兼容旧存档中的两类容量提示。
++    let notice = cur.notice;
++    const bulkCapacityNotice = /^(已入背包 \d+ 张)，\d+ 张放不下，整理背包后可重试$/.exec(notice || '');
++    if (bulkCapacityNotice && !isPick) {
++      const blocked = Math.max(cant, rest.filter(c => G.canReceiveCard && !G.canReceiveCard(c)).length);
++      notice = `${bulkCapacityNotice[1]}${blocked ? `，${blocked} 张放不下，整理背包后可重试` : ''}`;
++    } else if (G.canReceiveCard && rest.some(c => notice === `「${c.name}」当前放不下，整理背包后可重试` && G.canReceiveCard(c))) {
++      notice = '';
++    }
+     // 体验线切片4（2026-09-28，源自 Tarkov value-per-slot 心智模型）：满包时给出"最低价已装卡"参照，
+     // 让"值不值得为战利品让路"变成一眼对比（替换操作仍走背包/商店，这里只给判断依据）
+     const cheapestOwned = (G.ownedCards || [])
+@@ -458,7 +467,7 @@
+     const outcome = cur.battleSummary?.cardOutcome;
+     const details = outcome ? `<details class="loot-outcome"><summary>本战卡牌去向</summary>${[['进入消耗区',outcome.pocket],['直接消散',outcome.gone],['仍在背包',outcome.retained]].map(([label,names]) => `<p><b>${label}</b>：${names.length ? names.map(esc).join('、') : '无'}</p>`).join('')}</details>` : '';
+     const coins = cur.coins ? `<article class="reward-unit reward-coin-unit${cur.coinsReceived ? ' got' : ''}" aria-label="金币奖励"><div class="reward-coin-art" aria-hidden="true">[[icon:coin]]</div><div class="reward-coin-amount">×${cur.coins}</div>${cur.coinsReceived ? '<span class="reward-unit-state">已获得</span>' : `<button type="button" class="reward-claim" data-act="chestCoins"${cur.leaveConfirm ? ' disabled' : ''}>收下</button>`}</article>` : '';
+-    const footer = `<span class="reward-capacity">[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span><button type="button" class="reward-bag" data-act="chestOpenBag">整理背包</button>${cur.notice && !finished ? `<span class="reward-notice" role="status">${esc(cur.notice)}</span>` : ''}${finished ? `<span class="reward-final" role="status">${taken.size} 张已入背包${lost.size ? ` · ${lost.size} 张已永久放弃` : ''}</span>` : ''}`;
++    const footer = `<span class="reward-capacity">[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span><button type="button" class="reward-bag" data-act="chestOpenBag">整理背包</button>${notice && !finished ? `<span class="reward-notice" role="status">${esc(notice)}</span>` : ''}${finished ? `<span class="reward-final" role="status">${taken.size} 张已入背包${lost.size ? ` · ${lost.size} 张已永久放弃` : ''}</span>` : ''}`;
+     const body = rewardSceneHTML({
+       title:cur.title || (cur.battleSummary ? '战斗胜利' : isPick ? '选择收获' : '搜刮完成'),
+       source:`${cur.source || (cur.isClass ? '职业补给' : K.name)}${queue.length > 1 ? ` · ${idx}/${queue.length}` : ''}`,

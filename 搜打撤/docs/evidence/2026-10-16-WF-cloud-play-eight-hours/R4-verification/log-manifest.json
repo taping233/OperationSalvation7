@@ -1,0 +1,67 @@
+[
+  {
+    "bytes": 1337,
+    "path": "logs/asset-publication.log",
+    "sha256": "ce68948a6bcce0fd11b5074e4dfc404f39f9f8c6029a4d6ea9e21a19209f3459"
+  },
+  {
+    "bytes": 1491,
+    "path": "logs/build-metrics.log",
+    "sha256": "406c4d61b6a522e59c429c5852af04449053762e8ff8834c1541fc399834c8ed"
+  },
+  {
+    "bytes": 24822,
+    "path": "logs/build.log",
+    "sha256": "a82853f05629dcdd6658aaea6bfaac6182d459969b7b1725fb54223cba0c475c"
+  },
+  {
+    "bytes": 683,
+    "path": "logs/data.log",
+    "sha256": "80a40ff5dca7632020651ab9408a02bf7c2afb809c5f6be1dead4d6ba94728f8"
+  },
+  {
+    "bytes": 754,
+    "path": "logs/dependency-tree.log",
+    "sha256": "026e078bcd105be1a894550276c4eb3295a6136467c22463a1de75cd13f981aa"
+  },
+  {
+    "bytes": 2695,
+    "path": "logs/docs.log",
+    "sha256": "f5b28e7864a80987ea058ce101638cb4e1be91f3b2c4ae9755ae6c8315c2e61e"
+  },
+  {
+    "bytes": 161,
+    "path": "logs/environment.log",
+    "sha256": "435de44d7aa6f7640e5d51452cdde2a734b0f41c8f055c23e08aba074c1b399e"
+  },
+  {
+    "bytes": 690,
+    "path": "logs/index-semantics.log",
+    "sha256": "1573e8563b4d294a3ae44e4f48d8ccfe51afb63d819d4752527d1dad4633a83c"
+  },
+  {
+    "bytes": 816,
+    "path": "logs/lint.log",
+    "sha256": "cd02ef88b2cf567728c47f06613708f31f7af99e13cc05ff6da0cfdbe8420190"
+  },
+  {
+    "bytes": 332,
+    "path": "logs/npm-environment.log",
+    "sha256": "5e4af61c25cf48551084c8b543aa7c5a93878a6d148b8890d3ad46169c471f6f"
+  },
+  {
+    "bytes": 629,
+    "path": "logs/syntax.log",
+    "sha256": "b218b4dc782948942fe626756a63514d9ce505884d5982d7b9866230756e0bc0"
+  },
+  {
+    "bytes": 186417,
+    "path": "logs/test.log",
+    "sha256": "9a2055439ccb84637478174129646258298eb58d4358d0117d4a4590ba9bffb0"
+  },
+  {
+    "bytes": 2324,
+    "path": "logs/types.log",
+    "sha256": "1bafd54a44517a92b2fa7cbd5c5ac4b5a9d6b29565caee400e140a25f06defd2"
+  }
+]

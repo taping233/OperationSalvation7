@@ -1,0 +1,182 @@
+{
+  "method": "Isolated VM scheduling contract/call-count probe, not browser timing or full Agent behavior verification",
+  "source": "game/src/agent/agent.runner.js",
+  "baselineFile": "docs/evidence/2026-10-16-entry-cost-deep-audit/agent.runner.before.js",
+  "sourceSha256": "e5b7eb06c51ccc097138bfd3c694838eafbec444e09f435e0e1bb3c5c26ffd6a",
+  "cases": {
+    "browserChannel": {
+      "before": {
+        "beforeFirst": {
+          "created": 1,
+          "started": 1,
+          "posted": 0,
+          "immediate": 0,
+          "timer": 0
+        },
+        "afterConcurrent": {
+          "created": 1,
+          "started": 1,
+          "posted": 2,
+          "immediate": 0,
+          "timer": 0
+        },
+        "afterThird": {
+          "created": 1,
+          "started": 1,
+          "posted": 3,
+          "immediate": 0,
+          "timer": 0
+        },
+        "order": [
+          "first",
+          "second",
+          "third"
+        ]
+      },
+      "candidate": {
+        "beforeFirst": {
+          "created": 0,
+          "started": 0,
+          "posted": 0,
+          "immediate": 0,
+          "timer": 0
+        },
+        "afterConcurrent": {
+          "created": 1,
+          "started": 1,
+          "posted": 2,
+          "immediate": 0,
+          "timer": 0
+        },
+        "afterThird": {
+          "created": 1,
+          "started": 1,
+          "posted": 3,
+          "immediate": 0,
+          "timer": 0
+        },
+        "order": [
+          "first",
+          "second",
+          "third"
+        ]
+      }
+    },
+    "nodeSetImmediate": {
+      "before": {
+        "beforeFirst": {
+          "created": 1,
+          "started": 1,
+          "posted": 0,
+          "immediate": 0,
+          "timer": 0
+        },
+        "afterConcurrent": {
+          "created": 1,
+          "started": 1,
+          "posted": 0,
+          "immediate": 2,
+          "timer": 0
+        },
+        "afterThird": {
+          "created": 1,
+          "started": 1,
+          "posted": 0,
+          "immediate": 3,
+          "timer": 0
+        },
+        "order": [
+          "first",
+          "second",
+          "third"
+        ]
+      },
+      "candidate": {
+        "beforeFirst": {
+          "created": 0,
+          "started": 0,
+          "posted": 0,
+          "immediate": 0,
+          "timer": 0
+        },
+        "afterConcurrent": {
+          "created": 0,
+          "started": 0,
+          "posted": 0,
+          "immediate": 2,
+          "timer": 0
+        },
+        "afterThird": {
+          "created": 0,
+          "started": 0,
+          "posted": 0,
+          "immediate": 3,
+          "timer": 0
+        },
+        "order": [
+          "first",
+          "second",
+          "third"
+        ]
+      }
+    },
+    "timerFallback": {
+      "before": {
+        "beforeFirst": {
+          "created": 0,
+          "started": 0,
+          "posted": 0,
+          "immediate": 0,
+          "timer": 0
+        },
+        "afterConcurrent": {
+          "created": 0,
+          "started": 0,
+          "posted": 0,
+          "immediate": 0,
+          "timer": 2
+        },
+        "afterThird": {
+          "created": 0,
+          "started": 0,
+          "posted": 0,
+          "immediate": 0,
+          "timer": 3
+        },
+        "order": [
+          "first",
+          "second",
+          "third"
+        ]
+      },
+      "candidate": {
+        "beforeFirst": {
+          "created": 0,
+          "started": 0,
+          "posted": 0,
+          "immediate": 0,
+          "timer": 0
+        },
+        "afterConcurrent": {
+          "created": 0,
+          "started": 0,
+          "posted": 0,
+          "immediate": 0,
+          "timer": 2
+        },
+        "afterThird": {
+          "created": 0,
+          "started": 0,
+          "posted": 0,
+          "immediate": 0,
+          "timer": 3
+        },
+        "order": [
+          "first",
+          "second",
+          "third"
+        ]
+      }
+    }
+  }
+}

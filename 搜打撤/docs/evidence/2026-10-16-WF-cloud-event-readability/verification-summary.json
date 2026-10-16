@@ -1,0 +1,31 @@
+{
+  "baseline": "f0e84c5dc3",
+  "verifiedAtUtc": "2026-10-15T19:14:54Z",
+  "changedFiles": [
+    "game/css/entry-events.css",
+    "tests/event-scene-readability.test.js"
+  ],
+  "targetedValidation": {
+    "files": 8,
+    "tests": 105,
+    "status": "passed",
+    "log": "targeted-tests.log"
+  },
+  "eslint": "passed: tests/event-scene-readability.test.js",
+  "cssParse": "passed: PostCSS via event-scene-readability.test.js",
+  "diffCheck": "passed: game/css/entry-events.css",
+  "browserStatus": "pending main coordinator verification in existing port 5300; no browser operated by this worker",
+  "notRun": [
+    "full test suite",
+    "build",
+    "service changes",
+    "stage/commit/push"
+  ],
+  "sha256": {
+    "game/css/entry-events.css": "5c4d9ab4ddbc6c192afee86b40668072252103af2cfd0d3e4dead938130fb3f7",
+    "tests/event-scene-readability.test.js": "0eaad4515ad4a617d9f10149ff0a53e82f6dce8e9a5ecc1547d3e170ea278a99",
+    "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/22-camp-before.png": "0cfa2712b5724c95061184340b7035eb0c62f2fc88bd6991116faebe4cfc7449",
+    "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/26-layer-gate-before.png": "06aaeeffcaca4bcf55cc6bd43ab41e72f23d32f3062da33659eddda11cef55bd",
+    "docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/arknights-is3-event.png": "7e4512a4d64f385db9544857aa977a79c3de84711141c8fe8dcb19735e5cc915"
+  }
+}

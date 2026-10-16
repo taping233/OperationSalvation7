@@ -1,0 +1,57 @@
+{
+  "buildOutputBytes": 125404820,
+  "buildOutputFileCount": 1293,
+  "buildOutputManifestSha256": "203ce0aecfb8b71037ce18d3f43aa88b03e8be99ead47cbdcfce793a0e4d8c92",
+  "checkedAt": "2026-10-16T00:00:07.706352+00:00",
+  "dependencyInputChanges": [],
+  "dependencySharedInodes": [],
+  "gitMetadataInputChanges": [
+    "index"
+  ],
+  "gitSharedInodes": [],
+  "snapshotAddedInputPaths": [],
+  "snapshotInputChanges": [
+    {
+      "afterSha256": "e6e4b8f07be9947d7d9baf29d2d4a8418084198bcc670f4ee3153c68451c7811",
+      "beforeSha256": "cd68f57c532d30d610845bfbd7b756111d3ab329c051db1c46c5de341bdc47cf",
+      "path": "搜打撤/game/src/generated/art-manifest.js"
+    },
+    {
+      "afterSha256": "7964f8e4838c629ec8b62fb1fe3fa1eb7f9628cc68725642e5c4380889c3cd1a",
+      "beforeSha256": "e8ac6a5757807a4835f16bf53b3705866f732ba5b07bdce1b146041eddae6343",
+      "path": "搜打撤/game/src/generated/thumb-manifest.js"
+    }
+  ],
+  "snapshotModeChanges": [],
+  "sourceAddedPathsSinceFreeze": [
+    {
+      "bytes": 61443,
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/78-pearl-store-keyboard-after.png",
+      "sha256": "d34465603ef83df29b19865357d654e231d2dacc940d94d754e6c649241db9db"
+    },
+    {
+      "bytes": 48390,
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/79-altar-completed-preview-after.png",
+      "sha256": "ec4d18d805debf5db0c4ae6f0f5d2e00351439ee1d2f4abc60a771be177d58ca"
+    },
+    {
+      "bytes": 139641,
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/80-boss-immortal-hand-after.png",
+      "sha256": "e55a3ba1ca8aacc9fa379096c0d30153fd88ed422fa2c611c9ed8cc5b8c65945"
+    }
+  ],
+  "sourceChangesSinceFreeze": [
+    {
+      "afterSha256": "7922ade8eb22efaa4e1a78a29ef0186b971266901dd780b702869867be507b7e",
+      "beforeSha256": "81888cb45b90195f70b97fe2d6a58faef009016ff65be8c956a959002f6468e2",
+      "path": "搜打撤/docs/PARALLEL-REGISTRY.md"
+    },
+    {
+      "afterSha256": "80a8e9725281e34ed372bd78045c54a436d5652495f5d60a5d24001380e75b60",
+      "beforeSha256": "d0f5eb58f47b1e427828735e0a381a02e83aae77cad4b64bb7fba0cddeb5744c",
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/PLAYLOG.md"
+    }
+  ],
+  "sourceSnapshotSharedInodes": [],
+  "unexpectedSnapshotInputChanges": []
+}

@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-15T21:54:26.259Z",
+  "input": {
+    "capacity": 16,
+    "usedSlots": 15,
+    "freeSlots": 1,
+    "allExistingCardsHaveDifferentNames": true,
+    "rewardCard": "tt2-apollo",
+    "bonusPool": [
+      "bonus"
+    ]
+  },
+  "afterClaim": {
+    "version": 1,
+    "seed": 7,
+    "layerIdx": 0,
+    "trackPos": 1,
+    "queue": [
+      {
+        "kind": "small"
+      }
+    ],
+    "index": 1,
+    "context": {
+      "onCell": true
+    },
+    "current": {
+      "kind": "small",
+      "cards": [
+        {
+          "id": "tt2-apollo",
+          "name": "阿猫的礼物",
+          "rarity": "史诗",
+          "type": "装备",
+          "cost": 0
+        }
+      ],
+      "coins": 0,
+      "coinsReceived": false,
+      "taken": [
+        0
+      ],
+      "lost": [],
+      "rewardStage": "cards",
+      "selected": 0,
+      "notice": "「阿猫的礼物」已入本次远征背包"
+    }
+  },
+  "afterFreeingSpaceCardIds": [
+    "filler-1",
+    "filler-2",
+    "filler-3",
+    "filler-4",
+    "filler-5",
+    "filler-6",
+    "filler-7",
+    "filler-8",
+    "filler-9",
+    "filler-10",
+    "filler-11",
+    "filler-12",
+    "filler-13",
+    "filler-14",
+    "tt2-apollo"
+  ],
+  "afterContinueReward": null,
+  "logs": [
+    "[[icon:archive]] 获得卡牌【<b>阿猫的礼物</b>】",
+    "[[icon:bolt]] <b>阿猫的礼物</b>：随机获取触发，附赠另 1 张随机卡牌",
+    "[[icon:bag]] 背包放不下（16/16 格；新普通牌需通用空格，同名未满仍可叠放），【附赠测试卡】未领取，请整理背包后重试"
+  ],
+  "browserUsed": false,
+  "playerStorageTouched": false
+}

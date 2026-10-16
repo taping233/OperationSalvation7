@@ -76,6 +76,19 @@ export function extractionXp(moves, xpMul) {
   return Math.round((20 + moves * 2) * (Number(xpMul) || 1));
 }
 
+// 整理命令按名称堆叠候选；只有真实入库才会扣减 remainingCards。
+// 在 finish 清理 pending 前固化差集，不把初攻、未入库卡或仓库往局持有计入本局。
+function savedExtractionCards(game, remaining, isSha) {
+  const candidates = [];
+  for (const entry of game.ownedCards || []) {
+    if (entry?.card && !isSha(entry.card)) stackInto(candidates, { card: entry.card, count: 1 });
+  }
+  const leftByName = new Map(remaining.map(stack => [stack.card.name, stack.count]));
+  return clone(candidates.map(stack => ({ card: stack.card,
+    count: Math.max(0, stack.count - (leftByName.get(stack.card.name) || 0)),
+  })).filter(stack => stack.count > 0));
+}
+
 // 2026-10-03 老板（SYS-02）：一次远征的「真实回执」——结算命令链在 extractFinish 提交时构造，
 // 随既有事务收据持久化（base._m01.requests 的 output，journal 幂等语义不变，不新增存储机制）；
 // 结算页、跑局记录、Agent 导出三方读同一份事实。只读持久态（pending 的净带回/散失）
@@ -96,6 +109,7 @@ export function buildExtractionReceipt({ game, pending, isSha = () => false, xpM
     layersReached: Number.isInteger(game.layerIdx) ? game.layerIdx + 1 : null,
     actions: Math.max(0, (Number(game.turn) || 0) - 1),
     firstExplore: { moves, xp: extractionXp(moves, xpMul) },
+    savedCards: savedExtractionCards(game, remaining, isSha),   // 随事务回执保留最终入库集合，供跑局记录使用
     netTake: {
       cardsStashed: Math.max(0, ownedNonSha - remainingCount),   // 本局真实入库张数（与携出候选、仓库原持有区分）
       pocketKept: Math.max(0, pocketTotal - pocketLost),

@@ -1,0 +1,67 @@
+[
+  {
+    "path": "搜打撤/eslint.config.js",
+    "sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae",
+    "unchangedSinceR5": true
+  },
+  {
+    "path": "搜打撤/jsconfig.battle-settlement.json",
+    "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03",
+    "unchangedSinceR5": true
+  },
+  {
+    "path": "搜打撤/jsconfig.battle-snapshot.json",
+    "sha256": "ea4f18c266abd4bcf96a6a2c20658de8b3ede0325c0b074c3166b93e7bb8f90f",
+    "unchangedSinceR5": true
+  },
+  {
+    "path": "搜打撤/jsconfig.card-rules.json",
+    "sha256": "076241ce2542b6ffb6db4ed1597305d4306eb53fc61075a4757eed08728fb182",
+    "unchangedSinceR5": true
+  },
+  {
+    "path": "搜打撤/jsconfig.json",
+    "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1",
+    "unchangedSinceR5": true
+  },
+  {
+    "path": "搜打撤/jsconfig.strict-foundations.json",
+    "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90",
+    "unchangedSinceR5": true
+  },
+  {
+    "path": "搜打撤/jsconfig.strict-hand-selection.json",
+    "sha256": "de2ae55fa536962fd3bb57b79a0c510602371e94ed5185df9f9eb94b467e6a69",
+    "unchangedSinceR5": true
+  },
+  {
+    "path": "搜打撤/jsconfig.strict-selection.json",
+    "sha256": "28cd65359e0905aa111b60fdf0ea5efec7aba7982528f56b7df1399d6456deab",
+    "unchangedSinceR5": true
+  },
+  {
+    "path": "搜打撤/jsconfig.strict-ui.json",
+    "sha256": "a53bcb7a075a6fab45f5b1076b97cb3449e3313eca05b193da1ede8ec5695abc",
+    "unchangedSinceR5": true
+  },
+  {
+    "path": "搜打撤/package-lock.json",
+    "sha256": "0fac6dabe589938fbbcf4199ce98ac247f5f1baff240bbbe00a81bcf126da2c9",
+    "unchangedSinceR5": true
+  },
+  {
+    "path": "搜打撤/package.json",
+    "sha256": "765b11e639e664c177d7f906897380c86f3714136f567c538bb84d7d5917f1a8",
+    "unchangedSinceR5": true
+  },
+  {
+    "path": "搜打撤/vite.config.js",
+    "sha256": "63358325168ee4b05a785090dea7d3f1185037fbc3e37841870c384c97d9aef9",
+    "unchangedSinceR5": true
+  },
+  {
+    "path": "搜打撤/vite.e7.config.js",
+    "sha256": "f7dcbcf5d87e9aceb0152a563ef441d572ab274ba1cdcad109481ddec846bf78",
+    "unchangedSinceR5": true
+  }
+]

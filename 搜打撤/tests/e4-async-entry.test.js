@@ -53,7 +53,7 @@ beforeEach(async () => {
   vi.doMock('../game/src/agent/agent.data.js', () => ({ dataPanelHTML() {}, bindDataActions() {} }));
   scenes = await import('../game/src/run/game.run.scenes.js');
   const { ensureBattleReady } = await import('../game/src/battle/battle-loader.js');
-  const { createGameMenuController } = await import('../game/src/ui/game.menu.js');
+  const { createGameMenuController } = await import('./helpers/menu-controller.js');
   menu = createGameMenuController({ SDT, UI, game,
     runtime: { resize() {}, showRunTransition: scenes.showRunTransition, openBaseHub: vi.fn() },
     SLOT_COUNT: 1, esc: String, readSlot: () => null, loadGame, clearSlot() {}, saveGame,

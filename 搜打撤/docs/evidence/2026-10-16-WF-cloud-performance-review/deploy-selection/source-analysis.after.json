@@ -1,0 +1,6190 @@
+{
+  "analyzedAt": "2026-10-15T18:32:58.195Z",
+  "method": "Acorn static ESM reachability plus source gzip. No bundler/tree-shaking; source gzip is a ranking signal, not predicted build savings. Runtime copy simulation follows reviewed exclusions/aliases and development SFX read-only helpers; emitted static asset references not simulated.",
+  "entries": [
+    "game/src/ui/title-credits.js",
+    "game/src/ui/title-wallpaper.js",
+    "game/src/main.js",
+    "game/src/ui/cover-context.js"
+  ],
+  "startup": {
+    "count": 204,
+    "bytes": 2012788,
+    "gzipSourceBytes": 735299
+  },
+  "largestStartup": [
+    {
+      "path": "game/src/cards/cards.data.js",
+      "bytes": 97208,
+      "gzipSourceBytes": 25065,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "df1d9158d040f1ced758adc8ce72b3f30e02d7ef4fa6d8038f683879d33be29e"
+    },
+    {
+      "path": "game/src/ui/game.menu.js",
+      "bytes": 71285,
+      "gzipSourceBytes": 23915,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "7d183604bab0efa1520fd5fa1abffffef229e757bad48debc8dc74596fa72004"
+    },
+    {
+      "path": "game/src/cards/card-rules.schema.js",
+      "bytes": 69570,
+      "gzipSourceBytes": 17147,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "2f81e462c15e4c443c948538f4fa56c370ce4826544cc42ade3282300d9e92ed"
+    },
+    {
+      "path": "game/src/cards/cards.sync.js",
+      "bytes": 56413,
+      "gzipSourceBytes": 17264,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "2d0ff87b6e3fbaa58199351c388025931e2ffd857470366d92181929a2fe40d3"
+    },
+    {
+      "path": "game/src/agent/agent.policy.js",
+      "bytes": 55562,
+      "gzipSourceBytes": 21497,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "4c0128ef43e8650fd354bb6c0a5f280fdc04bf252fdbff23f588eec0d4b34dcb"
+    },
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "bytes": 55327,
+      "gzipSourceBytes": 17968,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "565904481caf8e906184b4536c26ed1f67bf6362f0ab28318e372daf3e34bbe8"
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "bytes": 54785,
+      "gzipSourceBytes": 18818,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "c016030dbfa16e21ec5129f059d504adae71da12489ef2766560859d0a76063e"
+    },
+    {
+      "path": "game/src/hub/game.bag.js",
+      "bytes": 45379,
+      "gzipSourceBytes": 13725,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "846aa38ab8becee303316942b741e333653b734215c505842365f4cc681589f9"
+    },
+    {
+      "path": "game/src/game.boot.js",
+      "bytes": 43179,
+      "gzipSourceBytes": 16399,
+      "dynamic": [
+        "./core/perf-probe.local.js"
+      ],
+      "packages": [],
+      "sha256": "0eaa41a6bb11a44f1ead63d3abaa6082025a9796c7a7360c9b4029d9610a30f2"
+    },
+    {
+      "path": "game/src/run/game.nest.js",
+      "bytes": 38853,
+      "gzipSourceBytes": 12747,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "9a8b55b669d5b359edb89ec7d0d7971fb4f2fdc57583ee45b7f6fc94696b9358"
+    },
+    {
+      "path": "game/src/generated/art-manifest.js",
+      "bytes": 36129,
+      "gzipSourceBytes": 5104,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "cd68f57c532d30d610845bfbd7b756111d3ab329c051db1c46c5de341bdc47cf"
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "bytes": 35494,
+      "gzipSourceBytes": 13080,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "32fc73bd9190fd3dc06afb03e6f3dc4a5cc4774973b495c4a5e04da702f8d18b"
+    },
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "bytes": 35142,
+      "gzipSourceBytes": 11804,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "c1bd7f880b77046edc8a7e6c01238eae8ffa44e51b40710f327be13b8e4283cd"
+    },
+    {
+      "path": "game/src/cards/card-description-text.js",
+      "bytes": 35125,
+      "gzipSourceBytes": 9753,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "63e8c460d46c1c6faacf6fc462379c99fa260d719beaa4f0f5b429baf425c641"
+    },
+    {
+      "path": "game/src/run/game.session.js",
+      "bytes": 33641,
+      "gzipSourceBytes": 12733,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "30902657dba3476cd4c225ac78253a797bb18b9725f2f13573591edec17718f8"
+    },
+    {
+      "path": "game/src/hub/base.js",
+      "bytes": 33607,
+      "gzipSourceBytes": 12302,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "f814bef1c89b894c7b0154425dad5f0d574a0fb7d8bf7e161790ec20a8355a66"
+    },
+    {
+      "path": "game/src/audio/sound.js",
+      "bytes": 32971,
+      "gzipSourceBytes": 10791,
+      "dynamic": [],
+      "packages": [
+        "howler"
+      ],
+      "sha256": "f5053d38817ddaee067ff0c42e5677694641340fd210722c189a4ecdbee2a4a7"
+    },
+    {
+      "path": "game/src/agent/agent.runner.js",
+      "bytes": 32560,
+      "gzipSourceBytes": 12942,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "e5b7eb06c51ccc097138bfd3c694838eafbec444e09f435e0e1bb3c5c26ffd6a"
+    },
+    {
+      "path": "game/src/core/art.js",
+      "bytes": 31572,
+      "gzipSourceBytes": 11803,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "7f161d92495690aecc15bd3fa5d6d0dd4b7828252d80c3af1d9b459e4259c9d3"
+    },
+    {
+      "path": "game/src/ui/ui.js",
+      "bytes": 31118,
+      "gzipSourceBytes": 10343,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "e40a8eac1adb5e3a834a417c174a5d2513eadab5d55bf0b07804bd1e87b3d6a1"
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "bytes": 29506,
+      "gzipSourceBytes": 12195,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "a70009ae2c162cd12554169e2b08d730a036c577a7a0bc07b6e5601e3c5eb99a"
+    },
+    {
+      "path": "game/src/core/renderer.js",
+      "bytes": 28060,
+      "gzipSourceBytes": 10330,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "cc97d2ef02b50c240d18954c1a38e0acc352d0deea7985e6bfb37fa71db26fa2"
+    },
+    {
+      "path": "game/src/ui/overlay.js",
+      "bytes": 24794,
+      "gzipSourceBytes": 10003,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "86776d4cc5cb7d407fa4da6c4a43b2a07ac8eeba996badb81a6b5808b08bc24e"
+    },
+    {
+      "path": "game/src/battle/core/combat.js",
+      "bytes": 24750,
+      "gzipSourceBytes": 7855,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "0758cd62a4fd44b620c533fa4e3830d29740376909e9be211c69ff69455354a9"
+    },
+    {
+      "path": "game/src/run/map-generator.js",
+      "bytes": 23965,
+      "gzipSourceBytes": 9260,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "41315bf016634efc081e22739b638ada1b1c35b8589dc7d06a1dbea8cb873b41"
+    },
+    {
+      "path": "game/src/hub/extraction.commands.js",
+      "bytes": 23256,
+      "gzipSourceBytes": 6869,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "39b592cbea4a931aba40d2e71c4b5e0a3c8c771d2cbaafec7a36c51034dde45e"
+    },
+    {
+      "path": "game/src/hub/game.bag.settle.js",
+      "bytes": 22705,
+      "gzipSourceBytes": 7952,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "f64b4bdce1d6348599b278214e6d0c44bdc5c3b57e935edebaf0896b4d63abca"
+    },
+    {
+      "path": "game/src/cards/cards.js",
+      "bytes": 19349,
+      "gzipSourceBytes": 8340,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "dc0198fdb841b3cdfa9e4c4aff4e75ee714ac2ed09b73b08394a6c080afd3f5e"
+    },
+    {
+      "path": "game/src/agent/agent.state.js",
+      "bytes": 19017,
+      "gzipSourceBytes": 7605,
+      "dynamic": [
+        "../battle/core/battle.core.js"
+      ],
+      "packages": [],
+      "sha256": "78057bb2c482923dd52c1400b4667ec984f0c4bfa3d472e92d99ca56dbc086e4"
+    },
+    {
+      "path": "game/src/cards/cards.rules.js",
+      "bytes": 17631,
+      "gzipSourceBytes": 7416,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "bfbbbbc6037f6a2bb78016c71614cfc98218eac21a0be77ddd0ab96e6297bf76"
+    },
+    {
+      "path": "game/src/hub/meta.js",
+      "bytes": 17320,
+      "gzipSourceBytes": 6742,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "9fc35f12c0c5bb92601f293260f057f25d8c32e3b3b02fce31e74ccc1fb09d0a"
+    },
+    {
+      "path": "game/src/run/game.session.death.js",
+      "bytes": 17080,
+      "gzipSourceBytes": 7127,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "5f48ef82cf0269cc012528c17d956357134b5af3899373b9c39e2b9267737f87"
+    },
+    {
+      "path": "game/src/hub/battle-settlement.commands.js",
+      "bytes": 16283,
+      "gzipSourceBytes": 3395,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "3fd8fdd35d368d37f404972bf84d485b4752d54f3d26722cb48517454ea61f0d"
+    },
+    {
+      "path": "game/src/ui/surface-motion.js",
+      "bytes": 15722,
+      "gzipSourceBytes": 4138,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "8716765517367607967488d1b66e7ffe5547e6dcef3420ca2c6bfc24c7fea596"
+    },
+    {
+      "path": "game/src/agent/agent.recorder.js",
+      "bytes": 15614,
+      "gzipSourceBytes": 6863,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "f55264595076a1b7f6b4c6c6727429bd4c7bf07a61603148114864024987f163"
+    },
+    {
+      "path": "game/src/hub/game.storage.js",
+      "bytes": 15129,
+      "gzipSourceBytes": 6214,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "129427f83d7e13d51b07cc6baa65568584aac15a6b72ef79a4c37c7a4def001f"
+    },
+    {
+      "path": "game/src/run/map-snapshot.js",
+      "bytes": 14814,
+      "gzipSourceBytes": 4923,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "1dbd182bf8f4a398cdb453cea0ca72cca8586f86a816cc43a6ab8271fb158f79"
+    },
+    {
+      "path": "game/src/ui/achievement-gallery.js",
+      "bytes": 13394,
+      "gzipSourceBytes": 4516,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "15d4359ae4a7cf4568195e491fced10f707f5b44e06a6412fd48decf0519fe7f"
+    },
+    {
+      "path": "game/src/run/expedition.view.js",
+      "bytes": 13359,
+      "gzipSourceBytes": 5403,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "237bf5b7030bda6581bdf0758bfd17485cafee378e6d1a4ea2e3f63695b06d7a"
+    },
+    {
+      "path": "game/src/core/map-node-art.js",
+      "bytes": 12978,
+      "gzipSourceBytes": 4809,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "2142595cfe18a9b47db627e03e10d4db1d868c66367751571c3e028e3bf8f0ac"
+    },
+    {
+      "path": "game/src/generated/thumb-manifest.js",
+      "bytes": 12707,
+      "gzipSourceBytes": 2757,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "e8ac6a5757807a4835f16bf53b3705866f732ba5b07bdce1b146041eddae6343"
+    },
+    {
+      "path": "game/src/cards/card-rules.capability.js",
+      "bytes": 12188,
+      "gzipSourceBytes": 3901,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "76ba46beb7218d35afb6ec9e139251d0f0cda2a84debdfb06cec5e4361310719"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m3.js",
+      "bytes": 12115,
+      "gzipSourceBytes": 5223,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "5c52b0f501f0f618eb3a5a97877679152813137bdd97be32ea85e6bb393ce93b"
+    },
+    {
+      "path": "game/src/cards/cards.view.js",
+      "bytes": 12077,
+      "gzipSourceBytes": 5757,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "d100f89cd30cd69f6d5179d595991e4669d1f582fdaaa118ad0bb0f2a2006074"
+    },
+    {
+      "path": "game/src/hub/recovery.commands.js",
+      "bytes": 12035,
+      "gzipSourceBytes": 3300,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "457ad8aee4756b7f85a31f22dbb7ec7fee24498be629e273b976c687fd327dac"
+    },
+    {
+      "path": "game/src/ui/interface-motion.js",
+      "bytes": 11468,
+      "gzipSourceBytes": 3806,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "63c4ffdc437e9034be6d9ceef3295bc2c1a339c7b93dfa543fad9ea31d45243a"
+    },
+    {
+      "path": "game/src/ui/term-tips.js",
+      "bytes": 11449,
+      "gzipSourceBytes": 5062,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "d12b84edaf6699d95378fdbd9295fa82f12af397c36ac8590d7c89cb75099004"
+    },
+    {
+      "path": "game/src/hub/game.bag.view2.js",
+      "bytes": 11319,
+      "gzipSourceBytes": 4893,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "076d034c4d3d627044e4017d8ab79fedd54929cb32a36c3bc0507c94e24e82a5"
+    },
+    {
+      "path": "game/src/hub/game.notes.js",
+      "bytes": 11245,
+      "gzipSourceBytes": 4355,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "ca9d135d8edf227f4414cc447fc525c7a31363185e67d8958e2e56ebca07b30e"
+    },
+    {
+      "path": "game/src/ui/feedback.local.js",
+      "bytes": 10300,
+      "gzipSourceBytes": 3738,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "b85ec6a9165346191a0bae669b2b1774f2e7d51ca3b42c4d3f7ca041a7dc5170"
+    },
+    {
+      "path": "game/src/core/camera.js",
+      "bytes": 9794,
+      "gzipSourceBytes": 3544,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "105c9f880b8383ac9688da85da2be6353fe1eb4cd21c01abbec065a10b9c50d2"
+    },
+    {
+      "path": "game/src/hub/nest-settlement.commands.js",
+      "bytes": 9761,
+      "gzipSourceBytes": 2685,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "d9f56f2e54d19584d7b1fc713417205f75bf522d3539c1c4a0ea89088857ab63"
+    },
+    {
+      "path": "game/src/ui/achievement-motion.js",
+      "bytes": 9713,
+      "gzipSourceBytes": 2917,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "e0b4c20e584d6126790e59aebf416b7cf117b8436f2c59ba11107d1189a6750f"
+    },
+    {
+      "path": "game/src/hub/game.bag.drag.js",
+      "bytes": 9666,
+      "gzipSourceBytes": 3828,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "725be5953eb0098d20c0ccfde7670d6c33c721feb0a4bf630cdf7ca4527adb1e"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m5.js",
+      "bytes": 8936,
+      "gzipSourceBytes": 3948,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "667a158c413195e7278ba9cd89cc27e2dd14da61ee27276e2f424d3f0227e4e3"
+    },
+    {
+      "path": "game/src/ui/home-menu-motion.js",
+      "bytes": 8925,
+      "gzipSourceBytes": 2761,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "a9a9ff34070d032790c64288190431037f753d746652cb752fcb435cdc57cf1e"
+    },
+    {
+      "path": "game/src/ui/camp-entry.js",
+      "bytes": 8869,
+      "gzipSourceBytes": 3268,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "104ad905fee3feed9279f3f86ce56550a0d306ab80ce110faab66a899ed40fde"
+    },
+    {
+      "path": "game/src/ui/hud.js",
+      "bytes": 8835,
+      "gzipSourceBytes": 3990,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "558077747cb3f1108375ff506b5421298734628b39e0cf597189148c4007ae81"
+    },
+    {
+      "path": "game/src/ui/home-fx.js",
+      "bytes": 8635,
+      "gzipSourceBytes": 2927,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "7e65b4dc4bce93eb3e75ce0ad4a2f646aaa098fcf4c792e565031ffa9320bba9"
+    },
+    {
+      "path": "game/src/hub/recoverable-pair.js",
+      "bytes": 8591,
+      "gzipSourceBytes": 2393,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "b817a01f7961dda2eafb83e65f2fb7cde7836fc96b93a2bd119bc3bbb29bf8fd"
+    },
+    {
+      "path": "game/src/ui/cinematics.js",
+      "bytes": 8547,
+      "gzipSourceBytes": 3800,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "6db055ff9c933bf58a0178523f4f79e37c315fd8e57814bd0f0cd3757eff4dd7"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m2.js",
+      "bytes": 8367,
+      "gzipSourceBytes": 3715,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "edb80c7416eb48aacb0769aeb8c7bbdce195770839689855c53119ebffdc6b68"
+    },
+    {
+      "path": "game/src/agent/agent.llm.js",
+      "bytes": 8313,
+      "gzipSourceBytes": 4033,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "d067b7f6a0d853fce5819b12622655e05d85ad8651924b4c732b55469f997d20"
+    },
+    {
+      "path": "game/src/cards/cards.sync.backfiller.js",
+      "bytes": 8270,
+      "gzipSourceBytes": 3365,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "1b4a8d120a33e9a6cf11580e93115f6bd8549e3fdc8dbbb142ca3227aacda3f8"
+    },
+    {
+      "path": "game/src/agent/agent.data.js",
+      "bytes": 7929,
+      "gzipSourceBytes": 3565,
+      "dynamic": [],
+      "packages": [],
+      "sha256": "f5b4138c9ef0c6996c53ac811d06f486633293f1c1ff20cb044e88267d0d3c10"
+    }
+  ],
+  "startupPackages": [
+    "howler",
+    "motion/mini"
+  ],
+  "cutResults": [
+    {
+      "name": "boot-agent",
+      "cuts": [
+        [
+          "game/src/game.boot.js",
+          "game/src/agent/agent.js"
+        ]
+      ],
+      "count": 11,
+      "bytes": 142903,
+      "gzipSourceBytes": 59565,
+      "files": [
+        "game/src/agent/agent.js",
+        "game/src/agent/agent.state.js",
+        "game/src/agent/agent.surface.js",
+        "game/src/agent/agent.protocol.js",
+        "game/src/agent/agent.runner.js",
+        "game/src/agent/agent.policy.js",
+        "game/src/agent/agent.weights.js",
+        "game/src/battle/bag/battle.slam-skill.js",
+        "game/src/agent/agent.llm.js",
+        "game/src/agent/agent.scenes.js",
+        "game/src/agent/agent.scenes.catalog.js"
+      ]
+    },
+    {
+      "name": "agent-policy",
+      "cuts": [
+        [
+          "game/src/agent/agent.js",
+          "game/src/agent/agent.policy.js"
+        ]
+      ],
+      "count": 0,
+      "bytes": 0,
+      "gzipSourceBytes": 0,
+      "files": []
+    },
+    {
+      "name": "agent-data",
+      "cuts": [
+        [
+          "game/src/agent/agent.js",
+          "game/src/agent/agent.data.js"
+        ],
+        [
+          "game/src/run/game.session.js",
+          "game/src/agent/agent.data.js"
+        ]
+      ],
+      "count": 1,
+      "bytes": 7929,
+      "gzipSourceBytes": 3565,
+      "files": [
+        "game/src/agent/agent.data.js"
+      ]
+    },
+    {
+      "name": "hub-depart",
+      "cuts": [
+        [
+          "game/src/hub/game.hub.js",
+          "game/src/hub/game.hub.depart.js"
+        ]
+      ],
+      "count": 0,
+      "bytes": 0,
+      "gzipSourceBytes": 0,
+      "files": []
+    }
+  ],
+  "css": {
+    "initialHTMLRoots": [
+      "game/css/base.css",
+      "game/css/cards.css",
+      "game/css/overlays.css",
+      "game/css/hub.css",
+      "game/css/battle.css",
+      "game/css/scenes.css",
+      "game/css/lab-ending.css",
+      "game/css/winter.css",
+      "game/css/expedition.css",
+      "game/css/expedition-map.css",
+      "game/css/map-edge-light.css",
+      "game/css/expedition-hub.css",
+      "game/css/expedition-inventory.css",
+      "game/css/expedition-rewards.css",
+      "game/css/expedition-battle.css",
+      "game/css/expedition-library.css",
+      "game/css/card-v3.css",
+      "game/css/expedition-roster.css",
+      "game/css/expedition-shop.css",
+      "game/css/ui-scale.css",
+      "game/css/page-slot-select.css",
+      "game/css/page-settings.css",
+      "game/css/page-datapage.css",
+      "game/css/page-ach.css",
+      "game/css/page-cardforge.css",
+      "game/css/page-expedition-hud.css",
+      "game/css/feedback-oct12.css",
+      "game/css/roster-departure-v2.css",
+      "game/css/pocket-strip.css",
+      "game/css/experience-loot.css",
+      "game/css/page-events.css",
+      "game/css/page-rewards-bag-help.css",
+      "game/css/page-battle-ui.css",
+      "game/css/character-idle.css",
+      "game/css/page-transitions.css",
+      "game/css/ak-skin.css",
+      "game/css/base-camp.css",
+      "game/css/base-camp-compact.css",
+      "game/css/card-layout-selected.css",
+      "game/css/battle-stage.css",
+      "game/css/title-credits.css",
+      "game/css/camp-entry.css",
+      "game/css/page-visual-ready.css",
+      "game/css/archive-motion.css",
+      "game/css/home-ui-tokens.css",
+      "game/css/home-linked-interactions.css",
+      "game/css/combat-feedback.css",
+      "game/css/card-description-links.css",
+      "game/css/chest-opening.css",
+      "game/css/title-achievements.css",
+      "game/css/beginner-guide.css",
+      "game/css/archive-back.css",
+      "game/css/leave-run.css",
+      "game/css/settings-navigation.css",
+      "game/css/home-ui-tokens.css",
+      "game/css/entry-events.css",
+      "game/css/expedition-transitions.css",
+      "game/css/page-loading.css",
+      "game/css/archive-back.css",
+      "game/css/preparation.css",
+      "game/css/base-camp-rework.css",
+      "game/css/base-controls-v4.css",
+      "game/css/card-browser.css",
+      "game/css/inventory-zoom.css",
+      "game/css/base-reward-feedback.css",
+      "game/css/base-collection-v4.css",
+      "game/css/base-courtyard-v3.css",
+      "game/css/base-panel-layout.css",
+      "game/css/base-cohesion-v5.css",
+      "game/css/base-framework-v7.css",
+      "game/css/base-rooms-v7.css",
+      "game/css/base-personnel-v12.css",
+      "game/css/base-logistics-trade-v12.css",
+      "game/css/base-archive-facilities-v12.css",
+      "game/css/base-page-motion-v7.css",
+      "game/css/base-home-v7.css",
+      "game/css/departure-selected.css",
+      "game/css/roster-reference.css",
+      "game/css/base-shop-v3.css",
+      "game/css/base-archive-v3.css",
+      "game/css/pocket-strip.css"
+    ],
+    "startupFiles": 87,
+    "startupBytes": 1292229,
+    "startupSourceGzipBytes": 351246,
+    "largest": [
+      {
+        "path": "game/css/winter.css",
+        "bytes": 104867,
+        "gzipSourceBytes": 32993
+      },
+      {
+        "path": "game/css/scenes.css",
+        "bytes": 48975,
+        "gzipSourceBytes": 12587
+      },
+      {
+        "path": "game/css/base-camp.css",
+        "bytes": 43657,
+        "gzipSourceBytes": 8485
+      },
+      {
+        "path": "game/css/page-rewards-bag-help.css",
+        "bytes": 40310,
+        "gzipSourceBytes": 12214
+      },
+      {
+        "path": "game/css/overlays.css",
+        "bytes": 40247,
+        "gzipSourceBytes": 11838
+      },
+      {
+        "path": "game/css/base-camp-rework.css",
+        "bytes": 38489,
+        "gzipSourceBytes": 6329
+      },
+      {
+        "path": "game/css/battle.css",
+        "bytes": 36099,
+        "gzipSourceBytes": 13779
+      },
+      {
+        "path": "game/css/page-expedition-hud.css",
+        "bytes": 35549,
+        "gzipSourceBytes": 8970
+      },
+      {
+        "path": "game/css/base-rooms-v7.css",
+        "bytes": 33811,
+        "gzipSourceBytes": 5725
+      },
+      {
+        "path": "game/css/base.css",
+        "bytes": 32155,
+        "gzipSourceBytes": 9364
+      },
+      {
+        "path": "game/css/base-archive-facilities-v12.css",
+        "bytes": 29387,
+        "gzipSourceBytes": 4246
+      },
+      {
+        "path": "game/css/expedition-inventory.css",
+        "bytes": 29386,
+        "gzipSourceBytes": 7979
+      },
+      {
+        "path": "game/css/expedition-roster.css",
+        "bytes": 28822,
+        "gzipSourceBytes": 8305
+      },
+      {
+        "path": "game/css/expedition-rewards.css",
+        "bytes": 28633,
+        "gzipSourceBytes": 6943
+      },
+      {
+        "path": "game/css/base-camp-roster.css",
+        "bytes": 28442,
+        "gzipSourceBytes": 4907
+      },
+      {
+        "path": "game/css/base-personnel-v12.css",
+        "bytes": 28047,
+        "gzipSourceBytes": 4647
+      },
+      {
+        "path": "game/css/page-ach.css",
+        "bytes": 27537,
+        "gzipSourceBytes": 7432
+      },
+      {
+        "path": "game/css/page-settings.css",
+        "bytes": 25799,
+        "gzipSourceBytes": 7836
+      },
+      {
+        "path": "game/css/hub.css",
+        "bytes": 24481,
+        "gzipSourceBytes": 6972
+      },
+      {
+        "path": "game/css/entry-events.css",
+        "bytes": 22158,
+        "gzipSourceBytes": 4147
+      },
+      {
+        "path": "game/css/expedition.css",
+        "bytes": 21924,
+        "gzipSourceBytes": 6631
+      },
+      {
+        "path": "game/css/battle-stage.css",
+        "bytes": 21635,
+        "gzipSourceBytes": 4777
+      },
+      {
+        "path": "game/css/page-slot-select.css",
+        "bytes": 21459,
+        "gzipSourceBytes": 6887
+      },
+      {
+        "path": "game/css/expedition-hub.css",
+        "bytes": 20032,
+        "gzipSourceBytes": 6197
+      },
+      {
+        "path": "game/css/title-achievements.css",
+        "bytes": 19267,
+        "gzipSourceBytes": 4804
+      },
+      {
+        "path": "game/css/ak-skin.css",
+        "bytes": 18745,
+        "gzipSourceBytes": 5524
+      },
+      {
+        "path": "game/css/expedition-shop.css",
+        "bytes": 17896,
+        "gzipSourceBytes": 3851
+      },
+      {
+        "path": "game/css/base-archive-v3.css",
+        "bytes": 17304,
+        "gzipSourceBytes": 2850
+      },
+      {
+        "path": "game/css/title-p0.css",
+        "bytes": 16943,
+        "gzipSourceBytes": 4188
+      },
+      {
+        "path": "game/css/base-cohesion-v5.css",
+        "bytes": 16541,
+        "gzipSourceBytes": 3275
+      },
+      {
+        "path": "game/css/settings-navigation.css",
+        "bytes": 16312,
+        "gzipSourceBytes": 3930
+      },
+      {
+        "path": "game/css/base-logistics-trade-v12.css",
+        "bytes": 15472,
+        "gzipSourceBytes": 3435
+      },
+      {
+        "path": "game/css/camp-entry.css",
+        "bytes": 15318,
+        "gzipSourceBytes": 3861
+      },
+      {
+        "path": "game/css/page-cardforge.css",
+        "bytes": 15080,
+        "gzipSourceBytes": 5489
+      },
+      {
+        "path": "game/css/card-layout-selected.css",
+        "bytes": 14830,
+        "gzipSourceBytes": 3653
+      },
+      {
+        "path": "game/css/expedition-battle.css",
+        "bytes": 14168,
+        "gzipSourceBytes": 5039
+      },
+      {
+        "path": "game/css/page-events.css",
+        "bytes": 12674,
+        "gzipSourceBytes": 4612
+      },
+      {
+        "path": "game/css/inbox-cover.css",
+        "bytes": 12546,
+        "gzipSourceBytes": 3095
+      },
+      {
+        "path": "game/css/settings-cover.css",
+        "bytes": 11955,
+        "gzipSourceBytes": 2764
+      },
+      {
+        "path": "game/css/cards.css",
+        "bytes": 11852,
+        "gzipSourceBytes": 3749
+      },
+      {
+        "path": "game/css/expedition-library.css",
+        "bytes": 11246,
+        "gzipSourceBytes": 6022
+      },
+      {
+        "path": "game/css/page-battle-ui.css",
+        "bytes": 10886,
+        "gzipSourceBytes": 4834
+      },
+      {
+        "path": "game/css/page-datapage.css",
+        "bytes": 10393,
+        "gzipSourceBytes": 3141
+      },
+      {
+        "path": "game/css/departure-selected.css",
+        "bytes": 10196,
+        "gzipSourceBytes": 2972
+      },
+      {
+        "path": "game/css/character-pool-cover.css",
+        "bytes": 10108,
+        "gzipSourceBytes": 2199
+      },
+      {
+        "path": "game/css/character-cover.css",
+        "bytes": 9815,
+        "gzipSourceBytes": 2514
+      },
+      {
+        "path": "game/css/slots-cover.css",
+        "bytes": 9659,
+        "gzipSourceBytes": 2505
+      },
+      {
+        "path": "game/css/base-home-v7.css",
+        "bytes": 8429,
+        "gzipSourceBytes": 1890
+      },
+      {
+        "path": "game/css/expedition-map.css",
+        "bytes": 8144,
+        "gzipSourceBytes": 2478
+      },
+      {
+        "path": "game/css/base-framework-v7.css",
+        "bytes": 8049,
+        "gzipSourceBytes": 2222
+      },
+      {
+        "path": "game/css/beginner-guide.css",
+        "bytes": 7520,
+        "gzipSourceBytes": 2130
+      },
+      {
+        "path": "game/css/title-credits.css",
+        "bytes": 7317,
+        "gzipSourceBytes": 1933
+      },
+      {
+        "path": "game/css/roster-departure-v2.css",
+        "bytes": 7214,
+        "gzipSourceBytes": 2186
+      },
+      {
+        "path": "game/css/preparation.css",
+        "bytes": 6937,
+        "gzipSourceBytes": 2720
+      },
+      {
+        "path": "game/css/base-shop-v3.css",
+        "bytes": 6727,
+        "gzipSourceBytes": 1801
+      },
+      {
+        "path": "game/css/base-courtyard-v3.css",
+        "bytes": 6673,
+        "gzipSourceBytes": 1597
+      },
+      {
+        "path": "game/css/home-linked-interactions.css",
+        "bytes": 6400,
+        "gzipSourceBytes": 2021
+      },
+      {
+        "path": "game/css/base-controls-v4.css",
+        "bytes": 6232,
+        "gzipSourceBytes": 1577
+      },
+      {
+        "path": "game/css/archive-motion.css",
+        "bytes": 5692,
+        "gzipSourceBytes": 1515
+      },
+      {
+        "path": "game/css/lab-ending.css",
+        "bytes": 5618,
+        "gzipSourceBytes": 1972
+      },
+      {
+        "path": "game/css/leave-run.css",
+        "bytes": 5387,
+        "gzipSourceBytes": 1602
+      },
+      {
+        "path": "game/css/inventory-zoom.css",
+        "bytes": 4908,
+        "gzipSourceBytes": 1424
+      },
+      {
+        "path": "game/css/feedback-oct12.css",
+        "bytes": 4862,
+        "gzipSourceBytes": 1863
+      },
+      {
+        "path": "game/css/pocket-strip.css",
+        "bytes": 4591,
+        "gzipSourceBytes": 2602
+      },
+      {
+        "path": "game/css/page-transitions.css",
+        "bytes": 4335,
+        "gzipSourceBytes": 1847
+      },
+      {
+        "path": "game/css/chest-opening.css",
+        "bytes": 4285,
+        "gzipSourceBytes": 1415
+      },
+      {
+        "path": "game/css/experience-loot.css",
+        "bytes": 4043,
+        "gzipSourceBytes": 2065
+      },
+      {
+        "path": "game/css/roster-reference.css",
+        "bytes": 3861,
+        "gzipSourceBytes": 1145
+      },
+      {
+        "path": "game/css/character-view-motion.css",
+        "bytes": 3848,
+        "gzipSourceBytes": 1197
+      },
+      {
+        "path": "game/css/expedition-transitions.css",
+        "bytes": 3801,
+        "gzipSourceBytes": 1246
+      },
+      {
+        "path": "game/css/base-page-motion-v7.css",
+        "bytes": 3295,
+        "gzipSourceBytes": 675
+      },
+      {
+        "path": "game/css/base-collection-v4.css",
+        "bytes": 3290,
+        "gzipSourceBytes": 1032
+      },
+      {
+        "path": "game/css/map-edge-light.css",
+        "bytes": 2620,
+        "gzipSourceBytes": 1040
+      },
+      {
+        "path": "game/css/page-loading.css",
+        "bytes": 2130,
+        "gzipSourceBytes": 952
+      },
+      {
+        "path": "game/css/navigation-feedback.css",
+        "bytes": 2095,
+        "gzipSourceBytes": 690
+      },
+      {
+        "path": "game/css/archive-back.css",
+        "bytes": 1990,
+        "gzipSourceBytes": 793
+      },
+      {
+        "path": "game/css/character-idle.css",
+        "bytes": 1840,
+        "gzipSourceBytes": 651
+      },
+      {
+        "path": "game/css/base-reward-feedback.css",
+        "bytes": 1538,
+        "gzipSourceBytes": 546
+      },
+      {
+        "path": "game/css/card-description-links.css",
+        "bytes": 1441,
+        "gzipSourceBytes": 621
+      },
+      {
+        "path": "game/css/card-v3.css",
+        "bytes": 1434,
+        "gzipSourceBytes": 719
+      },
+      {
+        "path": "game/css/combat-feedback.css",
+        "bytes": 1358,
+        "gzipSourceBytes": 721
+      },
+      {
+        "path": "game/css/card-browser.css",
+        "bytes": 1107,
+        "gzipSourceBytes": 483
+      },
+      {
+        "path": "game/css/page-visual-ready.css",
+        "bytes": 954,
+        "gzipSourceBytes": 435
+      },
+      {
+        "path": "game/css/home-ui-tokens.css",
+        "bytes": 590,
+        "gzipSourceBytes": 383
+      },
+      {
+        "path": "game/css/ui-scale.css",
+        "bytes": 421,
+        "gzipSourceBytes": 369
+      },
+      {
+        "path": "game/css/base-camp-compact.css",
+        "bytes": 73,
+        "gzipSourceBytes": 96
+      },
+      {
+        "path": "game/css/base-panel-layout.css",
+        "bytes": 73,
+        "gzipSourceBytes": 96
+      }
+    ],
+    "allSourceCSSCount": 132
+  },
+  "runtimePublication": {
+    "reviewedExcludedCount": 0,
+    "reviewWarnings": [
+      "Unreviewed dynamic asset consumer game/src/battle/view/battle.layers.js; retaining reviewed assets."
+    ],
+    "aliasCount": 19,
+    "developmentSfxExcluded": [
+      "sfx/alternatives/",
+      "sfx/winter-v5/",
+      "sfx/winter-v6-ten/"
+    ],
+    "copiedAssetCount": 1342,
+    "copiedSourceBytes": 117413186,
+    "largestCopied": [
+      {
+        "path": "scenes/battle/winter-transit-1011/far.webp",
+        "bytes": 1259138
+      },
+      {
+        "path": "scenes/shop/shop-cardstyle-approved-1011.webp",
+        "bytes": 1181460
+      },
+      {
+        "path": "scenes/rewards/chest-small-cardstyle-1011-v1.webp",
+        "bytes": 815604
+      },
+      {
+        "path": "scenes/battle/winter-transit-1011/ground.webp",
+        "bytes": 647394
+      },
+      {
+        "path": "cards/event.webp",
+        "bytes": 598448
+      },
+      {
+        "path": "scenes/rewards/chest-small-1011-v2.webp",
+        "bytes": 526708
+      },
+      {
+        "path": "scenes/map-nodes/city-ghost-props-a-1012.webp",
+        "bytes": 478880
+      },
+      {
+        "path": "portraits/enemies/dragon.webp",
+        "bytes": 426774
+      },
+      {
+        "path": "scenes/battle-street-amber-anime-v1.webp",
+        "bytes": 414722
+      },
+      {
+        "path": "portraits/enemies/orc_axe.webp",
+        "bytes": 412030
+      },
+      {
+        "path": "thumbs/cards/event.webp",
+        "bytes": 393872
+      },
+      {
+        "path": "portraits/full/wu-beach.webp",
+        "bytes": 378674
+      },
+      {
+        "path": "scenes/hub-wallpaper.webp",
+        "bytes": 376148
+      },
+      {
+        "path": "portraits/enemies/wolf_rider.webp",
+        "bytes": 373616
+      },
+      {
+        "path": "portraits/full/wu-casual-v14.webp",
+        "bytes": 366400
+      },
+      {
+        "path": "scenes/battle/winter-transit-1011/mid.webp",
+        "bytes": 361598
+      },
+      {
+        "path": "portraits/expedition-roster.webp",
+        "bytes": 357942
+      },
+      {
+        "path": "portraits/enemies/boss_orc.webp",
+        "bytes": 355060
+      },
+      {
+        "path": "portraits/full/wu-spring-v15.webp",
+        "bytes": 329108
+      },
+      {
+        "path": "portraits/full/baita.webp",
+        "bytes": 327278
+      },
+      {
+        "path": "portraits/enemies/boss_elem.webp",
+        "bytes": 317052
+      },
+      {
+        "path": "portraits/enemies/water_el.webp",
+        "bytes": 316702
+      },
+      {
+        "path": "portraits/enemies/archer.webp",
+        "bytes": 301536
+      },
+      {
+        "path": "scenes/event-tt6-airdrop.webp",
+        "bytes": 298472
+      },
+      {
+        "path": "scenes/chests/large-rig-640-v1/frame-16.webp",
+        "bytes": 298396
+      },
+      {
+        "path": "scenes/chests/large-rig-640-v1/frame-15.webp",
+        "bytes": 295830
+      },
+      {
+        "path": "scenes/chests/large-rig-640-v1/frame-14.webp",
+        "bytes": 292330
+      },
+      {
+        "path": "scenes/chests/large-rig-640-v1/frame-13.webp",
+        "bytes": 285092
+      },
+      {
+        "path": "scenes/chests/boss-rig-640-v1/frame-16.webp",
+        "bytes": 284980
+      },
+      {
+        "path": "scenes/chests/boss-rig-640-v1/frame-15.webp",
+        "bytes": 283340
+      },
+      {
+        "path": "scenes/chests/boss-rig-640-v1/frame-14.webp",
+        "bytes": 279864
+      },
+      {
+        "path": "portraits/enemies/bandit.webp",
+        "bytes": 279740
+      },
+      {
+        "path": "scenes/chests/large-rig-640-v1/frame-12.webp",
+        "bytes": 279460
+      },
+      {
+        "path": "scenes/chests/medium-rig-640-v1/frame-16.webp",
+        "bytes": 277964
+      },
+      {
+        "path": "scenes/chests/medium-rig-640-v1/frame-15.webp",
+        "bytes": 276092
+      },
+      {
+        "path": "scenes/chests/boss-rig-640-v1/frame-13.webp",
+        "bytes": 274934
+      },
+      {
+        "path": "scenes/event-bandits-anime-v2.webp",
+        "bytes": 273038
+      },
+      {
+        "path": "portraits/enemies/boss_general.webp",
+        "bytes": 272988
+      },
+      {
+        "path": "scenes/chests/medium-rig-640-v1/frame-14.webp",
+        "bytes": 272194
+      },
+      {
+        "path": "scenes/chests/large-rig-640-v1/frame-11.webp",
+        "bytes": 269236
+      },
+      {
+        "path": "scenes/chests/boss-rig-640-v1/frame-12.webp",
+        "bytes": 268188
+      },
+      {
+        "path": "scenes/chests/medium-rig-640-v1/frame-13.webp",
+        "bytes": 266132
+      },
+      {
+        "path": "portraits/avatars/wu.webp",
+        "bytes": 265352
+      },
+      {
+        "path": "portraits/enemies/esper_echo.webp",
+        "bytes": 264026
+      },
+      {
+        "path": "scenes/chests/class-rig-640-v1/frame-16.webp",
+        "bytes": 261222
+      }
+    ],
+    "directories": [
+      {
+        "path": "portraits/frames/changwuyu",
+        "bytes": 12708822,
+        "count": 75
+      },
+      {
+        "path": "portraits/frames/baita",
+        "bytes": 5002286,
+        "count": 66
+      },
+      {
+        "path": "portraits/frames/xingyue",
+        "bytes": 4433216,
+        "count": 51
+      },
+      {
+        "path": "scenes/chests/large-rig-640-v1",
+        "bytes": 3772214,
+        "count": 15
+      },
+      {
+        "path": "portraits/frames/heixiang",
+        "bytes": 3771558,
+        "count": 51
+      },
+      {
+        "path": "scenes/chests/boss-rig-640-v1",
+        "bytes": 3674384,
+        "count": 15
+      },
+      {
+        "path": "portraits/frames/wu",
+        "bytes": 3569238,
+        "count": 64
+      },
+      {
+        "path": "scenes/chests/medium-rig-640-v1",
+        "bytes": 3381330,
+        "count": 15
+      },
+      {
+        "path": "scenes/chests/class-rig-640-v1",
+        "bytes": 3245154,
+        "count": 15
+      },
+      {
+        "path": "scenes/chests/small-rig-640-v1",
+        "bytes": 2832522,
+        "count": 15
+      },
+      {
+        "path": "scenes/battle/winter-transit-1011",
+        "bytes": 2358045,
+        "count": 5
+      },
+      {
+        "path": "portraits/cut/enemies",
+        "bytes": 1775918,
+        "count": 18
+      },
+      {
+        "path": "scenes/shop/shop-cardstyle-approved-1011.webp",
+        "bytes": 1181460,
+        "count": 1
+      },
+      {
+        "path": "thumbs/portraits/enemies",
+        "bytes": 1160930,
+        "count": 18
+      },
+      {
+        "path": "thumbs/cards/resources",
+        "bytes": 1105464,
+        "count": 16
+      },
+      {
+        "path": "scenes/chests/safe-simple-v7",
+        "bytes": 945872,
+        "count": 5
+      },
+      {
+        "path": "scenes/rewards/chest-small-cardstyle-1011-v1.webp",
+        "bytes": 815604,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/items",
+        "bytes": 725744,
+        "count": 21
+      },
+      {
+        "path": "cards/event.webp",
+        "bytes": 598448,
+        "count": 1
+      },
+      {
+        "path": "scenes/rewards/chest-small-1011-v2.webp",
+        "bytes": 526708,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/city-ghost-props-a-1012.webp",
+        "bytes": 478880,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/dragon.webp",
+        "bytes": 426774,
+        "count": 1
+      },
+      {
+        "path": "scenes/battle-street-amber-anime-v1.webp",
+        "bytes": 414722,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/orc_axe.webp",
+        "bytes": 412030,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/event.webp",
+        "bytes": 393872,
+        "count": 1
+      },
+      {
+        "path": "portraits/full/wu-beach.webp",
+        "bytes": 378674,
+        "count": 1
+      },
+      {
+        "path": "scenes/hub-wallpaper.webp",
+        "bytes": 376148,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/wolf_rider.webp",
+        "bytes": 373616,
+        "count": 1
+      },
+      {
+        "path": "portraits/full/wu-casual-v14.webp",
+        "bytes": 366400,
+        "count": 1
+      },
+      {
+        "path": "portraits/expedition-roster.webp",
+        "bytes": 357942,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/boss_orc.webp",
+        "bytes": 355060,
+        "count": 1
+      },
+      {
+        "path": "portraits/full/wu-spring-v15.webp",
+        "bytes": 329108,
+        "count": 1
+      },
+      {
+        "path": "portraits/full/baita.webp",
+        "bytes": 327278,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/boss_elem.webp",
+        "bytes": 317052,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/water_el.webp",
+        "bytes": 316702,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/archer.webp",
+        "bytes": 301536,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-tt6-airdrop.webp",
+        "bytes": 298472,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/bandit.webp",
+        "bytes": 279740,
+        "count": 1
+      },
+      {
+        "path": "scenes/battle/stage-reset-1015",
+        "bytes": 278358,
+        "count": 3
+      },
+      {
+        "path": "scenes/event-bandits-anime-v2.webp",
+        "bytes": 273038,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/boss_general.webp",
+        "bytes": 272988,
+        "count": 1
+      },
+      {
+        "path": "portraits/avatars/wu.webp",
+        "bytes": 265352,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/esper_echo.webp",
+        "bytes": 264026,
+        "count": 1
+      },
+      {
+        "path": "portraits/avatars/xingyue.webp",
+        "bytes": 258720,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-ev19-pearlbox.webp",
+        "bytes": 258574,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-ev19-classchest.webp",
+        "bytes": 257064,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/esper_silence.webp",
+        "bytes": 255356,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/fire_el.webp",
+        "bytes": 252630,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-cmtn7qttxqo4.webp",
+        "bytes": 251196,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/cavalry.webp",
+        "bytes": 250274,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-tt6-goldmine.webp",
+        "bytes": 246234,
+        "count": 1
+      },
+      {
+        "path": "portraits/avatars/baita.webp",
+        "bytes": 244096,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/grass_el.webp",
+        "bytes": 240470,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-door-anime-v2.webp",
+        "bytes": 240322,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/esper_candle.webp",
+        "bytes": 239648,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-ev19-quartermaster.webp",
+        "bytes": 235916,
+        "count": 1
+      },
+      {
+        "path": "portraits/avatars/xingyue-dark.webp",
+        "bytes": 235282,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-cc-dual-wield.webp",
+        "bytes": 233770,
+        "count": 1
+      },
+      {
+        "path": "scenes/entry/modern-winter-entry-1011-v2.webp",
+        "bytes": 233244,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-ev19-fireballs.webp",
+        "bytes": 231198,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-maxsupply.webp",
+        "bytes": 228798,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-tt6-mystery.webp",
+        "bytes": 224206,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/esper_crow.webp",
+        "bytes": 219696,
+        "count": 1
+      },
+      {
+        "path": "cards/resource-valuables.webp",
+        "bytes": 219530,
+        "count": 1
+      },
+      {
+        "path": "cards/spell.webp",
+        "bytes": 218492,
+        "count": 1
+      },
+      {
+        "path": "portraits/battle/changwuyu.webp",
+        "bytes": 217306,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/orc_jav.webp",
+        "bytes": 215598,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-tt6-relief.webp",
+        "bytes": 214686,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-noon-duel.webp",
+        "bytes": 214326,
+        "count": 1
+      },
+      {
+        "path": "scenes/battle/winter-street-1011-v2.webp",
+        "bytes": 213906,
+        "count": 1
+      },
+      {
+        "path": "cards/hero-volcano.webp",
+        "bytes": 213708,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-ev19-potions.webp",
+        "bytes": 210142,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-tt6-demondeal.webp",
+        "bytes": 209318,
+        "count": 1
+      },
+      {
+        "path": "portraits/avatars/changwuyu.webp",
+        "bytes": 206734,
+        "count": 1
+      },
+      {
+        "path": "portraits/full/changwuyu.webp",
+        "bytes": 204422,
+        "count": 1
+      },
+      {
+        "path": "scenes/ui-loop-0925/boss-arena.webp",
+        "bytes": 201688,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/key-one.webp",
+        "bytes": 198516,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-ev19-arrows.webp",
+        "bytes": 198216,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-tt6-chestdraw.webp",
+        "bytes": 197786,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-stratagem.webp",
+        "bytes": 197780,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-ev19-vital.webp",
+        "bytes": 196426,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-ev19-gamble.webp",
+        "bytes": 196252,
+        "count": 1
+      },
+      {
+        "path": "scenes/battle/frozen-ruins-1015.webp",
+        "bytes": 194026,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-frostfall.webp",
+        "bytes": 193218,
+        "count": 1
+      },
+      {
+        "path": "scenes/battle/contaminated-core-1015.webp",
+        "bytes": 192968,
+        "count": 1
+      },
+      {
+        "path": "scenes/lab-ending/ending-1.webp",
+        "bytes": 192536,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cmtn1lbhbqi4.webp",
+        "bytes": 192366,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/infantry.webp",
+        "bytes": 191646,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/winter-expedition",
+        "bytes": 191542,
+        "count": 5
+      },
+      {
+        "path": "scenes/scene-fire-anime-v2.webp",
+        "bytes": 191192,
+        "count": 1
+      },
+      {
+        "path": "portraits/full/heixiang.webp",
+        "bytes": 190598,
+        "count": 1
+      },
+      {
+        "path": "scenes/courtyard-pond-v4.webp",
+        "bytes": 188050,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cmtn1ntxzoc4.webp",
+        "bytes": 186816,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-ev19-recode.webp",
+        "bytes": 186546,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-livingwater.webp",
+        "bytes": 185618,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-pickup-key-anime-v2.webp",
+        "bytes": 183918,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3sp-shadowbug.webp",
+        "bytes": 181108,
+        "count": 1
+      },
+      {
+        "path": "portraits/full/xingyue.webp",
+        "bytes": 180912,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/rest-heat-cell-style-1012-v2.webp",
+        "bytes": 179626,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-tt6-goldhammer.webp",
+        "bytes": 178954,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/shop-exchange-token-style-1012-v2.webp",
+        "bytes": 177964,
+        "count": 1
+      },
+      {
+        "path": "cards/hero-sacredrain.webp",
+        "bytes": 177832,
+        "count": 1
+      },
+      {
+        "path": "cards/hero-summoner.webp",
+        "bytes": 177550,
+        "count": 1
+      },
+      {
+        "path": "cards/unknown.webp",
+        "bytes": 176354,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-bulwark.webp",
+        "bytes": 172940,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/shop-exchange-token-palette-1012-v3.webp",
+        "bytes": 171656,
+        "count": 1
+      },
+      {
+        "path": "scenes/ui-loop-0925/prep-desk.webp",
+        "bytes": 171222,
+        "count": 1
+      },
+      {
+        "path": "cards/creature-tt8-curseimmune.webp",
+        "bytes": 169804,
+        "count": 1
+      },
+      {
+        "path": "cards/lore-raving.webp",
+        "bytes": 168346,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-tt6-systemsupply.webp",
+        "bytes": 168112,
+        "count": 1
+      },
+      {
+        "path": "cards/creature-tt8-nofocus.webp",
+        "bytes": 166676,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cc-ember-burst.webp",
+        "bytes": 166278,
+        "count": 1
+      },
+      {
+        "path": "cards/resource-material.webp",
+        "bytes": 165706,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-meteorstrong.webp",
+        "bytes": 165476,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-holyglow.webp",
+        "bytes": 165222,
+        "count": 1
+      },
+      {
+        "path": "cards/healing.webp",
+        "bytes": 165144,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-armup.webp",
+        "bytes": 162914,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-frozenight.webp",
+        "bytes": 162896,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt8-dragonblade.webp",
+        "bytes": 162536,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-holyheal.webp",
+        "bytes": 162432,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-demonbreaker.webp",
+        "bytes": 161890,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-holy-shield.webp",
+        "bytes": 161656,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cmtn28jv33wx.webp",
+        "bytes": 160716,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-ironphalanx.webp",
+        "bytes": 160680,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cc-mana-surge.webp",
+        "bytes": 158470,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-arcanebolt.webp",
+        "bytes": 157072,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-chest-large-anime-v1.webp",
+        "bytes": 156162,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-altar-anime-v2.webp",
+        "bytes": 156076,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-bladebloom.webp",
+        "bytes": 154696,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-cmtn1wnhhym.webp",
+        "bytes": 154604,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt2-turtlearmor.webp",
+        "bytes": 153796,
+        "count": 1
+      },
+      {
+        "path": "cards/equipment-utility.webp",
+        "bytes": 151334,
+        "count": 1
+      },
+      {
+        "path": "portraits/full/wu.webp",
+        "bytes": 150636,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/passage-transit-core-style-1012-v2.webp",
+        "bytes": 149218,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/event-record-fragments-style-1012-v2.webp",
+        "bytes": 149144,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-whirlwind.webp",
+        "bytes": 149112,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/map-atmosphere-is7-1012.webp",
+        "bytes": 148558,
+        "count": 1
+      },
+      {
+        "path": "cards/hero-warrior.webp",
+        "bytes": 147266,
+        "count": 1
+      },
+      {
+        "path": "cards/resource-key.webp",
+        "bytes": 146638,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/passage-transit-core-palette-1012-v3.webp",
+        "bytes": 146620,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-petal.webp",
+        "bytes": 146072,
+        "count": 1
+      },
+      {
+        "path": "cards/bound-shadow.webp",
+        "bytes": 145662,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3sp-devour.webp",
+        "bytes": 145368,
+        "count": 1
+      },
+      {
+        "path": "cards/wu-myriadswords.webp",
+        "bytes": 144382,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-pickup-rations-anime-v2.webp",
+        "bytes": 143736,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/battle-security-shard-style-1012-v2.webp",
+        "bytes": 142158,
+        "count": 1
+      },
+      {
+        "path": "cards/items/cmtmvq6ss84l.webp",
+        "bytes": 141564,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-cc-last-stand.webp",
+        "bytes": 141356,
+        "count": 1
+      },
+      {
+        "path": "cards/creature-tt8-healplus.webp",
+        "bytes": 141088,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-pickup-coin-anime-v2.webp",
+        "bytes": 140330,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-holy-water.webp",
+        "bytes": 140324,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-grass-armor.webp",
+        "bytes": 139890,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cmtn125e1nk0.webp",
+        "bytes": 139728,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-flame-storm.webp",
+        "bytes": 139714,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cmtn1p9vb5au.webp",
+        "bytes": 139450,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-marchrush.webp",
+        "bytes": 137670,
+        "count": 1
+      },
+      {
+        "path": "cards/expedition-starters/pierce.webp",
+        "bytes": 137136,
+        "count": 1
+      },
+      {
+        "path": "scenes/ui-loop-0925/rewards-convoy-fail.webp",
+        "bytes": 136234,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-armor-rush.webp",
+        "bytes": 135550,
+        "count": 1
+      },
+      {
+        "path": "cards/creature-tt8-energycap.webp",
+        "bytes": 135398,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-chest-anime-v2.webp",
+        "bytes": 135098,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-cc-cursed-blade.webp",
+        "bytes": 134888,
+        "count": 1
+      },
+      {
+        "path": "portraits/battle/wu.webp",
+        "bytes": 134200,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-abysscurse.webp",
+        "bytes": 133962,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cc-poison-burst.webp",
+        "bytes": 133768,
+        "count": 1
+      },
+      {
+        "path": "cards/creature-cmtn79743r2n.webp",
+        "bytes": 132498,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-chest-small-anime-v1.webp",
+        "bytes": 131822,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-cc-unmoved.webp",
+        "bytes": 131802,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-pickup-wood-anime-v2.webp",
+        "bytes": 131510,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-chest-medium-anime-v1.webp",
+        "bytes": 131346,
+        "count": 1
+      },
+      {
+        "path": "cards/curse-drain.webp",
+        "bytes": 131300,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/base-home-v1.webp",
+        "bytes": 130752,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/studio-expanded",
+        "bytes": 130052,
+        "count": 12
+      },
+      {
+        "path": "thumbs/cards/creature-cmtn79743r2n.webp",
+        "bytes": 129018,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-provoke.webp",
+        "bytes": 128694,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-sporewall.webp",
+        "bytes": 128062,
+        "count": 1
+      },
+      {
+        "path": "scenes/ui-loop-0925/rewards-convoy-success.webp",
+        "bytes": 127652,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-thunderblast.webp",
+        "bytes": 127140,
+        "count": 1
+      },
+      {
+        "path": "cards/equipment-armor.webp",
+        "bytes": 126550,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cmtn1r10xnl1.webp",
+        "bytes": 126080,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-energize.webp",
+        "bytes": 126042,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-double-shot.webp",
+        "bytes": 125988,
+        "count": 1
+      },
+      {
+        "path": "cards/curse-freeze.webp",
+        "bytes": 125346,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/battle-symbol-foreground-1012-v5.webp",
+        "bytes": 125126,
+        "count": 1
+      },
+      {
+        "path": "scenes/base-operations-v5.webp",
+        "bytes": 125046,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-chest-boss-anime-v1.webp",
+        "bytes": 124864,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3sp-shadowshot.webp",
+        "bytes": 123470,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/companion-cat.webp",
+        "bytes": 122060,
+        "count": 1
+      },
+      {
+        "path": "icons/chest.png",
+        "bytes": 121621,
+        "count": 1
+      },
+      {
+        "path": "cards/studio-expanded/tt3-grass-armor.webp",
+        "bytes": 121276,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/companion-falcon.webp",
+        "bytes": 121038,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-bloodpotion.webp",
+        "bytes": 120996,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt2-forestarrow.webp",
+        "bytes": 120488,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3eq-mistbox.webp",
+        "bytes": 120320,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-brush-1015/trail-b.webp",
+        "bytes": 119624,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-shop-anime-v2.webp",
+        "bytes": 118608,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-cc-rapid-fire.webp",
+        "bytes": 118284,
+        "count": 1
+      },
+      {
+        "path": "scenes/ui-loop-0925/expedition-banner.webp",
+        "bytes": 118232,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-thunderblast.webp",
+        "bytes": 117932,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-twinwater-mail.webp",
+        "bytes": 116328,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-ironcharge.webp",
+        "bytes": 116256,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-fullstrike.webp",
+        "bytes": 115830,
+        "count": 1
+      },
+      {
+        "path": "cards/wu-void.webp",
+        "bytes": 115644,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-ice-spike.webp",
+        "bytes": 115182,
+        "count": 1
+      },
+      {
+        "path": "cards/hero-abysssovereign.webp",
+        "bytes": 115042,
+        "count": 1
+      },
+      {
+        "path": "cards/dark-eclipse.webp",
+        "bytes": 114828,
+        "count": 1
+      },
+      {
+        "path": "icons/shop.png",
+        "bytes": 114245,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/shop-exchange-token-1011.webp",
+        "bytes": 114100,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-brush-1015/trail-c.webp",
+        "bytes": 113940,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-smite.webp",
+        "bytes": 113536,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-arrow-rain.webp",
+        "bytes": 113044,
+        "count": 1
+      },
+      {
+        "path": "scenes/entry/winter-arrival-1011-v1.webp",
+        "bytes": 112604,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cmtn1gfhczzj.webp",
+        "bytes": 111690,
+        "count": 1
+      },
+      {
+        "path": "cards/studio-expanded/tt8-heavensword.webp",
+        "bytes": 111530,
+        "count": 1
+      },
+      {
+        "path": "portraits/avatars/heixiang.webp",
+        "bytes": 111060,
+        "count": 1
+      },
+      {
+        "path": "cards/hero.webp",
+        "bytes": 110684,
+        "count": 1
+      },
+      {
+        "path": "cards/curse-venom.webp",
+        "bytes": 110154,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-chest-large-anime-v1.webp",
+        "bytes": 109926,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-recruit.webp",
+        "bytes": 109472,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-cc-chase-slash.webp",
+        "bytes": 108904,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-execute.webp",
+        "bytes": 108472,
+        "count": 1
+      },
+      {
+        "path": "portraits/battle/heixiang.webp",
+        "bytes": 108472,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-brush-1015/trail-a.webp",
+        "bytes": 108416,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-burnharvest.webp",
+        "bytes": 108038,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/resource-symbol-1015-v1.webp",
+        "bytes": 107562,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/creature-cmtn7err0a7.webp",
+        "bytes": 107498,
+        "count": 1
+      },
+      {
+        "path": "cards/curse-silence.webp",
+        "bytes": 107198,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-hitechrd.webp",
+        "bytes": 106802,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cc-double-boom.webp",
+        "bytes": 106402,
+        "count": 1
+      },
+      {
+        "path": "scenes/transition-boss-v1.webp",
+        "bytes": 106012,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/companion-penguin.webp",
+        "bytes": 105994,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/event-symbol-foreground-1012-v5.webp",
+        "bytes": 105828,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-barriermend.webp",
+        "bytes": 105476,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3sp-bloodstorm.webp",
+        "bytes": 105402,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-nature-form.webp",
+        "bytes": 104532,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-bloodpoison.webp",
+        "bytes": 104450,
+        "count": 1
+      },
+      {
+        "path": "cards/studio-expanded/tt3-twinwater-mail.webp",
+        "bytes": 104168,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-twinfireball.webp",
+        "bytes": 104126,
+        "count": 1
+      },
+      {
+        "path": "scenes/base-home-v4.webp",
+        "bytes": 103974,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cc-demon.webp",
+        "bytes": 103868,
+        "count": 1
+      },
+      {
+        "path": "cards/hero-priest.webp",
+        "bytes": 103666,
+        "count": 1
+      },
+      {
+        "path": "cards/expedition-starters/fireball.webp",
+        "bytes": 103648,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/companion-dog.webp",
+        "bytes": 103532,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-wave-slash.webp",
+        "bytes": 103212,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt8-curse2.webp",
+        "bytes": 103200,
+        "count": 1
+      },
+      {
+        "path": "portraits/battle/xingyue.webp",
+        "bytes": 102702,
+        "count": 1
+      },
+      {
+        "path": "cards/creature-cmtn7err0a7.webp",
+        "bytes": 102362,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-firm-barrier.webp",
+        "bytes": 102294,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-silence.webp",
+        "bytes": 102230,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-tt6-goldmine-1013-v2.webp",
+        "bytes": 102098,
+        "count": 1
+      },
+      {
+        "path": "cards/hero-forbidden.webp",
+        "bytes": 101998,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-treasure-hunt.webp",
+        "bytes": 99640,
+        "count": 1
+      },
+      {
+        "path": "scenes/event-last-lamp-1013-v1.webp",
+        "bytes": 99106,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/passage-transit-core-1011.webp",
+        "bytes": 98528,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-cmtn0xt0zr7.webp",
+        "bytes": 98518,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/event-record-fragments-1011.webp",
+        "bytes": 98378,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-backupcell.webp",
+        "bytes": 98242,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-thornfield.webp",
+        "bytes": 97948,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt8-curse4.webp",
+        "bytes": 97694,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/shop-symbol-foreground-1012-v5.webp",
+        "bytes": 97304,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-chest-medium-anime-v1.webp",
+        "bytes": 97124,
+        "count": 1
+      },
+      {
+        "path": "scenes/transition-field-v1.webp",
+        "bytes": 96750,
+        "count": 1
+      },
+      {
+        "path": "cards/wu-heavensword.webp",
+        "bytes": 96748,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-chaos-eye.webp",
+        "bytes": 95782,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-felguard.webp",
+        "bytes": 95376,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-chest-boss-anime-v1.webp",
+        "bytes": 95232,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt2-apollo.webp",
+        "bytes": 95220,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-nuke-ray.webp",
+        "bytes": 94466,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/passage-symbol-foreground-1012-v5.webp",
+        "bytes": 93940,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cc-lava-blast.webp",
+        "bytes": 93494,
+        "count": 1
+      },
+      {
+        "path": "scenes/lab-ending/ending-2.webp",
+        "bytes": 93490,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-chest-class-anime-v1.webp",
+        "bytes": 93464,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt8-curse3.webp",
+        "bytes": 92638,
+        "count": 1
+      },
+      {
+        "path": "scenes/lab-ending/ending-3.webp",
+        "bytes": 92444,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-chest-small-anime-v1.webp",
+        "bytes": 91964,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-dig-treasure.webp",
+        "bytes": 91566,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-light-mail.webp",
+        "bytes": 91104,
+        "count": 1
+      },
+      {
+        "path": "scenes/transition-battle-v1.webp",
+        "bytes": 91104,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-basicdev.webp",
+        "bytes": 90808,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt7-elementstorm.webp",
+        "bytes": 90190,
+        "count": 1
+      },
+      {
+        "path": "portraits/battle/baita.webp",
+        "bytes": 90190,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-reverse-bow.webp",
+        "bytes": 89634,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt2-jianghu.webp",
+        "bytes": 88972,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt2-piercearrow.webp",
+        "bytes": 88184,
+        "count": 1
+      },
+      {
+        "path": "scenes/entry/winter-arrival-1011-v2.webp",
+        "bytes": 88082,
+        "count": 1
+      },
+      {
+        "path": "icons/shop.svg",
+        "bytes": 87755,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-chain-lightning.webp",
+        "bytes": 87282,
+        "count": 1
+      },
+      {
+        "path": "portraits/allies/federal-shooter-v1.webp",
+        "bytes": 87082,
+        "count": 1
+      },
+      {
+        "path": "scenes/ui-loop-0925/cls2-stage.webp",
+        "bytes": 86586,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/wood-bundle.webp",
+        "bytes": 85144,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt7-arcanescroll.webp",
+        "bytes": 85072,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-saturate.webp",
+        "bytes": 84348,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cc-rot-seed.webp",
+        "bytes": 83156,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/blank-symbol-foreground-1013-v1.webp",
+        "bytes": 82836,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/coin-copper.webp",
+        "bytes": 82386,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-elemburst.webp",
+        "bytes": 82318,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/shuffle-1.ogg",
+        "bytes": 82048,
+        "count": 1
+      },
+      {
+        "path": "scenes/scene-extract-anime-v2.webp",
+        "bytes": 81954,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/ration.webp",
+        "bytes": 81554,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/coin-gold.webp",
+        "bytes": 81310,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/wood-lots.webp",
+        "bytes": 80804,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt2-pearlbox.webp",
+        "bytes": 80764,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-cmtn2jc142dj.webp",
+        "bytes": 80518,
+        "count": 1
+      },
+      {
+        "path": "cards/studio-expanded/tt3-wolf-bow.webp",
+        "bytes": 80360,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/rest-heat-cell-1011.webp",
+        "bytes": 80176,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-fate-wheel.webp",
+        "bytes": 79746,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt3-mixed-potion.webp",
+        "bytes": 79714,
+        "count": 1
+      },
+      {
+        "path": "cards/equipment-weapon.webp",
+        "bytes": 79688,
+        "count": 1
+      },
+      {
+        "path": "icons/fire.png",
+        "bytes": 79262,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/ration-std.webp",
+        "bytes": 79050,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-qi-wave.webp",
+        "bytes": 78764,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3eq-boiler.webp",
+        "bytes": 78408,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-cmtn233trmeg.webp",
+        "bytes": 77676,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt2-shoot.webp",
+        "bytes": 77274,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt2-treasuremap.webp",
+        "bytes": 76436,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-wave-slash.webp",
+        "bytes": 76268,
+        "count": 1
+      },
+      {
+        "path": "sfx/switch4.wav",
+        "bytes": 76110,
+        "count": 1
+      },
+      {
+        "path": "cards/hero-sacredsword.webp",
+        "bytes": 75788,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt7-naturestaff.webp",
+        "bytes": 75340,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/fire-symbol-foreground-1012-v5.webp",
+        "bytes": 75156,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt2-wreck.webp",
+        "bytes": 75038,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt8-curse1.webp",
+        "bytes": 75020,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/companion-robot.webp",
+        "bytes": 74566,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cmtna0nb1yxt.webp",
+        "bytes": 74274,
+        "count": 1
+      },
+      {
+        "path": "cards/expedition-starters/basic-attack.webp",
+        "bytes": 73920,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-magic-lamp.webp",
+        "bytes": 73606,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-wolf-bow.webp",
+        "bytes": 73274,
+        "count": 1
+      },
+      {
+        "path": "cards/studio-expanded/tt3-fate-wheel.webp",
+        "bytes": 73148,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/coin-silver.webp",
+        "bytes": 73118,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/companion-fire.webp",
+        "bytes": 73100,
+        "count": 1
+      },
+      {
+        "path": "portraits/allies/federal-patrol-v1.webp",
+        "bytes": 72236,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/supply-symbol-foreground-1012-v5.webp",
+        "bytes": 72068,
+        "count": 1
+      },
+      {
+        "path": "cards/consumable.webp",
+        "bytes": 71896,
+        "count": 1
+      },
+      {
+        "path": "scenes/transition-field-v2.webp",
+        "bytes": 71608,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-chest-class-anime-v1.webp",
+        "bytes": 71490,
+        "count": 1
+      },
+      {
+        "path": "icons/chest.svg",
+        "bytes": 71376,
+        "count": 1
+      },
+      {
+        "path": "portraits/allies/sealed-limb-v1.webp",
+        "bytes": 71314,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/ration-double.webp",
+        "bytes": 71214,
+        "count": 1
+      },
+      {
+        "path": "scenes/transition-camp-v1.webp",
+        "bytes": 70900,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-fatal-pierce.webp",
+        "bytes": 70440,
+        "count": 1
+      },
+      {
+        "path": "cards/studio-expanded/tt7-arcanescroll.webp",
+        "bytes": 70130,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/key.webp",
+        "bytes": 69742,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-purify-arrow.webp",
+        "bytes": 69518,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-sapper-bomb.webp",
+        "bytes": 69448,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-ghostblade.webp",
+        "bytes": 69352,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/keys-bunch.webp",
+        "bytes": 68916,
+        "count": 1
+      },
+      {
+        "path": "scenes/transition-photo-v1.webp",
+        "bytes": 68910,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-chaos-eye.webp",
+        "bytes": 68594,
+        "count": 1
+      },
+      {
+        "path": "cards/studio-expanded/tt12-raygun.webp",
+        "bytes": 68496,
+        "count": 1
+      },
+      {
+        "path": "cards/studio-expanded/tt2-frostsword.webp",
+        "bytes": 68470,
+        "count": 1
+      },
+      {
+        "path": "scenes/entry/threshold-cardstyle-1011-v1.webp",
+        "bytes": 68470,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-nodes/battle-security-shard-1011.webp",
+        "bytes": 68314,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/additions",
+        "bytes": 67253,
+        "count": 5
+      },
+      {
+        "path": "cards/martial-tt2-block.webp",
+        "bytes": 66564,
+        "count": 1
+      },
+      {
+        "path": "icons/door.svg",
+        "bytes": 66414,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-magicfind.webp",
+        "bytes": 66342,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-cmtn1epgt20j.webp",
+        "bytes": 66186,
+        "count": 1
+      },
+      {
+        "path": "icons/event.png",
+        "bytes": 65551,
+        "count": 1
+      },
+      {
+        "path": "sfx/switch3.wav",
+        "bytes": 64846,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt2-comboarrow.webp",
+        "bytes": 64732,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/econpack.webp",
+        "bytes": 64642,
+        "count": 1
+      },
+      {
+        "path": "icons/player.svg",
+        "bytes": 64521,
+        "count": 1
+      },
+      {
+        "path": "sfx/switch6.wav",
+        "bytes": 64334,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-freezeray.webp",
+        "bytes": 63748,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-hold-fast.webp",
+        "bytes": 63498,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/creature-cmtn6ulm4boj.webp",
+        "bytes": 63140,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-raydragon.webp",
+        "bytes": 62916,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-fly-arrowhawk.webp",
+        "bytes": 61896,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/resource-valuables.webp",
+        "bytes": 61548,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-breakthrough.webp",
+        "bytes": 61528,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-infectray.webp",
+        "bytes": 61438,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-fireball.webp",
+        "bytes": 61254,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-reshot.webp",
+        "bytes": 60892,
+        "count": 1
+      },
+      {
+        "path": "scenes/winter-expedition/outskirts.webp",
+        "bytes": 60624,
+        "count": 1
+      },
+      {
+        "path": "cards/creature-cmtn6ulm4boj.webp",
+        "bytes": 60596,
+        "count": 1
+      },
+      {
+        "path": "scenes/winter-expedition/greenhouse.webp",
+        "bytes": 60490,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-deep-diary.webp",
+        "bytes": 60180,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt12-raygun.webp",
+        "bytes": 59680,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/wood.webp",
+        "bytes": 59026,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3sp-dodge.webp",
+        "bytes": 58472,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-blooddrinker.webp",
+        "bytes": 58146,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-flux-slash.webp",
+        "bytes": 57712,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt4-shine-token.webp",
+        "bytes": 57676,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3eq-boiler.webp",
+        "bytes": 57272,
+        "count": 1
+      },
+      {
+        "path": "sfx/switch1.wav",
+        "bytes": 57166,
+        "count": 1
+      },
+      {
+        "path": "sfx/switch2.wav",
+        "bytes": 56142,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell.webp",
+        "bytes": 55904,
+        "count": 1
+      },
+      {
+        "path": "icons/altar.svg",
+        "bytes": 55650,
+        "count": 1
+      },
+      {
+        "path": "sfx/switch5.wav",
+        "bytes": 55630,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/garnet-marble.webp",
+        "bytes": 55290,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt5-galaxy-voyage.webp",
+        "bytes": 55042,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/pet-egg.webp",
+        "bytes": 54882,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt-token-gold.webp",
+        "bytes": 54774,
+        "count": 1
+      },
+      {
+        "path": "icons/fire.svg",
+        "bytes": 54084,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt8-heavensword.webp",
+        "bytes": 53908,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-thundergrudge.webp",
+        "bytes": 53486,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-brush-1015/fire.webp",
+        "bytes": 52952,
+        "count": 1
+      },
+      {
+        "path": "icons/boss.svg",
+        "bytes": 52769,
+        "count": 1
+      },
+      {
+        "path": "cards/resources/diamond.webp",
+        "bytes": 52652,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-brush-1015/shop.webp",
+        "bytes": 52390,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt2-frostsword.webp",
+        "bytes": 52230,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3sp-silverthorn.webp",
+        "bytes": 51960,
+        "count": 1
+      },
+      {
+        "path": "cards/studio-expanded/tt3-blooddrinker.webp",
+        "bytes": 51392,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/rations.webp",
+        "bytes": 51092,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-cmtn1i64j7y7.webp",
+        "bytes": 50786,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt3-demon-potion.webp",
+        "bytes": 50780,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-deep-seal.webp",
+        "bytes": 50652,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-element-seal.webp",
+        "bytes": 50382,
+        "count": 1
+      },
+      {
+        "path": "scenes/transition-camp-v2.webp",
+        "bytes": 50014,
+        "count": 1
+      },
+      {
+        "path": "scenes/winter-expedition/core.webp",
+        "bytes": 49952,
+        "count": 1
+      },
+      {
+        "path": "scenes/winter-expedition/sanctuary.webp",
+        "bytes": 49856,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3sp-flowerzhen.webp",
+        "bytes": 49838,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt2-swiftarrow.webp",
+        "bytes": 49694,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-sneak.webp",
+        "bytes": 49586,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-throwblade.webp",
+        "bytes": 49356,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-brush-1015/event.webp",
+        "bytes": 47946,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-chargeray.webp",
+        "bytes": 47326,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-bandage.webp",
+        "bytes": 47216,
+        "count": 1
+      },
+      {
+        "path": "cards/studio-expanded/tt3-staff.webp",
+        "bytes": 46754,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-brush-1015/battle.webp",
+        "bytes": 46598,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-skewer.webp",
+        "bytes": 46476,
+        "count": 1
+      },
+      {
+        "path": "cards/studio-expanded/tt8-demonslay.webp",
+        "bytes": 45978,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-brush-1015/resource.webp",
+        "bytes": 45954,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/expedition-starters",
+        "bytes": 45750,
+        "count": 4
+      },
+      {
+        "path": "cards/spell-tt3sp-magicoil.webp",
+        "bytes": 45580,
+        "count": 1
+      },
+      {
+        "path": "scenes/transition-achievement-v2.webp",
+        "bytes": 45508,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt3-blue-potion.webp",
+        "bytes": 45062,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-brush-1015/passage.webp",
+        "bytes": 44968,
+        "count": 1
+      },
+      {
+        "path": "cards/hero-sword.webp",
+        "bytes": 44924,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt7-talisman.webp",
+        "bytes": 44914,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-goldencicada.webp",
+        "bytes": 44820,
+        "count": 1
+      },
+      {
+        "path": "cards/expedition-starters/staff.webp",
+        "bytes": 44662,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-master-staff.webp",
+        "bytes": 44500,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-brush-1015/altar.webp",
+        "bytes": 44474,
+        "count": 1
+      },
+      {
+        "path": "icons/battle.png",
+        "bytes": 44313,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt3-savior-elixir.webp",
+        "bytes": 43046,
+        "count": 1
+      },
+      {
+        "path": "cards/studio-expanded/tt8-archdemon.webp",
+        "bytes": 42988,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-deep-seal.webp",
+        "bytes": 42898,
+        "count": 1
+      },
+      {
+        "path": "icons/entrance.svg",
+        "bytes": 42825,
+        "count": 1
+      },
+      {
+        "path": "scenes/transition-photo-v2.webp",
+        "bytes": 42702,
+        "count": 1
+      },
+      {
+        "path": "scenes/camp-transition-city-v1.webp",
+        "bytes": 42692,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-holy-staff.webp",
+        "bytes": 42650,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt3-mystery-potion.webp",
+        "bytes": 42474,
+        "count": 1
+      },
+      {
+        "path": "scenes/transition-boss-v2.webp",
+        "bytes": 42416,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-swordimmortal.webp",
+        "bytes": 42246,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/resource-key.webp",
+        "bytes": 42174,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/resource-material.webp",
+        "bytes": 42100,
+        "count": 1
+      },
+      {
+        "path": "sfx/rollover1.wav",
+        "bytes": 41806,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-stealth.webp",
+        "bytes": 41548,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-imitate.webp",
+        "bytes": 41340,
+        "count": 1
+      },
+      {
+        "path": "scenes/map-brush-1015/supply.webp",
+        "bytes": 41252,
+        "count": 1
+      },
+      {
+        "path": "icons/extract.svg",
+        "bytes": 41121,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/healing.webp",
+        "bytes": 41058,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/unknown.webp",
+        "bytes": 41010,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-skewer.webp",
+        "bytes": 40898,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-frost-slash.webp",
+        "bytes": 40714,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt5-galaxy-voyage.webp",
+        "bytes": 40486,
+        "count": 1
+      },
+      {
+        "path": "scenes/winter-expedition/supply-room.webp",
+        "bytes": 40304,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-toxin.webp",
+        "bytes": 39942,
+        "count": 1
+      },
+      {
+        "path": "icons/battle.svg",
+        "bytes": 39888,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-silver-runesword.webp",
+        "bytes": 39794,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-grope.webp",
+        "bytes": 39682,
+        "count": 1
+      },
+      {
+        "path": "cards/hero-mage.webp",
+        "bytes": 39372,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-azure-sword.webp",
+        "bytes": 39238,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-crimson-pouch.webp",
+        "bytes": 39202,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-venom-arrow.webp",
+        "bytes": 38142,
+        "count": 1
+      },
+      {
+        "path": "icons/key.svg",
+        "bytes": 38128,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v12/coin.webp",
+        "bytes": 37876,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt7-meteorrain.webp",
+        "bytes": 37134,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-immortal-blade.webp",
+        "bytes": 37124,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/expedition.webp",
+        "bytes": 36948,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v12/rations.webp",
+        "bytes": 36678,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/shop.webp",
+        "bytes": 36562,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/warehouse.webp",
+        "bytes": 36182,
+        "count": 1
+      },
+      {
+        "path": "icons/event.svg",
+        "bytes": 35817,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt3-houyi-potion.webp",
+        "bytes": 34960,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equipment-utility.webp",
+        "bytes": 34532,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt4-smoke-bomb.webp",
+        "bytes": 33968,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v12/wood.webp",
+        "bytes": 33768,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/personnel.webp",
+        "bytes": 33640,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/wood.webp",
+        "bytes": 33590,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-silver-runesword.webp",
+        "bytes": 33184,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cmtn1ntxzoc4.webp",
+        "bytes": 33002,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt3-mind-potion.webp",
+        "bytes": 32994,
+        "count": 1
+      },
+      {
+        "path": "cards/items/starter-emergency-bandage.webp",
+        "bytes": 32968,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/coin.webp",
+        "bytes": 32950,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equipment-armor.webp",
+        "bytes": 32918,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-master-staff.webp",
+        "bytes": 32344,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/archive.webp",
+        "bytes": 32222,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-life-arrow.webp",
+        "bytes": 32032,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-firecracker.webp",
+        "bytes": 31950,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3-blood-arrow.webp",
+        "bytes": 31704,
+        "count": 1
+      },
+      {
+        "path": "cards/hero-descend.webp",
+        "bytes": 31676,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-cmtn0pbkmnvc.webp",
+        "bytes": 31578,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt3wu-shike.webp",
+        "bytes": 31352,
+        "count": 1
+      },
+      {
+        "path": "scenes/transition-battle-v2.webp",
+        "bytes": 31066,
+        "count": 1
+      },
+      {
+        "path": "sfx/rollover6.wav",
+        "bytes": 31054,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt-crystal.webp",
+        "bytes": 31028,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt3-iceheart-potion.webp",
+        "bytes": 31016,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-tt6-airdrop.webp",
+        "bytes": 30826,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/hero.webp",
+        "bytes": 30502,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/creature-tt8-curseimmune.webp",
+        "bytes": 30496,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/creature-tt8-nofocus.webp",
+        "bytes": 30336,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/hub-wallpaper.webp",
+        "bytes": 30094,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-tt6-goldmine.webp",
+        "bytes": 29266,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-frostfall.webp",
+        "bytes": 29236,
+        "count": 1
+      },
+      {
+        "path": "cards/items/builtin-fuyuanyao.webp",
+        "bytes": 28726,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/coin.png",
+        "bytes": 28404,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v12/key.webp",
+        "bytes": 28378,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-bandits-anime-v2.webp",
+        "bytes": 28166,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-cc-dual-wield.webp",
+        "bytes": 28046,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/hero-volcano.webp",
+        "bytes": 27728,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-ev19-pearlbox.webp",
+        "bytes": 27436,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/hero-sacredrain.webp",
+        "bytes": 27386,
+        "count": 1
+      },
+      {
+        "path": "cards/martial-tt2-bloodblade.webp",
+        "bytes": 27272,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-cmtn7qttxqo4.webp",
+        "bytes": 27080,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-ev19-classchest.webp",
+        "bytes": 26682,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt2-venomstaff.webp",
+        "bytes": 26284,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-maxsupply.webp",
+        "bytes": 26284,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt3sp-doom.webp",
+        "bytes": 26182,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-immortal-blade.webp",
+        "bytes": 25844,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt3-python-potion.webp",
+        "bytes": 25602,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-ev19-fireballs.webp",
+        "bytes": 25540,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-frozenight.webp",
+        "bytes": 25516,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-ev19-quartermaster.webp",
+        "bytes": 25470,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/key.webp",
+        "bytes": 25462,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/layer3-knight.webp",
+        "bytes": 25392,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3sp-shadowbug.webp",
+        "bytes": 25196,
+        "count": 1
+      },
+      {
+        "path": "icons/base-v3/rune.webp",
+        "bytes": 25160,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/creature-tt8-energycap.webp",
+        "bytes": 25100,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cmtn1lbhbqi4.webp",
+        "bytes": 25088,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cmtn1p9vb5au.webp",
+        "bytes": 24868,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/hero-priest.webp",
+        "bytes": 24802,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt4-woodify.webp",
+        "bytes": 24788,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-tt6-mystery.webp",
+        "bytes": 24782,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-noon-duel.webp",
+        "bytes": 24742,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/hero-forbidden.webp",
+        "bytes": 24504,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-cmtn1wnhhym.webp",
+        "bytes": 24380,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-bladebloom.webp",
+        "bytes": 24348,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt7-darkfort.webp",
+        "bytes": 24332,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-stratagem.webp",
+        "bytes": 24240,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/cardPlace-3.ogg",
+        "bytes": 24230,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-fire-anime-v2.webp",
+        "bytes": 24132,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-ev19-potions.webp",
+        "bytes": 23960,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3sp-devour.webp",
+        "bytes": 23610,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-tt6-relief.webp",
+        "bytes": 23396,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/hero-summoner.webp",
+        "bytes": 23364,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt8-curse3.webp",
+        "bytes": 23322,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-arcanebolt.webp",
+        "bytes": 23188,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt8-curse4.webp",
+        "bytes": 23126,
+        "count": 1
+      },
+      {
+        "path": "sfx/rollover5.wav",
+        "bytes": 22862,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt8-curse2.webp",
+        "bytes": 22768,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/lore-raving.webp",
+        "bytes": 22718,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/endfield-ruins.webp",
+        "bytes": 22630,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-meteorstrong.webp",
+        "bytes": 22570,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-armor-rush.webp",
+        "bytes": 22382,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/creature-tt8-healplus.webp",
+        "bytes": 22132,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-ev19-vital.webp",
+        "bytes": 22072,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/cardPlace-1.ogg",
+        "bytes": 21967,
+        "count": 1
+      },
+      {
+        "path": "sfx/rollover4.wav",
+        "bytes": 21838,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-tt6-chestdraw.webp",
+        "bytes": 21770,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt-jinchuangyao.webp",
+        "bytes": 21580,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/wu-myriadswords.webp",
+        "bytes": 21532,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-longsword.webp",
+        "bytes": 21530,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-energize.webp",
+        "bytes": 21528,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cc-mana-surge.webp",
+        "bytes": 21506,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt-medneedle.webp",
+        "bytes": 21420,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-ev19-arrows.webp",
+        "bytes": 21312,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt3-fireball.webp",
+        "bytes": 21156,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-tt6-demondeal.webp",
+        "bytes": 21100,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-petal.webp",
+        "bytes": 21092,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-ev19-recode.webp",
+        "bytes": 20966,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-tt6-systemsupply.webp",
+        "bytes": 20832,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/bound-shadow.webp",
+        "bytes": 20698,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-holyheal.webp",
+        "bytes": 20640,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-demonbreaker.webp",
+        "bytes": 20604,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-tt6-goldhammer.webp",
+        "bytes": 20414,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3eq-mistbox.webp",
+        "bytes": 20336,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-livingwater.webp",
+        "bytes": 20222,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cmtn28jv33wx.webp",
+        "bytes": 20112,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/cardPlace-4.ogg",
+        "bytes": 19923,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/event-ev19-gamble.webp",
+        "bytes": 19910,
+        "count": 1
+      },
+      {
+        "path": "cards/items/tt3-turnabout-potion.webp",
+        "bytes": 19896,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cc-lava-blast.webp",
+        "bytes": 19476,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-holyglow.webp",
+        "bytes": 19432,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-bloodpotion.webp",
+        "bytes": 19364,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/hero-warrior.webp",
+        "bytes": 19080,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-armup.webp",
+        "bytes": 19050,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/dark-eclipse.webp",
+        "bytes": 18920,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cmtn125e1nk0.webp",
+        "bytes": 18920,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/draw-3.ogg",
+        "bytes": 18887,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-grass-armor.webp",
+        "bytes": 18848,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-recruit.webp",
+        "bytes": 18688,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/endfield-ruins.jpg",
+        "bytes": 18680,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-bulwark.webp",
+        "bytes": 18574,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/draw-2.ogg",
+        "bytes": 18444,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-flame-storm.webp",
+        "bytes": 18256,
+        "count": 1
+      },
+      {
+        "path": "sfx/click1.wav",
+        "bytes": 18254,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt8-demonslay.webp",
+        "bytes": 18100,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-ironphalanx.webp",
+        "bytes": 18014,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-provoke.webp",
+        "bytes": 17994,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-thornfield.webp",
+        "bytes": 17976,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-whirlwind.webp",
+        "bytes": 17962,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-chest-anime-v2.webp",
+        "bytes": 17862,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/curse-freeze.webp",
+        "bytes": 17820,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/battle-street-day-anime-v1.webp",
+        "bytes": 17746,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/draw-1.ogg",
+        "bytes": 17704,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-firm-barrier.webp",
+        "bytes": 17688,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-pickup-coin-anime-v2.webp",
+        "bytes": 17684,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/gear.png",
+        "bytes": 17639,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/battle-street-amber-anime-v1.webp",
+        "bytes": 17594,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cc-ember-burst.webp",
+        "bytes": 17554,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equipment-weapon.webp",
+        "bytes": 17514,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/curse-drain.webp",
+        "bytes": 17408,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt8-curse1.webp",
+        "bytes": 17406,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-arrow-rain.webp",
+        "bytes": 17378,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/heal-2.ogg",
+        "bytes": 17367,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-ghostblade.webp",
+        "bytes": 17364,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt8-dragonblade.webp",
+        "bytes": 17356,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-abysscurse.webp",
+        "bytes": 17298,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-double-shot.webp",
+        "bytes": 17184,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-sporewall.webp",
+        "bytes": 17114,
+        "count": 1
+      },
+      {
+        "path": "sfx/jsfxr/levelup.wav",
+        "bytes": 17046,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-staff.webp",
+        "bytes": 16954,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt8-archdemon.webp",
+        "bytes": 16904,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-altar-anime-v2.webp",
+        "bytes": 16808,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-ice-spike.webp",
+        "bytes": 16690,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/hero-abysssovereign.webp",
+        "bytes": 16654,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-execute.webp",
+        "bytes": 16630,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-silence.webp",
+        "bytes": 16628,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-holy-shield.webp",
+        "bytes": 16522,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt2-turtlearmor.webp",
+        "bytes": 16514,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-holy-water.webp",
+        "bytes": 16450,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3sp-shadowshot.webp",
+        "bytes": 16420,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-twinwater-mail.webp",
+        "bytes": 16416,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-raydragon.webp",
+        "bytes": 16232,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/curse-venom.webp",
+        "bytes": 16224,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-door-anime-v2.webp",
+        "bytes": 16078,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/consumable.webp",
+        "bytes": 16074,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt2-apollo.webp",
+        "bytes": 15998,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cc-demon.webp",
+        "bytes": 15854,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cmtn1gfhczzj.webp",
+        "bytes": 15854,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-cc-last-stand.webp",
+        "bytes": 15774,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cmtn1r10xnl1.webp",
+        "bytes": 15764,
+        "count": 1
+      },
+      {
+        "path": "cards/equip-tt3-staff.webp",
+        "bytes": 15740,
+        "count": 1
+      },
+      {
+        "path": "sfx/click3.wav",
+        "bytes": 15694,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-hitechrd.webp",
+        "bytes": 15638,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/defeat-1.ogg",
+        "bytes": 15591,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-twinfireball.webp",
+        "bytes": 15556,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-throwblade.webp",
+        "bytes": 15554,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-cc-cursed-blade.webp",
+        "bytes": 15550,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt2-forestarrow.webp",
+        "bytes": 15500,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-elementstorm.webp",
+        "bytes": 15500,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/curse-silence.webp",
+        "bytes": 15458,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/cardPlace-2.ogg",
+        "bytes": 15423,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-nature-form.webp",
+        "bytes": 15402,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-shop-anime-v2.webp",
+        "bytes": 15250,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-marchrush.webp",
+        "bytes": 15216,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-pickup-rations-anime-v2.webp",
+        "bytes": 15208,
+        "count": 1
+      },
+      {
+        "path": "sfx/rollover3.wav",
+        "bytes": 15182,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-cmtn0xt0zr7.webp",
+        "bytes": 15176,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/draw-4.ogg",
+        "bytes": 15124,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3sp-bloodstorm.webp",
+        "bytes": 14936,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-cc-unmoved.webp",
+        "bytes": 14528,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cc-poison-burst.webp",
+        "bytes": 14492,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-barriermend.webp",
+        "bytes": 14458,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt2-piercearrow.webp",
+        "bytes": 14352,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/legend-2.ogg",
+        "bytes": 14047,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-burnharvest.webp",
+        "bytes": 13866,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt2-pearlbox.webp",
+        "bytes": 13862,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt7-naturestaff.webp",
+        "bytes": 13822,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-dig-treasure.webp",
+        "bytes": 13746,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-cc-chase-slash.webp",
+        "bytes": 13728,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-backupcell.webp",
+        "bytes": 13600,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt2-block.webp",
+        "bytes": 13516,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-reverse-bow.webp",
+        "bytes": 13498,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-thundergrudge.webp",
+        "bytes": 13462,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-cmtn2jc142dj.webp",
+        "bytes": 13416,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt2-jianghu.webp",
+        "bytes": 13280,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt7-smite.webp",
+        "bytes": 13270,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/wu-heavensword.webp",
+        "bytes": 13248,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/victory-2.ogg",
+        "bytes": 13191,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-cc-rapid-fire.webp",
+        "bytes": 13144,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/battle-city-night-anime-v1.webp",
+        "bytes": 13070,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt2-wreck.webp",
+        "bytes": 12980,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-bloodpoison.webp",
+        "bytes": 12972,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cc-double-boom.webp",
+        "bytes": 12846,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-treasure-hunt.webp",
+        "bytes": 12670,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-nuke-ray.webp",
+        "bytes": 12658,
+        "count": 1
+      },
+      {
+        "path": "sfx/jsfxr/hit.wav",
+        "bytes": 12545,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-fullstrike.webp",
+        "bytes": 12480,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/wu-void.webp",
+        "bytes": 12350,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt2-treasuremap.webp",
+        "bytes": 12318,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-cmtn1i64j7y7.webp",
+        "bytes": 12130,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-goldencicada.webp",
+        "bytes": 12112,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt8-heavensword.webp",
+        "bytes": 12068,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-ironcharge.webp",
+        "bytes": 12060,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-qi-wave.webp",
+        "bytes": 12058,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-sneak.webp",
+        "bytes": 12014,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/reveal-3.ogg",
+        "bytes": 12013,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-magic-lamp.webp",
+        "bytes": 11938,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-basicdev.webp",
+        "bytes": 11928,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-fate-wheel.webp",
+        "bytes": 11766,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt7-arcanescroll.webp",
+        "bytes": 11656,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-pickup-key-anime-v2.webp",
+        "bytes": 11604,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-felguard.webp",
+        "bytes": 11596,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/victory-1.ogg",
+        "bytes": 11572,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/legend-1.ogg",
+        "bytes": 11508,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-chain-lightning.webp",
+        "bytes": 11438,
+        "count": 1
+      },
+      {
+        "path": "sfx/rollover2.wav",
+        "bytes": 11086,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-sapper-bomb.webp",
+        "bytes": 11030,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-pickup-wood-anime-v2.webp",
+        "bytes": 10974,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-saturate.webp",
+        "bytes": 10950,
+        "count": 1
+      },
+      {
+        "path": "cards/spell-tt12-unstableray.webp",
+        "bytes": 10662,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-cmtn233trmeg.webp",
+        "bytes": 10514,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt2-comboarrow.webp",
+        "bytes": 10490,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-light-mail.webp",
+        "bytes": 10488,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-elemburst.webp",
+        "bytes": 10400,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/hero-sacredsword.webp",
+        "bytes": 10294,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-stealth.webp",
+        "bytes": 10254,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-imitate.webp",
+        "bytes": 10180,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt2-shoot.webp",
+        "bytes": 10156,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cmtna0nb1yxt.webp",
+        "bytes": 10082,
+        "count": 1
+      },
+      {
+        "path": "sfx/click2.wav",
+        "bytes": 10062,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-swordimmortal.webp",
+        "bytes": 9960,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cc-rot-seed.webp",
+        "bytes": 9766,
+        "count": 1
+      },
+      {
+        "path": "sfx/jsfxr/error.wav",
+        "bytes": 9686,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-purify-arrow.webp",
+        "bytes": 9674,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/hero-sword.webp",
+        "bytes": 9580,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/chestburst-3.ogg",
+        "bytes": 9573,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/hurt-2.ogg",
+        "bytes": 9560,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/hit-2.ogg",
+        "bytes": 9440,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-magicfind.webp",
+        "bytes": 9426,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-hold-fast.webp",
+        "bytes": 9414,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/chestshake-1.ogg",
+        "bytes": 9352,
+        "count": 1
+      },
+      {
+        "path": "thumbs/scenes/scene-extract-anime-v2.webp",
+        "bytes": 9348,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/hurt-1.ogg",
+        "bytes": 9247,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-deep-diary.webp",
+        "bytes": 9184,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/chestburst-2.ogg",
+        "bytes": 9087,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt7-meteorrain.webp",
+        "bytes": 9056,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-firecracker.webp",
+        "bytes": 8880,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-fly-arrowhawk.webp",
+        "bytes": 8808,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-infectray.webp",
+        "bytes": 8790,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/hero-mage.webp",
+        "bytes": 8788,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-freezeray.webp",
+        "bytes": 8578,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-flux-slash.webp",
+        "bytes": 8546,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-wolf-bow.webp",
+        "bytes": 8538,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-breakthrough.webp",
+        "bytes": 8456,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/chestshake-2.ogg",
+        "bytes": 8397,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/legend-3.ogg",
+        "bytes": 8372,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/chestburst-1.ogg",
+        "bytes": 8348,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-blooddrinker.webp",
+        "bytes": 8334,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-fatal-pierce.webp",
+        "bytes": 8048,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-cmtn1epgt20j.webp",
+        "bytes": 8036,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt12-raygun.webp",
+        "bytes": 8010,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/heal-1.ogg",
+        "bytes": 7822,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/settings-gear-r2.webp",
+        "bytes": 7822,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/hit-1.ogg",
+        "bytes": 7816,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-reshot.webp",
+        "bytes": 7766,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/reveal-1.ogg",
+        "bytes": 7731,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/hero-descend.webp",
+        "bytes": 7644,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3sp-dodge.webp",
+        "bytes": 7592,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/hit-4.ogg",
+        "bytes": 7551,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/curse-1.ogg",
+        "bytes": 7516,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/parry-1.ogg",
+        "bytes": 7473,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/curse-2.ogg",
+        "bytes": 7299,
+        "count": 1
+      },
+      {
+        "path": "sfx/jsfxr/pickup.wav",
+        "bytes": 7296,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3sp-flowerzhen.webp",
+        "bytes": 7228,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-element-seal.webp",
+        "bytes": 6960,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/hit-3.ogg",
+        "bytes": 6897,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt2-frostsword.webp",
+        "bytes": 6872,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/parry-2.ogg",
+        "bytes": 6864,
+        "count": 1
+      },
+      {
+        "path": "sfx/click4.wav",
+        "bytes": 6734,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3sp-magicoil.webp",
+        "bytes": 6724,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt2-swiftarrow.webp",
+        "bytes": 6632,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/reveal-2.ogg",
+        "bytes": 6613,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/heal-3.ogg",
+        "bytes": 6393,
+        "count": 1
+      },
+      {
+        "path": "sfx/click5.wav",
+        "bytes": 6222,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-grope.webp",
+        "bytes": 6208,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt7-talisman.webp",
+        "bytes": 6000,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-holy-staff.webp",
+        "bytes": 5914,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3-toxin.webp",
+        "bytes": 5652,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-chargeray.webp",
+        "bytes": 5574,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-bandage.webp",
+        "bytes": 5464,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-frost-slash.webp",
+        "bytes": 5444,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-life-arrow.webp",
+        "bytes": 5192,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-venom-arrow.webp",
+        "bytes": 5186,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/SOURCES.md",
+        "bytes": 5087,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-crimson-pouch.webp",
+        "bytes": 5058,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt3sp-silverthorn.webp",
+        "bytes": 4950,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3-blood-arrow.webp",
+        "bytes": 4754,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-azure-sword.webp",
+        "bytes": 4690,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt3wu-shike.webp",
+        "bytes": 4328,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt2-venomstaff.webp",
+        "bytes": 3958,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-cmtn0pbkmnvc.webp",
+        "bytes": 3872,
+        "count": 1
+      },
+      {
+        "path": "sfx/jsfxr/confirm.wav",
+        "bytes": 3646,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt8-demonslay.webp",
+        "bytes": 3630,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt7-darkfort.webp",
+        "bytes": 3488,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/martial-tt2-bloodblade.webp",
+        "bytes": 3228,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt8-archdemon.webp",
+        "bytes": 3170,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/equip-tt3-longsword.webp",
+        "bytes": 3008,
+        "count": 1
+      },
+      {
+        "path": "thumbs/cards/spell-tt12-unstableray.webp",
+        "bytes": 2844,
+        "count": 1
+      },
+      {
+        "path": "cards/items/PROVENANCE.md",
+        "bytes": 1631,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/demon.png",
+        "bytes": 1173,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/crystal.png",
+        "bytes": 1029,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/gem.png",
+        "bytes": 1029,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/recycle.png",
+        "bytes": 1006,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/trophy.png",
+        "bytes": 976,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/fire.png",
+        "bytes": 922,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/paw.png",
+        "bytes": 900,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/swords.png",
+        "bytes": 882,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/skull.png",
+        "bytes": 878,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/medal.png",
+        "bytes": 869,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/broken.png",
+        "bytes": 811,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/blood.png",
+        "bytes": 808,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/helmet.png",
+        "bytes": 802,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/plate.png",
+        "bytes": 802,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/shield.png",
+        "bytes": 802,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/map.png",
+        "bytes": 794,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/hourglass.png",
+        "bytes": 768,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/mouse.png",
+        "bytes": 768,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/flask.png",
+        "bytes": 756,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/slime.png",
+        "bytes": 745,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/key.png",
+        "bytes": 733,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/runner.png",
+        "bytes": 724,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/bread.png",
+        "bytes": 696,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/bolt.png",
+        "bytes": 688,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/broom.png",
+        "bytes": 678,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/pen.png",
+        "bytes": 678,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/tools.png",
+        "bytes": 678,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/lantern.png",
+        "bytes": 664,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/sparkles.png",
+        "bytes": 664,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/cross.png",
+        "bytes": 645,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/question.png",
+        "bytes": 632,
+        "count": 1
+      },
+      {
+        "path": "sfx/battle/kenney-license.txt",
+        "bytes": 608,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/heart.png",
+        "bytes": 602,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/lock.png",
+        "bytes": 586,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/flag.png",
+        "bytes": 576,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/check.png",
+        "bytes": 563,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/sword.png",
+        "bytes": 563,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/dice.png",
+        "bytes": 554,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/unlock.png",
+        "bytes": 542,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/door.png",
+        "bytes": 538,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/home.png",
+        "bytes": 538,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/bag.png",
+        "bytes": 526,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/pocket.png",
+        "bytes": 526,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/pouch.png",
+        "bytes": 526,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/book.png",
+        "bytes": 523,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/cards.png",
+        "bytes": 523,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/notes.png",
+        "bytes": 523,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/save.png",
+        "bytes": 523,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/scroll.png",
+        "bytes": 523,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/download.png",
+        "bytes": 521,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/archive.png",
+        "bytes": 508,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/folder.png",
+        "bytes": 508,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/play.png",
+        "bytes": 508,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/skip.png",
+        "bytes": 508,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/trash.png",
+        "bytes": 508,
+        "count": 1
+      },
+      {
+        "path": "sfx/jsfxr/README.md",
+        "bytes": 477,
+        "count": 1
+      },
+      {
+        "path": "sfx/kenney-license.txt",
+        "bytes": 459,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/arrow.png",
+        "bytes": 430,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/exit.png",
+        "bytes": 430,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/upload.png",
+        "bytes": 430,
+        "count": 1
+      },
+      {
+        "path": "ui/icons/wood.png",
+        "bytes": 416,
+        "count": 1
+      },
+      {
+        "path": "sfx/LICENSE.txt",
+        "bytes": 293,
+        "count": 1
+      },
+      {
+        "path": "scenes/shop/.gitignore",
+        "bytes": 187,
+        "count": 1
+      },
+      {
+        "path": "scenes/chests/large-rig-v1",
+        "bytes": 60,
+        "count": 1
+      },
+      {
+        "path": "cards/.gitkeep",
+        "bytes": 1,
+        "count": 1
+      },
+      {
+        "path": "portraits/enemies/.gitkeep",
+        "bytes": 1,
+        "count": 1
+      }
+    ]
+  },
+  "sourceDuplicates": [
+    {
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+      "files": [
+        "scenes/chests/boss-rig-640-v1/frame-00.webp",
+        "scenes/chests/boss-rig-640-v1/frame-01.webp",
+        "scenes/chests/boss-rig-640-v1/frame-02.webp"
+      ],
+      "duplicateBytes": 453852,
+      "likelyCopied": [
+        "scenes/chests/boss-rig-640-v1/frame-00.webp"
+      ]
+    },
+    {
+      "bytes": 224682,
+      "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed",
+      "files": [
+        "scenes/chests/large-rig-640-v1/frame-00.webp",
+        "scenes/chests/large-rig-640-v1/frame-01.webp",
+        "scenes/chests/large-rig-640-v1/frame-02.webp"
+      ],
+      "duplicateBytes": 449364,
+      "likelyCopied": [
+        "scenes/chests/large-rig-640-v1/frame-00.webp"
+      ]
+    },
+    {
+      "bytes": 217306,
+      "sha256": "f7df78ee7bc717f0bcb42a7b1e22334043360e8624801845adf7d04a5acc234e",
+      "files": [
+        "portraits/battle/changwuyu.webp",
+        "portraits/frames/changwuyu/sprite-v1/f000.webp",
+        "portraits/frames/changwuyu/sprite-v1/neutral.webp"
+      ],
+      "duplicateBytes": 434612,
+      "likelyCopied": [
+        "portraits/battle/changwuyu.webp"
+      ]
+    },
+    {
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+      "files": [
+        "scenes/chests/medium-rig-640-v1/frame-00.webp",
+        "scenes/chests/medium-rig-640-v1/frame-01.webp",
+        "scenes/chests/medium-rig-640-v1/frame-02.webp"
+      ],
+      "duplicateBytes": 382712,
+      "likelyCopied": [
+        "scenes/chests/medium-rig-640-v1/frame-00.webp"
+      ]
+    },
+    {
+      "bytes": 186658,
+      "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3",
+      "files": [
+        "scenes/chests/class-rig-640-v1/frame-00.webp",
+        "scenes/chests/class-rig-640-v1/frame-01.webp",
+        "scenes/chests/class-rig-640-v1/frame-02.webp"
+      ],
+      "duplicateBytes": 373316,
+      "likelyCopied": [
+        "scenes/chests/class-rig-640-v1/frame-00.webp"
+      ]
+    },
+    {
+      "bytes": 298396,
+      "sha256": "ecc5b2a6c872f58b73dd2ade8953f73bc5be36e3809d40fe9858f916ffb062ac",
+      "files": [
+        "scenes/chests/large-rig-640-v1/frame-16.webp",
+        "scenes/chests/large-rig-640-v1/frame-17.webp"
+      ],
+      "duplicateBytes": 298396,
+      "likelyCopied": [
+        "scenes/chests/large-rig-640-v1/frame-16.webp"
+      ]
+    },
+    {
+      "bytes": 143532,
+      "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c",
+      "files": [
+        "scenes/chests/small-rig-640-v1/frame-00.webp",
+        "scenes/chests/small-rig-640-v1/frame-01.webp",
+        "scenes/chests/small-rig-640-v1/frame-02.webp"
+      ],
+      "duplicateBytes": 287064,
+      "likelyCopied": [
+        "scenes/chests/small-rig-640-v1/frame-00.webp"
+      ]
+    },
+    {
+      "bytes": 284980,
+      "sha256": "eaa01505e2e9357123cc2329ec69445527aad67452a4d4409488ba3d48b46b80",
+      "files": [
+        "scenes/chests/boss-rig-640-v1/frame-16.webp",
+        "scenes/chests/boss-rig-640-v1/frame-17.webp"
+      ],
+      "duplicateBytes": 284980,
+      "likelyCopied": [
+        "scenes/chests/boss-rig-640-v1/frame-16.webp"
+      ]
+    },
+    {
+      "bytes": 277964,
+      "sha256": "cc001beadc53d5447f0e14e9b89fe8b67e04051376e1dd4a6c8d423396554bef",
+      "files": [
+        "scenes/chests/medium-rig-640-v1/frame-16.webp",
+        "scenes/chests/medium-rig-640-v1/frame-17.webp"
+      ],
+      "duplicateBytes": 277964,
+      "likelyCopied": [
+        "scenes/chests/medium-rig-640-v1/frame-16.webp"
+      ]
+    },
+    {
+      "bytes": 261222,
+      "sha256": "51b1f8d01a7a382c24903e42353224a447d6a38b2d3685bda06062bb8cdc64a4",
+      "files": [
+        "scenes/chests/class-rig-640-v1/frame-16.webp",
+        "scenes/chests/class-rig-640-v1/frame-17.webp"
+      ],
+      "duplicateBytes": 261222,
+      "likelyCopied": [
+        "scenes/chests/class-rig-640-v1/frame-16.webp"
+      ]
+    },
+    {
+      "bytes": 248260,
+      "sha256": "8ff0d1656c438489ae9776e7645aa1564165e7ba3d8b700eebff12fc10635044",
+      "files": [
+        "scenes/chests/small-rig-640-v1/frame-16.webp",
+        "scenes/chests/small-rig-640-v1/frame-17.webp"
+      ],
+      "duplicateBytes": 248260,
+      "likelyCopied": [
+        "scenes/chests/small-rig-640-v1/frame-16.webp"
+      ]
+    },
+    {
+      "bytes": 105624,
+      "sha256": "e9a8c4854370de18e05ca552a2880e7a70a75f85b67c18f22f0887a11bee16a2",
+      "files": [
+        "ui/card-frames/paper-1015/initial.webp",
+        "ui/card-frames/paper-1015/neutral.webp"
+      ],
+      "duplicateBytes": 105624,
+      "likelyCopied": []
+    },
+    {
+      "bytes": 91972,
+      "sha256": "4769b74c110b4711c8275c436a58f091aac8cb5831c8eede9bc42cdfac2baf02",
+      "files": [
+        "thumbs/cards/expedition-starters/rations.webp",
+        "thumbs/cards/resources/ration.webp"
+      ],
+      "duplicateBytes": 91972,
+      "likelyCopied": [
+        "thumbs/cards/resources/ration.webp"
+      ]
+    },
+    {
+      "bytes": 81554,
+      "sha256": "0ed68ff2d42e7e9abc5f1341a227a341c9f65d5cdecf9b4ff5be7d6fe9d6daad",
+      "files": [
+        "cards/expedition-starters/rations.webp",
+        "cards/resources/ration.webp"
+      ],
+      "duplicateBytes": 81554,
+      "likelyCopied": [
+        "cards/resources/ration.webp"
+      ]
+    },
+    {
+      "bytes": 62366,
+      "sha256": "e63de959c4de2d21352a5e14f110f36780578cd6d41362274e15b854b2e44df1",
+      "files": [
+        "portraits/frames/wu/cast-1.webp",
+        "portraits/frames/wu/cast.webp"
+      ],
+      "duplicateBytes": 62366,
+      "likelyCopied": [
+        "portraits/frames/wu/cast-1.webp",
+        "portraits/frames/wu/cast.webp"
+      ]
+    },
+    {
+      "bytes": 57014,
+      "sha256": "dbc3ad24358832d4889e40cb821d73700c4194b0b724ba5f9e2d9b3e0359f305",
+      "files": [
+        "portraits/frames/changwuyu/atk-wind-1.webp",
+        "portraits/frames/changwuyu/atk-wind.webp"
+      ],
+      "duplicateBytes": 57014,
+      "likelyCopied": [
+        "portraits/frames/changwuyu/atk-wind-1.webp",
+        "portraits/frames/changwuyu/atk-wind.webp"
+      ]
+    },
+    {
+      "bytes": 50092,
+      "sha256": "4341e4c9e6dc662635f3f5fdb8f1806b441ec719c2f7d1cd19e742349ceb3380",
+      "files": [
+        "portraits/frames/changwuyu/hurt-1.webp",
+        "portraits/frames/changwuyu/hurt.webp"
+      ],
+      "duplicateBytes": 50092,
+      "likelyCopied": [
+        "portraits/frames/changwuyu/hurt-1.webp",
+        "portraits/frames/changwuyu/hurt.webp"
+      ]
+    },
+    {
+      "bytes": 49416,
+      "sha256": "804e4c49abd81b6780d33cf24494e78281221ec99da6cf6de43fbb97cc67f7fe",
+      "files": [
+        "portraits/frames/baita/atk-hit-1.webp",
+        "portraits/frames/baita/cast-4.webp"
+      ],
+      "duplicateBytes": 49416,
+      "likelyCopied": [
+        "portraits/frames/baita/atk-hit-1.webp",
+        "portraits/frames/baita/cast-4.webp"
+      ]
+    },
+    {
+      "bytes": 49398,
+      "sha256": "5d1825a9868bc4cc96b844905b8cb185cc53e7a84b9594231e57b412c68d394d",
+      "files": [
+        "portraits/frames/baita/atk-hit.webp",
+        "portraits/frames/baita/cast-3.webp"
+      ],
+      "duplicateBytes": 49398,
+      "likelyCopied": [
+        "portraits/frames/baita/atk-hit.webp",
+        "portraits/frames/baita/cast-3.webp"
+      ]
+    },
+    {
+      "bytes": 47084,
+      "sha256": "cf707b3a0dacdc53cfe76d6471dd0a9d299ece149558c85285a28fbae6fc4650",
+      "files": [
+        "portraits/frames/wu/hurt-1.webp",
+        "portraits/frames/wu/hurt.webp"
+      ],
+      "duplicateBytes": 47084,
+      "likelyCopied": [
+        "portraits/frames/wu/hurt-1.webp",
+        "portraits/frames/wu/hurt.webp"
+      ]
+    },
+    {
+      "bytes": 46318,
+      "sha256": "6bef546a844a8bd6e8275ce6149901f00abc2592b86adb20aae246a0788617f3",
+      "files": [
+        "portraits/frames/baita/atk-wind-1.webp",
+        "portraits/frames/baita/cast-1.webp"
+      ],
+      "duplicateBytes": 46318,
+      "likelyCopied": [
+        "portraits/frames/baita/atk-wind-1.webp",
+        "portraits/frames/baita/cast-1.webp"
+      ]
+    },
+    {
+      "bytes": 46014,
+      "sha256": "2d79440fd30261729f001b75f4c07753b191087a3f414e60f008cbf276a4d38b",
+      "files": [
+        "portraits/frames/baita/hurt-1.webp",
+        "portraits/frames/baita/hurt.webp"
+      ],
+      "duplicateBytes": 46014,
+      "likelyCopied": [
+        "portraits/frames/baita/hurt-1.webp",
+        "portraits/frames/baita/hurt.webp"
+      ]
+    },
+    {
+      "bytes": 45360,
+      "sha256": "a5565427df3a42ede7250571fd82a4668b75885be9838a13c64c39774cefcc57",
+      "files": [
+        "portraits/frames/baita/atk-wind.webp",
+        "portraits/frames/baita/cast.webp"
+      ],
+      "duplicateBytes": 45360,
+      "likelyCopied": [
+        "portraits/frames/baita/atk-wind.webp",
+        "portraits/frames/baita/cast.webp"
+      ]
+    },
+    {
+      "bytes": 44474,
+      "sha256": "c6b00ef708cd38eef1a356b8d3e9b39764aa01ae6f27e788eea2658b6097b689",
+      "files": [
+        "portraits/frames/changwuyu/idle-1.webp",
+        "portraits/frames/changwuyu/idle-breathe.webp"
+      ],
+      "duplicateBytes": 44474,
+      "likelyCopied": [
+        "portraits/frames/changwuyu/idle-1.webp",
+        "portraits/frames/changwuyu/idle-breathe.webp"
+      ]
+    },
+    {
+      "bytes": 39744,
+      "sha256": "102fa5876ccae4a2cd0eb54f1452044b2a408298ffefdb75da4e9b2f92b3873e",
+      "files": [
+        "portraits/frames/baita/idle-1.webp",
+        "portraits/frames/baita/idle-breathe.webp"
+      ],
+      "duplicateBytes": 39744,
+      "likelyCopied": [
+        "portraits/frames/baita/idle-1.webp",
+        "portraits/frames/baita/idle-breathe.webp"
+      ]
+    },
+    {
+      "bytes": 5052,
+      "sha256": "c61fd20e53913c49ad2f537a7559a3fbad77e949715399979a0113ab1b229992",
+      "files": [
+        "portraits/frames/baita/sprite-v1/animations.json",
+        "portraits/frames/xingyue/sprite-v1/animations.json"
+      ],
+      "duplicateBytes": 5052,
+      "likelyCopied": [
+        "portraits/frames/baita/sprite-v1/animations.json",
+        "portraits/frames/xingyue/sprite-v1/animations.json"
+      ]
+    },
+    {
+      "bytes": 523,
+      "sha256": "900988cc960fd6c7aed97bf9396cf1f1f3c5eed6f61445d6179f0693748e1600",
+      "files": [
+        "ui/icons/book.png",
+        "ui/icons/cards.png",
+        "ui/icons/notes.png",
+        "ui/icons/save.png",
+        "ui/icons/scroll.png"
+      ],
+      "duplicateBytes": 2092,
+      "likelyCopied": [
+        "ui/icons/book.png",
+        "ui/icons/cards.png",
+        "ui/icons/notes.png",
+        "ui/icons/save.png",
+        "ui/icons/scroll.png"
+      ]
+    },
+    {
+      "bytes": 802,
+      "sha256": "9dc63a90f75aef35944748a8f29cc7da676e5d8e950c6e649fade926c2c63fd3",
+      "files": [
+        "ui/icons/helmet.png",
+        "ui/icons/plate.png",
+        "ui/icons/shield.png"
+      ],
+      "duplicateBytes": 1604,
+      "likelyCopied": [
+        "ui/icons/helmet.png",
+        "ui/icons/plate.png",
+        "ui/icons/shield.png"
+      ]
+    },
+    {
+      "bytes": 678,
+      "sha256": "3362c5cf5b4595c0fbf5c8f30975ee5d3c86f0aa6e6b2bb3ec58cd108d6f9865",
+      "files": [
+        "ui/icons/broom.png",
+        "ui/icons/pen.png",
+        "ui/icons/tools.png"
+      ],
+      "duplicateBytes": 1356,
+      "likelyCopied": [
+        "ui/icons/broom.png",
+        "ui/icons/pen.png",
+        "ui/icons/tools.png"
+      ]
+    },
+    {
+      "bytes": 526,
+      "sha256": "a1a658559032a8d1d411f8fef3b74a56d0d1e2cb37602fa01403dbd6fab9071c",
+      "files": [
+        "ui/icons/bag.png",
+        "ui/icons/pocket.png",
+        "ui/icons/pouch.png"
+      ],
+      "duplicateBytes": 1052,
+      "likelyCopied": [
+        "ui/icons/bag.png",
+        "ui/icons/pocket.png",
+        "ui/icons/pouch.png"
+      ]
+    },
+    {
+      "bytes": 1029,
+      "sha256": "eed29dcd9bb3886667a114f33e3e696b2270342f70214280f82290d5cee0b017",
+      "files": [
+        "ui/icons/crystal.png",
+        "ui/icons/gem.png"
+      ],
+      "duplicateBytes": 1029,
+      "likelyCopied": [
+        "ui/icons/crystal.png",
+        "ui/icons/gem.png"
+      ]
+    },
+    {
+      "bytes": 508,
+      "sha256": "021a10d8171794d481fb3d858809aeb77b08e88d054cce4e2c77a8808f35b2fa",
+      "files": [
+        "ui/icons/archive.png",
+        "ui/icons/folder.png",
+        "ui/icons/trash.png"
+      ],
+      "duplicateBytes": 1016,
+      "likelyCopied": [
+        "ui/icons/archive.png",
+        "ui/icons/folder.png",
+        "ui/icons/trash.png"
+      ]
+    },
+    {
+      "bytes": 430,
+      "sha256": "850dea1856efa746c133f5619b61d95be50faacb8e68f7832a1265d58cf26ba2",
+      "files": [
+        "ui/icons/arrow.png",
+        "ui/icons/exit.png",
+        "ui/icons/upload.png"
+      ],
+      "duplicateBytes": 860,
+      "likelyCopied": [
+        "ui/icons/arrow.png",
+        "ui/icons/exit.png",
+        "ui/icons/upload.png"
+      ]
+    },
+    {
+      "bytes": 768,
+      "sha256": "a44a4000c632324eb56fe7f7f488b967ff754ecded9287980784cb7ea6c7e89d",
+      "files": [
+        "ui/icons/hourglass.png",
+        "ui/icons/mouse.png"
+      ],
+      "duplicateBytes": 768,
+      "likelyCopied": [
+        "ui/icons/hourglass.png",
+        "ui/icons/mouse.png"
+      ]
+    },
+    {
+      "bytes": 664,
+      "sha256": "95d63a00e1408fc4f15ea9ca0ea7df505021215a4ff1e5a6e9d4c7dc81f8afb4",
+      "files": [
+        "ui/icons/lantern.png",
+        "ui/icons/sparkles.png"
+      ],
+      "duplicateBytes": 664,
+      "likelyCopied": [
+        "ui/icons/lantern.png",
+        "ui/icons/sparkles.png"
+      ]
+    },
+    {
+      "bytes": 538,
+      "sha256": "727e9d57603cd329a853d2a2e747c8fcb681fb4989fbbcbcb8d43bdb13c5376d",
+      "files": [
+        "ui/icons/door.png",
+        "ui/icons/home.png"
+      ],
+      "duplicateBytes": 538,
+      "likelyCopied": [
+        "ui/icons/door.png",
+        "ui/icons/home.png"
+      ]
+    },
+    {
+      "bytes": 508,
+      "sha256": "e3c08dff79c895a747a6aa526a6b2b2159580f25e7eea97def7ccb48097ab47b",
+      "files": [
+        "ui/icons/play.png",
+        "ui/icons/skip.png"
+      ],
+      "duplicateBytes": 508,
+      "likelyCopied": [
+        "ui/icons/play.png",
+        "ui/icons/skip.png"
+      ]
+    },
+    {
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "files": [
+        "cards/.gitkeep",
+        "portraits/enemies/.gitkeep"
+      ],
+      "duplicateBytes": 1,
+      "likelyCopied": [
+        "cards/.gitkeep",
+        "portraits/enemies/.gitkeep"
+      ]
+    }
+  ]
+}

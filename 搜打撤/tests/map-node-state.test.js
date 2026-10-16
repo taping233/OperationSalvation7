@@ -22,8 +22,24 @@ describe('已消耗地图节点展示', () => {
     expect(mapNodeInfo(game({ visited:{} }), node(type))).toEqual(NODE_INFO[type]);
   });
 
-  it.each(['entrance', 'door', 'emergencyExit', 'extraction', 'altar'])('已访问 %s 仍保留可用地点图标', type => {
+  it.each(['entrance', 'door', 'emergencyExit', 'extraction'])('已访问 %s 仍保留可用地点图标', type => {
     expect(isConsumedMapNode(game(), node(type))).toBe(false);
+  });
+
+  it.each([
+    ['未激活未访问', { visited:{} }, false],
+    ['已访问但未激活', { altarActivated:false, altarRewardPending:false }, false],
+    ['只做道具献祭', { altarActivated:false, altarItemSacrificed:true }, false],
+    ['激活后奖励待选', { altarActivated:true, altarRewardPending:true }, false],
+    ['激活且奖励选择已完成', { altarActivated:true, altarRewardPending:false }, true],
+    ['旧档激活且无待领标记', { altarActivated:true }, true],
+    ['真实激活不依赖visited', { visited:{}, altarActivated:true, altarRewardPending:false }, true],
+  ])('祭坛%s：按激活/待领三态投影，不把visited误当领奖完成', (_label, state, completed) => {
+    const source = game(state), before = JSON.stringify(source);
+    expect(isConsumedMapNode(source, node('altar'))).toBe(completed);
+    expect(mapNodeInfo(source, node('altar'))[0]).toBe(completed ? '祭坛 · 已完成' : '祭坛');
+    if (state.altarActivated && state.altarRewardPending) expect(mapNodeInfo(source, node('altar'))[1]).toBe('已激活 · 回赠待领取');
+    expect(JSON.stringify(source)).toBe(before);
   });
 
   it('普通内容兼作层门时保留层门；首脑只以实际击败状态标注完成', () => {

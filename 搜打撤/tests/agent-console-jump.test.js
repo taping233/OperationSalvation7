@@ -1,7 +1,7 @@
 /* INFRA-02 回归：开发者控制台「快捷键」页签点「进入」后，jump 成功开出的目标页
  * 必须存活（_acts 不被 hideOverlay 清掉、overlay 不被隐藏），控制台页被目标页顶替。
  * 走真实链路：openDevConsole → devcTab 切快捷键页签 → 真实 DOM click「进入」按钮。 */
-import { describe, it, expect, vi } from 'vitest';
+import { afterEach, describe, it, expect, vi } from 'vitest';
 
 // ---- 环境补桩（与 boot.test.js 同款，必须在动态 import main.js 之前就位） ----
 // 故意恒真：jsdom 无 canvas，无论原生 getContext 是否存在都强制换成本桩（lint 静音，不改逻辑）
@@ -53,29 +53,97 @@ import { resolve } from 'node:path';
   document.body.innerHTML = body;
 }
 
+// Control only module delivery, retaining the real page factory and its UI behavior.
+// The first case cancels while the actual cold import is outstanding.
+let menuImportStarted = false;
+let releaseMenuImport;
+const menuImportGate = new Promise(resolve => { releaseMenuImport = resolve; });
+vi.doMock('../game/src/ui/game.menu.pages.js', async () => {
+  menuImportStarted = true;
+  await menuImportGate;
+  return vi.importActual('../game/src/ui/game.menu.pages.js');
+});
+
 await import('../game/src/main.js');
 document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 await new Promise(r => setTimeout(r, 50));
 
 const UI = () => window.SDT.UI;
+const waitForPresentation = () => vi.waitFor(() => {
+  expect(document.querySelector('.page-loading, .page-visual-handoff')).toBeNull();
+}, { timeout: 4000 });
+
+// No late jump or overlay transition may leak from one real-flow case to the next.
+afterEach(async () => {
+  const { cancelPendingPageEntries } = await import('../game/src/ui/page-entry-cancellation.js');
+  cancelPendingPageEntries();
+  releaseMenuImport();
+  await vi.dynamicImportSettled();
+  await waitForPresentation();
+  if (document.getElementById('devConsole')) {
+    expect(UI()._acts.devcClose, '可见控制台必须保留关闭动作').toBeTypeOf('function');
+    UI()._acts.devcClose();
+  }
+  UI().hideOverlay({ immediate: true });
+  const { showTitle } = await import('../game/src/run/game.session.js');
+  showTitle();
+  await Promise.resolve();
+  vi.restoreAllMocks();
+});
+
 const openKeysTab = async () => {
+  await waitForPresentation();
   const { openDevConsole } = await import('../game/src/run/game.run.dev.js');
   openDevConsole();
   // 切到「快捷键」页签（真实按钮点击，bindKeysTab 在 render 内注册 devcGoto）
   const tabBtn = document.querySelector('#ovBody [data-act="devcTab"][data-tab="keys"]');
   expect(tabBtn, '快捷键页签按钮不存在').not.toBeNull();
   tabBtn.click();
-  await new Promise(r => setTimeout(r, 10));
+  await vi.waitFor(() => expect(UI()._acts.devcGoto).toBeTypeOf('function'));
+  await waitForPresentation();
+};
+
+const clickJump = page => {
+  const button = document.querySelector(`#ovBody [data-act="devcGoto"][data-page="${page}"]`);
+  expect(button, `${page}页「进入」按钮不存在`).not.toBeNull();
+  const action = vi.spyOn(UI()._acts, 'devcGoto');
+  button.click();
+  expect(action).toHaveBeenCalledOnce();
+  const result = action.mock.results[0].value;
+  expect(typeof result?.then, '真实jump必须暴露可等待的异步结果').toBe('function');
+  return result;
 };
 
 describe('INFRA-02 控制台快捷键页签跳转不再关掉目标页', () => {
+  it('冷设置载入中真实Escape取消，迟到模块不能替换控制台或清掉动作表', async () => {
+    await openKeysTab();
+    const { menuPageLoading } = await import('../game/src/ui/game.menu.js');
+    expect(menuPageLoading).toBe(false);
+    const pending = clickJump('settings');
+    expect(document.querySelector('.page-loading')).not.toBeNull();
+    await vi.waitFor(() => expect(menuImportStarted).toBe(true), { timeout: 4000 });
+    expect(document.querySelector('.settings-page')).toBeNull();
+    const escape = new KeyboardEvent('keydown', { key:'Escape', bubbles:true, cancelable:true });
+    window.dispatchEvent(escape);
+    expect(escape.defaultPrevented).toBe(true);
+    expect(await pending).toBe(false);
+    releaseMenuImport();
+    await vi.dynamicImportSettled();
+    await waitForPresentation();
+    expect(document.querySelector('.settings-page')).toBeNull();
+    expect(document.querySelector('.devc-tabs')).not.toBeNull();
+    expect(UI().el.overlay.hidden).toBe(false);
+    expect(UI()._acts.devcGoto).toBeTypeOf('function');
+    expect(UI()._acts.devcClose).toBeTypeOf('function');
+  });
   it('点合法页面「进入」后：目标页动作表存活、overlay 未被隐藏、控制台已被顶替', async () => {
     await openKeysTab();
     const goto = document.querySelector('#ovBody [data-act="devcGoto"][data-page="settings"]');
     expect(goto, '设置页「进入」按钮不存在').not.toBeNull();
     expect(goto.disabled, '设置页在标题态应可进入').toBe(false);
 
-    goto.click();   // 真实点击：ovBody 委托 → _acts.devcGoto(dataset)
+    await clickJump('settings');   // 真实点击并等待 ovBody 委托 → devcGoto → jump → 冷/热菜单完成
+    await waitForPresentation();
 
     expect(UI().el.overlay.hidden, 'jump 成功后 overlay 被隐藏了（INFRA-02 症状）').toBe(false);
     const settingsPage = document.querySelector('#ovBody .settings-page');
@@ -92,7 +160,7 @@ describe('INFRA-02 控制台快捷键页签跳转不再关掉目标页', () => {
   it('点不可用/未知页面时控制台不跳转、重绘留在本页', async () => {
     await openKeysTab();
     expect(UI()._acts.devcGoto, 'devcGoto 未注册').toBeTruthy();
-    UI()._acts.devcGoto({ page: '__no_such_page__' });
+    expect(await UI()._acts.devcGoto({ page: '__no_such_page__' })).toBe(false);
     expect(document.querySelector('.devc-tabs'), 'jump 失败应重绘留在控制台').not.toBeNull();
     expect(UI().el.overlay.hidden).toBe(false);
   });

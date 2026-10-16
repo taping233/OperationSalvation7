@@ -30,6 +30,7 @@ export const WORKFLOW_TESTS = new Map([
   ['scripts/registry-paths.mjs', ['tests/workflow-handoff.test.js', 'tests/impact-query.test.js', 'tests/acceptance-gate.test.js']],
   ['scripts/gate-plan.mjs', ['tests/acceptance-gate.test.js', 'tests/impact-query.test.js', 'tests/quality-config.test.js']],
   ['scripts/workflow-browser.mjs', ['tests/workflow-browser.test.js']],
+  ['scripts/visible-playback.mjs', ['tests/visible-playback.test.js']],
   ['scripts/workflow-memory.mjs', ['tests/workflow-memory.test.js', 'tests/workflow-handoff.test.js']],
   ['scripts/workflow-staged.mjs', ['tests/workflow-staged.test.js']],
   ['scripts/workflow-gate-receipt.mjs', ['tests/workflow-gate-receipt.test.js', 'tests/workflow-staged.test.js']],

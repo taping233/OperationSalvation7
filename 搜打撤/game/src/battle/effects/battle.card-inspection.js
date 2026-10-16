@@ -37,6 +37,51 @@ export function createBattleCardInspection({ cards, readState, curseMeta }) {
     return entry;
   };
 
+  // Keep UID/ownership and raw overrides intact: this is a battle-only query view.
+  // Match the existing play-time order: per-UID override first, then the latest
+  // starter transform rule. A non-starter override is never transformed again.
+  // Provenance belongs to this query factory, never to saved card data. It lets
+  // a captured effective face re-read its live UID at the final payment boundary,
+  // without replacing an explicitly prepared custom execution candidate.
+  const effectiveSources = new WeakMap();
+  const findEffectiveCard = (uid, executionCard = null, normalize = null) => {
+    const state = readState();
+    const supplied = executionCard && typeof executionCard === 'object' ? executionCard : null;
+    const provenance = supplied && effectiveSources.get(supplied);
+    const knownSource = provenance?.uid === uid ? provenance : null;
+    const current = findCard(uid);
+    const liveUid = knownSource ? knownSource.liveUid : !supplied || supplied === current?.card;
+    const found = liveUid ? current : { uid, card: knownSource?.card || supplied };
+    if (!found?.card) return null;
+    const base = state.game.ownedCards.find(entry => entry.uid === uid)
+      || state.granted.find(entry => entry.uid === uid);
+    const entry = base && base !== found ? { ...base, ...found, uid } : found;
+    const transform = state.shaTransform;
+    let card = entry.card;
+    if (transform && ['初始攻击', '杀'].includes(card.name)) {
+      const template = cards.all?.().find(value => value.name === transform);
+      card = template ? { ...template } : { ...card, _battleTransformMissing: transform };
+    }
+    // Array.map passes its source array as the third argument; only a function
+    // is an execution normalizer. Track any clone it creates by the same source.
+    if (typeof normalize === 'function') card = normalize(card);
+    if (card === entry.card) {
+      if (liveUid) effectiveSources.set(card, { uid, card: entry.card, liveUid: true });
+      return entry;
+    }
+    effectiveSources.set(card, { uid, card: entry.card, liveUid });
+    return { ...entry, card };
+  };
+
+  const infusionFuelReason = uid => {
+    const state = readState();
+    if (!state.hand.includes(uid)) return '这张牌已离开手牌';
+    const entry = findEffectiveCard(uid);
+    if (!entry) return '找不到这张手牌';
+    if (entry.card._battleTransformMissing) return `转换目标「${entry.card._battleTransformMissing}」缺失，暂时无法使用`;
+    return /无法用于注能/.test(String(entry.card.desc || '')) ? '本牌无法用于注能' : '';
+  };
+
   const drawOf = card => +(card.draw || 0) || cards.deriveDraw(card) || 0;
   const infuseOf = card => card._noInfuse ? 0 : (+(card.infuse || 0) || cards.deriveInfuse(card) || 0);
 
@@ -118,5 +163,5 @@ export function createBattleCardInspection({ cards, readState, curseMeta }) {
     state.game.log(`[[icon:sparkles]] <b>交换费用</b>：【${esc(a.card.name)}】费用变为 <b>${costA}</b>，【${esc(b.card.name)}】费用变为 <b>${costB}</b>`, 'sys');
   }
 
-  return { findCard, drawOf, infuseOf, effCostOf, handCurseSpecs, queueSwapCostDiscover, swapCardCosts };
+  return { findCard, findEffectiveCard, infusionFuelReason, drawOf, infuseOf, effCostOf, handCurseSpecs, queueSwapCostDiscover, swapCardCosts };
 }

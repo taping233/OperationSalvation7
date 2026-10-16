@@ -1,0 +1,62 @@
+[
+  {
+    "command": [
+      "node",
+      "node_modules/eslint/bin/eslint.js",
+      "tests/agent-console-jump.test.js",
+      "tests/selftest-paths.test.js",
+      "game/selftest.js"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r3-20261016/snapshot/搜打撤",
+    "durationSeconds": 0.433,
+    "endedAt": "2026-10-15T21:04:47.025043+00:00",
+    "exitCode": 0,
+    "log": "logs/target-lint.log",
+    "name": "target-lint",
+    "sourceInputManifestSha256": "2e58810b934d08f450a9328eaf5e8e7941b961b5f0e996bc8654ccc0e5fcf950",
+    "startedAt": "2026-10-15T21:04:46.592515+00:00"
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "game/selftest.js"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r3-20261016/snapshot/搜打撤",
+    "durationSeconds": 0.084,
+    "endedAt": "2026-10-15T21:04:47.109383+00:00",
+    "exitCode": 0,
+    "log": "logs/selftest-syntax.log",
+    "name": "selftest-syntax",
+    "sourceInputManifestSha256": "2e58810b934d08f450a9328eaf5e8e7941b961b5f0e996bc8654ccc0e5fcf950",
+    "startedAt": "2026-10-15T21:04:47.025575+00:00"
+  },
+  {
+    "command": [
+      "node",
+      "game/selftest.js"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r3-20261016/snapshot/搜打撤",
+    "durationSeconds": 0.203,
+    "endedAt": "2026-10-15T21:04:47.315733+00:00",
+    "exitCode": 0,
+    "log": "logs/selftest.log",
+    "name": "selftest",
+    "sourceInputManifestSha256": "2e58810b934d08f450a9328eaf5e8e7941b961b5f0e996bc8654ccc0e5fcf950",
+    "startedAt": "2026-10-15T21:04:47.112494+00:00"
+  },
+  {
+    "command": [
+      "npm",
+      "test"
+    ],
+    "cwd": "/workspace/shared/cloud-iteration-verification-r3-20261016/snapshot/搜打撤",
+    "durationSeconds": 148.318,
+    "endedAt": "2026-10-15T21:07:15.634599+00:00",
+    "exitCode": 0,
+    "log": "logs/full-test.log",
+    "name": "full-test",
+    "sourceInputManifestSha256": "2e58810b934d08f450a9328eaf5e8e7941b961b5f0e996bc8654ccc0e5fcf950",
+    "startedAt": "2026-10-15T21:04:47.316275+00:00"
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "buildRepeated": false,
+  "conclusion": "Reviewed four-file contract repair passes ordinary full npm test and selftest/lint without unhandled errors; original R5 failures remain preserved",
+  "formalExitCodes": {
+    "lint": 0,
+    "selftest": 0,
+    "selftest-lint": 0,
+    "test": 0
+  },
+  "fourFileDelta": [
+    {
+      "afterSha256": "03cc5c082cec12914771b8ef172422b339ec2c48e9cdac9aba564236594080ef",
+      "beforeSha256": "16a71bbe7c8553d3cf9d6ced1f574145cb500c0c7025692e5cb6368a47b38db1",
+      "path": "搜打撤/game/selftest.js"
+    },
+    {
+      "afterSha256": "962a05cb4bc5dd87cb73d0a860b8f8144871c6a4e0bd8c2e98a26cbaa041a2d2",
+      "beforeSha256": "f8b4972875fa6dc8cf7308c38f81b5c8c7802bcec20410a2c8f8447b184b6eff",
+      "path": "搜打撤/tests/map-travel-motion.test.js"
+    },
+    {
+      "afterSha256": "09740e1685ed6cc84ec3a600d37f457b60ee99ba32e787a16c7a3f83604df7f0",
+      "beforeSha256": "3e15c1eb3d200e76588d8ac44ccd7f3bcc61c548f3048bdbd06eda886c4da3d8",
+      "path": "搜打撤/tests/node-flow-confirmation.test.js"
+    },
+    {
+      "afterSha256": "605720f4b3ba6f8a6a7cd2d7cae996a4ed88c7adfc3969f836824493fad28aa2",
+      "beforeSha256": "1907e400c29ec879a6ded25702fb5f2047695ed15cc9a01266c39002cfec6a82",
+      "path": "搜打撤/tests/r6-story-flow.repro.test.js"
+    }
+  ],
+  "fullEvidenceRoot": "/workspace/shared/cloud-iteration-verification-r5-20261016/contract-supplement",
+  "inheritedBuildResult": "R5 ordinary build prebuild/Vite compiled; original postbuild four budget failures remain",
+  "originalR5BuildMetrics": {
+    "cssGzipBytes": 200836,
+    "duplicateBytes": 16540,
+    "entryGzipBytes": 295001,
+    "files": 1293,
+    "initialJsGzipBytes": 341504,
+    "packageBytes": 125392304
+  },
+  "originalR5SourceManifestSha256": "b379f29db8c5f19a713f96aa00ad9fb4c2b63748f01015e684cab74b9422b109",
+  "productionInputsUnchangedCount": 2875,
+  "repairPatchSha256": "57ccd1b2031da1799fe937afcd16bd3c3434aa978cff123ea041f1f103e04c70",
+  "sourceAddedProductionPaths": [],
+  "sourceDriftAfterPreparation": [
+    {
+      "currentSourceSha256": "34c66681bda310e1f40bd97377b94a5393b508def59d9e44bd8f6acd045b8a69",
+      "frozenSha256": "5f438e80908b3ea70ede0d2ff13796be82cfbb159696676c107f23831df23ff0",
+      "path": "搜打撤/game/css/battle-stage.css"
+    }
+  ],
+  "supplementSourceInputManifestSha256": "8c3d16e082d519a6622d3090b3b9cb4209244f9792475d6119cd13cd53e42deb",
+  "testFilesPassed": 478,
+  "testFilesTotal": 478,
+  "testsPassed": 4523,
+  "testsSkipped": 2,
+  "testsTotal": 4525,
+  "unhandledErrors": 0
+}

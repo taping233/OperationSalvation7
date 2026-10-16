@@ -71,30 +71,10 @@
 #overlay #hubMain.pg.hub.base-camp .camp-notice { position: absolute; z-index: 12; bottom: 24px; right: 32px; display: flex; gap: 12px; align-items: center; padding: 16px 24px; color: #f8f5e9; background: #28505b; border-left: 4px solid #d5ba74; box-shadow: 0 8px 24px #192d3630; font-size: 17px; animation: camp-page-in .24s var(--camp-ease) both; pointer-events: none; }
 
 /* 主行动：一张人物大画与一份行动档案。 */
-#overlay #hubMain.pg.hub.base-camp .deploy-brief { display: block; width: 100%; max-width: none; margin: 0; }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-mission { display: grid; grid-template-columns: 1.05fr 1fr; gap: 0; min-height: 730px; width: 100%; background: var(--camp-sheet); border: 1px solid #bdc5bd; box-shadow: 0 16px 30px #253d4510; overflow: hidden; }
 #overlay #hubMain.pg.hub.base-camp :is(.deploy-mission, .deploy-mission-copy)::before,
 #overlay #hubMain.pg.hub.base-camp :is(.deploy-mission, .deploy-mission-copy)::after { content: none; }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-art { position: relative; overflow: hidden; margin: 0; min-width: 0; background: #c8d1cf; }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-art::before { content: 'VII'; position: absolute; top: 10px; left: 20px; color: #2c515715; font: 700 260px/1 var(--font-num); letter-spacing: -.08em; }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-figure { position: absolute; inset: 0; }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-figure .art-figure-wrap,
 #overlay #depMain.pg.hub.camp-detail .camp-depart-person-art .art-figure-wrap { width: 100%; height: 100%; position: absolute; inset: 0; transform: none; }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-figure .art-figure-back,
 #overlay #depMain.pg.hub.camp-detail .camp-depart-person-art .art-figure-back { display: none; }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-figure img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: contain; object-position: center; mix-blend-mode: multiply; filter: none; transform: none; }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-art figcaption { position: absolute; z-index: 1; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column; gap: 13px; padding: 85px 35px 32px; color: #f8f2e4; background: linear-gradient(transparent, #1b303cdc 65%); }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-art figcaption small { font: 12px/1.3 var(--font-mono); letter-spacing: .2em; color: #dcc58d; }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-art figcaption b { color: inherit; font-size: 27px; }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-art figcaption span { font-size: 15px; color: #c3d0cf; }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-dossier { display: flex; flex-direction: column; justify-content: flex-start; padding: 36px 38px; gap: 25px; background: var(--camp-sheet); }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-filehead { display: flex; justify-content: space-between; border-bottom: 1px solid #c9cbbf; padding-bottom: 15px; color: #647976; font: 12px/1.4 var(--font-mono); letter-spacing: .06em; }
-#overlay #hubMain.pg.hub.base-camp .camp-depart-filehead .eyebrow { color: #647976; }
-#overlay #hubMain.pg.hub.base-camp .deploy-mission-target { display: flex; flex-direction: column; gap: 8px; position: static; padding: 0; border: 0; background: none; }
-#overlay #hubMain.pg.hub.base-camp .deploy-mission-target span { font-size: 14px; color: #6a7b7b; }
-#overlay #hubMain.pg.hub.base-camp .deploy-mission-target b { color: var(--camp-ink); font: 700 33px/1.3 var(--font-ui); }
-#overlay #hubMain.pg.hub.base-camp .deploy-mission-target small { color: #8c743a; font-size: 15px; }
-#overlay #hubMain.pg.hub.base-camp .deploy-mode-dock { padding: 0; background: none; border: 0; }
 #overlay #hubMain.pg.hub.base-camp .dock-label { display: block; margin: 0 0 12px; color: #6a7775; font: 13px/1.4 var(--font-ui); }
 #overlay #hubMain.pg.hub.base-camp .mode-list { display: flex; flex-direction: column; gap: 12px; }
 #overlay #hubMain.pg.hub.base-camp .mode-card { display: flex; flex-direction: row; align-items: center; gap: 14px; padding: 20px; min-height: 110px; border: 1px solid #ccd1c8; border-radius: 2px; background: #f3f2ea; box-shadow: none; }
@@ -107,8 +87,7 @@
 #overlay #hubMain.pg.hub.base-camp .camp-depart-readiness { display: flex; gap: 30px; margin-top: auto; color: #61716e; font-size: 15px; }
 #overlay #hubMain.pg.hub.base-camp .camp-depart-readiness b { color: var(--camp-ink); }
 #overlay #hubMain.pg.hub.base-camp .camp-depart-actions { display: flex; flex-direction: column; gap: 12px; }
-#overlay #hubMain.pg.hub.base-camp .deploy-primary, #overlay #depMain.pg.hub.camp-detail #btnDeploy { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; min-height: 69px; padding: 17px 24px; margin: 0; border: 1px solid #ccb16a; background: #dcc27e; color: #28373b; border-radius: 2px; box-shadow: 0 4px 0 #ad9451; clip-path: none; font: 700 23px/1.4 var(--font-ui); letter-spacing: .08em; text-shadow: none; }
-#overlay #hubMain.pg.hub.base-camp .deploy-primary:hover { background: #e8d296; filter: none; }
+#overlay #depMain.pg.hub.camp-detail #btnDeploy { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; min-height: 69px; padding: 17px 24px; margin: 0; border: 1px solid #ccb16a; background: #dcc27e; color: #28373b; border-radius: 2px; box-shadow: 0 4px 0 #ad9451; clip-path: none; font: 700 23px/1.4 var(--font-ui); letter-spacing: .08em; text-shadow: none; }
 #overlay #hubMain.pg.hub.base-camp .camp-action-step { font: 18px/1 var(--font-mono); opacity: .6; }
 #overlay #hubMain.pg.hub.base-camp .camp-depart-secondary { min-height: 45px; background: transparent; border-color: #bac6bc; box-shadow: none; font-size: 16px; }
 #overlay #hubMain.pg.hub.base-camp .gate-strip { margin-top: 24px; display: flex; gap: 20px; align-items: center; }
@@ -182,14 +161,7 @@
 #overlay #hubMain.pg.hub.base-camp .camp-reserve-value span { color: #b1c8ba; }
 #overlay #hubMain.pg.hub.base-camp .shop-shelf { padding: 0; }
 #overlay #hubMain.pg.hub.base-camp .camp-product { display: flex; flex-direction: column; align-items: stretch; margin: 0; min-width: 0; border: 1px solid #cdd0c0; opacity: 1; filter: none; box-shadow: 0 5px 0 #ced2c7; }
-#overlay #hubMain.pg.hub.base-camp .shelf-visual { display: flex; width: 100%; height: 255px; align-items: center; justify-content: center; overflow: visible; background: #e3e7dc; border: 0; margin: 0; }
-#overlay #hubMain.pg.hub.base-camp .shelf-visual .hs-card { font-size: 15px; transform: none; }
-#overlay #hubMain.pg.hub.base-camp .shelf-ico .ic { width: 120px; height: 120px; filter: none; }
-#overlay #hubMain.pg.hub.base-camp .shelf-info { display: flex; flex-direction: column; gap: 7px; text-align: left; }
-#overlay #hubMain.pg.hub.base-camp .shelf-info b { color: #2e474e; font-size: 24px; }
-#overlay #hubMain.pg.hub.base-camp .shelf-info .dim { font-size: 15px; }
 #overlay #hubMain.pg.hub.base-camp .poor-why { color: #856d47; font-size: 14px; }
-#overlay #hubMain.pg.hub.base-camp .shop-price-tag { width: 100%; min-height: 48px; }
 
 /* 工坊与人物：容量是主数字，立绘是人物档案的主角。 */
 #overlay #hubMain.pg.hub.base-camp .camp-upgrade-glyph { float: right; margin-left: 25px; }
@@ -206,7 +178,6 @@
 #overlay #hubMain.pg.hub.base-camp .person-progress-track i { height: 100%; display: block; background: #528793; }
 
 /* 档案：未解锁时仍可读目标，长卡墙按人物折叠。 */
-#overlay #hubMain.pg.hub.base-camp .collection-command { display: block; padding: 0; background: none; border: 0; margin: 0 0 24px; }
 #overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card { background: #faf8f1; color: #344f54; border: 1px solid #c7cebe; border-radius: 2px; box-shadow: none; }
 #overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card::before,
 #overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card::after,
@@ -214,18 +185,10 @@
 #overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card > h3::after { content: none; }
 #overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card > h3 { color: #344f54; font: 700 23px/1.5 var(--font-ui); letter-spacing: .02em; }
 #overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page > .hub-card > h3 .set-tip { color: #6a806f; font: 14px/1.5 var(--font-ui); }
-#overlay #hubMain.pg.hub.base-camp.hub-ach .collection-panel .back-grid { width: 100%; max-width: none; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 20px; }
 #overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page.page-in :is(.ach-row, .coll-group, .back-card, .coll-ms) { animation: none; }
 #overlay #hubMain.pg.hub.base-camp .camp-collection-summary { color: #56766e; font-size: 15px; margin-top: 18px; }
 #overlay #hubMain.pg.hub.base-camp .story-strip { font-size: 15px; background: #e0e8dc; border-left: 3px solid #8a9e76; color: #5f7469; padding: 14px 18px; }
 #overlay #hubMain.pg.hub.base-camp .story-strip .ss-tag { color: #3c6159; }
-#overlay #hubMain.pg.hub.base-camp .back-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 25px; }
-#overlay #hubMain.pg.hub.base-camp .back-card { position: relative; width: 100%; max-width: none; min-width: 0; padding: 22px 17px; background: #eeeee2; border: 1px solid #c9cfbe; color: #425d60; opacity: 1; box-shadow: none; text-align: center; }
-#overlay #hubMain.pg.hub.base-camp .back-card.on { border: 2px solid #49808a; background: #deeadd; }
-#overlay #hubMain.pg.hub.base-camp .back-card.locked { background: #e9ebe2; opacity: 1; }
-#overlay #hubMain.pg.hub.base-camp .back-card b { color: #344f55; font-size: 19px; }
-#overlay #hubMain.pg.hub.base-camp .back-card .dim { color: #6b7c70; font-size: 13px; }
-#overlay #hubMain.pg.hub.base-camp .back-thumb { display: grid; place-items: center; margin: 0 auto 19px; width: 110px; height: 155px; }
 #overlay #hubMain.pg.hub.base-camp .ach-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
 #overlay #hubMain.pg.hub.base-camp .ach-row { display: flex; gap: 18px; min-height: 116px; border: 1px solid #cbd2c2; background: #edeee3; }
 #overlay #hubMain.pg.hub.base-camp .ach-row.done { background: #e1ebdd; border-color: #97b8a3; }
@@ -233,23 +196,7 @@
 #overlay #hubMain.pg.hub.base-camp .ach-info b { color: #344e53; font-size: 19px; }
 #overlay #hubMain.pg.hub.base-camp .ach-info span { color: #6a7c73; font-size: 14px; margin-top: 7px; line-height: 1.6; }
 #overlay #hubMain.pg.hub.base-camp .ach-ops :is(.rw, .got) { color: #758152; font-size: 13px; }
-#overlay #hubMain.pg.hub.base-camp .coll-ms-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-bottom: 28px; }
-#overlay #hubMain.pg.hub.base-camp .coll-ms { display: flex; flex-direction: column; align-items: start; gap: 10px; padding: 19px; background: #e7ecdf; border: 1px solid #c2cbb5; }
-#overlay #hubMain.pg.hub.base-camp .coll-ms b { color: #425f5c; font-size: 19px; }
-#overlay #hubMain.pg.hub.base-camp .coll-ms .rw { color: #657866; font-size: 14px; }
-#overlay #hubMain.pg.hub.base-camp .coll-group { margin-top: 20px; padding: 0; background: #faf8f1; border: 1px solid #c7d1bf; box-shadow: none; }
-#overlay #hubMain.pg.hub.base-camp .coll-group-head { display: flex; align-items: center; gap: 25px; cursor: pointer; margin: 0; padding: 20px 24px; background: #e4ebde; }
-#overlay #hubMain.pg.hub.base-camp .coll-group-head b { color: #345554; font-size: 23px; }
-#overlay #hubMain.pg.hub.base-camp .coll-group-head small { font-size: 13px; color: #72806a; margin-left: 14px; }
-#overlay #hubMain.pg.hub.base-camp .coll-group-count { margin-left: auto; font: 700 26px/1 var(--font-num); color: #537b72; }
 #overlay #hubMain.pg.hub.base-camp .coll-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; padding: 25px; }
-#overlay #hubMain.pg.hub.base-camp .coll-slot { width: auto; min-height: 210px; margin: 0; }
-#overlay #hubMain.pg.hub.base-camp .coll-slot.on { display: grid; place-items: center; background: transparent; border: 0; }
-#overlay #hubMain.pg.hub.base-camp .coll-slot .hs-card { font-size: 10px; }
-#overlay #hubMain.pg.hub.base-camp .coll-slot.off { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; gap: 10px; height: auto; background: #e7eadf; border: 1px dashed #b8c6b0; }
-#overlay #hubMain.pg.hub.base-camp .coll-slot.off span { color: #91a28b; font-size: 35px; }
-#overlay #hubMain.pg.hub.base-camp .coll-slot.off b { color: #5c7567; font-size: 18px; text-align: center; }
-#overlay #hubMain.pg.hub.base-camp .coll-slot.off small { color: #788b76; font-size: 13px; }
 
 /* 出征二级整备与三级详情，沿用同一张纸与返回动作。 */
 #overlay #depMain.pg.hub.camp-detail { position: relative; }

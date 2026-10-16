@@ -1,0 +1,82 @@
+{
+  "r6": {
+    "files": 1293,
+    "packageBytes": 125396991,
+    "duplicateBytes": 16540,
+    "entryGzipBytes": 295878,
+    "initialJsGzipBytes": 342381,
+    "cssGzipBytes": 201206
+  },
+  "r7": {
+    "files": 1293,
+    "packageBytes": 125404820,
+    "duplicateBytes": 16540,
+    "entryGzipBytes": 296902,
+    "initialJsGzipBytes": 343405,
+    "cssGzipBytes": 201452
+  },
+  "deltaR7MinusR6": {
+    "files": 0,
+    "packageBytes": 7829,
+    "duplicateBytes": 0,
+    "entryGzipBytes": 1024,
+    "initialJsGzipBytes": 1024,
+    "cssGzipBytes": 246
+  },
+  "initialFiles": [
+    "assets/js/index-BkP3nNwd.js",
+    "assets/js/game-card-catalog-va7DXL-F.js",
+    "assets/js/vendor-runtime-DkOp-1lm.js"
+  ],
+  "entryFiles": [
+    "assets/js/index-BkP3nNwd.js"
+  ],
+  "allCssFiles": [
+    {
+      "path": "assets/battle-CMeGAmXR.css",
+      "gzipBytes": 2217
+    },
+    {
+      "path": "assets/game.cardslib-DL1ME_Cs.css",
+      "gzipBytes": 13367
+    },
+    {
+      "path": "assets/game.menu-COmXXeJI.css",
+      "gzipBytes": 9387
+    },
+    {
+      "path": "assets/home-djRd51SW.css",
+      "gzipBytes": 1973
+    },
+    {
+      "path": "assets/home-layers-CGeD3b0U.css",
+      "gzipBytes": 1771
+    },
+    {
+      "path": "assets/home-menu-motion-ChDSp1Xr.css",
+      "gzipBytes": 973
+    },
+    {
+      "path": "assets/home-polish-8Wc6XNpi.css",
+      "gzipBytes": 6599
+    },
+    {
+      "path": "assets/index-DZGxO3CS.css",
+      "gzipBytes": 162192
+    },
+    {
+      "path": "assets/interface-motion-Cm3pw1Zg.css",
+      "gzipBytes": 971
+    },
+    {
+      "path": "assets/motion-transitions-BdxbKqrz.css",
+      "gzipBytes": 2002
+    }
+  ],
+  "budgets": {
+    "packageBytesMax": 117440512,
+    "entryGzipBytesMax": 276480,
+    "initialJsGzipBytesMax": 317440,
+    "cssGzipBytesMax": 139264
+  }
+}

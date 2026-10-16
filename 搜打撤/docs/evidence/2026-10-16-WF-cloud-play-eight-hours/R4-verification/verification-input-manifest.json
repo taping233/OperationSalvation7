@@ -1,0 +1,18 @@
+{
+  "budgetSourceSha256": "35972fa6e3fd93f363f9b7b53fe2c05f8c44d9a73ecfddc7a8ad0bc7934ae7e8",
+  "bypassVariablesSet": {},
+  "dependenciesNoSharedInodes": true,
+  "dependencyManifestSha256": "a289651fefbddca18476c65ada7fdef5d4c739dac9bfc08c971d237a04d2eff6",
+  "explicitBypassEnvironment": {
+    "FORCE_FULL_TESTS": null,
+    "GATE_RECEIPT": null,
+    "SDT_STAGED_SNAPSHOT": null,
+    "SKIP_FULL_TESTS": null
+  },
+  "gitMetadataManifestSha256": "3ad857e42e007b8d55fad440c83d4c5f9bc5acc76baeb4d1a45cbf7fa42a9c04",
+  "gitNoSharedInodes": true,
+  "kind": "R4 uncommitted working snapshot; independent Git and dependencies",
+  "reviewScriptSha256": "ac7ac392eb5cf6995ec4cfcb3b03b0c867313e5b725cc9765a2a78cf24593da4",
+  "sourceInputManifestSha256": "2c6b9b5116a6164cf8b39329d35380ff31793e95a7ca6d2cba5447359be6c2c8",
+  "sourceNoSharedInodes": true
+}

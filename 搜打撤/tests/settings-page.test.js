@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { createGameMenuController } from '../game/src/ui/game.menu.js';
+import { createGameMenuController } from './helpers/menu-controller.js';
 
 function openSettings() {
   document.body.innerHTML = '<div id="overlay" hidden><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';

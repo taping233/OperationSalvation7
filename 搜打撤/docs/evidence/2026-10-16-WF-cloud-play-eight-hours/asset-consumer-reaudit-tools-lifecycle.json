@@ -1,0 +1,7 @@
+{
+  "timeUTC": "2026-10-15T22:21:18.141210+00:00",
+  "path": "game/src/battle/view/battle.layers.js",
+  "before": "9e7550ed5c4ed75d54f158430e1cf83fc652e5086c7309a5c6d1b48c78797ab0",
+  "after": "9196a64ce8f64e75620fffbcddf01c5fc1effaeda763551c1859841d09bfb475",
+  "review": "Read source-change.patch; only moves fresh direct HUD tools into retained player, replacing stale direct tools. No asset URL construction/catalog/fallback/frames changes, existing R1-R4 preserved per source-preservation proof. Updated only matching opaque consumer."
+}

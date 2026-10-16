@@ -20,6 +20,7 @@
  * ============================================================ */
 
 import { Random } from '../core/random.js';
+import { BATTLE_LOG_CAP, createRunBattleStats } from './agent.battle-stats.js';
 
 const KEY = 'sdt-run-records';
 const CAP = 200;
@@ -34,10 +35,12 @@ let runDriver = null;
 let interventions = [];
 // 2026-10-03 老板（SYS-11）：结构化停止原因（runner 收口时写入，recordRun 随局落盘）
 let stopInfo = null;
-const battles = { fought: 0, won: 0 };
-// 本局战斗流水（09-26 死因解剖）：死亡 50 局全是战斗中倒下，但 runs.jsonl 只有
-// 胜负计数——看不到"最后一战打的谁、几回合、还剩多少血"。环形存末 40 场进记录
-const battleLog = [];
+const runBattleStats = createRunBattleStats();
+const { battles, battleLog, snapshot: snapshotRunBattles } = runBattleStats;
+function restoreRunBattles(data, runId) {
+  bt = null; // 只替换战斗统计，不抹掉同一会话既有的驱动/干预来源事实。
+  return runBattleStats.restore(data, runId);
+}
 
 function setDriver(name) {
   driverTag = name || 'human';
@@ -119,7 +122,7 @@ function noteBattle(win, ctx = {}) {
     startHp: bt && bt.startHp != null ? bt.startHp : null,   // 开战血量（残血滚动因果链关键观测）
     startCards: bt && bt.startCards != null ? bt.startCards : null, // 开战卡数（L4/紧急撤离献祭观测）
   });
-  if (battleLog.length > 40) battleLog.shift();
+  if (battleLog.length > BATTLE_LOG_CAP) battleLog.shift();
 }
 
 // —— 战斗内逐步观测累积器（09-26 埋点）——
@@ -165,9 +168,7 @@ function getBattleCount() { return battles.fought; }
 // 计数+流水一并清零。批跑每局开跑前也调（弃局走兜底路径不经 recordRun，
 // 不清会把上一局的流水带进下一局的记录）
 function resetRunCounters() {
-  battles.fought = 0;
-  battles.won = 0;
-  battleLog.length = 0;
+  runBattleStats.reset();
   bt = null;
   runDriver = null;        // SYS-11：驱动粘滞/干预履历/停止原因随局清零，不污染下一局
   interventions = [];
@@ -212,6 +213,7 @@ function recordRun(outcome, detail = {}) {
     }));
   const entry = {
     id: `run-${Date.now().toString(36)}-${Random.random('gameplay').toString(36).slice(2, 7)}`,
+    runId: snapshotRunBattles().runId,
     ts: Date.now(),
     driver: driverTag,
     // 2026-10-03 老板（SYS-11）：本局真实来源——driver 三态（human|agent|mixed）+ 干预履历
@@ -286,4 +288,4 @@ function exportCSV() {
   return [head.join(','), ...rows].join('\n');
 }
 
-export { recordRun, noteBattle, battleTick, battleActionTick, battleEnd, getBattleCount, resetRunCounters, listRuns, clearRuns, exportJSON, exportCSV, setDriver, getDriver, noteIntervention, noteStopReason, classifyStop };
+export { recordRun, noteBattle, battleTick, battleActionTick, battleEnd, getBattleCount, resetRunCounters, snapshotRunBattles, restoreRunBattles, listRuns, clearRuns, exportJSON, exportCSV, setDriver, getDriver, noteIntervention, noteStopReason, classifyStop };

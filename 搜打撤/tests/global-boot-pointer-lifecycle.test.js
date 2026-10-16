@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 const h = vi.hoisted(() => ({ runtime: null, canvas: null, dpr: 1,
-  ctx: { setTransform: vi.fn() }, reenter:vi.fn(), game: { runActive: false, state:'idle', toggles:{}, debug:{}, nodes:[], layerData:[], time:0, elapsed:0 },
+  ctx: { setTransform: vi.fn() }, reenter:vi.fn(), menuLoading:false, cancelMenu:vi.fn(), game: { runActive: false, state:'idle', toggles:{}, debug:{}, nodes:[], layerData:[], time:0, elapsed:0 },
   cam: { viewW:0, viewH:0, resize(w,height){ this.viewW=w; this.viewH=height; }, clamp:vi.fn(), panBy:vi.fn(), screenToWorld:(x,y)=>({x,y}) } }));
 vi.mock('../game/src/run/game.session.js', () => ({
   MAP: { cols:4, rows:4, tile:100 }, SLOT_COUNT: 3, canvas: h.canvas, cam: h.cam, ctx: h.ctx, game: h.game,
@@ -13,7 +13,8 @@ vi.mock('../game/src/run/game.session.js', () => ({
 }));
 vi.mock('../game/src/run/game.run.js', () => ({ bindRunMixins: vi.fn(), devForceBattle: vi.fn(), devJumpNode: vi.fn(),
   moveTo: vi.fn(), openDevConsole: vi.fn(), reenterCell: h.reenter, openClassChoice: vi.fn(), openShop: vi.fn(),
-  showRunTransition: vi.fn(), resumeChestsOnCell: vi.fn() }));
+  showRunTransition: vi.fn(), resumeChestsOnCell: vi.fn(), resumeEventCardChoice: vi.fn(() => false) }));
+vi.mock('../game/src/ui/game.menu.js', () => ({ get menuPageLoading() { return h.menuLoading; }, cancelPendingMenuPageOpen: h.cancelMenu }));
 vi.mock('../game/src/run/game.run.data.js', () => ({ PRELOAD_SCENES: {} }));
 vi.mock('../game/src/run/game.run.altar.js', () => ({ resumeExtraction: vi.fn() }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn(), baseHubLoading: false }));
@@ -46,11 +47,11 @@ beforeAll(async () => {
   const noop=()=>{};
   window.SDT = { UI:ui, Sound:{ muted:false, sfx:noop }, Camera:class { constructor(){return h.cam;} },
     Base:{ migrateLegacy:noop }, Cards:{ ensureStarters:noop, ensureSha:noop, ensureTabletop:noop, ensureDmgTypes:noop, ensureEffectFields:noop },
-    Art:{ collectThumbnailAssets:()=>[], collectManifestAssets:()=>[], prefetchBatched:async()=>{} } };
+    Art:{ collectThumbnailAssets:()=>[], collectManifestAssets:()=>[], warmBatched:async()=>{}, prefetchBatched:async()=>{} } };
   await import('../game/src/game.boot.js');
   document.dispatchEvent(new Event('DOMContentLoaded', { bubbles:true }));
 });
-afterEach(() => { window.dispatchEvent(new Event('blur')); captured.clear(); h.cam.panBy.mockClear(); h.reenter.mockClear(); h.canvas.releasePointerCapture.mockClear(); });
+afterEach(() => { h.menuLoading=false; h.cancelMenu.mockClear(); window.dispatchEvent(new Event('blur')); captured.clear(); h.cam.panBy.mockClear(); h.reenter.mockClear(); h.canvas.releasePointerCapture.mockClear(); });
 afterAll(() => vi.unstubAllGlobals());
 function pointer(type,id,x=20,y=20) {
   if (type === 'lostpointercapture' || type === 'pointercancel') captured.delete(id);
@@ -59,6 +60,13 @@ function pointer(type,id,x=20,y=20) {
   h.canvas.dispatchEvent(event);
 }
 describe('真实 boot Canvas 被中断的指针输入', () => {
+  it('菜单冷加载的Escape走取消端口，输入法组合中的Escape保留给输入法', () => {
+    h.menuLoading=true;
+    const composing=new KeyboardEvent('keydown',{ key:'Escape', bubbles:true, cancelable:true, isComposing:true });
+    window.dispatchEvent(composing); expect(h.cancelMenu).not.toHaveBeenCalled();
+    const escape=new KeyboardEvent('keydown',{ key:'Escape', bubbles:true, cancelable:true });
+    window.dispatchEvent(escape); expect(h.cancelMenu).toHaveBeenCalledOnce(); expect(escape.defaultPrevented).toBe(true);
+  });
   it('lostpointercapture 取消当前拖动，新的指针可继续拖动', () => {
     pointer('pointerdown',1); pointer('pointermove',1,40,20);
     expect(h.game.camDragging).toBe(true);

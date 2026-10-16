@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-battle-pile-readability-1016",
+  "date": "2026-10-16",
+  "owner": "Friday-pile-readability",
+  "goal": "R7后放大牌库与墓地共用查看页，只改pile作用域样式",
+  "paths": [
+    "game/css/battle-hand-overhaul.css",
+    "tests/battle-pile-readability.test.js",
+    "docs/evidence/2026-10-16-WF-battle-pile-readability/"
+  ],
+  "doneWhen": [
+    "牌堆专属1680壳与320卡格24px规则静态契约通过",
+    "牌堆交互回归及复原珍珠盒样式定向测试通过"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "5文件48项定向测试通过，新增测试ESLint及自有diff检查通过，详见自有summary.json",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "父会话负责当前窗口实页像素与原生滚动/Tab，本子任务未操作浏览器或真实存档；本R7后增量未纳入R7全量覆盖"
+  ],
+  "updatedAt": "2026-10-16T00:11:32.904Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

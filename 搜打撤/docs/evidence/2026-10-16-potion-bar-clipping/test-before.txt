@@ -1,0 +1,107 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤
+
+ × tests/battle-potion-bar-layout.test.js > battle potion left-anchor cascade > overrides the original centered bar transform in the complete loaded cascade 149ms
+   → expected { file: 'game/css/battle.css', …(3) } to match object { …(3) }
+(1 matching property omitted from actual)
+ × tests/battle-potion-bar-layout.test.js > battle potion left-anchor cascade > keeps the visible tooltip anchored to the bar instead of half its own width left 84ms
+   → expected { file: 'game/css/battle.css', …(3) } to match object { …(3) }
+(1 matching property omitted from actual)
+ × tests/battle-potion-bar-layout.test.js > battle potion left-anchor cascade > retains the more specific reset when the later runtime hidden-tip rule matches 26ms
+   → expected { …(4) } to match object { …(3) }
+(1 matching property omitted from actual)
+ ✓ tests/battle-potion-bar-layout.test.js > battle potion left-anchor cascade > reproduces both original horizontal offsets when only the canonical resets are removed 29ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/battle-potion-bar-layout.test.js > battle potion left-anchor cascade > overrides the original centered bar transform in the complete loaded cascade
+AssertionError: expected { file: 'game/css/battle.css', …(3) } to match object { …(3) }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "file": "game/css/battle-stage.css",
+-   "selector": "#overlay .battle-stage.sts>.bt-potions",
+-   "value": "none",
++   "file": "game/css/battle.css",
++   "selector": ".bt-potions",
++   "value": "translateX(-50%)",
+  }
+
+ ❯ tests/battle-potion-bar-layout.test.js:80:30
+     78|     const transform = cascade(bar, 'transform');
+     79|     expect(transform.matches).toContainEqual(expect.objectContaining({…
+     80|     expect(transform.winner).toMatchObject({ file: 'game/css/battle-st…
+       |                              ^
+     81|     expect(cascade(bar, 'left').winner.value).toBe('62px');
+     82|     expect(cascade(bar, 'max-width').winner.value).toBe('420px');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/battle-potion-bar-layout.test.js > battle potion left-anchor cascade > keeps the visible tooltip anchored to the bar instead of half its own width left
+AssertionError: expected { file: 'game/css/battle.css', …(3) } to match object { …(3) }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "file": "game/css/battle-stage.css",
+-   "selector": "#overlay .battle-stage.sts .bt-potion-tip",
+-   "value": "none",
++   "file": "game/css/battle.css",
++   "selector": ".bt-potion-tip",
++   "value": "translateX(-50%)",
+  }
+
+ ❯ tests/battle-potion-bar-layout.test.js:88:46
+     86|     const tip = document.querySelector('.bt-potion-tip');
+     87|     expect(cascade(tip, 'transform').matches).toContainEqual(expect.ob…
+     88|     expect(cascade(tip, 'transform').winner).toMatchObject({ file: 'ga…
+       |                                              ^
+     89|     expect(cascade(tip, 'left').winner.value).toBe('0');
+     90|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/battle-potion-bar-layout.test.js > battle potion left-anchor cascade > retains the more specific reset when the later runtime hidden-tip rule matches
+AssertionError: expected { …(4) } to match object { …(3) }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "file": "game/css/battle-stage.css",
+-   "selector": "#overlay .battle-stage.sts .bt-potion-tip",
+-   "value": "none",
++   "file": "game/css/motion-transitions.css",
++   "selector": "#overlay .bt-potion-tip[hidden]",
++   "value": "translateY(4px)",
+  }
+
+ ❯ tests/battle-potion-bar-layout.test.js:97:30
+     95|     const transform = cascade(tip, 'transform');
+     96|     expect(transform.matches).toContainEqual(expect.objectContaining({…
+     97|     expect(transform.winner).toMatchObject({ file: 'game/css/battle-st…
+       |                              ^
+     98|     expect(cascade(tip, 'display').winner.value).toBe('none');
+     99|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  07:35:46
+   Duration  2.65s (transform 146ms, setup 0ms, collect 552ms, tests 291ms, environment 1.07s, prepare 218ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

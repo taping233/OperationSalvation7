@@ -1,0 +1,46 @@
+{
+  "checkedAt": "2026-10-15T19:36:12.432Z",
+  "commands": [
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/css-dead-dom-budget.test.js tests/expedition-view.test.js tests/hub-archive-v3.test.js tests/hub-collection-v4.test.js tests/hub-trade-shop-v5.test.js tests/base-departure.test.js tests/beginner-guide-entry-copy.test.js tests/chest-click-flow.test.js tests/backpack-layout.test.js tests/entry-supply-presentation.test.js --reporter=dot",
+      "exitCode": 0,
+      "result": "10 files / 94 tests passed",
+      "log": "target-tests.log"
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/contracts.test.js tests/architecture-boundaries.test.js --reporter=dot",
+      "exitCode": 0,
+      "result": "2 files / 41 tests passed",
+      "log": "sentinels.log"
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js tests/css-dead-dom-budget.test.js",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check -- <18 modified CSS files> tests/css-dead-dom-budget.test.js",
+      "exitCode": 0
+    }
+  ],
+  "producerSha256": {
+    "game/src/run/expedition.view.js": "237bf5b7030bda6581bdf0758bfd17485cafee378e6d1a4ea2e3f63695b06d7a",
+    "tests/expedition-view.test.js": "b07afeeb6b5eff3418a6f54993faf5c790f18bfe81abea3caf5cfcd5bcaf73ce",
+    "game/src/ui/game.menu.js": "7d183604bab0efa1520fd5fa1abffffef229e757bad48debc8dc74596fa72004",
+    "game/src/ui/beginner-guide.js": "33cfcb52575a5b5083fcdcc1cb1c9aebc360135db492a398503365521f0c7086",
+    "game/src/hub/hub.home-v3.js": "caf31b16d31d566575e7fc7570d928e577097f9b8f58750632eb95ba9bc513a3",
+    "game/src/hub/game.hub.depart.js": "feadddb938f81e89962dacdd335802dd84adc7ad0836f46b11ecc53c49067f40",
+    "game/src/hub/hub.personnel.js": "2ccd3ab249def60d74d5dbcedc26dc2c6eee4c95c699c3f15be9ea3596746f80",
+    "game/src/hub/hub.collection-v4.js": "b194ae2175b0089e5a13d6f4d94609e0096080875452be8cf3581be3f3398a8e",
+    "game/src/hub/hub.archive-v3.js": "848f1eca823675bfe5c89ac6fff4b1b31392102e975790efc5fd840b0a04b10f",
+    "game/src/cards/cards.view.js": "d100f89cd30cd69f6d5179d595991e4669d1f582fdaaa118ad0bb0f2a2006074",
+    "game/src/hub/hub.trade-shop-v5.js": "3c93bb310fb04a2dcbb5a47b6defa7d1c989407c1c1be845d43256f18a7958e0",
+    "game/src/run/chests.js": "32fc73bd9190fd3dc06afb03e6f3dc4a5cc4774973b495c4a5e04da702f8d18b",
+    "game/src/hub/hub.warehouse.js": "9d057b221e9b4f6bf7cdb4b114e07d65079496ae3fdf2d00a0c5e5944adb2802"
+  },
+  "notRun": [
+    "full test suite",
+    "normal build",
+    "browser validation",
+    "remote CI"
+  ]
+}

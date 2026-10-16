@@ -19,7 +19,7 @@ import SDT from '../../core/sdt-facade.js';
  * @returns {{ drawCards, deckDraw, addTempCard, addDeckCard, grantSha, releaseHandMatches, autoPlayHandType }}
  */
 export function createBattleDraw({
-  R, alive, findCard, sweepDead,
+  R, alive, findCard, findEffectiveCard, sweepDead,
   applyTextEffects, resolveCard, fireDrawn, fireAcquire,
   checkSealTransformation, queueCardExecution, requestBattleRender,
 }) {
@@ -35,7 +35,12 @@ function drawCards(n) {
       }
       if (!drawPile.length) break;
       const uid = drawPile.pop();
-      const entry = findCard(uid);
+      const entry = findEffectiveCard?.(uid) || findCard(uid);
+      if (entry?.card?._battleTransformMissing) {
+        drawPile.push(uid);
+        G.log(`[[icon:cross]] 转换目标「${esc(entry.card._battleTransformMissing)}」缺失，本次未抽取或施放`, 'warn');
+        break;
+      }
       const parts = entry ? splitEffectClauses(String(entry.card.desc || '')) : null;
       // 手牌满：灰烬符文「放不下的招式直接释放」（2026-09-16 定版）——直释不占手牌，继续抽；
       // 其余情况把牌放回库顶并停止抽牌（与旧版 pop 前 break 等价：库序不变）。
@@ -160,9 +165,9 @@ function releaseHandMatches(key, drawEach, max) {
       if (max && released >= max) break;
       const o = findCard(uid);
       if (!o || o.card.type === '生物' || !re.test(o.card.name || '')) continue;
-      queueCardExecution(uid, o.card, [], alive()[0] || null, true, false, [],
+      const queued = queueCardExecution(uid, o.card, [], alive()[0] || null, true, false, [],
         drawEach ? () => { drawCards(drawEach); requestBattleRender(); } : null);
-      released++;
+      if (queued !== false) released++;
     }
     return released;
   }
@@ -173,8 +178,7 @@ function autoPlayHandType(type) {
       if (!hand.includes(uid)) continue;
       const o = findCard(uid);
       if (!o || o.card.type !== type) continue;
-      queueCardExecution(uid, o.card, [], alive()[0] || null, true);
-      played++;
+      if (queueCardExecution(uid, o.card, [], alive()[0] || null, true) !== false) played++;
     }
     return played;
   }

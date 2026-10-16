@@ -1,0 +1,4420 @@
+{
+  "warning": "Hypothetical upper bound only: same selector branch, condition, importance dominance and shorthand reset coverage. Does not validate fallback values, CSSOM dependencies, or every modern shorthand reset property. No production change.",
+  "totalGzip": 197087,
+  "saving": 3749,
+  "removed": 620,
+  "results": [
+    {
+      "file": "battle-CMeGAmXR.css",
+      "before": 2217,
+      "after": 2217,
+      "saving": 0,
+      "removed": []
+    },
+    {
+      "file": "game.cardslib-DL1ME_Cs.css",
+      "before": 13367,
+      "after": 13267,
+      "saving": 100,
+      "removed": [
+        {
+          "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-term",
+          "property": "border-bottom-color",
+          "value": "#2d656166",
+          "important": true,
+          "offset": 50976
+        },
+        {
+          "selector": "body.reduce-motion.cardlib-open #overlay .studio-archive .clib-tabs:after",
+          "property": "transition",
+          "value": "none",
+          "important": true,
+          "offset": 40789
+        },
+        {
+          "selector": "body.cardlib-open #overlay .studio-archive [data-studio-rarity=传说]",
+          "property": "color",
+          "value": "#88713b",
+          "important": true,
+          "offset": 38135
+        },
+        {
+          "selector": "body.cardlib-open #overlay .studio-archive .studio-zoom",
+          "property": "border-color",
+          "value": "#34383c",
+          "important": true,
+          "offset": 36666
+        },
+        {
+          "selector": "body.cardlib-open #overlay .studio-archive .pv-desc .d-term",
+          "property": "border-bottom-color",
+          "value": "#2d656166",
+          "important": true,
+          "offset": 35188
+        },
+        {
+          "selector": "body.cardlib-open #overlay .studio-archive .library-inspector",
+          "property": "position",
+          "value": "relative",
+          "important": false,
+          "offset": 33456
+        },
+        {
+          "selector": "body.cardlib-open #overlay .studio-archive .lib-cardwrap[aria-current=true] .studio-photo-paper",
+          "property": "outline-offset",
+          "value": "4px",
+          "important": true,
+          "offset": 32594
+        },
+        {
+          "selector": "body.cardlib-open #overlay .studio-archive .lib-cardwrap[aria-current=true] .studio-photo-paper",
+          "property": "outline",
+          "value": "2px solid #8a7130",
+          "important": true,
+          "offset": 32558
+        },
+        {
+          "selector": "body.cardlib-open #overlay .studio-archive .studio-search,body.cardlib-open #overlay .studio-archive .studio-select-shell",
+          "property": "background",
+          "value": "#f4f4f4",
+          "important": true,
+          "offset": 24259
+        },
+        {
+          "selector": "body.cardlib-open #overlay .studio-archive .studio-search,body.cardlib-open #overlay .studio-archive .studio-select-shell",
+          "property": "border",
+          "value": "1px solid #abadae",
+          "important": true,
+          "offset": 24208
+        },
+        {
+          "selector": "body.cardlib-open #overlay .studio-archive .studio-search,body.cardlib-open #overlay .studio-archive .studio-select-shell",
+          "property": "min-height",
+          "value": "44px",
+          "important": false,
+          "offset": 24192
+        },
+        {
+          "selector": "body.cardlib-open #overlay .studio-archive .studio-clear",
+          "property": "border-color",
+          "value": "#8e7d68",
+          "important": true,
+          "offset": 22022
+        },
+        {
+          "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-rules .d-term[data-term]",
+          "property": "color",
+          "value": "#2d6561",
+          "important": true,
+          "offset": 12194
+        },
+        {
+          "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-detail",
+          "property": "border-right",
+          "value": "1px solid rgba(210,189,117,.24)",
+          "important": false,
+          "offset": 11200
+        },
+        {
+          "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-title",
+          "property": "color",
+          "value": "#30302e",
+          "important": true,
+          "offset": 10874
+        },
+        {
+          "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-title",
+          "property": "line-height",
+          "value": "1.4",
+          "important": false,
+          "offset": 10858
+        },
+        {
+          "selector": "body.cardlib-open:has(.studio-archive) #cardZoom.cz-photo .cz-photo-title",
+          "property": "font-size",
+          "value": "26px",
+          "important": false,
+          "offset": 10843
+        }
+      ]
+    },
+    {
+      "file": "game.menu-COmXXeJI.css",
+      "before": 9387,
+      "after": 9387,
+      "saving": 0,
+      "removed": []
+    },
+    {
+      "file": "home-djRd51SW.css",
+      "before": 1973,
+      "after": 1973,
+      "saving": 0,
+      "removed": []
+    },
+    {
+      "file": "home-layers-CGeD3b0U.css",
+      "before": 1771,
+      "after": 1757,
+      "saving": 14,
+      "removed": []
+    },
+    {
+      "file": "home-menu-motion-ChDSp1Xr.css",
+      "before": 973,
+      "after": 965,
+      "saving": 8,
+      "removed": []
+    },
+    {
+      "file": "home-polish-8Wc6XNpi.css",
+      "before": 6599,
+      "after": 6551,
+      "saving": 48,
+      "removed": []
+    },
+    {
+      "file": "index-BzlIbwSi.css",
+      "before": 161576,
+      "after": 158025,
+      "saving": 3551,
+      "removed": [
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-body .hub-card",
+          "property": "border-color",
+          "value": "var(--camp-line)",
+          "important": false,
+          "offset": 703167
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-depart-person-copy .mini-btn",
+          "property": "border-color",
+          "value": "#718f9b",
+          "important": false,
+          "offset": 678370
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .bag-cell.empty",
+          "property": "border-color",
+          "value": "#d6e0e5",
+          "important": false,
+          "offset": 677911
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .bag-cell.empty",
+          "property": "background",
+          "value": "#f0f4f6",
+          "important": false,
+          "offset": 677892
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-depart-next",
+          "property": "font-size",
+          "value": "14px",
+          "important": false,
+          "offset": 558676
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-depart-next",
+          "property": "color",
+          "value": "#71836c",
+          "important": false,
+          "offset": 558662
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-foot",
+          "property": "background",
+          "value": "#e2e7db",
+          "important": false,
+          "offset": 558395
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-foot",
+          "property": "padding",
+          "value": "24px 38px",
+          "important": false,
+          "offset": 558377
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-pack-note",
+          "property": "font-size",
+          "value": "14px",
+          "important": false,
+          "offset": 558239
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-pack-note",
+          "property": "color",
+          "value": "#6e846e",
+          "important": false,
+          "offset": 558225
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .pet-chip",
+          "property": "border-radius",
+          "value": "2px",
+          "important": false,
+          "offset": 558019
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .pet-chip",
+          "property": "background",
+          "value": "#e2e9d8",
+          "important": false,
+          "offset": 557975
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .pet-chip",
+          "property": "color",
+          "value": "#597964",
+          "important": false,
+          "offset": 557961
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-n",
+          "property": "color",
+          "value": "#f0e5b7",
+          "important": false,
+          "offset": 557674
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-n",
+          "property": "background",
+          "value": "#2c5c60",
+          "important": false,
+          "offset": 557655
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .bag-cell",
+          "property": "border-radius",
+          "value": "2px",
+          "important": false,
+          "offset": 557273
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .bag-cell",
+          "property": "background",
+          "value": "#e1e6d8",
+          "important": false,
+          "offset": 557216
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .bag-grid",
+          "property": "min-height",
+          "value": "0",
+          "important": false,
+          "offset": 557026
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .bag-grid",
+          "property": "gap",
+          "value": "14px",
+          "important": false,
+          "offset": 557007
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-quantity",
+          "property": "color",
+          "value": "#66836c",
+          "important": false,
+          "offset": 556695
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-quantity",
+          "property": "font-size",
+          "value": "13px",
+          "important": false,
+          "offset": 556680
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card.picked",
+          "property": "background",
+          "value": "#d3e4d8",
+          "important": false,
+          "offset": 556478
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card.picked",
+          "property": "box-shadow",
+          "value": "inset 0 0 0 2px #417d8b",
+          "important": false,
+          "offset": 556443
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card.picked",
+          "property": "border-color",
+          "value": "#417d8b",
+          "important": false,
+          "offset": 556422
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card .hs-card",
+          "property": "font-size",
+          "value": "12px",
+          "important": false,
+          "offset": 556338
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card",
+          "property": "padding",
+          "value": "8px",
+          "important": false,
+          "offset": 556109
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card",
+          "property": "background",
+          "value": "#e0e6d9",
+          "important": false,
+          "offset": 556090
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card",
+          "property": "border-radius",
+          "value": "2px",
+          "important": false,
+          "offset": 556072
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card",
+          "property": "border",
+          "value": "1px solid #b4c8b4",
+          "important": false,
+          "offset": 556047
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-cards",
+          "property": "gap",
+          "value": "18px",
+          "important": false,
+          "offset": 555911
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-cards",
+          "property": "grid-template-columns",
+          "value": "repeat(auto-fill,minmax(210px,1fr))",
+          "important": false,
+          "offset": 555853
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-filters :is(select,button)",
+          "property": "border-radius",
+          "value": "2px",
+          "important": false,
+          "offset": 555774
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-filters :is(select,button)",
+          "property": "color",
+          "value": "#405d56",
+          "important": false,
+          "offset": 555704
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-filters :is(select,button)",
+          "property": "background",
+          "value": "#eeeee2",
+          "important": false,
+          "offset": 555685
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-filters",
+          "property": "color",
+          "value": "#58766b",
+          "important": false,
+          "offset": 555491
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .hub-card>h3",
+          "property": "color",
+          "value": "#2e4d55",
+          "important": false,
+          "offset": 555058
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-depart-person-copy h3",
+          "property": "color",
+          "value": "#f0efdf",
+          "important": false,
+          "offset": 554681
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-depart-person-copy h3",
+          "property": "font-size",
+          "value": "22px",
+          "important": false,
+          "offset": 554666
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-depart-person-copy",
+          "property": "color",
+          "value": "#d9e5db",
+          "important": false,
+          "offset": 554474
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-depart-person-copy",
+          "property": "background",
+          "value": "#294750",
+          "important": false,
+          "offset": 554455
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-depart-person-copy",
+          "property": "padding",
+          "value": "22px",
+          "important": false,
+          "offset": 554442
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-depart-person",
+          "property": "background",
+          "value": "#d9e2d7",
+          "important": false,
+          "offset": 554072
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-body",
+          "property": "overflow",
+          "value": "auto",
+          "important": false,
+          "offset": 553966
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-body",
+          "property": "padding",
+          "value": "30px 38px",
+          "important": false,
+          "offset": 553948
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-body",
+          "property": "gap",
+          "value": "24px",
+          "important": false,
+          "offset": 553919
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-body",
+          "property": "grid-template-columns",
+          "value": "230px minmax(0,1.2fr) minmax(0,1fr)",
+          "important": false,
+          "offset": 553861
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .hub-head",
+          "property": "border-bottom",
+          "value": "1px solid #495e63",
+          "important": false,
+          "offset": 553105
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .hub-head",
+          "property": "background",
+          "value": "#1c2a32",
+          "important": false,
+          "offset": 553086
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .person-progress-track i",
+          "property": "background",
+          "value": "#528793",
+          "important": false,
+          "offset": 550786
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .person-progress-track i",
+          "property": "display",
+          "value": "block",
+          "important": false,
+          "offset": 550772
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .person-progress-track i",
+          "property": "height",
+          "value": "100%",
+          "important": false,
+          "offset": 550760
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .person-progress-track",
+          "property": "background",
+          "value": "#d5ded1",
+          "important": false,
+          "offset": 550662
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .person-progress-track",
+          "property": "height",
+          "value": "6px",
+          "important": false,
+          "offset": 550651
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail #btnDeploy",
+          "property": "padding",
+          "value": "17px 24px",
+          "important": false,
+          "offset": 541186
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail #btnDeploy",
+          "property": "min-height",
+          "value": "69px",
+          "important": false,
+          "offset": 541170
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail #btnDeploy",
+          "property": "width",
+          "value": "100%",
+          "important": false,
+          "offset": 541159
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-notice",
+          "property": "box-shadow",
+          "value": "0 8px 24px #192d3630",
+          "important": false,
+          "offset": 539130
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-notice",
+          "property": "border-left",
+          "value": "4px solid #d5ba74",
+          "important": false,
+          "offset": 539100
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-notice",
+          "property": "background",
+          "value": "#28505b",
+          "important": false,
+          "offset": 539081
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-notice",
+          "property": "color",
+          "value": "#f8f5e9",
+          "important": false,
+          "offset": 539067
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head h2",
+          "property": "letter-spacing",
+          "value": ".04em",
+          "important": false,
+          "offset": 536798
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head h2",
+          "property": "font",
+          "value": "700 38px/1.3 var(--font-ui)",
+          "important": false,
+          "offset": 536765
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head h2",
+          "property": "margin",
+          "value": "0",
+          "important": false,
+          "offset": 536756
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head h2",
+          "property": "color",
+          "value": "var(--camp-ink)",
+          "important": false,
+          "offset": 536734
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head h2",
+          "property": "display",
+          "value": "block",
+          "important": false,
+          "offset": 536720
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head",
+          "property": "flex-direction",
+          "value": "column",
+          "important": false,
+          "offset": 536529
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head",
+          "property": "display",
+          "value": "flex",
+          "important": false,
+          "offset": 536516
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .hub-page",
+          "property": "scrollbar-color",
+          "value": "#96a7a6 #e3e3db",
+          "important": false,
+          "offset": 536328
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .hub-slot-label",
+          "property": "border-left",
+          "value": "1px solid #4f5e65",
+          "important": false,
+          "offset": 533632
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .hub-slot-label",
+          "property": "padding-left",
+          "value": "24px",
+          "important": false,
+          "offset": 533614
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-brand h2",
+          "property": "color",
+          "value": "#f7f2e6",
+          "important": false,
+          "offset": 533532
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-brand h2",
+          "property": "letter-spacing",
+          "value": ".16em",
+          "important": false,
+          "offset": 533511
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .hub-head",
+          "property": "background",
+          "value": "#1c2a32",
+          "important": false,
+          "offset": 533052
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .hub-head",
+          "property": "border-bottom",
+          "value": "1px solid #445159",
+          "important": false,
+          "offset": 533020
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .hub-head",
+          "property": "border",
+          "value": "0",
+          "important": false,
+          "offset": 533011
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=true] .pool-side",
+          "property": "overflow",
+          "value": "auto",
+          "important": false,
+          "offset": 521095
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-confirm:active:not(:disabled)",
+          "property": "box-shadow",
+          "value": "0 1px #8e743d",
+          "important": false,
+          "offset": 518391
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-confirm:hover:not(:disabled)",
+          "property": "box-shadow",
+          "value": "0 6px #8e743d",
+          "important": false,
+          "offset": 518244
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-confirm:hover:not(:disabled)",
+          "property": "background",
+          "value": "#d3ba7b",
+          "important": false,
+          "offset": 518186
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-confirm",
+          "property": "box-shadow",
+          "value": "0 4px #8e743d",
+          "important": false,
+          "offset": 517799
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-confirm",
+          "property": "color",
+          "value": "#263738",
+          "important": false,
+          "offset": 517785
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-confirm",
+          "property": "background",
+          "value": "#c5aa68",
+          "important": false,
+          "offset": 517766
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-confirm",
+          "property": "border-radius",
+          "value": "2px",
+          "important": false,
+          "offset": 517748
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-face.sel b",
+          "property": "background",
+          "value": "#307d8de8",
+          "important": false,
+          "offset": 516573
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-face.sel",
+          "property": "box-shadow",
+          "value": "0 4px 9px #214b5626",
+          "important": false,
+          "offset": 516465
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-strip",
+          "property": "background",
+          "value": "#eeece5",
+          "important": false,
+          "offset": 515300
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-pool-btn",
+          "property": "color",
+          "value": "#28616d",
+          "important": false,
+          "offset": 514832
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-pool-btn",
+          "property": "background",
+          "value": "#edf2e9",
+          "important": false,
+          "offset": 514813
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-skin-btn.sel",
+          "property": "border-color",
+          "value": "#307d8d",
+          "important": false,
+          "offset": 514450
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-skin-btn.sel",
+          "property": "background",
+          "value": "#307d8d",
+          "important": false,
+          "offset": 514431
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-story",
+          "property": "font",
+          "value": "16px/1.75 var(--font-ui)",
+          "important": false,
+          "offset": 513578
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-story",
+          "property": "margin",
+          "value": "19px 0 0",
+          "important": false,
+          "offset": 513490
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-stats>div",
+          "property": "background",
+          "value": "#eeeee5",
+          "important": false,
+          "offset": 512962
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-chip-live",
+          "property": "color",
+          "value": "#28616d",
+          "important": false,
+          "offset": 511405
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-chip-live",
+          "property": "border-color",
+          "value": "#8fb5b6",
+          "important": false,
+          "offset": 511384
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-chip-live",
+          "property": "background",
+          "value": "#e1ece8",
+          "important": false,
+          "offset": 511365
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] h2.cls2-name",
+          "property": "text-shadow",
+          "value": "none",
+          "important": false,
+          "offset": 510832
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-panel",
+          "property": "background",
+          "value": "var(--camp-sheet)",
+          "important": false,
+          "offset": 510090
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-stage",
+          "property": "background",
+          "value": "linear-gradient(100deg,#eeece5 40%,#d4ddda 70%,#b8c8c8)",
+          "important": false,
+          "offset": 508632
+        },
+        {
+          "selector": "#overlay :is(.cls2-page,.cls-pool-page)[data-base-departure=true]",
+          "property": "background",
+          "value": "var(--camp-paper)",
+          "important": false,
+          "offset": 507215
+        },
+        {
+          "selector": ".page-loading",
+          "property": "background",
+          "value": "var(--ak-tex-grid) 0 0 / 32px 32px,var(--ak-ink)",
+          "important": false,
+          "offset": 501805
+        },
+        {
+          "selector": "#overlay .cls2-strip>*",
+          "property": "clip-path",
+          "value": "polygon(0 0,100% 0,calc(100% - 8px) 100%,0 100%)",
+          "important": false,
+          "offset": 500901
+        },
+        {
+          "selector": "#overlay .card.bag-page",
+          "property": "background",
+          "value": "radial-gradient(110% 70% at 50% 0%,rgba(61,66,71,.3),transparent 58%),linear-gradient(125deg,#242729e0,#17191be6)",
+          "important": false,
+          "offset": 475004
+        },
+        {
+          "selector": "#overlay.bag-full",
+          "property": "background",
+          "value": "radial-gradient(120% 90% at 50% 24%,rgba(49,53,56,.5),transparent 62%),radial-gradient(130% 100% at 50% 46%,transparent 46%,rgba(9,9,10,.55) 92%),linear-gradient(125deg,#202325,#181a1c)",
+          "important": false,
+          "offset": 474783
+        },
+        {
+          "selector": "#overlay .node-pg:not(.event-themed) .node-panel:before",
+          "property": "background",
+          "value": "linear-gradient(90deg,transparent,#ead282a1 24%,#ead282c4 50%,#ead282a1 76%,transparent)",
+          "important": false,
+          "offset": 466045
+        },
+        {
+          "selector": "#overlay .node-pg:not(.event-themed) .node-panel:before",
+          "property": "height",
+          "value": "1px",
+          "important": false,
+          "offset": 466004
+        },
+        {
+          "selector": "#overlay .node-pg:not(.event-themed) .node-panel:before",
+          "property": "top",
+          "value": "0",
+          "important": false,
+          "offset": 465998
+        },
+        {
+          "selector": "#overlay .node-pg:not(.event-themed) .node-panel:before",
+          "property": "right",
+          "value": "12%",
+          "important": false,
+          "offset": 465988
+        },
+        {
+          "selector": "#overlay .node-pg:not(.event-themed) .node-panel:before",
+          "property": "left",
+          "value": "12%",
+          "important": false,
+          "offset": 465979
+        },
+        {
+          "selector": "body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #btnHome",
+          "property": "background",
+          "value": "#632d32",
+          "important": true,
+          "offset": 431483
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "background",
+          "value": "linear-gradient(180deg,#111214e0,#0d0e0feb)",
+          "important": false,
+          "offset": 429399
+        },
+        {
+          "selector": "#hpHud",
+          "property": "background",
+          "value": "linear-gradient(180deg,#121415e0,#0e0f10eb)",
+          "important": false,
+          "offset": 429083
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "border-right-color",
+          "value": "#aaaeb124",
+          "important": false,
+          "offset": 427224
+        },
+        {
+          "selector": "#sidebar",
+          "property": "box-shadow",
+          "value": "0 -10px 30px #08090980,inset 0 1px #dfe0e20d",
+          "important": false,
+          "offset": 426934
+        },
+        {
+          "selector": "#sidebar",
+          "property": "border-top-color",
+          "value": "#e6cb7642",
+          "important": false,
+          "offset": 426907
+        },
+        {
+          "selector": "#sidebar",
+          "property": "background",
+          "value": "linear-gradient(105deg,#111213ed,#1a1c1ee6)",
+          "important": false,
+          "offset": 426852
+        },
+        {
+          "selector": "body #sidebar .expedition-nav-summary",
+          "property": "padding-right",
+          "value": "110px",
+          "important": false,
+          "offset": 424160
+        },
+        {
+          "selector": "#overlay .pg.data-tuned .ov-btns .ov-btn",
+          "property": "min-width",
+          "value": "150px",
+          "important": false,
+          "offset": 398255
+        },
+        {
+          "selector": "#overlay .pg.data-tuned .ov-btns .ov-btn",
+          "property": "flex",
+          "value": "0 0 auto",
+          "important": false,
+          "offset": 398241
+        },
+        {
+          "selector": "#overlay .pg.data-tuned .data-pg-head h2",
+          "property": "font-size",
+          "value": "20px",
+          "important": false,
+          "offset": 398129
+        },
+        {
+          "selector": "#overlay .pg.data-tuned .data-pg-head h2:before",
+          "property": "content",
+          "value": "\"\"",
+          "important": false,
+          "offset": 397895
+        },
+        {
+          "selector": "#overlay .pg.data-tuned .data-pg-head h2",
+          "property": "padding-left",
+          "value": "14px",
+          "important": false,
+          "offset": 397829
+        },
+        {
+          "selector": "#overlay .pg.data-tuned .data-pg-head",
+          "property": "padding-left",
+          "value": "96px",
+          "important": false,
+          "offset": 397752
+        },
+        {
+          "selector": "#overlay .pg.data-tuned .data-pg-head",
+          "property": "padding-top",
+          "value": "58px",
+          "important": false,
+          "offset": 397735
+        },
+        {
+          "selector": ".slot-page:before",
+          "property": "background",
+          "value": "radial-gradient(ellipse 42% 34% at 30% 62%,rgba(132,144,152,.26),transparent 68%),radial-gradient(ellipse 38% 30% at 72% 40%,rgba(162,173,180,.15),transparent 70%),radial-gradient(ellipse 50% 40% at 52% 84%,rgba(34,36,39,.55),transparent 72%)",
+          "important": false,
+          "offset": 371610
+        },
+        {
+          "selector": "#overlay .pg.cls-pool-page .cls-foot .ov-btn,#overlay .pg.cls-pool-page .cls-foot .pool-pager .hs-btn",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 326473
+        },
+        {
+          "selector": "#overlay .pg.cls-pool-page .pool-grid",
+          "property": "overflow-y",
+          "value": "auto",
+          "important": false,
+          "offset": 326238
+        },
+        {
+          "selector": "#overlay .pg.cls-pool-page .pool-side .pv-row",
+          "property": "border-color",
+          "value": "#aab0b424",
+          "important": false,
+          "offset": 326177
+        },
+        {
+          "selector": "#overlay .pg.cls-pool-page .pool-side .pv-head",
+          "property": "padding-bottom",
+          "value": "12px",
+          "important": false,
+          "offset": 326111
+        },
+        {
+          "selector": "#overlay .pg.cls-pool-page .pool-side .pv-head",
+          "property": "margin-bottom",
+          "value": "14px",
+          "important": false,
+          "offset": 326092
+        },
+        {
+          "selector": "#overlay .pg.cls-pool-page .pool-side",
+          "property": "border-color",
+          "value": "#aab0b42b",
+          "important": false,
+          "offset": 326022
+        },
+        {
+          "selector": "#overlay .pg.cls-pool-page .pool-side",
+          "property": "flex-basis",
+          "value": "270px",
+          "important": false,
+          "offset": 326005
+        },
+        {
+          "selector": "#overlay .pg.cls-pool-page .pg-head",
+          "property": "border-color",
+          "value": "#aab0b424",
+          "important": false,
+          "offset": 325764
+        },
+        {
+          "selector": "#overlay .cls2-name",
+          "property": "text-shadow",
+          "value": "0 8px 28px rgba(0,0,0,.55)",
+          "important": false,
+          "offset": 324379
+        },
+        {
+          "selector": "#overlay .cls2-eyebrow",
+          "property": "letter-spacing",
+          "value": ".22em",
+          "important": false,
+          "offset": 324230
+        },
+        {
+          "selector": "#overlay .cls2-panel",
+          "property": "background",
+          "value": "linear-gradient(90deg,rgba(11,12,13,.98) 58%,rgba(11,12,13,.88) 84%,transparent)",
+          "important": false,
+          "offset": 324034
+        },
+        {
+          "selector": "#overlay .pg.cls-pool-page .cls-foot .pool-pager",
+          "property": "margin-right",
+          "value": "auto",
+          "important": false,
+          "offset": 322864
+        },
+        {
+          "selector": "#overlay .pg.cls-pool-page .pool-archive-title .section-kicker",
+          "property": "margin-bottom",
+          "value": "5px",
+          "important": false,
+          "offset": 320255
+        },
+        {
+          "selector": "#overlay .cls2-confirm",
+          "property": "background",
+          "value": "linear-gradient(115deg,#dfdcd5,var(--gold-main) 58%,#d7ba5c)",
+          "important": false,
+          "offset": 319101
+        },
+        {
+          "selector": "#overlay .cls2-confirm",
+          "property": "color",
+          "value": "#17181a",
+          "important": false,
+          "offset": 319087
+        },
+        {
+          "selector": "#overlay .cls2-confirm",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 319071
+        },
+        {
+          "selector": "#overlay .cls2-face",
+          "property": "border-color",
+          "value": "#919ba285",
+          "important": false,
+          "offset": 318706
+        },
+        {
+          "selector": "#overlay .cls2-eyebrow",
+          "property": "text-transform",
+          "value": "uppercase",
+          "important": false,
+          "offset": 314213
+        },
+        {
+          "selector": "#overlay .cls2-eyebrow",
+          "property": "color",
+          "value": "#95a1aad9",
+          "important": false,
+          "offset": 314160
+        },
+        {
+          "selector": "#overlay .cls2-page",
+          "property": "background",
+          "value": "#101112",
+          "important": false,
+          "offset": 313523
+        },
+        {
+          "selector": "#overlay .card.chest .evt-sts-desc",
+          "property": "color",
+          "value": "#c1c4c7",
+          "important": false,
+          "offset": 282303
+        },
+        {
+          "selector": "#overlay .card.chest>h2",
+          "property": "letter-spacing",
+          "value": "2px",
+          "important": false,
+          "offset": 282076
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "box-shadow",
+          "value": "0 32px 100px #0009",
+          "important": false,
+          "offset": 282007
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "background",
+          "value": "radial-gradient(ellipse at 50% 20%,#2d3134,#17191b 75%)",
+          "important": false,
+          "offset": 281940
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "border",
+          "value": "1px solid #a4a5a652",
+          "important": false,
+          "offset": 281913
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "padding",
+          "value": "24px 32px",
+          "important": false,
+          "offset": 281895
+        },
+        {
+          "selector": "#overlay .node-main",
+          "property": "justify-content",
+          "value": "flex-start",
+          "important": false,
+          "offset": 281191
+        },
+        {
+          "selector": "#overlay .hub-tab.on",
+          "property": "background",
+          "value": "#ead2821a",
+          "important": false,
+          "offset": 256172
+        },
+        {
+          "selector": "#overlay .hub-tab.on",
+          "property": "color",
+          "value": "#ebecec",
+          "important": false,
+          "offset": 256158
+        },
+        {
+          "selector": "#overlay .hub-tab",
+          "property": "color",
+          "value": "#a7abae",
+          "important": false,
+          "offset": 256025
+        },
+        {
+          "selector": "#overlay .hub-tab",
+          "property": "background",
+          "value": "transparent",
+          "important": false,
+          "offset": 256002
+        },
+        {
+          "selector": "#overlay .hub-tab",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 255986
+        },
+        {
+          "selector": "#overlay .hub-tab",
+          "property": "border-left",
+          "value": "3px solid transparent",
+          "important": false,
+          "offset": 255952
+        },
+        {
+          "selector": "#overlay .hub-tab",
+          "property": "border",
+          "value": "0",
+          "important": false,
+          "offset": 255943
+        },
+        {
+          "selector": "#overlay .hub-tabs",
+          "property": "border-bottom",
+          "value": "0",
+          "important": false,
+          "offset": 255807
+        },
+        {
+          "selector": "#overlay .hub-tabs",
+          "property": "gap",
+          "value": "4px",
+          "important": false,
+          "offset": 255736
+        },
+        {
+          "selector": "#logPanel",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 235333
+        },
+        {
+          "selector": "#logPanel",
+          "property": "background",
+          "value": "#101a20ed",
+          "important": false,
+          "offset": 235285
+        },
+        {
+          "selector": "#hpText",
+          "property": "font-variant-numeric",
+          "value": "tabular-nums",
+          "important": false,
+          "offset": 228785
+        },
+        {
+          "selector": "#sidebar .stat-duo label",
+          "property": "font-size",
+          "value": "10px",
+          "important": false,
+          "offset": 228522
+        },
+        {
+          "selector": "#sidebar .stat-duo b",
+          "property": "color",
+          "value": "var(--exp-text)",
+          "important": false,
+          "offset": 228475
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "box-shadow",
+          "value": "none",
+          "important": false,
+          "offset": 227971
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "background",
+          "value": "none",
+          "important": false,
+          "offset": 227955
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "border",
+          "value": "0",
+          "important": false,
+          "offset": 227946
+        },
+        {
+          "selector": "#sidebar",
+          "property": "box-shadow",
+          "value": "0 -10px 35px #0a0b0c55",
+          "important": false,
+          "offset": 227863
+        },
+        {
+          "selector": "#sidebar",
+          "property": "border-top",
+          "value": "1px solid #7f848766",
+          "important": false,
+          "offset": 227815
+        },
+        {
+          "selector": "#sidebar",
+          "property": "background",
+          "value": "linear-gradient(105deg,#151618,#212326)",
+          "important": false,
+          "offset": 227764
+        },
+        {
+          "selector": "#title .ak-start:before",
+          "property": "display",
+          "value": "block",
+          "important": false,
+          "offset": 220391
+        },
+        {
+          "selector": "#title .ak-circle:hover",
+          "property": "border-color",
+          "value": "var(--exp-gold)",
+          "important": false,
+          "offset": 220273
+        },
+        {
+          "selector": "#title .ak-circle",
+          "property": "transition",
+          "value": "background .2s,border-color .2s,transform .2s,box-shadow .2s",
+          "important": false,
+          "offset": 218744
+        },
+        {
+          "selector": "#title .ak-circle",
+          "property": "border-left",
+          "value": "2px solid #ead2829c",
+          "important": false,
+          "offset": 218712
+        },
+        {
+          "selector": "#title .ak-circle",
+          "property": "column-gap",
+          "value": "8px",
+          "important": false,
+          "offset": 218675
+        },
+        {
+          "selector": "#title .ak-quickref",
+          "property": "color",
+          "value": "#e0e1e2",
+          "important": false,
+          "offset": 217289
+        },
+        {
+          "selector": "#overlay .sugin-page .sugin-exit:after",
+          "property": "content",
+          "value": "\"\"",
+          "important": false,
+          "offset": 207995
+        },
+        {
+          "selector": "#overlay .sugin-page .sugin-exit",
+          "property": "border",
+          "value": "1px solid #a8b0a938",
+          "important": false,
+          "offset": 207915
+        },
+        {
+          "selector": "#overlay .sugin-page .sugin-exit",
+          "property": "background",
+          "value": "#2c3032f2",
+          "important": false,
+          "offset": 207894
+        },
+        {
+          "selector": "#topBtns #btnLocate",
+          "property": "bottom",
+          "value": "236px",
+          "important": true,
+          "offset": 207594
+        },
+        {
+          "selector": "#cardZoom .cz-note.has",
+          "property": "box-shadow",
+          "value": "inset 0 0 18px #ead2820f",
+          "important": false,
+          "offset": 201587
+        },
+        {
+          "selector": "#cardZoom .cz-note.has",
+          "property": "border-color",
+          "value": "#ead28273",
+          "important": false,
+          "offset": 201564
+        },
+        {
+          "selector": "#overlay .card.chest:before",
+          "property": "display",
+          "value": "none",
+          "important": false,
+          "offset": 199988
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "backdrop-filter",
+          "value": "none",
+          "important": false,
+          "offset": 199923
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "-webkit-backdrop-filter",
+          "value": "none",
+          "important": false,
+          "offset": 199894
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "box-shadow",
+          "value": "none",
+          "important": true,
+          "offset": 199868
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "border",
+          "value": "0",
+          "important": true,
+          "offset": 199849
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "background",
+          "value": "transparent",
+          "important": true,
+          "offset": 199816
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 199382
+        },
+        {
+          "selector": "#overlay .bag-view .set-h",
+          "property": "color",
+          "value": "#e4cb7a",
+          "important": false,
+          "offset": 195039
+        },
+        {
+          "selector": "#overlay .card.chest .bt-card.got:hover",
+          "property": "transform",
+          "value": "none",
+          "important": false,
+          "offset": 188349
+        },
+        {
+          "selector": "#overlay .card.chest .bt-card.got",
+          "property": "filter",
+          "value": "grayscale(.7)",
+          "important": false,
+          "offset": 188288
+        },
+        {
+          "selector": "#overlay .card.chest button.bt-card:focus-visible",
+          "property": "border-radius",
+          "value": "var(--radius-panel)",
+          "important": false,
+          "offset": 188193
+        },
+        {
+          "selector": "#overlay .card.chest button.bt-card:focus-visible",
+          "property": "outline-offset",
+          "value": "6px",
+          "important": false,
+          "offset": 188174
+        },
+        {
+          "selector": "#overlay .card.chest button.bt-card:focus-visible",
+          "property": "outline",
+          "value": "3px solid #fbdd7d",
+          "important": false,
+          "offset": 188148
+        },
+        {
+          "selector": "#overlay .card.chest .bt-card:hover",
+          "property": "transform",
+          "value": "translateY(-8px)",
+          "important": false,
+          "offset": 187842
+        },
+        {
+          "selector": "#overlay .card.chest .bt-card",
+          "property": "transition",
+          "value": "transform .15s",
+          "important": false,
+          "offset": 187780
+        },
+        {
+          "selector": "#overlay .card.chest .bt-hand",
+          "property": "padding",
+          "value": "16px 0 8px",
+          "important": false,
+          "offset": 187731
+        },
+        {
+          "selector": "#overlay .card.chest .evt-sts-desc",
+          "property": "font-size",
+          "value": "15px",
+          "important": false,
+          "offset": 187496
+        },
+        {
+          "selector": "#overlay .card.chest>h2",
+          "property": "letter-spacing",
+          "value": "3px",
+          "important": false,
+          "offset": 187442
+        },
+        {
+          "selector": "#overlay .card.chest>h2",
+          "property": "font-size",
+          "value": "20px",
+          "important": false,
+          "offset": 187406
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "padding",
+          "value": "24px 36px 28px",
+          "important": false,
+          "offset": 187359
+        },
+        {
+          "selector": "#overlay .card.chest",
+          "property": "width",
+          "value": "min(1180px,calc(var(--game-layout-width, 100vw) * .94))",
+          "important": false,
+          "offset": 187297
+        },
+        {
+          "selector": "#sidebar .hero-ava",
+          "property": "border-color",
+          "value": "#c2c2c2",
+          "important": false,
+          "offset": 187125
+        },
+        {
+          "selector": "#overlay .pg.cdes .cdes-sec",
+          "property": "border-bottom-color",
+          "value": "#c0b8a299",
+          "important": false,
+          "offset": 185569
+        },
+        {
+          "selector": "#overlay .pg.cdes .seg button.on,#overlay .pg.cdes .mech-chip.on",
+          "property": "box-shadow",
+          "value": "0 0 9px #caa83a59",
+          "important": false,
+          "offset": 185352
+        },
+        {
+          "selector": "#overlay .card.bag-page",
+          "property": "background",
+          "value": "linear-gradient(125deg,#272a2dd6,#1b1d1fd6)",
+          "important": false,
+          "offset": 183600
+        },
+        {
+          "selector": "#topBtns #btnLocate:hover",
+          "property": "color",
+          "value": "#fff",
+          "important": false,
+          "offset": 183565
+        },
+        {
+          "selector": "#topBtns #btnLocate:hover",
+          "property": "background",
+          "value": "#2b2e31",
+          "important": false,
+          "offset": 183546
+        },
+        {
+          "selector": "#topBtns #btnLocate",
+          "property": "height",
+          "value": "44px",
+          "important": false,
+          "offset": 183419
+        },
+        {
+          "selector": "#topBtns #btnLocate",
+          "property": "width",
+          "value": "44px",
+          "important": false,
+          "offset": 183408
+        },
+        {
+          "selector": "#topBtns #btnLocate",
+          "property": "color",
+          "value": "#dedfe0",
+          "important": false,
+          "offset": 183369
+        },
+        {
+          "selector": "#topBtns #btnLocate",
+          "property": "background",
+          "value": "#1f2124",
+          "important": false,
+          "offset": 183334
+        },
+        {
+          "selector": "#topBtns #btnLocate",
+          "property": "right",
+          "value": "16px",
+          "important": false,
+          "offset": 183288
+        },
+        {
+          "selector": "#topBtns #btnLocate",
+          "property": "position",
+          "value": "fixed",
+          "important": false,
+          "offset": 183254
+        },
+        {
+          "selector": "#layerBanner",
+          "property": "border-bottom",
+          "value": "0",
+          "important": false,
+          "offset": 182753
+        },
+        {
+          "selector": "#layerBanner",
+          "property": "background",
+          "value": "transparent",
+          "important": false,
+          "offset": 182730
+        },
+        {
+          "selector": ".pg.settings-page .hint",
+          "property": "margin",
+          "value": "10px 2px",
+          "important": false,
+          "offset": 173476
+        },
+        {
+          "selector": ".pg.settings-page .hint",
+          "property": "line-height",
+          "value": "1.9",
+          "important": false,
+          "offset": 173460
+        },
+        {
+          "selector": ".pg.settings-page .hint",
+          "property": "font-size",
+          "value": "12px",
+          "important": false,
+          "offset": 173445
+        },
+        {
+          "selector": ".pg.settings-page .hint",
+          "property": "color",
+          "value": "#9a9fa2",
+          "important": false,
+          "offset": 173431
+        },
+        {
+          "selector": ".pg.settings-page .chk.vol",
+          "property": "padding",
+          "value": "12px",
+          "important": false,
+          "offset": 173394
+        },
+        {
+          "selector": ".pg.settings-page .chk .set-en",
+          "property": "letter-spacing",
+          "value": "1.5px",
+          "important": false,
+          "offset": 173294
+        },
+        {
+          "selector": ".pg.settings-page .chk .set-en",
+          "property": "color",
+          "value": "#a9aeb1",
+          "important": false,
+          "offset": 173280
+        },
+        {
+          "selector": ".pg.settings-page .chk .set-en",
+          "property": "font-size",
+          "value": "10px",
+          "important": false,
+          "offset": 173265
+        },
+        {
+          "selector": ".pg.settings-page .chk .set-en",
+          "property": "margin-left",
+          "value": "auto",
+          "important": false,
+          "offset": 173248
+        },
+        {
+          "selector": ".pg.settings-page .chk:hover",
+          "property": "background",
+          "value": "#25282a88",
+          "important": false,
+          "offset": 173196
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "transition",
+          "value": "background .15s",
+          "important": false,
+          "offset": 173140
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "margin-bottom",
+          "value": "8px",
+          "important": false,
+          "offset": 173122
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "border",
+          "value": "1px solid #4d535933",
+          "important": false,
+          "offset": 173095
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "background",
+          "value": "#25282a55",
+          "important": false,
+          "offset": 173074
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "border-radius",
+          "value": "var(--radius-panel)",
+          "important": false,
+          "offset": 173040
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "padding",
+          "value": "9px 12px",
+          "important": false,
+          "offset": 173023
+        },
+        {
+          "selector": ".pg.settings-page .chk",
+          "property": "font-size",
+          "value": "14.5px",
+          "important": false,
+          "offset": 173006
+        },
+        {
+          "selector": ".pg.settings-page .set-h .set-en",
+          "property": "letter-spacing",
+          "value": "2px",
+          "important": false,
+          "offset": 172964
+        },
+        {
+          "selector": ".pg.settings-page .set-h .set-en",
+          "property": "color",
+          "value": "#a9aeb1",
+          "important": false,
+          "offset": 172950
+        },
+        {
+          "selector": ".pg.settings-page .set-h .set-en",
+          "property": "font-size",
+          "value": "10px",
+          "important": false,
+          "offset": 172935
+        },
+        {
+          "selector": ".pg.settings-page .set-h .set-en",
+          "property": "margin-left",
+          "value": "auto",
+          "important": false,
+          "offset": 172918
+        },
+        {
+          "selector": ".pg.settings-page .set-h:first-child",
+          "property": "margin-top",
+          "value": "8px",
+          "important": false,
+          "offset": 172870
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "border-bottom",
+          "value": "1px solid #757a7e66",
+          "important": false,
+          "offset": 172799
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "padding-bottom",
+          "value": "9px",
+          "important": false,
+          "offset": 172780
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "margin",
+          "value": "30px 0 14px",
+          "important": false,
+          "offset": 172761
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "color",
+          "value": "#ebebeb",
+          "important": false,
+          "offset": 172747
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "letter-spacing",
+          "value": "3px",
+          "important": false,
+          "offset": 172728
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "font-size",
+          "value": "15px",
+          "important": false,
+          "offset": 172713
+        },
+        {
+          "selector": ".pg.settings-page .set-h",
+          "property": "gap",
+          "value": "8px",
+          "important": false,
+          "offset": 172705
+        },
+        {
+          "selector": "#overlay .slot-page .slot-card-cta",
+          "property": "letter-spacing",
+          "value": "2px",
+          "important": false,
+          "offset": 172095
+        },
+        {
+          "selector": ".slot-page .slot-card-desc .si-line em",
+          "property": "letter-spacing",
+          "value": ".16em",
+          "important": false,
+          "offset": 170848
+        },
+        {
+          "selector": ".slot-page .slot-card-desc .si-line em",
+          "property": "color",
+          "value": "#c9cbcc",
+          "important": false,
+          "offset": 170834
+        },
+        {
+          "selector": "#overlay .pg.slot-page .pg-back",
+          "property": "transition",
+          "value": "color .18s,filter .18s,border-color .18s",
+          "important": false,
+          "offset": 170466
+        },
+        {
+          "selector": ".slot-card .slot-card-flakes i",
+          "property": "animation-timing-function",
+          "value": "ease-in-out",
+          "important": false,
+          "offset": 157149
+        },
+        {
+          "selector": ".ak-quickref",
+          "property": "transition",
+          "value": "color .18s,border-color .18s,filter .18s",
+          "important": false,
+          "offset": 156155
+        },
+        {
+          "selector": "#btnTitleExit",
+          "property": "border",
+          "value": "none",
+          "important": false,
+          "offset": 155911
+        },
+        {
+          "selector": "#btnTitleMute",
+          "property": "border",
+          "value": "none",
+          "important": false,
+          "offset": 155621
+        },
+        {
+          "selector": "#overlay .card.page,#overlay .card.bag-page",
+          "property": "background",
+          "value": "linear-gradient(125deg,#272a2d,#1b1d1f)",
+          "important": false,
+          "offset": 150330
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 150210
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "box-shadow",
+          "value": "0 25px 100px #0d0e0f99",
+          "important": false,
+          "offset": 150176
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "background",
+          "value": "linear-gradient(125deg,#2b2e31,#1e2022)",
+          "important": false,
+          "offset": 150125
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "border",
+          "value": "1px solid #74797c",
+          "important": false,
+          "offset": 150100
+        },
+        {
+          "selector": "#overlay.opaque",
+          "property": "background",
+          "value": "linear-gradient(125deg,#202325,#181a1c)",
+          "important": false,
+          "offset": 149984
+        },
+        {
+          "selector": "#overlay",
+          "property": "backdrop-filter",
+          "value": "blur(6px)",
+          "important": false,
+          "offset": 149942
+        },
+        {
+          "selector": "#overlay",
+          "property": "-webkit-backdrop-filter",
+          "value": "blur(6px)",
+          "important": false,
+          "offset": 149908
+        },
+        {
+          "selector": "#overlay",
+          "property": "background",
+          "value": "#101112a8",
+          "important": false,
+          "offset": 149887
+        },
+        {
+          "selector": "#resHud .res-gold b",
+          "property": "color",
+          "value": "#eed47f",
+          "important": false,
+          "offset": 149108
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "height",
+          "value": "42px",
+          "important": false,
+          "offset": 149076
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "box-shadow",
+          "value": "none",
+          "important": false,
+          "offset": 149045
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "border",
+          "value": "1px solid #71777b",
+          "important": false,
+          "offset": 149020
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "background",
+          "value": "#1e2022e8",
+          "important": false,
+          "offset": 148999
+        },
+        {
+          "selector": "#topBtns #btnHelp:hover",
+          "property": "color",
+          "value": "#fff",
+          "important": false,
+          "offset": 148969
+        },
+        {
+          "selector": "#topBtns #btnHelp:hover",
+          "property": "background",
+          "value": "#2b2e31",
+          "important": false,
+          "offset": 148950
+        },
+        {
+          "selector": "#topBtns #btnHelp",
+          "property": "box-shadow",
+          "value": "none",
+          "important": false,
+          "offset": 148801
+        },
+        {
+          "selector": "#topBtns #btnHelp",
+          "property": "background",
+          "value": "#1f2124",
+          "important": false,
+          "offset": 148757
+        },
+        {
+          "selector": "#topBtns #btnMute",
+          "property": "box-shadow",
+          "value": "none",
+          "important": false,
+          "offset": 148723
+        },
+        {
+          "selector": "#topBtns #btnMute",
+          "property": "background",
+          "value": "#1f2124",
+          "important": false,
+          "offset": 148679
+        },
+        {
+          "selector": ".hp-hud-label",
+          "property": "letter-spacing",
+          "value": "2px",
+          "important": false,
+          "offset": 148642
+        },
+        {
+          "selector": ".hp-hud-icon,.hp-hud-label",
+          "property": "background",
+          "value": "#5d646b",
+          "important": false,
+          "offset": 148593
+        },
+        {
+          "selector": "#hpHud",
+          "property": "clip-path",
+          "value": "none",
+          "important": false,
+          "offset": 148551
+        },
+        {
+          "selector": "#hpHud",
+          "property": "box-shadow",
+          "value": "none",
+          "important": false,
+          "offset": 148535
+        },
+        {
+          "selector": "#hpHud",
+          "property": "background",
+          "value": "#1e2022",
+          "important": false,
+          "offset": 148491
+        },
+        {
+          "selector": "#layerBanner .lb-zh",
+          "property": "letter-spacing",
+          "value": "5px",
+          "important": false,
+          "offset": 148366
+        },
+        {
+          "selector": "#bagBtn",
+          "property": "background",
+          "value": "#34373b",
+          "important": false,
+          "offset": 147958
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "padding",
+          "value": "2px 22px 2px 0",
+          "important": false,
+          "offset": 147560
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "box-shadow",
+          "value": "none",
+          "important": false,
+          "offset": 147544
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "background",
+          "value": "none",
+          "important": false,
+          "offset": 147528
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "border-right",
+          "value": "1px solid #464b5080",
+          "important": false,
+          "offset": 147495
+        },
+        {
+          "selector": "#sidebar .panel",
+          "property": "border",
+          "value": "0",
+          "important": false,
+          "offset": 147486
+        },
+        {
+          "selector": "#sidebar",
+          "property": "box-shadow",
+          "value": "0 -5px 25px #1a1c1e55",
+          "important": false,
+          "offset": 147437
+        },
+        {
+          "selector": "#sidebar",
+          "property": "overflow",
+          "value": "visible",
+          "important": false,
+          "offset": 147420
+        },
+        {
+          "selector": "#sidebar",
+          "property": "background",
+          "value": "linear-gradient(105deg,#1d2022,#26282b)",
+          "important": false,
+          "offset": 147369
+        },
+        {
+          "selector": "#sidebar",
+          "property": "border-top",
+          "value": "1px solid #7d8286",
+          "important": false,
+          "offset": 147340
+        },
+        {
+          "selector": "#sidebar",
+          "property": "gap",
+          "value": "22px",
+          "important": false,
+          "offset": 147331
+        },
+        {
+          "selector": "#sidebar",
+          "property": "padding",
+          "value": "8px 28px",
+          "important": false,
+          "offset": 147314
+        },
+        {
+          "selector": "#sidebar",
+          "property": "min-height",
+          "value": "105px",
+          "important": false,
+          "offset": 147297
+        },
+        {
+          "selector": "#sidebar",
+          "property": "height",
+          "value": "105px",
+          "important": false,
+          "offset": 147284
+        },
+        {
+          "selector": "#title:after",
+          "property": "background",
+          "value": "linear-gradient(90deg,#1416184d,transparent 45%,#161819ba),linear-gradient(0deg,#141618bf,transparent 55%)",
+          "important": false,
+          "offset": 139749
+        },
+        {
+          "selector": "button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible",
+          "property": "outline-offset",
+          "value": "2px",
+          "important": false,
+          "offset": 139112
+        },
+        {
+          "selector": "button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible",
+          "property": "outline",
+          "value": "1px solid #e6cb76cc",
+          "important": false,
+          "offset": 139084
+        },
+        {
+          "selector": "#layerBanner .lb-zh",
+          "property": "text-shadow",
+          "value": "0 0 12px rgba(255,255,255,.24),0 2px 8px rgba(0,0,0,.6)",
+          "important": false,
+          "offset": 125751
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt span",
+          "property": "text-shadow",
+          "value": "none",
+          "important": false,
+          "offset": 119077
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt span",
+          "property": "color",
+          "value": "#b3b8bb",
+          "important": false,
+          "offset": 119063
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt b",
+          "property": "text-shadow",
+          "value": "none",
+          "important": false,
+          "offset": 119014
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "box-shadow",
+          "value": "none",
+          "important": false,
+          "offset": 118919
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "background",
+          "value": "#1f2123b0",
+          "important": false,
+          "offset": 118898
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "border",
+          "value": "1px solid rgba(170,174,177,.3)",
+          "important": false,
+          "offset": 118860
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 118844
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "padding",
+          "value": "16px 20px",
+          "important": false,
+          "offset": 118826
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "text-align",
+          "value": "left",
+          "important": false,
+          "offset": 118802
+        },
+        {
+          "selector": "#overlay .node-pg .evt-opt",
+          "property": "align-items",
+          "value": "flex-start",
+          "important": false,
+          "offset": 118779
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub",
+          "property": "text-shadow",
+          "value": "none",
+          "important": false,
+          "offset": 116310
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub",
+          "property": "letter-spacing",
+          "value": ".5px",
+          "important": false,
+          "offset": 116290
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub",
+          "property": "color",
+          "value": "#b1b5b8",
+          "important": false,
+          "offset": 116276
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head .sub",
+          "property": "font-size",
+          "value": "13px",
+          "important": false,
+          "offset": 116245
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head h2",
+          "property": "text-shadow",
+          "value": "none",
+          "important": false,
+          "offset": 116097
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head h2",
+          "property": "font-family",
+          "value": "SimSun,serif",
+          "important": false,
+          "offset": 116072
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head h2",
+          "property": "letter-spacing",
+          "value": "4px",
+          "important": false,
+          "offset": 116039
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head h2",
+          "property": "font-weight",
+          "value": "400",
+          "important": false,
+          "offset": 116023
+        },
+        {
+          "selector": "#overlay .card.page .node-pg:not(.shop-pg) .pg-head h2",
+          "property": "font-size",
+          "value": "32px",
+          "important": false,
+          "offset": 116008
+        },
+        {
+          "selector": ".flow-title",
+          "property": "letter-spacing",
+          "value": ".2em",
+          "important": false,
+          "offset": 103158
+        },
+        {
+          "selector": ".scene-line p",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 101499
+        },
+        {
+          "selector": ".scene-line p",
+          "property": "border",
+          "value": "1px solid rgba(171,171,171,.3)",
+          "important": false,
+          "offset": 101461
+        },
+        {
+          "selector": ".scene-line p",
+          "property": "background",
+          "value": "linear-gradient(180deg,#dcdcdc1a,#dcdcdc0a)",
+          "important": false,
+          "offset": 101406
+        },
+        {
+          "selector": ".scene-line p",
+          "property": "color",
+          "value": "#d5d5d5",
+          "important": false,
+          "offset": 101392
+        },
+        {
+          "selector": ".scene-line p",
+          "property": "line-height",
+          "value": "1.75",
+          "important": false,
+          "offset": 101375
+        },
+        {
+          "selector": ".scene-title",
+          "property": "font-family",
+          "value": "var(--serif)",
+          "important": false,
+          "offset": 101092
+        },
+        {
+          "selector": ".bt-settings .chk",
+          "property": "transition",
+          "value": "background .15s",
+          "important": false,
+          "offset": 99218
+        },
+        {
+          "selector": ".cls2-face",
+          "property": "overflow",
+          "value": "hidden",
+          "important": false,
+          "offset": 73973
+        },
+        {
+          "selector": ".cls2-face",
+          "property": "position",
+          "value": "relative",
+          "important": false,
+          "offset": 73921
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "overflow",
+          "value": "hidden",
+          "important": false,
+          "offset": 71784
+        },
+        {
+          "selector": ".cls-detail",
+          "property": "border-top",
+          "value": "1px dashed #343434",
+          "important": false,
+          "offset": 71573
+        },
+        {
+          "selector": ".ach-row",
+          "property": "background",
+          "value": "#1d1d1d",
+          "important": false,
+          "offset": 70049
+        },
+        {
+          "selector": ".ach-row",
+          "property": "border-radius",
+          "value": "var(--radius-panel)",
+          "important": false,
+          "offset": 70015
+        },
+        {
+          "selector": ".ach-row",
+          "property": "border",
+          "value": "1px solid #343434",
+          "important": false,
+          "offset": 69990
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "box-shadow",
+          "value": "inset 0 1px #ededed2e,0 4px 16px #0006",
+          "important": false,
+          "offset": 67453
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "background",
+          "value": "linear-gradient(180deg,#515151,#2c2c2c)",
+          "important": false,
+          "offset": 67367
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "font-weight",
+          "value": "800",
+          "important": false,
+          "offset": 67351
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "color",
+          "value": "#d9d9d9",
+          "important": false,
+          "offset": 67305
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "border",
+          "value": "1px solid rgba(196,196,196,.65)",
+          "important": false,
+          "offset": 67266
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "border-radius",
+          "value": "var(--radius-panel)",
+          "important": false,
+          "offset": 67232
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "letter-spacing",
+          "value": "5px",
+          "important": false,
+          "offset": 67213
+        },
+        {
+          "selector": "#btnDeploy",
+          "property": "padding",
+          "value": "13px 44px",
+          "important": false,
+          "offset": 67180
+        },
+        {
+          "selector": ".fc-chip b",
+          "property": "color",
+          "value": "#e4e4e4",
+          "important": false,
+          "offset": 67155
+        },
+        {
+          "selector": ".fc-chip",
+          "property": "background",
+          "value": "#0003",
+          "important": false,
+          "offset": 67127
+        },
+        {
+          "selector": ".fc-chip",
+          "property": "border-radius",
+          "value": "999px",
+          "important": false,
+          "offset": 67090
+        },
+        {
+          "selector": ".fc-chip",
+          "property": "border",
+          "value": "1px solid #343434",
+          "important": false,
+          "offset": 67065
+        },
+        {
+          "selector": ".fc-chip",
+          "property": "color",
+          "value": "#bcbcbc",
+          "important": false,
+          "offset": 67051
+        },
+        {
+          "selector": ".deploy-forecast",
+          "property": "gap",
+          "value": "8px",
+          "important": false,
+          "offset": 67004
+        },
+        {
+          "selector": ".xp-txt",
+          "property": "color",
+          "value": "#797979",
+          "important": false,
+          "offset": 66868
+        },
+        {
+          "selector": ".xp-txt",
+          "property": "font-size",
+          "value": "10px",
+          "important": false,
+          "offset": 66853
+        },
+        {
+          "selector": ".xp-bar i",
+          "property": "background",
+          "value": "linear-gradient(90deg,#6a6a6a,#a6a6a6)",
+          "important": false,
+          "offset": 66774
+        },
+        {
+          "selector": ".xp-bar",
+          "property": "background",
+          "value": "#121212",
+          "important": false,
+          "offset": 66631
+        },
+        {
+          "selector": ".mode-ckpt",
+          "property": "color",
+          "value": "#797979",
+          "important": false,
+          "offset": 66520
+        },
+        {
+          "selector": ".mode-ckpt",
+          "property": "font-size",
+          "value": "10.5px",
+          "important": false,
+          "offset": 66503
+        },
+        {
+          "selector": ".mode-info span",
+          "property": "line-height",
+          "value": "1.45",
+          "important": false,
+          "offset": 66475
+        },
+        {
+          "selector": ".mode-card.on",
+          "property": "box-shadow",
+          "value": "0 0 12px #a1a1a138,inset 0 1px #ededed14",
+          "important": false,
+          "offset": 65998
+        },
+        {
+          "selector": ".mode-card.on",
+          "property": "background",
+          "value": "linear-gradient(180deg,#2d2d2d,#1c1c1c)",
+          "important": false,
+          "offset": 65947
+        },
+        {
+          "selector": ".mode-card.on",
+          "property": "border-color",
+          "value": "#a1a1a1",
+          "important": false,
+          "offset": 65926
+        },
+        {
+          "selector": ".mode-card",
+          "property": "background",
+          "value": "#1d1d1d",
+          "important": false,
+          "offset": 65777
+        },
+        {
+          "selector": ".mode-card",
+          "property": "border",
+          "value": "1.5px solid #343434",
+          "important": false,
+          "offset": 65736
+        },
+        {
+          "selector": ".mode-card",
+          "property": "border-radius",
+          "value": "var(--radius-panel)",
+          "important": false,
+          "offset": 65702
+        },
+        {
+          "selector": ".hub-card",
+          "property": "box-shadow",
+          "value": "inset 0 1px #f0f0f00a,0 4px 14px #00000040",
+          "important": false,
+          "offset": 65353
+        },
+        {
+          "selector": ".hub-card",
+          "property": "background",
+          "value": "linear-gradient(180deg,#222,#191919)",
+          "important": false,
+          "offset": 65305
+        },
+        {
+          "selector": ".hub-card",
+          "property": "border-radius",
+          "value": "var(--radius-panel)",
+          "important": false,
+          "offset": 65237
+        },
+        {
+          "selector": ".hub-card",
+          "property": "border",
+          "value": "1px solid #343434",
+          "important": false,
+          "offset": 65212
+        },
+        {
+          "selector": ".hub-tab.on",
+          "property": "box-shadow",
+          "value": "inset 0 2px #ababab80",
+          "important": false,
+          "offset": 64531
+        },
+        {
+          "selector": ".hub-tab.on",
+          "property": "background",
+          "value": "linear-gradient(180deg,#292929,#1c1c1c)",
+          "important": false,
+          "offset": 64480
+        },
+        {
+          "selector": ".hub-tab.on",
+          "property": "color",
+          "value": "#eaeaea",
+          "important": false,
+          "offset": 64445
+        },
+        {
+          "selector": ".hub-tab",
+          "property": "color",
+          "value": "#999",
+          "important": false,
+          "offset": 63858
+        },
+        {
+          "selector": ".hub-tab",
+          "property": "background",
+          "value": "transparent",
+          "important": false,
+          "offset": 63835
+        },
+        {
+          "selector": ".hub-tab",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 63804
+        },
+        {
+          "selector": ".hub-tab",
+          "property": "border-bottom",
+          "value": "none",
+          "important": false,
+          "offset": 63785
+        },
+        {
+          "selector": ".hub-tab",
+          "property": "border",
+          "value": "1px solid transparent",
+          "important": false,
+          "offset": 63756
+        },
+        {
+          "selector": ".hub-tabs",
+          "property": "gap",
+          "value": "8px",
+          "important": false,
+          "offset": 63565
+        },
+        {
+          "selector": ".hub-head",
+          "property": "border-bottom",
+          "value": "1px solid #353535",
+          "important": false,
+          "offset": 63133
+        },
+        {
+          "selector": ".ov-note",
+          "property": "font-size",
+          "value": "11.5px",
+          "important": false,
+          "offset": 56565
+        },
+        {
+          "selector": ".ov-note",
+          "property": "color",
+          "value": "#797979",
+          "important": false,
+          "offset": 56551
+        },
+        {
+          "selector": ".ov-empty",
+          "property": "color",
+          "value": "#8b8b8b",
+          "important": false,
+          "offset": 56494
+        },
+        {
+          "selector": ".ov-btn.ok",
+          "property": "color",
+          "value": "#e4e4e4",
+          "important": false,
+          "offset": 56470
+        },
+        {
+          "selector": ".ov-btn.ok",
+          "property": "background",
+          "value": "linear-gradient(180deg,#434343,#252525)",
+          "important": false,
+          "offset": 56419
+        },
+        {
+          "selector": ".ov-btn.ok",
+          "property": "border-color",
+          "value": "#ababab99",
+          "important": false,
+          "offset": 56396
+        },
+        {
+          "selector": ".ov-btn",
+          "property": "transition",
+          "value": "all .15s",
+          "important": false,
+          "offset": 56179
+        },
+        {
+          "selector": ".ov-btn",
+          "property": "box-shadow",
+          "value": "inset 0 1px #f0f0f00f",
+          "important": false,
+          "offset": 56146
+        },
+        {
+          "selector": ".ov-btn",
+          "property": "color",
+          "value": "var(--txt)",
+          "important": false,
+          "offset": 56129
+        },
+        {
+          "selector": ".ov-btn",
+          "property": "background",
+          "value": "linear-gradient(180deg,#2f2f2f,#1c1c1c)",
+          "important": false,
+          "offset": 56078
+        },
+        {
+          "selector": ".ov-btn",
+          "property": "border",
+          "value": "1px solid var(--line2)",
+          "important": false,
+          "offset": 56048
+        },
+        {
+          "selector": ".ov-btn",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 56017
+        },
+        {
+          "selector": ".ov-btn",
+          "property": "font-weight",
+          "value": "600",
+          "important": false,
+          "offset": 56001
+        },
+        {
+          "selector": ".gold,.ov-stats b.gold",
+          "property": "color",
+          "value": "#c4c4c4",
+          "important": false,
+          "offset": 55833
+        },
+        {
+          "selector": ".ov-stats b",
+          "property": "color",
+          "value": "#e4e4e4",
+          "important": false,
+          "offset": 55796
+        },
+        {
+          "selector": ".ov-stats",
+          "property": "color",
+          "value": "#afafaf",
+          "important": false,
+          "offset": 55675
+        },
+        {
+          "selector": "#overlay h2.bad",
+          "property": "text-shadow",
+          "value": "0 0 18px rgba(140,140,140,.25)",
+          "important": false,
+          "offset": 55622
+        },
+        {
+          "selector": "#overlay h2.bad",
+          "property": "color",
+          "value": "#959595",
+          "important": false,
+          "offset": 55608
+        },
+        {
+          "selector": "#overlay h2",
+          "property": "text-shadow",
+          "value": "0 0 18px rgba(171,171,171,.3),0 1px 2px rgba(0,0,0,.6)",
+          "important": false,
+          "offset": 55465
+        },
+        {
+          "selector": "#overlay h2",
+          "property": "letter-spacing",
+          "value": "1px",
+          "important": false,
+          "offset": 55421
+        },
+        {
+          "selector": "#overlay h2",
+          "property": "font-size",
+          "value": "21px",
+          "important": false,
+          "offset": 55387
+        },
+        {
+          "selector": "#overlay h2",
+          "property": "color",
+          "value": "#c9c9c9",
+          "important": false,
+          "offset": 55373
+        },
+        {
+          "selector": "#overlay .card:before",
+          "property": "background",
+          "value": "linear-gradient(90deg,transparent,rgba(171,171,171,.9),rgba(136,136,136,.5),transparent)",
+          "important": false,
+          "offset": 55191
+        },
+        {
+          "selector": "#overlay .card:before",
+          "property": "height",
+          "value": "2px",
+          "important": false,
+          "offset": 55180
+        },
+        {
+          "selector": "#overlay .card:before",
+          "property": "right",
+          "value": "10%",
+          "important": false,
+          "offset": 55170
+        },
+        {
+          "selector": "#overlay .card:before",
+          "property": "left",
+          "value": "10%",
+          "important": false,
+          "offset": 55161
+        },
+        {
+          "selector": "#overlay .card:before",
+          "property": "top",
+          "value": "0",
+          "important": false,
+          "offset": 55155
+        },
+        {
+          "selector": "#overlay .card:before",
+          "property": "position",
+          "value": "absolute",
+          "important": false,
+          "offset": 55137
+        },
+        {
+          "selector": "#overlay .card:before",
+          "property": "content",
+          "value": "\"\"",
+          "important": false,
+          "offset": 55126
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "animation",
+          "value": "cardIn .22s cubic-bezier(.22,1,.36,1)",
+          "important": false,
+          "offset": 55056
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "box-shadow",
+          "value": "0 18px 60px #000000a6,inset 0 0 0 1px #ededed0d",
+          "important": false,
+          "offset": 54997
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 54924
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "border",
+          "value": "1px solid #5f5f5f",
+          "important": false,
+          "offset": 54899
+        },
+        {
+          "selector": "#overlay .card",
+          "property": "background",
+          "value": "linear-gradient(180deg,#232323,#171717)",
+          "important": false,
+          "offset": 54848
+        },
+        {
+          "selector": "#overlay.opaque",
+          "property": "background",
+          "value": "#121212",
+          "important": false,
+          "offset": 54380
+        },
+        {
+          "selector": "#overlay.opaque",
+          "property": "backdrop-filter",
+          "value": "none",
+          "important": false,
+          "offset": 54359
+        },
+        {
+          "selector": "#overlay.opaque",
+          "property": "-webkit-backdrop-filter",
+          "value": "none",
+          "important": false,
+          "offset": 54330
+        },
+        {
+          "selector": "#overlay.room-view .card.room",
+          "property": "background",
+          "value": "radial-gradient(ellipse at 50% 0%,rgba(97,97,97,.22),transparent 58%),linear-gradient(180deg,#1d1d1d,#0c0c0c 78%)",
+          "important": false,
+          "offset": 53483
+        },
+        {
+          "selector": "#overlay.room-view",
+          "property": "background",
+          "value": "#0c0c0c",
+          "important": false,
+          "offset": 53100
+        },
+        {
+          "selector": "#overlay :focus-visible",
+          "property": "outline-offset",
+          "value": "3px",
+          "important": false,
+          "offset": 52965
+        },
+        {
+          "selector": "#overlay :focus-visible",
+          "property": "outline",
+          "value": "2px solid #f9e297",
+          "important": false,
+          "offset": 52939
+        },
+        {
+          "selector": "#overlay:focus",
+          "property": "outline-offset",
+          "value": "-4px",
+          "important": false,
+          "offset": 52895
+        },
+        {
+          "selector": "#overlay:focus",
+          "property": "outline",
+          "value": "2px solid #ecd382",
+          "important": false,
+          "offset": 52869
+        },
+        {
+          "selector": "#overlay",
+          "property": "backdrop-filter",
+          "value": "blur(5px)",
+          "important": false,
+          "offset": 52799
+        },
+        {
+          "selector": "#overlay",
+          "property": "-webkit-backdrop-filter",
+          "value": "blur(5px)",
+          "important": false,
+          "offset": 52765
+        },
+        {
+          "selector": "#overlay",
+          "property": "background",
+          "value": "#080808bf",
+          "important": false,
+          "offset": 52744
+        },
+        {
+          "selector": "#tooltip",
+          "property": "box-shadow",
+          "value": "0 6px 20px #0000008c",
+          "important": false,
+          "offset": 52417
+        },
+        {
+          "selector": "#tooltip",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 52350
+        },
+        {
+          "selector": "#tooltip",
+          "property": "border-left",
+          "value": "3px solid var(--amber)",
+          "important": false,
+          "offset": 52315
+        },
+        {
+          "selector": "#tooltip",
+          "property": "border",
+          "value": "1px solid rgba(171,171,171,.45)",
+          "important": false,
+          "offset": 52276
+        },
+        {
+          "selector": "#tooltip",
+          "property": "background",
+          "value": "#131313f5",
+          "important": false,
+          "offset": 52255
+        },
+        {
+          "selector": ".ov-btn.danger",
+          "property": "color",
+          "value": "#c4c4c4",
+          "important": false,
+          "offset": 51765
+        },
+        {
+          "selector": ".ov-btn.danger",
+          "property": "background",
+          "value": "#1c1c1c",
+          "important": false,
+          "offset": 51746
+        },
+        {
+          "selector": ".ov-btn.danger",
+          "property": "border-color",
+          "value": "#3d3d3d",
+          "important": false,
+          "offset": 51725
+        },
+        {
+          "selector": ".ov-btn:disabled",
+          "property": "opacity",
+          "value": ".45",
+          "important": false,
+          "offset": 49867
+        },
+        {
+          "selector": ".slot-page .slot-card-ops",
+          "property": "transition",
+          "value": "opacity .18s,transform .18s",
+          "important": false,
+          "offset": 49583
+        },
+        {
+          "selector": ".slot-page .slot-empty",
+          "property": "font-size",
+          "value": "11px",
+          "important": false,
+          "offset": 49151
+        },
+        {
+          "selector": ".slot-page .slot-empty",
+          "property": "color",
+          "value": "#a5adb3",
+          "important": false,
+          "offset": 49118
+        },
+        {
+          "selector": ".slot-card-desc .si-sub",
+          "property": "font-size",
+          "value": "10.5px",
+          "important": false,
+          "offset": 49062
+        },
+        {
+          "selector": ".slot-card-desc .si-line em",
+          "property": "font-size",
+          "value": "9px",
+          "important": false,
+          "offset": 48834
+        },
+        {
+          "selector": ".slot-page .slot-card-desc",
+          "property": "color",
+          "value": "#d1d3d5",
+          "important": false,
+          "offset": 48701
+        },
+        {
+          "selector": ".slot-page .slot-card-desc",
+          "property": "line-height",
+          "value": "1.7",
+          "important": false,
+          "offset": 48685
+        },
+        {
+          "selector": ".slot-page .slot-card-desc",
+          "property": "font-size",
+          "value": "12px",
+          "important": false,
+          "offset": 48670
+        },
+        {
+          "selector": ".slot-page .slot-card-desc",
+          "property": "flex",
+          "value": "1 1 auto",
+          "important": false,
+          "offset": 48616
+        },
+        {
+          "selector": ".slot-page .slot-card-sub",
+          "property": "color",
+          "value": "#a5adb3",
+          "important": false,
+          "offset": 48431
+        },
+        {
+          "selector": ".slot-page .slot-card-name",
+          "property": "text-shadow",
+          "value": "0 0 12px rgba(207,212,218,.5)",
+          "important": false,
+          "offset": 48262
+        },
+        {
+          "selector": ".slot-page .slot-card:active",
+          "property": "transform",
+          "value": "scale(.98)",
+          "important": false,
+          "offset": 47053
+        },
+        {
+          "selector": ".slot-page .slot-card:hover",
+          "property": "box-shadow",
+          "value": "0 0 24px #c4cbd140,0 18px 38px #070808a6",
+          "important": false,
+          "offset": 46972
+        },
+        {
+          "selector": ".slot-page .slot-card:hover",
+          "property": "border-color",
+          "value": "#dee1e4bf",
+          "important": false,
+          "offset": 46922
+        },
+        {
+          "selector": ".slot-card",
+          "property": "transition",
+          "value": "border-color .18s,box-shadow .18s,transform .18s",
+          "important": false,
+          "offset": 46834
+        },
+        {
+          "selector": ".slot-card",
+          "property": "box-shadow",
+          "value": "0 14px 34px #07080899,inset 0 0 30px #78bbdc0d",
+          "important": false,
+          "offset": 46776
+        },
+        {
+          "selector": ".slot-card",
+          "property": "background",
+          "value": "linear-gradient(180deg,#181a1be6,#0e0f10f0)",
+          "important": false,
+          "offset": 46721
+        },
+        {
+          "selector": ".slot-page:after",
+          "property": "background",
+          "value": "linear-gradient(180deg,rgba(16,17,18,.42),transparent 26%,transparent 62%,rgba(12,13,14,.6)),linear-gradient(90deg,rgba(16,17,18,.5),transparent 30%,transparent 70%,rgba(16,17,18,.5))",
+          "important": false,
+          "offset": 42641
+        },
+        {
+          "selector": ".slot-page:before",
+          "property": "animation",
+          "value": "slotMist 26s ease-in-out infinite alternate",
+          "important": false,
+          "offset": 42501
+        },
+        {
+          "selector": ".slot-page:before",
+          "property": "background",
+          "value": "radial-gradient(ellipse 42% 34% at 30% 62%,rgba(129,191,222,.34),transparent 68%),radial-gradient(ellipse 38% 30% at 72% 40%,rgba(138,154,166,.22),transparent 70%),radial-gradient(ellipse 50% 40% at 52% 84%,rgba(66,71,76,.55),transparent 72%)",
+          "important": false,
+          "offset": 42230
+        },
+        {
+          "selector": "#overlay .card .pg.slot-page",
+          "property": "background",
+          "value": "radial-gradient(ellipse 120% 90% at 50% 30%,#4a5055,#383d41 34%,#272a2d 62%,#1b1d20)",
+          "important": false,
+          "offset": 42035
+        },
+        {
+          "selector": ".exit-msg",
+          "property": "letter-spacing",
+          "value": "4px",
+          "important": false,
+          "offset": 41853
+        },
+        {
+          "selector": ".exit-msg",
+          "property": "font-size",
+          "value": "22px",
+          "important": false,
+          "offset": 41824
+        },
+        {
+          "selector": ".title-ver",
+          "property": "letter-spacing",
+          "value": "3px",
+          "important": false,
+          "offset": 41795
+        },
+        {
+          "selector": ".title-ver",
+          "property": "font-size",
+          "value": "11px",
+          "important": false,
+          "offset": 41780
+        },
+        {
+          "selector": ".title-ver",
+          "property": "color",
+          "value": "#5e5e5e",
+          "important": false,
+          "offset": 41766
+        },
+        {
+          "selector": ".menu-btn.primary",
+          "property": "color",
+          "value": "var(--gold)",
+          "important": false,
+          "offset": 41629
+        },
+        {
+          "selector": ".menu-btn.primary",
+          "property": "border-color",
+          "value": "#c4c4c499",
+          "important": false,
+          "offset": 41606
+        },
+        {
+          "selector": ".menu-btn:disabled",
+          "property": "opacity",
+          "value": ".32",
+          "important": false,
+          "offset": 41561
+        },
+        {
+          "selector": ".menu-btn:active:not(:disabled)",
+          "property": "transform",
+          "value": "scale(.97)",
+          "important": false,
+          "offset": 41521
+        },
+        {
+          "selector": ".menu-btn:hover:not(:disabled)",
+          "property": "transform",
+          "value": "translateY(-2px)",
+          "important": false,
+          "offset": 41462
+        },
+        {
+          "selector": ".menu-btn:hover:not(:disabled)",
+          "property": "border-color",
+          "value": "#abababe6",
+          "important": false,
+          "offset": 41384
+        },
+        {
+          "selector": ".menu-btn:hover:not(:disabled)",
+          "property": "background",
+          "value": "#3e3e3ed9",
+          "important": false,
+          "offset": 41363
+        },
+        {
+          "selector": ".menu-btn",
+          "property": "transition",
+          "value": "all .18s",
+          "important": false,
+          "offset": 41275
+        },
+        {
+          "selector": ".menu-btn",
+          "property": "box-shadow",
+          "value": "inset 0 1px #ededed14,0 4px 12px #00000059",
+          "important": false,
+          "offset": 41206
+        },
+        {
+          "selector": ".menu-btn",
+          "property": "font-weight",
+          "value": "700",
+          "important": false,
+          "offset": 41190
+        },
+        {
+          "selector": ".menu-btn",
+          "property": "color",
+          "value": "var(--amber-soft)",
+          "important": false,
+          "offset": 41141
+        },
+        {
+          "selector": ".menu-btn",
+          "property": "background",
+          "value": "#2229",
+          "important": false,
+          "offset": 41124
+        },
+        {
+          "selector": ".menu-btn",
+          "property": "border",
+          "value": "1px solid rgba(171,171,171,.4)",
+          "important": false,
+          "offset": 41086
+        },
+        {
+          "selector": ".menu-btn",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 41070
+        },
+        {
+          "selector": ".menu-btn",
+          "property": "letter-spacing",
+          "value": "6px",
+          "important": false,
+          "offset": 41051
+        },
+        {
+          "selector": "#title,#exitScr",
+          "property": "background",
+          "value": "radial-gradient(ellipse at 50% 38%,#1a1a1a8c,#070707ed)",
+          "important": false,
+          "offset": 40764
+        },
+        {
+          "selector": ".bt-gy-row .bt-gy-meta",
+          "property": "color",
+          "value": "#797979",
+          "important": false,
+          "offset": 37221
+        },
+        {
+          "selector": ".bt-gy-row b",
+          "property": "color",
+          "value": "#e4e4e4",
+          "important": false,
+          "offset": 37184
+        },
+        {
+          "selector": ".res-chip b",
+          "property": "color",
+          "value": "var(--gold)",
+          "important": false,
+          "offset": 35265
+        },
+        {
+          "selector": ".res-chip",
+          "property": "background",
+          "value": "#0000002e",
+          "important": false,
+          "offset": 35137
+        },
+        {
+          "selector": ".res-chip",
+          "property": "color",
+          "value": "#d5d5d5",
+          "important": false,
+          "offset": 35104
+        },
+        {
+          "selector": ".res-chip",
+          "property": "border-radius",
+          "value": "999px",
+          "important": false,
+          "offset": 35050
+        },
+        {
+          "selector": ".res-chip",
+          "property": "border",
+          "value": "1px solid var(--line2)",
+          "important": false,
+          "offset": 35020
+        },
+        {
+          "selector": "#overlay .card.page:has(.pg.settings-page)",
+          "property": "animation",
+          "value": "setPageIn .42s cubic-bezier(.22,1,.36,1)",
+          "important": false,
+          "offset": 33325
+        },
+        {
+          "selector": ".mini-btn.ok",
+          "property": "color",
+          "value": "#e3e3e3",
+          "important": false,
+          "offset": 32721
+        },
+        {
+          "selector": ".mini-btn.ok",
+          "property": "background",
+          "value": "#303030",
+          "important": false,
+          "offset": 32702
+        },
+        {
+          "selector": ".mini-btn.ok",
+          "property": "border-color",
+          "value": "#5b5b5b",
+          "important": false,
+          "offset": 32681
+        },
+        {
+          "selector": ".shop-slot",
+          "property": "transition",
+          "value": "transform .15s ease",
+          "important": false,
+          "offset": 32401
+        },
+        {
+          "selector": ".shop-slot",
+          "property": "gap",
+          "value": "6px",
+          "important": false,
+          "offset": 32393
+        },
+        {
+          "selector": ".shop-slot",
+          "property": "align-items",
+          "value": "center",
+          "important": false,
+          "offset": 32374
+        },
+        {
+          "selector": ".shop-slot",
+          "property": "flex-direction",
+          "value": "column",
+          "important": false,
+          "offset": 32352
+        },
+        {
+          "selector": ".shop-slot",
+          "property": "display",
+          "value": "flex",
+          "important": false,
+          "offset": 32339
+        },
+        {
+          "selector": ".hs-btn",
+          "property": "box-shadow",
+          "value": "inset 0 1px #f0f0f00f",
+          "important": false,
+          "offset": 26580
+        },
+        {
+          "selector": ".hs-btn",
+          "property": "transition",
+          "value": "all .14s",
+          "important": false,
+          "offset": 26560
+        },
+        {
+          "selector": ".hs-btn",
+          "property": "color",
+          "value": "#d5d5d5",
+          "important": false,
+          "offset": 26527
+        },
+        {
+          "selector": ".hs-btn",
+          "property": "background",
+          "value": "linear-gradient(180deg,#2f2f2f,#1c1c1c)",
+          "important": false,
+          "offset": 26476
+        },
+        {
+          "selector": ".hs-btn",
+          "property": "border",
+          "value": "1px solid #4c4c4c",
+          "important": false,
+          "offset": 26451
+        },
+        {
+          "selector": ".hs-btn",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 26420
+        },
+        {
+          "selector": ".hs-btn",
+          "property": "font-weight",
+          "value": "600",
+          "important": false,
+          "offset": 26404
+        },
+        {
+          "selector": ".pg-head h2",
+          "property": "letter-spacing",
+          "value": "2px",
+          "important": false,
+          "offset": 25960
+        },
+        {
+          "selector": ".pg-head h2",
+          "property": "color",
+          "value": "#dadada",
+          "important": false,
+          "offset": 25946
+        },
+        {
+          "selector": ".pg-head",
+          "property": "border-bottom",
+          "value": "1px solid #353535",
+          "important": false,
+          "offset": 25807
+        },
+        {
+          "selector": ".pg-close:hover",
+          "property": "background",
+          "value": "#2c2c2c",
+          "important": false,
+          "offset": 25598
+        },
+        {
+          "selector": ".pg-close",
+          "property": "background",
+          "value": "#1c1c1c",
+          "important": false,
+          "offset": 25415
+        },
+        {
+          "selector": ".pg-close",
+          "property": "border",
+          "value": "2px solid #3d3d3d",
+          "important": false,
+          "offset": 25390
+        },
+        {
+          "selector": "#overlay .card.page",
+          "property": "background-color",
+          "value": "#121212",
+          "important": false,
+          "offset": 24886
+        },
+        {
+          "selector": "#overlay .card.wide",
+          "property": "width",
+          "value": "min(680px,94%)",
+          "important": false,
+          "offset": 24658
+        },
+        {
+          "selector": "*,*:before,*:after",
+          "property": "transition-duration",
+          "value": ".01ms",
+          "important": true,
+          "offset": 24159
+        },
+        {
+          "selector": "*,*:before,*:after",
+          "property": "animation-duration",
+          "value": ".01ms",
+          "important": true,
+          "offset": 24124
+        },
+        {
+          "selector": ".mini-btn:active",
+          "property": "transform",
+          "value": "scale(.96)",
+          "important": false,
+          "offset": 21343
+        },
+        {
+          "selector": ".mini-btn:hover",
+          "property": "background",
+          "value": "var(--ak-white)",
+          "important": false,
+          "offset": 21258
+        },
+        {
+          "selector": ".mini-btn",
+          "property": "box-shadow",
+          "value": "var(--ak-bevel)",
+          "important": false,
+          "offset": 21215
+        },
+        {
+          "selector": ".mini-btn",
+          "property": "clip-path",
+          "value": "var(--ak-clip-sm)",
+          "important": false,
+          "offset": 21187
+        },
+        {
+          "selector": ".mini-btn",
+          "property": "transition",
+          "value": "background .14s,color .14s,transform .14s",
+          "important": false,
+          "offset": 21134
+        },
+        {
+          "selector": ".mini-btn",
+          "property": "color",
+          "value": "var(--ak-white)",
+          "important": false,
+          "offset": 21097
+        },
+        {
+          "selector": ".mini-btn",
+          "property": "background",
+          "value": "linear-gradient(180deg,#2a2e33,#181b1e)",
+          "important": false,
+          "offset": 21046
+        },
+        {
+          "selector": ".mini-btn",
+          "property": "border",
+          "value": "1px solid var(--ak-line-hi)",
+          "important": false,
+          "offset": 21011
+        },
+        {
+          "selector": ".mini-btn",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 20995
+        },
+        {
+          "selector": ".mini-btn",
+          "property": "letter-spacing",
+          "value": "2px",
+          "important": false,
+          "offset": 20976
+        },
+        {
+          "selector": ".mini-btn",
+          "property": "font-weight",
+          "value": "700",
+          "important": false,
+          "offset": 20960
+        },
+        {
+          "selector": "#overlay .card.bag-page",
+          "property": "background",
+          "value": "radial-gradient(ellipse at 50% 0%,rgba(97,97,97,.2),transparent 58%),linear-gradient(180deg,#1d1d1d,#0c0c0c 78%)",
+          "important": false,
+          "offset": 16084
+        },
+        {
+          "selector": "#overlay .card.bag-page",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 16007
+        },
+        {
+          "selector": "#overlay .card.bag-page",
+          "property": "border",
+          "value": "0",
+          "important": false,
+          "offset": 15998
+        },
+        {
+          "selector": "#overlay.bag-full",
+          "property": "background",
+          "value": "#0c0c0c",
+          "important": false,
+          "offset": 15851
+        },
+        {
+          "selector": ".bag-slot",
+          "property": "border-radius",
+          "value": "var(--radius-panel)",
+          "important": false,
+          "offset": 14994
+        },
+        {
+          "selector": ".bag-slot",
+          "property": "background",
+          "value": "var(--ak-tex-hatch)",
+          "important": false,
+          "offset": 14963
+        },
+        {
+          "selector": ".bag-grid",
+          "property": "gap",
+          "value": "8px",
+          "important": false,
+          "offset": 14872
+        },
+        {
+          "selector": ".bag-grid",
+          "property": "grid-template-columns",
+          "value": "repeat(4,1fr)",
+          "important": false,
+          "offset": 14836
+        },
+        {
+          "selector": ".bag-grid",
+          "property": "display",
+          "value": "grid",
+          "important": false,
+          "offset": 14823
+        },
+        {
+          "selector": "#bagBtn",
+          "property": "border-left",
+          "value": "4px solid var(--ak-white)",
+          "important": false,
+          "offset": 13998
+        },
+        {
+          "selector": "#bagBtn",
+          "property": "border",
+          "value": "1px solid var(--ak-line)",
+          "important": false,
+          "offset": 13966
+        },
+        {
+          "selector": "#bagBtn",
+          "property": "background",
+          "value": "var(--ak-tex-hatch),linear-gradient(180deg,#262a2e,#121417)",
+          "important": false,
+          "offset": 13895
+        },
+        {
+          "selector": "#bagBtn",
+          "property": "padding",
+          "value": "10px 8px 8px",
+          "important": false,
+          "offset": 13805
+        },
+        {
+          "selector": "#hpText",
+          "property": "color",
+          "value": "#fff",
+          "important": false,
+          "offset": 13132
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "box-shadow",
+          "value": "inset 0 2px 8px #0000008c,0 2px 6px #0006",
+          "important": false,
+          "offset": 12030
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "border-right",
+          "value": "2px solid var(--ak-blue)",
+          "important": false,
+          "offset": 11905
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "border",
+          "value": "none",
+          "important": false,
+          "offset": 11893
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 11745
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "height",
+          "value": "auto",
+          "important": false,
+          "offset": 11714
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "min-width",
+          "value": "110px",
+          "important": false,
+          "offset": 11698
+        },
+        {
+          "selector": ".hero-ava",
+          "property": "width",
+          "value": "110px",
+          "important": false,
+          "offset": 11686
+        },
+        {
+          "selector": "#charPanel",
+          "property": "min-width",
+          "value": "0",
+          "important": false,
+          "offset": 11611
+        },
+        {
+          "selector": "#charPanel",
+          "property": "align-items",
+          "value": "stretch",
+          "important": false,
+          "offset": 11591
+        },
+        {
+          "selector": "#charPanel",
+          "property": "display",
+          "value": "flex",
+          "important": false,
+          "offset": 11578
+        },
+        {
+          "selector": "#charPanel",
+          "property": "padding",
+          "value": "0",
+          "important": false,
+          "offset": 11568
+        },
+        {
+          "selector": "#statsPanel",
+          "property": "display",
+          "value": "flex",
+          "important": false,
+          "offset": 10908
+        },
+        {
+          "selector": ".hp-hud-label",
+          "property": "padding",
+          "value": "0 0 0 8px",
+          "important": false,
+          "offset": 9599
+        },
+        {
+          "selector": ".hp-hud-label",
+          "property": "background",
+          "value": "none",
+          "important": false,
+          "offset": 9583
+        },
+        {
+          "selector": ".hp-hud-label",
+          "property": "font-weight",
+          "value": "700",
+          "important": false,
+          "offset": 9509
+        },
+        {
+          "selector": ".hp-hud-label",
+          "property": "color",
+          "value": "var(--ak-sub)",
+          "important": false,
+          "offset": 9489
+        },
+        {
+          "selector": ".hp-hud-label",
+          "property": "letter-spacing",
+          "value": "3px",
+          "important": false,
+          "offset": 9470
+        },
+        {
+          "selector": ".hp-hud-icon",
+          "property": "background",
+          "value": "var(--ak-blue)",
+          "important": false,
+          "offset": 9177
+        },
+        {
+          "selector": "#hpHud",
+          "property": "clip-path",
+          "value": "polygon(0 0,100% 0,calc(100% - 10px) 100%,0 100%)",
+          "important": false,
+          "offset": 9014
+        },
+        {
+          "selector": "#hpHud",
+          "property": "box-shadow",
+          "value": "inset 0 0 0 1px var(--ak-line-hi),0 4px 14px #0000008c",
+          "important": false,
+          "offset": 8948
+        },
+        {
+          "selector": "#hpHud",
+          "property": "border",
+          "value": "none",
+          "important": false,
+          "offset": 8920
+        },
+        {
+          "selector": "#hpHud",
+          "property": "background",
+          "value": "linear-gradient(90deg,#0a0c0ef0,#1a1d21e0)",
+          "important": false,
+          "offset": 8866
+        },
+        {
+          "selector": "#layerBanner .lb-en",
+          "property": "text-shadow",
+          "value": "0 1px 2px rgba(0,0,0,.8)",
+          "important": false,
+          "offset": 7998
+        },
+        {
+          "selector": "#layerBanner .lb-en",
+          "property": "letter-spacing",
+          "value": "5px",
+          "important": false,
+          "offset": 7964
+        },
+        {
+          "selector": "#layerBanner .lb-en",
+          "property": "color",
+          "value": "var(--ak-yellow)",
+          "important": false,
+          "offset": 7941
+        },
+        {
+          "selector": "#layerBanner .lb-en",
+          "property": "font-weight",
+          "value": "700",
+          "important": false,
+          "offset": 7900
+        },
+        {
+          "selector": "#layerBanner .lb-en",
+          "property": "font-size",
+          "value": "11px",
+          "important": false,
+          "offset": 7885
+        },
+        {
+          "selector": "#layerBanner .lb-en",
+          "property": "font-family",
+          "value": "var(--font-label)",
+          "important": false,
+          "offset": 7855
+        },
+        {
+          "selector": "#layerBanner .lb-zh",
+          "property": "text-shadow",
+          "value": "0 2px 6px rgba(0,0,0,.9)",
+          "important": false,
+          "offset": 7779
+        },
+        {
+          "selector": "#layerBanner .lb-zh",
+          "property": "line-height",
+          "value": "1.25",
+          "important": false,
+          "offset": 7762
+        },
+        {
+          "selector": "#layerBanner .lb-zh",
+          "property": "letter-spacing",
+          "value": "8px",
+          "important": false,
+          "offset": 7743
+        },
+        {
+          "selector": "#layerBanner .lb-zh",
+          "property": "font-weight",
+          "value": "700",
+          "important": false,
+          "offset": 7716
+        },
+        {
+          "selector": "#layerBanner .lb-zh",
+          "property": "font-size",
+          "value": "20px",
+          "important": false,
+          "offset": 7701
+        },
+        {
+          "selector": "#layerBanner .lb-zh",
+          "property": "font-family",
+          "value": "var(--font-ui)",
+          "important": false,
+          "offset": 7674
+        },
+        {
+          "selector": "#layerBanner",
+          "property": "background",
+          "value": "linear-gradient(90deg,transparent,rgba(8,10,12,.84) 16%,rgba(8,10,12,.84) 84%,transparent)",
+          "important": false,
+          "offset": 7341
+        },
+        {
+          "selector": "#layerBanner",
+          "property": "padding",
+          "value": "5px 32px 6px",
+          "important": false,
+          "offset": 7320
+        },
+        {
+          "selector": "#layerBanner",
+          "property": "top",
+          "value": "10px",
+          "important": false,
+          "offset": 7173
+        },
+        {
+          "selector": "#resHud .res-atk b",
+          "property": "color",
+          "value": "#ff7a6b",
+          "important": false,
+          "offset": 7096
+        },
+        {
+          "selector": "#resHud .res-gold b",
+          "property": "color",
+          "value": "var(--ak-yellow)",
+          "important": false,
+          "offset": 7054
+        },
+        {
+          "selector": "#resHud .chip-mini b",
+          "property": "letter-spacing",
+          "value": ".5px",
+          "important": false,
+          "offset": 6912
+        },
+        {
+          "selector": "#resHud .chip-mini b",
+          "property": "font-variant-numeric",
+          "value": "tabular-nums",
+          "important": false,
+          "offset": 6878
+        },
+        {
+          "selector": "#resHud .chip-mini b",
+          "property": "font-size",
+          "value": "19px",
+          "important": false,
+          "offset": 6811
+        },
+        {
+          "selector": "#resHud .chip-mini .res-ic",
+          "property": "filter",
+          "value": "drop-shadow(0 1px 2px rgba(0,0,0,.6))",
+          "important": false,
+          "offset": 6717
+        },
+        {
+          "selector": "#resHud .chip-mini .res-ic",
+          "property": "flex",
+          "value": "0 0 auto",
+          "important": false,
+          "offset": 6703
+        },
+        {
+          "selector": "#resHud .chip-mini .res-ic",
+          "property": "height",
+          "value": "20px",
+          "important": false,
+          "offset": 6691
+        },
+        {
+          "selector": "#resHud .chip-mini .res-ic",
+          "property": "width",
+          "value": "20px",
+          "important": false,
+          "offset": 6680
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "box-shadow",
+          "value": "inset 0 0 0 1px #ffffff1a,0 4px 14px #0000008c",
+          "important": false,
+          "offset": 6595
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "border-left",
+          "value": "3px solid var(--ak-white)",
+          "important": false,
+          "offset": 6476
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "border",
+          "value": "none",
+          "important": false,
+          "offset": 6464
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "background",
+          "value": "linear-gradient(90deg,#0a0c0eeb,#181b1ed1)",
+          "important": false,
+          "offset": 6410
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "gap",
+          "value": "8px",
+          "important": false,
+          "offset": 6402
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "height",
+          "value": "36px",
+          "important": false,
+          "offset": 6358
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "min-width",
+          "value": "118px",
+          "important": false,
+          "offset": 6342
+        },
+        {
+          "selector": "#resHud .chip-mini",
+          "property": "border-radius",
+          "value": "0",
+          "important": false,
+          "offset": 6326
+        },
+        {
+          "selector": "#resHud",
+          "property": "right",
+          "value": "12px",
+          "important": false,
+          "offset": 6230
+        },
+        {
+          "selector": "#resHud",
+          "property": "top",
+          "value": "12px",
+          "important": false,
+          "offset": 6221
+        },
+        {
+          "selector": "#topBtns",
+          "property": "gap",
+          "value": "8px",
+          "important": false,
+          "offset": 6167
+        },
+        {
+          "selector": "#topBtns",
+          "property": "left",
+          "value": "12px",
+          "important": false,
+          "offset": 6134
+        },
+        {
+          "selector": "#topBtns",
+          "property": "top",
+          "value": "12px",
+          "important": false,
+          "offset": 6125
+        },
+        {
+          "selector": "#devPanel",
+          "property": "min-width",
+          "value": "210px",
+          "important": false,
+          "offset": 6067
+        },
+        {
+          "selector": "#statsPanel",
+          "property": "flex",
+          "value": "1 1 230px",
+          "important": false,
+          "offset": 6042
+        },
+        {
+          "selector": "#statsPanel",
+          "property": "min-width",
+          "value": "230px",
+          "important": false,
+          "offset": 6026
+        },
+        {
+          "selector": "#sidebar",
+          "property": "overflow-y",
+          "value": "visible",
+          "important": false,
+          "offset": 5965
+        },
+        {
+          "selector": "#sidebar",
+          "property": "overflow-x",
+          "value": "auto",
+          "important": false,
+          "offset": 5949
+        },
+        {
+          "selector": "#sidebar",
+          "property": "gap",
+          "value": "12px",
+          "important": false,
+          "offset": 5940
+        },
+        {
+          "selector": "#sidebar",
+          "property": "padding",
+          "value": "10px 14px",
+          "important": false,
+          "offset": 5922
+        },
+        {
+          "selector": "#sidebar",
+          "property": "display",
+          "value": "flex",
+          "important": false,
+          "offset": 5870
+        },
+        {
+          "selector": "#sidebar",
+          "property": "box-shadow",
+          "value": "inset 0 1px #ffffff0f,0 -10px 30px #0009",
+          "important": false,
+          "offset": 5818
+        },
+        {
+          "selector": "#sidebar",
+          "property": "border-top",
+          "value": "2px solid var(--ak-blue)",
+          "important": false,
+          "offset": 5782
+        },
+        {
+          "selector": "#sidebar",
+          "property": "background",
+          "value": "var(--ak-tex-grid) 0 0 / 32px 32px,linear-gradient(180deg,#1a1d20,#0e1012)",
+          "important": false,
+          "offset": 5696
+        },
+        {
+          "selector": "::-webkit-scrollbar-thumb",
+          "property": "border-radius",
+          "value": "var(--sb-radius)",
+          "important": false,
+          "offset": 5370
+        },
+        {
+          "selector": "::-webkit-scrollbar-thumb",
+          "property": "background",
+          "value": "var(--sb-thumb)",
+          "important": false,
+          "offset": 5343
+        },
+        {
+          "selector": "::selection",
+          "property": "background",
+          "value": "#1fb2ff59",
+          "important": false,
+          "offset": 5195
+        }
+      ]
+    },
+    {
+      "file": "interface-motion-Cm3pw1Zg.css",
+      "before": 971,
+      "after": 970,
+      "saving": 1,
+      "removed": []
+    },
+    {
+      "file": "motion-transitions-BdxbKqrz.css",
+      "before": 2002,
+      "after": 1975,
+      "saving": 27,
+      "removed": []
+    }
+  ]
+}

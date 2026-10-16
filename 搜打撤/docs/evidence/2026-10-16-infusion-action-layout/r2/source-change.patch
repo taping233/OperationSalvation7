@@ -1,0 +1,38 @@
+--- a/game/css/battle-stage.css
++++ b/game/css/battle-stage.css
+@@ -151,6 +151,7 @@
+ #overlay .battle-stage.sts .bt-forecast-damage>b{color:#ffd0b9}
+ #overlay .battle-stage.sts .bt-forecast-hp>b{margin:0 4px}
+ #overlay .battle-stage.sts .bt-forecast-warning{color:#ffc3ac;font-weight:650}
++#overlay .battle-stage.sts .bt-forecast-note{display:block;color:#bfd2dc;font-size:18px;font-weight:400;line-height:1.4}
+ #overlay .battle-stage.sts .bt-turn-forecast.lethal{color:#ffc3ac;font-weight:600}
+ #overlay .battle-stage.sts .bt-turn-forecast.lethal b{color:#ffd0b9}
+ #overlay .battle-stage.sts .sts-tactics-secondary{display:flex;justify-content:flex-end}
+@@ -169,6 +170,7 @@
+ #overlay .battle-stage.sts .bt-infuse-actions .mini-btn:hover:not(:disabled){background:#355463}
+ #overlay .battle-stage.sts .bt-infuse-actions .mini-btn.ok:hover:not(:disabled){background:#d3e8ed}
+ #overlay .battle-stage.sts .bt-infuse-actions .mini-btn:disabled{opacity:1;background:#263c47;border-color:#8ba5b045;color:#9fb4bf;cursor:default}
++#overlay .battle-stage.sts:has(>.bt-infuse:not(.bt-pick))>.bt-potions{display:none}
+ #overlay .battle-stage.sts>.bt-potions{position:absolute;top:140px;left:62px;z-index:13;display:flex;gap:8px;align-items:center;max-width:420px;margin:0;padding:0;background:none;border:0}
+ #overlay .battle-stage.sts .bt-potion{position:relative;display:flex;gap:6px;align-items:center;padding:8px 10px;border:1px solid #bdcbd847;background:#19303dd9;color:#d7e5ee;font-size:13px;cursor:pointer}
+ #overlay .battle-stage.sts .bt-potion.off{opacity:.5;cursor:default}
+--- a/game/src/battle/view/battle.view.js
++++ b/game/src/battle/view/battle.view.js
+@@ -548,7 +548,7 @@
+         <div class="sts-hud-r" aria-label="弃牌与消耗">${pilesHTML}</div>
+         <div class="bt-hand sts-hand" role="group" aria-label="当前手牌"></div>
+         <div class="sts-tactics" aria-label="战术操作">
+-          <p class="bt-turn-forecast${turnForecast.lethal ? ' lethal' : ''}" aria-live="polite" title="${escAttr(turnForecast.note)}"><span class="bt-forecast-damage">预计承伤 <b>${turnForecast.damage}</b></span><span class="bt-forecast-hp">余 <b>${turnForecast.hpAfter}</b> 生命</span>${turnForecast.lethal ? '<span class="bt-forecast-warning">可能致死</span>' : ''}</p>
++          <p class="bt-turn-forecast${turnForecast.lethal ? ' lethal' : ''}" aria-live="polite" title="${escAttr(turnForecast.note)}"><span class="bt-forecast-damage">估算承伤 <b>${turnForecast.damage}</b></span><span class="bt-forecast-hp">余 <b>${turnForecast.hpAfter}</b> 生命</span>${turnForecast.lethal ? '<span class="bt-forecast-warning">可能致死</span>' : ''}<span class="bt-forecast-note">未计随从攻击与回合末触发</span></p>
+           <div class="sts-tactics-secondary">
+             <button class="ov-btn ghost${mode === 'boss' ? ' dis' : ''}" data-act="btBag" ${busy || infusingNow ? 'disabled' : ''}
+               ${mode === 'boss' ? 'title="BOSS 战为牌库制：道具与资源不参战，背包不可打开"' : 'title="打开战斗背包（B）"'}>[[icon:bag]] 背包</button>
+@@ -571,7 +571,7 @@
+     UI.act('btEnd', () => {
+       const current = getSnapshot(), forecast = forecastEnemyTurn(current);
+       if (!forecast.lethal) { endTurn(); return; }
+-      showBattleDecision('回合结束可能致死', `<p class="ov-stats">当前 ${current.player.hp} 生命；预计承伤 ${forecast.damage}。</p><p class="ov-note">${forecast.note}</p><div class="ov-btns"><button class="ov-btn" data-act="btRiskBack">返回操作</button><button class="ov-btn" data-act="btRiskContinue">仍然结束回合</button></div>`, 'settings', current);
++      showBattleDecision('回合结束可能致死', `<p class="ov-stats">当前 ${current.player.hp} 生命；估算承伤 ${forecast.damage}。</p><p class="ov-note">${forecast.note}</p><div class="ov-btns"><button class="ov-btn" data-act="btRiskBack">返回操作</button><button class="ov-btn" data-act="btRiskContinue">仍然结束回合</button></div>`, 'settings', current);
+       UI.act('btRiskBack', () => render());
+       UI.act('btRiskContinue', () => {
+         if (getSnapshot().battleToken !== current.battleToken) return;

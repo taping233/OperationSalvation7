@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-15T22:02:11.912469+00:00",
+  "sources": [
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "afterSha256": "6dcdadc6b27bdead891dbbd18be4b132ca110322d9aa54699235f80dc25f4eac",
+      "bytes": 29732,
+      "beforeSha256": "a70009ae2c162cd12554169e2b08d730a036c577a7a0bc07b6e5601e3c5eb99a"
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "afterSha256": "fc0db9ad86f6888fe2558420bcfd0055d36bebce86ce60729f787dee28db2094",
+      "bytes": 36077,
+      "beforeSha256": "32fc73bd9190fd3dc06afb03e6f3dc4a5cc4774973b495c4a5e04da702f8d18b"
+    },
+    {
+      "path": "game/src/run/chest-reward-save.js",
+      "afterSha256": "f850db5fb27eb7eb5279d33dcd96c019ba16499faba8d499fc1c8906180a3e34",
+      "bytes": 3423,
+      "beforeSha256": "52df681436df3d6a576cd96f2cfebc1cbd616220f0983ddd3a0565affae09472"
+    },
+    {
+      "path": "tests/chest-acquired-gift-cloud.test.js",
+      "afterSha256": "8130d7e1038430a34e7cfe26607fcb2078121177539fca65ab3b9bb9d917a028",
+      "bytes": 14371
+    },
+    {
+      "path": "docs/save-format.md",
+      "beforeSha256": "dcbe273c0b58da326d3236af57005a35cc499ff32c2c38e116ff07f9c291b8b8",
+      "afterSha256": "e8189b0d15d71105cf5eac169b456cedeccdea427afb2ce4fed30addc22b6252",
+      "note": "before preserves other workers existing changes; only one sentence owned by this batch"
+    }
+  ],
+  "targetedTests": {
+    "files": 8,
+    "tests": 79,
+    "passed": true
+  },
+  "newRegressionTests": 20,
+  "eslintPassed": true,
+  "typecheckConfigsPassed": 8,
+  "nodeCheckPassed": true,
+  "diffCheckPassed": true,
+  "docs": {
+    "links": 461,
+    "findings": 0
+  },
+  "browserRun": false,
+  "buildRun": false,
+  "playerStorageTouched": false
+}

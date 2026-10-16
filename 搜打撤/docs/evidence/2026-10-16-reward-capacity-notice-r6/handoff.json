@@ -1,0 +1,60 @@
+{
+  "status": "complete-uncommitted",
+  "files": [
+    {
+      "path": "game/src/run/chests.js",
+      "beforeSha256": "ffed546ca3c783b413028184908e4479c516dbfcd6b744d82cf4523040c1a601",
+      "afterSha256": "a993d5ed443b8d6b5521d82be2dd22ca202382a4626647f4290c6299da36a021"
+    },
+    {
+      "path": "tests/chests-reward-capacity-notice.test.js",
+      "beforeSha256": "4bcfee17adfd9acf1badcacba98dc0f6ff94e4b77321f3837e95c29992c25f78",
+      "afterSha256": "ad55224a30a404852eef8c7e2e4321fc35b27f8e3b68610a4fa0de9cabb7cf67"
+    }
+  ],
+  "delta": "r6-only.patch",
+  "originalR6Log": {
+    "path": "/workspace/shared/cloud-iteration-verification-r6-20261016/logs/test.log",
+    "sha256": "39b68e05df12e012dd5e7a954e502593451034aadb2cad02597f13106c494aed",
+    "verifiedUnchanged": true
+  },
+  "sys03TestUnchangedSha256": "382b9feb15e6c21ccbbf9622452975ca1cbf41b56fef874bdea0ad60a05b1ff3",
+  "verification": {
+    "beforeInitialRegressionVersion": {
+      "files": 16,
+      "passed": 177,
+      "failed": 4,
+      "total": 181,
+      "log": "test-before.log"
+    },
+    "afterFinalRegressionVersion": {
+      "files": 16,
+      "passed": 183,
+      "failed": 0,
+      "total": 183,
+      "log": "test-after.log"
+    },
+    "additionalCases": 6,
+    "eslint": "passed",
+    "syntax": "passed",
+    "diffWhitespace": "passed"
+  },
+  "diagnosis": "SYS03 fixture reports 1/10 capacity and canReceive=true while grant rejects B. This exposed a real feedback-boundary risk: ordinary rendering could erase an actual grant=false result. Production grantEventCard is synchronous and returns false only for missing tpl or capacity rejection; save failure does not return false through grant.",
+  "scope": "Transient actual-failure marker and suspend/resume capacity fingerprint only; preserve original SYS03 fixture/assertions and existing preview rules.",
+  "legacyRestore": "Successful restore clears transient marker and may recalibrate only the two exact capacity notice formats. Non-capacity notices remain untouched.",
+  "unchanged": [
+    "card-capacity pure simulation",
+    "bag/session rules",
+    "grant outcomes",
+    "RNG",
+    "cur.notice and save schema",
+    "SYS03 fixture/assertions",
+    "R6 original log and frozen worker copy",
+    "previous two batches of evidence"
+  ],
+  "guardUpdated": false,
+  "browserStarted": false,
+  "serviceStarted": false,
+  "fullBuildOrSuiteRun": false,
+  "committed": false
+}

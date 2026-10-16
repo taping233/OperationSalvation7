@@ -1,8 +1,24 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1422,
+  "count": 1424,
   "assets": [
+    {
+      "path": "home-prototype/room-direction-candidate.webp",
+      "ext": "webp",
+      "bytes": 607272,
+      "sha256": "97469c1514ef8441515f07df056e91aaac67739367605cbb9da751bb5daa1861",
+      "license": "项目自有（现行NAI V5房间候选的同像素无损格式派生；沿用既有私有项目使用范围）",
+      "source": "docs/evidence/2026-10-16-WF-cloud-room-lossless/receipt.json"
+    },
+    {
+      "path": "portraits/personnel/wu-default-cutout-v1.webp",
+      "ext": "webp",
+      "bytes": 1011996,
+      "sha256": "68fe23ed56b3b9fee7e3fbfef64546ddc260da282897b87703034446b00432de",
+      "license": "项目原创（内置 imagegen 基于当前定稿透明编辑；老板认可配置页接入）",
+      "source": "docs/evidence/2026-10-16-wu-personnel-cutout/receipt.json"
+    },
     {
       "path": "scenes/chests/safe-simple-v7/frame-00.webp",
       "ext": "webp",
@@ -3286,400 +3302,400 @@
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-001.webp",
-      "bytes": 82616,
-      "sha256": "baf4997ea7046b70ae9b5c39a3dcf414fa0da192408f5a7753f7a521ad1d19aa",
+      "bytes": 62300,
+      "sha256": "4378dbff7096271a2c62de58fbf7634216f663274fdd7e14bfff0c011fce78db",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-002.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-002.webp",
-      "bytes": 82476,
-      "sha256": "b8e340281531409f84bd8a85e5bc8b847b03d9477207cddf4c098dba4304a886",
+      "bytes": 62174,
+      "sha256": "3997a11086fae18d98bef9c84493d43366da8ded65ae63cac1d41e40cdd4433c",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-003.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-003.webp",
-      "bytes": 82412,
-      "sha256": "cc223277afdf4b2f38d029b68545db14cd9ac85834029efc75a40b3277e659be",
+      "bytes": 62044,
+      "sha256": "5443244e4847ab160a3d14771a6358ba89b40ac7880eb0481e2410bc0094fbff",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-004.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-004.webp",
-      "bytes": 82044,
-      "sha256": "94774516ff592d36bcdca4d7431aa6851f7182494ee39d0d6d82ee005aaefaf1",
+      "bytes": 62118,
+      "sha256": "a983123275ca12177a3bf3d77db31b47a82c0f1b5b5acf4d968537c54a7b5b81",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-005.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-005.webp",
-      "bytes": 82042,
-      "sha256": "6f6c9160bd0bdaf114244eb655cf6d2fd89776d0e6bb5fd000186d0c63e70193",
+      "bytes": 62034,
+      "sha256": "3cb6d4dabc09b8e1ef8428184f6cbc90bd31e94ff9345354673cc592dd54a3f8",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-006.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-006.webp",
-      "bytes": 81886,
-      "sha256": "4cf24807beb72ce640a65f203e2d28cd9de8aa63239032e1ad7f46e34f0d7372",
+      "bytes": 61878,
+      "sha256": "2f85b8cd609de4ca0abd29971674fcc3b3917c596189830e97aaaaee1fac5574",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-007.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-007.webp",
-      "bytes": 81768,
-      "sha256": "eae10c98e87625885ee7b9389a553fa19265c81ec00abec3508a929c1c51adbd",
+      "bytes": 61934,
+      "sha256": "038dc6540b28b2191d8eda6d7f8064e1f7be0988d06f4f97561d5f940c69f3c0",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-008.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-008.webp",
-      "bytes": 81878,
-      "sha256": "d05db792b69e049688a81cef4688abb68488ec9316c830025b284932d6d458d0",
+      "bytes": 61970,
+      "sha256": "5e4cb4cf90bab9a00fa376f2bfc5453de11b550027a91f365d40da2a7eb64337",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-009.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-009.webp",
-      "bytes": 81876,
-      "sha256": "ebc8abd05cb854788542cda8236f9e937b92baa9c51e875416ac6002acbbb067",
+      "bytes": 61896,
+      "sha256": "1bc522309bbfdd544b308087048fb9f264b9eed1299284c65d50a6e696d7ae43",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-010.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-010.webp",
-      "bytes": 81898,
-      "sha256": "e35bb2234dca5c69df365e965eb278d9b17e493287249c2324d4db2e995738e5",
+      "bytes": 61894,
+      "sha256": "9e95e51980fea66fe9de569d8f4738a77e17760f53e10c76074f9cf7c6109982",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-011.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-011.webp",
-      "bytes": 81886,
-      "sha256": "7f6bf8cf53e957749eb39707e51d854940efb78a52ef483807b469978ea3bff9",
+      "bytes": 61852,
+      "sha256": "bd82f1c9186420cfa13f76fed8e5a275f5fe1ef330aa5d8d8198bb17095eac71",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-012.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-012.webp",
-      "bytes": 82170,
-      "sha256": "45c563bd7ad753c3bcd82c26d3abdb1c7c616cfc24a90b4346d7727816f5e8c5",
+      "bytes": 62112,
+      "sha256": "2ced9cc94361e72918a8ef864ef8eb0b24b5c2a3ee385f89b916fad7f76c2e19",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-013.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-013.webp",
-      "bytes": 82070,
-      "sha256": "fabd04e2e0d90033008d83497c15d7cfe139c232ece468a9858fd8622f594a48",
+      "bytes": 62178,
+      "sha256": "596247791e3784bdd62d19efb026bf6920b143f135df307a9c79370cae638e4f",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-014.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-014.webp",
-      "bytes": 81844,
-      "sha256": "6b7d521de3ef1a0868723f0c2bdc223118b3109ee5aab01535a15a4e5b12ee9d",
+      "bytes": 61704,
+      "sha256": "dd19c2c22424b161de55209d12e2783c42e3e6a3c092948a9094f4eb73eaf573",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-015.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-015.webp",
-      "bytes": 81824,
-      "sha256": "c471c2a92f4429f5e27688e3ef243b6e54a9de056f5b8a0cb4e46d7830b16444",
+      "bytes": 61842,
+      "sha256": "881baf2284d1608b7c2f0f5e052bd9cb614fd3e88a0d7131b49954a464969a28",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-016.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-016.webp",
-      "bytes": 81826,
-      "sha256": "4a46f640a2a7d04913bd7c0d5f6e716ce5ddd67cf67651d2a929714a4bc720f2",
+      "bytes": 61874,
+      "sha256": "3db43b5e1c51e1f46ffab996d7063b03c0f7ae5fce22b1c35e0ea80f9344e297",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-017.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-017.webp",
-      "bytes": 81908,
-      "sha256": "f53d63077b3d8c397396d79c0502f827cb3cbc3c48733cba795566a70445245d",
+      "bytes": 61818,
+      "sha256": "ad494b98dedbf6e2a69be8b665c1b52f7d3157988aa835ea280798e9513a2865",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-018.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-018.webp",
-      "bytes": 82226,
-      "sha256": "1af52d2c2ae6dd574c9d1c3327be91503358e635b7d314bc35138563a1aa7c69",
+      "bytes": 62054,
+      "sha256": "05d51b6053864cfdb74f303e517cc918a6d2d67c7f3f8f411d8627559aaae983",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-019.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-019.webp",
-      "bytes": 82330,
-      "sha256": "339041c406d9a4cc2d7bdd4ed0eeb85142aaae9ad028b9ee0ea8ea925c55b935",
+      "bytes": 62252,
+      "sha256": "1e3da67981ce21e63093623a66ded19e6bb399e097639672241002003e4f88ac",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-020.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-020.webp",
-      "bytes": 82098,
-      "sha256": "278a77fb7b891ba12f7a2e7c30bc9764480757e7c8b751b71d5a892d2a89ece7",
+      "bytes": 62060,
+      "sha256": "64514cabc749b6b0e642709b8371c8a58c686569d9926f3d9e2c4770dbdfc30a",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-021.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-021.webp",
-      "bytes": 81712,
-      "sha256": "68846319ce7a0554ff950ccda89c82fe640c212882af0ce0503858926ccd8660",
+      "bytes": 62016,
+      "sha256": "1b0f8fe1e9fd7f363970f0ee9d09c00924ec2ca5846b253d8779b2ec55e08a6c",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-022.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-022.webp",
-      "bytes": 81796,
-      "sha256": "178f25be2ff725eed0bc02ff4a69588859a1c49a543797299d8d83af8920b57d",
+      "bytes": 61970,
+      "sha256": "0b5e1f3df58466dea26f61a13cf0330a1271a3f31a55c596e133de9ce476771c",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-023.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-023.webp",
-      "bytes": 81818,
-      "sha256": "947245624ac802485c13a95fe2d5be9c53ca73eec418bbdd8fd6041bdd3be781",
+      "bytes": 61974,
+      "sha256": "bf9a884f491b1fef45afc047341db522365fdaad29c0ca07d26a1ac10e2e7b97",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-024.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-024.webp",
-      "bytes": 81812,
-      "sha256": "e0637c8e30dc67392c0fad042fb211182a6049ac90ff7ad24b1e51115b559f13",
+      "bytes": 61866,
+      "sha256": "72ae34dbed8e95b8462d909b40c0fb7d5dd45276fff326d8e3c1685c0d631c06",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-025.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-025.webp",
-      "bytes": 81918,
-      "sha256": "2a99d163f59045d4322774d5ee6d807c8a450ddc652348dae28af1697557048f",
+      "bytes": 62140,
+      "sha256": "51d86317624bd65bf1a055bb919d1601812647dd39c06f6f6168f32e52cbd4a9",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-026.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-026.webp",
-      "bytes": 82188,
-      "sha256": "f7163fa2cd7f36885eb53c86720eafc7a4e7ddeeba3fc018cdc0812d832ea632",
+      "bytes": 62170,
+      "sha256": "63e07e3b438cfbc48483201771e9c525159877afa2d46c63a676791f28e9f3f3",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-027.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-027.webp",
-      "bytes": 81994,
-      "sha256": "b88f40860e499221345ccf292b095305a1e80275a75e17648c6737dc8d78ae49",
+      "bytes": 62096,
+      "sha256": "093848c1630a656f6548ed778ac8e27697ffdb887ac68f698a1fccf319070e1f",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-028.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-028.webp",
-      "bytes": 81778,
-      "sha256": "3f1b51346ce9f7bb3dc7413fab56222e154e1fb0cd5f7b09b43dcf820488afe8",
+      "bytes": 62062,
+      "sha256": "d36226157c3b28a47eca03377136b37b0e0b51a137c1e55c8dfce211413a5603",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-029.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-029.webp",
-      "bytes": 81936,
-      "sha256": "d01dd48cfcca97009a6a6b017528c5b6d350e63fb5d11895ca028443f402db95",
+      "bytes": 62162,
+      "sha256": "2bbd750d1c4a5ab241014618ef11c8885c8b46623ee055657ec40dc9b4687cb4",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-030.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-030.webp",
-      "bytes": 81770,
-      "sha256": "ff72a13d6e5c99e6368c367a5bed9492d71231661877df7a21623bccc2b19989",
+      "bytes": 62172,
+      "sha256": "6014274c24eebdb3604b7e23dfbc8735da0d6a41adf559e8ab878c427df6d107",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-031.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-031.webp",
-      "bytes": 81776,
-      "sha256": "6270f931c3eb56c6597f97a35fe1e7cbc48a9b69384d8405fe693407383bd213",
+      "bytes": 62138,
+      "sha256": "ae4bd76d83e6a2f0679469ea89880abb6236e65863496eabd56b1e590136cc54",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-032.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-032.webp",
-      "bytes": 81864,
-      "sha256": "57554bf9f7fe269dc4a5e646d41da4dcc60c923f579f29864c10e1048cdd9b26",
+      "bytes": 61988,
+      "sha256": "f96e33113d7b10d7d83dea9c0df5b0b696b84f7bac7a9388eb0163ce81cfecb2",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-033.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-033.webp",
-      "bytes": 81858,
-      "sha256": "76ecf89a20e25e9ba2666e750b369a3693e4b3b357c9631aa0ae8f2f4b6f4ce3",
+      "bytes": 62068,
+      "sha256": "5b1af686cb4431d07c67af939b5f243169053ae2f553944e16bed82eeb3025cc",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-034.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-034.webp",
-      "bytes": 81918,
-      "sha256": "401dbf3f170a72bf81abfdbde892564abfe0c937af0ac7acadb2d0d5fefb66cb",
+      "bytes": 62384,
+      "sha256": "665c38ff98cbebd0914cab46de7a86e8bb907ca3a0aa0320e218d4439497ce13",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-035.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-035.webp",
-      "bytes": 81920,
-      "sha256": "d50992e41c7f2fa4bfea8be93442bb8227e604e23b8d51de128dffb737b5abe7",
+      "bytes": 62242,
+      "sha256": "5e89c2e20cc3b3d670d1de9e7d635b961ed55ed3a2359b5419eb194637cd076b",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-036.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-036.webp",
-      "bytes": 89450,
-      "sha256": "ac9efe58f4751bd86dee5c2f95b36fc6a2e8fff20cd761ff994f43d3551b5107",
+      "bytes": 67580,
+      "sha256": "d3850bc1e38838323f7a05bff62b4aea4f130c65f0999e1e3e253a5704ca516f",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-001.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-037.webp",
-      "bytes": 92422,
-      "sha256": "df6e9e718e96c68d0efff7e32e0d39ac1ad80abfe08b9ab8163607b84c479a3f",
+      "bytes": 69314,
+      "sha256": "d4ce5cfb313c0187fb3a2cd9875a32718d905896a655c9c8c046b8c4789299c8",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-002.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-038.webp",
-      "bytes": 97786,
-      "sha256": "56dbf08cd4d0c243a46b80193cc1482fecffec41b89528c2aa31f19954097c64",
+      "bytes": 72050,
+      "sha256": "3352610bb717c0b0e09d1a980e570ef69620ee1eeb94178969363a6e712fb60b",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-003.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-039.webp",
-      "bytes": 99110,
-      "sha256": "f3786b1181ec34f97d964a5ffb3eef06b0f54c4ef30f610aeee04c1dafdfd03f",
+      "bytes": 74458,
+      "sha256": "c2fe0c395d6ece0a56001be174d49f66760e6349bd6f8001648f665e84d2f709",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-004.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-040.webp",
-      "bytes": 93172,
-      "sha256": "740dae9e56e62e7c26e961cf2f04db1a1f33f07d69d49db4c0d127e6ecafb6e8",
+      "bytes": 69006,
+      "sha256": "f0fda34720f1bf30b38ecedfbe83f2b816177f5a8676ea15ab00959c671e31a4",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-005.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-041.webp",
-      "bytes": 90858,
-      "sha256": "747a8d6c771253d752891f38fc524c8139816f9b42b52a7dbc440f91f99ebdb9",
+      "bytes": 67238,
+      "sha256": "d63680b4b55bd136ab35f64aed8238b2efd7194cb361490bf362d32bf3c5f5a9",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/atk-006.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-042.webp",
-      "bytes": 94912,
-      "sha256": "3d235d13f088f1c633693b1315e9fd1c362c0ced2d6a1ac25dd8fad67d6cab60",
+      "bytes": 70176,
+      "sha256": "c5ff53e42cbd3a6fae25ebb35294d1bc27f7bbe4bfb3f94d75b60a151d187ce3",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/hurt-001.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-043.webp",
-      "bytes": 92752,
-      "sha256": "416cf9ab7d82918693b766934f0b320e80d7cf2daf45bc2b9fefa1e6586883b7",
+      "bytes": 70276,
+      "sha256": "b8f63b1470ca96407dc90fa7b2ef97b626efd47c41f9f065d944dda7fc6c9c39",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/hurt-002.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-044.webp",
-      "bytes": 106752,
-      "sha256": "3f24497d42fbf3fe16420ddc3f5d1155fc5e579f6cf594fa3226fd98ddb7877e",
+      "bytes": 82054,
+      "sha256": "d0ccd01c857b4423dd935e2739c9658f709cef779995170d6eeca53532308f09",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-001.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-045.webp",
-      "bytes": 108848,
-      "sha256": "128c03409c96fe6327635eae350eb5e497afd4c1e5973c717b58b77c3157bd71",
+      "bytes": 82236,
+      "sha256": "5aef54d07914ac340c592d93e0178450da2ee74ccd1cb4d1e59ead0c2a5ca80f",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-002.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-046.webp",
-      "bytes": 108974,
-      "sha256": "5ebf9082787c341f5a87e67cdafb336e1e4eb767d1a70e5c62990c0919caa0a2",
+      "bytes": 76486,
+      "sha256": "1ad335f70172165ca4cf74a2c1b757f79596a1a6f370ed74233b96f1b97df04d",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-003.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-047.webp",
-      "bytes": 102376,
-      "sha256": "4d39cb757985815feaa912779abb7ff0cf3d853feed7946eb856df2b4ba1ddd9",
+      "bytes": 71100,
+      "sha256": "9127f7ca28743e2a6ec7e2092bb322a84fde325ac85ce37a9c28ff3b87e6a97d",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-004.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-048.webp",
-      "bytes": 94788,
-      "sha256": "aea80921446c87d5266c0f9f03fd0ddf7241ea6724f83acba67882b758627239",
+      "bytes": 59924,
+      "sha256": "094bc726f45926a8356f58c9ca51e297c24340193107074a69c4a4db50289cc5",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-005.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/frame-049.webp",
-      "bytes": 92264,
-      "sha256": "1ee3d42bce02d99b8b4e046ecb1719ac3a0db0127d816fc499395234f4113353",
+      "bytes": 58124,
+      "sha256": "32e9ccaaa7a50b8f019d61be66ec168ba6aa4eda299c41e25087b1c9ab2bd856",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/death-006.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/baita/sprite-v1/neutral.webp",
-      "bytes": 82640,
-      "sha256": "e540f65b610dd5a0e3dfa8d3678d9ed9c3dbfde3f1181eac2f92482eedae9589",
+      "bytes": 62200,
+      "sha256": "c93ce03668e093c4b0d61358b7f2a094d24e3983c9c2711795d273ad93e8e94b",
       "source": "game/art-source/characters/three-role-sprites-20261010/baita/frames/idle-000.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
@@ -3707,496 +3723,496 @@
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f001.webp",
       "ext": "webp",
-      "bytes": 216350,
-      "sha256": "448657ff06c669b478eea526a972cd9554175a77083bf48bfaf7a9ac3a9e58bd",
+      "bytes": 197562,
+      "sha256": "7841aaf683c0ef5f5991ea4f6226483581b5118be00c6604ea9b600e2a8640e3",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f002.webp",
       "ext": "webp",
-      "bytes": 216494,
-      "sha256": "13f5c5601db3dc3bbe0a2ae18933d7e044bef12a7041eae7eaf52e52a30ee41f",
+      "bytes": 197400,
+      "sha256": "a4b75e51864dbc58f05bc6124b37b7c30f1b331a0b87b4c73f8c6c58aabc2b70",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f003.webp",
       "ext": "webp",
-      "bytes": 216450,
-      "sha256": "d36c1629c0760f2e43ef36de74faf1b5654fc9a7f381ab33bc2808b11f02de65",
+      "bytes": 197592,
+      "sha256": "15c2fe314947e3c93d897259e0ea36252143cb2254133d383828379632c7f948",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f004.webp",
       "ext": "webp",
-      "bytes": 216452,
-      "sha256": "4f5731ab995c62a9b570aad2486da3c23b133f8162f2bae975dc51f9d54c6444",
+      "bytes": 197516,
+      "sha256": "05e6f2491bfd6ed9883119a3b8e831f761f5859a39879f6da009820e1eada76f",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f005.webp",
       "ext": "webp",
-      "bytes": 216316,
-      "sha256": "c2368cedf4dd743c289054bc972174ad7ead46f205effb3c629e65e7c6230f61",
+      "bytes": 197500,
+      "sha256": "7db2cdaa79914091b5f29963c6eb010b86441eeafb9e4e1e3fd711767a9f1362",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f006.webp",
       "ext": "webp",
-      "bytes": 216356,
-      "sha256": "27dcbfd1035c6017ae748c7e92e27c90fb4c6a00056483db71891c2a0daada87",
+      "bytes": 197462,
+      "sha256": "67410e0df72de8950accfa83da5e2768ef49107e337233c1b771abd27bad7164",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f007.webp",
       "ext": "webp",
-      "bytes": 216302,
-      "sha256": "34b6c4aa279b736c5543c3c2a2abd3cbeca3bdb0c4a7fa28de70d00470dc2e2d",
+      "bytes": 197642,
+      "sha256": "d9ebda080f45dbff7b1f59dd4b03104736eb17caa5a7fd2205f08864bfa42e9c",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f008.webp",
       "ext": "webp",
-      "bytes": 216174,
-      "sha256": "9b610acb59ecc4ea00404d994bfa8a6b729c845fb928958c85493f7c10ffae68",
+      "bytes": 197302,
+      "sha256": "bfeefd201eb0f5677b0096dc725c2f8bd8b258dc3d271b9dab30f629f147458e",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f009.webp",
       "ext": "webp",
-      "bytes": 216278,
-      "sha256": "439b05fb8c3e3eba4fed6af3013230699681c7ecf9f5b8e1cedf370179398e3e",
+      "bytes": 197204,
+      "sha256": "72e11ea55cf7e1bd33362bd6451e878d87a882ff8ff3b97f555d3f1999c45f34",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f010.webp",
       "ext": "webp",
-      "bytes": 215934,
-      "sha256": "8621ca64dde78d5723512935a93954e5a2f778c7735573c206252e2d9071b989",
+      "bytes": 197340,
+      "sha256": "d4bcdabd15cb904a38d780e364b7f27c1e6cc8246cdc04d1e0cdcb196c8d75c3",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f011.webp",
       "ext": "webp",
-      "bytes": 216348,
-      "sha256": "73dffa601b67db19f398f7de786bb0343544178643c142eec08e28fee83a8569",
+      "bytes": 196998,
+      "sha256": "75f17c48cbd9490dd70a63fcff60ac65c31d6b368d01a23bfcbf426d25fb42fc",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f012.webp",
       "ext": "webp",
-      "bytes": 215994,
-      "sha256": "40c3681dd1e216a7e51bc70f4b1fc15824dcd226d550120cf8ccb8e6912ffaae",
+      "bytes": 197048,
+      "sha256": "382c7fe5a035091945cd84e7c6e7f772d16a5d015d7f48ef02f08f1581f4bc2b",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f013.webp",
       "ext": "webp",
-      "bytes": 215940,
-      "sha256": "31ff66c3c705d5452547e6a9fab7c0a6ccedc610505ff56ae11a9082085d2d5f",
+      "bytes": 196944,
+      "sha256": "df570d0da6e4b7c2b40453a5e2a7b9b39085f253c8906080f328819a595f2c0f",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f014.webp",
       "ext": "webp",
-      "bytes": 216176,
-      "sha256": "782f6e37b3d06eb7d4e39fd1a3d98a89fdcefe6d6e77e814c4b285ba00553502",
+      "bytes": 197088,
+      "sha256": "0f1a6c052ce3b47a284415c4bee4ff0a879091559c9b483e2c7e7dd71eb40ee2",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f015.webp",
       "ext": "webp",
-      "bytes": 216158,
-      "sha256": "ae60907069bf13916298daa3f7944f3a40aab349c9232a4055247e13e90fa9b3",
+      "bytes": 197198,
+      "sha256": "c09a96348f7443049e693f2e0b894ac3264202f6503fdb2460aac255ecd5f863",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f016.webp",
       "ext": "webp",
-      "bytes": 216060,
-      "sha256": "94e245f39ea350aa953820892020783c74891dc4136e225a27853c642899e54e",
+      "bytes": 197190,
+      "sha256": "a0a72698c34dde0d8d2a818624fb2f5110564a83a0d18210a9efca77fce7179f",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f017.webp",
       "ext": "webp",
-      "bytes": 216112,
-      "sha256": "05c4718f3fc260062c2458bf71f92590da0d73e193b691c5b311613cf65799f1",
+      "bytes": 196894,
+      "sha256": "4760e2bcfb4611ed55ecc638dc5587df9179f89776d7c60fea7e4291a12dbf68",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f018.webp",
       "ext": "webp",
-      "bytes": 216038,
-      "sha256": "4dc3ecb4636af51c44f314ba65ec7b68951ea6b7b437c9eeeb78ee4ccc66b40e",
+      "bytes": 197082,
+      "sha256": "7ecf97070afc9445b6dbfcb440c37090a3b6c9002f01cf0b528338051d8b62f3",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f019.webp",
       "ext": "webp",
-      "bytes": 216044,
-      "sha256": "34a65d279df2f982726f2b8466fd3ce7b89bd30235021b5ab25dac829407c0d9",
+      "bytes": 197204,
+      "sha256": "d76abb4a8da2a424982d411a5faa1b1277cf06ee835dedfac3f4df02d2e0441b",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f020.webp",
       "ext": "webp",
-      "bytes": 216274,
-      "sha256": "92b318cc95ab8d3d650f2b9b64d2c90271d86ca84b20802816bd78af98c276fc",
+      "bytes": 196822,
+      "sha256": "ff959864a9c102756681e2a2ad14a18fb10e3cccda8ef40931be9a45a229c053",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f021.webp",
       "ext": "webp",
-      "bytes": 216056,
-      "sha256": "3d6c4fe1744f08f0f2f85d5562362f7d27e656b002bee4e1502a36613f7f07e3",
+      "bytes": 197214,
+      "sha256": "2c8a164bc8c7ae04e5963e43cc38602d12303c1e3d1a7fceabd4419b3f94bf1a",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f022.webp",
       "ext": "webp",
-      "bytes": 216254,
-      "sha256": "49df67f7b4b70100d1a2e13d0bc71f4dc9afb1eb8ef25245e0a6ba4dc0fd8b30",
+      "bytes": 197014,
+      "sha256": "71070edaff5ce6cff7cdf91a7cf73c9f17da5dcea1b398eb3db3fdc48f7dcf9d",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f023.webp",
       "ext": "webp",
-      "bytes": 216294,
-      "sha256": "fa66d7e8074b2faac141b784f9f01be5bbc1345690a97cc199125c082066ea3f",
+      "bytes": 196990,
+      "sha256": "3033751802e9714836c76f563f8b9ba6b6a2828b282d4958a73d71fa0f71b2bc",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f024.webp",
       "ext": "webp",
-      "bytes": 215990,
-      "sha256": "c8f42e11c3ff25ebeea577d77f15a59bae8c3d0c92a0577d9655a5d1158d723b",
+      "bytes": 197288,
+      "sha256": "ac808042d30b8d49dfef32944d0514b1f29fa45d20330b95d40eb67c17cb92d9",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f025.webp",
       "ext": "webp",
-      "bytes": 216138,
-      "sha256": "4acd224dde00ea8ceb28da16fb685b9346ac135d112fd81fe60d7a34310e6912",
+      "bytes": 197218,
+      "sha256": "5d6f408b172654e11d3b5f559fb31f0d7797bb39e9f9fbbdae37ccb5dddbf75c",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f026.webp",
       "ext": "webp",
-      "bytes": 216052,
-      "sha256": "b0285f71bdd8383b1a1bf64bb823a2f41aabad0a0a626fd999008738782c9f27",
+      "bytes": 196940,
+      "sha256": "39f3740f49001552707bbe37c3daa18e9f39639a76e74bf7300aabeb9df35e12",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f027.webp",
       "ext": "webp",
-      "bytes": 216246,
-      "sha256": "62bf3fc84f5fc693a4de8fa4a16d84e45f3a42dcecdebf7bd0d1960ab37e17b6",
+      "bytes": 197038,
+      "sha256": "2b3c9aad362c9d2569b909c580ad030d2f0e864dcd12abb9d63afcf065e9204a",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f028.webp",
       "ext": "webp",
-      "bytes": 216326,
-      "sha256": "57bfb8377915e043044ad6748143c2d83ab861ed903e7a6a9808312541e5c23c",
+      "bytes": 197026,
+      "sha256": "7b4c484a3c17d2bcbbe81f84d04367516f41afb72a19ecd725271137dbe0cc1b",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f029.webp",
       "ext": "webp",
-      "bytes": 216094,
-      "sha256": "f3d3218394c8da9b9579d7c5d55f5bd7319b4f9ecd237dce001b99e2d6e4915a",
+      "bytes": 197278,
+      "sha256": "bf72a73a8aa10b81254cfb8338f1cba4a41b908ea6cfaa504571df9e8b86b285",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f030.webp",
       "ext": "webp",
-      "bytes": 216324,
-      "sha256": "d73d7c00c4bd63db14c5ae01c19e3bbecdde124bde2084454fe567d948e45a68",
+      "bytes": 197096,
+      "sha256": "27d8de90db2c735e858ed4e6c06f9b733263edee4850061bfd876a0321466bd7",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f031.webp",
       "ext": "webp",
-      "bytes": 216352,
-      "sha256": "ad525d37718deb4526a29021939353ae7ea96115f521545dd78d2191ab0fa0dc",
+      "bytes": 197050,
+      "sha256": "bf3f1ffda3ae09abbb6769d4878eab25655e86d780930db67732b12c91dcfc5f",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f032.webp",
       "ext": "webp",
-      "bytes": 216060,
-      "sha256": "7bb2a79a4160709e3d7d5b702b4b0b319d8ea0f4eba85481d75586437470167c",
+      "bytes": 196888,
+      "sha256": "a07a0533bec2a583b7f7c60d6c3ce2f30e3244e60fa53ff0fc20ae213e3025b0",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f033.webp",
       "ext": "webp",
-      "bytes": 216296,
-      "sha256": "dddeca5ccf8a34ae94b228014de5034151c3da97ff160908b790884f2416b368",
+      "bytes": 197118,
+      "sha256": "827ef0077460c98c8ce81eaab998cb8dc5a7204992952d9297fc312092f49add",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f034.webp",
       "ext": "webp",
-      "bytes": 216120,
-      "sha256": "d18bee6eec1a7e1fbe968bc489e159100fbaae85303da31df783dcaa2cceb629",
+      "bytes": 197102,
+      "sha256": "32520f802abfab7219d294e9cee5b2a06291dbef694561954b63fc790f0c61b4",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f035.webp",
       "ext": "webp",
-      "bytes": 216078,
-      "sha256": "7fadbfbe21f899d95167d7467bdf6f82118c7807878be8ed0697a9211da12524",
+      "bytes": 196988,
+      "sha256": "2debe0f2a7f724168b257c226133af569d9aefc60eb3972ee9c1744ee639546f",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f036.webp",
       "ext": "webp",
-      "bytes": 215960,
-      "sha256": "145aeb31a26920d3ec157b5516add4de1566d2b2f8c20d97e286a53a0842bd9f",
+      "bytes": 197092,
+      "sha256": "d181c07a2948bd76a0c83ee4a83c720e59453f1aa887529e5367a5aad30811da",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f037.webp",
       "ext": "webp",
-      "bytes": 217992,
-      "sha256": "2ba328270d3a96928cd44161ed0e92b95b94e13e067a8fa70407063133d34e09",
+      "bytes": 199874,
+      "sha256": "6f3770b37fb887084b196944833685c275da0e07892f7a35b4175584fd0d5272",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f038.webp",
       "ext": "webp",
-      "bytes": 220542,
-      "sha256": "cd3b1414314d0821d7b0adcb84c85cff2d25c915cc2f58fe08f75742386e09a9",
+      "bytes": 202160,
+      "sha256": "cd933922a0583c595fff1db9747ff120fcb7af7ffe128abf87a6620593108130",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f039.webp",
       "ext": "webp",
-      "bytes": 217716,
-      "sha256": "63393c8519afcb2d2f37f853cab3c6ee0157f1fcf6de2f8af3c32e00d68870ca",
+      "bytes": 199366,
+      "sha256": "53b624f570b9c1944853a6132965a29718dbc7b02e717c05bf2dd09869ab22b1",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f040.webp",
       "ext": "webp",
-      "bytes": 175744,
-      "sha256": "f3d94519e1a82221c92d73a0bb1eb69fe748076fe6081f6fe63798a43989697d",
+      "bytes": 164530,
+      "sha256": "9998ded120b177b9a42c27f069dea2943f16d9a4744f56ed4723bd24383dd9f7",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f041.webp",
       "ext": "webp",
-      "bytes": 174096,
-      "sha256": "339ef7e9b1b83aef6e3ab2dbb216fdc92c0152b950cc24bd96e30b629fd2b4be",
+      "bytes": 163798,
+      "sha256": "0a2928bb467bc28eb71ac6a476a8a8cc12b2786fd0bf386a52f4ffc9ed9005a5",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f042.webp",
       "ext": "webp",
-      "bytes": 175088,
-      "sha256": "ecb1546fb89fbae6beef4823b3fb33b89aa83808380aaa2b7860ef08b628562b",
+      "bytes": 164624,
+      "sha256": "e9895ca4c8de81af82cf97e7560e3b0659949f57ac7f9659aace2aab53114e9e",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f043.webp",
       "ext": "webp",
-      "bytes": 189102,
-      "sha256": "36ad5ddabb269e278b2c5267803801f3f359e0959895bc75749ba7b2f252a7df",
+      "bytes": 175380,
+      "sha256": "cfd816423a2267ef6fb7030c28510be02001b2970a3b6aa8240f29fbd652ab60",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f044.webp",
       "ext": "webp",
-      "bytes": 176272,
-      "sha256": "ea6a69ce888bb12529d4b53a7e11844c3ff24e397dd6e6d9cffb892aa51b0c18",
+      "bytes": 165482,
+      "sha256": "68d9f5519f60f19241cb0f6665b698f76070d499741e6b0be14fa91ead858c0f",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f045.webp",
       "ext": "webp",
-      "bytes": 176120,
-      "sha256": "432b35bee4521f86f901a06bc40a568e9e1fdcc07507e4fd61be61de31e6b482",
+      "bytes": 164480,
+      "sha256": "928c66957044c507e4fd2ac909618e0743325294b9950ca3313a4940b3d4a41f",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f046.webp",
       "ext": "webp",
-      "bytes": 176228,
-      "sha256": "281d59db77438b4590805e9a4630fd404ddcc1ef2d85731453116779c7898772",
+      "bytes": 164900,
+      "sha256": "ee9a1f74be869c6c8363c6be736dc67b62ff9e89f156d8865bf2d992d9bd529b",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f047.webp",
       "ext": "webp",
-      "bytes": 173712,
-      "sha256": "501bced5eab399423a75df8ad5671dd3c66b3c7a1f1f03398e76f29b8e05dd11",
+      "bytes": 162894,
+      "sha256": "2f8818f2f54ead63cb0a97ed51efd51dd5dbc95a9776224944f807990a0e8429",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f048.webp",
       "ext": "webp",
-      "bytes": 174852,
-      "sha256": "08a35b9581ce44898c333db70c30d971c3b56aa192b2d668f74ae15d4acddf3e",
+      "bytes": 163738,
+      "sha256": "47c384dad889c77fd191f34656f755becb899bae9b951de3c12c3d9f90a4ead0",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f049.webp",
       "ext": "webp",
-      "bytes": 175514,
-      "sha256": "c75d1276031acb33ec28e05b6ca61f34b97429e0a454bd36c76cd1372ba2e60f",
+      "bytes": 165122,
+      "sha256": "16762d1f4e43652e2ab5c96ed2340db4ef16c567fc9ea20d1931568ac13dbd40",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f050.webp",
       "ext": "webp",
-      "bytes": 189360,
-      "sha256": "73ae9ee428ac6132861782113cb38020e73b50af033b41aba93a263eb7d1370c",
+      "bytes": 175732,
+      "sha256": "db93d4dd9bc65319f1248bea3f07799c9864b752d84da897f0c9fa8464201d8e",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f051.webp",
       "ext": "webp",
-      "bytes": 175570,
-      "sha256": "3c345dc64244a5bd68573736b4b9af4323026d62f19a564c8baab3f2d9e939bc",
+      "bytes": 164722,
+      "sha256": "91fb0e9ed93c5a756589b70909363b9d3dc33b0b0d66c0ea8eceee4778c6b5f1",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f052.webp",
       "ext": "webp",
-      "bytes": 174902,
-      "sha256": "466f8a4dd9597f0a79c314e657f2cb82c723def2bc4cbe36ea2f5b46344de4a1",
+      "bytes": 163912,
+      "sha256": "d7cd93c018c0b4764915c114f064128e56db1ef632a740733da38db123392d26",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f053.webp",
       "ext": "webp",
-      "bytes": 174508,
-      "sha256": "f893555c30fec7cfef3b0447805a480ee83e299f6398e3c4beee8c56981d0c8d",
+      "bytes": 164052,
+      "sha256": "6e8696e6c52bd25a4c892d6fd7744bb3f8a5f9b1a0f80bd26d8586a065008429",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f054.webp",
       "ext": "webp",
-      "bytes": 176774,
-      "sha256": "a4f9aafe4ffe020da8d9603bd4719f646363e9e1b30cd47f59bc5cc4b57c9680",
+      "bytes": 165702,
+      "sha256": "fef04867f93573b8b2677052cc53b5bf85c929a6fd35876c218874162ec99276",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f055.webp",
       "ext": "webp",
-      "bytes": 178140,
-      "sha256": "1a3f007048e5d4f3d6859696b559799ae272c12d7e1f249cdb2a269948b463d5",
+      "bytes": 167544,
+      "sha256": "1df757d618cd664f432da49ee910ccf5850cb4aa4da45938548436e24a1f6347",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f056.webp",
       "ext": "webp",
-      "bytes": 180328,
-      "sha256": "2daf37b9f3534ef2778985fd3ace279a79bcfc7403db770cd3e2b500c609aca9",
+      "bytes": 169938,
+      "sha256": "16c79108415430b6bd044e3dd5e0d82e602c4f2d450ebe36516b9fc2234a68b2",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f057.webp",
       "ext": "webp",
-      "bytes": 122304,
-      "sha256": "8ef3ef332a80ad35694547604f84d00781319bef5a61d81eda5ac2a5d1c8219b",
+      "bytes": 118892,
+      "sha256": "12dfa30c19e660f4bccf35e2d944e0f4cac77b99a96c03b070db7d6a47b7d064",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f058.webp",
       "ext": "webp",
-      "bytes": 128730,
-      "sha256": "63d423f8648da4785f9831ff6e76f15017f5cc91eedf3919aefad63ac021b573",
+      "bytes": 124680,
+      "sha256": "e30de2bb1f7d82b3fafadd57774c82cb60ec33457bd89597a1120152dee7f5cf",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f059.webp",
       "ext": "webp",
-      "bytes": 104992,
-      "sha256": "c3a53adb82ae2186bae82c6ef62c726cbda57202746f7578c1f364768ddc34cc",
+      "bytes": 101498,
+      "sha256": "f72ae036a0e1cf2aca4591ba22382bb02469ae5e84fb3e74ad74b33b8391963d",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f060.webp",
       "ext": "webp",
-      "bytes": 108404,
-      "sha256": "19a49855c7ab137c405e7511baa3a93e0d325cb8c716d5d31ab93f852aa199cf",
+      "bytes": 104496,
+      "sha256": "0d5b21b0f56ca5c27fb86250e5331e7d330a13833a3a4d08ee60f4df9f52a300",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f061.webp",
       "ext": "webp",
-      "bytes": 89904,
-      "sha256": "ec28ab88bd4451ab0b630e530f2643bcd93517b15492f18539f0456038700a4a",
+      "bytes": 86218,
+      "sha256": "067653f0c60b20d630f6a772d0fd788b7cae350c2d1686edd97105805fa183fe",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
     {
       "path": "portraits/frames/changwuyu/sprite-v1/f062.webp",
       "ext": "webp",
-      "bytes": 81690,
-      "sha256": "957dd036fa67cc23d5045b5c7c16c4429a7d9e2d1fa8f9cd6402ad9fa8b75731",
+      "bytes": 78496,
+      "sha256": "db28d08fbc8f000467cd0f8e46134c59946123cd57232366d14f42bd320e7d0f",
       "license": "项目自有（内置imagegen生成；老板认可并授权常无欲四动作实装）",
       "source": "docs/evidence/2026-10-10-changwuyu-install/receipt.json"
     },
@@ -4218,400 +4234,400 @@
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-001.webp",
-      "bytes": 74928,
-      "sha256": "e0ebdfdd4aea86931fba339312de562eb9eb990bc60e94127c0668aab6f1d65f",
+      "bytes": 42090,
+      "sha256": "29808029ec49e28b8f932a74756ab98af6d8346bc4c9a99f12eae6b7c89e3524",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-002.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-002.webp",
-      "bytes": 74902,
-      "sha256": "18e888c732b499b68be0fb545d9e36bd4ce2fa5df76f2f3781ccc516b43d66ba",
+      "bytes": 42082,
+      "sha256": "a0d717b7bf5c13cd67de3e3f153a365666a77f1f588bc0ba89a88e415228c367",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-003.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-003.webp",
-      "bytes": 74648,
-      "sha256": "685a6f13bea2ef0cd2076506d3bc3d3eb481963ef182dd38e0cbe37661278aa0",
+      "bytes": 41928,
+      "sha256": "083bb86cabec2b1ba83b39a53ca909387f44858e54aeaf64552ca8ccb1d09225",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-004.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-004.webp",
-      "bytes": 74546,
-      "sha256": "9c9a7ffbb36c98ea0ddc37372de092ec06e1725e5fded6e2902955f04b33daaf",
+      "bytes": 41848,
+      "sha256": "e2663aaa6039edd63dc0a47616d0b94860a0997a52acc4a55bcee490b9b06b58",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-005.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-005.webp",
-      "bytes": 74402,
-      "sha256": "eb2d984ae2858116609d76a85f017bdd26afa7ed27795bd2dbedf6e99dfe9d1d",
+      "bytes": 41772,
+      "sha256": "8433dd48125deaf93cf97719f28117a067183b2b664c4ea3c4997e4ce1fe55ab",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-006.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-006.webp",
-      "bytes": 74038,
-      "sha256": "008d02eeb8f766dcd5f8fc8d4d5e85ce41df4c525a04e1af8654e12c2ded80ea",
+      "bytes": 41732,
+      "sha256": "deef7965b039b172219aadf8500cb3950b032ecc8a92398dd56c5671f021837f",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-007.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-007.webp",
-      "bytes": 74006,
-      "sha256": "44e47e17ae96bd381ba372f9573cd1876260b89e831c545a8b82997b4ee8c8ef",
+      "bytes": 41636,
+      "sha256": "32d5c60b204d4d248324844a79b60518c237cb26712d8a4afe0542fd0f61639a",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-008.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-008.webp",
-      "bytes": 73928,
-      "sha256": "40759f1d94aa8f56ada92bfbab16b2b5680c1d0b91306ec4d430fa2bc77e32f6",
+      "bytes": 41560,
+      "sha256": "b28b55b919e8ed41531d34aea5914da96cb9f397dd22dcd473a82c9dd4c3b9a8",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-009.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-009.webp",
-      "bytes": 74030,
-      "sha256": "5e1aa3258f1ed0cce61da2e6e8b304811149a03f64e7c58130672d71c18e2a80",
+      "bytes": 41664,
+      "sha256": "6376859a3e5a3abdf4d726cdfd7efc6e678eac5d42e2e52ae6e5509734c74752",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-010.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-010.webp",
-      "bytes": 74200,
-      "sha256": "2d1f860a7b8923384871379a5d3f77fb64bf1d9c5712ba2148f6ccdd822d6a12",
+      "bytes": 41682,
+      "sha256": "b1cb1cfa36b69d501d5d5a6d9df45f509fb4b91451d838cef2d198099d61649f",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-011.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-011.webp",
-      "bytes": 74312,
-      "sha256": "fa6856d2ceedc07be4c05e1209da630d61731d0f7c521e4ac83da3613be5a5e5",
+      "bytes": 41874,
+      "sha256": "5b8459b96a3c4652e80cbb21aa123c7ee2679c25263d404ec635dba4f12ba04d",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-012.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-012.webp",
-      "bytes": 74674,
-      "sha256": "aead901148edcc97a6d98ab3b277c519a84a6e99d24fecf20e03888b16736107",
+      "bytes": 42126,
+      "sha256": "0a15a18f47251d95a3d4a6693121d4066ee032f72ece8214f29f2daa5dcfb868",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-013.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-013.webp",
-      "bytes": 74306,
-      "sha256": "9745c2dc68d83cb94f0eb0e83b0b8ee76900d6f75da66f40ea190e2896524705",
+      "bytes": 41902,
+      "sha256": "8af3f2a386bc1e2f328efd8c35140564bb7867fea2e62f768c4fc3e324bd6d63",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-014.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-014.webp",
-      "bytes": 74004,
-      "sha256": "f45c0439071e6ec25d4c1b0cc41f91fa9c2747eca8d5e575a58e5deb9304e302",
+      "bytes": 41672,
+      "sha256": "fe020985c3672eebf529a428361f01fd190903e1d29716b5f0ed33fb1bc150bc",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-015.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-015.webp",
-      "bytes": 74020,
-      "sha256": "2628b48cdd700d9b5b1008a74367ee0be3fc0d26b3f00fe58ee93fe0eb0c6b75",
+      "bytes": 41700,
+      "sha256": "3168d3c33d9368ba4884569bb6e6acbf19876ffdc5469074cdbebf49f3ab57e9",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-016.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-016.webp",
-      "bytes": 74220,
-      "sha256": "c73c27de534625f540b3059cb5b094a59bca17c1d2f9fc89ba509511a82325a5",
+      "bytes": 41856,
+      "sha256": "feffdb0e003459f77bd7e1f0944b4230f344c0c92cba7f40dcc1ea08e13a4d51",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-017.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-017.webp",
-      "bytes": 74334,
-      "sha256": "2f518729c82c588618ccf56abee166636964058ff5c5190c2e43992fe7a94c25",
+      "bytes": 41988,
+      "sha256": "88c158cd74f13d5ab1e2879e0c07ebbec3a09673398e83bac3fe962c1afa6bae",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-018.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-018.webp",
-      "bytes": 74292,
-      "sha256": "7dabc5275e1430c154253f8136be375d9c2998b8cb4f4d0f217509f50c0eb1a4",
+      "bytes": 42114,
+      "sha256": "cc96a870f325e093ffaec72e64fa40d14b91f2c49ff7d0e0b4ffc4a37a2058af",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-019.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-019.webp",
-      "bytes": 74576,
-      "sha256": "35a2c2d27abfeea18d58b05f539517350a46a6484901234887a8d663d234b391",
+      "bytes": 42284,
+      "sha256": "c3f8ea9ae1c351caf678c7d5efa2a574e1fad64ff29b430f2b6dfcf7c5dc3c00",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-020.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-020.webp",
-      "bytes": 74278,
-      "sha256": "5be8221564ca4ed79f459115d79665f240766928181d5c55f8edd10eb6cd117e",
+      "bytes": 41978,
+      "sha256": "7fd50a4e815e9ac0424ffda0a1067f16b53ed4f4392b7c0ec3a2ae799aa41826",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-021.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-021.webp",
-      "bytes": 74020,
-      "sha256": "e3f9a1b1dfac8f56c4513fc3514ba1f76d7047493c3c8a146a3546aaa82ff363",
+      "bytes": 41836,
+      "sha256": "4c5b53469b11552b775a037ea382cda302e8e40fde59f47cf130206e1be68c14",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-022.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-022.webp",
-      "bytes": 73902,
-      "sha256": "7a9689d4c8633abcb89bf5a98a48025917371beae6df55a9a723ac376424dd73",
+      "bytes": 41722,
+      "sha256": "d3b92e6a1d1672bd33315d5eb472d204cf3222a1ff85c4153d44751b42d4c75c",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-023.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-023.webp",
-      "bytes": 74060,
-      "sha256": "3fd2bf41e677041dbce0986434d72e8c7bd1746691e1082eb65fa60e183e51c6",
+      "bytes": 41964,
+      "sha256": "399b113dcdccc1a21587756b61a97ea9aa02c862cb83747b08154fc3e6631de7",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-024.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-024.webp",
-      "bytes": 74330,
-      "sha256": "ded3b7cba499215039cdc79e9432c10a8189e20e792659169a82ac2f0febe293",
+      "bytes": 42056,
+      "sha256": "513da37c1e3ac4901bdf282ea2d1ec3c826a40944fb176b5c5b34f82387e4cb2",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-025.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-025.webp",
-      "bytes": 74324,
-      "sha256": "dda823ba0f66a771c7255daad33282f9fdcce72c82ed399bbbe80349a834a330",
+      "bytes": 42174,
+      "sha256": "ebfda62f3c703b595162e929583ba202122a6cb58dc212cfeaf1ec02a943733b",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-026.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-026.webp",
-      "bytes": 74814,
-      "sha256": "caabe5c8809a88ce01ed3a44cb949304f3fc32a9b1834d7d87721fa846144139",
+      "bytes": 42402,
+      "sha256": "a8c99edd49bfbf0eacaae4ac16d97d1fe2a623a41870feb9b0956f847a98702e",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-027.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-027.webp",
-      "bytes": 74496,
-      "sha256": "5b8da3d1a24541244622b95de9c495e00045e0ab0fe96d3f656da364b7c154a7",
+      "bytes": 42218,
+      "sha256": "5cdcc6356ae2a92be62136e03800340eceb9e72972c43bc14824cbcc7e54c17b",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-028.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-028.webp",
-      "bytes": 74368,
-      "sha256": "686184aea17a66b5351240ed10444402859b916b01ed3952e565e31201d6def2",
+      "bytes": 42080,
+      "sha256": "9e892b9dd1005a54ccd4f219fe17f7cc83d793ce2e8f053bf0fc267c17aaac92",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-029.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-029.webp",
-      "bytes": 74256,
-      "sha256": "9a480925b88802feb9cbc488361c048ca083122776915541483e05c81b1a5dff",
+      "bytes": 41948,
+      "sha256": "be18af4e85e0ab937590e6edb338c419b9c09ced1f851510c3f926be3079abac",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-030.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-030.webp",
-      "bytes": 73866,
-      "sha256": "d5f8ca808cb407c8e329e3a3f953b56f04d227e5e86e5ceb1150c6d2dce4618b",
+      "bytes": 41976,
+      "sha256": "e54e71c4e0018a2bd84a2ed18847fd63da96efc83c21d91e168e29a784bec9e5",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-031.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-031.webp",
-      "bytes": 73898,
-      "sha256": "28c95647a99975a6dbe9ca883a139bc168ce0be8ee46f5bc63eb972536f5b838",
+      "bytes": 42024,
+      "sha256": "bbf54c7382e4f2781cb9f28a8d920e98bcc69ea7bfae8d145dc7eb02e7fd75e4",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-032.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-032.webp",
-      "bytes": 73808,
-      "sha256": "f34eeff6962df53cc03fa67ea6959dcc4420a55ff7c5f68cea60740d0df9973b",
+      "bytes": 41972,
+      "sha256": "9089a36cc0bfb6e355fb16fc8ca8e32d06daef79c3237c42d3b75955c09396b4",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-033.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-033.webp",
-      "bytes": 73834,
-      "sha256": "f369a46df1fcbb8144bdc6e37a5af04fe48a46391272693051fd2b215d8ea6cd",
+      "bytes": 42004,
+      "sha256": "95d6d5f394be06b9a54677b68896a8970fe5642ce693640645f15fc11c06b091",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-034.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-034.webp",
-      "bytes": 73952,
-      "sha256": "054f3eeef17d58e7715fdcdf54a711c8fb0e91bd16f9c62392843e9a39ffaad7",
+      "bytes": 41926,
+      "sha256": "9f17a6b03dfb058e6fba7f08833bfbc4da54beb19b39606f6678719e12c6de36",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-035.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-035.webp",
-      "bytes": 73950,
-      "sha256": "0e631c4d4bd305c7618f5b5f2e6f8bab236bc4469093a9bb9fed83ed5172fa49",
+      "bytes": 41928,
+      "sha256": "b4017a30eac135183c2eade3c555e43ed6ac94daf7dcf14d6199e2572f54a714",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-036.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-036.webp",
-      "bytes": 66674,
-      "sha256": "41b8e693a266bd0e928b209f91fd0891dce58d2ba67bad1c09778fbc4a616029",
+      "bytes": 47904,
+      "sha256": "3901f2cc8264697e69efa1448b73c15c87b4605aa3f0566d47f6dcd74815b74a",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-001.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-037.webp",
-      "bytes": 60828,
-      "sha256": "60c11a5ff5c41289bd2743cf5bc3b3d3d0cf3d99fd3b2b890d96472856f82f36",
+      "bytes": 52040,
+      "sha256": "cb35435b0d2d2f2a6447b35a69e16366b95bf6c4f5efee2a7ed42a3a7b855298",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-002.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-038.webp",
-      "bytes": 100158,
-      "sha256": "4011dd1ce8ff871cf6621aa62f10658f284818581d6418b78e3da01452a7ae9f",
+      "bytes": 58410,
+      "sha256": "3c233b45fbe9ad7872aafa7edb9214e83415d51f541cdf6bdd20404d64f06a14",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-003.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-039.webp",
-      "bytes": 92144,
-      "sha256": "0ae7f311633b55bdaa32b00645fc4e9781a922a7ad56089b5bdad93477f2faeb",
+      "bytes": 50620,
+      "sha256": "0e5eaf48bcb7120c0ac50936eb683960ff8aa2656d45a8c0fff66100dde0e52a",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-004.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-040.webp",
-      "bytes": 84990,
-      "sha256": "487b42d56a9a6344c2cf8f710eb2ce94fa9c94e73fa91f9b242bffbd987c0830",
+      "bytes": 47384,
+      "sha256": "a904b044e5c736ea70fb6ecfbe199e7b2a70a9d689ddbc2dcd8d01b4290dd56a",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-005.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-041.webp",
-      "bytes": 66246,
-      "sha256": "2a97070fb2246e6400d5773d13d3d8164f29457c382220a2c01dac939aef61c7",
+      "bytes": 43616,
+      "sha256": "dbf677f753ae18f8c6de3cf735bfae92ca212763dab1264215d2a2b1ca21914a",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/atk-006.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-042.webp",
-      "bytes": 75750,
-      "sha256": "d44fa8fb17fe74f36d2d13027f43c4f5c5e236ba7bbbcf2adc4b75193e695df3",
+      "bytes": 41502,
+      "sha256": "c223d3f62d53abe18ab98e9b13cc845a873ae83655dd145e928236578081c1f4",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/hurt-001.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-043.webp",
-      "bytes": 77568,
-      "sha256": "4a13d0f8d66e71e4211f73660431abf114acd196264d7f30e6189a3b8922158f",
+      "bytes": 43744,
+      "sha256": "5eba5c4a87c5b8879859048b6de3a5a96939df580e9abbfe5794061a94fbd34f",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/hurt-002.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-044.webp",
-      "bytes": 72352,
-      "sha256": "a9dfe603fbe355f0060ea26b1286fabf0254bcc34356f1cd0ef6550db5483faf",
+      "bytes": 40028,
+      "sha256": "0ea2c74494c900f857f49a97dcaa79dd07af38ddce2cc287cba2e45dffe804c8",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-001.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-045.webp",
-      "bytes": 83286,
-      "sha256": "58469d51dd162c5687bcba5c73e9a2f2ee01bddee198eb4579135e0f7ba7da68",
+      "bytes": 38278,
+      "sha256": "9a578152b68dfc5af28fb2d593aae3a27a27b43c22a68e4feed316eccb66654a",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-002.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-046.webp",
-      "bytes": 88190,
-      "sha256": "f69579dd68b6f1e73acae11b493b82f7a42b53fc29cafab250db4ac43d664bcc",
+      "bytes": 33342,
+      "sha256": "8319e95d1c689068ee84b637d0f735444d7a4a003363c306289c281053d2cab8",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-003.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-047.webp",
-      "bytes": 87144,
-      "sha256": "b9d4bc7e308db00b48c05d5daf273a8ebfeb26587874ec4406cb7cabd7de6af1",
+      "bytes": 27726,
+      "sha256": "15c15bdf43f1069c0a706d332535a079f3a6379af2ff435df58012558fe31653",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-004.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-048.webp",
-      "bytes": 51232,
-      "sha256": "0f0f89f3e510cd62bd002a55bb8f2ba15036c9b26159552fde62c0a9f2f9c345",
+      "bytes": 21888,
+      "sha256": "73a7b062d203a6ffbe8f24f89ecc2c62cbd08eff5c9f1e2c3a18238095c9512b",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-005.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/frame-049.webp",
-      "bytes": 86708,
-      "sha256": "afc69a0874e96f69b9db963b9544a708dd6e6a222c5b734e5498d39e698b3ec7",
+      "bytes": 20268,
+      "sha256": "f5ab758d2b0d54e5e7f4933d027604112688192bc433957de892704aee8d2156",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/death-006.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/heixiang/sprite-v1/neutral.webp",
-      "bytes": 75062,
-      "sha256": "561e93cc4feda0ac5a14a16db05038ff0eba1b68e1dc14d01522bf03f3167a12",
+      "bytes": 42162,
+      "sha256": "232e345a47572c2dfc991b929f159e8ff3a88c6b986a7c3f88d3eb6ac6fc6f28",
       "source": "game/art-source/characters/three-role-sprites-20261010/heixiang/frames/idle-000.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
@@ -4631,408 +4647,408 @@
     {
       "path": "portraits/frames/wu/sprite-v1/frame-001.webp",
       "ext": "webp",
-      "bytes": 56400,
-      "sha256": "2b438fd2e9b280aea804fc7aa98ad4c53e0e16ff120f4d8c6675bfe0aa9484e1",
+      "bytes": 54156,
+      "sha256": "edba1b420eeb3a2e93825f2aea09043410044017c7e2d1d6246fd0618fe182a9",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-001.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-002.webp",
       "ext": "webp",
-      "bytes": 56346,
-      "sha256": "a1f54cb629fb10d9087ec51c861ad3a21c1d817300323201f9d6175995f583cb",
+      "bytes": 54158,
+      "sha256": "59a7f4781696dcae9b9cedbd772062bf4ea3cc2ccb5ce4ccbfd0da92dd812aba",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-002.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-003.webp",
       "ext": "webp",
-      "bytes": 56250,
-      "sha256": "bc81b5f9acad2a740a4d15728fd2dc0932c289608e3b080582fa5c55a631e105",
+      "bytes": 53952,
+      "sha256": "3ec3bd73b0cac2cabaffae85b2bbaaadbccae5c954a398e8f0cc92480f92ad98",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-003.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-004.webp",
       "ext": "webp",
-      "bytes": 56166,
-      "sha256": "0cc3b3ea7c13cec8f24bd12c03f017fb3e6eff5223e4052b136f3b1020edf919",
+      "bytes": 53956,
+      "sha256": "30208f78f946538c7161915fd547e93d3fe48e345860c44dc346c227567e38f3",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-004.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-005.webp",
       "ext": "webp",
-      "bytes": 55920,
-      "sha256": "47814d16d075b496553c1bdd788b3c7e679015e6f0db40e46c551365e0bcaf6c",
+      "bytes": 53780,
+      "sha256": "b659f9c51e44e1f96146390a216e029c8b4c333f6e5689c391f943c693d2adcf",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-005.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-006.webp",
       "ext": "webp",
-      "bytes": 55934,
-      "sha256": "8da0831759013f9c8279bdd50f545e4d89e6ec259e5990138af3f1360009a10d",
+      "bytes": 53758,
+      "sha256": "d92df74d8c7ae4cf91ab282845c8abd3c20ba87f21c0c211421498e75b0be2b5",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-006.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-007.webp",
       "ext": "webp",
-      "bytes": 55972,
-      "sha256": "5bb09b65fc019ce08d8dc5dee08ed34bae71bb733dd79f650e442237994d424b",
+      "bytes": 53676,
+      "sha256": "57d18b85ada69cc86745a0d95d3ec0537c72d05ad33586ca9cf516180187429b",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-007.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-008.webp",
       "ext": "webp",
-      "bytes": 56024,
-      "sha256": "7ebc7e2d4054665c3a2134f545f21202bf2c5f46571a309c1aa73bdc84c16e6d",
+      "bytes": 53672,
+      "sha256": "1ab2c269dd56c5d53976d061fc93bc648e20e950f3d5667ff83832acdef798db",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-008.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-009.webp",
       "ext": "webp",
-      "bytes": 55928,
-      "sha256": "4f0404beb8ac73ee3c9b4da6be52876a73b8ae184e67de26a98af10cc8380bc9",
+      "bytes": 53610,
+      "sha256": "1e25ceaba32b18f97910749a6003b4b8532015f44186c776ef4c5b9f428e8b4f",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-009.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-010.webp",
       "ext": "webp",
-      "bytes": 56010,
-      "sha256": "2391a6d5b3dcc51467feb3f8d8aa4ac28f6b11570ec43bca9573d06b384af233",
+      "bytes": 53648,
+      "sha256": "6312778083258596be0de144d854ab28890211749cd76b9556c1160bdcebdce4",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-010.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-011.webp",
       "ext": "webp",
-      "bytes": 56314,
-      "sha256": "61d835c931770267e6760b1ee00429c2e3dd05b8a6f705ff3af1fb33cb957245",
+      "bytes": 53824,
+      "sha256": "c9216635b0bb712c7803624e0d8375c469365fe75e087a75bb960ee563afaa90",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-011.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-012.webp",
       "ext": "webp",
-      "bytes": 56240,
-      "sha256": "bfc56b509f4299524dc170b5de171ee6b34914344cd929e59ddc9d5ff62e1529",
+      "bytes": 54066,
+      "sha256": "276a4a1fc0462fcebbb9f985b00736fd0e06bb0646306ea11137d87eb61f9200",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-012.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-013.webp",
       "ext": "webp",
-      "bytes": 56540,
-      "sha256": "b4acd97ab07fbe89baa21d358eb0768aed224bf7c145a36787aed9d3532f75e3",
+      "bytes": 54224,
+      "sha256": "cd070b06ec3e757185a4fb40e3143ed869a9e6a63370ba9d5b8d18a072da6aa6",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-013.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-014.webp",
       "ext": "webp",
-      "bytes": 56126,
-      "sha256": "6b8af76f9fa57170b1dd54ebd00923c30b4f81967c47ba6499ead2d42a7c194a",
+      "bytes": 54026,
+      "sha256": "b1c5fa591168f10d51db67f3d1ce95262b4b97a8b42378f791126c82c3e8754f",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-014.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-015.webp",
       "ext": "webp",
-      "bytes": 56024,
-      "sha256": "6b164dfb30be097df411cda9ab97a26a65a64b0d8459c5a75bf8ec19c3448545",
+      "bytes": 53728,
+      "sha256": "1b0a7fe1ed4e2f116f1d80fefbbeef87b77aae41131a0f26403dabcb96a76775",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-015.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-016.webp",
       "ext": "webp",
-      "bytes": 55960,
-      "sha256": "ded362635d03c1f7643fcb82c2fb33a1c479dabc0cb3fb84e088768a23290ed7",
+      "bytes": 53736,
+      "sha256": "c6fc25c77bf295c4a336e63b1e1ff391d954d4c5cedf0fae11d404110bac8b4e",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-016.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-017.webp",
       "ext": "webp",
-      "bytes": 56062,
-      "sha256": "8fbcef20d4f4457cff199012c51be43b49c001a63d01e1263a04c586fec12d9d",
+      "bytes": 53768,
+      "sha256": "ed00df7ae210b0b70df86cd6893a9a89d075ec48c9eb8167fc9d19aad81d1745",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-017.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-018.webp",
       "ext": "webp",
-      "bytes": 56284,
-      "sha256": "2d56f24147cdddf0b4a009cc2a0a3f4f8d99121becd1db7bda5a103084125437",
+      "bytes": 53904,
+      "sha256": "eb3576cc79b35e3de13fda27c9579971917eb95890b77897ec8453154ff650b3",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-018.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-019.webp",
       "ext": "webp",
-      "bytes": 56406,
-      "sha256": "e785c014bac1a1ed5a60e950300bd8f72666dcbf5946a3e0105a06e76dde4161",
+      "bytes": 54168,
+      "sha256": "a39a671c3b99190f7f164ed7fdd741768d4934bb0680bfeb3ef0741f49d47566",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-019.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-020.webp",
       "ext": "webp",
-      "bytes": 56350,
-      "sha256": "e43d89ff2cbe7c618f65cf5130a22b8397f22edc3d6e8534028d3d9a64caa3aa",
+      "bytes": 54308,
+      "sha256": "5c4f32fbbe6d8502e935a61233bce8cefb6648bafc2dd0e235521d2b4a59804a",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-020.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-021.webp",
       "ext": "webp",
-      "bytes": 56178,
-      "sha256": "bf8c6d664e255c7677a144d6eb0242fe0ed1398f7cc3e61a6e1c55d358c981d1",
+      "bytes": 53964,
+      "sha256": "d18796df11df3b53d55ad08395bde161409a4b36e52fac34e4267911b1175ba8",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-021.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-022.webp",
       "ext": "webp",
-      "bytes": 56216,
-      "sha256": "20d646023a1ae73a0a494ad865118e13ff385a3c22bc02b2350f4772c3054548",
+      "bytes": 53824,
+      "sha256": "39fc9787b2ab402ddd77eece676bdce02aad80bb7d0180aaaafae6456d614590",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-022.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-023.webp",
       "ext": "webp",
-      "bytes": 56120,
-      "sha256": "fdc8d3585041f5ecf91d666c695a4e17d92d50cf6ff19ae337367fb97448505a",
+      "bytes": 53872,
+      "sha256": "95c524a7a0f9c924bd6ae4129debb7d3b98c6958dc63d899aeb22acd83b5534f",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-023.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-024.webp",
       "ext": "webp",
-      "bytes": 56248,
-      "sha256": "7dc3e61718f34644fcff88359751fa8057bf5d4c814b4b46487df8e26ce1c775",
+      "bytes": 54014,
+      "sha256": "8994aaf754917f169b0b990ec1a7ed229bc111b71c939f3bf7d8f06f6ab29b47",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-024.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-025.webp",
       "ext": "webp",
-      "bytes": 56040,
-      "sha256": "15bda82fa27e07b901c474f0e9cb0504f12fd2cdd287838f39f14e2ca17f55e4",
+      "bytes": 53978,
+      "sha256": "9c1b0461d91d87327c7fa366ec155a1958634ec616b3cad8de2b6bd99bfab77d",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-025.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-026.webp",
       "ext": "webp",
-      "bytes": 56386,
-      "sha256": "af17670f005e014d54cc827a25a0019eae4384b5718327f7e00652afc16ccfeb",
+      "bytes": 54230,
+      "sha256": "872371a1ae92f64df1d4b4ee3de202a079ca247d441453caafb300ea235995ed",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-026.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-027.webp",
       "ext": "webp",
-      "bytes": 56566,
-      "sha256": "28f4f07d5181c57f1ab2316dbfbd585126a2626f799661be05623ddd7f4e4e1b",
+      "bytes": 54332,
+      "sha256": "12b6caea65532dea5800defd2a88361d44a4ac82395a39df4e595b0c508a97fc",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-027.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-028.webp",
       "ext": "webp",
-      "bytes": 56744,
-      "sha256": "db61b9c8e7d807d08c7c39d81f6505a22cec77b80f575db4124e14cc35660326",
+      "bytes": 54290,
+      "sha256": "bd9c5dd0c06032e2b5052766b7495b0075e9a6b749144946a10925a3d576dff8",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-028.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-029.webp",
       "ext": "webp",
-      "bytes": 56242,
-      "sha256": "0e73e008a0338a881a360c1955f747f90c64efbb9986ae93a2aa04a6bc861eb3",
+      "bytes": 53960,
+      "sha256": "f66645cfe1d9f6648c7e3aa8cfbd21c38b04a167ab9653d36b81453a7f7641b9",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-029.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-030.webp",
       "ext": "webp",
-      "bytes": 56226,
-      "sha256": "0b8640523de6a7f58c9c38be5f2bb06b07b2ae926bde615046989e667234e13c",
+      "bytes": 54014,
+      "sha256": "029e13b7961d4e88237aee54b710a428c8fc9fd45b349b2b30a76cc3f6ef1cbc",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-030.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-031.webp",
       "ext": "webp",
-      "bytes": 56102,
-      "sha256": "e9d49f6eac7eb965ef8b5d1fe35a267fa988be7c088ab9a7bab6c8062b6d0c3e",
+      "bytes": 53842,
+      "sha256": "6d01ecb0b80f17b878f4148e9cb04ca7b3aec68b660ee3772bcd39a0b4cf39be",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-031.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-032.webp",
       "ext": "webp",
-      "bytes": 56246,
-      "sha256": "fb8ba4dd6ec0fcef62bdf4138e0daa55c7f9ea16690a72112c8b6807f13925b9",
+      "bytes": 53930,
+      "sha256": "ea8baff8f429cd788d82b231c28fe6c3aec438726ed289712774220fdbd8c2b3",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-032.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-033.webp",
       "ext": "webp",
-      "bytes": 56266,
-      "sha256": "c4f1621dc8dc2433339a2242b9098eb327003bef38b6a9b51ea67e1ee0cb1899",
+      "bytes": 54176,
+      "sha256": "ee3e531caf29e2004092da78aea3d88e472dd575de76b24768fa6ebdc5927f7f",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-033.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-034.webp",
       "ext": "webp",
-      "bytes": 56280,
-      "sha256": "b8dfac7cd3fb4dd512266bf0d27b0f1b5fe93d66f3473c8441dcc2c5047a5403",
+      "bytes": 53936,
+      "sha256": "d99ae85ab7ef025dfde11ed07f5d20e7b819195378bfe8ad7e5717f869a220b7",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-034.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-035.webp",
       "ext": "webp",
-      "bytes": 56138,
-      "sha256": "42b4e8496f27cc642537b7cf50255d67e9b118747a29f2272eeffed51b0dde79",
+      "bytes": 53948,
+      "sha256": "a6340a944b0f28331c532ad7579267503bb91ce761c550cd1941263cc8fad292",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-035.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-036.webp",
       "ext": "webp",
-      "bytes": 56424,
-      "sha256": "2c4cece222bd83e8c3fb063cf1ece53d51eeb4681cdd562147664c846148f83d",
+      "bytes": 54056,
+      "sha256": "7ab0e305f75b967baa6e99f5166ffe2fbc658912784143144c38084ff55ee89a",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-036.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-037.webp",
       "ext": "webp",
-      "bytes": 64000,
-      "sha256": "0aaa1ece5961000d6e7fb7d3159a38957558b868fd4022583c3dd21e56d45dc4",
+      "bytes": 61164,
+      "sha256": "01b6233799b59e6c538a2dda326db9e7e352651ce1394722a901f4133090e476",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-01.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-038.webp",
       "ext": "webp",
-      "bytes": 80916,
-      "sha256": "6ee49336638ed0e64b4c640c2d6ea82d03b3290f6f3c8114632bfd3463522d31",
+      "bytes": 77446,
+      "sha256": "43cc2e1816829c96d8a11427b1bb541999cae77ae2a6e75acb8ab6bff35ffe9a",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-02.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-039.webp",
       "ext": "webp",
-      "bytes": 65878,
-      "sha256": "e8e11eca0fe5360069e6a666d36071d65968bbf68753f24aa89d11130306658e",
+      "bytes": 63650,
+      "sha256": "2b174e8029b287cef3328c761200c9fde39ac84e65827f795e3452f1801937f5",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-03.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-040.webp",
       "ext": "webp",
-      "bytes": 65042,
-      "sha256": "0a5c2475d418003102e87e51a9ad34477b9fe575ab9eab13ef480dc198fe3677",
+      "bytes": 62322,
+      "sha256": "efe50f692b6d4f746a53d4550ecd38f79a5b575828d99cf8afd268935a7ccb1f",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-04.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-041.webp",
       "ext": "webp",
-      "bytes": 71282,
-      "sha256": "ec071e18fe1cf318047646d339114a9e987dc9aaa481d283d33580756ac06378",
+      "bytes": 68018,
+      "sha256": "3423949918be04fc362cd34536c3c78f998d7611e790623cb9f87f88d5547f7c",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-05.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-042.webp",
       "ext": "webp",
-      "bytes": 71444,
-      "sha256": "02dc9f07a5ced596bbefa8c44914b56aaec1a2ddcdf7119515e1230e3aad0abe",
+      "bytes": 68452,
+      "sha256": "e0c9aba17fdacfd8a88c23fa4881cede7688c5d078eda854d52e787612dfe5f2",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-attack-sprite-20261009/v3/attack-06.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-043.webp",
       "ext": "webp",
-      "bytes": 60298,
-      "sha256": "7550e53ec6b55a26b00f39d83c5a3b1434bd18437919bc8ab528cb95d3801ae5",
+      "bytes": 57940,
+      "sha256": "52f079ec614a529971573bd270bd15e32d754eac537676f13ebe8be8493ca43b",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-hurt-sprite-20261009/hurt-01.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-044.webp",
       "ext": "webp",
-      "bytes": 62568,
-      "sha256": "65e59b96d3f126f519c40b81fa7a64b4c63403e49d2db5fff9da29feba0ecc80",
+      "bytes": 60094,
+      "sha256": "0aa9c8fabafb334257c313393557f9c8804ca76ccb221b0d8ad3c4ba663e6c44",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-hurt-sprite-20261009/hurt-02.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-045.webp",
       "ext": "webp",
-      "bytes": 53494,
-      "sha256": "a5f7ec2830e96fcff7020b9dfc9c4ac709984bc5374b5534495d1985b2a07552",
+      "bytes": 51448,
+      "sha256": "b20b843114e5208bf09e6215b834558dea2a50eb4bf771b4a758bdc6f5845e4a",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-death-sprite-20261009/death-01.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-046.webp",
       "ext": "webp",
-      "bytes": 49858,
-      "sha256": "c19773dc63d6219dda1920b088dbcaa80fa4cd883fc189d2c743ced672a581b2",
+      "bytes": 47276,
+      "sha256": "2ceeb398b3a2ebe20c91a58e1053b8d3c75f6e2eac058ec3a47a069c5a68d63b",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-death-sprite-20261009/death-02.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-047.webp",
       "ext": "webp",
-      "bytes": 50648,
-      "sha256": "7bc25c72041dcca49de96f718d1cca2dfb9c4eaf92ff3346f811a477b78f7183",
+      "bytes": 48704,
+      "sha256": "1db1c7092bf28b4f7340ee0177af29db25f9706a4e666235ea2f0b5350a6717e",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-death-sprite-20261009/death-03.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-048.webp",
       "ext": "webp",
-      "bytes": 45862,
-      "sha256": "690c0406b04d028ee82e61e467a24cb611a7e4a80c369a37a3e2ac902c4069ba",
+      "bytes": 44002,
+      "sha256": "de19d0ab6312610ed66aeff64becb1ce8250f7ac415c89873e1eab5dba5f7405",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-death-sprite-20261009/death-04.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-049.webp",
       "ext": "webp",
-      "bytes": 38236,
-      "sha256": "25bc6f05e4f15ba4006fcee1c31c86d3d3aa85a07711fcf8538bd2a82ba58407",
+      "bytes": 36966,
+      "sha256": "eea302969d5b511be6c33e7f40d3dd55e0ca56e80b21ada335b5a7381f7096b8",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-death-sprite-20261009/death-05.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/frame-050.webp",
       "ext": "webp",
-      "bytes": 38882,
-      "sha256": "5b49390b7326f55c2a53d2bb4e748e4210daecc0e3a1bfbaa274f0df498e6831",
+      "bytes": 37666,
+      "sha256": "e51cde18f124a8698cf0159fa6f0488a5620ea9de7f5788420711bf030648bd7",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-death-sprite-20261009/death-06.png"
     },
     {
       "path": "portraits/frames/wu/sprite-v1/neutral.webp",
       "ext": "webp",
-      "bytes": 56796,
-      "sha256": "c737441cace84ad8c749b1d992df14b00cba5edef6957c535369b8eb8cd9f909",
+      "bytes": 54686,
+      "sha256": "57ffd12fac024595631df559179eef54deb95db8ba183a9602f8dd721d072071",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "source": "game/art-source/characters/wu-idle-sprite-20261009/v2/frames/idle-000.png"
     },
@@ -5046,400 +5062,400 @@
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-001.webp",
-      "bytes": 89098,
-      "sha256": "e65c4c1f94e612c6f09282e4706522628cb6889f37657c92545228cfb5b5c28c",
+      "bytes": 64676,
+      "sha256": "3a8c8c5a92d7c968f63352e2e0446d3cd3af27543efc0eb92a6fbfedac984d20",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-002.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-002.webp",
-      "bytes": 88902,
-      "sha256": "5dd8df27ee65af8ea9b1fd85bb44c81a65cb57a6e5251fd7b9b1c1ac7c767574",
+      "bytes": 64436,
+      "sha256": "5408481bd705d195d3ecefc7c2c6cac6d77309bbe482983eee8f1558bb993639",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-003.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-003.webp",
-      "bytes": 88726,
-      "sha256": "5a3e02e894b90cd01a6dd32d934342c46fb3911e0bb38f7d193528c2743e2ef5",
+      "bytes": 64310,
+      "sha256": "be8d0311db74224b5e70b25185100c4dec95867b102de623eb48877273ae8332",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-004.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-004.webp",
-      "bytes": 88314,
-      "sha256": "1c6a19a3f5267b5a3c6887278d873bebe3768ff7bc1e6dd92d8b9bf6d1a6e1d9",
+      "bytes": 64210,
+      "sha256": "f4d3773fa4967eb23bcbfc7f80cf3d2eadd76aba853a192206fd2d1c7588bd20",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-005.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-005.webp",
-      "bytes": 88044,
-      "sha256": "268b86f1f00393c3b9412340745efc2435d03540a2b58d284e59508207efc4eb",
+      "bytes": 64110,
+      "sha256": "23996b374671a7263e5762a7c9b009cc4bfd903103dc9703ca3a2713649d33bf",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-006.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-006.webp",
-      "bytes": 87926,
-      "sha256": "86a0d30fa09acc3cc336cdd9be237dded6a1f75f254f2ad8026bbe1246a49037",
+      "bytes": 63978,
+      "sha256": "f19e3c846372f78b237eb8cfad33fe787142565516b7b2817e0295311f46276b",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-007.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-007.webp",
-      "bytes": 87818,
-      "sha256": "90389f18299652d916a719dfd44b0a98b5a4a230aeb56d3d9b64e7e7f72c4bc4",
+      "bytes": 63888,
+      "sha256": "21ee6c5770fde4730b0948ff220908891125a864fdab5b4754755de9d0b5a6b5",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-008.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-008.webp",
-      "bytes": 87896,
-      "sha256": "a5f91540b4f9e750a3128cfb9115a733790bc75859cb33de1c88bc6a4e2407db",
+      "bytes": 63972,
+      "sha256": "8cae818df037cf1535ae059b202cb31976eb905089f15519fa8007eec2f33db4",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-009.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-009.webp",
-      "bytes": 88072,
-      "sha256": "638630424876ef5b6fd621ebae8590e10bb6f4538159c9f2d751a83ba79bac70",
+      "bytes": 64222,
+      "sha256": "3de71daecd86958aff3b7b9acebec4762f88099d96584195e11df386f333b480",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-010.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-010.webp",
-      "bytes": 88244,
-      "sha256": "75b03c70b5fec456d6d505fc963322730debdb897c8084ff6932a465bfcb0456",
+      "bytes": 64376,
+      "sha256": "c94b0c8c6846885407853881a85d3e105efef15d064fd62a41dd1014ba956e2a",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-011.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-011.webp",
-      "bytes": 88528,
-      "sha256": "c7f6fb50b2622534fb21d6797458d4e30520a5a9537a249285ff3d972e8f1d63",
+      "bytes": 64510,
+      "sha256": "5b6707bf500ebd22eacc563c95594efeb8690b8f1938364260740347bed0cc26",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-012.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-012.webp",
-      "bytes": 89054,
-      "sha256": "85e0b3c2aeb72f4e0512779814151c3653df2e7d8fa568b41b715d81db351303",
+      "bytes": 64830,
+      "sha256": "48c5c135600471f054ea4cf46030a3d7a5c149d9cb9a195c40ad8353c9674f2e",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-013.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-013.webp",
-      "bytes": 88400,
-      "sha256": "605458715a2657858953802bed0bfb43a6ad5f9e95e091b7074054c7c6106005",
+      "bytes": 64442,
+      "sha256": "34f66e5ca58431cc4c827255382f64de2447ff694920446af0a008aeb4c983a7",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-014.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-014.webp",
-      "bytes": 87950,
-      "sha256": "afd20624a22f479b178a47aad80bf27e8e27369baa625d574c32b00b43191c3e",
+      "bytes": 64272,
+      "sha256": "0b3d5a9df64d25acb9b836ed23dc178903a5ae8826b6dcd0ba14983b236d890d",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-015.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-015.webp",
-      "bytes": 88000,
-      "sha256": "31035bf9caff2807d3bc62f99f5c072d08cd9a60768a9b4b52318ebbef1ea384",
+      "bytes": 64214,
+      "sha256": "783e321a216a0aad109dfdebc29e212d1ee4eeaf9c90cb32f3f69dd68d558d46",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-016.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-016.webp",
-      "bytes": 88038,
-      "sha256": "f2da1f138b2bc9f79b7707616fbe4a94c100fae50fbc9e93b5373afb118fbdd5",
+      "bytes": 64190,
+      "sha256": "3d67dc412f631acaa9c1ac9202279e3f1ef62788647a1319d7811d2975d3f650",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-017.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-017.webp",
-      "bytes": 88102,
-      "sha256": "1ae3ff122a8ce0286c870f01f72915f7d761b8b69ed3f57f4eb48ce1a0ce4792",
+      "bytes": 64474,
+      "sha256": "2e32b4c52f3a17da6e4046375c59777592bd69144c991c7e7961dfc21246b9b0",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-018.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-018.webp",
-      "bytes": 88612,
-      "sha256": "2acf58f88b238d03fd2072eaf384ee4257a048e4af33ec04c212fafcf82c1f85",
+      "bytes": 64784,
+      "sha256": "1dbdac92fa99105a6b4a5240bca1fbbdef7696559ccc04551a17271a04ebe97b",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-019.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-019.webp",
-      "bytes": 88622,
-      "sha256": "8227551091edb722b17a638cd98cbb2f828234c0b15aa73274df72ae1dadf088",
+      "bytes": 64706,
+      "sha256": "f8b31f2e292b78a55f3d60824e9cde4f08fdfcd06031586427e57cc1cd3137af",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-020.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-020.webp",
-      "bytes": 88314,
-      "sha256": "5735d9e3e6df43fedfe629fbedaa1cebce06eac614b1bef3eb43d3e2a0339907",
+      "bytes": 64522,
+      "sha256": "ea210b3bb05c383c1724377f7c2142aa95bdc19a6bdb18088d5e0b47c2834df5",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-021.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-021.webp",
-      "bytes": 88090,
-      "sha256": "61003a7b96d8a4441a7deb62f9e7fbacdb8959f8020804571194989aca7b1c74",
+      "bytes": 64370,
+      "sha256": "5c329e765dcb17a5d58a598b9582b9c30a602b8fbdc9d05b3b3d22e9bcd3a68b",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-022.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-022.webp",
-      "bytes": 88190,
-      "sha256": "ed094bc9d88be00f38d90d452968d7209122295a3c15491add1134f35b91a03d",
+      "bytes": 64484,
+      "sha256": "5fab519250177d24059bba8a0fd6391641a71811a94fe174053b93924fec4d3f",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-023.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-023.webp",
-      "bytes": 88300,
-      "sha256": "0b8c13c6984220086395b477b62bb0b2daa3aac9496c30afeea8f8ee401e2743",
+      "bytes": 64668,
+      "sha256": "5892df2fab1dde3d8ba48c51621cb9546d9427bd445ac94d243da1fe2e8fb817",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-024.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-024.webp",
-      "bytes": 88400,
-      "sha256": "92b5313aaf0f214d651d2a48f58fc9c34dfd3026cc9197760c06c29db828b539",
+      "bytes": 64640,
+      "sha256": "bbeddbe57fa6e3eb4bbc8fa247a4ff23603049d4e4d5334a6547cf994e9cc623",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-025.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-025.webp",
-      "bytes": 88720,
-      "sha256": "40e3f8ea9a025dd92a90de857676524b1aa0d1ea5febf4bb280435cf328fddb2",
+      "bytes": 64802,
+      "sha256": "a47bc0d9a8987b1bb3c747db88059d9be4112cd6db0999197f526889edf57b76",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-026.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-026.webp",
-      "bytes": 89282,
-      "sha256": "b669bb89537b173a783930ed988d7847abed24ae39ce070d4311a0044efbda6a",
+      "bytes": 65106,
+      "sha256": "4898f7d20583a07dd8d199136e2b2bbb3b087b6b149e2210325b5b05aad698a5",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-027.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-027.webp",
-      "bytes": 88890,
-      "sha256": "2ae7c19594476bfacc2cb0ffd805fd57bbe58fef62446951e3d033105f9d2a29",
+      "bytes": 64768,
+      "sha256": "f74f96c2b24814f971a509b78ebb2dac8bf462aa3e8661e932152e6ab84d2f5e",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-028.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-028.webp",
-      "bytes": 88224,
-      "sha256": "d64f7a2b1d1f3cc166edc2671c9ff5d5a73322dedb1af101d772fa14863a16c6",
+      "bytes": 64538,
+      "sha256": "f5da0b7ed575b117040e99e1d53d031becbeaac6e5cf681b664918f5281aa8a4",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-029.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-029.webp",
-      "bytes": 88124,
-      "sha256": "8cbdd8350ef258e50a52cd1e50c31938bbebbfe7c0676c8f248050709e9830ca",
+      "bytes": 64534,
+      "sha256": "fe09d13c2dc7275a9ebca8a83cc7fcddd05e4928deb2dee1383ebe8dda2f0647",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-030.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-030.webp",
-      "bytes": 88058,
-      "sha256": "9482f471cefa6ad10c8ff3eac96f87bbe77c49b58437868f1ded8645e55edcb2",
+      "bytes": 64440,
+      "sha256": "671b41258e1838600353168c329f9b94811d7d95cb234ebe0c9ec547d4fa174a",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-031.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-031.webp",
-      "bytes": 87972,
-      "sha256": "46f6eaf155cb70691890e4d952538d6d895772f7395742bf6ade5bcc3542cbb0",
+      "bytes": 64458,
+      "sha256": "768df600713747f624043c77842ae4849e358bacb0da06da957a649f82897979",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-032.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-032.webp",
-      "bytes": 88086,
-      "sha256": "0cfedc0eed51604b1d3b4977d834d07caa923167c0ba6747f5d7af705b176b5c",
+      "bytes": 64576,
+      "sha256": "c4c2f3fc78cdf97232716becaa495ed3271371e752b1b243f9905db8f2b97087",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-033.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-033.webp",
-      "bytes": 88120,
-      "sha256": "fb082e8a066ed5bd57bc5aeebb1aa9eab0151b7e9ee46627e7de0bffaa8c4ed7",
+      "bytes": 64534,
+      "sha256": "3f3c3f34fd29ddd29443bbd535d154db8db538ae7329bc8756d21e0c212f03a8",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-034.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-034.webp",
-      "bytes": 88104,
-      "sha256": "4cbd9fa5b2d60fdb3af00d5aa69846daadc0229cd4235f9e76fa399acaee95e0",
+      "bytes": 64498,
+      "sha256": "a70dc30bd68ec0fe4d5a2a6a21c0f4f7433904a3db1d5256f701cd6501ad2f9e",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-035.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-035.webp",
-      "bytes": 88116,
-      "sha256": "65707626855b53426156e2859f0a858704fa67102510449e695e4da5bdbc3910",
+      "bytes": 64440,
+      "sha256": "6cfd1f004f5037bed87dc294c9e085ef7a0507f925ea3cb872ff4f7a85f164cd",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-036.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-036.webp",
-      "bytes": 86062,
-      "sha256": "e4ebddd67b6bbc72523aad469973d525f3688044e4e7e4716bbd9503ebfb2a31",
+      "bytes": 67656,
+      "sha256": "4808d303a37826626373271e0c63a8a50777f4e4283bf21a0a95cb10661247fe",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-001.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-037.webp",
-      "bytes": 80576,
-      "sha256": "3de52c1827be6d17874c5e1c83644cc75e3b4d75a8bff0293bc197e554d5e89d",
+      "bytes": 62266,
+      "sha256": "0c63e7c74546e99a89f39e3fbe05be7e3802894f86920620d97af7c21e4ac2c5",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-002.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-038.webp",
-      "bytes": 92102,
-      "sha256": "f6938d439301d9b2e8fecbf33a6646cce38168a9c231ea7f93834ac1e45c2527",
+      "bytes": 70268,
+      "sha256": "85d73cb874f723768af658ee007952a3d596919a0e73e07ef182929b75059926",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-003.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-039.webp",
-      "bytes": 98882,
-      "sha256": "2289ed6bf95710e5afa95edf15d09ac06cf77901a82213983764f8a1ef1b026a",
+      "bytes": 70830,
+      "sha256": "08c24fbb405f31b0f8aa4337808ef52e20e41d5b724684e49dba97dc4641785a",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-004.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-040.webp",
-      "bytes": 90004,
-      "sha256": "6f60ec67b0317ea85d1c8d6f515a0466d7623743ac11be24dccb2b512dbd1eea",
+      "bytes": 65010,
+      "sha256": "389364d19ffb7b5b978ea94326fe5f156349c3e6db706046606260a64eef6466",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-005.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-041.webp",
-      "bytes": 80690,
-      "sha256": "65accd1869c520e82cc6ed94355c82f774e246b0d118378fef1ebd70585c4ce3",
+      "bytes": 62850,
+      "sha256": "3474a0b1458d9b20b380e460ef52d6ee219dcc0dce2f4db54e77bdc6f6ae56b0",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/atk-006.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-042.webp",
-      "bytes": 98112,
-      "sha256": "b0f1e58997a9b6e4477974e9eef73889b8b0916b7bfb5c3dea8e050af1e0c9ed",
+      "bytes": 69024,
+      "sha256": "b68733f5af6fc8d5a4417b9bbb63afc20e29966e04294747fe2ebcdedf36a45a",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/hurt-001.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-043.webp",
-      "bytes": 95006,
-      "sha256": "ed50bfdd8f71c879a44821b9a26757b25fe3e056f8914cb8ff05d75edbc7dd34",
+      "bytes": 73620,
+      "sha256": "29469d3b34bfd7e2bef2b568319831ee28cee37b2f42245c8df04a70bcb167d6",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/hurt-002.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-044.webp",
-      "bytes": 75362,
-      "sha256": "3bdb493ae118f0d0b51f3fb72a85f0c654fe887419d532c40ad99f100aceb7b7",
+      "bytes": 53752,
+      "sha256": "6b9a2d86fbb3098a40ede230d10e9a0e15972f43f1c29c5bdbd4a9b71196647e",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-001.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-045.webp",
-      "bytes": 72504,
-      "sha256": "e9c10c56e5ceb95e40bec34cddc85cddfa0fa8f75e187fd802180590cccc2cd9",
+      "bytes": 54206,
+      "sha256": "ec713da93b750b3db716ea969c2dd8329ffa2985c68daf34bd23da113569c44c",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-002.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-046.webp",
-      "bytes": 74564,
-      "sha256": "5030cb862e937f4ed6d321a3273476ede07b05fe90050e2cfd72b3ddbb722a19",
+      "bytes": 42308,
+      "sha256": "4ef579dff8a4cd3706a6fa2c73a2323f475f2e40bbe97bbff6946363878e0b31",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-003.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-047.webp",
-      "bytes": 102762,
-      "sha256": "4b3c0f404b94f13e803676f99b718914235f94083ee8230efa16d9e7c7566a1d",
+      "bytes": 42712,
+      "sha256": "5fd3388ab136855f393526ec772a2c58bd0c9935e0b6fd8368dbcd85eebf414f",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-004.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-048.webp",
-      "bytes": 101700,
-      "sha256": "2a0d0430e1678d2ceb589e54f14b91f3d133d97148e34119b7cb2eb3a29bb977",
+      "bytes": 33262,
+      "sha256": "38f9c6b95a381742210e64727e6a27b83b1e55803e48ac7a42d1b08a97eed818",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-005.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/frame-049.webp",
-      "bytes": 99246,
-      "sha256": "8a059bfcd9f8589afa307a0ea9adf066c3882f427ca4cc76626fe39d23f7989f",
+      "bytes": 29180,
+      "sha256": "64e01fd94965da0db8568472bb644d6f91baabbec2d08a15a95f2f381f355e1e",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/death-006.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"
     },
     {
       "path": "portraits/frames/xingyue/sprite-v1/neutral.webp",
-      "bytes": 89256,
-      "sha256": "0592cc85955465027ab45993f94c792a55b2642e727d0f50f230f2f24f3a931f",
+      "bytes": 64758,
+      "sha256": "6821803c9b3250625a8248c1c1bd008b56c2817fb565cc4dd0e72694818dce68",
       "source": "game/art-source/characters/three-role-sprites-20261010/xingyue/frames/idle-000.png",
       "license": "项目原创；内置imagegen生成，老板授权游戏使用",
       "ext": "webp"

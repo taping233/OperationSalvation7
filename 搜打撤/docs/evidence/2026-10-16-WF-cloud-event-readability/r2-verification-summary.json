@@ -1,0 +1,31 @@
+{
+  "baseline": "f0e84c5dc3",
+  "verifiedAtUtc": "2026-10-15T19:57:23.008199+00:00",
+  "scope": "R2 non-themed shared presentation only; preserves R1 themed changes",
+  "changedFiles": [
+    "game/css/entry-events.css",
+    "tests/event-scene-readability.test.js"
+  ],
+  "targetedValidation": {
+    "files": 11,
+    "tests": 122,
+    "status": "passed",
+    "log": "r2-targeted-tests.log"
+  },
+  "eslint": "passed: tests/event-scene-readability.test.js",
+  "cssParse": "passed: PostCSS via readability contract",
+  "diffCheck": "passed",
+  "actualImageViewed": "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/33-altar-before.png",
+  "browserStatus": "pending main coordinator current-window verification; jsdom does not prove real clipping/layout",
+  "notRun": [
+    "full suite",
+    "build",
+    "browser or service operations",
+    "stage/commit/push"
+  ],
+  "sha256": {
+    "game/css/entry-events.css": "0d488a1c0174cf7b0c77702e178937ef4a5ba5238b88adf70727f89a7f71185b",
+    "tests/event-scene-readability.test.js": "22bcafab62dc71d8505494f46c781cc971481818cf3232b3cb04861af1a30763",
+    "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/33-altar-before.png": "faf5dcd094873aa96f9e1f336443a26bb565feb80472c973a0b4bf5915394f8e"
+  }
+}

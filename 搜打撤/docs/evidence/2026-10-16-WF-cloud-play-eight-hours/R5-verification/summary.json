@@ -1,0 +1,61 @@
+{
+  "assetExclusions": 195,
+  "assetPublicationVerified": true,
+  "auxiliaryExitCodes": {
+    "asset-publication": 0,
+    "build-metrics": 0,
+    "index-semantics": 0,
+    "post-integrity": 0
+  },
+  "buildMetrics": {
+    "cssGzipBytes": 200836,
+    "duplicateBytes": 16540,
+    "entryGzipBytes": 295001,
+    "files": 1293,
+    "initialJsGzipBytes": 341504,
+    "packageBytes": 125392304
+  },
+  "checkedAt": "2026-10-15T22:29:04.009112+00:00",
+  "conclusion": "Static gates pass; ordinary full tests fail in four files; original build budget retains four failures; frozen inputs only",
+  "deltaR5MinusR4": {
+    "cssGzipBytes": 298,
+    "duplicateBytes": 0,
+    "entryGzipBytes": 92,
+    "files": 1,
+    "initialJsGzipBytes": 92,
+    "packageBytes": 7031
+  },
+  "dependencyInputChanges": 0,
+  "formalExitCodes": {
+    "build": 1,
+    "data": 0,
+    "dependency-tree": 0,
+    "docs": 0,
+    "environment": 0,
+    "lint": 0,
+    "npm-environment": 0,
+    "syntax": 0,
+    "test": 1,
+    "types": 0
+  },
+  "fullEvidenceRoot": "/workspace/shared/cloud-iteration-verification-r5-20261016",
+  "gitIndexEntrySemanticsEqual": true,
+  "notCovered": [
+    "Post-freeze source edits",
+    "Remote CI and future commits",
+    "Browser/visual verification"
+  ],
+  "oldAssetBytes": 1291352,
+  "oldAssetCount": 30,
+  "sharedInodes": 0,
+  "sourceManifestSha256": "b379f29db8c5f19a713f96aa00ad9fb4c2b63748f01015e684cab74b9422b109",
+  "testFilesFailed": 4,
+  "testFilesPassed": 474,
+  "testFilesTotal": 478,
+  "testsFailed": 14,
+  "testsPassed": 4509,
+  "testsSkipped": 2,
+  "testsTotal": 4525,
+  "unexpectedSnapshotInputChanges": 0,
+  "unhandledErrors": 1
+}

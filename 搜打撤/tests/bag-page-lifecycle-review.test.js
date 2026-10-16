@@ -25,7 +25,7 @@ beforeEach(async () => {
   ui = { el: { overlay, ovBody: body }, _acts: {}, helpTopics: {}, act(name, fn) { this._acts[name] = fn; }, log: vi.fn(), refresh: vi.fn(), helpBtn: () => '', registerHelp(id, def) { this.helpTopics[id] = def; },
     showOverlay(_title, html, mode) { document.getElementById('cardZoom')?.remove(); overlay.hidden = false; overlay.classList.remove('closing'); overlay.classList.toggle('bag-full', mode === 'bagpage'); body.innerHTML = html; },
     hideOverlay() { overlay.hidden = true; },
-    showCardZoom(_card, options) { document.getElementById('cardZoom')?.remove(); const zoom = document.createElement('div'); zoom.id = 'cardZoom'; zoom.innerHTML = `<button class="cz-backdrop"></button>${options.footer}`; zoom.querySelector('.cz-backdrop').onclick = () => { zoom.remove(); options.returnFocus?.focus(); }; document.body.append(zoom); },
+    showCardZoom(_card, options) { document.getElementById('cardZoom')?.remove(); const zoom = document.createElement('div'); zoom.id = 'cardZoom'; zoom.classList.toggle('inventory-zoom', options.presentation === 'inventory'); zoom.innerHTML = `<button class="cz-backdrop"></button><button class="cz-close"></button><div class="cz-card"></div><div class="cz-foot">${options.footer}</div>`; zoom.querySelector('.cz-backdrop').onclick = () => { zoom.remove(); options.returnFocus?.focus(); }; document.body.append(zoom); },
   };
   body.addEventListener('click', event => { const target = event.target.closest('[data-act]'); if (target && !target.disabled) ui._acts[target.dataset.act]?.({ ...target.dataset }); });
   window.SDT = { UI: ui, game: H.game, Base: { slot: 1, bagCap: () => 16 }, Sound: { sfx: vi.fn() }, Cards: { SHA: { id: 'starter-attack', name: '初始攻击' }, cardHTML: card => `<span>${card.name}</span>`, cardBackHTML: () => '' } };
@@ -153,6 +153,32 @@ describe('新号背包真实入口反馈', () => {
 
 
 describe('背包键盘查看与分区焦点', () => {
+  it('随身详情接入完整阅读栏并在注册后捕获当前动作，不改卡牌或存档', () => {
+    const longText = '回复 3 点生命。' + '获得护甲并保留完整说明。'.repeat(20);
+    H.game.ownedCards[0].card = { ...potion, desc: longText };
+    const before = JSON.stringify(H.game.ownedCards); bag.showBackpack(true); inspect();
+    const zoom = document.getElementById('cardZoom');
+    expect(zoom.querySelector('.inventory-zoom-rules').textContent).toBe(longText);
+    expect(zoom.querySelector('.inventory-zoom-info .cz-foot [data-act="useDetailCard"]')).not.toBeNull();
+    expect(zoom.querySelector('.inventory-zoom-info .cz-close')).not.toBeNull();
+    expect(zoom._inventoryActions.useDetailCard).toBe(ui._acts.useDetailCard);
+    expect(JSON.stringify(H.game.ownedCards)).toBe(before); expect(H.save).not.toHaveBeenCalled();
+    zoom._inventoryActions.useDetailCard(); expect(H.game.hp).toBe(13);
+  });
+  it('安全格与消耗区也保留全文阅读，安全格移回按钮与消耗区限制保持原语义', () => {
+    H.game.ownedCards[0].safe = true; H.game.ownedCards[0].card = { ...potion, desc: '回复 3 点生命' };
+    H.game.usedPocket = [{ card: { id: 'armor', name: '盔甲', type: '装备', desc: '获得 4 点护甲' }, count: 2 }];
+    bag.showBackpack(true); document.querySelector('.bag-rz[data-zone="safe"]').click(); inspect();
+    let zoom = document.getElementById('cardZoom');
+    expect(zoom.querySelector('.inventory-zoom-rules').textContent).toBe('回复 3 点生命');
+    expect(zoom._inventoryActions.zoomMoveToBag).toBe(ui._acts.zoomMoveToBag);
+    expect(zoom.querySelector('[data-act="useDetailCard"]')).toBeNull();
+    zoom.querySelector('.cz-backdrop').click(); document.querySelector('.bag-rz[data-zone="pocket"]').click(); inspect('盔甲');
+    zoom = document.getElementById('cardZoom');
+    expect(zoom.querySelector('.inventory-zoom-rules').textContent).toBe('获得 4 点护甲');
+    expect(zoom.querySelector('.inventory-zoom-info .cz-foot').textContent).toContain('火堆不可复原；能源结晶');
+    expect(zoom.querySelector('.cz-foot [data-act]')).toBeNull();
+  });
   it.each(['Enter', ' '])('%s 查看详情再关闭返回来源卡格，不重复触发', key => {
     const tile = document.querySelector('[data-stack="药剂"]'); tile.focus();
     expect(tile.getAttribute('role')).toBe('button'); expect(tile.getAttribute('aria-label')).toContain('查看药剂');

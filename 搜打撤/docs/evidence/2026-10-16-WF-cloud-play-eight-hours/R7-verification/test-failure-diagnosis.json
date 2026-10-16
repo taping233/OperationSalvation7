@@ -1,0 +1,65 @@
+{
+  "cases": [
+    {
+      "failure": "Original 20000ms timeout exceeded",
+      "file": "tests/acceptance-gate.test.js",
+      "focusedSameLimits": "passed in 1166ms",
+      "line": 29
+    },
+    {
+      "failure": "Original 20000ms timeout exceeded",
+      "file": "tests/runtime-asset-redundancy.test.js",
+      "focusedSameLimits": "passed in 1960ms",
+      "line": 66
+    },
+    {
+      "classification": "Abnormal child termination. Load-related timeout is suspected but cannot be proven from status null alone; do not label ETIMEDOUT as observed.",
+      "configuredChildTimeoutMs": 10000,
+      "failure": "spawnSync returned status null; expected exit 1",
+      "file": "tests/workflow-cli-integration.test.js",
+      "focusedSameLimits": "passed in 384ms",
+      "line": 78,
+      "originalErrorCode": "not logged",
+      "originalSignal": "not logged",
+      "workflowFailureBlockHasProcessErrorCodeOrSignal": false
+    }
+  ],
+  "focusedRerun": {
+    "durationSeconds": 14.725,
+    "exitCode": 0,
+    "filesPassed": 3,
+    "log": "logs/focused-r7-failures.log",
+    "testsPassed": 78
+  },
+  "noSourceTimeoutOrConfigurationChanges": true,
+  "originalOrdinaryFull": {
+    "exitCode": 1,
+    "log": "logs/test.log",
+    "logSha256": "18d0caea6332143aca5c7f343a0a167d3225a83a91830661fea6afe66cf59fdb",
+    "testFilesFailed": 3,
+    "testFilesPassed": 489,
+    "testFilesTotal": 492,
+    "testsFailed": 3,
+    "testsPassed": 4692,
+    "testsSkipped": 2,
+    "testsTotal": 4697,
+    "unhandledErrors": 0
+  },
+  "secondOrdinaryFull": {
+    "command": [
+      "npm",
+      "test"
+    ],
+    "configurationAndTimeoutsUnchanged": true,
+    "durationSeconds": 189.218,
+    "exitCode": 0,
+    "log": "logs/test-second-full.log",
+    "originalFullFailureLogUnchanged": true,
+    "testFilesPassed": 492,
+    "testsPassed": 4695,
+    "testsSkipped": 2,
+    "testsTotal": 4697,
+    "unhandledErrors": 0
+  },
+  "secondOrdinaryFullStatus": "Completed after parent held static UI with no other tests; no production edits, timeout changes or configuration changes"
+}

@@ -1,0 +1,23 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤
+
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 满16格保留确定传说，刷新/整理/已领刷新不重掷，首胜教学最后出现（boss=true） 548ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 满16格保留确定传说，刷新/整理/已领刷新不重掷，首胜教学最后出现（boss=false） 148ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 普通箱已领取后刷新，保留普通奖励并只在接续后掷一次首脑额外传说 117ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 非首脑/巨兽未命中不误发额外卡：{"isBoss":false,"foeNames":["普通敌人"]} 109ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 非首脑/巨兽未命中不误发额外卡：{"isBoss":false,"foeNames":["荒渊巨兽"]} 117ms
+stderr | tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 确定传说领取后真实Run写失败，原attempt恢复重试不重掷、不重复发卡
+[battle:settle] 战后结算未完成 Error: 提交已开始，刷新后继续恢复
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:388:14)
+
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 传说空池不抛错、不丢已领普通奖励，也不多消耗选卡骰 109ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 确定传说领取后真实Run写失败，原attempt恢复重试不重掷、不重复发卡 114ms
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  07:16:06
+   Duration  2.10s (transform 232ms, setup 0ms, collect 67ms, tests 1.26s, environment 380ms, prepare 113ms)
+

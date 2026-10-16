@@ -1,0 +1,49 @@
+{
+  "checkedAt": "2026-10-15T18:19:20.161Z",
+  "method": "read-only source inventory and config hook only; no real build hooks, bundle or generated manifest write",
+  "sourceRetained": true,
+  "newlyExcluded": 90,
+  "reviewedExcludedTotal": 146,
+  "reviewWarnings": [],
+  "publishedCopySourceBytesBefore": 113445004,
+  "publishedCopySourceBytesAfter": 96539400,
+  "copyBytesAvoided": 16905604,
+  "projectedPackageMiBAfter": 128.45755966186525,
+  "injectedAliasCount": 4,
+  "aliasesReferenceOmittedFiles": false,
+  "safeAssets": [
+    {
+      "path": "scenes/chests/safe-simple-v7/frame-00.webp",
+      "bytes": 199562,
+      "sha256": "cd9f549102b33b3f2e8a5a6d81b17349bffa38c0e14c9a13a7f9ebea2e1188c9",
+      "excluded": false
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7/frame-01.webp",
+      "bytes": 183892,
+      "sha256": "19830d5e7080c42488874aba116b5dc6be5dda8e5fbcf4f8ac54ea83bd089996",
+      "excluded": false
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7/frame-02.webp",
+      "bytes": 180958,
+      "sha256": "3fde8e2b661dafe6c1bcf25f0929d98df1413825ccfbfb911a1688a256ad1f8e",
+      "excluded": false
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7/frame-03.webp",
+      "bytes": 239750,
+      "sha256": "d3c9f87e322e6beadbff73dc82bef748a03a29ddbd3c88279603e473c7defcc3",
+      "excluded": false
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7/burst.webp",
+      "bytes": 141710,
+      "sha256": "64107ff0efcb2dab6cf420e0d4a43d0edda404ed6ee8c778bfdda3a484ced423",
+      "excluded": false
+    }
+  ],
+  "fontPreloadsRemovedBytes": 509372,
+  "build": "not run",
+  "browser": "parent owns the current 5300 browser session"
+}

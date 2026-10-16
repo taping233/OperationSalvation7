@@ -1,0 +1,35 @@
+{
+  "baseline": "2026-10-16 parent-approved R7-after small-copy batch; current worktree bytes before this worker edited",
+  "files": [
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "beforeSha256": "18a09f8477bfec2e922bfcf526a95ec3358ca69db588a6f5ff2fc182011c25ba",
+      "afterSha256": "02e26b459984afd66ca2e9d3513aeb2fd44c573323767a2b36e223492cc984e1"
+    },
+    {
+      "path": "game/src/battle/view/battle.piles.view.js",
+      "beforeSha256": "19a10816ebd278af40d36cc4b4c9864e648272d3fb44cee775b16322218452ed",
+      "afterSha256": "5a5bb0cb5038bd0d51dc7eb1b9ba69534761ce3c03a3bd97e942d1e90b5bb424"
+    },
+    {
+      "path": "game/src/battle/core/battle.exec-play.js",
+      "beforeSha256": "5e07adb2cd15fb79e7b485ab1804dcb027431f241c091f4bb7caae0aab1ade35",
+      "afterSha256": "8c69483d20985d5486ff3f8fb4b42df2f25b8f68ad3697e9f39c57909eef9a9d"
+    },
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "beforeSha256": "b9073fc2f55bd4d10ef645a4d7535b801e5304e6fbb7c3ade5e098d7525bd87a",
+      "afterSha256": "c9d7e3eac775c415ae30c9a96cd5997d71bc77c6261c284ddaa70aafd56e0a44"
+    },
+    {
+      "path": "tests/battle-infusion-action-layout.test.js",
+      "beforeSha256": "59a87dfafafac3ee78142b48f36ae34625ed8df1372ae72257370b2ad0a3f5ac",
+      "afterSha256": "b400f9f9ba8c82359bfbaa7e7c4b6be9fb9d2e99d8bf3f486a2ec0b0376691d3"
+    },
+    {
+      "path": "tests/extraction-receipt.test.js",
+      "beforeSha256": "5cc0367d80bab74e9315d21df33d860fe45503748bb7209dbbbb857e3b778569",
+      "afterSha256": "4923b2aa12a141e642cecb81e3490301bb3470fd7ffc7cf6a74cacef5c28a252"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "status": "completed-uncommitted; editing released",
+  "productionFiles": 4,
+  "files": [
+    {
+      "path": "game/src/core/map-node-state.js",
+      "baselineSha256": "e7227c53ebe593a1c41464718b2b44185762cbb63749d688ae54aae2b1566599",
+      "sha256": "766b77b5069e491394c1bcb83e969ff4b4941afd90ce1a9b9192b5a09dad2a5f",
+      "delta": "state.delta.diff"
+    },
+    {
+      "path": "game/src/core/node-info.js",
+      "baselineSha256": "1655ea2731af1959fd0f53bc669043ed8a1d7deb11ccae3e474715d97626b626",
+      "sha256": "5cf8927be39fdef2acc7074f8f4f6a90f2d67296a80d01b86ee16cf82c645f3e",
+      "delta": "info.delta.diff"
+    },
+    {
+      "path": "game/src/run/expedition.view.js",
+      "baselineSha256": "237bf5b7030bda6581bdf0758bfd17485cafee378e6d1a4ea2e3f63695b06d7a",
+      "sha256": "e422f650eaad442d720c32461a7ec31bef4211f20780b1d031269c84d3022604",
+      "delta": "view.delta.diff"
+    },
+    {
+      "path": "game/src/core/renderer.js",
+      "baselineSha256": "cc97d2ef02b50c240d18954c1a38e0acc352d0deea7985e6bfb37fa71db26fa2",
+      "sha256": "74fb995da22653b8a5e7b4c3b86fab9e6f6bcccae40982118174ca428de394be",
+      "delta": "renderer.delta.diff"
+    },
+    {
+      "path": "tests/map-node-state.test.js",
+      "baselineSha256": "5dcee597646ca075e09d63aee4eb67a46f4f7e1d984760456abcd5fcbe2956d5",
+      "sha256": "039337efb5b5ad83cbce6546cf131c80b51d9faa67351bcf60e1510d75ff4a9e",
+      "delta": "state-test.delta.diff"
+    },
+    {
+      "path": "tests/altar-node-completion-view.test.js",
+      "sha256": "cd868d75575b66d1d7812ef37aba46a15d737cad74fa96f0dcf034be5fd5ce14",
+      "newFile": true
+    },
+    {
+      "path": "tests/altar-completion-road-cache.test.js",
+      "sha256": "bbc38e6228839796d793f3409c9aa132fff52ef145bb08e551e09b1b7877977b",
+      "newFile": true
+    }
+  ],
+  "tests": {
+    "files": 12,
+    "passed": 147,
+    "failed": 0
+  },
+  "browserUsed": false,
+  "playerSaveAccessed": false,
+  "buildRun": false,
+  "flowEdited": false,
+  "priorRestoreUIEdited": false,
+  "fingerprintsUpdated": false
+}

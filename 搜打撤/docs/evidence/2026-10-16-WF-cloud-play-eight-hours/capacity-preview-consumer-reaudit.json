@@ -1,0 +1,6 @@
+{
+  "file": "game/src/run/chests.js",
+  "before": "1f2bf43237d46ba763646329e63a6a378f400c565cbcaed98f25ddcdf6a05435",
+  "after": "ffed546ca3c783b413028184908e4479c516dbfcd6b744d82cf4523040c1a601",
+  "review": "Reviewed full production delta and pure card-capacity.js. Only sequential capacity projection and display notices; no asset construction, URL source or fallback change. Existing opaque references refreshed twice."
+}

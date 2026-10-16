@@ -1,0 +1,13 @@
+
+> codename7-soudache-game@0.60.0 handoff
+> node scripts/handoff-brief.mjs --paths game/src/ui,game/css,game/src/battle,game/src/run
+
+接手：game/src/ui, game/css, game/src/battle, game/src/run｜HEAD f0e84c5dc3
+相关变更 0（省略 4）；编辑占用 0（省略 7）；完成未提交 0；待拍板 1（省略 10）；疑点 0
+任务元数据跳过 2 项（无效/过大/链接），不能据此推断任务不存在；详情 --json
+拍板 43｜研究所牌盒满容量玩法需确定：现行说明为容量 30（混沌之眼为 35）且满时一换一，领取/商店等实现尚未提供完整换牌流程；确认换牌交互与取消时奖励/付款保留方式后实施
+活账老化：达 7 天 8 项｜最老 9 17天、10 17天、16 16天（仅提示，不自动降级或销账）
+证据候选 docs/evidence/2026-10-15-WF-fresh-run-fixes-1015/task.json
+维护审计：已落库待移行 1／已决待移行 0；无主 0（范围外省略 6，勿动）；省略条目用 --json 查看
+入口：docs/PARALLEL-REGISTRY.md；docs/PENDING.md；docs/WORKFLOW-TOOLS.md；记忆按需 npm run memory:discover
+限制：完成未提交仍保护归属；省略范围不代表无问题；证据仅入口；远端/留言/实页未核验。维护疑点用 --details，完整审计用 --json。

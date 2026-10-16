@@ -61,7 +61,7 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
     if (!sameRun()) return false;
 
     if (settlement.promise) return settlement.promise;
-    if (settlement.phase === 'done' || settlement.phase === 'chests') return;
+    if (['done', 'chests', 'extraRewards'].includes(settlement.phase)) return;
     const retry = error => {
       if (!sameRun()) return false;
       if (error) console.error('[battle:settle] 战后结算未完成', error);
@@ -183,8 +183,6 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
       if (settlement.commitPromise) return settlement.commitPromise;
       settlement.commitPromise = (async () => {
         if (!sameRun()) return false;
-        // 战后保底传说（2026-09-09 玩法定版）：首脑必得 1 张，荒渊额外掉落概率不变。
-        const slewDragon = !opts.isBoss && (opts.foeNames || []).some(n => String(n).includes('巨兽'));
         if (!settlement.rewardsApplied) {
           // 宠物蛋保底计数和完成节点都进入 afterBase/afterRun，不先写任一存档。
           // 无档位胜利的计数（2026-09-29 收敛）经宠物蛋命令走内存推进+尝试保存的旧语义。
@@ -194,15 +192,6 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
           if (win === true) {
             game.visited = game.visited || {};
             game.visited[settlement.node.layerIdx + ',' + settlement.node.trackPos] = 1;
-          }
-          let legends = 0;
-          if (opts.isBoss && win === true) legends = 1;
-          if (slewDragon && win === true && Random.random('loot') < RULE_CONFIG.rewards.beastLegendaryChance) legends += 1;
-          if (legends > 0) UI.log('[[icon:trophy]] 首脑宝库开启：额外奖励 <b>1 张传说卡</b>！', 'loot');
-          for (let i = 0; i < legends; i++) {
-            const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
-            const card = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
-            if (card) game.grantCard(card);
           }
           settlement.rewardsApplied = true;
         }
@@ -341,23 +330,76 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
     settlement.phase = 'rewardsReady';
     }
     // 战胜 100% 掉宝箱（按所在环层 / BOSS 宝箱）
+    const rewardContinuation = () => ({
+      version:1, slotId:settlement.slotId, runId:settlement.runId, node:settlement.node,
+      opts:{ isBoss:!!opts.isBoss, foeNames:(opts.foeNames?.length ? opts.foeNames : [opts.name || '敌人']).slice(),
+        ...(opts.name ? { name:opts.name } : {}), ...(opts.encounterId ? { encounterId:opts.encounterId } : {}) },
+      victoryProgress:settlement.victoryProgress || null, progressRecorded:!!settlement.progressRecorded,
+      extraLegendaryPrepared:!!settlement.extraLegendaryPrepared,
+    });
     const afterRewards = async () => {
       if (settlement.phase === 'done') return true;
-      if (!sameRun()) return false;
+      if (!sameRun() || settlement.phase === 'extraRewards') return false;
+      settlement.chestsCompleted = true;
+      // 普通战利品领完后才掷原有额外传说骰；固定结果先进入同一 Run 的待领奖快照。
+      // 满包、刷新和保存重试都不能吞卡或重掷，领取/明确放弃后才提交胜利与首胜教学。
+      if (!settlement.extraLegendaryPrepared) {
+        const slewDragon = !opts.isBoss && (opts.foeNames || []).some(n => String(n).includes('巨兽'));
+        let legends = opts.isBoss ? 1 : 0;
+        if (slewDragon && Random.random('loot') < RULE_CONFIG.rewards.beastLegendaryChance) legends += 1;
+        const cards = [];
+        for (let i = 0; i < legends; i++) {
+          const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
+          if (pool.length) cards.push(pool[Math.floor(Random.random('loot') * pool.length)]);
+        }
+        settlement.extraLegendaryPrepared = true;
+        if (cards.length) {
+          const source = opts.isBoss ? '首脑宝库' : '巨兽战利品';
+          UI.log(`[[icon:trophy]] ${source}开启：额外奖励 <b>${cards.length} 张传说卡</b>！`, 'loot');
+          settlement.extraRewardSnapshot = {
+            version:1, seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos,
+            queue:[{ kind:'small' }], index:1, context:{ battleSettlement:rewardContinuation() },
+            current:{ kind:'small', cards, coins:0, coinsReceived:false, taken:[], lost:[],
+              rewardStage:'cards', title:'战斗胜利', source:`${source} · 额外传说奖励` },
+          };
+        }
+      }
+      if (settlement.extraRewardSnapshot) {
+        settlement.phase = 'extraRewards';
+        // 上一箱 next() 已发起关闭；先同步收尾，避免旧淡出回调盖掉新的固定领奖页。
+        UI.hideOverlay({ immediate:true });
+        let opened;
+        try {
+          opened = SDT.Chests.restore(game, settlement.extraRewardSnapshot, () => {
+            if (settlement.phase !== 'extraRewards') return settlement.phase === 'done';
+            settlement.extraRewardSnapshot = null;
+            settlement.phase = 'rewardsReady';
+            return afterRewards();
+          });
+          if (opened && settlement.slotId && saveGame() === false) {
+            settlement.phase = 'rewardsReady';
+            return retry(new Error('额外传说待领奖快照未保存'));
+          }
+        } catch (error) {
+          settlement.phase = 'rewardsReady';
+          return retry(error);
+        }
+        if (!opened) {
+          settlement.phase = 'rewardsReady';
+          return retry(new Error('额外传说奖励尚未进入待领奖快照'));
+        }
+        return false;
+      }
       settlement.phase = 'saving';
-      return await settle();   // Item 16：BOSS 战后不再进入整理背包
+      return await settle();   // Item 16：BOSS 战后不再强制整理背包
     };
+    if (settlement.chestsCompleted) return afterRewards();
     settlement.allChests ||= settlement.eventChests.concat(SDT.Chests.rollDrops(opts));
     const all = settlement.allChests;
     if (all.length) {
       UI.log(`[[icon:archive]] 战利品掉落：${SDT.Chests.dropText(all)}`, 'loot');
       SDT.Chests.open(game, all, afterRewards, {
-        battleSettlement: {
-          version:1, slotId:settlement.slotId, runId:settlement.runId, node:settlement.node,
-          opts:{ isBoss:!!opts.isBoss, foeNames:(opts.foeNames?.length ? opts.foeNames : [opts.name || '敌人']).slice(),
-            ...(opts.name ? { name:opts.name } : {}), ...(opts.encounterId ? { encounterId:opts.encounterId } : {}) },
-          victoryProgress:settlement.victoryProgress || null, progressRecorded:!!settlement.progressRecorded,
-        },
+        battleSettlement: rewardContinuation(),
         battleSummary: { defeated: (opts.foeNames || []).length, hp: game.hp, maxHp: game.maxHp, cardOutcome: settlement.cardOutcome },
       });
       if (settlement.phase === 'rewardsReady') settlement.phase = 'chests';
@@ -383,13 +425,14 @@ export const resumeBattleRewards = saved => restoreBattleReward?.(saved) || fals
       slotId:continuation.slotId, runId:continuation.runId, node:{ ...continuation.node },
       ownerSeed:game.seed, runToken:game.discoveredPairs, receiptChecked:true,
       attempt:null, rewardsApplied:false, victoryProgress:continuation.victoryProgress,
-      progressRecorded:continuation.progressRecorded };
+      progressRecorded:continuation.progressRecorded, extraLegendaryPrepared:continuation.extraLegendaryPrepared === true };
     settlements.set(opts, settlement);
     return SDT.Chests.restore(game, saved, () => {
       // The saved bag already contains card consumption and any claimed rewards.
-      // Re-enter only the existing idempotent Base+Run victory transaction.
+      // Resume any remaining fixed reward before the idempotent Base+Run victory transaction.
       if (settlement.phase === 'done') return true;
-      settlement.phase = 'saving';
+      settlement.chestsCompleted = true;
+      settlement.phase = 'rewardsReady';
       return onBattleEnd(opts, [], true, []);
     });
   };

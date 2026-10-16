@@ -214,9 +214,12 @@ export type PreviewActionInput = {
     effectiveCost?: number;
     legal?: boolean;
     illegalReason?: string;
+    mode?: string;
+    hostedExecutionVerified?: boolean;
     heartsMode?: boolean;
     shaTransformed?: boolean;
-    modifiers?: { stealthStrike?: boolean; nestDark1?: boolean; nestDark3?: boolean; allSpellsInfused?: boolean };
+    modifiers?: { stealthStrike?: boolean; nestDark1?: boolean; nestDark3?: boolean; allSpellsInfused?: boolean;
+      bleedAmp?: boolean; vsFreezeBonus?: boolean; specialLifecycle?: boolean };
     selectedFuelUids?: readonly string[];
     wholeCardRepeats?: number;
     arrowRuneRepeat?: boolean;
@@ -254,4 +257,6 @@ export type PreviewResult = {
   reasons: readonly string[];
 };
 
-export type PreviewDamageSpec = { unknown: true } | { unknown?: false; hits: number; retarget?: boolean; amount?: number };
+export type PreviewDamageSpec = { unknown: true; reason?: string } | {
+  unknown?: false; hits: number; retarget?: boolean; amount?: number; unknownEffects?: readonly string[];
+};

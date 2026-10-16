@@ -128,6 +128,7 @@ export function createBattleLifecycle({
   }
 
   function finish(win) {
+    if (!G?.battleActive) return;
     session.abort();
     clearActionSignals();
     if (win === true && battleState.phase !== BATTLE_PHASES.VICTORY) transitionTo(BATTLE_PHASES.VICTORY);
@@ -156,6 +157,15 @@ export function createBattleLifecycle({
     if (SDT.Sound) SDT.Sound.setBoss?.(false);   // BOSS 紧张垫解除（音频 P2#12）
     opts.foeNames = foes.map(f => f.name);
     opts.battleSummary = readBattleSummary(turn, foes);
+    // 先记账再通知结算/保存；隔离样本不进入玩家的本局战斗记录。
+    if (!opts.devSample) SDT.Agent?.recorder?.noteBattle?.(win, {
+      li: G.layerIdx, node: G.trackPos, foe: opts.foeNames?.join('+') || '', hp: G.hp, turn: G.turn,
+      round: turn,
+      mode: win === true ? 'win' : win === false ? 'lose' : 'flee',
+      nPlayed: playedCopy.length,
+      nUsed: consumedCopy.length,
+      deck: opts.isBoss ? lastDeckSel.map(uid => G.ownedCards?.find(o => o.uid === uid)?.card?.name || uid) : null,
+    });
     SDT.Sound.music('board');   // 战斗结束切回行军氛围
     // 战斗结束广播（2026-09-11 批次 5）：订阅方各自响应（背包结算/基地/统计），
     // 战斗核心不再直接依赖 game.onBattleEnd 的实现；无人订阅时回退旧回调（审计 harness 兼容）
@@ -170,19 +180,6 @@ export function createBattleLifecycle({
     const presentation = win === false ? presentBattleDefeat({ hp: endedGame.hp, maxHp: endedGame.maxHp }) : null;
     if (presentation) presentation.then(notifyEnd, notifyEnd);
     else notifyEnd();
-    // 跑局统计（不可订阅 battle:end——会吞 onBattleEnd 回退）；ctx=死因解剖流水：
-    // 打的谁/层×节点/战后血量/回合（09-26：死亡局胜率 0.56 vs 撤离局 0.78，要定位到具体战斗）
-    // ①战斗内观测（09-26 批准）：round=战斗轮数；mode 三态展开 w 二值（win/lose/flee——
-    // 阵亡只发生在终局那场，其余 w=0 都是 flee）；nPlayed/nUsed=出牌/道具消耗数；
-    // deck=boss 编组选牌快照（②boss 选牌分析的观测面）
-    SDT.Agent?.recorder?.noteBattle?.(win, {
-      li: G.layerIdx, node: G.trackPos, foe: opts.foeNames?.join('+') || '', hp: G.hp, turn: G.turn,
-      round: battleState.round,
-      mode: win === true ? 'win' : win === false ? 'lose' : 'flee',
-      nPlayed: playedCopy.length,
-      nUsed: consumedCopy.length,
-      deck: opts.isBoss ? lastDeckSel.map(uid => G.ownedCards?.find(o => o.uid === uid)?.card?.name || uid) : null,
-    });
     set$battleRestartCheckpoint(null);
   }
 

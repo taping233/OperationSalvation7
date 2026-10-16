@@ -1,0 +1,106 @@
+--- a/game/src/battle/core/battle.core.js
++++ b/game/src/battle/core/battle.core.js
+@@ -142,7 +142,7 @@
+   function pileTip(uids) {
+     const cnt = new Map();
+     uids.forEach(uid => {
+-      const o = findCard(uid);
++      const o = findEffectiveCard(uid);
+       if (!o) return;
+       const key = cardIdentity(o.card);
+       const rec = cnt.get(key) || { name: o.card.name, count: 0 };
+--- a/game/src/battle/view/battle.preview.js
++++ b/game/src/battle/view/battle.preview.js
+@@ -149,7 +149,7 @@
+   if (cardContext.legal === false) return illegal(cost, frozenTargets, cardContext.illegalReason || '当前不能打出这张牌');
+   if (!targets.includes(targetIndex)) return illegal(cost, frozenTargets, '当前目标不可用');
+   if (cardContext.heartsMode) return unknown(cost, frozenTargets, '心形生命的伤害换算暂不支持预览');
+-  if (cardContext.shaTransformed) return unknown(cost, frozenTargets, '这张初始攻击将变为另一张牌结算');
++  if (cardContext.shaTransformed) return unknown(cost, frozenTargets, '变形卡按当前效果结算，预览无法精算');
+   if (cardContext.modifiers?.stealthStrike) return unknown(cost, frozenTargets, '破隐一击会改变本次伤害');
+   if (cardContext.modifiers?.nestDark1 || cardContext.modifiers?.nestDark3) return unknown(cost, frozenTargets, '黑暗羁绊会逐段改变伤害');
+   if (cardContext.modifiers?.bleedAmp || cardContext.modifiers?.vsFreezeBonus) return unknown(cost, frozenTargets, '流血或冰冻增伤尚未纳入直接伤害预览');
+--- a/tests/skull-sword-effective-session.test.js
++++ b/tests/skull-sword-effective-session.test.js
+@@ -18,7 +18,7 @@
+   MAP: { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15, starterSha: 5, battleStartDraw: 5, battleTurnDraw: 1 }, items: {} },
+ };
+ await import('../game/src/cards/cards.js');
+-const { BattleSession, configureBattleRenderer, findEffectiveCard, infusionFuelReason, findCard } = await import('../game/src/battle/core/battle.core.js');
++const { BattleSession, configureBattleRenderer, findEffectiveCard, infusionFuelReason, findCard, pileTip } = await import('../game/src/battle/core/battle.core.js');
+ const { render } = await import('../game/src/battle/view/battle.view.js');
+ const Aim = await import('../game/src/battle/view/battle.aim.js');
+ const { closeHandInspector } = await import('../game/src/battle/view/battle.hand-inspector.js');
+@@ -467,3 +467,61 @@
+   expect(runtime.foes[0].hp).toBe(before.foes[0].hp - 2);
+   expect(runtime.energy).toBe(before.energy - 2);
+ });
++
++
++it('BOSS三堆摘要标题与ARIA按有效卡计数，打开牌库/墓地与摘要同名且不改UID', async () => {
++  const originals = await swordBattle();
++  const ownedBefore = JSON.stringify(game.ownedCards);
++  runtime.set$hand(runtime.hand.filter(uid => !originals.includes(uid)));
++  runtime.set$drawPile(originals.slice(0, 2));
++  runtime.set$discard([originals[2]]); runtime.set$grave([originals[3]]);
++  const before = BattleSession.getSnapshot();
++  render(); flush();
++  const draw = UI.el.ovBody.querySelector('[data-act="btDeck"]');
++  const grave = UI.el.ovBody.querySelector('[data-act="btGrave"]');
++  const discard = [...UI.el.ovBody.querySelectorAll('.bt-pile')]
++    .find(node => node.title.startsWith('弃牌堆：'));
++  for (const [node, count] of [[draw, 2], [discard, 1], [grave, 1]]) {
++    expect(node.title).toContain(`不朽斩×${count}`);
++    expect(node.title).not.toContain('初始攻击');
++    expect(node.querySelector('b').textContent).toBe(String(count));
++  }
++  expect(draw.getAttribute('aria-label')).toBe(draw.title);
++  expect(grave.getAttribute('aria-label')).toBe(grave.title);
++  for (const [uids, count] of [[before.drawPile, 2], [before.discard, 1], [before.grave, 1]]) {
++    expect(pileTip(uids)).toBe(`不朽斩×${count}`);
++  }
++  actions.get('btDeck')(); await settle();
++  expect(UI.el.ovBody.querySelector('.battle-pile-card').getAttribute('aria-label')).toContain('不朽斩');
++  expect(UI.el.ovBody.querySelector('.battle-decision-inspect h4').textContent).toBe('不朽斩');
++  actions.get('btDeckBack')(); await settle();
++  actions.get('btGrave')(); await settle();
++  expect(UI.el.ovBody.querySelector('.battle-pile-card').getAttribute('aria-label')).toContain('不朽斩');
++  expect(UI.el.ovBody.querySelector('.battle-decision-inspect h4').textContent).toBe('不朽斩');
++  const after = BattleSession.getSnapshot();
++  expect(after.drawPile).toEqual(before.drawPile);
++  expect(after.discard).toEqual(before.discard);
++  expect(after.grave).toEqual(before.grave);
++  expect(after.energy).toBe(before.energy);
++  expect(JSON.stringify(game.ownedCards)).toBe(ownedBefore);
++});
++
++it('堆摘要实时跟随青龙/取消变形和非初始override，普通战持剑仍报初始攻击', async () => {
++  const normal = await swordBattle(false);
++  expect(pileTip(normal)).toBe('初始攻击×4');
++  BattleSession.commands.flee(); await settle();
++  const originals = await swordBattle();
++  expect(pileTip(originals)).toBe('不朽斩×4');
++  runtime.set$shaTransform('青龙偃月斩');
++  expect(pileTip(originals)).toBe('青龙偃月斩×4');
++  runtime.set$shaTransform(null);
++  expect(pileTip(originals)).toBe('初始攻击×4');
++  const dragon = { ...Cards.all().find(card => card.name === '青龙偃月斩'), cost: 0 };
++  runtime.cardOverrides.set(originals[0], dragon);
++  runtime.set$shaTransform('不朽斩');
++  expect(pileTip(originals)).toBe('青龙偃月斩×1，不朽斩×3');
++  expect(pileTip([])).toBe('（空）');
++  expect(pileTip(['missing-pile-uid'])).toBe('（空）');
++  expect(originals.map(uid => game.ownedCards.find(entry => entry.uid === uid).card.name))
++    .toEqual(Array(4).fill('初始攻击'));
++});
+--- a/tests/r3-a-preview.test.js
++++ b/tests/r3-a-preview.test.js
+@@ -341,7 +341,7 @@
+     const card = Cards.all().find(entry => entry.id === 'starter-attack');
+     const { game, uid } = gameWith(card);
+     restore(game, uid, { hp: 12 }, {}, { shaTransform: '火球术' });
+-    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null, reasons: ['这张初始攻击将变为另一张牌结算'] });
++    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null, reasons: ['变形卡按当前效果结算，预览无法精算'] });
+     BattleSession.commands.flee();
+   });
+ 

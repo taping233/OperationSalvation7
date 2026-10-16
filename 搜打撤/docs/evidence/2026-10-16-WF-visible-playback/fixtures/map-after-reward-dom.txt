@@ -1,0 +1,12 @@
+- complementary:
+  - navigation "远征工具":
+    - button "背包：携带卡牌 8/16"
+    - button "安全格：保护物资 0/2"
+    - button "消耗区：已消耗卡牌 6"
+    - button "map 定位 F"
+    - button "map 总览 G"
+- main:
+  - navigation "远征章节":
+    - generic: 风雪哨线
+    - generic: 第 2 层 / 4
+  - button "离开对局"

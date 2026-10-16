@@ -1,0 +1,30 @@
+{
+  "buildOutputBytes": 125392304,
+  "buildOutputFileCount": 1293,
+  "buildOutputManifestSha256": "4af10a2fac4d5425ebf27a764d97994f1a04089bb91e009f72c00cfb31be176b",
+  "checkedAt": "2026-10-15T22:29:04.009112+00:00",
+  "dependencyInputChanges": [],
+  "dependencySharedInodes": [],
+  "gitMetadataInputChanges": [
+    "index"
+  ],
+  "gitSharedInodes": [],
+  "snapshotAddedInputPaths": [],
+  "snapshotInputChanges": [
+    {
+      "afterSha256": "e6e4b8f07be9947d7d9baf29d2d4a8418084198bcc670f4ee3153c68451c7811",
+      "beforeSha256": "cd68f57c532d30d610845bfbd7b756111d3ab329c051db1c46c5de341bdc47cf",
+      "path": "搜打撤/game/src/generated/art-manifest.js"
+    },
+    {
+      "afterSha256": "7964f8e4838c629ec8b62fb1fe3fa1eb7f9628cc68725642e5c4380889c3cd1a",
+      "beforeSha256": "e8ac6a5757807a4835f16bf53b3705866f732ba5b07bdce1b146041eddae6343",
+      "path": "搜打撤/game/src/generated/thumb-manifest.js"
+    }
+  ],
+  "snapshotModeChanges": [],
+  "sourceAddedPathsSinceFreeze": [],
+  "sourceChangesSinceFreeze": [],
+  "sourceSnapshotSharedInodes": [],
+  "unexpectedSnapshotInputChanges": []
+}

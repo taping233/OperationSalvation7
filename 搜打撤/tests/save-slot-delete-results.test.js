@@ -60,11 +60,11 @@ function confirmed(action, fields) {
 }
 
 describe('整档删除结果与菜单消费', () => {
-  it.each(['run', 'corrupt'])('%s删除失败不继续删基地，也不宣称整档成功', target => {
+  it.each(['run', 'corrupt'])('%s删除失败不继续删基地，也不宣称整档成功', async target => {
     const before = prepareSlot();
     localStorage.setItem(RunStorage.corruptKey(1), '{fixture corrupt backup');
     failRemove(target === 'run' ? RunStorage.key(1) : RunStorage.corruptKey(1));
-    session.startNewGame();
+    await session.startNewGame();
     expect(confirmed('delSlot', { slot: 1 })).toBe(false);
     expect(localStorage.getItem(Base.SLOT_KEY(1))).toBe(before.base);
     expect(localStorage.getItem(RunStorage.key(1))).toBe(target === 'run' ? before.run : null);
@@ -72,11 +72,11 @@ describe('整档删除结果与菜单消费', () => {
     expect(document.getElementById('slotRestoreError').textContent).toContain('基地数据未删除');
   });
 
-  it('待恢复事务阻止整档删除，Run/Base/journal均保留且不误报', () => {
+  it('待恢复事务阻止整档删除，Run/Base/journal均保留且不误报', async () => {
     const before = prepareSlot();
     const journal = '{fixture pending transaction';
     localStorage.setItem('sdt-tx-v1-slot1', journal);
-    session.startNewGame();
+    await session.startNewGame();
     expect(confirmed('delSlot', { slot: 1 })).toBe(false);
     expect(localStorage.getItem(RunStorage.key(1))).toBe(before.run);
     expect(localStorage.getItem(Base.SLOT_KEY(1))).toBe(before.base);
@@ -84,7 +84,7 @@ describe('整档删除结果与菜单消费', () => {
     expect(UI.log.mock.calls.flat().join(' ')).not.toContain('已删除【档位 1】');
   });
 
-  it('Base删除失败时不回填旧串或覆盖同时出现的外部新值', () => {
+  it('Base删除失败时不回填旧串或覆盖同时出现的外部新值', async () => {
     prepareSlot();
     const latest = JSON.stringify({ version: Base.BASE_VERSION, coins: 900, stash: [], pocket: [] });
     const remove = Storage.prototype.removeItem;
@@ -95,16 +95,16 @@ describe('整档删除结果与菜单消费', () => {
       }
       return remove.call(this, key);
     });
-    session.startNewGame();
+    await session.startNewGame();
     expect(confirmed('delSlot', { slot: 1 })).toBe(false);
     expect(localStorage.getItem(RunStorage.key(1))).toBeNull();
     expect(localStorage.getItem(Base.SLOT_KEY(1))).toBe(latest);
   });
 
-  it('Run已删但Base删除失败明确报告部分结果，重试成功后才宣称完成', () => {
+  it('Run已删但Base删除失败明确报告部分结果，重试成功后才宣称完成', async () => {
     const before = prepareSlot();
     const blocked = failRemove(Base.SLOT_KEY(1));
-    session.startNewGame();
+    await session.startNewGame();
     expect(confirmed('delSlot', { slot: 1 })).toBe(false);
     expect(localStorage.getItem(RunStorage.key(1))).toBeNull();
     expect(localStorage.getItem(Base.SLOT_KEY(1))).toBe(before.base);
@@ -122,7 +122,7 @@ describe('整档删除结果与菜单消费', () => {
     const reset = vi.spyOn(Base, 'reset');
     const openBaseHub = vi.fn();
     session.configureGameRuntime({ openBaseHub });
-    session.startNewGame();
+    await session.startNewGame();
     expect(await confirmed('overwriteSlot', { slot: 1 })).toBe(false);
     expect(reset).not.toHaveBeenCalled();
     expect(openBaseHub).not.toHaveBeenCalled();
@@ -130,7 +130,7 @@ describe('整档删除结果与菜单消费', () => {
     expect(UI.log.mock.calls.flat().join(' ')).not.toContain('已进入');
   });
 
-  it('全部清空逐档报告失败，其他档位照常完成，重试后才报告全成功', () => {
+  it('全部清空逐档报告失败，其他档位照常完成，重试后才报告全成功', async () => {
     const before1 = prepareSlot(1), before2 = prepareSlot(2);
     prepareSlot(3);
     const original = Storage.prototype.removeItem;
@@ -138,7 +138,7 @@ describe('整档删除结果与菜单消费', () => {
       if (key === RunStorage.key(1) || key === Base.SLOT_KEY(2)) throw new Error('fixture partial clear');
       return original.call(this, key);
     });
-    session.openSettings();
+    await session.openSettings();
     const activeBase = Base.data, activeRunToken = session.game.discoveredPairs;
     expect(confirmed('wipeSave', {})).toBe(false);
     expect(Base.slot).toBe(1);

@@ -1,0 +1,27 @@
+{
+  "task": "WF-cloud-backpack-layout",
+  "sourceBaseline": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "testGroups": [
+    {
+      "command": "npx vitest run tests/backpack-layout.test.js tests/bag-page-lifecycle-review.test.js tests/card-reading-typography.test.js tests/bag-architecture.test.js tests/ui-scale.test.js tests/contracts.test.js tests/architecture-boundaries.test.js --reporter=dot",
+      "filesPassed": 7,
+      "testsPassed": 96,
+      "testsFailed": 0
+    },
+    {
+      "command": "npx vitest run tests/bag-item-rule-baseline.test.js tests/bag-pouch-capacity.test.js tests/bag-return-hook.test.js tests/bag-structured-rule-migration.test.js tests/bag-structured-use.test.js tests/card-rules-bag-boundary.test.js tests/fresh-run-onboarding-copy.test.js --reporter=dot",
+      "filesPassed": 7,
+      "testsPassed": 32,
+      "testsFailed": 0
+    }
+  ],
+  "eslint": {
+    "command": "npx eslint game/src/hub/game.bag.js game/src/hub/game.bag.view2.js tests/backpack-layout.test.js tests/bag-page-lifecycle-review.test.js",
+    "status": "passed"
+  },
+  "cssParse": "passed via PostCSS in backpack-layout.test.js",
+  "ownDiffCheck": "passed",
+  "browser": "Parent-owned real-page validation pending",
+  "build": "not run, prohibited in worker scope",
+  "commit": "not run, prohibited"
+}

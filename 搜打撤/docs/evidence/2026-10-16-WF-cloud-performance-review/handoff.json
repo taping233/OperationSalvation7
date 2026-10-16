@@ -1,0 +1,64 @@
+{
+  "checkedAt": "2026-10-15T18:21:46.203Z",
+  "status": "complete-uncommitted",
+  "baseline": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "ownedFiles": [
+    {
+      "path": "scripts/runtime-asset-redundancy-review.mjs",
+      "bytes": 16453,
+      "sha256": "6b9c3edd0f342641186bb0cd552071b1d00b6680cd81ffefd412814b59751e71"
+    },
+    {
+      "path": "scripts/runtime-asset-redundancy.mjs",
+      "bytes": 9408,
+      "sha256": "2b8d933245f76b85efe8d9649980035952102db7a65987c59af37a9bfebc5a51"
+    },
+    {
+      "path": "vite.config.js",
+      "bytes": 20033,
+      "sha256": "769062c627746f9834ef61ad039e3b6526544636be9e5442fa3f0106b8f9c8cc"
+    },
+    {
+      "path": "game/index.html",
+      "bytes": 24002,
+      "sha256": "d547f85be215cd0a50a9d615aea8bca717c70685800be4b1d3516d649f567262"
+    },
+    {
+      "path": "tests/runtime-asset-redundancy.test.js",
+      "bytes": 10361,
+      "sha256": "06d577cc2aea1ae5cdc4f6b6ee81d253ae3a7e5a86bb387f236f767f7279819a"
+    },
+    {
+      "path": "tests/runtime-asset-redundancy-plugin.test.js",
+      "bytes": 9483,
+      "sha256": "215ff8d78aca4793cf037d21007f2ffccac2deeb06c512a58a8a763f9ab43a04"
+    },
+    {
+      "path": "tests/runtime-asset-publication.test.js",
+      "bytes": 9162,
+      "sha256": "2f20a1db2292f32dcb2b372ca2293bd3e71b86bd9d41c55c5e49bacd28fc9cd9"
+    }
+  ],
+  "tests": {
+    "files": 8,
+    "passed": 79,
+    "failed": 0,
+    "skipped": 0
+  },
+  "lint": "passed",
+  "diffWhitespace": "passed",
+  "documentation": {
+    "currentDocsGuard": true,
+    "checkedCurrentDocLinks": 461,
+    "reportLocalLinks": 10,
+    "missing": []
+  },
+  "build": "not run",
+  "browser": "not operated by this worker; parent owns verification",
+  "expectedBuildDelta": {
+    "packageSourceCopyBytes": -16905604,
+    "allFourBudgetsPassed": "unverified; package still projected above threshold"
+  },
+  "sourceFilesDeleted": 0,
+  "generatedManifestsWritten": false
+}

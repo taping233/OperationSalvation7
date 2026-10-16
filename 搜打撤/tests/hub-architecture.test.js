@@ -3,7 +3,8 @@
  * game.hub.js 曾是 1265 行混装（页签壳 + 出征整备流 + 六页签 HTML + 物资抽屉），现拆为：
  *   game.hub.js         —— 轻门面：按需载入、失效请求与公开五件套
  *   game.hub.runtime.js —— 壳实现：装配、事件分派、出发与整备编排、closeBase
- *   game.hub.depart.js  —— 出发页与出征整备（hubDeployHTML / openDepartPrep / deployPick 态）
+ *   game.hub.depart.js  —— 出发页与出征整备（hubDeployHTML / openDepartPrep / setDeployPick）
+ *   departure.selection-state.js —— 不依赖页面的 deployPick 共享 live binding
  *   game.hub.pages.js   —— 六页签 HTML 与 openStashItem/openRawItem 抽屉
  *   game.hub.bridge.js  —— 中立桥：slots.renderHub 注册点 + homeRequestId（bag-return-hook 先例）
  *   game.hub.home-scene.js —— Home 场景读取、命令分派与异步生命周期
@@ -11,7 +12,7 @@
  *   1. 壳不再定义被拆走的入口，行数不回涨成 God file；
  *   2. 对外导出面（五件套）不变；
  *   3. 依赖单向：切片不 import 壳（contracts 拒环），重绘回环只经 bridge 的 slots；
- *   4. 共享可变态单一归属：deployPick 在 depart 片（壳经 setDeployPick 写），
+ *   4. 共享可变态单一归属：deployPick 在纯状态模块（depart 管理完整 setter），
  *      hubCollectionView 留壳、hubAchHTML 形参注入。
  * 纯源码静态断言（不 import 游戏模块，避免 jsdom 环境桩干扰）——对齐 run-architecture 先例。 */
 import { describe, expect, it } from 'vitest';
@@ -24,6 +25,7 @@ const importedModules = (code) => [...code.matchAll(/^import\s+(?:\{[^}]*\}\s+fr
 const FACADE = source('hub/game.hub.js');
 const SHELL = source('hub/game.hub.runtime.js');
 const DEPART = source('hub/game.hub.depart.js');
+const SELECTION = source('hub/departure.selection-state.js');
 const PAGES = source('hub/game.hub.pages.js');
 const PREPARATION = source('hub/game.hub.preparation.js');
 const PREPARATION_PORTS = source('hub/game.hub.preparation-ports.js');
@@ -74,12 +76,17 @@ describe('基地模块分层（批3 拆分）', () => {
     expect(BRIDGE).toContain('export const slots = {}');
   });
 
-  it('共享态单一归属：deployPick 在 depart 带 setter；hubAchHTML 形参注入', () => {
-    expect(DEPART).toContain('let deployPick = null;');
+  it('共享态单一归属：轻门面只依赖纯 live binding；完整 setter 与整备生命周期留在 depart', () => {
+    expect(SELECTION).toContain('export let deployPick = null;');
+    expect(SELECTION).toContain('function replaceDeployPick(');
+    expect(SELECTION).not.toMatch(/^import\s|window\.|document\.|\.css['"]/m);
     expect(DEPART).toContain('function setDeployPick(');
+    expect(DEPART).toContain("import { deployPick, replaceDeployPick } from './departure.selection-state.js'");
+    expect(DEPART).not.toContain('let deployPick =');
     expect(SHELL).not.toContain('let deployPick');
     expect(FACADE).not.toContain('let deployPick');
-    expect(FACADE).toContain("import { deployPick } from './game.hub.depart.js'");
+    expect(FACADE).toContain("import { deployPick } from './departure.selection-state.js'");
+    expect(FACADE).not.toMatch(/from ['"].*game\.hub\.depart\.js['"]/);
     expect(SHELL).toContain('applyPicks: setDeployPick');
     expect(PREPARATION).toContain('navigation.applyPicks(picks)');
     expect(PAGES).toContain('function hubAchHTML(hubCollectionView)');

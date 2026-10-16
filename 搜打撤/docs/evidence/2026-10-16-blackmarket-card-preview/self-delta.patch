@@ -1,0 +1,21 @@
+--- game/src/run/game.run.flow.js:before-preview
++++ game/src/run/game.run.flow.js:with-preview
+@@ -803,10 +803,17 @@
+     nodeShell({
+       tone: 'event', asset: 'scene-event-gamble', icon: '[[icon:dice]]', title: '地下商场黑市',
+       sub: `每次投入 <b>3 币</b>，有 <b>50%</b> 概率拿走全部三张卡；第 <b>5</b> 次必定成功。已尝试 ${attempts}/5 次。${lastMiss ? '<br><b class="danger">指示灯变红，这次什么也没拿到。</b>' : ''}`,
+-      body: `<div class="bt-hand event-choice-hand">${prizes.map(c => `<div class="bt-card">${SDT.Cards.cardHTML(c, 'sm')}</div>`).join('')}</div>
++      body: `<div class="bt-hand event-choice-hand">${prizes.map((c, i) => `<button type="button" class="bt-card event-choice-card" data-act="eventGambleRead" data-i="${i}" aria-label="放大查看${escAttr(c.name)}" aria-haspopup="dialog">${SDT.Cards.cardHTML(c, 'sm')}</button>`).join('')}</div>
++        <p class="loot-footer-note">点击卡牌放大查看</p>
+         <div class="scene-ops"><button class="ov-btn" data-act="eventGambleLeave">放弃并离开</button><button class="ov-btn ok" data-act="eventGambleTry" ${(game.coins || 0) < 3 || !prizes.length ? 'disabled' : ''}>[[icon:coin]] 投入 3 币${attempts === 4 ? '（本次保底）' : ''}</button></div>`,
+     });
+     const active = eventPageBinding('eventGambleTry', current);
++    UI.act('eventGambleRead', d => {
++      const i = Number(d.i), card = prizes[i];
++      if (settled || !active() || !card) return;
++      const source = UI.el.ovBody.querySelector(`[data-act="eventGambleRead"][data-i="${i}"]`);
++      UI.showCardZoom(card, { hideNote:true, presentation:'expedition', from:source, returnFocus:source });
++    });
+     UI.act('eventGambleLeave', () => { if (!settled && active()) { settled = true; closeEventFlow(); } });
+     UI.act('eventGambleTry', () => {
+       if (settled || !active() || !spendEventCoins(3, '黑市抽签')) return;

@@ -1,19 +1,20 @@
 /* ══ 背包 v2 玻璃界面（2026-10-15 WF-bag-redesign-1015 实装，老板拍板绝区零方向）══
-   景深背景 + 玻璃拟态：左栏分区钮 / 轻量格子（真实卡面+物资图标+数量+稀有度晕染）/ 右侧常驻详情。
+   景深背景 + 玻璃拟态：左栏分区钮 / 轻量格子（真实卡面+物资图标+数量+稀有度晕染）/ 独立卡牌详情。
    拖拽浮影与落点高亮的基础样式仍在 scenes.css（.bag-ghost/.bag-slot.dragging/.bag-slot.drop-here）。 */
-/* 全屏：对标 .card.battle 的满屏覆写（老板反馈「背包没有全屏」），页面从视口边缘起；
-   transform:none 顶掉外场对卡片的整体缩放（实测被 scale(0.65) 缩成 828×466 的根因） */
+/* 壳使用 1920×1080 布局坐标，交给 html 的统一 zoom 缩放一次。
+   vw/vh 是浏览器显示尺寸，在 zoom 内再次使用会把整页缩到左上角。 */
 body #overlay.bag-full { padding: 0; display: block; }
 body #overlay .card.bag-page {
-  width: 100vw; max-width: 100vw; height: 100vh; max-height: 100vh;
+  width: var(--game-layout-width, 100%); max-width: var(--game-layout-width, 100%);
+  height: var(--game-layout-height, 100%); max-height: var(--game-layout-height, 100%);
   margin: 0; border: 0; border-radius: 0; padding: 0; box-shadow: none;
   transform: none !important; translate: none; scale: none;
 }
 body #overlay .card.bag-page #ovBody { width: 100%; height: 100%; max-height: none; overflow: hidden; }
 body #overlay .card.bag-page .bag-view.bag-v2 {
   position: relative; overflow: hidden; height: 100%; width: 100%; box-sizing: border-box;
-  max-width: none; margin: 0;
-  background: #0b1017; color: #f2f4f6;
+  max-width: none; margin: 0; padding: 0;
+  background: #0b1017; color: #f2f4f6; font-size: 22px; text-align: left;
 }
 body #overlay .card.bag-page .bag-v2 .bag-bg {
   position: absolute; inset: -40px; width: calc(100% + 80px); height: calc(100% + 80px);
@@ -21,7 +22,7 @@ body #overlay .card.bag-page .bag-v2 .bag-bg {
 }
 body #overlay .card.bag-page .bag-v2 .bag-shell {
   position: relative; z-index: 1; height: 100%; min-height: 0; box-sizing: border-box;
-  display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 20px; padding: 28px 34px;
+  display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 24px; padding: 28px 34px;
 }
 body #overlay .card.bag-page .bag-v2 .bag-rail,
 body #overlay .card.bag-page .bag-v2 .bag-board,
@@ -32,17 +33,18 @@ body #overlay .card.bag-page .bag-v2 .bag-detail {
   box-shadow: 0 10px 40px rgba(0, 0, 0, .32);
 }
 /* 左栏分区（顶部让位给左上角 archive-back 退出键，样式复用 archive-back.css） */
-body #overlay .card.bag-page .bag-v2 .bag-rail { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 78px 0 20px; }
+body #overlay .card.bag-page .bag-v2 .bag-rail { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 88px 0 20px; }
 body #overlay .card.bag-page .bag-v2 .bag-rz {
-  position: relative; width: 60px; height: 60px; border: 0; border-radius: 16px; cursor: pointer;
-  background: transparent; color: #93a7b1; display: flex; align-items: center; justify-content: center;
+  position: relative; width: 84px; height: 88px; border: 0; border-radius: 16px; cursor: pointer;
+  background: transparent; color: #aebfc9; display: flex; flex-direction: column; gap: 7px; align-items: center; justify-content: center;
   transition: background .2s, color .2s, transform .2s;
 }
-body #overlay .card.bag-page .bag-v2 .bag-rz svg { width: 26px; height: 26px; }
+body #overlay .card.bag-page .bag-v2 .bag-rz svg { width: 30px; height: 30px; }
+body #overlay .card.bag-page .bag-v2 .bag-rlabel { font-size: 18px; line-height: 1.3; white-space: nowrap; }
 body #overlay .card.bag-page .bag-v2 .bag-rz .bag-bdg {
-  position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px;
+  position: absolute; top: -6px; right: -6px; min-width: 28px; height: 28px; padding: 0 6px;
   border-radius: 10px; background: rgba(255, 255, 255, .14); color: #f2f4f6;
-  font-size: 11px; font-weight: 700; line-height: 20px; font-variant-numeric: tabular-nums;
+  font-size: 16px; font-weight: 700; line-height: 28px; font-variant-numeric: tabular-nums;
 }
 body #overlay .card.bag-page .bag-v2 .bag-rz:hover { color: #f2f4f6; background: rgba(255, 255, 255, .08); transform: translateY(-1px); }
 body #overlay .card.bag-page .bag-v2 .bag-rz.on { color: #101319; background: #f5d97b; box-shadow: 0 6px 22px rgba(245, 217, 123, .35); }
@@ -56,27 +58,30 @@ body #overlay .card.bag-page .bag-v2 .bag-head2 {
   border-bottom: 1px solid rgba(255, 255, 255, .14);
 }
 body #overlay .card.bag-page .bag-v2 .bag-kick { display: block; font-size: 10px; letter-spacing: .42em; color: rgba(226, 232, 238, .34); }
-body #overlay .card.bag-page .bag-v2 .bag-head2 h2 { margin: 2px 0 0; font-size: 40px; font-weight: 800; letter-spacing: .06em; line-height: 1; color: #f2f4f6; }
+body #overlay .card.bag-page .bag-v2 .bag-head2 h2 { display: flex; align-items: center; gap: 14px; margin: 2px 0 0; font-size: 40px; font-weight: 800; letter-spacing: .06em; line-height: 1.2; color: #f2f4f6; }
+body #overlay .card.bag-page .bag-v2 .bag-title .help-btn { width: 60px; height: 60px; font-size: 22px; flex: none; }
+body #overlay .card.bag-page .bag-v2 .archive-back { width: 60px; height: 60px; }
 body #overlay .card.bag-page .bag-v2 .bag-capchip {
   margin-left: auto; display: flex; align-items: center; gap: 10px; padding: 11px 20px; border-radius: 999px;
   background: rgba(14, 18, 26, .52); backdrop-filter: blur(26px) saturate(1.35); -webkit-backdrop-filter: blur(26px) saturate(1.35);
   border: 1px solid rgba(255, 255, 255, .10);
 }
-body #overlay .card.bag-page .bag-v2 .bag-capk { font-size: 11px; letter-spacing: .2em; color: #93a7b1; }
-body #overlay .card.bag-page .bag-v2 .bag-capbar { position: relative; width: 170px; height: 8px; border-radius: 4px; background: rgba(255, 255, 255, .10); overflow: hidden; }
+body #overlay .card.bag-page .bag-v2 .bag-capk { font-size: 18px; letter-spacing: .12em; color: #aebfc9; }
+body #overlay .card.bag-page .bag-v2 .bag-capbar { position: relative; width: 130px; height: 8px; border-radius: 4px; background: rgba(255, 255, 255, .10); overflow: hidden; }
 body #overlay .card.bag-page .bag-v2 .bag-capbar i { position: absolute; inset: 0 auto 0 0; border-radius: 4px; background: linear-gradient(90deg, #d8b054, #f5d97b); }
-body #overlay .card.bag-page .bag-v2 .bag-capchip b { font-size: 19px; font-variant-numeric: tabular-nums; }
-body #overlay .card.bag-page .bag-v2 .bag-capchip small { color: #93a7b1; font-variant-numeric: tabular-nums; }
+body #overlay .card.bag-page .bag-v2 .bag-capchip b { font-size: 28px; font-variant-numeric: tabular-nums; }
+body #overlay .card.bag-page .bag-v2 .bag-capchip small { font-size: 20px; color: #b7c7cf; font-variant-numeric: tabular-nums; }
 body #overlay .card.bag-page .bag-v2 .bag-cur { display: flex; gap: 20px; align-items: flex-end; }
-body #overlay .card.bag-page .bag-v2 .bag-cur .fc-chip { background: none; border: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; align-items: flex-end; color: #93a7b1; font-size: 10px; letter-spacing: .18em; }
-body #overlay .card.bag-page .bag-v2 .bag-cur .fc-chip b { color: #f2f4f6; font-size: 20px; letter-spacing: 0; }
+body #overlay .card.bag-page .bag-v2 .bag-cur .fc-chip { background: none; border: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; align-items: flex-end; color: #aebfc9; font-size: 18px; letter-spacing: .08em; }
+body #overlay .card.bag-page .bag-v2 .bag-cur .fc-chip b { color: #f2f4f6; font-size: 28px; letter-spacing: 0; }
+body #overlay .card.bag-page .bag-v2 .bag-cur .fc-chip small { font-size: 16px; letter-spacing: 0; }
 body #overlay .card.bag-page .bag-v2 .bag-tools {
   display: flex; align-items: center; gap: 8px; padding: 16px 2px;
   border-bottom: 1px solid rgba(255, 255, 255, .09);
 }
 body #overlay .card.bag-page .bag-v2 .bag-pill {
   border: 1px solid transparent; background: rgba(255, 255, 255, .06); color: #93a7b1;
-  font-size: 13.5px; padding: 8px 17px; border-radius: 999px; cursor: pointer; font-family: inherit; letter-spacing: .04em;
+  min-height: 60px; font-size: 22px; padding: 10px 22px; border-radius: 999px; cursor: pointer; font-family: inherit; letter-spacing: .04em;
   transition: background .2s, color .2s;
 }
 body #overlay .card.bag-page .bag-v2 .bag-pill:hover { color: #f2f4f6; background: rgba(255, 255, 255, .11); }
@@ -85,19 +90,19 @@ body #overlay .card.bag-page .bag-v2 .bag-receipt { margin: 0 0 12px; padding: 1
 body #overlay .card.bag-page .bag-v2 button:focus-visible { outline: 2px solid #f5d97b; outline-offset: 3px; }
 body #overlay .card.bag-page .bag-v2 .bag-tgap { flex: 1; }
 body #overlay .card.bag-page .bag-v2 .bag-icbtn {
-  width: 40px; height: 40px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, .12); cursor: pointer;
+  width: 60px; height: 60px; flex: none; border-radius: 12px; border: 1px solid rgba(255, 255, 255, .12); cursor: pointer;
   background: rgba(255, 255, 255, .06); color: #c9d4dc; display: flex; align-items: center; justify-content: center;
   transition: background .2s, color .2s;
 }
-body #overlay .card.bag-page .bag-v2 .bag-icbtn svg { width: 19px; height: 19px; }
+body #overlay .card.bag-page .bag-v2 .bag-icbtn svg { width: 26px; height: 26px; }
 body #overlay .card.bag-page .bag-v2 .bag-icbtn:hover { color: #fff; background: rgba(255, 255, 255, .13); }
 body #overlay .card.bag-page .bag-v2 .bag-icbtn.gold { background: #f5d97b; border-color: #f5d97b; color: #101319; }
 /* 网格板 */
 body #overlay .card.bag-page .bag-v2 .bag-board { flex: 1; min-height: 0; margin-top: 16px; padding: 16px 20px; overflow-y: auto; scrollbar-color: rgba(255, 255, 255, .18) transparent; }
-body #overlay .card.bag-page .bag-v2 .bag-znote { margin: 0 0 12px; font-size: 12px; letter-spacing: .04em; color: #93a7b1; }
+body #overlay .card.bag-page .bag-v2 .bag-znote { margin: 0 0 14px; font-size: 22px; line-height: 1.55; letter-spacing: .02em; color: #b7c7cf; }
 /* 一行固定五列（老板定向），格子走卡面比例，卡面放大占满格子 */
 body #overlay .card.bag-page .bag-v2 .bag-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; padding: 0; background: none; border: 0; }
-body #overlay .card.bag-page .bag-v2 .bag-empty2 { margin: 8px 2px; color: #93a7b1; font-size: 13px; }
+body #overlay .card.bag-page .bag-v2 .bag-empty2 { margin: 8px 2px; color: #b7c7cf; font-size: 22px; }
 body #overlay .card.bag-page .bag-v2 .bag-tile {
   position: relative; aspect-ratio: 5 / 7.4; height: auto; border-radius: 16px; cursor: pointer; overflow: hidden;
   background: var(--tint, rgba(255, 255, 255, .055)); border: 1px solid transparent;
@@ -131,7 +136,7 @@ body #overlay .card.bag-page .bag-v2 .bag-tnm { max-width: 92%; z-index: 1; font
 body #overlay .card.bag-page .bag-v2 .bag-tct {
   position: absolute; top: 8px; right: 8px; z-index: 2; padding: 2px 9px; border-radius: 999px;
   background: rgba(8, 10, 15, .55); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, .14);
-  font-size: 11.5px; font-weight: 700; font-variant-numeric: tabular-nums;
+  font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums;
 }
 body #overlay .card.bag-page .bag-v2 .bag-tcost {
   position: absolute; top: 7px; left: 8px; z-index: 2; width: 24px; height: 24px; border-radius: 50%;
@@ -139,9 +144,26 @@ body #overlay .card.bag-page .bag-v2 .bag-tcost {
 }
 body #overlay .card.bag-page .bag-v2 .bag-tstate {
   position: absolute; bottom: 9px; left: 0; right: 0; text-align: center; z-index: 2;
-  font-size: 10.5px; letter-spacing: .2em; color: rgba(245, 217, 123, .7);
+  font-size: 18px; letter-spacing: .08em; color: #f5d97b;
 }
 body #overlay .card.bag-page .bag-v2 .bag-tile.spent .bag-tstate { color: rgba(230, 150, 140, .75); }
+/* 背包详情只调整自己的阅读区，不改变基地仓库的同款特写。 */
+body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom {
+  grid-template-columns: var(--inspect-card-width) 640px; gap: 24px 72px;
+}
+body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom .inventory-zoom-info {
+  height: 840px; min-height: 0; max-height: calc(var(--game-layout-height, 1080px) - 160px); padding: 36px;
+}
+body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom .inventory-zoom-info header { flex: none; padding-right: 72px; }
+body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom .inventory-zoom-info header small { font-size: 20px; }
+body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom .inventory-zoom-effect { flex: 1 1 auto; min-height: 0; overflow: auto; }
+body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom .inventory-zoom-effect h3 { font-size: 18px; }
+body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom .cz-foot { font-size: 22px; line-height: 1.65; }
+body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom .camp-card-actions .inspect-count { font-size: 22px; }
+body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom .inspect-collection-state { font-size: 18px; }
+body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom .inspect-collection-hint { font-size: 22px; }
+body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom .camp-card-actions .ov-btn { min-height: 60px; font-size: 22px; }
+body:has(#overlay.bag-full .bag-v2) #cardZoom.inventory-zoom .cz-close { width: 60px; height: 60px; font-size: 22px; }
 #overlay .hub, #overlay .bag-view, #overlay .cardlib-page, #overlay .settings-page { background:var(--bg-deep2); color:#ebecec; min-height:100%; }
 #overlay .hub-head, #overlay .bag-head, #overlay .cardlib-head, #overlay .pg-head { background:rgba(17,18,20,.96); border-bottom:1px solid rgba(234,210,130,.24); padding:18px 24px; }
 #overlay .hub-head h2, #overlay .bag-head h2, #overlay .pg-head h2 { color:#ebecec; letter-spacing:.16em; }
@@ -167,9 +189,9 @@ body #overlay .card.bag-page .bag-v2 .bag-tile.spent .bag-tstate { color: rgba(2
 .bag-sort { float: right; display: inline-flex; gap: 6px; }
 .bag-sort .mini-btn { font-size: 11px; padding: 2px 8px; letter-spacing: 1px; white-space: nowrap; flex-shrink: 0; }
 #overlay .bag-view .set-h, #overlay .hub-page .set-h { color:#ead282; border-color:rgba(234,210,130,.22); }
-#overlay .stash-row, #overlay .ach-row, #overlay .coll-ms { background:#1c1e20; border-color:rgba(194,199,202,.16); border-radius:0; }
+#overlay .stash-row, #overlay .ach-row { background:#1c1e20; border-color:rgba(194,199,202,.16); border-radius:0; }
 #overlay .stash-row:hover, #overlay .ach-row:hover { background:#272a2d; border-color:#ead282; }
-#overlay .stash-list, #overlay .stash-grid, #overlay .dep-list, #overlay .coll-room { scrollbar-color:#4f545a var(--bg-deep2); }
+#overlay .stash-list, #overlay .stash-grid, #overlay .dep-list { scrollbar-color:#4f545a var(--bg-deep2); }
 #overlay .ov-btn, #overlay .mini-btn { border-radius:0; }
 #overlay .ov-btn.ok, #overlay .mini-btn.ok { background:#ead282; color:#17181a; }
 #overlay .ov-btn.danger, #overlay .mini-btn.danger { background:#6f3539; border-color:#a96868; color:#ffe4df; }
@@ -195,18 +217,11 @@ body #overlay .card.bag-page .bag-v2 .bag-tile.spent .bag-tstate { color: rgba(2
 
 /* 基地其他页签：局部压过 winter.css 的浅纸文字，保持深海军蓝信息层级。 */
 #overlay .hub-page .hub-card { color:#ebecec; background:rgba(25,26,28,.84); border-color:rgba(194,199,202,.16); }
-#overlay .hub-page .hub-card > h3, #overlay .hub-page .hub-card .base-line,
-#overlay .hub-page .hub-card .pk-row, #overlay .hub-page .hub-card .ov-note,
-#overlay .hub-page .hub-card .ov-empty, #overlay .hub-page .hub-card .dim,
-#overlay .hub-page .hub-card .ach-info span, #overlay .hub-page .hub-card .ach-info b,
-#overlay .hub-page .hub-card .pet-row div, #overlay .hub-page .hub-card .si-line,
-#overlay .hub-page .hub-card .back-card b { color:#d0d2d3; }
+#overlay .hub-page .hub-card > h3, #overlay .hub-page .hub-card .base-line, #overlay .hub-page .hub-card .pk-row, #overlay .hub-page .hub-card .ov-note, #overlay .hub-page .hub-card .ov-empty, #overlay .hub-page .hub-card .dim, #overlay .hub-page .hub-card .ach-info span, #overlay .hub-page .hub-card .ach-info b, #overlay .hub-page .hub-card .pet-row div, #overlay .hub-page .hub-card .si-line { color:#d0d2d3; }
 #overlay .hub-page .hub-card .base-line b, #overlay .hub-page .hub-card .pk-row b,
 #overlay .hub-page .hub-card .ach-info b { color:#fbdf83; }
-#overlay .hub-page .hub-card .pk-row, #overlay .hub-page .hub-card .stash-row,
-#overlay .hub-page .hub-card .ach-row, #overlay .hub-page .hub-card .coll-ms { background:#1c1e20; border-color:rgba(194,199,202,.16); }
-#overlay .hub-page .hub-card .stash-row:hover, #overlay .hub-page .hub-card .ach-row:hover,
-#overlay .hub-page .hub-card .coll-ms.reach { background:#272a2d; border-color:#ead282; }
+#overlay .hub-page .hub-card .pk-row, #overlay .hub-page .hub-card .stash-row, #overlay .hub-page .hub-card .ach-row { background:#1c1e20; border-color:rgba(194,199,202,.16); }
+#overlay .hub-page .hub-card .stash-row:hover, #overlay .hub-page .hub-card .ach-row:hover { background:#272a2d; border-color:#ead282; }
 
 /* 基地深蓝底对比度修复（09-20 高级感改造批1）：winter.css 392-500 段为旧米白主题写的
    深棕文字与图标压暗 filter 在深蓝底上失效（宝藏大门文字隐形、图标发暗），此处按现役
@@ -286,21 +301,6 @@ body #overlay .card.bag-page .bag-v2 .bag-tile.spent .bag-tstate { color: rgba(2
 #overlay .hub-shop .hub-two > .hub-card,
 #overlay .hub-upgrade .hub-upgrade-layout > .hub-card { background:rgba(21,22,24,.95); border-color:rgba(194,199,202,.24); }
 #overlay .hub-shop .shop-shelf { grid-template-columns:1fr; }
-#overlay .hub-shop .shelf-item { min-height:135px; }
-#overlay .hub-shop .shelf-item .shelf-visual { width:84px; height:116px; }
-#overlay .hub-shop .shelf-item .shelf-visual .hs-card { font-size:8px; }
-#overlay .hub-page .shelf-item { display:flex; align-items:center; gap:12px; padding:12px 14px 12px 12px; border:1px solid rgba(194,199,202,.2); border-radius:0; background:#1c1e20; transition:border-color .14s, transform .14s; }
-#overlay .hub-page .shelf-item:hover { border-color:#ead282; transform:translateY(-1px); }
-#overlay .hub-page .shelf-item .shelf-visual { flex:0 0 auto; width:66px; height:92px; overflow:hidden; border-radius:0; background:#191a1c; display:flex; align-items:center; justify-content:center; }
-#overlay .hub-page .shelf-item .shelf-visual .hs-card { font-size:6.6px; }
-#overlay .hub-page .shelf-item .shelf-ico .ic { width:38px; height:38px; opacity:.92; }
-#overlay .hub-page .shelf-item .shelf-info { flex:1; min-width:0; display:flex; flex-direction:column; gap:4px; }
-#overlay .hub-page .shelf-item .shelf-info b { color:#ebecec; font-size:15px; letter-spacing:1px; }
-#overlay .hub-page .shelf-item .shelf-info .dim { font-size:11.5px; line-height:1.6; }
-#overlay .hub-page .shelf-item .poor-why { color:#c98b7e; font-size:11px; }
-#overlay .hub-page .shelf-item.poor { border-color:rgba(194,199,202,.16); }
-#overlay .hub-page .shelf-item.poor .shop-price-tag:disabled { opacity:1; background:#323639; border-color:#707578; color:#d5d6d7; }
-#overlay .hub-page .shelf-item .shop-price-tag { flex:0 0 auto; }
 
 /* —— 升级页重排（09-20 高级感改造批3）：上排两张扩建卡大数字化，下排宠物升级全宽，
       整体撑满视口高度，不再留下 2/3 空白 —— */
@@ -314,3 +314,25 @@ body #overlay .card.bag-page .bag-v2 .bag-tile.spent .bag-tstate { color: rgba(2
 #overlay .hub-page .up-card .ov-btn:disabled,
 #overlay .hub-page .up-pets .mini-btn:disabled { opacity:1; background:#323639; border-color:#707578; color:#d5d6d7; }
 #overlay .hub-page .up-pets { grid-column:1 / -1; }
+
+/* 珍珠盒沿用远征决策弹层的头部、滚动区与固定动作栏，只定义资源存取布局。 */
+body #overlay .pearl-store .battle-decision-head h3 { display:flex; align-items:center; gap:12px; font-size:34px; }
+body #overlay .pearl-store .battle-decision-head h3 .ic { width:30px; height:30px; }
+body #overlay .pearl-store .battle-decision-head > span { font-size:22px; }
+body #overlay .pearl-store .battle-decision-summary .ov-note { margin:0; color:#d1e1e5; font-size:var(--card-copy-size,24px); line-height:1.55; }
+body #overlay .pearl-store .battle-decision-summary .ov-note + .ov-note { margin-top:8px; font-size:22px; }
+body #overlay .pearl-store .pearl-store-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; }
+body #overlay .pearl-store .pearl-store-columns > section { min-width:0; }
+body #overlay .pearl-store .pearl-store-columns h4 { margin:0; color:#e4edf0; font-size:28px; line-height:1.4; }
+body #overlay .pearl-store .pearl-store-hint { margin:8px 0 0; color:#b9cbd4; font-size:22px; line-height:1.5; }
+body #overlay .pearl-store .pearl-store-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(272px,1fr)); gap:24px; padding:18px 0 10px; align-items:start; }
+body #overlay .pearl-store .pearl-store-card { display:block; width:272px; max-width:100%; margin:0; padding:0; border:0; border-radius:0; background:transparent; color:#e4edf0; font:inherit; text-align:center; cursor:pointer; }
+body #overlay .pearl-store .pearl-store-art { display:block; pointer-events:none; }
+body #overlay .pearl-store .pearl-store-art .hs-card { width:100%; margin:0; font-size:27.2px; }
+body #overlay .pearl-store .pearl-store-caption { display:flex; flex-direction:column; gap:6px; padding:12px 8px; background:#1b3441; font-size:24px; line-height:1.4; }
+body #overlay .pearl-store .pearl-store-caption b { font-weight:600; overflow-wrap:anywhere; }
+body #overlay .pearl-store .pearl-store-caption > span { color:#f0da9c; }
+body #overlay .pearl-store .pearl-store-card:hover { transform:none; outline:2px solid #e4d49c; outline-offset:5px; }
+body #overlay .pearl-store .pearl-store-card:focus-visible { outline:3px solid #e0c986; outline-offset:5px; }
+body #overlay .pearl-store .ov-empty { grid-column:1/-1; margin:0; padding:24px 0; color:#b9cbd4; font-size:22px; line-height:1.6; text-align:left; }
+body #overlay .pearl-store .battle-decision-actions .ov-btn { min-height:64px; min-width:280px; font-size:24px; }

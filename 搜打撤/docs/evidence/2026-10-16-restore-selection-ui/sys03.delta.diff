@@ -1,0 +1,13 @@
+--- tests/sys03-altar-restore-txn.test.js (received baseline)
++++ tests/sys03-altar-restore-txn.test.js (restore UI)
+@@ -367,8 +367,8 @@
+   const { openAltarRitual } = await importAltar();
+   openAltarRitual(st.curLayer.logical[0].def);
+   await acts.altarRewardRestore();
+-  expect(document.querySelector('.pg-head h2').textContent).toContain('祭坛回赠 · 复原');
+-  expect(document.querySelector('.node-pg').classList.contains('sc-altar')).toBe(true);
++  expect(document.querySelector('.pocket-restore .battle-decision-head h3').textContent).toContain('祭坛回赠 · 复原');
++  expect(document.querySelector('.battle-decision.pocket-restore')).not.toBeNull();
+   expect(st.game.altarRewardPending).toBe(false);
+   expect(st.game.usedPocket[0].count).toBe(1);
+   acts.fireDone();

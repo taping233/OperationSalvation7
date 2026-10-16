@@ -1,0 +1,52 @@
+{
+  "createdAt": "2026-10-15T22:21:43.087000+00:00",
+  "scope": "Parent-authorized minimal lazy MessageChannel and conditional commDemo loading only",
+  "files": [
+    {
+      "path": "game/src/agent/agent.runner.js",
+      "beforeSha256": "e5b7eb06c51ccc097138bfd3c694838eafbec444e09f435e0e1bb3c5c26ffd6a",
+      "afterSha256": "92e97b832fdc6dd86f3f1a944dc905f90785fdd2abf79112ae113af4b49a0db6",
+      "beforeBytes": 32560,
+      "afterBytes": 32614
+    },
+    {
+      "path": "game/src/ui/transitions-director.js",
+      "beforeSha256": "4b3eb63e7b8c585dba29c456032e26a19cd9cb404043c397fe1961ef1d297b38",
+      "afterSha256": "32274d74704b15cacb146a0ed28e201ad4a932417bcc842601af68ba7e2b416b",
+      "beforeBytes": 5666,
+      "afterBytes": 6107
+    },
+    {
+      "path": "tests/agent-channel-pump-lazy.test.js",
+      "afterSha256": "109d0563d4fa15d4e6d7efcfcd1fcc9a68ab044682fc558493aa90c6263760f7",
+      "afterBytes": 3595
+    },
+    {
+      "path": "tests/comm-demo-lazy-entry.test.js",
+      "afterSha256": "1b052446dc8bd40a24d2c2649601c50d54825b2b63a9a7cfd20be5e2f40ad30e",
+      "afterBytes": 4675
+    }
+  ],
+  "tests": {
+    "files": 11,
+    "passed": 113,
+    "failed": 0,
+    "pending": 0,
+    "success": true
+  },
+  "lint": "passed, 4 files",
+  "syntax": "passed, 425 project files",
+  "whitespace": "passed, owned tracked source and new tests",
+  "staticJSModulesBefore": 199,
+  "staticJSModulesAfter": 198,
+  "bundleMeasurement": "Frozen R4 AST diagnostic only; no new build",
+  "notRun": [
+    "build",
+    "browser",
+    "services",
+    "full game test suite",
+    "commit",
+    "push"
+  ],
+  "docs": "passed, workflow docs --json"
+}

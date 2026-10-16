@@ -1,7 +1,7 @@
 /* Survival guide: the title/settings/credits paper and blue-gold visual family. */
 #overlay:has(.card.page .beginner-guide) { background: #1213148c; backdrop-filter: blur(10px) saturate(.8); }
 #overlay .card.page:has(.beginner-guide) {
-  width: min(1360px, 96%); height: 92%; max-width: none; max-height: none;
+  width: min(1680px, 96%); height: 92%; max-width: none; max-height: none;
   padding: 0; overflow: hidden; display: flex; flex-direction: column;
   border: 2px solid #2d3134; border-radius: 0; text-align: left;
   background: #ebeced; color: #26292c; box-shadow: 9px 9px 0 #0e0f1080;
@@ -32,7 +32,7 @@
 #overlay:has(.beginner-guide) #ovCloseX { display: none !important; }
 .beginner-guide .bg-layout {
   width: 100%; flex: 1; min-height: 0; margin: 0; padding: 24px 30px;
-  display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 28px;
+  display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 28px;
 }
 .beginner-guide .bg-nav {
   min-width: 0; display: flex; flex-direction: column; gap: 12px; padding: 0;
@@ -51,7 +51,7 @@
 .beginner-guide .bg-nav-item.is-current { color: #f1efeb; background: #2a2d30; box-shadow: inset 4px 0 #ceb66b; }
 .beginner-guide .bg-nav-number { color: #70767a; font: 12px/1 Consolas, monospace; }
 .beginner-guide .bg-nav-item.is-current .bg-nav-number { color: #f1dc96; }
-.beginner-guide .bg-nav-title { font-size: 16px; font-weight: 600; letter-spacing: .015em; }
+.beginner-guide .bg-nav-title { font-size: 20px; font-weight: 600; letter-spacing: .015em; }
 .beginner-guide .bg-nav-mark { display: none; }
 .beginner-guide .bg-page { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
 .beginner-guide .bg-page-heading { flex: none; margin: 0 0 20px; padding-bottom: 15px; border-bottom: 1px solid #b3b5b773; }
@@ -60,7 +60,7 @@
   display: block; margin: 7px 0 8px; color: #26292c; font: 700 29px/1.25 var(--font-ui);
   letter-spacing: .035em; text-shadow: none;
 }
-.beginner-guide .bg-lead { margin: 0; color: var(--bg-muted); font-size: 15px; line-height: 1.6; }
+.beginner-guide .bg-lead { margin: 0; color: var(--bg-muted); font-size: 20px; line-height: 1.6; }
 .beginner-guide .bg-content {
   min-height: 0; flex: 1; display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: 24px;
 }
@@ -73,16 +73,16 @@
 .beginner-guide .bg-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
 .beginner-guide .bg-step { display: grid; grid-template-columns: 23px minmax(0, 1fr); gap: 11px; padding: 13px 14px; border-left: 3px solid #ceb66b; background: #f3f3f3e8; box-shadow: 2px 2px 0 #2d313414; }
 .beginner-guide .bg-step-number { padding-top: 3px; color: #967d44; font: 12px/1.3 Consolas, monospace; }
-.beginner-guide .bg-step h3 { margin: 0 0 5px; color: #26292c; font-size: 17px; line-height: 1.4; font-weight: 700; }
-.beginner-guide .bg-step p { margin: 0; color: #4a4f55; font-size: 15px; line-height: 1.65; }
+.beginner-guide .bg-step h3 { margin: 0 0 5px; color: #26292c; font-size: 24px; line-height: 1.4; font-weight: 700; }
+.beginner-guide .bg-step p { margin: 0; color: #4a4f55; font-size: 22px; line-height: 1.65; }
 .beginner-guide .bg-tip { margin-top: 14px; padding: 12px 14px; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; background: #dddcd8; border: 0; }
 .beginner-guide .bg-tip-label { color: #806b3b; font-size: 13px; font-weight: 700; }
-.beginner-guide .bg-tip p { margin: 0; color: #5b533f; font-size: 14px; line-height: 1.65; }
+.beginner-guide .bg-tip p { margin: 0; color: #5b533f; font-size: 20px; line-height: 1.65; }
 .beginner-guide .bg-controls { display: flex; flex-wrap: wrap; gap: 9px 14px; margin: 13px 0 0; }
 .beginner-guide .bg-control { display: inline-flex; align-items: center; gap: 7px; color: var(--bg-muted); font-size: 12px; line-height: 1.6; }
 .beginner-guide .bg-control kbd { padding: 2px 7px; color: #f1f0ee; font: 12px/1.45 var(--font-ui); white-space: nowrap; background: #2a2d30; border: 0; border-radius: 0; box-shadow: 2px 2px 0 #a3a5a7; }
 .beginner-guide .bg-pager { flex: none; min-height: 76px; padding: 14px 30px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-top: 1px solid #b3b5b773; background: #e3e3e4; }
-.beginner-guide .bg-page-button { justify-self: start; min-width: 130px; min-height: 42px; padding: 0 16px; color: #f1f0ee; font: 600 14px/1.5 var(--font-ui); cursor: pointer; background: #2a2d30; border: 0; border-radius: 0; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); transition: background .16s ease; }
+.beginner-guide .bg-page-button { justify-self: start; min-width: 130px; min-height: 54px; padding: 0 16px; color: #f1f0ee; font: 600 20px/1.5 var(--font-ui); cursor: pointer; background: #2a2d30; border: 0; border-radius: 0; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); transition: background .16s ease; }
 .beginner-guide .bg-page-button:hover:not(:disabled) { background: #3c4045; }
 .beginner-guide .bg-page-button:disabled { opacity: .4; cursor: default; }
 .beginner-guide .bg-page-button.is-next { justify-self: end; }
@@ -93,3 +93,8 @@
 .beginner-guide :is(button, kbd):focus-visible { outline: 2px solid #848a8e; outline-offset: 3px; }
 .beginner-guide .bg-empty { margin: auto; color: var(--bg-muted); }
 @media (prefers-reduced-motion: reduce) { .beginner-guide * { transition: none; } }
+
+/* The disclosure is a single reading column, unlike the two-column tip badge. */
+.beginner-guide details.bg-tip { display: block; flex: none; }
+.beginner-guide details.bg-tip > summary { display: list-item; width: auto; min-height: 54px; padding: 10px 4px; color: #353c42; font: 600 22px/1.5 var(--font-ui); cursor: pointer; }
+.beginner-guide details.bg-tip > summary:focus-visible { outline: 2px solid #848a8e; outline-offset: 3px; }

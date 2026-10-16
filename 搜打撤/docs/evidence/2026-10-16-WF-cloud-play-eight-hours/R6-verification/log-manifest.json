@@ -1,0 +1,82 @@
+[
+  {
+    "bytes": 1337,
+    "path": "logs/asset-publication.log",
+    "sha256": "c0fd8f0a37c219656020fd8d93eb5c4714b07f71be15ac8eee3485edeab7291d"
+  },
+  {
+    "bytes": 1968,
+    "path": "logs/build-metrics.log",
+    "sha256": "5aabf45c9bcb8485db86f5cfc0cded145cfa0b2b0d23314e7735ae12146da229"
+  },
+  {
+    "bytes": 24938,
+    "path": "logs/build.log",
+    "sha256": "a1ea564edcbb32dd8b38ca2025994027cdfe6aa3b474852571eac8b03bf7d27d"
+  },
+  {
+    "bytes": 33906,
+    "path": "logs/check-runner.log",
+    "sha256": "59f21a787ed62db0fb1e88b2c12ee4af4bf3b2827c1caa59d3cacdec28c94761"
+  },
+  {
+    "bytes": 683,
+    "path": "logs/data.log",
+    "sha256": "d6db6c127ed4b79958b4c64539f647c959c6a11ee557700921683d84d09d3e7d"
+  },
+  {
+    "bytes": 754,
+    "path": "logs/dependency-tree.log",
+    "sha256": "d11cc861bffa100b34a93e5ba64a0ed1cd77bb6472e8057b40ce48da57b81cb6"
+  },
+  {
+    "bytes": 2695,
+    "path": "logs/docs.log",
+    "sha256": "0e091aad33823d8528a95fc82f5521d1a185f16ad02deb1ea5af9ddf65ed1ad3"
+  },
+  {
+    "bytes": 161,
+    "path": "logs/environment.log",
+    "sha256": "57838067ba7b78cf476ada0e0fdcb2ceaef5bc4af9fdd2bf15e1a07e90c5053e"
+  },
+  {
+    "bytes": 15154,
+    "path": "logs/focused-r6-failures.log",
+    "sha256": "190c33402677a4049f683d2498d3bd619813f20951afbc171f8c49fff6fab8b5"
+  },
+  {
+    "bytes": 690,
+    "path": "logs/index-semantics.log",
+    "sha256": "0bdcc64646435ec13b7797125458a72579ea7410bb74b96c27a123d769d115ae"
+  },
+  {
+    "bytes": 816,
+    "path": "logs/lint.log",
+    "sha256": "ab38a78126b83ceaa5a15266a2c832cad8f0241f7bf2cfd2856248ba1549aab7"
+  },
+  {
+    "bytes": 332,
+    "path": "logs/npm-environment.log",
+    "sha256": "f26a21c238dd635eb31446a25776d1bb422c8f36eee55748e7881835f36cabd7"
+  },
+  {
+    "bytes": 383,
+    "path": "logs/snapshot-copy-attempts.log",
+    "sha256": "3ecee0b8cbdf23d8200a32a7668633d5b7a5ffe64c9c913b4d05267a5072d326"
+  },
+  {
+    "bytes": 629,
+    "path": "logs/syntax.log",
+    "sha256": "e55f442f9c2034c21eb2e8d5059411ebf24944964e15d87cb854185445a58076"
+  },
+  {
+    "bytes": 201917,
+    "path": "logs/test.log",
+    "sha256": "39b68e05df12e012dd5e7a954e502593451034aadb2cad02597f13106c494aed"
+  },
+  {
+    "bytes": 2325,
+    "path": "logs/types.log",
+    "sha256": "823d80dde592a6f346486f57bcd91097ea6c78496805d8b285fde60816d89f6f"
+  }
+]

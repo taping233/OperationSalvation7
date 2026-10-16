@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "visible-playback-waits",
+  "date": "2026-10-16",
+  "owner": "Friday / improve_visible_playback_waits",
+  "goal": "为当前内置 tab 的纯可见 UI 试玩助手补充有界旅行和关闭动效等待，减少重复观察轮次",
+  "paths": [
+    "scripts/visible-playback.mjs",
+    "tests/visible-playback.test.js",
+    "docs/evidence/2026-10-16-visible-playback-waits"
+  ],
+  "doneWhen": [
+    "仅使用当前可见 DOM 与已公开 locator 条件等待，不访问隐藏状态或操作浏览器",
+    "每批所有条件等待共用至多10秒预算和8次上限，不超时重试点击",
+    "对应契约测试、ESLint和语法检查通过，真实浏览器覆盖边界明确"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    { "kind": "manual", "description": "三组定向175/175通过，最终字段微调后专测78/78通过", "result": "passed" },
+    { "kind": "manual", "description": "两文件ESLint、node语法、增量空白检查通过", "result": "passed" },
+    { "kind": "manual", "description": "父任务报告当前内置浏览器自然进入第三层节点6：1次点击，旅行等待settled，未知落点停止；本任务未采集原始浏览器证据", "result": "passed" }
+  ],
+  "unverified": [
+    "本任务未操作浏览器；新关闭动效等待路径仍未有本轮真实浏览器复验",
+    "未运行游戏全量测试或构建，未提交或推送"
+  ],
+  "updatedAt": "2026-10-15T22:41:39Z",
+  "closure": { "kind": "manual", "doneWhenConfirmed": true, "statement": "按授权工具范围完成；假tab测试不等同真实浏览器验收" }
+}

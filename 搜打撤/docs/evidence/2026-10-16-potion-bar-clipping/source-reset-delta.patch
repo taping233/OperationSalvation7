@@ -1,0 +1,12 @@
+--- a/game/css/battle-stage.css
++++ b/game/css/battle-stage.css
+@@ -173,3 +173,3 @@
+ #overlay .battle-stage.sts:has(>.bt-infuse:not(.bt-pick))>.bt-potions{display:none}
+-#overlay .battle-stage.sts>.bt-potions{position:absolute;top:140px;left:62px;z-index:13;display:flex;gap:8px;align-items:center;max-width:420px;margin:0;padding:0;background:none;border:0}
++#overlay .battle-stage.sts>.bt-potions{position:absolute;top:140px;left:62px;transform:none;z-index:13;display:flex;gap:8px;align-items:center;max-width:420px;margin:0;padding:0;background:none;border:0}
+ #overlay .battle-stage.sts .bt-potion{position:relative;display:flex;gap:6px;align-items:center;padding:8px 10px;border:1px solid #bdcbd847;background:#19303dd9;color:#d7e5ee;font-size:13px;cursor:pointer}
+@@ -177,3 +177,3 @@
+ #overlay .battle-stage.sts .bt-potions-label{font-size:12px;color:#becfda}
+-#overlay .battle-stage.sts .bt-potion-tip{position:absolute;left:0;top:100%;width:320px;padding:12px;background:#182b38f5;border:1px solid #b7c7d155;color:#e0e8ed;font-size:14px;line-height:1.5}
++#overlay .battle-stage.sts .bt-potion-tip{position:absolute;left:0;top:100%;transform:none;width:320px;padding:12px;background:#182b38f5;border:1px solid #b7c7d155;color:#e0e8ed;font-size:14px;line-height:1.5}
+ #overlay .battle-stage.sts .ic{width:1.2em;height:1.2em;object-fit:contain;vertical-align:middle}

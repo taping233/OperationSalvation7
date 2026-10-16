@@ -1,0 +1,209 @@
+{
+  "best": [
+    {
+      "minLength": 30,
+      "minCount": 8,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0
+    },
+    {
+      "minLength": 40,
+      "minCount": 5,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0
+    },
+    {
+      "minLength": 40,
+      "minCount": 8,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0
+    },
+    {
+      "minLength": 60,
+      "minCount": 3,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0
+    }
+  ],
+  "topValues": [],
+  "sourceCosts": [
+    {
+      "file": "game/css/winter.css",
+      "raw": 76342,
+      "standaloneGzip": 17664,
+      "marginalGzip": 16597
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "raw": 58463,
+      "standaloneGzip": 9978,
+      "marginalGzip": 9403
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "raw": 32125,
+      "standaloneGzip": 6560,
+      "marginalGzip": 5701
+    },
+    {
+      "file": "game/css/base.css",
+      "raw": 24196,
+      "standaloneGzip": 6489,
+      "marginalGzip": 5484
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "raw": 35404,
+      "standaloneGzip": 5728,
+      "marginalGzip": 5000
+    },
+    {
+      "file": "game/css/battle-stage.css",
+      "raw": 25406,
+      "standaloneGzip": 5235,
+      "marginalGzip": 4556
+    },
+    {
+      "file": "game/css/battle.css",
+      "raw": 20393,
+      "standaloneGzip": 5413,
+      "marginalGzip": 4383
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "raw": 22518,
+      "standaloneGzip": 4962,
+      "marginalGzip": 4274
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "raw": 23669,
+      "standaloneGzip": 4999,
+      "marginalGzip": 4107
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "raw": 31011,
+      "standaloneGzip": 4649,
+      "marginalGzip": 3725
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "raw": 22127,
+      "standaloneGzip": 4348,
+      "marginalGzip": 3679
+    },
+    {
+      "file": "game/css/expedition.css",
+      "raw": 15371,
+      "standaloneGzip": 4366,
+      "marginalGzip": 3570
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "raw": 29260,
+      "standaloneGzip": 4097,
+      "marginalGzip": 3328
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "raw": 23232,
+      "standaloneGzip": 3820,
+      "marginalGzip": 3247
+    },
+    {
+      "file": "game/css/ak-skin.css",
+      "raw": 14390,
+      "standaloneGzip": 3789,
+      "marginalGzip": 3212
+    },
+    {
+      "file": "game/css/hub.css",
+      "raw": 16749,
+      "standaloneGzip": 4240,
+      "marginalGzip": 3211
+    },
+    {
+      "file": "game/css/base-archive-facilities-v12.css",
+      "raw": 27788,
+      "standaloneGzip": 3762,
+      "marginalGzip": 3027
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "raw": 16952,
+      "standaloneGzip": 4016,
+      "marginalGzip": 3011
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "raw": 16219,
+      "standaloneGzip": 3784,
+      "marginalGzip": 2994
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "raw": 16512,
+      "standaloneGzip": 3586,
+      "marginalGzip": 2918
+    }
+  ],
+  "groupCosts": {
+    "legacyWinterSkin": {
+      "files": [
+        "game/css/ak-skin.css",
+        "game/css/winter.css"
+      ],
+      "raw": 90732,
+      "marginalGzip": 19826,
+      "warning": "Hypothetical complete removal cost, not safe or approved. Contains required live rules."
+    },
+    "legacyStructuralPages": {
+      "files": [
+        "game/css/base-camp.css",
+        "game/css/expedition-shop.css",
+        "game/css/expedition-roster.css",
+        "game/css/expedition-library.css",
+        "game/css/expedition-battle.css",
+        "game/css/expedition-rewards.css",
+        "game/css/expedition-inventory.css",
+        "game/css/expedition-hub.css",
+        "game/css/expedition.css",
+        "game/css/battle.css",
+        "game/css/hub.css"
+      ],
+      "raw": 223233,
+      "marginalGzip": 41065,
+      "warning": "Hypothetical complete removal cost, not safe or approved. Contains required live rules."
+    },
+    "baseLayers": {
+      "files": [
+        "game/css/base-archive-v3.css",
+        "game/css/base-shop-v3.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-camp-rework.css",
+        "game/css/base-camp.css"
+      ],
+      "raw": 249965,
+      "marginalGzip": 33446,
+      "warning": "Hypothetical complete removal cost, not safe or approved. Contains required live rules."
+    }
+  }
+}

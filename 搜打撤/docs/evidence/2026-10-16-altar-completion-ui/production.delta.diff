@@ -1,0 +1,68 @@
+--- game/src/core/map-node-state.js (received baseline)
++++ game/src/core/map-node-state.js (altar completion)
+@@ -6,6 +6,7 @@
+   const isDoor = game.doorKeys?.has(`${node.li},${node.idx}`) ||
+     game.layerData?.[node.li]?.doors?.some(door => door.at === node.idx);
+   if (isDoor) return false;
++  if (node.def?.type === 'altar') return !!game.altarActivated && !game.altarRewardPending;
+   if (node.def?.type === 'boss') return !!game.bossKilled;
+   return CONSUMABLE_TYPES.has(node.def?.type) && !!game.visited?.[`${node.li},${node.idx}`];
+ }
+--- game/src/core/node-info.js (received baseline)
++++ game/src/core/node-info.js (altar completion)
+@@ -12,7 +12,7 @@
+   door: ['层间闸门', '前往下一片区域', 'door', 'gold'],
+   emergencyExit: ['紧急撤离', '第三层 · 献祭 3 张卡牌离开', 'exit', 'safe'],
+   extraction: ['终局撤离', '击败首脑后带回战利品', 'exit', 'safe'],
+-  altar: ['祭坛', '选择能力 · 准备决战', 'sparkles', 'mystery'],
++  altar: ['祭坛', '献祭激活 · 选择回赠', 'sparkles', 'mystery'],
+   coin: ['金币', '拾取金币', 'coin', 'gold'],
+   key: ['钥匙', '搜集开门物资', 'key', 'gold'],
+   wood: ['木材', '收集基地升级物资', 'wood', 'warm'],
+@@ -25,6 +25,9 @@
+     game.doorKeys?.has(`${node?.li},${node?.idx}`);
+   const type = door ? 'door' : node?.def?.type;
+   const info = NODE_INFO[type] || ['已知地点', '查看当前已知区域', 'map', 'quiet'];
++  if (type === 'altar' && game.altarActivated && game.altarRewardPending) {
++    return [info[0], '已激活 · 回赠待领取', info[2], info[3]];
++  }
+   return isConsumedMapNode(game, node)
+     ? [`${info[0]} · 已完成`, '已探索 · 内容已消耗，仍可通行', info[2], 'quiet']
+     : info;
+--- game/src/run/expedition.view.js (received baseline)
++++ game/src/run/expedition.view.js (altar completion)
+@@ -149,6 +149,7 @@
+   const isCurrent = preview?.li === game.layerIdx && preview?.idx === game.trackPos;
+   const selectedDoor = selectedNode && game.layerData?.[selectedNode.li]?.doors?.some(d => d.at === selectedNode.idx);
+   const selectedSpent = isConsumedMapNode(game, selectedNode);
++  const completedLocalAltar = isCurrent && selectedSpent && selectedNode?.def?.type === 'altar';
+   const supply = game.entrySupply;
+   const selectedSupply = selectedNode && supply?.layerIdx === selectedNode.li && supply.trackPos === selectedNode.idx &&
+     (supply.taken?.length || 0) < (supply.cardIds?.length || 0);
+@@ -166,7 +167,7 @@
+   if (cam?.frameExploration && previousInset !== cam.detailInset && cam.frameMode !== 'manual') {
+     cam.frameExploration(game, cam.frameMode === 'overview');
+   }
+-  const key = JSON.stringify([game.state, preview?.li, preview?.idx, route?.name, name, hint, status, danger, lowLife]);
++  const key = JSON.stringify([game.state, preview?.li, preview?.idx, route?.name, name, hint, status, danger, lowLife, completedLocalAltar]);
+   if (strip.dataset.viewKey === key) return;
+   strip.dataset.viewKey = key;
+   strip.dataset.nodeState = moving && preview ? 'moving' : isCurrent ? 'current' : reachable ? 'reachable' : 'unreachable';
+@@ -187,5 +188,5 @@
+       ${!reachable && !isCurrent ? '<p class="expedition-preview-condition">需要先到达与此处相连的地点。</p>' : ''}
+       ${lowLife ? '<p class="expedition-preview-risk">生命偏低，建议先恢复再迎战。</p>' : ''}
+     </div>
+-    <button type="button" class="expedition-preview-enter" data-route-enter="1" ${game.state !== 'idle' || (!reachable && !isCurrent) ? 'disabled' : ''}><span>${isCurrent ? '查看本地内容' : '进入该地点'}</span><span aria-hidden="true">→</span></button>` : '';
++    <button type="button" class="expedition-preview-enter" data-route-enter="1" ${game.state !== 'idle' || (!reachable && !isCurrent) || completedLocalAltar ? 'disabled' : ''}><span>${completedLocalAltar ? '本地内容已完成' : isCurrent ? '查看本地内容' : '进入该地点'}</span><span aria-hidden="true">→</span></button>` : '';
+ }
+--- game/src/core/renderer.js (received baseline)
++++ game/src/core/renderer.js (altar completion)
+@@ -379,7 +379,7 @@
+     const g=nodeGeo(game),z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW),curLi=game.layerIdx;
+     const preview=getExpeditionPreview(game)||game.moveTarget;
+     const selectedKey=preview?mapKey(preview):'';
+-    const contentKey=`${Object.keys(game.visited||{}).length}:${game.entrySupply?.taken?.length||0}`;
++    const contentKey=`${Object.keys(game.visited||{}).length}:${game.entrySupply?.taken?.length||0}:${!!game.altarActivated}:${!!game.altarRewardPending}`;
+     let cached=mapRoadCache.get(g);
+     if(!cached||cached.zoom!==z||cached.viewW!==game.cam.viewW||cached.selectedKey!==selectedKey||cached.contentKey!==contentKey){
+       const roads=[],known=new Map(g.nodes.map(n=>[mapKey(n),n])),done=new Set();

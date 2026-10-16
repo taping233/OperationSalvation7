@@ -1,0 +1,92 @@
+[
+  {
+    "path": "game/src/battle/core/battle.core.js",
+    "before": "4ecf1c3a52bbef8436c954f49beb6fe0a5c6e3647a3684f21a43ab7a133558fa",
+    "after": "823e2c016cfcbc30ca3f0ab9118a1f9589fbc77a1ef2d4ef56675c3d95d8568f",
+    "changed": true
+  },
+  {
+    "path": "game/src/battle/core/battle.engine.js",
+    "before": "bb99d565fc4027d776e0c3e9fb7aea59cdd727400c522219f018309bc32354cd",
+    "after": "6fa832a79b3fce4ade478fb37412b618a463d20b6572fd39da4590f91f32da91",
+    "changed": true
+  },
+  {
+    "path": "game/src/battle/core/battle.exec-play.js",
+    "before": "d2996124d33ff3639be977ee83d50b61cd94123fcb7b41055a6f7761a6d7a69d",
+    "after": "e171fe0de0ca88f41fc3475df5b52ba8983f723573c57912732b4e6ff80ce013",
+    "changed": true
+  },
+  {
+    "path": "game/src/battle/effects/battle.card-inspection.js",
+    "before": "cbeac5b1c37ff495c38278e6de2fd9e85bd18326930946c5a855f86b84789ee5",
+    "after": "827848418da547f0b92f7515fcd53c318eae64550a85e808246c453d8bb702c1",
+    "changed": true
+  },
+  {
+    "path": "game/src/battle/view/battle.aim.js",
+    "before": "d6e4506f07db96f31d4b14cec43b83fa4b1d0a32c85d5473647c920564a13d8d",
+    "after": "1ec7d64bd19682e52cd6b42eb34c1b947b616c65d7e29a5127c9518df71777d8",
+    "changed": true
+  },
+  {
+    "path": "game/src/battle/view/battle.hand-inspector.js",
+    "before": "2cc41da2331c7076eb91c3f0a7d94b5078f53a30304c2bf86543d075c1a2893f",
+    "after": "4b7ad2e22a79ae26a9696348d1f8b405756229c5d55837ebcdc57e0485b5453d",
+    "changed": true
+  },
+  {
+    "path": "game/src/battle/view/battle.layers.js",
+    "before": "9196a64ce8f64e75620fffbcddf01c5fc1effaeda763551c1859841d09bfb475",
+    "after": "7041764eea55ce1e147afb10fc2e494e43ab2c493617d0cf88b6bdb185770575",
+    "changed": true
+  },
+  {
+    "path": "game/src/battle/view/battle.overlays.js",
+    "before": "bdadf35c9924bc94b95912c8b765853deb48da99db9d03ba9513d0eab2819227",
+    "after": "020855e27ebabb49af5c7c62fb7e5ebb11dde663236232133b08c74b9bb2e87e",
+    "changed": true
+  },
+  {
+    "path": "game/src/battle/view/battle.view.js",
+    "before": "5593842cd81707a09e5a9a00fff0a948ba1f328088ce4e43c69e60148c052042",
+    "after": "3aeb0ea58bdf7e714c802e451919ecaba31258ca24bf41cccebb7ef18e6fa08a",
+    "changed": true
+  },
+  {
+    "path": "game/src/ui/inventory-zoom.js",
+    "before": "c7fe495a9e827022c710318f6689f1d18ccb0540187666e9d4821bc65ba23243",
+    "after": "e27fbd02408735c630ce512a46556cee1e098b4ae1a9d32483849305f13dccb6",
+    "changed": true
+  },
+  {
+    "path": "game/src/cards/card-battle-start-explanation.js",
+    "before": null,
+    "after": "458480cf3935adb995a518a26800e2335ff2c76bbdafd77bb824bcfe3fd1ef71",
+    "changed": true
+  },
+  {
+    "path": "tests/battle-effective-card.test.js",
+    "before": null,
+    "after": "4e962e1ff768e8ebf95927b2ff59159d684716def0af06bb49562ade9c7c3bcd",
+    "changed": true
+  },
+  {
+    "path": "tests/card-battle-start-explanation.test.js",
+    "before": null,
+    "after": "3ae21c81e25e931cf3b16fb4e5b4ce7bbd526be1878ab949f0353b4fd4cbe966",
+    "changed": true
+  },
+  {
+    "path": "tests/skull-sword-effective-session.test.js",
+    "before": null,
+    "after": "3a2c169467bb96195a2d7b1daee93c43b04abb4b78dd5f748b05c29ca0e6b044",
+    "changed": true
+  },
+  {
+    "path": "tests/battle-engine-facade.test.js",
+    "before": "78baf7a2063fbcb1ba24c1fafabdd662a741d694b3aa9ea1565f46022937e44b",
+    "after": "56a3fe3a27cdeca79eee7d8d6a04dc49cb267e2fbdd97cc11230f5d56284cfc0",
+    "changed": true
+  }
+]

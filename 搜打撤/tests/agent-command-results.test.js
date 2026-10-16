@@ -12,7 +12,7 @@ const { act, step, autoRun } = await import('../game/src/agent/agent.runner.js')
 const { observe, bustSigCache, markUiFailure } = await import('../game/src/agent/agent.state.js');
 const { setTurbo } = await import('../game/src/core/turbo.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
-const { createGameMenuController } = await import('../game/src/ui/game.menu.js');
+const { createGameMenuController } = await import('./helpers/menu-controller.js');
 const action = { type: 'ui', name: 'testCommand' };
 const options = { preSettled: true, allowEmpty: true, quietMs: 1, pollMs: 1, timeoutMs: 100, commandTimeoutMs: 1000 };
 const deferred = () => {

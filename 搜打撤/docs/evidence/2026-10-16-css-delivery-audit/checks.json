@@ -1,0 +1,26 @@
+{
+  "checkedAtUtc": "2026-10-15T21:28:38.434331+00:00",
+  "scope": "read-only audit and this evidence directory only",
+  "nodeCheck": "passed",
+  "gitDiffCheck": "passed",
+  "relativeLinks": "passed",
+  "relatedInputFingerprints": {
+    "count": 98,
+    "snapshotMismatches": [
+      "game/css/battle-stage.css"
+    ],
+    "unchangedAfterFinalMeasurement": true,
+    "recommendedSuffixMatchesSnapshot": true
+  },
+  "artifactRecompressionIdentical": true,
+  "recommendedAndValidCandidateIntervalReconstructions": "exact",
+  "invalidatedCandidates": [
+    "htmlBattle",
+    "extendedAll",
+    "phase2HtmlMenuBattle"
+  ],
+  "viteBuild": "not-run",
+  "gameTests": "not-run",
+  "browserAndService": "not-run",
+  "productionSourceWrites": false
+}

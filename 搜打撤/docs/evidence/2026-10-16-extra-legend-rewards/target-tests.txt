@@ -1,0 +1,330 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤
+
+ ✓ tests/battle-settlement-retry.test.js > forwards the real battle review and boss identity to death settlement without persisting it 306ms
+ ✓ tests/battle-settlement-retry.test.js > 真实战斗奖励刷新续流 > 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=false） 474ms
+ ✓ tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 未领取宝箱不自动开箱，旧领取动作不能跨局发起开箱 537ms
+stderr | tests/battle-settlement-retry.test.js > 真实战斗奖励刷新续流 > 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=true）
+[battle:settle] 战后结算未完成 Error: restored reward retry
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:394:14)
+
+ ✓ tests/battle-settlement-retry.test.js > 真实战斗奖励刷新续流 > 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=true） 222ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 巨兽额外传说奖励使用规则概率且只消费原有loot骰 58ms
+stderr | tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 过场失败后重试，不再次消耗已转入口袋的牌
+[battle:settle] 战后结算未完成 Error: transition failed
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:256:44
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 展示结算按真实移动采样，失败重试不重复，展示字段不进入持久attempt
+[battle:settle] 战后结算未完成 Error: transition failed
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:281:44
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 领取宝箱双击只启动一次，未领奖前不发卡或金币 254ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 巨兽概率边界使用严格小于比较，恰等阈值时不发额外卡 59ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 过场失败后重试，不再次消耗已转入口袋的牌 27ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 展示结算按真实移动采样，失败重试不重复，展示字段不进入持久attempt 29ms
+stderr | tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 重复通知与事务失败重试复用固定attempt，不重复发奖励、重开宝箱或增计数
+[battle:settle] 战后结算未完成 Error: write failed
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:394:14)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:315:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 搜索等待期间run-token变化后旧揭晓不能覆盖新局 97ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 重复通知与事务失败重试复用固定attempt，不重复发奖励、重开宝箱或增计数 91ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 允许同一局背包整理替换ownedCards数组后继续提交 41ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 新节点已存在收据时在奖励与过场前停止，不投影旧结果 18ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 读取收据等待期间锁住战斗操作，切档后旧失败不弹新局重试面板 52ms
+ ✓ tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 搜索等待期间location变化后旧揭晓不能覆盖新局 170ms
+stderr | tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 教学保存仅在事务成功后执行，失败重试不重复奖励
+[battle:settle] 战后结算未完成 Error: write failed
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.afterRewards [as chestDone] (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:394:14)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:428:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 提交等待期间同槽开启新局后，旧失败不改变新局状态或显示重试面板 61ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 无档位胜利保留内存行为，撤退仍走普通保存且不创建胜利事务 16ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 教学保存仅在事务成功后执行，失败重试不重复奖励 46ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 死亡与龙巢战斗仍绕过普通战后事务 21ms
+ ✓ tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 搜索等待期间slot变化后旧揭晓不能覆盖新局 75ms
+ ✓ tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 已揭晓奖励run-token变化后旧领取不能发奖或写盘 98ms
+ ✓ tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 已揭晓奖励location变化后旧领取不能发奖或写盘 57ms
+ ✓ tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 已揭晓奖励slot变化后旧领取不能发奖或写盘 73ms
+ ✓ tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 已揭晓奖励new-page变化后旧领取不能发奖或写盘 77ms
+ ✓ tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 背包合法挂起/恢复不重抽，旧页动作失效且现页逐张领取只发一次 141ms
+ ✓ tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 新局不再视旧箱为可恢复，resume不会把旧奖励盖回新页 45ms
+stderr | tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 持续失败保留错误层，成功立即关闭自有层并解绑回调且不重复奖励
+[battle:settle] 战后结算未完成 Error: pending
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.afterRewards [as chestDone] (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:394:14)
+    at finishChestRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:125:18)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:473:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 持续失败保留错误层，成功立即关闭自有层并解绑回调且不重复奖励
+[battle:settle] 战后结算未完成 Error: pending
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+ ✓ tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 持续失败保留错误层，成功立即关闭自有层并解绑回调且不重复奖励 485ms
+ ✓ tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 领取后普通保存失败仍保留当前已领取事实，重试保存不重复发奖 48ms
+stderr | tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 首次成功教学不被重试层的210ms关闭尾巴清除
+[battle:settle] 战后结算未完成 Error: pending
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.afterRewards [as chestDone] (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:394:14)
+    at finishChestRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:125:18)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:495:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 会话内核不能重新接入 DOM 或浏览器适配器 18ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地模型与规则配置不得反向读取存储、门面或全局浏览器 3ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 识别静态导入、重导出、动态字面量与嵌套目录，不误判注释 8ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 能定位经动态导入与重导出形成的环 2ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 无法分析的动态路径与缺失源码不能悄悄略过 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 数据和 npm 导入不伪装成项目 JS 模块 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 允许既有状态装配模块读取 runtime，禁止视图旁路 4ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 纯模块不能借全局门面或反向 import 访问运行时，说明文字不误报 4ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 选牌域必须通过装配端口访问服务，不能重新读取浏览器门面 2ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 选牌域不能重新静态导入带 UI 等待的整段播放模块 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 纯模块不能反向依赖流程域目录（hub/run） 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > M 批命令适配器仅供 resolver 装配，视图和快照仍不可调用 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 独立领域模块不能通过视图切片接入界面 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 照相馆页面仅允许轻门面动态加载（hub/game.cardslib.js, import './game.cardslib.page.js';） 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 照相馆页面仅允许轻门面动态加载（hub/game.cardslib.js, export { open } from './game.cardslib.page.js';） 6ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 照相馆页面仅允许轻门面动态加载（hub/game.hub.js, import('./game.cardslib.page.js');） 3ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地实现只允许基地门面动态加载（hub/game.hub.js） 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地实现只允许基地门面动态加载（hub/game.hub.js） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地实现只允许基地门面动态加载（game.boot.js） 0ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 基地轻门面的动态入口合法 1ms
+ ✓ tests/architecture-boundaries.test.js > AST 架构检查的识别与负面场景 > 照相馆轻门面的动态入口合法 4ms
+ ✓ tests/architecture-boundaries.test.js > 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向 1578ms
+ ✓ tests/architecture-boundaries.test.js > 当前源码的架构边界 > 守卫判据键自检：每个键必须命中真实文件，杜绝规则死、测试绿 1ms
+ ✓ tests/architecture-boundaries.test.js > 当前源码的架构边界 > 自检本身能红：文件改名（或删除）会让对应判据键被判死 1ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 恢复日志写入前失败保持原始双存档不变 1740ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 15/16格收本体后附赠固定在原快照；满包失败不变，腾位返回后可单独领一次 101ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 普通JSON/真实RunStorage重载保留已掷附赠，卡库换池不重掷且本体不重发 30ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 附赠同名堆有2张：按真实3张叠放上限处理，不要求两空格 15ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 附赠同名堆有3张：按真实3张叠放上限处理，不要求两空格 17ms
+ ✓ tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 首次成功教学不被重试层的210ms关闭尾巴清除 279ms
+stderr | tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 异步成功不误关替代层（own-callback）
+[battle:settle] 战后结算未完成 Error: pending
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.afterRewards [as chestDone] (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:394:14)
+    at finishChestRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:125:18)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:509:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 异步成功不误关替代层（replacement-callback）
+[battle:settle] 战后结算未完成 Error: pending
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.afterRewards [as chestDone] (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:394:14)
+    at finishChestRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:125:18)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:509:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 三选一只永久放弃原候选，附赠独立待领且取后快照仍通过校验 67ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 浅池旧三选一只有1候选时，附赠不被误认为第二个候选 27ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 批量收下追加附赠，第二次才处理追加卡；不重复本体或消耗随机流 17ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 完全满包本体不发、不抽附赠；腾位后只抽一次 15ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 主存档setItem失败遵守检查点契约：内存本体/附赠/taken一起推进，重试完整落盘 29ms
+stderr | tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 异步成功不误关替代层（new-run）
+[battle:settle] 战后结算未完成 Error: pending
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.afterRewards [as chestDone] (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:394:14)
+    at finishChestRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:125:18)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:509:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 成功领取附赠但存储失败时，内存不重领，恢复存储后可完整保存 18ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 附赠事件卡只追加/领取一次，池仅有阿猫时不递归也不制造附赠 20ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 明确确认放弃才会丢弃附赠，不能通过继续动作隐式吞奖 18ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 不提供延后端口的旧非宝箱调用保持原可容纳时即时附赠行为 3ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 候选1张且choiceCount=-1拒绝异常快照，不修改输入 2ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 候选1张且choiceCount=0拒绝异常快照，不修改输入 1ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 候选1张且choiceCount=1.5拒绝异常快照，不修改输入 2ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 候选1张且choiceCount=2拒绝异常快照，不修改输入 2ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 候选1张且choiceCount="1"拒绝异常快照，不修改输入 2ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 候选1张且choiceCount=null拒绝异常快照，不修改输入 2ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 缺choiceCount旧快照原样恢复；合法边界不丢候选 10ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 满16格保留确定传说，刷新/整理/已领刷新不重掷，首胜教学最后出现（boss=true） 3017ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > pair在 after-journal 中断后，同原始storage重建会恢复一致后态并重放收据 356ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > pair在 after-base 中断后，同原始storage重建会恢复一致后态并重放收据 635ms
+ ✓ tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 异步成功不误关替代层（own-callback） 27ms
+ ✓ tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 异步成功不误关替代层（replacement-callback） 23ms
+ ✓ tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 异步成功不误关替代层（new-run） 27ms
+ ✓ tests/battle-settlement-retry.test.js > 真实 session 的战后保存入口 > payload构造不写盘，pending事务阻断普通saveGame直到清除 944ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 满16格保留确定传说，刷新/整理/已领刷新不重掷，首胜教学最后出现（boss=false） 921ms
+ ✓ tests/chest-multi-queue-regression.test.js > multi-chest leave and take actions advance exactly once per box 214ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > 关键玩法数值保持冻结且与现行规则一致 7ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > 效果文本按立即、回合开始、整场和被注能时分类 1ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > 限定技能句独立成桶（装备打出只穿戴，技能由按钮发动） 2ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > 效果执行器只通过端口修改战斗状态 27ms
+ ✓ tests/contracts.test.js > 规则与接口契约 > GameStore 提供稳定的可读快照，且不暴露可变集合 3ms
+ ✓ tests/contracts.test.js > 旧对局存档迁移 > v1 迁入空的档位 1，并保留已有 v2 数据 6ms
+ ✓ tests/contracts.test.js > ESM 依赖方向 > src 模块不存在循环依赖 2512ms
+ ✓ tests/contracts.test.js > ESM 依赖方向 > game.session 不反向导入页面功能模块 1ms
+ ✓ tests/contracts.test.js > ESM 依赖方向 > battle.core 不访问 DOM 或反向导入战斗视图 1ms
+ ✓ tests/contracts.test.js > 架构守护（2026-09-11 批次 1） > window.SDT 只允许在 sdt-facade.js 初始化 33ms
+ ✓ tests/contracts.test.js > 架构守护（2026-09-11 批次 1） > 核心机制层不访问 DOM 3ms
+ ✓ tests/contracts.test.js > 架构守护（2026-09-11 批次 1） > 数据模块 cards.js 不生成 HTML（卡面渲染已外迁 cards.view.js） 1ms
+ ✓ tests/contracts.test.js > 架构守护（2026-09-11 批次 1） > 实机卡库批次数据外置到 game/data/cards-sync.json（批次 6） 2ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > 桌面开发态只加载 Vite 构建产物，不直接加载含裸模块导入的源码 1ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > 首页监听在 DOMContentLoaded 的易失败初始化链之前绑定 0ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > 双击启动器会先刷新构建产物，避免桌面端长期运行旧前端 0ms
+ ✓ tests/contracts.test.js > Electron 启动契约 > main.js 副作用导入顺序与 boot-order.js 的 BOOT_ORDER 逐项一致（批次 5） 1ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 普通箱已领取后刷新，保留普通奖励并只在接续后掷一次首脑额外传说 426ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > pair在 after-run 中断后，同原始storage重建会恢复一致后态并重放收据 702ms
+ ✓ tests/four-player-chest-reload.test.js > G03 揭晓宝箱持久化 > 揭晓未领、部分领取、收金币的快照可复原，进度不重置 11ms
+ ✓ tests/four-player-chest-reload.test.js > G03 揭晓宝箱持久化 > 恢复真实开箱控制器沿用已展示奖励，不重抽或重复领取 184ms
+ ✓ tests/chest-click-flow.test.js > 宝箱点击链路 > 放大阅读可安全关闭，从独立或特写按钮领取后原位保留（特写领取=true） 212ms
+ ✓ tests/chest-click-flow.test.js > 宝箱点击链路 > 放大阅读可安全关闭，从独立或特写按钮领取后原位保留（特写领取=false） 99ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 非首脑/巨兽未命中不误发额外卡：{"isBoss":false,"foeNames":["普通敌人"]} 211ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 非首脑/巨兽未命中不误发额外卡：{"isBoss":false,"foeNames":["荒渊巨兽"]} 256ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > pair在 before-cleanup 中断后，同原始storage重建会恢复一致后态并重放收据 451ms
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 真实loadGame在主卡未领和附赠待领两阶段均优先恢复chest，不重付或重领
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 主卡选择锁定与待领快照同份保存；旧关闭不覆盖新页，实际主卡/附赠分别领取 273ms
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 完全满包也只锁定主卡待领，不实际发本体或附赠；整理后才发
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 传说空池不抛错、不丢已领普通奖励，也不多消耗选卡骰 172ms
+stderr | tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 固定领奖接收器reject后可重试，仍只发原传说
+[battle:settle] 战后结算未完成 Error: 额外传说奖励尚未进入待领奖快照
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:389:24)
+    at next (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/run/chests.js:306:15)
+    at Object.chestContinue (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/run/chests.js:544:27)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/extra-legend-reward-persistence.test.js:232:19
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器missing时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 真实loadGame在主卡未领和附赠待领两阶段均优先恢复chest，不重付或重领 105ms
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 完全满包也只锁定主卡待领，不实际发本体或附赠；整理后才发 75ms
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器missing-serialize时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器false时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器throw-before时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器missing时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留 33ms
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器missing-serialize时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留 36ms
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器false时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留 39ms
+ ✓ tests/nightshift-u10-settle-transition.test.js > U10 M1 settle 过场非当前后续流静默终止 > 撤退过场 resolve(false) 后：不打「你撤出了战斗」日志、不续结算 24ms
+ ✓ tests/nightshift-u10-settle-transition.test.js > U10 M1 settle 过场非当前后续流静默终止 > 回归锚：撤退过场 resolve(true)（正常路径）行为零变化——照常打日志、照常续结算 10ms
+ ✓ tests/nightshift-u10-settle-transition.test.js > U10 M1 settle 过场非当前后续流静默终止 > 原战场胜利反馈 resolve(false) 后：不打胜利日志、不续结算 14ms
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接已建立并保存后才抛异常时保留已锁选择与待领，不回滚成可重选
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 固定领奖接收器throw-after-adoption后可重试，仍只发原传说
+[battle:settle] 战后结算未完成 Error: test after adoption
+    at Object.<anonymous> (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/extra-legend-reward-persistence.test.js:230:13)
+    at Object.mockCall (file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.restore (file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:373:31)
+    at next (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/run/chests.js:306:15)
+    at Object.<anonymous> (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/run/chests.js:544:27)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/extra-legend-reward-persistence.test.js:232:19
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 胜利统计与多级XP在 after-journal 恢复后只提交一次 339ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 固定领奖接收器reject后可重试，仍只发原传说 211ms
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[1]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[1]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口
+[save] RunStorage.write 失败：对局进度未落盘（配额满或存储不可用）
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[2]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[2]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口
+[save] RunStorage.write 失败：对局进度未落盘（配额满或存储不可用）
+
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器throw-before时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留 34ms
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接已建立并保存后才抛异常时保留已锁选择与待领，不回滚成可重选 33ms
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[1]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口 40ms
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[1,2]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 固定领奖接收器throw-after-adoption后可重试，仍只发原传说 140ms
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[1,2]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口
+[save] RunStorage.write 失败：对局进度未落盘（配额满或存储不可用）
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 普通非阿猫选择保持原即时发卡/关闭/保存，不依赖固定领奖端口
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 额外传说初次落盘失败时停在可重试阶段，恢复写入仍是原卡原骰
+[battle:settle] 战后结算未完成 Error: 额外传说待领奖快照未保存
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:381:26)
+    at next (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/run/chests.js:306:15)
+    at Object.<anonymous> (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/run/chests.js:544:27)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/extra-legend-reward-persistence.test.js:255:19
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 整理返回同候选、交接后旧背包回调不覆盖固定领奖页，完成重进无新付款
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[2]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口 45ms
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[1,2]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口 40ms
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 普通非阿猫选择保持原即时发卡/关闭/保存，不依赖固定领奖端口 20ms
+ ✓ tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 整理返回同候选、交接后旧背包回调不覆盖固定领奖页，完成重进无新付款 40ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 胜利统计与多级XP在 after-base 恢复后只提交一次 203ms
+ ✓ tests/pet-egg-chest.test.js > 宝箱宠物蛋结算 > 空宝箱命中但蛋目录缺失时累加 pity，仍只消耗原随机序列 5ms
+ ✓ tests/pet-egg-chest.test.js > 宝箱宠物蛋结算 > 蛋已作为普通候选出现时不重复加入，仍记录为未实际出蛋 1ms
+ ✓ tests/pet-egg-chest.test.js > 宝箱宠物蛋结算 > 只有实际加入蛋才向 Base 报告成功 2ms
+ ✓ tests/pet-egg-chest.test.js > 宝箱宠物蛋结算 > 职业宝箱奖励也推进同一保底计数 2ms
+ ✓ tests/pet-egg-chest.test.js > 宝箱宠物蛋结算 > large 第 150 次奖励同时保留宠物蛋和史诗稀有度保底 2ms
+ ✓ tests/pet-egg-chest.test.js > 宝箱宠物蛋结算 > boss 第 150 次奖励同时保留宠物蛋和史诗稀有度保底 1ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 额外传说初次落盘失败时停在可重试阶段，恢复写入仍是原卡原骰 170ms
+stderr | tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 确定传说领取后真实Run写失败，原attempt恢复重试不重掷、不重复发卡
+[battle:settle] 战后结算未完成 Error: 提交已开始，刷新后继续恢复
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:394:14)
+
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 确定传说领取后真实Run写失败，原attempt恢复重试不重掷、不重复发卡 167ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 胜利统计与多级XP在 after-run 恢复后只提交一次 233ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 胜利统计与多级XP在 before-cleanup 恢复后只提交一次 172ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 真实journal cleanup删除失败后重建恢复且不重复增加永久计数 142ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 成功后同步Base内存与两种写入baseline，重复receipt不产生新写入 76ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 同requestId但节点业务payload不同会冲突；坏日志保留双存档现场 128ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 遇到日志之外的第三值时阻断恢复并保留基地、对局与日志 129ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 陈旧run/base revision、切档和同槽新run都会拒绝attempt 157ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > Web Locks不可用时拒绝且不更改存档 52ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 等待recover期间修改原node/afterRun不改变首次捕获的attempt 55ms
+stderr | tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 真实battle settle在journal待恢复时允许同attempt重试，不重复投奖励
+[battle:settle] 战后结算未完成 Error: 提交已开始，刷新后继续恢复
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:394:14)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-recovery.test.js:412:12
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 真实battle settle在journal待恢复时允许同attempt重试，不重复投奖励 152ms
+
+ Test Files  13 passed (13)
+      Tests  148 passed (148)
+   Start at  07:19:23
+   Duration  10.49s (transform 5.50s, setup 0ms, collect 10.13s, tests 24.17s, environment 21.65s, prepare 5.32s)
+

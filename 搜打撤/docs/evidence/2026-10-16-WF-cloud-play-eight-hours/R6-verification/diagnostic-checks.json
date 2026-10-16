@@ -1,0 +1,16 @@
+{
+  "command": [
+    "node_modules/.bin/vitest",
+    "run",
+    "tests/acceptance-gate.test.js",
+    "tests/sys03-loot-shop-txn.test.js",
+    "--reporter=verbose"
+  ],
+  "cwd": "/workspace/shared/cloud-iteration-verification-r6-20261016/snapshot/\u641c\u6253\u64a4",
+  "startedAt": "2026-10-15T23:27:19.789972+00:00",
+  "endedAt": "2026-10-15T23:27:34.559788+00:00",
+  "exitCode": 1,
+  "durationSeconds": 14.77,
+  "log": "logs/focused-r6-failures.log",
+  "purpose": "Read-only reproduction after original ordinary full-test failure; original 20s timeout unchanged; this does not replace full result"
+}

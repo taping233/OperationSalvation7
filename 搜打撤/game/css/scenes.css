@@ -124,22 +124,6 @@
   .bt-pilecard.down { transform: rotate(-8deg); opacity: .9; }
 
   /* ============ 基地成就页 · 卡背图鉴 ============ */
-  .back-grid { display: flex; flex-wrap: wrap; gap: 12px; }
-  .back-card { width: 106px; display: flex; flex-direction: column; align-items: center; gap: 6px;
-    padding: 12px 8px 10px; border-radius:0; border: 1.5px solid #343434; color: inherit;
-    background: #1d1d1d; cursor: pointer; transition: all .15s; font-family: inherit; }
-  .back-card:hover { border-color: #595959; transform: translateY(-2px); }
-  .back-card.on { border-color: #a1a1a1; background: linear-gradient(180deg, #2d2d2d, #1c1c1c);
-    box-shadow: 0 0 12px rgba(161,161,161,.25); }
-  .back-card.locked { opacity: .68; }
-  .back-card b { font-size: 12.5px; color: #e4e4e4; }
-  .back-card .dim { font-size: 10px; }
-  .back-thumb { position: relative; width: 58px; height: 80px; }
-  .back-thumb .hs-back { border-radius:0; }
-  .back-thumb .hsb-emblem { font-size: 22px; }
-  .back-card.locked .back-thumb::after { content: 'LOCK'; position: absolute; inset: 0; z-index: 5;
-    display: flex; align-items: center; justify-content: center; font-size: 19px;
-    background: rgba(7,7,7,.5); border-radius:0; }
 
   /* ============ v0.22 拾获场景的大字结算 ============ */
   .scene-gain { position: relative; margin: 10px 0 2px; display: inline-flex; align-items: center; gap: 10px;
@@ -332,13 +316,6 @@
     70% { transform: rotate(1.5deg) translateY(-1px); }
     86% { transform: rotate(0deg) translateY(0); }
   }
-  .chest-reveal { position:relative; isolation:isolate; display:flex; justify-content:center; margin:2px 0 0; }
-  .chest-reveal .chest-prop { width:clamp(170px,calc(var(--game-layout-width, 100vw) * 0.2),230px);
-    animation: chestOpenPop .62s cubic-bezier(.2,1.4,.4,1) backwards; }
-  .chest-reveal::before { content:''; position:absolute; left:50%; bottom:6%; transform:translateX(-50%);
-    width:72%; height:58%; border-radius:50%; pointer-events:none; z-index:-1;
-    background:radial-gradient(ellipse at center, rgba(255,224,120,.42), rgba(255,224,120,0) 70%);
-    filter:blur(6px); animation: chestGlowPulse 1.9s ease-in-out .55s infinite backwards; }
   @keyframes chestOpenPop {
     0% { transform: scale(.6) translateY(12px); opacity:.4; }
     55% { transform: scale(1.07) translateY(-3px); opacity:1; }
@@ -395,14 +372,6 @@
   .shop-board .shop-empty { border-color: rgba(229,230,230,.35); color: rgba(235,236,237,.55);
     background: rgba(20,22,24,.22); }
   /* 价签：金币 + 数字挂在卡牌正下方，点价签即买 */
-  .shop-price { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px;
-    font-family: var(--cal); font-size: 15px; font-weight: 700; letter-spacing: 1px; color: #33270a;
-    background: linear-gradient(180deg, #ffe387, #eec43c); border: 1px solid #e1dfd7; border-radius: 999px;
-    box-shadow: 0 4px 12px rgba(11,12,13,.45), inset 0 1px 0 rgba(255,255,255,.55);
-    cursor: pointer; transition: transform .13s ease, filter .13s ease; }
-  .shop-price .ic { width: 17px; height: 17px; }
-  .shop-price:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.06); }
-  .shop-price:disabled { opacity: .45; filter: grayscale(.5); cursor: default; }
   .shop-slotnote { font-size: 11px; letter-spacing: 1px; color: rgba(237,238,239,.75);
     text-shadow: 0 1px 6px rgba(0,0,0,.5); }
   /* 卖牌处：货板右下的鎏金圆牌（对齐参考图右下角服务位），点进收购台二级界面 */

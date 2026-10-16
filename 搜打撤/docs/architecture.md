@@ -30,7 +30,7 @@
 
 - `game.store.js`：创建可变会话状态，并通过 `getSnapshot()` 暴露不可变快照。
 - `game.storage.js`：五槽对局存档键、读写和 v1 迁移。
-- `game.session.js`：会话派生数据与对局生命周期，拆为 `game.session.kernel/modes/bag/map/board/death.js` 六片；`game.menu.js` 负责标题、选档、离开和设置页面。
+- `game.session.js`：会话派生数据与对局生命周期，拆为 `game.session.kernel/modes/bag/map/board/death.js` 六片；`game.menu.js` 保留同步标题/退出与轻量菜单入口，非首屏选档、指南、成就、设置、反馈和离开面板由 `game.menu.pages.js` 首次请求时加载；页工厂注入会话能力和标题回调，不反向导入会话模块。冷入口提供可见载入层、取消/重试与最后请求优先，已载入的页工厂复用并保持热入口同步。
 - `game.cardslib.js`：卡牌库轻门面；首次进入照相馆或制作坊时动态加载 `game.cardslib.page.js`。页面及其制作坊、照片道具、性能探针、图片预热和共享模块保持在门面之后，避免静态依赖回到首屏；制作坊写开关保持关闭。`ui/ui.js` 组合 `overlay.js`、`cinematics.js`、`hud.js`。
 - `game.hub.preparation.js`：基地整备控制器，通过数据、视图、导航和错误处理端口装配 `preparation.commands.js` / `preparation.view.js`；不读取 `SDT`、`UI`、`document` 或 `window`。页面 dispose 会阻止过期异步返回继续更新 UI。
 - `game.run.data.js`：场景、事件与职业叙事授权数据；`game.run.shop.js`：商店进货、购买和出售；`game.run.js`：移动、格子、事件、祭坛与撤离流程。

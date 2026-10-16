@@ -1,0 +1,129 @@
+{
+  "task": "WF-cloud-battle-card-effects-1016",
+  "state": "complete-uncommitted",
+  "editor": "audit_battle_card_effects",
+  "baseCommit": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "scope": [
+    "game/src/battle/effects/battle.target-rules.js",
+    "game/src/battle/bag/battle.equipment.js",
+    "tests/battle-imitate-unplayable.test.js",
+    "tests/battle-equipment-skill-synthesis.test.js"
+  ],
+  "findings": [
+    {
+      "cardId": "tt2-treasuremap",
+      "classification": "confirmed defect",
+      "rootCause": "Equipment skill ops acquire + draw(amountField) are valid in equip.skill, but the old unchanged onPlay synthesis violates the field-anchored effect / v2 mixture restriction. The old path marked used before validation, so neither insertion nor draw occurred and the once-per-battle charge was lost.",
+      "beforeExperiment": {
+        "runner": "isolated JSDOM BattleSession, temporary test outside repository",
+        "cases": 2,
+        "failed": 2,
+        "error": "Invalid card rules: tt2-treasuremap rules.triggers.onPlay: field-anchored heal/armor/draw cannot be combined with v2 operations"
+      },
+      "fix": "Validate original equipment, materialize heal/armor/draw amountField from current card fields into literal amount only in synthesized onPlay, preflight synthesized card, and mark used only after successful staged execution. Log a retained-use failure message on non-cancellation errors.",
+      "preserved": "Insert one box, shuffle, draw one card; one successful skill per battle; normal-battle deck-only restriction unchanged.",
+      "stackExperiment": {
+        "seed": 2,
+        "before": [
+          "初始攻击",
+          "银河之旅"
+        ],
+        "after": [
+          "初始攻击",
+          "银河之旅",
+          "初始攻击"
+        ],
+        "handSizeBefore": 2,
+        "handSizeAfter": 3,
+        "visibleGroupsBefore": 2,
+        "visibleGroupsAfter": 2,
+        "starterAttackStackSize": 2,
+        "boxRemainsInDrawPile": true
+      }
+    },
+    {
+      "cardId": "tt7-imitate",
+      "classification": "confirmed empty-play usability defect; late-draw transformation is not newly specified",
+      "rootCause": "Only martial cards played while imitate is already in hand trigger applyImitate. A late-drawn raw imitate remains untransformed; the old shared legality checker did not prohibit spending its energy and discarding it without an onPlay effect.",
+      "beforeRegression": {
+        "tests": 8,
+        "failed": 4,
+        "passed": 4
+      },
+      "fix": "Reuse unplayableReasonFor for raw tt7-imitate / hosted:imitate identity, returning the short reason 先打出一张武术牌，使本牌变形. Existing preview and hand-disabled paths consume the same shared result.",
+      "preserved": "No retroactive transformation on draw; while-in-hand re-transformation on each newly played martial card; transformed copies cost one and execute the copied effect; original owned card unchanged; full description unchanged."
+    }
+  ],
+  "canonicalStructuredSkillsAudit": {
+    "cards": [
+      "tt2-treasuremap",
+      "tt3-holy-staff",
+      "tt3-light-mail",
+      "tt12-raygun"
+    ],
+    "oldSynthesisInvalid": [
+      "tt2-treasuremap"
+    ],
+    "fixedSynthesisAllValid": true,
+    "canonicalDataUnchanged": true
+  },
+  "verification": {
+    "vitest": {
+      "passed": true,
+      "files": 10,
+      "testsPassed": 162,
+      "failed": 0,
+      "paths": [
+        "tests/battle-equipment-skill-synthesis.test.js",
+        "tests/battle-imitate-unplayable.test.js",
+        "tests/m-batch-behavior.test.js",
+        "tests/m7-battle.test.js",
+        "tests/m7-data.test.js",
+        "tests/m2-contract.test.js",
+        "tests/battle-pure-rules.test.js",
+        "tests/contracts.test.js",
+        "tests/architecture-boundaries.test.js",
+        "tests/battle-hand-inspector.test.js"
+      ]
+    },
+    "newRegressions": {
+      "imitate": 8,
+      "equipment": 7,
+      "allPassed": true
+    },
+    "syntax": {
+      "passed": true,
+      "projectFiles": 422
+    },
+    "typecheck": {
+      "passed": true,
+      "configs": 8
+    },
+    "lint": {
+      "passed": true,
+      "paths": [
+        "game/src/battle/effects/battle.target-rules.js",
+        "game/src/battle/bag/battle.equipment.js",
+        "tests/battle-imitate-unplayable.test.js",
+        "tests/battle-equipment-skill-synthesis.test.js"
+      ]
+    },
+    "gitDiffCheck": {
+      "passed": true,
+      "trackedSourcePaths": [
+        "game/src/battle/effects/battle.target-rules.js",
+        "game/src/battle/bag/battle.equipment.js"
+      ]
+    },
+    "executionFailureCoverage": "Invalid original rule rejected before running effects; injected staged-runner error retains used=false, permits retry, and marks used=true only after success. This verifies the charge state, not a general rollback transaction for effects that already occurred.",
+    "browser": "Not run by this worker. Parent owns current built-in browser and natural gameplay follow-up.",
+    "build": "Not run. Parent owns unified build.",
+    "otherOperations": "No browser, service, persisted save, probability, migration, canonical card data, git index, commit or push changes."
+  },
+  "sha256": {
+    "game/src/battle/effects/battle.target-rules.js": "a0dde95fcb5e3f1d2ce00d81e876edcd196262724ecb88f7b2e21a570fe6eb65",
+    "game/src/battle/bag/battle.equipment.js": "951a35573bfdb90aeca13df9943aea281b8e186af58480b9626a11840ee559b8",
+    "tests/battle-imitate-unplayable.test.js": "08c68068bf1877d9e941d3e1baf911e9ce428d18db29a7772096904f0690c7e6",
+    "tests/battle-equipment-skill-synthesis.test.js": "c0945dfadbfeb76a651e2b9b8bfd7108b068556a5504b03e0701bc77ab375d35"
+  }
+}

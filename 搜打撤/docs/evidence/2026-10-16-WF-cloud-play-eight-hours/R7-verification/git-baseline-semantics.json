@@ -1,0 +1,44 @@
+{
+  "bothStagedDiffsEmpty": true,
+  "diagnosis": "Only raw index ancillary/stat-cache bytes changed; HEAD/tree/staged index semantics are unchanged",
+  "headUnchanged": true,
+  "indexEntrySemanticsUnchanged": true,
+  "metadataFilesChangedSinceR6": [
+    {
+      "path": "index",
+      "r6": {
+        "bytes": 1947699,
+        "mode": 420,
+        "path": "index",
+        "sha256": "48df6e687b7813f8cf90577c84d0f26a4590657bd871c7d425fc0e10660fa570"
+      },
+      "r7": {
+        "bytes": 1947699,
+        "mode": 420,
+        "path": "index",
+        "sha256": "c7492e2cccabc51cbc7fc004c9948a60b4181e3b3133f8d16c51f455c9ff809b"
+      }
+    }
+  ],
+  "treeUnchanged": true,
+  "versions": [
+    {
+      "head": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+      "indexEntryCount": 13377,
+      "initialIndexEntrySemanticsSha256": "13e8908944a91adfe96cb270c8bf608eec8f7d7dd206f99066ab7fe6ac3929c2",
+      "initialIndexRawSha256": "48df6e687b7813f8cf90577c84d0f26a4590657bd871c7d425fc0e10660fa570",
+      "name": "r6",
+      "stagedDiffEmpty": true,
+      "tree": "869f3477c070304d5e6a96cfba395c42ab143e80"
+    },
+    {
+      "head": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+      "indexEntryCount": 13377,
+      "initialIndexEntrySemanticsSha256": "13e8908944a91adfe96cb270c8bf608eec8f7d7dd206f99066ab7fe6ac3929c2",
+      "initialIndexRawSha256": "c7492e2cccabc51cbc7fc004c9948a60b4181e3b3133f8d16c51f455c9ff809b",
+      "name": "r7",
+      "stagedDiffEmpty": true,
+      "tree": "869f3477c070304d5e6a96cfba395c42ab143e80"
+    }
+  ]
+}

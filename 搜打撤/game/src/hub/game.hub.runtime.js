@@ -44,6 +44,7 @@ const disposePreparation = () => preparationFeature?.dispose();
 
 // 基地当前页签（原为隐式全局，ESM 严格模式下必须显式声明）
 let hubTab = 'deploy';
+const hubRoomTitles = Object.freeze({ deploy:'基地', classes:'配置', stash:'后勤', shop:'交易所', ach:'收藏室', upgrade:'建设', courtyard:'庭院' });
 let hubRenderRevision = 0;
 let hubCollectionView = 'cards';
 let achievementReturn = 'rewards';
@@ -149,7 +150,7 @@ preparationFeature = createHubPreparationAdapter({
       <div class="pg hub hub-${hubTab} base-camp base-frame-v7 ${hubTab === 'deploy' ? 'base-home' : 'base-subpage'}" id="hubMain" data-page="${hubTab}" data-base-layout="open-menu">
        <header class="hub-head hub-head-min">
           ${linkedBackHTML(back?.action || (hubTab === 'deploy' ? 'closeBase' : 'hubHome'), back?.label || (hubTab === 'deploy' ? '返回选档' : '返回基地'), 'hub-back')}
-          <div class="camp-brand"><h2>基地</h2></div>
+          <div class="camp-brand"><h2>${esc(hubRoomTitles[hubTab] || '基地')}</h2></div>
           <span class="hub-slot-label">${getActiveSlot() ? `档案 / 0${getActiveSlot()}` : '未选档'}</span>
           <span class="hub-res">${resourceStripHTML(B)}</span>
         </header>
@@ -425,4 +426,3 @@ configureCardNavigation({
   renderHub,
   resetDeployPick: () => setDeployPick(null),
 });
-

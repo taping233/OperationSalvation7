@@ -1,0 +1,203 @@
+{
+  "failedWrites": [
+    1
+  ],
+  "attempts": [
+    {
+      "coins": 15,
+      "nodeReward": {
+        "version": 1,
+        "type": "event-choice",
+        "eventId": "ev19-quartermaster",
+        "cardIds": [
+          "tt2-apollo"
+        ],
+        "paidCoins": 3,
+        "taken": 0
+      },
+      "consumed": true,
+      "chestReward": {
+        "version": 1,
+        "seed": 4078859906,
+        "layerIdx": 0,
+        "trackPos": 0,
+        "queue": [
+          {
+            "kind": "small"
+          }
+        ],
+        "index": 1,
+        "context": {
+          "onCell": true
+        },
+        "current": {
+          "kind": "small",
+          "cards": [
+            {
+              "id": "tt2-apollo",
+              "name": "阿猫的礼物",
+              "type": "装备",
+              "rarity": "史诗",
+              "cost": 0
+            }
+          ],
+          "coins": 0,
+          "coinsReceived": false,
+          "taken": [],
+          "lost": [],
+          "source": "装备征用令",
+          "title": "领取奖励",
+          "rewardStage": "cards"
+        }
+      },
+      "mainCardOwned": 0
+    },
+    {
+      "coins": 15,
+      "nodeReward": {
+        "version": 1,
+        "type": "event-choice",
+        "eventId": "ev19-quartermaster",
+        "cardIds": [
+          "tt2-apollo"
+        ],
+        "paidCoins": 3,
+        "taken": 0
+      },
+      "consumed": true,
+      "chestReward": {
+        "version": 1,
+        "seed": 4078859906,
+        "layerIdx": 0,
+        "trackPos": 0,
+        "queue": [
+          {
+            "kind": "small"
+          }
+        ],
+        "index": 1,
+        "context": {
+          "onCell": true
+        },
+        "current": {
+          "kind": "small",
+          "cards": [
+            {
+              "id": "tt2-apollo",
+              "name": "阿猫的礼物",
+              "type": "装备",
+              "rarity": "史诗",
+              "cost": 0
+            }
+          ],
+          "coins": 0,
+          "coinsReceived": false,
+          "taken": [],
+          "lost": [],
+          "source": "装备征用令",
+          "title": "领取奖励",
+          "rewardStage": "cards"
+        }
+      },
+      "mainCardOwned": 0
+    }
+  ],
+  "durableBeforeRetry": {
+    "coins": 15,
+    "nodeReward": {
+      "version": 1,
+      "type": "event-choice",
+      "eventId": "ev19-quartermaster",
+      "cardIds": [
+        "tt2-apollo"
+      ],
+      "paidCoins": 3,
+      "taken": 0
+    },
+    "consumed": true,
+    "chestReward": {
+      "version": 1,
+      "seed": 4078859906,
+      "layerIdx": 0,
+      "trackPos": 0,
+      "queue": [
+        {
+          "kind": "small"
+        }
+      ],
+      "index": 1,
+      "context": {
+        "onCell": true
+      },
+      "current": {
+        "kind": "small",
+        "cards": [
+          {
+            "id": "tt2-apollo",
+            "name": "阿猫的礼物",
+            "type": "装备",
+            "rarity": "史诗",
+            "cost": 0
+          }
+        ],
+        "coins": 0,
+        "coinsReceived": false,
+        "taken": [],
+        "lost": [],
+        "source": "装备征用令",
+        "title": "领取奖励",
+        "rewardStage": "cards"
+      }
+    },
+    "mainCardOwned": 0
+  },
+  "memoryBeforeRetry": {
+    "coins": 15,
+    "nodeReward": {
+      "version": 1,
+      "type": "event-choice",
+      "eventId": "ev19-quartermaster",
+      "cardIds": [
+        "tt2-apollo"
+      ],
+      "paidCoins": 3,
+      "taken": 0
+    },
+    "consumed": true,
+    "chestReward": {
+      "version": 1,
+      "seed": 4078859906,
+      "layerIdx": 0,
+      "trackPos": 0,
+      "queue": [
+        {
+          "kind": "small"
+        }
+      ],
+      "index": 1,
+      "context": {
+        "onCell": true
+      },
+      "current": {
+        "kind": "small",
+        "cards": [
+          {
+            "id": "tt2-apollo",
+            "name": "阿猫的礼物",
+            "type": "装备",
+            "rarity": "史诗",
+            "cost": 0
+          }
+        ],
+        "coins": 0,
+        "coinsReceived": false,
+        "taken": [],
+        "lost": [],
+        "source": "装备征用令",
+        "title": "领取奖励",
+        "rewardStage": "cards"
+      }
+    },
+    "mainCardOwned": 0
+  }
+}

@@ -33,8 +33,6 @@
 #overlay #hubMain.pg.hub.base-camp .base-link:hover { color:var(--camp-accent); }
 #overlay #hubMain.pg.hub.base-camp .warehouse-capacity { display:flex; align-items:center; gap:24px; }
 #overlay #hubMain.pg.hub.base-camp .warehouse-more-filters { margin-left:auto; }
-#overlay #hubMain.pg.hub.base-camp .warehouse-use-tabs { border-bottom:1px solid var(--camp-line); padding-bottom:16px; }
-#overlay #hubMain.pg.hub.base-camp .warehouse-use-tabs button { flex:1 1 auto; }
 #overlay #hubMain.pg.hub.base-camp .warehouse-more-filters select { flex:1; min-width:0; }
 #overlay #hubMain.pg.hub.base-camp .person-level { font:500 38px/1.3 var(--font-num); color:var(--camp-ink); }
 #overlay #hubMain.pg.hub.base-camp .person-growth-summary h4 { margin-top:28px; }

@@ -1,0 +1,23 @@
+{
+  "repositoryHead": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "changes": [
+    {
+      "path": "game/src/hub/hub.courtyard-runtime.js",
+      "afterSha256": "564e575fbe4618a93ab614f6a17f60b6a6ad8c17f8c40103ccc29bbc07bffa69",
+      "headSha256": "82c9fa40fcc47a9e08c862db6de8f14bbfb4a7b62618c7dad692ba41dce4cce4"
+    },
+    {
+      "path": "game/src/ui/ui.js",
+      "afterSha256": "8a1eb7d22e5fea5bb874aec022f240c090e550da8192093f5d42ab64c7fb642d",
+      "headSha256": "e40a8eac1adb5e3a834a417c174a5d2513eadab5d55bf0b07804bd1e87b3d6a1"
+    },
+    {
+      "path": "tests/courtyard-lifecycle-deep-audit.test.js",
+      "afterSha256": "0972d78d1f323f968ccc64c08e8d7716760313024818e2b36647ac9432b6c2cb"
+    },
+    {
+      "path": "tests/photo-probe-lifecycle-deep-audit.test.js",
+      "afterSha256": "000ed0e89117a04ed2ada47392e0954d966c7926e34fd0002634ba34d3b867ee"
+    }
+  ]
+}

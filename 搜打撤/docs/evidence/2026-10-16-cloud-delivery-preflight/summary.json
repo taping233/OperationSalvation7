@@ -1,0 +1,64 @@
+{
+  "at": "2026-10-15T23:34:50.609014+00:00",
+  "baseline": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "head": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "staged_count": 0,
+  "counts": {
+    "tracked_diff": 393,
+    "untracked_nonignored": 590,
+    "ignored_project_files": 222,
+    "scanned_files": 1205,
+    "scanned_text_files": 855,
+    "scanned_bytes": 59239313
+  },
+  "status": "preparation-only-active-source-work-not-frozen",
+  "classes_nonignored": {
+    "candidate_art": {
+      "untracked": 7
+    },
+    "documentation": {
+      "tracked-diff": 4
+    },
+    "evidence_intermediate": {
+      "untracked": 68
+    },
+    "evidence_repro_tool": {
+      "untracked": 35
+    },
+    "evidence_screenshot": {
+      "untracked": 76
+    },
+    "evidence_text": {
+      "untracked": 345
+    },
+    "runtime_asset": {
+      "tracked-diff": 264,
+      "untracked": 2
+    },
+    "runtime_code": {
+      "tracked-diff": 77,
+      "untracked": 7
+    },
+    "test": {
+      "tracked-diff": 44,
+      "untracked": 49
+    },
+    "tooling": {
+      "tracked-diff": 4,
+      "untracked": 1
+    }
+  },
+  "secret_scan": {
+    "pattern_findings": 0,
+    "extended_pattern_findings": 0,
+    "scope": "Full current bytes of changed tracked files, nonignored untracked files, and project-local ignored evidence/previews only. No credential directories, home, session stores, .git payloads, node_modules, or network inspected.",
+    "coverage": "Common provider token forms, private-key headers, JWT, literal bearer and credential URLs, quoted and unquoted secret assignments, secret CLI arguments and query parameters. Binary files scanned only for high-specificity token/private-key signatures. Pattern-based; not a guarantee of absence."
+  },
+  "active_domains_from_parent": [
+    "BOSS",
+    "restore",
+    "notice",
+    "pearl"
+  ],
+  "definite_generated_cache_exclusion": "docs/evidence/2026-10-16-shadowed-card-audit/.vite-cache/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/results.json"
+}

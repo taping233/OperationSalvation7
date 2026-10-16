@@ -1,0 +1,40 @@
+{
+  "cases": [
+    {
+      "failure": "Original 20000ms test timeout exceeded",
+      "status": "Focused unchanged-timeout rerun passed: 2639ms. Original full-run 20s failure remains; isolated rerun does not establish full-suite success.",
+      "test": "acceptance-gate.test.js:35 数据与剧情改动走定向，不再一票全量"
+    },
+    {
+      "directCause": "takeAll records grantCard rejection, then render chests.js:437-439 recomputes cant using preview fallback/canReceiveCard and removes the recorded partial-failure warning",
+      "failure": "Expected reward notice to contain 放不下; actual 已入背包 1 张",
+      "fixtureBoundary": "Fixture canReceiveCard defaults to true while grantCard rejects card B. This proves prediction/grant disagreement can erase the actual rejection notice; do not assume the assertion is stale.",
+      "sourceChangedForDiagnosis": false,
+      "test": "sys03-loot-shop-txn.test.js:205 takeAll 满包保留未入包卡"
+    }
+  ],
+  "failedFiles": {
+    "tests/acceptance-gate.test.js": 1,
+    "tests/sys03-loot-shop-txn.test.js": 1
+  },
+  "failedTests": 2,
+  "focusedRerun": {
+    "acceptanceDataNarrativeCaseDurationMs": 2639,
+    "exitCode": 1,
+    "sys03FailureReproduced": true,
+    "testFilesFailed": 1,
+    "testFilesPassed": 1,
+    "testsFailed": 1,
+    "testsPassed": 72,
+    "testsTotal": 73,
+    "unhandledErrors": 0
+  },
+  "ordinaryFullTestExitCode": 1,
+  "rawFullTestLogSha256": "39b68e05df12e012dd5e7a954e502593451034aadb2cad02597f13106c494aed",
+  "testFilesPassed": 482,
+  "testFilesTotal": 484,
+  "testsPassed": 4604,
+  "testsSkipped": 2,
+  "testsTotal": 4608,
+  "unhandledErrors": 0
+}

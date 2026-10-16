@@ -1,0 +1,52 @@
+--- a/game/css/battle-stage.css
++++ b/game/css/battle-stage.css
+@@ -158,7 +158,17 @@
+ #overlay .battle-stage.sts .sts-end-turn{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;min-height:70px;margin:0;padding:16px 20px;border:1px solid #d1e5e9;border-radius:4px;background:#b5d4dc;color:#172d39;box-shadow:0 4px 12px #09172736;font-size:26px;font-weight:700;letter-spacing:.04em}
+ #overlay .battle-stage.sts .sts-end-turn:hover:not(:disabled){background:#d3e8ed}
+ #overlay .battle-stage.sts .sts-end-turn:disabled{opacity:.55;cursor:default}
+-#overlay .battle-stage.sts>.bt-infuse{position:absolute;top:155px;left:430px;right:400px;z-index:20;margin:0;padding:10px 16px;background:#1a2d3bf0;border:1px solid #c0cdd447;color:#e0e9ee;font-size:15px;line-height:1.5}
++#overlay .battle-stage.sts>.bt-infuse{position:absolute;top:112px;left:56px;right:56px;z-index:20;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin:0;padding:12px 16px;background:#1a2d3bf0;border:1px solid #c0cdd447;color:#e0e9ee;font-size:20px;line-height:1.4}
++#overlay .battle-stage.sts .bt-infuse-copy{flex:1 1 720px;min-width:0;display:grid;gap:4px;overflow-wrap:anywhere}
++#overlay .battle-stage.sts .bt-infuse-copy p{margin:0}
++#overlay .battle-stage.sts .bt-infuse-title{font-size:22px}
++#overlay .battle-stage.sts .bt-infuse b{color:inherit}
++#overlay .battle-stage.sts .bt-infuse-actions{flex:0 0 auto;max-width:100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:10px;margin-left:auto}
++#overlay .battle-stage.sts .bt-infuse-actions .mini-btn{flex:0 0 auto;min-width:96px;min-height:48px;box-sizing:border-box;margin:0;padding:10px 16px;border:1px solid var(--battle-line);border-radius:3px;background:#203a48;color:#dceaf0;font:600 20px/1.3 var(--font-ui,sans-serif);letter-spacing:0;white-space:nowrap;cursor:pointer}
++#overlay .battle-stage.sts .bt-infuse-actions .mini-btn.ok{background:#b5d4dc;border-color:#d1e5e9;color:#172d39}
++#overlay .battle-stage.sts .bt-infuse-actions .mini-btn:hover:not(:disabled){background:#355463}
++#overlay .battle-stage.sts .bt-infuse-actions .mini-btn.ok:hover:not(:disabled){background:#d3e8ed}
++#overlay .battle-stage.sts .bt-infuse-actions .mini-btn:disabled{opacity:1;background:#263c47;border-color:#8ba5b045;color:#9fb4bf;cursor:default}
+ #overlay .battle-stage.sts>.bt-potions{position:absolute;top:140px;left:62px;z-index:13;display:flex;gap:8px;align-items:center;max-width:420px;margin:0;padding:0;background:none;border:0}
+ #overlay .battle-stage.sts .bt-potion{position:relative;display:flex;gap:6px;align-items:center;padding:8px 10px;border:1px solid #bdcbd847;background:#19303dd9;color:#d7e5ee;font-size:13px;cursor:pointer}
+ #overlay .battle-stage.sts .bt-potion.off{opacity:.5;cursor:default}
+--- a/game/src/battle/view/battle.view.js
++++ b/game/src/battle/view/battle.view.js
+@@ -457,17 +457,21 @@
+       : '点击手牌查看大卡，确认使用后选择目标；也可直接拖拽到敌人、自己或战场空地。数字键与 Enter 同样先查看。';
+     const infuseBar = infusingNow ? `
+       <div class="bt-infuse">
+-        [[icon:flask]] <b>注能(${infusing.need})</b>：选择 <b>${infusing.need}</b> 张手牌消耗，才能打出【${esc(infusing.card.name)}】
+-        （已选 <b>${infusing.picked.length}/${infusing.need}</b> · 同名堆叠每点一次消耗一张 · 被消耗的牌战后进消耗区，可在火堆复原）
+-        <button class="mini-btn" data-act="btInfuseDirect" data-uid="${infusing.uid}">不注能直接打出</button>
+-        <button class="mini-btn ok" data-act="btInfuseGo" ${infusing.picked.length !== infusing.need ? 'disabled' : ''}>[[icon:swords]] 发动</button>
+-        <button class="mini-btn" data-act="btInfuseCancel">[[icon:cross]] 取消</button>
++        <div class="bt-infuse-copy">
++          <p class="bt-infuse-title">[[icon:flask]] 注能【<b>${esc(infusing.card.name)}</b>】：选择 <b>${infusing.need}</b> 张手牌作材料 · 已选 <b>${infusing.picked.length}/${infusing.need}</b></p>
++          <p>同名堆叠每点选1张；材料会被消耗，战后进消耗区，可在火堆复原</p>
++        </div>
++        <div class="bt-infuse-actions">
++          <button class="mini-btn" data-act="btInfuseDirect" data-uid="${infusing.uid}">不注能直接打出</button>
++          <button class="mini-btn ok" data-act="btInfuseGo" ${infusing.picked.length !== infusing.need ? 'disabled' : ''}>[[icon:swords]] 发动</button>
++          <button class="mini-btn" data-act="btInfuseCancel">[[icon:cross]] 取消</button>
++        </div>
+       </div>` : '';
+     // 药水栏点选提示条（点敌人使用 / 取消）
+     const itemBar = pendingItem ? `
+       <div class="bt-infuse bt-pick">
+-        [[icon:flask]] 已选【<b>${esc(pendingItem.card.name)}</b>】——<b>点击一名敌人</b>使用（或直接拖到敌人身上）
+-        <button class="mini-btn" data-act="btPickCancel">[[icon:cross]] 取消</button>
++        <div class="bt-infuse-copy"><p class="bt-infuse-title">[[icon:flask]] 已选【<b>${esc(pendingItem.card.name)}</b>】：<b>点击一名敌人</b>使用，或直接拖到敌人身上</p></div>
++        <div class="bt-infuse-actions"><button class="mini-btn" data-act="btPickCancel">[[icon:cross]] 取消</button></div>
+       </div>` : '';
+     // —— 道具栏（2026-09-12 老板定向）：战斗界面上方常驻，点击使用 / 拖到敌人身上 ——
+     // 2026-09-09 玩法定版：BOSS 战没有道具栏（背包里的道具无法使用）

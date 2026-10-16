@@ -1,0 +1,1 @@
+export default { cacheDir:'docs/evidence/2026-10-16-reward-atomicity-audit/.vite-cache-nonbox',test:{ environment:'jsdom',include:['docs/evidence/2026-10-16-reward-atomicity-audit/nonbox-gift.test.js'],pool:'forks',maxWorkers:1,minWorkers:1,cache:false } };

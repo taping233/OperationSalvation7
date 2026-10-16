@@ -9,7 +9,7 @@ beforeAll(async()=>{
   dom();
   window.SDT={ Icons:{rich:x=>x}, Sound:{sfx:noop,scene:noop,music:noop,musicVolume:1,sfxVolume:1}, Motion:{overlayIn:noop,reduceMotion:()=>false}, Base:{peek:()=>null}, Meta:{ACHIEVEMENTS:[]}, Cards:{} };
   ({UI}=await import('../game/src/ui/ui.js'));
-  ({createGameMenuController}=await import('../game/src/ui/game.menu.js'));
+  ({createGameMenuController}=await import('./helpers/menu-controller.js'));
 });
 beforeEach(()=>{
   vi.useFakeTimers(); vi.stubGlobal('requestAnimationFrame',fn=>setTimeout(fn,16)); vi.stubGlobal('cancelAnimationFrame',clearTimeout);

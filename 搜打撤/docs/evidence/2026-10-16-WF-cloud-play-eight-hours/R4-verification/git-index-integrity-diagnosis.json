@@ -1,0 +1,13 @@
+{
+  "changedEntryPaths": [],
+  "diagnosis": "Raw index bytes differ; staged entry semantics unchanged, ancillary/cache metadata changed",
+  "finalEntryCount": 13377,
+  "finalEntrySemanticsSha256": "13e8908944a91adfe96cb270c8bf608eec8f7d7dd206f99066ab7fe6ac3929c2",
+  "finalRawIndexSha256": "efd9c88a0c1f9fc38fe322db3abbed334cdf32214c0ddc88269794f736747cb1",
+  "indexEntrySemanticsEqual": true,
+  "initialEntryCount": 13377,
+  "initialEntrySemanticsSha256": "13e8908944a91adfe96cb270c8bf608eec8f7d7dd206f99066ab7fe6ac3929c2",
+  "initialRawIndexSha256": "48df6e687b7813f8cf90577c84d0f26a4590657bd871c7d425fc0e10660fa570",
+  "noIndexWrittenByComparison": true,
+  "rawIndexBytesEqual": false
+}

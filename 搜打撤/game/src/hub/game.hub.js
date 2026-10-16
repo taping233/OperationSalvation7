@@ -26,7 +26,7 @@ import '../../css/departure-selected.css';
 import '../../css/roster-reference.css';
 import '../../css/base-shop-v3.css';
 import '../../css/base-archive-v3.css';
-import { deployPick } from './game.hub.depart.js';
+import { deployPick } from './departure.selection-state.js';
 
 let modulePromise = null;
 let pageModule = null;

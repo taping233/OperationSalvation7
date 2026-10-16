@@ -24,7 +24,7 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: async () => nu
 
 let scenes, altar, flow, UI, takeBagReturnHook, setBagReturnHook;
 beforeAll(async () => {
-  window.SDT = { Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: {},
+  window.SDT = { Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: { bagCap:() => 9 },
     Cards: { all: () => H.cards, isRandomObtainable: () => true, randomClassCard: () => H.cards[0], cardHTML: c => `<span>${c.name}</span>` } };
   const { overlayMethods } = await import('../game/src/ui/overlay.js');
   UI = window.SDT.UI = { ...overlayMethods, _acts: {}, _baseActs: {}, _roomActive: true, el: {},
@@ -42,6 +42,7 @@ beforeEach(() => {
   H.cards = [{ id: 'reward', name: '奖励牌', rarity: '职业', type: '武术' }]; H.saves = []; H.uid = 0;
   Object.assign(H.game, { state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, nodeRewards: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 9,
     layerData: [{ logical: [{ def: { type: 'entrance' } }, { def: { type: 'fire' } }] }],
+    bagCap:() => 9, usedSlots:() => H.game.ownedCards.length,
     canReceiveCard: () => true, heal: n => H.game.hp = Math.min(H.game.maxHp, H.game.hp + n),
   });
 });
@@ -75,7 +76,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
   });
 
   it('WORLD-004 设置页留言库：返回键回设置页（dataset 不再被当成标题页来源）', async () => {
-    const { createGameMenuController } = await import('../game/src/ui/game.menu.js');
+    const { createGameMenuController } = await import('./helpers/menu-controller.js');
     H.game.toggles = { index: false }; H.game.state = 'title';
     Object.assign(window.SDT.Sound, { musicVolume: 1, sfxVolume: 1 });
     const controller = createGameMenuController({ SDT: window.SDT, UI, game: H.game, runtime: { syncDevVisibility() {} }, esc: String });
@@ -178,7 +179,10 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     H.cards = [{ id: 'ev19-quartermaster', type: '事件', name: '装备征用令' }, ...Array.from({ length: 3 }, (_, i) => ({ id: `equip${i}`, name: `装备${i}`, type: '装备', rarity: '古朴' }))];
     H.game.layerData[0].logical[1].def.type = 'event';
     await flow.runEventDeck(); UI._acts.evtChoice({ i: 0 });
-    expect(H.game.coins).toBe(6); expect(H.game.visited['0,1']).toBe(1);
+    expect(H.game.coins).toBe(6); expect(H.game.visited['0,1']).toBeUndefined();
+    const pending = H.game.nodeRewards['0,1'];
+    expect(pending).toMatchObject({ type:'event-choice', eventId:'ev19-quartermaster', paidCoins:3, taken:null });
+    const candidateIds = [...pending.cardIds];
     expect(UI.el.ovBody.querySelector('[data-act="eventCardPick"]')).not.toBeNull();
     UI.showOverlay('背包', '<button data-act="closeBag">关闭</button>', 'bagpage'); closeCoveredBag();
     expect(H.game.state).toBe('modal');   // 返回钩子重开选卡页（此前回 idle 且奖励永久丢失）
@@ -186,5 +190,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     UI._acts.eventCardPick({ i: 1 });
     expect(H.game.ownedCards).toHaveLength(1);   // 已付的奖励最终到手
     expect(H.saves.at(-1).coins).toBe(6);        // 只扣一次款
+    expect(H.game.nodeRewards['0,1']).toMatchObject({ cardIds:candidateIds, paidCoins:3, taken:1 });
+    expect(H.game.visited['0,1']).toBe(1);       // 成功收卡后才消费节点
   });
 });

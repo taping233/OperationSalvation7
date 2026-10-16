@@ -1,0 +1,2017 @@
+{
+  "baseline": {
+    "files": [
+      {
+        "file": "battle-CMeGAmXR.css",
+        "bytes": 8411,
+        "gzip": 2217,
+        "sha256": "45471c87586ceb616d2d808af6ae399664ca9b2b14d8bcf27555a2ba03a89b40"
+      },
+      {
+        "file": "game.cardslib-DL1ME_Cs.css",
+        "bytes": 72402,
+        "gzip": 13367,
+        "sha256": "85095b0e75e7bce1d03835c43cd43d5fe2a743203a2d70c6a7e9b3823417009c"
+      },
+      {
+        "file": "game.menu-COmXXeJI.css",
+        "bytes": 43489,
+        "gzip": 9387,
+        "sha256": "5d31d6a08c6263dfd3cb8ae4ca765702094a213d99cb6def287372eb4924c89c"
+      },
+      {
+        "file": "home-djRd51SW.css",
+        "bytes": 6275,
+        "gzip": 1973,
+        "sha256": "0bcd1de5b274e2aa0818dcee0b8ce07a9f9cc2522a9ffbd7648d63832ba0cf21"
+      },
+      {
+        "file": "home-layers-CGeD3b0U.css",
+        "bytes": 7062,
+        "gzip": 1771,
+        "sha256": "859fb623803b4549c88765d28de8f062b140d4a4e96606305dbf606f68afb206"
+      },
+      {
+        "file": "home-menu-motion-ChDSp1Xr.css",
+        "bytes": 5346,
+        "gzip": 973,
+        "sha256": "726592152d6e23122f02a0c6332b00918e1e22a41b002308dfada373288ee90e"
+      },
+      {
+        "file": "home-polish-8Wc6XNpi.css",
+        "bytes": 32383,
+        "gzip": 6599,
+        "sha256": "6a4b328446868cea1c27a6ed25640e649c40d9241b96f2f2242ad5747ca2797f"
+      },
+      {
+        "file": "index-BzlIbwSi.css",
+        "bytes": 917668,
+        "gzip": 161576,
+        "sha256": "19e6c2c9ab3a81d0c0bb8eb669d1eddf7ca342ae85703108b075d21ace5ea208"
+      },
+      {
+        "file": "interface-motion-Cm3pw1Zg.css",
+        "bytes": 6043,
+        "gzip": 971,
+        "sha256": "70a846aa0f98653f24d49ddab3cbf0b1c3634d86b333c1c14da531213821e214"
+      },
+      {
+        "file": "motion-transitions-BdxbKqrz.css",
+        "bytes": 6985,
+        "gzip": 2002,
+        "sha256": "384d22f6f74838e97adb6820fbd7fef206f077f89905c98be8664bc44fe3a2f6"
+      }
+    ],
+    "gzip": 200836,
+    "budget": 139264,
+    "gap": 61572
+  },
+  "unmapped": [
+    {
+      "file": "game/css/cards.css",
+      "rules": 94,
+      "hits": 0
+    },
+    {
+      "file": "game/css/overlays.css",
+      "rules": 276,
+      "hits": 0
+    },
+    {
+      "file": "game/css/scenes.css",
+      "rules": 311,
+      "hits": 0
+    }
+  ],
+  "sourceMismatch": [
+    {
+      "file": "game/css/battle-stage.css",
+      "currentSha": "34c66681bda310e1f40bd97377b94a5393b508def59d9e44bd8f6acd045b8a69",
+      "snapshotSha": "5f438e80908b3ea70ede0d2ff13796be82cfbb159696676c107f23831df23ff0"
+    }
+  ],
+  "totals": {
+    "exact": {
+      "gzip": 200497,
+      "savingVsOriginal": 339,
+      "savingVsRecompressed": 241,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "removed": 0
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "before": 13367,
+          "after": 13362,
+          "saving": 5,
+          "removed": 1
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "removed": 0
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "removed": 0
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "removed": 0
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "removed": 0
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "removed": 0
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "before": 161576,
+          "after": 161340,
+          "saving": 236,
+          "removed": 67
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "removed": 0
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "removed": 0
+        }
+      ]
+    },
+    "shadow": {
+      "gzip": 198295,
+      "savingVsOriginal": 2541,
+      "savingVsRecompressed": 2443,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "removed": 0
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "before": 13367,
+          "after": 13354,
+          "saving": 13,
+          "removed": 2
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "removed": 0
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "removed": 0
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "removed": 0
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "removed": 0
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "removed": 0
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "before": 161576,
+          "after": 159146,
+          "saving": 2430,
+          "removed": 405
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "removed": 0
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "removed": 0
+        }
+      ]
+    },
+    "branchExact": {
+      "gzip": 200427,
+      "savingVsOriginal": 409,
+      "savingVsRecompressed": 311,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "removed": 0
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "before": 13367,
+          "after": 13335,
+          "saving": 32,
+          "removed": 5
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "removed": 0
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "removed": 0
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "removed": 0
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "removed": 0
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "removed": 0
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "before": 161576,
+          "after": 161297,
+          "saving": 279,
+          "removed": 89
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "removed": 0
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "removed": 0
+        }
+      ]
+    },
+    "branchShadow": {
+      "gzip": 197546,
+      "savingVsOriginal": 3290,
+      "savingVsRecompressed": 3192,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "removed": 0
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "before": 13367,
+          "after": 13298,
+          "saving": 69,
+          "removed": 12
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "removed": 0
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "removed": 0
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "removed": 0
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "removed": 0
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "removed": 0
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "before": 161576,
+          "after": 158453,
+          "saving": 3123,
+          "removed": 535
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "removed": 0
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "removed": 0
+        }
+      ]
+    }
+  },
+  "adjacentSaving": 151,
+  "topExact": [
+    [
+      "unmapped",
+      {
+        "declarations": 27,
+        "rawBytes": 487
+      }
+    ],
+    [
+      "game/css/base.css",
+      {
+        "declarations": 9,
+        "rawBytes": 223
+      }
+    ],
+    [
+      "game/css/winter.css",
+      {
+        "declarations": 11,
+        "rawBytes": 187
+      }
+    ],
+    [
+      "game/css/base-camp.css",
+      {
+        "declarations": 10,
+        "rawBytes": 162
+      }
+    ],
+    [
+      "game/css/expedition.css",
+      {
+        "declarations": 2,
+        "rawBytes": 49
+      }
+    ],
+    [
+      "game/css/hub.css",
+      {
+        "declarations": 2,
+        "rawBytes": 35
+      }
+    ],
+    [
+      "game.cardslib-DL1ME_Cs.css",
+      {
+        "declarations": 1,
+        "rawBytes": 29
+      }
+    ],
+    [
+      "game/css/expedition-inventory.css",
+      {
+        "declarations": 2,
+        "rawBytes": 25
+      }
+    ],
+    [
+      "game/css/expedition-roster.css",
+      {
+        "declarations": 1,
+        "rawBytes": 16
+      }
+    ],
+    [
+      "game/css/expedition-map.css",
+      {
+        "declarations": 1,
+        "rawBytes": 16
+      }
+    ],
+    [
+      "game/css/expedition-rewards.css",
+      {
+        "declarations": 1,
+        "rawBytes": 14
+      }
+    ],
+    [
+      "game/css/page-events.css",
+      {
+        "declarations": 1,
+        "rawBytes": 6
+      }
+    ]
+  ],
+  "topShadow": [
+    [
+      "unmapped",
+      {
+        "declarations": 92,
+        "rawBytes": 2773
+      }
+    ],
+    [
+      "game/css/winter.css",
+      {
+        "declarations": 99,
+        "rawBytes": 2211
+      }
+    ],
+    [
+      "game/css/base.css",
+      {
+        "declarations": 68,
+        "rawBytes": 1821
+      }
+    ],
+    [
+      "game/css/base-camp.css",
+      {
+        "declarations": 84,
+        "rawBytes": 1674
+      }
+    ],
+    [
+      "game/css/hub.css",
+      {
+        "declarations": 25,
+        "rawBytes": 707
+      }
+    ],
+    [
+      "game/css/page-slot-select.css",
+      {
+        "declarations": 1,
+        "rawBytes": 254
+      }
+    ],
+    [
+      "game/css/expedition-roster.css",
+      {
+        "declarations": 6,
+        "rawBytes": 252
+      }
+    ],
+    [
+      "game/css/page-expedition-hud.css",
+      {
+        "declarations": 5,
+        "rawBytes": 250
+      }
+    ],
+    [
+      "game/css/expedition.css",
+      {
+        "declarations": 6,
+        "rawBytes": 187
+      }
+    ],
+    [
+      "game/css/page-events.css",
+      {
+        "declarations": 5,
+        "rawBytes": 136
+      }
+    ],
+    [
+      "game/css/expedition-inventory.css",
+      {
+        "declarations": 6,
+        "rawBytes": 86
+      }
+    ],
+    [
+      "game/css/expedition-rewards.css",
+      {
+        "declarations": 4,
+        "rawBytes": 78
+      }
+    ],
+    [
+      "game.cardslib-DL1ME_Cs.css",
+      {
+        "declarations": 2,
+        "rawBytes": 65
+      }
+    ],
+    [
+      "game/css/ak-skin.css",
+      {
+        "declarations": 1,
+        "rawBytes": 60
+      }
+    ],
+    [
+      "game/css/expedition-map.css",
+      {
+        "declarations": 2,
+        "rawBytes": 37
+      }
+    ]
+  ],
+  "repeatBlocks": [
+    {
+      "count": 141,
+      "body": "display:none",
+      "rawUpperBound": 1680,
+      "rules": [
+        {
+          "selector": "body.lobby #sidebar,body.lobby #topBtns",
+          "source": "game/css/base.css",
+          "context": "",
+          "offset": 5560
+        },
+        {
+          "selector": "body.lobby #resHud",
+          "source": "game/css/base.css",
+          "context": "",
+          "offset": 7110
+        },
+        {
+          "selector": "body.lobby #layerBanner,body.no-hintbar #hintBar,body.no-banner #layerBanner",
+          "source": "game/css/base.css",
+          "context": "",
+          "offset": 8054
+        },
+        {
+          "selector": "#btnMute .ic-sound-off,#btnMute.muted .ic-sound-on",
+          "source": "game/css/base.css",
+          "context": "",
+          "offset": 8629
+        },
+        {
+          "selector": "#hpHud #hpBarWrap",
+          "source": "game/css/base.css",
+          "context": "",
+          "offset": 9958
+        },
+        {
+          "selector": "#overlay .card.bag-page>h2",
+          "source": "game/css/base.css",
+          "context": "",
+          "offset": 16208
+        },
+        {
+          "selector": ".dev-tools[hidden]",
+          "source": "game/css/base.css",
+          "context": "",
+          "offset": 20081
+        },
+        {
+          "selector": "#overlay .card.page h2",
+          "source": "unmapped",
+          "context": "",
+          "offset": 24911
+        },
+        {
+          "selector": "#title[hidden],#exitScr[hidden]",
+          "source": "unmapped",
+          "context": "",
+          "offset": 40881
+        },
+        {
+          "selector": ".slot-page .slot-card:not(.filled) .slot-card-spark",
+          "source": "unmapped",
+          "context": "",
+          "offset": 47978
+        },
+        {
+          "selector": "#overlay[hidden]",
+          "source": "unmapped",
+          "context": "",
+          "offset": 52984
+        },
+        {
+          "selector": "#sugLayer[hidden]",
+          "source": "unmapped",
+          "context": "",
+          "offset": 57313
+        },
+        {
+          "selector": "#sugLayer .sug-where:empty",
+          "source": "unmapped",
+          "context": "",
+          "offset": 57957
+        },
+        {
+          "selector": "#overlay.room-view.fx-doom .card.room:before",
+          "source": "unmapped",
+          "context": "",
+          "offset": 58765
+        },
+        {
+          "selector": "#overlay .card .ov-x[hidden]",
+          "source": "unmapped",
+          "context": "",
+          "offset": 61698
+        },
+        {
+          "selector": ".term-tip[hidden]",
+          "source": "unmapped",
+          "context": "",
+          "offset": 62276
+        },
+        {
+          "selector": "#overlay>.battle-entry-curtain .battle-entry-copy button[hidden]",
+          "source": "game/css/battle.css",
+          "context": "",
+          "offset": 83354
+        },
+        {
+          "selector": ".bt-potion-tip[hidden]",
+          "source": "game/css/battle.css",
+          "context": "",
+          "offset": 88020
+        },
+        {
+          "selector": ".sts-foe.dead .bt-hpwrap,.sts-foe.dead .sts-intent,.bt-foe.dead .bt-hpwrap",
+          "source": "game/css/battle.css",
+          "context": "",
+          "offset": 89108
+        },
+        {
+          "selector": "#overlay .card.scene:before",
+          "source": "unmapped",
+          "context": "",
+          "offset": 100031
+        },
+        {
+          "selector": "#overlay .card.scene>h2",
+          "source": "unmapped",
+          "context": "",
+          "offset": 100072
+        },
+        {
+          "selector": "#overlay .card.page:has(.node-pg):before",
+          "source": "unmapped",
+          "context": "",
+          "offset": 114680
+        },
+        {
+          "selector": "#title[hidden]",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 139510
+        },
+        {
+          "selector": "#btnTitleMute .ic-sound-off,#btnTitleMute.muted .ic-sound-on",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 141417
+        },
+        {
+          "selector": "#statsPanel .stat-duo",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 148208
+        },
+        {
+          "selector": "#mapLabels[hidden]",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 149227
+        },
+        {
+          "selector": "body.lobby #sceneTools,body.scene-battle-3d #sceneTools",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 149809
+        },
+        {
+          "selector": "#overlay .card:before",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 150226
+        },
+        {
+          "selector": "#btnTitleMute:after",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 155722
+        },
+        {
+          "selector": "#btnTitleExit:after",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 155971
+        },
+        {
+          "selector": ".ak-quickref:before",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 156354
+        },
+        {
+          "selector": ".title-credits",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 156639
+        },
+        {
+          "selector": "#overlay:has(.slot-page) #ovCloseX",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 170138
+        },
+        {
+          "selector": ".log-panel.collapsed #log",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 175004
+        },
+        {
+          "selector": "#overlay .card.chest:before",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 199960
+        },
+        {
+          "selector": "#overlay.fx-glass .card:before",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 200378
+        },
+        {
+          "selector": "#bagBtnFloat[hidden]",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 203198
+        },
+        {
+          "selector": "#title .title-kicker",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 216844
+        },
+        {
+          "selector": "#title .winter-wordmark small",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 217138
+        },
+        {
+          "selector": "#title .ak-sq:after",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 218004
+        },
+        {
+          "selector": "#title .c-ring:after",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 218909
+        },
+        {
+          "selector": "#title .ak-circle .c-ring svg",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 219105
+        },
+        {
+          "selector": "#title .ak-start .st-orn",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 220938
+        },
+        {
+          "selector": "#title .ak-bp,#title .ak-plus,#title .ak-line1",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 221499
+        },
+        {
+          "selector": "#title .ak-hud:before",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 221669
+        },
+        {
+          "selector": "#title .ak-start:before,#title .ak-start:after",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 225346
+        },
+        {
+          "selector": "#title .title-dev[hidden]",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 226711
+        },
+        {
+          "selector": "body.lobby #logPanel,body.page-opaque #logPanel",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 227576
+        },
+        {
+          "selector": "body.reduce-motion #title .ak-start:before",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 229214
+        },
+        {
+          "selector": "body.reduce-motion .sts-impact,body.reduce-motion .sts-hurtflash",
+          "source": "game/css/expedition.css",
+          "context": "",
+          "offset": 229891
+        },
+        {
+          "selector": "body #layerBanner,body.lobby #expeditionChapter,body.page-opaque #expeditionChapter",
+          "source": "game/css/expedition-map.css",
+          "context": "",
+          "offset": 234651
+        },
+        {
+          "selector": "body:has(#overlay:not([hidden])) :is(#resHud,#hpHud) .map-resource-tip,body:has(#title:not([hidden])) :is(#resHud,#hpHud) .map-resource-tip",
+          "source": "game/css/expedition-map.css",
+          "context": "",
+          "offset": 236539
+        },
+        {
+          "selector": "body #overlay .card:has(.reward-replica):before,body #overlay .card:has(.reward-replica):after,body #overlay .card:has(.reward-replica)>h2",
+          "source": "game/css/expedition-rewards.css",
+          "context": "",
+          "offset": 283693
+        },
+        {
+          "selector": "#overlay .card:has(.battle-decision)>h2",
+          "source": "game/css/expedition-battle.css",
+          "context": "",
+          "offset": 299640
+        },
+        {
+          "selector": "#cardGet[data-combat=true] .lg-beam,#cardGet[data-combat=true] .lg-name",
+          "source": "game/css/expedition-battle.css",
+          "context": "",
+          "offset": 302273
+        },
+        {
+          "selector": "#overlay .cls2-fullart img.art-figure-back",
+          "source": "game/css/expedition-roster.css",
+          "context": "",
+          "offset": 323874
+        },
+        {
+          "selector": "#overlay .shop-pg.shop-market .shop-detail[hidden]",
+          "source": "game/css/expedition-shop.css",
+          "context": "",
+          "offset": 342337
+        },
+        {
+          "selector": "#overlay .shop-pg.shop-market .shop-live:empty",
+          "source": "game/css/expedition-shop.css",
+          "context": "",
+          "offset": 348507
+        },
+        {
+          "selector": "#overlay .pg.settings-page .ak-back-tl:after",
+          "source": "game/css/page-settings.css",
+          "context": "",
+          "offset": 390924
+        },
+        {
+          "selector": "#overlay .pg.data-tuned .data-pg-head .section-kicker",
+          "source": "game/css/page-datapage.css",
+          "context": "",
+          "offset": 399923
+        },
+        {
+          "selector": "body #sidebar #miniMap",
+          "source": "game/css/page-expedition-hud.css",
+          "context": "",
+          "offset": 423078
+        },
+        {
+          "selector": "body #sidebar #devPanel",
+          "source": "game/css/page-expedition-hud.css",
+          "context": "",
+          "offset": 423349
+        },
+        {
+          "selector": "body #sidebar :is(#charPanel,#statsPanel)",
+          "source": "game/css/page-expedition-hud.css",
+          "context": "",
+          "offset": 424371
+        },
+        {
+          "selector": "body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud #hpBar:after",
+          "source": "game/css/page-expedition-hud.css",
+          "context": "",
+          "offset": 432801
+        },
+        {
+          "selector": "body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #resHud .chip-mini:before",
+          "source": "game/css/page-expedition-hud.css",
+          "context": "",
+          "offset": 433190
+        },
+        {
+          "selector": "body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout=map] .expedition-map-preview[hidden]",
+          "source": "game/css/page-expedition-hud.css",
+          "context": "",
+          "offset": 439473
+        },
+        {
+          "selector": "body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12 .person-face :is(b,small)",
+          "source": "game/css/feedback-oct12.css",
+          "context": "",
+          "offset": 447074
+        },
+        {
+          "selector": "body #overlay#overlay#overlay #depMain.departure-cover:not(.departure-glass) .camp-depart-person",
+          "source": "game/css/feedback-oct12.css",
+          "context": "",
+          "offset": 448373
+        },
+        {
+          "selector": "body #overlay#overlay#overlay #depMain.departure-cover:not(.departure-glass) :is(.camp-pack-note,#depSummary,.set-tip,.camp-detail-heading small)",
+          "source": "game/css/feedback-oct12.css",
+          "context": "",
+          "offset": 450068
+        },
+        {
+          "selector": "body #overlay#overlay#overlay:has(.cls2-page.roster-reference) #ovCloseX",
+          "source": "game/css/roster-departure-v2.css",
+          "context": "",
+          "offset": 450978
+        },
+        {
+          "selector": "body #overlay#overlay#overlay#overlay .card.page .pg.cls2-page.roster-reference .cls2-fullart[data-skin=default] img.art-figure-back",
+          "source": "game/css/roster-departure-v2.css",
+          "context": "",
+          "offset": 453668
+        },
+        {
+          "selector": "body #overlay#overlay#overlay#overlay .card.page .pg.cls2-page.roster-reference .cls2-fullart:not([data-skin=default]) img.art-figure-back",
+          "source": "game/css/roster-departure-v2.css",
+          "context": "",
+          "offset": 454096
+        },
+        {
+          "selector": "body #overlay#overlay#overlay#overlay .card.page .pg.cls2-page.roster-reference .cls2-sub i",
+          "source": "game/css/roster-departure-v2.css",
+          "context": "",
+          "offset": 457467
+        },
+        {
+          "selector": "#expPocketStrip[hidden]",
+          "source": "game/css/pocket-strip.css",
+          "context": "",
+          "offset": 462357
+        },
+        {
+          "selector": "#overlay .card:has(.ak-back-tl) .ov-x",
+          "source": "game/css/page-rewards-bag-help.css",
+          "context": "",
+          "offset": 485360
+        },
+        {
+          "selector": "#overlay.room-view .card.room:before,#overlay.room-view .card.room:after,#overlay .card.bag-page:before,#overlay .card.bag-page:after,#overlay .card.page:after",
+          "source": "game/css/ak-skin.css",
+          "context": "",
+          "offset": 493644
+        },
+        {
+          "selector": "#overlay:has(.cls2-page[data-base-departure=true],.cls-pool-page[data-base-departure=true]) :is(#ovCloseX,.ov-title)",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 506720
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-fullart img.art-figure-back",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 509396
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-palette",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 512607
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-face img.art-figure-back",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 515870
+        },
+        {
+          "selector": "#overlay:has(.base-camp,.camp-depart-detail) :is(#ovCloseX,.ov-title)",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 532280
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-depart-person-art .art-figure-back",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 539591
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .mode-ckpt",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 540594
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .dep-card[hidden]",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 556214
+        },
+        {
+          "selector": "#cardZoom:has(.camp-detail) .cz-note",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 561009
+        },
+        {
+          "selector": ".hs-card[data-card-layout=split] :is(.hsc-dmg,.hsc-val)",
+          "source": "game/css/card-layout-selected.css",
+          "context": "",
+          "offset": 573991
+        },
+        {
+          "selector": ".hs-card[data-card-layout=split][data-has-description=true] .hsc-kw",
+          "source": "game/css/card-layout-selected.css",
+          "context": "",
+          "offset": 574321
+        },
+        {
+          "selector": "#overlay .card.battle>h2",
+          "source": "game/css/battle-stage.css",
+          "context": "",
+          "offset": 577937
+        },
+        {
+          "selector": "#overlay .battle-stage.sts .sts-options:not([open]) .sts-options-menu",
+          "source": "game/css/battle-stage.css",
+          "context": "",
+          "offset": 581269
+        },
+        {
+          "selector": "#overlay .battle-stage.sts .sts-hud-l:empty",
+          "source": "game/css/battle-stage.css",
+          "context": "",
+          "offset": 588902
+        },
+        {
+          "selector": "#overlay .battle-stage.sts .sts-hud-r:empty",
+          "source": "game/css/battle-stage.css",
+          "context": "",
+          "offset": 590758
+        },
+        {
+          "selector": "#overlay .battle-stage.sts .sts-nameplate :is(.sts-stats,.sts-chips):empty",
+          "source": "game/css/battle-stage.css",
+          "context": "",
+          "offset": 595490
+        },
+        {
+          "selector": "#overlay .battle-stage.sts:has(>.bt-infuse:not(.bt-pick))>.bt-potions",
+          "source": "game/css/battle-stage.css",
+          "context": "",
+          "offset": 601016
+        },
+        {
+          "selector": "body.reduce-motion #overlay .camp-entry-ghost,body.reduce-motion .camp-entry-identity",
+          "source": "game/css/camp-entry.css",
+          "context": "",
+          "offset": 614571
+        },
+        {
+          "selector": "body.reduce-motion :is(#overlay,.page-loading--city) .camp-entry-cut",
+          "source": "game/css/camp-entry.css",
+          "context": "",
+          "offset": 614670
+        },
+        {
+          "selector": "#overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .event-story>.pg-head h2>.ic",
+          "source": "game/css/entry-events.css",
+          "context": "",
+          "offset": 646672
+        },
+        {
+          "selector": "#overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .reward-notice:empty",
+          "source": "game/css/entry-events.css",
+          "context": "",
+          "offset": 648462
+        },
+        {
+          "selector": "#overlay .card.page .pg.node-pg.event-themed .event-story>.pg-head h2>.ic",
+          "source": "game/css/entry-events.css",
+          "context": "",
+          "offset": 657264
+        },
+        {
+          "selector": "#overlay .card.page .event-themed .reward-notice:empty",
+          "source": "game/css/entry-events.css",
+          "context": "",
+          "offset": 659001
+        },
+        {
+          "selector": "#overlay .card.scene:has(.expedition-cut)>#ovTitle,#overlay .card.scene:has(.expedition-cut):before,#overlay .card.scene:has(.expedition-cut):after",
+          "source": "game/css/expedition-transitions.css",
+          "context": "",
+          "offset": 668708
+        },
+        {
+          "selector": "#overlay .expedition-cut:before,#overlay .expedition-cut:after",
+          "source": "game/css/expedition-transitions.css",
+          "context": "",
+          "offset": 669176
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-section-head small",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 680541
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .person-details header small",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 688607
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .pool-toolbar-head",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 692009
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .partner-display>small",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 694702
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .facility-tile>small,#overlay #hubMain.pg.hub.base-camp .facility-tile>span",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 696712
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .facility-details>small",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 697380
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .person-skin small:empty",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 700891
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .personnel-v2[data-section=appearance] .person-details>:is(small,h4)",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 700964
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-detail-heading>small,#overlay #depMain.pg.hub.camp-detail .hub-head>.hub-res",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 703645
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-depart-person-art,#overlay #depMain.pg.hub.camp-detail .camp-depart-person-copy>small",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 704102
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail .camp-depart-next:not(.warning)",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 706326
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .companion-hatch small",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 707863
+        },
+        {
+          "selector": ".card-browser[data-empty=true] .card-browser-footer",
+          "source": "game/css/card-browser.css",
+          "context": "",
+          "offset": 717998
+        },
+        {
+          "selector": "body:has(#viewport) #cardZoom.inventory-zoom .cz-note:not(.has),body:has(#viewport) #cardZoom.inventory-zoom .cz-hint,body:has(#viewport) #cardZoom.inventory-zoom .cz-flash",
+          "source": "game/css/inventory-zoom.css",
+          "context": "",
+          "offset": 721881
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .courtyard-zzz .courtyard-v3-status:empty",
+          "source": "game/css/base-courtyard-v3.css",
+          "context": "",
+          "offset": 732384
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .courtyard-zzz .courtyard-v3-rain-layer[hidden]",
+          "source": "game/css/base-courtyard-v3.css",
+          "context": "",
+          "offset": 732881
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-description:empty",
+          "source": "game/css/base-cohesion-v5.css",
+          "context": "",
+          "offset": 746784
+        },
+        {
+          "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .camp-navigation-indicator",
+          "source": "game/css/base-framework-v7.css",
+          "context": "",
+          "offset": 754862
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3,.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) [hidden]",
+          "source": "game/css/base-rooms-v7.css",
+          "context": "",
+          "offset": 786770
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 [hidden]",
+          "source": "game/css/base-personnel-v12.css",
+          "context": "",
+          "offset": 805811
+        },
+        {
+          "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12[data-section=pool] [hidden]",
+          "source": "game/css/base-personnel-v12.css",
+          "context": "",
+          "offset": 813641
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .personnel-v12 .partner-stage:has(.partner-state.carried) [data-act=selPet]",
+          "source": "game/css/base-personnel-v12.css",
+          "context": "",
+          "offset": 814623
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.warehouse-v3.warehouse-v2,.trade-v5.trade-v12) [hidden]",
+          "source": "game/css/base-logistics-trade-v12.css",
+          "context": "",
+          "offset": 818515
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3.warehouse-v2 .resource-strip",
+          "source": "game/css/base-logistics-trade-v12.css",
+          "context": "",
+          "offset": 819247
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3.warehouse-v2 .stash-card-caption b",
+          "source": "game/css/base-logistics-trade-v12.css",
+          "context": "",
+          "offset": 825131
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .trade-v5.trade-v12 .trade-v5-wallet",
+          "source": "game/css/base-logistics-trade-v12.css",
+          "context": "",
+          "offset": 827563
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .trade-v5.trade-v12 .trade-v5-item-label b",
+          "source": "game/css/base-logistics-trade-v12.css",
+          "context": "",
+          "offset": 832185
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.archive-v12,.facilities-v12) [hidden]",
+          "source": "game/css/base-archive-facilities-v12.css",
+          "context": "",
+          "offset": 853263
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .collection-v12[data-empty=true]>:is(.collection-v12-stage,.card-browser)",
+          "source": "game/css/base-archive-facilities-v12.css",
+          "context": "",
+          "offset": 857637
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .av3-reward-inbox[data-empty=true] .av12-record-list>header",
+          "source": "game/css/base-archive-facilities-v12.css",
+          "context": "",
+          "offset": 859894
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-frame-v7 .base-room-art",
+          "source": "game/css/base-home-v7.css",
+          "context": "",
+          "offset": 870169
+        },
+        {
+          "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass .camp-detail-heading small",
+          "source": "game/css/departure-selected.css",
+          "context": "",
+          "offset": 878664
+        },
+        {
+          "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass .camp-depart-person-art .art-figure-back",
+          "source": "game/css/departure-selected.css",
+          "context": "",
+          "offset": 880594
+        },
+        {
+          "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass .camp-depart-person-copy small",
+          "source": "game/css/departure-selected.css",
+          "context": "",
+          "offset": 881145
+        },
+        {
+          "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass #depBag .bag-cell.empty",
+          "source": "game/css/departure-selected.css",
+          "context": "",
+          "offset": 888434
+        },
+        {
+          "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass #depSummary,body #overlay #depMain.pg.hub.departure-cover.departure-glass .camp-pack-note",
+          "source": "game/css/departure-selected.css",
+          "context": "",
+          "offset": 888770
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page.roster-reference .cls2-chips:empty",
+          "source": "game/css/roster-reference.css",
+          "context": "",
+          "offset": 892890
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 [hidden]",
+          "source": "game/css/base-archive-v3.css",
+          "context": "",
+          "offset": 901906
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .archive-empty p",
+          "source": "game/css/base-archive-v3.css",
+          "context": "",
+          "offset": 905684
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .hub-archive-v3 .av3-milestone-number",
+          "source": "game/css/base-archive-v3.css",
+          "context": "",
+          "offset": 910768
+        }
+      ]
+    },
+    {
+      "count": 54,
+      "body": "content:none",
+      "rawUpperBound": 636,
+      "rules": [
+        {
+          "selector": "#overlay .pg.cls-pool-page .pool-side:before",
+          "source": "game/css/expedition-roster.css",
+          "context": "",
+          "offset": 321112
+        },
+        {
+          "selector": "#overlay .cls2-panel:after",
+          "source": "game/css/expedition-roster.css",
+          "context": "",
+          "offset": 324126
+        },
+        {
+          "selector": "#overlay .pg.cls-pool-page .pool-cell:before",
+          "source": "game/css/expedition-roster.css",
+          "context": "",
+          "offset": 332553
+        },
+        {
+          "selector": "#overlay .sugin-page .sugin-exit:after",
+          "source": "game/css/page-settings.css",
+          "context": "",
+          "offset": 391389
+        },
+        {
+          "selector": "#overlay .pg.data-tuned:after",
+          "source": "game/css/page-datapage.css",
+          "context": "",
+          "offset": 399221
+        },
+        {
+          "selector": "#overlay .pg.data-tuned .data-pg-head h2:before,#overlay .pg.data-tuned .data-pg-head:before,#overlay .pg.data-tuned .data-pg-head:after",
+          "source": "game/css/page-datapage.css",
+          "context": "",
+          "offset": 399681
+        },
+        {
+          "selector": "#overlay #hubMain.hub-ach .hub-page>.hub-card:not(.collection-panel):not(.coll-room):after",
+          "source": "game/css/page-ach.css",
+          "context": "",
+          "offset": 407355
+        },
+        {
+          "selector": "body:not(.lobby):not(.scene-battle-3d) #sidebar:before",
+          "source": "game/css/page-expedition-hud.css",
+          "context": "",
+          "offset": 422523
+        },
+        {
+          "selector": "body #sidebar .panel:before",
+          "source": "game/css/page-expedition-hud.css",
+          "context": "",
+          "offset": 422675
+        },
+        {
+          "selector": "body #sidebar #charPanel .hero-ava:after",
+          "source": "game/css/page-expedition-hud.css",
+          "context": "",
+          "offset": 422911
+        },
+        {
+          "selector": "body #overlay#overlay#overlay #depMain.departure-cover:not(.departure-glass) #depBag:after",
+          "source": "game/css/feedback-oct12.css",
+          "context": "",
+          "offset": 448879
+        },
+        {
+          "selector": "body #overlay#overlay#overlay .cls2-page .cls2-panel:after",
+          "source": "game/css/feedback-oct12.css",
+          "context": "",
+          "offset": 450436
+        },
+        {
+          "selector": "body #overlay#overlay#overlay#overlay .card.page .pg.cls2-page.roster-reference:after",
+          "source": "game/css/roster-departure-v2.css",
+          "context": "",
+          "offset": 451542
+        },
+        {
+          "selector": "body #overlay#overlay#overlay#overlay .card.page .pg.cls2-page.roster-reference .cls2-stage:before",
+          "source": "game/css/roster-departure-v2.css",
+          "context": "",
+          "offset": 452254
+        },
+        {
+          "selector": "body #overlay#overlay#overlay#overlay .card.page .pg.cls2-page.roster-reference .cls2-fullart:before,body #overlay#overlay#overlay#overlay .card.page .pg.cls2-page.roster-reference .cls2-fullart:after",
+          "source": "game/css/roster-departure-v2.css",
+          "context": "",
+          "offset": 452791
+        },
+        {
+          "selector": "body #overlay#overlay#overlay#overlay .card.page .pg.cls2-page.roster-reference .cls2-panel:after",
+          "source": "game/css/roster-departure-v2.css",
+          "context": "",
+          "offset": 455010
+        },
+        {
+          "selector": "body #overlay#overlay#overlay#overlay .card.page .pg.cls2-page.roster-reference .cls2-name:after",
+          "source": "game/css/roster-departure-v2.css",
+          "context": "",
+          "offset": 455522
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-fullart:before",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 509503
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-panel:after",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 510181
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-name:after",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 510849
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls2-page[data-base-departure=true] .cls2-face:before",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 515629
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=true]:before,#overlay .card.page .pg.cls-pool-page[data-base-departure=true]:after",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 518683
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=true] .pg-head:before,#overlay .card.page .pg.cls-pool-page[data-base-departure=true] .pg-head:after",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 519113
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=true] .pool-side:before",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 521244
+        },
+        {
+          "selector": "#overlay .card.page .pg.cls-pool-page[data-base-departure=true] .pool-cell:before",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 525463
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp:before,#overlay #hubMain.pg.hub.base-camp:after",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 532819
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .hub-head:before,#overlay #hubMain.pg.hub.base-camp .hub-head:after",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 533085
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp :is(.deploy-mission,.deploy-mission-copy):before,#overlay #hubMain.pg.hub.base-camp :is(.deploy-mission,.deploy-mission-copy):after",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 539247
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page>.hub-card:before,#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page>.hub-card:after,#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page>.hub-card>h3:before,#overlay #hubMain.pg.hub.base-camp.hub-ach .hub-page>.hub-card>h3:after",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 550960
+        },
+        {
+          "selector": "#overlay #depMain.pg.hub.camp-detail:before,#overlay #depMain.pg.hub.camp-detail:after",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 552851
+        },
+        {
+          "selector": "#overlay .stash-shell.camp-detail:before,#overlay .stash-shell.camp-detail:after",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 559573
+        },
+        {
+          "selector": "#overlay .battle-stage.sts:before,#overlay .battle-stage.sts:after",
+          "source": "game/css/battle-stage.css",
+          "context": "",
+          "offset": 578477
+        },
+        {
+          "selector": "#overlay .battle-stage.sts .sts-topbar:before,#overlay .battle-stage.sts .sts-topbar:after",
+          "source": "game/css/battle-stage.css",
+          "context": "",
+          "offset": 579965
+        },
+        {
+          "selector": "#overlay .battle-stage.sts .sts-figure:before,#overlay .battle-stage.sts .sts-figure:after",
+          "source": "game/css/battle-stage.css",
+          "context": "",
+          "offset": 581972
+        },
+        {
+          "selector": "#overlay .battle-stage.sts .sts-energy:before,#overlay .battle-stage.sts .sts-energy:after",
+          "source": "game/css/battle-stage.css",
+          "context": "",
+          "offset": 589402
+        },
+        {
+          "selector": "#overlay .battle-stage.sts .bt-card:before,#overlay .battle-stage.sts .bt-card.click-selected:after",
+          "source": "game/css/battle-stage.css",
+          "context": "",
+          "offset": 596248
+        },
+        {
+          "selector": "#overlay .city-run-transition:before,#overlay .city-run-transition:after",
+          "source": "game/css/camp-entry.css",
+          "context": "",
+          "offset": 613324
+        },
+        {
+          "selector": "#title.home-composed #homeCredits .credits-model-label:before",
+          "source": "game/css/title-credits.css",
+          "context": "",
+          "offset": 625236
+        },
+        {
+          "selector": "#title.home-composed #homeCredits .credits-extra-thanks li+li:before",
+          "source": "game/css/title-credits.css",
+          "context": "",
+          "offset": 625614
+        },
+        {
+          "selector": ".page-loading.page-loading--city:before",
+          "source": "game/css/page-loading.css",
+          "context": "",
+          "offset": 640784
+        },
+        {
+          "selector": ".page-loading--city.leaving:after",
+          "source": "game/css/page-loading.css",
+          "context": "",
+          "offset": 641157
+        },
+        {
+          "selector": ":is(#overlay#overlay#overlay,#topBtns#topBtns#topBtns,#homeCredits#homeCredits#homeCredits) .archive-back:after",
+          "source": "game/css/archive-back.css",
+          "context": "",
+          "offset": 643915
+        },
+        {
+          "selector": "#overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .evt-opt:before",
+          "source": "game/css/entry-events.css",
+          "context": "",
+          "offset": 651072
+        },
+        {
+          "selector": "#overlay .card.page .pg.node-pg.event-themed .event-story>.pg-head h2:after",
+          "source": "game/css/entry-events.css",
+          "context": "",
+          "offset": 657351
+        },
+        {
+          "selector": "#overlay .card.page .pg.node-pg.event-themed .evt-opt:before",
+          "source": "game/css/entry-events.css",
+          "context": "",
+          "offset": 660073
+        },
+        {
+          "selector": "body:has(#overlay .event-themed) #resHud .chip-mini:before,body:has(#overlay .event-themed) #resHud .chip-mini:after",
+          "source": "game/css/entry-events.css",
+          "context": "",
+          "offset": 664486
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) button.base-command[data-act]:after",
+          "source": "game/css/base-cohesion-v5.css",
+          "context": "",
+          "offset": 740298
+        },
+        {
+          "selector": "#overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .hub-tab:before,#overlay#overlay#overlay #hubMain.pg.hub.base-frame-v7 .hub-tab:after",
+          "source": "game/css/base-framework-v7.css",
+          "context": "",
+          "offset": 753912
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage :is(.personnel-v2,.trade-v5,.hub-archive-v3,.facilities-v2) button.base-command[data-act]:after",
+          "source": "game/css/base-rooms-v7.css",
+          "context": "",
+          "offset": 785083
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .warehouse-v3.warehouse-v2 .warehouse-categories-v7 button:before",
+          "source": "game/css/base-logistics-trade-v12.css",
+          "context": "",
+          "offset": 820436
+        },
+        {
+          "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass .ak-back-tl:after",
+          "source": "game/css/departure-selected.css",
+          "context": "",
+          "offset": 879335
+        },
+        {
+          "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass .dep-body>:is(.dep-storage,.dep-pack):before",
+          "source": "game/css/departure-selected.css",
+          "context": "",
+          "offset": 882164
+        },
+        {
+          "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass #depPool .dep-card.picked:after",
+          "source": "game/css/departure-selected.css",
+          "context": "",
+          "offset": 886167
+        },
+        {
+          "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass #depBag:after",
+          "source": "game/css/departure-selected.css",
+          "context": "",
+          "offset": 888533
+        }
+      ]
+    },
+    {
+      "count": 7,
+      "body": "outline:1px solid #e6cb76cc;outline-offset:2px;box-shadow:0 0 0 1px var(--bg-deep),0 0 12px #e6cb7659",
+      "rawUpperBound": 606,
+      "rules": [
+        {
+          "selector": "#overlay .sc-shop .shop-slot.buy:focus-visible",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 192302
+        },
+        {
+          "selector": "#overlay .ak-back-tl:focus-visible",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 208759
+        },
+        {
+          "selector": "#overlay .slot-page .slot-card-cta:focus-visible,#overlay .slot-page .slot-card-ops .mini-btn:focus-visible,#overlay .pg.slot-page .pg-back:focus-visible,#overlay .slot-page .slot-page-help .help-btn:focus-visible",
+          "source": "game/css/page-slot-select.css",
+          "context": "",
+          "offset": 377290
+        },
+        {
+          "selector": "#overlay .pg.settings-page :is(button,select,input):focus-visible",
+          "source": "game/css/page-settings.css",
+          "context": "",
+          "offset": 395641
+        },
+        {
+          "selector": "#overlay .pg.settings-page .chk:has(input:focus-visible)",
+          "source": "game/css/page-settings.css",
+          "context": "",
+          "offset": 395890
+        },
+        {
+          "selector": "#overlay .sugin-page .sugin-exit:focus-visible,#overlay .card.page:has(.pg.settings-page) .ov-x:focus-visible",
+          "source": "game/css/page-settings.css",
+          "context": "",
+          "offset": 396049
+        },
+        {
+          "selector": "#overlay #hubMain.hub-ach :is(button,[role=button]):focus-visible",
+          "source": "game/css/page-ach.css",
+          "context": "",
+          "offset": 412569
+        }
+      ]
+    },
+    {
+      "count": 5,
+      "body": "outline:1px solid #e6cb76cc;outline-offset:2px;box-shadow:0 0 0 1px #101112,0 0 12px #e6cb7659",
+      "rawUpperBound": 376,
+      "rules": [
+        {
+          "selector": "#overlay .pg.cdes .pg-head .hs-btn:focus-visible,#overlay .pg.cdes .pg-close:focus-visible",
+          "source": "game/css/page-cardforge.css",
+          "context": "",
+          "offset": 420729
+        },
+        {
+          "selector": "#topBtns button:focus-visible,#logPanel .log-toggle:focus-visible",
+          "source": "game/css/page-expedition-hud.css",
+          "context": "",
+          "offset": 430923
+        },
+        {
+          "selector": "#overlay .card.scene .scene-ops .ov-btn:focus-visible",
+          "source": "game/css/page-events.css",
+          "context": "",
+          "offset": 471492
+        },
+        {
+          "selector": "#overlay .card.bag-page .bag-close:focus-visible,#overlay .card.bag-page .bag-sort .mini-btn:focus-visible,#overlay .card.bag-page .bag-head .help-btn:focus-visible",
+          "source": "game/css/page-rewards-bag-help.css",
+          "context": "",
+          "offset": 479391
+        },
+        {
+          "selector": "#overlay .card:has(.help-body) .ov-btn:focus-visible",
+          "source": "game/css/page-rewards-bag-help.css",
+          "context": "",
+          "offset": 481954
+        }
+      ]
+    },
+    {
+      "count": 4,
+      "body": "content:\"\";position:absolute;top:5px;right:5px;bottom:5px;left:5px;border:1px solid #a8b0a938;pointer-events:none",
+      "rawUpperBound": 339,
+      "rules": [
+        {
+          "selector": ".cls2-back:after",
+          "source": "game/css/hub.css",
+          "context": "",
+          "offset": 76011
+        },
+        {
+          "selector": ".ak-home:after,.ak-exit:after",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 141273
+        },
+        {
+          "selector": "#overlay .sugin-page .sugin-exit:after",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 207956
+        },
+        {
+          "selector": "#overlay .ak-back-tl:after",
+          "source": "game/css/winter.css",
+          "context": "",
+          "offset": 208462
+        }
+      ]
+    },
+    {
+      "count": 7,
+      "body": "background-image:url(./scenes/event-tt6-mystery.webp)",
+      "rawUpperBound": 318,
+      "rules": [
+        {
+          "selector": "#overlay .scene[data-asset-key=scene-event-bg]",
+          "source": "unmapped",
+          "context": "",
+          "offset": 126907
+        },
+        {
+          "selector": "#overlay .scene[data-asset-key=scene-event-timeskip]",
+          "source": "unmapped",
+          "context": "",
+          "offset": 127984
+        },
+        {
+          "selector": "#overlay .scene[data-asset-key=scene-event-mystery]",
+          "source": "unmapped",
+          "context": "",
+          "offset": 128312
+        },
+        {
+          "selector": "#overlay .node-pg[data-asset-key=scene-event-bg]",
+          "source": "unmapped",
+          "context": "",
+          "offset": 129919
+        },
+        {
+          "selector": "#overlay .node-pg[data-asset-key=scene-event-timeskip]",
+          "source": "unmapped",
+          "context": "",
+          "offset": 130486
+        },
+        {
+          "selector": "#overlay .node-pg[data-asset-key=scene-event-mystery]",
+          "source": "unmapped",
+          "context": "",
+          "offset": 130820
+        },
+        {
+          "selector": "#overlay .scene[data-asset-key=scene-event-custom-a],#overlay .node-pg[data-asset-key=scene-event-custom-a]",
+          "source": "unmapped",
+          "context": "",
+          "offset": 131604
+        }
+      ]
+    },
+    {
+      "count": 2,
+      "body": "grid-column:2;grid-row:2;align-self:center;box-sizing:border-box;min-width:0;min-height:0;max-height:100%;display:flex;flex-direction:column;justify-content:center;gap:22px;padding:24px;border-left:2px solid #99c6bb80;background:linear-gradient(90deg,#0a141bf2,#0a141bdb)",
+      "rawUpperBound": 271,
+      "rules": [
+        {
+          "selector": "#overlay .card.page .pg.node-pg.event-scene:not(.event-themed) .event-decisions",
+          "source": "game/css/entry-events.css",
+          "context": "",
+          "offset": 647311
+        },
+        {
+          "selector": "#overlay .card.page .event-themed .event-decisions",
+          "source": "game/css/entry-events.css",
+          "context": "",
+          "offset": 658105
+        }
+      ]
+    },
+    {
+      "count": 7,
+      "body": "display:flex;flex-direction:column;gap:12px",
+      "rawUpperBound": 258,
+      "rules": [
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .mode-list",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 539802
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .camp-depart-actions",
+          "source": "game/css/base-camp.css",
+          "context": "",
+          "offset": 540940
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp .skills-roster",
+          "source": "game/css/base-camp-rework.css",
+          "context": "",
+          "offset": 690813
+        },
+        {
+          "selector": "#overlay #hubMain.pg.hub.base-camp.base-subpage .trade-v5-checkout",
+          "source": "game/css/base-cohesion-v5.css",
+          "context": "",
+          "offset": 747479
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .archive-v12 .av3-medals",
+          "source": "game/css/base-archive-facilities-v12.css",
+          "context": "",
+          "offset": 845396
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage .archive-v12 .story-list",
+          "source": "game/css/base-archive-facilities-v12.css",
+          "context": "",
+          "offset": 848080
+        },
+        {
+          "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7 .facilities-v12 .facility-capacity",
+          "source": "game/css/base-archive-facilities-v12.css",
+          "context": "",
+          "offset": 863644
+        }
+      ]
+    }
+  ]
+}

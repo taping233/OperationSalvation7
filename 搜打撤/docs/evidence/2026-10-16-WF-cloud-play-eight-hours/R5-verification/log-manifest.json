@@ -1,0 +1,77 @@
+[
+  {
+    "bytes": 1338,
+    "path": "logs/asset-publication.log",
+    "sha256": "3dfe682390aec3eddddda82fd0b6c432d7c333d14ce6d81dafc59254aef00a4a"
+  },
+  {
+    "bytes": 1966,
+    "path": "logs/build-metrics.log",
+    "sha256": "257d1063b45fea8700af338cc18d50d0b9c77c61ab67619632dbc4f1357810ca"
+  },
+  {
+    "bytes": 24938,
+    "path": "logs/build.log",
+    "sha256": "9348efb9e6065a73022d9fbaad3757ae20e1c83420dd27e6837935ebef314e0f"
+  },
+  {
+    "bytes": 35323,
+    "path": "logs/check-runner.log",
+    "sha256": "047485e52e4693fddd3badf2922b885580e1acce00c8f7da7b69ef59bc4039ea"
+  },
+  {
+    "bytes": 683,
+    "path": "logs/data.log",
+    "sha256": "15e3a49a99650434585668a497a29f1cacf4622833b45e3868143425903d3300"
+  },
+  {
+    "bytes": 754,
+    "path": "logs/dependency-tree.log",
+    "sha256": "a395e758f5ec5821aa899215045edadde447cb55108fe766b1fe7445bde63433"
+  },
+  {
+    "bytes": 2695,
+    "path": "logs/docs.log",
+    "sha256": "c3bca1974bca179cfa4f69fa1f557c446627b1b983370bc745e2f53882009477"
+  },
+  {
+    "bytes": 161,
+    "path": "logs/environment.log",
+    "sha256": "0f7bcf6d2b53ae234c0b2b5e50a025a534e991ffa2260008a80b25251027b4b2"
+  },
+  {
+    "bytes": 690,
+    "path": "logs/index-semantics.log",
+    "sha256": "dabfc02cdccad26b0d408f4bbcb8d2b4e724de22927d4bb32bb096006df34e26"
+  },
+  {
+    "bytes": 816,
+    "path": "logs/lint.log",
+    "sha256": "1e1728c42fd2e10e54076f3f468379e9992ea670b42ffc331bc80b76ea424766"
+  },
+  {
+    "bytes": 332,
+    "path": "logs/npm-environment.log",
+    "sha256": "8b16179050d4c9ae93aba851e7ce203212a6f8538057d47383dc1865fac0c791"
+  },
+  {
+    "bytes": 751,
+    "path": "logs/snapshot-duplicate-attempt.log",
+    "sha256": "08e49c8b3caa8c83f5765ded3ffdb6ebf159f110a5c1644f07818940c244c83a"
+  },
+  {
+    "bytes": 629,
+    "path": "logs/syntax.log",
+    "sha256": "d10e12860967de57f271af74f98fa48812e85f4b56ff66e08a61980dd915be25"
+  },
+  {
+    "bytes": 219364,
+    "path": "logs/test.log",
+    "sha256": "57821ee7ec2dc4cc1d66ea5ce3182076dd00b1f90322c753fe3fdff120525b67"
+  },
+  {
+    "bytes": 2533,
+    "path": "logs/types.log",
+    "sha256": "69b49bdf57f5f6da015b818a6d4fa72792b4b230303ee4f2a5b7357f53e90d9a"
+  }
+]

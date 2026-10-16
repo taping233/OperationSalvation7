@@ -1,0 +1,50 @@
+[
+  {
+    "path": "game/src/battle/effects/battle.card-inspection.js",
+    "expectedSha256": "5ede79e3981ab8c83ffe9408e3c736a1123c4213c82ecd1e19afdb10ee70eac2",
+    "snapshotSha256": "5ede79e3981ab8c83ffe9408e3c736a1123c4213c82ecd1e19afdb10ee70eac2",
+    "matchesFinalAuthorSha": true
+  },
+  {
+    "path": "game/src/battle/core/battle.engine.js",
+    "expectedSha256": "640d449503c2f869e2b0ce20d406b6b3d48416dc5990a1b77c973ab1b36bdbec",
+    "snapshotSha256": "640d449503c2f869e2b0ce20d406b6b3d48416dc5990a1b77c973ab1b36bdbec",
+    "matchesFinalAuthorSha": true
+  },
+  {
+    "path": "game/src/battle/core/battle.draw.js",
+    "expectedSha256": "75cf7b5d7180d4b53cc7c3f44df42bc0562f0d830f8e1443940c9f01e91a0638",
+    "snapshotSha256": "75cf7b5d7180d4b53cc7c3f44df42bc0562f0d830f8e1443940c9f01e91a0638",
+    "matchesFinalAuthorSha": true
+  },
+  {
+    "path": "game/src/battle/core/battle.exec-play.js",
+    "expectedSha256": "5e07adb2cd15fb79e7b485ab1804dcb027431f241c091f4bb7caae0aab1ade35",
+    "snapshotSha256": "5e07adb2cd15fb79e7b485ab1804dcb027431f241c091f4bb7caae0aab1ade35",
+    "matchesFinalAuthorSha": true
+  },
+  {
+    "path": "game/src/battle/core/battle.enemy-phase.js",
+    "expectedSha256": "52da43ac52dc7635733a22596d9932ae34bd914d709f82d0e06f565c8f699001",
+    "snapshotSha256": "52da43ac52dc7635733a22596d9932ae34bd914d709f82d0e06f565c8f699001",
+    "matchesFinalAuthorSha": true
+  },
+  {
+    "path": "tests/skull-sword-effective-session.test.js",
+    "expectedSha256": "42457ff602117abe20baf93d0fd3cc52b02ea4dd9489306d4a8ab1d1800f8aa1",
+    "snapshotSha256": "42457ff602117abe20baf93d0fd3cc52b02ea4dd9489306d4a8ab1d1800f8aa1",
+    "matchesFinalAuthorSha": true
+  },
+  {
+    "path": "tests/battle-effective-card.test.js",
+    "expectedSha256": "6c0947212ad77bcf009e2b3f0e1746266b79101c6b2ee11483f9d3f1e9dcdcf0",
+    "snapshotSha256": "6c0947212ad77bcf009e2b3f0e1746266b79101c6b2ee11483f9d3f1e9dcdcf0",
+    "matchesFinalAuthorSha": true
+  },
+  {
+    "path": "tests/battle-drag-reference.test.js",
+    "expectedSha256": "1279f9cf8ba1f7a4fa9c149e77fac565b5130698acef4307020cddefe936d514",
+    "snapshotSha256": "1279f9cf8ba1f7a4fa9c149e77fac565b5130698acef4307020cddefe936d514",
+    "matchesFinalAuthorSha": true
+  }
+]

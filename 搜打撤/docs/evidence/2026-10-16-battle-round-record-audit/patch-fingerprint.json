@@ -1,0 +1,9 @@
+{
+  "path": "game/src/battle/core/battle.lifecycle.js",
+  "beforeSha256": "942f93e33d26ad394e9d07599702f89eb43ec7b7592acf7659c5e0f768e7d309",
+  "afterSha256": "362970eeec579a9779cc35c690f6ea1131f48e5ef82bfe5e3ff396d8f34104ce",
+  "replacement": {
+    "before": "round: battleState.round",
+    "after": "round: turn"
+  }
+}

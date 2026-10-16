@@ -1,0 +1,7 @@
+{
+  "consumer": "game/src/battle/view/battle.layers.js",
+  "old": "1830224b1a7ec8c0f7212bbc4229e015fe9ad977df5f9b06b01a77dda6a2f6e3",
+  "new": "2f59f030cab8537b85fe42d950b885be8a53194a1db1fe77ab22a8626aa982d8",
+  "review": "Parent reviewed full HEAD diff: view-only hand geometry/name strip/slot pointer bridge/intent and player stats markup. Existing Art.has/monsterArt selection remains unchanged. No added asset URL/path or manifest changes. battle.view.js is not registered as opaque consumer.",
+  "scriptSha256": "7ea91d7c913a8fc87f6f0c49eb5a93e4c1fbb1b4811618b126ddbd6d4ad0738f"
+}

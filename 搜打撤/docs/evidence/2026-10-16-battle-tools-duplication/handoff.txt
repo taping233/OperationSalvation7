@@ -1,0 +1,11 @@
+接手：game/src/battle/view/battle.layers.js, game/src/battle/view/battle.view.js, game/src/battle/view/battle.hand-layout.js, tests/battle-tools-lifecycle.test.js, docs/evidence/2026-10-16-battle-tools-duplication｜HEAD f0e84c5dc3
+相关变更 3（省略 744）；编辑占用 0（省略 7）；完成未提交 0；待拍板 0（省略 11）；疑点 0
+任务元数据跳过 2 项（无效/过大/链接），不能据此推断任务不存在；详情 --json
+变更  M game/src/battle/view/battle.hand-layout.js
+变更  M game/src/battle/view/battle.layers.js
+变更  M game/src/battle/view/battle.view.js
+活账老化：达 7 天 8 项｜最老 9 17天、10 17天、16 16天（仅提示，不自动降级或销账）
+证据候选 docs/evidence/2026-10-15-WF-fresh-run-fixes-1015/task.json
+维护审计：已落库待移行 1／已决待移行 0；无主 1（范围外省略 5，勿动）；省略条目用 --json 查看
+入口：docs/PARALLEL-REGISTRY.md；docs/PENDING.md；docs/WORKFLOW-TOOLS.md；记忆按需 npm run memory:discover
+限制：完成未提交仍保护归属；省略范围不代表无问题；证据仅入口；远端/留言/实页未核验。维护疑点用 --details，完整审计用 --json。

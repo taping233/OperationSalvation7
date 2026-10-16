@@ -1,0 +1,2506 @@
+{
+  "checkedAt": "2026-10-15T23:59:57.779Z",
+  "excludedAssetCount": 195,
+  "warnings": [],
+  "shadowedOldAssetCount": 30,
+  "shadowedOldAssetBytes": 1291352,
+  "oldChecks": [
+    {
+      "path": "cards/spell-tt8-curse1.webp",
+      "bytes": 75020,
+      "sourceSha256": "09aa94c5dfb27e4d48b3657d50da3451e994175de248d40928ffbb55d44b3bcc",
+      "snapshotSha256": "09aa94c5dfb27e4d48b3657d50da3451e994175de248d40928ffbb55d44b3bcc",
+      "currentSourceSha256": "09aa94c5dfb27e4d48b3657d50da3451e994175de248d40928ffbb55d44b3bcc",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse1.webp",
+      "bytes": 17406,
+      "sourceSha256": "1a60c3bbdbe690a604dca93893916f05576a4d544d41e250e3e9d679266a9495",
+      "snapshotSha256": "1a60c3bbdbe690a604dca93893916f05576a4d544d41e250e3e9d679266a9495",
+      "currentSourceSha256": "1a60c3bbdbe690a604dca93893916f05576a4d544d41e250e3e9d679266a9495",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/spell-tt8-curse2.webp",
+      "bytes": 103200,
+      "sourceSha256": "4fb64c46d0e8f5e6623f92a02ceebf33001705681d70e3b8fc8e876d310e39c7",
+      "snapshotSha256": "4fb64c46d0e8f5e6623f92a02ceebf33001705681d70e3b8fc8e876d310e39c7",
+      "currentSourceSha256": "4fb64c46d0e8f5e6623f92a02ceebf33001705681d70e3b8fc8e876d310e39c7",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse2.webp",
+      "bytes": 22768,
+      "sourceSha256": "a77114d06a8f963b0709d1974d9fbac2b658165d861dd8f586d1464112ee76ba",
+      "snapshotSha256": "a77114d06a8f963b0709d1974d9fbac2b658165d861dd8f586d1464112ee76ba",
+      "currentSourceSha256": "a77114d06a8f963b0709d1974d9fbac2b658165d861dd8f586d1464112ee76ba",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/spell-tt8-curse3.webp",
+      "bytes": 92638,
+      "sourceSha256": "e49a2a59c060f1103f93f6bb2fb7b97359f8ecfaf732589aa972cecd76c6e2cb",
+      "snapshotSha256": "e49a2a59c060f1103f93f6bb2fb7b97359f8ecfaf732589aa972cecd76c6e2cb",
+      "currentSourceSha256": "e49a2a59c060f1103f93f6bb2fb7b97359f8ecfaf732589aa972cecd76c6e2cb",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse3.webp",
+      "bytes": 23322,
+      "sourceSha256": "f71e159c81d3a006d63e5156f5ab3477b74dc4632e19e43012da8adee3980e5a",
+      "snapshotSha256": "f71e159c81d3a006d63e5156f5ab3477b74dc4632e19e43012da8adee3980e5a",
+      "currentSourceSha256": "f71e159c81d3a006d63e5156f5ab3477b74dc4632e19e43012da8adee3980e5a",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/spell-tt8-curse4.webp",
+      "bytes": 97694,
+      "sourceSha256": "2b448578b4378ac3276760e03b91a139d0ba1fd126a14978a1fe84f7e388a5c4",
+      "snapshotSha256": "2b448578b4378ac3276760e03b91a139d0ba1fd126a14978a1fe84f7e388a5c4",
+      "currentSourceSha256": "2b448578b4378ac3276760e03b91a139d0ba1fd126a14978a1fe84f7e388a5c4",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse4.webp",
+      "bytes": 23126,
+      "sourceSha256": "476fcfdd67004b62e7c0f8ba59f9da90fb050027550b3b19ed59866acadd0791",
+      "snapshotSha256": "476fcfdd67004b62e7c0f8ba59f9da90fb050027550b3b19ed59866acadd0791",
+      "currentSourceSha256": "476fcfdd67004b62e7c0f8ba59f9da90fb050027550b3b19ed59866acadd0791",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/equip-tt3-staff.webp",
+      "bytes": 15740,
+      "sourceSha256": "b36123515a96239be1194b5f413a28ece1b2d640944a1fede94a4e81904e5aad",
+      "snapshotSha256": "b36123515a96239be1194b5f413a28ece1b2d640944a1fede94a4e81904e5aad",
+      "currentSourceSha256": "b36123515a96239be1194b5f413a28ece1b2d640944a1fede94a4e81904e5aad",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-staff.webp",
+      "bytes": 16954,
+      "sourceSha256": "365d4c78a21f41f8c8bdec11fb2dd27b0e226784541a6ea34ea7bb8bad61156a",
+      "snapshotSha256": "365d4c78a21f41f8c8bdec11fb2dd27b0e226784541a6ea34ea7bb8bad61156a",
+      "currentSourceSha256": "365d4c78a21f41f8c8bdec11fb2dd27b0e226784541a6ea34ea7bb8bad61156a",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/equip-tt3-fate-wheel.webp",
+      "bytes": 79746,
+      "sourceSha256": "69bd24f9d1595a2cb03da05ddb1da0d0b526003c1505d4967ff40ab2d35c352c",
+      "snapshotSha256": "69bd24f9d1595a2cb03da05ddb1da0d0b526003c1505d4967ff40ab2d35c352c",
+      "currentSourceSha256": "69bd24f9d1595a2cb03da05ddb1da0d0b526003c1505d4967ff40ab2d35c352c",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-fate-wheel.webp",
+      "bytes": 11766,
+      "sourceSha256": "8bbe689632f471a3e0991f22ffbd63d8d12772927660098a5439c88ed559e8f0",
+      "snapshotSha256": "8bbe689632f471a3e0991f22ffbd63d8d12772927660098a5439c88ed559e8f0",
+      "currentSourceSha256": "8bbe689632f471a3e0991f22ffbd63d8d12772927660098a5439c88ed559e8f0",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/equip-tt3-wolf-bow.webp",
+      "bytes": 73274,
+      "sourceSha256": "ea1d58f405f3c2d26a242263015ea4c10aca9d064b8089d3891a4dc04ea7a147",
+      "snapshotSha256": "ea1d58f405f3c2d26a242263015ea4c10aca9d064b8089d3891a4dc04ea7a147",
+      "currentSourceSha256": "ea1d58f405f3c2d26a242263015ea4c10aca9d064b8089d3891a4dc04ea7a147",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-wolf-bow.webp",
+      "bytes": 8538,
+      "sourceSha256": "209ea2036f503e0fdf9cd8afc27657db08b57b648a6856d267edeb58006c67b5",
+      "snapshotSha256": "209ea2036f503e0fdf9cd8afc27657db08b57b648a6856d267edeb58006c67b5",
+      "currentSourceSha256": "209ea2036f503e0fdf9cd8afc27657db08b57b648a6856d267edeb58006c67b5",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/equip-tt3-twinwater-mail.webp",
+      "bytes": 116328,
+      "sourceSha256": "dbc216c2807f438278217745d198491a0d2eff36ea0b9008bb11e18532846e2c",
+      "snapshotSha256": "dbc216c2807f438278217745d198491a0d2eff36ea0b9008bb11e18532846e2c",
+      "currentSourceSha256": "dbc216c2807f438278217745d198491a0d2eff36ea0b9008bb11e18532846e2c",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-twinwater-mail.webp",
+      "bytes": 16416,
+      "sourceSha256": "d05e2fb9e166a6fd49abc2fc948353e44241bbb42cade14528167a5794d019ab",
+      "snapshotSha256": "d05e2fb9e166a6fd49abc2fc948353e44241bbb42cade14528167a5794d019ab",
+      "currentSourceSha256": "d05e2fb9e166a6fd49abc2fc948353e44241bbb42cade14528167a5794d019ab",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/equip-tt3-grass-armor.webp",
+      "bytes": 139890,
+      "sourceSha256": "cbc2f31e13294e5a2b4d89b60ae0b739975ea9290692918a1dad0379090f6f2a",
+      "snapshotSha256": "cbc2f31e13294e5a2b4d89b60ae0b739975ea9290692918a1dad0379090f6f2a",
+      "currentSourceSha256": "cbc2f31e13294e5a2b4d89b60ae0b739975ea9290692918a1dad0379090f6f2a",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-grass-armor.webp",
+      "bytes": 18848,
+      "sourceSha256": "c251f684b99ead2d88541546d9a9090a88a155afdcd256f84ca63035c985fa62",
+      "snapshotSha256": "c251f684b99ead2d88541546d9a9090a88a155afdcd256f84ca63035c985fa62",
+      "currentSourceSha256": "c251f684b99ead2d88541546d9a9090a88a155afdcd256f84ca63035c985fa62",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/equip-tt3-blooddrinker.webp",
+      "bytes": 58146,
+      "sourceSha256": "f9e0a1d48c1eea1c40dbfa10fec8d3ffab8522d4e8a0b8aa27162aa82055c126",
+      "snapshotSha256": "f9e0a1d48c1eea1c40dbfa10fec8d3ffab8522d4e8a0b8aa27162aa82055c126",
+      "currentSourceSha256": "f9e0a1d48c1eea1c40dbfa10fec8d3ffab8522d4e8a0b8aa27162aa82055c126",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-blooddrinker.webp",
+      "bytes": 8334,
+      "sourceSha256": "8875ed3d5f7433e8ae2bb8d0e2fd0e8d88b1db2b752dd844a9deb67df402e776",
+      "snapshotSha256": "8875ed3d5f7433e8ae2bb8d0e2fd0e8d88b1db2b752dd844a9deb67df402e776",
+      "currentSourceSha256": "8875ed3d5f7433e8ae2bb8d0e2fd0e8d88b1db2b752dd844a9deb67df402e776",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/equip-tt8-demonslay.webp",
+      "bytes": 18100,
+      "sourceSha256": "2e23c289d99acf110ba152b58d2d136bafeee0c7f5bc1613c6475d9b35c3d64e",
+      "snapshotSha256": "2e23c289d99acf110ba152b58d2d136bafeee0c7f5bc1613c6475d9b35c3d64e",
+      "currentSourceSha256": "2e23c289d99acf110ba152b58d2d136bafeee0c7f5bc1613c6475d9b35c3d64e",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-demonslay.webp",
+      "bytes": 3630,
+      "sourceSha256": "d89a450f3bbfa5e0c0c03ae9fb82deb892cc5e8b457a96bca115c910d88ab629",
+      "snapshotSha256": "d89a450f3bbfa5e0c0c03ae9fb82deb892cc5e8b457a96bca115c910d88ab629",
+      "currentSourceSha256": "d89a450f3bbfa5e0c0c03ae9fb82deb892cc5e8b457a96bca115c910d88ab629",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/equip-tt8-archdemon.webp",
+      "bytes": 16904,
+      "sourceSha256": "b3cb93997a286dc377716e4fa8a68b2114719131ab899a9167663e90202e93bd",
+      "snapshotSha256": "b3cb93997a286dc377716e4fa8a68b2114719131ab899a9167663e90202e93bd",
+      "currentSourceSha256": "b3cb93997a286dc377716e4fa8a68b2114719131ab899a9167663e90202e93bd",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-archdemon.webp",
+      "bytes": 3170,
+      "sourceSha256": "d16adc298449ad2657837d47ae295124e90e71a17c1350ef46cbb44f9b32d2bf",
+      "snapshotSha256": "d16adc298449ad2657837d47ae295124e90e71a17c1350ef46cbb44f9b32d2bf",
+      "currentSourceSha256": "d16adc298449ad2657837d47ae295124e90e71a17c1350ef46cbb44f9b32d2bf",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/equip-tt8-heavensword.webp",
+      "bytes": 53908,
+      "sourceSha256": "61539f6a00d221399f3632b009145c8e367b91049abead5b374c47fba2329648",
+      "snapshotSha256": "61539f6a00d221399f3632b009145c8e367b91049abead5b374c47fba2329648",
+      "currentSourceSha256": "61539f6a00d221399f3632b009145c8e367b91049abead5b374c47fba2329648",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-heavensword.webp",
+      "bytes": 12068,
+      "sourceSha256": "0ea725b5cc62e4a9ba8b8da401949492d3d3650b6bca9342a3965dd7b5f77faf",
+      "snapshotSha256": "0ea725b5cc62e4a9ba8b8da401949492d3d3650b6bca9342a3965dd7b5f77faf",
+      "currentSourceSha256": "0ea725b5cc62e4a9ba8b8da401949492d3d3650b6bca9342a3965dd7b5f77faf",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/equip-tt7-arcanescroll.webp",
+      "bytes": 85072,
+      "sourceSha256": "b3708f83f6aa7e69c5e61e438666544df3c367cadd3f5ce40322d668ee8f8cb7",
+      "snapshotSha256": "b3708f83f6aa7e69c5e61e438666544df3c367cadd3f5ce40322d668ee8f8cb7",
+      "currentSourceSha256": "b3708f83f6aa7e69c5e61e438666544df3c367cadd3f5ce40322d668ee8f8cb7",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt7-arcanescroll.webp",
+      "bytes": 11656,
+      "sourceSha256": "c14366802700684916a9f0d5b12bbfe1e0ac9d6014c2a936608f9be98c52a712",
+      "snapshotSha256": "c14366802700684916a9f0d5b12bbfe1e0ac9d6014c2a936608f9be98c52a712",
+      "currentSourceSha256": "c14366802700684916a9f0d5b12bbfe1e0ac9d6014c2a936608f9be98c52a712",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "cards/equip-tt12-raygun.webp",
+      "bytes": 59680,
+      "sourceSha256": "2356c8d0e454dc7d42e2cc17016577ce8cad0deb3364e8ecd79a5cb0de54dd93",
+      "snapshotSha256": "2356c8d0e454dc7d42e2cc17016577ce8cad0deb3364e8ecd79a5cb0de54dd93",
+      "currentSourceSha256": "2356c8d0e454dc7d42e2cc17016577ce8cad0deb3364e8ecd79a5cb0de54dd93",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt12-raygun.webp",
+      "bytes": 8010,
+      "sourceSha256": "4237ad7c9919899ec992e16789c30783dfa861287f7eb36bdb1d53f0e3f68d3f",
+      "snapshotSha256": "4237ad7c9919899ec992e16789c30783dfa861287f7eb36bdb1d53f0e3f68d3f",
+      "currentSourceSha256": "4237ad7c9919899ec992e16789c30783dfa861287f7eb36bdb1d53f0e3f68d3f",
+      "isExcluded": true,
+      "publishedAtOriginalPath": false,
+      "publishedByteIdenticalPaths": [],
+      "artManifestReference": false,
+      "thumbManifestReference": false
+    }
+  ],
+  "replacements": [
+    {
+      "path": "cards/curse-drain.webp",
+      "sourceSha256": "104952fc8765ea334e3ba03c6b0dfc2f48bd341d024c3303f230280083d88b1e",
+      "publishedSha256": "104952fc8765ea334e3ba03c6b0dfc2f48bd341d024c3303f230280083d88b1e",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/curse-drain.webp",
+      "sourceSha256": "bde557f9f1cb1c1b300e1c4895cb09cdf49734e1df9d3a833802a13e2feb1bb5",
+      "publishedSha256": "bde557f9f1cb1c1b300e1c4895cb09cdf49734e1df9d3a833802a13e2feb1bb5",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/curse-freeze.webp",
+      "sourceSha256": "5d03e9c283f431653f41517d949d82fbfa0916ecfd831b720049843abe3bab5d",
+      "publishedSha256": "5d03e9c283f431653f41517d949d82fbfa0916ecfd831b720049843abe3bab5d",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/curse-freeze.webp",
+      "sourceSha256": "8117a9a628235908f376d5a344803c991c6566df3707d6a33695fabff3f8110d",
+      "publishedSha256": "8117a9a628235908f376d5a344803c991c6566df3707d6a33695fabff3f8110d",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/curse-venom.webp",
+      "sourceSha256": "3e1167666f0c5bb333145bc91fb71a08ab22ea1aa2de2103198b3d84f9c30dc0",
+      "publishedSha256": "3e1167666f0c5bb333145bc91fb71a08ab22ea1aa2de2103198b3d84f9c30dc0",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/curse-venom.webp",
+      "sourceSha256": "f4dcedd2c7f3ff529a0b8499acdd87b13c2ff1cb12f546b8e5b83688de49a2a0",
+      "publishedSha256": "f4dcedd2c7f3ff529a0b8499acdd87b13c2ff1cb12f546b8e5b83688de49a2a0",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/curse-silence.webp",
+      "sourceSha256": "466e95ee0eae3fd065ec47452fe9e509a34f9f849d8fd0d59d84d48165275f50",
+      "publishedSha256": "466e95ee0eae3fd065ec47452fe9e509a34f9f849d8fd0d59d84d48165275f50",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/curse-silence.webp",
+      "sourceSha256": "12ab7b29fbbe26cf25f46edf9a3e682b957349b468d7366198de921a65d4784e",
+      "publishedSha256": "12ab7b29fbbe26cf25f46edf9a3e682b957349b468d7366198de921a65d4784e",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/studio-expanded/tt3-staff.webp",
+      "sourceSha256": "995e9a57f83ed5c1e494cda374fb536bbe72384033e1a6df41cd3c08b825fbf1",
+      "publishedSha256": "995e9a57f83ed5c1e494cda374fb536bbe72384033e1a6df41cd3c08b825fbf1",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/studio-expanded/tt3-staff.webp",
+      "sourceSha256": "f0975823bf81b775629cd91d68d2d7d37a19275129ba30ffe2f348c166befc9c",
+      "publishedSha256": "f0975823bf81b775629cd91d68d2d7d37a19275129ba30ffe2f348c166befc9c",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/studio-expanded/tt3-fate-wheel.webp",
+      "sourceSha256": "d77952377d35d74a67f0d94eceaabd016fdde1228deacb8beaafce39c1a0df97",
+      "publishedSha256": "d77952377d35d74a67f0d94eceaabd016fdde1228deacb8beaafce39c1a0df97",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/studio-expanded/tt3-fate-wheel.webp",
+      "sourceSha256": "c4f1dd6f84d4d845edcb425294103c15a5c3fe8d670b561876ec71abd3e0171d",
+      "publishedSha256": "c4f1dd6f84d4d845edcb425294103c15a5c3fe8d670b561876ec71abd3e0171d",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/studio-expanded/tt3-wolf-bow.webp",
+      "sourceSha256": "aae411b8680ee5c34f5288b41688fed120a88ec11a6e687cacb5389e9ccf484d",
+      "publishedSha256": "aae411b8680ee5c34f5288b41688fed120a88ec11a6e687cacb5389e9ccf484d",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/studio-expanded/tt3-wolf-bow.webp",
+      "sourceSha256": "f2e2844e65722dd65e0f083735342555cc2d0ebbae4ddd4775bae2917b39a578",
+      "publishedSha256": "f2e2844e65722dd65e0f083735342555cc2d0ebbae4ddd4775bae2917b39a578",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/studio-expanded/tt3-twinwater-mail.webp",
+      "sourceSha256": "337fd5c7bd7529f3d996ee821be7eb02949b9c48a75f44bb125281786fa6fb80",
+      "publishedSha256": "337fd5c7bd7529f3d996ee821be7eb02949b9c48a75f44bb125281786fa6fb80",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/studio-expanded/tt3-twinwater-mail.webp",
+      "sourceSha256": "ffc3fef5cdaf475edcd6bc3a4284079f11995f1c01ad7d0ca20a105a7f66d36d",
+      "publishedSha256": "ffc3fef5cdaf475edcd6bc3a4284079f11995f1c01ad7d0ca20a105a7f66d36d",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/studio-expanded/tt3-grass-armor.webp",
+      "sourceSha256": "27e22fb7887aeb11ab26d5d4f94a2b6707930c0722847276178efa1fb0b0058b",
+      "publishedSha256": "27e22fb7887aeb11ab26d5d4f94a2b6707930c0722847276178efa1fb0b0058b",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/studio-expanded/tt3-grass-armor.webp",
+      "sourceSha256": "5d68144089244b6108517692d571732b69f98cf07eee383599d3191ac04bf435",
+      "publishedSha256": "5d68144089244b6108517692d571732b69f98cf07eee383599d3191ac04bf435",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/studio-expanded/tt3-blooddrinker.webp",
+      "sourceSha256": "50dceb69e191b96f901c46adb5745f330e936932eea62de52e69867e231c6c40",
+      "publishedSha256": "50dceb69e191b96f901c46adb5745f330e936932eea62de52e69867e231c6c40",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/studio-expanded/tt3-blooddrinker.webp",
+      "sourceSha256": "ea78615077eb7069d0f0da778781a730fa5832a2f69df0325de9f779b35a75a0",
+      "publishedSha256": "ea78615077eb7069d0f0da778781a730fa5832a2f69df0325de9f779b35a75a0",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/studio-expanded/tt8-demonslay.webp",
+      "sourceSha256": "39c364128dfa712d0131e095666d0aa2d76a02b1fe025c99a75f6fbed7d039c4",
+      "publishedSha256": "39c364128dfa712d0131e095666d0aa2d76a02b1fe025c99a75f6fbed7d039c4",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/studio-expanded/tt8-demonslay.webp",
+      "sourceSha256": "d14024ad84c604cea745c2311745193791c1808ad6068425f93124e02a460821",
+      "publishedSha256": "d14024ad84c604cea745c2311745193791c1808ad6068425f93124e02a460821",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/studio-expanded/tt8-archdemon.webp",
+      "sourceSha256": "93160ef3ee0dc67e4efea9f2cd38ab144644d4664781ca71e5cc63ba0091ac65",
+      "publishedSha256": "93160ef3ee0dc67e4efea9f2cd38ab144644d4664781ca71e5cc63ba0091ac65",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/studio-expanded/tt8-archdemon.webp",
+      "sourceSha256": "29d4d76e66b366dc4718a55c406d2011273a8bfdef969a6315c792fe3db31e90",
+      "publishedSha256": "29d4d76e66b366dc4718a55c406d2011273a8bfdef969a6315c792fe3db31e90",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/studio-expanded/tt8-heavensword.webp",
+      "sourceSha256": "3188d4eca3d13b150852e6cfda49638ef0c9440267bf3417bf478c9c90055b60",
+      "publishedSha256": "3188d4eca3d13b150852e6cfda49638ef0c9440267bf3417bf478c9c90055b60",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/studio-expanded/tt8-heavensword.webp",
+      "sourceSha256": "15a29ad6cd4edfc249d2619025b6704c9bc785894c51703f913a03076227a53b",
+      "publishedSha256": "15a29ad6cd4edfc249d2619025b6704c9bc785894c51703f913a03076227a53b",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/studio-expanded/tt7-arcanescroll.webp",
+      "sourceSha256": "5c3c306f51c851012b1adb3c8900a252dfbf48d714fab5a8f667f7ede3d91320",
+      "publishedSha256": "5c3c306f51c851012b1adb3c8900a252dfbf48d714fab5a8f667f7ede3d91320",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/studio-expanded/tt7-arcanescroll.webp",
+      "sourceSha256": "460537734eb2be3c285f3f0410ab9e4c3c19ea74523b79a9e5d81d4ab8b19613",
+      "publishedSha256": "460537734eb2be3c285f3f0410ab9e4c3c19ea74523b79a9e5d81d4ab8b19613",
+      "manifestReference": true
+    },
+    {
+      "path": "cards/studio-expanded/tt12-raygun.webp",
+      "sourceSha256": "ecf6548fcee58020d1362fa18857a2578777c20792c20b01d264118acbab3167",
+      "publishedSha256": "ecf6548fcee58020d1362fa18857a2578777c20792c20b01d264118acbab3167",
+      "manifestReference": true
+    },
+    {
+      "path": "thumbs/cards/studio-expanded/tt12-raygun.webp",
+      "sourceSha256": "d5451bbcb5c0a29abe3b8825baa1f1b26d479f95be6f9fa1d8550d89bec18a95",
+      "publishedSha256": "d5451bbcb5c0a29abe3b8825baa1f1b26d479f95be6f9fa1d8550d89bec18a95",
+      "manifestReference": true
+    }
+  ],
+  "allCandidateCount": 195,
+  "allCandidateSourceBytes": 28910834,
+  "allCandidateChecks": [
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-00.webp",
+      "category": "chests",
+      "bytes": 143532,
+      "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-01.webp",
+      "category": "chests",
+      "bytes": 143532,
+      "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-02.webp",
+      "category": "chests",
+      "bytes": 143532,
+      "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-03.webp",
+      "category": "chests",
+      "bytes": 145560,
+      "sha256": "81f26ad3ec0f03dfde11137a8383b97138d6977037e29c4ad537366301c621e8",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-04.webp",
+      "category": "chests",
+      "bytes": 148288,
+      "sha256": "8c6fc066c1c1a9266fbd9fc1baedd754425c10dfc740a70b575d1f386909f657",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-05.webp",
+      "category": "chests",
+      "bytes": 148314,
+      "sha256": "86c318440ee598ca88e96cdc51f0d2b19b235d4d5d85ef8000202808481cd8c3",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-06.webp",
+      "category": "chests",
+      "bytes": 146944,
+      "sha256": "1ddb3d999536e662875248753cf4569153eefadc39bb6b5323bdcebc42069b3e",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-07.webp",
+      "category": "chests",
+      "bytes": 140484,
+      "sha256": "0ef56140d1c4c7a303416c79901416f4b8eb35a132ac067dc75b4b4f5e141bbc",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-08.webp",
+      "category": "chests",
+      "bytes": 155110,
+      "sha256": "2d548a4591864545a87d06a13a6d307755e62151329252b5143145de993ff263",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-09.webp",
+      "category": "chests",
+      "bytes": 179648,
+      "sha256": "7d7665b911647fd1cc7d8e13fd03cb214ac14e34b6b5f19a489c5e9453fdd55f",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-10.webp",
+      "category": "chests",
+      "bytes": 202252,
+      "sha256": "b98f3c651c0969f96160292a0fbdbd7c2d6111f872bdd22764bae36606f47828",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-11.webp",
+      "category": "chests",
+      "bytes": 219170,
+      "sha256": "0d31040a973999910e8360b54626405db3926d01f53240a4d63d58e02aa02251",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-12.webp",
+      "category": "chests",
+      "bytes": 230116,
+      "sha256": "7638db0bdcf797276095a5ee31dd18c610499ccc30202ef8784d69254eda092f",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-13.webp",
+      "category": "chests",
+      "bytes": 235438,
+      "sha256": "52e90c7b950f8a7d11e74d7612ae7df5bd403326ec917212e216ea39f9174a93",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-14.webp",
+      "category": "chests",
+      "bytes": 242876,
+      "sha256": "f5db37cd34a38cecfc8485a489f0efe2a88b90e02b2025d550610ab453ef35db",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-15.webp",
+      "category": "chests",
+      "bytes": 246530,
+      "sha256": "93d0019234fdf206cd1bd978c4012bfc60e15473aef2768ecbf5da48731c778a",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-16.webp",
+      "category": "chests",
+      "bytes": 248260,
+      "sha256": "8ff0d1656c438489ae9776e7645aa1564165e7ba3d8b700eebff12fc10635044",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-17.webp",
+      "category": "chests",
+      "bytes": 248260,
+      "sha256": "8ff0d1656c438489ae9776e7645aa1564165e7ba3d8b700eebff12fc10635044",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-00.webp",
+      "category": "chests",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-01.webp",
+      "category": "chests",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-02.webp",
+      "category": "chests",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-03.webp",
+      "category": "chests",
+      "bytes": 192418,
+      "sha256": "73a89c7209796383e4dab46ee193cc2d4db153c4364e5670b13750f7dc6e38d1",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-04.webp",
+      "category": "chests",
+      "bytes": 192152,
+      "sha256": "35a2c92d7545be1f3f6361e9d3db9722b66025d132893b5efdd4d4e9eb5045d8",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-05.webp",
+      "category": "chests",
+      "bytes": 191562,
+      "sha256": "5c8c64f6111fbac9a32d1e374c4b5970670db942d153955acf16fea973867266",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-06.webp",
+      "category": "chests",
+      "bytes": 186902,
+      "sha256": "af3f91b70314b59e80596f435e0a951b39417004d89aef35e414aaf65f693217",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-07.webp",
+      "category": "chests",
+      "bytes": 179380,
+      "sha256": "dae0dbc3f38968942581dfbe8858a8b133b4dedc74c014ba14184aa2b3acc2e6",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-08.webp",
+      "category": "chests",
+      "bytes": 193256,
+      "sha256": "534574ba7f807bbbf593e0bbf26dadaed8d55edb6db9db9beb3e14b27fe295e2",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-09.webp",
+      "category": "chests",
+      "bytes": 215096,
+      "sha256": "4f461fe71726fa7af02ec1adcb819af128897f6728d5875b6989cdd2247b31d6",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-10.webp",
+      "category": "chests",
+      "bytes": 235546,
+      "sha256": "445748a80a200de35e6b9f879ae92935f732995b029794f35abb81f0c52ffd27",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-11.webp",
+      "category": "chests",
+      "bytes": 250360,
+      "sha256": "23338436564b9a4fffa6dc15d729d391e937c8f2f82ad83633767a13531a6b0e",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-12.webp",
+      "category": "chests",
+      "bytes": 260920,
+      "sha256": "e298010d110a256d9c82138a37295a250328e53744dba22f89f9deacc04990aa",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-13.webp",
+      "category": "chests",
+      "bytes": 266132,
+      "sha256": "1f4ca606cd80a9e19dbc73e565d9999cbf40cd8269cc4f97de98c80117b6ceed",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-14.webp",
+      "category": "chests",
+      "bytes": 272194,
+      "sha256": "e8094f34ce84d35ad17d2f2bf2d39bfba224c604a26726c2252529d0f528a1b1",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-15.webp",
+      "category": "chests",
+      "bytes": 276092,
+      "sha256": "e6e82e54452e29fee86e341084a00bdeac8b046a2a0281eac524f01de2f2ddf9",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-16.webp",
+      "category": "chests",
+      "bytes": 277964,
+      "sha256": "cc001beadc53d5447f0e14e9b89fe8b67e04051376e1dd4a6c8d423396554bef",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-17.webp",
+      "category": "chests",
+      "bytes": 277964,
+      "sha256": "cc001beadc53d5447f0e14e9b89fe8b67e04051376e1dd4a6c8d423396554bef",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-00.webp",
+      "category": "chests",
+      "bytes": 224682,
+      "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-01.webp",
+      "category": "chests",
+      "bytes": 224682,
+      "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-02.webp",
+      "category": "chests",
+      "bytes": 224682,
+      "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-03.webp",
+      "category": "chests",
+      "bytes": 225630,
+      "sha256": "0214745cbc97eb02478e057b6f4273b70a96bac28761b8a5c0cb20b95ae0fcdf",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-04.webp",
+      "category": "chests",
+      "bytes": 226818,
+      "sha256": "8d7bf08802cc79aff26862f9c8c4c40609b4df3fc8975b9b31afb45933869589",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-05.webp",
+      "category": "chests",
+      "bytes": 225804,
+      "sha256": "0d6a2c5113b1adde19db15b2abf47b84e1053d251e3a15929330e8109d2ff90b",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-06.webp",
+      "category": "chests",
+      "bytes": 223952,
+      "sha256": "d75301ba39147003df49001c72902a1037fde55887ba71c115c69be98f1e03c8",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-07.webp",
+      "category": "chests",
+      "bytes": 220500,
+      "sha256": "f49c466b0bee679783b5a5431cc1a585c257dfe9ca0b2fb89f345f37235dba56",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-08.webp",
+      "category": "chests",
+      "bytes": 216390,
+      "sha256": "ffa0533e42e4d9e45b0d770dfb91fd28cb498a2cfde9858fe8e245baa2425c64",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-09.webp",
+      "category": "chests",
+      "bytes": 234128,
+      "sha256": "ef0de3981afd42fed84b6109abcd3027f3d38a539bd879cfc31f5610e87a9c50",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-10.webp",
+      "category": "chests",
+      "bytes": 253966,
+      "sha256": "543d1bf35851cc0de7095c5780c85073ab57ff1cd1b75163260d71a14d220d3b",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-11.webp",
+      "category": "chests",
+      "bytes": 269236,
+      "sha256": "ee2095c0608e782cbee5d375b0fd5ec1ddaa193129a16cb75f96b1e67f2ac715",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-12.webp",
+      "category": "chests",
+      "bytes": 279460,
+      "sha256": "0cdcec16ad27541ac11f3d9b52520537a54201ce0e6f116732f55d53357cc0f4",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-13.webp",
+      "category": "chests",
+      "bytes": 285092,
+      "sha256": "261472baf2568a8d786a88bb3ee86e41e3f1af2123dba34b7067b0aeb5fdfa72",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-14.webp",
+      "category": "chests",
+      "bytes": 292330,
+      "sha256": "dd633a76f394c0f2437dc13c9d5e7464b62c9cc6205d748205d4fa65c11b5159",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-15.webp",
+      "category": "chests",
+      "bytes": 295830,
+      "sha256": "4ac1f51d22901bc67420dd01203d8b2a7163a712e619bdce308be076b4293362",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-16.webp",
+      "category": "chests",
+      "bytes": 298396,
+      "sha256": "ecc5b2a6c872f58b73dd2ade8953f73bc5be36e3809d40fe9858f916ffb062ac",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-17.webp",
+      "category": "chests",
+      "bytes": 298396,
+      "sha256": "ecc5b2a6c872f58b73dd2ade8953f73bc5be36e3809d40fe9858f916ffb062ac",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-00.webp",
+      "category": "chests",
+      "bytes": 186658,
+      "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-01.webp",
+      "category": "chests",
+      "bytes": 186658,
+      "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-02.webp",
+      "category": "chests",
+      "bytes": 186658,
+      "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-03.webp",
+      "category": "chests",
+      "bytes": 187202,
+      "sha256": "bc8a95009b59e47cd1e3ae17ec9fd60bb1bbcbdcb34b687491ffbb60cba1dca6",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-04.webp",
+      "category": "chests",
+      "bytes": 185880,
+      "sha256": "11017a589985ea73ba8dde67a2b27f4581bea9bf9082937349a7a4caf6dc9ec7",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-05.webp",
+      "category": "chests",
+      "bytes": 184568,
+      "sha256": "3f1ac120dd64edcf20d6172b54880279e0aa07068d1f8ba12f77d5365eb9b2cf",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-06.webp",
+      "category": "chests",
+      "bytes": 181588,
+      "sha256": "cd34fd791d6843c5016e1acf976f183dee4f0b1861492a30c75066a8f7cb9c45",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-07.webp",
+      "category": "chests",
+      "bytes": 177448,
+      "sha256": "cfee76eab6eee4cead7213f44cc4ac3bdd64a3387490999cea6298423e061e9a",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-08.webp",
+      "category": "chests",
+      "bytes": 188688,
+      "sha256": "3453aefa02b4727113907fa85e84f354525559657b8f25c48e2c2592b9f7c2f7",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-09.webp",
+      "category": "chests",
+      "bytes": 208722,
+      "sha256": "7720f004f9fdf0425dbb647e96d8ae1930421722b7a353e2bb773724d1ecf56b",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-10.webp",
+      "category": "chests",
+      "bytes": 226422,
+      "sha256": "b19b09f77d0e0062fae77ea0215e66b4c67266d2c4699326e0d6228cb9201bee",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-11.webp",
+      "category": "chests",
+      "bytes": 239398,
+      "sha256": "980be1d5cdd0473ec71f27467bf3493ba63ab84d9389b625e4fdb2f9d9002bcc",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-12.webp",
+      "category": "chests",
+      "bytes": 247988,
+      "sha256": "f0b1f0a821d63db7e897616f2a103b6ba9ae8136950bec7cef8c8db334e19065",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-13.webp",
+      "category": "chests",
+      "bytes": 251882,
+      "sha256": "e034c127a103c7664ab7e0c786f6070dc98a22d90d1b106db7e747a2401c8068",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-14.webp",
+      "category": "chests",
+      "bytes": 257424,
+      "sha256": "e35572d3c5dff445c201e7502132f2a91ccfa953a8f60d48ecbc4c63de3a16ff",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-15.webp",
+      "category": "chests",
+      "bytes": 260064,
+      "sha256": "3712e351418dcf3e9ef2b49489b396ec5d9642a6dc370364a3b21ad67d322337",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-16.webp",
+      "category": "chests",
+      "bytes": 261222,
+      "sha256": "51b1f8d01a7a382c24903e42353224a447d6a38b2d3685bda06062bb8cdc64a4",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-17.webp",
+      "category": "chests",
+      "bytes": 261222,
+      "sha256": "51b1f8d01a7a382c24903e42353224a447d6a38b2d3685bda06062bb8cdc64a4",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-00.webp",
+      "category": "chests",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-01.webp",
+      "category": "chests",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-02.webp",
+      "category": "chests",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-03.webp",
+      "category": "chests",
+      "bytes": 227264,
+      "sha256": "772e0c38457e907758f27d03838b66f1787b90faedfc17a79d8c83a159772174",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-04.webp",
+      "category": "chests",
+      "bytes": 228460,
+      "sha256": "f55c267b4d58d2f4b2d78460d9bc7d046f698cc834b32f987b7c23e198f590dd",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-05.webp",
+      "category": "chests",
+      "bytes": 226622,
+      "sha256": "5c1120385acea03e8b85d2a37a875c12b845d062ed201250ee9bd989e70908fc",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-06.webp",
+      "category": "chests",
+      "bytes": 221112,
+      "sha256": "70ae5bc80841ac98fad041f8ec6381c70a8fd77833f440e832c6e9b917eed054",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-07.webp",
+      "category": "chests",
+      "bytes": 218610,
+      "sha256": "c041066c7a4ddb307bd05eb7b3baa20c102c15f6612b13de90b516654c94139f",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-08.webp",
+      "category": "chests",
+      "bytes": 208360,
+      "sha256": "2c95f750714e24edcfe557038bbae8dc725968e723aadce9ba81126af6bb86e7",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-09.webp",
+      "category": "chests",
+      "bytes": 224066,
+      "sha256": "89550994e59b38f73be96b10db973561cd613e64e0dc3b2092778b0c53b4c603",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-10.webp",
+      "category": "chests",
+      "bytes": 243836,
+      "sha256": "b1b2833cb9f2c6729a4d884506992cb9e46dfcd2792d1a1fcdc7796247a3f787",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-11.webp",
+      "category": "chests",
+      "bytes": 257822,
+      "sha256": "476a87b339d5bb047e11853bc358db5bc813975e78f0cbe5fe60c3dc0fdc4fb1",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-12.webp",
+      "category": "chests",
+      "bytes": 268188,
+      "sha256": "cfbf335b116302c8c86d8f129f90e9faf102f0e9513e095fd111e4c533733c9b",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-13.webp",
+      "category": "chests",
+      "bytes": 274934,
+      "sha256": "b10eda2ed474a11b264857fc6f71d33d5caa8897d4db69e45049ee9e8e3c1a33",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-14.webp",
+      "category": "chests",
+      "bytes": 279864,
+      "sha256": "a54a05a57cd2918cd0511d31c49630cec27a39a3adaa0d7e46830212badcecd6",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-15.webp",
+      "category": "chests",
+      "bytes": 283340,
+      "sha256": "89c2c24733347423a5ed01efffa71d9899b07e9f241517bf19495ef4797e2ab4",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-16.webp",
+      "category": "chests",
+      "bytes": 284980,
+      "sha256": "eaa01505e2e9357123cc2329ec69445527aad67452a4d4409488ba3d48b46b80",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-17.webp",
+      "category": "chests",
+      "bytes": 284980,
+      "sha256": "eaa01505e2e9357123cc2329ec69445527aad67452a4d4409488ba3d48b46b80",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/wu/atk-hit-1.webp",
+      "category": "frames",
+      "bytes": 61574,
+      "sha256": "9fff76805caf90a0609dd61ccaf7ec08208eee84a890774e3e515651adcd6248",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/wu/atk-hit.webp",
+      "category": "frames",
+      "bytes": 57444,
+      "sha256": "0f78de0055550c19cc6c2d8338344cd8e3da25ae1064ef058fddcc536af83e61",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/wu/atk-wind-1.webp",
+      "category": "frames",
+      "bytes": 57484,
+      "sha256": "77fee63a7670a136800786da55d76d111e34530565efdb7e392cf0289372fb53",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/wu/atk-wind-2.webp",
+      "category": "frames",
+      "bytes": 63240,
+      "sha256": "84d7d870874f8d5061367c44706fefeca0c2a0215578221825831a95929255cb",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/wu/atk-wind.webp",
+      "category": "frames",
+      "bytes": 55804,
+      "sha256": "3efd3c2ca05a8ec170e06c6d93d2120bb8c99bf751482cf3a0fd374243b2b25e",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/wu/cast-1.webp",
+      "category": "frames",
+      "bytes": 62366,
+      "sha256": "e63de959c4de2d21352a5e14f110f36780578cd6d41362274e15b854b2e44df1",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/wu/cast.webp",
+      "category": "frames",
+      "bytes": 62366,
+      "sha256": "e63de959c4de2d21352a5e14f110f36780578cd6d41362274e15b854b2e44df1",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/wu/hurt-1.webp",
+      "category": "frames",
+      "bytes": 47084,
+      "sha256": "cf707b3a0dacdc53cfe76d6471dd0a9d299ece149558c85285a28fbae6fc4650",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/wu/hurt.webp",
+      "category": "frames",
+      "bytes": 47084,
+      "sha256": "cf707b3a0dacdc53cfe76d6471dd0a9d299ece149558c85285a28fbae6fc4650",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/wu/idle-1.webp",
+      "category": "frames",
+      "bytes": 51082,
+      "sha256": "8fde65d9a80232668378ce45744e582b400411c9506a02859a7c32617dc5f11e",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/wu/idle-breathe.webp",
+      "category": "frames",
+      "bytes": 49030,
+      "sha256": "fb6247efbfe3115bcb196f717279a7a0204c2a2da9b961f483238d7fdb763dae",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/wu/idle.webp",
+      "category": "frames",
+      "bytes": 51112,
+      "sha256": "719d873ffc760b628e7e131fca7ee946fc131070151605e24d20cd65ce21be2f",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/atk-hit-1.webp",
+      "category": "frames",
+      "bytes": 51546,
+      "sha256": "2c382c2dcefedb715358a6026d598c971494dec1cfe3860fdbb700c5ea19a131",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/atk-hit.webp",
+      "category": "frames",
+      "bytes": 52416,
+      "sha256": "c613b5e85ea46fc74650a12669100f6a1c94a9fa219201dde5fab9dde6bdce80",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/atk-wind-1.webp",
+      "category": "frames",
+      "bytes": 57014,
+      "sha256": "dbc3ad24358832d4889e40cb821d73700c4194b0b724ba5f9e2d9b3e0359f305",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/atk-wind.webp",
+      "category": "frames",
+      "bytes": 57014,
+      "sha256": "dbc3ad24358832d4889e40cb821d73700c4194b0b724ba5f9e2d9b3e0359f305",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/cast-1.webp",
+      "category": "frames",
+      "bytes": 54364,
+      "sha256": "29f89ea39d35de8c089f21f5a1d664157258d330cb95ecb9af0562ed9d5a8fd2",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/cast-2.webp",
+      "category": "frames",
+      "bytes": 51282,
+      "sha256": "def6d953511dd3f166736a93ea452312f838557f8e04b848a60869c095f0701b",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/cast.webp",
+      "category": "frames",
+      "bytes": 54366,
+      "sha256": "cb189e4934f74c91334b733490e9f5455a3a1466dbc2e55eba74ecc24429c474",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/hurt-1.webp",
+      "category": "frames",
+      "bytes": 50092,
+      "sha256": "4341e4c9e6dc662635f3f5fdb8f1806b441ec719c2f7d1cd19e742349ceb3380",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/hurt.webp",
+      "category": "frames",
+      "bytes": 50092,
+      "sha256": "4341e4c9e6dc662635f3f5fdb8f1806b441ec719c2f7d1cd19e742349ceb3380",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/idle-1.webp",
+      "category": "frames",
+      "bytes": 44474,
+      "sha256": "c6b00ef708cd38eef1a356b8d3e9b39764aa01ae6f27e788eea2658b6097b689",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/idle-breathe.webp",
+      "category": "frames",
+      "bytes": 44474,
+      "sha256": "c6b00ef708cd38eef1a356b8d3e9b39764aa01ae6f27e788eea2658b6097b689",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/idle.webp",
+      "category": "frames",
+      "bytes": 44826,
+      "sha256": "2748e1c37db768944aaf66eb4e85135969ecf3e191fcb444d2d0c2751d375c3e",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/atk-hit-1.webp",
+      "category": "frames",
+      "bytes": 49416,
+      "sha256": "804e4c49abd81b6780d33cf24494e78281221ec99da6cf6de43fbb97cc67f7fe",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/atk-hit.webp",
+      "category": "frames",
+      "bytes": 49398,
+      "sha256": "5d1825a9868bc4cc96b844905b8cb185cc53e7a84b9594231e57b412c68d394d",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/atk-wind-1.webp",
+      "category": "frames",
+      "bytes": 46318,
+      "sha256": "6bef546a844a8bd6e8275ce6149901f00abc2592b86adb20aae246a0788617f3",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/atk-wind.webp",
+      "category": "frames",
+      "bytes": 45360,
+      "sha256": "a5565427df3a42ede7250571fd82a4668b75885be9838a13c64c39774cefcc57",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/cast-1.webp",
+      "category": "frames",
+      "bytes": 46318,
+      "sha256": "6bef546a844a8bd6e8275ce6149901f00abc2592b86adb20aae246a0788617f3",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/cast-2.webp",
+      "category": "frames",
+      "bytes": 45378,
+      "sha256": "d6ce31eb233e0ed07fa023786fa83097806957437697f630f5b1438fefa8ab9d",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/cast-3.webp",
+      "category": "frames",
+      "bytes": 49398,
+      "sha256": "5d1825a9868bc4cc96b844905b8cb185cc53e7a84b9594231e57b412c68d394d",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/cast-4.webp",
+      "category": "frames",
+      "bytes": 49416,
+      "sha256": "804e4c49abd81b6780d33cf24494e78281221ec99da6cf6de43fbb97cc67f7fe",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/cast-5.webp",
+      "category": "frames",
+      "bytes": 43210,
+      "sha256": "a0f74157eb834cd750c61ce394247fbd4b2d74a1b80883697ae2a91ebcc80a3f",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/cast.webp",
+      "category": "frames",
+      "bytes": 45360,
+      "sha256": "a5565427df3a42ede7250571fd82a4668b75885be9838a13c64c39774cefcc57",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/hurt-1.webp",
+      "category": "frames",
+      "bytes": 46014,
+      "sha256": "2d79440fd30261729f001b75f4c07753b191087a3f414e60f008cbf276a4d38b",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/hurt.webp",
+      "category": "frames",
+      "bytes": 46014,
+      "sha256": "2d79440fd30261729f001b75f4c07753b191087a3f414e60f008cbf276a4d38b",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/idle-1.webp",
+      "category": "frames",
+      "bytes": 39744,
+      "sha256": "102fa5876ccae4a2cd0eb54f1452044b2a408298ffefdb75da4e9b2f92b3873e",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/idle-breathe.webp",
+      "category": "frames",
+      "bytes": 39744,
+      "sha256": "102fa5876ccae4a2cd0eb54f1452044b2a408298ffefdb75da4e9b2f92b3873e",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "portraits/frames/baita/idle.webp",
+      "category": "frames",
+      "bytes": 39906,
+      "sha256": "95f72c8e282d109e51c654ccfb4bdc0b82ebfe049bf8aef8c33ed74074b2f00f",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/map-nodes/battle-security-shard-1011.webp",
+      "category": "map",
+      "bytes": 68314,
+      "sha256": "0ae9a6bed89201af11fe22c9ee807dbddd03c3e86a01f7206e5e3ff447d12610",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/map-nodes/battle-security-shard-style-1012-v2.webp",
+      "category": "map",
+      "bytes": 142158,
+      "sha256": "4e5f5202e99415f199fa32f76933238bc16970580b349abc7f0898ea8b39e113",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/map-nodes/event-record-fragments-1011.webp",
+      "category": "map",
+      "bytes": 98378,
+      "sha256": "d67a4310aaaa7a75b3c7c6c9b0ff88035b938e975992fd50577e8ed29caba76a",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/map-nodes/event-record-fragments-style-1012-v2.webp",
+      "category": "map",
+      "bytes": 149144,
+      "sha256": "5c7d930ed799aedd5be81f3801666ee516d7d71defccbe651f1cbc1974945084",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/map-nodes/passage-transit-core-1011.webp",
+      "category": "map",
+      "bytes": 98528,
+      "sha256": "e9b7fec6ed2f86770449aa911433d77b9cc6150f64c4c60789c06b04be912550",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/map-nodes/passage-transit-core-palette-1012-v3.webp",
+      "category": "map",
+      "bytes": 146620,
+      "sha256": "f6b480a10da5624168e62af688172c47b832dfb0deb5c588df91343e976c15bf",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/map-nodes/passage-transit-core-style-1012-v2.webp",
+      "category": "map",
+      "bytes": 149218,
+      "sha256": "12dab51ed6fb5bee8ceb055f4f84c6bd16bfd55ea2ba128e6789552608468053",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/map-nodes/rest-heat-cell-1011.webp",
+      "category": "map",
+      "bytes": 80176,
+      "sha256": "ea177d2c97939cd941582214c1a39e2380f353c3da8fa84505ea0fafd1c760e0",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/map-nodes/rest-heat-cell-style-1012-v2.webp",
+      "category": "map",
+      "bytes": 179626,
+      "sha256": "99a2179f3a5ffabba9ad035a32db294a6631342d4718d7c3bc012d3abf9b1dd9",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/map-nodes/shop-exchange-token-1011.webp",
+      "category": "map",
+      "bytes": 114100,
+      "sha256": "a954e5228f9570c49de9eaf95b851dffd4665f83be328b85ccb6713091638f91",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/map-nodes/shop-exchange-token-palette-1012-v3.webp",
+      "category": "map",
+      "bytes": 171656,
+      "sha256": "3e7a6a6f77a10ba3a2eeba29a1ace0ab9a7415362575d973c4e3b49e140d79f7",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/map-nodes/shop-exchange-token-style-1012-v2.webp",
+      "category": "map",
+      "bytes": 177964,
+      "sha256": "a2bc2a953c7d435c0c50c98775893f78c686048b2eeddb0022c69951280d334d",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/transition-battle-v1.webp",
+      "category": "transitions",
+      "bytes": 91104,
+      "sha256": "cadaf40079d8ef0540e34e55f82aae642fc584c173d7e5fd9d17f7799ce2ad9f",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/transition-boss-v1.webp",
+      "category": "transitions",
+      "bytes": 106012,
+      "sha256": "5c187ce7c0788245869e70de427426f727f6c5fe7507d92f3b453b6dbd5e513a",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/transition-camp-v1.webp",
+      "category": "transitions",
+      "bytes": 70900,
+      "sha256": "ac8b7c0d42be8ecbdfbb24d468fdd982d621beb0858120fead2bc092dc75befc",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/transition-field-v1.webp",
+      "category": "transitions",
+      "bytes": 96750,
+      "sha256": "e9e160cb52a546600a3aee0397f0a21d3453582d03372b0d2d16e7aca6f761c7",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/transition-photo-v1.webp",
+      "category": "transitions",
+      "bytes": 68910,
+      "sha256": "6f860d1b74e6b84b21dfa9d0f821fc783a4eece30e355fb147bb78387fd46b3a",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/base-home-v4.webp",
+      "category": "retired-scenes",
+      "bytes": 103974,
+      "sha256": "b17f006c93bb135daf146dd81eecf0fba936867dfa473c0f47ac6bc9f305818f",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/battle-street-amber-anime-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 414722,
+      "sha256": "00fd975da37e26de2ced2df8c9433ee331d30bc029edfd61a5a6e32b11bcb4a4",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/entry/winter-arrival-1011-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 112604,
+      "sha256": "1d44a932b6f6f78a11cf72d59eb3d20f9a6c1fbe1445000c56e4a438e7e5a894",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/entry/winter-arrival-1011-v2.webp",
+      "category": "retired-scenes",
+      "bytes": 88082,
+      "sha256": "68540f6eec3ba0278fbe9b7e1214ce33790ea077ee9f56598c11edd6f02deb7b",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/rewards/chest-small-1011-v2.webp",
+      "category": "retired-scenes",
+      "bytes": 526708,
+      "sha256": "ed43f22a4fbb9af6977e22bf17e7b642ee928174839918164d4eed93467e3f8a",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/rewards/chest-small-cardstyle-1011-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 815604,
+      "sha256": "ce11a73fa18d93700c93b4ef8fb518e1925be3af4261b142eafded0cba89042a",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/scene-chest-boss-anime-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 124864,
+      "sha256": "5ce12f77c5458ad5b28f2c7b5863623258d9b87363a3ec8339ffa66f19a8a023",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/scene-chest-class-anime-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 93464,
+      "sha256": "26407e527af912f72ff127c435a7f4b1cdffd67f87f3bad8be9ce38eda74b798",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/scene-chest-large-anime-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 156162,
+      "sha256": "91e7685ea015eeaa7cf94a855f4d0d1a5a64cadd0ddb40df3d9e7b9cdbc2e76c",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/scene-chest-medium-anime-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 131346,
+      "sha256": "e1c41d3b5b6eeeef8871a691f4ad656488c0f69f9779f13df183e7966536e6ae",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/scene-chest-small-anime-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 131822,
+      "sha256": "4157569f0fa29becb11fe1e5332cfd402c26abfb0cfc3fbf88ed905e9a68a422",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/ui-loop-0925/expedition-banner.webp",
+      "category": "retired-scenes",
+      "bytes": 118232,
+      "sha256": "2c64f57f684ee84bb260fadeabf99ac10a73d6d14ee434fa009383c92175d0d2",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "scenes/ui-loop-0925/rewards-convoy-success.webp",
+      "category": "retired-scenes",
+      "bytes": 127652,
+      "sha256": "6c9504db297c2390fa42d4ed710265c987c4e5eed94a6d7996624fa8689abaf1",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/scenes/battle-street-amber-anime-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 17594,
+      "sha256": "0bb536004fef2108a27e3d82e2a266e071922390042f34d50654ad0886108884",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-boss-anime-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 95232,
+      "sha256": "01a5bd234abedfbd51a808f3fec8cada6438c082836bc609e1b978cfcdc6ff93",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-class-anime-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 71490,
+      "sha256": "98a3f652b066e9302c90b2fc2bee7223099aa1f678df1142af37e335f6c3db20",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-large-anime-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 109926,
+      "sha256": "8b95f5487b4debcb401eac9fae70f61c3e56a2df544e1b9342bb03715bddec7e",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-medium-anime-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 97124,
+      "sha256": "a45678714412c1d9f9c0fd1de1e72a598d668d021e4ee721630f3b3bde9588fa",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-small-anime-v1.webp",
+      "category": "retired-scenes",
+      "bytes": 91964,
+      "sha256": "d5b626be16c70470cae23ddae54e0809df88a7f846d9958a4564b1e21b7dd664",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/spell-tt8-curse1.webp",
+      "category": "shadowed-card-art",
+      "bytes": 75020,
+      "sha256": "09aa94c5dfb27e4d48b3657d50da3451e994175de248d40928ffbb55d44b3bcc",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse1.webp",
+      "category": "shadowed-card-art",
+      "bytes": 17406,
+      "sha256": "1a60c3bbdbe690a604dca93893916f05576a4d544d41e250e3e9d679266a9495",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/spell-tt8-curse2.webp",
+      "category": "shadowed-card-art",
+      "bytes": 103200,
+      "sha256": "4fb64c46d0e8f5e6623f92a02ceebf33001705681d70e3b8fc8e876d310e39c7",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse2.webp",
+      "category": "shadowed-card-art",
+      "bytes": 22768,
+      "sha256": "a77114d06a8f963b0709d1974d9fbac2b658165d861dd8f586d1464112ee76ba",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/spell-tt8-curse3.webp",
+      "category": "shadowed-card-art",
+      "bytes": 92638,
+      "sha256": "e49a2a59c060f1103f93f6bb2fb7b97359f8ecfaf732589aa972cecd76c6e2cb",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse3.webp",
+      "category": "shadowed-card-art",
+      "bytes": 23322,
+      "sha256": "f71e159c81d3a006d63e5156f5ab3477b74dc4632e19e43012da8adee3980e5a",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/spell-tt8-curse4.webp",
+      "category": "shadowed-card-art",
+      "bytes": 97694,
+      "sha256": "2b448578b4378ac3276760e03b91a139d0ba1fd126a14978a1fe84f7e388a5c4",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse4.webp",
+      "category": "shadowed-card-art",
+      "bytes": 23126,
+      "sha256": "476fcfdd67004b62e7c0f8ba59f9da90fb050027550b3b19ed59866acadd0791",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/equip-tt3-staff.webp",
+      "category": "shadowed-card-art",
+      "bytes": 15740,
+      "sha256": "b36123515a96239be1194b5f413a28ece1b2d640944a1fede94a4e81904e5aad",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-staff.webp",
+      "category": "shadowed-card-art",
+      "bytes": 16954,
+      "sha256": "365d4c78a21f41f8c8bdec11fb2dd27b0e226784541a6ea34ea7bb8bad61156a",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/equip-tt3-fate-wheel.webp",
+      "category": "shadowed-card-art",
+      "bytes": 79746,
+      "sha256": "69bd24f9d1595a2cb03da05ddb1da0d0b526003c1505d4967ff40ab2d35c352c",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-fate-wheel.webp",
+      "category": "shadowed-card-art",
+      "bytes": 11766,
+      "sha256": "8bbe689632f471a3e0991f22ffbd63d8d12772927660098a5439c88ed559e8f0",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/equip-tt3-wolf-bow.webp",
+      "category": "shadowed-card-art",
+      "bytes": 73274,
+      "sha256": "ea1d58f405f3c2d26a242263015ea4c10aca9d064b8089d3891a4dc04ea7a147",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-wolf-bow.webp",
+      "category": "shadowed-card-art",
+      "bytes": 8538,
+      "sha256": "209ea2036f503e0fdf9cd8afc27657db08b57b648a6856d267edeb58006c67b5",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/equip-tt3-twinwater-mail.webp",
+      "category": "shadowed-card-art",
+      "bytes": 116328,
+      "sha256": "dbc216c2807f438278217745d198491a0d2eff36ea0b9008bb11e18532846e2c",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-twinwater-mail.webp",
+      "category": "shadowed-card-art",
+      "bytes": 16416,
+      "sha256": "d05e2fb9e166a6fd49abc2fc948353e44241bbb42cade14528167a5794d019ab",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/equip-tt3-grass-armor.webp",
+      "category": "shadowed-card-art",
+      "bytes": 139890,
+      "sha256": "cbc2f31e13294e5a2b4d89b60ae0b739975ea9290692918a1dad0379090f6f2a",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-grass-armor.webp",
+      "category": "shadowed-card-art",
+      "bytes": 18848,
+      "sha256": "c251f684b99ead2d88541546d9a9090a88a155afdcd256f84ca63035c985fa62",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/equip-tt3-blooddrinker.webp",
+      "category": "shadowed-card-art",
+      "bytes": 58146,
+      "sha256": "f9e0a1d48c1eea1c40dbfa10fec8d3ffab8522d4e8a0b8aa27162aa82055c126",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-blooddrinker.webp",
+      "category": "shadowed-card-art",
+      "bytes": 8334,
+      "sha256": "8875ed3d5f7433e8ae2bb8d0e2fd0e8d88b1db2b752dd844a9deb67df402e776",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/equip-tt8-demonslay.webp",
+      "category": "shadowed-card-art",
+      "bytes": 18100,
+      "sha256": "2e23c289d99acf110ba152b58d2d136bafeee0c7f5bc1613c6475d9b35c3d64e",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-demonslay.webp",
+      "category": "shadowed-card-art",
+      "bytes": 3630,
+      "sha256": "d89a450f3bbfa5e0c0c03ae9fb82deb892cc5e8b457a96bca115c910d88ab629",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/equip-tt8-archdemon.webp",
+      "category": "shadowed-card-art",
+      "bytes": 16904,
+      "sha256": "b3cb93997a286dc377716e4fa8a68b2114719131ab899a9167663e90202e93bd",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-archdemon.webp",
+      "category": "shadowed-card-art",
+      "bytes": 3170,
+      "sha256": "d16adc298449ad2657837d47ae295124e90e71a17c1350ef46cbb44f9b32d2bf",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/equip-tt8-heavensword.webp",
+      "category": "shadowed-card-art",
+      "bytes": 53908,
+      "sha256": "61539f6a00d221399f3632b009145c8e367b91049abead5b374c47fba2329648",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-heavensword.webp",
+      "category": "shadowed-card-art",
+      "bytes": 12068,
+      "sha256": "0ea725b5cc62e4a9ba8b8da401949492d3d3650b6bca9342a3965dd7b5f77faf",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/equip-tt7-arcanescroll.webp",
+      "category": "shadowed-card-art",
+      "bytes": 85072,
+      "sha256": "b3708f83f6aa7e69c5e61e438666544df3c367cadd3f5ce40322d668ee8f8cb7",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt7-arcanescroll.webp",
+      "category": "shadowed-card-art",
+      "bytes": 11656,
+      "sha256": "c14366802700684916a9f0d5b12bbfe1e0ac9d6014c2a936608f9be98c52a712",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "cards/equip-tt12-raygun.webp",
+      "category": "shadowed-card-art",
+      "bytes": 59680,
+      "sha256": "2356c8d0e454dc7d42e2cc17016577ce8cad0deb3364e8ecd79a5cb0de54dd93",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt12-raygun.webp",
+      "category": "shadowed-card-art",
+      "bytes": 8010,
+      "sha256": "4237ad7c9919899ec992e16789c30783dfa861287f7eb36bdb1d53f0e3f68d3f",
+      "sourceRetained": true,
+      "snapshotRetained": true,
+      "excluded": true,
+      "publishedAtOriginalPath": false
+    }
+  ],
+  "passed": true
+}

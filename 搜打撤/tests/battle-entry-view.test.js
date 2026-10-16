@@ -122,6 +122,31 @@ it('preserves decoded winter scenery through simplified entry and rerenders, res
   expect(stage().querySelector('.battle-entry-note')).toBeNull(); expect(frames.attach).toHaveBeenCalledTimes(2);
 });
 
+it('keeps folded hand names synchronized with their printed faces and intent in the same enemy HUD group', async () => {
+  frames.attach.mockResolvedValue(true); start([{ uid: 'folded-hand-source', card: Cards.SHA }]); await flush();
+  const cards = [...stage().querySelectorAll('.sts-hand .bt-card')];
+  expect(cards.length).toBeGreaterThan(0);
+  cards.forEach(card => {
+    expect(card.querySelector('.bt-rest-name')?.textContent).toBe(card.querySelector('.hsc-name')?.textContent);
+    expect(card.querySelector('.bt-rest-name')?.getAttribute('aria-hidden')).toBe('true');
+    expect(card.parentElement.dataset.act).toBe('btPlay');
+    expect(card.parentElement.dataset.uid).toBe(card.dataset.uid);
+    expect(card.parentElement.style.getPropertyValue('--hand-rest')).toBe('284px');
+  });
+  const foe = stage().querySelector('.sts-foe');
+  const intent = foe.querySelector('.sts-intent');
+  expect(intent.parentElement).toBe(foe.querySelector('.sts-nameplate'));
+  expect(intent.getAttribute('role')).toBe('button');
+  expect(intent.getAttribute('aria-label')).toContain('入场回归靶子的意图');
+  intent.click();
+  expect(intent.classList.contains('is-open')).toBe(true);
+  expect(BattleSession.getSnapshot().pendingTarget).toBeFalsy();
+  BattleSession.commands.setPendingHint('folded-name-rerender'); frame(); await flush();
+  expect(stage().querySelector('.sts-hand .bt-card')).toBe(cards[0]);
+  expect(stage().querySelector('.sts-intent')).toBe(intent);
+  expect(intent.classList.contains('is-open')).toBe(true);
+});
+
 it('keeps truly failed winter scenery hidden and reports the failure while simplified combat remains available', async () => {
   const failedDecode = new Error('winter ground layer decode failed');
   const warning = vi.spyOn(console, 'warn').mockImplementation(() => {});

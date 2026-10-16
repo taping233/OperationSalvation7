@@ -1,0 +1,22 @@
+{
+  "artJs": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1",
+  "newConsumer": "game/src/core/art-preload-plan.js",
+  "newSha": "7fc6a12eeed2ec21407df9e65ae81a3d2294fc343d37f8deefe62f0938cb93ad",
+  "review": "Parent reviewed exact diff and complete new module. art.js only delegates foreground yield and fetch priority low; no mappings or filtering changed. New opaque consumer collects current card-frame-layout frame paths via existing assetUrl, keeps all prior URL sets and adds no retired paths. All frame paths exist. Map/transition consumer contracts unchanged.",
+  "framePaths": [
+    "ui/card-frames/paper-1015/initial.webp",
+    "ui/card-frames/paper-1015/common.webp",
+    "ui/card-frames/paper-1015/rare.webp",
+    "ui/card-frames/paper-1015/epic.webp",
+    "ui/card-frames/paper-1015/legendary.webp",
+    "ui/card-frames/paper-1015/prism.webp",
+    "ui/card-frames/paper-1015/token.webp",
+    "ui/card-frames/paper-1015/wu.webp",
+    "ui/card-frames/paper-1015/xingyue.webp",
+    "ui/card-frames/paper-1015/changwuyu.webp",
+    "ui/card-frames/paper-1015/baita.webp",
+    "ui/card-frames/paper-1015/heixiang.webp",
+    "ui/card-frames/paper-1015/neutral.webp"
+  ],
+  "scriptSha256": "78bff383181a228e0312be1b04ea9a0a3bf152d58e1e22b6f153e319505c6b77"
+}

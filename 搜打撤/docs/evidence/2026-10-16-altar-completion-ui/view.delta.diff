@@ -1,0 +1,26 @@
+--- game/src/run/expedition.view.js (received baseline)
++++ game/src/run/expedition.view.js (altar completion)
+@@ -149,6 +149,7 @@
+   const isCurrent = preview?.li === game.layerIdx && preview?.idx === game.trackPos;
+   const selectedDoor = selectedNode && game.layerData?.[selectedNode.li]?.doors?.some(d => d.at === selectedNode.idx);
+   const selectedSpent = isConsumedMapNode(game, selectedNode);
++  const completedLocalAltar = isCurrent && selectedSpent && selectedNode?.def?.type === 'altar';
+   const supply = game.entrySupply;
+   const selectedSupply = selectedNode && supply?.layerIdx === selectedNode.li && supply.trackPos === selectedNode.idx &&
+     (supply.taken?.length || 0) < (supply.cardIds?.length || 0);
+@@ -166,7 +167,7 @@
+   if (cam?.frameExploration && previousInset !== cam.detailInset && cam.frameMode !== 'manual') {
+     cam.frameExploration(game, cam.frameMode === 'overview');
+   }
+-  const key = JSON.stringify([game.state, preview?.li, preview?.idx, route?.name, name, hint, status, danger, lowLife]);
++  const key = JSON.stringify([game.state, preview?.li, preview?.idx, route?.name, name, hint, status, danger, lowLife, completedLocalAltar]);
+   if (strip.dataset.viewKey === key) return;
+   strip.dataset.viewKey = key;
+   strip.dataset.nodeState = moving && preview ? 'moving' : isCurrent ? 'current' : reachable ? 'reachable' : 'unreachable';
+@@ -187,5 +188,5 @@
+       ${!reachable && !isCurrent ? '<p class="expedition-preview-condition">需要先到达与此处相连的地点。</p>' : ''}
+       ${lowLife ? '<p class="expedition-preview-risk">生命偏低，建议先恢复再迎战。</p>' : ''}
+     </div>
+-    <button type="button" class="expedition-preview-enter" data-route-enter="1" ${game.state !== 'idle' || (!reachable && !isCurrent) ? 'disabled' : ''}><span>${isCurrent ? '查看本地内容' : '进入该地点'}</span><span aria-hidden="true">→</span></button>` : '';
++    <button type="button" class="expedition-preview-enter" data-route-enter="1" ${game.state !== 'idle' || (!reachable && !isCurrent) || completedLocalAltar ? 'disabled' : ''}><span>${completedLocalAltar ? '本地内容已完成' : isCurrent ? '查看本地内容' : '进入该地点'}</span><span aria-hidden="true">→</span></button>` : '';
+ }

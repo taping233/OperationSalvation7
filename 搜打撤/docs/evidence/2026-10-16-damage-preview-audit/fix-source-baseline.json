@@ -1,0 +1,38 @@
+{
+  "head": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "validation": {
+    "targetedTests": 191,
+    "testFiles": 8,
+    "projectSyntax": true,
+    "typecheckConfigs": 8,
+    "scopedLint": true,
+    "browser": false,
+    "build": false
+  },
+  "files": [
+    {
+      "path": "game/src/battle/view/battle.preview.js",
+      "sha256": "ad785616a1cb19fd45b88b87cdf3be6d75aa685184b49723fe43e746f52242c8"
+    },
+    {
+      "path": "game/src/battle/core/battle.core.js",
+      "sha256": "4ecf1c3a52bbef8436c954f49beb6fe0a5c6e3647a3684f21a43ab7a133558fa"
+    },
+    {
+      "path": "game/src/battle/battle.snapshot.types.d.ts",
+      "sha256": "4511b5d85fe5e2bcd30e77a9ad15c93bf43c784eeb4aea2e264b5a9cf539c278"
+    },
+    {
+      "path": "game/src/battle/view/battle.hover.js",
+      "sha256": "4ba2c199ee2b943cfba7b6319455f7de77173ab8b72e46ffce0fdeaf48764000"
+    },
+    {
+      "path": "tests/r3-a-preview.test.js",
+      "sha256": "6d00a7324c01bac4d98dc7acd49a352cc3cb1a8940dd5e0865db645478375242"
+    },
+    {
+      "path": "tests/battle-preview-trust-boundary.test.js",
+      "sha256": "2550aae32330a8c9c08ecb20e97effecb5c6aaa162b7d8b7d68db2834c3ba9e6"
+    }
+  ]
+}

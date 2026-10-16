@@ -1,0 +1,104 @@
+[
+  {
+    "file": "original-r3-test.log",
+    "bytes": 189426,
+    "sha256": "6b39aceb0c07cda6f7e8984db742c733c31d7fd5724d20beb27ec9fb75744762",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/logs/test.log"
+  },
+  {
+    "file": "original-r3-build.log",
+    "bytes": 24822,
+    "sha256": "c79b680121d7857b0bd7d1a5b888e801a19fd8a59cd69ec98f20a5aae5dd25e0",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/logs/build.log"
+  },
+  {
+    "file": "original-r3-report.md",
+    "bytes": 6257,
+    "sha256": "98c06648b3942cccdf8cf1d704ab8aab2f6fdc51f4bb096745b997d89c11bfbf",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/menu-contract-supplement/initial-REPORT.md"
+  },
+  {
+    "file": "original-r3-checks.json",
+    "bytes": 3836,
+    "sha256": "96a1a15cf076907955ab084859d6efb4e9b6c3cb157daef35f75f0905c9d3250",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/menu-contract-supplement/initial-checks.json"
+  },
+  {
+    "file": "supplement-full-test.log",
+    "bytes": 185374,
+    "sha256": "349a32b88b5f7d7a8cad61a133f328c2fd34c4343dca233a534a7a9b1c2a1371",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/menu-contract-supplement/logs/full-test.log"
+  },
+  {
+    "file": "supplement-selftest.log",
+    "bytes": 1683,
+    "sha256": "c73072d1ff10055984a80ccb8df68adbc63f88ace2e155e0b2319f1b70fa936b",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/menu-contract-supplement/logs/selftest.log"
+  },
+  {
+    "file": "supplement-selftest-syntax.log",
+    "bytes": 434,
+    "sha256": "9ef7f1549b27d22260111787bd28da91ab501b988a38b743a2a0cf6be251ddad",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/menu-contract-supplement/logs/selftest-syntax.log"
+  },
+  {
+    "file": "supplement-target-lint.log",
+    "bytes": 521,
+    "sha256": "8377a8a5f2886b74d93aca68b2763d720371fb5c3c5d62fa7d908ee76a917ab7",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/menu-contract-supplement/logs/target-lint.log"
+  },
+  {
+    "file": "supplement-checks.json",
+    "bytes": 2046,
+    "sha256": "b6f249d380c3fef08461d39e746e19cf0d6e05cbf547118d040c606a16b7d15a",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/menu-contract-supplement/checks.json"
+  },
+  {
+    "file": "supplement-metadata.json",
+    "bytes": 1669,
+    "sha256": "a7481dc922c4da4a1c4cd6da1e6219028b9c0834116abb1488a5184d1a253442",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/menu-contract-supplement/supplement-metadata.json"
+  },
+  {
+    "file": "source-production-comparison.json",
+    "bytes": 3991,
+    "sha256": "4f0b1ece5f142d415f1173c4eb7f505cc0d89f57947c1b6da9441d88c22078a1",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/menu-contract-supplement/source-production-comparison.json"
+  },
+  {
+    "file": "approved-three-file.diff",
+    "bytes": 7967,
+    "sha256": "b05957258e46426299c5650b4bbb0227f720abba2350474b0061c6f80aa7a605",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/menu-contract-supplement/approved-three-file.diff"
+  },
+  {
+    "file": "approved-copied-inputs.json",
+    "bytes": 2299,
+    "sha256": "8cecddb7d3037bc7cdda680d4fcd6419ddd8679819fca6af75ac52b224c43b36",
+    "source": "/workspace/shared/cloud-iteration-verification-r3-20261016/menu-contract-supplement/approved-copied-inputs.json"
+  },
+  {
+    "file": "independent-verification.json",
+    "bytes": 2716,
+    "sha256": "120c59fe06272f1a2babdf57649a1d20195a4f27caefa215fba350ac52df1674",
+    "source": "Independent read-only verification recorded by verify_test_evidence"
+  },
+  {
+    "file": "addendum-docs-check.json",
+    "bytes": 2084,
+    "sha256": "cf11a22b41f3a32ff2f8ac1dd6b6e366692fb0ee45ba65307d3d498afb8ba6dc",
+    "source": "Generated evidence addendum or focused document validation"
+  },
+  {
+    "file": "addendum-file-check.json",
+    "bytes": 303,
+    "sha256": "94647bc6ef141270aeb77130f5dced72ca7010dfdcd2b1001a2182a44dde9de7",
+    "source": "Generated evidence addendum or focused document validation"
+  },
+  {
+    "file": "../ADDENDUM-R3-MENU-CONTRACT.md",
+    "bytes": 6637,
+    "sha256": "3d76fa739334056471492379ff32a3dcc4396be4edb9b76921d3a1c135d4a344",
+    "source": "Generated evidence addendum or focused document validation"
+  }
+]

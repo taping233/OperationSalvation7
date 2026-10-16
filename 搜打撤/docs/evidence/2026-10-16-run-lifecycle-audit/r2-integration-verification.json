@@ -1,0 +1,70 @@
+{
+  "verifiedAtUTC": "2026-10-15T20:23:11Z",
+  "scope": "独立R2全量五项失败的测试集成修复",
+  "modifiedTestHashes": {
+    "tests/game-canvas-resize.test.js": "6dac040dfc80f58e8f866e7a54702adc4afee2a2eb24206fca55c2f039dd5d4f",
+    "tests/global-boot-pointer-lifecycle.test.js": "a1cccdab5ac9e14a58da9f28a1e0fb9e3e7d96f768a1752adc5e0d981b52b757",
+    "tests/four-player-event-regressions.test.js": "b0f32608ff92184b1c4a7652ed5ec81393a9ce73d5bbb91f977df99dd3538269",
+    "tests/full-review-regressions-world.test.js": "61787746d0575aeb4d0cb2aa1a0a831dcebdee22833fccb259b92de4b6104c12",
+    "tests/battle-all-cards.test.js": "87c28a448ff0a2197184e00920b3f807173eb2002b65315e10c600cf6c62e07d"
+  },
+  "verifiedProductionHashes": {
+    "game/src/run/event-card-choice.js": "c2e4629812a10261b4d8beb2620c78b860267c20a29ca45b9f419a5b0b797606",
+    "game/src/run/game.run.js": "a0bb9b3b7b4252795ed6f1ba0119c5b44d8311162b9de627006dea5393beb4c7",
+    "game/src/run/game.session.bag.js": "ce39ddbd0ca535fd4b947adbfd768a5aa1fd0144bd41412aec695618eb65d417",
+    "game/src/hub/base.js": "f814bef1c89b894c7b0154425dad5f0d574a0fb7d8bf7e161790ec20a8355a66",
+    "game/src/game.boot.js": "08c2b7435d0c74559d145fb2b3816d95e914e145dc72b221942324db6e681fb4",
+    "game/src/battle/effects/battle.target-rules.js": "a0dde95fcb5e3f1d2ce00d81e876edcd196262724ecb88f7b2e21a570fe6eb65",
+    "game/src/battle/core/battle.engine.js": "bb99d565fc4027d776e0c3e9fb7aea59cdd727400c522219f018309bc32354cd"
+  },
+  "productionCodeChanged": false,
+  "checks": [
+    {
+      "result": "passed",
+      "files": 6,
+      "tests": 32,
+      "scope": "5个R2失败套件及battle-imitate-unplayable专测"
+    },
+    {
+      "result": "passed",
+      "files": 23,
+      "tests": 199,
+      "scope": "完整相关闭包，含真实main/boot、前序事件/献祭/恢复/架构",
+      "log": "r2-integration-test.log"
+    },
+    {
+      "result": "passed",
+      "command": "ESLint on the 5 modified test files"
+    },
+    {
+      "result": "passed",
+      "command": "git diff --check on the 5 modified test files"
+    }
+  ],
+  "allCardsAudit": {
+    "cards": 268,
+    "hardFailures": 0,
+    "existingConditionalWarnings": [
+      "铸甲",
+      "剑荡妖邪",
+      "快意恩仇"
+    ]
+  },
+  "testRunnerUnhandledErrors": 0,
+  "preservedAssertions": [
+    "全库expect(hard).toEqual([])",
+    "原卡unplayableReason/预览一致",
+    "原卡拒绝时能量和手牌/弃牌不变",
+    "实际手打武术触发变形",
+    "1费复制实伤/离手且背包原卡不污染",
+    "征用付款候选保留、成功收卡后节点消费"
+  ],
+  "notRun": [
+    "full repository suite (parent owns independent aggregate validation)",
+    "build",
+    "browser"
+  ],
+  "limits": [
+    "真实boot保留JSDOM音频codec与一条既有素材映射告警；坏档测试保留故障注入日志，不是无stderr运行"
+  ]
+}

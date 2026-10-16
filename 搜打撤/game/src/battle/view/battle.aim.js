@@ -6,7 +6,7 @@ import { scale as uiScale, viewport as uiViewport } from '../../ui/ui-scale.js';
 import { esc } from '../../core/shared.js';
 import { openHandInspector, closeHandInspector } from './battle.hand-inspector.js';
 import '../../../css/battle-hand-overhaul.css';
-import { commands, getSnapshot, getBattleLiveness, effCostOf, findCard, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
+import { commands, getSnapshot, getBattleLiveness, effCostOf, findEffectiveCard as findCard, infuseOf, targetSide, unplayableReason } from '../core/battle.core.js';
   const play = commands.playCard;
   const bagSlam = commands.bagSlam;             // 需求 #9：背包砸击
   const slamSkillOf = commands.slamSkill;       // 2026-10-02 老板：砸击换五职业分化技能（含牧师翻面态）

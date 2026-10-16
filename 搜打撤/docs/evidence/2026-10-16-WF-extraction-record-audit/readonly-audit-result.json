@@ -1,0 +1,156 @@
+{
+  "generatedAt": "2026-10-16T00:32:11.692Z",
+  "provenance": "Synthetic isolated jsdom storage; actual production command, transaction, recorder and export modules",
+  "historicRecordUntouched": true,
+  "productionSourceChanged": false,
+  "reports": [
+    {
+      "case": "persistent-clear-current",
+      "netCardsStashed": 23,
+      "expectedCards": 23,
+      "expectedValue": 77,
+      "recordedCards": 29,
+      "recordedValue": 84,
+      "lostCards": [
+        {
+          "name": "急速跑鞋",
+          "count": 1
+        },
+        {
+          "name": "冰刺",
+          "count": 1
+        },
+        {
+          "name": "迷之匣",
+          "count": 1
+        }
+      ],
+      "pendingClearedBeforeRecord": true,
+      "runSaveRemovedBeforeRecord": true,
+      "receiptHasSelectedCardSnapshot": false,
+      "selectedCards": [
+        {
+          "name": "三把钥匙",
+          "count": 1,
+          "price": 6
+        },
+        {
+          "name": "骷髅王剑",
+          "count": 1,
+          "price": 5
+        },
+        {
+          "name": "法力奔涌",
+          "count": 1,
+          "price": 5
+        },
+        {
+          "name": "斩杀",
+          "count": 1,
+          "price": 5
+        },
+        {
+          "name": "命运钟表",
+          "count": 1,
+          "price": 4
+        },
+        {
+          "name": "沉船宝盒",
+          "count": 2,
+          "price": 4
+        },
+        {
+          "name": "嗜血刃",
+          "count": 1,
+          "price": 4
+        },
+        {
+          "name": "神秘召唤",
+          "count": 1,
+          "price": 4
+        },
+        {
+          "name": "员工通行证B",
+          "count": 1,
+          "price": 4
+        },
+        {
+          "name": "奥术残卷",
+          "count": 1,
+          "price": 3
+        },
+        {
+          "name": "精神药水",
+          "count": 2,
+          "price": 3
+        },
+        {
+          "name": "珍珠盒",
+          "count": 1,
+          "price": 3
+        },
+        {
+          "name": "穿刺",
+          "count": 1,
+          "price": 3
+        },
+        {
+          "name": "铜币",
+          "count": 1,
+          "price": 3
+        },
+        {
+          "name": "寻宝图",
+          "count": 1,
+          "price": 2
+        },
+        {
+          "name": "致命穿刺",
+          "count": 2,
+          "price": 2
+        },
+        {
+          "name": "挖宝",
+          "count": 2,
+          "price": 2
+        },
+        {
+          "name": "一把钥匙",
+          "count": 1,
+          "price": 2
+        },
+        {
+          "name": "毒箭",
+          "count": 1,
+          "price": 2
+        }
+      ],
+      "organizingSnapshotFields": [
+        "version",
+        "runId",
+        "phase",
+        "requestSeq",
+        "remainingCards",
+        "keptPocket",
+        "lostPocketCount",
+        "totalPocketCount",
+        "resources"
+      ]
+    },
+    {
+      "case": "organizing-reload",
+      "netCardsStashed": 23,
+      "actualSavedCards": 23,
+      "actualSavedValue": 77
+    },
+    {
+      "case": "existing-battle-cap",
+      "totals": {
+        "fought": 12,
+        "won": 12
+      },
+      "details": 10,
+      "finalRound": 7
+    }
+  ]
+}

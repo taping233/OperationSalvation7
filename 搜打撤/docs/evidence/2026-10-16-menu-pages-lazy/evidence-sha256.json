@@ -1,0 +1,54 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "8803965e958a755d1271274281b01249a1102f164c5269f3851838df0e5f2a04"
+  },
+  {
+    "path": "cold-entry-tests-final.log",
+    "sha256": "4850bd5493365b5874df1405dfab3d9d6fc90ff903086b4d537caf82e86a1d7e"
+  },
+  {
+    "path": "cold-entry-tests.log",
+    "sha256": "98d3a5f867d2977dafebd914203a34488e47a67ce9426000ca16970a288177fd"
+  },
+  {
+    "path": "docs-check.json",
+    "sha256": "864cc1a0403d2773c27d1d0c58c1abf873c125edbee1497e59d60bfd5a76f907"
+  },
+  {
+    "path": "docs-check.log",
+    "sha256": "33f00194a1bcca515aaaa8e80f63471f8e773bce9c5e19574229dcd590ecec36"
+  },
+  {
+    "path": "final-target-tests.log",
+    "sha256": "5bd231299def8a8d2c3b7788e7c6b1662cff0804d59d0c563bee10b4a210a5fc"
+  },
+  {
+    "path": "handoff.json",
+    "sha256": "3406df5d65faabb02f7a60c9613c134b4ba7e5ec924ded69ce5a119fefaef4b3"
+  },
+  {
+    "path": "implementation-movement.json",
+    "sha256": "4bbeff022d4fad8f9744b7ee63f7244f13fc763ff86236edc9a511f5ad362d0b"
+  },
+  {
+    "path": "lint.log",
+    "sha256": "7125f194612fcff2f454c05d848e7cb71facc1967b4d5017e25b34fdee3ba74f"
+  },
+  {
+    "path": "save-slot-final.log",
+    "sha256": "ff988b1340a60264d2697b6365337e94f9ba8b58681f365c8087174a59b06088"
+  },
+  {
+    "path": "syntax.log",
+    "sha256": "f2ac61daf2e55beb188a525b1926d90e12c4186a4797339d01d2b6c35db7983c"
+  },
+  {
+    "path": "target-tests.log",
+    "sha256": "027c247cab557340e08c3b877ae51072d19121d96ebea8f2f2c6c3319f9a0e35"
+  },
+  {
+    "path": "typecheck.log",
+    "sha256": "f92af4f8c4e5b44caf1d71fb66382f39107fa6c1e0a1435ec7f63ab95864cbe2"
+  }
+]

@@ -113,6 +113,12 @@ describe('分层验收选择', () => {
       expect(plan.reasons).toContain('公共状态、启动、规则或迁移边界变更需要全量测试');
     }
   });
+  it('可见DOM转场辅助脚本映射至专属契约，不扩大选择范围', () => {
+    const plan = planForPaths(['scripts/visible-playback.mjs']);
+    expect(plan.mode).toBe('quick');
+    expect(plan.tests).toEqual(['tests/visible-playback.test.js']);
+  });
+
   it('已有直接契约的流程工具走快门，未知脚本 R2 起回退轻契约（映射守卫兜底）', () => {
     const plan = planForPaths(['scripts/workflow-task.mjs']);
     expect(plan.mode).toBe('quick');

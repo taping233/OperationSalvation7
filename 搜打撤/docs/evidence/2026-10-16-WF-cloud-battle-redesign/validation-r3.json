@@ -1,0 +1,76 @@
+{
+  "iteration": 3,
+  "status": "implementation-ready-awaiting-parent-current-window-verification",
+  "baseline": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "preserved": [
+    "260x390 shared card host",
+    "rest drop 284 / top 85%",
+    "hover scale 1.05",
+    "R2 stable slot pointer entry",
+    "damage and payment rules",
+    "font family and existing assets"
+  ],
+  "checks": {
+    "targetTests": {
+      "files": 9,
+      "passed": 148,
+      "failed": 0,
+      "log": "target-tests-r3.log"
+    },
+    "eslint": {
+      "passed": true,
+      "log": "eslint-r3.log"
+    },
+    "nodeSyntax": {
+      "passed": true,
+      "scope": [
+        "battle.hand-layout.js",
+        "battle.layers.js",
+        "battle.view.js"
+      ]
+    },
+    "postcss": {
+      "passed": true,
+      "nodes": 174,
+      "importantDeclarations": 0
+    },
+    "ownDiffWhitespace": {
+      "passed": true
+    }
+  },
+  "browser": {
+    "operator": "parent task",
+    "performedByThisWorker": false,
+    "parentReportedR2": [
+      "two battles mouse card selection and target click passed",
+      "second hand page switching passed",
+      "native drag attack to enemy passed",
+      "native drag equipment to self passed",
+      "native drag multi-hit card to enemy and victory passed"
+    ],
+    "r3Pending": [
+      "normal/long-name/frozen/compound enemy HUD and local intent details",
+      "skill ready/unaffordable/targeting/used/next-turn states and feet spacing",
+      "left/right enlarged detail/infusion controls",
+      "forecast zero/positive/lethal states",
+      "player buff/equipment density",
+      "hard-refresh/restore target DOM aria-label and focus with Enter"
+    ]
+  },
+  "limits": [
+    "DOM tests do not replace browser hit testing and visual review",
+    "parent target accessible-name observation not reproduced in unit redraw/modal-return tests; no speculative target logic changes",
+    "full test suite/build/remote CI/multi-size not run",
+    "asset consumer fingerprints require parent review/update"
+  ],
+  "sha256": {
+    "game/css/battle-stage.css": "993bfc69668b24bd96746063eb7eeed9902b661089c9d5f2c9bb197ee71a80a7",
+    "game/src/battle/view/battle.hand-layout.js": "706562cd5559ec0a8edae122c152a638dc5c23ce0a89c5ac1f619dc9f1253f6b",
+    "game/src/battle/view/battle.layers.js": "2f59f030cab8537b85fe42d950b885be8a53194a1db1fe77ab22a8626aa982d8",
+    "game/src/battle/view/battle.view.js": "c8101836bd34b1c0c7528bc0e6fb49d6cd2bc7af644bc70cdba86804bd09f4dc",
+    "tests/battle-hand-layout.test.js": "00a6c24875d7b077faca8c2a6d998ecf2b6581a29089ac436c575c3a6cfee7da",
+    "tests/battle-decision-readability.test.js": "b6634b3021f26a4f1379b3c802e3f466ad71bffaeb156db4a8c5595513d638cf",
+    "tests/battle-entry-view.test.js": "3f5a9fd757dac891d91a5da5d3762eb1ef202210684950747f169d2a9a46cbaf",
+    "tests/battle-hand-inspector.test.js": "af8a3febb18448b4112f970be9bbfdac75f3e1cf1bdb6c6de36ed7ebc496d7fd"
+  }
+}

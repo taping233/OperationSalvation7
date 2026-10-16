@@ -1,0 +1,17 @@
+{
+  "command": [
+    "node_modules/.bin/vitest",
+    "run",
+    "tests/acceptance-gate.test.js",
+    "tests/runtime-asset-redundancy.test.js",
+    "tests/workflow-cli-integration.test.js",
+    "--reporter=verbose"
+  ],
+  "cwd": "/workspace/shared/cloud-iteration-verification-r7-20261016/snapshot/\u641c\u6253\u64a4",
+  "startedAt": "2026-10-15T23:58:58.891779+00:00",
+  "endedAt": "2026-10-15T23:59:13.616902+00:00",
+  "exitCode": 0,
+  "durationSeconds": 14.725,
+  "log": "logs/focused-r7-failures.log",
+  "purpose": "Same snapshot and unchanged original timeouts; preserve ordinary full failures"
+}

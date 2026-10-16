@@ -8,6 +8,15 @@
 
 ## 活跃登记
 
+Friday 云端本轮并行属地（WF-cloud-play-eight-hours-1016，独立云端副本）：基地子任务持有 base-framework-v7/base-home-v7/base-personnel-v12/base-logistics-trade-v12.css、hub.home-v3.js、game.hub.runtime.js及专测（首批已完成待实机）；战斗子任务持有 battle-stage.css/battle.css 与 battle.hand-layout/layers/view.js呈现层及专测；远征子任务持有 game.run.altar.js 的入城补给文案/呈现、expedition-rewards.css 的 entry-supply-strips 作用域与专测；性能首批已完成，文件清单见独立performance-review/handoff.json。父任务统一共享台账/浏览器/最终构建；服务5300现由独立runner关闭watch/HMR，PID167，同桌面窗口35651587，手动刷新才更新。全部未提交，不改本地仓库。
+
+
+Friday（云端八小时实机迭代 WF-cloud-play-eight-hours-1016），2026-10-16：云端隔离仓库 OperationSalvation7-f0e84c5d 的 Vite 游戏范围；父任务统一协调子代理属地，实机使用当前云端内置浏览器 tab7 / 127.0.0.1:5300。服务由云端桌面 Terminal 窗口35651587启动，npm主PID40，启动脚本 /workspace/shared/run-code7.sh；只管理本服务。基线 f0e84c5d / tree869f3477，游戏修改已获老板明确授权，重点战斗UI反复实机对照及全流程细节/性能。编辑中；新任务，不操作本地工作区或旧对话。
+
+
+
+dot（云端同步与环境准备 WF-cloud-sync-f0e84c5d），2026-10-15 UTC：仅当前云端隔离工作区 `/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d`。最终 GitHub 基线 f0e84c5dc34afcbc1176b1519258d2c3010c62cb / tree 869f3477c070304d5e6a96cfba395c42ab143e80，归档、全部13377个Blob及干净浅Git基线已校验；Node22.23.3官方包SHA256通过，锁依赖 npm ci 成功（258包、Node22.23.3/npm10.9.9，工作区缓存）。属地仅本条、同任务环境证据及隔离开发服务；不修改游戏、不触碰本地旧会话属地，不提交/推送，内置浏览器由主会话负责。隔离 Vite 的沙箱内监听可启动，但其他工具调用无法连接；受审核的非沙箱启动被运行时只读挂载错误阻断。全部本次尝试均已退出，无可交付服务；环境准备已交付、文件编辑占用释放，后续服务由主会话协调。
+
 Codex-handoff（集成修复与交接 WF-integration-ship-1016，聊天01a14055），2026-10-16：老板追加授权在本新任务修复33项失败后正常提交推送与远端SHA归档传输。主会话统筹素材/脚本映射、共享index与门禁；本任务5名子代理分别限定入口与撤离、boot与可访问性测试、地图节点奖励、文案与迁移测试，精确属地见 `docs/evidence/2026-10-16-WF-integration-ship-1016/dispatch.json`。子任务已完成并释放编辑；33项集成失败已修复，完整测试4032/0/12；代码已正常提交b3820ca6，冻结full4028通过/16既有跳过/0错误，隐私检查无发现；主会话正在提交已完成证据并正常推送。生产构建四项既有预算超限如实交云端，不扩大性能重构；不唤起旧对话，不删未知文件，不动NAI增量，不全量add。
 
 
@@ -354,3 +363,124 @@ Friday（视频参考入城奖励 WF-entry-reward-video-1015）：game/src/run/g
 Friday（全屏奖励栏与金币独立项 WF-reward-full-coins-1015）：game/src/ui/reward-scene-view.js 将金币放入reward-objects；game/src/run/chests.js 金币独立图标、数量及收下按钮，复用coinsReceived防重领，选卡不再顺带领币，离开及全部收下沿用结算；game/css/expedition-rewards.css 全屏奖励壳及条列高度。完成未提交、编辑释放，待老板验收，无新服务；按老板要求不测试、不浏览器验收、不build、不提交。
 
 Friday（金币奖励去字放大 WF-reward-coin-size-1015），2026-10-15：game/src/run/chests.js 去掉金币可见名称、保留无障碍标签与数量；game/css/expedition-rewards.css 图标120→180px，移除无用名称样式。完成未提交、编辑释放；沿老板要求未测试、未实页验收、不build、不提交，无新服务。
+
+Friday 云端性能第二步（WF-cloud-perf-depart-state-1016）：game/src/hub/game.hub.js、game.hub.depart.js、departure.selection-state.js 与对应架构/懒加载/状态专测由性能子任务编辑，解除 deployPick 静态反穿，规则不变；主代理统一浏览器/构建/提交，禁止触及基地runtime/CSS；编辑中。
+
+Friday 云端背包布局修复（WF-cloud-backpack-layout-1016）：背包子任务仅持有 game/css/expedition-inventory.css 与 tests/backpack-layout.test.js 及独立证据，修复设计画布内100vw/vh重复缩放与双层padding；保留所有背包/安全格/消耗规则，父统一真实输入验收，编辑中。
+
+WF-cloud-backpack-layout-1016范围补充：game/src/hub/game.bag.js 接入已有 decorateInventoryZoom，game/src/hub/game.bag.view2.js 仅左栏可见分区名，tests/bag-page-lifecycle-review.test.js 专测；真实DOM确认背包大图缺少inventory-zoom-info，父批准该漏接修复，不改共享装饰器与玩法。
+
+Friday 云端事件阅读层（WF-cloud-event-readability-1016）：远征子任务继续持有 game/css/entry-events.css 的 event-themed 共用壳段、新tests/event-scene-readability.test.js（必要event-scene-selection契约），修火堆实机无底小字及主次动作，不改概率/玩法/已完成补给专属，父统一实页验收。
+
+Friday 可见UI重复流程辅助（WF-visible-playback-1016）：老板明确授权开发自动化提速；新子任务持有scripts/visible-playback.mjs、tests/visible-playback.test.js及独立证据。只在当前内置浏览器基于可见DOM执行唯一明确转场，未知/多选择/购买/删除/战斗决策交父，禁止隐藏状态或存档修改，不改门禁，编辑中。
+
+Friday 云端阶段复核 2026-10-16 03:31（UTC+8）：背包R1、事件阅读R1、战斗R2及基地R1代码已完成未提交、编辑释放；背包布局/详情/转移已实机通过，事件两种页已实机通过，战斗R2连续两场鼠标下沉卡选取成功，其余覆盖继续。性能纯状态拆分完成、编辑释放；独立构建128.46MiB/entry311.0KiB/initial356.4KiB/CSS201.1KiB，仍超原四项预算。资产消费者经差异审查仅更新两个指纹，146项排除恢复，27专测通过。验收副本Git边界13专测通过。辅助工具属地补充scripts/gate-plan.mjs与tests/acceptance-gate.test.js仅新工具映射，非修改门禁规则；R2仍在定向测试。CSS预算新子任务只读审查，无写入占用。5300云端服务当前PID213，父负责，HMR关闭。
+
+Friday 云端死DOM样式清退（WF-css-dead-dom-prune-1016）：CSS子任务持有 game/css/{ak-skin,base,base-camp,base-camp-rework,base-cohesion-v5,base-controls-v4,base-rooms-v7,camp-entry,expedition-hub,expedition-inventory,expedition-rewards,expedition,hub,page-ach,page-expedition-hud,page-rewards-bag-help,scenes,winter}.css 的已证实死DOM正向必需选择器分支；tests/css-dead-dom-budget.test.js与自有证据。保留文件、现行其他分支及所有已有他属改动，禁止处理混合伪类或降预算；只修订内容、不物理删除。编辑中，父统一浏览器验收。
+
+Friday 云端事件选卡恢复修复（WF-event-choice-recovery-1016）：实机药摊满包点击无可见反馈且退出后节点已完成；生命周期子任务持有game/src/run/game.run.flow.js、event-card-choice.js（新）、node-reward-state.js，最小恢复接入game.session.js/kernel.js/game.boot.js及tests/event-choice-recovery-cloud.test.js、自有证据。修复共用三选一候选持久化、一次扣费、满包整理/反馈、主动离开和读档恢复，不改概率、不改存档现场、不碰CSS。编辑中，父统一真实输入验收。
+
+Friday 03:53 UTC+8阶段归属更新：CSS死DOM18文件清退已完成编辑释放，135定向通过，最终build待统一。可见流程工具R2.2已完成编辑释放，158相关专测通过。事件恢复三小批已完成编辑释放：新增event-card-choice控制器、黑市待领奖、事件ID按节点绑定；13文件103项/语法422/类型8/docs通过；新增归属game/src/run/game.run.js、run/game.session.js、core/kernel.js、docs/save-format.md、tests/event-node-binding-cloud.test.js与既有event-callback-lifecycle专测，详见自有verification。三选一与黑市实页尚待自然重遇，未宣称通过。战斗R3编辑中：原battle-stage.css/battle.layers.js与专测，新增battle.view.js技能/风险信息最小markup；不动R2pointer，父后续审指纹并实页。云服务5300现PID237，父管理。
+
+Friday 云端无效复制牌（WF-imitate-unplayable-1016）：卡效子任务持有game/src/battle/effects/battle.target-rules.js、tests/battle-imitate-unplayable.test.js与自有证据；只禁止未变形原始复制牌空耗，复用统一可打出原因，保持在手新武术触发变形规则，编辑中。祭坛保护补丁完成未提交、编辑释放，6文件71项/语法类型docs通过；新增tests/altar-sacrifice-zones-cloud.test.js、docs/rules.md由生命周期子任务维护。R4战斗意图不拆词和致命预告/牌堆布局仍编辑中，R3资产指纹已父审更新27专测待日志核对。结算页可读性新子任务只读定位属地中。
+
+Friday 04:18 UTC+8新属地：图像预热子任务持有game/src/core/art.js、game/src/game.boot.js启动预热段、新art-preload-plan.js与art-preload-scheduling.test.js、必要art-warmup-lifecycle.test.js；仅顺序/优先级/可见图片让路，完整预热集合保留，编辑中。人物透明图审阅仅新增docs/previews/wu-cutout-20261016/（候选PNG>1MB按目录ignore），内置生图输出保留workspace generated_images，未接正式图。第二轮集成验收已从冻结manifest 6b12ae4e0f197302455cfcabca75ebcf9086ab8fc19f57a39d1452964e38937c取独立副本，来源已解冻，父继续实页。
+
+Friday 父级基地标题对比度（WF-base-header-contrast-1016）：仅game/css/base-framework-v7.css共用阅读层选择器修正实际courtyard-zzz，并补personnel-v12 companions页标题；tests/base-subpage-header-readability.test.js新专测。实机庭院/伙伴标题在亮窗背景上难读，复用现有暗底而非新造样式。编辑中，后续统一实页。人物无透明立绘接入由图像子任务持有hub.personnel.js、portraits/personnel/wu-default-cutout-v1.webp、asset-manifest单条及专测，不改全局art映射。卡效合成修复追加battle.equipment.js及battle-equipment-skill-synthesis.test.js，已完成未提交。生命周期子任务正在修R2全量5项夹具失配，指定game-canvas-resize/global-boot-pointer-lifecycle/four-player-event-regressions/full-review-regressions-world/battle-all-cards测试文件，禁止跳过门禁。
+
+Friday 云端菜单按需加载（WF-menu-pages-lazy-1016）：性能子任务持有game/src/ui/game.menu.js、新game.menu.pages.js、game.boot.js仅菜单Escape接线、tests/menu-pages-lazy-entry.test.js及tests/helpers/menu-controller.js、13项既有菜单专测仅显式热页工厂装配、全局boot pointer专测、docs/architecture.md和src/README对应段、自有证据目录。保留首屏标题与退出同步面，非首屏面板整段搬移并共享依赖注入；冷加载取消/重试/最后意图必须专测，不改预算/存档/统计；25文件319项/语法425/类型8/定向lint/docs461链接通过，完成未提交、编辑释放；父统一浏览器/正常build与资产consumer差异审定。证据docs/evidence/2026-10-16-menu-pages-lazy/。
+
+Friday 04:38 UTC+8并行更新：父持有game/css/beginner-guide.css与tests/beginner-guide-readability.test.js，修实机41图正文小字和details沿用两列tip造成summary仅32逻辑px宽；完整规则保留、正文滚动、分页固定。菜单懒加载子任务持有ui/game.menu.js、新game.menu.pages.js、loader专测及game.boot.js Escape/loading分支、现行结构文档，需保留之前预热与生命周期mock修。跑局统计子任务持有agent/agent.recorder.js、agent.js、新agent.battle-stats.js、run/game.session.js、battle/core/battle.lifecycle.js、两新专测和save-format；当前已冻结，29文件192项等门通过，历史首轮丢失胜场不补造。四角色去白底候选仅docs/previews/roster-cutouts-20261016与generated_images，禁止覆盖原图。人物alpha闭环新增hub.presentation.js两行同步与base-personnel-v12.css私有标记规则，已完成77项测试，父待最终实页；指纹已父差异审查更新。
+
+Friday 菜单R3集成契约修复（WF-menu-r3-integration-1016）：仅tests/agent-console-jump.test.js、tests/selftest-paths.test.js及game/selftest.js正确拆分属地映射；修真实菜单冷入口等待与取消集成覆盖，保留原动作表/overlay/四页签/自测断言，禁止skip或放宽。生产菜单/控制台不改，完成未提交、编辑释放；10文件152项、真实node自测/语法/定向lint通过；证据docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/，父统一补修后独立全量。
+
+Friday 05:17 UTC+8并行续验：verify_test_evidence仅持有docs/evidence/2026-10-16-WF-cloud-play-eight-hours/下独立R3补验addendum，核对已完成463文件4318通过2跳过与生产输入未变证据，不改原失败日志。audit_shadowed_card_assets仅持有docs/evidence/2026-10-16-shadowed-card-audit/，只读审计30项覆盖卡图候选，不改源码/清单/指纹，不物理删除。父独占5300浏览器继续第二轮第三层事件刷新与结算实机测试；两子任务不得操作浏览器或提交。先前源码工作均完成未提交、编辑释放。
+Friday 05:18 UTC+8：新增audit_css_delivery_cost只读CSS首屏交付结构，独占docs/evidence/2026-10-16-css-delivery-audit/；不改生产/配置/预算，不与父浏览器并用。待报告后决定方案。
+Friday 05:21 UTC+8：实机截图46发现注能操作栏按钮被文字挤至7.84px宽。fix_infusion_action_layout持有battle-stage.css仅bt-infuse共用段、新专测及docs/evidence/2026-10-16-infusion-action-layout/；必要markup先协调，禁止动规则或旧R4布局；父继续实机，不重启服务。R3补验证据addendum完成，verify_test_evidence编辑释放。
+Friday 05:22 UTC+8：注能修复范围批准battle.view.js仅提示条copy/actions分组，原匿名flex文本挤压按钮；不碰layers或规则。父统一审核消费者指纹，下一场实机验。
+Friday 05:23 UTC+8：shadowed-card只读审计完成8/8通过，父批准精确15对30文件发布排除（源图保留），audit_shadowed_card_assets转实施相关scripts资产审定定义/对应专测/自有证据。保守消费者指纹、新动态消费者兜底保持；battle.view消费者由父审，子不得盲刷新。暂不build/提交，发布结果待独立构建。
+Friday 05:25 UTC+8：audit_damage_preview_gaps只读审查奥术弹确定1点伤害却提示无法精算的覆盖缺口，独占docs/evidence/2026-10-16-damage-preview-audit/，不改生产，后续报告协调。父第四场实机同时检查召唤物自动战斗。
+Friday 05:27 UTC+8：30项发布排除完成68/68等定向通过、编辑释放；注能提示栏完成120项/语法425/lint通过、编辑释放。父读source-change.patch确认仅分组与局部CSS；battle.view.js当前并非opaque指纹条目，battle.layers未变，无需盲更新任何指纹。父重启自有5300加载已完成修复，继续实页。
+Friday 05:29 UTC+8：CSS交付只读审查完成、属地释放，懒加载方案仅提案暂不实施（首屏收益24.2KiB但总CSS约增1KiB，级联/取消接线风险），不计已优化。父生存指南新布局实机47/48通过，第二轮远征继续。
+Friday 05:30 UTC+8：伤害预览审计5个隔离复现确认现有伪精确。父批准audit_damage_preview_gaps持有battle.preview.js、battle.core.js、battle.snapshot.types.d.ts、必要battle.hover.js及新trust-boundary专测/近邻预览测试，先收紧未支持伤害流程，再普通战奥术弹窄支持直接伤害；不改真实resolver/卡数据/规则，view/layers/CSS归父协调。定向验收后统一构建。
+Friday 05:32 UTC+8：注能R1实页49已通过尺寸/取消/发动，补修原worker持有同CSS与battle.view.js：注能显示期间隐藏已禁用道具栏（不含道具选敌bt-pick）；承伤主标签明确估算并可见“未计随从攻击与回合末触发”，原公式/风险/R4列保留。无需layers变更，父继续实页。
+Friday 05:37 UTC+8：R2注能124项、预览安全修复191项及静态门均完成、源码编辑释放。verify_r4_integrated_build建立/workspace/shared/cloud-iteration-verification-r4-20261016独立快照做普通全量/构建/195资产排除验收；复制完成前生产源码冻结，父仅实机。源树禁止build和共享可写inode，原门禁保留，产物证据回R4-verification。
+Friday 05:39 UTC+8：父正常UI导出跑局JSON，第二轮跨刷新6战6胜准确、第三层成功撤离14入库2消耗回收。发现历史round字段均1与第四场实机3回合不符，audit_battle_round_records只读自有evidence核查，R4冻结期间不改源码。review_sacrifice_modal_layout只读截图50献祭框小字/7列及51消耗区标签挤压，独占各自证据，待父解冻授权。
+Friday 05:40 UTC+8：R4快照manifest 2c6b9b5116a6164cf8b39329d35380ff31793e95a7ca6d2cba5447359be6c2c8已冻结且独立，生产解冻。round统计子任务批准battle.lifecycle.js noteBattle一行来源改为真实runtime turn及新tests/battle-round-recording.test.js，修前后定向；R4不包含此后补丁，另补验，禁止历史数据回填。
+Friday 05:41 UTC+8：献祭/结算审查转实施，review_sacrifice_modal_layout仅持有expedition-rewards.css的献祭专属:has(.sac-hand)与result-pg pk-row作用域、新CSS专测及自有证据。统一5列同宽命中/正文按钮可读/固定操作，结果标签不拆字；原R3保持，不动玩法，R4冻结快照不含此补丁。
+Friday 05:42 UTC+8：父已用真实HTML深浅底目检4角色候选；prepare_roster_cutout_assets只准备黑像v1/星月v2无损WebP及独占docs/evidence/2026-10-16-roster-cutout-integration/，验证RGBA逐像素不变/<1MiB，未批准正式接入。白塔/常无欲暂保留候选（法阵/烟雾重描风险）；不覆盖原图，不动正式清单或消费者。
+Friday 05:44 UTC+8：R4验收完成、属地释放，466文件4390通过2既有跳过，静态全过，build编译通过/原预算119.58MiB/288.0KiB/333.4KiB/195.8KiB四失败保留；195排除及30源图/替代图/两manifest专项通过。后补round一行与献祭CSS19行/专测已完成编辑释放（69项、25项定向等门），不冒充R4覆盖；后续补验。
+Friday 05:47 UTC+8：无损人物候选两图均超1MiB门槛，仅shared存候选，不接生产，编辑释放。新增ui_lifecycle_deep_audit与reward_atomicity_audit两只读子任务，分别独占2026-10-16-ui-lifecycle-deep-audit/及reward-atomicity-audit/证据，允许隔离真实模块复现，不碰生产/浏览器/服务；先核旧报告避免重复，报告后协调修复。
+Friday 05:50 UTC+8：生命周期审计真实模块复现庭院暂停/减少动态时跨页替换不会dispose（RAF停使断连检测失效，雨声可残留）。父批准audit_ui_lifecycle_leaks独占hub.courtyard-runtime.js及新专测，自有证据，补幂等销毁与不依赖RAF的关闭/断连清理，禁止改音效规则/引擎/其他文件；父后续实机。
+Friday 05:51 UTC+8：原子性审计真实Base/Meta四探针复现缺失奖励仍claim成功/不足池吞奖及坏档collClaimed数组丢marker。父批准audit_reward_atomicity独占meta.js兑现预检与base-state.js对象规范化、新回归，保持原奖励数量、不用重复牌凑数、失败不提交；只按现有迁移风格兼容坏输入，不回写真实浏览器存档。
+Friday 05:54 UTC+8：庭院生命周期补丁6文件76测试完成并释放该源码。ui生命周期子任务追加仅ui/ui.js照片大图probe外层持有/关闭解绑清引用及专测，最佳努力取消无用在途加载，不宣称底层decode可硬取消；迟到守卫/下一张独立probe保留。资产指纹如变由父审，禁止盲刷新。
+Friday 05:55 UTC+8：Meta/base修补79项等门完成，原子性子任务追加阿猫宝箱附赠持久化：game.run.scenes.js可选deferAcquiredCard、chests.js把固定掷定附赠独立pending并与本体taken同persist、新专测/自有证据。只修宝箱/固定奖励路径，本批非宝箱明确未覆盖且不得回归；下一批先读全入口再协调。保留原checkpoint失败契约与三选一原候选范围。
+Friday 05:56 UTC+8：verify_github_delivery_route仅只读连接器核对私有仓库当前master/权限和后续安全交付路线，独占docs/evidence/2026-10-16-github-delivery-route/；禁止任何外部写入/配置凭证/创建分支PR。当前8小时实机仍继续，交付尚未提交推送。
+Friday 05:56 UTC+8：阿猫宝箱小批必要扩展批准chest-reward-save.js可选choiceCount整数校验与save-format一句字段说明，保留旧快照缺字段语义，不升版本；固定原选项边界与追加附赠分开，防误永久放弃附赠。当前无其他文档属地占用。
+Friday 05:58 UTC+8：庭院与照片probe两个小批完成，生产占用释放。父对ui.js完整delta（对R4冻结源）确认不改Art来源/资产路径，仅探针生命周期，更新唯一opaque SHA至8a1eb7d22e5fea5bb874aec022f240c090e550da8192093f5d42ab64c7fb642d，自有reaudit记录。当前资产collect86/2告警是阿猫chests仍在编辑的选择器失配，待完成后父另审，不放宽门禁。
+Friday 06:04 UTC+8：父审阿猫gift-fix完整delta，chests与game.run.scenes无资产构造变更，更新两类/三处选择器SHA，collect195/0告警恢复。装备征用附赠下一批批准event-card-choice.js/game.run.flow.js必要端口+新测，同步接既有固定奖励，不扩schema；首脑额外传说仅已复现未修。新fix_late_startup_notice独占index.html启动guard内联段/新测/自有证据，修12s后停表导致晚启动仍挂误失败条，真实resource error保持可见，禁止动其余入口。
+Friday 06:11 UTC+8：启动guard小批91项完成编辑释放；新audit_remaining_entry_cost只读R4产物/现源码剩余首屏JS成本，独占2026-10-16-entry-cost-deep-audit/，不build/改预算/生产，报告后再协调。
+Friday 06:12 UTC+8：fix_extra_legend_rewards独立子任务接手已复现首脑/巨兽额外传说满包丢失，先方案后实施game.bag.settle.js及新专测/自有evidence；不碰另一worker的chests/scenes/choice/flow，额外源码先协调，概率/数量不动。
+Friday 06:13 UTC+8：批准额外传说子任务单文件方案：普通战利品后通过既有Chests.restore固定待领快照、同battleSettlement标记持久化，领取/明确放弃后才原settle/教学，不重掷不改概率。真实RunStorage验证标记恢复，不可仅成功端口桩。征用附赠批55项完成编辑释放，event-choice/flow及save-format精确增量见自有quartermaster证据。
+Friday 06:14 UTC+8：额外传说补丁必要测试适配批准battle-settlement-retry.test.js/recovery.test.js补restore/领取路径，原失败重试与无重复断言保留，不放宽。旧恢复context无新标记需验证兼容，不回填历史已领奖励。
+Friday 06:15 UTC+8：实机61神灯抉择返回后两套sts-hand-tools（self正常/hud残留）真实可见，父派fix_battle_tools_duplication先方案后最小重建修复，独占battle.layers.js/必要view手牌接线及新测，自有evidence，不能用CSS隐藏假修。当前其他worker不碰battle视图；指纹父审。entry只读审查已06:11登记，继续候选量化。
+Friday 06:17 UTC+8：battle tools方案批准仅layers挂载定位新HUD直系工具栏替换旧self栏，正规battle-tools-lifecycle专测和独占证据，不动CSS/view/规则。entry低风险两小项批准agent.runner.js延迟MessageChannel与transitions-director.js仅commDemo分支动态import/捕获失败、新测；不拆同步Agent公共面，不夸1KiB收益，不build。
+Friday 06:23 UTC+8：当前所有源码小批完成释放，父collect195/0告警；R5独立验收任务在shared新目录复制，生产短冻结直到稳定manifest确认，不共享inode，不覆旧R4。父当前仅浏览器操作不重启服务/改生产；完整原门禁继续保留。R4后精确补丁覆盖边界以R5新输入为准。
+
+Friday 06:29 UTC+8：R5三类输入独立稳定SHA确认解冻；父已重启试玩服务加载后续修复。R5完整测试14败/4509过/2skip及1unhandled原样保留，定位旧scenes mock缺openFixedRewardsOnCell及selftest注释字符串契约。fix_r5_test_contracts独占上述三个旧测与game/selftest.js最小语义契约更新/自有证据，禁止弱化断言/改生产玩法；R5原预算四项仍红。
+Friday 06:32 UTC+8：父实机江湖救急→发现黑暗吊坠返回，tools只剩btSelf一组，截图62确认；道具条左缘疑似漂移裁切，audit_potion_bar_clipping先只读源码/自有证据不编辑，待10分钟内定性。父第三轮普通战4胜，37HP，奖励聚能收妥。
+Friday 06:33 UTC+8：R5契约修复4文件完成17/17+哨兵41+变异6正确，verify_r5_integrated_build恢复同任务在独立副本精确同步4文件，原红保留，另跑正常全测补充，不重build不改生产。药水裁左定性旧translateX(-50%)遇新left62；批准audit_potion_bar_clipping仅battle-stage.css canonical道具条与tip补transform:none及专测，保留infusion全部。父下一次药水实机复验。
+
+Friday 06:35 UTC+8：improve_visible_playback_waits独占scripts/visible-playback.mjs及其专测/自有证据，先方案，补已知可见转场有界waitFor，提高父重复实机效率；不得隐藏state/自动选奖励或战斗/访问浏览器。
+
+Friday 06:38 UTC+8：药水条仅2处transform reset与新26定向断言完成，实机待药水；audit_css_delivery_budget仅只读R5产物/现CSS/预算定义，独占自有evidence，十分钟内量化候选，不改门禁/字体/源码。
+
+Friday 06:44 UTC+8：可见助手r2.3-final完成175定向通过并已父实机旅行settled，释放脚本属地。药水条父截图64+真实rect已验证非负左缘；tip展开仍未验。R5补充478文件4523通过2skip0unhandled，四红预算保留；其后药水CSS/助手变化不纳入R5覆盖。
+
+Friday 06:50 UTC+8：CSS审计完成释放，未发现安全快速补齐60.1KiB总预算方案，不实施激进主题清除；相关原预算红灯保留。
+
+Friday 06:52 UTC+8：黑市实机成功3次投入共9币，满包保留致命穿刺，父普通reload检验。improve_blackmarket_card_preview先只读定位投入前小卡缺放大操作，独占自有证据，先方案；不得改付费/概率/保底/持久化。
+
+Friday 06:53 UTC+8：批准improve_blackmarket_card_preview仅flow.openEventGamble三卡button/标准UI.showCardZoom只读handler及专测，保留Apollo与付费概率持久化；不改UI.js或CSS。
+
+Friday 06:53 UTC+8：fix_reward_capacity_notice先方案后最小chests.js过时容量notice修复与新测，自有证据，父实机68腾格17/18可收却底栏仍称放不下。不碰flow（黑市预览），opaque SHA父审后更新，禁止自改守卫。
+
+Friday 06:58 UTC+8：notice小批90通过释放；父审notice-only.patch完整只读显示delta无资产来源/回退变化，chests两处opaqueSHA更新1f2bf4…5435，后续容量预估仅只读方案。黑市预览116测试完成释放flow，尚未下一自然黑市实页。
+
+Friday 06:59 UTC+8：批准顺序容量预估新批独占game.session.bag.js/game.session.js现canReceive薄包装/chests.js只读预检及必要3旧测试端口、新专测。保持grant/RNG/schema不变，真实grant对照与3/5堆/安全格/资源槽/珍珠盒扩格等边界，禁止另造规则；父之后审opaque指纹。
+
+Friday 07:11 UTC+8：云端执行器23:07-23:10短暂prep failure已恢复，源码SHA/当前浏览器确认原现场保留。父审容量纯模块与chests完整生产delta，无资产路径变化，opaque两处SHA更新ffed546…a601。实机祭坛5列grid240px已确认，另发现选下排后scrollTop1229.899→0；fix_sacrifice_scroll_position独占altar.js选牌会话滚动/焦点最小修复、新测自有证据，保留规则/安全区过滤，不改CSS。
+
+Friday 07:13 UTC+8：improve_pearl_storage_interface先只读game.bag.js珍珠盒UI和CSS/自有证据，实机75文字实际约6px且存取卡无button语义，鼠标业务可用1/9存妥；需先方案不动容量规则。父实机祭坛候选已取消，三把钥匙手动存盒不占包格。
+
+Friday 07:14 UTC+8：批准珍珠盒UI单页game.bag.js openPearlStore render与expedition-inventory.css .pearl-store域、专测，复用bag决策壳/大字/整叠原生按钮/焦点返回，规则不变。当前父普通背包17/27，三把钥匙1已手动存盒，盒与命运钟表安全2/2，阿猫移普通；下一战测试中。
+
+Friday 07:15 UTC+8：audit_skull_sword_start_effect只读+最小独立复现，父实机普通战新持有骷髅王剑仍显示初始攻击，先核装备/模式规则不直接判bug，十分钟内定性，自有证据。珍珠盒UI已07:14批准实施持有，不再只读；取出文案准确化与卡内tabindex仅可访问性修订允许。
+
+Friday 07:19 UTC+8：R6独立副本全量验收开始，生产短冻结直至稳定manifest释放；所有小批源码完成，BOSS有效卡修复方案批准但audit_skull_sword_start_effect明确等待解冻再编辑。父仅当前浏览器继续，不restart/改源码。
+
+Friday 07:23 UTC+8：R6第二稳定副本确认生产/tests无漂移、三类manifest/inode全过解冻；仅晚加截图76与skull自有pending测试不纳入本轮。BOSS有效卡统一解析/禁注能/提示按已批10既有文件+小模块+engine导出两名字契约开始编辑，ui.js不动，其他worker不得碰battle/inventory-zoom。父祭坛滚动1360.808选下排后保持同值、Space取消也保持，截图76；恢复中已献祭阿猫1+高端2，选复原分支。
+
+Friday 07:26 UTC+8：improve_restore_card_selection先只读共享复原面板renderer/限定CSS方案，新自有evidence；父实机26种候选右窄3列sm/DIV无键盘，考虑复用统一远征决策壳，不改次数/存档/领取规则，需先报精确文件范围。altar.js此前scroll小批完成释放可后续协调。
+
+Friday 07:27 UTC+8：R6全量2红原样保留，acceptance-gate超20s由验收原超时定向复跑；SYS03 grant拒收被即时notice投影清掉，capacity worker只读定性并需修实际拒收反馈，禁止改旧断言消红。复原UI范围批准scenes.js openPocketRestore renderer/同会话scroll/focus + expedition-rewards.css .pocket-restore域/新测，保留Apollo与事务业务；opaque父审。
+
+Friday 07:33 UTC+8：父审layers有效卡/注能和chests实际拒收完整delta，既有资产构造/Art回退不变，更新layers唯一SHA704176…575，chests两处a993d5…a021。safe pearl允许直接开安全盒小批占game.bag.js两gate+专测+rules同段两句；overlay非取消opt-out最小一条与restoreOne标记批准，原Escape启发式其余不改。交付预检audit_cloud_delivery_contents只读分类/敏感值不输出、不stage，源尚在途。
+
+Friday 07:40 UTC+8：restore UI/safe pearl/notice R6三批完成释放。父完整审scenes renderer/overlay optout/CSS与safe两gate/rules差分，资源路径未变，更新scenes唯一opaque至c49bbb…635d，collect195/0。独立BOSS审查真实复现剑荡妖邪直接释放仍raw初攻4伤/离手，及缺模板绕过；原作者追加exec-play/必要selection/draw统一有效化与回归，review worker只读复核，暂不进入首脑。交付预检完成1205文件未检常见凭证，非穷尽；未stage/push。旧本地传输thread断线通知核最新任务已completed，26文件交付完毕，不阻塞云端。
+Friday 07:41 UTC+8：audit_runtime_hot_paths新只读worker限定10分钟查当前地图/背包/UI热点，避已修项，/tmp探针可，禁止仓库写入/浏览器/build；只在有可证实低风险收益时向父报方案。
+Friday 07:43 UTC+8：runtime只读真实源片段探针证实药水提示pointerup后遗留pointercancel listener，每重建一次保留旧tooltip，100次后100个detached写入；批准audit_runtime_hot_paths独占battle.view.js仅该生命周期段/新测/自有证据，保留有效卡显示，额外文件先协调。restore worker只读确认已领取祭坛仍紫色可查看误导，与隐藏log相关；待最小投影方案，不改规则/存档。
+Friday 07:45 UTC+8：批准复原worker追加祭坛完成投影最小三文件(core/map-node-state.js、core/node-info.js、run/expedition.view.js)及新增状态矩阵，保留未激活/待领奖入口、其他完成节点查看和通行规则；不扩flow240ms转场。BOSS内部释放R2四文件已稳定，源完整测试23:43:19已启动受限4workers，等待完毕再R7，原失败保留。R7 verifier已待命，不提前复制。
+Friday 07:46 UTC+8：父仅项目.gitignore补.vite-cache/，确认预检发现的Vitest缓存被忽略，不删文件，不误排before证据；等待最终交付归属核验。祭坛renderer道路缓存contentKey追加两状态获批，避免领取前后visited不变沿用旧几何。
+Friday 07:47 UTC+8：BOSS源full已结束489文件488过/1败，4645过17败2skip，17均旧drag-reference mock缺新查询端口；批准只补mock原断言不动，R7重验。独审再现玩家先捕获有效卡后转换失效竞态与极速符文raw1费预检却effective2费执行；批准必要enemy-phase预检同源、非免费支付不足守卫及真回归，保留免费路径。源full期间未改四生产文件，后补不冒充该full覆盖。
+Friday 07:48 UTC+8：祭坛四文件147项、药水生命周期28项完成释放；父完整审renderer一行cache key与药水selfdelta，更新renderer唯一opaque74fb99…94be，collect195/0。BOSS末端来源/极速费用仍在途，R7尚未freeze，其他小批不再写。
+Friday 07:51 UTC+8：所有生产/测试/evidence作者已释放，BOSS最终五文件+三测R2最终33文件390项通过，独审9项补充已过待最终只读结论。父23:50已重启本会话5300，PID469，普通入口恢复slot02。现在R7全部仓库写入短冻结（含docs/evidence/截图），等待三类独立稳定manifest后解冻；父仅浏览器操作，不存截图/重启服务/改文件。verify_r5_integrated_build获准新的r7副本原全门。
+Friday 07:55 UTC+8：R7源11668文件714432977B、manifest54344d79…b102，deps a289…eff6/Git9e119…edb7三类独立稳定，shared inode0/assetguard195/0，正式解冻。最后raw来源补丁纳入；最终独审11项全部通过。父仅恢复实机证据/台账，R7副本正常完整门继续。23:50服务载入了除最后raw来源外全部修复，现重启以匹配最终源。实机珍珠盒安全直接开、Enter/Space整叠存取、Esc回原safe页、占格19→18验证；已完成祭坛显示+禁用实证，截图78/79在解冻后入库。
+Friday 08:01 UTC+8：R7首遍4692过3败2skip/0unhandled，三原配置定向78全过；两为明确20s超时，workflow子进程status=null仅疑似负载不虚构ETIMEDOUT。父首脑R1暂停输入配合00:00:40开始的第二遍原npm test，参数/阈值不变。新summarize_verified_game_changes仅轻读自有ledger/报告，不跑门不改生产。pileTip真实ARIA仍raw“初始攻击”已定性，批准skull作者core单行同effective+新测，先写不跑，等第二遍完毕再测，明确R7后补。
+Friday 08:06 UTC+8：R7原参数第二遍492文件4695过2skip0unhandled，完整性/资产195/0通过，四预算红保留；freeze后两行名称小补141项单独通过。新improve_battle_pile_readability只读截图81和共享牌库/墓地样式，先方案，不改业务；prepare_private_repository_delivery只读远端/metadata/二进制桥接准备，未上传/建分支。用户00:01已收到珍珠盒实机图78，当前首脑第一回合仍37HP、boss43/48、1/2能量。
+Friday 08:26 UTC+8：pile CSS限定新批48项已释放，父完整diff已审无业务改，00:18服务PID515载入，待实页。correct_verified_interface_copy先只读核实后获准battle.view/piles.view/exec-play/altar四文件纯呈现：材料复原限制、deckBottom有效卡面与临时副本来源、智能入库短label、损失高稀有子集词；保留所有玩法/排序/回执/UID。自有delta/SHA后由父审guard，不build/碰真档。
+
+Friday 08:52 UTC+8：撤离记录生产2文件修复及149项定向日志已落盘，作者遭平台preview额度中断，封装未完成；父已读关键差分。浏览器操作审批同受阻，授权已通知用户，未绕过。现短冻结源树，R8独立副本原全门由父执行，全部新呈现及savedCards纳入；Git blob worker已要求暂停源树回执写入。实页待核不得冒充通过。
+Friday 08:53 UTC+8：R8源11770文件716541108B，manifest728b253d…7888；依赖a289…eff6、Git9e119…edb7均独立稳定复制，源树解冻。原全门已在R8副本启动；父仅整理修复证据，不操作受阻浏览器、不并发其他测试。
+
+Friday 2026-10-16 04:18 UTC（云端提交推送）：已获老板明确提交推送授权；本次接手全部已完成云端源码、运行资产、测试及文本证据，截图/候选/中间副本留原位并记 SHA。独占本次发布证据及暂存树，源码已冻结；原 R8 验证与四项预算失败保持。二进制上传与源树分工明确，不重复上传；远端核验后方可记录已推送。

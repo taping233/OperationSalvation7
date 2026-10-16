@@ -1,0 +1,62 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤
+
+··········································stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 真实loadGame在主卡未领和附赠待领两阶段均优先恢复chest，不重付或重领
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 完全满包也只锁定主卡待领，不实际发本体或附赠；整理后才发
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+··stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器missing时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器missing-serialize时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器false时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+····stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接器throw-before时不发任何卡/不锁选择/不消费节点，已付3币与固定候选保留
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 承接已建立并保存后才抛异常时保留已锁选择与待领，不回滚成可重选
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[1]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[1]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口
+[save] RunStorage.write 失败：对局进度未落盘（配额满或存储不可用）
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[2]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[2]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口
+[save] RunStorage.write 失败：对局进度未落盘（配额满或存储不可用）
+
+···stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[1,2]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 交接两次保存失败序列[1,2]：每一尝试都含锁定+chest，成功盘面不留刷新复制窗口
+[save] RunStorage.write 失败：对局进度未落盘（配额满或存储不可用）
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 普通非阿猫选择保持原即时发卡/关闭/保存，不依赖固定领奖端口
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+stderr | tests/event-choice-acquired-gift-cloud.test.js > 装备征用阿猫整体交接固定待领奖 > 整理返回同候选、交接后旧背包回调不覆盖固定领奖页，完成重进无新付款
+[recorder] 对局身份变化，未沿用其他对局的战斗统计
+
+····
+
+ Test Files  5 passed (5)
+      Tests  55 passed (55)
+   Start at  07:11:52
+   Duration  3.29s (transform 1.35s, setup 0ms, collect 3.47s, tests 3.62s, environment 3.02s, prepare 767ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

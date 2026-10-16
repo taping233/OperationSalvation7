@@ -1,0 +1,134 @@
+{
+  "captured_at": "2026-10-16T00:33:13.737934+00:00",
+  "manifest_file": "runtime-binaries.manifest.json",
+  "manifest_sha256": "57efc08507ac94c77a41d879bf9126029a924f4ff10b5fedad7856034d26ce40",
+  "sha256_list_file": "runtime-binaries.sha256",
+  "sha256_list_sha256": "85af9542d6839b7306b7131cb0bc50dea81e131ce90c099f07238580e8171831",
+  "git_blob_list_file": "runtime-binaries.git-blob-sha1",
+  "git_blob_list_sha256": "8403f6652ccff6327ee11d6d1b7721b5a8343334a2afef7d661c7da421a2eafd",
+  "counts": {
+    "animation-frame": 263,
+    "wu-personnel": 1,
+    "room": 1,
+    "total": 265
+  },
+  "total_bytes": 23960112,
+  "unique_blob_count": 265,
+  "base64_characters": 31947144,
+  "largest_entry": {
+    "path": "搜打撤/game/assets/portraits/personnel/wu-default-cutout-v1.webp",
+    "bytes": 1011996,
+    "mode": "100644",
+    "git_blob_sha": "ef9054695ebea5f36f0dad7cfa31fc46c00114b3",
+    "sha256": "68fe23ed56b3b9fee7e3fbfef64546ddc260da282897b87703034446b00432de",
+    "kind": "wu-personnel",
+    "receipt": "搜打撤/docs/evidence/2026-10-16-wu-personnel-cutout/receipt.json",
+    "mtime_ns": "1792095686395235221"
+  },
+  "verification": {
+    "all_current_bytes_match_receipts_and_asset_manifest": true,
+    "frame_paths_equal_current_tracked_diff": true,
+    "all_263_frames_referenced_by_current_unchanged_catalogs": true,
+    "original_reports_record_rgba_and_alpha_preservation": true,
+    "image_decoding_rerun": false,
+    "tests_or_builds_run": false,
+    "remote_mutations": false,
+    "publish_authorization_pending": true
+  },
+  "catalogs": [
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/animations.json",
+      "sha256": "322055d9c310af548716f4be77005540c29658032ecb38f3fd697b389a1423a8",
+      "referenced_unique_textures_including_fallback": 51,
+      "bytes_equal_baseline": true,
+      "changed_frames_in_catalog": 51
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/animations.json",
+      "sha256": "f1cdc039221e3ec608b3bc8a3255f86e516a63fd77d0650b78e5c8be0c41656b",
+      "referenced_unique_textures_including_fallback": 64,
+      "bytes_equal_baseline": true,
+      "changed_frames_in_catalog": 62
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/animations.json",
+      "sha256": "c61fd20e53913c49ad2f537a7559a3fbad77e949715399979a0113ab1b229992",
+      "referenced_unique_textures_including_fallback": 50,
+      "bytes_equal_baseline": true,
+      "changed_frames_in_catalog": 50
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/animations.json",
+      "sha256": "e566a1f694f0c14d01af99ce928df4c765e15878ef9ec500f9cf54b3ea86093b",
+      "referenced_unique_textures_including_fallback": 50,
+      "bytes_equal_baseline": true,
+      "changed_frames_in_catalog": 50
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/animations.json",
+      "sha256": "c61fd20e53913c49ad2f537a7559a3fbad77e949715399979a0113ab1b229992",
+      "referenced_unique_textures_including_fallback": 50,
+      "bytes_equal_baseline": true,
+      "changed_frames_in_catalog": 50
+    }
+  ],
+  "originals_retained_not_selected": [
+    {
+      "path": "搜打撤/game/assets/portraits/full/wu.webp",
+      "sha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc",
+      "included_in_blob_upload_manifest": false
+    },
+    {
+      "path": "搜打撤/game/assets/home-prototype/room-direction-candidate.png",
+      "sha256": "66e3bb17dc7eef8424e08551f33c0efd395b248fc8011172d14f3b08223cb747",
+      "included_in_blob_upload_manifest": false
+    }
+  ],
+  "evidence_sources": [
+    {
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "bytes": 212228,
+      "sha256": "b1dc1f26980692b57c6ea03c7d7a598aba0ff4037848eb01fefaed4e49754574"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/verification.json",
+      "bytes": 1329,
+      "sha256": "b5092475a4ba0c28fb486c33a3f810adc575dea9128e274fb63f9604e7b7c503"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-16-wu-personnel-cutout/receipt.json",
+      "bytes": 2414,
+      "sha256": "8a86df04f3de3a3af0efc7a7a64faf6939293ab889c65a0dea080dcae1298e8d"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-room-lossless/receipt.json",
+      "bytes": 1304,
+      "sha256": "4ed08d8ec6d886a3ef264420454130c6fc335201e983b3395957f7a64d5ef480"
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-room-lossless/verification.json",
+      "bytes": 190,
+      "sha256": "66b8572c7ecd71521ff81badc7e95ee82f63ee3d502e43030f47a0b8341ea6e3"
+    }
+  ],
+  "formal_reference_locations": [
+    {
+      "path": "搜打撤/game/src/hub/hub.personnel.js",
+      "line": 14,
+      "asset": "portraits/personnel/wu-default-cutout-v1.webp"
+    },
+    {
+      "path": "搜打撤/game/src/home/home.visuals.js",
+      "lines": [
+        139,
+        141
+      ],
+      "asset": "home-prototype/room-direction-candidate.webp"
+    },
+    {
+      "path": "搜打撤/game/src/battle/view/battle.frames.js",
+      "line": 243,
+      "asset_template": "assets/portraits/frames/${role}/${name}.webp"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "status": "audit-complete-proposal-not-implemented",
+  "files": [
+    "README.md",
+    "audit-result.json",
+    "audit-shadowed-cards.mjs",
+    "audit.log",
+    "docs-check.json",
+    "docs-check.stderr.log",
+    "publication-proposal.json",
+    "shadowed-card.audit.test.js",
+    "vitest.audit.config.mjs",
+    "vitest.log"
+  ],
+  "checks": {
+    "sourceScan527": true,
+    "candidateArtifactsMatchR3": true,
+    "unchangedReviewedSourceSnapshot": true,
+    "vitest": "8 passed",
+    "docsCheck": true,
+    "syntaxCheck": "both audit scripts passed"
+  },
+  "unverified": [
+    "No official build",
+    "No complete actual Rollup graph after proposed exclusions",
+    "No browser or network image loading",
+    "No budget rerun"
+  ],
+  "proposedFiles": 30,
+  "confirmedImageBytes": 1291352
+}

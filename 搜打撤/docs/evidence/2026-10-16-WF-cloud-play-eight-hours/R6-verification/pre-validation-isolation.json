@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-10-15T23:22:05.113993+00:00",
+  "allThreeManifestsVerified": true,
+  "inputMismatches": [],
+  "sharedInodesByManifest": {
+    "source-input-manifest.json": [],
+    "dependency-input-manifest.json": [],
+    "git-input-manifest.json": []
+  },
+  "sharedWritableInodes": 0,
+  "copyStrategy": "FICLONE reflink attempted per file; independent-inode copy2 fallback; stable source/dependency/Git manifests before and after copying",
+  "browserOrServiceUsed": false
+}

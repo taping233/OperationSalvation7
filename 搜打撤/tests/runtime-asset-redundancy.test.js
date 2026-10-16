@@ -46,16 +46,101 @@ it('keeps reviewed asset decisions identical across Git LF and Windows CRLF sour
 });
 
 describe('reviewed production-only asset omissions', () => {
-  it('contains exactly the 56 independently reviewed paths, never sprite-v1, skins, fonts or active scenery', () => {
-    expect(RUNTIME_REDUNDANCY_REVIEW.candidates).toHaveLength(56);
-    expect(new Set(RUNTIME_REDUNDANCY_REVIEW.candidates.map(candidate => candidate.path)).size).toBe(56);
+  it('contains 56 previous paths, 90 retired chest frames, 19 retired scenes and 30 shadowed card files', () => {
+    expect(RUNTIME_REDUNDANCY_REVIEW.candidates).toHaveLength(195);
+    expect(new Set(RUNTIME_REDUNDANCY_REVIEW.candidates.map(candidate => candidate.path)).size).toBe(195);
+    const chests = RUNTIME_REDUNDANCY_REVIEW.candidates.filter(candidate => candidate.category === 'chests');
+    expect(chests).toHaveLength(90);
+    expect(chests.map(candidate => candidate.path).sort()).toEqual(['small', 'medium', 'large', 'class', 'boss']
+      .flatMap(kind => Array.from({ length: 18 }, (_, frame) =>
+        `scenes/chests/${kind}-rig-640-v1/frame-${String(frame).padStart(2, '0')}.webp`)).sort());
     const current = collectReviewedRuntimeAssetExclusions(projectRoot);
     expect(current.warnings).toEqual([]);
-    expect(current.excludedAssets.size).toBe(56);
+    expect(current.excludedAssets.size).toBe(195);
     for (const asset of current.excludedAssets) {
-      expect(asset).not.toMatch(/sprite-v1\/|portraits\/(?:full|battle|avatars)\/|fonts\/|symbol-foreground|map-atmosphere|city-ghost-props|transition-.*-v2/);
+      expect(asset).not.toMatch(/sprite-v1\/|portraits\/(?:full|battle|avatars)\/|fonts\/|safe-simple-v7\/|symbol-foreground|map-atmosphere|city-ghost-props|transition-.*-v2/);
       expect(readFileSync(new URL(`../game/assets/${asset}`, import.meta.url)).byteLength).toBeGreaterThan(0);
     }
+  });
+
+  it('omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs', () => {
+    const stems = ['spell-tt8-curse1', 'spell-tt8-curse2', 'spell-tt8-curse3', 'spell-tt8-curse4',
+      'equip-tt3-staff', 'equip-tt3-fate-wheel', 'equip-tt3-wolf-bow', 'equip-tt3-twinwater-mail',
+      'equip-tt3-grass-armor', 'equip-tt3-blooddrinker', 'equip-tt8-demonslay', 'equip-tt8-archdemon',
+      'equip-tt8-heavensword', 'equip-tt7-arcanescroll', 'equip-tt12-raygun'];
+    const reviewed = RUNTIME_REDUNDANCY_REVIEW.candidates.filter(candidate => candidate.category === 'shadowed-card-art');
+    expect(reviewed.map(candidate => candidate.path).sort()).toEqual(stems
+      .flatMap(stem => [`cards/${stem}.webp`, `thumbs/cards/${stem}.webp`]).sort());
+    expect(Object.keys(RUNTIME_REDUNDANCY_REVIEW.consumerFingerprints['shadowed-card-art']).sort()).toEqual([
+      'game/data/art-mapping.json', 'game/src/core/art.js', 'game/src/core/data-loader.js',
+    ]);
+    const mapping = JSON.parse(readFileSync(new URL('../game/data/art-mapping.json', import.meta.url), 'utf8'));
+    const current = collectReviewedRuntimeAssetExclusions(projectRoot);
+    for (const stem of stems) {
+      const id = stem.replace(/^(spell|equip)-/, '');
+      const replacement = mapping.cardArtOverrides[id];
+      expect(typeof replacement).toBe('string');
+      for (const prefix of ['', 'thumbs/']) {
+        const asset = `${prefix}cards/${stem}.webp`;
+        expect(current.excludedAssets.has(asset)).toBe(true);
+        expect(current.excludedAssets.has(`${prefix}${replacement}`)).toBe(false);
+        expect(readFileSync(new URL(`../game/assets/${asset}`, import.meta.url)).byteLength).toBeGreaterThan(0);
+        expect(readFileSync(new URL(`../game/assets/${prefix}${replacement}`, import.meta.url)).byteLength).toBeGreaterThan(0);
+      }
+    }
+    for (const stem of ['hero-forbidden', 'spell-tt3-fireball', 'martial-tt3-skewer', 'equip-tt2-frostsword']) {
+      for (const prefix of ['cards/', 'thumbs/cards/']) expect(current.excludedAssets.has(`${prefix}${stem}.webp`)).toBe(false);
+    }
+  });
+
+  it('retains shadowed card files after override, renderer or data-loader changes and rejects restored lazy references', () => {
+    const candidates = RUNTIME_REDUNDANCY_REVIEW.candidates.filter(candidate => candidate.category === 'shadowed-card-art');
+    const fingerprints = RUNTIME_REDUNDANCY_REVIEW.consumerFingerprints['shadowed-card-art'];
+    const sources = Object.keys(fingerprints).map(filename => ({
+      path: filename, code: readFileSync(new URL(`../${filename}`, import.meta.url), 'utf8'),
+    }));
+    const review = { candidates, consumerFingerprints: { 'shadowed-card-art': fingerprints },
+      opaqueConsumers: RUNTIME_REDUNDANCY_REVIEW.opaqueConsumers };
+    const inspect = records => planReviewedRuntimeAssetExclusions(records, {}, review);
+    expect(inspect(sources).excludedAssets.size).toBe(30);
+    for (const filename of Object.keys(fingerprints)) {
+      const changed = sources.map(source => source.path === filename ? { ...source, code: `${source.code}\n ` } : source);
+      expect(inspect(changed).excludedAssets.size).toBe(0);
+      expect(inspect(sources.filter(source => source.path !== filename)).excludedAssets.size).toBe(0);
+    }
+    const restoredMapping = sources.map(source => {
+      if (source.path !== 'game/data/art-mapping.json') return source;
+      const mapping = JSON.parse(source.code); delete mapping.cardArtOverrides['tt8-curse1'];
+      return { ...source, code: JSON.stringify(mapping) };
+    });
+    expect(inspect(restoredMapping).excludedAssets.size).toBe(0);
+    for (const candidate of candidates) {
+      const restored = { path: 'game/src/lazy-restored-card.js', code: `assetUrl('assets/${candidate.path}');` };
+      expect(inspect([...sources, restored]).excludedAssets.has(candidate.path)).toBe(false);
+      expect(() => assertExcludedRuntimeAssetReferences([{ id: `/project/${restored.path}`, code: restored.code }],
+        new Set(candidates.map(item => item.path)))).toThrow(/Excluded runtime asset/);
+    }
+    const generated = { id: '/project/game/src/generated/thumb-manifest.js', code: JSON.stringify([candidates[1].path.slice('thumbs/'.length)]) };
+    expect(() => assertExcludedRuntimeAssetReferences([generated], new Set(candidates.map(item => item.path)))).toThrow(/Excluded runtime asset/);
+  });
+
+  it('keeps the current safe timeline and restores any referenced or changed retired rig selector', () => {
+    const asset = 'scenes/chests/small-rig-640-v1/frame-00.webp';
+    const selector = { path: 'game/src/chest-selector.js', code: 'new URL("../assets/scenes/chests/safe-simple-v7/frame-00.webp", import.meta.url);' };
+    const review = {
+      candidates: [{ path: asset, category: 'chests' }],
+      consumerFingerprints: { chests: { [selector.path]: hash(selector.code) } },
+      opaqueConsumers: {},
+    };
+    const inspect = sources => planReviewedRuntimeAssetExclusions(sources, {}, review);
+    expect(inspect([selector]).excludedAssets.has(asset)).toBe(true);
+    expect(() => assertExcludedRuntimeAssetReferences([{ id: '/game/src/current.js', code: selector.code }], new Set([asset]))).not.toThrow();
+    for (const code of [`new URL('../assets/${asset}', import.meta.url);`, 'const restoredRig = "small-rig-640-v1";']) {
+      expect(inspect([selector, { path: 'game/src/lazy-restored.js', code }]).excludedAssets.has(asset)).toBe(false);
+      expect(() => assertExcludedRuntimeAssetReferences([{ id: '/game/src/lazy-restored.js', code }], new Set([asset]))).toThrow(/Excluded runtime asset/);
+    }
+    expect(inspect([{ ...selector, code: `${selector.code}\nconst revision = 2;` }]).excludedAssets.has(asset)).toBe(false);
+    expect(inspect([]).excludedAssets.has(asset)).toBe(false);
   });
 
   it('omits only unused reviewed files and retains future static or configured references', () => {

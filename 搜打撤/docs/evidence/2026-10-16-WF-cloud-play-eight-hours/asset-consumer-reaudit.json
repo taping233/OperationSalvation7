@@ -1,0 +1,15 @@
+{
+  "reason": "Reviewed exact source diffs against f0e84c5d: battle changes only hand geometry, escaped name strip, same UID pointer gesture bridge and intent DOM placement; bag view only visible rail labels. Asset URL construction, dynamic source paths, manifest selection and all original assets are unchanged. Preserve conservative consumer guards; refresh only these audited fingerprints.",
+  "files": [
+    {
+      "path": "game/src/hub/game.bag.view2.js",
+      "before": "076d034c4d3d627044e4017d8ab79fedd54929cb32a36c3bc0507c94e24e82a5",
+      "after": "3763b8bb13e113e97f9e09ed0d36ade94892bd6810db2fe711f3e74fee383f6f"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "before": "f3ed0dea3d9122998bed05f546593aac97ce430bd3a1039ca168dfc7cbb25b2f",
+      "after": "1830224b1a7ec8c0f7212bbc4229e015fe9ad977df5f9b06b01a77dda6a2f6e3"
+    }
+  ]
+}

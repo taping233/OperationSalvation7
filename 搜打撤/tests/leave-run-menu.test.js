@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { createGameMenuController } from '../game/src/ui/game.menu.js';
+import { createGameMenuController } from './helpers/menu-controller.js';
 
 function mountLeaveMenu({ slot = 1, save } = {}) {
   document.body.innerHTML = '<div id="title" hidden></div><div id="exitScr" hidden></div><div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';

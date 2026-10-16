@@ -1,0 +1,39 @@
+{
+  "repository": "taping233/OperationSalvation7",
+  "source_commit": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "source_tree": "869f3477c070304d5e6a96cfba395c42ab143e80",
+  "archive_sha256": "c9c04f87a808de681c136f85cc6affa79a83c1363f1a43a34a2729bda79a94ab",
+  "archive_bytes": 829285387,
+  "verified_transferred_files": 25,
+  "verified_blob_paths": 13377,
+  "bootstrap_selftest": "passed",
+  "git_fsck_full": "passed",
+  "baseline_before_administrative_notes": "clean shallow master, no remotes or credentials",
+  "node": "22.23.3",
+  "npm": "10.9.9",
+  "dependency_install": "npm ci --no-audit --no-fund; 258 packages; success",
+  "npm_cache": "/workspace/shared/operation7-npm-cache",
+  "hooks_path": "搜打撤/.githooks",
+  "source_root": "/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d",
+  "service": {
+    "url": "http://127.0.0.1:5300/",
+    "host": "0.0.0.0",
+    "port": 5300,
+    "strict_port": true,
+    "pid": null,
+    "cwd": "/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤",
+    "log": "/workspace/scratch/b7a53a06c872/operation7-transfer-f0e84c5d/vite-5300.log",
+    "status": "blocked_by_execution_network_namespace",
+    "session": null,
+    "error": "Wildcard bind URL discovery fails at uv_interface_addresses; loopback server starts in its execution sandbox but is unreachable from other tool calls; approved escalation fails on runtime read-only mounting. All created servers have exited."
+  },
+  "browser_started": false,
+  "game_changes": false,
+  "checks_not_run": [
+    "gameplay browser validation",
+    "full tests",
+    "build",
+    "performance budgets"
+  ],
+  "recorded_at_utc": "2026-10-15T18:06:13.809704+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "beforeAndAfterSourceShaEqual": true,
+  "copiedInputShaEqual": true,
+  "createdAt": "2026-10-15T23:21:14.688803+00:00",
+  "gitMetadataIncluded": false,
+  "kind": "uncommitted-working-snapshot",
+  "manifestSha256": "975a608ad540ff8a3f42426a053db7d683c1256764e694fc9ad9daebdef3a007",
+  "notes": [
+    "All actual Vite app sources, assets, tests, scripts and current documentation are included.",
+    "Duplicate historical full-repository/runtime snapshots, large historical evidence, frozen engine/old-art directories, build products and caches are excluded.",
+    "node_modules is copied separately and its own stable manifest is required."
+  ],
+  "snapshot": "/workspace/shared/cloud-iteration-verification-r6-20261016/snapshot",
+  "source": "/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d",
+  "sourceHead": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "sourceInputBytes": 712828056,
+  "sourceInputFiles": 11510,
+  "stabilityWindowSeconds": 20
+}

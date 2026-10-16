@@ -20,7 +20,7 @@ vi.mock('../game/src/run/game.run.scenes.js', () => ({
   }, finishInstant: () => { harness.finish++; },
   buildEncounter: () => [], cancelLegacyChainMove: () => {}, consumeCell: () => {}, enterNode: (_, fn) => fn(), grantEventCard: () => true,
   openBattleCell: () => {}, openBlankSafePage: () => {}, openChestsOnCell: () => {}, openPickupPage: () => {}, openPocketRestore: () => {},
-  openShop: () => {}, preloadCellScene: () => {},
+  openFixedRewardsOnCell: vi.fn(), openShop: () => {}, preloadCellScene: () => {},
 }));
 vi.mock('../game/src/run/game.run.altar.js', () => ({ openDoorModal() {}, openFireRest() {}, openAltarRitual() {}, openBossGate() {}, openEmergencyModal() {} }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ Sfx: {}, _set_cardPageOpen() {}, cardHTML: () => '' }));

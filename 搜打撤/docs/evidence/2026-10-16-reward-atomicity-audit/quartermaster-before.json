@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-15T22:06:20.907513+00:00",
+  "sources": [
+    {
+      "path": "game/src/run/event-card-choice.js",
+      "sha256": "c2e4629812a10261b4d8beb2620c78b860267c20a29ca45b9f419a5b0b797606",
+      "bytes": 4710
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "sha256": "7587599bb28253857d5b5dfd89f93706548d7800978d8995b71ec53636e76b6e",
+      "bytes": 54759
+    },
+    {
+      "path": "docs/save-format.md",
+      "sha256": "e8189b0d15d71105cf5eac169b456cedeccdea427afb2ce4fed30addc22b6252",
+      "bytes": 14198
+    }
+  ]
+}

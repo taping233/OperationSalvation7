@@ -1,0 +1,88 @@
+{
+  "source": "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/run-data-ui-export-20261016-0028.json",
+  "sha256": "f6988e1a852da701d293534436de60da9f811871efd8a76472f5cdfc2e2c98ce",
+  "runId": "run-2-b8abe3ed-028c-44e6-be83-bbeb0fad055d",
+  "battles": {
+    "fought": 12,
+    "won": 12
+  },
+  "bossKilled": true,
+  "outcome": "clear",
+  "retainedBattleCount": 10,
+  "battleEvidence": [
+    {
+      "foe": "联邦巡防兵+联邦巡防兵+联邦巡防兵",
+      "round": 1,
+      "hp": 37
+    },
+    {
+      "foe": "联邦射手+联邦射手",
+      "round": 2,
+      "hp": 37
+    },
+    {
+      "foe": "变异雪狼+甲壳变异体+反抗组织掷弹兵",
+      "round": 2,
+      "hp": 36
+    },
+    {
+      "foe": "甲壳变异体+反抗组织掷弹兵",
+      "round": 1,
+      "hp": 37
+    },
+    {
+      "foe": "反抗组织掷弹兵+变异雪狼",
+      "round": 1,
+      "hp": 37
+    },
+    {
+      "foe": "变异雪狼",
+      "round": 1,
+      "hp": 40
+    },
+    {
+      "foe": "滋生异变体+滋生异变体",
+      "round": 3,
+      "hp": 40
+    },
+    {
+      "foe": "巨兽「荒渊」",
+      "round": 3,
+      "hp": 40
+    },
+    {
+      "foe": "腐蚀异变体+腐蚀异变体",
+      "round": 3,
+      "hp": 19
+    },
+    {
+      "foe": "异能领主",
+      "round": 7,
+      "hp": 5
+    }
+  ],
+  "netTake": {
+    "cardsStashed": 23,
+    "pocketKept": 16,
+    "wood": 0,
+    "rations": 0
+  },
+  "losses": {
+    "lostCount": 3,
+    "lostNotable": [
+      {
+        "name": "迷之匣",
+        "rarity": "史诗",
+        "count": 1
+      }
+    ],
+    "pocketLost": 34
+  },
+  "knownPendingIssue": {
+    "reportedCarriedCount": 29,
+    "reportedCarriedValue": 84,
+    "actualStashedCount": 23,
+    "expectedActualStashedValue": 77,
+    "status": "confirmed source bug; fix pending; historical record unmodified"
+  }
+}

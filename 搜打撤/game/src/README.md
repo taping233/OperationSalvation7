@@ -25,7 +25,7 @@
 
 1. `core/rules.js`、`core/mapData.js`、`run/game.run.data.js`、`core/asset-url.js`：规则、授权数据和资源路径。
 2. `core/art.js`、`core/icons-bitmap.js`、`audio/sound.js`、`core/camera.js`、`battle/core/combat.js`、`hub/base.js`、`hub/meta.js`、`core/renderer.primitives.js`：独立能力与纯工具。
-3. `hub/game.store.js`、`hub/game.storage.js`、`run/game.session.js`、`battle/core/battle.core.js`、`battle/effects/battle.effects.js`、`battle/bag/battle.deck.js`、`battle/core/battle.target-rules.js`：状态、持久化和领域逻辑；`ui/game.menu.js` 是标题/选档/设置控制器。
+3. `hub/game.store.js`、`hub/game.storage.js`、`run/game.session.js`、`battle/core/battle.core.js`、`battle/effects/battle.effects.js`、`battle/bag/battle.deck.js`、`battle/core/battle.target-rules.js`：状态、持久化和领域逻辑；`ui/game.menu.js` 是同步标题/退出与菜单懒加载门面；`ui/game.menu.pages.js` 是经依赖注入创建一次的非首屏面板工厂。冷入口可等待完成并支持取消/重试，热入口直接复用原面板行为。
 4. `core/renderer.js`（聚合 `renderer.icons.js` / `renderer.fx.js`）、`battle/view/battle.view.js`、`ui/ui.js`、`experience/pocket-strip.js`（章节风险徽标，常驻汇总条已按老板要求移除）：Canvas 或 DOM 表现层；`renderer.fx.js` 挂载的 `SDT.FX` 必须先于 `run/game.session.js` 求值（main.js 导入顺序不可调换）。
 5. `run/game.run.js`、`run/game.run.shop.js`、`run/game.run.class-choice.js`（选角按需轻门面，返回页面就绪 Promise）、`run/game.run.class-choice.page.js`（人物与卡池叶页面，非首屏依赖）、`hub/game.hub.js`（基地按需轻门面）、`hub/game.hub.runtime.js`（基地壳实现，首次选档进入时动态加载）、`hub/game.hub.depart.js`（出征整备）、`hub/game.hub.pages.js`（六页签 HTML）、`hub/game.hub.bridge.js`（壳↔切片中立桥）、`hub/game.bag.js`、`hub/game.notes.js`、`hub/game.cardslib.js`：功能流程。
 6. `game.boot.js`：输入、跨功能接线和启动；这是唯一允许了解多数功能模块的地方。

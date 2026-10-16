@@ -1,0 +1,15 @@
+{
+  "task": "Persist extra legendary rewards before battle settlement",
+  "owner": "fix_extra_legend_rewards",
+  "status": "complete-uncommitted",
+  "paths": [
+    "game/src/hub/game.bag.settle.js",
+    "tests/battle-settlement-retry.test.js",
+    "tests/battle-settlement-recovery.test.js",
+    "tests/extra-legend-reward-persistence.test.js",
+    "docs/evidence/2026-10-16-extra-legend-rewards/"
+  ],
+  "result": "Fixed supplemental legendary rewards, original loot RNG/count preserved, real RunStorage and recovery tests pass",
+  "evidence": "docs/evidence/2026-10-16-extra-legend-rewards/source-verification.json",
+  "parentAction": "Release registry entry and continue authorized real-browser playthrough; no commit authorized"
+}

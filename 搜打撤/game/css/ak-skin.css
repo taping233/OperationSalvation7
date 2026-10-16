@@ -109,9 +109,9 @@ h1, h2, h3 { font-family: var(--font-ui); }
 #overlay :is(.slot-card, .shop-slot, .lib-item, .evt-opt, .dep-card) { transition: transform .18s var(--ease-pop), border-color .18s, box-shadow .18s; }
 #overlay :is(.slot-card, .shop-slot, .evt-opt):hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(0,0,0,.55), 0 0 0 1px var(--ak-blue); }
 #overlay .hub-card h3, #overlay .set-h { font-weight: 800; letter-spacing: .24em; color: var(--ak-white); }
-#overlay .set-en, #overlay .node-kicker, #overlay .cls2-eyebrow, #overlay .class-dossier-kicker { font-family: var(--font-label); font-weight: 700;
+#overlay .set-en, #overlay .node-kicker, #overlay .cls2-eyebrow { font-family: var(--font-label); font-weight: 700;
   letter-spacing: .38em; text-transform: uppercase; color: var(--ak-yellow); font-size: 11px; }
-#overlay .shop-price-tag, #overlay .dep-n { font-family: var(--font-num); font-weight: 700; color: var(--ak-yellow); }
+#overlay .dep-n { font-family: var(--font-num); font-weight: 700; color: var(--ak-yellow); }
 #overlay .shop-soldout { background: repeating-linear-gradient(135deg, rgba(0,0,0,.72) 0 8px, rgba(236,75,63,.28) 8px 16px); color: #fff; letter-spacing: .4em; font-weight: 800; }
 
 /* —— 存档位 —— */

@@ -7,6 +7,9 @@ import { createKoiPond } from './courtyard-vendor/KoiPond.js';
 export function mountCourtyardV3(root) {
   const host = root.matches?.('[data-courtyard]') ? root : root.querySelector('[data-courtyard]');
   if (!host) return () => {};
+  const overlay = host.closest('#overlay');
+  const departed = () => !host.isConnected || (overlay && (!overlay.contains(host) || overlay.hidden
+    || overlay.classList.contains('closing') || overlay.hasAttribute('data-ui-closing')));
   let rain = true;
   const canvas = host.querySelector('.courtyard-v3-canvas');
   const backdrop = host.querySelector('.courtyard-v3-backdrop');
@@ -118,7 +121,7 @@ export function mountCourtyardV3(root) {
   };
   const loop = time => {
     frame = 0;
-    if (!host.isConnected) { dispose(); return; }
+    if (departed()) { dispose(); return; }
     if (!running()) return;
     if (!previous || time - previous >= 32) {
       draw(previous ? Math.min(.05, (time - previous) / 1000) : 1 / 30, true);
@@ -128,6 +131,7 @@ export function mountCourtyardV3(root) {
   };
   const sync = () => {
     if (disposed) return;
+    if (departed()) { dispose(); return; }
     if (frame) cancelAnimationFrame(frame);
     frame = 0; previous = 0;
     const reduced = reducedMotion();
@@ -191,7 +195,14 @@ export function mountCourtyardV3(root) {
   const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(resize) : null;
   const motionObserver = typeof MutationObserver !== 'undefined' ? new MutationObserver(sync) : null;
   observer?.observe(scene);
-  motionObserver?.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  // Paused/static rooms have no RAF to notice a shortcut replacing their owner.
+  // Watch only ancestor child lists, rather than every mutation in the page tree.
+  for (let parent = host.parentElement; parent; parent = parent.parentElement) {
+    const attributes = parent === document.body ? ['class']
+      : parent === overlay ? ['hidden', 'class', 'data-ui-closing'] : [];
+    motionObserver?.observe(parent, { childList: true, ...(attributes.length
+      ? { attributes: true, attributeFilter: attributes } : {}) });
+  }
   if (!observer) window.addEventListener('resize', resize);
   canvas.addEventListener('pointerdown', pointer); canvas.addEventListener('keydown', key);
   canvas.addEventListener('pointermove', hover); canvas.addEventListener('pointerleave', leave);

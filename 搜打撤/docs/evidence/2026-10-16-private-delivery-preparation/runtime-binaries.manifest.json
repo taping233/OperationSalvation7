@@ -1,0 +1,2663 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-10-16T00:33:13.737934+00:00",
+  "repository": "taping233/OperationSalvation7",
+  "status": "frozen binary candidate list; no upload authorization exercised",
+  "baseline_commit": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "path_root": "repository-root",
+  "selection": "Exactly 263 completed animation-frame WebPs plus formal Wu personnel WebP and formal room WebP; no PNGs, screenshots, or other candidates.",
+  "entry_count": 265,
+  "total_bytes": 23960112,
+  "entries": [
+    {
+      "path": "搜打撤/game/assets/home-prototype/room-direction-candidate.webp",
+      "bytes": 607272,
+      "mode": "100644",
+      "git_blob_sha": "67c79a5bfe58cb3c7086e507e5a8f51d8f3379d8",
+      "sha256": "97469c1514ef8441515f07df056e91aaac67739367605cbb9da751bb5daa1861",
+      "kind": "room",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-room-lossless/receipt.json",
+      "mtime_ns": "1792097111228064743"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-001.webp",
+      "bytes": 62300,
+      "mode": "100644",
+      "git_blob_sha": "11abff21618de3ffeff5bb6303dcd70b646ee5db",
+      "sha256": "4378dbff7096271a2c62de58fbf7634216f663274fdd7e14bfff0c011fce78db",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087688707259"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-002.webp",
+      "bytes": 62174,
+      "mode": "100644",
+      "git_blob_sha": "15fd8e7254a10af9b1f098c4413424672bab6b10",
+      "sha256": "3997a11086fae18d98bef9c84493d43366da8ded65ae63cac1d41e40cdd4433c",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087689544407"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-003.webp",
+      "bytes": 62044,
+      "mode": "100644",
+      "git_blob_sha": "d379081b8a59d268639ec48f935dc7ea9852a9fa",
+      "sha256": "5443244e4847ab160a3d14771a6358ba89b40ac7880eb0481e2410bc0094fbff",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087690425356"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-004.webp",
+      "bytes": 62118,
+      "mode": "100644",
+      "git_blob_sha": "b47532fe1aec14421a4a74a5f7aca23e007663b7",
+      "sha256": "a983123275ca12177a3bf3d77db31b47a82c0f1b5b5acf4d968537c54a7b5b81",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087690821813"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-005.webp",
+      "bytes": 62034,
+      "mode": "100644",
+      "git_blob_sha": "d88884d89b98a81a8b4d92e52137bf10a4be59e4",
+      "sha256": "3cb6d4dabc09b8e1ef8428184f6cbc90bd31e94ff9345354673cc592dd54a3f8",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087691303712"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-006.webp",
+      "bytes": 61878,
+      "mode": "100644",
+      "git_blob_sha": "10b583d6db2a92e7ffac6983d3d172a983c3eb7b",
+      "sha256": "2f85b8cd609de4ca0abd29971674fcc3b3917c596189830e97aaaaee1fac5574",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087691847553"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-007.webp",
+      "bytes": 61934,
+      "mode": "100644",
+      "git_blob_sha": "6c4fc3f5ff391225e928fdb57297723c2d6c8c68",
+      "sha256": "038dc6540b28b2191d8eda6d7f8064e1f7be0988d06f4f97561d5f940c69f3c0",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087692269188"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-008.webp",
+      "bytes": 61970,
+      "mode": "100644",
+      "git_blob_sha": "9815c388a81f7f208544024f8cd504a25a931997",
+      "sha256": "5e4cb4cf90bab9a00fa376f2bfc5453de11b550027a91f365d40da2a7eb64337",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087693405118"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-009.webp",
+      "bytes": 61896,
+      "mode": "100644",
+      "git_blob_sha": "48b5d6652996cd21b1f2558ac8cc0bd3f3b12b93",
+      "sha256": "1bc522309bbfdd544b308087048fb9f264b9eed1299284c65d50a6e696d7ae43",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087693771709"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-010.webp",
+      "bytes": 61894,
+      "mode": "100644",
+      "git_blob_sha": "5cc16c564f1abd5890c19d2a3fc0b86a89292636",
+      "sha256": "9e95e51980fea66fe9de569d8f4738a77e17760f53e10c76074f9cf7c6109982",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087694368649"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-011.webp",
+      "bytes": 61852,
+      "mode": "100644",
+      "git_blob_sha": "3a2e7441f2507fe41e9be81fb4bc25e391d508d0",
+      "sha256": "bd82f1c9186420cfa13f76fed8e5a275f5fe1ef330aa5d8d8198bb17095eac71",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087695453524"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-012.webp",
+      "bytes": 62112,
+      "mode": "100644",
+      "git_blob_sha": "caa115bb6a242e258dffed956aa56597365b9091",
+      "sha256": "2ced9cc94361e72918a8ef864ef8eb0b24b5c2a3ee385f89b916fad7f76c2e19",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087695723939"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-013.webp",
+      "bytes": 62178,
+      "mode": "100644",
+      "git_blob_sha": "cfb65d0f94c05a85efcffdfeb54750cfae272dea",
+      "sha256": "596247791e3784bdd62d19efb026bf6920b143f135df307a9c79370cae638e4f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087696295226"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-014.webp",
+      "bytes": 61704,
+      "mode": "100644",
+      "git_blob_sha": "62240cd1f5429f74935a70102aff8046c3e87324",
+      "sha256": "dd19c2c22424b161de55209d12e2783c42e3e6a3c092948a9094f4eb73eaf573",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087697413927"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-015.webp",
+      "bytes": 61842,
+      "mode": "100644",
+      "git_blob_sha": "5d17c85380c951fd2a32d114632b6c7c815a1420",
+      "sha256": "881baf2284d1608b7c2f0f5e052bd9cb614fd3e88a0d7131b49954a464969a28",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087697846193"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-016.webp",
+      "bytes": 61874,
+      "mode": "100644",
+      "git_blob_sha": "c4f2090842bea86194706b2ffabbd4a18bba231e",
+      "sha256": "3db43b5e1c51e1f46ffab996d7063b03c0f7ae5fce22b1c35e0ea80f9344e297",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087698322276"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-017.webp",
+      "bytes": 61818,
+      "mode": "100644",
+      "git_blob_sha": "368ce43a9b8c8be78b21b372ef5f4c0349ec16b4",
+      "sha256": "ad494b98dedbf6e2a69be8b665c1b52f7d3157988aa835ea280798e9513a2865",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087699088183"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-018.webp",
+      "bytes": 62054,
+      "mode": "100644",
+      "git_blob_sha": "7b0d02062c1f63ff014f036afc591ee0713a3a26",
+      "sha256": "05d51b6053864cfdb74f303e517cc918a6d2d67c7f3f8f411d8627559aaae983",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087699860698"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-019.webp",
+      "bytes": 62252,
+      "mode": "100644",
+      "git_blob_sha": "4f4a28cfaa18532e2f082bbf8fcd26da480e9506",
+      "sha256": "1e3da67981ce21e63093623a66ded19e6bb399e097639672241002003e4f88ac",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087700245592"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-020.webp",
+      "bytes": 62060,
+      "mode": "100644",
+      "git_blob_sha": "64359426753f4f7214c011d10169f43f27af935c",
+      "sha256": "64514cabc749b6b0e642709b8371c8a58c686569d9926f3d9e2c4770dbdfc30a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087700666527"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-021.webp",
+      "bytes": 62016,
+      "mode": "100644",
+      "git_blob_sha": "217cd052144605ea6169ef799d1d3afad3a06d95",
+      "sha256": "1b0f8fe1e9fd7f363970f0ee9d09c00924ec2ca5846b253d8779b2ec55e08a6c",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087701861923"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-022.webp",
+      "bytes": 61970,
+      "mode": "100644",
+      "git_blob_sha": "5356f8b0e6145b07044e4700181c9bdcfe3e25a7",
+      "sha256": "0b5e1f3df58466dea26f61a13cf0330a1271a3f31a55c596e133de9ce476771c",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087702357189"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-023.webp",
+      "bytes": 61974,
+      "mode": "100644",
+      "git_blob_sha": "b8a52a52c7dd12182e039858d9815cd9efbaa038",
+      "sha256": "bf9a884f491b1fef45afc047341db522365fdaad29c0ca07d26a1ac10e2e7b97",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087703364272"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-024.webp",
+      "bytes": 61866,
+      "mode": "100644",
+      "git_blob_sha": "15a40fdfd693ec57208cbb98d1b0dd703089dd02",
+      "sha256": "72ae34dbed8e95b8462d909b40c0fb7d5dd45276fff326d8e3c1685c0d631c06",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087704546976"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-025.webp",
+      "bytes": 62140,
+      "mode": "100644",
+      "git_blob_sha": "abe361bfa99dd740b6af4c2d74bff0fc0377b241",
+      "sha256": "51d86317624bd65bf1a055bb919d1601812647dd39c06f6f6168f32e52cbd4a9",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087705787705"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-026.webp",
+      "bytes": 62170,
+      "mode": "100644",
+      "git_blob_sha": "e9e206d49ac40e445a6a71b47b2c4fa8cbeb0c06",
+      "sha256": "63e07e3b438cfbc48483201771e9c525159877afa2d46c63a676791f28e9f3f3",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087706470080"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-027.webp",
+      "bytes": 62096,
+      "mode": "100644",
+      "git_blob_sha": "871f4daeeaf0cccd9843d9f1da4464203b19c9f7",
+      "sha256": "093848c1630a656f6548ed778ac8e27697ffdb887ac68f698a1fccf319070e1f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087707390493"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-028.webp",
+      "bytes": 62062,
+      "mode": "100644",
+      "git_blob_sha": "9a276ac78a0db362f862ba95dbc09909a38a2406",
+      "sha256": "d36226157c3b28a47eca03377136b37b0e0b51a137c1e55c8dfce211413a5603",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087707880853"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-029.webp",
+      "bytes": 62162,
+      "mode": "100644",
+      "git_blob_sha": "e4881bf6514a70e09ba281298bdf8863580f7df2",
+      "sha256": "2bbd750d1c4a5ab241014618ef11c8885c8b46623ee055657ec40dc9b4687cb4",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087708229929"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-030.webp",
+      "bytes": 62172,
+      "mode": "100644",
+      "git_blob_sha": "ab66c82acff3054e6bf314e69fc2695d2b57e4c1",
+      "sha256": "6014274c24eebdb3604b7e23dfbc8735da0d6a41adf559e8ab878c427df6d107",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087708518113"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-031.webp",
+      "bytes": 62138,
+      "mode": "100644",
+      "git_blob_sha": "559af91f364731c58d7842af61ade76574a06491",
+      "sha256": "ae4bd76d83e6a2f0679469ea89880abb6236e65863496eabd56b1e590136cc54",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087709336093"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-032.webp",
+      "bytes": 61988,
+      "mode": "100644",
+      "git_blob_sha": "bb4de641c614fdcc11a68d30ba31bf03272b8bb1",
+      "sha256": "f96e33113d7b10d7d83dea9c0df5b0b696b84f7bac7a9388eb0163ce81cfecb2",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087709632868"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-033.webp",
+      "bytes": 62068,
+      "mode": "100644",
+      "git_blob_sha": "c755b4ec797d3e09f9d367c3125caef9a981af22",
+      "sha256": "5b1af686cb4431d07c67af939b5f243169053ae2f553944e16bed82eeb3025cc",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087710213203"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-034.webp",
+      "bytes": 62384,
+      "mode": "100644",
+      "git_blob_sha": "25820d9dc1b12acb68bab6f5fa6e15435be96fc9",
+      "sha256": "665c38ff98cbebd0914cab46de7a86e8bb907ca3a0aa0320e218d4439497ce13",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087710477781"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-035.webp",
+      "bytes": 62242,
+      "mode": "100644",
+      "git_blob_sha": "638a8e5200b6015ec62cb6449e25f05a59ad53ee",
+      "sha256": "5e89c2e20cc3b3d670d1de9e7d635b961ed55ed3a2359b5419eb194637cd076b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087710724406"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-036.webp",
+      "bytes": 67580,
+      "mode": "100644",
+      "git_blob_sha": "7ccaee1009b3a9519916b47bec9e4b09fb850ef2",
+      "sha256": "d3850bc1e38838323f7a05bff62b4aea4f130c65f0999e1e3e253a5704ca516f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087711393344"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-037.webp",
+      "bytes": 69314,
+      "mode": "100644",
+      "git_blob_sha": "c093774841b070d8c845586ee3c78af1d8c868c2",
+      "sha256": "d4ce5cfb313c0187fb3a2cd9875a32718d905896a655c9c8c046b8c4789299c8",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087711650836"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-038.webp",
+      "bytes": 72050,
+      "mode": "100644",
+      "git_blob_sha": "a2d309c6bbccadfa17dd412b112be53ea812ace0",
+      "sha256": "3352610bb717c0b0e09d1a980e570ef69620ee1eeb94178969363a6e712fb60b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087712460458"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-039.webp",
+      "bytes": 74458,
+      "mode": "100644",
+      "git_blob_sha": "3a34aaf406734ad9030b98cce6cbf633b6621e9b",
+      "sha256": "c2fe0c395d6ece0a56001be174d49f66760e6349bd6f8001648f665e84d2f709",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087712854766"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-040.webp",
+      "bytes": 69006,
+      "mode": "100644",
+      "git_blob_sha": "44da37d561c402b7d985e0ff6111232bc8a13856",
+      "sha256": "f0fda34720f1bf30b38ecedfbe83f2b816177f5a8676ea15ab00959c671e31a4",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087713172162"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-041.webp",
+      "bytes": 67238,
+      "mode": "100644",
+      "git_blob_sha": "93f5a185aa116637587a73ecef668c191d402df9",
+      "sha256": "d63680b4b55bd136ab35f64aed8238b2efd7194cb361490bf362d32bf3c5f5a9",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087713518808"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-042.webp",
+      "bytes": 70176,
+      "mode": "100644",
+      "git_blob_sha": "73b8b0704c96770449102bf7bdb911ea6e456c33",
+      "sha256": "c5ff53e42cbd3a6fae25ebb35294d1bc27f7bbe4bfb3f94d75b60a151d187ce3",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087713715903"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-043.webp",
+      "bytes": 70276,
+      "mode": "100644",
+      "git_blob_sha": "bbacb39645193009966cd6992a873c594d2f13c8",
+      "sha256": "b8f63b1470ca96407dc90fa7b2ef97b626efd47c41f9f065d944dda7fc6c9c39",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087714071709"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-044.webp",
+      "bytes": 82054,
+      "mode": "100644",
+      "git_blob_sha": "bcd86490a922fd99e33184c6c80fbc72769eb0dc",
+      "sha256": "d0ccd01c857b4423dd935e2739c9658f709cef779995170d6eeca53532308f09",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087714585806"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-045.webp",
+      "bytes": 82236,
+      "mode": "100644",
+      "git_blob_sha": "df32b3eaefdf5fed6f7b06aa12d3878e734a139b",
+      "sha256": "5aef54d07914ac340c592d93e0178450da2ee74ccd1cb4d1e59ead0c2a5ca80f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087715734209"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-046.webp",
+      "bytes": 76486,
+      "mode": "100644",
+      "git_blob_sha": "c5f27629f177e4c4ab68b6c7052b44c103f34c8c",
+      "sha256": "1ad335f70172165ca4cf74a2c1b757f79596a1a6f370ed74233b96f1b97df04d",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087716589840"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-047.webp",
+      "bytes": 71100,
+      "mode": "100644",
+      "git_blob_sha": "ad4c314ce5366c7908e7d5f308d15a00fdc5d116",
+      "sha256": "9127f7ca28743e2a6ec7e2092bb322a84fde325ac85ce37a9c28ff3b87e6a97d",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087717302576"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-048.webp",
+      "bytes": 59924,
+      "mode": "100644",
+      "git_blob_sha": "479f78d2dacc76198a1d948c72699c52de934f58",
+      "sha256": "094bc726f45926a8356f58c9ca51e297c24340193107074a69c4a4db50289cc5",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087717603202"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/frame-049.webp",
+      "bytes": 58124,
+      "mode": "100644",
+      "git_blob_sha": "b8b6257300548e31526f8c9b2a269cd9236da160",
+      "sha256": "32e9ccaaa7a50b8f019d61be66ec168ba6aa4eda299c41e25087b1c9ab2bd856",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087718267914"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/baita/sprite-v1/neutral.webp",
+      "bytes": 62200,
+      "mode": "100644",
+      "git_blob_sha": "f00086b631630eee3d3c995876babf6a67e9f091",
+      "sha256": "c93ce03668e093c4b0d61358b7f2a094d24e3983c9c2711795d273ad93e8e94b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087718982932"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f001.webp",
+      "bytes": 197562,
+      "mode": "100644",
+      "git_blob_sha": "f170d6c8a23443fae6c110d845cf2f55c55fd066",
+      "sha256": "7841aaf683c0ef5f5991ea4f6226483581b5118be00c6604ea9b600e2a8640e3",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087722027957"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f002.webp",
+      "bytes": 197400,
+      "mode": "100644",
+      "git_blob_sha": "cab9765923e52210b6f1b2b80acc70ab69142f72",
+      "sha256": "a4b75e51864dbc58f05bc6124b37b7c30f1b331a0b87b4c73f8c6c58aabc2b70",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087723984303"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f003.webp",
+      "bytes": 197592,
+      "mode": "100644",
+      "git_blob_sha": "d3c5182f713e540ce3e9404da153a273c1719c47",
+      "sha256": "15c2fe314947e3c93d897259e0ea36252143cb2254133d383828379632c7f948",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087725131772"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f004.webp",
+      "bytes": 197516,
+      "mode": "100644",
+      "git_blob_sha": "d151f1a62addfa38cf5cfe11e9c7faa5c9e9c323",
+      "sha256": "05e6f2491bfd6ed9883119a3b8e831f761f5859a39879f6da009820e1eada76f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087726044789"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f005.webp",
+      "bytes": 197500,
+      "mode": "100644",
+      "git_blob_sha": "4e52934b62fab80b3f4f887513b412a19c98b15e",
+      "sha256": "7db2cdaa79914091b5f29963c6eb010b86441eeafb9e4e1e3fd711767a9f1362",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087727196888"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f006.webp",
+      "bytes": 197462,
+      "mode": "100644",
+      "git_blob_sha": "5c3e115f8c14e546cfde15def822e109081680e1",
+      "sha256": "67410e0df72de8950accfa83da5e2768ef49107e337233c1b771abd27bad7164",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087727817275"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f007.webp",
+      "bytes": 197642,
+      "mode": "100644",
+      "git_blob_sha": "71bdccd43c90d1dd384aef12a02919c3ea8b9729",
+      "sha256": "d9ebda080f45dbff7b1f59dd4b03104736eb17caa5a7fd2205f08864bfa42e9c",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087728406810"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f008.webp",
+      "bytes": 197302,
+      "mode": "100644",
+      "git_blob_sha": "72c461da907cd8660661e7c1ee17708d2faca6f3",
+      "sha256": "bfeefd201eb0f5677b0096dc725c2f8bd8b258dc3d271b9dab30f629f147458e",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087729041364"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f009.webp",
+      "bytes": 197204,
+      "mode": "100644",
+      "git_blob_sha": "a4f2dab71c472023186beb241ea43e47725356b2",
+      "sha256": "72e11ea55cf7e1bd33362bd6451e878d87a882ff8ff3b97f555d3f1999c45f34",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087729469689"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f010.webp",
+      "bytes": 197340,
+      "mode": "100644",
+      "git_blob_sha": "9364fac564307d6a72c45015088be971c44823ca",
+      "sha256": "d4bcdabd15cb904a38d780e364b7f27c1e6cc8246cdc04d1e0cdcb196c8d75c3",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087730096201"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f011.webp",
+      "bytes": 196998,
+      "mode": "100644",
+      "git_blob_sha": "ce15d888a37072bb69be722c6e87bc9bbc7e5bce",
+      "sha256": "75f17c48cbd9490dd70a63fcff60ac65c31d6b368d01a23bfcbf426d25fb42fc",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087730852873"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f012.webp",
+      "bytes": 197048,
+      "mode": "100644",
+      "git_blob_sha": "b71e4a94e9460cd1785ea03853f14f9bbf416fed",
+      "sha256": "382c7fe5a035091945cd84e7c6e7f772d16a5d015d7f48ef02f08f1581f4bc2b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087731569007"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f013.webp",
+      "bytes": 196944,
+      "mode": "100644",
+      "git_blob_sha": "8fb8c9478ce74613cf33fa3b8c03c7e7fd257668",
+      "sha256": "df570d0da6e4b7c2b40453a5e2a7b9b39085f253c8906080f328819a595f2c0f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087732242766"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f014.webp",
+      "bytes": 197088,
+      "mode": "100644",
+      "git_blob_sha": "34352739dcb2b43c25257189d9fa09f1c128f6b2",
+      "sha256": "0f1a6c052ce3b47a284415c4bee4ff0a879091559c9b483e2c7e7dd71eb40ee2",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087732793620"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f015.webp",
+      "bytes": 197198,
+      "mode": "100644",
+      "git_blob_sha": "22daf5a3d17ef9a3335690d48965d8153c36087f",
+      "sha256": "c09a96348f7443049e693f2e0b894ac3264202f6503fdb2460aac255ecd5f863",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087733481126"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f016.webp",
+      "bytes": 197190,
+      "mode": "100644",
+      "git_blob_sha": "388bbb91c5c1d1ee2eac1997b4f61900c4bbac91",
+      "sha256": "a0a72698c34dde0d8d2a818624fb2f5110564a83a0d18210a9efca77fce7179f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087733948630"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f017.webp",
+      "bytes": 196894,
+      "mode": "100644",
+      "git_blob_sha": "f30b36ec2a1d556d7c05cfec2cc03479de0ec72b",
+      "sha256": "4760e2bcfb4611ed55ecc638dc5587df9179f89776d7c60fea7e4291a12dbf68",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087734632807"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f018.webp",
+      "bytes": 197082,
+      "mode": "100644",
+      "git_blob_sha": "4fea6d869e57656e9141fcc64b2147feb3a678a1",
+      "sha256": "7ecf97070afc9445b6dbfcb440c37090a3b6c9002f01cf0b528338051d8b62f3",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087735136258"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f019.webp",
+      "bytes": 197204,
+      "mode": "100644",
+      "git_blob_sha": "c6e57d5a3af126712fa932aa54ae282da44b55e7",
+      "sha256": "d76abb4a8da2a424982d411a5faa1b1277cf06ee835dedfac3f4df02d2e0441b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087735738602"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f020.webp",
+      "bytes": 196822,
+      "mode": "100644",
+      "git_blob_sha": "e0cd5c3677136b02c2cc46b93689e8094d892be4",
+      "sha256": "ff959864a9c102756681e2a2ad14a18fb10e3cccda8ef40931be9a45a229c053",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087736253208"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f021.webp",
+      "bytes": 197214,
+      "mode": "100644",
+      "git_blob_sha": "e300cb7d7d790143d8ca6a0b3fbf7d8975344566",
+      "sha256": "2c8a164bc8c7ae04e5963e43cc38602d12303c1e3d1a7fceabd4419b3f94bf1a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087737027861"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f022.webp",
+      "bytes": 197014,
+      "mode": "100644",
+      "git_blob_sha": "e1f54ccba2cd9a76ef456f36c175b83d293c1f8b",
+      "sha256": "71070edaff5ce6cff7cdf91a7cf73c9f17da5dcea1b398eb3db3fdc48f7dcf9d",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087737454079"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f023.webp",
+      "bytes": 196990,
+      "mode": "100644",
+      "git_blob_sha": "32bc56faa4d46d695aa4274daaefcd33d5159dd4",
+      "sha256": "3033751802e9714836c76f563f8b9ba6b6a2828b282d4958a73d71fa0f71b2bc",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087737868188"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f024.webp",
+      "bytes": 197288,
+      "mode": "100644",
+      "git_blob_sha": "938609dedc72fdf83c320491e8280adb88a53334",
+      "sha256": "ac808042d30b8d49dfef32944d0514b1f29fa45d20330b95d40eb67c17cb92d9",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087738411677"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f025.webp",
+      "bytes": 197218,
+      "mode": "100644",
+      "git_blob_sha": "dde1a96e2eaf32e6dc4ca46b61cdc3c77ba81032",
+      "sha256": "5d6f408b172654e11d3b5f559fb31f0d7797bb39e9f9fbbdae37ccb5dddbf75c",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087738994774"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f026.webp",
+      "bytes": 196940,
+      "mode": "100644",
+      "git_blob_sha": "f12657528f1df746612f9861eeee43ccf32cf65d",
+      "sha256": "39f3740f49001552707bbe37c3daa18e9f39639a76e74bf7300aabeb9df35e12",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087739508340"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f027.webp",
+      "bytes": 197038,
+      "mode": "100644",
+      "git_blob_sha": "91244b252113b3d18135c769e321dc544a3f49ec",
+      "sha256": "2b3c9aad362c9d2569b909c580ad030d2f0e864dcd12abb9d63afcf065e9204a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087739950600"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f028.webp",
+      "bytes": 197026,
+      "mode": "100644",
+      "git_blob_sha": "e4dfb820f2f1c17d90fba9c526ed044fa707e110",
+      "sha256": "7b4c484a3c17d2bcbbe81f84d04367516f41afb72a19ecd725271137dbe0cc1b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087740749969"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f029.webp",
+      "bytes": 197278,
+      "mode": "100644",
+      "git_blob_sha": "e174a53593f5be5bd6666e6e90bad4bf4865db3c",
+      "sha256": "bf72a73a8aa10b81254cfb8338f1cba4a41b908ea6cfaa504571df9e8b86b285",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087742124296"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f030.webp",
+      "bytes": 197096,
+      "mode": "100644",
+      "git_blob_sha": "7b0e8b5c88c7df02b9f60bd797d9c5d12afa8bb0",
+      "sha256": "27d8de90db2c735e858ed4e6c06f9b733263edee4850061bfd876a0321466bd7",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087743096476"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f031.webp",
+      "bytes": 197050,
+      "mode": "100644",
+      "git_blob_sha": "cb3536e304fb5885efb1142f2b3e6d8d52a47ed7",
+      "sha256": "bf3f1ffda3ae09abbb6769d4878eab25655e86d780930db67732b12c91dcfc5f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087743682353"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f032.webp",
+      "bytes": 196888,
+      "mode": "100644",
+      "git_blob_sha": "6d1764736095249b046786e69d23952e5727a150",
+      "sha256": "a07a0533bec2a583b7f7c60d6c3ce2f30e3244e60fa53ff0fc20ae213e3025b0",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087744508900"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f033.webp",
+      "bytes": 197118,
+      "mode": "100644",
+      "git_blob_sha": "9db6196c64fc8d0dce5c27349b1b33197bd76b86",
+      "sha256": "827ef0077460c98c8ce81eaab998cb8dc5a7204992952d9297fc312092f49add",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087745280188"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f034.webp",
+      "bytes": 197102,
+      "mode": "100644",
+      "git_blob_sha": "12157204ca50f712fcbc5ac0a5d5ebf62f34f040",
+      "sha256": "32520f802abfab7219d294e9cee5b2a06291dbef694561954b63fc790f0c61b4",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087746008590"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f035.webp",
+      "bytes": 196988,
+      "mode": "100644",
+      "git_blob_sha": "81c2432ff8e143bf9428d7e1863be4524b747b7f",
+      "sha256": "2debe0f2a7f724168b257c226133af569d9aefc60eb3972ee9c1744ee639546f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087746591109"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f036.webp",
+      "bytes": 197092,
+      "mode": "100644",
+      "git_blob_sha": "9fdebee3704958d7d4955cadb9064259b6c7615f",
+      "sha256": "d181c07a2948bd76a0c83ee4a83c720e59453f1aa887529e5367a5aad30811da",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087747489622"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f037.webp",
+      "bytes": 199874,
+      "mode": "100644",
+      "git_blob_sha": "39d5607fcde240f88e413d2f3a0587cdb29aa5f2",
+      "sha256": "6f3770b37fb887084b196944833685c275da0e07892f7a35b4175584fd0d5272",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087748094558"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f038.webp",
+      "bytes": 202160,
+      "mode": "100644",
+      "git_blob_sha": "b28d771f8dbaffa097a75bc7d5c271f7cebae923",
+      "sha256": "cd933922a0583c595fff1db9747ff120fcb7af7ffe128abf87a6620593108130",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087748758804"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f039.webp",
+      "bytes": 199366,
+      "mode": "100644",
+      "git_blob_sha": "555b00d70eb3b0ebf03d607583848629c8aac017",
+      "sha256": "53b624f570b9c1944853a6132965a29718dbc7b02e717c05bf2dd09869ab22b1",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087749427511"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f040.webp",
+      "bytes": 164530,
+      "mode": "100644",
+      "git_blob_sha": "a1f80d85b680bd85a0d1aceed8d9e03b4804e4f5",
+      "sha256": "9998ded120b177b9a42c27f069dea2943f16d9a4744f56ed4723bd24383dd9f7",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087750070678"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f041.webp",
+      "bytes": 163798,
+      "mode": "100644",
+      "git_blob_sha": "8d0f2dece5b1e7b773a85476cdd5d05dc1581341",
+      "sha256": "0a2928bb467bc28eb71ac6a476a8a8cc12b2786fd0bf386a52f4ffc9ed9005a5",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087750564048"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f042.webp",
+      "bytes": 164624,
+      "mode": "100644",
+      "git_blob_sha": "c3a73dddfd4f26d71ad403f1492ab11d41d58b82",
+      "sha256": "e9895ca4c8de81af82cf97e7560e3b0659949f57ac7f9659aace2aab53114e9e",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087751149946"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f043.webp",
+      "bytes": 175380,
+      "mode": "100644",
+      "git_blob_sha": "fe4ddb6f8badfe504c5dcb7e2eae1235e08d1ea8",
+      "sha256": "cfd816423a2267ef6fb7030c28510be02001b2970a3b6aa8240f29fbd652ab60",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087751769834"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f044.webp",
+      "bytes": 165482,
+      "mode": "100644",
+      "git_blob_sha": "af81d4daf92b1389f8baae7dafe0bdc992be7740",
+      "sha256": "68d9f5519f60f19241cb0f6665b698f76070d499741e6b0be14fa91ead858c0f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087752260644"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f045.webp",
+      "bytes": 164480,
+      "mode": "100644",
+      "git_blob_sha": "bc2381ee8d2bbd59a6ede6120e895e51cbef5f55",
+      "sha256": "928c66957044c507e4fd2ac909618e0743325294b9950ca3313a4940b3d4a41f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087752835248"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f046.webp",
+      "bytes": 164900,
+      "mode": "100644",
+      "git_blob_sha": "64471d42a62252e24827d57d1a623107ea4ee993",
+      "sha256": "ee9a1f74be869c6c8363c6be736dc67b62ff9e89f156d8865bf2d992d9bd529b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087753351076"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f047.webp",
+      "bytes": 162894,
+      "mode": "100644",
+      "git_blob_sha": "22aeaaf2f943e12415f3cb85128b9b310ee5a7f4",
+      "sha256": "2f8818f2f54ead63cb0a97ed51efd51dd5dbc95a9776224944f807990a0e8429",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087753836683"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f048.webp",
+      "bytes": 163738,
+      "mode": "100644",
+      "git_blob_sha": "0ccf30228c0fa621cd542666698b622884160bbf",
+      "sha256": "47c384dad889c77fd191f34656f755becb899bae9b951de3c12c3d9f90a4ead0",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087755029786"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f049.webp",
+      "bytes": 165122,
+      "mode": "100644",
+      "git_blob_sha": "41c8e87af5acd566e88deeff5ce9423cb5406777",
+      "sha256": "16762d1f4e43652e2ab5c96ed2340db4ef16c567fc9ea20d1931568ac13dbd40",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087755584448"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f050.webp",
+      "bytes": 175732,
+      "mode": "100644",
+      "git_blob_sha": "c5e7dcb3504895704bc33501b90f8e299e1ab5ef",
+      "sha256": "db93d4dd9bc65319f1248bea3f07799c9864b752d84da897f0c9fa8464201d8e",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087756288360"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f051.webp",
+      "bytes": 164722,
+      "mode": "100644",
+      "git_blob_sha": "8ac54a0bcd92696547ee9691c05fa57a9885c1c0",
+      "sha256": "91fb0e9ed93c5a756589b70909363b9d3dc33b0b0d66c0ea8eceee4778c6b5f1",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087756787258"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f052.webp",
+      "bytes": 163912,
+      "mode": "100644",
+      "git_blob_sha": "21c7f5b3e8af4260fe0cae564bcfc4a886cf6951",
+      "sha256": "d7cd93c018c0b4764915c114f064128e56db1ef632a740733da38db123392d26",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087757338009"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f053.webp",
+      "bytes": 164052,
+      "mode": "100644",
+      "git_blob_sha": "69bce5ed67e4ffefd5364a154a00f2101a840ab9",
+      "sha256": "6e8696e6c52bd25a4c892d6fd7744bb3f8a5f9b1a0f80bd26d8586a065008429",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087757869540"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f054.webp",
+      "bytes": 165702,
+      "mode": "100644",
+      "git_blob_sha": "6b100599ffdf88df2617490c94edcba43e35d250",
+      "sha256": "fef04867f93573b8b2677052cc53b5bf85c929a6fd35876c218874162ec99276",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087758425428"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f055.webp",
+      "bytes": 167544,
+      "mode": "100644",
+      "git_blob_sha": "5a1ef2511a64455f6c913758066aef41296ef02e",
+      "sha256": "1df757d618cd664f432da49ee910ccf5850cb4aa4da45938548436e24a1f6347",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087759106781"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f056.webp",
+      "bytes": 169938,
+      "mode": "100644",
+      "git_blob_sha": "b0a0245977fa6dddc8e186d9d76fd2cb7127b335",
+      "sha256": "16c79108415430b6bd044e3dd5e0d82e602c4f2d450ebe36516b9fc2234a68b2",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087759601299"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f057.webp",
+      "bytes": 118892,
+      "mode": "100644",
+      "git_blob_sha": "1d7820c7cac4b35ed12cbf28a866fb3f8cd88a65",
+      "sha256": "12dfa30c19e660f4bccf35e2d944e0f4cac77b99a96c03b070db7d6a47b7d064",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087760055288"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f058.webp",
+      "bytes": 124680,
+      "mode": "100644",
+      "git_blob_sha": "cd09996ccbfe1bf2e50903be5c6dd2efe768c3c4",
+      "sha256": "e30de2bb1f7d82b3fafadd57774c82cb60ec33457bd89597a1120152dee7f5cf",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087760980710"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f059.webp",
+      "bytes": 101498,
+      "mode": "100644",
+      "git_blob_sha": "24e52e0ebff3f4077d09d819fccb71f8138336db",
+      "sha256": "f72ae036a0e1cf2aca4591ba22382bb02469ae5e84fb3e74ad74b33b8391963d",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087761778612"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f060.webp",
+      "bytes": 104496,
+      "mode": "100644",
+      "git_blob_sha": "f920ea490eb06346576dc94d43400a1d3ecf95bd",
+      "sha256": "0d5b21b0f56ca5c27fb86250e5331e7d330a13833a3a4d08ee60f4df9f52a300",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087762404870"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f061.webp",
+      "bytes": 86218,
+      "mode": "100644",
+      "git_blob_sha": "d3ccc32f0550c40a2c3d6226c77d1a042556e5d0",
+      "sha256": "067653f0c60b20d630f6a772d0fd788b7cae350c2d1686edd97105805fa183fe",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087762790741"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/changwuyu/sprite-v1/f062.webp",
+      "bytes": 78496,
+      "mode": "100644",
+      "git_blob_sha": "c382c6662656bace41d3ed2590a1dca2f1177033",
+      "sha256": "db28d08fbc8f000467cd0f8e46134c59946123cd57232366d14f42bd320e7d0f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087763671180"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-001.webp",
+      "bytes": 42090,
+      "mode": "100644",
+      "git_blob_sha": "1dd40157e39324868b58cf16c8414f8f996e3eaf",
+      "sha256": "29808029ec49e28b8f932a74756ab98af6d8346bc4c9a99f12eae6b7c89e3524",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087764510977"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-002.webp",
+      "bytes": 42082,
+      "mode": "100644",
+      "git_blob_sha": "908f7e36bdd4212bd9a96551768ae42bc754acb9",
+      "sha256": "a0d717b7bf5c13cd67de3e3f153a365666a77f1f588bc0ba89a88e415228c367",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087765042237"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-003.webp",
+      "bytes": 41928,
+      "mode": "100644",
+      "git_blob_sha": "896108bee08f9ef0072b1d20c0620b1e94fb2f83",
+      "sha256": "083bb86cabec2b1ba83b39a53ca909387f44858e54aeaf64552ca8ccb1d09225",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087765604396"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-004.webp",
+      "bytes": 41848,
+      "mode": "100644",
+      "git_blob_sha": "a11a98bcaaf87d4a5c019520d0759050543a0c87",
+      "sha256": "e2663aaa6039edd63dc0a47616d0b94860a0997a52acc4a55bcee490b9b06b58",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087765831296"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-005.webp",
+      "bytes": 41772,
+      "mode": "100644",
+      "git_blob_sha": "d73c834aa76178ba7b8148a4e70dc6d4bedc56ae",
+      "sha256": "8433dd48125deaf93cf97719f28117a067183b2b664c4ea3c4997e4ce1fe55ab",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087766414595"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-006.webp",
+      "bytes": 41732,
+      "mode": "100644",
+      "git_blob_sha": "0febf0ae4ac85c577dfbffd4b946f916cf8bf1b5",
+      "sha256": "deef7965b039b172219aadf8500cb3950b032ecc8a92398dd56c5671f021837f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087766766642"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-007.webp",
+      "bytes": 41636,
+      "mode": "100644",
+      "git_blob_sha": "5adda8aea1674dd50913264878de9e10989a820d",
+      "sha256": "32d5c60b204d4d248324844a79b60518c237cb26712d8a4afe0542fd0f61639a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087766995608"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-008.webp",
+      "bytes": 41560,
+      "mode": "100644",
+      "git_blob_sha": "f9f5f859bf73cbc3b2d6f732deb647aa07b2897f",
+      "sha256": "b28b55b919e8ed41531d34aea5914da96cb9f397dd22dcd473a82c9dd4c3b9a8",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087767468470"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-009.webp",
+      "bytes": 41664,
+      "mode": "100644",
+      "git_blob_sha": "b6b9c811db5a96622c0b5e7cb79df301d84e2a40",
+      "sha256": "6376859a3e5a3abdf4d726cdfd7efc6e678eac5d42e2e52ae6e5509734c74752",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087767775353"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-010.webp",
+      "bytes": 41682,
+      "mode": "100644",
+      "git_blob_sha": "8b0da1f63b86a3d1da9121f93e2aa3da79f323bf",
+      "sha256": "b1cb1cfa36b69d501d5d5a6d9df45f509fb4b91451d838cef2d198099d61649f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087767989511"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-011.webp",
+      "bytes": 41874,
+      "mode": "100644",
+      "git_blob_sha": "158ef8f8c21a004a55c7fa54974f10c7d2d3b2d6",
+      "sha256": "5b8459b96a3c4652e80cbb21aa123c7ee2679c25263d404ec635dba4f12ba04d",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087768494358"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-012.webp",
+      "bytes": 42126,
+      "mode": "100644",
+      "git_blob_sha": "161307a17340a021283671ae9e91d49774b1c67e",
+      "sha256": "0a15a18f47251d95a3d4a6693121d4066ee032f72ece8214f29f2daa5dcfb868",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087768784240"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-013.webp",
+      "bytes": 41902,
+      "mode": "100644",
+      "git_blob_sha": "5a54072474d4eda356c18638fc603cb9c359bcc9",
+      "sha256": "8af3f2a386bc1e2f328efd8c35140564bb7867fea2e62f768c4fc3e324bd6d63",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087769003433"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-014.webp",
+      "bytes": 41672,
+      "mode": "100644",
+      "git_blob_sha": "395f8addf8061f01ba71c454e9dda308ce5593a4",
+      "sha256": "fe020985c3672eebf529a428361f01fd190903e1d29716b5f0ed33fb1bc150bc",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087769164694"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-015.webp",
+      "bytes": 41700,
+      "mode": "100644",
+      "git_blob_sha": "044e6ecf7897e0ce520d6b35ffb9c27d865eefd0",
+      "sha256": "3168d3c33d9368ba4884569bb6e6acbf19876ffdc5469074cdbebf49f3ab57e9",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087769410134"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-016.webp",
+      "bytes": 41856,
+      "mode": "100644",
+      "git_blob_sha": "e73383234a867a1907220834456dfc4018fc4f33",
+      "sha256": "feffdb0e003459f77bd7e1f0944b4230f344c0c92cba7f40dcc1ea08e13a4d51",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087769597029"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-017.webp",
+      "bytes": 41988,
+      "mode": "100644",
+      "git_blob_sha": "f58619b7130fd4b23c0707a492ea7b901452a576",
+      "sha256": "88c158cd74f13d5ab1e2879e0c07ebbec3a09673398e83bac3fe962c1afa6bae",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087769756896"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-018.webp",
+      "bytes": 42114,
+      "mode": "100644",
+      "git_blob_sha": "ca8f29c15b5bcc08900b9a6605703e3724bbdfdf",
+      "sha256": "cc96a870f325e093ffaec72e64fa40d14b91f2c49ff7d0e0b4ffc4a37a2058af",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087770394047"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-019.webp",
+      "bytes": 42284,
+      "mode": "100644",
+      "git_blob_sha": "fe2a1a29e995b91c5caf6b0497647a85ea288906",
+      "sha256": "c3f8ea9ae1c351caf678c7d5efa2a574e1fad64ff29b430f2b6dfcf7c5dc3c00",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087770606309"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-020.webp",
+      "bytes": 41978,
+      "mode": "100644",
+      "git_blob_sha": "08c88bda332d0c1b1d024220096d85f6dc88b596",
+      "sha256": "7fd50a4e815e9ac0424ffda0a1067f16b53ed4f4392b7c0ec3a2ae799aa41826",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087770845587"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-021.webp",
+      "bytes": 41836,
+      "mode": "100644",
+      "git_blob_sha": "c554f9712fb28807d792ba487d629b40325a0e44",
+      "sha256": "4c5b53469b11552b775a037ea382cda302e8e40fde59f47cf130206e1be68c14",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087771104303"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-022.webp",
+      "bytes": 41722,
+      "mode": "100644",
+      "git_blob_sha": "fcf2f2b3d79adb75f411c60afd3e6d21b62e3232",
+      "sha256": "d3b92e6a1d1672bd33315d5eb472d204cf3222a1ff85c4153d44751b42d4c75c",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087771312774"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-023.webp",
+      "bytes": 41964,
+      "mode": "100644",
+      "git_blob_sha": "9ce7e8f480871b14b7f75ccf2c122fd78b8e9b54",
+      "sha256": "399b113dcdccc1a21587756b61a97ea9aa02c862cb83747b08154fc3e6631de7",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087771522362"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-024.webp",
+      "bytes": 42056,
+      "mode": "100644",
+      "git_blob_sha": "3072f03339ff48062c08d0fe549178549f9c0ab8",
+      "sha256": "513da37c1e3ac4901bdf282ea2d1ec3c826a40944fb176b5c5b34f82387e4cb2",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087772693709"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-025.webp",
+      "bytes": 42174,
+      "mode": "100644",
+      "git_blob_sha": "9504993b20a65cd46fc7e188f39618bc514d2c7f",
+      "sha256": "ebfda62f3c703b595162e929583ba202122a6cb58dc212cfeaf1ec02a943733b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087772976309"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-026.webp",
+      "bytes": 42402,
+      "mode": "100644",
+      "git_blob_sha": "69529c450750d637ae133e17a095fa6cc49ac150",
+      "sha256": "a8c99edd49bfbf0eacaae4ac16d97d1fe2a623a41870feb9b0956f847a98702e",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087774212827"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-027.webp",
+      "bytes": 42218,
+      "mode": "100644",
+      "git_blob_sha": "7fe5d75b84d41acd507c4f4bdd9f17335892cd8a",
+      "sha256": "5cdcc6356ae2a92be62136e03800340eceb9e72972c43bc14824cbcc7e54c17b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087774418559"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-028.webp",
+      "bytes": 42080,
+      "mode": "100644",
+      "git_blob_sha": "e2afe206571ab6459f40c9e2b633528521d942f9",
+      "sha256": "9e892b9dd1005a54ccd4f219fe17f7cc83d793ce2e8f053bf0fc267c17aaac92",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087774576707"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-029.webp",
+      "bytes": 41948,
+      "mode": "100644",
+      "git_blob_sha": "2fe3b7d1b26b6fd8cdba2da4b10c4c85aa425201",
+      "sha256": "be18af4e85e0ab937590e6edb338c419b9c09ced1f851510c3f926be3079abac",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087775068643"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-030.webp",
+      "bytes": 41976,
+      "mode": "100644",
+      "git_blob_sha": "512bcf9162adbf1347d5bafc8987b4003f3e98c4",
+      "sha256": "e54e71c4e0018a2bd84a2ed18847fd63da96efc83c21d91e168e29a784bec9e5",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087775496842"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-031.webp",
+      "bytes": 42024,
+      "mode": "100644",
+      "git_blob_sha": "ff0e57e9a0b0606c1694815817582d1a27b50867",
+      "sha256": "bbf54c7382e4f2781cb9f28a8d920e98bcc69ea7bfae8d145dc7eb02e7fd75e4",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087775754851"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-032.webp",
+      "bytes": 41972,
+      "mode": "100644",
+      "git_blob_sha": "01f2c6ce5e8b740078ba1c058c6e92b4a7b14309",
+      "sha256": "9089a36cc0bfb6e355fb16fc8ca8e32d06daef79c3237c42d3b75955c09396b4",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087775983990"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-033.webp",
+      "bytes": 42004,
+      "mode": "100644",
+      "git_blob_sha": "4b21cf26d8ab7616308844ab82abc01056bcd84f",
+      "sha256": "95d6d5f394be06b9a54677b68896a8970fe5642ce693640645f15fc11c06b091",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087776218592"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-034.webp",
+      "bytes": 41926,
+      "mode": "100644",
+      "git_blob_sha": "ec4707d583b2871daf7a467b745226cd04ad6c44",
+      "sha256": "9f17a6b03dfb058e6fba7f08833bfbc4da54beb19b39606f6678719e12c6de36",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087776567560"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-035.webp",
+      "bytes": 41928,
+      "mode": "100644",
+      "git_blob_sha": "e3a7ddeb1a7f3275abde3f1a721106e284a713e1",
+      "sha256": "b4017a30eac135183c2eade3c555e43ed6ac94daf7dcf14d6199e2572f54a714",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087776783776"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-036.webp",
+      "bytes": 47904,
+      "mode": "100644",
+      "git_blob_sha": "d36f8bcf5bb3c424b7fe889e2c5cbf5ad29d02cc",
+      "sha256": "3901f2cc8264697e69efa1448b73c15c87b4605aa3f0566d47f6dcd74815b74a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087776987780"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-037.webp",
+      "bytes": 52040,
+      "mode": "100644",
+      "git_blob_sha": "4e1d0e53a3946f036096dfae2c27c1ab893129b9",
+      "sha256": "cb35435b0d2d2f2a6447b35a69e16366b95bf6c4f5efee2a7ed42a3a7b855298",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087777348823"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-038.webp",
+      "bytes": 58410,
+      "mode": "100644",
+      "git_blob_sha": "1458629b74c59e65199221c8e928d2ec9ecd94ae",
+      "sha256": "3c233b45fbe9ad7872aafa7edb9214e83415d51f541cdf6bdd20404d64f06a14",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087777649146"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-039.webp",
+      "bytes": 50620,
+      "mode": "100644",
+      "git_blob_sha": "59c876f05886c3121b06920cbe396b7cba29f361",
+      "sha256": "0e5eaf48bcb7120c0ac50936eb683960ff8aa2656d45a8c0fff66100dde0e52a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087777874557"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-040.webp",
+      "bytes": 47384,
+      "mode": "100644",
+      "git_blob_sha": "48c249168fcd50ef7dc0428875a8ed32013e9122",
+      "sha256": "a904b044e5c736ea70fb6ecfbe199e7b2a70a9d689ddbc2dcd8d01b4290dd56a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087778083790"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-041.webp",
+      "bytes": 43616,
+      "mode": "100644",
+      "git_blob_sha": "f61b0dc4900dc25ed113b71e0c2458b2a161c6bc",
+      "sha256": "dbf677f753ae18f8c6de3cf735bfae92ca212763dab1264215d2a2b1ca21914a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087778325489"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-042.webp",
+      "bytes": 41502,
+      "mode": "100644",
+      "git_blob_sha": "370e61bdf45d8277a08245b31c5b1d53009d5a39",
+      "sha256": "c223d3f62d53abe18ab98e9b13cc845a873ae83655dd145e928236578081c1f4",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087778506994"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-043.webp",
+      "bytes": 43744,
+      "mode": "100644",
+      "git_blob_sha": "63753db90397aa0fc1cfb838964d92cd0b82cc92",
+      "sha256": "5eba5c4a87c5b8879859048b6de3a5a96939df580e9abbfe5794061a94fbd34f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087778790345"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-044.webp",
+      "bytes": 40028,
+      "mode": "100644",
+      "git_blob_sha": "2c8b9fd36cb5f516d9df5b4aed776ba30698db7f",
+      "sha256": "0ea2c74494c900f857f49a97dcaa79dd07af38ddce2cc287cba2e45dffe804c8",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087779139696"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-045.webp",
+      "bytes": 38278,
+      "mode": "100644",
+      "git_blob_sha": "e960ab56080f8137cabd0d840470d36002978e60",
+      "sha256": "9a578152b68dfc5af28fb2d593aae3a27a27b43c22a68e4feed316eccb66654a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087779386000"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-046.webp",
+      "bytes": 33342,
+      "mode": "100644",
+      "git_blob_sha": "bc46803fd3aecf7da2bfeb4310f6c40a2de42a82",
+      "sha256": "8319e95d1c689068ee84b637d0f735444d7a4a003363c306289c281053d2cab8",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087779761822"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-047.webp",
+      "bytes": 27726,
+      "mode": "100644",
+      "git_blob_sha": "fe3d3625e9370b2745954268b39a0cd29f209885",
+      "sha256": "15c15bdf43f1069c0a706d332535a079f3a6379af2ff435df58012558fe31653",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087780075391"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-048.webp",
+      "bytes": 21888,
+      "mode": "100644",
+      "git_blob_sha": "d612afbe58e0b3d343988a881744460a908e6a78",
+      "sha256": "73a7b062d203a6ffbe8f24f89ecc2c62cbd08eff5c9f1e2c3a18238095c9512b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087780225608"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/frame-049.webp",
+      "bytes": 20268,
+      "mode": "100644",
+      "git_blob_sha": "73cee4957f3e6a73601a7bb100d7e7a7b9484e9b",
+      "sha256": "f5ab758d2b0d54e5e7f4933d027604112688192bc433957de892704aee8d2156",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087780382092"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/heixiang/sprite-v1/neutral.webp",
+      "bytes": 42162,
+      "mode": "100644",
+      "git_blob_sha": "d33c8a5e1fa185c8231e5960b7e9ab41b729e891",
+      "sha256": "232e345a47572c2dfc991b929f159e8ff3a88c6b986a7c3f88d3eb6ac6fc6f28",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087780741180"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-001.webp",
+      "bytes": 54156,
+      "mode": "100644",
+      "git_blob_sha": "8e7fa97fbc3d6bdeb2358bb26ae3bd7aef193da0",
+      "sha256": "edba1b420eeb3a2e93825f2aea09043410044017c7e2d1d6246fd0618fe182a9",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087780960344"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-002.webp",
+      "bytes": 54158,
+      "mode": "100644",
+      "git_blob_sha": "c196a3eada1dc8081fa6b8777521a38b412fa5cb",
+      "sha256": "59a7f4781696dcae9b9cedbd772062bf4ea3cc2ccb5ce4ccbfd0da92dd812aba",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087781123873"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-003.webp",
+      "bytes": 53952,
+      "mode": "100644",
+      "git_blob_sha": "393141ee2c236f73b1642c5b422a3c8e84b69361",
+      "sha256": "3ec3bd73b0cac2cabaffae85b2bbaaadbccae5c954a398e8f0cc92480f92ad98",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087781261830"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-004.webp",
+      "bytes": 53956,
+      "mode": "100644",
+      "git_blob_sha": "6923299546f7558917d583608790fa273ae957b5",
+      "sha256": "30208f78f946538c7161915fd547e93d3fe48e345860c44dc346c227567e38f3",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087781405917"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-005.webp",
+      "bytes": 53780,
+      "mode": "100644",
+      "git_blob_sha": "1e4324ea3313fb40bf926febbab5219184557e62",
+      "sha256": "b659f9c51e44e1f96146390a216e029c8b4c333f6e5689c391f943c693d2adcf",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087781541053"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-006.webp",
+      "bytes": 53758,
+      "mode": "100644",
+      "git_blob_sha": "3afe6f83bd6d3649fafa300f4944d8b50ed09a7c",
+      "sha256": "d92df74d8c7ae4cf91ab282845c8abd3c20ba87f21c0c211421498e75b0be2b5",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087781728321"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-007.webp",
+      "bytes": 53676,
+      "mode": "100644",
+      "git_blob_sha": "a6060dfe94f91e7dce1e1003e6e151c0e57b5864",
+      "sha256": "57d18b85ada69cc86745a0d95d3ec0537c72d05ad33586ca9cf516180187429b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087781863879"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-008.webp",
+      "bytes": 53672,
+      "mode": "100644",
+      "git_blob_sha": "cff797fd118642f259c5460fae5b75eefcf82553",
+      "sha256": "1ab2c269dd56c5d53976d061fc93bc648e20e950f3d5667ff83832acdef798db",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087782049034"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-009.webp",
+      "bytes": 53610,
+      "mode": "100644",
+      "git_blob_sha": "b1801be45497bde63a6d672c16474b16a3534136",
+      "sha256": "1e25ceaba32b18f97910749a6003b4b8532015f44186c776ef4c5b9f428e8b4f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087782225134"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-010.webp",
+      "bytes": 53648,
+      "mode": "100644",
+      "git_blob_sha": "2f893b72cf451408be3108c24dfd4e87c2a8ce11",
+      "sha256": "6312778083258596be0de144d854ab28890211749cd76b9556c1160bdcebdce4",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087782436186"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-011.webp",
+      "bytes": 53824,
+      "mode": "100644",
+      "git_blob_sha": "0509caa4fc0a684414352887834cfdcc5933b121",
+      "sha256": "c9216635b0bb712c7803624e0d8375c469365fe75e087a75bb960ee563afaa90",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087782600819"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-012.webp",
+      "bytes": 54066,
+      "mode": "100644",
+      "git_blob_sha": "55aa29d8797878294fc60be82db089caffe64bde",
+      "sha256": "276a4a1fc0462fcebbb9f985b00736fd0e06bb0646306ea11137d87eb61f9200",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087782714467"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-013.webp",
+      "bytes": 54224,
+      "mode": "100644",
+      "git_blob_sha": "a8feb98c4c74eddb394ccdd828ab6318154462a6",
+      "sha256": "cd070b06ec3e757185a4fb40e3143ed869a9e6a63370ba9d5b8d18a072da6aa6",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087782854650"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-014.webp",
+      "bytes": 54026,
+      "mode": "100644",
+      "git_blob_sha": "cc0eece099b1344d4f318b7d2a99dba6368f1fa1",
+      "sha256": "b1c5fa591168f10d51db67f3d1ce95262b4b97a8b42378f791126c82c3e8754f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087783118571"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-015.webp",
+      "bytes": 53728,
+      "mode": "100644",
+      "git_blob_sha": "deaf02cfb81e01e1fd684168e15211f368ba5b61",
+      "sha256": "1b0a7fe1ed4e2f116f1d80fefbbeef87b77aae41131a0f26403dabcb96a76775",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087783233345"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-016.webp",
+      "bytes": 53736,
+      "mode": "100644",
+      "git_blob_sha": "5a12bc43f1d387b1f27cc29c88325945c35474a9",
+      "sha256": "c6fc25c77bf295c4a336e63b1e1ff391d954d4c5cedf0fae11d404110bac8b4e",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087783534646"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-017.webp",
+      "bytes": 53768,
+      "mode": "100644",
+      "git_blob_sha": "3552e2299ddaa8342274abba98c9be12b6188aa9",
+      "sha256": "ed00df7ae210b0b70df86cd6893a9a89d075ec48c9eb8167fc9d19aad81d1745",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087783735746"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-018.webp",
+      "bytes": 53904,
+      "mode": "100644",
+      "git_blob_sha": "c5e87d357d985a9768626276710b93b99b29193f",
+      "sha256": "eb3576cc79b35e3de13fda27c9579971917eb95890b77897ec8453154ff650b3",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087783880882"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-019.webp",
+      "bytes": 54168,
+      "mode": "100644",
+      "git_blob_sha": "c664973daa0130ea121d2de5eccc5a701bbf8c65",
+      "sha256": "a39a671c3b99190f7f164ed7fdd741768d4934bb0680bfeb3ef0741f49d47566",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087784066622"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-020.webp",
+      "bytes": 54308,
+      "mode": "100644",
+      "git_blob_sha": "47c8c14c0f7710c96fb0e5a95cf88efc8940b345",
+      "sha256": "5c4f32fbbe6d8502e935a61233bce8cefb6648bafc2dd0e235521d2b4a59804a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087784203733"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-021.webp",
+      "bytes": 53964,
+      "mode": "100644",
+      "git_blob_sha": "2aa7a3373cdd8e3e807ffc07adbfe90c87d097ce",
+      "sha256": "d18796df11df3b53d55ad08395bde161409a4b36e52fac34e4267911b1175ba8",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087784377528"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-022.webp",
+      "bytes": 53824,
+      "mode": "100644",
+      "git_blob_sha": "a2e21e4ca77645f57443063f042884abc7410b6a",
+      "sha256": "39fc9787b2ab402ddd77eece676bdce02aad80bb7d0180aaaafae6456d614590",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087784590874"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-023.webp",
+      "bytes": 53872,
+      "mode": "100644",
+      "git_blob_sha": "a07e515486c7524388bc2c4f52ae1018b3b4ef63",
+      "sha256": "95c524a7a0f9c924bd6ae4129debb7d3b98c6958dc63d899aeb22acd83b5534f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087784781185"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-024.webp",
+      "bytes": 54014,
+      "mode": "100644",
+      "git_blob_sha": "8c6bd519e299bab676bd791f29681e919033a0e8",
+      "sha256": "8994aaf754917f169b0b990ec1a7ed229bc111b71c939f3bf7d8f06f6ab29b47",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087785310319"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-025.webp",
+      "bytes": 53978,
+      "mode": "100644",
+      "git_blob_sha": "f2319f14a2a81f3f2df922c5f196b0c163112a71",
+      "sha256": "9c1b0461d91d87327c7fa366ec155a1958634ec616b3cad8de2b6bd99bfab77d",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087785487150"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-026.webp",
+      "bytes": 54230,
+      "mode": "100644",
+      "git_blob_sha": "b071adfe9fcf5749b8857c530421f6eb1874c9c3",
+      "sha256": "872371a1ae92f64df1d4b4ee3de202a079ca247d441453caafb300ea235995ed",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087785708782"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-027.webp",
+      "bytes": 54332,
+      "mode": "100644",
+      "git_blob_sha": "82038084d4e305796f5bbe85ba9269c32e19c5b2",
+      "sha256": "12b6caea65532dea5800defd2a88361d44a4ac82395a39df4e595b0c508a97fc",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087785853261"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-028.webp",
+      "bytes": 54290,
+      "mode": "100644",
+      "git_blob_sha": "286bb066743765c409831405d3a9f98cf81451db",
+      "sha256": "bd9c5dd0c06032e2b5052766b7495b0075e9a6b749144946a10925a3d576dff8",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087786000332"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-029.webp",
+      "bytes": 53960,
+      "mode": "100644",
+      "git_blob_sha": "b69f9df82db45952ab7180613afda05064d41f64",
+      "sha256": "f66645cfe1d9f6648c7e3aa8cfbd21c38b04a167ab9653d36b81453a7f7641b9",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087786200833"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-030.webp",
+      "bytes": 54014,
+      "mode": "100644",
+      "git_blob_sha": "0560f4ac9c927bd0c99611ecfc2166d4835e07e6",
+      "sha256": "029e13b7961d4e88237aee54b710a428c8fc9fd45b349b2b30a76cc3f6ef1cbc",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087786362370"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-031.webp",
+      "bytes": 53842,
+      "mode": "100644",
+      "git_blob_sha": "6989d9aa9647e0a21b8d240782fe2aa9ecc0d5b4",
+      "sha256": "6d01ecb0b80f17b878f4148e9cb04ca7b3aec68b660ee3772bcd39a0b4cf39be",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087786528677"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-032.webp",
+      "bytes": 53930,
+      "mode": "100644",
+      "git_blob_sha": "5e5d88bc23200225826fd1897c476b5e06aa2102",
+      "sha256": "ea8baff8f429cd788d82b231c28fe6c3aec438726ed289712774220fdbd8c2b3",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087786675813"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-033.webp",
+      "bytes": 54176,
+      "mode": "100644",
+      "git_blob_sha": "f4432afe459bd4dc00e00c1a32b3ea178c04367c",
+      "sha256": "ee3e531caf29e2004092da78aea3d88e472dd575de76b24768fa6ebdc5927f7f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087786814651"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-034.webp",
+      "bytes": 53936,
+      "mode": "100644",
+      "git_blob_sha": "3d530a872cbff9ee2e53f11a73657997dc39fdb9",
+      "sha256": "d99ae85ab7ef025dfde11ed07f5d20e7b819195378bfe8ad7e5717f869a220b7",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087787036348"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-035.webp",
+      "bytes": 53948,
+      "mode": "100644",
+      "git_blob_sha": "3b44eb9c0f99bd424b0104149b52c51a7fe76abb",
+      "sha256": "a6340a944b0f28331c532ad7579267503bb91ce761c550cd1941263cc8fad292",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087787184271"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-036.webp",
+      "bytes": 54056,
+      "mode": "100644",
+      "git_blob_sha": "82b9e7595cb31d3b3e8595f67945672d5248d5f1",
+      "sha256": "7ab0e305f75b967baa6e99f5166ffe2fbc658912784143144c38084ff55ee89a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087787327706"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-037.webp",
+      "bytes": 61164,
+      "mode": "100644",
+      "git_blob_sha": "ecea9d02f685e3c8d14d7bc99a6373fb7a424ca6",
+      "sha256": "01b6233799b59e6c538a2dda326db9e7e352651ce1394722a901f4133090e476",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087787540944"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-038.webp",
+      "bytes": 77446,
+      "mode": "100644",
+      "git_blob_sha": "a6f86832c9dede7887eaa0dc09b11d8cecc0ee25",
+      "sha256": "43cc2e1816829c96d8a11427b1bb541999cae77ae2a6e75acb8ab6bff35ffe9a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087787786859"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-039.webp",
+      "bytes": 63650,
+      "mode": "100644",
+      "git_blob_sha": "921ec8b423aa7ad8e58e675a87855ec16e8322bb",
+      "sha256": "2b174e8029b287cef3328c761200c9fde39ac84e65827f795e3452f1801937f5",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087788081315"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-040.webp",
+      "bytes": 62322,
+      "mode": "100644",
+      "git_blob_sha": "5438b105122631a49e5a739d0f8f9f4efcc2f314",
+      "sha256": "efe50f692b6d4f746a53d4550ecd38f79a5b575828d99cf8afd268935a7ccb1f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087788219545"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-041.webp",
+      "bytes": 68018,
+      "mode": "100644",
+      "git_blob_sha": "33525e3cc3c39bd2a6b3bb77421329182e87b92f",
+      "sha256": "3423949918be04fc362cd34536c3c78f998d7611e790623cb9f87f88d5547f7c",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087788428472"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-042.webp",
+      "bytes": 68452,
+      "mode": "100644",
+      "git_blob_sha": "ba6d8226282d8480eb3525a22b1e79454b286a69",
+      "sha256": "e0c9aba17fdacfd8a88c23fa4881cede7688c5d078eda854d52e787612dfe5f2",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087788812765"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-043.webp",
+      "bytes": 57940,
+      "mode": "100644",
+      "git_blob_sha": "915cfa0682125bf00a125d351b6bc1c4e625dc05",
+      "sha256": "52f079ec614a529971573bd270bd15e32d754eac537676f13ebe8be8493ca43b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087788972869"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-044.webp",
+      "bytes": 60094,
+      "mode": "100644",
+      "git_blob_sha": "5b0992050db72de3f686db57ecf5b43449a1ac88",
+      "sha256": "0aa9c8fabafb334257c313393557f9c8804ca76ccb221b0d8ad3c4ba663e6c44",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087789230075"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-045.webp",
+      "bytes": 51448,
+      "mode": "100644",
+      "git_blob_sha": "a382518b791bb1ee15187532bf5859df735ae2db",
+      "sha256": "b20b843114e5208bf09e6215b834558dea2a50eb4bf771b4a758bdc6f5845e4a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087789393683"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-046.webp",
+      "bytes": 47276,
+      "mode": "100644",
+      "git_blob_sha": "0fc785c3a41408a743861f64e12942d5c85a6863",
+      "sha256": "2ceeb398b3a2ebe20c91a58e1053b8d3c75f6e2eac058ec3a47a069c5a68d63b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087789567179"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-047.webp",
+      "bytes": 48704,
+      "mode": "100644",
+      "git_blob_sha": "46961e11b108d6fc887b3bbeced4ad8bd156aa0a",
+      "sha256": "1db1c7092bf28b4f7340ee0177af29db25f9706a4e666235ea2f0b5350a6717e",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087789714105"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-048.webp",
+      "bytes": 44002,
+      "mode": "100644",
+      "git_blob_sha": "4437b258193197fd4a798938d9bfe91ea69bffc0",
+      "sha256": "de19d0ab6312610ed66aeff64becb1ce8250f7ac415c89873e1eab5dba5f7405",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087789828484"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-049.webp",
+      "bytes": 36966,
+      "mode": "100644",
+      "git_blob_sha": "9bc7078cba9ae79513936f7ed9f626a193997bfa",
+      "sha256": "eea302969d5b511be6c33e7f40d3dd55e0ca56e80b21ada335b5a7381f7096b8",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087789981918"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/frame-050.webp",
+      "bytes": 37666,
+      "mode": "100644",
+      "git_blob_sha": "1f014800235fba88982bd0e74125b710cd8cd0db",
+      "sha256": "e51cde18f124a8698cf0159fa6f0488a5620ea9de7f5788420711bf030648bd7",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087790478886"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/wu/sprite-v1/neutral.webp",
+      "bytes": 54686,
+      "mode": "100644",
+      "git_blob_sha": "c80403205695ae98ec1f64dd9994d853e159c7de",
+      "sha256": "57ffd12fac024595631df559179eef54deb95db8ba183a9602f8dd721d072071",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087790661617"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-001.webp",
+      "bytes": 64676,
+      "mode": "100644",
+      "git_blob_sha": "32497b206ab286440a4918556e9286ae861a5c9f",
+      "sha256": "3a8c8c5a92d7c968f63352e2e0446d3cd3af27543efc0eb92a6fbfedac984d20",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087790897842"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-002.webp",
+      "bytes": 64436,
+      "mode": "100644",
+      "git_blob_sha": "ab4ba75981b090772d2f394f0b85dda44347df8c",
+      "sha256": "5408481bd705d195d3ecefc7c2c6cac6d77309bbe482983eee8f1558bb993639",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087791140518"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-003.webp",
+      "bytes": 64310,
+      "mode": "100644",
+      "git_blob_sha": "4f7d0e344f2d58a0108c222a75c90f87fc1c2fb6",
+      "sha256": "be8d0311db74224b5e70b25185100c4dec95867b102de623eb48877273ae8332",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087791300419"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-004.webp",
+      "bytes": 64210,
+      "mode": "100644",
+      "git_blob_sha": "f56255d5485e7f12a7bca378f027dee633381a50",
+      "sha256": "f4d3773fa4967eb23bcbfc7f80cf3d2eadd76aba853a192206fd2d1c7588bd20",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087791502272"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-005.webp",
+      "bytes": 64110,
+      "mode": "100644",
+      "git_blob_sha": "90014dae20c61a4a678d11b3ed1e72c4b9bc3362",
+      "sha256": "23996b374671a7263e5762a7c9b009cc4bfd903103dc9703ca3a2713649d33bf",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087791702297"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-006.webp",
+      "bytes": 63978,
+      "mode": "100644",
+      "git_blob_sha": "3917c800d75d63fc8f803ea67a34d42dcd4ac317",
+      "sha256": "f19e3c846372f78b237eb8cfad33fe787142565516b7b2817e0295311f46276b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087791907571"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-007.webp",
+      "bytes": 63888,
+      "mode": "100644",
+      "git_blob_sha": "7ada5da4cd4fcc95f8ab7ab5fe70aa3b8e6d9d84",
+      "sha256": "21ee6c5770fde4730b0948ff220908891125a864fdab5b4754755de9d0b5a6b5",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087792547472"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-008.webp",
+      "bytes": 63972,
+      "mode": "100644",
+      "git_blob_sha": "ca11b22aa34a0592df3c8fefcfd9d30e1cefefea",
+      "sha256": "8cae818df037cf1535ae059b202cb31976eb905089f15519fa8007eec2f33db4",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087792766759"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-009.webp",
+      "bytes": 64222,
+      "mode": "100644",
+      "git_blob_sha": "f2ebc78046b02ad206f31bbd0d9c36747b2d06c2",
+      "sha256": "3de71daecd86958aff3b7b9acebec4762f88099d96584195e11df386f333b480",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087793114874"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-010.webp",
+      "bytes": 64376,
+      "mode": "100644",
+      "git_blob_sha": "cc648ac3367a8f720507149ad8d6a6a58c89fe1b",
+      "sha256": "c94b0c8c6846885407853881a85d3e105efef15d064fd62a41dd1014ba956e2a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087793295475"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-011.webp",
+      "bytes": 64510,
+      "mode": "100644",
+      "git_blob_sha": "4552bf91bc55383960f613c45969e92f68eb62fa",
+      "sha256": "5b6707bf500ebd22eacc563c95594efeb8690b8f1938364260740347bed0cc26",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087793806209"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-012.webp",
+      "bytes": 64830,
+      "mode": "100644",
+      "git_blob_sha": "325de113e626ed4ff6d044b8f4fa907b2f50a84e",
+      "sha256": "48c5c135600471f054ea4cf46030a3d7a5c149d9cb9a195c40ad8353c9674f2e",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087794122335"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-013.webp",
+      "bytes": 64442,
+      "mode": "100644",
+      "git_blob_sha": "75ae11b9339961ee2275847da876e49378914f7c",
+      "sha256": "34f66e5ca58431cc4c827255382f64de2447ff694920446af0a008aeb4c983a7",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087794396505"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-014.webp",
+      "bytes": 64272,
+      "mode": "100644",
+      "git_blob_sha": "57300d0eeb900b94bc19b5e267d0a418860d1398",
+      "sha256": "0b3d5a9df64d25acb9b836ed23dc178903a5ae8826b6dcd0ba14983b236d890d",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087794792839"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-015.webp",
+      "bytes": 64214,
+      "mode": "100644",
+      "git_blob_sha": "ecf52372541d16fec353611904f0f8fa4633b59c",
+      "sha256": "783e321a216a0aad109dfdebc29e212d1ee4eeaf9c90cb32f3f69dd68d558d46",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087795463701"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-016.webp",
+      "bytes": 64190,
+      "mode": "100644",
+      "git_blob_sha": "05b49116ae098353cf65d7512c9281110dd98d90",
+      "sha256": "3d67dc412f631acaa9c1ac9202279e3f1ef62788647a1319d7811d2975d3f650",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087795667296"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-017.webp",
+      "bytes": 64474,
+      "mode": "100644",
+      "git_blob_sha": "524c02aa9bd1b7d05c81640a916330befeef6d18",
+      "sha256": "2e32b4c52f3a17da6e4046375c59777592bd69144c991c7e7961dfc21246b9b0",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087795814374"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-018.webp",
+      "bytes": 64784,
+      "mode": "100644",
+      "git_blob_sha": "fa96ed1eb021df7895602486eed0dcd01529b4f3",
+      "sha256": "1dbdac92fa99105a6b4a5240bca1fbbdef7696559ccc04551a17271a04ebe97b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087796020587"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-019.webp",
+      "bytes": 64706,
+      "mode": "100644",
+      "git_blob_sha": "24d666763b9042b29e93055bf033cbae6943f2e9",
+      "sha256": "f8b31f2e292b78a55f3d60824e9cde4f08fdfcd06031586427e57cc1cd3137af",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087796360866"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-020.webp",
+      "bytes": 64522,
+      "mode": "100644",
+      "git_blob_sha": "271b931ef4bd406c5e93e0bbeec04300c1501241",
+      "sha256": "ea210b3bb05c383c1724377f7c2142aa95bdc19a6bdb18088d5e0b47c2834df5",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087796712470"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-021.webp",
+      "bytes": 64370,
+      "mode": "100644",
+      "git_blob_sha": "fbc08770e1abcba43be9392e15991ecaa44cffe8",
+      "sha256": "5c329e765dcb17a5d58a598b9582b9c30a602b8fbdc9d05b3b3d22e9bcd3a68b",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087797067516"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-022.webp",
+      "bytes": 64484,
+      "mode": "100644",
+      "git_blob_sha": "9569e55db84c6f8499f8c2cd527f5597fb30d75a",
+      "sha256": "5fab519250177d24059bba8a0fd6391641a71811a94fe174053b93924fec4d3f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087797272462"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-023.webp",
+      "bytes": 64668,
+      "mode": "100644",
+      "git_blob_sha": "8359195f2d91a26aac3debd8be50eb6629eb9fe7",
+      "sha256": "5892df2fab1dde3d8ba48c51621cb9546d9427bd445ac94d243da1fe2e8fb817",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087797696536"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-024.webp",
+      "bytes": 64640,
+      "mode": "100644",
+      "git_blob_sha": "015494ab44ff641405ef894d242dab725a9e4863",
+      "sha256": "bbeddbe57fa6e3eb4bbc8fa247a4ff23603049d4e4d5334a6547cf994e9cc623",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087797885762"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-025.webp",
+      "bytes": 64802,
+      "mode": "100644",
+      "git_blob_sha": "2da31dc987d3e2bbcd3c7a430d27223610fc50c0",
+      "sha256": "a47bc0d9a8987b1bb3c747db88059d9be4112cd6db0999197f526889edf57b76",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087798165892"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-026.webp",
+      "bytes": 65106,
+      "mode": "100644",
+      "git_blob_sha": "e19b1142823d1f72590a9794ded7ef74fe379c44",
+      "sha256": "4898f7d20583a07dd8d199136e2b2bbb3b087b6b149e2210325b5b05aad698a5",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087798495941"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-027.webp",
+      "bytes": 64768,
+      "mode": "100644",
+      "git_blob_sha": "692ba42d0e8c6feb4d962764e15f23fafe7ef456",
+      "sha256": "f74f96c2b24814f971a509b78ebb2dac8bf462aa3e8661e932152e6ab84d2f5e",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087799097894"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-028.webp",
+      "bytes": 64538,
+      "mode": "100644",
+      "git_blob_sha": "626826e7c6c8879bca4ea4e24da34fdcd9333947",
+      "sha256": "f5da0b7ed575b117040e99e1d53d031becbeaac6e5cf681b664918f5281aa8a4",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087799362105"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-029.webp",
+      "bytes": 64534,
+      "mode": "100644",
+      "git_blob_sha": "c67eb9163ca30f059b0d9c082eaec9fcb5a4b3e3",
+      "sha256": "fe09d13c2dc7275a9ebca8a83cc7fcddd05e4928deb2dee1383ebe8dda2f0647",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087799554124"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-030.webp",
+      "bytes": 64440,
+      "mode": "100644",
+      "git_blob_sha": "6dca6eeeba18deeb42a0324f9defc76e9728ff1b",
+      "sha256": "671b41258e1838600353168c329f9b94811d7d95cb234ebe0c9ec547d4fa174a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087799838160"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-031.webp",
+      "bytes": 64458,
+      "mode": "100644",
+      "git_blob_sha": "60fe713492643f9befcfd84ac50ee4fadeaa597b",
+      "sha256": "768df600713747f624043c77842ae4849e358bacb0da06da957a649f82897979",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087800079112"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-032.webp",
+      "bytes": 64576,
+      "mode": "100644",
+      "git_blob_sha": "f70fe1affa2e6d068457b260e2cf5613f939fe86",
+      "sha256": "c4c2f3fc78cdf97232716becaa495ed3271371e752b1b243f9905db8f2b97087",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087800288600"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-033.webp",
+      "bytes": 64534,
+      "mode": "100644",
+      "git_blob_sha": "43524492f44a9bec339e7606eeb6b20030bee181",
+      "sha256": "3f3c3f34fd29ddd29443bbd535d154db8db538ae7329bc8756d21e0c212f03a8",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087800458239"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-034.webp",
+      "bytes": 64498,
+      "mode": "100644",
+      "git_blob_sha": "0159c9f8ea00c8cd626a046f44a1c380e21460d5",
+      "sha256": "a70dc30bd68ec0fe4d5a2a6a21c0f4f7433904a3db1d5256f701cd6501ad2f9e",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087800699328"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-035.webp",
+      "bytes": 64440,
+      "mode": "100644",
+      "git_blob_sha": "11e7e9317e74cd5d1a45834195056c4f513dda46",
+      "sha256": "6cfd1f004f5037bed87dc294c9e085ef7a0507f925ea3cb872ff4f7a85f164cd",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087800906514"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-036.webp",
+      "bytes": 67656,
+      "mode": "100644",
+      "git_blob_sha": "b8dd31e6421235addd8f7692074d7432b0efc78d",
+      "sha256": "4808d303a37826626373271e0c63a8a50777f4e4283bf21a0a95cb10661247fe",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087801371978"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-037.webp",
+      "bytes": 62266,
+      "mode": "100644",
+      "git_blob_sha": "febfd8e8a53d53dc71520f940498354571a08c2f",
+      "sha256": "0c63e7c74546e99a89f39e3fbe05be7e3802894f86920620d97af7c21e4ac2c5",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087802209825"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-038.webp",
+      "bytes": 70268,
+      "mode": "100644",
+      "git_blob_sha": "a1374241cefa667d08b23fd1d94a15730c427dd5",
+      "sha256": "85d73cb874f723768af658ee007952a3d596919a0e73e07ef182929b75059926",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087802496785"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-039.webp",
+      "bytes": 70830,
+      "mode": "100644",
+      "git_blob_sha": "d44102fce24c85fbf57f4bbf33361314c264cdcd",
+      "sha256": "08c24fbb405f31b0f8aa4337808ef52e20e41d5b724684e49dba97dc4641785a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087803580454"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-040.webp",
+      "bytes": 65010,
+      "mode": "100644",
+      "git_blob_sha": "3e0abb00488146629f332e84c534c69a80685681",
+      "sha256": "389364d19ffb7b5b978ea94326fe5f156349c3e6db706046606260a64eef6466",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087804534069"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-041.webp",
+      "bytes": 62850,
+      "mode": "100644",
+      "git_blob_sha": "2930e18fbba4a223f52a7543edb0bf4c6090263e",
+      "sha256": "3474a0b1458d9b20b380e460ef52d6ee219dcc0dce2f4db54e77bdc6f6ae56b0",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087805136586"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-042.webp",
+      "bytes": 69024,
+      "mode": "100644",
+      "git_blob_sha": "5da859ce04fb80fa2c75cb2b5fd9decbc3b9fbdf",
+      "sha256": "b68733f5af6fc8d5a4417b9bbb63afc20e29966e04294747fe2ebcdedf36a45a",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087806122301"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-043.webp",
+      "bytes": 73620,
+      "mode": "100644",
+      "git_blob_sha": "6ffa1097d0418b372e5976be91eaf965c713d6f9",
+      "sha256": "29469d3b34bfd7e2bef2b568319831ee28cee37b2f42245c8df04a70bcb167d6",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087806682422"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-044.webp",
+      "bytes": 53752,
+      "mode": "100644",
+      "git_blob_sha": "3da0b6f70055bf6905fa52aae4ee334a75bcb97a",
+      "sha256": "6b9a2d86fbb3098a40ede230d10e9a0e15972f43f1c29c5bdbd4a9b71196647e",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087806910356"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-045.webp",
+      "bytes": 54206,
+      "mode": "100644",
+      "git_blob_sha": "deccc383771a5eb9907796f813b7449b0c53859f",
+      "sha256": "ec713da93b750b3db716ea969c2dd8329ffa2985c68daf34bd23da113569c44c",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087807162970"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-046.webp",
+      "bytes": 42308,
+      "mode": "100644",
+      "git_blob_sha": "f9b4d5617a92ebc1229ed4c935011147151adbdd",
+      "sha256": "4ef579dff8a4cd3706a6fa2c73a2323f475f2e40bbe97bbff6946363878e0b31",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087807375119"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-047.webp",
+      "bytes": 42712,
+      "mode": "100644",
+      "git_blob_sha": "f482f6a6e00bc2d0baa28c2fc41b2f12c40cbec7",
+      "sha256": "5fd3388ab136855f393526ec772a2c58bd0c9935e0b6fd8368dbcd85eebf414f",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087807772808"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-048.webp",
+      "bytes": 33262,
+      "mode": "100644",
+      "git_blob_sha": "3a077269ff4d3c1ad00acbce1d9607df21418d78",
+      "sha256": "38f9c6b95a381742210e64727e6a27b83b1e55803e48ac7a42d1b08a97eed818",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087807999097"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/frame-049.webp",
+      "bytes": 29180,
+      "mode": "100644",
+      "git_blob_sha": "fae145df97955ca6fba529d26578d2996ac27397",
+      "sha256": "64e01fd94965da0db8568472bb644d6f91baabbec2d08a15a95f2f381f355e1e",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087808429572"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/frames/xingyue/sprite-v1/neutral.webp",
+      "bytes": 64758,
+      "mode": "100644",
+      "git_blob_sha": "8a4cca9cea89aff1909b6111fa25161e0bf3cd55",
+      "sha256": "6821803c9b3250625a8248c1c1bd008b56c2817fb565cc4dd0e72694818dce68",
+      "kind": "animation-frame",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "mtime_ns": "1792097087808763372"
+    },
+    {
+      "path": "搜打撤/game/assets/portraits/personnel/wu-default-cutout-v1.webp",
+      "bytes": 1011996,
+      "mode": "100644",
+      "git_blob_sha": "ef9054695ebea5f36f0dad7cfa31fc46c00114b3",
+      "sha256": "68fe23ed56b3b9fee7e3fbfef64546ddc260da282897b87703034446b00432de",
+      "kind": "wu-personnel",
+      "receipt": "搜打撤/docs/evidence/2026-10-16-wu-personnel-cutout/receipt.json",
+      "mtime_ns": "1792095686395235221"
+    }
+  ]
+}

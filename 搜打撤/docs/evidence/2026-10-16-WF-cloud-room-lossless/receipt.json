@@ -1,0 +1,34 @@
+{
+  "scope": "Lossless runtime-format derivative from the unchanged current project NAI room PNG; original retained",
+  "source": "game/assets/home-prototype/room-direction-candidate.png",
+  "sourceSha256": "66e3bb17dc7eef8424e08551f33c0efd395b248fc8011172d14f3b08223cb747",
+  "sourceBytes": 1031685,
+  "path": "home-prototype/room-direction-candidate.webp",
+  "sha256": "97469c1514ef8441515f07df056e91aaac67739367605cbb9da751bb5daa1861",
+  "bytes": 607272,
+  "savedBytes": 424413,
+  "size": [
+    1216,
+    832
+  ],
+  "rgbaSha256": "53c966312dfada4855f2b3576458406ca858de54559e508d4d0efb4083a6a6a2",
+  "sameRGBA": true,
+  "sameAlpha": true,
+  "generationProvenance": {
+    "source": "Original PNG embedded metadata and game/src/home/home.visuals.js existing provenance",
+    "software": "NovelAI",
+    "model": "NovelAI Diffusion V5 0ADF9AB7",
+    "seed": 731942861,
+    "rightsScope": "Inherited existing private project use; no new third-party license or public distribution authorization claimed"
+  },
+  "encoding": {
+    "Pillow": "12.3.0",
+    "format": "WEBP",
+    "lossless": true,
+    "quality": 100,
+    "method": 6,
+    "exact": true,
+    "libwebp": "1.6.0"
+  },
+  "metadata": "Generation text stays in original PNG; WebP carries identical display pixels and alpha, without the prompt text"
+}

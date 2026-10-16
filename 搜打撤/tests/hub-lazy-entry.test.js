@@ -29,7 +29,7 @@ async function setup() {
   window.SDT = { Base: h.base, UI: { log: h.log } };
   vi.doMock('../game/src/core/motion.js', () => ({ reduceMotion: () => true }));
   vi.doMock('../game/src/run/game.session.js', () => ({ game: h.game, getActiveSlot: () => h.slot, startNewGame: h.startNewGame }));
-  vi.doMock('../game/src/hub/game.hub.depart.js', () => ({ deployPick: null }));
+  vi.doMock('../game/src/hub/game.hub.depart.js', () => { throw new Error('Departure runtime must not enter the initial facade graph'); });
   vi.doMock('../game/src/hub/game.cardslib.common.js', () => {
     const common = {
       CARD_DESIGNER_WRITES_ENABLED: false, Sfx: {}, cardHTML() {}, configureCardNavigation() {},
@@ -51,6 +51,7 @@ async function setup() {
     return { openCardLibrary: h.openCard, openCardDesigner: h.openCard, preparePhotoStudioEntry: async () => {} };
   });
   h.hub = await import('../game/src/hub/game.hub.js');
+  h.selection = await import('../game/src/hub/departure.selection-state.js');
   h.cancel = await import('../game/src/ui/page-entry-cancellation.js');
   return h;
 }
@@ -76,6 +77,18 @@ afterEach(async () => {
 beforeEach(setup);
 
 describe('基地真实按需入口', () => {
+  it('公开 deployPick 同步读取唯一 live binding，不提前装载整备页面', () => {
+    expect(h.hub.deployPick).toBeNull();
+    const picks = { 'card:live': 2 };
+    h.selection.replaceDeployPick(picks);
+    expect(h.hub.deployPick).toBe(picks);
+    picks['card:live'] += 1;
+    expect(h.hub.deployPick['card:live']).toBe(3);
+    h.selection.replaceDeployPick(null);
+    expect(h.hub.deployPick).toBeNull();
+    expect(h.hubImports).not.toHaveBeenCalled();
+  });
+
   it('标题等待不拉取页面，没有已选档时只打开选档', async () => {
     await vi.advanceTimersByTimeAsync(10_000);
     expect(h.hubImports).not.toHaveBeenCalled();
@@ -204,7 +217,7 @@ describe('基地真实按需入口', () => {
   });
 
   it('终局回基地入口直接返回异步结果，不提前收走可重试来源按钮', () => {
-    for (const file of ['game/src/run/game.run.altar.js', 'game/src/run/game.session.death.js', 'game/src/ui/game.menu.js']) {
+    for (const file of ['game/src/run/game.run.altar.js', 'game/src/run/game.session.death.js', 'game/src/ui/game.menu.pages.js']) {
       const source = readFileSync(file, 'utf8');
       expect(source).not.toMatch(/UI\.act\('(?:goBase|again)', \(\) => \{ UI\.hideOverlay\(\); (?:runtime\.)?openBaseHub/);
       expect(source).toMatch(/UI\.act\('goBase', \(\) => (?:runtime\.)?openBaseHub\('deploy'\)\)/);

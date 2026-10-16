@@ -1,0 +1,147 @@
+{
+  "recommendedSuffix": {
+    "files": [
+      "game/css/base-reward-feedback.css",
+      "game/css/base-collection-v4.css",
+      "game/css/base-courtyard-v3.css",
+      "game/css/base-panel-layout.css",
+      "game/css/base-cohesion-v5.css",
+      "game/css/base-framework-v7.css",
+      "game/css/base-rooms-v7.css",
+      "game/css/base-personnel-v12.css",
+      "game/css/base-logistics-trade-v12.css",
+      "game/css/base-archive-facilities-v12.css",
+      "game/css/base-page-motion-v7.css",
+      "game/css/base-home-v7.css",
+      "game/css/departure-selected.css",
+      "game/css/roster-reference.css",
+      "game/css/base-shop-v3.css",
+      "game/css/base-archive-v3.css"
+    ],
+    "missing": [],
+    "ranges": [
+      {
+        "start": 722654,
+        "end": 917462,
+        "files": [
+          "game/css/base-reward-feedback.css",
+          "game/css/base-collection-v4.css",
+          "game/css/base-courtyard-v3.css",
+          "game/css/base-cohesion-v5.css",
+          "game/css/base-framework-v7.css",
+          "game/css/base-rooms-v7.css",
+          "game/css/base-personnel-v12.css",
+          "game/css/base-logistics-trade-v12.css",
+          "game/css/base-archive-facilities-v12.css",
+          "game/css/base-page-motion-v7.css",
+          "game/css/base-home-v7.css",
+          "game/css/departure-selected.css",
+          "game/css/roster-reference.css",
+          "game/css/base-shop-v3.css",
+          "game/css/base-archive-v3.css"
+        ]
+      }
+    ],
+    "eagerGzip": 136822,
+    "lazyGzip": 25823,
+    "initialSaving": 24754,
+    "totalDelta": 1069,
+    "totalCssAfter": 201905
+  },
+  "extendedHubClass": {
+    "files": [
+      "game/css/preparation.css",
+      "game/css/base-camp-rework.css",
+      "game/css/base-controls-v4.css",
+      "game/css/base-reward-feedback.css",
+      "game/css/base-collection-v4.css",
+      "game/css/base-courtyard-v3.css",
+      "game/css/base-panel-layout.css",
+      "game/css/base-cohesion-v5.css",
+      "game/css/base-framework-v7.css",
+      "game/css/base-rooms-v7.css",
+      "game/css/base-personnel-v12.css",
+      "game/css/base-logistics-trade-v12.css",
+      "game/css/base-archive-facilities-v12.css",
+      "game/css/base-page-motion-v7.css",
+      "game/css/base-home-v7.css",
+      "game/css/departure-selected.css",
+      "game/css/roster-reference.css",
+      "game/css/base-shop-v3.css",
+      "game/css/base-archive-v3.css",
+      "game/css/base-camp.css",
+      "game/css/base-camp-compact.css"
+    ],
+    "missing": [],
+    "ranges": [
+      {
+        "start": 506031,
+        "end": 564482,
+        "files": [
+          "game/css/base-camp.css"
+        ]
+      },
+      {
+        "start": 671175,
+        "end": 717041,
+        "files": [
+          "game/css/preparation.css",
+          "game/css/base-camp-rework.css",
+          "game/css/base-controls-v4.css"
+        ]
+      },
+      {
+        "start": 722654,
+        "end": 917462,
+        "files": [
+          "game/css/base-reward-feedback.css",
+          "game/css/base-collection-v4.css",
+          "game/css/base-courtyard-v3.css",
+          "game/css/base-cohesion-v5.css",
+          "game/css/base-framework-v7.css",
+          "game/css/base-rooms-v7.css",
+          "game/css/base-personnel-v12.css",
+          "game/css/base-logistics-trade-v12.css",
+          "game/css/base-archive-facilities-v12.css",
+          "game/css/base-page-motion-v7.css",
+          "game/css/base-home-v7.css",
+          "game/css/departure-selected.css",
+          "game/css/roster-reference.css",
+          "game/css/base-shop-v3.css",
+          "game/css/base-archive-v3.css"
+        ]
+      }
+    ],
+    "eagerGzip": 121572,
+    "lazyGzip": 43733,
+    "initialSaving": 40004,
+    "totalDelta": 3729,
+    "totalCssAfter": 204565
+  },
+  "htmlMenuPages": {
+    "files": [
+      "game/css/page-slot-select.css",
+      "game/css/page-settings.css",
+      "game/css/page-datapage.css",
+      "game/css/page-ach.css"
+    ],
+    "missing": [],
+    "ranges": [
+      {
+        "start": 367548,
+        "end": 414924,
+        "files": [
+          "game/css/page-slot-select.css",
+          "game/css/page-settings.css",
+          "game/css/page-datapage.css",
+          "game/css/page-ach.css"
+        ]
+      }
+    ],
+    "eagerGzip": 153820,
+    "lazyGzip": 9526,
+    "initialSaving": 7756,
+    "totalDelta": 1770,
+    "totalCssAfter": 202606
+  }
+}

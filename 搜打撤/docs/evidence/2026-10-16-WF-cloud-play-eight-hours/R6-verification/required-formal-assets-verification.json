@@ -1,0 +1,35 @@
+[
+  {
+    "publicationRequired": true,
+    "publishedCopies": [
+      {
+        "path": "assets/portraits/personnel/wu-default-cutout-v1.webp",
+        "sha256": "68fe23ed56b3b9fee7e3fbfef64546ddc260da282897b87703034446b00432de",
+        "bytes": 1011996
+      }
+    ],
+    "sourceIncludedAndBytesEqual": true,
+    "sourcePath": "game/assets/portraits/personnel/wu-default-cutout-v1.webp",
+    "sourceSha256": "68fe23ed56b3b9fee7e3fbfef64546ddc260da282897b87703034446b00432de"
+  },
+  {
+    "publicationRequired": true,
+    "publishedCopies": [
+      {
+        "path": "assets/room-direction-candidate-B2IgpU2u.webp",
+        "sha256": "97469c1514ef8441515f07df056e91aaac67739367605cbb9da751bb5daa1861",
+        "bytes": 607272
+      }
+    ],
+    "sourceIncludedAndBytesEqual": true,
+    "sourcePath": "game/assets/home-prototype/room-direction-candidate.webp",
+    "sourceSha256": "97469c1514ef8441515f07df056e91aaac67739367605cbb9da751bb5daa1861"
+  },
+  {
+    "publicationRequired": false,
+    "publishedCopies": [],
+    "sourceIncludedAndBytesEqual": true,
+    "sourcePath": "game/assets/home-prototype/room-direction-candidate.png",
+    "sourceSha256": "66e3bb17dc7eef8424e08551f33c0efd395b248fc8011172d14f3b08223cb747"
+  }
+]

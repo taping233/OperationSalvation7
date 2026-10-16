@@ -26,6 +26,7 @@ export const runtime = {
   syncDevVisibility: () => {},
   resumeExtraction: () => ({ ok: false, code: 'EXTRACTION_UNAVAILABLE', message: '撤离整理界面尚未就绪' }),
   resumeChestsOnCell: /** @type {(saved: unknown) => boolean} */ (() => false),
+  resumeEventCardChoice: /** @type {() => boolean} */ (() => false),
   resumeBattleRewards: /** @type {(saved: unknown) => boolean} */ (() => false),
   log: () => {},
 };

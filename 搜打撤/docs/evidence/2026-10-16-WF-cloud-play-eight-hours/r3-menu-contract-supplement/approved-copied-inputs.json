@@ -1,0 +1,68 @@
+[
+  {
+    "bytes": 10508,
+    "mode": 420,
+    "path": "搜打撤/tests/agent-console-jump.test.js",
+    "sha256": "c62edc376f76266b62eb4eb58c47dbc811e6e4fb3b32e8d3a43a43e5a61ddd36"
+  },
+  {
+    "bytes": 1140,
+    "mode": 420,
+    "path": "搜打撤/tests/selftest-paths.test.js",
+    "sha256": "afdc98e0d7ff3d12d68c9fb64ea674ac42a3cdd483bb626268efccacdfcd2454"
+  },
+  {
+    "bytes": 9026,
+    "mode": 420,
+    "path": "搜打撤/game/selftest.js",
+    "sha256": "16a71bbe7c8553d3cf9d6ced1f574145cb500c0c7025692e5cb6368a47b38db1"
+  },
+  {
+    "bytes": 2544,
+    "mode": 420,
+    "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/README.md",
+    "sha256": "511cd017039d728f6af418e84ebce350d40c7330c70f32afe41c6ff86263d2e4"
+  },
+  {
+    "bytes": 828,
+    "mode": 420,
+    "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/evidence-sha256.json",
+    "sha256": "2f3444ab9d50a76d989e17ecad3b2a038b7b93469531ee8eac650e353707eaf2"
+  },
+  {
+    "bytes": 13650,
+    "mode": 420,
+    "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/final-target.log",
+    "sha256": "ac83010a256b8f26c0718e8c6ede35fdb003a9a29bca73e87f8c2c8a195ee99b"
+  },
+  {
+    "bytes": 1725,
+    "mode": 420,
+    "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/first-target.log",
+    "sha256": "dec04c1ca5c1cf108fd99b37631e686e7d757ce5ce24a6119695763eb1dc2580"
+  },
+  {
+    "bytes": 976,
+    "mode": 420,
+    "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/handoff.json",
+    "sha256": "24d60c958c7ee5c6be20159000ee6fd1305dfdf3df9e29dff8ccd20e74a810da"
+  },
+  {
+    "bytes": 99,
+    "mode": 420,
+    "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/lint.log",
+    "sha256": "7125f194612fcff2f454c05d848e7cb71facc1967b4d5017e25b34fdee3ba74f"
+  },
+  {
+    "bytes": 1257,
+    "mode": 420,
+    "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/selftest.log",
+    "sha256": "8deecdd2e5b1e1e1f34d9995c977678ec427e5265e59846504bcd1bbad1099e1"
+  },
+  {
+    "bytes": 428,
+    "mode": 420,
+    "path": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration/syntax.log",
+    "sha256": "a484bee492c4bc0041a0af0732e74fcb1a9cd79bb667bd5b158326e4ea1da01c"
+  }
+]

@@ -1,0 +1,203 @@
+--- a/game/src/run/chests.js
++++ b/game/src/run/chests.js
+@@ -20,6 +20,8 @@
+   let saveContext = null;
+   let saveBinding = null;
+   let rewardZoom = null;
++  let noticeFailure = null, suspendedBag = null;
++  const clearNoticeContext = () => { noticeFailure = null; suspendedBag = null; };
+   const closeRewardZoom = () => { rewardZoom?._closeCardZoom?.(true); rewardZoom = null; };
+   const bindSave = game => ({ seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos, runToken:game.discoveredPairs, slotId:SDT.Base?.slot });
+   const isCurrentRewardRun = () => !!G && !!saveBinding && saveBinding.seed === G.seed &&
+@@ -278,6 +280,7 @@
+ 
+   // ---------- 开箱 UI（逐个弹窗，全部开完调 onDone） ----------
+   function open(game, chests, done, opts) {
++    clearNoticeContext();
+     cancelPresentation();
+     const K = Object.assign({ resourceOnly: false }, opts || {});
+     G = game;
+@@ -292,6 +295,7 @@
+   }
+ 
+   function next() {
++    clearNoticeContext();
+     closeRewardZoom();
+     cancelPresentation();
+     if (idx >= queue.length) {
+@@ -402,7 +406,7 @@
+   // ---------- 全屏奖励栏：金币与卡牌分别展示、领取 ----------
+   const rewardRarity = (card) => SDT.Cards.rarityOf?.(card) || card.rarity;
+ 
+-  function render() {
++  function render(grantFailed = false) {
+     const K = KINDS()[cur.kind];
+     const taken = cur.taken || (cur.taken = new Set());
+     const lost = cur.lost || (cur.lost = new Set());
+@@ -434,10 +438,13 @@
+     }
+     // 容量失败是当前状态；保留领取事实，并兼容旧存档中的两类容量提示。
+     let notice = cur.notice;
++    // 实际拒收优先于预测；同一奖励整理后容量状态真变，才允许重新校准。
++    if (grantFailed) noticeFailure = { box:cur, notice };
++    const actualFailure = noticeFailure?.box === cur && noticeFailure.notice === notice;
+     const bulkCapacityNotice = /^(已入背包 \d+ 张)，\d+ 张放不下，整理背包后可重试$/.exec(notice || '');
+-    if (bulkCapacityNotice && !isPick) {
++    if (!actualFailure && bulkCapacityNotice && !isPick) {
+       notice = `${bulkCapacityNotice[1]}${cant ? `，${cant} 张放不下，整理背包后可重试` : ''}`;
+-    } else if (G.canReceiveCard && rest.some(c => notice === `「${c.name}」当前放不下，整理背包后可重试` && G.canReceiveCard(c))) {
++    } else if (!actualFailure && G.canReceiveCard && rest.some(c => notice === `「${c.name}」当前放不下，整理背包后可重试` && G.canReceiveCard(c))) {
+       notice = '';
+     }
+     // 体验线切片4（2026-09-28，源自 Tarkov value-per-slot 心智模型）：满包时给出"最低价已装卡"参照，
+@@ -523,7 +530,7 @@
+         persistReward();
+         cur.notice = `「${card.name}」已入本次远征背包`;
+         render();
+-      } else { cur.notice = `「${card.name}」当前放不下，整理背包后可重试`; render(); }
++      } else { cur.notice = `「${card.name}」当前放不下，整理背包后可重试`; render(true); }
+     });
+     UI.act('chestSkip', () => {
+       if (!isLiveReward()) return;
+@@ -559,7 +566,7 @@
+       cur.selected = i;
+       // 放不下时留在面板（grantCard 内部已播报「背包已满」）：玩家可腾格重选或走「只收金币离开」，
+       // 不得照常 next()——否则三选一被静默吞卡（2026-09-19 审计 P2-8）
+-      if (!grantRewardCard(card)) { cur.notice = `「${card.name}」当前放不下，整理背包后可重试`; render(); return; }
++      if (!grantRewardCard(card)) { cur.notice = `「${card.name}」当前放不下，整理背包后可重试`; render(true); return; }
+       cur.taken.add(i);
+       cur.cards.forEach((_, other) => { if (isChoice(other) && other !== i) cur.lost.add(other); });
+       persistReward();
+@@ -592,6 +599,7 @@
+ 
+   // 附赠先追加到同一快照，再与本体 taken 一起保存；不因当前容量丢弃或重掷。
+   function grantRewardCard(card) {
++    noticeFailure = null;
+     const box = cur;
+     return G.grantCard(card, { silent: true, deferAcquiredCard: extra => {
+       box.choiceCount ??= box.cards.length;
+@@ -601,16 +609,18 @@
+ 
+   function takeAll() {
+     const taken = cur.taken;
++    let grantFailed = false;
+     cur.cards.forEach((card, i) => {
+       if (taken.has(i) || cur.lost.has(i)) return;
+       if (grantRewardCard(card)) taken.add(i);
++      else grantFailed = true;
+     });
+     collectCoinsOnce();
+     if (!cur.cards.length && !cur.coins) UI.log('（空的——早被别的拾荒者搬空了……）', 'dim');
+     const pending = cur.cards.filter((_, i) => !taken.has(i) && !cur.lost.has(i)).length;
+     cur.notice = `已入背包 ${taken.size} 张${pending ? `，${pending} 张放不下，整理背包后可重试` : ''}`;
+     persistReward();
+-    render();
++    render(grantFailed);
+   }
+ 
+   function collectCoinsOnce() {
+@@ -623,15 +633,26 @@
+   // 挂起/恢复（2026-09-09 留言 #13）：搜刮界面允许打开背包——
+   // suspend 作废未播完的搜索演出计时器（防止中途 render 抢走背包浮层），
+   // 背包关闭后 resume 重新渲染当前搜刮面板继续开箱
++  const bagCapacityFingerprint = () => JSON.stringify([
++    SDT.Base.bagCap(), G.bagCap(), G.usedSlots(), G.inventory?.length || 0,
++    G.ownedCards.map(o => [o.card.id, o.card.name, o.card.type, !!o.safe, !!o.stored]),
++  ]);
+   function suspend() {
+     closeRewardZoom();
+     cancelPresentation();
+     searchSeq++;
+-    return isCurrentRewardRun() && !!(cur || queue.length);
++    const active = isCurrentRewardRun() && !!(cur || queue.length);
++    if (!active || !cur) suspendedBag = null;
++    else if (suspendedBag?.box !== cur) suspendedBag = { box:cur, fingerprint:bagCapacityFingerprint() };
++    return active;
+   }
+   function resume() {
+     cancelPresentation();
+-    if (isCurrentRewardRun() && cur) renderCurrentStage();
++    if (isCurrentRewardRun() && cur) {
++      if (suspendedBag?.box === cur && suspendedBag.fingerprint !== bagCapacityFingerprint()) noticeFailure = null;
++      suspendedBag = null;
++      renderCurrentStage();
++    }
+   }
+   function serialize(game) {
+     if (G !== game || !isCurrentRewardRun()) return null;
+@@ -640,6 +661,7 @@
+   function restore(game, saved, done) {
+     const value = restoreChestReward(game, saved);
+     if (!value) return false;
++    clearNoticeContext();
+     closeRewardZoom();
+     cancelPresentation(); searchSeq++;
+     G = game; queue = value.queue; idx = value.index; cur = value.current;
+--- a/tests/chests-reward-capacity-notice.test.js
++++ b/tests/chests-reward-capacity-notice.test.js
+@@ -112,6 +112,65 @@
+     expect(notice()).toBe(message); expect(Bag.usedSlots()).toBe(18);
+   });
+ 
++  it.each(['small','medium'])('%s实际grant拒收优先于乐观容量端口，普通重绘/无变化返回不能擦除', kind => {
++    open({ kind }); H.game.grantCard.mockReturnValue(false);
++    expect(H.game.canReceiveCard(cards[2])).toBe(true);
++    acts[kind==='medium'?'chestPick':'chestTake1']({ i:2 });
++    const message='「致命穿刺」当前放不下，整理背包后可重试';
++    expect(notice()).toBe(message);
++    acts.chestCoins(); expect(notice()).toBe(message);
++    acts.chestOpenBag(); Chests.resume(); expect(notice()).toBe(message);
++    expect(count('pierce')).toBe(0);
++  });
++
++  it('批量真实拒收不被预测清空；实际整理后可校准，同样失败串再次发生须重新显示', () => {
++    open();
++    H.game.grantCard.mockImplementation((card,opts)=>card.id===cards[0].id&&scenes.grantEventCard(card,opts));
++    acts.chestTake();
++    const message='已入背包 1 张，2 张放不下，整理背包后可重试';
++    expect(notice()).toBe(message); expect(Bag.usedSlots()).toBe(17);
++    expect(H.game.canReceiveCard(cards[1])).toBe(true);
++    acts.chestOpenBag(); Chests.resume(); expect(notice()).toBe(message);
++    organizeWood(); expect(notice()).toBe('已入背包 1 张'); expect(Bag.usedSlots()).toBe(16);
++    H.UI.el.ovBody.querySelector('[data-act="chestTake"]').click();
++    expect(notice()).toBe(message);
++    expect(Chests.serialize(H.game).current.taken).toEqual([0]);
++  });
++
++  it('restore清除旧实例拒收显示状态，旧容量串可校准但非容量错误不受影响', () => {
++    open(); H.game.grantCard.mockReturnValue(false); acts.chestTake();
++    expect(notice()).toContain('放不下');
++    open({ message:'已入背包 0 张，3 张放不下，整理背包后可重试' });
++    expect(notice()).toBe('已入背包 0 张，1 张放不下，整理背包后可重试');
++    open({ message:'存档失败，请重试' }); expect(notice()).toBe('存档失败，请重试');
++    expect(H.game.grantCard).toHaveBeenCalledTimes(3);
++  });
++
++  it('整理后按B关闭的第二次suspend不覆盖首次背包指纹', () => {
++    open(); acts.chestTake(); expect(notice()).toContain('1 张放不下');
++    acts.chestOpenBag(); H.game.inventory.pop();
++    expect(Chests.suspend()).toBe(true); // Real showBackpack toggle suspends again before closing.
++    Chests.resume(); expect(notice()).toBe('已入背包 2 张');
++    expect(Bag.usedSlots()).toBe(17); expect(count('pierce')).toBe(0);
++  });
++
++  it('重新open及next换箱不会继承另一箱的实际拒收标记', () => {
++    const SDT=window.SDT, oldBase=SDT.Base, oldCards=SDT.Cards, oldKind=SDT.MAP.chestKinds.small;
++    try {
++      SDT.Base={ ...oldBase, petEggDropChance:()=>0, recordPetEggChestResult(){} };
++      SDT.Cards={ ...oldCards, RARITIES:['古朴','稀有','史诗','传说'], randomDropCard:()=>cards[0] };
++      SDT.MAP.chestKinds.small={ name:'小宝箱', cards:1 };
++      open({ rewards:[cards[0]] }); H.game.grantCard.mockReturnValue(false); acts.chestTake();
++      expect(notice()).toBe('已入背包 0 张，1 张放不下，整理背包后可重试');
++      Chests.open(H.game,[{kind:'small'},{kind:'small'}],()=>{},{onCell:true});
++      acts.chestClaim(); acts.chestReveal(); expect(notice()).toBe('');
++      acts.chestTake(); expect(notice()).toContain('1 张放不下');
++      acts.chestSkip(); acts.chestLeave(); acts.chestContinue();
++      acts.chestClaim(); acts.chestReveal();
++      expect(notice()).toBe(''); expect(H.UI.el.ovBody.querySelector('.chest-warn')).toBeNull();
++    } finally { SDT.Base=oldBase; SDT.Cards=oldCards; SDT.MAP.chestKinds.small=oldKind; }
++  });
++
+   it.each(['small','medium'])('%s单卡失败：只清除现在确实可收的对应待领卡提示', kind => {
+     H.game.ownedCards=fill(17); open({ kind });
+     acts[kind==='medium'?'chestPick':'chestTake1']({ i:2 });

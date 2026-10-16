@@ -1,0 +1,32 @@
+[
+  {
+    "path": "game/src/battle/effects/battle.card-inspection.js",
+    "before": "827848418da547f0b92f7515fcd53c318eae64550a85e808246c453d8bb702c1",
+    "after": "eb066a9d47e9bb515a1471b512c77d67c837f93c53d69334edea3610d6944c6e"
+  },
+  {
+    "path": "game/src/battle/core/battle.engine.js",
+    "before": "6fa832a79b3fce4ade478fb37412b618a463d20b6572fd39da4590f91f32da91",
+    "after": "c9f1c405c78ade4ad42376570422dca8eefc05eb57cecb678b142b9bfb53fffd"
+  },
+  {
+    "path": "game/src/battle/core/battle.draw.js",
+    "before": "583caf9183c2beea83ea73e6a13d60bf659187b44ef852e838a2630ea2827a25",
+    "after": "75cf7b5d7180d4b53cc7c3f44df42bc0562f0d830f8e1443940c9f01e91a0638"
+  },
+  {
+    "path": "game/src/battle/core/battle.exec-play.js",
+    "before": "e171fe0de0ca88f41fc3475df5b52ba8983f723573c57912732b4e6ff80ce013",
+    "after": "d7dfa3963bade3ab451b6e4e9e9a12d62c0d078dc961aace3cdc42cb00725a44"
+  },
+  {
+    "path": "tests/skull-sword-effective-session.test.js",
+    "before": "3a2c169467bb96195a2d7b1daee93c43b04abb4b78dd5f748b05c29ca0e6b044",
+    "after": "2039f748ecf3dc7c07cd6bffa821f719d53b14084c0b02bce34c347fd9ac4ee0"
+  },
+  {
+    "path": "tests/battle-effective-card.test.js",
+    "before": "4e962e1ff768e8ebf95927b2ff59159d684716def0af06bb49562ade9c7c3bcd",
+    "after": "7c2d2d3dd4b1884e7dc5e5ef75774e3d1eac1539af818647d51fee14aeb641ea"
+  }
+]

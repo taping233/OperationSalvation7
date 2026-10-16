@@ -26,7 +26,7 @@ describe('基地出发与选角回流回归', () => {
     expect(hub).toContain('if (started === false) {');
     expect(hub).toContain("deployHint = '[[icon:cross]] 基地出征整备未保存，请重试；当前没有开始新局。'");
     // 顺序守卫：失败分支 → 重置选牌 → 成功返回；中间允许有限的合法插入（音效/埋点），不锁死相邻字节（CRLF 教训同族）
-    expect(hub).toMatch(/if \(started === false\) \{[\s\S]*?return false;\s*\}\s*deployPick = null;\s*[\s\S]{0,300}?return true;/);
+    expect(hub).toMatch(/if \(started === false\) \{[\s\S]*?return false;\s*\}\s*replaceDeployPick\(null\);\s*[\s\S]{0,300}?return true;/);
     expect(altar).toContain('if (beforeConfirm && beforeConfirm() === false) return;');
     expect(altar.indexOf('beforeConfirm() === false')).toBeLessThan(altar.indexOf('const card = SDT.Cards.randomClassCard(cl)'));
   });
@@ -167,6 +167,25 @@ function enablePersonnelNavigationFixture() {
 describe('基地分页、详情返回与档位浏览状态', () => {
   let browsing;
   afterEach(() => { browsing?.runtime.closeBase(); browsing = null; document.body.replaceChildren(); });
+
+  it('七个基地房间的页头和常驻导航保持一致，浏览不改资源', async () => {
+    browsing = await createBrowsingHarness();
+    enablePersonnelNavigationFixture();
+    Object.assign(window.SDT.Meta, { COLL_MILESTONES:[], collProgress:() => 0, collTotal:() => 0 });
+    const courtyard = await import('../game/src/hub/hub.courtyard-v3.js');
+    const mount = vi.spyOn(courtyard, 'mountCourtyardV3').mockImplementation(() => () => {});
+    const before = JSON.stringify(browsing.base.data);
+    try {
+      for (const [tab, title] of Object.entries({ deploy:'基地', classes:'配置', stash:'后勤', shop:'交易所', ach:'收藏室', upgrade:'建设', courtyard:'庭院' })) {
+        browsing.runtime.openBaseHub(tab);
+        expect(browsing.host.querySelector('.camp-brand h2').textContent).toBe(title);
+        const selected = browsing.host.querySelector('.base-navigation-v7 [aria-current="page"]');
+        expect(selected.dataset.tab).toBe(tab);
+        expect(selected.querySelector('span').textContent).toBe(title);
+      }
+      expect(JSON.stringify(browsing.base.data)).toBe(before);
+    } finally { mount.mockRestore(); }
+  });
 
   it('收藏室合并奖励入口，目标与里程碑返回奖励，再返回收藏室', async () => {
     browsing = await createBrowsingHarness();

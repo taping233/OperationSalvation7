@@ -1,0 +1,462 @@
+{
+  "status": "approved implementation, awaiting safe source edit window",
+  "baseline": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "scope": "Retain source; omit exact reviewed legacy chest frames from production copy and art prefetch. Keep all current safe-simple-v7 resources. Remove only Noto fallback font preloads.",
+  "files": [
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-00.webp",
+      "bytes": 143532,
+      "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-01.webp",
+      "bytes": 143532,
+      "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-02.webp",
+      "bytes": 143532,
+      "sha256": "57834aeb382d8383c15a09a5cd696077b03ea66e3a68d1ad43e97b30deaca57c"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-03.webp",
+      "bytes": 145560,
+      "sha256": "81f26ad3ec0f03dfde11137a8383b97138d6977037e29c4ad537366301c621e8"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-04.webp",
+      "bytes": 148288,
+      "sha256": "8c6fc066c1c1a9266fbd9fc1baedd754425c10dfc740a70b575d1f386909f657"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-05.webp",
+      "bytes": 148314,
+      "sha256": "86c318440ee598ca88e96cdc51f0d2b19b235d4d5d85ef8000202808481cd8c3"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-06.webp",
+      "bytes": 146944,
+      "sha256": "1ddb3d999536e662875248753cf4569153eefadc39bb6b5323bdcebc42069b3e"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-07.webp",
+      "bytes": 140484,
+      "sha256": "0ef56140d1c4c7a303416c79901416f4b8eb35a132ac067dc75b4b4f5e141bbc"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-08.webp",
+      "bytes": 155110,
+      "sha256": "2d548a4591864545a87d06a13a6d307755e62151329252b5143145de993ff263"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-09.webp",
+      "bytes": 179648,
+      "sha256": "7d7665b911647fd1cc7d8e13fd03cb214ac14e34b6b5f19a489c5e9453fdd55f"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-10.webp",
+      "bytes": 202252,
+      "sha256": "b98f3c651c0969f96160292a0fbdbd7c2d6111f872bdd22764bae36606f47828"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-11.webp",
+      "bytes": 219170,
+      "sha256": "0d31040a973999910e8360b54626405db3926d01f53240a4d63d58e02aa02251"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-12.webp",
+      "bytes": 230116,
+      "sha256": "7638db0bdcf797276095a5ee31dd18c610499ccc30202ef8784d69254eda092f"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-13.webp",
+      "bytes": 235438,
+      "sha256": "52e90c7b950f8a7d11e74d7612ae7df5bd403326ec917212e216ea39f9174a93"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-14.webp",
+      "bytes": 242876,
+      "sha256": "f5db37cd34a38cecfc8485a489f0efe2a88b90e02b2025d550610ab453ef35db"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-15.webp",
+      "bytes": 246530,
+      "sha256": "93d0019234fdf206cd1bd978c4012bfc60e15473aef2768ecbf5da48731c778a"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-16.webp",
+      "bytes": 248260,
+      "sha256": "8ff0d1656c438489ae9776e7645aa1564165e7ba3d8b700eebff12fc10635044"
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-17.webp",
+      "bytes": 248260,
+      "sha256": "8ff0d1656c438489ae9776e7645aa1564165e7ba3d8b700eebff12fc10635044"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-00.webp",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-01.webp",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-02.webp",
+      "bytes": 191356,
+      "sha256": "8b8e8fd18cf9165acedeca46fe968720bb94048f8e16a3007051314763adff72"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-03.webp",
+      "bytes": 192418,
+      "sha256": "73a89c7209796383e4dab46ee193cc2d4db153c4364e5670b13750f7dc6e38d1"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-04.webp",
+      "bytes": 192152,
+      "sha256": "35a2c92d7545be1f3f6361e9d3db9722b66025d132893b5efdd4d4e9eb5045d8"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-05.webp",
+      "bytes": 191562,
+      "sha256": "5c8c64f6111fbac9a32d1e374c4b5970670db942d153955acf16fea973867266"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-06.webp",
+      "bytes": 186902,
+      "sha256": "af3f91b70314b59e80596f435e0a951b39417004d89aef35e414aaf65f693217"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-07.webp",
+      "bytes": 179380,
+      "sha256": "dae0dbc3f38968942581dfbe8858a8b133b4dedc74c014ba14184aa2b3acc2e6"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-08.webp",
+      "bytes": 193256,
+      "sha256": "534574ba7f807bbbf593e0bbf26dadaed8d55edb6db9db9beb3e14b27fe295e2"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-09.webp",
+      "bytes": 215096,
+      "sha256": "4f461fe71726fa7af02ec1adcb819af128897f6728d5875b6989cdd2247b31d6"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-10.webp",
+      "bytes": 235546,
+      "sha256": "445748a80a200de35e6b9f879ae92935f732995b029794f35abb81f0c52ffd27"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-11.webp",
+      "bytes": 250360,
+      "sha256": "23338436564b9a4fffa6dc15d729d391e937c8f2f82ad83633767a13531a6b0e"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-12.webp",
+      "bytes": 260920,
+      "sha256": "e298010d110a256d9c82138a37295a250328e53744dba22f89f9deacc04990aa"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-13.webp",
+      "bytes": 266132,
+      "sha256": "1f4ca606cd80a9e19dbc73e565d9999cbf40cd8269cc4f97de98c80117b6ceed"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-14.webp",
+      "bytes": 272194,
+      "sha256": "e8094f34ce84d35ad17d2f2bf2d39bfba224c604a26726c2252529d0f528a1b1"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-15.webp",
+      "bytes": 276092,
+      "sha256": "e6e82e54452e29fee86e341084a00bdeac8b046a2a0281eac524f01de2f2ddf9"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-16.webp",
+      "bytes": 277964,
+      "sha256": "cc001beadc53d5447f0e14e9b89fe8b67e04051376e1dd4a6c8d423396554bef"
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-17.webp",
+      "bytes": 277964,
+      "sha256": "cc001beadc53d5447f0e14e9b89fe8b67e04051376e1dd4a6c8d423396554bef"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-00.webp",
+      "bytes": 224682,
+      "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-01.webp",
+      "bytes": 224682,
+      "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-02.webp",
+      "bytes": 224682,
+      "sha256": "7e85b0102b2fc2c576d7cd764e8d26a16f68e2b70dcb12faf954232280fae2ed"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-03.webp",
+      "bytes": 225630,
+      "sha256": "0214745cbc97eb02478e057b6f4273b70a96bac28761b8a5c0cb20b95ae0fcdf"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-04.webp",
+      "bytes": 226818,
+      "sha256": "8d7bf08802cc79aff26862f9c8c4c40609b4df3fc8975b9b31afb45933869589"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-05.webp",
+      "bytes": 225804,
+      "sha256": "0d6a2c5113b1adde19db15b2abf47b84e1053d251e3a15929330e8109d2ff90b"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-06.webp",
+      "bytes": 223952,
+      "sha256": "d75301ba39147003df49001c72902a1037fde55887ba71c115c69be98f1e03c8"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-07.webp",
+      "bytes": 220500,
+      "sha256": "f49c466b0bee679783b5a5431cc1a585c257dfe9ca0b2fb89f345f37235dba56"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-08.webp",
+      "bytes": 216390,
+      "sha256": "ffa0533e42e4d9e45b0d770dfb91fd28cb498a2cfde9858fe8e245baa2425c64"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-09.webp",
+      "bytes": 234128,
+      "sha256": "ef0de3981afd42fed84b6109abcd3027f3d38a539bd879cfc31f5610e87a9c50"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-10.webp",
+      "bytes": 253966,
+      "sha256": "543d1bf35851cc0de7095c5780c85073ab57ff1cd1b75163260d71a14d220d3b"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-11.webp",
+      "bytes": 269236,
+      "sha256": "ee2095c0608e782cbee5d375b0fd5ec1ddaa193129a16cb75f96b1e67f2ac715"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-12.webp",
+      "bytes": 279460,
+      "sha256": "0cdcec16ad27541ac11f3d9b52520537a54201ce0e6f116732f55d53357cc0f4"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-13.webp",
+      "bytes": 285092,
+      "sha256": "261472baf2568a8d786a88bb3ee86e41e3f1af2123dba34b7067b0aeb5fdfa72"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-14.webp",
+      "bytes": 292330,
+      "sha256": "dd633a76f394c0f2437dc13c9d5e7464b62c9cc6205d748205d4fa65c11b5159"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-15.webp",
+      "bytes": 295830,
+      "sha256": "4ac1f51d22901bc67420dd01203d8b2a7163a712e619bdce308be076b4293362"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-16.webp",
+      "bytes": 298396,
+      "sha256": "ecc5b2a6c872f58b73dd2ade8953f73bc5be36e3809d40fe9858f916ffb062ac"
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-17.webp",
+      "bytes": 298396,
+      "sha256": "ecc5b2a6c872f58b73dd2ade8953f73bc5be36e3809d40fe9858f916ffb062ac"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-00.webp",
+      "bytes": 186658,
+      "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-01.webp",
+      "bytes": 186658,
+      "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-02.webp",
+      "bytes": 186658,
+      "sha256": "6aab169c293fbb0632a18a53dc5d6d8411717fdcfa50a011a62ef27bfdc55ce3"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-03.webp",
+      "bytes": 187202,
+      "sha256": "bc8a95009b59e47cd1e3ae17ec9fd60bb1bbcbdcb34b687491ffbb60cba1dca6"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-04.webp",
+      "bytes": 185880,
+      "sha256": "11017a589985ea73ba8dde67a2b27f4581bea9bf9082937349a7a4caf6dc9ec7"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-05.webp",
+      "bytes": 184568,
+      "sha256": "3f1ac120dd64edcf20d6172b54880279e0aa07068d1f8ba12f77d5365eb9b2cf"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-06.webp",
+      "bytes": 181588,
+      "sha256": "cd34fd791d6843c5016e1acf976f183dee4f0b1861492a30c75066a8f7cb9c45"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-07.webp",
+      "bytes": 177448,
+      "sha256": "cfee76eab6eee4cead7213f44cc4ac3bdd64a3387490999cea6298423e061e9a"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-08.webp",
+      "bytes": 188688,
+      "sha256": "3453aefa02b4727113907fa85e84f354525559657b8f25c48e2c2592b9f7c2f7"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-09.webp",
+      "bytes": 208722,
+      "sha256": "7720f004f9fdf0425dbb647e96d8ae1930421722b7a353e2bb773724d1ecf56b"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-10.webp",
+      "bytes": 226422,
+      "sha256": "b19b09f77d0e0062fae77ea0215e66b4c67266d2c4699326e0d6228cb9201bee"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-11.webp",
+      "bytes": 239398,
+      "sha256": "980be1d5cdd0473ec71f27467bf3493ba63ab84d9389b625e4fdb2f9d9002bcc"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-12.webp",
+      "bytes": 247988,
+      "sha256": "f0b1f0a821d63db7e897616f2a103b6ba9ae8136950bec7cef8c8db334e19065"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-13.webp",
+      "bytes": 251882,
+      "sha256": "e034c127a103c7664ab7e0c786f6070dc98a22d90d1b106db7e747a2401c8068"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-14.webp",
+      "bytes": 257424,
+      "sha256": "e35572d3c5dff445c201e7502132f2a91ccfa953a8f60d48ecbc4c63de3a16ff"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-15.webp",
+      "bytes": 260064,
+      "sha256": "3712e351418dcf3e9ef2b49489b396ec5d9642a6dc370364a3b21ad67d322337"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-16.webp",
+      "bytes": 261222,
+      "sha256": "51b1f8d01a7a382c24903e42353224a447d6a38b2d3685bda06062bb8cdc64a4"
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-17.webp",
+      "bytes": 261222,
+      "sha256": "51b1f8d01a7a382c24903e42353224a447d6a38b2d3685bda06062bb8cdc64a4"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-00.webp",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-01.webp",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-02.webp",
+      "bytes": 226926,
+      "sha256": "d930607d0f62b3e0939bb1ab9090a3be2f275cc485c62a7e50814fee5fd7e597"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-03.webp",
+      "bytes": 227264,
+      "sha256": "772e0c38457e907758f27d03838b66f1787b90faedfc17a79d8c83a159772174"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-04.webp",
+      "bytes": 228460,
+      "sha256": "f55c267b4d58d2f4b2d78460d9bc7d046f698cc834b32f987b7c23e198f590dd"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-05.webp",
+      "bytes": 226622,
+      "sha256": "5c1120385acea03e8b85d2a37a875c12b845d062ed201250ee9bd989e70908fc"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-06.webp",
+      "bytes": 221112,
+      "sha256": "70ae5bc80841ac98fad041f8ec6381c70a8fd77833f440e832c6e9b917eed054"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-07.webp",
+      "bytes": 218610,
+      "sha256": "c041066c7a4ddb307bd05eb7b3baa20c102c15f6612b13de90b516654c94139f"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-08.webp",
+      "bytes": 208360,
+      "sha256": "2c95f750714e24edcfe557038bbae8dc725968e723aadce9ba81126af6bb86e7"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-09.webp",
+      "bytes": 224066,
+      "sha256": "89550994e59b38f73be96b10db973561cd613e64e0dc3b2092778b0c53b4c603"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-10.webp",
+      "bytes": 243836,
+      "sha256": "b1b2833cb9f2c6729a4d884506992cb9e46dfcd2792d1a1fcdc7796247a3f787"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-11.webp",
+      "bytes": 257822,
+      "sha256": "476a87b339d5bb047e11853bc358db5bc813975e78f0cbe5fe60c3dc0fdc4fb1"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-12.webp",
+      "bytes": 268188,
+      "sha256": "cfbf335b116302c8c86d8f129f90e9faf102f0e9513e095fd111e4c533733c9b"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-13.webp",
+      "bytes": 274934,
+      "sha256": "b10eda2ed474a11b264857fc6f71d33d5caa8897d4db69e45049ee9e8e3c1a33"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-14.webp",
+      "bytes": 279864,
+      "sha256": "a54a05a57cd2918cd0511d31c49630cec27a39a3adaa0d7e46830212badcecd6"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-15.webp",
+      "bytes": 283340,
+      "sha256": "89c2c24733347423a5ed01efffa71d9899b07e9f241517bf19495ef4797e2ab4"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-16.webp",
+      "bytes": 284980,
+      "sha256": "eaa01505e2e9357123cc2329ec69445527aad67452a4d4409488ba3d48b46b80"
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-17.webp",
+      "bytes": 284980,
+      "sha256": "eaa01505e2e9357123cc2329ec69445527aad67452a4d4409488ba3d48b46b80"
+    }
+  ],
+  "sourceBytes": 20222734,
+  "fingerprints": {
+    "game/src/run/chests.js": "32fc73bd9190fd3dc06afb03e6f3dc4a5cc4774973b495c4a5e04da702f8d18b",
+    "game/src/run/chest-opening-art.js": "6ea623ee1a706248f743e143c0c5fca5026de400056a0761f8c8ef29d6b65079"
+  }
+}

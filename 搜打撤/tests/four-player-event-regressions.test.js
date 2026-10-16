@@ -20,7 +20,7 @@ vi.mock('../game/src/home/narrative.js', () => ({ eventNarrative: async () => nu
 
 let scenes, flow, UI, takeBagReturnHook, setBagReturnHook;
 beforeAll(async () => {
-  window.SDT = { Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: {},
+  window.SDT = { Icons: { rich: x => x }, Sound: { sfx() {} }, Meta: { track() {}, addXpToProgress() {} }, Base: { bagCap:() => 9 },
     Cards: { all: () => H.cards, isRandomObtainable: () => true, randomClassCard: () => H.cards[0], cardHTML: c => `<span>${c.name}</span>` } };
   const { overlayMethods } = await import('../game/src/ui/overlay.js');
   UI = window.SDT.UI = { ...overlayMethods, _acts: {}, _baseActs: {}, _roomActive: true, el: {},
@@ -35,8 +35,9 @@ beforeEach(() => {
   UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
   UI._acts = {}; UI._overlayInerted = []; UI._lastMode = null; UI._hideTimer = null; UI._roomActive = true; setBagReturnHook(null);
   H.cards = [{ id: 'reward', name: '奖励牌', rarity: '职业', type: '武术' }]; H.saves = []; H.uid = 0;
-  Object.assign(H.game, { state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 9,
+  Object.assign(H.game, { state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, nodeRewards:{}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 9,
     layerData: [{ logical: [{ def: { type: 'entrance' } }, { def: { type: 'fire' } }] }],
+    bagCap:() => 9, usedSlots:() => H.game.ownedCards.length,
     canReceiveCard: () => true, heal: n => H.game.hp = Math.min(H.game.maxHp, H.game.hp + n),
   });
 });

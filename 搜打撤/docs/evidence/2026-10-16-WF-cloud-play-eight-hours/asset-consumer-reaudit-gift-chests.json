@@ -1,0 +1,13 @@
+{
+  "timeUTC": "2026-10-15T22:02:58.845319+00:00",
+  "path": "game/src/run/chests.js",
+  "before": "32fc73bd9190fd3dc06afb03e6f3dc4a5cc4774973b495c4a5e04da702f8d18b",
+  "after": "fc0db9ad86f6888fe2558420bcfd0055d36bebce86ce60729f787dee28db2094",
+  "review": "Read full gift-fix.patch against R4. Delta separates original pick candidates from appended gift pending cards, passes deferAcquiredCard callback and persists take state. Chest scene/frame construction, icon/scene paths and imports unchanged. Updated only retired-scenes and chests selector hashes; no exclusion paths or algorithm changed.",
+  "additionalReviewedConsumer": {
+    "path": "game/src/run/game.run.scenes.js",
+    "before": "a70009ae2c162cd12554169e2b08d730a036c577a7a0bc07b6e5601e3c5eb99a",
+    "after": "6dcdadc6b27bdead891dbbd18be4b132ca110322d9aa54699235f80dc25f4eac",
+    "review": "Only existing Apollo gift callback delegation versus unchanged legacy recursive grant; no scene art URL/render/choice asset changes."
+  }
+}

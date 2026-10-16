@@ -1,0 +1,194 @@
+{
+  "sourceScanCount": 527,
+  "sourceScanExcludes": [
+    "game/src/generated/**"
+  ],
+  "count": 19,
+  "bytes": 3428566,
+  "files": [
+    {
+      "bytes": 103974,
+      "path": "assets/scenes/base-home-v4.webp",
+      "sha256": "b17f006c93bb135daf146dd81eecf0fba936867dfa473c0f47ac6bc9f305818f",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/base-home-v4.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 414722,
+      "path": "assets/scenes/battle-street-amber-anime-v1.webp",
+      "sha256": "00fd975da37e26de2ced2df8c9433ee331d30bc029edfd61a5a6e32b11bcb4a4",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/battle-street-amber-anime-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 112604,
+      "path": "assets/scenes/entry/winter-arrival-1011-v1.webp",
+      "sha256": "1d44a932b6f6f78a11cf72d59eb3d20f9a6c1fbe1445000c56e4a438e7e5a894",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/entry/winter-arrival-1011-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 88082,
+      "path": "assets/scenes/entry/winter-arrival-1011-v2.webp",
+      "sha256": "68540f6eec3ba0278fbe9b7e1214ce33790ea077ee9f56598c11edd6f02deb7b",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/entry/winter-arrival-1011-v2.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 526708,
+      "path": "assets/scenes/rewards/chest-small-1011-v2.webp",
+      "sha256": "ed43f22a4fbb9af6977e22bf17e7b642ee928174839918164d4eed93467e3f8a",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/rewards/chest-small-1011-v2.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 815604,
+      "path": "assets/scenes/rewards/chest-small-cardstyle-1011-v1.webp",
+      "sha256": "ce11a73fa18d93700c93b4ef8fb518e1925be3af4261b142eafded0cba89042a",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/rewards/chest-small-cardstyle-1011-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 124864,
+      "path": "assets/scenes/scene-chest-boss-anime-v1.webp",
+      "sha256": "5ce12f77c5458ad5b28f2c7b5863623258d9b87363a3ec8339ffa66f19a8a023",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/scene-chest-boss-anime-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 93464,
+      "path": "assets/scenes/scene-chest-class-anime-v1.webp",
+      "sha256": "26407e527af912f72ff127c435a7f4b1cdffd67f87f3bad8be9ce38eda74b798",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/scene-chest-class-anime-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 156162,
+      "path": "assets/scenes/scene-chest-large-anime-v1.webp",
+      "sha256": "91e7685ea015eeaa7cf94a855f4d0d1a5a64cadd0ddb40df3d9e7b9cdbc2e76c",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/scene-chest-large-anime-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 131346,
+      "path": "assets/scenes/scene-chest-medium-anime-v1.webp",
+      "sha256": "e1c41d3b5b6eeeef8871a691f4ad656488c0f69f9779f13df183e7966536e6ae",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/scene-chest-medium-anime-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 131822,
+      "path": "assets/scenes/scene-chest-small-anime-v1.webp",
+      "sha256": "4157569f0fa29becb11fe1e5332cfd402c26abfb0cfc3fbf88ed905e9a68a422",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/scene-chest-small-anime-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 118232,
+      "path": "assets/scenes/ui-loop-0925/expedition-banner.webp",
+      "sha256": "2c64f57f684ee84bb260fadeabf99ac10a73d6d14ee434fa009383c92175d0d2",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/ui-loop-0925/expedition-banner.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 127652,
+      "path": "assets/scenes/ui-loop-0925/rewards-convoy-success.webp",
+      "sha256": "6c9504db297c2390fa42d4ed710265c987c4e5eed94a6d7996624fa8689abaf1",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/scenes/ui-loop-0925/rewards-convoy-success.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 17594,
+      "path": "assets/thumbs/scenes/battle-street-amber-anime-v1.webp",
+      "sha256": "0bb536004fef2108a27e3d82e2a266e071922390042f34d50654ad0886108884",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/thumbs/scenes/battle-street-amber-anime-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 95232,
+      "path": "assets/thumbs/scenes/scene-chest-boss-anime-v1.webp",
+      "sha256": "01a5bd234abedfbd51a808f3fec8cada6438c082836bc609e1b978cfcdc6ff93",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/thumbs/scenes/scene-chest-boss-anime-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 71490,
+      "path": "assets/thumbs/scenes/scene-chest-class-anime-v1.webp",
+      "sha256": "98a3f652b066e9302c90b2fc2bee7223099aa1f678df1142af37e335f6c3db20",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/thumbs/scenes/scene-chest-class-anime-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 109926,
+      "path": "assets/thumbs/scenes/scene-chest-large-anime-v1.webp",
+      "sha256": "8b95f5487b4debcb401eac9fae70f61c3e56a2df544e1b9342bb03715bddec7e",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/thumbs/scenes/scene-chest-large-anime-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 97124,
+      "path": "assets/thumbs/scenes/scene-chest-medium-anime-v1.webp",
+      "sha256": "a45678714412c1d9f9c0fd1de1e72a598d668d021e4ee721630f3b3bde9588fa",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/thumbs/scenes/scene-chest-medium-anime-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    },
+    {
+      "bytes": 91964,
+      "path": "assets/thumbs/scenes/scene-chest-small-anime-v1.webp",
+      "sha256": "d5b626be16c70470cae23ddae54e0809df88a7f846d9958a4564b1e21b7dd664",
+      "runtimeReferenceFiles": [],
+      "sourcePath": "game/assets/thumbs/scenes/scene-chest-small-anime-v1.webp",
+      "sourceMatchesR2": true,
+      "status": "proposed only; preserve source originals"
+    }
+  ],
+  "status": "implemented exact production-only exclusion category; original source files retained",
+  "consumerFingerprints": {
+    "game/data/art-mapping.json": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99",
+    "game/src/core/art.js": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1",
+    "game/src/run/chests.js": "32fc73bd9190fd3dc06afb03e6f3dc4a5cc4774973b495c4a5e04da702f8d18b",
+    "game/src/run/chest-opening-art.js": "6ea623ee1a706248f743e143c0c5fca5026de400056a0761f8c8ef29d6b65079",
+    "game/src/run/game.run.data.js": "6f89d00a6116d2ec0171e1cd1ae73272af0c8879f5557fd2921e507f9b55c9db",
+    "game/src/run/game.run.scenes.js": "a70009ae2c162cd12554169e2b08d730a036c577a7a0bc07b6e5601e3c5eb99a",
+    "game/src/battle/view/battle.scenery.js": "def5fdf4843c3fc8b5eb0226e8859b6ff14ee72c9b12d24481a9a93d22647dba",
+    "game/src/run/game.session.death.js": "5f48ef82cf0269cc012528c17d956357134b5af3899373b9c39e2b9267737f87",
+    "game/css/entry-events.css": "0d488a1c0174cf7b0c77702e178937ef4a5ba5238b88adf70727f89a7f71185b",
+    "game/css/scenes.css": "6d10a0d68c80397b9ff599ff631dc66c0b91984cc205b736dbf7716df05cfb70"
+  }
+}

@@ -1,0 +1,70 @@
+--- a/搜打撤/game/src/run/event-card-choice.js
++++ b/搜打撤/game/src/run/event-card-choice.js
+@@ -17,7 +17,7 @@
+ // The reward record, paid coins, and received card share the existing run save.
+ // Only rendering callbacks remain in memory; reopening never draws or pays again.
+ export function createEventCardChoiceController({
+-  game, UI, SDT, saveGame, getActiveSlot, nodeShell, grantEventCard, consumeCurrentCell, captureContext, close,
++  game, UI, SDT, saveGame, getActiveSlot, nodeShell, grantEventCard, consumeCurrentCell, captureContext, close, openFixedRewardsOnCell,
+ }) {
+   function render(record, current = captureContext(), notice = '') {
+     if (!current()) return false;
+@@ -49,6 +49,36 @@
+       if (!active()) return false;
+       const index = Number(data.i), card = cards[index];
+       if (!Number.isInteger(index) || !card) return false;
++      if (card.id === 'tt2-apollo') {
++        // 先锁定选择再建立同一份 Run 的待领快照；主卡和附赠都由宝箱逐张承接。
++        // 交接失败且未建立待领时只还原此节点，既不发主卡也不重新抽候选。
++        if (typeof openFixedRewardsOnCell !== 'function' || typeof SDT.Chests?.restore !== 'function' || typeof SDT.Chests?.serialize !== 'function') {
++          render(record, current, '领奖页暂未就绪，主卡与已支付货币均已保留，请稍后重试。');
++          return false;
++        }
++        const visited = game.visited || (game.visited = {});
++        const hadVisited = Object.prototype.hasOwnProperty.call(visited, key), previousVisited = visited[key];
++        let beforeReward = null;
++        try { beforeReward = SDT.Chests.serialize(game); } catch { /* 下方承接结果仍须独立核对。 */ }
++        record.taken = index;
++        consumeCurrentCell();
++        let opened = false;
++        try { opened = openFixedRewardsOnCell([card], spec.title) === true; }
++        catch { /* 已建立的待领快照仍应保留；没有建立时回到原选择。 */ }
++        let pending = null;
++        try { pending = SDT.Chests.serialize?.(game); } catch { /* 失效端口不能作为成功凭据。 */ }
++        const adopted = pending && pending.seed === game.seed && pending.layerIdx === game.layerIdx
++          && pending.trackPos === game.trackPos && pending.current?.cards?.[0]?.id === card.id
++          && JSON.stringify(pending) !== JSON.stringify(beforeReward);
++        if (opened || adopted) { setBagReturnHook(null); return true; }
++        record.taken = null;
++        if (game.visited === visited) {
++          if (hadVisited) visited[key] = previousVisited;
++          else delete visited[key];
++        }
++        if (current()) render(record, current, '领奖页未能打开，选择与已支付货币已保留，请重试。');
++        return false;
++      }
+       if (!grantEventCard(card)) {
+         const message = UI.el?.ovBody?.querySelector('[data-event-capacity]');
+         if (message) message.textContent = `「${card.name}」当前放不下，请整理背包后重试；本次候选已保留。`;
+--- a/搜打撤/game/src/run/game.run.flow.js
++++ b/搜打撤/game/src/run/game.run.flow.js
+@@ -702,7 +702,7 @@
+ function eventCardChoiceController() {
+   // Lazy assembly preserves the session/flow import boundary during boot.
+   return eventCardChoices ||= createEventCardChoiceController({
+-    game, UI, SDT, saveGame, getActiveSlot, nodeShell, grantEventCard, consumeCurrentCell,
++    game, UI, SDT, saveGame, getActiveSlot, nodeShell, grantEventCard, consumeCurrentCell, openFixedRewardsOnCell,
+     captureContext: captureEventContext, close: closeEventFlow,
+   });
+ }
+--- a/搜打撤/docs/save-format.md
++++ b/搜打撤/docs/save-format.md
+@@ -36,7 +36,7 @@
+ 
+ - `eventId` 为 `ev19-potions` 或 `ev19-quartermaster`；`cardIds` 保存首次确定的 1–3 个不同候选 ID，重进与恢复不重新抽取
+ - `paidCoins` 分别为 0 或 3；装备征用的扣款后余额与候选在同一份普通 Run 快照保存，恢复候选不再次扣款
+-- `taken=null` 表示尚未领取；成功收卡后写入已领取索引，并标记该节点已完成。容量不足不推进这两个状态
++- `taken=null` 表示尚未锁定选择；普通卡成功收卡后写入索引，阿猫的礼物则在同步转入固定领奖页时写入索引并锁定所选卡，实际主卡与附赠由同份 `chestReward` 独立领取。两种成功路径均标记节点已完成；普通卡容量不足或阿猫领奖页未能建立时不推进这两个状态
+ 
+ 未领时可整理背包或返回地图，原候选保留在原节点；读档位于该节点时直接恢复选择页，位于其他节点时不强制弹回。完成后的索引保留，禁止重复领取。旧档缺少这些记录时沿用原恢复流程，不补发奖励、不改变地图快照版本。候选 ID 暂时不在现行卡库中时保留记录并显示不可用，不擅自换卡。
+ 

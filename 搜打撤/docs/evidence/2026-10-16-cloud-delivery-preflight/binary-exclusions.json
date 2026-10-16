@@ -1,0 +1,101 @@
+[
+  {
+    "path": "docs/previews/roster-cutouts-20261016/baita-cutout-v1.png",
+    "bytes": 2294232,
+    "sha256": "88bbf12fa373bdb3ef71c7c8860ad7bd4edcab67dee08c135c5eb64f6806fd7a",
+    "reason": "binary-over-1MiB",
+    "state": "already-ignored-preserve-local-do-not-force-add",
+    "retrieval": {
+      "generated_source": "/workspace/scratch/b7a53a06c872/generated_images/exec-f9ed8ba2-f297-48e5-901f-a50108aa65ab.png",
+      "method": "Copy the preserved generated source to the listed project-relative path, then verify bytes and SHA256. Workspace-local source availability does not imply durable access from a new clone."
+    }
+  },
+  {
+    "path": "docs/previews/roster-cutouts-20261016/baita-cutout-v2.png",
+    "bytes": 2273635,
+    "sha256": "86fe972d4cc5abf3ecad85496da1885adfe6357fa87e252cb23ab0d369dfc21a",
+    "reason": "binary-over-1MiB",
+    "state": "already-ignored-preserve-local-do-not-force-add",
+    "retrieval": {
+      "generated_source": "/workspace/scratch/b7a53a06c872/generated_images/exec-ab57c7c0-4b00-4cd6-bdb8-8c93f30adc0e.png",
+      "method": "Copy the preserved generated source to the listed project-relative path, then verify bytes and SHA256. Workspace-local source availability does not imply durable access from a new clone."
+    }
+  },
+  {
+    "path": "docs/previews/roster-cutouts-20261016/changwuyu-cutout-v1.png",
+    "bytes": 1906957,
+    "sha256": "4a02b26c303cfb8ab82db40881f6e02f63556bd84824093d35c1a4ea6b24bc82",
+    "reason": "binary-over-1MiB",
+    "state": "already-ignored-preserve-local-do-not-force-add",
+    "retrieval": {
+      "generated_source": "/workspace/scratch/b7a53a06c872/generated_images/exec-c620dfa2-2871-4a40-a88b-6dcf319b6672.png",
+      "method": "Copy the preserved generated source to the listed project-relative path, then verify bytes and SHA256. Workspace-local source availability does not imply durable access from a new clone."
+    }
+  },
+  {
+    "path": "docs/previews/roster-cutouts-20261016/changwuyu-cutout-v2.png",
+    "bytes": 1943811,
+    "sha256": "c158ca853c9c2545d176934c4493aa231859f583efc1b265590c9962852a0c7f",
+    "reason": "binary-over-1MiB",
+    "state": "already-ignored-preserve-local-do-not-force-add",
+    "retrieval": {
+      "generated_source": "/workspace/scratch/b7a53a06c872/generated_images/exec-df0d5857-f582-4d1d-89cb-ae854a8ca14e.png",
+      "method": "Copy the preserved generated source to the listed project-relative path, then verify bytes and SHA256. Workspace-local source availability does not imply durable access from a new clone."
+    }
+  },
+  {
+    "path": "docs/previews/roster-cutouts-20261016/heixiang-cutout-v1.png",
+    "bytes": 1897915,
+    "sha256": "b210efbff0e60a54b23ef1d9d0fc0f397eecba65216972ca4a797a2cf3262531",
+    "reason": "binary-over-1MiB",
+    "state": "already-ignored-preserve-local-do-not-force-add",
+    "retrieval": {
+      "generated_source": "/workspace/scratch/b7a53a06c872/generated_images/exec-3f49f2b0-5bbb-4484-920f-5fed085777e3.png",
+      "method": "Copy the preserved generated source to the listed project-relative path, then verify bytes and SHA256. Workspace-local source availability does not imply durable access from a new clone."
+    }
+  },
+  {
+    "path": "docs/previews/roster-cutouts-20261016/heixiang-cutout-v2.png",
+    "bytes": 1845205,
+    "sha256": "16c79bb7540ba8869332b373685c072d8f060b6555e94f9c3dd9dc2f9f14f146",
+    "reason": "binary-over-1MiB",
+    "state": "already-ignored-preserve-local-do-not-force-add",
+    "retrieval": {
+      "generated_source": "/workspace/scratch/b7a53a06c872/generated_images/exec-9cb35c2b-f587-4590-881d-08271d83343c.png",
+      "method": "Copy the preserved generated source to the listed project-relative path, then verify bytes and SHA256. Workspace-local source availability does not imply durable access from a new clone."
+    }
+  },
+  {
+    "path": "docs/previews/roster-cutouts-20261016/xingyue-cutout-v1.png",
+    "bytes": 1766309,
+    "sha256": "954b14139a21485d0a9c88d18160822c5ae09e5fd7974e6d84e0d11cdd58d22a",
+    "reason": "binary-over-1MiB",
+    "state": "already-ignored-preserve-local-do-not-force-add",
+    "retrieval": {
+      "generated_source": "/workspace/scratch/b7a53a06c872/generated_images/exec-0791ec21-2009-458b-9807-19879a2360e3.png",
+      "method": "Copy the preserved generated source to the listed project-relative path, then verify bytes and SHA256. Workspace-local source availability does not imply durable access from a new clone."
+    }
+  },
+  {
+    "path": "docs/previews/roster-cutouts-20261016/xingyue-cutout-v2.png",
+    "bytes": 1784637,
+    "sha256": "e833816d8873064da53b60fb053d0f21848d9449c03797c66725ec1a5264caec",
+    "reason": "binary-over-1MiB",
+    "state": "already-ignored-preserve-local-do-not-force-add",
+    "retrieval": {
+      "generated_source": "/workspace/scratch/b7a53a06c872/generated_images/exec-2ec38402-8b23-4192-91d4-a310c75b4a61.png",
+      "method": "Copy the preserved generated source to the listed project-relative path, then verify bytes and SHA256. Workspace-local source availability does not imply durable access from a new clone."
+    }
+  },
+  {
+    "path": "docs/previews/wu-cutout-20261016/candidate-wu-v1.png",
+    "bytes": 1665018,
+    "sha256": "b8f404434be29c2417737587be97f3e57137dd98f53f995d4715dd4438099fe8",
+    "reason": "binary-over-1MiB",
+    "state": "already-ignored-preserve-local-do-not-force-add",
+    "retrieval": {
+      "generated_source": "/workspace/scratch/b7a53a06c872/generated_images/exec-6460ac23-086f-4f35-8964-ce838dd94999.png",
+      "method": "Copy the preserved generated source to the listed project-relative path, then verify bytes and SHA256. Workspace-local source availability does not imply durable access from a new clone."
+    }
+  }
+]

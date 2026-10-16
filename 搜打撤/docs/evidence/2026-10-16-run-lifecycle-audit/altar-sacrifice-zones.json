@@ -1,0 +1,48 @@
+{
+  "timestampUTC": "2026-10-15T20:00:05.893387+00:00",
+  "scope": "祭坛与第三层紧急撤离只献祭普通随身背包；位置/类型双校验",
+  "files": {
+    "game/src/run/game.run.altar.js": "cfd9b22ad3797623111badc892274debe83f3fb9327a0c3feb0ad0bf4813734e",
+    "tests/altar-sacrifice-zones-cloud.test.js": "8e0cd11e844b362aadb5664c16f99b3a77a0b4ee557de02f148f0335552dc7ac",
+    "docs/rules.md": "a5a98b18f5def7f367e685f5dbdf3dc62de7200272003d9d0d41a7023d304baa"
+  },
+  "checks": [
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/altar-sacrifice-zones-cloud.test.js tests/sys03-altar-restore-txn.test.js tests/extraction-flow.test.js tests/event-callback-lifecycle-audit.test.js tests/entry-supply-presentation.test.js tests/run-architecture.test.js --reporter=dot",
+      "result": "passed",
+      "files": 6,
+      "tests": 71
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js game/src/run/game.run.altar.js tests/altar-sacrifice-zones-cloud.test.js",
+      "result": "passed"
+    },
+    {
+      "command": "node scripts/check-syntax.mjs",
+      "result": "passed",
+      "projectFiles": 422
+    },
+    {
+      "command": "node scripts/check-types.mjs",
+      "result": "passed",
+      "configs": 8
+    },
+    {
+      "command": "npm run --silent docs:check -- --json",
+      "result": "passed",
+      "checkedRelativeLinks": 461,
+      "findings": []
+    },
+    {
+      "command": "git diff --check -- game/src/run/game.run.altar.js tests/altar-sacrifice-zones-cloud.test.js docs/rules.md",
+      "result": "passed"
+    }
+  ],
+  "preservedExistingChanges": "game.run.altar.js入城补给显示、claimNotice等前序工作者改动保留",
+  "notRun": [
+    "browser/manual gameplay",
+    "build",
+    "full test suite"
+  ],
+  "state": "source_frozen_ready_for_parent_manual_validation"
+}

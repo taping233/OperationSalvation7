@@ -1,0 +1,36 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤
+
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 15/16格收本体后附赠固定在原快照；满包失败不变，腾位返回后可单独领一次 98ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 普通JSON/真实RunStorage重载保留已掷附赠，卡库换池不重掷且本体不重发 28ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 附赠同名堆有2张：按真实3张叠放上限处理，不要求两空格 14ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 附赠同名堆有3张：按真实3张叠放上限处理，不要求两空格 12ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 三选一只永久放弃原候选，附赠独立待领且取后快照仍通过校验 22ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 浅池旧三选一只有1候选时，附赠不被误认为第二个候选 17ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 批量收下追加附赠，第二次才处理追加卡；不重复本体或消耗随机流 9ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 完全满包本体不发、不抽附赠；腾位后只抽一次 10ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 主存档setItem失败遵守检查点契约：内存本体/附赠/taken一起推进，重试完整落盘 16ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 成功领取附赠但存储失败时，内存不重领，恢复存储后可完整保存 10ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 附赠事件卡只追加/领取一次，池仅有阿猫时不递归也不制造附赠 11ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 明确确认放弃才会丢弃附赠，不能通过继续动作隐式吞奖 10ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > 宝箱/固定奖励阿猫附赠独立待领 > 不提供延后端口的旧非宝箱调用保持原可容纳时即时附赠行为 2ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 候选1张且choiceCount=-1拒绝异常快照，不修改输入 1ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 候选1张且choiceCount=0拒绝异常快照，不修改输入 1ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 候选1张且choiceCount=1.5拒绝异常快照，不修改输入 1ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 候选1张且choiceCount=2拒绝异常快照，不修改输入 1ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 候选1张且choiceCount="1"拒绝异常快照，不修改输入 1ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 候选1张且choiceCount=null拒绝异常快照，不修改输入 1ms
+ ✓ tests/chest-acquired-gift-cloud.test.js > choiceCount兼容与边界 > 缺choiceCount旧快照原样恢复；合法边界不丢候选 5ms
+
+ Test Files  1 passed (1)
+      Tests  20 passed (20)
+   Start at  07:01:30
+   Duration  16.13s (transform 2.40s, setup 0ms, collect 1.05s, tests 3.55s, environment 10.25s, prepare 391ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -1,0 +1,428 @@
+diff --git "a/\346\220\234\346\211\223\346\222\244/game/src/battle/battle.snapshot.types.d.ts" "b/\346\220\234\346\211\223\346\222\244/game/src/battle/battle.snapshot.types.d.ts"
+index e8bb80f..c90800c 100644
+--- "a/\346\220\234\346\211\223\346\222\244/game/src/battle/battle.snapshot.types.d.ts"
++++ "b/\346\220\234\346\211\223\346\222\244/game/src/battle/battle.snapshot.types.d.ts"
+@@ -214,9 +214,12 @@ export type PreviewActionInput = {
+     effectiveCost?: number;
+     legal?: boolean;
+     illegalReason?: string;
++    mode?: string;
++    hostedExecutionVerified?: boolean;
+     heartsMode?: boolean;
+     shaTransformed?: boolean;
+-    modifiers?: { stealthStrike?: boolean; nestDark1?: boolean; nestDark3?: boolean; allSpellsInfused?: boolean };
++    modifiers?: { stealthStrike?: boolean; nestDark1?: boolean; nestDark3?: boolean; allSpellsInfused?: boolean;
++      bleedAmp?: boolean; vsFreezeBonus?: boolean; specialLifecycle?: boolean };
+     selectedFuelUids?: readonly string[];
+     wholeCardRepeats?: number;
+     arrowRuneRepeat?: boolean;
+@@ -254,4 +257,6 @@ export type PreviewResult = {
+   reasons: readonly string[];
+ };
+ 
+-export type PreviewDamageSpec = { unknown: true } | { unknown?: false; hits: number; retarget?: boolean; amount?: number };
++export type PreviewDamageSpec = { unknown: true; reason?: string } | {
++  unknown?: false; hits: number; retarget?: boolean; amount?: number; unknownEffects?: readonly string[];
++};
+diff --git "a/\346\220\234\346\211\223\346\222\244/game/src/battle/core/battle.core.js" "b/\346\220\234\346\211\223\346\222\244/game/src/battle/core/battle.core.js"
+index 186499c..36e7380 100644
+--- "a/\346\220\234\346\211\223\346\222\244/game/src/battle/core/battle.core.js"
++++ "b/\346\220\234\346\211\223\346\222\244/game/src/battle/core/battle.core.js"
+@@ -3,11 +3,12 @@ const SDT = window.SDT;
+ import { refillDrawPile } from '../bag/battle.deck.js';
+ import { COMBAT_HOOKS } from './combat.js';
+ import { BATTLE_PHASES } from '../runtime/battle.state.js';
++import { getHostedExecutionCard } from '../effects/battle.hosted.js';
+ import * as Combat from './combat.js';
+ import {
+   battleState, G, foes, opts, mode, hand, energy, maxEnergy, pstat, busy, infusing,
+   discovering, choosing, stealthStrike, nextSpellTwice, viewingGrave, viewingDeck,
+-  shaTransform, growth, nestSyn, arrowRune, allSpellsInfused, freeCast,
++  shaTransform, growth, nestSyn, arrowRune, allSpellsInfused, freeCast, equipped,
+   battleRestartCheckpoint, set$energy, set$interaction, set$viewingGrave, set$viewingDeck,
+   set$pendingHint, bindBattleRenderer, showDread, takeBattleFloats, takeBattleCardAnims,
+ } from '../runtime/battle.runtime.js';
+@@ -287,8 +288,16 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
+     const nestDark3 = !!nestSyn.dark3;
+     // 暗 1 每一段命中前重新判断半血；即便目标当前高于半血，多段也可能在中途跨阈值。
+     const nestDark1 = !!nestSyn.dark1;
++    const executionCard = getHostedExecutionCard(card);
++    // hitFoe 还有裸 Combat 之外的修正。任一可能转向目标受影响时保守降级，不执行钩子。
++    const livingFoes = foes.filter(foe => !foe.dead && foe.hp > 0);
++    const bleedAmp = !!(pstat?.status?.bleedAmp > 0 && livingFoes.some(foe => foe.status?.bleed > 0));
++    const vsFreezeBonus = equipped.some(entry => entry?.card?.rules?.equip?.passive?.cond?.vsFreeze > 0)
++      && livingFoes.some(foe => foe.status?.freeze > 0);
+     return Object.freeze({
+-      card: Object.freeze({ ...card }),
++      card: Object.freeze({ ...executionCard }),
++      mode,
++      hostedExecutionVerified: executionCard !== card,
+       legal: !illegalReason,
+       illegalReason,
+       effectiveCost,
+@@ -306,6 +315,9 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
+         stealthStrike: stealthStrikeActive,
+         nestDark1,
+         nestDark3,
++        bleedAmp,
++        vsFreezeBonus,
++        specialLifecycle: livingFoes.some(foe => foe.revive && !foe.revived),
+         allSpellsInfused: !!(allSpellsInfused && infuseOf(card) > 0),
+       }),
+     });
+diff --git "a/\346\220\234\346\211\223\346\222\244/game/src/battle/view/battle.hover.js" "b/\346\220\234\346\211\223\346\222\244/game/src/battle/view/battle.hover.js"
+index 5517ece..23cf0ea 100644
+--- "a/\346\220\234\346\211\223\346\222\244/game/src/battle/view/battle.hover.js"
++++ "b/\346\220\234\346\211\223\346\222\244/game/src/battle/view/battle.hover.js"
+@@ -36,7 +36,7 @@ import { getSnapshot, Combat, getPreviewContext } from '../core/battle.core.js';
+       const killSummary = defeated.length
+         ? `，预计击败 ${defeated.length} 名：${[...new Set(defeated)].map(esc).join('、')}`
+         : '';
+-      main = `[[icon:${defeated.length ? 'skull' : 'bolt'}]] 精确伤害：<b>${d.total}</b> 点${Combat.TYPE_NAME[d.type]} ${segments}${killSummary}`;
++      main = `[[icon:${defeated.length ? 'skull' : 'bolt'}]] 直接伤害：<b>${d.total}</b> 点${Combat.TYPE_NAME[d.type]} ${segments}${killSummary}`;
+       const details = [`费${result.cost}`];
+       if (d.blockedBy === 'aegis') details.push('元素庇幕完全减免');
+       if (d.blockedBy === 'protected') details.push('存活护卫者庇护，伤害偏转');
+diff --git "a/\346\220\234\346\211\223\346\222\244/game/src/battle/view/battle.preview.js" "b/\346\220\234\346\211\223\346\222\244/game/src/battle/view/battle.preview.js"
+index 0782b10..b123fe0 100644
+--- "a/\346\220\234\346\211\223\346\222\244/game/src/battle/view/battle.preview.js"
++++ "b/\346\220\234\346\211\223\346\222\244/game/src/battle/view/battle.preview.js"
+@@ -31,23 +31,36 @@ function normalizeDesc(value) {
+ /** @type {Record<string, string>} */
+ const DAMAGE_TYPE_NAMES = Combat.TYPE_NAME;
+ 
+-// B1/B2（2026-09-25）：结构化 damage op → 预览规格。纯字面量/字段伤害（amount/amountField）
+-// 加确定段数（hitCount/hits.count）可精确预演；条件（cond）、增伤（bonus）、区间（range）、
+-// 吸血、随机目标/随机段数、墓地/重施/延迟一律降级 unknown——宁可不给数字，不给错数字。
+-// 与解释器（battle.resolution.js castSegment）共享语义口径：amount 与 card.dmg 由 schema 强制一致，
+-// growth 由 cardContext.damageGrowth 通道承担（>0 时 previewAction 已降级 unknown）。
++const EXACT_DAMAGE_KEYS = new Set(['op', 'amount', 'amountField', 'target', 'hitCount', 'hits', 'retarget']);
++const FOLLOWUP_OPS = new Set(['curse', 'draw', 'cleanse', 'registerRule', 'blessing', 'armor', 'heal', 'coins']);
++
++// 只接纳完整扫描后可证明的单个 damage op；新参数默认降级，不能忽略后再宣称精确。
++// 后置抽牌/附加状态与时点触发不计入此处直接伤害，并通过 unknownEffects 明示。
+ /** @param {SnapshotBattleCard | null | undefined} card @returns {PreviewDamageSpec | null} */
+ function structuredDamageSpec(card) {
+-  const operation = card?.rules?.triggers?.onPlay?.find(item => item && item.op === 'damage');
+-  if (!operation) return null;
+-  const unstable = operation.range !== undefined || operation.cond !== undefined || operation.bonus !== undefined ||
+-    operation.lifesteal === true || operation.graveyard !== undefined || operation.recast !== undefined ||
+-    operation.schedule !== undefined || operation.target === 'randomEnemy' ||
+-    (operation.hits != null && (operation.hits.range !== undefined || operation.hits.perFoe !== undefined ||
+-      // 段数=本回合已打出招式数（连续射击）：快照不含该计数，无法精算——降级 unknown 不给错数字
+-      // （09-30 深审 BC-08：此前按默认 1 段还标 exact，显示值恒错）
+-      operation.hits.perPlayedMoves !== undefined));
+-  if (unstable) return { unknown: true };
++  const triggers = card?.rules?.triggers;
++  if (!triggers) return null;
++  const operations = triggers.onPlay;
++  if (!Array.isArray(operations)) return { unknown: true };
++  const damageOps = operations.filter(item => item?.op === 'damage');
++  if (damageOps.length !== 1) return { unknown: true, reason: '包含多个或未声明的直接伤害流程，暂未完整预演' };
++  const operation = damageOps[0];
++  if (Object.keys(operation).some(key => !EXACT_DAMAGE_KEYS.has(key)) ||
++      (operation.target !== undefined && !['chosenEnemy', 'allEnemies'].includes(operation.target)) ||
++      (operation.retarget !== undefined && operation.retarget !== 'livingFoes') ||
++      (operation.hitCount !== undefined && operation.hits !== undefined) ||
++      (operation.hits !== undefined && (!operation.hits || typeof operation.hits !== 'object' ||
++        Object.keys(operation.hits).some(key => key !== 'count')))) {
++    return { unknown: true, reason: '伤害含尚未预演的条件、动态参数或目标流程' };
++  }
++  if (operations.some(item => !item || (item.op !== 'damage' &&
++      (!FOLLOWUP_OPS.has(item.op || '') || item.burst !== undefined || item.pick !== undefined || item.schedule !== undefined)))) {
++    return { unknown: true, reason: '包含尚未预演的额外伤害或后续施放流程' };
++  }
++  const sources = ['amount', 'amountField'].filter(key => operation[key] !== undefined);
++  if (sources.length !== 1 || (operation.amountField !== undefined && operation.amountField !== 'dmg')) return { unknown: true };
++  const unknownEffects = operations.length > 1 || Object.keys(triggers).some(key => key !== 'onPlay' && key !== 'duration')
++    ? ['仅计算直接伤害；附加效果及后续触发未计入'] : [];
+   // target 未声明时解释器按「倒下顺延战场首位」结算——预览按 retarget 式逐段转移处理
+   const retarget = operation.retarget === 'livingFoes' || operation.target === undefined;
+   const countSource = operation.hitCount ?? operation.hits?.count;
+@@ -57,17 +70,34 @@ function structuredDamageSpec(card) {
+   const hits = Math.max(1, Math.floor(numericCount || 1));
+   if (operation.amount !== undefined) {
+     const amount = Number(operation.amount);
+-    return Number.isFinite(amount) ? { hits, retarget, amount } : { unknown: true };
++    return Number.isFinite(amount) ? { hits, retarget, amount, unknownEffects } : { unknown: true };
+   }
+   if (operation.amountField === 'dmg' && !Number.isFinite(Number(card?.dmg))) return { unknown: true };
+-  return { hits, retarget };
++  return { hits, retarget, unknownEffects };
+ }
+ 
+-/** @param {SnapshotBattleCard | null | undefined} card @returns {PreviewDamageSpec | null} */
+-function semanticMatch(card) {
++/** @param {SnapshotBattleCard} card @param {PreviewActionInput['cardContext']} context @returns {PreviewDamageSpec | null} */
++function hostedDamageSpec(card, context) {
++  if (card.id !== 'tt7-arcanebolt') return null;
++  const rules = card.rules;
++  const hosted = rules?.battle?.hosted;
++  if (context.mode !== 'normal' || !context.hostedExecutionVerified ||
++      card.type !== '法术' || card.dmgType !== 'spell' || typeof card.dmg !== 'number' || !Number.isFinite(card.dmg) || card.dmg <= 0 ||
++      !rules || Object.keys(rules).some(key => !['version', 'battle'].includes(key)) ||
++      Object.keys(rules.battle || {}).some(key => key !== 'hosted') ||
++      !Array.isArray(hosted) || hosted.length !== 1 || hosted[0] !== 'damage-and-draw' ||
++      normalizeDesc(card.desc) !== "1',抽1张牌") return { unknown: true };
++  return { hits: 1, amount: card.dmg, unknownEffects: ['仅计算直接伤害；普通战抽牌改为获得初始攻击，后续触发未计入；敌人全灭时停止余下效果'] };
++}
++
++/** @param {SnapshotBattleCard | null | undefined} card @param {PreviewActionInput['cardContext']} context @returns {PreviewDamageSpec | null} */
++function semanticMatch(card, context) {
+   if (!card) return null;
++  const hosted = hostedDamageSpec(card, context);
++  if (hosted) return hosted;
+   const structured = structuredDamageSpec(card);
+   if (structured) return structured;
++  if (card.rules?.equip || card.rules?.bag || card.rules?.battle?.hosted) return null;
+   const spec = card.id ? SEMANTICS[card.id] : undefined;
+   if (!spec) return null;
+   return card.type === spec[0] && card.dmgType === spec[1] && Number(card.dmg) === spec[2]
+@@ -122,15 +152,16 @@ function previewAction({ snapshot, action, cardContext }) {
+   if (cardContext.shaTransformed) return unknown(cost, frozenTargets, '这张初始攻击将变为另一张牌结算');
+   if (cardContext.modifiers?.stealthStrike) return unknown(cost, frozenTargets, '破隐一击会改变本次伤害');
+   if (cardContext.modifiers?.nestDark1 || cardContext.modifiers?.nestDark3) return unknown(cost, frozenTargets, '黑暗羁绊会逐段改变伤害');
++  if (cardContext.modifiers?.bleedAmp || cardContext.modifiers?.vsFreezeBonus) return unknown(cost, frozenTargets, '流血或冰冻增伤尚未纳入直接伤害预览');
++  if (cardContext.modifiers?.specialLifecycle) return unknown(cost, frozenTargets, '目标带有复活等特殊生命流程，暂未完整预演');
+   if (cardContext.modifiers?.allSpellsInfused || cardContext.selectedFuelUids?.length) return unknown(cost, frozenTargets, '注能会改变这张牌的伤害');
+   if ((cardContext.wholeCardRepeats || 1) !== 1) return unknown(cost, frozenTargets, '这张牌会整体重复结算');
+   if (cardContext.arrowRuneRepeat) return unknown(cost, frozenTargets, '箭矢符文会重复结算这张牌');
+ 
+-  // 只计算通过语义验证的伤害流程。非白名单、随机、AOE、状态前置或任何字段被改写的卡
+-  // 都不猜测段数和结算顺序；带 v2 条件/区间/增伤的结构化伤害降级 unknown（不猜数字）。
+-  const exactSpec = semanticMatch(card);
++  // AOE 数字仅对应当前指向目标；随机、未建模参数与额外伤害流程不猜数字。
++  const exactSpec = semanticMatch(card, cardContext);
+   if (!exactSpec) return unknown(cost, frozenTargets, '这张牌的伤害流程暂不支持预览');
+-  if (exactSpec.unknown === true) return unknown(cost, frozenTargets, '这张牌带有条件/区间/随机伤害效果，暂不支持精确预览');
++  if (exactSpec.unknown === true) return unknown(cost, frozenTargets, exactSpec.reason || '这张牌带有尚未完整预演的伤害流程');
+   const dmgType = card.dmgType;
+   const cardDamage = Number(card.dmg);
+   const damageGrowth = Number(cardContext.damageGrowth) || 0;
+@@ -188,7 +219,7 @@ function previewAction({ snapshot, action, cardContext }) {
+       armorBefore, armorAfter: target.defense.armor, dodgeBefore, dodgeAfter: +(target.status.dodge || 0),
+       blockedBy: cardContext.targetProtected ? 'protected' : cardContext.aegisBlocked ? 'aegis' : null,
+       notes: Object.freeze([...new Set(logs)]), }),
+-    knownEffects: Object.freeze(['damage']), unknownEffects: Object.freeze([]), reasons: Object.freeze([]),
++    knownEffects: Object.freeze(['damage']), unknownEffects: Object.freeze(exactSpec.unknownEffects || []), reasons: Object.freeze([]),
+   });
+ }
+ 
+diff --git "a/\346\220\234\346\211\223\346\222\244/tests/r3-a-preview.test.js" "b/\346\220\234\346\211\223\346\222\244/tests/r3-a-preview.test.js"
+index ad91a73..a7a3122 100644
+--- "a/\346\220\234\346\211\223\346\222\244/tests/r3-a-preview.test.js"
++++ "b/\346\220\234\346\211\223\346\222\244/tests/r3-a-preview.test.js"
+@@ -11,6 +11,7 @@ window.SDT.MAP = {
+ await import('../game/src/cards/cards.js');
+ const { BattleSession, viewApi } = await import('../game/src/battle/core/battle.core.js');
+ const { cardRuleHint, previewAction } = await import('../game/src/battle/view/battle.preview.js');
++const { showFoePreview } = await import('../game/src/battle/view/battle.hover.js');
+ const { Random } = await import('../game/src/core/random.js');
+ const Cards = window.SDT.Cards;
+ 
+@@ -188,6 +189,85 @@ describe('R3-a 可信伤害预览', () => {
+     },
+   );
+ 
++  it('普通战奥术弹按定版 hosted 执行视图预览，直接伤害与真实结算一致', async () => {
++    const original = Cards.all().find(entry => entry.id === 'tt7-arcanebolt');
++    expect(original.rules.battle.hosted).toEqual(['damage-and-draw']);
++    const { game, uid } = gameWith({ ...original, desc: '玩家展示文本已变化', dmg: 3 }, { spellPower: 2 });
++    restore(game, uid, { hp: 20 }, { spellUp: 1 });
++    const context = viewApi.getPreviewContext(uid, 0);
++    expect(context).toMatchObject({ mode: 'normal', hostedExecutionVerified: true });
++    const result = preview(uid);
++    expect(result).toMatchObject({ confidence: 'exact', cost: 0, damage: { total: 6, hpAfter: 14 } });
++    expect(result.unknownEffects.join('')).toContain('后续触发未计入');
++    const bubbleHost = document.createElement('div');
++    showFoePreview(bubbleHost, 0, uid, original, 'click');
++    expect(bubbleHost.textContent).toContain('直接伤害：6');
++    expect(bubbleHost.textContent).toContain('后续触发未计入');
++    BattleSession.commands.playCard(uid, 0);
++    const actual = await settle();
++    expect(actual.foes[0].hp).toBe(result.damage.hpAfter);
++    expect(game.logs.some(line => line.includes('获得 1 张【初始攻击】'))).toBe(true);
++    BattleSession.commands.flee();
++  });
++
++  it('BOSS 抽牌后续未完整预演时奥术弹仍降级，不影响普通直接伤害', () => {
++    const card = Cards.all().find(entry => entry.id === 'tt7-arcanebolt');
++    const { game, uid } = gameWith(card);
++    restore(game, uid, { hp: 20, isBoss: true });
++    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null });
++    BattleSession.commands.flee();
++  });
++
++  it('core 将流血增伤旗标传给预览，避免裸 Combat 伪精确', async () => {
++    const card = Cards.all().find(entry => entry.id === 'starter-attack');
++    const { game, uid } = gameWith(card);
++    restore(game, uid, { hp: 20, status: { bleed: 2 } }, { bleedAmp: 1 });
++    expect(viewApi.getPreviewContext(uid, 0).modifiers.bleedAmp).toBe(true);
++    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null });
++    BattleSession.commands.playCard(uid, 0);
++    expect((await settle()).foes[0].hp).toBe(12);
++    BattleSession.commands.flee();
++  });
++
++  it('穿戴合法冰冻增伤装备后由 core 降级；实际 hitFoe 仍按原规则增伤', async () => {
++    const attack = Cards.all().find(entry => entry.id === 'starter-attack');
++    const equipment = { id: 'preview-frost-equipment', name: '冰冻增伤测试装备', type: '装备', cost: 0, dmg: 0,
++      rules: { version: 1, equip: { onEquip: [], passive: { cond: { vsFreeze: 2 } } } } };
++    const { game, uid } = gameWith(attack);
++    game.ownedCards.push({ uid: 'preview-equipment', card: equipment });
++    restore(game, uid, { hp: 20, status: { freeze: 1 } }, {}, { hand: [uid, 'preview-equipment'] });
++    BattleSession.commands.playCard('preview-equipment', 'self');
++    await settle();
++    expect(viewApi.getPreviewContext(uid, 0).modifiers.vsFreezeBonus).toBe(true);
++    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null });
++    BattleSession.commands.playCard(uid, 0);
++    expect((await settle()).foes[0].hp).toBe(14);
++    BattleSession.commands.flee();
++  });
++
++  it('后续可转向目标带流血增伤时也降级，不只检查当前选中目标', () => {
++    const card = Cards.all().find(entry => entry.id === 'tt7-meteorrain');
++    const { game, uid } = gameWith(card);
++    const foe = (hp, bleed = 0) => ({ id: 'target', name: '目标', hp, maxHp: hp, atk: 1,
++      dead: false, status: { bleed }, defense: { shield: 0, armor: 0, guard: false } });
++    restore(game, uid, { hp: 1 }, { bleedAmp: 1 }, { foes: [foe(1), foe(20, 2)] });
++    expect(viewApi.getPreviewContext(uid, 0).modifiers.bleedAmp).toBe(true);
++    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null });
++    BattleSession.commands.flee();
++  });
++
++  it('奥术弹全灭后停止抽牌；预览说明不承诺一定获得后续卡牌', async () => {
++    const card = Cards.all().find(entry => entry.id === 'tt7-arcanebolt');
++    const { game, uid } = gameWith(card);
++    restore(game, uid, { hp: 1 });
++    const result = preview(uid);
++    expect(result).toMatchObject({ confidence: 'exact', damage: { total: 1, lethal: true } });
++    expect(result.unknownEffects.join('')).toContain('敌人全灭时停止余下效果');
++    BattleSession.commands.playCard(uid, 0);
++    await settle();
++    expect(game.logs.some(line => line.includes('获得 1 张【初始攻击】'))).toBe(false);
++  });
++
+   it.each(['cc-double-boom', 'tt7-whirlwind', 'cc-cursed-blade'])(
+     '%s 结构化伤害：预览 exact 且数字与真实结算一致', async id => {
+       const card = Cards.all().find(entry => entry.id === id);
+diff --git a/tests/battle-preview-trust-boundary.test.js b/tests/battle-preview-trust-boundary.test.js
+new file mode 100644
+index 0000000..aa8e45d
+--- /dev/null
++++ b/tests/battle-preview-trust-boundary.test.js
+@@ -0,0 +1,114 @@
++import { describe, expect, it } from 'vitest';
++import { previewAction } from '../game/src/battle/view/battle.preview.js';
++import { getHostedExecutionCard } from '../game/src/battle/effects/battle.hosted.js';
++import { Random } from '../game/src/core/random.js';
++
++const damage = (extra = {}) => ({ op: 'damage', amount: 5, target: 'chosenEnemy', ...extra });
++const structured = (ops = [damage()]) => ({ id: 'trust-test', type: '法术', dmgType: 'spell', dmg: 5,
++  rules: { version: 1, triggers: { onPlay: ops } } });
++function preview(card = structured(), { status = {}, defense = {}, playerStatus = {}, context = {}, spellPower = 0 } = {}) {
++  return previewAction({
++    snapshot: { foes: [{ hp: 30, dead: false, status, defense: { shield: 0, armor: 0, guard: false, ...defense } }],
++      player: { atk: 4, spellPower }, pstat: { status: playerStatus } },
++    action: { kind: 'play-card', uid: 'trust-test', targetIndex: 0 },
++    cardContext: { card, targetIndexes: [0], legal: true, ...context },
++  });
++}
++function bolt(extra = {}) {
++  return getHostedExecutionCard({ id: 'tt7-arcanebolt', name: '奥术弹', type: '法术', dmgType: 'spell', dmg: 1, cost: 0,
++    desc: '可编辑展示文本', rules: { version: 1, battle: { hosted: ['damage-and-draw'] } }, ...extra });
++}
++const normalHosted = { mode: 'normal', hostedExecutionVerified: true };
++
++describe('damage preview trust boundary', () => {
++  it.each([
++    ['spellPowerMul', 2], ['perInfusedInHand', 2], ['infuseBonus', 3], ['perTargetPrice', true],
++    ['cond', { anyCurse: true }], ['bonus', { amount: 2 }], ['range', [4, 6]],
++    ['lifesteal', true], ['graveyard', { type: '法术', perCard: 1 }],
++    ['recast', { on: 'kill', times: 1 }], ['schedule', 'nextTurn'], ['pick', 'new'],
++    ['onKill', { coins: 2 }], ['futureDamageModifier', 9],
++  ])('fails closed for unsupported damage key %s', (key, value) => {
++    expect(preview(structured([damage({ [key]: value })]))).toMatchObject({ confidence: 'unknown', damage: null });
++  });
++
++  it.each([
++    { target: 'randomEnemy' }, { hits: { range: [1, 2] } }, { hits: { perPlayedMoves: true } },
++    { hits: { count: 2, futureHits: true } }, { hits: null }, { hitCount: 2, hits: { count: 3 } },
++    { amount: undefined }, { amountField: 'cost', amount: undefined },
++  ])('does not guess an unsupported source/count/target shape %#', extra => {
++    expect(preview(structured([damage(extra)]))).toMatchObject({ confidence: 'unknown', damage: null });
++  });
++
++  it.each([
++    damage({ cond: { anyCurse: true } }), damage({ range: [4, 6] }), damage(),
++  ])('scans the complete damage list, including later conditional/random/plain operations %#', later => {
++    const result = preview(structured([damage(), later]), { status: { poison: 1 } });
++    expect(result).toMatchObject({ confidence: 'unknown', damage: null });
++    expect(result.reasons[0]).toContain('多个');
++  });
++
++  it('does not fall back to legacy card semantics when structured onPlay suppresses damage', () => {
++    expect(preview({ id: 'starter-attack', type: '武术', dmgType: 'attack', dmg: 0,
++      desc: '攻(+0):造成等同于攻击力的伤害', rules: { triggers: { onPlay: [] } } })).toMatchObject({ confidence: 'unknown', damage: null });
++  });
++
++  it.each([
++    { op: 'execute', what: 'fireball', count: 1 },
++    { op: 'curse', curse: 'poison', stacks: 1, burst: 1 },
++    { op: 'futureDamageOperation' },
++  ])('does not hide an additional damage/unknown operation %#', later => {
++    expect(preview(structured([damage(), later]))).toMatchObject({ confidence: 'unknown', damage: null });
++  });
++
++  it.each([
++    ['plain', {}, {}, 5], ['spell power', {}, { spellPower: 2 }, 7],
++    ['guard', {}, { defense: { guard: true } }, 1], ['shield', {}, { defense: { shield: 2 } }, 3],
++    ['immune', {}, { status: { immune: 1 } }, 0],
++  ])('retains ordinary direct damage: %s', (_label, operation, options, expected) => {
++    expect(preview(structured([damage(operation)]), options)).toMatchObject({ confidence: 'exact', damage: { total: expected } });
++  });
++
++  it('keeps deterministic multi-hit damage and simple AOE target damage', () => {
++    expect(preview(structured([damage({ hitCount: 2 })]))).toMatchObject({ confidence: 'exact', damage: { hits: [5, 5], total: 10 } });
++    expect(preview(structured([damage({ target: 'allEnemies' })]))).toMatchObject({ confidence: 'exact', damage: { total: 5 } });
++  });
++
++  it('labels omitted follow-up effects without discarding the known direct hit', () => {
++    const result = preview(structured([damage(), { op: 'curse', curse: 'poison', stacks: 1, target: 'chosenEnemy' }, { op: 'draw', amount: 1 }]));
++    expect(result).toMatchObject({ confidence: 'exact', damage: { total: 5 } });
++    expect(result.unknownEffects.join('')).toContain('后续触发未计入');
++  });
++
++  it.each(['bleedAmp', 'vsFreezeBonus', 'specialLifecycle'])('does not ignore hitFoe-only context %s', key => {
++    expect(preview(structured(), { context: { modifiers: { [key]: true } } })).toMatchObject({ confidence: 'unknown', damage: null });
++  });
++
++  it('supports only the verified ordinary-battle 奥术弹 identity and direct damage', () => {
++    const result = preview(bolt(), { context: normalHosted, spellPower: 2, playerStatus: { spellUp: 1 }, defense: { shield: 1 } });
++    expect(result).toMatchObject({ confidence: 'exact', cost: 0, damage: { total: 3, hpAfter: 27 } });
++    expect(result.unknownEffects.join('')).toMatch(/普通战抽牌.*初始攻击.*后续触发未计入.*全灭/);
++    expect(preview(bolt({ dmg: 3 }), { context: normalHosted })).toMatchObject({ confidence: 'exact', damage: { total: 3 } });
++  });
++
++  it.each([
++    [() => bolt({ id: 'same-name-bolt' }), normalHosted],
++    [() => bolt({ rules: { version: 1, battle: { hosted: ['wrong-host'] } } }), normalHosted],
++    [() => bolt({ rules: { version: 1, battle: { hosted: ['damage-and-draw', 'extra'] } } }), normalHosted],
++    [() => bolt({ rules: { version: 1, battle: { hosted: ['damage-and-draw'] }, triggers: { onPlay: [damage()] } } }), normalHosted],
++    [() => bolt({ dmg: 0 }), normalHosted],
++    [() => bolt(), { mode: 'boss', hostedExecutionVerified: true }],
++    [() => bolt(), { mode: 'normal' }],
++  ])('rejects unverified/expanded hosted definitions or unsupported mode %#', (card, context) => {
++    expect(preview(card(), { context })).toMatchObject({ confidence: 'unknown', damage: null });
++  });
++
++  it('repeated hosted preview never changes its input or battle RNG', () => {
++    const card = bolt();
++    const before = structuredClone(card);
++    const rng = Random.snapshot();
++    const first = preview(card, { context: normalHosted });
++    for (let i = 0; i < 100; i++) expect(preview(card, { context: normalHosted })).toEqual(first);
++    expect(card).toEqual(before);
++    expect(Random.snapshot()).toEqual(rng);
++  });
++});

@@ -1,0 +1,56 @@
+[
+  {
+    "path": "game/src/agent/agent.js",
+    "sameAsR4": true,
+    "currentSha256": "a999da44a09c584db3082c0ccd9dad4bedfcc03ea56236538a75d965c6c23ffc",
+    "r4Sha256": "a999da44a09c584db3082c0ccd9dad4bedfcc03ea56236538a75d965c6c23ffc"
+  },
+  {
+    "path": "game/src/agent/agent.runner.js",
+    "sameAsR4": true,
+    "currentSha256": "e5b7eb06c51ccc097138bfd3c694838eafbec444e09f435e0e1bb3c5c26ffd6a",
+    "r4Sha256": "e5b7eb06c51ccc097138bfd3c694838eafbec444e09f435e0e1bb3c5c26ffd6a"
+  },
+  {
+    "path": "game/src/agent/agent.policy.js",
+    "sameAsR4": true,
+    "currentSha256": "4c0128ef43e8650fd354bb6c0a5f280fdc04bf252fdbff23f588eec0d4b34dcb",
+    "r4Sha256": "4c0128ef43e8650fd354bb6c0a5f280fdc04bf252fdbff23f588eec0d4b34dcb"
+  },
+  {
+    "path": "game/src/agent/agent.recorder.js",
+    "sameAsR4": true,
+    "currentSha256": "5719f81a13f533e6ec9baa953e6e0171c0bc79a0d31c2e5033e9e44642a5cdc6",
+    "r4Sha256": "5719f81a13f533e6ec9baa953e6e0171c0bc79a0d31c2e5033e9e44642a5cdc6"
+  },
+  {
+    "path": "game/src/agent/agent.llm.js",
+    "sameAsR4": true,
+    "currentSha256": "d067b7f6a0d853fce5819b12622655e05d85ad8651924b4c732b55469f997d20",
+    "r4Sha256": "d067b7f6a0d853fce5819b12622655e05d85ad8651924b4c732b55469f997d20"
+  },
+  {
+    "path": "game/src/ui/comm-feed.js",
+    "sameAsR4": true,
+    "currentSha256": "57de567954cdb050c2c84f5cb6abbca8aa85fe78c33a1fa5e19b1d1b3806e19e",
+    "r4Sha256": "57de567954cdb050c2c84f5cb6abbca8aa85fe78c33a1fa5e19b1d1b3806e19e"
+  },
+  {
+    "path": "game/src/ui/transitions-director.js",
+    "sameAsR4": true,
+    "currentSha256": "4b3eb63e7b8c585dba29c456032e26a19cd9cb404043c397fe1961ef1d297b38",
+    "r4Sha256": "4b3eb63e7b8c585dba29c456032e26a19cd9cb404043c397fe1961ef1d297b38"
+  },
+  {
+    "path": "game/src/cards/card-description-text.js",
+    "sameAsR4": true,
+    "currentSha256": "63e8c460d46c1c6faacf6fc462379c99fa260d719beaa4f0f5b429baf425c641",
+    "r4Sha256": "63e8c460d46c1c6faacf6fc462379c99fa260d719beaa4f0f5b429baf425c641"
+  },
+  {
+    "path": "game/src/run/lab.ending.js",
+    "sameAsR4": true,
+    "currentSha256": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c",
+    "r4Sha256": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c"
+  }
+]

@@ -1,0 +1,16 @@
+- main:
+  - dialog "archive 收获 · 小型物资箱 · 第 1 / 1":
+    - generic: 污染空投箱
+    - heading "领取奖励" [level=3]
+    - article:
+      - button "放大查看冰冻药水":
+        - generic: 冰冻药水
+        - generic: 费用 0
+        - generic: 道具 · 稀有
+        - generic: 对目标附加冰冻，持续 1 回合
+      - generic: 已入背包
+    - complementary "奖励操作":
+      - button "继续探索"
+    - text: 11/16 格
+    - button "整理背包"
+    - status: 1 张已入背包

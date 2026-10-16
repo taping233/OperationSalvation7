@@ -1,0 +1,75 @@
+{
+  "status": "complete-uncommitted",
+  "files": [
+    {
+      "path": "game/src/run/game.session.bag.js",
+      "beforeSha256": "ce39ddbd0ca535fd4b947adbfd768a5aa1fd0144bd41412aec695618eb65d417",
+      "afterSha256": "39a872ae34d6a9888ea0eb166b2793fba4427ffdc4201d2ca7a25c42cf95c6fa"
+    },
+    {
+      "path": "game/src/run/game.session.js",
+      "beforeSha256": "330dec515669731b24cb387f2ab2bacb5e3f05a0cba03b83aa258c4214680bc8",
+      "afterSha256": "d835237129c8357862f26204dc7a0154ebfe2f6864261afdded3eb904caf1068"
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "beforeSha256": "1f2bf43237d46ba763646329e63a6a378f400c565cbcaed98f25ddcdf6a05435",
+      "afterSha256": "ffed546ca3c783b413028184908e4479c516dbfcd6b744d82cf4523040c1a601"
+    },
+    {
+      "path": "tests/run-architecture.test.js",
+      "beforeSha256": "2666aec250bf4f5484043aacbfcde8a9cc3034ed70da4663742c47dd1ec174f3",
+      "afterSha256": "0090442a842eeb328f743026526e9d94c30ebed1b815b161aadb7d637597c509"
+    },
+    {
+      "path": "tests/chest-acquired-gift-cloud.test.js",
+      "beforeSha256": "8130d7e1038430a34e7cfe26607fcb2078121177539fca65ab3b9bb9d917a028",
+      "afterSha256": "2ba80fa7fc8fa3495d5f11508515ca4b10991e77af41fafbecbbb6fe2d5b1e5e"
+    },
+    {
+      "path": "tests/chests-reward-capacity-notice.test.js",
+      "beforeSha256": "6311dec3a0063eb7087d6264b9bb2e2eb4bf7e8ef1a02ee4ddf48721cffa43be",
+      "afterSha256": "4bcfee17adfd9acf1badcacba98dc0f6ff94e4b77321f3837e95c29992c25f78"
+    },
+    {
+      "path": "game/src/core/card-capacity.js",
+      "beforeSha256": null,
+      "afterSha256": "26720e5e5178bbd4a016763adc617e81b9cd095ccaad398631179d42dd1e5b40"
+    },
+    {
+      "path": "tests/reward-capacity-preview.test.js",
+      "beforeSha256": null,
+      "afterSha256": "6e96763e2e0f8c5de012726006b956d48edaa08aee0524af70ee387a537e666d"
+    }
+  ],
+  "delta": "preview-only.patch",
+  "dedicatedTests": 27,
+  "verification": {
+    "targetedFiles": 15,
+    "passed": 151,
+    "failed": 0,
+    "log": "test-after.log",
+    "liveRuleOracleStates": 1215,
+    "eslint": "passed",
+    "syntax": "passed",
+    "diffWhitespace": "passed",
+    "standaloneNodePureImport": "passed"
+  },
+  "unverified": [
+    "Parent built-in browser verification",
+    "Parent opaque consumer fingerprint review/update"
+  ],
+  "unchanged": [
+    "grant and claim actions",
+    "RNG",
+    "save schema",
+    "first notice evidence"
+  ],
+  "knownBoundary": "Current live capacity uses total occupied slots against base capacity for new non-resource cards. Resources are not automatically assigned to dedicated slots; manual pearl-box storage can free bag slots. This batch preserves that behavior.",
+  "guardUpdated": false,
+  "browserStarted": false,
+  "serviceStarted": false,
+  "fullBuildOrSuiteRun": false,
+  "committed": false,
+  "followUpOnly": "Consider a capacity-aware hint to manually store loose resources in an accessible pearl box when base slots are full; check real remaining container capacity. No hint or container behavior changes in this batch."
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "asset-publication",
+    "command": [
+      "node",
+      "/workspace/shared/cloud-iteration-verification-r5-20261016/verify_assets.mjs"
+    ],
+    "startedAt": "2026-10-15T22:28:49.735770+00:00",
+    "endedAt": "2026-10-15T22:28:52.491596+00:00",
+    "exitCode": 0,
+    "durationSeconds": 2.756,
+    "log": "logs/asset-publication.log"
+  },
+  {
+    "name": "build-metrics",
+    "command": [
+      "node",
+      "/workspace/shared/cloud-iteration-verification-r5-20261016/collect_build_metrics.mjs"
+    ],
+    "startedAt": "2026-10-15T22:28:52.492016+00:00",
+    "endedAt": "2026-10-15T22:28:52.865951+00:00",
+    "exitCode": 0,
+    "durationSeconds": 0.374,
+    "log": "logs/build-metrics.log"
+  },
+  {
+    "name": "index-semantics",
+    "command": [
+      "python3",
+      "/workspace/shared/cloud-iteration-verification-r5-20261016/diagnose_index.py"
+    ],
+    "startedAt": "2026-10-15T22:28:52.866971+00:00",
+    "endedAt": "2026-10-15T22:28:52.988023+00:00",
+    "exitCode": 0,
+    "durationSeconds": 0.121,
+    "log": "logs/index-semantics.log"
+  },
+  {
+    "name": "post-integrity",
+    "command": [
+      "python3",
+      "/workspace/shared/cloud-iteration-verification-r5-20261016/inspect_snapshot.py"
+    ],
+    "startedAt": "2026-10-15T22:28:52.988995+00:00",
+    "endedAt": "2026-10-15T22:29:04.028566+00:00",
+    "exitCode": 0,
+    "durationSeconds": 11.04,
+    "log": "integrity-console.json"
+  }
+]

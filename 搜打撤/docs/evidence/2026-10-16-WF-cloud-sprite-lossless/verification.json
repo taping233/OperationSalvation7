@@ -1,0 +1,37 @@
+{
+  "encodedFilesVerified": 263,
+  "allRGBAAndAlphaMatch": true,
+  "catalogs": [
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/animations.json",
+      "sha256": "322055d9c310af548716f4be77005540c29658032ecb38f3fd697b389a1423a8",
+      "uniqueTextureNames": 51,
+      "matchesR2Unchanged": true
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/sprite-v1/animations.json",
+      "sha256": "f1cdc039221e3ec608b3bc8a3255f86e516a63fd77d0650b78e5c8be0c41656b",
+      "uniqueTextureNames": 64,
+      "matchesR2Unchanged": true
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/animations.json",
+      "sha256": "c61fd20e53913c49ad2f537a7559a3fbad77e949715399979a0113ab1b229992",
+      "uniqueTextureNames": 50,
+      "matchesR2Unchanged": true
+    },
+    {
+      "path": "game/assets/portraits/frames/heixiang/sprite-v1/animations.json",
+      "sha256": "e566a1f694f0c14d01af99ce928df4c765e15878ef9ec500f9cf54b3ea86093b",
+      "uniqueTextureNames": 50,
+      "matchesR2Unchanged": true
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/animations.json",
+      "sha256": "c61fd20e53913c49ad2f537a7559a3fbad77e949715399979a0113ab1b229992",
+      "uniqueTextureNames": 50,
+      "matchesR2Unchanged": true
+    }
+  ],
+  "catalogTextureFilesDecoded": 265
+}

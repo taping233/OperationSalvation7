@@ -1,0 +1,31 @@
+{
+  "baseline": "f0e84c5dc3",
+  "verifiedAtUtc": "2026-10-15T20:09:55.774778+00:00",
+  "scope": "R3 doom terminal and exMain.result-pg CSS only; existing entry-supply and cleanup changes preserved",
+  "changedFiles": [
+    "game/css/expedition-rewards.css",
+    "tests/terminal-result-readability.test.js"
+  ],
+  "targetedValidation": {
+    "files": 14,
+    "tests": 94,
+    "status": "passed",
+    "log": "r3-targeted-tests.log"
+  },
+  "eslint": "passed: tests/terminal-result-readability.test.js",
+  "cssParse": "passed: PostCSS via new readability contract",
+  "diffCheck": "passed",
+  "actualImageViewed": "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/36-failure-result-before.png",
+  "browserStatus": "pending main coordinator; real containing-block clipping and fixed-action visibility unverified",
+  "notRun": [
+    "full suite",
+    "build",
+    "browser or service operations",
+    "stage/commit/push"
+  ],
+  "sha256": {
+    "game/css/expedition-rewards.css": "71838208f783f2b9ad446af4f7abce38a4fec0b8e433498407ba0c5af00d8b8c",
+    "tests/terminal-result-readability.test.js": "b9bc653998147b8ebef0781b88bb8d808df0c18aa7966b9a5bdc4fb86a457483",
+    "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/36-failure-result-before.png": "37ad9b484b78fe2b1ebeff5f7097296365573c881aa7370f080907d9ebf203a7"
+  }
+}

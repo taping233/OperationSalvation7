@@ -1,0 +1,7 @@
+{
+  "consumer": "game/src/battle/view/battle.layers.js",
+  "old": "2f59f030cab8537b85fe42d950b885be8a53194a1db1fe77ab22a8626aa982d8",
+  "new": "9e7550ed5c4ed75d54f158430e1cf83fc652e5086c7309a5c6d1b48c78797ab0",
+  "review": "R4 only splits existing escaped intent text into action and condition spans. No asset reference, URL, selector or lookup changes; prior full HEAD diff reviewed in R3.",
+  "scriptSha256": "88e619829308bac4decc3037929c8579a0fe0f60dbd3f9cdc51eca38a60d858f"
+}

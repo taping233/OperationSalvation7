@@ -1,0 +1,11 @@
+--- game/src/core/renderer.js (received baseline)
++++ game/src/core/renderer.js (altar completion)
+@@ -379,7 +379,7 @@
+     const g=nodeGeo(game),z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW),curLi=game.layerIdx;
+     const preview=getExpeditionPreview(game)||game.moveTarget;
+     const selectedKey=preview?mapKey(preview):'';
+-    const contentKey=`${Object.keys(game.visited||{}).length}:${game.entrySupply?.taken?.length||0}`;
++    const contentKey=`${Object.keys(game.visited||{}).length}:${game.entrySupply?.taken?.length||0}:${!!game.altarActivated}:${!!game.altarRewardPending}`;
+     let cached=mapRoadCache.get(g);
+     if(!cached||cached.zoom!==z||cached.viewW!==game.cam.viewW||cached.selectedKey!==selectedKey||cached.contentKey!==contentKey){
+       const roads=[],known=new Map(g.nodes.map(n=>[mapKey(n),n])),done=new Set();

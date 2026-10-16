@@ -17,6 +17,7 @@ import { enterDepartureCut, startDepartureHandoff } from '../ui/departure-transi
 import '../../css/departure-selected.css';
 import { bindDepartureDrag } from './departure.drag.js';
 import { departureStackKey, findDepartureStack } from './base-departure.commands.js';
+import { deployPick, replaceDeployPick } from './departure.selection-state.js';
 import '../../css/roster-reference.css';
   // 基地首页：房间入口、行动难度与出征整备。
   function hubDeployHTML() {
@@ -30,15 +31,14 @@ import '../../css/roster-reference.css';
 
   // ---------- 出征整备：先选择人物，再选择从仓库携带的卡牌 ----------
   // 带入背包的卡牌才能在战斗中使用；「初始攻击」固定携带、不入库也不会出现在这里。
-  let deployPick = null;    // 卡名 => 携带张数（出发准备页的暂存选择）
-  // ESM 导入绑定不可赋值：壳侧重置改经 setter（2026-09-22 拆分理顺点）
+  // 共享选择引用归纯状态模块；本页仍负责规范化和完整整备生命周期。
   let deployPickFresh = false;   // 整备入口刚注入过预设选择（随后打开整备页时保留）
   function setDeployPick(v) {
     departureGeneration++;
-    deployPick = v == null ? null : Object.fromEntries(Object.entries(v).map(([key, count]) => {
+    replaceDeployPick(v == null ? null : Object.fromEntries(Object.entries(v).map(([key, count]) => {
       const stack = findDepartureStack(SDT.Base.data.stash, key);
       return [stack ? departureStackKey(stack) : key, count];
-    }));
+    })));
     deployPickFresh = true; deploymentSlot = SDT.Base.slot; deployCharacter = null; deployStart = null;
   }
   let deployCharacter = null;
@@ -65,7 +65,7 @@ import '../../css/roster-reference.css';
     const current = () => departureGeneration === generation && SDT.Base.slot === slot && deploymentSlot === slot;
     if (deploymentSlot !== SDT.Base.slot) {
       deploymentSlot = SDT.Base.slot;
-      deployPick = null; deployCharacter = null; deployStart = null; deployPickFresh = false;
+      replaceDeployPick(null); deployCharacter = null; deployStart = null; deployPickFresh = false;
     }
     deploySubmitting = false;
     game.state = 'modal';
@@ -74,7 +74,7 @@ import '../../css/roster-reference.css';
     if (deployPickFresh || !deployPick) deployFilters = { rarity: '', type: '', cost: '' };
     // 预设应用链路（applyPicks → openDeparture）刚注入的选择必须保留：
     // 此前无条件清空，应用预设后确认出发只携带初始攻击（09-30 深审 ROOT-01）
-    if (!deployPick) deployPick = {};
+    if (!deployPick) replaceDeployPick({});
     deployPickFresh = false;
     deployJustOpened = true;   // 页面初次打开时播放入场动画
     // 2026-09-07 留言：仓库卡牌不再自动塞进背包——全部留在左侧，由玩家自己拖
@@ -115,7 +115,7 @@ import '../../css/roster-reference.css';
           renderDepartPrep();
           return false;
         }
-        deployPick = null;
+        replaceDeployPick(null);
         deployStart = null;
         SDT.Sound.sfx('deployStart');
         return true;
@@ -261,7 +261,7 @@ import '../../css/roster-reference.css';
         deployHint = '请先预览推荐；若库存或选择有变化，请重新预览。'; renderDepartPrep(); return;
       }
       const before = { ...deployPick };
-      deployPick = { ...deployRecommendation.picks };
+      replaceDeployPick({ ...deployRecommendation.picks });
       deployUndo = { before, after: JSON.stringify(deployPick) };
       deployRecommendation = null;
       deployHint = '已应用推荐，尚未扣仓；可拖回仓库调整或点击「撤销推荐」。'; renderDepartPrep();
@@ -270,7 +270,7 @@ import '../../css/roster-reference.css';
       if (!deployUndo || deployUndo.after !== JSON.stringify(deployPick)) {
         deployHint = '没有可撤销的推荐，或你已继续调整；保留当前选择。'; renderDepartPrep(); return;
       }
-      deployPick = { ...deployUndo.before }; deployUndo = null; deployRecommendation = null;
+      replaceDeployPick({ ...deployUndo.before }); deployUndo = null; deployRecommendation = null;
       deployHint = '已撤销推荐，恢复应用前的携带选择；仓库未扣卡。'; renderDepartPrep();
     });
     bindDepartureFilters(stage, B.data.stash, {

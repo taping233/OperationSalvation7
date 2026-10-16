@@ -1,0 +1,21 @@
+--- game/src/core/node-info.js (received baseline)
++++ game/src/core/node-info.js (altar completion)
+@@ -12,7 +12,7 @@
+   door: ['层间闸门', '前往下一片区域', 'door', 'gold'],
+   emergencyExit: ['紧急撤离', '第三层 · 献祭 3 张卡牌离开', 'exit', 'safe'],
+   extraction: ['终局撤离', '击败首脑后带回战利品', 'exit', 'safe'],
+-  altar: ['祭坛', '选择能力 · 准备决战', 'sparkles', 'mystery'],
++  altar: ['祭坛', '献祭激活 · 选择回赠', 'sparkles', 'mystery'],
+   coin: ['金币', '拾取金币', 'coin', 'gold'],
+   key: ['钥匙', '搜集开门物资', 'key', 'gold'],
+   wood: ['木材', '收集基地升级物资', 'wood', 'warm'],
+@@ -25,6 +25,9 @@
+     game.doorKeys?.has(`${node?.li},${node?.idx}`);
+   const type = door ? 'door' : node?.def?.type;
+   const info = NODE_INFO[type] || ['已知地点', '查看当前已知区域', 'map', 'quiet'];
++  if (type === 'altar' && game.altarActivated && game.altarRewardPending) {
++    return [info[0], '已激活 · 回赠待领取', info[2], info[3]];
++  }
+   return isConsumedMapNode(game, node)
+     ? [`${info[0]} · 已完成`, '已探索 · 内容已消耗，仍可通行', info[2], 'quiet']
+     : info;

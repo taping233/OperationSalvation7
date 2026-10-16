@@ -16,13 +16,25 @@ const alive = () => foes.filter(foe => !foe.dead);
 
 export function createBattleExecPlay({
   warnCardRuleRejection = message => G.log(message, 'warn'),
-  requestBattleRender, findCard, fireConsumeTriggers, effCostOf,
+  requestBattleRender, findCard, findEffectiveCard, prepareExecutionCard, infusionFuelReason, fireConsumeTriggers, effCostOf,
   resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
   takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate, checkElementSealProgress,
   beginDartStrike, sweepDead, finish, processChoice, processDiscoverQueue, queueBattleAction,
   triggersM2,
 }) {
+  function effectiveExecutionCard(uid, card) {
+    return prepareExecutionCard ? prepareExecutionCard(uid, card) : findEffectiveCard?.(uid, card)?.card || card;
+  }
+  function rejectMissingTransform(card) {
+    if (!card?._battleTransformMissing) return false;
+    G.log(`[[icon:cross]] 转换目标「${esc(card._battleTransformMissing)}」缺失，本次未施放`, 'warn');
+    requestBattleRender();
+    return true;
+  }
   function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null) {
+    const submittedCard = card;
+    card = effectiveExecutionCard(uid, card);
+    if (rejectMissingTransform(card)) return false;
     if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
     // M3：infused 打出门（注能 N 后才能打出——felguard/raydragon 式卡面 infuse 门的规则表达）
@@ -61,7 +73,7 @@ export function createBattleExecPlay({
     const receipt = Object.freeze({ battleToken, actionSeq: nextActionSeq() });
     // 返回动作 promise：调用方（如极速符文回环）可 await 出牌完成
     return queueBattleAction(async signal => {
-      const resolved = await execPlay(uid, card, fuelUids, target, freeCost, signal, receipt, paymentUids);
+      const resolved = await execPlay(uid, submittedCard, fuelUids, target, freeCost, signal, receipt, paymentUids);
       throwIfActionCancelled(signal);
       if (resolved && onResolved && G?.battleActive) onResolved();
     }, '出牌动作');
@@ -71,8 +83,23 @@ export function createBattleExecPlay({
     set$activeActionSignal(signal);
     try {
     throwIfActionCancelled(signal);
+    // Every producer, including free selections and automatic releases, uses the
+    // same effective face. Resolve again here before any payment or UID movement.
+    card = effectiveExecutionCard(uid, card);
+    if (rejectMissingTransform(card)) return false;
     // Recheck after queueing: rules may have changed before payment is committed.
     if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
+    // Revalidate before any payment: a queued transform can invalidate chosen fuel.
+    if ((fuelUids || []).some(fuelUid => infusionFuelReason?.(fuelUid))) {
+      G.log('[[icon:cross]] 注能材料已失效，本次打出未扣费', 'warn');
+      requestBattleRender();
+      return false;
+    }
+    if (!freeCost && effCostOf(card, uid) > energy) {
+      G.log(`[[icon:bolt]] 能量不足：【${esc(card.name)}】本次未扣费或消耗手牌`, 'warn');
+      requestBattleRender();
+      return false;
+    }
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
     if (handRequirement) {
       const handUids = new Set(hand);
@@ -120,7 +147,12 @@ export function createBattleExecPlay({
     })();
     const effCost = effCostOf(card, uid);
     if (effCost !== card.cost) G.log(`[[icon:sparkles]] <b>费用变化</b>：【${esc(card.name)}】按 <b>${effCost}</b> 费打出（原 ${card.cost} 费）`, 'sys');
-    if (!freeCost) set$energy(Math.max(0, energy - effCost));   // 队列等待期费用可能上涨，钳 0 防负能量泄漏到结算
+    if (!freeCost && effCost > energy) {
+      G.log(`[[icon:bolt]] 能量不足：【${esc(card.name)}】未打出`, 'warn');
+      requestBattleRender();
+      return false;
+    }
+    if (!freeCost) set$energy(energy - effCost);
     played.push(uid);
     SDT.Sound.sfx('card');
     removeUid(hand, uid);
@@ -137,7 +169,7 @@ export function createBattleExecPlay({
       if (mode === 'boss') grave.push(f);
       const o = findCard(f);
       cardAnims.push({ kind: 'burn', uid: f, name: o ? o.card.name : '' });
-      G.log(`[[icon:flask]] <b>${esc(card.name)}</b> 注能：消耗了【<b>${esc(o ? o.card.name : '?')}</b>】${mode === 'boss' ? '（进墓地，不参与洗回）' : '（战后进消耗区，可在火堆复原）'}`, 'sys');
+      G.log(`[[icon:flask]] <b>${esc(card.name)}</b> 注能：消耗了【<b>${esc(o ? o.card.name : '?')}</b>】${mode === 'boss' ? '（进墓地，不参与洗回）' : '（战后进消耗区；道具、装备不可在火堆复原）'}`, 'sys');
       // 被牺牲的牌并没有被「使用」：不结算主效果，只结算它的「被注能时」条件效果
       if (o) resolveInfusedFuel(o.card, target);
       throwIfActionCancelled(signal);

@@ -1,0 +1,130 @@
+{
+  "head": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "scope": "入城补给呈现与一致文案；其他出征/地图只读评审",
+  "changedFiles": [
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "sha256": "565904481caf8e906184b4536c26ed1f67bf6362f0ab28318e372daf3e34bbe8"
+    },
+    {
+      "path": "game/css/expedition-rewards.css",
+      "sha256": "9c445324d63c11605635508c896d59b31f399402dfdce305568d6eb261657e2b"
+    },
+    {
+      "path": "tests/sys03-altar-restore-txn.test.js",
+      "sha256": "c52e50d4ca516ea32ae2c6fe71ef60eb21671234685896643cafdec716915a40"
+    },
+    {
+      "path": "tests/entry-supply-presentation.test.js",
+      "sha256": "fadfa38e25e6f827f1f680f560bfb899a06571c6d88cf5432c598a81e16b5119"
+    }
+  ],
+  "viewedImages": [
+    {
+      "path": "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/11-depart-character-before.png",
+      "sha256": "723a78d0d0a2fc358251c8b383987e1fa9a4baec34fb989e95cefafcb74737c1"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/12-loadout-before.png",
+      "sha256": "1953fe595f2b251dc7948629fc5b795dbdc655f7c4f044329de48afd6549b0de"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/13-map-before.png",
+      "sha256": "20e115c61800caf7c84d42ba3feb2adb09a1d68d1ce23b9c213d13cb2255e551"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/14-entry-scene-before.png",
+      "sha256": "2aea079a97e71bff57317c72524e84b36a77849e1c00eacb56dc0baaf7ea41bf"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/15-entry-claim-before.png",
+      "sha256": "ce6e245748e444b015b2b97212977837771f7e66b745810a648b023cec909fac"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/arknights-is6-reward.jpg",
+      "sha256": "53c1b5cd488884401d93c52f1fe0d26bf576f87a9d081cb5578954a54bc50b04"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/arknights-is3-event.png",
+      "sha256": "7e4512a4d64f385db9544857aa977a79c3de84711141c8fe8dcb19735e5cc915"
+    },
+    {
+      "path": "docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/arknights-is3-map.png",
+      "sha256": "45d7a3d53895b212a1762283375195565ceec7fed4a633ca413f1a2172da3093"
+    }
+  ],
+  "checks": [
+    {
+      "report": "targeted-tests.json",
+      "success": true,
+      "files": 5,
+      "passed": 62,
+      "failed": 0,
+      "total": 62,
+      "suites": [
+        {
+          "file": "architecture-boundaries.test.js",
+          "status": "passed",
+          "tests": 24
+        },
+        {
+          "file": "entry-supply-presentation.test.js",
+          "status": "passed",
+          "tests": 3
+        },
+        {
+          "file": "map-travel-path.test.js",
+          "status": "passed",
+          "tests": 10
+        },
+        {
+          "file": "node-reward-state.test.js",
+          "status": "passed",
+          "tests": 7
+        },
+        {
+          "file": "sys03-altar-restore-txn.test.js",
+          "status": "passed",
+          "tests": 18
+        }
+      ]
+    },
+    {
+      "report": "adjacent-tests.json",
+      "success": true,
+      "files": 5,
+      "passed": 75,
+      "failed": 0,
+      "total": 75,
+      "suites": [
+        {
+          "file": "contracts.test.js",
+          "status": "passed",
+          "tests": 17
+        },
+        {
+          "file": "departure-stack-lifecycle-review.test.js",
+          "status": "passed",
+          "tests": 18
+        },
+        {
+          "file": "e4-async-entry.test.js",
+          "status": "passed",
+          "tests": 30
+        },
+        {
+          "file": "node-flow-confirmation.test.js",
+          "status": "passed",
+          "tests": 4
+        },
+        {
+          "file": "run-architecture.test.js",
+          "status": "passed",
+          "tests": 6
+        }
+      ]
+    }
+  ],
+  "browser": "未操作，当前5300由主代理统一验收",
+  "build": "未运行"
+}

@@ -1,0 +1,38 @@
+{
+  "head": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "validation": "Isolated ports fixture, 5 tests reproduced pre-fix behavior; no browser or BattleSession restore",
+  "sources": [
+    {
+      "path": "game/src/battle/view/battle.preview.js",
+      "sha256": "1e286209e651934066d10ff71adabe0b198d093ff2343db20b48651a63caace0"
+    },
+    {
+      "path": "game/src/battle/view/battle.hover.js",
+      "sha256": "ec07961f5723135d5d01eaabbc5ecf6f5d5210f2b33b60be4f97f74e8ee6d4f8"
+    },
+    {
+      "path": "game/src/battle/core/battle.core.js",
+      "sha256": "84db1b9f21d83a708417f0deb23882cc9168c102b0d4a15eefe00ebad58c0c63"
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.js",
+      "sha256": "1f28f83dcb5ad23d69bb87698dd019de2063d33cbbace600b068129706c4647e"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "sha256": "bb99d565fc4027d776e0c3e9fb7aea59cdd727400c522219f018309bc32354cd"
+    },
+    {
+      "path": "game/src/battle/view/battle.turn-forecast.js",
+      "sha256": "6ec7031f279033cd2a6ac80d8f6e8604b659a5f34ed9dd132fc0dc064580346e"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m3.js",
+      "sha256": "5c52b0f501f0f618eb3a5a97877679152813137bdd97be32ea85e6bb393ce93b"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m11.js",
+      "sha256": "7bd8a10fde163f5bd54673bf604449659cf3ab50457efb5144056d3938f1cad1"
+    }
+  ]
+}

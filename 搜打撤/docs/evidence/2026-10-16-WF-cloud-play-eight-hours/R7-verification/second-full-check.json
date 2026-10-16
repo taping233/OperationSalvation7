@@ -1,0 +1,27 @@
+{
+  "command": [
+    "npm",
+    "test"
+  ],
+  "configurationAndTimeoutsUnchanged": true,
+  "cwd": "/workspace/shared/cloud-iteration-verification-r7-20261016/snapshot/搜打撤",
+  "durationSeconds": 189.218,
+  "endedAt": "2026-10-16T00:03:49.327246+00:00",
+  "exitCode": 0,
+  "log": "logs/test-second-full.log",
+  "name": "test-second-full",
+  "originalFullLogSha256": "18d0caea6332143aca5c7f343a0a167d3225a83a91830661fea6afe66cf59fdb",
+  "originalFullLogUnchanged": true,
+  "parentContext": "Static BOSS R1 UI, no browser actions/restart/other checks for the duration",
+  "results": {
+    "failed": 0,
+    "filesFailed": 0,
+    "filesPassed": 492,
+    "filesTotal": 492,
+    "passed": 4695,
+    "skipped": 2,
+    "total": 4697,
+    "unhandled": 0
+  },
+  "startedAt": "2026-10-16T00:00:40.108849+00:00"
+}

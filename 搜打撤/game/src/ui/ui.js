@@ -11,6 +11,26 @@ import { hudMethods } from './hud.js';
   const SDT = window.SDT;
   const $ = (id) => document.getElementById(id);
 
+function releasePhotoSource(request, cancel = false) {
+  if (!request) return;
+  const image = request.image;
+  request.image = request.zoom = request.visibleImage = null;
+  if (!image) return;
+  image.onload = image.onerror = null;
+  // Best effort: Image.decode itself has no abort API. Clear only the probe,
+  // never the thumbnail already displayed by the dialog.
+  if (cancel) image.src = '';
+}
+
+function revealPhotoSource(request) {
+  const { image, zoom, visibleImage } = request;
+  if (image && zoom?.isConnected && image.naturalHeight > 0) {
+    zoom.style.setProperty('--cz-photo-ratio', String(image.naturalWidth / image.naturalHeight));
+    visibleImage.src = image.src;
+  }
+  releasePhotoSource(request);
+}
+
 /* ui.js —— UI 壳（09-25 拆分）：保留引导（init/act）、卡牌放大特写 showCardZoom
  * （tests/premium-ui-pages.test.js 对本文件源文本钉死，实现不得外移）与状态字段；
  * 弹窗容器/演出过渡/HUD 三块行为拆入 overlay.js / cinematics.js / hud.js 的方法包，
@@ -245,6 +265,7 @@ import { hudMethods } from './hud.js';
       let negTimer = null;
       let enterTimer = null;
       let photoSourceTimer = null;
+      let photoSourceRequest = null;
       let closeTimer = null;
       let finishClose = null;
       let closeTransitionEnd = null;
@@ -295,6 +316,8 @@ import { hudMethods } from './hud.js';
       }
       const close = (immediate = false) => {
         document.body.classList.remove('zoom-open');   // 战斗层动画恢复（见上方 zoom-open 挂载处）
+        releasePhotoSource(photoSourceRequest, true);
+        photoSourceRequest = null;
         if (closed) {
           if (immediate && !removed) {
             clearTimeout(enterTimer);
@@ -450,17 +473,16 @@ import { hudMethods } from './hud.js';
           const visibleImage = el.querySelector('.cz-photo-image img');
           if (!visibleImage || !el.isConnected || closed || visibleImage.src === new URL(photoFullSrc, document.baseURI).href) return;
           const fullImage = new Image();
+          const request = { image: fullImage, zoom: el, visibleImage };
+          photoSourceRequest = request;
           fullImage.decoding = 'async';
           fullImage.src = photoFullSrc;
           const ready = typeof fullImage.decode === 'function'
             ? fullImage.decode().catch(() => null)
             : new Promise(resolve => { fullImage.onload = resolve; fullImage.onerror = resolve; });
-          ready.then(() => {
-            if (el.isConnected && !closed && fullImage.naturalHeight > 0) {
-              el.style.setProperty('--cz-photo-ratio', String(fullImage.naturalWidth / fullImage.naturalHeight));
-              visibleImage.src = fullImage.src;
-            }
-          });
+          // Bind only the clearable record; a slow decode must not keep a closed
+          // dialog and its source/notes alive through this completion callback.
+          ready.then(revealPhotoSource.bind(null, request));
         }, reducedMotion ? 0 : photoEnterMs);
       }
       // 大图显式解码，防 IAB 合成黑窗（同池页首屏/战斗手牌修法；2026-09-20 走查实锤特写黑窗）

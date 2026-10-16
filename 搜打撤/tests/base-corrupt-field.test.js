@@ -1,7 +1,7 @@
 // 基地档「JSON 合法但字段类型损坏」兜底（2026-09-24 F1）：
 // adopt() 对容器字段回落默认值并 console.warn 留痕；openSlotPicker 单档异常不卡整页。
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { createGameMenuController } from '../game/src/ui/game.menu.js';
+import { createGameMenuController } from './helpers/menu-controller.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons ||= { img: () => '' };

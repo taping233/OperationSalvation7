@@ -50,18 +50,6 @@ body.interface-motion #overlay#overlay#overlay:has(#hubMain.base-camp):not([data
 #overlay[data-camp-entry] #hubMain.base-camp .hub-tab:nth-of-type(4) { animation-delay: .32s; }
 #overlay[data-camp-entry] #hubMain.base-camp .hub-tab:nth-of-type(5) { animation-delay: .36s; }
 #overlay[data-camp-entry] #hubMain.base-camp .hub-tab:nth-of-type(6) { animation-delay: .4s; }
-#overlay[data-camp-entry] #hubMain.base-camp .camp-depart-figure {
-  transform-origin: 50% 65%;
-  animation: campPortraitSettle .64s cubic-bezier(.16,1,.3,1) .2s backwards;
-}
-#overlay[data-camp-entry] #hubMain.base-camp .camp-depart-art figcaption {
-  animation: campCopySettle .48s cubic-bezier(.16,1,.3,1) .3s backwards;
-}
-#overlay[data-camp-entry] #hubMain.base-camp .camp-depart-dossier > * {
-  animation: campCopySettle .5s cubic-bezier(.16,1,.3,1) .32s backwards;
-}
-#overlay[data-camp-entry] #hubMain.base-camp .deploy-mission-target { animation-delay: .34s; }
-#overlay[data-camp-entry] #hubMain.base-camp .deploy-mode-dock { animation-delay: .4s; }
 #overlay[data-camp-entry] #hubMain.base-camp .camp-depart-readiness { animation-delay: .44s; }
 #overlay[data-camp-entry] #hubMain.base-camp .camp-depart-actions { animation-delay: .48s; }
 /* 装饰副本仅存在 980ms；档案号从原位置移到基地标识，所有副本无交互。 */

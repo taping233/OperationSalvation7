@@ -1,0 +1,115 @@
+{
+  "buildOutputBytes": 125385273,
+  "buildOutputFileCount": 1292,
+  "buildOutputManifestSha256": "e0621ad8ff3799d2294e5ee70fabda19c9a57a5c42a34f2798a80350d03af4c3",
+  "checkedAt": "2026-10-15T21:42:36.693838+00:00",
+  "dependencyInputChanges": [],
+  "dependencySharedInodes": [],
+  "gitMetadataInputChanges": [
+    "index"
+  ],
+  "gitSharedInodes": [],
+  "snapshotInputChanges": [
+    {
+      "afterSha256": "e6e4b8f07be9947d7d9baf29d2d4a8418084198bcc670f4ee3153c68451c7811",
+      "beforeSha256": "cd68f57c532d30d610845bfbd7b756111d3ab329c051db1c46c5de341bdc47cf",
+      "path": "搜打撤/game/src/generated/art-manifest.js"
+    },
+    {
+      "afterSha256": "7964f8e4838c629ec8b62fb1fe3fa1eb7f9628cc68725642e5c4380889c3cd1a",
+      "beforeSha256": "e8ac6a5757807a4835f16bf53b3705866f732ba5b07bdce1b146041eddae6343",
+      "path": "搜打撤/game/src/generated/thumb-manifest.js"
+    }
+  ],
+  "sourceAddedPathsSinceFreeze": [
+    {
+      "bytes": 10062,
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/run-data-ui-export-213829.json",
+      "sha256": "6a423b217fab4e98699bd5be1509414ae41de87fe5070da6b37ae6bbf9a37779"
+    },
+    {
+      "bytes": 106073,
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/screenshots/53-xingyue-cutout-reference-light.png",
+      "sha256": "eeb080c0c04e87bde4d1317ef50e1b5cd826c531aee940d31941ee69e2ffa251"
+    },
+    {
+      "bytes": 1756,
+      "path": "搜打撤/docs/evidence/2026-10-16-battle-round-record-audit/final-round-test.log",
+      "sha256": "1167815af022d8b0b79b2b83caf818c9f2b5e06096572a6818837cbb094eabf6"
+    },
+    {
+      "bytes": 1581,
+      "path": "搜打撤/docs/evidence/2026-10-16-battle-round-record-audit/green-test.log",
+      "sha256": "c1828bca5c58c8a7f29d4662b20d8362f460a9854c9daf820a519772f3e76eaa"
+    },
+    {
+      "bytes": 602,
+      "path": "搜打撤/docs/evidence/2026-10-16-battle-round-record-audit/implementation.patch",
+      "sha256": "6cc82174590e2a373aa81ba79685956b0d65a73c52547ab78751ea2058d47d3f"
+    },
+    {
+      "bytes": 321,
+      "path": "搜打撤/docs/evidence/2026-10-16-battle-round-record-audit/patch-fingerprint.json",
+      "sha256": "ca77a2967142a20e47eae164551e43c238550abd70b6750737578ee6080346d5"
+    },
+    {
+      "bytes": 6018,
+      "path": "搜打撤/docs/evidence/2026-10-16-battle-round-record-audit/red-test.log",
+      "sha256": "de3379eac0d59a64912de9a363cfbfc7cfdfcb78a361cc6795f966bbfae5620b"
+    },
+    {
+      "bytes": 630,
+      "path": "搜打撤/docs/evidence/2026-10-16-battle-round-record-audit/reproduce.mjs",
+      "sha256": "fd60ca5b429a4719432b59abe7ad6cad23f98c1ec3076594e4a873cb4b9c71c5"
+    },
+    {
+      "bytes": 0,
+      "path": "搜打撤/docs/evidence/2026-10-16-battle-round-record-audit/reproduction.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 75,
+      "path": "搜打撤/docs/evidence/2026-10-16-battle-round-record-audit/static-check.log",
+      "sha256": "c2804dda725b3ed2d211b53e0e94e43a6f347cba2f67e12492b0ff4d49ced759"
+    },
+    {
+      "bytes": 529,
+      "path": "搜打撤/docs/evidence/2026-10-16-battle-round-record-audit/targeted-test.log",
+      "sha256": "c379aaaf707a10cd0c3732d14508ce35650e3a0081697ffc4f512bdfed8dc759"
+    },
+    {
+      "bytes": 195,
+      "path": "搜打撤/docs/evidence/2026-10-16-sacrifice-modal-layout/before.sha256",
+      "sha256": "d93a25679400c1dd4f87be6a54af20aecb8239794d4dffeae866435346c0f5e5"
+    },
+    {
+      "bytes": 5345,
+      "path": "搜打撤/tests/battle-round-recording.test.js",
+      "sha256": "9bfb0471312ec06a46134d73f8faf618d729f19f946ff650228f63de93183b5f"
+    }
+  ],
+  "sourceChangesSinceFreeze": [
+    {
+      "afterSha256": "f99c037f32801fc42693fc6607e7a97800911a3c6fc6c5ee838365e7574828b4",
+      "beforeSha256": "5d1a1569627831087a9d0adf103ac62f58602293b256f0dac37222ffca0fc710",
+      "path": "搜打撤/docs/PARALLEL-REGISTRY.md"
+    },
+    {
+      "afterSha256": "61c943fad40a53ee15fbe3249f1e94df70a441a604c25098c32caea1e6cdf239",
+      "beforeSha256": "b53a0d871d9c175370f65e71fd7bfcf341d9df9f864c14f1facd4c72b9de89b6",
+      "path": "搜打撤/docs/evidence/2026-10-16-WF-cloud-play-eight-hours/PLAYLOG.md"
+    },
+    {
+      "afterSha256": "403b50e7d7211e5741d097818eeabe5d45e9c24ed34eb2e1d38cd99420058bd3",
+      "beforeSha256": "71838208f783f2b9ad446af4f7abce38a4fec0b8e433498407ba0c5af00d8b8c",
+      "path": "搜打撤/game/css/expedition-rewards.css"
+    },
+    {
+      "afterSha256": "362970eeec579a9779cc35c690f6ea1131f48e5ef82bfe5e3ff396d8f34104ce",
+      "beforeSha256": "942f93e33d26ad394e9d07599702f89eb43ec7b7592acf7659c5e0f768e7d309",
+      "path": "搜打撤/game/src/battle/core/battle.lifecycle.js"
+    }
+  ],
+  "sourceSnapshotSharedInodes": [],
+  "unexpectedSnapshotInputChanges": []
+}

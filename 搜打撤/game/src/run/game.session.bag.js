@@ -6,13 +6,13 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { game } from './game.session.kernel.js';
 import { modeCfg } from './game.session.modes.js';
+import { canAcceptCardAtCapacity, PEARL_BOX_ID, PEARL_BOX_SLOTS, stackCapOf } from '../core/card-capacity.js';
+export { PEARL_BOX_ID, stackCapOf } from '../core/card-capacity.js';
 
 // ---------- 背包容量（基地扩建后生效）----------
 // 物资与卡牌混占背包格：同名物资/同名卡牌各堆叠 1 格；
 // 安全格独立计容（基地用口粮升级），消耗区不占格（无限容量）。
 // 珍珠盒（Q5 老板定向）：每持有 1 个额外扩容 9 格，扩出来的格子只能放资源卡。
-export const PEARL_BOX_ID = 'tt2-pearlbox';
-const PEARL_BOX_SLOTS = 9;
 const pearlBonus = () => (game.ownedCards || []).filter(o => o.card && o.card.id === PEARL_BOX_ID).length * PEARL_BOX_SLOTS;
 export const bagCap = () => SDT.Base.bagCap() + pearlBonus();
 export function bagCapacityText() {
@@ -20,20 +20,12 @@ export function bagCapacityText() {
   return extra ? `通用格 ${Math.min(used, base)}/${base} · 资源专用格 ${Math.max(0, used - base)}/${extra}` : `${used}/${base} 格`;
 }
 // 背包能否再收一张卡：基础格内任意类型；珍珠盒扩出来的格子仅资源卡（卡面「容纳所有类型的资源卡牌」）
-export const canAcceptCard = (card) => {
-  if (!card) return false;
-  const used = usedSlots();
-  if (used < SDT.Base.bagCap()) return true;
-  return card.type === '资源' && used < bagCap();
-};
+export const canAcceptCard = card => !!card && canAcceptCardAtCapacity(card, {
+  usedSlots:usedSlots(), baseCap:SDT.Base.bagCap(), totalCap:bagCap(),
+});
 export const safeCap = () => SDT.Base.safeCap();
 // ---------- 背包叠放上限（2026-09-09 需求 #7）----------
 // 同名卡牌最多 3 张占 1 格（「初始攻击」与「火球」可叠 5 张），第 4 张起另占一格。
-export const stackCapOf = (card) => {
-  const n = card && card.name;
-  if (n === '初始攻击' || n === '火球') return 5;
-  return 3;
-};
 export function cardStacks(safe) {
   // 先按卡名聚合，再按叠放上限切分成多格（同名可能占多格，#7）
   // 2026-09-10 留言 #29：存入珍珠盒的资源卡（o.stored）不占背包格——从堆叠统计里排除，

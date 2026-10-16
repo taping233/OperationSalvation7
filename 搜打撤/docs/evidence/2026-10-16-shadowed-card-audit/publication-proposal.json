@@ -1,0 +1,143 @@
+{
+  "status": "proposal-only-not-implemented",
+  "category": "shadowed-card-art",
+  "fileCount": 30,
+  "assetBytes": 1291352,
+  "candidates": [
+    {
+      "path": "cards/spell-tt8-curse1.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse1.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/spell-tt8-curse2.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse2.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/spell-tt8-curse3.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse3.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/spell-tt8-curse4.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse4.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/equip-tt3-staff.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-staff.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/equip-tt3-fate-wheel.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-fate-wheel.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/equip-tt3-wolf-bow.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-wolf-bow.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/equip-tt3-twinwater-mail.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-twinwater-mail.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/equip-tt3-grass-armor.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-grass-armor.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/equip-tt3-blooddrinker.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-blooddrinker.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/equip-tt8-demonslay.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-demonslay.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/equip-tt8-archdemon.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-archdemon.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/equip-tt8-heavensword.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-heavensword.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/equip-tt7-arcanescroll.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/equip-tt7-arcanescroll.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "cards/equip-tt12-raygun.webp",
+      "category": "shadowed-card-art"
+    },
+    {
+      "path": "thumbs/cards/equip-tt12-raygun.webp",
+      "category": "shadowed-card-art"
+    }
+  ],
+  "consumerFingerprints": {
+    "game/src/core/art.js": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1",
+    "game/src/core/data-loader.js": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be",
+    "game/data/art-mapping.json": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99"
+  },
+  "retainNonPrimary": [
+    "cards/hero-forbidden.webp",
+    "thumbs/cards/hero-forbidden.webp",
+    "cards/spell-tt3-fireball.webp",
+    "thumbs/cards/spell-tt3-fireball.webp",
+    "cards/martial-tt3-skewer.webp",
+    "thumbs/cards/martial-tt3-skewer.webp",
+    "cards/equip-tt2-frostsword.webp",
+    "thumbs/cards/equip-tt2-frostsword.webp"
+  ]
+}

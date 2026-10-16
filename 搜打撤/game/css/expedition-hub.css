@@ -2,46 +2,15 @@
 /* 2026-09-25 对齐修复：与 .hub-classes/.hub-ach 页签统一 max-width + 居中，避免页签内容对齐行为不一致 */
 #overlay .hub-deploy .hub-page { max-width:1420px; margin:0 auto; width:100%; }
 #overlay #hubMain .hub-head h2 { display:block; font-size:clamp(16px,calc(var(--game-layout-width, 100vw) * 0.016),21px); }
-#overlay .hub-deploy .deploy-brief { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(320px,.72fr); gap:16px; }
-#overlay .deploy-mission { position:relative; isolation:isolate; overflow:hidden; min-height:clamp(520px, calc(var(--game-layout-height, 100vh) * 0.58), 900px); display:flex; flex-direction:column; justify-content:space-between; border:1px solid rgba(209,194,144,.28); border-radius:0; background:#131416 url('../assets/scenes/ui-loop-0925/expedition-banner.webp') center/cover no-repeat; box-shadow:0 18px 42px rgba(0,0,0,.28); }
 /* 二波 C 组：hero 统一暗角（径向渐晕）+底部渐变融入底色；banner 中心左已留白，渐晕只压四缘 */
-#overlay .deploy-mission::after { content:''; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(115% 92% at 36% 38%, transparent 46%, rgba(8,9,9,.4) 76%, rgba(7,7,8,.78) 100%), linear-gradient(180deg, transparent 58%, rgba(8,9,9,.85) 100%); }
-#overlay .deploy-mission-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(11,12,13,.18),rgba(10,11,12,.56) 46%,rgba(8,9,9,.94)); }
-#overlay .deploy-mission-copy { padding:clamp(24px,calc(var(--game-layout-width, 100vw) * 0.03),38px); max-width:600px; }
-#overlay .deploy-mission-copy .eyebrow, #overlay .deploy-readiness-panel .eyebrow { color:#e2ce8d; letter-spacing:2.2px; font-size:10px; }
-#overlay .deploy-mission-copy h3 { margin:12px 0 10px; font-size:clamp(28px,calc(var(--game-layout-width, 100vw) * 0.038),49px); line-height:1.08; color:#ecebe9; letter-spacing:1px; }
-#overlay .deploy-mission-lead { max-width:470px; margin:0 0 26px; color:#cacbcc; font-size:14px; line-height:1.8; }
-.deploy-mission-target { display:grid; gap:4px; padding:11px 14px; max-width:310px; border-left:2px solid #e2c66b; border-radius:0; background:rgba(11,12,13,.6); }
-.deploy-mission-target span { color:#b6b9bb; font-size:11px; letter-spacing:1px; }
-.deploy-mission-target b { color:#ffe9a1; font-size:20px; }
-.deploy-mission-target small { color:#d3d3d4; font-size:11px; }
-#overlay .deploy-primary { display:inline-flex; align-items:center; justify-content:space-between; gap:12px; width:min(100%,320px); margin-top:22px; padding:12px 15px; border:1px solid #edd072; border-radius:0; background:linear-gradient(135deg,#d5b64e,#967c3f); color:#17150f; font-weight:800; font-size:15px; box-shadow:0 8px 22px rgba(0,0,0,.28); cursor:pointer; }
-#overlay .deploy-primary:hover { filter:brightness(1.1); transform:translateY(-1px); }
 /* 长文案折行收口（研究所锁定态键）：极窄容器下允许换行并收紧行距 */
 #btnNest { white-space:normal; line-height:1.35; }
 /* 龙巢（09-20 高级感改造批1）：未解锁态不再内联暗紫底+金底深字（深字压暗底不可读），
    改 class 双态。二波 C 组语义收敛：出发整备=primary 金实心；
    龙巢=secondary 深蓝描边金 hover（不再与主行动抢金）。
    （W2-02 起 #btnNest 仅在解锁后渲染，nest-locked 锁态样式已随重设计删除） */
-#overlay #btnNest.deploy-primary { border-color:rgba(170,174,177,.32); background:linear-gradient(135deg,rgba(45,48,52,.92),rgba(23,25,26,.94)); color:#f1de9f; box-shadow:none; }
-#overlay #btnNest.deploy-primary:hover { filter:none; transform:translateY(-1px); border-color:var(--gold-main); color:var(--gold-bright); box-shadow:0 0 10px rgba(230,203,118,.16); }
-#overlay #btnNest.deploy-primary .ic { filter:none; }
 /* 金底上的位图图标压成深色剪影（09-20 批1）：exit/lock 原图为青蓝调，直接放金底显脏 */
-#overlay .deploy-primary .ic { filter:brightness(.45) saturate(.9); }
-.deploy-primary span { font-size:21px; line-height:1; }
-.deploy-mode-dock { position:relative; z-index:2; padding:14px clamp(16px,calc(var(--game-layout-width, 100vw) * 0.024),28px) 16px; background:rgba(10,11,11,.82); border-top:1px solid rgba(219,205,160,.22); }
 .dock-label { display:block; margin-bottom:10px; color:#e0d6b6; font-size:11px; letter-spacing:1.5px; }
-#overlay .deploy-mode-dock .mode-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
-#overlay .deploy-mode-dock .mode-card { display:grid; grid-template-columns:32px minmax(0,1fr); grid-template-areas:"icon info" "ckpt ckpt"; align-items:start; min-height:102px; padding:10px; border:1px solid rgba(183,187,189,.24); border-radius:0; background:rgba(20,22,23,.78); color:#cdcece; text-align:left; cursor:pointer; }
-#overlay .deploy-mode-dock .mode-card.on { border-color:#e7c969; background:rgba(76,63,33,.68); color:#e7e5dd; box-shadow:inset 0 0 0 1px rgba(238,209,113,.22); }
-#overlay .deploy-mode-dock .mode-card:hover { border-color:rgba(230,203,118,.72); }
-#overlay .deploy-mode-dock .mode-ico { grid-area:icon; width:32px; min-width:32px; height:32px; margin:2px 7px 0 0; font-size:18px; border-radius:0; border-color:rgba(170,174,177,.25); background:radial-gradient(ellipse at 50% 30%,#1f2124,#131416 85%); }
-#overlay .deploy-mode-dock .mode-info { grid-area:info; display:flex; flex-direction:column; gap:3px; min-width:0; }
-#overlay .deploy-mode-dock .mode-info b { font-size:12px; }
-#overlay .deploy-mode-dock .mode-info span, #overlay .deploy-mode-dock .mode-ckpt { color:#b4b6b7; font-size:10.5px; line-height:1.35; }
-#overlay .deploy-mode-dock .mode-ckpt { grid-area:ckpt; display:block; margin-top:8px; color:#e0ca83; white-space:normal; }
-
-#overlay .deploy-readiness-panel { display:flex; flex-direction:column; gap:12px; padding:clamp(20px,calc(var(--game-layout-width, 100vw) * 0.024),28px); border:1px solid rgba(188,193,196,.22); border-radius:0; background:linear-gradient(165deg,rgba(24,26,28,.96),rgba(14,15,16,.96)); box-shadow:0 18px 42px rgba(0,0,0,.2); }
 .readiness-head { display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px; padding-bottom:14px; border-bottom:1px solid rgba(204,205,206,.16); }
 .readiness-head > b { flex:1; color:#e4e3df; font-size:19px; }
 .brief-status { padding:4px 8px; border:1px solid rgba(163,173,180,.42); border-radius:999px; color:#b6e2c3; font-size:10px; }
@@ -49,188 +18,55 @@
 .brief-mode span { color:#9ea4a7; font-size:10px; letter-spacing:1px; }
 .brief-mode b { color:#ffe9a0; font-size:21px; }
 .brief-mode small { color:#c3c5c6; font-size:11px; line-height:1.5; }
-#overlay .deploy-readiness-panel .readiness-list { display:grid; gap:4px; }
-#overlay .deploy-readiness-panel .readiness-item { display:grid; grid-template-columns:25px 1fr; gap:8px; align-items:center; padding:12px 0; border-bottom:1px solid rgba(204,205,206,.1); color:#a7abad; font-size:11px; }
-#overlay .deploy-readiness-panel .readiness-item i { grid-row:span 2; color:#dec46d; font-style:normal; font-size:10px; }
-#overlay .deploy-readiness-panel .readiness-item span { color:#b9bcbe; }
-#overlay .deploy-readiness-panel .readiness-item b { color:#ebeced; font-size:12px; font-weight:600; }
 .brief-pet { display:flex; align-items:center; gap:11px; padding:12px 0; }
 .brief-pet-icon { width:34px; height:34px; display:grid; place-items:center; border:1px solid rgba(224,196,105,.5); border-radius:50%; color:#fbdf82; }
 .brief-pet > span:nth-child(2) { display:grid; gap:3px; }
 .brief-pet small { color:#9ea4a7; font-size:10px; }
 .brief-pet b { color:#e6e5e2; font-size:13px; }
 .brief-pet em { margin-left:auto; max-width:140px; color:#b2b5b7; font-size:10px; line-height:1.45; text-align:right; font-style:normal; }
-#overlay .deploy-readiness-panel .deploy-tip { margin:auto 0 0; padding-top:14px; border-top:1px solid rgba(204,205,206,.13); color:#a6aaac; font-size:11px; line-height:1.65; }
 #overlay .hub-deploy .gate-strip { margin-top:16px; }
-@media (prefers-reduced-motion:reduce) { #overlay .deploy-primary:hover { transform:none; } }
+@media (prefers-reduced-motion:reduce) { }
 
 /* 人物档案与收藏档案：与基地的深青金属骨架共用视觉语言。 */
 #overlay .hub-classes .hub-page,
 #overlay .hub-ach .hub-page { max-width:1420px; margin:0 auto; width:100%; }
 .section-kicker { display:block; margin-bottom:8px; font:700 10px/1.2 "Cascadia Code",monospace; letter-spacing:.2em; }
-.class-command,
-.collection-command { display:flex; align-items:flex-end; justify-content:space-between; gap:28px; margin-bottom:16px; padding:20px 24px; border:1px solid rgba(195,199,202,.2); border-left:3px solid #e2c76c; background:linear-gradient(110deg,rgba(28,30,32,.96),rgba(16,17,18,.96)); box-shadow:0 14px 30px rgba(0,0,0,.18); }
-.class-command-copy,
-.collection-command-copy { max-width:670px; }
-.class-command h3,
-.collection-command h3 { margin:0 0 7px; color:#e7e6e3; font:400 clamp(25px,calc(var(--game-layout-width, 100vw) * 0.024),36px)/1.1 var(--font-display); letter-spacing:5px; }
-.class-command p,
-.collection-command p { margin:0; color:#b6b9bb; font-size:13px; line-height:1.7; }
-.class-command-stats,
-.collection-command-stats { display:flex; gap:8px; flex:0 0 auto; }
-.class-command-stats > span,
-.collection-command-stats > span { min-width:94px; padding:10px 12px; border:1px solid rgba(195,199,201,.16); background:rgba(10,11,11,.45); }
-.class-command-stats small,
-.collection-command-stats small { display:block; margin-bottom:4px; color:#9a9ea1; font-size:10px; letter-spacing:1px; }
-.class-command-stats b,
-.collection-command-stats b { color:#f4dd94; font:700 19px/1 "Cascadia Code",monospace; }
-
-.class-dossier-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
-.class-dossier { position:relative; isolation:isolate; min-height:clamp(390px,calc(var(--game-layout-height, 100vh) * 0.5),600px); overflow:hidden; border:1px solid rgba(172,178,182,.25); background:#141618; box-shadow:0 16px 30px rgba(0,0,0,.2); }
-.class-dossier.trained { border-color:rgba(224,197,106,.42); }
-.class-dossier-art { position:absolute; inset:0; z-index:-3; }
-.class-dossier-art .art,
-.class-dossier-art .art-figure-wrap { width:100%; height:100%; }
-.class-dossier-art img { width:100%; height:100%; object-fit:cover; object-position:center 22%; filter:saturate(.76) contrast(1.03); transition:transform .32s ease,filter .32s ease; }
-.class-dossier-shade { position:absolute; inset:0; z-index:-2; background:linear-gradient(180deg,rgba(11,12,13,.05) 25%,rgba(11,11,12,.48) 55%,rgba(9,9,10,.97) 91%); }
-.class-dossier-index { position:absolute; top:13px; right:13px; color:rgba(242,227,175,.72); font:700 11px "Cascadia Code",monospace; letter-spacing:2px; }
-.class-dossier-copy { position:absolute; left:0; right:0; bottom:0; padding:20px 18px 16px; }
-.class-dossier-kicker { color:#e3c871; font:700 9px "Cascadia Code",monospace; letter-spacing:.18em; }
-.class-dossier h3 { margin:5px 0 7px; color:#ecebe9; font:400 clamp(20px,calc(var(--game-layout-width, 100vw) * 0.018000000000000002),29px)/1.1 var(--font-display); letter-spacing:5px; }
-.class-dossier p { min-height:3em; margin:0 0 12px; color:#bcbec0; font-size:11px; line-height:1.55; }
-.class-dossier-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; color:#c8c9ca; font-size:11px; }
-.class-dossier-meta b { color:#f4dc8c; font:700 12px "Cascadia Code",monospace; }
-.class-dossier .xp-bar { height:4px; margin-top:9px; background:rgba(224,225,226,.12); }
-.class-dossier .xp-bar i { background:linear-gradient(90deg,#9ba1a5,#eccf70); }
-.class-dossier .xp-txt { color:#c3c5c7; font-size:10px; }
+.class-command { display:flex; align-items:flex-end; justify-content:space-between; gap:28px; margin-bottom:16px; padding:20px 24px; border:1px solid rgba(195,199,202,.2); border-left:3px solid #e2c76c; background:linear-gradient(110deg,rgba(28,30,32,.96),rgba(16,17,18,.96)); box-shadow:0 14px 30px rgba(0,0,0,.18); }
+.class-command-copy { max-width:670px; }
+.class-command h3 { margin:0 0 7px; color:#e7e6e3; font:400 clamp(25px,calc(var(--game-layout-width, 100vw) * 0.024),36px)/1.1 var(--font-display); letter-spacing:5px; }
+.class-command p { margin:0; color:#b6b9bb; font-size:13px; line-height:1.7; }
+.class-command-stats { display:flex; gap:8px; flex:0 0 auto; }
+.class-command-stats > span { min-width:94px; padding:10px 12px; border:1px solid rgba(195,199,201,.16); background:rgba(10,11,11,.45); }
+.class-command-stats small { display:block; margin-bottom:4px; color:#9a9ea1; font-size:10px; letter-spacing:1px; }
+.class-command-stats b { color:#f4dd94; font:700 19px/1 "Cascadia Code",monospace; }
 .class-skins { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px; margin-top:8px; }
 .class-skins .mini-btn { min-width:0; padding:7px 6px; font-size:10px; letter-spacing:0; white-space:nowrap; }
-.class-dossier:hover .class-dossier-art img { transform:scale(1.025); filter:saturate(.92) contrast(1.04); }
 
 .collection-tabs { position:sticky; top:0; z-index:3; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-bottom:12px; padding:8px; border:1px solid rgba(184,189,192,.18); background:rgba(14,15,16,.94); backdrop-filter:blur(12px); }
 .collection-tabs button { min-height:44px; border:1px solid transparent; background:transparent; color:#a7aaad; font:700 13px var(--font-ui); letter-spacing:1px; cursor:pointer; }
 .collection-tabs button .ic { width:16px; height:16px; vertical-align:-.2em; }
 .collection-tabs button:hover { color:#ebebeb; border-color:rgba(186,191,194,.24); }
 .collection-tabs button.on { border-color:rgba(229,201,110,.55); background:linear-gradient(180deg,rgba(72,62,38,.72),rgba(38,35,29,.72)); color:#fbe6a2; box-shadow:inset 0 1px rgba(255,255,255,.08); }
-#overlay .hub-ach .collection-panel,
-#overlay .hub-ach .coll-room { padding:18px 20px; border:1px solid rgba(188,193,196,.2); border-radius:0; background:linear-gradient(160deg,rgba(27,29,31,.96),rgba(16,18,19,.97)); color:#e0e1e2; }
-#overlay .hub-ach .collection-panel > h3,
-#overlay .hub-ach .coll-room > h3 { color:#e5e3e0; font-size:16px; letter-spacing:2px; }
-#overlay .hub-ach .ach-row,
-#overlay .hub-ach .coll-ms { border-color:rgba(183,188,192,.16); border-radius:0; background:rgba(11,12,13,.42); }
-#overlay .hub-ach .ach-row.done,
-#overlay .hub-ach .coll-ms.reach { border-color:rgba(224,197,106,.36); background:rgba(57,48,28,.35); }
-#overlay .hub-ach .ach-info b,
-#overlay .hub-ach .coll-ms b,
-#overlay .hub-ach .coll-group-head b { color:#e9e9e9; }
-#overlay .hub-ach .ach-info span,
-#overlay .hub-ach .coll-ms .rw,
-#overlay .hub-ach .coll-group-head .dim { color:#b0b3b5; }
-#overlay .hub-ach .coll-slot.off { border:1px solid rgba(165,170,174,.18); background:linear-gradient(145deg,rgba(41,44,47,.66),rgba(18,19,21,.82)); box-shadow:inset 0 0 28px rgba(178,185,190,.04); }
-#overlay .hub-ach .coll-slot.off span { color:rgba(199,200,202,.3); }
-#overlay .hub-ach .back-grid { gap:10px; }
-#overlay .hub-ach .back-card { min-width:0; padding:13px 10px; border:1px solid rgba(176,181,185,.2); border-radius:0; background:linear-gradient(155deg,rgba(31,33,35,.9),rgba(17,18,19,.94)); color:#e0e0e1; box-shadow:none; }
-#overlay .hub-ach .back-card:hover:not(.locked) { border-color:#e3c871; transform:translateY(-2px); }
-#overlay .hub-ach .back-card.on { border-color:#e3c871; background:linear-gradient(155deg,rgba(69,60,39,.88),rgba(23,25,27,.94)); box-shadow:inset 0 0 0 1px rgba(227,200,113,.18); }
-#overlay .hub-ach .back-card.locked { --back-accent:#a7abae; opacity:1; border-top:2px solid var(--back-accent); background:linear-gradient(155deg,rgba(37,40,42,.92),rgba(17,18,19,.96)); }
-#overlay .hub-ach .back-card b { color:#e8e8e8; }
-#overlay .hub-ach .back-card .dim { color:#a7aaad; }
-#overlay .hub-ach .back-card.locked:has(.hb-wolf) { --back-accent:#93989c; }
-#overlay .hub-ach .back-card.locked:has(.hb-coin) { --back-accent:#d5bb64; }
-#overlay .hub-ach .back-card.locked:has(.hb-vault) { --back-accent:#b09e62; }
-#overlay .hub-ach .back-card.locked:has(.hb-boss) { --back-accent:#ae7881; }
-#overlay .hub-ach .back-card.locked:has(.hb-altar) { --back-accent:#a9afb4; }
-#overlay .hub-ach .back-card.locked:has(.hb-pet) { --back-accent:#c1ae6e; }
-#overlay .hub-ach .back-card.locked .back-thumb { opacity:1; filter:none; }
-#overlay .hub-ach .back-card.locked .back-thumb::after { display:none; }
-#overlay .hub-ach .back-card.locked .back-thumb .hs-back { outline:2px solid var(--back-accent); outline-offset:-3px; }
+#overlay .hub-ach .ach-row { border-color:rgba(183,188,192,.16); border-radius:0; background:rgba(11,12,13,.42); }
+#overlay .hub-ach .ach-row.done { border-color:rgba(224,197,106,.36); background:rgba(57,48,28,.35); }
+#overlay .hub-ach .ach-info b { color:#e9e9e9; }
+#overlay .hub-ach .ach-info span { color:#b0b3b5; }
 #overlay .hub-ach .back-lock { position:absolute; z-index:6; top:-5px; right:-6px; display:grid; place-items:center; width:20px; height:20px; border:1px solid var(--back-accent); border-radius:50%; background:#17181a; }
 #overlay .hub-ach .back-lock .ic { width:11px; height:11px; }
-@media (prefers-reduced-motion:reduce) { .class-dossier-art img { transition:none; } }
+@media (prefers-reduced-motion:reduce) { }
 
 /* 基地商店（09-20 P1-6）→ 2026-09-25 无害化：货板 DOM 已切到 .shelf-item 体系，
    .pk-row.stash-row 簇为幽灵选择器；按走查要求保留规则块，块内可见属性
    （background/border/color/opacity/filter）全部置初始/透明，防该类名未来
    复用时旧金描边整段复活 */
-#overlay .pk-row.stash-row .shop-price-tag { padding: 3px 10px; font-size: 12.5px;
-  background: transparent; border: 1px solid transparent; color: inherit; }
-#overlay .pk-row.stash-row .shop-price-tag:hover:not(:disabled) { background: transparent; }
 #overlay .pk-row.stash-row.poor { opacity: 1; filter: none; }
-#overlay .pk-row.stash-row.poor .shop-price-tag { border-color: transparent; color: inherit; }
 #overlay .pk-row.stash-row .poor-why { margin-left: 6px; color: inherit; }
 
 /* 2026-10-03 A6：认可白底横幅完整坐入相纸窗；档案信息独立流式排版。
    当前窗口样板采用宽卡，后续人物沿原容器滚动；不修改原图或皮肤行为。 */
-#overlay #hubMain.hub-classes .class-dossier-grid {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  align-items: start;
-}
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier {
-  min-height: 0;
-  border: 1px solid rgba(202,203,204,.22);
-  background: #141617;
-}
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier::after {
-  display: none;
-}
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-art {
-  position: relative;
-  inset: auto;
-  z-index: 0;
-  aspect-ratio: 16 / 9;
-  background: #ffffff;
-  border-bottom: 1px solid rgba(202,203,204,.22);
-}
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-art img {
-  display: block;
-  position: absolute;
-  inset: 0;
-  object-fit: contain;
-  object-position: center;
-  filter: none;
-  transform: none;
-  transition: none;
-  -webkit-mask-image: none;
-  mask-image: none;
-}
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier:hover .class-dossier-art img {
-  filter: none;
-  transform: none;
-}
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-copy {
-  position: relative;
-  inset: auto;
-  padding: 18px 18px 16px;
-  background: #141617;
-}
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-shade {
-  display: none;
-}
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-index {
-  z-index: 1;
-  padding: 5px 7px;
-  background: #141617;
-  border: 1px solid rgba(202,203,204,.3);
-}
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier p,
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-dossier-meta {
-  font-size: 14px;
-}
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .xp-txt,
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-skins .mini-btn {
-  font-size: 13px;
-}
-#overlay #hubMain.hub-classes .class-dossier-grid .class-dossier .class-skins .mini-btn {
-  white-space: normal;
-  overflow-wrap: anywhere;
-}
 
 /* W2-02（0926 W2 R1）：锁态深层内容收敛行——原主列锁钮+页底宝藏大门横条（锁态）不渲染，
    钥匙进度聚合到右栏 MISSION BRIEF 末行；降透明+可点（gateInfo），与 01-04 行同构 */
-#overlay .deploy-readiness-panel .readiness-item.locked-gate { cursor: pointer; opacity: .78; border-bottom: 0; }
-#overlay .deploy-readiness-panel .readiness-item.locked-gate:hover { opacity: 1; }
-#overlay .deploy-readiness-panel .readiness-item.locked-gate span small { color: #888d90; }
-#overlay .deploy-readiness-panel .readiness-item.locked-gate b { color: #a9aeb1; }
 
 /* W4-04（0926 W4 R1）：双语 eyebrow 制式归一——.section-kicker 为唯一页面/节级制式。
    存量色 #e3c871 归并主金 token（W4-01 体系）；整备页头 kicker 在 flex 头内独占一行 */

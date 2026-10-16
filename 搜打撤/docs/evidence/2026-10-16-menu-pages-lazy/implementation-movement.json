@@ -1,0 +1,168 @@
+{
+  "baseline": "/workspace/shared/cloud-iteration-verification-r2-20261016/snapshot/搜打撤/game/src/ui/game.menu.js",
+  "baselineSha256": "7d183604bab0efa1520fd5fa1abffffef229e757bad48debc8dc74596fa72004",
+  "exactImplementations": 29,
+  "total": 32,
+  "functions": [
+    {
+      "name": "setLobby",
+      "owner": "shell",
+      "exact": true
+    },
+    {
+      "name": "showTitle",
+      "owner": "shell",
+      "exact": true
+    },
+    {
+      "name": "maybeShowRmbHint",
+      "owner": "shell",
+      "exact": true
+    },
+    {
+      "name": "hideTitle",
+      "owner": "shell",
+      "exact": true
+    },
+    {
+      "name": "bindTitleExtras",
+      "owner": "shell",
+      "exact": true
+    },
+    {
+      "name": "describeCurrentPage",
+      "owner": "shell",
+      "exact": true
+    },
+    {
+      "name": "describeTitleTarget",
+      "owner": "shell",
+      "exact": true
+    },
+    {
+      "name": "pickLatestSlot",
+      "owner": "shell",
+      "exact": true
+    },
+    {
+      "name": "renderTitleStats",
+      "owner": "shell",
+      "exact": true
+    },
+    {
+      "name": "saveSuggestion",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "openSuggestionBox",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "loadSuggestions",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "removeSuggestion",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "sugRowHTML",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "renderSugBox",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "openSuggestionInbox",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "openTitleGuide",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "openTitleAchievements",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "fmtPlayTime",
+      "owner": "shell",
+      "exact": true
+    },
+    {
+      "name": "slotInfoHTML",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "openSlotPicker",
+      "owner": "pages",
+      "exact": false
+    },
+    {
+      "name": "startNewGame",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "exitToTitle",
+      "owner": "shell",
+      "exact": true
+    },
+    {
+      "name": "leavePanel",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "leaveViewCurrent",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "setLeaveBusy",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "openLeaveMenu",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "openAbandonConfirmation",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "abandonRun",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "quitGame",
+      "owner": "shell",
+      "exact": false
+    },
+    {
+      "name": "openDataPageUi",
+      "owner": "pages",
+      "exact": true
+    },
+    {
+      "name": "openSettings",
+      "owner": "shell,pages",
+      "exact": false
+    }
+  ]
+}

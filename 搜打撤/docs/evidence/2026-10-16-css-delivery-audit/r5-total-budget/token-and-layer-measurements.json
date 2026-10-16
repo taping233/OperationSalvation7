@@ -1,0 +1,2250 @@
+{
+  "method": "Literal-only in-file custom-property extraction, no var/env/attr/url/counter/element values, no custom declarations or keyframes. Per-file unique token names. In-memory proposal only.",
+  "experiments": [
+    {
+      "minLength": 30,
+      "minCount": 8,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 161576,
+          "after": 161576,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 40,
+      "minCount": 5,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 161576,
+          "after": 161576,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 40,
+      "minCount": 8,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 161576,
+          "after": 161576,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 60,
+      "minCount": 3,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 161576,
+          "after": 161576,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 60,
+      "minCount": 5,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 161576,
+          "after": 161576,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 60,
+      "minCount": 8,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 161576,
+          "after": 161576,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 80,
+      "minCount": 3,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 161576,
+          "after": 161576,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 80,
+      "minCount": 5,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 161576,
+          "after": 161576,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 80,
+      "minCount": 8,
+      "totalGzip": 200738,
+      "saving": 98,
+      "raw": 1105476,
+      "tokens": 0,
+      "replaced": 0,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 161576,
+          "after": 161576,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 40,
+      "minCount": 3,
+      "totalGzip": 200764,
+      "saving": 72,
+      "raw": 1105269,
+      "tokens": 3,
+      "replaced": 10,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 3,
+          "replacements": 10,
+          "before": 161576,
+          "after": 161602,
+          "saving": -26,
+          "values": [
+            {
+              "value": "linear-gradient(90deg,transparent,#e6cb76b8,transparent)",
+              "count": 4,
+              "token": "--s77x0"
+            },
+            {
+              "value": "polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)",
+              "count": 3,
+              "token": "--s77x1"
+            },
+            {
+              "value": "linear-gradient(180deg,#111214e0,#0d0e0feb)",
+              "count": 3,
+              "token": "--s77x2"
+            }
+          ]
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 30,
+      "minCount": 5,
+      "totalGzip": 200824,
+      "saving": 12,
+      "raw": 1105277,
+      "tokens": 3,
+      "replaced": 16,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 3,
+          "replacements": 16,
+          "before": 161576,
+          "after": 161662,
+          "saving": -86,
+          "values": [
+            {
+              "value": "0 0 0 1px #101112,0 0 12px #e6cb7659",
+              "count": 6,
+              "token": "--s77x0"
+            },
+            {
+              "value": "600 10px ui-monospace,monospace",
+              "count": 5,
+              "token": "--s77x1"
+            },
+            {
+              "value": "1px solid rgba(194,199,202,.2)",
+              "count": 5,
+              "token": "--s77x2"
+            }
+          ]
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 20,
+      "minCount": 8,
+      "totalGzip": 200826,
+      "saving": 10,
+      "raw": 1105071,
+      "tokens": 4,
+      "replaced": 55,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 4,
+          "replacements": 55,
+          "before": 161576,
+          "after": 161664,
+          "saving": -88,
+          "values": [
+            {
+              "value": "1px solid transparent",
+              "count": 23,
+              "token": "--s77x0"
+            },
+            {
+              "value": "repeat(2,minmax(0,1fr))",
+              "count": 12,
+              "token": "--s77x1"
+            },
+            {
+              "value": "2px solid transparent",
+              "count": 12,
+              "token": "--s77x2"
+            },
+            {
+              "value": "repeat(3,minmax(0,1fr))",
+              "count": 8,
+              "token": "--s77x3"
+            }
+          ]
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 30,
+      "minCount": 3,
+      "totalGzip": 200870,
+      "saving": -34,
+      "raw": 1104838,
+      "tokens": 13,
+      "replaced": 49,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 1,
+          "replacements": 4,
+          "before": 13367,
+          "after": 13382,
+          "saving": -15,
+          "values": [
+            {
+              "value": "normal,normal,normal,multiply,normal",
+              "count": 4,
+              "token": "--s71x0"
+            }
+          ]
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 12,
+          "replacements": 45,
+          "before": 161576,
+          "after": 161693,
+          "saving": -117,
+          "values": [
+            {
+              "value": "linear-gradient(90deg,transparent,#e6cb76b8,transparent)",
+              "count": 4,
+              "token": "--s77x0"
+            },
+            {
+              "value": "0 0 0 1px #101112,0 0 12px #e6cb7659",
+              "count": 6,
+              "token": "--s77x1"
+            },
+            {
+              "value": "polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)",
+              "count": 3,
+              "token": "--s77x2"
+            },
+            {
+              "value": "linear-gradient(180deg,#111214e0,#0d0e0feb)",
+              "count": 3,
+              "token": "--s77x3"
+            },
+            {
+              "value": "repeat(auto-fill,minmax(150px,1fr))",
+              "count": 4,
+              "token": "--s77x4"
+            },
+            {
+              "value": "600 10px ui-monospace,monospace",
+              "count": 5,
+              "token": "--s77x5"
+            },
+            {
+              "value": "1px solid rgba(194,199,202,.2)",
+              "count": 5,
+              "token": "--s77x6"
+            },
+            {
+              "value": "linear-gradient(180deg,#2f2f2f,#1c1c1c)",
+              "count": 3,
+              "token": "--s77x7"
+            },
+            {
+              "value": "linear-gradient(180deg,#515151,#2c2c2c)",
+              "count": 3,
+              "token": "--s77x8"
+            },
+            {
+              "value": "linear-gradient(180deg,#222,#191919)",
+              "count": 3,
+              "token": "--s77x9"
+            },
+            {
+              "value": "background .16s,border-color .16s",
+              "count": 3,
+              "token": "--s77xa"
+            },
+            {
+              "value": "drop-shadow(0 7px 8px #202b3728)",
+              "count": 3,
+              "token": "--s77xb"
+            }
+          ]
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 20,
+      "minCount": 5,
+      "totalGzip": 200894,
+      "saving": -58,
+      "raw": 1104783,
+      "tokens": 9,
+      "replaced": 82,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 13367,
+          "after": 13367,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 9,
+          "replacements": 82,
+          "before": 161576,
+          "after": 161732,
+          "saving": -156,
+          "values": [
+            {
+              "value": "1px solid transparent",
+              "count": 23,
+              "token": "--s77x0"
+            },
+            {
+              "value": "0 0 0 1px #101112,0 0 12px #e6cb7659",
+              "count": 6,
+              "token": "--s77x1"
+            },
+            {
+              "value": "repeat(2,minmax(0,1fr))",
+              "count": 12,
+              "token": "--s77x2"
+            },
+            {
+              "value": "600 10px ui-monospace,monospace",
+              "count": 5,
+              "token": "--s77x3"
+            },
+            {
+              "value": "1px solid rgba(194,199,202,.2)",
+              "count": 5,
+              "token": "--s77x4"
+            },
+            {
+              "value": "2px solid transparent",
+              "count": 12,
+              "token": "--s77x5"
+            },
+            {
+              "value": "repeat(3,minmax(0,1fr))",
+              "count": 8,
+              "token": "--s77x6"
+            },
+            {
+              "value": "minmax(0,1fr) minmax(0,1fr)",
+              "count": 5,
+              "token": "--s77x7"
+            },
+            {
+              "value": "blur(18px) saturate(1.15)",
+              "count": 6,
+              "token": "--s77x8"
+            }
+          ]
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    },
+    {
+      "minLength": 20,
+      "minCount": 3,
+      "totalGzip": 200944,
+      "saving": -108,
+      "raw": 1104317,
+      "tokens": 20,
+      "replaced": 119,
+      "per": [
+        {
+          "file": "battle-CMeGAmXR.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2217,
+          "after": 2217,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "game.cardslib-DL1ME_Cs.css",
+          "tokens": 1,
+          "replacements": 4,
+          "before": 13367,
+          "after": 13382,
+          "saving": -15,
+          "values": [
+            {
+              "value": "normal,normal,normal,multiply,normal",
+              "count": 4,
+              "token": "--s71x0"
+            }
+          ]
+        },
+        {
+          "file": "game.menu-COmXXeJI.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 9387,
+          "after": 9387,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-djRd51SW.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1973,
+          "after": 1973,
+          "saving": 0,
+          "values": []
+        },
+        {
+          "file": "home-layers-CGeD3b0U.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 1771,
+          "after": 1757,
+          "saving": 14,
+          "values": []
+        },
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 973,
+          "after": 965,
+          "saving": 8,
+          "values": []
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 6599,
+          "after": 6551,
+          "saving": 48,
+          "values": []
+        },
+        {
+          "file": "index-BzlIbwSi.css",
+          "tokens": 19,
+          "replacements": 115,
+          "before": 161576,
+          "after": 161767,
+          "saving": -191,
+          "values": [
+            {
+              "value": "linear-gradient(90deg,transparent,#e6cb76b8,transparent)",
+              "count": 4,
+              "token": "--s77x0"
+            },
+            {
+              "value": "1px solid transparent",
+              "count": 23,
+              "token": "--s77x1"
+            },
+            {
+              "value": "0 0 0 1px #101112,0 0 12px #e6cb7659",
+              "count": 6,
+              "token": "--s77x2"
+            },
+            {
+              "value": "polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)",
+              "count": 3,
+              "token": "--s77x3"
+            },
+            {
+              "value": "repeat(2,minmax(0,1fr))",
+              "count": 12,
+              "token": "--s77x4"
+            },
+            {
+              "value": "linear-gradient(180deg,#111214e0,#0d0e0feb)",
+              "count": 3,
+              "token": "--s77x5"
+            },
+            {
+              "value": "repeat(auto-fill,minmax(150px,1fr))",
+              "count": 4,
+              "token": "--s77x6"
+            },
+            {
+              "value": "600 10px ui-monospace,monospace",
+              "count": 5,
+              "token": "--s77x7"
+            },
+            {
+              "value": "1px solid rgba(194,199,202,.2)",
+              "count": 5,
+              "token": "--s77x8"
+            },
+            {
+              "value": "linear-gradient(180deg,#2f2f2f,#1c1c1c)",
+              "count": 3,
+              "token": "--s77x9"
+            },
+            {
+              "value": "linear-gradient(180deg,#515151,#2c2c2c)",
+              "count": 3,
+              "token": "--s77xa"
+            },
+            {
+              "value": "2px solid transparent",
+              "count": 12,
+              "token": "--s77xb"
+            },
+            {
+              "value": "repeat(3,minmax(0,1fr))",
+              "count": 8,
+              "token": "--s77xc"
+            },
+            {
+              "value": "linear-gradient(180deg,#222,#191919)",
+              "count": 3,
+              "token": "--s77xd"
+            },
+            {
+              "value": "minmax(0,1fr) minmax(0,1fr)",
+              "count": 5,
+              "token": "--s77xe"
+            },
+            {
+              "value": "blur(18px) saturate(1.15)",
+              "count": 6,
+              "token": "--s77xf"
+            },
+            {
+              "value": "background .16s,border-color .16s",
+              "count": 3,
+              "token": "--s77xg"
+            },
+            {
+              "value": "0 0 8px rgba(230,203,118,.2)",
+              "count": 4,
+              "token": "--s77xh"
+            },
+            {
+              "value": "drop-shadow(0 7px 8px #202b3728)",
+              "count": 3,
+              "token": "--s77xi"
+            }
+          ]
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 971,
+          "after": 970,
+          "saving": 1,
+          "values": []
+        },
+        {
+          "file": "motion-transitions-BdxbKqrz.css",
+          "tokens": 0,
+          "replacements": 0,
+          "before": 2002,
+          "after": 1975,
+          "saving": 27,
+          "values": []
+        }
+      ]
+    }
+  ],
+  "sourceCosts": [
+    {
+      "file": "game/css/winter.css",
+      "raw": 76342,
+      "standaloneGzip": 17664,
+      "marginalGzip": 16597
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "raw": 58463,
+      "standaloneGzip": 9978,
+      "marginalGzip": 9403
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "raw": 32125,
+      "standaloneGzip": 6560,
+      "marginalGzip": 5701
+    },
+    {
+      "file": "game/css/base.css",
+      "raw": 24196,
+      "standaloneGzip": 6489,
+      "marginalGzip": 5484
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "raw": 35404,
+      "standaloneGzip": 5728,
+      "marginalGzip": 5000
+    },
+    {
+      "file": "game/css/battle-stage.css",
+      "raw": 25406,
+      "standaloneGzip": 5235,
+      "marginalGzip": 4556
+    },
+    {
+      "file": "game/css/battle.css",
+      "raw": 20393,
+      "standaloneGzip": 5413,
+      "marginalGzip": 4383
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "raw": 22518,
+      "standaloneGzip": 4962,
+      "marginalGzip": 4274
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "raw": 23669,
+      "standaloneGzip": 4999,
+      "marginalGzip": 4107
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "raw": 31011,
+      "standaloneGzip": 4649,
+      "marginalGzip": 3725
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "raw": 22127,
+      "standaloneGzip": 4348,
+      "marginalGzip": 3679
+    },
+    {
+      "file": "game/css/expedition.css",
+      "raw": 15371,
+      "standaloneGzip": 4366,
+      "marginalGzip": 3570
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "raw": 29260,
+      "standaloneGzip": 4097,
+      "marginalGzip": 3328
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "raw": 23232,
+      "standaloneGzip": 3820,
+      "marginalGzip": 3247
+    },
+    {
+      "file": "game/css/ak-skin.css",
+      "raw": 14390,
+      "standaloneGzip": 3789,
+      "marginalGzip": 3212
+    },
+    {
+      "file": "game/css/hub.css",
+      "raw": 16749,
+      "standaloneGzip": 4240,
+      "marginalGzip": 3211
+    },
+    {
+      "file": "game/css/base-archive-facilities-v12.css",
+      "raw": 27788,
+      "standaloneGzip": 3762,
+      "marginalGzip": 3027
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "raw": 16952,
+      "standaloneGzip": 4016,
+      "marginalGzip": 3011
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "raw": 16219,
+      "standaloneGzip": 3784,
+      "marginalGzip": 2994
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "raw": 16512,
+      "standaloneGzip": 3586,
+      "marginalGzip": 2918
+    },
+    {
+      "file": "game/css/ui-scale.css",
+      "raw": 15097,
+      "standaloneGzip": 3421,
+      "marginalGzip": 2862
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "raw": 13158,
+      "standaloneGzip": 3403,
+      "marginalGzip": 2832
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "raw": 13197,
+      "standaloneGzip": 3227,
+      "marginalGzip": 2459
+    },
+    {
+      "file": "game/css/base-logistics-trade-v12.css",
+      "raw": 22735,
+      "standaloneGzip": 3192,
+      "marginalGzip": 2362
+    },
+    {
+      "file": "game/css/departure-selected.css",
+      "raw": 13899,
+      "standaloneGzip": 2936,
+      "marginalGzip": 2353
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "raw": 12559,
+      "standaloneGzip": 2778,
+      "marginalGzip": 2170
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "raw": 16275,
+      "standaloneGzip": 2724,
+      "marginalGzip": 2082
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "raw": 15151,
+      "standaloneGzip": 2763,
+      "marginalGzip": 1866
+    },
+    {
+      "file": "game/css/roster-departure-v2.css",
+      "raw": 10986,
+      "standaloneGzip": 2168,
+      "marginalGzip": 1865
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "raw": 8424,
+      "standaloneGzip": 2263,
+      "marginalGzip": 1669
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "raw": 9565,
+      "standaloneGzip": 2185,
+      "marginalGzip": 1645
+    },
+    {
+      "file": "game/css/base-framework-v7.css",
+      "raw": 7678,
+      "standaloneGzip": 2024,
+      "marginalGzip": 1456
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "raw": 8807,
+      "standaloneGzip": 2159,
+      "marginalGzip": 1430
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "raw": 6919,
+      "standaloneGzip": 1913,
+      "marginalGzip": 1364
+    },
+    {
+      "file": "game/css/page-cardforge.css",
+      "raw": 7489,
+      "standaloneGzip": 1907,
+      "marginalGzip": 1285
+    },
+    {
+      "file": "game/css/feedback-oct12.css",
+      "raw": 6446,
+      "standaloneGzip": 1571,
+      "marginalGzip": 1257
+    },
+    {
+      "file": "game/css/preparation.css",
+      "raw": 4864,
+      "standaloneGzip": 1684,
+      "marginalGzip": 1212
+    },
+    {
+      "file": "game/css/base-home-v7.css",
+      "raw": 8018,
+      "standaloneGzip": 1705,
+      "marginalGzip": 1170
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "raw": 3651,
+      "standaloneGzip": 1476,
+      "marginalGzip": 1033
+    },
+    {
+      "file": "game/css/base-shop-v3.css",
+      "raw": 6200,
+      "standaloneGzip": 1548,
+      "marginalGzip": 1022
+    },
+    {
+      "file": "game/css/title-credits.css",
+      "raw": 6497,
+      "standaloneGzip": 1622,
+      "marginalGzip": 1003
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "raw": 4217,
+      "standaloneGzip": 1527,
+      "marginalGzip": 964
+    },
+    {
+      "file": "game/css/page-events.css",
+      "raw": 6113,
+      "standaloneGzip": 1419,
+      "marginalGzip": 951
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "raw": 5130,
+      "standaloneGzip": 1175,
+      "marginalGzip": 844
+    },
+    {
+      "file": "game/css/base-courtyard-v3.css",
+      "raw": 6342,
+      "standaloneGzip": 1433,
+      "marginalGzip": 838
+    },
+    {
+      "file": "game/css/lab-ending.css",
+      "raw": 4061,
+      "standaloneGzip": 1172,
+      "marginalGzip": 826
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "raw": 4591,
+      "standaloneGzip": 1255,
+      "marginalGzip": 816
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "raw": 5598,
+      "standaloneGzip": 1328,
+      "marginalGzip": 815
+    },
+    {
+      "file": "game/css/chest-opening.css",
+      "raw": 3977,
+      "standaloneGzip": 1332,
+      "marginalGzip": 797
+    },
+    {
+      "file": "game/css/archive-motion.css",
+      "raw": 4833,
+      "standaloneGzip": 1134,
+      "marginalGzip": 783
+    },
+    {
+      "file": "game/css/expedition-transitions.css",
+      "raw": 3373,
+      "standaloneGzip": 1014,
+      "marginalGzip": 614
+    },
+    {
+      "file": "game/css/map-edge-light.css",
+      "raw": 2430,
+      "standaloneGzip": 903,
+      "marginalGzip": 513
+    },
+    {
+      "file": "game/css/roster-reference.css",
+      "raw": 3198,
+      "standaloneGzip": 852,
+      "marginalGzip": 500
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "raw": 3213,
+      "standaloneGzip": 806,
+      "marginalGzip": 422
+    },
+    {
+      "file": "game/css/base-collection-v4.css",
+      "raw": 3026,
+      "standaloneGzip": 880,
+      "marginalGzip": 377
+    },
+    {
+      "file": "game/css/experience-loot.css",
+      "raw": 1810,
+      "standaloneGzip": 739,
+      "marginalGzip": 373
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "raw": 1786,
+      "standaloneGzip": 734,
+      "marginalGzip": 353
+    },
+    {
+      "file": "game/css/pocket-strip.css",
+      "raw": 1823,
+      "standaloneGzip": 808,
+      "marginalGzip": 348
+    },
+    {
+      "file": "game/css/card-description-links.css",
+      "raw": 1325,
+      "standaloneGzip": 551,
+      "marginalGzip": 328
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "raw": 2794,
+      "standaloneGzip": 476,
+      "marginalGzip": 309
+    },
+    {
+      "file": "game/css/base-reward-feedback.css",
+      "raw": 1437,
+      "standaloneGzip": 521,
+      "marginalGzip": 273
+    },
+    {
+      "file": "game/css/card-v3.css",
+      "raw": 902,
+      "standaloneGzip": 282,
+      "marginalGzip": 272
+    },
+    {
+      "file": "game/css/page-transitions.css",
+      "raw": 1471,
+      "standaloneGzip": 413,
+      "marginalGzip": 261
+    },
+    {
+      "file": "game/css/combat-feedback.css",
+      "raw": 1025,
+      "standaloneGzip": 459,
+      "marginalGzip": 250
+    },
+    {
+      "file": "game/css/home-ui-tokens.css",
+      "raw": 444,
+      "standaloneGzip": 252,
+      "marginalGzip": 199
+    },
+    {
+      "file": "game/css/character-idle.css",
+      "raw": 1244,
+      "standaloneGzip": 297,
+      "marginalGzip": 198
+    },
+    {
+      "file": "game/css/card-browser.css",
+      "raw": 1022,
+      "standaloneGzip": 465,
+      "marginalGzip": 197
+    },
+    {
+      "file": "game/css/page-visual-ready.css",
+      "raw": 802,
+      "standaloneGzip": 365,
+      "marginalGzip": 194
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "raw": 1023,
+      "standaloneGzip": 427,
+      "marginalGzip": 164
+    }
+  ],
+  "groupCosts": {
+    "legacyWinterSkin": {
+      "files": [
+        "game/css/ak-skin.css",
+        "game/css/winter.css"
+      ],
+      "raw": 90732,
+      "marginalGzip": 19826,
+      "warning": "Hypothetical complete removal cost, not safe or approved. Contains required live rules."
+    },
+    "legacyStructuralPages": {
+      "files": [
+        "game/css/base-camp.css",
+        "game/css/expedition-shop.css",
+        "game/css/expedition-roster.css",
+        "game/css/expedition-library.css",
+        "game/css/expedition-battle.css",
+        "game/css/expedition-rewards.css",
+        "game/css/expedition-inventory.css",
+        "game/css/expedition-hub.css",
+        "game/css/expedition.css",
+        "game/css/battle.css",
+        "game/css/hub.css"
+      ],
+      "raw": 223233,
+      "marginalGzip": 41065,
+      "warning": "Hypothetical complete removal cost, not safe or approved. Contains required live rules."
+    },
+    "baseLayers": {
+      "files": [
+        "game/css/base-archive-v3.css",
+        "game/css/base-shop-v3.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-camp-rework.css",
+        "game/css/base-camp.css"
+      ],
+      "raw": 249965,
+      "marginalGzip": 33446,
+      "warning": "Hypothetical complete removal cost, not safe or approved. Contains required live rules."
+    }
+  }
+}

@@ -58,6 +58,7 @@ async function harness(slot = 2, failpoint = null) {
 const expectedReceipt = {
   version: 1, outcome: 'clear', bossKilled: true, layersReached: 4,
   actions: 8, firstExplore: { moves: 8, xp: 36 },   // 旧档无 explored：回退 turn-1；20+8*2
+  savedCards: [{ card, count: 1 }],
   netTake: { cardsStashed: 1, pocketKept: 1, wood: 3, rations: 2 },
   losses: { lostCount: 1, lostNotable: [{ name: '回执测试卡', rarity: '史诗', count: 1 }], pocketLost: 1 },
   runCoins: 12, durationSec: 123,

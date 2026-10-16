@@ -1,0 +1,64 @@
+{
+  "scope": "仅配置页默认无的主展示立绘；保留原定稿、皮肤场景与外观缩略图、出征、战斗和卡面路径",
+  "original": {
+    "path": "game/assets/portraits/full/wu.webp",
+    "sha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc",
+    "unchanged": true
+  },
+  "source": {
+    "path": "/workspace/scratch/b7a53a06c872/generated_images/exec-6460ac23-086f-4f35-8964-ce838dd94999.png",
+    "bytes": 1665018,
+    "sha256": "b8f404434be29c2417737587be97f3e57137dd98f53f995d4715dd4438099fe8",
+    "method": "内置 imagegen 基于当前定稿编辑为透明背景；当前内置浏览器深灰底对比已确认可用",
+    "storedInGit": false
+  },
+  "runtime": {
+    "path": "game/assets/portraits/personnel/wu-default-cutout-v1.webp",
+    "bytes": 1011996,
+    "sha256": "68fe23ed56b3b9fee7e3fbfef64546ddc260da282897b87703034446b00432de",
+    "format": "WebP lossless",
+    "width": 1024,
+    "height": 1536,
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "alphaZeroPixels": 1049497,
+    "visibleBoundsAlpha128": [
+      264,
+      6,
+      935,
+      1525
+    ],
+    "encoding": {
+      "tool": "Pillow",
+      "lossless": true,
+      "quality": 100,
+      "method": 6,
+      "exact": true
+    },
+    "decodedRgbaIdenticalToSource": true,
+    "decodedRgbaSha256": "448ecfc8e14e550b156442754fa5e81afa15cf4a2314bff775baab14eb382908"
+  },
+  "tests": {
+    "filesPassed": 8,
+    "testsPassed": 77,
+    "testsFailed": 0,
+    "success": true,
+    "report": "vitest.json",
+    "testFiles": 8
+  },
+  "gamePageReview": "首次配置页确认新src加载且头顶/剑尖/鞋完整；追加透明舞台与normal混合规则后的真实配置页待当前内置浏览器复验",
+  "build": "未运行",
+  "commit": "未提交",
+  "cssFollowup": {
+    "marker": "默认无figure data-portrait-alpha=true；其余角色与场景皮肤false",
+    "file": "game/css/base-personnel-v12.css",
+    "stage": "透明背景、透明边框、无阴影",
+    "imageBlendMode": "normal",
+    "reason": "首次配置页核验确认新src已加载且头顶/剑尖/鞋完整，但feedback-oct12.css浅舞台和multiply仍显示白板",
+    "existingR1AndFeedbackRulesPreserved": true,
+    "retainedDomUpdate": "hub.presentation.js 仅在已解码图像reveal和同src分支同步hero.dataset.portraitAlpha；不在旧图仍可见时提前切换混合模式"
+  }
+}

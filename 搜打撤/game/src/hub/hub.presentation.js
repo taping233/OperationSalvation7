@@ -191,6 +191,7 @@ function updatePersonnelV12(page, next, reduced, before) {
       if (!image.isConnected || image.dataset.portraitRequest !== request) return;
       image.style.cssText = nextImage.style.cssText;
       image.dataset.portraitFit = nextImage.dataset.portraitFit;
+      hero.dataset.portraitAlpha = nextHero.dataset.portraitAlpha || 'false';
       image.src = source; image.alt = nextImage.alt;
       if (changedPerson && !reduced) {
         if (!hero.hidden) linkedAnimate(image, [{ opacity: .7 }, { opacity: 1 }], { duration: 120, easing: motionEasing.enter });
@@ -204,6 +205,7 @@ function updatePersonnelV12(page, next, reduced, before) {
   } else {
     image.style.cssText = nextImage.style.cssText;
     image.dataset.portraitFit = nextImage.dataset.portraitFit;
+    hero.dataset.portraitAlpha = nextHero.dataset.portraitAlpha || 'false';
     image.alt = nextImage.alt;
   }
   hero.dataset.skin = nextHero.dataset.skin;

@@ -1,0 +1,80 @@
+{
+  "checkedAt": "2026-10-15T18:36:25.731Z",
+  "status": "complete-uncommitted",
+  "ownedFiles": [
+    {
+      "path": "game/src/hub/game.hub.js",
+      "bytes": 5459,
+      "sha256": "6f2860fbd2a538325fa05863b8fe43b33610f25b449b2c35d3cdae394ce31839"
+    },
+    {
+      "path": "game/src/hub/game.hub.depart.js",
+      "bytes": 27674,
+      "sha256": "feadddb938f81e89962dacdd335802dd84adc7ad0836f46b11ecc53c49067f40"
+    },
+    {
+      "path": "game/src/hub/departure.selection-state.js",
+      "bytes": 284,
+      "sha256": "c4d0ae39cc850b463bfe3ccc941c4ba0009663a3268e1124fb00e7685aa01db4"
+    },
+    {
+      "path": "tests/hub-architecture.test.js",
+      "bytes": 7226,
+      "sha256": "26caac6cbbcc2b52adce1bd285a9b4b6b626bf741d0aaab22dade65464984f58"
+    },
+    {
+      "path": "tests/hub-lazy-entry.test.js",
+      "bytes": 13218,
+      "sha256": "6f98e35de7f33b41bbaca15e87d8ab5ae493284fe63e617358a3403266e8f294"
+    },
+    {
+      "path": "tests/hub-flow-regression.test.js",
+      "bytes": 18949,
+      "sha256": "7de83912c9a497a3f3f3f8083642cbd5213bf6f76276e28ef86087a63cdec3e8"
+    },
+    {
+      "path": "tests/departure-selection-state.test.js",
+      "bytes": 2390,
+      "sha256": "8636e821613faaf775e980c1151372e8326a45cac819fb63064342565c0e10d5"
+    }
+  ],
+  "tests": {
+    "files": 14,
+    "passed": 141,
+    "failed": 0,
+    "skipped": 0,
+    "report": "final-target-tests.json",
+    "initialFailure": "Retained in target-tests.json; original base worker removed one redundant runtime blank line; threshold unchanged"
+  },
+  "lint": "passed",
+  "diffWhitespace": "passed",
+  "graph": {
+    "before": 214,
+    "after": 204,
+    "removed": [
+      "game/src/hub/game.hub.depart.js",
+      "game/src/hub/game.hub.bridge.js",
+      "game/src/hub/departure.view-updates.js",
+      "game/src/hub/hub.presentation.js",
+      "game/src/hub/base-motion-v4.js",
+      "game/src/ui/card-browser.js",
+      "game/src/hub/departure.summary.js",
+      "game/src/hub/hub.home-v3.js",
+      "game/src/hub/hub.home-icons-v10.js",
+      "game/src/ui/departure-transition.js",
+      "game/src/hub/departure.drag.js"
+    ],
+    "added": [
+      "game/src/hub/departure.selection-state.js"
+    ]
+  },
+  "measuredBundleSavings": null,
+  "build": "not run",
+  "browser": "not operated",
+  "protectedScope": "No edit to game.hub.runtime.js, hub.home-v3.js, CSS or save logic",
+  "reportMissingLinks": [],
+  "assetReviewWarning": "Current battle.layers.js changed outside this task; all production exclusions conservatively retained until parent consumer review",
+  "sharedFileOwnership": {
+    "tests/hub-flow-regression.test.js": "This step changes only the success-reset source assertion. Room header/navigation regression was added by the base worker and retained."
+  }
+}

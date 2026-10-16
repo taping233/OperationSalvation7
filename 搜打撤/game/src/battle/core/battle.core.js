@@ -3,15 +3,16 @@ const SDT = window.SDT;
 import { refillDrawPile } from '../bag/battle.deck.js';
 import { COMBAT_HOOKS } from './combat.js';
 import { BATTLE_PHASES } from '../runtime/battle.state.js';
+import { getHostedExecutionCard } from '../effects/battle.hosted.js';
 import * as Combat from './combat.js';
 import {
   battleState, G, foes, opts, mode, hand, energy, maxEnergy, pstat, busy, infusing,
   discovering, choosing, stealthStrike, nextSpellTwice, viewingGrave, viewingDeck,
-  shaTransform, growth, nestSyn, arrowRune, allSpellsInfused, freeCast,
+  shaTransform, growth, nestSyn, arrowRune, allSpellsInfused, freeCast, equipped,
   battleRestartCheckpoint, set$energy, set$interaction, set$viewingGrave, set$viewingDeck,
   set$pendingHint, bindBattleRenderer, showDread, takeBattleFloats, takeBattleCardAnims,
 } from '../runtime/battle.runtime.js';
-import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, getBattleLiveness, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover, slamSkill } from './battle.engine.js';
+import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, getBattleLiveness, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover, slamSkill } from './battle.engine.js';
 import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
 import { endTurn, surrender } from './battle.enemy-phase.js';
 /* battle.core.js —— 战斗逻辑：牌库/出牌结算/词条时点/回合流转（渲染由注入的视图完成） */
@@ -141,7 +142,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
   function pileTip(uids) {
     const cnt = new Map();
     uids.forEach(uid => {
-      const o = findCard(uid);
+      const o = findEffectiveCard(uid);
       if (!o) return;
       const key = cardIdentity(o.card);
       const rec = cnt.get(key) || { name: o.card.name, count: 0 };
@@ -287,8 +288,16 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     const nestDark3 = !!nestSyn.dark3;
     // 暗 1 每一段命中前重新判断半血；即便目标当前高于半血，多段也可能在中途跨阈值。
     const nestDark1 = !!nestSyn.dark1;
+    const executionCard = getHostedExecutionCard(card);
+    // hitFoe 还有裸 Combat 之外的修正。任一可能转向目标受影响时保守降级，不执行钩子。
+    const livingFoes = foes.filter(foe => !foe.dead && foe.hp > 0);
+    const bleedAmp = !!(pstat?.status?.bleedAmp > 0 && livingFoes.some(foe => foe.status?.bleed > 0));
+    const vsFreezeBonus = equipped.some(entry => entry?.card?.rules?.equip?.passive?.cond?.vsFreeze > 0)
+      && livingFoes.some(foe => foe.status?.freeze > 0);
     return Object.freeze({
-      card: Object.freeze({ ...card }),
+      card: Object.freeze({ ...executionCard }),
+      mode,
+      hostedExecutionVerified: executionCard !== card,
       legal: !illegalReason,
       illegalReason,
       effectiveCost,
@@ -306,6 +315,9 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
         stealthStrike: stealthStrikeActive,
         nestDark1,
         nestDark3,
+        bleedAmp,
+        vsFreezeBonus,
+        specialLifecycle: livingFoes.some(foe => foe.revive && !foe.revived),
         allSpellsInfused: !!(allSpellsInfused && infuseOf(card) > 0),
       }),
     });
@@ -429,5 +441,5 @@ const viewApi = Object.freeze({
 const BattleSession = Object.freeze({ start, getSnapshot, commands, serialize, restore });
 
 // 批5 理顺：battle.view 拆片后按名直引（viewApi 原样保留给既有消费方与测试）
-export { AFFIX_META, Combat, R, aegisBlocked, effCostOf, findCard, infuseOf, markDreadShown, pileTip, refillDrawPile, takeFloats, takeCardAnims, targetSide, unplayableReason, matchHandSelectKey, handCurseSpecs, getPreviewContext };
+export { AFFIX_META, Combat, R, aegisBlocked, effCostOf, findCard, findEffectiveCard, infusionFuelReason, infuseOf, markDreadShown, pileTip, refillDrawPile, takeFloats, takeCardAnims, targetSide, unplayableReason, matchHandSelectKey, handCurseSpecs, getPreviewContext };
 export { BattleSession, commands, configureBattleRenderer, getSnapshot, getBattleLiveness, viewApi };

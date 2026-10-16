@@ -1,0 +1,30 @@
+{
+  "status": "complete-uncommitted",
+  "scope": "reward capacity notice display only",
+  "source": "game/src/run/chests.js",
+  "beforeSha256": "fc0db9ad86f6888fe2558420bcfd0055d36bebce86ce60729f787dee28db2094",
+  "afterSha256": "1f2bf43237d46ba763646329e63a6a378f400c565cbcaed98f25ddcdf6a05435",
+  "delta": "notice-only.patch",
+  "dedicatedTest": {
+    "path": "tests/chests-reward-capacity-notice.test.js",
+    "sha256": "6311dec3a0063eb7087d6264b9bb2e2eb4bf7e8ef1a02ee4ddf48721cffa43be",
+    "cases": 12
+  },
+  "verification": {
+    "beforeInitialTestVersion": { "passed": 6, "failed": 6, "log": "test-before.log" },
+    "after": { "files": 8, "passed": 90, "failed": 0, "log": "test-after.log" },
+    "eslint": "passed",
+    "syntax": "passed",
+    "diffWhitespace": "passed"
+  },
+  "unverified": [
+    "Post-change built-in browser behavior/visual verification belongs to parent",
+    "Asset opaque consumer fingerprint update belongs to parent after delta review"
+  ],
+  "knownPreexistingIssue": "Batch capacity preflight treats every existing same-name card as stackable without the production per-stack limit; dedicated real-bag test demonstrates the mismatch. No forecast algorithm changes in this delta.",
+  "guardUpdated": false,
+  "browserStarted": false,
+  "serviceStarted": false,
+  "fullBuildOrSuiteRun": false,
+  "committed": false
+}

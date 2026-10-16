@@ -7,6 +7,7 @@ vi.mock('../game/src/battle/core/battle.core.js', () => ({
   commands, getSnapshot: () => state.snap,
   getBattleLiveness: () => ({ battleToken: state.snap.battleToken, phase: state.snap.phase }),
   effCostOf: card => card.cost || 0, findCard: uid => uid === 'drag-card' ? { card: state.card } : null,
+  findEffectiveCard: uid => uid === 'drag-card' ? { card: state.card } : null,
   targetSide: card => card.side, infuseOf: () => null, unplayableReason: () => '',
 }));
 vi.mock('../game/src/ui/ui-scale.js', () => ({ scale: () => state.scale, viewport: () => ({ width: 1920, height: 1080 }) }));

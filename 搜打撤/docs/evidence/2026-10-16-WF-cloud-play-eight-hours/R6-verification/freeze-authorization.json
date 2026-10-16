@@ -1,0 +1,9 @@
+{
+  "authorizedAt": "2026-10-15T23:20:00.750594+00:00",
+  "source": "Parent /root R6 task delegation",
+  "authorization": "All source workers released; production frozen until stable independent source/Git/dependency copy verified. Run normal R6 full tests and original-budget build without modifying source.",
+  "sourceWritesAuthorized": [
+    "Final concise evidence at docs/evidence/2026-10-16-WF-cloud-play-eight-hours/R6-verification only; parent registers."
+  ],
+  "snapshot": "Independent reflink/copied inode source, Git and dependencies; preserve R5 and all earlier failures"
+}

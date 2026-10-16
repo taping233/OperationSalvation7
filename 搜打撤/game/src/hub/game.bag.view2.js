@@ -85,7 +85,7 @@ export function tileHTML(t) {
 export function pageHTML(m) {  const zoneNames = { bag: '随身背包', safe: '安全格', pocket: '消耗区' };
   const railBtn = (z, badge) => `
       <button class="bag-rz${m.bagZone === z ? ' on' : ''}" data-act="bagZone" data-zone="${z}" title="${zoneNames[z]}" aria-label="${zoneNames[z]}" aria-pressed="${m.bagZone === z}">
-        ${svgIcon(RAIL_ICONS[z], 'currentColor')}<span class="bag-bdg">${badge}</span>
+        ${svgIcon(RAIL_ICONS[z], 'currentColor')}<span class="bag-rlabel">${z === 'bag' ? '背包' : zoneNames[z]}</span><span class="bag-bdg">${badge}</span>
       </button>`;
   const pills = [['all', '全部'], ['move', '招式'], ['生物', '生物'], ['装备', '装备'], ['道具', '道具'], ['资源', '资源'], ['supply', '物资']]
     .map(([f, label]) => `<button class="bag-pill${m.bagFilter === f ? ' on' : ''}" data-act="bagFilter" data-f="${f}">${label}</button>`).join('');

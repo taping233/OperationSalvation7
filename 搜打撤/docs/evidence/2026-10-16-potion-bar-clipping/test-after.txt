@@ -1,0 +1,42 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤
+
+ ✓ tests/battle-potion-bar-layout.test.js > battle potion left-anchor cascade > overrides the original centered bar transform in the complete loaded cascade 136ms
+ ✓ tests/battle-potion-bar-layout.test.js > battle potion left-anchor cascade > keeps the visible tooltip anchored to the bar instead of half its own width left 46ms
+ ✓ tests/battle-potion-bar-layout.test.js > battle potion left-anchor cascade > retains the more specific reset when the later runtime hidden-tip rule matches 111ms
+ ✓ tests/battle-potion-bar-layout.test.js > battle potion left-anchor cascade > reproduces both original horizontal offsets when only the canonical resets are removed 39ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > groups all copy separately from the three original actions and explains the real material cost 159ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > updates exact material counts and preserves the disabled, cancel and reentry paths 138ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > replaces retained disabled tools with the fresh ready template after a full redraw 342ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > still dispatches direct play without consuming the selected materials 175ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > still confirms the selected materials and spends them only after target confirmation 121ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > escapes long card names and keeps counters correct through an ordinary rerender 62ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > keeps one fresh set after repeated grave open/return and incremental patches 215ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > uses the same two groups for targeted items and preserves cancellation without spending the item 70ms
+ ✓ tests/battle-infusion-action-layout.test.js > shared infusion action bar > hides the whole potion rail only during infusion and restores it after cancellation 158ms
+ ✓ tests/battle-infusion-action-layout.test.js > visible forecast uncertainty > labels the unchanged damage as an estimate and always shows the excluded actions 40ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > keeps one fresh set after repeated bag open/return and incremental patches 338ms
+ ✓ tests/battle-infusion-action-layout.test.js > visible forecast uncertainty > keeps possible-death language and the same estimate in the confirmation dialog 67ms
+ ✓ tests/battle-infusion-action-layout.test.js > infusion reading and nonshrinking CSS contract > keeps the shared bar below the top header with wrapping copy and a separate action group 11ms
+ ✓ tests/battle-infusion-action-layout.test.js > infusion reading and nonshrinking CSS contract > gives every action a readable minimum hit size and prevents vertical word wrapping or flex crushing 8ms
+ ✓ tests/battle-infusion-action-layout.test.js > infusion reading and nonshrinking CSS contract > keeps the forecast limitation readable in the existing auto-sized tactics column 7ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > keeps one fresh set after repeated settings open/return and incremental patches 182ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > returns from the real lamp enemy-target choice with one ready set through the next turn 294ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > returns from real discovery with one current set and preserves subsequent updates 149ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > keeps one set when target or infusion is cancelled, and when the lethal warning returns 167ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > does not duplicate paging or gesture listeners across patches and full redraws 645ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > spends for the real skill once after repeated returns, retains used state, then resets next turn 209ms
+ ✓ tests/battle-tools-lifecycle.test.js > battle tools template ownership > removes and reintroduces paging through one shared set and starts the next battle cleanly 97ms
+
+ Test Files  3 passed (3)
+      Tests  26 passed (26)
+   Start at  07:37:57
+   Duration  5.31s (transform 1.02s, setup 0ms, collect 3.68s, tests 3.99s, environment 1.57s, prepare 366ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

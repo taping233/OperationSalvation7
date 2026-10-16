@@ -35,6 +35,8 @@ const Agent = Object.freeze({
     recordRun: recorder.recordRun,
     noteBattle: recorder.noteBattle,
     resetRunCounters: recorder.resetRunCounters,
+    snapshotRunBattles: recorder.snapshotRunBattles,
+    restoreRunBattles: recorder.restoreRunBattles,
     listRuns: recorder.listRuns,
     clearRuns: recorder.clearRuns,
     exportJSON: recorder.exportJSON,

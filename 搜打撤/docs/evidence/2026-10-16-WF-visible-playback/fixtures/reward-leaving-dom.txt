@@ -1,0 +1,18 @@
+- complementary:
+  - navigation "远征工具":
+    - button "背包：携带卡牌 8/16"
+    - button "安全格：保护物资 0/2"
+    - button "消耗区：已消耗卡牌 6"
+    - button "map 定位 F"
+    - button "map 总览 G"
+- main:
+  - dialog "archive 搜刮！战斗胜利 · 密封物资箱 · 第 1 / 1":
+    - heading "战斗胜利" [level=3]
+    - button "放大查看毒箭"
+    - generic: 已入背包
+    - generic: 已永久放弃
+    - generic: 已永久放弃
+    - complementary "奖励操作":
+      - button "继续探索" [active]
+    - button "整理背包"
+    - status: 1 张已入背包 · 2 张已永久放弃

@@ -4,8 +4,9 @@ const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from '../../core/shared.js';
 import { escAttr } from '../../core/shared.js';
+import { battleStartExplanation } from '../../cards/card-battle-start-explanation.js';
 import { displayCardDescription } from '../../cards/card-description-text.js';
-import { commands, getSnapshot, AFFIX_META, R, findCard } from '../core/battle.core.js';
+import { commands, getSnapshot, AFFIX_META, R, findEffectiveCard as findCard } from '../core/battle.core.js';
   const closeBagCmd = commands.closeBag;
   const useItemCmd = commands.useItem;
   const closeGrave = commands.closeGrave;
@@ -60,6 +61,7 @@ function pileDetailHTML(stack) {
     <h4>${esc(stack.card.name)}</h4>
     <p class="battle-decision-inspect-meta">${esc(stack.card.type || '卡牌')} · ${stack.card.cost ?? 0} 费 · ${stack.count} 张</p>
     <p class="battle-decision-inspect-rules">${esc(displayCardDescription(stack.card.desc || '暂无规则描述', stack.card.id))}</p>
+    ${battleStartExplanation(stack.card) ? `<p class="ov-note">${esc(battleStartExplanation(stack.card))}</p>` : ''}
   </aside>`;
 }
 function installPileInspection(stacks) {

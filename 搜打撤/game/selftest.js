@@ -21,7 +21,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 // game.run.* 为架构批次 4 拆出的局内流程模块（scenes→altar→flow），与壳合并扫描；
 // 2026-09-22 六文件重构批1-5 拆出的切片一并并入（effect-steps/cards/hub/bag/battle.view 各片）。
 // 2026-10-01（ROOT-06）：路径按现行域目录更新（src/ 顶层平铺时代已结束）。
-const GAME_PARTS = ['run/game.session.js', 'ui/game.menu.js', 'run/game.run.data.js', 'run/game.run.js', 'run/game.run.scenes.js', 'run/game.run.altar.js', 'run/game.run.flow.js',
+const GAME_PARTS = ['run/game.session.js', 'ui/game.menu.js', 'ui/game.menu.pages.js', 'run/game.run.data.js', 'run/game.run.js', 'run/game.run.scenes.js', 'run/game.run.altar.js', 'run/game.run.flow.js',
   'battle/effects/effect-steps.ctx.js', 'battle/effects/effect-steps.gates.js', 'battle/effects/effect-steps.curse.js', 'battle/effects/effect-steps.damage.js', 'battle/effects/effect-steps.recovery.js', 'battle/effects/effect-steps.kills.js', 'battle/effects/effect-steps.deck.js', 'battle/effects/effect-steps.rules.js', 'battle/effects/effect-steps.audit.js', 'battle/effects/effect-steps.tail.js',
   'cards/cards.consts.js', 'cards/cards.rules.js', 'cards/cards.data.js', 'cards/cards.sync.js',
   'hub/game.hub.js', 'hub/game.hub.depart.js', 'hub/game.hub.pages.js', 'hub/game.hub.bridge.js',
@@ -88,7 +88,33 @@ check('兼容·未知事件仍走旧效果', /return null;/.test(gameSource) && 
 // 2026-10-01（ROOT-06）：bossCleanupPending 已随整理背包（Item 16）退役；现行契约是
 // 09-09 定版「战斗中开背包转战斗背包」（hub/game.bag.js）。
 check('BOSS·战斗阶段背包入口转战斗背包', /if \(game\.battleActive\) \{[\s\S]{0,200}?SDT\.Battle\.commands\.openBag\(\)/.test(src('hub/game.bag.js')), true);
-check('BOSS·胜利直接结算（Item 16 定版：战后不再进入整理背包，showBossPackCleanup 退役备用）', /settle\(\);   \/\/ Item 16：BOSS 战后不再进入整理背包/.test(gameSource), true);
+check('BOSS·胜利领奖完成后直接保存结算', (() => {
+  // 核对现行领奖续流的代码结构，不把历史注释文字当作玩法契约。
+  const tree = parse(src('hub/game.bag.settle.js'), { ecmaVersion: 'latest', sourceType: 'module' });
+  const findAfterRewards = node => {
+    if (!node || typeof node !== 'object') return null;
+    if (node.type === 'VariableDeclarator' && node.id?.name === 'afterRewards') return node.init;
+    for (const value of Object.values(node)) {
+      for (const child of Array.isArray(value) ? value : [value]) {
+        const found = findAfterRewards(child);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
+  const afterRewards = findAfterRewards(tree);
+  const [phase, completion] = afterRewards?.body?.body?.slice(-2) || [];
+  const assignment = phase?.expression;
+  const invocation = completion?.argument?.argument;
+  return afterRewards?.async === true && phase?.type === 'ExpressionStatement'
+    && assignment?.type === 'AssignmentExpression' && assignment.operator === '='
+    && assignment.left.type === 'MemberExpression' && !assignment.left.computed
+    && assignment.left.object.name === 'settlement' && assignment.left.property.name === 'phase'
+    && assignment.right.type === 'Literal' && assignment.right.value === 'saving'
+    && completion?.type === 'ReturnStatement' && completion.argument?.type === 'AwaitExpression'
+    && invocation?.type === 'CallExpression' && invocation.callee.type === 'Identifier'
+    && invocation.callee.name === 'settle' && invocation.arguments.length === 0;
+})(), true);
 // 2026-10-01（ROOT-06）：「未选卡牌从 ownedCards 删除」属已退役的整理背包页契约；
 // Item 16 后该页彻底移除，改守护「退役入口无残留调用」。
 check('BOSS·整理背包页已彻底移除（showBossPackCleanup 零调用）', !/showBossPackCleanup\s*\(/.test(gameSource), true);

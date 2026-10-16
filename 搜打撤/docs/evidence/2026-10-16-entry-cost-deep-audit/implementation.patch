@@ -1,0 +1,274 @@
+--- a/game/src/agent/agent.runner.js
++++ b/game/src/agent/agent.runner.js
+@@ -62,11 +62,17 @@
+ // turbo 步进的 defer 全部吃节流会让每步膨胀到秒级；MessageChannel 不受 timer
+ // 节流（实机实测 10 次 1ms）。无 MessageChannel 的极简环境再退 setTimeout(0)
+ const channelPump = (typeof MessageChannel === 'function') ? (() => {
+-  const ch = new MessageChannel();   // eslint-disable-line no-undef
++  let ch = null;
+   const queue = [];
+-  ch.port1.onmessage = () => { const job = queue.shift(); if (job) job(); };
+-  ch.port1.start?.();
+-  return (resolve) => { queue.push(resolve); ch.port2.postMessage(null); };
++  return (resolve) => {
++    if (!ch) {
++      ch = new MessageChannel();   // eslint-disable-line no-undef
++      ch.port1.onmessage = () => { const job = queue.shift(); if (job) job(); };
++      ch.port1.start?.();
++    }
++    queue.push(resolve);
++    ch.port2.postMessage(null);
++  };
+ })() : null;
+ const defer = () => (typeof globalThis.setImmediate === 'function')
+   ? new Promise(resolve => globalThis.setImmediate(resolve))
+--- a/game/src/ui/transitions-director.js
++++ b/game/src/ui/transitions-director.js
+@@ -19,7 +19,6 @@
+  * 战斗域零接触：lastMode==='battle'（sdt-overlay-mode 广播）一律不起闸门；
+  * 弹层标识不命中链路集合自然排除。reduce（core/motion.js 权威口径）下整体直出。 */
+ import { reduceMotion } from '../core/motion.js';
+-import { mountCommDemo } from './comm-feed.js';
+ 
+ // ── T1 闸门单例 ──
+ let gateBusy = false;
+@@ -67,6 +66,7 @@
+ 
+ let lastMark = '';
+ let lastMode = null;
++let commDemoPromise = null;
+ 
+ function maybeGateOnSwap(next) {
+   // 战斗与弹层模式不进闸门；只有链路页互切（hubMain↔depMain）触发
+@@ -112,7 +112,17 @@
+ 
+   // D10 demo：URL 参数触发，去参即无痕
+   try {
+-    if (new URLSearchParams(location.search).has('commDemo')) mountCommDemo();
++    if (new URLSearchParams(location.search).has('commDemo') && !commDemoPromise) {
++      commDemoPromise = import('./comm-feed.js').then(({ mountCommDemo }) => {
++        mountCommDemo();
++        // Cold loading may cross a battle entry before the demo subscribes.
++        const panel = document.getElementById('commDemoPanel');
++        if (panel && lastMode === 'battle') panel.style.display = 'none';
++      }).catch(error => {
++        commDemoPromise = null;
++        console.warn('[comm-demo] 演示载入失败', error);
++      });
++    }
+   } catch { /* 非浏览器环境（测试 jsdom 无 location.search 解析失败）：忽略 */ }
+ }
+ 
+--- /dev/null
++++ b/tests/agent-channel-pump-lazy.test.js
+@@ -0,0 +1,92 @@
++import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
++
++const fixture = vi.hoisted(() => ({ now: 0, game: { state: 'idle' } }));
++vi.mock('../game/src/run/game.session.js', () => ({
++  game: fixture.game, getActiveSlot: () => 1, startNewGame: vi.fn(),
++}));
++vi.mock('../game/src/run/game.run.flow.js', () => ({ moveTo: vi.fn(), reenterCell: vi.fn() }));
++vi.mock('../game/src/agent/agent.state.js', () => ({
++  observe: () => ({ phase: 'idle', actions: [] }), settleSignature: () => 'stable', bustSigCache: vi.fn(), markUiFailure: vi.fn(),
++}));
++vi.mock('../game/src/agent/agent.surface.js', () => ({
++  findUiElement: vi.fn(), collectActionKeys: () => [], overlayVisible: () => false,
++}));
++vi.mock('../game/src/agent/agent.recorder.js', () => ({
++  setDriver: vi.fn(), getDriver: () => 'human', battleTick: vi.fn(), battleActionTick: vi.fn(), battleEnd: vi.fn(), noteStopReason: vi.fn(),
++}));
++vi.mock('../game/src/core/turbo.js', () => ({ isTurbo: () => true }));
++
++const options = { quietMs: 1, timeoutMs: 100, allowEmpty: true };
++let channels;
++let starts;
++let posts;
++function installMessageChannel() {
++  vi.stubGlobal('MessageChannel', class {
++    constructor() {
++      channels += 1;
++      this.port1 = { onmessage: null, start: () => { starts += 1; } };
++      this.port2 = { postMessage: () => {
++        posts += 1;
++        queueMicrotask(() => this.port1.onmessage?.({ data: null }));
++      } };
++    }
++  });
++}
++
++beforeEach(() => {
++  vi.resetModules();
++  channels = starts = posts = 0;
++  fixture.now = 0;
++  vi.spyOn(performance, 'now').mockImplementation(() => fixture.now++);
++  vi.stubGlobal('setImmediate', undefined);
++  installMessageChannel();
++});
++afterEach(() => {
++  vi.unstubAllGlobals();
++  vi.restoreAllMocks();
++});
++
++describe('Agent turbo scheduling lazy MessageChannel', () => {
++  it('creates no ports at import and one channel on the first browser wait', async () => {
++    const { waitSettle } = await import('../game/src/agent/agent.runner.js');
++    expect(channels).toBe(0);
++    expect(starts).toBe(0);
++    expect((await waitSettle(options)).ok).toBe(true);
++    expect(channels).toBe(1);
++    expect(starts).toBe(1);
++    expect(posts).toBe(1);
++  });
++
++  it('reuses the same FIFO pump for concurrent and later waits', async () => {
++    const { waitSettle } = await import('../game/src/agent/agent.runner.js');
++    const order = [];
++    await Promise.all([
++      waitSettle(options).then(() => order.push('first')),
++      waitSettle(options).then(() => order.push('second')),
++    ]);
++    await waitSettle(options).then(() => order.push('third'));
++    expect(order).toEqual(['first', 'second', 'third']);
++    expect(channels).toBe(1);
++    expect(starts).toBe(1);
++    expect(posts).toBe(3);
++  });
++
++  it('keeps Node setImmediate ahead of MessageChannel without allocating unused ports', async () => {
++    const immediate = vi.fn(resolve => queueMicrotask(resolve));
++    vi.stubGlobal('setImmediate', immediate);
++    const { waitSettle } = await import('../game/src/agent/agent.runner.js');
++    await waitSettle(options);
++    expect(immediate).toHaveBeenCalledTimes(1);
++    expect(channels).toBe(0);
++    expect(posts).toBe(0);
++  });
++
++  it('retains the zero-delay timer fallback when MessageChannel is unavailable', async () => {
++    vi.stubGlobal('MessageChannel', undefined);
++    const timer = vi.spyOn(globalThis, 'setTimeout');
++    const { waitSettle } = await import('../game/src/agent/agent.runner.js');
++    expect((await waitSettle(options)).ok).toBe(true);
++    expect(timer.mock.calls.some(([, delay]) => delay === 0)).toBe(true);
++    expect(channels).toBe(0);
++  });
++});
+--- /dev/null
++++ b/tests/comm-demo-lazy-entry.test.js
+@@ -0,0 +1,115 @@
++import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
++
++vi.mock('../game/src/core/motion.js', () => ({ reduceMotion: () => false }));
++let listeners;
++let observers;
++let mount;
++let load;
++const deferred = () => {
++  let resolve;
++  let reject;
++  const promise = new Promise((yes, no) => { resolve = yes; reject = no; });
++  return { promise, resolve, reject };
++};
++
++beforeEach(() => {
++  vi.resetModules();
++  listeners = [];
++  observers = [];
++  load = vi.fn();
++  mount = vi.fn(() => {
++    if (document.getElementById('commDemoPanel')) return;
++    const panel = document.createElement('div');
++    panel.id = 'commDemoPanel';
++    document.body.appendChild(panel);
++  });
++  document.body.innerHTML = '<div id="overlay"><div id="ovBody"><div id="hubMain"></div></div></div>';
++  vi.spyOn(document, 'readyState', 'get').mockReturnValue('loading');
++  const add = document.addEventListener.bind(document);
++  vi.spyOn(document, 'addEventListener').mockImplementation((type, fn, options) => {
++    listeners.push([type, fn, options]);
++    return add(type, fn, options);
++  });
++  vi.stubGlobal('MutationObserver', class {
++    constructor(callback) { this.callback = callback; observers.push(this); }
++    observe() {}
++    disconnect() {}
++  });
++  vi.doMock('../game/src/ui/comm-feed.js', () => { load(); return { mountCommDemo: mount }; });
++  history.replaceState(null, '', '/');
++});
++afterEach(() => {
++  for (const [type, fn, options] of listeners) document.removeEventListener(type, fn, options);
++  vi.doUnmock('../game/src/ui/comm-feed.js');
++  vi.unstubAllGlobals();
++  vi.restoreAllMocks();
++  document.body.replaceChildren();
++  history.replaceState(null, '', '/');
++});
++
++async function start(query = '') {
++  history.replaceState(null, '', `/${query}`);
++  const runtime = await import('../game/src/ui/transitions-director.js');
++  document.dispatchEvent(new Event('DOMContentLoaded'));
++  return runtime;
++}
++
++const flush = async () => { for (let i = 0; i < 12; i += 1) await Promise.resolve(); };
++
++describe('communication demo lazy startup boundary', () => {
++  it('never requests the demo module without its URL parameter and keeps transition startup synchronous', async () => {
++    const runtime = await start();
++    expect(observers).toHaveLength(2);
++    runtime.gateSweep();
++    expect(document.getElementById('t1Gate')).not.toBeNull();
++    await flush();
++    expect(load).not.toHaveBeenCalled();
++    expect(mount).not.toHaveBeenCalled();
++  });
++
++  it('loads and mounts exactly once for the existing has-parameter semantics', async () => {
++    await start('?commDemo=0');
++    document.dispatchEvent(new Event('DOMContentLoaded'));
++    await vi.waitFor(() => expect(mount).toHaveBeenCalledTimes(1));
++    expect(load).toHaveBeenCalledTimes(1);
++    expect(document.querySelectorAll('#commDemoPanel')).toHaveLength(1);
++  });
++
++  it('catches a failed dynamic load without blocking the already installed transitions', async () => {
++    const failure = new Error('demo unavailable');
++    vi.doMock('../game/src/ui/comm-feed.js', async () => { load(); throw failure; });
++    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
++    const runtime = await start('?commDemo');
++    expect(observers).toHaveLength(2);
++    runtime.gateSweep();
++    await vi.waitFor(() => expect(warn).toHaveBeenCalledTimes(1));
++    const [message, caught] = warn.mock.calls[0];
++    expect(message).toBe('[comm-demo] 演示载入失败');
++    expect(caught.cause || caught).toBe(failure); // Vitest wraps a rejected mock module factory.
++    expect(mount).not.toHaveBeenCalled();
++    expect(document.getElementById('t1Gate')).not.toBeNull();
++  });
++
++  it('keeps a cold-loaded demo hidden when a battle starts before the module arrives', async () => {
++    const pending = deferred();
++    vi.doMock('../game/src/ui/comm-feed.js', async () => {
++      load();
++      await pending.promise;
++      return { mountCommDemo: mount };
++    });
++    await start('?commDemo=1');
++    await vi.waitFor(() => expect(load).toHaveBeenCalledTimes(1));
++    document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: 'battle' }));
++    pending.resolve();
++    await vi.waitFor(() => expect(mount).toHaveBeenCalledTimes(1));
++    expect(document.getElementById('commDemoPanel').style.display).toBe('none');
++  });
++
++  it('catches a mount failure as well as a loader failure', async () => {
++    const failure = new Error('mount unavailable');
++    mount.mockImplementation(() => { throw failure; });
++    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
++    await start('?commDemo=1');
++    await vi.waitFor(() => expect(warn).toHaveBeenCalledWith('[comm-demo] 演示载入失败', failure));
++  });
++});

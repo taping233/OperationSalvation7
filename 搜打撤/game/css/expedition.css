@@ -321,47 +321,15 @@ body.lobby #logPanel, body.page-opaque #logPanel { display: none; }
 #sidebar .stat-duo b { font-size: 12px; color: var(--exp-text); }
 #sidebar .stat-duo label { font-size: 10px; }
 #sidebar .stat-duo .duo-sep { padding: 0 6px; opacity: .5; }
-#routePanel { display: flex; flex-direction: column; justify-content: center; gap: 8px; }
-.route-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
-#routePanel .route-title { font-size: 13px; color: var(--exp-gold); letter-spacing: 1px; flex-shrink: 0; }
-.route-objective { font-size: 11px; color: var(--exp-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.route-objective[data-tone="danger"] { color: #f6a38e; }
-.route-objective[data-tone="safe"] { color: #b7bfc4; }
 /* 09-25 P2：上下留 6px 给路线卡 hover translateY(-2px) 的位移空间（overflow-x:auto 会把纵向
    也折算成裁切，无留白则上浮被剪）；两侧 16px 渐隐提示横向可滚（mask 不随内容滚动） */
-.route-options { display: flex; gap: 8px; overflow-x: auto; padding: 6px 2px; scrollbar-width: thin;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000000 16px, #000000 calc(100% - 16px), transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000000 16px, #000000 calc(100% - 16px), transparent 100%); }
-.route-option {
-  --route-accent: #c0c3c6;
-  min-width: 145px; flex: 1 0 145px; display: flex; gap: 10px; align-items: center; padding: 9px 11px;
-  text-align: left; background: #2a2d30; border: 1px solid #757a7e80; border-left: 2px solid var(--route-accent);
-  color: var(--exp-text); border-radius: var(--radius-panel); box-shadow: none;
-}
-.route-option[data-tone="danger"] { --route-accent: #dd9684; }
-.route-option[data-tone="gold"] { --route-accent: #ead282; }
-.route-option[data-tone="warm"] { --route-accent: #f3d571; }
-.route-option[data-tone="safe"] { --route-accent: #a2abb1; }
-.route-option[data-tone="mystery"] { --route-accent: #b7bdc2; }
-.route-icon { display: flex; align-items: center; justify-content: center; width: 24px; color: var(--route-accent); }
-.route-icon .ic { width: 22px; height: 22px; }
-.route-copy { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.route-copy b { color: #eeeeef; font-size: 13px; font-weight: 600; white-space: nowrap; }
-.route-copy small { color: #bec2c5; font-size: 10px; line-height: 1.4; }
-.route-arrow { margin-left: auto; color: var(--route-accent); font-size: 18px; }
-.route-option:hover:not(:disabled), .route-option.selected { background: #3c4045; border-color: var(--exp-gold); }
-.route-option:disabled { opacity: .5; }
-#routePanel .route-help { display: flex; justify-content: space-between; gap: 10px; margin: 0; color: #abb0b3; font-size: 10px; line-height: 1.2; }
-#routePanel .route-help span { color: #92989c; }
 .route-empty { font-size: 12px; padding: 14px; color: var(--exp-muted); }
-body.no-hintbar .route-help { display: none !important; }
 #topBtns { gap: 7px; }
 #hpHud { min-width: 126px; }
 #hpHud .hp-hud-label { color: #ced0d1; background: #313438; font-size: 10px; }
 #hpText { color: #f3f3f4; font-variant-numeric: tabular-nums; }
 #layerBanner { background: #191a1cdb; border: 1px solid #9a9c9e2e; border-bottom-color: #d0b76799; }
 #layerBanner .lb-en { color: #bbbec0; }
-.route-option:focus-visible { outline: 2px solid #f9e297; outline-offset: -3px; }
 body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after {
   animation-duration: .001ms !important; animation-delay: 0ms !important;
   transition-duration: .001ms !important; scroll-behavior: auto !important;

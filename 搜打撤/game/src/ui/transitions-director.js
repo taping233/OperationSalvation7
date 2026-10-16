@@ -19,7 +19,6 @@
  * 战斗域零接触：lastMode==='battle'（sdt-overlay-mode 广播）一律不起闸门；
  * 弹层标识不命中链路集合自然排除。reduce（core/motion.js 权威口径）下整体直出。 */
 import { reduceMotion } from '../core/motion.js';
-import { mountCommDemo } from './comm-feed.js';
 
 // ── T1 闸门单例 ──
 let gateBusy = false;
@@ -67,6 +66,7 @@ function markOf() {
 
 let lastMark = '';
 let lastMode = null;
+let commDemoPromise = null;
 
 function maybeGateOnSwap(next) {
   // 战斗与弹层模式不进闸门；只有链路页互切（hubMain↔depMain）触发
@@ -112,7 +112,17 @@ function start() {
 
   // D10 demo：URL 参数触发，去参即无痕
   try {
-    if (new URLSearchParams(location.search).has('commDemo')) mountCommDemo();
+    if (new URLSearchParams(location.search).has('commDemo') && !commDemoPromise) {
+      commDemoPromise = import('./comm-feed.js').then(({ mountCommDemo }) => {
+        mountCommDemo();
+        // Cold loading may cross a battle entry before the demo subscribes.
+        const panel = document.getElementById('commDemoPanel');
+        if (panel && lastMode === 'battle') panel.style.display = 'none';
+      }).catch(error => {
+        commDemoPromise = null;
+        console.warn('[comm-demo] 演示载入失败', error);
+      });
+    }
   } catch { /* 非浏览器环境（测试 jsdom 无 location.search 解析失败）：忽略 */ }
 }
 

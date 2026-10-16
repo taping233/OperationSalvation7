@@ -21,7 +21,8 @@ import { findMapTravelPath, setMapTravelPresentation } from './map-travel-path.j
 import { createTravelMotion, createArrivalFeedback } from './map-travel-motion.js';
 import { cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openChestsOnCell, openFixedRewardsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene } from './game.run.scenes.js';
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal, openEntrySupply } from './game.run.altar.js';
-import { claimResourceReward, entrySupplyAt, entrySupplyGate, nodeActionBinding, resourceRewardAt } from './node-reward-state.js';
+import { bindNodeEvent, nodeEventAt, claimResourceReward, entrySupplyAt, entrySupplyGate, nodeActionBinding, resourceRewardAt } from './node-reward-state.js';
+import { createEventCardChoiceController } from './event-card-choice.js';
 import { rewardExitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
@@ -190,6 +191,7 @@ function resolveCell() {
   game.visited = game.visited || {};
   const vKey = game.layerIdx + ',' + idx;
   const consumed = !!game.visited[vKey];
+  if (resumeEventCardChoice()) { UI.beginRoom(); return; }
   // The actual entry cell owns its pending supply; old saves have no synthetic reward.
   const supply = entrySupplyAt(game);
   if (supply && supply.taken.length < supply.cardIds.length) { UI.beginRoom(); openEntrySupply(); return; }
@@ -398,12 +400,19 @@ function eventPageBinding(act, current) {
 
 export async function runEventDeck() {
   eventRequest++;
+  if (resumeEventCardChoice()) return;
   const current = captureEventContext();
   if (!await enterNode('event', () => true)) return;
   if (!current()) return;
-  if (await tryLastLampEvent()) return;
+  const bound = nodeEventAt(game);
+  if (!bound && await tryLastLampEvent()) return;
   if (!current()) return;
   const deck = SDT.Cards.all().filter(c => c.type === '事件');
+  if (bound) {
+    const savedCard = deck.find(card => card.id === bound.eventId);
+    if (!savedCard) { renderUnavailableNodeEvent(current); return; }
+    return triggerEventCard(savedCard, current);
+  }
   if (!deck.length) {
     const ev = weighted(MAP.randomEvents);
     if (ev.coins) { UI.log(`【事件】${ev.text}`, 'sys'); gainCoins(ev.coins[0] + Math.floor(Random.random('event') * (ev.coins[1] - ev.coins[0] + 1))); }
@@ -415,7 +424,22 @@ export async function runEventDeck() {
     finishInstant();
     return;
   }
-  return triggerEventCard(pick(deck), current);
+  const card = pick(deck);
+  bindNodeEvent(game, card.id);
+  saveGame(); // Freeze the first draw before narrative loading; reentry never advances this draw again.
+  return triggerEventCard(card, current);
+}
+
+function renderUnavailableNodeEvent(current) {
+  if (!current()) return;
+  game.state = 'modal';
+  nodeShell({ tone:'event', icon:'[[icon:notes]]', title:'此处事件暂不可用',
+    sub:'这个节点的事件记录已保留，当前卡库暂时无法显示；不会重新抽取事件。',
+    body:nodeOpt('eventUnavailableLeave', '返回地图', '保留原事件，稍后可重新进入') });
+  const active = eventPageBinding('eventUnavailableLeave', current);
+  setBagReturnHook(() => renderUnavailableNodeEvent(current));
+  UI.act('eventUnavailableLeave', () => { if (active()) closeEventFlow(); });
+  UI.refresh(game);
 }
 
 function currentLastLampIdentity(slotId, runId) {
@@ -619,7 +643,7 @@ async function triggerEventCard(card, current) {
       evtSettled = true;
       setBagReturnHook(null);
       UI.hideOverlay();
-      consumeCurrentCell();
+      if (!choice.deferConsume) consumeCurrentCell();
       choice.run();
       if (game.state !== 'modal') finishInstant();   // 选项未自开新页时兜底收尾（幂等）
     });
@@ -674,39 +698,15 @@ function spendEventCoins(amount, reason) {
   return true;
 }
 
-function openEventCardChoice(args, transaction = null) {
-  const txn = transaction || { picked: false, current: captureEventContext() };
-  if (txn.picked || !txn.current()) return;
-  const { title, sub, cards, action = '选择获得', onPick, asset = 'scene-event-custom-a' } = args;
-  game.state = 'modal';
-  const list = (cards || []).filter(Boolean);
-  if (!list.length) {
-    UI.log(`【${esc(title)}】可用卡池为空，本次未获得卡牌`, 'warn');
-    closeEventFlow();
-    return;
-  }
-  // 背包返回恢复本页（09-30 深审 WORLD-003）：二级选卡页此前无返回钩子，装备征用令等
-  // 已扣款页关一次背包就丢失候选与奖励（节点已消耗、重进不来）。重开不重扣、不重消耗。
-  setBagReturnHook(() => openEventCardChoice(args, txn));
-  nodeShell({
-    tone: 'event', asset, icon: '[[icon:cards]]', title,
-    sub,
-    body: `<div class="bt-hand event-choice-hand">${list.map((card, i) => `
-      <button type="button" class="bt-card event-choice-card" data-act="eventCardPick" data-i="${i}" aria-label="${escAttr(action)}：${escAttr(card.name)}">
-        ${SDT.Cards.cardHTML(card, 'sm')}
-      </button>`).join('')}</div>
-      <p class="loot-footer-note">点击一张卡牌${action}</p>`,
+let eventCardChoices = null;
+function eventCardChoiceController() {
+  // Lazy assembly preserves the session/flow import boundary during boot.
+  return eventCardChoices ||= createEventCardChoiceController({
+    game, UI, SDT, saveGame, getActiveSlot, nodeShell, grantEventCard, consumeCurrentCell, openFixedRewardsOnCell,
+    captureContext: captureEventContext, close: closeEventFlow,
   });
-  const active = eventPageBinding('eventCardPick', txn.current);
-  UI.act('eventCardPick', (d) => {
-    if (txn.picked || !active()) return;
-    const card = list[+d.i];
-    if (!card || (onPick ? onPick(card) === false : !grantEventCard(card))) return;
-    txn.picked = true;
-    closeEventFlow();
-  });
-  UI.refresh(game);
 }
+export function resumeEventCardChoice() { return eventCardChoiceController().resume(); }
 
 function transformCandidates(card) {
   if (!card || !['武术', '法术', '装备'].includes(card.type)) return [];
@@ -776,21 +776,16 @@ function openEventRecode() {
 }
 
 function openEventPotions() {
+  if (resumeEventCardChoice()) return;
   const pool = eventPool('道具').filter(c => /药水/.test(c.name));
-  openEventCardChoice({
-    title: '避难市集药摊', asset: 'scene-event-potions',
-    sub: '污染区药师只能保住一瓶——从 3 瓶随机药水中选择 1 瓶。',
-    cards: uniqueEventPicks(pool, 3),
-  });
+  eventCardChoiceController().open('ev19-potions', uniqueEventPicks(pool, 3));
 }
 
 function openEventQuartermaster() {
+  if (resumeEventCardChoice()) return;
   const cards = uniqueEventPicks(eventPool('装备'), 3);
   if (!spendEventCoins(3, '军需征用')) { closeEventFlow(); return; }
-  openEventCardChoice({
-    title: '装备征用令', asset: 'scene-event-quartermaster',
-    sub: '已支付 3 币。从军需官摆出的 3 件装备中选择 1 件。', cards,
-  });
+  eventCardChoiceController().open('ev19-quartermaster', cards);
 }
 
 function openEventGamble() {
@@ -808,10 +803,17 @@ function openEventGamble() {
     nodeShell({
       tone: 'event', asset: 'scene-event-gamble', icon: '[[icon:dice]]', title: '地下商场黑市',
       sub: `每次投入 <b>3 币</b>，有 <b>50%</b> 概率拿走全部三张卡；第 <b>5</b> 次必定成功。已尝试 ${attempts}/5 次。${lastMiss ? '<br><b class="danger">指示灯变红，这次什么也没拿到。</b>' : ''}`,
-      body: `<div class="bt-hand event-choice-hand">${prizes.map(c => `<div class="bt-card">${SDT.Cards.cardHTML(c, 'sm')}</div>`).join('')}</div>
+      body: `<div class="bt-hand event-choice-hand">${prizes.map((c, i) => `<button type="button" class="bt-card event-choice-card" data-act="eventGambleRead" data-i="${i}" aria-label="放大查看${escAttr(c.name)}" aria-haspopup="dialog">${SDT.Cards.cardHTML(c, 'sm')}</button>`).join('')}</div>
+        <p class="loot-footer-note">点击卡牌放大查看</p>
         <div class="scene-ops"><button class="ov-btn" data-act="eventGambleLeave">放弃并离开</button><button class="ov-btn ok" data-act="eventGambleTry" ${(game.coins || 0) < 3 || !prizes.length ? 'disabled' : ''}>[[icon:coin]] 投入 3 币${attempts === 4 ? '（本次保底）' : ''}</button></div>`,
     });
     const active = eventPageBinding('eventGambleTry', current);
+    UI.act('eventGambleRead', d => {
+      const i = Number(d.i), card = prizes[i];
+      if (settled || !active() || !card) return;
+      const source = UI.el.ovBody.querySelector(`[data-act="eventGambleRead"][data-i="${i}"]`);
+      UI.showCardZoom(card, { hideNote:true, presentation:'expedition', from:source, returnFocus:source });
+    });
     UI.act('eventGambleLeave', () => { if (!settled && active()) { settled = true; closeEventFlow(); } });
     UI.act('eventGambleTry', () => {
       if (settled || !active() || !spendEventCoins(3, '黑市抽签')) return;
@@ -820,9 +822,8 @@ function openEventGamble() {
       if (!hit) { SDT.Sound.sfx('blackMarketLose'); render(true); return; }
       settled = true;
       SDT.Sound.sfx('blackMarketWin');
-      prizes.forEach(c => grantEventCard(c));
-      UI.log(`[[icon:sparkles]] 黑市闸门弹开：第 ${attempts} 次投币成功，获得 1 张装备与 2 张招式`, 'loot');
-      closeEventFlow();
+      UI.log(`[[icon:sparkles]] 黑市闸门弹开：第 ${attempts} 次投币成功，1 张装备与 2 张招式待领取`, 'loot');
+      openFixedRewardsOnCell(prizes, '地下商场黑市');
     });
     UI.refresh(game);
   };
@@ -915,7 +916,7 @@ function eventChoiceSpec(card, narrative = null) {
       { label: '接入重编台', detail: '选择 2 张招式或装备卡进行同稀有度同类型转换', tone: 'ok', run: openEventRecode },
     ],
     'ev19-potions': () => [
-      { label: '查看药摊', detail: '从 3 瓶随机药水中选择 1 瓶', tone: 'ok', run: openEventPotions },
+      { label: '查看药摊', detail: '从 3 瓶随机药水中选择 1 瓶', tone: 'ok', deferConsume:true, run: openEventPotions },
     ],
     'ev19-arrows': () => [
       { label: '打开弹药柜', detail: '获得 2 张随机非职业箭系列卡', tone: 'ok', run: () => {
@@ -927,7 +928,7 @@ function eventChoiceSpec(card, narrative = null) {
       { label: '查看黑市货物', detail: '每次 3 币，50% 概率，第 5 次保底；可随时放弃', run: openEventGamble },
     ],
     'ev19-quartermaster': () => [
-      { label: '支付 3 币', detail: (game.coins || 0) >= 3 ? '从 3 张装备卡中选择 1 张' : `币不足（现有 ${game.coins || 0}）`, tone: (game.coins || 0) >= 3 ? 'ok' : 'danger', run: openEventQuartermaster },
+      { label: '支付 3 币', detail: (game.coins || 0) >= 3 ? '从 3 张装备卡中选择 1 张' : `币不足（现有 ${game.coins || 0}）`, tone: (game.coins || 0) >= 3 ? 'ok' : 'danger', deferConsume:true, run: openEventQuartermaster },
       { label: '放弃征用', detail: '保留货币继续行进', run: settle(() => { UI.log('你没有签下军需征用单', 'dim'); }) },
     ],
   };

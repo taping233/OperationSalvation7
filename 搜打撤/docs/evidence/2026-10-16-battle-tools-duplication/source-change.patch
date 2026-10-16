@@ -1,0 +1,20 @@
+--- a/game/src/battle/view/battle.layers.js
++++ b/game/src/battle/view/battle.layers.js
+@@ -504,8 +504,15 @@
+       selfSig = {};
+     }
+     if (selfAnchor !== selfUnit) selfAnchor.replaceWith(selfUnit);
+-    const careerTools = body.querySelector('.sts-hand-tools');
+-    if (careerTools && careerTools.parentElement !== selfUnit) selfUnit.appendChild(careerTools);
++    // A rebuilt HUD owns the fresh tools; the retained player may still carry the
++    // previous stage's tools. Replace those rather than selecting them first.
++    // Incremental renders have no HUD placeholder and keep the live tools intact.
++    const careerTools = body.querySelector('.sts-hud > .sts-hand-tools');
++    if (careerTools) {
++      const previousTools = selfUnit.querySelector(':scope > .sts-hand-tools');
++      if (previousTools) previousTools.replaceWith(careerTools);
++      else selfUnit.appendChild(careerTools);
++    }
+     return { alliesMount, foesMount };
+   }
+   // 单位节点固定骨架：意图(敌) + 立绘 + 名牌(名号/血条/属性/状态角标/装备)，各段按签名差分

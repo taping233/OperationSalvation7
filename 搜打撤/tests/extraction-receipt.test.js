@@ -21,7 +21,9 @@ describe('回执字段完整性（clear/extract 各一例）', () => {
   it('clear：击破首脑终局撤离——结局/层/行动/首探经验/净带回/关键损失/时长齐备', () => {
     const r = buildExtractionReceipt({
       game: { bossKilled: true, layerIdx: 3, turn: 33, explored: exploredOf(12), coins: 7, elapsed: 95.4,
-        ownedCards: Array.from({ length: 5 }, (_, i) => ({ card: { id: String(i), name: `带${i}`, rarity: '古朴' } })) },
+        ownedCards: ['入库', '入库', '遗珠', '遗珠', '杂卡'].map(name => ({
+          card: { name, rarity: name === '遗珠' ? '传说' : '古朴' },
+        })) },
       pending: {
         remainingCards: [{ card: { name: '遗珠', rarity: '传说' }, count: 2 }, { card: { name: '杂卡', rarity: '古朴' }, count: 1 }],
         totalPocketCount: 4, lostPocketCount: 1, resources: { wood: 2, rations: 3 },
@@ -31,6 +33,7 @@ describe('回执字段完整性（clear/extract 各一例）', () => {
     expect(r).toEqual({
       version: 1, outcome: 'clear', bossKilled: true, layersReached: 4, actions: 32,
       firstExplore: { moves: 12, xp: 44 },   // SYS-01 口径：20+12*2，与撤离实发经验同源
+      savedCards: [{ card: { name: '入库', rarity: '古朴' }, count: 2 }],
       netTake: { cardsStashed: 2, pocketKept: 3, wood: 2, rations: 3 },   // 本局真实入库（携出 5 − 未入库 3）
       losses: { lostCount: 3, lostNotable: [{ name: '遗珠', rarity: '传说', count: 2 }], pocketLost: 1 },
       runCoins: 7, durationSec: 95,
@@ -47,6 +50,7 @@ describe('回执字段完整性（clear/extract 各一例）', () => {
     expect(r).toEqual({
       version: 1, outcome: 'extract', bossKilled: false, layersReached: 2, actions: 20,
       firstExplore: { moves: 20, xp: 60 },
+      savedCards: [{ card: { name: '镭射', rarity: '古朴' }, count: 3 }],
       netTake: { cardsStashed: 3, pocketKept: 0, wood: 0, rations: 0 },
       losses: { lostCount: 0, lostNotable: [], pocketLost: 0 },
       runCoins: null, durationSec: 0,
@@ -118,6 +122,7 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
     };
     window.SDT = {
       UI, Base: { data: { wood: 0, rations: 0, pocket: [], stash: [], nestUnlocked: false, coins: 0, collection: {},
+        _m01: { revision: 0, requests: {} },
         stats: { extracts: 0, bestRunCoins: 0, stashTotal: 0 } },
         isSha: () => false, stashRoom: () => 5, stashUsed: () => 0, stashCap: () => 5 },
       Sound: { sfx: vi.fn(), music: vi.fn() },
@@ -153,6 +158,41 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
     expect(outcome).toBe('clear');
     expect(detail.receipt).toMatchObject({ outcome: 'clear', bossKilled: true, layersReached: 4, actions: 32 });
     expect(detail.receipt.firstExplore).toEqual({ moves: 12, xp: 44 });
+    expect(detail.savedCards).toEqual([]);   // 未选择入库，不能回退为 ownedCards 候选
+    expect(detail).not.toHaveProperty('carriedCards');
+  });
+
+  it('records only the final receipt savedCards after actual storage selection', async () => {
+    expect(await doExtract()).toBe(true);
+    await UI.acts.exAll();
+    await UI.acts.exFinish();
+    const [outcome, detail] = recordRun.mock.calls[0];
+    expect(outcome).toBe('clear');
+    expect(detail.savedCards).toEqual([{ card: { id: 'b', name: '背包卡' }, count: 1 }]);
+    expect(detail.savedCards).toEqual(detail.receipt.savedCards);
+    expect(detail).not.toHaveProperty('carriedCards');
+  });
+
+  it('uses a short smart-storage label while retaining capacity and value priority in its accessible description', async () => {
+    expect(await doExtract()).toBe(true);
+    const smart = document.querySelector('[data-act="exSmart"]');
+    expect(smart.textContent).toContain('优先入库高价值卡');
+    expect(smart.textContent).not.toContain('上限仓库空格');
+    expect(smart.title).toBe('按仓库剩余空格，优先入库价值最高的卡牌');
+    expect(smart.getAttribute('aria-label')).toBe(smart.title);
+  });
+
+  it('labels notable losses as a subset while preserving the full receipt count', async () => {
+    altarState.game.ownedCards = [
+      { uid: 'run-shoes', card: { name: '急速跑鞋', rarity: '古朴', type: '装备' } },
+      { uid: 'ice', card: { name: '冰刺', rarity: '古朴', type: '法术' } },
+      { uid: 'box', card: { name: '迷之匣', rarity: '史诗', type: '道具' } },
+    ];
+    await finishUp();
+    expect(document.body.textContent).toContain('未入库 3 张（其中传说/史诗包括：【迷之匣】×1）');
+    expect(recordRun.mock.calls[0][1].receipt.losses).toMatchObject({
+      lostCount: 3, lostNotable: [{ name: '迷之匣', rarity: '史诗', count: 1 }],
+    });
   });
 
   it('extract 结局：主体文案突出「保本返回」，与 clear 不共享同一句主体', async () => {
@@ -169,6 +209,7 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
     const [outcome, detail] = recordRun.mock.calls[0];
     expect(outcome).toBe('extract');
     expect(detail.receipt).toMatchObject({ outcome: 'extract', bossKilled: false, layersReached: 4, actions: 20 });
+    expect(detail.savedCards).toEqual([]);
   });
 });
 

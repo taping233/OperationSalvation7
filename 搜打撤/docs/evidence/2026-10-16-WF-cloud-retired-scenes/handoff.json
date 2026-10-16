@@ -1,0 +1,76 @@
+{
+  "status": "completed source changes; editing ownership returned to parent",
+  "batches": {
+    "room": {
+      "receipt": "docs/evidence/2026-10-16-WF-cloud-room-lossless/receipt.json",
+      "savedBytes": 424413,
+      "sourcePreserved": true
+    },
+    "retiredScenes": {
+      "receipt": "docs/evidence/2026-10-16-WF-cloud-retired-scenes/receipt.json",
+      "count": 19,
+      "potentialPublishedSavedBytes": 3428566,
+      "allSourceFilesRetained": true,
+      "currentTotalExclusionCount": 165,
+      "warnings": []
+    },
+    "sprites": {
+      "receipt": "docs/evidence/2026-10-16-WF-cloud-sprite-lossless/receipt.json",
+      "count": 263,
+      "savedBytes": 5160770,
+      "allRGBAAlphaAndSizesUnchanged": true,
+      "animationCatalogsUnchangedFromR2": 5,
+      "requiredTextureFilesDecoded": 265
+    }
+  },
+  "changedCodeAndManifest": [
+    "game/src/home/home.visuals.js",
+    "game/assets/asset-manifest.json",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "vite.config.js (writeThumbManifest precise reviewed-exclusion filter only)"
+  ],
+  "changedAssets": [
+    "game/assets/home-prototype/room-direction-candidate.webp (new; 607272B)",
+    "263 existing sprite WebPs listed in sprite receipt; same paths"
+  ],
+  "tests": [
+    "tests/runtime-asset-redundancy.test.js",
+    "tests/runtime-asset-redundancy-plugin.test.js",
+    "tests/retired-scenes-publication.test.js",
+    "tests/lossless-runtime-assets.test.js"
+  ],
+  "validation": {
+    "adjacentFiles": 15,
+    "adjacentPassedTests": 112,
+    "finalFiles": 4,
+    "finalPassedTests": 26,
+    "assetAuditErrors": 0,
+    "unchangedHistoricalAssetWarnings": 617,
+    "eslint": "passed",
+    "syntax": "passed"
+  },
+  "unchanged": [
+    "scripts/runtime-asset-redundancy.mjs",
+    "fonts",
+    "animations.json",
+    "art mappings",
+    "frame-atelier-v1.png/CSS reference",
+    "both large title PNGs",
+    "all 19 retired source originals",
+    "extra 30 shadowed card candidates"
+  ],
+  "parentReviewSha256": "1dbb7522f32a2e6a60575864ce625aee077717a4662276cc790bb211dbf00c18",
+  "projectionOnly": {
+    "totalSavedBytesRelativeToR2": 9013749,
+    "MiB": 8.59618091583252,
+    "packageWithParent1011996BytePortraitMiB": 120.79909801483154
+  },
+  "notRun": [
+    "build",
+    "browser",
+    "services",
+    "Git",
+    "full suite"
+  ],
+  "next": "Parent owns normal build and real-page verification; source-only projection is not a measured build result"
+}

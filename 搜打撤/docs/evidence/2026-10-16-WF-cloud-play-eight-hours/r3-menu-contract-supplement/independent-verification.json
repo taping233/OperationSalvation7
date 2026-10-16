@@ -1,0 +1,84 @@
+{
+  "checkedAtUtc": "2026-10-15T21:18:17.173284+00:00",
+  "method": "Read-only evidence and SHA256 verification; no test/build/browser run, no production edit",
+  "originalR3Tests": {
+    "filesPassed": 461,
+    "filesFailed": 2,
+    "testsPassed": 4313,
+    "testsFailed": 4,
+    "testsSkipped": 2,
+    "testsTotal": 4319,
+    "summaryPresent": true
+  },
+  "supplementTests": {
+    "filesPassed": 463,
+    "filesFailed": 0,
+    "testsPassed": 4318,
+    "testsFailed": 0,
+    "testsSkipped": 2,
+    "testsTotal": 4320,
+    "summaryPresent": true,
+    "allFourRecordedCommandsExitZero": true
+  },
+  "approvedReplacements": [
+    "搜打撤/tests/agent-console-jump.test.js",
+    "搜打撤/tests/selftest-paths.test.js",
+    "搜打撤/game/selftest.js"
+  ],
+  "approvedCopiedPaths": 11,
+  "currentSourceCopiedPathMismatches": [],
+  "snapshotCopiedPathMismatches": [],
+  "comparisonOtherProductionChanges": [],
+  "productionState": {
+    "beforeAfterBytesEqual": true,
+    "fileCount": 2916,
+    "manifestSha256": "8a3431844719b172008352015b10c66d58c25d26290fe328b9ae59b3fca939c4",
+    "snapshotCurrentMismatches": [],
+    "sourceR3FreezeProductionCount": 2916,
+    "sourceCurrentMismatches": [],
+    "sourceAddedProductionPathsComparedWithR3": []
+  },
+  "artifactChecks": [
+    {
+      "name": "preserved-r3-build-output",
+      "files": 1322,
+      "bytes": 126673218,
+      "changedOrMissing": [],
+      "extraFiles": [],
+      "exactMatch": true
+    },
+    {
+      "name": "original-r3-output",
+      "files": 1322,
+      "bytes": 126673218,
+      "changedOrMissing": [],
+      "extraFiles": [],
+      "exactMatch": true
+    }
+  ],
+  "originalLogsUnmodifiedAgainstManifest": true,
+  "originalLogMismatches": [],
+  "build": {
+    "rerun": false,
+    "originalExitCode": 1,
+    "viteCompileSuccessInOriginalLog": true,
+    "packageMiB": 120.8,
+    "entryGzipKiB": 288.1,
+    "initialJsGzipKiB": 333.5,
+    "allCssGzipKiB": 195.6,
+    "budgetFailureLines": [
+      "[perf-budget] FAIL: 构建体积 120.80 MiB > 112.00 MiB",
+      "[perf-budget] FAIL: 入口 JS gzip 288.1 KiB > 270.0 KiB",
+      "[perf-budget] FAIL: 首屏 JS gzip 333.5 KiB > 310.0 KiB",
+      "[perf-budget] FAIL: CSS gzip 195.6 KiB > 136.0 KiB"
+    ]
+  },
+  "manifestHashes": {
+    "originalR3Source": "bf2e4dffb52d302525344f38dc61c1b325e35923e0ec8234c499411b0a8e96d5",
+    "supplementSource": "2e58810b934d08f450a9328eaf5e8e7941b961b5f0e996bc8654ccc0e5fcf950",
+    "originalBuildOutputs": "0754a018fa4724fe193cbc03dfd43dedefc850d4f1b3fe3e354c34b28c045526",
+    "preservedOriginalBuildManifest": "0754a018fa4724fe193cbc03dfd43dedefc850d4f1b3fe3e354c34b28c045526"
+  },
+  "metadataHashesMatch": true,
+  "checksUseSameSupplementSourceHash": true
+}

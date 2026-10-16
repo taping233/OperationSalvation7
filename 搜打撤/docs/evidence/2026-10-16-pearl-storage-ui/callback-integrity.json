@@ -1,0 +1,11 @@
+{
+  "pearlCallbacksUnchangedFromHEAD": true,
+  "headSHA256": "fbad38a925780e218356faa7319bf8699b060f31cb64eb170537d9725787b3ea",
+  "workingSHA256": "fbad38a925780e218356faa7319bf8699b060f31cb64eb170537d9725787b3ea",
+  "gameBagLines": 752,
+  "protectedFilesNotEditedByThisTask": [
+    "game/src/run/game.session.bag.js",
+    "game/src/core/card-capacity.js",
+    "game/src/run/chests.js"
+  ]
+}

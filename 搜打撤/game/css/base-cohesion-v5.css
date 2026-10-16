@@ -36,10 +36,6 @@
 #overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) select option { background:var(--camp-bg); color:var(--camp-ink); }
 #overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .warehouse-more-filters summary { background:transparent; color:var(--camp-muted); }
 #overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .warehouse-more-filters[open] summary { color:var(--camp-ink); border-color:var(--camp-accent); }
-#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .warehouse-use-tabs { border-color:var(--camp-line); }
-#overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) .warehouse-use-tabs button.on {
-  color:var(--camp-ink); background:var(--camp-room-selected); box-shadow:inset 0 -2px 0 var(--camp-accent);
-}
 #overlay #hubMain.pg.hub.base-camp.base-subpage:not(.hub-courtyard) :is(.stash-cell,.person-pool-card,.collection-card,.av3-back,.skills-person,.facility-tile) {
   background:transparent; color:var(--camp-ink); box-shadow:none;
 }

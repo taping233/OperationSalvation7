@@ -1,0 +1,25 @@
+{
+  "scope": "R7冻结后独立名称一致性小补；定向7文件141项通过，变更4文件语法/lint与8配置typecheck通过；不在R7 full快照内",
+  "files": [
+    {
+      "path": "game/src/battle/core/battle.core.js",
+      "before": "823e2c016cfcbc30ca3f0ab9118a1f9589fbc77a1ef2d4ef56675c3d95d8568f",
+      "after": "0df25eec9921e5f19bdec3c111f6850306a47f0f213f876305b9e4db649d2335"
+    },
+    {
+      "path": "game/src/battle/view/battle.preview.js",
+      "before": "ad785616a1cb19fd45b88b87cdf3be6d75aa685184b49723fe43e746f52242c8",
+      "after": "320b6629e974707f45ec2d37b89b2994b7e64977fff9c1844c6c90344127301f"
+    },
+    {
+      "path": "tests/skull-sword-effective-session.test.js",
+      "before": "42457ff602117abe20baf93d0fd3cc52b02ea4dd9489306d4a8ab1d1800f8aa1",
+      "after": "1fe40086afca241fbcb9ce6c34142aefff10246249441755b67fc55751df916f"
+    },
+    {
+      "path": "tests/r3-a-preview.test.js",
+      "before": "6d00a7324c01bac4d98dc7acd49a352cc3cb1a8940dd5e0865db645478375242",
+      "after": "ba3d1f943f193666454510600f25dc34705194521dc982668b8752331d567252"
+    }
+  ]
+}

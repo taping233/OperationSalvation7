@@ -144,18 +144,59 @@ it('keeps nine hand identities and stable corner controls while rerendering the 
   expect(stage().querySelectorAll('[data-act="btSettings"]')).toHaveLength(1);
 });
 
-it('selects a target on a pointer tap and suppresses the following synthetic click', () => {
+it.each(['face', 'bridge'])('selects a target on one %s pointer tap and suppresses the following synthetic click', route => {
   start();
   expect([...stage().querySelectorAll('.bt-card')].map(node => node.dataset.uid)).toEqual(['inspect-card']);
   const down = new MouseEvent('pointerdown', { bubbles: true, button: 0, clientX: 20, clientY: 600 });
-  Object.defineProperty(down, 'pointerId', { value: 1 }); card().dispatchEvent(down);
+  const hit = route === 'bridge' ? card().closest('.bt-slot') : card().querySelector('.hs-card');
+  Object.defineProperty(down, 'pointerId', { value: 1 }); hit.dispatchEvent(down);
   expect(Aim.aim?.uid).toBe('inspect-card');
   const up = new MouseEvent('pointerup', { bubbles: true, button: 0, clientX: 20, clientY: 600 });
   Object.defineProperty(up, 'pointerId', { value: 1 }); window.dispatchEvent(up);
-  expect(panel()).toBeNull(); card().click();
+  expect(panel()).toBeNull(); hit.click();
   expect(Aim.clickSelectedUid).toBe('inspect-card');
   expect(document.querySelectorAll('.bt-hand-detail')).toHaveLength(0);
   expect(BattleSession.getSnapshot().foes[0].hp).toBe(40);
+});
+
+it('starts self-target equipment selection from the stable folded slot without spending or requiring a second click', () => {
+  const sword = Cards.all().find(entry => entry.id === 'tt3-longsword');
+  expect(sword).toBeTruthy(); start(3, sword);
+  const before = BattleSession.getSnapshot();
+  const foldedSlot = card().closest('.bt-slot');
+  const pointer = type => {
+    const event = new MouseEvent(type, { bubbles: true, button: 0, clientX: 900, clientY: 1064 });
+    Object.defineProperty(event, 'pointerId', { value: 7 }); return event;
+  };
+  foldedSlot.dispatchEvent(pointer('pointerdown'));
+  expect(Aim.aim?.uid).toBe('inspect-card');
+  window.dispatchEvent(pointer('pointerup'));
+  expect(Aim.aim).toBeNull();
+  expect(Aim.clickSelectedUid).toBe('inspect-card');
+  expect(card().classList.contains('click-selected')).toBe(true);
+  expect(stage().querySelector('#btSelf.can-target')).not.toBeNull();
+  foldedSlot.click(); // Native click after the captured pointerup must not toggle it off.
+  expect(Aim.clickSelectedUid).toBe('inspect-card');
+  expect(BattleSession.getSnapshot().energy).toBe(before.energy);
+  expect(BattleSession.getSnapshot().hand).toEqual(before.hand);
+});
+
+it('routes rapid folded-slot infusion picks to distinct UIDs in one shared material stack', () => {
+  start(1, { id: 'folded-infuse', name: '折叠注能', type: '法术', cost: 1, infuse: 3, desc: '注能(3)：获得 6 点护盾。' }, [
+    { uid: 'folded-fuel-a', card: Cards.SHA }, { uid: 'folded-fuel-b', card: Cards.SHA }, { uid: 'folded-fuel-c', card: Cards.SHA },
+  ]);
+  UI.el.ovBody.querySelector('.bt-card[data-uid="inspect-card"] [data-act=btCardDetails]').click();
+  panel().querySelector('.bt-hand-detail-use').click(); flush();
+  const material = UI.el.ovBody.querySelector('.bt-card[data-uid="folded-fuel-a"]');
+  const foldedSlot = material.closest('.bt-slot');
+  const pick = () => {
+    foldedSlot.dispatchEvent(new MouseEvent('pointerdown', { bubbles: true, button: 0 }));
+    foldedSlot.click();
+  };
+  pick(); expect(BattleSession.getSnapshot().infusing.picked).toEqual(['folded-fuel-a']);
+  pick(); expect(BattleSession.getSnapshot().infusing.picked).toEqual(['folded-fuel-a', 'folded-fuel-b']);
+  expect(foldedSlot.dataset.uid).toBe(material.dataset.uid);
+  expect(BattleSession.getSnapshot().energy).toBe(9);
 });
 
 it('keeps unavailable cards readable and prevents stale confirmations after a battle switch', () => {
@@ -234,7 +275,7 @@ it('reuses one stable slot for unchanged groups and clears it when the final cop
   const slot = card().closest('.bt-slot');
   expect(stage().querySelectorAll('.sts-hand .bt-card')).toHaveLength(1); render(); expect(card().closest('.bt-slot')).toBe(slot);
   BattleSession.commands.playCard('inspect-card', 0); await settle();
-  expect(card().dataset.uid).toBe('same-copy'); expect(card().closest('.bt-slot')).toBe(slot);
+  expect(card().dataset.uid).toBe('same-copy'); expect(card().closest('.bt-slot')).toBe(slot); expect(slot.dataset.uid).toBe('same-copy');
   BattleSession.commands.playCard('same-copy', 0); await settle();
   expect(stage().querySelectorAll('.sts-hand .bt-card')).toHaveLength(0);
 });
@@ -272,12 +313,16 @@ it('renders every long-rule condition through the shared safe rich-text copy wit
 });
 
 it.each([
-  [{ atk: 5 }, {}, '攻击 5', '攻击 · 5', '攻 5'],
-  [{ atk: 3, affix: 'frenzy' }, {}, '双击 3×2', '共6', '攻 3×2'],
-  [{ atk: 3, affix: 'frenzy' }, { bleed: 2 }, '双击 5×2', '流血 2 层', '攻 3×2'],
-  [{ atk: 0 }, {}, '攻击 0', '攻击 · 0', '攻 0'],
-  [{ atk: 4, evenAttack: true }, {}, '蓄力', '下回合行动', '攻 4'],
-  [{ atk: 4, status: { freeze: 1 } }, {}, '冰冻中', '无法行动', '攻 4'],
+  [{ atk: 5 }, {}, '攻击 5', '攻击 · 5', '基础攻击 5'],
+  [{ atk: 3, affix: 'frenzy' }, {}, '双击 3×2 · 诅咒', '共6', '基础攻击 3×2'],
+  [{ atk: 3, affix: 'frenzy' }, { bleed: 2 }, '双击 5×2 · 诅咒', '流血 2 层', '基础攻击 3×2'],
+  [{ atk: 0 }, {}, '攻击 0', '攻击 · 0', '基础攻击 0'],
+  [{ atk: 4, evenAttack: true }, {}, '蓄力 · 下回合行动', '下回合行动', '基础攻击 4'],
+  [{ atk: 4, status: { freeze: 1 } }, {}, '冰冻中', '无法行动', '基础攻击 4'],
+  [{ atk: 4, behavior: 'burn' }, {}, '攻击 4 · 灼烧', '攻击并灼烧', '基础攻击 4'],
+  [{ atk: 5, behavior: 'general' }, {}, '攻击 5 · 回合末强化', '攻击·回合末强化', '基础攻击 5'],
+  [{ atk: 6, behavior: 'curse' }, {}, '攻击 6 · 诅咒', '攻击并施加诅咒', '基础攻击 6'],
+  [{ atk: 4, affix: 'aegis' }, {}, '攻击 4 · 偶数回合庇幕', '偶数回合减免所有伤害', '基础攻击 4'],
 ])('separates the actual next action from base attack and keeps detailed conditions for %j', (foe, status, short, detail, base) => {
   start();
   const before = BattleSession.getSnapshot();
@@ -285,14 +330,124 @@ it.each([
   updateUnits(mountUnitLayer(UI.el.ovBody, before.battleToken), presented, {});
   const enemy = stage().querySelector('.sts-foe');
   expect(enemy.querySelector('.bt-intent-short').textContent).toBe(short);
+  const [actionText, conditionText] = short.split(' · ');
+  expect(enemy.querySelector('.bt-intent-action').textContent).toBe(actionText);
+  expect(enemy.querySelector('.bt-intent-condition')?.textContent).toBe(conditionText ? ` · ${conditionText}` : undefined);
   expect(enemy.querySelector('.bt-intent-detail').textContent).toContain(detail);
-  expect(enemy.querySelector('.sts-atkbadge').textContent).toContain(base);
+  expect(enemy.querySelector('.sts-headrow .sts-atkbadge')).toBeNull();
+  expect(enemy.querySelector('.bt-intent-detail .sts-atkbadge').textContent.trim()).toBe(base);
+  expect(enemy.querySelector('.sts-intent').getAttribute('aria-label')).toContain(base);
+  expect(enemy.querySelector('.sts-intent').getAttribute('aria-expanded')).toBe('false');
   expect(stage().querySelector('.sts-me .sts-stats').textContent).toContain('攻 4');
   expect(enemy.querySelector('.sts-hp span').textContent).toBe('40/40');
   enemy.querySelector('.sts-intent').click();
   expect(enemy.querySelector('.sts-intent').classList.contains('is-open')).toBe(true);
+  expect(enemy.querySelector('.sts-intent').getAttribute('aria-expanded')).toBe('true');
   expect(BattleSession.getSnapshot()).toEqual(before);
   expect(Aim.clickSelectedUid).toBeNull();
+});
+
+it('keeps a long enemy name intact and exposes base attack through keyboard intent details without confirming a target', () => {
+  start(); const before = BattleSession.getSnapshot();
+  const name = '被冰雾侵蚀的联邦机械重装巡防指挥官';
+  const presented = { ...before, foes: [{ ...before.foes[0], name, atk: 7, behavior: 'burn' }] };
+  updateUnits(mountUnitLayer(UI.el.ovBody, before.battleToken), presented, {});
+  const enemy = stage().querySelector('.sts-foe'), intent = enemy.querySelector('.sts-intent');
+  expect(enemy.querySelector('.sts-headrow>b').textContent).toBe(name);
+  expect(enemy.querySelector('.sts-headrow .sts-atkbadge')).toBeNull();
+  expect(intent.querySelector('.bt-intent-short').textContent).toBe('攻击 7 · 灼烧');
+  intent.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+  expect(intent.getAttribute('aria-expanded')).toBe('true');
+  expect(intent.querySelector('.bt-intent-detail').textContent).toContain('基础攻击 7');
+  expect(intent.querySelector('.bt-intent-detail').textContent).toContain('攻击并灼烧');
+  intent.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true }));
+  expect(intent.getAttribute('aria-expanded')).toBe('false');
+  expect(BattleSession.getSnapshot()).toEqual(before); expect(Aim.clickSelectedUid).toBeNull();
+});
+
+it('keeps each player combat stat and its actual bonus in a compact unbroken group', () => {
+  start(); const before = BattleSession.getSnapshot();
+  const presented = { ...before, pstat: { ...before.pstat, status: { ...before.pstat.status, atkUp: 2, spellUp: 1 } },
+    pdef: { ...before.pdef, shield: 2, armor: 3, guard: true } };
+  updateUnits(mountUnitLayer(UI.el.ovBody, before.battleToken), presented, {});
+  const groups = [...stage().querySelectorAll('.sts-me .sts-stats>.sts-stat')].map(node => node.textContent.trim());
+  expect(groups).toEqual(['攻 6（含+2）', '法伤 1（含+1）', '盾 2', '甲 3', '格挡中']);
+  expect(BattleSession.getSnapshot()).toEqual(before);
+});
+
+it.each([
+  ['侠客', '刺击', 1, '2 点固定伤害'], ['战士', '猛击', 2, '攻击一次'],
+  ['法师', '搜刮', 1, '随机获得1张牌'], ['牧师', '圣疗', 1, '回复 3 生命'], ['降临者', '火球', 2, '4 点法术伤害'],
+])('presents %s skill effect, available state and fee without changing its action', (myClass, name, cost, effect) => {
+  start(); game.myClass = myClass; render();
+  const skill = stage().querySelector('[data-act=btSlam]');
+  expect(skill.dataset.skillState).toBe('ready'); expect(skill.disabled).toBe(false);
+  expect(skill.querySelector('.battle-skill-copy>b').textContent).toBe(name);
+  expect(skill.querySelector('.battle-skill-cost>b').textContent).toBe(String(cost));
+  expect(skill.querySelector('.battle-skill-cost>small').textContent).toBe('费');
+  expect(skill.querySelector('.battle-skill-availability').textContent).toBe('可用');
+  expect(skill.querySelector('.battle-skill-status').textContent).toContain(effect);
+  expect(skill.getAttribute('aria-label')).toContain('每回合一次');
+  set$energy(0); render();
+  const locked = stage().querySelector('[data-act=btSlam]');
+  expect(locked.disabled).toBe(true); expect(locked.dataset.skillState).toBe('unaffordable');
+  expect(locked.querySelector('.battle-skill-availability').textContent).toBe(`差 ${cost} 费`);
+  expect(locked.querySelector('.battle-skill-status').textContent).toContain(effect);
+});
+
+it('presents skill target selection, once-per-turn use and restored readiness through the existing command chain', async () => {
+  start(); game.myClass = '侠客'; render();
+  stage().querySelector('[data-act=btSlam]').click(); flush();
+  expect(stage().querySelector('[data-act=btSlam]').dataset.skillState).toBe('targeting');
+  expect(stage().querySelector('.battle-skill-availability').textContent).toBe('选目标');
+  const target = stage().querySelector('.bt-foe.can-target');
+  expect(target.getAttribute('role')).toBe('button');
+  expect(target.getAttribute('aria-label')).toBe('敌人0，按 Enter 确认目标');
+  target.focus();
+  target.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+  await settle();
+  const used = stage().querySelector('[data-act=btSlam]');
+  expect(used.dataset.skillState).toBe('used'); expect(used.disabled).toBe(true);
+  expect(used.querySelector('.battle-skill-availability').textContent).toBe('已使用');
+  expect(BattleSession.getSnapshot().energy).toBe(8);
+  set$turn(2); render();
+  expect(stage().querySelector('[data-act=btSlam]').dataset.skillState).toBe('ready');
+  expect(stage().querySelector('[data-act=btSlam]').disabled).toBe(false);
+});
+
+it.each(['enemy', 'self'])('retains the %s target label and Enter action across redraw and a modal return', async side => {
+  const entry = side === 'self' ? Cards.all().find(item => item.id === 'tt3-longsword') : Cards.SHA;
+  start(2, entry);
+  card().querySelector('.hs-card').dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+  const selector = side === 'self' ? '#btSelf.can-target' : '.bt-foe.can-target';
+  const label = side === 'self' ? '自己，按 Enter 确认目标' : '敌人0，按 Enter 确认目标';
+  const target = stage().querySelector(selector);
+  expect(target.getAttribute('role')).toBe('button'); expect(target.getAttribute('aria-label')).toBe(label);
+  expect(target.getAttribute('tabindex')).toBe('0'); expect(document.activeElement).toBe(target);
+  render();
+  expect(stage().querySelector(selector)).toBe(target); expect(target.getAttribute('aria-label')).toBe(label);
+  BattleSession.commands.openGrave(); flush(); expect(stage()).toBeNull();
+  BattleSession.commands.closeGrave(); flush();
+  expect(stage().querySelector(selector)).toBe(target); expect(target.getAttribute('aria-label')).toBe(label);
+  expect(target.getAttribute('tabindex')).toBe('0');
+  target.focus(); target.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+  await settle();
+  expect(BattleSession.getSnapshot().hand).not.toContain('inspect-card');
+  if (side === 'self') expect(BattleSession.getSnapshot().equipped.some(item => item.uid === 'inspect-card')).toBe(true);
+  else expect(BattleSession.getSnapshot().foes[0].hp).toBeLessThan(40);
+  expect(Aim.clickSelectedUid).toBeNull();
+});
+
+it('emphasizes forecast damage and remaining HP as separate values and keeps the actual forecast semantics', () => {
+  start(); game.hp = 1; set$turn(2); render();
+  const expected = forecastEnemyTurn(BattleSession.getSnapshot());
+  const forecast = stage().querySelector('.bt-turn-forecast');
+  expect(forecast.querySelector('.bt-forecast-damage>b').textContent).toBe(String(expected.damage));
+  expect(forecast.querySelector('.bt-forecast-hp>b').textContent).toBe(String(expected.hpAfter));
+  expect(forecast.classList.contains('lethal')).toBe(expected.lethal);
+  expect(forecast.querySelector('.bt-forecast-warning').textContent).toBe('可能致死');
+  expect(forecast.title).toBe(expected.note);
+  expect(game.hp).toBe(1); expect(BattleSession.getSnapshot().busy).toBe(false);
 });
 
 it('renders real unit icon bitmaps synchronously before observer/rAF hydration and reuses unchanged sections', () => {
@@ -305,9 +460,9 @@ it('renders real unit icon bitmaps synchronously before observer/rAF hydration a
     updateUnits(mounts, presented, {});
     const head = stage().querySelector('.sts-foe .sts-headrow');
     expect(head.textContent).not.toContain('[[icon:');
-    expect(head.querySelectorAll('img.ic')).toHaveLength(2);
+    expect(head.querySelectorAll('img.ic')).toHaveLength(1);
     expect(head.querySelector('[data-asset-key="icon-cross"]')).not.toBeNull();
-    expect(head.querySelector('[data-asset-key="icon-swords"]')).not.toBeNull();
+    expect(head.querySelector('[data-asset-key="icon-swords"]')).toBeNull();
     const stats = stage().querySelector('.sts-me .sts-stats');
     expect(stats.textContent).not.toContain('[[icon:');
     expect(stats.querySelector('[data-asset-key="icon-shield"]')).not.toBeNull();

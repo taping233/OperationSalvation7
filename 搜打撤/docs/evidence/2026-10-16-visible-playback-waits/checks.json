@@ -1,0 +1,38 @@
+{
+  "version": "20261016-r2.3",
+  "timestamp": "2026-10-15T22:41:39.641Z",
+  "files": [
+    {
+      "path": "scripts/visible-playback.mjs",
+      "sha256": "fb0d8266997efed30214cd36a4d5fdb9922727514e9d653ddc392b5f44a7b31d"
+    },
+    {
+      "path": "tests/visible-playback.test.js",
+      "sha256": "8085ca3d93d463711ba25f24053c26f2ff90917a9e0de03a79a196dadcd9ed6b"
+    }
+  ],
+  "checks": {
+    "focused": 78,
+    "targeted": 175,
+    "eslint": "passed",
+    "nodeSyntax": "passed",
+    "changeWhitespace": {
+      "result": "passed",
+      "method": "Explicit trailing-space and final-newline scan",
+      "files": [
+        "scripts/visible-playback.mjs",
+        "tests/visible-playback.test.js",
+        "docs/evidence/2026-10-16-visible-playback-waits/README.md",
+        "docs/evidence/2026-10-16-visible-playback-waits/task.json"
+      ]
+    }
+  },
+  "coverage": "pure planner and fake tab contracts; no browser operations",
+  "pending": "New post-click closing wait still has fake-tab contract coverage only",
+  "parentBrowserReport": {
+    "time": "2026-10-15T22:41:39Z",
+    "source": "Parent task message reporting its current built-in browser natural travel",
+    "result": "one entry click; travel wait settled; unknown destination returned control without a second input",
+    "scope": "travel only; no new closing-transition browser verification"
+  }
+}

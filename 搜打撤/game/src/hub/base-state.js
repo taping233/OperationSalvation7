@@ -75,9 +75,6 @@ export function normalizeBaseState(raw) {
   const d = Object.assign(createBaseState(), raw, {
     stash: Array.isArray(raw.stash) ? raw.stash : [],
     pocket: Array.isArray(raw.pocket) ? raw.pocket : [],
-    collection: (raw.collection && typeof raw.collection === 'object') ? raw.collection : {},
-    collClaimed: (raw.collClaimed && typeof raw.collClaimed === 'object') ? raw.collClaimed : {},
-    collXp: (raw.collXp && typeof raw.collXp === 'object') ? raw.collXp : {},
   });
   // F1（2026-09-24）：容器字段类型兜底。stats/characters/classes/pets/home 等在
   // peek/use/终局提交全链路被解引用或赋属性，写坏即 TypeError（JSON 语法坏已有
@@ -91,6 +88,11 @@ export function normalizeBaseState(raw) {
   normalizeObjField(d, 'goals', createBaseState().goals);
   normalizeObjField(d, 'story', createBaseState().story);
   normalizeObjField(d, 'achClaimed', {});
+  // 字符串 id 写入数组不会进入 JSON；领取/收藏记录必须保留为对象字典。
+  normalizeObjField(d, 'collection', {});
+  normalizeObjField(d, 'collClaimed', {});
+  normalizeObjField(d, 'collXp', {});
+  normalizeObjField(d, 'backs', { classic: true });
   mergeDef(d, createBaseState());
   if (!Array.isArray(d.stats.bossKills)) d.stats.bossKills = [];
   if (!Array.isArray(d.stats.nestBossKills)) d.stats.nestBossKills = [];
@@ -100,7 +102,6 @@ export function normalizeBaseState(raw) {
   if (!Array.isArray(d.runes)) d.runes = [];
   if (typeof d.nestBagUp !== 'number') d.nestBagUp = 0;
   if (typeof d.nestUnlocked !== 'boolean') d.nestUnlocked = false;
-  if (!d.backs || typeof d.backs !== 'object') d.backs = { classic: true };
   d.backs.classic = true;   // 默认卡背永远可用
   if (!d.backSel || !d.backs[d.backSel]) d.backSel = 'classic';
   if (!d._m01 || typeof d._m01 !== 'object') d._m01 = { revision: 0, requests: {} };

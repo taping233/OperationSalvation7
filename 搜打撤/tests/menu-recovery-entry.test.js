@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { createGameMenuController } from '../game/src/ui/game.menu.js';
+import { createGameMenuController } from './helpers/menu-controller.js';
 
 function setup(recoverSlotIfPending) {
   const handlers = {};

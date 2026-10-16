@@ -31,23 +31,36 @@ function normalizeDesc(value) {
 /** @type {Record<string, string>} */
 const DAMAGE_TYPE_NAMES = Combat.TYPE_NAME;
 
-// B1/B2（2026-09-25）：结构化 damage op → 预览规格。纯字面量/字段伤害（amount/amountField）
-// 加确定段数（hitCount/hits.count）可精确预演；条件（cond）、增伤（bonus）、区间（range）、
-// 吸血、随机目标/随机段数、墓地/重施/延迟一律降级 unknown——宁可不给数字，不给错数字。
-// 与解释器（battle.resolution.js castSegment）共享语义口径：amount 与 card.dmg 由 schema 强制一致，
-// growth 由 cardContext.damageGrowth 通道承担（>0 时 previewAction 已降级 unknown）。
+const EXACT_DAMAGE_KEYS = new Set(['op', 'amount', 'amountField', 'target', 'hitCount', 'hits', 'retarget']);
+const FOLLOWUP_OPS = new Set(['curse', 'draw', 'cleanse', 'registerRule', 'blessing', 'armor', 'heal', 'coins']);
+
+// 只接纳完整扫描后可证明的单个 damage op；新参数默认降级，不能忽略后再宣称精确。
+// 后置抽牌/附加状态与时点触发不计入此处直接伤害，并通过 unknownEffects 明示。
 /** @param {SnapshotBattleCard | null | undefined} card @returns {PreviewDamageSpec | null} */
 function structuredDamageSpec(card) {
-  const operation = card?.rules?.triggers?.onPlay?.find(item => item && item.op === 'damage');
-  if (!operation) return null;
-  const unstable = operation.range !== undefined || operation.cond !== undefined || operation.bonus !== undefined ||
-    operation.lifesteal === true || operation.graveyard !== undefined || operation.recast !== undefined ||
-    operation.schedule !== undefined || operation.target === 'randomEnemy' ||
-    (operation.hits != null && (operation.hits.range !== undefined || operation.hits.perFoe !== undefined ||
-      // 段数=本回合已打出招式数（连续射击）：快照不含该计数，无法精算——降级 unknown 不给错数字
-      // （09-30 深审 BC-08：此前按默认 1 段还标 exact，显示值恒错）
-      operation.hits.perPlayedMoves !== undefined));
-  if (unstable) return { unknown: true };
+  const triggers = card?.rules?.triggers;
+  if (!triggers) return null;
+  const operations = triggers.onPlay;
+  if (!Array.isArray(operations)) return { unknown: true };
+  const damageOps = operations.filter(item => item?.op === 'damage');
+  if (damageOps.length !== 1) return { unknown: true, reason: '包含多个或未声明的直接伤害流程，暂未完整预演' };
+  const operation = damageOps[0];
+  if (Object.keys(operation).some(key => !EXACT_DAMAGE_KEYS.has(key)) ||
+      (operation.target !== undefined && !['chosenEnemy', 'allEnemies'].includes(operation.target)) ||
+      (operation.retarget !== undefined && operation.retarget !== 'livingFoes') ||
+      (operation.hitCount !== undefined && operation.hits !== undefined) ||
+      (operation.hits !== undefined && (!operation.hits || typeof operation.hits !== 'object' ||
+        Object.keys(operation.hits).some(key => key !== 'count')))) {
+    return { unknown: true, reason: '伤害含尚未预演的条件、动态参数或目标流程' };
+  }
+  if (operations.some(item => !item || (item.op !== 'damage' &&
+      (!FOLLOWUP_OPS.has(item.op || '') || item.burst !== undefined || item.pick !== undefined || item.schedule !== undefined)))) {
+    return { unknown: true, reason: '包含尚未预演的额外伤害或后续施放流程' };
+  }
+  const sources = ['amount', 'amountField'].filter(key => operation[key] !== undefined);
+  if (sources.length !== 1 || (operation.amountField !== undefined && operation.amountField !== 'dmg')) return { unknown: true };
+  const unknownEffects = operations.length > 1 || Object.keys(triggers).some(key => key !== 'onPlay' && key !== 'duration')
+    ? ['仅计算直接伤害；附加效果及后续触发未计入'] : [];
   // target 未声明时解释器按「倒下顺延战场首位」结算——预览按 retarget 式逐段转移处理
   const retarget = operation.retarget === 'livingFoes' || operation.target === undefined;
   const countSource = operation.hitCount ?? operation.hits?.count;
@@ -57,17 +70,34 @@ function structuredDamageSpec(card) {
   const hits = Math.max(1, Math.floor(numericCount || 1));
   if (operation.amount !== undefined) {
     const amount = Number(operation.amount);
-    return Number.isFinite(amount) ? { hits, retarget, amount } : { unknown: true };
+    return Number.isFinite(amount) ? { hits, retarget, amount, unknownEffects } : { unknown: true };
   }
   if (operation.amountField === 'dmg' && !Number.isFinite(Number(card?.dmg))) return { unknown: true };
-  return { hits, retarget };
+  return { hits, retarget, unknownEffects };
 }
 
-/** @param {SnapshotBattleCard | null | undefined} card @returns {PreviewDamageSpec | null} */
-function semanticMatch(card) {
+/** @param {SnapshotBattleCard} card @param {PreviewActionInput['cardContext']} context @returns {PreviewDamageSpec | null} */
+function hostedDamageSpec(card, context) {
+  if (card.id !== 'tt7-arcanebolt') return null;
+  const rules = card.rules;
+  const hosted = rules?.battle?.hosted;
+  if (context.mode !== 'normal' || !context.hostedExecutionVerified ||
+      card.type !== '法术' || card.dmgType !== 'spell' || typeof card.dmg !== 'number' || !Number.isFinite(card.dmg) || card.dmg <= 0 ||
+      !rules || Object.keys(rules).some(key => !['version', 'battle'].includes(key)) ||
+      Object.keys(rules.battle || {}).some(key => key !== 'hosted') ||
+      !Array.isArray(hosted) || hosted.length !== 1 || hosted[0] !== 'damage-and-draw' ||
+      normalizeDesc(card.desc) !== "1',抽1张牌") return { unknown: true };
+  return { hits: 1, amount: card.dmg, unknownEffects: ['仅计算直接伤害；普通战抽牌改为获得初始攻击，后续触发未计入；敌人全灭时停止余下效果'] };
+}
+
+/** @param {SnapshotBattleCard | null | undefined} card @param {PreviewActionInput['cardContext']} context @returns {PreviewDamageSpec | null} */
+function semanticMatch(card, context) {
   if (!card) return null;
+  const hosted = hostedDamageSpec(card, context);
+  if (hosted) return hosted;
   const structured = structuredDamageSpec(card);
   if (structured) return structured;
+  if (card.rules?.equip || card.rules?.bag || card.rules?.battle?.hosted) return null;
   const spec = card.id ? SEMANTICS[card.id] : undefined;
   if (!spec) return null;
   return card.type === spec[0] && card.dmgType === spec[1] && Number(card.dmg) === spec[2]
@@ -119,18 +149,19 @@ function previewAction({ snapshot, action, cardContext }) {
   if (cardContext.legal === false) return illegal(cost, frozenTargets, cardContext.illegalReason || '当前不能打出这张牌');
   if (!targets.includes(targetIndex)) return illegal(cost, frozenTargets, '当前目标不可用');
   if (cardContext.heartsMode) return unknown(cost, frozenTargets, '心形生命的伤害换算暂不支持预览');
-  if (cardContext.shaTransformed) return unknown(cost, frozenTargets, '这张初始攻击将变为另一张牌结算');
+  if (cardContext.shaTransformed) return unknown(cost, frozenTargets, '变形卡按当前效果结算，预览无法精算');
   if (cardContext.modifiers?.stealthStrike) return unknown(cost, frozenTargets, '破隐一击会改变本次伤害');
   if (cardContext.modifiers?.nestDark1 || cardContext.modifiers?.nestDark3) return unknown(cost, frozenTargets, '黑暗羁绊会逐段改变伤害');
+  if (cardContext.modifiers?.bleedAmp || cardContext.modifiers?.vsFreezeBonus) return unknown(cost, frozenTargets, '流血或冰冻增伤尚未纳入直接伤害预览');
+  if (cardContext.modifiers?.specialLifecycle) return unknown(cost, frozenTargets, '目标带有复活等特殊生命流程，暂未完整预演');
   if (cardContext.modifiers?.allSpellsInfused || cardContext.selectedFuelUids?.length) return unknown(cost, frozenTargets, '注能会改变这张牌的伤害');
   if ((cardContext.wholeCardRepeats || 1) !== 1) return unknown(cost, frozenTargets, '这张牌会整体重复结算');
   if (cardContext.arrowRuneRepeat) return unknown(cost, frozenTargets, '箭矢符文会重复结算这张牌');
 
-  // 只计算通过语义验证的伤害流程。非白名单、随机、AOE、状态前置或任何字段被改写的卡
-  // 都不猜测段数和结算顺序；带 v2 条件/区间/增伤的结构化伤害降级 unknown（不猜数字）。
-  const exactSpec = semanticMatch(card);
+  // AOE 数字仅对应当前指向目标；随机、未建模参数与额外伤害流程不猜数字。
+  const exactSpec = semanticMatch(card, cardContext);
   if (!exactSpec) return unknown(cost, frozenTargets, '这张牌的伤害流程暂不支持预览');
-  if (exactSpec.unknown === true) return unknown(cost, frozenTargets, '这张牌带有条件/区间/随机伤害效果，暂不支持精确预览');
+  if (exactSpec.unknown === true) return unknown(cost, frozenTargets, exactSpec.reason || '这张牌带有尚未完整预演的伤害流程');
   const dmgType = card.dmgType;
   const cardDamage = Number(card.dmg);
   const damageGrowth = Number(cardContext.damageGrowth) || 0;
@@ -188,7 +219,7 @@ function previewAction({ snapshot, action, cardContext }) {
       armorBefore, armorAfter: target.defense.armor, dodgeBefore, dodgeAfter: +(target.status.dodge || 0),
       blockedBy: cardContext.targetProtected ? 'protected' : cardContext.aegisBlocked ? 'aegis' : null,
       notes: Object.freeze([...new Set(logs)]), }),
-    knownEffects: Object.freeze(['damage']), unknownEffects: Object.freeze([]), reasons: Object.freeze([]),
+    knownEffects: Object.freeze(['damage']), unknownEffects: Object.freeze(exactSpec.unknownEffects || []), reasons: Object.freeze([]),
   });
 }
 

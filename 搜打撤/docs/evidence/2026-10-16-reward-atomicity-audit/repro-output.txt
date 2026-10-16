@@ -1,0 +1,14 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤
+
+ ✓ docs/evidence/2026-10-16-reward-atomicity-audit/repro.test.js > Reward atomicity and durable-marker characterization > configured achievement card removed through real Cards.remove is consumed without a reward 21ms
+ ✓ docs/evidence/2026-10-16-reward-atomicity-audit/repro.test.js > Reward atomicity and durable-marker characterization > full collection egg reward removed from catalog is marked claimed without granting an egg 14ms
+ ✓ docs/evidence/2026-10-16-reward-atomicity-audit/repro.test.js > Reward atomicity and durable-marker characterization > two-legend milestone accepts a catalog with one eligible legend and permanently grants only one 13ms
+ ✓ docs/evidence/2026-10-16-reward-atomicity-audit/repro.test.js > Reward atomicity and durable-marker characterization > malformed collClaimed array drops the claimed marker but durably saves wood, permitting a second grant after reload 9ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  06:50:34
+   Duration  1.61s (transform 326ms, setup 0ms, collect 679ms, tests 60ms, environment 482ms, prepare 112ms)
+

@@ -13,7 +13,7 @@ await import('../game/src/hub/base.js');
 const session = await import('../game/src/run/game.session.js');
 const { RunStorage } = await import('../game/src/hub/game.storage.js');
 const { Random } = await import('../game/src/core/random.js');
-const { createGameMenuController } = await import('../game/src/ui/game.menu.js');
+const { createGameMenuController } = await import('./helpers/menu-controller.js');
 const { Base, UI } = window.SDT;
 const handlers = {};
 Object.assign(UI, {

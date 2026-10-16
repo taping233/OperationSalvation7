@@ -1,0 +1,30 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "511cd017039d728f6af418e84ebce350d40c7330c70f32afe41c6ff86263d2e4"
+  },
+  {
+    "path": "final-target.log",
+    "sha256": "ac83010a256b8f26c0718e8c6ede35fdb003a9a29bca73e87f8c2c8a195ee99b"
+  },
+  {
+    "path": "first-target.log",
+    "sha256": "dec04c1ca5c1cf108fd99b37631e686e7d757ce5ce24a6119695763eb1dc2580"
+  },
+  {
+    "path": "handoff.json",
+    "sha256": "24d60c958c7ee5c6be20159000ee6fd1305dfdf3df9e29dff8ccd20e74a810da"
+  },
+  {
+    "path": "lint.log",
+    "sha256": "7125f194612fcff2f454c05d848e7cb71facc1967b4d5017e25b34fdee3ba74f"
+  },
+  {
+    "path": "selftest.log",
+    "sha256": "8deecdd2e5b1e1e1f34d9995c977678ec427e5265e59846504bcd1bbad1099e1"
+  },
+  {
+    "path": "syntax.log",
+    "sha256": "a484bee492c4bc0041a0af0732e74fcb1a9cd79bb667bd5b158326e4ea1da01c"
+  }
+]

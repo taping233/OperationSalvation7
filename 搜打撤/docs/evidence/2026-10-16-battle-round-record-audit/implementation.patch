@@ -1,0 +1,11 @@
+--- game/src/battle/core/battle.lifecycle.js (before this task)
++++ game/src/battle/core/battle.lifecycle.js (after this task)
+@@ -160,7 +160,7 @@
+     // 先记账再通知结算/保存；隔离样本不进入玩家的本局战斗记录。
+     if (!opts.devSample) SDT.Agent?.recorder?.noteBattle?.(win, {
+       li: G.layerIdx, node: G.trackPos, foe: opts.foeNames?.join('+') || '', hp: G.hp, turn: G.turn,
+-      round: battleState.round,
++      round: turn,
+       mode: win === true ? 'win' : win === false ? 'lose' : 'flee',
+       nPlayed: playedCopy.length,
+       nUsed: consumedCopy.length,

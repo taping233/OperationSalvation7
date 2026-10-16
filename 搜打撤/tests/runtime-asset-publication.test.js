@@ -18,6 +18,19 @@ afterEach(() => {
 });
 
 describe('production runtime asset publication', () => {
+  it('loads fallback Noto fonts on demand without changing the primary font or removing bundled fallbacks', () => {
+    const html = readFileSync(new URL('../game/index.html', import.meta.url), 'utf8');
+    const css = readFileSync(new URL('../game/css/base.css', import.meta.url), 'utf8');
+    const preloads = [...html.matchAll(/<link\b[^>]*rel="preload"[^>]*>/g)].map(match => match[0]);
+    expect(preloads.some(tag => tag.includes('HarmonyOS_Sans_SC_Regular.ttf'))).toBe(true);
+    for (const weight of [400, 700]) {
+      const font = `notosans-sc-${weight}.woff2`;
+      expect(preloads.some(tag => tag.includes(font))).toBe(false);
+      expect(css).toContain(`url('../assets/fonts/${font}')`);
+      expect(readFileSync(path.join(assetsRoot, 'fonts', font)).byteLength).toBeGreaterThan(0);
+    }
+  });
+
   it('omits only the three unused audition libraries and keeps active samples and artwork', () => {
     const excluded = collectUnreferencedDevelopmentSfxPrefixes([
       { id: '/game/src/audio/sound.js', code: readFileSync(new URL('../game/src/audio/sound.js', import.meta.url), 'utf8') },

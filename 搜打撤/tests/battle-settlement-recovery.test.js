@@ -391,7 +391,9 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
       isRandomObtainable: () => true,
     };
     window.SDT.Meta = { track: vi.fn(), xpMultiplier: () => 1, publishBattleProgress: vi.fn() };
+    let extraReward = null;
     window.SDT.Chests = {
+      restore:vi.fn((_game, saved, done) => { extraReward = { saved, done }; return true; }),
       rollDrops: vi.fn(() => [{ kind: 'boss' }]), dropText: () => '首脑宝箱',
       open: vi.fn((_game, _drops, done) => { settleHarness.chestDone = done; }),
     };
@@ -402,8 +404,12 @@ describe('真实 Base/RunStorage 胜利结算恢复事务', () => {
     await settleHarness.game.onBattleEnd(opts, [], true, []);
     expect(settleHarness.chestDone).toBeTypeOf('function');
 
-    const failRunWrite = failStorageMethod('setItem', runKey);
     expect(await settleHarness.chestDone()).toBe(false);
+    expect(extraReward).not.toBeNull();
+    expect(settleHarness.game.grantCard).not.toHaveBeenCalled();
+    extraReward.saved.current.cards.forEach(card => settleHarness.game.grantCard(card));
+    const failRunWrite = failStorageMethod('setItem', runKey);
+    expect(await extraReward.done()).toBe(false);
     failRunWrite.mockRestore();
     expect(env.RunStorage.readIdentity(slotId)).toMatchObject({ ok: false, code: 'RECOVERY_REQUIRED' });
     expect(JSON.parse(localStorage.getItem(baseKey)).eggBattles).toBe(1);

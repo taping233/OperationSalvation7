@@ -13,11 +13,6 @@
 
 /* ── T0 统一节奏变量：fast=色彩/光晕/小位移，lift=回弹过冲（快按慢弹），press=按下快进 ── */
 /* 探索信息层：目标有独立阅读行，路线名称与已知结果分级。 */
-body #sidebar #routePanel { display:grid; align-content:start; justify-content:stretch; box-sizing:border-box; }
-body #sidebar #routePanel .route-heading { display:flex; flex-direction:column; align-items:flex-start; min-height:48px; margin:0; }
-body #sidebar .route-title { font-size:16px; letter-spacing:.08em; color:#f1e2bc; text-shadow:none; }
-body #sidebar .route-objective { font-size:15px; line-height:1.45; color:#d1dade; letter-spacing:0; white-space:normal; overflow:visible; text-overflow:clip; max-width:none; }
-body #sidebar #routePanel .route-options { margin:0; padding:4px 2px; }
 
 /* 地图系统第一轮：连续行动台。空间在主图，身份与当前行动在同一稳定底栏。 */
 body:not(.lobby):not(.scene-battle-3d) #sidebar {
@@ -36,28 +31,9 @@ body #sidebar #statsPanel .stat-duo { flex-direction:column; align-items:flex-st
 body #sidebar #statsPanel .stat-duo label { font-size:14px; letter-spacing:.04em; color:#c6d2d8; }
 body #sidebar #statsPanel .stat-duo b { font-size:22px; }
 body #sidebar #devPanel { display:none; }
-body #sidebar #routePanel { grid-column:3; grid-row:1; }
-body #sidebar #routePanel .route-heading { border:0; padding:0; }
-body #sidebar #routePanel .route-title::before { content:none; }
-body #sidebar #routePanel .route-option { background:#243942; border:1px solid #7c929a; box-shadow:none; padding:10px 14px; }
-body #sidebar #routePanel .route-option::after { content:none; }
-body #sidebar #routePanel .route-option.selected { background:#394e54; border-color:#ead39b; box-shadow:inset 3px 0 #ead39b; }
-body #sidebar #routePanel .route-help { border:0; padding:0; }
 
 /* IS7第二轮修正版：地图中央 / 节点决策右侧 / 底部薄工具带。 */
 body #sidebar #charPanel .hero-ava { width:64px; min-width:64px; height:80px; }
-body #sidebar #routePanel { position:absolute; right:24px; bottom:calc(100% + 20px); width:340px; height:430px; padding:20px; background:#152831f5; border:1px solid #869da5; grid-template-rows:auto minmax(0,1fr) auto; gap:16px; box-shadow:0 12px 24px #0613193d; }
-body #sidebar #routePanel .route-heading { gap:10px; }
-body #sidebar #routePanel .route-title { font-size:20px; }
-body #sidebar #routePanel .route-objective { line-height:1.6; }
-body #sidebar #routePanel .route-options { flex-direction:column; overflow-y:auto; overflow-x:hidden; mask-image:none; -webkit-mask-image:none; align-items:stretch; min-height:0; }
-body #sidebar #routePanel .route-option { flex:0 0 auto; min-height:80px; min-width:0; }
-body #sidebar #routePanel .route-option[data-direction="return"] { border-style:dashed; }
-body #sidebar #routePanel .route-option[data-direction="deeper"] { box-shadow:inset 3px 0 #e6cb76; }
-body #sidebar #routePanel .route-arrow::before { display:block; margin-bottom:6px; font-size:12px; }
-body #sidebar #routePanel .route-option[data-direction="return"] .route-arrow::before { content:'回程'; }
-body #sidebar #routePanel .route-option[data-direction="deeper"] .route-arrow::before { content:'深入'; }
-body #sidebar #routePanel .route-help { flex-direction:column; gap:6px; font-size:13px; line-height:1.5; }
 body #sidebar .expedition-nav-summary { flex-direction:column; justify-content:center; color:#d6e2e5; }
 body #sidebar .expedition-nav-summary b { font-size:16px; }
 body #sidebar .expedition-nav-summary span { font-size:14px; }
@@ -65,14 +41,8 @@ body #sidebar .expedition-nav-summary small { font-size:12px; color:#adbec5; }
 body #sidebar #logPanel { position:absolute; right:104px; left:auto; bottom:24px; width:330px; }
 body #sidebar #logPanel.collapsed { width:130px; min-width:130px; }
 body #sidebar #logPanel:not(.collapsed) { bottom:24px; z-index:10; }
-body #sidebar .route-objective[data-tone="danger"] { color:#ffb3a4; }
-body #sidebar .route-copy b { font-size:16px; }
-body #sidebar .route-copy small { font-size:14px; line-height:1.4; color:#c0cbd0; }
-body #sidebar .route-option[data-direction="return"] { border-style:dashed; }
-body #sidebar .route-option[data-direction="deeper"] { box-shadow:inset 3px 0 0 #e6cb76; }
-body #sidebar .route-option[data-cleared="1"] .route-icon { opacity:.65; }
 /* Removed map panels stay absent; compact navigation owns location/help only. */
-body #sidebar #routePanel, body #sidebar #logPanel { display:none!important; }
+body #sidebar #logPanel { display:none!important; }
 body:not(.lobby):not(.scene-battle-3d) #sidebar { background:#090d10f2; border-top-color:#8aa0a22b; box-shadow:none; }
 body #sidebar .expedition-nav-summary { gap:5px; padding-right:110px; }
 body #sidebar #statsPanel { border-right-color:#7b91982b; }
@@ -164,68 +134,13 @@ body #resHud .chip-mini { gap:8px; padding-left:10px; min-width:120px; }
 /* ═════════ W3 路线面板：金短线标题 + 发丝分隔线 + 路线卡交互（核心操作区） ═════════ */
 
 /* W3a 「下一步」标题：前置金短线 + 暖米金（对标页头 hub-slot-label / 卡标题语言） */
-#sidebar .route-title {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: #f4e2a5; font-size: 12.5px; letter-spacing: .24em;
-  text-shadow: 0 0 10px rgba(230,203,118,.18);
-}
-#sidebar .route-title::before {
-  content: ''; display: block; width: 16px; height: 1px;
-  background: linear-gradient(90deg, transparent, #e6cb76b3);
-  box-shadow: 0 0 4px #e6cb7655;
-}
-/* W3a-2 标题行下发丝线 / 提示行上发丝线：面板内的"档案表格"骨架 */
-#sidebar .route-heading { padding-bottom: 7px; border-bottom: 1px solid rgba(170,174,177,.13); }
-#sidebar .route-help { padding-top: 7px; border-top: 1px solid rgba(170,174,177,.11); }
-#sidebar .route-help { color: #9da1a3; }
-#sidebar .route-help span { color: #9da1a3; letter-spacing: .08em; } /* 09-25 P3：#898e91 对比临界，提到 route-help 同级 */
-#sidebar .route-objective { color: #9da1a3; letter-spacing: .05em; }
+/* W3a-2 标题行下发丝线 / 提示行上发丝线：面板内的"档案表格"骨架 */ /* 09-25 P3：#898e91 对比临界，提到 route-help 同级 */
 
 /* W3b 路线卡：冷青半透明档案卡 + hover 金线上浮 + 按压快按慢弹 */
-#sidebar .route-option {
-  background: linear-gradient(180deg, rgba(34,36,39,.88), rgba(24,26,27,.92));
-  border-color: rgba(170,174,177,.26);
-  transition: transform var(--exh-lift), border-color var(--exh-fast),
-    background var(--exh-fast), box-shadow var(--exh-fast);
-}
 /* 卡顶"封条"金线：hover 点亮（与选档卡同语言） */
-#sidebar .route-option::after {
-  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, #e6cb76b8, transparent);
-  opacity: 0;
-  transition: opacity var(--exh-fast);
-}
-#sidebar .route-option:hover:not(:disabled) {
-  transform: translateY(-2px);
-  border-color: rgba(230,203,118,.58);
-  background: linear-gradient(180deg, rgba(45,48,52,.95), rgba(30,33,35,.95));
-  box-shadow: 0 6px 14px rgba(7,7,8,.38), 0 0 10px rgba(230,203,118,.1);
-}
-#sidebar .route-option:hover:not(:disabled)::after { opacity: .8; }
-#sidebar .route-option:active:not(:disabled) {
-  transform: translateY(0) scale(.97);
-  transition: transform var(--exh-press), border-color var(--exh-press),
-    background var(--exh-press), box-shadow var(--exh-press);
-}
 /* 选中态：金边 + 左缘金条压过 tone 强调色（expedition.css 原有 hover/selected 底色同步提冷） */
-#sidebar .route-option.selected {
-  border-color: #e6cb76;
-  background: linear-gradient(180deg, rgba(50,53,57,.95), rgba(34,37,40,.95));
-  box-shadow: 0 0 12px rgba(230,203,118,.12);
-}
-#sidebar .route-option:disabled { opacity: .45; }
 
 /* W3c 路线卡文字层级：主名提亮 / 副注灰青 / 箭头 hover 斜移 + 暖金 */
-#sidebar .route-copy b { color: #f1f1f1; letter-spacing: .04em; }
-#sidebar .route-copy small { color: #aaafb2; }
-#sidebar .route-arrow {
-  transition: transform var(--exh-fast), color var(--exh-fast);
-}
-#sidebar .route-option:hover:not(:disabled) .route-arrow {
-  transform: translate(2px, -2px);
-  color: #f4e2a5;
-}
 
 /* ═════════ W4 左上操作键组 #topBtns（含右下定位键）：幽灵键三态 + 金线焦点 ═════════ */
 /* winter.css 09-24 留言 #6 把三键设为透明+细边(!important)，本文件更晚加载，
@@ -325,7 +240,6 @@ body:not(.lobby):not(.scene-battle-3d) #topBtns #btnLocate { display: none !impo
 #logPanel .log-toggle:hover { color: #f4e2a5; border-bottom-color: rgba(230,203,118,.42); } /* 09-25 P3：数字字体与 HUD 其余等宽制式对齐 */
 
 /* ═════════ T2 焦点态：键盘导航金线焦点环（对局 HUD 全部可焦元素） ═════════ */
-#sidebar .route-option:focus-visible,
 #topBtns button:focus-visible,
 #logPanel .log-toggle:focus-visible {
   outline: 1px solid #e6cb76cc;
@@ -333,12 +247,10 @@ body:not(.lobby):not(.scene-battle-3d) #topBtns #btnLocate { display: none !impo
   box-shadow: 0 0 0 1px #101112, 0 0 12px rgba(230,203,118,.35);
 }
 /* 路线卡贴边收进：金环画在卡内，避免与相邻卡重叠 */
-#sidebar .route-option:focus-visible { outline-offset: -3px; }
 
 /* ═════════ T6 光标自查：对局 HUD 可点元素均为 <button>（cursor-art 的
    button:not(:disabled) 白名单已给出互动光标），无新增非按钮可点元素。
    禁用路线卡保持系统默认，压掉自定义互动光标误导。 ═════════ */
-#sidebar .route-option:disabled { cursor: default; }
 
 /* IS7 source layout: edge-aligned top groups, central current-region title,
    continuous bottom inventory strip. No route details or action-log panel. */

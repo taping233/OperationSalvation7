@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-15T21:55:22.254036+00:00",
+  "sources": [
+    {
+      "path": "game/src/hub/meta.js",
+      "sha256": "28e3149cf0c1edfc7f38638b2509bf7604ed309c96e163f30c114ab67764dab6",
+      "bytes": 18013,
+      "preFixHeadSha256": "9fc35f12c0c5bb92601f293260f057f25d8c32e3b3b02fce31e74ccc1fb09d0a"
+    },
+    {
+      "path": "game/src/hub/base-state.js",
+      "sha256": "86e06ab0c856cd195787ff0e2504b11902c3fae5b3547e08dbfde4096c5a5558",
+      "bytes": 6728,
+      "preFixHeadSha256": "f68a2b30737ed3620b2851c21db9854f24ffa65f4bebc6929701d3ed06fef0ea"
+    },
+    {
+      "path": "tests/reward-atomicity-cloud.test.js",
+      "sha256": "cc895abce8e4e85ec9062e9e09a8d5dbf73c07c2d7a4513b2b431279ee835456",
+      "bytes": 9249
+    }
+  ],
+  "targetedTests": {
+    "files": 7,
+    "tests": 79,
+    "passed": true
+  },
+  "newRegressionTests": 17,
+  "eslintPassed": true,
+  "nodeCheckPassed": true,
+  "typecheckConfigsPassed": 8,
+  "diffCheckPassed": true,
+  "browserRun": false,
+  "buildRun": false,
+  "playerStorageTouched": false
+}

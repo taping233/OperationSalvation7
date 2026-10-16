@@ -13,6 +13,7 @@ import { bagDrag, resetBagDrag } from './game.bag.drag.js';
 import { useStructuredBagRule } from './game.bag.rules.js';
 import { pageHTML as bagV2PageHTML, rarityOf as bagV2Rarity } from './game.bag.view2.js';
 import { captureBattleContext } from '../battle/battle-loader.js';
+import { decorateInventoryZoom } from '../ui/inventory-zoom.js';
 function captureBagView(rootFor = null) {
   const sameRun = captureBattleContext(game), cards = game.ownedCards, body = UI.el.ovBody;
   const root = body?.firstElementChild, zoom = document.getElementById('cardZoom');
@@ -468,26 +469,31 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     };
     const bagResStacks = () => cardStacks(false).filter(st => st.card.type === '资源');
     const render = () => {
-      const storedHTML = storedStacks().map(st => `
-        <div class="bt-card" data-act="pearlTake" data-name="${escAttr(st.card.name)}"
-          title="${escAttr(`${st.card.name} ×${st.count}——点击整叠取出回背包（需要一个空背包格）`)}">
-          ${SDT.Cards.cardHTML(st.card, 'sm')}
-          <span class="bt-count">×${st.count}</span>
-        </div>`).join('') || '<p class="ov-empty">（盒子里还没有资源卡）</p>';
-      const bagHTML = bagResStacks().map(st => `
-        <div class="bt-card" data-act="pearlPut" data-name="${escAttr(st.card.name)}"
-          title="${escAttr(`${st.card.name} ×${st.count}——点击整叠存入珍珠盒（腾出背包格）`)}">
-          ${SDT.Cards.cardHTML(st.card, 'sm')}
-          <span class="bt-count">×${st.count}</span>
-        </div>`).join('') || '<p class="ov-empty">（背包里没有资源卡——木材/口粮/货币卡等才是资源）</p>';
-      UI.showOverlay('[[icon:gem]] 珍珠盒 · 存放资源卡', `
-        <p class="ov-note">盒中 <b>${storedN()}/${cap}</b> 张（${boxes} 个珍珠盒 · 每个内置 3×3 空间）——存入的资源卡<b>不占背包格</b>；把珍珠盒放进安全格，盒中的卡撤离失败时也会被抢运回基地</p>
-        <h3 class="set-h">盒中资源（点击整叠取出）</h3>
-        <div class="bt-hand">${storedHTML}</div>
-        <h3 class="set-h">背包里的资源卡（点击整叠存入）</h3>
-        <div class="bt-hand">${bagHTML}</div>
-        <div class="ov-btns"><button class="ov-btn ok" data-act="pearlBack">[[icon:arrow]] 收好珍珠盒</button></div>`);
+      const focused = root?.contains(document.activeElement) ? document.activeElement.dataset : null;
+      const stackHTML = (st, take) => `<button type="button" class="bt-card pearl-store-card" data-act="${take ? 'pearlTake' : 'pearlPut'}" data-name="${escAttr(st.card.name)}"
+        aria-label="${escAttr(`${st.card.name}，${st.count} 张，${take ? '整叠取出回背包' : '整叠存入珍珠盒'}`)}"
+        title="${escAttr(take ? '按所需背包空间整叠取出' : '整叠存入珍珠盒，腾出背包空间')}">
+        <span class="pearl-store-art" aria-hidden="true">${SDT.Cards.cardHTML(st.card, 'sm')}</span>
+        <span class="pearl-store-caption"><b>${esc(st.card.name)}</b><span>${take ? '整叠取出' : '整叠存入'} · ${st.count} 张</span></span></button>`;
+      const storedHTML = storedStacks().map(st => stackHTML(st, true)).join('') || '<p class="ov-empty">盒子里还没有资源卡</p>';
+      const bagHTML = bagResStacks().map(st => stackHTML(st, false)).join('') || '<p class="ov-empty">背包里没有资源卡。木材、口粮、货币卡等才是资源。</p>';
+      UI.showOverlay('[[icon:gem]] 珍珠盒 · 存放资源卡', `<section class="battle-decision pearl-store" data-decision-kind="pearl-store">
+        <header class="battle-decision-head"><h3>[[icon:gem]] 珍珠盒</h3><span>${boxes} 个珍珠盒 · 每个 3×3 空间</span></header>
+        <div class="battle-decision-summary"><p class="ov-note" role="status" aria-live="polite" aria-atomic="true">盒中 <b>${storedN()}/${cap}</b> 张 · 存入的资源卡<b>不占背包格</b></p>
+          <p class="ov-note">把珍珠盒放进安全格，盒中的卡撤离失败时也会被抢运回基地</p></div>
+        <div class="battle-decision-content pearl-store-columns">
+          <section><h4>盒中资源</h4><p class="pearl-store-hint">选择卡牌，整叠取出回背包</p><div class="pearl-store-list">${storedHTML}</div></section>
+          <section><h4>背包里的资源卡</h4><p class="pearl-store-hint">选择卡牌，整叠存入珍珠盒</p><div class="pearl-store-list">${bagHTML}</div></section>
+        </div>
+        <footer class="battle-decision-actions"><div class="ov-btns"><button type="button" class="ov-btn ok" data-act="pearlBack" aria-label="收好珍珠盒，返回背包">[[icon:arrow]] 收好珍珠盒</button></div></footer>
+        </section>`, 'bag');
       root = UI.el.ovBody?.firstElementChild;
+      root?.querySelectorAll('.pearl-store-art [tabindex]').forEach(el => el.removeAttribute('tabindex'));
+      if (focused) {
+        const buttons = [...root.querySelectorAll('button[data-act]')];
+        (buttons.find(b => b.dataset.act === focused.act && b.dataset.name === focused.name)
+          || buttons.find(b => b.dataset.act === focused.act) || buttons.find(b => b.dataset.act === 'pearlBack'))?.focus({ preventScroll: true });
+      }
     };
     bagAct('pearlPut', (d) => {
       const stack = bagResStacks().find(st => st.card.name === d.name);
@@ -578,8 +584,11 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     const source = [...(UI.el.ovBody?.querySelectorAll('.bag-tile[data-stack]') || [])].find(tile => tile.dataset.stack === name);
     if (pocket) {
       const entry = game.usedPocket.find(item => item.card.name === name);
-      if (entry) UI.showCardZoom(entry.card, { presentation: 'inventory', from: source, returnFocus: source,
-        footer: `<div class="camp-detail"><p>已消耗 ${entry.count} 张 · ${['道具', '装备'].includes(entry.card.type) ? '火堆不可复原；能源结晶可按顺序复原' : '可在火堆或使用复原道具取回'}。</p></div>` });
+      if (entry) {
+        UI.showCardZoom(entry.card, { presentation: 'inventory', from: source, returnFocus: source,
+          footer: `<div class="camp-detail"><p>已消耗 ${entry.count} 张 · ${['道具', '装备'].includes(entry.card.type) ? '火堆不可复原；能源结晶可按顺序复原' : '可在火堆或使用复原道具取回'}。</p></div>` });
+        decorateInventoryZoom(entry.card);
+      }
       return;
     }
     const st = findBagStack(name, safe);
@@ -590,7 +599,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     const closeZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
     const btns = [];
     if (usable) btns.push('<button class="ov-btn ok" data-act="useDetailCard">使用这张道具</button>');
-    if (card.id === 'tt2-pearlbox' && !safeFlag) btns.push('<button class="ov-btn ok" data-act="pearlStoreZoom">[[icon:gem]] 打开珍珠盒</button>');
+    if (card.id === 'tt2-pearlbox') btns.push('<button class="ov-btn ok" data-act="pearlStoreZoom">[[icon:gem]] 打开珍珠盒</button>');
     if (card.id === 'tt7-stratagem' && !safeFlag) btns.push('<button class="ov-btn ok" data-act="pouchStoreZoom">[[icon:cards]] 打开锦囊（存放法术 ×3）</button>');
     if (card.id === 'tt-token-gold' && st.count >= 3) btns.push('<button class="ov-btn ok" data-act="craftColorToken">合成员工通行证A（3 张 B → 1 张 A）</button>');
     if (card.id === 'tt-token-color' && (game.fragments || 0) >= 2) btns.push('<button class="ov-btn ok" data-act="craftColorTokenByFragments">合成员工通行证A（2 碎片 + 1 通行证A）</button>');
@@ -612,7 +621,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     bagAct('useDetailCard', () => { closeZoom(); useOwnedCard(st.uids[0]); });
     if (safeFlag) bagAct('zoomMoveToBag', () => { closeZoom(); moveStackSafe(card.name, false); });
     else if (!isSha) bagAct('zoomMoveToSafe', () => { closeZoom(); moveStackSafe(card.name, true); });
-    if (card.id === 'tt2-pearlbox' && !safeFlag) bagAct('pearlStoreZoom', () => { closeZoom(); openPearlStore(); });
+    if (card.id === 'tt2-pearlbox') bagAct('pearlStoreZoom', () => { closeZoom(); openPearlStore(); });
     if (card.id === 'tt7-stratagem' && !safeFlag) bagAct('pouchStoreZoom', () => { closeZoom(); openPouchStore(); });
     bagAct('detailDiscard', () => { closeZoom(); showDiscardConfirm(card.name, safeFlag); });
     bagAct('craftColorToken', () => {
@@ -640,6 +649,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       saveGame();
       showBackpack(true);
     });
+    decorateInventoryZoom(card);
   }
   function showBackpack(refreshOnly) {
     // 卡牌特写浮层挂在 body（overlay 之外）：此时按 B / 点背包按钮 = 先收回特写，
@@ -715,8 +725,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       used: usedSlots(), coins: game.coins, fragments: game.fragments || 0,
       tiles: bagZoneTiles(),
     }), 'bagpage');
-    // 分区 / 筛选 / 排序 / 点选详情（v2，2026-10-15）：点选格子只更新右侧详情面板，
-    // 「放大查看」沿用 09-12 留言 #27 卡面特写入口（inspectStack 契约不变，selftest 锚定）。
+    // 分区 / 筛选 / 排序 / 点选详情：格子打开独立全文阅读与操作区，
+    // inspectStack 契约与原有卡面特写返回路径不变。
     bagAct('bagZone', d => {
       if (!['bag', 'safe', 'pocket'].includes(d.zone)) return;
       bagZone = d.zone; bagFilter = 'all';

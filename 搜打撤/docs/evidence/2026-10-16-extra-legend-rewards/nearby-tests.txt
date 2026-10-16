@@ -1,0 +1,166 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤
+
+ ✓ tests/battle-settlement-retry.test.js > forwards the real battle review and boss identity to death settlement without persisting it 77ms
+ ✓ tests/nightshift-u10-settle-transition.test.js > U10 M1 settle 过场非当前后续流静默终止 > 撤退过场 resolve(false) 后：不打「你撤出了战斗」日志、不续结算 52ms
+ ✓ tests/nightshift-u10-settle-transition.test.js > U10 M1 settle 过场非当前后续流静默终止 > 回归锚：撤退过场 resolve(true)（正常路径）行为零变化——照常打日志、照常续结算 12ms
+ ✓ tests/nightshift-u10-settle-transition.test.js > U10 M1 settle 过场非当前后续流静默终止 > 原战场胜利反馈 resolve(false) 后：不打胜利日志、不续结算 18ms
+ ✓ tests/battle-settlement-retry.test.js > 真实战斗奖励刷新续流 > 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=false） 209ms
+stderr | tests/battle-settlement-retry.test.js > 真实战斗奖励刷新续流 > 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=true）
+[battle:settle] 战后结算未完成 Error: restored reward retry
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:393:14)
+
+ ✓ tests/battle-settlement-retry.test.js > 真实战斗奖励刷新续流 > 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=true） 361ms
+stderr | tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 过场失败后重试，不再次消耗已转入口袋的牌
+[battle:settle] 战后结算未完成 Error: transition failed
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:256:44
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 展示结算按真实移动采样，失败重试不重复，展示字段不进入持久attempt
+[battle:settle] 战后结算未完成 Error: transition failed
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:281:44
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 重复通知与事务失败重试复用固定attempt，不重复发奖励、重开宝箱或增计数
+[battle:settle] 战后结算未完成 Error: write failed
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:393:14)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:315:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 巨兽额外传说奖励使用规则概率且只消费原有loot骰 8ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 巨兽概率边界使用严格小于比较，恰等阈值时不发额外卡 8ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 过场失败后重试，不再次消耗已转入口袋的牌 12ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 展示结算按真实移动采样，失败重试不重复，展示字段不进入持久attempt 8ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 重复通知与事务失败重试复用固定attempt，不重复发奖励、重开宝箱或增计数 61ms
+stderr | tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 教学保存仅在事务成功后执行，失败重试不重复奖励
+[battle:settle] 战后结算未完成 Error: write failed
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.afterRewards [as chestDone] (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:393:14)
+    at finishChestRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:125:18)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:428:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 允许同一局背包整理替换ownedCards数组后继续提交 7ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 新节点已存在收据时在奖励与过场前停止，不投影旧结果 6ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 读取收据等待期间锁住战斗操作，切档后旧失败不弹新局重试面板 6ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 提交等待期间同槽开启新局后，旧失败不改变新局状态或显示重试面板 59ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 无档位胜利保留内存行为，撤退仍走普通保存且不创建胜利事务 7ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 教学保存仅在事务成功后执行，失败重试不重复奖励 10ms
+ ✓ tests/battle-settlement-retry.test.js > 战后结算事务接线与失败重试 > 死亡与龙巢战斗仍绕过普通战后事务 7ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 恢复日志写入前失败保持原始双存档不变 789ms
+stderr | tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 持续失败保留错误层，成功立即关闭自有层并解绑回调且不重复奖励
+[battle:settle] 战后结算未完成 Error: pending
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.afterRewards [as chestDone] (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:393:14)
+    at finishChestRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:125:18)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:473:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 持续失败保留错误层，成功立即关闭自有层并解绑回调且不重复奖励
+[battle:settle] 战后结算未完成 Error: pending
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+ ✓ tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 持续失败保留错误层，成功立即关闭自有层并解绑回调且不重复奖励 151ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > pair在 after-journal 中断后，同原始storage重建会恢复一致后态并重放收据 132ms
+stderr | tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 首次成功教学不被重试层的210ms关闭尾巴清除
+[battle:settle] 战后结算未完成 Error: pending
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.afterRewards [as chestDone] (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:393:14)
+    at finishChestRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:125:18)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:495:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > pair在 after-base 中断后，同原始storage重建会恢复一致后态并重放收据 123ms
+ ✓ tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 首次成功教学不被重试层的210ms关闭尾巴清除 275ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > pair在 after-run 中断后，同原始storage重建会恢复一致后态并重放收据 128ms
+stderr | tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 异步成功不误关替代层（own-callback）
+[battle:settle] 战后结算未完成 Error: pending
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.afterRewards [as chestDone] (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:393:14)
+    at finishChestRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:125:18)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:509:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 异步成功不误关替代层（replacement-callback）
+[battle:settle] 战后结算未完成 Error: pending
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.afterRewards [as chestDone] (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:393:14)
+    at finishChestRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:125:18)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:509:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 异步成功不误关替代层（new-run）
+[battle:settle] 战后结算未完成 Error: pending
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Object.afterRewards [as chestDone] (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:393:14)
+    at finishChestRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:125:18)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-retry.test.js:509:5
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 异步成功不误关替代层（own-callback） 38ms
+ ✓ tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 异步成功不误关替代层（replacement-callback） 18ms
+ ✓ tests/battle-settlement-retry.test.js > 真实重试弹层的结算归属 > 异步成功不误关替代层（new-run） 20ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > pair在 before-cleanup 中断后，同原始storage重建会恢复一致后态并重放收据 99ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 满16格保留确定传说，刷新/整理/已领刷新不重掷，首胜教学最后出现（boss=true） 1497ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 胜利统计与多级XP在 after-journal 恢复后只提交一次 127ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 胜利统计与多级XP在 after-base 恢复后只提交一次 200ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 胜利统计与多级XP在 after-run 恢复后只提交一次 198ms
+ ✓ tests/battle-settlement-retry.test.js > 真实 session 的战后保存入口 > payload构造不写盘，pending事务阻断普通saveGame直到清除 594ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 胜利统计与多级XP在 before-cleanup 恢复后只提交一次 171ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 满16格保留确定传说，刷新/整理/已领刷新不重掷，首胜教学最后出现（boss=false） 672ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 真实journal cleanup删除失败后重建恢复且不重复增加永久计数 135ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 成功后同步Base内存与两种写入baseline，重复receipt不产生新写入 57ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 普通箱已领取后刷新，保留普通奖励并只在接续后掷一次首脑额外传说 125ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 同requestId但节点业务payload不同会冲突；坏日志保留双存档现场 115ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 非首脑/巨兽未命中不误发额外卡：{"isBoss":false,"foeNames":["普通敌人"]} 96ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 非首脑/巨兽未命中不误发额外卡：{"isBoss":false,"foeNames":["荒渊巨兽"]} 93ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 遇到日志之外的第三值时阻断恢复并保留基地、对局与日志 125ms
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 传说空池不抛错、不丢已领普通奖励，也不多消耗选卡骰 93ms
+stderr | tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 额外传说初次落盘失败时停在可重试阶段，恢复写入仍是原卡原骰
+[battle:settle] 战后结算未完成 Error: 额外传说待领奖快照未保存
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:380:24)
+    at next (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/run/chests.js:306:15)
+    at Object.<anonymous> (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/run/chests.js:544:27)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/extra-legend-reward-persistence.test.js:230:19
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 额外传说初次落盘失败时停在可重试阶段，恢复写入仍是原卡原骰 129ms
+stderr | tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 确定传说领取后真实Run写失败，原attempt恢复重试不重掷、不重复发卡
+[battle:settle] 战后结算未完成 Error: 提交已开始，刷新后继续恢复
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:393:14)
+
+ ✓ tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 确定传说领取后真实Run写失败，原attempt恢复重试不重掷、不重复发卡 100ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 陈旧run/base revision、切档和同槽新run都会拒绝attempt 198ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > Web Locks不可用时拒绝且不更改存档 48ms
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 等待recover期间修改原node/afterRun不改变首次捕获的attempt 51ms
+stderr | tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 真实battle settle在journal待恢复时允许同attempt重试，不重复投奖励
+[battle:settle] 战后结算未完成 Error: 提交已开始，刷新后继续恢复
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:226:26
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at afterRewards (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/hub/game.bag.settle.js:393:14)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/battle-settlement-recovery.test.js:412:12
+    at file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/battle-settlement-recovery.test.js > 真实 Base/RunStorage 胜利结算恢复事务 > 真实battle settle在journal待恢复时允许同attempt重试，不重复投奖励 163ms
+
+ Test Files  4 passed (4)
+      Tests  49 passed (49)
+   Start at  07:17:40
+   Duration  3.97s (transform 1.40s, setup 0ms, collect 403ms, tests 7.70s, environment 2.02s, prepare 395ms)
+

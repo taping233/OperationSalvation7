@@ -118,17 +118,17 @@ const cardInspection = createBattleCardInspection({
     readState: () => ({
       game: G, granted, hand, consumed, discoverQueue, cardOverrides,
       unlimitedRune, zeroFeeUntil, turn, pstat, spellCost1, meleeCost1,
-      lastPlayedType, playedMartialThisTurn, playedMovesThisTurn, pdef,
+      lastPlayedType, playedMartialThisTurn, playedMovesThisTurn, pdef, shaTransform,
     }),
   });
-const { findCard, drawOf, infuseOf, effCostOf, handCurseSpecs, queueSwapCostDiscover, swapCardCosts } = cardInspection;
+const { findCard, findEffectiveCard, infusionFuelReason, drawOf, infuseOf, effCostOf, handCurseSpecs, queueSwapCostDiscover, swapCardCosts } = cardInspection;
 /* 治理批次 3：敌方生命周期簇与抽牌/发牌/自动出牌簇迁至 battle.foe-lifecycle.js / battle.draw.js。
  * 此处装配端口；resolveCard/applyTextEffects/triggersM2 为下方晚定义常量，以惰性包装传入。 */
 const { resolveFoeDefeat, sweepDead, nestPhase } = createBattleFoeLifecycle({
   alive, foeIdx, finish, executionSession, stagedDeathFx,
 });
 const { drawCards, deckDraw, addTempCard, addDeckCard, grantSha, releaseHandMatches, autoPlayHandType } = createBattleDraw({
-  R, alive, findCard, sweepDead,
+  R, alive, findCard, findEffectiveCard, sweepDead,
   applyTextEffects: (...args) => applyTextEffects(...args),
   resolveCard: (...args) => resolveCard(...args),
   fireDrawn: (...args) => triggersM2.fireDrawn(...args),
@@ -381,7 +381,7 @@ function usePotion(uid) { if (!hasPendingEndTurn()) return bag.usePotion(uid); }
 function openBag() { return bag.openBag(); }
 function closeBag() { return bag.closeBag(); }
 
-export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, getBattleLiveness, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, slamSkill, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse, deferEndTurn, hasPendingEndTurn };
+export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, getBattleLiveness, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, slamSkill, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse, deferEndTurn, hasPendingEndTurn };
 
 /* —— 六段正文（原行 606-2479，逐字）—— */
   // ---------- 生效时刻 / 持续时间 / 生效条件（设计者 2026-09-02 定版） ----------
@@ -894,6 +894,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // （普通战斗没有牌库与墓地概念）；道具卡只能在普通战斗中使用。
   // 2026-09-09 老板 #14：手牌代价（消耗 N 张 X / 选择 N 张手牌）不足时同样不可打出。
   function unplayableReason(card) {
+    if (card?._battleTransformMissing) return `转换目标「${card._battleTransformMissing}」缺失，暂时无法使用`;
     const handCards = hand.map(u => { const o = findCard(u); return o ? { uid: u, card: o.card } : null; }).filter(Boolean);
     return unplayableReasonFor(card, mode, { handCards, selfCard: card });
   }
@@ -906,7 +907,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (hasPendingEndTurn() && interactionOf('card')?.uid !== uid) return;
     // 玩家命令只能提交当前手牌。内部直接释放继续直接走 queueCardExecution，
     // 保留牌与弃牌洗回重抽后 uid 会重新位于 hand，因此仍可再次合法使用。
-    const entry = findCard(uid);
+    const entry = findEffectiveCard(uid);
     if (!entry) return;
     const card = entry.card;
     if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
@@ -947,12 +948,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (pendingCard) set$interaction(null);   // 交互正常结算：清卡牌槽（不 cancelTargeting，RESOLVING 迁移接管阶段）
     set$pendingHint('');
     // 「杀化为X」战斗规则：打出的初始攻击以目标卡形态结算（uid 沿用，弃牌簿记不变）
-    let playCard = card;
-    if (shaTransform && (card.name === '初始攻击' || card.name === '杀')) {
-      const tpl = SDT.Cards.all().find(c => c.name === shaTransform);
-      if (tpl) playCard = { ...tpl };
-    }
-    queueCardExecution(uid, playCard, pendingCard?.fuelUids || [], target, isFree);
+    queueCardExecution(uid, card, pendingCard?.fuelUids || [], target, isFree);
   }
   // v0.32 堆叠手牌：点击传入手牌 uid——按 uid 精确 toggle（N1 修复，2026-09-25 老板定版）：
   // 点已选中的那张=取消它（per-uid delete，同叠/别叠的其他已选张不受影响）；
@@ -963,11 +959,11 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (!infusing || uid === infusing.uid) return;
     const entry = findCard(uid);
     if (!entry) return;
-    // 「无法用于注能」（不朽斩等）不能被选作注能牺牲品
-    if (/无法用于注能/.test(String(entry.card.desc || ''))) return;
+    // Allow removing a previously picked card even if a transform made it illegal.
     if (infusing.picked.has(uid)) {
       infusing.picked.delete(uid);
     } else {
+      if (infusionFuelReason(uid)) return;
       const groupUids = hand.filter(h => {
         if (h === infusing.uid) return false;
         const o = findCard(h);
@@ -982,7 +978,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   function beginInfuse(uid) {
     if (busy || infusing || discovering || choosing || handSelecting || viewingGrave || viewingDeck || hasPendingEndTurn()) return;
     if (!hand.includes(uid)) return;
-    const entry = findCard(uid);
+    const entry = findEffectiveCard(uid);
     if (!entry) return;
     const card = entry.card;
     if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) return false;
@@ -990,7 +986,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (infN <= 0) return;
     const effCost = effCostOf(card, uid);
     if (effCost > energy) { G.log(`[[icon:bolt]] 能量不足：【${esc(card.name)}】注能打出需要 ${effCost} 点能量`, 'warn'); return; }
-    const others = hand.filter(h => h !== uid);
+    const others = hand.filter(h => h !== uid && !infusionFuelReason(h));
     if (others.length < infN) {
       G.log(`[[icon:flask]] 手牌不足：【${esc(card.name)}】注能(${infN}) 需要消耗 ${infN} 张手牌，当前只有 ${others.length} 张可选`, 'warn');
       return;
@@ -1005,6 +1001,13 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (!infusing || infusing.picked.size !== infusing.need) { SDT.Sound.sfx('deny'); return; }
     const { uid, card } = infusing;
     const fuel = [...infusing.picked];
+    const invalid = fuel.filter(fuelUid => infusionFuelReason(fuelUid));
+    if (invalid.length) {
+      invalid.forEach(fuelUid => infusing.picked.delete(fuelUid));
+      G.log('[[icon:cross]] 注能材料已失效，请重新选择可用手牌', 'warn');
+      requestBattleRender();
+      return;
+    }
     set$infusing(null);
     SDT.Sound.sfx('confirm');
     if (targetSide(card) === 'enemy' && alive().length > 1) {
@@ -1088,7 +1091,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // —— 出牌结算长流程（queueCardExecution + execPlay）已拆出 battle.exec-play.js：工厂注入 + 一行转发 shim（具名导出面不变）——
   const execPlayFlow = createBattleExecPlay({
     warnCardRuleRejection,
-    requestBattleRender, findCard, fireConsumeTriggers, effCostOf,
+    requestBattleRender, findCard, findEffectiveCard, infusionFuelReason, fireConsumeTriggers, effCostOf,
+    prepareExecutionCard: (uid, card) => findEffectiveCard(uid, card, getHostedExecutionCard)?.card || getHostedExecutionCard(card),
     resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
     takeSurge, registerEquip, summonAlly, applyKillRewards, poisonRandomFoe, applyImitate, checkElementSealProgress,
     beginDartStrike, sweepDead, finish, processChoice, processDiscoverQueue, queueBattleAction,
@@ -1096,7 +1100,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     triggersM2,
   });
   function queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid = false, paymentUids = [], onResolved = null) {
-    return execPlayFlow.queueCardExecution(uid, getHostedExecutionCard(card), fuelUids, target, freeCost, requirementsPaid, paymentUids, onResolved);
+    return execPlayFlow.queueCardExecution(uid, card, fuelUids, target, freeCost, requirementsPaid, paymentUids, onResolved);
   }
 
   // M2：onTurnEnd 触发转发（enemy-phase 回合结束管线调用；triggersM2 为模块闭包件）

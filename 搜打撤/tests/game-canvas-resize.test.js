@@ -13,7 +13,7 @@ vi.mock('../game/src/run/game.session.js', () => ({
 }));
 vi.mock('../game/src/run/game.run.js', () => ({ bindRunMixins: vi.fn(), devForceBattle: vi.fn(), devJumpNode: vi.fn(),
   moveTo: vi.fn(), openDevConsole: vi.fn(), reenterCell: vi.fn(), openClassChoice: vi.fn(), openShop: vi.fn(),
-  showRunTransition: vi.fn(), resumeChestsOnCell: vi.fn() }));
+  showRunTransition: vi.fn(), resumeChestsOnCell: vi.fn(), resumeEventCardChoice: vi.fn(() => false) }));
 vi.mock('../game/src/run/game.run.data.js', () => ({ PRELOAD_SCENES: {} }));
 vi.mock('../game/src/run/game.run.altar.js', () => ({ resumeExtraction: vi.fn() }));
 vi.mock('../game/src/hub/game.hub.js', () => ({ openBaseHub: vi.fn(), baseHubLoading: false }));
@@ -52,6 +52,11 @@ afterEach(() => h.ctx.setTransform.mockClear());
 afterAll(() => vi.unstubAllGlobals());
 
 describe('真实boot的Canvas resize接线', () => {
+  it('运行时装配转发正式事件选择恢复端口', async () => {
+    const run = await import('../game/src/run/game.run.js');
+    expect(h.runtime.resumeEventCardChoice).toBe(run.resumeEventCardChoice);
+    expect(h.runtime.resumeEventCardChoice()).toBe(false);
+  });
   it('小数逻辑尺寸赋值与no-op判断使用一致像素取整，重复调用不重置', () => {
     Object.defineProperty(window, 'devicePixelRatio', { configurable: true, value: 1 });
     h.runtime.resize(); expect(h.canvas.width).toBe(801); expect(h.canvas.height).toBe(601);

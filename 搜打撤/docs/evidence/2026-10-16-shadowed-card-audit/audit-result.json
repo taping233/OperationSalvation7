@@ -1,0 +1,4425 @@
+{
+  "auditTime": "2026-10-15T21:21:35.506Z",
+  "input": {
+    "path": "/workspace/shared/published-asset-audit-20261016/shadowed-card-art-candidates.json",
+    "sha256": "992bea821f87b4f3096a0b10cdf27069c14b4580bbcbcf1c59fe0b327362ecad"
+  },
+  "sourceCount": 527,
+  "sourceSnapshot": [
+    {
+      "path": "game/src/agent/agent.battle-stats.js",
+      "normalizedSha256": "ad18c1b9deb1adf637a873e3670a02633997a659414fc891c24eed7b2d4f8e41"
+    },
+    {
+      "path": "game/src/agent/agent.console.js",
+      "normalizedSha256": "cf4d8973bddbafb9c669fea26165a443df6f3a25f5992aebcd9ba751af6f10c3"
+    },
+    {
+      "path": "game/src/agent/agent.data.js",
+      "normalizedSha256": "f5b4138c9ef0c6996c53ac811d06f486633293f1c1ff20cb044e88267d0d3c10"
+    },
+    {
+      "path": "game/src/agent/agent.js",
+      "normalizedSha256": "a999da44a09c584db3082c0ccd9dad4bedfcc03ea56236538a75d965c6c23ffc"
+    },
+    {
+      "path": "game/src/agent/agent.llm.js",
+      "normalizedSha256": "d067b7f6a0d853fce5819b12622655e05d85ad8651924b4c732b55469f997d20"
+    },
+    {
+      "path": "game/src/agent/agent.policy.js",
+      "normalizedSha256": "4c0128ef43e8650fd354bb6c0a5f280fdc04bf252fdbff23f588eec0d4b34dcb"
+    },
+    {
+      "path": "game/src/agent/agent.protocol.js",
+      "normalizedSha256": "8398f0bbe8fc1cccd619b52b96b3c06c4d341673210b790e85bf6f7c796cde84"
+    },
+    {
+      "path": "game/src/agent/agent.recorder.js",
+      "normalizedSha256": "5719f81a13f533e6ec9baa953e6e0171c0bc79a0d31c2e5033e9e44642a5cdc6"
+    },
+    {
+      "path": "game/src/agent/agent.runner.js",
+      "normalizedSha256": "e5b7eb06c51ccc097138bfd3c694838eafbec444e09f435e0e1bb3c5c26ffd6a"
+    },
+    {
+      "path": "game/src/agent/agent.scenes.catalog.js",
+      "normalizedSha256": "00982b021d18f18aa93e78b6dd9de4a1f612dd6a05819b05b9e7c79f01c751b9"
+    },
+    {
+      "path": "game/src/agent/agent.scenes.js",
+      "normalizedSha256": "b88a54dffe02cf7010f577e47a924dcb268658c1d2c8491edf81c03e323469c8"
+    },
+    {
+      "path": "game/src/agent/agent.scenes.runtime.js",
+      "normalizedSha256": "f5a9b734f46430b5e586b314ae9bd7bd2d1025d4840ebc8bd4312d9202603d35"
+    },
+    {
+      "path": "game/src/agent/agent.state.js",
+      "normalizedSha256": "78057bb2c482923dd52c1400b4667ec984f0c4bfa3d472e92d99ca56dbc086e4"
+    },
+    {
+      "path": "game/src/agent/agent.stats.js",
+      "normalizedSha256": "6e0791d7ae899c39d9185a05663922b3c66b76dd4f31de72fe045a362240bdb5"
+    },
+    {
+      "path": "game/src/agent/agent.surface.js",
+      "normalizedSha256": "0fd42c1e8b97c71a941895c8a541426eaee990fb54263ba9b7eca2c59357c496"
+    },
+    {
+      "path": "game/src/agent/agent.weights.js",
+      "normalizedSha256": "2a2944dbd969cb05074e5e3fc0c479b05801d868791feb1a8f7ce77bb34b550c"
+    },
+    {
+      "path": "game/src/audio/sfx-audition.js",
+      "normalizedSha256": "e2a5dbbfc72747a51f1023a70bccd4f8ed33785126e0433a2ab2473881bdebdc"
+    },
+    {
+      "path": "game/src/audio/sound.bank.js",
+      "normalizedSha256": "81b9bdf76f7440c6adccdc757b10a1240201830d76f8b4dea695dc9812b0fdf4"
+    },
+    {
+      "path": "game/src/audio/sound.js",
+      "normalizedSha256": "f5053d38817ddaee067ff0c42e5677694641340fd210722c189a4ecdbee2a4a7"
+    },
+    {
+      "path": "game/src/audio/sound.music.catalog.js",
+      "normalizedSha256": "bb39e957e6f6f82606bb7f125f542dcc6659909f87c0e9f6bbdf979fcf3a45d2"
+    },
+    {
+      "path": "game/src/audio/sound.music.player.js",
+      "normalizedSha256": "f36ec41eeed80ce96e25d56ec4871bc35a749c7f18080459c4da6612206a467e"
+    },
+    {
+      "path": "game/src/audio/sound.policy.js",
+      "normalizedSha256": "bef908c7cfc155e491104959902607ba776c787b2297e8e05c584d3d7d10c9e1"
+    },
+    {
+      "path": "game/src/audio/sound.scape.js",
+      "normalizedSha256": "d6aa9b4d4b11568743422bd1f8244bec874a0a0039807b30e651dfc0c2e54dc8"
+    },
+    {
+      "path": "game/src/battle/bag/battle.bag.js",
+      "normalizedSha256": "12181df921a553b735b67caeb50a6e9409f782fc9d4901ebda666af50263a6d1"
+    },
+    {
+      "path": "game/src/battle/bag/battle.deck.js",
+      "normalizedSha256": "3dc642ed8e4ed508ea9641bec1cf67fe1d2908741f718ab3d129d172923bed33"
+    },
+    {
+      "path": "game/src/battle/bag/battle.equipment.js",
+      "normalizedSha256": "951a35573bfdb90aeca13df9943aea281b8e186af58480b9626a11840ee559b8"
+    },
+    {
+      "path": "game/src/battle/bag/battle.piles.js",
+      "normalizedSha256": "de53394d19a4041368905ed26a728385031e565e0ce68e39aa7994991d68c7c6"
+    },
+    {
+      "path": "game/src/battle/bag/battle.slam-skill.js",
+      "normalizedSha256": "4ee6b20aa3dca00279977aea49a65754274127077130806cdf5bbf6805314e28"
+    },
+    {
+      "path": "game/src/battle/battle-loader.js",
+      "normalizedSha256": "e2394be64c048d765e6336af2c8f348576b005840e6ac7a7e1d81f8d410f4a69"
+    },
+    {
+      "path": "game/src/battle/core/battle.actions.js",
+      "normalizedSha256": "4782a8abf619db319e7cb30ffb8f3d66f318ad6ee0391a3272c2809bdf12fc8b"
+    },
+    {
+      "path": "game/src/battle/core/battle.core.js",
+      "normalizedSha256": "84db1b9f21d83a708417f0deb23882cc9168c102b0d4a15eefe00ebad58c0c63"
+    },
+    {
+      "path": "game/src/battle/core/battle.draw.js",
+      "normalizedSha256": "583caf9183c2beea83ea73e6a13d60bf659187b44ef852e838a2630ea2827a25"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-intent.js",
+      "normalizedSha256": "94daf4a07a47e4e37488dff4ba37f9bf9a39fa2486d5274816a180bf6c577f44"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-phase.js",
+      "normalizedSha256": "e6aac716d875da9110c4e47a614a24dbb6fe2d315a194add6bdcf97c2bff5636"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "normalizedSha256": "bb99d565fc4027d776e0c3e9fb7aea59cdd727400c522219f018309bc32354cd"
+    },
+    {
+      "path": "game/src/battle/core/battle.exec-play.js",
+      "normalizedSha256": "d2996124d33ff3639be977ee83d50b61cd94123fcb7b41055a6f7761a6d7a69d"
+    },
+    {
+      "path": "game/src/battle/core/battle.foe-lifecycle.js",
+      "normalizedSha256": "6167773ef4132cb06d18eba37c0c585582a50075e8754e3071cca643c8bba834"
+    },
+    {
+      "path": "game/src/battle/core/battle.hand-selection.js",
+      "normalizedSha256": "43a1f14c4c193365a58e21694b7bd8b31de45a6c1f778abc30aaca8479aadc37"
+    },
+    {
+      "path": "game/src/battle/core/battle.hand.js",
+      "normalizedSha256": "8c691430632c473c27939e73c8be1df9e73fb4e01bd798fa6fdffbad72fbdf85"
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.js",
+      "normalizedSha256": "942f93e33d26ad394e9d07599702f89eb43ec7b7592acf7659c5e0f768e7d309"
+    },
+    {
+      "path": "game/src/battle/core/battle.presentation.js",
+      "normalizedSha256": "753ca719e0b7f7daf6cc8271256ecef4335f3ae0adac705f53ee2e621a8d68ac"
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.js",
+      "normalizedSha256": "1f28f83dcb5ad23d69bb87698dd019de2063d33cbbace600b068129706c4647e"
+    },
+    {
+      "path": "game/src/battle/core/battle.selection-flow.js",
+      "normalizedSha256": "411b64accec2a176c434516214cb25c73d7af423ff79acb5919d507a38084e58"
+    },
+    {
+      "path": "game/src/battle/core/battle.summary.js",
+      "normalizedSha256": "54005c1ee889c6693276ef66bbdbd6c93f4bc139af8bee5b3891b2fd66b82e1c"
+    },
+    {
+      "path": "game/src/battle/core/battle.target-session.js",
+      "normalizedSha256": "e74471e686868e2537ef960515536cfdd1eafb122b4910decdd78e6eda9bde61"
+    },
+    {
+      "path": "game/src/battle/core/combat.js",
+      "normalizedSha256": "0758cd62a4fd44b620c533fa4e3830d29740376909e9be211c69ff69455354a9"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-cost.js",
+      "normalizedSha256": "a56c1e23a5a5de6c26e85710a210733cd4ea4d9a98b5b7b661adddac792d1eb4"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-inspection.js",
+      "normalizedSha256": "cbeac5b1c37ff495c38278e6de2fd9e85bd18326930946c5a855f86b84789ee5"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-candidates.js",
+      "normalizedSha256": "7e86026a93b86f2cad0e7f2c191ff7f77de194f5d0eeaf78044e8406d95cd138"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-flow.js",
+      "normalizedSha256": "4894b15160f5675dd3d36d259ef2be708eb0f23d8c830fa90799dcb1b8dd879e"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-state.js",
+      "normalizedSha256": "8cceb48137552d676a3ce4d127f325363e71be75c9cb955cda44c04d9e092f88"
+    },
+    {
+      "path": "game/src/battle/effects/battle.effects.js",
+      "normalizedSha256": "ff7efe4d09ba6774e2ef1136acd11cb102939e2acc60fd6052c5972ee92d583e"
+    },
+    {
+      "path": "game/src/battle/effects/battle.hosted.js",
+      "normalizedSha256": "bc0ecc6ab517ed1e790efc0a821e79643d5070297fca1dc53669a985ba964793"
+    },
+    {
+      "path": "game/src/battle/effects/battle.rule-guard.js",
+      "normalizedSha256": "7c79e45d48053ec2040161d1deb7025e75f25a40b91be21738c3cb65f239f7e3"
+    },
+    {
+      "path": "game/src/battle/effects/battle.target-rules.js",
+      "normalizedSha256": "a0dde95fcb5e3f1d2ce00d81e876edcd196262724ecb88f7b2e21a570fe6eb65"
+    },
+    {
+      "path": "game/src/battle/effects/battle.triggers.m2.js",
+      "normalizedSha256": "1e2ea7c043314f98b524078ff43b9212f8940fb4f115cb4efe642ea930fe8431"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.audit.js",
+      "normalizedSha256": "929a963e95d941233532120d06a8dc815c222adabec8cde31ab89717190bc2b7"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.ctx.js",
+      "normalizedSha256": "a8bc5900458372782f5ba8a7a6ebe3dcdd89e5e96c6014defbe23ddf879e4446"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.curse.js",
+      "normalizedSha256": "9b1d82a85937b101eb4fea9f191a9062aea08504557da8c8bd3eb94a28eb496e"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.damage.js",
+      "normalizedSha256": "7829f53a1931ba49e408d7fa9abf8b1b82767309a790f507f3c7453c8dd3029d"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.deck.js",
+      "normalizedSha256": "5b613d2653942106d41f2302c3902755a5f3ea5afb7be1a48cce99ab7d78fb52"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.gates.js",
+      "normalizedSha256": "f4c537f8d4dc4dcb77e0a0acd0517a98f3cd08ce5825ecbcd47044ede1f92527"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.js",
+      "normalizedSha256": "5faea255b404580bd8bd940c6e069869714a240849f2f124d3099d402dbcffee"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.kills.js",
+      "normalizedSha256": "bda4e00752c7f99a881aa3bb0115e84931bc25c22d1cb88ea48c5fedb14c3fc5"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m1.js",
+      "normalizedSha256": "73b009ca4c0b4ecedc27ef52020fc581841c4748e82f72b461d2b48d5b2e0933"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m2.js",
+      "normalizedSha256": "f4fbcc259b78dc6d3ad85647b619d9792dd3fe5b698b0defe1720f4ce28df7f7"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.recovery.js",
+      "normalizedSha256": "6a3c8d2116f46aceab6a4c0b97415251a60562cbda12b3bae658b72d4d79834a"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.rules.js",
+      "normalizedSha256": "ae530a785da03b218ec230c0cd627271d82aa93a95949fc785e109d029f21a57"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.tail.js",
+      "normalizedSha256": "bdab0871926c1b271bb3d1387157641c380db0b83d7a7f247c6177c8f068aa99"
+    },
+    {
+      "path": "game/src/battle/effects/effect-verbs.js",
+      "normalizedSha256": "fb104054d3910c711b9d19eba0d2d97642af41a9fc4c8aeb6ca2407d9330ee78"
+    },
+    {
+      "path": "game/src/battle/effects/hand-cost-patterns.js",
+      "normalizedSha256": "9462316eb89b0c8959a39295267dcc2421f2b105da332fda0caeca6317060a23"
+    },
+    {
+      "path": "game/src/battle/effects/hosted-catalog-index.js",
+      "normalizedSha256": "3e025a4149d4ce4d51884581251bb02f5e151294c702ea04b69c1e29027cbaac"
+    },
+    {
+      "path": "game/src/battle/runes.js",
+      "normalizedSha256": "1f3374f9e5065081f0e289cdf330d708897890975f74629d09b0b1f8b12d4656"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.action-runner.js",
+      "normalizedSha256": "a323cf9cb52d0178815144e396a1f2dcb871f2a4baceb186a1b30152ec6e9dc8"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.clock.js",
+      "normalizedSha256": "af8ff90afade17361c8b5804fa390cb68e1d84a79215e114aa62f168f5338416"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.execution-session.js",
+      "normalizedSha256": "64df4e49b54f49b477ab9232fe9c78802185d8cdbb4f501227170653b8b620e5"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.pace.js",
+      "normalizedSha256": "5dff1a4c01482408e439b99cc020cac4f77e4de69ae8c30b5ee363f98035b958"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.effects.js",
+      "normalizedSha256": "82e20de2d72f530604890feb8dca61a87e2482b2ce2bca40aa4a97a594281200"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "normalizedSha256": "eb98e2112b538625390126e6b093a8814e06fb3ced51253bf3e9a8d3880ae8d7"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.js",
+      "normalizedSha256": "dd43159a90f6523f5cdc20117b142ce5c49328f81791918fbde8df1660fb3d53"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.piles.js",
+      "normalizedSha256": "9d8f61605b27084ffebd2c700184a7304bb6f2a72252e57da92f4c14613cf0bc"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "normalizedSha256": "27aebed4ab68e551e6c3ab09830d837982ba209fdfdcbba7a0099b62edd4e16e"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.session.js",
+      "normalizedSha256": "04997b81ef6e9755ac74ba88673a9235c35668ac156df83a0d59485e434513d4"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.snapshot.js",
+      "normalizedSha256": "cd328cb2514ac2236c206f73dc55ebad5a7c6acc522ef73393536bf56fa814bb"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.staged-playback.js",
+      "normalizedSha256": "9a94d83a9325a9d99b0afcaa47e6d4319dc3d9d79a7aa139d182734ce11f1182"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.state.js",
+      "normalizedSha256": "35e9eb0b6b746897dfe9a6e469a17963e6ad78d96b4215d1a8c7ccc3a37fa10c"
+    },
+    {
+      "path": "game/src/battle/view/battle.aim.js",
+      "normalizedSha256": "d6e4506f07db96f31d4b14cec43b83fa4b1d0a32c85d5473647c920564a13d8d"
+    },
+    {
+      "path": "game/src/battle/view/battle.anim.view.js",
+      "normalizedSha256": "50dde0a1c4497f7c1fe894080908b3f04c4061ce67eeed222c22511ed5cda139"
+    },
+    {
+      "path": "game/src/battle/view/battle.attack-cues.js",
+      "normalizedSha256": "13e79f6af1b9bc338ad5f5c08659b6beb8118efcbd9f39a7c78417f451b84130"
+    },
+    {
+      "path": "game/src/battle/view/battle.feedback.js",
+      "normalizedSha256": "b94acaa417ce2bcf7638797a688d407f18aed85d84580d906cff8e0ad8c65cc3"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-catalog-changwuyu.js",
+      "normalizedSha256": "774594287f6417bf0ffba60f77817ffc7dff42d5d78f937f6c13c72973a4a77d"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-catalog-three-role.js",
+      "normalizedSha256": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-catalog.js",
+      "normalizedSha256": "7396a3a49f206d63e16e5ed8bab02d4d5fbd39e7ef934c354f1dc0fcda756bd0"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-renderer.js",
+      "normalizedSha256": "cb4e7df684da0635e6fb38b11b1dbb366e8f8e2313cb3c0c086963ef336b9196"
+    },
+    {
+      "path": "game/src/battle/view/battle.frames.js",
+      "normalizedSha256": "3749586baaf1cbb45f00af3eccbd14e2963a0b98ac483c69b10a6c7b557eb904"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-inspector.js",
+      "normalizedSha256": "2cc41da2331c7076eb91c3f0a7d94b5078f53a30304c2bf86543d075c1a2893f"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-layout.js",
+      "normalizedSha256": "706562cd5559ec0a8edae122c152a638dc5c23ce0a89c5ac1f619dc9f1253f6b"
+    },
+    {
+      "path": "game/src/battle/view/battle.hover.js",
+      "normalizedSha256": "ec07961f5723135d5d01eaabbc5ecf6f5d5210f2b33b60be4f97f74e8ee6d4f8"
+    },
+    {
+      "path": "game/src/battle/view/battle.intent.view.js",
+      "normalizedSha256": "b2d04f3fdc39a2c7d49052b16e52cce9e013e53f4319bf4e8ae4d69f5601321f"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "normalizedSha256": "9e7550ed5c4ed75d54f158430e1cf83fc652e5086c7309a5c6d1b48c78797ab0"
+    },
+    {
+      "path": "game/src/battle/view/battle.overlays.js",
+      "normalizedSha256": "bdadf35c9924bc94b95912c8b765853deb48da99db9d03ba9513d0eab2819227"
+    },
+    {
+      "path": "game/src/battle/view/battle.piles.view.js",
+      "normalizedSha256": "19a10816ebd278af40d36cc4b4c9864e648272d3fb44cee775b16322218452ed"
+    },
+    {
+      "path": "game/src/battle/view/battle.presentation-ready.js",
+      "normalizedSha256": "94dd921d5e88b7b77b983eb1161c01e3332a0ef3fe370d4706e41d6d95225b18"
+    },
+    {
+      "path": "game/src/battle/view/battle.preview.js",
+      "normalizedSha256": "1e286209e651934066d10ff71adabe0b198d093ff2343db20b48651a63caace0"
+    },
+    {
+      "path": "game/src/battle/view/battle.scenery.js",
+      "normalizedSha256": "def5fdf4843c3fc8b5eb0226e8859b6ff14ee72c9b12d24481a9a93d22647dba"
+    },
+    {
+      "path": "game/src/battle/view/battle.turn-forecast.js",
+      "normalizedSha256": "6ec7031f279033cd2a6ac80d8f6e8604b659a5f34ed9dd132fc0dc064580346e"
+    },
+    {
+      "path": "game/src/battle/view/battle.vfx.js",
+      "normalizedSha256": "a439f13c5433f7dfc936a9e7a8c4bfe56350f745e17a69e2661b783d4d667e28"
+    },
+    {
+      "path": "game/src/battle/view/battle.victory.js",
+      "normalizedSha256": "7fb4f630a67ce43d1961e391193316f44fd51d1963d942787b798559dafaa0e2"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "normalizedSha256": "c8101836bd34b1c0c7528bc0e6fb49d6cd2bc7af644bc70cdba86804bd09f4dc"
+    },
+    {
+      "path": "game/src/boot-order.js",
+      "normalizedSha256": "9da98bad5bff080081a82449a19c95935ce02c2dfc0ffbd4982498430b37574a"
+    },
+    {
+      "path": "game/src/cards/card-description-links.js",
+      "normalizedSha256": "ad6ac09f4fc165f62c4883abec3b56931e1139207fe53edc107ec20eb50f582f"
+    },
+    {
+      "path": "game/src/cards/card-description-text.js",
+      "normalizedSha256": "63e8c460d46c1c6faacf6fc462379c99fa260d719beaa4f0f5b429baf425c641"
+    },
+    {
+      "path": "game/src/cards/card-draw-explanation.js",
+      "normalizedSha256": "5201ee0193fccc780e88dd4508e13507d9d76a5a70025f70141f1e697a3b713e"
+    },
+    {
+      "path": "game/src/cards/card-frame-presentation.js",
+      "normalizedSha256": "79ef8241faad2ed89bb1c19b6866f0e352ddd43e9498d1e0842e436335099d9a"
+    },
+    {
+      "path": "game/src/cards/card-photo-notes.js",
+      "normalizedSha256": "e5b584cc493c1beebc5918f6920c0434a8cd8711886c4cd4c1c8b22a71a2435d"
+    },
+    {
+      "path": "game/src/cards/card-rarity.js",
+      "normalizedSha256": "7df4211548e6e4bcc46fac07d5b7541265f7c04dfcab23b72b899be7637028fe"
+    },
+    {
+      "path": "game/src/cards/card-render-context.js",
+      "normalizedSha256": "5520443debdf12b82befc015e04765052642a6b9af99a0a502992c4e3de9ad4b"
+    },
+    {
+      "path": "game/src/cards/card-rules.capability.js",
+      "normalizedSha256": "76ba46beb7218d35afb6ec9e139251d0f0cda2a84debdfb06cec5e4361310719"
+    },
+    {
+      "path": "game/src/cards/card-rules.schema.js",
+      "normalizedSha256": "2f81e462c15e4c443c948538f4fa56c370ce4826544cc42ade3282300d9e92ed"
+    },
+    {
+      "path": "game/src/cards/cards.catalog.js",
+      "normalizedSha256": "8be4bec49c82b5e3bb023be7fbe623fcdbb82ace680100ae477cb917b981a823"
+    },
+    {
+      "path": "game/src/cards/cards.consts.js",
+      "normalizedSha256": "777e0735e4b26bd001e71085565f6326fa8314794b47f0c8cf09765efeff75eb"
+    },
+    {
+      "path": "game/src/cards/cards.data.js",
+      "normalizedSha256": "df1d9158d040f1ced758adc8ce72b3f30e02d7ef4fa6d8038f683879d33be29e"
+    },
+    {
+      "path": "game/src/cards/cards.js",
+      "normalizedSha256": "dc0198fdb841b3cdfa9e4c4aff4e75ee714ac2ed09b73b08394a6c080afd3f5e"
+    },
+    {
+      "path": "game/src/cards/cards.rules.js",
+      "normalizedSha256": "bfbbbbc6037f6a2bb78016c71614cfc98218eac21a0be77ddd0ab96e6297bf76"
+    },
+    {
+      "path": "game/src/cards/cards.sync.backfiller.js",
+      "normalizedSha256": "1b4a8d120a33e9a6cf11580e93115f6bd8549e3fdc8dbbb142ca3227aacda3f8"
+    },
+    {
+      "path": "game/src/cards/cards.sync.face-refresh.js",
+      "normalizedSha256": "94a36c67b5caf855106cb63184f561fd72d597852f7e88b079789ad9100a8c38"
+    },
+    {
+      "path": "game/src/cards/cards.sync.js",
+      "normalizedSha256": "2d0ff87b6e3fbaa58199351c388025931e2ffd857470366d92181929a2fe40d3"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m1.js",
+      "normalizedSha256": "e05ab9d7484406e4328f2bd8e8c88681e1431f62a9a6b0a2bfd4965c6b75cf8b"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m10.js",
+      "normalizedSha256": "6cc3697b9138c79a1f5555853048d6163085ef1e4f675f163dd8c3039511e73b"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m11.js",
+      "normalizedSha256": "7bd8a10fde163f5bd54673bf604449659cf3ab50457efb5144056d3938f1cad1"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m2.js",
+      "normalizedSha256": "edb80c7416eb48aacb0769aeb8c7bbdce195770839689855c53119ebffdc6b68"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m3.js",
+      "normalizedSha256": "5c52b0f501f0f618eb3a5a97877679152813137bdd97be32ea85e6bb393ce93b"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m4.js",
+      "normalizedSha256": "13eb6767b010d64ca1db098bffd048e9a9a1f52244f6955c2d39d7055f3ab105"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m5.js",
+      "normalizedSha256": "667a158c413195e7278ba9cd89cc27e2dd14da61ee27276e2f424d3f0227e4e3"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m6.js",
+      "normalizedSha256": "5fbb6f6ee19018adf72fd12d2a6a91ba799bb72416b00b6cce2cbd2d9a7daf2b"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m7.js",
+      "normalizedSha256": "c3a6e7d6729e176f45e1805b779b86e922649611115d630ff09f867e676b5cb8"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m8.js",
+      "normalizedSha256": "fedeca1fd65cb45d5d93379d7d987d916ee230a2ae088262f5942be007806e3b"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m9.js",
+      "normalizedSha256": "b8041fdaa22993e0cf03605a474aa0238d0e71dee369b3b2e64a5ac6a4cbadc0"
+    },
+    {
+      "path": "game/src/cards/cards.view.js",
+      "normalizedSha256": "d100f89cd30cd69f6d5179d595991e4669d1f582fdaaa118ad0bb0f2a2006074"
+    },
+    {
+      "path": "game/src/cards/mech-sentences.js",
+      "normalizedSha256": "fe7cb590cee930fe795de5bcb0e94bfe5d4e76d74f2c0d6ded0d9e1b2fed1061"
+    },
+    {
+      "path": "game/src/core/art-preload-plan.js",
+      "normalizedSha256": "7fc6a12eeed2ec21407df9e65ae81a3d2294fc343d37f8deefe62f0938cb93ad"
+    },
+    {
+      "path": "game/src/core/art.js",
+      "normalizedSha256": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1"
+    },
+    {
+      "path": "game/src/core/asset-url.js",
+      "normalizedSha256": "5bbfcf5fd3b9a0f7a1a53779710786133c5c749f8f8a20d635f804699b6d207e"
+    },
+    {
+      "path": "game/src/core/camera.js",
+      "normalizedSha256": "105c9f880b8383ac9688da85da2be6353fe1eb4cd21c01abbec065a10b9c50d2"
+    },
+    {
+      "path": "game/src/core/characters.js",
+      "normalizedSha256": "1e13c272bf950c475c31282faafadc5aedb0b5d5d0ab34b4ec99941e0c7254b9"
+    },
+    {
+      "path": "game/src/core/data-loader.js",
+      "normalizedSha256": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be"
+    },
+    {
+      "path": "game/src/core/diagnostics.local.js",
+      "normalizedSha256": "aaaf2af15496b426c6bfd974cbff3ab91a6d1bbaa1736202f143d7bcba0f03da"
+    },
+    {
+      "path": "game/src/core/event-bus.js",
+      "normalizedSha256": "76cc1a8023d1330c386c1e2392525d4d33882b21aad6d7485822660d630c0740"
+    },
+    {
+      "path": "game/src/core/icon-hydration.js",
+      "normalizedSha256": "e84bb33f03882a86aa971edb1a7b7c3ef223afdcc080fc322cb12e11dad364c6"
+    },
+    {
+      "path": "game/src/core/icons-bitmap.js",
+      "normalizedSha256": "c8c66dda18b0b7d43c08e7fac90f35f1672e9693775892e1d7116158bf18aa46"
+    },
+    {
+      "path": "game/src/core/image-decode.js",
+      "normalizedSha256": "5d2cab3cf14e1a20d04d418f18266d52e8d8aa5c0f5341f1a8c300556258d97d"
+    },
+    {
+      "path": "game/src/core/input.js",
+      "normalizedSha256": "c52d8ce3333038bb231e2953c5a7f209e9f93b1ee52831f66050a77ad97ffa01"
+    },
+    {
+      "path": "game/src/core/map-brush-art.js",
+      "normalizedSha256": "7aa3d1887cfe8e5721251f5c88363ba99859c9414b626c20eb7e79275bf53a12"
+    },
+    {
+      "path": "game/src/core/map-city-atmosphere.js",
+      "normalizedSha256": "70c7ce669d14bb5c55261a17c412b843a8616e9732b544bb03c18376cbf3a5fb"
+    },
+    {
+      "path": "game/src/core/map-image-ready.js",
+      "normalizedSha256": "77f5a75f98b42c2c567ba9411c1ea29d0583f7db3edd4908e9a4e3d283dce3fb"
+    },
+    {
+      "path": "game/src/core/map-node-art.js",
+      "normalizedSha256": "2142595cfe18a9b47db627e03e10d4db1d868c66367751571c3e028e3bf8f0ac"
+    },
+    {
+      "path": "game/src/core/map-node-glow.js",
+      "normalizedSha256": "ade0ca6cf9a32339c05fc5fe924ed890f939915dbab6db30a83ed3b382dd1507"
+    },
+    {
+      "path": "game/src/core/map-node-state.js",
+      "normalizedSha256": "e7227c53ebe593a1c41464718b2b44185762cbb63749d688ae54aae2b1566599"
+    },
+    {
+      "path": "game/src/core/map-reveals.js",
+      "normalizedSha256": "891511c20e01c1316264147d56dbf7ae830e99af42ec1ebee4feb0c670c7e4cd"
+    },
+    {
+      "path": "game/src/core/mapData.js",
+      "normalizedSha256": "cd140f6f0876fd4f01aec10019e2a51a76398d7642526f52fafce77772eb9bf7"
+    },
+    {
+      "path": "game/src/core/motion-primitives.js",
+      "normalizedSha256": "ff13e1089b25de9af60b70da0e30d1badae577ac2b85df4c308c8a18ff2240d7"
+    },
+    {
+      "path": "game/src/core/motion.js",
+      "normalizedSha256": "d70f9e42c714b60d9d3e01e6762c6c723a8d5b8eec0757f8571aa51aaa320653"
+    },
+    {
+      "path": "game/src/core/node-info.js",
+      "normalizedSha256": "1655ea2731af1959fd0f53bc669043ed8a1d7deb11ccae3e474715d97626b626"
+    },
+    {
+      "path": "game/src/core/notes.js",
+      "normalizedSha256": "a8d32c5265aa2185901fb1795d25297fa618a2e0aec9a66abf0152b6b75b902d"
+    },
+    {
+      "path": "game/src/core/perf-probe.local.js",
+      "normalizedSha256": "8ef43c1da5fef75dd9cbd759461988a91a2d7191ea80992eec93036a34ba4003"
+    },
+    {
+      "path": "game/src/core/performance-budgets.js",
+      "normalizedSha256": "35972fa6e3fd93f363f9b7b53fe2c05f8c44d9a73ecfddc7a8ad0bc7934ae7e8"
+    },
+    {
+      "path": "game/src/core/random-core.js",
+      "normalizedSha256": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174"
+    },
+    {
+      "path": "game/src/core/random.js",
+      "normalizedSha256": "cbc6ade0393a77dc838fea3d5833ae771eb51825f9d3a06644b100a449542923"
+    },
+    {
+      "path": "game/src/core/render-scheduler.js",
+      "normalizedSha256": "a698340dc9a192991d00a53dfea5b27c21f2fc3bbee330c0834643670ad19c32"
+    },
+    {
+      "path": "game/src/core/renderer.fx.js",
+      "normalizedSha256": "7682307628f400dcea170457cab7308a0687156696324e7c101573cf7a645a02"
+    },
+    {
+      "path": "game/src/core/renderer.icons.js",
+      "normalizedSha256": "d07938a2701004c80616bafda2db13c2d3f075ca85380d2ea5061666682afa07"
+    },
+    {
+      "path": "game/src/core/renderer.js",
+      "normalizedSha256": "cc97d2ef02b50c240d18954c1a38e0acc352d0deea7985e6bfb37fa71db26fa2"
+    },
+    {
+      "path": "game/src/core/renderer.primitives.js",
+      "normalizedSha256": "7860c4e2ad5469ab17a1e4d1800dc69a5914633710b808157d14ef105966fce7"
+    },
+    {
+      "path": "game/src/core/rule-config.js",
+      "normalizedSha256": "7976d367bf8a8313f197f489cf923cd0a014914a33f46111100daf55fd2dbbbe"
+    },
+    {
+      "path": "game/src/core/rules.js",
+      "normalizedSha256": "1f07a1b9533ed0ae6c2abc48554767351dc75ab52daaa9673363550a27bb2cce"
+    },
+    {
+      "path": "game/src/core/sdt-facade.js",
+      "normalizedSha256": "52c174eb79457cf0f215420b0503e572fa228c4d33c8f34b9b637efd338d433d"
+    },
+    {
+      "path": "game/src/core/shared.js",
+      "normalizedSha256": "2687bcc33d114eab4700663ffdda962e783a8c9125da5c3de29323e8f6f9e9ad"
+    },
+    {
+      "path": "game/src/core/storage.js",
+      "normalizedSha256": "011a7e5d2fc8446f626981322b986d6bae954a4cac709d9d381d3bc6d27a49fc"
+    },
+    {
+      "path": "game/src/core/turbo.js",
+      "normalizedSha256": "26f366de51e0fd7d24593bb7aa00f817bb73f18b4577b141dba07ff8a2394737"
+    },
+    {
+      "path": "game/src/e2.snapshot.qa.js",
+      "normalizedSha256": "b20918e483fcb88ff00e22bf45e244f169e703af8f3767c91baf8d9e2541a31e"
+    },
+    {
+      "path": "game/src/experience/pocket-strip.js",
+      "normalizedSha256": "3923840a81444f1b488a44f3335b880bfa3b8f0010fb4e5029f8647ce8d172d5"
+    },
+    {
+      "path": "game/src/game.boot.js",
+      "normalizedSha256": "8cb7e4fc4238c5d78f3daa897a10e0aca232b1968fff1a9b8f371fc4aaec0e7a"
+    },
+    {
+      "path": "game/src/home/home.catalog.js",
+      "normalizedSha256": "a0722309d6cdcec0e95f3a2c79b8cca3480a4482a468a000f491c75f7171b869"
+    },
+    {
+      "path": "game/src/home/home.commands.js",
+      "normalizedSha256": "eb75d1a2444b1082ed5b8c97b5559dc7e480e91cf68bb0074f9c609c0dbe6c82"
+    },
+    {
+      "path": "game/src/home/home.presenter.js",
+      "normalizedSha256": "885923c89a44c237010830dbd037602c5bae1552fec40f65a03d30efc8066b88"
+    },
+    {
+      "path": "game/src/home/home.scene.js",
+      "normalizedSha256": "abbbd5aaabc4afae047302bc2e7bd62858fbc7a6386b1505e60b46dcbe957604"
+    },
+    {
+      "path": "game/src/home/home.visuals.js",
+      "normalizedSha256": "77894ef542f7caa05ab164959f45d45299a1e99b0fa0e8783e47d9abd5576b68"
+    },
+    {
+      "path": "game/src/home/narrative.js",
+      "normalizedSha256": "de497a1dd57cccaeeb7da97af2d27a6c84ea3a6eb11cc435110003e52e9647f2"
+    },
+    {
+      "path": "game/src/home/story.commands.js",
+      "normalizedSha256": "7f7e4c8220f85e686eb43a8c929cee3462c866c8584b210009a0cb7fc1fe8022"
+    },
+    {
+      "path": "game/src/home/story.last-lamp.js",
+      "normalizedSha256": "6ce80c708c9c2d760abd0cb08215f4e75de644cbf51c7aa9ff563ae670df1cbc"
+    },
+    {
+      "path": "game/src/hub/bag-return-hook.js",
+      "normalizedSha256": "855b5c061bbf2c3aa57a4e2ba2f98849da3e2e8d98e7d17afee7c06c0081e9c9"
+    },
+    {
+      "path": "game/src/hub/base-chibi-gait.js",
+      "normalizedSha256": "e6fea475d690624f68662134f7a97efeb2682e7bbe121390ca1c64987d5061e4"
+    },
+    {
+      "path": "game/src/hub/base-chibi-skin.js",
+      "normalizedSha256": "05febd50137529900cb35c34c3b8175a1bd4e0deed6687bee12eea2f0307e6fd"
+    },
+    {
+      "path": "game/src/hub/base-chibi-v2.art.js",
+      "normalizedSha256": "f65904c24d620f95e47e57aa0e44818fa599bd4dd0731d08bc31dc30b7441dc2"
+    },
+    {
+      "path": "game/src/hub/base-chibi-v2.skin.js",
+      "normalizedSha256": "53a4a3e47e3b01b53d134776a0ee62335f5253e714edc5e775ca16c733906f86"
+    },
+    {
+      "path": "game/src/hub/base-chibi.js",
+      "normalizedSha256": "5920894f4e087300ed5499d7f1e73a29c4d89d088af3d93ed84452972659900b"
+    },
+    {
+      "path": "game/src/hub/base-departure.commands.js",
+      "normalizedSha256": "12b2efbc86c2ca3e54ef8e588d8b86e357c161cd48feddf2a7d08802fe322cfc"
+    },
+    {
+      "path": "game/src/hub/base-economy.js",
+      "normalizedSha256": "d39b7920f233156b9c036d33e700fc61222e2eb103e83799f76b7c0d0316f21d"
+    },
+    {
+      "path": "game/src/hub/base-elapsed.commands.js",
+      "normalizedSha256": "6b47872c47a2ec728025745a0e356dee9ef9e98b6a7a81ca9250b87c1180b514"
+    },
+    {
+      "path": "game/src/hub/base-meta.commands.js",
+      "normalizedSha256": "43c53e3edf5d48dabb979e3c94d36788d17acfd3a5e74fc058ee5d898af0476a"
+    },
+    {
+      "path": "game/src/hub/base-motion-v4.js",
+      "normalizedSha256": "cd0015726f793b27a1f2da04ff15fe57d00121385f21fd10ffa90b085992453d"
+    },
+    {
+      "path": "game/src/hub/base-mutation.js",
+      "normalizedSha256": "88601f7a606e91275a692e929d96697b80ad88512b4ccf53b0a4ced14e6050f6"
+    },
+    {
+      "path": "game/src/hub/base-page-motion-v7.js",
+      "normalizedSha256": "60b95779622f977afdbd6add457ec381582b006d27fc5fc0dad204b941e54575"
+    },
+    {
+      "path": "game/src/hub/base-pet-egg.commands.js",
+      "normalizedSha256": "44066ee38c5d7bd85497486c30fa05633bfde139d406c04b374808fa04b82b79"
+    },
+    {
+      "path": "game/src/hub/base-progression.commands.js",
+      "normalizedSha256": "80c520a6179c650bab60315face2c0f52894a4622e5c92a83100b185ef9e4cbf"
+    },
+    {
+      "path": "game/src/hub/base-state.js",
+      "normalizedSha256": "f68a2b30737ed3620b2851c21db9854f24ffa65f4bebc6929701d3ed06fef0ea"
+    },
+    {
+      "path": "game/src/hub/base.commands.js",
+      "normalizedSha256": "a7a56eb20547c8e885c209d9aabe51cf6362dd24d59a5075e17c1dd4eb42b5ab"
+    },
+    {
+      "path": "game/src/hub/base.js",
+      "normalizedSha256": "f814bef1c89b894c7b0154425dad5f0d574a0fb7d8bf7e161790ec20a8355a66"
+    },
+    {
+      "path": "game/src/hub/battle-settlement.commands.js",
+      "normalizedSha256": "3fd8fdd35d368d37f404972bf84d485b4752d54f3d26722cb48517454ea61f0d"
+    },
+    {
+      "path": "game/src/hub/battle-victory-progress.js",
+      "normalizedSha256": "042797a9cf64528b6d29b2afbf6e302bf345df6093474899993a066c6b4b1ac9"
+    },
+    {
+      "path": "game/src/hub/collection.commands.js",
+      "normalizedSha256": "1ae93d67dbd16b4ee1d7bbfb1a3b8478d70b1df4819662d6542f7bdebf5b77c1"
+    },
+    {
+      "path": "game/src/hub/commands.shared.js",
+      "normalizedSha256": "6100ca4b1f3624e49fd0c27a2b21373baeb462f50d1d84f13a85e3d6438ca88b"
+    },
+    {
+      "path": "game/src/hub/courtyard-vendor/KoiPond.js",
+      "normalizedSha256": "323d504420cd46ece45e85fafef82226c51c4710796fe046b13d1c4577b3c1dd"
+    },
+    {
+      "path": "game/src/hub/courtyard-vendor/RainRenderer.js",
+      "normalizedSha256": "0cd254b6c2b538d062625d8474db4ac49b679507801453fd49ea7e384ec46acd"
+    },
+    {
+      "path": "game/src/hub/courtyard-vendor/RainSimulation.js",
+      "normalizedSha256": "c7dfbf5bc6e2cc1de96078909eff39d1198310b68c878e2a7b02be66f55437f5"
+    },
+    {
+      "path": "game/src/hub/courtyard.rain-tableau.js",
+      "normalizedSha256": "51baef07821ad53def47fe397974da70348aa7bbdb1e80e7c17846dfe697e32b"
+    },
+    {
+      "path": "game/src/hub/departure.drag.js",
+      "normalizedSha256": "ce271515794670e761b766a3884646a3be274244cea466e7cfff17060befe1da"
+    },
+    {
+      "path": "game/src/hub/departure.selection-state.js",
+      "normalizedSha256": "c4d0ae39cc850b463bfe3ccc941c4ba0009663a3268e1124fb00e7685aa01db4"
+    },
+    {
+      "path": "game/src/hub/departure.summary.js",
+      "normalizedSha256": "9074a5b558da2a1a2a7380440fe32858e37ad6414959b863b8cb13546bf22abd"
+    },
+    {
+      "path": "game/src/hub/departure.view-updates.js",
+      "normalizedSha256": "451d7134e62c3977e96edf1b399a07968503f3f43863a4b195164005abc0f73c"
+    },
+    {
+      "path": "game/src/hub/extraction.commands.js",
+      "normalizedSha256": "39b592cbea4a931aba40d2e71c4b5e0a3c8c771d2cbaafec7a36c51034dde45e"
+    },
+    {
+      "path": "game/src/hub/game.bag.bridge.js",
+      "normalizedSha256": "cb117388a75f9e47d9803da31be7912dae443c586abbd6dcec096491061c6cf5"
+    },
+    {
+      "path": "game/src/hub/game.bag.drag.js",
+      "normalizedSha256": "725be5953eb0098d20c0ccfde7670d6c33c721feb0a4bf630cdf7ca4527adb1e"
+    },
+    {
+      "path": "game/src/hub/game.bag.js",
+      "normalizedSha256": "2f3973cf84511b6ab009dd8d21d0b85ddeb4441da0679f45a6d9dccda738de21"
+    },
+    {
+      "path": "game/src/hub/game.bag.rules.js",
+      "normalizedSha256": "d91837d2e3fa83983760da7f2c45620f1f23ed11f27782cf5f6da506b45b7778"
+    },
+    {
+      "path": "game/src/hub/game.bag.settle.js",
+      "normalizedSha256": "f64b4bdce1d6348599b278214e6d0c44bdc5c3b57e935edebaf0896b4d63abca"
+    },
+    {
+      "path": "game/src/hub/game.bag.view2.js",
+      "normalizedSha256": "3763b8bb13e113e97f9e09ed0d36ade94892bd6810db2fe711f3e74fee383f6f"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.art-warm.js",
+      "normalizedSha256": "0e749cec6b54eeda4feff81fbc317a2a03686bafea8cc4dffaa7b8f1ae1a481e"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.common.js",
+      "normalizedSha256": "b321bbd98f91c76e854e1cd22e6cb9eef4dd3a604fc26271df1967d2b8b374c4"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.designer.js",
+      "normalizedSha256": "7991adb7c1a8e3de3266eec87b503491e6d9b65f27ca358685ebbba6f64b8cb5"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.js",
+      "normalizedSha256": "744486dda776d5c59f8bf734322a03416339f61f6631939b132c7bfda222fcf1"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.page.js",
+      "normalizedSha256": "cf8d88c1dc13394469b7b686865977a8602d73d13546f76e4e10d1bab60fa531"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.photo-fps.js",
+      "normalizedSha256": "f088d8a2da767bb6491274dc9f2f8b6e6845743887fe1fee5bb1c035a854a500"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.photo-props.js",
+      "normalizedSha256": "d9658c6c529d1f88879d071da692ab92b6742d95a0f46c1ae04d1f32f76b4971"
+    },
+    {
+      "path": "game/src/hub/game.hub.bridge.js",
+      "normalizedSha256": "8f0bd3e9a736841bca9623fda2a9e0c4ed8045cbb482523e093c0fe3d7d737e5"
+    },
+    {
+      "path": "game/src/hub/game.hub.depart.js",
+      "normalizedSha256": "feadddb938f81e89962dacdd335802dd84adc7ad0836f46b11ecc53c49067f40"
+    },
+    {
+      "path": "game/src/hub/game.hub.home-scene.js",
+      "normalizedSha256": "8074951f9b829a3c3469a3b5eabff2199d1808c7d47a70f25d5f13418c9a5f06"
+    },
+    {
+      "path": "game/src/hub/game.hub.js",
+      "normalizedSha256": "6f2860fbd2a538325fa05863b8fe43b33610f25b449b2c35d3cdae394ce31839"
+    },
+    {
+      "path": "game/src/hub/game.hub.pages.js",
+      "normalizedSha256": "78549104a72a753bb6ca32def65ce1e495c7fbb8718e2a5ad934ee03147790f1"
+    },
+    {
+      "path": "game/src/hub/game.hub.preparation-ports.js",
+      "normalizedSha256": "b3c9d996cdff32d488a696a404b433a15ab17e6f600f50c74e34a6ec0202ddfd"
+    },
+    {
+      "path": "game/src/hub/game.hub.preparation.js",
+      "normalizedSha256": "fda1adb467141690785f4bff4de5140a7c615059d4313899e7cadae7347243da"
+    },
+    {
+      "path": "game/src/hub/game.hub.runtime.js",
+      "normalizedSha256": "65d2f8b44d34f437d580974207851bfc97fd266f9e8f1fa08e9788e101e28038"
+    },
+    {
+      "path": "game/src/hub/game.notes.js",
+      "normalizedSha256": "ca9d135d8edf227f4414cc447fc525c7a31363185e67d8958e2e56ebca07b30e"
+    },
+    {
+      "path": "game/src/hub/game.storage.js",
+      "normalizedSha256": "129427f83d7e13d51b07cc6baa65568584aac15a6b72ef79a4c37c7a4def001f"
+    },
+    {
+      "path": "game/src/hub/game.store.js",
+      "normalizedSha256": "afb400a29ecb0f807683f9fef3808b02eee54eb69a7fabb3a88ab658e36ca9aa"
+    },
+    {
+      "path": "game/src/hub/hub.archive-v3.js",
+      "normalizedSha256": "848f1eca823675bfe5c89ac6fff4b1b31392102e975790efc5fd840b0a04b10f"
+    },
+    {
+      "path": "game/src/hub/hub.archive.js",
+      "normalizedSha256": "bb4db75bb2c02a828710bdda484b771c85bde59026fcdeeba11b44c94c79957b"
+    },
+    {
+      "path": "game/src/hub/hub.collection-v4.js",
+      "normalizedSha256": "b194ae2175b0089e5a13d6f4d94609e0096080875452be8cf3581be3f3398a8e"
+    },
+    {
+      "path": "game/src/hub/hub.courtyard-runtime.js",
+      "normalizedSha256": "82c9fa40fcc47a9e08c862db6de8f14bbfb4a7b62618c7dad692ba41dce4cce4"
+    },
+    {
+      "path": "game/src/hub/hub.courtyard-v3.js",
+      "normalizedSha256": "0ed780a3d447e04a25cd60e00f3b1304a718cc3219de555cc86121f859037024"
+    },
+    {
+      "path": "game/src/hub/hub.facilities.js",
+      "normalizedSha256": "00fc9dfc2a3a0f49daeacf7141da597fde24a5b3b6c102d892c24827b193f87c"
+    },
+    {
+      "path": "game/src/hub/hub.home-icons-v10.js",
+      "normalizedSha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4"
+    },
+    {
+      "path": "game/src/hub/hub.home-v3.js",
+      "normalizedSha256": "caf31b16d31d566575e7fc7570d928e577097f9b8f58750632eb95ba9bc513a3"
+    },
+    {
+      "path": "game/src/hub/hub.materials.js",
+      "normalizedSha256": "25d9e187ef7f3e261ad068ccb1e20a6c6980992cc09c14757b102da598a7c5d8"
+    },
+    {
+      "path": "game/src/hub/hub.navigation-v7.js",
+      "normalizedSha256": "9f0f7e7e1f0caed7ab5701dd9b6c382c3a3a2de5ba3ad38ff34c900d99a67bb6"
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "normalizedSha256": "f68d650a722b678804055d5656fcf96725bf1bd0c1dbea3d252b4d11e21773c6"
+    },
+    {
+      "path": "game/src/hub/hub.presentation.js",
+      "normalizedSha256": "eb0f264f8c8f2cfbed1cd008156f73da707c8477393e7e90b20a61f9d54f5cb3"
+    },
+    {
+      "path": "game/src/hub/hub.reward-feedback.js",
+      "normalizedSha256": "f21f144b61023e3c302861e5ad3a7dd83d211c881e82b5f69870011247a14283"
+    },
+    {
+      "path": "game/src/hub/hub.shop-v3.js",
+      "normalizedSha256": "30b22c68212b8ce3e82c02690c1cbb1b7ec837202d70fc44747cc8052e37f38e"
+    },
+    {
+      "path": "game/src/hub/hub.trade-shop-v5.js",
+      "normalizedSha256": "3c93bb310fb04a2dcbb5a47b6defa7d1c989407c1c1be845d43256f18a7958e0"
+    },
+    {
+      "path": "game/src/hub/hub.visuals.js",
+      "normalizedSha256": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78"
+    },
+    {
+      "path": "game/src/hub/hub.warehouse-categories-v7.js",
+      "normalizedSha256": "209aebf8e4d64faa0b234614a4725f17d5dcbd2121ff9b4e720f4972065a6b2d"
+    },
+    {
+      "path": "game/src/hub/hub.warehouse.js",
+      "normalizedSha256": "9d057b221e9b4f6bf7cdb4b114e07d65079496ae3fdf2d00a0c5e5944adb2802"
+    },
+    {
+      "path": "game/src/hub/meta-progression.js",
+      "normalizedSha256": "b3033c3466f95142eaa221a2e2c28e2e38695d0a65d82cb15b9c3818d88d0de0"
+    },
+    {
+      "path": "game/src/hub/meta.js",
+      "normalizedSha256": "9fc35f12c0c5bb92601f293260f057f25d8c32e3b3b02fce31e74ccc1fb09d0a"
+    },
+    {
+      "path": "game/src/hub/nest-settlement.commands.js",
+      "normalizedSha256": "d9f56f2e54d19584d7b1fc713417205f75bf522d3539c1c4a0ea89088857ab63"
+    },
+    {
+      "path": "game/src/hub/photo-studio-controls.js",
+      "normalizedSha256": "0096f293b823e517df8b58bf49d9a052ba84beac87014fdf8217925d284fabd5"
+    },
+    {
+      "path": "game/src/hub/photo-studio-navigation.js",
+      "normalizedSha256": "2185879b35000041103ba8adfa3b4986193f6f4a4f31df277bfce7c1b8a66570"
+    },
+    {
+      "path": "game/src/hub/photo-studio-presentation.js",
+      "normalizedSha256": "b93af0e7507faa7e70bc0b4b0c13f7b2acee17b9a37620a3135192a228e750a5"
+    },
+    {
+      "path": "game/src/hub/photo-studio-tabs.js",
+      "normalizedSha256": "722162bf5802f1140b7bf7694b895b11658674e28909eaf8ac4b41def12c7b22"
+    },
+    {
+      "path": "game/src/hub/preparation.commands.js",
+      "normalizedSha256": "1c3ad2cb5086711e5bb795b969a88a712182424b8f1daf0d05519c2d80c8f1bc"
+    },
+    {
+      "path": "game/src/hub/preparation.sources.js",
+      "normalizedSha256": "980eeff5ae6b929b751dd60fa2a592726dda26fc21bd59b87bcf32287ea21e80"
+    },
+    {
+      "path": "game/src/hub/preparation.view.js",
+      "normalizedSha256": "59c7ffdfa21f6ddada449bea1b0640653492050c56ea25b0802591adaba7bf95"
+    },
+    {
+      "path": "game/src/hub/recoverable-pair.js",
+      "normalizedSha256": "b817a01f7961dda2eafb83e65f2fb7cde7836fc96b93a2bd119bc3bbb29bf8fd"
+    },
+    {
+      "path": "game/src/hub/recovery.commands.js",
+      "normalizedSha256": "457ad8aee4756b7f85a31f22dbb7ec7fee24498be629e273b976c687fd327dac"
+    },
+    {
+      "path": "game/src/hub/run-save-validation.js",
+      "normalizedSha256": "bb67dfb7080cd2452c63dfe23ec6c5d26877745c82d8b5df6011d05f8062eda9"
+    },
+    {
+      "path": "game/src/hub/terminal.commands.js",
+      "normalizedSha256": "d0aceac2317893b092233bb3a13bf346eeb6528da2b10b30a9290f85ed2b9229"
+    },
+    {
+      "path": "game/src/hub/versioned-slot-reader.js",
+      "normalizedSha256": "34ff2b2d5c342573ae44f8b75fd944ea6132b09d46787615cf2bf8f2ee65cea1"
+    },
+    {
+      "path": "game/src/main.js",
+      "normalizedSha256": "4bd809a094dbff36dbbba3d4d1f9542e110c4e9e907f8fd213d801964504e236"
+    },
+    {
+      "path": "game/src/r7a.qa.js",
+      "normalizedSha256": "2b203fe77f5d013a0b4068bfbc6286abe6629aa3dbdde22745135b047e4c0ae6"
+    },
+    {
+      "path": "game/src/rarity-design-lab.js",
+      "normalizedSha256": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775"
+    },
+    {
+      "path": "game/src/run/chest-opening-art.js",
+      "normalizedSha256": "6ea623ee1a706248f743e143c0c5fca5026de400056a0761f8c8ef29d6b65079"
+    },
+    {
+      "path": "game/src/run/chest-reward-save.js",
+      "normalizedSha256": "52df681436df3d6a576cd96f2cfebc1cbd616220f0983ddd3a0565affae09472"
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "normalizedSha256": "32fc73bd9190fd3dc06afb03e6f3dc4a5cc4774973b495c4a5e04da702f8d18b"
+    },
+    {
+      "path": "game/src/run/encounter-meta.js",
+      "normalizedSha256": "a94baf84f82704dfe3e99b70e8550e16fc709465e9eb8d3e49835aae4e46ec72"
+    },
+    {
+      "path": "game/src/run/encounter-selector.js",
+      "normalizedSha256": "a7533515ede020fdb82a5dbf488dea9d411224b329239897085d1f45d8855398"
+    },
+    {
+      "path": "game/src/run/event-card-choice.js",
+      "normalizedSha256": "c2e4629812a10261b4d8beb2620c78b860267c20a29ca45b9f419a5b0b797606"
+    },
+    {
+      "path": "game/src/run/expedition.view.js",
+      "normalizedSha256": "237bf5b7030bda6581bdf0758bfd17485cafee378e6d1a4ea2e3f63695b06d7a"
+    },
+    {
+      "path": "game/src/run/extraction-preview.js",
+      "normalizedSha256": "0e486fdbe0f7e72cdb10e8bdfe763712aa4d879feed9c2cb61779f55ff043441"
+    },
+    {
+      "path": "game/src/run/game.nest.js",
+      "normalizedSha256": "9a8b55b669d5b359edb89ec7d0d7971fb4f2fdc57583ee45b7f6fc94696b9358"
+    },
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "normalizedSha256": "cfd9b22ad3797623111badc892274debe83f3fb9327a0c3feb0ad0bf4813734e"
+    },
+    {
+      "path": "game/src/run/game.run.class-choice.js",
+      "normalizedSha256": "a81dfce40a84a2713174bcf918e5901b4401f8b71604691256fa3bc94fb3128b"
+    },
+    {
+      "path": "game/src/run/game.run.class-choice.page.js",
+      "normalizedSha256": "b162384b3a361308a1ffea06d0af4bb859e087f4b864611443b279d844866be2"
+    },
+    {
+      "path": "game/src/run/game.run.data.js",
+      "normalizedSha256": "6f89d00a6116d2ec0171e1cd1ae73272af0c8879f5557fd2921e507f9b55c9db"
+    },
+    {
+      "path": "game/src/run/game.run.dev-loader.js",
+      "normalizedSha256": "63bc91f9be199b49531268e4ada83e8a49843c73d0bbe4d72da6a59743ea51ba"
+    },
+    {
+      "path": "game/src/run/game.run.dev.js",
+      "normalizedSha256": "a69123d4e83f67603c27fe25067a15640ddf5c10233f4e6bc97e9435fce4c384"
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "normalizedSha256": "7587599bb28253857d5b5dfd89f93706548d7800978d8995b71ec53636e76b6e"
+    },
+    {
+      "path": "game/src/run/game.run.js",
+      "normalizedSha256": "a0bb9b3b7b4252795ed6f1ba0119c5b44d8311162b9de627006dea5393beb4c7"
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "normalizedSha256": "a70009ae2c162cd12554169e2b08d730a036c577a7a0bc07b6e5601e3c5eb99a"
+    },
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "normalizedSha256": "c1bd7f880b77046edc8a7e6c01238eae8ffa44e51b40710f327be13b8e4283cd"
+    },
+    {
+      "path": "game/src/run/game.session.bag.js",
+      "normalizedSha256": "ce39ddbd0ca535fd4b947adbfd768a5aa1fd0144bd41412aec695618eb65d417"
+    },
+    {
+      "path": "game/src/run/game.session.board.js",
+      "normalizedSha256": "558f0d92456c383e4bcb0834d02185266ff316615a3ec8ef49ad5ee46f5927f9"
+    },
+    {
+      "path": "game/src/run/game.session.browser.js",
+      "normalizedSha256": "6990f34b05c0b1fe119723999171b6713c69b868d3fcb58d6b7f10bc57b7d34c"
+    },
+    {
+      "path": "game/src/run/game.session.death.js",
+      "normalizedSha256": "5f48ef82cf0269cc012528c17d956357134b5af3899373b9c39e2b9267737f87"
+    },
+    {
+      "path": "game/src/run/game.session.js",
+      "normalizedSha256": "330dec515669731b24cb387f2ab2bacb5e3f05a0cba03b83aa258c4214680bc8"
+    },
+    {
+      "path": "game/src/run/game.session.kernel.js",
+      "normalizedSha256": "6cc5d6206dcf9fe30ecef4e24b6404046296d0195f718e98ca31c4e1c9f4bbf5"
+    },
+    {
+      "path": "game/src/run/game.session.map.js",
+      "normalizedSha256": "03f215ae679ab4994ab30dc00d2ded5dfbb9fdfba59b4cbe6a1de4206d8de9d5"
+    },
+    {
+      "path": "game/src/run/game.session.modes.js",
+      "normalizedSha256": "97bdd16eefa10e6b3e9144299f9920f62cafc15ab117ec2c3f55f05da33fb2a7"
+    },
+    {
+      "path": "game/src/run/lab.ending.js",
+      "normalizedSha256": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c"
+    },
+    {
+      "path": "game/src/run/layeredMap.js",
+      "normalizedSha256": "92db7449078a4bb4e3d37393c92c13a7085a7d954625466aa3b6d802abb15088"
+    },
+    {
+      "path": "game/src/run/map-generator.js",
+      "normalizedSha256": "41315bf016634efc081e22739b638ada1b1c35b8589dc7d06a1dbea8cb873b41"
+    },
+    {
+      "path": "game/src/run/map-graph.js",
+      "normalizedSha256": "c49c551e2244750a91047363dc889ce628c55d4e31c969f80bf191be833d321b"
+    },
+    {
+      "path": "game/src/run/map-snapshot.js",
+      "normalizedSha256": "1dbd182bf8f4a398cdb453cea0ca72cca8586f86a816cc43a6ab8271fb158f79"
+    },
+    {
+      "path": "game/src/run/map-travel-motion.js",
+      "normalizedSha256": "c2184dba1b6afb1f33a8a9cc03b99c95f729e14d546db0659d89f1eb210c5b22"
+    },
+    {
+      "path": "game/src/run/map-travel-path.js",
+      "normalizedSha256": "47d661350e83f78237a054fa01038bc3edc151436c201bc4a7cbb260bee4a896"
+    },
+    {
+      "path": "game/src/run/node-reward-state.js",
+      "normalizedSha256": "7a69543367c38643fbaddd4a81c9c9f3af2ae6d0fb19ec72fa18ddb0639aa426"
+    },
+    {
+      "path": "game/src/ui/achievement-gallery.js",
+      "normalizedSha256": "15d4359ae4a7cf4568195e491fced10f707f5b44e06a6412fd48decf0519fe7f"
+    },
+    {
+      "path": "game/src/ui/achievement-medals.js",
+      "normalizedSha256": "fb021117349082ffac0faca8acecdfd159aaaefa0360aea04776937d82749a6f"
+    },
+    {
+      "path": "game/src/ui/achievement-motion.js",
+      "normalizedSha256": "e0b4c20e584d6126790e59aebf416b7cf117b8436f2c59ba11107d1189a6750f"
+    },
+    {
+      "path": "game/src/ui/archive-motion.js",
+      "normalizedSha256": "30d0ccd7dd231f61d726a1919f684c97cc932f0bc27798a2ba468483d303864f"
+    },
+    {
+      "path": "game/src/ui/base-design-preview-v7.js",
+      "normalizedSha256": "7ae565c2cbabd0b76d3b7873382b1d9a2c542172254bd6299f4bb42b8fc793f0"
+    },
+    {
+      "path": "game/src/ui/base-preview-rooms-v7.js",
+      "normalizedSha256": "c68c228942c7aaa41d1d52343c8f34346f4b424327c14619c2e5c5943a4e9fb8"
+    },
+    {
+      "path": "game/src/ui/beginner-guide-diagrams.js",
+      "normalizedSha256": "278132f2823d887837a95cf1b32e15654e635aa3cc943c0ed22dee2e154d7d5b"
+    },
+    {
+      "path": "game/src/ui/beginner-guide.js",
+      "normalizedSha256": "33cfcb52575a5b5083fcdcc1cb1c9aebc360135db492a398503365521f0c7086"
+    },
+    {
+      "path": "game/src/ui/camp-entry.js",
+      "normalizedSha256": "104ad905fee3feed9279f3f86ce56550a0d306ab80ce110faab66a899ed40fde"
+    },
+    {
+      "path": "game/src/ui/card-browser.js",
+      "normalizedSha256": "c3ef040f3dc04a056f4f1c64463e6f658eb70201a23cad9a4062a00b4342d9c2"
+    },
+    {
+      "path": "game/src/ui/character-idle.js",
+      "normalizedSha256": "be6018d0a569e43017abe4b91121c53415a24aa5a3a0f1e9127fc3410e11303c"
+    },
+    {
+      "path": "game/src/ui/character-view-motion.js",
+      "normalizedSha256": "0cd4fe341c58a1e7e9eaf0f4428b531f4ce876bf24a50ce6f3a5383c4bcd72be"
+    },
+    {
+      "path": "game/src/ui/chibi-preview.js",
+      "normalizedSha256": "213e7ab06ae8380a73bf0503a278dc74ec3604c15b2016214b84ea531b6802fc"
+    },
+    {
+      "path": "game/src/ui/cinematics.js",
+      "normalizedSha256": "6db055ff9c933bf58a0178523f4f79e37c315fd8e57814bd0f0cd3757eff4dd7"
+    },
+    {
+      "path": "game/src/ui/comm-feed.js",
+      "normalizedSha256": "57de567954cdb050c2c84f5cb6abbca8aa85fe78c33a1fa5e19b1d1b3806e19e"
+    },
+    {
+      "path": "game/src/ui/cover-context.js",
+      "normalizedSha256": "c16729750acf44c22ee0ecbcbd94a313837283863daa497b68877e9c0cb415b8"
+    },
+    {
+      "path": "game/src/ui/departure-transition.js",
+      "normalizedSha256": "4761e69eaa383cce88675615a9ad14f8cd2cce9fadb80e2c7bbbda770029aaa5"
+    },
+    {
+      "path": "game/src/ui/expedition-feedback.js",
+      "normalizedSha256": "46bf0d0215d265e9b9e33613bed8118b1a0be74f735f38a9b2a91da2516fcd74"
+    },
+    {
+      "path": "game/src/ui/feedback.local.js",
+      "normalizedSha256": "b85ec6a9165346191a0bae669b2b1774f2e7d51ca3b42c4d3f7ca041a7dc5170"
+    },
+    {
+      "path": "game/src/ui/game.menu.js",
+      "normalizedSha256": "cea11326c01a46240c7f902d37a667d528589502fe743652145ffe7654573010"
+    },
+    {
+      "path": "game/src/ui/game.menu.pages.js",
+      "normalizedSha256": "6aedf6a0a140865a1eb986428225920f48ee88cad6d13c9b257520f67c4051b6"
+    },
+    {
+      "path": "game/src/ui/home-fx.js",
+      "normalizedSha256": "7e65b4dc4bce93eb3e75ce0ad4a2f646aaa098fcf4c792e565031ffa9320bba9"
+    },
+    {
+      "path": "game/src/ui/home-layers.js",
+      "normalizedSha256": "0c1564abc037f789309d73f812287571b9b65985a9365e47dd57ad19b6b78184"
+    },
+    {
+      "path": "game/src/ui/home-linked-interactions.js",
+      "normalizedSha256": "513c539a482f9aa62e966ca998602d4c1a36dba2010c46c4a551ca2713e40d02"
+    },
+    {
+      "path": "game/src/ui/home-menu-motion.js",
+      "normalizedSha256": "a9a9ff34070d032790c64288190431037f753d746652cb752fcb435cdc57cf1e"
+    },
+    {
+      "path": "game/src/ui/hud.js",
+      "normalizedSha256": "558077747cb3f1108375ff506b5421298734628b39e0cf597189148c4007ae81"
+    },
+    {
+      "path": "game/src/ui/interface-motion.js",
+      "normalizedSha256": "63c4ffdc437e9034be6d9ceef3295bc2c1a339c7b93dfa543fad9ea31d45243a"
+    },
+    {
+      "path": "game/src/ui/inventory-zoom.js",
+      "normalizedSha256": "c7fe495a9e827022c710318f6689f1d18ccb0540187666e9d4821bc65ba23243"
+    },
+    {
+      "path": "game/src/ui/motion-presets.js",
+      "normalizedSha256": "5e4a81f4d4c91e46af8bc99bf65bd987d0eef845eaac6350eb8f11f892e917b4"
+    },
+    {
+      "path": "game/src/ui/motion-transitions.js",
+      "normalizedSha256": "b9590cb526ddf530644c551f81123328049493f8089fd9c794d207489d6079d1"
+    },
+    {
+      "path": "game/src/ui/navigation-motion.js",
+      "normalizedSha256": "a5ae395a1df3cf43b5510ca5bccc1cbe6d5c54fb4dc703c865e83f41d2378e0d"
+    },
+    {
+      "path": "game/src/ui/node-scene-view.js",
+      "normalizedSha256": "bb9b8c944d0900f52fc6f0377f97534be6c6d135a3e02228cca99079a75ddb34"
+    },
+    {
+      "path": "game/src/ui/overlay.js",
+      "normalizedSha256": "86776d4cc5cb7d407fa4da6c4a43b2a07ac8eeba996badb81a6b5808b08bc24e"
+    },
+    {
+      "path": "game/src/ui/page-entry-cancellation.js",
+      "normalizedSha256": "a2e1c5d2863ac1d4e368c1b7b13ebc22df81fe61f631594580656977ee87df29"
+    },
+    {
+      "path": "game/src/ui/page-loading.js",
+      "normalizedSha256": "5d1de557d680e8410490a72f851fe8d2caa78d633af689a8c630bdea313861ff"
+    },
+    {
+      "path": "game/src/ui/page-motion-profiles.js",
+      "normalizedSha256": "187c5c9a9bed2422be1c58d933f667765116446fc38fb6d4a98672aa1bec6387"
+    },
+    {
+      "path": "game/src/ui/page-visual-ready.js",
+      "normalizedSha256": "e1217134ecdc568e9cc8aa3f869749aada7d6cc1b171bc8d3b7387a9aef46d7e"
+    },
+    {
+      "path": "game/src/ui/quick-nav.js",
+      "normalizedSha256": "c88ac07011069e2eeb542c1a99315260a551847c00e59f2072c8e11f7c6bd20f"
+    },
+    {
+      "path": "game/src/ui/reward-scene-view.js",
+      "normalizedSha256": "88bf01969d34f3c2ef6b1cbcd63ba248e9b5ff1d13f12d4900a77bbebf1b7c0e"
+    },
+    {
+      "path": "game/src/ui/route-overlay.js",
+      "normalizedSha256": "5b0547cf721ce742e63f53b552c217967553547e0ff0d4ddedf98e9fc472ebc5"
+    },
+    {
+      "path": "game/src/ui/settings-navigation.js",
+      "normalizedSha256": "9caa1110befc60ae376f5e16c4f2a121e2321fa41f36d30936ca575ec8c455b2"
+    },
+    {
+      "path": "game/src/ui/settings-transition.js",
+      "normalizedSha256": "94f83c8193310e06740516b9480beb07f8d7049bfd7abfee58444df0beeccecb"
+    },
+    {
+      "path": "game/src/ui/slot-emblems.js",
+      "normalizedSha256": "92c305263c9d1be295636540db4286e4b8305a699c34570f9cb0d1562702566a"
+    },
+    {
+      "path": "game/src/ui/surface-motion.js",
+      "normalizedSha256": "8716765517367607967488d1b66e7ffe5547e6dcef3420ca2c6bfc24c7fea596"
+    },
+    {
+      "path": "game/src/ui/term-tips.js",
+      "normalizedSha256": "d12b84edaf6699d95378fdbd9295fa82f12af397c36ac8590d7c89cb75099004"
+    },
+    {
+      "path": "game/src/ui/terminal-settlement.js",
+      "normalizedSha256": "db5b21b4ee1be4f1889540433d6e3b8348351d19c80320ead3810125756b1c8c"
+    },
+    {
+      "path": "game/src/ui/title-credits.js",
+      "normalizedSha256": "a740aa2164cac21a3c3b03e289514c96f6bb9ccdd879e826537623f10619af8f"
+    },
+    {
+      "path": "game/src/ui/title-wallpaper.js",
+      "normalizedSha256": "32c79be116ba5f167b7fee9b15ad611b21a6b9af748d048c82ef32c4ab57544d"
+    },
+    {
+      "path": "game/src/ui/transitions-director.js",
+      "normalizedSha256": "4b3eb63e7b8c585dba29c456032e26a19cd9cb404043c397fe1961ef1d297b38"
+    },
+    {
+      "path": "game/src/ui/ui-scale.js",
+      "normalizedSha256": "d9f6f5872e0065b4af9875a3f786796adf2d2ad6615871434129aa7607113235"
+    },
+    {
+      "path": "game/src/ui/ui.js",
+      "normalizedSha256": "e40a8eac1adb5e3a834a417c174a5d2513eadab5d55bf0b07804bd1e87b3d6a1"
+    },
+    {
+      "path": "game/src/wu-career-frame-preview.js",
+      "normalizedSha256": "2715b703789fef835432d3eb7cbffdedc249f8355a22714e6faff8ef49cfee38"
+    },
+    {
+      "path": "game/data/achievements.json",
+      "normalizedSha256": "feda8996c2f7827f75d3b14769aff4feb3530acfe113f51a3a6fe8d2246de13c"
+    },
+    {
+      "path": "game/data/art-mapping.json",
+      "normalizedSha256": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99"
+    },
+    {
+      "path": "game/data/beginner-guide.json",
+      "normalizedSha256": "b42966bb2e29476ca800cb18a869b21c1fef1b1521b1a3e5010044d8cdcb8ba5"
+    },
+    {
+      "path": "game/data/card-frame-layout.json",
+      "normalizedSha256": "13acdc0dc1c69171df99b04e8874990a5da82be46bf3828c06209e6490c757ea"
+    },
+    {
+      "path": "game/data/card-notes.json",
+      "normalizedSha256": "a4c0a6185cc6cc0bee1c14ab63207725d965c347de712a736945f90d5b77fd57"
+    },
+    {
+      "path": "game/data/cards-sync.json",
+      "normalizedSha256": "1ae95746a9f5037142737efedb32aa451441ec56fe570c6ab15ec7f4cfb715df"
+    },
+    {
+      "path": "game/data/map.json",
+      "normalizedSha256": "eb2d7147fcd422c06c64d09824a508a6272c166ba034802663087ed3b4dfdcb8"
+    },
+    {
+      "path": "game/data/pets.json",
+      "normalizedSha256": "f0e5ea2a57a9ec16b1f708f0763ed1b4d5704f58619bcf7bc4308b7c43477591"
+    },
+    {
+      "path": "game/data/scenes.json",
+      "normalizedSha256": "bd50f72f5e4fbed923ebea709fc496cd0449a28f4ae1fb92fb779e955ecf083b"
+    },
+    {
+      "path": "game/css/ak-skin.css",
+      "normalizedSha256": "28ad1ca82985af7cdc6edc404783dd18da16d6fd4072a67e0f386b6d1333cae2"
+    },
+    {
+      "path": "game/css/archive-back.css",
+      "normalizedSha256": "29e9ff37b078d113073a1e2a8b79a4ab014200ce4a3dc7ab8bd0297756f0dd76"
+    },
+    {
+      "path": "game/css/archive-motion.css",
+      "normalizedSha256": "5fd3a8a99f91579defa7ca26bd314c9dcafd2e8ece886990411932e9d8a76873"
+    },
+    {
+      "path": "game/css/base-archive-facilities-v12.css",
+      "normalizedSha256": "37054842058ac0b5556295a768e28f5d0f3b763835433807bbf8be1dc85c4a62"
+    },
+    {
+      "path": "game/css/base-archive-v3.css",
+      "normalizedSha256": "27b7ac56bce6dcabdf915420c1c379f1b0313e3c728ccf297a72adfd55bb7923"
+    },
+    {
+      "path": "game/css/base-camp-compact.css",
+      "normalizedSha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+    },
+    {
+      "path": "game/css/base-camp-rework.css",
+      "normalizedSha256": "fa45ebd6f155f5ce14b5557a0f6f8093d449166019589ed514ac13da20278694"
+    },
+    {
+      "path": "game/css/base-camp-roster.css",
+      "normalizedSha256": "dec3c50b50c6aa12edf7064dfbcd0d8199c40b89b06d0ca1f4f721bb43213303"
+    },
+    {
+      "path": "game/css/base-camp.css",
+      "normalizedSha256": "10c3294f8f9b02d8be83d8a550dd308d8e9a6955c932d5cf348f3c4de11d218d"
+    },
+    {
+      "path": "game/css/base-chibi.css",
+      "normalizedSha256": "994e3c0903e6fe75908b6201f3078d9fabc2dfeb9e45fbb5b95c1da147dcc9f6"
+    },
+    {
+      "path": "game/css/base-cohesion-v5.css",
+      "normalizedSha256": "f84f54252b51ddcbbc2912403a6367c51453de4090ad9be3d14d9b980ffd4926"
+    },
+    {
+      "path": "game/css/base-collection-v4.css",
+      "normalizedSha256": "554cfed37ef35726fa7888bd35f8bb26e92172e2980d5e8bf300e4f3ee4dfe5c"
+    },
+    {
+      "path": "game/css/base-controls-v4.css",
+      "normalizedSha256": "e66c0eafe648742f14c619f07c82b038dfac9bb392a09059f839fe479f234f7a"
+    },
+    {
+      "path": "game/css/base-courtyard-v3.css",
+      "normalizedSha256": "a81b362e43179a416e1aab62357a68141579196173a60ba0a045078f3cebbd3b"
+    },
+    {
+      "path": "game/css/base-framework-v6.css",
+      "normalizedSha256": "b00b13d9654003ea9da6e42f7ce5c279fbbbf6c3ead229b8cf3ed528b08fd250"
+    },
+    {
+      "path": "game/css/base-framework-v7.css",
+      "normalizedSha256": "f7485b47de5ad5b7332f7201fa0b4da7bab136eef41f6e5833535b97b9ea4ed1"
+    },
+    {
+      "path": "game/css/base-home-v3.css",
+      "normalizedSha256": "c441fa8e31c0d938a80dac13bf0d08d1adcdc57e5a1ec8ee7d0c5d2976fa774a"
+    },
+    {
+      "path": "game/css/base-home-v7.css",
+      "normalizedSha256": "2cd68bbcf96bea9721aa911cce4b962aaa821b0f348a3846cde4297e882872b8"
+    },
+    {
+      "path": "game/css/base-logistics-trade-v12.css",
+      "normalizedSha256": "267438aaa2b24dbe8b89761ffd6ef2bce90a9a7db8219cbeedbfff424936a0be"
+    },
+    {
+      "path": "game/css/base-page-motion-v7.css",
+      "normalizedSha256": "b70aaf07519a19e00dae1941a3725181cd728648a10aa8edf7bb793e9c49d562"
+    },
+    {
+      "path": "game/css/base-panel-layout.css",
+      "normalizedSha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+    },
+    {
+      "path": "game/css/base-personnel-v12.css",
+      "normalizedSha256": "4e290572f6993d505867128464326987c93c2dad8ad63656d9f1f4045d051bad"
+    },
+    {
+      "path": "game/css/base-reward-feedback.css",
+      "normalizedSha256": "4cf3949a74c15dab2c9f1d7075cb4e303059bbd15910a1e4b0e9d665d1ff857b"
+    },
+    {
+      "path": "game/css/base-rooms-v7.css",
+      "normalizedSha256": "e19ac60643b3caa944a1700ac56d9571d1e651615e8259b60100057b0984d399"
+    },
+    {
+      "path": "game/css/base-shop-v3.css",
+      "normalizedSha256": "b16070d392d6e7b6067c7908d814286a26a9c92541946abb62a821897327ce5d"
+    },
+    {
+      "path": "game/css/base.css",
+      "normalizedSha256": "1499019c0512b90b6cc2387d298bc90967739e074272407eed911d3c853b22e5"
+    },
+    {
+      "path": "game/css/battle-hand-overhaul.css",
+      "normalizedSha256": "7b29b382d3c332b6c7695aee35f6827954a63c7a45d89385521a4247e94c3fc3"
+    },
+    {
+      "path": "game/css/battle-stage.css",
+      "normalizedSha256": "26ed9c98ade16936d694a0343630c73ef12aed81f22f4981df7b7704a641be24"
+    },
+    {
+      "path": "game/css/battle.css",
+      "normalizedSha256": "cb2e5e6d6c9499a04ad940b28c975ca958e21e69f93a0b76afc4ff6e55c18b78"
+    },
+    {
+      "path": "game/css/beginner-guide.css",
+      "normalizedSha256": "3dc7ac8cf4b42bd840429cbacc873b78a44c7b20e5e7edc627ae8407fa24943f"
+    },
+    {
+      "path": "game/css/camp-entry.css",
+      "normalizedSha256": "0cd65b3c8073157328939a408235cc5300a4caeb190d8341ddec1a75abf8109f"
+    },
+    {
+      "path": "game/css/card-browser.css",
+      "normalizedSha256": "0d4b619e89af1fe54d253778eb0e706bfe7638e64039b212b36ed0cf68b25d1f"
+    },
+    {
+      "path": "game/css/card-description-links.css",
+      "normalizedSha256": "3d4ae7fc35dfd198d14dd12e475c465275b24fecfc3ab26991cf5d0a460f0d25"
+    },
+    {
+      "path": "game/css/card-frames/career/frames.css",
+      "normalizedSha256": "85cabfdf2afc4530d170a579bd0b49407002088817751901fdc8e773b4064d5b"
+    },
+    {
+      "path": "game/css/card-frames/career/geometry.json",
+      "normalizedSha256": "4189d8e1f0e9cbfb0852512377d4599fd14d87f53dc27f10500d6356971f755f"
+    },
+    {
+      "path": "game/css/card-frames/rose/frames.css",
+      "normalizedSha256": "85cabfdf2afc4530d170a579bd0b49407002088817751901fdc8e773b4064d5b"
+    },
+    {
+      "path": "game/css/card-frames/rose-painterly-1012/geometry.json",
+      "normalizedSha256": "eb458609446a7e8e1637fd07b36307b4b11f52443fdc49561b1c9583a5cc4b40"
+    },
+    {
+      "path": "game/css/card-layout-selected.css",
+      "normalizedSha256": "6c7296dd305832802772c8f853fb204983a044d211a219b266d4bdef846cf7db"
+    },
+    {
+      "path": "game/css/card-rarity-preview.css",
+      "normalizedSha256": "f4eca6d6693644684a7247011ec77ead32d8283fe98a78a706c05659209fea62"
+    },
+    {
+      "path": "game/css/card-v3.css",
+      "normalizedSha256": "1b4eef67f438b94d9d8e224556e4bf41fe6c75cfb19b2418cc799e01718c0e4d"
+    },
+    {
+      "path": "game/css/cards.css",
+      "normalizedSha256": "3fe867ce2d597d628369d2acb59503c62338930050acb0944fc2b953d8745bfe"
+    },
+    {
+      "path": "game/css/character-cover.css",
+      "normalizedSha256": "a067b9b3217a3f681ddad6e0e9e3e2d98153cb7b32ed52c2b562355476c6024f"
+    },
+    {
+      "path": "game/css/character-idle.css",
+      "normalizedSha256": "c815b0019b52d2260b241001ff5904d426f87c5c8658dd9f247ea978498d609b"
+    },
+    {
+      "path": "game/css/character-pool-cover.css",
+      "normalizedSha256": "b36574cded1af09f07c36af022b1df349a7755e59f6f45b193dc4a48df106905"
+    },
+    {
+      "path": "game/css/character-view-motion.css",
+      "normalizedSha256": "0546a5f9e101887f082a02d87c52ed0193bdf315b1adc3e82bdab175f3271631"
+    },
+    {
+      "path": "game/css/chest-opening.css",
+      "normalizedSha256": "d2162f97a5a36f6f70780f366c88fcdf2f0d81969998b69eac53c1b351adf0dd"
+    },
+    {
+      "path": "game/css/combat-feedback.css",
+      "normalizedSha256": "e59252f788f93ca4cb811d37608d8b25ca58f226ee4a9b8df845379aad378389"
+    },
+    {
+      "path": "game/css/cover-battle-shell.css",
+      "normalizedSha256": "cf5748b8d72bd993af8d61d31808fe23ae659d06fba2cf799e4a4897082d29d0"
+    },
+    {
+      "path": "game/css/cover-details.css",
+      "normalizedSha256": "ce42f86a97108d49b66c10a0a6bfd41bdbe0c8e7652490c9f6b01e3fab289a17"
+    },
+    {
+      "path": "game/css/cover-hub.css",
+      "normalizedSha256": "87ad4fdc9d66cd6b3e15dbeb586f1946f9a007a37e1e17b3b425f9f9d919d568"
+    },
+    {
+      "path": "game/css/cover-remaining.css",
+      "normalizedSha256": "2a9b9b804595b23dd7ade4c02982a4ae870eeccb4d8e8dacd1066f7295100458"
+    },
+    {
+      "path": "game/css/cover-run.css",
+      "normalizedSha256": "8b9e425c60d9efb08ae6456b7b248cfee0d3865111c92cb993763888d79827e6"
+    },
+    {
+      "path": "game/css/cover-secondary.css",
+      "normalizedSha256": "27fbb739a08b12a1abb21b5ab1af38317a49a9cd9ceb343bf0191248ca9dae51"
+    },
+    {
+      "path": "game/css/cover-system.css",
+      "normalizedSha256": "2b679e75921fa6ca5ddfb236cae79be54db4a59a24bc3f33dbdd8ac3f6444e8d"
+    },
+    {
+      "path": "game/css/departure-cover.css",
+      "normalizedSha256": "2a78325cd4c2c4d89401e6b40aabb9078ed1df81fefe1397a58ca696878e9c43"
+    },
+    {
+      "path": "game/css/departure-selected.css",
+      "normalizedSha256": "b53c6f5e799dc48d8e598d4b86cf85dfe0fa49f5fb759f17c5a3330a3e2ff475"
+    },
+    {
+      "path": "game/css/entry-events.css",
+      "normalizedSha256": "0d488a1c0174cf7b0c77702e178937ef4a5ba5238b88adf70727f89a7f71185b"
+    },
+    {
+      "path": "game/css/expedition-battle.css",
+      "normalizedSha256": "e424aaf7dc285aa6c767ff75dfd62c280a104bc4f413d1e7156ef0647c6beaf3"
+    },
+    {
+      "path": "game/css/expedition-hub.css",
+      "normalizedSha256": "49a67f94098daa023331829f6f45131a9d3c48882483dbbdb4656a0856b3c123"
+    },
+    {
+      "path": "game/css/expedition-inventory.css",
+      "normalizedSha256": "158c7a97d871f9c2821f1358418d4c96951a7d973a305b9ad0e4016d700e1e7f"
+    },
+    {
+      "path": "game/css/expedition-library.css",
+      "normalizedSha256": "c13b321b06cb4c4664c17b86d916d4e81e2c98fc830ef369a3e4569179bebe89"
+    },
+    {
+      "path": "game/css/expedition-map.css",
+      "normalizedSha256": "52f517ca0a09d01d5ccfb21bdd8784b68805a8cc12ca0d6b92533c4c50af81bb"
+    },
+    {
+      "path": "game/css/expedition-rewards.css",
+      "normalizedSha256": "71838208f783f2b9ad446af4f7abce38a4fec0b8e433498407ba0c5af00d8b8c"
+    },
+    {
+      "path": "game/css/expedition-roster.css",
+      "normalizedSha256": "9b57efe9e1155680aacaead2c14e30d7864b4a4ca548521d323446f9ad3ef0a1"
+    },
+    {
+      "path": "game/css/expedition-shop.css",
+      "normalizedSha256": "737c87127bdf6324fdcc79c9c73df058984e2b3e243ff4ca14caa173431afa99"
+    },
+    {
+      "path": "game/css/expedition-transitions.css",
+      "normalizedSha256": "4a6cebf9068a361efdbec576a312df9132b22ed0aeb5a79687e6049ca7acb96b"
+    },
+    {
+      "path": "game/css/expedition.css",
+      "normalizedSha256": "e01e7dc454882197dd7e69fcb9f3674335366f92de210554e6b521bf3e641b28"
+    },
+    {
+      "path": "game/css/experience-loot.css",
+      "normalizedSha256": "89d1ca446221cc9940937acef4c3237c807342e035e04487c305b1b7a2efc96f"
+    },
+    {
+      "path": "game/css/feedback-oct12.css",
+      "normalizedSha256": "656586628f7816777a358ae657e48f7cfae532dc3cab806a56bf8c9adf8f2503"
+    },
+    {
+      "path": "game/css/home-layers.css",
+      "normalizedSha256": "ac5d871a838c2d6b46d71c676b220e9e2122aee5a59408b5d90d4db045e4f478"
+    },
+    {
+      "path": "game/css/home-linked-interactions.css",
+      "normalizedSha256": "b6d70c2d361d93fb65a251948332ee3d06e89161151b64ee43eb646e54f0ddc4"
+    },
+    {
+      "path": "game/css/home-menu-motion.css",
+      "normalizedSha256": "eb4d1d680084d761a5c8ad7a2db6dc8ebdbf4551572bfcf7d1655276ef4d61e2"
+    },
+    {
+      "path": "game/css/home-polish.css",
+      "normalizedSha256": "ce6216ad0506bc492d4dff65f88eab8bb5488efa1bc32f5c89b41d462e47cd29"
+    },
+    {
+      "path": "game/css/home-scene.css",
+      "normalizedSha256": "c79343e83284423e125dbf6730a26f04dff682719f878f172fb720bb19208c5c"
+    },
+    {
+      "path": "game/css/home-ui-tokens.css",
+      "normalizedSha256": "cf985b45cf4f28d4f1fef916125797c322ffefd63330743481d7547a5b83d0d0"
+    },
+    {
+      "path": "game/css/hub-arrival.css",
+      "normalizedSha256": "82f7870153c3345d5c177c4dfd5245b6a0a885038906a8de600df18f8e80ff74"
+    },
+    {
+      "path": "game/css/hub-cover-collections.css",
+      "normalizedSha256": "89b09665f3915a88ebaffac3b3e5f7f148bede7374c0a4bd24789b2ded628ec6"
+    },
+    {
+      "path": "game/css/hub-cover-deploy.css",
+      "normalizedSha256": "bf1f4e447ba7afb695620445b672f08b58f9b8e6b6aa53cb7007153e05bc6156"
+    },
+    {
+      "path": "game/css/hub-cover-motion.css",
+      "normalizedSha256": "f78f22021ca0890cdeb5d40381e36ac4b05a1b11ff1c5c0ea13d9e52c36deecf"
+    },
+    {
+      "path": "game/css/hub-cover.css",
+      "normalizedSha256": "846e2bca14a47907be8095b81ae7c44c910129146e3febf8c9f4b4de60e2c885"
+    },
+    {
+      "path": "game/css/hub-personnel-cover.css",
+      "normalizedSha256": "6b499ea1725632e6b820a3aecaee780f793710297731dbdf9cd28bb5e45af260"
+    },
+    {
+      "path": "game/css/hub-stash-cover.css",
+      "normalizedSha256": "5dc56dd4f4cb6a1dd1f4fc4df1b096c2b3a674708e3eed74124d7fc238c3df07"
+    },
+    {
+      "path": "game/css/hub.css",
+      "normalizedSha256": "15625e19a8d3ceef649cb9f3b337b7d64e49c00592e0c2d84218edb7709af246"
+    },
+    {
+      "path": "game/css/inbox-cover.css",
+      "normalizedSha256": "4dffe5aafc9f2b0e598aca3191ec684c646b88c660087438348b7ca313880fe9"
+    },
+    {
+      "path": "game/css/interface-motion.css",
+      "normalizedSha256": "cfab7b16a74313f318409e14a05e4ec8271f6b1c20d52472c874131c54295e99"
+    },
+    {
+      "path": "game/css/inventory-zoom.css",
+      "normalizedSha256": "fb4a2562f42b5f50fcda49d11feb6dee7f3bd84c9f7d5e481fc0570a01a70e20"
+    },
+    {
+      "path": "game/css/lab-ending.css",
+      "normalizedSha256": "016f67eb90ddee62f365b94e87d8874b73b3745a474ce8f55ee84e9312d245f2"
+    },
+    {
+      "path": "game/css/leave-run.css",
+      "normalizedSha256": "19ee3bbd94cd4b83d9f8bcf0f8b0adf7d8dbbabf73c8a1bf2582181b50f3ef78"
+    },
+    {
+      "path": "game/css/map-cover.css",
+      "normalizedSha256": "369a5bf0ce813a2f47bca327093ddd1d7cabbbb8e8434133e597529a01ff59dc"
+    },
+    {
+      "path": "game/css/map-edge-light.css",
+      "normalizedSha256": "c6caa8a3b6e406db801917c9081af1db79be9d1031cef62bd47b1239b6cf50c2"
+    },
+    {
+      "path": "game/css/motion-transitions.css",
+      "normalizedSha256": "7d121c987b4790355168f0c4357884aa92a358faae00e6b4c63549d8db4eb345"
+    },
+    {
+      "path": "game/css/navigation-feedback.css",
+      "normalizedSha256": "c5ba8e6e3d19e66b97f03398138b7c6dddd15bbdb25ffb4836b9fa73e1f9f01e"
+    },
+    {
+      "path": "game/css/ordinary-polish.css",
+      "normalizedSha256": "39a425b64af52779a425ce2f561e4c1ce4dad38c69a00e45b3c86c8b2aab7009"
+    },
+    {
+      "path": "game/css/overlays.css",
+      "normalizedSha256": "888bf002106a381e35e64da11cdf0073e43469af4b8a27784b31b08fc1ba45df"
+    },
+    {
+      "path": "game/css/page-ach.css",
+      "normalizedSha256": "910ee0b36fd8cb130f3d078f5eac8545e7e2321c2d3a8b009a20d9631b11c78a"
+    },
+    {
+      "path": "game/css/page-battle-ui.css",
+      "normalizedSha256": "2888d269a8997bab9a21ff773b9eb5db605620170037d38ee19616383eef45ea"
+    },
+    {
+      "path": "game/css/page-cardforge.css",
+      "normalizedSha256": "fd3213e0ee6077922df01f8e653bad3682d5a3f0c489c35a938748e2c96f9513"
+    },
+    {
+      "path": "game/css/page-classes.css",
+      "normalizedSha256": "c9e4b4e269b2c27d18eab3043fa174dd6499091bae3e585602d839fd71fce1f2"
+    },
+    {
+      "path": "game/css/page-datapage.css",
+      "normalizedSha256": "6a98b5492b21029b82abf512dec0262f60502c15dcb9704fdbed1e26c1f90d0e"
+    },
+    {
+      "path": "game/css/page-deploy.css",
+      "normalizedSha256": "d54a76f8df3e412c8e7256279f4be1e7961bc68e19bf7b2ac38e85c93bb5bacb"
+    },
+    {
+      "path": "game/css/page-events.css",
+      "normalizedSha256": "e439d92c4b4b9500cfbce8ea534c63a2fac8cc4ec146e6e8a2d868bf8bb6ceea"
+    },
+    {
+      "path": "game/css/page-expedition-hud.css",
+      "normalizedSha256": "6f0b06f23626bb195b95a6894fcffc7ebdbd4b7eef0991a22c978ee89ca4f57f"
+    },
+    {
+      "path": "game/css/page-hub.css",
+      "normalizedSha256": "4d49435258d920ff81fb429b32bf5d5ec2b9f33934b449d6520eee4efae3f20b"
+    },
+    {
+      "path": "game/css/page-loading.css",
+      "normalizedSha256": "591720893fc30fc4908b1f7d5d4b062f7cd243568d86228260c8971cbf25ccf6"
+    },
+    {
+      "path": "game/css/page-rewards-bag-help.css",
+      "normalizedSha256": "5740473109131816d6112b9d2572f874765d48d8325fd41c4d54369f48e732cb"
+    },
+    {
+      "path": "game/css/page-settings.css",
+      "normalizedSha256": "5f0d3e1929eb0089bb551ea65a0d7c831a371ed62f276b06d3847cc39e5f2e0a"
+    },
+    {
+      "path": "game/css/page-shop.css",
+      "normalizedSha256": "e94901e6a826722a354c4c7a4ceb10fb412b5baf690dee4018f776b2ed345698"
+    },
+    {
+      "path": "game/css/page-slot-select.css",
+      "normalizedSha256": "5bd88749d062aa099b34b491be3b105dd099441b7d01a70870cd9461424cba97"
+    },
+    {
+      "path": "game/css/page-stash.css",
+      "normalizedSha256": "614c1d8dd1551f3d5301b34ce093dda9ae1f330fe85df188aaec7a9e48254126"
+    },
+    {
+      "path": "game/css/page-transitions.css",
+      "normalizedSha256": "4fcdc225c5394df4c4123f904aa5536bb7424a32fea379c692eeaf558d2b30bb"
+    },
+    {
+      "path": "game/css/page-upgrade.css",
+      "normalizedSha256": "66edf2b9c1089e060e6a8c364cb56be00908c999f40d830b878e883c359944ad"
+    },
+    {
+      "path": "game/css/page-visual-ready.css",
+      "normalizedSha256": "d8de986d8b834bf10ecce440f426d311b7949820774b670c334bd851e351d071"
+    },
+    {
+      "path": "game/css/photo-studio-mounts.css",
+      "normalizedSha256": "266b61a2efc3c49f70f449ab6d9617204e36c7fa49e6aec350a8e98a09279203"
+    },
+    {
+      "path": "game/css/photo-studio-room-effects.css",
+      "normalizedSha256": "2f5ca4bd3fb06781a599eaead25bc615d4279b9215911b3380e099cd44a23b0b"
+    },
+    {
+      "path": "game/css/photo-studio-unified.css",
+      "normalizedSha256": "77c20764dfb9099fa9e4cf31241bce6ad5ff2cb385d09b01410826a512162990"
+    },
+    {
+      "path": "game/css/photo-studio-zoom-motion.css",
+      "normalizedSha256": "d4918b1effd88d3add908500ad39c6682f3351def78e7b2feab38177d3481e40"
+    },
+    {
+      "path": "game/css/pocket-strip.css",
+      "normalizedSha256": "2f3845ee24c86940d241a4809c0a2991ac0338c9125efe123afae93f6469ebda"
+    },
+    {
+      "path": "game/css/preparation.css",
+      "normalizedSha256": "d66b5f2c4bde7fe2fa6e86d00b1b32ee456f106ae3716517030dfb9a9f625270"
+    },
+    {
+      "path": "game/css/rarity-design-lab.css",
+      "normalizedSha256": "94c4a9b5f52c591acbb628a2fa36891c914489ad105a44b3a24a9a28aff8b792"
+    },
+    {
+      "path": "game/css/roster-departure-v2.css",
+      "normalizedSha256": "4636991b33470ab3bc755b3e9c2b980d142b57379abf1af31ef69c387b4b308d"
+    },
+    {
+      "path": "game/css/roster-reference.css",
+      "normalizedSha256": "cfb7916b04ce89b777a5a42d51770ac87b4d5a0a31318bcbbedf7785a3a8fbe7"
+    },
+    {
+      "path": "game/css/scenes.css",
+      "normalizedSha256": "6d10a0d68c80397b9ff599ff631dc66c0b91984cc205b736dbf7716df05cfb70"
+    },
+    {
+      "path": "game/css/settings-cover.css",
+      "normalizedSha256": "90a1c67ca521b5c18ca4d625baff3cc0a81b20ec3a6b392ba99a472b31dbaa55"
+    },
+    {
+      "path": "game/css/settings-navigation.css",
+      "normalizedSha256": "660a524842cc8431d051d20bb86323e473e61ebbffcacd5b2bdb22bc3998be6c"
+    },
+    {
+      "path": "game/css/settings-transition.css",
+      "normalizedSha256": "7d46f61a0edced4b0d7e0ef274fc1af1b930e722e198d4edd96ae872354b461a"
+    },
+    {
+      "path": "game/css/sfx-audition.css",
+      "normalizedSha256": "25126d289ed4e1e6f07dbada50068836d57bd94c05b58a9be9cfe00b7fcd5c2a"
+    },
+    {
+      "path": "game/css/slots-cover.css",
+      "normalizedSha256": "b9a214f2e6ccd50e1d170d85cb4f94fc12f4ef9a4c42d296aba1ee01ef1dd5f5"
+    },
+    {
+      "path": "game/css/tactical-card-redesign.css",
+      "normalizedSha256": "6513919e0c0d267bcc69e4f817efdd34105826a7205eb0e9f40026943dca8200"
+    },
+    {
+      "path": "game/css/title-achievements.css",
+      "normalizedSha256": "b27803fe4feabf1b5964110d2ef0c6d06190ec35010085c61ca4b17fc74d2b69"
+    },
+    {
+      "path": "game/css/title-credits.css",
+      "normalizedSha256": "9ae4b38a7c3daeedcbca7fd4e8c2e02bb60e0f8c30c77b0fd6570aa876772a62"
+    },
+    {
+      "path": "game/css/title-p0.css",
+      "normalizedSha256": "6432914334c984e593c8edc544fa5b381b6361bc0106a1ecb3db3793bc3d7642"
+    },
+    {
+      "path": "game/css/ui-scale.css",
+      "normalizedSha256": "83705767f816c8aee8e7d463be424881ebf27c714ddc5f29648a97ac7895ebe1"
+    },
+    {
+      "path": "game/css/winter.css",
+      "normalizedSha256": "ece80983ce19406ed30fb90b6bfb4732df056816bb9069993e42cde58df2d857"
+    },
+    {
+      "path": "game/css/wu-career-frame-preview.css",
+      "normalizedSha256": "d9c48c97954307db316bd5118f0777f4193cc3002e79f351bd452b3ac357e05b"
+    },
+    {
+      "path": "game/ark-battle-demo.html",
+      "normalizedSha256": "71631f1febfe049495adba29d26a4d70e18e41bfdcff289a7f0566ae8b716adf"
+    },
+    {
+      "path": "game/backpack-redesign-demo.html",
+      "normalizedSha256": "f5580a249c931e2832787f82b614319abddbc219c6f8be2238576932c08e1ac0"
+    },
+    {
+      "path": "game/battle-redesign-demo.html",
+      "normalizedSha256": "bfb7e36ac0e2cad7ef8ca4d3ea3f952d571892d530dac6748510d9fea58da964"
+    },
+    {
+      "path": "game/chibi-preview.html",
+      "normalizedSha256": "ee207ed087848d4f35567299ab640422271a7cc74d33c3a712aab67b61e92196"
+    },
+    {
+      "path": "game/dev.html",
+      "normalizedSha256": "d7cefae47b69f38bc8fd4f9775fe553c2db4aa3a46373f257e5abc2d16116726"
+    },
+    {
+      "path": "game/four-music-demos.html",
+      "normalizedSha256": "c27e0c67f72701e5514cfc01ed641fbadd430e2f9323b38fc83c21ea2220ce1f"
+    },
+    {
+      "path": "game/index.html",
+      "normalizedSha256": "d547f85be215cd0a50a9d615aea8bca717c70685800be4b1d3516d649f567262"
+    },
+    {
+      "path": "game/music-demo.html",
+      "normalizedSha256": "439aefa3ffc84dce12c9275d5f5490550676aafbb300abbb084506f856f74036"
+    },
+    {
+      "path": "game/music-redirection-demo.html",
+      "normalizedSha256": "5de9c2c0c49ffaba502e310c0b9b596e518638e5cbcf782297246e9cf80e9531"
+    },
+    {
+      "path": "game/music-refinement-demo.html",
+      "normalizedSha256": "1da0e66d3eeff3afa95e41ada24410a1cd38e362625cf11c975d9f4e0ddf4ed9"
+    },
+    {
+      "path": "game/music-soft-continuity-demo.html",
+      "normalizedSha256": "6518d3db7c4be18e284d2c823d44c222cb6059515ea39d065065df494ef142ec"
+    },
+    {
+      "path": "game/rarity-design-lab.html",
+      "normalizedSha256": "b08c9dc02647ce3c5aa8b6e8a9aa2953242fcb00e0fddf3e6445b50a6ce0ff99"
+    },
+    {
+      "path": "game/sfx-audition.html",
+      "normalizedSha256": "37afecbe0a952dfe29f273e1a7c1756c57041df57c51045290f4258e1f888858"
+    },
+    {
+      "path": "game/shop-remake-demo.html",
+      "normalizedSha256": "2545194370dfe52e60005cfc9a3eaa886dd5f8c21b6416ee468038b6aede99dd"
+    },
+    {
+      "path": "game/title-calm-demo.html",
+      "normalizedSha256": "cf822379969a2e64734aaa336efbd7688821a229a8eb672b9dc1ce6ee1bbb069"
+    },
+    {
+      "path": "game/title-modern-demo.html",
+      "normalizedSha256": "79340cabd51db918cf53eb01e7e790c92626858e9d02f5bcce9fcf9458c4c23f"
+    }
+  ],
+  "candidateCardCount": 19,
+  "candidateFileCount": 38,
+  "primaryCardCount": 15,
+  "primaryFileCount": 30,
+  "primaryAssetBytes": 1291352,
+  "primaryPaths": [
+    "cards/spell-tt8-curse1.webp",
+    "thumbs/cards/spell-tt8-curse1.webp",
+    "cards/spell-tt8-curse2.webp",
+    "thumbs/cards/spell-tt8-curse2.webp",
+    "cards/spell-tt8-curse3.webp",
+    "thumbs/cards/spell-tt8-curse3.webp",
+    "cards/spell-tt8-curse4.webp",
+    "thumbs/cards/spell-tt8-curse4.webp",
+    "cards/equip-tt3-staff.webp",
+    "thumbs/cards/equip-tt3-staff.webp",
+    "cards/equip-tt3-fate-wheel.webp",
+    "thumbs/cards/equip-tt3-fate-wheel.webp",
+    "cards/equip-tt3-wolf-bow.webp",
+    "thumbs/cards/equip-tt3-wolf-bow.webp",
+    "cards/equip-tt3-twinwater-mail.webp",
+    "thumbs/cards/equip-tt3-twinwater-mail.webp",
+    "cards/equip-tt3-grass-armor.webp",
+    "thumbs/cards/equip-tt3-grass-armor.webp",
+    "cards/equip-tt3-blooddrinker.webp",
+    "thumbs/cards/equip-tt3-blooddrinker.webp",
+    "cards/equip-tt8-demonslay.webp",
+    "thumbs/cards/equip-tt8-demonslay.webp",
+    "cards/equip-tt8-archdemon.webp",
+    "thumbs/cards/equip-tt8-archdemon.webp",
+    "cards/equip-tt8-heavensword.webp",
+    "thumbs/cards/equip-tt8-heavensword.webp",
+    "cards/equip-tt7-arcanescroll.webp",
+    "thumbs/cards/equip-tt7-arcanescroll.webp",
+    "cards/equip-tt12-raygun.webp",
+    "thumbs/cards/equip-tt12-raygun.webp"
+  ],
+  "allCandidateBytes": 1646740,
+  "buildManifests": [
+    {
+      "path": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+      "sha256": "2d35838ab02b3cc34f2420d62d6a45207ae7f8081cf6c31218f425df830d2dd7"
+    },
+    {
+      "path": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+      "sha256": "0754a018fa4724fe193cbc03dfd43dedefc850d4f1b3fe3e354c34b28c045526"
+    }
+  ],
+  "fingerprints": {
+    "game/src/core/art.js": {
+      "sha256": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1",
+      "normalizedSha256": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1"
+    },
+    "game/src/core/data-loader.js": {
+      "sha256": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be",
+      "normalizedSha256": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be"
+    },
+    "game/data/art-mapping.json": {
+      "sha256": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99",
+      "normalizedSha256": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99"
+    },
+    "game/src/cards/cards.view.js": {
+      "sha256": "d100f89cd30cd69f6d5179d595991e4669d1f582fdaaa118ad0bb0f2a2006074",
+      "normalizedSha256": "d100f89cd30cd69f6d5179d595991e4669d1f582fdaaa118ad0bb0f2a2006074"
+    },
+    "game/src/core/asset-url.js": {
+      "sha256": "5bbfcf5fd3b9a0f7a1a53779710786133c5c749f8f8a20d635f804699b6d207e",
+      "normalizedSha256": "5bbfcf5fd3b9a0f7a1a53779710786133c5c749f8f8a20d635f804699b6d207e"
+    },
+    "game/css/card-v3.css": {
+      "sha256": "1b4eef67f438b94d9d8e224556e4bf41fe6c75cfb19b2418cc799e01718c0e4d",
+      "normalizedSha256": "1b4eef67f438b94d9d8e224556e4bf41fe6c75cfb19b2418cc799e01718c0e4d"
+    },
+    "game/battle-redesign-demo.html": {
+      "sha256": "bfb7e36ac0e2cad7ef8ca4d3ea3f952d571892d530dac6748510d9fea58da964",
+      "normalizedSha256": "bfb7e36ac0e2cad7ef8ca4d3ea3f952d571892d530dac6748510d9fea58da964"
+    },
+    "vite.config.js": {
+      "sha256": "63358325168ee4b05a785090dea7d3f1185037fbc3e37841870c384c97d9aef9",
+      "normalizedSha256": "63358325168ee4b05a785090dea7d3f1185037fbc3e37841870c384c97d9aef9"
+    },
+    "scripts/runtime-asset-redundancy.mjs": {
+      "sha256": "2b8d933245f76b85efe8d9649980035952102db7a65987c59af37a9bfebc5a51",
+      "normalizedSha256": "2b8d933245f76b85efe8d9649980035952102db7a65987c59af37a9bfebc5a51"
+    },
+    "scripts/runtime-asset-redundancy-review.mjs": {
+      "sha256": "1dbb7522f32a2e6a60575864ce625aee077717a4662276cc790bb211dbf00c18",
+      "normalizedSha256": "1dbb7522f32a2e6a60575864ce625aee077717a4662276cc790bb211dbf00c18"
+    },
+    "scripts/runtime-asset-publication.mjs": {
+      "sha256": "71f0569ee3e962eef77bd87496d86428afe9ff982b63da79b7b6f8621c47f88e",
+      "normalizedSha256": "71f0569ee3e962eef77bd87496d86428afe9ff982b63da79b7b6f8621c47f88e"
+    },
+    "game/src/generated/art-manifest.js": {
+      "sha256": "cd68f57c532d30d610845bfbd7b756111d3ab329c051db1c46c5de341bdc47cf",
+      "normalizedSha256": "cd68f57c532d30d610845bfbd7b756111d3ab329c051db1c46c5de341bdc47cf"
+    },
+    "game/src/generated/thumb-manifest.js": {
+      "sha256": "e8ac6a5757807a4835f16bf53b3705866f732ba5b07bdce1b146041eddae6343",
+      "normalizedSha256": "e8ac6a5757807a4835f16bf53b3705866f732ba5b07bdce1b146041eddae6343"
+    }
+  },
+  "opaqueConsumers": [
+    {
+      "path": "game/src/audio/sfx-audition.js",
+      "normalizedSha256": "e2a5dbbfc72747a51f1023a70bccd4f8ed33785126e0433a2ab2473881bdebdc",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/audio/sound.bank.js",
+      "normalizedSha256": "81b9bdf76f7440c6adccdc757b10a1240201830d76f8b4dea695dc9812b0fdf4",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/audio/sound.js",
+      "normalizedSha256": "f5053d38817ddaee067ff0c42e5677694641340fd210722c189a4ecdbee2a4a7",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/battle/view/battle.frames.js",
+      "normalizedSha256": "3749586baaf1cbb45f00af3eccbd14e2963a0b98ac483c69b10a6c7b557eb904",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "normalizedSha256": "9e7550ed5c4ed75d54f158430e1cf83fc652e5086c7309a5c6d1b48c78797ab0",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/battle/view/battle.vfx.js",
+      "normalizedSha256": "a439f13c5433f7dfc936a9e7a8c4bfe56350f745e17a69e2661b783d4d667e28",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/cards/card-frame-presentation.js",
+      "normalizedSha256": "79ef8241faad2ed89bb1c19b6866f0e352ddd43e9498d1e0842e436335099d9a",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/core/art-preload-plan.js",
+      "normalizedSha256": "7fc6a12eeed2ec21407df9e65ae81a3d2294fc343d37f8deefe62f0938cb93ad",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/core/art.js",
+      "normalizedSha256": "df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/core/icons-bitmap.js",
+      "normalizedSha256": "c8c66dda18b0b7d43c08e7fac90f35f1672e9693775892e1d7116158bf18aa46",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/home/home.scene.js",
+      "normalizedSha256": "abbbd5aaabc4afae047302bc2e7bd62858fbc7a6386b1505e60b46dcbe957604",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/hub/base-chibi-v2.skin.js",
+      "normalizedSha256": "53a4a3e47e3b01b53d134776a0ee62335f5253e714edc5e775ca16c733906f86",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/hub/game.bag.view2.js",
+      "normalizedSha256": "3763b8bb13e113e97f9e09ed0d36ade94892bd6810db2fe711f3e74fee383f6f",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "normalizedSha256": "f68d650a722b678804055d5656fcf96725bf1bd0c1dbea3d252b4d11e21773c6",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/hub/hub.presentation.js",
+      "normalizedSha256": "eb0f264f8c8f2cfbed1cd008156f73da707c8477393e7e90b20a61f9d54f5cb3",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/hub/hub.visuals.js",
+      "normalizedSha256": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/rarity-design-lab.js",
+      "normalizedSha256": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/run/lab.ending.js",
+      "normalizedSha256": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/ui/base-preview-rooms-v7.js",
+      "normalizedSha256": "c68c228942c7aaa41d1d52343c8f34346f4b424327c14619c2e5c5943a4e9fb8",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/ui/game.menu.pages.js",
+      "normalizedSha256": "6aedf6a0a140865a1eb986428225920f48ee88cad6d13c9b257520f67c4051b6",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/ui/ui.js",
+      "normalizedSha256": "e40a8eac1adb5e3a834a417c174a5d2513eadab5d55bf0b07804bd1e87b3d6a1",
+      "reviewMatches": true
+    },
+    {
+      "path": "game/src/wu-career-frame-preview.js",
+      "normalizedSha256": "2715b703789fef835432d3eb7cbffdedc249f8355a22714e6faff8ef49cfee38",
+      "reviewMatches": true
+    }
+  ],
+  "currentPlan": {
+    "count": 165,
+    "warnings": []
+  },
+  "proposedInMemoryPlan": {
+    "count": 195,
+    "addedPrimaryCount": 30,
+    "warnings": [],
+    "primaryPaths": [
+      "cards/spell-tt8-curse1.webp",
+      "thumbs/cards/spell-tt8-curse1.webp",
+      "cards/spell-tt8-curse2.webp",
+      "thumbs/cards/spell-tt8-curse2.webp",
+      "cards/spell-tt8-curse3.webp",
+      "thumbs/cards/spell-tt8-curse3.webp",
+      "cards/spell-tt8-curse4.webp",
+      "thumbs/cards/spell-tt8-curse4.webp",
+      "cards/equip-tt3-staff.webp",
+      "thumbs/cards/equip-tt3-staff.webp",
+      "cards/equip-tt3-fate-wheel.webp",
+      "thumbs/cards/equip-tt3-fate-wheel.webp",
+      "cards/equip-tt3-wolf-bow.webp",
+      "thumbs/cards/equip-tt3-wolf-bow.webp",
+      "cards/equip-tt3-twinwater-mail.webp",
+      "thumbs/cards/equip-tt3-twinwater-mail.webp",
+      "cards/equip-tt3-grass-armor.webp",
+      "thumbs/cards/equip-tt3-grass-armor.webp",
+      "cards/equip-tt3-blooddrinker.webp",
+      "thumbs/cards/equip-tt3-blooddrinker.webp",
+      "cards/equip-tt8-demonslay.webp",
+      "thumbs/cards/equip-tt8-demonslay.webp",
+      "cards/equip-tt8-archdemon.webp",
+      "thumbs/cards/equip-tt8-archdemon.webp",
+      "cards/equip-tt8-heavensword.webp",
+      "thumbs/cards/equip-tt8-heavensword.webp",
+      "cards/equip-tt7-arcanescroll.webp",
+      "thumbs/cards/equip-tt7-arcanescroll.webp",
+      "cards/equip-tt12-raygun.webp",
+      "thumbs/cards/equip-tt12-raygun.webp"
+    ]
+  },
+  "graphGuardSamples": {
+    "cards/spell-tt8-curse1.webp": true,
+    "thumbs/cards/spell-tt8-curse1.webp": true,
+    "cards/spell-tt8-curse2.webp": true,
+    "thumbs/cards/spell-tt8-curse2.webp": true,
+    "cards/spell-tt8-curse3.webp": true,
+    "thumbs/cards/spell-tt8-curse3.webp": true,
+    "cards/spell-tt8-curse4.webp": true,
+    "thumbs/cards/spell-tt8-curse4.webp": true,
+    "cards/equip-tt3-staff.webp": true,
+    "thumbs/cards/equip-tt3-staff.webp": true,
+    "cards/equip-tt3-fate-wheel.webp": true,
+    "thumbs/cards/equip-tt3-fate-wheel.webp": true,
+    "cards/equip-tt3-wolf-bow.webp": true,
+    "thumbs/cards/equip-tt3-wolf-bow.webp": true,
+    "cards/equip-tt3-twinwater-mail.webp": true,
+    "thumbs/cards/equip-tt3-twinwater-mail.webp": true,
+    "cards/equip-tt3-grass-armor.webp": true,
+    "thumbs/cards/equip-tt3-grass-armor.webp": true,
+    "cards/equip-tt3-blooddrinker.webp": true,
+    "thumbs/cards/equip-tt3-blooddrinker.webp": true,
+    "cards/equip-tt8-demonslay.webp": true,
+    "thumbs/cards/equip-tt8-demonslay.webp": true,
+    "cards/equip-tt8-archdemon.webp": true,
+    "thumbs/cards/equip-tt8-archdemon.webp": true,
+    "cards/equip-tt8-heavensword.webp": true,
+    "thumbs/cards/equip-tt8-heavensword.webp": true,
+    "cards/equip-tt7-arcanescroll.webp": true,
+    "thumbs/cards/equip-tt7-arcanescroll.webp": true,
+    "cards/equip-tt12-raygun.webp": true,
+    "thumbs/cards/equip-tt12-raygun.webp": true
+  },
+  "guardExperiments": {
+    "override-removed": {
+      "primaryExcluded": 0,
+      "warnings": [
+        "Changed/missing retired-scenes selector; retaining its reviewed assets.",
+        "Changed/missing shadowed-card-art selector; retaining its reviewed assets."
+      ]
+    },
+    "selector-changed": {
+      "primaryExcluded": 0,
+      "warnings": [
+        "Unreviewed dynamic asset consumer game/src/core/art.js; retaining reviewed assets."
+      ]
+    },
+    "data-freeze-loader-changed": {
+      "primaryExcluded": 0,
+      "warnings": [
+        "Changed/missing map selector; retaining its reviewed assets.",
+        "Changed/missing transitions selector; retaining its reviewed assets.",
+        "Changed/missing shadowed-card-art selector; retaining its reviewed assets."
+      ]
+    },
+    "new-opaque-consumer": {
+      "totalExcluded": 0,
+      "primaryExcluded": 0,
+      "warnings": [
+        "Unreviewed dynamic asset consumer game/src/audit-new-lazy.js; retaining reviewed assets."
+      ]
+    },
+    "new-syntax-error": {
+      "totalExcluded": 0,
+      "primaryExcluded": 0,
+      "warnings": [
+        "Runtime path analysis inconclusive (Unexpected token (1:6)); retaining reviewed assets."
+      ]
+    },
+    "missing-selector": {
+      "primaryExcluded": 0,
+      "warnings": [
+        "Changed/missing retired-scenes selector; retaining its reviewed assets.",
+        "Changed/missing map selector; retaining its reviewed assets.",
+        "Changed/missing transitions selector; retaining its reviewed assets.",
+        "Changed/missing shadowed-card-art selector; retaining its reviewed assets."
+      ]
+    },
+    "restored-static-path": {
+      "originalRetained": true,
+      "thumbnailRetained": true,
+      "warnings": []
+    }
+  },
+  "records": [
+    {
+      "cardId": "tt8-hero-warlock",
+      "shadowed": "cards/hero-forbidden.webp",
+      "override": "cards/dark-eclipse.webp",
+      "bytes": 101998,
+      "thumbBytes": 24504,
+      "literalReferenceFiles": [
+        "game/data/art-mapping.json"
+      ],
+      "decision": "semantic-followup-only",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "heroCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/hero-forbidden.webp",
+        "exists": true,
+        "bytes": 101998,
+        "sha256": "9e30fcd9e8394875c3f2f8e3611c8738d16a5d0226900eb15466e9e19cb50cd8",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 101998,
+            "sha256": "9e30fcd9e8394875c3f2f8e3611c8738d16a5d0226900eb15466e9e19cb50cd8",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 101998,
+            "sha256": "9e30fcd9e8394875c3f2f8e3611c8738d16a5d0226900eb15466e9e19cb50cd8",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/hero-forbidden.webp",
+        "exists": true,
+        "bytes": 24504,
+        "sha256": "685d3e2d76c7dc80717ac64ac2155828ac611b199b20042d09a535b558c13395",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 24504,
+            "sha256": "685d3e2d76c7dc80717ac64ac2155828ac611b199b20042d09a535b558c13395",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 24504,
+            "sha256": "685d3e2d76c7dc80717ac64ac2155828ac611b199b20042d09a535b558c13395",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/dark-eclipse.webp",
+        "exists": true,
+        "bytes": 114828,
+        "sha256": "be45d434b10d40958cb1ab585953bad21849b325eb81d39cda0e469f12073caf",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 114828,
+            "sha256": "be45d434b10d40958cb1ab585953bad21849b325eb81d39cda0e469f12073caf",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 114828,
+            "sha256": "be45d434b10d40958cb1ab585953bad21849b325eb81d39cda0e469f12073caf",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/dark-eclipse.webp",
+        "exists": true,
+        "bytes": 18920,
+        "sha256": "13a29e0242f8fb3d3acad32649f9993163abb61ab133bc2da7180ad29e0cdbb9",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 18920,
+            "sha256": "13a29e0242f8fb3d3acad32649f9993163abb61ab133bc2da7180ad29e0cdbb9",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 18920,
+            "sha256": "13a29e0242f8fb3d3acad32649f9993163abb61ab133bc2da7180ad29e0cdbb9",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": [
+        {
+          "path": "game/data/art-mapping.json",
+          "lines": [
+            {
+              "line": 305,
+              "code": "\"tt8-hero-warlock\": \"hero-forbidden\","
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "cardId": "tt8-curse1",
+      "shadowed": "cards/spell-tt8-curse1.webp",
+      "override": "cards/curse-drain.webp",
+      "bytes": 75020,
+      "thumbBytes": 17406,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "spellCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/spell-tt8-curse1.webp",
+        "exists": true,
+        "bytes": 75020,
+        "sha256": "09aa94c5dfb27e4d48b3657d50da3451e994175de248d40928ffbb55d44b3bcc",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 75020,
+            "sha256": "09aa94c5dfb27e4d48b3657d50da3451e994175de248d40928ffbb55d44b3bcc",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 75020,
+            "sha256": "09aa94c5dfb27e4d48b3657d50da3451e994175de248d40928ffbb55d44b3bcc",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/spell-tt8-curse1.webp",
+        "exists": true,
+        "bytes": 17406,
+        "sha256": "1a60c3bbdbe690a604dca93893916f05576a4d544d41e250e3e9d679266a9495",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 17406,
+            "sha256": "1a60c3bbdbe690a604dca93893916f05576a4d544d41e250e3e9d679266a9495",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 17406,
+            "sha256": "1a60c3bbdbe690a604dca93893916f05576a4d544d41e250e3e9d679266a9495",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/curse-drain.webp",
+        "exists": true,
+        "bytes": 131300,
+        "sha256": "104952fc8765ea334e3ba03c6b0dfc2f48bd341d024c3303f230280083d88b1e",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 131300,
+            "sha256": "104952fc8765ea334e3ba03c6b0dfc2f48bd341d024c3303f230280083d88b1e",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 131300,
+            "sha256": "104952fc8765ea334e3ba03c6b0dfc2f48bd341d024c3303f230280083d88b1e",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/curse-drain.webp",
+        "exists": true,
+        "bytes": 17408,
+        "sha256": "bde557f9f1cb1c1b300e1c4895cb09cdf49734e1df9d3a833802a13e2feb1bb5",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 17408,
+            "sha256": "bde557f9f1cb1c1b300e1c4895cb09cdf49734e1df9d3a833802a13e2feb1bb5",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 17408,
+            "sha256": "bde557f9f1cb1c1b300e1c4895cb09cdf49734e1df9d3a833802a13e2feb1bb5",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt8-curse2",
+      "shadowed": "cards/spell-tt8-curse2.webp",
+      "override": "cards/curse-freeze.webp",
+      "bytes": 103200,
+      "thumbBytes": 22768,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "spellCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/spell-tt8-curse2.webp",
+        "exists": true,
+        "bytes": 103200,
+        "sha256": "4fb64c46d0e8f5e6623f92a02ceebf33001705681d70e3b8fc8e876d310e39c7",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 103200,
+            "sha256": "4fb64c46d0e8f5e6623f92a02ceebf33001705681d70e3b8fc8e876d310e39c7",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 103200,
+            "sha256": "4fb64c46d0e8f5e6623f92a02ceebf33001705681d70e3b8fc8e876d310e39c7",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/spell-tt8-curse2.webp",
+        "exists": true,
+        "bytes": 22768,
+        "sha256": "a77114d06a8f963b0709d1974d9fbac2b658165d861dd8f586d1464112ee76ba",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 22768,
+            "sha256": "a77114d06a8f963b0709d1974d9fbac2b658165d861dd8f586d1464112ee76ba",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 22768,
+            "sha256": "a77114d06a8f963b0709d1974d9fbac2b658165d861dd8f586d1464112ee76ba",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/curse-freeze.webp",
+        "exists": true,
+        "bytes": 125346,
+        "sha256": "5d03e9c283f431653f41517d949d82fbfa0916ecfd831b720049843abe3bab5d",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 125346,
+            "sha256": "5d03e9c283f431653f41517d949d82fbfa0916ecfd831b720049843abe3bab5d",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 125346,
+            "sha256": "5d03e9c283f431653f41517d949d82fbfa0916ecfd831b720049843abe3bab5d",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/curse-freeze.webp",
+        "exists": true,
+        "bytes": 17820,
+        "sha256": "8117a9a628235908f376d5a344803c991c6566df3707d6a33695fabff3f8110d",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 17820,
+            "sha256": "8117a9a628235908f376d5a344803c991c6566df3707d6a33695fabff3f8110d",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 17820,
+            "sha256": "8117a9a628235908f376d5a344803c991c6566df3707d6a33695fabff3f8110d",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt8-curse3",
+      "shadowed": "cards/spell-tt8-curse3.webp",
+      "override": "cards/curse-venom.webp",
+      "bytes": 92638,
+      "thumbBytes": 23322,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "spellCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/spell-tt8-curse3.webp",
+        "exists": true,
+        "bytes": 92638,
+        "sha256": "e49a2a59c060f1103f93f6bb2fb7b97359f8ecfaf732589aa972cecd76c6e2cb",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 92638,
+            "sha256": "e49a2a59c060f1103f93f6bb2fb7b97359f8ecfaf732589aa972cecd76c6e2cb",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 92638,
+            "sha256": "e49a2a59c060f1103f93f6bb2fb7b97359f8ecfaf732589aa972cecd76c6e2cb",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/spell-tt8-curse3.webp",
+        "exists": true,
+        "bytes": 23322,
+        "sha256": "f71e159c81d3a006d63e5156f5ab3477b74dc4632e19e43012da8adee3980e5a",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 23322,
+            "sha256": "f71e159c81d3a006d63e5156f5ab3477b74dc4632e19e43012da8adee3980e5a",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 23322,
+            "sha256": "f71e159c81d3a006d63e5156f5ab3477b74dc4632e19e43012da8adee3980e5a",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/curse-venom.webp",
+        "exists": true,
+        "bytes": 110154,
+        "sha256": "3e1167666f0c5bb333145bc91fb71a08ab22ea1aa2de2103198b3d84f9c30dc0",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 110154,
+            "sha256": "3e1167666f0c5bb333145bc91fb71a08ab22ea1aa2de2103198b3d84f9c30dc0",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 110154,
+            "sha256": "3e1167666f0c5bb333145bc91fb71a08ab22ea1aa2de2103198b3d84f9c30dc0",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/curse-venom.webp",
+        "exists": true,
+        "bytes": 16224,
+        "sha256": "f4dcedd2c7f3ff529a0b8499acdd87b13c2ff1cb12f546b8e5b83688de49a2a0",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 16224,
+            "sha256": "f4dcedd2c7f3ff529a0b8499acdd87b13c2ff1cb12f546b8e5b83688de49a2a0",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 16224,
+            "sha256": "f4dcedd2c7f3ff529a0b8499acdd87b13c2ff1cb12f546b8e5b83688de49a2a0",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt8-curse4",
+      "shadowed": "cards/spell-tt8-curse4.webp",
+      "override": "cards/curse-silence.webp",
+      "bytes": 97694,
+      "thumbBytes": 23126,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "spellCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/spell-tt8-curse4.webp",
+        "exists": true,
+        "bytes": 97694,
+        "sha256": "2b448578b4378ac3276760e03b91a139d0ba1fd126a14978a1fe84f7e388a5c4",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 97694,
+            "sha256": "2b448578b4378ac3276760e03b91a139d0ba1fd126a14978a1fe84f7e388a5c4",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 97694,
+            "sha256": "2b448578b4378ac3276760e03b91a139d0ba1fd126a14978a1fe84f7e388a5c4",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/spell-tt8-curse4.webp",
+        "exists": true,
+        "bytes": 23126,
+        "sha256": "476fcfdd67004b62e7c0f8ba59f9da90fb050027550b3b19ed59866acadd0791",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 23126,
+            "sha256": "476fcfdd67004b62e7c0f8ba59f9da90fb050027550b3b19ed59866acadd0791",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 23126,
+            "sha256": "476fcfdd67004b62e7c0f8ba59f9da90fb050027550b3b19ed59866acadd0791",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/curse-silence.webp",
+        "exists": true,
+        "bytes": 107198,
+        "sha256": "466e95ee0eae3fd065ec47452fe9e509a34f9f849d8fd0d59d84d48165275f50",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 107198,
+            "sha256": "466e95ee0eae3fd065ec47452fe9e509a34f9f849d8fd0d59d84d48165275f50",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 107198,
+            "sha256": "466e95ee0eae3fd065ec47452fe9e509a34f9f849d8fd0d59d84d48165275f50",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/curse-silence.webp",
+        "exists": true,
+        "bytes": 15458,
+        "sha256": "12ab7b29fbbe26cf25f46edf9a3e682b957349b468d7366198de921a65d4784e",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 15458,
+            "sha256": "12ab7b29fbbe26cf25f46edf9a3e682b957349b468d7366198de921a65d4784e",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 15458,
+            "sha256": "12ab7b29fbbe26cf25f46edf9a3e682b957349b468d7366198de921a65d4784e",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt3-fireball",
+      "shadowed": "cards/spell-tt3-fireball.webp",
+      "override": "cards/expedition-starters/fireball.webp",
+      "bytes": 21156,
+      "thumbBytes": 61254,
+      "literalReferenceFiles": [
+        "game/css/card-v3.css"
+      ],
+      "decision": "semantic-followup-only",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "spellCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/spell-tt3-fireball.webp",
+        "exists": true,
+        "bytes": 21156,
+        "sha256": "00d27a2ca387e9f5cf32eebe2086f7388b5ae5f46f8de37a7b51d7c0fbcad300",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 21156,
+            "sha256": "00d27a2ca387e9f5cf32eebe2086f7388b5ae5f46f8de37a7b51d7c0fbcad300",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 21156,
+            "sha256": "00d27a2ca387e9f5cf32eebe2086f7388b5ae5f46f8de37a7b51d7c0fbcad300",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/spell-tt3-fireball.webp",
+        "exists": true,
+        "bytes": 61254,
+        "sha256": "93f5beeefa4ed7c8ed4f5d473afb8d8c36408975f523878f6b7b7cd77f3a69ba",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 61254,
+            "sha256": "93f5beeefa4ed7c8ed4f5d473afb8d8c36408975f523878f6b7b7cd77f3a69ba",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 61254,
+            "sha256": "93f5beeefa4ed7c8ed4f5d473afb8d8c36408975f523878f6b7b7cd77f3a69ba",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/expedition-starters/fireball.webp",
+        "exists": true,
+        "bytes": 103648,
+        "sha256": "1ead802c2e92007f2ac98d16b76fc667ac4140a2b6a65b173c0454db39f30bb0",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 103648,
+            "sha256": "1ead802c2e92007f2ac98d16b76fc667ac4140a2b6a65b173c0454db39f30bb0",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 103648,
+            "sha256": "1ead802c2e92007f2ac98d16b76fc667ac4140a2b6a65b173c0454db39f30bb0",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/expedition-starters/fireball.webp",
+        "exists": true,
+        "bytes": 16398,
+        "sha256": "8e64d6aa5d73167f052130b278ce60e54b6f55e682aaafd6e21937cfe8aab2d4",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 16398,
+            "sha256": "8e64d6aa5d73167f052130b278ce60e54b6f55e682aaafd6e21937cfe8aab2d4",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 16398,
+            "sha256": "8e64d6aa5d73167f052130b278ce60e54b6f55e682aaafd6e21937cfe8aab2d4",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": [
+        {
+          "path": "game/css/card-v3.css",
+          "lines": [
+            {
+              "line": 12,
+              "code": "img[data-asset-key=\"card-spell-tt3-fireball\"]{object-position:50% 42%!important}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "cardId": "tt3-skewer",
+      "shadowed": "cards/martial-tt3-skewer.webp",
+      "override": "cards/expedition-starters/pierce.webp",
+      "bytes": 46476,
+      "thumbBytes": 40898,
+      "literalReferenceFiles": [
+        "game/css/card-v3.css"
+      ],
+      "decision": "semantic-followup-only",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "martialCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/martial-tt3-skewer.webp",
+        "exists": true,
+        "bytes": 46476,
+        "sha256": "7e7f2d3005dae4dcc90bb482f6e14271307a212e640a027ee914f755cf699539",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 46476,
+            "sha256": "7e7f2d3005dae4dcc90bb482f6e14271307a212e640a027ee914f755cf699539",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 46476,
+            "sha256": "7e7f2d3005dae4dcc90bb482f6e14271307a212e640a027ee914f755cf699539",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/martial-tt3-skewer.webp",
+        "exists": true,
+        "bytes": 40898,
+        "sha256": "a76f8523a9a447851fac68e7c68d3a8ac23a19848582418700b31caccf2f3eda",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 40898,
+            "sha256": "a76f8523a9a447851fac68e7c68d3a8ac23a19848582418700b31caccf2f3eda",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 40898,
+            "sha256": "a76f8523a9a447851fac68e7c68d3a8ac23a19848582418700b31caccf2f3eda",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/expedition-starters/pierce.webp",
+        "exists": true,
+        "bytes": 137136,
+        "sha256": "b9b5cb348978492675fef527ecff5f86a4a5aa3564967649855dd323b04f8fb4",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 137136,
+            "sha256": "b9b5cb348978492675fef527ecff5f86a4a5aa3564967649855dd323b04f8fb4",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 137136,
+            "sha256": "b9b5cb348978492675fef527ecff5f86a4a5aa3564967649855dd323b04f8fb4",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/expedition-starters/pierce.webp",
+        "exists": true,
+        "bytes": 14522,
+        "sha256": "c54873724ba43d9a1fa6515ac7caaee578c190dfebde237e7863063d520a8615",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 14522,
+            "sha256": "c54873724ba43d9a1fa6515ac7caaee578c190dfebde237e7863063d520a8615",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 14522,
+            "sha256": "c54873724ba43d9a1fa6515ac7caaee578c190dfebde237e7863063d520a8615",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": [
+        {
+          "path": "game/css/card-v3.css",
+          "lines": [
+            {
+              "line": 6,
+              "code": "img[data-asset-key=\"card-martial-tt3-skewer\"]{object-position:65% 60%!important}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "cardId": "tt3-staff",
+      "shadowed": "cards/equip-tt3-staff.webp",
+      "override": "cards/studio-expanded/tt3-staff.webp",
+      "bytes": 15740,
+      "thumbBytes": 16954,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "equipCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/equip-tt3-staff.webp",
+        "exists": true,
+        "bytes": 15740,
+        "sha256": "b36123515a96239be1194b5f413a28ece1b2d640944a1fede94a4e81904e5aad",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 15740,
+            "sha256": "b36123515a96239be1194b5f413a28ece1b2d640944a1fede94a4e81904e5aad",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 15740,
+            "sha256": "b36123515a96239be1194b5f413a28ece1b2d640944a1fede94a4e81904e5aad",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/equip-tt3-staff.webp",
+        "exists": true,
+        "bytes": 16954,
+        "sha256": "365d4c78a21f41f8c8bdec11fb2dd27b0e226784541a6ea34ea7bb8bad61156a",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 16954,
+            "sha256": "365d4c78a21f41f8c8bdec11fb2dd27b0e226784541a6ea34ea7bb8bad61156a",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 16954,
+            "sha256": "365d4c78a21f41f8c8bdec11fb2dd27b0e226784541a6ea34ea7bb8bad61156a",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/studio-expanded/tt3-staff.webp",
+        "exists": true,
+        "bytes": 46754,
+        "sha256": "995e9a57f83ed5c1e494cda374fb536bbe72384033e1a6df41cd3c08b825fbf1",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 46754,
+            "sha256": "995e9a57f83ed5c1e494cda374fb536bbe72384033e1a6df41cd3c08b825fbf1",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 46754,
+            "sha256": "995e9a57f83ed5c1e494cda374fb536bbe72384033e1a6df41cd3c08b825fbf1",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/studio-expanded/tt3-staff.webp",
+        "exists": true,
+        "bytes": 5450,
+        "sha256": "f0975823bf81b775629cd91d68d2d7d37a19275129ba30ffe2f348c166befc9c",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 5450,
+            "sha256": "f0975823bf81b775629cd91d68d2d7d37a19275129ba30ffe2f348c166befc9c",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 5450,
+            "sha256": "f0975823bf81b775629cd91d68d2d7d37a19275129ba30ffe2f348c166befc9c",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt2-frostsword",
+      "shadowed": "cards/equip-tt2-frostsword.webp",
+      "override": "cards/studio-expanded/tt2-frostsword.webp",
+      "bytes": 52230,
+      "thumbBytes": 6872,
+      "literalReferenceFiles": [
+        "game/battle-redesign-demo.html"
+      ],
+      "decision": "retain-original-demo-reference",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "equipCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/equip-tt2-frostsword.webp",
+        "exists": true,
+        "bytes": 52230,
+        "sha256": "6fdd4393495a5df036057a027a0cd74606ce535c0dc871c2ed54f27441ec1b2b",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 52230,
+            "sha256": "6fdd4393495a5df036057a027a0cd74606ce535c0dc871c2ed54f27441ec1b2b",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 52230,
+            "sha256": "6fdd4393495a5df036057a027a0cd74606ce535c0dc871c2ed54f27441ec1b2b",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/equip-tt2-frostsword.webp",
+        "exists": true,
+        "bytes": 6872,
+        "sha256": "a350466feffa521f70e945a3bd750c6d1d382ac7dd98708152fd74ac4659233c",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 6872,
+            "sha256": "a350466feffa521f70e945a3bd750c6d1d382ac7dd98708152fd74ac4659233c",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 6872,
+            "sha256": "a350466feffa521f70e945a3bd750c6d1d382ac7dd98708152fd74ac4659233c",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/studio-expanded/tt2-frostsword.webp",
+        "exists": true,
+        "bytes": 68470,
+        "sha256": "ee61044c4d6ccfced57697ebbdd72b852416a276fece87dcd44c0c6a84a59271",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 68470,
+            "sha256": "ee61044c4d6ccfced57697ebbdd72b852416a276fece87dcd44c0c6a84a59271",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 68470,
+            "sha256": "ee61044c4d6ccfced57697ebbdd72b852416a276fece87dcd44c0c6a84a59271",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/studio-expanded/tt2-frostsword.webp",
+        "exists": true,
+        "bytes": 9478,
+        "sha256": "c9349257202bc1638f2d405abdec57991b5b55e7d1e32b90eaa5739a4c016bf0",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 9478,
+            "sha256": "c9349257202bc1638f2d405abdec57991b5b55e7d1e32b90eaa5739a4c016bf0",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 9478,
+            "sha256": "c9349257202bc1638f2d405abdec57991b5b55e7d1e32b90eaa5739a4c016bf0",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": [
+        {
+          "path": "game/battle-redesign-demo.html",
+          "lines": [
+            {
+              "line": 502,
+              "code": "{ name:\"霜结之刃\", type:\"martial\", cost:2, desc:\"造成 9 点攻击伤害并施加 1 层冻结。\", art:\"assets/cards/equip-tt2-frostsword.webp\", target:\"enemy\", val:9 },"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "cardId": "tt3-fate-wheel",
+      "shadowed": "cards/equip-tt3-fate-wheel.webp",
+      "override": "cards/studio-expanded/tt3-fate-wheel.webp",
+      "bytes": 79746,
+      "thumbBytes": 11766,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "equipCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/equip-tt3-fate-wheel.webp",
+        "exists": true,
+        "bytes": 79746,
+        "sha256": "69bd24f9d1595a2cb03da05ddb1da0d0b526003c1505d4967ff40ab2d35c352c",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 79746,
+            "sha256": "69bd24f9d1595a2cb03da05ddb1da0d0b526003c1505d4967ff40ab2d35c352c",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 79746,
+            "sha256": "69bd24f9d1595a2cb03da05ddb1da0d0b526003c1505d4967ff40ab2d35c352c",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/equip-tt3-fate-wheel.webp",
+        "exists": true,
+        "bytes": 11766,
+        "sha256": "8bbe689632f471a3e0991f22ffbd63d8d12772927660098a5439c88ed559e8f0",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 11766,
+            "sha256": "8bbe689632f471a3e0991f22ffbd63d8d12772927660098a5439c88ed559e8f0",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 11766,
+            "sha256": "8bbe689632f471a3e0991f22ffbd63d8d12772927660098a5439c88ed559e8f0",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/studio-expanded/tt3-fate-wheel.webp",
+        "exists": true,
+        "bytes": 73148,
+        "sha256": "d77952377d35d74a67f0d94eceaabd016fdde1228deacb8beaafce39c1a0df97",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 73148,
+            "sha256": "d77952377d35d74a67f0d94eceaabd016fdde1228deacb8beaafce39c1a0df97",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 73148,
+            "sha256": "d77952377d35d74a67f0d94eceaabd016fdde1228deacb8beaafce39c1a0df97",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/studio-expanded/tt3-fate-wheel.webp",
+        "exists": true,
+        "bytes": 13318,
+        "sha256": "c4f1dd6f84d4d845edcb425294103c15a5c3fe8d670b561876ec71abd3e0171d",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 13318,
+            "sha256": "c4f1dd6f84d4d845edcb425294103c15a5c3fe8d670b561876ec71abd3e0171d",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 13318,
+            "sha256": "c4f1dd6f84d4d845edcb425294103c15a5c3fe8d670b561876ec71abd3e0171d",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt3-wolf-bow",
+      "shadowed": "cards/equip-tt3-wolf-bow.webp",
+      "override": "cards/studio-expanded/tt3-wolf-bow.webp",
+      "bytes": 73274,
+      "thumbBytes": 8538,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "equipCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/equip-tt3-wolf-bow.webp",
+        "exists": true,
+        "bytes": 73274,
+        "sha256": "ea1d58f405f3c2d26a242263015ea4c10aca9d064b8089d3891a4dc04ea7a147",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 73274,
+            "sha256": "ea1d58f405f3c2d26a242263015ea4c10aca9d064b8089d3891a4dc04ea7a147",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 73274,
+            "sha256": "ea1d58f405f3c2d26a242263015ea4c10aca9d064b8089d3891a4dc04ea7a147",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/equip-tt3-wolf-bow.webp",
+        "exists": true,
+        "bytes": 8538,
+        "sha256": "209ea2036f503e0fdf9cd8afc27657db08b57b648a6856d267edeb58006c67b5",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 8538,
+            "sha256": "209ea2036f503e0fdf9cd8afc27657db08b57b648a6856d267edeb58006c67b5",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 8538,
+            "sha256": "209ea2036f503e0fdf9cd8afc27657db08b57b648a6856d267edeb58006c67b5",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/studio-expanded/tt3-wolf-bow.webp",
+        "exists": true,
+        "bytes": 80360,
+        "sha256": "aae411b8680ee5c34f5288b41688fed120a88ec11a6e687cacb5389e9ccf484d",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 80360,
+            "sha256": "aae411b8680ee5c34f5288b41688fed120a88ec11a6e687cacb5389e9ccf484d",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 80360,
+            "sha256": "aae411b8680ee5c34f5288b41688fed120a88ec11a6e687cacb5389e9ccf484d",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/studio-expanded/tt3-wolf-bow.webp",
+        "exists": true,
+        "bytes": 11126,
+        "sha256": "f2e2844e65722dd65e0f083735342555cc2d0ebbae4ddd4775bae2917b39a578",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 11126,
+            "sha256": "f2e2844e65722dd65e0f083735342555cc2d0ebbae4ddd4775bae2917b39a578",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 11126,
+            "sha256": "f2e2844e65722dd65e0f083735342555cc2d0ebbae4ddd4775bae2917b39a578",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt3-twinwater-mail",
+      "shadowed": "cards/equip-tt3-twinwater-mail.webp",
+      "override": "cards/studio-expanded/tt3-twinwater-mail.webp",
+      "bytes": 116328,
+      "thumbBytes": 16416,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "equipCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/equip-tt3-twinwater-mail.webp",
+        "exists": true,
+        "bytes": 116328,
+        "sha256": "dbc216c2807f438278217745d198491a0d2eff36ea0b9008bb11e18532846e2c",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 116328,
+            "sha256": "dbc216c2807f438278217745d198491a0d2eff36ea0b9008bb11e18532846e2c",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 116328,
+            "sha256": "dbc216c2807f438278217745d198491a0d2eff36ea0b9008bb11e18532846e2c",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/equip-tt3-twinwater-mail.webp",
+        "exists": true,
+        "bytes": 16416,
+        "sha256": "d05e2fb9e166a6fd49abc2fc948353e44241bbb42cade14528167a5794d019ab",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 16416,
+            "sha256": "d05e2fb9e166a6fd49abc2fc948353e44241bbb42cade14528167a5794d019ab",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 16416,
+            "sha256": "d05e2fb9e166a6fd49abc2fc948353e44241bbb42cade14528167a5794d019ab",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/studio-expanded/tt3-twinwater-mail.webp",
+        "exists": true,
+        "bytes": 104168,
+        "sha256": "337fd5c7bd7529f3d996ee821be7eb02949b9c48a75f44bb125281786fa6fb80",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 104168,
+            "sha256": "337fd5c7bd7529f3d996ee821be7eb02949b9c48a75f44bb125281786fa6fb80",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 104168,
+            "sha256": "337fd5c7bd7529f3d996ee821be7eb02949b9c48a75f44bb125281786fa6fb80",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/studio-expanded/tt3-twinwater-mail.webp",
+        "exists": true,
+        "bytes": 17382,
+        "sha256": "ffc3fef5cdaf475edcd6bc3a4284079f11995f1c01ad7d0ca20a105a7f66d36d",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 17382,
+            "sha256": "ffc3fef5cdaf475edcd6bc3a4284079f11995f1c01ad7d0ca20a105a7f66d36d",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 17382,
+            "sha256": "ffc3fef5cdaf475edcd6bc3a4284079f11995f1c01ad7d0ca20a105a7f66d36d",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt3-grass-armor",
+      "shadowed": "cards/equip-tt3-grass-armor.webp",
+      "override": "cards/studio-expanded/tt3-grass-armor.webp",
+      "bytes": 139890,
+      "thumbBytes": 18848,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "equipCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/equip-tt3-grass-armor.webp",
+        "exists": true,
+        "bytes": 139890,
+        "sha256": "cbc2f31e13294e5a2b4d89b60ae0b739975ea9290692918a1dad0379090f6f2a",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 139890,
+            "sha256": "cbc2f31e13294e5a2b4d89b60ae0b739975ea9290692918a1dad0379090f6f2a",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 139890,
+            "sha256": "cbc2f31e13294e5a2b4d89b60ae0b739975ea9290692918a1dad0379090f6f2a",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/equip-tt3-grass-armor.webp",
+        "exists": true,
+        "bytes": 18848,
+        "sha256": "c251f684b99ead2d88541546d9a9090a88a155afdcd256f84ca63035c985fa62",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 18848,
+            "sha256": "c251f684b99ead2d88541546d9a9090a88a155afdcd256f84ca63035c985fa62",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 18848,
+            "sha256": "c251f684b99ead2d88541546d9a9090a88a155afdcd256f84ca63035c985fa62",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/studio-expanded/tt3-grass-armor.webp",
+        "exists": true,
+        "bytes": 121276,
+        "sha256": "27e22fb7887aeb11ab26d5d4f94a2b6707930c0722847276178efa1fb0b0058b",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 121276,
+            "sha256": "27e22fb7887aeb11ab26d5d4f94a2b6707930c0722847276178efa1fb0b0058b",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 121276,
+            "sha256": "27e22fb7887aeb11ab26d5d4f94a2b6707930c0722847276178efa1fb0b0058b",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/studio-expanded/tt3-grass-armor.webp",
+        "exists": true,
+        "bytes": 19430,
+        "sha256": "5d68144089244b6108517692d571732b69f98cf07eee383599d3191ac04bf435",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 19430,
+            "sha256": "5d68144089244b6108517692d571732b69f98cf07eee383599d3191ac04bf435",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 19430,
+            "sha256": "5d68144089244b6108517692d571732b69f98cf07eee383599d3191ac04bf435",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt3-blooddrinker",
+      "shadowed": "cards/equip-tt3-blooddrinker.webp",
+      "override": "cards/studio-expanded/tt3-blooddrinker.webp",
+      "bytes": 58146,
+      "thumbBytes": 8334,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "equipCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/equip-tt3-blooddrinker.webp",
+        "exists": true,
+        "bytes": 58146,
+        "sha256": "f9e0a1d48c1eea1c40dbfa10fec8d3ffab8522d4e8a0b8aa27162aa82055c126",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 58146,
+            "sha256": "f9e0a1d48c1eea1c40dbfa10fec8d3ffab8522d4e8a0b8aa27162aa82055c126",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 58146,
+            "sha256": "f9e0a1d48c1eea1c40dbfa10fec8d3ffab8522d4e8a0b8aa27162aa82055c126",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/equip-tt3-blooddrinker.webp",
+        "exists": true,
+        "bytes": 8334,
+        "sha256": "8875ed3d5f7433e8ae2bb8d0e2fd0e8d88b1db2b752dd844a9deb67df402e776",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 8334,
+            "sha256": "8875ed3d5f7433e8ae2bb8d0e2fd0e8d88b1db2b752dd844a9deb67df402e776",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 8334,
+            "sha256": "8875ed3d5f7433e8ae2bb8d0e2fd0e8d88b1db2b752dd844a9deb67df402e776",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/studio-expanded/tt3-blooddrinker.webp",
+        "exists": true,
+        "bytes": 51392,
+        "sha256": "50dceb69e191b96f901c46adb5745f330e936932eea62de52e69867e231c6c40",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 51392,
+            "sha256": "50dceb69e191b96f901c46adb5745f330e936932eea62de52e69867e231c6c40",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 51392,
+            "sha256": "50dceb69e191b96f901c46adb5745f330e936932eea62de52e69867e231c6c40",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/studio-expanded/tt3-blooddrinker.webp",
+        "exists": true,
+        "bytes": 8474,
+        "sha256": "ea78615077eb7069d0f0da778781a730fa5832a2f69df0325de9f779b35a75a0",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 8474,
+            "sha256": "ea78615077eb7069d0f0da778781a730fa5832a2f69df0325de9f779b35a75a0",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 8474,
+            "sha256": "ea78615077eb7069d0f0da778781a730fa5832a2f69df0325de9f779b35a75a0",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt8-demonslay",
+      "shadowed": "cards/equip-tt8-demonslay.webp",
+      "override": "cards/studio-expanded/tt8-demonslay.webp",
+      "bytes": 18100,
+      "thumbBytes": 3630,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "equipCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/equip-tt8-demonslay.webp",
+        "exists": true,
+        "bytes": 18100,
+        "sha256": "2e23c289d99acf110ba152b58d2d136bafeee0c7f5bc1613c6475d9b35c3d64e",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 18100,
+            "sha256": "2e23c289d99acf110ba152b58d2d136bafeee0c7f5bc1613c6475d9b35c3d64e",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 18100,
+            "sha256": "2e23c289d99acf110ba152b58d2d136bafeee0c7f5bc1613c6475d9b35c3d64e",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/equip-tt8-demonslay.webp",
+        "exists": true,
+        "bytes": 3630,
+        "sha256": "d89a450f3bbfa5e0c0c03ae9fb82deb892cc5e8b457a96bca115c910d88ab629",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 3630,
+            "sha256": "d89a450f3bbfa5e0c0c03ae9fb82deb892cc5e8b457a96bca115c910d88ab629",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 3630,
+            "sha256": "d89a450f3bbfa5e0c0c03ae9fb82deb892cc5e8b457a96bca115c910d88ab629",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/studio-expanded/tt8-demonslay.webp",
+        "exists": true,
+        "bytes": 45978,
+        "sha256": "39c364128dfa712d0131e095666d0aa2d76a02b1fe025c99a75f6fbed7d039c4",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 45978,
+            "sha256": "39c364128dfa712d0131e095666d0aa2d76a02b1fe025c99a75f6fbed7d039c4",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 45978,
+            "sha256": "39c364128dfa712d0131e095666d0aa2d76a02b1fe025c99a75f6fbed7d039c4",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/studio-expanded/tt8-demonslay.webp",
+        "exists": true,
+        "bytes": 5222,
+        "sha256": "d14024ad84c604cea745c2311745193791c1808ad6068425f93124e02a460821",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 5222,
+            "sha256": "d14024ad84c604cea745c2311745193791c1808ad6068425f93124e02a460821",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 5222,
+            "sha256": "d14024ad84c604cea745c2311745193791c1808ad6068425f93124e02a460821",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt8-archdemon",
+      "shadowed": "cards/equip-tt8-archdemon.webp",
+      "override": "cards/studio-expanded/tt8-archdemon.webp",
+      "bytes": 16904,
+      "thumbBytes": 3170,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "equipCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/equip-tt8-archdemon.webp",
+        "exists": true,
+        "bytes": 16904,
+        "sha256": "b3cb93997a286dc377716e4fa8a68b2114719131ab899a9167663e90202e93bd",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 16904,
+            "sha256": "b3cb93997a286dc377716e4fa8a68b2114719131ab899a9167663e90202e93bd",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 16904,
+            "sha256": "b3cb93997a286dc377716e4fa8a68b2114719131ab899a9167663e90202e93bd",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/equip-tt8-archdemon.webp",
+        "exists": true,
+        "bytes": 3170,
+        "sha256": "d16adc298449ad2657837d47ae295124e90e71a17c1350ef46cbb44f9b32d2bf",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 3170,
+            "sha256": "d16adc298449ad2657837d47ae295124e90e71a17c1350ef46cbb44f9b32d2bf",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 3170,
+            "sha256": "d16adc298449ad2657837d47ae295124e90e71a17c1350ef46cbb44f9b32d2bf",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/studio-expanded/tt8-archdemon.webp",
+        "exists": true,
+        "bytes": 42988,
+        "sha256": "93160ef3ee0dc67e4efea9f2cd38ab144644d4664781ca71e5cc63ba0091ac65",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 42988,
+            "sha256": "93160ef3ee0dc67e4efea9f2cd38ab144644d4664781ca71e5cc63ba0091ac65",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 42988,
+            "sha256": "93160ef3ee0dc67e4efea9f2cd38ab144644d4664781ca71e5cc63ba0091ac65",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/studio-expanded/tt8-archdemon.webp",
+        "exists": true,
+        "bytes": 4464,
+        "sha256": "29d4d76e66b366dc4718a55c406d2011273a8bfdef969a6315c792fe3db31e90",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 4464,
+            "sha256": "29d4d76e66b366dc4718a55c406d2011273a8bfdef969a6315c792fe3db31e90",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 4464,
+            "sha256": "29d4d76e66b366dc4718a55c406d2011273a8bfdef969a6315c792fe3db31e90",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt8-heavensword",
+      "shadowed": "cards/equip-tt8-heavensword.webp",
+      "override": "cards/studio-expanded/tt8-heavensword.webp",
+      "bytes": 53908,
+      "thumbBytes": 12068,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "equipCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/equip-tt8-heavensword.webp",
+        "exists": true,
+        "bytes": 53908,
+        "sha256": "61539f6a00d221399f3632b009145c8e367b91049abead5b374c47fba2329648",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 53908,
+            "sha256": "61539f6a00d221399f3632b009145c8e367b91049abead5b374c47fba2329648",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 53908,
+            "sha256": "61539f6a00d221399f3632b009145c8e367b91049abead5b374c47fba2329648",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/equip-tt8-heavensword.webp",
+        "exists": true,
+        "bytes": 12068,
+        "sha256": "0ea725b5cc62e4a9ba8b8da401949492d3d3650b6bca9342a3965dd7b5f77faf",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 12068,
+            "sha256": "0ea725b5cc62e4a9ba8b8da401949492d3d3650b6bca9342a3965dd7b5f77faf",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 12068,
+            "sha256": "0ea725b5cc62e4a9ba8b8da401949492d3d3650b6bca9342a3965dd7b5f77faf",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/studio-expanded/tt8-heavensword.webp",
+        "exists": true,
+        "bytes": 111530,
+        "sha256": "3188d4eca3d13b150852e6cfda49638ef0c9440267bf3417bf478c9c90055b60",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 111530,
+            "sha256": "3188d4eca3d13b150852e6cfda49638ef0c9440267bf3417bf478c9c90055b60",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 111530,
+            "sha256": "3188d4eca3d13b150852e6cfda49638ef0c9440267bf3417bf478c9c90055b60",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/studio-expanded/tt8-heavensword.webp",
+        "exists": true,
+        "bytes": 16092,
+        "sha256": "15a29ad6cd4edfc249d2619025b6704c9bc785894c51703f913a03076227a53b",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 16092,
+            "sha256": "15a29ad6cd4edfc249d2619025b6704c9bc785894c51703f913a03076227a53b",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 16092,
+            "sha256": "15a29ad6cd4edfc249d2619025b6704c9bc785894c51703f913a03076227a53b",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt7-arcanescroll",
+      "shadowed": "cards/equip-tt7-arcanescroll.webp",
+      "override": "cards/studio-expanded/tt7-arcanescroll.webp",
+      "bytes": 85072,
+      "thumbBytes": 11656,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "equipCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/equip-tt7-arcanescroll.webp",
+        "exists": true,
+        "bytes": 85072,
+        "sha256": "b3708f83f6aa7e69c5e61e438666544df3c367cadd3f5ce40322d668ee8f8cb7",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 85072,
+            "sha256": "b3708f83f6aa7e69c5e61e438666544df3c367cadd3f5ce40322d668ee8f8cb7",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 85072,
+            "sha256": "b3708f83f6aa7e69c5e61e438666544df3c367cadd3f5ce40322d668ee8f8cb7",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/equip-tt7-arcanescroll.webp",
+        "exists": true,
+        "bytes": 11656,
+        "sha256": "c14366802700684916a9f0d5b12bbfe1e0ac9d6014c2a936608f9be98c52a712",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 11656,
+            "sha256": "c14366802700684916a9f0d5b12bbfe1e0ac9d6014c2a936608f9be98c52a712",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 11656,
+            "sha256": "c14366802700684916a9f0d5b12bbfe1e0ac9d6014c2a936608f9be98c52a712",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/studio-expanded/tt7-arcanescroll.webp",
+        "exists": true,
+        "bytes": 70130,
+        "sha256": "5c3c306f51c851012b1adb3c8900a252dfbf48d714fab5a8f667f7ede3d91320",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 70130,
+            "sha256": "5c3c306f51c851012b1adb3c8900a252dfbf48d714fab5a8f667f7ede3d91320",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 70130,
+            "sha256": "5c3c306f51c851012b1adb3c8900a252dfbf48d714fab5a8f667f7ede3d91320",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/studio-expanded/tt7-arcanescroll.webp",
+        "exists": true,
+        "bytes": 9996,
+        "sha256": "460537734eb2be3c285f3f0410ab9e4c3c19ea74523b79a9e5d81d4ab8b19613",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 9996,
+            "sha256": "460537734eb2be3c285f3f0410ab9e4c3c19ea74523b79a9e5d81d4ab8b19613",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 9996,
+            "sha256": "460537734eb2be3c285f3f0410ab9e4c3c19ea74523b79a9e5d81d4ab8b19613",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    },
+    {
+      "cardId": "tt12-raygun",
+      "shadowed": "cards/equip-tt12-raygun.webp",
+      "override": "cards/studio-expanded/tt12-raygun.webp",
+      "bytes": 59680,
+      "thumbBytes": 8010,
+      "literalReferenceFiles": [],
+      "decision": "primary-30",
+      "mappingOverrideMatches": true,
+      "shadowSelectorSet": "equipCardArt",
+      "shadowSelectorContainsCard": true,
+      "original": {
+        "path": "cards/equip-tt12-raygun.webp",
+        "exists": true,
+        "bytes": 59680,
+        "sha256": "2356c8d0e454dc7d42e2cc17016577ce8cad0deb3364e8ecd79a5cb0de54dd93",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 59680,
+            "sha256": "2356c8d0e454dc7d42e2cc17016577ce8cad0deb3364e8ecd79a5cb0de54dd93",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 59680,
+            "sha256": "2356c8d0e454dc7d42e2cc17016577ce8cad0deb3364e8ecd79a5cb0de54dd93",
+            "matchesSource": true
+          }
+        ]
+      },
+      "thumbnail": {
+        "path": "thumbs/cards/equip-tt12-raygun.webp",
+        "exists": true,
+        "bytes": 8010,
+        "sha256": "4237ad7c9919899ec992e16789c30783dfa861287f7eb36bdb1d53f0e3f68d3f",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 8010,
+            "sha256": "4237ad7c9919899ec992e16789c30783dfa861287f7eb36bdb1d53f0e3f68d3f",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 8010,
+            "sha256": "4237ad7c9919899ec992e16789c30783dfa861287f7eb36bdb1d53f0e3f68d3f",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacement": {
+        "path": "cards/studio-expanded/tt12-raygun.webp",
+        "exists": true,
+        "bytes": 68496,
+        "sha256": "ecf6548fcee58020d1362fa18857a2578777c20792c20b01d264118acbab3167",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 68496,
+            "sha256": "ecf6548fcee58020d1362fa18857a2578777c20792c20b01d264118acbab3167",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 68496,
+            "sha256": "ecf6548fcee58020d1362fa18857a2578777c20792c20b01d264118acbab3167",
+            "matchesSource": true
+          }
+        ]
+      },
+      "replacementThumbnail": {
+        "path": "thumbs/cards/studio-expanded/tt12-raygun.webp",
+        "exists": true,
+        "bytes": 9620,
+        "sha256": "d5451bbcb5c0a29abe3b8825baa1f1b26d479f95be6f9fa1d8550d89bec18a95",
+        "published": [
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r2-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 9620,
+            "sha256": "d5451bbcb5c0a29abe3b8825baa1f1b26d479f95be6f9fa1d8550d89bec18a95",
+            "matchesSource": true
+          },
+          {
+            "manifest": "/workspace/shared/cloud-iteration-verification-r3-20261016/build-output-manifest.json",
+            "present": true,
+            "bytes": 9620,
+            "sha256": "d5451bbcb5c0a29abe3b8825baa1f1b26d479f95be6f9fa1d8550d89bec18a95",
+            "matchesSource": true
+          }
+        ]
+      },
+      "runtimeStemReferences": []
+    }
+  ]
+}

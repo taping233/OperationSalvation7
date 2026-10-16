@@ -11,7 +11,7 @@ vi.mock('../game/src/run/game.run.scenes.js', () => ({
   preloadCellScene: vi.fn(), buildEncounter: vi.fn(), cancelLegacyChainMove: vi.fn(), consumeCurrentCell: vi.fn(),
   enterNode: vi.fn(), grantEventCard: vi.fn(), nodeShell: vi.fn(), openBattleCell: vi.fn(),
   openBlankSafePage: () => { harness.safePage(); harness.game.state = 'modal'; },
-  openChestsOnCell: vi.fn(), openPickupPage: vi.fn(), openPocketRestore: vi.fn(), openShop: vi.fn(),
+  openChestsOnCell: vi.fn(), openFixedRewardsOnCell: vi.fn(), openPickupPage: vi.fn(), openPocketRestore: vi.fn(), openShop: vi.fn(),
 }));
 vi.mock('../game/src/hub/game.cardslib.js', () => ({ _set_cardPageOpen: vi.fn() }));
 vi.mock('../game/src/run/game.run.data.js', () => ({ EVENT_SCENE_META: {} }));

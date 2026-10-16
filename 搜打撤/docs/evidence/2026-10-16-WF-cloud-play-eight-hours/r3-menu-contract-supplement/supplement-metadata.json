@@ -1,0 +1,28 @@
+{
+  "approvedEvidencePrefix": "搜打撤/docs/evidence/2026-10-16-menu-pages-lazy/r3-integration",
+  "approvedReplacementFiles": [
+    "搜打撤/tests/agent-console-jump.test.js",
+    "搜打撤/tests/selftest-paths.test.js",
+    "搜打撤/game/selftest.js"
+  ],
+  "copiedEvidenceFileCount": 8,
+  "createdAt": "2026-10-15T21:04:46.577451+00:00",
+  "dependencyManifestSha256": "a289651fefbddca18476c65ada7fdef5d4c739dac9bfc08c971d237a04d2eff6",
+  "gitIndexRawSha256AtSupplementStart": "b4d7b31077f0c5695c5b8d2060293488c5789d04e3bcd312652ba426c5166cf7",
+  "gitInitialManifestSha256": "3ad857e42e007b8d55fad440c83d4c5f9bc5acc76baeb4d1a45cbf7fa42a9c04",
+  "originalR3SourceManifestSha256": "bf2e4dffb52d302525344f38dc61c1b325e35923e0ec8234c499411b0a8e96d5",
+  "productionStateBeforeAfterEqual": true,
+  "productionStateManifestSha256": "8a3431844719b172008352015b10c66d58c25d26290fe328b9ae59b3fca939c4",
+  "reusedBuildResult": {
+    "budgetFailuresRetained": 4,
+    "originalArtifactManifestSha256": "0754a018fa4724fe193cbc03dfd43dedefc850d4f1b3fe3e354c34b28c045526",
+    "originalCommand": "npm run build",
+    "originalExitCode": 1,
+    "originalLog": "../logs/build.log",
+    "preservedArtifactDirectory": "/workspace/shared/cloud-iteration-verification-r3-20261016/menu-contract-supplement/preserved-r3-build-output",
+    "reason": "Only two test files and standalone selftest CLI changed; materialized production state is byte-identical before/after, and no new production inputs are copied"
+  },
+  "sourceOtherProductionChanges": [],
+  "sourceWritten": false,
+  "supplementSourceManifestSha256": "2e58810b934d08f450a9328eaf5e8e7941b961b5f0e996bc8654ccc0e5fcf950"
+}

@@ -1,0 +1,26 @@
+--- game/css/expedition-rewards.css (received baseline)
++++ game/css/expedition-rewards.css (restore UI)
+@@ -332,3 +332,23 @@
+   body:not(.reduce-motion) #overlay .reward-replica:not(.no-anim) .reward-unit { animation:rewardUnitEnter .24s ease-out both; }
+   body:not(.reduce-motion) #overlay .reward-replica .reward-card { transition:transform .16s ease,opacity .16s ease; }
+ }
++
++/* Shared consumed-card restoration uses the expedition decision shell, not a narrow node rail. */
++body #overlay .card.discover:has(.pocket-restore) { box-sizing:border-box; width:min(1480px,94%); height:94%; min-height:0; max-width:none; max-height:94%; }
++body #overlay .card.discover:has(.pocket-restore) > #ovBody { min-width:0; }
++body #overlay .pocket-restore { height:100%; max-height:none; }
++body #overlay .pocket-restore .battle-decision-head h3 { font-size:34px; }
++body #overlay .pocket-restore .battle-decision-head > span { font-size:22px; }
++body #overlay .pocket-restore .battle-decision-summary .ov-note { margin:0; color:#d1e1e5; font-size:var(--card-copy-size,24px); line-height:1.55; }
++body #overlay .pocket-restore .battle-decision-summary .ov-note + .ov-note { margin-top:8px; font-size:22px; }
++body #overlay .pocket-restore .pocket-restore-content { flex:1 1 auto; scrollbar-gutter:stable; }
++body #overlay .pocket-restore .pocket-restore-content .fire-restore-hand { display:grid; grid-template-columns:repeat(5,minmax(0,240px)); justify-content:center; align-content:start; align-items:start; gap:28px; padding:20px 12px; max-height:none; overflow:visible; }
++body #overlay .pocket-restore .fire-restore-card { position:relative; display:block; width:100%; min-width:0; margin:0; padding:0; color:inherit; font:inherit; text-align:center; cursor:pointer; }
++body #overlay .pocket-restore .pocket-restore-art { display:block; pointer-events:none; }
++body #overlay .pocket-restore .pocket-restore-content .pocket-restore-art .hs-card { width:100%; margin:0; font-size:24px; }
++body #overlay .pocket-restore .pocket-restore-caption { display:flex; flex-direction:column; gap:6px; padding:12px 8px; background:#1b3441; color:#e4edf0; font-size:22px; line-height:1.4; }
++body #overlay .pocket-restore .pocket-restore-caption b { font-weight:600; overflow-wrap:anywhere; }
++body #overlay .pocket-restore .pocket-restore-caption > span { color:#f0da9c; }
++body #overlay .pocket-restore .fire-restore-card:focus-visible { outline:3px dashed #b7dcd0; outline-offset:6px; }
++body #overlay .pocket-restore .ov-empty { grid-column:1/-1; margin:0; padding:24px 0; color:#b9cbd4; font-size:22px; line-height:1.6; text-align:left; }
++body #overlay .pocket-restore .battle-decision-actions .ov-btn { min-height:64px; min-width:240px; font-size:24px; }

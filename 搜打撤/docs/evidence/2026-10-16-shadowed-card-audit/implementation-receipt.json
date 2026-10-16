@@ -1,0 +1,62 @@
+{
+  "status": "implemented-uncommitted-awaiting-parent-build",
+  "files": [
+    {
+      "path": "scripts/runtime-asset-redundancy-review.mjs",
+      "added": 36,
+      "removed": 0,
+      "sha256": "ac7ac392eb5cf6995ec4cfcb3b03b0c867313e5b725cc9765a2a78cf24593da4"
+    },
+    {
+      "path": "tests/runtime-asset-redundancy.test.js",
+      "added": 65,
+      "removed": 4,
+      "sha256": "d8fb6f33960fb75d849c84ef5f34b9c104a2480e40f0e6d9aebea7f8845f7ef9"
+    },
+    {
+      "path": "tests/runtime-asset-redundancy-plugin.test.js",
+      "added": 39,
+      "removed": 1,
+      "sha256": "333c26f59033f8118bdde5b1480e0043b3a27f450d7591843159fe39de8dc6a9"
+    },
+    {
+      "path": "tests/shadowed-card-art.test.js",
+      "added": 75,
+      "removed": 0,
+      "sha256": "6d6e31acb1809221bf76c60b88d1dccda94d8da79976d4fa22ab994ed7f2a75b"
+    }
+  ],
+  "proposedFileCount": 30,
+  "confirmedImageBytes": 1291352,
+  "sourceAssetChecks": {
+    "count": 76,
+    "allUnchanged": true
+  },
+  "untouchedAuditFiles": {
+    "game/src/core/art.js": true,
+    "game/src/core/data-loader.js": true,
+    "game/data/art-mapping.json": true,
+    "game/src/cards/cards.view.js": true,
+    "game/src/core/asset-url.js": true,
+    "game/css/card-v3.css": true,
+    "game/battle-redesign-demo.html": true,
+    "vite.config.js": true,
+    "scripts/runtime-asset-redundancy.mjs": true,
+    "scripts/runtime-asset-publication.mjs": true,
+    "game/src/generated/art-manifest.js": true,
+    "game/src/generated/thumb-manifest.js": true
+  },
+  "tests": {
+    "targetedVitest": "7 files / 68 passed",
+    "focusedEslint": "passed",
+    "noOfficialBuild": true,
+    "noBrowser": true
+  },
+  "newCategory": "shadowed-card-art",
+  "expectedTotal": 195,
+  "unverified": [
+    "Actual built output and generated manifests",
+    "Budget rerun",
+    "Browser/network image checks"
+  ]
+}

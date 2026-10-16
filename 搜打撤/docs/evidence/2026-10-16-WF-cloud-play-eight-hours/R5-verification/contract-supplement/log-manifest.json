@@ -1,0 +1,32 @@
+[
+  {
+    "bytes": 814,
+    "path": "logs/lint.log",
+    "sha256": "58da11349c4d197b8a127a6db0c59ad47af81c010f399d9176d9707273231948"
+  },
+  {
+    "bytes": 0,
+    "path": "logs/patch-apply.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "bytes": 0,
+    "path": "logs/patch-check.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "bytes": 354,
+    "path": "logs/selftest-lint.log",
+    "sha256": "6abca9135ce4767ea8708cba17043e7ad67ab44eea393c3e14cf5ff954ebdf41"
+  },
+  {
+    "bytes": 1523,
+    "path": "logs/selftest.log",
+    "sha256": "b118a2d0baf983d71aa33d1bc44c58d367080fbee33a5d251b00f01bc35ed905"
+  },
+  {
+    "bytes": 198243,
+    "path": "logs/test.log",
+    "sha256": "9782161182b632a7a1054575f71f66eebfb15fecf7e09122e03c7dbb310c0106"
+  }
+]

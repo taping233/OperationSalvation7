@@ -235,14 +235,42 @@ async function auditOne(card) {
     return;
   }
   // kind === 'hand'
-  const game = makeGame([card, ...fill]);
+  const imitate = card.id === 'tt7-imitate' || card.rules?.battle?.hosted?.includes('imitate');
+  const precursor = imitate ? [C.all().find(entry => entry.id === 'starter-attack')] : [];
+  const game = makeGame([card, ...fill, ...precursor]);
   try {
     BattleSession.start(game, [foeDef()], { isBoss: false, name: '审计' });
     const uid = game.ownedCards[0].uid;
     // 受缚之残影（2026-09-16 定版重做）：开局即破封化形，原卡按设计离场（abyss-sovereign.test.js 实打覆盖）
     if (card.id === 'tt8-hero-sealer') { endBattle(game); return; }
     if (!snap().hand.includes(uid)) { record(card, 'A-手牌', '战斗卡未进手牌'); endBattle(game); return; }
-    const r = await playInBattle(game, uid, card);
+    let effectiveCard = card;
+    if (imitate) {
+      const before = snap(), reason = unplayableReasonFor(card, 'normal');
+      expect(reason).toBe('先打出一张武术牌，使本牌变形');
+      expect(viewApi.unplayableReason(card)).toBe(reason);
+      expect(viewApi.getPreviewContext(uid, 0).illegalReason).toContain(reason);
+      BattleSession.commands.playCard(uid, sideFor(card));
+      const blocked = await drain();
+      expect(blocked.energy).toBe(before.energy);
+      expect(blocked.hand).toEqual(before.hand);
+      expect(blocked.discard).toEqual(before.discard);
+      expect(blocked.foes[0].hp).toBe(before.foes[0].hp);
+      const fuel = game.ownedCards.find(entry => entry.card.id === 'starter-attack');
+      expect(blocked.hand).toContain(fuel.uid);
+      await playInBattle(game, fuel.uid, fuel.card);
+      effectiveCard = viewApi.findCard(uid).card;
+      expect(effectiveCard).toMatchObject({ id:'starter-attack', cost:1 });
+      expect(viewApi.unplayableReason(effectiveCard)).toBeNull();
+    }
+    const ready = snap();
+    const r = await playInBattle(game, uid, effectiveCard);
+    if (imitate) {
+      expect(r.end.energy).toBe(ready.energy - 1);
+      expect(r.end.foes[0].hp).toBeLessThan(ready.foes[0].hp);
+      expect(r.end.hand).not.toContain(uid);
+      expect(game.ownedCards[0].card.id).toBe(card.id);
+    }
     if (r.after === r.before) record(card, 'A-手牌', isConditionalCard(card) ? ZERO_CONDITIONAL : ZERO_UNCONDITIONAL);
     if (r.end.busy || r.end.actionQueueLength > 0) record(card, 'A-手牌', '结算悬挂（busy/队列未清）');
     if (game.lastBattleEnd && game.lastBattleEnd.win === false) record(card, 'A-手牌', '打出后意外败北');

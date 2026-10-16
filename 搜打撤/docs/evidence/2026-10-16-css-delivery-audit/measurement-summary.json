@@ -1,0 +1,645 @@
+{
+  "initialCssCount": 74,
+  "htmlCssCount": 40,
+  "artifactGzip": 200290,
+  "initialArtifactGzip": 161030,
+  "cssBudget": {
+    "bytes": 139264,
+    "scope": "sum gzip of all emitted .css, including async and new URL CSS",
+    "gap": 61026
+  },
+  "fingerprintMismatches": [
+    "game/css/battle-stage.css"
+  ],
+  "artifactMatches": [
+    {
+      "file": "game/css/base.css",
+      "matched": true,
+      "start": 0
+    },
+    {
+      "file": "game/css/cards.css",
+      "matched": false
+    },
+    {
+      "file": "game/css/overlays.css",
+      "matched": false
+    },
+    {
+      "file": "game/css/hub.css",
+      "matched": true,
+      "start": 62825
+    },
+    {
+      "file": "game/css/battle.css",
+      "matched": true,
+      "start": 79574
+    },
+    {
+      "file": "game/css/scenes.css",
+      "matched": false
+    },
+    {
+      "file": "game/css/lab-ending.css",
+      "matched": true,
+      "start": 134237
+    },
+    {
+      "file": "game/css/winter.css",
+      "matched": true,
+      "start": 138298
+    },
+    {
+      "file": "game/css/expedition.css",
+      "matched": true,
+      "start": 214598
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "matched": true,
+      "start": 229969
+    },
+    {
+      "file": "game/css/map-edge-light.css",
+      "matched": true,
+      "start": 236888
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "matched": true,
+      "start": 239318
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "matched": true,
+      "start": 243535
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "matched": true,
+      "start": 267204
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "matched": true,
+      "start": 296965
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "matched": true,
+      "start": 306516
+    },
+    {
+      "file": "game/css/card-v3.css",
+      "matched": true,
+      "start": 310163
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "matched": true,
+      "start": 311065
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "matched": true,
+      "start": 333583
+    },
+    {
+      "file": "game/css/ui-scale.css",
+      "matched": true,
+      "start": 350095
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "matched": true,
+      "start": 365192
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "matched": true,
+      "start": 378389
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "matched": true,
+      "start": 395341
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "matched": true,
+      "start": 403761
+    },
+    {
+      "file": "game/css/page-cardforge.css",
+      "matched": true,
+      "start": 412568
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "matched": true,
+      "start": 420057
+    },
+    {
+      "file": "game/css/feedback-oct12.css",
+      "matched": true,
+      "start": 442176
+    },
+    {
+      "file": "game/css/roster-departure-v2.css",
+      "matched": true,
+      "start": 448622
+    },
+    {
+      "file": "game/css/pocket-strip.css",
+      "matched": true,
+      "start": 459594
+    },
+    {
+      "file": "game/css/experience-loot.css",
+      "matched": true,
+      "start": 461415
+    },
+    {
+      "file": "game/css/page-events.css",
+      "matched": true,
+      "start": 463215
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "matched": true,
+      "start": 469328
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "matched": true,
+      "start": 485547
+    },
+    {
+      "file": "game/css/character-idle.css",
+      "matched": true,
+      "start": 486570
+    },
+    {
+      "file": "game/css/page-transitions.css",
+      "matched": true,
+      "start": 487814
+    },
+    {
+      "file": "game/css/ak-skin.css",
+      "matched": true,
+      "start": 489285
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "matched": true,
+      "start": 503675
+    },
+    {
+      "file": "game/css/base-camp-compact.css",
+      "matched": true,
+      "start": 0
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "matched": true,
+      "start": 562126
+    },
+    {
+      "file": "game/css/battle-stage.css",
+      "matched": false
+    },
+    {
+      "file": "game/css/card-description-links.css",
+      "matched": true,
+      "start": 630411
+    },
+    {
+      "file": "game/css/combat-feedback.css",
+      "matched": true,
+      "start": 629386
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "matched": true,
+      "start": 707563
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "matched": true,
+      "start": 863202
+    },
+    {
+      "file": "game/css/departure-selected.css",
+      "matched": true,
+      "start": 874014
+    },
+    {
+      "file": "game/css/roster-reference.css",
+      "matched": true,
+      "start": 887911
+    },
+    {
+      "file": "game/css/preparation.css",
+      "matched": true,
+      "start": 667295
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "matched": true,
+      "start": 672159
+    },
+    {
+      "file": "game/css/card-browser.css",
+      "matched": true,
+      "start": 713161
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "matched": true,
+      "start": 714183
+    },
+    {
+      "file": "game/css/base-reward-feedback.css",
+      "matched": true,
+      "start": 718774
+    },
+    {
+      "file": "game/css/base-collection-v4.css",
+      "matched": true,
+      "start": 720211
+    },
+    {
+      "file": "game/css/base-courtyard-v3.css",
+      "matched": true,
+      "start": 723237
+    },
+    {
+      "file": "game/css/base-panel-layout.css",
+      "matched": true,
+      "start": 0
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "matched": true,
+      "start": 729579
+    },
+    {
+      "file": "game/css/base-framework-v7.css",
+      "matched": true,
+      "start": 744730
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "matched": true,
+      "start": 752408
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "matched": true,
+      "start": 783419
+    },
+    {
+      "file": "game/css/base-logistics-trade-v12.css",
+      "matched": true,
+      "start": 812679
+    },
+    {
+      "file": "game/css/base-archive-facilities-v12.css",
+      "matched": true,
+      "start": 835414
+    },
+    {
+      "file": "game/css/base-home-v7.css",
+      "matched": true,
+      "start": 865996
+    },
+    {
+      "file": "game/css/base-shop-v3.css",
+      "matched": true,
+      "start": 891107
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "matched": true,
+      "start": 897307
+    },
+    {
+      "file": "game/css/chest-opening.css",
+      "matched": true,
+      "start": 631736
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "matched": true,
+      "start": 640712
+    },
+    {
+      "file": "game/css/expedition-transitions.css",
+      "matched": true,
+      "start": 663922
+    },
+    {
+      "file": "game/css/archive-motion.css",
+      "matched": true,
+      "start": 612482
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "matched": true,
+      "start": 599121
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "matched": true,
+      "start": 637499
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "matched": true,
+      "start": 624256
+    },
+    {
+      "file": "game/css/home-ui-tokens.css",
+      "matched": true,
+      "start": 617315
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "matched": true,
+      "start": 635713
+    },
+    {
+      "file": "game/css/page-visual-ready.css",
+      "matched": true,
+      "start": 611680
+    },
+    {
+      "file": "game/css/title-credits.css",
+      "matched": true,
+      "start": 617759
+    }
+  ],
+  "groups": {
+    "hubFacadeExclusive": {
+      "files": 20,
+      "unmatched": [],
+      "sourceGzipReduction": 32263,
+      "splitTotalDelta": 745,
+      "artifactGzipReduction": 32108,
+      "artifactRemainingGzip": 128922,
+      "slotCount": 2,
+      "artifactSplitTotalDelta": 1826,
+      "orderedDelivery": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 667295,
+            "bytes": 667497,
+            "gzip": 128124,
+            "sha256": "168658501fad04749179fc1c0af647352c9392761113953ce19e736ccd2a717f"
+          },
+          {
+            "start": 714183,
+            "end": 718774,
+            "bytes": 4592,
+            "gzip": 1258,
+            "sha256": "2a0d4976f6514c00911052e8188ccc0cd664d5d23988a55c22c376c3c7e39265"
+          }
+        ],
+        "initialGzip": 129382,
+        "initialGzipReduction": 31648,
+        "deferredGzip": 33934,
+        "totalGzipDelta": 2286,
+        "exactIntervalReconstruction": true
+      }
+    },
+    "hubFacadeIncludingShared": {
+      "files": 21,
+      "unmatched": [],
+      "sourceGzipReduction": 33010,
+      "splitTotalDelta": 794,
+      "artifactGzipReduction": 32906,
+      "artifactRemainingGzip": 128124,
+      "slotCount": 1,
+      "artifactSplitTotalDelta": 878,
+      "orderedDelivery": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 667295,
+            "bytes": 667497,
+            "gzip": 128124,
+            "sha256": "168658501fad04749179fc1c0af647352c9392761113953ce19e736ccd2a717f"
+          }
+        ],
+        "initialGzip": 128124,
+        "initialGzipReduction": 32906,
+        "deferredGzip": 33784,
+        "totalGzipDelta": 878,
+        "exactIntervalReconstruction": true
+      }
+    },
+    "htmlBaseCamp": {
+      "files": 2,
+      "unmatched": [],
+      "sourceGzipReduction": 9402,
+      "splitTotalDelta": 586,
+      "artifactGzipReduction": 9377,
+      "artifactRemainingGzip": 151653,
+      "slotCount": 1,
+      "artifactSplitTotalDelta": 604,
+      "orderedDelivery": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 503675,
+            "bytes": 503798,
+            "gzip": 100295,
+            "sha256": "9b25b6a4d472791b2656c21f2ac76491a36bab9f32664be8bcdf3821ea6e2203"
+          },
+          {
+            "start": 562126,
+            "end": 913583,
+            "bytes": 351528,
+            "gzip": 52132,
+            "sha256": "895bf64a1061d52603fcf20850e286799b1ae6285b4f74c1073ed5d8adf1991b"
+          }
+        ],
+        "initialGzip": 152427,
+        "initialGzipReduction": 8603,
+        "deferredGzip": 9981,
+        "totalGzipDelta": 1378,
+        "exactIntervalReconstruction": true
+      }
+    },
+    "htmlMenuPages": {
+      "files": 4,
+      "unmatched": [],
+      "sourceGzipReduction": 8483,
+      "splitTotalDelta": 1043,
+      "artifactGzipReduction": 8476,
+      "artifactRemainingGzip": 152554,
+      "slotCount": 1,
+      "artifactSplitTotalDelta": 1050,
+      "orderedDelivery": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 365192,
+            "bytes": 365277,
+            "gzip": 75152,
+            "sha256": "9296ca8decf3f9762e8962e9512ae08e47dba80b9314ac6a76e404840ec0d6dd"
+          },
+          {
+            "start": 412568,
+            "end": 913583,
+            "bytes": 501132,
+            "gzip": 78136,
+            "sha256": "68cf30a3b34b1f87bd1bad3f9578acc0275f97cd6fec0be83d720087696233bc"
+          }
+        ],
+        "initialGzip": 153288,
+        "initialGzipReduction": 7742,
+        "deferredGzip": 9526,
+        "totalGzipDelta": 1784,
+        "exactIntervalReconstruction": true
+      }
+    },
+    "htmlBattle": {
+      "files": 4,
+      "unmatched": [
+        "game/css/battle-stage.css"
+      ],
+      "sourceGzipReduction": 10624,
+      "splitTotalDelta": 1302,
+      "slotCount": 3,
+      "orderedDelivery": null
+    },
+    "phase1Hub": {
+      "files": 22,
+      "unmatched": [],
+      "sourceGzipReduction": 41659,
+      "splitTotalDelta": 572,
+      "artifactGzipReduction": 41496,
+      "artifactRemainingGzip": 119534,
+      "slotCount": 3,
+      "artifactSplitTotalDelta": 2419,
+      "orderedDelivery": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 503675,
+            "bytes": 503798,
+            "gzip": 100295,
+            "sha256": "9b25b6a4d472791b2656c21f2ac76491a36bab9f32664be8bcdf3821ea6e2203"
+          },
+          {
+            "start": 562126,
+            "end": 667295,
+            "bytes": 105237,
+            "gzip": 19198,
+            "sha256": "e178374ec505ef11d2fd03e48447dd398ece80753e00fea45a60cd467bb36084"
+          },
+          {
+            "start": 714183,
+            "end": 718774,
+            "bytes": 4592,
+            "gzip": 1258,
+            "sha256": "2a0d4976f6514c00911052e8188ccc0cd664d5d23988a55c22c376c3c7e39265"
+          }
+        ],
+        "initialGzip": 120751,
+        "initialGzipReduction": 40279,
+        "deferredGzip": 43915,
+        "totalGzipDelta": 3636,
+        "exactIntervalReconstruction": true
+      }
+    },
+    "recommendedSuffix": {
+      "files": 16,
+      "unmatched": [],
+      "sourceGzipReduction": 24869,
+      "splitTotalDelta": 967,
+      "artifactGzipReduction": 24751,
+      "artifactRemainingGzip": 136279,
+      "slotCount": 1,
+      "artifactSplitTotalDelta": 1072,
+      "orderedDelivery": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 718774,
+            "bytes": 718976,
+            "gzip": 136279,
+            "sha256": "63249862f30221faeab70b8c4faf87ab7760c6534671a398ad5d023576d9e61c"
+          }
+        ],
+        "initialGzip": 136279,
+        "initialGzipReduction": 24751,
+        "deferredGzip": 25823,
+        "totalGzipDelta": 1072,
+        "exactIntervalReconstruction": true
+      }
+    },
+    "extendedHubClass": {
+      "files": 21,
+      "unmatched": [],
+      "sourceGzipReduction": 41424,
+      "splitTotalDelta": 641,
+      "artifactGzipReduction": 41258,
+      "artifactRemainingGzip": 119772,
+      "slotCount": 3,
+      "artifactSplitTotalDelta": 2475,
+      "orderedDelivery": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 503675,
+            "bytes": 503798,
+            "gzip": 100295,
+            "sha256": "9b25b6a4d472791b2656c21f2ac76491a36bab9f32664be8bcdf3821ea6e2203"
+          },
+          {
+            "start": 562126,
+            "end": 667295,
+            "bytes": 105237,
+            "gzip": 19198,
+            "sha256": "e178374ec505ef11d2fd03e48447dd398ece80753e00fea45a60cd467bb36084"
+          },
+          {
+            "start": 713161,
+            "end": 718774,
+            "bytes": 5614,
+            "gzip": 1531,
+            "sha256": "5fe7fbd683b6b4ae430c69a0b70b4c4c984253f64276631d8b566733c7b36c41"
+          }
+        ],
+        "initialGzip": 121024,
+        "initialGzipReduction": 40006,
+        "deferredGzip": 43733,
+        "totalGzipDelta": 3727,
+        "exactIntervalReconstruction": true
+      }
+    },
+    "extendedAll": {
+      "files": 29,
+      "unmatched": [
+        "game/css/battle-stage.css"
+      ],
+      "sourceGzipReduction": 60548,
+      "splitTotalDelta": 1663,
+      "slotCount": 7,
+      "orderedDelivery": null
+    },
+    "phase2HtmlMenuBattle": {
+      "files": 8,
+      "unmatched": [
+        "game/css/battle-stage.css"
+      ],
+      "sourceGzipReduction": 19119,
+      "splitTotalDelta": 1494,
+      "slotCount": 4,
+      "orderedDelivery": null
+    }
+  }
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "path": "collect_build_metrics.mjs",
+    "sha256": "7f5a7da7894ac5b866ac8e249346235598d90752bf066e414ba4659fe5ca41ab"
+  },
+  {
+    "path": "copy_git_metadata.py",
+    "sha256": "a62ef5b9e832cd8049b9d3e1e1a7e236fd621ae704d2f121dfc62ef02abb189b"
+  },
+  {
+    "path": "dependencies.py",
+    "sha256": "64623b23f143fee089e21bef222cec8b9ace61ad5d0761b4ce5fbd40e49e7ce7"
+  },
+  {
+    "path": "diagnose_index.py",
+    "sha256": "e181f0a974386bd729d46db9e4ccf3537513a4821ae07f895e7afc68b30a876b"
+  },
+  {
+    "path": "diagnose_second_full.py",
+    "sha256": "725bc28ccf0cf184ae27b904c057cfe553f7b8311e273605230af90e2d490290"
+  },
+  {
+    "path": "finalize_report.py",
+    "sha256": "86fd427daa6a693962ea95f8190bee3449af804d4ab5c636f2d66f03b5df49eb"
+  },
+  {
+    "path": "inspect_second_full.py",
+    "sha256": "04babd664179ae03d752d04d8e5c52ceceaeb87a7bc4af12d09526049014ae5c"
+  },
+  {
+    "path": "inspect_snapshot.py",
+    "sha256": "d6036a0333a17519c222b0cc28376b41409993170ed121f911fa718272bccbd1"
+  },
+  {
+    "path": "preflight_asset_review.mjs",
+    "sha256": "af6fb2ffa8faf85507083c5c6e426ff01c4d8bbbd9884c6baf7aa2bdfb542003"
+  },
+  {
+    "path": "prepare_checks.py",
+    "sha256": "69e62e3bab268e88a2cd4b98342d4d15aad8b11c68f6c44e9c495acd1e76d9d9"
+  },
+  {
+    "path": "run_auxiliary.py",
+    "sha256": "98a8ca9383a707218d7ca6c54860cf153b7c41a8385c629ed286fa889b3fd40a"
+  },
+  {
+    "path": "run_checks.py",
+    "sha256": "683d19a9a6fd7f540ee0942248720805664ba84f101eefbab9e060177726838a"
+  },
+  {
+    "path": "run_second_full.py",
+    "sha256": "02721faae41be14090c7c245261af7347bfba6695d48dcbc95bb291a01e7939c"
+  },
+  {
+    "path": "snapshot.py",
+    "sha256": "690cf68f8ed8814212ddd2f45b474d187c43edb2108c650abff71862f23726d7"
+  },
+  {
+    "path": "verify_assets.mjs",
+    "sha256": "b83d04c4f45e3c540f444499d31998663ab0f971084005a204cdba9dfa128c83"
+  },
+  {
+    "path": "verify_frozen_inputs.py",
+    "sha256": "3ab1af4d57836748ce0be2f78cfe5a4de9d73b80c9e96009199e1042b0e4c590"
+  }
+]

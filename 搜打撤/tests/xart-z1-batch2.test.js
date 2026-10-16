@@ -11,7 +11,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 const death = readFileSync('game/src/run/game.session.death.js', 'utf8');
 const altar = readFileSync('game/src/run/game.run.altar.js', 'utf8');
 const depart = readFileSync('game/src/hub/game.hub.depart.js', 'utf8');
-const menu = readFileSync('game/src/ui/game.menu.js', 'utf8');
+const menu = readFileSync('game/src/ui/game.menu.pages.js', 'utf8');
 
 let commands;
 beforeAll(async () => {

@@ -1,0 +1,549 @@
+[
+  {
+    "path": "搜打撤/.gitignore",
+    "r6": {
+      "bytes": 210,
+      "mode": 420,
+      "path": "搜打撤/.gitignore",
+      "sha256": "3affe08f58a0100e230fff289327f589188e213e74e6a7acdd5dd53fdc932de1"
+    },
+    "r7": {
+      "bytes": 292,
+      "mode": 420,
+      "path": "搜打撤/.gitignore",
+      "sha256": "5772918209d73d035cb12d9c717a5fa42030c4cc34bb0f800d4e8486b0f64a1e"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/css/expedition-rewards.css",
+    "r6": {
+      "bytes": 35948,
+      "mode": 420,
+      "path": "搜打撤/game/css/expedition-rewards.css",
+      "sha256": "23fe5f15f19f3309036f81760fc9dd042516b0542467b26073821281c71c7800"
+    },
+    "r7": {
+      "bytes": 38295,
+      "mode": 420,
+      "path": "搜打撤/game/css/expedition-rewards.css",
+      "sha256": "c76f0428e2324705c2f7b02d70be30c86e2ea27675535ce6b2125027ae1ed8ba"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/battle/core/battle.core.js",
+    "r6": {
+      "bytes": 22547,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/core/battle.core.js",
+      "sha256": "4ecf1c3a52bbef8436c954f49beb6fe0a5c6e3647a3684f21a43ab7a133558fa"
+    },
+    "r7": {
+      "bytes": 22625,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/core/battle.core.js",
+      "sha256": "823e2c016cfcbc30ca3f0ab9118a1f9589fbc77a1ef2d4ef56675c3d95d8568f"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/battle/core/battle.draw.js",
+    "r6": {
+      "bytes": 9115,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/core/battle.draw.js",
+      "sha256": "583caf9183c2beea83ea73e6a13d60bf659187b44ef852e838a2630ea2827a25"
+    },
+    "r7": {
+      "bytes": 9443,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/core/battle.draw.js",
+      "sha256": "75cf7b5d7180d4b53cc7c3f44df42bc0562f0d830f8e1443940c9f01e91a0638"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/battle/core/battle.enemy-phase.js",
+    "r6": {
+      "bytes": 26556,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/core/battle.enemy-phase.js",
+      "sha256": "e6aac716d875da9110c4e47a614a24dbb6fe2d315a194add6bdcf97c2bff5636"
+    },
+    "r7": {
+      "bytes": 26584,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/core/battle.enemy-phase.js",
+      "sha256": "52da43ac52dc7635733a22596d9932ae34bd914d709f82d0e06f565c8f699001"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/battle/core/battle.engine.js",
+    "r6": {
+      "bytes": 82223,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/core/battle.engine.js",
+      "sha256": "bb99d565fc4027d776e0c3e9fb7aea59cdd727400c522219f018309bc32354cd"
+    },
+    "r7": {
+      "bytes": 82707,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/core/battle.engine.js",
+      "sha256": "640d449503c2f869e2b0ce20d406b6b3d48416dc5990a1b77c973ab1b36bdbec"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/battle/core/battle.exec-play.js",
+    "r6": {
+      "bytes": 19209,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/core/battle.exec-play.js",
+      "sha256": "d2996124d33ff3639be977ee83d50b61cd94123fcb7b41055a6f7761a6d7a69d"
+    },
+    "r7": {
+      "bytes": 20707,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/core/battle.exec-play.js",
+      "sha256": "5e07adb2cd15fb79e7b485ab1804dcb027431f241c091f4bb7caae0aab1ade35"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/battle/effects/battle.card-inspection.js",
+    "r6": {
+      "bytes": 5583,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/effects/battle.card-inspection.js",
+      "sha256": "cbeac5b1c37ff495c38278e6de2fd9e85bd18326930946c5a855f86b84789ee5"
+    },
+    "r7": {
+      "bytes": 8213,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/effects/battle.card-inspection.js",
+      "sha256": "5ede79e3981ab8c83ffe9408e3c736a1123c4213c82ecd1e19afdb10ee70eac2"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.aim.js",
+    "r6": {
+      "bytes": 36192,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/view/battle.aim.js",
+      "sha256": "d6e4506f07db96f31d4b14cec43b83fa4b1d0a32c85d5473647c920564a13d8d"
+    },
+    "r7": {
+      "bytes": 36213,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/view/battle.aim.js",
+      "sha256": "1ec7d64bd19682e52cd6b42eb34c1b947b616c65d7e29a5127c9518df71777d8"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.hand-inspector.js",
+    "r6": {
+      "bytes": 7651,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/view/battle.hand-inspector.js",
+      "sha256": "2cc41da2331c7076eb91c3f0a7d94b5078f53a30304c2bf86543d075c1a2893f"
+    },
+    "r7": {
+      "bytes": 7780,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/view/battle.hand-inspector.js",
+      "sha256": "4b7ad2e22a79ae26a9696348d1f8b405756229c5d55837ebcdc57e0485b5453d"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.layers.js",
+    "r6": {
+      "bytes": 51662,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/view/battle.layers.js",
+      "sha256": "9196a64ce8f64e75620fffbcddf01c5fc1effaeda763551c1859841d09bfb475"
+    },
+    "r7": {
+      "bytes": 51765,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/view/battle.layers.js",
+      "sha256": "7041764eea55ce1e147afb10fc2e494e43ab2c493617d0cf88b6bdb185770575"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.overlays.js",
+    "r6": {
+      "bytes": 18465,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/view/battle.overlays.js",
+      "sha256": "bdadf35c9924bc94b95912c8b765853deb48da99db9d03ba9513d0eab2819227"
+    },
+    "r7": {
+      "bytes": 18690,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/view/battle.overlays.js",
+      "sha256": "020855e27ebabb49af5c7c62fb7e5ebb11dde663236232133b08c74b9bb2e87e"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/battle/view/battle.view.js",
+    "r6": {
+      "bytes": 56786,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/view/battle.view.js",
+      "sha256": "5593842cd81707a09e5a9a00fff0a948ba1f328088ce4e43c69e60148c052042"
+    },
+    "r7": {
+      "bytes": 57767,
+      "mode": 420,
+      "path": "搜打撤/game/src/battle/view/battle.view.js",
+      "sha256": "18a09f8477bfec2e922bfcf526a95ec3358ca69db588a6f5ff2fc182011c25ba"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/cards/card-battle-start-explanation.js",
+    "r6": null,
+    "r7": {
+      "bytes": 383,
+      "mode": 420,
+      "path": "搜打撤/game/src/cards/card-battle-start-explanation.js",
+      "sha256": "458480cf3935adb995a518a26800e2335ff2c76bbdafd77bb824bcfe3fd1ef71"
+    },
+    "status": "added"
+  },
+  {
+    "path": "搜打撤/game/src/core/map-node-state.js",
+    "r6": {
+      "bytes": 599,
+      "mode": 420,
+      "path": "搜打撤/game/src/core/map-node-state.js",
+      "sha256": "e7227c53ebe593a1c41464718b2b44185762cbb63749d688ae54aae2b1566599"
+    },
+    "r7": {
+      "bytes": 691,
+      "mode": 420,
+      "path": "搜打撤/game/src/core/map-node-state.js",
+      "sha256": "766b77b5069e491394c1bcb83e969ff4b4941afd90ce1a9b9192b5a09dad2a5f"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/core/node-info.js",
+    "r6": {
+      "bytes": 1886,
+      "mode": 420,
+      "path": "搜打撤/game/src/core/node-info.js",
+      "sha256": "1655ea2731af1959fd0f53bc669043ed8a1d7deb11ccae3e474715d97626b626"
+    },
+    "r7": {
+      "bytes": 2038,
+      "mode": 420,
+      "path": "搜打撤/game/src/core/node-info.js",
+      "sha256": "5cf8927be39fdef2acc7074f8f4f6a90f2d67296a80d01b86ee16cf82c645f3e"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/core/renderer.js",
+    "r6": {
+      "bytes": 28060,
+      "mode": 420,
+      "path": "搜打撤/game/src/core/renderer.js",
+      "sha256": "cc97d2ef02b50c240d18954c1a38e0acc352d0deea7985e6bfb37fa71db26fa2"
+    },
+    "r7": {
+      "bytes": 28114,
+      "mode": 420,
+      "path": "搜打撤/game/src/core/renderer.js",
+      "sha256": "74fb995da22653b8a5e7b4c3b86fab9e6f6bcccae40982118174ca428de394be"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/hub/game.bag.js",
+    "r6": {
+      "bytes": 46695,
+      "mode": 420,
+      "path": "搜打撤/game/src/hub/game.bag.js",
+      "sha256": "ad3b7d10b452c816eea2a7fd5ce98c4200a9b861dd142f9b3d7ec0da3ab9c69e"
+    },
+    "r7": {
+      "bytes": 46669,
+      "mode": 420,
+      "path": "搜打撤/game/src/hub/game.bag.js",
+      "sha256": "d54e64724169153bd988d4159af8061140ac629eb2963705f7fb215969f1b748"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/run/chests.js",
+    "r6": {
+      "bytes": 36542,
+      "mode": 420,
+      "path": "搜打撤/game/src/run/chests.js",
+      "sha256": "ffed546ca3c783b413028184908e4479c516dbfcd6b744d82cf4523040c1a601"
+    },
+    "r7": {
+      "bytes": 37725,
+      "mode": 420,
+      "path": "搜打撤/game/src/run/chests.js",
+      "sha256": "a993d5ed443b8d6b5521d82be2dd22ca202382a4626647f4290c6299da36a021"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/run/expedition.view.js",
+    "r6": {
+      "bytes": 13359,
+      "mode": 420,
+      "path": "搜打撤/game/src/run/expedition.view.js",
+      "sha256": "237bf5b7030bda6581bdf0758bfd17485cafee378e6d1a4ea2e3f63695b06d7a"
+    },
+    "r7": {
+      "bytes": 13548,
+      "mode": 420,
+      "path": "搜打撤/game/src/run/expedition.view.js",
+      "sha256": "e422f650eaad442d720c32461a7ec31bef4211f20780b1d031269c84d3022604"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/run/game.run.scenes.js",
+    "r6": {
+      "bytes": 29732,
+      "mode": 420,
+      "path": "搜打撤/game/src/run/game.run.scenes.js",
+      "sha256": "6dcdadc6b27bdead891dbbd18be4b132ca110322d9aa54699235f80dc25f4eac"
+    },
+    "r7": {
+      "bytes": 31485,
+      "mode": 420,
+      "path": "搜打撤/game/src/run/game.run.scenes.js",
+      "sha256": "c49bbb277679f39eee25201ce928560d8a159413a74a6ab59d7e9efeb026635d"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/ui/inventory-zoom.js",
+    "r6": {
+      "bytes": 1432,
+      "mode": 420,
+      "path": "搜打撤/game/src/ui/inventory-zoom.js",
+      "sha256": "c7fe495a9e827022c710318f6689f1d18ccb0540187666e9d4821bc65ba23243"
+    },
+    "r7": {
+      "bytes": 1646,
+      "mode": 420,
+      "path": "搜打撤/game/src/ui/inventory-zoom.js",
+      "sha256": "e27fbd02408735c630ce512a46556cee1e098b4ae1a9d32483849305f13dccb6"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/game/src/ui/overlay.js",
+    "r6": {
+      "bytes": 24794,
+      "mode": 420,
+      "path": "搜打撤/game/src/ui/overlay.js",
+      "sha256": "86776d4cc5cb7d407fa4da6c4a43b2a07ac8eeba996badb81a6b5808b08bc24e"
+    },
+    "r7": {
+      "bytes": 24826,
+      "mode": 420,
+      "path": "搜打撤/game/src/ui/overlay.js",
+      "sha256": "266b8a1adccecce25207cf70bec046a072358c765e7ecd67f4d54144c0778be8"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/scripts/runtime-asset-redundancy-review.mjs",
+    "r6": {
+      "bytes": 22433,
+      "mode": 420,
+      "path": "搜打撤/scripts/runtime-asset-redundancy-review.mjs",
+      "sha256": "8a193415ef529d717235bd2c88bbc6ce863da9b256b69300c1ccc2b672426bab"
+    },
+    "r7": {
+      "bytes": 22433,
+      "mode": 420,
+      "path": "搜打撤/scripts/runtime-asset-redundancy-review.mjs",
+      "sha256": "66e05324487bd9d48991be527ee6ded40272fc1a3b820dddb04f22f586c12846"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/tests/altar-completion-road-cache.test.js",
+    "r6": null,
+    "r7": {
+      "bytes": 2646,
+      "mode": 420,
+      "path": "搜打撤/tests/altar-completion-road-cache.test.js",
+      "sha256": "bbc38e6228839796d793f3409c9aa132fff52ef145bb08e551e09b1b7877977b"
+    },
+    "status": "added"
+  },
+  {
+    "path": "搜打撤/tests/altar-node-completion-view.test.js",
+    "r6": null,
+    "r7": {
+      "bytes": 5099,
+      "mode": 420,
+      "path": "搜打撤/tests/altar-node-completion-view.test.js",
+      "sha256": "cd868d75575b66d1d7812ef37aba46a15d737cad74fa96f0dcf034be5fd5ce14"
+    },
+    "status": "added"
+  },
+  {
+    "path": "搜打撤/tests/battle-drag-reference.test.js",
+    "r6": {
+      "bytes": 9751,
+      "mode": 420,
+      "path": "搜打撤/tests/battle-drag-reference.test.js",
+      "sha256": "e7ffda90e5188fa385db97ba3de223ad0c01b4879b5adb5d7700068f7bac62d8"
+    },
+    "r7": {
+      "bytes": 9830,
+      "mode": 420,
+      "path": "搜打撤/tests/battle-drag-reference.test.js",
+      "sha256": "1279f9cf8ba1f7a4fa9c149e77fac565b5130698acef4307020cddefe936d514"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/tests/battle-effective-card.test.js",
+    "r6": null,
+    "r7": {
+      "bytes": 6194,
+      "mode": 420,
+      "path": "搜打撤/tests/battle-effective-card.test.js",
+      "sha256": "6c0947212ad77bcf009e2b3f0e1746266b79101c6b2ee11483f9d3f1e9dcdcf0"
+    },
+    "status": "added"
+  },
+  {
+    "path": "搜打撤/tests/battle-engine-facade.test.js",
+    "r6": {
+      "bytes": 2110,
+      "mode": 420,
+      "path": "搜打撤/tests/battle-engine-facade.test.js",
+      "sha256": "78baf7a2063fbcb1ba24c1fafabdd662a741d694b3aa9ea1565f46022937e44b"
+    },
+    "r7": {
+      "bytes": 2153,
+      "mode": 420,
+      "path": "搜打撤/tests/battle-engine-facade.test.js",
+      "sha256": "56a3fe3a27cdeca79eee7d8d6a04dc49cb267e2fbdd97cc11230f5d56284cfc0"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/tests/card-battle-start-explanation.test.js",
+    "r6": null,
+    "r7": {
+      "bytes": 1756,
+      "mode": 420,
+      "path": "搜打撤/tests/card-battle-start-explanation.test.js",
+      "sha256": "3ae21c81e25e931cf3b16fb4e5b4ce7bbd526be1878ab949f0353b4fd4cbe966"
+    },
+    "status": "added"
+  },
+  {
+    "path": "搜打撤/tests/chests-reward-capacity-notice.test.js",
+    "r6": {
+      "bytes": 11000,
+      "mode": 420,
+      "path": "搜打撤/tests/chests-reward-capacity-notice.test.js",
+      "sha256": "4bcfee17adfd9acf1badcacba98dc0f6ff94e4b77321f3837e95c29992c25f78"
+    },
+    "r7": {
+      "bytes": 14615,
+      "mode": 420,
+      "path": "搜打撤/tests/chests-reward-capacity-notice.test.js",
+      "sha256": "ad55224a30a404852eef8c7e2e4321fc35b27f8e3b68610a4fa0de9cabb7cf67"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/tests/map-node-state.test.js",
+    "r6": {
+      "bytes": 2975,
+      "mode": 420,
+      "path": "搜打撤/tests/map-node-state.test.js",
+      "sha256": "5dcee597646ca075e09d63aee4eb67a46f4f7e1d984760456abcd5fcbe2956d5"
+    },
+    "r7": {
+      "bytes": 4118,
+      "mode": 420,
+      "path": "搜打撤/tests/map-node-state.test.js",
+      "sha256": "039337efb5b5ad83cbce6546cf131c80b51d9faa67351bcf60e1510d75ff4a9e"
+    },
+    "status": "changed"
+  },
+  {
+    "path": "搜打撤/tests/pocket-restore-interface.test.js",
+    "r6": null,
+    "r7": {
+      "bytes": 13525,
+      "mode": 420,
+      "path": "搜打撤/tests/pocket-restore-interface.test.js",
+      "sha256": "d4eefbdd6893efcf8cd52908072bdc746026886e1334540ad79544c1d10415bd"
+    },
+    "status": "added"
+  },
+  {
+    "path": "搜打撤/tests/potion-tip-lifecycle.test.js",
+    "r6": null,
+    "r7": {
+      "bytes": 6392,
+      "mode": 420,
+      "path": "搜打撤/tests/potion-tip-lifecycle.test.js",
+      "sha256": "973a7243fe0b69fa1ce785ed34a78f31a0ce209a4f98db617dea17b879ed76c9"
+    },
+    "status": "added"
+  },
+  {
+    "path": "搜打撤/tests/safe-pearl-access.test.js",
+    "r6": null,
+    "r7": {
+      "bytes": 9396,
+      "mode": 420,
+      "path": "搜打撤/tests/safe-pearl-access.test.js",
+      "sha256": "266ba805b713bc8fba64fa263559c9bda3c20e0cfecbe900cca885e5b18ea4c6"
+    },
+    "status": "added"
+  },
+  {
+    "path": "搜打撤/tests/skull-sword-effective-session.test.js",
+    "r6": null,
+    "r7": {
+      "bytes": 26640,
+      "mode": 420,
+      "path": "搜打撤/tests/skull-sword-effective-session.test.js",
+      "sha256": "42457ff602117abe20baf93d0fd3cc52b02ea4dd9489306d4a8ab1d1800f8aa1"
+    },
+    "status": "added"
+  },
+  {
+    "path": "搜打撤/tests/sys03-altar-restore-txn.test.js",
+    "r6": {
+      "bytes": 24267,
+      "mode": 420,
+      "path": "搜打撤/tests/sys03-altar-restore-txn.test.js",
+      "sha256": "c52e50d4ca516ea32ae2c6fe71ef60eb21671234685896643cafdec716915a40"
+    },
+    "r7": {
+      "bytes": 24292,
+      "mode": 420,
+      "path": "搜打撤/tests/sys03-altar-restore-txn.test.js",
+      "sha256": "7bd1a0ebab1eaab7d38e65cd9cc92d6c558d8725001a9e774492e8ef03001684"
+    },
+    "status": "changed"
+  }
+]

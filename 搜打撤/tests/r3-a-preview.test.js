@@ -11,6 +11,7 @@ window.SDT.MAP = {
 await import('../game/src/cards/cards.js');
 const { BattleSession, viewApi } = await import('../game/src/battle/core/battle.core.js');
 const { cardRuleHint, previewAction } = await import('../game/src/battle/view/battle.preview.js');
+const { showFoePreview } = await import('../game/src/battle/view/battle.hover.js');
 const { Random } = await import('../game/src/core/random.js');
 const Cards = window.SDT.Cards;
 
@@ -188,6 +189,85 @@ describe('R3-a 可信伤害预览', () => {
     },
   );
 
+  it('普通战奥术弹按定版 hosted 执行视图预览，直接伤害与真实结算一致', async () => {
+    const original = Cards.all().find(entry => entry.id === 'tt7-arcanebolt');
+    expect(original.rules.battle.hosted).toEqual(['damage-and-draw']);
+    const { game, uid } = gameWith({ ...original, desc: '玩家展示文本已变化', dmg: 3 }, { spellPower: 2 });
+    restore(game, uid, { hp: 20 }, { spellUp: 1 });
+    const context = viewApi.getPreviewContext(uid, 0);
+    expect(context).toMatchObject({ mode: 'normal', hostedExecutionVerified: true });
+    const result = preview(uid);
+    expect(result).toMatchObject({ confidence: 'exact', cost: 0, damage: { total: 6, hpAfter: 14 } });
+    expect(result.unknownEffects.join('')).toContain('后续触发未计入');
+    const bubbleHost = document.createElement('div');
+    showFoePreview(bubbleHost, 0, uid, original, 'click');
+    expect(bubbleHost.textContent).toContain('直接伤害：6');
+    expect(bubbleHost.textContent).toContain('后续触发未计入');
+    BattleSession.commands.playCard(uid, 0);
+    const actual = await settle();
+    expect(actual.foes[0].hp).toBe(result.damage.hpAfter);
+    expect(game.logs.some(line => line.includes('获得 1 张【初始攻击】'))).toBe(true);
+    BattleSession.commands.flee();
+  });
+
+  it('BOSS 抽牌后续未完整预演时奥术弹仍降级，不影响普通直接伤害', () => {
+    const card = Cards.all().find(entry => entry.id === 'tt7-arcanebolt');
+    const { game, uid } = gameWith(card);
+    restore(game, uid, { hp: 20, isBoss: true });
+    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null });
+    BattleSession.commands.flee();
+  });
+
+  it('core 将流血增伤旗标传给预览，避免裸 Combat 伪精确', async () => {
+    const card = Cards.all().find(entry => entry.id === 'starter-attack');
+    const { game, uid } = gameWith(card);
+    restore(game, uid, { hp: 20, status: { bleed: 2 } }, { bleedAmp: 1 });
+    expect(viewApi.getPreviewContext(uid, 0).modifiers.bleedAmp).toBe(true);
+    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null });
+    BattleSession.commands.playCard(uid, 0);
+    expect((await settle()).foes[0].hp).toBe(12);
+    BattleSession.commands.flee();
+  });
+
+  it('穿戴合法冰冻增伤装备后由 core 降级；实际 hitFoe 仍按原规则增伤', async () => {
+    const attack = Cards.all().find(entry => entry.id === 'starter-attack');
+    const equipment = { id: 'preview-frost-equipment', name: '冰冻增伤测试装备', type: '装备', cost: 0, dmg: 0,
+      rules: { version: 1, equip: { onEquip: [], passive: { cond: { vsFreeze: 2 } } } } };
+    const { game, uid } = gameWith(attack);
+    game.ownedCards.push({ uid: 'preview-equipment', card: equipment });
+    restore(game, uid, { hp: 20, status: { freeze: 1 } }, {}, { hand: [uid, 'preview-equipment'] });
+    BattleSession.commands.playCard('preview-equipment', 'self');
+    await settle();
+    expect(viewApi.getPreviewContext(uid, 0).modifiers.vsFreezeBonus).toBe(true);
+    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null });
+    BattleSession.commands.playCard(uid, 0);
+    expect((await settle()).foes[0].hp).toBe(14);
+    BattleSession.commands.flee();
+  });
+
+  it('后续可转向目标带流血增伤时也降级，不只检查当前选中目标', () => {
+    const card = Cards.all().find(entry => entry.id === 'tt7-meteorrain');
+    const { game, uid } = gameWith(card);
+    const foe = (hp, bleed = 0) => ({ id: 'target', name: '目标', hp, maxHp: hp, atk: 1,
+      dead: false, status: { bleed }, defense: { shield: 0, armor: 0, guard: false } });
+    restore(game, uid, { hp: 1 }, { bleedAmp: 1 }, { foes: [foe(1), foe(20, 2)] });
+    expect(viewApi.getPreviewContext(uid, 0).modifiers.bleedAmp).toBe(true);
+    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null });
+    BattleSession.commands.flee();
+  });
+
+  it('奥术弹全灭后停止抽牌；预览说明不承诺一定获得后续卡牌', async () => {
+    const card = Cards.all().find(entry => entry.id === 'tt7-arcanebolt');
+    const { game, uid } = gameWith(card);
+    restore(game, uid, { hp: 1 });
+    const result = preview(uid);
+    expect(result).toMatchObject({ confidence: 'exact', damage: { total: 1, lethal: true } });
+    expect(result.unknownEffects.join('')).toContain('敌人全灭时停止余下效果');
+    BattleSession.commands.playCard(uid, 0);
+    await settle();
+    expect(game.logs.some(line => line.includes('获得 1 张【初始攻击】'))).toBe(false);
+  });
+
   it.each(['cc-double-boom', 'tt7-whirlwind', 'cc-cursed-blade'])(
     '%s 结构化伤害：预览 exact 且数字与真实结算一致', async id => {
       const card = Cards.all().find(entry => entry.id === id);
@@ -261,7 +341,7 @@ describe('R3-a 可信伤害预览', () => {
     const card = Cards.all().find(entry => entry.id === 'starter-attack');
     const { game, uid } = gameWith(card);
     restore(game, uid, { hp: 12 }, {}, { shaTransform: '火球术' });
-    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null, reasons: ['这张初始攻击将变为另一张牌结算'] });
+    expect(preview(uid)).toMatchObject({ confidence: 'unknown', damage: null, reasons: ['变形卡按当前效果结算，预览无法精算'] });
     BattleSession.commands.flee();
   });
 

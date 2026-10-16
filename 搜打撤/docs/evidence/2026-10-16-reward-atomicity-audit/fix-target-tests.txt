@@ -1,0 +1,37 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤
+
+···········································································stderr | tests/base-corrupt-field.test.js > 基地档字段类型损坏兜底（F1） > 损坏档存在时选档页五档全渲染、不抛异常
+[base] 存档字段 stats 类型损坏（string），已回落默认值
+[base] 存档字段 characters 类型损坏（number），已回落默认值
+[base] 存档字段 stats 类型损坏（string），已回落默认值
+[base] 存档字段 characters 类型损坏（number），已回落默认值
+
+stderr | tests/base-corrupt-field.test.js > 基地档字段类型损坏兜底（F1） > 单档 peek 抛异常时选档页仍渲染其余档位并给出可见错误（原档不写回）
+[menu] 档位 3 存档渲染异常，原档已保留未写回： TypeError: Cannot create property 'bossKills' on string 'junk'
+    at Object.peek (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/base-corrupt-field.test.js:97:28)
+    at openSlotPicker (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/ui/game.menu.pages.js:385:35)
+    at Object.startNewGame (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/ui/game.menu.pages.js:643:29)
+    at enterMenuPage (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/ui/game.menu.js:40:54)
+    at Object.startNewGame (/workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/game/src/ui/game.menu.js:89:36)
+    at /workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/搜打撤/tests/base-corrupt-field.test.js:102:29
+    at Proxy.assertThrows (file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/chai/index.js:2767:5)
+    at Proxy.methodWrapper (file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/chai/index.js:1686:25)
+    at Proxy.<anonymous> (file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/expect/dist/index.js:1088:12)
+    at Proxy.overwritingMethodWrapper (file:///workspace/scratch/b7a53a06c872/OperationSalvation7-f0e84c5d/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/chai/index.js:1735:33)
+[menu] 档位 03 存档数据异常，已保留原档未写回
+
+····
+
+ Test Files  7 passed (7)
+      Tests  79 passed (79)
+   Start at  06:52:33
+   Duration  3.06s (transform 1.54s, setup 0ms, collect 5.79s, tests 527ms, environment 7.40s, prepare 1.15s)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -1,0 +1,5307 @@
+{
+  "checkedAt": "2026-10-15T21:28:38.240Z",
+  "method": "Read-only source/retained R3 artifact analysis; esbuild in-memory transforms only; no Vite build, service, browser, or production write",
+  "snapshot": "/workspace/shared/cloud-iteration-verification-r3-20261016/snapshot/搜打撤",
+  "node": "v22.23.3",
+  "esbuild": "0.25.12",
+  "vite": "6.4.4",
+  "initialRoots": [
+    "ui/title-credits.js",
+    "ui/title-wallpaper.js",
+    "main.js",
+    "ui/cover-context.js"
+  ],
+  "moduleCounts": {
+    "initial": 199,
+    "complete": 352
+  },
+  "initialCss": [
+    "game/css/base.css",
+    "game/css/cards.css",
+    "game/css/overlays.css",
+    "game/css/hub.css",
+    "game/css/battle.css",
+    "game/css/scenes.css",
+    "game/css/lab-ending.css",
+    "game/css/winter.css",
+    "game/css/expedition.css",
+    "game/css/expedition-map.css",
+    "game/css/map-edge-light.css",
+    "game/css/expedition-hub.css",
+    "game/css/expedition-inventory.css",
+    "game/css/expedition-rewards.css",
+    "game/css/expedition-battle.css",
+    "game/css/expedition-library.css",
+    "game/css/card-v3.css",
+    "game/css/expedition-roster.css",
+    "game/css/expedition-shop.css",
+    "game/css/ui-scale.css",
+    "game/css/page-slot-select.css",
+    "game/css/page-settings.css",
+    "game/css/page-datapage.css",
+    "game/css/page-ach.css",
+    "game/css/page-cardforge.css",
+    "game/css/page-expedition-hud.css",
+    "game/css/feedback-oct12.css",
+    "game/css/roster-departure-v2.css",
+    "game/css/pocket-strip.css",
+    "game/css/experience-loot.css",
+    "game/css/page-events.css",
+    "game/css/page-rewards-bag-help.css",
+    "game/css/page-battle-ui.css",
+    "game/css/character-idle.css",
+    "game/css/page-transitions.css",
+    "game/css/ak-skin.css",
+    "game/css/base-camp.css",
+    "game/css/base-camp-compact.css",
+    "game/css/card-layout-selected.css",
+    "game/css/battle-stage.css",
+    "game/css/card-description-links.css",
+    "game/css/combat-feedback.css",
+    "game/css/base-controls-v4.css",
+    "game/css/base-page-motion-v7.css",
+    "game/css/departure-selected.css",
+    "game/css/roster-reference.css",
+    "game/css/preparation.css",
+    "game/css/base-camp-rework.css",
+    "game/css/card-browser.css",
+    "game/css/inventory-zoom.css",
+    "game/css/base-reward-feedback.css",
+    "game/css/base-collection-v4.css",
+    "game/css/base-courtyard-v3.css",
+    "game/css/base-panel-layout.css",
+    "game/css/base-cohesion-v5.css",
+    "game/css/base-framework-v7.css",
+    "game/css/base-rooms-v7.css",
+    "game/css/base-personnel-v12.css",
+    "game/css/base-logistics-trade-v12.css",
+    "game/css/base-archive-facilities-v12.css",
+    "game/css/base-home-v7.css",
+    "game/css/base-shop-v3.css",
+    "game/css/base-archive-v3.css",
+    "game/css/chest-opening.css",
+    "game/css/entry-events.css",
+    "game/css/expedition-transitions.css",
+    "game/css/archive-motion.css",
+    "game/css/camp-entry.css",
+    "game/css/archive-back.css",
+    "game/css/home-linked-interactions.css",
+    "game/css/home-ui-tokens.css",
+    "game/css/page-loading.css",
+    "game/css/page-visual-ready.css",
+    "game/css/title-credits.css"
+  ],
+  "initialCssCount": 74,
+  "htmlCss": [
+    "game/css/base.css",
+    "game/css/cards.css",
+    "game/css/overlays.css",
+    "game/css/hub.css",
+    "game/css/battle.css",
+    "game/css/scenes.css",
+    "game/css/lab-ending.css",
+    "game/css/winter.css",
+    "game/css/expedition.css",
+    "game/css/expedition-map.css",
+    "game/css/map-edge-light.css",
+    "game/css/expedition-hub.css",
+    "game/css/expedition-inventory.css",
+    "game/css/expedition-rewards.css",
+    "game/css/expedition-battle.css",
+    "game/css/expedition-library.css",
+    "game/css/card-v3.css",
+    "game/css/expedition-roster.css",
+    "game/css/expedition-shop.css",
+    "game/css/ui-scale.css",
+    "game/css/page-slot-select.css",
+    "game/css/page-settings.css",
+    "game/css/page-datapage.css",
+    "game/css/page-ach.css",
+    "game/css/page-cardforge.css",
+    "game/css/page-expedition-hud.css",
+    "game/css/feedback-oct12.css",
+    "game/css/roster-departure-v2.css",
+    "game/css/pocket-strip.css",
+    "game/css/experience-loot.css",
+    "game/css/page-events.css",
+    "game/css/page-rewards-bag-help.css",
+    "game/css/page-battle-ui.css",
+    "game/css/character-idle.css",
+    "game/css/page-transitions.css",
+    "game/css/ak-skin.css",
+    "game/css/base-camp.css",
+    "game/css/base-camp-compact.css",
+    "game/css/card-layout-selected.css",
+    "game/css/battle-stage.css"
+  ],
+  "htmlCssCount": 40,
+  "urls": [
+    {
+      "file": "game/css/home-polish.css",
+      "module": "ui/home-fx.js",
+      "initial": true,
+      "reachable": true
+    },
+    {
+      "file": "game/css/home-layers.css",
+      "module": "ui/home-layers.js",
+      "initial": true,
+      "reachable": true
+    },
+    {
+      "file": "game/css/home-menu-motion.css",
+      "module": "ui/home-menu-motion.js",
+      "initial": true,
+      "reachable": true
+    },
+    {
+      "file": "game/css/interface-motion.css",
+      "module": "ui/interface-motion.js",
+      "initial": true,
+      "reachable": true
+    },
+    {
+      "file": "game/css/motion-transitions.css",
+      "module": "ui/motion-transitions.js",
+      "initial": true,
+      "reachable": true
+    }
+  ],
+  "cssStats": [
+    {
+      "file": "game/css/base.css",
+      "source": {
+        "bytes": 31857,
+        "gzip": 9306,
+        "sha256": "1499019c0512b90b6cc2387d298bc90967739e074272407eed911d3c853b22e5"
+      },
+      "expanded": {
+        "bytes": 31857,
+        "gzip": 9306,
+        "sha256": "1499019c0512b90b6cc2387d298bc90967739e074272407eed911d3c853b22e5"
+      },
+      "minified": {
+        "bytes": 24317,
+        "gzip": 6311,
+        "sha256": "f2847b2e688e92e41a7a5168f0f6863e4d7302c74ead8337e5e73b345ce507b0"
+      },
+      "htmlOrder": 0,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/cards.css",
+      "source": {
+        "bytes": 11852,
+        "gzip": 3749,
+        "sha256": "3fe867ce2d597d628369d2acb59503c62338930050acb0944fc2b953d8745bfe"
+      },
+      "expanded": {
+        "bytes": 11852,
+        "gzip": 3749,
+        "sha256": "3fe867ce2d597d628369d2acb59503c62338930050acb0944fc2b953d8745bfe"
+      },
+      "minified": {
+        "bytes": 9131,
+        "gzip": 2654,
+        "sha256": "fe4c57211173f844f8a0ed6cf149e93d6306b33d131ac8830c92984c217e0579"
+      },
+      "htmlOrder": 1,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/overlays.css",
+      "source": {
+        "bytes": 40247,
+        "gzip": 11838,
+        "sha256": "888bf002106a381e35e64da11cdf0073e43469af4b8a27784b31b08fc1ba45df"
+      },
+      "expanded": {
+        "bytes": 40247,
+        "gzip": 11838,
+        "sha256": "888bf002106a381e35e64da11cdf0073e43469af4b8a27784b31b08fc1ba45df"
+      },
+      "minified": {
+        "bytes": 29575,
+        "gzip": 7400,
+        "sha256": "685f6a1bb0e58bb8f1f8a39edb40ec42ba68aba64d9ac80ec04549b64a4b5af8"
+      },
+      "htmlOrder": 2,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/hub.css",
+      "source": {
+        "bytes": 22800,
+        "gzip": 6705,
+        "sha256": "15625e19a8d3ceef649cb9f3b337b7d64e49c00592e0c2d84218edb7709af246"
+      },
+      "expanded": {
+        "bytes": 22800,
+        "gzip": 6705,
+        "sha256": "15625e19a8d3ceef649cb9f3b337b7d64e49c00592e0c2d84218edb7709af246"
+      },
+      "minified": {
+        "bytes": 16758,
+        "gzip": 4249,
+        "sha256": "df226102911b6a7a73ca2ee4b4fd098b87ddb6be20f666c7cbeb1223f92cb9f7"
+      },
+      "htmlOrder": 3,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/battle.css",
+      "source": {
+        "bytes": 36099,
+        "gzip": 13779,
+        "sha256": "cb2e5e6d6c9499a04ad940b28c975ca958e21e69f93a0b76afc4ff6e55c18b78"
+      },
+      "expanded": {
+        "bytes": 36099,
+        "gzip": 13779,
+        "sha256": "cb2e5e6d6c9499a04ad940b28c975ca958e21e69f93a0b76afc4ff6e55c18b78"
+      },
+      "minified": {
+        "bytes": 20406,
+        "gzip": 5406,
+        "sha256": "9f19e929a163ee88c1f679465085d229c365588cade15f7266e5d3a5a77cf04d"
+      },
+      "htmlOrder": 4,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/scenes.css",
+      "source": {
+        "bytes": 46558,
+        "gzip": 12056,
+        "sha256": "6d10a0d68c80397b9ff599ff631dc66c0b91984cc205b736dbf7716df05cfb70"
+      },
+      "expanded": {
+        "bytes": 46558,
+        "gzip": 12056,
+        "sha256": "6d10a0d68c80397b9ff599ff631dc66c0b91984cc205b736dbf7716df05cfb70"
+      },
+      "minified": {
+        "bytes": 34926,
+        "gzip": 7490,
+        "sha256": "50824562a0f654507a2f0e346b327a77adc95759d732b6f909ef1f1c208268dd"
+      },
+      "htmlOrder": 5,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/lab-ending.css",
+      "source": {
+        "bytes": 5618,
+        "gzip": 1972,
+        "sha256": "016f67eb90ddee62f365b94e87d8874b73b3745a474ce8f55ee84e9312d245f2"
+      },
+      "expanded": {
+        "bytes": 5618,
+        "gzip": 1972,
+        "sha256": "016f67eb90ddee62f365b94e87d8874b73b3745a474ce8f55ee84e9312d245f2"
+      },
+      "minified": {
+        "bytes": 4062,
+        "gzip": 1175,
+        "sha256": "8edf1e2b1f572a35338e7dabf07f13fca1b0d6d4daaaf0fb23182bdae9ee11de"
+      },
+      "htmlOrder": 6,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/winter.css",
+      "source": {
+        "bytes": 103749,
+        "gzip": 32726,
+        "sha256": "ece80983ce19406ed30fb90b6bfb4732df056816bb9069993e42cde58df2d857"
+      },
+      "expanded": {
+        "bytes": 103749,
+        "gzip": 32726,
+        "sha256": "ece80983ce19406ed30fb90b6bfb4732df056816bb9069993e42cde58df2d857"
+      },
+      "minified": {
+        "bytes": 76411,
+        "gzip": 17649,
+        "sha256": "71be93096910b24808b43ddf2d109b60d4a819f198703ee795fc0068cf52df9d"
+      },
+      "htmlOrder": 7,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/expedition.css",
+      "source": {
+        "bytes": 19421,
+        "gzip": 6051,
+        "sha256": "e01e7dc454882197dd7e69fcb9f3674335366f92de210554e6b521bf3e641b28"
+      },
+      "expanded": {
+        "bytes": 19421,
+        "gzip": 6051,
+        "sha256": "e01e7dc454882197dd7e69fcb9f3674335366f92de210554e6b521bf3e641b28"
+      },
+      "minified": {
+        "bytes": 15456,
+        "gzip": 4325,
+        "sha256": "44d518ca4d00baaf393eced0d0532ee1852dbf8576259a9f9bb394b5bf939a1a"
+      },
+      "htmlOrder": 8,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "source": {
+        "bytes": 8144,
+        "gzip": 2478,
+        "sha256": "52f517ca0a09d01d5ccfb21bdd8784b68805a8cc12ca0d6b92533c4c50af81bb"
+      },
+      "expanded": {
+        "bytes": 8144,
+        "gzip": 2478,
+        "sha256": "52f517ca0a09d01d5ccfb21bdd8784b68805a8cc12ca0d6b92533c4c50af81bb"
+      },
+      "minified": {
+        "bytes": 6920,
+        "gzip": 1916,
+        "sha256": "0dc0df8017f8b1b2ae0d2a5accd1f1683d6ceffad57f76579c78f741806aec3c"
+      },
+      "htmlOrder": 9,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/map-edge-light.css",
+      "source": {
+        "bytes": 2620,
+        "gzip": 1040,
+        "sha256": "c6caa8a3b6e406db801917c9081af1db79be9d1031cef62bd47b1239b6cf50c2"
+      },
+      "expanded": {
+        "bytes": 2620,
+        "gzip": 1040,
+        "sha256": "c6caa8a3b6e406db801917c9081af1db79be9d1031cef62bd47b1239b6cf50c2"
+      },
+      "minified": {
+        "bytes": 2431,
+        "gzip": 906,
+        "sha256": "407a0251c7a7245b2fbd7afa3a3b70b50498b97c65fbfc31510382b59751712a"
+      },
+      "htmlOrder": 10,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "source": {
+        "bytes": 6824,
+        "gzip": 3281,
+        "sha256": "49a67f94098daa023331829f6f45131a9d3c48882483dbbdb4656a0856b3c123"
+      },
+      "expanded": {
+        "bytes": 6824,
+        "gzip": 3281,
+        "sha256": "49a67f94098daa023331829f6f45131a9d3c48882483dbbdb4656a0856b3c123"
+      },
+      "minified": {
+        "bytes": 4218,
+        "gzip": 1530,
+        "sha256": "ce2e253de5071db07e4a3f5ac5588d1fa3e7f6bc4524c09c4411945485098282"
+      },
+      "htmlOrder": 11,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "source": {
+        "bytes": 29911,
+        "gzip": 8134,
+        "sha256": "158c7a97d871f9c2821f1358418d4c96951a7d973a305b9ad0e4016d700e1e7f"
+      },
+      "expanded": {
+        "bytes": 29911,
+        "gzip": 8134,
+        "sha256": "158c7a97d871f9c2821f1358418d4c96951a7d973a305b9ad0e4016d700e1e7f"
+      },
+      "minified": {
+        "bytes": 23686,
+        "gzip": 5009,
+        "sha256": "fa58fb46cc6602bd7b5fa1f8dd90477b4d4b55062471c4abdebab2048cd2e3eb"
+      },
+      "htmlOrder": 12,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "source": {
+        "bytes": 33330,
+        "gzip": 7820,
+        "sha256": "71838208f783f2b9ad446af4f7abce38a4fec0b8e433498407ba0c5af00d8b8c"
+      },
+      "expanded": {
+        "bytes": 33330,
+        "gzip": 7820,
+        "sha256": "71838208f783f2b9ad446af4f7abce38a4fec0b8e433498407ba0c5af00d8b8c"
+      },
+      "minified": {
+        "bytes": 29770,
+        "gzip": 6236,
+        "sha256": "709fd76641be8aae1e01d57cabc0a84728f0b7f94d4eca4eb3a713fa1360ce97"
+      },
+      "htmlOrder": 13,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "source": {
+        "bytes": 14168,
+        "gzip": 5039,
+        "sha256": "e424aaf7dc285aa6c767ff75dfd62c280a104bc4f413d1e7156ef0647c6beaf3"
+      },
+      "expanded": {
+        "bytes": 14168,
+        "gzip": 5039,
+        "sha256": "e424aaf7dc285aa6c767ff75dfd62c280a104bc4f413d1e7156ef0647c6beaf3"
+      },
+      "minified": {
+        "bytes": 9566,
+        "gzip": 2188,
+        "sha256": "6204dd8080b969b04c3d3eb88f611aff51bb4297f9b5899bfa4aeb45a7acdd12"
+      },
+      "htmlOrder": 14,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "source": {
+        "bytes": 11246,
+        "gzip": 6022,
+        "sha256": "c13b321b06cb4c4664c17b86d916d4e81e2c98fc830ef369a3e4569179bebe89"
+      },
+      "expanded": {
+        "bytes": 11246,
+        "gzip": 6022,
+        "sha256": "c13b321b06cb4c4664c17b86d916d4e81e2c98fc830ef369a3e4569179bebe89"
+      },
+      "minified": {
+        "bytes": 3667,
+        "gzip": 1478,
+        "sha256": "b919b392c22b6ba2d410d055f849dc7a0ff62c20aa7f342d35f9e0be1605e097"
+      },
+      "htmlOrder": 15,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/card-v3.css",
+      "source": {
+        "bytes": 1434,
+        "gzip": 719,
+        "sha256": "1b4eef67f438b94d9d8e224556e4bf41fe6c75cfb19b2418cc799e01718c0e4d"
+      },
+      "expanded": {
+        "bytes": 1434,
+        "gzip": 719,
+        "sha256": "1b4eef67f438b94d9d8e224556e4bf41fe6c75cfb19b2418cc799e01718c0e4d"
+      },
+      "minified": {
+        "bytes": 903,
+        "gzip": 284,
+        "sha256": "0b634b8c98b053357e95358a1b483a6b4cdbee869d39a409fcbc7a9bd9eed664"
+      },
+      "htmlOrder": 16,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "source": {
+        "bytes": 28822,
+        "gzip": 8305,
+        "sha256": "9b57efe9e1155680aacaead2c14e30d7864b4a4ca548521d323446f9ad3ef0a1"
+      },
+      "expanded": {
+        "bytes": 28822,
+        "gzip": 8305,
+        "sha256": "9b57efe9e1155680aacaead2c14e30d7864b4a4ca548521d323446f9ad3ef0a1"
+      },
+      "minified": {
+        "bytes": 22519,
+        "gzip": 4965,
+        "sha256": "bcb54934a139373898f22d85ff52c53fa7730e465a3d174b8cab9f10c00be1fb"
+      },
+      "htmlOrder": 17,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "source": {
+        "bytes": 17896,
+        "gzip": 3851,
+        "sha256": "737c87127bdf6324fdcc79c9c73df058984e2b3e243ff4ca14caa173431afa99"
+      },
+      "expanded": {
+        "bytes": 17896,
+        "gzip": 3851,
+        "sha256": "737c87127bdf6324fdcc79c9c73df058984e2b3e243ff4ca14caa173431afa99"
+      },
+      "minified": {
+        "bytes": 16521,
+        "gzip": 3595,
+        "sha256": "4d56ee7303dbe567f92aca38513ed1b8ff53b4225e248c6a1d57a5e50baa6ad9"
+      },
+      "htmlOrder": 18,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/ui-scale.css",
+      "source": {
+        "bytes": 421,
+        "gzip": 369,
+        "sha256": "83705767f816c8aee8e7d463be424881ebf27c714ddc5f29648a97ac7895ebe1"
+      },
+      "expanded": {
+        "bytes": 17333,
+        "gzip": 4399,
+        "sha256": "c2f60f3ee8ffa9c5503310d183de6c805c1a0ac894efa8a36808f67905eaaa38"
+      },
+      "minified": {
+        "bytes": 15154,
+        "gzip": 3424,
+        "sha256": "4d2105b397440ad9e6d95dcbd29a63ed60b2b0f750abfb4c406675a9d3af11ad"
+      },
+      "htmlOrder": 19,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "source": {
+        "bytes": 21459,
+        "gzip": 6887,
+        "sha256": "5bd88749d062aa099b34b491be3b105dd099441b7d01a70870cd9461424cba97"
+      },
+      "expanded": {
+        "bytes": 21459,
+        "gzip": 6887,
+        "sha256": "5bd88749d062aa099b34b491be3b105dd099441b7d01a70870cd9461424cba97"
+      },
+      "minified": {
+        "bytes": 13198,
+        "gzip": 3230,
+        "sha256": "07085a2f236bf1815331259233feb5fea3b0446683cc3f52dcfb6e5e80d6614f"
+      },
+      "htmlOrder": 20,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "source": {
+        "bytes": 25799,
+        "gzip": 7836,
+        "sha256": "5f0d3e1929eb0089bb551ea65a0d7c831a371ed62f276b06d3847cc39e5f2e0a"
+      },
+      "expanded": {
+        "bytes": 25799,
+        "gzip": 7836,
+        "sha256": "5f0d3e1929eb0089bb551ea65a0d7c831a371ed62f276b06d3847cc39e5f2e0a"
+      },
+      "minified": {
+        "bytes": 16953,
+        "gzip": 4018,
+        "sha256": "ff4dfcf87bd9cf33f3e08dc1ec9b6df7705335e59965396a0f7e5170f28c6bde"
+      },
+      "htmlOrder": 21,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "source": {
+        "bytes": 10393,
+        "gzip": 3141,
+        "sha256": "6a98b5492b21029b82abf512dec0262f60502c15dcb9704fdbed1e26c1f90d0e"
+      },
+      "expanded": {
+        "bytes": 10393,
+        "gzip": 3141,
+        "sha256": "6a98b5492b21029b82abf512dec0262f60502c15dcb9704fdbed1e26c1f90d0e"
+      },
+      "minified": {
+        "bytes": 8425,
+        "gzip": 2264,
+        "sha256": "ab680403b1a135e4482223d1c844ac8e5229ac1f0643fa016857726ba2134461"
+      },
+      "htmlOrder": 22,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "source": {
+        "bytes": 18399,
+        "gzip": 6152,
+        "sha256": "910ee0b36fd8cb130f3d078f5eac8545e7e2321c2d3a8b009a20d9631b11c78a"
+      },
+      "expanded": {
+        "bytes": 18399,
+        "gzip": 6152,
+        "sha256": "910ee0b36fd8cb130f3d078f5eac8545e7e2321c2d3a8b009a20d9631b11c78a"
+      },
+      "minified": {
+        "bytes": 8808,
+        "gzip": 2162,
+        "sha256": "49ab84184516663865bf8ddd6f2c227d8587de2e0abcd720bcd09634883c6e6a"
+      },
+      "htmlOrder": 23,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/page-cardforge.css",
+      "source": {
+        "bytes": 15080,
+        "gzip": 5489,
+        "sha256": "fd3213e0ee6077922df01f8e653bad3682d5a3f0c489c35a938748e2c96f9513"
+      },
+      "expanded": {
+        "bytes": 15080,
+        "gzip": 5489,
+        "sha256": "fd3213e0ee6077922df01f8e653bad3682d5a3f0c489c35a938748e2c96f9513"
+      },
+      "minified": {
+        "bytes": 7490,
+        "gzip": 1910,
+        "sha256": "2c7888a287e7f51950dc1f17bdb682c36ecd859ec944cfc28edbd29f8fe53fac"
+      },
+      "htmlOrder": 24,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "source": {
+        "bytes": 30037,
+        "gzip": 7939,
+        "sha256": "6f0b06f23626bb195b95a6894fcffc7ebdbd4b7eef0991a22c978ee89ca4f57f"
+      },
+      "expanded": {
+        "bytes": 30037,
+        "gzip": 7939,
+        "sha256": "6f0b06f23626bb195b95a6894fcffc7ebdbd4b7eef0991a22c978ee89ca4f57f"
+      },
+      "minified": {
+        "bytes": 22128,
+        "gzip": 4351,
+        "sha256": "e5518669d9fd7273c9f95cf51c53d6f83a805e912dfddc92bfb7580cb3673733"
+      },
+      "htmlOrder": 25,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/feedback-oct12.css",
+      "source": {
+        "bytes": 4862,
+        "gzip": 1863,
+        "sha256": "656586628f7816777a358ae657e48f7cfae532dc3cab806a56bf8c9adf8f2503"
+      },
+      "expanded": {
+        "bytes": 4862,
+        "gzip": 1863,
+        "sha256": "656586628f7816777a358ae657e48f7cfae532dc3cab806a56bf8c9adf8f2503"
+      },
+      "minified": {
+        "bytes": 6447,
+        "gzip": 1573,
+        "sha256": "8ffe930f16484c4204e3216fc34c101169f25404f339d80a6ac605a309a84d31"
+      },
+      "htmlOrder": 26,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/roster-departure-v2.css",
+      "source": {
+        "bytes": 7214,
+        "gzip": 2186,
+        "sha256": "4636991b33470ab3bc755b3e9c2b980d142b57379abf1af31ef69c387b4b308d"
+      },
+      "expanded": {
+        "bytes": 7214,
+        "gzip": 2186,
+        "sha256": "4636991b33470ab3bc755b3e9c2b980d142b57379abf1af31ef69c387b4b308d"
+      },
+      "minified": {
+        "bytes": 10987,
+        "gzip": 2170,
+        "sha256": "79ff37fdbc3adbc3ecd8b09ac2bdca1dc0097a74b7a7cf5ae966f998880f1b3e"
+      },
+      "htmlOrder": 27,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/pocket-strip.css",
+      "source": {
+        "bytes": 4591,
+        "gzip": 2602,
+        "sha256": "2f3845ee24c86940d241a4809c0a2991ac0338c9125efe123afae93f6469ebda"
+      },
+      "expanded": {
+        "bytes": 4591,
+        "gzip": 2602,
+        "sha256": "2f3845ee24c86940d241a4809c0a2991ac0338c9125efe123afae93f6469ebda"
+      },
+      "minified": {
+        "bytes": 1824,
+        "gzip": 811,
+        "sha256": "94b95abae89c6d3126196a84166d73159aead4c4b92c504dd34b2d597ccebb9a"
+      },
+      "htmlOrder": 28,
+      "owners": [
+        {
+          "module": "experience/pocket-strip.js",
+          "kind": "static",
+          "line": 4,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/experience-loot.css",
+      "source": {
+        "bytes": 4043,
+        "gzip": 2065,
+        "sha256": "89d1ca446221cc9940937acef4c3237c807342e035e04487c305b1b7a2efc96f"
+      },
+      "expanded": {
+        "bytes": 4043,
+        "gzip": 2065,
+        "sha256": "89d1ca446221cc9940937acef4c3237c807342e035e04487c305b1b7a2efc96f"
+      },
+      "minified": {
+        "bytes": 1811,
+        "gzip": 741,
+        "sha256": "472aabba9f900c28fddfc7819b830587a043772fe697d75e5c6a446df3e7a275"
+      },
+      "htmlOrder": 29,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/page-events.css",
+      "source": {
+        "bytes": 12674,
+        "gzip": 4612,
+        "sha256": "e439d92c4b4b9500cfbce8ea534c63a2fac8cc4ec146e6e8a2d868bf8bb6ceea"
+      },
+      "expanded": {
+        "bytes": 12674,
+        "gzip": 4612,
+        "sha256": "e439d92c4b4b9500cfbce8ea534c63a2fac8cc4ec146e6e8a2d868bf8bb6ceea"
+      },
+      "minified": {
+        "bytes": 6114,
+        "gzip": 1423,
+        "sha256": "cdd9e1c82e5556623fc70502847134ae1479575cd5e334cf3409a0e24954602a"
+      },
+      "htmlOrder": 30,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "source": {
+        "bytes": 32644,
+        "gzip": 11238,
+        "sha256": "5740473109131816d6112b9d2572f874765d48d8325fd41c4d54369f48e732cb"
+      },
+      "expanded": {
+        "bytes": 32644,
+        "gzip": 11238,
+        "sha256": "5740473109131816d6112b9d2572f874765d48d8325fd41c4d54369f48e732cb"
+      },
+      "minified": {
+        "bytes": 16220,
+        "gzip": 3788,
+        "sha256": "337a2aed169062541d592c0733fcae60d0ade6323c58ada77486da57c26c6a04"
+      },
+      "htmlOrder": 31,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "source": {
+        "bytes": 10886,
+        "gzip": 4834,
+        "sha256": "2888d269a8997bab9a21ff773b9eb5db605620170037d38ee19616383eef45ea"
+      },
+      "expanded": {
+        "bytes": 10886,
+        "gzip": 4834,
+        "sha256": "2888d269a8997bab9a21ff773b9eb5db605620170037d38ee19616383eef45ea"
+      },
+      "minified": {
+        "bytes": 1024,
+        "gzip": 430,
+        "sha256": "3cbc9084e66023ece4a60f11ad70cb2f63e1a4f440f38622641f65b86c29b9ce"
+      },
+      "htmlOrder": 32,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/character-idle.css",
+      "source": {
+        "bytes": 1840,
+        "gzip": 651,
+        "sha256": "c815b0019b52d2260b241001ff5904d426f87c5c8658dd9f247ea978498d609b"
+      },
+      "expanded": {
+        "bytes": 1840,
+        "gzip": 651,
+        "sha256": "c815b0019b52d2260b241001ff5904d426f87c5c8658dd9f247ea978498d609b"
+      },
+      "minified": {
+        "bytes": 1245,
+        "gzip": 299,
+        "sha256": "b105e0e98446821b581dd52baf87b324ed36722a8df14b1e55bdf3f97a16823c"
+      },
+      "htmlOrder": 33,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/page-transitions.css",
+      "source": {
+        "bytes": 4335,
+        "gzip": 1847,
+        "sha256": "4fcdc225c5394df4c4123f904aa5536bb7424a32fea379c692eeaf558d2b30bb"
+      },
+      "expanded": {
+        "bytes": 4335,
+        "gzip": 1847,
+        "sha256": "4fcdc225c5394df4c4123f904aa5536bb7424a32fea379c692eeaf558d2b30bb"
+      },
+      "minified": {
+        "bytes": 1472,
+        "gzip": 415,
+        "sha256": "f07f206f82ab222e00102b5e4e3c4032e20170983115de6617936f990bed89fd"
+      },
+      "htmlOrder": 34,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/ak-skin.css",
+      "source": {
+        "bytes": 18687,
+        "gzip": 5508,
+        "sha256": "28ad1ca82985af7cdc6edc404783dd18da16d6fd4072a67e0f386b6d1333cae2"
+      },
+      "expanded": {
+        "bytes": 18687,
+        "gzip": 5508,
+        "sha256": "28ad1ca82985af7cdc6edc404783dd18da16d6fd4072a67e0f386b6d1333cae2"
+      },
+      "minified": {
+        "bytes": 14391,
+        "gzip": 3792,
+        "sha256": "44a2cf11708b986b825b0be04ca907322b4d6ef4b6edf0fe37b64bcccdadd1a0"
+      },
+      "htmlOrder": 35,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "source": {
+        "bytes": 36646,
+        "gzip": 7457,
+        "sha256": "10c3294f8f9b02d8be83d8a550dd308d8e9a6955c932d5cf348f3c4de11d218d"
+      },
+      "expanded": {
+        "bytes": 65049,
+        "gzip": 11325,
+        "sha256": "84af574c6a7ddf5ccf6ed7a2e12b026c0e537292755427a7bc92a829a6fee2c7"
+      },
+      "minified": {
+        "bytes": 58472,
+        "gzip": 9988,
+        "sha256": "68cfd2dcb7a9de0685d967fe3bcc1032907c4b76734f8106237dd599fc194269"
+      },
+      "htmlOrder": 36,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-camp-compact.css",
+      "source": {
+        "bytes": 73,
+        "gzip": 96,
+        "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+      },
+      "expanded": {
+        "bytes": 73,
+        "gzip": 96,
+        "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+      },
+      "minified": {
+        "bytes": 0,
+        "gzip": 20,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "htmlOrder": 37,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "source": {
+        "bytes": 14830,
+        "gzip": 3653,
+        "sha256": "6c7296dd305832802772c8f853fb204983a044d211a219b266d4bdef846cf7db"
+      },
+      "expanded": {
+        "bytes": 14830,
+        "gzip": 3653,
+        "sha256": "6c7296dd305832802772c8f853fb204983a044d211a219b266d4bdef846cf7db"
+      },
+      "minified": {
+        "bytes": 13339,
+        "gzip": 3390,
+        "sha256": "5dcb5013ea1b0166880dba3052ad526acb169d5fd1f3898c579c2706887bcc08"
+      },
+      "htmlOrder": 38,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/battle-stage.css",
+      "source": {
+        "bytes": 25623,
+        "gzip": 5446,
+        "sha256": "56fcbc6152be723173f2aee676077eb4a65d7736634724884fa7c54d5245def0"
+      },
+      "expanded": {
+        "bytes": 25623,
+        "gzip": 5446,
+        "sha256": "56fcbc6152be723173f2aee676077eb4a65d7736634724884fa7c54d5245def0"
+      },
+      "minified": {
+        "bytes": 25204,
+        "gzip": 5200,
+        "sha256": "d8e4aa2f41249d005b62452516da62411e1b5722b5888101290f162709caec73"
+      },
+      "htmlOrder": 39,
+      "owners": [],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/card-description-links.css",
+      "source": {
+        "bytes": 1441,
+        "gzip": 621,
+        "sha256": "3d4ae7fc35dfd198d14dd12e475c465275b24fecfc3ab26991cf5d0a460f0d25"
+      },
+      "expanded": {
+        "bytes": 1441,
+        "gzip": 621,
+        "sha256": "3d4ae7fc35dfd198d14dd12e475c465275b24fecfc3ab26991cf5d0a460f0d25"
+      },
+      "minified": {
+        "bytes": 1326,
+        "gzip": 554,
+        "sha256": "1e3057b46fd4c28d932883c02411b13fa3979b11a7325148067f5f494c439f57"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "cards/card-description-links.js",
+          "kind": "static",
+          "line": 5,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/combat-feedback.css",
+      "source": {
+        "bytes": 1358,
+        "gzip": 721,
+        "sha256": "e59252f788f93ca4cb811d37608d8b25ca58f226ee4a9b8df845379aad378389"
+      },
+      "expanded": {
+        "bytes": 1358,
+        "gzip": 721,
+        "sha256": "e59252f788f93ca4cb811d37608d8b25ca58f226ee4a9b8df845379aad378389"
+      },
+      "minified": {
+        "bytes": 1026,
+        "gzip": 462,
+        "sha256": "7d211537ab0d5619853d7c3c3dd423e07dd96ef92a43386833c81dbf5760cd3a"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "core/motion.js",
+          "kind": "static",
+          "line": 3,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "source": {
+        "bytes": 6029,
+        "gzip": 1543,
+        "sha256": "e66c0eafe648742f14c619f07c82b038dfac9bb392a09059f839fe479f234f7a"
+      },
+      "expanded": {
+        "bytes": 6029,
+        "gzip": 1543,
+        "sha256": "e66c0eafe648742f14c619f07c82b038dfac9bb392a09059f839fe479f234f7a"
+      },
+      "minified": {
+        "bytes": 5599,
+        "gzip": 1331,
+        "sha256": "36cd44a8ca60e80e9637ddd8953b59281e3665c5985b54bfcb09672ba562bbb3"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/base-motion-v4.js",
+          "kind": "static",
+          "line": 1,
+          "initial": false,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 10,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "source": {
+        "bytes": 3295,
+        "gzip": 675,
+        "sha256": "b70aaf07519a19e00dae1941a3725181cd728648a10aa8edf7bb793e9c49d562"
+      },
+      "expanded": {
+        "bytes": 3295,
+        "gzip": 675,
+        "sha256": "b70aaf07519a19e00dae1941a3725181cd728648a10aa8edf7bb793e9c49d562"
+      },
+      "minified": {
+        "bytes": 2795,
+        "gzip": 478,
+        "sha256": "b79693490aaa6ee05ad55dd8954eae6fc456ab14234f96cab16330d7a72c0a3a"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/base-page-motion-v7.js",
+          "kind": "static",
+          "line": 1,
+          "initial": false,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 23,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/departure-selected.css",
+      "source": {
+        "bytes": 10196,
+        "gzip": 2972,
+        "sha256": "b53c6f5e799dc48d8e598d4b86cf85dfe0fa49f5fb759f17c5a3330a3e2ff475"
+      },
+      "expanded": {
+        "bytes": 10196,
+        "gzip": 2972,
+        "sha256": "b53c6f5e799dc48d8e598d4b86cf85dfe0fa49f5fb759f17c5a3330a3e2ff475"
+      },
+      "minified": {
+        "bytes": 13908,
+        "gzip": 2945,
+        "sha256": "2a59215bedc440d913f316aee38c186549ba21cdb6e07728ca9965e5578f78c2"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.depart.js",
+          "kind": "static",
+          "line": 17,
+          "initial": false,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 25,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/roster-reference.css",
+      "source": {
+        "bytes": 3861,
+        "gzip": 1145,
+        "sha256": "cfb7916b04ce89b777a5a42d51770ac87b4d5a0a31318bcbbedf7785a3a8fbe7"
+      },
+      "expanded": {
+        "bytes": 3861,
+        "gzip": 1145,
+        "sha256": "cfb7916b04ce89b777a5a42d51770ac87b4d5a0a31318bcbbedf7785a3a8fbe7"
+      },
+      "minified": {
+        "bytes": 3199,
+        "gzip": 854,
+        "sha256": "f36f57a68aa5044d0c59632f7a23841996354a0fb3fbb36e7880c2e39fde3693"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.depart.js",
+          "kind": "static",
+          "line": 21,
+          "initial": false,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 26,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/preparation.css",
+      "source": {
+        "bytes": 6937,
+        "gzip": 2720,
+        "sha256": "d66b5f2c4bde7fe2fa6e86d00b1b32ee456f106ae3716517030dfb9a9f625270"
+      },
+      "expanded": {
+        "bytes": 6937,
+        "gzip": 2720,
+        "sha256": "d66b5f2c4bde7fe2fa6e86d00b1b32ee456f106ae3716517030dfb9a9f625270"
+      },
+      "minified": {
+        "bytes": 4873,
+        "gzip": 1692,
+        "sha256": "22d8c1044820b5c4be287a27809338ad0841529a1cc15f63560ad2411e9b5527"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 8,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.preparation-ports.js",
+          "kind": "static",
+          "line": 6,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "source": {
+        "bytes": 38023,
+        "gzip": 6274,
+        "sha256": "fa45ebd6f155f5ce14b5557a0f6f8093d449166019589ed514ac13da20278694"
+      },
+      "expanded": {
+        "bytes": 38023,
+        "gzip": 6274,
+        "sha256": "fa45ebd6f155f5ce14b5557a0f6f8093d449166019589ed514ac13da20278694"
+      },
+      "minified": {
+        "bytes": 35405,
+        "gzip": 5731,
+        "sha256": "52133bff687327d8ac1ef9949b36b3443f0dd4c63bebbdd1c61d3dee038f6824"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 9,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.runtime.js",
+          "kind": "static",
+          "line": 15,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/card-browser.css",
+      "source": {
+        "bytes": 1107,
+        "gzip": 483,
+        "sha256": "0d4b619e89af1fe54d253778eb0e706bfe7638e64039b212b36ed0cf68b25d1f"
+      },
+      "expanded": {
+        "bytes": 1107,
+        "gzip": 483,
+        "sha256": "0d4b619e89af1fe54d253778eb0e706bfe7638e64039b212b36ed0cf68b25d1f"
+      },
+      "minified": {
+        "bytes": 1023,
+        "gzip": 468,
+        "sha256": "bb35a331b0b83ff4675ee211ecee06f77a9e98b1c095f391a0364a444ae2282b"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 11,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/hub.warehouse.js",
+          "kind": "static",
+          "line": 4,
+          "initial": false,
+          "reachable": true
+        },
+        {
+          "module": "ui/card-browser.js",
+          "kind": "static",
+          "line": 2,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "source": {
+        "bytes": 4908,
+        "gzip": 1424,
+        "sha256": "fb4a2562f42b5f50fcda49d11feb6dee7f3bd84c9f7d5e481fc0570a01a70e20"
+      },
+      "expanded": {
+        "bytes": 4908,
+        "gzip": 1424,
+        "sha256": "fb4a2562f42b5f50fcda49d11feb6dee7f3bd84c9f7d5e481fc0570a01a70e20"
+      },
+      "minified": {
+        "bytes": 4592,
+        "gzip": 1258,
+        "sha256": "2a0d4976f6514c00911052e8188ccc0cd664d5d23988a55c22c376c3c7e39265"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 12,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "ui/inventory-zoom.js",
+          "kind": "static",
+          "line": 3,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-reward-feedback.css",
+      "source": {
+        "bytes": 1538,
+        "gzip": 546,
+        "sha256": "4cf3949a74c15dab2c9f1d7075cb4e303059bbd15910a1e4b0e9d665d1ff857b"
+      },
+      "expanded": {
+        "bytes": 1538,
+        "gzip": 546,
+        "sha256": "4cf3949a74c15dab2c9f1d7075cb4e303059bbd15910a1e4b0e9d665d1ff857b"
+      },
+      "minified": {
+        "bytes": 1438,
+        "gzip": 524,
+        "sha256": "29a5593d55a731dce56b1de21b4c95d1b7404f47d06a95daefa3984f926a8b82"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 13,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/hub.reward-feedback.js",
+          "kind": "static",
+          "line": 2,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-collection-v4.css",
+      "source": {
+        "bytes": 3290,
+        "gzip": 1032,
+        "sha256": "554cfed37ef35726fa7888bd35f8bb26e92172e2980d5e8bf300e4f3ee4dfe5c"
+      },
+      "expanded": {
+        "bytes": 3290,
+        "gzip": 1032,
+        "sha256": "554cfed37ef35726fa7888bd35f8bb26e92172e2980d5e8bf300e4f3ee4dfe5c"
+      },
+      "minified": {
+        "bytes": 3027,
+        "gzip": 883,
+        "sha256": "dd2a60dfcd1aa1291022a94675794951d55916a8444d3ac0b9027bb60de1b01e"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 14,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/hub.collection-v4.js",
+          "kind": "static",
+          "line": 6,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-courtyard-v3.css",
+      "source": {
+        "bytes": 6673,
+        "gzip": 1597,
+        "sha256": "a81b362e43179a416e1aab62357a68141579196173a60ba0a045078f3cebbd3b"
+      },
+      "expanded": {
+        "bytes": 6673,
+        "gzip": 1597,
+        "sha256": "a81b362e43179a416e1aab62357a68141579196173a60ba0a045078f3cebbd3b"
+      },
+      "minified": {
+        "bytes": 6343,
+        "gzip": 1436,
+        "sha256": "f70f506c80df2cb751e40c6ca8eabbff8cb6dbeed93a18ebad9ea2c158c5e893"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 15,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.runtime.js",
+          "kind": "static",
+          "line": 22,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-panel-layout.css",
+      "source": {
+        "bytes": 73,
+        "gzip": 96,
+        "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+      },
+      "expanded": {
+        "bytes": 73,
+        "gzip": 96,
+        "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+      },
+      "minified": {
+        "bytes": 0,
+        "gzip": 20,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 16,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.runtime.js",
+          "kind": "static",
+          "line": 23,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "source": {
+        "bytes": 16207,
+        "gzip": 3242,
+        "sha256": "f84f54252b51ddcbbc2912403a6367c51453de4090ad9be3d14d9b980ffd4926"
+      },
+      "expanded": {
+        "bytes": 16207,
+        "gzip": 3242,
+        "sha256": "f84f54252b51ddcbbc2912403a6367c51453de4090ad9be3d14d9b980ffd4926"
+      },
+      "minified": {
+        "bytes": 15152,
+        "gzip": 2766,
+        "sha256": "1d5046bbc6561b3762f999d2b4ae3e45fe0bbd889de3a23a31cb347f5834dbd8"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 17,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.runtime.js",
+          "kind": "static",
+          "line": 24,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-framework-v7.css",
+      "source": {
+        "bytes": 8109,
+        "gzip": 2265,
+        "sha256": "f7485b47de5ad5b7332f7201fa0b4da7bab136eef41f6e5833535b97b9ea4ed1"
+      },
+      "expanded": {
+        "bytes": 8109,
+        "gzip": 2265,
+        "sha256": "f7485b47de5ad5b7332f7201fa0b4da7bab136eef41f6e5833535b97b9ea4ed1"
+      },
+      "minified": {
+        "bytes": 7687,
+        "gzip": 2033,
+        "sha256": "b805cd083136f94d8852f3102988b5763828faf1c83cff349eded521cb061461"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 18,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.runtime.js",
+          "kind": "static",
+          "line": 25,
+          "initial": false,
+          "reachable": true
+        },
+        {
+          "module": "ui/base-design-preview-v7.js",
+          "kind": "static",
+          "line": 7,
+          "initial": false,
+          "reachable": false
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "source": {
+        "bytes": 33335,
+        "gzip": 5684,
+        "sha256": "e19ac60643b3caa944a1700ac56d9571d1e651615e8259b60100057b0984d399"
+      },
+      "expanded": {
+        "bytes": 33335,
+        "gzip": 5684,
+        "sha256": "e19ac60643b3caa944a1700ac56d9571d1e651615e8259b60100057b0984d399"
+      },
+      "minified": {
+        "bytes": 31012,
+        "gzip": 4652,
+        "sha256": "105b0aa170926de3d0616ff966358c7f77beb7e5d04b6754f1f3c9c59f42fa3a"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 19,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.runtime.js",
+          "kind": "static",
+          "line": 26,
+          "initial": false,
+          "reachable": true
+        },
+        {
+          "module": "ui/base-design-preview-v7.js",
+          "kind": "static",
+          "line": 8,
+          "initial": false,
+          "reachable": false
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "source": {
+        "bytes": 28543,
+        "gzip": 4799,
+        "sha256": "4e290572f6993d505867128464326987c93c2dad8ad63656d9f1f4045d051bad"
+      },
+      "expanded": {
+        "bytes": 28543,
+        "gzip": 4799,
+        "sha256": "4e290572f6993d505867128464326987c93c2dad8ad63656d9f1f4045d051bad"
+      },
+      "minified": {
+        "bytes": 29261,
+        "gzip": 4099,
+        "sha256": "5faad0aca3ad6cc601ebc5554f9771081f0d08e89f9b74e6b8c324fc777caec6"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 20,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.runtime.js",
+          "kind": "static",
+          "line": 27,
+          "initial": false,
+          "reachable": true
+        },
+        {
+          "module": "ui/base-design-preview-v7.js",
+          "kind": "static",
+          "line": 9,
+          "initial": false,
+          "reachable": false
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-logistics-trade-v12.css",
+      "source": {
+        "bytes": 15472,
+        "gzip": 3435,
+        "sha256": "267438aaa2b24dbe8b89761ffd6ef2bce90a9a7db8219cbeedbfff424936a0be"
+      },
+      "expanded": {
+        "bytes": 15472,
+        "gzip": 3435,
+        "sha256": "267438aaa2b24dbe8b89761ffd6ef2bce90a9a7db8219cbeedbfff424936a0be"
+      },
+      "minified": {
+        "bytes": 22736,
+        "gzip": 3195,
+        "sha256": "8ad2f21b8809105c4876603ee895448b41c503258a81993079e9350305024ad6"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 21,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.runtime.js",
+          "kind": "static",
+          "line": 28,
+          "initial": false,
+          "reachable": true
+        },
+        {
+          "module": "ui/base-design-preview-v7.js",
+          "kind": "static",
+          "line": 10,
+          "initial": false,
+          "reachable": false
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-archive-facilities-v12.css",
+      "source": {
+        "bytes": 29387,
+        "gzip": 4246,
+        "sha256": "37054842058ac0b5556295a768e28f5d0f3b763835433807bbf8be1dc85c4a62"
+      },
+      "expanded": {
+        "bytes": 29387,
+        "gzip": 4246,
+        "sha256": "37054842058ac0b5556295a768e28f5d0f3b763835433807bbf8be1dc85c4a62"
+      },
+      "minified": {
+        "bytes": 27789,
+        "gzip": 3765,
+        "sha256": "bf48ebd7c33aef8bb0928cf6a0f130b7a3832bb4ecf92a56ba54b7f6068b5245"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 22,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.runtime.js",
+          "kind": "static",
+          "line": 29,
+          "initial": false,
+          "reachable": true
+        },
+        {
+          "module": "ui/base-design-preview-v7.js",
+          "kind": "static",
+          "line": 11,
+          "initial": false,
+          "reachable": false
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-home-v7.css",
+      "source": {
+        "bytes": 8429,
+        "gzip": 1890,
+        "sha256": "2cd68bbcf96bea9721aa911cce4b962aaa821b0f348a3846cde4297e882872b8"
+      },
+      "expanded": {
+        "bytes": 8429,
+        "gzip": 1890,
+        "sha256": "2cd68bbcf96bea9721aa911cce4b962aaa821b0f348a3846cde4297e882872b8"
+      },
+      "minified": {
+        "bytes": 8019,
+        "gzip": 1708,
+        "sha256": "9c4a58e8f85f4c2b2467a9e70617aa31c1be91252c548f8dcef20b5db5ebcb76"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 24,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/hub.home-v3.js",
+          "kind": "static",
+          "line": 3,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-shop-v3.css",
+      "source": {
+        "bytes": 6727,
+        "gzip": 1801,
+        "sha256": "b16070d392d6e7b6067c7908d814286a26a9c92541946abb62a821897327ce5d"
+      },
+      "expanded": {
+        "bytes": 6727,
+        "gzip": 1801,
+        "sha256": "b16070d392d6e7b6067c7908d814286a26a9c92541946abb62a821897327ce5d"
+      },
+      "minified": {
+        "bytes": 6201,
+        "gzip": 1551,
+        "sha256": "774e496392d03c59bd926801c55bb6c5ea935a98d926017b8a6ee1d04e992577"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 27,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.pages.js",
+          "kind": "static",
+          "line": 12,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "source": {
+        "bytes": 17304,
+        "gzip": 2850,
+        "sha256": "27b7ac56bce6dcabdf915420c1c379f1b0313e3c728ccf297a72adfd55bb7923"
+      },
+      "expanded": {
+        "bytes": 17304,
+        "gzip": 2850,
+        "sha256": "27b7ac56bce6dcabdf915420c1c379f1b0313e3c728ccf297a72adfd55bb7923"
+      },
+      "minified": {
+        "bytes": 16276,
+        "gzip": 2727,
+        "sha256": "9718bc2ddf24273f598f2bd53be42a8aa3969b985b81f2a79626317d1a0f8509"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.hub.js",
+          "kind": "static",
+          "line": 28,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "hub/game.hub.pages.js",
+          "kind": "static",
+          "line": 13,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/chest-opening.css",
+      "source": {
+        "bytes": 4285,
+        "gzip": 1415,
+        "sha256": "d2162f97a5a36f6f70780f366c88fcdf2f0d81969998b69eac53c1b351adf0dd"
+      },
+      "expanded": {
+        "bytes": 4285,
+        "gzip": 1415,
+        "sha256": "d2162f97a5a36f6f70780f366c88fcdf2f0d81969998b69eac53c1b351adf0dd"
+      },
+      "minified": {
+        "bytes": 3978,
+        "gzip": 1334,
+        "sha256": "2c99163859809e8a477e1eb88124d27f68b202cfea4a16f1a08aad27470f840d"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "run/chest-opening-art.js",
+          "kind": "static",
+          "line": 2,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "source": {
+        "bytes": 25075,
+        "gzip": 4371,
+        "sha256": "0d488a1c0174cf7b0c77702e178937ef4a5ba5238b88adf70727f89a7f71185b"
+      },
+      "expanded": {
+        "bytes": 25075,
+        "gzip": 4371,
+        "sha256": "0d488a1c0174cf7b0c77702e178937ef4a5ba5238b88adf70727f89a7f71185b"
+      },
+      "minified": {
+        "bytes": 23249,
+        "gzip": 3828,
+        "sha256": "d8a35a01d17a39b818c3b0f1a824bc7557a228133df7432a11254b80f2c64713"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "run/game.run.scenes.js",
+          "kind": "static",
+          "line": 25,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/expedition-transitions.css",
+      "source": {
+        "bytes": 3801,
+        "gzip": 1246,
+        "sha256": "4a6cebf9068a361efdbec576a312df9132b22ed0aeb5a79687e6049ca7acb96b"
+      },
+      "expanded": {
+        "bytes": 3801,
+        "gzip": 1246,
+        "sha256": "4a6cebf9068a361efdbec576a312df9132b22ed0aeb5a79687e6049ca7acb96b"
+      },
+      "minified": {
+        "bytes": 3374,
+        "gzip": 1016,
+        "sha256": "041fe3fcec5c5f250b1d66213bacd3548f5f199e1361fb81c5c7a6dc58e05749"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "run/game.run.scenes.js",
+          "kind": "static",
+          "line": 26,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "ui/departure-transition.js",
+          "kind": "static",
+          "line": 4,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/archive-motion.css",
+      "source": {
+        "bytes": 5692,
+        "gzip": 1515,
+        "sha256": "5fd3a8a99f91579defa7ca26bd314c9dcafd2e8ece886990411932e9d8a76873"
+      },
+      "expanded": {
+        "bytes": 5692,
+        "gzip": 1515,
+        "sha256": "5fd3a8a99f91579defa7ca26bd314c9dcafd2e8ece886990411932e9d8a76873"
+      },
+      "minified": {
+        "bytes": 4834,
+        "gzip": 1138,
+        "sha256": "8211c458a3d627ffe368269fb9bc5ad6780d1dc12c124e0c4ecbd9059357dd76"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "ui/archive-motion.js",
+          "kind": "static",
+          "line": 2,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "source": {
+        "bytes": 14662,
+        "gzip": 3766,
+        "sha256": "0cd65b3c8073157328939a408235cc5300a4caeb190d8341ddec1a75abf8109f"
+      },
+      "expanded": {
+        "bytes": 14662,
+        "gzip": 3766,
+        "sha256": "0cd65b3c8073157328939a408235cc5300a4caeb190d8341ddec1a75abf8109f"
+      },
+      "minified": {
+        "bytes": 12560,
+        "gzip": 2780,
+        "sha256": "17232683adb459116128ada3c3857a4aaa1e2a8ed1ccdba5d0c9ee48ffd42571"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "ui/camp-entry.js",
+          "kind": "static",
+          "line": 2,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "source": {
+        "bytes": 1990,
+        "gzip": 793,
+        "sha256": "29e9ff37b078d113073a1e2a8b79a4ab014200ce4a3dc7ab8bd0297756f0dd76"
+      },
+      "expanded": {
+        "bytes": 4043,
+        "gzip": 1293,
+        "sha256": "e7dd258fec6563752f396dcdca24dfc1d2af360db8825012715bc4ff4c02c0e5"
+      },
+      "minified": {
+        "bytes": 3214,
+        "gzip": 809,
+        "sha256": "1421644b46f55928f8a3f896def8ab99cae0b3a71ddcf7928fca2e9b601b6db7"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "ui/game.menu.pages.js",
+          "kind": "static",
+          "line": 14,
+          "initial": false,
+          "reachable": true
+        },
+        {
+          "module": "ui/node-scene-view.js",
+          "kind": "static",
+          "line": 2,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "source": {
+        "bytes": 6400,
+        "gzip": 2021,
+        "sha256": "b6d70c2d361d93fb65a251948332ee3d06e89161151b64ee43eb646e54f0ddc4"
+      },
+      "expanded": {
+        "bytes": 6400,
+        "gzip": 2021,
+        "sha256": "b6d70c2d361d93fb65a251948332ee3d06e89161151b64ee43eb646e54f0ddc4"
+      },
+      "minified": {
+        "bytes": 5131,
+        "gzip": 1177,
+        "sha256": "4dd6ff7915f1f44e6bc787ab6b89eac8972ea370fa45cb6f9dde0b812d615fb9"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "ui/home-linked-interactions.js",
+          "kind": "static",
+          "line": 1,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/home-ui-tokens.css",
+      "source": {
+        "bytes": 590,
+        "gzip": 383,
+        "sha256": "cf985b45cf4f28d4f1fef916125797c322ffefd63330743481d7547a5b83d0d0"
+      },
+      "expanded": {
+        "bytes": 590,
+        "gzip": 383,
+        "sha256": "cf985b45cf4f28d4f1fef916125797c322ffefd63330743481d7547a5b83d0d0"
+      },
+      "minified": {
+        "bytes": 445,
+        "gzip": 254,
+        "sha256": "3eca781dff23fb3e37c2854f5a080d2a92a7ba410d7ab36df8eeb1a8ef3b2193"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "ui/home-menu-motion.js",
+          "kind": "static",
+          "line": 3,
+          "initial": true,
+          "reachable": true
+        },
+        {
+          "module": "ui/settings-navigation.js",
+          "kind": "static",
+          "line": 2,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "source": {
+        "bytes": 2130,
+        "gzip": 952,
+        "sha256": "591720893fc30fc4908b1f7d5d4b062f7cd243568d86228260c8971cbf25ccf6"
+      },
+      "expanded": {
+        "bytes": 2130,
+        "gzip": 952,
+        "sha256": "591720893fc30fc4908b1f7d5d4b062f7cd243568d86228260c8971cbf25ccf6"
+      },
+      "minified": {
+        "bytes": 1787,
+        "gzip": 737,
+        "sha256": "1858652394ff5815bd3892e99732f0fdc5058bcaf65e63d8d82aa651b49b5f99"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "ui/page-loading.js",
+          "kind": "static",
+          "line": 3,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/page-visual-ready.css",
+      "source": {
+        "bytes": 954,
+        "gzip": 435,
+        "sha256": "d8de986d8b834bf10ecce440f426d311b7949820774b670c334bd851e351d071"
+      },
+      "expanded": {
+        "bytes": 954,
+        "gzip": 435,
+        "sha256": "d8de986d8b834bf10ecce440f426d311b7949820774b670c334bd851e351d071"
+      },
+      "minified": {
+        "bytes": 803,
+        "gzip": 368,
+        "sha256": "d7fc657162a0f547359c02edacd9412fb03563d3b2c7763f2f30e7c94a9fb52d"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "ui/page-visual-ready.js",
+          "kind": "static",
+          "line": 2,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/title-credits.css",
+      "source": {
+        "bytes": 7317,
+        "gzip": 1933,
+        "sha256": "9ae4b38a7c3daeedcbca7fd4e8c2e02bb60e0f8c30c77b0fd6570aa876772a62"
+      },
+      "expanded": {
+        "bytes": 7317,
+        "gzip": 1933,
+        "sha256": "9ae4b38a7c3daeedcbca7fd4e8c2e02bb60e0f8c30c77b0fd6570aa876772a62"
+      },
+      "minified": {
+        "bytes": 6498,
+        "gzip": 1625,
+        "sha256": "947e88102e16b4abef71501b382fcdac6b3e1f42432d5ad277f28836a9ec002a"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "ui/title-credits.js",
+          "kind": "static",
+          "line": 4,
+          "initial": true,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/battle-hand-overhaul.css",
+      "source": {
+        "bytes": 9656,
+        "gzip": 3079,
+        "sha256": "7b29b382d3c332b6c7695aee35f6827954a63c7a45d89385521a4247e94c3fc3"
+      },
+      "expanded": {
+        "bytes": 9656,
+        "gzip": 3079,
+        "sha256": "7b29b382d3c332b6c7695aee35f6827954a63c7a45d89385521a4247e94c3fc3"
+      },
+      "minified": {
+        "bytes": 8411,
+        "gzip": 2217,
+        "sha256": "45471c87586ceb616d2d808af6ae399664ca9b2b14d8bcf27555a2ba03a89b40"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "battle/view/battle.aim.js",
+          "kind": "static",
+          "line": 8,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/home-scene.css",
+      "source": {
+        "bytes": 6190,
+        "gzip": 1966,
+        "sha256": "c79343e83284423e125dbf6730a26f04dff682719f878f172fb720bb19208c5c"
+      },
+      "expanded": {
+        "bytes": 6190,
+        "gzip": 1966,
+        "sha256": "c79343e83284423e125dbf6730a26f04dff682719f878f172fb720bb19208c5c"
+      },
+      "minified": {
+        "bytes": 6275,
+        "gzip": 1973,
+        "sha256": "0bcd1de5b274e2aa0818dcee0b8ce07a9f9cc2522a9ffbd7648d63832ba0cf21"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "home/home.scene.js",
+          "kind": "static",
+          "line": 3,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/photo-studio-mounts.css",
+      "source": {
+        "bytes": 6761,
+        "gzip": 1660,
+        "sha256": "266b61a2efc3c49f70f449ab6d9617204e36c7fa49e6aec350a8e98a09279203"
+      },
+      "expanded": {
+        "bytes": 6761,
+        "gzip": 1660,
+        "sha256": "266b61a2efc3c49f70f449ab6d9617204e36c7fa49e6aec350a8e98a09279203"
+      },
+      "minified": {
+        "bytes": 6170,
+        "gzip": 1456,
+        "sha256": "6fe2759bf6c5feb988994279450ae21a77fcad0cd2b7c2d0c0ade5567ac1b696"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.cardslib.page.js",
+          "kind": "static",
+          "line": 53,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "source": {
+        "bytes": 65861,
+        "gzip": 12353,
+        "sha256": "77c20764dfb9099fa9e4cf31241bce6ad5ff2cb385d09b01410826a512162990"
+      },
+      "expanded": {
+        "bytes": 65861,
+        "gzip": 12353,
+        "sha256": "77c20764dfb9099fa9e4cf31241bce6ad5ff2cb385d09b01410826a512162990"
+      },
+      "minified": {
+        "bytes": 61137,
+        "gzip": 10911,
+        "sha256": "aefc6a4bf81faef297f8d9df680b976ae754f7750f10e16f1f952ef30dc91b11"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.cardslib.page.js",
+          "kind": "static",
+          "line": 54,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/photo-studio-room-effects.css",
+      "source": {
+        "bytes": 4601,
+        "gzip": 1480,
+        "sha256": "2f5ca4bd3fb06781a599eaead25bc615d4279b9215911b3380e099cd44a23b0b"
+      },
+      "expanded": {
+        "bytes": 4601,
+        "gzip": 1480,
+        "sha256": "2f5ca4bd3fb06781a599eaead25bc615d4279b9215911b3380e099cd44a23b0b"
+      },
+      "minified": {
+        "bytes": 4232,
+        "gzip": 1349,
+        "sha256": "71ca0cf4c684fd5bef4dd2c9493580c8ffe93a9e521a1f59439ecc7cf9b4297a"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.cardslib.page.js",
+          "kind": "static",
+          "line": 55,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/photo-studio-zoom-motion.css",
+      "source": {
+        "bytes": 1565,
+        "gzip": 449,
+        "sha256": "d4918b1effd88d3add908500ad39c6682f3351def78e7b2feab38177d3481e40"
+      },
+      "expanded": {
+        "bytes": 1565,
+        "gzip": 449,
+        "sha256": "d4918b1effd88d3add908500ad39c6682f3351def78e7b2feab38177d3481e40"
+      },
+      "minified": {
+        "bytes": 1369,
+        "gzip": 357,
+        "sha256": "c7bd96ab660f8d3774c1032423c60fd8284278a52af62df0369f6062e8dfcea8"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "hub/game.cardslib.page.js",
+          "kind": "static",
+          "line": 56,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/title-achievements.css",
+      "source": {
+        "bytes": 19267,
+        "gzip": 4804,
+        "sha256": "b27803fe4feabf1b5964110d2ef0c6d06190ec35010085c61ca4b17fc74d2b69"
+      },
+      "expanded": {
+        "bytes": 19267,
+        "gzip": 4804,
+        "sha256": "b27803fe4feabf1b5964110d2ef0c6d06190ec35010085c61ca4b17fc74d2b69"
+      },
+      "minified": {
+        "bytes": 17108,
+        "gzip": 4260,
+        "sha256": "8aca71e5067bf56d8d9293c9da763fb550f466489c4334e2129efa107dde7f26"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "ui/game.menu.pages.js",
+          "kind": "static",
+          "line": 12,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/beginner-guide.css",
+      "source": {
+        "bytes": 7957,
+        "gzip": 2243,
+        "sha256": "3dc7ac8cf4b42bd840429cbacc873b78a44c7b20e5e7edc627ae8407fa24943f"
+      },
+      "expanded": {
+        "bytes": 7957,
+        "gzip": 2243,
+        "sha256": "3dc7ac8cf4b42bd840429cbacc873b78a44c7b20e5e7edc627ae8407fa24943f"
+      },
+      "minified": {
+        "bytes": 6969,
+        "gzip": 2035,
+        "sha256": "a253bcad6ffd166fbfc957d939e01479a7e001ffff82bc6b15c2a47cc7d7fbed"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "ui/game.menu.pages.js",
+          "kind": "static",
+          "line": 13,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/leave-run.css",
+      "source": {
+        "bytes": 5387,
+        "gzip": 1602,
+        "sha256": "19ee3bbd94cd4b83d9f8bcf0f8b0adf7d8dbbabf73c8a1bf2582181b50f3ef78"
+      },
+      "expanded": {
+        "bytes": 5387,
+        "gzip": 1602,
+        "sha256": "19ee3bbd94cd4b83d9f8bcf0f8b0adf7d8dbbabf73c8a1bf2582181b50f3ef78"
+      },
+      "minified": {
+        "bytes": 4867,
+        "gzip": 1414,
+        "sha256": "7499a160367e834af141eb3d6f17bc2ee40c7688f7fc6490a770326edacfc1a8"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "ui/game.menu.pages.js",
+          "kind": "static",
+          "line": 15,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/settings-navigation.css",
+      "source": {
+        "bytes": 16312,
+        "gzip": 3930,
+        "sha256": "660a524842cc8431d051d20bb86323e473e61ebbffcacd5b2bdb22bc3998be6c"
+      },
+      "expanded": {
+        "bytes": 16312,
+        "gzip": 3930,
+        "sha256": "660a524842cc8431d051d20bb86323e473e61ebbffcacd5b2bdb22bc3998be6c"
+      },
+      "minified": {
+        "bytes": 14576,
+        "gzip": 3455,
+        "sha256": "c4d2cf85ed4d58536c462a11a6989315c0d9e8029e8dde4eea1012446c2feb81"
+      },
+      "htmlOrder": -1,
+      "owners": [
+        {
+          "module": "ui/settings-navigation.js",
+          "kind": "static",
+          "line": 1,
+          "initial": false,
+          "reachable": true
+        }
+      ],
+      "urlOwners": []
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "source": {
+        "bytes": 38009,
+        "gzip": 8711,
+        "sha256": "ce6216ad0506bc492d4dff65f88eab8bb5488efa1bc32f5c89b41d462e47cd29"
+      },
+      "expanded": {
+        "bytes": 38009,
+        "gzip": 8711,
+        "sha256": "ce6216ad0506bc492d4dff65f88eab8bb5488efa1bc32f5c89b41d462e47cd29"
+      },
+      "minified": {
+        "bytes": 32071,
+        "gzip": 6551,
+        "sha256": "24b9fe6daffa50351725fcffd942100e5c54027c9e7c1f87abe92fc29ba7242e"
+      },
+      "htmlOrder": -1,
+      "owners": [],
+      "urlOwners": [
+        {
+          "file": "game/css/home-polish.css",
+          "module": "ui/home-fx.js",
+          "initial": true,
+          "reachable": true
+        }
+      ]
+    },
+    {
+      "file": "game/css/home-layers.css",
+      "source": {
+        "bytes": 8465,
+        "gzip": 2268,
+        "sha256": "ac5d871a838c2d6b46d71c676b220e9e2122aee5a59408b5d90d4db045e4f478"
+      },
+      "expanded": {
+        "bytes": 8465,
+        "gzip": 2268,
+        "sha256": "ac5d871a838c2d6b46d71c676b220e9e2122aee5a59408b5d90d4db045e4f478"
+      },
+      "minified": {
+        "bytes": 7031,
+        "gzip": 1757,
+        "sha256": "6c3e07a6168c6bb3f8077bde5d261d376b4915323dfbfcb3ee40fab4a5e263bc"
+      },
+      "htmlOrder": -1,
+      "owners": [],
+      "urlOwners": [
+        {
+          "file": "game/css/home-layers.css",
+          "module": "ui/home-layers.js",
+          "initial": true,
+          "reachable": true
+        }
+      ]
+    },
+    {
+      "file": "game/css/home-menu-motion.css",
+      "source": {
+        "bytes": 6563,
+        "gzip": 1547,
+        "sha256": "eb4d1d680084d761a5c8ad7a2db6dc8ebdbf4551572bfcf7d1655276ef4d61e2"
+      },
+      "expanded": {
+        "bytes": 6563,
+        "gzip": 1547,
+        "sha256": "eb4d1d680084d761a5c8ad7a2db6dc8ebdbf4551572bfcf7d1655276ef4d61e2"
+      },
+      "minified": {
+        "bytes": 5281,
+        "gzip": 965,
+        "sha256": "ba122c7f24cfd0f8b331200344ba987792245aeef4f5b414ec0404d601607fa4"
+      },
+      "htmlOrder": -1,
+      "owners": [],
+      "urlOwners": [
+        {
+          "file": "game/css/home-menu-motion.css",
+          "module": "ui/home-menu-motion.js",
+          "initial": true,
+          "reachable": true
+        }
+      ]
+    },
+    {
+      "file": "game/css/interface-motion.css",
+      "source": {
+        "bytes": 7185,
+        "gzip": 1603,
+        "sha256": "cfab7b16a74313f318409e14a05e4ec8271f6b1c20d52472c874131c54295e99"
+      },
+      "expanded": {
+        "bytes": 7185,
+        "gzip": 1603,
+        "sha256": "cfab7b16a74313f318409e14a05e4ec8271f6b1c20d52472c874131c54295e99"
+      },
+      "minified": {
+        "bytes": 6012,
+        "gzip": 970,
+        "sha256": "17eaaefcd12b09e698fe481b0b7dc6cd8909e9f815dceb49f4bf3f4a935ec094"
+      },
+      "htmlOrder": -1,
+      "owners": [],
+      "urlOwners": [
+        {
+          "file": "game/css/interface-motion.css",
+          "module": "ui/interface-motion.js",
+          "initial": true,
+          "reachable": true
+        }
+      ]
+    },
+    {
+      "file": "game/css/motion-transitions.css",
+      "source": {
+        "bytes": 16711,
+        "gzip": 6801,
+        "sha256": "7d121c987b4790355168f0c4357884aa92a358faae00e6b4c63549d8db4eb345"
+      },
+      "expanded": {
+        "bytes": 16711,
+        "gzip": 6801,
+        "sha256": "7d121c987b4790355168f0c4357884aa92a358faae00e6b4c63549d8db4eb345"
+      },
+      "minified": {
+        "bytes": 6836,
+        "gzip": 1975,
+        "sha256": "6c0e5267bceeeaf47fe196bc939d7b3701298fe15e1bbd7d651348f9e39cc861"
+      },
+      "htmlOrder": -1,
+      "owners": [],
+      "urlOwners": [
+        {
+          "file": "game/css/motion-transitions.css",
+          "module": "ui/motion-transitions.js",
+          "initial": true,
+          "reachable": true
+        }
+      ]
+    }
+  ],
+  "retainedArtifactCss": [
+    {
+      "file": "assets/battle-CMeGAmXR.css",
+      "bytes": 8411,
+      "gzip": 2217,
+      "sha256": "45471c87586ceb616d2d808af6ae399664ca9b2b14d8bcf27555a2ba03a89b40"
+    },
+    {
+      "file": "assets/game.cardslib-DL1ME_Cs.css",
+      "bytes": 72402,
+      "gzip": 13367,
+      "sha256": "85095b0e75e7bce1d03835c43cd43d5fe2a743203a2d70c6a7e9b3823417009c"
+    },
+    {
+      "file": "assets/game.menu-COmXXeJI.css",
+      "bytes": 43489,
+      "gzip": 9387,
+      "sha256": "5d31d6a08c6263dfd3cb8ae4ca765702094a213d99cb6def287372eb4924c89c"
+    },
+    {
+      "file": "assets/home-djRd51SW.css",
+      "bytes": 6275,
+      "gzip": 1973,
+      "sha256": "0bcd1de5b274e2aa0818dcee0b8ce07a9f9cc2522a9ffbd7648d63832ba0cf21"
+    },
+    {
+      "file": "assets/home-layers-CGeD3b0U.css",
+      "bytes": 7062,
+      "gzip": 1771,
+      "sha256": "859fb623803b4549c88765d28de8f062b140d4a4e96606305dbf606f68afb206"
+    },
+    {
+      "file": "assets/home-menu-motion-ChDSp1Xr.css",
+      "bytes": 5346,
+      "gzip": 973,
+      "sha256": "726592152d6e23122f02a0c6332b00918e1e22a41b002308dfada373288ee90e"
+    },
+    {
+      "file": "assets/home-polish-8Wc6XNpi.css",
+      "bytes": 32383,
+      "gzip": 6599,
+      "sha256": "6a4b328446868cea1c27a6ed25640e649c40d9241b96f2f2242ad5747ca2797f"
+    },
+    {
+      "file": "assets/index-CxqK3peg.css",
+      "bytes": 913788,
+      "gzip": 161030,
+      "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+    },
+    {
+      "file": "assets/interface-motion-Cm3pw1Zg.css",
+      "bytes": 6043,
+      "gzip": 971,
+      "sha256": "70a846aa0f98653f24d49ddab3cbf0b1c3634d86b333c1c14da531213821e214"
+    },
+    {
+      "file": "assets/motion-transitions-BdxbKqrz.css",
+      "bytes": 6985,
+      "gzip": 2002,
+      "sha256": "384d22f6f74838e97adb6820fbd7fef206f077f89905c98be8664bc44fe3a2f6"
+    }
+  ],
+  "retainedArtifactCssTotalGzip": 200290,
+  "artifactInitialCssGzip": 161030,
+  "fingerprintMismatches": [
+    "game/css/battle-stage.css"
+  ],
+  "fingerprints": [
+    {
+      "file": "game/css/base.css",
+      "bytes": 31857,
+      "gzip": 9306,
+      "sha256": "1499019c0512b90b6cc2387d298bc90967739e074272407eed911d3c853b22e5",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/cards.css",
+      "bytes": 11852,
+      "gzip": 3749,
+      "sha256": "3fe867ce2d597d628369d2acb59503c62338930050acb0944fc2b953d8745bfe",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/overlays.css",
+      "bytes": 40247,
+      "gzip": 11838,
+      "sha256": "888bf002106a381e35e64da11cdf0073e43469af4b8a27784b31b08fc1ba45df",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/hub.css",
+      "bytes": 22800,
+      "gzip": 6705,
+      "sha256": "15625e19a8d3ceef649cb9f3b337b7d64e49c00592e0c2d84218edb7709af246",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/battle.css",
+      "bytes": 36099,
+      "gzip": 13779,
+      "sha256": "cb2e5e6d6c9499a04ad940b28c975ca958e21e69f93a0b76afc4ff6e55c18b78",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/scenes.css",
+      "bytes": 46558,
+      "gzip": 12056,
+      "sha256": "6d10a0d68c80397b9ff599ff631dc66c0b91984cc205b736dbf7716df05cfb70",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/lab-ending.css",
+      "bytes": 5618,
+      "gzip": 1972,
+      "sha256": "016f67eb90ddee62f365b94e87d8874b73b3745a474ce8f55ee84e9312d245f2",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/winter.css",
+      "bytes": 103749,
+      "gzip": 32726,
+      "sha256": "ece80983ce19406ed30fb90b6bfb4732df056816bb9069993e42cde58df2d857",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/expedition.css",
+      "bytes": 19421,
+      "gzip": 6051,
+      "sha256": "e01e7dc454882197dd7e69fcb9f3674335366f92de210554e6b521bf3e641b28",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "bytes": 8144,
+      "gzip": 2478,
+      "sha256": "52f517ca0a09d01d5ccfb21bdd8784b68805a8cc12ca0d6b92533c4c50af81bb",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/map-edge-light.css",
+      "bytes": 2620,
+      "gzip": 1040,
+      "sha256": "c6caa8a3b6e406db801917c9081af1db79be9d1031cef62bd47b1239b6cf50c2",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "bytes": 6824,
+      "gzip": 3281,
+      "sha256": "49a67f94098daa023331829f6f45131a9d3c48882483dbbdb4656a0856b3c123",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "bytes": 29911,
+      "gzip": 8134,
+      "sha256": "158c7a97d871f9c2821f1358418d4c96951a7d973a305b9ad0e4016d700e1e7f",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "bytes": 33330,
+      "gzip": 7820,
+      "sha256": "71838208f783f2b9ad446af4f7abce38a4fec0b8e433498407ba0c5af00d8b8c",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "bytes": 14168,
+      "gzip": 5039,
+      "sha256": "e424aaf7dc285aa6c767ff75dfd62c280a104bc4f413d1e7156ef0647c6beaf3",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "bytes": 11246,
+      "gzip": 6022,
+      "sha256": "c13b321b06cb4c4664c17b86d916d4e81e2c98fc830ef369a3e4569179bebe89",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/card-v3.css",
+      "bytes": 1434,
+      "gzip": 719,
+      "sha256": "1b4eef67f438b94d9d8e224556e4bf41fe6c75cfb19b2418cc799e01718c0e4d",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "bytes": 28822,
+      "gzip": 8305,
+      "sha256": "9b57efe9e1155680aacaead2c14e30d7864b4a4ca548521d323446f9ad3ef0a1",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "bytes": 17896,
+      "gzip": 3851,
+      "sha256": "737c87127bdf6324fdcc79c9c73df058984e2b3e243ff4ca14caa173431afa99",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/ui-scale.css",
+      "bytes": 421,
+      "gzip": 369,
+      "sha256": "83705767f816c8aee8e7d463be424881ebf27c714ddc5f29648a97ac7895ebe1",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "bytes": 21459,
+      "gzip": 6887,
+      "sha256": "5bd88749d062aa099b34b491be3b105dd099441b7d01a70870cd9461424cba97",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "bytes": 25799,
+      "gzip": 7836,
+      "sha256": "5f0d3e1929eb0089bb551ea65a0d7c831a371ed62f276b06d3847cc39e5f2e0a",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "bytes": 10393,
+      "gzip": 3141,
+      "sha256": "6a98b5492b21029b82abf512dec0262f60502c15dcb9704fdbed1e26c1f90d0e",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "bytes": 18399,
+      "gzip": 6152,
+      "sha256": "910ee0b36fd8cb130f3d078f5eac8545e7e2321c2d3a8b009a20d9631b11c78a",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/page-cardforge.css",
+      "bytes": 15080,
+      "gzip": 5489,
+      "sha256": "fd3213e0ee6077922df01f8e653bad3682d5a3f0c489c35a938748e2c96f9513",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "bytes": 30037,
+      "gzip": 7939,
+      "sha256": "6f0b06f23626bb195b95a6894fcffc7ebdbd4b7eef0991a22c978ee89ca4f57f",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/feedback-oct12.css",
+      "bytes": 4862,
+      "gzip": 1863,
+      "sha256": "656586628f7816777a358ae657e48f7cfae532dc3cab806a56bf8c9adf8f2503",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/roster-departure-v2.css",
+      "bytes": 7214,
+      "gzip": 2186,
+      "sha256": "4636991b33470ab3bc755b3e9c2b980d142b57379abf1af31ef69c387b4b308d",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/pocket-strip.css",
+      "bytes": 4591,
+      "gzip": 2602,
+      "sha256": "2f3845ee24c86940d241a4809c0a2991ac0338c9125efe123afae93f6469ebda",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/experience-loot.css",
+      "bytes": 4043,
+      "gzip": 2065,
+      "sha256": "89d1ca446221cc9940937acef4c3237c807342e035e04487c305b1b7a2efc96f",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/page-events.css",
+      "bytes": 12674,
+      "gzip": 4612,
+      "sha256": "e439d92c4b4b9500cfbce8ea534c63a2fac8cc4ec146e6e8a2d868bf8bb6ceea",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "bytes": 32644,
+      "gzip": 11238,
+      "sha256": "5740473109131816d6112b9d2572f874765d48d8325fd41c4d54369f48e732cb",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "bytes": 10886,
+      "gzip": 4834,
+      "sha256": "2888d269a8997bab9a21ff773b9eb5db605620170037d38ee19616383eef45ea",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/character-idle.css",
+      "bytes": 1840,
+      "gzip": 651,
+      "sha256": "c815b0019b52d2260b241001ff5904d426f87c5c8658dd9f247ea978498d609b",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/page-transitions.css",
+      "bytes": 4335,
+      "gzip": 1847,
+      "sha256": "4fcdc225c5394df4c4123f904aa5536bb7424a32fea379c692eeaf558d2b30bb",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/ak-skin.css",
+      "bytes": 18687,
+      "gzip": 5508,
+      "sha256": "28ad1ca82985af7cdc6edc404783dd18da16d6fd4072a67e0f386b6d1333cae2",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "bytes": 36646,
+      "gzip": 7457,
+      "sha256": "10c3294f8f9b02d8be83d8a550dd308d8e9a6955c932d5cf348f3c4de11d218d",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-camp-compact.css",
+      "bytes": 73,
+      "gzip": 96,
+      "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "bytes": 14830,
+      "gzip": 3653,
+      "sha256": "6c7296dd305832802772c8f853fb204983a044d211a219b266d4bdef846cf7db",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/battle-stage.css",
+      "bytes": 25623,
+      "gzip": 5446,
+      "sha256": "56fcbc6152be723173f2aee676077eb4a65d7736634724884fa7c54d5245def0",
+      "snapshotMatch": false
+    },
+    {
+      "file": "game/css/card-description-links.css",
+      "bytes": 1441,
+      "gzip": 621,
+      "sha256": "3d4ae7fc35dfd198d14dd12e475c465275b24fecfc3ab26991cf5d0a460f0d25",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/combat-feedback.css",
+      "bytes": 1358,
+      "gzip": 721,
+      "sha256": "e59252f788f93ca4cb811d37608d8b25ca58f226ee4a9b8df845379aad378389",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "bytes": 6029,
+      "gzip": 1543,
+      "sha256": "e66c0eafe648742f14c619f07c82b038dfac9bb392a09059f839fe479f234f7a",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "bytes": 3295,
+      "gzip": 675,
+      "sha256": "b70aaf07519a19e00dae1941a3725181cd728648a10aa8edf7bb793e9c49d562",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/departure-selected.css",
+      "bytes": 10196,
+      "gzip": 2972,
+      "sha256": "b53c6f5e799dc48d8e598d4b86cf85dfe0fa49f5fb759f17c5a3330a3e2ff475",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/roster-reference.css",
+      "bytes": 3861,
+      "gzip": 1145,
+      "sha256": "cfb7916b04ce89b777a5a42d51770ac87b4d5a0a31318bcbbedf7785a3a8fbe7",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/preparation.css",
+      "bytes": 6937,
+      "gzip": 2720,
+      "sha256": "d66b5f2c4bde7fe2fa6e86d00b1b32ee456f106ae3716517030dfb9a9f625270",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "bytes": 38023,
+      "gzip": 6274,
+      "sha256": "fa45ebd6f155f5ce14b5557a0f6f8093d449166019589ed514ac13da20278694",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/card-browser.css",
+      "bytes": 1107,
+      "gzip": 483,
+      "sha256": "0d4b619e89af1fe54d253778eb0e706bfe7638e64039b212b36ed0cf68b25d1f",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "bytes": 4908,
+      "gzip": 1424,
+      "sha256": "fb4a2562f42b5f50fcda49d11feb6dee7f3bd84c9f7d5e481fc0570a01a70e20",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-reward-feedback.css",
+      "bytes": 1538,
+      "gzip": 546,
+      "sha256": "4cf3949a74c15dab2c9f1d7075cb4e303059bbd15910a1e4b0e9d665d1ff857b",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-collection-v4.css",
+      "bytes": 3290,
+      "gzip": 1032,
+      "sha256": "554cfed37ef35726fa7888bd35f8bb26e92172e2980d5e8bf300e4f3ee4dfe5c",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-courtyard-v3.css",
+      "bytes": 6673,
+      "gzip": 1597,
+      "sha256": "a81b362e43179a416e1aab62357a68141579196173a60ba0a045078f3cebbd3b",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-panel-layout.css",
+      "bytes": 73,
+      "gzip": 96,
+      "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "bytes": 16207,
+      "gzip": 3242,
+      "sha256": "f84f54252b51ddcbbc2912403a6367c51453de4090ad9be3d14d9b980ffd4926",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-framework-v7.css",
+      "bytes": 8109,
+      "gzip": 2265,
+      "sha256": "f7485b47de5ad5b7332f7201fa0b4da7bab136eef41f6e5833535b97b9ea4ed1",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "bytes": 33335,
+      "gzip": 5684,
+      "sha256": "e19ac60643b3caa944a1700ac56d9571d1e651615e8259b60100057b0984d399",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "bytes": 28543,
+      "gzip": 4799,
+      "sha256": "4e290572f6993d505867128464326987c93c2dad8ad63656d9f1f4045d051bad",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-logistics-trade-v12.css",
+      "bytes": 15472,
+      "gzip": 3435,
+      "sha256": "267438aaa2b24dbe8b89761ffd6ef2bce90a9a7db8219cbeedbfff424936a0be",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-archive-facilities-v12.css",
+      "bytes": 29387,
+      "gzip": 4246,
+      "sha256": "37054842058ac0b5556295a768e28f5d0f3b763835433807bbf8be1dc85c4a62",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-home-v7.css",
+      "bytes": 8429,
+      "gzip": 1890,
+      "sha256": "2cd68bbcf96bea9721aa911cce4b962aaa821b0f348a3846cde4297e882872b8",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-shop-v3.css",
+      "bytes": 6727,
+      "gzip": 1801,
+      "sha256": "b16070d392d6e7b6067c7908d814286a26a9c92541946abb62a821897327ce5d",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "bytes": 17304,
+      "gzip": 2850,
+      "sha256": "27b7ac56bce6dcabdf915420c1c379f1b0313e3c728ccf297a72adfd55bb7923",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/chest-opening.css",
+      "bytes": 4285,
+      "gzip": 1415,
+      "sha256": "d2162f97a5a36f6f70780f366c88fcdf2f0d81969998b69eac53c1b351adf0dd",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "bytes": 25075,
+      "gzip": 4371,
+      "sha256": "0d488a1c0174cf7b0c77702e178937ef4a5ba5238b88adf70727f89a7f71185b",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/expedition-transitions.css",
+      "bytes": 3801,
+      "gzip": 1246,
+      "sha256": "4a6cebf9068a361efdbec576a312df9132b22ed0aeb5a79687e6049ca7acb96b",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/archive-motion.css",
+      "bytes": 5692,
+      "gzip": 1515,
+      "sha256": "5fd3a8a99f91579defa7ca26bd314c9dcafd2e8ece886990411932e9d8a76873",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "bytes": 14662,
+      "gzip": 3766,
+      "sha256": "0cd65b3c8073157328939a408235cc5300a4caeb190d8341ddec1a75abf8109f",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "bytes": 1990,
+      "gzip": 793,
+      "sha256": "29e9ff37b078d113073a1e2a8b79a4ab014200ce4a3dc7ab8bd0297756f0dd76",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "bytes": 6400,
+      "gzip": 2021,
+      "sha256": "b6d70c2d361d93fb65a251948332ee3d06e89161151b64ee43eb646e54f0ddc4",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/home-ui-tokens.css",
+      "bytes": 590,
+      "gzip": 383,
+      "sha256": "cf985b45cf4f28d4f1fef916125797c322ffefd63330743481d7547a5b83d0d0",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "bytes": 2130,
+      "gzip": 952,
+      "sha256": "591720893fc30fc4908b1f7d5d4b062f7cd243568d86228260c8971cbf25ccf6",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/page-visual-ready.css",
+      "bytes": 954,
+      "gzip": 435,
+      "sha256": "d8de986d8b834bf10ecce440f426d311b7949820774b670c334bd851e351d071",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/title-credits.css",
+      "bytes": 7317,
+      "gzip": 1933,
+      "sha256": "9ae4b38a7c3daeedcbca7fd4e8c2e02bb60e0f8c30c77b0fd6570aa876772a62",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/battle-hand-overhaul.css",
+      "bytes": 9656,
+      "gzip": 3079,
+      "sha256": "7b29b382d3c332b6c7695aee35f6827954a63c7a45d89385521a4247e94c3fc3",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/home-scene.css",
+      "bytes": 6190,
+      "gzip": 1966,
+      "sha256": "c79343e83284423e125dbf6730a26f04dff682719f878f172fb720bb19208c5c",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/photo-studio-mounts.css",
+      "bytes": 6761,
+      "gzip": 1660,
+      "sha256": "266b61a2efc3c49f70f449ab6d9617204e36c7fa49e6aec350a8e98a09279203",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "bytes": 65861,
+      "gzip": 12353,
+      "sha256": "77c20764dfb9099fa9e4cf31241bce6ad5ff2cb385d09b01410826a512162990",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/photo-studio-room-effects.css",
+      "bytes": 4601,
+      "gzip": 1480,
+      "sha256": "2f5ca4bd3fb06781a599eaead25bc615d4279b9215911b3380e099cd44a23b0b",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/photo-studio-zoom-motion.css",
+      "bytes": 1565,
+      "gzip": 449,
+      "sha256": "d4918b1effd88d3add908500ad39c6682f3351def78e7b2feab38177d3481e40",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/title-achievements.css",
+      "bytes": 19267,
+      "gzip": 4804,
+      "sha256": "b27803fe4feabf1b5964110d2ef0c6d06190ec35010085c61ca4b17fc74d2b69",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/beginner-guide.css",
+      "bytes": 7957,
+      "gzip": 2243,
+      "sha256": "3dc7ac8cf4b42bd840429cbacc873b78a44c7b20e5e7edc627ae8407fa24943f",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/leave-run.css",
+      "bytes": 5387,
+      "gzip": 1602,
+      "sha256": "19ee3bbd94cd4b83d9f8bcf0f8b0adf7d8dbbabf73c8a1bf2582181b50f3ef78",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/settings-navigation.css",
+      "bytes": 16312,
+      "gzip": 3930,
+      "sha256": "660a524842cc8431d051d20bb86323e473e61ebbffcacd5b2bdb22bc3998be6c",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "bytes": 38009,
+      "gzip": 8711,
+      "sha256": "ce6216ad0506bc492d4dff65f88eab8bb5488efa1bc32f5c89b41d462e47cd29",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/home-layers.css",
+      "bytes": 8465,
+      "gzip": 2268,
+      "sha256": "ac5d871a838c2d6b46d71c676b220e9e2122aee5a59408b5d90d4db045e4f478",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/home-menu-motion.css",
+      "bytes": 6563,
+      "gzip": 1547,
+      "sha256": "eb4d1d680084d761a5c8ad7a2db6dc8ebdbf4551572bfcf7d1655276ef4d61e2",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/interface-motion.css",
+      "bytes": 7185,
+      "gzip": 1603,
+      "sha256": "cfab7b16a74313f318409e14a05e4ec8271f6b1c20d52472c874131c54295e99",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/motion-transitions.css",
+      "bytes": 16711,
+      "gzip": 6801,
+      "sha256": "7d121c987b4790355168f0c4357884aa92a358faae00e6b4c63549d8db4eb345",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "bytes": 16943,
+      "gzip": 4188,
+      "sha256": "6432914334c984e593c8edc544fa5b381b6361bc0106a1ecb3db3793bc3d7642",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/base-camp-roster.css",
+      "bytes": 28442,
+      "gzip": 4907,
+      "sha256": "dec3c50b50c6aa12edf7064dfbcd0d8199c40b89b06d0ca1f4f721bb43213303",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/css/navigation-feedback.css",
+      "bytes": 2095,
+      "gzip": 690,
+      "sha256": "c5ba8e6e3d19e66b97f03398138b7c6dddd15bbdb25ffb4836b9fa73e1f9f01e",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/index.html",
+      "bytes": 24002,
+      "gzip": 7720,
+      "sha256": "d547f85be215cd0a50a9d615aea8bca717c70685800be4b1d3516d649f567262",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/src/main.js",
+      "bytes": 2062,
+      "gzip": 1039,
+      "sha256": "4bd809a094dbff36dbbba3d4d1f9542e110c4e9e907f8fd213d801964504e236",
+      "snapshotMatch": true
+    },
+    {
+      "file": "game/src/hub/game.hub.js",
+      "bytes": 5459,
+      "gzip": 1992,
+      "sha256": "6f2860fbd2a538325fa05863b8fe43b33610f25b449b2c35d3cdae394ce31839",
+      "snapshotMatch": true
+    },
+    {
+      "file": "vite.config.js",
+      "bytes": 20096,
+      "gzip": 8214,
+      "sha256": "63358325168ee4b05a785090dea7d3f1185037fbc3e37841870c384c97d9aef9",
+      "snapshotMatch": true
+    },
+    {
+      "file": "scripts/perf-budget.cjs",
+      "bytes": 7478,
+      "gzip": 2594,
+      "sha256": "405c07b735ecfcf33033808a8cf024939a9c8e0ff1d9f90fedade5a14bb1ceb6",
+      "snapshotMatch": true
+    },
+    {
+      "file": "scripts/css-asset-minification.mjs",
+      "bytes": 2226,
+      "gzip": 1046,
+      "sha256": "aabdb61fd4bb63416e4e0584cac75a918a92e5f0fca67182ec676773196f3217",
+      "snapshotMatch": true
+    }
+  ],
+  "duplicateRuleInventory": [
+    {
+      "file": "assets/battle-CMeGAmXR.css",
+      "exactRuleRepeatCount": 0,
+      "rawRepeatChars": 0
+    },
+    {
+      "file": "assets/game.cardslib-DL1ME_Cs.css",
+      "exactRuleRepeatCount": 0,
+      "rawRepeatChars": 0
+    },
+    {
+      "file": "assets/game.menu-COmXXeJI.css",
+      "exactRuleRepeatCount": 0,
+      "rawRepeatChars": 0
+    },
+    {
+      "file": "assets/home-djRd51SW.css",
+      "exactRuleRepeatCount": 0,
+      "rawRepeatChars": 0
+    },
+    {
+      "file": "assets/home-layers-CGeD3b0U.css",
+      "exactRuleRepeatCount": 0,
+      "rawRepeatChars": 0
+    },
+    {
+      "file": "assets/home-menu-motion-ChDSp1Xr.css",
+      "exactRuleRepeatCount": 0,
+      "rawRepeatChars": 0
+    },
+    {
+      "file": "assets/home-polish-8Wc6XNpi.css",
+      "exactRuleRepeatCount": 0,
+      "rawRepeatChars": 0
+    },
+    {
+      "file": "assets/index-CxqK3peg.css",
+      "exactRuleRepeatCount": 0,
+      "rawRepeatChars": 0
+    },
+    {
+      "file": "assets/interface-motion-Cm3pw1Zg.css",
+      "exactRuleRepeatCount": 0,
+      "rawRepeatChars": 0
+    },
+    {
+      "file": "assets/motion-transitions-BdxbKqrz.css",
+      "exactRuleRepeatCount": 0,
+      "rawRepeatChars": 0
+    }
+  ],
+  "artifactMatches": [
+    {
+      "file": "game/css/base.css",
+      "matched": true,
+      "ruleCount": 180,
+      "start": 0,
+      "end": 24196
+    },
+    {
+      "file": "game/css/cards.css",
+      "matched": false,
+      "ruleCount": 94,
+      "runCount": 0
+    },
+    {
+      "file": "game/css/overlays.css",
+      "matched": false,
+      "ruleCount": 276,
+      "runCount": 0
+    },
+    {
+      "file": "game/css/hub.css",
+      "matched": true,
+      "ruleCount": 162,
+      "start": 62825,
+      "end": 79574
+    },
+    {
+      "file": "game/css/battle.css",
+      "matched": true,
+      "ruleCount": 151,
+      "start": 79574,
+      "end": 99963
+    },
+    {
+      "file": "game/css/scenes.css",
+      "matched": false,
+      "ruleCount": 311,
+      "runCount": 0
+    },
+    {
+      "file": "game/css/lab-ending.css",
+      "matched": true,
+      "ruleCount": 26,
+      "start": 134237,
+      "end": 138298
+    },
+    {
+      "file": "game/css/winter.css",
+      "matched": true,
+      "ruleCount": 786,
+      "start": 138298,
+      "end": 214598
+    },
+    {
+      "file": "game/css/expedition.css",
+      "matched": true,
+      "ruleCount": 131,
+      "start": 214598,
+      "end": 229969
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "matched": true,
+      "ruleCount": 42,
+      "start": 229969,
+      "end": 236888
+    },
+    {
+      "file": "game/css/map-edge-light.css",
+      "matched": true,
+      "ruleCount": 13,
+      "start": 236888,
+      "end": 239318
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "matched": true,
+      "ruleCount": 45,
+      "start": 239318,
+      "end": 243535
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "matched": true,
+      "ruleCount": 177,
+      "start": 243535,
+      "end": 267204
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "matched": true,
+      "ruleCount": 216,
+      "start": 267204,
+      "end": 296965
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "matched": true,
+      "ruleCount": 78,
+      "start": 296965,
+      "end": 306516
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "matched": true,
+      "ruleCount": 20,
+      "start": 306516,
+      "end": 310163
+    },
+    {
+      "file": "game/css/card-v3.css",
+      "matched": true,
+      "ruleCount": 11,
+      "start": 310163,
+      "end": 311065
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "matched": true,
+      "ruleCount": 178,
+      "start": 311065,
+      "end": 333583
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "matched": true,
+      "ruleCount": 117,
+      "start": 333583,
+      "end": 350095
+    },
+    {
+      "file": "game/css/ui-scale.css",
+      "matched": true,
+      "ruleCount": 123,
+      "start": 350095,
+      "end": 365192
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "matched": true,
+      "ruleCount": 90,
+      "start": 365192,
+      "end": 378389
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "matched": true,
+      "ruleCount": 133,
+      "start": 378389,
+      "end": 395341
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "matched": true,
+      "ruleCount": 70,
+      "start": 395341,
+      "end": 403761
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "matched": true,
+      "ruleCount": 63,
+      "start": 403761,
+      "end": 412568
+    },
+    {
+      "file": "game/css/page-cardforge.css",
+      "matched": true,
+      "ruleCount": 53,
+      "start": 412568,
+      "end": 420057
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "matched": true,
+      "ruleCount": 166,
+      "start": 420057,
+      "end": 442176
+    },
+    {
+      "file": "game/css/feedback-oct12.css",
+      "matched": true,
+      "ruleCount": 49,
+      "start": 442176,
+      "end": 448622
+    },
+    {
+      "file": "game/css/roster-departure-v2.css",
+      "matched": true,
+      "ruleCount": 56,
+      "start": 448622,
+      "end": 459594
+    },
+    {
+      "file": "game/css/pocket-strip.css",
+      "matched": true,
+      "ruleCount": 18,
+      "start": 459594,
+      "end": 461415
+    },
+    {
+      "file": "game/css/experience-loot.css",
+      "matched": true,
+      "ruleCount": 13,
+      "start": 461415,
+      "end": 463215
+    },
+    {
+      "file": "game/css/page-events.css",
+      "matched": true,
+      "ruleCount": 48,
+      "start": 463215,
+      "end": 469328
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "matched": true,
+      "ruleCount": 129,
+      "start": 469328,
+      "end": 485547
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "matched": true,
+      "ruleCount": 10,
+      "start": 485547,
+      "end": 486570
+    },
+    {
+      "file": "game/css/character-idle.css",
+      "matched": true,
+      "ruleCount": 13,
+      "start": 486570,
+      "end": 487814
+    },
+    {
+      "file": "game/css/page-transitions.css",
+      "matched": true,
+      "ruleCount": 3,
+      "start": 487814,
+      "end": 489285
+    },
+    {
+      "file": "game/css/ak-skin.css",
+      "matched": true,
+      "ruleCount": 125,
+      "start": 489285,
+      "end": 503675
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "matched": true,
+      "ruleCount": 414,
+      "start": 503675,
+      "end": 562126
+    },
+    {
+      "file": "game/css/base-camp-compact.css",
+      "matched": true,
+      "ruleCount": 0,
+      "start": 0,
+      "end": 0,
+      "note": "Comment-only stylesheet has no emitted CSS"
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "matched": true,
+      "ruleCount": 87,
+      "start": 562126,
+      "end": 575239
+    },
+    {
+      "file": "game/css/battle-stage.css",
+      "matched": false,
+      "ruleCount": 184,
+      "runCount": 0
+    },
+    {
+      "file": "game/css/card-description-links.css",
+      "matched": true,
+      "ruleCount": 12,
+      "start": 630411,
+      "end": 631736
+    },
+    {
+      "file": "game/css/combat-feedback.css",
+      "matched": true,
+      "ruleCount": 10,
+      "start": 629386,
+      "end": 630411
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "matched": true,
+      "ruleCount": 39,
+      "start": 707563,
+      "end": 713161
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "matched": true,
+      "ruleCount": 12,
+      "start": 863202,
+      "end": 865996
+    },
+    {
+      "file": "game/css/departure-selected.css",
+      "matched": true,
+      "ruleCount": 73,
+      "start": 874014,
+      "end": 887911
+    },
+    {
+      "file": "game/css/roster-reference.css",
+      "matched": true,
+      "ruleCount": 23,
+      "start": 887911,
+      "end": 891107
+    },
+    {
+      "file": "game/css/preparation.css",
+      "matched": true,
+      "ruleCount": 45,
+      "start": 667295,
+      "end": 672159
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "matched": true,
+      "ruleCount": 275,
+      "start": 672159,
+      "end": 707563
+    },
+    {
+      "file": "game/css/card-browser.css",
+      "matched": true,
+      "ruleCount": 10,
+      "start": 713161,
+      "end": 714183
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "matched": true,
+      "ruleCount": 26,
+      "start": 714183,
+      "end": 718774
+    },
+    {
+      "file": "game/css/base-reward-feedback.css",
+      "matched": true,
+      "ruleCount": 12,
+      "start": 718774,
+      "end": 720211
+    },
+    {
+      "file": "game/css/base-collection-v4.css",
+      "matched": true,
+      "ruleCount": 22,
+      "start": 720211,
+      "end": 723237
+    },
+    {
+      "file": "game/css/base-courtyard-v3.css",
+      "matched": true,
+      "ruleCount": 37,
+      "start": 723237,
+      "end": 729579
+    },
+    {
+      "file": "game/css/base-panel-layout.css",
+      "matched": true,
+      "ruleCount": 0,
+      "start": 0,
+      "end": 0,
+      "note": "Comment-only stylesheet has no emitted CSS"
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "matched": true,
+      "ruleCount": 91,
+      "start": 729579,
+      "end": 744730
+    },
+    {
+      "file": "game/css/base-framework-v7.css",
+      "matched": true,
+      "ruleCount": 36,
+      "start": 744730,
+      "end": 752408
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "matched": true,
+      "ruleCount": 150,
+      "start": 752408,
+      "end": 783419
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "matched": true,
+      "ruleCount": 146,
+      "start": 783419,
+      "end": 812679
+    },
+    {
+      "file": "game/css/base-logistics-trade-v12.css",
+      "matched": true,
+      "ruleCount": 111,
+      "start": 812679,
+      "end": 835414
+    },
+    {
+      "file": "game/css/base-archive-facilities-v12.css",
+      "matched": true,
+      "ruleCount": 158,
+      "start": 835414,
+      "end": 863202
+    },
+    {
+      "file": "game/css/base-home-v7.css",
+      "matched": true,
+      "ruleCount": 50,
+      "start": 865996,
+      "end": 874014
+    },
+    {
+      "file": "game/css/base-shop-v3.css",
+      "matched": true,
+      "ruleCount": 39,
+      "start": 891107,
+      "end": 897307
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "matched": true,
+      "ruleCount": 115,
+      "start": 897307,
+      "end": 913582
+    },
+    {
+      "file": "game/css/chest-opening.css",
+      "matched": true,
+      "ruleCount": 28,
+      "start": 631736,
+      "end": 635713
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "matched": true,
+      "ruleCount": 139,
+      "start": 640712,
+      "end": 663922
+    },
+    {
+      "file": "game/css/expedition-transitions.css",
+      "matched": true,
+      "ruleCount": 27,
+      "start": 663922,
+      "end": 667295
+    },
+    {
+      "file": "game/css/archive-motion.css",
+      "matched": true,
+      "ruleCount": 12,
+      "start": 612482,
+      "end": 617315
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "matched": true,
+      "ruleCount": 73,
+      "start": 599121,
+      "end": 611680
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "matched": true,
+      "ruleCount": 15,
+      "start": 637499,
+      "end": 640712
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "matched": true,
+      "ruleCount": 29,
+      "start": 624256,
+      "end": 629386
+    },
+    {
+      "file": "game/css/home-ui-tokens.css",
+      "matched": true,
+      "ruleCount": 1,
+      "start": 617315,
+      "end": 617759
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "matched": true,
+      "ruleCount": 21,
+      "start": 635713,
+      "end": 637499
+    },
+    {
+      "file": "game/css/page-visual-ready.css",
+      "matched": true,
+      "ruleCount": 9,
+      "start": 611680,
+      "end": 612482
+    },
+    {
+      "file": "game/css/title-credits.css",
+      "matched": true,
+      "ruleCount": 35,
+      "start": 617759,
+      "end": 624256
+    }
+  ],
+  "measurements": {
+    "hubFacadeExclusive": {
+      "files": [
+        "game/css/preparation.css",
+        "game/css/base-camp-rework.css",
+        "game/css/base-controls-v4.css",
+        "game/css/card-browser.css",
+        "game/css/base-reward-feedback.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-panel-layout.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-home-v7.css",
+        "game/css/departure-selected.css",
+        "game/css/roster-reference.css",
+        "game/css/base-shop-v3.css",
+        "game/css/base-archive-v3.css"
+      ],
+      "matchedFiles": [
+        "game/css/base-archive-v3.css",
+        "game/css/base-shop-v3.css",
+        "game/css/roster-reference.css",
+        "game/css/departure-selected.css",
+        "game/css/base-home-v7.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-reward-feedback.css",
+        "game/css/card-browser.css",
+        "game/css/base-controls-v4.css",
+        "game/css/base-camp-rework.css",
+        "game/css/preparation.css",
+        "game/css/base-panel-layout.css"
+      ],
+      "unmatchedFiles": [],
+      "sourceGroup": {
+        "bytes": 244554,
+        "gzip": 38832,
+        "sha256": "51556f550dd793781d93f9206e9b7b64882ee69003e7a2f53a53297f2fd30e81"
+      },
+      "minifiedGroup": {
+        "bytes": 241725,
+        "gzip": 33008,
+        "sha256": "a47952da2910832d7a801c37204dc8099a5e643b6987c7fb54eec81ebe4762a1"
+      },
+      "retainedArtifactSlots": [
+        {
+          "start": 667295,
+          "end": 714183,
+          "files": [
+            "game/css/preparation.css",
+            "game/css/base-camp-rework.css",
+            "game/css/base-controls-v4.css",
+            "game/css/card-browser.css"
+          ],
+          "bytes": 46889,
+          "gzip": 8111,
+          "sha256": "3a2d0bcbd7c77a67ed1f412feb8a823f17f37f32d53b6d0d1fdd1a6b4d3e61e7"
+        },
+        {
+          "start": 718774,
+          "end": 913582,
+          "files": [
+            "game/css/base-reward-feedback.css",
+            "game/css/base-collection-v4.css",
+            "game/css/base-courtyard-v3.css",
+            "game/css/base-cohesion-v5.css",
+            "game/css/base-framework-v7.css",
+            "game/css/base-rooms-v7.css",
+            "game/css/base-personnel-v12.css",
+            "game/css/base-logistics-trade-v12.css",
+            "game/css/base-archive-facilities-v12.css",
+            "game/css/base-page-motion-v7.css",
+            "game/css/base-home-v7.css",
+            "game/css/departure-selected.css",
+            "game/css/roster-reference.css",
+            "game/css/base-shop-v3.css",
+            "game/css/base-archive-v3.css"
+          ],
+          "bytes": 194813,
+          "gzip": 25823,
+          "sha256": "d26689d3cd6feefeaa5a813efa62c0a2665dd4d350691e1801a57d1d719803a3"
+        }
+      ],
+      "orderedDeliverySimulation": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 667295,
+            "bytes": 667497,
+            "gzip": 128124,
+            "sha256": "168658501fad04749179fc1c0af647352c9392761113953ce19e736ccd2a717f"
+          },
+          {
+            "start": 714183,
+            "end": 718774,
+            "bytes": 4592,
+            "gzip": 1258,
+            "sha256": "2a0d4976f6514c00911052e8188ccc0cd664d5d23988a55c22c376c3c7e39265"
+          }
+        ],
+        "initialGzip": 129382,
+        "initialGzipReduction": 31648,
+        "deferredGzip": 33934,
+        "totalGzipDelta": 2286,
+        "exactIntervalReconstruction": true
+      },
+      "omittedArtifactCssBytes": 241700,
+      "sourceSimulation": {
+        "initialBase": {
+          "bytes": 916290,
+          "gzip": 160867,
+          "sha256": "0364ebf77a7ff6077f25a5e735e30ba0fc07e8ca029697355f66f8eca0bdcb05"
+        },
+        "initialRemaining": {
+          "bytes": 674566,
+          "gzip": 128604,
+          "sha256": "4563fdbc892fa6c1d06bd7ef207f63fd05c3ea9f225949aa051a262de7f89fa0"
+        },
+        "gzipReduction": 32263,
+        "separateGroupGzip": 33008,
+        "totalGzipDelta": 745
+      },
+      "artifactSimulation": {
+        "initialBase": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "original": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "initialRemaining": {
+          "bytes": 672088,
+          "gzip": 128922,
+          "sha256": "ac33ef0c9186b84030f0408c071f9860ef505ce5a675d0b7e22a46788fd53dfa"
+        },
+        "gzipReduction": 32108,
+        "deferredSlotsGzip": 33934,
+        "totalGzipDelta": 1826,
+        "note": "Static production CSS interval subtraction and re-minification; not a new Vite build"
+      }
+    },
+    "hubFacadeIncludingShared": {
+      "files": [
+        "game/css/preparation.css",
+        "game/css/base-camp-rework.css",
+        "game/css/base-controls-v4.css",
+        "game/css/card-browser.css",
+        "game/css/inventory-zoom.css",
+        "game/css/base-reward-feedback.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-panel-layout.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-home-v7.css",
+        "game/css/departure-selected.css",
+        "game/css/roster-reference.css",
+        "game/css/base-shop-v3.css",
+        "game/css/base-archive-v3.css"
+      ],
+      "matchedFiles": [
+        "game/css/base-archive-v3.css",
+        "game/css/base-shop-v3.css",
+        "game/css/roster-reference.css",
+        "game/css/departure-selected.css",
+        "game/css/base-home-v7.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-reward-feedback.css",
+        "game/css/inventory-zoom.css",
+        "game/css/card-browser.css",
+        "game/css/base-controls-v4.css",
+        "game/css/base-camp-rework.css",
+        "game/css/preparation.css",
+        "game/css/base-panel-layout.css"
+      ],
+      "unmatchedFiles": [],
+      "sourceGroup": {
+        "bytes": 249463,
+        "gzip": 39725,
+        "sha256": "84101d1b6f6456a66b5872ce3eca91acd534ae0c0dd3e4377d47d2e7301b59eb"
+      },
+      "minifiedGroup": {
+        "bytes": 246316,
+        "gzip": 33804,
+        "sha256": "56685a26e5015f7ddd8a5e57d66192a9d62cddcd407851eea02093af92624096"
+      },
+      "retainedArtifactSlots": [
+        {
+          "start": 667295,
+          "end": 913582,
+          "files": [
+            "game/css/preparation.css",
+            "game/css/base-camp-rework.css",
+            "game/css/base-controls-v4.css",
+            "game/css/card-browser.css",
+            "game/css/inventory-zoom.css",
+            "game/css/base-reward-feedback.css",
+            "game/css/base-collection-v4.css",
+            "game/css/base-courtyard-v3.css",
+            "game/css/base-cohesion-v5.css",
+            "game/css/base-framework-v7.css",
+            "game/css/base-rooms-v7.css",
+            "game/css/base-personnel-v12.css",
+            "game/css/base-logistics-trade-v12.css",
+            "game/css/base-archive-facilities-v12.css",
+            "game/css/base-page-motion-v7.css",
+            "game/css/base-home-v7.css",
+            "game/css/departure-selected.css",
+            "game/css/roster-reference.css",
+            "game/css/base-shop-v3.css",
+            "game/css/base-archive-v3.css"
+          ],
+          "bytes": 246292,
+          "gzip": 33784,
+          "sha256": "873f13d89f7f54b2661766a35275d22564ee10f760315788bec791b28f45c1c6"
+        }
+      ],
+      "orderedDeliverySimulation": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 667295,
+            "bytes": 667497,
+            "gzip": 128124,
+            "sha256": "168658501fad04749179fc1c0af647352c9392761113953ce19e736ccd2a717f"
+          }
+        ],
+        "initialGzip": 128124,
+        "initialGzipReduction": 32906,
+        "deferredGzip": 33784,
+        "totalGzipDelta": 878,
+        "exactIntervalReconstruction": true
+      },
+      "omittedArtifactCssBytes": 246291,
+      "sourceSimulation": {
+        "initialBase": {
+          "bytes": 916290,
+          "gzip": 160867,
+          "sha256": "0364ebf77a7ff6077f25a5e735e30ba0fc07e8ca029697355f66f8eca0bdcb05"
+        },
+        "initialRemaining": {
+          "bytes": 669975,
+          "gzip": 127857,
+          "sha256": "b3ce92e40052ce20da957eb14d56ecabb78aaf9c64ad004ae5e46580437f456c"
+        },
+        "gzipReduction": 33010,
+        "separateGroupGzip": 33804,
+        "totalGzipDelta": 794
+      },
+      "artifactSimulation": {
+        "initialBase": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "original": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "initialRemaining": {
+          "bytes": 667497,
+          "gzip": 128124,
+          "sha256": "168658501fad04749179fc1c0af647352c9392761113953ce19e736ccd2a717f"
+        },
+        "gzipReduction": 32906,
+        "deferredSlotsGzip": 33784,
+        "totalGzipDelta": 878,
+        "note": "Static production CSS interval subtraction and re-minification; not a new Vite build"
+      }
+    },
+    "htmlBaseCamp": {
+      "files": [
+        "game/css/base-camp.css",
+        "game/css/base-camp-compact.css"
+      ],
+      "matchedFiles": [
+        "game/css/base-camp.css",
+        "game/css/base-camp-compact.css"
+      ],
+      "unmatchedFiles": [],
+      "sourceGroup": {
+        "bytes": 36720,
+        "gzip": 7524,
+        "sha256": "976e28e45e0b5109e86c83c83fe7e652e4c24c058cf9b7c73eaf1e631db9ad85"
+      },
+      "minifiedGroup": {
+        "bytes": 58472,
+        "gzip": 9988,
+        "sha256": "68cfd2dcb7a9de0685d967fe3bcc1032907c4b76734f8106237dd599fc194269"
+      },
+      "retainedArtifactSlots": [
+        {
+          "start": 503675,
+          "end": 562126,
+          "files": [
+            "game/css/base-camp.css"
+          ],
+          "bytes": 58464,
+          "gzip": 9981,
+          "sha256": "ff33daa1e0f98a8c76cd8a1e2f81c8ad8a97ec46f7df247a33b3365a45b030f2"
+        }
+      ],
+      "orderedDeliverySimulation": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 503675,
+            "bytes": 503798,
+            "gzip": 100295,
+            "sha256": "9b25b6a4d472791b2656c21f2ac76491a36bab9f32664be8bcdf3821ea6e2203"
+          },
+          {
+            "start": 562126,
+            "end": 913583,
+            "bytes": 351528,
+            "gzip": 52132,
+            "sha256": "895bf64a1061d52603fcf20850e286799b1ae6285b4f74c1073ed5d8adf1991b"
+          }
+        ],
+        "initialGzip": 152427,
+        "initialGzipReduction": 8603,
+        "deferredGzip": 9981,
+        "totalGzipDelta": 1378,
+        "exactIntervalReconstruction": true
+      },
+      "omittedArtifactCssBytes": 58463,
+      "sourceSimulation": {
+        "initialBase": {
+          "bytes": 916290,
+          "gzip": 160867,
+          "sha256": "0364ebf77a7ff6077f25a5e735e30ba0fc07e8ca029697355f66f8eca0bdcb05"
+        },
+        "initialRemaining": {
+          "bytes": 857819,
+          "gzip": 151465,
+          "sha256": "7be7a1142b6499e877c8acc4a5466fb308f03db07d20a7b7b11dc0ff507470e8"
+        },
+        "gzipReduction": 9402,
+        "separateGroupGzip": 9988,
+        "totalGzipDelta": 586
+      },
+      "artifactSimulation": {
+        "initialBase": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "original": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "initialRemaining": {
+          "bytes": 855325,
+          "gzip": 151653,
+          "sha256": "47afb17a689bee15ef2ea3f896580902b4fcd2fb7bfad231ac8c970939e955b2"
+        },
+        "gzipReduction": 9377,
+        "deferredSlotsGzip": 9981,
+        "totalGzipDelta": 604,
+        "note": "Static production CSS interval subtraction and re-minification; not a new Vite build"
+      }
+    },
+    "htmlMenuPages": {
+      "files": [
+        "game/css/page-slot-select.css",
+        "game/css/page-settings.css",
+        "game/css/page-datapage.css",
+        "game/css/page-ach.css"
+      ],
+      "matchedFiles": [
+        "game/css/page-ach.css",
+        "game/css/page-datapage.css",
+        "game/css/page-settings.css",
+        "game/css/page-slot-select.css"
+      ],
+      "unmatchedFiles": [],
+      "sourceGroup": {
+        "bytes": 76053,
+        "gzip": 20429,
+        "sha256": "857d166075cd76f2342bbc553adcb06fb459276c7188f82d138a95fb747f2e62"
+      },
+      "minifiedGroup": {
+        "bytes": 47381,
+        "gzip": 9526,
+        "sha256": "6dabf4476139adbaa085faef8a05e14c28a06922dc7cd81fa2f4d313e9ccd5c7"
+      },
+      "retainedArtifactSlots": [
+        {
+          "start": 365192,
+          "end": 412568,
+          "files": [
+            "game/css/page-slot-select.css",
+            "game/css/page-settings.css",
+            "game/css/page-datapage.css",
+            "game/css/page-ach.css"
+          ],
+          "bytes": 47381,
+          "gzip": 9526,
+          "sha256": "6dabf4476139adbaa085faef8a05e14c28a06922dc7cd81fa2f4d313e9ccd5c7"
+        }
+      ],
+      "orderedDeliverySimulation": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 365192,
+            "bytes": 365277,
+            "gzip": 75152,
+            "sha256": "9296ca8decf3f9762e8962e9512ae08e47dba80b9314ac6a76e404840ec0d6dd"
+          },
+          {
+            "start": 412568,
+            "end": 913583,
+            "bytes": 501132,
+            "gzip": 78136,
+            "sha256": "68cf30a3b34b1f87bd1bad3f9578acc0275f97cd6fec0be83d720087696233bc"
+          }
+        ],
+        "initialGzip": 153288,
+        "initialGzipReduction": 7742,
+        "deferredGzip": 9526,
+        "totalGzipDelta": 1784,
+        "exactIntervalReconstruction": true
+      },
+      "omittedArtifactCssBytes": 47380,
+      "sourceSimulation": {
+        "initialBase": {
+          "bytes": 916290,
+          "gzip": 160867,
+          "sha256": "0364ebf77a7ff6077f25a5e735e30ba0fc07e8ca029697355f66f8eca0bdcb05"
+        },
+        "initialRemaining": {
+          "bytes": 868910,
+          "gzip": 152384,
+          "sha256": "b8006153ac69a898d077bf4011602fdcaf44ad5599c77194e98c7a0af43781a8"
+        },
+        "gzipReduction": 8483,
+        "separateGroupGzip": 9526,
+        "totalGzipDelta": 1043
+      },
+      "artifactSimulation": {
+        "initialBase": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "original": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "initialRemaining": {
+          "bytes": 866408,
+          "gzip": 152554,
+          "sha256": "63b99cfdd6c7127410027cded34d0ccda31083bc09311f2825592ee60cae45fa"
+        },
+        "gzipReduction": 8476,
+        "deferredSlotsGzip": 9526,
+        "totalGzipDelta": 1050,
+        "note": "Static production CSS interval subtraction and re-minification; not a new Vite build"
+      }
+    },
+    "htmlBattle": {
+      "files": [
+        "game/css/battle.css",
+        "game/css/expedition-battle.css",
+        "game/css/page-battle-ui.css",
+        "game/css/battle-stage.css"
+      ],
+      "matchedFiles": [
+        "game/css/page-battle-ui.css",
+        "game/css/expedition-battle.css",
+        "game/css/battle.css"
+      ],
+      "unmatchedFiles": [
+        "game/css/battle-stage.css"
+      ],
+      "sourceGroup": {
+        "bytes": 86779,
+        "gzip": 26911,
+        "sha256": "96df383300a59a930bedd4d2422926f456439ffb4b2faef3d5b0bc7464081d7f"
+      },
+      "minifiedGroup": {
+        "bytes": 56197,
+        "gzip": 11926,
+        "sha256": "d09d97a29fc17eae45a293a71457c3e3af1d8879cb1d0becf4bb7ade4dd4916c"
+      },
+      "retainedArtifactSlots": [
+        {
+          "start": 79574,
+          "end": 99963,
+          "files": [
+            "game/css/battle.css"
+          ],
+          "bytes": 20394,
+          "gzip": 5416,
+          "sha256": "92749a1bbb2df15843657be11c6417a4f43e5e1616f031ec8ef7113eb3929d05"
+        },
+        {
+          "start": 296965,
+          "end": 306516,
+          "files": [
+            "game/css/expedition-battle.css"
+          ],
+          "bytes": 9566,
+          "gzip": 2188,
+          "sha256": "6204dd8080b969b04c3d3eb88f611aff51bb4297f9b5899bfa4aeb45a7acdd12"
+        },
+        {
+          "start": 485547,
+          "end": 486570,
+          "files": [
+            "game/css/page-battle-ui.css"
+          ],
+          "bytes": 1024,
+          "gzip": 430,
+          "sha256": "3cbc9084e66023ece4a60f11ad70cb2f63e1a4f440f38622641f65b86c29b9ce"
+        }
+      ],
+      "orderedDeliverySimulation": null,
+      "omittedArtifactCssBytes": 30981,
+      "sourceSimulation": {
+        "initialBase": {
+          "bytes": 916290,
+          "gzip": 160867,
+          "sha256": "0364ebf77a7ff6077f25a5e735e30ba0fc07e8ca029697355f66f8eca0bdcb05"
+        },
+        "initialRemaining": {
+          "bytes": 860094,
+          "gzip": 150243,
+          "sha256": "f1ebc7053caeeef005088226452c66bd3a62a8edcb18fe54f694774ff2fa4182"
+        },
+        "gzipReduction": 10624,
+        "separateGroupGzip": 11926,
+        "totalGzipDelta": 1302
+      },
+      "artifactSimulation": null
+    },
+    "phase1Hub": {
+      "files": [
+        "game/css/preparation.css",
+        "game/css/base-camp-rework.css",
+        "game/css/base-controls-v4.css",
+        "game/css/card-browser.css",
+        "game/css/base-reward-feedback.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-panel-layout.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-home-v7.css",
+        "game/css/departure-selected.css",
+        "game/css/roster-reference.css",
+        "game/css/base-shop-v3.css",
+        "game/css/base-archive-v3.css",
+        "game/css/base-camp.css",
+        "game/css/base-camp-compact.css"
+      ],
+      "matchedFiles": [
+        "game/css/base-archive-v3.css",
+        "game/css/base-shop-v3.css",
+        "game/css/roster-reference.css",
+        "game/css/departure-selected.css",
+        "game/css/base-home-v7.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-reward-feedback.css",
+        "game/css/card-browser.css",
+        "game/css/base-controls-v4.css",
+        "game/css/base-camp-rework.css",
+        "game/css/preparation.css",
+        "game/css/base-camp.css",
+        "game/css/base-camp-compact.css",
+        "game/css/base-panel-layout.css"
+      ],
+      "unmatchedFiles": [],
+      "sourceGroup": {
+        "bytes": 281275,
+        "gzip": 45828,
+        "sha256": "a519e2bb782db6cc653d866ca6ad8813aa0b511f015efce194a1525422fc6425"
+      },
+      "minifiedGroup": {
+        "bytes": 300196,
+        "gzip": 42231,
+        "sha256": "affaf7db8066f70a554486d8d8ffb765a1f820e27f9604b935a1c09ae01438e9"
+      },
+      "retainedArtifactSlots": [
+        {
+          "start": 503675,
+          "end": 562126,
+          "files": [
+            "game/css/base-camp.css"
+          ],
+          "bytes": 58464,
+          "gzip": 9981,
+          "sha256": "ff33daa1e0f98a8c76cd8a1e2f81c8ad8a97ec46f7df247a33b3365a45b030f2"
+        },
+        {
+          "start": 667295,
+          "end": 714183,
+          "files": [
+            "game/css/preparation.css",
+            "game/css/base-camp-rework.css",
+            "game/css/base-controls-v4.css",
+            "game/css/card-browser.css"
+          ],
+          "bytes": 46889,
+          "gzip": 8111,
+          "sha256": "3a2d0bcbd7c77a67ed1f412feb8a823f17f37f32d53b6d0d1fdd1a6b4d3e61e7"
+        },
+        {
+          "start": 718774,
+          "end": 913582,
+          "files": [
+            "game/css/base-reward-feedback.css",
+            "game/css/base-collection-v4.css",
+            "game/css/base-courtyard-v3.css",
+            "game/css/base-cohesion-v5.css",
+            "game/css/base-framework-v7.css",
+            "game/css/base-rooms-v7.css",
+            "game/css/base-personnel-v12.css",
+            "game/css/base-logistics-trade-v12.css",
+            "game/css/base-archive-facilities-v12.css",
+            "game/css/base-page-motion-v7.css",
+            "game/css/base-home-v7.css",
+            "game/css/departure-selected.css",
+            "game/css/roster-reference.css",
+            "game/css/base-shop-v3.css",
+            "game/css/base-archive-v3.css"
+          ],
+          "bytes": 194813,
+          "gzip": 25823,
+          "sha256": "d26689d3cd6feefeaa5a813efa62c0a2665dd4d350691e1801a57d1d719803a3"
+        }
+      ],
+      "orderedDeliverySimulation": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 503675,
+            "bytes": 503798,
+            "gzip": 100295,
+            "sha256": "9b25b6a4d472791b2656c21f2ac76491a36bab9f32664be8bcdf3821ea6e2203"
+          },
+          {
+            "start": 562126,
+            "end": 667295,
+            "bytes": 105237,
+            "gzip": 19198,
+            "sha256": "e178374ec505ef11d2fd03e48447dd398ece80753e00fea45a60cd467bb36084"
+          },
+          {
+            "start": 714183,
+            "end": 718774,
+            "bytes": 4592,
+            "gzip": 1258,
+            "sha256": "2a0d4976f6514c00911052e8188ccc0cd664d5d23988a55c22c376c3c7e39265"
+          }
+        ],
+        "initialGzip": 120751,
+        "initialGzipReduction": 40279,
+        "deferredGzip": 43915,
+        "totalGzipDelta": 3636,
+        "exactIntervalReconstruction": true
+      },
+      "omittedArtifactCssBytes": 300163,
+      "sourceSimulation": {
+        "initialBase": {
+          "bytes": 916290,
+          "gzip": 160867,
+          "sha256": "0364ebf77a7ff6077f25a5e735e30ba0fc07e8ca029697355f66f8eca0bdcb05"
+        },
+        "initialRemaining": {
+          "bytes": 616095,
+          "gzip": 119208,
+          "sha256": "62e5d08d4aa5dca4226b3dc73f3abe47eae0b92427b9580df10543aec22639f5"
+        },
+        "gzipReduction": 41659,
+        "separateGroupGzip": 42231,
+        "totalGzipDelta": 572
+      },
+      "artifactSimulation": {
+        "initialBase": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "original": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "initialRemaining": {
+          "bytes": 613625,
+          "gzip": 119534,
+          "sha256": "d592c4f415ffa843e111ca25144f0a9954811ec7d6c5f5ef58794b8220bb406f"
+        },
+        "gzipReduction": 41496,
+        "deferredSlotsGzip": 43915,
+        "totalGzipDelta": 2419,
+        "note": "Static production CSS interval subtraction and re-minification; not a new Vite build"
+      }
+    },
+    "recommendedSuffix": {
+      "files": [
+        "game/css/base-reward-feedback.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-panel-layout.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-home-v7.css",
+        "game/css/departure-selected.css",
+        "game/css/roster-reference.css",
+        "game/css/base-shop-v3.css",
+        "game/css/base-archive-v3.css"
+      ],
+      "matchedFiles": [
+        "game/css/base-archive-v3.css",
+        "game/css/base-shop-v3.css",
+        "game/css/roster-reference.css",
+        "game/css/departure-selected.css",
+        "game/css/base-home-v7.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-reward-feedback.css",
+        "game/css/base-panel-layout.css"
+      ],
+      "unmatchedFiles": [],
+      "sourceGroup": {
+        "bytes": 192454,
+        "gzip": 29885,
+        "sha256": "57855b9c508e6a767abfc95135683172b04a915377c5a7d86e390a87e3070038"
+      },
+      "minifiedGroup": {
+        "bytes": 194829,
+        "gzip": 25836,
+        "sha256": "59e3893037ac625bde367ea4f65909dead5e905e3f8249f960ee38ec9c424dab"
+      },
+      "retainedArtifactSlots": [
+        {
+          "start": 718774,
+          "end": 913582,
+          "files": [
+            "game/css/base-reward-feedback.css",
+            "game/css/base-collection-v4.css",
+            "game/css/base-courtyard-v3.css",
+            "game/css/base-cohesion-v5.css",
+            "game/css/base-framework-v7.css",
+            "game/css/base-rooms-v7.css",
+            "game/css/base-personnel-v12.css",
+            "game/css/base-logistics-trade-v12.css",
+            "game/css/base-archive-facilities-v12.css",
+            "game/css/base-page-motion-v7.css",
+            "game/css/base-home-v7.css",
+            "game/css/departure-selected.css",
+            "game/css/roster-reference.css",
+            "game/css/base-shop-v3.css",
+            "game/css/base-archive-v3.css"
+          ],
+          "bytes": 194813,
+          "gzip": 25823,
+          "sha256": "d26689d3cd6feefeaa5a813efa62c0a2665dd4d350691e1801a57d1d719803a3"
+        }
+      ],
+      "orderedDeliverySimulation": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 718774,
+            "bytes": 718976,
+            "gzip": 136279,
+            "sha256": "63249862f30221faeab70b8c4faf87ab7760c6534671a398ad5d023576d9e61c"
+          }
+        ],
+        "initialGzip": 136279,
+        "initialGzipReduction": 24751,
+        "deferredGzip": 25823,
+        "totalGzipDelta": 1072,
+        "exactIntervalReconstruction": true
+      },
+      "omittedArtifactCssBytes": 194812,
+      "sourceSimulation": {
+        "initialBase": {
+          "bytes": 916290,
+          "gzip": 160867,
+          "sha256": "0364ebf77a7ff6077f25a5e735e30ba0fc07e8ca029697355f66f8eca0bdcb05"
+        },
+        "initialRemaining": {
+          "bytes": 721462,
+          "gzip": 135998,
+          "sha256": "1bc38af8b41e3e0dc8af5486ae17454339d7ecaf82345ac579c6be133d3b7863"
+        },
+        "gzipReduction": 24869,
+        "separateGroupGzip": 25836,
+        "totalGzipDelta": 967
+      },
+      "artifactSimulation": {
+        "initialBase": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "original": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "initialRemaining": {
+          "bytes": 718976,
+          "gzip": 136279,
+          "sha256": "63249862f30221faeab70b8c4faf87ab7760c6534671a398ad5d023576d9e61c"
+        },
+        "gzipReduction": 24751,
+        "deferredSlotsGzip": 25823,
+        "totalGzipDelta": 1072,
+        "note": "Static production CSS interval subtraction and re-minification; not a new Vite build"
+      }
+    },
+    "extendedHubClass": {
+      "files": [
+        "game/css/preparation.css",
+        "game/css/base-camp-rework.css",
+        "game/css/base-controls-v4.css",
+        "game/css/base-reward-feedback.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-panel-layout.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-home-v7.css",
+        "game/css/departure-selected.css",
+        "game/css/roster-reference.css",
+        "game/css/base-shop-v3.css",
+        "game/css/base-archive-v3.css",
+        "game/css/base-camp.css",
+        "game/css/base-camp-compact.css"
+      ],
+      "matchedFiles": [
+        "game/css/base-archive-v3.css",
+        "game/css/base-shop-v3.css",
+        "game/css/roster-reference.css",
+        "game/css/departure-selected.css",
+        "game/css/base-home-v7.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-reward-feedback.css",
+        "game/css/base-controls-v4.css",
+        "game/css/base-camp-rework.css",
+        "game/css/preparation.css",
+        "game/css/base-camp.css",
+        "game/css/base-camp-compact.css",
+        "game/css/base-panel-layout.css"
+      ],
+      "unmatchedFiles": [],
+      "sourceGroup": {
+        "bytes": 280167,
+        "gzip": 45654,
+        "sha256": "224ddbeb05203e7d5199878e4fc59deb7d9678a129e356dd8aae76526544becd"
+      },
+      "minifiedGroup": {
+        "bytes": 299174,
+        "gzip": 42065,
+        "sha256": "a86b15b2fd7f53d089e2067ca3e0b9d4955a9790db8c07b8e72af53d7785bb7e"
+      },
+      "retainedArtifactSlots": [
+        {
+          "start": 503675,
+          "end": 562126,
+          "files": [
+            "game/css/base-camp.css"
+          ],
+          "bytes": 58464,
+          "gzip": 9981,
+          "sha256": "ff33daa1e0f98a8c76cd8a1e2f81c8ad8a97ec46f7df247a33b3365a45b030f2"
+        },
+        {
+          "start": 667295,
+          "end": 713161,
+          "files": [
+            "game/css/preparation.css",
+            "game/css/base-camp-rework.css",
+            "game/css/base-controls-v4.css"
+          ],
+          "bytes": 45867,
+          "gzip": 7929,
+          "sha256": "0898482844ad4fe915662d761a23a784822f1eeffe633586bcd499323be3b2de"
+        },
+        {
+          "start": 718774,
+          "end": 913582,
+          "files": [
+            "game/css/base-reward-feedback.css",
+            "game/css/base-collection-v4.css",
+            "game/css/base-courtyard-v3.css",
+            "game/css/base-cohesion-v5.css",
+            "game/css/base-framework-v7.css",
+            "game/css/base-rooms-v7.css",
+            "game/css/base-personnel-v12.css",
+            "game/css/base-logistics-trade-v12.css",
+            "game/css/base-archive-facilities-v12.css",
+            "game/css/base-page-motion-v7.css",
+            "game/css/base-home-v7.css",
+            "game/css/departure-selected.css",
+            "game/css/roster-reference.css",
+            "game/css/base-shop-v3.css",
+            "game/css/base-archive-v3.css"
+          ],
+          "bytes": 194813,
+          "gzip": 25823,
+          "sha256": "d26689d3cd6feefeaa5a813efa62c0a2665dd4d350691e1801a57d1d719803a3"
+        }
+      ],
+      "orderedDeliverySimulation": {
+        "criticalSlots": [
+          {
+            "start": 0,
+            "end": 503675,
+            "bytes": 503798,
+            "gzip": 100295,
+            "sha256": "9b25b6a4d472791b2656c21f2ac76491a36bab9f32664be8bcdf3821ea6e2203"
+          },
+          {
+            "start": 562126,
+            "end": 667295,
+            "bytes": 105237,
+            "gzip": 19198,
+            "sha256": "e178374ec505ef11d2fd03e48447dd398ece80753e00fea45a60cd467bb36084"
+          },
+          {
+            "start": 713161,
+            "end": 718774,
+            "bytes": 5614,
+            "gzip": 1531,
+            "sha256": "5fe7fbd683b6b4ae430c69a0b70b4c4c984253f64276631d8b566733c7b36c41"
+          }
+        ],
+        "initialGzip": 121024,
+        "initialGzipReduction": 40006,
+        "deferredGzip": 43733,
+        "totalGzipDelta": 3727,
+        "exactIntervalReconstruction": true
+      },
+      "omittedArtifactCssBytes": 299141,
+      "sourceSimulation": {
+        "initialBase": {
+          "bytes": 916290,
+          "gzip": 160867,
+          "sha256": "0364ebf77a7ff6077f25a5e735e30ba0fc07e8ca029697355f66f8eca0bdcb05"
+        },
+        "initialRemaining": {
+          "bytes": 617117,
+          "gzip": 119443,
+          "sha256": "d8d02352728c70683a84b377ac87f5ac39d5f597b63aad83d2c014e40edc7ef6"
+        },
+        "gzipReduction": 41424,
+        "separateGroupGzip": 42065,
+        "totalGzipDelta": 641
+      },
+      "artifactSimulation": {
+        "initialBase": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "original": {
+          "bytes": 913788,
+          "gzip": 161030,
+          "sha256": "af68f34378e6275d0e485ffbcb5ad0f3b8ea8210e595e5f33c70e79ed8c79459"
+        },
+        "initialRemaining": {
+          "bytes": 614647,
+          "gzip": 119772,
+          "sha256": "5442072fbfb3845f59b3243c846b88d037edb3188cdff8c2c3c00dffab8e8d04"
+        },
+        "gzipReduction": 41258,
+        "deferredSlotsGzip": 43733,
+        "totalGzipDelta": 2475,
+        "note": "Static production CSS interval subtraction and re-minification; not a new Vite build"
+      }
+    },
+    "extendedAll": {
+      "files": [
+        "game/css/preparation.css",
+        "game/css/base-camp-rework.css",
+        "game/css/base-controls-v4.css",
+        "game/css/base-reward-feedback.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-panel-layout.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-home-v7.css",
+        "game/css/departure-selected.css",
+        "game/css/roster-reference.css",
+        "game/css/base-shop-v3.css",
+        "game/css/base-archive-v3.css",
+        "game/css/base-camp.css",
+        "game/css/base-camp-compact.css",
+        "game/css/page-slot-select.css",
+        "game/css/page-settings.css",
+        "game/css/page-datapage.css",
+        "game/css/page-ach.css",
+        "game/css/battle.css",
+        "game/css/expedition-battle.css",
+        "game/css/page-battle-ui.css",
+        "game/css/battle-stage.css"
+      ],
+      "matchedFiles": [
+        "game/css/base-archive-v3.css",
+        "game/css/base-shop-v3.css",
+        "game/css/roster-reference.css",
+        "game/css/departure-selected.css",
+        "game/css/base-home-v7.css",
+        "game/css/base-page-motion-v7.css",
+        "game/css/base-archive-facilities-v12.css",
+        "game/css/base-logistics-trade-v12.css",
+        "game/css/base-personnel-v12.css",
+        "game/css/base-rooms-v7.css",
+        "game/css/base-framework-v7.css",
+        "game/css/base-cohesion-v5.css",
+        "game/css/base-courtyard-v3.css",
+        "game/css/base-collection-v4.css",
+        "game/css/base-reward-feedback.css",
+        "game/css/base-controls-v4.css",
+        "game/css/base-camp-rework.css",
+        "game/css/preparation.css",
+        "game/css/base-camp.css",
+        "game/css/page-battle-ui.css",
+        "game/css/page-ach.css",
+        "game/css/page-datapage.css",
+        "game/css/page-settings.css",
+        "game/css/page-slot-select.css",
+        "game/css/expedition-battle.css",
+        "game/css/battle.css",
+        "game/css/base-camp-compact.css",
+        "game/css/base-panel-layout.css"
+      ],
+      "unmatchedFiles": [
+        "game/css/battle-stage.css"
+      ],
+      "sourceGroup": {
+        "bytes": 443001,
+        "gzip": 91754,
+        "sha256": "6a840f7417894f217fb547eac48a1c06e9902e148fe73f1798e237606450d9dc"
+      },
+      "minifiedGroup": {
+        "bytes": 402750,
+        "gzip": 62211,
+        "sha256": "f135c08e56ab0501c33dbc3e696f930f192479a4633fb71b5dd132f81702bd40"
+      },
+      "retainedArtifactSlots": [
+        {
+          "start": 79574,
+          "end": 99963,
+          "files": [
+            "game/css/battle.css"
+          ],
+          "bytes": 20394,
+          "gzip": 5416,
+          "sha256": "92749a1bbb2df15843657be11c6417a4f43e5e1616f031ec8ef7113eb3929d05"
+        },
+        {
+          "start": 296965,
+          "end": 306516,
+          "files": [
+            "game/css/expedition-battle.css"
+          ],
+          "bytes": 9566,
+          "gzip": 2188,
+          "sha256": "6204dd8080b969b04c3d3eb88f611aff51bb4297f9b5899bfa4aeb45a7acdd12"
+        },
+        {
+          "start": 365192,
+          "end": 412568,
+          "files": [
+            "game/css/page-slot-select.css",
+            "game/css/page-settings.css",
+            "game/css/page-datapage.css",
+            "game/css/page-ach.css"
+          ],
+          "bytes": 47381,
+          "gzip": 9526,
+          "sha256": "6dabf4476139adbaa085faef8a05e14c28a06922dc7cd81fa2f4d313e9ccd5c7"
+        },
+        {
+          "start": 485547,
+          "end": 486570,
+          "files": [
+            "game/css/page-battle-ui.css"
+          ],
+          "bytes": 1024,
+          "gzip": 430,
+          "sha256": "3cbc9084e66023ece4a60f11ad70cb2f63e1a4f440f38622641f65b86c29b9ce"
+        },
+        {
+          "start": 503675,
+          "end": 562126,
+          "files": [
+            "game/css/base-camp.css"
+          ],
+          "bytes": 58464,
+          "gzip": 9981,
+          "sha256": "ff33daa1e0f98a8c76cd8a1e2f81c8ad8a97ec46f7df247a33b3365a45b030f2"
+        },
+        {
+          "start": 667295,
+          "end": 713161,
+          "files": [
+            "game/css/preparation.css",
+            "game/css/base-camp-rework.css",
+            "game/css/base-controls-v4.css"
+          ],
+          "bytes": 45867,
+          "gzip": 7929,
+          "sha256": "0898482844ad4fe915662d761a23a784822f1eeffe633586bcd499323be3b2de"
+        },
+        {
+          "start": 718774,
+          "end": 913582,
+          "files": [
+            "game/css/base-reward-feedback.css",
+            "game/css/base-collection-v4.css",
+            "game/css/base-courtyard-v3.css",
+            "game/css/base-cohesion-v5.css",
+            "game/css/base-framework-v7.css",
+            "game/css/base-rooms-v7.css",
+            "game/css/base-personnel-v12.css",
+            "game/css/base-logistics-trade-v12.css",
+            "game/css/base-archive-facilities-v12.css",
+            "game/css/base-page-motion-v7.css",
+            "game/css/base-home-v7.css",
+            "game/css/departure-selected.css",
+            "game/css/roster-reference.css",
+            "game/css/base-shop-v3.css",
+            "game/css/base-archive-v3.css"
+          ],
+          "bytes": 194813,
+          "gzip": 25823,
+          "sha256": "d26689d3cd6feefeaa5a813efa62c0a2665dd4d350691e1801a57d1d719803a3"
+        }
+      ],
+      "orderedDeliverySimulation": null,
+      "omittedArtifactCssBytes": 377502,
+      "sourceSimulation": {
+        "initialBase": {
+          "bytes": 916290,
+          "gzip": 160867,
+          "sha256": "0364ebf77a7ff6077f25a5e735e30ba0fc07e8ca029697355f66f8eca0bdcb05"
+        },
+        "initialRemaining": {
+          "bytes": 513541,
+          "gzip": 100319,
+          "sha256": "7ccb68be174da4b79402a042b5d069c4e29462f6e80f6408a596efa82a314237"
+        },
+        "gzipReduction": 60548,
+        "separateGroupGzip": 62211,
+        "totalGzipDelta": 1663
+      },
+      "artifactSimulation": null
+    },
+    "phase2HtmlMenuBattle": {
+      "files": [
+        "game/css/page-slot-select.css",
+        "game/css/page-settings.css",
+        "game/css/page-datapage.css",
+        "game/css/page-ach.css",
+        "game/css/battle.css",
+        "game/css/expedition-battle.css",
+        "game/css/page-battle-ui.css",
+        "game/css/battle-stage.css"
+      ],
+      "matchedFiles": [
+        "game/css/page-battle-ui.css",
+        "game/css/page-ach.css",
+        "game/css/page-datapage.css",
+        "game/css/page-settings.css",
+        "game/css/page-slot-select.css",
+        "game/css/expedition-battle.css",
+        "game/css/battle.css"
+      ],
+      "unmatchedFiles": [
+        "game/css/battle-stage.css"
+      ],
+      "sourceGroup": {
+        "bytes": 162833,
+        "gzip": 46442,
+        "sha256": "36c8b5bae4818b5492f67d108862af6de4ed9f472c7d5fc1d40f749b69e0e6a1"
+      },
+      "minifiedGroup": {
+        "bytes": 103577,
+        "gzip": 20613,
+        "sha256": "fa45b976b2a6f39db990483ba0573e4eb38c564d43203b3911c4fc77759bdc9c"
+      },
+      "retainedArtifactSlots": [
+        {
+          "start": 79574,
+          "end": 99963,
+          "files": [
+            "game/css/battle.css"
+          ],
+          "bytes": 20394,
+          "gzip": 5416,
+          "sha256": "92749a1bbb2df15843657be11c6417a4f43e5e1616f031ec8ef7113eb3929d05"
+        },
+        {
+          "start": 296965,
+          "end": 306516,
+          "files": [
+            "game/css/expedition-battle.css"
+          ],
+          "bytes": 9566,
+          "gzip": 2188,
+          "sha256": "6204dd8080b969b04c3d3eb88f611aff51bb4297f9b5899bfa4aeb45a7acdd12"
+        },
+        {
+          "start": 365192,
+          "end": 412568,
+          "files": [
+            "game/css/page-slot-select.css",
+            "game/css/page-settings.css",
+            "game/css/page-datapage.css",
+            "game/css/page-ach.css"
+          ],
+          "bytes": 47381,
+          "gzip": 9526,
+          "sha256": "6dabf4476139adbaa085faef8a05e14c28a06922dc7cd81fa2f4d313e9ccd5c7"
+        },
+        {
+          "start": 485547,
+          "end": 486570,
+          "files": [
+            "game/css/page-battle-ui.css"
+          ],
+          "bytes": 1024,
+          "gzip": 430,
+          "sha256": "3cbc9084e66023ece4a60f11ad70cb2f63e1a4f440f38622641f65b86c29b9ce"
+        }
+      ],
+      "orderedDeliverySimulation": null,
+      "omittedArtifactCssBytes": 78361,
+      "sourceSimulation": {
+        "initialBase": {
+          "bytes": 916290,
+          "gzip": 160867,
+          "sha256": "0364ebf77a7ff6077f25a5e735e30ba0fc07e8ca029697355f66f8eca0bdcb05"
+        },
+        "initialRemaining": {
+          "bytes": 812714,
+          "gzip": 141748,
+          "sha256": "d472ccf85f03c4e1174847bd13e5c702184b35187a2cc45fc7010a142bd0583f"
+        },
+        "gzipReduction": 19119,
+        "separateGroupGzip": 20613,
+        "totalGzipDelta": 1494
+      },
+      "artifactSimulation": null
+    }
+  },
+  "cssBudget": {
+    "bytes": 139264,
+    "scope": "sum gzip of all emitted .css, including async and new URL CSS",
+    "gap": 61026
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "recordedAtUtc": "2026-10-15T20:37:33Z",
+  "task": "normal-run battle statistics refresh persistence",
+  "sourceFrozen": true,
+  "changes": [
+    {
+      "path": "game/src/agent/agent.battle-stats.js",
+      "sha256": "ad18c1b9deb1adf637a873e3670a02633997a659414fc891c24eed7b2d4f8e41"
+    },
+    {
+      "path": "game/src/agent/agent.recorder.js",
+      "sha256": "5719f81a13f533e6ec9baa953e6e0171c0bc79a0d31c2e5033e9e44642a5cdc6"
+    },
+    {
+      "path": "game/src/agent/agent.js",
+      "sha256": "a999da44a09c584db3082c0ccd9dad4bedfcc03ea56236538a75d965c6c23ffc"
+    },
+    {
+      "path": "game/src/run/game.session.js",
+      "sha256": "330dec515669731b24cb387f2ab2bacb5e3f05a0cba03b83aa258c4214680bc8"
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.js",
+      "sha256": "942f93e33d26ad394e9d07599702f89eb43ec7b7592acf7659c5e0f768e7d309"
+    },
+    {
+      "path": "tests/run-battle-stats-persistence-cloud.test.js",
+      "sha256": "92e2620442ea35785757ca3451b43951e49441b6dee1de12a54eca03b9008746"
+    },
+    {
+      "path": "tests/battle-recorder-lifecycle-cloud.test.js",
+      "sha256": "bbe48fb97248db785e8bf160601262f8903e8bb0df3c7f741ea55b71f08023d7"
+    },
+    {
+      "path": "docs/save-format.md",
+      "sha256": "dcbe273c0b58da326d3236af57005a35cc499ff32c2c38e116ff07f9c291b8b8"
+    }
+  ],
+  "preFixReproduction": {
+    "method": "Native Node + new isolated JSDOM storage + fresh import query per recorder module",
+    "beforeRefresh": {
+      "fought": 6,
+      "won": 6
+    },
+    "afterFreshModule": {
+      "fought": 0,
+      "won": 0
+    },
+    "recordAfterOneLoss": {
+      "fought": 1,
+      "won": 0
+    },
+    "winRate": 0,
+    "playerBrowserStorageRead": false
+  },
+  "checks": [
+    {
+      "kind": "vitest",
+      "files": [
+        "tests/run-battle-stats-persistence-cloud.test.js",
+        "tests/battle-recorder-lifecycle-cloud.test.js",
+        "tests/agent-recorder.test.js",
+        "tests/agent-provenance-stopreason.test.js",
+        "tests/agent-stats-provenance.test.js",
+        "tests/agent-runner-driver-restore.test.js",
+        "tests/battle-restart.test.js",
+        "tests/battle-settlement-retry.test.js",
+        "tests/battle-victory-progress.test.js",
+        "tests/terminal-death.test.js",
+        "tests/terminal-persistence.test.js",
+        "tests/extraction-receipt.test.js",
+        "tests/extraction-flow.test.js",
+        "tests/entry-supply-presentation.test.js",
+        "tests/event-choice-session-resume-cloud.test.js",
+        "tests/menu-recovery-entry.test.js",
+        "tests/save-recovery-session-feedback.test.js",
+        "tests/save-compat.test.js",
+        "tests/contracts.test.js",
+        "tests/run-architecture.test.js",
+        "tests/battle-architecture.test.js",
+        "tests/game-session-browser-boundary.test.js"
+      ],
+      "passedFiles": 22,
+      "passedTests": 161,
+      "log": "battle-stats-regression.log"
+    },
+    {
+      "kind": "vitest",
+      "files": [
+        "tests/battle-all-cards.test.js",
+        "tests/battle-imitate-unplayable.test.js",
+        "tests/battle-action-runner-readiness.test.js",
+        "tests/r7a-qa-live.test.js",
+        "tests/intent-legend-isolation.test.js",
+        "tests/battle-presentation.test.js",
+        "tests/battle-victory-presentation.test.js"
+      ],
+      "passedFiles": 7,
+      "passedTests": 31,
+      "log": "battle-stats-battle-regression.log"
+    },
+    {
+      "kind": "eslint",
+      "files": 7,
+      "passed": true
+    },
+    {
+      "kind": "syntax",
+      "projectFiles": 425,
+      "passed": true
+    },
+    {
+      "kind": "typecheck",
+      "configurations": 8,
+      "passed": true
+    },
+    {
+      "kind": "docs",
+      "relativeLinks": 461,
+      "passed": true
+    },
+    {
+      "kind": "git diff --check",
+      "passed": true
+    }
+  ],
+  "allCards": {
+    "cards": 268,
+    "hardFailures": 0,
+    "existingConditionalWarnings": [
+      "铸甲",
+      "剑荡妖邪",
+      "快意恩仇"
+    ]
+  },
+  "contract": {
+    "field": "runBattleStats",
+    "version": 1,
+    "identity": "current _r2.runId",
+    "countRule": "non-negative safe integers; won <= fought",
+    "logCap": 40,
+    "terminalLogCap": 10,
+    "foeNameCharCap": 256,
+    "deckNameCharCap": 256,
+    "deckEntryCap": 40,
+    "oldMissingInvalidOrWrongRun": "zero counts, never inferred",
+    "loadSemantics": "replace, never add",
+    "battleEndSemantics": "note before notification; finish guarded by battleActive",
+    "devSampleCounted": false,
+    "existingCurrentSessionProvenance": "preserved; battle restore does not reset driver/interventions"
+  },
+  "limits": [
+    "No player browser/save reads or writes",
+    "No browser, services, build, Git mutation or save repair",
+    "Existing lost historical wins cannot be recovered from the previously absent field",
+    "Full repository suite and real second-run refresh verification owned by parent",
+    "Related regression logs include deliberate save/settlement failure-injection diagnostics"
+  ]
+}

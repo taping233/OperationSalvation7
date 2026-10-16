@@ -1,0 +1,42 @@
+{
+  "status": "completed-uncommitted",
+  "files": [
+    {
+      "path": "tests/agent-console-jump.test.js",
+      "sha256": "c62edc376f76266b62eb4eb58c47dbc811e6e4fb3b32e8d3a43a43e5a61ddd36"
+    },
+    {
+      "path": "tests/selftest-paths.test.js",
+      "sha256": "afdc98e0d7ff3d12d68c9fb64ea674ac42a3cdd483bb626268efccacdfcd2454"
+    },
+    {
+      "path": "game/selftest.js",
+      "sha256": "16a71bbe7c8553d3cf9d6ced1f574145cb500c0c7025692e5cb6368a47b38db1"
+    }
+  ],
+  "verification": {
+    "target": {
+      "files": 10,
+      "tests": 152,
+      "failed": 0,
+      "log": "final-target.log"
+    },
+    "selftest": {
+      "exit": 0,
+      "log": "selftest.log"
+    },
+    "lint": {
+      "exit": 0,
+      "log": "lint.log"
+    },
+    "syntax": {
+      "exit": 0,
+      "log": "syntax.log"
+    }
+  },
+  "productionCodeChanged": false,
+  "unverified": [
+    "Independent full npm test after these changes",
+    "No new build; production menu code remains frozen"
+  ]
+}

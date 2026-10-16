@@ -73,6 +73,38 @@ body #overlay .battle-decision .battle-decision-inspect-kicker { color:#b9ced2;f
 body #overlay .battle-decision .battle-decision-inspect h4 { margin:8px 0;color:#f0e0b8;font-size:21px; }
 body #overlay .battle-decision .battle-decision-inspect-meta { color:#bdd0d5;font-size:14px; }
 body #overlay .battle-decision .battle-decision-inspect-rules { white-space:pre-wrap;line-height:1.6;font-size:16px; }
+/* 牌库与消耗牌共用阅读尺寸；长规则留在中部阅读区，不挤走返回动作。 */
+body #overlay .card:has(.battle-decision[data-decision-kind="pile"]) {
+  box-sizing:border-box;display:flex;width:min(1680px,94%);height:94%;min-width:0;min-height:0;max-width:94%;max-height:94%;
+}
+body #overlay .card:has(.battle-decision[data-decision-kind="pile"]) > #ovBody { min-width:0;max-width:none; }
+body #overlay .battle-decision[data-decision-kind="pile"] { flex:1 1 auto;height:100%;max-height:none; }
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-head { flex-wrap:wrap; }
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-head h3 { font-size:34px;line-height:1.35;overflow-wrap:anywhere; }
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-head > span { font-size:22px;white-space:normal; }
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-summary .ov-stats { font-size:var(--card-copy-size,24px);overflow-wrap:anywhere; }
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-content {
+  flex:1 1 auto;min-width:0;overflow:auto;scrollbar-gutter:stable;scroll-padding:16px;
+}
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-pile-layout { grid-template-columns:minmax(0,1fr) minmax(400px,30%);gap:32px; }
+body #overlay .battle-decision[data-decision-kind="pile"] .bt-gy-list {
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:28px;justify-items:center;align-content:start;overflow:visible;
+}
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-pile-card {
+  box-sizing:border-box;width:320px;max-width:100%;min-width:0;padding:0;scroll-margin:16px;
+}
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-pile-card .hs-card { width:100%;max-width:100%;margin:0;font-size:32px; }
+body #overlay .battle-decision[data-decision-kind="pile"] .bt-count { font-size:22px;padding:4px 8px; }
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-inspect {
+  box-sizing:border-box;max-height:calc(var(--game-layout-height,100vh) * .94 - 332px);overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scroll-padding:12px;overflow-wrap:anywhere;
+}
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-inspect-kicker { font-size:20px; }
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-inspect h4 { font-size:30px;line-height:1.4; }
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-inspect-meta { font-size:22px;line-height:1.5; }
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-inspect-rules,
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-content .ov-note,
+body #overlay .battle-decision[data-decision-kind="pile"] .ov-empty { font-size:var(--card-copy-size,24px);line-height:var(--card-copy-leading,1.55);overflow-wrap:anywhere; }
+body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-actions .ov-btn { min-height:64px;min-width:240px;max-width:100%;font-size:24px; }
 body #overlay .battle-decision[data-decision-kind="bag"] .battle-decision-inspect { position:static;margin:0 0 18px; }
 body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-entry { display:flex;flex-direction:column;align-items:center;gap:6px; }
 body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-inspect {
@@ -86,6 +118,9 @@ body #overlay .battle-decision[data-decision-kind="bag"] .battle-bag-inspect:foc
 @media (max-width:900px) {
   body #overlay .battle-decision .battle-pile-layout { grid-template-columns:minmax(0,1fr); }
   body #overlay .battle-decision .battle-decision-inspect { position:static; }
+  body #overlay .battle-decision[data-decision-kind="pile"] .battle-pile-layout { grid-template-columns:minmax(0,1fr); }
+  body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-inspect { position:static;max-height:none;overflow:visible; }
+  body #overlay .battle-decision[data-decision-kind="pile"] .battle-decision-actions .ov-btn { min-width:0;width:100%; }
 }
 
 /* 同一手牌保留原卡框；StS2位置表适配的低弧让九叠身份区全部可见。 */

@@ -1,0 +1,64 @@
+{
+  "task": "WF-battle-pile-readability-1016",
+  "status": "implementation-and-targeted-checks-complete-browser-owned-by-parent",
+  "baseline": "R7 verification finished before this increment; this increment is not covered by the R7 full-suite snapshot",
+  "sourceManifest": [
+    {
+      "path": "game/css/battle-hand-overhaul.css",
+      "sha256": "1122518fbb52e695b6719106b155756780f5b7cb767fdb4e00ea4e9c334ef580"
+    },
+    {
+      "path": "tests/battle-pile-readability.test.js",
+      "sha256": "4516f08e2d6eaad98e3007e46a2f43f54ca6be05352eef92a13034deafb07083"
+    }
+  ],
+  "productionFiles": [
+    "game/css/battle-hand-overhaul.css"
+  ],
+  "scope": "Only selectors containing [data-decision-kind=\"pile\"]; no card data, behavior, assets, deck contents, or action counts changed",
+  "layout": {
+    "logicalCanvas": [
+      1920,
+      1080
+    ],
+    "observedWindow": [
+      1188,
+      761
+    ],
+    "scale": 0.61875,
+    "shellLogicalWidth": 1680,
+    "shellMaxPercent": 94,
+    "cardTrackLogicalWidth": 320,
+    "rulesLogicalFontPx": 24,
+    "headingLogicalFontPx": 34,
+    "buttonLogicalMinHeight": 64,
+    "buttonLogicalFontPx": 24
+  },
+  "checks": [
+    {
+      "command": "npx vitest run tests/battle-pile-readability.test.js tests/expedition-battle-presentation.test.js tests/battle-tools-lifecycle.test.js tests/pocket-restore-interface.test.js tests/pearl-storage-interface.test.js --reporter=dot",
+      "exitCode": 0,
+      "testFilesPassed": 5,
+      "testsPassed": 48,
+      "log": "targeted-tests.log"
+    },
+    {
+      "command": "npx eslint tests/battle-pile-readability.test.js",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check -- game/css/battle-hand-overhaul.css tests/battle-pile-readability.test.js",
+      "exitCode": 0
+    }
+  ],
+  "coverage": [
+    "Static CSS: isolated pile scope, three 320px grid tracks at approved logical width, readable rules typography, bounded scrollable long-rule panel, scroll padding and card focus margins, narrow-window single-column fallback",
+    "Module fixture: deck and grave grouping/counts, full 90-line rules retained, repeated inspection preserves focused button and selection state, fixed footer action remains outside scrolling content, snapshot unchanged",
+    "Existing tests: battle tools open/return lifecycle, effective full-rule presentation, restoration and pearl storage interfaces"
+  ],
+  "unverified": [
+    "Current-window browser pixel layout, native scroll and native Tab behavior are owned by parent; jsdom does not establish actual layout or native input success",
+    "No browser, service, real save, build, full suite, or remote CI was run for this increment"
+  ],
+  "referenceScreenshot": "../2026-10-16-WF-cloud-play-eight-hours/screenshots/81-boss-effective-deck-details.png"
+}

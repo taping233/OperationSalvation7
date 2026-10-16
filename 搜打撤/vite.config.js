@@ -69,6 +69,7 @@ const ITEM_ART_ALIAS = Object.freeze({ id: 'tt-token-color', target: 'cmtmvq6ss8
 let aliasedDuplicateAssets = null;
 let verifiedRuntimeAssetAliases = null;
 let reviewedRuntimeAssetExclusions = new Set();
+let configuredRuntimeAssetExclusions = null;
 
 function getVerifiedRuntimeAssetAliases() {
   if (!verifiedRuntimeAssetAliases) verifiedRuntimeAssetAliases = collectVerifiedRuntimeAssetAliases(ASSETS_ROOT);
@@ -128,7 +129,8 @@ function writeArtManifest() {
 function writeThumbManifest() {
   const omittedAliases = getAliasedDuplicateAssets();
   const files = collectImageFiles(path.join(GAME_ROOT, 'assets', 'thumbs'))
-    .filter(file => includeRuntimeThumbnailMetadata(file, omittedAliases, getVerifiedRuntimeAssetAliases())).sort();
+    .filter(file => !reviewedRuntimeAssetExclusions.has(`thumbs/${file}`)
+      && includeRuntimeThumbnailMetadata(file, omittedAliases, getVerifiedRuntimeAssetAliases())).sort();
   const target = path.join(GAME_ROOT, 'src', 'generated', 'thumb-manifest.js');
   writeFileSync(
     target,
@@ -174,11 +176,16 @@ function copyStatic() {
     config(_config, { command }) {
       verifiedRuntimeAssetAliases = null;
       aliasedDuplicateAssets = null;
-      reviewedRuntimeAssetExclusions = new Set();
+      reviewedRuntimeAssetExclusions = command === 'build'
+        ? collectReviewedRuntimeAssetExclusions(ROOT).excludedAssets : new Set();
+      configuredRuntimeAssetExclusions = command === 'build'
+        ? new Set(reviewedRuntimeAssetExclusions) : null;
       return {
         define: {
           __RUNTIME_ASSET_ALIASES__: JSON.stringify(command === 'build'
-            ? Object.fromEntries([...getVerifiedRuntimeAssetAliases()].map(([alias, canonical]) => [`assets/${alias}`, `assets/${canonical}`]))
+            ? Object.fromEntries([...getVerifiedRuntimeAssetAliases()]
+              .filter(([alias, canonical]) => !reviewedRuntimeAssetExclusions.has(alias) && !reviewedRuntimeAssetExclusions.has(canonical))
+              .map(([alias, canonical]) => [`assets/${alias}`, `assets/${canonical}`]))
             : {}),
         },
       };
@@ -189,6 +196,11 @@ function copyStatic() {
       verifiedRuntimeAssetAliases = null;
       aliasedDuplicateAssets = null;
       const publication = collectReviewedRuntimeAssetExclusions(ROOT);
+      // The injected alias dictionary and generated manifests must describe the
+      // same selection. Changed sources require a fresh build configuration.
+      if (configuredRuntimeAssetExclusions) {
+        assertRuntimeExclusionPlanUnchanged(configuredRuntimeAssetExclusions, publication.excludedAssets);
+      }
       reviewedRuntimeAssetExclusions = publication.excludedAssets;
       for (const warning of publication.warnings) console.warn(`[assets] ${warning}`);
       console.log(`[assets] reviewed unused production images omitted: ${reviewedRuntimeAssetExclusions.size}`);

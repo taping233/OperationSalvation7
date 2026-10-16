@@ -11,8 +11,14 @@ const posix = value => String(value).replace(/\\/g, '/');
 const JS_SOURCE_RE = /\.(?:[cm]?js|jsx|tsx?)$/;
 const ROOT_RE = /(?:assets\/|portraits\/frames\/|scenes\/|map-nodes\/)/;
 const isString = node => node?.type === 'Literal' && typeof node.value === 'string';
-const pathNeedle = candidate => candidate.category === 'frames'
-  ? path.posix.basename(candidate.path) : path.posix.basename(candidate.path, '.webp');
+const LEGACY_CHEST_FRAME_RE = /^scenes\/chests\/(?:small|medium|large|class|boss)-rig-640-v1\/frame-\d{2}\.webp$/;
+// Legacy and current safe timelines share frame-00 names. Match the retired rig
+// directory as well, so keeping safe-simple-v7 cannot restore unrelated rigs.
+const referenceNeedle = asset => LEGACY_CHEST_FRAME_RE.test(asset)
+  ? path.posix.basename(path.posix.dirname(asset)) : path.posix.basename(asset);
+const pathNeedle = candidate => candidate.category === 'chests'
+  ? referenceNeedle(candidate.path) : candidate.category === 'frames'
+    ? path.posix.basename(candidate.path) : path.posix.basename(candidate.path, '.webp');
 
 // Opaque paths cannot be proved unused by searching for filenames. Every
 // module constructing dynamic asset URLs needs an unchanged reviewed consumer.
@@ -166,7 +172,7 @@ export function assertExcludedRuntimeAssetReferences(modules, excludedAssets) {
       throw new Error(`Unscanned dynamic game asset consumer ${id}; restore publication before building.`);
     }
     for (const asset of excludedAssets) {
-      if (id.endsWith(`/assets/${asset}`) || code.includes(asset) || code.includes(path.posix.basename(asset))) {
+      if (id.endsWith(`/assets/${asset}`) || code.includes(asset) || code.includes(referenceNeedle(asset))) {
         throw new Error(`Excluded runtime asset referenced by ${id}: ${asset}. Restore publication or review the selector before building.`);
       }
     }

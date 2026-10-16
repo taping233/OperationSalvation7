@@ -1,0 +1,76 @@
+{
+  "iteration": 4,
+  "status": "implementation-ready-awaiting-parent-current-window-verification",
+  "baseline": "f0e84c5dc34afcbc1176b1519258d2c3010c62cb",
+  "changedThisIteration": [
+    "battle-stage.css: atomic intent condition row and automatic pile/tactics grid rows",
+    "battle.layers.js: split action and condition spans only",
+    "nearby CSS/intent tests"
+  ],
+  "preserved": [
+    "hand rest/hover geometry",
+    "R2 pointer path",
+    "view template",
+    "character/assets/font",
+    "damage/payment rules"
+  ],
+  "checks": {
+    "targetTests": {
+      "files": 9,
+      "passed": 150,
+      "failed": 0,
+      "log": "target-tests-r4.log"
+    },
+    "eslint": {
+      "passed": true,
+      "log": "eslint-r4.log"
+    },
+    "nodeSyntax": {
+      "passed": true,
+      "scope": [
+        "battle.layers.js"
+      ]
+    },
+    "postcss": {
+      "passed": true,
+      "importantDeclarations": 0
+    },
+    "ownDiffWhitespace": {
+      "passed": true
+    }
+  },
+  "browser": {
+    "operator": "parent task",
+    "performedByThisWorker": false,
+    "inputEvidence": [
+      "../2026-10-16-WF-cloud-play-eight-hours/screenshots/34-boss-battle-after-r3.png",
+      "../2026-10-16-WF-cloud-play-eight-hours/screenshots/35-boss-lethal-forecast-r3.png"
+    ],
+    "parentReportedR3": [
+      "skill and forecast copy readable",
+      "target aria normal in this boss battle",
+      "equipment/active equipment buttons/skill used and unaffordable states passed",
+      "full intent detail can open"
+    ],
+    "r4Pending": [
+      "boss condition not broken inside words",
+      "piles fully visible above normal/lethal forecast with positive gap",
+      "next turn and pile modal return preserve end-turn and hand positions"
+    ]
+  },
+  "limits": [
+    "CSS/DOM contracts do not prove current-window pixel layout",
+    "full test suite/build/remote CI/multi-size not run",
+    "asset consumer fingerprints require parent review/update"
+  ],
+  "sha256": {
+    "game/css/battle-stage.css": "26ed9c98ade16936d694a0343630c73ef12aed81f22f4981df7b7704a641be24",
+    "game/src/battle/view/battle.hand-layout.js": "706562cd5559ec0a8edae122c152a638dc5c23ce0a89c5ac1f619dc9f1253f6b",
+    "game/src/battle/view/battle.layers.js": "9e7550ed5c4ed75d54f158430e1cf83fc652e5086c7309a5c6d1b48c78797ab0",
+    "game/src/battle/view/battle.view.js": "c8101836bd34b1c0c7528bc0e6fb49d6cd2bc7af644bc70cdba86804bd09f4dc",
+    "tests/battle-hand-layout.test.js": "00a6c24875d7b077faca8c2a6d998ecf2b6581a29089ac436c575c3a6cfee7da",
+    "tests/battle-decision-readability.test.js": "1b6a289d98cd4935932a76cfaedae28e44b0e4ff96cb5efcd219366b8b0ffa64",
+    "tests/battle-entry-view.test.js": "3f5a9fd757dac891d91a5da5d3762eb1ef202210684950747f169d2a9a46cbaf",
+    "tests/battle-hand-inspector.test.js": "1708572efcb2e21821b147a4c7efb4087fc125743cf14d554981b46251edd397"
+  }
+}

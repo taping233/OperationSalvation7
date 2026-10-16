@@ -5,6 +5,7 @@ import * as Combat from '../core/combat.js';
 import { splitEffectClauses } from '../effects/battle.effects.js';
 import { G, equipped, nestSyn, pstat, busy, infusing, discovering, choosing, handSelecting, hand, mode, sel } from '../runtime/battle.runtime.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
+import { assertCardRulesExecutable } from '../effects/battle.rule-guard.js';
 
 export function createBattleEquipment({
   requestBattleRender, clearTargetSession, queueBattleAction, runStagedSteps,
@@ -129,17 +130,31 @@ export function createBattleEquipment({
       queueBattleAction(async signal => {
         throwIfActionCancelled(signal);
         if (!equipped.includes(e) || (once && e.used)) return;
-        if (once) e.used = true;
-        G.log(`[[icon:sparkles]] <b>${esc(e.card.name)}</b> 主动技能发动`, 'ok');
         // 复用真实分段执行器，异步伤害、发现与后续选择都属于同一动作。
-        const ops = structuredSkill.ops;
-        const enemy = ops.some(op => op.op === 'damage' || ['chosenEnemy', 'allEnemies', 'randomEnemy'].includes(op.target));
-        const synthetic = { ...executionCard, desc: '', infuse: 0,
-          type: ops.some(op => op.op === 'damage') ? '法术' : executionCard.type,
-          dmgType: executionCard.dmgType || 'fixed',
-          rules: { ...executionCard.rules, battle: { target: { side: enemy ? 'enemy' : 'self', area: ops.some(op => op.target === 'allEnemies') } }, triggers: { onPlay: ops } } };
-        await runStagedSteps(resolveCardSteps(synthetic, alive()[0] || null), signal);
-        throwIfActionCancelled(signal);
+        try {
+          assertCardRulesExecutable(executionCard);
+          // 装备域允许字段效果混排；合成 onPlay 时取当前值，满足其 v2 字面量混排契约。
+          const ops = structuredSkill.ops.map(op => {
+            if (!['heal', 'armor', 'draw'].includes(op.op) || op.amountField === undefined) return op;
+            const { amountField, ...rest } = op;
+            return { ...rest, amount: executionCard[amountField] };
+          });
+          const enemy = ops.some(op => op.op === 'damage' || ['chosenEnemy', 'allEnemies', 'randomEnemy'].includes(op.target));
+          const synthetic = { ...executionCard, desc: '', infuse: 0,
+            type: ops.some(op => op.op === 'damage') ? '法术' : executionCard.type,
+            dmgType: executionCard.dmgType || 'fixed',
+            rules: { ...executionCard.rules, battle: { target: { side: enemy ? 'enemy' : 'self', area: ops.some(op => op.target === 'allEnemies') } }, triggers: { onPlay: ops } } };
+          assertCardRulesExecutable(synthetic);
+          G.log(`[[icon:sparkles]] <b>${esc(e.card.name)}</b> 主动技能发动`, 'ok');
+          await runStagedSteps(resolveCardSteps(synthetic, alive()[0] || null), signal);
+          throwIfActionCancelled(signal);
+          if (once) e.used = true;
+        } catch (error) {
+          if (error?.name !== 'BattleActionCancelledError') {
+            G.log(`[[icon:cross]] 【${esc(e.card.name)}】主动技能未完成，本场次数未消耗`, 'warn');
+          }
+          throw error;
+        }
         sweepDead();
         if (!alive().length) { finish(true); return; }
         processChoice(); processDiscoverQueue(); processHandSelect();
