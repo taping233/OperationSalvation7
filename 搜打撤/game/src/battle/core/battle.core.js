@@ -4,6 +4,7 @@ import { refillDrawPile } from '../bag/battle.deck.js';
 import { COMBAT_HOOKS } from './combat.js';
 import { BATTLE_PHASES } from '../runtime/battle.state.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
+import { hasInfusionWaiver } from '../effects/battle.infusion.js';
 import * as Combat from './combat.js';
 import {
   battleState, G, foes, opts, mode, hand, energy, maxEnergy, pstat, busy, infusing,
@@ -319,7 +320,8 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
         bleedAmp,
         vsFreezeBonus,
         specialLifecycle: livingFoes.some(foe => foe.revive && !foe.revived),
-        allSpellsInfused: !!(allSpellsInfused && infuseOf(card) > 0),
+        allSpellsInfused: !!(hasInfusionWaiver(card, allSpellsInfused)
+          && (+(card.infuse || 0) || SDT.Cards.deriveInfuse(card))),
       }),
     });
   }

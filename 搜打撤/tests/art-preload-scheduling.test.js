@@ -31,6 +31,13 @@ afterEach(() => {
 });
 
 describe('启动预热集合与顺序', () => {
+  it('桌面本地资源只预取首轮场景和通用卡框，不扫描全人物、原图或缩略图', () => {
+    const sceneUrls = ['current-scene.webp'];
+    const urls = planStartupArtPreload({ protocol: 'app:', sceneUrls,
+      figureUrls: ['figure.webp'], thumbnailUrls: ['thumb.webp'], manifestUrls: ['catalog.webp'] });
+    expect(urls).toEqual([...sceneUrls, ...frameUrls()]);
+    expect(urls).not.toContain('catalog.webp');
+  });
   it('保留旧清单完整集合，新增项仅是现行人物URL与现行卡框，且先于全缩略图', () => {
     const sceneUrls = ['current-scene.webp'];
     const figureUrls = Art.collectCardAssets([]);

@@ -6,7 +6,7 @@ import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import {
   DEVELOPMENT_SFX_PREFIXES, collectUnreferencedDevelopmentSfxPrefixes,
-  fontLicenseFileNames, shouldPublishRuntimeAsset,
+  fontLicenseFileNames, shouldPublishRuntimeAsset, RUNTIME_ASSET_DIRS,
 } from '../scripts/runtime-asset-publication.mjs';
 
 const assetsRoot = fileURLToPath(new URL('../game/assets/', import.meta.url));
@@ -18,6 +18,21 @@ afterEach(() => {
 });
 
 describe('production runtime asset publication', () => {
+  it('publishes JSON-referenced frames and guide art plus dynamically named battle stickers at stable paths', () => {
+    const frames = JSON.parse(readFileSync(new URL('../game/data/card-frame-layout.json', import.meta.url), 'utf8'));
+    const guide = readFileSync(new URL('../game/data/beginner-guide.json', import.meta.url), 'utf8');
+    const assets = [...Object.values(frames).map(frame => frame.path),
+      ...guide.matchAll(/ui\/beginner-guide\/[\w-]+\.svg/g)].map(value => typeof value === 'string' ? value : value[0]);
+    assets.push('ui/map-hud-1015/gold-is7-v2.webp', 'ui/sugin-mail-empty.webp',
+      'battle/fx-sticker-boom.svg', 'battle/fx-sticker-heal.svg', 'battle/fx-sticker-hurt.svg');
+    expect(assets.length).toBeGreaterThan(20);
+    for (const asset of assets) {
+      expect(RUNTIME_ASSET_DIRS.some(directory => asset.startsWith(`${directory}/`)), asset).toBe(true);
+      expect(readFileSync(path.join(assetsRoot, asset)).byteLength, asset).toBeGreaterThan(0);
+    }
+    const config = readFileSync(new URL('../vite.config.js', import.meta.url), 'utf8');
+    expect(config).toContain('for (const relativeDir of RUNTIME_ASSET_DIRS)');
+  });
   it('loads fallback Noto fonts on demand without changing the primary font or removing bundled fallbacks', () => {
     const html = readFileSync(new URL('../game/index.html', import.meta.url), 'utf8');
     const css = readFileSync(new URL('../game/css/base.css', import.meta.url), 'utf8');

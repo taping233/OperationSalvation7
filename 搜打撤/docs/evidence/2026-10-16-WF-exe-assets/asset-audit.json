@@ -1,0 +1,12 @@
+{
+  "output": "desktop-app\\dist\\fixed-20261016\\win-unpacked\\resources\\game",
+  "uniqueReferences": 1564,
+  "missing": [],
+  "aliasCount": 19,
+  "coverage": [
+    "generated art and thumbnail catalogues",
+    "existing image paths in game data",
+    "static new URL in emitted JS",
+    "emitted CSS and HTML URLs"
+  ]
+}

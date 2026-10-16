@@ -230,26 +230,9 @@ body.interface-motion #overlay#overlay#overlay:has(.city-run-transition):not([da
   overflow: hidden; background: transparent !important;
 }
 #overlay .city-run-transition::before, #overlay .city-run-transition::after { content: none; }
-#overlay .city-run-transition .camp-entry-cut {
-  animation: cityRunCut var(--city-run-duration,900ms) cubic-bezier(.65,0,.2,1) both !important;
-}
-#overlay .city-run-transition .camp-entry-caption {
-  animation: cityRunCaption var(--city-run-duration,900ms) ease-out both;
-}
-#overlay .city-run-transition :is(.camp-entry-register, .camp-entry-scenery) { animation: none; }
-#overlay .city-run-transition .camp-entry-register::before { font-size: clamp(72px,calc(var(--game-layout-width, 100vw) * 0.12),180px); }
 #overlay .city-run-transition .city-run-hint {
   position: absolute; right: 30px; bottom: 24px; z-index: 35; margin: 0;
   font: 12px/1.5 var(--font-ui); color: #a9b4b8; letter-spacing: .12em;
-}
-@keyframes cityRunCut {
-  0%, 64% { transform: translate3d(0,0,0); clip-path: polygon(0 0,100% 0,100% 100%,0 100%); }
-  100% { transform: translate3d(105%,0,0); clip-path: polygon(0 0,84% 0,100% 100%,0 100%); }
-}
-@keyframes cityRunCaption {
-  0%, 10% { opacity: 0; transform: translateX(-20px) rotate(-5deg); }
-  24%, 64% { opacity: 1; transform: translateX(0) rotate(-5deg); }
-  95%, 100% { opacity: 0; transform: translateX(24px) rotate(-5deg); }
 }
 body.reduce-motion #overlay[data-camp-entry] #hubMain.base-camp *,
 body.reduce-motion #overlay .camp-entry-ghost { animation: none !important; }

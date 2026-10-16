@@ -2,6 +2,7 @@
  * 通过 readState 接收引擎运行态快照，不直接导入或持有 battle.runtime 状态。 */
 import { esc, clone as cloneData } from '../../core/shared.js';
 import { calculateEffectiveCardCost, pocketSpellDiscountFor } from './battle.card-cost.js';
+import { hasInfusionWaiver } from './battle.infusion.js';
 
 const CURSE_SCAN = [
   { key: 'bleed',   re: /(?:附加|施加)\s*(?:(\d+)\s*层?)?\s*流血/, def: 1 },
@@ -83,7 +84,8 @@ export function createBattleCardInspection({ cards, readState, curseMeta }) {
   };
 
   const drawOf = card => +(card.draw || 0) || cards.deriveDraw(card) || 0;
-  const infuseOf = card => card._noInfuse ? 0 : (+(card.infuse || 0) || cards.deriveInfuse(card) || 0);
+  const infuseOf = card => hasInfusionWaiver(card, readState().allSpellsInfused)
+    ? 0 : (+(card.infuse || 0) || cards.deriveInfuse(card) || 0);
 
   const effCostOf = (card, uid) => {
     const state = readState();

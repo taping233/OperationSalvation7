@@ -18,7 +18,7 @@ afterEach(() => vi.restoreAllMocks());
 
 describe('home wallpaper preference', () => {
   it('temporarily hides the interface and restores it without changing wallpaper or saves', async () => {
-    localStorage.setItem('sdt-title-wallpaper', 'ensemble');
+    localStorage.setItem('sdt-title-wallpaper', 'baita-heixiang');
     localStorage.setItem('game-save-fixture', 'untouched');
     await boot();
     const title = document.getElementById('title');
@@ -29,7 +29,7 @@ describe('home wallpaper preference', () => {
     expect(title.querySelector('.title-inner').hasAttribute('inert')).toBe(true);
     expect(viewButton.getAttribute('aria-pressed')).toBe('true');
     expect(viewButton.textContent).toContain('恢复界面');
-    expect(selection()).toBe('snow-road');
+    expect(selection()).toBe('baita-heixiang');
     viewButton.click();
     expect(title.classList.contains('wallpaper-only')).toBe(false);
     expect(title.querySelector('.title-inner').hasAttribute('inert')).toBe(false);
@@ -37,20 +37,21 @@ describe('home wallpaper preference', () => {
     expect({ ...localStorage }).toEqual(stored);
   });
 
-  it('keeps the switch available with one current wallpaper without changing game saves', async () => {
+  it('keeps the snow road first and cycles the second wallpaper without changing game saves', async () => {
     localStorage.setItem('game-save-fixture', 'untouched');
     await boot();
     expect(selection()).toBe('snow-road');
     expect(button().disabled).toBe(false);
     expect(button().hidden).toBe(false);
+    expect(button().textContent).toContain('1/2');
+    button().click();
+    expect(selection()).toBe('baita-heixiang');
+    expect(button().getAttribute('aria-label')).toContain('当前第2张，共2张');
+    expect(button().textContent).toContain('2/2');
+    expect(localStorage.getItem('sdt-title-wallpaper')).toBe('baita-heixiang');
     button().click();
     expect(selection()).toBe('snow-road');
-    expect(button().getAttribute('aria-label')).toContain('当前第1张，共1张');
-    expect(button().textContent).toContain('1/1');
-    expect(localStorage.getItem('sdt-title-wallpaper')).toBe('snow-road');
-    button().click();
-    expect(selection()).toBe('snow-road');
-    expect(button().textContent).toContain('1/1');
+    expect(button().textContent).toContain('1/2');
     expect(localStorage.getItem('game-save-fixture')).toBe('untouched');
   });
 
@@ -81,14 +82,14 @@ describe('home wallpaper preference', () => {
     } finally { vi.useRealTimers(); }
   });
 
-  it('restores the current wallpaper on a new page load', async () => {
+  it('restores the second wallpaper on a new page load', async () => {
     await boot();
     button().click();
     vi.resetModules();
     document.body.innerHTML = html;
     await boot();
-    expect(selection()).toBe('snow-road');
-    expect(button().textContent).toContain('1/1');
+    expect(selection()).toBe('baita-heixiang');
+    expect(button().textContent).toContain('2/2');
   });
 
   it.each(['snow', 'ensemble', 'retired'])('uses the new wallpaper for retired or unknown preference %s', async preference => {
@@ -96,7 +97,7 @@ describe('home wallpaper preference', () => {
     await boot();
     expect(selection()).toBe('snow-road');
     button().click();
-    expect(selection()).toBe('snow-road');
+    expect(selection()).toBe('baita-heixiang');
   });
 
   it('still switches when preference storage is unavailable', async () => {
@@ -104,7 +105,7 @@ describe('home wallpaper preference', () => {
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('blocked'); });
     await boot();
     button().click();
-    expect(selection()).toBe('snow-road');
+    expect(selection()).toBe('baita-heixiang');
     button().click();
     expect(selection()).toBe('snow-road');
   });

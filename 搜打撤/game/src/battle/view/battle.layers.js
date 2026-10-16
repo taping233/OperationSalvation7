@@ -10,6 +10,7 @@ import { fanLayout } from '../core/battle.hand.js';
 import { handDisplayLayout as referenceHandLayout } from './battle.hand-layout.js';
 import { calculateEnemyIntent } from '../core/battle.enemy-intent.js';
 import { intentViewModel } from './battle.intent.view.js';
+import { isAreaEffect } from '../effects/battle.target-rules.js';
 import { storeGet, storeSet } from '../../core/storage.js';
 /* W5-03（2026-09-27 R2）：首次意图图例样式（battle.css 冻结 → head 注入，W2-01 同款）。 */
 if (!document.getElementById('stsIntentLegendStyle')) {
@@ -272,9 +273,9 @@ import { cardRuleHint } from './battle.preview.js';
         : infuseOf(g.card) > 0
         ? `费用 ${effCost}${costTip} · 点击选择注能材料；也可直接拖拽使用`
         : side === 'enemy'
-        ? `费用 ${effCost}${costTip} · 点击选择敌人；也可直接拖到敌人身上使用`
+        ? `费用 ${effCost}${costTip} · 点击选择敌人；也可直接拖到${isAreaEffect(g.card) ? '战场空地或敌人身上' : '敌人身上'}使用`
         : side === 'self'
-          ? `费用 ${effCost}${costTip} · 点击选择自己；也可直接拖到左侧人物使用`
+          ? `费用 ${effCost}${costTip} · 点击选择自己；也可直接拖到战场空地或左侧人物使用`
           : side === 'any'
             ? `费用 ${effCost}${costTip} · 点击直接使用；也可直接拖到战场空地`
             : `费用 ${effCost}${costTip} · 规则见卡面`;

@@ -1,0 +1,14 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Use case: precise-object-edit (depth of field correction). Image 1 is the EDIT TARGET, the current hand-painted anime winter transition illustration. Image 2 is the ORIGINAL NOVELAI DRAFT and is a supporting reference ONLY for the original soft defocus / bokeh depth treatment. The user's correction is that the redraw wrongly removed the original's blur. Change ONLY depth-of-field/soft-focus handling to restore that original treatment. Preserve Image 1's exact scene, composition, camera, positions, gateway shape, single vermilion cloth, mountain silhouettes, forest arrangement, painted colors, broad painted rendering, canvas ratio and lighting. Restore the beautiful intentional soft foreground defocus across the LEFT 0-42 percent of the canvas, with very blurred soft dark-blue nearby snowbank/forest on the far left, a natural gradual transition toward a sharper scene near the middle, and soft distant atmospheric forest/mountain layers as seen in Image 2. Match the amount and spatial distribution of blur in the original NAI draft, not just a subtle haze. The left defocus is a deliberate photographic depth cue supporting space for UI captions; do not repaint it with crisp little tree branches or sharp snow details. The RIGHT gateway and vermilion cloth remain the clear sharp focal plane and must not get globally blurred. Preserve the brush-painted anime visual style in the focused areas. No new objects, no people, no animals, no weapons, no added light sources, no text, no UI, no border, no watermark. Do not apply a uniform whole-image blur. Return one complete opaque wide illustration.",
+  "references": [
+    "C:\\Users\\太平\\.codex\\generated_images\\01a144f3-002d-7421-b5e3-06f4a387de8f\\exec-8e050a55-a4ae-4929-b508-7bae210db100.png",
+    "D:\\素材\\代号柒\\.tmp\\nai\\general-transition-1016\\nai-draft-v2.png"
+  ],
+  "referenceRoles": [
+    "edit target: first redraw",
+    "supporting reference: original NAI depth of field"
+  ],
+  "generatedSource": "C:/Users/太平/.codex/generated_images/01a144f3-002d-7421-b5e3-06f4a387de8f/exec-fe46d1d3-ab2f-44cd-8061-ec333436ca90.png",
+  "userCorrection": "你没有维持原图的虚化"
+}

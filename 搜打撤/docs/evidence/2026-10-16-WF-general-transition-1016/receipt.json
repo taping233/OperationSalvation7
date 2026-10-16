@@ -1,0 +1,20 @@
+{
+  "workflow": "NovelAI V5 draft -> built-in redraw -> original blur restored",
+  "dimensions": [
+    1672,
+    941
+  ],
+  "encoding": "WebP quality89 method6, original dimensions",
+  "source": ".tmp\\nai\\general-transition-1016\\builtin-blur-restored-v2.png",
+  "sourceBytes": 1888484,
+  "sourceSha256": "16845fa8a59eaac77150805ad314a9eddbc60eb597261ed6fdf227d9b66255de",
+  "asset": {
+    "path": "scenes/transition-general-1016.webp",
+    "ext": "webp",
+    "license": "项目自有（NovelAI起稿、内置ImageGen重绘）",
+    "bytes": 148636,
+    "sha256": "5a6093b4a5e71d8773a750e8a48922519c6ea4cb0c9b7222f3ab0b598ff3815d",
+    "source": "docs/evidence/2026-10-16-WF-general-transition-1016/receipt.json"
+  },
+  "correction": "Preserve original NAI left-side and distant defocus; gateway and cloth stay sharp."
+}

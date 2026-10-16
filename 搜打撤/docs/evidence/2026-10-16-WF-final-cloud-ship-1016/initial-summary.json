@@ -1,0 +1,17 @@
+{
+  "baseline": {
+    "head": "2d881711bd03e2cad0d6608820afa4ec9f427a58",
+    "tree": "0affb05d47c0a5bb931bb9367e4b52e493872918",
+    "index": "0affb05d47c0a5bb931bb9367e4b52e493872918",
+    "observed": "2026-10-16T15:20:45.139094+00:00"
+  },
+  "changed": 54,
+  "untracked": 1973,
+  "selected": 70,
+  "preserved": [
+    ".codex/config.toml and backups",
+    "desktop-app changes (frozen)",
+    "tools/NAI files and NAI-PROMPTING.md",
+    "untracked art-source, old chest rigs, slot-weather, PV and intermediate evidence"
+  ]
+}

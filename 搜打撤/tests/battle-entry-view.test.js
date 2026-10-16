@@ -97,7 +97,7 @@ it('preserves decoded winter scenery through simplified entry and rerenders, res
   start(); await flush();
   expect(stage().dataset.battleEntry).toBe('waiting'); expect(frames.attach).toHaveBeenCalledTimes(1);
   const firstScenery = expectPaintedScenery();
-  overlay.querySelector('.battle-entry-curtain button').click();
+  overlay.querySelector('.battle-entry-status button').click();
   const firstStage = stage(), token = firstStage._battleToken, note = firstStage.querySelector('.battle-entry-note');
   expect(firstStage.dataset.battleEntry).toBe('degraded'); expect(frames.hide).toHaveBeenCalledTimes(1);
   expect(expectPaintedScenery()).toEqual(firstScenery);
@@ -112,7 +112,7 @@ it('preserves decoded winter scenery through simplified entry and rerenders, res
   expect(stage()).not.toBe(firstStage); expect(stage()._battleToken).toBe(token);
   expect(stage().dataset.battleEntry).toBe('degraded'); expect(stage().inert).not.toBe(true);
   expect(stage().querySelectorAll('.battle-entry-note')).toHaveLength(1);
-  expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
+  expect(overlay.querySelector('.battle-entry-status')).toBeNull();
   const restoredScenery = expectPaintedScenery();
   expect(restoredScenery[0]).not.toBe(firstScenery[0]); expect(restoredScenery[1]).not.toBe(firstScenery[1]);
   expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(firstDecodeCount + 3);
@@ -155,12 +155,12 @@ it('keeps truly failed winter scenery hidden and reports the failure while simpl
   });
   start(); await flush();
   expect(stage().dataset.battleEntry).toBe('waiting');
-  expect(overlay.querySelector('.battle-entry-curtain').textContent).toContain('部分战场资源加载失败');
+  expect(overlay.querySelector('.battle-entry-status').textContent).toContain('部分画面资源加载失败');
   expect(warning).toHaveBeenCalledWith('[battle:scenery] painted layer unavailable', failedDecode);
   const failedScenery = scenery();
   expect(failedScenery.every(image => image.hidden)).toBe(true);
   expect(stage().classList.contains('has-painted-scenery')).toBe(false);
-  overlay.querySelector('.battle-entry-curtain button').click();
+  overlay.querySelector('.battle-entry-status button').click();
   expect(stage().dataset.battleEntry).toBe('degraded'); expect(stage().inert).toBe(false);
   expect(stage().querySelector('.battle-entry-note').textContent).toContain('简化显示');
   BattleSession.commands.setPendingHint('failed-scenery-rerender'); frame(); await flush();
@@ -178,13 +178,13 @@ it('allows late decoded scenery after an explicit timeout fallback without undoi
   expect(pendingScenery.every(image => image.hidden)).toBe(true);
   await vi.advanceTimersByTimeAsync(8000);
   expect(stage().dataset.battleEntry).toBe('waiting');
-  overlay.querySelector('.battle-entry-curtain button').click();
+  overlay.querySelector('.battle-entry-status button').click();
   const note = stage().querySelector('.battle-entry-note');
   expect(stage().dataset.battleEntry).toBe('degraded'); expect(stage().inert).toBe(false);
   background.resolve(); await flush();
   expect(expectPaintedScenery()).toEqual(pendingScenery);
   expect(stage().dataset.battleEntry).toBe('degraded'); expect(stage().querySelector('.battle-entry-note')).toBe(note);
-  expect(overlay.querySelector('.battle-entry-curtain')).toBeNull(); expect(frames.attach).toHaveBeenCalledTimes(1);
+  expect(overlay.querySelector('.battle-entry-status')).toBeNull(); expect(frames.attach).toHaveBeenCalledTimes(1);
 });
 
 it('ignores a departed battle background decode when the next battle already owns its scenery', async () => {
@@ -197,7 +197,7 @@ it('ignores a departed battle background decode when the next battle already own
   const currentScenery = expectPaintedScenery();
   expect(stage()._battleToken).not.toBe(oldStage._battleToken);
   expect(oldScenery.every(image => !image.isConnected && image.hidden)).toBe(true);
-  overlay.querySelector('.battle-entry-curtain button').click();
+  overlay.querySelector('.battle-entry-status button').click();
   background.resolve(); await flush();
   expect(expectPaintedScenery()).toEqual(currentScenery);
   expect(oldScenery.every(image => !image.isConnected && image.hidden)).toBe(true);
@@ -213,7 +213,7 @@ it('retains completed ready entry on modal return while rebuilding the full pres
   BattleSession.commands.openGrave(); frame(); await flush();
   BattleSession.commands.closeGrave(); frame(); await flush();
   expect(stage()).not.toBe(firstStage); expect(stage()._battleToken).toBe(token);
-  expect(stage().dataset.battleEntry).toBe('ready'); expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
+  expect(stage().dataset.battleEntry).toBe('ready'); expect(overlay.querySelector('.battle-entry-status')).toBeNull();
   expect(frames.attach).toHaveBeenCalledTimes(2); expect(overlay.querySelector('.battle-scene-world')).not.toBeNull();
 });
 
@@ -236,11 +236,11 @@ it.each(['ready', 'degraded'])('holds actual payment and all three hits until th
   expect(waiting).toMatchObject({ busy: true, phase: 'resolving', energy: 2 });
   expect(battlePiles.consumed).toEqual([]); expect(waiting.foes[0].hp).toBe(50);
   expect(Random.snapshot().streams.gameplay).toBe(randomBefore.streams.gameplay);
-  const curtain = overlay.querySelector('.battle-entry-curtain');
+  const curtain = overlay.querySelector('.battle-entry-status');
   expect(curtain).not.toBeNull(); expect(curtain.querySelector('button').hidden).toBe(true);
   const restoredDecodeCount = HTMLImageElement.prototype.decode.mock.calls.length;
   frame(); await flush();
-  expect(stage()).toBe(restored); expect(overlay.querySelector('.battle-entry-curtain')).toBe(curtain);
+  expect(stage()).toBe(restored); expect(overlay.querySelector('.battle-entry-status')).toBe(curtain);
   expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(restoredDecodeCount);
   actor.resolve(result === 'ready'); await flush();
   if (result === 'degraded') {
@@ -254,11 +254,11 @@ it.each(['ready', 'degraded'])('holds actual payment and all three hits until th
   expect(settled.energy).toBe(1); expect(battlePiles.consumed).toEqual(fuel);
   expect(settled.foes[0].hp).toBe(38); expect(settled.busy).toBe(false);
   expect(stage().dataset.battleEntry).toBe(result); expect(stage()._battleToken).toBe(token);
-  expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
+  expect(overlay.querySelector('.battle-entry-status')).toBeNull();
   if (result === 'degraded') expect(frames.attach).toHaveBeenCalledTimes(2);
   const readyDecodeCount = HTMLImageElement.prototype.decode.mock.calls.length;
   BattleSession.commands.beginCardInteraction('ready-extra-attack', 0); await flush();
-  expect(stage()).toBe(restored); expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
+  expect(stage()).toBe(restored); expect(overlay.querySelector('.battle-entry-status')).toBeNull();
   for (let i = 0; i < 20; i++) { if (rafQueue.length) frame(); await flush(); }
   expect(BattleSession.getSnapshot()).toMatchObject({ busy: false, energy: 0 });
   expect(BattleSession.getSnapshot().foes[0].hp).toBe(34);
@@ -276,7 +276,7 @@ it('cancels an actual payment action on departure without charging or reviving i
   BattleSession.commands.pickHandSelect(fuel[1]); await flush();
   expect(BattleSession.getSnapshot().energy).toBe(2);
   UI.hideOverlay(); await flush();
-  expect(BattleSession.getSnapshot()).toMatchObject({ busy: false, energy: 2 }); expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
+  expect(BattleSession.getSnapshot()).toMatchObject({ busy: false, energy: 2 }); expect(overlay.querySelector('.battle-entry-status')).toBeNull();
   actor.resolve(true); await flush();
   while (rafQueue.length) frame(); await flush();
   expect(game.logs.some(log => log.includes('作为出牌代价'))).toBe(false);

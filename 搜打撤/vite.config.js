@@ -8,7 +8,7 @@ import { collectVerifiedRuntimeAssetAliases } from './scripts/runtime-asset-alia
 import { minifyStandaloneCssAssets } from './scripts/css-asset-minification.mjs';
 import {
   collectUnreferencedDevelopmentSfxPrefixes, fontLicenseFileNames,
-  shouldPublishRuntimeAsset, includeRuntimeThumbnailMetadata,
+  shouldPublishRuntimeAsset, includeRuntimeThumbnailMetadata, RUNTIME_ASSET_DIRS,
 } from './scripts/runtime-asset-publication.mjs';
 import {
   assertExcludedRuntimeAssetReferences, assertRuntimeExclusionPlanUnchanged,
@@ -59,7 +59,6 @@ const GAME_ROOT = path.join(ROOT, 'game');
 const OUT_DIR = process.env.SDT_BUILD_OUT_DIR
   ? path.resolve(ROOT, process.env.SDT_BUILD_OUT_DIR)
   : path.join(ROOT, 'desktop-app', 'game');
-const RUNTIME_ASSET_DIRS = ['cards', 'portraits', 'icons', 'scenes', 'thumbs', path.join('ui', 'icons'), 'sfx'];
 const ASSETS_ROOT = path.join(GAME_ROOT, 'assets');
 const RUNTIME_ASSET_PREFIXES = RUNTIME_ASSET_DIRS.map(dir => dir.split(path.sep).join('/') + '/');
 // 原图清单排除 sfx 与 thumbs；缩略图有独立清单，启动时可和原图分批统一预热。

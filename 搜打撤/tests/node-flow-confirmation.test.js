@@ -28,13 +28,21 @@ beforeEach(() => {
   st.acts = {}; st.layer.logical = [{ def:{ type:'battle' } }];
   st.encounter.mockClear(); st.battle.mockClear(); st.enter.mockClear(); st.chests.mockClear(); st.supply.mockClear(); st.safe.mockClear();
 });
-it('战斗格抵达直接开战：无确认页与过场，flow 不预抽遭遇', () => {
+it('战斗格先走通用节点过场再开战，无确认页且不预抽遭遇', () => {
+  let continueEntry;
+  st.enter.mockImplementationOnce((_kind, done) => { continueEntry = done; });
   reenter();
+  expect(st.enter).toHaveBeenCalledExactlyOnceWith('battle', expect.any(Function));
+  expect(st.battle).not.toHaveBeenCalled();
+  expect(st.encounter).not.toHaveBeenCalled();
+  expect(st.game.state).toBe('modal');
+  reenter();
+  expect(st.enter).toHaveBeenCalledTimes(1);
+  continueEntry();
   expect(st.battle).toHaveBeenCalledTimes(1);
   expect(st.battle.mock.calls[0][0]).toBe(st.layer.logical[0].def);   // 只传 def，遭遇由 openBattleCell 组建
   expect(st.battle.mock.calls[0][1]).toBeUndefined();
   expect(st.encounter).not.toHaveBeenCalled();
-  expect(st.enter).not.toHaveBeenCalled();          // 接敌确认过场已移除
   expect(st.acts.nodeBattleEnter).toBeUndefined();  // 确认页按钮不再注册
   expect(st.acts.nodeDecisionLeave).toBeUndefined();
   expect(st.game.state).toBe('modal');              // 战斗接管前锁住地图
@@ -53,7 +61,8 @@ it('点击实际入口才派发补给页，旧档与旁边节点不合成补给'
   reenter(); expect(st.supply).toHaveBeenCalledTimes(1);
   st.game.entrySupply = null; st.game.state = 'idle';
   reenter(); expect(st.supply).toHaveBeenCalledTimes(1);
-  expect(st.battle).toHaveBeenCalledTimes(1);   // 补给领完后战斗格直接开战，不再弹确认页
+  expect(st.enter).toHaveBeenCalledExactlyOnceWith('battle', expect.any(Function));
+  expect(st.battle).toHaveBeenCalledTimes(1);   // 补给领完后经通用过场开战，不再弹确认页
 });
 it('入口全收/收益已消耗的终点直接收尾，不重开收益也不弹安全页', () => {
   st.game.entrySupply = { version:1, layerIdx:0, trackPos:0, cardIds:['a'], taken:[0] };

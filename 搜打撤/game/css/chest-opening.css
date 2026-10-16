@@ -32,6 +32,14 @@ body #overlay .safe-opening .safe-stage .ps-chest {
 }
 .safe-opening .safe-glow { z-index:-1; }
 .safe-opening .safe-burst { z-index:1; }
+/* New frames contain inner light; the separate flash stays a restrained accent. */
+body #overlay .safe-opening[data-chest-fx='frames'] .safe-burst {
+  left:0; top:-12%; width:100%; height:100%; transform:none;
+  animation:none; opacity:.1;
+}
+body #overlay .safe-opening[data-chest-fx='frames'][data-chest-phase='opening'] .safe-burst { opacity:.14; }
+body #overlay .safe-opening[data-chest-fx='frames'][data-chest-phase='burst'] .safe-burst { opacity:.26; }
+body #overlay .safe-opening[data-chest-fx='frames'][data-chest-phase='settle'] .safe-burst { opacity:.1; }
 .safe-opening[data-chest-phase='charging'] .safe-glow { animation:safeCharge .78s ease-in both; }
 .safe-opening[data-chest-phase='opening'] .safe-glow { opacity:.2; transform:translate(-50%,-50%) scale(.65); }
 .safe-opening[data-chest-phase='burst'] .safe-burst { animation:safeTreasureBurst .35s cubic-bezier(.12,.7,.24,1) both; }

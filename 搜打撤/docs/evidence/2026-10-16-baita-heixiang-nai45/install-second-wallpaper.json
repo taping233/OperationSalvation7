@@ -1,0 +1,23 @@
+{
+  "status": "installed-pending-verification",
+  "source": "../.tmp/art/baita-heixiang-home-ratio-heixiang-face-v2-20261016.png",
+  "source_sha256": "d6bccaa1053b63c5838034bfa3b6c9a21b16e9a38decd8984894aaf4d67e2ab2",
+  "source_method": "Built-in image_gen face correction; see request-builtin-heixiang-face-v2.json",
+  "asset": "game/assets/reconstruction/wallpaper-baita-heixiang-1016.webp",
+  "sha256": "12efb1d9d0b269e3c22350f1d71c793ef5e63801c4b89d508be5017469407b25",
+  "bytes": 237854,
+  "size": [
+    1672,
+    941
+  ],
+  "encoding": {
+    "format": "WebP",
+    "quality": 95,
+    "method": 6
+  },
+  "wallpaper_id": "baita-heixiang",
+  "order": 2,
+  "first_wallpaper_unchanged": "snow-road",
+  "verification": {},
+  "committed": false
+}

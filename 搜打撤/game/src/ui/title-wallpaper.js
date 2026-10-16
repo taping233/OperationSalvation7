@@ -2,7 +2,7 @@ import { storeGet, storeSet } from '../core/storage.js';
 import { hideHomeForWallpaper, restoreHomeFromWallpaper } from './home-menu-motion.js';
 
 const preferenceKey = 'sdt-title-wallpaper';
-const wallpapers = ['snow-road'];
+const wallpapers = ['snow-road', 'baita-heixiang'];
 const title = document.getElementById('title');
 const button = document.getElementById('btnTitleWallpaper');
 const viewButton = document.getElementById('btnTitleWallpaperView');

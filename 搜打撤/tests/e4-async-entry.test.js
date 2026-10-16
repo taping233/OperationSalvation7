@@ -78,6 +78,24 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
     expect(UI.hideOverlay).not.toHaveBeenCalled(); expect(game.state).toBe('modal');
   });
 
+  it('boss confirmation uses the shared transition before drawing the boss and loading battle', async () => {
+    const { openBossGate } = await import('../game/src/run/game.run.altar.js');
+    game.altarActivated = true;
+    openBossGate();
+    const fight = handlers.bossGateFight;
+    const request = fight();
+    expect(document.querySelector('.city-run-transition')).not.toBeNull();
+    expect(document.querySelector('.camp-entry-caption').textContent).toContain('旅途继续');
+    expect(game.bossPlan).toBeUndefined();
+    expect(battle.start).not.toHaveBeenCalled();
+    fight();
+    expect(game.bossPlan).toBeUndefined();
+    handlers.flowContinue(); await entered.promise; gate.resolve();
+    expect(await request).toBe(true);
+    expect(battle.start).toHaveBeenCalledExactlyOnceWith(game, expect.objectContaining({ name:'boss', boss:true }),
+      { isBoss:true, name:'boss', directBossStart:true });
+  });
+
   it('an older transition cannot close the replacement transition', async () => {
     const first = scenes.showRunTransition({ title: 'old' }); const oldFinish = handlers.flowContinue;
     const second = scenes.showRunTransition({ title: 'new' }); UI.hideOverlay.mockClear();

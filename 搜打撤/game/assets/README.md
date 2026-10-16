@@ -17,3 +17,9 @@
 常无欲的战斗Sprite使用 portraits/frames/changwuyu/sprite-v1/（animations.json维护帧序和时长），静态兜底与新待机一致；四动作实装来源见 [10-10实装记录](../../docs/evidence/2026-10-10-changwuyu-install/README.md)。
 
 白塔、黑像、星月的战斗Sprite使用 `portraits/frames/<角色>/sprite-v1/`。三人统一向右（含视线和姿势），待机、攻击、受击、死亡采用固定画布与各动作原稿时间步；攻击/受击首尾与待机同图，死亡末帧保持到结算。白塔和星月施法复用各自的攻击施法动作，黑像施法沿用静态基准。源图、透明帧、制作提示及验证边界见 [三人重制记录](../../docs/evidence/2026-10-10-three-role-sprites/README.md)。选人立绘保留当前版本，战斗静态兜底由播放器使用新待机基准。
+
+## 常规宝箱开箱帧（2026-10-16）
+
+小型物资箱、密封物资箱、军用保险柜分别使用 `scenes/chests/supply-opening-v6/{small,medium,large}/frame-00.webp` 至 `frame-03.webp`，对应灰绿、烟紫、香槟金黑；总览闭合图与开箱动作同源。`fx/frame-00.webp` 至 `frame-03.webp` 是独立闪光，随解锁、爆光、余辉同步播放，帧内光效保留。职业箱与首脑箱仍使用原 `safe-simple-v7/`。
+
+本轮素材来源、SHA256与接入边界见[实装记录](../../docs/evidence/2026-10-16-WF-chest-install-v6/README.md)。老板明确要求接入后不检测，本轮不宣称测试或游戏内验收通过。

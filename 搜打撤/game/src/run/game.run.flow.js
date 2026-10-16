@@ -228,11 +228,10 @@ function resolveCell() {
   UI.beginRoom();
   game.state = 'modal';
 
-  // 1) 战斗格：抵达后直接进入战场。
+  // 1) 战斗格：沿通用节点过场进入战场，不再增加接敌确认页。
   if (def && def.type === 'battle') {
     setBagReturnHook(null);
-    UI.hideOverlay();
-    openBattleCell(def);
+    enterNode('battle', () => openBattleCell(def));
     return;
   }
 

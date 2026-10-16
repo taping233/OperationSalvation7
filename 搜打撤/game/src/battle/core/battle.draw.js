@@ -98,7 +98,7 @@ function addTempCard(tpl) {
     const uid = 'bts' + Date.now().toString(36) + nextTmpSeq();
     granted.push({ uid, card: { ...tpl } });
     hand.push(uid);
-    cardAnims.push({ kind: 'draw', uid, name: tpl.name || '' });
+    cardAnims.push({ kind: 'draw', uid, name: tpl.name || '', acquired: true });
     // 置入手牌视同「抽到」（2026-09-11 英雄卡审计）：万剑归宗普通战分支走
     // grantStarterAttack→addTempCard，此前不进 lastDrawnUids，「直接释放其中武术」永远放 0 张
     lastDrawnUids.push(uid);

@@ -1,0 +1,18 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Use case: style-transfer. Create one final wide 16:9 landscape background for the original winter expedition game's reusable transition screen. Image 1 is the NovelAI COMPOSITION DRAFT and the only content reference. Images 2, 3, 4 are STYLE ONLY references (original source 5, 8, 1); borrow economical hand-painted color grouping and edge grammar, DO NOT copy any people, faces, clothing, hats, weapons, jewelry, lettering or watermark. Repaint the entire draft in the project's default hand-painted anime block-brush v1.0 style. Keep the empty snow-covered pass, the single old stone arch gateway at the right third, ONE flowing vivid vermilion cloth tied to the gateway upright, dark blue-green forest beyond, immense layered snowy mountains, sparse snow and the calm luminous cold winter sky. Preserve the spacious composition, road leading into depth and quiet left 40 percent for separately rendered UI. Remove the draft's artificial photographic blur patch on the left: instead paint clear quiet blue-gray snow and shadow shapes. Simplify the gateway to several convincing broad stone masses with only a few essential seams, simplify the pine forest into 3-4 overlapping grouped silhouettes rather than hundreds of tiny branches. Mountain slopes modeled by large connected shadow planes and a handful of long opaque brush swaths, no detailed geological scratches. BRUSHWORK: opaque economical hand-painted color masses with a handful of broad directional curved or elongated strokes. Deliberate firm handmade edges, broad swaths and grouped shadows, NOT triangular mosaics. Selected irregular stroke endings and overlaps, NOT all-over grain. Quiet areas inside most painted surfaces. CLOTH: three or four principal broad folds with elongated painterly strokes, one simple clear flowing silhouette. COLOR: muted coherent icy cyan, pale silver and ink-blue masses, clear cool-warm distinction, vermilion as one concentrated chromatic accent. Rich atmospheric depth through overlap and value grouping, not lens blur. Beautiful complete confident anime environment painting, selective detail concentrated on the arch and cloth, no photorealistic rubble, smooth 3D, plastic shine, airbrush gradients, global grain, dense brush texture, heavy dark vignette or black overlay. NO HUMANS, no characters, no animals, no weapons, no combat imagery, no lettering, no UI, no border, no logos, no watermark. Full opaque rectangular illustration. Target 2048x1152.",
+  "references": [
+    "D:\\素材\\代号柒\\.tmp\\nai\\general-transition-1016\\nai-draft-v2.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-5.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-8.png",
+    "C:\\Users\\太平\\.codex\\skills\\artifact-template-anime-block-brush\\assets\\source-1.png"
+  ],
+  "roles": [
+    "NAI composition draft",
+    "style only source 5",
+    "style only source 8",
+    "style only source 1"
+  ],
+  "generatedSource": "C:/Users/太平/.codex/generated_images/01a144f3-002d-7421-b5e3-06f4a387de8f/exec-8e050a55-a4ae-4929-b508-7bae210db100.png",
+  "styleAuthority": "docs/production/art/ART-STYLE-V1.md"
+}

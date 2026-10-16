@@ -10,6 +10,7 @@ import { throwIfActionCancelled } from '../runtime/battle.staged-playback.js';
 import { rejectUnsupportedCard } from '../effects/battle.rule-guard.js';
 import { inspectCardRuleCapability } from '../../cards/card-rules.capability.js';
 import { isHandPaymentCandidate } from './battle.hand-selection.js';
+import { hasInfusionWaiver } from '../effects/battle.infusion.js';
 import { G, foes, mode, hand, discard, played, consumed, grave, energy, delayed, cardAnims, freeCast, infuseFuels, consumeFireballN, allSpellsInfused, growthNames, killAtkUp, playerCurseImmune, arrowRune, nextSpellTwice, poisonOnSpell, playedMovesThisTurn, playedMartialThisTurn, activeActionSignal, battleState, effectiveHandMax, set$hand, set$energy, set$infuseFuels, set$nextSpellTwice, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$playerCurseImmune, set$allSpellsInfused, set$consumeFireballN, set$stealthStrike, set$lastPlayedType, set$playedMovesThisTurn, set$playedMartialThisTurn, set$activeActionSignal, set$handSelecting, nextActionSeq } from '../runtime/battle.runtime.js';
 
 const R = () => SDT.MAP.rules;
@@ -260,8 +261,8 @@ export function createBattleExecPlay({
       const o = findCard(f);
       return a + (o ? Math.max(0, +(SDT.Cards.sellPrice(o.card) || 0)) : 0);
     }, 0);
-    // 深渊主宰·妲莉薇特「招式均已注能」（旧日再临）：可注能/必须注能的招式无需选燃料，直接按已注能结算
-    const infusedBase = fuelUids.length > 0 || (allSpellsInfused && (card.type === '武术' || card.type === '法术'));
+    // 免注能实例与「招式均已注能」均按已注能结算；材料消耗及累计计数仍只由实际燃料驱动。
+    const infusedBase = fuelUids.length > 0 || hasInfusionWaiver(card, allSpellsInfused);
     const aliveBefore = alive().length;
     await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
     await takeSurge(signal);   // 法力奔涌：演出未完不结束本次出牌动作；终局会中止余下结算

@@ -1,7 +1,7 @@
 // 每个挂载的舞台等待真正的解码/首帧结果；简化显示选择按场次保留。
 export function waitForBattleImages(root) {
   const cleanups = [];
-  const promises = [...root.querySelectorAll('.sts-figure img[src], .sts-hand .hsc-art img[src]')].map(image => new Promise(resolve => {
+  const promises = [...root.querySelectorAll('.sts-figure img[src], .sts-hand .hsc-art img[src], .sts-hand .hsc-frame[src]')].map(image => new Promise(resolve => {
     image.loading = 'eager';
     let currentSource = image.src, settled = false;
     const clean = () => { image.removeEventListener('load', loaded); image.removeEventListener('error', failed); };
@@ -56,7 +56,7 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
     && !record.overlay.hidden && record.stage._battleToken === record.token;
   const dispose = record => {
     clearTimeout(record.timer); record.observer?.disconnect(); record.cancelImages?.();
-    record.curtain.remove(); record.stage.inert = record.wasInert;
+    record.status.remove(); record.stage.inert = record.wasInert;
     record.stage.removeAttribute('aria-busy');
   };
   const cancel = () => {
@@ -78,16 +78,18 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
     }
     completed = null;
     stage.querySelectorAll('.battle-entry-note').forEach(note => note.remove());
-    const curtain = document.createElement('div');
-    curtain.className = 'battle-entry-curtain';
-    curtain.innerHTML = '<div class="battle-entry-copy" role="status"><span>接敌准备</span><h2>正在进入战场</h2><p>正在准备场景与参战单位…</p><button type="button" hidden>以简化画面继续</button></div>';
+    // 通用节点过场由 enterNode 播放；这里只保留资源失败/超时的操作提示。
+    const status = document.createElement('div');
+    status.className = 'battle-entry-status'; status.hidden = true;
+    status.setAttribute('role', 'status');
+    status.innerHTML = '<h2>正在准备战场</h2><p>正在准备场景与参战单位…</p><button type="button" hidden>以简化画面继续</button>';
     let resolveReady;
     const ready = new Promise(resolve => { resolveReady = resolve; });
-    const record = { stage, token, overlay, curtain, wasInert: !!stage.inert, started: false, ready, resolveReady };
+    const record = { stage, token, overlay, status, wasInert: !!stage.inert, started: false, ready, resolveReady };
     active = record;
     stage.inert = true; stage.dataset.battleEntry = 'loading'; stage.setAttribute('aria-busy', 'true');
-    overlay.appendChild(curtain);
-    curtain.querySelector('button').addEventListener('click', () => {
+    overlay.appendChild(status);
+    status.querySelector('button').addEventListener('click', () => {
       if (!current(record)) return;
       record.onFallback?.();
       finish(record, 'degraded');
@@ -106,9 +108,10 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
     if (!current(record)) return;
     if (reason === 'error') clearTimeout(record.timer);
     record.stage.dataset.battleEntry = 'waiting';
-    record.curtain.querySelector('h2').textContent = reason === 'timeout' ? '资源准备仍未完成' : '部分战场资源加载失败';
-    record.curtain.querySelector('p').textContent = '可以继续等待，或使用简化画面进入战斗。';
-    record.curtain.querySelector('button').hidden = false;
+    record.status.hidden = false;
+    record.status.querySelector('h2').textContent = reason === 'timeout' ? '资源准备仍未完成' : '部分画面资源加载失败';
+    record.status.querySelector('p').textContent = '可以继续等待，或使用简化画面继续战斗。';
+    record.status.querySelector('button').hidden = false;
   }
   function wait(stage, token, dependencies, { cancelImages, onFallback } = {}) {
     const record = active;
@@ -124,7 +127,7 @@ export function createBattleEntryGate({ timeoutMs = 8000 } = {}) {
     if (!active) return;
     if (!current(active)) { cancel(); return; }
     event.stopImmediatePropagation();
-    if (event.key === 'Tab') { event.preventDefault(); active.curtain.querySelector('button:not([hidden])')?.focus(); }
+    if (event.key === 'Tab') { event.preventDefault(); active.status.querySelector('button:not([hidden])')?.focus(); }
   }
   function ready(stage, token) {
     if (active?.stage === stage && active.token === token) return current(active) ? active.ready : Promise.resolve(false);

@@ -18,6 +18,7 @@ import {
 // Schema and runtime support share the same complete-list boundary at every battle entry.
 import { assertCardRulesExecutable } from '../effects/battle.rule-guard.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
+import { hasInfusionWaiver } from '../effects/battle.infusion.js';
 
 // B5 诅咒日志动词：逐字对齐文本路径 effect-steps.curse.js 的 run 文案（图标不在此表——
 // 统一取 combat.CURSE_META[kind].icon，保证与 combat.js 枚举单源）。括注部分为卡面语义解释，
@@ -474,6 +475,8 @@ function createBattleResolution(ports) {
 
   function* resolveCardSteps(card, target, infused, fuelCost, uid) {
     card = getHostedExecutionCard(card);
+    // Direct resolution (e.g. ash overflow) bypasses execPlay but retains infusion waivers.
+    infused = !!infused || hasInfusionWaiver(card, readState().allSpellsInfused);
     const registeredTriggers = card?._registeredTriggers;
     if (registeredTriggers) {
       assertCardRulesExecutable({ ...card, rules: { ...card.rules, triggers: registeredTriggers } });

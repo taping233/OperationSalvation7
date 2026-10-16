@@ -22,7 +22,7 @@ import { claimNodeRestore, finishNodeRestore, nodeRestoreAt } from './node-resto
 import { selectEncounterSpec } from './encounter-selector.js';
 import { turboMs } from '../core/turbo.js';
 import { reduceMotion } from '../core/motion.js';
-import { createCityCut } from '../ui/camp-entry.js';
+import { createCityCut, cityCutDuration } from '../ui/camp-entry.js';
 import { eventSceneHTML } from '../ui/node-scene-view.js';
 import '../../css/entry-events.css';
 import '../../css/expedition-transitions.css';
@@ -195,9 +195,9 @@ export function consumeCell(layerIdx = game.layerIdx, trackPos = game.trackPos) 
 
 export function consumeCurrentCell() { consumeCell(); }
 
-// 节点短过场沿原定时与跳过生命周期；斜切画面按地图、遭遇战或首脑选择。
+// 节点短过场沿原定时与跳过生命周期；战斗入口共用通用远征画面。
 let transitionRequest = 0;
-export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = 900, presentation = '', holdVisual = false }) {
+export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = cityCutDuration, presentation = '', holdVisual = false }) {
   // 结束时必须恢复状态：战斗/节点流程下游会自行改状态，但「继续对局」路径
   // 过渡后无人收拾，曾导致 game.state 卡死在 modal、侧栏按钮永久禁用
   const prevState = game.state;
@@ -226,12 +226,12 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
     if (cityCut) {
       const battleEntry = tone === 'battle';
       const cut = createCityCut({
-        archive: battleEntry ? '接敌档案' : '远征档案',
-        title: title || (battleEntry ? '进入战斗' : '进入地图'),
-        subtitle: detail || (battleEntry ? 'BATTLE / 准备接敌' : 'EXPEDITION / 开始探索'),
-        edition: `${eyebrow} / VII`, destination: battleEntry ? 'BATTLE' : 'EXPEDITION',
-        watermark: battleEntry ? 'BATTLE' : 'FIELD',
-        scene: battleEntry ? (eyebrow === 'BOSS CONTACT' ? 'boss' : 'battle') : 'field',
+        archive: '远征档案',
+        title: battleEntry ? '旅途继续' : (title || '进入地图'),
+        subtitle: battleEntry ? 'WINTER EXPEDITION / 冬日远征' : (detail || 'EXPEDITION / 开始探索'),
+        edition: battleEntry ? 'WINTER EXPEDITION / VII' : `${eyebrow} / VII`, destination: 'EXPEDITION',
+        watermark: 'FIELD',
+        scene: battleEntry ? 'general' : 'field',
       });
       UI.showOverlay('', `<div class="scene flow-transition city-run-transition${holdVisual ? ' resume-hold' : ''} sc-${escAttr(tone)}"
         data-presentation="city-cut" data-act="flowContinue" role="group"
@@ -275,8 +275,8 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
 
 export function enterNode(kind, done) {
   const transitions = {
-    battle: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'HOSTILE CONTACT', title: '遭遇敌袭', detail: '武器解锁 · 准备接敌', presentation: 'city-cut' },
-    boss: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'BOSS CONTACT', title: '首脑接敌', detail: '高危目标 · 准备战斗', presentation: 'city-cut' },
+    battle: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'WINTER EXPEDITION', title: '旅途继续', detail: '冬日远征 · 旅途继续', presentation: 'city-cut' },
+    boss: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'WINTER EXPEDITION', title: '旅途继续', detail: '冬日远征 · 旅途继续', presentation: 'city-cut' },
     door: { tone: 'door', asset: 'scene-door-bg', eyebrow: 'GATE SIGNAL', title: '抵达大门', detail: '环层通路正在响应' },
     altar: { tone: 'altar', asset: 'scene-altar-bg', eyebrow: 'CONTAMINATION DETECTED', title: '污染核心', detail: '高危生命信号逼近' },
     emergencyExit: { tone: 'exit', asset: 'scene-extract-bg', eyebrow: 'EXTRACTION POINT', title: '紧急撤离点', detail: '撤离信标已经接通' },

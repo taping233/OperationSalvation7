@@ -14,34 +14,56 @@ beforeEach(() => {
 });
 afterEach(() => { gate.dispose(); style?.remove(); style = null; vi.useRealTimers(); });
 
-it('covers the entire overlay with a readable loading panel and a visible fallback action only after failure', async () => {
+it('waits for actual readiness without mounting a second cutscene or reveal animation', async () => {
+  const resource = deferred();
+  gate.begin(stage, 1, overlay);
+  const status = overlay.querySelector('.battle-entry-status');
+  expect(status.hidden).toBe(true);
+  expect(overlay.querySelector('.general-transition, .battle-entry-curtain, img')).toBeNull();
+  gate.wait(stage, 1, [resource.promise]);
+  const ready = gate.ready(stage, 1);
+  await flush(); expect(stage.inert).toBe(true);
+  resource.resolve(true); await flush();
+  expect(await ready).toBe(true);
+  expect(stage.inert).toBe(false); expect(stage.dataset.battleEntry).toBe('ready');
+  expect(status.isConnected).toBe(false); expect(vi.getTimerCount()).toBe(0);
+});
+
+it('cancels pending readiness without letting late resources reveal a departed battle', async () => {
+  const resource = deferred();
+  gate.begin(stage, 1, overlay); gate.wait(stage, 1, [resource.promise]);
+  const ready = gate.ready(stage, 1);
+  gate.cancel(); resource.resolve(true); await flush();
+  expect(await ready).toBe(false);
+  expect(overlay.querySelector('.battle-entry-status')).toBeNull();
+  expect(stage.hasAttribute('data-battle-entry')).toBe(false); expect(stage.inert).toBe(false);
+});
+
+it('shows only a compact resource failure notice with a usable simplified-display action', async () => {
   style = document.createElement('style'); style.textContent = battleCss; document.head.appendChild(style);
   gate.begin(stage, 1, overlay);
-  const curtain = overlay.querySelector('.battle-entry-curtain');
-  const copy = curtain.querySelector('.battle-entry-copy'), button = copy.querySelector('button');
-  const curtainStyle = getComputedStyle(curtain), copyStyle = getComputedStyle(copy);
-  expect(curtain.parentElement).toBe(overlay);
-  expect(curtainStyle.position).toBe('absolute'); expect(curtainStyle.inset).toBe('0');
-  expect(curtainStyle.display).toBe('grid'); expect(curtainStyle.placeItems).toBe('center');
-  expect(Number(curtainStyle.zIndex)).toBeGreaterThan(900);
-  expect(curtainStyle.pointerEvents).toBe('auto');
-  expect(curtainStyle.backgroundColor).toBe('rgb(12, 13, 15)');
-  expect(copyStyle.color).toBe('rgb(245, 246, 243)');
-  expect(copyStyle.backgroundColor).toBe('rgb(29, 32, 35)');
-  expect(getComputedStyle(button).display).toBe('none');
+  const status = overlay.querySelector('.battle-entry-status'), button = status.querySelector('button');
+  expect(status.parentElement).toBe(overlay);
+  expect(getComputedStyle(status).display).toBe('none'); expect(button.hidden).toBe(true);
   gate.wait(stage, 1, [Promise.resolve(false)]); await flush();
+  expect(status.hidden).toBe(false); expect(getComputedStyle(status).display).not.toBe('none');
+  expect(status.querySelector('img')).toBeNull();
+  const noticeStyle = getComputedStyle(status);
+  expect(noticeStyle.position).toBe('absolute'); expect(noticeStyle.left).toBe('50%');
+  expect(noticeStyle.color).toBe('rgb(245, 246, 243)');
+  expect(Number(noticeStyle.zIndex)).toBeGreaterThan(900);
   expect(button.hidden).toBe(false); expect(getComputedStyle(button).display).toBe('inline-flex');
   expect(getComputedStyle(button).color).toBe('rgb(12, 13, 15)');
   expect(getComputedStyle(button).backgroundColor).toBe('rgb(242, 199, 92)');
   expect(getComputedStyle(button).minHeight).toBe('48px');
-  expect(battleCss).toContain('.battle-entry-copy button:focus-visible');
+  expect(battleCss).toContain('.battle-entry-status button:focus-visible');
 });
 
 it('keeps keyboard focus on the available fallback without swallowing native Enter or Space activation', async () => {
   const gameplayKey = vi.fn(); document.addEventListener('keydown', gameplayKey);
   try {
     gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(false)]); await flush();
-    const button = overlay.querySelector('.battle-entry-curtain button');
+    const button = overlay.querySelector('.battle-entry-status button');
     for (const shiftKey of [false, true]) {
       const tab = new KeyboardEvent('keydown', { key: 'Tab', shiftKey, bubbles: true, cancelable: true });
       document.dispatchEvent(tab);
@@ -61,7 +83,7 @@ it('keeps keyboard focus on the available fallback without swallowing native Ent
 it('keeps the simplified-display notice when a routine render replaces encounter information', async () => {
   stage.innerHTML = '<div class="sts-topbar"><div class="sts-encounter">第 1 回合</div><details class="sts-options"></details></div>';
   gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(false)]); await flush();
-  overlay.querySelector('.battle-entry-curtain button').click();
+  overlay.querySelector('.battle-entry-status button').click();
   const note = stage.querySelector('.battle-entry-note');
   expect(note?.getAttribute('role')).toBe('status');
   const next = document.createElement('div'); next.className = 'sts-encounter'; next.textContent = '第 2 回合';
@@ -73,19 +95,19 @@ it('keeps the simplified-display notice when a routine render replaces encounter
 
 it('preserves the explicit simplified choice when returning to a new stage with the same battle token', async () => {
   gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(false)]); await flush();
-  overlay.querySelector('.battle-entry-curtain button').click();
+  overlay.querySelector('.battle-entry-status button').click();
   gate.cancel(); stage.remove();
   stage = document.createElement('div'); stage.className = 'battle-stage'; stage._battleToken = 1;
   stage.innerHTML = '<div class="sts-topbar"><div class="sts-encounter">第 2 回合</div><details class="sts-options"></details></div>';
   overlay.appendChild(stage); gate.begin(stage, 1, overlay);
   expect(stage.dataset.battleEntry).toBe('degraded'); expect(stage.inert).not.toBe(true);
-  expect(gate.pending(stage)).toBe(false); expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
+  expect(gate.pending(stage)).toBe(false); expect(overlay.querySelector('.battle-entry-status')).toBeNull();
   expect(stage.querySelectorAll('.battle-entry-note')).toHaveLength(1);
   gate.begin(stage, 1, overlay); expect(stage.querySelectorAll('.battle-entry-note')).toHaveLength(1);
   stage._battleToken = 2; gate.begin(stage, 2, overlay);
   expect(stage.dataset.battleEntry).toBe('loading'); expect(stage.inert).toBe(true);
   expect(stage.querySelector('.battle-entry-note')).toBeNull();
-  expect(overlay.querySelector('.battle-entry-curtain')).not.toBeNull();
+  expect(overlay.querySelector('.battle-entry-status')).not.toBeNull();
 });
 
 it('waits for the new stage resources when returning from payment to an already ready battle token', async () => {
@@ -99,7 +121,7 @@ it('waits for the new stage resources when returning from payment to an already 
   gate.begin(stage, 1, overlay);
   expect(gate.pending(stage)).toBe(true);
   gate.wait(stage, 1, [scenery.promise, actor.promise, images.promise]);
-  const curtain = overlay.querySelector('.battle-entry-curtain');
+  const curtain = overlay.querySelector('.battle-entry-status');
   expect(curtain).not.toBeNull(); expect(stage.inert).toBe(true);
   expect(stage.dataset.battleEntry).toBe('loading');
   expect(stage.querySelector('.battle-scene-world').hidden).toBe(true);
@@ -107,9 +129,9 @@ it('waits for the new stage resources when returning from payment to an already 
   expect(stage.dataset.battleEntry).toBe('loading'); expect(curtain.isConnected).toBe(true);
   actor.resolve(true); await flush();
   expect(stage.dataset.battleEntry).toBe('ready'); expect(stage.inert).toBe(false);
-  expect(overlay.querySelector('.battle-entry-curtain')).toBeNull(); expect(vi.getTimerCount()).toBe(0);
+  expect(overlay.querySelector('.battle-entry-status')).toBeNull(); expect(vi.getTimerCount()).toBe(0);
   gate.begin(stage, 1, overlay);
-  expect(gate.pending(stage)).toBe(false); expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
+  expect(gate.pending(stage)).toBe(false); expect(overlay.querySelector('.battle-entry-status')).toBeNull();
 });
 
 it.each(['failure', 'timeout'])('keeps a same-token replacement covered after its own resource %s', async outcome => {
@@ -124,7 +146,7 @@ it.each(['failure', 'timeout'])('keeps a same-token replacement covered after it
   else await vi.advanceTimersByTimeAsync(8000);
   expect(stage.dataset.battleEntry).toBe('waiting'); expect(stage.inert).toBe(true);
   expect(overlay.textContent).toContain(outcome === 'failure' ? '加载失败' : '仍未完成');
-  const button = overlay.querySelector('.battle-entry-curtain button');
+  const button = overlay.querySelector('.battle-entry-status button');
   expect(button.hidden).toBe(false); button.click();
   expect(fallback).toHaveBeenCalledTimes(1); expect(stage.dataset.battleEntry).toBe('degraded');
   expect(stage.inert).toBe(false);
@@ -134,13 +156,13 @@ it.each(['loading', 'waiting'])('restarts an unfinished %s gate after departure 
   const old = deferred(), next = deferred(), fallback = vi.fn();
   gate.begin(stage, 1, overlay); gate.wait(stage, 1, [old.promise], { onFallback: fallback });
   if (state === 'waiting') await vi.advanceTimersByTimeAsync(8000);
-  const oldButton = overlay.querySelector('.battle-entry-curtain button');
+  const oldButton = overlay.querySelector('.battle-entry-status button');
   gate.cancel(); stage.remove();
   stage = document.createElement('div'); stage._battleToken = 1; overlay.appendChild(stage);
   gate.begin(stage, 1, overlay); gate.wait(stage, 1, [next.promise]);
   oldButton.click(); old.resolve(true); await flush();
   expect(fallback).not.toHaveBeenCalled(); expect(stage.dataset.battleEntry).toBe('loading');
-  expect(stage.inert).toBe(true); expect(overlay.querySelector('.battle-entry-curtain')).not.toBeNull();
+  expect(stage.inert).toBe(true); expect(overlay.querySelector('.battle-entry-status')).not.toBeNull();
   next.resolve(true); await flush(); expect(stage.dataset.battleEntry).toBe('ready');
 });
 
@@ -148,12 +170,12 @@ it('does not share completed entry state with a new gate after disposal', async 
   gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(true)]); await flush();
   gate.dispose(); gate = createBattleEntryGate(); gate.begin(stage, 1, overlay);
   expect(stage.dataset.battleEntry).toBe('loading'); expect(stage.inert).toBe(true);
-  expect(overlay.querySelector('.battle-entry-curtain')).not.toBeNull();
+  expect(overlay.querySelector('.battle-entry-status')).not.toBeNull();
 });
 
 it('reapplies simplified portrait placeholders after a restored stage mounts its units', async () => {
   gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(false)]); await flush();
-  overlay.querySelector('.battle-entry-curtain button').click();
+  overlay.querySelector('.battle-entry-status button').click();
   const figure = document.createElement('div'); figure.className = 'sts-figure';
   figure.innerHTML = '<img src="/missing.webp" alt="失联角色">'; stage.appendChild(figure);
   gate.begin(stage, 1, overlay);
@@ -163,16 +185,16 @@ it('reapplies simplified portrait placeholders after a restored stage mounts its
   expect(stage.querySelectorAll('.battle-entry-note')).toHaveLength(1);
 });
 
-it('keeps the first frame covered until scenery, rendered actor and visible images are all ready', async () => {
+it('keeps gameplay locked until scenery, rendered actor and visible images are all ready', async () => {
   const scenery = deferred(), actor = deferred(), images = deferred();
   gate.begin(stage, 1, overlay); gate.wait(stage, 1, [scenery.promise, actor.promise, images.promise]);
   expect(stage.inert).toBe(true); expect(stage.dataset.battleEntry).toBe('loading');
-  expect(overlay.querySelector('.battle-entry-curtain')).not.toBeNull();
+  expect(overlay.querySelector('.battle-entry-status')).not.toBeNull();
   scenery.resolve(true); images.resolve(true); await flush();
   expect(stage.dataset.battleEntry).toBe('loading');
   actor.resolve(); await flush();
   expect(stage.dataset.battleEntry).toBe('ready'); expect(stage.inert).toBe(false);
-  expect(overlay.querySelector('.battle-entry-curtain')).toBeNull(); expect(vi.getTimerCount()).toBe(0);
+  expect(overlay.querySelector('.battle-entry-status')).toBeNull(); expect(vi.getTimerCount()).toBe(0);
 });
 
 it('reveals cached resources without a minimum timer and does not gate routine rerenders again', async () => {
@@ -180,7 +202,7 @@ it('reveals cached resources without a minimum timer and does not gate routine r
   await flush();
   gate.begin(stage, 1, overlay);
   expect(stage.dataset.battleEntry).toBe('ready'); expect(gate.pending(stage)).toBe(false);
-  expect(overlay.querySelector('.battle-entry-curtain')).toBeNull(); expect(vi.getTimerCount()).toBe(0);
+  expect(overlay.querySelector('.battle-entry-status')).toBeNull(); expect(vi.getTimerCount()).toBe(0);
 });
 
 it('cannot let an old resource callback reveal a newer battle', async () => {
@@ -191,7 +213,7 @@ it('cannot let an old resource callback reveal a newer battle', async () => {
   gate.begin(stage, 2, overlay); gate.wait(stage, 2, [next.promise]);
   old.resolve(true); await flush();
   expect(stage.dataset.battleEntry).toBe('loading'); expect(stage.inert).toBe(true);
-  expect(overlay.querySelectorAll('.battle-entry-curtain')).toHaveLength(1);
+  expect(overlay.querySelectorAll('.battle-entry-status')).toHaveLength(1);
   next.resolve(true); await flush(); expect(stage.dataset.battleEntry).toBe('ready');
 });
 
@@ -201,7 +223,7 @@ it('reports timeout and requires an explicit simplified entry; late completion d
   await vi.advanceTimersByTimeAsync(8000);
   expect(stage.inert).toBe(true); expect(stage.dataset.battleEntry).toBe('waiting');
   expect(overlay.textContent).toContain('资源准备仍未完成');
-  overlay.querySelector('.battle-entry-curtain button').click();
+  overlay.querySelector('.battle-entry-status button').click();
   expect(fallback).toHaveBeenCalledTimes(1); expect(cancelImages).toHaveBeenCalledTimes(1);
   expect(stage.inert).toBe(false); expect(stage.dataset.battleEntry).toBe('degraded');
   expect(stage.textContent).toContain('简化显示');
@@ -220,7 +242,7 @@ it('cancels synchronously on explicit departure and on hidden overlay, releasing
   const resource = deferred(), cancelImages = vi.fn();
   gate.begin(stage, 1, overlay); gate.wait(stage, 1, [resource.promise], { cancelImages });
   overlay.hidden = true; await flush();
-  expect(overlay.querySelector('.battle-entry-curtain')).toBeNull(); expect(stage.inert).toBe(false);
+  expect(overlay.querySelector('.battle-entry-status')).toBeNull(); expect(stage.inert).toBe(false);
   expect(cancelImages).toHaveBeenCalledTimes(1); expect(vi.getTimerCount()).toBe(0);
   resource.resolve(true); await flush(); expect(stage.hasAttribute('data-battle-entry')).toBe(false);
 });
@@ -249,13 +271,13 @@ it('resolves a disconnected active stage as cancelled rather than holding readin
   expect(await gate.ready(stage, 1)).toBe(false);
   expect(await pending).toBe(false); expect(cancelImages).toHaveBeenCalledTimes(1);
   resource.resolve(true); await flush();
-  expect(await gate.ready(stage, 1)).toBe(false); expect(overlay.querySelector('.battle-entry-curtain')).toBeNull();
+  expect(await gate.ready(stage, 1)).toBe(false); expect(overlay.querySelector('.battle-entry-status')).toBeNull();
 });
 
 it('retains readiness for an explicit degraded choice only in its current stage and overlay', async () => {
   gate.begin(stage, 1, overlay); gate.wait(stage, 1, [Promise.resolve(false)]); await flush();
   const pending = gate.ready(stage, 1);
-  overlay.querySelector('.battle-entry-curtain button').click(); expect(await pending).toBe(true);
+  overlay.querySelector('.battle-entry-status button').click(); expect(await pending).toBe(true);
   const previous = stage, newOverlay = document.createElement('div'); document.body.appendChild(newOverlay);
   stage = document.createElement('div'); stage._battleToken = 1;
   stage.innerHTML = '<div class="sts-encounter"></div>'; newOverlay.appendChild(stage);

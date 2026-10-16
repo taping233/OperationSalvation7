@@ -6,6 +6,7 @@ import { rect as uiRect } from '../../ui/ui-scale.js';
 import { esc } from '../../core/shared.js';
 import { play as playUnitFrames } from './battle.frames.js';
 import { schedulePresentationMs } from '../runtime/battle.clock.js';
+import { showBattleCardResults } from './battle.card-results.js';
   // ---------- 牌局动画（2026-09-09）：离场克隆飞行 / 新牌飞入 / 幸存者归位 / 手牌区显隐 ----------
   // 渲染是整块重建，跨渲染的位移全部走 WAAPI：离场牌在 overlay 常驻层放克隆体飞行，
   // 入场/归位用 composite:'add' 加法合成——不破坏槽位自身的扇形 transform。
@@ -103,6 +104,7 @@ import { schedulePresentationMs } from '../runtime/battle.clock.js';
     let flightMs = extraFlightMs;
     const handEl = body.querySelector('.sts-hand');
     const stage = body.querySelector('.battle-stage');
+    showBattleCardResults(stage, events);
     // —— 手牌区随回合显隐：玩家→敌人 下沉退场；敌人→玩家 升回 ——
     //    批次F：过渡同时放回合横幅（STS2 Enemy Turn 式）
     if (handEl && stage && prev && prev.phase != null && handEl.animate) {
@@ -186,19 +188,12 @@ import { schedulePresentationMs } from '../runtime/battle.clock.js';
         });
       }
     }
-    // —— 法力奔涌慢动作（2026-09-16 留言「应当慢动作打出4张卡牌」）：每发一张横幅报目 +
-    //    法术卡面在手牌区上方站定一拍，再飞向目标敌人；逐发错峰（发间隔 850ms），
-    //    看清每一发打的是什么招式 ——
+    // 卡名与目标保留在结果栏；卡面在手牌区上方停留后飞向目标。
+    // 同一渲染批次才错峰，分帧到达的后续发数不再重复累加等待。
     if (surges.length) {
       const STEP = 850, FLY = 640;
-      surges.forEach(ev => {
-        const delay = 180 + ((ev.i || 1) - 1) * STEP;
-        const wave = document.createElement('div');
-        wave.className = 'surge-wave';
-        wave.innerHTML = `<b>${esc(ev.sourceName || '法力奔涌')} · 第 ${ev.i || 1}/${ev.n || surges.length} 发</b><span>【${esc(ev.name || '?')}】→ ${esc(ev.targetName || '')}</span>`;
-        wave.style.animationDelay = `${delay}ms`;
-        ov.appendChild(wave);
-        schedulePresentationMs(() => wave.remove(), delay + STEP + 200);
+      surges.forEach((ev, index) => {
+        const delay = 180 + index * STEP;
         const clone = document.createElement('div');
         clone.className = 'sts-cardfly surge-fly';
         const sx = ovR.width / 2 - 66, sy = ovR.height * 0.6;

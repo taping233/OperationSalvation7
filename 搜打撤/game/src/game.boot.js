@@ -799,7 +799,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     };
     if ('requestIdleCallback' in window) window.requestIdleCallback(warmHubWallpaper, { timeout: 4000 });
     else window.setTimeout(warmHubWallpaper, 2000);
-    // 启动时完整预取原图与缩略图文件；只解码首轮场景，其他美术在显示前再按需解码。
+    // 网页完整预取；桌面本地文件只准备首轮场景和通用卡框，避免首启扫读全部资源。
     const warmupTip = document.getElementById('warmupTip');
     const warmupBar = document.getElementById('warmupBar');
     const warmupNum = document.getElementById('warmupNum');
@@ -807,11 +807,12 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     if (sceneUrls.length > PERFORMANCE_BUDGETS.startupPreloadMax) {
       throw new Error(`首轮场景预热超预算：${sceneUrls.length}/${PERFORMANCE_BUDGETS.startupPreloadMax}`);
     }
+    const localArtwork = location.protocol === 'app:';
     const urls = planStartupArtPreload({
       sceneUrls,
-      figureUrls: SDT.Art.collectCardAssets?.([]) || [],
-      thumbnailUrls: SDT.Art.collectThumbnailAssets(),
-      manifestUrls: SDT.Art.collectManifestAssets(),
+      figureUrls: localArtwork ? [] : SDT.Art.collectCardAssets?.([]) || [],
+      thumbnailUrls: localArtwork ? [] : SDT.Art.collectThumbnailAssets(),
+      manifestUrls: localArtwork ? [] : SDT.Art.collectManifestAssets(),
     });
     if (warmupTip && urls.length) {
       warmupTip.hidden = false;

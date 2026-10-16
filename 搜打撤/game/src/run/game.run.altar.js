@@ -21,7 +21,7 @@ import { openBaseHub } from '../hub/game.hub.js';
 import { Sfx, _set_cardPageOpen } from '../hub/game.cardslib.js';
 import { Random, SeededRandomService } from '../core/random.js';
 import { startBattle } from '../battle/battle-loader.js';
-import { FIRE_RESTORABLE, consumeCurrentCell, finishInstant, grantEventCard, nodeOpt, nodeShell, openFixedRewardsOnCell, openPocketRestore, openShop } from './game.run.scenes.js';
+import { FIRE_RESTORABLE, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openFixedRewardsOnCell, openPocketRestore, openShop } from './game.run.scenes.js';
 import { RunStorage } from '../hub/game.storage.js';
 import { commitBaseAndRun, readSettlementReceipt, recoverSlot } from '../hub/recovery.commands.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
@@ -407,13 +407,14 @@ export function openBossGate() {
     if (!active() || entering) return;
     entering = true;
     setBagReturnHook(null);
-    UI.hideOverlay();
-    // 本层只抽取一次首脑；重进和读档沿用 bossPlan。
-    if (game.bossPlan == null) game.bossPlan = Math.floor(Random.random('boss') * MAP.altar.bosses.length);
-    const b = MAP.altar.bosses[game.bossPlan % MAP.altar.bosses.length];
-    const bossFoe = scaledEnemy(b);
-    bossFoe.boss = true;
-    startBattle(game, bossFoe, { isBoss:true, name:b.name, directBossStart:true });
+    return enterNode('boss', () => {
+      // 本层只抽取一次首脑；重进和读档沿用 bossPlan。
+      if (game.bossPlan == null) game.bossPlan = Math.floor(Random.random('boss') * MAP.altar.bosses.length);
+      const b = MAP.altar.bosses[game.bossPlan % MAP.altar.bosses.length];
+      const bossFoe = scaledEnemy(b);
+      bossFoe.boss = true;
+      return startBattle(game, bossFoe, { isBoss:true, name:b.name, directBossStart:true });
+    });
   });
   UI.refresh(game);
 }

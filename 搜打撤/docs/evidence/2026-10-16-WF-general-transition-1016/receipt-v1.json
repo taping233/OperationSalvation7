@@ -1,0 +1,19 @@
+{
+  "workflow": "NovelAI V5 draft -> built-in image_gen redraw",
+  "dimensions": [
+    1672,
+    941
+  ],
+  "encoding": "WebP quality89 method6, original dimensions",
+  "source": ".tmp\\nai\\general-transition-1016\\builtin-redraw-v1.png",
+  "sourceBytes": 2089185,
+  "sourceSha256": "6660396bf7cecd3632b9a14e6e7495012b9238f64d40cb98eda982b9729a4fd8",
+  "asset": {
+    "path": "scenes/transition-general-1016.webp",
+    "ext": "webp",
+    "license": "项目自有（NovelAI起稿、内置ImageGen重绘）",
+    "bytes": 190974,
+    "sha256": "6942de81f128e8090fb59217f2ed70da6b9ba1463f4059f48edb0c2c721e806a",
+    "source": "docs/evidence/2026-10-16-WF-general-transition-1016/receipt.json"
+  }
+}

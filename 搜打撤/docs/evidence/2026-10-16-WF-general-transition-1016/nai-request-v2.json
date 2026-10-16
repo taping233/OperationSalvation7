@@ -1,0 +1,61 @@
+{
+  "status": "generated",
+  "workflow": "NovelAI draft -> built-in ImageGen redraw",
+  "recipeVersion": "3.4",
+  "cleanupVersion": "1.0",
+  "request": {
+    "input": "scenery, no humans, winter landscape. An empty snow-covered mountain passage, an old ruined stone gateway on the RIGHT, a single long faded vermilion cloth tied to its upright hanging in the cold wind. Beyond the gateway a winding pale snowy path leads into layered dark blue pine forests and immense distant snowy mountain silhouettes. A quiet journey between places, no battle. A few snow-laden branches frame the upper right. Wide calm pale winter sky, sparse drifting snow.\n\nA beautiful atmospheric reusable transition illustration for a winter expedition game. Environment only, no UI or lettering.\n\nWide 16:9 landscape. Three clear depth layers, strong graphic silhouettes and a simple diagonal path. Main gateway and red cloth occupy the RIGHT third. LEFT 40 percent is quiet deep blue-gray foreground shade and misty snow, no focal props, for overlay text. The mountain and forest are grouped shapes, no intricate architectural clutter.\n\nLuminous cold winter overcast light, delicate icy cyan and pale silver snow, deep ink blue foreground shadow, desaturated blue-green forests. One small vivid vermilion cloth is the only warm color accent. Spacious, poetic and inviting, restrained contrast with a clear cold-warm accent. Hand-painted anime environment illustration, economical shapes and clear large-scale light and shadow.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1319267762,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, human, girl, boy, character, face, animal, weapons, enemies, fighting, machinery, industrial scaffolding, ruined city, detailed brickwork, crowded composition, lettering, interface, photorealistic, 3d render",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "scenery, no humans, winter landscape. An empty snow-covered mountain passage, an old ruined stone gateway on the RIGHT, a single long faded vermilion cloth tied to its upright hanging in the cold wind. Beyond the gateway a winding pale snowy path leads into layered dark blue pine forests and immense distant snowy mountain silhouettes. A quiet journey between places, no battle. A few snow-laden branches frame the upper right. Wide calm pale winter sky, sparse drifting snow.\n\nA beautiful atmospheric reusable transition illustration for a winter expedition game. Environment only, no UI or lettering.\n\nWide 16:9 landscape. Three clear depth layers, strong graphic silhouettes and a simple diagonal path. Main gateway and red cloth occupy the RIGHT third. LEFT 40 percent is quiet deep blue-gray foreground shade and misty snow, no focal props, for overlay text. The mountain and forest are grouped shapes, no intricate architectural clutter.\n\nLuminous cold winter overcast light, delicate icy cyan and pale silver snow, deep ink blue foreground shadow, desaturated blue-green forests. One small vivid vermilion cloth is the only warm color accent. Spacious, poetic and inviting, restrained contrast with a clear cold-warm accent. Hand-painted anime environment illustration, economical shapes and clear large-scale light and shadow.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, people, human, girl, boy, character, face, animal, weapons, enemies, fighting, machinery, industrial scaffolding, ruined city, detailed brickwork, crowded composition, lettering, interface, photorealistic, 3d render",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": ".tmp\\nai\\general-transition-1016\\nai-draft-v2.png",
+  "seed": 1319267762,
+  "bytes": 1490538,
+  "sha256": "1972ecce8e2f6bd43fbb222637a2f5381537beeb5275503d0ec43730bbcc66ed"
+}

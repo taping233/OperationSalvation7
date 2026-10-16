@@ -3,7 +3,7 @@
  * 2. pickNestBoss 此前未定义：startNestBattle 一进来就 ReferenceError，龙巢任何战斗都开不起来
  * 3. 战后链：战斗结束走总线；龙巢订阅负责结算与推进，一图战后流程对龙巢让位
  * 4. 心模式：心数按最终伤害折算（含攻击力），而非卡面基础伤害值 */
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, vi } from 'vitest';
 
 /* jsdom 的 canvas 无 2D 上下文：game.session 顶层会建画布，先垫一个万能 stub */
 const ctxStub = new Proxy({}, {
@@ -31,6 +31,7 @@ const { BattleSession, configureBattleRenderer } = await import('../game/src/bat
 configureBattleRenderer(() => {});
 window.SDT.Nest.bindBattleStart(BattleSession.start);
 const C = window.SDT.Cards;
+const { Random, SeededRandomService, setRandomService } = await import('../game/src/core/random.js');
 
 beforeAll(() => {
   // UI 层在 jsdom 里没有 index.html 骨架：把界面方法换成无操作/收集器，只测游戏逻辑
@@ -141,7 +142,7 @@ describe('龙巢回归', () => {
 
 /* 江湖救急定版（2026-09-18 老板澄清）：随机直接给 3 张临时卡——不走发现面板，回合开始消耗。 */
 describe('江湖救急 · 随机直接给3张', () => {
-  it('打出后不弹发现面板，手牌直接多 3 张临时卡，并登记回合开始消耗', async () => {
+  it.each([false, true])('直接给3张并保留获取触发器（阿猫池：%s）', async withCat => {
     const g = prepRun();
     // 单卡牌盒保证目标牌必在起手，避免随机洗牌让测试误从牌库外调用 uid。
     g.cardBox = [{ id: 'cmtn1wnhhym', name: '江湖救急-改', cost: 0, rarity: '职业', type: '武术', dmg: 0, desc: '随机获得3张临时卡牌，回合开始时将其消耗。', value: 3, sellable: false, unrandom: true }];
@@ -150,13 +151,31 @@ describe('江湖救急 · 随机直接给3张', () => {
     await drain();
     const before = snap().hand.length;
     const e = g.ownedCards.find(o => o.card.id === 'cmtn1wnhhym');
-    BattleSession.commands.playCard(e.uid, 'any');
-    const s = await drain();
-    expect(s.discovering, '不应弹出发现面板').toBeFalsy();
-    expect(s.hand.length).toBe(before - 1 + 3);   // 打出的江湖救急离手 + 3 张临时卡置入
-    const log = (window.__uiLog || []).join(' | ');
-    expect(log).toContain('随机获得 3 张临时卡牌');
-    BattleSession.commands.flee();
-    await drain(60);
+    const plain = { id:'nest-temp-plain', name:'普通临时牌', type:'法术', rarity:'古朴', cost:0, desc:'' };
+    const cat = C.all().find(card => card.id === 'tt2-apollo');
+    expect(cat).toBeTruthy();
+    const pool = vi.spyOn(C, 'all').mockReturnValue(withCat ? [cat, plain] : [plain]);
+    const previousRandom = Random.snapshot();
+    const fixedRandom = new SeededRandomService(0);
+    fixedRandom.random = () => 0;
+    setRandomService(fixedRandom);
+    window.__uiLog = [];
+    try {
+      BattleSession.commands.playCard(e.uid, 'any');
+      const s = await drain();
+      expect(s.discovering, '不应弹出发现面板').toBeFalsy();
+      // 3张本体均为阿猫时，各触发1张赠牌；额外赠牌不属于下回合消耗的本体。
+      expect(s.hand.length).toBe(before - 1 + (withCat ? 6 : 3));
+      const log = (window.__uiLog || []).join(' | ');
+      expect(log).toContain('随机获得 3 张临时卡牌');
+      expect(log.includes('阿猫的礼物')).toBe(withCat);
+    } finally {
+      pool.mockRestore();
+      const restoredRandom = new SeededRandomService();
+      restoredRandom.restore(previousRandom);
+      setRandomService(restoredRandom);
+      BattleSession.commands.flee();
+      await drain(60);
+    }
   });
 });

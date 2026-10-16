@@ -1,0 +1,79 @@
+{
+  "target": {
+    "passed": 72,
+    "failed": 0,
+    "files": [
+      {
+        "name": "architecture-boundaries.test.js",
+        "tests": 24
+      },
+      {
+        "name": "chest-acquired-gift-cloud.test.js",
+        "tests": 20
+      },
+      {
+        "name": "contracts.test.js",
+        "tests": 17
+      },
+      {
+        "name": "pet-egg-chest.test.js",
+        "tests": 6
+      },
+      {
+        "name": "reward-coins-overview.test.js",
+        "tests": 5
+      }
+    ]
+  },
+  "legacy": {
+    "baselineFailed": 20,
+    "currentFailed": 20,
+    "sameFailedCases": true,
+    "failedCases": [
+      "奖励页使用同一顺序预估，排除领取/放弃且区分原选择与已掷附赠 choiceCount后的可收gift不能掩盖原三选一候选全部拒收",
+      "奖励页使用同一顺序预估，排除领取/放弃且区分原选择与已掷附赠 原选择解决后，只按顺序预估已有gift，不重抽、不重发原奖励",
+      "奖励页使用同一顺序预估，排除领取/放弃且区分原选择与已掷附赠 过滤后pending下标独立，不把原已领/已放弃卡重新发放",
+      "整理背包返回时奖励容量 notice 与真实容量同步 medium单卡失败：只清除现在确实可收的对应待领卡提示",
+      "整理背包返回时奖励容量 notice 与真实容量同步 medium实际grant拒收优先于乐观容量端口，普通重绘/无变化返回不能擦除",
+      "整理背包返回时奖励容量 notice 与真实容量同步 restore清除旧实例拒收显示状态，旧容量串可校准但非容量错误不受影响",
+      "整理背包返回时奖励容量 notice 与真实容量同步 small单卡失败：只清除现在确实可收的对应待领卡提示",
+      "整理背包返回时奖励容量 notice 与真实容量同步 small实际grant拒收优先于乐观容量端口，普通重绘/无变化返回不能擦除",
+      "整理背包返回时奖励容量 notice 与真实容量同步 仅腾出部分容量，刷新放不下数量但不把仍待领取的卡计入已领取",
+      "整理背包返回时奖励容量 notice 与真实容量同步 保存旧容量串后普通JSON重载，按17/18校准，不重抽/不重发已领卡",
+      "整理背包返回时奖励容量 notice 与真实容量同步 保留非容量状态：「黑市装备」已入本次远征背包",
+      "整理背包返回时奖励容量 notice 与真实容量同步 保留非容量状态：保存失败，请重试",
+      "整理背包返回时奖励容量 notice 与真实容量同步 保留非容量状态：已入背包 2 张，存档放不下，请检查存储空间",
+      "整理背包返回时奖励容量 notice 与真实容量同步 另有资源卡能收时，不能清除仍放不下的普通卡失败提示",
+      "整理背包返回时奖励容量 notice 与真实容量同步 地下商场黑市：18/18批量领2张，丢木材回17/18只保留领取成功事实",
+      "整理背包返回时奖励容量 notice 与真实容量同步 已满同名三张堆实际拒收时，不能因旧预检把同名当免费格而清掉失败",
+      "整理背包返回时奖励容量 notice 与真实容量同步 批量真实拒收不被预测清空；实际整理后可校准，同样失败串再次发生须重新显示",
+      "整理背包返回时奖励容量 notice 与真实容量同步 整理后按B关闭的第二次suspend不覆盖首次背包指纹",
+      "整理背包返回时奖励容量 notice 与真实容量同步 普通宝箱：18/18批量领2张，丢木材回17/18只保留领取成功事实",
+      "整理背包返回时奖励容量 notice 与真实容量同步 重新open及next换箱不会继承另一箱的实际拒收标记"
+    ]
+  },
+  "eslint": "passed",
+  "browser": {
+    "platform": "Codex IAB",
+    "fixture": ".tmp/reward-preview.html",
+    "viewport": [
+      1280,
+      720
+    ],
+    "realClicks": [
+      "claim coins before opening",
+      "open box",
+      "claim card and return to overview"
+    ],
+    "regionsOverlap": false,
+    "errorLogs": [],
+    "fullNaturalRunVerified": false
+  },
+  "sha256": {
+    "game/src/run/chests.js": "d08a8a46fa7a36c224be26499559adf65c8ae83e80d80e33239e738568bfd1b6",
+    "game/src/run/chest-reward-save.js": "035f2dc13caab2176ef2463c6334c9ab308848e1add24766f4a0545242bb345a",
+    "game/src/ui/chest-reward-overview.js": "624c986d11601d984e657abffe3b8624ae319b9a5511d1c70dc6e7508a3b775d",
+    "game/css/chest-reward-overview.css": "abecb493578c42eabdd341e20b1dd5d73128c56b49a7c64c4b7f12b652c0baab",
+    "tests/reward-coins-overview.test.js": "798aa554dc798b067b3f46be920715d2628fa4f1705fba3dae8baf2eccfd2159"
+  }
+}

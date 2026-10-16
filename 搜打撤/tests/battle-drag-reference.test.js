@@ -111,10 +111,26 @@ it('processes fast untargeted drops before cancelling the target session and exc
   expect(commands.submitCardPlay).not.toHaveBeenCalled();
 });
 
-it('requires a self-target drop on the player rather than an arbitrary empty point', () => {
-  state.card.side = 'self'; begin(); release(800, 700); expect(commands.submitCardPlay).not.toHaveBeenCalled();
+it('casts self-target cards from the battlefield centre or directly on the player', () => {
+  state.card.side = 'self'; begin(); release(800, 700);
+  expect(commands.submitCardPlay).toHaveBeenCalledExactlyOnceWith('drag-card', 'self', false);
+  commands.submitCardPlay.mockClear();
   begin(); document.elementFromPoint.mockReturnValue(document.getElementById('btSelf')); release(800, 700);
   expect(commands.submitCardPlay).toHaveBeenCalledExactlyOnceWith('drag-card', 'self', false);
+});
+
+it('casts area attacks from empty battlefield space using a live enemy for resolution', () => {
+  state.card.rules = { battle: { target: { area: true } } };
+  state.snap.foes = [{ hp: 0, dead: true }, { hp: 20, dead: false }];
+  begin(); release(800, 700);
+  expect(commands.submitCardPlay).toHaveBeenCalledExactlyOnceWith('drag-card', 1, false);
+});
+
+it.each(['self', 'enemy'])('keeps field-cast %s cards out of hand and HUD drop zones', side => {
+  state.card.side = side;
+  state.card.rules = { battle: { target: { area: true } } };
+  begin(); document.elementFromPoint.mockReturnValue(document.querySelector('.sts-hud')); release(800, 700);
+  expect(commands.submitCardPlay).not.toHaveBeenCalled();
 });
 
 it.each(['pointercancel', 'lostpointercapture', 'blur', 'resize', 'compositionstart'])('cleans up safely on %s', type => {

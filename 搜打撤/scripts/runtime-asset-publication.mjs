@@ -12,6 +12,12 @@ export const DEVELOPMENT_SFX_PREFIXES = Object.freeze([
 
 const posix = value => String(value || '').replace(/\\/g, '/');
 
+// Runtime strings and JSON paths bypass Vite's static URL rewriting.
+// Keep the whole UI family: card frames, guide illustrations, mail and HUD art.
+export const RUNTIME_ASSET_DIRS = Object.freeze([
+  'cards', 'portraits', 'icons', 'scenes', 'thumbs', 'ui', 'battle', 'sfx',
+]);
+
 export function collectUnreferencedDevelopmentSfxPrefixes(modules, assetsRoot) {
   // A missing Rollup graph is inconclusive, so preserve every asset.
   if (!modules) return new Set();

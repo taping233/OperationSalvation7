@@ -2,16 +2,18 @@
 import '../../css/camp-entry.css';
 import { waitPageVisual } from './page-visual-ready.js';
 import { mapImageReady } from '../core/map-image-ready.js';
+import { GENERAL_TRANSITION_ART } from './general-transition.js';
 const CUT_SCENES = {
   camp: new URL('../../assets/scenes/transition-camp-v2.webp', import.meta.url).href,
   photo: new URL('../../assets/scenes/transition-photo-v2.webp', import.meta.url).href,
   field: new URL('../../assets/scenes/transition-field-v2.webp', import.meta.url).href,
-  battle: new URL('../../assets/scenes/transition-battle-v2.webp', import.meta.url).href,
-  boss: new URL('../../assets/scenes/transition-boss-v2.webp', import.meta.url).href,
+  general: GENERAL_TRANSITION_ART,
+  battle: GENERAL_TRANSITION_ART,
+  boss: GENERAL_TRANSITION_ART,
   achievement: new URL('../../assets/scenes/transition-achievement-v2.webp', import.meta.url).href,
 };
 // 各目的页小图随模块预热，首次切幕出现前即可加载。
-for (const src of Object.values(CUT_SCENES)) {
+for (const src of new Set(Object.values(CUT_SCENES))) {
   const image = new Image();
   image.decoding = 'async';
   image.src = src;

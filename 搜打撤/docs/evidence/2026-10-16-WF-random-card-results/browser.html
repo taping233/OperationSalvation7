@@ -1,0 +1,48 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>随机卡牌结果 · 真实战斗验收</title>
+<style>body{margin:0;background:#111;color:#eee;font-family:system-ui}.qa-bar{position:relative;z-index:20;padding:12px;background:#171c22;border-bottom:1px solid #46515d}.qa-bar button{margin:4px;padding:8px 12px}.qa-bar output{display:block;margin-top:6px;color:#a9d9b2}#overlay{position:relative;inset:auto;display:block;min-height:720px}#overlay[hidden]{display:none}#overlay>.card{position:relative;inset:auto;transform:none;width:100%;max-width:none}.qa-note{color:#e7c98c}.qa-bar{position:fixed;left:35%;top:0;z-index:10000;max-width:440px;font-size:10px;opacity:.8}.qa-bar output{display:none}</style><link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/cards.css" />
+<link rel="stylesheet" href="/css/overlays.css" />
+<link rel="stylesheet" href="/css/hub.css" />
+<link rel="stylesheet" href="/css/battle.css" />
+<link rel="stylesheet" href="/css/scenes.css" />
+<link rel="stylesheet" href="/css/lab-ending.css" />
+<link rel="stylesheet" href="/css/winter.css" />
+<link rel="stylesheet" href="/css/expedition.css" />
+<link rel="stylesheet" href="/css/expedition-map.css" />
+<link rel="stylesheet" href="/css/map-edge-light.css" />
+<link rel="stylesheet" href="/css/expedition-hub.css" />
+<link rel="stylesheet" href="/css/expedition-inventory.css" />
+<link rel="stylesheet" href="/css/expedition-rewards.css" />
+<link rel="stylesheet" href="/css/expedition-battle.css" />
+<link rel="stylesheet" href="/css/expedition-library.css" />
+<link rel="stylesheet" href="/css/card-v3.css" />
+<link rel="stylesheet" href="/css/expedition-roster.css" />
+<link rel="stylesheet" href="/css/expedition-shop.css" />
+<link rel="stylesheet" href="/css/ui-scale.css" />
+<link rel="stylesheet" href="/css/page-slot-select.css" />
+<link rel="stylesheet" href="/css/page-settings.css" />
+<link rel="stylesheet" href="/css/page-datapage.css" />
+<link rel="stylesheet" href="/css/page-ach.css" />
+<link rel="stylesheet" href="/css/page-cardforge.css" />
+<link rel="stylesheet" href="/css/page-expedition-hud.css" />
+<link rel="stylesheet" href="/css/feedback-oct12.css" />
+<link rel="stylesheet" href="/css/roster-departure-v2.css" />
+<link rel="stylesheet" href="/css/pocket-strip.css" />
+<link rel="stylesheet" href="/css/experience-loot.css" />
+<link rel="stylesheet" href="/css/page-events.css" />
+<link rel="stylesheet" href="/css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="/css/page-battle-ui.css" />
+<link rel="stylesheet" href="/css/character-idle.css" />
+<link rel="stylesheet" href="/css/cover-remaining.css" />
+<link rel="stylesheet" href="/css/page-transitions.css" />
+<link rel="stylesheet" href="/css/ak-skin.css" />
+<link rel="stylesheet" href="/css/base-camp.css" />
+<link rel="stylesheet" href="/css/base-camp-compact.css" />
+<link rel="stylesheet" href="/css/card-layout-selected.css" />
+<link rel="stylesheet" href="/css/battle-stage.css" /></head><body>
+<header class="qa-bar"><b>R7-a 隔离验收</b> <span class="qa-note">构造手牌：江湖救急、法力奔涌；99能量；高血量靶子；无奖励、无存档、无真实玩家档接线。</span><br>
+<button data-sample="l2-archer-cavalry">开始/重开 L2 射手＋机动兵</button><button data-sample="l4-fire-grass">开始/重开 L4 灼热＋滋生</button>
+<button id="qaAcquire">测试随机获得</button><button id="qaCast">测试随机释放</button><button id="qaEnd">结束回合</button><button id="qaReset">退出样本</button><output id="qaState">正在加载真实 BattleSession + BattleView；存储状态显示前后快照是否变化，不代表写入次数。</output></header>
+<section id="overlay" hidden><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></section><div id="log"></div>
+<script type="module" src="./browser.mjs"></script></body></html>

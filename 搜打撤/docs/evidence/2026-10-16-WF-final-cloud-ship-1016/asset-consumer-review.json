@@ -1,0 +1,55 @@
+{
+  "updates": [
+    {
+      "path": "game/src/run/chests.js",
+      "old": [
+        "fd2d26a4a13805ab9ac4df57853eac3d010de746dc0f29fd95d2fcb1f3be4149"
+      ],
+      "sha256": "a7c2956e662135d624e7c208e1b21689cc2ae429258ea170cb88fe1379905456",
+      "reason": "Only selected current frame sets, matching FX and per-frame duration indexing; old special boxes still use SAFE; no restored retired paths."
+    },
+    {
+      "path": "game/src/run/chest-opening-art.js",
+      "old": [
+        "6ea623ee1a706248f743e143c0c5fca5026de400056a0761f8c8ef29d6b65079"
+      ],
+      "sha256": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf",
+      "reason": "Supply small/medium/large now use 16 supply-opening-v6 assets. Class/boss retain safe-simple-v7, with no references to omitted rig-640 or retired scenes."
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "old": [
+        "0373fc9bdf673db7783d0f6b331d2c4a4842d94af320ca04beb29a780b5936e8"
+      ],
+      "sha256": "554c4fdbaf87e4e03b2886553e5c27bbb148a9125197da630fb0e7c5fd09a12b",
+      "reason": "Battle and boss route to the common camp-entry general transition; other scene selectors remain unchanged."
+    },
+    {
+      "path": "game/src/ui/camp-entry.js",
+      "old": [
+        "45512ff38fd159adbdad17ee62622a2a7dddb5f3d4c347e5bc759e5c7d2e8520"
+      ],
+      "sha256": "fa226982c29fdc2043a0dc0706d36ebac17ebf8dbc40d57539f8cd81c1d577a9",
+      "reason": "Battle/boss map to the new general transition. Other destinations retain their existing assets and layout."
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "old": [
+        "a2661d60343129a0e19566738d01c0a0c60e096441b15bb22a4360cc9ad39ec7"
+      ],
+      "sha256": "bf46e8c3af62472b80dc550900f0ac0489f50853c6dbb8fb53bbdfb11db71531",
+      "reason": "Only area/self target hints changed. Dynamic frame/card artwork naming is unchanged."
+    },
+    {
+      "path": "game/src/core/art-preload-plan.js",
+      "old": [
+        "7fc6a12eeed2ec21407df9e65ae81a3d2294fc343d37f8deefe62f0938cb93ad"
+      ],
+      "sha256": "19b0ba97279c218ac7230f91967ecedf9519134f9de189b86d482035dc89a445",
+      "reason": "app: preloads a subset of the existing scene/frame URL inputs. HTTP behavior and dynamic URL membership sources remain unchanged."
+    }
+  ],
+  "candidatesUnchanged": 195,
+  "algorithmUnchanged": true,
+  "futureReferenceGuardsUnchanged": true
+}

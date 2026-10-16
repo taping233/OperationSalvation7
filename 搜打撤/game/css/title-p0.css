@@ -24,9 +24,14 @@
 }
 #title.home-composed .title-bg-alternate {
   inset: 0;
-  background: none;
+  background: url('../assets/reconstruction/wallpaper-baita-heixiang-1016.webp?v=face-v2-1016') center / cover no-repeat;
   mask-image: none; opacity: 0;
 }
+#title.home-composed[data-home-wallpaper="baita-heixiang"] .title-wallpaper-extension {
+  background-image: url('../assets/reconstruction/wallpaper-baita-heixiang-1016.webp?v=face-v2-1016');
+}
+#title.home-composed[data-home-wallpaper="baita-heixiang"] .title-bg { opacity: 0; }
+#title.home-composed[data-home-wallpaper="baita-heixiang"] .title-bg-alternate { opacity: 1; }
 #title.home-composed::before,
 #title.home-composed .title-bg::before,
 #title.home-composed .title-bg::after,

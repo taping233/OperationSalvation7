@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-final-cloud-ship-1016",
+  "date": "2026-10-16",
+  "owner": "Friday",
+  "goal": "统一收尾已完成改动、验证、销账并正常提交推送，提供精确版本完整云端交接",
+  "paths": [
+    "game/src",
+    "game/assets",
+    "game/css",
+    "tests",
+    "vite.config.js",
+    "scripts/runtime-asset-publication.mjs",
+    "docs/PARALLEL-REGISTRY.md",
+    "docs/evidence/2026-10-16-WF-final-cloud-ship-1016"
+  ],
+  "doneWhen": [
+    "完成增量核对与必要集成修复",
+    "正常提交门通过且远端精确SHA确认",
+    "本机配置、NAI设置、原始及候选文件保留"
+  ],
+  "stage": "doing",
+  "checks": [],
+  "unverified": [
+    "最终远端CI与生产体积预算待核对"
+  ],
+  "updatedAt": "2026-10-16T15:23:37.712299+00:00"
+}

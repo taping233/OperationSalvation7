@@ -1,8 +1,24 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1441,
+  "count": 1459,
   "assets": [
+    {
+      "path": "scenes/transition-general-1016.webp",
+      "ext": "webp",
+      "license": "项目自有（NovelAI起稿、内置ImageGen重绘）",
+      "bytes": 148636,
+      "sha256": "5a6093b4a5e71d8773a750e8a48922519c6ea4cb0c9b7222f3ab0b598ff3815d",
+      "source": "docs/evidence/2026-10-16-WF-general-transition-1016/receipt.json"
+    },
+    {
+      "path": "reconstruction/wallpaper-baita-heixiang-1016.webp",
+      "ext": "webp",
+      "bytes": 237854,
+      "sha256": "12efb1d9d0b269e3c22350f1d71c793ef5e63801c4b89d508be5017469407b25",
+      "license": "项目AI生成素材（老板指定黑像修脸版接入首页第二张壁纸）",
+      "source": "docs/evidence/2026-10-16-baita-heixiang-nai45/install-second-wallpaper.json"
+    },
     {
       "path": "reconstruction/wallpaper-snow-road-1016.webp",
       "ext": "webp",
@@ -12086,6 +12102,134 @@
       "sha256": "c54aa8b843b7d8c6a69c7baa1bbf50bc896f3ac2af0b99260ac09c02793ccae9",
       "license": "项目原创（老板授权内置 imagegen 全新绘制透明HUD符号，无外部素材复制）",
       "source": "docs/evidence/2026-10-16-WF-battle-glass-1016/icons/receipt.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/small/frame-00.webp",
+      "ext": "webp",
+      "bytes": 179456,
+      "sha256": "f4bc3b12a1d73a7ca28d57f49be6cd7f348bf00c39f0367c627b4efcfc36ace1",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/small/frame-01.webp",
+      "ext": "webp",
+      "bytes": 185150,
+      "sha256": "c236d9e2c68a9089e4893d2ea352c4f119dea70e90d8173c889daf93d5581693",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/small/frame-02.webp",
+      "ext": "webp",
+      "bytes": 227368,
+      "sha256": "2dc92257e01a1e986c7ad783bfc63607c1021da024f010bc8ca9a49b6a1f71d7",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/small/frame-03.webp",
+      "ext": "webp",
+      "bytes": 228602,
+      "sha256": "9060930ad9c5642089f790f120e11658a478643891749ee99ec7b4fbddd39425",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/medium/frame-00.webp",
+      "ext": "webp",
+      "bytes": 195656,
+      "sha256": "e8b9e6df5866fa0070826ebea30ce74df1aaf96d02c5ea86da956d14baff7074",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/medium/frame-01.webp",
+      "ext": "webp",
+      "bytes": 207138,
+      "sha256": "73f78dba3f021cfd690fb8d883d76cc65908f14acd47d597edf1e8cba35f3cb3",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/medium/frame-02.webp",
+      "ext": "webp",
+      "bytes": 249302,
+      "sha256": "e7855b11569518790a4c83335e52dfb2d7b389dabbcc131953e7f94dd20639b7",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/medium/frame-03.webp",
+      "ext": "webp",
+      "bytes": 224342,
+      "sha256": "6a8df7fc91d6ac57007ec32afbd778dd2d66433155334959c0ee7047e28334fc",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/large/frame-00.webp",
+      "ext": "webp",
+      "bytes": 199256,
+      "sha256": "13cf0284e0a1f93d3714fd8af33840c85408b5e424ad4f4dc29cec276c7a9d80",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/large/frame-01.webp",
+      "ext": "webp",
+      "bytes": 204976,
+      "sha256": "4d8e8d57a98986eda8712eb877e9a3d6f693fd7441e265dc2b55ffa747d8578a",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/large/frame-02.webp",
+      "ext": "webp",
+      "bytes": 272688,
+      "sha256": "dd0084eca1915e39be859ff53b13678e66e16d9b3d02b4f662d92cee968065da",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/large/frame-03.webp",
+      "ext": "webp",
+      "bytes": 269756,
+      "sha256": "9b1e43248c8d3e47843a903e6d719150fcd4c263dbf1ca4cbf0d27f52230e4cb",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/fx/frame-00.webp",
+      "ext": "webp",
+      "bytes": 37444,
+      "sha256": "01f2eee1c6959f0f92091cf8a0f96f523231c8c893bf0ed575812be3896ab252",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/fx/frame-01.webp",
+      "ext": "webp",
+      "bytes": 90870,
+      "sha256": "ee722034118b816238bd75e8ac73ef58d3ee5687ea24ef1c0e5b555193e2918e",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/fx/frame-02.webp",
+      "ext": "webp",
+      "bytes": 197186,
+      "sha256": "e7486a6d7c5b1c18e18c64432083649f1a19fc05720b153869928d1d54af7c92",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6/fx/frame-03.webp",
+      "ext": "webp",
+      "bytes": 46866,
+      "sha256": "dcbcaba475d527fa35972c09af7c717f2581b61f101b5323ab7e3a844cb42988",
+      "license": "Project original AI-generated art, authorized by the owner.",
+      "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
     }
   ],
   "verified": "2026-10-05"

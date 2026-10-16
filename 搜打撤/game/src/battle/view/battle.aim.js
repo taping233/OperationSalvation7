@@ -35,6 +35,7 @@ import { commands, getSnapshot, getBattleLiveness, findEffectiveCard as findCard
   function showHandCardDetails() { return false; }
 import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble } from './battle.hover.js';
 import { createTargetSession } from '../core/battle.target-session.js';
+import { isAreaEffect } from '../effects/battle.target-rules.js';
 import { BATTLE_PHASES } from '../runtime/battle.state.js';
   // ---------- 指向施法 ----------
   // 状态分支依据本地 NMouseCardPlay / NTargetManager；DOM 命中与 UI 缩放沿本项目接口。
@@ -185,7 +186,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   }
   function makeAimTargetSession(a) {
     return createTargetSession({
-      side: a.side, snapshot: a.snap,
+      side: a.fieldPlayable ? 'any' : a.side, snapshot: a.snap,
       isBattleCurrent: () => targetSessionBattleCurrent(a.snap.battleToken),
       getTargets: () => getSnapshot().foes,
       onHover(next, previous) {
@@ -246,6 +247,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     a.hover = null;
     a.snap = snapshot;
     a.card = entry.card;
+    a.fieldPlayable = a.follow && (a.side === 'self' || isAreaEffect(entry.card));
     a.stage = stage;
     a.vr = UI.el.overlay.getBoundingClientRect();
     a.playBlockedReason = cardPlayBlockedReason(a.uid, a.side === 'self' ? 'self' : undefined, a.side !== 'any');
@@ -460,6 +462,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (returning) returningCards.delete(el);
     aim = {
       uid, card: entry.card, side, el, kind: kind || 'card',
+      fieldPlayable: isCard && (side === 'self' || isAreaEffect(entry.card)),
       pointerId: e.pointerId, lastX: e.clientX, lastY: e.clientY,
       playBlockedReason, reasonShown: false,
       ax: r.left + r.width / 2 - vr.left, ay: r.top - vr.top + 6,
@@ -591,7 +594,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (a.follow) {
       if (a.mode === 'drag' && eY < a.playY) {
         if (a.playBlockedReason) { const reason = a.playBlockedReason; cancelAim(); showThoughtBubble(reason); return; }
-        a.mode = a.side === 'enemy' || a.side === 'self' ? 'target' : 'multi';
+        a.mode = a.fieldPlayable ? 'multi' : a.side === 'enemy' || a.side === 'self' ? 'target' : 'multi';
         a.hasEnteredPlay = true;
         a.targetMode = a.leftDown ? 'release' : 'click';
         if (a.targetMode === 'click' && a.mode === 'target') a.mode = 'clickTarget';
@@ -745,10 +748,13 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   function completeCardTarget(a, e) {
     const allowed = e.clientY < a.playY && !a.playBlockedReason;
     const hit = allowed ? aimHoverAt(e.clientX, e.clientY, a.targetSession) : null;
-    const selected = hit && a.targetSession.select(hit);
+    const target = a.side === 'enemy'
+      ? hit?.idx ?? getSnapshot().foes.findIndex(foe => !foe.dead && foe.hp > 0)
+      : a.side === 'self' ? 'self' : undefined;
+    const selected = hit && (a.side !== 'enemy' || target >= 0) && a.targetSession.select(hit);
     aim = null;
     finishAim(a, !selected, !!selected);
-    if (selected) submitCardWithFeedback(a.uid, a.side === 'enemy' ? hit.idx : a.side === 'self' ? 'self' : undefined, false, a);
+    if (selected) submitCardWithFeedback(a.uid, target, false, a);
     else cancelPendingTarget();
   }
   function endAim(e) {

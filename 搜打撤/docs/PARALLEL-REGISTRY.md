@@ -8,9 +8,11 @@
 
 ## 活跃登记
 
-Friday（免注能效果结算 WF-infuse-free-1016，聊天01a144bf），2026-10-16：game/src/battle/core/battle.exec-play.js 注能状态判定、tests/infuse-free-play.test.js、docs/rules.md 本轮说明及 docs/evidence/2026-10-16-WF-infuse-free/；修复灵能召唤等免注能实例只跳过材料却不触发注能效果的问题，编辑中；不build、不提交、不操作已有服务。
 
-Friday（随机卡牌结果展示 WF-random-card-results-1016，聊天01a144fe），2026-10-16：`game/src/battle/core/battle.draw.js`发牌事件元数据、`game/src/battle/view/battle.anim.view.js`结果呈现、独立`battle.card-results.js`与专测、`game/css/battle.css`仅结果栏新增选择器、`docs/evidence/2026-10-16-WF-random-card-results/`；编辑中。随机获得/洗入/释放显示实际卡名、数量与去向；保留已有改动，复用5200服务不认领，不build、不提交。
+
+
+
+
 
 Friday（白塔黑像第二壁纸，聊天01a144c7），2026-10-16：自有 `docs/evidence/2026-10-16-baita-heixiang-nai45/`、`game/assets/reconstruction/wallpaper-baita-heixiang-1016.webp`、`game/assets/asset-manifest.json`本图条目、`game/src/ui/title-wallpaper.js`、`game/css/title-p0.css`本图选择器、`tests/title-wallpaper.test.js`；编辑中。老板授权最新修脸候选接入首页第二张，现第一张雪原公路保留，沿原切换/偏好存储，定向与当前窗口内置浏览器核验；不build、不提交，复用5200服务不认领。
 
@@ -63,6 +65,7 @@ Friday（首页图标预览服务 WF-home-icons-install-1015）：工作目录D:
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
+| Friday（最终云端交接 WF-final-cloud-ship-1016） | 全部完成未提交源码/正式资源/台账；证据 docs/evidence/2026-10-16-WF-final-cloud-ship-1016/ | 老板授权统一核对、补验、销账、正常提交推送；本机配置/NAI/原始与候选保留，不开启下一轮试玩 | 2026-10-16 | 编辑中 |
 | Friday（轨道站实机预览服务 WF-battle-platform-live-1016） | 隔离Vite5318/PID42064/exec46471，工作目录D:/素材/代号柒/搜打撤；Codex内置浏览器tab5 | 保留老板当前战斗预览，源码编辑已释放；服务由本会话创建，后续停止前核对身份 | 2026-10-16 | 已交付预览，资源保留；原5200未动，不build、不提交 |
 | Friday（网页版启动 01a13e37） | 工作目录 `D:\素材\代号柒\搜打撤`；5200 / PID 7404；`node_modules/.cache/web-up-5200.json` | 老板要求打开网页版，使用现有 web-up 启动器后台启动，入口及 PNG/WebP 响应有效；服务保留供老板使用 | 2026-10-15 | 已释放；服务历史保留，未停止服务；创建会话 01a13e37-5915-7490-ac18-166000b29ccb；未改游戏源码 |
 | Friday（拉起主线 Vite WF-mainline-up-1015） | 工作目录 `D:/素材/代号柒/搜打撤`；端口5200；PID26504；本会话创建 | 老板要求拉起主线；`npm run web` 独立后台启动，叙事编译后探针（入口/PNG/WebP）通过；启动时5200无监听，登记内旧PID23856已不在，未动他人记录 | 2026-10-15 | 已释放；服务历史保留，未停止服务；进程记录 `node_modules/.cache/web-up-5200.json`，收官由本会话核实身份后停止 |
@@ -81,6 +84,18 @@ Friday（首页图标预览服务 WF-home-icons-install-1015）：工作目录D:
 | 根`.codex/config.toml.bak-nai-*`三个备份与`nul` | 当前Git未跟踪；备份关联NAI试验，nul内容/归属未核实 | 2026-10-14 | 仅登记，不删除；NAI备份不等同待提交配置 |
 
 ## 近期已释放
+
+Friday（战斗通用过场接线 WF-battle-common-transition-1016，聊天01a14535），2026-10-16：完成未提交、编辑释放。战斗/首脑接回 enterNode；移除独立全屏插画与右滑揭幕，资源保护保留紧凑失败提示；移除 city-run 专用动画/字号覆盖，沿共用切幕样式与980ms。属地：game.run.flow.js、game.run.altar.js、game.run.scenes.js、battle.presentation-ready.js、general-transition.js、battle.css、camp-entry.css、对应测试、development.md对应段及自有证据。此前119项通过仅覆盖接线与独立过场移除；老板要求最终样式后不再检测，已直接生产构建并打包成功。产物 desktop-app/dist/搜打撤-代号7.exe；本地依赖与desktop-app/game已生成，资产索引沿构建自动更新；无新增服务、未启动EXE、不提交。证据 docs/evidence/2026-10-16-WF-battle-common-transition/。
+
+Friday（EXE资源与首启及战斗过场 WF-exe-assets-1016，聊天01a144bf），2026-10-16：vite.config.js、scripts/runtime-asset-publication.mjs、game/src/core/art-preload-plan.js、game/src/game.boot.js预热段、game/src/ui/general-transition.js、game/src/battle/view/battle.presentation-ready.js及定向测试、自有修正版EXE与docs/evidence/2026-10-16-WF-exe-assets/；完成未提交、编辑释放。补齐UI/战斗动态图片，桌面仅预取场景与卡框，战斗共用滑移揭幕；103项及lint通过，最终资源1564引用缺失0，内置浏览器整备6张卡框解码；老板要求停止后续检查并直接交付EXE，战斗实页与EXE启动未核验。自有8139/PID31160/exec39077资源保留供老板当前页面，目录.tmp/clean-exe-1016/project；不提交、不删旧包或存档、不动5200。
+
+Friday（独立空档EXE WF-clean-exe-1016，聊天01a144bf），2026-10-16：desktop-app/main.js、desktop-app/package.json本轮发行文件、.tmp/clean-exe-1016/隔离快照与依赖、desktop-app/dist/clean-20261016/产物、docs/evidence/2026-10-16-WF-clean-exe/；完成未提交、编辑占用释放。老板授权的Windows x64独立空档EXE已生成，Vite与Electron打包均退出0，独立新存档目录，不读取/删除原存档；依老板要求不再测试或启动验收。不提交、不操作已有服务，不删旧文件；自有打包产物与缓存保留。
+
+Friday（免注能来源补查 WF-infuse-free-paths-1016，聊天01a144bf），2026-10-16：game/src/battle/core/battle.exec-play.js注能判定、battle.resolution.js入口、battle.engine.js状态端口、battle.core.js预览免注能标志、effects/battle.card-inspection.js、effects/battle.infusion.js、tests/infuse-free-paths.test.js、docs/rules.md本轮说明和docs/evidence/2026-10-16-WF-infuse-free-paths/；完成未提交、编辑占用释放。补齐全场材料选择与绕过exec的状态传播；老板要求停止测试，最终修复未复测，不宣称通过。不提交、不操作已有服务，draw.js他人改动保留。老板随后另授权空存档独立EXE，打包另登记。
+
+Friday（随机卡牌结果与空地释放 WF-random-card-results-1016，聊天01a144fe），2026-10-16：完成未提交，编辑释放。属地game/src/battle/core/battle.draw.js事件元数据、view/battle.anim.view.js及battle.card-results.js结果呈现、game/css/battle.css仅结果栏、view/battle.aim.js空地判定、battle.layers.js提示、tests/battle-card-results.test.js与battle-drag-reference.test.js、docs/rules.md对应拖放说明、自有docs/evidence/2026-10-16-WF-random-card-results/。随机结果57定向、语法/类型/lint及当前内置浏览器构造战斗通过；空地释放按老板最后明示免验证，测试预期已更新但未运行，详见自有README。复用5200无新服务，不build、不提交。
+
+Friday（免注能效果结算 WF-infuse-free-1016，聊天01a144bf），2026-10-16：game/src/battle/core/battle.exec-play.js 注能状态判定、tests/infuse-free-play.test.js、docs/rules.md 本轮说明及 docs/evidence/2026-10-16-WF-infuse-free/；完成未提交、编辑占用释放。免注能实例按已注能结算，正常扣费，不虚增材料消耗和累计数；定向6文件110测试及ESLint通过，当前内置浏览器仅见主菜单，战斗实页未核验。不build、不提交、不操作已有服务。
 
 Friday（完成改动提交 WF-completed-commit-1016，聊天01a14487），2026-10-16：已按老板授权修复集成并正常提交源码 `256dc29fb4063dbf4962cd09ce4e0b1d7ef78466`（170件，相关现行文档同组），证据 `docs/evidence/2026-10-16-WF-completed-commit-1016/README.md`；编辑占用释放。197项断言失败已修复，最终完整隔离门495套/4730项通过、16项既有跳过、0未处理错误；测试fork上限4，未调超时/阈值。原生内置浏览器验证拖牌和宝箱续领。既有完成证据按组随本轮提交；后续第二壁纸/宝箱v6/通用过场、在途生图、91旧宝箱帧、无主配置/工具/候选与中间文件保留。未build/推送，原5200服务未动，自建测试页已关。此前任务行中的完成未提交为当时历史，本轮实际源码范围见source-index-inventory.json。
 
@@ -443,6 +458,7 @@ Friday（Codex 地图天气 01a13c12），2026-10-15：game/css/expedition-map.c
 
 | 会话/来源 | 属地 | 事项 | 状态 |
 |---|---|---|---|
+| Friday（双图默认画风 WF-default-art-style-1016） | 2026-10-16 | 完成未提交；编辑占用释放。自有 `docs/production/art/ART-STYLE-V1.md`、`docs/production/art/ART-DIRECTION-BRIEF.md`、`docs/production/art/VISUAL-BIBLE.md`、`docs/production/art/ART-STYLE.md` 与 `docs/evidence/2026-10-16-default-art-style/`；双图确认为默认，保留头发/裙子有结构的细碎块面、叠色与硬边笔触 | docs:check通过，7条本地链接可达，diff --check通过，双图SHA256核对一致且大图已忽略；新提示词未出图验证；无服务、不改运行素材、不提交 |
 | Friday（通用过场 WF-general-transition-1016） | game/src/ui/general-transition.js、camp-entry.js；run/game.run.scenes.js；battle/view/battle.presentation-ready.js；game/css/battle.css；两battle-entry测试；通用过场图及manifest本图条目；docs/development.md对应段；自有evidence | NAI起稿+内置重绘，已按老板反馈恢复原图左侧虚化；战斗/首脑入口与资源等待共用远征画面 | 完成未提交、编辑释放；5套82项及末版3套41项通过，lint/docs/diff通过；当前内置窗口构造过场与真实简化按钮通过，未完整实战；本图登记校验通过，工作区另有95项资产审计错误；无build/新服务/提交。证据docs/evidence/2026-10-16-WF-general-transition-1016/ |
 | Friday（NAI画法单变量 WF-nai-style-trial-a-1016） | docs/evidence/2026-10-16-nai-style-trial-a/；根.tmp/nai/wu-dinner-v5-style-trial-a-20261016.png | 单张HTTP200；同种子仅换画法，请求差异断言与共享默认指纹核对通过；视觉比较记录于README | 2026-10-16 完成未提交，编辑占用释放；候选未选为默认，无服务 |
 | Friday（简约轨道站战斗场景 WF-battle-platform-minimal-1016） | game/assets/scenes/battle/platform-minimal-1016/{far,ground,foreground}.webp；game/src/battle/view/battle.scenery.js；game/src/run/game.run.data.js战斗预载；game/css/battle-stage.css、scenes.css战斗背景；game/assets/asset-manifest.json新增三条；docs/architecture.md；自有记录 | 认可概念经内置生图制作三层并接入普通战/首脑战，预载与战前背景同步；地面后沿修订一次，人物与动作保留；生成提示词与编码来源见request/receipt | 完成未提交，编辑释放；未执行测试、lint、类型/语法检查、build或内置浏览器验收，按老板要求最后统一。无新服务、无提交/推送；原图>1MB留本机生成目录，运行WebP均<1MB |

@@ -60,6 +60,14 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
       const set = sets?.[kind];
       if (!set || !Array.isArray(set.frames) || !set.frames.every(frame => typeof frame === 'string' && frame)) continue;
       CHEST_FRAME_SETS[kind] = { frames: set.frames.slice(), fps: Math.min(60, Math.max(1, Number(set.fps) || 8)) };
+      for (const key of ['effects', 'phases', 'durationsMs']) {
+        const list = set[key];
+        if (!Array.isArray(list) || list.length !== set.frames.length) continue;
+        const valid = key === 'durationsMs' ? list.every(value => Number.isFinite(value) && value > 0)
+          : key === 'phases' ? list.every(value => ['charging', 'opening', 'burst', 'settle'].includes(value))
+            : list.every(value => typeof value === 'string' && value);
+        if (valid) CHEST_FRAME_SETS[kind][key] = list.slice();
+      }
     }
   }
   const frameArtOf = box => CHEST_FRAME_SETS[box.isClass ? 'class' : box.kind] || CHEST_FRAME_SETS.medium;
@@ -91,6 +99,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     if (openingTimer != null) clearTimeout(openingTimer);
     openingTimer = null;
     const image = UI.el.ovBody.querySelector('.ps-chest');
+    const effect = UI.el.ovBody.querySelector('.safe-burst');
     const reduced = SDT.Motion?.reduceMotion?.() || window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
     if (skip || reduced || isTurbo() || context.frames.length < 2) {
       if (image && context.frames.length) image.src = context.frames.at(-1);
@@ -105,12 +114,14 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
       if (!isCurrentPresentation(context)) return;
       if (frame >= context.frames.length) { revealOnce(context); return; }
       if (image) { image.src = context.frames[frame]; image.dataset.chestFrame = String(frame); }
-      const phase = frame >= Math.ceil(context.frames.length * .8) ? 'settle'
-        : frame >= Math.floor(context.frames.length * .55) ? 'burst' : 'opening';
+      if (effect && context.effects?.[frame]) effect.src = context.effects[frame];
+      const phase = context.phases?.[frame] || (frame >= Math.ceil(context.frames.length * .8) ? 'settle'
+        : frame >= Math.floor(context.frames.length * .55) ? 'burst' : 'opening');
       if (context.surface) context.surface.dataset.chestPhase = phase;
       if (phase === 'burst' && !context.burstPlayed) { context.burstPlayed = true; SDT.Sound.sfx('chestBurst'); }
+      const holdMs = context.durationsMs?.[frame] ?? 1000 / context.fps;
       frame++;
-      openingTimer = setTimeout(step, turboMs(1000 / context.fps));
+      openingTimer = setTimeout(step, turboMs(holdMs));
     };
     step();
   }
@@ -465,11 +476,13 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const K = KINDS()[cur.kind];
     const tok = ++searchSeq;
     const frames = frameArtOf(cur);
-    const context = openingPresentation = { sequence: tok, box: cur, game: G, seed: G.seed, revealed: false, frames: frames.frames.slice(), fps: frames.fps };
+    const context = openingPresentation = { sequence: tok, box: cur, game: G, seed: G.seed, revealed: false,
+      frames:frames.frames.slice(), fps:frames.fps,
+      effects:frames.effects?.slice(), phases:frames.phases?.slice(), durationsMs:frames.durationsMs?.slice() };
     context.framesReady = true;
     if (context.frames.length && typeof Image !== 'undefined' && typeof Image.prototype.decode === 'function') {
       context.framesReady = false;
-      const images = [...new Set([...context.frames, SAFE_BURST])].map(src => { const image = new Image(); image.src = src; return image; });
+      const images = [...new Set([...context.frames, ...(context.effects || [SAFE_BURST])])].map(src => { const image = new Image(); image.src = src; return image; });
       Promise.all(images.map(image => image.decode())).then(() => {
         if (!isCurrentPresentation(context)) return;
         context.framesReady = true;
@@ -481,7 +494,8 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     globalThis.__probe?.('rs', `tok=${tok} t=${Date.now()} kind=${cur.kind}`);
     const opening = `
       <p class="evt-sts-desc">${cur.isClass ? '职业补给：本职业专属卡牌' : '正在解锁封存物资。'}</p>
-      ${safeOpeningHTML({ kind:cur.isClass ? 'class' : cur.kind, src:chestArtOf(cur), animated:context.frames.length > 1 })}`;
+      ${safeOpeningHTML({ kind:cur.isClass ? 'class' : cur.kind, src:chestArtOf(cur), animated:context.frames.length > 1,
+        effect:context.effects?.[0], effectFrames:!!context.effects })}`;
     UI.showOverlay(`[[icon:archive]] 开启${K.name}`, chestRewardFrameHTML({ overview:overviewHTML(), picker:opening, label:'开启宝箱' }), 'chest');
     UI.act('chestClosePicker', () => { if (isCurrentPresentation(context)) closePicker(); });
     context.surface = UI.el?.ovBody?.querySelector('[data-eps-search]');

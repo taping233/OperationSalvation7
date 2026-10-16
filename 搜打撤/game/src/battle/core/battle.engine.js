@@ -12,7 +12,7 @@ import {
   selPool, selShaN, sel, selectingDeck, selDeckMax, allies, growthNames, growth, infuseFuels,
   sealUnlocked, deathSave, killAtkUp, nestRunes, nestSyn, unyieldRune, timeRune, extraTurn,
   unlimitedRune, holyRune, armorMul, sealDone, playerCurseImmune, zeroFeeUntil, cardOverrides,
-  equipped, freeCast, activeActionSignal, surgeWaiter, lastPersistAt, snapCache,
+  equipped, freeCast, allSpellsInfused, activeActionSignal, surgeWaiter, lastPersistAt, snapCache,
   snapSig, set$noDrawNext, set$stealthStrike,
   set$nextSpellTwice, set$drawPile, set$energy, set$maxEnergy, set$shaTransform,
   set$consumeFireballN, set$deathSave, set$hand, set$extraTurn, set$delayed, set$meleeCost1,
@@ -120,7 +120,7 @@ const cardInspection = createBattleCardInspection({
     readState: () => ({
       game: G, granted, hand, consumed, discoverQueue, cardOverrides,
       unlimitedRune, zeroFeeUntil, turn, pstat, spellCost1, meleeCost1,
-      lastPlayedType, playedMartialThisTurn, playedMovesThisTurn, pdef, shaTransform,
+      lastPlayedType, playedMartialThisTurn, playedMovesThisTurn, pdef, shaTransform, allSpellsInfused,
     }),
   });
 const { findCard, findEffectiveCard, infusionFuelReason, drawOf, infuseOf, effCostOf, handCurseSpecs, queueSwapCostDiscover, swapCardCosts } = cardInspection;
@@ -534,7 +534,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // 出牌结算（目标：单点卡 = target；群体卡 = 所有存活敌人；infused = 作为注能主卡打出；
   // fuelCost = 注能牺牲品费用合计，供「N 倍于被注能卡牌价格」类效果折算；uid = 成长/容器定位）
   const resolveCard = createBattleResolution({
-    readState: () => ({ mode, playedMovesThisTurn, infuseFuels, grave }),
+    readState: () => ({ mode, playedMovesThisTurn, infuseFuels, grave, allSpellsInfused }),
     getHandSize: () => hand.length,
     getPlayerStatus: () => pstat,
     esc,
