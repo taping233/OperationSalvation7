@@ -1,56 +1,31 @@
 # -*- coding: utf-8 -*-
-"""全游戏统一画风配方 v1.3 —— 现行视觉权威见 docs/production/art/VISUAL-BIBLE.md。
+"""NAI 默认画风 v3.4：参考质量尾与通用画法减约束。
 
-【口径（2026-09-23 老板拍板，本文件为唯一权威源）】
-  一切 NAI 生图（立绘 / 卡面 / Q 版头像 / 资源卡 / 皮肤 / 背景……）一律 import 本模块，
-  禁止散抄画风文本。.tmp/nai/style_modules/official_painterly_style.py 为兼容薄壳，
-  .tmp 清理丢失时以本文件重建。历史 0919 使用 V5 full；当前 nai_gen 默认
-  nai-diffusion-4-5-full，V5 必须显式传 model；配方与模型版本分别记录，不改客户端默认。
-  现行客户端参数（与历史基线一致）：
-  steps 28 / scale 6.5 / variety_plus / k_euler_ancestral / karras / cfg_rescale 0。
+画师、画法、质量尾在本模块维护，模型与采样配置在 nai_gen。
+完整认可请求和旧配方快照见 docs/evidence/2026-10-16-nai-default-wide/。
+这套配方用于 NAI；内置生图默认重绘 v1.0 由 ART-STYLE-V1.md 独立维护。
+身份、动作、布局、光色与单图排除按任务填写，不全局继承吃饭场景。
+"""
 
-【配方来源】0919 首版选人立绘 wu-portrait-painterly-small（seed 1278087392）的画师串与风格块，
-  2026-09-23 老板指定为全游戏通用风格基准；角色专属排除项仍由单图追加。
-【修订史】旧 v1.1（painterly sketch illustration + STYLE_CONTROL 1.2）实测后回滚记录仍保留，
-  不作为当前默认；v1.2 保留画师/笔触块，v1.3 纠正用途与强制站姿。
-【结构】build_prompt(subject, scene) = 画师串 + 主体层 + 场景层 + 风格块（\n\n 分段）；
-  build_uc(extra) = 含手指异常排除的通用基线 + 角色/图片专属排除；
-  build_character_portrait_prompt() 仅为全身立绘追加安静无场景背景的构图句。"""
+RECIPE_VERSION = '3.4'
 
-RECIPE_VERSION = '1.3'
+ARTIST_BLOCK = '0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::'
 
-ARTIST_BLOCK = '1.2::miv4t::, 0.8::quasarcake::'
+QUALITY_BLOCK = 'masterpiece, best quality, very aesthetic, masterpiece, no text, rating:general'
 
-STYLE_BLOCK = (
-    'masterpiece, best quality, painterly, sketch, visible brush strokes, '
-    'loose hand-painted texture, broken edges, blocky volume modeling.\n\n'
-    'A complete illustration with the freshness of a painted sketch, not an unfinished draft. '
-    'Soft directional light reveals the planes of forms. '
-    'Build volumes from confident planes of light and shadow with visible brush edges, '
-    'while letting selected outer contours remain open. '
-    'Use broad flowing paint masses, dry uneven strokes, and crisp small highlights '
-    'appropriate to each material. '
-    'Vary the brush size and edge sharpness between different materials. '
-    'Preserve deliberate brush marks instead of smoothing every surface.'
-)
+STYLE_BLOCK = 'arknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.'
 
 PORTRAIT_SCENE_TAIL = (
-    'Use a quiet, loosely brushed background without scenery, '
+    'Use a quiet background without scenery, '
     'leaving the complete character silhouette as the focal point; preserve the specified pose.'
 )
 
-BASE_UC = (
-    'flat cel shading, smooth airbrush, no brush texture, clean closed lineart, '
-    'fully rendered polished painting, plastic texture, waxy texture, '
-    'blurry fingers, extra fingers, missing fingers, fused fingers, '
-    'text, watermark, signature, frame, collage, multiple views'
-)
-# 手指四条为老板 0919 追加指令（模糊不清、数量异常的手指），其余为老板负面词原文+通用排除。
+BASE_UC = 'lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo'
 
 
 def build_prompt(subject_layer, scene_layer=''):
-    """拼完整正向提示词：画师串 → 主体层 →（可选）场景层 → 风格块，空段自动跳过。"""
-    return '\n\n'.join(part for part in (ARTIST_BLOCK, subject_layer, scene_layer, STYLE_BLOCK) if part)
+    """主体 → 场景 → 画师 → 画法 → 质量尾；单图身份与场景不在共享块内。"""
+    return '\n\n'.join(part for part in (subject_layer, scene_layer, ARTIST_BLOCK, STYLE_BLOCK, QUALITY_BLOCK) if part)
 
 
 def build_character_portrait_prompt(subject_layer, scene_layer='', *, composition_layer=''):

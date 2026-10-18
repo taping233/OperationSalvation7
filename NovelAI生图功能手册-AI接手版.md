@@ -16,7 +16,7 @@
 | 项 | 内容 |
 |---|---|
 | Python | 3.8+/3.11 均可，依赖 `requests` `pillow` `numpy` |
-| 代理 | Clash/Mihomo `127.0.0.1:7890`，**保持 rule 模式，不要切节点（尤其不要切香港）** |
+| 代理 | 2026-10-18 已核验为 sing-box HTTP 代理 `http://127.0.0.1:12450`；执行前读取 Windows 当前代理配置并核对运行进程监听，端口与模式以实时配置为准，不擅自切节点 |
 | NAI token | 找项目所有者索取（`pst-` 开头），存为 `.tmp/nai/token.txt` 一行纯文本；脚本读第一个非 `#` 行。**pst- token 只能出图，API 查不了余额；此文件勿提交 git** |
 | 生图脚本目录 | `.tmp/nai/`（几十个批次脚本，见 §8 索引） |
 | 序列帧烘焙目录 | `.tmp/frames-bake/` |
@@ -295,7 +295,7 @@ orange scarf, smirk
 ## 9. 接手检查单（第一次干活前过一遍）
 
 1. `token.txt` 在不在？不在 → 找项目所有者要，**别猜、别试旧 token**
-2. 代理是 Clash rule 模式、端口 7890？→ 试跑一张免费小图验证链路
+2. Windows 当前代理配置与运行进程监听是否一致？2026-10-18 已核验 sing-box `http://127.0.0.1:12450`，执行前重新核对，不套用历史端口或固定模式；按任务授权验证链路。
 3. 卡面任务 → 先查现役 id（游戏内或 `game/data/cards-sync.json`），再抄 warrior_batch_0913.py 开批
 4. 新批次落地后 → 登记 `tests/card-art-coverage.test.js` 的定稿清单，跑 `npm test` 守卫
 5. 改了 `game/` 下源码 → 记得 `搜打撤/` 目录 `npm run build`（桌面版玩的是构建产物）

@@ -333,7 +333,7 @@ class GuardTests(unittest.TestCase):
                                  (EPOCH + 45, ['-x', 'http://127.0.0.1:12450'])])
         day = datetime.datetime.fromtimestamp(EPOCH).date().isoformat()
         self.assertEqual(json.loads(self.guard.usage_file.read_text(encoding='utf-8'))[day], 2)
-        self.assertEqual(nai_gen.MODEL, 'nai-diffusion-4-5-full')
+        self.assertEqual(nai_gen.MODEL, 'nai-diffusion-5-full')
 
     def test_generate_429_saves_cooldown_and_restart_never_calls_transport(self):
         out = self.directory / 'offline.png'

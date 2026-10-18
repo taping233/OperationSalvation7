@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """NAI 生图客户端 —— 全游戏生图 API 权威链路，0919 固化进 git（token 不入库）。
 
-【默认（09-24 老板定版，新 token 起）】模型 nai-diffusion-4-5-full + 免费档小图（832×1216/1344×768）；
-  V5 需显式传 model='nai-diffusion-5-full'。**大图一天限额 20 张**：长×宽超过免费档上限
+【默认（2026-10-16 老板认可横版）】模型 nai-diffusion-5-full，2048×1152；
+  CFG5.5、28步、Euler Ancestral、Karras、Rescale0、Variety+关闭。**大图一天限额 20 张**：长×宽超过免费档上限
   每次请求（含通道重试）即计一次，工具内按自然日锁定预扣、到顶拒出
   （.tmp/nai/large-usage.json；状态损坏停手核对，宁保守勿超限）。
 【通道】默认用 Python requests 直连，000 时改用当前环境的 HTTPS_PROXY/ALL_PROXY；
@@ -22,8 +22,11 @@
 用法：
     from nai_gen import generate_image
     generate_image(prompt, uc, char_prompt='...', width=832, height=1216, out='x.png')
+    # 多人：char_prompts=[{'prompt': '...', 'uc': '...', 'center': {'x': .3, 'y': .5}}, ...]
+    # 显式位置同时传 use_coords=True；场景与画风留在 prompt。见 docs/production/art/NAI-PROMPTING.md。
 """
 import json
+import math
 import os
 import random
 import subprocess
@@ -33,10 +36,11 @@ from pathlib import Path
 from nai_guard import GuardError, RequestGuard
 
 ENDPOINT = 'https://image.novelai.net/ai/generate-image'
-MODEL = 'nai-diffusion-4-5-full'   # 09-24 起默认 4.5 小图；V5 显式传 model='nai-diffusion-5-full'
-# 0919「配置拉满」口径：steps 28 顶格 + scale 6.5（官方区间上限）+ variety_plus
-DEFAULTS = dict(steps=28, scale=6.5, cfg_rescale=0.0, sampler='k_euler_ancestral',
-                noise_schedule='karras', variety_plus=True)
+MODEL = 'nai-diffusion-5-full'
+DEFAULT_WIDTH, DEFAULT_HEIGHT = 2048, 1152
+# 2026-10-16 认可请求的采样配置；默认大图仍受现行额度护栏保护。
+DEFAULTS = dict(steps=28, scale=5.5, cfg_rescale=0.0, sampler='k_euler_ancestral',
+                noise_schedule='karras', variety_plus=False)
 # 仓库根 = 代号柒/（搜打撤/tools/nai_gen.py → 搜打撤 → 代号柒；.tmp/nai 挂在仓库根）
 ROOT = Path(__file__).resolve().parents[2]
 TOKEN_FILE = ROOT / '.tmp' / 'nai' / 'token.txt'
@@ -60,11 +64,31 @@ def load_token():
     return tok
 
 
-def build_payload(prompt, uc='', char_prompt='', width=832, height=1216, seed=None, model=MODEL):
-    """按 V5 params_version=3 构造完整请求体（样例见 0919 wu-portrait json，逐字段对齐）。"""
+def build_payload(prompt, uc='', char_prompt='', width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, seed=None, model=MODEL,
+                  *, char_prompts=None, use_coords=False, vibes=None):
+    """构造 V4+ 请求；多人用 char_prompts=[{prompt, uc, center}]，旧单人调用兼容。"""
+    if char_prompts is not None and char_prompt:
+        raise ValueError('char_prompt 与 char_prompts 不能同时使用')
+    entries = [{'prompt': char_prompt}] if char_prompts is None else char_prompts
+    if not isinstance(entries, (list, tuple)):
+        raise ValueError('char_prompts 必须为列表')
+    characters = []
+    for entry in entries:
+        if not isinstance(entry, dict) or not isinstance(entry.get('prompt'), str):
+            raise ValueError('每个角色必须含字符串 prompt')
+        negative = entry.get('uc', '')
+        center = entry.get('center', {'x': 0.5, 'y': 0.5})
+        if not isinstance(negative, str) or not isinstance(center, dict):
+            raise ValueError('角色 uc 必须为字符串，center 必须为坐标对象')
+        if any(isinstance(center.get(axis), bool) or
+               not isinstance(center.get(axis), (int, float)) or
+               not math.isfinite(center[axis]) or not 0 <= center[axis] <= 1
+               for axis in ('x', 'y')):
+            raise ValueError('角色坐标必须为 0 到 1 的有限数值')
+        characters.append({'prompt': entry['prompt'], 'uc': negative,
+                           'center': {axis: center[axis] for axis in ('x', 'y')}, 'enabled': True})
     seed = seed if seed is not None else random.randint(100_000_000, 2_000_000_000)
-    center = {'x': 0.5, 'y': 0.5}
-    return {
+    body = {
         'input': prompt,
         'model': model,
         'action': 'generate',
@@ -83,46 +107,63 @@ def build_payload(prompt, uc='', char_prompt='', width=832, height=1216, seed=No
             'add_original_image': True,
             'cfg_rescale': DEFAULTS['cfg_rescale'],
             'noise_schedule': DEFAULTS['noise_schedule'],
-            'use_coords': False, 'normalize_reference_strength_multiple': True,
+            'use_coords': use_coords, 'normalize_reference_strength_multiple': True,
             'inpaintImg2ImgStrength': 1.0,
             'seed': seed,
             'negative_prompt': uc,
-            'characterPrompts': [{'prompt': char_prompt, 'uc': '', 'center': center, 'enabled': True}],
+            'characterPrompts': characters,
             'v4_prompt': {'caption': {'base_caption': prompt,
-                                      'char_captions': [{'char_caption': char_prompt, 'centers': [center]}]},
-                          'use_coords': False, 'use_order': True},
+                                      'char_captions': [{'char_caption': c['prompt'], 'centers': [c['center']]}
+                                                        for c in characters]},
+                          'use_coords': use_coords, 'use_order': True},
             'v4_negative_prompt': {'caption': {'base_caption': uc,
-                                               'char_captions': [{'char_caption': '', 'centers': [center]}]},
-                                   'use_coords': False, 'use_order': True},
+                                               'char_captions': [{'char_caption': c['uc'], 'centers': [c['center']]}
+                                                                 for c in characters]},
+                                   'use_coords': use_coords, 'use_order': True},
             'deliberate_euler_ancestral_bug': False,
             'prefer_brownian': True,
         },
     }
+    if vibes:
+        if not isinstance(vibes, (list, tuple)) or len(vibes) > 16:
+            raise ValueError('vibes 必须为不超过 16 项的列表')
+        for vibe in vibes:
+            if not isinstance(vibe, dict) or not isinstance(vibe.get('encoding'), str) or not vibe['encoding']:
+                raise ValueError('vibe 必须含非空 base64 encoding')
+            strength = vibe.get('strength')
+            if isinstance(strength, bool) or not isinstance(strength, (int, float)) or not 0 <= strength <= 1:
+                raise ValueError('vibe strength 必须在 0 到 1 之间')
+        if sum(v['strength'] for v in vibes) > 1:
+            raise ValueError('vibe 总强度须不超过 1')
+        body['parameters'].update(reference_image_multiple=[v['encoding'] for v in vibes],
+                                  reference_strength_multiple=[v['strength'] for v in vibes],
+                                  reference_information_extracted_multiple=[1.0] * len(vibes))
+    return body
 
 
-def _curl_request(payload_file, zip_file, token, channel):
+def _curl_request(payload_file, zip_file, token, channel, endpoint=ENDPOINT):
     # Argument lists preserve paths/headers literally; no shell expansion of
     # credentials or output names. Keep the existing two network channels.
     arguments = ['curl'] + channel + ['-sS', '--ssl-no-revoke', '--max-time', '240',
                  '-H', 'Authorization: Bearer ' + token, '-H', 'Content-Type: application/json',
                  '-w', '%{http_code}', '-o', str(zip_file),
-                 '--data-binary', '@' + str(payload_file), ENDPOINT]
+                 '--data-binary', '@' + str(payload_file), endpoint]
     return subprocess.run(arguments, shell=False, capture_output=True, text=True).stdout.strip()
 
 
-def _requests_request(payload_file, zip_file, token, channel):
+def _requests_request(payload_file, zip_file, token, channel, endpoint=ENDPOINT):
     """Use Python TLS so Windows sandbox curl's Schannel credentials are not required."""
     try:
         import requests
     except ImportError:
-        return _curl_request(payload_file, zip_file, token, channel)
+        return _curl_request(payload_file, zip_file, token, channel, endpoint)
     proxy_options = {} if channel[0] == '--noproxy' else {
         'proxies': {'https': channel[1]}}
     with requests.Session() as session:
         session.trust_env = False
         try:
             response = session.post(
-                ENDPOINT, data=payload_file.read_bytes(),
+                endpoint, data=payload_file.read_bytes(),
                 headers={'Authorization': 'Bearer ' + token,
                          'Content-Type': 'application/json'},
                 timeout=120, **proxy_options,
@@ -134,14 +175,15 @@ def _requests_request(payload_file, zip_file, token, channel):
     return str(response.status_code)
 
 
-def generate_image(prompt, uc='', char_prompt='', width=832, height=1216, seed=None, out='nai-out.png', model=MODEL,
-                   *, guard=None, transport=None, token=None):
+def generate_image(prompt, uc='', char_prompt='', width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, seed=None, out='nai-out.png', model=MODEL,
+                   *, guard=None, transport=None, token=None, char_prompts=None, use_coords=False, vibes=None):
     """构造 payload → 请求生成 → 解 ZIP 首条目存 PNG → PIL 校验尺寸。返回 (out, seed)。"""
     from PIL import Image
 
     out = Path(out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    body = build_payload(prompt, uc, char_prompt, width, height, seed, model)
+    body = build_payload(prompt, uc, char_prompt, width, height, seed, model,
+                         char_prompts=char_prompts, use_coords=use_coords, vibes=vibes)
     seed = body['parameters']['seed']
 
     # 直连失败后使用本进程已配置的代理，避免沿用失效的固定端口。

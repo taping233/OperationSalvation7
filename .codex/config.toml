@@ -1,8 +1,14 @@
+default_permissions = "project-network"
+
 # Project-only skill filtering. Files remain installed; other projects retain these skills.
 # Include the global duplicate exclusions because project arrays override user arrays.
 
 # Superseded 2026-09-27: all 26 exclusions are now in user config.
 # No project skill overrides remain; re-enable skills in the user config only.
 
-[sandbox_workspace_write]
-network_access = true
+[permissions.project-network]
+description = "Project workspace editing with network access."
+extends = ":workspace"
+
+[permissions.project-network.network]
+enabled = true
