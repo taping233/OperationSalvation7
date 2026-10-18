@@ -78,7 +78,7 @@ describe('安全格珍珠盒直接存取', () => {
     expect(game.ownedCards.find(o => o.card.id === key.id).safe).toBeUndefined();
     expect(game.ownedCards.map(o => o.uid)).toEqual(beforeUids);
     expect(game.canReceiveCard(ordinary)).toBe(false);
-    expect(document.querySelector('.pearl-store [role="status"]').textContent).toContain('2/9');
+    expect(document.querySelector('.pearl-store [role="status"]').textContent.replace(/\s/g, '')).toContain('2/9');
   });
 
   it.each(['button', 'Esc'])('%s关闭只回原安全格tab，不关闭背包或改变保护归属', method => {

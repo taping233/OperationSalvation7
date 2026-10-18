@@ -1,3 +1,4 @@
+import { patchBackpackPane } from './bag-pane-view.js';
 import { containerStoreHTML, restoreContainerFocus } from './game.container-store.view.js';
 import { stackTransferSlotDelta } from '../core/card-capacity.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
@@ -737,7 +738,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
         <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
       back: () => { if (helpCurrent() && game.ownedCards === helpCards && UI.el.ovBody?.querySelector('.help-body')) showBackpack(true); },
     });
-    UI.showOverlay('[[icon:bag]] 背包', bagV2PageHTML({
+    const markup = bagV2PageHTML({
       bagZone, bagFilter, bagSortKey,
       cap, baseCap, pearlStoredN:game.ownedCards.filter(o => o.stored && !o.pouchOf).length, capacityText:game.bagCapacityText?.() || '', total, safeUsedN, sCap, pkN,
       petName: SDT.Base.carriedPet?.()?.name || '随行伙伴', receipt: bagReceipt?.cards === game.ownedCards ? bagReceipt.text : '',
@@ -745,7 +746,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       bagCardN:bagStacks.reduce((n, st) => n + st.count, 0), safeCardN:safeStacks.reduce((n, st) => n + st.count, 0),
       supplyN:game.inventory.reduce((n, item) => n + (item.count || 1), 0),
       tiles: bagZoneTiles(bagStacks, safeStacks),
-    }), 'bagpage');
+    });
+    if (!patchBackpackPane(UI, SDT, markup, bagZone, refreshOnly)) UI.showOverlay('[[icon:bag]] 背包', markup, 'bagpage');
     // 分区 / 筛选 / 排序 / 点选详情：格子打开独立全文阅读与操作区，
     // inspectStack 契约与原有卡面特写返回路径不变。
     bagAct('bagZone', d => {

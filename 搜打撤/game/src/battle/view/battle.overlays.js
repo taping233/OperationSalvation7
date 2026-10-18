@@ -52,6 +52,20 @@ function installPileInspection(stacks) {
     const boss = deckSelection.boss;
     const affix = boss && boss.affix ? AFFIX_META[boss.affix] : null;
     const ready = selected.length >= need;
+    const mounted = UI.el.ovBody.querySelector('[data-decision-kind="formation"]');
+    const poolKey = JSON.stringify(deckSelection.cards.map(entry => [entry.uid, entry.card]));
+    if (mounted?._battleToken === snapshot.battleToken && mounted._formationPoolKey === poolKey) {
+      for (const button of mounted.querySelectorAll('[data-act="bossSel"]')) {
+        const on = selected.includes(button.dataset.uid);
+        button.classList.toggle('sel', on);
+        button.setAttribute('aria-pressed', String(on));
+      }
+      mounted.querySelector('.boss-formation-progress strong').innerHTML = `${selected.length}<small> / ${need}</small>`;
+      const confirm = mounted.querySelector('[data-act="bossGo"]');
+      confirm.disabled = !ready;
+      confirm.textContent = ready ? `开始战斗（牌库 ${selected.length + deckSelection.starterCount} 张）` : `还需选择 ${need - selected.length} 张…`;
+      return;
+    }
     showBattleDecision('[[icon:demon]] BOSS战 · 编组牌库', `
       <div class="ov-stats boss-formation-summary"><div><span class="boss-formation-kicker">本局首脑</span><b>${esc(boss && boss.name || '???')}</b><span>${boss ? `攻击 ${boss.atk} · 生命 ${boss.maxHp || boss.hp}` : '属性未知'}</span></div><div class="boss-formation-progress"><strong>${selected.length}<small> / ${need}</small></strong><span>已编入${deckSelection.max > deckSelection.need ? ` · 上限 ${deckSelection.max}` : ''}</span></div></div>
       ${affix ? `<p class="boss-formation-affix"><b>${affix.icon} ${esc(affix.name)}</b><span>${esc(affix.desc)}</span></p>` : ''}
@@ -65,6 +79,8 @@ function installPileInspection(stacks) {
         <button class="ov-btn" data-act="bossCancel">↩ 放弃挑战</button>
       </div>`, true, snapshot);
     UI.act('bossSel', data => selectDeckCard(data.uid));
+    const formation = UI.el.ovBody.querySelector('[data-decision-kind="formation"]');
+    if (formation) formation._formationPoolKey = poolKey;
     UI.act('bossGo', confirmDeck);
     UI.act('bossCancel', cancelDeck);
     UI.refresh(SDT.game);

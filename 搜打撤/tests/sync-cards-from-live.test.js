@@ -27,6 +27,14 @@ describe('sync-cards-from-live 源码有效卡库（六文件沙箱）', () => {
     ).toBe(true);
   });
 
+  it('同步沙箱执行腐化之种修订，保留单体标记和死亡群体真伤规则', () => {
+    const card = sourceCardLibrary().find(c => c.id === 'cc-rot-seed');
+    expect(card).toBeDefined();
+    expect(card.desc).toMatch(/对所有敌人造成.*真实伤害/);
+    expect(card.desc).not.toContain('中毒层数转移');
+    expect(card.rules.battle.target).toEqual({ side:'enemy', area:false });
+    expect(card.rules.battle.hosted).toContain('rot-seed');
+  });
   it('diff 对齐口径：完全一致的输入零差异', () => {
     const lib = sourceCardLibrary();
     const { upserts, changed, retire } = diff(lib, lib);

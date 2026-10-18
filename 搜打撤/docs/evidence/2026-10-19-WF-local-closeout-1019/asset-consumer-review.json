@@ -1,0 +1,82 @@
+{
+  "reviewed_changes": [
+    {
+      "path": "game/src/audio/sfx-audition.js",
+      "previous_sha256": [
+        "e2a5dbbfc72747a51f1023a70bccd4f8ed33785126e0433a2ab2473881bdebdc"
+      ],
+      "reviewed_sha256": "0d6dd150075b4a5204d3786d6ce31f4ab124c26ad145f399501796dad8fbc60f",
+      "slots": 1
+    },
+    {
+      "path": "game/src/audio/sound.js",
+      "previous_sha256": [
+        "46007097da42f3084068fb28e8b21f9ddfc23fef41631f1776c409ed359708db"
+      ],
+      "reviewed_sha256": "7a6fbb71985cdae7285b8c33a02c0041e2f4af4f6c7b8d01b91ee3cbc0db6d08",
+      "slots": 1
+    },
+    {
+      "path": "game/src/audio/sound.samples.catalog.js",
+      "previous_sha256": [
+        "a7ecef3349db16ce67f51e06a97bb6d2cf18dd789127ce9ba501418c36ae2f10"
+      ],
+      "reviewed_sha256": "37225368ded0124bb43f50ddf164ca71babe04444439d1573fd374996dc6e850",
+      "slots": 1
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "previous_sha256": [
+        "0f6a16665c20d6791e36a4506d32d7d107d3bec91d88560fcc9391ee7807a082"
+      ],
+      "reviewed_sha256": "0f28d76e3183d94026d1d911ff7d014fa7c316a3b8ef21fcb36ad366d35c6557",
+      "slots": 1
+    },
+    {
+      "path": "game/src/core/art.js",
+      "previous_sha256": [
+        "8ee6b16a36ff4146707092e76ef143404bfe9e7c7c6f48dd47a00af5d6571ad6"
+      ],
+      "reviewed_sha256": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
+      "slots": 5
+    },
+    {
+      "path": "game/src/hub/game.bag.view2.js",
+      "previous_sha256": [
+        "d370d6f68772085c6b3b83ddcfaf961bcbb82c5e246aa1f9b29beba263c8cba1"
+      ],
+      "reviewed_sha256": "f619c9b5dac841c328fd05e88b9f6aec17801f5aa8b57ed5beb498820c27d49e",
+      "slots": 1
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "previous": [
+        "e8518681de2cf1b7d645e8a3a18f58777accf78ce7c74757e4913498ad04d972",
+        "e8518681de2cf1b7d645e8a3a18f58777accf78ce7c74757e4913498ad04d972"
+      ],
+      "reviewed_sha256": "6c64654a7ad881b99cda0c15231361ca53ebc9affc740e5d44c041c61238bd2f"
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "previous": [
+        "10003215188193039a42a8a6d026729a439b10a359400c7d17ba13f0ee0cd758"
+      ],
+      "reviewed_sha256": "037c34da347c73f933fb216b2aa8da8942ed18b7e50f666f1986afa8b7bbebb1"
+    },
+    {
+      "path": "game/src/core/renderer.js",
+      "previous": [
+        "2340256b7775262fa191d247518a85c0fdd2cd05e2d7cc75ddeb599d55c66f18"
+      ],
+      "reviewed_sha256": "cd25fc496afb26b3574ab3204d271d66bf49168f02f833a3b011a5fc31e1ba34"
+    }
+  ],
+  "new_consumer": {
+    "path": "game/src/audio/sfx-review.js",
+    "sha256": "2d7d38a1a9d6248e2cb7a8cffb28b0b118dfda587f4401b1cd019397c938b927",
+    "path_dependency": "game/src/audio/sound.samples.catalog.js"
+  },
+  "review_scope": "Reviewed HEAD-to-worktree diffs: named SFX mute/navigation suppression; audition uses registered library JSON and handles silent variants; new review playback loads only selected SAMPLE_CUES.files via assetUrl; rot-seed chip is presentation only; art adds only drum-room skin; bag markup changes layout/price, retaining asset fallback selection.",
+  "unchanged_protections": "Candidate omission lists and bytes unchanged. Mutation/missing-source guards retained. Sound and review UIs pin the exact catalogue dependency. No assets deleted, debt baselines or gate thresholds changed.",
+  "additional_review": "Full diffs reviewed: chests changes choice/receipt labels only; scenes changes immediate transition close and 650ms duration only; renderer removes unseen fog silhouettes/links using existing seen set. No asset construction/fallback paths changed."
+}

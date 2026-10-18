@@ -7,7 +7,7 @@ import { spawnSync } from 'node:child_process';
 
 const require = createRequire(import.meta.url);
 const { createHash } = require('node:crypto');
-const { auditAssets, canonicalAssetBytes, canonicalPath, inspectAssets, selectedAssetPaths } = require('../scripts/asset-audit-lib.cjs');
+const { auditAssets, auditSelectedAssets, canonicalAssetBytes, canonicalPath, inspectAssets, selectedAssetPaths } = require('../scripts/asset-audit-lib.cjs');
 
 function fixture(entries = [{ path: 'old.png', ext: 'png', bytes: 3, license: 'CC0' }], files = { 'old.png': 'old' }) {
   const root = mkdtempSync(path.join(tmpdir(), 'asset-audit-test-'));
@@ -26,6 +26,20 @@ function fixture(entries = [{ path: 'old.png', ext: 'png', bytes: 3, license: 'C
 }
 
 describe('incremental asset registration gate', () => {
+  it('reports selected success separately without weakening the global new-debt gate', () => {
+    const { root } = fixture([], { 'target.webp': 'target' });
+    writeFileSync(path.join(root, 'game/assets/other.webp'), 'unrelated new debt');
+    const result = auditSelectedAssets({ root, paths: ['game/assets/target.webp'] });
+    expect(result.ok).toBe(false); // Selected historical unlisted debt is still an error.
+    expect(result.errors.map(item => item.path)).toEqual(['target.webp']);
+    expect(result.global.errorCount).toBe(2);
+    expect(auditAssets({ root }).ok).toBe(false);
+  });
+  it('rejects empty and nonexistent selected scopes', () => {
+    const { root } = fixture([], {});
+    expect(() => auditSelectedAssets({ root, paths: [] })).toThrow();
+    expect(auditSelectedAssets({ root, paths: ['game/assets/missing.webp'] }).errors[0].code).toBe('selected-missing');
+  });
   it('warns for unchanged frozen debt without accepting new unregistered assets', () => {
     const { root } = fixture([], { 'old.png': 'old' });
     expect(auditAssets({ root }).warnings.map(item => item.code)).toEqual(['unlisted']);
@@ -120,10 +134,11 @@ describe('incremental asset registration gate', () => {
     expect(auditAssets({ root, paths: ['game/assets/icon.svg'] }).ok).toBe(true);
   });
   it.skipIf(Boolean(process.env.SDT_STAGED_SNAPSHOT))('runs the repository CLI without a build or document writes and rejects bad arguments', () => {
-    const debtPath = path.resolve('docs/asset-audit-debt.json');
+    const { root } = fixture([], {});
+    const debtPath = path.join(root, 'docs/asset-audit-debt.json');
     const before = readFileSync(debtPath, 'utf8');
     const command = path.resolve('scripts/asset-audit.cjs');
-    const result = spawnSync(process.execPath, [command, '--check', '--paths-json', '[]'], { encoding: 'utf8' });
+    const result = spawnSync(process.execPath, [command, '--root', root, '--check', '--paths-json', '[]'], { encoding: 'utf8' });
     expect(result.status, result.stderr).toBe(0);
     expect(result.stdout).toContain('0 errors');
     expect(result.stdout).not.toContain('Packaged game');

@@ -237,6 +237,9 @@ const FIGURE_FULL_ART = Object.freeze({
 });
 // 皮肤立绘（2026-09-19 老板令）：角色 id → 备选皮肤立绘。
 const SKIN_FULL_ART = Object.freeze({
+  changwuyu: Object.freeze([
+    { id: 'drum-room', name: '余响·鼓房', file: 'portraits/full/changwuyu-drum-room.webp' },
+  ]),
   wu: Object.freeze([
     { id: 'casual', name: '春日·机车', file: 'portraits/full/wu-casual-v14.webp' },
     { id: 'spring', name: '新春·旗袍', file: 'portraits/full/wu-spring-v15.webp' },

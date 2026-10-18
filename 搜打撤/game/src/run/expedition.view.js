@@ -115,10 +115,11 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
     const pocket = (game.usedPocket || []).reduce((n, item) => n + (item.count || 0), 0);
     const disabled = game.state !== 'idle';
     const toolbarKey = `${used}:${cap}:${safe}:${safeCap}:${pocket}:${disabled}`;
+    const capacityState = used >= cap ? 'full' : used / Math.max(1, cap) >= .75 ? 'tight' : used ? 'ready' : 'empty';
     if (summary.dataset.toolbarKey !== toolbarKey) {
       summary.dataset.toolbarKey = toolbarKey;
       summary.innerHTML = `<nav class="expedition-toolbar" aria-label="远征工具">
-        <button data-expedition-tool="bag" aria-label="背包：携带卡牌 ${used}/${cap}" ${disabled ? 'disabled' : ''}>${iconHTML('bag')}<span>背包</span><strong>${used}<small>/${cap}</small></strong><kbd>B</kbd></button>
+        <button data-expedition-tool="bag" data-capacity-state="${capacityState}" style="--bag-fill:${Math.min(100, used / Math.max(1, cap) * 100)}%" aria-label="背包：占格 ${used}/${cap}，${capacityState === 'full' ? '已满' : `余 ${Math.max(0, cap - used)} 格`}" ${disabled ? 'disabled' : ''}>${iconHTML('bag')}<span>背包</span><strong>${used}<small>/${cap}</small></strong><kbd>B</kbd><span class="expedition-bag-status">${capacityState === 'full' ? '已满' : `余 ${Math.max(0, cap - used)} 格`}</span></button>
         <button data-expedition-tool="safe" aria-label="安全格：保护物资 ${safe}/${safeCap}" ${disabled ? 'disabled' : ''}>${iconHTML('lock')}<span>安全格</span><strong>${safe}<small>/${safeCap}</small></strong></button>
         <button data-expedition-tool="pocket" aria-label="消耗区：已消耗卡牌 ${pocket}" ${disabled ? 'disabled' : ''}>${iconHTML('cards')}<span>消耗区</span><strong>${pocket}</strong></button>
         <span class="expedition-toolbar-space"></span>

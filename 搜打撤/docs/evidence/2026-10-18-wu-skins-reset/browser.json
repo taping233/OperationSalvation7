@@ -1,0 +1,61 @@
+{
+  "url": "http://localhost:5200/",
+  "input": "Codex内置浏览器当前窗口，真实点击进入城市、档位01、配置、外观并依次预览；未点击应用外观",
+  "items": [
+    {
+      "id": "casual",
+      "images": [
+        {
+          "box": [
+            838,
+            645
+          ],
+          "complete": true,
+          "fit": "cover",
+          "natural": [
+            1430,
+            1100
+          ],
+          "src": "http://localhost:5200/assets/portraits/full/wu-casual-v14.webp?v=0.60.0"
+        }
+      ]
+    },
+    {
+      "id": "spring",
+      "images": [
+        {
+          "box": [
+            838,
+            645
+          ],
+          "complete": true,
+          "fit": "cover",
+          "natural": [
+            1422,
+            1106
+          ],
+          "src": "http://localhost:5200/assets/portraits/full/wu-spring-v15.webp?v=0.60.0"
+        }
+      ]
+    },
+    {
+      "id": "beach",
+      "images": [
+        {
+          "box": [
+            838,
+            645
+          ],
+          "complete": true,
+          "fit": "cover",
+          "natural": [
+            1422,
+            1106
+          ],
+          "src": "http://localhost:5200/assets/portraits/full/wu-beach.webp?v=0.60.0"
+        }
+      ]
+    }
+  ],
+  "consoleErrors": []
+}

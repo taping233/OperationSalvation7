@@ -1,4 +1,5 @@
 import { FEEDBACK_TIMING, quietFeedback } from './feedback-theme.js';
+import { rewardRarity, hasRareReveal } from './rarity-reveal.js';
 
 // Settled events only: this queue never returns a battle wait or mutates a card.
 const states = new Map();
@@ -88,10 +89,13 @@ function present(state, item, lane) {
   node.style.cssText = `left:${x - layout.width / 2}px;top:${y - layout.height / 2}px`;
   const face = document.createElement('div'); face.className = 'bt-card-reveal-face';
   const card = event.card || window.SDT?.Cards?.all?.().find(card => card.name === event.name);
+  const rarity = rewardRarity(card);
+  const rare = hasRareReveal(rarity) && (event.kind === 'bag' || event.kind === 'draw' && event.acquired);
+  if (rare) { node.dataset.rarity = rarity; node.dataset.rareReveal = 'true'; }
   if (card && window.SDT?.Cards?.cardHTML) face.innerHTML = window.SDT.Cards.cardHTML(card, 'sm');
   else { const name = document.createElement('b'); name.textContent = event.name; face.append(name); }
   const caption = document.createElement('span'); caption.className = 'bt-card-reveal-caption';
-  caption.textContent = `${labelFor(event)}${count > 1 ? ` ×${count}` : ''}${event.targetName ? ` → ${event.targetName}` : ''}`;
+  caption.textContent = `${rare ? `${rarity} · ` : ''}${labelFor(event)}${count > 1 ? ` ×${count}` : ''}${event.targetName ? ` → ${event.targetName}` : ''}`;
   node.append(face, caption); state.layer.append(node);
   for (const element of node.querySelectorAll('[tabindex],button,a,input')) element.setAttribute('tabindex','-1');
   node.inert = true;
@@ -113,7 +117,7 @@ function present(state, item, lane) {
       later(state, () => ring.remove(), 620);
     } else if (!quiet) animate(state, node, [{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-24px) scale(.9)'}], {duration:260,fill:'forwards'});
     later(state, () => { node.remove(); state.active--; pump(state); }, quiet ? 200 : 380);
-  }, quiet ? 700 : FEEDBACK_TIMING.hold);
+  }, quiet ? 700 : rare ? 1150 : FEEDBACK_TIMING.hold);
 }
 function pump(state) {
   while (state.active < 2 && state.queue.length) {

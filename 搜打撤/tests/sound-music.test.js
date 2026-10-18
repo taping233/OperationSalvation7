@@ -42,7 +42,7 @@ describe('scene BGM crossfades', () => {
     expect(tracks.get('title').load).toHaveBeenCalledTimes(1);
     expect(tracks.get('title').play).not.toHaveBeenCalled();
     tracks.get('title').ready();
-    expect(tracks.get('title').fade).toHaveBeenLastCalledWith(0, 0.12, 650);
+    expect(tracks.get('title').fade).toHaveBeenLastCalledWith(0, 0.12, 1100);
     expect(tracks.get('title').muted()).toBe(false);
   });
 
@@ -53,10 +53,10 @@ describe('scene BGM crossfades', () => {
     expect(tracks.get('board').playing()).toBe(true);
     expect(tracks.get('board').fade).toHaveBeenCalledTimes(1);
     tracks.get('shop').ready();
-    expect(tracks.get('board').fade).toHaveBeenLastCalledWith(0.12, 0, 500);
+    expect(tracks.get('board').fade).toHaveBeenLastCalledWith(0.12, 0, 900);
     expect(tracks.get('board').muted()).toBe(false);
-    expect(tracks.get('shop').fade).toHaveBeenLastCalledWith(0, 0.12, 650);
-    vi.advanceTimersByTime(532);
+    expect(tracks.get('shop').fade).toHaveBeenLastCalledWith(0, 0.12, 1100);
+    vi.advanceTimersByTime(932);
     expect(tracks.get('board').unload).toHaveBeenCalledOnce();
     expect(player.snapshot().current).toBe('shop');
     expect(player.snapshot().tracks).toHaveLength(1);
@@ -69,7 +69,7 @@ describe('scene BGM crossfades', () => {
     vi.advanceTimersByTime(180);
     tracks.get('board').volume(0.06);
     set('board');
-    expect(tracks.get('board').fade).toHaveBeenLastCalledWith(0.06, 0.12, 650);
+    expect(tracks.get('board').fade).toHaveBeenLastCalledWith(0.06, 0.12, 1100);
     vi.advanceTimersByTime(1000);
     expect(tracks.get('board').pause).not.toHaveBeenCalled();
     expect(tracks.get('board').play).toHaveBeenCalledTimes(1);
@@ -105,7 +105,7 @@ describe('scene BGM crossfades', () => {
     expect(previous.play).toHaveBeenCalledTimes(1);
     expect(resumed.play).not.toHaveBeenCalled();
     resumed.ready();
-    expect(resumed.fade).toHaveBeenLastCalledWith(0, 0.12, 650);
+    expect(resumed.fade).toHaveBeenLastCalledWith(0, 0.12, 1100);
   });
 
   it('retains a valid old track if the next asset fails and never starts it on a late muted load', () => {

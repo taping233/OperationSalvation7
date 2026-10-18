@@ -1,0 +1,36 @@
+{
+  "video": "output\\ost-snow-road-1018\\代号柒_霜窗回声_OST_1080p.mp4",
+  "bytes": 55845759,
+  "sha256": "7cada9cc154d7ee34a7295845643a886813078f9af106d413b4a566b3f7823a7",
+  "duration_seconds": 91.4285625,
+  "frames": 2743,
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "render_seconds": 169.3,
+  "inputs": [
+    {
+      "path": "搜打撤\\game\\assets\\reconstruction\\wallpaper-snow-road-1016.webp",
+      "sha256": "6595b1ca0f0c84ca438da2688501d1f0a0886e297fa16b6bf7c98cd2302407ef"
+    },
+    {
+      "path": "搜打撤\\game\\assets\\music-demo\\01-title-frostglass-v12.ogg",
+      "sha256": "1080484e7d1747339a145b247ce523f0776770e7c1e74398fe5b398a9f07309a"
+    }
+  ],
+  "design": [
+    "single-source slow camera drift",
+    "three-depth snow",
+    "76 FFT-driven spectral bars",
+    "Chinese/English track typography",
+    "elapsed time and progress",
+    "intro/outro fades"
+  ],
+  "references": [
+    "https://www.youtube.com/watch?v=Yy_E2_3YNh0",
+    "https://www.youtube.com/watch?v=J9wcfTVUZNE"
+  ],
+  "acquisition": "Run python docs/evidence/2026-10-18-ost-snow-road/render_ost.py --render from 搜打撤; uses existing local FFmpeg/Pillow/numpy. No downloaded third-party assets."
+}

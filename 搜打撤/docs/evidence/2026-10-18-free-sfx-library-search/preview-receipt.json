@@ -1,0 +1,102 @@
+{
+  "source": "Chequered Ink 400 Sounds Pack",
+  "source_url": "https://ci.itch.io/400-sounds-pack",
+  "processing": "attenuation only; full source durations; 650ms separators; no EQ/pitch change",
+  "game_modified": false,
+  "tests_run": false,
+  "listening_verified": false,
+  "previews": [
+    {
+      "preview": "01-ui-and-items.mp3",
+      "sha256": "ea53ffee65ab2f50764f0f5668710b6c680009495625c370f013de52515114fc",
+      "timeline": [
+        {
+          "label": "科幻选择",
+          "source_relative": "UI/sci_fi_select.wav",
+          "start": 0.0,
+          "duration": 1.558875,
+          "gain": 0.5692953593249168,
+          "source_sha256": "bf16028b9698a64c37ddff469f5e5e7ecd150872a717a3a4bcac090d28477eb9"
+        },
+        {
+          "label": "科幻确认",
+          "source_relative": "UI/sci_fi_confirm.wav",
+          "start": 2.208875,
+          "duration": 1.4950208333333332,
+          "gain": 0.4440974570267468,
+          "source_sha256": "d7a5a42162d4a4b1141ff33205fe75f009d2a6dfac0a270a817fcc8ead544884"
+        },
+        {
+          "label": "系统完成",
+          "source_relative": "UI/synth_process_complete.wav",
+          "start": 4.3538958333333335,
+          "duration": 2.2642083333333334,
+          "gain": 1,
+          "source_sha256": "93dc6ce1303eb275690eb88947e066a6ec24cafcb7adad3b284febb91b4be41a"
+        },
+        {
+          "label": "获得物品",
+          "source_relative": "Items/gem_collect.wav",
+          "start": 7.268104166666666,
+          "duration": 1.6836666666666666,
+          "gain": 0.6799116968645335,
+          "source_sha256": "a8a78ba732a0986d6923dadbdf4f6112fbe4987a2a4311b80955e7652fdafd48"
+        }
+      ]
+    },
+    {
+      "preview": "02-card-and-combat.mp3",
+      "sha256": "cff67e19120483d8b9ee10810ed72bb3b463e74914dca4cb1cb3bb54888f88e5",
+      "timeline": [
+        {
+          "label": "抽牌",
+          "source_relative": "Card and Board/card_draw_2.wav",
+          "start": 0.0,
+          "duration": 0.23220833333333332,
+          "gain": 0.16157560764484843,
+          "source_sha256": "157998d6098a422027b3c397d2bad153dd2fa81c5fcec35956e4197e9676ebc4"
+        },
+        {
+          "label": "展牌",
+          "source_relative": "Card and Board/card_fan.wav",
+          "start": 0.8822083333333334,
+          "duration": 0.39475,
+          "gain": 0.15952663312389567,
+          "source_sha256": "1890b6b187126f5f240b7a80998a445fef3d4d65a48eb7fae480aedabe34ade6"
+        },
+        {
+          "label": "轻斩",
+          "source_relative": "Weapons/sword_light.wav",
+          "start": 1.9269583333333333,
+          "duration": 0.35991666666666666,
+          "gain": 0.1212861569743289,
+          "source_sha256": "35ac3f7454c9aee940a083ff1c29ca503f78e26e750c9cd54ff03659179cc791"
+        },
+        {
+          "label": "挥斩",
+          "source_relative": "Weapons/sword_slice.wav",
+          "start": 2.936875,
+          "duration": 0.7662708333333333,
+          "gain": 0.145013260168069,
+          "source_sha256": "a38188b702a7e08ca386cd5c995e5231e9e650f841100415b781a86ffd1ac7d5"
+        },
+        {
+          "label": "格挡",
+          "source_relative": "Weapons/sword_clash_2.wav",
+          "start": 4.3531458333333335,
+          "duration": 0.2670416666666667,
+          "gain": 0.1177143029087134,
+          "source_sha256": "57d075a4aa3f50d2c27257cc179691798ffbb78c1e088351e22ebd6432c6f5b8"
+        },
+        {
+          "label": "钝击",
+          "source_relative": "Combat and Gore/punch_2.wav",
+          "start": 5.2701875,
+          "duration": 0.17979166666666666,
+          "gain": 0.15852373159619812,
+          "source_sha256": "5822120fc14bb41ceef5d0433a9e105409c4b3d2f0b40180287e7ba432fe6048"
+        }
+      ]
+    }
+  ]
+}

@@ -8,13 +8,12 @@ vi.mock('../game/src/run/game.session.js', () => ({ MAP: { rules: { safeStart: 2
 vi.mock('../game/src/hub/collection.commands.js', () => ({ getCharacter: (_data, id) => owned.get(id) }));
 
 import { CHARACTERS } from '../game/src/core/characters.js';
-import { assetUrl } from '../game/src/core/asset-url.js';
 import { personnelHTML, bindPersonnel, setPersonnelGroup, setPersonnelSection } from '../game/src/hub/hub.personnel.js';
 import { presentHub } from '../game/src/hub/hub.presentation.js';
 
 let slot = 0;
 let skinUrl;
-const cutoutUrl = assetUrl('assets/portraits/personnel/wu-default-cutout-v1.webp');
+const defaultUrl = '/original/侠客/default.webp';
 beforeEach(() => {
   owned.clear();
   for (const character of CHARACTERS) owned.set(character.id, { selectedSkinId: 'default', availableSkinIds: character.id === 'wu' ? ['default', 'casual', 'spring', 'beach'] : ['default'] });
@@ -35,16 +34,16 @@ function render(id = 'wu') {
   return document.querySelector('.pv12-agent-image-stage img');
 }
 
-describe('configuration-only default portrait override', () => {
-  it('uses the versioned transparent Wu main image and its own visible bounds', () => {
+describe('shared default portraits in personnel', () => {
+  it('uses the same default Wu source as the roster without legacy crop bounds', () => {
     const image = render();
-    expect(image.getAttribute('src')).toBe(cutoutUrl);
-    expect(image.dataset.portraitFit).toBe('body');
-    expect(image.closest('.pv12-agent-art').dataset.portraitAlpha).toBe('true');
-    expect(image.style.getPropertyValue('--portrait-center')).toBe('-58.544922%');
-    expect(image.style.getPropertyValue('--portrait-height')).toBe((.92 * 1536 / 1519).toFixed(6));
+    expect(image.getAttribute('src')).toBe(defaultUrl);
+    expect(image.dataset.portraitFit).toBe('canvas');
+    expect(image.closest('.pv12-agent-art').dataset.portraitAlpha).toBe('false');
+    expect(image.style.getPropertyValue('--portrait-center')).toBe('');
+    expect(image.style.getPropertyValue('--portrait-height')).toBe('');
     expect(document.querySelector('.pv12-agent-avatar img').getAttribute('src')).toBe('/avatar/wu.webp');
-    expect(skinUrl).not.toHaveBeenCalled();
+    expect(skinUrl).toHaveBeenCalledWith('侠客', 'default');
   });
 
   it('keeps all four companion default portraits on their existing art URLs', () => {
@@ -74,31 +73,25 @@ describe('configuration-only default portrait override', () => {
     expect(document.querySelector('.pv12-agent-image-stage img').getAttribute('src')).toBe('/original/侠客/casual.webp');
     expect(document.querySelector('.pv12-agent-art').dataset.portraitAlpha).toBe('false');
     actions.get('personPreviewSkin')({ character: 'wu', skin: 'default' });
-    expect(document.querySelector('.pv12-agent-image-stage img').getAttribute('src')).toBe(cutoutUrl);
-    expect(document.querySelector('.pv12-agent-art').dataset.portraitAlpha).toBe('true');
+    expect(document.querySelector('.pv12-agent-image-stage img').getAttribute('src')).toBe(defaultUrl);
+    expect(document.querySelector('.pv12-agent-art').dataset.portraitAlpha).toBe('false');
     expect(JSON.stringify(owned.get('wu'))).toBe(before);
   });
 
-  it('scopes transparent-stage and normal blending overrides to the alpha portrait marker', () => {
+  it('uses white backing and normal blending only for default portraits', () => {
     const rules = [];
     postcss.parse(readFileSync('game/css/base-personnel-v12.css', 'utf8')).walkRules(rule => {
-      if (rule.selector.includes('[data-portrait-alpha="true"]')) rules.push(rule);
+      if (rule.selector.includes('[data-skin="default"]')) rules.push(rule);
     });
-    expect(rules).toHaveLength(2);
-    const stageRule = rules.find(rule => !rule.selector.endsWith('> img'));
-    const imageRule = rules.find(rule => rule.selector.endsWith('> img'));
-    const values = rule => Object.fromEntries(rule.nodes.map(node => [node.prop, node.value]));
-    expect(values(stageRule)).toMatchObject({ background: 'transparent', 'border-color': 'transparent', 'box-shadow': 'none' });
-    expect(values(imageRule)['mix-blend-mode']).toBe('normal');
-    // Match the real selector, including the specificity that beats feedback-oct12.css.
+    const values = rule => Object.fromEntries(rule.nodes.filter(node => node.type === 'decl').map(node => [node.prop, node.value]));
+    expect(rules.some(rule => values(rule).background === '#fff')).toBe(true);
+    expect(rules.some(rule => values(rule)['mix-blend-mode'] === 'normal')).toBe(true);
+    const stageRule = rules.find(rule => values(rule).background === '#fff');
     document.body.innerHTML = `<div id="overlay"><div id="hubMain" class="base-frame-v7">${personnelHTML('wu')}</div></div>`;
     expect(document.querySelector('.pv12-agent-image-stage').matches(stageRule.selector)).toBe(true);
-    expect(document.querySelector('.pv12-agent-image-stage img').matches(imageRule.selector)).toBe(true);
-    for (const character of CHARACTERS.filter(item => item.id !== 'wu')) {
-      document.querySelector('#hubMain').innerHTML = personnelHTML(character.id);
-      expect(document.querySelector('.pv12-agent-image-stage').matches(stageRule.selector)).toBe(false);
-      expect(document.querySelector('.pv12-agent-image-stage img').matches(imageRule.selector)).toBe(false);
-    }
+    owned.get('wu').selectedSkinId = 'casual';
+    document.querySelector('#hubMain').innerHTML = personnelHTML('wu');
+    expect(document.querySelector('.pv12-agent-image-stage').matches(stageRule.selector)).toBe(false);
   });
 
   it('updates the retained hero alpha marker together with its decoded image through presentHub', async () => {
@@ -118,8 +111,8 @@ describe('configuration-only default portrait override', () => {
 
     owned.get('wu').selectedSkinId = 'casual';
     show('wu');
-    expect(hero.dataset.portraitAlpha).toBe('true');
-    expect(image.getAttribute('src')).toBe(cutoutUrl);
+    expect(hero.dataset.portraitAlpha).toBe('false');
+    expect(image.getAttribute('src')).toBe(defaultUrl);
     await reveal();
     expect(hero.dataset.portraitAlpha).toBe('false');
     expect(decodeURI(image.getAttribute('src'))).toContain('/original/侠客/casual.webp');
@@ -128,8 +121,8 @@ describe('configuration-only default portrait override', () => {
     show('wu');
     expect(hero.dataset.portraitAlpha).toBe('false');
     await reveal();
-    expect(hero.dataset.portraitAlpha).toBe('true');
-    expect(image.getAttribute('src')).toContain('wu-default-cutout-v1.webp');
+    expect(hero.dataset.portraitAlpha).toBe('false');
+    expect(decodeURI(image.getAttribute('src'))).toContain(defaultUrl);
 
     show('heixiang');
     await reveal();

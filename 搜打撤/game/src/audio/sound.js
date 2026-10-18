@@ -98,8 +98,16 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
   // 保底音，消除「咔哒+错误低鸣」一按双响；视觉反馈（抖动/toast）不受影响。
   // 窗口取 350ms 覆盖按住时长；非按钮路径（程序化 deny）无新鲜 click 记录，照常出声。
   const DENY_SUPPRESS_MS = 350;
+  function isSubpageOpen() {
+    const overlay = document.getElementById('overlay');
+    const suggestions = document.getElementById('sugLayer');
+    return (overlay && !overlay.hidden) || (suggestions && !suggestions.hidden)
+      || document.getElementById('cardZoom') || document.querySelector('dialog[open]');
+  }
   function sfx(name, opts) {
     if (muted || sfxOff) return;
+    // 子页面不播放通用点击/悬停音；具名的奖励、交易及战斗反馈仍按各自配置播放。
+    if ((name === 'click' || name === 'hover') && isSubpageOpen()) return;
     const stamp = typeof performance !== 'undefined' && performance.now ? performance.now() : Date.now();
     if (name === 'deny') {
       const lastClick = lastSfxAt.get('click');
@@ -215,16 +223,19 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
   document.addEventListener('keydown', kick, { capture: true, signal: soundEvents.signal });
   document.addEventListener('visibilitychange', syncBgm, { signal: soundEvents.signal });
 
-  // 全局事件委托：任何 <button> 被点击都播放点击音（替代各处手动绑定，避免重复）
+  // 页面入口同样静音，避免在新页面打开前的 pointerdown 阶段先响点击音。
+  const silentNavigationButtons = '.home-plate, #mBack, #btnHome, #btnHelp, '
+    + '[data-expedition-tool="bag"], [data-expedition-tool="safe"], [data-expedition-tool="pocket"]';
   document.addEventListener('pointerdown', (e) => {
-    if (e.target && e.target.closest && e.target.closest('button')) sfx('click');
+    const button = e.target?.closest?.('button');
+    if (button && !button.disabled && !button.matches(silentNavigationButtons)) sfx('click');
   }, { signal: soundEvents.signal });
   // 全局事件委托：菜单按钮掠过播放悬停音（pointerover 会因子元素冒泡重复触发，去重）
   let lastHoverBtn = null;
   document.addEventListener('pointerover', (e) => {
     if (!e.target || !e.target.closest) return;
     const btn = e.target.closest('button');
-    if (!btn || btn === lastHoverBtn || btn.disabled) return;
+    if (!btn || btn === lastHoverBtn || btn.disabled || btn.matches(silentNavigationButtons)) return;
     lastHoverBtn = btn;
     sfx('hover');
   }, { signal: soundEvents.signal });

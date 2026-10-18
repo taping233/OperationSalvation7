@@ -1,9 +1,10 @@
 const { createHash } = require('node:crypto');
-const { existsSync, readFileSync, readdirSync, statSync } = require('node:fs');
+const { existsSync, readFileSync, readdirSync, statSync, writeFileSync } = require('node:fs');
 const path = require('node:path');
-const { auditAssets, inspectAssets } = require('./asset-audit-lib.cjs');
+const { auditAssets, auditSelectedAssets, inspectAssets } = require('./asset-audit-lib.cjs');
 
-const root = path.resolve(__dirname, '..');
+const rootIndex = process.argv.indexOf('--root');
+const root = rootIndex >= 0 && process.argv[rootIndex + 1] ? path.resolve(process.argv[rootIndex + 1]) : path.resolve(__dirname, '..');
 const sourceRoot = path.join(root, 'game', 'assets');
 const buildArgument = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : null;
 const buildRoot = buildArgument
@@ -59,10 +60,29 @@ function duplicateSummary(files, rootDir) {
 }
 
 function main() {
+  if (process.argv.includes('--help')) {
+    console.log('asset-audit [--root <project>] [--check] [--scope global|selected] [--paths-json <JSON array>] [--json] [--report <file>]\nDefault global gate remains unchanged. Selected scope reports target issues and a separate global summary.');
+    return;
+  }
   const check = process.argv.includes('--check');
+  if (rootIndex >= 0 && !process.argv[rootIndex + 1]) throw new Error('--root requires a project');
   const pathsIndex = process.argv.indexOf('--paths-json');
   if (pathsIndex >= 0 && !process.argv[pathsIndex + 1]) throw new Error('--paths-json requires a JSON array');
   const paths = pathsIndex >= 0 ? JSON.parse(process.argv[pathsIndex + 1]) : [];
+  const scopeIndex = process.argv.indexOf('--scope');
+  const scope = scopeIndex < 0 ? 'global' : process.argv[scopeIndex + 1];
+  if (!['global', 'selected'].includes(scope)) throw new Error('--scope must be global or selected');
+  if (scope === 'selected') {
+    const result = auditSelectedAssets({ root, paths });
+    const reportIndex = process.argv.indexOf('--report');
+    if (reportIndex >= 0) {
+      if (!process.argv[reportIndex + 1]) throw new Error('--report requires a file');
+      writeFileSync(path.resolve(process.argv[reportIndex + 1]), JSON.stringify(result, null, 2) + '\n');
+    }
+    console.log(JSON.stringify(result));
+    if (!result.ok) process.exitCode = 1;
+    return;
+  }
   if (!check) {
     const source = summarize('Source assets', sourceRoot);
     if (existsSync(buildRoot)) {
@@ -86,4 +106,7 @@ function main() {
   }
 }
 
-try { main(); } catch (error) { console.error(`Asset audit failed: ${error.message}`); process.exitCode = 1; }
+try { main(); } catch (error) {
+  console.error(process.argv.includes('--json') ? JSON.stringify({ ok: false, error: error.message }) : `Asset audit failed: ${error.message}`);
+  process.exitCode = 1;
+}

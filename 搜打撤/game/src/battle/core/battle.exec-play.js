@@ -319,7 +319,7 @@ export function createBattleExecPlay({
         hosted.includes('charge-fireball'))) growthNames.add(card.name);
     if (!hasStructuredRules && /每消灭\s*1\s*个敌人[^。]*?\+\s*1\s*点?攻击力/.test(String(card.desc || ''))) set$killAtkUp(killAtkUp + 1);
     if (!hasStructuredRules && /每当你使用一张法术牌[^。]*中毒/.test(String(card.desc || ''))) set$poisonOnSpell(true);
-    if (!hasStructuredRules && (/死亡时[^。；]*中毒层数转移/.test(String(card.desc || '')) || hosted.includes('rot-seed'))) set$poisonLegacy(true);
+    if (card.id !== 'cc-rot-seed' && !hasStructuredRules && /死亡时[^。；]*中毒层数转移/.test(String(card.desc || ''))) set$poisonLegacy(true);
     if (!hasStructuredRules && hosted.includes('venom-staff')) set$poisonOnSpell(true);
     if (!hasStructuredRules && hosted.includes('consume-fireball')) set$consumeFireballN(1);
     if (!hasStructuredRules && hosted.includes('assassin')) set$stealthStrike(true);

@@ -598,11 +598,24 @@ export const syncSlice = {
         if (localStorage.getItem(EVENTS_0919_KEY)) {
           // 只修旧定版标题；保留已盖章卡库的自定义名称、规则及其它字段。
           const cards = SDT.Cards.all().slice();
+          let changed = false;
           const index = cards.findIndex(c => c.id === 'tt6-chestdraw' && c.name === '熔断双箱');
           if (index >= 0) {
             cards[index] = { ...cards[index], name: '熔断物资箱' };
-            SDT.Cards.saveAll(cards);
+            changed = true;
           }
+          const oldDescriptions = {
+            'tt6-bandits':['反抗组织拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。'],
+            'tt6-mystery':['获得员工通行证A碎片，+2 币。','你获得员工通行证A碎片和 2 币。'],
+            'tt6-goldhammer':['获得卡牌「闪金之锤」。','你获得 1 张「闪金之锤」。'],
+            'tt6-relief':['回复 6 点生命。','你回复 6 点生命。'],
+          };
+          cards.forEach((card,i) => {
+            if (!oldDescriptions[card.id]?.includes(card.desc)) return;
+            const definition = SDT.Cards.EVENTS_0919.find(item => item.id === card.id);
+            if (definition) { cards[i] = {...card,desc:definition.desc}; changed = true; }
+          });
+          if (changed) SDT.Cards.saveAll(cards);
           return;
         }
         const cards = SDT.Cards.all();

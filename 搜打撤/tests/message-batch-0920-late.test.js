@@ -64,7 +64,8 @@ describe('2026-09-20 晚间留言卡牌数据', () => {
     const battleCss = readFileSync(resolve(process.cwd(), 'game/css/battle.css'), 'utf8');
     expect(flow).toContain('EVENT_SCENE_META[card.id]');
     expect(scenes.eventSceneMeta['tt6-airdrop']).toContain('scene-event-airdrop');
-    expect(flow).toContain("potion.desc || '效果见卡牌说明'");
+    expect(flow).toContain("drawEventCards(card.name,'airdrop-potion',[potionPool]");
+    expect(flow).toContain('投骰前展示全部对应点数');
     expect(battleView).toContain('bt-hand-page has-more');
     expect(battleCss).toContain('@keyframes handPageReminder');
   });

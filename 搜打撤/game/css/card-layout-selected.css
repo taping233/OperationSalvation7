@@ -157,7 +157,17 @@ body:has(#viewport) .card-rules-copy .d-kw { color: var(--card-copy-keyword); fo
   height: auto; max-width: none; padding: 0; margin: 0; border: 0; object-fit: contain;
   z-index: 7; pointer-events: none; filter: drop-shadow(1px 3px 2px #0006);
 }
-.hs-card[data-card-layout="split"] :is(.hsc-dmg,.hsc-val) { display: none; }
+.hs-card[data-card-layout="split"] .hsc-dmg { display: none; }
+.hs-card[data-card-layout="split"] .hsc-val {
+  position:absolute; inset:auto 4.2cqw 4.2cqw auto; z-index:10;
+  display:flex; align-items:center; gap:1.2cqw; padding:1.3cqw 2.2cqw;
+  background:#17212aee; border:1px solid #c6b78b80; border-radius:1cqw;
+  color:#e9d6a2; font:600 7.2cqw/1.15 'Card Oxanium',sans-serif;
+  pointer-events:none; font-variant-numeric:tabular-nums;
+}
+.hs-card[data-card-layout="split"] .hsc-val i { display:flex; align-items:center; font-style:normal; }
+.hs-card[data-card-layout="split"] .hsc-val .ic { width:6cqw; height:6cqw; }
+.hs-card[data-card-layout="split"] .hsc-val b { font:inherit; color:inherit; }
 .hs-card[data-card-layout="split"] .hsc-kw { display: flex; gap: .25em; flex-wrap: wrap; justify-content: center; margin-top: .3em; }
 .hs-card[data-card-layout="split"] .hsc-kw span { font-size: 5.6cqw; color: #c5d5de; }
 .hs-card[data-card-layout="split"] .hsc-kw .ic { width: 1em; height: 1em; }

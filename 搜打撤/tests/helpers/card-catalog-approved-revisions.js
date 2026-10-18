@@ -2,6 +2,15 @@
 import frozenInventory from '../../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
 
 export const RETIRED_1010 = new Set(['tt-medneedle', 'tt-token-color', 'tt3-deep-seal', 'tt3eq-boiler']);
+// 2026-10-18 老板批准的事件选择与腐化之种死亡真伤；仅投影生产副本，CARDS_SYNC 不变。
+export const APPROVED_1018_PRODUCTION_REVISIONS = [
+  ['tt6-bandits', 'desc', '反抗组织拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。', '可逃离，或迎战反抗组织拾荒者 ×3~5（随层数增加），胜利获得密封物资箱 ×2。'],
+  ['tt6-goldhammer', 'desc', '获得卡牌「闪金之锤」。', '选择领取「闪金之锤」，或接受送信委托：下一家商店随机两格商品免费，排除初始攻击。'],
+  ['tt6-mystery', 'desc', '获得员工通行证A碎片，+2 币。', '投骰领取：1~3 点获得员工通行证A碎片 ×1，4~6 点获得 3 币；也可离开。'],
+  ['tt6-relief', 'desc', '回复 6 点生命。', '选择回复 6 点生命，或投骰获得 1 张随机招式。'],
+  ['cc-rot-seed', 'desc', '对 1 名敌人附加 2 层中毒；其死亡时，将中毒层数转移给另一名敌人。', '对 1 名敌人附加 2 层中毒并标记。被标记的敌人死亡时，对所有敌人造成等同于其死亡时中毒层数的真实伤害。'],
+  ['cc-rot-seed', 'dmgType', undefined, 'true'],
+];
 const revisions = {
   'cc-demon': { dmg: 7, desc: '7′，损失 2 点生命。' },
   'tt2-forestarrow': { name: '回音箭' },
@@ -46,6 +55,11 @@ export function approvedRevisionBaseline(original) {
       ] } };
     const row = baseline.cardsSync.cards.find(r => r.id === id);
     if (row) row.card = sorted(card); else baseline.cardsSync.cards.push({ id, card: sorted(card) });
+  }
+  for (const [id, field, previous, current] of APPROVED_1018_PRODUCTION_REVISIONS) {
+    const card = baseline.production.cards.find(row => row.id === id)?.card;
+    if (!card || card[field] !== previous) throw new Error(`Unreviewed original ${id}.${field}`);
+    card[field] = current;
   }
   baseline.cardsSync.cards.sort((a,b) => a.id < b.id ? -1 : 1);
   return baseline;

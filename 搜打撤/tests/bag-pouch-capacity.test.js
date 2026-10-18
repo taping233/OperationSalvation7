@@ -100,7 +100,7 @@ it('真实背包锦囊接受坚冰结界与冰封千里职业法术并可原样�
     UI._acts.pouchPut({name});
     expect(game.ownedCards.find(o => o.card.name === name)).toMatchObject({stored:1,pouchOf:pouch.id});
   }
-  expect(document.body.textContent).toContain('2/3');
+  expect(document.body.textContent.replace(/\s/g, '')).toContain('2/3');
   for (const name of ['坚冰结界','冰封千里']) UI._acts.pouchTake({name});
   expect(game.ownedCards.every(o => !o.stored && !o.pouchOf)).toBe(true);
   expect(game.ownedCards.map(o => JSON.stringify(o.card))).toEqual(cardsBefore);
@@ -138,7 +138,7 @@ it('真实背包存取两种资源：盒内独立张数不占外部格',()=>{
  UI._acts.inspectStack({name:pearl.name,safe:'0'});UI._acts.pearlStoreZoom();
  UI._acts.pearlPut({name:key.name});UI._acts.pearlPut({name:wood.name});
  expect(game.ownedCards).toHaveLength(3);expect(game.ownedCards.filter(o=>o.stored&&!o.pouchOf)).toHaveLength(2);
- expect(UI.el.ovBody.textContent).toContain('2/9');expect(session.usedSlots()).toBe(13);
+ expect(UI.el.ovBody.textContent.replace(/\s/g, '')).toContain('2/9');expect(session.usedSlots()).toBe(13);
  UI._acts.pearlBack();expect(UI.el.ovBody.querySelector('.bag-capchip').textContent).toContain('盒内 2/9 张（不占格）');
  expect(UI.el.ovBody.textContent).toContain('资源扩展格 0/9');
  UI._acts.inspectStack({name:pearl.name,safe:'0'});UI._acts.pearlStoreZoom();

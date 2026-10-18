@@ -4,7 +4,7 @@
 
 ## 身份与参考使用
 
-运行立绘已换为 10-13 竖版 `game/assets/portraits/full/xingyue.webp`，本页图片为同图副本；胸前单手采用张开五指的祝祷姿势。当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)；历史姿态和配方保留在下方版本描述。
+运行立绘 `game/assets/portraits/full/xingyue.webp` 于2026-10-18按老板要求恢复至本轮重绘前的10-13版本，1024×1536；本页图片为同图副本，保留胸前单手祝祷、长辫与星灯。来源及验证见[统一立绘记录](../evidence/2026-10-18-roster-reference-final/README.md)。当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)；历史姿态和配方保留在下方版本描述。
 
 ## 卡面光牧与暗牧外观（2026-10-10老板确认）
 

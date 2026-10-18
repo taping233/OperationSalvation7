@@ -1,0 +1,275 @@
+{
+  "click": {
+    "files": [
+      "assets/sfx/original-ui-1018/click.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "cardSelect": {
+    "files": [
+      "assets/sfx/original-ui-1018/click.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "characterSelect": {
+    "files": [
+      "assets/sfx/original-ui-1018/click.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "switch": {
+    "files": [
+      "assets/sfx/original-ui-1018/click.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "shutter": {
+    "files": [
+      "assets/sfx/original-ui-1018/click.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "pick": {
+    "files": [
+      "assets/sfx/original-ui-1018/click.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "altarActivate": {
+    "files": [
+      "assets/sfx/original-ui-1018/click.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "altarOffer": {
+    "files": [
+      "assets/sfx/original-ui-1018/click.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "hover": {
+    "files": [
+      "assets/sfx/original-ui-1018/click.wav"
+    ],
+    "gain": 0.08,
+    "group": "ui"
+  },
+  "navigate": {
+    "files": [
+      "assets/sfx/original-ui-1018/click.wav"
+    ],
+    "gain": 0.08,
+    "group": "ui"
+  },
+  "confirm": {
+    "files": [
+      "assets/sfx/original-ui-1018/confirm.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "prepReady": {
+    "files": [
+      "assets/sfx/original-ui-1018/confirm.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "extractionConfirm": {
+    "files": [
+      "assets/sfx/original-ui-1018/confirm.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "eventSafe": {
+    "files": [
+      "assets/sfx/original-ui-1018/confirm.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "gain": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "stashDeposit": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "coin": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "tradeSell": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "ui"
+  },
+  "tradeBuy": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "ding": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "levelup": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "achievementUnlock": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "collectionUnlock": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "eventComplete": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "storyComplete": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "recodeComplete": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "reward"
+  },
+  "reveal": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "runeExchange": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "legend": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "rarePlay": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "altarReward": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "eggHatch": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "petRescue": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "blackMarketWin": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "victory": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "bossVictory": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "runClear": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "extractionSuccess": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "chestBurst": {
+    "files": [
+      "assets/sfx/original-ui-1018/reward.wav"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  }
+}

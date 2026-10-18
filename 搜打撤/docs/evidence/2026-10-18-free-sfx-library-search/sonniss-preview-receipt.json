@@ -1,0 +1,193 @@
+{
+  "source_url": "https://gdc.sonniss.com/",
+  "license_url": "https://sonniss.com/gdc-bundle-license/",
+  "processing": "Attenuation only; full source durations; 800ms separators; no EQ, pitch shift, or layering",
+  "previews": [
+    {
+      "preview": "03-sonniss-ui.mp3",
+      "sha256": "2be60b7bd73c5f156528e0dfb5fb040736fb3f4f6deafb09928a4f9020cd0879",
+      "duration": 8.256,
+      "timeline": [
+        {
+          "label": "干式双击",
+          "source_relative": "sources/sonniss/01-ui.wav",
+          "source_filename": "UIClick_UI Button Analog Vintage Double Click Neutral Dry Press 11_ESM_BG.wav",
+          "source_sha256": "e7029246db8489ceb4be234e5b861926a441e0bce4cb341e51e90ad2421baccb",
+          "start": 0.0,
+          "duration": 0.167,
+          "gain": 0.2657514956273559
+        },
+        {
+          "label": "打击式轻点",
+          "source_relative": "sources/sonniss/02-ui.wav",
+          "source_filename": "Interface Percussion Snap.wav",
+          "source_sha256": "cd45df5914d9b430f94699dd20c7d290220680eb7cb5b55d64ed20ff18f6c7ba",
+          "start": 0.967,
+          "duration": 0.656,
+          "gain": 0.2891394692972248
+        },
+        {
+          "label": "玻璃质感确认",
+          "source_relative": "sources/sonniss/03-ui.wav",
+          "source_filename": "Interface Accept Glassy Snap.wav",
+          "source_sha256": "7c4337c429b72efa3731e2fb970f32e87ca39a6dd62adce1a6779f9e809a3444",
+          "start": 2.423,
+          "duration": 0.438,
+          "gain": 0.4515012775682808
+        },
+        {
+          "label": "短弹点",
+          "source_relative": "sources/sonniss/04-ui.wav",
+          "source_filename": "Interface Pop High Short.wav",
+          "source_sha256": "8ac9cb88514baf7b59031e1eacf9a1866daa2470f6b72fefdb75df2871032546",
+          "start": 3.66,
+          "duration": 0.646,
+          "gain": 0.17434012059814688
+        },
+        {
+          "label": "闷音拒绝",
+          "source_relative": "sources/sonniss/05-ui.wav",
+          "source_filename": "Deny Muted.wav",
+          "source_sha256": "619233bd4af5cc3d329a0e69e50836923175d986f8a4742c1f36f9bd5f174e5f",
+          "start": 5.107,
+          "duration": 0.799,
+          "gain": 0.2994726127911814
+        },
+        {
+          "label": "下行科幻提示",
+          "source_relative": "sources/sonniss/06-ui.wav",
+          "source_filename": "Interface Sci-Fi Ping Down.wav",
+          "source_sha256": "93249fc63f754fc3f6b0f902247e7a1920e81afcd2ae9dd865f170e6ad24e2be",
+          "start": 6.706,
+          "duration": 0.75,
+          "gain": 0.23351017422615167
+        }
+      ]
+    },
+    {
+      "preview": "04-sonniss-rewards.mp3",
+      "sha256": "adae8d1476b2d41f8bbdf35c184ea2636ba45a820beeb522a74abe0952942ddc",
+      "duration": 8.495,
+      "timeline": [
+        {
+          "label": "金币轻响",
+          "source_relative": "sources/sonniss/07-reward.wav",
+          "source_filename": "Ting Coins.wav",
+          "source_sha256": "7467e2687c5b9bf3cedebd0fcb3af58f7eaeffdd7201a97790daf3c87c42f1a1",
+          "start": 0.0,
+          "duration": 1.104,
+          "gain": 0.3548650323517861
+        },
+        {
+          "label": "细碎闪光",
+          "source_relative": "sources/sonniss/08-reward.wav",
+          "source_filename": "Button Arp Twinkle.wav",
+          "source_sha256": "867cc48998eb387da8492c0a6ef8b5a42ebf2db5ffca2fb28c27aa985769fe4f",
+          "start": 1.904,
+          "duration": 1.812,
+          "gain": 0.20778143305574026
+        },
+        {
+          "label": "拨弦提示",
+          "source_relative": "sources/sonniss/09-reward.wav",
+          "source_filename": "Interface Plucks Happy.wav",
+          "source_sha256": "a6866b6e04580d6f4007c59514a5530c7699f785beb27b2eda6a2b4579478ded",
+          "start": 4.517,
+          "duration": 0.853,
+          "gain": 0.23906340908816806
+        },
+        {
+          "label": "二次元成功",
+          "source_relative": "sources/sonniss/10-reward.wav",
+          "source_filename": "DSGNStngr_Power Up Bright Positive Successful Light Saturation Crash Shimmer 05_ESM_AG.wav",
+          "source_sha256": "3bf090678bb55da7d38f2bf76ac6a8d826f5245452a36d54666d2597c0be0299",
+          "start": 6.17,
+          "duration": 1.525,
+          "gain": 0.17796548517272845
+        }
+      ]
+    },
+    {
+      "preview": "05-sonniss-card-combat.mp3",
+      "sha256": "b4c87d59be6511c8e979f74f006bcce60e6a30b387a4b37c2ecd0e2364ea72b6",
+      "duration": 82.782,
+      "timeline": [
+        {
+          "label": "纸牌翻动",
+          "source_relative": "sources/sonniss/11-cards.wav",
+          "source_filename": "PAPRHndl_Game Play Cards Dry Show Flip Toss Disgard Near 12_ESM_BG.wav",
+          "source_sha256": "8892c2dd4eb34e8e108655e292dd26da9986d2603cf59c7a3a0379dcf4cb1bf2",
+          "start": 0.0,
+          "duration": 0.167,
+          "gain": 0.17697837974145722
+        },
+        {
+          "label": "发牌",
+          "source_relative": "sources/sonniss/12-cards.wav",
+          "source_filename": "GAMECas_Dealing 3_344 Audio_Casino Cards Vol 1.wav",
+          "source_sha256": "df844d02603e1108a2c7ce2e2ebb2cf26de6835bc717ca18098fb9f2dc4ebc04",
+          "start": 0.967,
+          "duration": 6.965,
+          "gain": 1
+        },
+        {
+          "label": "收起多张牌",
+          "source_relative": "sources/sonniss/13-cards.wav",
+          "source_filename": "GAMECas_Pick Up Multiple Cards At Once 5_344 Audio_Casino Cards Vol 1.wav",
+          "source_sha256": "886284ed373d5795bdca521fc1fe30ceaf5155af05ce9c53263594593d92c510",
+          "start": 8.732,
+          "duration": 0.375,
+          "gain": 1
+        },
+        {
+          "label": "部署挥斩",
+          "source_relative": "sources/sonniss/14-combat.wav",
+          "source_filename": "DSGNStngr_Action Deploy Units Sword Slice Special Move Layered Swish 04_ESM_TDG.wav",
+          "source_sha256": "21de605e1b3154980e32ebd312d4b4a2cbdb199470f6f64fe0ef3403acf15244",
+          "start": 9.907,
+          "duration": 2.454,
+          "gain": 0.176487908709084
+        },
+        {
+          "label": "二次元轻命中",
+          "source_relative": "sources/sonniss/15-combat.wav",
+          "source_filename": "FGHTImpt_Combat Punch Impact Light Hit Delay Crunchy Vintage Quick Smack 05_ESM_AG.wav",
+          "source_sha256": "55cb8102db4d8728c2607279b4e381f27336db35bb966e5f4993c9ace2cd9ecd",
+          "start": 13.161,
+          "duration": 1.057,
+          "gain": 0.18013349088137376
+        },
+        {
+          "label": "挥击钝击",
+          "source_relative": "sources/sonniss/16-combat.wav",
+          "source_filename": "SWSH_SWING IMPACTS Quick Heavy Weapon Swing To Thud Impact Var 01_DDUMAIS_MWP2.wav",
+          "source_sha256": "d75988b9eab8e10dfbef9dc8f6297eec5c57b91e50fb09bc8b72273356a2e681",
+          "start": 15.019,
+          "duration": 61.818,
+          "gain": 0.17644450682145468
+        },
+        {
+          "label": "冰霜技能",
+          "source_relative": "sources/sonniss/17-combat.wav",
+          "source_filename": "ICEBrk_Skill Freeze Whoosh Break Impact Layered Movement Shatter 03_ESM_TDG.wav",
+          "source_sha256": "ce74c26069a84d55ba7c5fa7a01369ec3b38f88fc787b02ced9d7d1e02ffcc55",
+          "start": 77.637,
+          "duration": 2.509,
+          "gain": 0.17751243568518332
+        },
+        {
+          "label": "机械部署",
+          "source_relative": "sources/sonniss/18-combat.wav",
+          "source_filename": "ROBTMvmt_Tower Deploy Hitech Robot Motor Dark Thump Servo Whine 04_ESM_TDG.wav",
+          "source_sha256": "c9f2c8b24ce6ae6fb7b519b2bbcdb2503816ca5cdd6c8f81ee3fc27149600d48",
+          "start": 80.946,
+          "duration": 1.036,
+          "gain": 0.17795009736927037
+        }
+      ]
+    }
+  ],
+  "game_modified": false,
+  "tests_run": false,
+  "listening_verified": false
+}

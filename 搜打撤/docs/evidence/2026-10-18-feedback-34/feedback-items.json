@@ -1,0 +1,170 @@
+[
+  {
+    "ts": "2026-10-18T14:46:38.593Z",
+    "page": {
+      "id": "depMain",
+      "name": "出发整备"
+    },
+    "target": {
+      "name": "出发整备 · 按钮「预览推荐装配」"
+    },
+    "text": "这个绿色不好看，换一个颜色",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T14:48:15.671Z",
+    "page": {
+      "id": "state:idle",
+      "name": "对局地图"
+    },
+    "target": {
+      "name": "游戏画布（对局地图）"
+    },
+    "text": "不是现在在的节点和抵达过的节点的相邻节点不显示",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T14:49:31.418Z",
+    "page": {
+      "id": "overlay:奖励总览",
+      "name": "奖励总览"
+    },
+    "target": {
+      "name": "奖励总览 · cqo-receipt"
+    },
+    "text": "这个绿色也不好看",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T14:49:49.923Z",
+    "page": {
+      "id": "state:idle",
+      "name": "对局地图"
+    },
+    "target": {
+      "name": "游戏画布（对局地图）"
+    },
+    "text": "离开节点缺少过渡动画",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T14:50:13.628Z",
+    "page": {
+      "id": "state:idle",
+      "name": "对局地图"
+    },
+    "target": {
+      "name": "游戏画布（对局地图）"
+    },
+    "text": "层级间的跳转缺少演出动画",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T14:51:50.992Z",
+    "page": {
+      "id": "state:idle",
+      "name": "对局地图"
+    },
+    "target": {
+      "name": "游戏画布（对局地图）"
+    },
+    "text": "获得稀有卡牌缺少演出",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T14:52:35.627Z",
+    "page": {
+      "id": "mode:page",
+      "name": "全屏页"
+    },
+    "target": {
+      "name": "全屏页 · shop-return-note"
+    },
+    "text": "这行文字删掉",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T15:01:12.177Z",
+    "page": {
+      "id": "mode:battle",
+      "name": "战斗弹层"
+    },
+    "target": {
+      "name": "战斗弹层 · hsc-type"
+    },
+    "text": "对随机敌人释放的牌应该可以拖动到画面中间打出",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T15:04:20.478Z",
+    "page": {
+      "id": "overlay:背包",
+      "name": "背包"
+    },
+    "target": {
+      "name": "背包 · 按钮「指南」"
+    },
+    "text": "这个按键不好看，不符合整个界面的画风",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T15:05:36.076Z",
+    "page": {
+      "id": "overlay:背包",
+      "name": "背包"
+    },
+    "target": {
+      "name": "背包 · art-card-image art-hero-fit"
+    },
+    "text": "腐化之种的文字描述和效果改为 如果被标记的敌人死亡，将会对所有敌人造成等同于中毒层数的真实伤害",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T15:06:52.285Z",
+    "page": {
+      "id": "mode:page",
+      "name": "全屏页"
+    },
+    "target": {
+      "name": "全屏页 · 按钮「0 装备古朴 长剑 你的攻击力增加 1 」"
+    },
+    "text": "这里点击会刷新闪烁，改掉，类似的设定都改掉",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T15:07:39.23Z",
+    "page": {
+      "id": "overlay:珍珠盒",
+      "name": "珍珠盒"
+    },
+    "target": {
+      "name": "珍珠盒 · battle-decision-content pearl-store-columns"
+    },
+    "text": "这个珍珠盒界面的颜色和ui设计都太丑了，重新设计或者复用类似的页面设计",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T15:08:40.456Z",
+    "page": {
+      "id": "overlay:背包",
+      "name": "背包"
+    },
+    "target": {
+      "name": "背包 · 按钮「消耗区15」"
+    },
+    "text": "这里子页面切换会闪烁并漏出地图，改掉",
+    "done": false
+  },
+  {
+    "ts": "2026-10-18T15:08:53.622Z",
+    "page": {
+      "id": "overlay:背包",
+      "name": "背包"
+    },
+    "target": {
+      "name": "背包 · fc-chip"
+    },
+    "text": "这里的文字和数字都删掉",
+    "done": false
+  }
+]

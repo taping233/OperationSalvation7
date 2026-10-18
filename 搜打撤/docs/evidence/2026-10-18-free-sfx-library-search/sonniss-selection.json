@@ -1,0 +1,110 @@
+[
+  {
+    "group": "ui",
+    "label": "干式双击",
+    "source_filename": "UIClick_UI Button Analog Vintage Double Click Neutral Dry Press 11_ESM_BG.wav",
+    "filename": "sonniss/01-ui.wav"
+  },
+  {
+    "group": "ui",
+    "label": "打击式轻点",
+    "source_filename": "Interface Percussion Snap.wav",
+    "filename": "sonniss/02-ui.wav"
+  },
+  {
+    "group": "ui",
+    "label": "玻璃质感确认",
+    "source_filename": "Interface Accept Glassy Snap.wav",
+    "filename": "sonniss/03-ui.wav"
+  },
+  {
+    "group": "ui",
+    "label": "短弹点",
+    "source_filename": "Interface Pop High Short.wav",
+    "filename": "sonniss/04-ui.wav"
+  },
+  {
+    "group": "ui",
+    "label": "闷音拒绝",
+    "source_filename": "Deny Muted.wav",
+    "filename": "sonniss/05-ui.wav"
+  },
+  {
+    "group": "ui",
+    "label": "下行科幻提示",
+    "source_filename": "Interface Sci-Fi Ping Down.wav",
+    "filename": "sonniss/06-ui.wav"
+  },
+  {
+    "group": "reward",
+    "label": "金币轻响",
+    "source_filename": "Ting Coins.wav",
+    "filename": "sonniss/07-reward.wav"
+  },
+  {
+    "group": "reward",
+    "label": "细碎闪光",
+    "source_filename": "Button Arp Twinkle.wav",
+    "filename": "sonniss/08-reward.wav"
+  },
+  {
+    "group": "reward",
+    "label": "拨弦提示",
+    "source_filename": "Interface Plucks Happy.wav",
+    "filename": "sonniss/09-reward.wav"
+  },
+  {
+    "group": "reward",
+    "label": "二次元成功",
+    "source_filename": "DSGNStngr_Power Up Bright Positive Successful Light Saturation Crash Shimmer 05_ESM_AG.wav",
+    "filename": "sonniss/10-reward.wav"
+  },
+  {
+    "group": "cards",
+    "label": "纸牌翻动",
+    "source_filename": "PAPRHndl_Game Play Cards Dry Show Flip Toss Disgard Near 12_ESM_BG.wav",
+    "filename": "sonniss/11-cards.wav"
+  },
+  {
+    "group": "cards",
+    "label": "发牌",
+    "source_filename": "GAMECas_Dealing 3_344 Audio_Casino Cards Vol 1.wav",
+    "filename": "sonniss/12-cards.wav"
+  },
+  {
+    "group": "cards",
+    "label": "收起多张牌",
+    "source_filename": "GAMECas_Pick Up Multiple Cards At Once 5_344 Audio_Casino Cards Vol 1.wav",
+    "filename": "sonniss/13-cards.wav"
+  },
+  {
+    "group": "combat",
+    "label": "部署挥斩",
+    "source_filename": "DSGNStngr_Action Deploy Units Sword Slice Special Move Layered Swish 04_ESM_TDG.wav",
+    "filename": "sonniss/14-combat.wav"
+  },
+  {
+    "group": "combat",
+    "label": "二次元轻命中",
+    "source_filename": "FGHTImpt_Combat Punch Impact Light Hit Delay Crunchy Vintage Quick Smack 05_ESM_AG.wav",
+    "filename": "sonniss/15-combat.wav"
+  },
+  {
+    "group": "combat",
+    "label": "挥击钝击",
+    "source_filename": "SWSH_SWING IMPACTS Quick Heavy Weapon Swing To Thud Impact Var 01_DDUMAIS_MWP2.wav",
+    "filename": "sonniss/16-combat.wav"
+  },
+  {
+    "group": "combat",
+    "label": "冰霜技能",
+    "source_filename": "ICEBrk_Skill Freeze Whoosh Break Impact Layered Movement Shatter 03_ESM_TDG.wav",
+    "filename": "sonniss/17-combat.wav"
+  },
+  {
+    "group": "combat",
+    "label": "机械部署",
+    "source_filename": "ROBTMvmt_Tower Deploy Hitech Robot Motor Dark Thump Servo Whine 04_ESM_TDG.wav",
+    "filename": "sonniss/18-combat.wav"
+  }
+]

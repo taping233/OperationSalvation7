@@ -1,4 +1,5 @@
 import { DATA } from '../../core/data-loader.js';
+import { ROT_SEED_DESCRIPTION } from '../../cards/rot-seed-revision.js';
 import { dataSlice } from '../../cards/cards.data.js';
 import { HOSTED_CARD_RULES } from '../../cards/card-rules.schema.js';
 import { buildFirstSourceCardIndex } from './hosted-catalog-index.js';
@@ -25,5 +26,5 @@ export function getHostedExecutionCard(card) {
   if (card.rules?.triggers || card.rules?.equip || card.rules?.bag) return card;
   const canonical = CANONICAL_CARD_BY_ID.get(card.id);
   if (!canonical || typeof canonical.desc !== 'string') return card;
-  return { ...canonical, ...card, desc: canonical.desc };
+  return { ...canonical, ...card, desc: card.id === 'cc-rot-seed' ? ROT_SEED_DESCRIPTION : canonical.desc };
 }

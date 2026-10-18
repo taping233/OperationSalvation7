@@ -542,7 +542,7 @@ body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.rew
 }
 
 /* Current reward receipts derive only from successful claims, and remain readable after completion. */
-body #overlay .card .cqo-frame .cqo-receipt{flex:none;max-height:180px;overflow:auto;padding:12px 18px;border:1px solid #73959c66;background:#142b35;color:#e7f2ef;font-size:22px;line-height:1.45}
+body #overlay .card .cqo-frame .cqo-receipt{flex:none;max-height:180px;overflow:auto;padding:12px 18px;border:1px solid #a6b6c34d;background:#202934;color:#e5eaf0;font-size:22px;line-height:1.45}
 body #overlay .card .cqo-frame .cqo-receipt ul{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none;margin:8px 0 0;padding:0}
 body #overlay .card .cqo-frame .cqo-receipt li{overflow-wrap:anywhere}
 body #overlay .card .cqo-frame .cqp-dialog .reward-replica[data-reward-count="4"] .reward-objects,
@@ -568,7 +568,7 @@ body #overlay .card .cqo-frame .cqo-receipt-icon{display:inline-flex;width:28px;
 body #overlay .card .cqo-frame .cqo-receipt-icon img{width:100%;height:100%;object-fit:contain}
 body #overlay .card .cqo-frame .cqo-receipt-count{margin-left:10px;color:#f3dfaa;font-variant-numeric:tabular-nums}
 body #overlay .card .cqo-frame .cqo-receipt-destination{margin-left:auto;font-size:18px;color:#aabdc4}
-body #overlay .card .cqo-frame .cqo-receipt li{padding:4px 12px;border-left:2px solid #87afb0;background:#ffffff05}
+body #overlay .card .cqo-frame .cqo-receipt li{padding:4px 12px;border-left:2px solid #a5b8cb;background:#ffffff05}
 
 /* Fixed event receipts share picker controls without creating an overview or changing commands. */
 body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-replica {

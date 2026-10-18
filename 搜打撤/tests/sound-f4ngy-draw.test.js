@@ -1,7 +1,9 @@
+// Historical credit assertions use the fixed pre-replacement page, alongside before.catalog.js.
+// Historical integration provenance; current runtime replacement is covered by sound-web-library.test.js.
 import { describe, expect, it } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { SAMPLE_CUES } from '../game/src/audio/sound.samples.catalog.js';
+import { SAMPLE_CUES } from '../docs/evidence/2026-10-18-web-sfx-replacement/before.catalog.js';
 import { SAMPLE_CUES as BEFORE } from '../docs/evidence/2026-10-17-f4ngy-draw/before/sound.samples.catalog.js';
 
 describe('single attributed card draw sample', () => {
@@ -14,10 +16,10 @@ describe('single attributed card draw sample', () => {
     const current = JSON.parse(readFileSync('game/assets/asset-manifest.json', 'utf8'));
     const previous = JSON.parse(readFileSync('docs/evidence/2026-10-17-f4ngy-draw/before/asset-manifest.json', 'utf8'));
     const addedPath = 'sfx/f4ngy/dealing-card-240777-hq.mp3';
-    for (const asset of previous.assets) expect(current.assets.find(item => item.path === asset.path)).toEqual(asset);
+    for (const asset of previous.assets.filter(item => item.path.startsWith('sfx/'))) expect(current.assets.find(item => item.path === asset.path)).toEqual(asset);
     expect(current.assets.filter(asset => asset.path === addedPath)).toHaveLength(1);
     expect(current.count).toBe(current.assets.length);
-    const html = readFileSync('game/index.html', 'utf8');
+    const html = readFileSync('docs/evidence/2026-10-18-web-sfx-replacement/before.index.html', 'utf8');
     expect(html).toContain('Dealing Card — f4ngy（Freesound）');
     expect(html).toContain('https://creativecommons.org/licenses/by/4.0/');
     expect(html).toContain('音频文件未处理，仅降低播放音量');

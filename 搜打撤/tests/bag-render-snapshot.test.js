@@ -57,7 +57,7 @@ beforeEach(async () => {
     if (target && !target.disabled) ui.acts[target.dataset.act]?.({ ...target.dataset });
   });
   window.SDT = { UI:ui, game:H.game, Base:{ slot:1, bagCap:() => 24, safeCap:() => 6 },
-    Sound:{ sfx:vi.fn() }, Cards:{ SHA:{ id:'sha', name:'初始攻击' }, all:() => [],
+    Icons:{ rich:markup => markup }, Sound:{ sfx:vi.fn() }, Cards:{ SHA:{ id:'sha', name:'初始攻击' }, all:() => [],
       cardHTML:card => `<span>${card.name}</span>`, cardBackHTML:() => '' } };
   vi.stubGlobal('requestAnimationFrame', () => 1); vi.stubGlobal('cancelAnimationFrame', vi.fn());
   bag = await import('../game/src/hub/game.bag.js'); drag = await import('../game/src/hub/game.bag.drag.js');

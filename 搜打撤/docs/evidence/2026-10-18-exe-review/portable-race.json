@@ -1,0 +1,63 @@
+{
+  "exe": "D:\\素材\\代号柒\\搜打撤\\.tmp\\exe-refresh-1018\\delivery\\搜打撤-代号7-20261018-换肤修复.exe",
+  "temp": "D:\\素材\\代号柒\\搜打撤\\.tmp\\exe-review-1018\\portable-temp",
+  "gameUIStarted": false,
+  "wrapperPids": [
+    {
+      "role": "first",
+      "pid": 23436
+    },
+    {
+      "role": "second",
+      "pid": 30744
+    }
+  ],
+  "events": [
+    {
+      "role": "second",
+      "exit": 0,
+      "time": 1792335175579
+    },
+    {
+      "role": "first",
+      "exit": 0,
+      "time": 1792335176861
+    }
+  ],
+  "first": [
+    {
+      "event": "start",
+      "pid": 32256,
+      "exe": "D:\\素材\\代号柒\\搜打撤\\.tmp\\exe-review-1018\\portable-temp\\3Ks4uz7SIbkMFwZ4XJSGFwA0lwG\\搜打撤·代号7.exe",
+      "file": "D:\\素材\\代号柒\\搜打撤\\.tmp\\exe-review-1018\\portable-temp\\3Ks4uz7SIbkMFwZ4XJSGFwA0lwG\\resources\\game\\assets\\portraits\\full\\wu.webp",
+      "exists": true,
+      "time": 1792335130107
+    },
+    {
+      "event": "resource",
+      "exists": false,
+      "time": 1792335130344
+    },
+    {
+      "event": "resource",
+      "exists": true,
+      "time": 1792335163377
+    },
+    {
+      "event": "resource",
+      "exists": false,
+      "time": 1792335175177
+    }
+  ],
+  "existsBeforeStop": false,
+  "second": [
+    {
+      "event": "start",
+      "pid": 23816,
+      "exe": "D:\\素材\\代号柒\\搜打撤\\.tmp\\exe-review-1018\\portable-temp\\3Ks4uz7SIbkMFwZ4XJSGFwA0lwG\\搜打撤·代号7.exe",
+      "file": "D:\\素材\\代号柒\\搜打撤\\.tmp\\exe-review-1018\\portable-temp\\3Ks4uz7SIbkMFwZ4XJSGFwA0lwG\\resources\\game\\assets\\portraits\\full\\wu.webp",
+      "exists": true,
+      "time": 1792335174908
+    }
+  ]
+}

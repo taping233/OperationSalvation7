@@ -918,7 +918,9 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
         && intents[0].damage === Math.max(0, f.atk || 0) && intents[0].hits === 1 && !intents[0].bleedBonus;
       const attackStat = simpleAttack ? '' : `<span class="sts-stat">[[icon:swords]] 攻 ${f.atk}${f.affix === 'frenzy' ? '×2' : ''}</span>`;
       setSection(parts.stats, sig, 'stats', `${attackStat}${immune ? '<span class="sts-stat">[[icon:crystal]] 庇幕免伤中</span>' : ''}`);
-      setSection(parts.chips, sig, 'chips', (aff ? `<span class="bt-affix" data-term="${f.affix}">${aff.icon} ${aff.name}</span>` : '') + curseChips(f.status, { compact: true }));
+      setSection(parts.chips, sig, 'chips', (aff ? `<span class="bt-affix" data-term="${f.affix}">${aff.icon} ${aff.name}</span>` : '')
+        + (f.rotSeedMarked ? '<span class="bt-affix" title="死亡时，对所有敌人造成等同于此时中毒层数的真实伤害">[[icon:skull]] 腐化标记</span>' : '')
+        + curseChips(f.status, { compact: true }));
       sig.init = true;
       ordered.push(rec);
     });

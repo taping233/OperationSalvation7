@@ -35,7 +35,7 @@ import { commands, getSnapshot, getBattleLiveness, findEffectiveCard as findCard
   function showHandCardDetails() { return false; }
 import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble } from './battle.hover.js';
 import { createTargetSession, isTargetableEnemy } from '../core/battle.target-session.js';
-import { isAreaEffect } from '../effects/battle.target-rules.js';
+import { isAreaEffect, isRandomEnemyEffect } from '../effects/battle.target-rules.js';
 import { BATTLE_PHASES } from '../runtime/battle.state.js';
   // ---------- 指向施法 ----------
   // 状态分支依据本地 NMouseCardPlay / NTargetManager；DOM 命中与 UI 缩放沿本项目接口。
@@ -264,7 +264,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     a.hover = null;
     a.snap = snapshot;
     a.card = entry.card;
-    a.fieldPlayable = a.follow && (a.side === 'self' || isAreaEffect(entry.card));
+    a.fieldPlayable = a.follow && (a.side === 'self' || isAreaEffect(entry.card) || isRandomEnemyEffect(entry.card));
     a.stage = stage;
     a.vr = UI.el.overlay.getBoundingClientRect();
     a.playBlockedReason = cardPlayBlockedReason(a.uid, a.side === 'self' ? 'self' : undefined, a.side !== 'any');
@@ -479,7 +479,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (returning) returningCards.delete(el);
     aim = {
       uid, card: entry.card, side, el, kind: kind || 'card',
-      fieldPlayable: isCard && (side === 'self' || isAreaEffect(entry.card)),
+      fieldPlayable: isCard && (side === 'self' || isAreaEffect(entry.card) || isRandomEnemyEffect(entry.card)),
       pointerId: e.pointerId, lastX: e.clientX, lastY: e.clientY,
       playBlockedReason, reasonShown: false,
       ax: r.left + r.width / 2 - vr.left, ay: r.top - vr.top + 6,

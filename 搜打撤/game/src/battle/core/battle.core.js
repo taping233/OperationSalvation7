@@ -96,7 +96,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
                // 黑暗吊坠：剩余免致命充能
                // 饮血剑：每消灭 1 敌 +1 攻（本局层数来源）
        // 毒杖：每打出 1 张法术 → 随机敌附加中毒
-        // 腐化之种：本局中毒敌人死亡时层数转移
+        // 腐化之种：标记敌人死亡时，按其中毒层数对所有敌人造成真实伤害。
   // —— 龙巢符文（第二玩法，2026-09-16 定版）——
   
   
@@ -160,7 +160,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
   
   
 
-  // 腐化之种（cc-rot-seed）：本局打出后，中毒敌人死亡时把中毒层数转移给另一名存活敌人。
+  // 腐化之种（cc-rot-seed）：仅标记目标的死亡触发群体真实伤害。
   // 三个死亡入口（hitFoe 直伤 / sweepDead 补扫 / afterEnemies 毒发）统一走这里
   
 

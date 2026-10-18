@@ -1,0 +1,37 @@
+{
+  "noWindows": true,
+  "failures": [],
+  "close": "passed",
+  "userAgent": "Codename7/44.1.0 Electron/44.1.0 Chrome/152.0.7977.65",
+  "mime": {
+    ".webp": "image/webp",
+    ".svg": "image/svg+xml",
+    ".css": "text/css; charset=utf-8",
+    ".ogg": "audio/ogg",
+    ".png": "image/png",
+    ".md": "application/octet-stream",
+    ".woff2": "font/woff2",
+    ".txt": "application/octet-stream",
+    ".js": "text/javascript; charset=utf-8",
+    ".ttf": "font/ttf",
+    ".json": "application/json; charset=utf-8",
+    "": "application/octet-stream",
+    ".wav": "audio/wav",
+    ".mp3": "audio/mpeg",
+    ".jpg": "image/jpeg",
+    ".html": "text/html; charset=utf-8"
+  },
+  "jsType": "text/javascript; charset=utf-8",
+  "htmlType": "text/html; charset=utf-8",
+  "files": 1837,
+  "queriedStylesheet": {
+    "status": 200,
+    "type": "text/css; charset=utf-8",
+    "matches": true
+  },
+  "audioRange": {
+    "status": 206,
+    "bytes": 32,
+    "range": "bytes 0-31/915133"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "version": 5,
+  "video": "output\\ost-snow-road-1018\\霜窗回声_唱片演示_v5_1080p.mp4",
+  "bytes": 35825772,
+  "sha256": "4565b6a2ce80a231dceff35fc7742046355b1a754df08249d57ef374880b4849",
+  "duration_seconds": 91.4285625,
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "frames": 2743,
+  "render_seconds": 133.0,
+  "inputs": [
+    {
+      "path": "搜打撤\\game\\assets\\reconstruction\\wallpaper-snow-road-1016.webp",
+      "sha256": "6595b1ca0f0c84ca438da2688501d1f0a0886e297fa16b6bf7c98cd2302407ef"
+    },
+    {
+      "path": "搜打撤\\game\\assets\\music-demo\\01-title-frostglass-v12.ogg",
+      "sha256": "1080484e7d1747339a145b247ce523f0776770e7c1e74398fe5b398a9f07309a"
+    },
+    {
+      "path": "output\\ost-snow-road-1018\\霜窗回声_手书字标_v3.png",
+      "sha256": "0ede0d12d54b708174dc76aa4910bddd199df23e451219ef1eef196f3f25046c"
+    }
+  ],
+  "visible_text": [
+    "霜窗回声"
+  ],
+  "design": {
+    "background": "first-wallpaper road crop [130,95,1250,725], Gaussian blur 10px, 36% cool dim mix; no duplicate face",
+    "disc": "620px disc, 574px original-wallpaper circle label, clockwise 6 degrees/second; three rim grooves",
+    "title": "built-in image_gen isolated handwritten title, static below disc",
+    "details": [
+      "six road-dash marks softly pulse per four bars at 84BPM",
+      "17 sparse background snowflakes",
+      "292px handwritten title at y815",
+      "no tonearm"
+    ],
+    "removed": [
+      "spectrum",
+      "progress",
+      "time",
+      "branding",
+      "English",
+      "bright white margins",
+      "tonearm",
+      "duplicate background face"
+    ]
+  },
+  "acquisition": "python docs/evidence/2026-10-18-ost-snow-road/render_ost_v3.py --render --v5; existing local Pillow/numpy/FFmpeg"
+}

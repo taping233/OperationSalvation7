@@ -91,6 +91,32 @@ export function createCharacterViewMotion() {
     const commit = () => {
       if (!current.isConnected || swaps.get(parent) !== request) return;
       if (reduced()) { current.replaceWith(next); return; }
+      const surface = current.querySelector('.roster-art-surface');
+      const replacement = next.querySelector('.roster-art-surface');
+      if (direction === 0 && surface && replacement) {
+        // 换肤保留原画框；两张图共用同一坐标，待机进度也连续。
+        current.querySelectorAll('[data-portrait-outgoing]').forEach(node => node.remove());
+        const idle = surface.querySelector('.art-figure-wrap')?.getAnimations?.()
+          .find(animation => animation.animationName?.startsWith('idle'));
+        const idleTime = idle?.currentTime;
+        current.dataset.skin = next.dataset.skin;
+        surface.before(replacement);
+        if (idleTime != null) {
+          replacement.querySelector('.art-figure-wrap')?.getAnimations?.()
+            .filter(animation => animation.animationName === idle.animationName)
+            .forEach(animation => { animation.currentTime = idleTime; });
+        }
+        surface.dataset.portraitOutgoing = 'true';
+        surface.setAttribute('aria-hidden', 'true');
+        surface.style.pointerEvents = 'none';
+        surface.style.zIndex = '2';
+        linkedAnimate(replacement, [{ opacity: 0 }, { opacity: 1 }],
+          { duration: motionTiming.regionEnter, easing: motionEasing.enter });
+        const fade = linkedAnimate(surface, [{ opacity: 1 }, { opacity: 0 }],
+          { duration: motionTiming.regionEnter, easing: motionEasing.enter, fill: 'forwards' });
+        fade?.finished.then(() => surface.remove(), () => surface.remove());
+        return;
+      }
       const outgoing = current.cloneNode(true);
       outgoing.querySelectorAll('[data-portrait-outgoing]').forEach(node => node.remove());
       outgoing.dataset.portraitOutgoing = 'true';

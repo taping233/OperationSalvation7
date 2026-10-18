@@ -17,7 +17,11 @@ const flush = async () => { for (let i = 0; i < 10; i++) await Promise.resolve()
 describe('sample-only runtime', () => {
   it.each(Object.keys(SAMPLE_CUES))('%s plays exactly one decoded sample and releases it', async id => {
     const { player, sources } = fixture(); const buffer = { duration: 1 };
-    player.load(async () => buffer); await flush(); expect(player.play(id)).toBe(true);
+    player.load(async () => buffer); await flush();
+    if (!SAMPLE_CUES[id].files.length) {
+      expect(player.play(id)).toBe(false); expect(sources).toHaveLength(0); return;
+    }
+    expect(player.play(id)).toBe(true);
     expect(sources).toHaveLength(1); expect(sources[0].buffer).toBe(buffer);
     expect(sources[0].start).toHaveBeenCalledOnce(); sources[0].onended();
     expect(player.voices.size).toBe(0); expect(sources[0].disconnect).toHaveBeenCalledOnce();

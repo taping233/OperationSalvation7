@@ -1,7 +1,9 @@
+// Historical credit assertions use the fixed pre-replacement page, alongside before.catalog.js.
+// Historical integration provenance; current runtime replacement is covered by sound-web-library.test.js.
 import { describe, expect, it } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { SAMPLE_CUES } from '../game/src/audio/sound.samples.catalog.js';
+import { SAMPLE_CUES } from '../docs/evidence/2026-10-18-web-sfx-replacement/before.catalog.js';
 import { SAMPLE_CUES as BEFORE } from '../docs/evidence/2026-10-18-safe-slot-foley/before/game/src/audio/sound.samples.catalog.js';
 
 const evidence = 'docs/evidence/2026-10-18-safe-slot-foley/';
@@ -36,8 +38,8 @@ describe('safe-slot recorded Foley integration', () => {
     const receipt = readJson(`${evidence}receipt.json`);
     const paths = pins.map(pin => pin.path);
     expect(receipt.files.map(file => file.path)).toEqual(paths);
-    expect(current.assets.filter(item => !paths.includes(item.path))).toEqual(before.assets);
-    expect(current.count).toBe(before.count + 2);
+    for (const asset of before.assets.filter(item => item.path.startsWith('sfx/'))) expect(current.assets.find(item => item.path === asset.path)).toEqual(asset);
+    expect(current.count).toBeGreaterThanOrEqual(before.count + 2);
     expect(current.count).toBe(current.assets.length);
     for (const pin of pins) {
       const matches = current.assets.filter(item => item.path === pin.path);
@@ -57,7 +59,7 @@ describe('safe-slot recorded Foley integration', () => {
   });
   it('retains source licensing and visible credits without claiming listening approval', () => {
     expect(readJson(`${evidence}receipt.json`).listening_verified).toBe(false);
-    expect(readFileSync('game/index.html', 'utf8')).toContain('挥动与安全格锁盒：');
+    expect(readFileSync('docs/evidence/2026-10-18-web-sfx-replacement/before.index.html', 'utf8')).toContain('挥动与安全格锁盒：');
     const credits = readFileSync('game/assets/sfx/real-foley/SOURCES.md', 'utf8');
     expect(credits).toContain('keyhole-lockbox-turn-06/unlock-01');
     expect(credits).toContain('https://creativecommons.org/publicdomain/zero/1.0/');

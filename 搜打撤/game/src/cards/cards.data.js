@@ -4,11 +4,11 @@ import { resolveCardCatalog } from './cards.catalog.js';
 export const dataSlice = {
     EVENTS_0919: [
       { id: 'tt6-demondeal', name: '隧道血契', cost: 0, rarity: '衍生', type: '事件', desc: '-5 血，获得 1 个军用保险柜。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-bandits', name: '暴雨劫道', cost: 0, rarity: '衍生', type: '事件', battle: true, desc: '反抗组织拾荒者 ×3~5（随层数增加）。奖励：密封物资箱 ×2。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-mystery', name: '实验室余粮', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片，+2 币。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-bandits', name: '暴雨劫道', cost: 0, rarity: '衍生', type: '事件', battle: true, desc: '可逃离，或迎战反抗组织拾荒者 ×3~5（随层数增加），胜利获得密封物资箱 ×2。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-mystery', name: '实验室余粮', cost: 0, rarity: '衍生', type: '事件', desc: '投骰领取：1~3 点获得员工通行证A碎片 ×1，4~6 点获得 3 币；也可离开。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-goldmine', name: '塌方采掘点', cost: 0, rarity: '衍生', type: '事件', desc: '稳妥取走 3 币，或冒险深挖获得 6 币并损失 3 血。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-goldhammer', name: '满电动力锤', cost: 0, rarity: '衍生', type: '事件', desc: '获得卡牌「闪金之锤」。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-relief', name: '临时救护站', cost: 0, rarity: '衍生', type: '事件', desc: '回复 6 点生命。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-goldhammer', name: '满电动力锤', cost: 0, rarity: '衍生', type: '事件', desc: '选择领取「闪金之锤」，或接受送信委托：下一家商店随机两格商品免费，排除初始攻击。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-relief', name: '临时救护站', cost: 0, rarity: '衍生', type: '事件', desc: '选择回复 6 点生命，或投骰获得 1 张随机招式。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-airdrop', name: '污染空投箱', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、能量饮料、随机药水中选择一项。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-chestdraw', name: '熔断物资箱', cost: 0, rarity: '衍生', type: '事件', desc: '从大、中、小宝箱中随机抽取 1 个开启。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-systemsupply', name: '末班配送无人机', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片和木材卡 ×1。', value: 0, sellable: false, unrandom: true },

@@ -1,0 +1,177 @@
+{
+  "files": [
+    {
+      "provider": "Kenney",
+      "page": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original_title": "Audio/close_002.ogg",
+      "archive_sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+      "key": "close",
+      "local_source": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/close_002.ogg",
+      "source_sha256": "bc4279d2bb2bf86592473eab6a8eab55e51b54a8619315000dbd780a83b102d8",
+      "path": "assets/sfx/selected15-r2-1018/close.wav",
+      "bytes": 42284,
+      "sha256": "f8ffb311dc68bc8952794f963911ec965ff723a585321c9856942c827deecd20",
+      "seconds": 0.22,
+      "processing": {
+        "filter": "aresample=48000,silenceremove=start_periods=1:start_duration=0.003:start_threshold=-55dB,asetrate=48000,aresample=48000,highpass=f=85,lowpass=f=7500,atrim=duration=0.22",
+        "gain": 0.7226023112053509,
+        "fade_in": 0.003,
+        "fade_out": 0.018
+      }
+    },
+    {
+      "provider": "Kenney",
+      "page": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original_title": "Audio/minimize_003.ogg",
+      "archive_sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+      "key": "status-down",
+      "local_source": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/minimize_003.ogg",
+      "source_sha256": "400e1041499de85ec8b5529a35ff36787288175c4696cf2018ecff24a3a3fd29",
+      "path": "assets/sfx/selected15-r2-1018/status-down.wav",
+      "bytes": 40148,
+      "sha256": "22b5fabd9c240ee6dcd95e45c1a4a2c93ac47ca53c228e8dd37de047e218dbcd",
+      "seconds": 0.208875,
+      "processing": {
+        "filter": "aresample=48000,silenceremove=start_periods=1:start_duration=0.003:start_threshold=-55dB,asetrate=48000,aresample=48000,highpass=f=85,lowpass=f=6500,atrim=duration=0.28",
+        "gain": 1,
+        "fade_in": 0.003,
+        "fade_out": 0.018
+      }
+    },
+    {
+      "provider": "Kenney",
+      "page": "https://kenney.nl/assets/impact-sounds",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original_title": "Audio/impactMetal_light_002.ogg",
+      "archive_sha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8",
+      "key": "parry",
+      "local_source": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/impactMetal_light_002.ogg",
+      "source_sha256": "25a96f90a9a1f88a531e824e126f0519504625e5635e65a72e4f31611428db29",
+      "path": "assets/sfx/selected15-r2-1018/parry.wav",
+      "bytes": 38444,
+      "sha256": "9099111c33cd8a5406e2c249bb9a080bf80a72780648fab84fe681b74c77005f",
+      "seconds": 0.2,
+      "processing": {
+        "filter": "aresample=48000,silenceremove=start_periods=1:start_duration=0.003:start_threshold=-55dB,asetrate=44160,aresample=48000,highpass=f=85,lowpass=f=6000,atrim=duration=0.2",
+        "gain": 0.3478313579380519,
+        "fade_in": 0.003,
+        "fade_out": 0.018
+      }
+    },
+    {
+      "provider": "Kenney",
+      "page": "https://kenney.nl/assets/impact-sounds",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original_title": "Audio/impactWood_medium_001.ogg",
+      "archive_sha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8",
+      "key": "parry-muted",
+      "local_source": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/impactWood_medium_001.ogg",
+      "source_sha256": "15271dbe8e2872dbb0ff1aeb7b12b2d2b92b7c1951c88532b9ab9158c36dfc73",
+      "path": "assets/sfx/selected15-r2-1018/parry-muted.wav",
+      "bytes": 38444,
+      "sha256": "f935159112c1b88ecb5e8d3b13bd82de784bd1db584a5a56fe9378179fe48e8a",
+      "seconds": 0.2,
+      "processing": {
+        "filter": "aresample=48000,silenceremove=start_periods=1:start_duration=0.003:start_threshold=-55dB,asetrate=48960,aresample=48000,highpass=f=85,lowpass=f=4800,atrim=duration=0.2",
+        "gain": 0.5459732256699886,
+        "fade_in": 0.003,
+        "fade_out": 0.018
+      }
+    },
+    {
+      "provider": "Kenney",
+      "page": "https://kenney.nl/assets/impact-sounds",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original_title": "Audio/impactGlass_light_002.ogg",
+      "archive_sha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8",
+      "key": "ice",
+      "local_source": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/impactGlass_light_002.ogg",
+      "source_sha256": "710db7451bb7857b9140dfe6afe4621ea2188ad65eda3919c569d1bb285b933d",
+      "path": "assets/sfx/selected15-r2-1018/ice.wav",
+      "bytes": 36256,
+      "sha256": "938dc1f0fe47f584a13c66a70ffe5f44122053baab2dd95fc7c8c1e46c5f0687",
+      "seconds": 0.18860416666666666,
+      "processing": {
+        "filter": "aresample=48000,silenceremove=start_periods=1:start_duration=0.003:start_threshold=-55dB,asetrate=51840,aresample=48000,highpass=f=85,lowpass=f=7500,atrim=duration=0.38",
+        "gain": 0.39158104602811367,
+        "fade_in": 0.003,
+        "fade_out": 0.035
+      }
+    },
+    {
+      "url": "https://soundeffect-lab.info/sound/battle/mp3/magic-gravity1.mp3",
+      "provider": "Sound Effect Lab",
+      "page": "https://soundeffect-lab.info/sound/battle/",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "original_title": "重力魔法1押しつぶされる",
+      "key": "curse",
+      "local_source": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/magic-gravity1.mp3",
+      "source_sha256": "0d065fdc1fe1daf88a4ad1a596c50470bab76007812936fe14397ad3d5d39016",
+      "path": "assets/sfx/selected15-r2-1018/curse.wav",
+      "bytes": 99884,
+      "sha256": "b0912d323310cb89a6585eedde83b7c4841f3a423ac8fb09f4d8370622f6b3d9",
+      "seconds": 0.52,
+      "processing": {
+        "filter": "aresample=48000,silenceremove=start_periods=1:start_duration=0.003:start_threshold=-55dB,asetrate=48000,aresample=48000,highpass=f=85,lowpass=f=5600,atrim=duration=0.52",
+        "gain": 0.5121932767547831,
+        "fade_in": 0.003,
+        "fade_out": 0.035
+      }
+    },
+    {
+      "url": "https://soundeffect-lab.info/sound/button/mp3/gauge-recovery3.mp3",
+      "provider": "Sound Effect Lab",
+      "page": "https://soundeffect-lab.info/sound/button/",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "original_title": "ゲージ回復3控えめな音",
+      "key": "heal",
+      "local_source": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/gauge-recovery3.mp3",
+      "source_sha256": "8cf7e5ca0a2222d4997c942a8be4ee21e32407d6c8058fefd41b1628dfeea544",
+      "path": "assets/sfx/selected15-r2-1018/heal.wav",
+      "bytes": 111912,
+      "sha256": "0c45bf9af380d2109ca149f88d2bd81c99957cb205db044d4fb2db59572f9bd6",
+      "seconds": 0.5826458333333333,
+      "processing": {
+        "filter": "aresample=48000,silenceremove=start_periods=1:start_duration=0.003:start_threshold=-55dB,asetrate=48000,aresample=48000,highpass=f=85,lowpass=f=6800,atrim=duration=0.62",
+        "gain": 0.7099961626208251,
+        "fade_in": 0.003,
+        "fade_out": 0.035
+      }
+    },
+    {
+      "url": "https://soundeffect-lab.info/sound/button/mp3/gauge-recovery3.mp3",
+      "provider": "Sound Effect Lab",
+      "page": "https://soundeffect-lab.info/sound/button/",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "original_title": "ゲージ回復3控えめな音",
+      "key": "curse-end",
+      "local_source": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/gauge-recovery3.mp3",
+      "source_sha256": "8cf7e5ca0a2222d4997c942a8be4ee21e32407d6c8058fefd41b1628dfeea544",
+      "path": "assets/sfx/selected15-r2-1018/curse-end.wav",
+      "bytes": 53804,
+      "sha256": "dbfd018e0324c4ddcbe191ae9d262322f256c121c3a803344476e737d545fc59",
+      "seconds": 0.28,
+      "processing": {
+        "filter": "aresample=48000,silenceremove=start_periods=1:start_duration=0.003:start_threshold=-55dB,asetrate=55200,aresample=48000,highpass=f=85,lowpass=f=6200,atrim=duration=0.28",
+        "gain": 1,
+        "fade_in": 0.003,
+        "fade_out": 0.018
+      }
+    }
+  ],
+  "method": "Reuse earlier official Kenney Interface archive; official Kenney Impact download link; two Sound Effect Lab audio downloads linked from retained official source lists",
+  "tests_run": false,
+  "build_run": false,
+  "browser_verification": false,
+  "listening_verified": false
+}

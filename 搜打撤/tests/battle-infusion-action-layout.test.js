@@ -417,14 +417,14 @@ describe('focused infusion workspace layout contract', () => {
     return found;
   }
   it('keeps source rules beside an independently scrolling material grid', () => {
-    expect(declarations('body #overlay [data-infusion-workspace]')).toMatchObject({ display:'grid', 'grid-template-columns':'340px minmax(0,1fr)', 'min-height':'0' });
+    expect(declarations('body #overlay [data-infusion-workspace]')).toMatchObject({ display:'grid', 'grid-template-columns':'300px minmax(0,1fr)', 'min-height':'0' });
     expect(declarations('body #overlay .infusion-materials')).toMatchObject({ overflow:'auto', 'min-height':'0', display:'grid', 'overscroll-behavior':'contain' });
-    expect(declarations('body #overlay .infusion-selection-summary')).toMatchObject({ flex:'none', display:'flex', padding:'8px 18px' });
-    expect(declarations('body #overlay .infusion-card-face .hs-card')).toMatchObject({ 'font-size':'14px' });
+    expect(declarations('body #overlay .infusion-selection-summary')).toMatchObject({ display:'none' });
+    expect(declarations('body #overlay .infusion-card-face .hs-card')).toMatchObject({ 'font-size':'13px' });
   });
   it('keeps quantity buttons distinct and selection visibly outlined', () => {
     expect(declarations('body #overlay .infusion-quantity>button')).toMatchObject({ width:'48px', height:'46px', flex:'none' });
-    expect(declarations('body #overlay .infusion-material.is-selected')).toMatchObject({ 'border-color':'#daca9c' });
+    expect(declarations('body #overlay .infusion-material.is-selected')).toMatchObject({ 'border-color':'#c3e3e5' });
     expect(declarations('body #overlay .infusion-card-face .hs-card')).toMatchObject({ 'pointer-events':'none' });
   });
 });

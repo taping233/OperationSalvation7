@@ -1,0 +1,38 @@
+[
+  {
+    "id": "heixiang",
+    "image": {
+      "complete": true,
+      "height": 1536,
+      "src": "http://localhost:5200/assets/portraits/full/heixiang.webp?v=0.60.0",
+      "width": 1024
+    }
+  },
+  {
+    "id": "xingyue",
+    "image": {
+      "complete": true,
+      "height": 1536,
+      "src": "http://localhost:5200/assets/portraits/full/xingyue.webp?v=0.60.0",
+      "width": 1024
+    }
+  },
+  {
+    "id": "baita",
+    "image": {
+      "complete": true,
+      "height": 1536,
+      "src": "http://localhost:5200/assets/portraits/full/baita.webp?v=0.60.0",
+      "width": 1024
+    }
+  },
+  {
+    "id": "changwuyu",
+    "image": {
+      "complete": true,
+      "height": 1536,
+      "src": "http://localhost:5200/assets/portraits/full/changwuyu.webp?v=0.60.0",
+      "width": 1024
+    }
+  }
+]

@@ -1,3 +1,4 @@
+import { rollEventDice } from './helpers/event-dice.js';
 // Real session/loadGame/RunStorage, event flow/choice, fixed rewards and Chests.
 // Canvas, narrative lookup and presentation are isolated; no browser/player data.
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -38,7 +39,7 @@ const ownCount=id=>session.game.ownedCards.filter(owned=>owned.card.id===id).len
 function fill(n){return Array.from({length:n},(_,i)=>({uid:`filler-${i}`,card:{id:`filler-${i}`,name:`不同已有卡${i}`,type:'法术',rarity:'古朴'}}));}
 async function openQuartermaster(card=apollo){
   catalog=[event,card,bonus];const opening=flow.runEventDeck();await vi.advanceTimersByTimeAsync(1000);await opening;
-  acts.evtChoice({i:'0'});expect(session.game.coins).toBe(15);expect(saved().nodeRewards[key]).toMatchObject({paidCoins:3,taken:null});
+  acts.evtChoice({i:'0'}); rollEventDice(UI);expect(session.game.coins).toBe(15);expect(saved().nodeRewards[key]).toMatchObject({paidCoins:3,taken:null});
 }
 function reload(){session.game.state='title';const result=session.loadGame(1);expect(result,JSON.stringify(result)).toMatchObject({ok:true});}
 beforeEach(()=>{

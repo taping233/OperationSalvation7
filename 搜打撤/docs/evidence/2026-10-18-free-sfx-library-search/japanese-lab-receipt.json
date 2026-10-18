@@ -1,0 +1,80 @@
+{
+  "files": [
+    {
+      "provider": "効果音ラボ",
+      "page": "https://soundeffect-lab.info/sound/button/",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision3.mp3",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "group": "ui",
+      "label": "柔和按钮",
+      "original_label": "決定ボタンを押す3.mp3",
+      "local_file": "sources/japanese/lab-decision3.mp3",
+      "bytes": 36988,
+      "sha256": "9f01ead7fddc02c7fbe70024260f07a1718157f70385d3162b9e662ba89db8f8"
+    },
+    {
+      "provider": "効果音ラボ",
+      "page": "https://soundeffect-lab.info/sound/button/",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision6.mp3",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "group": "ui",
+      "label": "克制电子按钮",
+      "original_label": "決定ボタンを押す6.mp3",
+      "local_file": "sources/japanese/lab-decision6.mp3",
+      "bytes": 26330,
+      "sha256": "75c5b3b4eec7e92e741e3df4b95c5c1400383eff05f470353f901ed336d19221"
+    },
+    {
+      "provider": "効果音ラボ",
+      "page": "https://soundeffect-lab.info/sound/button/",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision23.mp3",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "group": "ui",
+      "label": "轻确认",
+      "original_label": "決定ボタンを押す23.mp3",
+      "local_file": "sources/japanese/lab-decision23.mp3",
+      "bytes": 30719,
+      "sha256": "48eae246a6c9a98bfb85e513a750a810930a78928395e4d5ec541213618bd532"
+    },
+    {
+      "provider": "効果音ラボ",
+      "page": "https://soundeffect-lab.info/sound/button/",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision10.mp3",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "group": "reward",
+      "label": "技能获得",
+      "original_label": "決定ボタンを押す10.mp3",
+      "local_file": "sources/japanese/lab-decision10.mp3",
+      "bytes": 58176,
+      "sha256": "2eb1d91cdd78d135b1d2e3c77864a462f23ba03999046932c655dc5facbb2f28"
+    },
+    {
+      "provider": "効果音ラボ",
+      "page": "https://soundeffect-lab.info/sound/button/",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision30.mp3",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "group": "reward",
+      "label": "清爽电子提示",
+      "original_label": "決定ボタンを押す30.mp3",
+      "local_file": "sources/japanese/lab-decision30.mp3",
+      "bytes": 79620,
+      "sha256": "cc013d760f161818f9c240dbaa2d4c880b5f3dad028aaa3833727863cd9dadd7"
+    },
+    {
+      "provider": "効果音ラボ",
+      "page": "https://soundeffect-lab.info/sound/button/",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision40.mp3",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "group": "reward",
+      "label": "短上行提示",
+      "original_label": "決定ボタンを押す40.mp3",
+      "local_file": "sources/japanese/lab-decision40.mp3",
+      "bytes": 26496,
+      "sha256": "c46e5a058c7d7582e5745f28cc3281a40f4f3d01f5ad20b9b2c622879b5069e2"
+    }
+  ],
+  "game_installed": false,
+  "tests_run": false,
+  "listening_verified": false,
+  "distribution": "private project selection only"
+}

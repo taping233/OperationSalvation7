@@ -19,6 +19,7 @@ import { isTurbo } from '../core/turbo.js';
 import { renderScheduler } from '../core/render-scheduler.js';
 import { findMapTravelPath, setMapTravelPresentation } from './map-travel-path.js';
 import { createTravelMotion, createArrivalFeedback } from './map-travel-motion.js';
+import { showLayerPassage } from '../ui/map-passage.js';
 import { cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openChestsOnCell, openFixedRewardsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene, resumeChestsOnCell } from './game.run.scenes.js';
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal, openEntrySupply, resumeNodeRestore } from './game.run.altar.js';
 import { bindNodeEvent, nodeEventAt, claimResourceReward, entrySupplyAt, entrySupplyGate, nodeActionBinding, resourceRewardAt } from './node-reward-state.js';
@@ -27,6 +28,8 @@ import { rewardExitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
 import { createSignalPuzzleState, mountEventSignalPuzzle } from '../ui/event-signal-puzzle.js';
 import { nodeChestRewardAt } from './chest-reward-save.js';
 import { recodeEligibleCards } from './event-recode-candidates.js';
+import { createEventDiceController } from '../ui/event-dice.js';
+import { showEventRecodeResult } from '../ui/event-recode-result.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -86,6 +89,7 @@ export function moveTo(toLi, toIdx) {
   const commitNode = () => {
     const from = route[committed], to = route[++committed];
     const current = game.layerData[from.li]?.logical[from.idx];
+    if (!reduced && from.li !== to.li) showLayerPassage(game, from.li, to.li);
     game.pos = { x: to.x, y: to.y };
     game.layerIdx = to.li;
     game.trackPos = to.idx;
@@ -614,6 +618,11 @@ async function triggerEventCard(card, current) {
   if (!current() || game.state !== 'modal' || (loadingBody && (UI.el?.ovBody !== loadingBody ||
       (loadingBody.firstElementChild && loadingBody.firstElementChild !== loadingSurface)))) return;
   const choices = eventChoiceSpec(card, narrative);
+  const resumedChoice = nodeEventAt(game)?.actionChoice;
+  if (Number.isInteger(resumedChoice) && choices?.[resumedChoice]?.rolls) {
+    choices[resumedChoice].run();
+    return;
+  }
   // 2026-09-10 留言 #18：没有专属图的事件此前全部回落到祭坛图（等于所有事件共用 1 张背景）。
   // 改为从 3 张事件场景图中随机轮换（scene-event-custom-a/b/c，见 css/scenes.css）。
   const GENERIC_EVENT_BGS = ['scene-event-custom-a', 'scene-event-custom-b', 'scene-event-custom-c'];
@@ -658,10 +667,15 @@ async function triggerEventCard(card, current) {
         SDT.Sound.sfx('deny');
         return false;
       }
+      if (choice.rolls) {
+        const record = nodeEventAt(game);
+        record.actionChoice = index;
+        if (saveGame() === false) { renderEventPage('未能保存选择，请重试。'); return false; }
+      }
       evtSettled = true;
       setBagReturnHook(null);
       UI.hideOverlay();
-      if (!choice.deferConsume) consumeCurrentCell();
+      if (!choice.deferConsume && !choice.rolls) consumeCurrentCell();
       choice.run();
       if (game.state !== 'modal') finishInstant();
       return true;
@@ -714,23 +728,51 @@ function eventPool(types) {
   return SDT.Cards.all().filter(c => wanted.has(c.type) && SDT.Cards.isRandomObtainable(c));
 }
 
-function uniqueEventPicks(pool, count) {
-  const bag = [...pool];
-  const out = [];
-  while (bag.length && out.length < count) {
-    const at = Math.floor(Random.random('event') * bag.length);
-    const picked = bag.splice(at, 1)[0];
-    if (picked && !out.some(c => c.id === picked.id || c.name === picked.name)) out.push(picked);
-  }
-  return out;
-}
-
 function closeEventFlow() {
   setBagReturnHook(null);
   UI.hideOverlay();
   game.state = 'idle';
   saveGame();
   UI.refresh(game);
+}
+
+function eventDice(title, key, outcomes, done, sides, beforeRoll) {
+  const owner = nodeEventAt(game);
+  const current = captureEventContext();
+  return createEventDiceController({ UI, SDT, save:saveGame,
+    show:spec => { game.state = 'modal'; nodeShell({ tone:'event', asset:EVENT_SCENE_META[owner.eventId]?.[2], icon:'[[icon:dice]]', ...spec }); UI.refresh(game); },
+    bind:act => eventPageBinding(act, current), onLeave:closeEventFlow, setReturn:setBagReturnHook,
+  }).open({ owner, key, title, outcomes, done, sides, beforeRoll, current });
+}
+
+function finishEventRoll(run) {
+  const record = nodeEventAt(game);
+  if (record) delete record.actionChoice;
+  consumeCurrentCell();
+  setBagReturnHook(null);
+  UI.hideOverlay();
+  run();
+}
+
+// Each card uses a numbered die with exactly one face per eligible card.
+// Frozen candidate IDs and completed dice are reused on reentry, including partial sequences.
+function drawEventCards(title, key, pools, done, unique = true) {
+  const owner = nodeEventAt(game), drawn = [];
+  const next = index => {
+    if (index >= pools.length) { done(drawn); return; }
+    const pool = (typeof pools[index] === 'function' ? pools[index]() : pools[index])
+      .filter(c => c && (!unique || !drawn.some(other => other.id === c.id || other.name === c.name)));
+    const outcomes = pool.map(c => ({label:c.name,value:c.id}));
+    if (!outcomes.length && !owner.dice?.[`${key}:${index}`]) {
+      UI.log('没有符合条件的卡牌，事件与已投结果已保留。', 'warn'); closeEventFlow(); return;
+    }
+    eventDice(`${title} · 第 ${index + 1}/${pools.length} 张`, `${key}:${index}`, outcomes, id => {
+      const card = SDT.Cards.all().find(c => c.id === id);
+      if (!card) { UI.log('本次骰子对应卡牌暂不可用，结果已保留。','warn'); closeEventFlow(); return; }
+      drawn.push(card); next(index + 1);
+    });
+  };
+  next(0);
 }
 
 function spendEventCoins(amount, reason) {
@@ -769,6 +811,22 @@ function openEventRecode() {
   game.state = 'modal';
   const eligible = recodeEligibleCards(game.ownedCards, SDT.Cards.all(), game.myClass, card => SDT.Cards.isRandomObtainable(card));
   const need = Math.min(2, eligible.length);
+  const owner = nodeEventAt(game);
+  const convert = () => {
+    const entries = owner.recodeUids.map(uid => game.ownedCards.find(o => o.uid === uid));
+    if (entries.some(entry => !entry)) { UI.log('待重编的卡牌已不在背包中，本次结果保留。','warn'); closeEventFlow(); return; }
+    drawEventCards('故障重编','recode',entries.map(entry => transformCandidates(entry.card)), cards => showEventRecodeResult({ UI, Cards:SDT.Cards, cards, entries, nodeShell, setReturn:setBagReturnHook, current:captureEventContext(), done:() => {
+      if (entries.some(entry => !game.ownedCards.includes(entry))) { UI.log('原卡已不在背包中，结果保留，请重新进入事件。', 'warn'); closeEventFlow(); return; }
+      finishEventRoll(() => {
+      entries.forEach((entry,i) => {
+        UI.log(`[[icon:recycle]] 【${esc(entry.card.name)}】重编为【${esc(cards[i].name)}】`, 'loot');
+        entry.card = {...cards[i]};
+      });
+      SDT.Sound.sfx('recodeComplete'); closeEventFlow();
+      });
+    } }), false);
+  };
+  if (owner.recodeUids?.length) { convert(); return; }
   if (!need) {
     UI.log('[[icon:cards]] 背包中没有可转换的招式或装备卡', 'warn');
     closeEventFlow();
@@ -800,22 +858,12 @@ function openEventRecode() {
       else if (selected.size < need) selected.add(entry.uid);
       render();
     });
-    UI.act('eventRecodeLeave', () => { if (!settled && active()) { settled = true; closeEventFlow(); } });
+    UI.act('eventRecodeLeave', () => { if (!settled && active()) { settled = true; finishEventRoll(closeEventFlow); } });
     UI.act('eventRecodeGo', () => {
       if (settled || !active() || selected.size !== need) return;
       settled = true;
-      for (const uid of selected) {
-        const entry = game.ownedCards.find(o => o.uid === uid);
-        if (!entry) continue;
-        const before = entry.card;
-        const pool = transformCandidates(before);
-        if (!pool.length) continue;
-        const after = pool[Math.floor(Random.random('card') * pool.length)];
-        entry.card = { ...after };
-        UI.log(`[[icon:recycle]] 【${esc(before.name)}】重编为同类型同稀有度的【${esc(after.name)}】`, 'loot');
-      }
-      SDT.Sound.sfx('recodeComplete');
-      closeEventFlow();
+      owner.recodeUids = [...selected];
+      convert();
     });
     UI.refresh(game);
   };
@@ -825,31 +873,61 @@ function openEventRecode() {
 function openEventPotions() {
   if (resumeEventCardChoice()) return;
   const pool = eventPool('道具').filter(c => /药水/.test(c.name));
-  eventCardChoiceController().open('ev19-potions', uniqueEventPicks(pool, 3));
+  const count = Math.min(3, new Set(pool.map(c => c.name)).size);
+  if (!count) { UI.log('药摊暂无药水。','warn'); closeEventFlow(); return; }
+  drawEventCards('避难市集药摊','potions',Array(count).fill(pool), cards => eventCardChoiceController().open('ev19-potions', cards));
 }
 
 function openEventQuartermaster() {
   if (resumeEventCardChoice()) return;
-  const cards = uniqueEventPicks(eventPool('装备'), 3);
-  if (!spendEventCoins(3, '军需征用')) { closeEventFlow(); return; }
-  eventCardChoiceController().open('ev19-quartermaster', cards);
+  const owner = nodeEventAt(game), pool = eventPool('装备');
+  const count = Math.min(3,new Set(pool.map(c => c.name)).size);
+  if (!count) { UI.log('军需处暂无装备。','warn'); closeEventFlow(); return; }
+  if (!owner.quartermasterPaid) {
+    if (!spendEventCoins(3, '军需征用')) { delete owner.actionChoice; closeEventFlow(); return; }
+    owner.quartermasterPaid = true;
+  }
+  drawEventCards('装备征用令','quartermaster',Array(count).fill(pool), cards => eventCardChoiceController().open('ev19-quartermaster', cards));
 }
 
 function openEventGamble() {
+  const owner = nodeEventAt(game);
+  if (!owner.gamble) owner.gamble = { attempts:0, pending:null };
+  const state = owner.gamble;
+  if (!state.prizeIds) {
+    drawEventCards('地下商场黑市','gamble-prizes',[eventPool('装备'),eventPool(['武术','法术']),eventPool(['武术','法术'])], cards => {
+      state.prizeIds = cards.map(c => c.id); openEventGamble();
+    });
+    return;
+  }
   game.state = 'modal';
-  const equip = uniqueEventPicks(eventPool('装备'), 1);
-  const moves = uniqueEventPicks(eventPool(['武术', '法术']), 2);
-  const prizes = [...equip, ...moves];
-  let attempts = 0;
+  const prizes = state.prizeIds.map(id => SDT.Cards.all().find(c => c.id === id)).filter(Boolean);
+  let attempts = state.attempts;
   let settled = false;
   const current = captureEventContext();
+  const attempt = () => {
+    const attemptNumber = state.pending ?? state.attempts + 1;
+    const guaranteed = attemptNumber >= 5;
+    eventDice('地下商场黑市 · 投币判定',`gamble-attempt:${attemptNumber}`,
+      guaranteed ? [{label:'第 5 次保底：拿走三张卡',value:true}] : [{label:'本次落空',value:false},{label:'拿走三张卡',value:true}], hit => {
+        state.pending = null;
+        attempts = state.attempts;
+        if (!hit) { SDT.Sound.sfx('blackMarketLose'); render(true); return; }
+        settled = true; SDT.Sound.sfx('blackMarketWin');
+        finishEventRoll(() => openFixedRewardsOnCell(prizes, '地下商场黑市'));
+      },6,() => {
+        if (!spendEventCoins(3,'黑市抽签')) return false;
+        state.attempts = attemptNumber; state.pending = attemptNumber;
+        return true;
+      });
+  };
   const render = (lastMiss = false) => {
     if (settled || !current()) return;
     game.state = 'modal';
     setBagReturnHook(() => render(lastMiss));
     nodeShell({
       tone: 'event', asset: 'scene-event-gamble', icon: '[[icon:dice]]', title: '地下商场黑市',
-      sub: `每次投入 <b>3 币</b>，有 <b>50%</b> 概率拿走全部三张卡；第 <b>5</b> 次必定成功。已尝试 ${attempts}/5 次。${lastMiss ? '<br><b class="danger">指示灯变红，这次什么也没拿到。</b>' : ''}`,
+      sub: `每次投入 <b>3 币</b>后亲手投骰：<b>1～3 点落空，4～6 点拿走三张卡（50%）</b>；第 <b>5</b> 次任意点数都成功。已尝试 ${attempts}/5 次。${lastMiss ? '<br><b class="danger">指示灯变红，这次什么也没拿到。</b>' : ''}`,
       body: `<div class="bt-hand event-choice-hand">${prizes.map((c, i) => `<button type="button" class="bt-card event-choice-card" data-act="eventGambleRead" data-i="${i}" aria-label="放大查看${escAttr(c.name)}" aria-haspopup="dialog">${SDT.Cards.cardHTML(c, 'sm')}</button>`).join('')}</div>
         <p class="loot-footer-note">点击卡牌放大查看</p>
         <div class="scene-ops"><button class="ov-btn" data-act="eventGambleLeave">放弃并离开</button><button class="ov-btn ok" data-act="eventGambleTry" ${(game.coins || 0) < 3 || !prizes.length ? 'disabled' : ''}>[[icon:coin]] 投入 3 币${attempts === 4 ? '（本次保底）' : ''}</button></div>`,
@@ -861,16 +939,9 @@ function openEventGamble() {
       const source = UI.el.ovBody.querySelector(`[data-act="eventGambleRead"][data-i="${i}"]`);
       UI.showCardZoom(card, { hideNote:true, presentation:'expedition', from:source, returnFocus:source });
     });
-    UI.act('eventGambleLeave', () => { if (!settled && active()) { settled = true; closeEventFlow(); } });
+    UI.act('eventGambleLeave', () => { if (!settled && active()) { settled = true; finishEventRoll(closeEventFlow); } });
     UI.act('eventGambleTry', () => {
-      if (settled || !active() || !spendEventCoins(3, '黑市抽签')) return;
-      attempts++;
-      const hit = attempts >= 5 || Random.random('event') < 0.5;
-      if (!hit) { SDT.Sound.sfx('blackMarketLose'); render(true); return; }
-      settled = true;
-      SDT.Sound.sfx('blackMarketWin');
-      UI.log(`[[icon:sparkles]] 黑市闸门弹开：第 ${attempts} 次投币成功，1 张装备与 2 张招式待领取`, 'loot');
-      openFixedRewardsOnCell(prizes, '地下商场黑市');
+      if (!settled && active()) attempt();
     });
     UI.refresh(game);
   };
@@ -879,7 +950,8 @@ function openEventGamble() {
     closeEventFlow();
     return;
   }
-  render(false);
+  if (state.pending !== null) attempt();
+  else render(state.attempts > 0);
 }
 
 // 事件分支只覆盖已有资源/效果；未列出的旧事件继续单按钮结算，兼容旧存档与自定义事件卡。
@@ -897,7 +969,10 @@ function eventChoiceSpec(card, narrative = null) {
   //     直接走自定义选项（旧 ink 叙事仍作 intro 展示，效果按新卡面结算）——
   const V2 = {
     'tt6-mystery': () => [
-      { label: '接收补给', detail: '获得员工通行证A碎片，+2 币', tone: 'ok', run: settle(() => { gainFragment(); gainCoins(2); }) },
+      { label:'投骰领取', detail:'1～3 点：员工通行证A碎片 ×1；4～6 点：3 币', tone:'ok', rolls:true,
+        run:() => eventDice(card.name, 'supply', [{label:'员工通行证A碎片 ×1',value:'fragment'},{label:'3 币',value:'coins'}],
+          value => finishEventRoll(settle(() => { if (value === 'fragment') gainFragment(); else gainCoins(3); })), 6) },
+      { label:'离开', detail:'不领取物资', run:settle(() => {}) },
     ],
     'tt6-systemsupply': () => {
       const wood = SDT.Cards.all().find(c => c.id === 'tt-wood');
@@ -920,25 +995,32 @@ function eventChoiceSpec(card, narrative = null) {
     ],
     'tt6-airdrop': () => {
       const potionPool = SDT.Cards.all().filter(c => c.type === '道具' && SDT.Cards.isRandomObtainable(c) && (/药水/.test(c.name) || c.name === '能量饮料'));
-      const potion = potionPool.length ? potionPool[Math.floor(Random.random('loot') * potionPool.length)] : null;
       const woodCard = SDT.Cards.all().find(c => c.id === 'tt-wood');
       const rationCard = SDT.Cards.all().find(c => c.id === 'tt-rations');
       return [
         { label: '木材', detail: '木材卡 ×1', run: () => rewards(woodCard) },   // 需求 #10：物资一律以卡牌入包
         { label: '口粮', detail: '口粮卡 ×1', run: () => rewards(rationCard) },
         { label: '能量饮料', detail: '回复 6 血', tone: 'ok', run: settle(() => { game.heal(6); UI.log('[[icon:heart]] 一罐能量饮料下肚，回复 6 点生命', 'ok'); }) },
-        { label: '随机药水', detail: potion ? `获得【${potion.name}】：${potion.desc || '效果见卡牌说明'}` : '（补给已耗尽）', tone: 'ok', run: () => rewards(potion) },
+        { label:'随机药水', detail:'亲手投骰抽取 1 瓶药水；投骰前展示全部对应点数', tone:'ok', rolls:true,
+          run:() => drawEventCards(card.name,'airdrop-potion',[potionPool], cards => finishEventRoll(() => rewards(...cards))) },
       ];
     },
     'tt6-chestdraw': () => [
-      { label: '开箱', detail: '从大、中、小宝箱中随机抽取 1 个', tone: 'ok', run: () => {
-        const kinds = ['large', 'medium', 'small'];
-        const kind = kinds[Math.floor(Random.random('loot') * kinds.length)];
-        openChestsOnCell([{ kind }], '你撬开了一个未知的箱子');
-      } },
+      { label:'投骰开箱', detail:'1～2 点：小型物资箱；3～4 点：密封物资箱；5～6 点：军用保险柜', tone:'ok', rolls:true,
+        run:() => eventDice(card.name,'chest-kind',[
+          {label:'小型物资箱',value:'small'},{label:'密封物资箱',value:'medium'},{label:'军用保险柜',value:'large'},
+        ], kind => finishEventRoll(() => openChestsOnCell([{ kind }], '你投骰选中的物资箱')),6) },
     ],
     'tt6-goldhammer': () => [
       { label: '查看并领取', detail: '获得卡牌「闪金之锤」；放不下时可先整理背包', tone: 'ok', run: () => rewards(SDT.Cards.all().find(c => c.id === 'cmtn0xt0zr7')) },
+      { label:'接受送信委托', detail:'替校工把配送凭据交给下一家商店：随机两格商品免费，排除初始攻击；与领取锤子二选一。', tone:'ok',
+        run:settle(() => { nodeEventAt(game).commission = {status:'pending'};
+          UI.log('[[icon:notes]] 校工把配送凭据塞进你的手里：“交给下一家店的行商，两格货物算我的账。”','sys'); }) },
+    ],
+    'tt6-relief': () => [
+      { label:'接受处理', detail:'回复 6 点生命', tone:'ok', run:settle(() => game.heal(6)) },
+      { label:'领取防身招式', detail:'放弃治疗，投骰获得 1 张随机招式（武术或法术）', rolls:true,
+        run:() => drawEventCards(card.name,'relief-move',[eventPool(['武术','法术'])], cards => finishEventRoll(() => rewards(...cards))) },
     ],
     'ev19-vital': () => [
       { label: '接受强化急救', tone: 'ok', run: settle(() => {
@@ -961,22 +1043,22 @@ function eventChoiceSpec(card, narrative = null) {
       } },
     ],
     'ev19-recode': () => [
-      { label: '接入重编台', tone: 'ok', run: openEventRecode },
+      { label: '接入重编台', detail:'选好卡牌后，亲手投骰决定同类型同稀有度的新卡', tone: 'ok', rolls:true, run: openEventRecode },
     ],
     'ev19-potions': () => [
-      { label: '查看药摊', tone: 'ok', deferConsume:true, run: openEventPotions },
+      { label: '查看药摊', detail:'投骰抽出 3 瓶药水，再选择 1 瓶', tone: 'ok', rolls:true, deferConsume:true, run: openEventPotions },
     ],
     'ev19-arrows': () => [
-      { label: '打开弹药柜', tone: 'ok', run: () => {
-        const arrows = uniqueEventPicks(eventPool(['武术', '法术', '装备']).filter(c => /箭/.test(c.name) && c.rarity !== '职业' && !c.cls), 2);
-        rewards(...arrows);
+      { label:'投骰打开弹药柜', tone:'ok', rolls:true, run:() => {
+        const arrows = eventPool(['武术','法术','装备']).filter(c => /箭/.test(c.name) && c.rarity !== '职业' && !c.cls);
+        drawEventCards(card.name,'arrows',[arrows,arrows], cards => finishEventRoll(() => rewards(...cards)));
       } },
     ],
     'ev19-gamble': () => [
-      { label: '查看黑市货物', run: openEventGamble },
+      { label: '查看黑市货物', detail:'先投骰抽出货物；每次 3 币，1～3 点落空、4～6 点全拿，第 5 次保底', rolls:true, run: openEventGamble },
     ],
     'ev19-quartermaster': () => [
-      { label: '支付 3 币', detail: (game.coins || 0) >= 3 ? '从 3 张装备卡中选择 1 张' : `币不足（现有 ${game.coins || 0}）`, tone: (game.coins || 0) >= 3 ? 'ok' : 'danger', deferConsume:true, run: openEventQuartermaster },
+      { label: '支付 3 币', detail: (game.coins || 0) >= 3 ? '亲手投骰抽出 3 张装备，再选择 1 张' : `币不足（现有 ${game.coins || 0}）`, tone: (game.coins || 0) >= 3 ? 'ok' : 'danger', deferConsume:true, rolls:true, run: openEventQuartermaster },
       { label: '放弃征用', detail: '保留货币继续行进', run: settle(() => { UI.log('你没有签下军需征用单', 'dim'); }) },
     ],
   };

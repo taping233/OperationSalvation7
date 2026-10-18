@@ -1,0 +1,81 @@
+{
+  "url": "http://127.0.0.1:5200/",
+  "input": "真实UI点击进入档位01→配置→伙伴→逐只切换",
+  "pets": [
+    {
+      "id": "dog",
+      "name": "旺财",
+      "selected": true
+    },
+    {
+      "id": "falcon",
+      "name": "猎鹰宝宝",
+      "selected": true
+    },
+    {
+      "id": "cat",
+      "name": "招财猫",
+      "selected": true
+    },
+    {
+      "id": "robot",
+      "name": "变形机器人",
+      "selected": true
+    },
+    {
+      "id": "fire",
+      "name": "火焰精灵",
+      "selected": true
+    },
+    {
+      "id": "penguin",
+      "name": "小企鹅咕嘎",
+      "selected": true
+    }
+  ],
+  "images": [
+    {
+      "complete": true,
+      "height": 720,
+      "src": "http://127.0.0.1:5200/assets/icons/base-v3/companion-dog.webp?v=0.60.0",
+      "width": 720
+    },
+    {
+      "complete": true,
+      "height": 720,
+      "src": "http://127.0.0.1:5200/assets/icons/base-v3/companion-falcon.webp?v=0.60.0",
+      "width": 720
+    },
+    {
+      "complete": true,
+      "height": 720,
+      "src": "http://127.0.0.1:5200/assets/icons/base-v3/companion-cat.webp?v=0.60.0",
+      "width": 720
+    },
+    {
+      "complete": true,
+      "height": 720,
+      "src": "http://127.0.0.1:5200/assets/icons/base-v3/companion-robot.webp?v=0.60.0",
+      "width": 720
+    },
+    {
+      "complete": true,
+      "height": 720,
+      "src": "http://127.0.0.1:5200/assets/icons/base-v3/companion-fire.webp?v=0.60.0",
+      "width": 720
+    },
+    {
+      "complete": true,
+      "height": 720,
+      "src": "http://127.0.0.1:5200/assets/icons/base-v3/companion-penguin.webp?v=0.60.0",
+      "width": 720
+    },
+    {
+      "complete": true,
+      "height": 720,
+      "src": "http://127.0.0.1:5200/assets/icons/base-v3/companion-penguin.webp?v=0.60.0",
+      "width": 720
+    }
+  ],
+  "errors": []
+}

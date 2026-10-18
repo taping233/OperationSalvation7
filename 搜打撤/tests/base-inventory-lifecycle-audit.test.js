@@ -288,7 +288,7 @@ describe('基地容量与材料信息准确性', () => {
     window.SDT.Cards.cardHTML=item=>item.name;
     const {warehouseHTML}=await import('../game/src/hub/hub.warehouse.js');
     document.querySelector('.hub-page').innerHTML=warehouseHTML();
-    expect(document.querySelector('.stash-pocket-note').textContent).toContain('单击木材／口粮／钥匙卡使用 1 张，折入基地库存');
+    expect(document.querySelector('.warehouse-rules').textContent).toMatch(/单击木材[、／]口粮[、／]钥匙卡使用\s*(一|1)\s*张，折入基地库存/);
     expect(base.data.keys).toBe(0); expect(base.useStashMaterial).not.toHaveBeenCalled();
   });
   it.each([['木材',3],['口粮',2],['钥匙',4]])('材料详情按已有端口显示%s收益%i，不按名称猜数值', (label,amount) => {

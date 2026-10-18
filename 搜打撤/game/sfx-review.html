@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>代号柒 · 当前音效清单</title>
+  <link rel="stylesheet" href="./css/sfx-review.css">
+</head>
+<body>
+  <header class="page-head">
+    <div class="eyebrow">CODENAME 7 / SOUND REVIEW <span>当前游戏配置</span></div>
+    <div class="heading"><div><h1>把不喜欢的声音挑出来。</h1><p>逐个试听，勾选「要更换」。备注会保存在这个浏览器里。</p></div><div id="totals" class="totals">正在读取…</div></div>
+    <p class="version-note">当前11项已取消音效；子页面按钮的通用点击和悬停音也已关闭。静音项会标明「已取消音效」，勾选和备注沿用。</p>
+  </header>
+  <main>
+    <section class="toolbar" aria-label="筛选与播放控制">
+      <div class="view-switch" role="group" aria-label="查看方式"><button id="by-sound" aria-pressed="true">按声音去重</button><button id="by-cue" aria-pressed="false">全部触发场景</button></div>
+      <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜索按钮、奖励、抽牌、撤离…" aria-label="搜索音效"></label>
+      <label class="volume">试听音量 <input id="volume" type="range" min="0" max="100" value="70"><output id="volume-value">70%</output></label>
+      <button id="stop" class="plain">停止播放</button>
+    </section>
+    <section class="filters" aria-label="分类筛选"><div id="categories"></div><label class="marked-filter"><input id="only-marked" type="checkbox">只看要更换的</label></section>
+    <div class="list-heading"><h2 id="list-title">当前使用的声音</h2><span id="list-count"></span></div>
+    <p id="view-note" class="view-note">同一音源合并展示；展开卡片可查看全部关联场景。勾选整组会标记这些场景。</p>
+    <section id="list" class="sound-list" aria-label="全部当前音效"><p>正在读取当前映射…</p></section>
+  </main>
+  <footer class="review-bar"><div><strong id="selected-count">尚未标记</strong><p id="playing" role="status" aria-live="polite">点「试听」播放；声音不会叠在一起。</p></div><button id="export" class="primary">查看 / 复制更换清单</button></footer>
+  <dialog id="export-dialog"><div class="dialog-head"><h2>准备更换的音效</h2><button id="dialog-close" aria-label="关闭清单">×</button></div><p>复制后发给 Friday；未勾选的声音不会列入。</p><textarea id="export-text" rows="15" aria-label="更换清单" readonly></textarea><div class="dialog-actions"><span id="copy-status" role="status"></span><button id="copy" class="primary">复制清单</button></div></dialog>
+  <script type="module" src="./src/audio/sfx-review.js"></script>
+</body>
+</html>

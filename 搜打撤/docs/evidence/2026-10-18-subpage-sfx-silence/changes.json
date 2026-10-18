@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-18",
+  "request": "进入界面依然有音效；子页面的点击取消点击音效",
+  "findings": [
+    "全局pointerdown仍为任意button播放click，早于页面打开",
+    "子页面全局pointerover及部分显式hover使用相同点击样音",
+    "基地换页另发navigate",
+    "选档动画840ms后另发scene"
+  ],
+  "changes": {
+    "subpages": [
+      "overlay",
+      "cardZoom",
+      "sugLayer",
+      "dialog[open]"
+    ],
+    "skipCueIdsInSubpages": [
+      "click",
+      "hover"
+    ],
+    "silentNavigation": true,
+    "removedArchiveSceneTimer": true,
+    "navigationCue": {
+      "before": {
+        "id": "navigate",
+        "label": "navigate",
+        "group": "ui",
+        "loop": false,
+        "gain": 0.08,
+        "note": "已认可的V2原创样音",
+        "variants": [
+          {
+            "src": "./assets/sfx/original-ui-1018/click.wav",
+            "seconds": 0.185
+          }
+        ]
+      },
+      "after": {
+        "id": "navigate",
+        "label": "navigate",
+        "group": "ui",
+        "loop": false,
+        "gain": 0,
+        "note": "老板要求：子页面导航取消音效",
+        "variants": [],
+        "silent": true
+      }
+    }
+  },
+  "preserved": "具名奖励、交易、战斗反馈及场景配乐保持原配置；不清除试听标记和备注",
+  "verification": "按老板要求未运行测试、构建、浏览器或听感验证",
+  "commit": "未提交"
+}

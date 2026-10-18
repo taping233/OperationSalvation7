@@ -19,6 +19,7 @@ export const overlayMethods = {
   // 点 ? 打开帮助，点「返回」执行 back() 重绘原页面。
   registerHelp(id, def) { this.helpTopics[id] = def; },
   helpBtn(id) {
+    if (id === 'bag') return '<button class="bag-guide-trigger bag-icbtn" data-act="openHelp" data-page="bag" aria-label="背包使用指南" title="背包使用指南"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 4h6l2 2 2-2h6v15h-6l-2 2-2-2H4Z"/><path d="M12 6v15M7 8h2M7 12h2M15 8h2M15 12h2"/></svg></button>';
     // 2026-09-07 留言：全角"？ "字形墨迹不居中，换 SVG 问号保证几何居中
     return `<button class="help-btn" data-act="openHelp" data-page="${id}" title="查看说明"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M8.1 9a3.9 3.9 0 1 1 6.05 3.27c-1.25.83-2.15 1.55-2.15 3.03v.3" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><circle cx="12" cy="19.7" r="1.35" fill="currentColor"/></svg></button>`;
   },
@@ -26,7 +27,7 @@ export const overlayMethods = {
     const t = this.helpTopics[page];
     if (!t) return;
     this.showOverlay(`[[icon:question]] ${t.title}`, `
-      <div class="help-body">${t.html}</div>
+      <div class="help-body${page === 'bag' ? ' bag-guide' : ''}">${page === 'bag' ? '<header class="bag-guide-heading"><small>FIELD MANUAL / 01</small><h2>收纳与押运</h2></header>' : ''}${t.html}</div>
       <div class="ov-btns"><button class="ov-btn ok" data-act="helpBack">↩ 返回</button></div>`, true);
     this.act('helpBack', () => { if (typeof t.back === 'function') t.back(); });
   },

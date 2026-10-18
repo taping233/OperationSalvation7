@@ -1,0 +1,71 @@
+{
+  "status": "installed",
+  "encoding": "Pillow RGB WebP quality=92 method=6; no crop/resize",
+  "items": [
+    {
+      "id": "casual",
+      "asset": "portraits/full/wu-casual-v14.webp",
+      "beforeSha256": "377ac979dcfdc04292e7332326864fb3cccee5defe02537c089653afa6e77f0d",
+      "backup": ".tmp\\nai\\wu-skins-reset-1018\\casual-before.webp",
+      "source": "output\\imagegen\\wu-skins-reset-1018\\casual-arknights.png",
+      "sourceSha256": "6389fa63cf98b3335674c4df113b87c7f0d52ff4cf27edc3574aa79926b64139",
+      "dimensions": [
+        1422,
+        1106
+      ],
+      "entry": {
+        "path": "portraits/full/wu-casual-v14.webp",
+        "ext": "webp",
+        "license": "项目自有（AI 生成）",
+        "bytes": 475800,
+        "sha256": "9d729bb8a792107a9cd37c0dbd748e7db977660faa86faff5b3df3aabbc8fcf6",
+        "source": "docs/evidence/2026-10-18-wu-skins-reset/installed.json"
+      },
+      "status": "installed"
+    },
+    {
+      "id": "spring",
+      "asset": "portraits/full/wu-spring-v15.webp",
+      "beforeSha256": "ec37a0b208a58a39df729ea289cf68075e485c58f44b42583b4fe249ddec83ad",
+      "backup": ".tmp\\nai\\wu-skins-reset-1018\\spring-before.webp",
+      "source": "output\\imagegen\\wu-skins-reset-1018\\spring-arknights.png",
+      "sourceSha256": "3d748e029a83374cd88efb855ce461a092382b72f49919ebd7978df0c683b94f",
+      "dimensions": [
+        1422,
+        1106
+      ],
+      "entry": {
+        "path": "portraits/full/wu-spring-v15.webp",
+        "ext": "webp",
+        "license": "项目自有（AI 生成）",
+        "bytes": 321566,
+        "sha256": "e36ae1e378bd75eed27d29b40f09a80310885f890e9ecae00f94ee382e89c666",
+        "source": "docs/evidence/2026-10-18-wu-skins-reset/installed.json"
+      },
+      "status": "installed"
+    },
+    {
+      "id": "beach",
+      "asset": "portraits/full/wu-beach.webp",
+      "beforeSha256": "027f6fb049a6966a9f3c7662b012075d3f5c7533e9e39fc95c5147a38ccb232a",
+      "backup": ".tmp\\nai\\wu-skins-reset-1018\\beach-before.webp",
+      "source": "output\\imagegen\\wu-skins-reset-1018\\beach-arknights.png",
+      "sourceSha256": "f0961ff2abdafb65d6a27a47813bb2e49e4dbbef443bea5c457833380282d525",
+      "dimensions": [
+        1422,
+        1106
+      ],
+      "entry": {
+        "path": "portraits/full/wu-beach.webp",
+        "ext": "webp",
+        "license": "项目自有（AI 生成）",
+        "bytes": 377504,
+        "sha256": "b6918f429e3b3757514d160e26be2559dc9bda5a25b2e5ca26866544a39ba6a3",
+        "source": "docs/evidence/2026-10-18-wu-skins-reset/installed.json"
+      },
+      "status": "installed"
+    }
+  ],
+  "manifestSha256": "d1710deb12a89571fc1ba840c11110ad8b12d6d57c58a9f64bff29cb8e606ced",
+  "countChanged": false
+}

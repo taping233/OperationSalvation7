@@ -221,7 +221,7 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
       if (!isCurrent()) { resolve(false); return; }
       // 过场只拥有自己挂载的画面；迟到回调不能关掉已打开的背包或新页面。
       if (surface && (!surface.isConnected || !UI.el.ovBody.contains(surface))) { resolve(false); return; }
-      if (!holdVisual) UI.hideOverlay();
+      if (!holdVisual) UI.hideOverlay({ immediate: tone === 'battle' });
       // 战斗 modal 态（Battle.restore 置位）不得降级为 idle，否则战斗界面丢失且移动锁死
       game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
       resolve(true);
@@ -288,7 +288,7 @@ export function enterNode(kind, done) {
   };
   const spec = transitions[kind] || { title: '进入节点' };
   const combat = kind === 'battle' || kind === 'boss';
-  const transition = showRunTransition(combat ? spec : { ...spec, presentation: 'node-cut', duration: 240 });
+  const transition = showRunTransition(combat ? { ...spec, duration: 650 } : { ...spec, presentation: 'node-cut', duration: 240 });
   return transition.then(current => current && transition.isCurrent() ? done() : false);
 }
 

@@ -1,0 +1,650 @@
+{
+  "selection": [
+    "safeStore",
+    "open",
+    "safeEnter",
+    "close",
+    "safeRetrieve",
+    "drop",
+    "discard",
+    "energyUp",
+    "buffUp",
+    "energyDown",
+    "buffDown",
+    "curseEnd",
+    "scene",
+    "eventEnter",
+    "layerEnter",
+    "altarEnter",
+    "doorEnter",
+    "shopEnter",
+    "extractionEnter",
+    "deployStart",
+    "battleEnter",
+    "flee",
+    "parry",
+    "curse",
+    "attackFire",
+    "attackIce",
+    "attackLightning",
+    "attackPsychic",
+    "heal",
+    "cardRestore",
+    "shieldUp",
+    "burn"
+  ],
+  "changed_count": 32,
+  "preserved_count": 74,
+  "changes": [
+    {
+      "id": "safeStore",
+      "label": "物品存入保险箱",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2577.wav"
+        ],
+        "gain": 0.2,
+        "group": "ui"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/safe-store.wav"
+        ],
+        "gain": 0.65,
+        "group": "ui"
+      }
+    },
+    {
+      "id": "open",
+      "label": "打开界面",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2578.wav"
+        ],
+        "gain": 0.2,
+        "group": "ui"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/open.wav"
+        ],
+        "gain": 0.65,
+        "group": "ui"
+      }
+    },
+    {
+      "id": "safeEnter",
+      "label": "打开保险箱",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2578.wav"
+        ],
+        "gain": 0.2,
+        "group": "ui"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/open.wav"
+        ],
+        "gain": 0.65,
+        "group": "ui"
+      }
+    },
+    {
+      "id": "close",
+      "label": "关闭界面",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2575.wav"
+        ],
+        "gain": 0.2,
+        "group": "ui"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/close.wav"
+        ],
+        "gain": 0.65,
+        "group": "ui"
+      }
+    },
+    {
+      "id": "safeRetrieve",
+      "label": "从保险箱取出",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2573.wav"
+        ],
+        "gain": 0.2,
+        "group": "ui"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/safe-retrieve.wav"
+        ],
+        "gain": 0.65,
+        "group": "ui"
+      }
+    },
+    {
+      "id": "drop",
+      "label": "放下物品",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2576.wav"
+        ],
+        "gain": 0.2,
+        "group": "ui"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/discard.wav"
+        ],
+        "gain": 0.65,
+        "group": "ui"
+      }
+    },
+    {
+      "id": "discard",
+      "label": "弃牌",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2576.wav"
+        ],
+        "gain": 0.2,
+        "group": "ui"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/discard.wav"
+        ],
+        "gain": 0.65,
+        "group": "ui"
+      }
+    },
+    {
+      "id": "energyUp",
+      "label": "能量增加",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/873.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/status-up.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "buffUp",
+      "label": "增益生效",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/873.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/status-up.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "energyDown",
+      "label": "能量减少",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2575.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/status-down.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "buffDown",
+      "label": "增益减弱",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2575.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/status-down.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "curseEnd",
+      "label": "诅咒结束",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2575.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/curse-end.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "scene",
+      "label": "场景切换",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2575.wav"
+        ],
+        "gain": 0.18,
+        "group": "transition"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/transition.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      }
+    },
+    {
+      "id": "eventEnter",
+      "label": "进入事件",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2575.wav"
+        ],
+        "gain": 0.18,
+        "group": "transition"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/transition.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      }
+    },
+    {
+      "id": "layerEnter",
+      "label": "进入下一层",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2575.wav"
+        ],
+        "gain": 0.18,
+        "group": "transition"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/transition.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      }
+    },
+    {
+      "id": "altarEnter",
+      "label": "进入祭坛",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2583.wav"
+        ],
+        "gain": 0.18,
+        "group": "transition"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/altar-enter.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      }
+    },
+    {
+      "id": "doorEnter",
+      "label": "进入门扉",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2578.wav"
+        ],
+        "gain": 0.18,
+        "group": "transition"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/open.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      }
+    },
+    {
+      "id": "shopEnter",
+      "label": "进入商店",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/269.wav"
+        ],
+        "gain": 0.18,
+        "group": "transition"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/shop-enter.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      }
+    },
+    {
+      "id": "extractionEnter",
+      "label": "进入撤离点",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2578.wav"
+        ],
+        "gain": 0.18,
+        "group": "transition"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/open.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      }
+    },
+    {
+      "id": "deployStart",
+      "label": "开始出发或部署",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2578.wav"
+        ],
+        "gain": 0.18,
+        "group": "transition"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/deploy-start.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      }
+    },
+    {
+      "id": "battleEnter",
+      "label": "进入战斗",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2166.wav"
+        ],
+        "gain": 0.18,
+        "group": "transition"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/battle-enter.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      }
+    },
+    {
+      "id": "flee",
+      "label": "逃离战斗",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2575.wav"
+        ],
+        "gain": 0.18,
+        "group": "transition"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/transition.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      }
+    },
+    {
+      "id": "parry",
+      "label": "格挡",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2160.wav",
+          "assets/sfx/mixkit-1018/2765.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/parry.wav",
+          "assets/sfx/selected32-1018/parry-soft.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "curse",
+      "label": "诅咒生效",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2345.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/curse.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "attackFire",
+      "label": "火焰攻击",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2589.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/fire.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "attackIce",
+      "label": "冰霜攻击",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2584.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/ice.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "attackLightning",
+      "label": "雷电攻击",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/3083.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/lightning.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "attackPsychic",
+      "label": "精神攻击",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2345.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/psychic.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "heal",
+      "label": "治疗恢复",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2628.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/heal.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "cardRestore",
+      "label": "卡牌恢复效果",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2628.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/heal.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "shieldUp",
+      "label": "获得护盾",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2574.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat",
+        "maxDuration": 0.42
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/shield.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat",
+        "maxDuration": 0.42
+      }
+    },
+    {
+      "id": "burn",
+      "label": "灼烧反馈配置",
+      "before": {
+        "files": [
+          "assets/sfx/mixkit-1018/2589.wav"
+        ],
+        "gain": 0.32,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected32-1018/burn.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "game/src/audio/sound.samples.catalog.js",
+      "sha256": "ca0464581d3538b74a9ca3dde7ab3bafd54d59a77792aa1267a60240cf9db3e1"
+    },
+    {
+      "path": "game/src/audio/sfx-review.sources.js",
+      "sha256": "7664064df4853806e25c8d084269a9d852f1b55e33d3edf5d7078584741b488c"
+    },
+    {
+      "path": "game/sfx-review.html",
+      "sha256": "70ff28bed096bb486a617d1446c0e8716babc6dd6150d2700e52117195c0d5d1"
+    },
+    {
+      "path": "game/assets/sfx/original-ui-1018/library.json",
+      "sha256": "54d39c1acf2624613cc321550501c45bc76ec85fcf58626c70a135d438569588"
+    },
+    {
+      "path": "game/assets/asset-manifest.json",
+      "sha256": "a6f4f01fbd9ec68449c5231c54273dfe9ef640347ee30b3e71752548ba2163c2"
+    },
+    {
+      "path": "game/index.html",
+      "sha256": "7191050430e1515ec56b3959faf3773ebf60ea90871a5180f990d4426604ebc6"
+    }
+  ],
+  "tests_run": false,
+  "build_run": false,
+  "browser_verification": false,
+  "listening_verified": false
+}

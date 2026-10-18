@@ -1,3 +1,4 @@
+import { rollEventDice } from './helpers/event-dice.js';
 import { openRewardCapacityOrganizer } from '../game/src/ui/reward-capacity-organizer.js';
 import { bagSlots } from '../game/src/hub/game.bag.bridge.js';
 import { dataSlice } from '../game/src/cards/cards.data.js';
@@ -81,8 +82,8 @@ const potionCards = [1, 2, 3].map(i => ({ id: `p${i}`, name: `药水${i}`, type:
 describe('药摊与装备征用的可恢复选择', () => {
   it.each([false, true])('卡面只阅读，关闭不领；明确领取仅发一张（详情领取=%s）', async fromDetail => {
     await openEvent('ev19-potions', potionCards);
-    expect(UI.el.ovBody.querySelector('[data-act="evtChoice"] span')).toBeNull();
-    UI._acts.evtChoice({ i:'0' });
+    expect(UI.el.ovBody.querySelector('[data-act="evtChoice"] span').textContent).toContain('投骰');
+    UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     const record = H.game.nodeRewards['0,1'];
     const before = JSON.stringify(record);
     const read = UI.el.ovBody.querySelector('[data-act="eventCardRead"]'); read.click();
@@ -102,7 +103,7 @@ describe('药摊与装备征用的可恢复选择', () => {
     window.SDT.UI = UI;
     UI.showCardZoom = realUI.showCardZoom;
     H.game.canReceiveCard = () => false;
-    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i:'0' });
+    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     expect(UI.el.ovBody.textContent).toContain('暂离可保留候选，领取后其余放弃。');
     UI.el.ovBody.querySelector('[data-act="eventCardRead"]').click();
     const initial = document.getElementById('cardZoom');
@@ -123,7 +124,7 @@ describe('药摊与装备征用的可恢复选择', () => {
 
   it('详情领取满包时关闭详情露出错误，候选不丢并可整理后重试', async () => {
     H.game.canReceiveCard = () => false;
-    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i:'0' });
+    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     const record = H.game.nodeRewards['0,1'], ids = [...record.cardIds];
     UI.el.ovBody.querySelector('[data-act="eventCardRead"]').click();
     document.querySelector('#cardZoom [data-act="eventCardPick"]').click();
@@ -137,7 +138,7 @@ describe('药摊与装备征用的可恢复选择', () => {
   });
 
   it('取消当前选择页时不关闭没有本视图归属的其他详情', async () => {
-    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i:'0' });
+    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     UI.el.ovBody.querySelector('[data-act="eventCardRead"]').click();
     UI.showCardZoom(potionCards[1], { footer:'<button data-act="unrelated">其他详情</button>' });
     const unrelated = document.getElementById('cardZoom');
@@ -149,7 +150,7 @@ describe('药摊与装备征用的可恢复选择', () => {
   });
 
   it('同节点返回重开后，旧详情数据和旧领取回调都不能领取当前候选', async () => {
-    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i:'0' });
+    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     UI.el.ovBody.querySelector('[data-act="eventCardRead"]').click();
     const oldData = { ...document.querySelector('#cardZoom [data-act="eventCardPick"]').dataset };
     const oldPick = UI._acts.eventCardPick, oldRead = UI._acts.eventCardRead;
@@ -167,7 +168,7 @@ describe('药摊与装备征用的可恢复选择', () => {
   it('满包局部提示并有真实整理入口，返回仍是同一组候选，只能领取一次', async () => {
     H.game.canReceiveCard = () => false;
     await openEvent('ev19-potions', potionCards);
-    UI._acts.evtChoice({ i:'0' });
+    UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     const pending = JSON.parse(JSON.stringify(H.game.nodeRewards['0,1']));
     const old = UI._acts.eventCardPick;
     expect(H.game.visited).toEqual({ '0,1':1 });
@@ -199,7 +200,7 @@ describe('药摊与装备征用的可恢复选择', () => {
   it.each(['ev19-potions', 'ev19-quartermaster'])('%s 退出回地图保留未领记录，点原节点重进不重掷不再付款', async id => {
     const candidates = potionCards.map(c => ({ ...c, type:id === 'ev19-potions' ? '道具' : '装备' }));
     H.game.canReceiveCard = () => false;
-    await openEvent(id, candidates); UI._acts.evtChoice({ i:'0' });
+    await openEvent(id, candidates); UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     const record = JSON.parse(JSON.stringify(H.game.nodeRewards['0,1']));
     const coins = H.game.coins;
     H.random = vi.fn(() => 0.1);
@@ -217,7 +218,7 @@ describe('药摊与装备征用的可恢复选择', () => {
 
   it.each(['ev19-potions', 'ev19-quartermaster'])('%s 正常保存后重载保留候选、付款和未领状态；成功重载不再领取', async id => {
     const candidates = potionCards.map(c => ({ ...c, type:id === 'ev19-potions' ? '道具' : '装备' }));
-    await openEvent(id, candidates); UI._acts.evtChoice({ i:'0' });
+    await openEvent(id, candidates); UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     const snapshot = JSON.parse(JSON.stringify(H.saves.at(-1)));
     const { validateRunSave } = await import('../game/src/hub/run-save-validation.js');
     expect(validateRunSave(snapshot).ok).toBe(true);
@@ -241,7 +242,7 @@ describe('药摊与装备征用的可恢复选择', () => {
   it('装备征用退出/背包反复往返只扣3币，未选择不占背包且付款与候选同次保存', async () => {
     await openEvent('ev19-quartermaster', potionCards.map(c => ({ ...c, type:'装备' })));
     const launch = UI._acts.evtChoice;
-    launch({ i:'0' }); launch({ i:'0' });
+    launch({ i:'0' }); rollEventDice(UI); launch({ i:'0' });
     expect(H.game.coins).toBe(15);
     expect(H.game.ownedCards).toHaveLength(0);
     expect(H.saves.at(-1)).toMatchObject({ coins:15, nodeRewards:{ '0,1':{ taken:null, paidCoins:3 } } });
@@ -260,7 +261,7 @@ describe('药摊与装备征用的可恢复选择', () => {
   it.each([2, 3])('装备征用余额%s：不足不扣款，刚好支付后退出仍保留候选', async coins => {
     H.game.coins = coins;
     await openEvent('ev19-quartermaster', potionCards.map(c => ({ ...c, type:'装备' })));
-    UI._acts.evtChoice({ i:'0' });
+    UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     expect(H.game.coins).toBe(coins < 3 ? coins : 0);
     if (coins < 3) {
       expect(H.game.nodeRewards['0,1']).toEqual({ version:1, type:'event', eventId:'ev19-quartermaster' });
@@ -275,8 +276,8 @@ describe('药摊与装备征用的可恢复选择', () => {
   it('黑市满包命中只收费一次，三张待领持久化，刷新后收下不能重领或重掷', async () => {
     const prizes = [{ id:'e1', name:'装备', type:'装备', rarity:'古朴' }, ...[1,2].map(i => ({ id:`m${i}`, name:`招式${i}`, type:'武术', rarity:'古朴' }))];
     H.game.canReceiveCard = () => false; H.random = () => 0;
-    await openEvent('ev19-gamble', prizes); UI._acts.evtChoice({ i:'0' });
-    const tryOnce = UI._acts.eventGambleTry; tryOnce(); tryOnce();
+    await openEvent('ev19-gamble', prizes); UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
+    H.random = () => 0.99; const tryOnce = UI._acts.eventGambleTry; tryOnce(); rollEventDice(UI); tryOnce();
     expect(H.game.coins).toBe(15); expect(H.game.ownedCards).toHaveLength(0);
     expect(H.game.state).toBe('modal');
     const saved = JSON.parse(JSON.stringify(window.SDT.Chests.serialize(H.game)));
@@ -309,7 +310,7 @@ describe('药摊与装备征用的可恢复选择', () => {
     const prizes = [{ id:'e1', name:'装备', type:'装备', rarity:'古朴' }, ...[1,2].map(i => ({ id:`m${i}`, name:`招式${i}`, type:'武术', rarity:'古朴' }))];
     H.game.coins = 3; H.random = () => 0;
     H.game.canReceiveCard = () => H.game.ownedCards.length < 1;
-    await openEvent('ev19-gamble', prizes); UI._acts.evtChoice({ i:'0' }); UI._acts.eventGambleTry();
+    await openEvent('ev19-gamble', prizes); UI._acts.evtChoice({ i:'0' }); rollEventDice(UI); H.random = () => 0.99; UI._acts.eventGambleTry(); rollEventDice(UI);
     UI._acts.chestTake();
     const saved = JSON.parse(JSON.stringify(window.SDT.Chests.serialize(H.game)));
     expect(H.game.coins).toBe(0); expect(H.game.ownedCards).toHaveLength(1);
@@ -323,7 +324,7 @@ describe('药摊与装备征用的可恢复选择', () => {
   });
 
   it('同槽新局或新页面接管后旧动作与背包恢复不能复活候选', async () => {
-    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i:'0' });
+    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     const pick = UI._acts.eventCardPick, restore = takeBagReturnHook();
     H.game.discoveredPairs = new Set(); H.game.nodeRewards = {};
     UI.showOverlay('新局', '<main id="new-run-page">新局</main>', 'page');
@@ -347,12 +348,12 @@ describe('药摊与装备征用的可恢复选择', () => {
 it('黑市入口不重复规则，首次投币前风险/价格/保底和放弃仍可见', async () => {
   const prizes=[{id:'market-e',name:'装备',type:'装备',rarity:'古朴'},...[1,2].map(i=>({id:`market-m${i}`,name:`招式${i}`,type:'武术',rarity:'古朴'}))];
   await openEvent('ev19-gamble',prizes);
-  expect(UI.el.ovBody.querySelector('[data-act="evtChoice"] span')).toBeNull();
+  expect(UI.el.ovBody.querySelector('[data-act="evtChoice"] span').textContent).toContain('投骰');
   const coins=H.game.coins;
-  UI._acts.evtChoice({i:'0'});
+  UI._acts.evtChoice({i:'0'}); rollEventDice(UI); rollEventDice(UI);
   expect(H.game.coins).toBe(coins);
   const text=UI.el.ovBody.textContent;
-  expect(text).toContain('3 币'); expect(text).toContain('50%'); expect(text).toContain('5 次必定成功');
+  expect(text).toContain('3 币'); expect(text).toContain('50%'); expect(text).toContain('5 次任意点数都成功');
   expect(text).toContain('已尝试 0/5 次');
   expect(UI.el.ovBody.querySelector('[data-act="eventGambleTry"]').textContent).toContain('投入 3 币');
   expect(UI.el.ovBody.querySelector('[data-act="eventGambleLeave"]').textContent).toBe('放弃并离开');
@@ -363,7 +364,7 @@ it('黑市入口不重复规则，首次投币前风险/价格/保底和放弃�
 it.each([
   ['ev19-vital','接受强化急救'], ['ev19-pearlbox','取走珍珠匣'],
   ['ev19-fireballs','接收封装火种'], ['ev19-classchest','启封黑箱'],
-  ['ev19-arrows','打开弹药柜'],
+  ['ev19-arrows','投骰打开弹药柜'],
 ])('纯收益入口仅正文保留完整规则，按钮不重复且打开未结算：%s', async (id, label) => {
   const card = dataSlice.EVENTS_0919.find(c => c.id === id);
   expect(card).toBeTruthy();
@@ -386,7 +387,7 @@ it.each([
   expect(UI.el.ovBody.querySelector('[data-act="evtBag"]')).not.toBeNull();
   expect(UI.el.ovBody.querySelector('[data-act="evtReturn"]')).not.toBeNull();
   expect(restored).not.toHaveBeenCalled(); expect(opened).not.toHaveBeenCalled();
-  UI._acts.evtChoice({i:'0'});
+  UI._acts.evtChoice({i:'0'}); rollEventDice(UI); rollEventDice(UI);
   if (id === 'ev19-vital') {
     expect(H.game.hp).toBe(before.hp + 3); expect(H.game.maxHp).toBe(before.maxHp + 3);
   } else if (id === 'ev19-classchest') {
@@ -413,11 +414,11 @@ it('故障重编入口正文保规则，接入选择页不转换不收费且仍�
   await vi.advanceTimersByTimeAsync(1000); await opening;
   const button = UI.el.ovBody.querySelector('[data-act="evtChoice"]');
   expect(button.querySelector('b').textContent).toBe('接入重编台');
-  expect(button.querySelector('span')).toBeNull();
+  expect(button.querySelector('span').textContent).toContain('投骰');
   expect(UI.el.ovBody.textContent.split(card.desc)).toHaveLength(2);
   expect(card.desc).toBe('选择 2 张招式或装备卡，随机变为同稀有度、同类型的卡牌。');
   expect(snapshot()).toBe(before);
-  UI._acts.evtChoice({ i: '0' });
+  UI._acts.evtChoice({ i: '0' }); rollEventDice(UI);
   expect(UI.el.ovBody.textContent).toContain('选择 2 张招式或装备卡，将其随机变为同稀有度、同类型的卡牌（0/2）');
   expect(UI.el.ovBody.querySelectorAll('[data-act="eventRecodePick"]')).toHaveLength(2);
   expect(UI.el.ovBody.querySelector('[data-act="eventRecodeGo"]').disabled).toBe(true);
@@ -434,7 +435,7 @@ it.each(['ev19-potions','ev19-quartermaster'])('%s满包直接复用整理，返
     moveToSafe:()=>{full=false;return true;},discardOne:()=>false});
   try {
     await openEvent(id,potionCards.map(c=>({...c,type:id==='ev19-potions'?'道具':'装备'})));
-    UI._acts.evtChoice({i:'0'});
+    UI._acts.evtChoice({i:'0'}); rollEventDice(UI); rollEventDice(UI);
     const coins=H.game.coins,record=H.game.nodeRewards['0,1'],ids=[...record.cardIds];
     expect(UI.el.ovBody.querySelector('[data-act="eventCardPick"]').textContent).toBe('腾位置领取');
     UI._acts.eventCardPick({i:'1'});
@@ -457,7 +458,7 @@ it('事件整理页乐观可收但原grant拒收，返回候选显示失败且�
     readStacks:()=>[],canReceive:()=>true,capacity:()=>'',moveToSafe:()=>false,discardOne:()=>false});
   try{
     H.game.canReceiveCard=()=>false;
-    await openEvent('ev19-quartermaster',potionCards.map(c=>({...c,type:'装备'})));UI._acts.evtChoice({i:'0'});
+    await openEvent('ev19-quartermaster',potionCards.map(c=>({...c,type:'装备'})));UI._acts.evtChoice({i:'0'}); rollEventDice(UI); rollEventDice(UI);
     const record=H.game.nodeRewards['0,1'],coins=H.game.coins;
     UI._acts.eventCardPick({i:'2'});document.querySelector('[data-organize="claim"]').click();
     expect(record.taken).toBeNull();expect(H.game.ownedCards).toHaveLength(0);expect(H.game.coins).toBe(coins);

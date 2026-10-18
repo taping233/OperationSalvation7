@@ -9,9 +9,10 @@ const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
 const R = await import('../game/src/battle/runtime/battle.runtime.js');
+const { Random } = await import('../game/src/core/random.js');
 
-beforeEach(() => { vi.useFakeTimers(); R.set$lastDeckSel([]); window.SDT.MAP.rules.battleStartDraw = 20; });
-afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); });
+beforeEach(() => { Random.reseed('turn-start-discover'); vi.useFakeTimers(); R.set$lastDeckSel([]); window.SDT.MAP.rules.battleStartDraw = 20; });
+afterEach(() => { vi.restoreAllMocks(); vi.clearAllTimers(); vi.useRealTimers(); });
 const canonical = id => { const card = C.all().find(c => c.id === id); expect(card, id).toBeTruthy(); return card; };
 function makeGame(cards) {
   return { ownedCards: cards.map((card, i) => ({ uid: `runtime-${i}`, card: { ...card }, safe: false })),
@@ -40,6 +41,12 @@ async function start(boss = true, double = false) {
  if (double) { BattleSession.commands.playCard('runtime-2', null, true); await settle(); }
  return game;
 }
+function plainDiscoverIndex(state) {
+ const index = state.discovering.options.findIndex(card =>
+   card.id !== 'tt2-apollo' && !card.rules?.triggers?.onAcquire?.length);
+ expect(index, 'discovery must offer a candidate without acquisition side effects').toBeGreaterThanOrEqual(0);
+ return index;
+}
 async function nextTurn(clock = false) {
  if (clock) {
    BattleSession.commands.playCard('runtime-1', 'self', true); await settle();
@@ -55,16 +62,40 @@ it.each([false,true])('首脑回合开始真实发现并获得候选，钟表=%s
  const state = await nextTurn(clock);
  expect(state).toMatchObject({turn:2,phase:'player',busy:false});
  expect(state.discovering).toBeTruthy();
- const picked = state.discovering.options[0];
+ // A random candidate may legitimately grant another card on acquisition (Apollo).
+ const index = plainDiscoverIndex(state);
+ const picked = state.discovering.options[index];
  const before = state.hand.length;
  BattleSession.commands.endTurn(); // 选择未结束时不能跳回合。
  expect(BattleSession.getSnapshot().turn).toBe(2);
- BattleSession.commands.pickDiscover(0); await settle();
+ BattleSession.commands.pickDiscover(index); await settle();
  const after = BattleSession.getSnapshot();
  expect(after.discovering).toBeNull();
  expect(after.hand.length).toBe(before + 1);
  expect(R.granted.some(o => o.card.id === picked.id && after.hand.includes(o.uid))).toBe(true);
  expect(after.busy).toBe(false);
+});
+it('回合开始发现阿猫的礼物时，额外获取来自卡牌效果而非重复奖励', async () => {
+ await start();
+ const gift = canonical('tt2-apollo');
+ const plain = C.all().filter(card => C.isRandomObtainable(card) &&
+   card.id !== gift.id && !card.rules?.triggers?.onAcquire?.length).slice(0, 2);
+ // Keep the real discovery flow, but make its three candidates deterministic.
+ const catalog = vi.spyOn(C, 'all').mockReturnValue([gift, ...plain]);
+ const state = await nextTurn();
+ catalog.mockRestore();
+ const index = state.discovering.options.findIndex(card => card.id === gift.id);
+ expect(index).toBeGreaterThanOrEqual(0);
+ const before = state.hand.length;
+ const grantsBefore = R.granted.length;
+ BattleSession.commands.pickDiscover(index); await settle();
+ const after = BattleSession.getSnapshot();
+ const acquired = R.granted.slice(grantsBefore);
+ expect(after.discovering).toBeNull();
+ expect(after.hand.length).toBe(before + 2);
+ expect(acquired).toHaveLength(2);
+ expect(acquired.filter(entry => entry.card.id === gift.id)).toHaveLength(1);
+ expect(acquired.every(entry => after.hand.includes(entry.uid))).toBe(true);
 });
 it.each([false,true])('普通战能力卡不在初手，不制造发现，钟表=%s', async clock => {
  await start(false);
@@ -78,9 +109,9 @@ it('两个持续发现依次领取，下回合重新触发且没有重复打开'
  let state = await nextTurn();
  const before = state.hand.length;
  expect(state.discovering).toBeTruthy();
- BattleSession.commands.pickDiscover(0); await settle();
+ BattleSession.commands.pickDiscover(plainDiscoverIndex(BattleSession.getSnapshot())); await settle();
  state = BattleSession.getSnapshot(); expect(state.discovering).toBeTruthy();
- BattleSession.commands.pickDiscover(0); await settle();
+ BattleSession.commands.pickDiscover(plainDiscoverIndex(BattleSession.getSnapshot())); await settle();
  state = BattleSession.getSnapshot(); expect(state.discovering).toBeNull();
  expect(state.hand.length).toBe(before + 2);
  BattleSession.commands.pickDiscover(0); await settle();

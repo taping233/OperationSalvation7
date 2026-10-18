@@ -1,0 +1,24 @@
+{
+  "character": "changwuyu",
+  "skin_id": "drum-room",
+  "name": "余响·鼓房",
+  "source": "C:\\Users\\太平\\.codex\\generated_images\\01a14f3d-d115-7002-98d2-5af998ea575a\\exec-ecd5640a-7c63-4af6-af5c-3c6bd938ec13.png",
+  "source_sha256": "c8edb2e278b9d1e0b75b62c9bb0d5f6801b8161718045ce83f972a0930609451",
+  "source_size": [
+    1659,
+    948
+  ],
+  "asset": {
+    "path": "portraits/full/changwuyu-drum-room.webp",
+    "ext": "webp",
+    "bytes": 321748,
+    "sha256": "9cffdf6b725f8301ff3b944030b0d1e532e9e0b8072153bcb177d12a61117c58",
+    "license": "项目自有（AI 生成）",
+    "source": "docs/evidence/2026-10-19-changwuyu-drum-skin/receipt.json"
+  },
+  "processing": "Full canvas RGB WebP quality94/method6; no crop, resize or paint changes.",
+  "default_sha256": "156d3889d6b4c92d95d29eb67440d951f0234b5f325c22d4f3ee27027180a1ff",
+  "default_unchanged": true,
+  "acquisition": "NAI5 draft followed by built-in imagegen repaint using local arknights-art-ui-design guidance; user approved skin integration on 2026-10-19.",
+  "original_policy": "Original PNG >1MB retained at generated_images source path; recover by copying source and checking SHA256; not added to git."
+}

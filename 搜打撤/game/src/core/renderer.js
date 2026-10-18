@@ -158,16 +158,14 @@ const SDT = window.SDT;
     // 当前层始终可见；中央祭坛/BOSS 作为终局锚点保留，便于祭坛引导线落点明确。
     // 战争迷雾（2026-09-09 老板）：只显示走过的节点（game.seen）与相邻可走节点；
     // seen 为空（旧档/基地）时保持全可见兼容。
-    // 迷雾剪影（2026-10-15 老板修订）：未揭示节点改为「黑色模糊+微光晕」渲染——结构可见、
-    // 类型未知、不带图形语义。剪影仅进渲染层，命中检测（pickNode 的 seen 过滤）与 run 域揭示逻辑不变。
+    // 未探索节点及其结构边不绘制；可见集仍由到达节点和相邻节点登记决定。
     const seenMap = game.seen || null;
     const fogOn = !!(seenMap && Object.keys(seenMap).length);
     const seenOnLayer = (li, idx) => !fogOn || (li === game.layerIdx && seenMap[li + ',' + idx] === 1);
     const visible = game.nodes.filter(n => n.li === -1 || (n.li === game.layerIdx && seenOnLayer(n.li, n.idx)));
     const nodes = visible.map(n => ({ ...n, r: nodeRadius(n) }));
-    const fogNodes = fogOn ? game.nodes
-      .filter(n => n.li === game.layerIdx && !seenOnLayer(n.li, n.idx))
-      .map(n => ({ ...n, r: nodeRadius(n), fog: true })) : [];
+    // 未到达区域不显示节点剪影或结构边，探索范围沿 seen 保留。
+    const fogNodes = [];
     const byKey = new Map(nodes.map(n => [`${n.li},${n.idx}`, n]));
 
     // 轻微确定性弯曲，避免分支边重合；端点由调用方按节点半径裁剪。
@@ -275,6 +273,7 @@ const SDT = window.SDT;
     if (ld3 && altarNode) {
       for (const ae of (ld3.altarEntrances || [])) {
         const altarLi = game.layerData.indexOf(ld3);
+        if (!seenOnLayer(altarLi, ae.at)) continue;
         const p = game.nodePos[altarLi][ae.at];
         altarLinks.push({ path: hand(trim(p, altarNode, LINK_GAP), trim(altarNode, p, LINK_GAP), 700 + ae.at * 11),
           arrow: arrowAt(p, altarNode) });

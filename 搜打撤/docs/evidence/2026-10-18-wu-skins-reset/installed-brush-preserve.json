@@ -1,0 +1,29 @@
+{
+  "status": "installed",
+  "encoding": "Pillow RGB WebP quality=92 method=6; no crop/resize",
+  "items": [
+    {
+      "id": "casual",
+      "asset": "portraits/full/wu-casual-v14.webp",
+      "beforeSha256": "13286e30c8e35e2858a23f87d6ee275dcf8ec7483ca10e5d3088fc8410e43082",
+      "backup": ".tmp\\nai\\wu-skins-reset-1018\\casual-before-brush.webp",
+      "source": "output\\imagegen\\wu-skins-reset-1018\\casual-brush-preserved.png",
+      "sourceSha256": "37b498f779cda846ae2b5a98c5cb4fd9c9c6f54a951dcfffa527bd73560fcccf",
+      "dimensions": [
+        1430,
+        1100
+      ],
+      "entry": {
+        "path": "portraits/full/wu-casual-v14.webp",
+        "ext": "webp",
+        "license": "项目自有（AI 生成）",
+        "bytes": 407952,
+        "sha256": "c53156d2038291935fba357e7a04d9d31371e27be759662937deb0804db5ccb3",
+        "source": "docs/evidence/2026-10-18-wu-skins-reset/installed-brush-preserve.json"
+      },
+      "status": "installed"
+    }
+  ],
+  "manifestSha256": "a98f627bf59878caade276ed30c3ed1fc650584433b946b9590d3bf3cbc442fe",
+  "countChanged": false
+}

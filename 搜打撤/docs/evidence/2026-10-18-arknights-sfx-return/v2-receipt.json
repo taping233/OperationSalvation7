@@ -1,0 +1,33 @@
+{
+  "method": "independent synthesis from new noise seeds, inharmonic transient modes, pressure and air layers",
+  "audio_inputs": [],
+  "reference_use": "coarse attack, tonal/noise balance, decay and action hierarchy; no source waveform reuse",
+  "changes_from_v1": "remove sustained sine motifs and bell-like reward; add short broadband contacts and a subdued pressure/air reward",
+  "tests_run": false,
+  "listening_verified": false,
+  "runtime_installed": false,
+  "legal_noninfringement_determination": false,
+  "files": [
+    {
+      "name": "v2-01-click",
+      "duration": 0.185,
+      "designed_peak_linear": 0.135,
+      "wav_sha256": "0f28a52d7691503b2b21ea0fcb6717207d73c658d6c0409265ef1d1d5a6521b5",
+      "mp3_sha256": "5e940b35797cbad20ed012d90766637ed6d709ecd03ffb05b4810098205e2b1f"
+    },
+    {
+      "name": "v2-02-confirm",
+      "duration": 0.225,
+      "designed_peak_linear": 0.145,
+      "wav_sha256": "140353102d906b839a7df8620b2bf63e979a4cffe5a8a6e4eb19a4fb7690c963",
+      "mp3_sha256": "65efa8e4feaf9155423c2d3a87dd4c50be40308df3ed064947d68b5f8ccd49b8"
+    },
+    {
+      "name": "v2-03-reward",
+      "duration": 0.375,
+      "designed_peak_linear": 0.125,
+      "wav_sha256": "f0ae10a3f2e81937f82ac18d74722af947984f4f6a0fac46ae03ab227550a990",
+      "mp3_sha256": "96808800a9df28e46162c0aa843d4fa16d8cc4bcbec4a46b93b2938107539a9e"
+    }
+  ]
+}

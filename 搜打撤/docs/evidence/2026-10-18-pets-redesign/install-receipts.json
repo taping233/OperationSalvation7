@@ -1,0 +1,110 @@
+[
+  {
+    "id": "dog",
+    "rawPath": "game/art-source/pets/redesign-20261018/dog-redraw-v2.png",
+    "sourceSha256": "5deba60a0b75828dcb725bd148cb5f9b4d2ed7c1e2003aa8e238ea8eb0f61f84",
+    "outputPath": "game/assets/icons/base-v3/companion-dog.webp",
+    "outputSha256": "462d69f53293a0b92962a70264dfd51f6da8657ab2e56a6091c67799356ccd61",
+    "outputBytes": 89620,
+    "size": [
+      720,
+      720
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "backup": "game/art-source/pets/redesign-20261018/dog-before-install.webp",
+    "backupSha256": "0a39e7667cea645753e944eef2c7ff56c0faacbd764008eedfaec0a7a59542ce"
+  },
+  {
+    "id": "falcon",
+    "rawPath": "game/art-source/pets/redesign-20261018/falcon-redraw-v1.png",
+    "sourceSha256": "bac3db35b3ee3f0891899b4e32a4a839dd3408b2fe658ad6821d73af46fd9d09",
+    "outputPath": "game/assets/icons/base-v3/companion-falcon.webp",
+    "outputSha256": "5e4fdb8f7648e82ed4d07ecf671d21f3fbc487f197550c87e7803e89c88f846c",
+    "outputBytes": 101168,
+    "size": [
+      720,
+      720
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "backup": "game/art-source/pets/redesign-20261018/falcon-before-install.webp",
+    "backupSha256": "654a1845ca519a63de6756cab3f7fbe51332ec54fa3366cf19954ae9861dfbfc"
+  },
+  {
+    "id": "cat",
+    "rawPath": "game/art-source/pets/redesign-20261018/cat-redraw-v1.png",
+    "sourceSha256": "78056ba96cf1b41dd62220fd60989c97482c9c56f1500564d1f3d4d68405ba76",
+    "outputPath": "game/assets/icons/base-v3/companion-cat.webp",
+    "outputSha256": "c27319f848b8b5773fb71cc7bf25d8cae77998270b631587a770e3dbf3cc868f",
+    "outputBytes": 125316,
+    "size": [
+      720,
+      720
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "backup": "game/art-source/pets/redesign-20261018/cat-before-install.webp",
+    "backupSha256": "7989e27d3417b26eb1cadee613a8d838ea6e62561d44d3cc4154fb2bc21aa71a"
+  },
+  {
+    "id": "robot",
+    "rawPath": "game/art-source/pets/redesign-20261018/robot-redraw-v2.png",
+    "sourceSha256": "e8a12d9e2d5093b30614ac1b9ae1ea62964251b8fecb8444a9e65296f3a6cd0f",
+    "outputPath": "game/assets/icons/base-v3/companion-robot.webp",
+    "outputSha256": "25ef844a6b18bbc9e887a80c2d8203be216a83d60b94de2a49edae516da51231",
+    "outputBytes": 108542,
+    "size": [
+      720,
+      720
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "backup": "game/art-source/pets/redesign-20261018/robot-before-install.webp",
+    "backupSha256": "d2ecf7f8a255ff359f38a784b635315c13048eff140258c6143b5d1d070ada67"
+  },
+  {
+    "id": "fire",
+    "rawPath": "game/art-source/pets/redesign-20261018/fire-redraw-v2.png",
+    "sourceSha256": "28eeb7e081569c2218d68639ba09da7d08e70d22dfe4f81995ab5176a92e6529",
+    "outputPath": "game/assets/icons/base-v3/companion-fire.webp",
+    "outputSha256": "d872e0025c159e07d4c27fc3ef802de6c9133e236f61e8048586014a62ccc917",
+    "outputBytes": 64926,
+    "size": [
+      720,
+      720
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "backup": "game/art-source/pets/redesign-20261018/fire-before-install.webp",
+    "backupSha256": "d8354206ee1f5d8403d206f6e2d6a634535660b9d8a50dc14a2e0d5e516a4621"
+  },
+  {
+    "id": "penguin",
+    "rawPath": "game/art-source/pets/redesign-20261018/penguin-redraw-v2.png",
+    "sourceSha256": "52aa578c42dd836534f72407c9dd8ee5c94370b3bb23cb4978e3909e4c539895",
+    "outputPath": "game/assets/icons/base-v3/companion-penguin.webp",
+    "outputSha256": "709acc7f6f1e0347e4c9cf66c597bec642b8c9e9a9dd2b26c02752e78cf78c86",
+    "outputBytes": 90972,
+    "size": [
+      720,
+      720
+    ],
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "backup": "game/art-source/pets/redesign-20261018/penguin-before-install.webp",
+    "backupSha256": "455176e51bbf6e65e11e36f23c3ee544ed56bd81d1bf6216cb31175432995230"
+  }
+]

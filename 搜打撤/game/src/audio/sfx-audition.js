@@ -70,7 +70,8 @@ async function loadLibrary(packId, preserve = false) {
   currentPack = packId; renderPacks();
   $('status').textContent = '正在载入方案…';
   const url = compareMode ? packs.find(pack => pack.id === packId)?.url || `./assets/sfx/alternatives/${packId}/library.json`
-    : requestedSet === 'v5' ? './assets/sfx/winter-v5/library.json' : './assets/sfx/winter-v6-ten/library.json';
+    : requestedSet === 'web' ? './assets/sfx/original-ui-1018/library.json'
+      : requestedSet === 'v5' ? './assets/sfx/winter-v5/library.json' : './assets/sfx/winter-v6-ten/library.json';
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error('library unavailable');
@@ -132,10 +133,11 @@ function renderGrid() {
     heading.append(element('h3', cue.label));
     if (favorites.has(cue.id) && featuredLabel === '已认可的五个') heading.append(element('span', '已认可', 'approved'));
     const meta = element('div', null, 'card-meta');
-    meta.append(element('span', groups[cue.group]), element('span', `${cue.variants[index].seconds.toFixed(2)} 秒`));
+    meta.append(element('span', groups[cue.group]), element('span', cue.variants.length ? `${cue.variants[index].seconds.toFixed(2)} 秒` : '已取消音效'));
     if (cue.loop) meta.append(element('span', '可循环'));
     const actions = element('div', null, 'card-actions');
     const play = element('button', '▶ 试听', 'card-play');
+    play.disabled = !cue.variants.length; if (play.disabled) play.textContent = '已取消音效';
     play.setAttribute('aria-label', `试听${cue.label}`);
     play.addEventListener('click', () => { setSequence(false); playCue(cue); });
     const select = element('select', null, 'version-select');
@@ -173,12 +175,18 @@ function setSequence(value) {
 async function playCue(cue) {
   const token = ++generation;
   audio.pause(); active = cue;
+  if (!cue.variants.length) {
+    setSequence(false); active = null; audio.removeAttribute('src'); audio.load();
+    $('now-title').textContent = cue.label; $('now-detail').textContent = '已取消音效';
+    $('status').textContent = '这个场景不再播放声音。'; renderGrid(); updatePlayer(); return;
+  }
   const index = versions.get(cue.id) || 0;
   const variant = cue.variants[index];
   $('now-title').textContent = cue.label;
   $('now-detail').textContent = `${compareMode ? `${packs.find(pack => pack.id === currentPack).label} · ` : ''}${groups[cue.group]}${cue.variants.length > 1 ? ` · 版本 ${index + 1} / ${cue.variants.length}` : cue.note ? ` · ${cue.note}` : ''}${cue.loop ? ' · 环境循环' : ''}`;
   $('status').textContent = '正在加载…';
   audio.src = new URL(variant.src, document.baseURI).href;
+  if (requestedSet === 'web') audio.volume = Math.min(1, Number($('volume').value) / 100 * cue.gain * 1.5);
   audio.loop = $('loop').checked && !sequence;
   audio.load(); renderGrid(); updatePlayer();
   try {
@@ -194,7 +202,7 @@ async function playCue(cue) {
 }
 
 function step(offset, wrap = true) {
-  const list = filtered(); if (!list.length) return;
+  const list = filtered().filter(cue => cue.variants.length); if (!list.length) return;
   const index = list.findIndex(cue => cue.id === active?.id);
   const next = index < 0 ? 0 : index + offset;
   if (!wrap && next >= list.length) { setSequence(false); $('status').textContent = '这一组听完了。'; return; }
@@ -202,7 +210,7 @@ function step(offset, wrap = true) {
 }
 
 async function toggle() {
-  if (!active) { if (filtered()[0]) playCue(filtered()[0]); return; }
+  if (!active) { const first = filtered().find(cue => cue.variants.length); if (first) playCue(first); return; }
   if (!audio.paused) audio.pause();
   else {
     try { await audio.play(); $('status').textContent = ''; }
@@ -225,9 +233,12 @@ $('toggle').addEventListener('click', toggle);
 $('previous').addEventListener('click', () => step(-1));
 $('next').addEventListener('click', () => step(1));
 $('variant').addEventListener('click', nextVersion);
-$('sequence').addEventListener('click', () => { setSequence(!sequence); if (sequence) { const list = filtered(); if (list.length) playCue(list[0]); } });
+$('sequence').addEventListener('click', () => { setSequence(!sequence); if (sequence) { const list = filtered().filter(cue => cue.variants.length); if (list.length) playCue(list[0]); else setSequence(false); } });
 $('stop').addEventListener('click', () => { generation++; setSequence(false); audio.pause(); audio.currentTime = 0; $('status').textContent = ''; updatePlayer(); });
-$('volume').addEventListener('input', () => { audio.volume = Number($('volume').value) / 100; $('volume-value').textContent = `${$('volume').value}%`; });
+$('volume').addEventListener('input', () => {
+  audio.volume = Math.min(1, Number($('volume').value) / 100 * (requestedSet === 'web' && active ? active.gain * 1.5 : 1));
+  $('volume-value').textContent = `${$('volume').value}%`;
+});
 $('loop').addEventListener('change', () => { if ($('loop').checked) setSequence(false); audio.loop = $('loop').checked; });
 $('progress').addEventListener('input', () => { if (Number.isFinite(audio.duration)) audio.currentTime = Number($('progress').value) / 1000 * audio.duration; });
 for (const event of ['timeupdate', 'loadedmetadata', 'play', 'pause', 'ended']) audio.addEventListener(event, updatePlayer);

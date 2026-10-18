@@ -3,10 +3,27 @@ body #overlay .battle-decision.container-store .pearl-store-list { grid-template
 body #overlay .battle-decision.container-store .container-store-slot { display:flex; flex-direction:column; gap:10px; width:300px; max-width:100%; }
 body #overlay .battle-decision.container-store .pearl-store-card { width:300px; max-width:100%; }
 body #overlay .battle-decision.container-store .pearl-store-art .hs-card { width:100%!important; font-size:30px; }
-body #overlay .battle-decision.container-store .pearl-store-caption { background:#223441; color:#e8edef; }
+body #overlay .battle-decision.container-store .pearl-store-caption { background:#202832; color:#e8edef; border-top:1px solid #bac9d333; }
 body #overlay .battle-decision.container-store .pearl-store-card:disabled { opacity:.55; cursor:not-allowed; outline:none; }
 body #overlay .battle-decision.container-store .container-store-blocked { margin:0; color:#e3b7a6; font-size:20px; line-height:1.5; }
 body #overlay .battle-decision.container-store .container-store-help { flex:1; align-self:center; min-width:0; max-width:68ch; color:#b8cbd6; font-size:21px; line-height:1.6; }
 body #overlay .battle-decision.container-store .container-store-help summary { width:max-content; cursor:pointer; }
 body #overlay .battle-decision.container-store .container-store-help p { margin:10px 24px 0 0; }
 body #overlay .battle-decision.container-store .battle-decision-actions { display:flex; align-items:center; gap:24px; }
+body #overlay .battle-decision.container-store { background:linear-gradient(130deg,#202a35f5,#121922fa); color:#d8e1e9; }
+body #overlay .battle-decision.container-store .battle-decision-head { padding:24px 32px; border-bottom:1px solid #c2d2df33; background:#ffffff03; }
+body #overlay .container-store-title small { color:#93a4b5; font-size:14px; letter-spacing:.22em; }
+body #overlay .container-store-title h3 { margin:8px 0 0; color:#edf1f5; }
+body #overlay .container-store-capacity { display:grid; grid-template-columns:auto auto; align-items:baseline; gap:6px 10px; min-width:130px; color:#9eafc0; }
+body #overlay .container-store-capacity b { color:#e1e8ee; font:500 38px/1 var(--font-ui); }
+body #overlay .container-store-capacity i { grid-column:1/-1; height:3px; background:linear-gradient(to right,#a9bdcf var(--store-fill),#ffffff12 var(--store-fill)); }
+body #overlay .battle-decision.container-store .pearl-store-columns { gap:0; padding:0; }
+body #overlay .battle-decision.container-store .pearl-store-columns > section { padding:26px 30px; background:#ffffff02; }
+body #overlay .battle-decision.container-store .pearl-store-columns > section + section { border-left:1px solid #b6c6d329; background:#0c121833; }
+body #overlay .container-column-head { display:grid; grid-template-columns:1fr auto; gap:6px 12px; margin-bottom:24px; padding-bottom:18px; border-bottom:1px solid #b6c6d326; }
+body #overlay .container-column-head small { grid-column:1/-1; color:#8e9fb1; letter-spacing:.15em; font-size:14px; }
+body #overlay .container-column-head span { align-self:center; color:#97a9b9; font-size:18px; }
+body #overlay .battle-decision.container-store .pearl-store-card { border:1px solid #b6c6d33d; border-radius:2px; background:#151d26; box-shadow:none; }
+body #overlay .battle-decision.container-store .pearl-store-card:hover:not(:disabled) { border-color:#bacddc; background:#27333f; }
+body #overlay .battle-decision.container-store .battle-card-inspect { color:#b8c8d6; background:transparent; border-color:#9baebb40; border-radius:2px; }
+body #overlay .battle-decision.container-store .ov-btn.ok { background:#bacbd8; color:#17212a; border-color:#bacbd8; }

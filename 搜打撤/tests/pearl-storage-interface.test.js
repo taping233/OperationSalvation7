@@ -74,10 +74,10 @@ describe('珍珠盒可读存取界面', () => {
     const before = game.ownedCards.map(o => o.uid);
     button('pearlPut', wood.name).click();
     expect(game.ownedCards.filter(o => o.card.id === wood.id && o.stored)).toHaveLength(2);
-    expect(document.querySelector('.pearl-store [role="status"]').textContent).toContain('3/9');
+    expect(document.querySelector('.pearl-store [role="status"]').textContent.replace(/\s/g, '')).toContain('3/9');
     button('pearlTake', wood.name).click();
     expect(game.ownedCards.filter(o => o.card.id === wood.id && o.stored)).toHaveLength(0);
-    expect(document.querySelector('.pearl-store [role="status"]').textContent).toContain('1/9');
+    expect(document.querySelector('.pearl-store [role="status"]').textContent.replace(/\s/g, '')).toContain('1/9');
     expect(game.ownedCards.map(o => o.uid)).toEqual(before);
     expect(game.ownedCards.find(o => o.card.id === pearl.id).safe).toBe(true);
   });

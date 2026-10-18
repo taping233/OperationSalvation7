@@ -1,0 +1,1542 @@
+{
+  "name": "网络新选 · 写实克制",
+  "version": "WEB 10.18",
+  "featuredLabel": "点击与奖励",
+  "featuredTitle": "先听高频操作与奖励",
+  "featuredIds": [
+    "click",
+    "cardSelect",
+    "confirm",
+    "gain",
+    "coin",
+    "ding",
+    "reveal",
+    "legend",
+    "victory",
+    "chestBurst"
+  ],
+  "groups": {
+    "ui": "界面操作",
+    "combat": "战斗与卡牌",
+    "reward": "奖励提示",
+    "transition": "场景转换"
+  },
+  "cues": [
+    {
+      "id": "click",
+      "label": "按钮点击",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/click.ogg",
+          "seconds": 0.09210884353741497
+        }
+      ]
+    },
+    {
+      "id": "cardSelect",
+      "label": "选择卡牌",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/select.ogg",
+          "seconds": 0.11709750566893425
+        }
+      ]
+    },
+    {
+      "id": "characterSelect",
+      "label": "characterSelect",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/select.ogg",
+          "seconds": 0.11709750566893425
+        }
+      ]
+    },
+    {
+      "id": "confirm",
+      "label": "操作确认",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.55,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/confirm.ogg",
+          "seconds": 0.17709750566893423
+        }
+      ]
+    },
+    {
+      "id": "prepReady",
+      "label": "prepReady",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.55,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/confirm.ogg",
+          "seconds": 0.17709750566893423
+        }
+      ]
+    },
+    {
+      "id": "extractionConfirm",
+      "label": "extractionConfirm",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.55,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/confirm.ogg",
+          "seconds": 0.17709750566893423
+        }
+      ]
+    },
+    {
+      "id": "gain",
+      "label": "获得物品",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.55,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/leather-pick.ogg",
+          "seconds": 0.28904761904761905
+        }
+      ]
+    },
+    {
+      "id": "coin",
+      "label": "获得钱币",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.48,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/coin-one.ogg",
+          "seconds": 0.31709750566893424
+        },
+        {
+          "src": "./assets/sfx/web-foley-1018/coin-many.ogg",
+          "seconds": 0.6051700680272109
+        }
+      ]
+    },
+    {
+      "id": "tradeSell",
+      "label": "tradeSell",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.48,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/coin-one.ogg",
+          "seconds": 0.31709750566893424
+        },
+        {
+          "src": "./assets/sfx/web-foley-1018/coin-many.ogg",
+          "seconds": 0.6051700680272109
+        }
+      ]
+    },
+    {
+      "id": "stashDeposit",
+      "label": "stashDeposit",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.55,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/leather-pick.ogg",
+          "seconds": 0.28904761904761905
+        }
+      ]
+    },
+    {
+      "id": "safeStore",
+      "label": "safeStore",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.48,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/buckle.ogg",
+          "seconds": 0.1872108843537415
+        }
+      ]
+    },
+    {
+      "id": "hover",
+      "label": "悬停",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.09,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/click.ogg",
+          "seconds": 0.09210884353741497
+        }
+      ]
+    },
+    {
+      "id": "navigate",
+      "label": "navigate",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.09,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/click.ogg",
+          "seconds": 0.09210884353741497
+        }
+      ]
+    },
+    {
+      "id": "switch",
+      "label": "switch",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/switch.ogg",
+          "seconds": 0.16108843537414966
+        }
+      ]
+    },
+    {
+      "id": "open",
+      "label": "open",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/book-open.ogg",
+          "seconds": 0.13498866213151928
+        }
+      ]
+    },
+    {
+      "id": "safeEnter",
+      "label": "safeEnter",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/book-open.ogg",
+          "seconds": 0.13498866213151928
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "label": "close",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/book-close.ogg",
+          "seconds": 0.16972789115646258
+        }
+      ]
+    },
+    {
+      "id": "error",
+      "label": "error",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/deny.ogg",
+          "seconds": 0.23709750566893423
+        }
+      ]
+    },
+    {
+      "id": "deny",
+      "label": "deny",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/deny.ogg",
+          "seconds": 0.23709750566893423
+        }
+      ]
+    },
+    {
+      "id": "blackMarketLose",
+      "label": "blackMarketLose",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/deny.ogg",
+          "seconds": 0.23709750566893423
+        }
+      ]
+    },
+    {
+      "id": "extractionFail",
+      "label": "extractionFail",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/deny.ogg",
+          "seconds": 0.23709750566893423
+        }
+      ]
+    },
+    {
+      "id": "pick",
+      "label": "pick",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/leather-pick.ogg",
+          "seconds": 0.28904761904761905
+        }
+      ]
+    },
+    {
+      "id": "safeRetrieve",
+      "label": "safeRetrieve",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.48,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/unbuckle.ogg",
+          "seconds": 0.31709750566893424
+        }
+      ]
+    },
+    {
+      "id": "drop",
+      "label": "drop",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/leather-drop.ogg",
+          "seconds": 0.3470975056689342
+        }
+      ]
+    },
+    {
+      "id": "discard",
+      "label": "discard",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/leather-drop.ogg",
+          "seconds": 0.3470975056689342
+        }
+      ]
+    },
+    {
+      "id": "danger",
+      "label": "danger",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/wood-creak.ogg",
+          "seconds": 0.32072562358276646
+        }
+      ]
+    },
+    {
+      "id": "eventDanger",
+      "label": "eventDanger",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/wood-creak.ogg",
+          "seconds": 0.32072562358276646
+        }
+      ]
+    },
+    {
+      "id": "bossReveal",
+      "label": "bossReveal",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/heavy.ogg",
+          "seconds": 0.4770975056689342
+        }
+      ]
+    },
+    {
+      "id": "energyUp",
+      "label": "energyUp",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/magic-2.ogg",
+          "seconds": 0.49709750566893424
+        }
+      ]
+    },
+    {
+      "id": "buffUp",
+      "label": "buffUp",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/magic-2.ogg",
+          "seconds": 0.49709750566893424
+        }
+      ]
+    },
+    {
+      "id": "energyDown",
+      "label": "energyDown",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/cloth.ogg",
+          "seconds": 0.39709750566893426
+        }
+      ]
+    },
+    {
+      "id": "buffDown",
+      "label": "buffDown",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/cloth.ogg",
+          "seconds": 0.39709750566893426
+        }
+      ]
+    },
+    {
+      "id": "curseEnd",
+      "label": "curseEnd",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/cloth.ogg",
+          "seconds": 0.39709750566893426
+        }
+      ]
+    },
+    {
+      "id": "turnSelf",
+      "label": "turnSelf",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/latch.ogg",
+          "seconds": 0.2208843537414966
+        }
+      ]
+    },
+    {
+      "id": "phaseSelf",
+      "label": "phaseSelf",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/latch.ogg",
+          "seconds": 0.2208843537414966
+        }
+      ]
+    },
+    {
+      "id": "turnFoe",
+      "label": "turnFoe",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/metal-click.ogg",
+          "seconds": 0.2917006802721088
+        }
+      ]
+    },
+    {
+      "id": "phaseFoe",
+      "label": "phaseFoe",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/metal-click.ogg",
+          "seconds": 0.2917006802721088
+        }
+      ]
+    },
+    {
+      "id": "scene",
+      "label": "scene",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/cloth.ogg",
+          "seconds": 0.39709750566893426
+        }
+      ]
+    },
+    {
+      "id": "eventEnter",
+      "label": "进入事件",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/cloth.ogg",
+          "seconds": 0.39709750566893426
+        }
+      ]
+    },
+    {
+      "id": "layerEnter",
+      "label": "layerEnter",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/cloth.ogg",
+          "seconds": 0.39709750566893426
+        }
+      ]
+    },
+    {
+      "id": "fireEnter",
+      "label": "fireEnter",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/wood-creak.ogg",
+          "seconds": 0.32072562358276646
+        }
+      ]
+    },
+    {
+      "id": "altarEnter",
+      "label": "altarEnter",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/magic-6.ogg",
+          "seconds": 0.5470975056689342
+        }
+      ]
+    },
+    {
+      "id": "doorEnter",
+      "label": "doorEnter",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.48,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/door.ogg",
+          "seconds": 0.6470975056689342
+        }
+      ]
+    },
+    {
+      "id": "shopEnter",
+      "label": "shopEnter",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/coin-many.ogg",
+          "seconds": 0.6051700680272109
+        }
+      ]
+    },
+    {
+      "id": "extractionEnter",
+      "label": "extractionEnter",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.48,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/door.ogg",
+          "seconds": 0.6470975056689342
+        }
+      ]
+    },
+    {
+      "id": "deployStart",
+      "label": "deployStart",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.48,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/door.ogg",
+          "seconds": 0.6470975056689342
+        }
+      ]
+    },
+    {
+      "id": "battleEnter",
+      "label": "battleEnter",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/knife-draw.ogg",
+          "seconds": 0.3729705215419501
+        }
+      ]
+    },
+    {
+      "id": "flee",
+      "label": "flee",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/cloth.ogg",
+          "seconds": 0.39709750566893426
+        }
+      ]
+    },
+    {
+      "id": "ding",
+      "label": "奖励提示",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-small.ogg",
+          "seconds": 0.4770975056689342
+        }
+      ]
+    },
+    {
+      "id": "levelup",
+      "label": "升级",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-small.ogg",
+          "seconds": 0.4770975056689342
+        }
+      ]
+    },
+    {
+      "id": "achievementUnlock",
+      "label": "成就解锁",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-small.ogg",
+          "seconds": 0.4770975056689342
+        }
+      ]
+    },
+    {
+      "id": "collectionUnlock",
+      "label": "collectionUnlock",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-small.ogg",
+          "seconds": 0.4770975056689342
+        }
+      ]
+    },
+    {
+      "id": "eventComplete",
+      "label": "eventComplete",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.55,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-rare.ogg",
+          "seconds": 0.6429024943310657
+        }
+      ]
+    },
+    {
+      "id": "storyComplete",
+      "label": "storyComplete",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.55,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-rare.ogg",
+          "seconds": 0.6429024943310657
+        }
+      ]
+    },
+    {
+      "id": "recodeComplete",
+      "label": "recodeComplete",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.55,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-rare.ogg",
+          "seconds": 0.6429024943310657
+        }
+      ]
+    },
+    {
+      "id": "shutter",
+      "label": "shutter",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/switch.ogg",
+          "seconds": 0.16108843537414966
+        }
+      ]
+    },
+    {
+      "id": "searchStart",
+      "label": "searchStart",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/page-long.ogg",
+          "seconds": 0.39462585034013603
+        }
+      ]
+    },
+    {
+      "id": "recodeStart",
+      "label": "recodeStart",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/page-long.ogg",
+          "seconds": 0.39462585034013603
+        }
+      ]
+    },
+    {
+      "id": "searchReveal",
+      "label": "searchReveal",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/paper-place.ogg",
+          "seconds": 0.24709750566893424
+        }
+      ]
+    },
+    {
+      "id": "eventClue",
+      "label": "eventClue",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/paper-place.ogg",
+          "seconds": 0.24709750566893424
+        }
+      ]
+    },
+    {
+      "id": "storyClue",
+      "label": "storyClue",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/paper-place.ogg",
+          "seconds": 0.24709750566893424
+        }
+      ]
+    },
+    {
+      "id": "altarActivate",
+      "label": "altarActivate",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/buckle.ogg",
+          "seconds": 0.1872108843537415
+        }
+      ]
+    },
+    {
+      "id": "altarOffer",
+      "label": "altarOffer",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/buckle.ogg",
+          "seconds": 0.1872108843537415
+        }
+      ]
+    },
+    {
+      "id": "eventSafe",
+      "label": "eventSafe",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/confirm.ogg",
+          "seconds": 0.17709750566893423
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "label": "出牌",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/paper-place.ogg",
+          "seconds": 0.24709750566893424
+        },
+        {
+          "src": "./assets/sfx/web-foley-1018/paper-place-2.ogg",
+          "seconds": 0.3236281179138322
+        }
+      ]
+    },
+    {
+      "id": "draw",
+      "label": "抽牌",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/page-short.ogg",
+          "seconds": 0.2307482993197279
+        },
+        {
+          "src": "./assets/sfx/web-foley-1018/page-long.ogg",
+          "seconds": 0.39462585034013603
+        }
+      ]
+    },
+    {
+      "id": "shuffle",
+      "label": "shuffle",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.55,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/page-long.ogg",
+          "seconds": 0.39462585034013603
+        }
+      ]
+    },
+    {
+      "id": "hit",
+      "label": "斩击",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/knife-cut.ogg",
+          "seconds": 0.39709750566893426
+        },
+        {
+          "src": "./assets/sfx/web-foley-1018/knife-cut-2.ogg",
+          "seconds": 0.37709750566893424
+        }
+      ]
+    },
+    {
+      "id": "attackSlash",
+      "label": "attackSlash",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/knife-cut.ogg",
+          "seconds": 0.39709750566893426
+        },
+        {
+          "src": "./assets/sfx/web-foley-1018/knife-cut-2.ogg",
+          "seconds": 0.37709750566893424
+        }
+      ]
+    },
+    {
+      "id": "attackPierce",
+      "label": "attackPierce",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/pierce.ogg",
+          "seconds": 0.3470975056689342
+        }
+      ]
+    },
+    {
+      "id": "attackArrow",
+      "label": "attackArrow",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/arrow.ogg",
+          "seconds": 0.2276643990929705
+        }
+      ]
+    },
+    {
+      "id": "strike",
+      "label": "strike",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/blunt.ogg",
+          "seconds": 0.1919954648526077
+        }
+      ]
+    },
+    {
+      "id": "attackBlunt",
+      "label": "attackBlunt",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/blunt.ogg",
+          "seconds": 0.1919954648526077
+        }
+      ]
+    },
+    {
+      "id": "attackBossHeavy",
+      "label": "attackBossHeavy",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/heavy.ogg",
+          "seconds": 0.4770975056689342
+        }
+      ]
+    },
+    {
+      "id": "hurt",
+      "label": "hurt",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/blunt.ogg",
+          "seconds": 0.1919954648526077
+        }
+      ]
+    },
+    {
+      "id": "parry",
+      "label": "格挡",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.55,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/parry.ogg",
+          "seconds": 0.3570975056689342
+        },
+        {
+          "src": "./assets/sfx/web-foley-1018/parry-2.ogg",
+          "seconds": 0.33709750566893426
+        }
+      ]
+    },
+    {
+      "id": "curse",
+      "label": "curse",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/magic-7.ogg",
+          "seconds": 0.6970975056689342
+        }
+      ]
+    },
+    {
+      "id": "attackFire",
+      "label": "attackFire",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/magic-1.ogg",
+          "seconds": 0.6470975056689342
+        }
+      ]
+    },
+    {
+      "id": "attackIce",
+      "label": "attackIce",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/magic-3.ogg",
+          "seconds": 0.49709750566893424
+        }
+      ]
+    },
+    {
+      "id": "attackLightning",
+      "label": "attackLightning",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/magic-5.ogg",
+          "seconds": 0.49709750566893424
+        }
+      ]
+    },
+    {
+      "id": "attackPoison",
+      "label": "attackPoison",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/leather.ogg",
+          "seconds": 0.31709750566893424
+        }
+      ]
+    },
+    {
+      "id": "attackPsychic",
+      "label": "attackPsychic",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/magic-7.ogg",
+          "seconds": 0.6970975056689342
+        }
+      ]
+    },
+    {
+      "id": "heal",
+      "label": "治疗",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/magic-6.ogg",
+          "seconds": 0.5470975056689342
+        }
+      ]
+    },
+    {
+      "id": "cardRestore",
+      "label": "cardRestore",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/magic-6.ogg",
+          "seconds": 0.5470975056689342
+        }
+      ]
+    },
+    {
+      "id": "chestShake",
+      "label": "chestShake",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.55,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/leather.ogg",
+          "seconds": 0.31709750566893424
+        }
+      ]
+    },
+    {
+      "id": "chestBurst",
+      "label": "宝箱打开",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/unbuckle.ogg",
+          "seconds": 0.31709750566893424
+        }
+      ]
+    },
+    {
+      "id": "reveal",
+      "label": "奖励落定",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/coin-one.ogg",
+          "seconds": 0.31709750566893424
+        }
+      ]
+    },
+    {
+      "id": "tradeBuy",
+      "label": "tradeBuy",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.48,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/coin-one.ogg",
+          "seconds": 0.31709750566893424
+        },
+        {
+          "src": "./assets/sfx/web-foley-1018/coin-many.ogg",
+          "seconds": 0.6051700680272109
+        }
+      ]
+    },
+    {
+      "id": "runeExchange",
+      "label": "runeExchange",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/coin-one.ogg",
+          "seconds": 0.31709750566893424
+        }
+      ]
+    },
+    {
+      "id": "legend",
+      "label": "稀有奖励",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-rare.ogg",
+          "seconds": 0.6429024943310657
+        }
+      ]
+    },
+    {
+      "id": "rarePlay",
+      "label": "rarePlay",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-rare.ogg",
+          "seconds": 0.6429024943310657
+        }
+      ]
+    },
+    {
+      "id": "altarReward",
+      "label": "altarReward",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-rare.ogg",
+          "seconds": 0.6429024943310657
+        }
+      ]
+    },
+    {
+      "id": "eggHatch",
+      "label": "eggHatch",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-rare.ogg",
+          "seconds": 0.6429024943310657
+        }
+      ]
+    },
+    {
+      "id": "petRescue",
+      "label": "petRescue",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-rare.ogg",
+          "seconds": 0.6429024943310657
+        }
+      ]
+    },
+    {
+      "id": "blackMarketWin",
+      "label": "blackMarketWin",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-rare.ogg",
+          "seconds": 0.6429024943310657
+        }
+      ]
+    },
+    {
+      "id": "victory",
+      "label": "胜利",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-complete.ogg",
+          "seconds": 0.8970975056689342
+        }
+      ]
+    },
+    {
+      "id": "bossVictory",
+      "label": "bossVictory",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-complete.ogg",
+          "seconds": 0.8970975056689342
+        }
+      ]
+    },
+    {
+      "id": "runClear",
+      "label": "runClear",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-complete.ogg",
+          "seconds": 0.8970975056689342
+        }
+      ]
+    },
+    {
+      "id": "extractionSuccess",
+      "label": "extractionSuccess",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/reward-complete.ogg",
+          "seconds": 0.8970975056689342
+        }
+      ]
+    },
+    {
+      "id": "defeat",
+      "label": "defeat",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.5,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/wood-creak.ogg",
+          "seconds": 0.32072562358276646
+        }
+      ]
+    },
+    {
+      "id": "shieldUp",
+      "label": "shieldUp",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.55,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/latch.ogg",
+          "seconds": 0.2208843537414966
+        }
+      ]
+    },
+    {
+      "id": "kill",
+      "label": "kill",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/heavy.ogg",
+          "seconds": 0.4770975056689342
+        }
+      ]
+    },
+    {
+      "id": "shieldBreak",
+      "label": "破盾",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/shield-break.ogg",
+          "seconds": 0.49709750566893424
+        }
+      ]
+    },
+    {
+      "id": "armorBreak",
+      "label": "armorBreak",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.6,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/shield-break.ogg",
+          "seconds": 0.49709750566893424
+        }
+      ]
+    },
+    {
+      "id": "burn",
+      "label": "burn",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/magic-1.ogg",
+          "seconds": 0.6470975056689342
+        }
+      ]
+    },
+    {
+      "id": "foeLunge",
+      "label": "foeLunge",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.45,
+      "note": "网络公开许可素材 · 本轮新选样",
+      "variants": [
+        {
+          "src": "./assets/sfx/web-foley-1018/lunge.ogg",
+          "seconds": 0.19709750566893425
+        }
+      ]
+    }
+  ]
+}

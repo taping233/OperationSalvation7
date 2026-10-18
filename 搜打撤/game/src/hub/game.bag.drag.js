@@ -16,6 +16,10 @@ import { captureBattleContext } from '../battle/battle-loader.js';
     const bagGrid = body.querySelector('.bag-grid');
     if (!bagGrid) return;
     const sameRun = captureBattleContext(game), cards = game.ownedCards;
+    let suppressClick = false;
+    bagGrid.addEventListener('click', event => {
+      if (suppressClick) { event.preventDefault(); event.stopImmediatePropagation(); suppressClick = false; }
+    }, true);
     const current = () => sameRun() && !game.battleActive && game.ownedCards === cards && bagGrid.isConnected
       && body === UI.el.ovBody && body.querySelector('.bag-grid') === bagGrid
       && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
@@ -36,6 +40,7 @@ import { captureBattleContext } from '../battle/battle-loader.js';
         name: cell.dataset.stack, fromSafe: cell.dataset.safe === '1', cell, pointerId: e.pointerId, current,
         sx: e.clientX, sy: e.clientY, lx: e.clientX, ly: e.clientY,
         vx: 0, vy: 0, moved: false, ghost: null, card3d: null,
+        suppressClick: () => { suppressClick = true; setTimeout(() => { suppressClick = false; }, 0); },
       };
       cell.classList.add('dragging');
       SDT.Sound.sfx('pick');
@@ -131,6 +136,7 @@ import { captureBattleContext } from '../battle/battle-loader.js';
     resetBagDrag();
     if (!d.current()) return;
     if (!d.moved) return;   // 原地按住未拖动 = 无操作
+    d.suppressClick();
     SDT.Sound.sfx('drop');
     const t = bagDropTarget(e.clientX, e.clientY, d.cell);
     if (!t) { bagSlots.showDiscardConfirm(d.name, d.fromSafe); return; }
@@ -181,7 +187,12 @@ import { captureBattleContext } from '../battle/battle-loader.js';
     if (t.kind === 'stack') bagSlots.moveStackOrder(d.name, t.name);
     else bagSlots.moveStackOrder(d.name, null);   // 空格/物资格 = 移到卡牌区末尾
     saveGame();
-    bagSlots.showBackpack(true);
+    // Same-zone order changes preserve the page, artwork, focus and scroll.
+    const grid = d.cell.parentElement;
+    const moving = [...grid.querySelectorAll('.bag-tile[data-stack]')].filter(cell => cell.dataset.stack === d.name);
+    const before = t.kind === 'stack' && t.name !== d.name
+      ? [...grid.children].find(cell => cell.dataset.stack === t.name) : null;
+    for (const cell of moving) grid.insertBefore(cell, before || null);
   }
 
 

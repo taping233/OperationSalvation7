@@ -1,0 +1,762 @@
+{
+  "click": {
+    "files": [
+      "assets/sfx/web-foley-1018/click.ogg"
+    ],
+    "gain": 0.5,
+    "group": "ui"
+  },
+  "cardSelect": {
+    "files": [
+      "assets/sfx/web-foley-1018/select.ogg"
+    ],
+    "gain": 0.45,
+    "group": "ui"
+  },
+  "characterSelect": {
+    "files": [
+      "assets/sfx/web-foley-1018/select.ogg"
+    ],
+    "gain": 0.45,
+    "group": "ui"
+  },
+  "confirm": {
+    "files": [
+      "assets/sfx/web-foley-1018/confirm.ogg"
+    ],
+    "gain": 0.55,
+    "group": "ui"
+  },
+  "prepReady": {
+    "files": [
+      "assets/sfx/web-foley-1018/confirm.ogg"
+    ],
+    "gain": 0.55,
+    "group": "ui"
+  },
+  "extractionConfirm": {
+    "files": [
+      "assets/sfx/web-foley-1018/confirm.ogg"
+    ],
+    "gain": 0.55,
+    "group": "ui"
+  },
+  "gain": {
+    "files": [
+      "assets/sfx/web-foley-1018/leather-pick.ogg"
+    ],
+    "gain": 0.55,
+    "group": "ui"
+  },
+  "coin": {
+    "files": [
+      "assets/sfx/web-foley-1018/coin-one.ogg",
+      "assets/sfx/web-foley-1018/coin-many.ogg"
+    ],
+    "gain": 0.48,
+    "group": "ui"
+  },
+  "tradeSell": {
+    "files": [
+      "assets/sfx/web-foley-1018/coin-one.ogg",
+      "assets/sfx/web-foley-1018/coin-many.ogg"
+    ],
+    "gain": 0.48,
+    "group": "ui"
+  },
+  "stashDeposit": {
+    "files": [
+      "assets/sfx/web-foley-1018/leather-pick.ogg"
+    ],
+    "gain": 0.55,
+    "group": "ui"
+  },
+  "safeStore": {
+    "files": [
+      "assets/sfx/web-foley-1018/buckle.ogg"
+    ],
+    "gain": 0.48,
+    "group": "ui"
+  },
+  "hover": {
+    "files": [
+      "assets/sfx/web-foley-1018/click.ogg"
+    ],
+    "gain": 0.09,
+    "group": "ui"
+  },
+  "navigate": {
+    "files": [
+      "assets/sfx/web-foley-1018/click.ogg"
+    ],
+    "gain": 0.09,
+    "group": "ui"
+  },
+  "switch": {
+    "files": [
+      "assets/sfx/web-foley-1018/switch.ogg"
+    ],
+    "gain": 0.45,
+    "group": "ui"
+  },
+  "open": {
+    "files": [
+      "assets/sfx/web-foley-1018/book-open.ogg"
+    ],
+    "gain": 0.5,
+    "group": "ui"
+  },
+  "safeEnter": {
+    "files": [
+      "assets/sfx/web-foley-1018/book-open.ogg"
+    ],
+    "gain": 0.5,
+    "group": "ui"
+  },
+  "close": {
+    "files": [
+      "assets/sfx/web-foley-1018/book-close.ogg"
+    ],
+    "gain": 0.45,
+    "group": "ui"
+  },
+  "error": {
+    "files": [
+      "assets/sfx/web-foley-1018/deny.ogg"
+    ],
+    "gain": 0.45,
+    "group": "ui"
+  },
+  "deny": {
+    "files": [
+      "assets/sfx/web-foley-1018/deny.ogg"
+    ],
+    "gain": 0.45,
+    "group": "ui"
+  },
+  "blackMarketLose": {
+    "files": [
+      "assets/sfx/web-foley-1018/deny.ogg"
+    ],
+    "gain": 0.45,
+    "group": "ui"
+  },
+  "extractionFail": {
+    "files": [
+      "assets/sfx/web-foley-1018/deny.ogg"
+    ],
+    "gain": 0.45,
+    "group": "ui"
+  },
+  "pick": {
+    "files": [
+      "assets/sfx/web-foley-1018/leather-pick.ogg"
+    ],
+    "gain": 0.5,
+    "group": "ui"
+  },
+  "safeRetrieve": {
+    "files": [
+      "assets/sfx/web-foley-1018/unbuckle.ogg"
+    ],
+    "gain": 0.48,
+    "group": "ui"
+  },
+  "drop": {
+    "files": [
+      "assets/sfx/web-foley-1018/leather-drop.ogg"
+    ],
+    "gain": 0.45,
+    "group": "ui"
+  },
+  "discard": {
+    "files": [
+      "assets/sfx/web-foley-1018/leather-drop.ogg"
+    ],
+    "gain": 0.45,
+    "group": "ui"
+  },
+  "danger": {
+    "files": [
+      "assets/sfx/web-foley-1018/wood-creak.ogg"
+    ],
+    "gain": 0.6,
+    "group": "combat",
+    "rate": 0.85
+  },
+  "eventDanger": {
+    "files": [
+      "assets/sfx/web-foley-1018/wood-creak.ogg"
+    ],
+    "gain": 0.6,
+    "group": "combat",
+    "rate": 0.85
+  },
+  "bossReveal": {
+    "files": [
+      "assets/sfx/web-foley-1018/heavy.ogg"
+    ],
+    "gain": 0.6,
+    "group": "combat",
+    "rate": 0.85
+  },
+  "energyUp": {
+    "files": [
+      "assets/sfx/web-foley-1018/magic-2.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat"
+  },
+  "buffUp": {
+    "files": [
+      "assets/sfx/web-foley-1018/magic-2.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat"
+  },
+  "energyDown": {
+    "files": [
+      "assets/sfx/web-foley-1018/cloth.ogg"
+    ],
+    "gain": 0.5,
+    "group": "combat"
+  },
+  "buffDown": {
+    "files": [
+      "assets/sfx/web-foley-1018/cloth.ogg"
+    ],
+    "gain": 0.5,
+    "group": "combat"
+  },
+  "curseEnd": {
+    "files": [
+      "assets/sfx/web-foley-1018/cloth.ogg"
+    ],
+    "gain": 0.5,
+    "group": "combat"
+  },
+  "turnSelf": {
+    "files": [
+      "assets/sfx/web-foley-1018/latch.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat"
+  },
+  "phaseSelf": {
+    "files": [
+      "assets/sfx/web-foley-1018/latch.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat"
+  },
+  "turnFoe": {
+    "files": [
+      "assets/sfx/web-foley-1018/metal-click.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat"
+  },
+  "phaseFoe": {
+    "files": [
+      "assets/sfx/web-foley-1018/metal-click.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat"
+  },
+  "scene": {
+    "files": [
+      "assets/sfx/web-foley-1018/cloth.ogg"
+    ],
+    "gain": 0.5,
+    "group": "transition"
+  },
+  "eventEnter": {
+    "files": [
+      "assets/sfx/web-foley-1018/cloth.ogg"
+    ],
+    "gain": 0.5,
+    "group": "transition"
+  },
+  "layerEnter": {
+    "files": [
+      "assets/sfx/web-foley-1018/cloth.ogg"
+    ],
+    "gain": 0.5,
+    "group": "transition"
+  },
+  "fireEnter": {
+    "files": [
+      "assets/sfx/web-foley-1018/wood-creak.ogg"
+    ],
+    "gain": 0.5,
+    "group": "transition"
+  },
+  "altarEnter": {
+    "files": [
+      "assets/sfx/web-foley-1018/magic-6.ogg"
+    ],
+    "gain": 0.45,
+    "group": "transition"
+  },
+  "doorEnter": {
+    "files": [
+      "assets/sfx/web-foley-1018/door.ogg"
+    ],
+    "gain": 0.48,
+    "group": "transition"
+  },
+  "shopEnter": {
+    "files": [
+      "assets/sfx/web-foley-1018/coin-many.ogg"
+    ],
+    "gain": 0.45,
+    "group": "transition"
+  },
+  "extractionEnter": {
+    "files": [
+      "assets/sfx/web-foley-1018/door.ogg"
+    ],
+    "gain": 0.48,
+    "group": "transition"
+  },
+  "deployStart": {
+    "files": [
+      "assets/sfx/web-foley-1018/door.ogg"
+    ],
+    "gain": 0.48,
+    "group": "transition"
+  },
+  "battleEnter": {
+    "files": [
+      "assets/sfx/web-foley-1018/knife-draw.ogg"
+    ],
+    "gain": 0.5,
+    "group": "transition"
+  },
+  "flee": {
+    "files": [
+      "assets/sfx/web-foley-1018/cloth.ogg"
+    ],
+    "gain": 0.45,
+    "group": "transition",
+    "rate": 0.9
+  },
+  "ding": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-small.ogg"
+    ],
+    "gain": 0.6,
+    "group": "reward"
+  },
+  "levelup": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-small.ogg"
+    ],
+    "gain": 0.6,
+    "group": "reward"
+  },
+  "achievementUnlock": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-small.ogg"
+    ],
+    "gain": 0.6,
+    "group": "reward"
+  },
+  "collectionUnlock": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-small.ogg"
+    ],
+    "gain": 0.6,
+    "group": "reward"
+  },
+  "eventComplete": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-rare.ogg"
+    ],
+    "gain": 0.55,
+    "group": "reward"
+  },
+  "storyComplete": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-rare.ogg"
+    ],
+    "gain": 0.55,
+    "group": "reward"
+  },
+  "recodeComplete": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-rare.ogg"
+    ],
+    "gain": 0.55,
+    "group": "reward"
+  },
+  "shutter": {
+    "files": [
+      "assets/sfx/web-foley-1018/switch.ogg"
+    ],
+    "gain": 0.45,
+    "group": "ui"
+  },
+  "searchStart": {
+    "files": [
+      "assets/sfx/web-foley-1018/page-long.ogg"
+    ],
+    "gain": 0.5,
+    "group": "ui"
+  },
+  "recodeStart": {
+    "files": [
+      "assets/sfx/web-foley-1018/page-long.ogg"
+    ],
+    "gain": 0.5,
+    "group": "ui"
+  },
+  "searchReveal": {
+    "files": [
+      "assets/sfx/web-foley-1018/paper-place.ogg"
+    ],
+    "gain": 0.5,
+    "group": "ui"
+  },
+  "eventClue": {
+    "files": [
+      "assets/sfx/web-foley-1018/paper-place.ogg"
+    ],
+    "gain": 0.5,
+    "group": "ui"
+  },
+  "storyClue": {
+    "files": [
+      "assets/sfx/web-foley-1018/paper-place.ogg"
+    ],
+    "gain": 0.5,
+    "group": "ui"
+  },
+  "altarActivate": {
+    "files": [
+      "assets/sfx/web-foley-1018/buckle.ogg"
+    ],
+    "gain": 0.5,
+    "group": "ui"
+  },
+  "altarOffer": {
+    "files": [
+      "assets/sfx/web-foley-1018/buckle.ogg"
+    ],
+    "gain": 0.5,
+    "group": "ui"
+  },
+  "eventSafe": {
+    "files": [
+      "assets/sfx/web-foley-1018/confirm.ogg"
+    ],
+    "gain": 0.45,
+    "group": "ui"
+  },
+  "card": {
+    "files": [
+      "assets/sfx/web-foley-1018/paper-place.ogg",
+      "assets/sfx/web-foley-1018/paper-place-2.ogg"
+    ],
+    "gain": 0.6,
+    "group": "combat"
+  },
+  "draw": {
+    "files": [
+      "assets/sfx/web-foley-1018/page-short.ogg",
+      "assets/sfx/web-foley-1018/page-long.ogg"
+    ],
+    "gain": 0.5,
+    "group": "combat"
+  },
+  "shuffle": {
+    "files": [
+      "assets/sfx/web-foley-1018/page-long.ogg"
+    ],
+    "gain": 0.55,
+    "group": "combat"
+  },
+  "hit": {
+    "files": [
+      "assets/sfx/web-foley-1018/knife-cut.ogg",
+      "assets/sfx/web-foley-1018/knife-cut-2.ogg"
+    ],
+    "gain": 0.6,
+    "group": "combat"
+  },
+  "attackSlash": {
+    "files": [
+      "assets/sfx/web-foley-1018/knife-cut.ogg",
+      "assets/sfx/web-foley-1018/knife-cut-2.ogg"
+    ],
+    "gain": 0.6,
+    "group": "combat"
+  },
+  "attackPierce": {
+    "files": [
+      "assets/sfx/web-foley-1018/pierce.ogg"
+    ],
+    "gain": 0.6,
+    "group": "combat"
+  },
+  "attackArrow": {
+    "files": [
+      "assets/sfx/web-foley-1018/arrow.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "strike": {
+    "files": [
+      "assets/sfx/web-foley-1018/blunt.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "attackBlunt": {
+    "files": [
+      "assets/sfx/web-foley-1018/blunt.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "attackBossHeavy": {
+    "files": [
+      "assets/sfx/web-foley-1018/heavy.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat",
+    "rate": 0.9
+  },
+  "hurt": {
+    "files": [
+      "assets/sfx/web-foley-1018/blunt.ogg"
+    ],
+    "gain": 0.5,
+    "group": "combat",
+    "lowpass": 1800,
+    "rate": 0.88
+  },
+  "parry": {
+    "files": [
+      "assets/sfx/web-foley-1018/parry.ogg",
+      "assets/sfx/web-foley-1018/parry-2.ogg"
+    ],
+    "gain": 0.55,
+    "group": "combat"
+  },
+  "curse": {
+    "files": [
+      "assets/sfx/web-foley-1018/magic-7.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat"
+  },
+  "attackFire": {
+    "files": [
+      "assets/sfx/web-foley-1018/magic-1.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat"
+  },
+  "attackIce": {
+    "files": [
+      "assets/sfx/web-foley-1018/magic-3.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat"
+  },
+  "attackLightning": {
+    "files": [
+      "assets/sfx/web-foley-1018/magic-5.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat"
+  },
+  "attackPoison": {
+    "files": [
+      "assets/sfx/web-foley-1018/leather.ogg"
+    ],
+    "gain": 0.6,
+    "group": "combat"
+  },
+  "attackPsychic": {
+    "files": [
+      "assets/sfx/web-foley-1018/magic-7.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat"
+  },
+  "heal": {
+    "files": [
+      "assets/sfx/web-foley-1018/magic-6.ogg"
+    ],
+    "gain": 0.5,
+    "group": "combat"
+  },
+  "cardRestore": {
+    "files": [
+      "assets/sfx/web-foley-1018/magic-6.ogg"
+    ],
+    "gain": 0.5,
+    "group": "combat"
+  },
+  "chestShake": {
+    "files": [
+      "assets/sfx/web-foley-1018/leather.ogg"
+    ],
+    "gain": 0.55,
+    "group": "combat"
+  },
+  "chestBurst": {
+    "files": [
+      "assets/sfx/web-foley-1018/unbuckle.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "reveal": {
+    "files": [
+      "assets/sfx/web-foley-1018/coin-one.ogg"
+    ],
+    "gain": 0.5,
+    "group": "combat"
+  },
+  "tradeBuy": {
+    "files": [
+      "assets/sfx/web-foley-1018/coin-one.ogg",
+      "assets/sfx/web-foley-1018/coin-many.ogg"
+    ],
+    "gain": 0.48,
+    "group": "combat"
+  },
+  "runeExchange": {
+    "files": [
+      "assets/sfx/web-foley-1018/coin-one.ogg"
+    ],
+    "gain": 0.5,
+    "group": "combat"
+  },
+  "legend": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-rare.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "rarePlay": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-rare.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "altarReward": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-rare.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "eggHatch": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-rare.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "petRescue": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-rare.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "blackMarketWin": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-rare.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "victory": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-complete.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "bossVictory": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-complete.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "runClear": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-complete.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "extractionSuccess": {
+    "files": [
+      "assets/sfx/web-foley-1018/reward-complete.ogg"
+    ],
+    "gain": 0.65,
+    "group": "combat"
+  },
+  "defeat": {
+    "files": [
+      "assets/sfx/web-foley-1018/wood-creak.ogg"
+    ],
+    "gain": 0.5,
+    "group": "combat",
+    "rate": 0.8
+  },
+  "shieldUp": {
+    "files": [
+      "assets/sfx/web-foley-1018/latch.ogg"
+    ],
+    "gain": 0.55,
+    "group": "combat",
+    "maxDuration": 0.42
+  },
+  "kill": {
+    "files": [
+      "assets/sfx/web-foley-1018/heavy.ogg"
+    ],
+    "gain": 0.6,
+    "group": "combat"
+  },
+  "shieldBreak": {
+    "files": [
+      "assets/sfx/web-foley-1018/shield-break.ogg"
+    ],
+    "gain": 0.6,
+    "group": "combat"
+  },
+  "armorBreak": {
+    "files": [
+      "assets/sfx/web-foley-1018/shield-break.ogg"
+    ],
+    "gain": 0.6,
+    "group": "combat"
+  },
+  "burn": {
+    "files": [
+      "assets/sfx/web-foley-1018/magic-1.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat"
+  },
+  "foeLunge": {
+    "files": [
+      "assets/sfx/web-foley-1018/lunge.ogg"
+    ],
+    "gain": 0.45,
+    "group": "combat",
+    "maxDuration": 0.22
+  }
+}

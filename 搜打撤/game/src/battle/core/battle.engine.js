@@ -136,6 +136,7 @@ const { findCard, findEffectiveCard, infusionFuelReason, drawOf, infuseOf, effCo
  * 此处装配端口；resolveCard/applyTextEffects/triggersM2 为下方晚定义常量，以惰性包装传入。 */
 const { resolveFoeDefeat, sweepDead, nestPhase } = createBattleFoeLifecycle({
   alive, foeIdx, finish, executionSession, stagedDeathFx,
+  hitFoe: (...args) => hitFoe(...args),
 });
 const { drawCards, deckDraw, addTempCard, addDeckCard, grantSha, releaseHandMatches, autoPlayHandType } = createBattleDraw({
   R, alive, findCard, findEffectiveCard, sweepDead,

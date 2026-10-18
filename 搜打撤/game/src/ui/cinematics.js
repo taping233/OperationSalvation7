@@ -4,6 +4,7 @@
  * 方法均以 UI.method() 形式调用，内部一律走 this 访问壳上的状态。
  */
 import { esc } from '../core/shared.js';
+import { rewardRarity, hasRareReveal } from './rarity-reveal.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 /** window.SDT 门面的 cinematics 消费切面：仅声明本文件触达的成员（整体形状由 main.js 装配保证）。
  * @typedef {object} SdtCinematicsSurface
@@ -97,18 +98,19 @@ export const cinematicsMethods = {
         this._cardGetShowing = false;
         return;
       }
-      const legendary = next.card.rarity === '传说';
+      const rarity = rewardRarity(next.card);
+      const legendary = rarity === '传说';
       const combat = !!SDT.game?.battleActive && !!document.querySelector('#overlay .battle-stage, #overlay .battle-decision');
-      const rarity = SDT.Cards.rarityOf?.(next.card) || next.card.rarity;
       const el = document.createElement('div');
       el.id = 'cardGet';
       el.dataset.combat = combat ? 'true' : 'false';
       el.dataset.rarity = rarity || '';
+      el.dataset.rareReveal = String(hasRareReveal(rarity));
       if (combat) { el.setAttribute('role', 'status'); el.setAttribute('aria-label', `获得${rarity || ''}卡牌：${next.card.name}`); }
       el.innerHTML = `<div class="lg-beam${legendary ? '' : ' lg-beam-plain'}" aria-hidden="true"></div>
-        <span class="lg-kicker">${combat ? `${esc(rarity || '')}获得` : legendary ? 'LEGENDARY · 传说' : 'REWARD · 获得卡牌'}</span>
+        <span class="lg-kicker">${combat ? `${esc(rarity || '')}获得` : hasRareReveal(rarity) ? `${esc(rarity)} · 获得卡牌` : 'REWARD · 获得卡牌'}</span>
         <div class="lg-card">${SDT.Cards.cardHTML(next.card, 'lg')}</div>
-        ${combat ? '' : `<b class="lg-name">${next.card.name}</b>`}
+        ${combat ? '' : `<b class="lg-name">${esc(next.card.name)}</b>`}
         ${next.reason ? `<span class="lg-reason">${esc(next.reason)}</span>` : ''}
         <span class="lg-hint">点击收起 · 稍后自动收起</span>`;
       let closed = false;

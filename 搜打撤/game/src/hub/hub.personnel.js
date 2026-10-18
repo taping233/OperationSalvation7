@@ -1,6 +1,5 @@
 import { linkedCostsHTML } from '../ui/home-linked-interactions.js';
 import { esc, escAttr } from '../core/shared.js';
-import { assetUrl } from '../core/asset-url.js';
 import { characterFor } from '../core/characters.js';
 import { getCharacter } from './collection.commands.js';
 import { MAP } from '../run/game.session.js';
@@ -11,29 +10,7 @@ import { decorateInventoryZoom } from '../ui/inventory-zoom.js';
 import { animateBaseRefresh } from './base-motion-v4.js';
 import { partnerInteractionHTML, mountPartnerInteraction } from '../ui/partner-interaction.js';
 
-// 配置页默认大图单独版本化，原定稿、外观缩略图与其他页面仍走 Art.skinUrl。
-const personnelDefaultPortraits = Object.freeze({ wu: 'portraits/personnel/wu-default-cutout-v1.webp' });
-function personnelPortraitUrl(art, classId, characterId, skin) {
-  const file = skin === 'default' && personnelDefaultPortraits[characterId];
-  return file ? assetUrl(`assets/${file}`) : art.skinUrl(classId, skin);
-}
-
-// 可见原画边界；无的透明图按 Alpha≥128 测量，只用于基地人物展示。
-const portraitBounds = {
-  wu:[1024,1536,264,6,935,1525],
-  heixiang:[2560,1440,839,29,1723,1440],
-  xingyue:[2560,1440,875,89,1676,1398],
-  baita:[2560,1440,846,75,1685,1427],
-  changwuyu:[2560,1440,862,16,1732,1429],
-};
-function personnelPortraitStyle(id, skin) {
-  const bounds = portraitBounds[skin === 'default' ? id : `${id}/${skin}`];
-  if (!bounds) return '';
-  const [width,height,left,top,right,bottom] = bounds;
-  const visibleHeight = bottom - top;
-  return `--portrait-height:${(.92 * height / visibleHeight).toFixed(6)};--portrait-bottom:${(4 - 92 * (height - bottom) / visibleHeight).toFixed(6)}%;--portrait-center:${(-50 * (left + right) / width).toFixed(6)}%;`;
-}
-
+// 默认立绘与选人共用Art.skinUrl；统一画布完整展示，不沿用旧图裁切边界。
 const avatarBounds = {
   wu:[101,4,1016,1019], heixiang:[232,165,847,922],
   xingyue:[35,17,1004,1017], baita:[40,18,1015,1010], changwuyu:[31,8,1010,1017],
@@ -102,7 +79,7 @@ export function personnelHTML(view) {
   const owned = getCharacter(base.data, character.id);
   const equipped = owned?.selectedSkinId || 'default';
   const skin = browse.skins.get(character.id) || equipped;
-  const alphaPortrait = skin === 'default' && !!personnelDefaultPortraits[character.id];
+  const alphaPortrait = false;
   const skins = owned?.availableSkinIds || ['default'];
   const skinNames = new Map(art.listSkins(stats.cls).map(item => [item.id, item.name]));
   const pool = cards.classPool(stats.cls);
@@ -112,7 +89,7 @@ export function personnelHTML(view) {
   if (browse.section === 'appearance') content = `<h4>${esc(skinNames.get(skin) || '默认外观')}</h4><p class="appearance-current">${skin === equipped ? '当前使用' : `浏览预览中 · 当前使用：${esc(skinNames.get(equipped) || '默认外观')}`}</p><div class="person-skin-grid">${skins.map(id => `<button class="person-skin${id === skin ? ' on' : ''}${id === equipped ? ' equipped' : ''}" data-act="personPreviewSkin" data-character="${character.id}" data-skin="${escAttr(id)}" aria-pressed="${id === skin}"><img src="${escAttr(art.skinUrl(stats.cls, id))}" alt="${escAttr(skinNames.get(id) || '默认外观')}" loading="lazy"><b>${esc(skinNames.get(id) || '默认')}</b><small>${id === equipped ? '已装备' : id === skin ? '预览中' : ''}</small></button>`).join('')}</div>`;
   else if (browse.section === 'pool') content = '';
   else content = `<section class="person-growth-summary"><span class="person-level">Lv.${stats.lv}${stats.maxed ? ' · MAX' : ''}</span><h4>出征加成</h4><p class="person-perk-value">${esc(meta.perkText(stats.lv))}</p>${stats.maxed ? '' : `<p class="hint">下一级 · ${esc(meta.perkText(stats.lv + 1))}</p>`}</section><section class="person-growth-progress"><h4>熟练度</h4><div class="person-progress-track" role="progressbar" aria-label="人物熟练度" aria-valuemin="0" aria-valuemax="${stats.maxed ? 100 : stats.need}" aria-valuenow="${stats.maxed ? 100 : stats.xp}"><i style="width:${pct}%"></i></div><p>${stats.maxed ? '熟练度已满' : `${stats.xp} / ${stats.need} XP`}</p>${stats.maxed ? '' : `<p class="hint">用该人物的职业卡或能力卡培养；卡牌转为经验并消耗。</p>`}</section>`;
-  return `<div class="personnel-v2 personnel-v12" data-section="${browse.section}"><div class="pv12-agent-workspace"><section class="pv12-pool-catalog" aria-label="招式卡牌目录"${browse.section === 'pool' ? '' : ' hidden'}>${browse.section === 'pool' ? poolCatalogHTML(pool, base, cards) : ''}</section><figure class="pv12-agent-art" data-skin="${escAttr(skin)}" data-portrait-alpha="${alphaPortrait}"${browse.section === 'pool' ? ' hidden' : ''}><div class="pv12-agent-image-stage"><img src="${escAttr(personnelPortraitUrl(art, stats.cls, character.id, skin))}" alt="${escAttr(character.name)}完整立绘" decoding="async" data-portrait-fit="${personnelPortraitStyle(character.id, skin) ? 'body' : 'canvas'}" style="${personnelPortraitStyle(character.id, skin)}"></div><figcaption><h2>${esc(character.name)}</h2><span>${esc(skinNames.get(skin) || '默认外观')}</span></figcaption></figure><nav class="pv12-agent-strip" aria-label="人物切换">${roster.map(entry => `<button class="pv12-agent-choice${entry.character.id === character.id ? ' on' : ''}" data-act="hubPersonView" data-character="${entry.character.id}" aria-label="查看${escAttr(entry.character.name)}" aria-pressed="${entry.character.id === character.id}"><span class="pv12-agent-avatar" style="${personnelAvatarStyle(entry.character.id)}">${art.classAvatarArt(entry.character.id)}</span><b>${esc(entry.character.name)}</b></button>`).join('')}</nav>${browse.section === 'pool' ? '' : `<article class="pv12-agent-data"><header class="pv12-identity"><small>${esc(character.rulesetId)} · 浏览档案</small><h3>${esc(character.name)}</h3><span>${browse.section === 'appearance' ? '外观' : browse.section === 'pool' ? '专属招式' : '人物培养'}</span></header><div class="pv12-data-content">${content}</div>${actions ? `<footer class="pv12-data-actions">${actions}</footer>` : ''}</article>`}<nav class="pv12-sections" aria-label="角色操作">${[['profile','培养'],['pool','招式'],['appearance','外观']].map(([id,label]) => `<button data-act="personSection" data-section="${id}" class="${browse.section === id ? 'on' : ''}" aria-pressed="${browse.section === id}">${label}</button>`).join('')}<button data-act="personGroup" data-group="pets">伙伴</button></nav></div></div>`;
+  return `<div class="personnel-v2 personnel-v12" data-section="${browse.section}"><div class="pv12-agent-workspace"><section class="pv12-pool-catalog" aria-label="招式卡牌目录"${browse.section === 'pool' ? '' : ' hidden'}>${browse.section === 'pool' ? poolCatalogHTML(pool, base, cards) : ''}</section><figure class="pv12-agent-art" data-skin="${escAttr(skin)}" data-portrait-alpha="${alphaPortrait}"${browse.section === 'pool' ? ' hidden' : ''}><div class="pv12-agent-image-stage"><img src="${escAttr(art.skinUrl(stats.cls, skin))}" alt="${escAttr(character.name)}完整立绘" decoding="async" data-portrait-fit="canvas"></div><figcaption><h2>${esc(character.name)}</h2><span>${esc(skinNames.get(skin) || '默认外观')}</span></figcaption></figure><nav class="pv12-agent-strip" aria-label="人物切换">${roster.map(entry => `<button class="pv12-agent-choice${entry.character.id === character.id ? ' on' : ''}" data-act="hubPersonView" data-character="${entry.character.id}" aria-label="查看${escAttr(entry.character.name)}" aria-pressed="${entry.character.id === character.id}"><span class="pv12-agent-avatar" style="${personnelAvatarStyle(entry.character.id)}">${art.classAvatarArt(entry.character.id)}</span><b>${esc(entry.character.name)}</b></button>`).join('')}</nav>${browse.section === 'pool' ? '' : `<article class="pv12-agent-data"><header class="pv12-identity"><small>${esc(character.rulesetId)} · 浏览档案</small><h3>${esc(character.name)}</h3><span>${browse.section === 'appearance' ? '外观' : browse.section === 'pool' ? '专属招式' : '人物培养'}</span></header><div class="pv12-data-content">${content}</div>${actions ? `<footer class="pv12-data-actions">${actions}</footer>` : ''}</article>`}<nav class="pv12-sections" aria-label="角色操作">${[['profile','培养'],['pool','招式'],['appearance','外观']].map(([id,label]) => `<button data-act="personSection" data-section="${id}" class="${browse.section === id ? 'on' : ''}" aria-pressed="${browse.section === id}">${label}</button>`).join('')}<button data-act="personGroup" data-group="pets">伙伴</button></nav></div></div>`;
 }
 export function bindPersonnel({ ui, refresh, sound }) {
   ui.act('personnelHome', () => { browse.group = 'people'; browse.section = 'profile'; browse.hatch = false; sound.tick(); refresh(); });

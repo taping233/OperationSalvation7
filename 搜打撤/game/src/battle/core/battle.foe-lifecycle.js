@@ -1,5 +1,5 @@
 /* battle.foe-lifecycle.js —— 敌方单位生命周期（自 battle.engine.js 逐字迁出，治理批次 3）。
- * 覆盖：击倒结算 resolveFoeDefeat / 清尸 sweepDead / 腐化之种遗产转移 / 龙巢复活与复活击杀
+ * 覆盖：击倒结算 resolveFoeDefeat / 清尸 sweepDead / 腐化之种标记爆发 / 龙巢复活与复活击杀
  * 追踪 / 远古龙尊阶段机 nestPhase。互递归件（finish / foeIdx / alive / activeActionSignal）
  * 经端口注入或 runtime 活绑定直引——本模块不回环依赖 engine。
  */
@@ -20,7 +20,7 @@ const KILL_CHEER = ['漂亮！', '好剑！', '干净利落！'];
  * @returns {{ resolveFoeDefeat, sweepDead, transferPoisonLegacy, nestRevive, nestKillCheck, nestPhase }}
  */
 export function createBattleFoeLifecycle({
-  alive, foeIdx, finish, executionSession, stagedDeathFx,
+  alive, foeIdx, finish, executionSession, stagedDeathFx, hitFoe,
 }) {
 function resolveFoeDefeat(foe, cause = '被击倒') {
     if (!foe || foe.dead || foe.hp > 0) return false;
@@ -47,6 +47,17 @@ function sweepDead() {
     foes.forEach(f => resolveFoeDefeat(f));
   }
 function transferPoisonLegacy(deadFoe) {
+    if (deadFoe.rotSeedMarked) {
+      delete deadFoe.rotSeedMarked;
+      const stacks = Math.max(0, Number(deadFoe.status?.poison) || 0);
+      if (stacks > 0) {
+        G.log(`[[icon:skull]] <b>腐化之种</b>：<b>${esc(deadFoe.name)}</b> 的标记引爆，对所有敌人造成 <b>${stacks}</b> 点真实伤害`, 'sys');
+        for (const foe of alive().filter(foe => foe.hp > 0)) {
+          hitFoe(foe, { id:'cc-rot-seed-burst', name:'腐化之种', type:'法术', desc:'' }, stacks, Combat.TYPES.TRUE, null, { preserveBaseDamage:true });
+        }
+      }
+      return;
+    }
     if (!poisonLegacy || !deadFoe.status || !(deadFoe.status.poison > 0)) return;
     // hp>0 过滤：AOE 双杀时 sweepDead 逐个清尸，后一个死者此刻尚未置 dead、仍在 alive() 里，
     // 遗产转给它只会随其立即倒下而湮灭
@@ -65,6 +76,7 @@ function nestRevive(foe) {
     foe.hp = foe.revive.hearts;
     foe.atk = foe.revive.atk;
     foe.status = {};
+    delete foe.rotSeedMarked;
     foe.reviveTurn = turn;
     G.log('[[icon:fire]] <b>完全形态·元素领主</b>：死亡不是终结——以 8 攻 8 心复活（诅咒尽散）。借过！', 'warn');
     return true;

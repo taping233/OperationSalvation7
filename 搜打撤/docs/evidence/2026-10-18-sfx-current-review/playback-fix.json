@@ -1,0 +1,13 @@
+{
+  "task": "WF-sfx-review-playback-fix-1018",
+  "cause": "Vite transformed dynamic new URL ../../${file} into a glob that omitted nested assets; source WAV direct request returned HTTP200 audio/wav",
+  "change": "Use existing assetUrl(file) with page-relative runtime asset paths",
+  "servedModuleUsesAssetUrl": true,
+  "servedModuleContainsGlob": false,
+  "sourceFileSha256": "F14A8490A222D41E1C78A7467BDC26FB22DAA32B49560FA752BBC6B3CD6AA132",
+  "gameMappingModified": false,
+  "testsRun": false,
+  "buildRun": false,
+  "browserVerification": false,
+  "listeningVerified": false
+}

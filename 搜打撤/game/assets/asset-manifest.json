@@ -1,8 +1,1189 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1493,
+  "count": 1616,
   "assets": [
+    {
+      "path": "sfx/selected15-r2-1018/close.wav",
+      "ext": "wav",
+      "license": "CC0 1.0",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "bytes": 42284,
+      "sha256": "f8ffb311dc68bc8952794f963911ec965ff723a585321c9856942c827deecd20",
+      "original_path": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/close_002.ogg",
+      "processing": "Source excerpt, mild rate/filter, attenuation and fade; see docs/evidence/2026-10-18-selected15-sfx-r2/receipt.json"
+    },
+    {
+      "path": "sfx/selected15-r2-1018/status-down.wav",
+      "ext": "wav",
+      "license": "CC0 1.0",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "bytes": 40148,
+      "sha256": "22b5fabd9c240ee6dcd95e45c1a4a2c93ac47ca53c228e8dd37de047e218dbcd",
+      "original_path": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/minimize_003.ogg",
+      "processing": "Source excerpt, mild rate/filter, attenuation and fade; see docs/evidence/2026-10-18-selected15-sfx-r2/receipt.json"
+    },
+    {
+      "path": "sfx/selected15-r2-1018/parry.wav",
+      "ext": "wav",
+      "license": "CC0 1.0",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "bytes": 38444,
+      "sha256": "9099111c33cd8a5406e2c249bb9a080bf80a72780648fab84fe681b74c77005f",
+      "original_path": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/impactMetal_light_002.ogg",
+      "processing": "Source excerpt, mild rate/filter, attenuation and fade; see docs/evidence/2026-10-18-selected15-sfx-r2/receipt.json"
+    },
+    {
+      "path": "sfx/selected15-r2-1018/parry-muted.wav",
+      "ext": "wav",
+      "license": "CC0 1.0",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "bytes": 38444,
+      "sha256": "f935159112c1b88ecb5e8d3b13bd82de784bd1db584a5a56fe9378179fe48e8a",
+      "original_path": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/impactWood_medium_001.ogg",
+      "processing": "Source excerpt, mild rate/filter, attenuation and fade; see docs/evidence/2026-10-18-selected15-sfx-r2/receipt.json"
+    },
+    {
+      "path": "sfx/selected15-r2-1018/ice.wav",
+      "ext": "wav",
+      "license": "CC0 1.0",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "bytes": 36256,
+      "sha256": "938dc1f0fe47f584a13c66a70ffe5f44122053baab2dd95fc7c8c1e46c5f0687",
+      "original_path": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/impactGlass_light_002.ogg",
+      "processing": "Source excerpt, mild rate/filter, attenuation and fade; see docs/evidence/2026-10-18-selected15-sfx-r2/receipt.json"
+    },
+    {
+      "path": "sfx/selected15-r2-1018/curse.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 99884,
+      "sha256": "b0912d323310cb89a6585eedde83b7c4841f3a423ac8fb09f4d8370622f6b3d9",
+      "original_path": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/magic-gravity1.mp3",
+      "processing": "Source excerpt, mild rate/filter, attenuation and fade; see docs/evidence/2026-10-18-selected15-sfx-r2/receipt.json"
+    },
+    {
+      "path": "sfx/selected15-r2-1018/heal.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/button/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 111912,
+      "sha256": "0c45bf9af380d2109ca149f88d2bd81c99957cb205db044d4fb2db59572f9bd6",
+      "original_path": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/gauge-recovery3.mp3",
+      "processing": "Source excerpt, mild rate/filter, attenuation and fade; see docs/evidence/2026-10-18-selected15-sfx-r2/receipt.json"
+    },
+    {
+      "path": "sfx/selected15-r2-1018/curse-end.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/button/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 53804,
+      "sha256": "dbfd018e0324c4ddcbe191ae9d262322f256c121c3a803344476e737d545fc59",
+      "original_path": "docs/evidence/2026-10-18-selected15-sfx-r2/sources/gauge-recovery3.mp3",
+      "processing": "Source excerpt, mild rate/filter, attenuation and fade; see docs/evidence/2026-10-18-selected15-sfx-r2/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/safe-store.wav",
+      "ext": "wav",
+      "license": "CC BY 4.0",
+      "source": "https://otologic.jp/free/se/assorted-se01.html",
+      "license_url": "https://otologic.jp/free/license",
+      "bytes": 42284,
+      "sha256": "b73880ddfc34560b36f7ed6c50a3ed14e1205dc866f825d339436ad38d09b82c",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/Assorted_SE05-01.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/safe-retrieve.wav",
+      "ext": "wav",
+      "license": "CC BY 4.0",
+      "source": "https://otologic.jp/free/se/assorted-se01.html",
+      "license_url": "https://otologic.jp/free/license",
+      "bytes": 46124,
+      "sha256": "ff3732690bb9b4b03950557d3fe8c9ad571937517cac18e95cc00a24ca58ae6b",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/Assorted_SE05-02.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/discard.wav",
+      "ext": "wav",
+      "license": "CC BY 4.0",
+      "source": "https://otologic.jp/free/se/assorted-se01.html",
+      "license_url": "https://otologic.jp/free/license",
+      "bytes": 38444,
+      "sha256": "795a790b49f26fc687ea26ef939f78b989d6474c113977d2677bac63ed727465",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/Assorted_SE05-03.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/open.wav",
+      "ext": "wav",
+      "license": "CC BY 4.0",
+      "source": "https://otologic.jp/free/se/cyber02.html",
+      "license_url": "https://otologic.jp/free/license",
+      "bytes": 76844,
+      "sha256": "826ed036e40fcc8408dbe5b3b7ed5a96373b75fe680beb372baaa0f478162622",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/Cyber16-1.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/close.wav",
+      "ext": "wav",
+      "license": "CC BY 4.0",
+      "source": "https://otologic.jp/free/se/cyber02.html",
+      "license_url": "https://otologic.jp/free/license",
+      "bytes": 65324,
+      "sha256": "ad9c043c341455be3e6b3d7332d54ae3c9cc14231cc3d318e101deafea4931d2",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/Cyber16-2.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/status-up.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 92204,
+      "sha256": "81e3b6300d585308c0dfd54a5d62e826d1ffdda2b8d6a15e6fab90c6d71903b2",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/magic-statusup2.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/status-down.wav",
+      "ext": "wav",
+      "license": "CC BY 4.0",
+      "source": "https://otologic.jp/free/se/cyber02.html",
+      "license_url": "https://otologic.jp/free/license",
+      "bytes": 73004,
+      "sha256": "eaca3dcc49a85e52a35c621d283e2193706c945af4b513dab7fbd3aa78ada1e0",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/Cyber16-2.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/curse-end.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 88364,
+      "sha256": "4234c5d4924f36d6fa1b68b6b4e65fc614223cf11db15f1afb6fba20730288af",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/magic-status-cure1.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/transition.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/anime/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 65324,
+      "sha256": "697bc19afbbbbd625bef2fe9ecc64c6090be33140f9745746f77a62dea8d9f6a",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/sceneswitch2.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/altar-enter.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 144044,
+      "sha256": "c8d5b1884cc9b4a07e1b33c8ec64e9689e6a9ea28e12b53498b2b12874f377a3",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/magic-circle1.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/shop-enter.wav",
+      "ext": "wav",
+      "license": "CC BY 4.0",
+      "source": "https://otologic.jp/free/se/assorted-se01.html",
+      "license_url": "https://otologic.jp/free/license",
+      "bytes": 73004,
+      "sha256": "48921ae1e7a3286131dd75b67984af8c015630ddbb011d3ea045be4b6fe55c80",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/Assorted_SE05-12.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/deploy-start.wav",
+      "ext": "wav",
+      "license": "CC BY 4.0",
+      "source": "https://otologic.jp/free/se/assorted-se01.html",
+      "license_url": "https://otologic.jp/free/license",
+      "bytes": 80684,
+      "sha256": "0e1f3e93d8f84e7a7639ecd06bbffbb4f52b273e9020193b1bcf0dfa25ce2b53",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/Assorted_SE05-18.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/battle-enter.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/anime/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 65324,
+      "sha256": "db7b54cdc3115f80a98aecec8f22f651b1b5503939b9d1e08cdd41506a7e9fdf",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/text-impact3.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/parry.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 65324,
+      "sha256": "127b4eff68910c7a85b757a35ab2cb0745143ae75f9d3a5babbb9c47ca00a7c0",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/sword-clash4.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/parry-soft.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 57644,
+      "sha256": "2f7921f733dc5c8750939322ce1dc145c9a422522cefea61486968576c9a4bcf",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/sword-clash4.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/curse.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 138284,
+      "sha256": "221a8d5d07edc2e61f98e7e5e51662a51eb0b08e2e144601b0dc3e2c38c0c1ad",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/magic-drain2.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/fire.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 130604,
+      "sha256": "402383030a6e3695ccd526baa76fe13e40582ea629c45af87b45075fa378c24a",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/magic-flame1.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/ice.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 134444,
+      "sha256": "59d35555e47cad31fdbee89620e23b792fe7161f8cc11d374037b4dd4d54be1b",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/magic-ice1.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/lightning.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 115244,
+      "sha256": "6ea942710b66e5dbe49a46e0918035908c467c967954d449542d780582d9b634",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/magic-electron2.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/psychic.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 138284,
+      "sha256": "145b3e2f01ea0add131a0a9ce51ace5777eca0e7f0fcfdf0627df9e1a1e1e6b3",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/magic-gravity2.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/heal.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 142124,
+      "sha256": "2559ce3fc9ef5899d312e1f75d8c7243fd16a98469c4ba63f62139ddc94d11ae",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/magic-cure1.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/shield.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 80684,
+      "sha256": "8ff7cf2542d4a01a141ffa94dae7b31ff79489244fe90689f21505883ba5361c",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/magic-reflection1.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/selected32-1018/burn.wav",
+      "ext": "wav",
+      "license": "Free commercial game use; modification allowed; no standalone redistribution",
+      "source": "https://soundeffect-lab.info/sound/battle/",
+      "license_url": "https://soundeffect-lab.info/agreement/",
+      "bytes": 76844,
+      "sha256": "c97b9c95d2d351d64cd4a1f7dfc6a090441d2bf00582f38a5b1dbaaa9d06bd93",
+      "original_path": "docs/evidence/2026-10-18-selected32-sfx/sources/magic-flame1.mp3",
+      "processing": "Short excerpt, rate/filters, attenuation only, 4ms fade in and 40ms fade out; detailed receipt in docs/evidence/2026-10-18-selected32-sfx/receipt.json"
+    },
+    {
+      "path": "sfx/original-ui-1018/click.wav",
+      "ext": "wav",
+      "license": "Project original audio — independently generated for this project; no third-party audio samples",
+      "bytes": 35564,
+      "sha256": "0f28a52d7691503b2b21ea0fcb6717207d73c658d6c0409265ef1d1d5a6521b5",
+      "source": "docs/evidence/2026-10-18-arknights-sfx-return/redesign-v2.py",
+      "original_path": "docs/evidence/2026-10-18-arknights-sfx-return/v2-01-click.wav",
+      "processing": "exact copy of the user-reviewed WAV master; runtime gain only"
+    },
+    {
+      "path": "sfx/original-ui-1018/confirm.wav",
+      "ext": "wav",
+      "license": "Project original audio — independently generated for this project; no third-party audio samples",
+      "bytes": 43244,
+      "sha256": "140353102d906b839a7df8620b2bf63e979a4cffe5a8a6e4eb19a4fb7690c963",
+      "source": "docs/evidence/2026-10-18-arknights-sfx-return/redesign-v2.py",
+      "original_path": "docs/evidence/2026-10-18-arknights-sfx-return/v2-02-confirm.wav",
+      "processing": "exact copy of the user-reviewed WAV master; runtime gain only"
+    },
+    {
+      "path": "sfx/original-ui-1018/reward.wav",
+      "ext": "wav",
+      "license": "Project original audio — independently generated for this project; no third-party audio samples",
+      "bytes": 55724,
+      "sha256": "08973e823e08ffaf0f894600cad891e451635643f3a325363ffeb406035217ac",
+      "source": "docs/evidence/2026-10-18-arknights-sfx-return/reward-v3.py",
+      "original_path": "docs/evidence/2026-10-18-arknights-sfx-return/v3-reward-A-light.wav",
+      "processing": "exact copy of the user-reviewed WAV master; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2568.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/interface/",
+      "bytes": 35918,
+      "sha256": "248312c2ef619427ef7024126a846e4210fe37e39038cfd32c73b1fb854a8086",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/1109.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/interface/",
+      "bytes": 195014,
+      "sha256": "9136caeb750756176bd696d639ec74261523fa1f9d8312be6ccd673a506e0a2b",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2573.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/interface/",
+      "bytes": 274068,
+      "sha256": "8c66b12ae8d31f6a656d53b23d9eb81bde351be851b49a83677a7520e1a388a1",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2574.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/interface/",
+      "bytes": 414076,
+      "sha256": "7323c6ced9605a9b8a406cd088550d06d1a39dc8d37c9abfe52b536482468ad5",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2575.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/interface/",
+      "bytes": 234556,
+      "sha256": "2ef811b3c3466fbf27a2769d08012c4f72f699d611cbbd9ba89af136c6e10786",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2576.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/interface/",
+      "bytes": 380300,
+      "sha256": "708f4b07d687e997956e1f970d97a51b4dda7b5de3e4d01a96c4dd4af80fb8e5",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2577.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/interface/",
+      "bytes": 184740,
+      "sha256": "bb9d4bb078ba650cd81027dfca724162cf1df0352fc56018cb6241aab5a406cc",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2578.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/interface/",
+      "bytes": 201764,
+      "sha256": "810ebf07e3b2aaa72e0324ed65614b42048c6023ec4bd6ecb28258eb4746ad26",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2569.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/negative/",
+      "bytes": 222054,
+      "sha256": "66be19b433b653739b10c257365d71d110958c8a150dc19c0948c27fec3ab5b8",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2020.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/win/",
+      "bytes": 281320,
+      "sha256": "469e9498c09f319d66036b7d7fb2969364889e7a492bd98ee489ce2702993b4d",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2021.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/win/",
+      "bytes": 236116,
+      "sha256": "d61df13e95afa01564bea9ef16c4a43549db7db35338d64a9d55523e2fdf4eaf",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/269.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/win/",
+      "bytes": 345398,
+      "sha256": "0773318d3d2dde630678ad3087c12a438f62c92306d945d3a6ddb0d9f3fa4614",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2018.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/win/",
+      "bytes": 309634,
+      "sha256": "6354bfc6851c7bb3153f01ba5477ce494d6d8560c252221d7d95cdbf94333efd",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2015.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/win/",
+      "bytes": 466330,
+      "sha256": "ab4de95e557af35a0faf6597e9dfc873bbae6840397bc8f8b0ba6eb96602a82e",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/270.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/win/",
+      "bytes": 529930,
+      "sha256": "1403241fba1db6b31e464e99e8e6fd694950e30f8ba148e8ec8de7d38da2d85c",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/3083.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/magic/",
+      "bytes": 413334,
+      "sha256": "afd5ad882553d28d6254a3e0c2df6f873de11270032ffe49952fe8f8ada3e999",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2380.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/paper/",
+      "bytes": 159812,
+      "sha256": "a6cf4c34aaeb090641b3464b9a76af2f1b7d0140a306797d46ccd9daf6cdb74d",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/1530.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/paper/",
+      "bytes": 193072,
+      "sha256": "2e945267f56208884153867d062838888e6bddc92b512e130aa9566255ad36bb",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/1104.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/paper/",
+      "bytes": 80386,
+      "sha256": "d1ccce088b96216c6ed725c1b56333722ba77c658d2327fc7aef3e7f3b98640f",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/1101.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/paper/",
+      "bytes": 460158,
+      "sha256": "aee109c3ba12c3c62cefd93de0b24b9e507f309a4be6320d927fd39d8b147573",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/268.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/click/",
+      "bytes": 794530,
+      "sha256": "20c3f737140257313b4e3ce4c02311802087b523d3ee23444f6aee923593874e",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2583.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/magic/",
+      "bytes": 893108,
+      "sha256": "05c0fd6182aca164faf06b22024de01f8335c4c8f8161a50e7ad7a3beb7f7fae",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2153.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/punch/",
+      "bytes": 222836,
+      "sha256": "199bb8f54124f008f77a0f216bf95703233aab73eeeb9f74dfceceb8dae59b22",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2158.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/sword/",
+      "bytes": 86643,
+      "sha256": "7a17d276190701ff00b5841eb995f499632d1ff1a9363b0883d092c60cc56a1a",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2166.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/sword/",
+      "bytes": 220056,
+      "sha256": "916312df2b375604edd13277fd2a1f002157088af54f1ec8edc53c35cf534110",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2761.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/sword/",
+      "bytes": 200960,
+      "sha256": "fe9d6e83d49be3d583f5f9c9315a047b75265a56e3caa04b0b7580406bf41e50",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2771.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/arrow/",
+      "bytes": 184052,
+      "sha256": "7e488e8542a95a459984a1f05ddbdb782cde601d37c3571d0af1a06844abec2b",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2160.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/sword/",
+      "bytes": 238740,
+      "sha256": "2717a659587f7962dbfdfc59b2716894620834b9d24836794560d86bf10b4c30",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2765.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/sword/",
+      "bytes": 185140,
+      "sha256": "0c05aeb28b5a795bf1e309f9bc209e00df954af9dd2b2da825b0bc83696bda64",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2795.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/sword/",
+      "bytes": 268300,
+      "sha256": "f59abe6b03b22b37fa63553fdf72e3fcf190df0467efd762c4d2665f3c08de81",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2794.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/sword/",
+      "bytes": 204616,
+      "sha256": "d47d1e5daaa2e6460f68aa3fb2d4ea33f0b4f5ea66dc5b9338e140833104292e",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2141.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/punch/",
+      "bytes": 86643,
+      "sha256": "f2b9e17cd1b1db434b822a9779495e0327443feff1ee61c09201b1c5393b636a",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2589.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/magic/",
+      "bytes": 1961588,
+      "sha256": "e6e387e65da2903534bfe17b7fea7731049113edd3d666bd328eec5f295a0ead",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/873.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/magic/",
+      "bytes": 435332,
+      "sha256": "394090b28b6a63689047954bcb86576045341cd42da9ee74b624c7e28bd23206",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2999.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/magic/",
+      "bytes": 294564,
+      "sha256": "3e6cb75a269d78b74fc1dfd748148969fa2ff21a829ac4fc63c18e61af4a3b54",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/863.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/magic/",
+      "bytes": 684002,
+      "sha256": "317d6c5f6b6a24d62468f6816b55375b30e320eb17dc39e4f32792711f86af91",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2628.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/magic/",
+      "bytes": 1116740,
+      "sha256": "bf07708aec52e02483b1cc4b9fab1308d8e3950c72da2f284915c2a84b7e8ee4",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2345.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/magic/",
+      "bytes": 1546400,
+      "sha256": "d3926e957336cc3019e3329b6cad12f5340b02a94e9a3b876fcde3cbd3c50387",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/2584.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/magic/",
+      "bytes": 884644,
+      "sha256": "d137a17c3f5fbcc9367ed9ed36a4f406a2e1e2f40e8d90c419b1efef3873ce61",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/mixkit-1018/600.wav",
+      "ext": "wav",
+      "license": "Mixkit Sound Effects Free License — licensed for incorporation in video games; no standalone/source redistribution",
+      "source": "https://mixkit.co/free-sound-effects/win/",
+      "bytes": 424934,
+      "sha256": "7a5c0b2fb7f7cf77f6b3d36e9e165176a0b2f463c6ff3e6f3c133eda7fc945a1",
+      "processing": "none; original full-quality WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/web-foley-1018/click.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Independent.nu / qubodup",
+      "bytes": 5016,
+      "sha256": "1421806c70b8b421bdd1fd1a43b62e69d1ca1fb0412dc59b60e7afa9f34cf1cf",
+      "source": "https://opengameart.org/content/16-button-clicks",
+      "original_path": "buttons_and_clicks/Clic07.mp3.flac",
+      "processing": "atrim=start=0.000000:duration=0.095000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=3800,volume=2.000000,afade=t=in:d=0.003,afade=t=out:st=0.068400:d=0.026600; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/select.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Independent.nu / qubodup",
+      "bytes": 5916,
+      "sha256": "2bcdbdc0dc22ca04b7d1714ca339840294ac450502c7e6fa20cc598f33d2da29",
+      "source": "https://opengameart.org/content/16-button-clicks",
+      "original_path": "buttons_and_clicks/Clic06.mp3.flac",
+      "processing": "atrim=start=0.021467:duration=0.120000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=4200,volume=2.000000,afade=t=in:d=0.003,afade=t=out:st=0.086400:d=0.033600; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/confirm.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Independent.nu / qubodup",
+      "bytes": 5779,
+      "sha256": "47848b931fdb98d57ac7878af8298525f3f7e27ae75974c691fa385f4303c9b4",
+      "source": "https://opengameart.org/content/16-button-clicks",
+      "original_path": "buttons_and_clicks/button02.mp3.flac",
+      "processing": "atrim=start=0.128837:duration=0.180000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=4200,volume=0.296366,afade=t=in:d=0.003,afade=t=out:st=0.129600:d=0.050400; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/back.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Independent.nu / qubodup",
+      "bytes": 5632,
+      "sha256": "4c6d8224a478f24de3e78064ca82d1144d2676cc03cfa7a57b0571a2eaa2993f",
+      "source": "https://opengameart.org/content/16-button-clicks",
+      "original_path": "buttons_and_clicks/button04.mp3.flac",
+      "processing": "atrim=start=0.094483:duration=0.170000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=3800,volume=0.315829,afade=t=in:d=0.003,afade=t=out:st=0.122400:d=0.047600; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/switch.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Independent.nu / qubodup",
+      "bytes": 4987,
+      "sha256": "6b91b28bd811374ee4e65fc26d586f2303eae2dcffdfdbef2f062695a8067b28",
+      "source": "https://opengameart.org/content/16-button-clicks",
+      "original_path": "buttons_and_clicks/Clic03.mp3.flac",
+      "processing": "atrim=start=0.022737:duration=0.140000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=4200,volume=0.332146,afade=t=in:d=0.003,afade=t=out:st=0.100800:d=0.039200; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/deny.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Independent.nu / qubodup",
+      "bytes": 6196,
+      "sha256": "fd57dd1158b2332fdd5ad98d1f8f26e1f1374b15a399413c31eeffdee20dab16",
+      "source": "https://opengameart.org/content/16-button-clicks",
+      "original_path": "buttons_and_clicks/button06.mp3.flac",
+      "processing": "atrim=start=0.078383:duration=0.240000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=3200,volume=0.451627,afade=t=in:d=0.003,afade=t=out:st=0.185000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/page-short.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 6231,
+      "sha256": "12336ca20c406d6b97bce2b4ca6625efaacae504835bf17af5be22505cc730c1",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/bookFlip3.ogg",
+      "processing": "atrim=start=0.027590:duration=0.203023,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.503918,afade=t=in:d=0.003,afade=t=out:st=0.148023:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/page-long.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 8024,
+      "sha256": "fe895584b5e600e53eea623f6ef1489385aafa5e74be7a03e920ce4ad20e9ca5",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/bookFlip2.ogg",
+      "processing": "atrim=start=0.032918:duration=0.397535,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.771284,afade=t=in:d=0.003,afade=t=out:st=0.342535:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/paper-place.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 6288,
+      "sha256": "f0237403352b32f0a351d3923a640b90c5762be0695da9764b1967cca3ef3a55",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/bookPlace1.ogg",
+      "processing": "atrim=start=0.022918:duration=0.250000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.243685,afade=t=in:d=0.003,afade=t=out:st=0.195000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/paper-place-2.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 6434,
+      "sha256": "c95254a1ef0419e1ef1856484226e4ffffeb24305f79fe5cb0681919be786c6c",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/bookPlace2.ogg",
+      "processing": "atrim=start=0.031150:duration=0.300000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.238852,afade=t=in:d=0.003,afade=t=out:st=0.245000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/book-open.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 5662,
+      "sha256": "741d8225ebfbf5579666ea5d3d72e7df9f95c94829fccac9f6ce3d82fcf22fb8",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/bookOpen.ogg",
+      "processing": "atrim=start=0.013190:duration=0.137875,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=1.187682,afade=t=in:d=0.003,afade=t=out:st=0.099270:d=0.038605; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/book-close.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 5652,
+      "sha256": "16bbb2146f93efe74b5390279b5b4618d68797345d41f405ae4a7c388b987d7b",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/bookClose.ogg",
+      "processing": "atrim=start=0.057975:duration=0.172637,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.247784,afade=t=in:d=0.003,afade=t=out:st=0.124299:d=0.048338; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/leather-pick.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 6601,
+      "sha256": "f5df69d543c2620b766334755a73f3593cccca7d37179dd24eeb35f13636fe57",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/handleSmallLeather.ogg",
+      "processing": "atrim=start=0.046274:duration=0.291934,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=1.352165,afade=t=in:d=0.003,afade=t=out:st=0.236934:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/leather-drop.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 6950,
+      "sha256": "dc8d3c32dd60489d55499805d7e58b0ad6d555b240ad7756fdefef1096351935",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/dropLeather.ogg",
+      "processing": "atrim=start=0.004687:duration=0.350000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.619708,afade=t=in:d=0.003,afade=t=out:st=0.295000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/coin-one.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 8249,
+      "sha256": "a12150c56554d6006a8a8f7743be4f767dc370706e6394f06959d0b78046e511",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/handleCoins2.ogg",
+      "processing": "atrim=start=0.017907:duration=0.320000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=1.001393,afade=t=in:d=0.003,afade=t=out:st=0.265000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/coin-many.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 9904,
+      "sha256": "6c371c7d507bc0cc3fcd203458644fd67e41e9cb02bbaee7faf43f5813b20f47",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/handleCoins.ogg",
+      "processing": "atrim=start=0.051127:duration=0.600000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.244833,afade=t=in:d=0.003,afade=t=out:st=0.545000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/latch.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 5995,
+      "sha256": "7b50e0006f24419128bed0276b3ab0b0aaa98d9307c497dc354b6a8d6e51ad82",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/metalLatch.ogg",
+      "processing": "atrim=start=0.037567:duration=0.223771,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.232745,afade=t=in:d=0.003,afade=t=out:st=0.168771:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/metal-click.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 6751,
+      "sha256": "d671183c23b359126bf3edaaaa7257b23c135cbf9a08680618911e80e4618985",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/metalClick.ogg",
+      "processing": "atrim=start=0.000000:duration=0.280000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.642926,afade=t=in:d=0.003,afade=t=out:st=0.225000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/cloth.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 7582,
+      "sha256": "9c10256587f129d665456941ac50a52a3710742fc692f18d527a978435d45bb4",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/cloth3.ogg",
+      "processing": "atrim=start=0.021308:duration=0.400000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.960557,afade=t=in:d=0.003,afade=t=out:st=0.345000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/door.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 10106,
+      "sha256": "180c2657adb3444aa31ed2f829169c75e626b33abec298d0ce963b56263cca3f",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/doorOpen_1.ogg",
+      "processing": "atrim=start=0.048134:duration=0.650000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.249754,afade=t=in:d=0.003,afade=t=out:st=0.595000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/blunt.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 5680,
+      "sha256": "7233716eb4482392b62758fcfe1ded165c5171286a430752dda51522988f6c6d",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/chop.ogg",
+      "processing": "atrim=start=0.045367:duration=0.194905,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.255339,afade=t=in:d=0.003,afade=t=out:st=0.140331:d=0.054573; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/knife-cut.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 7566,
+      "sha256": "778d266a57726cc18c4483c2d504a5f40a332a13b447cf013b938ae62cb2558a",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/knifeSlice.ogg",
+      "processing": "atrim=start=0.079222:duration=0.400000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.348324,afade=t=in:d=0.003,afade=t=out:st=0.345000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/knife-cut-2.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 7680,
+      "sha256": "064be05ab58bc949a436f82252f9e42801fd75c676e1c2cf358cd1dd7870a710",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/knifeSlice2.ogg",
+      "processing": "atrim=start=0.014868:duration=0.380000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.238272,afade=t=in:d=0.003,afade=t=out:st=0.325000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/knife-draw.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 7527,
+      "sha256": "e6ebd6d887cd1a6177f01a935d0c540ab6063b166812fc58a45cb9c0d640c0c5",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/drawKnife2.ogg",
+      "processing": "atrim=start=0.000016:duration=0.350000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=2.000000,afade=t=in:d=0.003,afade=t=out:st=0.295000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/wood-creak.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Kenney",
+      "bytes": 6376,
+      "sha256": "98b63e5547951e4228a08544ce3e546fcecc3b2ad73f24e882d6de4b43785ad7",
+      "source": "https://opengameart.org/content/50-rpg-sound-effects",
+      "original_path": "rpg/OGG/creak3.ogg",
+      "processing": "atrim=start=0.018655:duration=0.300000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.616133,afade=t=in:d=0.003,afade=t=out:st=0.245000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/parry.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke",
+      "bytes": 7261,
+      "sha256": "50559b56cbea89c714a43b565825b617e9e574b53b8f0c3d9323de321de42b00",
+      "source": "https://opengameart.org/content/fantasy-weapons-and-apparel-sfx-library",
+      "original_path": "weapons/sfx/sword-knife-clash-01.wav",
+      "processing": "atrim=start=0.028156:duration=0.360000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=6200,volume=0.250899,afade=t=in:d=0.003,afade=t=out:st=0.305000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/parry-2.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke",
+      "bytes": 7349,
+      "sha256": "24ca1a7591589cedb7b4ae59e440f3bb1d4404e0a1413da4c26007647ff63be4",
+      "source": "https://opengameart.org/content/fantasy-weapons-and-apparel-sfx-library",
+      "original_path": "weapons/sfx/sword-knife-clash-03.wav",
+      "processing": "atrim=start=0.034256:duration=0.340000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=6200,volume=0.250899,afade=t=in:d=0.003,afade=t=out:st=0.285000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/pierce.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke",
+      "bytes": 8147,
+      "sha256": "d68203fe0f21e37dd96c342ddbd18f0fbc4444ce078081b8c66cbf88dbede7d2",
+      "source": "https://opengameart.org/content/fantasy-weapons-and-apparel-sfx-library",
+      "original_path": "weapons/sfx/knife-unsheathe-02.wav",
+      "processing": "atrim=start=0.118701:duration=0.350000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=6200,volume=0.250899,afade=t=in:d=0.003,afade=t=out:st=0.295000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/arrow.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke",
+      "bytes": 6106,
+      "sha256": "3269effa62b5a0e0e6b8b065e6cebd5faa6cc82c930bafc96321ba980a7e36b0",
+      "source": "https://opengameart.org/content/fantasy-weapons-and-apparel-sfx-library",
+      "original_path": "weapons/sfx/arrow-feathers-03.wav",
+      "processing": "atrim=start=0.039585:duration=0.230574,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=6200,volume=0.250899,afade=t=in:d=0.003,afade=t=out:st=0.175574:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/buckle.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke",
+      "bytes": 5453,
+      "sha256": "a330f96718cc2c66ce92f9bbe9ba617574848f68042b4a054a8ed89180f1030b",
+      "source": "https://opengameart.org/content/fantasy-weapons-and-apparel-sfx-library",
+      "original_path": "weapons/sfx/belt-buckle-01.wav",
+      "processing": "atrim=start=0.034166:duration=0.165834,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=6200,volume=0.251313,afade=t=in:d=0.003,afade=t=out:st=0.119401:d=0.046434; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/unbuckle.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke",
+      "bytes": 6805,
+      "sha256": "a9ea0ec7758506cd8d8f9be8dcddd5ea21e87191039739ec71967b64aa2d2adb",
+      "source": "https://opengameart.org/content/fantasy-weapons-and-apparel-sfx-library",
+      "original_path": "weapons/sfx/sheath-unbuckle-01.wav",
+      "processing": "atrim=start=1.243281:duration=0.320000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=6200,volume=0.250899,afade=t=in:d=0.003,afade=t=out:st=0.265000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/shield-break.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke",
+      "bytes": 8295,
+      "sha256": "cf9872df1fbb03c480a9b1dba50e3c14139f07f7ff75636bfc32af13afbc5b76",
+      "source": "https://opengameart.org/content/fantasy-weapons-and-apparel-sfx-library",
+      "original_path": "weapons/sfx/sword-knife-clash-02.wav",
+      "processing": "atrim=start=0.040515:duration=0.500000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=6200,volume=0.250899,afade=t=in:d=0.003,afade=t=out:st=0.445000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/heavy.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke",
+      "bytes": 9282,
+      "sha256": "936c7a4ed5c329203e2201fe939ef748a31365a3059971a3d3ab0c56489df381",
+      "source": "https://opengameart.org/content/fantasy-weapons-and-apparel-sfx-library",
+      "original_path": "weapons/sfx/sword-thermos-hit-01.wav",
+      "processing": "atrim=start=0.083440:duration=0.480000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=6200,volume=0.263643,afade=t=in:d=0.003,afade=t=out:st=0.425000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/lunge.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke",
+      "bytes": 6157,
+      "sha256": "c0afa430c677258fb056f926c4a0d4afd0deded5350ac44b9b1db43e1102c0e4",
+      "source": "https://opengameart.org/content/fantasy-weapons-and-apparel-sfx-library",
+      "original_path": "weapons/sfx/arrow-feathers-01.wav",
+      "processing": "atrim=start=0.023168:duration=0.200000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=6200,volume=0.250906,afade=t=in:d=0.003,afade=t=out:st=0.145000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/leather.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke",
+      "bytes": 7534,
+      "sha256": "a1328f66455c742ac47772512cd25639715b0d100260e3e522242619b4b948de",
+      "source": "https://opengameart.org/content/fantasy-weapons-and-apparel-sfx-library",
+      "original_path": "weapons/sfx/quiver-leather-squeeze-03.wav",
+      "processing": "atrim=start=0.013621:duration=0.320000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=6200,volume=0.290163,afade=t=in:d=0.003,afade=t=out:st=0.265000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/reward-small.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — PWL",
+      "bytes": 6543,
+      "sha256": "96e08dfff62308ab791ad651ed859f8455bd6d94cc6e575b36f0942d9568b183",
+      "source": "https://opengameart.org/content/bell-dingschimes",
+      "original_path": "bell_ding2.wav",
+      "processing": "atrim=start=0.076320:duration=0.480000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=3300,volume=0.250891,afade=t=in:d=0.003,afade=t=out:st=0.425000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/reward-rare.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Brandon Morris / HaelDB",
+      "bytes": 7032,
+      "sha256": "165a70267370713e301992d1d4bfeb772523f37f903a42197471955ecfbff82e",
+      "source": "https://opengameart.org/node/5095",
+      "original_path": "completetask_0.mp3",
+      "processing": "atrim=start=0.017204:duration=0.620000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=4000,volume=2.000000,afade=t=in:d=0.003,afade=t=out:st=0.565000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/reward-complete.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — Brandon Morris / HaelDB",
+      "bytes": 9601,
+      "sha256": "7b1060f129ebf5fc3e41c8032e0b7111f188dae0bf0184b09c16c821a83b2dd2",
+      "source": "https://opengameart.org/node/5095",
+      "original_path": "gmae.wav",
+      "processing": "atrim=start=0.186796:duration=0.900000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=4000,volume=1.340388,afade=t=in:d=0.003,afade=t=out:st=0.845000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/magic-1.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — JaggedStone",
+      "bytes": 9916,
+      "sha256": "7162c96de68e863992baa8158607736815115b86ea41a930a054ef45ba358b32",
+      "source": "https://opengameart.org/content/magic-spell-sfx",
+      "original_path": "magical_1_0.ogg",
+      "processing": "atrim=start=0.018769:duration=0.650000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.952477,afade=t=in:d=0.003,afade=t=out:st=0.595000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/magic-2.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — JaggedStone",
+      "bytes": 9619,
+      "sha256": "e230a430e2524bf88dbb4bd78363904a6311a5c1249809853da53437cccdef0c",
+      "source": "https://opengameart.org/content/magic-spell-sfx",
+      "original_path": "magical_2.ogg",
+      "processing": "atrim=start=0.000243:duration=0.500000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=1.266248,afade=t=in:d=0.003,afade=t=out:st=0.445000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/magic-3.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — JaggedStone",
+      "bytes": 9187,
+      "sha256": "bf43cd193969748f925cf1aa908eb08e90718648eb1d4938e9a87082e095b5bf",
+      "source": "https://opengameart.org/content/magic-spell-sfx",
+      "original_path": "magical_3.ogg",
+      "processing": "atrim=start=0.000000:duration=0.500000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=0.375714,afade=t=in:d=0.003,afade=t=out:st=0.445000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/magic-4.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — JaggedStone",
+      "bytes": 11681,
+      "sha256": "ff2cda3a7a383a9be0547a3f9247dec920a42a01c2f1b7dc703361c99858bbab",
+      "source": "https://opengameart.org/content/magic-spell-sfx",
+      "original_path": "magical_4.ogg",
+      "processing": "atrim=start=0.000764:duration=0.900000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=1.469456,afade=t=in:d=0.003,afade=t=out:st=0.845000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/magic-5.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — JaggedStone",
+      "bytes": 9235,
+      "sha256": "65e8818e9684f83940be3ae733111d9d612c38db7c77d91c0831c5445582e235",
+      "source": "https://opengameart.org/content/magic-spell-sfx",
+      "original_path": "magical_5.ogg",
+      "processing": "atrim=start=0.000000:duration=0.500000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=1.806207,afade=t=in:d=0.003,afade=t=out:st=0.445000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/magic-6.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — JaggedStone",
+      "bytes": 9624,
+      "sha256": "b51ffb078fabacbdfd8e31398e40c7da501756d3cccf31209bb61d0c9355cf3e",
+      "source": "https://opengameart.org/content/magic-spell-sfx",
+      "original_path": "magical_6.ogg",
+      "processing": "atrim=start=0.000000:duration=0.550000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=2.000000,afade=t=in:d=0.003,afade=t=out:st=0.495000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
+    {
+      "path": "sfx/web-foley-1018/magic-7.ogg",
+      "ext": "ogg",
+      "license": "CC0 1.0 — JaggedStone",
+      "bytes": 10469,
+      "sha256": "4bbb4e6ca2a0fb4bfe6a10ae321aabb060683f1e5eacb753a3c90680fec77a02",
+      "source": "https://opengameart.org/content/magic-spell-sfx",
+      "original_path": "magical_7.ogg",
+      "processing": "atrim=start=0.000000:duration=0.700000,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5500,volume=2.000000,afade=t=in:d=0.003,afade=t=out:st=0.645000:d=0.055000; mono 44100Hz Vorbis q5"
+    },
     {
       "path": "sfx/real-foley/lockbox-turn-06.wav",
       "ext": "wav",
@@ -2392,90 +3573,90 @@
     {
       "path": "icons/base-v3/companion-cat.webp",
       "ext": "webp",
-      "bytes": 122060,
-      "sha256": "7989e27d3417b26eb1cadee613a8d838ea6e62561d44d3cc4154fb2bc21aa71a",
+      "bytes": 125316,
+      "sha256": "c27319f848b8b5773fb71cc7bf25d8cae77998270b631587a770e3dbf3cc868f",
       "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
-      "source": "docs/evidence/2026-10-14-WF-pets-first-install/receipts.json",
+      "source": "docs/evidence/2026-10-18-pets-redesign/install-receipts.json",
       "provenance": {
         "kind": "generated-source-and-conversion-record",
-        "sourceSha256": "bbe12328ac9d7dfdcc0d966b141e4662fbc0ac50b83bf7a3bc497fd777d474f1",
-        "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/cat.png",
-        "encoder": "docs/evidence/2026-10-14-WF-pets-first-install/encode.py",
+        "sourceSha256": "78056ba96cf1b41dd62220fd60989c97482c9c56f1500564d1f3d4d68405ba76",
+        "rawPath": "game/art-source/pets/redesign-20261018/cat-redraw-v1.png",
+        "encoder": "docs/evidence/2026-10-18-pets-redesign/install.py",
         "outputBytesMatch": true
       }
     },
     {
       "path": "icons/base-v3/companion-dog.webp",
       "ext": "webp",
-      "bytes": 103532,
-      "sha256": "0a39e7667cea645753e944eef2c7ff56c0faacbd764008eedfaec0a7a59542ce",
+      "bytes": 89620,
+      "sha256": "462d69f53293a0b92962a70264dfd51f6da8657ab2e56a6091c67799356ccd61",
       "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
-      "source": "docs/evidence/2026-10-14-WF-pets-first-install/receipts.json",
+      "source": "docs/evidence/2026-10-18-pets-redesign/install-receipts.json",
       "provenance": {
         "kind": "generated-source-and-conversion-record",
-        "sourceSha256": "367c54d4e33ad5ac1b7b01cc9840c06ba0952e5cab17ad09c957dce1478e8eb8",
-        "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/dog.png",
-        "encoder": "docs/evidence/2026-10-14-WF-pets-first-install/encode.py",
+        "sourceSha256": "5deba60a0b75828dcb725bd148cb5f9b4d2ed7c1e2003aa8e238ea8eb0f61f84",
+        "rawPath": "game/art-source/pets/redesign-20261018/dog-redraw-v2.png",
+        "encoder": "docs/evidence/2026-10-18-pets-redesign/install.py",
         "outputBytesMatch": true
       }
     },
     {
       "path": "icons/base-v3/companion-falcon.webp",
       "ext": "webp",
-      "bytes": 121038,
-      "sha256": "654a1845ca519a63de6756cab3f7fbe51332ec54fa3366cf19954ae9861dfbfc",
+      "bytes": 101168,
+      "sha256": "5e4fdb8f7648e82ed4d07ecf671d21f3fbc487f197550c87e7803e89c88f846c",
       "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
-      "source": "docs/evidence/2026-10-14-WF-pets-first-install/receipts.json",
+      "source": "docs/evidence/2026-10-18-pets-redesign/install-receipts.json",
       "provenance": {
         "kind": "generated-source-and-conversion-record",
-        "sourceSha256": "37d23584965b548d91d1790cf7e958c8a2cb3f9e3481438774a8e4d04e63402e",
-        "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/falcon.png",
-        "encoder": "docs/evidence/2026-10-14-WF-pets-first-install/encode.py",
+        "sourceSha256": "bac3db35b3ee3f0891899b4e32a4a839dd3408b2fe658ad6821d73af46fd9d09",
+        "rawPath": "game/art-source/pets/redesign-20261018/falcon-redraw-v1.png",
+        "encoder": "docs/evidence/2026-10-18-pets-redesign/install.py",
         "outputBytesMatch": true
       }
     },
     {
       "path": "icons/base-v3/companion-fire.webp",
       "ext": "webp",
-      "bytes": 73100,
-      "sha256": "d8354206ee1f5d8403d206f6e2d6a634535660b9d8a50dc14a2e0d5e516a4621",
+      "bytes": 64926,
+      "sha256": "d872e0025c159e07d4c27fc3ef802de6c9133e236f61e8048586014a62ccc917",
       "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
-      "source": "docs/evidence/2026-10-14-WF-pets-first-install/receipts.json",
+      "source": "docs/evidence/2026-10-18-pets-redesign/install-receipts.json",
       "provenance": {
         "kind": "generated-source-and-conversion-record",
-        "sourceSha256": "bac534aece39f4fd5759e83ea04835f29b8a1d03e7947bd7b142d787f2f297c9",
-        "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/fire.png",
-        "encoder": "docs/evidence/2026-10-14-WF-pets-first-install/encode.py",
+        "sourceSha256": "28eeb7e081569c2218d68639ba09da7d08e70d22dfe4f81995ab5176a92e6529",
+        "rawPath": "game/art-source/pets/redesign-20261018/fire-redraw-v2.png",
+        "encoder": "docs/evidence/2026-10-18-pets-redesign/install.py",
         "outputBytesMatch": true
       }
     },
     {
       "path": "icons/base-v3/companion-penguin.webp",
       "ext": "webp",
-      "bytes": 105994,
-      "sha256": "455176e51bbf6e65e11e36f23c3ee544ed56bd81d1bf6216cb31175432995230",
+      "bytes": 90972,
+      "sha256": "709acc7f6f1e0347e4c9cf66c597bec642b8c9e9a9dd2b26c02752e78cf78c86",
       "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
-      "source": "docs/evidence/2026-10-14-WF-pets-first-install/receipts.json",
+      "source": "docs/evidence/2026-10-18-pets-redesign/install-receipts.json",
       "provenance": {
         "kind": "generated-source-and-conversion-record",
-        "sourceSha256": "ce913e1973b6f3b61ba70005c42fd2ec0522abef63b13305d29505a17df30e4a",
-        "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/penguin.png",
-        "encoder": "docs/evidence/2026-10-14-WF-pets-first-install/encode.py",
+        "sourceSha256": "52aa578c42dd836534f72407c9dd8ee5c94370b3bb23cb4978e3909e4c539895",
+        "rawPath": "game/art-source/pets/redesign-20261018/penguin-redraw-v2.png",
+        "encoder": "docs/evidence/2026-10-18-pets-redesign/install.py",
         "outputBytesMatch": true
       }
     },
     {
       "path": "icons/base-v3/companion-robot.webp",
       "ext": "webp",
-      "bytes": 74566,
-      "sha256": "d2ecf7f8a255ff359f38a784b635315c13048eff140258c6143b5d1d070ada67",
+      "bytes": 108542,
+      "sha256": "25ef844a6b18bbc9e887a80c2d8203be216a83d60b94de2a49edae516da51231",
       "license": "项目自有（内置ImageGen生成并按已留存编码脚本转换）",
-      "source": "docs/evidence/2026-10-14-WF-pets-first-install/receipts.json",
+      "source": "docs/evidence/2026-10-18-pets-redesign/install-receipts.json",
       "provenance": {
         "kind": "generated-source-and-conversion-record",
-        "sourceSha256": "80413522e13d00e4893201e284c7530866184c61fe228ad74349b689f1318b5b",
-        "rawPath": "docs/evidence/2026-10-14-WF-pets-first-install/source/robot.png",
-        "encoder": "docs/evidence/2026-10-14-WF-pets-first-install/encode.py",
+        "sourceSha256": "e8a12d9e2d5093b30614ac1b9ae1ea62964251b8fecb8444a9e65296f3a6cd0f",
+        "rawPath": "game/art-source/pets/redesign-20261018/robot-redraw-v2.png",
+        "encoder": "docs/evidence/2026-10-18-pets-redesign/install.py",
         "outputBytesMatch": true
       }
     },
@@ -5578,7 +6759,15 @@
       "bytes": 327278,
       "sha256": "ab6ab3c9f5c6e185b2d71ac7b719dd970fd259436f2675d163d2ea4aa849b218",
       "license": "项目自有（老板指定立绘）",
-      "source": "docs/evidence/2026-10-13-roster-redraw/README.md"
+      "source": "docs/evidence/2026-10-18-roster-reference-final/restored-four.json"
+    },
+    {
+      "path": "portraits/full/changwuyu-drum-room.webp",
+      "ext": "webp",
+      "bytes": 321748,
+      "sha256": "9cffdf6b725f8301ff3b944030b0d1e532e9e0b8072153bcb177d12a61117c58",
+      "license": "项目自有（AI 生成）",
+      "source": "docs/evidence/2026-10-19-changwuyu-drum-skin/receipt.json"
     },
     {
       "path": "portraits/full/changwuyu.webp",
@@ -5586,7 +6775,7 @@
       "bytes": 204422,
       "sha256": "156d3889d6b4c92d95d29eb67440d951f0234b5f325c22d4f3ee27027180a1ff",
       "license": "项目自有（自制/AI 生成）",
-      "source": "docs/evidence/2026-10-13-roster-redraw/README.md"
+      "source": "docs/evidence/2026-10-18-roster-reference-final/restored-four.json"
     },
     {
       "path": "portraits/full/heixiang.webp",
@@ -5594,37 +6783,39 @@
       "bytes": 190598,
       "sha256": "d8b76ee16b7d6bc85db83298a603f845fea39f139e42f97f41ebe9972fd50caa",
       "license": "项目自有（自制/AI 生成）",
-      "source": "docs/evidence/2026-10-13-roster-redraw/README.md"
+      "source": "docs/evidence/2026-10-18-roster-reference-final/restored-four.json"
     },
     {
       "path": "portraits/full/wu-beach.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 378674,
-      "sha256": "027f6fb049a6966a9f3c7662b012075d3f5c7533e9e39fc95c5147a38ccb232a",
-      "source": "docs/evidence/2026-10-15-wu-skin-fill/installed.json"
+      "bytes": 340018,
+      "sha256": "57333fc398022d2d1997c3358b6fb1ce6bde9b858316882aa231f6ee25dfd583",
+      "source": "docs/evidence/2026-10-18-wu-skins-reset/installed-faces.json"
     },
     {
       "path": "portraits/full/wu-casual-v14.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 366400,
-      "sha256": "377ac979dcfdc04292e7332326864fb3cccee5defe02537c089653afa6e77f0d",
-      "source": "docs/evidence/2026-10-15-wu-skin-fill/installed.json"
+      "bytes": 407952,
+      "sha256": "c53156d2038291935fba357e7a04d9d31371e27be759662937deb0804db5ccb3",
+      "source": "docs/evidence/2026-10-18-wu-skins-reset/installed-brush-preserve.json"
     },
     {
       "path": "portraits/full/wu-spring-v15.webp",
       "ext": "webp",
       "license": "项目自有（AI 生成）",
-      "bytes": 329108,
-      "sha256": "ec37a0b208a58a39df729ea289cf68075e485c58f44b42583b4fe249ddec83ad",
-      "source": "docs/evidence/2026-10-15-wu-skin-fill/installed.json"
+      "bytes": 299146,
+      "sha256": "e6609bfc693cb22eb3fc5e18a29494f9a32cc5418dea35b8ee2eac5365dd93a8",
+      "source": "docs/evidence/2026-10-18-wu-skins-reset/installed-faces.json"
     },
     {
       "path": "portraits/full/wu.webp",
       "ext": "webp",
-      "bytes": 150636,
-      "license": "项目自有（自制/AI 生成）"
+      "bytes": 122966,
+      "license": "项目自有（自制/AI 生成）",
+      "sha256": "8d976e04f8382b100ca110ab15908ae9f78f0894c7b73fd88373d47745467de5",
+      "source": "docs/evidence/2026-10-18-wu-back-sword/receipt.json"
     },
     {
       "path": "portraits/full/xingyue.webp",
@@ -5632,7 +6823,7 @@
       "bytes": 180912,
       "sha256": "77c4a09b76804cf7cce78075dd610c7e2ebbdcfac67c5c2a1105eddae228eca3",
       "license": "项目自有（自制/AI 生成）",
-      "source": "docs/evidence/2026-10-13-roster-redraw/README.md"
+      "source": "docs/evidence/2026-10-18-roster-reference-final/restored-four.json"
     },
     {
       "path": "reconstruction/wallpaper-ensemble-1005.webp",
@@ -12518,6 +13709,30 @@
       "bytes": 7651,
       "sha256": "33b5e6e37c6e9d54e07bf5a89b12c76e879f40c1ea83cdd82714df1d6f9fec6d",
       "source": "https://kenney.nl/assets/impact-sounds"
+    },
+    {
+      "path": "sfx/mixkit-1018/library.json",
+      "ext": "json",
+      "license": "项目自有索引元数据；所列音频授权见同目录 SOURCES.md",
+      "source": "game/assets/sfx/mixkit-1018/SOURCES.md",
+      "bytes": 36556,
+      "sha256": "084c57eb8ce326d33af92a94a3c6466281a54755452667f13f9685641c3ae7ed"
+    },
+    {
+      "path": "sfx/original-ui-1018/library.json",
+      "ext": "json",
+      "license": "项目自有索引元数据；所列音频授权见同目录 SOURCES.md",
+      "source": "game/assets/sfx/original-ui-1018/SOURCES.md",
+      "bytes": 34510,
+      "sha256": "64fc9612f16c001969f468e80aae10d1d484a97b49664c70e9779767c9ae5651"
+    },
+    {
+      "path": "sfx/web-foley-1018/library.json",
+      "ext": "json",
+      "license": "项目自有索引元数据；所列音频授权见同目录 SOURCES.md",
+      "source": "game/assets/sfx/web-foley-1018/SOURCES.md",
+      "bytes": 37705,
+      "sha256": "102a5b39a107d053dccde9153a3d694a3dcf395b343486287a0ee6a54941284b"
     }
   ],
   "verified": "2026-10-05"

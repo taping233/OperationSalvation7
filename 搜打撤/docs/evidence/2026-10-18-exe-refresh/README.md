@@ -1,0 +1,17 @@
+# 含事件改动与换肤修复的 EXE
+
+2026-10-18，Friday / 01a14f4c。老板授权重新打包，并在构建中追问事件能否纳入；核对原会话停止现场后，在独立副本补验并纳入事件改动。没有继续编辑原事件源码。
+
+交付：`.tmp/exe-refresh-1018/delivery/搜打撤-代号7-20261018-换肤修复.exe`，Windows x64 免安装版，游戏版本0.60.0，Electron44.1.0，326032977字节（约311MiB）。SHA256：`c8cd0c4f83750f4e6a77bc8ba9b46dd68f0cd579a3b9c7a64bd27c16a2746c4e`。二进制本地保留，不纳入Git；获取方式为本机现有依赖与NSIS缓存离线封装。
+
+包含已完成工作区的换肤定位修复、桌面资源读取与窗口销毁守卫、事件选项/玩家投骰/商店免单委托。事件会话原记录仍为编辑中，但聊天最终答复为按老板要求停止，241项旧回归通过、最后新增测试未复验；本轮将该源码冻结后补验。三张仍登记在途的皮肤素材采用HEAD `7d46ce2347`版本，未纳入其重绘中间素材；默认立绘与其他已完成素材来自本轮冻结工作区。所有输入及选择保存在本地`.tmp/exe-refresh-1018/{prepare,include-events}.cjs`与`inputs.json`。
+
+验证：
+
+- 事件相关17文件245项：首轮244通过，唯一失败为副本漏复制根启动器BAT。补齐副本文件后单独重跑contracts的17项全部通过；其余通过结果复用，事件源码未修改。结果见[event-test-results.json](event-test-results.json)，补验命令为`npx vitest run tests/contracts.test.js --root .tmp/exe-refresh-1018/project --reporter=dot`。
+- 桌面启动/协议/看护与选人换肤/待机5文件64项通过。
+- 冻结副本叙事编译、数据校验与Vite编译成功；`npm run build`最终退出1：postbuild性能预算5项超限。包体249.90MiB>112、重复11.44MiB>0.88、入口gzip330.3KiB>270、首屏375.9KiB>310、CSS214.4KiB>136。未修改门槛或把该结果记为通过。编译产物在明确保留此限制的情况下继续封装。
+- electron-builder退出0；包内8项应用文件、1837项游戏资源与冻结副本逐字节一致（自动省略的`.gitkeep`占位文件除外），最终EXE的MZ标识、体积、SHA256和事件/换肤代码标记通过，见[verification.json](verification.json)。
+- 无窗口Electron主进程经新包实际`app://sdt`处理器读取1837文件，失败0；版本查询CSS 200、32字节音频Range 206、窗口关闭回调模拟通过，见[protocol.json](protocol.json)。
+
+原换肤当前窗口内置浏览器实页验证复用[换肤证据](../2026-10-18-skin-swap-position/README.md)。本轮没有原生打开EXE/关闭窗口或整局实玩，不宣称这些场景已通过；不改共享构建产物，无新增服务，原EXE保留，未提交推送。自有编辑占用释放。

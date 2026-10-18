@@ -20,6 +20,7 @@ const ENEMY_EFFECT_PATTERN = new RegExp([
 ].join('|'));
 
 function isAreaEffect(card) {
+  if (card?.id === 'cc-rot-seed') return false;
   const battle = card && card.rules && card.rules.battle;
   if (battle && battle.target && Object.prototype.hasOwnProperty.call(battle.target, 'area')) {
     return !!battle.target.area;
@@ -44,6 +45,7 @@ function isPureAreaEffect(card) {
 }
 
 function targetSideFor(card, damageTypes) {
+  if (card?.id === 'cc-rot-seed') return 'enemy';
   const desc = String(card.desc || '');
   const battle = card && card.rules && card.rules.battle;
   if (battle && battle.target && Object.prototype.hasOwnProperty.call(battle.target, 'side')) {
@@ -133,4 +135,16 @@ function itemTargetSideFor(card) {
   return null;
 }
 
-export { isAreaEffect, targetSideFor, unplayableReasonFor, itemTargetSideFor };
+// 随机敌人牌可在战场空地提交；仍交给原结算器掷目标，不改成全体伤害。
+function isRandomEnemyEffect(card) {
+  const operations = card?.rules?.triggers?.onPlay;
+  if (Array.isArray(operations)) {
+    return operations.some(op => op.target === 'randomEnemy')
+      && !operations.some(op => op.target === 'chosenEnemy');
+  }
+  const text = String(card?.desc || '');
+  return /随机(?:的)?(?:\s*\d+\s*名)?敌人|随机敌方/.test(text)
+    && !/对\s*(?:1|一)\s*名敌人|对目标/.test(text);
+}
+
+export { isAreaEffect, isRandomEnemyEffect, targetSideFor, unplayableReasonFor, itemTargetSideFor };

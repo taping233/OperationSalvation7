@@ -76,8 +76,9 @@ describe('scene BGM explicit media lifecycle', () => {
     expect(h.player.snapshot().error.stage).toBe('play'); expect(old.playing()).toBe(true);
     next.callbacks.unlock(); next.started(); next.advance(1.25);
     expect(h.player.snapshot()).toMatchObject({ backend: 'html5', current: 'battle', playing: true, positionSeconds: 1.25, error: null });
-    vi.advanceTimersByTime(532); expect(old.unload).toHaveBeenCalledOnce();
-    h.set('shop'); const shop = h.tracks[2]; shop.ready(); vi.advanceTimersByTime(532);
+    vi.advanceTimersByTime(932); expect(old.unload).toHaveBeenCalledOnce();
+    h.set('shop'); const shop = h.tracks[2]; shop.ready(); vi.advanceTimersByTime(931);
+    expect(next.unload).not.toHaveBeenCalled(); vi.advanceTimersByTime(1);
     expect(next.unload).toHaveBeenCalledOnce(); expect(h.tracks.every(t => t.options.html5)).toBe(true);
     expect(h.player.snapshot().tracks).toHaveLength(1); h.player.dispose(); expect(shop.unload).toHaveBeenCalledOnce();
     expect(vi.getTimerCount()).toBe(0);
@@ -157,7 +158,7 @@ it('preserves nonzero fades and cancels real Howler fade/release timers across r
     const track = realFadeTrack(() => callbacks.play()); tracks.push(track); handlers.push(callbacks); return track;
   });
   player.set('title', { enabled: true, volume: 0.12 }); tracks[0]._state = 'loaded'; handlers[0].load();
-  expect(vi.getTimerCount()).toBe(1); vi.advanceTimersByTime(700); expect(vi.getTimerCount()).toBe(0);
+  expect(vi.getTimerCount()).toBe(1); vi.advanceTimersByTime(1200); expect(vi.getTimerCount()).toBe(0);
   for (let i = 0; i < 5; i++) {
     player.set('shop', { enabled: true, volume: 0.12 }); tracks.at(-1)._state = 'loaded'; handlers.at(-1).load();
     vi.advanceTimersByTime(100);

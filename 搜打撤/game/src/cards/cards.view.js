@@ -120,8 +120,8 @@ function buildCardHTML(c, cls, opts) {
   if (dmgUp) mark = { ...mark, text: SDT.Cards.DMG_TYPE_META[c.dmgType].fmt(dmg + dmgOverride.bonus) };
   const ghostDmg = !showDmg && isDmgType && c._preview;
   // 桌游道具卡的币值角标（右下角金色硬币）
-  const val = +(c.value || 0);
-  const showVal = val > 0;
+  const val = SDT.Cards.sellPrice(c);
+  const showVal = true;
 // 框色=职业（2026-09-12 v3 卡面定调）：战士赤铁/侠客青锋/法师秘法/牧师圣辉/降临者虚空，
 // 无职业卡不带 cf-* 落到默认青灰；颜色变量见 winter.css 末尾 v3 卡框块。
 const CF_SLUGS = { '战士': 'cf0', '侠客': 'cf1', '法师': 'cf2', '牧师': 'cf3', '降临者': 'cf4' };

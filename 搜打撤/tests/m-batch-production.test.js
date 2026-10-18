@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import before from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
-import { approvedRevisionBaseline, isApprovedLampArmorRemoval, RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
+import { approvedRevisionBaseline, APPROVED_1018_PRODUCTION_REVISIONS, isApprovedLampArmorRemoval, RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
 import { isApprovedBackupcellRename } from './helpers/e8-card-inventory.js';
 
 const text = readFileSync('docs/M-BATCH-MATRIX.md', 'utf8');
@@ -88,6 +88,15 @@ describe('M batch production boot', () => {
     for (const [id] of APPROVED_PRODUCTION_FACE_REVISIONS) {
       expect(first.find(card => card.id === id)).toEqual(currentBaseline.production.cards.find(row => row.id === id).card);
     }
+  });
+
+  it('事件与腐化之种投影精确批准值，生产初始化不扩展字段白名单', () => {
+    for (const [id, field, , current] of APPROVED_1018_PRODUCTION_REVISIONS) {
+      expect(first.find(card => card.id === id)[field], `${id}.${field}`).toBe(current);
+    }
+    expect(first.find(card => card.id === 'cc-rot-seed').rules).toEqual({
+      version: 1, battle: { target: { side: 'enemy', area: false }, hosted: ['rot-seed'] },
+    });
   });
 
   it('神秘药水文案只同步主动战斗与下回合时点，保留精确 M9 宿主', () => {

@@ -1,0 +1,25 @@
+{
+  "artifact": "D:\\素材\\代号柒\\搜打撤\\.tmp\\exe-stability-1018\\delivery\\搜打撤-代号7-资源修复版-20261018.exe",
+  "artifactSHA256": "395b54650f7b724a62b79e2d10908c3c286defb54ac84ab4bf84da341b05fe0c",
+  "work": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-EhtbS5",
+  "first": {
+    "pid": 39788,
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-EhtbS5\\临时 resources\\nsaEFB9.tmp\\app",
+    "files": 1837,
+    "missing": []
+  },
+  "second": {
+    "pid": 43500,
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-EhtbS5\\临时 resources\\nsd9D4E.tmp\\app",
+    "files": 1837,
+    "missing": []
+  },
+  "final": {
+    "root": "C:\\Users\\太平\\AppData\\Local\\Temp\\c7-portable-check-EhtbS5\\临时 resources\\nsaEFB9.tmp\\app",
+    "files": 1837,
+    "missing": []
+  },
+  "firstExit": 0,
+  "secondExit": 0,
+  "passed": true
+}

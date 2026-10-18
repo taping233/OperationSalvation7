@@ -1,3 +1,4 @@
+import { rollEventDice } from './helpers/event-dice.js';
 import { bagSlots } from '../game/src/hub/game.bag.bridge.js';
 import { openRewardCapacityOrganizer } from '../game/src/ui/reward-capacity-organizer.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -69,6 +70,26 @@ async function openEvent(id, rewards = []) {
 function returnFromBag() { UI.hideOverlay(); const hook = takeBagReturnHook(); if (hook) hook(); else H.game.state = 'idle'; }
 const potionCards = [1, 2, 3].map(i => ({ id: `p${i}`, name: `药水${i}`, type: '道具', rarity: '古朴' }));
 
+it('动力锤委托与领锤互斥，委托随已消费节点保存且旧按钮不重复接受', async () => {
+  const hammer={id:'cmtn0xt0zr7',name:'闪金之锤',type:'装备',rarity:'传说'};
+  await openEvent('tt6-goldhammer',[hammer]);
+  const choose=UI._acts.evtChoice;choose({i:'1'});choose({i:'0'});choose({i:'1'});
+  expect(H.game.nodeRewards['0,1'].commission).toEqual({status:'pending'});
+  expect(H.game.ownedCards).toHaveLength(0);
+  expect(H.game.visited['0,1']).toBe(1);
+  expect(H.saves.at(-1).nodeRewards['0,1'].commission).toEqual({status:'pending'});
+});
+
+it('救护站随机招式不同时治疗；投骰后固定待领奖，重复确认不重复发牌', async () => {
+  const moves=[{id:'move',name:'防身术',type:'武术',rarity:'古朴'}];
+  await openEvent('tt6-relief',moves);UI._acts.evtChoice({i:'1'});
+  expect(H.game.hp).toBe(1);expect(H.game.ownedCards).toHaveLength(0);
+  rollEventDice(UI);
+  expect(window.SDT.Chests.serialize(H.game).current.cards.map(c=>c.id)).toEqual(['move']);
+  UI._acts.chestTake();UI._acts.chestTake();
+  expect(H.game.hp).toBe(1);expect(H.game.ownedCards.map(o=>o.card.id)).toEqual(['move']);
+});
+
 describe('事件等待与回调生命周期审计', () => {
   it.each(['new-run', 'new-page'])('叙事等待期间 %s 后旧结果不覆盖当前页面', async change => {
     let resolveNarrative;
@@ -94,7 +115,7 @@ describe('事件等待与回调生命周期审计', () => {
     expect(H.game.coins).toBe(18);
     expect(H.game.fragments || 0).toBe(0);
     expect(H.game.visited).toEqual({});
-    if (change === 'reenter') { UI._acts.evtChoice({ i: '0' }); expect(H.game.coins).toBe(20); }
+    if (change === 'reenter') { UI._acts.evtChoice({ i: '0' }); rollEventDice(UI); expect(H.game.coins).toBe(21); }
   });
   it('背包返回恢复一级事件，当前选择执行一次', async () => {
     await openEvent('tt6-mystery');
@@ -102,11 +123,11 @@ describe('事件等待与回调生命周期审计', () => {
     UI.showOverlay('背包', '<main>背包</main>', 'page'); returnFromBag();
     old({ i: '0' });
     expect(H.game.coins).toBe(18);
-    const current = UI._acts.evtChoice; current({ i: '0' }); current({ i: '0' });
-    expect(H.game.coins).toBe(20); expect(H.game.fragments).toBe(1);
+    const current = UI._acts.evtChoice; current({ i: '0' }); rollEventDice(UI); current({ i: '0' });
+    expect(H.game.coins).toBe(21); expect(H.game.fragments).toBe(0);
   });
   it.each(['new-run', 'new-page', 'bag-return'])('二级药摊 %s 后旧选卡回调不能领卡', async change => {
-    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i: '0' });
+    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i: '0' }); rollEventDice(UI);
     const old = UI._acts.eventCardPick;
     if (change === 'new-run') H.game.discoveredPairs = new Set();
     UI.showOverlay('其他页面', '<main>其他内容</main>', 'page');
@@ -118,26 +139,27 @@ describe('事件等待与回调生命周期审计', () => {
   it('重编背包返回保留已选卡，旧启动回调不再二次转换', async () => {
     const moves = [1, 2, 3, 4].map(i => ({ id: `m${i}`, name: `招式${i}`, type: '武术', rarity: '古朴' }));
     H.game.ownedCards = moves.slice(0, 2).map((card, i) => ({ uid: `owned${i}`, card }));
-    await openEvent('ev19-recode', moves); UI._acts.evtChoice({ i: '0' });
+    await openEvent('ev19-recode', moves); UI._acts.evtChoice({ i: '0' }); rollEventDice(UI);
     UI._acts.eventRecodePick({ i: '0' }); UI._acts.eventRecodePick({ i: '1' });
     const oldGo = UI._acts.eventRecodeGo;
     UI.showOverlay('背包', '<main>背包</main>', 'page'); returnFromBag();
     expect(UI.el.ovBody.querySelectorAll('.picked')).toHaveLength(2);
     oldGo(); expect(H.game.ownedCards.map(o => o.card.id)).toEqual(['m1', 'm2']);
-    const currentGo = UI._acts.eventRecodeGo; currentGo();
+    const currentGo = UI._acts.eventRecodeGo; currentGo(); rollEventDice(UI);
     const after = H.game.ownedCards.map(o => o.card.id); currentGo();
     expect(H.game.ownedCards.map(o => o.card.id)).toEqual(after);
   });
   it('黑市背包返回保留四次失败后的保底次数，旧回调不扣币', async () => {
     const rewards = [{ id: 'e1', name: '装备', type: '装备', rarity: '古朴' }, ...[1, 2].map(i => ({ id: `m${i}`, name: `招式${i}`, type: '武术', rarity: '古朴' }))];
-    await openEvent('ev19-gamble', rewards); UI._acts.evtChoice({ i: '0' });
-    for (let i = 0; i < 4; i++) UI._acts.eventGambleTry();
+    await openEvent('ev19-gamble', rewards); UI._acts.evtChoice({ i: '0' }); rollEventDice(UI);
+    H.random = () => 0.1;
+    for (let i = 0; i < 4; i++) { UI._acts.eventGambleTry(); rollEventDice(UI); }
     expect(H.game.coins).toBe(6);
     const oldTry = UI._acts.eventGambleTry;
     UI.showOverlay('背包', '<main>背包</main>', 'page'); returnFromBag();
     expect(UI.el.ovBody.textContent).toContain('已尝试 4/5');
     oldTry(); expect(H.game.coins).toBe(6);
-    UI._acts.eventGambleTry(); expect(H.game.coins).toBe(3); expect(H.game.ownedCards).toHaveLength(0);
+    UI._acts.eventGambleTry(); rollEventDice(UI); expect(H.game.coins).toBe(3); expect(H.game.ownedCards).toHaveLength(0);
     expect(window.SDT.Chests.serialize(H.game).current.cards).toHaveLength(3);
     UI._acts.chestTake(); expect(H.game.ownedCards).toHaveLength(3);
   });
@@ -164,7 +186,7 @@ describe('事件等待与回调生命周期审计', () => {
   it.each(['ev19-recode', 'ev19-gamble'])('%s 中途放弃后旧恢复hook与动作不能复活奖励', async id => {
     const rewards = [{ id: 'e1', name: '装备', type: '装备', rarity: '古朴' }, ...[1, 2, 3].map(i => ({ id: `m${i}`, name: `招式${i}`, type: '武术', rarity: '古朴' }))];
     H.game.ownedCards = rewards.slice(1, 3).map((card, i) => ({ uid: `u${i}`, card }));
-    await openEvent(id, rewards); UI._acts.evtChoice({ i: '0' });
+    await openEvent(id, rewards); UI._acts.evtChoice({ i: '0' }); rollEventDice(UI);
     const restore = takeBagReturnHook();
     const leave = UI._acts[id === 'ev19-recode' ? 'eventRecodeLeave' : 'eventGambleLeave'];
     const oldAction = UI._acts[id === 'ev19-recode' ? 'eventRecodePick' : 'eventGambleTry'];
@@ -174,7 +196,7 @@ describe('事件等待与回调生命周期审计', () => {
     expect(UI.el.overlay.hidden).toBe(true); expect(takeBagReturnHook()).toBeNull();
   });
   it('二级奖励旧恢复hook在同槽新局不会覆盖新页', async () => {
-    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i: '0' });
+    await openEvent('ev19-potions', potionCards); UI._acts.evtChoice({ i: '0' }); rollEventDice(UI);
     const restore = takeBagReturnHook(); H.game.discoveredPairs = new Set();
     UI.showOverlay('新局页面', '<main id="new-run-page">新局</main>', 'page'); restore();
     expect(document.getElementById('new-run-page')?.textContent).toBe('新局');
@@ -221,7 +243,7 @@ describe('事件等待与回调生命周期审计', () => {
     const hammer = { id:'cmtn0xt0zr7', name:'闪金之锤', rarity:'传说', type:'装备' };
     H.game.canReceiveCard = () => false;
     await openEvent('tt6-goldhammer', [hammer]);
-    UI._acts.evtChoice({ i:'0' });
+    UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     const saved = window.SDT.Chests.serialize(H.game);
     expect(saved.current.cards.map(c => c.id)).toEqual([hammer.id]);
     UI._acts.chestTake1({ i:'0' });
@@ -290,7 +312,7 @@ describe('事件等待与回调生命周期审计', () => {
   it('无人机实际领取拒绝不发碎片不消费节点，保选择且可改选货币', async () => {
     let checks=0; H.game.canReceiveCard=()=>++checks<3;
     await openEvent('tt6-systemsupply',[{id:'tt-wood',name:'木材',type:'资源'}]);
-    UI._acts.evtChoice({i:'0'});
+    UI._acts.evtChoice({i:'0'}); rollEventDice(UI); rollEventDice(UI);
     expect(H.game.fragments).toBe(0); expect(H.game.ownedCards).toHaveLength(0);
     expect(H.game.visited).toEqual({});
     expect(UI.el.ovBody.textContent).toContain('奖励与选择已保留');
@@ -301,7 +323,7 @@ describe('事件等待与回调生命周期审计', () => {
   it('无人机返回后改选货币或取消选择，普通背包往返保最新阅读状态', async () => {
     H.game.canReceiveCard=()=>false;
     await openEvent('tt6-systemsupply',[{id:'tt-wood',name:'木材',type:'资源'}]);
-    UI._acts.evtChoice({i:'0'}); UI.el.ovBody.querySelector('[data-organize=return]').click();
+    UI._acts.evtChoice({i:'0'}); rollEventDice(UI); rollEventDice(UI); UI.el.ovBody.querySelector('[data-organize=return]').click();
     UI.el.ovBody.querySelector('[data-i="1"]').click(); UI._acts.evtBag(); returnFromBag();
     expect(UI.el.ovBody.querySelector('[data-i="1"]').getAttribute('aria-pressed')).toBe('true');
     UI.el.ovBody.querySelector('.event-choice-clear').click(); UI._acts.evtBag(); returnFromBag();
@@ -311,7 +333,7 @@ describe('事件等待与回调生命周期审计', () => {
   it('无人机新局后旧整理页不能领取木材与碎片', async () => {
     H.game.canReceiveCard=()=>false;
     await openEvent('tt6-systemsupply',[{id:'tt-wood',name:'木材',type:'资源'}]);
-    UI._acts.evtChoice({i:'0'});
+    UI._acts.evtChoice({i:'0'}); rollEventDice(UI); rollEventDice(UI);
     const back=UI.el.ovBody.querySelector('[data-organize=return]');
     H.game.discoveredPairs=new Set(); H.game.canReceiveCard=()=>true;
     back.click();

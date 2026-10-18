@@ -1,0 +1,27 @@
+{
+  "accepted_unchanged": [
+    "v2-01-click",
+    "v2-02-confirm"
+  ],
+  "scope": "reward only; remove the v2 pressure/bass gesture",
+  "audio_inputs": [],
+  "runtime_installed": false,
+  "tests_run": false,
+  "listening_verified": false,
+  "files": [
+    {
+      "file": "v3-reward-A-light.mp3",
+      "seconds": 0.29,
+      "designed_peak": 0.115,
+      "wav_sha256": "08973e823e08ffaf0f894600cad891e451635643f3a325363ffeb406035217ac",
+      "mp3_sha256": "c5f59e9eff1c3383bd849f7dfdda93f659d3fb3908e5d8d03b5a88900594ee5a"
+    },
+    {
+      "file": "v3-reward-B-compact.mp3",
+      "seconds": 0.19,
+      "designed_peak": 0.125,
+      "wav_sha256": "79c6921b97cc84d7ffd0845760060c9cd71cad91a68a326db6d774fd6ee8943e",
+      "mp3_sha256": "f625fae1c95bbc0397045cb934e060082f0af18ab54d69c67ad4668d0679019f"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-18",
+  "selection": "UI SFX / Sci-fi / press, success, reward",
+  "author": "Yuki Capital / romainsimon",
+  "version": "0.4.0",
+  "license": "CC0-1.0",
+  "source_manifest": "sources/uisfx-manifest.json",
+  "purpose": "three low-volume style candidates for user listening; no game changes",
+  "tests_run": false,
+  "listening_verified": false,
+  "files": [
+    {
+      "role": "点击",
+      "cue": "press",
+      "source": "https://raw.githubusercontent.com/romainsimon/uisfx/main/packages/uisfx/sounds/scifi/press.ogg",
+      "original_path": "docs/evidence/2026-10-18-scifi-ui-candidates/sources/scifi-press.ogg",
+      "original_sha256": "9c0591488f72db77ef4862134cd7bb04deb595471b1476b74ffbe3e7805d2f78",
+      "preview_path": "docs/evidence/2026-10-18-scifi-ui-candidates/01-click.mp3",
+      "preview_sha256": "4b139e6269f4a34b93964804f1fb0f8bfc5ee862e471eb256846deffa5c0c167",
+      "source_declared_duration": 0.214,
+      "gain": 0.2,
+      "processing": "author default gain only; no cut, EQ, fade, synthesis or runtime integration"
+    },
+    {
+      "role": "确认",
+      "cue": "success",
+      "source": "https://raw.githubusercontent.com/romainsimon/uisfx/main/packages/uisfx/sounds/scifi/success.ogg",
+      "original_path": "docs/evidence/2026-10-18-scifi-ui-candidates/sources/scifi-success.ogg",
+      "original_sha256": "b29e34f3ce52bc2e3853d2936dcb24b92b8aa53f302b50f2affc6f9d61a57c4c",
+      "preview_path": "docs/evidence/2026-10-18-scifi-ui-candidates/02-confirm.mp3",
+      "preview_sha256": "2b2bf4b2abb3b27de35ba097ab26d199b0a91b259e4c5ca6d76b09380bdbd718",
+      "source_declared_duration": 0.617,
+      "gain": 0.23,
+      "processing": "author default gain only; no cut, EQ, fade, synthesis or runtime integration"
+    },
+    {
+      "role": "奖励",
+      "cue": "reward",
+      "source": "https://raw.githubusercontent.com/romainsimon/uisfx/main/packages/uisfx/sounds/scifi/reward.ogg",
+      "original_path": "docs/evidence/2026-10-18-scifi-ui-candidates/sources/scifi-reward.ogg",
+      "original_sha256": "3c5d9a028e2168e2b343826a2919fed4ab54998f5e5d77b0acd7e7e6d55072aa",
+      "preview_path": "docs/evidence/2026-10-18-scifi-ui-candidates/03-reward.mp3",
+      "preview_sha256": "baf131ed0d4f24a5e79b60453c6072c34e38ddea337b874be239306dc8be2647",
+      "source_declared_duration": 0.534,
+      "gain": 0.22,
+      "processing": "author default gain only; no cut, EQ, fade, synthesis or runtime integration"
+    }
+  ]
+}

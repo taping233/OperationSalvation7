@@ -4,7 +4,7 @@
 
 ## 身份与参考使用
 
-运行立绘已换为 10-13 竖版 `game/assets/portraits/full/heixiang.webp`，本页图片为同图副本。身份要素按指定版本核对；当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)。下方 09-12 与 09-19 描述保留版本差异，不同时套用两种画风或发色。
+运行立绘 `game/assets/portraits/full/heixiang.webp` 于2026-10-18按老板要求恢复至本轮重绘前的10-13版本，1024×1536；保留喝咖啡与背剑，本页图片为同图副本。来源及验证见[统一立绘记录](../evidence/2026-10-18-roster-reference-final/README.md)。当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)。下方09-12与09-19描述保留历史版本差异。
 
 ## 当前角色数据（core/characters.js）
 

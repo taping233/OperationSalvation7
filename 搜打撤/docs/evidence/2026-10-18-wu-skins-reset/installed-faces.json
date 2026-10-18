@@ -1,0 +1,71 @@
+{
+  "status": "installed",
+  "encoding": "Pillow RGB WebP quality=92 method=6; no crop/resize",
+  "items": [
+    {
+      "id": "casual",
+      "asset": "portraits/full/wu-casual-v14.webp",
+      "beforeSha256": "9d729bb8a792107a9cd37c0dbd748e7db977660faa86faff5b3df3aabbc8fcf6",
+      "backup": ".tmp\\nai\\wu-skins-reset-1018\\casual-before-face.webp",
+      "source": "output\\imagegen\\wu-skins-reset-1018\\casual-face-refined.png",
+      "sourceSha256": "99a02c4d820e8abb109d039c60c4ff3300d1006b73e3b2598eacb91bad32108f",
+      "dimensions": [
+        1422,
+        1106
+      ],
+      "entry": {
+        "path": "portraits/full/wu-casual-v14.webp",
+        "ext": "webp",
+        "license": "项目自有（AI 生成）",
+        "bytes": 446236,
+        "sha256": "495775ea0595adf3be5b8b67e8a1d50225ecf6afe644b94eb1695a9bae5adffc",
+        "source": "docs/evidence/2026-10-18-wu-skins-reset/installed-faces.json"
+      },
+      "status": "installed"
+    },
+    {
+      "id": "spring",
+      "asset": "portraits/full/wu-spring-v15.webp",
+      "beforeSha256": "e36ae1e378bd75eed27d29b40f09a80310885f890e9ecae00f94ee382e89c666",
+      "backup": ".tmp\\nai\\wu-skins-reset-1018\\spring-before-face.webp",
+      "source": "output\\imagegen\\wu-skins-reset-1018\\spring-face-refined.png",
+      "sourceSha256": "e29a4a22b7dc62b3c4f479bba707718b70a4f498ece6eb04aaeeb1c6486854a9",
+      "dimensions": [
+        1422,
+        1106
+      ],
+      "entry": {
+        "path": "portraits/full/wu-spring-v15.webp",
+        "ext": "webp",
+        "license": "项目自有（AI 生成）",
+        "bytes": 299146,
+        "sha256": "e6609bfc693cb22eb3fc5e18a29494f9a32cc5418dea35b8ee2eac5365dd93a8",
+        "source": "docs/evidence/2026-10-18-wu-skins-reset/installed-faces.json"
+      },
+      "status": "installed"
+    },
+    {
+      "id": "beach",
+      "asset": "portraits/full/wu-beach.webp",
+      "beforeSha256": "b6918f429e3b3757514d160e26be2559dc9bda5a25b2e5ca26866544a39ba6a3",
+      "backup": ".tmp\\nai\\wu-skins-reset-1018\\beach-before-face.webp",
+      "source": "output\\imagegen\\wu-skins-reset-1018\\beach-face-refined.png",
+      "sourceSha256": "86b8c72bb0698b510785961633a852c7b307c02795ccb622c68386acfabd4ac9",
+      "dimensions": [
+        1422,
+        1106
+      ],
+      "entry": {
+        "path": "portraits/full/wu-beach.webp",
+        "ext": "webp",
+        "license": "项目自有（AI 生成）",
+        "bytes": 340018,
+        "sha256": "57333fc398022d2d1997c3358b6fb1ce6bde9b858316882aa231f6ee25dfd583",
+        "source": "docs/evidence/2026-10-18-wu-skins-reset/installed-faces.json"
+      },
+      "status": "installed"
+    }
+  ],
+  "manifestSha256": "65820ba3d2bc4a684288c1c023a0ef258c423f534df6a0cfe402a3dcb6894735",
+  "countChanged": false
+}

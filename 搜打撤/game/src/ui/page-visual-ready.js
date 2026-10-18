@@ -69,6 +69,12 @@ export function stageMapReturn(ui, game) {
   const overlay = ui.el.overlay;
   const cover = document.createElement('div');
   cover.className = 'page-visual-handoff page-visual-return';
+  if (ui.el.ovBody.querySelector('.node-pg, .event-scene, .reward-replica, .cqo-overview, .shop-market')) {
+    cover.classList.add('node-map-return');
+    const label = document.createElement('span');
+    label.textContent = '返回探索';
+    cover.append(label);
+  }
   cover.setAttribute('aria-hidden', 'true');
   document.body.append(cover);
   const block = event => {

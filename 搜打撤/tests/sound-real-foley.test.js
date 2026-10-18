@@ -1,7 +1,9 @@
+// Historical credit assertions use the fixed pre-replacement page, alongside before.catalog.js.
+// Historical integration provenance; current runtime replacement is covered by sound-web-library.test.js.
 import { describe, expect, it } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { SAMPLE_CUES } from '../game/src/audio/sound.samples.catalog.js';
+import { SAMPLE_CUES } from '../docs/evidence/2026-10-18-web-sfx-replacement/before.catalog.js';
 import { SAMPLE_CUES as BEFORE } from '../docs/evidence/2026-10-17-real-foley-batch/before/sound.samples.catalog.js';
 const evidence = 'docs/evidence/2026-10-17-real-foley-batch/';
 const readJson = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -31,8 +33,8 @@ describe('recorded Vehicle library integration', () => {
     expect(paths).toHaveLength(6);
     const nextPaths = ['sfx/real-foley/lockbox-turn-06.wav', 'sfx/real-foley/lockbox-unlock-01.wav'];
     expect(nextReceipt.files.map(item => item.path)).toEqual(nextPaths);
-    expect(current.assets.filter(item => ![...paths, ...nextPaths].includes(item.path))).toEqual(before.assets);
-    expect(current.count).toBe(before.count + 8);
+    for (const asset of before.assets.filter(item => item.path.startsWith('sfx/'))) expect(current.assets.find(item => item.path === asset.path)).toEqual(asset);
+    expect(current.count).toBe(current.assets.length);
     for (const file of receipt.files) {
       expect(current.assets.find(item => item.path === file.path)).toEqual(file);
       const bytes = readFileSync(`game/assets/${file.path}`);
@@ -44,7 +46,7 @@ describe('recorded Vehicle library integration', () => {
   });
   it('records provenance, gives visible credits, and does not claim listening approval', () => {
     expect(receipt.listening_verified).toBe(false);
-    expect(readFileSync('game/index.html', 'utf8')).toContain('Vehicle / Jan Schupke — Fantasy SFX Libraries');
+    expect(readFileSync('docs/evidence/2026-10-18-web-sfx-replacement/before.index.html', 'utf8')).toContain('Vehicle / Jan Schupke — Fantasy SFX Libraries');
     const sources = readFileSync('game/assets/sfx/real-foley/SOURCES.md', 'utf8');
     expect(sources).toContain('https://creativecommons.org/publicdomain/zero/1.0/');
     expect(sources).toContain('本轮未人工耳听');

@@ -1,0 +1,93 @@
+{
+  "provider": "OtoLogic",
+  "license": "CC BY 4.0",
+  "license_url": "https://otologic.jp/free/license",
+  "credit": "Sound effects: OtoLogic (https://otologic.jp), CC BY 4.0",
+  "method": "official page download links via Codex built-in browser; no account; archives are not executed",
+  "archives": [
+    {
+      "pack": "Cyber14",
+      "archive": "sources/japanese/Cyber14-mp3.zip",
+      "url": "https://otologic.jp/sounds/se/mp3-zip/Cyber14-mp3.zip",
+      "sha256": "482268cfc7f41407e860fd579da0756a4cdb299c372d189e5af4ea6ab3c2ec73",
+      "bytes": 11412,
+      "files": [
+        "Cyber14/Cyber14-1.mp3",
+        "Cyber14/Cyber14-2.mp3"
+      ]
+    },
+    {
+      "pack": "Assorted_SE01",
+      "archive": "sources/japanese/Assorted_SE01-mp3.zip",
+      "url": "https://otologic.jp/sounds/se/mp3-zip/Assorted_SE01-mp3.zip",
+      "sha256": "f9327a7177e8e7ae1182bf8421fce0eb2ad0675722c4b4f0caae74f8877f55a2",
+      "bytes": 172386,
+      "files": [
+        "Assorted_SE01/Assorted_SE01-01.mp3",
+        "Assorted_SE01/Assorted_SE01-02.mp3",
+        "Assorted_SE01/Assorted_SE01-03.mp3",
+        "Assorted_SE01/Assorted_SE01-04.mp3",
+        "Assorted_SE01/Assorted_SE01-05.mp3",
+        "Assorted_SE01/Assorted_SE01-06.mp3",
+        "Assorted_SE01/Assorted_SE01-07.mp3",
+        "Assorted_SE01/Assorted_SE01-08.mp3",
+        "Assorted_SE01/Assorted_SE01-09.mp3",
+        "Assorted_SE01/Assorted_SE01-10.mp3",
+        "Assorted_SE01/Assorted_SE01-11.mp3",
+        "Assorted_SE01/Assorted_SE01-12.mp3",
+        "Assorted_SE01/Assorted_SE01-13.mp3",
+        "Assorted_SE01/Assorted_SE01-14.mp3",
+        "Assorted_SE01/Assorted_SE01-15.mp3",
+        "Assorted_SE01/Assorted_SE01-16.mp3",
+        "Assorted_SE01/Assorted_SE01-17.mp3",
+        "Assorted_SE01/Assorted_SE01-18.mp3",
+        "Assorted_SE01/Assorted_SE01-19.mp3",
+        "Assorted_SE01/Assorted_SE01-20.mp3",
+        "Assorted_SE01/Assorted_SE01-21.mp3",
+        "Assorted_SE01/Assorted_SE01-22.mp3",
+        "Assorted_SE01/Assorted_SE01-23.mp3",
+        "Assorted_SE01/Assorted_SE01-24.mp3",
+        "Assorted_SE01/Assorted_SE01-25.mp3",
+        "Assorted_SE01/Assorted_SE01-26.mp3",
+        "Assorted_SE01/Assorted_SE01-27.mp3",
+        "Assorted_SE01/Assorted_SE01-28.mp3"
+      ]
+    },
+    {
+      "pack": "Assorted_SE08",
+      "archive": "sources/japanese/Assorted_SE08-mp3.zip",
+      "url": "https://otologic.jp/sounds/se/mp3-zip/Assorted_SE08-mp3.zip",
+      "sha256": "7eaf546cc63f6b3fa3ab61c94df0fd9035c6b7381c6f90605df85feb346dc25f",
+      "bytes": 320302,
+      "files": [
+        "Assorted_SE08/Assorted_SE08-01.mp3",
+        "Assorted_SE08/Assorted_SE08-02.mp3",
+        "Assorted_SE08/Assorted_SE08-03.mp3",
+        "Assorted_SE08/Assorted_SE08-04.mp3",
+        "Assorted_SE08/Assorted_SE08-05.mp3",
+        "Assorted_SE08/Assorted_SE08-06.mp3",
+        "Assorted_SE08/Assorted_SE08-07.mp3",
+        "Assorted_SE08/Assorted_SE08-08.mp3",
+        "Assorted_SE08/Assorted_SE08-09.mp3",
+        "Assorted_SE08/Assorted_SE08-10.mp3",
+        "Assorted_SE08/Assorted_SE08-11.mp3",
+        "Assorted_SE08/Assorted_SE08-12.mp3",
+        "Assorted_SE08/Assorted_SE08-13.mp3",
+        "Assorted_SE08/Assorted_SE08-14.mp3",
+        "Assorted_SE08/Assorted_SE08-15.mp3",
+        "Assorted_SE08/Assorted_SE08-16.mp3",
+        "Assorted_SE08/Assorted_SE08-17.mp3",
+        "Assorted_SE08/Assorted_SE08-18.mp3",
+        "Assorted_SE08/Assorted_SE08-19.mp3",
+        "Assorted_SE08/Assorted_SE08-20.mp3",
+        "Assorted_SE08/Assorted_SE08-21.mp3",
+        "Assorted_SE08/Assorted_SE08-22.mp3",
+        "Assorted_SE08/Assorted_SE08-23.mp3",
+        "Assorted_SE08/Assorted_SE08-24.mp3",
+        "Assorted_SE08/Assorted_SE08-25.mp3",
+        "Assorted_SE08/Assorted_SE08-26.mp3",
+        "Assorted_SE08/Assorted_SE08-27.mp3"
+      ]
+    }
+  ]
+}

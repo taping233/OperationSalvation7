@@ -1,0 +1,37 @@
+{
+  "status": "independent-original-sketches-for-user-listening",
+  "third_party_audio_inputs": [],
+  "runtime_installed": false,
+  "tests_run": false,
+  "listening_verified": false,
+  "legal_noninfringement_determination": false,
+  "files": [
+    {
+      "name": "01-original-click",
+      "duration": 0.105,
+      "designed_peak_linear": 0.105,
+      "seed": 71018,
+      "wav_sha256": "cba70d421f8315f8faa49137b826917076a03aadf28c9b0fca9a5cc577f526e6",
+      "mp3_sha256": "d980b0d434f11001642606c995a71628b6aac1bf3a13a8d5e4c5f1f60f132182",
+      "source": "Independent mathematical synthesis; no source audio input"
+    },
+    {
+      "name": "02-original-confirm",
+      "duration": 0.29,
+      "designed_peak_linear": 0.115,
+      "seed": 71019,
+      "wav_sha256": "1a3e329ab6ae6c3d6c58a44522e8b55a48989811fd89b7ecd5c2a9b959268454",
+      "mp3_sha256": "ea881baff3731e1d489d6111fe383cf30536d23448a4cf1d57d64bbf0f8bec33",
+      "source": "Independent mathematical synthesis; no source audio input"
+    },
+    {
+      "name": "03-original-reward",
+      "duration": 0.48,
+      "designed_peak_linear": 0.12,
+      "seed": 71020,
+      "wav_sha256": "7093f5324690ca1280c3d647b9cf547c54ba153fe42d31948a5c3a227504826f",
+      "mp3_sha256": "b6f4772e45ee19ddafb429b206041c49832981c8c76d8c83e9ed26d815cf4c6e",
+      "source": "Independent mathematical synthesis; no source audio input"
+    }
+  ]
+}

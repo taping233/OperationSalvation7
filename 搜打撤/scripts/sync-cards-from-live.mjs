@@ -63,6 +63,7 @@ const MIGRATION_MODULES = [
   ['cards.sync.m9.js', 'ensureM9HostedRules'],
   ['cards.sync.m10.js', 'ensureM10HostedEquipmentRules'],
   ['cards.sync.m11.js', 'ensureM11HostedRules'],
+  ['rot-seed-revision.js', 'ensureRotSeedRevision'],
 ];
 const CAPABILITY_MODULE = ['card-rules.capability.js', 'inspectCardRuleCapability'];
 // 2026-09-29 沙箱失真修复：cards.sync.js 的 backfillStructuredRuleDefinitions 依赖

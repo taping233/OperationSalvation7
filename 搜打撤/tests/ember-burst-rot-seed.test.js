@@ -119,20 +119,25 @@ describe('余烬爆裂 + 腐化之种', () => {
     expect(g.logs.some(l => l.includes('再施放一次'))).toBe(false);
   });
 
-  it('实打：腐化之种附加 2 层中毒；目标死亡时层数转移给另一名敌人', async () => {
+  it('实打：腐化之种标记单敌，死亡后对其余全部敌人造成等同中毒层数的真实伤害', async () => {
     const g = makeGame([rot(), shot()]);
-    // 靶子A 血量 2（中毒后被补刀击杀），靶子B 承接转移
-    BattleSession.start(g, [foeDef('中毒靶', 2), foeDef('承接靶')], { isBoss: false, name: '腐化测试' });
+    // 被标记者被补刀击杀；其余两敌同时承受死亡时的中毒层数伤害。
+    BattleSession.start(g, [foeDef('中毒靶', 2), foeDef('旁观靶甲'), foeDef('旁观靶乙')], { isBoss: false, name: '腐化测试' });
     await drain();
+    const before = snap().foes.map(foe => foe.hp);
 
     await playOwned(g, rot(), 0);
     expect(snap().foes[0].status.poison).toBe(2);                 // 中毒靶挂 2 层
+    expect(snap().foes[0].rotSeedMarked).toBe(true);
 
-    // 同回合用固定伤补刀（毒尚未结算，2 层原样转移）
+    // 同回合补刀，中毒未结算，死亡时按 2 层爆发。
     await playOwned(g, shot(), 0);
     expect(snap().foes[0].dead).toBe(true);
-    expect(snap().foes[1].status.poison).toBe(2);                 // 承接靶获得 2 层中毒
-    expect(g.logs.some(l => l.includes('腐化之种') && l.includes('2 层中毒转移给'))).toBe(true);
+    for (const index of [1, 2]) {
+      expect(snap().foes[index].hp).toBe(before[index] - 2);
+      expect(snap().foes[index].status.poison || 0).toBe(0);
+    }
+    expect(g.logs.some(l => l.includes('腐化之种') && l.includes('真实伤害'))).toBe(true);
   });
 
   it('对照：中毒来自其他卡（毒箭）时，击杀不触发转移', async () => {

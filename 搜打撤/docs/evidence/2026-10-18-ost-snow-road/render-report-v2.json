@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "video": "output\\ost-snow-road-1018\\霜窗回声_蓝白手书EP_v2_1080p.mp4",
+  "bytes": 19259874,
+  "sha256": "d857e02dbb70ff855ff9c65aab1b6cf9a03cdd75326b60326bc18210c4dfa13c",
+  "duration_seconds": 91.4285625,
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "frames": 2743,
+  "render_seconds": 125.3,
+  "inputs": [
+    {
+      "path": "output\\ost-snow-road-1018\\霜窗回声_EP封面_v2.png",
+      "sha256": "e27ae9c67810df0b451f38db9be1ead25c57cefcd015c275a8970d80779fa5a7"
+    },
+    {
+      "path": "搜打撤\\game\\assets\\music-demo\\01-title-frostglass-v12.ogg",
+      "sha256": "1080484e7d1747339a145b247ce523f0776770e7c1e74398fe5b398a9f07309a"
+    }
+  ],
+  "visible_text": [
+    "霜窗回声"
+  ],
+  "design": "Blue-white handwritten anime EP; broad pale negative space; no English, player controls, time, progress or spectrum; sparse snow and 0.8% slow camera travel.",
+  "generation": "Built-in image_gen edit using the first homepage wallpaper; full prompt and source in generated-assets-v2.json.",
+  "acquisition": "Run python docs/evidence/2026-10-18-ost-snow-road/render_ost_v2.py --render. Local existing Pillow/numpy/FFmpeg. Video and cover remain in ignored root output/."
+}

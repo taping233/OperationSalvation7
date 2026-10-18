@@ -126,6 +126,14 @@
         "kind": "audit_context",
         "detail": "能源结晶前置可用性由地图空堆守卫和battle.bag执行入口/队列复检负责；energy-crystal-restoration覆盖空堆不消费、非空复原及队列复检。"
       }
+    },
+    {
+      "id": "cc-rot-seed",
+      "clause": "被标记的敌人死亡时，对所有敌人造成等同于其死亡时中毒层数的真实伤害",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "2026-10-18 批准的腐化之种死亡群体真伤由 rot-seed hosted 标记及真实战斗死亡结算负责；逐句即时审计没有被标记者死亡上下文。tests/ember-burst-rot-seed.test.js 覆盖真实出牌附毒、标记目标死亡后按死亡时中毒层数对其余全部敌人造成真实伤害。"
+      }
     }
   ]
 }

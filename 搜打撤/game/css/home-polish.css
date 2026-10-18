@@ -393,6 +393,12 @@ body #title#title.home-composed[data-surface-motion][data-surface-phase]:not([da
 body #title.home-composed .home-plate:active::after, body #title.home-composed .home-tool:active::after { filter: brightness(.82); }
 body #title.home-composed .home-plate:focus-visible { outline-offset: 4px; }
 
+/* Original utility plates retain their geometry and styling; only deepen the glass blur. */
+body #title.home-composed :is(#btnTitleMute, #mInbox)::after {
+  -webkit-backdrop-filter: blur(18px) saturate(.75);
+  backdrop-filter: blur(18px) saturate(.75);
+}
+
 /* Group art keeps its warmer colour and faces; local glass plates carry menu contrast. */
 body #title.home-composed .title-bg-alternate { filter: saturate(.88) contrast(1.03) brightness(.96); }
 body #title.home-composed[data-home-wallpaper="ensemble"]::after {

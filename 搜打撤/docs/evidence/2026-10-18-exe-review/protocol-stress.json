@@ -1,0 +1,15 @@
+{
+  "requests": 600,
+  "concurrency": 32,
+  "cancelled": 200,
+  "statuses": [
+    200
+  ],
+  "streamErrors": 200,
+  "streamErrorExamples": [
+    "[game-file] assets\\01-title-frostglass-v12-CP1hqFy8.ogg: The operation was aborted",
+    "[game-file] assets\\05-shop-lamplight-deal-v3-ChB2vbnD.ogg: The operation was aborted",
+    "[game-file] assets\\battle\\fx-block.webp: The operation was aborted"
+  ],
+  "unhandled": []
+}

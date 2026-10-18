@@ -1,0 +1,26 @@
+{
+  "artifact": ".tmp\\exe-errors-1018\\delivery-fixed\\搜打撤-代号7-修复版-20261018.exe",
+  "bytes": 287814417,
+  "sha256": "58439159bfd8abd4ae1648c803c9598ceceeb10598b861da86ac425664bc5325",
+  "codeFiles": [
+    "main.js",
+    "game-file-protocol.cjs",
+    "preload.js",
+    "suggestions-store.cjs",
+    "startup-window.cjs",
+    "startup-preload.cjs",
+    "startup.html",
+    "app.ico",
+    "package.json"
+  ],
+  "unchangedGame": {
+    "files": 1526,
+    "bytes": 212699680
+  },
+  "runtimeFiles": 13,
+  "runtime": "Electron 44.1.0 Windows x64 portable",
+  "limits": [
+    "No native UI launch, screenshot validation or gameplay performed at user request.",
+    "All frozen game bytes preserved; existing source performance-budget failures remain outside this desktop-only repair."
+  ]
+}

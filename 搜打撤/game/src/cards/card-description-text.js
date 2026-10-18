@@ -1,4 +1,5 @@
-// 卡牌展示文案。只替换已审阅的 id + 原始描述；结算与玩家自定义文字继续使用原值。
+import { rotSeedDescription } from './rot-seed-revision.js';
+// 卡牌展示文案。只替换已审阅的 id + 原始描述；旧存档腐化之种沿现行定版。
 // 文案审阅依据：docs/evidence/2026-10-11-card-description-unification/。
 const descriptions = new Map([
   ["starter-emergency-bandage", ["回复12 点生命。", "你回复 12 点生命。"]],
@@ -227,6 +228,7 @@ const descriptions = new Map([
 ]);
 
 export function displayCardDescription(value, id) {
+  value = rotSeedDescription({ id, desc:value });
   const source = String(value || '').replaceAll('消耗口袋', '消耗区');
   const revision = descriptions.get(String(id || ''));
   return revision && source === revision[0] ? revision[1] : source;

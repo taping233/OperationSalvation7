@@ -1,0 +1,40 @@
+/* 10-18 player feedback: compact controls, stable inventory and clear states. */
+body #overlay#overlay #depMain.pg.hub.camp-detail.departure-cover .dep-filters { gap:8px; margin-bottom:10px; padding:0; }
+body #overlay#overlay #depMain.pg.hub.camp-detail.departure-cover .dep-filters :is(label,select,button,span) { font-size:15px; }
+body #overlay#overlay #depMain.pg.hub.camp-detail.departure-cover .dep-filters :is(select,button) { min-height:32px; padding:3px 8px; }
+body #overlay .bag-v2 .bag-rail { padding:20px 12px; gap:16px; align-items:center; }
+body #overlay .bag-v2 .bag-rail .archive-back { position:static; inset:auto; flex:none; margin:0 0 20px; width:64px; height:64px; display:grid; place-items:center; }
+body #overlay .bag-v2 .bag-rz { width:88px; min-height:90px; border-radius:4px; }
+body #overlay .bag-v2 .bag-rz.on { background:#c3dce51a; border-color:#b3cbd5; box-shadow:inset 3px 0 #c6dee6; }
+body #overlay .bag-v2 .card-face .hsc-val { visibility:visible; }
+body #overlay .bag-v2 .bag-guide-trigger { display:inline-grid; place-items:center; width:42px; height:42px; min-height:0; padding:9px; margin-left:14px; border:1px solid #c1ced82b; border-radius:2px; color:#bac6cf; background:#ffffff05; cursor:pointer; vertical-align:middle; }
+body #overlay .bag-v2 .bag-guide-trigger svg { width:24px; height:24px; }
+body #overlay .bag-v2 .bag-guide-trigger:hover { color:#eef3f6; border-color:#c1ced880; background:#ffffff0d; }
+body #overlay .bag-v2 .bag-guide-trigger:focus-visible { outline:2px solid #c1ced8; outline-offset:3px; }
+body #overlay#overlay #depMain.pg.hub.camp-detail.departure-cover .dep-recommend .mini-btn { background:#24313c; color:#dce6ed; border-color:#94aabb70; box-shadow:none; }
+body #overlay#overlay #depMain.pg.hub.camp-detail.departure-cover .dep-recommend .mini-btn:hover:not(:disabled) { background:#354552; border-color:#c6d5de; }
+body #overlay#overlay #depMain.pg.hub.camp-detail.departure-cover .dep-recommend .mini-btn:disabled { background:#1c242d; color:#71808d; border-color:#65758340; }
+body #overlay .bag-guide-trigger .ic { width:21px; height:21px; }
+body #overlay .bag-guide { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; max-height:65vh; overflow:auto; padding:16px 22px; }
+body #overlay .bag-guide-heading { grid-column:1/-1; padding:12px 0 20px; border-bottom:1px solid #adc8d340; }
+body #overlay .bag-guide-heading small { font-size:16px; letter-spacing:.16em; color:#9bb9c5; }
+body #overlay .bag-guide-heading h2 { margin:10px 0 0; font-size:34px; color:#edf2ed; }
+body #overlay .bag-guide .help-item { margin:0; padding:18px; background:#14232be8; border-left:2px solid #7999a7; color:#c4d3da; font:400 20px/1.6 var(--font-ui); }
+body #overlay .bag-guide .help-item b { display:block; margin-bottom:8px; color:#e8eee8; font-size:23px; }
+body #overlay .bag-guide details { grid-column:1/-1; padding:14px 18px; color:#bdcdd5; }
+.expedition-toolbar [data-expedition-tool="bag"] { position:relative; overflow:hidden; border-bottom:3px solid #718d9b; }
+.expedition-toolbar [data-expedition-tool="bag"]::after { content:''; position:absolute; bottom:0; left:0; height:3px; width:var(--bag-fill); background:#c4dde6; pointer-events:none; }
+.expedition-toolbar .expedition-bag-status { font-size:14px; color:#b9d3de; white-space:nowrap; }
+.expedition-toolbar [data-capacity-state="tight"] { border-color:#d5be85; }
+.expedition-toolbar [data-capacity-state="tight"] .expedition-bag-status { color:#efdaa7; }
+.expedition-toolbar [data-capacity-state="full"] { border-color:#d78d7e; background:#472b2de8; }
+.expedition-toolbar [data-capacity-state="full"] .expedition-bag-status { color:#ffd2bc; }
+body #overlay#overlay #hubMain .facilities-v12 .facility-tile { min-width:0; overflow:hidden; padding-right:38px; }
+body #overlay#overlay #hubMain .facilities-v12 .facility-tile > b { display:flex; flex-wrap:wrap; gap:4px 8px; min-width:0; max-width:100%; font-size:28px; line-height:1.4; white-space:normal; }
+body #overlay#overlay #hubMain .facilities-v12 .facility-tile > b small { font-size:18px; white-space:normal; }
+body #overlay#overlay #hubMain .warehouse-rules { flex:none; margin:0 0 12px; color:#b7cbd4; font-size:18px; }
+body #overlay .exr-page .exr-section-title > p { display:none; }
+body #overlay .exr-page .exr-empty { min-height:380px; gap:24px; }
+body #overlay .exr-page .exr-notice:empty { display:none; }
+body #overlay .exr-page .exr-sidebar-scroll { gap:24px; padding-top:24px; }
+body #overlay .exr-page .exr-finish-note > span { font-size:18px; }

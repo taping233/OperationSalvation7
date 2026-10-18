@@ -178,3 +178,7 @@ body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12 butt
 /* 透明默认大图沿用深色人物面板；不再套白底原图的浅舞台与正片叠底。 */
 body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12 .pv12-agent-art[data-portrait-alpha="true"] .pv12-agent-image-stage { background:transparent; border-color:transparent; box-shadow:none; }
 body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12 .pv12-agent-art[data-portrait-alpha="true"] .pv12-agent-image-stage > img { mix-blend-mode:normal; }
+
+/* 默认五图共用白底画布；场景皮肤沿用各自背景。 */
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12 .pv12-agent-art[data-skin="default"] .pv12-agent-image-stage { background:#fff; }
+body #overlay#overlay#overlay#overlay #hubMain.base-frame-v7 .personnel-v12 .pv12-agent-art[data-skin="default"] .pv12-agent-image-stage > img { mix-blend-mode:normal; }

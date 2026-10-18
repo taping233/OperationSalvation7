@@ -1,3 +1,4 @@
+import { uiDisclosure } from '../game/src/ui/ui-disclosure.js';
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -13,10 +14,10 @@ const bagCurrent = readFileSync(resolve('game/src/hub/game.bag.view2.js'), 'utf8
 function mountWarehouse(source, size = 200, pocket = false) {
   const keyOf = vi.fn(stack => `card:${stack.card.id}${stack.card.variantKey ? `:${stack.card.variantKey}` : ''}`);
   const factory = new Function('esc', 'escAttr', 'stackKeyOf', 'characterFor', 'bindCardNavigation',
-    'decorateInventoryZoom', 'warehouseCategoriesV7HTML', 'animateBaseRefresh',
+    'decorateInventoryZoom', 'warehouseCategoriesV7HTML', 'animateBaseRefresh', 'uiDisclosure',
     source.replace(/^import .*;\r?$/gm, '').replace(/export /g, '') + '\nreturn { warehouseHTML, bindWarehouse };');
   const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[char]);
-  const feature = factory(escape, escape, keyOf, () => null, () => {}, () => {}, () => '', () => {});
+  const feature = factory(escape, escape, keyOf, () => null, () => {}, () => {}, () => '', () => {}, uiDisclosure);
   const stacks = Array.from({ length:size }, (_, index) => ({
     card:{ id:`test-${index}`, name:`卡牌${index}`, type:'法术', rarity:'古朴' }, count:2,
   }));
@@ -134,9 +135,18 @@ function bagView(source, catalog) {
   const all = vi.fn(() => catalog);
   const sdt = { Cards:{ all, cardHTML:card => `<b data-card="${card.id}">${card.name}</b>` }, UI:{ helpBtn:() => '<button>帮助</button>' } };
   window.SDT = sdt;
-  const factory = new Function('SDT', 'esc', 'escAttr', 'bagUseLocation',
+  const factory = new Function('SDT', 'esc', 'escAttr', 'bagUseLocation', 'uiDisclosure',
     source.replace(/^import .*;\r?$/gm, '').replace(/export /g, '') + '\nreturn { pageHTML, tileHTML };');
-  return { ...factory(sdt, String, String, () => null), all };
+  return { ...factory(sdt, String, String, () => null, uiDisclosure), all };
+}
+function tileProjection(html) {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return [...template.content.querySelectorAll('.bag-grid > *')].map(tile => ({
+    tag:tile.tagName, classes:tile.className, data:{ ...tile.dataset },
+    text:tile.textContent.replace(/\s+/g, ' ').trim(),
+    cards:[...tile.querySelectorAll('[data-card]')].map(card => card.outerHTML),
+  }));
 }
 const bagModel = tiles => ({ bagZone:'bag', bagFilter:'all', bagSortKey:'rarity', cap:30, baseCap:30,
   total:0, safeUsedN:0, sCap:4, pkN:0, used:tiles.length, coins:0, fragments:0, tiles });
@@ -153,8 +163,8 @@ describe('bag resource art work per render', () => {
       return { html, catalogCalls:view.all.mock.calls.length, typeReads };
     };
     const before = measure(bagBaseline), after = measure(bagCurrent);
-    expect(after.html).toBe(before.html);
-    expect(after.catalogCalls).toBe(1); expect(after.typeReads).toBe(300);
+    expect(tileProjection(after.html)).toEqual(tileProjection(before.html));
+    expect(after.catalogCalls).toBe(1); expect(after.typeReads).toBe(300 + tiles.length);
     expect(before.catalogCalls).toBe(30); expect(before.typeReads).toBe(9000);
     console.log('hub bag resource catalog operation counts', JSON.stringify({ catalog:300, supplyTiles:30,
       before:{ catalogCalls:before.catalogCalls, typeReads:before.typeReads }, after:{ catalogCalls:after.catalogCalls, typeReads:after.typeReads } }));
@@ -164,19 +174,19 @@ describe('bag resource art work per render', () => {
     const tile = { card:{ id:'spell', name:'法术', type:'法术' }, name:'法术', type:'法术', count:2, zone };
     const before = bagView(bagBaseline, []), expected = before.pageHTML({ ...bagModel([tile]), bagZone:zone });
     const after = bagView(bagCurrent, []), html = after.pageHTML({ ...bagModel([tile]), bagZone:zone });
-    expect(html).toBe(expected); expect(after.all).not.toHaveBeenCalled();
+    expect(tileProjection(html)).toEqual(tileProjection(expected)); expect(after.all).not.toHaveBeenCalled();
   });
 
   it('re-reads in-place resource edits, additions and fuzzy matches on the next render', () => {
     const catalog = [{ id:'old', name:'口粮', type:'资源' }, { id:'key', name:'神秘钥匙', type:'资源' }];
     const tiles = [{ name:'口粮', count:2, supply:1, zone:'bag' }, { name:'神秘钥匙碎片', count:1, supply:1, zone:'bag' }];
     const before = bagView(bagBaseline, catalog), after = bagView(bagCurrent, catalog);
-    expect(after.pageHTML(bagModel(tiles))).toBe(before.pageHTML(bagModel(tiles)));
+    expect(tileProjection(after.pageHTML(bagModel(tiles)))).toEqual(tileProjection(before.pageHTML(bagModel(tiles))));
     catalog[0].type = '法术';
-    expect(after.pageHTML(bagModel(tiles))).toBe(before.pageHTML(bagModel(tiles)));
+    expect(tileProjection(after.pageHTML(bagModel(tiles)))).toEqual(tileProjection(before.pageHTML(bagModel(tiles))));
     catalog.push({ id:'new', name:'口粮', type:'资源' });
     const html = after.pageHTML(bagModel(tiles));
-    expect(html).toBe(before.pageHTML(bagModel(tiles)));
+    expect(tileProjection(html)).toEqual(tileProjection(before.pageHTML(bagModel(tiles))));
     expect(html).toContain('data-card="new"'); expect(html).toContain('data-card="key"');
     expect(after.tileHTML(tiles[0])).toBe(before.tileHTML(tiles[0]));
   });

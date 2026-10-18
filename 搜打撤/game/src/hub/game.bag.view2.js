@@ -5,6 +5,7 @@ import SDT from '../core/sdt-facade.js';
 import { esc, escAttr } from '../core/shared.js';
 import '../../css/bag-design-system.css';
 import { bagUseLocation } from './game.bag.rules.js';
+import '../../css/feedback-1018.css';
 
 const RARITY_TINT = { '古朴': '#9fb0ba', '职业': '#5fcf94', '衍生': '#8ba0b8', '稀有': '#57a8f0', '史诗': '#b184e8', '传说': '#f0ac4e', '棱彩': '#ef86bd', '初始': '#8ba0b8' };
 const TYPE_GLYPH = {
@@ -68,7 +69,7 @@ export function tileHTML(t, resourceCards = null) {
     return `<div class="bag-tile bag-slot card-face${spent}" data-supply="${escAttr(t.name)}" tabindex="0"
       style="--tint:${rc}1c;--glow:${rc}30"
       title="${escAttr(t.name)}${t.count > 1 ? ` ×${t.count}` : ''} · ${t.tier || 'C'} 级物资 · 价值 ${(t.value || 0) * (t.count || 1)}">
-      ${SDT.Cards.cardHTML(supplyCard, '', { hideCost: false })}
+      ${SDT.Cards.cardHTML({ ...supplyCard, value:Number(t.value) || 0 }, '', { hideCost: false })}
       ${state ? `<span class="bag-tstate"${t.useStatus?.reason ? ` title="${escAttr(t.useStatus.reason)}"` : ''}>${esc(state)}</span>` : ''}
       ${t.count > 1 ? `<span class="bag-tct">×${t.count}</span>` : ''}
     </div>`;
@@ -106,11 +107,6 @@ export function pageHTML(m) {  const zoneNames = { bag: '随身背包', safe: '�
           <b>${zoneUsed}</b><small>${zoneCap == null ? ' 张 · 不限容量' : `/${zoneCap} 格`}${m.bagZone === 'bag' && ext ? ` · ${m.capacityText ? esc(m.capacityText) : `扩展+${ext}`}` : ''}${m.bagZone === 'bag' && ext ? ` · 盒内 ${m.pearlStoredN || 0}/${ext} 张（不占格）` : ''}</small>
           ${zoneCap == null ? '' : `<span class="bag-count-summary">卡牌 <strong>${cardCount}</strong> 张${m.bagZone === 'bag' && m.supplyN ? ` · 散装物资 ${m.supplyN} 件` : ''}</span>`}
         </div>
-        <div class="bag-cur">
-          <span class="fc-chip">金币 <b>${m.coins}</b></span>
-          <span class="fc-chip">散装物资估值 <b>${m.total.toLocaleString()}</b></span>
-          ${m.fragments > 0 ? `<span class="fc-chip" title="集齐 2 枚，可随员工通行证A合成员工通行证A">[[icon:gem]] 碎片 <b>${m.fragments} 枚</b><small>每次需 2 枚 · 通行证A详情合成／祭坛使用</small></span>` : ''}
-        </div>
       </header>`;
   const tools = m.bagZone === 'bag' ? `
       <div class="bag-tools">
@@ -124,18 +120,19 @@ export function pageHTML(m) {  const zoneNames = { bag: '随身背包', safe: '�
         <div class="bag-grid" data-zone="${m.bagZone}">${m.tiles.map(tile => tileHTML(tile, resourceCards)).join('')}</div>
         ${m.tiles.length ? '' : `<p class="bag-empty2">${m.bagZone === 'bag' && m.bagFilter !== 'all' ? '该分类没有卡牌或物资。<button class="bag-pill" data-act="bagFilter" data-f="all">显示全部</button>' : `（${zoneNames[m.bagZone]}是空的）`}</p>`}
       </div>`;
-  return `<div class="bag-view bag-v2 ui-design-system">
-      <button class="archive-back" data-act="closeBag" title="关闭背包（B）" aria-label="关闭背包">
+  const exit = `<button class="archive-back" data-act="closeBag" title="关闭背包（B）" aria-label="关闭背包">
         <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
                 fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
           <path d="M4 12h10M4 12l4-4M4 12l4 4"
                 fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-      </button>
+      </button>`;
+  return `<div class="bag-view bag-v2 ui-design-system">
       <img class="bag-bg" src="assets/scenes/map-nodes/map-atmosphere-is7-1012.webp" alt="" aria-hidden="true">
       <div class="bag-shell">
         <nav class="bag-rail">
+          ${exit}
           ${railBtn('bag', m.used)}
           ${railBtn('safe', `${m.safeUsedN}/${m.sCap}`)}
           ${railBtn('pocket', m.pkN)}

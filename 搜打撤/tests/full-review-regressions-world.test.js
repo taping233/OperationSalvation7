@@ -1,3 +1,4 @@
+import { rollEventDice } from './helpers/event-dice.js';
 // 09-30 全仓深审 WORLD 组（世界/UI 流程）修复回归。发现来源：
 // docs/evidence/2026-09-30-full-repository-review/world_ui/findings.json，
 // 复现手法沿用其 repro.test.js（mock 装配同款），断言反转成修复后行为。
@@ -199,7 +200,7 @@ describe('09-30 深审 WORLD 组修复回归', () => {
   it('WORLD-003 事件二级选卡页：开关背包不丢已付奖励（付款一次、节点消耗一次）', async () => {
     H.cards = [{ id: 'ev19-quartermaster', type: '事件', name: '装备征用令' }, ...Array.from({ length: 3 }, (_, i) => ({ id: `equip${i}`, name: `装备${i}`, type: '装备', rarity: '古朴' }))];
     H.game.layerData[0].logical[1].def.type = 'event';
-    await flow.runEventDeck(); UI._acts.evtChoice({ i: 0 });
+    await flow.runEventDeck(); UI._acts.evtChoice({ i: 0 }); rollEventDice(UI);
     expect(H.game.coins).toBe(6); expect(H.game.visited['0,1']).toBe(1);
     const pending = H.game.nodeRewards['0,1'];
     expect(pending).toMatchObject({ type:'event-choice', eventId:'ev19-quartermaster', paidCoins:3, taken:null });

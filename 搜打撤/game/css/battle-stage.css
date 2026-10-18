@@ -82,8 +82,8 @@
 #overlay .battle-stage.sts .sts-intent:is(:hover,:focus-visible,.is-open) .bt-intent-detail{display:block}
 #overlay .battle-stage.sts .sts-intent:is(:hover,:focus-visible,.is-open){color:#ffdbc9}
 #overlay .battle-stage.sts .sts-intent .ic{flex:none;width:26px;height:26px}
-#overlay .battle-stage.sts .can-target:not(.dead){outline:1px dashed #a8d6df99;outline-offset:8px}
-#overlay .battle-stage.sts .drag-over:not(.dead){outline:2px solid #d4f1f5;outline-offset:8px}
+#overlay .battle-stage.sts .can-target:not(.dead){cursor:crosshair}
+#overlay .battle-stage.sts .drag-over:not(.dead){outline:none}
 #overlay .battle-stage.sts .sts-hud{position:absolute;inset:0;box-sizing:border-box;padding:0 48px 40px;margin:0;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 264px;grid-template-rows:minmax(0,1fr) auto auto;gap:14px 0;border:0;background:none;box-shadow:none;z-index:9;pointer-events:none}
 #overlay .battle-stage.sts .sts-hud button,#overlay .battle-stage.sts .sts-hud [role="button"]{pointer-events:auto}
 #overlay .battle-stage.sts .sts-resource-dock{position:absolute;left:56px;bottom:40px;width:max-content;max-width:320px;min-height:104px;display:flex;align-items:center;gap:16px;box-sizing:border-box;padding:12px 18px;border:1px solid var(--battle-line);border-radius:14px;background:var(--battle-glass)}
@@ -171,7 +171,7 @@
 #overlay .battle-stage.sts .bt-infuse-actions .mini-btn:disabled{opacity:1;background:#263c47;border-color:#8ba5b045;color:#9fb4bf;cursor:default}
 #overlay .battle-stage.sts:has(>.bt-infuse:not(.bt-pick))>.bt-potions{display:none}
 #overlay .battle-stage.sts>.bt-potions{position:absolute;top:140px;left:62px;transform:none;z-index:13;display:flex;gap:8px;align-items:center;max-width:420px;margin:0;padding:0;background:none;border:0}
-#overlay .battle-stage.sts .bt-potion{position:relative;display:flex;gap:6px;align-items:center;padding:8px 10px;border:1px solid #bdcbd847;background:#19303dd9;color:#d7e5ee;font-size:13px;cursor:pointer}
+#overlay .battle-stage.sts .bt-potion{position:relative;display:flex;gap:8px;align-items:center;padding:10px 14px;border:1px solid #ffffff66;background:#090c10;color:#fff;font-size:18px;cursor:pointer}
 #overlay .battle-stage.sts .bt-potion.off{opacity:.5;cursor:default}
 #overlay .battle-stage.sts .bt-potions-label{font-size:12px;color:#becfda}
 #overlay .battle-stage.sts .bt-potion-tip{position:absolute;left:0;top:100%;transform:none;width:320px;padding:12px;background:#182b38f5;border:1px solid #b7c7d155;color:#e0e8ed;font-size:14px;line-height:1.5}

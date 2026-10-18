@@ -97,10 +97,20 @@ function install(ui = window.SDT?.UI) {
     // 同一基地页的异步资料刷新只替换内容，不中断尚未播完的揭幕。
     if (!refreshHub) clearCampEntry();
     const motionKeyChanged = options?.motionKey && options.motionKey !== this._motionKey;
+    // 背包分区、同页选牌与数量变化只刷新内容；不再清空遮罩并重播整页入场。
+    const contentRefresh = wasOpen && this._lastMode === mode && !motionKeyChanged && !refreshHub
+      && (mode === 'bagpage' && !!body?.querySelector('.bag-v2') && html.includes('bag-v2')
+        || this._motionHeading === heading && mode !== 'battle' && oldProfile !== 'base-content');
+    this._motionHeading = heading;
     this._motionKey = options?.motionKey || null;
     const restart = !wasOpen || this._lastMode !== mode || motionKeyChanged || (mode === 'page' && !refreshHub);
     overlay.style.removeProperty('--page-out');
-    markEntry(kindFor(this, mode, null), restart);
+    if (contentRefresh) {
+      delete overlay.dataset.uiEnter;
+      delete overlay.dataset.uiClosing;
+      delete overlay.dataset.uiInstantClose;
+      clearSurface(overlay);
+    } else markEntry(kindFor(this, mode, null), restart);
     withinShow = true;
     let result;
     try { result = showOverlay.call(this, heading, html, mode, options); }
@@ -112,6 +122,11 @@ function install(ui = window.SDT?.UI) {
     const dedicated = !!currentBody?.querySelector('.city-run-transition, .expedition-cut')
       || !!(currentBody?.querySelector('.studio-unified') && document.querySelector('.page-loading'));
     const reveal = () => {
+    if (contentRefresh) {
+      delete overlay.dataset.uiEnter;
+      clearSurface(overlay);
+      return;
+    }
     if (refreshHub || initialCamp) {
       // 基地外壳始终保持不透明；首次进入由专用编排展开内容，
       // 基地内刷新也不为重建的 header/body 重挂通用入场块。
@@ -142,7 +157,7 @@ function install(ui = window.SDT?.UI) {
     enterArchive(overlay, currentBody, interfaceReducedMotion());
     };
     // 基地内导航直接衔接区域动效，避免每次换房间都盖全屏黑幕。
-    const staged = !dedicated && !initialCamp && !refreshHub
+    const staged = !contentRefresh && !dedicated && !initialCamp && !refreshHub
       && (mode === 'page' || mode === 'bagpage' || (this._roomActive && mode !== 'battle'));
     if (staged) {
       clearSurface(overlay);
@@ -160,7 +175,8 @@ function install(ui = window.SDT?.UI) {
     cancelPageVisual();
     const game = window.SDT?.game;
     if (!options?.immediate && !overlay.hidden && game?.runActive && !game.battleActive && !game.nestActive
-      && (overlay.classList.contains('opaque') || overlay.dataset.surfaceContext === 'expedition')) {
+      && (overlay.classList.contains('opaque') || overlay.dataset.surfaceContext === 'expedition'
+        || !!this.el.ovBody?.querySelector('.node-pg:not(.flow-transition), .event-scene, .reward-replica, .cqo-overview, .shop-market'))) {
       stageMapReturn(this, game);
     }
     clearCampEntry();

@@ -3,6 +3,7 @@ import { esc } from '../core/shared.js';
 import { descRich } from '../cards/cards.view.js';
 import { hopPoint, decayOsc, ease } from '../core/motion-primitives.js';
 import { captureShopBrowseState, restoreShopBrowseState } from './shop-browse-state.js';
+import { openShopCommission } from './shop-commission.js';
 
 let openBackpack;
 export function configureShopRuntime({ openBag }) {
@@ -127,6 +128,12 @@ function createShopController({
     shopNotice = '';
     selectedShopIndex = null;
     shopOnClose = onClose || null;
+    const session = shopSession;
+    const revealCommission = () => openShopCommission({ game, UI, SDT, stockKey, save:saveGame,
+      current:() => currentSession(session), renderShop:() => { if (!revealCommission()) renderShop(); },
+      leave:() => { if (currentSession(session)) { shopSession = null; UI.hideOverlay(); game.state = 'idle'; saveGame(); shopOnClose?.(); } },
+    });
+    if (revealCommission()) return;
     renderShop();
   }
 
@@ -159,7 +166,7 @@ function createShopController({
     const owned = game.ownedCards.filter(item => item.card.name === slot.card?.name).length;
     const status = exhausted ? (slot.shaReplenish != null ? '本站已补满' : slot.mystery ? '已购入 · 已揭晓' : '')
       : slot.shaReplenish != null ? `持有 ${owned} · 余 ${slot.shaReplenish}` : slot.mystery ? '购买后揭晓' : owned > 0 ? `已持有 ${owned}` : '';
-    return `<div class="shop-slot${exhausted ? ' sold' : ' buy'}${selectedShopIndex === index ? ' selected' : ''}${!exhausted && !hasMoney ? ' unaffordable' : ''}" data-availability="${state}">
+    return `<div class="shop-slot${slot.commissionFree && !exhausted ? ' commission-free' : ''}${exhausted ? ' sold' : ' buy'}${selectedShopIndex === index ? ' selected' : ''}${!exhausted && !hasMoney ? ' unaffordable' : ''}" data-availability="${state}">
       <button type="button" class="shop-preview" data-act="shopInspect" data-i="${index}" aria-pressed="${selectedShopIndex === index}" aria-label="${esc(slotPreviewLabel(slot, availability))}">
         <span class="shop-item-art">${image}</span>${slot.mystery && !slot.sold ? `<span class="shop-item-title">${esc(title)}</span>` : ''}<span class="shop-offer"><span class="shop-offer-copy"><span class="shop-stock-state">${label}</span>${status ? `<small class="shop-owned">${status}</small>` : ''}</span><strong class="shop-v14-price">${slot.free ? '免费' : moneyHTML(slot.price)}</strong></span>
       </button></div>`;
@@ -347,7 +354,7 @@ function createShopController({
         </aside>
         <aside class="shop-detail" role="dialog" aria-label="当前商品详情"${selectedShopIndex == null ? ' hidden' : ''}>${shopDetailHTML()}</aside>
         </div>
-        <footer class="shop-market-footer"><span class="shop-live" id="shopLive" aria-live="polite">${shopNotice}</span><span class="shop-return-note">移动离开前可再次进入</span><button class="shop-back" data-act="closeShop">[[icon:arrow]] 返回地图</button></footer>
+        <footer class="shop-market-footer"><span class="shop-live" id="shopLive" aria-live="polite">${shopNotice}</span><button class="shop-back" data-act="closeShop">[[icon:arrow]] 返回地图</button></footer>
       </div>`, 'page');
     const shopRoot = document.querySelector('.shop-replica');
     registerShopActs(shopRoot);

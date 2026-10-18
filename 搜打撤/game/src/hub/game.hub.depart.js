@@ -225,7 +225,7 @@ function renderDepartureCard(card) {
           </aside>
           <section class="hub-card dep-storage">
             <h3>仓库候选 <span class="set-tip">点击或拖拽带入</span></h3>
-            <div class="dep-recommend"><button class="mini-btn" data-act="depRecommendPreview">预览推荐装配</button><button class="mini-btn" data-act="depRecommendApply" disabled>应用预览</button><button class="mini-btn" data-act="depRecommendUndo" disabled>撤销推荐</button><small>保留已选，最多补 3 张不同卡，预留至少 3 格；可继续拖拽调整。</small></div>
+            <div class="dep-recommend"><button class="mini-btn" data-act="depRecommendPreview">预览推荐装配</button><button class="mini-btn" data-act="depRecommendApply" disabled>应用预览</button><button class="mini-btn" data-act="depRecommendUndo" disabled>撤销推荐</button></div>
             <div class="dep-filters">
               <label>稀有度<select id="depFilterRarity" aria-label="按稀有度筛选仓库卡牌"></select></label>
               <label>类型<select id="depFilterType" aria-label="按类型筛选仓库卡牌"></select></label>

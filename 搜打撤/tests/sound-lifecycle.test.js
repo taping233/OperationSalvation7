@@ -1,3 +1,4 @@
+import { SAMPLE_CUES } from '../game/src/audio/sound.samples.catalog.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('howler', () => ({ Howl: class {}, Howler: { mute: vi.fn(), ctx: null } }));
@@ -59,8 +60,8 @@ describe('SFX mute and audio instance lifecycle', () => {
     sound.ensure();
     for (let i=0;i<800;i++) await Promise.resolve();
     const urls = fetch.mock.calls.map(([url]) => url);
-    const confirm = urls.findIndex(url => url.includes('/interface-soft/confirmation_001.ogg'));
-    const battle = urls.findIndex(url => url.includes('/battle/'));
+    const confirm = urls.findIndex(url => url.includes('/original-ui-1018/confirm.wav'));
+    const battle = urls.findIndex(url => url.includes('/mixkit-1018/268.wav'));
     expect(confirm).toBeGreaterThanOrEqual(0);
     expect(battle).toBeGreaterThan(confirm);
   });
@@ -147,12 +148,12 @@ describe('SFX mute and audio instance lifecycle', () => {
 });
 
 describe('partial SFX asset availability', () => {
-  it.each(['hit', 'hurt', 'parry', 'draw'])('retains successful %s siblings when one file is missing', async cue => {
-    const missing = { hit: '/hit-1.ogg', hurt: '/hurt-1.ogg', parry: '/parry-1.ogg', draw: '/draw-1.ogg' }[cue];
+  it.each(['hit', 'hurt', 'parry', 'draw'])('plays only available %s siblings when one catalog file is missing', async cue => {
+    const missing = SAMPLE_CUES[cue].files[0];
     const sound = await importSound(async url => ({ ok: !url.split('?')[0].endsWith(missing), status: 404, arrayBuffer: async () => new ArrayBuffer(1) }));
     sound.ensure(); await flush(); sound.sfx(cue);
     expect(context.contexts[0].oscillators).toHaveLength(0);
-    expect(context.contexts[0].sources).toHaveLength(1);
+    expect(context.contexts[0].sources).toHaveLength(SAMPLE_CUES[cue].files.length > 1 ? 1 : 0);
   });
 
   it('stays silent without synthesis when every sampled sibling fails', async () => {
@@ -182,18 +183,18 @@ describe('CC0 UI integration', () => {
     sound.sfx('confirm');
     const source = ctx.sources.at(-1);
     expect(Array.from(source.buffer.getChannelData(0))).toEqual([expect.closeTo(0.4), -0.5]);
-    expect(ctx.gains.at(-1).gain.value).toBe(0.24);
+    expect(ctx.gains.at(-1).gain.value).toBe(0.65);
     sound.setSfxMuted(true); expect(ctx.gains[1].gain.value).toBe(0);
     const urls = fetch.mock.calls.map(([url]) => url);
-    const confirm = urls.findIndex(url => url.includes('/interface-soft/confirmation_001.ogg'));
+    const confirm = urls.findIndex(url => url.includes('/original-ui-1018/confirm.wav'));
     expect(confirm).toBeGreaterThanOrEqual(0);
-    expect(confirm).toBeLessThan(urls.findIndex(url => url.includes('/battle/')));
-    expect(urls.some(url => url.includes('/real-foley/wood-tap-01.wav'))).toBe(true);
+    expect(confirm).toBeLessThan(urls.findIndex(url => url.includes('/mixkit-1018/268.wav')));
+    expect(urls.some(url => url.includes('/selected32-1018/safe-store.wav'))).toBe(true);
   });
 });
 
 it('does not request or play legacy synthesis when CC0 confirmation fails', async () => {
-  const sound = await importSound(async url => ({ ok: !url.includes('/interface-soft/'), status: 404, arrayBuffer: async () => new ArrayBuffer(1) }));
+  const sound = await importSound(async url => ({ ok: !url.includes('/original-ui-1018/confirm.wav'), status: 404, arrayBuffer: async () => new ArrayBuffer(1) }));
   sound.ensure(); await flush(); sound.sfx('confirm');
   const ctx = context.contexts[0];
   expect(ctx.sources).toHaveLength(0);

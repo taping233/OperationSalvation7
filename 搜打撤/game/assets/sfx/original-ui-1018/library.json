@@ -1,0 +1,1496 @@
+{
+  "name": "当前运行音效 · 子页面静音更新",
+  "version": "SELECTED15 R2 / MUTED11",
+  "featuredLabel": "本轮15项",
+  "featuredTitle": "10项已取消音效，5项保留新音源",
+  "featuredIds": [
+    "open",
+    "safeEnter",
+    "close",
+    "energyDown",
+    "buffDown",
+    "curseEnd",
+    "altarEnter",
+    "doorEnter",
+    "shopEnter",
+    "extractionEnter",
+    "parry",
+    "curse",
+    "attackIce",
+    "heal",
+    "cardRestore"
+  ],
+  "groups": {
+    "ui": "界面操作",
+    "combat": "战斗与卡牌",
+    "reward": "奖励提示",
+    "transition": "场景转换"
+  },
+  "cues": [
+    {
+      "id": "click",
+      "label": "按钮点击",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/click.wav",
+          "seconds": 0.185
+        }
+      ]
+    },
+    {
+      "id": "cardSelect",
+      "label": "选择卡牌",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/click.wav",
+          "seconds": 0.185
+        }
+      ]
+    },
+    {
+      "id": "characterSelect",
+      "label": "characterSelect",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/click.wav",
+          "seconds": 0.185
+        }
+      ]
+    },
+    {
+      "id": "confirm",
+      "label": "操作确认",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/confirm.wav",
+          "seconds": 0.225
+        }
+      ]
+    },
+    {
+      "id": "prepReady",
+      "label": "prepReady",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/confirm.wav",
+          "seconds": 0.225
+        }
+      ]
+    },
+    {
+      "id": "extractionConfirm",
+      "label": "extractionConfirm",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/confirm.wav",
+          "seconds": 0.225
+        }
+      ]
+    },
+    {
+      "id": "gain",
+      "label": "获得物品",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "coin",
+      "label": "获得钱币",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "tradeSell",
+      "label": "tradeSell",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "stashDeposit",
+      "label": "stashDeposit",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "safeStore",
+      "label": "物品存入保险箱",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "本轮点选替换 · OtoLogic",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/safe-store.wav",
+          "seconds": 0.22
+        }
+      ]
+    },
+    {
+      "id": "hover",
+      "label": "悬停",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.08,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/click.wav",
+          "seconds": 0.185
+        }
+      ]
+    },
+    {
+      "id": "navigate",
+      "label": "navigate",
+      "group": "ui",
+      "loop": false,
+      "gain": 0,
+      "note": "老板要求：子页面导航取消音效",
+      "variants": [],
+      "silent": true
+    },
+    {
+      "id": "switch",
+      "label": "switch",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/click.wav",
+          "seconds": 0.185
+        }
+      ]
+    },
+    {
+      "id": "open",
+      "label": "打开界面",
+      "group": "ui",
+      "loop": false,
+      "gain": 0,
+      "note": "老板要求：进入界面不播放音效",
+      "variants": [],
+      "silent": true
+    },
+    {
+      "id": "safeEnter",
+      "label": "打开保险箱",
+      "group": "ui",
+      "loop": false,
+      "gain": 0,
+      "note": "老板要求：进入界面不播放音效",
+      "variants": [],
+      "silent": true
+    },
+    {
+      "id": "close",
+      "label": "关闭界面",
+      "group": "ui",
+      "loop": false,
+      "gain": 0,
+      "note": "老板要求：取消音效",
+      "variants": [],
+      "silent": true
+    },
+    {
+      "id": "error",
+      "label": "error",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.2,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2569.wav",
+          "seconds": 1.254671
+        }
+      ]
+    },
+    {
+      "id": "deny",
+      "label": "deny",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.2,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2569.wav",
+          "seconds": 1.254671
+        }
+      ]
+    },
+    {
+      "id": "blackMarketLose",
+      "label": "blackMarketLose",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.2,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2569.wav",
+          "seconds": 1.254671
+        }
+      ]
+    },
+    {
+      "id": "extractionFail",
+      "label": "extractionFail",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.2,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2569.wav",
+          "seconds": 1.254671
+        }
+      ]
+    },
+    {
+      "id": "pick",
+      "label": "pick",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/click.wav",
+          "seconds": 0.185
+        }
+      ]
+    },
+    {
+      "id": "safeRetrieve",
+      "label": "从保险箱取出",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "本轮点选替换 · OtoLogic",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/safe-retrieve.wav",
+          "seconds": 0.24
+        }
+      ]
+    },
+    {
+      "id": "drop",
+      "label": "放下物品",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "本轮点选替换 · OtoLogic",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/discard.wav",
+          "seconds": 0.2
+        }
+      ]
+    },
+    {
+      "id": "discard",
+      "label": "弃牌",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "本轮点选替换 · OtoLogic",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/discard.wav",
+          "seconds": 0.2
+        }
+      ]
+    },
+    {
+      "id": "danger",
+      "label": "danger",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/268.wav",
+          "seconds": 4.5
+        }
+      ]
+    },
+    {
+      "id": "eventDanger",
+      "label": "eventDanger",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/268.wav",
+          "seconds": 4.5
+        }
+      ]
+    },
+    {
+      "id": "bossReveal",
+      "label": "bossReveal",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2794.wav",
+          "seconds": 1.159705
+        }
+      ]
+    },
+    {
+      "id": "energyUp",
+      "label": "能量增加",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "本轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/status-up.wav",
+          "seconds": 0.48
+        }
+      ]
+    },
+    {
+      "id": "buffUp",
+      "label": "增益生效",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "本轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/status-up.wav",
+          "seconds": 0.48
+        }
+      ]
+    },
+    {
+      "id": "energyDown",
+      "label": "能量减少",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "第二轮点选替换 · Kenney",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected15-r2-1018/status-down.wav",
+          "seconds": 0.208875
+        }
+      ],
+      "silent": false
+    },
+    {
+      "id": "buffDown",
+      "label": "增益减弱",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "第二轮点选替换 · Kenney",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected15-r2-1018/status-down.wav",
+          "seconds": 0.208875
+        }
+      ],
+      "silent": false
+    },
+    {
+      "id": "curseEnd",
+      "label": "诅咒结束",
+      "group": "combat",
+      "loop": false,
+      "gain": 0,
+      "note": "老板要求：取消音效",
+      "variants": [],
+      "silent": true
+    },
+    {
+      "id": "turnSelf",
+      "label": "turnSelf",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2568.wav",
+          "seconds": 0.199478
+        }
+      ]
+    },
+    {
+      "id": "phaseSelf",
+      "label": "phaseSelf",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2568.wav",
+          "seconds": 0.199478
+        }
+      ]
+    },
+    {
+      "id": "turnFoe",
+      "label": "turnFoe",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/1109.wav",
+          "seconds": 1.10449
+        }
+      ]
+    },
+    {
+      "id": "phaseFoe",
+      "label": "phaseFoe",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/1109.wav",
+          "seconds": 1.10449
+        }
+      ]
+    },
+    {
+      "id": "scene",
+      "label": "场景切换",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.55,
+      "note": "本轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/transition.wav",
+          "seconds": 0.34
+        }
+      ]
+    },
+    {
+      "id": "eventEnter",
+      "label": "进入事件",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.55,
+      "note": "本轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/transition.wav",
+          "seconds": 0.34
+        }
+      ]
+    },
+    {
+      "id": "layerEnter",
+      "label": "进入下一层",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.55,
+      "note": "本轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/transition.wav",
+          "seconds": 0.34
+        }
+      ]
+    },
+    {
+      "id": "fireEnter",
+      "label": "fireEnter",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.18,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/268.wav",
+          "seconds": 4.5
+        }
+      ]
+    },
+    {
+      "id": "altarEnter",
+      "label": "进入祭坛",
+      "group": "transition",
+      "loop": false,
+      "gain": 0,
+      "note": "老板要求：进入界面不播放音效",
+      "variants": [],
+      "silent": true
+    },
+    {
+      "id": "doorEnter",
+      "label": "进入门扉",
+      "group": "transition",
+      "loop": false,
+      "gain": 0,
+      "note": "老板要求：进入界面不播放音效",
+      "variants": [],
+      "silent": true
+    },
+    {
+      "id": "shopEnter",
+      "label": "进入商店",
+      "group": "transition",
+      "loop": false,
+      "gain": 0,
+      "note": "老板要求：进入界面不播放音效",
+      "variants": [],
+      "silent": true
+    },
+    {
+      "id": "extractionEnter",
+      "label": "进入撤离点",
+      "group": "transition",
+      "loop": false,
+      "gain": 0,
+      "note": "老板要求：进入界面不播放音效",
+      "variants": [],
+      "silent": true
+    },
+    {
+      "id": "deployStart",
+      "label": "开始出发或部署",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.55,
+      "note": "本轮点选替换 · OtoLogic",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/deploy-start.wav",
+          "seconds": 0.42
+        }
+      ]
+    },
+    {
+      "id": "battleEnter",
+      "label": "进入战斗",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.55,
+      "note": "本轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/battle-enter.wav",
+          "seconds": 0.34
+        }
+      ]
+    },
+    {
+      "id": "flee",
+      "label": "逃离战斗",
+      "group": "transition",
+      "loop": false,
+      "gain": 0.55,
+      "note": "本轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/transition.wav",
+          "seconds": 0.34
+        }
+      ]
+    },
+    {
+      "id": "ding",
+      "label": "奖励提示",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "levelup",
+      "label": "升级",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "achievementUnlock",
+      "label": "成就解锁",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "collectionUnlock",
+      "label": "collectionUnlock",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "eventComplete",
+      "label": "eventComplete",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "storyComplete",
+      "label": "storyComplete",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "recodeComplete",
+      "label": "recodeComplete",
+      "group": "reward",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "shutter",
+      "label": "shutter",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/click.wav",
+          "seconds": 0.185
+        }
+      ]
+    },
+    {
+      "id": "searchStart",
+      "label": "searchStart",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.2,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/1530.wav",
+          "seconds": 1.094263
+        }
+      ]
+    },
+    {
+      "id": "recodeStart",
+      "label": "recodeStart",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.2,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/1530.wav",
+          "seconds": 1.094263
+        }
+      ]
+    },
+    {
+      "id": "searchReveal",
+      "label": "searchReveal",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.2,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2380.wav",
+          "seconds": 0.901542
+        }
+      ]
+    },
+    {
+      "id": "eventClue",
+      "label": "eventClue",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.2,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2380.wav",
+          "seconds": 0.901542
+        }
+      ]
+    },
+    {
+      "id": "storyClue",
+      "label": "storyClue",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.2,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2380.wav",
+          "seconds": 0.901542
+        }
+      ]
+    },
+    {
+      "id": "altarActivate",
+      "label": "altarActivate",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/click.wav",
+          "seconds": 0.185
+        }
+      ]
+    },
+    {
+      "id": "altarOffer",
+      "label": "altarOffer",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/click.wav",
+          "seconds": 0.185
+        }
+      ]
+    },
+    {
+      "id": "eventSafe",
+      "label": "eventSafe",
+      "group": "ui",
+      "loop": false,
+      "gain": 0.65,
+      "note": "已认可的V2原创样音",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/confirm.wav",
+          "seconds": 0.225
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "label": "出牌",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2380.wav",
+          "seconds": 0.901542
+        },
+        {
+          "src": "./assets/sfx/mixkit-1018/1530.wav",
+          "seconds": 1.094263
+        }
+      ]
+    },
+    {
+      "id": "draw",
+      "label": "抽牌",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/1104.wav",
+          "seconds": 0.451565
+        },
+        {
+          "src": "./assets/sfx/mixkit-1018/1101.wav",
+          "seconds": 2.608345
+        }
+      ]
+    },
+    {
+      "id": "shuffle",
+      "label": "shuffle",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/1530.wav",
+          "seconds": 1.094263
+        }
+      ]
+    },
+    {
+      "id": "hit",
+      "label": "斩击",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2158.wav",
+          "seconds": 2.063675
+        },
+        {
+          "src": "./assets/sfx/mixkit-1018/2166.wav",
+          "seconds": 1.247234
+        }
+      ]
+    },
+    {
+      "id": "attackSlash",
+      "label": "attackSlash",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2158.wav",
+          "seconds": 2.063675
+        },
+        {
+          "src": "./assets/sfx/mixkit-1018/2166.wav",
+          "seconds": 1.247234
+        }
+      ]
+    },
+    {
+      "id": "attackPierce",
+      "label": "attackPierce",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2761.wav",
+          "seconds": 1.116009
+        }
+      ]
+    },
+    {
+      "id": "attackArrow",
+      "label": "attackArrow",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2771.wav",
+          "seconds": 1.043129
+        }
+      ]
+    },
+    {
+      "id": "strike",
+      "label": "strike",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2153.wav",
+          "seconds": 0.461542
+        }
+      ]
+    },
+    {
+      "id": "attackBlunt",
+      "label": "attackBlunt",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2153.wav",
+          "seconds": 0.461542
+        }
+      ]
+    },
+    {
+      "id": "attackBossHeavy",
+      "label": "attackBossHeavy",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2794.wav",
+          "seconds": 1.159705
+        }
+      ]
+    },
+    {
+      "id": "hurt",
+      "label": "hurt",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2153.wav",
+          "seconds": 0.461542
+        }
+      ]
+    },
+    {
+      "id": "parry",
+      "label": "格挡",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "第二轮点选替换 · Kenney",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected15-r2-1018/parry.wav",
+          "seconds": 0.2
+        },
+        {
+          "src": "./assets/sfx/selected15-r2-1018/parry-muted.wav",
+          "seconds": 0.2
+        }
+      ],
+      "silent": false
+    },
+    {
+      "id": "curse",
+      "label": "诅咒生效",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "第二轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected15-r2-1018/curse.wav",
+          "seconds": 0.52
+        }
+      ],
+      "silent": false
+    },
+    {
+      "id": "attackFire",
+      "label": "火焰攻击",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "本轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/fire.wav",
+          "seconds": 0.68
+        }
+      ]
+    },
+    {
+      "id": "attackIce",
+      "label": "冰霜攻击",
+      "group": "combat",
+      "loop": false,
+      "gain": 0,
+      "note": "老板要求：取消音效",
+      "variants": [],
+      "silent": true
+    },
+    {
+      "id": "attackLightning",
+      "label": "雷电攻击",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "本轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/lightning.wav",
+          "seconds": 0.6
+        }
+      ]
+    },
+    {
+      "id": "attackPoison",
+      "label": "attackPoison",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/1530.wav",
+          "seconds": 1.094263
+        }
+      ]
+    },
+    {
+      "id": "attackPsychic",
+      "label": "精神攻击",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "本轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/psychic.wav",
+          "seconds": 0.72
+        }
+      ]
+    },
+    {
+      "id": "heal",
+      "label": "治疗恢复",
+      "group": "combat",
+      "loop": false,
+      "gain": 0,
+      "note": "老板要求：取消音效",
+      "variants": [],
+      "silent": true
+    },
+    {
+      "id": "cardRestore",
+      "label": "卡牌恢复效果",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "第二轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected15-r2-1018/heal.wav",
+          "seconds": 0.5826458333333333
+        }
+      ],
+      "silent": false
+    },
+    {
+      "id": "chestShake",
+      "label": "chestShake",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/1530.wav",
+          "seconds": 1.094263
+        }
+      ]
+    },
+    {
+      "id": "chestBurst",
+      "label": "宝箱打开",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "reveal",
+      "label": "奖励落定",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "tradeBuy",
+      "label": "tradeBuy",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "runeExchange",
+      "label": "runeExchange",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "legend",
+      "label": "稀有奖励",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "rarePlay",
+      "label": "rarePlay",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "altarReward",
+      "label": "altarReward",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "eggHatch",
+      "label": "eggHatch",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "petRescue",
+      "label": "petRescue",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "blackMarketWin",
+      "label": "blackMarketWin",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "victory",
+      "label": "胜利",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "bossVictory",
+      "label": "bossVictory",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "runClear",
+      "label": "runClear",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "extractionSuccess",
+      "label": "extractionSuccess",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "原创奖励A · 清冷轻亮",
+      "variants": [
+        {
+          "src": "./assets/sfx/original-ui-1018/reward.wav",
+          "seconds": 0.29
+        }
+      ]
+    },
+    {
+      "id": "defeat",
+      "label": "defeat",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/268.wav",
+          "seconds": 4.5
+        }
+      ]
+    },
+    {
+      "id": "shieldUp",
+      "label": "获得护盾",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "本轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/shield.wav",
+          "seconds": 0.42
+        }
+      ]
+    },
+    {
+      "id": "kill",
+      "label": "kill",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2794.wav",
+          "seconds": 1.159705
+        }
+      ]
+    },
+    {
+      "id": "shieldBreak",
+      "label": "破盾",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2795.wav",
+          "seconds": 1.520726
+        }
+      ]
+    },
+    {
+      "id": "armorBreak",
+      "label": "armorBreak",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2795.wav",
+          "seconds": 1.520726
+        }
+      ]
+    },
+    {
+      "id": "burn",
+      "label": "灼烧反馈配置",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.65,
+      "note": "本轮点选替换 · 効果音ラボ",
+      "variants": [
+        {
+          "src": "./assets/sfx/selected32-1018/burn.wav",
+          "seconds": 0.4
+        }
+      ]
+    },
+    {
+      "id": "foeLunge",
+      "label": "foeLunge",
+      "group": "combat",
+      "loop": false,
+      "gain": 0.32,
+      "note": "Mixkit游戏音效 · 保留原音色与完整收尾",
+      "variants": [
+        {
+          "src": "./assets/sfx/mixkit-1018/2141.wav",
+          "seconds": 2.063675
+        }
+      ]
+    }
+  ]
+}

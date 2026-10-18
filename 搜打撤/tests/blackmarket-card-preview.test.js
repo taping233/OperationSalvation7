@@ -1,3 +1,4 @@
+import { rollEventDice } from './helpers/event-dice.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const H = vi.hoisted(() => ({ game: {}, cards: [], saves: [], uid: 0, random: () => 0.9 }));
@@ -61,7 +62,7 @@ afterEach(() => {
 async function openBlackMarket() {
   H.cards = [{ id:'ev19-gamble', name:'地下商场黑市', type:'事件' }, ...prizes];
   const opening = flow.runEventDeck(); await vi.advanceTimersByTimeAsync(1000); await opening;
-  UI._acts.evtChoice({ i:'0' });
+  UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
 }
 const readers = () => [...UI.el.ovBody.querySelectorAll('[data-act="eventGambleRead"]')];
 function closeZoom(kind = 'escape') {
@@ -113,7 +114,8 @@ describe('黑市投入前卡牌详情', () => {
 
   it('四次失败后详情和背包返回仍保留保底，第五次只扣3币并保留原三张待领', async () => {
     await openBlackMarket();
-    for (let i = 0; i < 4; i++) { readers()[i % 3].click(); closeZoom(); UI._acts.eventGambleTry(); }
+    H.random.mockReturnValue(0.1);
+    for (let i = 0; i < 4; i++) { readers()[i % 3].click(); closeZoom(); UI._acts.eventGambleTry(); rollEventDice(UI); }
     expect(H.game.coins).toBe(6); expect(UI.el.ovBody.textContent).toContain('已尝试 4/5');
     const oldRead = UI._acts.eventGambleRead;
     UI.showOverlay('背包', '<main>背包</main>', 'page'); UI.hideOverlay(); takeBagReturnHook()();
@@ -122,9 +124,9 @@ describe('黑市投入前卡牌详情', () => {
     expect(UI.el.ovBody.textContent).toContain('已尝试 4/5');
     expect(UI.el.ovBody.querySelector('[data-act="eventGambleTry"]').textContent).toContain('本次保底');
     const rolls = H.random.mock.calls.length, staleRead = UI._acts.eventGambleRead;
-    UI._acts.eventGambleTry();
+    UI._acts.eventGambleTry(); rollEventDice(UI);
     expect(H.game.coins).toBe(3); expect(H.game.ownedCards).toHaveLength(0);
-    expect(H.random).toHaveBeenCalledTimes(rolls);
+    expect(H.random).toHaveBeenCalledTimes(rolls + 1);
     const pending = window.SDT.Chests.serialize(H.game);
     expect(pending.current.cards.map(c => c.id).sort()).toEqual(prizes.map(c => c.id).sort());
     staleRead({ i:'0' }); expect(document.getElementById('cardZoom')).toBeNull();

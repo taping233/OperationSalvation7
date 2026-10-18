@@ -1,0 +1,55 @@
+{
+  "baseline": ".tmp/startup-fix-1018",
+  "unchangedGame": "D:\\素材\\代号柒\\搜打撤\\.tmp\\startup-fix-1018\\delivery\\win-unpacked\\resources\\game",
+  "overrides": [
+    {
+      "file": "main.js",
+      "source": "desktop-app\\main.js",
+      "bytes": 6989,
+      "sha256": "57c57b11221d4a8e7935011f8a1adbb14fd462ad91eef2868df977e230a05f77"
+    },
+    {
+      "file": "game-file-protocol.cjs",
+      "source": "desktop-app\\game-file-protocol.cjs",
+      "bytes": 3941,
+      "sha256": "06291d8c4cc293ef981213043da2f1ceee57ab9cbd8cf555c776a8d1669f0e36"
+    },
+    {
+      "file": "preload.js",
+      "source": ".tmp\\startup-fix-1018\\exe-project\\desktop-app\\preload.js",
+      "bytes": 2897,
+      "sha256": "788c1dd10f9d369608b698ef482b30f3cc39cac287014ec1309ebc7e58dbf455"
+    },
+    {
+      "file": "suggestions-store.cjs",
+      "source": ".tmp\\startup-fix-1018\\exe-project\\desktop-app\\suggestions-store.cjs",
+      "bytes": 983,
+      "sha256": "4f2d615ce8433b1b98890568f3d4edcc3641666a2e51d1606d0d3cb9f920d2d3"
+    },
+    {
+      "file": "startup-window.cjs",
+      "source": "desktop-app\\startup-window.cjs",
+      "bytes": 4497,
+      "sha256": "48aaefece5054ea504c0d96d6578e89c9e9c084664d218bc3312b7bf01d402fc"
+    },
+    {
+      "file": "startup-preload.cjs",
+      "source": ".tmp\\startup-fix-1018\\exe-project\\desktop-app\\startup-preload.cjs",
+      "bytes": 307,
+      "sha256": "0fd1ecdc6f8c7795b63784483078a32a2330dab8dd26b7f8642564df0c3e2f47"
+    },
+    {
+      "file": "startup.html",
+      "source": ".tmp\\startup-fix-1018\\exe-project\\desktop-app\\startup.html",
+      "bytes": 5448,
+      "sha256": "068bc6b9f7090bafe0859af0de7c748b8065d3b5522ea662e9a5eb49875ac554"
+    },
+    {
+      "file": "app.ico",
+      "source": ".tmp\\startup-fix-1018\\exe-project\\desktop-app\\app.ico",
+      "bytes": 124019,
+      "sha256": "a4e6c139c712469ed573aa8cdb337b75bab5560ee452e59d1a6c0525e59f92e6"
+    }
+  ],
+  "sourcePolicy": "Only desktop main/protocol/lifecycle changes; frozen game bytes preserved; no active changes included."
+}

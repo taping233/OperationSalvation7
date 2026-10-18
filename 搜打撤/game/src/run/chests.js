@@ -507,8 +507,8 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
       const got = taken.has(i), dropped = lost.has(i);
       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
       const action = got || dropped
-        ? `<span class="reward-unit-state">${got ? '已入背包' : '已永久放弃'}</span>`
-        : fits ? `<button type="button" class="reward-claim" data-act="${isChoice(i) ? 'chestPick' : 'chestTake1'}" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>收下</button>`
+        ? `<span class="reward-unit-state">${got ? (isChoice(i) ? '✓ 已选择 · 已入背包' : '已入背包') : '已永久放弃'}</span>`
+        : fits ? `<button type="button" class="reward-claim" data-act="${isChoice(i) ? 'chestPick' : 'chestTake1'}" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>${isChoice(i) ? '选择这张' : '收下'}</button>`
           : `<button type="button" class="reward-claim" data-act="chestMakeRoom" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>腾位置领取</button>`;
       return `<article class="reward-unit${selected === i && !got && !dropped ? ' is-pending-target' : ''}${got ? ' got' : dropped ? ' dropped' : ''}" data-reward-rarity="${escAttr(rewardRarity(card))}">
         <button type="button" class="reward-card" data-act="chestSelect" data-i="${i}" aria-label="放大查看${escAttr(card.name || '卡牌')}" title="放大查看">${SDT.Cards.cardHTML(card)}</button>${selected === i && !got && !dropped ? '<span class="reward-target-label">待领取</span>' : ''}${action}</article>`;

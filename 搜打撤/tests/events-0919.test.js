@@ -19,6 +19,23 @@ beforeAll(() => {
 });
 
 describe('0919 都市污染事件池', () => {
+  it('暴雨劫道编译剧情同时提供迎战和无奖励逃离', async () => {
+    const {eventNarrative}=await import('../game/src/home/narrative.js');
+    const narrative=await eventNarrative('tt6-bandits');
+    expect(narrative.choices.map(choice=>choice.effect)).toEqual(['bandits_fight','bandits_escape']);
+    expect(narrative.choices[1].detail).toContain('不战斗');
+  });
+
+  it('旧档事件描述更新为现行选项，自定义描述保留', () => {
+    const marker='sdt-events-0919-v2-seeded';const old=localStorage.getItem(marker);localStorage.setItem(marker,'1');
+    let stored=[{id:'tt6-mystery',name:'实验室余粮',desc:'你获得员工通行证A碎片和 2 币。'},{id:'tt6-relief',desc:'我的自定义救护站'}];
+    const all=vi.spyOn(C,'all').mockImplementation(()=>stored);
+    const save=vi.spyOn(C,'saveAll').mockImplementation(cards=>{stored=structuredClone(cards);return true;});
+    try {
+      C.ensureEvents0919();expect(stored[0].desc).toContain('1~3 点');expect(stored[1].desc).toBe('我的自定义救护站');
+      C.ensureEvents0919();expect(save).toHaveBeenCalledOnce();
+    } finally {all.mockRestore();save.mockRestore();if(old===null)localStorage.removeItem(marker);else localStorage.setItem(marker,old);}
+  });
   it('含 10 个改名旧事件与 9 个新事件，且全部进入实机事件卡池', () => {
     expect(C.EVENTS_0919).toHaveLength(19);
     const ids = new Set(C.all().filter(c => c.type === '事件').map(c => c.id));
@@ -40,7 +57,8 @@ describe('0919 都市污染事件池', () => {
       'ev19-vital', 'ev19-pearlbox', 'ev19-fireballs', 'ev19-classchest', 'ev19-recode',
       'ev19-potions', 'ev19-arrows', 'ev19-gamble', 'ev19-quartermaster',
     ].forEach(id => expect(source).toContain(`'${id}'`));
-    expect(source).toContain("attempts >= 5 || Random.random('event') < 0.5");
+    expect(source).toContain('const guaranteed = attemptNumber >= 5;');
+    expect(source).toContain("{label:'本次落空',value:false},{label:'拿走三张卡',value:true}");
     expect(source).toContain("kind: 'medium', isClass: true");
     expect(source).toContain("['武术', '法术', '装备']");
   });
@@ -53,9 +71,8 @@ describe('熔断物资箱标题', () => {
     expect(card.name).toBe('熔断物资箱');
     expect(card.desc).toBe('从大、中、小宝箱中随机抽取 1 个开启。');
     const source = readFileSync(path.join(ROOT, 'game/src/run/game.run.flow.js'), 'utf8');
-    expect(source).toContain("const kinds = ['large', 'medium', 'small'];");
-    expect(source).toContain("const kind = kinds[Math.floor(Random.random('loot') * kinds.length)];");
-    expect(source).toContain("openChestsOnCell([{ kind }], '你撬开了一个未知的箱子');");
+    expect(source).toContain("{label:'小型物资箱',value:'small'},{label:'密封物资箱',value:'medium'},{label:'军用保险柜',value:'large'}");
+    expect(source).toContain("openChestsOnCell([{ kind }], '你投骰选中的物资箱')");
   });
 
   it.each(['false', 'throw'])('已盖旧章只改旧标题，保存 %s 后可重试且幂等', failure => {

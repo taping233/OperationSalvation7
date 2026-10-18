@@ -9,7 +9,7 @@ export function clearArchiveMotion(overlay) {
   if (overlay) delete overlay.dataset.archiveMotion;
 }
 
-export function enterArchive(overlay, body, reduced) {
+export function enterArchive(overlay, body) {
   clearArchiveMotion(overlay);
   const page = body?.querySelector('.slot-page:not(.camp-entry-ghost)');
   if (!page) return;
@@ -29,12 +29,5 @@ export function enterArchive(overlay, body, reduced) {
     card.dataset.archivePicked = '1';
   };
   page.addEventListener('click', pick, true);
-  const timer = reduced ? null : setTimeout(() => {
-    if (page.isConnected && !overlay.hidden && !overlay.dataset.uiClosing
-      && !document.body.classList.contains('reduce-motion')
-      && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
-      window.SDT?.Sound?.sfx('scene');
-    }
-  }, 840);
-  cleanup = () => { clearTimeout(timer); page.removeEventListener('click', pick, true); };
+  cleanup = () => page.removeEventListener('click', pick, true);
 }

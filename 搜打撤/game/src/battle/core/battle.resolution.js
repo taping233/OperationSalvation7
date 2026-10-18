@@ -488,6 +488,16 @@ function createBattleResolution(ports) {
       assertCardRulesExecutable(card);
     }
 
+    if (card.id === 'cc-rot-seed') {
+      const foe = target && !target.dead && target.hp > 0 ? target : null;
+      if (foe) {
+        combat.addCurse(foe, 'poison', 2);
+        foe.rotSeedMarked = true;
+        log(`[[icon:skull]] <b>腐化之种</b>：标记 <b>${esc(foe.name)}</b> 并附加 2 层中毒；死亡时按中毒层数对所有敌人造成真实伤害`, 'sys');
+      }
+      return;
+    }
+
     // 牧师浪掷风吟：固定宿主实现，直接按随机池置入至 6 张并只按新置入法术数回血。
     // 原文分号会拆开手牌填充与回血句，旧文本步骤因此先泛化回复 heal 字段再漏算逐张系数；
     // hosted adapter 提供定版卡面，仅此 ID 走此分支，不依赖可编辑描述执行。

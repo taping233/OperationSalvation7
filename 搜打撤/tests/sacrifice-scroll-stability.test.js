@@ -83,7 +83,7 @@ describe('同次献祭选牌的滚动与焦点', () => {
     pick('card-0', detail);
     const previousHand = hand(); previousHand.scrollTop = 1229.899;
     pick('card-30', detail);
-    expect(hand()).not.toBe(previousHand);
+    expect(hand()).toBe(previousHand);
     expectStable('card-30', 1229.899);
     await vi.advanceTimersByTimeAsync(32);
     expectStable('card-30', 1229.899);

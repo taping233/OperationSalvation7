@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-18",
+  "constraint": "free and commercially usable only",
+  "game_modified": false,
+  "approved_three_preserved": true,
+  "sources": [
+    {
+      "name": "Sonniss GDC 2026",
+      "url": "https://gdc.sonniss.com/",
+      "license_url": "https://sonniss.com/gdc-bundle-license/",
+      "status": "18 original WAV files obtained from official Google Drive mirrors with bounded byte ranges; source CRC and byte counts checked as transfer-integrity checks; no game tests or listening verification",
+      "receipt": "sonniss-receipt.json",
+      "selection": "sonniss-selection.json",
+      "previews": [
+        "03-sonniss-ui.mp3",
+        "04-sonniss-rewards.mp3",
+        "05-sonniss-card-combat.mp3"
+      ],
+      "user_feedback": "2026-10-18: rejected as unpleasant; no installation"
+    },
+    {
+      "name": "Chequered Ink 400 Sounds Pack",
+      "url": "https://ci.itch.io/400-sounds-pack",
+      "status": "full source pack downloaded; 10-sound cross-category preview prepared",
+      "previews": [
+        "01-ui-and-items.mp3",
+        "02-card-and-combat.mp3"
+      ]
+    },
+    {
+      "name": "Kenney Interface Sounds",
+      "url": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0 1.0",
+      "status": "100-sound source archive downloaded as secondary candidate; not installed or auditioned",
+      "receipt": "kenney-receipt.json"
+    },
+    {
+      "name": "効果音ラボ Japanese UI",
+      "url": "https://soundeffect-lab.info/sound/button/",
+      "license": "free commercial use, custom terms; private project audition only",
+      "status": "source files downloaded; six-sound local candidate reel prepared; not installed or listening verified"
+    },
+    {
+      "name": "OtoLogic Japanese UI",
+      "url": "https://otologic.jp/free/se/assorted-se01.html",
+      "license": "CC BY 4.0; attribution required",
+      "status": "source files downloaded; six-sound local candidate reel prepared; not installed or listening verified"
+    }
+  ],
+  "tests_run": false,
+  "listening_verified": false,
+  "reference_note": "https://www.xiaohongshu.com/explore/69ede968000000003601f460",
+  "reference_note_read": "Relevant slides 1-5 read in Codex built-in browser; SFX recommendations on slide 4: Freesound, Kenney, Sonniss, ZapSplat, Pixabay/Mixkit. Music and AI-generation sections are outside this task.",
+  "extra_candidates": [
+    {
+      "name": "Tissman modern GUI",
+      "url": "https://freesound.org/people/Tissman/packs/29401/",
+      "status": "Individual CC0 candidates identified: menu move1 (574594), menu move7 (575542), notification2 (575540); originals require login, not downloaded."
+    }
+  ],
+  "latest_candidate_record": "JAPANESE-AUDITION.md",
+  "latest_preview_receipt": "japanese-preview-receipt.json"
+}

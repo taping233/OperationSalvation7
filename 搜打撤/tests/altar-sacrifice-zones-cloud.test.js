@@ -170,8 +170,11 @@ it('道具献祭同时按类型和位置筛选，安全/储藏道具与普通非
   st.game.usedPocket = [{ card:{ id:'used', name:'已用招式', type:'武术' }, count:2 }];
   const { openAltarRitual } = await importAltar(); openAltarRitual(); acts.altarItemRestore();
   expect([...document.querySelectorAll('[data-act="sacPick"]')].map(el => el.dataset.uid)).toEqual(['bag-item']);
-  const confirm = acts.sacConfirm; acts.sacPick({ uid:'bag-item' }); confirm();
-  // Selecting rebuilt the page, so only its fresh confirmation can commit.
+  const hand = document.querySelector('.sac-hand'), candidate = document.querySelector('[data-act="sacPick"]');
+  acts.sacPick({ uid:'bag-item' });
+  expect(document.querySelector('.sac-hand')).toBe(hand);
+  expect(document.querySelector('[data-act="sacPick"]')).toBe(candidate);
+  expect(candidate.getAttribute('aria-pressed')).toBe('true');
   expect(st.game.ownedCards).toHaveLength(4);
   const currentConfirm = acts.sacConfirm; currentConfirm(); currentConfirm();
   expect(st.game.ownedCards).toEqual([spell, ...protectedItems]);

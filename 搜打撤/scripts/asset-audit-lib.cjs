@@ -123,4 +123,18 @@ function auditAssets({ root, paths = [], debtPath = path.join(root, 'docs', 'ass
   return { ...inspected, errors, warnings, ok: errors.length === 0 };
 }
 
-module.exports = { auditAssets, canonicalAssetBytes, canonicalPath, inspectAssets, selectedAssetPaths };
+function auditSelectedAssets(options) {
+  const selected = selectedAssetPaths(options.paths);
+  if (!selected.length) throw new Error('selected scope requires at least one game/assets path');
+  const result = auditAssets(options);
+  const includes = issue => selected.some(value => issue.path === value || issue.path.startsWith(value + '/'));
+  const issues = result.issues.filter(includes);
+  const missing = selected.filter(value => !result.actual.some(item => item.path === value || item.path.startsWith(value + '/')));
+  const errors = [...issues, ...missing.map(value => ({ code: 'selected-missing', path: value, detail: 'selected asset does not exist' }))];
+  return { scope: 'selected', ok: errors.length === 0, selected, errors,
+    assets: result.actual.filter(includes),
+    global: { ok: result.ok, errorCount: result.errors.length, historicalWarningCount: result.warnings.length,
+      manifestIssues: result.issues.filter(issue => issue.path === 'asset-manifest.json') } };
+}
+
+module.exports = { auditAssets, auditSelectedAssets, canonicalAssetBytes, canonicalPath, inspectAssets, selectedAssetPaths };

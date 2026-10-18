@@ -1,3 +1,4 @@
+import { rollEventDice } from './helpers/event-dice.js';
 // 四线试玩修复：复用 WORLD 组会话桩，使用真实UI壳、动效包装器和返回钩子。
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -106,7 +107,7 @@ describe('四线试玩 P1 事件生命周期', () => {
     const opening = flow.runEventDeck();
     await vi.advanceTimersByTimeAsync(1000);
     await opening;
-    UI._acts.evtChoice({ i:'0' });
+    UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     const before = UI.el.ovBody.textContent;
     closeCoveredBag();
     expect(UI.el.ovBody.textContent).toBe(before);

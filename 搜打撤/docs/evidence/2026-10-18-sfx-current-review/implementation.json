@@ -1,0 +1,63 @@
+{
+  "task": "WF-sfx-current-review-1018",
+  "request": "List all current game SFX on a local audition webpage for user replacement selection",
+  "runtime_mapping": "game/src/audio/sound.samples.catalog.js",
+  "cue_count": 106,
+  "sound_groups": 34,
+  "source_files": 35,
+  "game_mapping_modified": false,
+  "selected_B_installed": false,
+  "features": [
+    "live runtime cue import",
+    "deduplicated sound view and full cue view",
+    "all source variants",
+    "runtime cue gain, rate, lowpass and duration",
+    "runtime 1.5 SFX baseline, dB volume curve, 4.5kHz -4dB shelf and compressor settings",
+    "single voice audition",
+    "local-only replacement marks and comments",
+    "copyable cue and file list"
+  ],
+  "audition_limits": [
+    "solo playback; no music or gameplay concurrent sounds",
+    "enemy lunge uses default rate rather than dynamic combat opts",
+    "labels describe configured cues; no natural gameplay trigger coverage asserted"
+  ],
+  "tests_run": false,
+  "build_run": false,
+  "browser_verification": false,
+  "listening_verified": false,
+  "user_requested_self_verification": true,
+  "existing_service": {
+    "url": "http://127.0.0.1:5200",
+    "owner": "other session",
+    "pid": 48716,
+    "new_service_started": false
+  },
+  "files": [
+    {
+      "path": "game/sfx-review.html",
+      "bytes": 2794,
+      "sha256": "9d1a50b8c914395af339b1022016e6e44c312b9c76c8883b4e6081996a1d0d67"
+    },
+    {
+      "path": "game/css/sfx-review.css",
+      "bytes": 7330,
+      "sha256": "59d39ef31042d1e8285e4e2de7cef5277d099c2de4f1c9b33b9558fb68392faa"
+    },
+    {
+      "path": "game/src/audio/sfx-review.js",
+      "bytes": 12221,
+      "sha256": "1cdafff18fe1888877b1015582993af32a92e48285076227686d53dca58d8da3"
+    },
+    {
+      "path": "game/src/audio/sfx-review.labels.js",
+      "bytes": 3107,
+      "sha256": "8b77310ec212085db29fdd016acdd9af1be780fa7f742dc6effc2e53ae389218"
+    },
+    {
+      "path": "game/src/audio/sfx-review.sources.js",
+      "bytes": 6737,
+      "sha256": "ee13152b402f918eca8efea58d05700efb0b1a82f530f67d7250169c77f35d93"
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+import { SAMPLE_CUES } from '../game/src/audio/sound.samples.catalog.js';
+const expectedSampleCount = new Set(Object.values(SAMPLE_CUES).flatMap(cue => cue.files)).size;
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 const h = vi.hoisted(() => ({ contexts: [], tracks: [], blockNextPlay: false }));
@@ -72,17 +74,17 @@ it.each(['sdt-muted', 'sdt-sfx-off'])('initializes once on the first enabled SFX
   localStorage.setItem(setting, '1'); const sound = await loadSound(); gesture('pointerdown');
   if (setting === 'sdt-muted') sound.setMuted(false); else sound.setSfxMuted(false);
   sound.sfx('confirm'); await flush();
-  expect(h.contexts).toHaveLength(1); expect(fetch).toHaveBeenCalledTimes(64);
-  expect(h.contexts[0].decodeAudioData).toHaveBeenCalledTimes(64);
+  expect(h.contexts).toHaveLength(1); expect(fetch).toHaveBeenCalledTimes(expectedSampleCount);
+  expect(h.contexts[0].decodeAudioData).toHaveBeenCalledTimes(expectedSampleCount);
   expect(h.contexts[0].sources).toHaveLength(0); // A not-yet-ready cue is never replayed late.
   sound.sfx('hit'); expect(h.contexts[0].sources).toHaveLength(1);
   gesture('pointerdown'); gesture('keydown'); await flush();
-  expect(h.contexts).toHaveLength(1); expect(fetch).toHaveBeenCalledTimes(64);
+  expect(h.contexts).toHaveLength(1); expect(fetch).toHaveBeenCalledTimes(expectedSampleCount);
 });
 
 it('preserves normal first-gesture loading, suspended-context resume and SFX gains', async () => {
   const sound = await loadSound(); gesture('pointerdown'); await flush();
-  const ctx = h.contexts[0]; expect(fetch).toHaveBeenCalledTimes(64);
+  const ctx = h.contexts[0]; expect(fetch).toHaveBeenCalledTimes(expectedSampleCount);
   ctx.state = 'suspended'; gesture('keydown'); expect(ctx.resume).toHaveBeenCalledOnce();
   sound.setSfxVolume(0.5); const gain = 1.5 * Math.pow(10, -0.75);
   expect(ctx.gains[1].gain.value).toBeCloseTo(gain);
@@ -99,7 +101,7 @@ it('retries blocked HTML5 music and preserves its fades and switch while SFX sta
   const track = h.tracks[0]; expect(track.options.html5).toBe(true);
   expect(sound.musicPlayback.playing).toBe(false); gesture('pointerdown');
   expect(track.play).toHaveBeenCalledTimes(2); expect(sound.musicPlayback.playing).toBe(true);
-  expect(track.fade).toHaveBeenLastCalledWith(0, 0.45, 650);
+  expect(track.fade).toHaveBeenLastCalledWith(0, 0.45, 1100);
   gesture('keydown'); expect(track.fade).toHaveBeenCalledTimes(1);
   sound.setMusicVolume(0.5); expect(track.fade.mock.calls.at(-1)[2]).toBe(100);
   sound.setMusicMuted(true); expect(track.unload).toHaveBeenCalledOnce();
@@ -114,5 +116,5 @@ it('restores music from global mute without requiring short-sample initializatio
   sound.setMuted(false); expect(sound.musicPlayback.playing).toBe(true);
   expect(h.contexts).toHaveLength(0);
   gesture('keydown'); await flush();
-  expect(h.contexts).toHaveLength(1); expect(fetch).toHaveBeenCalledTimes(64);
+  expect(h.contexts).toHaveLength(1); expect(fetch).toHaveBeenCalledTimes(expectedSampleCount);
 });

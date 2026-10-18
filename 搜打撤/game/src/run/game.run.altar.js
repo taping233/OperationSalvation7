@@ -452,7 +452,7 @@ function openBagSacrifice(n, done, onCancel, filterType) {
         ${o.card.cost != null ? `<span class="bt-sac-cost">${o.card.cost} 费</span>` : ''}
       </button>`).join('');
     UI.showOverlay('[[icon:crystal]] 选择要献祭的卡牌', `
-      <p class="ov-note">选择 <b>${n}</b> 张${filterType ? `<b>${escAttr(filterType)}</b>卡` : '卡牌'}献祭（已选 <b>${sel.size}</b>）</p>
+      <p class="ov-note">选择 <b>${n}</b> 张${filterType ? `<b>${escAttr(filterType)}</b>卡` : '卡牌'}献祭（已选 <b data-sac-count>${sel.size}</b>）</p>
       <p class="ov-note">仅可献祭普通随身背包卡牌；安全格和容器内的卡牌需先移回背包。</p>
       <div class="bt-hand sac-hand">${rows || '<p class="ov-empty">背包里没有符合条件的卡牌</p>'}</div>
       <div class="scene-ops">
@@ -470,8 +470,13 @@ function openBagSacrifice(n, done, onCancel, filterType) {
       if (sel.has(o.uid)) sel.delete(o.uid);
       else if (sel.size < n) sel.add(o.uid);
       Sfx.tick();
-      render();
-      [...UI.el.ovBody.querySelectorAll('[data-act="sacPick"]')].find(button => button.dataset.uid === o.uid)?.focus({ preventScroll:true });
+      for (const button of hand.querySelectorAll('[data-act="sacPick"]')) {
+        const selected = sel.has(button.dataset.uid);
+        button.classList.toggle('sel', selected);
+        button.setAttribute('aria-pressed', String(selected));
+      }
+      UI.el.ovBody.querySelector('[data-sac-count]').textContent = String(sel.size);
+      UI.el.ovBody.querySelector('[data-act="sacConfirm"]').disabled = sel.size !== n;
     });
     UI.act('sacCancel', () => {
       if (finished || !active()) return;

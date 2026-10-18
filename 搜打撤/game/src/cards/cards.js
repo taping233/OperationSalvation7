@@ -1,6 +1,7 @@
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 import { Random } from '../core/random.js';
+import { ensureRotSeedRevision } from './rot-seed-revision.js';
 import { cardHTML, cardBackHTML } from './cards.view.js';
 import { DATA } from '../core/data-loader.js';
 
@@ -287,6 +288,7 @@ function assertValidCardRules(cards) {
       ensureM9HostedRules();
       ensureM10HostedEquipmentRules();
       ensureM11HostedRules();
+      ensureRotSeedRevision(SDT.Cards);
     },
 
     // 职业稀有度迁移（设计者 2026-09-04 定版）：老档里第七批职业卡（tt7- 前缀）

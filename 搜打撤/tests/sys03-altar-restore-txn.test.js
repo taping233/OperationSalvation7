@@ -137,6 +137,7 @@ it('献祭道具：确认后上锁+道具移除+复原页打开，复原 min(2, 
   expect(document.querySelector('[data-act="sacConfirm"]')).not.toBeNull();
   expect(document.querySelector('[data-act="sacPick"]')?.tagName).toBe('BUTTON');
   expect(document.querySelector('[data-act="sacPick"]').getAttribute('aria-pressed')).toBe('false');
+  document.querySelector('[data-act="sacPick"]').focus();
   acts.sacPick({ uid: 'item-1' });
   expect(document.querySelector('[data-act="sacPick"]').getAttribute('aria-pressed')).toBe('true');
   expect(document.activeElement).toBe(document.querySelector('[data-act="sacPick"]'));
@@ -163,6 +164,7 @@ it('献祭道具：取消分支不上锁、道具不丢，回流祭坛面板', a
   const { openAltarRitual } = await importAltar();
   openAltarRitual(st.curLayer.logical[0].def);
   acts.altarItemRestore();
+  document.querySelector('[data-act="sacPick"]').focus();
   acts.sacPick({ uid: 'item-1' });
   acts.sacCancel();
   expect(game.altarItemSacrificed).toBeFalsy();   // 取消献祭不上锁（注释口径）
@@ -461,7 +463,7 @@ it('入城补给先阅读再逐张领取，刷新不重领，满包补给保留�
   st.bagCapN = 1;
   acts.entrySupplyTake({ i:0 });
   expect(game.entrySupply.taken).toEqual([0]);
-  expect(document.querySelector('.bt-card-reveal-caption').textContent).toBe('已入背包');
+  expect(document.querySelector('.bt-card-reveal-caption').textContent).toBe('传说 · 已入背包');
   expect(document.querySelectorAll('.entry-supply-strips .reward-unit')).toHaveLength(1);
   expect(document.querySelector('.entry-supply-status b').textContent).toBe('1 / 2');
   expect(document.querySelector('.reward-notice').textContent).not.toContain('仍保留在入口');

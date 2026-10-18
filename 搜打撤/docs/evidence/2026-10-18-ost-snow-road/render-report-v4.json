@@ -1,0 +1,55 @@
+{
+  "version": 4,
+  "video": "output\\ost-snow-road-1018\\霜窗回声_唱片演示_v4_1080p.mp4",
+  "bytes": 36894894,
+  "sha256": "5a68cb8507e044d08557986d68cb0d6c922cc29757e3b867662b4cd9e4f5ce6a",
+  "duration_seconds": 91.4285625,
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "frames": 2743,
+  "render_seconds": 119.6,
+  "inputs": [
+    {
+      "path": "搜打撤\\game\\assets\\reconstruction\\wallpaper-snow-road-1016.webp",
+      "sha256": "6595b1ca0f0c84ca438da2688501d1f0a0886e297fa16b6bf7c98cd2302407ef"
+    },
+    {
+      "path": "搜打撤\\game\\assets\\music-demo\\01-title-frostglass-v12.ogg",
+      "sha256": "1080484e7d1747339a145b247ce523f0776770e7c1e74398fe5b398a9f07309a"
+    },
+    {
+      "path": "output\\ost-snow-road-1018\\霜窗回声_手书字标_v3.png",
+      "sha256": "0ede0d12d54b708174dc76aa4910bddd199df23e451219ef1eef196f3f25046c"
+    },
+    {
+      "path": "output\\ost-snow-road-1018\\蓝丝带手绘唱针_v4.png",
+      "sha256": "e47babfb3d5ced59ed58a3ca67e538be338e41e30853a691142d80ca5b62ac72"
+    }
+  ],
+  "visible_text": [
+    "霜窗回声"
+  ],
+  "design": {
+    "background": "same first wallpaper, Gaussian blur 11px, cool dim mix at 34%, vignette",
+    "disc": "620px vinyl rim, 500px original-wallpaper circle label, clockwise 6 degrees/second",
+    "title": "built-in image_gen isolated handwritten title, static below disc",
+    "details": [
+      "small tonearm with blue ribbon echoing the character",
+      "RMS music-driven blue rim",
+      "two small traveling frost glints"
+    ],
+    "removed": [
+      "spectrum",
+      "progress",
+      "time",
+      "branding",
+      "English",
+      "snow overlay",
+      "bright white margins"
+    ]
+  },
+  "acquisition": "python docs/evidence/2026-10-18-ost-snow-road/render_ost_v3.py --render --v4; existing local Pillow/numpy/FFmpeg"
+}

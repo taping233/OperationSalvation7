@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { assertInventoryComplete, buildCardInventory, compareMigrationInventories, describeStage, isApprovedBackupcellRename, renderCardInventory } from './helpers/e8-card-inventory.js';
 import beforeInventory from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
-import { approvedRevisionBaseline, RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
+import { approvedRevisionBaseline, APPROVED_1018_PRODUCTION_REVISIONS, RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
 import { readFileSync } from 'node:fs';
 
 const BOOT_ORDER = ['ensureStarters', 'ensureSha', 'ensureTabletop', 'ensureDmgTypes', 'ensureEffectFields'];
@@ -226,6 +226,25 @@ describe('E8 isolated production inventory', () => {
         expect(() => compareMigrationInventories(currentBaseline, changed, APPROVED_IDS,
           HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID)).toThrow('changed IDs differ from approved IDs');
       }
+    }
+  });
+
+  it('事件与腐化之种只接受精确批准字段，回退、扩效与额外字段均拒绝', () => {
+    for (const [id, field, previous, current] of APPROVED_1018_PRODUCTION_REVISIONS) {
+      expect(inventory.production.cards.find(row => row.id === id).card[field]).toBe(current);
+      for (const mutate of [
+        card => { if (previous === undefined) delete card[field]; else card[field] = previous; },
+        card => { card[field] = current + '额外效果'; },
+        card => { card.cost++; }, card => { card.extra = true; },
+      ]) {
+        const changed = clone(inventory);
+        mutate(changed.production.cards.find(row => row.id === id).card);
+        expect(() => compareMigrationInventories(currentBaseline, changed, APPROVED_IDS,
+          HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID)).toThrow();
+      }
+      const wrongBefore = clone(beforeInventory);
+      wrongBefore.production.cards.find(row => row.id === id).card[field] = '未经批准的旧值';
+      expect(() => approvedRevisionBaseline(wrongBefore)).toThrow(`Unreviewed original ${id}.${field}`);
     }
   });
 

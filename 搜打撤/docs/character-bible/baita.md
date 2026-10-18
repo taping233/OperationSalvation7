@@ -4,7 +4,7 @@
 
 ## 身份与参考使用
 
-运行立绘已换为 10-13 竖版 `game/assets/portraits/full/baita.webp`，本页图片为同图副本，保留坐姿、腿上古书、蛋糕、浮书与椅下法阵。下面的 09-19 配方作为历史版本保留；当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)。
+运行立绘 `game/assets/portraits/full/baita.webp` 于2026-10-18按老板要求恢复至本轮重绘前的10-13版本，1024×1536；本页图片为同图副本，保留坐姿、腿上古书、蛋糕、浮书与椅下法阵。来源及验证见[统一立绘记录](../evidence/2026-10-18-roster-reference-final/README.md)。下面的09-19配方为历史版本；当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)。
 
 ## 当前角色数据（core/characters.js）
 

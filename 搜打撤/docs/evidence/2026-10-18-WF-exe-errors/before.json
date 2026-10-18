@@ -1,0 +1,8 @@
+{
+  "noWindows": true,
+  "failures": [],
+  "close": "Error: Object has been destroyed\n    at get webContents (D:\\素材\\代号柒\\搜打撤\\.tmp\\exe-errors-1018\\probe.cjs:19:51)\n    at cleanup (D:\\素材\\代号柒\\搜打撤\\.tmp\\startup-fix-1018\\exe-project\\desktop-app\\startup-window.cjs:78:10)\n    at Window.<anonymous> (D:\\素材\\代号柒\\搜打撤\\.tmp\\startup-fix-1018\\exe-project\\desktop-app\\startup-window.cjs:89:5)\n    at Object.onceWrapper (node:events:630:28)\n    at Window.emit (node:events:509:28)\n    at Window.destroy (D:\\素材\\代号柒\\搜打撤\\.tmp\\exe-errors-1018\\probe.cjs:22:45)\n    at lifecycle (D:\\素材\\代号柒\\搜打撤\\.tmp\\exe-errors-1018\\probe.cjs:26:14)\n    at D:\\素材\\代号柒\\搜打撤\\.tmp\\exe-errors-1018\\probe.cjs:30:3",
+  "jsType": "text/javascript",
+  "htmlType": "text/html",
+  "files": 1526
+}

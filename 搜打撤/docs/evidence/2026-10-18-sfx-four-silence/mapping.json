@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-18",
+  "request": "关闭界面、诅咒结束、冰霜攻击、治疗恢复取消音效",
+  "changes": [
+    {
+      "id": "close",
+      "before": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/close.wav"
+        ],
+        "gain": 0.65,
+        "group": "ui"
+      },
+      "after": {
+        "files": [],
+        "gain": 0,
+        "group": "ui",
+        "silent": true
+      }
+    },
+    {
+      "id": "curseEnd",
+      "before": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/curse-end.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      },
+      "after": {
+        "files": [],
+        "gain": 0,
+        "group": "combat",
+        "silent": true
+      }
+    },
+    {
+      "id": "attackIce",
+      "before": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/ice.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      },
+      "after": {
+        "files": [],
+        "gain": 0,
+        "group": "combat",
+        "silent": true
+      }
+    },
+    {
+      "id": "heal",
+      "before": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/heal.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      },
+      "after": {
+        "files": [],
+        "gain": 0,
+        "group": "combat",
+        "silent": true
+      }
+    }
+  ],
+  "unchangedCueCount": 102,
+  "cardRestore": "保留既有音效",
+  "totalCueCount": 106,
+  "silentCueCount": 10,
+  "verification": "按老板要求由老板验证，未运行测试、构建、浏览器或听感验证",
+  "commit": "未提交"
+}

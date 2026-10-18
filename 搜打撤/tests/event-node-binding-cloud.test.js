@@ -1,3 +1,4 @@
+import { rollEventDice } from './helpers/event-dice.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const H = vi.hoisted(() => ({ game: {}, cards: [], saves: [], uid: 0, slot: null, narrative: async () => null, random: () => 0.9, pick: a => a[0] }));
@@ -133,7 +134,7 @@ describe('未知节点首次事件绑定', () => {
 
   it('药摊/征用从绑定事件升级为固定候选，付款后再开事件入口不重扣或重抽', async () => {
     H.cards = [events[0], ...potionCards.map(c => ({ ...c, type:'装备' }))];
-    await openBoundEvent(); UI._acts.evtChoice({ i:'0' });
+    await openBoundEvent(); UI._acts.evtChoice({ i:'0' }); rollEventDice(UI);
     const pending = JSON.parse(JSON.stringify(H.game.nodeRewards['0,1']));
     expect(pending.type).toBe('event-choice');
     expect(pending.eventId).toBe('ev19-quartermaster');

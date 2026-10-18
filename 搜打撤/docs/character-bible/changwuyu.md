@@ -4,13 +4,17 @@
 
 ## 现行权威（2026-10-13）
 
-运行立绘已换为 10-13 竖版 `game/assets/portraits/full/changwuyu.webp`，本页 ref-images 为同图副本。身份要素按指定参考核对，当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)，接入要求见[视觉规范](../production/art/VISUAL-BIBLE.md)。
+运行立绘 `game/assets/portraits/full/changwuyu.webp` 于2026-10-18按老板要求恢复至本轮重绘前的10-13版本，1024×1536；保留扶镜、帽子、黑雾与橙火，本页 ref-images 为同图副本。来源及验证见[统一立绘记录](../evidence/2026-10-18-roster-reference-final/README.md)。当前画风见[美术方向](../production/art/ART-DIRECTION-BRIEF.md)，接入要求见[视觉规范](../production/art/VISUAL-BIBLE.md)。
 
 - 男性、银灰长发低发髻、垂肩鬓发、黄瞳、尖耳、细圆框眼镜、黑弯尖宽檐魔女帽。
 - 黑高领长袍、紫内衬、金滚边、黑手套黑靴、左胸白羽与蓝宝石金扣胸针。
 - 扶镜站姿；**不持杖**。实体黑雾与带彗星拖尾的橙火球伴随，不能用旧法杖替换；动作小样可改变动作但须保留身份。
 
 下方 09-12 / 09-19 文字保留为修订史；旧持杖、背景和景别不作为现行共同条件。未定背景不由画面推断。
+
+## 可选皮肤
+
+- **余响·鼓房**（`drum-room`）：无帽休闲装，灰T恤、橄榄绿敞衫、黑裤与浅色鞋，坐在鼓组前；保留银灰低髻、黄瞳、尖耳和圆框眼镜。横幅场景完整展示，可在人物外观与选人页切换，默认及战斗立绘沿用原图。素材为 `game/assets/portraits/full/changwuyu-drum-room.webp`，来源见[接入记录](../evidence/2026-10-19-changwuyu-drum-skin/README.md)。
 
 ## 当前角色数据（core/characters.js）
 

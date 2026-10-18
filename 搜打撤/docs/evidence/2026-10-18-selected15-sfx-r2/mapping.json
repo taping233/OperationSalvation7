@@ -1,0 +1,334 @@
+{
+  "selection": [
+    "open",
+    "safeEnter",
+    "close",
+    "energyDown",
+    "buffDown",
+    "curseEnd",
+    "altarEnter",
+    "doorEnter",
+    "shopEnter",
+    "extractionEnter",
+    "parry",
+    "curse",
+    "attackIce",
+    "heal",
+    "cardRestore"
+  ],
+  "silent_cues": [
+    "open",
+    "safeEnter",
+    "altarEnter",
+    "doorEnter",
+    "shopEnter",
+    "extractionEnter"
+  ],
+  "replaced_cues": [
+    "close",
+    "energyDown",
+    "buffDown",
+    "curseEnd",
+    "parry",
+    "curse",
+    "attackIce",
+    "heal",
+    "cardRestore"
+  ],
+  "changed_count": 15,
+  "preserved_count": 91,
+  "changes": [
+    {
+      "id": "open",
+      "label": "打开界面",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/open.wav"
+        ],
+        "gain": 0.65,
+        "group": "ui"
+      },
+      "after": {
+        "files": [],
+        "gain": 0,
+        "group": "ui",
+        "silent": true
+      }
+    },
+    {
+      "id": "safeEnter",
+      "label": "打开保险箱",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/open.wav"
+        ],
+        "gain": 0.65,
+        "group": "ui"
+      },
+      "after": {
+        "files": [],
+        "gain": 0,
+        "group": "ui",
+        "silent": true
+      }
+    },
+    {
+      "id": "altarEnter",
+      "label": "进入祭坛",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/altar-enter.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      },
+      "after": {
+        "files": [],
+        "gain": 0,
+        "group": "transition",
+        "silent": true
+      }
+    },
+    {
+      "id": "doorEnter",
+      "label": "进入门扉",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/open.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      },
+      "after": {
+        "files": [],
+        "gain": 0,
+        "group": "transition",
+        "silent": true
+      }
+    },
+    {
+      "id": "shopEnter",
+      "label": "进入商店",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/shop-enter.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      },
+      "after": {
+        "files": [],
+        "gain": 0,
+        "group": "transition",
+        "silent": true
+      }
+    },
+    {
+      "id": "extractionEnter",
+      "label": "进入撤离点",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/open.wav"
+        ],
+        "gain": 0.55,
+        "group": "transition"
+      },
+      "after": {
+        "files": [],
+        "gain": 0,
+        "group": "transition",
+        "silent": true
+      }
+    },
+    {
+      "id": "close",
+      "label": "关闭界面",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/close.wav"
+        ],
+        "gain": 0.65,
+        "group": "ui"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/close.wav"
+        ],
+        "gain": 0.65,
+        "group": "ui"
+      }
+    },
+    {
+      "id": "energyDown",
+      "label": "能量减少",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/status-down.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/status-down.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "buffDown",
+      "label": "增益减弱",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/status-down.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/status-down.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "curseEnd",
+      "label": "诅咒结束",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/curse-end.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/curse-end.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "parry",
+      "label": "格挡",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/parry.wav",
+          "assets/sfx/selected32-1018/parry-soft.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/parry.wav",
+          "assets/sfx/selected15-r2-1018/parry-muted.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "curse",
+      "label": "诅咒生效",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/curse.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/curse.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "attackIce",
+      "label": "冰霜攻击",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/ice.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/ice.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "heal",
+      "label": "治疗恢复",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/heal.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/heal.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    },
+    {
+      "id": "cardRestore",
+      "label": "卡牌恢复效果",
+      "before": {
+        "files": [
+          "assets/sfx/selected32-1018/heal.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      },
+      "after": {
+        "files": [
+          "assets/sfx/selected15-r2-1018/heal.wav"
+        ],
+        "gain": 0.65,
+        "group": "combat"
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "game/src/audio/sound.samples.catalog.js",
+      "sha256": "c82fb497898fdc46b2530cf81851679226092837c5ad8332655e8fec6366ff3d"
+    },
+    {
+      "path": "game/src/audio/sfx-review.sources.js",
+      "sha256": "b1cca4f0fac5ab496ea314d8a6e08c2ecb7eb8b290a3ee1a4b540d2f5203a30b"
+    },
+    {
+      "path": "game/sfx-review.html",
+      "sha256": "73abf46e828b0993ee3a1b3b2ab1fb25cc0435c3a13cd0508418819ec4ed0f16"
+    },
+    {
+      "path": "game/assets/sfx/original-ui-1018/library.json",
+      "sha256": "5051e9381c7921a3d22dceb7119f8c6097524c89c413db65c6ffa957acf0efc2"
+    },
+    {
+      "path": "game/assets/asset-manifest.json",
+      "sha256": "c42784b68e447de225a8937d77f29c4736162c2dd8cb7437b429405afd472d30"
+    }
+  ],
+  "tests_run": false,
+  "build_run": false,
+  "browser_verification": false,
+  "listening_verified": false
+}

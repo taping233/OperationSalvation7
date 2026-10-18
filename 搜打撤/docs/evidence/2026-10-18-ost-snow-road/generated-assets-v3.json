@@ -1,0 +1,10 @@
+{
+  "mode": "built-in image_gen edit",
+  "authorization": "老板允许内置生图生成素材；最新要求画面调暗、背景虚化、中央类似专辑的圆盘旋转。",
+  "source_image": "output/ost-snow-road-1018/霜窗回声_EP封面_v2.png",
+  "output": "output/ost-snow-road-1018/霜窗回声_手书字标_v3.png",
+  "generated_source": "C:/Users/太平/.codex/generated_images/01a14efe-5ebe-7710-a30b-b66094f82963/exec-b49fc307-b9c2-4c2f-8122-43b6a1272626.png",
+  "role": "曲名字标；唱片标签和虚化背景均继续使用原首页第一张壁纸，不使用重绘封面替代原壁纸。",
+  "normalization": "视频合成时按透明边界裁去空边并等比缩放到350×132范围；字标内容未重绘。",
+  "prompt": "Extract and reproduce ONLY the four existing handwritten Chinese title characters 霜窗回声 from the left side of the reference cover as an isolated clean transparent PNG typography asset. Keep the same soft, light, airy handwritten Japanese anime EP title lettering, horizontally arranged with the same expressive curved stroke of the first and last characters. Render the actual lettering in a single FLAT pale icy blue-white color #dce8f2 so it will be readable on a DARK blurred background. Four characters only, no English or other text. Remove absolutely all illustration, background, paper, snowflakes, decorative swirls, lines, leaf shapes and all other graphics. Genuinely transparent background with ample padding. No glow, no shadow, no gradients, no metallic finish, no 3D texture, no ice crystals, no outline. Do not redesign the characters into sharp serif typography."
+}

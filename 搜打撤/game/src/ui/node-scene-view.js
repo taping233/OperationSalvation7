@@ -1,5 +1,21 @@
 import { esc, escAttr } from '../core/shared.js';
 import '../../css/archive-back.css';
+import '../../css/event-choice-feedback.css';
+
+function decorateChoices(template) {
+  for (const [index, option] of [...template.content.querySelectorAll('.evt-opt[data-act]')].entries()) {
+    const label = option.querySelector('b')?.textContent.replace(/\s/g, '') || '';
+    const kind = /应战|战斗|攻击|反击/.test(label) ? 'combat' : /离开|返回|放弃|绕行|逃/.test(label) ? 'leave'
+      : /购买|支付|交易|贿赂|交出/.test(label) ? 'trade' : /治疗|休息|救助|复原/.test(label) ? 'restore' : 'explore';
+    option.dataset.choiceKind = kind;
+    const icon = document.createElement('i');
+    icon.className = 'event-choice-symbol'; icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = `[[icon:${{ combat:'swords', leave:'exit', trade:'coin', restore:'heart', explore:'map' }[kind]}]]`;
+    option.prepend(icon);
+    option.dataset.choiceNumber = String(index + 1).padStart(2, '0');
+  }
+  return template.innerHTML;
+}
 
 function mergeSingleOptionDescription(choices, body, narrative) {
   const options = choices.content.querySelectorAll('.evt-opt');
@@ -21,7 +37,8 @@ export function eventSceneHTML({ tone, icon = '', title, sub = '', body = '', fo
   const themed = ['event', 'entry', 'fire', 'pickup'].includes(tone);
   const choiceTemplate = tone === 'event' ? document.createElement('template') : null;
   if (choiceTemplate) choiceTemplate.innerHTML = body;
-  const choices = choiceTemplate ? mergeSingleOptionDescription(choiceTemplate, body, sub) : body;
+  if (choiceTemplate) mergeSingleOptionDescription(choiceTemplate, body, sub);
+  const choices = choiceTemplate ? decorateChoices(choiceTemplate) : body;
   const choiceCount = choiceTemplate ? choiceTemplate.content.querySelectorAll('.evt-opt[data-act]').length : 0;
   const eventChoiceFoot = choiceCount > 1 ? `<div class="event-choice-state">
     <div class="event-choice-announcement" role="status" aria-live="polite"><b data-event-choice-name>先选择一个选项</b><small data-event-choice-detail>点击选项查看已知结果，再确认执行。</small></div>

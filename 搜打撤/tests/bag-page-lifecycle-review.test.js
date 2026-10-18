@@ -28,7 +28,7 @@ beforeEach(async () => {
     showCardZoom(_card, options) { document.getElementById('cardZoom')?.remove(); const zoom = document.createElement('div'); zoom.id = 'cardZoom'; zoom.classList.toggle('inventory-zoom', options.presentation === 'inventory'); zoom.innerHTML = `<button class="cz-backdrop"></button><button class="cz-close"></button><div class="cz-card"></div><div class="cz-foot">${options.footer}</div>`; zoom.querySelector('.cz-backdrop').onclick = () => { zoom.remove(); options.returnFocus?.focus(); }; document.body.append(zoom); },
   };
   body.addEventListener('click', event => { const target = event.target.closest('[data-act]'); if (target && !target.disabled) ui._acts[target.dataset.act]?.({ ...target.dataset }); });
-  window.SDT = { UI: ui, game: H.game, Base: { slot: 1, bagCap: () => 16 }, Sound: { sfx: vi.fn() }, Cards: { SHA: { id: 'starter-attack', name: '初始攻击' }, cardHTML: card => `<span>${card.name}</span>`, cardBackHTML: () => '' } };
+  window.SDT = { UI: ui, game: H.game, Base: { slot: 1, bagCap: () => 16 }, Icons: { rich: markup => markup }, Sound: { sfx: vi.fn() }, Cards: { SHA: { id: 'starter-attack', name: '初始攻击' }, cardHTML: card => `<span>${card.name}</span>`, cardBackHTML: () => '' } };
   frames = []; vi.stubGlobal('requestAnimationFrame', fn => { frames.push(fn); return frames.length; }); vi.stubGlobal('cancelAnimationFrame', vi.fn());
   document.elementFromPoint = vi.fn(() => null);
   bag = await import('../game/src/hub/game.bag.js'); drag = await import('../game/src/hub/game.bag.drag.js'); bag.showBackpack(true);
@@ -210,10 +210,10 @@ describe('新号背包真实入口反馈', () => {
     expect(document.querySelector('[data-stack="盔甲"] .bag-tstate').textContent).toBe('火堆不可复原');
     expect(document.querySelectorAll('.bag-znote, .bag-disclosure')).toHaveLength(0);
   });
-  it('按钮丢弃确认不误称拖拽，碎片库存与门槛分列且排序按钮有名称', () => {
+  it('按钮丢弃确认不误称拖拽，按反馈移除货币栏且排序按钮有名称', () => {
     H.game.fragments = 4; bag.showBackpack(true);
-    expect(document.querySelector('.bag-cur').textContent).toContain('4 枚');
-    expect(document.querySelector('.bag-cur').textContent).toContain('每次需 2 枚');
+    expect(document.querySelector('.bag-cur')).toBeNull();
+    expect(H.game.fragments).toBe(4);
     expect(document.querySelector('[data-act="bagSortCycle"]').getAttribute('aria-label')).toBeTruthy();
     inspect(); ui._acts.detailDiscard();
     expect(document.getElementById('ovBody').textContent).toContain('永久丢弃');
