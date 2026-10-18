@@ -80,6 +80,12 @@ const waitFor = async (cond, ms = 3000) => {
 };
 
 describe('启动链（DOMContentLoaded → showTitle）', () => {
+  it('标题已可用时立即发布桌面就绪状态，不等待被封面跳过的地图循环', () => {
+    expect(window.SDT.game.state).toBe('title');
+    expect(document.getElementById('title').dataset.controlsBound).toBe('true');
+    expect(document.getElementById('title').hidden).toBe(false);
+    expect(document.body.dataset.state).toBe('title');
+  });
   it('重复DOMContentLoaded不会再次初始化UI或启动后台预取', () => {
     const init = vi.spyOn(window.SDT.UI, 'init');
     const prefetch = vi.spyOn(window.SDT.Art, 'prefetchBatched');

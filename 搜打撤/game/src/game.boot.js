@@ -786,6 +786,8 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     }
     rebuildNotes();
     showTitle();          // 开机进入《代号7》标题界面
+    // The title covers the map loop; desktop readiness must not wait for that loop.
+    document.body.dataset.state = game.state;
     if (import.meta.env.DEV && new URLSearchParams(location.search).has('perfProbe')) {
       import('./core/perf-probe.local.js')
         .then(({ installPerfProbe }) => installPerfProbe({ SDT, game, canvas, renderScheduler }))

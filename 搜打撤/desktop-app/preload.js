@@ -3,6 +3,10 @@ const { contextBridge, ipcRenderer } = require('electron');
 // The isolated preload reads DOM readiness, never the page's JavaScript namespace.
 window.addEventListener('DOMContentLoaded', () => {
   let sentReady = false;
+  let readyScheduled = false;
+  let stopped = false;
+  let readyFrame;
+  let readyTimer;
   let sentCovered = false;
   const reveal = () => { document.documentElement.dataset.desktopStartup = 'preparing'; };
   const play = () => { document.documentElement.dataset.desktopStartup = 'playing'; };
@@ -11,6 +15,9 @@ window.addEventListener('DOMContentLoaded', () => {
   ipcRenderer.on('startup-play', play);
   ipcRenderer.on('startup-cancel', cancel);
   function cleanup() {
+    stopped = true;
+    clearTimeout(readyTimer);
+    if (readyFrame != null) cancelAnimationFrame(readyFrame);
     observer.disconnect();
     ipcRenderer.removeListener('startup-reveal', reveal);
     ipcRenderer.removeListener('startup-play', play);
@@ -25,9 +32,18 @@ window.addEventListener('DOMContentLoaded', () => {
     if (startup === 'complete' || startup === 'cancelled') { cleanup(); return; }
     const state = document.body?.dataset.state;
     const bound = document.getElementById('title')?.dataset.controlsBound === 'true';
-    if (sentReady || !state || state === 'boot' || !bound) return;
-    sentReady = true;
-    requestAnimationFrame(() => requestAnimationFrame(() => ipcRenderer.send('startup-ready')));
+    if (readyScheduled || !state || state === 'boot' || !bound) return;
+    readyScheduled = true;
+    const sendReady = () => {
+      if (stopped || sentReady) return;
+      sentReady = true;
+      clearTimeout(readyTimer);
+      if (readyFrame != null) cancelAnimationFrame(readyFrame);
+      ipcRenderer.send('startup-ready');
+    };
+    // The initialized page is ready even if its hidden window gets no paint frames.
+    readyTimer = setTimeout(sendReady, 250);
+    readyFrame = requestAnimationFrame(() => { readyFrame = requestAnimationFrame(sendReady); });
   }
   const observer = new MutationObserver(checkReady);
   observer.observe(document.documentElement, { attributes: true, subtree: true, attributeFilter: ['data-state', 'data-controls-bound', 'data-desktop-startup'] });

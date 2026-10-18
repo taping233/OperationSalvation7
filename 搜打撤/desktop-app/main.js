@@ -1,5 +1,5 @@
 /* 搜打撤 · 代号7 —— 唯一 Electron 外壳实现 */
-const { app, BrowserWindow, Menu, protocol, ipcMain, shell, net } = require('electron');
+const { app, BrowserWindow, Menu, protocol, ipcMain, shell, net, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const { pathToFileURL } = require('url');
@@ -85,7 +85,7 @@ function createWindow() {
     },
   });
 
-  attachStartupWindow({ BrowserWindow, ipcMain, app }, win);
+  attachStartupWindow({ BrowserWindow, ipcMain, app, screen }, win);
   win.webContents.on('did-fail-load', (_event, code, description, url, isMainFrame) => {
     if (isMainFrame) console.error(`桌面页面加载失败：${code} ${description} (${url})`);
   });

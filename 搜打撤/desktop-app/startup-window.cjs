@@ -1,9 +1,13 @@
 const path = require('path');
 
 // A separate renderer keeps the loading screen responsive while the game boots.
-function attachStartupWindow({ BrowserWindow, ipcMain, app }, game) {
+function attachStartupWindow({ BrowserWindow, ipcMain, app, screen }, game) {
+  const area = screen?.getDisplayMatching(game.getBounds()).workArea;
+  const width = Math.min(880, area?.width || 880), height = Math.min(540, area?.height || 540);
   const splash = new BrowserWindow({
-    width: 880, height: 540, resizable: false, fullscreen: true,
+    width, height, resizable: false, fullscreen: false, fullscreenable: false,
+    movable: true, maximizable: false,
+    ...(area ? { x: Math.round(area.x + (area.width - width) / 2), y: Math.round(area.y + (area.height - height) / 2) } : { center: true }),
     backgroundColor: '#080b0e', show: false, frame: false,
     webPreferences: {
       preload: path.join(__dirname, 'startup-preload.cjs'),
@@ -14,19 +18,25 @@ function attachStartupWindow({ BrowserWindow, ipcMain, app }, game) {
   let failed = false;
   let preparing = false;
   let revealTimer;
+  let bootTimer;
+  let loadAttempt = 0;
   const sendFailure = () => {
     if (!finished && !splash.isDestroyed()) {
       failed = true;
       preparing = false;
       clearTimeout(revealTimer);
+      clearTimeout(bootTimer);
       game.webContents.send('startup-cancel');
       splash.webContents.send('startup-status', 'failed');
     }
   };
   const loadGame = () => {
+    const attempt = ++loadAttempt;
     failed = false;
+    clearTimeout(bootTimer);
+    bootTimer = setTimeout(sendFailure, 15000);
     splash.webContents.send('startup-status', 'loading');
-    game.loadURL('app://sdt/index.html').catch(sendFailure);
+    game.loadURL('app://sdt/index.html').catch(() => { if (attempt === loadAttempt) sendFailure(); });
   };
   const reveal = (animated) => {
     if (finished || failed) return;
@@ -41,6 +51,7 @@ function attachStartupWindow({ BrowserWindow, ipcMain, app }, game) {
   const ready = (event) => {
     if (event.sender !== game.webContents || finished || failed || preparing) return;
     preparing = true;
+    clearTimeout(bootTimer);
     game.webContents.send('startup-reveal');
     // Missing/older game assets must never trap the player behind a loading screen.
     revealTimer = setTimeout(() => reveal(false), 4500);
@@ -59,6 +70,7 @@ function attachStartupWindow({ BrowserWindow, ipcMain, app }, game) {
   };
   function cleanup() {
     clearTimeout(revealTimer);
+    clearTimeout(bootTimer);
     ipcMain.removeListener('startup-ready', ready);
     ipcMain.removeListener('startup-covered', covered);
     ipcMain.removeListener('startup-retry', retry);

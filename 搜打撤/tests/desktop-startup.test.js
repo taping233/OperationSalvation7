@@ -10,7 +10,7 @@ const { attachStartupWindow } = require('../desktop-app/startup-window.cjs');
 beforeEach(() => vi.useFakeTimers());
 afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); });
 
-function setup() {
+function setup(workArea) {
   const windows = [];
   class Window extends EventEmitter {
     constructor(options) {
@@ -26,13 +26,27 @@ function setup() {
     isDestroyed() { return this.destroyed; }
   }
   const game = new Window();
+  game.getBounds = vi.fn(() => ({ x: -1600, y: 120, width: 1400, height: 850 }));
   const ipcMain = new EventEmitter();
   const app = { quit: vi.fn() };
-  const splash = attachStartupWindow({ BrowserWindow: Window, ipcMain, app }, game);
-  return { game, ipcMain, app, splash };
+  const screen = workArea ? { getDisplayMatching: vi.fn(() => ({ workArea })) } : undefined;
+  const splash = attachStartupWindow({ BrowserWindow: Window, ipcMain, app, screen }, game);
+  return { game, ipcMain, app, splash, screen };
 }
 
 describe('desktop startup window lifecycle', () => {
+  it.each([
+    [{ x: 0, y: 0, width: 1920, height: 1040 }, { x: 520, y: 250, width: 880, height: 540 }],
+    [{ x: -1920, y: 40, width: 1920, height: 1040 }, { x: -1400, y: 290, width: 880, height: 540 }],
+    [{ x: 100, y: -600, width: 800, height: 500 }, { x: 100, y: -600, width: 800, height: 500 }],
+  ])('centres a movable window in the game display work area %j', (area, bounds) => {
+    const { splash, game, screen } = setup(area);
+    expect(screen.getDisplayMatching).toHaveBeenCalledWith(game.getBounds());
+    expect(splash.options).toEqual(expect.objectContaining({ ...bounds, movable: true, fullscreen: false, fullscreenable: false, frame: false }));
+  });
+  it('uses native centring when no screen adapter is provided', () => {
+    expect(setup().splash.options.center).toBe(true);
+  });
   it('shows the lightweight splash before loading the game and waits for real readiness', () => {
     const { game, splash, ipcMain, app } = setup();
     expect(game.loadURL).not.toHaveBeenCalled();
@@ -99,6 +113,19 @@ describe('desktop startup window lifecycle', () => {
     expect(game.webContents.send).toHaveBeenLastCalledWith('startup-cancel');
     expect(splash.destroy).toHaveBeenCalledOnce();
   });
+  it('turns a missing boot signal into retryable failure and resets the deadline on retry', () => {
+    const { splash, game, ipcMain } = setup();
+    splash.emit('ready-to-show'); vi.advanceTimersByTime(14999);
+    expect(splash.webContents.send).toHaveBeenLastCalledWith('startup-status', 'loading');
+    vi.advanceTimersByTime(1);
+    expect(splash.webContents.send).toHaveBeenLastCalledWith('startup-status', 'failed');
+    expect(game.show).not.toHaveBeenCalled();
+    ipcMain.emit('startup-retry', { sender: splash.webContents });
+    ipcMain.emit('startup-ready', { sender: game.webContents });
+    ipcMain.emit('startup-covered', { sender: game.webContents });
+    vi.advanceTimersByTime(15000);
+    expect(game.show).toHaveBeenCalledOnce(); expect(vi.getTimerCount()).toBe(0);
+  });
   it('cancels a pending cut after load failure and rejects its late covered notification', () => {
     const { game, splash, ipcMain } = setup();
     splash.emit('ready-to-show');
@@ -155,6 +182,7 @@ describe('desktop readiness bridge', () => {
       require: () => ({ contextBridge: { exposeInMainWorld() {} }, ipcRenderer }),
       window: dom.window, document: dom.window.document, MutationObserver: observer,
       requestAnimationFrame: callback => frames.push(callback),
+      cancelAnimationFrame() {}, setTimeout, clearTimeout,
     });
     dom.window.dispatchEvent(new dom.window.Event('DOMContentLoaded'));
     dom.window.document.getElementById('title').dataset.controlsBound = 'true';
@@ -181,6 +209,39 @@ describe('desktop readiness bridge', () => {
       expect(pkg.build.files).toContain(file);
       expect(readFileSync(`desktop-app/${file}`, 'utf8').length).toBeGreaterThan(0);
     }
+  });
+});
+
+describe('hidden game readiness frames', () => {
+  function bridge() {
+    const dom = new JSDOM('<body data-state="title"><main id="title" data-controls-bound="true"></main></body>');
+    const frames = [], ipcRenderer = new EventEmitter(); ipcRenderer.send = vi.fn();
+    runInNewContext(readFileSync('desktop-app/preload.js', 'utf8'), {
+      require: () => ({ contextBridge: { exposeInMainWorld() {} }, ipcRenderer }),
+      window: dom.window, document: dom.window.document, MutationObserver: dom.window.MutationObserver,
+      requestAnimationFrame: callback => frames.push(callback), cancelAnimationFrame() {}, setTimeout, clearTimeout,
+    });
+    dom.window.dispatchEvent(new dom.window.Event('DOMContentLoaded'));
+    return { dom, frames, ipcRenderer };
+  }
+  it('does not indefinitely gate an initialized hidden page on paint callbacks', () => {
+    const { dom, frames, ipcRenderer } = bridge();
+    vi.advanceTimersByTime(249); expect(ipcRenderer.send).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(1); expect(ipcRenderer.send).toHaveBeenCalledExactlyOnceWith('startup-ready');
+    while (frames.length) frames.shift()();
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    dom.window.dispatchEvent(new dom.window.Event('pagehide')); dom.window.close();
+  });
+  it('cancels readiness on departure and ignores late frame callbacks', () => {
+    const { dom, frames, ipcRenderer } = bridge();
+    dom.window.dispatchEvent(new dom.window.Event('pagehide'));
+    vi.advanceTimersByTime(1000); while (frames.length) frames.shift()();
+    expect(ipcRenderer.send).not.toHaveBeenCalled(); expect(vi.getTimerCount()).toBe(0); dom.window.close();
+  });
+  it('declares a native drag surface while leaving action buttons clickable', () => {
+    const source = readFileSync('desktop-app/startup.html', 'utf8');
+    expect(source).toMatch(/main\s*\{[^}]*-webkit-app-region:\s*drag/);
+    expect(source).toMatch(/button\s*\{[^}]*-webkit-app-region:\s*no-drag/);
   });
 });
 
