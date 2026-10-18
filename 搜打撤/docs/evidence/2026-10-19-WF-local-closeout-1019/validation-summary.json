@@ -1,0 +1,34 @@
+{
+  "sourceCommit": "3721e42a4abfbed2fd623e75d4264f5a428a22b3",
+  "remoteVerified": "3721e42a4abfbed2fd623e75d4264f5a428a22b3",
+  "files": 434,
+  "tests": {
+    "filesPassed": 618,
+    "passed": 6065,
+    "failed": 0,
+    "skipped": 16,
+    "seconds": 316.65
+  },
+  "checks": [
+    "syntax",
+    "content-data",
+    "types",
+    "eslint",
+    "full-vitest"
+  ],
+  "selectedAssetCount": 133,
+  "selectedAssetOK": true,
+  "globalAssetErrors": 95,
+  "globalAssetErrorBoundary": "91 baseline errors plus 4 intentionally ignored local candidate frames; no debt baseline changed",
+  "frozenReport": {
+    "path": "D:\\素材\\代号柒\\搜打撤\\docs\\evidence\\2026-10-19-WF-local-closeout-1019-r2\\2026-10-18T17-15-32.033Z-eda7b698-staged.json",
+    "bytes": 4060278,
+    "sha256": "40479a60320804590ef57ad6e0d591d944243482d5b0caaa3d4beaeb41a464d5"
+  },
+  "unverified": [
+    "fresh browser gameplay",
+    "build",
+    "remote CI"
+  ],
+  "registry": "Own row closed in local shared registry; shared file excluded from commit after automatic approval rejection to preserve concurrent registrations."
+}
