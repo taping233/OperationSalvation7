@@ -1,0 +1,12 @@
+/* Container pages share the secondary workspace, card scale and detail controls. */
+body #overlay .battle-decision.container-store .pearl-store-list { grid-template-columns:repeat(auto-fill,300px); justify-content:start; gap:24px; }
+body #overlay .battle-decision.container-store .container-store-slot { display:flex; flex-direction:column; gap:10px; width:300px; max-width:100%; }
+body #overlay .battle-decision.container-store .pearl-store-card { width:300px; max-width:100%; }
+body #overlay .battle-decision.container-store .pearl-store-art .hs-card { width:100%!important; font-size:30px; }
+body #overlay .battle-decision.container-store .pearl-store-caption { background:#223441; color:#e8edef; }
+body #overlay .battle-decision.container-store .pearl-store-card:disabled { opacity:.55; cursor:not-allowed; outline:none; }
+body #overlay .battle-decision.container-store .container-store-blocked { margin:0; color:#e3b7a6; font-size:20px; line-height:1.5; }
+body #overlay .battle-decision.container-store .container-store-help { flex:1; align-self:center; min-width:0; max-width:68ch; color:#b8cbd6; font-size:21px; line-height:1.6; }
+body #overlay .battle-decision.container-store .container-store-help summary { width:max-content; cursor:pointer; }
+body #overlay .battle-decision.container-store .container-store-help p { margin:10px 24px 0 0; }
+body #overlay .battle-decision.container-store .battle-decision-actions { display:flex; align-items:center; gap:24px; }

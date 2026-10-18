@@ -1,15 +1,11 @@
 import frames from '../../data/card-frame-layout.json';
 import { assetUrl } from './asset-url.js';
 
-// Keep every original preload URL. Main figures and the frames actually used by
-// cardHTML get a place before the complete thumbnail catalogue, without eagerly
-// decoding the catalogue or promoting all portrait animation frames.
-export function planStartupArtPreload({ sceneUrls = [], figureUrls = [], thumbnailUrls = [], manifestUrls = [], protocol = globalThis.location?.protocol } = {}) {
+// Startup prepares only common scenes and the card frames used by cardHTML.
+// Figures, card art and thumbnails load through their existing page-level paths.
+export function planStartupArtPreload({ sceneUrls = [] } = {}) {
   const frameUrls = Object.values(frames).map(frame => assetUrl(`assets/${frame.path}`));
-  // Desktop artwork already lives on disk. Reading the complete catalogue at
-  // boot competes with foreground decoding without providing an HTTP cache.
-  if (protocol === 'app:') return [...new Set([...sceneUrls, ...frameUrls].filter(Boolean))];
-  return [...new Set([...sceneUrls, ...figureUrls, ...frameUrls, ...thumbnailUrls, ...manifestUrls].filter(Boolean))];
+  return [...new Set([...sceneUrls, ...frameUrls].filter(Boolean))];
 }
 
 // A per-prefetch-run, bounded courtesy window for the current foreground page.

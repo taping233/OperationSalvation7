@@ -1,3 +1,4 @@
+import { isQueuedCastSource } from './battle.card-presentation.js';
 /* battle.draw.js —— 抽牌/发牌/自动出牌簇（自 battle.engine.js 逐字迁出，治理批次 3）。
  * 覆盖：drawCards（含抽到即施放/灰烬符文直释）、deckDraw、addTempCard/addDeckCard/grantSha、
  * releaseHandMatches/autoPlayHandType。牌堆与表现态经 runtime 活绑定直引；与引擎互递归的
@@ -94,11 +95,12 @@ function drawCards(n) {
     checkSealTransformation();   // 受缚之残影：每批抽牌后检查手牌是否集齐 5 张封印之牌
     return got;
   }
-function addTempCard(tpl) {
+function addTempCard(tpl, presentation = null) {
     const uid = 'bts' + Date.now().toString(36) + nextTmpSeq();
     granted.push({ uid, card: { ...tpl } });
     hand.push(uid);
-    cardAnims.push({ kind: 'draw', uid, name: tpl.name || '', acquired: true });
+    cardAnims.push({ kind: 'draw', uid, name: tpl.name || '', card: { ...tpl }, acquired: true,
+      ...(isQueuedCastSource(presentation?.source) ? { source: presentation.source } : {}) });
     // 置入手牌视同「抽到」（2026-09-11 英雄卡审计）：万剑归宗普通战分支走
     // grantStarterAttack→addTempCard，此前不进 lastDrawnUids，「直接释放其中武术」永远放 0 张
     lastDrawnUids.push(uid);
@@ -114,7 +116,7 @@ function addDeckCard(tpl) {
     const uid = 'btd' + Date.now().toString(36) + nextTmpSeq();
     granted.push({ uid, card: { ...tpl } });
     drawPile.push(uid);
-    cardAnims.push({ kind: 'shuffle', name: tpl.name || '' });   // 洗入牌动画事件（2026-09-11 需求）
+    cardAnims.push({ kind: 'shuffle', uid, name: tpl.name || '', card: { ...tpl } });   // 洗入牌动画事件（2026-09-11 需求）
     return uid;
   }
 function grantSha(n) {

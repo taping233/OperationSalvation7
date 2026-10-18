@@ -58,8 +58,6 @@ async function mount() {
 const search = value => { const input = document.querySelector('[data-warehouse-filter="query"]'); input.value = value; input.dispatchEvent(new Event('input')); return input; };
 const open = name => {
   const source = document.querySelector(`[data-name="${name}"]`); source.focus(); source.click();
-  // 2026-10-15 老板指令新契约：点卡仅选中浏览，特写收进「查看详情」（warehousePick）入口。
-  ui._acts.warehousePick(document.querySelector('.warehouse-selection-v12 [data-act="warehousePick"]').dataset);
   return source;
 };
 const footer = action => document.querySelector(`#cardZoom .cz-foot [data-act="${action}"]`);
@@ -96,13 +94,12 @@ describe('仓库双排浏览与原特写事务边界', () => {
     const { openCard } = await mount(); const before = JSON.stringify(base.data); search('乙');
     expect(document.querySelector('[data-name="甲"]').hidden).toBe(true);
     const source = document.querySelector('[data-name="乙"]'); source.focus(); source.click();
-    // 点卡只选中浏览：不直接开特写，「当前浏览」面板给出待查看的堆
-    expect(document.getElementById('cardZoom')).toBeNull();
-    expect(openCard).not.toHaveBeenCalled();
+    // 当前入口单击普通卡即委派特写，库存变更仍由特写事务动作负责。
+    expect(document.getElementById('cardZoom')).not.toBeNull();
+    expect(openCard).toHaveBeenCalledTimes(1);
     expect(document.querySelector('.warehouse-selection-v12').textContent).toContain('乙');
     expect(JSON.stringify(base.data)).toBe(before);
     const from = source;
-    ui._acts.warehousePick(document.querySelector('.warehouse-selection-v12 [data-act="warehousePick"]').dataset);
     expect(openCard).toHaveBeenCalledWith(1, { from });
     expect(ui.showCardZoom).toHaveBeenLastCalledWith(rare, expect.objectContaining({ from, returnFocus: from }));
     expect(JSON.stringify(base.data)).toBe(before);

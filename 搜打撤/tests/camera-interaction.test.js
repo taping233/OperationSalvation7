@@ -5,13 +5,13 @@ window.SDT = {};
 const { nodeHitRadius } = await import('../game/src/core/camera.js');
 
 describe('地图相机交互几何', () => {
-  it('探索起点的180世界间距分支保留更宽留白与独立点击目标', () => {
+  it('探索起点保留独立点击目标，同时给上下HUD与标签让出空间', () => {
     const cam = new window.SDT.Camera({cols:30,rows:30,tile:48},1920,968);
     const game = {layerIdx:0,trackPos:0,nodePos:[[{x:180,y:180},{x:360,y:180},{x:180,y:360}]],
       layerData:[{logical:[{next:[[0,1],[0,2]]},{next:[]},{next:[]}]}]};
     cam.frameExploration(game);
     const a=cam.worldToScreen(180,180),b=cam.worldToScreen(360,180);
-    expect(b.x-a.x).toBeGreaterThanOrEqual(560);
+    expect(b.x-a.x).toBeGreaterThanOrEqual(480);
     expect(nodeHitRadius(cam.zoom)*cam.zoom*2).toBeLessThan(b.x-a.x);
     expect(cam.screenToWorld(b.x,b.y)).toEqual(game.nodePos[0][1]);
     cam.setDetailInset(530);
@@ -100,5 +100,46 @@ describe('地图相机交互几何', () => {
       expect(screen.x).toBeLessThan(900-310-78);
     }
     expect(JSON.stringify(game)).toBe(before);
+  });
+});
+
+describe('整层全景与安全取景',()=>{
+  const fixture=()=>({layerIdx:0,trackPos:0,seen:{'0,0':1,'0,1':1},visited:{},
+    nodePos:[[{x:100,y:100},{x:280,y:100},{x:100,y:1360},{x:1360,y:1360}]],
+    layerData:[{logical:[{next:[[0,1]]},{next:[]},{next:[]},{next:[]}]}]});
+  it('G框全部结构，F回当前分支；全程不揭示或访问未知节点类型',()=>{
+    const game=fixture(),before=JSON.stringify(game);
+    const cam=new window.SDT.Camera({cols:30,rows:30,tile:48},1180,664);
+    cam.frameExploration(game,true);
+    expect(cam.frameMode).toBe('overview');
+    for(const p of game.nodePos[0]){
+      const s=cam.worldToScreen(p.x,p.y);
+      expect(s.x).toBeGreaterThanOrEqual(105);
+      expect(s.x).toBeLessThanOrEqual(1075);
+      expect(s.y).toBeGreaterThanOrEqual(95);
+      expect(s.y).toBeLessThanOrEqual(490);
+    }
+    expect(cam.zoom).toBeLessThan(.4);
+    const overviewZoom=cam.zoom;
+    cam.frameExploration(game);
+    expect(cam.frameMode).toBe('routes');
+    expect(cam.zoom).toBeGreaterThan(overviewZoom);
+    expect(JSON.stringify(game)).toBe(before);
+  });
+  it('有详情侧栏时全景仍将整层中心点留在可见安全区',()=>{
+    const cam=new window.SDT.Camera({cols:30,rows:30,tile:48},1180,664);
+    cam.setDetailInset(350);cam.frameExploration(fixture(),true);
+    for(const p of fixture().nodePos[0]){
+      const s=cam.worldToScreen(p.x,p.y);
+      expect(s.x).toBeGreaterThan(90);expect(s.x).toBeLessThan(1180-350-90);
+      expect(s.y).toBeGreaterThan(90);expect(s.y).toBeLessThan(500);
+    }
+  });
+  it('低于原0.4的全景缩放后滚轮不会反向跳大，单点不会产生无穷值',()=>{
+    const cam=new window.SDT.Camera({cols:30,rows:30,tile:48},1180,664);
+    cam.frameExploration(fixture(),true);const z=cam.zoom;
+    cam.zoomAt(500,300,.9);expect(cam.zoom).toBeLessThan(z);
+    const g=fixture();g.nodePos=[[{x:100,y:100}]];g.layerData[0].logical=[{next:[]}];
+    cam.frameExploration(g,true);expect([cam.cx,cam.cy,cam.zoom].every(Number.isFinite)).toBe(true);
   });
 });

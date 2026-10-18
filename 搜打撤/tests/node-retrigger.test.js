@@ -4,8 +4,8 @@
  * 口径：
  *   1) 收益节点完成领取即写 visited，站在格上也不能重刷；
  *   2) 商店关闭后仍可重开，离开商店格时才写 visited。
- * 场景用固定种子 20260919 第 1 层的直线图：0入口 1战斗 2商店 3宝箱 4火堆 5战斗 6门；
- * enterLayer 落位不触发内容，正好构造「站在宝箱格」的起点。 */
+ * 场景动态选择收益格与已有动作可确定退出的邻格，不依赖随机事件的选择或确认；
+ * enterLayer 落位不触发内容，正好构造「站在目标格」的起点。 */
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 
 // 故意恒真：仅给下方 canvas/存储补桩一个块级作用域（lint 静音，不改逻辑）
@@ -108,10 +108,10 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     // 层内类型布局按局随机（种子固定但 skipClassChoice/上游随机源演进都会平移消耗序列，
     // 固定种子不再保证「第 1 层=直线图」的旧前提），动态选目标格：优先宝箱/物资格
     // （收益可计数），兜底商店（页面可观测），且其邻格存在可正常结算的格子
-    // （避开战斗/门/祭坛/首脑/撤离点）。enterLayer 只置位不触发内容，用来构造
+    // （仅入口/空白/商店/营火，不进入需要独立选择与确认的随机事件）。enterLayer 只置位不触发内容，用来构造
     // 「站在目标格」的起点。目标格可能落在任意层：逐层扫描；整局都没有合法格是
     // 合法随机结果——重摇重试到找到（有上限），被测行为与具体布局无关。
-    const sweepable = t => !['battle', 'door', 'extraction', 'altar', 'boss', 'emergencyExit'].includes(t);
+    const sweepable = t => ['entrance', 'blank', 'shop', 'fire'].includes(t);
     const neighborsOf = (li, idx) => (game.layerData[li].logical[idx].next || []).filter(([l]) => l === li).map(([, i]) => i);
     const LOOT_TYPES = ['chest', 'coin', 'wood', 'rations', 'key', 'resource'];
     const findTarget = () => {
@@ -168,7 +168,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     // 走去邻格：商店在此刻补写 visited；收益节点保持已完成。
     expect(moveTo(li, leaveIdx)).toBe(true);
     await sweep();
-    expect(game.state).toBe('idle');
+    expect(game.state, `离开 ${kind} 格后，受控邻格 ${typeOfLocal(li, leaveIdx)} 应完成合法操作`).toBe('idle');
     expect(game.visited[vKey]).toBe(1);
 
     // 走回本格：移动合法（双向边），但内容不得再触发
@@ -238,7 +238,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
       newRun('standard',[],{skipClassChoice:true});game.myClass='武';game.characterId='wu';game.state='idle';
       const idx=game.layerData[0].logical.findIndex(cell=>(cell.next||[]).some(([li])=>li===0));
       const neighbor=game.layerData[0].logical[idx].next.find(([li])=>li===0)[1];
-      const originalDef=game.layerData[0].logical[idx].def;
+      const originalDef=game.layerData[0].logical[idx].def,originalNeighborDef=game.layerData[0].logical[neighbor].def;
       game.layerData[0].logical[idx].def={type:kind,n:1};game.layerData[0].logical[neighbor].def={type:'entrance',name:'测试安全位置',extraction:false};
       enterLayer(0,idx);game.entrySupply=null;
       const eligible=window.SDT.Cards.all().filter(card=>card.type==='法术');
@@ -251,6 +251,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
       expect(pending.current.cards).toHaveLength(1);expect(game.visited[key]).toBeFalsy();
       expect(clickAct('chestReturn')).toBe(true);expect(game.state).toBe('idle');
       expect(moveTo(0,neighbor)).toBe(true);await tick(30);
+      game.layerData[0].logical[neighbor].def=originalNeighborDef; // 安全落位只供此夹具，不污染持久化地图配额。
       expect(session.saveGame()).toBe(true);
       expect(session.loadGame(slot).ok).toBe(true);
       expect(game.trackPos).toBe(neighbor);expect(game.nodeChestRewards[key]).toEqual(pending);
@@ -281,7 +282,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     enterLayer(0,idx);reenterCell();await tick(30);
     expect(document.querySelector('[data-act="doorShop"]')).toBeNull();
   });
-  it('F38 真实新局保存/读取保留轮换开关，旧快照与旧种子档缺字段均继续旧遭遇', async () => {
+  it('F38 真实新局保存/读取保留轮换开关，缺轮换字段的快照与旧种子档均继续旧遭遇', async () => {
     const session = await import('../game/src/run/game.session.js');
     const { RunStorage } = await import('../game/src/hub/game.storage.js');
     const { Random } = await import('../game/src/core/random.js');
@@ -306,10 +307,20 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
       const first = buildEncounter(2);
       Random.restore(state);
       expect(buildEncounter(2)).toEqual(first);
+      // 新4/9必须保留快照：缺失时拒绝恢复，并完整保留原存档以便修复。
+      const damaged = JSON.parse(JSON.stringify(modern));
+      delete damaged.mapSnapshot; delete damaged.routeVersion;
+      expect(RunStorage.write(slot, damaged)).toBe(true);
+      const rawBeforeRejectedLoad = localStorage.getItem(`sdt-run-${slot}`);
+      expect(session.loadGame(slot)).toMatchObject({ ok: false, preserveRun: true, code: 'UNSUPPORTED_LEGACY_MAP' });
+      expect(localStorage.getItem(`sdt-run-${slot}`)).toBe(rawBeforeRejectedLoad);
       for (const legacySeedOnly of [false, true]) {
         const legacy = JSON.parse(JSON.stringify(modern));
         delete legacy.encounterRotationVersion;
-        if (legacySeedOnly) { delete legacy.mapSnapshot; delete legacy.routeVersion; }
+        if (legacySeedOnly) {
+          delete legacy.mapSnapshot; delete legacy.routeVersion;
+          legacy.generatorVersion = 3; legacy.layoutVersion = 9; // 真正旧seed-only身份，不伪造新4/9丢失快照。
+        }
         expect(RunStorage.write(slot, legacy)).toBe(true);
         game.encounterRotationVersion = 1;
         expect(session.loadGame(slot).ok).toBe(true);

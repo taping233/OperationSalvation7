@@ -86,7 +86,7 @@ it('消耗区 1/3 保留：恒保留侧四张全带回且日志/快照一致', a
   expect(game.pendingExtraction.keptPocket).toEqual([{ card: { id: 'a', name: '口袋卡' }, count: 4 }]);
   expect(game.pendingExtraction.totalPocketCount).toBe(4);
   expect(game.pendingExtraction.lostPocketCount).toBe(0);
-  expect(UI.log).toHaveBeenCalledWith(expect.stringContaining('张只有 1/3 保留（带回 4 张，散失 0 张）'), 'sys');
+  expect(UI.log).toHaveBeenCalledWith(expect.stringContaining('张逐张以 1/3 概率结算；实际带回 4 张待复原，散失 0 张'), 'sys');
   expect(base.data.pocket).toEqual([{ card: { id: 'a', name: '口袋卡' }, count: 4 }]);
 });
 
@@ -96,7 +96,7 @@ it('消耗区 1/3 保留：恒散失侧全部散失且不进入基地口袋', as
   expect(altarState.random).toHaveBeenCalledTimes(4);
   expect(game.pendingExtraction.keptPocket).toEqual([]);
   expect(game.pendingExtraction.lostPocketCount).toBe(4);
-  expect(UI.log).toHaveBeenCalledWith(expect.stringContaining('带回 0 张，散失 4 张'), 'sys');
+  expect(UI.log).toHaveBeenCalledWith(expect.stringContaining('实际带回 0 张待复原，散失 4 张'), 'sys');
   expect(base.data.pocket).toEqual([]);
 });
 

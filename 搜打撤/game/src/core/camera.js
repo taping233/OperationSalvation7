@@ -44,7 +44,7 @@ import { ease } from './motion-primitives.js';
     this._stopGlide();
     this.frameMode = 'manual';
     const before = this.screenToWorld(sx, sy);
-    this.zoom = Math.min(2.45, Math.max(0.4, this.zoom * factor));
+    this.zoom = Math.min(2.45, Math.max(0.08, this.zoom * factor));
     const after = this.screenToWorld(sx, sy);
     this.cx += before.x - after.x;
     this.cy += before.y - after.y;
@@ -81,7 +81,7 @@ import { ease } from './motion-primitives.js';
     const to = {
       cx: Number.isFinite(tx) ? tx : from.cx,
       cy: Number.isFinite(ty) ? ty : from.cy,
-      zoom: Number.isFinite(zoom) ? Math.min(3.4, Math.max(0.4, zoom)) : from.zoom,
+      zoom: Number.isFinite(zoom) ? Math.min(3.4, Math.max(0.08, zoom)) : from.zoom,
     };
     if (!(dur > 0) || typeof requestAnimationFrame !== 'function' || SDT.Motion?.reduceMotion?.()) {
       this.zoom = to.zoom; this.focus(to.cx, to.cy);
@@ -97,7 +97,8 @@ import { ease } from './motion-primitives.js';
       this.cy = from.cy + (to.cy - from.cy) * k;
       this.zoom = from.zoom + (to.zoom - from.zoom) * k;
       this.clamp();
-      renderScheduler.invalidate();
+      if (now - t0 < dur) renderScheduler.invalidateAnimation();
+      else renderScheduler.invalidate();
       if (now - t0 < dur) requestAnimationFrame(tick);
       else if (this._glide === token) this._glide = null;
     };
@@ -146,18 +147,26 @@ import { ease } from './motion-primitives.js';
     if (!points?.length || !current) return false;
     const indices = new Set([game.trackPos]);
     for (const [nl, idx] of current.next || []) if (nl === li) indices.add(idx);
-    if (overview) points.forEach((p, idx) => { if (game.seen?.[`${li},${idx}`] === 1) indices.add(idx); });
+    // Full-layer framing changes only the camera: the renderer retains fog silhouettes
+    // and the input path still rejects unknown nodes. Never mutate seen/visited here.
+    if (overview) points.forEach((p, idx) => { if (p) indices.add(idx); });
     const visible = [...indices].map(idx => points[idx]).filter(Boolean);
     if (!visible.length) return false;
     const minX = Math.min(...visible.map(p => p.x)), maxX = Math.max(...visible.map(p => p.x));
     const minY = Math.min(...visible.map(p => p.y)), maxY = Math.max(...visible.map(p => p.y));
-    // The camera frames the decision in front of the player, without revealing fogged nodes.
+    // Badges and HUD use screen-space size, so world-space padding alone clips
+    // names/statuses at the bottom. Reserve their envelope before fitting centres.
     const availableW = this.viewW - (this.detailInset || 0);
-    const zoom = Math.min(3.4, Math.max(.4, Math.min(
-      availableW * .80 / (maxX - minX + 48),
-      Math.max(180, this.viewH - 70) * .90 / (maxY - minY + 24))));
+    const unit = this.viewW / 1280;
+    const side = Math.min(availableW * .16, 120 * unit);
+    const top = Math.min(this.viewH * .23, 105 * unit);
+    const bottom = Math.min(this.viewH * .30, 190 * unit);
+    const safeW = Math.max(1, availableW - side * 2);
+    const safeH = Math.max(1, this.viewH - top - bottom);
+    const zoom = Math.min(overview ? 2.45 : 3.4, Math.max(.08, Math.min(
+      safeW / Math.max(1, maxX - minX), safeH / Math.max(1, maxY - minY))));
     const cx = (minX + maxX) / 2 + (this.detailInset || 0) / (2 * zoom);
-    const cy = (minY + maxY) / 2 - 30 / zoom;
+    const cy = (minY + maxY) / 2 + (bottom - top) / (2 * zoom);
     // 显式定位默认同步落定；需要过渡的入口传入 glide。
     if (opts?.glide) this.glideTo(cx, cy, { zoom, dur: opts.dur });
     else { this._stopGlide(); this.zoom = zoom; this.cx = cx; this.cy = cy; }

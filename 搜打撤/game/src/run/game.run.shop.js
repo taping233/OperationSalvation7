@@ -130,29 +130,45 @@ function createShopController({
     renderShop();
   }
 
+  // Reuse the approved HUD currency art; the surrounding text carries its meaning.
+  const coinIconHTML = () => `<span class="shop-coin-icon" aria-hidden="true">${SDT.Icons?.img?.('coin') || ''}</span>`;
+  const moneyHTML = amount => `${coinIconHTML()}<span class="shop-money-value">${amount}</span><span class="shop-money-unit">币</span>`;
+  function slotAvailability(slot) {
+    const exhausted = slot.sold || (slot.shaReplenish != null && slot.shaReplenish <= 0);
+    const hasMoney = game.coins >= slot.price;
+    const fits = exhausted || (slot.card && (game.canReceiveCard ? game.canReceiveCard(slot.card) : game.canAcceptCard ? game.canAcceptCard(slot.card) : true));
+    const state = exhausted ? 'sold' : !hasMoney ? 'short' : !fits ? 'full' : 'ready';
+    const label = exhausted ? (slot.shaReplenish != null ? '补充已售罄' : '已售出')
+      : !hasMoney ? `还差 ${slot.price - game.coins} 币` : !fits ? '背包装不下' : slot.free ? '可免费领取' : '可购买';
+    return { exhausted, hasMoney, fits, state, label };
+  }
+  function slotPreviewLabel(slot, availability) {
+    const title = slot.mystery && !slot.sold ? '神秘货箱' : slot.card?.name || slot.label || '商品';
+    return `查看${title}详情，${slot.free ? '免费' : `${slot.price} 金币`}，${availability.label}`;
+  }
+
   // 商品原位保留身份、价格与售出状态；点选后才打开局部详情。
   function slotHTML(slot, index) {
     if (slot.empty) return `<div class="shop-slot"><div class="shop-empty">${slot.label || '无货'}</div></div>`;
-    const exhausted = slot.sold || (slot.shaReplenish != null && slot.shaReplenish <= 0);
+    const availability = slotAvailability(slot);
+    const { exhausted, hasMoney, state, label } = availability;
     const title = slot.mystery && !slot.sold ? '神秘货箱' : slot.card?.name || slot.label || '商品';
     const image = slot.mystery && !slot.sold
       ? '<div class="shop-card-mystery">[[icon:dice]]<b>？</b><span>随机卡牌</span></div>'
       : slot.card ? cardHTML(slot.card) : '<div class="shop-empty">已售出</div>';
     const owned = game.ownedCards.filter(item => item.card.name === slot.card?.name).length;
-    const status = exhausted ? (slot.shaReplenish != null ? '本站已补满' : slot.mystery ? '已购入 · 已揭晓' : '已售出')
+    const status = exhausted ? (slot.shaReplenish != null ? '本站已补满' : slot.mystery ? '已购入 · 已揭晓' : '')
       : slot.shaReplenish != null ? `持有 ${owned} · 余 ${slot.shaReplenish}` : slot.mystery ? '购买后揭晓' : owned > 0 ? `已持有 ${owned}` : '';
-    return `<div class="shop-slot${exhausted ? ' sold' : ' buy'}${selectedShopIndex === index ? ' selected' : ''}${!exhausted && game.coins < slot.price ? ' unaffordable' : ''}">
-      <button type="button" class="shop-preview" data-act="shopInspect" data-i="${index}" aria-pressed="${selectedShopIndex === index}" aria-label="查看${esc(title)}详情">
-        <span class="shop-item-art">${image}</span>${slot.mystery && !slot.sold ? `<span class="shop-item-title">${esc(title)}</span>` : ''}<span class="shop-offer">${status ? `<small class="shop-owned">${status}</small>` : ''}<strong class="shop-v14-price">${exhausted ? '已购' : slot.free ? '免费' : `[[icon:coin]] ${slot.price}`}</strong></span>
+    return `<div class="shop-slot${exhausted ? ' sold' : ' buy'}${selectedShopIndex === index ? ' selected' : ''}${!exhausted && !hasMoney ? ' unaffordable' : ''}" data-availability="${state}">
+      <button type="button" class="shop-preview" data-act="shopInspect" data-i="${index}" aria-pressed="${selectedShopIndex === index}" aria-label="${esc(slotPreviewLabel(slot, availability))}">
+        <span class="shop-item-art">${image}</span>${slot.mystery && !slot.sold ? `<span class="shop-item-title">${esc(title)}</span>` : ''}<span class="shop-offer"><span class="shop-offer-copy"><span class="shop-stock-state">${label}</span>${status ? `<small class="shop-owned">${status}</small>` : ''}</span><strong class="shop-v14-price">${slot.free ? '免费' : moneyHTML(slot.price)}</strong></span>
       </button></div>`;
   }
 
   function shopDetailHTML() {
     const slot = game.shopStock[selectedShopIndex];
     if (!slot || slot.empty) return '';
-    const exhausted = slot.sold || (slot.shaReplenish != null && slot.shaReplenish <= 0);
-    const hasMoney = game.coins >= slot.price;
-    const fits = slot.card && (game.canReceiveCard ? game.canReceiveCard(slot.card) : game.canAcceptCard ? game.canAcceptCard(slot.card) : true);
+    const { exhausted, hasMoney, fits } = slotAvailability(slot);
     const moneyStatus = !hasMoney ? `还差 ${slot.price - game.coins} 币` : '';
     const capacityStatus = !fits ? `背包装不下：${usedSlots()}/${bagCap()} 格` : '';
     const status = exhausted ? (slot.mystery ? `已购入「${slot.card?.name || '卡牌'}」，已放入本次远征背包` : '本站已售出')
@@ -167,10 +183,11 @@ function createShopController({
       <div class="shop-detail-scroll"><div class="shop-detail-art">${slot.mystery && !slot.sold ? '<div class="shop-card-mystery">[[icon:dice]]<b>？</b><span>神秘货箱</span><small>购买后随机揭晓一张卡</small></div>' : slot.card ? cardHTML(slot.card) : ''}</div>
       ${hasLongRules && (!slot.mystery || slot.sold) ? `<details class="shop-detail-rules"><summary>完整规则</summary><p>${rules}</p></details>` : ''}</div>
       <div class="shop-detail-actions">
+      <div class="shop-detail-account"><span>可用金币<strong>${moneyHTML(game.coins)}</strong></span>${!exhausted && hasMoney && fits ? `<span>购买后<strong>${moneyHTML(game.coins - slot.price)}</strong></span>` : ''}</div>
       <div class="shop-detail-facts">${exhausted ? `<strong class="tone-complete">${esc(status)}</strong>`
         : unavailable ? `${moneyStatus ? `<strong class="tone-limited">${esc(moneyStatus)}</strong>` : ''}${capacityStatus ? `<strong class="tone-limited">${esc(capacityStatus)}</strong>` : ''}`
           : `<strong class="tone-ready">${status}</strong>`}</div>
-      ${exhausted ? '<button type="button" class="shop-detail-done" data-act="shopCloseInspect">继续浏览</button>' : `<button type="button" class="shop-detail-buy${unavailable ? ' short' : ''}" data-act="${buyAct}" data-i="${selectedShopIndex}"${unavailable ? ` disabled aria-disabled="true" title="${esc(status)}"` : ''}>${unavailable ? !hasMoney ? '金币不足' : '背包装不下' : slot.free ? '免费领取' : `购买 · ${slot.price} 币`}</button>`}
+      ${exhausted ? '<button type="button" class="shop-detail-done" data-act="shopCloseInspect">继续浏览</button>' : `<button type="button" class="shop-detail-buy${unavailable ? ' short' : ''}" data-act="${buyAct}" data-i="${selectedShopIndex}"${unavailable ? ` disabled aria-disabled="true" title="${esc(status)}"` : ''}>${slot.free && !unavailable ? '免费领取' : `<span>${unavailable ? !hasMoney ? '金币不足' : '背包装不下' : '购买'}</span><span class="shop-buy-price"> · ${coinIconHTML()}${slot.price} 币</span>`}</button>`}
       ${!exhausted && !fits ? '<button type="button" class="shop-detail-bag" data-act="shopOpenBag">整理背包</button>' : ''}</div>`;
   }
 
@@ -309,8 +326,8 @@ function createShopController({
     UI.showOverlay('', `
       <div class="pg shop-pg shop-market shop-v14 shop-replica node-pg sc-shop" data-asset-key="scene-shop-bg">
         <header class="pg-head">
-          <div class="shop-heading"><h2>补给站 ${UI.helpBtn('shop')}</h2></div>
-          <div class="shop-resources" aria-label="远征资源"><span class="shop-resource coin"><small>金币</small><b id="resCoins">${game.coins}</b><em>币</em></span><span class="shop-resource"><small>容量</small><b id="resCap">${usedSlots()}/${bagCap()}</b><em>格</em></span></div>
+          <div class="shop-heading"><h2>补给站 ${UI.helpBtn('shop')}</h2><p class="shop-browse-hint">挑选商品查看详情，再确认购买</p></div>
+          <div class="shop-resources" aria-label="远征资源"><span class="shop-resource coin">${coinIconHTML()}<small>可用金币</small><b id="resCoins">${game.coins}</b><em>币</em></span><span class="shop-resource"><small>容量</small><b id="resCap">${usedSlots()}/${bagCap()}</b><em>格</em></span></div>
         </header>
         <div class="shop-layout">
         <div class="shop-board" aria-label="商店商品">
@@ -322,7 +339,7 @@ function createShopController({
           <div class="shop-merchant-caption"><span>冬境行商</span><p>“风雪还没停。<br>带上用得着的，再走吧。”</p></div>
           <div class="shop-services">
             <button class="shop-sellpost" data-act="openSell" title="打开收购台，挑卡卖掉">
-              <span class="sellpost-copy"><span class="sellpost-name">出售卡牌</span><span class="sellpost-hint">${sellableCount ? `${sellableCount} 张可出售` : '暂无可出售卡牌'}</span></span>
+              ${coinIconHTML()}<span class="sellpost-copy"><span class="sellpost-name">出售卡牌</span><span class="sellpost-hint">${sellableCount ? `${sellableCount} 张可出售` : '暂无可出售卡牌'}</span></span>
               <span class="sellpost-enter">→</span>
             </button>
             <button class="shop-bag-btn" data-act="shopOpenBag" title="打开背包整理卡牌">[[icon:bag]] 整理背包</button>
@@ -364,7 +381,7 @@ function createShopController({
     const rows = sellableOwned.map(owned => `
       <div class="bag-card sell-item">
         ${cardHTML(owned.card, 'sm')}
-        <div class="sell-item-offer"><span>商队估值</span><b>+${SDT.Cards.sellPrice(owned.card)} 币</b></div>
+        <div class="sell-item-offer"><span>卖出可得</span><b>${coinIconHTML()}+${SDT.Cards.sellPrice(owned.card)} 币</b></div>
         <button class="mini-btn ok" data-act="sellCard" data-uid="${owned.uid}">确认卖出</button>
       </div>`).join('');
     const ownedAll = game.ownedCards.length;
@@ -381,14 +398,14 @@ function createShopController({
         <header class="pg-head">
           <div class="shop-heading"><span class="shop-kicker">ACQUISITION DESK // 08</span><h2>[[icon:cards]] 收购台 ${UI.helpBtn('shopSell')}</h2><p>只收带有“可出售”备注的卡牌，其他卡不会出现在这里。</p></div>
           <button class="shop-bag-btn" data-act="shopOpenBag" title="打开背包整理卡牌">[[icon:bag]] 背包</button>
-          <div class="shop-resources"><span class="shop-resource coin"><small>当前金币</small><b>${game.coins}</b><em>币</em></span><span class="shop-resource"><small>可出售</small><b>${total}</b><em>张</em></span></div>
+          <div class="shop-resources"><span class="shop-resource coin">${coinIconHTML()}<small>可用金币</small><b>${game.coins}</b><em>币</em></span><span class="shop-resource"><small>可出售</small><b>${total}</b><em>张</em></span></div>
         </header>
         <div class="shop-board sell-board">
           <div class="sell-desk">
             <aside class="sell-ledger">
               <span class="sell-ledger-kicker">MERCHANT LEDGER</span>
               <h3>商队收购单</h3>
-              <div class="sell-ledger-total"><small>本页可换取</small><b>${totalValue}</b><span>币</span></div>
+              <div class="sell-ledger-total"><small>本页卖出共可得</small><b>${coinIconHTML()}${totalValue}</b><span>币</span></div>
               <dl><div><dt>持有卡牌</dt><dd>${ownedAll} 张</dd></div><div><dt>符合条件</dt><dd>${total} 张</dd></div><div><dt>当前金币</dt><dd>${game.coins} 币</dd></div></dl>
               <div class="sell-ledger-rule"><b>收购规则</b><p>仅识别带“可出售”备注的货币与宝石类卡牌。点击“确认卖出”后立即成交，价格等于卡面币值。</p></div>
             </aside>
@@ -404,13 +421,14 @@ function createShopController({
     UI.refresh(game);
   }
 
-  // 购买后只重绘该货位 + 顶栏数字（配合留言 #33：整页入场动画只在页面切换时重播）
+  // 购买后只重绘该货位/详情，原位同步其他商品状态与余额，不重播整页入场。
   function refreshShopSlot(index) {
     const slots = document.querySelectorAll('.shop-board-grid .shop-slot');
     const el = slots[index];
     const hadFocus = el?.contains(document.activeElement);
     if (el) {
-      el.outerHTML = slotHTML(game.shopStock[index], index);
+      const html = slotHTML(game.shopStock[index], index);
+      el.outerHTML = SDT.Icons?.rich?.(html) || html;
       if (hadFocus) {
         const current = document.querySelectorAll('.shop-board-grid .shop-slot')[index];
         (current?.querySelector('.shop-preview') || document.querySelector('.shop-market .shop-bag-btn'))?.focus({ preventScroll:true });
@@ -440,7 +458,13 @@ function createShopController({
     }
     document.querySelectorAll('.shop-board-grid .shop-slot').forEach((slot, stockIndex) => {
       const stock = game.shopStock[stockIndex];
-      slot.classList.toggle('unaffordable', !stock?.empty && !stock?.sold && game.coins < stock.price);
+      if (!stock || stock.empty) return;
+      const availability = slotAvailability(stock);
+      slot.classList.toggle('unaffordable', !availability.exhausted && !availability.hasMoney);
+      slot.dataset.availability = availability.state;
+      const status = slot.querySelector('.shop-stock-state');
+      if (status) status.textContent = availability.label;
+      slot.querySelector('.shop-preview')?.setAttribute('aria-label', slotPreviewLabel(stock, availability));
     });
   }
   function closeShopInspection() {
@@ -546,7 +570,7 @@ function createShopController({
       if (game.canReceiveCard
         ? !game.canReceiveCard(slot.card)
         : (!game.ownedCards.some(owned => owned.card.name === slot.card.name) && !game.canAcceptCard(slot.card))) {
-        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格；同名每格最多叠 3 张——初始攻击/火球 5 张，堆满后另占一格），买不下这张卡`, 'warn');
+        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格；装备每张占 1 格，其他同名每格最多叠 3 张，堆满后另占一格），买不下这张卡`, 'warn');
         SDT.Sound.sfx('error');
         denySlotFeedback(+data.i, `背包装不下（${usedSlots()}/${bagCap()} 格）`);
         return;
@@ -575,7 +599,7 @@ function createShopController({
       // 2026-09-19 审计 P2-7：改走 canReceiveCard 统一口径——堆未满并入不占格、堆满或
       // 满包拒买；旧判定「满包但有同名就放行」会在堆也满时把第 6 张推出容量外
       if (!game.canReceiveCard(slot.card)) {
-        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格；初始攻击每格最多叠 5 张，堆满后另占一格），补充不了`, 'warn');
+        UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格；初始攻击每格最多叠 3 张，堆满后另占一格），补充不了`, 'warn');
         SDT.Sound.sfx('error');
         denySlotFeedback(+data.i, `补不了——背包已满（${usedSlots()}/${bagCap()} 格）`);
         return;

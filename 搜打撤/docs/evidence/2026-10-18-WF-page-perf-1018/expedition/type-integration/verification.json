@@ -1,0 +1,38 @@
+{
+  "checkedAt": "2026-10-18T07:24:54.961Z",
+  "files": [
+    {
+      "path": "game/src/run/map-generation-rules.js",
+      "beforeSha256": "c2744224768a64afe35d92daadf2f99ab795ead193efd8d7baa95b8165c900a5",
+      "afterSha256": "3221813e5b42add91a676801448f124f84bc34d762fa8316803dfa90114475bd",
+      "identicalRuntimeAST": true,
+      "identicalBytes": false
+    },
+    {
+      "path": "game/src/run/map-generator-v4.js",
+      "beforeSha256": "1fe517b465199eaf36cfd9d13dc8c01099dd25d06d8cb369fb439524771b17d4",
+      "afterSha256": "1fe517b465199eaf36cfd9d13dc8c01099dd25d06d8cb369fb439524771b17d4",
+      "identicalRuntimeAST": true,
+      "identicalBytes": true
+    },
+    {
+      "path": "game/src/run/map-route-v2.js",
+      "beforeSha256": "d9c2ef6cba84387bd0cf41281583b3b204668c6374e46414399bdf449aacea0e",
+      "afterSha256": "d9c2ef6cba84387bd0cf41281583b3b204668c6374e46414399bdf449aacea0e",
+      "identicalRuntimeAST": true,
+      "identicalBytes": true
+    },
+    {
+      "path": "game/src/run/map-snapshot.js",
+      "beforeSha256": "52eec10ee61f8ab2a50c347aa1bb1b185cbce166d0ab4caab69b9407fbfca6c1",
+      "afterSha256": "52eec10ee61f8ab2a50c347aa1bb1b185cbce166d0ab4caab69b9407fbfca6c1",
+      "identicalRuntimeAST": true,
+      "identicalBytes": true
+    }
+  ],
+  "typeCheck": {
+    "command": "node node_modules/typescript/bin/tsc --noEmit -p jsconfig.json --pretty false",
+    "exitCode": 0
+  },
+  "scope": "Only JSDoc in map-generation-rules.js changed. No runtime AST, version, budget or routing change. No tests, shared docs or index edited."
+}

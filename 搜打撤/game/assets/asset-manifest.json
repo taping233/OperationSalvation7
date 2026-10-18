@@ -1,8 +1,96 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1459,
+  "count": 1493,
   "assets": [
+    {
+      "path": "sfx/real-foley/lockbox-turn-06.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 123516,
+      "sha256": "47fba948e9eab77cad4480ce88a75d842ae1fe7e3046fc13446178c4bff5d197",
+      "source": "https://opengameart.org/content/fantasy-accessory-sfx-library",
+      "original_path": "accessory/sfx/keyhole-lockbox-turn-06.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/real-foley/lockbox-unlock-01.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 131252,
+      "sha256": "4a8307c941dc56d984fc460b4730b70bf4833252c29922f08457b96d1ce10df0",
+      "source": "https://opengameart.org/content/fantasy-accessory-sfx-library",
+      "original_path": "accessory/sfx/keyhole-lockbox-unlock-01.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/real-foley/coinflip-01.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 62308,
+      "sha256": "60c652aca20c60e4fa6efe086f061bc52ddc66d7728dd23d9b625b7e6485a96c",
+      "source": "https://opengameart.org/content/fantasy-accessory-sfx-library",
+      "original_path": "accessory/sfx/coinflip-01.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only (foeLunge additionally retains existing 220ms envelope)"
+    },
+    {
+      "path": "sfx/real-foley/coinflip-02.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 43020,
+      "sha256": "44215b7af83d7e0d569b30898c94c5372e080675c05e3a030cfe1a764f843bc5",
+      "source": "https://opengameart.org/content/fantasy-accessory-sfx-library",
+      "original_path": "accessory/sfx/coinflip-02.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only (foeLunge additionally retains existing 220ms envelope)"
+    },
+    {
+      "path": "sfx/real-foley/book-page-02.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 129416,
+      "sha256": "b14e15141984eb84bcbe8841139d3f1d4715eac4e64cf52091acffd8fe440331",
+      "source": "https://opengameart.org/content/fantasy-sound-effects-tinysized-sfx",
+      "original_path": "tinysized/sfx-cc0/book-page-02.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only (foeLunge additionally retains existing 220ms envelope)"
+    },
+    {
+      "path": "sfx/real-foley/wood-tap-01.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 52880,
+      "sha256": "dac92db04d0a040d1d862638b26f0d0c0218b8fa27a2535728103ef24bcc8858",
+      "source": "https://opengameart.org/content/fantasy-accessory-sfx-library",
+      "original_path": "accessory/sfx/wood-bowl-hit-wood-spoon-01.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only (foeLunge additionally retains existing 220ms envelope)"
+    },
+    {
+      "path": "sfx/real-foley/tube-whoosh-01.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 59568,
+      "sha256": "6bf539745db12b4b546bb8bb1ab2f75ccf403db80c07fc8f473fa288d0d428b9",
+      "source": "https://opengameart.org/content/fantasy-sound-effects-tinysized-sfx",
+      "original_path": "tinysized/sfx-cc0/tube-plastic-whoosh-01.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only (foeLunge additionally retains existing 220ms envelope)"
+    },
+    {
+      "path": "sfx/real-foley/tube-whoosh-02.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 70876,
+      "sha256": "2ba001b889f1465d949b5531e7c9f61425a0f81d2a40febe3bdb4e449e99c190",
+      "source": "https://opengameart.org/content/fantasy-sound-effects-tinysized-sfx",
+      "original_path": "tinysized/sfx-cc0/tube-plastic-whoosh-02.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only (foeLunge additionally retains existing 220ms envelope)"
+    },
+    {
+      "path": "sfx/f4ngy/dealing-card-240777-hq.mp3",
+      "ext": "mp3",
+      "license": "CC BY 4.0 — f4ngy / Dealing Card; attribution required",
+      "bytes": 20979,
+      "sha256": "a16225c9beac75c4d83eb0cb9d59f33c773768a9d95d330fe6b56dc81c56cfb7",
+      "source": "https://freesound.org/people/f4ngy/sounds/240777/"
+    },
     {
       "path": "scenes/transition-general-1016.webp",
       "ext": "webp",
@@ -12230,6 +12318,206 @@
       "sha256": "dcbcaba475d527fa35972c09af7c717f2581b61f101b5323ab7e3a844cb42988",
       "license": "Project original AI-generated art, authorized by the owner.",
       "source": "docs/evidence/2026-10-16-WF-chest-install-v6/assets.json"
+    },
+    {
+      "path": "scenes/map-nodes/altar-symbol-1017-v2.webp",
+      "ext": "webp",
+      "license": "AI生成（本项目原创，内置 image_gen；参考板仅用于画法观察，未直接接入）",
+      "bytes": 68276,
+      "sha256": "290185e51e34e7326822c5dcf3ddb07d831c789d5e9c9b7b72812e5f55478ac6",
+      "source": "docs/evidence/2026-10-17-altar-node-redraw/README.md"
+    },
+    {
+      "path": "sfx/interface-soft/click_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney Interface Sounds 1.0)",
+      "bytes": 4876,
+      "sha256": "ccfb7fa0cccdd9faec0eb16033c732b1e308d139d80f799161495d58f7adcdb9",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/select_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney Interface Sounds 1.0)",
+      "bytes": 5468,
+      "sha256": "aec0c31ea934a35936ae0d2ab8fac8123c93aa5647f935853a58dbaf90278b7a",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/confirmation_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney Interface Sounds 1.0)",
+      "bytes": 8968,
+      "sha256": "063564703b6094d70718a3e787a55cc9141611e4ecd6b6637f8828f79b4a8c3a",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/pluck_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney Interface Sounds 1.0)",
+      "bytes": 6317,
+      "sha256": "be97ec4893a02d6eccfb678daa76c83e34cb2583b834ec2593d2641def739fa4",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/toggle_002.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 8056,
+      "sha256": "1f564f5520cfa0764028ce245ad97599d3ece8f0ab504554c403af92ac72b900",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/select_003.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 6901,
+      "sha256": "9a612fd2f513d52a296906b41071c990f75defe56be3bee60d2d4e2423b51b8b",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/back_002.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 7029,
+      "sha256": "61581c58194e3f19f531072edabbc344204c7e0a2887b8ededce4357bcf09195",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/back_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 6997,
+      "sha256": "07db973f79f6ae0f2edc34561e7592e24d0577455919fb602cb8ecc0da991dcf",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/open_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 9834,
+      "sha256": "a27c6bb0df7da1e6af5dd5937593c98bc58b6e513f42fe6a3254cd6a6949c648",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/select_002.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 5463,
+      "sha256": "4cc6ac5341b9b2c86fef80c347de028e9ab9f2e037586ac7d9fa59a403a1c012",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/error_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 7373,
+      "sha256": "46e67425d16339772e8d328fb36a49426c9467418686e11beeb71ff84b0f6433",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/close_002.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 14752,
+      "sha256": "bc4279d2bb2bf86592473eab6a8eab55e51b54a8619315000dbd780a83b102d8",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/toggle_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 7369,
+      "sha256": "ca1d2dde5f0b286abac4f070e23edab8f30927c8a533665cdf2ac6492a415e49",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/tick_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 4497,
+      "sha256": "9d057b918024c787bbe6c00beed13a7ef72a3fa0c259add3cef36582792f4230",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/confirmation_002.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 14169,
+      "sha256": "33b17a9a9a2397c62b285c52c33a907fdffb476909c99e42dde603f6a7a8b12c",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/switch_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 6753,
+      "sha256": "3b74efad87f1e69dbd1d05c5ad952ab90859b5a3d11da6ec5bd79b4f03b42afa",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/scroll_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 21633,
+      "sha256": "320c6aafb2c7a503eae508dc443b72d7f7c0a317bfd16813157ed400cd04cf16",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/question_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 11700,
+      "sha256": "abb8f9e4eb2071491b0b15f84ee302386b1847609310c1b000ae174639a6cc5a",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/close_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 9915,
+      "sha256": "44af8249b933e0fd35ec957a638bb1a0b01f85b53fbe9674bf77bd3ca3168ef4",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/drop_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 5859,
+      "sha256": "692ee3a6f1821402ca649ff735bee9591dc4846c8098fc7d6a90fd15fa57c1af",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/scratch_001.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 8989,
+      "sha256": "5c294d2e1a6b6d07ee2d75b17105a55ad3527e5482dd60652dc49c2ea4c70096",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/interface-soft/open_002.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 14975,
+      "sha256": "24ff224fe2c09c6aed1b41249825382dc74cf324b887ff279d8494912ce2beee",
+      "source": "https://kenney.nl/assets/interface-sounds"
+    },
+    {
+      "path": "sfx/impact-soft/impactWood_light_000.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 6343,
+      "sha256": "eb45e35b4bed784d3f120de4afec4b0d6ac09d9e143cce8cfcb7d739e1b1f3c3",
+      "source": "https://kenney.nl/assets/impact-sounds"
+    },
+    {
+      "path": "sfx/impact-soft/impactMetal_light_000.ogg",
+      "ext": "ogg",
+      "license": "CC0-1.0 (Kenney)",
+      "bytes": 7651,
+      "sha256": "33b5e6e37c6e9d54e07bf5a89b12c76e879f40c1ea83cdd82714df1d6f9fec6d",
+      "source": "https://kenney.nl/assets/impact-sounds"
     }
   ],
   "verified": "2026-10-05"

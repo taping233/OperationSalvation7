@@ -3,6 +3,7 @@
  * （09-25 自 ui.js 拆出，方法包由 ui.js 组装）。
  * 方法均以 UI.method() 形式调用，内部一律走 this 访问壳上的 el 与各 _last* 缓存。
  */
+import { updateMapHealthHud } from './map-health-hud.js';
 import { storeGet } from '../core/storage.js';
 import { renderExpeditionPanel } from '../run/expedition.view.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
@@ -92,8 +93,9 @@ export const hudMethods = {
     const dispHp = Math.max(0, game.hp);
     const pct = Math.max(0, game.hp / game.maxHp);
     const hpKey = `${game.hp}/${game.maxHp}`;
+    const firstHpSet = this._lastHpKey == null;
     if (this._lastHpKey !== hpKey) {
-      const firstHpSet = this._lastHpKey == null;   // 首帧直贴：进场不从 0% 播过渡（口径同战斗血条 instant）
+      // 首帧直贴：进场不从 0% 播过渡（口径同战斗血条 instant）
       this._lastHpKey = hpKey;
       if (firstHpSet) { this.el.hpBar.style.transition = 'none'; }
       this.el.hpBar.style.width = (pct * 100).toFixed(1) + '%';
@@ -103,6 +105,11 @@ export const hudMethods = {
       this.el.hpBarWrap.classList.toggle('low', pct <= 0.25 && game.hp > 0);
       this.el.hpText.innerHTML = `${dispHp}<span class="hp-rest">/${game.maxHp}</span>`;
     }
+    updateMapHealthHud(this.el.hpText.closest('#hpHud'), {
+      hp: game.hp, maxHp: game.maxHp, instant: firstHpSet,
+      active: game.runActive !== false && this._lastMode !== 'battle'
+        && !document.body.matches('.lobby, .scene-battle-3d'),
+    });
     if (this._lastCoins !== game.coins) {
       this.el.charCoins.textContent = /** @type {any} */ (game.coins);
       if (this._lastCoins != null) this.popNum(this.el.charCoins);

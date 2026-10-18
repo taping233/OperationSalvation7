@@ -4,7 +4,7 @@ import * as Combat from '../core/combat.js';
 export function forecastEnemyTurn(snapshot) {
   const hp = Number(snapshot.player?.hp || 0);
   const note = '按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。';
-  // 额外回合分支直接进入新玩家回合，实际管线不结算本次毒/灼或敌方攻击。
+  // 额外回合分支直接进入新玩家回合，实际管线不结算本次中毒或敌方攻击。
   if (snapshot.endTurnContext?.extraTurn) return Object.freeze({damage:0,hpAfter:hp,lethal:false,note});
   const player = { hp, status: { ...snapshot.pstat?.status }, defense: { ...snapshot.pdef } };
   const allies = (snapshot.allies || []).filter(a => !a.dead && !a.statless)
@@ -13,7 +13,6 @@ export function forecastEnemyTurn(snapshot) {
   let deathSave = snapshot.endTurnContext?.deathSave || 0;
   for (let i = 0; i < (snapshot.endTurnContext?.timeRune ? 2 : 1); i++) {
     damage += Combat.tickPoison(player)?.dealt || 0;
-    damage += Combat.tickBurn(player)?.dealt || 0;
   }
   for (const foe of snapshot.foes || []) {
     if (player.hp <= 0) break;

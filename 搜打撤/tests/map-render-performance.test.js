@@ -36,7 +36,7 @@ describe('地图节点热路径', () => {
   it('本帧状态可供标签复用，不再重复读取奖励；默认调用仍投影当前状态', () => {
     const game = fixture(), projection = mapNodeStatus(game, node);
     Object.defineProperty(game, 'nodeRewards', { get() { throw new Error('duplicate projection'); } });
-    expect(mapNodeInfo(game, node, projection)).toEqual(['祭坛', '已完成 · 内容已结算，仍可通行。', 'sparkles', 'quiet']);
+    expect(mapNodeInfo(game, node, projection)).toEqual(['祭坛', '已完成 · 内容已结算，仍可通行。', 'altar', 'quiet']);
     const fresh = { layerData: [], visited: {}, altarActivated: false };
     expect(mapNodeInfo(fresh, node)[1]).toContain('未完成');
     fresh.altarActivated = true;

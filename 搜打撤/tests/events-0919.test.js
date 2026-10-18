@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeAll } from 'vitest';
+import { describe, expect, it, beforeAll, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -43,5 +43,49 @@ describe('0919 都市污染事件池', () => {
     expect(source).toContain("attempts >= 5 || Random.random('event') < 0.5");
     expect(source).toContain("kind: 'medium', isClass: true");
     expect(source).toContain("['武术', '法术', '装备']");
+  });
+});
+
+
+describe('熔断物资箱标题', () => {
+  it('定版标题与三种箱随机一个的现行规则一致', () => {
+    const card = C.EVENTS_0919.find(c => c.id === 'tt6-chestdraw');
+    expect(card.name).toBe('熔断物资箱');
+    expect(card.desc).toBe('从大、中、小宝箱中随机抽取 1 个开启。');
+    const source = readFileSync(path.join(ROOT, 'game/src/run/game.run.flow.js'), 'utf8');
+    expect(source).toContain("const kinds = ['large', 'medium', 'small'];");
+    expect(source).toContain("const kind = kinds[Math.floor(Random.random('loot') * kinds.length)];");
+    expect(source).toContain("openChestsOnCell([{ kind }], '你撬开了一个未知的箱子');");
+  });
+
+  it.each(['false', 'throw'])('已盖旧章只改旧标题，保存 %s 后可重试且幂等', failure => {
+    const marker = 'sdt-events-0919-v2-seeded';
+    const prior = localStorage.getItem(marker);
+    localStorage.setItem(marker, '1');
+    const original = [
+      { id: 'tt6-chestdraw', name: '熔断双箱', desc: '自定义规则', value: 9, custom: true },
+      { id: 'other', name: '熔断双箱' },
+    ];
+    let stored = structuredClone(original);
+    const all = vi.spyOn(C, 'all').mockImplementation(() => stored);
+    const save = vi.spyOn(C, 'saveAll').mockImplementationOnce(() => {
+      if (failure === 'throw') throw new Error('storage unavailable');
+      return false;
+    }).mockImplementation(cards => { stored = structuredClone(cards); return true; });
+    try {
+      C.ensureEvents0919();
+      expect(stored).toEqual(original);
+      C.ensureEvents0919();
+      expect(stored).toEqual([{ ...original[0], name: '熔断物资箱' }, original[1]]);
+      C.ensureEvents0919();
+      expect(save).toHaveBeenCalledTimes(2);
+      stored[0].name = '我的箱子';
+      C.ensureEvents0919();
+      expect(stored[0].name).toBe('我的箱子');
+      expect(save).toHaveBeenCalledTimes(2);
+    } finally {
+      all.mockRestore(); save.mockRestore();
+      if (prior === null) localStorage.removeItem(marker); else localStorage.setItem(marker, prior);
+    }
   });
 });

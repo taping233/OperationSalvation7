@@ -1,0 +1,16 @@
+{
+  "safeStore": {
+    "files": [
+      "assets/sfx/real-foley/lockbox-turn-06.wav"
+    ],
+    "gain": 0.18,
+    "group": "ui"
+  },
+  "safeRetrieve": {
+    "files": [
+      "assets/sfx/real-foley/lockbox-unlock-01.wav"
+    ],
+    "gain": 0.22,
+    "group": "ui"
+  }
+}

@@ -110,6 +110,22 @@
         "kind": "unsupported",
         "detail": "文本效果解析器当前未识别该法术伤害写法；结构化伤害字段不能替代本审计对文本的识别。"
       }
+    },
+    {
+      "id": "cmtn6bge52qt",
+      "clause": "对应消耗区为空时不可使用",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "复原药水的使用前置限制由地图背包空堆守卫及 battle.bag itemUsability/队列复检执行，逐句效果执行器不负责可用性；restoration-potion-observation 与 bag-page-lifecycle-review 覆盖空堆不消费。"
+      }
+    },
+    {
+      "id": "tt-crystal",
+      "clause": "对应消耗区为空时不可使用",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "能源结晶前置可用性由地图空堆守卫和battle.bag执行入口/队列复检负责；energy-crystal-restoration覆盖空堆不消费、非空复原及队列复检。"
+      }
     }
   ]
 }

@@ -93,7 +93,7 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
     handlers.flowContinue(); await entered.promise; gate.resolve();
     expect(await request).toBe(true);
     expect(battle.start).toHaveBeenCalledExactlyOnceWith(game, expect.objectContaining({ name:'boss', boss:true }),
-      { isBoss:true, name:'boss', directBossStart:true });
+      { isBoss:true, name:'boss' });
   });
 
   it('an older transition cannot close the replacement transition', async () => {
@@ -287,5 +287,32 @@ describe('迟到选角操作失效', () => {
     if (change === 'confirmation-owner') valid = false;
     confirm(); expect(beforeConfirm).not.toHaveBeenCalled(); expect(saveGame).not.toHaveBeenCalled();
     expect(game.entrySupply).toBeUndefined();
+  });
+});
+
+describe('DEV plain battle transition diagnostic', () => {
+  afterEach(() => { history.replaceState(null, '', '/'); });
+  it.each(['battle', 'boss'])('uses plain artwork for %s while retaining its original timer', async kind => {
+    history.replaceState(null, '', '/?perfProbe=1&flightRecord=1&transitionDiagnostic=plain');
+    const motion = await import('../game/src/core/motion.js');
+    vi.spyOn(motion, 'reduceMotion').mockReturnValue(false);
+    const done = vi.fn(); const request = scenes.enterNode(kind, done);
+    expect(UI.el.ovBody.querySelector('.expedition-cut')).toBeTruthy();
+    expect(UI.el.ovBody.querySelector('.camp-entry-cut')).toBeNull();
+    await vi.advanceTimersByTimeAsync(979); expect(done).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(1); await request; expect(done).toHaveBeenCalledTimes(1);
+  });
+  it('preserves the held transition release delay', async () => {
+    history.replaceState(null, '', '/?perfProbe=1&flightRecord=1&transitionDiagnostic=plain');
+    const motion = await import('../game/src/core/motion.js');
+    vi.spyOn(motion, 'reduceMotion').mockReturnValue(false);
+    const request = scenes.showRunTransition({ tone: 'battle', presentation: 'city-cut', duration: 900, holdVisual: true });
+    expect(UI.el.ovBody.querySelector('.expedition-cut')).toBeTruthy();
+    await vi.advanceTimersByTimeAsync(900); await request;
+    expect(UI.hideOverlay).not.toHaveBeenCalled();
+    const released = request.release();
+    await vi.advanceTimersByTimeAsync(219); expect(UI.hideOverlay).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(1); await released;
+    expect(UI.hideOverlay).toHaveBeenCalledExactlyOnceWith({ immediate: true });
   });
 });

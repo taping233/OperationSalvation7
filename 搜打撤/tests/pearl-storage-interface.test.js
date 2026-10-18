@@ -97,17 +97,31 @@ describe('珍珠盒可读存取界面', () => {
 
   it('盒容量不足仍整叠拒收，按钮不改卡与焦点', () => {
     game.ownedCards = [...copies(pearl, 1), ...copies(food, 8, { stored: 1 }), ...copies(wood, 2)]; open();
-    const target = button('pearlPut', wood.name), before = JSON.stringify(game.ownedCards); target.focus(); target.click();
+    const target = button('pearlPut', wood.name), before = JSON.stringify(game.ownedCards), focus = button('pearlBack');
+    expect(target.disabled).toBe(true);
+    expect(target.getAttribute('aria-label')).toContain('剩余 1 张空间，放不下整叠');
+    expect(target.closest('.container-store-slot').querySelector('.container-store-blocked').textContent).toBe('剩余 1 张空间，放不下整叠');
+    focus.focus(); UI.log.mockClear(); target.click();
     expect(JSON.stringify(game.ownedCards)).toBe(before);
-    expect(document.activeElement).toBe(target);
+    expect(document.activeElement).toBe(focus); expect(UI.log).not.toHaveBeenCalled();
+    // 绕过禁用按钮调用当前动作时，执行层仍须拒绝整叠。
+    UI._acts.pearlPut({ name:wood.name });
+    expect(JSON.stringify(game.ownedCards)).toBe(before); expect(document.activeElement).toBe(focus);
     expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('珍珠盒放不下'), 'warn');
   });
 
   it('背包空间不足仍拒绝整叠取出，不受新布局影响', () => {
     game.ownedCards = [...copies(pearl, 1), ...copies(wood, 9, { stored: 1 }), ...copies(food, 69)]; open();
     expect(session.usedSlots()).toBe(24); expect(session.bagCap()).toBe(25);
-    const before = JSON.stringify(game.ownedCards); button('pearlTake', wood.name).click();
+    const before = JSON.stringify(game.ownedCards), target = button('pearlTake', wood.name), focus = button('pearlBack');
+    expect(target.disabled).toBe(true);
+    expect(target.closest('.container-store-slot').querySelector('.container-store-blocked').textContent).toBe('背包空间不足，整叠需 3 格');
+    focus.focus(); UI.log.mockClear(); target.click();
+    expect(JSON.stringify(game.ownedCards)).toBe(before); expect(document.activeElement).toBe(focus);
+    expect(UI.log).not.toHaveBeenCalled();
+    UI._acts.pearlTake({ name:wood.name });
     expect(JSON.stringify(game.ownedCards)).toBe(before);
+    expect(session.usedSlots()).toBe(24); expect(document.activeElement).toBe(focus);
     expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('背包放不下'), 'warn');
   });
 

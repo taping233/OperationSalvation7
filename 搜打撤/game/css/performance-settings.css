@@ -1,0 +1,29 @@
+.performance-controls { margin: 12px 0 22px; }
+.performance-controls .performance-setting { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 0; padding: 12px 0; border-bottom: 1px solid #bebfc066; color: inherit; font-size: 24px; line-height: 1.4; }
+.performance-controls .performance-setting select { font: inherit; font-size: 20px; width: 210px; max-width: 100%; min-height: 44px; padding: 9px 28px 9px 12px; border: 1px solid #74736a; border-radius: 4px; background-color: #e9eaeb; color: #262b30; }
+.performance-controls .performance-setting select:focus-visible { outline: 2px solid #8e7738; outline-offset: 3px; }
+.performance-controls .performance-help { color: inherit; font-size: 19px; line-height: 1.6; margin: 9px 0 14px; }
+.performance-details { margin: 12px 0; }
+.performance-details summary { cursor: pointer; min-height: 44px; padding: 9px 0; font-size: 19px; line-height: 1.4; }
+.performance-details summary:focus-visible { outline: 2px solid #8e7738; outline-offset: 3px; }
+.performance-controls #setPerformanceStatus:empty { display: none; }
+/* Match the existing settings cards while overriding their compact select defaults. */
+#overlay .pg.settings-page:not(.sugin-page) .performance-controls .performance-setting { min-height: 84px; margin: 0 0 8px; padding: 16px 28px; gap: 24px; border: 1px solid #d9e6ef21; border-radius: 4px; background: linear-gradient(105deg, rgba(125,135,145,.22), rgba(60,70,81,.24)); box-shadow: inset 0 1px 0 #ecf4ff12, inset 0 -1px 0 #03080e33, 0 3px 8px #02060926; color: #e7edf3; font-size: 24px; }
+#overlay .pg.settings-page:not(.sugin-page) .performance-controls .performance-setting select { width: 210px; max-width: 100%; min-height: 44px; font-size: 20px; background-color: #263440; color: #eef3f7; border-color: #8095a5; }
+#overlay .pg.settings-page:not(.sugin-page) .performance-controls .performance-help,
+#overlay .pg.settings-page:not(.sugin-page) .performance-details summary { color: #c4d0da; font-size: 19px; }
+/* Only named decorative layers are reduced. Card text, aiming, damage and resource feedback remain intact. */
+body[data-render-quality="low"] #title :is(.home-snow,.home-near-snow,.home-mist,.home-grain,.home-spark,.home-beams) { display: none !important; }
+body[data-render-quality="balanced"] #title :is(.home-near-snow,.home-mist,.home-grain) { display: none !important; }
+body[data-render-quality="low"] #title :is(.home-wordmark,.home-ghost-track,.hs-accent,.home-readout-dot),
+body[data-render-quality="low"] #title :is(.title-bg,.title-wallpaper-extension),
+body[data-render-quality="low"] #overlay #hubMain :is(.deploy-primary,.gate-scale i.lit)::after,
+body[data-render-quality="low"] #overlay .pg.settings-page .pg-head::before { animation: none !important; }
+body[data-render-quality="balanced"] #overlay .pg.settings-page .pg-head::before,
+body[data-render-quality="balanced"] #overlay #hubMain .deploy-primary::after { animation: none !important; }
+
+/* Low quality freezes map decoration without removing the selected artwork. */
+body[data-render-quality="low"] #viewport::before,
+body[data-render-quality="low"] #viewport::after,
+body[data-render-quality="low"] .map-volumetric-light i,
+body[data-render-quality="low"] .map-edge-light i { animation-play-state: paused !important; }

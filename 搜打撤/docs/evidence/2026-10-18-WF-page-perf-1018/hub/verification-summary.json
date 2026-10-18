@@ -1,0 +1,189 @@
+{
+  "scope": "hub/home pages; no build or commit by subagent",
+  "baseline": {
+    "hub": {
+      "files": 5,
+      "passed": 76,
+      "failed": 0
+    },
+    "bag": {
+      "files": 6,
+      "passed": 111,
+      "failed": 5
+    },
+    "provenance": "Recorded from actual pre-edit Vitest console outputs; both source baselines retained."
+  },
+  "beforeTestContractRefresh": {
+    "files": 20,
+    "passed": 264,
+    "failed": 5,
+    "failures": [
+      {
+        "file": "backpack-layout.test.js",
+        "name": "背包横屏布局与独立阅读区 bag区保留全部说明、帮助入口和有名称的分区目标"
+      },
+      {
+        "file": "backpack-layout.test.js",
+        "name": "背包横屏布局与独立阅读区 safe区保留全部说明、帮助入口和有名称的分区目标"
+      },
+      {
+        "file": "backpack-layout.test.js",
+        "name": "背包横屏布局与独立阅读区 pocket区保留全部说明、帮助入口和有名称的分区目标"
+      },
+      {
+        "file": "bag-page-lifecycle-review.test.js",
+        "name": "新号背包真实入口反馈 招式与物资按钮使用实际键值筛选，不将散装物资混入招式"
+      },
+      {
+        "file": "bag-page-lifecycle-review.test.js",
+        "name": "新号背包真实入口反馈 安全格标题容量和伙伴名称跟随分区，口袋区分火堆可复原类型与张数"
+      }
+    ]
+  },
+  "authorizedTestContractRefresh": {
+    "basis": [
+      "docs/architecture.md:94",
+      "docs/evidence/2026-10-18-feedback-13/README.md items 2 and 5"
+    ],
+    "retestedFiles": 3,
+    "passed": 71,
+    "failed": 0
+  },
+  "effectiveResults": {
+    "files": 20,
+    "passed": 269,
+    "failed": 0,
+    "results": [
+      {
+        "file": "backpack-layout.test.js",
+        "passed": 7,
+        "failed": 0,
+        "report": "ui-contract-retest.json"
+      },
+      {
+        "file": "bag-architecture.test.js",
+        "passed": 5,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "bag-item-rule-baseline.test.js",
+        "passed": 15,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "bag-page-lifecycle-review.test.js",
+        "passed": 53,
+        "failed": 0,
+        "report": "ui-contract-retest.json"
+      },
+      {
+        "file": "bag-pouch-capacity.test.js",
+        "passed": 23,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "base-inventory-lifecycle-audit.test.js",
+        "passed": 45,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "card-library-performance-contract.test.js",
+        "passed": 3,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "courtyard-lifecycle-deep-audit.test.js",
+        "passed": 10,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "departure-browse-state.test.js",
+        "passed": 7,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "hub-archive-v3.test.js",
+        "passed": 9,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "hub-collection-v4.test.js",
+        "passed": 4,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "hub-courtyard-v3.test.js",
+        "passed": 8,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "hub-flow-regression.test.js",
+        "passed": 12,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "hub-personnel-actions.test.js",
+        "passed": 2,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "hub-trade-shop-v5.test.js",
+        "passed": 13,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "hub-upgrade-render.test.js",
+        "passed": 4,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "m05-home-scene.test.js",
+        "passed": 14,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "page-perf-hub.test.js",
+        "passed": 11,
+        "failed": 0,
+        "report": "ui-contract-retest.json"
+      },
+      {
+        "file": "photo-page-lifecycle-audit.test.js",
+        "passed": 11,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      },
+      {
+        "file": "safe-pearl-access.test.js",
+        "passed": 13,
+        "failed": 0,
+        "report": "final-targeted-tests.json"
+      }
+    ]
+  },
+  "eslint": {
+    "files": 5,
+    "exitCode": 0
+  },
+  "unverified": [
+    "parent built-in-browser current-window review",
+    "real FPS or peak memory",
+    "full suite",
+    "production build"
+  ]
+}

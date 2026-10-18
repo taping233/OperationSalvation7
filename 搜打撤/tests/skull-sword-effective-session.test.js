@@ -22,6 +22,9 @@ const { BattleSession, configureBattleRenderer, findEffectiveCard, infusionFuelR
 const { render } = await import('../game/src/battle/view/battle.view.js');
 const Aim = await import('../game/src/battle/view/battle.aim.js');
 const { openHandInspector, closeHandInspector } = await import('../game/src/battle/view/battle.hand-inspector.js');
+const { UI: zoomUI } = await import('../game/src/ui/ui.js');
+UI.showCardZoom = zoomUI.showCardZoom;
+window.SDT.UI = UI;
 const { clearFeedback } = await import('../game/src/battle/view/battle.feedback.js');
 const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
 const engine = await import('../game/src/battle/core/battle.engine.js');
@@ -57,6 +60,7 @@ beforeEach(async () => {
   });
 });
 afterEach(async () => {
+  document.getElementById('cardZoom')?._closeCardZoom?.(true);
   closeHandInspector({ restoreFocus: false }); Aim.cancelAim(); Aim.cancelClickSelection(); clearFeedback();
   if (game?.battleActive) { BattleSession.commands.cancelInfusion(); BattleSession.commands.flee(); }
   await settle();
@@ -131,14 +135,21 @@ it('不朽斩不能选作注能材料，禁用原因与详情一致，拒绝不�
   BattleSession.commands.selectInfusion(originals[0]); await settle();
   expect(BattleSession.getSnapshot().infusing.picked).toEqual([]);
   expect(infusionFuelReason(originals[0])).toContain('无法用于注能');
-  const node = effectiveNode();
-  expect(node.classList.contains('off')).toBe(true);
-  expect(node.querySelector('.hs-card').getAttribute('aria-disabled')).toBe('true');
-  expect(node.getAttribute('aria-label')).toContain('无法用于注能');
-  openHandInspector(node.dataset.uid);
-  expect(panel().querySelector('.bt-hand-detail-use').disabled).toBe(true);
-  expect(panel().querySelector('.bt-hand-detail-action-note').textContent).toContain('无法用于注能');
-  closeHandInspector();
+  const workspace = UI.el.ovBody.querySelector('[data-infusion-workspace]');
+  const material = [...workspace.querySelectorAll('.infusion-material')]
+    .find(entry => entry.querySelector('.hsc-name')?.textContent === '不朽斩');
+  expect(material.classList.contains('is-unavailable')).toBe(true);
+  expect(material.querySelector('.infusion-card-face').disabled).toBe(true);
+  expect(material.querySelector('[data-act="btInfuseAdd"]').disabled).toBe(true);
+  expect(material.querySelector('.infusion-material-note').textContent).toContain('无法用于注能');
+  expect(effectiveNode().closest('.battle-stage').hasAttribute('inert')).toBe(true);
+  material.querySelector('.infusion-card-face').click();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual([]);
+  material.querySelector('.infusion-detail').click();
+  const zoom = document.getElementById('cardZoom');
+  expect(zoom.textContent).toContain('不朽斩'); expect(zoom.textContent).toContain('无法用于注能');
+  zoom._closeCardZoom(true);
+  expect(UI.el.ovBody.querySelector('[data-infusion-workspace]')).toBe(workspace);
   expect(BattleSession.getSnapshot().energy).toBe(before.energy);
   expect(BattleSession.getSnapshot().hand).toEqual(before.hand);
 });

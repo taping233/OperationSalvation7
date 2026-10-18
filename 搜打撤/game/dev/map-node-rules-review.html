@@ -1,0 +1,18 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>地图节点规则核验</title>
+<style>body{font:16px/1.65 system-ui;background:#101b24;color:#e7eff5;margin:40px;max-width:1100px}h1{font-size:26px}table{border-collapse:collapse;width:100%;margin:24px 0}td,th{border:1px solid #42505a;padding:10px;text-align:left}.ok{color:#9de6b0}.nodes{display:flex;flex-wrap:wrap;gap:10px}.node{padding:7px 12px;background:#233845;border:1px solid #557083;border-radius:6px}small{color:#b9cbd6}</style>
+<h1>地图节点规则核验</h1><p>构造种子：map-node-rules-review。直接加载当前地图生成、路线和快照模块；不读取或写入玩家存档。</p>
+<main id="result">正在生成地图…</main>
+<script type="module">
+import { createCurrentLayeredMap } from '../src/run/layeredMap.js';
+import { applyRouteOverlay } from '../src/ui/route-overlay.js';
+import { applyGuardedRoute } from '../src/run/map-route-v2.js';
+import { createMapSnapshot } from '../src/run/map-snapshot.js';
+import { NODE_INFO } from '../src/core/node-info.js';
+const seed='map-node-rules-review',base=createCurrentLayeredMap(seed);
+const route=applyRouteOverlay({generatorVersion:5,layoutVersion:9,layerData:base});
+const guarded=applyGuardedRoute({generatorVersion:5,layoutVersion:9,layerData:route.value.layerData,baseRoutePlan:route.value.routePlan});
+const snapshot=createMapSnapshot({mapSeed:seed,generatorVersion:5,layoutVersion:9,...guarded.value});
+if(!snapshot.ok)throw Error(snapshot.message);
+const layers=guarded.value.layerData;
+document.querySelector('#result').innerHTML='<p class="ok">5/9新局生成、路线覆盖与快照校验通过</p><table><thead><tr><th>层数</th><th>总节点</th><th>战斗</th><th>宝箱</th><th>事件</th><th>物资格</th><th>火堆</th><th>商店</th></tr></thead><tbody>'+layers.map((l,i)=>{const n=t=>l.logical.filter(c=>c.def.type===t).length;return '<tr><td>第'+(i+1)+'层</td><td>'+l.logical.length+'</td>'+['battle','chest','event','resource','fire','shop'].map(t=>'<td>'+n(t)+'</td>').join('')+'</tr>';}).join('')+'</tbody></table><h2>首层节点名称</h2><div class="nodes">'+layers[0].logical.map(c=>'<span class="node">'+(NODE_INFO[c.def.type]?.[0]||c.def.name)+'</span>').join('')+'</div><h2>宝箱节点</h2><p>'+NODE_INFO.chest[0]+'：'+NODE_INFO.chest[1]+'</p><p>70%小型物资箱（随机1张），30%密封物资箱（3选1）。使用通用掉落池，不限资源卡。</p><small>已有3/9、4/9对局沿原快照恢复，节点不删减、不重排。</small>';
+</script></html>

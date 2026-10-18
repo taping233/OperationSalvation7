@@ -1,3 +1,4 @@
+import { traceRestoreStep } from '../../core/flight-recorder.local.js';
 /* battle.lifecycle.js —— 战斗入口/编组与终局收尾（自 battle.engine.js 拆出）。
  * start/编组/restore 进场，finish/flee 收尾；规则数据经 battle.runtime.js 活绑定直读，
  * 规则核结算件由 createBattleLifecycle 注入（解回合循环互递归的强连通簇）。 */
@@ -38,7 +39,7 @@ const shuffle = shuffleCards;
 export function createBattleLifecycle({
   session, intentFor, cloneData, injectSealCards, applyNestRunes, applyVoidRune, drawCards,
   applyBattleStartPassives, isBattleStartEquip, isStarterAttack, requestBattleRender, alive, R,
-  resetTriggers, runBattleStartTriggers, triggersM2,
+  resetTriggers, runBattleStartTriggers, triggersM2, emitBattlePresentation,
 }) {
   const { handSelectQueue, choiceQueue } = session;
   const RUN_RESTART_KEYS = [
@@ -62,6 +63,12 @@ export function createBattleLifecycle({
   }
 
   function restore(nextGame, data) {
+    return import.meta.env.DEV
+      ? traceRestoreStep('battle-restore', () => restoreImpl(nextGame, data))
+      : restoreImpl(nextGame, data);
+  }
+
+  function restoreImpl(nextGame, data) {
     if (data && data.restartVersion === 1 && Array.isArray(data.enemyDefs) && data.opts) {
       session.reset('battle restarted from checkpoint');
       clearActionSignals();
@@ -206,14 +213,16 @@ export function createBattleLifecycle({
     clearActionSignals();
     clearFeedback();
     set$G(game);
-    // 战斗开局预热本局可用卡面：手牌 img 是 lazy，手牌重建瞬间图未解码会露插画窗深底（黑窗）。
-    // URL 走 collectCardAssets 与 <img> 实际 src 完全一致，命中 HTTP/解码缓存；已预热项内部自动去重。
-    // restore 读档恢复同样走 start，两条进战斗路径都覆盖。
+    // Only the requested card art needs warming here; unrelated enemy and class
+    // portraits must not be decoded on battle entry.
+    // Keep card URLs and two-slot decode warmup, without pinning speculative card images.
+    // Restore uses this same entry. Visible fighters load through their own scene images.
     try {
-      if (SDT.Art && SDT.Art.collectCardAssets && SDT.Art.warm) {
-        SDT.Art.warm(SDT.Art.collectCardAssets((G.ownedCards || []).map(o => o && o.card).filter(Boolean)));
+      if (SDT.Art?.collectCardAssets && SDT.Art?.warm) {
+        const cards = (G.ownedCards || []).map(o => o && o.card).filter(Boolean);
+        SDT.Art.warm(SDT.Art.collectCardAssets(cards, { includePortraits: false }), { retain: false });
       }
-    } catch { /* 预热失败（如 Art 域未就绪/资产缺失）：不阻塞进战斗 */ }
+    } catch { /* Optional artwork warmup must not block battle entry. */ }
     const defs = Array.isArray(enemyDefs) ? enemyDefs : [enemyDefs];
     const startOptions = Object.assign({ isBoss: false }, options || {});
     if (!restoringRestartCheckpoint) {
@@ -252,12 +261,22 @@ export function createBattleLifecycle({
     SDT.Sound.music('battle');   // 切入战斗氛围
     SDT.Sound.sfx(opts.isBoss ? 'bossReveal' : 'battleEnter');
     G.state = 'modal';
+    // The restart checkpoint, opts and combatants are now complete. Persist before
+    // entry effects/rendering; restoreGame retains ownership of its final save.
+    if (!restoringRestartCheckpoint && battleRestartCheckpoint && typeof G.persistSave === 'function') {
+      try {
+        if (G.persistSave() === false) G.log('[[icon:cross]] 本场入场检查点未保存，重新载入仍以此前存档为准', 'warn');
+      } catch (error) {
+        console.warn('[battle] 入场检查点保存失败', error);
+        G.log('[[icon:cross]] 本场入场检查点未保存，重新载入仍以此前存档为准', 'warn');
+      }
+    }
     const names = foes.map(f => `${f.name}(${f.atk}-${f.hp})`).join('、');
     G.log(`[[icon:swords]] <b>${opts.isBoss ? 'BOSS战' : '遭遇战'}【${esc(names)}】</b>${!opts.isBoss && opts.risk ? ` · 风险<b>${esc(opts.risk)}</b>` : ''}`, 'warn');
     if (mode === 'boss') {
     if (opts.nest) {
       // 龙巢（2026-09-18 留言「牌盒即牌库」）：跳过编组，卡盒全部卡牌直接成库
-      set$selPool(G.ownedCards.filter(o => !['道具', '资源', '事件', '生物'].includes(o.card.type) && !isStarterAttack(o.card)));
+      set$selPool(G.ownedCards.filter(o => !o.stored && !o.pouchOf && !['道具', '资源', '事件', '生物'].includes(o.card.type) && !isStarterAttack(o.card)));
       set$selShaN(0);
       set$sel(new Set(selPool.map(o => o.uid)));
       beginBoss();
@@ -272,15 +291,16 @@ export function createBattleLifecycle({
     // 道具/资源/事件/生物卡默认不进手牌（v0.32：手牌只放可直接打出的战斗卡）；
     // 「对战开始时」装备（Q1 老板定向：持有即自动生效）不进手牌、改为开战被动
     // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡与道具/资源/事件/生物一样不进普通战手牌
-    set$hand(G.ownedCards.filter(o => !['道具', '资源', '事件', '生物', '能力卡'].includes(o.card.type) && !isBattleStartEquip(o.card)).map(o => o.uid));
+    set$hand(G.ownedCards.filter(o => !o.stored && !o.pouchOf && !['道具', '资源', '事件', '生物', '能力卡'].includes(o.card.type) && !isBattleStartEquip(o.card)).map(o => o.uid));
     resetBattleEntryState();
     transitionTo(BATTLE_PHASES.PLAYER);
     G.state = 'modal';
     if (resetTriggers) resetTriggers();
     applyBattleStartPassives();
     if (runBattleStartTriggers) runBattleStartTriggers();   // M2：结构化 onBattleStart（能力卡/迎装规则）
+    if (!restoringRestartCheckpoint) emitBattlePresentation?.({ kind: 'player-turn-start', turn });
     // 普通战无法使用能力卡（2026-09-16 老板定版）：能力卡不进普通战手牌（对 BOSS 编组不受限）
-    if (alive().length > 1) G.log('[[icon:question]] 以一敌多：伤害与群体卡都<b>拖到任意敌人身上</b>打出（群体自动命中全体）', 'sys');
+    if (alive().length > 1) G.log('[[icon:question]] 以一敌多：单体伤害牌选择敌人；全体牌可拖到<b>战场空地</b>或选择敌人。需要注能时先选材料，再确认释放', 'sys');
     G.log(`[[icon:cards]] 普通战斗无需抽牌：随身 <b>${hand.length}</b> 张战斗卡直接可打出；道具/资源/事件卡不入手，能力卡只能收藏或编入 BOSS 战牌库 · 每回合固定 <b>${maxEnergy}</b> 费`, 'sys');
     requestBattleRender();
   }
@@ -309,7 +329,7 @@ export function createBattleLifecycle({
   // ---------- BOSS战：编组牌库 ----------
   // 地图首脑直入：沿用有效旧编组，按背包顺序补齐，保持既有卡类与容量规则。
   function prepareAutomaticBossDeck() {
-    set$selPool(G.ownedCards.filter(o => !['道具', '资源', '事件', '生物'].includes(o.card.type) && !isStarterAttack(o.card)));
+    set$selPool(G.ownedCards.filter(o => !o.stored && !o.pouchOf && !['道具', '资源', '事件', '生物'].includes(o.card.type) && !isStarterAttack(o.card)));
     set$selShaN(R().starterSha);
     set$sel(new Set(lastDeckSel.filter(uid => selPool.some(entry => entry.uid === uid))));
     const capacity = () => Math.min(selPool.length, R().bossDeckSize + deckCapBonus(sel));
@@ -326,7 +346,7 @@ export function createBattleLifecycle({
   function prepareDeckSelection() {
     set$selDeckMax(R().bossDeckSize + deckCapBonus());   // 混沌之眼「牌库上限+5」（编入后才计入）
     // 2026-09-16 老板定版：骷髅王剑/混沌之眼等「对战开始时」装备计入 15 张套牌（不再独立勾选）
-    set$selPool(G.ownedCards.filter(o => !['道具', '资源', '事件', '生物'].includes(o.card.type) && !isStarterAttack(o.card)));
+    set$selPool(G.ownedCards.filter(o => !o.stored && !o.pouchOf && !['道具', '资源', '事件', '生物'].includes(o.card.type) && !isStarterAttack(o.card)));
     set$selShaN(R().starterSha);
     set$sel(new Set(lastDeckSel.filter(uid => selPool.some(entry => entry.uid === uid))));
     const cap = Math.min(selDeckMax, selPool.length);
@@ -386,6 +406,7 @@ export function createBattleLifecycle({
     };
     applyBattleStartPassives();   // Q1：迷之匣替换/灵符抽牌/骷髅王剑/混沌之眼（持有即生效）
     if (runBattleStartTriggers) runBattleStartTriggers();   // M2：结构化 onBattleStart（能力卡/迎装规则）
+    if (!restoringRestartCheckpoint) emitBattlePresentation?.({ kind: 'player-turn-start', turn });
     requestBattleRender();
   }
 

@@ -1,0 +1,32 @@
+warning: in the working copy of 'D:/素材/代号柒/搜打撤/docs/evidence/2026-10-18-WF-page-perf-1018/battle/baseline/battle.view.js.txt', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '搜打撤/game/src/battle/view/battle.view.js', CRLF will be replaced by LF the next time Git touches it
+diff --git a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-18-WF-page-perf-1018/battle/baseline/battle.view.js.txt b/game/src/battle/view/battle.view.js
+index d5d7aa6e..9c62887d 100644
+--- a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-18-WF-page-perf-1018/battle/baseline/battle.view.js.txt
++++ b/game/src/battle/view/battle.view.js
+@@ -443,15 +443,19 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
+       const progressHTML = progress?.innerHTML || '';
+       // A bounded visual update follows only this DOM page; no delayed callback
+       // can unlock a replacement page or restart the round's admission deadline.
++      let previousOpening = null;
+       const paintInputReadiness = () => {
+         if (!isCurrentPage()) return;
+         const opening = inputTicket.remainingMs() > 0;
+-        panel.setAttribute('aria-busy', String(opening));
+-        buttons.forEach(button => {
+-          if (opening) button.setAttribute('aria-disabled', 'true');
+-          else button.removeAttribute('aria-disabled');
+-        });
+-        if (progress) progress.innerHTML = opening ? '候选展开中' : progressHTML;
++        if (opening !== previousOpening) {
++          previousOpening = opening;
++          panel.setAttribute('aria-busy', String(opening));
++          buttons.forEach(button => {
++            if (opening) button.setAttribute('aria-disabled', 'true');
++            else button.removeAttribute('aria-disabled');
++          });
++          if (progress) progress.innerHTML = opening ? '候选展开中' : progressHTML;
++        }
+         if (opening) requestAnimationFrame(paintInputReadiness);
+       };
+       if (typeof requestAnimationFrame === 'function') paintInputReadiness();

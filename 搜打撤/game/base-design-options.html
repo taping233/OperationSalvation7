@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>基地 · 大界面重做</title>
+<style>
+:root { color-scheme:dark; --font-ui:'HarmonyOS Sans SC','Microsoft YaHei',sans-serif; --font-num:Georgia,serif; --font-mono:Consolas,monospace; }
+* { box-sizing:border-box; } body { margin:0; color:#eeeae1; background:#181f1b; font:16px/1.7 var(--font-ui); }
+a { color:#dcad80; text-underline-offset:4px; } button { cursor:pointer; font:inherit; }
+.design-shell { max-width:1800px; margin:auto; padding:28px clamp(18px,3vw,54px) 50px; }
+.design-head { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap; border-bottom:1px solid #e7e6d52b; padding-bottom:22px; }
+h1 { margin:0 0 6px; font-size:30px; font-weight:400; letter-spacing:.06em; } .design-head p { margin:0; color:#aeb7a7; }
+.design-tabs,.design-choices { display:flex; align-items:center; flex-wrap:wrap; gap:26px; }
+.design-tabs button,.design-choices button,.design-replay { padding:10px 0; border:0; border-bottom:2px solid transparent; color:#aab7a5; background:none; }
+:is(.design-tabs,.design-choices) button[aria-pressed="true"] { color:#efbd8b; border-bottom-color:#db9b60; }
+.design-choices { margin:16px 0; } .design-choices button { font-size:18px; }
+.design-workbench { overflow:hidden; border:1px solid #dedec826; background:#202720; }
+.design-stage { position:relative; aspect-ratio:16/9; overflow:hidden; }
+.design-stage #overlay { position:absolute; top:0; left:0; width:1920px; height:1080px; transform:scale(var(--preview-scale,1)); transform-origin:top left; }
+#frameHost { height:100%; } #overlay #hubMain { margin:0; padding:0; text-align:left; font:18px/1.6 var(--font-ui); }
+#overlay .hub-back { position:absolute; background:none; color:#eeeae1; border:0; padding:0; }
+#overlay .hub-back svg { width:100%; height:100%; } #overlay .camp-brand h2 { margin:0; }
+#overlay .hub-res { display:flex; } #overlay .hub-page { background:#242a29; }
+#overlay .base-link { border:0; color:inherit; background:none; font:18px/1.5 var(--font-ui); padding:10px 0; }
+#overlay .card-browser-track img { width:100%; height:100%; object-fit:contain; }
+#overlay .warehouse-card-art,#overlay .collection-card-art { display:block; }
+#overlay .trade-v5-item { display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:10px; color:inherit; font:20px/1.5 var(--font-ui); }
+#overlay :is(.trade-v5-item-art,.trade-v5-art) { display:block; } #overlay :is(.trade-v5-item-art,.trade-v5-art) img { width:100%; height:100%; object-fit:contain; }
+#overlay .trade-v5-desk-heading h3 { font-size:34px; margin:10px 0; } #overlay .trade-v5-balance { display:flex; justify-content:space-between; font-size:23px; }
+#overlay .base-command { min-height:62px; padding:14px 22px; border:1px solid #a9b4a24a; font:22px/1.4 var(--font-ui); background:#e8e1d3; color:#26332b; }
+#overlay .person-hero { display:flex; flex-direction:column; margin:0; } #overlay .person-hero figcaption h3 { margin:0; }
+#overlay .av3-collection-sample .card-browser-track { gap:30px; }
+#overlay .base-preview-card-page { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:64px; height:100%; padding:30px 70px; }
+#overlay .base-preview-card-page > button { grid-column:1/-1; justify-self:start; }
+#overlay .base-preview-card-page figure { margin:0; height:700px; } #overlay .base-preview-card-page img { width:100%; height:100%; object-fit:contain; }
+#overlay .base-preview-card-page article { align-self:center; color:#eeeae1; } #overlay .base-preview-card-page h2 { font-size:56px; font-weight:400; margin:14px 0 38px; }
+.design-tools { display:flex; align-items:center; flex-wrap:wrap; gap:22px; padding:12px 22px; border-top:1px solid #e7e6d522; color:#aeb7a7; font-size:14px; }
+.design-tools input { accent-color:#db9b60; } .design-replay { margin-left:auto; }
+.design-caption { margin:18px 0; color:#d1d5c7; } .design-note { color:#8d9d87; font-size:14px; }
+.design-references { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:26px; margin:24px 0; }
+.design-reference { margin:0; border-bottom:1px solid #e7e6d524; padding-bottom:20px; } .design-reference img { display:block; width:100%; aspect-ratio:16/9; object-fit:contain; background:#0d1510; }
+.design-reference figcaption { padding-top:16px; } .design-reference h2 { font-size:22px; font-weight:500; margin:0; } .design-reference p { color:#aeb7a7; margin:8px 0; }
+[hidden] { display:none!important; } :is(button,a,input):focus-visible { outline:2px solid #dcad80; outline-offset:4px; }
+@media (max-width:600px) { .design-references { grid-template-columns:1fr; } .design-choices { gap:15px; } }
+</style>
+</head>
+<body><main class="design-shell">
+<header class="design-head"><div><h1>基地 · 大界面重做</h1><p>照成熟游戏的真实骨架改：开放菜单、完整房间、统一阅读区。</p></div><nav class="design-tabs"><button data-panel="layouts" aria-pressed="true">大页演示</button><button data-panel="references" aria-pressed="false">真实参考与原则</button><a href="/" target="_blank" rel="noopener">打开游戏 ↗</a></nav></header>
+<section id="layoutsPanel"><nav class="design-choices" aria-label="大页演示"><button data-page-choice="deploy" aria-pressed="true">基地首页</button><button data-page-choice="stash" aria-pressed="false">仓库</button><button data-page-choice="classes" aria-pressed="false">队员</button><button data-page-choice="shop" aria-pressed="false">交易所</button><button data-page-choice="ach" aria-pressed="false">收藏室</button></nav><div class="design-workbench"><div class="design-stage"><div id="overlay"><div id="frameHost"></div></div></div><div class="design-tools"><label><input type="checkbox" id="preparedPreview">已有整备草稿</label><span>菜单可直接跳转大页，卡牌可进入大图。</span><button class="design-replay" id="replayPreview">重播展开 ↗</button></div></div><p id="layoutCaption" class="design-caption" role="status"></p><p class="design-note">此画板使用示例数量与自有资产，不读写存档；正式游戏已接入新框架与房间样式。按老板要求未检测、测试或浏览器验收。</p></section>
+<section id="referencesPanel" hidden><div class="design-references" id="referenceCards"></div><h2>教学原则来源</h2><ul id="teachingSources"></ul><p class="design-note">截图用于布局与美术参考；字号、间距与时长是本项目实施值。静态截图不证明原游戏动效，转场原则另取官方设计资料。</p></section>
+</main><script type="module" src="./src/ui/base-design-preview-v7.js"></script></body>
+</html>

@@ -7,6 +7,7 @@ const actions = new Map();
 const UI = {
   el: {}, _lastMode: null,
   showOverlay(title, html, mode) { this.el.ovBody.innerHTML = rich(html); this.el.overlay.hidden = false; this._lastMode = mode; },
+  showCardZoom: vi.fn(),
   hideOverlay() { this.el.overlay.hidden = true; }, hideTooltip() {}, showTooltip() {}, refresh() {}, log() {},
   act: (name, fn) => actions.set(name, fn),
 };
@@ -40,6 +41,13 @@ const inspectCard = uid => openHandInspector(uid, selected => actions.get('btPla
 const panel = () => document.querySelector('.bt-hand-detail');
 const stage = () => UI.el.ovBody.querySelector('.battle-stage');
 const card = () => UI.el.ovBody.querySelector('.sts-hand .bt-card');
+const infusionWorkspace = () => UI.el.ovBody.querySelector('[data-infusion-workspace]');
+const infusionMaterial = (index = 0) => infusionWorkspace().querySelectorAll('.infusion-material')[index];
+const infusionControl = (act, index = 0) => infusionMaterial(index).querySelector(`.infusion-quantity [data-act="${act}"]`);
+const infusionResources = () => {
+  const { energy, hand, grave, discard, player, foes } = BattleSession.getSnapshot();
+  return { energy, hand, grave, discard, player, foes, coins:game.coins };
+};
 function flush() { for (let i = 0; frames.length && i < 30; i++) frames.shift()(performance.now()); }
 async function settle() {
   for (let i = 0; i < 100; i++) {
@@ -55,13 +63,13 @@ function start(count = 1, entry = Cards.SHA, extra = [], myClass = null) {
     myClass, state: 'idle', battleActive: false, log() {}, heal() {}, addItem() {}, onBattleEnd(opts) { this.lastBattleSummary = opts.battleSummary; },
   };
   window.SDT.game = game;
-  BattleSession.start(game, Array.from({ length: count }, (_, i) => ({ id: `foe-${i}`, name: `敌人${i}`, hp: 40, atk: 1 })), { isBoss: false });
+  BattleSession.start(game, Array.isArray(count) ? count : Array.from({ length: count }, (_, i) => ({ id: `foe-${i}`, name: `敌人${i}`, hp: 40, atk: 1 })), { isBoss: false });
   flush();
 }
 beforeEach(async () => {
   // 拖拽松手后的 300ms click 吞噬是生产交互窗口；各用例不共享该手势。
   if (Date.now() - Aim.aimPlayedAt < 300) await new Promise(resolve => setTimeout(resolve, 310));
-  frames = [];
+  frames = []; UI.showCardZoom.mockClear();
   window.requestAnimationFrame = callback => { frames.push(callback); return frames.length; };
   Element.prototype.animate = () => ({ finished: Promise.resolve(), cancel() {}, onfinish: null });
   document.body.innerHTML = '<div id="overlay"><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
@@ -184,22 +192,19 @@ it('starts self-target equipment selection from the stable folded slot without s
   expect(BattleSession.getSnapshot().hand).toEqual(before.hand);
 });
 
-it('routes rapid folded-slot infusion picks to distinct UIDs in one shared material stack', () => {
+it('adds distinct material UIDs through the workspace and ignores a detached repeated button', () => {
   start(1, { id: 'folded-infuse', name: '折叠注能', type: '法术', cost: 1, infuse: 3, desc: '注能(3)：获得 6 点护盾。' }, [
     { uid: 'folded-fuel-a', card: Cards.SHA }, { uid: 'folded-fuel-b', card: Cards.SHA }, { uid: 'folded-fuel-c', card: Cards.SHA },
   ]);
   inspectCard('inspect-card');
   panel().querySelector('.bt-hand-detail-use').click(); flush();
-  const material = UI.el.ovBody.querySelector('.bt-card[data-uid="folded-fuel-a"]');
-  const foldedSlot = material.closest('.bt-slot');
-  const pick = () => {
-    foldedSlot.dispatchEvent(new MouseEvent('pointerdown', { bubbles: true, button: 0 }));
-    foldedSlot.click();
-  };
-  pick(); expect(BattleSession.getSnapshot().infusing.picked).toEqual(['folded-fuel-a']);
-  pick(); expect(BattleSession.getSnapshot().infusing.picked).toEqual(['folded-fuel-a', 'folded-fuel-b']);
-  expect(foldedSlot.dataset.uid).toBe(material.dataset.uid);
-  expect(BattleSession.getSnapshot().energy).toBe(9);
+  const before = infusionResources();
+  const oldButton = infusionControl('btInfuseAdd');
+  oldButton.click(); flush(); oldButton.click();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['folded-fuel-a']);
+  infusionControl('btInfuseAdd').click(); flush();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['folded-fuel-a', 'folded-fuel-b']);
+  expect(infusionResources()).toEqual(before);
 });
 
 it('keeps unavailable cards readable and prevents stale confirmations after a battle switch', () => {
@@ -228,19 +233,24 @@ it('removes the inspector and restores inert state when the whole overlay is hid
   expect(oldStage.inert).toBe(false);
 });
 
-it('inspects infusion cards and materials before either entering or changing the selection', () => {
+it('inspects the source before entry and keeps selected materials and scroll while reading details', () => {
   start(1, { id: 'inspect-infuse', name: '注能护体', type: '法术', cost: 1, infuse: 1, desc: '注能(1)：获得 6 点护盾。' }, [{ uid: 'inspect-fuel', card: Cards.SHA }]);
   inspectCard('inspect-card');
   expect(BattleSession.getSnapshot().infusing).toBeNull();
   panel().querySelector('.bt-hand-detail-use').click(); flush();
   expect(BattleSession.getSnapshot().infusing.picked).toEqual([]);
-  inspectCard('inspect-fuel');
-  expect(BattleSession.getSnapshot().infusing.picked).toEqual([]);
-  expect(panel().querySelector('.bt-hand-detail-use').textContent).toBe('选作注能材料');
-  panel().querySelector('.bt-hand-detail-use').click(); flush();
-  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['inspect-fuel']);
-  expect(BattleSession.getSnapshot().energy).toBe(9);
-  expect(BattleSession.getSnapshot().hand).toContain('inspect-fuel');
+  infusionControl('btInfuseAdd').click(); flush();
+  const workspace = infusionWorkspace(), materials = workspace.querySelector('.infusion-materials');
+  materials.scrollTop = 240;
+  const detail = infusionMaterial().querySelector('[data-act="btInfuseInspect"]');
+  const before = BattleSession.getSnapshot();
+  detail.click(); flush();
+  expect(UI.showCardZoom).toHaveBeenCalledWith(expect.objectContaining({ id:Cards.SHA.id }), { returnFocus:detail });
+  expect(infusionWorkspace()).toBe(workspace);
+  expect(materials.scrollTop).toBe(240);
+  expect(BattleSession.getSnapshot()).toEqual(before);
+  expect(before.infusing.picked).toEqual(['inspect-fuel']);
+  expect(before.energy).toBe(9); expect(before.hand).toContain('inspect-fuel');
 });
 
 it.each(['cost', 'id', 'desc'])('keeps distinct hand groups keyed by %s and removes only the card actually played', async variant => {
@@ -322,7 +332,7 @@ it.each([
   [{ atk: 0 }, {}, '攻击 0', '攻击 · 0', '基础攻击 0'],
   [{ atk: 4, evenAttack: true }, {}, '蓄力 · 下回合行动', '下回合行动', '基础攻击 4'],
   [{ atk: 4, status: { freeze: 1 } }, {}, '冰冻中', '无法行动', '基础攻击 4'],
-  [{ atk: 4, behavior: 'burn' }, {}, '攻击 4 · 灼烧', '攻击并灼烧', '基础攻击 4'],
+  [{ atk: 4, behavior: 'strike' }, {}, '攻击 4', '攻击', '基础攻击 4'],
   [{ atk: 5, behavior: 'general' }, {}, '攻击 5 · 回合末强化', '攻击·回合末强化', '基础攻击 5'],
   [{ atk: 6, behavior: 'curse' }, {}, '攻击 6 · 诅咒', '攻击并施加诅咒', '基础攻击 6'],
   [{ atk: 4, affix: 'aegis' }, {}, '攻击 4 · 偶数回合庇幕', '偶数回合减免所有伤害', '基础攻击 4'],
@@ -353,16 +363,16 @@ it.each([
 it('keeps a long enemy name intact and exposes base attack through keyboard intent details without confirming a target', () => {
   start(); const before = BattleSession.getSnapshot();
   const name = '被冰雾侵蚀的联邦机械重装巡防指挥官';
-  const presented = { ...before, foes: [{ ...before.foes[0], name, atk: 7, behavior: 'burn' }] };
+  const presented = { ...before, foes: [{ ...before.foes[0], name, atk: 7, behavior: 'strike' }] };
   updateUnits(mountUnitLayer(UI.el.ovBody, before.battleToken), presented, {});
   const enemy = stage().querySelector('.sts-foe'), intent = enemy.querySelector('.sts-intent');
   expect(enemy.getAttribute('aria-label')).toContain(name); expect(enemy.querySelector('.sts-headrow>b')).toBeNull();
   expect(enemy.querySelector('.sts-headrow .sts-atkbadge')).toBeNull();
-  expect(intent.querySelector('.bt-intent-short').textContent).toBe('攻击 7 · 灼烧');
+  expect(intent.querySelector('.bt-intent-short').textContent).toBe('攻击 7');
   intent.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
   expect(intent.getAttribute('aria-expanded')).toBe('true');
   expect(intent.querySelector('.bt-intent-detail').textContent).toContain('基础攻击 7');
-  expect(intent.querySelector('.bt-intent-detail').textContent).toContain('攻击并灼烧');
+  expect(intent.querySelector('.bt-intent-detail').textContent).toContain('攻击');
   intent.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true }));
   expect(intent.getAttribute('aria-expanded')).toBe('false');
   expect(BattleSession.getSnapshot()).toEqual(before); expect(Aim.clickSelectedUid).toBeNull();
@@ -429,7 +439,7 @@ it.each(['enemy', 'self'])('retains the %s target label and Enter action across 
   expect(target.getAttribute('tabindex')).toBe('0'); expect(document.activeElement).toBe(target);
   render();
   expect(stage().querySelector(selector)).toBe(target); expect(target.getAttribute('aria-label')).toContain(label);
-  BattleSession.commands.openGrave(); flush(); expect(stage()).toBeNull();
+  BattleSession.commands.openGrave(); flush(); expect(stage().hasAttribute('inert')).toBe(true);
   BattleSession.commands.closeGrave(); flush();
   expect(stage().querySelector(selector)).toBe(target); expect(target.getAttribute('aria-label')).toContain(label);
   expect(target.getAttribute('tabindex')).toBe('0');
@@ -486,14 +496,19 @@ it('single click selects a target and details stay separately accessible', async
   expect(BattleSession.getSnapshot().foes[0].hp).toBeLessThan(40);
 });
 
-it('directly toggles infusion materials without opening the inspector', () => {
+it('adds and removes infusion materials explicitly without opening the inspector or spending resources', () => {
   start(1, { id:'fresh-infusion', name:'注能护体', type:'法术', cost:1, infuse:1, desc:'注能(1)：获得 6 点护盾。' }, [{ uid:'fuel', card:Cards.SHA }]);
   UI.el.ovBody.querySelector('[data-act=btInfuseStart]').click(); flush();
-  UI.el.ovBody.querySelector('.bt-card[data-uid="fuel"]').click(); flush();
+  const before = infusionResources();
+  infusionMaterial().querySelector('.infusion-card-face').click(); flush();
   expect(panel()).toBeNull();
   expect(BattleSession.getSnapshot().infusing.picked).toEqual(['fuel']);
-  document.dispatchEvent(new KeyboardEvent('keydown', {key:'1',bubbles:true,cancelable:true})); flush();
+  expect(infusionControl('btInfuseAdd').disabled).toBe(true);
+  infusionControl('btInfuseAdd').click();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['fuel']);
+  infusionControl('btInfuseRemove').click(); flush();
   expect(BattleSession.getSnapshot().infusing.picked).toEqual([]);
+  expect(infusionResources()).toEqual(before);
 });
 
 it('keeps remaining shortcut numbers after a lower slot leaves', async () => {
@@ -541,4 +556,475 @@ it('warns only on lethal end turn and lets the player return or proceed', async 
   expect(game.lastBattleSummary.round).toBe(2);
   expect(game.lastBattleSummary.damageTaken).toEqual([{source:'敌人0',damage:1,round:2}]);
   expect(Object.isFrozen(game.lastBattleSummary.remainingFoes)).toBe(true);
+});
+
+
+it('低能量卡的可访问说明与禁用原因一致，恢复后重新提示可用且拒绝不扣费', () => {
+  start(); set$energy(0); render();
+  const el=card();
+  expect(el.dataset.handState).toBe('blocked');
+  expect(el.getAttribute('aria-label')).toContain('能量不足：需要 1，当前 0');
+  expect(el.querySelector('.hsc-desc .bt-rulehint').textContent).toBe('无法打出：能量不足：需要 1，当前 0');
+  expect(el.querySelector('.hs-card').getAttribute('aria-label')).toContain('能量不足');
+  expect(el.getAttribute('aria-label')).not.toContain('点击选择敌人');
+  const before=BattleSession.getSnapshot();
+  Aim.selectCardByClick(el.dataset.uid); flush();
+  const after=BattleSession.getSnapshot();
+  expect(stage().querySelector('.bt-thought-bubble').textContent).toContain('能量不足');
+  expect(after.energy).toBe(before.energy); expect(after.turn).toBe(before.turn); expect(after.hand).toEqual(before.hand);
+  set$energy(9); render();
+  expect(card().dataset.handState).toBe('ready');
+  expect(card().getAttribute('aria-label')).not.toContain('能量不足');
+  expect(card().querySelector('.hsc-desc').textContent).not.toContain('能量不足');
+  expect(card().getAttribute('aria-label')).toContain('点击选择敌人');
+});
+it('特殊禁用原因仍优先于能量提示，不回退成可用操作', () => {
+  start(1,Cards.all().find(c => c.id === 'tt7-imitate')); set$energy(0); render();
+  expect(card().dataset.handState).toBe('blocked');
+  expect(card().getAttribute('aria-label')).toContain('先打出一张武术牌');
+  expect(card().getAttribute('aria-label')).toContain('无法打出');
+  expect(card().getAttribute('aria-label')).not.toContain('点击直接使用');
+});
+
+
+it('two real equipped cards block the next card and ARIA before submission, preserving rejection code and resources', async () => {
+ const canonical=id=>Cards.all().find(c=>c.id===id);
+ start(1,canonical('tt3eq-mistbox'),[{uid:'armor',card:canonical('tt3-grass-armor')},{uid:'gun',card:canonical('tt12-raygun')},{uid:'paid',card:{id:'paid',name:'有费装备',type:'装备',cost:2,desc:''}}]);
+ BattleSession.commands.playCard('armor','self');await settle();
+ BattleSession.commands.playCard('gun','self');await settle();render();
+ const element=stage().querySelector('.sts-hand .bt-card[data-uid="inspect-card"]');
+ expect(element.dataset.handState).toBe('blocked');expect(element.getAttribute('aria-label')).toContain('最多同时装配 2 件装备（已装配 2 件）');
+ expect(element.getAttribute('aria-label')).not.toContain('点击直接使用');
+ const engine=await import('../game/src/battle/core/battle.engine.js');
+ expect(engine.unplayableReason(canonical('tt3eq-mistbox'))).toBeNull(); // Preserve automatic-effect eligibility.
+ const publicCore=await import('../game/src/battle/core/battle.core.js');
+ expect(publicCore.unplayableReason(canonical('tt3eq-mistbox'))).toContain('最多同时装配');
+ expect(publicCore.unplayableReason({type:'装备',name:'封印装备',desc:'无法打出'})).toContain('封印之牌');
+ const before=BattleSession.getSnapshot();
+ const rejected=BattleSession.commands.submitCardPlay('inspect-card','self');
+ expect(rejected.reason.code).toBe('EQUIPMENT_FULL');
+ expect(BattleSession.getSnapshot().hand).toEqual(before.hand);expect(BattleSession.getSnapshot().energy).toBe(before.energy);expect(BattleSession.getSnapshot().turn).toBe(before.turn);
+ expect(BattleSession.commands.submitCardPlay('armor','self').reason.code).toBe('NOT_IN_HAND');
+ set$energy(0);expect(BattleSession.commands.submitCardPlay('paid','self').reason.code).toBe('INSUFFICIENT_ENERGY');set$energy(9);
+ // Existing ability changes capacity by presence; removing it restores the original cap.
+ game.ownedCards.push({uid:'extra-slot',card:canonical('tt8-hero-guardian')});render();
+ expect(stage().querySelector('.sts-hand .bt-card[data-uid="inspect-card"]').dataset.handState).toBe('ready');
+ game.ownedCards=game.ownedCards.filter(o=>o.uid!=='extra-slot');render();
+ expect(stage().querySelector('.sts-hand .bt-card[data-uid="inspect-card"]').dataset.handState).toBe('blocked');
+});
+it('passive gear does not occupy slots and rune capacity remains dynamic', async () => {
+ const runtime=await import('../game/src/battle/runtime/battle.runtime.js');
+ const canonical=id=>Cards.all().find(c=>c.id===id);
+ start(1,canonical('tt3eq-mistbox'));
+ runtime.set$equipped([{uid:'a',card:canonical('tt3-grass-armor')},{uid:'passive',card:canonical('tt12-raygun'),passive:true}]);render();
+ expect(card().dataset.handState).toBe('ready');
+ runtime.equipped.push({uid:'b',card:canonical('tt12-raygun')});render();expect(card().dataset.handState).toBe('blocked');
+ runtime.set$nestSyn({...runtime.nestSyn,grass1:true});render();expect(card().dataset.handState).toBe('ready');
+ runtime.set$nestSyn({...runtime.nestSyn,grass1:false,grass3:true});render();expect(card().dataset.handState).toBe('ready');
+ runtime.set$nestSyn({...runtime.nestSyn,grass3:false});render();expect(card().dataset.handState).toBe('blocked');
+});
+
+it('普通战武装悬浮卡片共享提示明确抽牌替代，仍可使用', () => {
+  const arm = Cards.all().find(c => c.id === 'tt7-armup');
+  start(1, arm);
+  render(); flush();
+  const handCard = card();
+  expect(handCard.getAttribute('aria-label')).toContain('普通战抽牌改为获得初始攻击');
+  expect(handCard.textContent).toContain('普通战抽牌改为获得初始攻击');
+  expect(handCard.getAttribute('aria-disabled')).not.toBe('true');
+});
+
+
+it('describes and cycles three hand pages without changing cards or combat state', async () => {
+  const entries = Array.from({ length: 19 }, (_, i) => ({
+    uid: `page-${i}`, card: { ...Cards.SHA, id: `page-card-${i}`, name: `分页牌${i}` },
+  }));
+  start(1, entries[0].card, entries.slice(1));
+  const before = BattleSession.getSnapshot();
+  for (const page of [1, 2, 3, 1]) {
+    const button = stage().querySelector('[data-act="btHandPage"]');
+    expect(button.title).toBe('手牌分栏：每栏最多 9 叠；点击查看下一栏，末栏后回到第一栏');
+    expect(button.getAttribute('aria-label')).toContain(`当前第 ${page} 栏，共 3 栏`);
+    expect(stage().querySelectorAll('.sts-hand .bt-card').length).toBe(page === 3 ? 1 : 9);
+    expect(BattleSession.getSnapshot().hand).toEqual(before.hand);
+    expect(BattleSession.getSnapshot().energy).toBe(before.energy);
+    expect(BattleSession.getSnapshot().turn).toBe(before.turn);
+    button.click(); flush();
+    await new Promise(resolve => setTimeout(resolve, 260));
+    flush();
+  }
+});
+
+it('does not show pagination help for a single hand page', () => {
+  start();
+  expect(stage().querySelector('[data-act="btHandPage"]')).toBeNull();
+  expect(stage().querySelectorAll('.sts-hand .bt-card')).toHaveLength(1);
+});
+
+
+it.each(['mouse', 'touch'])('keeps %s untargeted pickup pending until field confirmation or Escape', pointerType => {
+  const mana = Cards.all().find(c => c.id === 'cc-mana-surge');
+  expect(mana).toBeTruthy(); start(1, mana);
+  const before = BattleSession.getSnapshot(), face = card();
+  expect(face.getAttribute('aria-label')).toContain('拖至战场空地使用；拿起后 Esc 取消；聚焦卡面按 Enter 直接使用');
+  expect(face.getAttribute('aria-label')).not.toContain('点击直接使用');
+  const pointer = type => {
+    const event = new MouseEvent(type, { bubbles: true, button: 0, clientX: 900, clientY: 950 });
+    Object.defineProperties(event, { pointerId: { value: 88 }, pointerType: { value: pointerType } });
+    return event;
+  };
+  face.querySelector('.hs-card').dispatchEvent(pointer('pointerdown'));
+  window.dispatchEvent(pointer('pointerup'));
+  expect(Aim.aim?.uid).toBe('inspect-card'); expect(Aim.aim.mode).toBe('drag');
+  expect(Aim.aim.leftDown).toBe(false); expect(face.inert).toBe(true);
+  expect(BattleSession.getSnapshot().energy).toBe(before.energy);
+  expect(BattleSession.getSnapshot().hand).toEqual(before.hand);
+  expect(BattleSession.getSnapshot().busy).toBe(false);
+  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+  expect(Aim.aim).toBeNull();
+  expect(BattleSession.getSnapshot().hand).toEqual(before.hand);
+});
+
+it.each(['Enter', ' '])('directly plays an untargeted card from focused card-face %s', async key => {
+  start(1, { id: 'keyboard-coins', name: '无目标金币', type: '法术', rarity: '古朴', cost: 1, desc: '获得 3 金币。',
+    rules: { version: 1, battle: { target: { side: null, area: false } }, triggers: { onPlay: [{ op: 'coins', n: 3 }] } } });
+  expect(card().getAttribute('aria-label')).toContain('聚焦卡面按 Enter 直接使用');
+  card().querySelector('.hs-card').dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+  await settle();
+  expect(game.coins).toBe(3); expect(BattleSession.getSnapshot().energy).toBe(8);
+  expect(BattleSession.getSnapshot().hand).not.toContain('inspect-card'); expect(Aim.aim).toBeNull();
+});
+
+it('updates the entire career skill help across busy and energy changes', async () => {
+  const { set$busy } = await import('../game/src/battle/runtime/battle.runtime.session.js');
+  start();
+  const check = (disabled, reason) => {
+    const wrapper = stage().querySelector('.battle-skill-help');
+    const button = wrapper.querySelector('.bt-slam-btn');
+    expect(button.disabled).toBe(disabled);
+    expect(button.getAttribute('aria-label')).toContain(reason);
+    expect(wrapper.dataset.uiTipNote).toContain(reason);
+    if (disabled) expect(wrapper.getAttribute('aria-label')).toContain(reason);
+    else { expect(wrapper.hasAttribute('aria-label')).toBe(false); expect(wrapper.hasAttribute('tabindex')).toBe(false); }
+  };
+  check(false, '可用');
+  set$busy(true); render(); check(true, '结算中');
+  set$busy(false); render(); check(false, '可用');
+  set$energy(0); render(); check(true, '差 2 费');
+  set$energy(9); render(); check(false, '可用');
+  const { set$hand } = await import('../game/src/battle/runtime/battle.runtime.piles.js');
+  const extra = Array.from({ length: 10 }, (_, i) => ({ uid: `skill-page-${i}`, card: { ...Cards.SHA, id: `skill-page-${i}`, name: `技能分页${i}` } }));
+  game.ownedCards.push(...extra);
+  set$hand([...BattleSession.getSnapshot().hand, ...extra.map(entry => entry.uid)]);
+  render();
+  const page = stage().querySelector('[data-act="btHandPage"]');
+  expect(page).not.toBeNull(); expect(page.closest('.battle-skill-help')).toBeNull();
+  expect(page.previousElementSibling?.matches('.battle-skill-help')).toBe(true);
+  set$busy(true); render(); check(true, '结算中');
+  set$busy(false); render(); check(false, '可用');
+  expect(stage().querySelector('[data-act="btHandPage"]')).toBe(page);
+  page.click(); flush();
+  expect(stage().querySelector('[data-act="btHandPage"]').getAttribute('aria-label')).toContain('当前第 2 栏');
+});
+
+it('同叠注能逐张加减，数量、按钮与剩余提示同步且不循环撤选', () => {
+  start(1, { id:'stack-click-infusion', name:'堆叠注能', type:'法术', cost:1, infuse:2, desc:'注能(2)：获得6点护盾。' }, [
+    { uid:'stack-fuel-a', card:Cards.SHA }, { uid:'stack-fuel-b', card:Cards.SHA }]);
+  BattleSession.commands.beginInfusion('inspect-card'); flush();
+  const before = infusionResources();
+  expect(infusionControl('btInfuseRemove').disabled).toBe(true);
+  infusionControl('btInfuseAdd').click(); flush();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['stack-fuel-a']);
+  expect(infusionMaterial().querySelector('.infusion-quantity span').textContent).toContain('1 / 2');
+  expect(infusionWorkspace().querySelector('[role="status"]').textContent).toBe('已选 1/2');
+  expect(infusionControl('btInfuseAdd').getAttribute('aria-label')).toContain('增加一张');
+  infusionControl('btInfuseAdd').click(); flush();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['stack-fuel-a', 'stack-fuel-b']);
+  expect(infusionControl('btInfuseAdd').disabled).toBe(true);
+  expect(UI.el.ovBody.querySelector('[data-act="btInfuseGo"]').disabled).toBe(false);
+  infusionControl('btInfuseAdd').click();
+  expect(BattleSession.getSnapshot().infusing.picked).toHaveLength(2);
+  infusionControl('btInfuseRemove').click(); flush();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['stack-fuel-b']);
+  expect(UI.el.ovBody.querySelector('[data-act="btInfuseGo"]').disabled).toBe(true);
+  expect(infusionResources()).toEqual(before);
+});
+
+it('更新后旧加减回调失效，当前按钮继续逐张选取独立UID', () => {
+  start(1, { id:'stack-click-fast', name:'快速注能', type:'法术', cost:1, infuse:2, desc:'注能(2)：获得6点护盾。' }, [
+    { uid:'click-a', card:Cards.SHA }, { uid:'click-b', card:Cards.SHA }]);
+  BattleSession.commands.beginInfusion('inspect-card'); flush();
+  const oldAdd = actions.get('btInfuseAdd'), oldRemove = actions.get('btInfuseRemove');
+  oldAdd({ i:'0' }); flush();
+  oldAdd({ i:'0' }); oldRemove({ i:'0' });
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['click-a']);
+  infusionControl('btInfuseAdd').click(); flush();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['click-a', 'click-b']);
+});
+
+it('工作区数字键逐张加入当前材料组，取消保留全部手牌和能量', () => {
+  start(1, { id:'stack-key', name:'键盘注能', type:'法术', cost:1, infuse:2, desc:'注能(2)：获得6点护盾。' }, [
+    { uid:'key-a', card:Cards.SHA }, { uid:'key-b', card:Cards.SHA }]);
+  BattleSession.commands.beginInfusion('inspect-card'); flush();
+  const before = infusionResources();
+  for (let i = 0; i < 2; i++) {
+    document.dispatchEvent(new KeyboardEvent('keydown', { key:'1', bubbles:true, cancelable:true })); flush();
+  }
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['key-a', 'key-b']);
+  document.dispatchEvent(new KeyboardEvent('keydown', { key:'1', bubbles:true, cancelable:true })); flush();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['key-b']);
+  document.dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true, cancelable:true })); flush();
+  expect(BattleSession.getSnapshot().infusing).toBeNull();
+  expect(infusionResources()).toEqual(before);
+});
+
+it('独立工作区展示全部材料，旧手牌入口不能选离屏UID', () => {
+  start(1, { id:'paged-infusion', name:'分页注能', type:'法术', cost:1, infuse:2, desc:'注能(2)：获得6点护盾。' },
+    Array.from({ length:10 }, (_, i) => ({ uid:`page-fuel-${i}`, card:{ id:`page-fuel-${i}`, name:`分页材料${i}`, type:'法术', cost:0, desc:'获得1点护盾。' } })));
+  const oldHand = stage().querySelector('.sts-hand'), oldPlay = actions.get('btPlay');
+  BattleSession.commands.beginInfusion('inspect-card'); flush();
+  expect(oldHand.isConnected).toBe(true);
+  expect(oldHand.closest('[inert]')).toBe(stage());
+  expect(infusionWorkspace().querySelectorAll('.infusion-material')).toHaveLength(10);
+  expect(UI.el.ovBody.querySelector('.battle-secondary-panel [data-act="btHandPage"]')).toBeNull();
+  oldPlay({ uid:'page-fuel-0' }); flush();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual([]);
+  infusionControl('btInfuseAdd', 9).click(); flush();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['page-fuel-9']);
+});
+
+it('选量变化保留材料滚动和可用控件焦点，更换材料不提前消耗', () => {
+  start(1, { id:'scroll-infusion', name:'滚动注能', type:'法术', cost:1, infuse:2, desc:'注能(2)：获得6点护盾。' }, [
+    { uid:'scroll-a', card:Cards.SHA }, { uid:'scroll-b', card:Cards.SHA },
+    { uid:'scroll-c', card:{ ...Cards.SHA, id:'other-fuel', name:'另一材料' } }]);
+  BattleSession.commands.beginInfusion('inspect-card'); flush();
+  const before = infusionResources();
+  infusionWorkspace().querySelector('.infusion-materials').scrollTop = 180;
+  infusionControl('btInfuseAdd').focus(); infusionControl('btInfuseAdd').click(); flush();
+  expect(infusionWorkspace().querySelector('.infusion-materials').scrollTop).toBe(180);
+  expect(document.activeElement.dataset.act).toBe('btInfuseAdd');
+  expect(document.activeElement.dataset.i).toBe('0');
+  infusionControl('btInfuseRemove').click(); flush();
+  infusionControl('btInfuseAdd', 1).click(); flush();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(['scroll-c']);
+  expect(infusionWorkspace().querySelector('.infusion-selection-summary').textContent).toContain('另一材料 ×1');
+  expect(infusionWorkspace().querySelector('.infusion-materials').scrollTop).toBe(180);
+  expect(infusionResources()).toEqual(before);
+});
+
+it('取消或切换战斗后旧工作区确认、直打、选量与详情回调均失效', () => {
+  const source = { id:'stale-infusion', name:'旧页注能', type:'法术', cost:1, infuse:1, desc:'注能(1)：获得6点护盾。' };
+  start(1, source, [{ uid:'stale-fuel', card:Cards.SHA }]);
+  BattleSession.commands.beginInfusion('inspect-card'); flush();
+  infusionControl('btInfuseAdd').click(); flush();
+  const old = ['btInfuseAdd', 'btInfuseRemove', 'btInfuseInspect', 'btInfuseCancel', 'btInfuseDirect', 'btInfuseGo'].map(name => actions.get(name));
+  UI.el.ovBody.querySelector('[data-act="btInfuseCancel"]').click(); flush();
+  const cancelled = BattleSession.getSnapshot();
+  old.forEach(action => action({ i:'0', uid:'inspect-card' })); flush();
+  expect(BattleSession.getSnapshot()).toEqual(cancelled);
+  start(1, source, [{ uid:'stale-fuel', card:Cards.SHA }]);
+  BattleSession.commands.beginInfusion('inspect-card'); flush();
+  const restarted = BattleSession.getSnapshot();
+  old.forEach(action => action({ i:'0', uid:'inspect-card' })); flush();
+  expect(BattleSession.getSnapshot()).toEqual(restarted);
+  expect(UI.showCardZoom).not.toHaveBeenCalled();
+});
+
+it('pending infusion recreates its actual battlefield when restored without a mounted scene', () => {
+  start(1, { id:'pending-overlay', name:'待选注能', type:'法术', cost:1, infuse:2, desc:'注能(2)：获得6点护盾。' }, [
+    { uid:'pending-a', card:Cards.SHA }, { uid:'pending-b', card:Cards.SHA }]);
+  BattleSession.commands.beginInfusion('inspect-card'); flush();
+  infusionControl('btInfuseAdd').click(); flush();
+  const before = infusionResources();
+  const picked = [...BattleSession.getSnapshot().infusing.picked];
+  UI.el.ovBody.replaceChildren();
+  render(); flush();
+  expect(stage()).not.toBeNull();
+  expect(stage()._battleToken).toBe(BattleSession.getSnapshot().battleToken);
+  expect(stage().hasAttribute('inert')).toBe(true);
+  expect(infusionWorkspace()).not.toBeNull();
+  expect(BattleSession.getSnapshot().infusing.picked).toEqual(picked);
+  expect(infusionResources()).toEqual(before);
+});
+
+it('choice backdrop refreshes paid energy and removed hand card, and survives the real overlay mode event', async () => {
+  start(1, Cards.all().find(entry => entry.id === 'tt3-magic-lamp'));
+  const originalStage = stage();
+  const scenery = stage().querySelector('.battle-scene-world');
+  const foreground = stage().querySelector('.battle-scene-foreground');
+  expect(scenery).not.toBeNull();
+  BattleSession.commands.playCard('inspect-card', 0);
+  await settle();
+  const snap = BattleSession.getSnapshot();
+  expect(snap.choosing).not.toBeNull();
+  expect(stage()).toBe(originalStage);
+  expect(stage().querySelector('.sts-energy').getAttribute('aria-label')).toContain(`能量 ${snap.energy}，`);
+  expect(snap.hand).not.toContain('inspect-card');
+  expect(stage().querySelector('.sts-hand [data-uid="inspect-card"]')).toBeNull();
+  document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail:'discover' }));
+  expect(stage().querySelector('.battle-scene-world')).toBe(scenery);
+  expect(stage().querySelector('.battle-scene-foreground')).toBe(foreground);
+  expect(stage().hasAttribute('inert')).toBe(true);
+});
+
+it('扰敌真实双选：首点保留手牌，排除已选敌人高亮，第二点才扣费互殴', async () => {
+  start(3, Cards.all().find(c => c.id === 'tt7-provoke'));
+  Aim.selectCardByClick('inspect-card', false);
+  expect(Aim.clickSelectedTarget('enemy', 2)).toBe(true); flush();
+  let snapshot = BattleSession.getSnapshot();
+  expect(snapshot.hand).toContain('inspect-card'); expect(snapshot.energy).toBe(9);
+  expect(snapshot.foes.map(f => f.hp)).toEqual([40, 40, 40]);
+  expect(stage().textContent).toContain('已选 敌人2 先攻击');
+  expect(stage().querySelector('.bt-foe[data-eidx="2"]').classList.contains('can-target')).toBe(false);
+  expect(stage().querySelector('.bt-foe[data-eidx="1"]').classList.contains('can-target')).toBe(true);
+  expect(Aim.clickSelectedTarget('enemy', 1)).toBe(true); await settle();
+  snapshot = BattleSession.getSnapshot();
+  expect(snapshot.hand).not.toContain('inspect-card'); expect(snapshot.energy).toBe(8);
+  expect(snapshot.foes.map(f => f.hp)).toEqual([40, 39, 39]);
+  expect(snapshot.pendingTarget).toBeNull();
+});
+it('扰敌首选后Esc撤销不消费，只有一敌时不能空耗卡牌', async () => {
+  const provoke = Cards.all().find(c => c.id === 'tt7-provoke');
+  start(2, provoke);
+  Aim.selectCardByClick('inspect-card', false); Aim.clickSelectedTarget('enemy', 0); flush();
+  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); flush();
+  expect(BattleSession.getSnapshot().pendingTarget).toBeNull();
+  expect(BattleSession.getSnapshot().energy).toBe(9);
+  expect(BattleSession.getSnapshot().hand).toContain('inspect-card');
+  start(1, provoke); flush();
+  expect(card().dataset.handState).toBe('blocked');
+  expect(card().getAttribute('aria-label')).toContain('场上敌人不足两名');
+});
+
+it('keeps an actively held touch owned when a different primary mouse or pen presses', () => {
+  start();
+  const before = infusionResources();
+  const pointer = (type, pointerId, pointerType) => {
+    const event = new MouseEvent(type, { bubbles:true, button:0, clientX:900, clientY:950 });
+    Object.defineProperties(event, { pointerId:{value:pointerId}, pointerType:{value:pointerType}, isPrimary:{value:true} });
+    return event;
+  };
+  card().querySelector('.hs-card').dispatchEvent(pointer('pointerdown', 88, 'touch'));
+  expect(Aim.aim?.pointerId).toBe(88);
+  for (const [id, type] of [[1,'mouse'],[42,'pen']]) {
+    window.dispatchEvent(pointer('pointerdown', id, type));
+    expect(Aim.aim?.pointerId).toBe(88);
+    window.dispatchEvent(pointer('pointerup', id, type));
+    expect(Aim.aim?.leftDown).toBe(true);
+  }
+  window.dispatchEvent(pointer('pointercancel', 88, 'touch'));
+  expect(Aim.aim).toBeNull();
+  expect(infusionResources()).toEqual(before);
+});
+
+it('allows a new primary pointer to continue a pickup only after its owner releases', () => {
+  start();
+  const before=infusionResources();
+  const pointer=(type,id)=>{
+    const event=new MouseEvent(type,{bubbles:true,button:0,clientX:900,clientY:950});
+    Object.defineProperties(event,{pointerId:{value:id},isPrimary:{value:true}});return event;
+  };
+  card().querySelector('.hs-card').dispatchEvent(pointer('pointerdown',88));
+  window.dispatchEvent(pointer('pointerup',88));
+  expect(Aim.aim?.leftDown).toBe(false);
+  window.dispatchEvent(pointer('pointerdown',1));
+  expect(Aim.aim?.pointerId).toBe(1);
+  expect(Aim.aim?.leftDown).toBe(true);
+  window.dispatchEvent(pointer('pointercancel',1));
+  expect(Aim.aim).toBeNull();expect(infusionResources()).toEqual(before);
+});
+
+it('lets real window aim cancellation consume the down before the retained hand can pick up another card', () => {
+  const mana = Cards.all().find(c => c.id === 'cc-mana-surge');
+  start(1, mana, [{ uid:'other-hand-card', card:Cards.SHA }]);
+  const before = infusionResources();
+  const pointer = (type, y=950) => {
+    const event = new MouseEvent(type,{bubbles:true,button:0,clientX:900,clientY:y});
+    Object.defineProperties(event,{pointerId:{value:88},pointerType:{value:'mouse'},isPrimary:{value:true}});
+    return event;
+  };
+  const source = UI.el.ovBody.querySelector('.bt-card[data-uid="inspect-card"]');
+  source.querySelector('.hs-card').dispatchEvent(pointer('pointerdown'));
+  window.dispatchEvent(pointer('pointerup'));
+  expect(Aim.aim?.leftDown).toBe(false);
+  window.dispatchEvent(pointer('pointermove', Aim.aim.playY - 50)); flush();
+  expect(Aim.aim?.mode).toBe('multi');expect(Aim.aim.targetMode).toBe('click');
+  const next = UI.el.ovBody.querySelector('.bt-card[data-uid="other-hand-card"]');
+  next.querySelector('.hs-card').dispatchEvent(pointer('pointerdown'));
+  expect(Aim.aim).toBeNull();expect(infusionResources()).toEqual(before);
+});
+
+
+it('扰敌同种三敌DOM点击0→2：重绘只排首实例，拒重复，单次扣费且不打中间敌', async () => {
+  start(Array.from({ length:3 }, () => ({ id:'grass_el', name:'滋生异变体', hp:12, atk:5 })), Cards.all().find(c => c.id === 'tt7-provoke'));
+  const foe = index => stage().querySelector(`.bt-foe[data-eidx="${index}"]`);
+  Aim.selectCardByClick('inspect-card', false);
+  foe(0).click(); flush(); render(); flush();
+  expect(BattleSession.getSnapshot().pendingTarget.excludedTargetIndex).toBe(0);
+  expect([0, 1, 2].map(index => foe(index).classList.contains('can-target'))).toEqual([false, true, true]);
+  // A direct DOM click must be rejected even though it bypasses visual highlighting.
+  foe(0).click(); flush();
+  expect(BattleSession.getSnapshot().energy).toBe(9);
+  expect(BattleSession.getSnapshot().foes.map(f => f.hp)).toEqual([12, 12, 12]);
+  foe(2).click(); await settle();
+  const snapshot = BattleSession.getSnapshot();
+  expect(snapshot.foes.map(f => f.hp)).toEqual([7, 12, 7]);
+  expect(snapshot.energy).toBe(8);
+  expect(snapshot.hand).not.toContain('inspect-card');
+  expect(snapshot.pendingTarget).toBeNull();
+});
+
+it('扰敌同种双敌取消后可反向重选，无遗留实例排除', async () => {
+  start(Array.from({ length:2 }, () => ({ id:'grass_el', name:'滋生异变体', hp:12, atk:5 })), Cards.all().find(c => c.id === 'tt7-provoke'));
+  Aim.selectCardByClick('inspect-card', false);
+  Aim.clickSelectedTarget('enemy', 0); flush();
+  document.dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true })); flush();
+  expect(BattleSession.getSnapshot().pendingTarget).toBeNull();
+  expect(BattleSession.getSnapshot().energy).toBe(9);
+  expect(BattleSession.getSnapshot().hand).toContain('inspect-card');
+  Aim.selectCardByClick('inspect-card', false);
+  expect(Aim.clickSelectedTarget('enemy', 1)).toBe(true); flush(); render();
+  expect(BattleSession.getSnapshot().pendingTarget.excludedTargetIndex).toBe(1);
+  expect(stage().querySelector('.bt-foe[data-eidx="0"]').classList.contains('can-target')).toBe(true);
+  expect(Aim.clickSelectedTarget('enemy', 0)).toBe(true); await settle();
+  expect(BattleSession.getSnapshot().foes.map(f => f.hp)).toEqual([7, 7]);
+  expect(BattleSession.getSnapshot().energy).toBe(8);
+});
+
+
+it('普通战流光斩在卡面阅读区显示禁用理由，拒绝后不选目标或消费', () => {
+  start(2, Cards.all().find(entry => entry.id === 'tt3-flux-slash'));
+  const reason = '「牌库」词条只有对战 BOSS 时生效——普通战斗没有牌库与墓地，无法打出';
+  const desc = card().querySelector('.hsc-desc');
+  expect(desc.querySelectorAll('.bt-rulehint')).toHaveLength(1);
+  expect(desc.firstElementChild.textContent).toBe(`无法打出：${reason}`);
+  expect(card().querySelector('.hs-card').getAttribute('aria-label')).toContain(reason);
+  const before = infusionResources();
+  Aim.selectCardByClick(card().dataset.uid); flush();
+  expect(Aim.clickSelectedUid).toBeNull(); expect(Aim.aim).toBeNull();
+  expect(infusionResources()).toEqual(before);
+});
+
+it('禁用理由占用单个提示槽，能量变化更新数值，恢复后还原补充规则', () => {
+  start(1, { ...Cards.all().find(entry => entry.id === 'tt7-armup'), cost: 3 });
+  const hint = () => card().querySelector('.hsc-desc .bt-rulehint');
+  expect(hint().textContent).toBe('普通战抽牌改为获得初始攻击。');
+  set$energy(0); render();
+  expect(hint().textContent).toContain('能量不足');
+  expect(hint().textContent).toContain('当前 0');
+  expect(card().querySelectorAll('.bt-rulehint')).toHaveLength(1);
+  set$energy(1); render();
+  expect(hint().textContent).toBe('无法打出：能量不足：需要 3，当前 1');
+  set$energy(9); render();
+  expect(hint().textContent).toBe('普通战抽牌改为获得初始攻击。');
+  expect(card().querySelector('.hsc-desc').textContent).not.toContain('能量不足');
+});
+
+it('卡文已包含禁用原因时不追加相同阅读提示', () => {
+  const reason = '先打出一张武术牌，使本牌变形';
+  start(1, { ...Cards.all().find(entry => entry.id === 'tt7-imitate'), desc: reason });
+  const desc = card().querySelector('.hsc-desc');
+  expect(card().dataset.handState).toBe('blocked');
+  expect(desc.textContent).toContain(reason);
+  expect(desc.querySelector('.bt-rulehint')).toBeNull();
 });

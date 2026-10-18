@@ -5,6 +5,8 @@ import { clone } from '../core/shared.js';
  * @typedef {{ok:false, code:string, message:string, preserveRun:true, details?:Record<string, any>}} SnapshotFail
  */
 import { createLayeredMap } from './layeredMap.js';
+import { GUARDED_ROUTE_VERSION, validateGuardedRoute } from './map-route-v2.js';
+import { CURRENT_GENERATOR_VERSION, CURRENT_LAYOUT_VERSION, validateCurrentGeneratedMap, MAP_TYPE_BUDGETS, V4_MAP_TYPE_BUDGETS, PREVIOUS_MAP_TYPE_BUDGETS } from './map-generation-rules.js';
 
 const SNAPSHOT_VERSION = 1;
 const ROUTE_SNAPSHOT_VERSION = 2;
@@ -59,12 +61,14 @@ function validateMapSnapshotInner(snapshot, position = null) {
   let encoded;
   try { encoded=JSON.stringify(snapshot); } catch { return fail('INVALID_MAP_SNAPSHOT','地图快照不是 JSON 纯数据'); }
   const routed=snapshot?.snapshotVersion===ROUTE_SNAPSHOT_VERSION;
+  const current=snapshot?.generatorVersion===CURRENT_GENERATOR_VERSION && snapshot?.layoutVersion===CURRENT_LAYOUT_VERSION;
+  const previousVersion=snapshot?.generatorVersion===4 && snapshot?.layoutVersion===9;
   const keys=routed?['kind','snapshotVersion','mapSeed','generatorVersion','layoutVersion','layers','routeVersion','routePlan']:['kind','snapshotVersion','mapSeed','generatorVersion','layoutVersion','layers'];
   if (!pureJson(snapshot) || !encoded || encoded.length > 300_000 || !exactKeys(snapshot,keys) || snapshot.kind !== 'normal-map' || ![SNAPSHOT_VERSION,ROUTE_SNAPSHOT_VERSION].includes(snapshot.snapshotVersion) ||
-      !scalarSeed(snapshot.mapSeed) || snapshot.generatorVersion !== LEGACY_GENERATOR_VERSION || snapshot.layoutVersion !== LEGACY_LAYOUT_VERSION ||
+      !scalarSeed(snapshot.mapSeed) || (!current && !previousVersion && (snapshot.generatorVersion !== LEGACY_GENERATOR_VERSION || snapshot.layoutVersion !== LEGACY_LAYOUT_VERSION)) ||
       !Array.isArray(snapshot.layers) || snapshot.layers.length !== 4) return fail('UNSUPPORTED_MAP_SNAPSHOT','地图快照版本或外壳无效');
   if (/(?:"__proto__"|"prototype"|"constructor")\s*:/.test(encoded)) return fail('INVALID_MAP_SNAPSHOT','地图快照含禁止键');
-  const ids=new Set(), layerIds=new Set(), expectedCounts=[7,12,17,17];
+  const ids=new Set(), layerIds=new Set(), expectedCounts=current?[7,11,16,16]:[7,12,17,17];
   for (let li=0;li<4;li++) {
     const layer=snapshot.layers[li];
     if (!exactKeys(layer,['id','name','nameEn','color','gridBounds','entrances','entranceNames','exit','doors','altarEntrances','nodes']) ||
@@ -99,7 +103,7 @@ function validateMapSnapshotInner(snapshot, position = null) {
     for (const door of layer.doors) {
       if (!exactKeys(door,['pair','at','toLayer','arriveAt','exit'])||typeof door.pair!=='string'||!door.pair||!int(door.at)||!int(door.toLayer)||!int(door.arriveAt)||typeof door.exit!=='boolean'||door.at<0||door.at>=layer.nodes.length||door.toLayer<0||door.toLayer>=4||door.arriveAt<0||door.arriveAt>=snapshot.layers[door.toLayer].nodes.length||!layer.nodes[door.at].next.some(([l,i])=>l===door.toLayer&&i===door.arriveAt)) return fail('INVALID_MAP_SNAPSHOT','层间门描述无效',{layer:li});
     }
-    if(layer.altarEntrances.length) return fail('INVALID_MAP_SNAPSHOT','3/9 地图不应含旧中央祭坛入口',{layer:li});
+    if(layer.altarEntrances.length) return fail('INVALID_MAP_SNAPSHOT','普通地图不应含旧中央祭坛入口',{layer:li});
   }
   const allDoors=snapshot.layers.flatMap((layer,li)=>layer.doors.map(door=>({li,...door}))), pairs=new Set();
   for(const door of allDoors){if(pairs.has(door.pair))return fail('INVALID_MAP_SNAPSHOT','层间门 pair 重复');pairs.add(door.pair);}
@@ -111,7 +115,24 @@ function validateMapSnapshotInner(snapshot, position = null) {
   while(queue.length){const [li,ni]=queue.shift();for(const [tl,ti] of snapshot.layers[li].nodes[ni].next){const k=`${tl},${ti}`;if(!seen.has(k)){seen.add(k);queue.push([tl,ti]);}}}
   const total=snapshot.layers.reduce((n,l)=>n+l.nodes.length,0);
   if(seen.size!==total) return fail('INVALID_MAP_SNAPSHOT','地图存在不可达节点');
-  if(routed){
+  let previousFacilities = false;
+  let budgets = current ? MAP_TYPE_BUDGETS : V4_MAP_TYPE_BUDGETS;
+  if(current || previousVersion){
+    const layers=snapshot.layers.map((layer,li)=>({...layer,entry:layer.entrances[0],
+      nodes:layer.nodes.map((node,idx)=>({...node,li,idx,type:node.def.type}))}));
+    const quality=validateCurrentGeneratedMap(layers, budgets);
+    previousFacilities = previousVersion && !quality.ok && validateCurrentGeneratedMap(layers, PREVIOUS_MAP_TYPE_BUDGETS).ok;
+    if(previousFacilities) budgets = PREVIOUS_MAP_TYPE_BUDGETS;
+    if(!quality.ok && !previousFacilities) return fail('INVALID_MAP_SNAPSHOT','4/9 地图未满足最终约束',{issues:quality.issues});
+  }
+  if(routed && snapshot.routeVersion===GUARDED_ROUTE_VERSION){
+    if(!current && !previousVersion) return fail('INVALID_ROUTE_PLAN','新路线仅适用于4/9或5/9地图');
+    const route=validateGuardedRoute(snapshot.layers,snapshot.routePlan,previousFacilities,budgets);
+    if(!route.ok) return fail('INVALID_ROUTE_PLAN','休整与搜刮路线计划无效');
+    // 不按seed重生成：逆还原申报变化，独立校验冻结v1前态与原计划。
+    const previous=validateMapSnapshotInner({...snapshot,layers:route.baseLayers,routeVersion:'r5-routes-v1',routePlan:snapshot.routePlan.baseRoutePlan},position);
+    if(!previous.ok) return fail('INVALID_ROUTE_PLAN','路线前态或旧计划无效');
+  } else if(routed){
     const p=snapshot.routePlan;
     if(snapshot.routeVersion!=='r5-routes-v1' || !plainObject(p) || !['applied','fallback'].includes(p.status) || p.layerIndex!==1) return fail('INVALID_ROUTE_PLAN','路线计划无效');
     if(p.status==='fallback'){

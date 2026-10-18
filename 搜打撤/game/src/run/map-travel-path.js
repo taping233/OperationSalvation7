@@ -44,21 +44,25 @@ export function findMapTravelPath(game, target) {
   }
   const known = idx => !!(game.seen?.[`${li},${idx}`] || game.visited?.[`${li},${idx}`]);
   if (target.li !== li || !known(target.idx)) return null;
+  const doors = new Set((layer.doors || []).map(door => door.at));
   const passable = idx => {
     const cell = layer.logical[idx];
     const supply = game.entrySupply;
     if (supply?.layerIdx === li && supply.trackPos === idx &&
         (supply.taken?.length || 0) < (supply.cardIds?.length || 0)) return false;
-    if (!cell || !known(idx) || layer.doors?.some(door => door.at === idx) ||
+    if (!cell || !known(idx) || doors.has(idx) ||
         game.doorKeys?.has(`${li},${idx}`) || ['door', 'altar', 'boss'].includes(cell.def?.type)) return false;
     return cell.def?.type === 'blank' || isConsumedMapNode(game, { li, idx, def: cell.def });
   };
-  const parents = new Map([[start, null]]), queue = [start];
+  const parents = new Map([[start, null]]), queue = [start], blocked = new Set();
   for (let cursor = 0; cursor < queue.length; cursor++) {
     const idx = queue[cursor];
     for (const [nl, next] of layer.logical[idx].next || []) {
       if (nl !== li || !layer.logical[next] || parents.has(next)) continue;
-      if (next !== target.idx && !passable(next)) continue;
+      // Rejected cells may have many incoming edges. Only this query reuses their
+      // state; the next query must observe rewards or visibility edited in place.
+      if (blocked.has(next)) continue;
+      if (next !== target.idx && !passable(next)) { blocked.add(next); continue; }
       parents.set(next, idx);
       if (next === target.idx) {
         const path = [];

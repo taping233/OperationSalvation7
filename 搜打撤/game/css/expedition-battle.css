@@ -139,3 +139,17 @@ body #overlay .battle-decision-compact[data-decision-kind="settings"] .bt-settin
 /* 敌我共用底线，在名牌与抬起的手牌之间保留垂直阅读间距。 */
 /* 意图挂在角色头上，结果反馈仍贴着受击对象。 */
 /* 两侧工具独立锚定；中央手牌不参与工具布局。 */
+
+/* 规则说明沿用短决策面板：正文可滚动，返回动作不挤进正文。 */
+body #overlay.room-view:has(.battle-decision-compact[data-decision-kind="rules"]) { align-items:center; justify-content:center; padding:36px; }
+body #overlay.room-view .card.room:has(.battle-decision-compact[data-decision-kind="rules"]) {
+  position:relative; inset:auto; width:min(1040px,calc(var(--game-layout-width,100vw) - 96px));
+  height:auto; min-height:0; max-height:calc(var(--game-layout-height,100vh) - 72px);
+  flex:0 1 auto; align-self:center; justify-content:flex-start; margin:auto; padding:0!important;
+}
+body #overlay.room-view .card.room:has(.battle-decision-compact[data-decision-kind="rules"]) #ovBody {
+  width:100%; height:auto; min-height:0; max-width:none; margin:0; flex:0 1 auto;
+}
+body #overlay .battle-decision-compact[data-decision-kind="rules"] { width:100%; height:auto; min-height:0; }
+body #overlay .battle-decision[data-decision-kind="rules"] :is(.ov-stats,.ov-note) { font-size:var(--card-copy-size,24px); line-height:1.55; text-align:left; overflow-wrap:anywhere; }
+body #overlay .battle-decision[data-decision-kind="rules"] .battle-decision-actions .ov-btn { min-height:60px; font-size:24px; }

@@ -20,7 +20,6 @@ function scanHandMoveCurses(deps) {
   const legacySpecs = [
     ['bleed', /(?:附加|施加)\s*(?:(\d+)\s*层?)?\s*流血/, 1],
     ['poison', /(?:附加|施加)\s*(?:(\d+)\s*层)?\s*中毒/, 1],
-    ['burn', /(?:附加|施加|攻击并)\s*(?:\d+\s*层?\s*)?灼烧/, 1],
     ['freeze', /附加冰冻|冰冻所有|冰冻\s*(?:\d+|[一两二三四五])?\s*名|冻结/, 1],
     ['silence', /沉默/, 1],
     ['abreak', /破甲/, 2],
@@ -255,13 +254,33 @@ export function restoreAtkDown(foe) {
  * execute：消灭满足 cap 的敌人（吞噬「攻 4 及以下小怪」/ TNT）。
  * perCurseKinds=true 时消灭数量锚定目标诅咒种类数；onKill 奖励复用击杀奖励键。
  */
+function matchesExecuteCap(foe, cap = {}) {
+  return !foe.affix && (cap.atk === undefined || (foe.atk || 0) <= cap.atk) &&
+    (cap.maxHpBelow === undefined || (foe.maxHp || 0) < cap.maxHpBelow);
+}
+
+// Only pure single-target execute cards can be rejected before their effects run.
+// Mixed operations may change the target first; automatic casts retain their own flow.
+export function executeTargetReason(card, target, aliveFoes) {
+  const ops = card.rules?.triggers?.onPlay;
+  if (card.rules?.battle?.target?.side !== 'enemy' || card.rules.battle.target.area ||
+    !Array.isArray(ops) || ops.length !== 1) return null;
+  const op = ops[0];
+  if (op.op !== 'execute' || op.what || op.perCurseKinds || op.perCurseStacks) return null;
+  const candidates = target ? aliveFoes.filter(foe => foe === target) : aliveFoes;
+  if (candidates.some(foe => !foe.dead && matchesExecuteCap(foe, op.cap))) return null;
+  const cap = op.cap || {};
+  const message = target?.affix ? '不能选择 BOSS 敌人' : cap.atk !== undefined
+    ? `只能选择攻击力不高于${cap.atk}的非 BOSS 敌人`
+    : cap.maxHpBelow !== undefined ? `只能选择最大生命低于${cap.maxHpBelow}的非 BOSS 敌人`
+      : '没有可以消灭的非 BOSS 敌人';
+  return { code: 'EXECUTE_TARGET_INELIGIBLE', message };
+}
+
 export function resolveExecute(card, operation, preferredTarget, deps) {
   const cap = operation.cap || {};
   // 词缀 BOSS 豁免（对齐文本轨 kill.minions 门槛分支；m6 数据注释「含 BOSS 排除」）
-  const matches = foe => (foe.affix ? false : true) &&
-    (cap.atk === undefined || (foe.atk || 0) <= cap.atk) &&
-    (cap.maxHpBelow === undefined || (foe.maxHp || 0) < cap.maxHpBelow);
-  let targets = deps.getAliveFoes().filter(matches);
+  let targets = deps.getAliveFoes().filter(foe => matchesExecuteCap(foe, cap));
   const anchor = preferredTarget && !preferredTarget.dead ? preferredTarget : targets[0];
   if (operation.perCurseKinds === true || operation.perCurseStacks === true) {
     targets = anchor ? [anchor] : [];
@@ -287,6 +306,10 @@ export function resolveExecute(card, operation, preferredTarget, deps) {
       : `[[icon:cross]] <b>${deps.esc(card.name)}</b>：没有符合条件的敌人`, casts > 0 ? 'sys' : 'dim');
     return casts > 0;
   }
+  // A single-target card must not silently execute a different eligible enemy.
+  // Untargeted effects (TNT) and automatic casts without an anchor keep list order.
+  const singleEnemy = card.rules?.battle?.target?.side === 'enemy' && !card.rules.battle.target.area;
+  if (singleEnemy && preferredTarget) targets = targets.filter(foe => foe === preferredTarget);
   let killed = 0;
   for (const foe of targets) {
     if (killed >= count) break;

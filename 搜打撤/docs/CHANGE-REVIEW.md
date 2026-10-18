@@ -1,0 +1,45 @@
+# 改动核验清单
+
+`workflow review` 把显式改动路径、相关现行文档、既有测试选择、UI用例候选和已有验证结果放在同一个只读报告中。它复用 `impact` / `gate-plan` 和 `workflow verify` 的指纹检查，不运行测试、不启动浏览器、不改资产守卫。
+
+## 使用
+
+在项目根目录运行：
+
+```sh
+npm run --silent workflow -- review --paths game/src/ui/extraction-rewards-view.js --json
+npm run --silent workflow -- verify --task example --tests tests/extraction-rewards-view.test.js --json
+npm run --silent workflow -- review --paths game/src/ui/extraction-rewards-view.js --input docs/evidence/<日期>-example/<报告>.json --json
+```
+
+第一条只规划。第二条明确执行选定测试并保存报告，报告路径取命令实际输出。第三条只读取该报告和日志，重新核对指纹，汇总结果；报告与日志须位于本项目 `docs/evidence/`，不经过符号链接。按改动选择测试的要求仍见[质量门](quality-gates.md)。
+
+## 怎样读结果
+
+- `plan` 完整保留既有门的 `quick` / `full` / `skip` 及原因，不把 `full` 改成定向通过；`skip` 不代表通过。
+- `documents` 给出导航候选和源码引用行。`present: false` 表示恢复副本缺少该入口；候选表不是完整规范清单。
+- `ui.candidates` 来自 `game/dev/*.html` 对改动文件及其反向依赖的静态引用，带实际文件、标题和行号，全部保持 `not-verified`。动态入口可能漏查，无候选时须人工选真实场景。
+- `verification.status` 区分未提供、候选、过期、失败、跳过和无效报告；`scope` 与 `missingTests` / `untrackedPaths` 显示现有结果能否覆盖所选范围。候选不等于完整验收，仍需负责人解释结果。
+- 游戏改动会提醒人工核对实页范围；纯内部工具不要求游戏实页。游戏行为、真实输入与视觉证据不能互相替代，规则仍以质量门为准。
+
+## 无 Git 的恢复副本
+
+`review` 必须显式提供路径，不猜测变更清单。`verify` 在确认目录不是Git仓库时仍可运行原来的显式验证命令，保存文件指纹、真实退出码和日志，Git信息为 `null`、仓库模式为 `snapshot`，`reusableReceipt` 始终为 `false`。不会执行 `git init`，也不伪造提交或暂存状态。
+
+损坏的 `.git`、Git读取错误或显式Git环境覆盖不能当作无仓库豁免；此时命令报错。`staged`、`ship`、提交钩子和资产检查保持原有边界，恢复副本的工作区报告不能作为冻结index凭证，不能证明远端CI。新工具不改变任何授权要求。
+
+## 每轮评价记录
+
+`review` 的机器结果提供关联范围和证据核验；任务负责人在该轮 `docs/evidence/<日期>-<任务>/REPORT.md` 记录下表，不把待验字段自动补成通过。可复用同环境、未失效的已有证据，不要求每轮重跑全量。
+
+| 项目 | 最小内容 |
+| --- | --- |
+| 基线 | 实际问题、复现条件、修改前结果；缺失输入明确写未知 |
+| 改动 | 本轮具体路径、行为与保留的兼容边界；前态与差异位置 |
+| 自动检查 | 命令、退出码、日志、实际覆盖；定向通过不等于全量通过 |
+| 实玩证据 | 环境/版本、真实输入、结果与截图位置；未运行或阻塞照实记录 |
+| 收益与退化 | 对照基线的可验证改善、新失败与风险；无测量不报性能提升百分比 |
+| 结论 | 保留、返修或撤回建议及依据；未验风险明确交接，建议不授权实际回滚 |
+| 下一步 | 关闭剩余风险的最小检查与停止条件，避免无差别重复验证 |
+
+选验按风险：纯工具用脚本测试与真实CLI往返；游戏规则用真实引擎边界回归；交互同时验取消、重复输入与重入；视觉需实页；存档/交易需中断与兼容；性能须同口径基线。最终级别仍以质量门为准。自动测试、DOM输入和实页各有覆盖边界，任一项不能替代其他必要证据。

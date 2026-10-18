@@ -30,7 +30,7 @@
  *   tt12-chargeray    5 点法伤，每注能过 1 张 +2 → damage amount:5 + perInfusedInHand:2；
  *   tt3-holy-water    回复 5 点生命并净化自身 → heal amountField:'heal' + cleanse self；
  *   tt3-thunderblast  7 点法伤，墓地每 1 张法术 +1 → damage amount:7 + graveyard{type:'法术',perCard:1}；
- *   tt7-bladebloom    发现并直接施放 1 张，获取剩下两张 → acquire n:3 dest:'discover' act:'playKeep'
+ *   tt7-bladebloom    发现并直接施放 1 张，获取剩下两张 → acquire n:1 dest:'discover' act:'playKeep'
  *                     （SPEC §二.6「施放 1 张其余入手」=本卡口径，随机通用池）；
  *   tt7-burnharvest   5 点法伤，受法伤加成翻倍 → damage amount:5 + spellPowerMul:2；
  *   tt7-maxsupply     抽牌直到 4 张手牌 → draw untilHandN:4；
@@ -61,7 +61,8 @@
  * 本文件只保留 definitions 数据与批次参数；迁移数据行为不变（m3-data.test.js 守护）。 */
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
 
-const M3_MARKER_KEY = 'sdt-cards-m3-onplay-rules-v3-seeded';
+// v4：永恒绽放只发现一轮，三张是候选数，不是发现轮数。
+const M3_MARKER_KEY = 'sdt-cards-m3-onplay-rules-v4-seeded';
 
 const R = (battle, onPlay) => ({ rules: { version: 1, battle, triggers: { onPlay } } });
 const ENEMY_ONE = { target: { side: 'enemy', area: false } };
@@ -112,7 +113,7 @@ const definitions = new Map([
   ['tt3-thunderblast', R(ENEMY_ONE, [
     { op: 'damage', amount: 7, target: 'chosenEnemy', graveyard: { type: '法术', perCard: 1 } },
   ])],
-  ['tt7-bladebloom', R(SELF, [acquire(3, '随机', 'discover', 'playKeep')])],
+  ['tt7-bladebloom', R(SELF, [acquire(1, '随机', 'discover', 'playKeep')])],
   ['tt7-burnharvest', R(ENEMY_ONE, [
     { op: 'damage', amount: 5, target: 'chosenEnemy', spellPowerMul: 2 },
   ])],
@@ -166,6 +167,7 @@ export const ensureM3OnplayRules = createRuleBackfiller({
   // 整卡（canonical 卡面 + 旧版 rules）精确匹配的存档视为本批旧版产物，允许重写为现行版；
   // 玩家改名/改字段的卡深不相等，仍保守跳过。
   previousRulesById: new Map([
+    ['tt7-bladebloom', R(SELF, [acquire(3, '随机', 'discover', 'playKeep')]).rules],
     ['tt2-turtlearmor', R(SELF, [{ op: 'armor', amount: 10, consumeEquip: true }]).rules],
     ['cc-last-stand', R(ENEMY_ONE, [{ ...dmgField(), recast: { on: 'lastHand', times: 2 } }]).rules],
   ]),

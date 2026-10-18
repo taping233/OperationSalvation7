@@ -1,0 +1,65 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>地图生命 · 隔离预览</title>
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/cards.css" />
+<link rel="stylesheet" href="/css/overlays.css" />
+<link rel="stylesheet" href="/css/hub.css" />
+<link rel="stylesheet" href="/css/battle.css" />
+<link rel="stylesheet" href="/css/scenes.css" />
+<link rel="stylesheet" href="/css/lab-ending.css" />
+<link rel="stylesheet" href="/css/winter.css" />
+<link rel="stylesheet" href="/css/expedition.css" />
+<link rel="stylesheet" href="/css/expedition-map.css" />
+<link rel="stylesheet" href="/css/map-edge-light.css" />
+<link rel="stylesheet" href="/css/expedition-hub.css" />
+<link rel="stylesheet" href="/css/expedition-inventory.css" />
+<link rel="stylesheet" href="/css/expedition-rewards.css" />
+<link rel="stylesheet" href="/css/expedition-battle.css" />
+<link rel="stylesheet" href="/css/expedition-library.css" />
+<link rel="stylesheet" href="/css/card-v3.css" />
+<link rel="stylesheet" href="/css/expedition-roster.css" />
+<link rel="stylesheet" href="/css/expedition-shop.css" />
+<link rel="stylesheet" href="/css/ui-scale.css" />
+<link rel="stylesheet" href="/css/page-slot-select.css" />
+    <link rel="stylesheet" href="/css/page-settings.css" />
+    <link rel="stylesheet" href="/css/page-datapage.css" />
+<link rel="stylesheet" href="/css/page-ach.css" />
+<link rel="stylesheet" href="/css/page-cardforge.css" />
+<link rel="stylesheet" href="/css/page-expedition-hud.css" />
+<link rel="stylesheet" href="/css/feedback-oct12.css" />
+<link rel="stylesheet" href="/css/roster-departure-v2.css" />
+<link rel="stylesheet" href="/css/pocket-strip.css" />
+<link rel="stylesheet" href="/css/experience-loot.css" />
+<link rel="stylesheet" href="/css/page-events.css" />
+<link rel="stylesheet" href="/css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="/css/page-battle-ui.css" />
+<link rel="stylesheet" href="/css/character-idle.css" />
+<link rel="stylesheet" href="/css/page-transitions.css" />
+<link rel="stylesheet" href="/css/ak-skin.css" />
+<link rel="stylesheet" href="/css/base-camp.css" />
+<link rel="stylesheet" href="/css/base-camp-compact.css" />
+<link rel="stylesheet" href="/css/card-layout-selected.css" />
+<link rel="stylesheet" href="/css/battle-stage.css" /><style>html {zoom:1!important; width:100%!important; height:100%!important; transform:none!important;} body {background:#142128;} .review-controls{z-index:10000;position:fixed;top:160px;left:72px;display:flex;flex-wrap:wrap;gap:12px;max-width:850px;color:#e8eeee;font:16px var(--font-ui)}.review-controls button{min-width:80px;min-height:40px;padding:10px;font:inherit}.review-controls p{flex-basis:100%}.review-map{position:fixed;inset:280px 72px 60px;border:1px solid #8eaba533;color:#8eaba5;display:grid;place-items:center}.review-map p{pointer-events:none}</style></head><body>
+<div class="review-map" id="map"><p>地图点击计数：<b id="mapClicks">0</b></p></div><div id="topBtns">      <div id="hpHud" tabindex="0" aria-label="生命值" aria-describedby="mapHealthTip">
+        <div class="hp-hud-body">
+          <b id="hpText">30/30</b>
+          <div id="hpBarWrap"><div id="hpBar"></div></div>
+        </div>
+        <span class="map-resource-tip" id="mapHealthTip" role="tooltip"><strong>生命值</strong><span>当前生命 / 生命上限。下方细条显示剩余生命比例。</span></span>
+      </div>
+</div>
+<section class="review-controls"><p>隔离生命 HUD · 真实 hudMethods 刷新 · 不加载或保存主局</p><button data-hp="30">满血 30</button><button data-hp="18">受伤至 18</button><button data-hp="6">低血 6</button><button data-hp="12">恢复至 12</button><button data-hp="0">耗尽 0</button><button id="max">切换上限 30/40</button><button id="reset">模拟读档 6</button><button id="reduce">切换减少动态</button><p>血量可点击、Tab 聚焦、Enter/空格展开，Escape 或点击外部关闭。反馈持续 1 秒；低血不循环闪烁。</p></section>
+<script type="module">
+import '/src/core/sdt-facade.js';
+import { hudMethods } from '/src/ui/hud.js?review=map-health-r1';
+const el = Object.fromEntries(['layerZh','layerEn','statTurn','statValue','charCoins','charAtk','heroAva'].map(id => [id, document.createElement('span')]));
+for (const id of ['hpText','hpBar','hpBarWrap']) el[id]=document.getElementById(id);
+const ctx={el,_lastMode:'map',_roomActive:false,popNum(){},endRoom(){}};
+const game={state:'idle',turn:1,hp:30,maxHp:30,coins:0,atk:0,myClass:'',runActive:true,inventory:[]};
+const refresh=()=>hudMethods.refresh.call(ctx,game);
+document.querySelectorAll('[data-hp]').forEach(button=>button.onclick=()=>{game.hp=Number(button.dataset.hp);refresh();});
+document.getElementById('max').onclick=()=>{game.maxHp=game.maxHp===30?40:30;refresh();};
+document.getElementById('reset').onclick=()=>{ctx._lastHpKey=null;game.hp=6;refresh();};
+document.getElementById('reduce').onclick=()=>document.body.classList.toggle('reduce-motion');
+let clicks=0;document.getElementById('map').onclick=()=>document.getElementById('mapClicks').textContent=String(++clicks);
+refresh();
+</script></body></html>

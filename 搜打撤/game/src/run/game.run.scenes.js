@@ -21,6 +21,7 @@ import { nodeActionBinding } from './node-reward-state.js';
 import { claimNodeRestore, finishNodeRestore, nodeRestoreAt } from './node-restore-state.js';
 import { selectEncounterSpec } from './encounter-selector.js';
 import { turboMs } from '../core/turbo.js';
+import { usePlainBattleTransition } from '../ui/transition-diagnostic-policy.js';
 import { reduceMotion } from '../core/motion.js';
 import { createCityCut, cityCutDuration } from '../ui/camp-entry.js';
 import { eventSceneHTML } from '../ui/node-scene-view.js';
@@ -205,6 +206,8 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
   const request = ++transitionRequest;
   const isCurrent = () => currentContext() && request === transitionRequest;
   const cityCut = presentation === 'city-cut' && !reduceMotion();
+  const plainCut = usePlainBattleTransition(import.meta.env.DEV, location.search, tone, presentation);
+  // Keep the original transition timer and held-release delay; only replace its visual DOM.
   let heldSurface = null;
   game.state = 'modal';
   const transition = new Promise(resolve => {
@@ -223,7 +226,7 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
       game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
       resolve(true);
     };
-    if (cityCut) {
+    if (cityCut && !plainCut) {
       const battleEntry = tone === 'battle';
       const cut = createCityCut({
         archive: '远征档案',
@@ -239,7 +242,7 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
         style="--city-run-duration:${turboMs(duration)}ms">
         ${cut.outerHTML}<p class="city-run-hint">点击跳过</p>
       </div>`, 'scene');
-    } else if (presentation === 'node-cut') {
+    } else if (presentation === 'node-cut' || plainCut) {
       UI.showOverlay('', `<div class="scene flow-transition expedition-cut" data-act="flowContinue" role="status" aria-label="${escAttr(title || '进入节点')}"><div class="expedition-cut-rule" aria-hidden="true"></div><h2>${esc(title || '进入节点')}</h2></div>`, 'scene');
     } else UI.showOverlay('', `
       <div class="scene flow-transition sc-${escAttr(tone)}" data-asset-key="${escAttr(asset)}" data-presentation="${escAttr(presentation)}" data-act="flowContinue">
@@ -492,7 +495,7 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
     const scrollTop = surface?.querySelector('.pocket-restore-content')?.scrollTop ?? 0;
     const left = record?.left ?? txn.left;
     const list = restorable();
-    const blockedN = game.usedPocket.length - list.length;
+    const blockedN = game.usedPocket.filter(p => !FIRE_RESTORABLE(p.card)).reduce((sum, p) => sum + p.count, 0);
     const title = opts.title || '营火休整';
     const icon = opts.icon || '[[icon:fire]]';
     const cardsHTML = list.length

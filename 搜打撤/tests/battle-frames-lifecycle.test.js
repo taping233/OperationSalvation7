@@ -8,11 +8,21 @@ const pixi = vi.hoisted(() => {
   const extraTexture = { id: 'extra-texture' };
   const emptyTexture = { id: 'empty' };
   class Application {
-    constructor() {
+    constructor(options) {
+      pixi.lastApp = this;
+      this.options = options;
       this.view = document.createElement('canvas');
       this.stage = { addChild() {} };
-      this.ticker = { maxFPS: 0, stop() {}, start() {}, add(fn) { pixi.tick = fn; } };
-      this.renderer = { type: 1, render() { pixi.rendered += 1; } };
+      this.ticker = { maxFPS: 0, remove: vi.fn(), stop() {}, start() {}, add(fn) { pixi.tick = fn; } };
+      const view = this.view;
+      this.renderer = { type: 1, resolution: options.resolution,
+        get width() { return view.width; }, get height() { return view.height; },
+        resize: vi.fn(function(width, height) {
+          view.width = Math.round(width * this.resolution);
+          view.height = Math.round(height * this.resolution);
+          this.screen = { width: view.width / this.resolution, height: view.height / this.resolution };
+        }),
+        render() { pixi.rendered += 1; } };
     }
     stop() {}
     start() {}
@@ -64,6 +74,9 @@ vi.mock('pixi.js', () => ({
   },
 }));
 
+import * as Flight from '../game/src/core/flight-recorder.local.js';
+import { setPerformanceSettings } from '../game/src/core/performance-settings.js';
+import { scale as uiScale } from '../game/src/ui/ui-scale.js';
 import { attach, cacheStats, isLiveBattleFigure, hide, play, presentDeath } from '../game/src/battle/view/battle.frames.js';
 import { WU_FRAME_SEQUENCES, wuTimeline } from '../game/src/battle/view/battle.frame-catalog.js';
 import { CHANGWUYU_FRAME_SEQUENCES, changwuyuTimeline } from '../game/src/battle/view/battle.frame-catalog-changwuyu.js';
@@ -99,9 +112,137 @@ describe('battle frame lifecycle', () => {
     pixi.blocked = null;
     pixi.missing.clear();
     document.body.innerHTML = '<div id="overlay"><div id="ovBody"><div class="battle-stage sts"><div id="btSelf"><div class="sts-figure"><img /></div></div></div></div><div id="unitFrames"></div></div>';
+    Object.defineProperties(document.getElementById('overlay'), {
+      clientWidth: { configurable: true, value: 1920 }, clientHeight: { configurable: true, value: 1080 },
+    });
     document.querySelector('#btSelf img').setAttribute('src', '/assets/portraits/battle/changwuyu.webp');
   });
-  afterEach(async () => { pixi.finishLoad?.(); pixi.finishUnload?.(); await hide(); vi.restoreAllMocks(); });
+  afterEach(async () => { pixi.finishLoad?.(); pixi.finishUnload?.(); await hide(); setPerformanceSettings({ quality: 'balanced', fps: 60 }); vi.restoreAllMocks(); });
+
+  it('diagnostic static gate keeps neutral art and skips Pixi loads without global reduced motion', async () => {
+    await hide();
+    const stages = vi.spyOn(Flight, 'recordFrameStage');
+    const previousURL = location.href;
+    expect(cacheStats().liveApps).toBe(0);
+    history.replaceState(null, '', '?perfProbe=1&flightRecord=1&framesDiagnostic=static');
+    try {
+      expect(await attach(document.getElementById('ovBody'))).toBe(true);
+      expect(await attach(document.getElementById('ovBody'))).toBe(true);
+      expect(stages.mock.calls.map(call => call[0])).toEqual(['static']);
+      expect(pixi.loaded).toEqual([]);
+      expect(document.querySelector('#btSelf img').style.visibility).toBe('');
+      expect(document.querySelector('#btSelf img').src).toContain('/sprite-v1/neutral.webp');
+      expect(cacheStats()).toMatchObject({ phase: 'static', staticDiagnostic: true, liveApps: 0,
+        textureCount: 0, activeFrameSessions: 0, pendingAttach: 0 });
+    } finally { history.replaceState(null, '', previousURL); }
+  });
+
+  it('applies the frame limit to a live character and preserves action timing', async () => {
+    const stages = vi.spyOn(Flight, 'recordFrameStage');
+    const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+    await attach(document.getElementById('ovBody')); await finishFrames('changwuyu');
+    expect(pixi.lastApp.options.resizeTo).toBeNull();
+    expect(stages.mock.calls.map(call => call[0])).toEqual(['renderer-loading', 'app-init', 'app-ready', 'idle-loading', 'idle-ready', 'frame-batch', 'all-ready']);
+    setPerformanceSettings({ quality: 'low', fps: 30 });
+    expect(pixi.lastApp.ticker.maxFPS).toBe(60);
+    expect(pixi.lastApp.ticker.remove).toHaveBeenCalledWith(pixi.lastApp.render, pixi.lastApp);
+    expect(pixi.lastApp.renderer.resolution).toBe(Math.min(1, window.devicePixelRatio * uiScale()));
+    expect(play('atk')).toBe(true);
+    clock.mockReturnValue(1001 + timelineFor('changwuyu', 'atk').dur[0]); pixi.tick();
+    expect(document.getElementById('unitFrames').dataset.action).toBe('atk');
+    setPerformanceSettings({ fps: 120 });
+    expect(pixi.lastApp.ticker.maxFPS).toBe(60);
+  });
+
+  it('syncs output pixels on resize, DPR-only ticks, visible recovery and app reuse', async () => {
+    vi.stubGlobal('innerWidth', 1180);
+    vi.stubGlobal('innerHeight', 595);
+    vi.stubGlobal('devicePixelRatio', 1);
+    const hidden = vi.spyOn(document, 'hidden', 'get').mockReturnValue(false);
+    try {
+      window.dispatchEvent(new Event('resize'));
+      await attach(document.getElementById('ovBody'));
+      expect(cacheStats()).toMatchObject({ backingWidth: 1058, backingHeight: 595 });
+      const app = pixi.lastApp;
+      app.renderer.resize.mockClear();
+      pixi.tick();
+      expect(app.renderer.resize).not.toHaveBeenCalled();
+
+      vi.stubGlobal('devicePixelRatio', 2); // No resize event: active tick must detect it.
+      pixi.tick();
+      expect(cacheStats()).toMatchObject({ backingWidth: 2116, backingHeight: 1190 });
+      expect(app.renderer.resize).toHaveBeenLastCalledWith(1920, 1080);
+
+      vi.stubGlobal('innerHeight', 540);
+      app.renderer.resize.mockClear();
+      const beforeResize = pixi.rendered;
+      window.dispatchEvent(new Event('resize'));
+      expect(cacheStats()).toMatchObject({ backingWidth: 1920, backingHeight: 1080 });
+      expect(app.renderer.resize).toHaveBeenCalledTimes(1);
+      expect(pixi.rendered).toBe(beforeResize); // Resize does not bypass the draw gate.
+      pixi.tick();
+      expect(pixi.rendered).toBe(beforeResize + 1); // Cleared backing is repainted.
+      expect(app.renderer.resize).toHaveBeenCalledTimes(1);
+      window.dispatchEvent(new Event('resize'));
+      expect(app.renderer.resize).toHaveBeenCalledTimes(1); // Equal target is a no-op.
+
+      hidden.mockReturnValue(true);
+      document.dispatchEvent(new Event('visibilitychange'));
+      vi.stubGlobal('devicePixelRatio', 1);
+      const beforeVisible = pixi.rendered;
+      const start = vi.spyOn(app, 'start');
+      hidden.mockReturnValue(false);
+      document.dispatchEvent(new Event('visibilitychange'));
+      expect(cacheStats()).toMatchObject({ backingWidth: 960, backingHeight: 540 });
+      await Promise.resolve();
+      expect(start).toHaveBeenCalled();
+      expect(pixi.rendered).toBe(beforeVisible);
+      pixi.tick();
+      expect(pixi.rendered).toBe(beforeVisible + 1);
+
+      await hide();
+      vi.stubGlobal('devicePixelRatio', 2); // Reuse the existing app without resize.
+      await attach(document.getElementById('ovBody'));
+      expect(pixi.lastApp).toBe(app);
+      expect(cacheStats()).toMatchObject({ backingWidth: 1920, backingHeight: 1080, liveApps: 1 });
+
+      // Preserve Pixi's resizeTo:window dimensions when the container is absent.
+      const overlay = document.getElementById('overlay');
+      overlay.id = 'temporarily-detached-overlay';
+      try {
+        window.dispatchEvent(new Event('resize'));
+        expect(app.renderer.resize).toHaveBeenLastCalledWith(1180, 540);
+      } finally { overlay.id = 'overlay'; }
+    } finally {
+      vi.unstubAllGlobals();
+      window.dispatchEvent(new Event('resize'));
+    }
+  });
+
+  it.each([30, 60, 120])('keeps the death completion deadline at %i FPS', async fps => {
+    const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+    await attach(document.getElementById('ovBody')); await finishFrames('changwuyu');
+    setPerformanceSettings({ fps });
+    const total = timelineFor('changwuyu', 'death').dur.reduce((sum, ms) => sum + ms, 0);
+    let done = false; const result = presentDeath({ maxHp: 20 });
+    expect(result).toBeInstanceOf(Promise); result.then(() => { done = true; });
+    clock.mockReturnValue(1000 + total - 1); pixi.tick(); await Promise.resolve();
+    expect(done).toBe(false);
+    clock.mockReturnValue(1000 + total); pixi.tick(); await Promise.resolve();
+    expect(done).toBe(true);
+    expect(pixi.lastApp.ticker.maxFPS).toBe(60);
+  });
+
+  it('limits actual render submissions even while geometry updates every 60 Hz tick', async () => {
+    const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
+    await attach(document.getElementById('ovBody')); await finishFrames('changwuyu');
+    setPerformanceSettings({ fps: 30 });
+    let left = 0;
+    vi.spyOn(document.querySelector('.sts-figure'), 'getBoundingClientRect').mockImplementation(() => ({ left: left++, top: 0, width: 100, height: 150 }));
+    pixi.rendered = 0;
+    for (let sample = 0; sample < 60; sample++) { clock.mockReturnValue(1000 + sample * 1000 / 60); pixi.tick(); }
+    expect(pixi.rendered).toBe(30);
+  });
 
   it('measures the figure once when a ticker update advances a frame', async () => {
     const clock = vi.spyOn(performance, 'now').mockReturnValue(1000);
@@ -214,7 +355,7 @@ describe('battle frame lifecycle', () => {
     pixi.unloadGate = new Promise(resolve => { pixi.finishUnload = resolve; });
     hide();
     await vi.waitFor(() => expect(pixi.unloaded).toContainEqual(expect.stringContaining(changwuyuIdlePath)));
-    expect(cacheStats()).toEqual({ roles: 0, roleNames: [] });
+    expect(cacheStats()).toMatchObject({ roles: 0, roleNames: [], textureCount: 0, baseTextures: 0, basePixels: 0, activeFrameSessions: 0 });
     expect(document.querySelector('#btSelf img').style.visibility).toBe('');
     expect(document.getElementById('unitFrames').hidden).toBe(true);
 
@@ -232,7 +373,7 @@ describe('battle frame lifecycle', () => {
   it('probes only idle when none is usable and clears a sprite even after the cache is empty', async () => {
     const body = document.getElementById('ovBody');
     const sprite = pixi.sprites.at(-1);
-    expect(cacheStats()).toEqual({ roles: 0, roleNames: [] });
+    expect(cacheStats()).toMatchObject({ roles: 0, roleNames: [], textureCount: 0, baseTextures: 0, basePixels: 0, activeFrameSessions: 0 });
     sprite.texture = pixi.extraTexture;
     hide();
     expect(sprite.texture).toBe(pixi.emptyTexture);
@@ -246,7 +387,7 @@ describe('battle frame lifecycle', () => {
     sprite.texture = pixi.extraTexture;
     hide();
     expect(sprite.texture).toBe(pixi.emptyTexture);
-    expect(cacheStats()).toEqual({ roles: 0, roleNames: [] });
+    expect(cacheStats()).toMatchObject({ roles: 0, roleNames: [], textureCount: 0, baseTextures: 0, basePixels: 0, activeFrameSessions: 0 });
   });
 
   it('bounds simultaneous frame loads while preserving a usable idle frame', async () => {
@@ -348,6 +489,17 @@ describe('battle frame lifecycle', () => {
     expect(document.querySelector('#btSelf img').style.visibility).toBe('hidden');
     expect(pixi.unloaded).toContainEqual(expect.stringContaining(changwuyuIdlePath));
     await finishFrames('baita');
+  });
+
+  it('reports actual single-app/session and completed frame count without starting more loads', async () => {
+    await attach(document.getElementById('ovBody')); await finishFrames('changwuyu');
+    const count = pixi.loaded.length;
+    expect(cacheStats()).toMatchObject({ phase: 'all-ready', rendererBackend: 'webgl', liveApps: 1,
+      activeFrameSessions: 1, pendingAttach: 0, staticDiagnostic: false, textureCount: deliveredNames('changwuyu').length });
+    cacheStats(); cacheStats();
+    expect(pixi.loaded).toHaveLength(count);
+    await hide();
+    expect(cacheStats()).toMatchObject({ phase: 'released', liveApps: 1, activeFrameSessions: 0, textureCount: 0 });
   });
 
   it('skips all texture work with reduced motion while leaving the static figure visible', async () => {

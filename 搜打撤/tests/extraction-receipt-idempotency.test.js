@@ -114,3 +114,31 @@ describe('结算回执幂等与持久化', () => {
     expect(base.stash.find(stack => stack.card.id === card.id).count).toBe(1);
   });
 });
+
+it('mixed pocket receipt persists only actual base recovery cards and replays rule-loss details without rerolling', async () => {
+  const h = await harness(1);
+  h.game.usedPocket = [
+    {card:{id:'normal-pocket',name:'普通消耗卡',rarity:'稀有'},count:3},
+    {card:{id:'starter-attack',name:'初始攻击',rarity:'初始'},count:2},
+    {card:{id:'old-career',name:'旧职业卡',rarity:'职业'},count:4},
+  ];
+  const started=await h.commands.begin();
+  expect(started.ok).toBe(true);
+  expect(RunStorage.read(1).rngState.streams.pocket).toBe(9);
+  expect(started.value.keptPocket.reduce((n,s)=>n+s.count,0)).toBe(5);
+  const baseBefore=JSON.parse(localStorage.getItem(Base.SLOT_KEY(1)));
+  expect(baseBefore.pocket).toEqual([{card:{id:'normal-pocket',name:'普通消耗卡',rarity:'稀有'},count:2}]);
+  h.failNextAt('after-base');
+  expect((await h.commands.finish(started.value.runId,1)).ok).toBe(false);
+  const finished=await h.commands.finish(started.value.runId,1);
+  expect(finished.ok).toBe(true);
+  expect(finished.replayed).toBe(true);
+  const receipt=finished.value.output.receipt;
+  expect(receipt.netTake.pocketKept).toBe(2);
+  expect(receipt.losses).toMatchObject({pocketLost:7,pocketRuleLost:3});
+  const after=JSON.parse(localStorage.getItem(Base.SLOT_KEY(1)));
+  expect(after.pocket).toEqual(baseBefore.pocket);
+  expect(after.stats.extracts).toBe(1);
+  const stored=Object.values(after._m01.requests).map(item=>item.result?.value?.output?.receipt).find(Boolean);
+  expect(stored).toEqual(receipt);
+});

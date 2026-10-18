@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/"><title>Canvas / CSS 资源隔离</title>
+<script>
+const params = new URLSearchParams(location.search);
+const cssMode = ['map', 'snow-only'].includes(params.get('css')) ? params.get('css') : 'none';
+const mapCSS = cssMode !== 'none';
+const noCanvas = params.get('canvas') === 'none';
+const styles = ["css/base.css", "css/cards.css", "css/overlays.css", "css/hub.css", "css/battle.css", "css/scenes.css", "css/lab-ending.css", "css/winter.css", "css/expedition.css", "css/expedition-map.css", "css/map-edge-light.css", "css/expedition-hub.css", "css/expedition-inventory.css", "css/expedition-rewards.css", "css/expedition-battle.css", "css/expedition-library.css", "css/card-v3.css", "css/expedition-roster.css", "css/expedition-shop.css", "css/ui-scale.css", "css/page-slot-select.css", "css/page-settings.css", "css/page-datapage.css", "css/page-ach.css", "css/page-cardforge.css", "css/page-expedition-hud.css", "css/feedback-oct12.css", "css/roster-departure-v2.css", "css/pocket-strip.css", "css/experience-loot.css", "css/page-events.css", "css/page-rewards-bag-help.css", "css/page-battle-ui.css", "css/character-idle.css", "css/page-transitions.css", "css/ak-skin.css", "css/base-camp.css", "css/base-camp-compact.css", "css/card-layout-selected.css", "css/battle-stage.css"];
+if (mapCSS) for (const href of cssMode === 'snow-only' ? ['css/expedition-map.css'] : styles) {
+  const link = document.createElement('link'); link.rel = 'stylesheet'; link.href = href; document.head.append(link);
+}
+</script>
+<style>
+html,body { margin:0; width:100%; height:100%; overflow:hidden; background:#091017; color:#e5eeee; }
+#app { width:100%; height:100%; }
+#viewport { position:absolute!important; inset:0!important; width:100%!important; height:100%!important; overflow:hidden; }
+#game { display:block; width:100%; height:100%; }
+#probeControls { position:fixed; left:12px; top:12px; z-index:99999; padding:12px; max-width:calc(100vw - 48px); background:#15252fee; font:16px/1.5 sans-serif; }
+#probeControls a { color:#a4ded6; margin-right:12px; }
+#probeControls button { font:inherit; margin:4px; }
+body.probe-stop-snow #viewport::before,body.probe-stop-snow #viewport::after { animation-play-state:paused!important; }
+body.probe-only-snow *,body.probe-only-snow *::before,body.probe-only-snow *::after { animation-play-state:paused!important; }
+body.probe-only-snow #viewport::before,body.probe-only-snow #viewport::after { animation-play-state:running!important; }
+body.probe-stop-css *,body.probe-stop-css *::before,body.probe-stop-css *::after { animation:none!important; transition:none!important; }
+</style></head><body><div id="app"><aside id="sidebar"></aside><main id="viewport"><canvas id="game"></canvas><nav id="expeditionChapter"></nav></main></div>
+<section id="probeControls">
+<div>隔离诊断：仅固定 Canvas / 地图 CSS，未载入游戏模块或存档。</div>
+<nav><a href="/dev/canvas-resource-review.html">静态 Canvas，无游戏 CSS</a><a href="/dev/canvas-resource-review.html?css=map&canvas=none">地图 CSS，无 Canvas</a><a href="/dev/canvas-resource-review.html?css=map">地图 CSS + 静态 Canvas</a></nav>
+<nav><a href="/dev/canvas-resource-review.html?css=map&canvas=none&ambient=stop-snow">全CSS仅停雪</a><a href="/dev/canvas-resource-review.html?css=map&canvas=none&ambient=only-snow">全CSS仅放雪</a></nav>
+<div><button id="static">静态绘制</button><button id="dynamic">连续绘制</button><button id="cssToggle">暂停 CSS 动画</button></div>
+<output id="status"></output></section>
+<script>
+const ambientMode = ['stop-snow','only-snow'].includes(params.get('ambient')) ? params.get('ambient') : 'all';
+if (ambientMode !== 'all') document.body.classList.add(`probe-${ambientMode}`);
+if (params.get('paused') === '1') {
+  document.body.classList.add('probe-stop-css');
+  document.querySelector('#cssToggle').textContent='恢复 CSS 动画';
+}
+const canvas = document.querySelector('#game');
+if (noCanvas) canvas.remove();
+const ctx = noCanvas ? null : canvas.getContext('2d');
+const status = document.querySelector('#status');
+let frames = 0, loop = 0, dynamic = false;
+const started = performance.now();
+function paint() {
+  if (!ctx) return;
+  ctx.fillStyle = '#112831'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = '#a4ded6'; ctx.fillRect(100 + (dynamic ? frames % 300 : 0),150,80,80);
+  frames++;
+}
+function tick() { loop=0; paint(); if (dynamic) loop=requestAnimationFrame(tick); }
+function stop() { dynamic=false; cancelAnimationFrame(loop); loop=0; }
+function resize() {
+  if (!ctx) return;
+  // Deliberately fixed DPR=1: one bounded viewport-sized backing store.
+  canvas.width=innerWidth; canvas.height=innerHeight; paint();
+}
+function report() {
+  status.textContent = `ambient=${ambientMode} · CSS=${cssMode} · Canvas=${noCanvas?'none':dynamic?'dynamic':'static'} · CSS动画=${document.body.classList.contains('probe-stop-css')?'paused':'enabled'} · 绘制=${frames} · 存活=${Math.floor((performance.now()-started)/1000)}s · backing=${noCanvas?'0':canvas.width+'×'+canvas.height}`;
+}
+document.querySelector('#static').onclick=()=>{stop();paint();report();};
+document.querySelector('#dynamic').onclick=()=>{if(ctx&&!dynamic){dynamic=true;tick();}report();};
+document.querySelector('#cssToggle').onclick=event=>{const paused=document.body.classList.toggle('probe-stop-css');event.target.textContent=paused?'恢复 CSS 动画':'暂停 CSS 动画';report();};
+addEventListener('resize',resize); addEventListener('pagehide',stop);
+resize(); report(); setInterval(report,1000);
+</script></body></html>

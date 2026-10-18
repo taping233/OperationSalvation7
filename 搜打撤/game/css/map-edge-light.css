@@ -65,3 +65,5 @@ body.page-opaque .map-edge-light i,
 body.scene-battle-3d .map-edge-light i { animation-play-state:paused; }
 body.reduce-motion .map-edge-light i { animation:none; }
 @media (prefers-reduced-motion:reduce) { .map-edge-light i { animation:none; } }
+
+body.linked-backgrounded .map-edge-light i { animation-play-state: paused !important; }

@@ -19,7 +19,7 @@ const TERM_TIPS = {
   // —— 伤害类型（combat.js dealDamage）——
   attackDamage: { name: '攻击伤害', text: '按卡牌数值加你的攻击力结算；目标每有 1 层流血，额外增加 1 点伤害。可被闪避、格挡、减伤、护盾和护甲抵挡。' },
   spellDamage:  { name: '法术伤害', text: '按卡牌数值加你的法伤加成结算，不受攻击力或流血加成。不能被闪避，但可被格挡、减伤、护盾和护甲抵挡。' },
-  fixedDamage:  { name: '固定伤害', text: '按标注数值结算，不受攻击力、法伤或流血加成，也不能被闪避。卡牌造成的固定伤害仍会被格挡、减伤、护盾和护甲抵挡；中毒与灼烧的状态伤害直接扣除生命。' },
+  fixedDamage:  { name: '固定伤害', text: '按标注数值结算，不受攻击力、法伤或流血加成，也不能被闪避。卡牌造成的固定伤害仍会被格挡、减伤、护盾和护甲抵挡；中毒的状态伤害直接扣除生命。' },
   trueDamage:   { name: '真实伤害', text: '按标注数值结算，不受攻击力、法伤或流血加成。无视格挡、减伤、护盾和护甲，也不能被闪避；免疫伤害仍能阻挡。' },
   spellPower:   { name: '法伤', text: '法术伤害的额外加成：每增加 1 点法伤，法术伤害增加 1 点。不影响攻击、固定或真实伤害；卡牌另有倍率说明时按该牌效果计算。' },
   // —— 诅咒（combat.js CURSE_META，key 对齐状态字段）——
@@ -29,7 +29,7 @@ const TERM_TIPS = {
   silence: { name: '沉默', icon: 'cross',   text: '1 回合技能无法生效（攻击除外）。' },
   abreak:  { name: '破甲', icon: 'tools',   text: '2 回合内无法减免伤害。' },
   healban: { name: '禁疗', icon: 'heart',   text: '2 回合内无法回复生命。' },
-  burn:    { name: '灼烧', icon: 'fire',    text: '每回合结束时受到 1 点固定伤害；不叠加，重复施加刷新持续时间。' },
+  atkDown: { name: '攻击降低', icon: 'arrow', text: '持续期间攻击力降低，到期归还实际扣减的攻击力。' },
   // —— 祝福（combat.js BUFF_META；形态为 flag 型，本局对战常驻不递减）——
   atkUp:      { name: '攻击强化', icon: 'swords',   text: '攻击伤害 +N，持续到本场战斗结束。' },
   spellUp:    { name: '法术强化', icon: 'crystal',  text: '法术伤害 +N，持续到本场战斗结束。' },
@@ -41,13 +41,13 @@ const TERM_TIPS = {
   natureForm: { name: '满月形态', icon: 'wood',     text: '回合开始时额外获得 1 点能量。形态是开关型祝福，本局对战常驻。' },
   cosmosForm: { name: '宇宙形态', icon: 'sparkles', text: '本局对战所有卡牌变为 1 费。形态是开关型祝福，本局对战常驻。' },
   // —— 机制词（卡面描述高亮词）——
-  curse:      { name: '诅咒',     text: '负面状态的统称：流血、中毒、冰冻、沉默、破甲、禁疗、灼烧。部分卡牌与「诅咒状态」联动（对被诅咒者增伤、按诅咒种类抽牌等）。' },
+  curse:      { name: '诅咒',     text: '负面状态的统称：流血、中毒、冰冻、沉默、破甲、禁疗、攻击降低。部分卡牌与「诅咒状态」联动（对被诅咒者增伤、按诅咒种类抽牌等）。' },
   purify:     { name: '净化',     text: '清除身上所有诅咒，层数与剩余回合全部归零。' },
-  infuse:     { name: '注能',     text: '打出前可点卡面「注能」角标，牺牲若干张手牌强化本牌效果；牺牲品进入墓地、不计入「打出」。不注能则按弱效果直接打出。' },
-  charge:     { name: '充能',     text: '「回合开始时，本牌伤害 +N」——该牌每回合开始永久成长，整场对战按牌累计（如充能火山）。' },
+  infuse:     { name: '注能',     text: '打出前消耗指定数量的手牌，启用本牌的注能效果；材料不计入「打出」。有基础效果时可不注能；必须注能的牌需先注能才能打出。' },
+  charge:     { name: '充能',     text: '卡面写明「回合开始时，本牌伤害 +N」时，该牌每回合开始累计增加伤害，本场有效。其他充能卡的成长条件以卡面为准。' },
   discover:   { name: '发现',     text: '从三张随机卡牌（可限定卡池）中选择一张并获取。' },
   moves:      { name: '招式',     text: '武术与法术的统称：「所有招式」类效果对两种牌同时生效。' },
-  exhaust:    { name: '消耗',     text: '此牌打出后进入墓地，不再参与洗回；部分卡牌需要「消耗」其他手牌作为发动代价。' },
+  exhaust:    { name: '消耗',     text: '被消耗的牌进入消耗区；BOSS 战中进入墓地，不参与洗回。消耗本牌还是其他牌，以卡面说明为准。' },
   equipSkill: { name: '主动技能', text: '装备打出即穿戴；技能在角色信息区以按钮发动，每场战斗限一次。' },
   ability:    { name: '能力卡',   text: '只能收藏，普通战不会进入手牌；仅可编入 BOSS 战牌库使用。' },
   // —— 敌方词缀（battle.core AFFIX）——
@@ -60,7 +60,7 @@ const TERM_TIPS = {
 /** @type {Record<string, string>} */
 const TERM_ALIAS = {
   '攻击伤害': 'attackDamage', '法术伤害': 'spellDamage', '固定伤害': 'fixedDamage', '真实伤害': 'trueDamage', '法伤': 'spellPower',
-  '冰冻': 'freeze', '冻结': 'freeze', '中毒': 'poison', '燃烧': 'burn', '灼烧': 'burn',
+  '冰冻': 'freeze', '冻结': 'freeze', '中毒': 'poison',
   '流血': 'bleed', '沉默': 'silence', '禁疗': 'healban', '诅咒': 'curse', '净化': 'purify', '充能': 'charge',
   '招式': 'moves',
   '潜行': 'stealth',

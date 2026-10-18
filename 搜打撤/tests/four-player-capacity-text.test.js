@@ -35,12 +35,12 @@ afterEach(() => UI.hideOverlay({ immediate: true }));
 it('G07 普通容量16和珍珠盒资源9分别显示，收卡叠放规则保持', () => {
   game.ownedCards=[{uid:'pearl',card:pearl},{uid:'spell',card:spell}];
   game.inventory=Array.from({length:14},(_,i)=>({name:'物资'+i,count:1}));
-  expect(game.bagCapacityText()).toBe('通用格 16/16 · 资源专用格 0/9');
+  expect(game.bagCapacityText()).toBe('通用格 16/16 · 资源扩展格 0/9');
   expect(game.canReceiveCard({...spell,name:'新普通牌'})).toBe(false);
   expect(game.canReceiveCard(spell)).toBe(true);
   expect(game.canReceiveCard({id:'res',name:'新资源',type:'资源'})).toBe(true);
-  showBackpack(true);expect(UI.el.ovBody.textContent).toContain('通用格 16/16 · 资源专用格 0/9');
+  showBackpack(true);expect(UI.el.ovBody.textContent).toContain('通用格 16/16 · 资源扩展格 0/9');
   game.inventory.push({name:'资源格占用',count:1});
-  expect(game.bagCapacityText()).toBe('通用格 16/16 · 资源专用格 1/9');
+  expect(game.bagCapacityText()).toBe('通用格 16/16 · 资源扩展格 1/9');
 });
 

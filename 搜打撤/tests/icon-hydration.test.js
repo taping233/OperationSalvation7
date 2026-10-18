@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { observeIconHydration } from '../game/src/core/icon-hydration.js';
 
@@ -63,4 +64,25 @@ describe('图标字符串转换', () => {
     expect(document.querySelector('[onerror]')).toBeNull();
     expect(document.querySelector('p').textContent).toContain('<img onerror=alert(1)>');
   });
+});
+
+it('安全格按钮显式装饰图标在真实hydrate前后隐藏，纯图标按钮保留名称', async () => {
+  observer.disconnect();
+  vi.stubGlobal('MutationObserver', undefined);
+  await import('../game/src/core/icons-bitmap.js');
+  const source = readFileSync('game/src/hub/game.bag.js', 'utf8');
+  const markup = source.match(/<button class="ov-btn" data-act="zoomMoveToSafe">.*?<\/button>/)[0];
+  document.body.innerHTML = markup + '<button id="iconOnly">[[icon:cross]]</button><button id="named" aria-label="关闭详情">[[icon:cross]]</button>';
+  const button = document.querySelector('[data-act="zoomMoveToSafe"]');
+  expect(button.querySelector('[aria-hidden="true"]').textContent).toBe('[[icon:lock]]');
+  window.SDT.Icons.hydrate(document.body);
+  const icon = button.querySelector('img');
+  expect(icon.closest('[aria-hidden="true"]')).toBeTruthy();
+  expect(button.textContent.trim()).toBe('移入安全格');
+  expect(document.querySelector('#iconOnly img').alt).toBe('cross');
+  expect(document.querySelector('#iconOnly img').closest('[aria-hidden="true"]')).toBeNull();
+  expect(document.querySelector('#named').getAttribute('aria-label')).toBe('关闭详情');
+  window.SDT.Icons.hydrate(document.body);
+  expect(button.querySelector('img')).toBe(icon);
+  expect(button.querySelectorAll('img')).toHaveLength(1);
 });

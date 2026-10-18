@@ -1,0 +1,102 @@
+{
+  "status": "failed",
+  "recipe_version": "3.4",
+  "request": {
+    "input": "1girl, solo, upper body, full face, eye level, wide shot, off-center, emerging from the right frame, looking at viewer, 1.5::head tilt::, smiling, fang\n\nA girl leans into the foreground from the right edge, showing part of her upper body. Her face is fully visible. The empty wet asphalt highway extends toward the central horizon, guard rails, flat snowy fields, distant utility poles, winter, overcast cold dawn.\n\nBlue theme, muted colors, soft ambient twilight, diffused cinematic lighting, puddles and reflections on the wet road, cold atmospheric haze, glowing particles.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 2048,
+      "height": 1152,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1552649891,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, duplicate character",
+      "characterPrompts": [
+        {
+          "prompt": "silver-white long hair, high ponytail, blue ribbon bow at ponytail base, parted bangs, both cyan-blue eyes visible, pale skin, confident smile, small fang, black round goggles on head, black rose on her left temple, black charcoal off-shoulder long-sleeved short dress, layered ruffles at neckline and cuffs, black tied waist, above-knee ruffled skirt, bare legs, black ankle boots, one black straight sword sheathed diagonally on her back, black shoulder strap, sword hilt above her right shoulder",
+          "uc": "long skirt, high-low skirt, long back hem, dress train, floor-length dress, blue star pattern, stockings, pantyhose, thighhighs, halo, hat, backpack, red hair, braid, hair over one eye, holding sword",
+          "center": {
+            "x": 0.9,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, upper body, full face, eye level, wide shot, off-center, emerging from the right frame, looking at viewer, 1.5::head tilt::, smiling, fang\n\nA girl leans into the foreground from the right edge, showing part of her upper body. Her face is fully visible. The empty wet asphalt highway extends toward the central horizon, guard rails, flat snowy fields, distant utility poles, winter, overcast cold dawn.\n\nBlue theme, muted colors, soft ambient twilight, diffused cinematic lighting, puddles and reflections on the wet road, cold atmospheric haze, glowing particles.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "silver-white long hair, high ponytail, blue ribbon bow at ponytail base, parted bangs, both cyan-blue eyes visible, pale skin, confident smile, small fang, black round goggles on head, black rose on her left temple, black charcoal off-shoulder long-sleeved short dress, layered ruffles at neckline and cuffs, black tied waist, above-knee ruffled skirt, bare legs, black ankle boots, one black straight sword sheathed diagonally on her back, black shoulder strap, sword hilt above her right shoulder",
+              "centers": [
+                {
+                  "x": 0.9,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, duplicate character",
+          "char_captions": [
+            {
+              "char_caption": "long skirt, high-low skirt, long back hem, dress train, floor-length dress, blue star pattern, stockings, pantyhose, thighhighs, halo, hat, backpack, red hair, braid, hair over one eye, holding sword",
+              "centers": [
+                {
+                  "x": 0.9,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": ".tmp/nai/wu-snow-road-nai45-20261016.png",
+  "references": [
+    {
+      "path": "C:\\Users\\太平\\AppData\\Local\\Temp\\codex-clipboard-597aa3bb-6e2c-4f1f-aa32-902bea0a21bf.png",
+      "sha256": "4b90f6d6952af56af1aaa0d1e822f96184e4b4793886c1865fe54f06ac9b53ef",
+      "purpose": "Extracted scene composition and original seed; no image upload."
+    },
+    {
+      "path": "game/assets/portraits/full/wu.webp",
+      "sha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc",
+      "purpose": "Visually checked identity; text description only; no image upload."
+    }
+  ],
+  "method": "nai_gen.generate_image with shared nai_guard; one requested candidate",
+  "user_feedback": "Awaiting review",
+  "error_type": "SystemExit",
+  "error": "Generation failed (HTTP 402)"
+}

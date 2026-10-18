@@ -1,0 +1,1487 @@
+diff --git a/搜打撤/game/css/scenes.css b/搜打撤/game/css/scenes.css
+index 1c557426..73fff256 100644
+--- a/搜打撤/game/css/scenes.css
++++ b/搜打撤/game/css/scenes.css
+@@ -498,8 +498,8 @@
+   #overlay .scene[data-asset-key]::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:linear-gradient(90deg,rgba(9,9,9,.94),rgba(9,9,9,.72) 46%,rgba(9,9,9,.34)); }
+   #overlay .scene[data-asset-key] > * { z-index:1; }
+ 
+-  /* 预战遭遇页与实际战场共用现行冬城四层。 */
+-  #overlay { --battle-winter-bg:url('../assets/scenes/battle/winter-transit-1011/foreground.webp'),url('../assets/scenes/battle/winter-transit-1011/ground.webp'),url('../assets/scenes/battle/winter-transit-1011/mid.webp'),url('../assets/scenes/battle/winter-transit-1011/far.webp'); }
++  /* 预战遭遇页与实际战场共用本轮简约轨道站三层。 */
++  #overlay { --battle-winter-bg:url('../assets/scenes/battle/platform-minimal-1016/foreground.webp'),url('../assets/scenes/battle/platform-minimal-1016/ground.webp'),url('../assets/scenes/battle/platform-minimal-1016/far.webp'); }
+   #overlay .scene[data-asset-key="scene-battle-bg"] { background-image:var(--battle-winter-bg); }
+   #overlay .scene[data-asset-key="scene-shop-bg"] { background-image:url('../assets/scenes/scene-shop-anime-v2.webp'); }
+   #overlay .scene[data-asset-key="scene-event-bg"] { background-image:url('../assets/scenes/event-tt6-mystery.webp'); }
+diff --git a/搜打撤/game/src/audio/sound.js b/搜打撤/game/src/audio/sound.js
+index 0f66b09a..a741c5a0 100644
+--- a/搜打撤/game/src/audio/sound.js
++++ b/搜打撤/game/src/audio/sound.js
+@@ -51,10 +51,10 @@ import { SceneMusicPlayer } from './sound.music.player.js';
+     clickComp.threshold.value = -14; clickComp.ratio.value = 4;
+     clickGain.connect(clickComp); clickComp.connect(sfxGain);
+     loadClicks();
++    loadJsfx();
+     loadHovers();
+     loadSwitches();
+     loadBattle();
+-    loadJsfx();
+     return true;
+   }
+ 
+diff --git a/搜打撤/game/src/battle/view/battle.frames.js b/搜打撤/game/src/battle/view/battle.frames.js
+index 66ff3958..c2fbb225 100644
+--- a/搜打撤/game/src/battle/view/battle.frames.js
++++ b/搜打撤/game/src/battle/view/battle.frames.js
+@@ -54,6 +54,7 @@ let pollTimer = 0;
+ let renderHoldT = 0;
+ let lifecycle = 0;
+ let releasePromise = null;
++let tickGeometry = null;
+ 
+ function cancelTextureRecord(record) {
+   if (record.cancelled) return;
+@@ -369,7 +370,7 @@ function applyFrame(name) {
+   const host = document.getElementById('unitFrames');
+   if (host) host.dataset.frame = used;
+   setTexture(tex);
+-  layout();
++  if (!tickGeometry) layout();
+   wakeRenderer();
+ }
+ 
+@@ -440,11 +441,14 @@ function advance(now) {
+ 
+ function tickLoop() {
+   if (!cur || document.hidden) return;
+-  advance(performance.now());
++  const geometry = cur.fig && uiRect(cur.fig);
++  tickGeometry = geometry;
++  try { advance(performance.now()); }
++  finally { tickGeometry = null; }
+   if (cur && cur.fig) {
+-    const r = uiRect(cur.fig);   // 与 lastRect（布局口径）同尺比较
++    const r = geometry;   // 同一 tick 切帧与 DOM 跟随共用一次布局读取
+     const lr = cur.lastRect;
+-    if (!lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
++    if (cur.dirty || !lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
+       layout(r);
+       wakeRenderer();   // DOM 位移中（抖动/沉浮）持续跟随渲染
+     }
+@@ -475,7 +479,7 @@ function startLoop() {
+       if (!r || !r.width) return;
+       const lr = cur.lastRect;
+       if (!lr || r.left !== lr[0] || r.top !== lr[1] || r.width !== lr[2] || r.height !== lr[3]) {
+-        layout();
++        layout(r);
+         wakeRenderer(500);
+       }
+     }, POLL_MS);
+diff --git a/搜打撤/game/src/battle/view/battle.layers.js b/搜打撤/game/src/battle/view/battle.layers.js
+index fde0042e..7d4d4606 100644
+--- a/搜打撤/game/src/battle/view/battle.layers.js
++++ b/搜打撤/game/src/battle/view/battle.layers.js
+@@ -51,7 +51,7 @@ import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, fin
+   const HAND_PAGE_SIZE = 9;   // 2026-09-16 老板：每栏最多 9 张（原 battle.view 渲染段，随 updateHand 的 handIndex 落位迁入——批5）
+ import { animateSafe } from './battle.anim.view.js';
+ import { schedulePresentationMs } from '../runtime/battle.clock.js';
+-import { aim, clickSelectedUid, clickSelectedTarget, setTargetable, startAim, cancelAim, cancelClickSelection, selectCardByClick, showHandCardDetails } from './battle.aim.js';
++import { aim, clickSelectedUid, clickSelectedTarget, setTargetable, startAim, cancelAim, cancelClickSelection, selectCardByClick, syncSubmittedCardPoses } from './battle.aim.js';
+ import { showFoePreview, clearFoePreview } from './battle.hover.js';
+ import { cardRuleHint } from './battle.preview.js';
+   // 数字键选牌 / Esc 取消（原在 aim 片：需读手牌层 handLayer，随迁本片解 aim↔layers 环——2026-09-22 批5）
+@@ -73,13 +73,13 @@ import { cardRuleHint } from './battle.preview.js';
+       return;
+     }
+     if (!handLayer || e.defaultPrevented) return;
++    if (e.shiftKey) return;
+     if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+     if (!/^[1-9]$/.test(e.key)) return;
+     const el = handLayer.querySelector(`.bt-card[data-hand-index="${e.key}"]`);
+     if (!el) return;
+     e.preventDefault();
+-    if (e.shiftKey) showHandCardDetails(el.dataset.uid);
+-    else if (getSnapshot().infusing) {
++    if (getSnapshot().infusing) {
+       const rec = [...handSlots.values()].find(entry => entry.card === el);
+       const uid = infuseRotateUid(rec?.group, getSnapshot().infusing);
+       if (uid) commands.selectInfusion(uid);
+@@ -138,10 +138,52 @@ import { cardRuleHint } from './battle.preview.js';
+   //   - 卡面内容按序列化签名 diff，内容没变不重写 innerHTML（图片不重载、悬停态不闪）。
+   let handLayer = null;
+   const handSlots = new Map();   // key -> { slot, card, sig, rect, isNew }
++  let handLayoutSlots = [], handLayoutWidth = 0, handResizeObserver = null;
+   // 两层分别核对拥有者；单位先挂载不能提前替手牌消耗换场检查。
+   let handBattleToken = null;
+   let unitBattleToken = null;
+ 
++  function captureHandFocus() {
++    const element = document.activeElement;
++    if (!element || !handLayer?.contains(element)) return null;
++    const entry = [...handSlots.entries()].find(([, rec]) => rec.card.contains(element));
++    if (!entry) return null;
++    const [key, rec] = entry;
++    const rules = rec.card.querySelector('.hsc-desc');
++    return { element, key, token:handBattleToken, uid:rec.card.dataset.uid,
++      uids:[...(rec.group?.uids || [])], order:handLayoutSlots.map(item => item.slot),
++      index:handLayoutSlots.indexOf(rec), reading:!!rules?.contains(element), scrollTop:rules?.scrollTop || 0 };
++  }
++
++  function restoreHandFocus(previous, ordered) {
++    if (!previous || previous.token !== handBattleToken || !handLayer?.isConnected) return;
++    const active = document.activeElement;
++    // Rebuilding a focused subtree usually leaves body focused. Any deliberate
++    // transfer to a target, another hand control, or an overlay keeps ownership.
++    if (active && active !== previous.element && active !== document.body && active !== document.documentElement) return;
++    const visible = ordered.filter(rec => rec.slot.isConnected && !rec.slot.closest('[hidden], [aria-hidden="true"], [inert]'));
++    const same = visible.find(rec => handSlotKey(rec.group) === previous.key)
++      || visible.find(rec => rec.group.uids.includes(previous.uid))
++      || visible.find(rec => rec.group.uids.some(uid => previous.uids.includes(uid)));
++    if (same?.card.contains(previous.element) && active === previous.element) return;
++    let nearest = null, distance = Infinity;
++    visible.forEach(rec => {
++      const oldIndex = previous.order.indexOf(rec.slot);
++      if (oldIndex < 0) return;
++      const nextDistance = Math.abs(oldIndex - previous.index);
++      if (nextDistance < distance) { nearest = rec; distance = nextDistance; }
++    });
++    const rec = same || nearest || visible[Math.min(Math.max(previous.index, 0), visible.length - 1)];
++    const rules = same?.card.querySelector('.hsc-desc');
++    const stage = handLayer.closest('.battle-stage');
++    const target = rec
++      ? (previous.reading && same ? same.card.querySelector('.hsc-desc[tabindex]') : null) || rec.card.querySelector('.hs-card[role="button"]')
++      : stage?.querySelector('.bt-hand-page:not(:disabled)') || stage?.querySelector('.sts-options > summary');
++    if (!target) return;
++    target.focus({ preventScroll:true });
++    if (rules) rules.scrollTop = previous.scrollTop;
++  }
++
+   function handSlotKey(g) {
+     return (g.self ? 'self|' : '') + g.key;
+   }
+@@ -152,14 +194,29 @@ import { cardRuleHint } from './battle.preview.js';
+     slot.style.setProperty('--counter-rot', -L.rot + 'deg');
+     slot.style.setProperty('--fs', L.scale);
+     slot.style.setProperty('--hand-index', String(L.index ?? 0));
+-    slot.style.setProperty('--hand-rest', (L.rest ?? 284) + 'px');
++    slot.style.setProperty('--hand-rest', (L.rest ?? 64) + 'px');
+     slot.style.setProperty('--hand-visible-width', (L.visibleWidth ?? 204) + 'px');
+   }
+   // 只改变手牌视图位置；分组、顺序、出牌 UID 与差分槽位保持原语义。
+   function handDisplayLayout(index, count, width) {
+     if (count > 9) return fanLayout(index, count);
+-    return referenceHandLayout(index, count, width || 1420);
++    return referenceHandLayout(index, count, width);
++  }
++  function syncHandWidth() {
++    if (!handLayer?.isConnected) return;
++    const width = handLayer.clientWidth;
++    if (width <= 0 || width === handLayoutWidth) return;
++    handLayoutWidth = width;
++    handLayoutSlots.forEach((rec, index) => setSlotVars(rec.slot, handDisplayLayout(index, handLayoutSlots.length, width)));
++  }
++  function observeHandWidth() {
++    if (!handResizeObserver && typeof ResizeObserver !== 'undefined') {
++      handResizeObserver = new ResizeObserver(syncHandWidth);
++      handResizeObserver.observe(handLayer);
++    }
++    syncHandWidth();
+   }
++  if (import.meta.hot) import.meta.hot.dispose(() => handResizeObserver?.disconnect());
+   // N1 视图侧闭环（2026-09-25）：注能选牌态整叠同名卡共享一个槽位节点，点击发的
+   // dataset.uid 渲染时固定为叠代表（g.uids[0]）——连点永远发同一个 uid，引擎 per-uid
+   // toggle（99daf74）下就是 0→1→0 循环，一叠选不满 need 张。这里按「轮转」算本次
+@@ -209,9 +266,9 @@ import { cardRuleHint } from './battle.preview.js';
+     const amount = dynamic ? +(dynamic.amount ?? g.card.dmg ?? 0) : 0;
+     const ruleHint = dynamic ? `当前 ${hits} 段 × ${amount} 基础伤害，共 ${hits * amount}；目标防御与加成另计。` : cardRuleHint(g.card, mode);
+     const tip = infusingNow
+-      ? (isSelf ? '正在注能的卡牌 · 详情按钮查看规则' : blocked || `点击选择注能材料${g.uids.length > 1 ? ` · 本叠还有 ${g.uids.length} 张` : ''}`)
++      ? (isSelf ? '正在注能的卡牌' : blocked || `点击选择注能材料${g.uids.length > 1 ? ` · 本叠还有 ${g.uids.length} 张` : ''}`)
+       : blocked
+-        ? `无法打出：${blocked} · 详情按钮查看完整规则`
++        ? `无法打出：${blocked}`
+         : infuseOf(g.card) > 0
+         ? `费用 ${effCost}${costTip} · 点击选择注能材料；也可直接拖拽使用`
+         : side === 'enemy'
+@@ -220,12 +277,12 @@ import { cardRuleHint } from './battle.preview.js';
+           ? `费用 ${effCost}${costTip} · 点击选择自己；也可直接拖到左侧人物使用`
+           : side === 'any'
+             ? `费用 ${effCost}${costTip} · 点击直接使用；也可直接拖到战场空地`
+-            : `费用 ${effCost}${costTip} · 点击查看完整规则`;
++            : `费用 ${effCost}${costTip} · 规则见卡面`;
+     // 需求 #16：费用变动显示在卡牌左上角费用处——降低 = 绿字，提高 = 红字
+     // （天狼长弓等「变为0费」的临时卡带 _baseCost：按原费用对比显示绿色 0）
+     const baseCost = (g.card._baseCost != null) ? g.card._baseCost : g.card.cost;
+     const costDiff = effCost !== baseCost;
+-    // 注能角标直接进入选材料；详情入口另置，不消耗卡牌。
++    // 注能角标直接进入选材料，不消耗卡牌。
+     const infN = infuseOf(g.card);
+     const infChip = (!infusingNow && !blocked && infN > 0)
+       ? `<button class="bt-infchip" data-act="btInfuseStart" data-uid="${uid}"
+@@ -252,11 +309,7 @@ import { cardRuleHint } from './battle.preview.js';
+         ...(spellBonus > 0 && g.card.dmgType === 'spell' && +(g.card.dmg || 0) > 0
+           ? { dmgOverride: { bonus: spellBonus } } : {}),
+       })
+-      // The shared printed name sits below the fold of a resting battle card.
+-      // This view-only strip uses the same name and disappears while reading.
+-      + `<span class="bt-rest-name" aria-hidden="true">${esc(g.card.name || '未命名卡牌')}</span>`
+-      + cnt + infChip + curseChip
+-      + `<button type="button" class="bt-detail-chip" data-act="btCardDetails" data-uid="${uid}" aria-label="查看${escAttr(g.card.name)}详情">详情</button>`;
++      + cnt + infChip + curseChip;
+     const handState = infusingNow ? 'infusing' : targeted || clickSelectedUid === uid ? 'selected' : blockedReason ? 'blocked' : 'ready';
+     return { g, uid, side, cls, tip, inner, ruleHint, handState, blockedReason };
+   }
+@@ -273,21 +326,27 @@ import { cardRuleHint } from './battle.preview.js';
+       handSlots.clear();
+       // 离场动画的槽已退Map但尚留DOM；新场次不可继承这些旧UID点击区。
+       handLayer.replaceChildren();
++      handLayoutSlots = []; handLayoutWidth = 0;
+     }
+     handBattleToken = token;
+     // 2026-09-19 留言 #19/#7：不再挂原生 title（系统白底黑字提示框）——描述就在卡面上，
+     // 黑框 tooltip（UI.showTooltip）也已全局停用
+-    mount.replaceWith(handLayer);
++    // The normal stage diff already contains this persistent layer. Replacing
++    // it with itself would detach its focused descendant before updateHand.
++    if (mount !== handLayer) mount.replaceWith(handLayer);
++    observeHandWidth();
+     return handLayer;
+   }
+   // 差分更新：新建/保留/移除槽位 + 目标扇形位补间 + 新牌飞入。返回动画时长供飘字延迟取用。
+   function updateHand(snapshot, prev, pageGroups, events, extra) {
+     if (!handLayer) return { flightMs: 0 };
++    const previousFocus = captureHandFocus();
+     const readable = pageGroups.length <= 6 ? 'true' : 'false';
+     if (handLayer.dataset.readable !== readable) handLayer.dataset.readable = readable;
+     const evs = events || [];
+     const drawn = new Set(), played = new Set();
+     evs.forEach(ev => { if (ev.kind === 'draw') drawn.add(ev.uid); else if (ev.kind !== 'shuffle' && ev.kind !== 'surge') played.add(ev.uid); });
++    const submitted = new Set(evs.filter(ev => ev.kind === 'play').map(ev => ev.uid));
+     drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
+     const ctx = {
+       infusingNow: !!snapshot.infusing, infusing: snapshot.infusing,
+@@ -299,11 +358,12 @@ import { cardRuleHint } from './battle.preview.js';
+     handSlots.forEach(rec => { rec.rect = rec.slot.isConnected ? uiRect(rec.slot) : null; });   // 布局口径
+     // —— 第一遍：算状态 / 更新目标值与内容 / 建缺失槽位 ——
+     const ordered = [];
++    const handWidth = handLayer.clientWidth;
+     pageGroups.forEach((g, i) => {
+       const key = handSlotKey(g);
+       const st = handGroupState(g, ctx);
+       // Keep card identity and shortcut assignment; close visual gaps after a card leaves.
+-      const L = handDisplayLayout(i, pageGroups.length, handLayer.clientWidth);
++      const L = handDisplayLayout(i, pageGroups.length, handWidth);
+       let rec = handSlots.get(key);
+       if (!(rec && rec.slot.isConnected)) {
+         rec = { slot: document.createElement('div'), card: document.createElement('div'), sig: '', rect: null, isNew: true };
+@@ -330,14 +390,17 @@ import { cardRuleHint } from './battle.preview.js';
+           }
+           if (e.button === 0 && rec.card.dataset.aim === '1') startAim(e, rec.card);
+         });
+-        // 同槽抬牌负责悬停阅读，大卡负责全文；不再叠一层跟鼠标的操作说明。
++        // 同槽抬牌负责悬停阅读，规则保留在卡面上。
+         rec.card.addEventListener('mouseenter', () => UI.hideTooltip?.());
+         rec.card.addEventListener('keydown', (e) => {
+           if (e.isComposing || e.keyCode === 229) return;
+-          if ((e.key !== 'Enter' && e.key !== ' ') || e.target.closest('button')) return;
++          if (e.defaultPrevented || e.repeat || (e.key !== 'Enter' && e.key !== ' ')) return;
++          const face = rec.card.querySelector('.hs-card[role="button"]');
++          // 阅读区与词条子控件保留自己的键盘行为，只有卡面本身负责选牌。
++          if (!face || e.target !== face) return;
+           e.preventDefault();
+-          if (e.shiftKey) showHandCardDetails(rec.card.dataset.uid);
+-          else if (getSnapshot().infusing) {
++          if (e.shiftKey) return;
++          if (getSnapshot().infusing) {
+             const uid = infuseRotateUid(rec.group, getSnapshot().infusing);
+             if (uid) commands.selectInfusion(uid);
+           } else selectCardByClick(rec.card.dataset.uid, true, { autoSingleTarget: false });
+@@ -366,7 +429,7 @@ import { cardRuleHint } from './battle.preview.js';
+       rec.__name = `${g.card.name} · ${effCostOf(g.card, st.uid)} 费`;
+       rec.card.setAttribute('role', 'group');
+       rec.card.tabIndex = -1;
+-      rec.card.setAttribute('aria-label', `${rec.__name}。${st.ruleHint ? st.ruleHint + ' ' : ''}${st.tip || '按回车或空格使用，Shift+Enter查看详情'}`);
++      rec.card.setAttribute('aria-label', `${rec.__name}。${st.ruleHint ? st.ruleHint + ' ' : ''}${st.tip || '按回车或空格使用'}`);
+       // 操作提示由局面说明和可访问名称提供，原生 title 不再挂。
+       rec.card.removeAttribute('title');
+       // 卡面外的角标（目标侧/费用变化/注能/诅咒）带 [[icon:]] 宏——写入时统一渲染，否则宏原文直接上屏
+@@ -386,11 +449,13 @@ import { cardRuleHint } from './battle.preview.js';
+       if (face) {
+         face.setAttribute('role', 'button'); face.tabIndex = 0;
+         face.setAttribute('aria-disabled', st.blockedReason ? 'true' : 'false');
+-        face.setAttribute('aria-label', `${rec.__name}。${st.ruleHint} ${st.tip}。Shift+Enter查看详情`);
++        face.setAttribute('aria-label', `${rec.__name}。${st.ruleHint} ${st.tip}`);
+         face.setAttribute('aria-pressed', clickSelectedUid === st.uid ? 'true' : 'false');
+       }
+       ordered.push(rec);
+     });
++    handLayoutSlots = ordered;
++    handLayoutWidth = handWidth;
+     // —— 顺序校正（DOM 序 = 扇形叠放序）：失序才搬节点 ——
+     const current = [...handLayer.querySelectorAll('.bt-slot')];
+     if (current.length !== ordered.length || current.some((el, i) => el !== ordered[i].slot)) {
+@@ -455,6 +520,10 @@ import { cardRuleHint } from './battle.preview.js';
+     // 手牌重建后立即补解码（img 是 lazy）：衍生牌等未走开局预热的卡面防首帧黑窗；
+     // 已解码图 decode() 立即兑现，重复调用无副作用。
+     if (SDT.Art && SDT.Art.decodeIn) SDT.Art.decodeIn(handLayer);
++    // Pose ownership ends on the original play event even when play + draw
++    // cancel the flight animation for a card that immediately returns to hand.
++    syncSubmittedCardPoses(submitted);
++    restoreHandFocus(previousFocus, ordered);
+     return { flightMs };
+   }
+ 
+@@ -515,7 +584,7 @@ import { cardRuleHint } from './battle.preview.js';
+     }
+     return { alliesMount, foesMount };
+   }
+-  // 单位节点固定骨架：意图(敌) + 立绘 + 名牌(名号/血条/属性/状态角标/装备)，各段按签名差分
++  // 单位节点固定骨架：立绘 + 脚下生命条 + 上方属性/状态/装备/敌方意图，各段按签名差分。
+   function makeUnitSkeleton(slot, opts = {}) {
+     const parts = {};
+     if (opts.intent) {
+@@ -541,7 +610,9 @@ import { cardRuleHint } from './battle.preview.js';
+     const np = document.createElement('div');
+     np.className = 'sts-nameplate';
+     parts.head = document.createElement('div');
+-    parts.head.className = 'sts-headrow';   // 名行 flex 钩子（敌方名牌两行化，迭代评审 09-20）
++    parts.head.className = 'sts-headrow';
++    parts.head.hidden = true;
++    parts.head.style.display = 'none';
+     parts.hp = document.createElement('div');
+     parts.hp.className = 'bt-hpwrap sts-hp';
+     parts.hpGhost = document.createElement('i');   // STS2 式幽灵条：掉血时延迟收缩的黄尾
+@@ -552,18 +623,22 @@ import { cardRuleHint } from './battle.preview.js';
+     parts.hp.appendChild(parts.hpGhost);
+     parts.hp.appendChild(parts.hpBar);
+     parts.hp.appendChild(parts.hpTxt);
++    parts.vitals = document.createElement('div');
++    parts.vitals.className = 'sts-unit-vitals';
++    parts.vitals.appendChild(parts.hp);
++    slot.appendChild(parts.vitals);
+     parts.stats = document.createElement('div');
+     parts.stats.className = 'sts-stats';
+     parts.chips = document.createElement('div');
+     parts.chips.className = 'sts-chips';
+-    np.appendChild(parts.head); np.appendChild(parts.hp); np.appendChild(parts.stats); np.appendChild(parts.chips);
++    np.appendChild(parts.head); np.appendChild(parts.stats); np.appendChild(parts.chips);
+     if (opts.equips) {
+       parts.equips = document.createElement('div');
+       parts.equips.className = 'sts-equips';
+       parts.equips.style.display = 'none';
+       np.appendChild(parts.equips);
+     }
+-    // One anchored reading group: name, health, state, then the nearby intent.
++    // 姓名、属性、状态与意图仍同组；生命条独立放在立绘之后，由布局锚定脚下。
+     // The intent retains its own input handlers and never confirms a target.
+     if (parts.intent) np.appendChild(parts.intent);
+     slot.appendChild(np);
+@@ -608,8 +683,9 @@ import { cardRuleHint } from './battle.preview.js';
+     const sig = selfSig;
+     setSection(selfParts.fig, sig, 'fig',
+       player.myClass && SDT.Art.has(player.myClass) ? (SDT.Art.battleArt ? SDT.Art.battleArt(player.myClass) : SDT.Art.classArt(player.myClass)) : SDT.Icons.img('helmet'));
+-    setSection(selfParts.head, sig, 'head',
+-      `<b>${esc(characterName(player.characterId || player.myClass))}</b><span class="sts-you">你</span>`);
++    const playerName = characterName(player.characterId || player.myClass);
++    selfParts.fig.setAttribute('role', 'img');
++    selfParts.fig.setAttribute('aria-label', playerName);
+     setUnitHP(selfParts, sig, player.hp, player.maxHp, !sig.init);
+     // 攻击力/法伤含加成显示（2026-09-09 留言 #2：人物图标下要能看到攻/法伤的变化）
+     const atkBuff = pstat.status.atkUp || 0, spBuff = pstat.status.spellUp || 0;
+@@ -626,7 +702,8 @@ import { cardRuleHint } from './battle.preview.js';
+     selfUnit.classList.toggle('fx-burning', (pstat.status.burn || 0) > 0);
+     const pendingCard = ctx.pendingTarget && findCard(ctx.pendingTarget.uid);
+     const clickCard = clickSelectedUid != null && findCard(clickSelectedUid);
+-    setTargetable(selfUnit, !!((pendingCard && targetSide(pendingCard.card) === 'self') || (clickCard && targetSide(clickCard.card) === 'self')), '自己，按 Enter 确认目标');
++    setTargetable(selfUnit, !!((pendingCard && targetSide(pendingCard.card) === 'self') || (clickCard && targetSide(clickCard.card) === 'self')), `${playerName}，自己，按 Enter 确认目标`);
++    if (!selfUnit.classList.contains('can-target')) selfUnit.setAttribute('aria-label', `${playerName}，自己`);
+     // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
+     const equipsHTML = (equipped || []).map(e => e.skill
+       ? `<button class="sts-equip has-skill${e.used ? ' used' : ''}" data-act="btEquipSkill" data-uid="${escAttr(e.uid)}" ${snapshot.busy || e.used ? 'disabled' : ''} aria-label="${escAttr(e.name)}主动技能：${escAttr(e.skill)}${e.used ? '，本场已使用' : ''}"
+@@ -668,8 +745,12 @@ import { cardRuleHint } from './battle.preview.js';
+       rec.slot.classList.toggle('dead', !!a.dead);
+       rec.slot.dataset.allyI = i;
+       setSection(rec.parts.fig, rec.sig, 'fig', allyFigure(a.name));
+-      setSection(rec.parts.head, rec.sig, 'head', `<b>${esc(a.name)}</b>`);
++      rec.slot.setAttribute('aria-label', `${a.name}，你的随从`);
++      rec.parts.fig.setAttribute('role', 'img');
++      rec.parts.fig.setAttribute('aria-label', a.name);
+       // 无攻血场面物件（封印肢体，同天国之门口径）：不显示血条与攻击力
++      rec.parts.vitals.hidden = !!a.statless;
++      rec.parts.stats.parentElement.hidden = !!a.statless;
+       if (a.statless) {
+         setSection(rec.parts.stats, rec.sig, 'stats', '');
+       } else {
+@@ -753,6 +834,7 @@ import { cardRuleHint } from './battle.preview.js';
+       // W5-06（2026-09-27 R2）：道具按目标侧过滤——自用道具不再高亮敌人（与 aim.js 同式）
+       const itemTargetsEnemy = !!(ctx.pendingItem && ctx.pendingItem.card && targetSide(ctx.pendingItem.card) === 'enemy');
+       setTargetable(slot, !!(cardTargetsEnemy || itemTargetsEnemy || ctx.slamPending || ctx.dartPending) && !f.dead, `${f.name}，按 Enter 确认目标`);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
++      if (!slot.classList.contains('can-target')) slot.setAttribute('aria-label', `${f.name}${f.dead ? '，已倒下' : '，敌方单位'}`);
+       slot.dataset.foeId = f.id || f.name;
+       slot.dataset.eidx = idx;
+       slot.style.setProperty('--foe-idle-phase', `${-(idx * 0.61)}s`);
+@@ -797,14 +879,15 @@ import { cardRuleHint } from './battle.preview.js';
+         catch { /* 页面销毁等 DOM 异常时不影响战斗渲染 */ }
+       } else parts.intent.style.display = 'none';
+       setSection(parts.fig, sig, 'fig', f.id && SDT.Art.has(f.id) ? SDT.Art.monsterArt(f.id) : SDT.Icons.img('slime'));
+-      // 常驻名牌只列姓名、生命和实际意图；基础攻击留在可展开的完整意图详情。
+-      // stats 行仍保留免伤提示，玩家属性和装备不隐藏。
+-      setSection(parts.head, sig, 'head',
+-        `<b title="${escAttr(f.name)}">${esc(f.name)}</b>${f.dead ? ' <span class="bt-deadmark">[[icon:cross]]</span>' : ''}` +
+-        (aff ? `<span class="bt-affix" data-term="${f.affix}">${aff.icon} ${aff.name}</span>` : ''));
++      parts.fig.setAttribute('role', 'img');
++      parts.fig.setAttribute('aria-label', f.name);
++      // 姓名保留在可访问身份中；上方呈现攻击、意图和状态，生命条仍在脚下。
+       setUnitHP(parts, sig, f.hp, f.maxHp, reattached || !sig.init);
+-      setSection(parts.stats, sig, 'stats', immune ? '[[icon:crystal]] 庇幕免伤中' : '');
+-      setSection(parts.chips, sig, 'chips', curseChips(f.status, { compact: true }));
++      const simpleAttack = intents.length === 1 && intents[0].label === '攻击'
++        && intents[0].damage === Math.max(0, f.atk || 0) && intents[0].hits === 1 && !intents[0].bleedBonus;
++      const attackStat = simpleAttack ? '' : `<span class="sts-stat">[[icon:swords]] 攻 ${f.atk}${f.affix === 'frenzy' ? '×2' : ''}</span>`;
++      setSection(parts.stats, sig, 'stats', `${attackStat}${immune ? '<span class="sts-stat">[[icon:crystal]] 庇幕免伤中</span>' : ''}`);
++      setSection(parts.chips, sig, 'chips', (aff ? `<span class="bt-affix" data-term="${f.affix}">${aff.icon} ${aff.name}</span>` : '') + curseChips(f.status, { compact: true }));
+       sig.init = true;
+       ordered.push(rec);
+     });
+diff --git a/搜打撤/game/src/battle/view/battle.scenery.js b/搜打撤/game/src/battle/view/battle.scenery.js
+index 7824ddf1..22f1b4c0 100644
+--- a/搜打撤/game/src/battle/view/battle.scenery.js
++++ b/搜打撤/game/src/battle/view/battle.scenery.js
+@@ -1,18 +1,14 @@
+ // 场景选择与站脚线为纯配置；画面解码、观察器与清理仍由战斗视图持有。
+-const bridge = Object.freeze({ key:'winter-bridge',
+-  far:new URL('../../../assets/scenes/battle/stage-reset-1015/backdrop.webp',import.meta.url).href,
+-  ground:new URL('../../../assets/scenes/battle/stage-reset-1015/ground.webp',import.meta.url).href,
+-  foreground:new URL('../../../assets/scenes/battle/stage-reset-1015/foreground.webp',import.meta.url).href,
+-  aspect:16/9,footLine:.615,stageLayers:true });
+-const street = Object.freeze({key:'winter-street',image:new URL('../../../assets/scenes/battle/winter-street-1011-v2.webp',import.meta.url).href,aspect:1672/941,footLine:.74});
+-const ruins = Object.freeze({key:'frozen-ruins',image:new URL('../../../assets/scenes/battle/frozen-ruins-1015.webp',import.meta.url).href,aspect:16/9,footLine:.74});
+-const core = Object.freeze({key:'contaminated-core',image:new URL('../../../assets/scenes/battle/contaminated-core-1015.webp',import.meta.url).href,aspect:16/9,footLine:.74});
++const platform = Object.freeze({ key:'winter-platform-minimal',
++  far:new URL('../../../assets/scenes/battle/platform-minimal-1016/far.webp',import.meta.url).href,
++  ground:new URL('../../../assets/scenes/battle/platform-minimal-1016/ground.webp',import.meta.url).href,
++  foreground:new URL('../../../assets/scenes/battle/platform-minimal-1016/foreground.webp',import.meta.url).href,
++  aspect:1672/941,footLine:.68,stageLayers:true });
+ 
+ export function selectBattleScenery({layerIdx=0,isBoss=false}={}) {
+-  if (isBoss || layerIdx >= 3) return core;
+-  if (layerIdx === 2) return ruins;
+-  if (layerIdx === 1) return street;
+-  return bridge;
++  // 层号与首脑参数保留原接口；当前所有战场共用本轮新站台三层场景。
++  void layerIdx; void isBoss;
++  return platform;
+ }
+ 
+ // 只在本场首次挂载时捕获层号；面板返回、重绘或旧解码回调不读取实时地图层。
+diff --git a/搜打撤/game/src/core/art.js b/搜打撤/game/src/core/art.js
+index 3ec9fff4..f7a1cd79 100644
+--- a/搜打撤/game/src/core/art.js
++++ b/搜打撤/game/src/core/art.js
+@@ -427,7 +427,9 @@ function characterArt(value, full=false, useDefault=false) {
+       return new Promise((resolve) => {
+         const scheduleNext = () => {
+           const run = () => {
+-            if (document.body?.classList.contains('cardlib-open') || foregroundImagesPending()) {
++            if (document.hidden || document.body?.dataset.state === 'moving'
++                || navigator.scheduling?.isInputPending?.()
++                || document.body?.classList.contains('cardlib-open') || foregroundImagesPending()) {
+               setTimeout(scheduleNext, 160);
+               return;
+             }
+@@ -444,7 +446,13 @@ function characterArt(value, full=false, useDefault=false) {
+             try {
+               const response = await fetch(url, { cache: 'force-cache', priority: 'low' });
+               if (!response.ok) throw new Error(`HTTP ${response.status}`);
+-              await response.arrayBuffer();
++              // Drain encoded bytes without assembling a second full ArrayBuffer
++              // for every asset; consuming to EOF still populates the HTTP cache.
++              if (response.body?.getReader) {
++                const reader = response.body.getReader();
++                try { while (!(await reader.read()).done) { /* cache only */ } }
++                finally { reader.releaseLock(); }
++              } else await response.arrayBuffer();
+               prefetchedUrls.add(url);
+             } catch (error) {
+               console.warn('[warmup] 美术资源预取失败', url, error);
+diff --git a/搜打撤/game/src/core/map-node-art.js b/搜打撤/game/src/core/map-node-art.js
+index 6d1cb1bc..beb9232c 100644
+--- a/搜打撤/game/src/core/map-node-art.js
++++ b/搜打撤/game/src/core/map-node-art.js
+@@ -125,7 +125,33 @@ function drawMapNodeGlow(ctx,type,state,time,pulse){
+   ctx.fillStyle=glow;ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.fill();ctx.restore();
+ }
+ 
+-export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=false,showLabel=true,time=0,pulse=0,reachable=false}={}) {
++const NODE_LABEL_FONT='600 18px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub",sans-serif';
++const NODE_STATUS_FONT='600 14px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub",sans-serif';
++const CONTENT_STATUS_INK={
++  incomplete:{ink:'#e0e6e3',background:'#20282cf5',line:'#6c7b80'},
++  pending:{ink:'#eed09a',background:'#302719f5',line:'#a47e3f'},
++  completed:{ink:'#abc3b8',background:'#1a2824f5',line:'#4d6b5f'},
++  'shop-open':{ink:'#9bd2bd',background:'#172d28f5',line:'#477a69'},
++  'shop-closed':{ink:'#afbeb7',background:'#202824f5',line:'#52655b'},
++};
++
++// Content labels have their own opaque support. Position/reachability glow never
++// changes this state colour, and faded visited artwork does not fade the words.
++function drawMapContentStatus(ctx,status,top,scale) {
++  if(!status?.label)return null;
++  const ink=CONTENT_STATUS_INK[status.id]||CONTENT_STATUS_INK.incomplete;
++  ctx.save();ctx.translate(0,top);ctx.scale(scale,scale);
++  ctx.font=NODE_STATUS_FONT;ctx.textAlign='center';ctx.textBaseline='middle';
++  const width=Math.ceil(ctx.measureText(status.label).width)+20,height=24;
++  ctx.fillStyle=ink.background;ctx.fillRect(-width/2,0,width,height);
++  ctx.strokeStyle=ink.line;ctx.lineWidth=.8;ctx.strokeRect(-width/2+.4,.4,width-.8,height-.8);
++  ctx.fillStyle=ink.ink;ctx.fillText(status.label,0,height/2+.5);
++  ctx.restore();
++  return {left:-width*scale/2,right:width*scale/2,top,bottom:top+height*scale};
++}
++
++export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=false,showLabel=true,time=0,pulse=0,reachable=false,status=null,statusScale=1}={}) {
++  const baseAlpha=ctx.globalAlpha;
+   const style=mapNodeAppearance(state);ctx.globalAlpha*=style.alpha;
+   const glowState=state==='current'?'current':state==='legal'||reachable?'legal':null;
+   if(glowState)drawMapNodeGlow(ctx,type,glowState,time,pulse);
+@@ -133,11 +159,13 @@ export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=fals
+   if(!empty){const support=mapNodeSupport(type);if(support)ctx.drawImage(support,-64,-64,128,128);}
+   if(getMapNodeArt(type)) drawMapNodeArt(ctx,type,0,0,empty?18:32);
+   else if(!drawMapNativeSymbol(ctx,type,0,0,3.1,nativeInk(type))) drawTacticalIcon(ctx,type,0,0,2.8,nativeInk(type));
++  let labelBounds=null;
++  const labelY=empty?27:44,labelHeight=empty?18:20;
+   if(showLabel){
+-    ctx.font='600 18px "HarmonyOS Sans SC","HarmonyOS Sans","Noto Sans SC Sub",sans-serif';
++    ctx.font=NODE_LABEL_FONT;
+     ctx.textAlign='center';ctx.textBaseline='middle';
+     const width=Math.ceil(ctx.measureText(label).width+12);
+-    const labelY=empty?27:44,labelHeight=empty?18:20;
++    labelBounds={left:-width/2,right:width/2,top:labelY,bottom:labelY+labelHeight};
+     if(state==='current'){
+       ctx.strokeStyle='#78c8be88';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(-width/2,labelY+labelHeight+3);ctx.lineTo(width/2,labelY+labelHeight+3);ctx.stroke();
+     }
+@@ -150,6 +178,13 @@ export function drawMapNodeBadge(ctx,type,label,state,{note=false,completed=fals
+     ctx.save();ctx.fillStyle='#0a171c';ctx.beginPath();ctx.arc(30,27,10,0,Math.PI*2);ctx.fill();
+     ctx.strokeStyle='#9bbdb1';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(25,27);ctx.lineTo(29,31);ctx.lineTo(35,23);ctx.stroke();ctx.restore();
+   }
++  ctx.globalAlpha=baseAlpha;
++  const statusTop=(showLabel?labelY+labelHeight:empty?22:39)+6*statusScale;
++  const statusBounds=drawMapContentStatus(ctx,status,statusTop,statusScale);
++  if(!labelBounds)return statusBounds;
++  if(!statusBounds)return labelBounds;
++  return {left:Math.min(labelBounds.left,statusBounds.left),right:Math.max(labelBounds.right,statusBounds.right),
++    top:labelBounds.top,bottom:statusBounds.bottom};
+ }
+ 
+ // 迷雾剪影徽章（2026-10-15 老板）：未揭示节点渲染为「黑色模糊+微光晕」——结构可见、
+diff --git a/搜打撤/game/src/core/renderer.js b/搜打撤/game/src/core/renderer.js
+index 105e04b2..5adb7aec 100644
+--- a/搜打撤/game/src/core/renderer.js
++++ b/搜打撤/game/src/core/renderer.js
+@@ -1,11 +1,11 @@
+-import { drawMapBrushRoad } from './map-brush-art.js';
++import { drawMapBrushRoad, mapBrushRoadInView } from './map-brush-art.js';
+ 
+ import { font, hash2 } from './renderer.primitives.js';
+ import { revealProgress } from './map-reveals.js';
+ import { ease } from './motion-primitives.js';
+ import { renderScheduler } from './render-scheduler.js';
+ import { mapNodeInfo } from './node-info.js';
+-import { isConsumedMapNode } from './map-node-state.js';
++import { isConsumedMapNode, mapNodeStatus } from './map-node-state.js';
+ import { createMapCityAtmosphere } from './map-city-atmosphere.js';
+ import { drawMapNodeBadge, drawMapFogBadge, drawMapTraveller, mapViewportScale, prepareMapNodeArt } from './map-node-art.js';
+ import { noteGlowPulse, glowPulse } from './map-node-glow.js';
+@@ -121,6 +121,17 @@ const SDT = window.SDT;
+   let vignetteKey = '';
+   let vignetteGrad = null;
+   const mapRoadCache = new WeakMap();
++  const renderedLabelBounds = new Map();
++  let labelBoundsGame = null, labelBoundsNodes = null, labelBoundsLayer = null;
++
++  // The input layer combines these real painted text bounds with its icon hit radius.
++  // Only bounds from the current revealed layer are exposed, never fog silhouettes.
++  function nodeLabelBounds(game,node) {
++    if(labelBoundsGame!==game||labelBoundsNodes!==game.nodes||labelBoundsLayer!==game.layerIdx||node.li!==game.layerIdx)return null;
++    const key=`${node.li},${node.idx}`;
++    if(Object.keys(game.seen||{}).length&&game.seen[key]!==1)return null;
++    return renderedLabelBounds.get(key)||null;
++  }
+ 
+ 
+   const isCurrentNode = (game, n) => n.li === game.layerIdx && n.idx === game.trackPos;
+@@ -294,11 +305,12 @@ const SDT = window.SDT;
+   const mapEdgeKey=(a,b)=>[mapKey(a),mapKey(b)].sort().join('|');
+ 
+   // Artwork and type names remain small relative to the complete viewport.
+-  function drawIcons(ctx,game){
+-    const z=game.cam.zoom,g=nodeGeo(game),unit=mapViewportScale(game.cam.viewW);
++  function drawIcons(ctx,game,g,statuses,path){
++    const z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW);
++    renderedLabelBounds.clear();labelBoundsGame=game;labelBoundsNodes=game.nodes;labelBoundsLayer=game.layerIdx;
+     const travel=getMapTravelPresentation(game);
+     const preview=travel?.path?.at(-1)||getExpeditionPreview(game)||game.moveTarget;
+-    const path=selectedMapPath(game),onPath=new Set(path.map(mapKey));
++    const onPath=new Set(path.map(mapKey));
+     const reduced=SDT.Motion?.reduceMotion?.()||false;
+     const glowSig=`${game.layerIdx},${game.trackPos}:${[...g.legalKeys].join(';')}`;
+     // 呼吸窗口只在活跃对局的站立态武装：被动重绘（resize 重烘焙/测试极简 mock）不触发，
+@@ -323,20 +335,24 @@ const SDT = window.SDT;
+       const supply=game.entrySupply;
+       const entryPending=supply?.layerIdx===n.li&&supply.trackPos===n.idx&&(supply.taken?.length||0)<(supply.cardIds?.length||0);
+       const completed=isConsumedMapNode(game,n);
++      const status=statuses.get(key);
+       const type=entryPending?'event':door?'door':n.def.type;
+-      const name=entryPending?'入城补给':mapNodeInfo(game,n)[0];
++      const name=entryPending?'入城补给':mapNodeInfo(game,n,status)[0];
+       const state=current?'current':selected?'selected':routed?'route':legal?'legal':game.visited?.[key]?'visited':'known';
+       const rv=reduced?1:revealProgress(key,game.time||0);
+       const detailScale=primary?Math.min(1,Math.max(.65,z)):Math.min(1,Math.max(.25,z*.65));
+       const scale=unit*detailScale*(rv<1?.75+.25*rv:1)/z;
+       ctx.save();ctx.translate(n.x,n.y);ctx.scale(scale,scale);ctx.globalAlpha=rv<1?Math.min(1,rv*1.4):1;
+-      drawMapNodeBadge(ctx,type,name,state,{
++      const labelBounds=drawMapNodeBadge(ctx,type,name,state,{
+         completed,reachable:legal,
++        status,statusScale:1/detailScale,
+         note:game.noteMap?.has(`${game.map?.boardId}|${key}`),
+         showLabel:current||selected||(type!=='blank'&&!routed&&(legal?z>=.65:z>=.85)),
+         time:game.time||0,pulse:glowPulse(game.time||0),
+       });
+       ctx.restore();
++      if(labelBounds)renderedLabelBounds.set(key,{left:n.x+labelBounds.left*scale,right:n.x+labelBounds.right*scale,
++        top:n.y+labelBounds.top*scale,bottom:n.y+labelBounds.bottom*scale});
+     }
+   }
+ 
+@@ -353,7 +369,7 @@ const SDT = window.SDT;
+   function mapCurvePath(c){
+     const p=new Path2D();p.moveTo(c.from.x,c.from.y);p.bezierCurveTo(c.c1.x,c.c1.y,c.c2.x,c.c2.y,c.to.x,c.to.y);return p;
+   }
+-  function clippedMapRoad(from,to,game,unit){
++  function clippedMapRoad(from,to,game,unit,statuses){
+     const z=game.cam.zoom,len=Math.hypot(to.x-from.x,to.y-from.y);
+     if(len<1)return null;
+     const selected=getExpeditionPreview(game)||game.moveTarget;
+@@ -361,8 +377,9 @@ const SDT = window.SDT;
+       const marked=isCurrentNode(game,n)||(selected?.li===n.li&&selected?.idx===n.idx);
+       const supply=game.entrySupply;
+       const pending=supply?.layerIdx===n.li&&supply.trackPos===n.idx&&(supply.taken?.length||0)<(supply.cardIds?.length||0);
+-      if(!pending&&(n.def?.type==='blank'||isConsumedMapNode(game,n)))return {x:24*unit/z,top:24*unit/z,bottom:(marked?52:24)*unit/z};
+-      return {x:(marked?60:56)*unit/z,top:56*unit/z,bottom:78*unit/z};
++      const hasStatus=!!statuses.get(mapKey(n)).label;
++      if(!pending&&!hasStatus&&(n.def?.type==='blank'||isConsumedMapNode(game,n)))return {x:24*unit/z,top:24*unit/z,bottom:(marked?52:24)*unit/z};
++      return {x:(marked?60:56)*unit/z,top:56*unit/z,bottom:(hasStatus?100:78)*unit/z};
+     };
+     const outside=(p,n,box)=>Math.abs(p.x-n.x)>Math.min(box.x,len*.32)||p.y-n.y < -Math.min(box.top,len*.32)||p.y-n.y > Math.min(box.bottom,len*.32);
+     const exit=(origin,target)=>{
+@@ -375,33 +392,45 @@ const SDT = window.SDT;
+     return {curve,start,end,section,path:mapCurvePath(section)};
+   }
+ 
+-  function drawLinks(ctx,game){
+-    const g=nodeGeo(game),z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW),curLi=game.layerIdx;
++  function drawLinks(ctx,game,g,statuses,path){
++    const z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW),curLi=game.layerIdx;
++    const view={left:game.cam.cx-game.cam.viewW/(2*z),right:game.cam.cx+game.cam.viewW/(2*z),
++      top:game.cam.cy-game.cam.viewH/(2*z),bottom:game.cam.cy+game.cam.viewH/(2*z)};
+     const preview=getExpeditionPreview(game)||game.moveTarget;
+     const selectedKey=preview?mapKey(preview):'';
+-    const contentKey=`${Object.keys(game.visited||{}).length}:${game.entrySupply?.taken?.length||0}:${!!game.altarActivated}:${!!game.altarRewardPending}`;
++    const contentKey=`${Object.keys(game.visited||{}).length}:${game.entrySupply?.taken?.length||0}:${!!game.altarActivated}:${!!game.altarRewardPending}:${g.nodes.map(n=>`${mapKey(n)}:${statuses.get(mapKey(n)).id}`).join(';')}`;
+     let cached=mapRoadCache.get(g);
+-    if(!cached||cached.zoom!==z||cached.viewW!==game.cam.viewW||cached.selectedKey!==selectedKey||cached.contentKey!==contentKey){
++    if(!cached){
+       const roads=[],known=new Map(g.nodes.map(n=>[mapKey(n),n])),done=new Set();
+       for(const n of g.nodes){
+         if(n.li!==curLi)continue;
+         for(const [li,idx] of game.layerData[n.li]?.logical[n.idx]?.next||[]){
+           const q=known.get(`${li},${idx}`);if(!q||li!==curLi)continue;
+           const edgeKey=mapEdgeKey(n,q);if(done.has(edgeKey))continue;done.add(edgeKey);
+-          const road=clippedMapRoad(n,q,game,unit);if(!road)continue;
++          if(Math.hypot(q.x-n.x,q.y-n.y)<1)continue;
+           const fromKey=mapKey(n),toKey=mapKey(q),currentKey=`${game.layerIdx},${game.trackPos}`;
+           const legal=(fromKey===currentKey&&g.legalKeys.has(toKey))||(toKey===currentKey&&g.legalKeys.has(fromKey));
+-          roads.push({...road,edgeKey,fromKey,toKey,legal});
++          roads.push({curve:mapTravelCurve(n,q),from:n,to:q,edgeKey,fromKey,toKey,legal,paint:null});
+         }
+       }
+-      cached={zoom:z,viewW:game.cam.viewW,selectedKey,contentKey,roads};mapRoadCache.set(g,cached);
++      cached={roads};mapRoadCache.set(g,cached);
+     }
+-    const path=selectedMapPath(game),planned=new Map();
++    const planned=new Map();
+     for(let i=1;i<path.length;i++)planned.set(mapEdgeKey(path[i-1],path[i]),mapKey(path[i-1]));
+     const travel=getMapTravelPresentation(game),moving=travel?.phase==='moving';
+     ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+-    for (const road of g.fogRoads) drawMapBrushRoad(ctx,road,unit/z,{alpha:.12});
+-    for(const road of cached.roads){
++    for (const road of g.fogRoads) drawMapBrushRoad(ctx,road,unit/z,{alpha:.12,view});
++    for(const descriptor of cached.roads){
++      if(!mapBrushRoadInView(descriptor.curve,unit/z,view))continue;
++      // Keep one paint object/canvas per edge across zoom and content changes.
++      // Offscreen edges catch up lazily when panned back into the viewport.
++      if(!descriptor.paint||descriptor.zoom!==z||descriptor.viewW!==game.cam.viewW
++          ||descriptor.selectedKey!==selectedKey||descriptor.contentKey!==contentKey){
++        descriptor.paint=Object.assign(descriptor.paint||{},clippedMapRoad(descriptor.from,descriptor.to,game,unit,statuses),
++          {edgeKey:descriptor.edgeKey,fromKey:descriptor.fromKey,toKey:descriptor.toKey,legal:descriptor.legal});
++        Object.assign(descriptor,{zoom:z,viewW:game.cam.viewW,selectedKey,contentKey});
++      }
++      const road=descriptor.paint;
+       const chosen=planned.has(road.edgeKey),legal=road.legal;
+       const color=chosen?'#79c9c4':legal?'#c7d1ca':'#b9c8c2';
+       drawMapBrushRoad(ctx,road,unit/z,{alpha:chosen?(moving?.45:.95):legal?.8:.45});
+@@ -416,7 +445,7 @@ const SDT = window.SDT;
+       for(let i=1;i<travel.path.length;i++){
+         if(i>travel.segmentIndex)break;
+         const a=travel.path[i-1],b=travel.path[i];if(a.li!==curLi||b.li!==curLi)continue;
+-        const road=cached.roads.find(r=>r.edgeKey===mapEdgeKey(a,b));if(!road)continue;
++        const road=cached.roads.find(r=>r.edgeKey===mapEdgeKey(a,b))?.paint;if(!road)continue;
+         const progress=i<travel.segmentIndex?1:Math.max(0,Math.min(1,travel.progress));
+         const forward=mapKey(a)===road.fromKey;
+         const start=forward?road.start:Math.max(road.start,1-progress),end=forward?Math.min(road.end,progress):road.end;
+@@ -435,9 +464,8 @@ const SDT = window.SDT;
+ 
+   // ---------- 火堆结点（辉光环 + 摇曳火焰） ----------
+   // ---------- 编号（当前环结点，顶部长小字） ----------
+-  function drawIndexes(ctx, game) {
++  function drawIndexes(ctx, game, g) {
+     if (!game.toggles.index) return;
+-    const g = nodeGeo(game);
+     ctx.font = font(game.cam, 9);
+     ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+     ctx.fillStyle = 'rgba(255,255,255,0.6)';
+@@ -450,8 +478,8 @@ const SDT = window.SDT;
+   }
+ 
+   // The confirmed old portrait and pointer identify the real position at rest and in motion.
+-  function drawPlayer(ctx,game){
+-    const n=nodeGeo(game).nodes.find(n=>isCurrentNode(game,n));
++  function drawPlayer(ctx,game,g){
++    const n=g.nodes.find(n=>isCurrentNode(game,n));
+     const p=game.pos||(n&&{x:n.x,y:n.y});if(!p)return;
+     const z=game.cam.zoom,unit=mapViewportScale(game.cam.viewW),travel=getMapTravelPresentation(game);
+     drawMapTraveller(ctx,p.x+44*unit/z,p.y-38*unit/z,z,
+@@ -479,10 +507,14 @@ const SDT = window.SDT;
+     ctx.scale(cam.zoom, cam.zoom);
+     ctx.translate(-cam.cx, -cam.cy);
+ 
+-    drawLinks(ctx, game);
+-    drawIcons(ctx, game);
+-    drawPlayer(ctx, game);
+-    drawIndexes(ctx, game);
++    // Projection lives for one draw only: in-place reward edits are visible on
++    // the next frame, while labels, clipping and badges share this frame's work.
++    const g=nodeGeo(game),statuses=new Map(g.nodes.map(n=>[mapKey(n),mapNodeStatus(game,n)]));
++    const path=selectedMapPath(game);
++    drawLinks(ctx, game, g, statuses, path);
++    drawIcons(ctx, game, g, statuses, path);
++    drawPlayer(ctx, game, g);
++    drawIndexes(ctx, game, g);
+ 
+     ctx.restore();
+ 
+@@ -508,6 +540,7 @@ const SDT = window.SDT;
+     backdropFadeFrame = 0; backdropFadeDriving = false;
+     backdropCanvas = null; backdropFade.snap = null;
+     geo = null; vignetteGrad = null;
++    renderedLabelBounds.clear();labelBoundsGame=null;labelBoundsNodes=null;labelBoundsLayer=null;
+     mapAtmosphere.onload = null;
+   }
+ 
+@@ -530,5 +563,5 @@ const SDT = window.SDT;
+     return true;
+   }
+ 
+-  SDT.Renderer = { draw, dispose, warm, prepare };
++  SDT.Renderer = { draw, dispose, warm, prepare, nodeLabelBounds };
+   if (import.meta.hot) import.meta.hot.dispose(dispose);
+diff --git a/搜打撤/game/src/run/chests.js b/搜打撤/game/src/run/chests.js
+index 6f5152f5..3572d107 100644
+--- a/搜打撤/game/src/run/chests.js
++++ b/搜打撤/game/src/run/chests.js
+@@ -4,10 +4,11 @@ import { Random } from '../core/random.js';
+ import { previewCardRewards } from '../core/card-capacity.js';
+ import { esc, escAttr } from '../core/shared.js';
+ import { rewardSceneHTML, rewardExitHTML } from '../ui/reward-scene-view.js';
++import { chestRewardOverviewHTML, chestRewardFrameHTML } from '../ui/chest-reward-overview.js';
+ import { turboMs, isTurbo } from '../core/turbo.js';
+ import { serializeChestReward, restoreChestReward } from './chest-reward-save.js';
+ import { bagSlots } from '../hub/game.bag.bridge.js';
+-import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE_CLOSED } from './chest-opening-art.js';
++import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from './chest-opening-art.js';
+ 
+   const SDT = window.SDT;
+   const UI = SDT.UI;
+@@ -18,16 +19,38 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+   let idx = 0;         // 已开到第几个
+   let onDone = null;   // 全部开完后的续流回调
+   let saveContext = null;
++  let rewardScreen = 'overview', overviewMode = true;
+   let saveBinding = null;
++  let parked = false;
++  let beforeMapReturn = null, returningToMap = false;
+   let rewardZoom = null;
+   let noticeFailure = null, suspendedBag = null;
+   const clearNoticeContext = () => { noticeFailure = null; suspendedBag = null; };
+   const closeRewardZoom = () => { rewardZoom?._closeCardZoom?.(true); rewardZoom = null; };
+   const bindSave = game => ({ seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos, runToken:game.discoveredPairs, slotId:SDT.Base?.slot });
+-  const isCurrentRewardRun = () => !!G && !!saveBinding && saveBinding.seed === G.seed &&
++  const isCurrentRewardRun = () => !parked && !!G && !!saveBinding && saveBinding.seed === G.seed &&
+     saveBinding.layerIdx === G.layerIdx && saveBinding.trackPos === G.trackPos &&
+     saveBinding.runToken === G.discoveredPairs && saveBinding.slotId === SDT.Base?.slot;
+-  const persistReward = () => { if (isCurrentRewardRun() && (saveContext?.onCell || saveContext?.battleSettlement)) G.persistSave?.(); };
++  const persistReward = () => {
++    if (!isCurrentRewardRun() || !(saveContext?.onCell || saveContext?.battleSettlement)) return;
++    const saved = serializeChestReward(G, queue, idx, cur, saveContext, { screen:rewardScreen });
++    if (saved) (G.nodeChestRewards ||= {})[`${G.layerIdx},${G.trackPos}`] = saved;
++    G.persistSave?.();
++  };
++  async function returnToMap() {
++    if (!isCurrentRewardRun() || !cur || G.state !== 'modal' || returningToMap) return false;
++    returningToMap = true;
++    try {
++      if (beforeMapReturn && !await beforeMapReturn(saveContext?.battleSettlement)) return false;
++      if (!isCurrentRewardRun() || !cur) return false;
++      if (overviewMode) rewardScreen = 'overview';
++      persistReward();
++      closeRewardZoom(); cancelPresentation(); searchSeq++;
++      parked = true;
++      UI.hideOverlay(); G.state = 'idle'; G.persistSave?.(); UI.refresh(G);
++      return true;
++    } finally { returningToMap = false; }
++  }
+   let searchSeq = 0;   // 搜索演出代次：过期定时器不得再渲染（连开多箱/提前结束时防串台）
+   let searchTimer = null, openingTimer = null, openingPresentation = null;
+ 
+@@ -126,7 +149,7 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+   // 掷一个宝箱的完整内容：cards=开出的卡（中宝箱为 3 选 1 候选），coins=内含币
+   function rollContents(kind, isClass) {
+     const K = KINDS()[kind] || KINDS().small;
+-    const c = { kind, cards: [], coins: 0, isClass: !!isClass };
++    const c = { kind, cards: [], coins: 0, isClass: !!isClass, claimMode:K.pickFrom ? 'one' : 'all' };
+     const seen = panelSeen();
+     const rollPetEgg = () => {
+       const eggRate = SDT.Base.petEggDropChance();
+@@ -188,7 +211,7 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+     // 大宝箱 / 首脑宝箱保底至少 1 张「史诗」+。未达标就重掷最后一张非宠物蛋卡（目标档内挑卡，
+     // 该档暂无可用卡则逐档上探；全部失败则保持原结果）。职业宝箱走上面独立分支，不参与。
+     const riOfCard = (card) => Math.max(0, SDT.Cards.RARITIES.indexOf(card.rarity));
+-    const needRi = K.pickFrom ? SDT.Cards.RARITIES.indexOf('稀有')
++    const needRi = kind === 'medium' ? SDT.Cards.RARITIES.indexOf('稀有')
+       : (kind === 'large' || kind === 'boss') ? SDT.Cards.RARITIES.indexOf('史诗') : -1;
+     let upgradeIndex = -1;
+     for (let i = c.cards.length - 1; i >= 0; i--) {
+@@ -278,83 +301,156 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+       .join('，');
+   }
+ 
+-  // ---------- 开箱 UI（逐个弹窗，全部开完调 onDone） ----------
++  // 宝箱总览持有整批进度；卡牌弹层的关闭不结束节点或胜利续流。
+   function open(game, chests, done, opts) {
+     clearNoticeContext();
+     cancelPresentation();
+     const K = Object.assign({ resourceOnly: false }, opts || {});
+     G = game;
++    parked = false;
++    beforeMapReturn = K.beforeMapReturn || null;
+     saveContext = { onCell:!!K.onCell, consumeNode:!!K.consumeNode,
+       ...(K.battleSettlement ? { battleSettlement:K.battleSettlement } : {}) };
+     saveBinding = bindSave(game);
+     queue = chests.map((chest, i) => ({ ...chest, battleSummary: i === 0 ? K.battleSummary || null : null }));
+-    idx = 0;
++    idx = 0; cur = null; overviewMode = true; rewardScreen = 'overview';
+     onDone = done || null;
+     G.state = 'modal';
+-    next();
++    if (!queue.length) { finishQueue(); return; }
++    prepareBox(0);
++    persistReward();
++    renderChestOffer();
+   }
+ 
+-  function next() {
++  const boxResolved = box => !!box && box.cards.every((_, i) => box.taken.has(i) || box.lost.has(i))
++    && (!box.coins || box.coinsReceived);
++  const allBoxesResolved = () => queue.length > 0 && queue.every(box => box.completed || boxResolved(box.reward));
++  const cardsResolved = box => !!box && box.rewardStage !== 'chest' && box.rewardStage !== 'opening'
++    && box.cards.every((_, i) => box.taken.has(i) || box.lost.has(i));
++  const pendingBox = slot => !slot.completed && !cardsResolved(slot.reward);
++  function nextPendingBoxIndex() {
++    const opened = queue.findIndex(slot => pendingBox(slot) && slot.reward && slot.reward.rewardStage !== 'chest');
++    return opened >= 0 ? opened : queue.findIndex(pendingBox);
++  }
++  const compactNotice = notice => String(notice || '').replaceAll('本次远征背包', '背包').replaceAll('，整理背包后可重试', '');
++
++  function finishQueue() {
+     clearNoticeContext();
+     closeRewardZoom();
+     cancelPresentation();
+-    if (idx >= queue.length) {
+-      searchSeq++;              // 作废未播完的搜索演出，避免收尾后又被旧定时器拉回浮层
+-      UI.hideOverlay();
+-      G.state = 'idle';
+-      cur = null;
+-      queue = [];   // 开完即清：isOpen 用 queue.length 判终态，残留会恒 true 锁死背包
+-      saveContext = null;
+-      saveBinding = null;
+-      const cb = onDone;
+-      onDone = null;
+-      if (cb) cb();
+-      return;
+-    }
+-    cur = rollContents(queue[idx].kind, queue[idx].isClass);
+-    cur.selected = null;
+-    cur.lost = new Set();
+-    cur.coinsReceived = false;
++    if (G.nodeChestRewards) delete G.nodeChestRewards[`${G.layerIdx},${G.trackPos}`];
++    searchSeq++;              // 作废未播完的搜索演出，避免收尾后又被旧定时器拉回浮层
++    UI.hideOverlay();
++    G.state = 'idle';
++    cur = null;
++    queue = [];   // 清除活动领奖引用，再调用一次原续流。
++    saveContext = null;
++    saveBinding = null;
++    const cb = onDone;
++    onDone = null;
++    if (cb) cb();
++  }
++
++  function prepareBox(index) {
++    const slot = queue[index];
++    if (!slot || slot.completed) return false;
++    if (!slot.reward) slot.reward = Object.assign(rollContents(slot.kind, slot.isClass), {
++      selected:null, taken:new Set(), lost:new Set(), coinsReceived:false,
++      leaveConfirm:false, notice:'', battleSummary:slot.battleSummary || null, rewardStage:'chest',
++    });
++    idx = index + 1; cur = slot.reward;
++    return true;
++  }
++
++  function next() {
++    if (!boxResolved(cur)) return;
++    queue[idx - 1].completed = true;
++    if (!overviewMode) { finishQueue(); return; }
++    closePicker();
++  }
++
++  function closePicker() {
++    closeRewardZoom(); cancelPresentation(); searchSeq++;
++    queue[idx - 1].completed = boxResolved(cur);
+     cur.leaveConfirm = false;
+-    cur.notice = '';
+-    cur.isClass = !!queue[idx].isClass;
+-    cur.battleSummary = queue[idx].battleSummary || null;
+-    cur.rewardStage = 'chest';
+-    idx++;
+-    persistReward();   // 在揭晓前冻结本箱内容与RNG；刷新不再重掷。
+-    renderChestOffer();
++    rewardScreen = 'overview';
++    persistReward(); renderChestOffer();
++  }
++
++  function overviewHTML() {
++    const nextIndex = nextPendingBoxIndex();
++    const nextBox = queue[nextIndex]?.reward;
++    return chestRewardOverviewHTML({
++      title:queue.some(box => box.battleSummary) ? '战斗胜利' : '本次收获',
++      source:'奖励总览', complete:allBoxesResolved(),
++      coins:queue.reduce((sum, slot) => {
++        sum.total += slot.reward?.coins || 0;
++        if (!slot.reward?.coinsReceived) sum.pending += slot.reward?.coins || 0;
++        return sum;
++      }, { total:0, pending:0 }),
++      primaryAction:nextIndex < 0 ? null : { index:nextIndex, label:nextBox && nextBox.rewardStage !== 'chest' ? '继续领取' : '打开宝箱' },
++      progress:{ pending:queue.filter(pendingBox).length, total:queue.length },
++      notice:cur?.taken?.size && cur.notice?.includes('已入') ? `已收下 ${cur.taken.size} 张${boxResolved(cur) ? '' : ' · 还有奖励'}` : '',
++      boxes:queue.map((slot, index) => {
++        const K = KINDS()[slot.kind] || KINDS().small;
++        const box = slot.reward;
++        const complete = !!slot.completed || cardsResolved(box);
++        const choice = box ? box.claimMode === 'one' : !!K.pickFrom;
++        return { index, name:slot.isClass ? '职业补给箱' : K.name,
++          art:`<img src="${escAttr(chestArtOf(slot))}" alt="" draggable="false">`,
++          rule:choice ? `${K.pickFrom || box?.choiceCount || box?.cards.length || 3} 张中选 1 张` : `${K.cards || box?.cards.length || 0} 张 · 可全部领取`,
++          status:complete ? box?.taken?.size ? `已收下 ${box.taken.size} 张`
++            : box?.lost?.size ? '卡牌已放弃' : '已完成'
++            : box?.taken?.size ? `已收下 ${box.taken.size} 张 · 待领`
++              : box && box.rewardStage !== 'chest' ? '待继续领取' : '待开启',
++          completed:complete, opened:!!box && box.rewardStage !== 'chest', active:index === idx - 1 };
++      }),
++      footer:`<span>[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span>`,
++    });
++  }
++
++  function bindOverview() {
++    const surface = UI.el?.ovBody?.querySelector('.cqo-overview');
++    const active = () => isCurrentRewardRun() && rewardScreen === 'overview' && G.state === 'modal'
++      && !!surface && UI.el?.ovBody?.querySelector('.cqo-overview') === surface && !UI.el?.overlay?.hidden;
++    const openBox = index => {
++      if (!active() || !Number.isInteger(index) || !queue[index] || !pendingBox(queue[index]) || !prepareBox(index)) return;
++      if (noticeFailure?.box !== cur) clearNoticeContext();
++      rewardScreen = 'cards';
++      if (cur.rewardStage === 'chest') {
++        cur.rewardStage = 'opening'; persistReward(); renderSearch();
++      } else { persistReward(); renderCurrentStage(); }
++    };
++    UI.act('chestOpen', d => openBox(Number(d.i)));
++    UI.act('chestNext', () => openBox(nextPendingBoxIndex()));
++    UI.act('chestOverviewCoins', () => {
++      if (!active()) return;
++      for (const slot of queue) {
++        if (slot.reward?.coins && !slot.reward.coinsReceived) collectCoinsOnce(slot.reward);
++        if (boxResolved(slot.reward)) slot.completed = true;
++      }
++      persistReward(); renderChestOffer();
++    });
++    UI.act('chestReturn', () => { if (active()) return returnToMap(); });
++    UI.act('chestOverviewBag', () => { if (active()) bagSlots.showBackpack(); });
++    UI.act('chestFinish', () => { if (active() && allBoxesResolved()) finishQueue(); });
+   }
+ 
+   function renderChestOffer() {
+     cancelPresentation();
+-    const sequence = ++searchSeq;
+-    const offeredBox = cur;
+-    const K = KINDS()[cur.kind];
+-    const name = cur.isClass ? '职业补给箱' : K.name;
+-    const body = rewardSceneHTML({
+-      title:cur.battleSummary ? '战斗胜利' : '获得宝箱',
+-      source:`${name}${queue.length > 1 ? ` · ${idx}/${queue.length}` : ''}`,
+-      rule:K.pickFrom ? `领取宝箱后，从 ${cur.cards.length} 张卡牌中选择 1 张` : '领取宝箱后揭晓卡牌',
+-      cards:chestOfferHTML({ name, src:chestArtOf(cur) }),
+-      actions:'<button type="button" class="reward-claim chest-claim-action" data-act="chestClaim">领取宝箱</button>',
+-      footer:`<span class="reward-capacity">待领取宝箱 · ${queue.length - idx + 1} 个</span>`,
+-      className:'reward-v14 chest-offer-page', count:1,
++    searchSeq++;
++    const nextIndex = nextPendingBoxIndex();
++    UI.showOverlay('[[icon:archive]] 奖励总览', chestRewardFrameHTML({ overview:overviewHTML() }), 'chest', {
++      initialFocus:nextIndex >= 0 ? `[data-act="chestOpen"][data-i="${nextIndex}"]`
++        : allBoxesResolved() ? '[data-act="chestFinish"]' : '[data-act="chestOverviewCoins"]',
+     });
+-    UI.showOverlay(`[[icon:archive]] 奖励宝箱 · 第 ${idx} / ${queue.length}`, body, 'chest');
+     markChestTier(cur);
+-    const surface = UI.el?.ovBody?.querySelector('.chest-offer-page');
+-    UI.act('chestClaim', () => {
+-      if (!isCurrentRewardRun() || cur !== offeredBox || sequence !== searchSeq || cur.rewardStage !== 'chest'
+-        || !surface || UI.el?.ovBody?.querySelector('.chest-offer-page') !== surface || UI.el?.overlay?.hidden) return;
+-      cur.rewardStage = 'opening';
+-      persistReward();
+-      renderSearch();
+-    });
++    bindOverview();
+     UI.refresh(G);
+   }
+ 
+   function renderCurrentStage() {
+-    if (cur.rewardStage === 'chest') renderChestOffer();
++    if (overviewMode && rewardScreen === 'overview') renderChestOffer();
+     else if (cur.rewardStage === 'opening') { cur.rewardStage = 'cards'; render(); persistReward(); }
+     else render();
+   }
+@@ -383,9 +479,11 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+       });
+     }
+     globalThis.__probe?.('rs', `tok=${tok} t=${Date.now()} kind=${cur.kind}`);
+-    UI.showOverlay(`[[icon:archive]] 搜寻物资 · ${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, `
++    const opening = `
+       <p class="evt-sts-desc">${cur.isClass ? '职业补给：本职业专属卡牌' : '正在解锁封存物资。'}</p>
+-      ${safeOpeningHTML({ kind:cur.isClass ? 'class' : cur.kind, src:chestArtOf(cur), animated:context.frames.length > 1 })}`, 'chest');
++      ${safeOpeningHTML({ kind:cur.isClass ? 'class' : cur.kind, src:chestArtOf(cur), animated:context.frames.length > 1 })}`;
++    UI.showOverlay(`[[icon:archive]] 开启${K.name}`, chestRewardFrameHTML({ overview:overviewHTML(), picker:opening, label:'开启宝箱' }), 'chest');
++    UI.act('chestClosePicker', () => { if (isCurrentPresentation(context)) closePicker(); });
+     context.surface = UI.el?.ovBody?.querySelector('[data-eps-search]');
+     markChestTier(cur);
+     // W6-01 事实更正（2026-09-27 R2）：battle.lifecycle.js:135 的三元式
+@@ -412,15 +510,17 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+     const lost = cur.lost || (cur.lost = new Set());
+     // 阿猫附赠追加在原候选之后，不参与原三选一的永久放弃。
+     const choiceCount = cur.choiceCount ?? cur.cards.length;
+-    const isChoice = index => !!K.pickFrom && index < choiceCount;
+-    const isPick = !!K.pickFrom && cur.cards.some((_, i) => isChoice(i) && !taken.has(i) && !lost.has(i));
++    const choice = cur.claimMode === 'one';
++    const isChoice = index => choice && index < choiceCount;
++    const isPick = choice && cur.cards.some((_, i) => isChoice(i) && !taken.has(i) && !lost.has(i));
+     const selected = Number.isInteger(cur.selected) ? cur.selected : null;
+     const cardsHTML = cur.cards.map((card, i) => {
+       const got = taken.has(i), dropped = lost.has(i);
+       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
+       const action = got || dropped
+         ? `<span class="reward-unit-state">${got ? '已入背包' : '已永久放弃'}</span>`
+-        : `<button type="button" class="reward-claim${fits ? '' : ' needs-room'}" data-act="${fits ? isChoice(i) ? 'chestPick' : 'chestTake1' : 'chestOpenBag'}" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>${fits ? '收下' : '整理背包'}</button>`;
++        : fits ? `<button type="button" class="reward-claim" data-act="${isChoice(i) ? 'chestPick' : 'chestTake1'}" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>收下</button>`
++          : '<span class="reward-unit-state needs-room">当前放不下</span>';
+       return `<article class="reward-unit${got ? ' got' : dropped ? ' dropped' : ''}" data-reward-rarity="${escAttr(rewardRarity(card))}">
+         <button type="button" class="reward-card" data-act="chestSelect" data-i="${i}" aria-label="放大查看${escAttr(card.name || '卡牌')}" title="放大查看">${SDT.Cards.cardHTML(card)}</button>${action}</article>`;
+     }).join('');
+@@ -428,8 +528,7 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+     // 按实际顺序模拟同名分堆/占格；成功收到珍珠盒后，后续资源可使用其扩格。
+     const rest = cur.cards.filter((c, i) => !taken.has(i) && !lost.has(i));
+     let cant = 0, canTake = 0;
+-    // 三选一（2026-09-19 审计 P2-8）：满包时逐张预检——全部收不下则给警示与「只收金币离开」，
+-    // 点选被拒时留在面板（旧实现照常 next()，选中的卡被静默吞掉）
++    // 逐张判断当前候选；满格仍可能通过同名叠放领取，不能用格数直接禁用。
+     const pickNoFit = isPick && !cur.cards.some((c, i) => isChoice(i) && !taken.has(i) && !lost.has(i) && (G.canReceiveCard ? G.canReceiveCard(c) : true));
+     if (!isPick) {
+       ({ canTake, cant } = previewCardRewards(rest, {
+@@ -447,40 +546,36 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+     } else if (!actualFailure && G.canReceiveCard && rest.some(c => notice === `「${c.name}」当前放不下，整理背包后可重试` && G.canReceiveCard(c))) {
+       notice = '';
+     }
+-    // 体验线切片4（2026-09-28，源自 Tarkov value-per-slot 心智模型）：满包时给出"最低价已装卡"参照，
+-    // 让"值不值得为战利品让路"变成一眼对比（替换操作仍走背包/商店，这里只给判断依据）
+-    const cheapestOwned = (G.ownedCards || [])
+-      .filter(o => o.card && !(SDT.Base.isSha ? SDT.Base.isSha(o.card) : false))
+-      .map(o => ({ name: o.card.name, price: SDT.Cards.sellPrice(o.card) }))
+-      .sort((a, b) => a.price - b.price)[0];
+-    const cheapHint = cheapestOwned
+-      ? ` 背包内最低估值：「${esc(cheapestOwned.name)}」${cheapestOwned.price} 币。`
+-      : '';
+-    const warnLine = pickNoFit
+-      ? `<p class="chest-warn">[[icon:bag]] 背包 ${G.usedSlots()}/${G.bagCap()} 格：当前候选都放不下。整理背包后可返回同一选择。</p>`
+-      : cant > 0
+-      ? `<p class="chest-warn">[[icon:bag]] 背包 ${G.usedSlots()}/${G.bagCap()} 格：按当前卡牌顺序预计可收 ${canTake} 张、${cant} 张放不下；批量领取时按逐张容量判定，放不下的保留在本页，可整理后再领。${cheapHint}</p>`
+-      : '';
++    const noneFit = rest.length > 0 && !rest.some(card => !G.canReceiveCard || G.canReceiveCard(card));
++    const informationalNotice = notice && !bulkCapacityNotice
++      && !cur.cards.some(card => notice === `「${card.name}」当前放不下，整理背包后可重试`);
++    const capacityNote = actualFailure || informationalNotice ? compactNotice(notice)
++      : pickNoFit ? '当前候选都放不下，奖励保留。'
++        : cant > 0 ? `预计可收 ${canTake} 张 · ${cant} 张待整理，奖励保留。` : compactNotice(notice);
+     const finished = rest.length === 0;
+-    const ops = cur.leaveConfirm
++    const leaveConfirmation = cur.leaveConfirm
+       ? `<div class="reward-leave-confirm"><p>永久放弃剩余 ${rest.length} 张卡牌？离开后无法找回。</p><button type="button" class="reward-secondary" data-act="chestStay">继续领取</button><button type="button" class="reward-secondary danger" data-act="chestLeave">确认放弃</button></div>`
+-      : rewardExitHTML(finished ? 'chestContinue' : 'chestSkip', finished ? (idx < queue.length ? `下一批奖励 · 剩余 ${queue.length - idx} 批` : '继续探索') : '返回地图');
+-    const bulk = !finished && !isPick && !cur.leaveConfirm && rest.length > 1
+-      ? `<button type="button" class="reward-secondary" data-act="chestTake">全部收下${cant ? ' · 放不下的保留' : ''}</button>` : '';
++      : '';
++    const ops = finished && !overviewMode ? rewardExitHTML('chestContinue', '继续探索') : '';
++    const bulk = !finished && !isPick && !cur.leaveConfirm && rest.length > 1 && (!noneFit || (!overviewMode && cur.coins && !cur.coinsReceived))
++      ? '<button type="button" class="reward-secondary" data-act="chestTake">全部收下</button>' : '';
+     const outcome = cur.battleSummary?.cardOutcome;
+     const details = outcome ? `<details class="loot-outcome"><summary>本战卡牌去向</summary>${[['进入消耗区',outcome.pocket],['直接消散',outcome.gone],['仍在背包',outcome.retained]].map(([label,names]) => `<p><b>${label}</b>：${names.length ? names.map(esc).join('、') : '无'}</p>`).join('')}</details>` : '';
+-    const coins = cur.coins ? `<article class="reward-unit reward-coin-unit${cur.coinsReceived ? ' got' : ''}" aria-label="金币奖励"><div class="reward-coin-art" aria-hidden="true">[[icon:coin]]</div><div class="reward-coin-amount">×${cur.coins}</div>${cur.coinsReceived ? '<span class="reward-unit-state">已获得</span>' : `<button type="button" class="reward-claim" data-act="chestCoins"${cur.leaveConfirm ? ' disabled' : ''}>收下</button>`}</article>` : '';
+-    const footer = `<span class="reward-capacity">[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span><button type="button" class="reward-bag" data-act="chestOpenBag">整理背包</button>${notice && !finished ? `<span class="reward-notice" role="status">${esc(notice)}</span>` : ''}${finished ? `<span class="reward-final" role="status">${taken.size} 张已入背包${lost.size ? ` · ${lost.size} 张已永久放弃` : ''}</span>` : ''}`;
+-    const body = rewardSceneHTML({
++    const coins = !overviewMode && cur.coins ? `<article class="reward-unit reward-coin-unit${cur.coinsReceived ? ' got' : ''}" aria-label="金币奖励"><div class="reward-coin-art" aria-hidden="true">[[icon:coin]]</div><div class="reward-coin-amount">×${cur.coins}</div>${cur.coinsReceived ? '<span class="reward-unit-state">已获得</span>' : `<button type="button" class="reward-claim" data-act="chestCoins"${cur.leaveConfirm ? ' disabled' : ''}>收下</button>`}</article>` : '';
++    const finalNotice = [taken.size ? `${taken.size} 张已入背包` : '', lost.size ? `${lost.size} 张已永久放弃` : '',
++      !overviewMode && cur.coins ? cur.coinsReceived ? '金币已入账' : '金币待领取' : ''].filter(Boolean).join(' · ') || '已处理';
++    const footer = `<span class="reward-capacity">[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span>${!finished ? `<button type="button" class="reward-bag${noneFit ? ' is-primary' : ''}" data-act="chestOpenBag">整理背包</button>` : ''}${!boxResolved(cur) && !cur.leaveConfirm ? '<button type="button" class="reward-bag" data-act="chestReturn">返回地图 · 保留奖励</button>' : ''}${!finished && !cur.leaveConfirm ? '<button type="button" class="reward-bag danger" data-act="chestSkip" data-cancel="false">放弃剩余卡牌</button>' : ''}${capacityNote && !finished && !cur.leaveConfirm ? `<span class="reward-capacity-note" role="status">${esc(capacityNote)}</span>` : ''}${finished ? `<span class="reward-final" role="status">${esc(finalNotice)}</span>` : ''}${leaveConfirmation}`;
++    const picker = rewardSceneHTML({
+       title:cur.title || (cur.battleSummary ? '战斗胜利' : isPick ? '选择收获' : '搜刮完成'),
+       source:`${cur.source || (cur.isClass ? '职业补给' : K.name)}${queue.length > 1 ? ` · ${idx}/${queue.length}` : ''}`,
+       rule:finished ? '' : isPick ? '任选 1 张，其余卡牌永久放弃，无法找回' : cur.cards.length > 1 ? '奖励可分别领取' : '',
+       cards:cardsHTML || (coins ? '' : '<p class="reward-empty">这里没有奖励</p>'),
+-      actions:`${ops}${bulk}`, coins, footer, warning:warnLine, details, count:cur.cards.length + (cur.coins ? 1 : 0),
++      actions:`${ops}${bulk}`, coins, footer, warning:'', details, count:cur.cards.length + (coins ? 1 : 0),
+       className:`reward-v14${taken.size || lost.size ? ' no-anim' : ''}`,
+     });
++    const body = overviewMode ? chestRewardFrameHTML({ overview:overviewHTML(), picker, label:cur.isClass ? '职业补给' : K.name }) : picker;
+     const currentBody = UI.el?.ovBody;
+-    if (currentBody?.querySelector('.reward-v14')) {
++    if (currentBody?.querySelector('.reward-v14') && !UI.el?.overlay?.hidden) {
+       const scrollTop = currentBody.querySelector('.loot-scroll')?.scrollTop || 0;
+       const hadFocus = currentBody.contains(document.activeElement);
+       currentBody.innerHTML = SDT.Icons.rich(body);
+@@ -495,7 +590,9 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+     const surface = UI.el?.ovBody?.querySelector('.reward-v14');
+     const isLiveReward = () => isCurrentRewardRun() && cur === renderedBox && G.state === 'modal' &&
+       !!surface && UI.el?.ovBody?.querySelector('.reward-v14') === surface && !UI.el?.overlay?.hidden;
++    UI.act('chestClosePicker', () => { if (overviewMode && isLiveReward()) closePicker(); });
+     UI.act('chestTake', () => { if (isLiveReward() && !isPick && !cur.leaveConfirm) takeAll(); });
++    UI.act('chestReturn', () => { if (isLiveReward()) return returnToMap(); });
+     UI.act('chestCoins', () => {
+       if (!isLiveReward() || cur.leaveConfirm || cur.coinsReceived) return;
+       collectCoinsOnce();
+@@ -514,7 +611,7 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
+       const source = UI.el.ovBody.querySelector(`[data-act="chestSelect"][data-i="${i}"]`);
+       UI.showCardZoom?.(card, { from:source, returnFocus:source, hideNote:true, presentation:'expedition',
+-        footer:available ? `<button class="ov-btn ok" data-act="${fits ? isChoice(i) ? 'chestPick' : 'chestTake1' : 'chestOpenBag'}" data-i="${i}">${fits ? '收下' : '整理背包'}</button>` : '' });
++        footer:available ? fits ? `<button class="ov-btn ok" data-act="${isChoice(i) ? 'chestPick' : 'chestTake1'}" data-i="${i}">收下</button>` : '<span class="reward-unit-state needs-room">当前放不下</span>' : '' });
+       rewardZoom = document.getElementById('cardZoom');
+     });
+     UI.act('chestTake1', (d) => {
+@@ -529,7 +626,8 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+         cur.taken.add(i);
+         persistReward();
+         cur.notice = `「${card.name}」已入本次远征背包`;
+-        render();
++        if (overviewMode && cur.cards.every((_, j) => taken.has(j) || lost.has(j))) closePicker();
++        else render();
+       } else { cur.notice = `「${card.name}」当前放不下，整理背包后可重试`; render(true); }
+     });
+     UI.act('chestSkip', () => {
+@@ -538,18 +636,19 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+         cur.leaveConfirm = true;
+         cur.notice = '';
+         render();
+-      } else { collectCoinsOnce(); next(); }
++      } else { if (!overviewMode) collectCoinsOnce(); next(); }
+     });
+     UI.act('chestStay', () => { if (isLiveReward()) { cur.leaveConfirm = false; render(); } });
+     UI.act('chestLeave', () => {
+       if (!isLiveReward() || !cur.leaveConfirm) return;
+       cur.cards.forEach((_, i) => { if (!cur.taken.has(i)) cur.lost.add(i); });
+-      collectCoinsOnce();
++      if (!overviewMode) collectCoinsOnce();
+       UI.log('（未收取的卡牌已永久放弃，无法找回）', 'dim');
+       cur.leaveConfirm = false;
+       cur.notice = '剩余卡牌已永久放弃';
+       persistReward();
+-      render();
++      if (overviewMode) closePicker();
++      else render();
+     });
+     UI.act('chestContinue', () => {
+       if (!isLiveReward() || cur.cards.some((_, i) => !cur.taken.has(i) && !cur.lost.has(i))) return;
+@@ -571,7 +670,8 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+       cur.cards.forEach((_, other) => { if (isChoice(other) && other !== i) cur.lost.add(other); });
+       persistReward();
+       cur.notice = `「${card.name}」已入本次远征背包`;
+-      render();
++      if (overviewMode && cur.cards.every((_, j) => taken.has(j) || lost.has(j))) closePicker();
++      else render();
+     });
+     UI.refresh(G);
+   }
+@@ -615,18 +715,19 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+       if (grantRewardCard(card)) taken.add(i);
+       else grantFailed = true;
+     });
+-    collectCoinsOnce();
++    if (!overviewMode) collectCoinsOnce();
+     if (!cur.cards.length && !cur.coins) UI.log('（空的——早被别的拾荒者搬空了……）', 'dim');
+     const pending = cur.cards.filter((_, i) => !taken.has(i) && !cur.lost.has(i)).length;
+     cur.notice = `已入背包 ${taken.size} 张${pending ? `，${pending} 张放不下，整理背包后可重试` : ''}`;
+     persistReward();
+-    render(grantFailed);
++    if (overviewMode && !pending) closePicker();
++    else render(grantFailed);
+   }
+ 
+-  function collectCoinsOnce() {
+-    if (!cur || cur.coinsReceived) return;
+-    if (cur.coins) G.gainCoins(cur.coins);
+-    cur.coinsReceived = true;
++  function collectCoinsOnce(box = cur) {
++    if (!box || box.coinsReceived) return;
++    if (box.coins) G.gainCoins(box.coins);
++    box.coinsReceived = true;
+     persistReward();
+   }
+ 
+@@ -656,15 +757,18 @@ import { createChestFrameSets, safeOpeningHTML, chestOfferHTML, SAFE_BURST, SAFE
+   }
+   function serialize(game) {
+     if (G !== game || !isCurrentRewardRun()) return null;
+-    return serializeChestReward(game, queue, idx, cur, saveContext);
++    return serializeChestReward(game, queue, idx, cur, saveContext, { screen:rewardScreen });
+   }
+-  function restore(game, saved, done) {
++  function restore(game, saved, done, opts = {}) {
+     const value = restoreChestReward(game, saved);
+     if (!value) return false;
+     clearNoticeContext();
+     closeRewardZoom();
+     cancelPresentation(); searchSeq++;
+-    G = game; queue = value.queue; idx = value.index; cur = value.current;
++    G = game; parked = false; queue = value.queue; idx = value.index; cur = value.current;
++    overviewMode = !(cur.source || cur.title);
++    rewardScreen = overviewMode ? value.screen : 'cards';
++    beforeMapReturn = opts.beforeMapReturn || null;
+     saveContext = value.context; onDone = done; G.state = 'modal';
+     saveBinding = bindSave(game);
+     renderCurrentStage(); persistReward(); return true;
+diff --git a/搜打撤/game/src/run/game.run.data.js b/搜打撤/game/src/run/game.run.data.js
+index f1bd0cb5..f6e7e4b8 100644
+--- a/搜打撤/game/src/run/game.run.data.js
++++ b/搜打撤/game/src/run/game.run.data.js
+@@ -12,14 +12,13 @@ const NODE_BG = DATA.scenes.nodeBg;
+ const PICKUP_BG = DATA.scenes.pickupBg;
+ const CLASS_STORY = DATA.scenes.classStory;
+ const WINTER_BATTLE_LAYERS = Object.freeze([
+-  new URL('../../assets/scenes/battle/winter-transit-1011/far.webp', import.meta.url).href,
+-  new URL('../../assets/scenes/battle/winter-transit-1011/mid.webp', import.meta.url).href,
+-  new URL('../../assets/scenes/battle/winter-transit-1011/ground.webp', import.meta.url).href,
+-  new URL('../../assets/scenes/battle/winter-transit-1011/foreground.webp', import.meta.url).href,
++  new URL('../../assets/scenes/battle/platform-minimal-1016/far.webp', import.meta.url).href,
++  new URL('../../assets/scenes/battle/platform-minimal-1016/ground.webp', import.meta.url).href,
++  new URL('../../assets/scenes/battle/platform-minimal-1016/foreground.webp', import.meta.url).href,
+ ]);
+   const PRELOAD_SCENES = Object.freeze({
+     battle: WINTER_BATTLE_LAYERS[0],
+-    // The encounter fallback and boss entrances reuse the current winter-city scenery.
++    // 遭遇战与全部首脑入口预取同一套新冬季站台场景。
+     bossGeneral: WINTER_BATTLE_LAYERS[0],
+     bossOrc: WINTER_BATTLE_LAYERS[0],
+     bossElement: WINTER_BATTLE_LAYERS[0],
+diff --git a/搜打撤/game/src/run/game.run.scenes.js b/搜打撤/game/src/run/game.run.scenes.js
+index 93eb0791..535a5b80 100644
+--- a/搜打撤/game/src/run/game.run.scenes.js
++++ b/搜打撤/game/src/run/game.run.scenes.js
+@@ -16,7 +16,9 @@ import { hashSeed } from '../core/random-core.js';
+ import { createShopController } from './game.run.shop.js';
+ import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
+ import { setBagReturnHook } from '../hub/bag-return-hook.js';
++import { bagSlots } from '../hub/game.bag.bridge.js';
+ import { nodeActionBinding } from './node-reward-state.js';
++import { claimNodeRestore, finishNodeRestore, nodeRestoreAt } from './node-restore-state.js';
+ import { selectEncounterSpec } from './encounter-selector.js';
+ import { turboMs } from '../core/turbo.js';
+ import { reduceMotion } from '../core/motion.js';
+@@ -421,9 +423,9 @@ export function resumeChestsOnCell(saved) {
+ }
+ 
+ // 固定奖励复用宝箱的逐张领取与存档恢复，不重新掷卡，也不因容量不足丢失。
+-export function openFixedRewardsOnCell(cards, source) {
++export function openFixedRewardsOnCell(cards, source, { consumeNode = false } = {}) {
+   const saved = { version:1, seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos,
+-    queue:[{ kind:'small' }], index:1, context:{ onCell:true },
++    queue:[{ kind:'small' }], index:1, context:{ onCell:true, consumeNode },
+     current:{ kind:'small', cards:cards.filter(Boolean), coins:0, coinsReceived:false,
+       taken:[], lost:[], source, title:'领取奖励' } };
+   setBagReturnHook(null);
+@@ -471,7 +473,9 @@ export const FIRE_RESTORABLE = (card) => card.type !== '道具' && card.type !==
+ // opts = { title, icon, tone, sub }：2026-09-19 留言 #21——复原页不再一律伪装成
+ // 「营火休整」（修鞋铺等事件里复原时跳成火堆页观感）；不传 opts 保持火堆口径
+ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
+-  const txn = transaction || { left: picks, finished: false, current: captureBattleContext(game) };
++  const record = opts.restoreRecord;
++  if (record && nodeRestoreAt(game) !== record) return false;
++  const txn = transaction || { left: record?.left ?? picks, finished: false, current: captureBattleContext(game) };
+   if (txn.finished || !txn.current()) return;
+   game.state = 'modal';
+   // 背包返回恢复本页并保留剩余复原次数（09-30 深审 WORLD-002）：关闭背包不再兜底回
+@@ -486,7 +490,7 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
+     const focusedName = focused?.dataset.name;
+     const focusedIndex = oldButtons.indexOf(focused);
+     const scrollTop = surface?.querySelector('.pocket-restore-content')?.scrollTop ?? 0;
+-    const left = txn.left;
++    const left = record?.left ?? txn.left;
+     const list = restorable();
+     const blockedN = game.usedPocket.length - list.length;
+     const title = opts.title || '营火休整';
+@@ -507,7 +511,7 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
+         <p class="ov-note">${opts.sub != null ? opts.sub : '<span class="eps-fate">复原=撤离全额带回，否则每张仅 1/3 幸存</span>'}${blockedN ? ` · 道具/装备共 ${blockedN} 张不可复原` : ''}</p>
+       </div>
+       <div class="battle-decision-content pocket-restore-content"><div class="bt-hand fire-restore-hand">${cardsHTML}</div></div>
+-      <footer class="battle-decision-actions"><div class="ov-btns"><button type="button" class="ov-btn ok fire-done-btn" data-act="fireDone" aria-label="继续旅程，结束复原并返回地图"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button></div></footer>
++      <footer class="battle-decision-actions"><div class="ov-btns">${record ? `<button type="button" class="ov-btn ok" data-act="restoreReturn">返回地图 · 保留 ${left} 次复原</button><button type="button" class="ov-btn" data-act="restoreBag">整理背包</button><button type="button" class="ov-btn fire-done-btn" data-act="fireDone">结束复原${left ? ' · 放弃剩余次数' : ''}</button>` : '<button type="button" class="ov-btn ok fire-done-btn" data-act="fireDone" aria-label="继续旅程，结束复原并返回地图"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>'}</div></footer>
+       </section>`, 'discover');
+     surface = UI.el?.ovBody?.firstElementChild;
+     surface?.querySelectorAll('.pocket-restore-art [tabindex]').forEach(el => el.removeAttribute('tabindex'));
+@@ -521,9 +525,11 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
+     const active = nodeActionBinding(game, UI, 'fireDone');
+     const renderedSurface = surface;
+     const live = () => active() && txn.current() && !txn.finished &&
++      (!record || game.nodeRewards?.[`${game.layerIdx},${game.trackPos}`] === record) &&
+       (!renderedSurface || UI.el?.ovBody?.firstElementChild === renderedSurface);
+     const finish = () => {
+       if (!live()) return;
++      if (record && !finishNodeRestore(game, record)) return;
+       txn.finished = true;
+       setBagReturnHook(null);
+       UI.hideOverlay();
+@@ -532,21 +538,38 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
+     UI.act('restoreOne', (d) => {
+       if (!live()) return;
+       const p = game.usedPocket.find(x => x.card.name === d.name && FIRE_RESTORABLE(x.card));
+-      if (!p || txn.left <= 0) return;
++      if (!p || (record?.left ?? txn.left) <= 0) return;
+       // 2026-09-06 #18：背包满时不能复原
+       const card = p.card;
+       if (!game.canReceiveCard(card)) { UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}），无法复原`, 'warn'); SDT.Sound.sfx('deny'); return; }
+-      p.count--;
+-      if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
+-      game.ownedCards.push({ uid: newUid(), card: { ...card } });
+-      txn.left--;
++      if (record) {
++        if (!claimNodeRestore(game, record, { name:d.name, isRestorable:FIRE_RESTORABLE,
++          canReceive:c => game.canReceiveCard(c), newUid })) return;
++        saveGame();
++      } else {
++        p.count--;
++        if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
++        game.ownedCards.push({ uid: newUid(), card: { ...card } });
++        txn.left--;
++      }
+       SDT.Sound.sfx('cardRestore');
+       UI.log(`[[icon:sparkles]] 【<b>${esc(card.name)}</b>】已复原，回到背包`, 'ok');
+-      if (txn.left <= 0) finish(); else render();
++      if ((record?.left ?? txn.left) <= 0) finish(); else render();
+     });
+     UI.act('fireDone', finish);
++    if (record) {
++      UI.act('restoreReturn', () => {
++        if (!live()) return;
++        txn.finished = true;
++        setBagReturnHook(null);
++        UI.hideOverlay();
++        finishInstant();
++      });
++      UI.act('restoreBag', () => { if (live()) bagSlots.showBackpack(); });
++    }
+   };
+   render();
++  return true;
+ }
+ 
+ // ---------- 角色选择（开局从全部角色中自由选 1，与 5 张初始攻击一起获得 1 张该角色随机卡） ----------
+diff --git a/搜打撤/game/src/ui/camp-entry.js b/搜打撤/game/src/ui/camp-entry.js
+index 5ec05da3..02acd139 100644
+--- a/搜打撤/game/src/ui/camp-entry.js
++++ b/搜打撤/game/src/ui/camp-entry.js
+@@ -1,6 +1,7 @@
+ // 基地初次展开独立编排；只保留选档画面的短暂装饰副本，不接管存档或焦点。
+ import '../../css/camp-entry.css';
+ import { waitPageVisual } from './page-visual-ready.js';
++import { mapImageReady } from '../core/map-image-ready.js';
+ const CUT_SCENES = {
+   camp: new URL('../../assets/scenes/transition-camp-v2.webp', import.meta.url).href,
+   photo: new URL('../../assets/scenes/transition-photo-v2.webp', import.meta.url).href,
+@@ -119,6 +120,17 @@ export function createCityCut({ archive = '基地档案', title = '返回基地'
+ 
+ export const cityCutDuration = 980;
+ 
++// The curtain's own artwork must be ready before the destination is revealed.
++// A failed decorative image falls back to the cut's opaque colour and lettering.
++export async function prepareCityCut(cut, { signal } = {}) {
++  const image = cut?.querySelector('.camp-entry-scenery img');
++  if (!image || signal?.aborted) return false;
++  const ready = await mapImageReady(image, { signal, timeout: 3000 });
++  if (signal?.aborted) return false;
++  if (!ready) { image.style.display = 'none'; cut.dataset.scenery = 'fallback'; }
++  return true;
++}
++
+ // A mounted city cut holds its first pose until the destination's representative assets settle.
+ export function playPreparedCut(page, cut, duration = cityCutDuration, onFinish) {
+   const overlay = page?.closest('#overlay');
+@@ -139,9 +151,10 @@ export function playPreparedCut(page, cut, duration = cityCutDuration, onFinish)
+   });
+   observer.observe(overlay, { childList: true, subtree: true, attributes: true,
+     attributeFilter: ['hidden', 'data-ui-closing'] });
+-  waitPageVisual(page, { signal: controller.signal, extraRoots: [cut], background: window.SDT?.UI?._pageBgReady })
+-    .then(ready => {
+-      if (!ready || finished) return;
++  Promise.all([prepareCityCut(cut, { signal: controller.signal }),
++    waitPageVisual(page, { signal: controller.signal, background: window.SDT?.UI?._pageBgReady })])
++    .then(([cutReady, ready]) => {
++      if (!cutReady || !ready || finished) return;
+       cut.classList.remove('page-cut-waiting');
+       timer = setTimeout(finish, duration);
+     }).catch(finish);
+@@ -183,9 +196,10 @@ export function enterCamp(overlay, ghost, reduced) {
+     if (cleanup === finish) cleanup = null;
+   };
+   cleanup = finish;
+-  waitPageVisual(overlay, { signal: controller.signal, extraRoots: cut ? [cut] : [], background: window.SDT?.UI?._pageBgReady })
+-    .then(ready => {
+-      if (!ready || cleanup !== finish || !overlay.querySelector('#hubMain')) return;
++  Promise.all([cut ? prepareCityCut(cut, { signal: controller.signal }) : true,
++    waitPageVisual(overlay, { signal: controller.signal, background: window.SDT?.UI?._pageBgReady })])
++    .then(([cutReady, ready]) => {
++      if (!cutReady || !ready || cleanup !== finish || !overlay.querySelector('#hubMain')) return;
+       overlay.dataset.campEntry = '1';
+       cut?.classList.remove('page-cut-waiting');
+       removeIdentity = ghost ? transferIdentity(overlay, ghost) : null;

@@ -1,0 +1,50 @@
+[
+  {
+    "path": "game/src/run/expedition.view.js",
+    "beforeSha256": "F35DB59E57D0A2F6FB51A8C2256B90A5DBCB1431F4369E45ADC0D71C018DFBBE",
+    "afterSha256": "7D3E6234268AC2EE7A20A7996FFA2D6FE0C725D34581E5B9747014FA1F657A18",
+    "baseline": "docs/evidence/2026-10-18-WF-page-perf-1018/expedition/baseline/game__src__run__expedition.view.js.txt"
+  },
+  {
+    "path": "game/src/run/map-travel-path.js",
+    "beforeSha256": "47D661350E83F78237A054FA01038BC3EDC151436C201BC4A7CBB260BEE4A896",
+    "afterSha256": "409AC7761A003388D3328AC692EDC74709B5CD3369093AF8648742E1FC3A9F8D",
+    "baseline": "docs/evidence/2026-10-18-WF-page-perf-1018/expedition/baseline/game__src__run__map-travel-path.js.txt"
+  },
+  {
+    "path": "game/src/run/event-recode-candidates.js",
+    "beforeSha256": null,
+    "afterSha256": "27145BF3515187ACB516D03ED8D498A3EF5C874FF41683E843AFB054FC2D3C47",
+    "baseline": null
+  },
+  {
+    "path": "game/src/run/game.run.flow.js",
+    "beforeSha256": "8436A66789B3D5ACD875CC0FC8D469263B2FF96B9BC434B780921BE2AA14765C",
+    "afterSha256": "81CCB3CD5238226EDE79D0A42DD5D7397F05439448DC1EE34B32C1A09A9C3942",
+    "baseline": "docs/evidence/2026-10-18-WF-page-perf-1018/expedition/baseline/game__src__run__game.run.flow.js.txt"
+  },
+  {
+    "path": "game/src/run/game.run.class-choice.page.js",
+    "beforeSha256": "574787805803FFE381A195B330D36BA708E2D87A3C00895BC4F87CEA5372E97F",
+    "afterSha256": "05C40BC4FF3BE44A952578559CD8537C4FD586D98E71D8B7899E1730EF9245DC",
+    "baseline": "docs/evidence/2026-10-18-WF-page-perf-1018/expedition/baseline/game__src__run__game.run.class-choice.page.js.txt"
+  },
+  {
+    "path": "game/src/ui/node-scene-view.js",
+    "beforeSha256": "BB9B8C944D0900F52FC6F0377F97534BE6C6D135A3E02228CCA99079A75DDB34",
+    "afterSha256": "65E7A2123D373F2A1BE5589B054D81CB3C8E27BF499A6D47639C89B40C1B0672",
+    "baseline": "docs/evidence/2026-10-18-WF-page-perf-1018/expedition/baseline/game__src__ui__node-scene-view.js.txt"
+  },
+  {
+    "path": "tests/page-perf-expedition.test.js",
+    "beforeSha256": null,
+    "afterSha256": "08510F18D03943669A2A3A40CA9A6274BA9490FF86451017D238BB14FCC3419C",
+    "baseline": null
+  },
+  {
+    "path": "tests/event-callback-lifecycle-audit.test.js",
+    "beforeSha256": "59D8F0CA8167625DF8A6656C69446599683A734B98C25B231526EB9B06870031",
+    "afterSha256": "3F3076C45BFEF7F9AB0BE43E214010F8AF2198D446A52DEF818CE6E479B3F57D",
+    "baseline": "docs/evidence/2026-10-18-WF-page-perf-1018/expedition/baseline/tests__event-callback-lifecycle-audit.test.js.txt"
+  }
+]

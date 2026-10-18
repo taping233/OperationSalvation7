@@ -228,3 +228,50 @@ describe('reviewed production-only asset omissions', () => {
     expect(() => assertRuntimeExclusionPlanUnchanged(new Set([legacy]), new Set([oldMap]))).toThrow(/changed during build/);
   });
 });
+
+it('pins indirect URL inputs even when their change has no recognizable asset constructor', () => {
+  const f = fixture();
+  const dependency = { path: 'game/src/catalog.js', code: 'export const names = ["current"];' };
+  f.sources.push(dependency);
+  f.review.opaqueConsumerDependencies = { [f.sources[1].path]: { [dependency.path]: hash(dependency.code) } };
+  expect(plan(f).excludedAssets.size).toBe(3);
+  dependency.code = 'export const names = ["portraits", "frames", "wu", "idle.webp"].join("/");';
+  expect(hasOpaqueAssetPaths(dependency.code)).toBe(false);
+  expect(plan(f).excludedAssets.size).toBe(0);
+  expect(plan(f).warnings.join(' ')).toContain('asset path dependency');
+});
+it('retains all candidates when an explicit path dependency or its owning consumer is missing', () => {
+  const f = fixture();
+  const dependency = { path: 'game/src/catalog.js', code: 'export const names = ["current"];' };
+  f.sources.push(dependency);
+  const consumer = f.sources[1];
+  f.review.opaqueConsumerDependencies = { [consumer.path]: { [dependency.path]: hash(dependency.code) } };
+  expect(plan(f).warnings).toEqual([]);
+  const complete = f.sources;
+  for (const missing of [consumer.path, dependency.path]) {
+    f.sources = complete.filter(source => source.path !== missing);
+    expect(plan(f).excludedAssets.size).toBe(0);
+    expect(plan(f).warnings.join(' ')).toContain(missing);
+  }
+  f.sources = complete; consumer.code += '\n// a later revision';
+  expect(plan(f).excludedAssets.size).toBe(0);
+});
+it('explicit indirect inputs retain normalized CRLF equivalence and invalidate between calls', () => {
+  const f = fixture();
+  const dependency = { path: 'game/src/catalog.js', code: 'export const names = [];\n' };
+  f.sources.push(dependency);
+  f.review.opaqueConsumerDependencies = { [f.sources[1].path]: { [dependency.path]: hash(dependency.code) } };
+  dependency.code = dependency.code.replaceAll('\n', '\r\n');
+  expect(plan(f).excludedAssets.size).toBe(3);
+  dependency.code += '// changed';
+  expect(plan(f).excludedAssets.size).toBe(0);
+});
+it('keeps the reviewed sample callback and catalog in the explicit sound path dependency set', () => {
+  const dependencies = RUNTIME_REDUNDANCY_REVIEW.opaqueConsumerDependencies['game/src/audio/sound.js'];
+  expect(Object.keys(dependencies).sort()).toEqual([
+    'game/src/audio/sound.samples.catalog.js', 'game/src/audio/sound.samples.player.js',
+  ]);
+  for (const [file, expected] of Object.entries(dependencies)) {
+    expect(hash(readFileSync(new URL(`../${file}`, import.meta.url), 'utf8').replaceAll('\r\n', '\n'))).toBe(expected);
+  }
+});

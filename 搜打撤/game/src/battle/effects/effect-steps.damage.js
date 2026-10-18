@@ -3,7 +3,7 @@
  * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量）；攻击表现 cue 来自白名单模块。 */
 import { attackCue } from '../view/battle.attack-cues.js';
 export function damageSteps(s) {
-  const {combat, getAlive, log, addTempCard, allCards, random01, getPlayerCaster, damagePlayer, addPlayerMaxHp, dumpHand, esc, hitFoe, ARROW_TOKEN, num} = s;
+  const {combat, getAlive, log, addTempCard, allCards, isRandomObtainable, random01, getPlayerCaster, damagePlayer, addPlayerMaxHp, dumpHand, esc, hitFoe, ARROW_TOKEN, num} = s;
   const drain = steps => {
     let next = steps.next();
     while (!next.done) next = steps.next();
@@ -157,7 +157,7 @@ export function damageSteps(s) {
         when: (ctx) => ctx.desc.match(/附加\s*(\d+|[一二两三四五])\s*[种层]随机诅咒/),
         run: (ctx, m) => {
           const n = num(m[1]);
-          const keys = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn']
+          const keys = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban']
             .sort(() => random01() - 0.5)
             .slice(0, n);
           const t = ctx.curseTarget;
@@ -172,7 +172,7 @@ export function damageSteps(s) {
         id: 'curse.doomGate', gate: 'fresh', label: '末日浩劫之门：全体各 1 层随机诅咒（优先不重复）',
         when: (ctx) => /对所有敌方(?:角色)?各施加(?:一|1)层随机诅咒/.test(ctx.desc) ? true : null,
         run: (ctx) => {
-          const keys = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn'];
+          const keys = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban'];
           let hit = 0;
           getAlive().slice().forEach(t => {
             const fresh = keys.filter(k => !((t.status[k] || 0) > 0));
@@ -188,8 +188,9 @@ export function damageSteps(s) {
         id: 'summon.morphRandom', gate: 'fresh', label: '变成随机招式卡牌、费用为 0（神秘药水回合开始）',
         when: (ctx) => ctx.desc.match(/变成\s*(\d+|一)\s*张随机\s*(招式|武术|法术)?\s*卡牌/),
         run: (ctx, m) => {
-          const want = m[2] === '法术' ? '法术' : '武术';
-          const pool = allCards().filter(c => c.type === want && c.rarity !== '衍生' && !['生物', '事件'].includes(c.type));
+          const want = m[2] === '招式' ? ['武术', '法术'] : [m[2] === '法术' ? '法术' : '武术'];
+          const pool = allCards().filter(c => want.includes(c.type) &&
+            (m[2] === '招式' ? isRandomObtainable(c) : c.rarity !== '衍生'));
           const c = pool.length ? pool[Math.floor(random01() * pool.length)] : null;
           if (c) {
             addTempCard({ ...c, cost: 0, _baseCost: c.cost || 0 });   // _baseCost：费用角标显示绿色「降费」（需求 #16）
@@ -222,11 +223,11 @@ export function damageSteps(s) {
       },
       {
         id: 'curse.enumeration', gate: 'fresh', label: '诅咒枚举句「(N′)冰冻、流血、中毒」',
-        when: (ctx) => ctx.desc.match(/^(?:(\d+)\s*′\s*)?((?:冰冻|流血|中毒|沉默|破甲|禁疗|灼烧)(?:[、，]\s*(?:冰冻|流血|中毒|沉默|破甲|禁疗|灼烧))*)$/),
+        when: (ctx) => ctx.desc.match(/^(?:(\d+)\s*′\s*)?((?:冰冻|流血|中毒|沉默|破甲|禁疗)(?:[、，]\s*(?:冰冻|流血|中毒|沉默|破甲|禁疗))*)$/),
         run: paced(function* (ctx, m) {
           const t = ctx.curseTarget;
           if (t) {
-            const keyMap = { '冰冻': 'freeze', '流血': 'bleed', '中毒': 'poison', '沉默': 'silence', '破甲': 'abreak', '禁疗': 'healban', '灼烧': 'burn' };
+            const keyMap = { '冰冻': 'freeze', '流血': 'bleed', '中毒': 'poison', '沉默': 'silence', '破甲': 'abreak', '禁疗': 'healban' };
             if (m[1]) {
               const cue = attackCue(combat.TYPES.SPELL);
               yield { kind: 'windup', targets: [t], ...(cue ? { cue } : {}) };

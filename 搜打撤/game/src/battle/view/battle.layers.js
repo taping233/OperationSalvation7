@@ -1,12 +1,16 @@
+import { isTargetableEnemy } from '../core/battle.target-session.js';
+import { requiresInfusion } from '../effects/battle.infusion.js';
+import { isHandArrivalEvent } from '../core/battle.card-presentation.js';
 /* 由 battle.view.js 拆出（2026-09-22 六文件重构批5）：手牌与单位区常驻层（批次A/B 差分更新）+ 状态角标 statusChips/curseChips（随用迁入）。
  * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
-import { rect as uiRect } from '../../ui/ui-scale.js';
+import { rect as uiRect, scale as uiScale } from '../../ui/ui-scale.js';
 import { characterName } from '../../core/characters.js';
 import { esc, escAttr } from '../../core/shared.js';
 import { assetUrl } from '../../core/asset-url.js';
 import { fanLayout } from '../core/battle.hand.js';
+import { createHandHitController } from './battle.hand-hit.js';
 import { handDisplayLayout as referenceHandLayout } from './battle.hand-layout.js';
 import { calculateEnemyIntent } from '../core/battle.enemy-intent.js';
 import { intentViewModel } from './battle.intent.view.js';
@@ -55,9 +59,11 @@ import { schedulePresentationMs } from '../runtime/battle.clock.js';
 import { aim, clickSelectedUid, clickSelectedTarget, setTargetable, startAim, cancelAim, cancelClickSelection, selectCardByClick, syncSubmittedCardPoses } from './battle.aim.js';
 import { showFoePreview, clearFoePreview } from './battle.hover.js';
 import { cardRuleHint } from './battle.preview.js';
+import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
   // 数字键选牌 / Esc 取消（原在 aim 片：需读手牌层 handLayer，随迁本片解 aim↔layers 环——2026-09-22 批5）
   document.addEventListener('keydown', (e) => {
     if (e.isComposing || e.keyCode === 229) return;
+    if (UI.el.ovBody?.querySelector('.battle-secondary-panel')) return;
     if (e.key === 'Escape') {
       // 输入法组合中（keyCode 229）：Esc 是取消拼音组合，不是取消瞄准/点选/注能
       if (e.isComposing || e.keyCode === 229) return;
@@ -137,7 +143,7 @@ import { cardRuleHint } from './battle.preview.js';
   //     对齐 STS2 NHandCardHolder「SetTargetPosition + 可取消动画 + 误差吸附」结构；
   //   - hover / 指向拎起 / 双击放大只碰类名，不触发重建；
   //   - 卡面内容按序列化签名 diff，内容没变不重写 innerHTML（图片不重载、悬停态不闪）。
-  let handLayer = null;
+  let handLayer = null, handHit = null, handPlay = null;
   const handSlots = new Map();   // key -> { slot, card, sig, rect, isNew }
   let handLayoutSlots = [], handLayoutWidth = 0, handResizeObserver = null;
   // 两层分别核对拥有者；单位先挂载不能提前替手牌消耗换场检查。
@@ -188,15 +194,24 @@ import { cardRuleHint } from './battle.preview.js';
   function handSlotKey(g) {
     return (g.self ? 'self|' : '') + g.key;
   }
+  function setHandAttribute(node, name, value) {
+    if (value === null) {
+      if (node.hasAttribute(name)) node.removeAttribute(name);
+    } else if (node.getAttribute(name) !== String(value)) node.setAttribute(name, String(value));
+  }
+  function setHandVariable(slot, name, value) {
+    const text = String(value);
+    if (slot.style.getPropertyValue(name) !== text) slot.style.setProperty(name, text);
+  }
   function setSlotVars(slot, L) {
-    slot.style.setProperty('--fx', L.x + 'px');
-    slot.style.setProperty('--fy', L.y + 'px');
-    slot.style.setProperty('--frot', L.rot + 'deg');
-    slot.style.setProperty('--counter-rot', -L.rot + 'deg');
-    slot.style.setProperty('--fs', L.scale);
-    slot.style.setProperty('--hand-index', String(L.index ?? 0));
-    slot.style.setProperty('--hand-rest', (L.rest ?? 64) + 'px');
-    slot.style.setProperty('--hand-visible-width', (L.visibleWidth ?? 204) + 'px');
+    setHandVariable(slot, '--fx', L.x + 'px');
+    setHandVariable(slot, '--fy', L.y + 'px');
+    setHandVariable(slot, '--frot', L.rot + 'deg');
+    setHandVariable(slot, '--counter-rot', -L.rot + 'deg');
+    setHandVariable(slot, '--fs', L.scale);
+    setHandVariable(slot, '--hand-index', L.index ?? 0);
+    setHandVariable(slot, '--hand-rest', (L.rest ?? 64) + 'px');
+    setHandVariable(slot, '--hand-visible-width', (L.visibleWidth ?? 204) + 'px');
   }
   // 只改变手牌视图位置；分组、顺序、出牌 UID 与差分槽位保持原语义。
   function handDisplayLayout(index, count, width) {
@@ -217,7 +232,7 @@ import { cardRuleHint } from './battle.preview.js';
     }
     syncHandWidth();
   }
-  if (import.meta.hot) import.meta.hot.dispose(() => handResizeObserver?.disconnect());
+  if (import.meta.hot) import.meta.hot.dispose(() => { handResizeObserver?.disconnect(); handHit?.dispose(); });
   // N1 视图侧闭环（2026-09-25）：注能选牌态整叠同名卡共享一个槽位节点，点击发的
   // dataset.uid 渲染时固定为叠代表（g.uids[0]）——连点永远发同一个 uid，引擎 per-uid
   // toggle（99daf74）下就是 0→1→0 循环，一叠选不满 need 张。这里按「轮转」算本次
@@ -240,6 +255,10 @@ import { cardRuleHint } from './battle.preview.js';
       if (!infusing.picked.includes(u)) return u;
     }
     return null;
+  }
+  function infusionStackUid(uid) {
+    const group = [...handSlots.values()].find(rec => rec.group?.uids.includes(uid))?.group;
+    return infuseRotateUid(group, getSnapshot().infusing);
   }
   // 单叠手牌的即时视图状态：side/类名/提示语/卡面内容一次算全（原 render 内联计算外提）
   function handGroupState(g, ctx) {
@@ -265,19 +284,19 @@ import { cardRuleHint } from './battle.preview.js';
     const dynamic = g.card.rules?.triggers?.onPlay?.find(op => op.op === 'damage' && op.hits?.perPlayedMoves !== undefined);
     const hits = ctx.playedMovesThisTurn || 0;
     const amount = dynamic ? +(dynamic.amount ?? g.card.dmg ?? 0) : 0;
-    const ruleHint = dynamic ? `当前 ${hits} 段 × ${amount} 基础伤害，共 ${hits * amount}；目标防御与加成另计。` : cardRuleHint(g.card, mode);
+    let ruleHint = dynamic ? `当前 ${hits} 段 × ${amount} 基础伤害，共 ${hits * amount}；目标防御与加成另计。` : cardRuleHint(g.card, mode);
     const tip = infusingNow
-      ? (isSelf ? '正在注能的卡牌' : blocked || `点击选择注能材料${g.uids.length > 1 ? ` · 本叠还有 ${g.uids.length} 张` : ''}`)
-      : blocked
-        ? `无法打出：${blocked}`
+      ? (isSelf ? '正在注能的卡牌' : blocked || `点击选择注能材料 · 已选 ${pickedN}/${g.uids.length} 张 · 剩余 ${g.uids.length - pickedN} 张${pickedN && (pickedN === g.uids.length || infusing.picked.length >= infusing.need) ? ' · 再点取消1张' : infusing.picked.length >= infusing.need ? ' · 材料已选满' : ''}`)
+      : blockedReason
+        ? `无法打出：${blockedReason}`
         : infuseOf(g.card) > 0
-        ? `费用 ${effCost}${costTip} · 点击选择注能材料；也可直接拖拽使用`
+        ? `费用 ${effCost}${costTip} · ${requiresInfusion(g.card) ? '必须先注能；点「注能」按钮选材料' : '点「注能」按钮选材料；也可拖拽使用'}；鼠标按卡面拿起，Esc 取消；聚焦卡面按 Enter 选材料`
         : side === 'enemy'
         ? `费用 ${effCost}${costTip} · 点击选择敌人；也可直接拖到${isAreaEffect(g.card) ? '战场空地或敌人身上' : '敌人身上'}使用`
         : side === 'self'
           ? `费用 ${effCost}${costTip} · 点击选择自己；也可直接拖到战场空地或左侧人物使用`
           : side === 'any'
-            ? `费用 ${effCost}${costTip} · 点击直接使用；也可直接拖到战场空地`
+            ? `费用 ${effCost}${costTip} · 拖至战场空地使用；拿起后 Esc 取消；聚焦卡面按 Enter 直接使用`
             : `费用 ${effCost}${costTip} · 规则见卡面`;
     // 需求 #16：费用变动显示在卡牌左上角费用处——降低 = 绿字，提高 = 红字
     // （天狼长弓等「变为0费」的临时卡带 _baseCost：按原费用对比显示绿色 0）
@@ -290,19 +309,21 @@ import { cardRuleHint } from './battle.preview.js';
           title="开始注能(${infN})，点击手牌选择材料">[[icon:crystal]] 注能${infN}</button>`
       : '';
     const cnt = g.uids.length > 1 ? `<span class="bt-count" title="同名卡 ${g.uids.length} 张堆叠为一叠">×${g.uids.length}</span>` : '';
-    // 诅咒之刃（2026-09-10 需求）：卡面实时显示手牌招式（武术+法术）提供的全部诅咒
-    // 09-20 老板：单个诅咒 chip 带 data-term，触摸弹 term-tips 讲解框（title 已被全局移除）
+    // 诅咒之刃（2026-09-10 需求）：卡面规则阅读区显示手牌招式（武术+法术）提供的全部诅咒
+    // 诅咒名称与层数作为文字补充，不在插画上叠放图标。
     const curseChip = (g.card.id === 'cc-cursed-blade' && typeof handCurseSpecs === 'function')
       ? (() => {
           const specs = handCurseSpecs();
           if (!specs.length) {
-            return `<div class="bt-cursechips empty"><span class="bt-cursechip-i none">无诅咒</span></div>`;
+            ruleHint = [ruleHint, '当前手牌无可附加诅咒。'].filter(Boolean).join(' ');
+            return '';
           }
           const items = specs.map(s => {
             const meta = Combat.CURSE_META[s.key] || { name: s.key, icon: '', stack: false, desc: '' };
-            return `<span class="bt-cursechip-i" data-term="${s.key}">${meta.icon}${meta.name}${meta.stack ? '×' + s.n : ''}</span>`;
-          }).join('');
-          return `<div class="bt-cursechips">${items}</div>`;
+            return `${meta.name}${meta.stack ? '×' + s.n : ''}`;
+          }).join('、');
+          ruleHint = [ruleHint, `当前附加：${items}。`].filter(Boolean).join(' ');
+          return '';
         })()
       : '';
     const inner = SDT.Cards.cardHTML(g.card, 'sm', {
@@ -312,17 +333,27 @@ import { cardRuleHint } from './battle.preview.js';
       })
       + cnt + infChip + curseChip;
     const handState = infusingNow ? 'infusing' : targeted || clickSelectedUid === uid ? 'selected' : blockedReason ? 'blocked' : 'ready';
-    return { g, uid, side, cls, tip, inner, ruleHint, handState, blockedReason };
+    return { g, uid, side, cls, tip, inner, ruleHint, handState, blockedReason, pickedN, infusingNow };
   }
   // 挂载：把手牌常驻层接回刚重建的舞台（占位节点 → 常驻节点）。
   // 战斗实例令牌变了 = 上一场战斗已收尾/新战斗开打：清掉旧槽位再开新局。
   // （不能用 isConnected 判定——showOverlay 整块重建 ovBody，常驻层每次挂载前都脱离文档）
-  function mountHandLayer(body, tip, token) {
+  function mountHandLayer(body, tip, token, onPlay) {
     const mount = body.querySelector('.sts-hud .sts-hand');
     if (!mount) return null;
-    if (!handLayer) handLayer = document.createElement('div');
+    handPlay = onPlay || null;
+    if (!handLayer) {
+      handLayer = document.createElement('div');
+      handHit = createHandHitController(handLayer, {
+        getCards: () => handLayoutSlots.map(rec => rec.card), scale: uiScale,
+        isAiming: () => !!aim,
+        onPointerDown: (event, card) => { if (card.dataset.aim === '1') startAim(event, card); },
+        onPlay: uid => handPlay?.({ uid }),
+      });
+    }
     handLayer.className = 'bt-hand sts-hand';
     if (token !== handBattleToken) {
+      handHit.reset();
       handSlots.forEach(rec => rec.slot.remove());
       handSlots.clear();
       // 离场动画的槽已退Map但尚留DOM；新场次不可继承这些旧UID点击区。
@@ -342,11 +373,13 @@ import { cardRuleHint } from './battle.preview.js';
   function updateHand(snapshot, prev, pageGroups, events, extra) {
     if (!handLayer) return { flightMs: 0 };
     const previousFocus = captureHandFocus();
+    const previousUids = new Map([...handSlots.values()].filter(rec => rec.slot.isConnected)
+      .map(rec => [rec.slot, new Set(rec.group.uids)]));
     const readable = pageGroups.length <= 6 ? 'true' : 'false';
     if (handLayer.dataset.readable !== readable) handLayer.dataset.readable = readable;
     const evs = events || [];
     const drawn = new Set(), played = new Set();
-    evs.forEach(ev => { if (ev.kind === 'draw') drawn.add(ev.uid); else if (ev.kind !== 'shuffle' && ev.kind !== 'surge') played.add(ev.uid); });
+    evs.forEach(ev => { if (isHandArrivalEvent(ev)) drawn.add(ev.uid); else if (['play', 'dump', 'burn'].includes(ev.kind)) played.add(ev.uid); });
     const submitted = new Set(evs.filter(ev => ev.kind === 'play').map(ev => ev.uid));
     drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
     const ctx = {
@@ -369,28 +402,6 @@ import { cardRuleHint } from './battle.preview.js';
       if (!(rec && rec.slot.isConnected)) {
         rec = { slot: document.createElement('div'), card: document.createElement('div'), sig: '', rect: null, isNew: true };
         rec.slot.className = 'bt-slot';
-        // The stable slot owns both the visible face and its bottom hover bridge.
-        // A bridge hit must start the same single gesture as a hit on the rising card.
-        rec.slot.addEventListener('pointerdown', (e) => {
-          // 注能角标是按钮，点击走 ovBody 委托，不进指向（需求 #15）
-          if (e.target.closest && e.target.closest('button')) return;
-          // N1（2026-09-25）：注能选牌态下整叠一个槽位，dataset.uid 是渲染时算好的叠代表
-          // ——连点发同一个 uid，per-uid toggle 下选不满。按下瞬间按当前快照现算轮转 uid
-          // 写回 dataset.uid，随后的 click 委托（btPlay→toggleInfusePick）即按 per-uid 生效；
-          // 现算而非渲染时算：requestBattleRender 走 rAF 合帧，连点可能同帧到达。
-          // 非注能态不碰 dataset.uid，普通点击/拖拽路径零变化。
-          if (e.button === 0) {
-            const snap = getSnapshot();
-            if (snap && snap.infusing) {
-              const rot = infuseRotateUid(rec.group, snap.infusing);
-              if (rot) {
-                rec.card.dataset.uid = rot;
-                rec.slot.dataset.uid = rot;
-              }
-            }
-          }
-          if (e.button === 0 && rec.card.dataset.aim === '1') startAim(e, rec.card);
-        });
         // 同槽抬牌负责悬停阅读，规则保留在卡面上。
         rec.card.addEventListener('mouseenter', () => UI.hideTooltip?.());
         rec.card.addEventListener('keydown', (e) => {
@@ -409,53 +420,58 @@ import { cardRuleHint } from './battle.preview.js';
         rec.slot.appendChild(rec.card);
         handSlots.set(key, rec);
       }
-      rec.group = g;   // 实时分组挂在常驻 rec 上：pointerdown 注能轮转按本帧分组现算（N1）
+      rec.group = g;   // 实时分组供 click / 键盘按当前快照逐张选材。
       setSlotVars(rec.slot, L);
-      // 紧凑态恒挂（只露牌面+名字）；悬停弹出完整描述由 CSS :hover 驱动
-      rec.card.className = 'bt-card compact' + st.cls
+      // 紧凑态恒挂；固定选区控制阅读类，键盘焦点保留 CSS 阅读态。
+      setHandAttribute(rec.card, 'class', 'bt-card compact' + st.cls
         + (st.side === 'enemy' || st.side === 'self' ? ' need-target' : '')
         + (st.side === 'any' ? ' free-drop' : '')
-        + (clickSelectedUid === st.uid ? ' click-selected' : '');
-      rec.slot.dataset.uid = st.uid;
-      rec.slot.dataset.act = 'btPlay';
-      rec.card.dataset.uid = st.uid;
-      rec.card.dataset.handIndex = String((g.displayIndex ?? i) + 1);
-      rec.card.dataset.act = 'btPlay';
-      rec.card.dataset.aim = st.side ? '1' : '';
-      rec.card.dataset.side = st.side || '';
-      rec.card.dataset.handState = st.handState;
-      if (st.blockedReason) rec.card.dataset.blockReason = st.blockedReason;
-      else rec.card.removeAttribute('data-block-reason');
+        + (clickSelectedUid === st.uid ? ' click-selected' : ''));
+      setHandAttribute(rec.slot, 'data-uid', st.uid);
+      setHandAttribute(rec.slot, 'data-act', 'btPlay');
+      setHandAttribute(rec.card, 'data-uid', st.uid);
+      setHandAttribute(rec.card, 'data-hand-index', (g.displayIndex ?? i) + 1);
+      setHandAttribute(rec.card, 'data-act', 'btPlay');
+      setHandAttribute(rec.card, 'data-aim', st.side ? '1' : '');
+      setHandAttribute(rec.card, 'data-side', st.side || '');
+      setHandAttribute(rec.card, 'data-hand-state', st.handState);
+      setHandAttribute(rec.card, 'data-block-reason', st.blockedReason || null);
       rec.__tip = st.tip;
       rec.__name = `${g.card.name} · ${effCostOf(g.card, st.uid)} 费`;
-      rec.card.setAttribute('role', 'group');
-      rec.card.tabIndex = -1;
-      rec.card.setAttribute('aria-label', `${rec.__name}。${st.ruleHint ? st.ruleHint + ' ' : ''}${st.tip || '按回车或空格使用'}`);
+      setHandAttribute(rec.card, 'role', 'group');
+      setHandAttribute(rec.card, 'tabindex', -1);
+      setHandAttribute(rec.card, 'aria-label', `${rec.__name}。${st.ruleHint ? st.ruleHint + ' ' : ''}${st.tip || '按回车或空格使用'}`);
       // 操作提示由局面说明和可访问名称提供，原生 title 不再挂。
-      rec.card.removeAttribute('title');
+      setHandAttribute(rec.card, 'title', null);
       // 卡面外的角标（目标侧/费用变化/注能/诅咒）带 [[icon:]] 宏——写入时统一渲染，否则宏原文直接上屏
-      const renderSig = `${st.inner}\u0000${st.ruleHint}`;
+      // One reading hint: a current block takes priority over supplementary rules.
+      const readingHint = st.blockedReason ? `无法打出：${st.blockedReason}` : st.ruleHint;
+      const renderSig = `${st.inner}\u0000${st.ruleHint}\u0000${st.blockedReason}`;
       if (rec.sig !== renderSig) {
         rec.card.innerHTML = SDT.Icons.rich(st.inner);
         const desc = rec.card.querySelector('.hsc-desc');
-        if (desc && st.ruleHint) {
+        if (desc && readingHint && !desc.textContent.includes(st.blockedReason || readingHint)) {
           const hint = document.createElement('span');
           hint.className = 'bt-rulehint';
-          hint.textContent = st.ruleHint;
-          desc.appendChild(hint);
+          hint.textContent = readingHint;
+          if (st.blockedReason) desc.prepend(hint);
+          else desc.appendChild(hint);
         }
         rec.sig = renderSig;
       }
       const face = rec.card.querySelector('.hs-card');
       if (face) {
-        face.setAttribute('role', 'button'); face.tabIndex = 0;
-        face.setAttribute('aria-disabled', st.blockedReason ? 'true' : 'false');
-        face.setAttribute('aria-label', `${rec.__name}。${st.ruleHint} ${st.tip}`);
-        face.setAttribute('aria-pressed', clickSelectedUid === st.uid ? 'true' : 'false');
+        setHandAttribute(face, 'role', 'button'); setHandAttribute(face, 'tabindex', 0);
+        setHandAttribute(face, 'aria-disabled', st.blockedReason ? 'true' : 'false');
+        setHandAttribute(face, 'aria-label', `${rec.__name}。${st.ruleHint} ${st.tip}`);
+        setHandAttribute(face, 'aria-pressed', st.infusingNow
+          ? st.pickedN === g.uids.length ? 'true' : st.pickedN ? 'mixed' : 'false'
+          : clickSelectedUid === st.uid ? 'true' : 'false');
       }
       ordered.push(rec);
     });
     handLayoutSlots = ordered;
+    handHit?.sync(handBattleToken);
     handLayoutWidth = handWidth;
     // —— 顺序校正（DOM 序 = 扇形叠放序）：失序才搬节点 ——
     const current = [...handLayer.querySelectorAll('.bt-slot')];
@@ -480,18 +496,19 @@ import { cardRuleHint } from './battle.preview.js';
       const r = uiRect(rec.slot);
       if (rec.isNew) {
         rec.isNew = false;
-        if (drawn.has(rec.card.dataset.uid)) {
+        if (drawn.has(rec.card.dataset.uid) && !evs.some(event => event.kind === 'draw' && event.acquired && event.uid === rec.card.dataset.uid)) {
           // 发现选卡飞入起点：由壳（battle.view.js）经 extra.discoverSrcRect 传入，
           // 消费后的置空也归壳（render 里调用 updateHand 后统一 discoverSrcRect = null）
           const src = (prev && prev.drawPile) || extra.discoverSrcRect
             || { left: ovR.width - 150, top: ovR.height - 110, width: 56, height: 80 };
           const dx = src.left + src.width / 2 - (r.left + r.width / 2);
           const dy = src.top + src.height / 2 - (r.top + r.height / 2);
-          animateSafe(rec.slot, [
+          const delay = drawIdx++ * 300;
+          if (!SDT.Motion?.reduceMotion?.()) animateSafe(rec.slot, [
             { transform: `translate(${dx}px,${dy}px) rotate(9deg) scale(.72)`, opacity: 0 },
             { transform: `translate(${dx * 0.18}px,${dy * 0.18}px) rotate(3deg) scale(1.04)`, opacity: 1, offset: 0.72 },
             { transform: 'translate(0px,0px) rotate(0deg) scale(1)', opacity: 1 },
-          ], { duration: 900, delay: drawIdx++ * 300, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'backwards', composite: 'add' });
+          ], { duration: 900, delay, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'backwards', composite: 'add' });
           flightMs = Math.max(flightMs, 900 + (drawIdx - 1) * 300);   // drawIdx 已自增：末张 delay=(n-1)×300，旧式多算一档
         }
       } else if (rec.rect) {
@@ -525,6 +542,7 @@ import { cardRuleHint } from './battle.preview.js';
     // cancel the flight animation for a card that immediately returns to hand.
     syncSubmittedCardPoses(submitted);
     restoreHandFocus(previousFocus, ordered);
+    updateHandAcquisitionFeedback(handLayer.closest('.battle-stage'), snapshot, ordered, previousUids, evs);
     return { flightMs };
   }
 
@@ -621,9 +639,13 @@ import { cardRuleHint } from './battle.preview.js';
     parts.hpBar = document.createElement('i');
     parts.hpBar.className = 'sts-hp-main';
     parts.hpTxt = document.createElement('span');
+    parts.armor = document.createElement('b');
+    parts.armor.className = 'sts-hp-armor';
+    parts.armor.hidden = true;
     parts.hp.appendChild(parts.hpGhost);
     parts.hp.appendChild(parts.hpBar);
     parts.hp.appendChild(parts.hpTxt);
+    parts.hp.appendChild(parts.armor);
     parts.vitals = document.createElement('div');
     parts.vitals.className = 'sts-unit-vitals';
     parts.vitals.appendChild(parts.hp);
@@ -688,6 +710,9 @@ import { cardRuleHint } from './battle.preview.js';
     selfParts.fig.setAttribute('role', 'img');
     selfParts.fig.setAttribute('aria-label', playerName);
     setUnitHP(selfParts, sig, player.hp, player.maxHp, !sig.init);
+    selfParts.armor.hidden = !(pdef.armor > 0);
+    selfParts.armor.textContent = `甲 ${pdef.armor || 0}`;
+    selfParts.armor.setAttribute('aria-label', `护甲 ${pdef.armor || 0}`);
     // 攻击力/法伤含加成显示（2026-09-09 留言 #2：人物图标下要能看到攻/法伤的变化）
     const atkBuff = pstat.status.atkUp || 0, spBuff = pstat.status.spellUp || 0;
     const atkShow = (player.atk || 0) + atkBuff;
@@ -698,9 +723,8 @@ import { cardRuleHint } from './battle.preview.js';
     setSection(selfParts.stats, sig, 'stats',
       `<span class="sts-stat">[[icon:swords]] 攻 ${atkShow}${atkTag}</span>${spTag}${pdef.shield ? '<span class="sts-stat">[[icon:shield]] 盾 ' + pdef.shield + '</span>' : ''}${pdef.armor ? '<span class="sts-stat">[[icon:plate]] 甲 ' + pdef.armor + '</span>' : ''}${pdef.guard ? '<span class="sts-stat">格挡中</span>' : ''}`);
     setSection(selfParts.chips, sig, 'chips', curseChips(pstat.status));
-    // 状态挂件（P2）：玩家自己被冰冻/灼烧时同样点亮常驻状态光
+    // 状态挂件（P2）：玩家自己被冰冻时同样点亮常驻状态光
     selfUnit.classList.toggle('fx-frozen', (pstat.status.freeze || 0) > 0);
-    selfUnit.classList.toggle('fx-burning', (pstat.status.burn || 0) > 0);
     const pendingCard = ctx.pendingTarget && findCard(ctx.pendingTarget.uid);
     const clickCard = clickSelectedUid != null && findCard(clickSelectedUid);
     setTargetable(selfUnit, !!((pendingCard && targetSide(pendingCard.card) === 'self') || (clickCard && targetSide(clickCard.card) === 'self')), `${playerName}，自己，按 Enter 确认目标`);
@@ -834,7 +858,7 @@ import { cardRuleHint } from './battle.preview.js';
       const cardTargetsEnemy = !!((pendingCard && targetSide(pendingCard.card) === 'enemy') || (clickCard && targetSide(clickCard.card) === 'enemy'));
       // W5-06（2026-09-27 R2）：道具按目标侧过滤——自用道具不再高亮敌人（与 aim.js 同式）
       const itemTargetsEnemy = !!(ctx.pendingItem && ctx.pendingItem.card && targetSide(ctx.pendingItem.card) === 'enemy');
-      setTargetable(slot, !!(cardTargetsEnemy || itemTargetsEnemy || ctx.slamPending || ctx.dartPending) && !f.dead, `${f.name}，按 Enter 确认目标`);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
+      setTargetable(slot, !!(cardTargetsEnemy || itemTargetsEnemy || ctx.slamPending || ctx.dartPending) && isTargetableEnemy(f, idx, ctx.pendingTarget?.excludedTargetIndex), `${f.name}，按 Enter 确认目标`);   // dartPending：血毒双镖二段点选也高亮（2026-09-17 留言）
       if (!slot.classList.contains('can-target')) slot.setAttribute('aria-label', `${f.name}${f.dead ? '，已倒下' : '，敌方单位'}`);
       slot.dataset.foeId = f.id || f.name;
       slot.dataset.eidx = idx;
@@ -849,9 +873,8 @@ import { cardRuleHint } from './battle.preview.js';
       // 冰冻敌人显示专用意图图标（2026-09-09 玩法定版）：冰冻中无法行动，
       // 用冰晶图标替换原攻击/蓄力预告，解冻后恢复正常意图显示
       const frozen = !f.dead && f.status && (f.status.freeze || 0) > 0;
-      // 状态挂件（P2）：诅咒持续期间的常驻视觉——冰冻青晶边光 / 灼烧底部橙焰光
+      // 状态挂件（P2）：诅咒持续期间的常驻视觉——冰冻青晶边光
       slot.classList.toggle('fx-frozen', frozen);
-      slot.classList.toggle('fx-burning', !f.dead && f.status && (f.status.burn || 0) > 0);
       const intents = frozen
         ? [{ icon: '[[icon:crystal]]', label: '冰冻·无法行动', damage: null, kind: 'frozen' }]
         // 意图伤害渲染时现算（U12-b/2026-09-29 夜班 F2）：foe.intent 仍是回合末快照
@@ -904,4 +927,4 @@ import { cardRuleHint } from './battle.preview.js';
     });
   }
 
-export { mountHandLayer, updateHand, mountUnitLayer, updateUnits, showIntentLegend, HAND_PAGE_SIZE };
+export { mountHandLayer, updateHand, mountUnitLayer, updateUnits, showIntentLegend, HAND_PAGE_SIZE, infusionStackUid };

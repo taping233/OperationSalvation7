@@ -85,7 +85,9 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       const collectXp = card.type === '能力卡' ? 50 : 10;
       const btns = [];
       if (mat) {
-        btns.push('<button class="ov-btn ok" data-act="stashUseMat">使用 1 张 · 折入基地材料</button>');
+        const amount = B.materialAmount?.(card);
+        const gain = Number.isFinite(amount) && amount > 0 && mat.label ? `${esc(mat.label)} +${amount}` : '折入基地材料';
+        btns.push(`<button class="ov-btn ok" data-act="stashUseMat">使用 1 张 → ${gain}</button>`);
         if (n > 1) btns.push(`<button class="ov-btn" data-act="stashUseMatAll">使用整堆 · ${n} 张</button>`);
       } else if (isEgg) {
         btns.push('<button class="ov-btn ok" data-act="stashHatch">孵化 1 枚 · 消耗 50 储备币</button>');

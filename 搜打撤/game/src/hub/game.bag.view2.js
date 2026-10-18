@@ -3,6 +3,8 @@
    架构约束（tests/bag-architecture.test.js）：切片不得 import 壳，互调只经桥。 */
 import SDT from '../core/sdt-facade.js';
 import { esc, escAttr } from '../core/shared.js';
+import '../../css/bag-design-system.css';
+import { bagUseLocation } from './game.bag.rules.js';
 
 const RARITY_TINT = { '古朴': '#9fb0ba', '职业': '#5fcf94', '衍生': '#8ba0b8', '稀有': '#57a8f0', '史诗': '#b184e8', '传说': '#f0ac4e', '棱彩': '#ef86bd', '初始': '#8ba0b8' };
 const TYPE_GLYPH = {
@@ -39,12 +41,12 @@ function stackIcon(name, type, supply) {
   if (supply) return SUPPLY_ICONS[name] || TYPE_GLYPH['资源'];
   return TYPE_GLYPH[type] || TYPE_GLYPH['资源'];
 }
-export function tileHTML(t) {
+export function tileHTML(t, resourceCards = null) {
   const rc = t.supply ? '#aebfc9' : (RARITY_TINT[t.rarity] || '#9fb0ba');
   const select = t.supply ? '' : ` role="button" aria-label="查看${escAttr(t.name)}，${t.count}张${t.zone === 'pocket' ? '，已消耗' : ''}" data-act="inspectStack" data-name="${escAttr(t.name)}" data-safe="${t.safe ? 1 : 0}"${t.zone === 'pocket' ? ' data-pocket="1"' : ''}`;
   const stack = t.supply ? ` data-supply="${escAttr(t.name)}"` : ` data-stack="${escAttr(t.name)}"`;
   const spent = t.zone === 'pocket' ? ' spent' : '';
-  const state = t.zone === 'safe' ? '押运' : t.zone === 'pocket' ? (['道具', '装备'].includes(t.type) ? '火堆不可复原' : '火堆可复原') : (t.type === '道具' ? '可用' : '');
+  const state = t.zone === 'safe' ? '押运' : t.zone === 'pocket' ? (['道具', '装备'].includes(t.type) ? '火堆不可复原' : '火堆可复原') : (t.type === '道具' ? (t.useStatus?.badge || { map: '可用', battle: '战斗使用' }[bagUseLocation(t.card)] || '查看用法') : '');
   if (t.card) {
     // 真实卡面（2026-10-15 老板反馈：格子接入现行卡面样式）；卡面自带名称与费用，
     // 点击开基地同款 inventory-zoom 看卡操作台
@@ -52,14 +54,14 @@ export function tileHTML(t) {
       style="--tint:${rc}1c;--glow:${rc}30"
       title="${escAttr(t.name)}${t.count > 1 ? ` ×${t.count}` : ''} · 点击查看 · 按住拖动整理">
       ${SDT.Cards.cardHTML(t.card, '', { hideCost: false }).replace(/\s+tabindex="0"/g, '')}
-      ${state ? `<span class="bag-tstate">${state}</span>` : ''}
+      ${state ? `<span class="bag-tstate"${t.useStatus?.reason ? ` title="${escAttr(t.useStatus.reason)}"` : ''}>${esc(state)}</span>` : ''}
       ${t.count > 1 ? `<span class="bag-tct">×${t.count}</span>` : ''}
     </div>`;
   }
   // 物资（木材/口粮/钥匙等）：按名字接同款资源卡面（老板反馈「也有卡牌样式可接入」），
   // 精确同名优先，尾部匹配兜底（神秘钥匙→一把钥匙）；无候选回退图标格。
   // 物资不可开操作台（点击无动作），价值看 tooltip。
-  const lib = (window.SDT.Cards.all?.() || []).filter(c => c.type === '资源');
+  const lib = Array.isArray(resourceCards) ? resourceCards : (window.SDT.Cards.all?.() || []).filter(c => c.type === '资源');
   const supplyCard = lib.find(c => c.name === t.name)
     || lib.find(c => [...c.name].filter(ch => t.name.includes(ch)).length >= 2);
   if (supplyCard) {
@@ -67,7 +69,7 @@ export function tileHTML(t) {
       style="--tint:${rc}1c;--glow:${rc}30"
       title="${escAttr(t.name)}${t.count > 1 ? ` ×${t.count}` : ''} · ${t.tier || 'C'} 级物资 · 价值 ${(t.value || 0) * (t.count || 1)}">
       ${SDT.Cards.cardHTML(supplyCard, '', { hideCost: false })}
-      ${state ? `<span class="bag-tstate">${state}</span>` : ''}
+      ${state ? `<span class="bag-tstate"${t.useStatus?.reason ? ` title="${escAttr(t.useStatus.reason)}"` : ''}>${esc(state)}</span>` : ''}
       ${t.count > 1 ? `<span class="bag-tct">×${t.count}</span>` : ''}
     </div>`;
   }
@@ -76,30 +78,33 @@ export function tileHTML(t) {
       title="${escAttr(t.name)}${t.count > 1 ? ` ×${t.count}` : ''} · ${t.tier || 'C'} 级物资 · 价值 ${(t.value || 0) * (t.count || 1)}">
       <span class="bag-tico">${svgIcon(stackIcon(t.name, t.type, true), rc)}</span>
       <span class="bag-tnm">${esc(t.name)}</span>
-      ${state ? `<span class="bag-tstate">${state}</span>` : ''}
+      ${state ? `<span class="bag-tstate"${t.useStatus?.reason ? ` title="${escAttr(t.useStatus.reason)}"` : ''}>${esc(state)}</span>` : ''}
       ${t.count > 1 ? `<span class="bag-tct">×${t.count}</span>` : ''}
     </div>`;
 }
 
 /* 整页：m = { bagZone, bagFilter, bagSortKey, cap, baseCap, total, safeUsedN, sCap, pkN, used, coins, fragments, tiles } */
 export function pageHTML(m) {  const zoneNames = { bag: '随身背包', safe: '安全格', pocket: '消耗区' };
+  // Share only within this render so catalog edits are visible on the next visit.
+  const resourceCards = m.tiles.some(tile => !tile.card) ? (window.SDT.Cards.all?.() || []).filter(card => card.type === '资源') : [];
   const railBtn = (z, badge) => `
-      <button class="bag-rz${m.bagZone === z ? ' on' : ''}" data-act="bagZone" data-zone="${z}" title="${zoneNames[z]}" aria-label="${zoneNames[z]}" aria-pressed="${m.bagZone === z}">
+      <button class="bag-rz${m.bagZone === z ? ' on' : ''}" data-act="bagZone" data-zone="${z}" title="${zoneNames[z]}" aria-label="${zoneNames[z]}，${z === 'pocket' ? `${m.pkN} 张` : z === 'safe' ? `${m.safeUsedN}/${m.sCap} 格` : `${m.used}/${m.cap} 格`}" aria-pressed="${m.bagZone === z}">
         ${svgIcon(RAIL_ICONS[z], 'currentColor')}<span class="bag-rlabel">${z === 'bag' ? '背包' : zoneNames[z]}</span><span class="bag-bdg">${badge}</span>
       </button>`;
-  const pills = [['all', '全部'], ['move', '招式'], ['生物', '生物'], ['装备', '装备'], ['道具', '道具'], ['资源', '资源'], ['supply', '物资']]
-    .map(([f, label]) => `<button class="bag-pill${m.bagFilter === f ? ' on' : ''}" data-act="bagFilter" data-f="${f}">${label}</button>`).join('');
+  const pills = [['all', '全部'], ['move', '招式'], ['装备', '装备'], ['道具', '道具'], ['资源', '资源']]
+    .map(([f, label]) => `<button class="bag-pill${m.bagFilter === f ? ' on' : ''}" data-act="bagFilter" data-f="${f}" aria-pressed="${m.bagFilter === f}">${label}</button>`).join('');
   const ext = Math.max(0, m.cap - m.baseCap);
   const zoneUsed = m.bagZone === 'safe' ? m.safeUsedN : m.bagZone === 'pocket' ? m.pkN : m.used;
   const zoneCap = m.bagZone === 'safe' ? m.sCap : m.bagZone === 'pocket' ? null : m.cap;
   const pct = zoneCap == null ? 0 : Math.min(100, Math.round(zoneUsed / Math.max(1, zoneCap) * 100));
-  const restorable = m.tiles.filter(t => !['道具', '装备'].includes(t.type)).reduce((sum, t) => sum + t.count, 0);
+  const cardCount = m.bagZone === 'pocket' ? m.pkN : m.bagZone === 'safe' ? (m.safeCardN ?? m.tiles.reduce((n, t) => n + t.count, 0)) : (m.bagCardN ?? m.tiles.filter(t => !t.supply).reduce((n, t) => n + t.count, 0));
   const head = `
       <header class="bag-head2">
         <div class="bag-title"><span class="bag-kick">DEPOT</span><h2>${zoneNames[m.bagZone]} ${window.SDT.UI.helpBtn('bag')}</h2></div>
-        <div class="bag-capchip" title="张是卡牌数量；同名卡按堆叠上限占格；种是不同卡牌名称。珍珠盒扩展格只收资源卡。">
+        <div class="bag-capchip" aria-label="${zoneCap == null ? '消耗区卡牌数量' : '占格与卡牌张数'}">
           <span class="bag-capk">${zoneCap == null ? '卡牌' : '占格'}</span><span class="bag-capbar"><i style="width:${pct}%"></i></span>
-          <b>${zoneUsed}</b><small>${zoneCap == null ? ' 张 · 不限容量' : `/${zoneCap} 格`}${m.bagZone === 'bag' && ext ? ` · ${m.capacityText ? esc(m.capacityText) : `扩展+${ext}`}` : ''}</small>
+          <b>${zoneUsed}</b><small>${zoneCap == null ? ' 张 · 不限容量' : `/${zoneCap} 格`}${m.bagZone === 'bag' && ext ? ` · ${m.capacityText ? esc(m.capacityText) : `扩展+${ext}`}` : ''}${m.bagZone === 'bag' && ext ? ` · 盒内 ${m.pearlStoredN || 0}/${ext} 张（不占格）` : ''}</small>
+          ${zoneCap == null ? '' : `<span class="bag-count-summary">卡牌 <strong>${cardCount}</strong> 张${m.bagZone === 'bag' && m.supplyN ? ` · 散装物资 ${m.supplyN} 件` : ''}</span>`}
         </div>
         <div class="bag-cur">
           <span class="fc-chip">金币 <b>${m.coins}</b></span>
@@ -113,17 +118,13 @@ export function pageHTML(m) {  const zoneNames = { bag: '随身背包', safe: '�
         <button class="bag-icbtn" data-act="bagSortCycle" aria-label="切换背包排序" title="排序：稀有度 ⇄ 种类（当前${m.bagSortKey === 'rarity' ? '稀有度' : '种类'}）">${svgIcon(RAIL_ICONS.sort, 'currentColor')}</button>
         <button class="bag-icbtn gold" data-act="bagTidy" aria-label="按稀有度整理背包" title="一键整理（按稀有度）">${svgIcon(RAIL_ICONS.tidy, 'currentColor')}</button>
       </div>` : '';
-  const note = m.bagZone === 'safe' ? `${esc(m.petName || '随行伙伴')}押运中 · 撤离失败也运回基地 · 拖到左栏背包钮取出`
-    : m.bagZone === 'pocket' ? `火堆可复原 ${restorable} 张／不可复原 ${m.pkN - restorable} 张（道具、装备） · 能源结晶按顺序复原至多 3 张，不受火堆类型限制 · 撤离每张 1/3 概率带回消耗区`
-    : '点击查看详情 · 按住拖动整理 · 拖到左栏盾钮存入安全格';
   const board = `
       <div class="bag-board">
-        <p class="bag-znote">${note}</p><p class="bag-znote">张＝卡牌数量；格＝占用空间（同名通常每 3 张一格；初始攻击／火球每 5 张一格）；种＝不同卡名。资源卡不计入散装物资估值，带回仓库使用后才折入基地材料。</p>
         ${m.receipt ? `<p class="bag-receipt" role="status">${esc(m.receipt)}</p>` : ''}
-        <div class="bag-grid" data-zone="${m.bagZone}">${m.tiles.map(tileHTML).join('')}</div>
+        <div class="bag-grid" data-zone="${m.bagZone}">${m.tiles.map(tile => tileHTML(tile, resourceCards)).join('')}</div>
         ${m.tiles.length ? '' : `<p class="bag-empty2">${m.bagZone === 'bag' && m.bagFilter !== 'all' ? '该分类没有卡牌或物资。<button class="bag-pill" data-act="bagFilter" data-f="all">显示全部</button>' : `（${zoneNames[m.bagZone]}是空的）`}</p>`}
       </div>`;
-  return `<div class="bag-view bag-v2">
+  return `<div class="bag-view bag-v2 ui-design-system">
       <button class="archive-back" data-act="closeBag" title="关闭背包（B）" aria-label="关闭背包">
         <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"

@@ -14,13 +14,23 @@
 #overlay .card.page .shop-pg.sc-shop .shop-heading h2 { display:block; margin:0; padding:0; border:0; color:var(--shop-ink); font:650 34px/1.3 var(--font-ui); letter-spacing:.03em; text-shadow:none; }
 #overlay .shop-pg.sc-shop .shop-heading p { margin:7px 0 0; color:#c3cacb; font-size:16px; }
 #overlay .shop-pg.sc-shop .shop-kicker { display:block; margin-bottom:7px; color:#b4bec1; font:500 13px/1.4 var(--font-ui); letter-spacing:.12em; }
-#overlay .shop-pg.sc-shop .shop-resources { display:flex; align-items:center; gap:22px; padding:8px 0; background:none; }
+#overlay .shop-pg.sc-shop .shop-resources { display:flex; align-items:center; gap:22px; padding:0; background:none; cursor:default; }
 #overlay .shop-pg.sc-shop .shop-resource { display:grid; grid-template-columns:auto auto auto; align-items:baseline; gap:7px; min-width:80px; padding:0; border:0; background:none; }
 #overlay .shop-pg.sc-shop .shop-resource:first-child { border-left:0; }
 #overlay .shop-pg.sc-shop .shop-resource small { color:var(--shop-muted); font-size:15px; }
 #overlay .shop-pg.sc-shop .shop-resource b { color:var(--shop-ink); font:650 27px/1.2 var(--font-ui); font-variant-numeric:tabular-nums; }
 #overlay .shop-pg.sc-shop .shop-resource.coin b { color:var(--shop-gold); }
 #overlay .shop-pg.sc-shop .shop-resource em { align-self:end; color:var(--shop-muted); font-size:13px; font-style:normal; }
+#overlay .shop-pg.sc-shop .shop-coin-icon { --coin-size:28px; display:inline-grid; place-items:center; flex:none; width:var(--coin-size); height:var(--coin-size); vertical-align:middle; }
+/* The approved coin illustration has transparent breathing room; size the visible art, not its canvas. */
+#overlay .shop-pg.sc-shop .shop-coin-icon > .ic { display:block; width:calc(var(--coin-size) * 1.7); height:calc(var(--coin-size) * 1.7); max-width:none; margin:0; object-fit:contain; }
+/* 金币使用透明信息栏，与容量共享页面底色。 */
+#overlay .shop-pg.sc-shop .shop-resource.coin { display:flex; align-items:center; gap:10px; padding:9px 18px 9px 12px; border:0; background:none; box-shadow:none; }
+#overlay .shop-pg.sc-shop .shop-resource.coin > .shop-coin-icon { --coin-size:48px; }
+#overlay .shop-pg.sc-shop .shop-resource.coin > small { font-size:16px; white-space:nowrap; }
+#overlay .shop-pg.sc-shop .shop-resource.coin > b { color:var(--shop-gold); font-size:42px; line-height:1; }
+#overlay .shop-pg.sc-shop .shop-resource.coin > em { align-self:center; font-size:15px; }
+#overlay .shop-pg.sc-shop .shop-resources:hover .shop-resource:not(.coin) b { color:var(--shop-ink); }
 #overlay .shop-pg.shop-market .shop-layout { position:relative; flex:1; min-height:0; display:grid; grid-template-columns:minmax(230px,26fr) minmax(0,74fr); gap:40px; }
 #overlay .shop-pg.sc-shop .shop-board { position:relative; min-width:0; max-width:none; margin:0; padding:0; background:none; border:0; box-shadow:none; clip-path:none; }
 #overlay .shop-pg.shop-market .shop-board { grid-column:2; grid-row:1; min-height:0; overflow:auto; overscroll-behavior:contain; padding:4px 6px 10px; }
@@ -28,21 +38,28 @@
 /* These two properties override the fixed legacy winter sleeve, at its source boundary. */
 #overlay .shop-pg.shop-market .shop-slot { position:relative; display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; gap:0; min-width:0; min-height:0; padding:0; background:#12212666!important; border:0!important; border-radius:0; box-shadow:none; cursor:default; transition:background-color .16s; }
 #overlay .shop-pg.shop-market .shop-slot:is(:hover,:active) { transform:none; translate:none; box-shadow:none; }
-#overlay .shop-pg.shop-market .shop-slot.selected { background:#56867d42!important; box-shadow:inset 0 -2px #a5d6cc; }
+#overlay .shop-pg.shop-market .shop-slot.selected { background:#8b754b2e!important; box-shadow:inset 0 -2px var(--shop-gold); }
 #overlay .shop-pg.shop-market .shop-slot.sold { opacity:1; filter:none; }
 #overlay .shop-pg.shop-market .shop-preview { appearance:none; display:flex; flex-direction:column; align-items:center; width:100%; height:100%; min-height:0; gap:0; padding:0; border:0; border-radius:0; background:none; color:var(--shop-ink); font:inherit; cursor:pointer; }
-#overlay .shop-pg.shop-market .shop-preview:hover { background:#9bd7ca12; }
+#overlay .shop-pg.shop-market .shop-preview { transition:background-color .16s ease; }
+#overlay .shop-pg.shop-market .shop-preview:hover { background:#e0c98c12; }
 #overlay .shop-pg.shop-market .shop-item-art { display:grid; place-items:center; container-type:size; flex:1; min-height:0; width:100%; padding:0; }
 #overlay .shop-pg.shop-market .shop-item-title { box-sizing:border-box; display:block; width:100%; min-height:29px; padding:0 12px 5px; color:var(--shop-ink); background:none; font-size:17px; font-weight:500; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 body:has(#viewport) #overlay .shop-pg.shop-market .shop-preview .hs-card { flex:none; width:min(226px,calc((100cqh - 12px) * 2 / 3)); max-width:100%; margin:0; font-size:13px; pointer-events:none; }
 #overlay .shop-pg.shop-market .shop-preview .hs-card:is(.rv4,.rv7,.rv-prism) { margin:0; }
-#overlay .shop-pg.shop-market .shop-offer { display:flex; align-items:center; justify-content:space-between; box-sizing:border-box; width:100%; min-height:43px; margin:0; padding:6px 12px 12px; gap:6px; background:none; border:0; }
-#overlay .shop-pg.shop-market .shop-owned { color:#a8bbbf; font-size:12px; line-height:1.4; text-align:left; }
-#overlay .shop-pg.shop-market .shop-v14-price { margin-left:auto; color:#aaddcf; font-size:24px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; }
-#overlay .shop-pg.shop-market .shop-v14-price .ic { width:18px; height:18px; }
-#overlay .shop-pg.shop-market .shop-slot.unaffordable .shop-v14-price { color:#dc9d8e; }
+#overlay .shop-pg.shop-market .shop-offer { display:flex; align-items:center; justify-content:space-between; box-sizing:border-box; width:100%; min-height:66px; margin:0; padding:10px 12px; gap:10px; background:#09131873; border-top:1px solid #b5c8c720; }
+#overlay .shop-pg.shop-market .shop-offer-copy { display:grid; min-width:0; gap:4px; text-align:left; }
+#overlay .shop-pg.shop-market .shop-stock-state { color:#c6d1ce; font-size:17px; line-height:1.4; }
+#overlay .shop-pg.shop-market .shop-slot[data-availability="ready"] .shop-stock-state { color:#e0c98c; }
+#overlay .shop-pg.shop-market .shop-slot:is([data-availability="short"],[data-availability="full"]) .shop-stock-state { color:#edb7a4; }
+#overlay .shop-pg.shop-market .shop-owned { color:#a8bbbf; font-size:14px; line-height:1.4; text-align:left; }
+#overlay .shop-pg.shop-market .shop-v14-price { display:inline-flex; flex:none; align-items:center; gap:3px; margin-left:auto; color:var(--shop-gold); font-size:30px; font-weight:650; font-variant-numeric:tabular-nums; white-space:nowrap; }
+#overlay .shop-pg.shop-market .shop-v14-price .shop-coin-icon { --coin-size:36px; }
+#overlay .shop-pg.sc-shop .shop-money-unit { margin-left:1px; color:var(--shop-muted); font-size:14px; font-weight:400; }
+#overlay .shop-pg.shop-market .shop-slot.unaffordable .shop-v14-price { color:#dfbd8e; }
 #overlay .shop-pg.shop-market .shop-slot.sold .shop-item-art { opacity:.38; filter:grayscale(.75); }
-#overlay .shop-pg.shop-market .shop-slot.sold .shop-v14-price { color:#a4b8ad; font-size:16px; }
+#overlay .shop-pg.shop-market .shop-slot.sold .shop-v14-price { color:#99a5a3; opacity:.65; }
+#overlay .shop-pg.shop-market .shop-slot.sold .shop-money-value { text-decoration:line-through; text-decoration-thickness:1px; }
 #overlay .shop-pg.shop-market .shop-slot.sold .shop-item-title { color:#c1c8c9; }
 #overlay .shop-pg.sc-shop .shop-card-mystery { box-sizing:border-box; display:flex; flex:none; flex-direction:column; align-items:center; justify-content:center; gap:10px; width:min(226px,calc((100cqh - 12px) * 2 / 3)); max-width:100%; aspect-ratio:272/406; min-height:0; height:auto; margin:0; border:1px solid #94b9b55c; border-radius:0; background:#13232be8; color:#c9e0da; font:400 42px/1 var(--font-ui); text-shadow:none; }
 #overlay .shop-pg.sc-shop .shop-card-mystery .ic { width:24px; height:24px; color:var(--shop-muted); }
@@ -69,11 +86,20 @@ body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { wi
 #overlay .shop-pg.shop-market .shop-detail-rules summary { color:#b9d3d1; font-size:17px; cursor:pointer; }
 #overlay .shop-pg.shop-market .shop-detail-rules p { margin:14px 0 0; color:#d1dfde; font-size:19px; line-height:1.65; white-space:pre-line; }
 #overlay .shop-pg.shop-market .shop-detail-actions { position:relative; flex:none; display:grid; gap:9px; width:350px; padding:0; border:0; background:none; }
+#overlay .shop-pg.shop-market .shop-detail-account { display:flex; justify-content:space-between; gap:18px; padding:11px 0; border-block:1px solid #b5c8c729; }
+#overlay .shop-pg.shop-market .shop-detail-account > span { display:grid; gap:4px; color:var(--shop-muted); font-size:13px; }
+#overlay .shop-pg.shop-market .shop-detail-account strong { display:inline-flex; align-items:center; gap:3px; color:var(--shop-gold); font-size:22px; font-weight:600; font-variant-numeric:tabular-nums; }
 #overlay .shop-pg.shop-market .shop-detail-facts { display:flex; flex-wrap:wrap; align-items:center; gap:6px 14px; color:#b9c3c6; font-size:15px; line-height:1.45; }
 #overlay .shop-pg.shop-market .shop-detail-facts strong { font-weight:500; }
 #overlay .shop-pg.shop-market .shop-detail-facts :is(.tone-ready,.tone-complete) { color:#b4d0bd; }
 #overlay .shop-pg.shop-market .shop-detail-facts .tone-limited { color:#e0aa98; }
-#overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done) { width:100%; min-height:54px; padding:12px; border:0; border-radius:0; background:#a3d4c8; color:#13282b; font:650 20px/1.4 var(--font-ui); cursor:pointer; }
+#overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done) { width:100%; min-height:56px; padding:12px 18px; border:1px solid #f2dfac80; border-radius:0; background:#e0c98c; color:#20251f; font:650 20px/1.4 var(--font-ui); cursor:pointer; }
+#overlay .shop-pg.shop-market .shop-detail-buy { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+#overlay .shop-pg.shop-market .shop-buy-price { display:inline-flex; align-items:center; white-space:nowrap; font-variant-numeric:tabular-nums; }
+#overlay .shop-pg.shop-market .shop-buy-price .shop-coin-icon { --coin-size:30px; margin:0 4px; }
+#overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done):hover:not(:disabled) { background:#eddaa9; border-color:#f2dfac; }
+#overlay .shop-pg.shop-market .shop-detail-done { background:#253732; border-color:#789a8d66; color:#c9ded4; }
+#overlay .shop-pg.shop-market .shop-detail-done:hover:not(:disabled) { background:#344b43; }
 #overlay .shop-pg.shop-market .shop-detail-buy.short:disabled { border-color:#b19a8055; background:#3a3330; color:#ddb5a5; opacity:1; cursor:not-allowed; }
 #overlay .shop-pg.shop-market .shop-detail-bag { width:100%; min-height:46px; border:1px solid #a6afb155; border-radius:0; background:#30383b; color:#e1e6e6; font:500 17px/1.4 var(--font-ui); cursor:pointer; }
 #overlay .shop-pg.shop-market .shop-merchant { grid-column:1; grid-row:1; display:flex; flex-direction:column; justify-content:flex-end; min-width:0; min-height:0; padding:0 20px 0 0; gap:26px; }
@@ -83,6 +109,8 @@ body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { wi
 #overlay .shop-pg.shop-market .shop-services { display:grid; gap:10px; }
 #overlay .shop-pg.shop-market .shop-sellpost { position:relative; grid-column:auto; justify-self:stretch; align-self:stretch; display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:12px; min-width:0; min-height:68px; margin:0; padding:12px 4px; border:0; border-top:1px solid #b6cfca66; border-radius:0; background:#16282b5e; color:var(--shop-ink); text-align:left; box-shadow:none; cursor:pointer; }
 #overlay .shop-pg.shop-market .sellpost-copy { display:grid; gap:6px; }
+#overlay .shop-pg.shop-market .shop-sellpost > .shop-coin-icon { --coin-size:36px; }
+#overlay .shop-pg.shop-market .shop-sellpost .sellpost-copy { margin-right:auto; }
 #overlay .shop-pg.shop-market .sellpost-name { color:var(--shop-ink); font:600 21px/1.3 var(--font-ui); letter-spacing:0; text-shadow:none; }
 #overlay .shop-pg.shop-market .sellpost-hint { color:var(--shop-muted); font:400 14px/1.4 var(--font-ui); text-shadow:none; }
 #overlay .shop-pg.shop-market .sellpost-enter { color:#cbd2d3; font-size:15px; white-space:nowrap; }
@@ -105,6 +133,8 @@ body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { wi
 #overlay .shop-pg.shop-exchange .sell-ledger-total { display:grid; grid-template-columns:1fr auto; align-items:end; gap:7px; padding:16px 0; border-block:1px solid var(--shop-line); }
 #overlay .shop-pg.shop-exchange .sell-ledger-total small { grid-column:1/-1; color:var(--shop-muted); font-size:15px; }
 #overlay .shop-pg.shop-exchange .sell-ledger-total b { color:var(--shop-gold); font-size:36px; font-variant-numeric:tabular-nums; }
+#overlay .shop-pg.shop-exchange .sell-ledger-total b { display:flex; align-items:center; gap:8px; }
+#overlay .shop-pg.shop-exchange .sell-ledger-total .shop-coin-icon { --coin-size:36px; }
 #overlay .shop-pg.shop-exchange .sell-ledger-total > span { color:var(--shop-muted); font-size:15px; }
 #overlay .shop-pg.shop-exchange .sell-ledger dl { display:grid; gap:14px; margin:24px 0; }
 #overlay .shop-pg.shop-exchange .sell-ledger dl > div { display:flex; justify-content:space-between; gap:12px; font-size:15px; }
@@ -122,7 +152,7 @@ body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { wi
 #overlay .shop-pg.shop-exchange .sell-item { display:flex; flex-direction:column; align-items:center; gap:16px; min-width:0; padding:26px 16px 16px; border:0; background:#252d30cc; }
 #overlay .shop-pg.shop-exchange .sell-item-offer { display:flex; justify-content:space-between; align-items:baseline; gap:8px; width:100%; margin-top:auto; padding-top:14px; border-top:1px solid var(--shop-line); }
 #overlay .shop-pg.shop-exchange .sell-item-offer span { color:var(--shop-muted); font-size:14px; }
-#overlay .shop-pg.shop-exchange .sell-item-offer b { color:var(--shop-gold); font-size:22px; }
+#overlay .shop-pg.shop-exchange .sell-item-offer b { display:inline-flex; align-items:center; gap:5px; color:var(--shop-gold); font-size:22px; white-space:nowrap; }
 #overlay .shop-pg.shop-exchange .sell-item .mini-btn { width:100%; min-height:48px; border:1px solid var(--shop-gold); border-radius:0; background:var(--shop-gold); color:#1c2124; font:600 17px/1.4 var(--font-ui); }
 #overlay .shop-pg.shop-exchange .shop-sell-empty { min-height:190px; display:grid; place-items:center; margin:0; padding:24px; color:var(--shop-muted); font-size:17px; text-align:center; line-height:1.7; }
 body.reduce-motion #overlay .shop-pg.sc-shop * { animation:none; transition:none; }

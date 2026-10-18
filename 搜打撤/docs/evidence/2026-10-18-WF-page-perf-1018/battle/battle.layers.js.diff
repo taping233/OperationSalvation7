@@ -1,0 +1,97 @@
+warning: in the working copy of 'D:/素材/代号柒/搜打撤/docs/evidence/2026-10-18-WF-page-perf-1018/battle/baseline/battle.layers.js.txt', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '搜打撤/game/src/battle/view/battle.layers.js', CRLF will be replaced by LF the next time Git touches it
+diff --git a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-18-WF-page-perf-1018/battle/baseline/battle.layers.js.txt b/game/src/battle/view/battle.layers.js
+index f4db9026..3b4cc322 100644
+--- a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-18-WF-page-perf-1018/battle/baseline/battle.layers.js.txt
++++ b/game/src/battle/view/battle.layers.js
+@@ -194,15 +194,24 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
+   function handSlotKey(g) {
+     return (g.self ? 'self|' : '') + g.key;
+   }
++  function setHandAttribute(node, name, value) {
++    if (value === null) {
++      if (node.hasAttribute(name)) node.removeAttribute(name);
++    } else if (node.getAttribute(name) !== String(value)) node.setAttribute(name, String(value));
++  }
++  function setHandVariable(slot, name, value) {
++    const text = String(value);
++    if (slot.style.getPropertyValue(name) !== text) slot.style.setProperty(name, text);
++  }
+   function setSlotVars(slot, L) {
+-    slot.style.setProperty('--fx', L.x + 'px');
+-    slot.style.setProperty('--fy', L.y + 'px');
+-    slot.style.setProperty('--frot', L.rot + 'deg');
+-    slot.style.setProperty('--counter-rot', -L.rot + 'deg');
+-    slot.style.setProperty('--fs', L.scale);
+-    slot.style.setProperty('--hand-index', String(L.index ?? 0));
+-    slot.style.setProperty('--hand-rest', (L.rest ?? 64) + 'px');
+-    slot.style.setProperty('--hand-visible-width', (L.visibleWidth ?? 204) + 'px');
++    setHandVariable(slot, '--fx', L.x + 'px');
++    setHandVariable(slot, '--fy', L.y + 'px');
++    setHandVariable(slot, '--frot', L.rot + 'deg');
++    setHandVariable(slot, '--counter-rot', -L.rot + 'deg');
++    setHandVariable(slot, '--fs', L.scale);
++    setHandVariable(slot, '--hand-index', L.index ?? 0);
++    setHandVariable(slot, '--hand-rest', (L.rest ?? 64) + 'px');
++    setHandVariable(slot, '--hand-visible-width', (L.visibleWidth ?? 204) + 'px');
+   }
+   // 只改变手牌视图位置；分组、顺序、出牌 UID 与差分槽位保持原语义。
+   function handDisplayLayout(index, count, width) {
+@@ -414,27 +423,26 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
+       rec.group = g;   // 实时分组供 click / 键盘按当前快照逐张选材。
+       setSlotVars(rec.slot, L);
+       // 紧凑态恒挂；固定选区控制阅读类，键盘焦点保留 CSS 阅读态。
+-      rec.card.className = 'bt-card compact' + st.cls
++      setHandAttribute(rec.card, 'class', 'bt-card compact' + st.cls
+         + (st.side === 'enemy' || st.side === 'self' ? ' need-target' : '')
+         + (st.side === 'any' ? ' free-drop' : '')
+-        + (clickSelectedUid === st.uid ? ' click-selected' : '');
+-      rec.slot.dataset.uid = st.uid;
+-      rec.slot.dataset.act = 'btPlay';
+-      rec.card.dataset.uid = st.uid;
+-      rec.card.dataset.handIndex = String((g.displayIndex ?? i) + 1);
+-      rec.card.dataset.act = 'btPlay';
+-      rec.card.dataset.aim = st.side ? '1' : '';
+-      rec.card.dataset.side = st.side || '';
+-      rec.card.dataset.handState = st.handState;
+-      if (st.blockedReason) rec.card.dataset.blockReason = st.blockedReason;
+-      else rec.card.removeAttribute('data-block-reason');
++        + (clickSelectedUid === st.uid ? ' click-selected' : ''));
++      setHandAttribute(rec.slot, 'data-uid', st.uid);
++      setHandAttribute(rec.slot, 'data-act', 'btPlay');
++      setHandAttribute(rec.card, 'data-uid', st.uid);
++      setHandAttribute(rec.card, 'data-hand-index', (g.displayIndex ?? i) + 1);
++      setHandAttribute(rec.card, 'data-act', 'btPlay');
++      setHandAttribute(rec.card, 'data-aim', st.side ? '1' : '');
++      setHandAttribute(rec.card, 'data-side', st.side || '');
++      setHandAttribute(rec.card, 'data-hand-state', st.handState);
++      setHandAttribute(rec.card, 'data-block-reason', st.blockedReason || null);
+       rec.__tip = st.tip;
+       rec.__name = `${g.card.name} · ${effCostOf(g.card, st.uid)} 费`;
+-      rec.card.setAttribute('role', 'group');
+-      rec.card.tabIndex = -1;
+-      rec.card.setAttribute('aria-label', `${rec.__name}。${st.ruleHint ? st.ruleHint + ' ' : ''}${st.tip || '按回车或空格使用'}`);
++      setHandAttribute(rec.card, 'role', 'group');
++      setHandAttribute(rec.card, 'tabindex', -1);
++      setHandAttribute(rec.card, 'aria-label', `${rec.__name}。${st.ruleHint ? st.ruleHint + ' ' : ''}${st.tip || '按回车或空格使用'}`);
+       // 操作提示由局面说明和可访问名称提供，原生 title 不再挂。
+-      rec.card.removeAttribute('title');
++      setHandAttribute(rec.card, 'title', null);
+       // 卡面外的角标（目标侧/费用变化/注能/诅咒）带 [[icon:]] 宏——写入时统一渲染，否则宏原文直接上屏
+       // One reading hint: a current block takes priority over supplementary rules.
+       const readingHint = st.blockedReason ? `无法打出：${st.blockedReason}` : st.ruleHint;
+@@ -453,10 +461,10 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
+       }
+       const face = rec.card.querySelector('.hs-card');
+       if (face) {
+-        face.setAttribute('role', 'button'); face.tabIndex = 0;
+-        face.setAttribute('aria-disabled', st.blockedReason ? 'true' : 'false');
+-        face.setAttribute('aria-label', `${rec.__name}。${st.ruleHint} ${st.tip}`);
+-        face.setAttribute('aria-pressed', st.infusingNow
++        setHandAttribute(face, 'role', 'button'); setHandAttribute(face, 'tabindex', 0);
++        setHandAttribute(face, 'aria-disabled', st.blockedReason ? 'true' : 'false');
++        setHandAttribute(face, 'aria-label', `${rec.__name}。${st.ruleHint} ${st.tip}`);
++        setHandAttribute(face, 'aria-pressed', st.infusingNow
+           ? st.pickedN === g.uids.length ? 'true' : st.pickedN ? 'mixed' : 'false'
+           : clickSelectedUid === st.uid ? 'true' : 'false');
+       }

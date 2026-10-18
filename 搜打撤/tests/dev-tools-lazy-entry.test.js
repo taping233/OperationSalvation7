@@ -79,9 +79,11 @@ function startupClosure() {
 }
 
 describe('开发工具真正按需加载', () => {
-  it('四个 HTML roots 保留同步 Agent 门面，却没有 dev runtime/console eager edge', () => {
+  it('五个精确 HTML roots 保留同步 Agent 门面，却没有 dev runtime/console eager edge', () => {
     const { roots, seen } = startupClosure();
-    expect(roots).toHaveLength(4);
+    expect(roots.map(file => path.relative(path.resolve('game'), file).split(path.sep).join('/'))).toEqual([
+      'src/ui/title-credits.js', 'src/ui/title-wallpaper.js', 'src/main.js', 'src/ui/startup-transition.js', 'src/ui/cover-context.js',
+    ]);
     for (const file of ['run/game.run.dev.js', 'agent/agent.console.js', 'agent/agent.scenes.runtime.js']) {
       expect(seen.has(path.resolve('game/src', file)), file).toBe(false);
     }

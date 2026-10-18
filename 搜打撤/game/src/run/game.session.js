@@ -1,3 +1,4 @@
+import { traceRestoreStep } from '../core/flight-recorder.local.js';
 /* ============================================================
  * game.session.js —— 搜打撤会话生命周期 + 兼容导出面（2026-09-25 拆分后）
  *
@@ -284,6 +285,10 @@ function preflightRunMap(slot) {
 }
 
 function loadGame(slot) {
+  return import.meta.env.DEV ? traceRestoreStep('load-game', () => loadGameImpl(slot)) : loadGameImpl(slot);
+}
+
+function loadGameImpl(slot) {
   const persistence = { status: 'not_attempted', attempts: [] };
   const previous = loadPersistence;
   loadPersistence = persistence;

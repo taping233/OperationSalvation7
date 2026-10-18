@@ -86,3 +86,11 @@
 自动检查入口见[质量门](quality-gates.md)；模块改进的过程与验收从[历史索引](archive/README.md)按任务查阅。
 `scripts/architecture-graph.mjs` 由契约测试和 `tests/architecture-boundaries.test.js` 共用。检查包含缺失 JS 模块、不透明动态 import、运行时导入范围与独立领域模块的浏览器全局访问；判据采用真实域路径的精确集合，并以 `deadGuardKeys` 检查失效键。`hub/game.cardslib.page.js` 只有一个允许的入边：轻门面 `hub/game.cardslib.js` 的字面量动态 import；静态导入、重导出或其他模块的动态导入都会失败，防止照相馆页面被重新打入首屏。`RUNTIME_SURFACE` 覆盖兼容入口及五个运行态子模块；`RUNTIME_OWNERS` 包含 core、engine、enemy-phase、selection-flow、equipment、bag、lifecycle、exec-play，运行态模块也可互相导入。战斗视图通过 core 的快照和命令访问领域，不能直接读取运行态。这是源码依赖约束，不代表已消除兼容门面上的全部可变状态。
 普通测试中的游戏全书校验只在内存生成内容；`npm run docs:compendium` 才会写入 `docs/game-compendium.md`，避免回归测试覆盖工作区文档。
+
+
+## 背包与战斗呈现边界
+
+- `core/card-capacity.js` 提供按类型的叠放上限与顺序收卡预估；背包、安全格转移、奖励整理和出发预览传入完整卡牌，避免装备退化为普通卡的叠放上限。散装物资保留聚合存储，背包渲染按每3件分格。
+- `game.bag.rules.js` 将传说池的 `discover` 交由地图消费器结算，通行证C在背包可用；战斗侧仍沿发现候选流程。背包主层不渲染解释段落，帮助入口与实际操作回执保留。
+- `battle.hand.js` 先按初始攻击、招式、其他、装备、注能主卡排序；同类保留UID槽位。`battle.layers.js` 将诅咒之刃的当前诅咒写入规则阅读区，玩家护甲徽记附着生命条。
+- `expedition.view.js` 在 `travel` 模式不改侧栏inset或重新取景；移动结束后侧栏变化以镜头补间衔接。地图首脑入口走正常 `prepareDeckSelection`，显式开发自动入口与龙巢保留原行为。

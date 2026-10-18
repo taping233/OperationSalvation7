@@ -102,10 +102,29 @@ export function planReviewedRuntimeAssetExclusions(sources, catalogs, review = R
   const warnings = [];
   if (!sources) return { excludedAssets, warnings: ['Runtime source scan unavailable; retaining reviewed assets.'] };
   const records = new Map(sources.map(record => [posix(record.path), record.code]));
+  // One normalized digest per file per scan, shared by selectors and explicit
+  // indirect URL inputs. The cache never survives a plan invocation.
+  const digestCache = new Map();
+  const matchesFingerprint = (filename, expected) => {
+    const code = records.get(filename);
+    if (code === undefined || typeof expected !== 'string') return false;
+    if (!digestCache.has(filename)) digestCache.set(filename, sha256(code));
+    return digestCache.get(filename) === expected;
+  };
+  for (const [consumer, dependencies] of Object.entries(review.opaqueConsumerDependencies || {})) {
+    if (!matchesFingerprint(consumer, review.opaqueConsumers[consumer])) {
+      warnings.push(`Changed/missing indirect asset consumer ${consumer}; retaining reviewed assets.`);
+    }
+    for (const [filename, expected] of Object.entries(dependencies)) {
+      if (!matchesFingerprint(filename, expected)) {
+        warnings.push(`Changed/missing asset path dependency ${filename} of ${consumer}; retaining reviewed assets.`);
+      }
+    }
+  }
   try {
     for (const [filename, code] of records) {
       if (hasOpaqueRuntimeSourcePaths(filename, code)
-        && review.opaqueConsumers[filename] !== sha256(code)) {
+        && !matchesFingerprint(filename, review.opaqueConsumers[filename])) {
         warnings.push(`Unreviewed dynamic asset consumer ${filename}; retaining reviewed assets.`);
       }
     }
@@ -116,14 +135,12 @@ export function planReviewedRuntimeAssetExclusions(sources, catalogs, review = R
 
   const unverified = new Set();
   for (const [category, fingerprints] of Object.entries(review.consumerFingerprints)) {
-    if (Object.entries(fingerprints).some(([filename, expected]) => {
-      const code = records.get(filename);
-      return code === undefined || sha256(code) !== expected;
-    })) {
+    if (Object.entries(fingerprints).some(([filename, expected]) => !matchesFingerprint(filename, expected))) {
       unverified.add(category);
       warnings.push(`Changed/missing ${category} selector; retaining its reviewed assets.`);
     }
   }
+  const sourceText = [...records.values()];
   for (const candidate of review.candidates) {
     if (unverified.has(candidate.category)) continue;
     if (candidate.category === 'frames') {
@@ -133,7 +150,7 @@ export function planReviewedRuntimeAssetExclusions(sources, catalogs, review = R
       if (required.has(relative)) continue;
     }
     const needle = pathNeedle(candidate);
-    if ([...records.values()].some(code => code.includes(candidate.path) || code.includes(needle))) continue;
+    if (sourceText.some(code => code.includes(candidate.path) || code.includes(needle))) continue;
     excludedAssets.add(candidate.path);
   }
   return { excludedAssets, warnings };

@@ -1,9 +1,8 @@
-/* 覆盖缺口补测 U8（find-C-0100 #1）：battle.target-session 出牌瞄准会话状态机。
- * 测公共契约：会话开启、hover 转换回调、select/selectDirect 确认、cancel、
- * 战局失效自取消、settled 一次性。hitAt 的 elementFromPoint 拾取半边依赖真实布局
- * （jsdom 无布局），不在可测面，仅测其不碰 DOM 的前置守卫分支。零生产改动。 */
+/* battle.target-session 公共契约回归：会话开启、hover 转换、选择/取消、
+ * 战局失效及一次性结算；敌人实例排除覆盖 select/selectDirect/hitAt。
+ * hitAt 用 elementFromPoint 桩验证目标筛选，不代表真实布局或原生坐标命中。 */
 import { describe, expect, it } from 'vitest';
-import { createTargetSession } from '../game/src/battle/core/battle.target-session.js';
+import { createTargetSession, isTargetableEnemy } from '../game/src/battle/core/battle.target-session.js';
 
 // hover 目标桩：源码按 next?.el 引用判重，只需身份可比
 function hoverEl(tag) { return { kind: 'enemy', idx: 0, el: { id: tag } }; }
@@ -192,5 +191,57 @@ describe('target-session hitAt 的无 DOM 前置守卫', () => {
     const { session } = makeSession({ side: null });
     expect(session.hitAt(10, 10)).toBe(null);
     expect(session.settled, '守卫短路不应终结会话').toBe(false);
+  });
+});
+
+
+describe('target-session excludes combat instances rather than species IDs', () => {
+  const foes = () => [{ id: 'grass_el', dead: false }, { id: 'grass_el', dead: false }, { id: 'grass_el', dead: true }];
+  function pendingSession() {
+    return createTargetSession({ side:'enemy', snapshot:{ foes:foes(), pendingTarget:{ excludedTargetIndex:0 } }, isBattleCurrent:() => true });
+  }
+  it('shared highlight predicate allows the other same-species instance only', () => {
+    const list = foes();
+    expect(list.map((foe, index) => isTargetableEnemy(foe, index, 0))).toEqual([false, true, false]);
+    for (const index of [-1, 0.5, NaN, undefined, '1']) expect(isTargetableEnemy(list[1], index, 0)).toBe(false);
+    expect(isTargetableEnemy(undefined, 99, 0)).toBe(false);
+    expect(isTargetableEnemy(list[0], 0, -1)).toBe(true);
+    expect(isTargetableEnemy({ id:null, dead:false }, 0, 0)).toBe(false);
+    expect(isTargetableEnemy({ id:null, dead:false }, 1, 0)).toBe(true);
+  });
+  it('selectDirect rejects the first/dead/out-of-range instances without settling', async () => {
+    const session = pendingSession();
+    for (const index of [0, 2, -1, 99, 0.5, NaN, '1']) {
+      expect(session.selectDirect('enemy', index)).toBe(false);
+      expect(session.settled).toBe(false);
+    }
+    expect(session.selectDirect('enemy', 1)).toBe(true);
+    await expect(session.promise).resolves.toEqual({ status:'selected', target:{ kind:'enemy', idx:1 } });
+  });
+  it('select uses the same instance filter', () => {
+    const session = pendingSession();
+    expect(session.select({ kind:'enemy', idx:0 })).toBe(false);
+    expect(session.select({ kind:'enemy', idx:2 })).toBe(false);
+    expect(session.select({ kind:'enemy', idx:1 })).toBe(true);
+  });
+  it('hitAt uses the same instance filter before native event dispatch', () => {
+    const session = pendingSession();
+    const original = Object.getOwnPropertyDescriptor(document, 'elementFromPoint');
+    const slot = document.createElement('div');
+    slot.className = 'bt-foe';
+    Object.defineProperty(document, 'elementFromPoint', { configurable:true, value:() => slot });
+    try {
+      for (const index of [0, 2, -1, 99]) {
+        slot.dataset.eidx = String(index);
+        expect(session.hitAt(10, 10)).toBeNull();
+      }
+      slot.dataset.eidx = '1';
+      expect(session.hitAt(10, 10)).toEqual({ kind:'enemy', idx:1, el:slot });
+      session.cancel();
+      expect(session.hitAt(10, 10)).toBeNull();
+    } finally {
+      if (original) Object.defineProperty(document, 'elementFromPoint', original);
+      else delete document.elementFromPoint;
+    }
   });
 });

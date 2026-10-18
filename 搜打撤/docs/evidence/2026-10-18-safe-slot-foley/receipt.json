@@ -1,0 +1,26 @@
+{
+  "installed_utc": "2026-10-18T00:46:00.894257+00:00",
+  "listening_verified": false,
+  "files": [
+    {
+      "path": "sfx/real-foley/lockbox-turn-06.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 123516,
+      "sha256": "47fba948e9eab77cad4480ce88a75d842ae1fe7e3046fc13446178c4bff5d197",
+      "source": "https://opengameart.org/content/fantasy-accessory-sfx-library",
+      "original_path": "accessory/sfx/keyhole-lockbox-turn-06.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only"
+    },
+    {
+      "path": "sfx/real-foley/lockbox-unlock-01.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 131252,
+      "sha256": "4a8307c941dc56d984fc460b4730b70bf4833252c29922f08457b96d1ce10df0",
+      "source": "https://opengameart.org/content/fantasy-accessory-sfx-library",
+      "original_path": "accessory/sfx/keyhole-lockbox-unlock-01.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only"
+    }
+  ]
+}

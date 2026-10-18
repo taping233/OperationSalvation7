@@ -317,7 +317,7 @@ describe('A3 迁移第一批：真实战斗结算', () => {
     BattleSession.commands.playCard('nuke-1', 0);
     const after = await drain();
     const status = after.foes[0].status;
-    const applied = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn']
+    const applied = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban']
       .filter(k => (status[k] || 0) > 0);
     expect(applied.length, `随机 3 种诅咒，实际 ${JSON.stringify(applied)}`).toBe(3);
     endBattleSafe(game);

@@ -1,0 +1,5 @@
+fix(vite): integrate gameplay updates and performance improvements
+
+Cache photo catalog preparation and wait for shared page transitions to be ready. Integrate battle input/HUD, node restoration, reward overview, bag/shop lifecycle and completed wallpaper changes. Remove the approved chibi implementation while retaining its assets.
+
+Repair fast drag release, reward failure persistence and preheat timer ownership; align integration fixtures with the current interaction contracts and stop tests overwriting historical evidence. Full frozen-index gate and native IAB drag/reward checks passed.

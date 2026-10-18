@@ -2,7 +2,7 @@
  * 铁律：顺序即语义——本分节在壳 effect-steps.js 的 concat 顺序即旧 if 链物理顺序，勿重排。
  * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
 export function auditSteps(s) {
-  const {combat, getMode, log, drawCards, grantStarterAttack, queueDiscover, queueHandSelect, getHandSize, releaseHandMatches, getPriceOfLastDrawn, dealAoeFixed, replaceShaInDeck, summonAlly, setExtraTurn, queuePouchCast, registerGrowthCard, esc, parsePoolNoun} = s;
+  const {combat, getMode, log, drawCards, grantStarterAttack, queueDiscover, queueHandSelect, getHandSize, castStarterAttack, getPriceOfLastDrawn, dealAoeFixed, replaceShaInDeck, summonAlly, setExtraTurn, queuePouchCast, registerGrowthCard, esc, parsePoolNoun} = s;
   return [
       /* ============ 2026-09-09 机制审计补实装（Q1-Q8 老板定向批次） ============ */
       {
@@ -48,7 +48,7 @@ export function auditSteps(s) {
         run: (ctx) => {
           const price = typeof getPriceOfLastDrawn === 'function' ? getPriceOfLastDrawn() : 0;
           if (price > 0 && typeof dealAoeFixed === 'function') {
-            dealAoeFixed(price);
+            dealAoeFixed(price, ctx.card);
             log(`[[icon:play]] <b>${esc(ctx.card.name)}</b>：对全体敌人造成 <b>${price}</b> 点固定伤害（按抽到卡牌的价格）`, 'sys');
           } else {
             log(`[[icon:question]] 没有抽到可折算价格的卡牌（占位）`, 'dim');
@@ -139,13 +139,13 @@ export function auditSteps(s) {
       },
       {
         id: 'release.oneSha', gate: 'fresh', label: '立即释放一次「杀」（百炼青虹剑，消耗该牌时触发）',
-        when: (ctx) => (!/该牌时/.test(ctx.desc) && typeof releaseHandMatches === 'function')
-          ? ctx.desc.match(/立即释放(?:一次|1\s*次)?[‘'“]?杀/) : null,
+        when: (ctx) => (!/该牌时/.test(ctx.desc) && typeof castStarterAttack === 'function')
+          ? ctx.desc.match(/^立即(?:释放|施放)(?:一次|1\s*次)?[‘’'“”「」]?(?:初始攻击|杀)[‘’'“”「」]?[。！!]?$/) : null,
         run: (ctx) => {
-          const released = releaseHandMatches('杀', 0, 1);
-          log(released
-            ? `[[icon:swords]] <b>${esc(ctx.card.name)}</b>：立即释放了 1 次「初始攻击」`
-            : `[[icon:cross]] 手牌中没有「杀」可释放`, released ? 'ok' : 'dim');
+          const queued = castStarterAttack(ctx.curseTarget);
+          log(queued
+            ? `[[icon:swords]] <b>${esc(ctx.card.name)}</b>：排队释放 1 次「初始攻击」`
+            : `[[icon:cross]] <b>${esc(ctx.card.name)}</b>：没有可施放初始攻击的目标`, queued ? 'sys' : 'dim');
           ctx.did = true;
         },
       },

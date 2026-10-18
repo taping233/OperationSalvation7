@@ -1,8 +1,7 @@
-/* 由 effect-steps.js 拆出（2026-09-22 六文件重构批1）。原第 825-1129 行，逐字搬迁。
- * 铁律：顺序即语义——本分节在壳 effect-steps.js 的 concat 顺序即旧 if 链物理顺序，勿重排。
- * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
+import { foeFightTargets } from './battle.foe-fight.js';
+// Step order is semantic; shared combat ports are injected by the pipeline.
 export function killsSteps(s) {
-  const {combat, getAlive, log, heal, pushFloat, queueDiscover, randomDiscoverCard, addTempCard, allCards, random01, getPlayerHp, getHandSize, getHandCards, burstPoison, deckDraw, fleeBattle, getPlayerCaster, damagePlayer, setNextSpellTwice, randomAcquired, esc, hitFoe, POOL_NUM_MAP, parsePoolNoun, isRandomObtainable} = s;
+  const {combat, getAlive, log, heal, pushFloat, queueDiscover, randomDiscoverCard, addTempCard, allCards, random01, getPlayerHp, getHandSize, getHandCards, burstPoison, deckDraw, getMode, grantStarterAttack, fleeBattle, getPlayerCaster, damagePlayer, setNextSpellTwice, randomAcquired, esc, hitFoe, POOL_NUM_MAP, parsePoolNoun, isRandomObtainable} = s;
   const paced = steps => Object.assign((...args) => {
     const iterator = steps(...args);
     let next = iterator.next();
@@ -49,14 +48,15 @@ export function killsSteps(s) {
         },
       },
       {
-        id: 'dmg.taunt', gate: 'fresh', label: '扰敌：迫使两名敌人相互攻击（点选目标为锚）',
+        id: 'dmg.taunt', gate: 'fresh', label: '扰敌：先选敌人攻击后选敌人，后者存活才反击',
         when: (ctx) => /迫使其?相互攻击/.test(ctx.desc) ? true : null,
         run: paced(function* (ctx) {
-          // 卡面「选择 2 名敌人，迫使其相互攻击一次」：玩家拖拽指定的敌人是锚，另一名存活敌为对手；
-          // 双向互殴对齐结构化 resolveFoeFight（旧实现只打单方向且无视点选目标）
-          const a = (ctx.curseTarget && !ctx.curseTarget.dead) ? ctx.curseTarget : getAlive()[0];
-          const b = getAlive().filter(f => f !== a)[0];
-          if (!a || !b) {
+          // Explicit player picks stay fixed across recasts. Automatic legacy
+          // casts without a pair retain their existing anchor/first-alive fallback.
+          const selected = foeFightTargets(ctx.card);
+          const a = selected ? selected[0] : (ctx.curseTarget && !ctx.curseTarget.dead) ? ctx.curseTarget : getAlive()[0];
+          const b = selected ? selected[1] : getAlive().find(f => f !== a);
+          if (!a || !b || a.dead || b.dead) {
             log(`[[icon:cross]] <b>${esc(ctx.card.name)}</b>：场上敌人不足两名，无法互相攻击`, 'dim');
             return;
           }
@@ -241,7 +241,12 @@ export function killsSteps(s) {
         when: (ctx) => ctx.desc.match(/从牌库中抽取\s*(\d+)\s*张?(初始攻击|装备|法术|武术|杀)牌?/),
         run: (ctx, m) => {
           const kind = (m[2] === '杀' || m[2] === '初始攻击') ? '杀' : m[2];
-          deckDraw({ n: +m[1], type: kind });
+          if (getMode() === 'normal') {
+            grantStarterAttack(+m[1]);
+            log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：普通战斗没有牌库，改为获得 ${m[1]} 张【初始攻击】`, 'sys');
+          } else {
+            deckDraw({ n: +m[1], type: kind });
+          }
           ctx.did = true;
         },
       },

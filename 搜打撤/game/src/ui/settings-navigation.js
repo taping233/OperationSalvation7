@@ -5,7 +5,7 @@ import { enterSettingsCut } from './settings-transition.js';
 
 const CATEGORIES = [
   ['general', '通用', 'GENERAL', '界面信息与辅助功能', ['general']],
-  ['display', '画面与反馈', 'DISPLAY', '调整动作反馈与动态效果', ['display']],
+  ['display', '画面与反馈', 'DISPLAY', '画质、动画绘制上限与动作反馈', ['display']],
   ['audio', '音频', 'AUDIO', '音乐与音效独立调节，修改自动保存', ['audio']],
   ['data', '数据管理', 'DATA', '查看记录与管理本地数据', ['records', 'danger']],
   ['about', '关于', 'ABOUT', '创作来源与鸣谢', ['credits']],

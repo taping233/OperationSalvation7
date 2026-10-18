@@ -1,0 +1,248 @@
+{
+  "Date": "2026-10-18",
+  "Documents": 5,
+  "CheckedLocalLinks": 48,
+  "Missing": 0,
+  "Checks": [
+    {
+      "Document": "docs/audio-system.md",
+      "Target": "evidence/2026-10-13-WF-title-music-v12/README.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/audio-system.md",
+      "Target": "evidence/2026-10-13-WF-shop-music-v3/README.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/audio-system.md",
+      "Target": "evidence/2026-10-09-WF-four-bgm-install/README.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/audio-system.md",
+      "Target": "evidence/2026-10-12-WF-battle-bgm-install/README.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/audio-system.md",
+      "Target": "evidence/2026-10-17-sample-only-sfx/mapping.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/audio-system.md",
+      "Target": "evidence/2026-10-17-sample-only-sfx/README.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/audio-system.md",
+      "Target": "evidence/2026-10-17-sample-only-sfx/README.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/audio-system.md",
+      "Target": "evidence/2026-10-17-f4ngy-draw/README.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/audio-system.md",
+      "Target": "evidence/2026-10-17-real-foley-batch/README.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/audio-system.md",
+      "Target": "evidence/2026-10-18-safe-slot-foley/README.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-sample-only-sfx/README.md",
+      "Target": "inventory.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-sample-only-sfx/README.md",
+      "Target": "../2026-10-17-f4ngy-draw/before/sound.samples.catalog.js",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-sample-only-sfx/README.md",
+      "Target": "../2026-10-17-f4ngy-draw/receipt.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-sample-only-sfx/README.md",
+      "Target": "mapping.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-sample-only-sfx/README.md",
+      "Target": "../../../game/src/audio/sound.samples.catalog.js",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-sample-only-sfx/README.md",
+      "Target": "../../../game/src/audio/sound.samples.player.js",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-sample-only-sfx/README.md",
+      "Target": "../../../game/src/audio/sound.js",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-sample-only-sfx/README.md",
+      "Target": "verification-2026-10-18.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-sample-only-sfx/README.md",
+      "Target": "reconstructed-tests-2026-10-18.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-f4ngy-draw/README.md",
+      "Target": "../../../game/src/audio/sound.samples.catalog.js",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-f4ngy-draw/README.md",
+      "Target": "../../../game/assets/sfx/f4ngy/SOURCES.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-f4ngy-draw/README.md",
+      "Target": "receipt.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-f4ngy-draw/README.md",
+      "Target": "before/sound.samples.catalog.js",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-f4ngy-draw/README.md",
+      "Target": "before/asset-manifest.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-f4ngy-draw/README.md",
+      "Target": "../../../tests/sound-f4ngy-draw.test.js",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-f4ngy-draw/README.md",
+      "Target": "../2026-10-17-sample-only-sfx/reconstructed-tests-2026-10-18.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-f4ngy-draw/README.md",
+      "Target": "../2026-10-17-sample-only-sfx/verification-2026-10-18.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-real-foley-batch/README.md",
+      "Target": "packages.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-real-foley-batch/README.md",
+      "Target": "receipt.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-real-foley-batch/README.md",
+      "Target": "mapping.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-real-foley-batch/README.md",
+      "Target": "../../../game/assets/sfx/real-foley/SOURCES.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-real-foley-batch/README.md",
+      "Target": "accessory/readme.txt",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-real-foley-batch/README.md",
+      "Target": "tinysized/readme.txt",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-real-foley-batch/README.md",
+      "Target": "before/sound.samples.catalog.js",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-real-foley-batch/README.md",
+      "Target": "before/asset-manifest.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-real-foley-batch/README.md",
+      "Target": "../2026-10-18-safe-slot-foley/README.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-real-foley-batch/README.md",
+      "Target": "../../../tests/sound-real-foley.test.js",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-real-foley-batch/README.md",
+      "Target": "../2026-10-17-sample-only-sfx/reconstructed-tests-2026-10-18.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-17-real-foley-batch/README.md",
+      "Target": "../2026-10-17-sample-only-sfx/verification-2026-10-18.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-18-safe-slot-foley/README.md",
+      "Target": "mapping.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-18-safe-slot-foley/README.md",
+      "Target": "receipt.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-18-safe-slot-foley/README.md",
+      "Target": "../../../game/assets/sfx/real-foley/SOURCES.md",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-18-safe-slot-foley/README.md",
+      "Target": "../2026-10-17-real-foley-batch/packages.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-18-safe-slot-foley/README.md",
+      "Target": "before/game/src/audio/sound.samples.catalog.js",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-18-safe-slot-foley/README.md",
+      "Target": "before/game/assets/asset-manifest.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-18-safe-slot-foley/README.md",
+      "Target": "../../../tests/sound-safe-slot-foley.test.js",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-18-safe-slot-foley/README.md",
+      "Target": "../2026-10-17-sample-only-sfx/reconstructed-tests-2026-10-18.json",
+      "Exists": true
+    },
+    {
+      "Document": "docs/evidence/2026-10-18-safe-slot-foley/README.md",
+      "Target": "../2026-10-17-sample-only-sfx/verification-2026-10-18.json",
+      "Exists": true
+    }
+  ]
+}

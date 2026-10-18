@@ -1,0 +1,14 @@
+/* Shared winter feedback identity; no permanent animation or input surface. */
+.sdt-feedback-theme { --feedback-ink:#eef1ed; --feedback-blue:#b6cbd7; --feedback-gold:#c6b487; --feedback-panel:#15212cef; --feedback-line:#9bafbc66; }
+#overlay .bt-turnbanner.bt-turn-title { position:absolute; left:50%; right:auto; top:21%; width:540px; margin-left:-270px; display:flex; flex-direction:column; align-items:center; gap:7px; z-index:86; pointer-events:none; padding:20px 24px 24px; box-sizing:border-box; color:var(--feedback-ink); background:linear-gradient(90deg,transparent,var(--feedback-panel) 20% 80%,transparent); }
+#overlay .bt-turnbanner.bt-turn-title::before,#overlay .bt-turnbanner.bt-turn-title::after { content:''; width:88%; height:1px; background:linear-gradient(90deg,transparent,var(--feedback-line),var(--feedback-gold),var(--feedback-line),transparent); }
+#overlay .bt-turnbanner.bt-turn-title::after { margin-top:10px; }
+#overlay .bt-turnbanner.bt-turn-title.sdt-feedback-theme b { padding:0; margin:0; border:0; background:none; animation:none; color:var(--feedback-ink); font-size:54px; line-height:1.3; letter-spacing:.18em; text-indent:.18em; font-weight:600; text-shadow:0 3px 12px #07101dcc; }
+#overlay .bt-turnbanner.bt-turn-title small { color:var(--feedback-blue); font-size:20px; line-height:1.4; letter-spacing:.16em; margin-top:9px; }
+#overlay .bt-turnbanner.bt-turn-title.foe { --feedback-gold:#9bafbc; }
+#overlay .bt-turnbanner.bt-turn-title.foe b { color:#c9d3dc; }
+#overlay .bt-turnbanner.bt-turn-title.bt-extra-turn small { color:var(--feedback-gold); }
+.sdt-feedback-theme .bt-card-reveal-face { background:var(--feedback-panel); box-shadow:0 0 0 1px var(--feedback-line),0 8px 24px #07101d80; }
+.sdt-feedback-theme .bt-card-reveal-caption { border-color:var(--feedback-line); border-radius:4px; background:var(--feedback-panel); color:var(--feedback-ink); box-shadow:inset 2px 0 var(--feedback-gold); }
+.sdt-feedback-theme .bt-card-arrival { border-color:var(--feedback-blue); box-shadow:none; }
+.sdt-feedback-theme .bt-card-feedback-overflow { border-radius:4px; background:var(--feedback-panel); color:var(--feedback-ink); }

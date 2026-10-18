@@ -227,3 +227,43 @@ describe('整理背包返回时奖励容量 notice 与真实容量同步', () =>
     expect(Random.snapshot()).toEqual(rng);
   });
 });
+
+describe('满包保留目标的腾位入口', () => {
+  it.each(['small','medium'])('%s 返回不锁定候选；腾位后仍走一次原 grant', async kind => {
+    const {openRewardCapacityOrganizer}=await import('../game/src/ui/reward-capacity-organizer.js');
+    bagPort.organizeReward=vi.fn(options=>openRewardCapacityOrganizer({...options,UI:H.UI,
+      readStacks:()=>[],canReceive:()=>H.game.canReceiveCard(options.card),capacity:()=>H.game.bagCapacityText(),
+      moveToSafe:()=>false,discardOne:()=>false}));
+    H.game.ownedCards=fill(18); H.game.inventory=[]; open({kind});
+    acts.chestMakeRoom({i:1});
+    const oldClaim=H.UI.el.ovBody.querySelector('[data-organize="claim"]');
+    expect(oldClaim.disabled).toBe(true);
+    H.UI.el.ovBody.querySelector('[data-organize="return"]').click();
+    expect(H.UI.el.ovBody.querySelector('.is-pending-target').textContent).toContain('待领取');
+    expect(Chests.serialize(H.game).current.selected).toBe(1);
+    expect(Chests.serialize(H.game).current.taken).toEqual([]);
+    expect(Chests.serialize(H.game).current.lost).toEqual([]);
+    acts.chestMakeRoom({i:1});
+    // A full-backpack visit preserves the target and resumes the original picker.
+    H.UI.el.ovBody.querySelector('[data-organize="bag"]').click();
+    H.game.ownedCards.pop(); Chests.resume();
+    expect(H.UI.el.ovBody.querySelector('.is-pending-target [data-act=chestSelect]').dataset.i).toBe('1');
+    acts[kind==='medium'?'chestPick':'chestTake1']({i:1});
+    expect(count('spell')).toBe(1);
+    expect(H.game.grantCard).toHaveBeenCalledTimes(1);
+    oldClaim.click(); expect(count('spell')).toBe(1);
+  });
+});
+
+it('整理页容量乐观但原grant拒收时，原候选/金币仍保留且不锁定三选一', async () => {
+  const {openRewardCapacityOrganizer}=await import('../game/src/ui/reward-capacity-organizer.js');
+  bagPort.organizeReward=options=>openRewardCapacityOrganizer({...options,UI:H.UI,readStacks:()=>[],canReceive:()=>true,
+    capacity:()=>'',moveToSafe:()=>false,discardOne:()=>false});
+  open({kind:'medium'}); H.game.grantCard.mockReturnValue(false);
+  acts.chestMakeRoom({i:1});
+  H.UI.el.ovBody.querySelector('[data-organize="claim"]').click();
+  const saved=Chests.serialize(H.game).current;
+  expect(saved.taken).toEqual([]);expect(saved.lost).toEqual([]);expect(saved.selected).toBe(1);
+  expect(H.game.gainCoins).not.toHaveBeenCalled();expect(count('spell')).toBe(0);
+  expect(H.UI.el.ovBody.textContent).toContain('当前放不下');
+});

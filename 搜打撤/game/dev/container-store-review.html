@@ -1,0 +1,52 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><base href="/"><title>容器统一 · 内存隔离夹具</title><style>#containerFixtureControls button{font:inherit;min-height:32px;padding:6px 10px}#containerFixtureControls{flex-wrap:wrap;max-width:100vw;box-sizing:border-box}</style>
+<script>
+// All app persistence stays in this tab's empty memory. Never read the owner's storage.
+const memory = new Map();
+Object.defineProperty(window, 'localStorage', {value:{getItem:key=>memory.get(String(key))??null,setItem:(key,value)=>memory.set(String(key),String(value)),removeItem:key=>memory.delete(String(key)),clear:()=>memory.clear()}});
+Object.defineProperty(window, 'sessionStorage', {value:{getItem:()=>null,setItem(){},removeItem(){},clear(){}}});
+</script></head><body><p>加载隔离夹具…</p><script type="module">
+if (!window.__containerFixtureStarted) {
+window.__containerFixtureStarted = true;
+const markup = new DOMParser().parseFromString(await (await fetch('/index.html')).text(), 'text/html');
+for (const style of markup.querySelectorAll('link[rel="stylesheet"]')) document.head.append(style.cloneNode());
+for (const script of markup.querySelectorAll('script')) script.remove();
+document.body.innerHTML = markup.body.innerHTML;
+// Only the unrelated full-catalogue background prefetch is skipped in this fixture.
+// Real visible assets, startup scene decoding and their failures remain unchanged.
+await import('/src/core/art.js');
+window.SDT.Art.prefetchBatched = async () => {};
+const warmupTip = document.getElementById('warmupTip');
+if (warmupTip) warmupTip.style.display = 'none';
+await import('/src/main.js');
+document.dispatchEvent(new Event('DOMContentLoaded', {bubbles:true}));
+await new Promise(resolve=>setTimeout(resolve,100));
+const {game} = await import('/src/run/game.session.js');
+const {showBackpack} = await import('/src/hub/game.bag.js');
+
+const {UI,Cards} = window.SDT;
+const controls=document.createElement('nav'); controls.id='containerFixtureControls';
+controls.style.cssText='position:fixed;top:0;left:0;z-index:999999;background:#102030;color:white;padding:8px;display:flex;gap:10px;font:14px sans-serif';
+controls.innerHTML='隔离内存，无真实存档 <button data-case="pearl">珍珠盒</button><button data-case="pouch">法师锦囊</button><button data-case="full">满盒禁用</button>';
+// Keep the fixture controls inside the real modal's interactive boundary.
+UI.el.overlay.append(controls);
+function sizeControls(){controls.style.zoom=String(1/window.SDT.UiScale.scale());}
+sizeControls();window.addEventListener('resize',sizeControls);
+function scenario(mode){
+  document.getElementById('cardZoom')?._closeCardZoom?.(true);
+  UI.hideOverlay({immediate:true});
+  const pearl=Cards.all().find(c=>c.id==='tt2-pearlbox');
+  const pouch=Cards.all().find(c=>c.id==='tt7-stratagem');
+  const resources=Cards.all().filter(c=>c.type==='资源').slice(0,4);
+  const spells=Cards.all().filter(c=>c.type==='法术').slice(0,3);
+  Object.assign(game,{runActive:true,battleActive:false,state:'idle',seed:811,myClass:'剑士',discoveredPairs:new Set(),layerData:[],layerIdx:0,trackPos:0,
+    ownedCards:[{uid:'box',card:pearl},{uid:'pouch',card:pouch},...resources.map((card,i)=>({uid:`r${i}`,card})),...spells.map((card,i)=>({uid:`s${i}`,card}))],
+    usedPocket:[],inventory:[],safeCards:[],fragments:0});
+  if(mode==='full') game.ownedCards.push(...Array.from({length:9},(_,i)=>({uid:`stored${i}`,card:resources[0],stored:1})));
+  showBackpack();
+  UI._acts.inspectStack({name:(mode==='pouch'?pouch:pearl).name,safe:'0'});
+  UI._acts[mode==='pouch'?'pouchStoreZoom':'pearlStoreZoom']();
+}
+controls.addEventListener('click',event=>{const mode=event.target.dataset.case;if(mode)scenario(mode)});
+scenario('pearl');
+}
+</script></body></html>

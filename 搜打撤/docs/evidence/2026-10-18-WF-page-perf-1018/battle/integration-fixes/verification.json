@@ -1,0 +1,54 @@
+{
+  "Date": "2026-10-18",
+  "ProductionChanged": false,
+  "Before": {
+    "Passed": 41,
+    "Total": 85,
+    "Failed": 44
+  },
+  "Final": {
+    "Passed": 85,
+    "ConditionalWarnings": 5,
+    "HardCardFailures": 0,
+    "AuditedCards": 268,
+    "Files": 7,
+    "Failed": 0
+  },
+  "Files": [
+    {
+      "File": "tests/battle-all-cards.test.js",
+      "BeforeSHA256": "87c28a448ff0a2197184e00920b3f807173eb2002b65315e10c600cf6c62e07d",
+      "AfterSHA256": "7f7430dacad1de9ab3bcc51c81d0fe41808d2b6e6bcca4f05d6785b068e2add0"
+    },
+    {
+      "File": "tests/battle-decision-readability.test.js",
+      "BeforeSHA256": "bff10b7fdf5ee0c182ba34e8b8a68196ed684ba35c8ea87db417cab48f75cebf",
+      "AfterSHA256": "026aaec6f4838392ce9110d9d97036d6f9f5cea4c7e1b954b303cb3f26c5476a"
+    },
+    {
+      "File": "tests/battle-effect-feedback.test.js",
+      "BeforeSHA256": "d93a25ddc65e6d0668fcda527f019342bc23f36841fba3f290af4ad37d37eec2",
+      "AfterSHA256": "de9c41097af0c7e41df7e6cda19695267882adff7cfbd87537de33c3be660d6e"
+    },
+    {
+      "File": "tests/battle-engine-facade.test.js",
+      "BeforeSHA256": "e943a2c79d15fd574dc2d2cd70d763f903b3f50acf0da85c6ba630c985fb811b",
+      "AfterSHA256": "23efddb29de87eebfb3694e4a32d4c9efb606c74e0212525df2d99b489e84a04"
+    },
+    {
+      "File": "tests/battle-tools-lifecycle.test.js",
+      "BeforeSHA256": "84df74fba23a5ceafa4952131ab6c835715ac070d6262c4c914a67793a982c2a",
+      "AfterSHA256": "31e7fcd6385e4f653709c33c1e9b4defe7cd01af9f85b70ca74b64d5921b4c72"
+    },
+    {
+      "File": "tests/skull-sword-effective-session.test.js",
+      "BeforeSHA256": "15dbb62f0a8812d1649a845fa41d06c547d6f7708d69bcbe84e86dc4309d8f1a",
+      "AfterSHA256": "d207b5ecabd32d3cc95e3c62f075176b467761d2e0734865dca2957de67f79cb"
+    },
+    {
+      "File": "tests/ui-accessibility-regression.test.js",
+      "BeforeSHA256": "4efc5b9803f9ae416661929ae2f80cfbccc09f59f8228f3fb009e8580fe12794",
+      "AfterSHA256": "e0d3840fa18bf85dccbb8a69743598cfef5c6f0ace1436de77a59bc4df547d35"
+    }
+  ]
+}

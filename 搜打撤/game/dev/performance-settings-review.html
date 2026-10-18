@@ -1,0 +1,11 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>画质与绘制预算 · 隔离检查</title>
+<link rel="stylesheet" href="/css/base.css"><link rel="stylesheet" href="/css/cards.css"><link rel="stylesheet" href="/css/overlays.css"><link rel="stylesheet" href="/css/page-settings.css">
+<style>html{zoom:1!important}body{background:#13191c;color:#eee;font-family:system-ui}main{max-width:850px;padding:32px;margin:auto}canvas{width:100%;height:120px;border:1px solid #657577}button{padding:10px;font:inherit;margin:12px 0}#counts{font-variant-numeric:tabular-nums}h1{font-size:24px}</style></head><body><main><h1>画质与绘制预算</h1><p>隔离检查使用真实设置控件与地图绘制调度器，不载入主局或资源目录。设置会保存在同源浏览器。</p><section id="settings"></section><canvas id="preview" width="800" height="120"></canvas><p id="counts" aria-live="polite"></p><button id="input">立即输入反馈</button><p id="response"></p><p>色块按真实经过时间移动；切换绘制预算不改变运动速度。直接输入不等待预算。浏览器刷新率较低时，选择 120 不会让实际绘制超过屏幕刷新率。</p></main><script type="module">
+import { performanceSettingsHTML, bindPerformanceSettings } from '/src/ui/performance-settings.js';
+import { renderScheduler } from '/src/core/render-scheduler.js';
+const root=document.querySelector('#settings');root.innerHTML=performanceSettingsHTML();bindPerformanceSettings(root);
+const canvas=document.querySelector('#preview'),ctx=canvas.getContext('2d');let draws=0,started=performance.now(),inputs=0;
+function paint(now){ctx.fillStyle='#15232a';ctx.fillRect(0,0,800,120);ctx.fillStyle='#dfc476';ctx.fillRect((now/5)%760,40,40,40);draws++;}
+function loop(now){renderScheduler.invalidateAnimation();if(renderScheduler.shouldDraw(now))paint(now);if(now-started>=1000){document.querySelector('#counts').textContent=`最近采样：${Math.round(draws*1000/(now-started))} 次绘制/秒`;draws=0;started=now;}requestAnimationFrame(loop);}
+document.querySelector('#input').onclick=()=>{const now=performance.now();renderScheduler.invalidate();const immediate=renderScheduler.shouldDraw(now);if(immediate)paint(now);document.querySelector('#response').textContent=`输入 ${++inputs}：${immediate?'已立即绘制':'等待'}`;};requestAnimationFrame(loop);
+</script></body></html>

@@ -32,6 +32,19 @@ describe('卡牌展示文案与结算文本隔离', () => {
     expect(displayCardDescription(get('tt3-bandage').desc, 'tt3-bandage')).toBe('你回复 3 点生命，并获得 3 点护甲。');
   });
 
+  it.each(['tt2-bloodblade', 'tt3sp-bloodstorm', 'tt7-bloodpotion'])('吸血展示明确结算后伤害含过量且不改结算原文：%s', id => {
+    const card = get(id);
+    const before = JSON.stringify(card);
+    const text = displayCardDescription(card.desc, id);
+    expect(text).toContain('结算后');
+    expect(text).toContain('含过量伤害');
+    expect(text).not.toContain('实际造成');
+    if (id === 'tt3sp-bloodstorm') expect(text).toContain('总伤害');
+    expect(card.desc).toContain('回复等量生命');
+    expect(JSON.stringify(card)).toBe(before);
+    expect(textContent(descRich(card.desc, card.id))).toContain('含过量伤害');
+  });
+
   it('同一原文在不同 ID 下只更新已审阅的卡，玩家改文案时原样返回', () => {
     const raw = get('tt3-bandage').desc;
     expect(displayCardDescription(raw, 'custom-bandage')).toBe(raw);

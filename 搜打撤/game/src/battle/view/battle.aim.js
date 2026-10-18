@@ -34,7 +34,7 @@ import { commands, getSnapshot, getBattleLiveness, findEffectiveCard as findCard
   function closeHandCardDetails() { return false; }
   function showHandCardDetails() { return false; }
 import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble } from './battle.hover.js';
-import { createTargetSession } from '../core/battle.target-session.js';
+import { createTargetSession, isTargetableEnemy } from '../core/battle.target-session.js';
 import { isAreaEffect } from '../effects/battle.target-rules.js';
 import { BATTLE_PHASES } from '../runtime/battle.state.js';
   // ---------- 指向施法 ----------
@@ -133,21 +133,25 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     vr = vr || UI.el.overlay.getBoundingClientRect();
     const ratio = Math.max(1, window.devicePixelRatio || 1);
     const zA = uiScale();
-    // vr/坐标全是视口口径；画布布局尺寸=视口/z，绘制矩阵除 z 抵消 → 物理密度恰为 dpr
+    // CSS retains logical layout size; backing pixels follow the displayed rect.
+    // Arrow coordinates already use viewport pixels, so drawing needs only DPR.
     const width = Math.max(1, Math.round(vr.width / zA));
     const height = Math.max(1, Math.round(vr.height / zA));
-    if (canvas.width !== Math.round(width * ratio) || canvas.height !== Math.round(height * ratio)) {
-      canvas.width = Math.round(width * ratio);
-      canvas.height = Math.round(height * ratio);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
+    const pixelWidth = Math.max(1, Math.round(vr.width * ratio));
+    const pixelHeight = Math.max(1, Math.round(vr.height * ratio));
+    if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+      canvas.width = pixelWidth;
+      canvas.height = pixelHeight;
     }
-    const cacheKey = `${x1}|${y1}|${x2}|${y2}|${color}|${canvas.width}x${canvas.height}`;
+    if (canvas.style.width !== `${width}px`) canvas.style.width = `${width}px`;
+    if (canvas.style.height !== `${height}px`) canvas.style.height = `${height}px`;
+    const cacheKey = `${x1}|${y1}|${x2}|${y2}|${color}|${canvas.width}x${canvas.height}|${ratio}`;
     if (aimArrowCache === cacheKey) return;
     aimArrowCache = cacheKey;
     const ctx = canvas.getContext('2d');
-    ctx.setTransform(ratio / zA, 0, 0, ratio / zA, 0, 0);
-    ctx.clearRect(0, 0, width, height);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
     const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy) || 1;
     let px = -dy / len, py = dx / len;
@@ -193,13 +197,23 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
         if (previous) {
           previous.el.classList.remove('drag-over', 'drop-here', 'drop-any');
           if (previous.kind === 'enemy') clearFoePreview(previous.el);
+          if (a.fieldPlayable && a.side === 'enemy') a.stage.querySelectorAll('.bt-foe').forEach(clearFoePreview);
         }
         a.hover = next;
         if (!next) return;
         if (next.kind === 'enemy') {
           next.el.classList.add('drag-over');
           showFoePreview(next.el, next.idx, a.uid, a.card, a.mode === 'clickTarget' ? 'click' : 'drag');
-        } else next.el.classList.add('drop-here');
+        } else {
+          next.el.classList.add('drop-here');
+          // 全体牌保持跟手；合法空地预览每名敌人，不提前提交或消耗注能材料。
+          if (a.fieldPlayable && a.side === 'enemy') {
+            a.stage.querySelectorAll('.bt-foe[data-eidx]').forEach(el => {
+              const idx = +el.dataset.eidx;
+              if (!getSnapshot().foes[idx]?.dead) showFoePreview(el, idx, a.uid, a.card, 'drag');
+            });
+          }
+        }
       },
     });
   }
@@ -324,7 +338,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       clearFoePreview(el);
       const idx = +el.dataset.eidx;
       const foe = snapshot.foes[idx];
-      const targetable = !!(foe && !foe.dead && (selectedSide === 'enemy' || pendingSide === 'enemy' || pendingItemSide === 'enemy' || snapshot.slamPending || snapshot.dartPending));
+      const targetable = !!(isTargetableEnemy(foe, idx, snapshot.pendingTarget?.excludedTargetIndex) && (selectedSide === 'enemy' || pendingSide === 'enemy' || pendingItemSide === 'enemy' || snapshot.slamPending || snapshot.dartPending));
       setTargetable(el, targetable, `${foe?.name || '敌人'}，按 Enter 确认目标`);
       if (targetable && selectedSide === 'enemy' && el.matches(':hover, :focus')) {
         showFoePreview(el, idx, clickSelectedUid, entry.card, 'click');
@@ -512,6 +526,9 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (!a || e.isPrimary === false) return;
     if (e.button === 2) { e.preventDefault(); cancelAim(); return; }
     if (e.button !== 0) return;
+    // Mouse, pen and touch may each be primary. A held gesture keeps its owner;
+    // after release, a fresh pointer may still confirm the existing pickup.
+    if (a.leftDown && e.pointerId !== a.pointerId) return;
     a.pointerId = e.pointerId; a.lastX = e.clientX; a.lastY = e.clientY; a.leftDown = true;
     if (a.follow && a.mode === 'multi' && a.targetMode === 'click') {
       aimPlayedAt = Date.now();
@@ -606,7 +623,8 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     }
 
     // 悬停检测：瞄准态（含药水全程）高亮目标；drag 态 STS2 无悬停反馈
-    const targeting = !a.follow || a.mode === 'target' || a.mode === 'clickTarget';
+    const targeting = !a.follow || a.mode === 'target' || a.mode === 'clickTarget'
+      || a.mode === 'multi' && a.fieldPlayable && a.side === 'enemy' && eY < a.playY;
     const hit = targeting ? aimHoverAt(eX, eY, a.targetSession) : null;
     if (a.playBlockedReason && a.mode !== 'drag' && !a.reasonShown) {
       showThoughtBubble(a.playBlockedReason, true);

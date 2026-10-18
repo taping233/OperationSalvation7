@@ -1,3 +1,4 @@
+import { getQualityPreset } from './performance-settings.js';
 import { drawMapBrushRoad, mapBrushRoadInView } from './map-brush-art.js';
 
 import { font, hash2 } from './renderer.primitives.js';
@@ -44,10 +45,11 @@ const SDT = window.SDT;
       backdropFadeFrame = 0;
       if (rendererDisposed) return;
       if (backdropFade.snap && now - backdropFade.t0 < BACKDROP_FADE_MS + 60) {
-        renderScheduler.invalidate();
+        renderScheduler.invalidateAnimation();
         backdropFadeFrame = requestAnimationFrame(tick);
       } else {
         backdropFadeDriving = false;
+        renderScheduler.invalidate();
       }
     };
     backdropFadeFrame = requestAnimationFrame(tick);
@@ -65,7 +67,7 @@ const SDT = window.SDT;
   function ensureBackdrop(cam, li) {
     const { img } = backdropFor(li);
     const ready = img.complete && img.naturalWidth > 0;
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, getQualityPreset().backdropScale);
     const sizeChanged = backdropCanvas && (backdropKey.w !== cam.viewW || backdropKey.h !== cam.viewH);
     if (sizeChanged && backdropKey.li === li && backdropKey.ready === ready && backdropKey.dpr === dpr) {
       const resizeKey = `${cam.viewW}x${cam.viewH}`;
@@ -472,7 +474,7 @@ const SDT = window.SDT;
     for (const n of g.nodes) {
       if (n.li !== game.layerIdx || n.li < 0 || n.fog) continue;
       ctx.globalAlpha = isCurrentNode(game, n) ? 0.85 : 0.18;
-      ctx.fillText(String(n.idx), n.x, n.y - n.r - 4);
+      ctx.fillText(String(n.idx + 1), n.x, n.y - n.r - 4);
     }
     ctx.globalAlpha = 1;
   }

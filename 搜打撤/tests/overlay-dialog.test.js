@@ -127,6 +127,22 @@ describe('overlay dialog accessibility contract', () => {
     zoom._closeCardZoom(true);
   });
 
+  it('显式安全取消优先于猜测文案，并由 Esc 调用原返回操作', () => {
+    UI.showOverlay('锦囊', '<button data-act="leave">离开</button><button data-act="pouchBack" data-cancel="true">收好锦囊</button>');
+    const leave = vi.fn(), back = vi.fn(); UI.act('leave', leave); UI.act('pouchBack', back);
+    expect(UI._findCancelBtn().dataset.act).toBe('pouchBack');
+    expect(UI.closeTopOverlayByEsc()).toBe(true);
+    expect(back).toHaveBeenCalledOnce(); expect(leave).not.toHaveBeenCalled();
+  });
+
+  it('强制领取页无取消入口，隐藏或禁用标记及明确禁止按钮都不能被 Esc 跳过', () => {
+    UI.showOverlay('领取补给', '<button data-act="take">收下</button><button data-cancel="false">返回地图</button><button data-cancel="true" disabled>取消</button><div hidden><button data-cancel="true">收好</button></div>', 'chest');
+    expect(UI._findCancelBtn()).toBeUndefined();
+    expect(UI._canCancelOverlay()).toBe(false);
+    expect(UI.closeTopOverlayByEsc()).toBe(false);
+    expect(UI.el.overlay.hidden).toBe(false);
+  });
+
   it('closes immediately when reduced motion is enabled', () => {
     UI.showOverlay('成就总览', '<div class="achievement-gallery">奖章</div>', 'page');
     document.body.classList.add('reduce-motion');

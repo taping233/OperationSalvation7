@@ -10,14 +10,14 @@ import { canAcceptCardAtCapacity, PEARL_BOX_ID, PEARL_BOX_SLOTS, stackCapOf } fr
 export { PEARL_BOX_ID, stackCapOf } from '../core/card-capacity.js';
 
 // ---------- 背包容量（基地扩建后生效）----------
-// 物资与卡牌混占背包格：同名物资/同名卡牌各堆叠 1 格；
+// 物资与卡牌混占背包格：装备每张占1格，其余同名卡/散装物资每3张（件）占1格；
 // 安全格独立计容（基地用口粮升级），消耗区不占格（无限容量）。
 // 珍珠盒（Q5 老板定向）：每持有 1 个额外扩容 9 格，扩出来的格子只能放资源卡。
 const pearlBonus = () => (game.ownedCards || []).filter(o => o.card && o.card.id === PEARL_BOX_ID).length * PEARL_BOX_SLOTS;
 export const bagCap = () => SDT.Base.bagCap() + pearlBonus();
 export function bagCapacityText() {
   const base = SDT.Base.bagCap(), extra = pearlBonus(), used = usedSlots();
-  return extra ? `通用格 ${Math.min(used, base)}/${base} · 资源专用格 ${Math.max(0, used - base)}/${extra}` : `${used}/${base} 格`;
+  return extra ? `通用格 ${Math.min(used, base)}/${base} · 资源扩展格 ${Math.max(0, used - base)}/${extra}` : `${used}/${base} 格`;
 }
 // 背包能否再收一张卡：基础格内任意类型；珍珠盒扩出来的格子仅资源卡（卡面「容纳所有类型的资源卡牌」）
 export const canAcceptCard = card => !!card && canAcceptCardAtCapacity(card, {
@@ -25,7 +25,7 @@ export const canAcceptCard = card => !!card && canAcceptCardAtCapacity(card, {
 });
 export const safeCap = () => SDT.Base.safeCap();
 // ---------- 背包叠放上限（2026-09-09 需求 #7）----------
-// 同名卡牌最多 3 张占 1 格（「初始攻击」与「火球」可叠 5 张），第 4 张起另占一格。
+// 装备每张占 1 格，其余同名卡每 3 张占 1 格。
 export function cardStacks(safe) {
   // 先按卡名聚合，再按叠放上限切分成多格（同名可能占多格，#7）
   // 2026-09-10 留言 #29：存入珍珠盒的资源卡（o.stored）不占背包格——从堆叠统计里排除，
@@ -47,7 +47,7 @@ export function cardStacks(safe) {
   });
   return out;
 }
-export function usedSlots() { return game.inventory.length + cardStacks(false).length; }
+export function usedSlots() { return game.inventory.reduce((sum, item) => sum + Math.ceil((item.count || 1) / 3), 0) + cardStacks(false).length; }
 export function safeUsed() { return cardStacks(true).length; }
 // 卡牌 zone 一致性断言（card-game：一张卡同一时刻只应属于一个 zone）。
 // dev 模式下在存档前跑：uid 重复 / 卡牌同时带 safe 与 brought 以外矛盾标记即报错。
@@ -78,9 +78,11 @@ game.gainCoins = gainCoins;   // 宝箱等模块发币（含飘字与日志）
 
 game.addItem = function (tpl, n) {
   n = n || 1;
-  // 同名物品堆叠占一格；背包上限 bagCap() 格（基地可扩建）
+  // 散装物资同名每 3 件占一格；批量领取也先检查完整所需空间。
   let slot = game.inventory.find(it => it.name === tpl.name && it.tier === (tpl.tier || 'C'));
-  if (!slot && usedSlots() >= bagCap()) {
+  const count = slot?.count || 0;
+  const addedSlots = Math.ceil((count + n) / 3) - Math.ceil(count / 3);
+  if (usedSlots() + addedSlots > bagCap()) {
     SDT.Sound.sfx('deny');
     UI.log(`[[icon:bag]] 背包已满（${usedSlots()}/${bagCap()} 格，可在基地用木材扩建），无法获得 <b>${tpl.name}</b>`, 'warn');
     return null;

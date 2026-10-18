@@ -75,6 +75,8 @@ async function useItem(cardId, uid) {
   const use = zoom.querySelector('[data-act="useDetailCard"]');
   expect(use).toBeTruthy();
   use.click();
+  // Disabled restoration keeps its detail open; close it before the next isolated scenario.
+  if (use.disabled) zoom.querySelector('.cz-backdrop')?.click();
   await vi.advanceTimersByTimeAsync(280);
   return uid;
 }
@@ -204,4 +206,60 @@ describe('背包道具旧行为基线', () => {
     expect(game.ownedCards.some(o => o.uid === uid)).toBe(true);
     expect(game.usedPocket).toHaveLength(0);
   });
+});
+
+
+describe('复原道具满包零收益保护', () => {
+  it.each(['tt-crystal', 'cmtn6bge52qt'])('%s同堆两张满包时详情禁用，直接执行也不消耗', async id => {
+    const card = window.SDT.Cards.all().find(c => c.id === id);
+    const ownedCards = [1, 2].map(n => ({ uid:`blocked-${n}`, card }));
+    const inventory = Array.from({length:session.bagCap() - 1}, (_, i) => ({name:`满包物资${i}`, count:1}));
+    setScenario({ownedCards, inventory, usedPocket:[{card:{...sampleCard}, count:2}]});
+    const before = JSON.stringify({owned:game.ownedCards, pocket:game.usedPocket});
+    bag.showBackpack();
+    const tile = [...document.querySelectorAll('[data-act="inspectStack"]')].find(el => el.dataset.name === card.name);
+    expect(tile.querySelector('.bag-tstate').textContent).toBe('需腾位');
+    expect(tile.querySelector('.bag-tstate').title).toContain('背包空间不足');
+    tile.click();
+    const use = document.querySelector('#cardZoom [data-act="useDetailCard"]');
+    expect(use.disabled).toBe(true); expect(use.textContent).toContain('先腾位再复原');
+    document.querySelector('#cardZoom .cz-backdrop').click();
+    await vi.advanceTimersByTimeAsync(280);
+    const {useStructuredBagRule} = await import('../game/src/hub/game.bag.rules.js');
+    const save = vi.fn(), log = vi.fn();
+    useStructuredBagRule(card, 0, {UI:{log}, SDT:window.SDT, game, Random:{}, newUid:vi.fn(), saveGame:save, showBackpack:vi.fn(), usedSlots:session.usedSlots, bagCap:session.bagCap});
+    expect(JSON.stringify({owned:game.ownedCards, pocket:game.usedPocket})).toBe(before);
+    expect(save).not.toHaveBeenCalled();
+    expect(log).toHaveBeenCalledWith(expect.stringContaining('卡牌未消耗'), 'warn');
+  });
+
+  it('满包只剩一张结晶时可腾出其格，仍允许复原', async () => {
+    const inventory = Array.from({length:session.bagCap() - 1}, (_, i) => ({name:`单张物资${i}`, count:1}));
+    setScenario({ownedCards:[{uid:'last-crystal', card:crystal}], inventory, usedPocket:[{card:{...sampleCard}, count:2}]});
+    bag.showBackpack();
+    const tile = [...document.querySelectorAll('[data-act="inspectStack"]')].find(el => el.dataset.name === crystal.name);
+    expect(tile.querySelector('.bag-tstate').textContent).toBe('可用');
+    tile.click();
+    const use = document.querySelector('#cardZoom [data-act="useDetailCard"]');
+    expect(use.disabled).toBe(false); use.click();
+    await vi.advanceTimersByTimeAsync(280);
+    expect(game.ownedCards.some(o => o.uid === 'last-crystal')).toBe(false);
+    expect(game.ownedCards.filter(o => o.card.name === sampleCard.name)).toHaveLength(1);
+    expect(game.usedPocket[0].count).toBe(1);
+  });
+
+  it('背包帮助遵循地图营火随机复原，不混用通用手选页', () => {
+    const source = readFileSync('game/src/hub/game.bag.js', 'utf8');
+    expect(source).toContain('每次随机复原最多 2 张');
+    expect(source).not.toContain('在营火选择要复原的卡牌');
+  });
+});
+
+it('真实卡库通行证C的背包按钮可用，消费后只获得一张传说卡', async () => {
+  const token=window.SDT.Cards.all().find(c=>c.id==='tt4-shine-token');
+  setScenario({ownedCards:[{uid:'token-c',card:{...token}}]});
+  await useItem('tt4-shine-token','token-c');
+  expect(game.ownedCards).toHaveLength(1);
+  expect(game.ownedCards[0].uid).not.toBe('token-c');
+  expect(game.ownedCards[0].card.rarity).toBe('传说');
 });

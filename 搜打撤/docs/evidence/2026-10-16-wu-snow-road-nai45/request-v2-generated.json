@@ -1,0 +1,120 @@
+{
+  "status": "generated",
+  "prepared_source": "request-v2-prepared.json",
+  "request": {
+    "input": "1girl, solo, upper body, full face, eye level, wide shot, off-center, 1.3::peeking in from the extreme right edge, tightly cropped foreground character::, looking at viewer, 1.5::head tilt::, subtle smile\n\nHer head and a narrow slice of shoulder and chest occupy only the rightmost quarter. Her head touches the top and right edges, both eyes visible; most of her body is beyond the right border, waist and hands outside the crop. Her torso stays upright with her head tilted sideways. The broad wet asphalt highway fills the lower two thirds, converging straight toward a central vanishing point at the upper third. White dashed center line, white edge lines, snow-topped steel guardrails on both sides, flat snowy fields, distant utility poles.\n\nWinter, overcast cold dawn, blue-gray sky, faint pink horizon. Dark wet granular asphalt, fine surface detail, long pale pink reflections and small puddles. Soft cool shadow on her face, warm rim light on her hair, sparse glowing particles. Readable road and distant landscape, highly detailed, high complexity.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, painterly anime promotional illustration, grouped shadows, angular cloth folds, delicate skin transitions, selective facial linework, rich controlled color, crisp facial features and readable landscape.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1552649891,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, duplicate character, full body, cowboy shot, visible waist, visible hands, bent over, leaning forward, bokeh, depth of field, blurred background, plain road surface, featureless road, fence",
+      "characterPrompts": [
+        {
+          "prompt": "silver-white long hair, high ponytail tied with a blue ribbon bow, parted bangs, both cyan-blue eyes visible, pale skin, tiny fang at the corner of her slight smile, black round sunglasses on head, thin black round frames, dark tinted lenses, sunglasses pushed up onto her hair, black rose on her left temple, black charcoal off-shoulder long-sleeved dress, ruffled neckline, black sword sheathed on her back, black shoulder strap",
+          "uc": "goggles, ski goggles, swimming goggles, aviator goggles, safety goggles, halo, hat, backpack, red hair, braid, hair over one eye, holding sword, wide open mouth, long skirt, high-low skirt, long back hem, dress train, floor-length dress, blue star pattern, stockings, pantyhose, thighhighs",
+          "center": {
+            "x": 0.9,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, upper body, full face, eye level, wide shot, off-center, 1.3::peeking in from the extreme right edge, tightly cropped foreground character::, looking at viewer, 1.5::head tilt::, subtle smile\n\nHer head and a narrow slice of shoulder and chest occupy only the rightmost quarter. Her head touches the top and right edges, both eyes visible; most of her body is beyond the right border, waist and hands outside the crop. Her torso stays upright with her head tilted sideways. The broad wet asphalt highway fills the lower two thirds, converging straight toward a central vanishing point at the upper third. White dashed center line, white edge lines, snow-topped steel guardrails on both sides, flat snowy fields, distant utility poles.\n\nWinter, overcast cold dawn, blue-gray sky, faint pink horizon. Dark wet granular asphalt, fine surface detail, long pale pink reflections and small puddles. Soft cool shadow on her face, warm rim light on her hair, sparse glowing particles. Readable road and distant landscape, highly detailed, high complexity.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, painterly anime promotional illustration, grouped shadows, angular cloth folds, delicate skin transitions, selective facial linework, rich controlled color, crisp facial features and readable landscape.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "silver-white long hair, high ponytail tied with a blue ribbon bow, parted bangs, both cyan-blue eyes visible, pale skin, tiny fang at the corner of her slight smile, black round sunglasses on head, thin black round frames, dark tinted lenses, sunglasses pushed up onto her hair, black rose on her left temple, black charcoal off-shoulder long-sleeved dress, ruffled neckline, black sword sheathed on her back, black shoulder strap",
+              "centers": [
+                {
+                  "x": 0.9,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, duplicate character, full body, cowboy shot, visible waist, visible hands, bent over, leaning forward, bokeh, depth of field, blurred background, plain road surface, featureless road, fence",
+          "char_captions": [
+            {
+              "char_caption": "goggles, ski goggles, swimming goggles, aviator goggles, safety goggles, halo, hat, backpack, red hair, braid, hair over one eye, holding sword, wide open mouth, long skirt, high-low skirt, long back hem, dress train, floor-length dress, blue star pattern, stockings, pantyhose, thighhighs",
+              "centers": [
+                {
+                  "x": 0.9,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": ".tmp/nai/wu-snow-road-nai45-20261016-v2.png",
+  "method": "Shared nai_gen/nai_guard, current environment HTTPS proxy, one candidate",
+  "raw_t5_budget": {
+    "positive": [
+      365,
+      113
+    ],
+    "positive_total": 478,
+    "negative": [
+      194,
+      91
+    ],
+    "negative_total": 285,
+    "tokenizer_sha256": "d60acb128cf7b7f2536e8f38a5b18a05535c9e14c7a355904270e15b0945ea86",
+    "limit": "Raw local counts include weight syntax; not identical to server tokenisation."
+  },
+  "seed": 1552649891,
+  "bytes": 1913009,
+  "sha256": "14fafeccd57d51a6d927888c01e28b0c198bb53d1335a03e13af0236fc01c984",
+  "visual_review": {
+    "source": "view_image of original generated PNG",
+    "matched": [
+      "black round sunglasses on head with ordinary glasses frames",
+      "tighter character crop along right edge",
+      "higher horizon and central road perspective",
+      "granular wet road and pink reflections",
+      "small smile and sideways head tilt"
+    ],
+    "deviations": [
+      "Ponytail extends inward toward middle of frame",
+      "Center marking is continuous rather than dashed",
+      "Distant background remains soft"
+    ],
+    "user_approval": "pending"
+  }
+}

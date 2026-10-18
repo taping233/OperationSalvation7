@@ -1,7 +1,7 @@
 /* Enemy-intent projection from an enemy definition, round, and player status values. */
 const INTENT_META = {
   strike: ['[[icon:swords]]', '攻击'], volley: ['[[icon:swords]]', '攻击'], charge: ['[[icon:swords]]', '攻击'],
-  guard: ['[[icon:swords]]', '攻击'], burn: ['[[icon:fire]]', '攻击并灼烧'], curse: ['[[icon:skull]]', '攻击并施加诅咒'],
+  guard: ['[[icon:swords]]', '攻击'], curse: ['[[icon:skull]]', '攻击并施加诅咒'],
   dragon: ['[[icon:demon]]', '攻击·阶段效果'], general: ['[[icon:arrow]]', '攻击·回合末强化'],
   orc_boss: ['[[icon:tools]]', '双击并施加诅咒'], element_boss: ['[[icon:crystal]]', '攻击·偶数回合庇幕'],
 };

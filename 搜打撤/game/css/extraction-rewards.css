@@ -1,0 +1,140 @@
+@import url('./feedback-theme.css');
+@import url('./ui-design-system.css');
+/* Dedicated extraction presentation; no inventory, reward, or transaction rules live here. */
+/* The extraction pages own the full game viewport, rather than the legacy centered dialog bounds. */
+body #overlay .card.page:has(.exr-page) { box-sizing:border-box; width:100%; height:100%; max-width:none; max-height:none; padding:0; margin:0; border:0; border-radius:0; overflow:hidden; }
+body #overlay .card.page:has(.exr-page) > #ovBody { box-sizing:border-box; width:100%; height:100%; max-width:none; max-height:none; padding:0; margin:0; overflow:hidden; }
+body #overlay .card.page:has(.exr-page) > #ovTitle, body #overlay:has(.exr-page) #ovCloseX { display:none; }
+body #overlay .card.page .exr-page {
+  --exr-gold:var(--feedback-blue); --exr-ink:var(--ui-ink); --exr-muted:var(--ui-muted); --exr-line:var(--ui-line);
+  box-sizing:border-box; display:flex; flex-direction:column; gap:26px; height:100%; min-height:0;
+  padding:48px 64px 32px; overflow:hidden; color:var(--exr-ink);
+  background:linear-gradient(90deg,#101d28ef 0%,#101d28cd 62%,#101d28e8 100%),url('../assets/scenes/scene-extract-anime-v2.webp') center/cover;
+  font:400 var(--ui-text-body)/1.45 var(--font-ui);
+}
+#overlay .exr-page :is(h2,h3,p) { margin:0; }
+#overlay .exr-page button { font-family:inherit; }
+#overlay .exr-page .exr-header { display:flex; flex:none; justify-content:space-between; align-items:center; gap:30px; padding:0 0 22px; border-bottom:1px solid var(--exr-line); }
+#overlay .exr-page .exr-eyebrow { color:var(--exr-gold); font-size:17px; letter-spacing:.2em; margin-bottom:8px; }
+body #overlay .card.page .exr-page h2.exr-success-title { display:block; color:var(--exr-ink); font:600 60px/1.22 var(--font-ui); letter-spacing:.05em; text-shadow:none; margin:0; }
+#overlay .exr-page .exr-header p:not(.exr-eyebrow) { color:var(--exr-muted); font-size:22px; }
+#overlay .exr-page .exr-step { display:flex; align-items:center; gap:16px; color:#7f8d96; font-size:18px; white-space:nowrap; }
+#overlay .exr-page .exr-step .is-current { color:var(--exr-gold); }
+#overlay .exr-page .exr-step i { width:44px; height:1px; background:#6b777b; }
+#overlay .exr-page .exr-layout { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:40px; flex:1; min-height:0; }
+#overlay .exr-page .exr-loot { display:flex; flex-direction:column; min-width:0; min-height:0; }
+#overlay .exr-page .exr-section-title { display:flex; flex:none; align-items:center; justify-content:space-between; gap:20px; padding:0 6px 10px; }
+#overlay .exr-page .exr-overline { color:#a7b8c1; font-size:17px; letter-spacing:.14em; }
+#overlay .exr-page .exr-section-title h3 { color:#eae8df; font-size:28px; font-weight:500; }
+#overlay .exr-page .exr-section-title h3 b { color:var(--exr-gold); font-size:40px; font-weight:650; margin-left:10px; }
+#overlay .exr-page .exr-section-title h3 small { font-size:21px; }
+#overlay .exr-page .exr-section-title > p { color:var(--exr-muted); font-size:18px; line-height:1.55; text-align:right; }
+#overlay .exr-page .exr-notice { flex:none; min-height:0; margin:0 6px 12px; color:#cfdbc9; font-size:20px; }
+#overlay .exr-page .exr-card-scroll { min-height:0; overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; padding:5px 14px 16px 4px; }
+#overlay .exr-page .exr-card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:28px; align-items:start; }
+#overlay .exr-page .exr-item { --exr-rarity:#9ba9b2; position:relative; min-width:0; background:transparent; border:0; padding:8px 6px 12px; }
+#overlay .exr-page .exr-item[data-rarity="稀有"] { --exr-rarity:#85b9eb; }
+#overlay .exr-page .exr-item[data-rarity="史诗"] { --exr-rarity:#bea0e4; }
+#overlay .exr-page .exr-item[data-rarity="传说"] { --exr-rarity:#e6c073; }
+#overlay .exr-page .exr-item[data-rarity="棱彩"] { --exr-rarity:#d7b8e7; }
+#overlay .exr-page .exr-item-meta { display:flex; align-items:center; justify-content:space-between; color:var(--exr-rarity); font-size:18px; margin-bottom:8px; }
+#overlay .exr-page .exr-item-meta b { color:#f0ede3; font-size:24px; font-variant-numeric:tabular-nums; }
+#overlay .exr-page .exr-card-preview { position:relative; display:block; appearance:none; width:100%; padding:0; margin:0; border:0; color:inherit; background:none; cursor:zoom-in; }
+body:has(#viewport) #overlay .exr-page .exr-card-preview .hs-card { width:100%; max-width:260px; margin:0 auto; font-size:18px; pointer-events:none; }
+#overlay .exr-page .exr-card-preview .hs-card { transition:none; }
+#overlay .exr-page .exr-card-face { display:block; }
+#overlay .exr-page .exr-inspect-hint { position:absolute; left:50%; bottom:8px; transform:translateX(-50%); padding:3px 10px; border:1px solid #d8d6cd66; background:#121b25e8; color:#e8e7df; font-size:16px; opacity:0; pointer-events:none; white-space:nowrap; }
+#overlay .exr-page .exr-card-preview:is(:hover,:focus-visible) .exr-inspect-hint { opacity:1; }
+#overlay .exr-page .exr-deposit { display:flex; flex-direction:column; align-items:center; justify-content:center; box-sizing:border-box; width:100%; margin:12px 0 0; min-height:50px; padding:8px; border:1px solid #a6b7b845; border-radius:3px; background:#253d4bcc; color:#e6ece5; cursor:pointer; font-size:22px; line-height:1.2; }
+#overlay .exr-page .exr-deposit small { margin-top:4px; font-size:16px; color:#b7c9cb; }
+#overlay .exr-page .exr-deposit:hover:not(:disabled) { background:#345460; border-color:#b7d7d1; }
+#overlay .exr-page .exr-deposit:disabled { opacity:1; background:#262a2e; color:#b5b8b9; cursor:default; border-color:#82898d26; }
+#overlay .exr-page .exr-deposit:disabled small { color:#a4aaad; }
+#overlay .exr-page .exr-brought { display:block; margin-top:7px; color:#c8b792; font-size:16px; text-align:center; }
+#overlay .exr-page .exr-item-saved { display:block; position:absolute; right:12px; bottom:18px; padding:5px; text-align:center; background:#15212ce8; border-radius:50%; color:#b2d2be; font-size:19px; }
+#overlay .exr-page .exr-sidebar { display:flex; flex-direction:column; min-height:0; gap:22px; padding-left:28px; border-left:1px solid var(--exr-line); }
+#overlay .exr-page .exr-store { flex:none; }
+#overlay .exr-page .exr-capacity > div:first-child { display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+#overlay .exr-page .exr-capacity span { color:#bac5c9; font-size:20px; }
+#overlay .exr-page .exr-capacity strong { color:var(--exr-ink); font-size:34px; white-space:nowrap; }
+#overlay .exr-page .exr-capacity small { color:#a9b8bf; font-size:19px; font-weight:400; }
+#overlay .exr-page .exr-meter { height:5px; margin:12px 0; background:#9aafb729; }
+#overlay .exr-page .exr-meter i { display:block; height:100%; background:var(--feedback-blue); }
+#overlay .exr-page .exr-capacity p { color:var(--feedback-blue); font-size:22px; margin:0 0 18px; }
+#overlay .exr-page .exr-button { display:flex; align-items:center; justify-content:center; gap:18px; min-height:68px; padding:14px 22px; border:1px solid #afc6c25c; border-radius:2px; margin:0; box-shadow:none; font-size:23px; font-weight:600; line-height:1.35; cursor:pointer; }
+#overlay .exr-page .exr-store .exr-button { width:100%; flex-direction:column; gap:3px; }
+#overlay .exr-page .exr-store .exr-button b { font-size:19px; font-weight:500; }
+#overlay .exr-page .exr-primary { background:var(--feedback-blue); color:#17232b; border-color:#d9e4e8; }
+#overlay .exr-page .exr-button:hover:not(:disabled) { filter:brightness(1.08); }
+#overlay .exr-page .exr-button:disabled { background:#31363a; color:#aeb8bc; border-color:#74838a40; opacity:1; cursor:default; }
+#overlay .exr-page .exr-bulk-note { color:#bbc6ca; font-size:18px; margin:12px 0 0; }
+#overlay .exr-page .exr-sidebar-scroll { min-height:0; overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; padding-right:6px; }
+#overlay .exr-page .exr-sidebar-scroll > * + * { margin-top:22px; }
+#overlay .exr-page :is(.exr-resource-block,.exr-pocket,.exr-loss) h3 { font-size:22px; font-weight:550; color:#dbe0da; }
+#overlay .exr-page .exr-resources { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+#overlay .exr-page .exr-resources > div { display:flex; flex-direction:column; padding:12px 4px; background:none; border:0; }
+#overlay .exr-page .exr-resources span { font-size:20px; color:#bdc9c9; }
+#overlay .exr-page .exr-resources b { font-size:32px; color:var(--exr-ink); }
+#overlay .exr-page .exr-pocket { padding-top:20px; border-top:1px solid var(--exr-line); }
+#overlay .exr-page .exr-pocket-count { color:#d5deca; margin:5px 0; font-size:20px; }
+#overlay .exr-page .exr-pocket-count b { color:var(--exr-ink); font-size:34px; }
+#overlay .exr-page .exr-pocket > p:not(.exr-pocket-count) { font-size:18px; line-height:1.55; color:#b3c0c6; }
+#overlay .exr-page .exr-pocket .exr-pocket-loss { margin-top:8px; color:#ceb2a5; }
+#overlay .exr-page details summary { cursor:pointer; color:#b7c9ca; font-size:18px; }
+#overlay .exr-page .exr-pocket-list { margin-top:12px; }
+#overlay .exr-page .exr-pocket-list ul { list-style:none; padding:0; margin:8px 0; }
+#overlay .exr-page .exr-pocket-list button { display:flex; width:100%; justify-content:space-between; padding:7px 0; border:0; background:none; color:#ced9da; font-size:18px; text-align:left; }
+#overlay .exr-page .exr-left-behind { border-top:1px solid var(--exr-line); padding-top:16px; }
+#overlay .exr-page .exr-left-behind p { font-size:18px; color:#b2bbc1; margin-top:10px; }
+#overlay .exr-page .exr-saved-shelf { border-top:1px solid var(--exr-line); padding:20px 0 0; margin-top:24px; }
+#overlay .exr-page .exr-saved-shelf summary { color:#b5d1bd; font-size:22px; }
+#overlay .exr-page .exr-saved-shelf summary span { color:#9caeb7; font-size:18px; margin-left:20px; }
+#overlay .exr-page .exr-saved-shelf[open] .exr-card-grid { margin-top:20px; }
+#overlay .exr-page .exr-footer { display:flex; flex:none; align-items:center; justify-content:space-between; gap:24px; padding-top:22px; border-top:1px solid var(--exr-line); }
+#overlay .exr-page .exr-finish-note { display:flex; flex-direction:column; gap:5px; min-width:0; }
+#overlay .exr-page .exr-finish-note b { color:#c6dbcc; font-size:23px; }
+#overlay .exr-page .exr-finish-note span { color:#aab8be; font-size:18px; overflow-wrap:anywhere; max-width:1160px; }
+#overlay .exr-page .exr-finish-note.is-risk b { color:#e2b7a2; }
+#overlay .exr-page .exr-finish-note.is-risk span { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; color:#c4aaa0; }
+#overlay .exr-page .exr-footer > button { flex:none; min-width:330px; }
+#overlay .exr-page .exr-danger { color:#ebc7b7; background:#48332f; border-color:#a1766666; }
+#overlay .exr-page .exr-empty { display:flex; min-height:320px; grid-column:1/-1; flex-direction:column; align-items:center; justify-content:center; gap:16px; color:#adbdc5; text-align:center; }
+#overlay .exr-page .exr-empty > span { font-size:54px; opacity:.65; }
+#overlay .exr-page .exr-empty h3 { color:#d0ded3; font-size:30px; }
+#overlay .exr-page .exr-empty p { font-size:22px; }
+#overlay .exr-page .exr-ready { color:#b9d0bb; font-size:22px; padding:12px 0; }
+#overlay .exr-page .exr-run-facts { display:flex; flex:none; gap:0; flex-wrap:wrap; margin-top:-6px; }
+#overlay .exr-page .exr-run-facts > span { color:#aabac2; font-size:21px; padding:0 28px; border-left:1px solid var(--exr-line); }
+#overlay .exr-page .exr-run-facts > span:first-child { padding-left:0; border-left:0; }
+#overlay .exr-page .exr-run-facts b { color:var(--exr-ink); font-weight:500; }
+#overlay .exr-page .exr-loss { padding:16px 0; border-top:1px solid var(--exr-line); background:none; }
+#overlay .exr-page .exr-loss h3 { color:#d9b5a4; }
+#overlay .exr-page .exr-loss p { color:#c8aea1; font-size:19px; line-height:1.6; margin-top:8px; overflow-wrap:anywhere; }
+#overlay .exr-page .exr-currency-note { color:#9eafb9; font-size:18px; line-height:1.6; }
+#overlay .exr-page :is(button,summary):focus-visible { outline:3px solid var(--feedback-blue); outline-offset:4px; }
+#overlay .exr-page[data-reveal="true"] .exr-header { animation:exr-arrive .24s ease-out both; }
+#overlay .exr-page[data-reveal="true"] .exr-card-grid { animation:exr-arrive .28s ease-out both; }
+@keyframes exr-arrive { from { opacity:.65; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+@media (prefers-reduced-motion:reduce) { #overlay .exr-page *, #overlay .exr-page *::before, #overlay .exr-page *::after { animation:none!important; transition:none!important; } }
+
+/* Main surface is a quiet card gallery. Rules and run history stay one level below. */
+#overlay .exr-page .exr-notice:empty { display:none; }
+#overlay .exr-page .exr-rarity-mark { width:26px; height:3px; background:var(--exr-rarity); }
+#overlay .exr-page .exr-item-meta b { padding:2px 10px; background:#101d28a6; border-radius:3px; }
+#overlay .exr-page .exr-pocket-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+#overlay .exr-page .exr-pocket-count small { font-size:18px; }
+#overlay .exr-page .exr-pocket-list p { font-size:18px; color:var(--exr-muted); line-height:1.6; margin-top:12px; }
+#overlay .exr-page .exr-expedition-details { border-top:1px solid var(--exr-line); padding-top:18px; }
+#overlay .exr-page .exr-expedition-details .exr-run-facts { display:grid; gap:8px; margin:16px 0; }
+#overlay .exr-page .exr-expedition-details .exr-run-facts > span { padding:0; border:0; font-size:19px; }
+
+/* Confirmation stays in the current gallery; only the item list scrolls. */
+#overlay .exr-page .exr-sort-note { margin:8px 0 0; color:#aab8be; font-size:18px; }
+#overlay .exr-page .exr-footer.is-confirming { padding-top:14px; }
+#overlay .exr-page .exr-confirm { width:100%; min-width:0; }
+#overlay .exr-page .exr-confirm-list { max-height:120px; overflow-y:auto; margin:10px 0; padding:0 8px 0 0; list-style:none; }
+#overlay .exr-page .exr-confirm-list li { display:flex; justify-content:space-between; gap:20px; color:#d3c3bb; font-size:20px; line-height:1.5; }
+#overlay .exr-page .exr-confirm-list li span { overflow-wrap:anywhere; }
+#overlay .exr-page .exr-confirm-list li b { flex:none; }
+#overlay .exr-page .exr-confirm-actions { display:flex; justify-content:flex-end; gap:16px; }
+#overlay .exr-page .exr-confirm-actions button { flex:0 1 auto; }

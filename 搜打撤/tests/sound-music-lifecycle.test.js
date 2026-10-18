@@ -5,13 +5,14 @@ import { SceneMusicPlayer } from '../game/src/audio/sound.music.player.js';
 function harness() {
   const tracks = [], errors = [];
   const player = new SceneMusicPlayer((scene, callbacks, options = {}) => {
-    let state = 'unloaded', playing = false, volume = 0;
+    let state = 'unloaded', playing = false, volume = 0, position = 0;
     const track = {
       scene, options, callbacks,
       load: vi.fn(() => { state = 'loading'; }),
       ready: () => { state = 'loaded'; callbacks.load(); },
       fail: error => callbacks.error(null, error),
       state: () => state, playing: () => playing,
+      seek: () => position, advance: seconds => { position = seconds; },
       volume: value => { if (value !== undefined) volume = value; if (value !== undefined) track.pendingFade = null; return volume; },
       mute: vi.fn(), pause: vi.fn(() => { playing = false; }), unload: vi.fn(() => { state = 'unloaded'; }),
       play: vi.fn(() => { playing = true; callbacks.play(); }),
@@ -27,39 +28,37 @@ function harness() {
 beforeEach(() => vi.useFakeTimers());
 afterEach(() => vi.useRealTimers());
 
-describe('scene BGM media fallback lifecycle', () => {
-  it('falls back exactly once for decoding and reports only final failure', () => {
-    const h = harness(); h.set('title'); const first = h.tracks[0];
-    first.fail('Decoding audio data failed.');
-    expect(first.unload).toHaveBeenCalledOnce(); expect(h.tracks).toHaveLength(2);
-    const media = h.tracks[1]; expect(media.options.html5).toBe(true); expect(media.load).toHaveBeenCalledOnce();
-    media.fail('Decoding failed again');
-    expect(h.tracks).toHaveLength(2); expect(h.errors).toEqual([['title', 'Decoding failed again']]);
+describe('scene BGM explicit media lifecycle', () => {
+  it('selects HTML5 on the first load and never falls back after decode failure', () => {
+    const h = harness(); h.set('title'); const media = h.tracks[0];
+    expect(media.options).toEqual({ html5: true, backend: 'html5' });
+    media.fail('Decoding audio data failed.'); h.set('title'); h.set('title');
+    expect(media.unload).toHaveBeenCalledOnce(); expect(h.tracks).toHaveLength(1);
+    expect(h.errors).toEqual([['title', 'Decoding audio data failed.']]);
+    expect(h.player.snapshot()).toMatchObject({ backend: 'html5', playing: false, current: null,
+      error: { scene: 'title', stage: 'load', message: 'Decoding audio data failed.' } });
     expect(h.player.snapshot().tracks).toHaveLength(0);
   });
-
-  it('does not change channels for a network error', () => {
-    const h = harness(); h.set('title'); h.tracks[0].fail('404');
+  it('does not retry network failure until the user disables and reenables music', () => {
+    const h = harness(); h.set('title'); h.tracks[0].fail('404'); h.set('title');
     expect(h.tracks).toHaveLength(1); expect(h.errors).toEqual([['title', '404']]);
+    h.set('title', { enabled: false, immediate: true }); h.set('title');
+    expect(h.tracks).toHaveLength(2); expect(h.tracks[1].options.html5).toBe(true);
   });
-
-  it('keeps valid previous music if both next-song channels fail', () => {
+  it('keeps previous music if the next media load fails, without another channel', () => {
     const h = harness(); h.set('board'); h.tracks[0].ready();
-    h.set('shop'); h.tracks[1].fail('Decoding failed'); h.tracks[2].fail('media error');
+    h.set('shop'); h.tracks[1].fail('media error');
     expect(h.player.snapshot().current).toBe('board'); expect(h.tracks[0].playing()).toBe(true);
-    expect(h.tracks[0].pause).not.toHaveBeenCalled();
+    expect(h.tracks[0].pause).not.toHaveBeenCalled(); expect(h.tracks).toHaveLength(2);
   });
-
-  it('ignores callbacks from the first channel after replacing it', () => {
-    const h = harness(); h.set('title'); const first = h.tracks[0]; first.fail('Decoding failed');
-    first.ready(); first.fail('404'); first.callbacks.unlock(); first.callbacks.playError();
-    expect(first.play).not.toHaveBeenCalled(); expect(h.errors).toHaveLength(0);
-    expect(h.tracks[1].play).not.toHaveBeenCalled();
-    h.tracks[1].ready(); expect(h.tracks[1].play).toHaveBeenCalledOnce();
+  it('ignores every callback from a failed and released media track', () => {
+    const h = harness(); h.set('title'); const failed = h.tracks[0]; failed.fail('media error');
+    failed.ready(); failed.fail('late'); failed.callbacks.unlock(); failed.callbacks.playError(); failed.started();
+    expect(failed.play).not.toHaveBeenCalled(); expect(h.errors).toHaveLength(1);
+    expect(h.player.snapshot().current).toBe(null); expect(h.player.snapshot().playing).toBe(false);
   });
-
-  it.each(['leave', 'mute', 'dispose'])('releases an in-flight media fallback on %s and ignores all late callbacks', action => {
-    const h = harness(); h.set('title'); h.tracks[0].fail('Decoding failed'); const media = h.tracks[1];
+  it.each(['leave', 'mute', 'dispose'])('releases pending media on %s and ignores late callbacks', action => {
+    const h = harness(); h.set('title'); const media = h.tracks[0];
     if (action === 'leave') h.set('board');
     if (action === 'mute') h.set('title', { enabled: false, immediate: true });
     if (action === 'dispose') h.player.dispose();
@@ -68,7 +67,57 @@ describe('scene BGM media fallback lifecycle', () => {
     expect(media.play).not.toHaveBeenCalled(); expect(h.errors).toHaveLength(0);
     expect(h.player.snapshot().tracks.some(track => track.scene === 'title')).toBe(false);
   });
-
+  it('only retires old music after confirmed media playback, and exposes position', () => {
+    const h = harness(); h.set('board'); const old = h.tracks[0]; old.ready(); old.advance(12.5);
+    expect(h.player.snapshot()).toMatchObject({ playing: true, positionSeconds: 12.5 });
+    h.set('battle'); const next = h.tracks[1]; next.play.mockImplementation(() => {}); next.ready();
+    expect(h.player.snapshot().current).toBe('board'); expect(old.pause).not.toHaveBeenCalled();
+    next.callbacks.playError(null, 'autoplay blocked');
+    expect(h.player.snapshot().error.stage).toBe('play'); expect(old.playing()).toBe(true);
+    next.callbacks.unlock(); next.started(); next.advance(1.25);
+    expect(h.player.snapshot()).toMatchObject({ backend: 'html5', current: 'battle', playing: true, positionSeconds: 1.25, error: null });
+    vi.advanceTimersByTime(532); expect(old.unload).toHaveBeenCalledOnce();
+    h.set('shop'); const shop = h.tracks[2]; shop.ready(); vi.advanceTimersByTime(532);
+    expect(next.unload).toHaveBeenCalledOnce(); expect(h.tracks.every(t => t.options.html5)).toBe(true);
+    expect(h.player.snapshot().tracks).toHaveLength(1); h.player.dispose(); expect(shop.unload).toHaveBeenCalledOnce();
+    expect(vi.getTimerCount()).toBe(0);
+  });
+  it('updates the surviving old track volume after a new media load failure', () => {
+    const h = harness(); h.set('board'); const old = h.tracks[0]; old.ready(); old.volume(.12);
+    h.set('battle'); h.tracks[1].fail('network'); h.set('battle', { volume: .06 });
+    expect(old.pendingFade).toBe(.06); expect(h.tracks).toHaveLength(2);
+  });
+  it('keeps one looping media entry across repeated play callbacks and frees it on mute', () => {
+    const h = harness(); h.set('battle'); const track = h.tracks[0]; track.ready();
+    track.advance(119); track.callbacks.play(); track.advance(.5); track.callbacks.play();
+    expect(h.tracks).toHaveLength(1); expect(track.load).toHaveBeenCalledOnce(); expect(track.play).toHaveBeenCalledOnce();
+    expect(h.player.snapshot()).toMatchObject({ playing: true, positionSeconds: .5 });
+    h.set('battle', { enabled: false, immediate: true }); expect(track.unload).toHaveBeenCalledOnce();
+    expect(h.player.snapshot().playing).toBe(false); expect(vi.getTimerCount()).toBe(0);
+  });
+  it('releases an optimistic-playing pending track when a third scene supersedes it', () => {
+    const h = harness(); h.set('board'); const board = h.tracks[0]; board.ready();
+    h.set('battle'); const battle = h.tracks[1]; battle.play.mockImplementation(() => {});
+    battle.ready(); battle.playing = () => true; // Howler marks playing before its Promise resolves.
+    h.set('shop'); h.tracks[2].fail('network failure'); battle.started();
+    expect(battle.unload).toHaveBeenCalledOnce(); expect(board.playing()).toBe(true);
+    expect(h.player.snapshot().current).toBe('board'); expect(h.player.snapshot().tracks).toHaveLength(1);
+  });
+  it('does not retry blocked playback on sync; only unlock or a user gesture retries', () => {
+    const h = harness(); h.set('title'); const track = h.tracks[0]; track.play.mockImplementation(() => {}); track.ready();
+    track.callbacks.playError(null, 'blocked'); for (let i=0;i<4;i++) h.set('title');
+    expect(track.play).toHaveBeenCalledOnce(); h.player.retryBlocked(); expect(track.play).toHaveBeenCalledTimes(2);
+    h.player.retryBlocked(); expect(track.play).toHaveBeenCalledTimes(2);
+    track.callbacks.playError(null, 'blocked'); track.callbacks.unlock(); expect(track.play).toHaveBeenCalledTimes(3);
+  });
+  it.each(['loading', 'blocked'])('updates audible old-track gain while the next track is %s', state => {
+    const h = harness(); h.set('board'); const old = h.tracks[0]; old.ready(); old.volume(.12);
+    h.set('battle'); const next = h.tracks[1];
+    if (state === 'blocked') { next.play.mockImplementation(() => {}); next.ready(); next.callbacks.playError(null, 'blocked'); }
+    h.set('battle', { volume: 0 }); expect(old.pendingFade).toBe(0);
+    h.set('battle', { volume: .054 }); expect(old.pendingFade).toBe(.054);
+    expect(h.player.snapshot().current).toBe('board'); expect(old.pause).not.toHaveBeenCalled();
+  });
   it.each([0, 0.054, 0.25])('uses latest slider/ducking value %s after a suspended play request starts', volume => {
     const h = harness(); h.set('title'); const track = h.tracks[0]; track.play.mockImplementation(() => {});
     track.ready(); h.set('title', { volume }); track.started();
@@ -124,5 +173,5 @@ it('ignores an old onplay Promise after reentry and cannot change the replacemen
   const replacement = h.tracks[1]; replacement.ready();
   old.started();
   expect(replacement.pendingFade).toBe(0.25); expect(replacement.play).toHaveBeenCalledOnce();
-  expect(old.fade).toHaveBeenCalledTimes(1); expect(h.player.snapshot().current).toBe('title');
+  expect(old.fade).not.toHaveBeenCalled(); expect(h.player.snapshot().current).toBe('title');
 });

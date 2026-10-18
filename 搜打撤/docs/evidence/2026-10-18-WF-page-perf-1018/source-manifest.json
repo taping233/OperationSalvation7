@@ -1,0 +1,86 @@
+[
+  {
+    "path": "game/src/cards/cards.view.js",
+    "currentSha256": "204e88a43dbc64c70f1e28f8ae9898216494accb7256af97ffcbd19c8a1cfabb",
+    "frozenBrowserSha256": "204e88a43dbc64c70f1e28f8ae9898216494accb7256af97ffcbd19c8a1cfabb",
+    "sameAsBrowser": true
+  },
+  {
+    "path": "game/src/ui/home-fx.js",
+    "currentSha256": "b9155aa5b673bec8c13c34ee753da35fc5a9250e26ed0217b28dd521ff7ee74c",
+    "frozenBrowserSha256": "b9155aa5b673bec8c13c34ee753da35fc5a9250e26ed0217b28dd521ff7ee74c",
+    "sameAsBrowser": true
+  },
+  {
+    "path": "game/src/hub/hub.warehouse.js",
+    "currentSha256": "261c57aeff95f0c6c50a05bf6950713985ed61fb63a7d42b78f3efe3e38f17fb",
+    "frozenBrowserSha256": "261c57aeff95f0c6c50a05bf6950713985ed61fb63a7d42b78f3efe3e38f17fb",
+    "sameAsBrowser": true
+  },
+  {
+    "path": "game/src/hub/game.bag.view2.js",
+    "currentSha256": "d370d6f68772085c6b3b83ddcfaf961bcbb82c5e246aa1f9b29beba263c8cba1",
+    "frozenBrowserSha256": "d370d6f68772085c6b3b83ddcfaf961bcbb82c5e246aa1f9b29beba263c8cba1",
+    "sameAsBrowser": true
+  },
+  {
+    "path": "game/src/run/expedition.view.js",
+    "currentSha256": "7d3e6234268ac2ee7a20a7996ffa2d6fe0c725d34581e5b9747014fa1f657a18",
+    "frozenBrowserSha256": "7d3e6234268ac2ee7a20a7996ffa2d6fe0c725d34581e5b9747014fa1f657a18",
+    "sameAsBrowser": true
+  },
+  {
+    "path": "game/src/run/map-travel-path.js",
+    "currentSha256": "409ac7761a003388d3328ac692edc74709b5cd3369093af8648742e1fc3a9f8d",
+    "frozenBrowserSha256": "409ac7761a003388d3328ac692edc74709b5cd3369093af8648742e1fc3a9f8d",
+    "sameAsBrowser": true
+  },
+  {
+    "path": "game/src/run/event-recode-candidates.js",
+    "currentSha256": "27145bf3515187acb516d03ed8d498a3ef5c874ff41683e843afb054fc2d3c47",
+    "frozenBrowserSha256": "27145bf3515187acb516d03ed8d498a3ef5c874ff41683e843afb054fc2d3c47",
+    "sameAsBrowser": true
+  },
+  {
+    "path": "game/src/run/game.run.flow.js",
+    "currentSha256": "f3557bbe858c95e2bfc8b08db08e995fb0f87cf96b1a4e9b6bff7d7ba9e8a3de",
+    "frozenBrowserSha256": "27ed0ab8ad032421bf884043b7836ca6212a52716bf989c167b7aea7ce2d23e3",
+    "sameAsBrowser": false
+  },
+  {
+    "path": "game/src/run/game.run.class-choice.page.js",
+    "currentSha256": "05c40bc4ff3be44a952578559cd8537c4fd586d98e71d8b7899e1730ef9245dc",
+    "frozenBrowserSha256": "05c40bc4ff3be44a952578559cd8537c4fd586d98e71d8b7899e1730ef9245dc",
+    "sameAsBrowser": true
+  },
+  {
+    "path": "game/src/ui/node-scene-view.js",
+    "currentSha256": "65e7a2123d373f2a1be5589b054d81cb3c8e27bf499a6d47639c89b40c1b0672",
+    "frozenBrowserSha256": "65e7a2123d373f2a1be5589b054d81cb3c8e27bf499a6d47639c89b40c1b0672",
+    "sameAsBrowser": true
+  },
+  {
+    "path": "game/src/battle/view/battle.layers.js",
+    "currentSha256": "1edb9488dba72d62ee6cc66233b1ac88fddf59f28e2956a1054dcf76721a789d",
+    "frozenBrowserSha256": "1edb9488dba72d62ee6cc66233b1ac88fddf59f28e2956a1054dcf76721a789d",
+    "sameAsBrowser": true
+  },
+  {
+    "path": "game/src/battle/view/battle.infusion-view.js",
+    "currentSha256": "d79405d53e93fa2a8234c23ca0ac216b01ac20378fd0edfddd56f29ed38d73be",
+    "frozenBrowserSha256": "d79405d53e93fa2a8234c23ca0ac216b01ac20378fd0edfddd56f29ed38d73be",
+    "sameAsBrowser": true
+  },
+  {
+    "path": "game/src/battle/view/battle.view.js",
+    "currentSha256": "330ba953e430d18e27aa22b40e2ba231acd1c0c282430ee77d8e82f38b379d22",
+    "frozenBrowserSha256": "330ba953e430d18e27aa22b40e2ba231acd1c0c282430ee77d8e82f38b379d22",
+    "sameAsBrowser": true
+  },
+  {
+    "path": "game/dev/page-performance-review.html",
+    "currentSha256": "f20f5a58fa31fdfe5f2736628cc51e29ae6a29aaad5575dfbe9e714012d6d0e4",
+    "frozenBrowserSha256": "f20f5a58fa31fdfe5f2736628cc51e29ae6a29aaad5575dfbe9e714012d6d0e4",
+    "sameAsBrowser": true
+  }
+]

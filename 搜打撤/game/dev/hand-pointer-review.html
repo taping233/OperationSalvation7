@@ -1,0 +1,50 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/"><title>手牌指针命中 · 只读隔离夹具</title>
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/cards.css" />
+<link rel="stylesheet" href="css/overlays.css" />
+<link rel="stylesheet" href="css/hub.css" />
+<link rel="stylesheet" href="css/battle.css" />
+<link rel="stylesheet" href="css/scenes.css" />
+<link rel="stylesheet" href="css/lab-ending.css" />
+<link rel="stylesheet" href="css/winter.css" />
+<link rel="stylesheet" href="css/expedition.css" />
+<link rel="stylesheet" href="css/expedition-map.css" />
+<link rel="stylesheet" href="css/map-edge-light.css" />
+<link rel="stylesheet" href="css/expedition-hub.css" />
+<link rel="stylesheet" href="css/expedition-inventory.css" />
+<link rel="stylesheet" href="css/expedition-rewards.css" />
+<link rel="stylesheet" href="css/expedition-battle.css" />
+<link rel="stylesheet" href="css/expedition-library.css" />
+<link rel="stylesheet" href="css/card-v3.css" />
+<link rel="stylesheet" href="css/expedition-roster.css" />
+<link rel="stylesheet" href="css/expedition-shop.css" />
+<link rel="stylesheet" href="css/ui-scale.css" />
+<link rel="stylesheet" href="css/page-slot-select.css" />
+<link rel="stylesheet" href="css/page-settings.css" />
+<link rel="stylesheet" href="css/page-datapage.css" />
+<link rel="stylesheet" href="css/page-ach.css" />
+<link rel="stylesheet" href="css/page-cardforge.css" />
+<link rel="stylesheet" href="css/page-expedition-hud.css" />
+<link rel="stylesheet" href="css/feedback-oct12.css" />
+<link rel="stylesheet" href="css/roster-departure-v2.css" />
+<link rel="stylesheet" href="css/pocket-strip.css" />
+<link rel="stylesheet" href="css/experience-loot.css" />
+<link rel="stylesheet" href="css/page-events.css" />
+<link rel="stylesheet" href="css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="css/page-battle-ui.css" />
+<link rel="stylesheet" href="css/character-idle.css" />
+
+<link rel="stylesheet" href="css/page-transitions.css" />
+<link rel="stylesheet" href="css/ak-skin.css" />
+<link rel="stylesheet" href="css/base-camp.css" />
+<link rel="stylesheet" href="css/base-camp-compact.css" />
+<link rel="stylesheet" href="css/card-layout-selected.css" />
+<link rel="stylesheet" href="css/battle-stage.css" />
+<link rel="stylesheet" href="css/entry-events.css"><style>
+.review-tools{position:absolute;z-index:10000;left:24px;top:12px;display:flex;align-items:center;gap:12px;max-width:1850px;padding:10px 16px;background:#0c1728ed;color:#e8eeee;font:20px sans-serif}.review-tools button,.review-tools select{font:inherit;padding:8px;color:#edf3f1;background:#263d4c;border:1px solid #79939e}.review-tools[hidden]{display:none}.review-output{pointer-events:none;position:absolute;z-index:10001;right:20px;top:100px;bottom:auto;max-width:1050px;max-height:260px;overflow:auto;white-space:pre-wrap;background:#0c1728f5;color:#eaf0ee;font:20px/1.5 monospace;padding:16px}.review-output[hidden]{display:none}
+/* Prototype overrides only: visual lift follows the same policy as ordinary pointerdown. */
+#overlay .battle-stage.sts[data-review-hit="fixed"] .bt-slot{z-index:calc(10 + var(--hand-index,0))}
+#overlay .battle-stage.sts[data-review-hit="fixed"] .bt-slot .bt-card:not(.aim-lift){transform:translateY(var(--hand-rest,64px));filter:none}
+#overlay .battle-stage.sts[data-review-hit="fixed"] .bt-slot.review-active{z-index:90}
+#overlay .battle-stage.sts[data-review-hit="fixed"] .bt-slot.review-active .bt-card:not(.aim-lift){transform:translateY(0);filter:drop-shadow(0 12px 20px #09162566)}
+</style></head><body class="page-covered page-opaque"><nav class="review-tools" aria-label="隔离场景控制">纯呈现 · 不连接存档 <select id="reviewCase" aria-label="选择复核场景"><option value="9">9叠手牌</option><option value="5">5叠手牌</option><option value="3">3叠手牌</option><option value="1">1叠手牌</option></select><select id="hitPolicy" aria-label="命中策略"><option value="original">原命中</option><option value="fixed">固定选牌区域</option></select><button id="diagnose">记录可见按钮矩形</button><button id="reset">清空记录/取消</button><button id="hideTools">收起工具</button></nav><div id="app"><main id="viewport"><div id="overlay" class="room-view" role="dialog" aria-modal="true"><div class="card battle"><h2 id="ovTitle" hidden></h2><div id="ovBody"></div></div></div></main></div><output class="review-output" id="reviewOutput" hidden></output><script type="module" src="/dev/hand-pointer-review.js"></script></body></html>

@@ -1,0 +1,70 @@
+{
+  "coin": {
+    "files": [
+      "assets/sfx/real-foley/coinflip-01.wav",
+      "assets/sfx/real-foley/coinflip-02.wav"
+    ],
+    "gain": 0.28,
+    "group": "ui"
+  },
+  "tradeSell": {
+    "files": [
+      "assets/sfx/real-foley/coinflip-01.wav",
+      "assets/sfx/real-foley/coinflip-02.wav"
+    ],
+    "gain": 0.28,
+    "group": "ui"
+  },
+  "tradeBuy": {
+    "files": [
+      "assets/sfx/real-foley/coinflip-01.wav",
+      "assets/sfx/real-foley/coinflip-02.wav"
+    ],
+    "gain": 0.28,
+    "group": "combat"
+  },
+  "searchStart": {
+    "files": [
+      "assets/sfx/real-foley/book-page-02.wav"
+    ],
+    "gain": 0.13,
+    "group": "ui"
+  },
+  "recodeStart": {
+    "files": [
+      "assets/sfx/real-foley/book-page-02.wav"
+    ],
+    "gain": 0.13,
+    "group": "ui"
+  },
+  "click": {
+    "files": [
+      "assets/sfx/real-foley/wood-tap-01.wav"
+    ],
+    "gain": 0.2,
+    "group": "ui"
+  },
+  "cardSelect": {
+    "files": [
+      "assets/sfx/real-foley/wood-tap-01.wav"
+    ],
+    "gain": 0.16,
+    "group": "ui"
+  },
+  "characterSelect": {
+    "files": [
+      "assets/sfx/real-foley/wood-tap-01.wav"
+    ],
+    "gain": 0.16,
+    "group": "ui"
+  },
+  "foeLunge": {
+    "files": [
+      "assets/sfx/real-foley/tube-whoosh-01.wav",
+      "assets/sfx/real-foley/tube-whoosh-02.wav"
+    ],
+    "gain": 0.18,
+    "group": "combat",
+    "maxDuration": 0.22
+  }
+}

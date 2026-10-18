@@ -258,7 +258,7 @@ export const rulesSlice = {
       return pool.length ? pool[Math.floor(Random.random('card') * pool.length)] : null;
     },
 
-    // 内置初始牌「初始攻击」：每局开始固定携带 5 张（同名堆叠只占 1 格背包）。
+    // 内置初始牌「初始攻击」：每局开始固定携带 5 张（每格最多3张，共占2格背包）。
     // 1 费 · 攻（+0）＝ 伤害等同于攻击力（combat.js：攻击伤害 = 卡面值 + 攻击力）
     SHA: {
       id: 'starter-attack', name: '初始攻击', cost: 1,

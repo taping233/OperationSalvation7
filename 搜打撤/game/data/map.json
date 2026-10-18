@@ -135,7 +135,7 @@
       "name": "灼热异变体",
       "atk": 10,
       "hp": 7,
-      "behavior": "burn"
+      "behavior": "strike"
     },
     "water_el": {
       "id": "water_el",
@@ -156,7 +156,7 @@
       "name": "烛火",
       "atk": 9,
       "hp": 6,
-      "behavior": "burn"
+      "behavior": "strike"
     },
     "grass_el": {
       "id": "grass_el",
@@ -314,7 +314,7 @@
         }
       ],
       "risk": "极高",
-      "strategy": "核心区：腐蚀与灼烧持续消耗、滋生体厚血缠斗，随时准备战术取舍；巨兽「荒渊」偶尔出没",
+      "strategy": "核心区：腐蚀持续消耗、滋生体厚血缠斗，随时准备战术取舍；巨兽「荒渊」偶尔出没",
       "groups": [
         {
           "id": "l4-fire-grass",
@@ -348,7 +348,7 @@
     "small": {
       "name": "小型物资箱",
       "icon": "[[icon:archive]]",
-      "pickFrom": 3,
+      "cards": 1,
       "coins": [
         1,
         1
@@ -381,8 +381,7 @@
         "金币",
         "银币",
         "铜币"
-      ],
-      "tokenChance": 0.3
+      ]
     }
   },
   "layerChests": [

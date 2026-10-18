@@ -1,0 +1,17 @@
+<!doctype html><meta charset="utf-8"><title>故障记录只读恢复页</title>
+<style>body{background:#101820;color:#eee;font:14px monospace;padding:24px}pre{white-space:pre-wrap}button{font:inherit}</style>
+<h1>故障记录只读恢复页</h1><p>仅读取本地白名单摘要。不加载游戏、音乐或存档，不写入记录。末尾缺少事件不证明终止原因。</p><button id="read">刷新摘要</button><pre id="summary"></pre><details><summary>完整白名单记录</summary><pre id="records"></pre></details>
+<script type="module">
+import {readFlight} from '../src/core/flight-recorder.local.js';
+function read(){
+ let rows=[];try{rows=readFlight(localStorage)}catch{/* storage unavailable */}
+ const sessions=[...new Set(rows.map(r=>r.session))];
+ document.querySelector('#summary').textContent=JSON.stringify(sessions.map(session=>{
+  const items=rows.filter(r=>r.session===session);const pulses=items.filter(r=>r.kind==='pulse');
+  const range=key=>{const n=pulses.map(r=>r[key]).filter(Number.isFinite);return n.length?[Math.min(...n),Math.max(...n)]:null};
+  return {session,count:items.length,first:items[0],last:items.at(-1),heapUsedRange:range('heapUsed'),domRange:range('dom'),imagePixelsRange:range('imagePixels'),canvasPixelsRange:range('canvasPixels'),artBytesRange:range('artBytes'),gapRange:range('gapMs'),events:items.filter(r=>r.kind!=='pulse').slice(-12),lastPulses:pulses.slice(-4)};
+ }),null,2);
+ document.querySelector('#records').textContent=JSON.stringify(rows,null,2);
+}
+document.querySelector('#read').addEventListener('click',read);read();
+</script>

@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/"><title>扰敌 · 同种敌实例隔离回归</title>
+<script>
+// Install before any game module: reads and writes only touch this page's memory.
+{const memory=new Map();Object.defineProperty(window,'localStorage',{value:Object.freeze({getItem(key){return memory.get(key)??null},setItem(key,value){memory.set(key,String(value))},removeItem(key){memory.delete(key)},clear(){memory.clear()}})});}
+</script></head><body>
+
+<div id="app"><main id="viewport"><div id="overlay" class="room-view" role="dialog" aria-modal="true">
+<div class="fixture-controls" id="fixtureControls">扰敌隔离 <button data-count="2" disabled>两只同种敌人</button><button data-count="3" disabled>三只同种敌人</button><span id="fixtureStatus">载入真实战斗组件中…</span></div>
+<div class="card room"><h2 id="ovTitle" hidden></h2><div id="ovBody"></div></div></div></main></div>
+<output id="fixtureEvidence" style="position:fixed;left:8px;top:52px;z-index:20000;pointer-events:none;max-width:640px;background:#07121ce8;color:white;font:12px monospace;white-space:pre-wrap"></output>
+<script type="module" src="/dev/provoke-instance-review.js"></script></body></html>

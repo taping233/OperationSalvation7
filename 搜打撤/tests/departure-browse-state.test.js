@@ -10,7 +10,7 @@ vi.mock('../game/src/hub/departure.view-updates.js', () => ({ bindDepartureFilte
 vi.mock('../game/src/ui/departure-transition.js', () => ({ enterDepartureCut: ports.cut, startDepartureHandoff: ports.handoff }));
 let actions, base, departure;
 beforeEach(async () => {
-  vi.resetModules(); ports.choice.mockReset(); ports.start.mockReset(); ports.hub.mockClear(); ports.handoff.mockReset(); ports.cut.mockReset();
+  vi.resetModules(); ports.choice.mockReset(); ports.start.mockReset(); ports.hub.mockClear(); ports.handoff.mockReset(); ports.handoff.mockReturnValue(new Promise(() => {})); ports.cut.mockReset();
   actions = {};
   base = { slot: 1, data: { selMode: 'standard', pocket: [], stash: [{ card: { name: '甲', rarity: '古朴' }, count: 2 }] },
     PETS: [], bagCap: () => 16, carriedPet: () => null, ownedPets: () => [] };

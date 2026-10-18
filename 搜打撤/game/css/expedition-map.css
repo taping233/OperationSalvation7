@@ -121,3 +121,8 @@ body:has(#overlay:not([hidden])) :is(#resHud,#hpHud) .map-resource-tip,
 body:has(#title:not([hidden])) :is(#resHud,#hpHud) .map-resource-tip { display:none; }
 body.reduce-motion :is(#resHud,#hpHud) .map-resource-tip { transition:none; transform:none; }
 @media (prefers-reduced-motion:reduce) { :is(#resHud,#hpHud) .map-resource-tip { transition:none; transform:none; } }
+
+/* Reuse the shared page-visibility state; foreground resumes the same phase. */
+body.linked-backgrounded #viewport::before,
+body.linked-backgrounded #viewport::after,
+body.linked-backgrounded .map-volumetric-light i { animation-play-state: paused !important; }

@@ -15,6 +15,8 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import { targetSideFor, unplayableReasonFor } from '../game/src/battle/effects/battle.target-rules.js';
 import { HAND_COST_PATTERNS } from '../game/src/battle/effects/hand-cost-patterns.js';
+import { requiresInfusion } from '../game/src/battle/effects/battle.infusion.js';
+import { isFoeFightCard } from '../game/src/battle/effects/battle.foe-fight.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
@@ -67,6 +69,12 @@ async function drain(maxLoops = 200) {
     if (s.discovering) { BattleSession.commands.pickDiscover(0); continue; }
     if (s.choosing) { BattleSession.commands.pickChoice(0); continue; }
     if (s.handSelecting) { BattleSession.commands.skipHandSelect(); continue; }
+    if (s.pendingTarget) {
+      const side = viewApi.targetSide(s.pendingTarget.card) === 'self' ? 'self'
+        : s.foes.findIndex((foe, index) => !foe.dead && index !== s.pendingTarget.excludedTargetIndex);
+      expect(side).not.toBe(-1);
+      BattleSession.commands.playCard(s.pendingTarget.uid, side); continue;
+    }
     if (!s.busy && s.actionQueueLength === 0) {
       await nap(30);   // 根治负载 flake：首闲≠终闲——用新鲜快照跨调度间隙再确认
       const fresh = snap();
@@ -112,7 +120,7 @@ function sideFor(card) {
   return undefined;
 }
 
-// 注能燃料：同名一叠只能选一张（toggle 语义），燃料必须互相不同名
+// 审计燃料使用不同卡名；实际选择命令仍按 UID 提交每张材料。
 const FILLER_NAMES = ['初始攻击', '毒药', '坚冰结界', '禁言术'];
 
 // 注能卡：从手牌补选燃料到满，再确认注能
@@ -139,7 +147,9 @@ async function settleInfusion() {
 // 在已开打的战斗里把一张手牌真正打出（含注能、面板自动点选）
 async function playInBattle(game, uid, card) {
   const before = observe(game, snap());
-  BattleSession.commands.playCard(uid, sideFor(card));
+  // Pure infusion cannot execute through direct targeting. Complete the same
+  // material choice as the player before submitting its final target.
+  BattleSession.commands.playCard(uid, requiresInfusion(card) ? undefined : sideFor(card));
   if (snap().infusing) await settleInfusion();
   const end = await drain();
   return { before, after: observe(game, end), end };
@@ -239,7 +249,8 @@ async function auditOne(card) {
   const precursor = imitate ? [C.all().find(entry => entry.id === 'starter-attack')] : [];
   const game = makeGame([card, ...fill, ...precursor]);
   try {
-    BattleSession.start(game, [foeDef()], { isBoss: false, name: '审计' });
+    const enemies = isFoeFightCard(card) ? [foeDef(), { ...foeDef(), id:'archer', name:'审计第二靶子' }] : [foeDef()];
+    BattleSession.start(game, enemies, { isBoss: false, name: '审计' });
     const uid = game.ownedCards[0].uid;
     // 受缚之残影（2026-09-16 定版重做）：开局即破封化形，原卡按设计离场（abyss-sovereign.test.js 实打覆盖）
     if (card.id === 'tt8-hero-sealer') { endBattle(game); return; }
@@ -265,6 +276,20 @@ async function auditOne(card) {
     }
     const ready = snap();
     const r = await playInBattle(game, uid, effectiveCard);
+    if (isFoeFightCard(card)) {
+      expect(r.end.pendingTarget).toBeNull();
+      expect(r.end.energy).toBe(ready.energy - card.cost);
+      expect(r.end.foes.map((foe, index) => ready.foes[index].hp - foe.hp)).toEqual([1, 1]);
+    }
+    if (['tt7-meteorstrong', 'tt12-raydragon'].includes(card.id)) {
+      expect(r.end.infusing).toBeNull(); expect(r.end.pendingTarget).toBeNull();
+      expect(r.end.energy).toBe(ready.energy - card.cost);
+      const spentMaterials = ready.hand.filter(fuelUid => fuelUid !== uid && !r.end.hand.includes(fuelUid));
+      expect(spentMaterials).toHaveLength(need);
+      const baseDamage = card.id === 'tt12-raydragon' ? 11 + game.spellPower
+        : 3 * (C.all().find(entry => entry.name === '火球').dmg + game.spellPower);
+      expect(ready.foes[0].hp - r.end.foes[0].hp).toBe(baseDamage);
+    }
     if (imitate) {
       expect(r.end.energy).toBe(ready.energy - 1);
       expect(r.end.foes[0].hp).toBeLessThan(ready.foes[0].hp);

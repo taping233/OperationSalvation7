@@ -1,9 +1,14 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
+import { Texture } from "pixi.js";
 
 const ticker = { start: vi.fn(), stop: vi.fn() };
 const destroy = vi.fn();
+const render = vi.fn();
+const applicationOptions = vi.fn();
+let frames, resizeCallbacks;
+const flushPaint = () => { const pending = [...frames.values()]; frames.clear(); pending.forEach(fn => fn()); };
 vi.mock("pixi.js", () => {
   class Node {
     constructor() {
@@ -27,7 +32,9 @@ vi.mock("pixi.js", () => {
   }
   return {
     Application: class {
-      constructor() {
+      constructor(options) {
+        applicationOptions(options);
+        this.render = render;
         this.view = document.createElement("canvas");
         this.stage = new Node();
         this.ticker = ticker;
@@ -108,7 +115,18 @@ describe("M05 home scene", () => {
   beforeEach(() => {
     document.body.innerHTML = '<main id="host"></main>';
     vi.clearAllMocks();
+    Object.defineProperty(document, "hidden", { configurable: true, value: false });
+    frames = new Map(); resizeCallbacks = [];
+    let id = 0;
+    vi.stubGlobal('requestAnimationFrame', vi.fn(fn => { frames.set(++id, fn); return id; }));
+    vi.stubGlobal('cancelAnimationFrame', vi.fn(key => frames.delete(key)));
+    vi.stubGlobal('ResizeObserver', class {
+      constructor(fn) { resizeCallbacks.push(fn); }
+      observe() {}
+      disconnect() {}
+    });
   });
+  afterEach(() => vi.unstubAllGlobals());
 
   it("五热点和旧入口发同一 openPanel 意图，遮罩内点击不冒泡", async () => {
     const intents = [];
@@ -297,13 +315,19 @@ describe("M05 home scene", () => {
     controller.dispose();
   });
 
-  it("隐藏暂停 ticker，dispose 解绑并销毁画布", () => {
+  it("静态房间只按需绘制，隐藏取消待绘制帧且销毁幂等", () => {
     const host = document.getElementById("host");
     const controller = mountHome({ host, view: view(), onIntent: vi.fn() });
+    expect(applicationOptions).toHaveBeenCalledWith(expect.objectContaining({ autoStart: false }));
+    expect(frames.size).toBe(1);
+    flushPaint();
+    expect(render).toHaveBeenCalledTimes(1);
+    expect(frames.size).toBe(0);
+    controller.update(view());
     controller.setActive(false);
-    expect(ticker.stop).toHaveBeenCalledTimes(1);
+    expect(frames.size).toBe(0);
     controller.setActive(true);
-    expect(ticker.start).toHaveBeenCalledTimes(1);
+    expect(frames.size).toBe(1);
     controller.dispose();
     expect(destroy).toHaveBeenCalledTimes(1);
     expect(host.innerHTML).toBe("");
@@ -311,7 +335,7 @@ describe("M05 home scene", () => {
     expect(destroy).toHaveBeenCalledTimes(1);
   });
 
-  it("页面隐藏停 ticker，重新显示自动恢复入口交互", async () => {
+  it("页面隐藏停止绘制，重新显示只补一帧并恢复入口交互", async () => {
     const intents = [],
       host = document.getElementById("host");
     const controller = mountHome({
@@ -327,17 +351,97 @@ describe("M05 home scene", () => {
       value: true,
     });
     document.dispatchEvent(new Event("visibilitychange"));
-    expect(ticker.stop).toHaveBeenCalled();
+    expect(frames.size).toBe(0);
     Object.defineProperty(document, "hidden", {
       configurable: true,
       value: false,
     });
     document.dispatchEvent(new Event("visibilitychange"));
-    expect(ticker.start).toHaveBeenCalled();
+    expect(frames.size).toBe(1);
+    expect(ticker.start).not.toHaveBeenCalled();
     host.querySelector(".home-hotspot--deploy").click();
     await Promise.resolve();
     expect(intents.some((i) => i.type === "openPanel")).toBe(true);
     controller.dispose();
+  });
+
+  it("更新和 resize 合并绘制，离开页后不绘制，返回补最新状态", () => {
+    const controller = mountHome({ host: document.getElementById('host'), view: view(), onIntent: vi.fn() });
+    flushPaint();
+    controller.update(view());
+    resizeCallbacks.forEach(fn => fn());
+    controller.update(view());
+    expect(frames.size).toBe(1);
+    flushPaint();
+    expect(render).toHaveBeenCalledTimes(2);
+    controller.setActive(false);
+    controller.update(view());
+    resizeCallbacks.forEach(fn => fn());
+    expect(frames.size).toBe(0);
+    controller.setActive(true);
+    flushPaint();
+    expect(render).toHaveBeenCalledTimes(3);
+    controller.update(view());
+    controller.dispose();
+    expect(frames.size).toBe(0);
+    flushPaint();
+    expect(render).toHaveBeenCalledTimes(3);
+  });
+
+  it("可见房间纹理就绪后合帧补绘且没有连续帧", () => {
+    const listeners = new Map();
+    const base = { valid: false,
+      on: (event, callback) => listeners.set(event, callback),
+      off: (event, callback) => { if (listeners.get(event) === callback) listeners.delete(event); },
+    };
+    Texture.from.mockReturnValueOnce({ baseTexture: base });
+    const controller = mountHome({ host: document.getElementById('host'), view: view(), onIntent: vi.fn(),
+      assets: { assets: [{ id: 'home-room-candidate', url: '/room.webp' }] } });
+    flushPaint();
+    listeners.get('loaded')();
+    expect(frames.size).toBe(1);
+    flushPaint();
+    expect(render).toHaveBeenCalledTimes(2);
+    expect(frames.size).toBe(0);
+    expect(listeners.size).toBe(0);
+    controller.dispose();
+  });
+
+  it("纹理延迟就绪只请求一帧，隐藏时不画，销毁解绑未完成纹理", () => {
+    const listeners = new Map();
+    const base = {
+      valid: false,
+      on: vi.fn((event, callback) => listeners.set(event, callback)),
+      off: vi.fn((event, callback) => { if (listeners.get(event) === callback) listeners.delete(event); }),
+    };
+    Texture.from.mockReturnValueOnce({ baseTexture: base });
+    const controller = mountHome({
+      host: document.getElementById('host'), view: view(), onIntent: vi.fn(),
+      assets: { assets: [{ id: 'home-room-candidate', url: '/room.webp' }] },
+    });
+    flushPaint();
+    expect(render).toHaveBeenCalledTimes(1);
+    controller.setActive(false);
+    listeners.get('loaded')();
+    expect(frames.size).toBe(0);
+    expect(listeners.size).toBe(0);
+    controller.setActive(true);
+    flushPaint();
+    expect(render).toHaveBeenCalledTimes(2);
+    controller.dispose();
+
+    Texture.from.mockReturnValueOnce({ baseTexture: base });
+    const second = mountHome({
+      host: document.getElementById('host'), view: view(), onIntent: vi.fn(),
+      assets: { assets: [{ id: 'home-room-candidate', url: '/room.webp' }] },
+    });
+    const lateReady = listeners.get('loaded');
+    second.dispose();
+    expect(listeners.size).toBe(0);
+    lateReady();
+    expect(frames.size).toBe(0);
+    flushPaint();
+    expect(render).toHaveBeenCalledTimes(2);
   });
 
   it("候选背景异步加载失败时显示原型地面并保持入口可操作", async () => {

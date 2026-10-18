@@ -8,10 +8,12 @@
 
 ## 活跃登记
 
-当前无源码编辑占用。老板已明确本地没有进行中修改，本轮已完成工作统一落库；旧预览服务资源保留，见近期已释放原登记，未据历史PID停止进程。
+本轮源码编辑占用见下表；旧预览服务资源保留，使用前核对实时身份。
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
+| Friday（本地完成工作打包 WF-completed-ship-1018） | Git index、当前全部完成未提交文件的核对与分组；排除待决目录、未完成任务、无主物品及中间文件；自有docs/evidence/2026-10-18-WF-page-perf-1018/提交记录 | 老板授权完成后提交；性能、掉落及地图两会话均已释放源码编辑；核对来源/mtime/index并按实际暂存门验证，单组失败停止 | 2026-10-18 | 编辑中 |
+| Friday / 网页服务 01a14d8f | Vite D:/素材/代号柒/搜打撤、5200、PID48716、本会话创建；node_modules/.cache/web-up-5200.json | 按老板拉起网页版授权恢复，保留供试玩；桌面启动动画编辑已释放，见近期已释放 | 2026-10-18 | 已交付 |
 
 ## 无主物品（只记录勿动，等认领/处置）
 
@@ -21,6 +23,30 @@
 | 根`.codex/config.toml.bak-nai-*`三个备份与`nul` | 当前Git未跟踪；备份关联NAI试验，nul内容/归属未核实 | 2026-10-14 | 仅登记，不删除；NAI备份不等同待提交配置 |
 
 ## 近期已释放
+
+### 2026-10-18 逐页性能优化 / Friday 01a14db9
+
+完成未提交，三子代理与主会话编辑释放。13个生产源码文件、4份新增性能回归、3份过期UI/文案断言及内存存档DEV入口；具体路径/原字节/操作计数/逐页覆盖见[本轮报告](evidence/2026-10-18-WF-page-perf-1018/README.md)。当前窗口内置浏览器真实开局、基地导航/仓库筛选、皮肤/整备、补给、背包三分区、路线与首战发现→胜利通过，构造注能键盘通过；静止地图6秒0重绘/0长任务。后续其他会话地图语义不以冻结副本证明。补齐/更正文档死链，证据缺失如实标记。5318纯副本服务PID6336/exec68877已按会话停止，系统复核无5318监听和相符进程；未删除副本；5200旧服务未动。本地提交授权沿老板本聊天指示，由上方打包登记执行；未build或推送。
+
+### 2026-10-18 掉落规则调整 / Friday 01a14dbc
+
+完成未提交，编辑占用释放。自有 `game/src/run/chests.js` 的 `rollContents` 稀有度保底与通行证附赠段、`game/data/map.json` 的 `boss.tokenChance`、`game/src/run/game.run.flow.js` 的 `openResourcePick` 生成段、`tests/{pet-egg-chest,chest-extra-rewards-choice,event-callback-lifecycle-audit}.test.js` 本轮断言、`docs/rules.md` 第5节掉落段、`game/dev/{chest-no-pity-review.html,resource-drop-review.html,resource-drop-review.js}`及[自有证据](evidence/2026-10-18-WF-chest-no-rarity-pity-1018/README.md)。取消宝箱稀有度保底、首脑箱30%通行证B额外附赠；物资格先抽稀有度、档内均分，空档位跳过，同名去重与已存候选保留。宠物蛋独立保底保留；已协调性能会话并保留其改动。最终9文件156项、ESLint、数据校验及差异检查通过；当前窗口内置浏览器内存隔离场景验证中/首脑箱与物资格领取/重进。文档全检有其他页面既有断链。无新服务、不build、不提交；未验真实档刷新或完整自然跑局。
+
+### 2026-10-18 EXE启动加载动画 / Friday 01a14d8f
+
+通用过场增量完成未提交，编辑释放：`desktop-app/{startup-window.cjs,preload.js}`、`game/index.html`新增模块入口、`game/src/ui/startup-transition.js`、`game/css/startup-transition.css`、`game/dev/startup-transition-preview.html`、`tests/{desktop-startup,startup-transition}.test.js`、`docs/development.md`启动说明及自有证据。复用createCityCut与雪夜城门图，980ms共用斜切；六文件86项通过，内置浏览器已核预览播放/退场并截图。未原生窗口实测，未打包/提交，见原证据增量节。
+
+老板后续指定“正在准备进入城市”文案与模拟进度条，已补入 startup.html / startup-window.cjs / desktop-startup.test.js；模拟值8%→94%，真实就绪100%。增量8项通过，当前窗口内置浏览器截图已交付，仍未打包；编辑占用释放。
+
+完成未提交，源码编辑占用释放。自有 `desktop-app/main.js` 启动窗口与二次启动唤起段、`preload.js`就绪通知、`package.json`新增打包文件、`startup-window.cjs`、`startup-preload.cjs`、`startup.html`、`tests/desktop-startup.test.js`；原有release-profile与图标改动保留。3文件47项测试及桌面语法检查通过，当前窗口内置浏览器已看加载页；未原生EXE实测、未build、未更新现有EXE、未提交推送，原因与覆盖边界见[证据](evidence/2026-10-18-desktop-startup/README.md)。网页版服务另保留活跃资源登记。
+
+### 2026-10-18 留言13项修复 / Friday new-chat
+
+完成未提交，编辑占用释放。自有范围：`game/src/core/card-capacity.js`、`run/{game.session.bag,expedition.view,game.run.altar,game.run.shop}.js`、`hub/{game.bag,game.bag.rules,game.bag.view2,game.reward-organizer,game.hub.depart,hub.warehouse}.js`、`cards/cards.rules.js`相关注释、`battle/core/battle.hand.js`、`battle/view/{battle.view,battle.layers}.js`相关排序/说明/护甲段、`game/css/{battle-stage,expedition-shop,chest-reward-overview}.css`本批选择器、`game/dev/feedback-1018-review.{html,js}`、对应定向测试、`docs/{rules,save-format,architecture,map-travel,STATUS}.md`本批说明及[证据目录](evidence/2026-10-18-feedback-13/README.md)。保留各文件原改动；灼烧移除沿task-6成果，本轮仅复验。定向18文件260项、语法与定向lint通过；全局类型检查4处地图类型错误、文档18处他任务失效链接分列，不宣称全量通过。项目记忆已更新并用workflow memory检索验证。未提交/推送/build。自有Vite原为`D:/素材/代号柒/搜打撤`、5200、PID16556，已核实身份后停止，复查5200无监听。
+
+### 2026-10-18 地图设施与灼烧移除 / Codex task-6
+
+完成未提交，编辑占用已释放。属地为地图生成/快照/支路、灼烧相关战斗/卡牌/UI、map.json、对应测试及规则/图鉴文档；完整路径与最终SHA见[变更清单](evidence/2026-10-18-map-facilities-no-burn/changes.json)，行为与验证边界见[交付记录](evidence/2026-10-18-map-facilities-no-burn/README.md)。原有本地改动保留，未提交推送或运行服务。
 
 ### 2026-10-16 最终本地收尾销账 WF-final-cloud-ship-1016
 
@@ -468,6 +494,7 @@ Friday（Codex 地图天气 01a13c12），2026-10-15：game/css/expedition-map.c
 
 | 会话/来源 | 属地 | 事项 | 状态 |
 |---|---|---|---|
+| Friday（地图节点调整 WF-map-node-rules-1018，聊天01a14d8c） | 宝箱更名/通用掉落入口；新局5/9配额7/11/16/16；旧3/9、4/9快照保留；对应源码/地图测试/旧图fixture与docs规则及game/dev/map-node-rules-review.html | 完成未提交，编辑释放；9文件61项通过，增量后3文件30项通过；lint/docs检查与Codex当前窗口构造实页核验通过；未build、提交、推送。证据docs/evidence/2026-10-18-WF-map-node-rules-1018/ | 2026-10-18 |
 | Friday（双图默认画风 WF-default-art-style-1016） | 2026-10-16 | 完成未提交；编辑占用释放。自有 `docs/production/art/ART-STYLE-V1.md`、`docs/production/art/ART-DIRECTION-BRIEF.md`、`docs/production/art/VISUAL-BIBLE.md`、`docs/production/art/ART-STYLE.md` 与 `docs/evidence/2026-10-16-default-art-style/`；双图确认为默认，保留头发/裙子有结构的细碎块面、叠色与硬边笔触 | docs:check通过，7条本地链接可达，diff --check通过，双图SHA256核对一致且大图已忽略；新提示词未出图验证；无服务、不改运行素材、不提交 |
 | Friday（通用过场 WF-general-transition-1016） | game/src/ui/general-transition.js、camp-entry.js；run/game.run.scenes.js；battle/view/battle.presentation-ready.js；game/css/battle.css；两battle-entry测试；通用过场图及manifest本图条目；docs/development.md对应段；自有evidence | NAI起稿+内置重绘，已按老板反馈恢复原图左侧虚化；战斗/首脑入口与资源等待共用远征画面 | 完成未提交、编辑释放；5套82项及末版3套41项通过，lint/docs/diff通过；当前内置窗口构造过场与真实简化按钮通过，未完整实战；本图登记校验通过，工作区另有95项资产审计错误；无build/新服务/提交。证据docs/evidence/2026-10-16-WF-general-transition-1016/ |
 | Friday（NAI画法单变量 WF-nai-style-trial-a-1016） | docs/evidence/2026-10-16-nai-style-trial-a/；根.tmp/nai/wu-dinner-v5-style-trial-a-20261016.png | 单张HTTP200；同种子仅换画法，请求差异断言与共享默认指纹核对通过；视觉比较记录于README | 2026-10-16 完成未提交，编辑占用释放；候选未选为默认，无服务 |

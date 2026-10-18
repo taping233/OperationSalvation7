@@ -526,6 +526,25 @@ export const syncSlice = {
         definitions,
         domains: ['bag'],
       });
+      // 仅修正定版旧说明；自定义卡文保留，live-sync/旧批次重播后也可重试。
+      try {
+        const cards = SDT.Cards.all();
+        const descriptionDefinitions = new Map([...definitions, ['tt3-mystery-potion', SDT.Cards.TABLETOP10.find(card => card.id === 'tt3-mystery-potion')]]);
+        const legacy = new Map([
+          ['tt-crystal', new Set(['在背包中才能使用，可以复原最多 3 张卡牌。', '复活最多 3 张卡牌。'])],
+          ['cmtn6bge52qt', new Set(['在背包中才能使用，复原最多两张卡牌'])],
+          ['tt3-mystery-potion', new Set(['随机神秘效果。', '回合开始时：变成1张随机招式卡牌，使其费用为0。'])],
+        ]);
+        const needsRevision = card => legacy.get(card.id)?.has(card.desc);
+        if (cards.some(needsRevision)) {
+          const saved = SDT.Cards.saveAll(cards.map(card => needsRevision(card)
+            ? { ...card, desc: descriptionDefinitions.get(card.id).desc } : card));
+          if (!saved) console.error('[cards] Restoration item description migration save returned false; will retry.');
+        }
+      } catch (error) {
+        console.error('[cards] Restoration item description migration failed; will retry:', error);
+      }
+
     },
 
     // 第十一批同步（2026-09-09 老板拍板）：与设计者实机卡库导出（微信接收的
@@ -576,7 +595,16 @@ export const syncSlice = {
     },
     ensureEvents0919() {
       try {
-        if (localStorage.getItem(EVENTS_0919_KEY)) return;
+        if (localStorage.getItem(EVENTS_0919_KEY)) {
+          // 只修旧定版标题；保留已盖章卡库的自定义名称、规则及其它字段。
+          const cards = SDT.Cards.all().slice();
+          const index = cards.findIndex(c => c.id === 'tt6-chestdraw' && c.name === '熔断双箱');
+          if (index >= 0) {
+            cards[index] = { ...cards[index], name: '熔断物资箱' };
+            SDT.Cards.saveAll(cards);
+          }
+          return;
+        }
         const cards = SDT.Cards.all();
         SDT.Cards.EVENTS_0919.forEach(d => {
           const i = cards.findIndex(c => c.id === d.id);

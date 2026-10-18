@@ -80,6 +80,15 @@ const waitFor = async (cond, ms = 3000) => {
 };
 
 describe('启动链（DOMContentLoaded → showTitle）', () => {
+  it('重复DOMContentLoaded不会再次初始化UI或启动后台预取', () => {
+    const init = vi.spyOn(window.SDT.UI, 'init');
+    const prefetch = vi.spyOn(window.SDT.Art, 'prefetchBatched');
+    document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
+    expect(init).not.toHaveBeenCalled();
+    expect(prefetch).not.toHaveBeenCalled();
+    init.mockRestore(); prefetch.mockRestore();
+  });
+
   it('启动完成后 body 挂上 lobby 类（局内控件在标题页隐藏）', () => {
     expect(document.body.classList.contains('lobby'), 'body 缺少 lobby 类').toBe(true);
   });

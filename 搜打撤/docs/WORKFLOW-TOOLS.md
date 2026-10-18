@@ -44,6 +44,8 @@ npm run --silent workflow -- verify --task <编号> --tests <逗号分隔测试>
 npm run --silent docs:check -- --json
 ```
 
+改动涉及多处时可用 `workflow review --paths <CSV> --json` 汇总现行文档、测试和UI用例候选；加 `--input <verify报告>` 核验已有结果，详见[改动核验清单](CHANGE-REVIEW.md)。无Git恢复副本必须显式给路径，报告标 `snapshot`，不提供HEAD/index/CI证明。
+
 明确测试列表可直接 `verify --tests`；影响面/门级别不明才用 `--plan`，示例不是必跑清单。skip、失败和中断不算通过；相同相关内容与环境复用证据，不相关改动不扩大定向闭包。工作树 verify 结果是复用候选，不能直接免除暂存门。混树提交前先 `npm run check:staged:isolate -- --plan --json` 核对再显式运行；有效报告的 gateReceipt 须精确匹配 index、选择范围、输入、环境与依赖后才可 `GATE_RECEIPT` 复用，任一不符补验，不绕过门禁。
 
 ## 按授权收官

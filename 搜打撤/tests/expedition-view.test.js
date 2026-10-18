@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach } from 'vitest';
+import { describe, expect, it, beforeEach, vi } from 'vitest';
 import { expeditionObjective, expeditionRoutes, getExpeditionPreview, renderExpeditionPanel, setExpeditionPreview } from '../game/src/run/expedition.view.js';
 
 const layer = {
@@ -233,4 +233,28 @@ describe('expedition view DOM rendering', () => {
     expect(document.querySelector('.expedition-map-guide')).toBeNull();
     expect(document.querySelector('[data-expedition-tool="pocket"]').getAttribute('aria-label')).toBe('消耗区：已消耗卡牌 2');
   });
+});
+
+describe('地图取景入口语义',()=>{
+  it('全景与定位公开范围和快捷键，未知地点不承诺揭示',()=>{
+    document.body.innerHTML='<aside id="sidebar"></aside><nav id="expeditionChapter"></nav>';
+    renderExpeditionPanel(null,makeGame(),icon=>icon);
+    const overview=document.querySelector('[data-expedition-tool="overview"]');
+    expect(overview.textContent).toContain('全景');
+    expect(overview.title).toContain('未探明地点仅显示剪影');
+    expect(overview.getAttribute('aria-label')).toContain('未知地点保留迷雾');
+    expect(document.querySelector('[data-expedition-tool="focus"]').title).toContain('当前位置与相邻路线');
+  });
+});
+
+
+it('移动期间侧栏不改取景与inset，抵达后的侧栏改动平滑取景', () => {
+  document.body.innerHTML='<aside id="sidebar"></aside><nav id="expeditionChapter"></nav>';
+  const cam={viewW:1920,detailInset:0,frameMode:'travel',setDetailInset:vi.fn(function(width){this.detailInset=width}),frameExploration:vi.fn()};
+  const g=makeGame({cam,state:'moving',moveTarget:{li:0,idx:1}});
+  renderExpeditionPanel(null,g,icon=>icon);
+  expect(cam.frameMode).toBe('travel');expect(cam.setDetailInset).not.toHaveBeenCalled();expect(cam.frameExploration).not.toHaveBeenCalled();
+  cam.frameMode='routes';g.state='idle';
+  renderExpeditionPanel(null,g,icon=>icon);
+  expect(cam.frameExploration).toHaveBeenCalledWith(g,false,{glide:true});
 });

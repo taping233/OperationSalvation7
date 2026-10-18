@@ -1,0 +1,188 @@
+[
+  {
+    "id": "cmtn6bge52qt",
+    "fields": [
+      "desc"
+    ],
+    "previous": {
+      "id": "cmtn6bge52qt",
+      "name": "复原药水",
+      "cost": 0,
+      "rarity": "稀有",
+      "type": "道具",
+      "dmg": 0,
+      "desc": "在背包中才能使用，复原最多两张卡牌",
+      "value": 3,
+      "sellable": false,
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "restoreConsumed",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    },
+    "current": {
+      "id": "cmtn6bge52qt",
+      "name": "复原药水",
+      "cost": 0,
+      "rarity": "稀有",
+      "type": "道具",
+      "dmg": 0,
+      "desc": "地图背包：从消耗区复原最多2张卡牌；战斗：从本场消耗牌复原最多2张回到手牌。对应消耗区为空时不可使用。",
+      "value": 3,
+      "sellable": false,
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "restoreConsumed",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "foe-esper_candle",
+    "fields": [
+      "desc"
+    ],
+    "previous": {
+      "id": "foe-esper_candle",
+      "name": "烛火",
+      "cost": 0,
+      "rarity": "衍生",
+      "type": "生物",
+      "unrandom": true,
+      "art": "esper_candle",
+      "desc": "攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击并灼烧。"
+    },
+    "current": {
+      "id": "foe-esper_candle",
+      "name": "烛火",
+      "cost": 0,
+      "rarity": "衍生",
+      "type": "生物",
+      "unrandom": true,
+      "art": "esper_candle",
+      "desc": "攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击。"
+    }
+  },
+  {
+    "id": "foe-fire_el",
+    "fields": [
+      "desc"
+    ],
+    "previous": {
+      "id": "foe-fire_el",
+      "name": "灼热异变体",
+      "cost": 0,
+      "rarity": "衍生",
+      "type": "生物",
+      "dmg": 0,
+      "desc": "攻击 10 / 生命 7。变异·第4层。攻击并灼烧。",
+      "value": 0,
+      "sellable": false,
+      "art": "fire_el"
+    },
+    "current": {
+      "id": "foe-fire_el",
+      "name": "灼热异变体",
+      "cost": 0,
+      "rarity": "衍生",
+      "type": "生物",
+      "dmg": 0,
+      "desc": "攻击 10 / 生命 7。变异·第4层。攻击。",
+      "value": 0,
+      "sellable": false,
+      "art": "fire_el"
+    }
+  },
+  {
+    "id": "tt-crystal",
+    "fields": [
+      "desc"
+    ],
+    "previous": {
+      "cost": 0,
+      "desc": "在背包中才能使用，可以复原最多 3 张卡牌。",
+      "dmg": 0,
+      "id": "tt-crystal",
+      "name": "能源结晶",
+      "rarity": "史诗",
+      "sellable": false,
+      "type": "道具",
+      "value": 3,
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "restoreConsumed",
+              "amount": 3
+            }
+          ]
+        }
+      }
+    },
+    "current": {
+      "cost": 0,
+      "desc": "地图背包：从消耗区复原最多3张卡牌；战斗：从本场消耗牌复原最多3张回到手牌。对应消耗区为空时不可使用。",
+      "dmg": 0,
+      "id": "tt-crystal",
+      "name": "能源结晶",
+      "rarity": "史诗",
+      "sellable": false,
+      "type": "道具",
+      "value": 3,
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "restoreConsumed",
+              "amount": 3
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "tt6-chestdraw",
+    "fields": [
+      "name"
+    ],
+    "previous": {
+      "id": "tt6-chestdraw",
+      "name": "熔断双箱",
+      "cost": 0,
+      "rarity": "衍生",
+      "type": "事件",
+      "desc": "从大、中、小宝箱中随机抽取 1 个开启。",
+      "dmg": 0,
+      "unrandom": true,
+      "value": 0,
+      "sellable": false
+    },
+    "current": {
+      "id": "tt6-chestdraw",
+      "name": "熔断物资箱",
+      "cost": 0,
+      "rarity": "衍生",
+      "type": "事件",
+      "desc": "从大、中、小宝箱中随机抽取 1 个开启。",
+      "dmg": 0,
+      "unrandom": true,
+      "value": 0,
+      "sellable": false
+    }
+  }
+]

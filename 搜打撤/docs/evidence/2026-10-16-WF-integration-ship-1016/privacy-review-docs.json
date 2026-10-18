@@ -1,0 +1,14 @@
+{
+  "scope": "planned completed documentation/evidence text; values suppressed",
+  "scanned": 359,
+  "findings": [],
+  "trackedConfigCredentialPatterns": [],
+  "preservedLocalConfig": [
+    ".codex/config.toml",
+    ".codex/config.toml.bak-nai-domain-20261013-224601",
+    ".codex/config.toml.bak-nai-network-20261013-224312",
+    ".codex/config.toml.bak-nai-open-20261013-230419",
+    ".codex/config.toml.bak-nai-profile-20261015-215723"
+  ],
+  "limits": "heuristic credential scan; unknown files excluded, not deleted"
+}

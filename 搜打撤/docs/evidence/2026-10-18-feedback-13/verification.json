@@ -1,0 +1,41 @@
+{
+  "suites": 18,
+  "passed": 260,
+  "failed": 0,
+  "reports": [
+    "tests.json",
+    "capacity-retest.json"
+  ],
+  "syntax": {
+    "status": "passed",
+    "files": 476
+  },
+  "eslint": "scoped passed",
+  "typecheck": {
+    "status": "failed-existing-map-types",
+    "paths": [
+      "map-generator-v4.js:84",
+      "map-route-v2.js:174",
+      "map-route-v2.js:212",
+      "map-snapshot.js:122"
+    ]
+  },
+  "fullSuite": "not run",
+  "build": "not run",
+  "CI": "not run",
+  "browser": {
+    "platform": "Codex IAB",
+    "viewport": "current window, no override",
+    "input": "real clicks/Enter against constructed no-save scenarios",
+    "rewardCardSize": [
+      183.1,
+      274.65
+    ]
+  },
+  "docsCheck": {
+    "globalFindings": 18,
+    "thisTaskFindings": 0
+  },
+  "memory": "updated and retrieval verified",
+  "service": "owned PID16556 stopped, port5200 no listener"
+}

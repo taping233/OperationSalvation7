@@ -37,14 +37,14 @@ describe('宝箱回调与探索身份审计', () => {
     expect(game.grantCard).not.toHaveBeenCalled();
   });
 
-  it('领取宝箱双击只启动一次，未领奖前不发卡或金币', () => {
+  it('领取宝箱双击只启动一次并收币一次，未选前不发卡', () => {
     Chests.open(game, [{ kind:'small' }], vi.fn(), { onCell:true });
     const claim = actions.chestNext, draws = drawn.mock.calls.length;
     claim(); claim();
     expect(Chests.serialize(game).current.rewardStage).toBe('opening');
     expect(drawn).toHaveBeenCalledTimes(draws);
     expect(window.SDT.Sound.sfx.mock.calls.filter(([name]) => name === 'chestShake')).toHaveLength(1);
-    expect(game.grantCard).not.toHaveBeenCalled(); expect(game.gainCoins).not.toHaveBeenCalled();
+    expect(game.grantCard).not.toHaveBeenCalled(); expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(2);
     actions.chestReveal();
     expect(Chests.serialize(game).current.rewardStage).toBe('cards');
   });
@@ -87,4 +87,51 @@ describe('宝箱回调与探索身份审计', () => {
     game.persistSave.mockReturnValue(true); Chests.restore(game, saved, vi.fn()); actions.chestTake1({ i: '0' });
     expect(game.grantCard).toHaveBeenCalledTimes(1);
   });
+});
+
+function restoreFixedReceipt() {
+  const saved = { version:1, seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos,
+    queue:[{ kind:'small' }], index:1, context:{ onCell:true, consumeNode:false },
+    current:{ kind:'small', cards:[cards[0]], coins:0, coinsReceived:false,
+      taken:[], lost:[], source:'污染空投箱', title:'领取奖励' } };
+  expect(Chests.restore(game, saved, vi.fn())).toBe(true);
+}
+it('固定事件使用独立领取样式，保留来源和既有动作；返回再领不重抽不重领', async () => {
+  restoreFixedReceipt();
+  const root = UI.el.ovBody;
+  expect(root.querySelector('.reward-standalone-picker')).not.toBeNull();
+  expect(root.querySelector('.reward-source').textContent).toBe('污染空投箱');
+  expect(root.querySelector('.reward-head h3').textContent).toBe('领取奖励');
+  expect(root.querySelector('.reward-count').textContent).toBe('共 1 张');
+  expect(root.querySelector('.cqo-overview,.cqp-dialog,[data-act="chestClosePicker"]')).toBeNull();
+  for (const action of ['chestSelect','chestTake1','chestOpenBag','chestReturn','chestSkip']) {
+    expect(root.querySelector(`[data-act="${action}"]`)).not.toBeNull();
+  }
+  expect(root.querySelector('[data-act="chestSkip"]').dataset.cancel).toBe('false');
+  const oldTake = actions.chestTake1;
+  await actions.chestReturn();
+  oldTake({ i:'0' });
+  expect(game.grantCard).not.toHaveBeenCalled();
+  expect(Chests.restore(game, game.nodeChestRewards['0,1'], vi.fn())).toBe(true);
+  actions.chestTake1({ i:'0' }); actions.chestTake1({ i:'0' });
+  expect(game.grantCard).toHaveBeenCalledTimes(1);
+  expect(drawn).not.toHaveBeenCalled();
+  expect(Chests.serialize(game).current).toMatchObject({ taken:[0], lost:[], source:'污染空投箱', title:'领取奖励' });
+  expect(root.querySelector('[data-act="chestContinue"]')).not.toBeNull();
+  expect(root.querySelector('.reward-final').textContent).toBe('1 张已入背包');
+});
+it('固定事件满包和放弃确认仍由原动作控制，不因展示层改变奖励状态', () => {
+  game.canReceiveCard = () => false;
+  restoreFixedReceipt();
+  expect(UI.el.ovBody.querySelector('[data-act="chestMakeRoom"]').dataset.i).toBe('0');
+  expect(UI.el.ovBody.querySelector('[data-act="chestOpenBag"]').classList.contains('is-primary')).toBe(true);
+  actions.chestSkip();
+  expect(Chests.serialize(game).current.lost).toEqual([]);
+  expect(UI.el.ovBody.querySelector('[data-act="chestLeave"]')).not.toBeNull();
+  actions.chestStay();
+  expect(Chests.serialize(game).current.lost).toEqual([]);
+  actions.chestSkip(); actions.chestLeave();
+  expect(Chests.serialize(game).current).toMatchObject({ taken:[], lost:[0] });
+  expect(game.grantCard).not.toHaveBeenCalled();
+  expect(drawn).not.toHaveBeenCalled();
 });

@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest';
 const hand = readFileSync(new URL('../game/css/battle-hand-overhaul.css', import.meta.url), 'utf8');
 const battle = readFileSync(new URL('../game/css/battle-stage.css', import.meta.url), 'utf8');
 const stage = '#overlay .battle-stage.sts';
-const liftSelector = `${stage} .bt-slot:is(:hover,:has(:focus-visible)) .bt-card:not(.aim-lift)`;
+const liftSelector = `${stage} :where(.sts-hand:not([data-hand-hit="fixed"])) .bt-slot:hover .bt-card:not(.aim-lift),${stage} .bt-slot:is(.hand-reading,:has(:focus-visible)) .bt-card:not(.aim-lift)`;
 function declarations(css, selector) {
   let result = '';
   postcss.parse(css).walkRules(rule => {

@@ -1,0 +1,5146 @@
+{
+  "mirror": "D:\\素材\\代号柒\\搜打撤\\.tmp\\page-perf-1018\\expedition-integration\\project",
+  "indexSha256": "d8f0b9ee5ffbe928e3db25af257e64297d01b11f390d10d2728c8f310aa90407",
+  "files": [
+    {
+      "path": "docs/M-BATCH-EXCLUSIONS.md",
+      "oid": "d35d45e19cdba2d6fe5b688b1805fc7d4d7bbbe3"
+    },
+    {
+      "path": "docs/M-BATCH-MATRIX.md",
+      "oid": "11b8b4eabf22025e1343f4e02060cbc3b5ff181f"
+    },
+    {
+      "path": "docs/evidence/e8-card-migration-2026-09-27/catalog-before.json",
+      "oid": "7aa77f02e8b894d6838a3b29d3890954cc0c8d01"
+    },
+    {
+      "path": "docs/evidence/e8-card-migration-2026-09-27/catalog-before.md",
+      "oid": "304d0d3cd506d56499364df1a7543e6a4966d686"
+    },
+    {
+      "path": "game/assets/asset-manifest.json",
+      "oid": "1f578cf0d7313a688399b67a99a82598dabaa03c"
+    },
+    {
+      "path": "game/assets/home-prototype/manifest.json",
+      "oid": "866dce8d04eb728478ef30b37ec49b5141c09d67"
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/sprite-v1/animations.json",
+      "oid": "d9bcbe5ee3bbbcd0c5e0e9fe8c34f94431d21789"
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/sprite-v1/animations.json",
+      "oid": "0c1b9c058cfe2572ff3d56571c3b5fcf9299a965"
+    },
+    {
+      "path": "game/assets/portraits/frames/heixiang/sprite-v1/animations.json",
+      "oid": "dfd05dfdc5c8e11d9f4359f7703e22fcd4803508"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/animations.json",
+      "oid": "5d65cc866b02b7a51effb14a02fd669e7fe95f4b"
+    },
+    {
+      "path": "game/assets/portraits/frames/xingyue/sprite-v1/animations.json",
+      "oid": "d9bcbe5ee3bbbcd0c5e0e9fe8c34f94431d21789"
+    },
+    {
+      "path": "game/assets/sfx/alternatives/arknights-adjusted/library.json",
+      "oid": "e4e5fa419100a860c02228041177e755f5c362da"
+    },
+    {
+      "path": "game/assets/sfx/alternatives/arknights-expansion/library-base.json",
+      "oid": "b1a753d596ae9cee2c80c97865cb54640c0a78ec"
+    },
+    {
+      "path": "game/assets/sfx/alternatives/arknights-expansion/library.json",
+      "oid": "ffdaf6f389b9a94ac8643468b4e7faada78bdfaf"
+    },
+    {
+      "path": "game/assets/sfx/alternatives/arknights-runtime/combat-extra/fragment.json",
+      "oid": "15d935a26ca05cc3bc8de5ec44bfbe4ebc31d66c"
+    },
+    {
+      "path": "game/assets/sfx/alternatives/arknights-runtime/environment/fragment.json",
+      "oid": "93585a1d6bc6b708ad1a2d593a43aa6ca49cca0c"
+    },
+    {
+      "path": "game/assets/sfx/alternatives/arknights-runtime/library.json",
+      "oid": "e8f84049eaaaa462a7cf350b56e39c2745dda187"
+    },
+    {
+      "path": "game/assets/sfx/alternatives/arknights-runtime/ui-extra/fragment.json",
+      "oid": "9f5bf59bb47ef3df8675046c1aa6e441903bff90"
+    },
+    {
+      "path": "game/assets/sfx/alternatives/arknights/library.json",
+      "oid": "c127f5c4c9c71d4bca1a3be5b3acd9d236644443"
+    },
+    {
+      "path": "game/assets/sfx/alternatives/cc0-action/library.json",
+      "oid": "cc044471098d0924979b9499d94b254ce79eedb6"
+    },
+    {
+      "path": "game/assets/sfx/alternatives/cc0-ui/library.json",
+      "oid": "892c19977c7edf5067cac6cf130435af6b5d058a"
+    },
+    {
+      "path": "game/assets/sfx/winter-v5/library.json",
+      "oid": "ce49110be8a4dd97cce8fed127838f4e7dc5b12c"
+    },
+    {
+      "path": "game/assets/sfx/winter-v6-ten/library.json",
+      "oid": "4952b1da20b25edeb03e7fac09922cbfcd710c9d"
+    },
+    {
+      "path": "game/css/ak-skin.css",
+      "oid": "ea39d6328aa60df232a51a7d7de0f842101968d5"
+    },
+    {
+      "path": "game/css/archive-back.css",
+      "oid": "3cd5e924df42464128071599ca36b083223382c5"
+    },
+    {
+      "path": "game/css/archive-motion.css",
+      "oid": "f27f556a2f19d1d33039d13de8679cfc4c35db7a"
+    },
+    {
+      "path": "game/css/bag-design-system.css",
+      "oid": "a2d60bc6feb0d943f1896faf0ed54ab514cce2dd"
+    },
+    {
+      "path": "game/css/base-archive-facilities-v12.css",
+      "oid": "5b74132bebf5d5a0cf81276541c3838720ac2116"
+    },
+    {
+      "path": "game/css/base-archive-v3.css",
+      "oid": "d24f0dfe13fc035f05836a4d938db09b35b7d80a"
+    },
+    {
+      "path": "game/css/base-camp-compact.css",
+      "oid": "b1abf2b70f9defb4fd08f328b38d55dc692e5a64"
+    },
+    {
+      "path": "game/css/base-camp-rework.css",
+      "oid": "c4bee3ae1e51c1f0bad617b8218f16f9f0a3a0c0"
+    },
+    {
+      "path": "game/css/base-camp-roster.css",
+      "oid": "3e0998ada862fc19aa56b277eb38dbcd0277c098"
+    },
+    {
+      "path": "game/css/base-camp.css",
+      "oid": "56c2c960ef9141335d84936adad6eadad7a7767f"
+    },
+    {
+      "path": "game/css/base-cohesion-v5.css",
+      "oid": "f9b7e06eef3b6acbad820caaf73b42afe78602c8"
+    },
+    {
+      "path": "game/css/base-collection-v4.css",
+      "oid": "9954a25c8bb43cb16e0a32622b950e9f8ad03dc4"
+    },
+    {
+      "path": "game/css/base-controls-v4.css",
+      "oid": "e35af0619afab979b811b7b8f6dcabfedad6a5f9"
+    },
+    {
+      "path": "game/css/base-courtyard-v3.css",
+      "oid": "194b2a72f5963cbcd233a8d5464b84284bfa8f1f"
+    },
+    {
+      "path": "game/css/base-framework-v6.css",
+      "oid": "1383f98afcc239247e43cfafdd3d47175c3bc745"
+    },
+    {
+      "path": "game/css/base-framework-v7.css",
+      "oid": "3b4362f1e34dd92ade98b507987fe6504a924f79"
+    },
+    {
+      "path": "game/css/base-home-v3.css",
+      "oid": "905e6248ccbb694f6fd95a8066a9c1c080a5a963"
+    },
+    {
+      "path": "game/css/base-home-v7.css",
+      "oid": "aa81fad6096e298c20a584b2f5edf8df5db9f2fd"
+    },
+    {
+      "path": "game/css/base-logistics-trade-v12.css",
+      "oid": "8374a6ed39750c13bd981d9fefbd4f63e1eded63"
+    },
+    {
+      "path": "game/css/base-page-motion-v7.css",
+      "oid": "80c0bc3fe4674e6a096d7fdf1d90014ef753dd00"
+    },
+    {
+      "path": "game/css/base-panel-layout.css",
+      "oid": "b1abf2b70f9defb4fd08f328b38d55dc692e5a64"
+    },
+    {
+      "path": "game/css/base-personnel-v12.css",
+      "oid": "82fa365aa1acf90dedcbda7cb2e9281987671c9b"
+    },
+    {
+      "path": "game/css/base-reward-feedback.css",
+      "oid": "81c8f6b59bd56f43602013fb658a04de5dafceaa"
+    },
+    {
+      "path": "game/css/base-rooms-v7.css",
+      "oid": "f1bbbd46de810ca53dbe48e4b62379097362fc5b"
+    },
+    {
+      "path": "game/css/base-shop-v3.css",
+      "oid": "40b33a211330c0f8e24c72c289055f8f1697cd87"
+    },
+    {
+      "path": "game/css/base.css",
+      "oid": "42f51944a8380f8e76e0cebc3c85efd3d7edc9e0"
+    },
+    {
+      "path": "game/css/battle-decision.css",
+      "oid": "d6a73c1b53c9b34ec0b34cbb9a9c1289f08f0ddc"
+    },
+    {
+      "path": "game/css/battle-discover.css",
+      "oid": "ea41b5283b86e4743cea5be2653bbd3a9a3d5731"
+    },
+    {
+      "path": "game/css/battle-hand-overhaul.css",
+      "oid": "d891bc0b19a9c625cc3c6242f22bd86cd22e55b7"
+    },
+    {
+      "path": "game/css/battle-infusion.css",
+      "oid": "79d6293049c54247ca7534b622934b8953e015f3"
+    },
+    {
+      "path": "game/css/battle-secondary-overlay.css",
+      "oid": "0c2b64e89c9cab0bbd9b20be79ce80fdf42d8c18"
+    },
+    {
+      "path": "game/css/battle-stage.css",
+      "oid": "474cbc21b1c9e914b56da944ce63fe1766306553"
+    },
+    {
+      "path": "game/css/battle.css",
+      "oid": "f0d9fb808887ff82110c9d9397a2cd750b8bf2c2"
+    },
+    {
+      "path": "game/css/beginner-guide.css",
+      "oid": "8c18995ee50875e4703ae6d6d65956a89b3248a2"
+    },
+    {
+      "path": "game/css/camp-entry.css",
+      "oid": "8f046a3450c5e5dfaa8c4c2643b682cbd1c0e959"
+    },
+    {
+      "path": "game/css/card-browser.css",
+      "oid": "a08b58dc8538265b534a06b01496b1001e42357b"
+    },
+    {
+      "path": "game/css/card-description-links.css",
+      "oid": "c8b884f1132f916d4ca10cf5595dcc97758d6912"
+    },
+    {
+      "path": "game/css/card-frames/career/frames.css",
+      "oid": "67dd2d6fcec4255c28b6987a0a554ec482d8ae9e"
+    },
+    {
+      "path": "game/css/card-frames/career/geometry.json",
+      "oid": "b2765d47a9c2c2d273230cacaca8b56dabd92546"
+    },
+    {
+      "path": "game/css/card-frames/rose-painterly-1012/geometry.json",
+      "oid": "5ed3fe6095d499cbc0ee0041ae0a7016a7f3a3b1"
+    },
+    {
+      "path": "game/css/card-frames/rose/frames.css",
+      "oid": "67dd2d6fcec4255c28b6987a0a554ec482d8ae9e"
+    },
+    {
+      "path": "game/css/card-layout-selected.css",
+      "oid": "8d38c69fd33343ed80196bad950c8f669514963c"
+    },
+    {
+      "path": "game/css/card-rarity-preview.css",
+      "oid": "8e7602c6e9c26973a2d9d9306c9713b680d9d13b"
+    },
+    {
+      "path": "game/css/card-v3.css",
+      "oid": "1ea649a89c67a82910dfdc5a178ada09a4b155ea"
+    },
+    {
+      "path": "game/css/cards.css",
+      "oid": "753754f75c1fc2149d31ad7c2a43fd47cb0d99c4"
+    },
+    {
+      "path": "game/css/character-cover.css",
+      "oid": "cc1e23c46a6db1ec17f88da1ae5ace22301744f8"
+    },
+    {
+      "path": "game/css/character-idle.css",
+      "oid": "9d666a2649107f40d92aec1eeb21a622e20a9a05"
+    },
+    {
+      "path": "game/css/character-pool-cover.css",
+      "oid": "4aab344756152f95cdd82ebcb22295331bfed18d"
+    },
+    {
+      "path": "game/css/character-view-motion.css",
+      "oid": "89ec804250a79e3dd41a216c79928af1b838441a"
+    },
+    {
+      "path": "game/css/chest-opening.css",
+      "oid": "7055fef42e1bc9d782a94c8af22bfa958fbb99af"
+    },
+    {
+      "path": "game/css/chest-reward-overview.css",
+      "oid": "61f372bf6206636e3aef5aec33028efeffa619ba"
+    },
+    {
+      "path": "game/css/combat-feedback.css",
+      "oid": "cda07762791f0ada775c55362efb532fdc3be2c0"
+    },
+    {
+      "path": "game/css/container-store.css",
+      "oid": "5da3e4af5340a1099beda9fd2d41d5f6bff7c04b"
+    },
+    {
+      "path": "game/css/cover-battle-shell.css",
+      "oid": "0fff83e4ea6fa6c02d3f63a838139dce6bdd467c"
+    },
+    {
+      "path": "game/css/cover-details.css",
+      "oid": "380736a2acc3625d27cd0b824189044dc6d87177"
+    },
+    {
+      "path": "game/css/cover-hub.css",
+      "oid": "65b5f994b724a06f9ac56f45d851b005f1529b33"
+    },
+    {
+      "path": "game/css/cover-remaining.css",
+      "oid": "59b7c2f57b4ea9fb8f5903b91609d509b136002c"
+    },
+    {
+      "path": "game/css/cover-run.css",
+      "oid": "8a954c690909c0859c0ebf09d059930decc3b2b1"
+    },
+    {
+      "path": "game/css/cover-secondary.css",
+      "oid": "114c958dc2479695885ccfa1138a1827bad3153c"
+    },
+    {
+      "path": "game/css/cover-system.css",
+      "oid": "2d2913cd20e585bf36b6923fa1f31887c05aac62"
+    },
+    {
+      "path": "game/css/departure-cover.css",
+      "oid": "911b942c7e177636fc98f0a059d3ea11a2d1af50"
+    },
+    {
+      "path": "game/css/departure-selected.css",
+      "oid": "c2e715dbab70b719881a48f92778636f7e310818"
+    },
+    {
+      "path": "game/css/entry-events.css",
+      "oid": "c27bded54d3a508b3bc88522c44e61725021e041"
+    },
+    {
+      "path": "game/css/event-signal-puzzle.css",
+      "oid": "5f1b7ebb456ffbc49ddc5ad6a82a557c78abc525"
+    },
+    {
+      "path": "game/css/expedition-battle.css",
+      "oid": "34bb27ecd8fced616a39f2e951210bee6f7595cc"
+    },
+    {
+      "path": "game/css/expedition-hub.css",
+      "oid": "8afb61e97e3e78dad12d702b513d4cbdf703c00f"
+    },
+    {
+      "path": "game/css/expedition-inventory.css",
+      "oid": "29afacac37cdcc3a33cdacb25aa454e287950e51"
+    },
+    {
+      "path": "game/css/expedition-library.css",
+      "oid": "bf8a2485e26596ef4dd6e29b527e01f7cee06a2c"
+    },
+    {
+      "path": "game/css/expedition-map.css",
+      "oid": "7cc5e59cb55173eda06a5d85471eec22a0c478d6"
+    },
+    {
+      "path": "game/css/expedition-rewards.css",
+      "oid": "e2ceb991ed70d51b6a6231ab138fad46cd03b981"
+    },
+    {
+      "path": "game/css/expedition-roster.css",
+      "oid": "8e8cf7c7b8c573cfd5144d8f9e639dd73de71875"
+    },
+    {
+      "path": "game/css/expedition-shop.css",
+      "oid": "aa175810d66081641f7b9e52f6c04d54c66a5076"
+    },
+    {
+      "path": "game/css/expedition-transitions.css",
+      "oid": "e2f115142aeaedf8e94bca0eef44e24c62386acd"
+    },
+    {
+      "path": "game/css/expedition.css",
+      "oid": "04874f12b78bc116575e89cf843e8581e27c57ae"
+    },
+    {
+      "path": "game/css/experience-loot.css",
+      "oid": "4732a397d5ff541f517129e3bbae40438d0ee7ae"
+    },
+    {
+      "path": "game/css/extraction-rewards.css",
+      "oid": "978d62849c33c74448d70aeb91f06dab07bf3a8e"
+    },
+    {
+      "path": "game/css/feedback-oct12.css",
+      "oid": "0d1ba91ed1a291da9c223828a95c98319b2800aa"
+    },
+    {
+      "path": "game/css/feedback-theme.css",
+      "oid": "3e9bdd09e19d9acba110721484d62b9328166111"
+    },
+    {
+      "path": "game/css/home-layers.css",
+      "oid": "0687e5c56537c2fd0ae94a70cd9ab72bd03fb685"
+    },
+    {
+      "path": "game/css/home-linked-interactions.css",
+      "oid": "b7bbdeb83f07ff9a3a166f84fb90f781f78292bd"
+    },
+    {
+      "path": "game/css/home-menu-motion.css",
+      "oid": "cb6955e6dc0a83cef7c2eec0e91d60d0f79198f0"
+    },
+    {
+      "path": "game/css/home-polish.css",
+      "oid": "b7728d7b9faf4477c1a3111c9f93c551f5f90a37"
+    },
+    {
+      "path": "game/css/home-scene.css",
+      "oid": "213759698a7d208e973a800cbff690ef8247c179"
+    },
+    {
+      "path": "game/css/home-ui-tokens.css",
+      "oid": "1802e0b90a3f61975754207dd340deca2df97846"
+    },
+    {
+      "path": "game/css/hub-arrival.css",
+      "oid": "1bef6e035079a001e53427874cb39368f897c093"
+    },
+    {
+      "path": "game/css/hub-cover-collections.css",
+      "oid": "70a901d3ebc280f5710f632d5ee0d750911d7e24"
+    },
+    {
+      "path": "game/css/hub-cover-deploy.css",
+      "oid": "bdb6471ba26179e00411f78f37861e2dca8c12eb"
+    },
+    {
+      "path": "game/css/hub-cover-motion.css",
+      "oid": "c377710adf4cb536f0f3af739cca536476fe86fd"
+    },
+    {
+      "path": "game/css/hub-cover.css",
+      "oid": "f5e4edf424b569ddd2c11fd4acd3f909f5f85d4e"
+    },
+    {
+      "path": "game/css/hub-personnel-cover.css",
+      "oid": "39b5e54de2149fe866fcf2c41a7af28747ce4f5b"
+    },
+    {
+      "path": "game/css/hub-stash-cover.css",
+      "oid": "1e329c486c7cba22645c1801750eb8562cc4019c"
+    },
+    {
+      "path": "game/css/hub.css",
+      "oid": "6643545116d5e494861a0c40a3744f518f95642c"
+    },
+    {
+      "path": "game/css/inbox-cover.css",
+      "oid": "79e05c7bff993b8364f24730e05d9873188cf52f"
+    },
+    {
+      "path": "game/css/interface-motion.css",
+      "oid": "2c1d7f686835d505a2939e168a0fd5c2d24ea0e7"
+    },
+    {
+      "path": "game/css/inventory-zoom.css",
+      "oid": "77394e9c6d2a2dbf42d7dbc8dc6f3dae62299f80"
+    },
+    {
+      "path": "game/css/lab-ending.css",
+      "oid": "e05155f6ebef633ee49d3f4c5ee1b33752c9ae15"
+    },
+    {
+      "path": "game/css/leave-run.css",
+      "oid": "9f64b676d8cd020e5262230f2b26ac6a00cc282a"
+    },
+    {
+      "path": "game/css/map-cover.css",
+      "oid": "0f310ff39fcc4e298f68aa4682a66ffd29cfd9cf"
+    },
+    {
+      "path": "game/css/map-edge-light.css",
+      "oid": "57d40e50e60cfe427de83290310d935ec9938b57"
+    },
+    {
+      "path": "game/css/map-node-status.css",
+      "oid": "4a884935cda6d57fa15f0e3b8535d76fda14d3f3"
+    },
+    {
+      "path": "game/css/motion-transitions.css",
+      "oid": "e025810743a16364b8bbcff09755431feacdcc5d"
+    },
+    {
+      "path": "game/css/navigation-feedback.css",
+      "oid": "eb16018b0ed580235cb587baa4fa5a36af1c285d"
+    },
+    {
+      "path": "game/css/ordinary-polish.css",
+      "oid": "e1d34968b5d01205743b0c7841ca15fdcce9ea42"
+    },
+    {
+      "path": "game/css/overlays.css",
+      "oid": "d26b9dc4f6cd39d80a84ba09b3c5122aa88415f8"
+    },
+    {
+      "path": "game/css/page-ach.css",
+      "oid": "771fb872eeb8238ba790b7224536aff7ee4e6842"
+    },
+    {
+      "path": "game/css/page-battle-ui.css",
+      "oid": "55bbffa4c0a99c4620b5c5ab2720ef1098b2af4c"
+    },
+    {
+      "path": "game/css/page-cardforge.css",
+      "oid": "ccaa2bb3df43dc6a9bc455e9e195ee8ba42507e7"
+    },
+    {
+      "path": "game/css/page-classes.css",
+      "oid": "34486faa4c3937c49e586c2adb455a764f30ca41"
+    },
+    {
+      "path": "game/css/page-datapage.css",
+      "oid": "2c7c84f9cde93dcf13761e6aa241b0137b29456f"
+    },
+    {
+      "path": "game/css/page-deploy.css",
+      "oid": "5173bfc6fcadf4fd790cb405c57ce26a1d8bc262"
+    },
+    {
+      "path": "game/css/page-events.css",
+      "oid": "77ca6e63da8c3a7b7a9c9c9ede6ee17dc7966722"
+    },
+    {
+      "path": "game/css/page-expedition-hud.css",
+      "oid": "d6afd89ffd77d689d837484e6a9c4116e3d22006"
+    },
+    {
+      "path": "game/css/page-hub.css",
+      "oid": "7a52d80d862abcc137c3ca243eb768e7a56d455a"
+    },
+    {
+      "path": "game/css/page-loading.css",
+      "oid": "5c56b063948efa84ed4f6e6d918d13b8254d9d5a"
+    },
+    {
+      "path": "game/css/page-rewards-bag-help.css",
+      "oid": "9f40f6c2ba3a3229bf6aa4fbbddbc600257adad5"
+    },
+    {
+      "path": "game/css/page-settings.css",
+      "oid": "d1c199bd00b24f00ca9a528f3ee38fd4c071798c"
+    },
+    {
+      "path": "game/css/page-shop.css",
+      "oid": "c483a95a3eb02d67ce9430a91b913853ee2bbf9b"
+    },
+    {
+      "path": "game/css/page-slot-select.css",
+      "oid": "9ab044f773d5fe701d58b7d92f31ae29c55dea9d"
+    },
+    {
+      "path": "game/css/page-stash.css",
+      "oid": "675fdfecf99b48a627cb324584cc8326e27c7bce"
+    },
+    {
+      "path": "game/css/page-transitions.css",
+      "oid": "544b71549150667ae973914f1547d33eb2749c4a"
+    },
+    {
+      "path": "game/css/page-upgrade.css",
+      "oid": "894232ab9b347dc3aaac9ab994c0979cdff697f6"
+    },
+    {
+      "path": "game/css/page-visual-ready.css",
+      "oid": "8be871aee7209d4dcd06b6758487224e0baff689"
+    },
+    {
+      "path": "game/css/performance-settings.css",
+      "oid": "bb9f8f4afd0eb793c386e4c0b8a6d0e0ed0c965b"
+    },
+    {
+      "path": "game/css/photo-studio-mounts.css",
+      "oid": "0a85b3ccc9253fcd343b1a54cb636e9cb4b034c7"
+    },
+    {
+      "path": "game/css/photo-studio-room-effects.css",
+      "oid": "e78a2c6efc850d509688dc6c642f95d7f3340a80"
+    },
+    {
+      "path": "game/css/photo-studio-unified.css",
+      "oid": "29d36bd391cbdc3cb863e20a74201ba41e40d5d8"
+    },
+    {
+      "path": "game/css/photo-studio-zoom-motion.css",
+      "oid": "0c119504a515e90ccae47a7a520992b968951943"
+    },
+    {
+      "path": "game/css/pocket-strip.css",
+      "oid": "b10153dfdc81f11ce16d3e7a4f6573d6590e9406"
+    },
+    {
+      "path": "game/css/preparation.css",
+      "oid": "f85a1ab39aebff6fc43aba640925345a802e1dfc"
+    },
+    {
+      "path": "game/css/rarity-design-lab.css",
+      "oid": "ac73a0f76c5dcfc47f49fd06256381cea3fa90d0"
+    },
+    {
+      "path": "game/css/roster-departure-v2.css",
+      "oid": "dbf71e3ab32323cf1b224c2445248a464b0aeab0"
+    },
+    {
+      "path": "game/css/roster-reference.css",
+      "oid": "595bb4e10ccfedd0360bf3ddc236620060b8c4b2"
+    },
+    {
+      "path": "game/css/scenes.css",
+      "oid": "ccbbc94c94c7fe753ae428d9d607ca5bebe789d7"
+    },
+    {
+      "path": "game/css/settings-cover.css",
+      "oid": "70af4815bca12a7c35e8338f7458c99d437fd3d6"
+    },
+    {
+      "path": "game/css/settings-navigation.css",
+      "oid": "45e1ac0c24f4dab864167efa70306ff98f85677e"
+    },
+    {
+      "path": "game/css/settings-transition.css",
+      "oid": "23f9e0b33203bdc663ed24f91d97a4940cf9d182"
+    },
+    {
+      "path": "game/css/sfx-audition.css",
+      "oid": "35d9bbfd1e0bd2ae9c0d68fd3c7a58f90fb366e4"
+    },
+    {
+      "path": "game/css/slots-cover.css",
+      "oid": "6e53bcb94846952ac8c2ec2b82e772c5e57914b1"
+    },
+    {
+      "path": "game/css/startup-transition.css",
+      "oid": "426d5fad3ad0ede2b10888af7e235b5e49b84634"
+    },
+    {
+      "path": "game/css/tactical-card-redesign.css",
+      "oid": "67ef379320141ab532d48a1c1143b1d1e85a0d16"
+    },
+    {
+      "path": "game/css/title-achievements.css",
+      "oid": "86d1ccf0ad42f9600ad8b7e5163229801f94e42b"
+    },
+    {
+      "path": "game/css/title-credits.css",
+      "oid": "c3556fe85b080232aae114e1b18005775073b52f"
+    },
+    {
+      "path": "game/css/title-p0.css",
+      "oid": "2112f22ad4b4072361945b45401d95419ade31b1"
+    },
+    {
+      "path": "game/css/ui-design-system.css",
+      "oid": "8130b298c276c9bafb988b0f994761663f91252d"
+    },
+    {
+      "path": "game/css/ui-scale.css",
+      "oid": "549efedfcf396918f57fdf8886a4923346d0e9e4"
+    },
+    {
+      "path": "game/css/winter.css",
+      "oid": "2a72d1e7c690bb5a70991de423a0e09d270cae56"
+    },
+    {
+      "path": "game/css/wu-career-frame-preview.css",
+      "oid": "18a48ab33765a65e1d7036ed11c553e0b9712e1e"
+    },
+    {
+      "path": "game/data/achievements.json",
+      "oid": "7fde9bbacd11c74e788dbda34d774b2dcbddc955"
+    },
+    {
+      "path": "game/data/art-mapping.json",
+      "oid": "f3e963d174f824d6a71560218f6a5d26e37e626b"
+    },
+    {
+      "path": "game/data/beginner-guide.json",
+      "oid": "ac9aa9dec60368bf6e56e7d85a4a417aa4ecba3c"
+    },
+    {
+      "path": "game/data/card-frame-layout.json",
+      "oid": "0650b6cb2c4c84a75befcf7ae7e7c7339ae00b4b"
+    },
+    {
+      "path": "game/data/card-notes.json",
+      "oid": "a9abbc61af56040ada5b4f4ad66b36c780ac7215"
+    },
+    {
+      "path": "game/data/cards-sync.json",
+      "oid": "1eef737c334cbc028661ceaf20dde619ed96f977"
+    },
+    {
+      "path": "game/data/map.json",
+      "oid": "25d6a0fba718ece1bbebfda64d8aeffd527ef1af"
+    },
+    {
+      "path": "game/data/pets.json",
+      "oid": "cb64aed48d70e24dcae7be83887b724791b86735"
+    },
+    {
+      "path": "game/data/scenes.json",
+      "oid": "b9d6a7b36b99a806f71e045cb8d836d642710ce5"
+    },
+    {
+      "path": "game/index.html",
+      "oid": "cde1b3ff9a8cad386020ff4c3d002bbc15ed7595"
+    },
+    {
+      "path": "game/src/README.md",
+      "oid": "924ccb76a33c182c72f8df7c857f021ea8b99a74"
+    },
+    {
+      "path": "game/src/agent/agent.battle-stats.js",
+      "oid": "3507044259a03391d008e9d97edfcabec145e62f"
+    },
+    {
+      "path": "game/src/agent/agent.console.js",
+      "oid": "7a6430074fe90fc3fa3a78318e3f10d8ec6fbe12"
+    },
+    {
+      "path": "game/src/agent/agent.data.js",
+      "oid": "4b2d742eed8a6dc80e85c2d3f0637a409b069017"
+    },
+    {
+      "path": "game/src/agent/agent.js",
+      "oid": "02236a59ba104b421095b42c6e7483aa071800ee"
+    },
+    {
+      "path": "game/src/agent/agent.llm.js",
+      "oid": "00fd1720fe977b565b7c54d1d1c44027be972643"
+    },
+    {
+      "path": "game/src/agent/agent.policy.js",
+      "oid": "64414b3b518adbe3ee05ae94260e1ac13307d178"
+    },
+    {
+      "path": "game/src/agent/agent.protocol.js",
+      "oid": "992cbc217340c36da62f1ed61980f109d59329ea"
+    },
+    {
+      "path": "game/src/agent/agent.recorder.js",
+      "oid": "c8da350422cdedf2f10f2b760f2816b6f432e2a3"
+    },
+    {
+      "path": "game/src/agent/agent.runner.js",
+      "oid": "a19e19cd62497adeae23c6d158b341f6c0f76182"
+    },
+    {
+      "path": "game/src/agent/agent.scenes.catalog.js",
+      "oid": "7fb13b2d4b20cebaa71d61e888bd4bde90f07384"
+    },
+    {
+      "path": "game/src/agent/agent.scenes.js",
+      "oid": "2c42947298949b57215f9f4ac5ed1a829c37bca5"
+    },
+    {
+      "path": "game/src/agent/agent.scenes.runtime.js",
+      "oid": "5d939469379abd446f258acd0777e829bfa6685e"
+    },
+    {
+      "path": "game/src/agent/agent.state.js",
+      "oid": "680742aa60d0ec6ecff9865d54fbf36075097f37"
+    },
+    {
+      "path": "game/src/agent/agent.stats.js",
+      "oid": "a17c1c99683669618f58e21cdd58f65915d94df4"
+    },
+    {
+      "path": "game/src/agent/agent.surface.js",
+      "oid": "64d873246e927f3c96a5b8e6d71c78ab691a8931"
+    },
+    {
+      "path": "game/src/agent/agent.weights.js",
+      "oid": "0ff938e6992309ddb69b6417a399adae63548e66"
+    },
+    {
+      "path": "game/src/audio/sfx-audition.js",
+      "oid": "83868431187254384a12d02a57f6ef349def8af7"
+    },
+    {
+      "path": "game/src/audio/sound.bank.js",
+      "oid": "6372edfe21b57d435587d060a07e798786cbbef3"
+    },
+    {
+      "path": "game/src/audio/sound.diagnostic-policy.js",
+      "oid": "7d5d585b2d4b56f399c853fbe9c8b3a87bf0c8e1"
+    },
+    {
+      "path": "game/src/audio/sound.js",
+      "oid": "fd28d64e23794c852f4eb2842e8177b60e39bc5f"
+    },
+    {
+      "path": "game/src/audio/sound.music.catalog.js",
+      "oid": "bc2aa028fa2e28e4f12f5d120734c59b048110e6"
+    },
+    {
+      "path": "game/src/audio/sound.music.player.js",
+      "oid": "e729813fc9e76fa80fdb18a9f65da061c9e27414"
+    },
+    {
+      "path": "game/src/audio/sound.policy.js",
+      "oid": "11aefcdfbf634e5502e456bd8a0d62d85611bf9a"
+    },
+    {
+      "path": "game/src/audio/sound.samples.catalog.js",
+      "oid": "085dd3b47658f1b7e220e7a1202d58b10021d2f2"
+    },
+    {
+      "path": "game/src/audio/sound.samples.player.js",
+      "oid": "f2b3ca87dea54020ab858517449ad764efb73818"
+    },
+    {
+      "path": "game/src/audio/sound.scape.js",
+      "oid": "9b29e6b7488aa7b366e92745a95d31d04e1a1360"
+    },
+    {
+      "path": "game/src/audio/sound.ui-samples.js",
+      "oid": "3ac2b4001711eacf35397023c85fb517d03d9bfa"
+    },
+    {
+      "path": "game/src/battle/bag/battle.bag.js",
+      "oid": "3495b5d51055dc8cd08cbc0092236743cd0916ba"
+    },
+    {
+      "path": "game/src/battle/bag/battle.deck.js",
+      "oid": "e517a7452b64344b83ee9e11a6959ad99387ab28"
+    },
+    {
+      "path": "game/src/battle/bag/battle.equipment.js",
+      "oid": "2efedcebfca7895a4ad92f50df1f71a3543dd68d"
+    },
+    {
+      "path": "game/src/battle/bag/battle.piles.js",
+      "oid": "6c8e232a772da12d4950bbb89b4f955c4064986a"
+    },
+    {
+      "path": "game/src/battle/bag/battle.slam-skill.js",
+      "oid": "e046830db3477922f4d4784bdc10d2b39894e5ee"
+    },
+    {
+      "path": "game/src/battle/battle-loader.js",
+      "oid": "cfb921ffcb4da89c0ae69ce0f337e226f86e5c62"
+    },
+    {
+      "path": "game/src/battle/battle.play-submission.types.d.ts",
+      "oid": "079faf20e3a517d569434b37fb0cad6cab2a7086"
+    },
+    {
+      "path": "game/src/battle/battle.snapshot.types.d.ts",
+      "oid": "c90800c4f5433d2533d2e755ba266eb6e79a6b73"
+    },
+    {
+      "path": "game/src/battle/core/battle.actions.js",
+      "oid": "5a11a958ebed72f57ecce6181190a871668a9ea1"
+    },
+    {
+      "path": "game/src/battle/core/battle.card-presentation.js",
+      "oid": "8ea23d50825d2a81cadccaa64cfa14c8f953133b"
+    },
+    {
+      "path": "game/src/battle/core/battle.core.js",
+      "oid": "69c69c7d5ffd97f20cb4a930211748fe1345140d"
+    },
+    {
+      "path": "game/src/battle/core/battle.draw.js",
+      "oid": "f3e126218011ec04fe9bc3378d873317e58a5211"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-intent.js",
+      "oid": "fcf50270b999f9ee8c2b839b5ad2bc487f396330"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-phase.js",
+      "oid": "8a9fdd1022b1c02bc98275154b32d4d6bc713d75"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "oid": "ac4563fd0b4a5eeb1bd49548c56292bcd5dbe5b8"
+    },
+    {
+      "path": "game/src/battle/core/battle.exec-play.js",
+      "oid": "31eb8dd3a4024c2e340e43543c85d0ee46a3de20"
+    },
+    {
+      "path": "game/src/battle/core/battle.foe-lifecycle.js",
+      "oid": "056aad7547c6916320c10953e493e0e43faa3007"
+    },
+    {
+      "path": "game/src/battle/core/battle.hand-selection.js",
+      "oid": "5c5736852f0773cee99a3771c82511148ded1336"
+    },
+    {
+      "path": "game/src/battle/core/battle.hand.js",
+      "oid": "fe9eb7ceb36a8ecad1960808465ba18c2a22e001"
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.js",
+      "oid": "eb14357438236ab1586225fd336c09b4a874f694"
+    },
+    {
+      "path": "game/src/battle/core/battle.presentation-events.js",
+      "oid": "7ecf3f3ecd917793950dd82b1ed5649c2a9d4d65"
+    },
+    {
+      "path": "game/src/battle/core/battle.presentation.js",
+      "oid": "b00cd3289bc081535950aa016ece32ffe4858743"
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.js",
+      "oid": "d49c5f138266a5a796a367e713e62eba4a3d28c7"
+    },
+    {
+      "path": "game/src/battle/core/battle.selection-flow.js",
+      "oid": "d6be3f83a453da2d73f79d1bf1f8f72cc54e5a8c"
+    },
+    {
+      "path": "game/src/battle/core/battle.summary.js",
+      "oid": "46267f97eb25eac30d7e7373a0dbaf6f71be1aff"
+    },
+    {
+      "path": "game/src/battle/core/battle.target-session.js",
+      "oid": "369a43ee086f1e26f1f8b3e19106ba172b4c34ef"
+    },
+    {
+      "path": "game/src/battle/core/combat.js",
+      "oid": "35308f2f3cc1133e8314de2892b9c982a0305b19"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-cost.js",
+      "oid": "36d2f7e3088bac02fa837c29902407ca62d5b4a9"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-inspection.js",
+      "oid": "f06537b6680b55fb180f954dc5482f2e6c6078bb"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-candidates.js",
+      "oid": "552249409d11d118b7409e42a0b4c2d809b52fd4"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-flow.js",
+      "oid": "ed603ae724d67a49366bd04b4e850bb9d05e159b"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-state.js",
+      "oid": "f00de51071df972aea44a039c724228264a2ce6a"
+    },
+    {
+      "path": "game/src/battle/effects/battle.effect-clauses.js",
+      "oid": "d8e9594f4b2d7400b6b2c8e1e7e0f8ab3e2a8241"
+    },
+    {
+      "path": "game/src/battle/effects/battle.effects.js",
+      "oid": "784f6f3a4679d6737427b25b090f3bd356d1b2e9"
+    },
+    {
+      "path": "game/src/battle/effects/battle.foe-fight.js",
+      "oid": "e3818358ecfbdb2dad9d45f59851eca0ecce02cb"
+    },
+    {
+      "path": "game/src/battle/effects/battle.hosted.js",
+      "oid": "8f092ef601dc225c75404b3723477b768a959668"
+    },
+    {
+      "path": "game/src/battle/effects/battle.infusion.js",
+      "oid": "330ebe634d336d24a6ace225b3bd905a971cfa72"
+    },
+    {
+      "path": "game/src/battle/effects/battle.rule-guard.js",
+      "oid": "f2a9caac4957edf356f6425d710c5c661904de21"
+    },
+    {
+      "path": "game/src/battle/effects/battle.target-rules.js",
+      "oid": "03648868889988974f758fb31ae9e5b224228361"
+    },
+    {
+      "path": "game/src/battle/effects/battle.triggers.m2.js",
+      "oid": "78556378f73965c13053b38a277c956f92b5cde6"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.audit.js",
+      "oid": "088d910d28a92d7831f295bf8d30f09f69f7a3da"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.ctx.js",
+      "oid": "5623bb68a59d9b1b27d80d00d9c82adb7200c6df"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.curse.js",
+      "oid": "f73aa9ee5c6bc77d7d2a86e18846c1eba98633af"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.damage.js",
+      "oid": "7ca949f380fe6a33434adca696798471ab3e5b6e"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.deck.js",
+      "oid": "ac22300de93bb5a6533f0ce5d90192ef57070705"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.gates.js",
+      "oid": "6b66b687c443745953d2a6b3252732623c790f01"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.js",
+      "oid": "a744252cb59ea34fb0d84ba2614fd298c649728f"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.kills.js",
+      "oid": "584d0846b8302376f25c344f335ad24f07651093"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m1.js",
+      "oid": "334b1fc6abdbd2f58fa4408f93cd73e90aa0fc01"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m2.js",
+      "oid": "0ab266768763940f230548fbb094cd78820396d0"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.recovery.js",
+      "oid": "b44bdf1d418fa1fb313696a00a847665facce896"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.rules.js",
+      "oid": "942544ecbcb78fcf07b42d1c1bc0b8f021470f29"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.tail.js",
+      "oid": "62573b8599b60fa962fc2358f478d5658b130b80"
+    },
+    {
+      "path": "game/src/battle/effects/effect-verbs.js",
+      "oid": "37d06e072ad05dcf1ddb4f127160d084de561085"
+    },
+    {
+      "path": "game/src/battle/effects/hand-cost-patterns.js",
+      "oid": "e6cec04f800132d464bc4db99af7f945eddb1f82"
+    },
+    {
+      "path": "game/src/battle/effects/hosted-catalog-index.js",
+      "oid": "bb83d1af89d3906ed2789da9f5a7e95e0ef3dca1"
+    },
+    {
+      "path": "game/src/battle/runes.js",
+      "oid": "dd6057fa887766d12cc03861e99b68d03303fade"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.action-runner.js",
+      "oid": "2258eccad87ac8fcdfd0335a1a7bca22a1cd0d4e"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.clock.js",
+      "oid": "fc95cde54732b463ee26f7524b199b87631ee7c8"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.execution-session.js",
+      "oid": "68c78adc03d0f0c163bba5459ac19954c6bd362e"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.pace.js",
+      "oid": "cadec85fb730765ed5dcfb1ae2f5802a4ac88d5c"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.effects.js",
+      "oid": "db04069e2bb4a71f9fc46b52a4e6a85425c93ab5"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "oid": "05ada0fe6aa01cd23bd1f2193e70902cfe0bc004"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.js",
+      "oid": "32276d0547964f94a4928d5cd6e42e63761aabec"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.piles.js",
+      "oid": "85d867845991005c20c0dae1c35797b550686760"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "oid": "b7c453ba694568eb09f1ee44f14cfcef6bf621dc"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.session.js",
+      "oid": "311adaf03192d389df7d48ef159b41761e2abb7e"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.snapshot.js",
+      "oid": "084ac19f03373a50ca640d87c7f027408f163f48"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.staged-playback.js",
+      "oid": "3615cfadb04e259eec9115b6d6ce252758e2b796"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.state.js",
+      "oid": "911b73756bfbb304a177e4e56a130c936f89258a"
+    },
+    {
+      "path": "game/src/battle/view/battle.aim.js",
+      "oid": "1d515d6a34c98a0ca54e4ff07e8d56600fa7ba44"
+    },
+    {
+      "path": "game/src/battle/view/battle.anim.view.js",
+      "oid": "8d6686182a26b49b4329937ab27f19441bd84fb8"
+    },
+    {
+      "path": "game/src/battle/view/battle.attack-cues.js",
+      "oid": "4b600bdc35a686dac3865d637789da2fcae4c032"
+    },
+    {
+      "path": "game/src/battle/view/battle.card-feedback.js",
+      "oid": "f9b5d4af2b9df2e326748e366fdd1ccab75c2d0f"
+    },
+    {
+      "path": "game/src/battle/view/battle.card-results.js",
+      "oid": "092e1c623638d7bbb303cd27b3f465cc5dafbf58"
+    },
+    {
+      "path": "game/src/battle/view/battle.decision-content.js",
+      "oid": "93b18fdf15dd1ef4217eda36edcd4c5f7648e4d8"
+    },
+    {
+      "path": "game/src/battle/view/battle.decision-shell.js",
+      "oid": "cee46dfd4fdd81bcd536e72efee649a6983002f0"
+    },
+    {
+      "path": "game/src/battle/view/battle.discover-infusion.js",
+      "oid": "9bdf466abd559083e9f255a52a43a8c4da9ff007"
+    },
+    {
+      "path": "game/src/battle/view/battle.discover-input.js",
+      "oid": "7c353b336d4ef9e7d51b2662776d92878422234c"
+    },
+    {
+      "path": "game/src/battle/view/battle.discover-view.js",
+      "oid": "443f438af612ad84344a0f38591dcefc2c3d5082"
+    },
+    {
+      "path": "game/src/battle/view/battle.effect-feedback.js",
+      "oid": "7c6b29d295fc3d6d466c20ab539e9d1de6187e9e"
+    },
+    {
+      "path": "game/src/battle/view/battle.feedback.js",
+      "oid": "29fd2630796af054b164b31b6d524d382466f59b"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-assets.js",
+      "oid": "dd462bd39d2cb2d926a261c709a3123910274b47"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-catalog-changwuyu.js",
+      "oid": "6aac4a3cf8ae2a642d872d5a4962143612727620"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-catalog-three-role.js",
+      "oid": "cd20da76587afed41d1935e071b6c2dc598763b7"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-catalog.js",
+      "oid": "027d148951fa3698ca6c06fe350781a2daecdd23"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-renderer.js",
+      "oid": "8a860e625dde518b7059847cf63a645dee4184d8"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-resolution.js",
+      "oid": "c3677e17daca3a407562b7787489cd45748f3287"
+    },
+    {
+      "path": "game/src/battle/view/battle.frames-diagnostic-policy.js",
+      "oid": "b1c410b5023e469ff2670dae6aa650ecf5b32fe9"
+    },
+    {
+      "path": "game/src/battle/view/battle.frames.js",
+      "oid": "fcc4f258021200e0aefac3228772e62726660b5e"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-hit.js",
+      "oid": "b256541fe96cd2b0392bf8ce8d195b7e349df57e"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-inspector.js",
+      "oid": "baa07ee7ea2ada3a95f17090978a6587463bc9c3"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-layout.js",
+      "oid": "21ecc209b403b6cfc4ea34ba8783ed67ae1bbf8a"
+    },
+    {
+      "path": "game/src/battle/view/battle.hover.js",
+      "oid": "5da90c018f92f18e691905ca8fb0162f81e66846"
+    },
+    {
+      "path": "game/src/battle/view/battle.infusion-view.js",
+      "oid": "75d45cd78d8217e7a0b1a027e65bc2a312b566d5"
+    },
+    {
+      "path": "game/src/battle/view/battle.intent.view.js",
+      "oid": "5ba8d5e673cc3b9a88a4ec6f7c5c6d947c04784d"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "oid": "3b4cc3228d53cf536de1828d91c877168729ed69"
+    },
+    {
+      "path": "game/src/battle/view/battle.overlays.js",
+      "oid": "a717720e2a37870e7f2c672ac8987d978d9e166f"
+    },
+    {
+      "path": "game/src/battle/view/battle.piles.view.js",
+      "oid": "9501a333a2902beb3c6846a68724a69745a77629"
+    },
+    {
+      "path": "game/src/battle/view/battle.presentation-ready.js",
+      "oid": "0146137fae8f69c99baa3c0dba70084e02685bca"
+    },
+    {
+      "path": "game/src/battle/view/battle.preview.js",
+      "oid": "6e735c497b88cc885180be8f371f7783823c97bd"
+    },
+    {
+      "path": "game/src/battle/view/battle.scenery.js",
+      "oid": "22f1b4c0331d6ee41d2b4683904fb5c3236e2d27"
+    },
+    {
+      "path": "game/src/battle/view/battle.secondary-overlay.js",
+      "oid": "d8b3b103ebf8f36ead0522535617932e0bf82159"
+    },
+    {
+      "path": "game/src/battle/view/battle.skill-view.js",
+      "oid": "c3a5769ed5345b08ccad7ec52c8e3177c166272c"
+    },
+    {
+      "path": "game/src/battle/view/battle.turn-feedback.js",
+      "oid": "9be6412ff0b4bf99df66b55d1a592eb84dcc8bae"
+    },
+    {
+      "path": "game/src/battle/view/battle.turn-forecast.js",
+      "oid": "4f1dcd8397618cbc49a80dee52c29e231528d2d1"
+    },
+    {
+      "path": "game/src/battle/view/battle.vfx.js",
+      "oid": "e482ac29ec488cc3e173e92681b60ed682cbcc0b"
+    },
+    {
+      "path": "game/src/battle/view/battle.victory.js",
+      "oid": "57bb43c5df0ec180bf0f3c9d83937471f62460f8"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "oid": "9c62887da0dbe6b61ec0d885f1000dc9330e840c"
+    },
+    {
+      "path": "game/src/boot-order.js",
+      "oid": "13599e23b1eb0352c84d459a787cbac10ba5ec54"
+    },
+    {
+      "path": "game/src/cards/card-battle-start-explanation.js",
+      "oid": "59ccd38764145976eedb368b4157c85e1ad8d6f7"
+    },
+    {
+      "path": "game/src/cards/card-description-links.js",
+      "oid": "a6d4cf4a3de7f2560cb31bea6904c33a95736508"
+    },
+    {
+      "path": "game/src/cards/card-description-text.js",
+      "oid": "c74ce7050f61b83acda5daa1273f463d7e029bd2"
+    },
+    {
+      "path": "game/src/cards/card-draw-explanation.js",
+      "oid": "c8829c562bc221625db5b8da1a3fc2ad48db45a4"
+    },
+    {
+      "path": "game/src/cards/card-frame-presentation.js",
+      "oid": "73ee6f579db61d816ba0fee4dea7c9dcaa27935d"
+    },
+    {
+      "path": "game/src/cards/card-photo-notes.js",
+      "oid": "2cb55773440f21f38882b1e534dd29c9bcda8196"
+    },
+    {
+      "path": "game/src/cards/card-rarity.js",
+      "oid": "40a1dbee488a2671ef767e6eaf9ec46d6459a658"
+    },
+    {
+      "path": "game/src/cards/card-render-context.js",
+      "oid": "66e00fdf8c7b54099eedeacb59d3178e5159fcb5"
+    },
+    {
+      "path": "game/src/cards/card-rules.capability.js",
+      "oid": "d1512ec79906d310ae4bf6a5089e09d18c6ab7db"
+    },
+    {
+      "path": "game/src/cards/card-rules.capability.types.d.ts",
+      "oid": "52eeff68bfe09e7c5bbe3929645f5a2cae3b492f"
+    },
+    {
+      "path": "game/src/cards/card-rules.schema.js",
+      "oid": "3850b9f740f3c617a1657c50689cf10af2684c78"
+    },
+    {
+      "path": "game/src/cards/cards.catalog.js",
+      "oid": "6948d3e9a7a9ac1fb97442fde5d0518af41ff7db"
+    },
+    {
+      "path": "game/src/cards/cards.consts.js",
+      "oid": "19902b82cdf05458ab5668a9bbf024dfdcba96ee"
+    },
+    {
+      "path": "game/src/cards/cards.data.js",
+      "oid": "b822fca49097a94391a2457bd4a6d7f101307c7b"
+    },
+    {
+      "path": "game/src/cards/cards.js",
+      "oid": "53a965c9a6f122df53372ce24c066b97f025b81b"
+    },
+    {
+      "path": "game/src/cards/cards.rules.js",
+      "oid": "ec6e313844e0760aa297740a52677993248aa5ba"
+    },
+    {
+      "path": "game/src/cards/cards.sync.backfiller.js",
+      "oid": "282ddd0eec7431f6df34bdcb8ef6f97a66295a46"
+    },
+    {
+      "path": "game/src/cards/cards.sync.face-refresh.js",
+      "oid": "f82ba18fa924ffa1940e4a41cca47bba490384f3"
+    },
+    {
+      "path": "game/src/cards/cards.sync.js",
+      "oid": "2c456f93fa8e68ac447b0be47b2440872c5efe8e"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m1.js",
+      "oid": "800da00ceaad4d9d8a8aba0d23b3801cb264bb30"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m10.js",
+      "oid": "c7644a986cf58e69efb19ccfa2d2d84a8aab81a2"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m11.js",
+      "oid": "4704f4d60c0c963dedf0234a9d2e65bca57c212e"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m2.js",
+      "oid": "bce045428ea6e5749043e4cb6b7ee38ca6d7d88b"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m3.js",
+      "oid": "b366e43e0bf1a993c16b684ef9c22415db68f69e"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m4.js",
+      "oid": "249c919e9c685a2d4e79abc22211c5cab60502aa"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m5.js",
+      "oid": "66a43b4d1431c73a2f41576af9bb6fa79d198945"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m6.js",
+      "oid": "5234104b698dfab09f1a3f8624bf770cb78ac7a4"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m7.js",
+      "oid": "7e433b695a3078189292768104c6f54806f7f62b"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m8.js",
+      "oid": "5bd598a86ddf50b00e1757e69af452f08dd29066"
+    },
+    {
+      "path": "game/src/cards/cards.sync.m9.js",
+      "oid": "01030931a812ceaf4f940c41627bf6d2ccae98a7"
+    },
+    {
+      "path": "game/src/cards/cards.view.js",
+      "oid": "d2a25c9f6a7523cad4cbf21139d24f821f302f38"
+    },
+    {
+      "path": "game/src/cards/mech-sentences.js",
+      "oid": "c6831f7117517e6b6507c9f780e10bcce1969593"
+    },
+    {
+      "path": "game/src/core/art-preload-plan.js",
+      "oid": "9a8380a68a3adc771948a2888f512496b8d7bf71"
+    },
+    {
+      "path": "game/src/core/art.js",
+      "oid": "0ad576aeabfa4b1f00368c0a330f408cd638ddd7"
+    },
+    {
+      "path": "game/src/core/asset-url.js",
+      "oid": "49640f05c79084abc5ef2672d8ff9c99b88e21d6"
+    },
+    {
+      "path": "game/src/core/camera.js",
+      "oid": "a88290c83757e6147add151ed0789ca83a3a929d"
+    },
+    {
+      "path": "game/src/core/card-capacity.js",
+      "oid": "e44e3bef66c0c549ae7c4f84f0311c26652de0d7"
+    },
+    {
+      "path": "game/src/core/characters.js",
+      "oid": "2644ba9b6ac6b75de67620813ed18dbf1e6a2f72"
+    },
+    {
+      "path": "game/src/core/data-loader.js",
+      "oid": "794743e18ec7e99be32cc4a8d5a67fc7f7ad9002"
+    },
+    {
+      "path": "game/src/core/diagnostics.local.js",
+      "oid": "95746313430634232e673046f47af59330e2663d"
+    },
+    {
+      "path": "game/src/core/event-bus.js",
+      "oid": "5f5a528c5d1f4830301aab9cf7e1dd740c6f56ef"
+    },
+    {
+      "path": "game/src/core/flight-recorder.local.js",
+      "oid": "9a5c0cf56889732d09ef958742339ca51c3397aa"
+    },
+    {
+      "path": "game/src/core/icon-hydration.js",
+      "oid": "1d44e044916d805cabe3295ab4141383d9591375"
+    },
+    {
+      "path": "game/src/core/icons-bitmap.js",
+      "oid": "4ccbc9275f9e8f26c9ceb5322ff890ac29a46dfd"
+    },
+    {
+      "path": "game/src/core/image-decode.js",
+      "oid": "e33f79c236d6619ac265b3d7514a9f6e28c276e6"
+    },
+    {
+      "path": "game/src/core/input.js",
+      "oid": "559e79019fa365fd40b38937a8ea57efcd3c032e"
+    },
+    {
+      "path": "game/src/core/map-brush-art.js",
+      "oid": "abe6ee2254bf222701c11d8ff18af1f1489fe9bf"
+    },
+    {
+      "path": "game/src/core/map-city-atmosphere.js",
+      "oid": "19ba42c82111880da79bdfee1a6bf0c4752db06f"
+    },
+    {
+      "path": "game/src/core/map-image-ready.js",
+      "oid": "fe5032d84a21f58de9ecc4e3cca9f64cccb757f1"
+    },
+    {
+      "path": "game/src/core/map-node-art.js",
+      "oid": "1dcddc3480aa50a8b3e05065710cf139a69bb1b0"
+    },
+    {
+      "path": "game/src/core/map-node-glow.js",
+      "oid": "f72720eba6600bd4ffd713b52ee16dba5d3ff704"
+    },
+    {
+      "path": "game/src/core/map-node-state.js",
+      "oid": "ed047526d0dc76e78dc248ff2d73584f728c9033"
+    },
+    {
+      "path": "game/src/core/map-reveals.js",
+      "oid": "59567c3b7c005816274c60f3fa8dcded20e520ad"
+    },
+    {
+      "path": "game/src/core/mapData.js",
+      "oid": "f8b2d4a9c5bff3876574927b27212415fb103d98"
+    },
+    {
+      "path": "game/src/core/motion-primitives.js",
+      "oid": "4b8089bfb18b0fcd7cb452982abd29380cfebbd2"
+    },
+    {
+      "path": "game/src/core/motion.js",
+      "oid": "4b3d3771ff58ed4c0134457c15c035a910a53626"
+    },
+    {
+      "path": "game/src/core/node-info.js",
+      "oid": "b1c5972a805c184d623c4bf1a1781b54bec92f7c"
+    },
+    {
+      "path": "game/src/core/notes.js",
+      "oid": "3d2582567f17da64ffa41a137d688f94bbd3cb71"
+    },
+    {
+      "path": "game/src/core/perf-probe.local.js",
+      "oid": "565eb4c0900e53c225fea1e397c18be117d76db3"
+    },
+    {
+      "path": "game/src/core/performance-budgets.js",
+      "oid": "f52807bd91e49ae9ec079171b2af2923bb31775f"
+    },
+    {
+      "path": "game/src/core/performance-settings.js",
+      "oid": "f584324cd6c6a816c5a4515eb051537363c4bcb9"
+    },
+    {
+      "path": "game/src/core/random-core.js",
+      "oid": "92c0c14dba8ea27fabfa515a766ddcce85d7dd54"
+    },
+    {
+      "path": "game/src/core/random.js",
+      "oid": "6ed350751bc30e2edddbe8fc3601f40f3cbf396e"
+    },
+    {
+      "path": "game/src/core/render-scheduler.js",
+      "oid": "8e8d30aae6001f1cc2978c239bb619916804ec9d"
+    },
+    {
+      "path": "game/src/core/renderer.fx.js",
+      "oid": "3f6baf1d3695ae6fbd126a9e5b0705a26ca654d1"
+    },
+    {
+      "path": "game/src/core/renderer.icons.js",
+      "oid": "de97b2befd0bff08fdf5ec5694828c0df2e42ad8"
+    },
+    {
+      "path": "game/src/core/renderer.js",
+      "oid": "0f49b01b7c8e19f2940864d2b313129a791ba763"
+    },
+    {
+      "path": "game/src/core/renderer.primitives.js",
+      "oid": "06bdc082d561b9a92576b4a8145a70dc69d49b45"
+    },
+    {
+      "path": "game/src/core/rule-config.js",
+      "oid": "0932ab673ba0760c6c136c3295a63d4ec4960a32"
+    },
+    {
+      "path": "game/src/core/rules.js",
+      "oid": "d05ad91d73d9e7dd7f94d07295aa2a8bba237556"
+    },
+    {
+      "path": "game/src/core/sdt-facade.js",
+      "oid": "099fb9f30fb902ea2deb4282656c0cfc8d97ad95"
+    },
+    {
+      "path": "game/src/core/shared.js",
+      "oid": "bc4000623ef3435f08bc50d7ba99823cb3706e10"
+    },
+    {
+      "path": "game/src/core/storage.js",
+      "oid": "fb3f5c327d0dca991900b574a445f7191bf5dc68"
+    },
+    {
+      "path": "game/src/core/turbo.js",
+      "oid": "6544c9efbd4dbef778534fb08e0072c75688ac76"
+    },
+    {
+      "path": "game/src/e2.snapshot.qa.js",
+      "oid": "2f000e343c3833cfbe6cc7782cb789c92a2650d6"
+    },
+    {
+      "path": "game/src/experience/pocket-strip.js",
+      "oid": "36ded7e8105f2665c387c2b60a7caa4051932f5d"
+    },
+    {
+      "path": "game/src/game.boot.js",
+      "oid": "132031d698fdb30aaf7bddb40da0a999329fdca7"
+    },
+    {
+      "path": "game/src/generated/art-manifest.js",
+      "oid": "fba7fe569607f1da758256bea1123e309a89ff4b"
+    },
+    {
+      "path": "game/src/generated/narrative-events.js",
+      "oid": "94349ce3d37077bfdc50bd0fd103da59f6c43643"
+    },
+    {
+      "path": "game/src/generated/thumb-manifest.js",
+      "oid": "07a0ea83ea7ea48fe0cc767d5cec3a41d9db458d"
+    },
+    {
+      "path": "game/src/home/home.catalog.js",
+      "oid": "4b59149624662ac957549ae42e9b0054a01324f5"
+    },
+    {
+      "path": "game/src/home/home.commands.js",
+      "oid": "93c6a69e7dbec0f82688fae726a2e7a2543f50bb"
+    },
+    {
+      "path": "game/src/home/home.presenter.js",
+      "oid": "b582e42a432683e014990ebf0fea09a43fcb8d55"
+    },
+    {
+      "path": "game/src/home/home.scene.js",
+      "oid": "6c62a8baaaf889711ecb9f7a8f9f9e877b37c460"
+    },
+    {
+      "path": "game/src/home/home.visuals.js",
+      "oid": "bc5ab76ad48dd78bd1008ed9fc90842a4c744b51"
+    },
+    {
+      "path": "game/src/home/narrative.js",
+      "oid": "68301a5489428c1cc2901df3d999c899e1d27d7e"
+    },
+    {
+      "path": "game/src/home/story.commands.js",
+      "oid": "7f8009be653e9d1951020f0071d006657ffe81a4"
+    },
+    {
+      "path": "game/src/home/story.last-lamp.js",
+      "oid": "412cf97b9ad7b9c32da5a445d248b50824ac1efb"
+    },
+    {
+      "path": "game/src/hub/bag-return-hook.js",
+      "oid": "f243bbaf1459811c6677f92461f2a6f1a36160a7"
+    },
+    {
+      "path": "game/src/hub/base-departure.commands.js",
+      "oid": "56d458d36e9b435e098736c5e06bf03d2616b591"
+    },
+    {
+      "path": "game/src/hub/base-economy.js",
+      "oid": "b3867778e190dcbecfaef84f4d74d53c9c31c18d"
+    },
+    {
+      "path": "game/src/hub/base-elapsed.commands.js",
+      "oid": "1576b5bb6413be62ad5793c13b7a2c5145943e6a"
+    },
+    {
+      "path": "game/src/hub/base-meta.commands.js",
+      "oid": "0facb7239c299364bcd065239eeb1eb4becd65a7"
+    },
+    {
+      "path": "game/src/hub/base-motion-v4.js",
+      "oid": "a3313cc928ce2526b457b248d202186d3c8f86df"
+    },
+    {
+      "path": "game/src/hub/base-mutation.js",
+      "oid": "6e518675beab0ec98dc4b20f944e3d583565e746"
+    },
+    {
+      "path": "game/src/hub/base-page-motion-v7.js",
+      "oid": "d69f20003d24617c9f0eab11228a20277ceb6c3c"
+    },
+    {
+      "path": "game/src/hub/base-pet-egg.commands.js",
+      "oid": "32f82d4994b12a341497673ec2e6ba75dbb10baa"
+    },
+    {
+      "path": "game/src/hub/base-progression.commands.js",
+      "oid": "5412f3af7d18545f57fa45d0167825b6704db559"
+    },
+    {
+      "path": "game/src/hub/base-state.js",
+      "oid": "4bc5d04283dc4461a3cddaf63c9b5763de34c7ca"
+    },
+    {
+      "path": "game/src/hub/base.commands.js",
+      "oid": "f78d5d0c62574285c296f734a8f7d3e91db9f36c"
+    },
+    {
+      "path": "game/src/hub/base.js",
+      "oid": "2f57a93780346596ef3eda378668860a4402deae"
+    },
+    {
+      "path": "game/src/hub/battle-settlement.commands.js",
+      "oid": "e15c35906b62e573c1d776c7dcbc41fe6ec5b09d"
+    },
+    {
+      "path": "game/src/hub/battle-settlement.commands.types.d.ts",
+      "oid": "43dc0226ef6b2e65f32567cb78c88de4d5b8a260"
+    },
+    {
+      "path": "game/src/hub/battle-victory-progress.js",
+      "oid": "b42a3693d3acc53b6372365df11fd0b1cccf0a35"
+    },
+    {
+      "path": "game/src/hub/collection.commands.js",
+      "oid": "b275239979d5b1d4c591a500467a8cda2b279d88"
+    },
+    {
+      "path": "game/src/hub/commands.shared.js",
+      "oid": "3a7be887b027c1560ba277e9f556fab99614c0c5"
+    },
+    {
+      "path": "game/src/hub/courtyard-vendor/KoiPond.js",
+      "oid": "ff4f259b174db19b149ce5df2a7229cf8be26c07"
+    },
+    {
+      "path": "game/src/hub/courtyard-vendor/RainRenderer.js",
+      "oid": "332fbbdd82ff73070f6886756adc7baaf9b6334b"
+    },
+    {
+      "path": "game/src/hub/courtyard-vendor/RainSimulation.js",
+      "oid": "34e4b94043c4cc623b9de6619e1a6854f18209be"
+    },
+    {
+      "path": "game/src/hub/courtyard-vendor/SOURCE.md",
+      "oid": "f3a1e666a513d2f4f9b4474650707d5e42f7267a"
+    },
+    {
+      "path": "game/src/hub/courtyard.rain-tableau.js",
+      "oid": "9f70e50b13d6ae2c64a5a8124c36264296bcd222"
+    },
+    {
+      "path": "game/src/hub/departure.drag.js",
+      "oid": "8ed87ccb196be2629a0e12be5c7887c9ba12c352"
+    },
+    {
+      "path": "game/src/hub/departure.selection-state.js",
+      "oid": "7a1b7a39e39d0be2393a46507c356791716e0468"
+    },
+    {
+      "path": "game/src/hub/departure.summary.js",
+      "oid": "b5b748deba3c32f705cf1ebf71192d2d718a6153"
+    },
+    {
+      "path": "game/src/hub/departure.view-updates.js",
+      "oid": "e8b376af1dd0f2bdfd2ab5449538e1dee5ef6971"
+    },
+    {
+      "path": "game/src/hub/extraction.commands.js",
+      "oid": "5b1724813076430fb9a69d7dac11de9904e86974"
+    },
+    {
+      "path": "game/src/hub/game.bag.bridge.js",
+      "oid": "4f67b3edad751e7411966d897038cc15c0c880e4"
+    },
+    {
+      "path": "game/src/hub/game.bag.drag.js",
+      "oid": "fae2d9c5795fa5395fd4a878190ab5879b0d6cf5"
+    },
+    {
+      "path": "game/src/hub/game.bag.js",
+      "oid": "ceeb0ef739b8f170ff223ed7cd772c33e3901775"
+    },
+    {
+      "path": "game/src/hub/game.bag.rules.js",
+      "oid": "47725ca7da19549d393ff73cbb4c4c225f50ea99"
+    },
+    {
+      "path": "game/src/hub/game.bag.settle.js",
+      "oid": "883a107cd86884bb6d013dce84d785f2801a9291"
+    },
+    {
+      "path": "game/src/hub/game.bag.view2.js",
+      "oid": "93638d60f346510dc5873b06842b515439e7b503"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.art-warm.js",
+      "oid": "574b43c48adb40bddd40ca1ff3ce6e0ab12b901d"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.common.js",
+      "oid": "820406a9581e0171dde9a3d1269537f90574c4e4"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.designer.js",
+      "oid": "0a8876b69cf98d22e64ae3338ae82c4f1bdf6856"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.js",
+      "oid": "a4f7634d928fdfb21440b6d057a94dd877a2dcc7"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.page.js",
+      "oid": "86456980ba1ab3ba8afe57d51f2f26d37ede1680"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.photo-fps.js",
+      "oid": "8b7ba95a7e37dada33033f79eb4d413991c3fda5"
+    },
+    {
+      "path": "game/src/hub/game.cardslib.photo-props.js",
+      "oid": "fc794b1ed5d52a930b5f478ab11451369ee4610e"
+    },
+    {
+      "path": "game/src/hub/game.container-store.view.js",
+      "oid": "dc8708b69a880d3b3306eef0215e708db220ec95"
+    },
+    {
+      "path": "game/src/hub/game.hub.bridge.js",
+      "oid": "07166080002f86df3731b7cb3dcf93e0345ba2a2"
+    },
+    {
+      "path": "game/src/hub/game.hub.depart.js",
+      "oid": "b9ec847a3cac781136e42ed5d7bd2bc0f44c8d4b"
+    },
+    {
+      "path": "game/src/hub/game.hub.home-scene.js",
+      "oid": "af30cd580d0990374198cfec4371e450b7e1f328"
+    },
+    {
+      "path": "game/src/hub/game.hub.js",
+      "oid": "aed2096c463043654cb22883e18c9d6f1ef449cf"
+    },
+    {
+      "path": "game/src/hub/game.hub.pages.js",
+      "oid": "16d15716545b58cc0909b099b6fbc667c399e51b"
+    },
+    {
+      "path": "game/src/hub/game.hub.preparation-ports.js",
+      "oid": "61189ddff90bb9ed20a9681a6f6d272f0999c86e"
+    },
+    {
+      "path": "game/src/hub/game.hub.preparation.js",
+      "oid": "998aae943465d7025afc569e231d11bbfd9fcad4"
+    },
+    {
+      "path": "game/src/hub/game.hub.runtime.js",
+      "oid": "fe522ffed1efb9e6f136552a31de20c303dc9bb3"
+    },
+    {
+      "path": "game/src/hub/game.notes.js",
+      "oid": "a660656b7e9b6f1d3a1e411a89dcc27bc8a5e330"
+    },
+    {
+      "path": "game/src/hub/game.reward-organizer.js",
+      "oid": "917929fb6deddcf687a00520d10ebdee38ea6570"
+    },
+    {
+      "path": "game/src/hub/game.storage.js",
+      "oid": "3586f2ae6c9d0c231183d8a1912fdff0c91f11ca"
+    },
+    {
+      "path": "game/src/hub/game.store.js",
+      "oid": "e99c95fbbefbeba46b86c4c7fc5f555cf5d9a9ab"
+    },
+    {
+      "path": "game/src/hub/game.store.types.d.ts",
+      "oid": "8370cd8ebd0b5a214339d99b528e8a7e797872ef"
+    },
+    {
+      "path": "game/src/hub/hub.archive-v3.js",
+      "oid": "0de7a22f07f8f8a0473d10251c2a2e8e1ab9aabb"
+    },
+    {
+      "path": "game/src/hub/hub.archive.js",
+      "oid": "0f19c4247e2f4e7d4ef6c4b789ef799192c77d81"
+    },
+    {
+      "path": "game/src/hub/hub.collection-v4.js",
+      "oid": "3a2bfcc3fd2de07612052604cf514af64aead5a9"
+    },
+    {
+      "path": "game/src/hub/hub.courtyard-runtime.js",
+      "oid": "683ad81fb064b2cf5a06c9e5e9ae5320fb117f2c"
+    },
+    {
+      "path": "game/src/hub/hub.courtyard-v3.js",
+      "oid": "c05f85a5466e99372637f06c157b1d090d8b822c"
+    },
+    {
+      "path": "game/src/hub/hub.facilities.js",
+      "oid": "5511b6c905376f42657530b386aebb96d46c4bc2"
+    },
+    {
+      "path": "game/src/hub/hub.home-icons-v10.js",
+      "oid": "7d3fbb2ce820cbe2bc511f7cb7cd9e33f10658f5"
+    },
+    {
+      "path": "game/src/hub/hub.home-v3.js",
+      "oid": "be9c4bfd01f239dfd4e7cc47d3ca6b03d70b18fd"
+    },
+    {
+      "path": "game/src/hub/hub.materials.js",
+      "oid": "81eed4d12e3df7080dbd107058b58780378b23be"
+    },
+    {
+      "path": "game/src/hub/hub.navigation-v7.js",
+      "oid": "4efe4d0feca28902a6fe57f4ecb9e055e9295ccf"
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "oid": "01571f0b2f555ba251d1406477bc9e08c12c33e1"
+    },
+    {
+      "path": "game/src/hub/hub.presentation.js",
+      "oid": "b249346669ddda203857b73f835638c8a20abf4f"
+    },
+    {
+      "path": "game/src/hub/hub.reward-feedback.js",
+      "oid": "99227b9603128fafceebc6d0504a3278dcd0f772"
+    },
+    {
+      "path": "game/src/hub/hub.shop-v3.js",
+      "oid": "11d626798d91f64b8ff75bfb87d186a379592832"
+    },
+    {
+      "path": "game/src/hub/hub.trade-shop-v5.js",
+      "oid": "1417b45caa43b885d4c943c8beea2ebaedaf7e2e"
+    },
+    {
+      "path": "game/src/hub/hub.visuals.js",
+      "oid": "18e0a7b43f035181f2f3569150e8cfc20587824e"
+    },
+    {
+      "path": "game/src/hub/hub.warehouse-categories-v7.js",
+      "oid": "5397c7d6397f0f8696d9f7eb26f8eb69537459a7"
+    },
+    {
+      "path": "game/src/hub/hub.warehouse.js",
+      "oid": "8d72bdc72d72dbd78c5cf544c112512ee0000b31"
+    },
+    {
+      "path": "game/src/hub/meta-progression.js",
+      "oid": "83a5f9d2073832b4cc1559bc9f1ef9d7f4e3e8da"
+    },
+    {
+      "path": "game/src/hub/meta.js",
+      "oid": "a0c88dad01c48b93ba058fa3e863f98618470455"
+    },
+    {
+      "path": "game/src/hub/nest-settlement.commands.js",
+      "oid": "d19eb2b59153d6e2422e7ec2e9d033138325719d"
+    },
+    {
+      "path": "game/src/hub/photo-studio-catalog-cache.js",
+      "oid": "378d4a031a7dfc84175cf9c910d41af7568f752e"
+    },
+    {
+      "path": "game/src/hub/photo-studio-controls.js",
+      "oid": "05eac28159d208639cfcb04c73fcf32bf73de3c5"
+    },
+    {
+      "path": "game/src/hub/photo-studio-navigation.js",
+      "oid": "a69c769a4cfb8971863863f9ba8dcca5885866e8"
+    },
+    {
+      "path": "game/src/hub/photo-studio-presentation.js",
+      "oid": "dc7ba6151579add4bd2f6d58509a57e19d1e2358"
+    },
+    {
+      "path": "game/src/hub/photo-studio-tabs.js",
+      "oid": "5f9918f975bd640669a948bf18d30b4ebb3bea34"
+    },
+    {
+      "path": "game/src/hub/preparation.commands.js",
+      "oid": "e9c0d983bf9d0deb413f2b50ed713403db6415eb"
+    },
+    {
+      "path": "game/src/hub/preparation.sources.js",
+      "oid": "fa212a1f3d95aa2ada5cbcc90960b0789faeee44"
+    },
+    {
+      "path": "game/src/hub/preparation.view.js",
+      "oid": "0ea3116d51812082e2a0844e4a5bed89cccc1c89"
+    },
+    {
+      "path": "game/src/hub/recoverable-pair.js",
+      "oid": "c2bbdf0cb86c9d762b10b5678a6af339b95768c2"
+    },
+    {
+      "path": "game/src/hub/recovery.commands.js",
+      "oid": "898cafd56b15e26b1e9aa7eed79a60b523cc5b53"
+    },
+    {
+      "path": "game/src/hub/run-save-validation.js",
+      "oid": "da769a867582e99025a29b1e77678d8854f4d7fe"
+    },
+    {
+      "path": "game/src/hub/terminal.commands.js",
+      "oid": "6c2f6797785260ff8663c3e14204854c53e96a26"
+    },
+    {
+      "path": "game/src/hub/versioned-slot-reader.js",
+      "oid": "ee344c27dc14cd0bfc4414990ab1b7c238964ca5"
+    },
+    {
+      "path": "game/src/main.js",
+      "oid": "92d131994bf0beee8debea52b47b9b831b55b470"
+    },
+    {
+      "path": "game/src/r7a.qa.js",
+      "oid": "ed2edd9cef3b159e50f4ba5092fe29de4962bd8b"
+    },
+    {
+      "path": "game/src/rarity-design-lab.js",
+      "oid": "88306b2182a90300e5fe619595dd92fee23f18e2"
+    },
+    {
+      "path": "game/src/run/chest-opening-art.js",
+      "oid": "76cd3f841b734097f8b53e488345bcceb6f01841"
+    },
+    {
+      "path": "game/src/run/chest-reward-save.js",
+      "oid": "d6ef0d50adffc218347c2e77ae19b7e14e4b21dc"
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "oid": "f3fa80cc500b663c3e34766455873c5a63a51a37"
+    },
+    {
+      "path": "game/src/run/encounter-meta.js",
+      "oid": "0ae3d8db9d0d4bf6563ea8e950c84c65033ea3dd"
+    },
+    {
+      "path": "game/src/run/encounter-selector.js",
+      "oid": "c8866e12b6b6b502a1bfd33e290c6ec51eacd683"
+    },
+    {
+      "path": "game/src/run/event-card-choice.js",
+      "oid": "5f0779e5db59d1e3e96a5d4338e8d6a1ff1d5f7b"
+    },
+    {
+      "path": "game/src/run/event-recode-candidates.js",
+      "oid": "0af55b3cb175d148a03e2413a6af856d88ca5cbf"
+    },
+    {
+      "path": "game/src/run/expedition.view.js",
+      "oid": "94696a7b0df7f35b84db2be4403b8e3ed1764be4"
+    },
+    {
+      "path": "game/src/run/extraction-preview.js",
+      "oid": "e88c7a78c73dc5d4c1c80d0944f9df496c95e25e"
+    },
+    {
+      "path": "game/src/run/game.nest.js",
+      "oid": "4794f85c4b2d7c7acfcdeaedfa38ba5907735f4f"
+    },
+    {
+      "path": "game/src/run/game.run.altar.js",
+      "oid": "b0cabeec66ee4f8b26a1242802d7d1a64d28bc11"
+    },
+    {
+      "path": "game/src/run/game.run.class-choice.js",
+      "oid": "3988e6789bc453fe6e7f5372b91cafc31ef3b034"
+    },
+    {
+      "path": "game/src/run/game.run.class-choice.page.js",
+      "oid": "a9de9c1cc0ef9b64723e13429b1b0e229bbb15f9"
+    },
+    {
+      "path": "game/src/run/game.run.data.js",
+      "oid": "f6e7e4b85f4c2a5b8669ddbef5a981111e6a6586"
+    },
+    {
+      "path": "game/src/run/game.run.dev-loader.js",
+      "oid": "88a729268690992f9109c36c4ad83ef5d02a0a7f"
+    },
+    {
+      "path": "game/src/run/game.run.dev.js",
+      "oid": "008bcc0bde8e8d052da738a2e182f333c4c241ad"
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "oid": "3582713004ed40012babcc5d916b33cadd2ca32a"
+    },
+    {
+      "path": "game/src/run/game.run.js",
+      "oid": "3092c1995ca0cf702c0831bde4c30a822fe0e175"
+    },
+    {
+      "path": "game/src/run/game.run.scenes.js",
+      "oid": "87b900b9fd5f4eae2255a7b0b5bd08058bf310f9"
+    },
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "oid": "b6c2ccff32025ab3fba08beb5cb906498e4971c2"
+    },
+    {
+      "path": "game/src/run/game.session.bag.js",
+      "oid": "38145a27df48739eb054f1be4dba20a76312074a"
+    },
+    {
+      "path": "game/src/run/game.session.board.js",
+      "oid": "f0432b1e2c6457f159132dd2646d8d7549e2106a"
+    },
+    {
+      "path": "game/src/run/game.session.browser.js",
+      "oid": "f207bf9ee9dc5d5c9c3fb07d8da5571ab41304e5"
+    },
+    {
+      "path": "game/src/run/game.session.death.js",
+      "oid": "73840bbaaf2fce242e835ae581991d1ec21f1f89"
+    },
+    {
+      "path": "game/src/run/game.session.js",
+      "oid": "843f443aa17684992189a03ac9a4c3ad79c3815e"
+    },
+    {
+      "path": "game/src/run/game.session.kernel.js",
+      "oid": "76e78525c7b320840ed0312fe4f914181ecd7f29"
+    },
+    {
+      "path": "game/src/run/game.session.map.js",
+      "oid": "d3be63867f88bd1e1af90c61746910ef4607aab1"
+    },
+    {
+      "path": "game/src/run/game.session.modes.js",
+      "oid": "ae711bc2db73cc8549eb6fb8dcd8a64b226a4d5e"
+    },
+    {
+      "path": "game/src/run/lab.ending.js",
+      "oid": "37456a0d3ace58867b5057f376ee0137ed5efe23"
+    },
+    {
+      "path": "game/src/run/layeredMap.js",
+      "oid": "c43810113f4ebf08f4a131865f60bc9d5996e60a"
+    },
+    {
+      "path": "game/src/run/map-generation-rules.js",
+      "oid": "4d0fbe14f93e6438dd21ca30f23d0d2f530b846c"
+    },
+    {
+      "path": "game/src/run/map-generator-v4.js",
+      "oid": "5394df068e33e71e085bfb7611322ef1c67fa80d"
+    },
+    {
+      "path": "game/src/run/map-generator.js",
+      "oid": "5990760b5a955d3a6d69177ba190c5bcbb16756b"
+    },
+    {
+      "path": "game/src/run/map-graph.js",
+      "oid": "0046346bac358e0fc8f42ac89de0f736e854b58b"
+    },
+    {
+      "path": "game/src/run/map-route-v2.js",
+      "oid": "fa09cc5ded5939f899fc0557936b7d31aabb701c"
+    },
+    {
+      "path": "game/src/run/map-snapshot.js",
+      "oid": "026cea66d5534a6ec4b9e4864ac2c930dea13c63"
+    },
+    {
+      "path": "game/src/run/map-travel-motion.js",
+      "oid": "64395ac8e6aeefe7e6a59c61eeb0857589dbdc04"
+    },
+    {
+      "path": "game/src/run/map-travel-path.js",
+      "oid": "a78fed0f2ca21d4663ead498f70dac7e50d02c34"
+    },
+    {
+      "path": "game/src/run/node-restore-state.js",
+      "oid": "40dc2020ea755561ddc0e05b2bc0e737cbae9383"
+    },
+    {
+      "path": "game/src/run/node-reward-state.js",
+      "oid": "78e53b1c7e7d9114908033416dbc640648634a05"
+    },
+    {
+      "path": "game/src/run/route-choice-preview.js",
+      "oid": "ed0c97833479ca181d7cded932d23c51825098b2"
+    },
+    {
+      "path": "game/src/run/shop-browse-state.js",
+      "oid": "a16ce8b623c34962b90be7920399f08593fc1015"
+    },
+    {
+      "path": "game/src/ui/achievement-gallery.js",
+      "oid": "218a612efb3868d2ce96b459bca4aa042aa93566"
+    },
+    {
+      "path": "game/src/ui/achievement-medals.js",
+      "oid": "f1b8e8c1fb15a129bdd119081635fad50c464b11"
+    },
+    {
+      "path": "game/src/ui/achievement-motion.js",
+      "oid": "b91cefbbeeaa5f22787f777a443872c179dc1c4c"
+    },
+    {
+      "path": "game/src/ui/archive-motion.js",
+      "oid": "12bf527afb437f7c7131a54a1ab9e18776e33450"
+    },
+    {
+      "path": "game/src/ui/base-design-preview-v7.js",
+      "oid": "4493d8a68b637387cf8a71a3bd28086c7bc4aa1b"
+    },
+    {
+      "path": "game/src/ui/base-preview-rooms-v7.js",
+      "oid": "9456fbfe007111684b1ab00ffad6654c2d889283"
+    },
+    {
+      "path": "game/src/ui/beginner-guide-diagrams.js",
+      "oid": "8dcaeae6474da043c4762aee54c3eb7683a6bc47"
+    },
+    {
+      "path": "game/src/ui/beginner-guide.js",
+      "oid": "45b9d48f722178e1eb35c8aeed7f94d218f91441"
+    },
+    {
+      "path": "game/src/ui/camp-entry.js",
+      "oid": "19fff833efa487156b46c25f5a74ec6eac2b7614"
+    },
+    {
+      "path": "game/src/ui/card-browser.js",
+      "oid": "4be33bfc7c14468957f0d8ec534bfa438c5a5f3b"
+    },
+    {
+      "path": "game/src/ui/card-result-feedback.js",
+      "oid": "5ff93df01b14918e82df9d6914f9218f92b0b694"
+    },
+    {
+      "path": "game/src/ui/character-idle.js",
+      "oid": "3a849dec0b4d18d610dfcd5a44b129ad124127a1"
+    },
+    {
+      "path": "game/src/ui/character-view-motion.js",
+      "oid": "d4ded5487efd528c47747109e41a947974c7f8c9"
+    },
+    {
+      "path": "game/src/ui/chest-reward-overview.js",
+      "oid": "ea90dc03cb1b8957cacd7ac0444ba8c75902f249"
+    },
+    {
+      "path": "game/src/ui/cinematics.js",
+      "oid": "6f428416eac99aadf70bf6e5363d93410298212e"
+    },
+    {
+      "path": "game/src/ui/comm-feed.js",
+      "oid": "de01eb3eceb579c7b64759428caccd7c4749756b"
+    },
+    {
+      "path": "game/src/ui/cover-context.js",
+      "oid": "ac20491b2a6ae3bd39d5870eefc069cd3adf6838"
+    },
+    {
+      "path": "game/src/ui/departure-transition.js",
+      "oid": "2c8f5433fa0d07791a812bcfac11288e157d43f7"
+    },
+    {
+      "path": "game/src/ui/event-signal-puzzle.js",
+      "oid": "24b6f7683c35ba2bdfcf5c22a1253c06149b85f8"
+    },
+    {
+      "path": "game/src/ui/expedition-feedback.js",
+      "oid": "7ccf7ed85c84b86863bab9325081fc074b19c32c"
+    },
+    {
+      "path": "game/src/ui/extraction-rewards-view.js",
+      "oid": "d76784187ece329179f76fb9ae5e1c92d5cc0457"
+    },
+    {
+      "path": "game/src/ui/feedback-theme.js",
+      "oid": "eb0828d52040c63b3e72e9708a084e665f14cf69"
+    },
+    {
+      "path": "game/src/ui/feedback.local.js",
+      "oid": "3ee0540070c295943091bb76a42567230322bca0"
+    },
+    {
+      "path": "game/src/ui/fire-rest-view.js",
+      "oid": "68b90d2abba1b5ce584646e775c3ec3d1057d2b3"
+    },
+    {
+      "path": "game/src/ui/game.menu.js",
+      "oid": "52bb461141a39877518a0f6bd6d56c6ebf66a21f"
+    },
+    {
+      "path": "game/src/ui/game.menu.pages.js",
+      "oid": "8e1ff40f1b7e17462277028464985a5dbb19d2b4"
+    },
+    {
+      "path": "game/src/ui/general-transition.js",
+      "oid": "51a7a08cc521c2a2ba31c1cdef1ad3232f1c89e3"
+    },
+    {
+      "path": "game/src/ui/home-fx.js",
+      "oid": "29f5c8f5595ba66df28bf91b07a397363bb93e69"
+    },
+    {
+      "path": "game/src/ui/home-layers.js",
+      "oid": "04bba93d45f460fc79eecbd2c546662685016b11"
+    },
+    {
+      "path": "game/src/ui/home-linked-interactions.js",
+      "oid": "9171c48b99ff5ee18870024ed6ec114e2751d1d4"
+    },
+    {
+      "path": "game/src/ui/home-menu-motion.js",
+      "oid": "6a010e82d42b6c435847f2858ac4fa2f42d7eb80"
+    },
+    {
+      "path": "game/src/ui/hud.js",
+      "oid": "8927c8b588c2b1d839139fda1fd03e4dbb7f94fc"
+    },
+    {
+      "path": "game/src/ui/interface-motion.js",
+      "oid": "cabee9222fe40a59d0d7dedda192c5da08fbd57d"
+    },
+    {
+      "path": "game/src/ui/inventory-zoom.js",
+      "oid": "c0c073cb2df1bb46435107a2294a3404e7b561a4"
+    },
+    {
+      "path": "game/src/ui/lucide-acquisition-icon.js",
+      "oid": "ea8b56c09aa9d82d35b1bc93e6a3084d48e3eff4"
+    },
+    {
+      "path": "game/src/ui/map-health-hud.js",
+      "oid": "bf2786681654956ef9c0422c70c6cde992a7a83d"
+    },
+    {
+      "path": "game/src/ui/motion-presets.js",
+      "oid": "f964c97fc06ccd9b266077d36a0d4cb5531a6598"
+    },
+    {
+      "path": "game/src/ui/motion-transitions.js",
+      "oid": "4adca48304ac30f77fe5b6ca4e40d96672d73f01"
+    },
+    {
+      "path": "game/src/ui/navigation-motion.js",
+      "oid": "49dda4ac66820a9eecaac99db83229987c6b233c"
+    },
+    {
+      "path": "game/src/ui/node-decision-view.js",
+      "oid": "cb30afbd436c1a85345d44d6f217f0564fc58383"
+    },
+    {
+      "path": "game/src/ui/node-scene-view.js",
+      "oid": "2e81ce1b0a15f22b0ecf5d6c3c4389edc7874cf7"
+    },
+    {
+      "path": "game/src/ui/overlay.js",
+      "oid": "4ee5f33ace2d0b85ab08e794e3e6febc69dd80e3"
+    },
+    {
+      "path": "game/src/ui/page-entry-cancellation.js",
+      "oid": "0b51181be19f02882935ca86a85dce0ec68d0ebe"
+    },
+    {
+      "path": "game/src/ui/page-loading.js",
+      "oid": "5309edd059765baabf6fe45cb251c94d9b7eb58d"
+    },
+    {
+      "path": "game/src/ui/page-motion-profiles.js",
+      "oid": "a1e6f36a6fc684feeb5b5cf01b9f33b5e4157723"
+    },
+    {
+      "path": "game/src/ui/page-visual-ready.js",
+      "oid": "888a05a4e254633826c53c42c078cf2fcca7cce6"
+    },
+    {
+      "path": "game/src/ui/partner-interaction.js",
+      "oid": "b69acfd141d01cd34a194daff40bdf74f2951889"
+    },
+    {
+      "path": "game/src/ui/performance-settings.js",
+      "oid": "b52776de28cf550178d7951acb9a02ee997d217f"
+    },
+    {
+      "path": "game/src/ui/quick-nav.js",
+      "oid": "ccd15128afc285be52b772f78e033a208d22c5f2"
+    },
+    {
+      "path": "game/src/ui/reward-capacity-organizer.js",
+      "oid": "0fbee4000f9c2a50a3a39c04c35d2e0ea570a1b7"
+    },
+    {
+      "path": "game/src/ui/reward-card-feedback.js",
+      "oid": "fc1736077313f23e217bbfb5d7cd445476445b25"
+    },
+    {
+      "path": "game/src/ui/reward-picker-heading.js",
+      "oid": "fe216305b46e3b90e2298c95269f5e4ac20faa38"
+    },
+    {
+      "path": "game/src/ui/reward-scene-view.js",
+      "oid": "1d3128a0c5b95f0db94e6c7651b30ef28757af36"
+    },
+    {
+      "path": "game/src/ui/route-overlay.js",
+      "oid": "9e1a34f4d099f492c76bb013cd1d92f9ffe837eb"
+    },
+    {
+      "path": "game/src/ui/settings-navigation.js",
+      "oid": "29a07734504bd2cc3fa60dbcfb99d55dcb8afc08"
+    },
+    {
+      "path": "game/src/ui/settings-transition.js",
+      "oid": "ef6724d27015d0e2e687b96533844b61bc633adc"
+    },
+    {
+      "path": "game/src/ui/slot-emblems.js",
+      "oid": "7eb18477f922cec1fe3e2c21b173883d3fde6067"
+    },
+    {
+      "path": "game/src/ui/startup-transition.js",
+      "oid": "3357358a14d3ce37eae85c9769fc0ee966cce018"
+    },
+    {
+      "path": "game/src/ui/surface-motion.js",
+      "oid": "8dd4a0212614679f999e8f400dea7c9276b96b62"
+    },
+    {
+      "path": "game/src/ui/term-tips.js",
+      "oid": "68e1de0fa8b58c33e8d406a7f6032f5fa3550276"
+    },
+    {
+      "path": "game/src/ui/terminal-settlement.js",
+      "oid": "2bc12248c30d5e2411097c83266515b202857567"
+    },
+    {
+      "path": "game/src/ui/title-credits.js",
+      "oid": "a8d21a07098f48707cb91899ca4e97bb1b49bcc8"
+    },
+    {
+      "path": "game/src/ui/title-wallpaper.js",
+      "oid": "1cf76b87b0fab8a891f1074ab9a8bf259b018815"
+    },
+    {
+      "path": "game/src/ui/transition-diagnostic-policy.js",
+      "oid": "d973593a6524926e1fb3210f78ec216640e9783b"
+    },
+    {
+      "path": "game/src/ui/transitions-director.js",
+      "oid": "952bfe5c7fa5009ca67db7e590f423513ad776da"
+    },
+    {
+      "path": "game/src/ui/ui-decision.js",
+      "oid": "103add82a7414f2bf05a3ed7a012d303390a1b7f"
+    },
+    {
+      "path": "game/src/ui/ui-disclosure.js",
+      "oid": "8188d46161f5ae086100da981978446a6a43e7e5"
+    },
+    {
+      "path": "game/src/ui/ui-scale.js",
+      "oid": "fee25b2b2bb620afe18a7603f89a4bfb47e1d5b5"
+    },
+    {
+      "path": "game/src/ui/ui.js",
+      "oid": "f0822a39a3d8a31fdc465e85eec67b74cafe0471"
+    },
+    {
+      "path": "game/src/ui/vendor/lucide-1.58.0/README.md",
+      "oid": "6f9894afe05c39befb86edf76e7d5d4d0269ad0b"
+    },
+    {
+      "path": "game/src/wu-career-frame-preview.js",
+      "oid": "840f92a5a1434b97402e13535e77f5e960be3546"
+    },
+    {
+      "path": "package.json",
+      "oid": "cb11e04f53b0d5801dc5f4916d25d976c101bf95"
+    },
+    {
+      "path": "scripts/acceptance-gate.mjs",
+      "oid": "292cac22422ed471708a6ea7a6a7b8f4317e8333"
+    },
+    {
+      "path": "scripts/architecture-graph.mjs",
+      "oid": "32da7b56c77253b0c5d2c9767ed97ac97b71af78"
+    },
+    {
+      "path": "scripts/asset-audit-lib.cjs",
+      "oid": "98a2b352637814d47d1fbf3e659dc8fc85dd7bd0"
+    },
+    {
+      "path": "scripts/asset-audit.cjs",
+      "oid": "5d64ca9637921656223534483b9551a413d45f0e"
+    },
+    {
+      "path": "scripts/check-syntax.mjs",
+      "oid": "20261cb6988199d3fefd9b270c9fa9f2d4d8e88e"
+    },
+    {
+      "path": "scripts/check-types.mjs",
+      "oid": "ef8830571a6bc00256ce013ad4906b35ccdd38cf"
+    },
+    {
+      "path": "scripts/check-version.cjs",
+      "oid": "6ea5d62aebd39f1c538bade3383818223d7c9133"
+    },
+    {
+      "path": "scripts/compile-narrative.mjs",
+      "oid": "7ca63b53ab0a4411b649565c238fd6751ea7df84"
+    },
+    {
+      "path": "scripts/css-asset-minification.mjs",
+      "oid": "9b3d262ba1a5672172028c27ee1a8dd715a2a1b8"
+    },
+    {
+      "path": "scripts/css-redundancy-audit.mjs",
+      "oid": "935f06019d7f16da9ddaeca94a3086152bfb03e3"
+    },
+    {
+      "path": "scripts/doc-retirement-candidates.mjs",
+      "oid": "e06ed228c82c2ad4ba3eae6998330ef48d9f4fc0"
+    },
+    {
+      "path": "scripts/electron-gpu-info.cjs",
+      "oid": "865dbd3b70637b0d058557736c9c2e43e26dcdfc"
+    },
+    {
+      "path": "scripts/electron-title-smoke.mjs",
+      "oid": "cd120b781c1ff48e6d89899db8583e7e7e01b226"
+    },
+    {
+      "path": "scripts/esm-convert.mjs",
+      "oid": "1dac7ef68b036a177f0c91610354db298213ffd2"
+    },
+    {
+      "path": "scripts/esm-fix-setters.mjs",
+      "oid": "61701c55d29424bd7cf623294ae9411501625c72"
+    },
+    {
+      "path": "scripts/gate-plan.mjs",
+      "oid": "06908083aab7da1d1164b8f7e7e47a50d44d757d"
+    },
+    {
+      "path": "scripts/generate-compendium.mjs",
+      "oid": "8697324430481b46c567fd6a7ee3df2eaac3d998"
+    },
+    {
+      "path": "scripts/handoff-brief.mjs",
+      "oid": "c6ce1167a6c01b5cf3f65ac995c3b84713cbab49"
+    },
+    {
+      "path": "scripts/iab-drive.mjs",
+      "oid": "e472ead12a49044af3ea0df339f2f59f6489d863"
+    },
+    {
+      "path": "scripts/impact-query.mjs",
+      "oid": "b00e34be867904ae1aa6d1b7ffce1a10739bb1ee"
+    },
+    {
+      "path": "scripts/index-validation.mjs",
+      "oid": "f938d3b0c1077edaa024d2ed50ac1cb7c57f2e6d"
+    },
+    {
+      "path": "scripts/perf-benchmark.cjs",
+      "oid": "629464ddbe1c93d5cc26f9235e54a3f652562367"
+    },
+    {
+      "path": "scripts/perf-budget.cjs",
+      "oid": "2f4821479bc182a9919d8b24a0e7a8397aa52904"
+    },
+    {
+      "path": "scripts/perf-ledger-capture.mjs",
+      "oid": "d1c3d9ec3ee1a81c332dc1ab4ab431dcaa33c02a"
+    },
+    {
+      "path": "scripts/registry-paths.mjs",
+      "oid": "eeb968d751c437f9bbe1c563ed8a879f459af932"
+    },
+    {
+      "path": "scripts/runtime-asset-aliases.mjs",
+      "oid": "5b21e84fea8e9c8fbe73c3544e8deaaa30e7b162"
+    },
+    {
+      "path": "scripts/runtime-asset-publication.mjs",
+      "oid": "b324997d6289f1d693b61a60b377bdb703007314"
+    },
+    {
+      "path": "scripts/runtime-asset-redundancy-review.mjs",
+      "oid": "6e78945f3ef4f36103eafd60e0df0c633fdf493f"
+    },
+    {
+      "path": "scripts/runtime-asset-redundancy.mjs",
+      "oid": "a9f7d86bd7cd2564dd47641e31d34fc903e8888e"
+    },
+    {
+      "path": "scripts/setup-commit-gate.mjs",
+      "oid": "083f404603ff4bfd7b9cc751b78a655030c72987"
+    },
+    {
+      "path": "scripts/sync-cards-from-live.mjs",
+      "oid": "59e01ce992bad0bcc28117e44adc3c9d1a2b1433"
+    },
+    {
+      "path": "scripts/validate-data.mjs",
+      "oid": "8d483f23246fdbf9d901ab22ef33e9a0724b3529"
+    },
+    {
+      "path": "scripts/visible-playback.mjs",
+      "oid": "b18e733597981e1235da8b96959e6e345ab9f287"
+    },
+    {
+      "path": "scripts/web-up.mjs",
+      "oid": "a1d4875f959db5a8d6678a463efea4ab204620e7"
+    },
+    {
+      "path": "scripts/workflow-archive.mjs",
+      "oid": "2f3d1ff3948aa562a06bffc9a8a87c3339d77552"
+    },
+    {
+      "path": "scripts/workflow-browser.mjs",
+      "oid": "3ce708065df1ace61d797e58e5c515e6f887d3d3"
+    },
+    {
+      "path": "scripts/workflow-change-review.mjs",
+      "oid": "6817c2d3ba4c502bce58a85f25b9027627d5f83e"
+    },
+    {
+      "path": "scripts/workflow-dependencies.mjs",
+      "oid": "f0bf07175355596aba1c64c56dcd30b985e1aa2d"
+    },
+    {
+      "path": "scripts/workflow-doctor.mjs",
+      "oid": "ce1a5f966c0c81adec466832dfc01a56995412f5"
+    },
+    {
+      "path": "scripts/workflow-evidence.mjs",
+      "oid": "c4e738032532a92e5c2139ea0d2c757f0507ff1d"
+    },
+    {
+      "path": "scripts/workflow-gate-receipt.mjs",
+      "oid": "7fa336263bf6ed44c82645ed0ea7416504b63cde"
+    },
+    {
+      "path": "scripts/workflow-ledger.mjs",
+      "oid": "b60976033f048ba42843e89870d2f20dd93d67d9"
+    },
+    {
+      "path": "scripts/workflow-memory.mjs",
+      "oid": "87a702839a13d136516d62b5a8ef553575caba8c"
+    },
+    {
+      "path": "scripts/workflow-ship.mjs",
+      "oid": "08dc99e4af34d26ad753f8b8b104e0b9bc584daf"
+    },
+    {
+      "path": "scripts/workflow-staged.mjs",
+      "oid": "bfe5fd8eee6f27c3952204eaeffa7bae84e87107"
+    },
+    {
+      "path": "scripts/workflow-status.mjs",
+      "oid": "399f5ef031ba2d2288dd232057b33fce1e266109"
+    },
+    {
+      "path": "scripts/workflow-task-input.mjs",
+      "oid": "106d4d866aa3d01a61f6d7ab4ea8f47d212c45f7"
+    },
+    {
+      "path": "scripts/workflow-task.mjs",
+      "oid": "defa6d6c8a002a21999c9233291774632c26d90c"
+    },
+    {
+      "path": "scripts/workflow.mjs",
+      "oid": "237310b454919c6bd17eea9eb425e68eab3db453"
+    },
+    {
+      "path": "tests/a3-battle-rules.test.js",
+      "oid": "d95da5f5b5c214bb50737776c247670c2b089875"
+    },
+    {
+      "path": "tests/abyss-sovereign.test.js",
+      "oid": "efca14d1ac5e95f0b369400793378b945713b117"
+    },
+    {
+      "path": "tests/acceptance-gate.test.js",
+      "oid": "68213f3c172b405676ecd1e637496c1351b5c8eb"
+    },
+    {
+      "path": "tests/achievement-gallery.test.js",
+      "oid": "ee4bf588ae50c124c2181aa07be95a335b25342a"
+    },
+    {
+      "path": "tests/agent-batch-llm-timeout.test.js",
+      "oid": "35340886642ca5440315327a2c5dcbf6759a33e5"
+    },
+    {
+      "path": "tests/agent-channel-pump-lazy.test.js",
+      "oid": "4847c6c4e158a1042e46d25a054ee3af1f44d3e8"
+    },
+    {
+      "path": "tests/agent-command-results.test.js",
+      "oid": "0967f69acf521a532928640db58d3df875f3aa58"
+    },
+    {
+      "path": "tests/agent-compare-provenance.test.js",
+      "oid": "b47a782d7a3ac4abaa7dbc3abe38e0794d837c39"
+    },
+    {
+      "path": "tests/agent-console-async-entry.test.js",
+      "oid": "6bb656977a878192883db2106e1db153e5f3bf53"
+    },
+    {
+      "path": "tests/agent-console-jump.test.js",
+      "oid": "ee2ebe72aaadd496ab7801900efc71d20c6f53ee"
+    },
+    {
+      "path": "tests/agent-llm-abort.test.js",
+      "oid": "6d1dca993c5d2fb6326e1b1206ca002ed2975659"
+    },
+    {
+      "path": "tests/agent-llm.test.js",
+      "oid": "0c96d9c1c25500e20b7ecf6241e6413fc51e53b5"
+    },
+    {
+      "path": "tests/agent-policy-door-threshold.test.js",
+      "oid": "92499801cf9925e868a5812f3803baf9cdd614d3"
+    },
+    {
+      "path": "tests/agent-provenance-stopreason.test.js",
+      "oid": "8f63cd0f0c3ae821adc7938a1a44c4d2792f309a"
+    },
+    {
+      "path": "tests/agent-recorder.test.js",
+      "oid": "5258f671f0792bb76dcb679fc5a1fc9369097d34"
+    },
+    {
+      "path": "tests/agent-run-provenance.test.js",
+      "oid": "c5aef2088753701c1582d01dff7905ce9ff17450"
+    },
+    {
+      "path": "tests/agent-runner-abort.test.js",
+      "oid": "8bf61eb20c82d715063325e3115bea13f1efcbe9"
+    },
+    {
+      "path": "tests/agent-runner-driver-restore.test.js",
+      "oid": "1f220f764f03df9f6c0af7b024693f0bee687627"
+    },
+    {
+      "path": "tests/agent-scenes-lazy-boundary.test.js",
+      "oid": "1c885bc1effa3b7977a50045c94e77434b470353"
+    },
+    {
+      "path": "tests/agent-scenes.test.js",
+      "oid": "3d22f71cf80cc392b1e121028d3a9636d988d32a"
+    },
+    {
+      "path": "tests/agent-stats-provenance.test.js",
+      "oid": "0af918b63d9156cfdabd08cf6baff3c37ea53935"
+    },
+    {
+      "path": "tests/agent-tool-lifecycle.test.js",
+      "oid": "336eef83f753ebda3382f948c5a2c0b7d540e22a"
+    },
+    {
+      "path": "tests/altar-completion-road-cache.test.js",
+      "oid": "8e2aac20299abc3168bbbd28d7c9f54b9a6b97cc"
+    },
+    {
+      "path": "tests/altar-node-art.test.js",
+      "oid": "3617073fddb38a9ea28162d8374846e07eeb5620"
+    },
+    {
+      "path": "tests/altar-node-completion-view.test.js",
+      "oid": "41607fce56c749bdc011648c644daa9788e2d210"
+    },
+    {
+      "path": "tests/altar-sacrifice-zones-cloud.test.js",
+      "oid": "995dc635a31c52a624c76d19af17e3a81bd5b457"
+    },
+    {
+      "path": "tests/architecture-boundaries.test.js",
+      "oid": "f95e27bb2f9b0ef0a469fc0a2f7de0e8adf3f2a5"
+    },
+    {
+      "path": "tests/archive-motion.test.js",
+      "oid": "225973be48fd7d4f2d4fb6b31e46c8982041487c"
+    },
+    {
+      "path": "tests/armup-mode.test.js",
+      "oid": "1de8da63553cd7e8432f4b39974c0e5ad6f7cbf1"
+    },
+    {
+      "path": "tests/art-preload-scheduling.test.js",
+      "oid": "953ca32a71936df650869cdb6c2e5e6344fa8b48"
+    },
+    {
+      "path": "tests/art-warmup-lifecycle.test.js",
+      "oid": "e7a1eb4ad72fa51f6c908de3343dae105b06ce54"
+    },
+    {
+      "path": "tests/asset-audit.test.js",
+      "oid": "9b8bb9629b12850c5e531862dfe51d89397604cb"
+    },
+    {
+      "path": "tests/asset-url-aliases.test.js",
+      "oid": "b472918f0ad6dc28f39b58ece7438bdeca63bfee"
+    },
+    {
+      "path": "tests/backpack-layout.test.js",
+      "oid": "0b657ef3a6174c5aca6ea835c2f82e2ed9abdd54"
+    },
+    {
+      "path": "tests/bag-architecture.test.js",
+      "oid": "031b96b1a48c318d2e4bc8d8ac6d8303c91969a6"
+    },
+    {
+      "path": "tests/bag-item-rule-baseline.test.js",
+      "oid": "c85202541a42f2ab1ba02f8d5e338aed8d5e61d3"
+    },
+    {
+      "path": "tests/bag-page-lifecycle-review.test.js",
+      "oid": "4d4212f2b8ab5e8cfaa9368b36a8ac134175ce3a"
+    },
+    {
+      "path": "tests/bag-pouch-capacity.test.js",
+      "oid": "21dc0d3926eb6b5985a7e0e1d36c5f768b99e2a4"
+    },
+    {
+      "path": "tests/bag-return-hook.test.js",
+      "oid": "ffac4d1f350ad5ac8e7e7a3befff857fc14ba8eb"
+    },
+    {
+      "path": "tests/bag-slam-button.test.js",
+      "oid": "06d2602c07c3679672bbcfcc17050eaa26f08b86"
+    },
+    {
+      "path": "tests/bag-structured-rule-migration.test.js",
+      "oid": "b11cbb4c81cfeb560485f38d3a78bcaef6d0389d"
+    },
+    {
+      "path": "tests/bag-structured-use.test.js",
+      "oid": "296fbf73e3c84b1923743a89db4030204c91eeed"
+    },
+    {
+      "path": "tests/bag-ui-language.test.js",
+      "oid": "8331178100778f222027db0f15ff8fbcf5a14f5e"
+    },
+    {
+      "path": "tests/base-corrupt-field.test.js",
+      "oid": "b5c56a38de858b800b4e1ee5bdfb09a739e173d8"
+    },
+    {
+      "path": "tests/base-departure.test.js",
+      "oid": "9d492a5337deadd858653a657652e3165074ea81"
+    },
+    {
+      "path": "tests/base-direct-write-convergence.test.js",
+      "oid": "44fc2f400b8dceb3ec325844bb42265d46244bef"
+    },
+    {
+      "path": "tests/base-elapsed.test.js",
+      "oid": "69dcf74a55132e68b981f5bbe986fa708351464a"
+    },
+    {
+      "path": "tests/base-hub-business-lifecycle-audit.test.js",
+      "oid": "4f96dd4b6988da75b49939ed4ec19e6265677733"
+    },
+    {
+      "path": "tests/base-inventory-lifecycle-audit.test.js",
+      "oid": "c3b7aae4d0e5901956f2996691aa3f8a8697eb79"
+    },
+    {
+      "path": "tests/base-key-count.test.js",
+      "oid": "2c97877eff5b2decc1663d07f0f4c4a0e3c6a759"
+    },
+    {
+      "path": "tests/base-material-rule-baseline.test.js",
+      "oid": "1cd0dbb04fcd885fa0093fb48f38070409162173"
+    },
+    {
+      "path": "tests/base-meta.test.js",
+      "oid": "ea8ba118394306637163edab18bac424c7463688"
+    },
+    {
+      "path": "tests/base-motion-v4.test.js",
+      "oid": "97aa7a0809ce6cd8fd598efee6801020e2572019"
+    },
+    {
+      "path": "tests/base-mutation-types.test.js",
+      "oid": "0f117ecdf69899ec249535eb1ab30346f4b2c31c"
+    },
+    {
+      "path": "tests/base-mutation.test.js",
+      "oid": "a44f80f0b13389940b001dc3c89b86afd0d66028"
+    },
+    {
+      "path": "tests/base-pet-egg.test.js",
+      "oid": "0dda7546d86a5ec780915730fe7e2d371f4d3b19"
+    },
+    {
+      "path": "tests/base-progression-commands.test.js",
+      "oid": "a56e823915ea02fae38fcef77df27c775ab02411"
+    },
+    {
+      "path": "tests/base-save-snapshot.test.js",
+      "oid": "45f9c172f6cccaa4cb4f82dd2c282f22926b8e83"
+    },
+    {
+      "path": "tests/base-sticky-issue-fix.test.js",
+      "oid": "4b61c1734468c50be8d02729977a962ababc76fa"
+    },
+    {
+      "path": "tests/base-storage-read-failure.test.js",
+      "oid": "571bab7e96cdea4fc2c68e52c6a021036c9310a2"
+    },
+    {
+      "path": "tests/base-subpage-header-readability.test.js",
+      "oid": "1ea1264b11859964085823cce67a2b7b7815a454"
+    },
+    {
+      "path": "tests/base-ui-sample.test.js",
+      "oid": "eb51edd828c3d030f191f1d1ec300e59cf765601"
+    },
+    {
+      "path": "tests/battle-action-runner-readiness.test.js",
+      "oid": "2fe17ca7559ba297ebd1dc3937575759160f1332"
+    },
+    {
+      "path": "tests/battle-aim-canvas-resolution.test.js",
+      "oid": "240b6b8e2fc5ed56fd981313af2be7030ada49ad"
+    },
+    {
+      "path": "tests/battle-all-cards.test.js",
+      "oid": "5103ebb1d9a633b19eab2890cfe8f90907458260"
+    },
+    {
+      "path": "tests/battle-architecture.test.js",
+      "oid": "bba7bfc255b3fa15d7c10026c671bf304c46dd2e"
+    },
+    {
+      "path": "tests/battle-art-warm-scope.test.js",
+      "oid": "edc701beccbeade5870269415dc33009a7cd65de"
+    },
+    {
+      "path": "tests/battle-bloom-discovery.test.js",
+      "oid": "85ee791c2871e443a3281ef484b4e5a1d8f0d91b"
+    },
+    {
+      "path": "tests/battle-card-feedback.test.js",
+      "oid": "17b20af447f60a8163f3ec57d8dbd764db87ab00"
+    },
+    {
+      "path": "tests/battle-card-inspection.test.js",
+      "oid": "e7ac729d8b61e5169a440aafd1ce3c8dccff467c"
+    },
+    {
+      "path": "tests/battle-card-results.test.js",
+      "oid": "e4b4777e10ccb54fddce75d20263926736562f69"
+    },
+    {
+      "path": "tests/battle-decision-lifecycle.test.js",
+      "oid": "9338d6995a8babc2c4d6ba9463eb0bef9c439748"
+    },
+    {
+      "path": "tests/battle-decision-readability.test.js",
+      "oid": "2ce3c7d8acb6b153ab2bc9f094871959611eaba3"
+    },
+    {
+      "path": "tests/battle-decision-redesign.test.js",
+      "oid": "0f828d1dac11d609b744b8cdb1d6c22101f552d8"
+    },
+    {
+      "path": "tests/battle-decision-shell-review.test.js",
+      "oid": "b55d9ca3935afaa1a055c7d32cf38fc60619a39b"
+    },
+    {
+      "path": "tests/battle-discover-candidates.test.js",
+      "oid": "a9f7f0904a0c6054f67311d863a657a61b12859d"
+    },
+    {
+      "path": "tests/battle-discover-result-source.test.js",
+      "oid": "c466a3d1a7b4d5b5c50a29184a981c0515333b8a"
+    },
+    {
+      "path": "tests/battle-discover-retained-feedback.test.js",
+      "oid": "9976701ce9892c1901d5e1957709241681dd34d2"
+    },
+    {
+      "path": "tests/battle-discover-state.test.js",
+      "oid": "a5b99bb582ff75fdb3b7a5c874223028aa3b720f"
+    },
+    {
+      "path": "tests/battle-drag-reference.test.js",
+      "oid": "150f13bf191e74d8adb0ac5b54530bfe38d6f385"
+    },
+    {
+      "path": "tests/battle-effect-feedback.test.js",
+      "oid": "c9661823cce1ed1c5205eabcbee256a17b8c8409"
+    },
+    {
+      "path": "tests/battle-effective-card.test.js",
+      "oid": "8806f5ec5fd869f778d72abb83cc0ab0bb41254e"
+    },
+    {
+      "path": "tests/battle-end-turn-selection.test.js",
+      "oid": "f9cad493bf1241849c4fffceddb0d6fca21b40ca"
+    },
+    {
+      "path": "tests/battle-engine-facade.test.js",
+      "oid": "661500fd1230008514a670d1c0bd2b4f7f2a93dd"
+    },
+    {
+      "path": "tests/battle-entry-readiness.test.js",
+      "oid": "590089ee0185f266dea0420996e043257e5933d6"
+    },
+    {
+      "path": "tests/battle-entry-view.test.js",
+      "oid": "3fc524d4f3db741fc140bf018b69995942c189f9"
+    },
+    {
+      "path": "tests/battle-equipment-skill-synthesis.test.js",
+      "oid": "85813ba9b1b4a0becb238204b5b96b6ae11f44c3"
+    },
+    {
+      "path": "tests/battle-esc-ime-guard.test.js",
+      "oid": "6064596d033abf8187a28f3f296370ba4f4e6d7d"
+    },
+    {
+      "path": "tests/battle-execution-continuation.test.js",
+      "oid": "f39691f490620099bca635f40957e8775d844704"
+    },
+    {
+      "path": "tests/battle-feedback-stickers.test.js",
+      "oid": "51349cd444abb7519910b66324382ce02ede67fb"
+    },
+    {
+      "path": "tests/battle-feedback-view.test.js",
+      "oid": "fdd2658f527c12827d111463e886d086c0c4bd44"
+    },
+    {
+      "path": "tests/battle-foe-canvas-resolution.test.js",
+      "oid": "f3b424303b1a3f0fe2cf1cf3ee08af1d147fc14b"
+    },
+    {
+      "path": "tests/battle-frame-assets.test.js",
+      "oid": "1d38ca4b9d5e854db8bcf53ff3de776ee4a2753b"
+    },
+    {
+      "path": "tests/battle-frame-renderer.test.js",
+      "oid": "ce265df9e562fb7c5ebdcd5565b3eeac6f207c29"
+    },
+    {
+      "path": "tests/battle-frame-resolution.test.js",
+      "oid": "583785842bc989f390f5cdadcf4c3bec4ed12622"
+    },
+    {
+      "path": "tests/battle-frames-diagnostic-policy.test.js",
+      "oid": "27ed8625e2029713ddb820d297ef23e1a4483820"
+    },
+    {
+      "path": "tests/battle-frames-lifecycle.test.js",
+      "oid": "f82e30e6d5a2fc8cec51cd0d66fa6a39960b1242"
+    },
+    {
+      "path": "tests/battle-frames-ownership.test.js",
+      "oid": "acf047ee6659bc97e69c0c8f2f26da47096b0149"
+    },
+    {
+      "path": "tests/battle-frames-pending-release.test.js",
+      "oid": "80f167a16da94a2096488b31762b8dfdbb0185ef"
+    },
+    {
+      "path": "tests/battle-generated-settlement.test.js",
+      "oid": "e110aeeeda35c669ba2f8a24f0d84ae61c30b411"
+    },
+    {
+      "path": "tests/battle-hand-hit-input.test.js",
+      "oid": "fffed9f377174218ecde90d96849e7cf47711c2d"
+    },
+    {
+      "path": "tests/battle-hand-inspector.test.js",
+      "oid": "34a7b6f479358b7e4ad59f715cb4eddb37c9e3d1"
+    },
+    {
+      "path": "tests/battle-hand-keyword-interaction.test.js",
+      "oid": "aa663efd3dd936f050e01522f18ce98d79f70cae"
+    },
+    {
+      "path": "tests/battle-hand-layout.test.js",
+      "oid": "e921629777b9713a4e73e1dbf62f09f65d52d141"
+    },
+    {
+      "path": "tests/battle-hand-selection-rules.test.js",
+      "oid": "ef8cb54aaab3d43a5b8238a3694c9cf055306ba8"
+    },
+    {
+      "path": "tests/battle-hover-play-availability.test.js",
+      "oid": "5c107113d4b0fa44b03f04a6f152cf36f87b473e"
+    },
+    {
+      "path": "tests/battle-imitate-unplayable.test.js",
+      "oid": "7c45f4027d08bd2afb2a662343f4fe9902b678d5"
+    },
+    {
+      "path": "tests/battle-infusion-action-layout.test.js",
+      "oid": "0b9547bdfe32b1179b516bc7e9ace3325fe86a1b"
+    },
+    {
+      "path": "tests/battle-infusion-chip-bounds.test.js",
+      "oid": "55ee3e8e0717be9394c83329c7b51f2ef809be6f"
+    },
+    {
+      "path": "tests/battle-lifecycle.test.js",
+      "oid": "4804095c838fab8b789153463586cbd2236d33fe"
+    },
+    {
+      "path": "tests/battle-modules.test.js",
+      "oid": "5cfb584e654fe2fc03db169fcd0178658632431c"
+    },
+    {
+      "path": "tests/battle-pace.test.js",
+      "oid": "1076165b68de5d02e46b65b775a71121b1cf6fe1"
+    },
+    {
+      "path": "tests/battle-pile-readability.test.js",
+      "oid": "8a7a6ce6278b6e2b966f82a40be75217125f15df"
+    },
+    {
+      "path": "tests/battle-pile-timers.test.js",
+      "oid": "40260c090d4c72ce152b5f98d83937c645e78375"
+    },
+    {
+      "path": "tests/battle-potion-bar-layout.test.js",
+      "oid": "bcf0cc9e9254f9016a4f84276b84516e715c0d5c"
+    },
+    {
+      "path": "tests/battle-pouch-entry.test.js",
+      "oid": "8f0b26bb2640919697d58847a98c56fa721a6cfa"
+    },
+    {
+      "path": "tests/battle-presentation.test.js",
+      "oid": "b9971352f731865ebdce9033cbd1656a6ed15b16"
+    },
+    {
+      "path": "tests/battle-preview-amount.test.js",
+      "oid": "ea07712b2e6ae9f8f8e2761df849cb22c681e0ab"
+    },
+    {
+      "path": "tests/battle-preview-trust-boundary.test.js",
+      "oid": "aa8e45d32391cfbefa810fcc8d58070a246b20ec"
+    },
+    {
+      "path": "tests/battle-pure-rules.test.js",
+      "oid": "e0a0becd0f88a0f9cab89948c09092d641b35d77"
+    },
+    {
+      "path": "tests/battle-qi-wave-defense.test.js",
+      "oid": "1e0971a1a3bc09588a7140c17eeb2a870174975f"
+    },
+    {
+      "path": "tests/battle-recorder-lifecycle-cloud.test.js",
+      "oid": "cee57fa494f048b6dbfe549378df4cf425a888de"
+    },
+    {
+      "path": "tests/battle-resolution.test.js",
+      "oid": "70bd0aee3bb2d321266421e023259456c38da0e5"
+    },
+    {
+      "path": "tests/battle-restart.test.js",
+      "oid": "b90f9b3a0b6be5908c06f4ea02c56ce2279bf044"
+    },
+    {
+      "path": "tests/battle-round-recording.test.js",
+      "oid": "6f12227d97e9feae73b9561f6fd32c5059569f9a"
+    },
+    {
+      "path": "tests/battle-rule-audit-1014.test.js",
+      "oid": "f1ba17d296e96724f325434f43cd975505e5a246"
+    },
+    {
+      "path": "tests/battle-runtime-completion-1014.test.js",
+      "oid": "b0292afc5c79b29b1428c60aa79e5132c09559e2"
+    },
+    {
+      "path": "tests/battle-runtime-state-guard.test.js",
+      "oid": "f130941889d7bfbbf754d7537b4fa48d52dbadf7"
+    },
+    {
+      "path": "tests/battle-scenery-secondary-ready.test.js",
+      "oid": "8b10ccf5b84c552af3eab510aba493bc9ff136de"
+    },
+    {
+      "path": "tests/battle-scenery.test.js",
+      "oid": "d2eac48247660a133649d5a8e8f9676bed5eebb3"
+    },
+    {
+      "path": "tests/battle-secondary-overlay.test.js",
+      "oid": "25cb6f122bf95b254ae5f0194706fbb83ef8dc39"
+    },
+    {
+      "path": "tests/battle-selection-consumer.test.js",
+      "oid": "7e227258d14a7cf2223ec471a471b3d62876251b"
+    },
+    {
+      "path": "tests/battle-selection-flow-boundary.test.js",
+      "oid": "a236aae6c992306dd9d672b0ecd036d3953319ca"
+    },
+    {
+      "path": "tests/battle-semantic-feedback.test.js",
+      "oid": "b9ab3fef206be923900df3238cffb34c692369f6"
+    },
+    {
+      "path": "tests/battle-settlement-recovery.test.js",
+      "oid": "8785b245e91789d63ec9f9a67261fda9b0023820"
+    },
+    {
+      "path": "tests/battle-settlement-retry.test.js",
+      "oid": "ba85f0c938048544f818254f9664f95ca929de99"
+    },
+    {
+      "path": "tests/battle-settlement-types.fixture.ts",
+      "oid": "428a7d28988111de5f2449da389e9eae859bf953"
+    },
+    {
+      "path": "tests/battle-settlement-types.test.js",
+      "oid": "89f7773fd5d0e97911b4cb88aa4af2bcf6da3314"
+    },
+    {
+      "path": "tests/battle-snapshot-integration.test.js",
+      "oid": "0331c9aa689d05a1a61279578752a4db3e1c5025"
+    },
+    {
+      "path": "tests/battle-snapshot-types.fixture.ts",
+      "oid": "c7c27813698865d3607b74696df375d2c073bb2c"
+    },
+    {
+      "path": "tests/battle-snapshot-types.test.js",
+      "oid": "51eccd787d74ea84e6ce46a6b6ff05f2fbd04fab"
+    },
+    {
+      "path": "tests/battle-snapshot.test.js",
+      "oid": "efec821b3f605ddb793e76e4dc8c140b1663fa48"
+    },
+    {
+      "path": "tests/battle-three-role-sprites.test.js",
+      "oid": "2e4df9a88cbc9915e4a78c3114728ddce57f0584"
+    },
+    {
+      "path": "tests/battle-tools-lifecycle.test.js",
+      "oid": "0b8460e88466d42dad245082a5960d12afd5909a"
+    },
+    {
+      "path": "tests/battle-turn-feedback.test.js",
+      "oid": "2759de9c7fef9f13417f3d5d630f66dda0c8e9cc"
+    },
+    {
+      "path": "tests/battle-turn-start-discover.test.js",
+      "oid": "0369a4d62e4fa988f7eab397d162a9b641c57647"
+    },
+    {
+      "path": "tests/battle-victory-presentation.test.js",
+      "oid": "af5665122c4b7a7eb3463e698e2e778538e96bf6"
+    },
+    {
+      "path": "tests/battle-victory-progress.test.js",
+      "oid": "be63d0457c0c9856f6972813d959de61a0a6c314"
+    },
+    {
+      "path": "tests/battle-wu-sprite.test.js",
+      "oid": "14adcd72b2ec925dd5ca149ae2988a02f9a80200"
+    },
+    {
+      "path": "tests/beginner-guide-entry-copy.test.js",
+      "oid": "d3a21b5012dddf65fa6ed9b207d89af9a7330e8b"
+    },
+    {
+      "path": "tests/beginner-guide-readability.test.js",
+      "oid": "a219318f01174e21f13341747dd5ecf1c2a3d940"
+    },
+    {
+      "path": "tests/blackmarket-card-preview.test.js",
+      "oid": "57d01f6faead56b7b7755bf55d4f7a60b075aa84"
+    },
+    {
+      "path": "tests/boot.test.js",
+      "oid": "47c3a98014666d7ee75bc97b4f4d51500c9d787a"
+    },
+    {
+      "path": "tests/boss-equip-select.test.js",
+      "oid": "bcaa1cee5bdbb73e2021478e1b851b61a3d649cc"
+    },
+    {
+      "path": "tests/boss-rescue-pool.test.js",
+      "oid": "dbd26d6708441ed1fcf625e4ca8937f20fb515b8"
+    },
+    {
+      "path": "tests/build-output-contract.test.js",
+      "oid": "402690d9735def804d7a57e54b904f6ad0c84c74"
+    },
+    {
+      "path": "tests/camera-interaction.test.js",
+      "oid": "6ae72e8dbf75843d9e944f02a19d5c82290c79f7"
+    },
+    {
+      "path": "tests/canvas-resource-review.test.js",
+      "oid": "b330c6f2390c6d5c09d91a7e09899fc4c416cd7c"
+    },
+    {
+      "path": "tests/card-art-coverage.test.js",
+      "oid": "406543bc364ca1fc32ce5a64fa401d0002fad18a"
+    },
+    {
+      "path": "tests/card-audit.test.js",
+      "oid": "a696bd4550806a771e88ff6102561ef804fa05ea"
+    },
+    {
+      "path": "tests/card-battle-start-explanation.test.js",
+      "oid": "875e6a44b95b75afce29effb5e0cf7e74ef3f90e"
+    },
+    {
+      "path": "tests/card-browser.test.js",
+      "oid": "af874582bd3e522e39a0493caf316e65421eea7d"
+    },
+    {
+      "path": "tests/card-description-text.test.js",
+      "oid": "bd41bd1836481198955ccd885175754c563e85bc"
+    },
+    {
+      "path": "tests/card-effect-semantics.test.js",
+      "oid": "c7b96e1f9208f4615e630c1312128974b4ec67fd"
+    },
+    {
+      "path": "tests/card-face-presentation.test.js",
+      "oid": "e5fbe0c4c0c4e523242eebdd10b129780e5d203b"
+    },
+    {
+      "path": "tests/card-feedback-fixture.test.js",
+      "oid": "77e43dc4a70745641ae2dc95e35002650c66afc5"
+    },
+    {
+      "path": "tests/card-feedback-motion-integration.test.js",
+      "oid": "9119f49fc247087ef64c9b800a917646a7eb69e4"
+    },
+    {
+      "path": "tests/card-fixes-1010.test.js",
+      "oid": "34c28f26f47fb95d749a69e3f20454bbcb8010bb"
+    },
+    {
+      "path": "tests/card-library-lazy-boundary.test.js",
+      "oid": "d7269fbe3bc407bb8b6abb7ffa7fa0669c5549d7"
+    },
+    {
+      "path": "tests/card-library-performance-contract.test.js",
+      "oid": "50448084d20b25c9190f8db126c4f79e839a9527"
+    },
+    {
+      "path": "tests/card-notes-coverage.test.js",
+      "oid": "52e6f1a395d1f3d38bb0a9a5a18827639922bcc0"
+    },
+    {
+      "path": "tests/card-photo-notes.test.js",
+      "oid": "83ea63dd130a1f7e3c09ede9ab600947043f97da"
+    },
+    {
+      "path": "tests/card-rarity-cycle.test.js",
+      "oid": "02d1eabd5a7942fb8a89a0cf7dd5f23a54d858a2"
+    },
+    {
+      "path": "tests/card-reading-typography.test.js",
+      "oid": "5606a3f50eae40aeb3aa36d336a6ef2d1d9ecb26"
+    },
+    {
+      "path": "tests/card-render-context.test.js",
+      "oid": "c245cd74c2cf0a2e740633d566a63f1968405988"
+    },
+    {
+      "path": "tests/card-rules-bag-boundary.test.js",
+      "oid": "4d68e690f86b5af0e9639e218f63181a107cd819"
+    },
+    {
+      "path": "tests/card-rules-per-foe-boundary.test.js",
+      "oid": "f51f82736e26387410e8f503e87690814a1d206d"
+    },
+    {
+      "path": "tests/card-rules-schema.test.js",
+      "oid": "938e81e78aa8b6de47beb56b7b36c7836f1c961e"
+    },
+    {
+      "path": "tests/cards-catalog.test.js",
+      "oid": "8133d117d9d69b96942cd54d3c9704ee68274880"
+    },
+    {
+      "path": "tests/cards-choice-armor-guard.test.js",
+      "oid": "9081f0c965a025720b974e24f7328b1e111c1fcc"
+    },
+    {
+      "path": "tests/cards-migration-commit-guard.test.js",
+      "oid": "6463c1f4a853bf38aefb07b80267c88209f5cfd8"
+    },
+    {
+      "path": "tests/cards-random-pool-guard.test.js",
+      "oid": "85b993d22865f48afcc2fdc01c6c5d584c35c5ab"
+    },
+    {
+      "path": "tests/cards-replay.test.js",
+      "oid": "d478f730f87de3d6e282113f3503de53afaa5af8"
+    },
+    {
+      "path": "tests/cards-rules-runtime-boundary.test.js",
+      "oid": "987650d16c1c004058172133f0b2a2ea9becd627"
+    },
+    {
+      "path": "tests/cards-storage-guard.test.js",
+      "oid": "5523e98db74a1060a9b4f4ba5f64c95b754cec84"
+    },
+    {
+      "path": "tests/cards-sync-snapshot-guard.test.js",
+      "oid": "a855062acec3579c514485bcfacf5ff98fd6a9ba"
+    },
+    {
+      "path": "tests/cards.test.js",
+      "oid": "dabfc285c0a5dbdb8d9b06d4a64cd893a38edf7f"
+    },
+    {
+      "path": "tests/cell-notes-migration-commit-guard.test.js",
+      "oid": "c7a1fb00a9d4a696e8d7d645cd0e9b6b79e48b4e"
+    },
+    {
+      "path": "tests/cell-notes-quota.test.js",
+      "oid": "3198a4b38a30350b4c982872e25082e0817c2d36"
+    },
+    {
+      "path": "tests/character-idle.test.js",
+      "oid": "05679c0faca18e451a373490b6bccb252cdb6c55"
+    },
+    {
+      "path": "tests/character-view-motion.test.js",
+      "oid": "e09d3a8110b96f28d909f4502b62e1a207ac0d69"
+    },
+    {
+      "path": "tests/characters.test.js",
+      "oid": "d42a4835fcf6a1980f801137bcda1642d880ff07"
+    },
+    {
+      "path": "tests/chase-slash.test.js",
+      "oid": "dfd549ecedb73ed6f9545ff5ab7781e5c367fc0e"
+    },
+    {
+      "path": "tests/chest-acquired-gift-cloud.test.js",
+      "oid": "fae22d6d9005b59e183cc1f28ebc2394a280bfde"
+    },
+    {
+      "path": "tests/chest-batch-receipt.test.js",
+      "oid": "935360a8338b9c4cc1dc0cbde799cbd89a45678c"
+    },
+    {
+      "path": "tests/chest-callback-lifecycle-audit.test.js",
+      "oid": "f06f829ad09f5a43e992eea3cc4671dcba81e1a6"
+    },
+    {
+      "path": "tests/chest-click-flow.test.js",
+      "oid": "0b667eeaee9c738407517c7537dc12c4acfe2aaa"
+    },
+    {
+      "path": "tests/chest-coins-summary.test.js",
+      "oid": "81f23ca5155db3338a5ada63d1c809a715845d4b"
+    },
+    {
+      "path": "tests/chest-extra-rewards-choice.test.js",
+      "oid": "a55a2efca28316ba20d5f566a17263ceb8c085b3"
+    },
+    {
+      "path": "tests/chest-multi-queue-regression.test.js",
+      "oid": "6591b18e3420868574c4e3a65c29ddb09931e4c2"
+    },
+    {
+      "path": "tests/chest-opening-art.test.js",
+      "oid": "3120032b5b994720d5f861ccf6b726a59187e8f5"
+    },
+    {
+      "path": "tests/chest-receive-animation.test.js",
+      "oid": "0afa499cb228344860912af2ab0806f2239ce1b2"
+    },
+    {
+      "path": "tests/chests-reward-capacity-notice.test.js",
+      "oid": "113025c262acd20e38c161f58d9d779c0d8ec99c"
+    },
+    {
+      "path": "tests/cinematics-lifecycle.test.js",
+      "oid": "668859cccc1bc710a969815722a089dad3e5fa70"
+    },
+    {
+      "path": "tests/class-choice-lazy-entry.test.js",
+      "oid": "c1fe2eef8dc17730a16d0573f5cf693409dc6c03"
+    },
+    {
+      "path": "tests/class-consolidation.test.js",
+      "oid": "178fc45382c05ec4d04b04839f5f8b7bf0f645d7"
+    },
+    {
+      "path": "tests/collection-room.test.js",
+      "oid": "fac0612d0260bd5038bc2ea1c18353fd04c91a38"
+    },
+    {
+      "path": "tests/collection-skin-context-audit.test.js",
+      "oid": "d747852a5e7216dcb812ef9c677dead41dfd41d4"
+    },
+    {
+      "path": "tests/combat-feedback.test.js",
+      "oid": "43be9bad9b1d311d07b4132e3adf9c427d80ffed"
+    },
+    {
+      "path": "tests/combat.test.js",
+      "oid": "602681c9825799107a9e6cfcea8f197fc733c577"
+    },
+    {
+      "path": "tests/comm-demo-lazy-entry.test.js",
+      "oid": "8ee406f6757296d6132e2d1b3d20cfd225ccee59"
+    },
+    {
+      "path": "tests/comm-feed-lifecycle.test.js",
+      "oid": "0a09bc34a1a35251c5cb41087f92cc04fbcf209f"
+    },
+    {
+      "path": "tests/commands-shared-contract.test.js",
+      "oid": "18c4ede8956f3b1f984e94d7dd7f6339f96fe4fb"
+    },
+    {
+      "path": "tests/compendium.test.js",
+      "oid": "3fc63a820c22ede11d7b747022381aa19326ee0f"
+    },
+    {
+      "path": "tests/contracts.test.js",
+      "oid": "b29d96a922c628a15297a7b1477f940be92f1897"
+    },
+    {
+      "path": "tests/courtyard-koi.test.js",
+      "oid": "afb7820086ce841478df58ea1de4c3c8babfb641"
+    },
+    {
+      "path": "tests/courtyard-lifecycle-deep-audit.test.js",
+      "oid": "baf87dc71c6ff2ec9a84a4a92d944989e087574e"
+    },
+    {
+      "path": "tests/courtyard-rain-tableau.test.js",
+      "oid": "25098acf8bf10df75d661c08e1c9b1148d863028"
+    },
+    {
+      "path": "tests/cov-battle-clock.test.js",
+      "oid": "a44b2fb5ab178af9b88065b14f7c3f5388101f6e"
+    },
+    {
+      "path": "tests/cov-motion-primitives.test.js",
+      "oid": "f48121df9650951c5869facf495bde3404ea2f68"
+    },
+    {
+      "path": "tests/cov-target-session.test.js",
+      "oid": "fa33026a8a88846be0270fb2200556f15d4f5884"
+    },
+    {
+      "path": "tests/css-asset-minification.test.js",
+      "oid": "f7af5869b33c6df2ae8afb62c81ff3ac6d90e3db"
+    },
+    {
+      "path": "tests/css-dead-dom-budget.test.js",
+      "oid": "4a401584e61bb9edd4fedf504407c649feb1b6ea"
+    },
+    {
+      "path": "tests/css-redundancy-audit.test.js",
+      "oid": "35bd262e2d7617328ada2f1b9ed51ce9397382dc"
+    },
+    {
+      "path": "tests/cursed-blade.test.js",
+      "oid": "5553c8aa75dec4fb1095d22eb39c3b2a425ea080"
+    },
+    {
+      "path": "tests/custom-cards.test.js",
+      "oid": "2fbdea5fb8d344d3aa8a3faa25c66a673a2258a2"
+    },
+    {
+      "path": "tests/defeat-summary-review.test.js",
+      "oid": "d22bf38413f13cff33b3876461e405489749f83c"
+    },
+    {
+      "path": "tests/departure-browse-state.test.js",
+      "oid": "04ca7f9c46d86a5e338b4d244c97326d1d65d87b"
+    },
+    {
+      "path": "tests/departure-class-confirmation.test.js",
+      "oid": "5fd8b3d0f0c5b3b656001ecf705472854680109b"
+    },
+    {
+      "path": "tests/departure-domain-review.test.js",
+      "oid": "0feaf3e344ede68a36cbcc1d748269099ec1d659"
+    },
+    {
+      "path": "tests/departure-drag.test.js",
+      "oid": "d21124af1a59b5c54450a64ee9640585ffb2eea5"
+    },
+    {
+      "path": "tests/departure-handoff.test.js",
+      "oid": "d6a5ff996e3d1c3fd6f21d41cc19103fee09c059"
+    },
+    {
+      "path": "tests/departure-real-session-review.test.js",
+      "oid": "6493b66b1003064187767586714c3f022586ed88"
+    },
+    {
+      "path": "tests/departure-rejected-start.test.js",
+      "oid": "f43e93422151a557839ecc2ad6d2a3e94ac2235b"
+    },
+    {
+      "path": "tests/departure-selection-state.test.js",
+      "oid": "d169a0c56b4b39c8f2dabb4c88426babc18224a2"
+    },
+    {
+      "path": "tests/departure-stack-lifecycle-review.test.js",
+      "oid": "46ed0029e5f9fb3fd409599f2cacb095dc644a6b"
+    },
+    {
+      "path": "tests/departure-summary.test.js",
+      "oid": "14fbb5ec65c2e8a8ad0ade53f8ddcf7ace4d28d0"
+    },
+    {
+      "path": "tests/desktop-startup.test.js",
+      "oid": "e752810b6fe9b52137f1a92d1320752aa5edf93c"
+    },
+    {
+      "path": "tests/dev-console-lifecycle.test.js",
+      "oid": "4fa79cc5d68ea1542bb4ba512739350067895e0a"
+    },
+    {
+      "path": "tests/dev-tools-lazy-entry.test.js",
+      "oid": "b384cf6ba9e57ad5646847ba340323925e355952"
+    },
+    {
+      "path": "tests/diagnostics.local.test.js",
+      "oid": "eb00875e207419649295da71c0fd1307e4498767"
+    },
+    {
+      "path": "tests/direct-cast.test.js",
+      "oid": "5074469b8f73c0b874e300cf45dc92c3554a74a7"
+    },
+    {
+      "path": "tests/discover-infusion-feedback.test.js",
+      "oid": "dda4c9c6cc95d0ead461bdb5135942d7b025624d"
+    },
+    {
+      "path": "tests/docs-consistency.test.js",
+      "oid": "297058feb5cc9852f0549e49894d10d02f7c5a00"
+    },
+    {
+      "path": "tests/dual-wield.test.js",
+      "oid": "90d6b5ff45dc4285d2810188821c8399ca69883d"
+    },
+    {
+      "path": "tests/e2-view-hp.test.js",
+      "oid": "b2fb57c950fa7ef2c7710adaa9cfe1a5dd83fe03"
+    },
+    {
+      "path": "tests/e4-async-entry.test.js",
+      "oid": "b0a800c6edb516016d7ce38ae100231d84187160"
+    },
+    {
+      "path": "tests/e4-battle-loader.test.js",
+      "oid": "af09fa1bc0ef0630d402c113f78e1868e4da1009"
+    },
+    {
+      "path": "tests/e5-save-validation.test.js",
+      "oid": "816c082029487dfd809eb50d42595d4741cfcd2a"
+    },
+    {
+      "path": "tests/e5-session-recovery.test.js",
+      "oid": "58148bb897a869962d8d9718a0c71178dfb5ddb0"
+    },
+    {
+      "path": "tests/e6-card-rules-capability.test.js",
+      "oid": "5b1891607c9ad8ef6ef6f4d5d4512bcc36076d4a"
+    },
+    {
+      "path": "tests/e6-card-rules-execution.test.js",
+      "oid": "f139f07af76d8f2d53aea9f49285ed6ab9103237"
+    },
+    {
+      "path": "tests/e6-card-rules-types.test.js",
+      "oid": "b11df387b4125cfdba49f75e6dc5328ceaac93bf"
+    },
+    {
+      "path": "tests/e7-rule-warning-view.test.js",
+      "oid": "92dd713ca5a9522fdb3c326c1ea0594ba975086f"
+    },
+    {
+      "path": "tests/e8-card-inventory.test.js",
+      "oid": "f40775fa4de4c5e978f32094139bc78f23263b26"
+    },
+    {
+      "path": "tests/e8-card-migration.test.js",
+      "oid": "3f9044edcf127a854a5fe2b3a4470ecbadc08c2e"
+    },
+    {
+      "path": "tests/effect-verbs.test.js",
+      "oid": "34144064c2a1f1a9aac83dc69393fb9e4bfaa7c9"
+    },
+    {
+      "path": "tests/ember-burst-rot-seed.test.js",
+      "oid": "e64c3da51bcea68549fe8a9006656c9e3b7b9629"
+    },
+    {
+      "path": "tests/encounter-count.test.js",
+      "oid": "c23c6ebe9de664081f334e83b36f43605c93ae13"
+    },
+    {
+      "path": "tests/encounter-meta.test.js",
+      "oid": "ecd387859eb158110bab95f18ed02bf0c3e3ac0a"
+    },
+    {
+      "path": "tests/energy-crystal-restoration.test.js",
+      "oid": "a4dda868ab3ee61d4ac88be5e39fc342114d2b76"
+    },
+    {
+      "path": "tests/entry-supply-presentation.test.js",
+      "oid": "016f71485a97f845b8848bbfa298fe14ca62c235"
+    },
+    {
+      "path": "tests/esc-semantics.test.js",
+      "oid": "8eab2a5eddde8ada67be2a723d32a75cae260a0e"
+    },
+    {
+      "path": "tests/event-bus.test.js",
+      "oid": "c9f7425882bd951e8587ca6c55f66c00b409bf4e"
+    },
+    {
+      "path": "tests/event-callback-lifecycle-audit.test.js",
+      "oid": "abde10e4f02799c99804b7d2f79c1b3683e6c1a7"
+    },
+    {
+      "path": "tests/event-choice-acquired-gift-cloud.test.js",
+      "oid": "921ea55d401e353cfa3d32397aa0d575fe607834"
+    },
+    {
+      "path": "tests/event-choice-recovery-cloud.test.js",
+      "oid": "41c277bc9b748eb64066afbe85d90f8faac813a2"
+    },
+    {
+      "path": "tests/event-choice-session-resume-cloud.test.js",
+      "oid": "dccf94054e026e6fef9768267eabd2b34e7946da"
+    },
+    {
+      "path": "tests/event-node-binding-cloud.test.js",
+      "oid": "c5de7b71161384be7b120bf86b0228fa28822830"
+    },
+    {
+      "path": "tests/event-reward-layout.test.js",
+      "oid": "d95ca112c28a0d4d792ecf070d43e0c41b83dd32"
+    },
+    {
+      "path": "tests/event-scene-readability.test.js",
+      "oid": "e370b2bfd11ae0ea152d62742cfcbfb6c76800d8"
+    },
+    {
+      "path": "tests/event-scene-selection.test.js",
+      "oid": "4905aa0e5417ce52443394f1998e72b3a8274472"
+    },
+    {
+      "path": "tests/event-signal-puzzle-integration.test.js",
+      "oid": "4ec5084c6cd3e5bc7537d77564b3a2ffa7e5aba0"
+    },
+    {
+      "path": "tests/event-signal-puzzle.test.js",
+      "oid": "610917efa851dc7f235372a5f2d9b637687531a1"
+    },
+    {
+      "path": "tests/events-0919.test.js",
+      "oid": "989d9378fbd7aecd60e76a6c862033de0fc6ea75"
+    },
+    {
+      "path": "tests/execute-target.test.js",
+      "oid": "ef93b894764e3192db685fa1fc461c9c69ff1fa9"
+    },
+    {
+      "path": "tests/exp003-extraction-pocket-copy.test.js",
+      "oid": "9a47b0636215738bad8b59fb0e9cf1ed5d483353"
+    },
+    {
+      "path": "tests/expedition-battle-presentation.test.js",
+      "oid": "30bcecf6e68886834982d22adfb7693f8cd7949c"
+    },
+    {
+      "path": "tests/expedition-feedback.test.js",
+      "oid": "a2bf6cf86a2fdeae3090afecaf000f64532ecc90"
+    },
+    {
+      "path": "tests/expedition-log-preference.test.js",
+      "oid": "3b813dd10ca6e488fc53e93e8568a1c37fbf430d"
+    },
+    {
+      "path": "tests/expedition-page-lifecycle.test.js",
+      "oid": "f887b43e62f595ffb98c361b6c6751685a31f4f0"
+    },
+    {
+      "path": "tests/expedition-view.test.js",
+      "oid": "172640a3ef8b03877db70c457f88370eda39a410"
+    },
+    {
+      "path": "tests/extra-legend-reward-persistence.test.js",
+      "oid": "ad67794a9e8f75830d018996cde21758b01243da"
+    },
+    {
+      "path": "tests/extraction-first-explore-xp.test.js",
+      "oid": "289cbb0623ce9cb2f78c52f67a1acd40606122dc"
+    },
+    {
+      "path": "tests/extraction-flow.test.js",
+      "oid": "2691298dce4fd77d4c230d6074d703320eede499"
+    },
+    {
+      "path": "tests/extraction-pocket-truth.test.js",
+      "oid": "e8a4b008dcd3807241ba9061a47f17c7b2e7f2a5"
+    },
+    {
+      "path": "tests/extraction-preview.test.js",
+      "oid": "bdd771b75cdf5e0d8aa50368f45b471b02c45e73"
+    },
+    {
+      "path": "tests/extraction-receipt-idempotency.test.js",
+      "oid": "06b3e57b4c588da8e228ecec64b800e00fd7bd20"
+    },
+    {
+      "path": "tests/extraction-receipt.test.js",
+      "oid": "4d4c505340ea6894521e9b12b29ce89979cad21b"
+    },
+    {
+      "path": "tests/extraction-record-saved-cards-cloud.test.js",
+      "oid": "459d729e80a1b0f90ac792894785e397e2832d28"
+    },
+    {
+      "path": "tests/extraction-recovery-ui.test.js",
+      "oid": "070861f97d555798b8b350efe149d9c67c4996c5"
+    },
+    {
+      "path": "tests/extraction-recovery.test.js",
+      "oid": "528e8d6621fbf74e75f4637dcb442860dcf738ff"
+    },
+    {
+      "path": "tests/extraction-review-fixture.test.js",
+      "oid": "063ced92004b97e8e58e33aa762a328e69ccddca"
+    },
+    {
+      "path": "tests/extraction-rewards-view.test.js",
+      "oid": "e8ea1d67f0b5d0acd84205e32109e2984067abee"
+    },
+    {
+      "path": "tests/extraction-session-resume.test.js",
+      "oid": "9c99271d5914d12231f903abf8a27c8d306bbb1f"
+    },
+    {
+      "path": "tests/extraction-settlement.test.js",
+      "oid": "28adb1b850728acf71f6b0558ea794696cb91c90"
+    },
+    {
+      "path": "tests/facade-snapshot-drift.test.js",
+      "oid": "2422e0fb67f8a75876d77258dc078f8418643ca2"
+    },
+    {
+      "path": "tests/feedback-1018.test.js",
+      "oid": "e36080828de7afef28016c3c7933520b58fe4e17"
+    },
+    {
+      "path": "tests/first-explore-marking.test.js",
+      "oid": "8527a6fae104593bfa7dd915ec0720ab9ee26bce"
+    },
+    {
+      "path": "tests/fixtures/base-v1.json",
+      "oid": "4eb22e2bba7763f4d33270c8b778f65f1ec9a975"
+    },
+    {
+      "path": "tests/fixtures/card-effect-audit-known.json",
+      "oid": "11ee6c873347008e7c733f6b07c48919296e2cfa"
+    },
+    {
+      "path": "tests/fixtures/effect-elsewhere-frozen.json",
+      "oid": "08509c834d702fe083e002d52588bfaae1425c67"
+    },
+    {
+      "path": "tests/fixtures/map-replica.html",
+      "oid": "d891359d6aa34d56c4763927ad63167b00ad4772"
+    },
+    {
+      "path": "tests/fixtures/map-v4-before-resource-removal.json",
+      "oid": "726ee5696810b19eb488a3ec85266f4f69580ed0"
+    },
+    {
+      "path": "tests/fixtures/save-v1-run.json",
+      "oid": "3a45a70d92096494d7d18d81474d52684cfa0b93"
+    },
+    {
+      "path": "tests/fixtures/save-v2-slot2-run.json",
+      "oid": "5120e7e889d7a0a9200ef8fdd7c9472598280efa"
+    },
+    {
+      "path": "tests/flight-recorder.local.test.js",
+      "oid": "20e044ca4f9a087a3d34b744a4bd533b985407ae"
+    },
+    {
+      "path": "tests/four-player-battle-regressions.test.js",
+      "oid": "f2be5c45b542f02022c8e2dd0ce2f5f250d56cb8"
+    },
+    {
+      "path": "tests/four-player-capacity-text.test.js",
+      "oid": "b28c6acee7ce0b0b12d374a86c54af6fac7909af"
+    },
+    {
+      "path": "tests/four-player-chest-reload.test.js",
+      "oid": "b6cecbc323791789e849bb02a73dfc65adf3e514"
+    },
+    {
+      "path": "tests/four-player-event-regressions.test.js",
+      "oid": "9d3cd21cafc8d645e3c3eb9f9ca73ccddadbc9b1"
+    },
+    {
+      "path": "tests/four-player-music-fallback.test.js",
+      "oid": "94736d932c9555a766c8d8651ba40e992dddb26b"
+    },
+    {
+      "path": "tests/four-player-semantics-regressions.test.js",
+      "oid": "950c7b578f065b5780a9414a2f026b51177788d6"
+    },
+    {
+      "path": "tests/fresh-run-battle-turn-forecast.test.js",
+      "oid": "409dd4dc97fc76d6cd030162c207fa54ca6ca576"
+    },
+    {
+      "path": "tests/fresh-run-map-encounters.test.js",
+      "oid": "c5fb9c293a7b66f1855f152e296f5cf0ef5d8848"
+    },
+    {
+      "path": "tests/fresh-run-onboarding-copy.test.js",
+      "oid": "1613b36b5ce19e63da1c806058321ce87c81a702"
+    },
+    {
+      "path": "tests/fresh-run-settlement-battle-summary.test.js",
+      "oid": "148deb79c3847cc72588d0eecfd19dfd7ace931e"
+    },
+    {
+      "path": "tests/fresh-run-settlement.test.js",
+      "oid": "63217a6fa01d84a8147e8a8998aaa2b9e0f801cb"
+    },
+    {
+      "path": "tests/full-review-regressions-battle.test.js",
+      "oid": "07e4e3c9fff1c8dc8e4b2afdcef0bcd812f8e331"
+    },
+    {
+      "path": "tests/full-review-regressions-hub.test.js",
+      "oid": "b778cbb37f1e90fbd20e6d8edfefd0147fe22f5e"
+    },
+    {
+      "path": "tests/full-review-regressions-world.test.js",
+      "oid": "a07b8dac6a7f64ba91f068f6ff7c3facf596f3e6"
+    },
+    {
+      "path": "tests/game-canvas-resize.test.js",
+      "oid": "9082f157eb9b337fc9e3727b6f42978d446db146"
+    },
+    {
+      "path": "tests/game-hub-preparation-feature.test.js",
+      "oid": "3faff02f6e1f169c6103e222dcef157ffc6543b9"
+    },
+    {
+      "path": "tests/game-session-browser-boundary.test.js",
+      "oid": "554f6a8b7cb07339aadf56474fe877759ef0127c"
+    },
+    {
+      "path": "tests/game-session-elapsed.test.js",
+      "oid": "d5a6fd4cf914a8e7810b381c2314c3483e577d33"
+    },
+    {
+      "path": "tests/game-store-snapshot.test.js",
+      "oid": "acb82ef5494290678fccf6c98d1f27db5c7afd23"
+    },
+    {
+      "path": "tests/game-store-types.fixture.ts",
+      "oid": "5ac021cf59dd08e29edab7932e06bd09108dfd40"
+    },
+    {
+      "path": "tests/game-store-types.test.js",
+      "oid": "9a5d660cd839d8596e61d95bc99d2c137ad20f71"
+    },
+    {
+      "path": "tests/ghostblade-stealth-break.test.js",
+      "oid": "aad615aacdce5cf0af9d2666baabf66adab49498"
+    },
+    {
+      "path": "tests/global-boot-pointer-lifecycle.test.js",
+      "oid": "ed2dab5bb1c0f1365cd280eddccc6f9937f1b1cd"
+    },
+    {
+      "path": "tests/global-ui-character-lifecycle.test.js",
+      "oid": "26cd89ebc4107fd73fa11951876a11912b8a19d5"
+    },
+    {
+      "path": "tests/global-ui-completion.test.js",
+      "oid": "db131f34c21b3cd175b51186db4ce00ef9767b86"
+    },
+    {
+      "path": "tests/global-ui-feedback-state-lifecycle.test.js",
+      "oid": "f95f3278d1c54400e33ab4c8bc7d3b0ba099418e"
+    },
+    {
+      "path": "tests/global-ui-settings-notes.test.js",
+      "oid": "dd75a7e32407a784d9b8a8ab29cc8ec08f552973"
+    },
+    {
+      "path": "tests/hand-cost-patterns.test.js",
+      "oid": "7c16fb283d95e21f9be68f38497934e17709350d"
+    },
+    {
+      "path": "tests/hand-fixed-hit.test.js",
+      "oid": "abf3eab3914d355bf99924e1125f54b38611ce3e"
+    },
+    {
+      "path": "tests/hand-pointer-log.test.js",
+      "oid": "6cf61611fe75ff3f384d11468989180a336f1d4d"
+    },
+    {
+      "path": "tests/hand-pointer-review.test.js",
+      "oid": "703f6c1c07f97615151a2b7aea4a0685da85e4b9"
+    },
+    {
+      "path": "tests/helpers/card-catalog-approved-revisions.js",
+      "oid": "d941a1c3758461c93e1025fd2f8e15b351a955c7"
+    },
+    {
+      "path": "tests/helpers/card-effect-audit.js",
+      "oid": "aa04ed3641a3b2bf0607103dc70555172c0e4a91"
+    },
+    {
+      "path": "tests/helpers/chest-actions.js",
+      "oid": "bffe449a376448dc101e333251f5e28118a5e6d9"
+    },
+    {
+      "path": "tests/helpers/e8-card-inventory.js",
+      "oid": "bf7dd91bb6d49cc9f864133b2631eb49e608c448"
+    },
+    {
+      "path": "tests/helpers/menu-controller.js",
+      "oid": "e9f4fe2c52f38760dc0e364b7f5cd64845cea3c0"
+    },
+    {
+      "path": "tests/hero-cards.test.js",
+      "oid": "9dfbceeeaa2d27935cf09c6d2108e3a29229c00a"
+    },
+    {
+      "path": "tests/home-async-lifecycle.test.js",
+      "oid": "04e617e54b92b9c6b3fb7a32792846ada4194532"
+    },
+    {
+      "path": "tests/home-legacy-layout-review.test.js",
+      "oid": "8314c663cf081154185909d78aab3e3881a33e5f"
+    },
+    {
+      "path": "tests/home-menu-motion.test.js",
+      "oid": "e69e3ec9b8b957c0943a443911d9f9d728f9a170"
+    },
+    {
+      "path": "tests/home-slot-lifecycle-review.test.js",
+      "oid": "e5cc3aa1e487e51c6a475bae78053105433b549b"
+    },
+    {
+      "path": "tests/hub-architecture.test.js",
+      "oid": "6eac453d6003b0255c0921a9bbcc0eb2ee9469f8"
+    },
+    {
+      "path": "tests/hub-archive-v3.test.js",
+      "oid": "f42e9f69700cf5a292c3ea15d0edb2553a67a08e"
+    },
+    {
+      "path": "tests/hub-collection-v4.test.js",
+      "oid": "3b3ad772361f48d895150fdc6fed67c59bc3e2a3"
+    },
+    {
+      "path": "tests/hub-courtyard-v3.test.js",
+      "oid": "33326899f5fbfbd0da827653c14493f02707b136"
+    },
+    {
+      "path": "tests/hub-flow-regression.test.js",
+      "oid": "4eb0c698f47faf34ff7a0099b7da77f129afe05c"
+    },
+    {
+      "path": "tests/hub-lazy-entry.test.js",
+      "oid": "73b38091196ef4645cf27a91703924174873eed4"
+    },
+    {
+      "path": "tests/hub-pages-rework.test.js",
+      "oid": "678fe06887a8290e9962c19c18506260507023b5"
+    },
+    {
+      "path": "tests/hub-personnel-actions.test.js",
+      "oid": "6fe2f52e5483aa603f3578be8224efa03d5b2e48"
+    },
+    {
+      "path": "tests/hub-personnel-navigation.test.js",
+      "oid": "8f71ba4f569ef452726729da361d9ad822a29e43"
+    },
+    {
+      "path": "tests/hub-personnel-portrait.test.js",
+      "oid": "85bf503451080d06402baefa54e4a4efdfb4f9e4"
+    },
+    {
+      "path": "tests/hub-reward-feedback.test.js",
+      "oid": "493244da6b12387baf4b81a8e2f93e1507358654"
+    },
+    {
+      "path": "tests/hub-shop-v3.test.js",
+      "oid": "89ac1aee2e1fd9f2f9b5129a7304112c9209e6ac"
+    },
+    {
+      "path": "tests/hub-trade-shop-v5.test.js",
+      "oid": "514d9c2050e2d04011a5bb898831861a37693446"
+    },
+    {
+      "path": "tests/hub-upgrade-render.test.js",
+      "oid": "d336504d087aa8017e9304433e393585087cc098"
+    },
+    {
+      "path": "tests/hub-versioned-slot-reader.test.js",
+      "oid": "4a1dd366334fdcaf6ac9c5607a878f19aa0c950e"
+    },
+    {
+      "path": "tests/icon-hydration.test.js",
+      "oid": "f2dca6a224d79ce4515f20fc21c1883020750cad"
+    },
+    {
+      "path": "tests/image-decode.test.js",
+      "oid": "5074b65a927b39ad5bd41ea3fef3c3f81fa3d155"
+    },
+    {
+      "path": "tests/impact-query.test.js",
+      "oid": "fd1b47d88c1bd5a1499b325fbe2298b3c0485ddd"
+    },
+    {
+      "path": "tests/infuse-free-paths.test.js",
+      "oid": "fae069429d13937800a0176f10f476c967867ef0"
+    },
+    {
+      "path": "tests/infuse-free-play.test.js",
+      "oid": "7a02faef5be9b54f590a848e22a4f3ad729db9e1"
+    },
+    {
+      "path": "tests/input-bindings-persistence.test.js",
+      "oid": "1dfbbb69cd3c9d57231ab124eb291392da9da166"
+    },
+    {
+      "path": "tests/intent-legend-isolation.test.js",
+      "oid": "c188eb10fc8938af0d4dadb26ca622499b257df3"
+    },
+    {
+      "path": "tests/item15-18-fixes.test.js",
+      "oid": "c96c61d9ba1254f5fa561cf7e510908bac9d7558"
+    },
+    {
+      "path": "tests/last-stand-poison-burst.test.js",
+      "oid": "37b9286e4565484c2e90813c1bc1502725d0dbf9"
+    },
+    {
+      "path": "tests/lava-blast.test.js",
+      "oid": "addfb8282755eb093b15a854c083736fd88050cf"
+    },
+    {
+      "path": "tests/layered-map-generator.test.js",
+      "oid": "14eab4bacc69d1a860005d8e5078d52f90bf447f"
+    },
+    {
+      "path": "tests/leave-run-menu.test.js",
+      "oid": "df453698e57abcac861c6788d745a917a4e8b3f8"
+    },
+    {
+      "path": "tests/light-startup-boot.test.js",
+      "oid": "18787cc344ab2add40c6385a3ffefc18dfb81314"
+    },
+    {
+      "path": "tests/lossless-runtime-assets.test.js",
+      "oid": "c88856995b7ad01648f06cca0b744cc5c2826e5c"
+    },
+    {
+      "path": "tests/m-batch-behavior.test.js",
+      "oid": "948351548ded146150abff15b574b0f931031431"
+    },
+    {
+      "path": "tests/m-batch-production.test.js",
+      "oid": "75d99e1324d42e28d0b551855f25c605e475e1a2"
+    },
+    {
+      "path": "tests/m-execute-consume.test.js",
+      "oid": "e2d53bddfd5d5b2ec94504ff5a4932688dd1a680"
+    },
+    {
+      "path": "tests/m-hosted-contract.test.js",
+      "oid": "2cef0305e56ccc6c65e902506a06738d9755d0e3"
+    },
+    {
+      "path": "tests/m01-base-commit.test.js",
+      "oid": "ddbcad32ba71634feff6310c76cfb1251c385e9f"
+    },
+    {
+      "path": "tests/m02-collection-commands.test.js",
+      "oid": "2606d11d2ef70c6f661da4ea54f7d0fdfb8418ea"
+    },
+    {
+      "path": "tests/m03-home.test.js",
+      "oid": "148184164fc16a0eb8a3e4e128426827d6ba9c56"
+    },
+    {
+      "path": "tests/m04-preview-contract.test.js",
+      "oid": "60b451ee7c29b1021f1b2fb6785802f763b748c2"
+    },
+    {
+      "path": "tests/m04-visual-pack.test.js",
+      "oid": "d1f321287d86edeecc512a849133befc94de3703"
+    },
+    {
+      "path": "tests/m05-home-presenter.test.js",
+      "oid": "b35eac94d2b7ee47772995f312a788c1622f4815"
+    },
+    {
+      "path": "tests/m05-home-scene.test.js",
+      "oid": "ac7dc5d751a9aefb5352cc30dc59d3e3fadbe9a1"
+    },
+    {
+      "path": "tests/m06-preparation.test.js",
+      "oid": "dea327e4f33eab3c35cc806a041c21e63d109e1b"
+    },
+    {
+      "path": "tests/m06-sources-view.test.js",
+      "oid": "bed42cca1460ddd802ff81941796cfcd8ee85337"
+    },
+    {
+      "path": "tests/m1-contract.test.js",
+      "oid": "7d9672420168530fd38dce771648f0470f63b216"
+    },
+    {
+      "path": "tests/m1-data.test.js",
+      "oid": "813ff1bb540c6b0f2de61a70af60ae46ffabdd0b"
+    },
+    {
+      "path": "tests/m10-data.test.js",
+      "oid": "89cb1a1ad61243d8bfe8927d401b990d96c09671"
+    },
+    {
+      "path": "tests/m11-data.test.js",
+      "oid": "b35ca32b6c059c3ab1079a489380f7bb4a6a0b9a"
+    },
+    {
+      "path": "tests/m2-contract.test.js",
+      "oid": "8bd326f87fb6f490e26b170c227747102f9b974a"
+    },
+    {
+      "path": "tests/m2-data.test.js",
+      "oid": "1a2a0640648148a1d2f17e31225adefc7cde5b21"
+    },
+    {
+      "path": "tests/m3-contract.test.js",
+      "oid": "a28839e172eb1b798d7b454de2fdbc3b66b84e96"
+    },
+    {
+      "path": "tests/m3-data.test.js",
+      "oid": "726c80efb6ceb1cef017d1295f0381f64c56b1df"
+    },
+    {
+      "path": "tests/m4-data.test.js",
+      "oid": "06b7434802c0db4753b6c6874fe1f98e65032d6c"
+    },
+    {
+      "path": "tests/m5-data.test.js",
+      "oid": "ba023468b439d5af6173a99061e1beef98a32b68"
+    },
+    {
+      "path": "tests/m6-data.test.js",
+      "oid": "894a2ff0e61c3b4d66197d9fbcae00f1bd138f19"
+    },
+    {
+      "path": "tests/m7-battle.test.js",
+      "oid": "c184c04f43b23a709aa5a1ad3b160ce750706086"
+    },
+    {
+      "path": "tests/m7-data.test.js",
+      "oid": "f43827a4c53451a594304117d52147c6948564b1"
+    },
+    {
+      "path": "tests/m8-data.test.js",
+      "oid": "b2216f422f85cdfedd1e0f30cb01f0df995d304d"
+    },
+    {
+      "path": "tests/m9-data.test.js",
+      "oid": "ed84aa27f1265d5014b673eaba435637dd9505c0"
+    },
+    {
+      "path": "tests/mana-surge.test.js",
+      "oid": "0106ef25f0a5b4bfe09501bdf8b4e2fbbc58b31f"
+    },
+    {
+      "path": "tests/map-connectivity.test.js",
+      "oid": "a80d96a2e49697908ef8d77f79a999720006ed3f"
+    },
+    {
+      "path": "tests/map-decoration-budget.test.js",
+      "oid": "2d2e780bc587bc9db6ef04fdbee121b822e55037"
+    },
+    {
+      "path": "tests/map-facilities-burn-removal.test.js",
+      "oid": "e246891a26bd6572cd941509cbc0b1ac503fd4cd"
+    },
+    {
+      "path": "tests/map-generator-v4.test.js",
+      "oid": "6d509c187f33d8e49be2dd3edd240aae58828d97"
+    },
+    {
+      "path": "tests/map-health-hud.test.js",
+      "oid": "30c1845b3f5cbf86dbbfa22a6726aeea87d9ea63"
+    },
+    {
+      "path": "tests/map-node-glow.test.js",
+      "oid": "7c66b652badfda40c64f287688a5e238db0ad2fa"
+    },
+    {
+      "path": "tests/map-node-state.test.js",
+      "oid": "c0a8cf33c87a5f7f84124c74a6f65233065e5064"
+    },
+    {
+      "path": "tests/map-overview-review.test.js",
+      "oid": "aa0c294c55b5744eb68225703cda73b9193f935d"
+    },
+    {
+      "path": "tests/map-render-performance.test.js",
+      "oid": "84f2a6542539c90808fa9f08de0a528e4b1d3d6f"
+    },
+    {
+      "path": "tests/map-rng-bit-equivalence.test.js",
+      "oid": "f794cebee2d89994177b4a169525826de0818982"
+    },
+    {
+      "path": "tests/map-route-v2-preview.test.js",
+      "oid": "12408ba7c3f6e5b9c4b145bf81773ca77bc3eecd"
+    },
+    {
+      "path": "tests/map-route-v2.test.js",
+      "oid": "d8581109825ff9f8519daf328172c580de816bb1"
+    },
+    {
+      "path": "tests/map-travel-motion.test.js",
+      "oid": "e58e7b0054ea48c986a4ed636f84ed0bd511a575"
+    },
+    {
+      "path": "tests/map-travel-path.test.js",
+      "oid": "44c035ed4bca2ca2989a9aa5e0f761b7be79bb42"
+    },
+    {
+      "path": "tests/map-version-compat.test.js",
+      "oid": "c80733429821942c86ddb01cd3e23c65ed50c32a"
+    },
+    {
+      "path": "tests/mech-sentences.test.js",
+      "oid": "776dae9f171bda363061b4d32793fdc1ceb360fb"
+    },
+    {
+      "path": "tests/menu-pages-lazy-entry.test.js",
+      "oid": "5d7711ca88357d421bbad29bbbbe1f83335a13e9"
+    },
+    {
+      "path": "tests/menu-recovery-entry.test.js",
+      "oid": "ba696991bfbac06f6bce67db790aa7534bddf783"
+    },
+    {
+      "path": "tests/message-batch-0917.test.js",
+      "oid": "3c6aefda4291ecae06fe508d99dc84d33b379f8e"
+    },
+    {
+      "path": "tests/message-batch-0920-late.test.js",
+      "oid": "d6956058dd233b115c7849bf85c3ffbd9bf5b9e3"
+    },
+    {
+      "path": "tests/message-fixes.test.js",
+      "oid": "cb6bf3a0c567b0250d033d5485b0e32c476383fb"
+    },
+    {
+      "path": "tests/mistbox.test.js",
+      "oid": "08dcb746c27c11e76453d5895a37b4d81461b722"
+    },
+    {
+      "path": "tests/multi-hit-retarget.test.js",
+      "oid": "ac46d47bd53a46f8c53372931027a5c970c9a810"
+    },
+    {
+      "path": "tests/mystery-potion-observation.test.js",
+      "oid": "80837029ddf8b53cf0fb2f21f546520e2a2c8f10"
+    },
+    {
+      "path": "tests/n1-infuse-uid-toggle.test.js",
+      "oid": "e0878429c766d21df3d9eb618b05e22c6b497943"
+    },
+    {
+      "path": "tests/narrative-coverage.test.js",
+      "oid": "01d803c0aff096199ff897dc7612f3ad62447275"
+    },
+    {
+      "path": "tests/narrative.test.js",
+      "oid": "24a06202f4b4ee40175208d1680e9c700592f23a"
+    },
+    {
+      "path": "tests/navigation-motion.test.js",
+      "oid": "bc09597cab30f54fce0d4c81ac0740187c764edb"
+    },
+    {
+      "path": "tests/nest-hearts.test.js",
+      "oid": "25cec6e50ed813b9b6d863c5756b57c2c1bd5567"
+    },
+    {
+      "path": "tests/nest-node-lifecycle-audit.test.js",
+      "oid": "4003c6fce90d621268e35fe1c7fe7568e732aaa6"
+    },
+    {
+      "path": "tests/nest-regression.test.js",
+      "oid": "1511646dd46a0ee5ce45ad257b8b7d01ca0b6438"
+    },
+    {
+      "path": "tests/nest-runemaster.test.js",
+      "oid": "d24a6fa9354f246bc6d1734b6e7cbada3ca43d1c"
+    },
+    {
+      "path": "tests/nest-settlement-transaction.test.js",
+      "oid": "e297923b42530b46d08d2b575c17a31672b83df9"
+    },
+    {
+      "path": "tests/nightshift-u10-settle-transition.test.js",
+      "oid": "01c4ea7e41e97c61d71d96a5e96d6a619c8835e0"
+    },
+    {
+      "path": "tests/nightshift-u10-teardown-guards.test.js",
+      "oid": "59a172eda644a799b3a8c01ee4921eedac9ccd7c"
+    },
+    {
+      "path": "tests/node-decision-view.test.js",
+      "oid": "ed70a093c1ee5978f0bdb714db1ea58523677df5"
+    },
+    {
+      "path": "tests/node-design-review.test.js",
+      "oid": "d01f6d46ac57e102869d9e47b9de0f6e5eb2c056"
+    },
+    {
+      "path": "tests/node-flow-confirmation.test.js",
+      "oid": "07f54af102d59ad8c4b3ccec534c10269f31320a"
+    },
+    {
+      "path": "tests/node-restore-flow.test.js",
+      "oid": "33753ffc88e453fc1375056159b179eff04c33b2"
+    },
+    {
+      "path": "tests/node-restore-state.test.js",
+      "oid": "78e3aa36b54043b2ef30c05963cf8330a629e415"
+    },
+    {
+      "path": "tests/node-retrigger.test.js",
+      "oid": "25b5ee3f269b4f0a7f9eeed9791b25976c3476d3"
+    },
+    {
+      "path": "tests/node-reward-state.test.js",
+      "oid": "e50857f74ab09a8679e2272f87f5f7c28bc8a0f8"
+    },
+    {
+      "path": "tests/optional-scene-lazy-boundary.test.js",
+      "oid": "ae620144037da3f338734e7d2847858aff35f5cc"
+    },
+    {
+      "path": "tests/overlay-dialog.test.js",
+      "oid": "2248a0b366608416e36bacfd42e87c9061435936"
+    },
+    {
+      "path": "tests/page-entry-cancellation.test.js",
+      "oid": "ff0ec6ee66a1aafcc8260012bfd69d6c278d193c"
+    },
+    {
+      "path": "tests/page-loading.test.js",
+      "oid": "9c6baeb1b8bbcf874ead1c6af41af75427525f9f"
+    },
+    {
+      "path": "tests/page-perf-battle.test.js",
+      "oid": "907bea9aaf8b6a237693d255ff25528a06a08545"
+    },
+    {
+      "path": "tests/page-perf-expedition.test.js",
+      "oid": "e4bdec7818bed9988368a873902fe313e370b693"
+    },
+    {
+      "path": "tests/page-perf-hub.test.js",
+      "oid": "7e9e5dece22edfdce072d378c4c3df38996c06c9"
+    },
+    {
+      "path": "tests/page-perf-shared.test.js",
+      "oid": "767c0dc69a55fc8ffd9e61497f83b48a58b728c3"
+    },
+    {
+      "path": "tests/partner-interaction.test.js",
+      "oid": "e1d9fe3613940a5bcf66a3a26c1b004fb9b083f6"
+    },
+    {
+      "path": "tests/pearl-storage-interface.test.js",
+      "oid": "1327e014d2061c3b2d35127532453f3e4dc56679"
+    },
+    {
+      "path": "tests/perf-ledger-port-occupancy.test.js",
+      "oid": "bd9490ae3f20156009020606e8018f687a505c05"
+    },
+    {
+      "path": "tests/perf-probe-summary.test.js",
+      "oid": "199055734b3bfda8e269a793f1a5cb198c9a564c"
+    },
+    {
+      "path": "tests/performance-settings.test.js",
+      "oid": "e518971b98f1a3a0934b3f10ce02391f0b90e05a"
+    },
+    {
+      "path": "tests/pet-egg-chest.test.js",
+      "oid": "fe327848d7693f987dac26c9625284d65ef27a06"
+    },
+    {
+      "path": "tests/photo-art-warm-audit.test.js",
+      "oid": "f371c14e24e4c34d95c2f9d7bc2167413d4cbf0c"
+    },
+    {
+      "path": "tests/photo-notes-key-audit.test.js",
+      "oid": "656b7ac0e97b9055350da5d4b4509c09f1ac473b"
+    },
+    {
+      "path": "tests/photo-page-lifecycle-audit.test.js",
+      "oid": "b6be1feeb35fbc26736ae30498b4de414d4ce324"
+    },
+    {
+      "path": "tests/photo-probe-lifecycle-deep-audit.test.js",
+      "oid": "31213db3abb73aa978a3edc8bad47e9b3d4f3a92"
+    },
+    {
+      "path": "tests/photo-studio-catalog-cache.test.js",
+      "oid": "398e79882cf0a88ed5c96f9c3e884e5bac24d0c5"
+    },
+    {
+      "path": "tests/photo-studio-presentation.test.js",
+      "oid": "078697e02db3173a72ab84f4736e29d0cfb463a1"
+    },
+    {
+      "path": "tests/photo-studio-tabs.test.js",
+      "oid": "f5099dcd19f085d51166475cb3ed318c9fe07a45"
+    },
+    {
+      "path": "tests/photo-zoom-lifecycle.test.js",
+      "oid": "f6e77d148e44b8ad3e46678b5122545b64775ea1"
+    },
+    {
+      "path": "tests/pipeline-completion-contract.test.js",
+      "oid": "22cf92c6fb82c82ccff7904ab1799a0621e224cf"
+    },
+    {
+      "path": "tests/playthrough-bot.test.js",
+      "oid": "5d054354659d59354a1f092b475730ca9420a129"
+    },
+    {
+      "path": "tests/pocket-restore-interface.test.js",
+      "oid": "a17550deea1bfb324499373621f83e610feff511"
+    },
+    {
+      "path": "tests/potion-tip-lifecycle.test.js",
+      "oid": "4747a1dabae678d0101b214adc3b9f70fd93e3ea"
+    },
+    {
+      "path": "tests/potion-tip.test.js",
+      "oid": "5dcd0af1b06c2c1172303403225fd86731e5972e"
+    },
+    {
+      "path": "tests/premium-ui-pages.test.js",
+      "oid": "050134f64934d2e05fbd79dde18f115559684ce0"
+    },
+    {
+      "path": "tests/preparation-adapter-review.test.js",
+      "oid": "5539ca936b57c2d23503e386c519533779ecd5d8"
+    },
+    {
+      "path": "tests/preparation-slot-review.test.js",
+      "oid": "0222291d5cd0a46cc0039c5ca0efe69c6060d25c"
+    },
+    {
+      "path": "tests/provoke-instance-review.test.js",
+      "oid": "cff093bcb63ba409d84d612acebacb62ee4bc834"
+    },
+    {
+      "path": "tests/provoke-target-contract.test.js",
+      "oid": "792bd0a698e04ed49c2184ce131fa7c322e80f16"
+    },
+    {
+      "path": "tests/quality-config.test.js",
+      "oid": "da0a50fc6b112fa0248c5b50961a2cfa544808bf"
+    },
+    {
+      "path": "tests/quick-nav-async.test.js",
+      "oid": "0c80a0172fc7363338896c3453359ef71c14f69c"
+    },
+    {
+      "path": "tests/r2a-commands.test.js",
+      "oid": "18646bcdc3d9801aa763ccf97e403bb4105b22cc"
+    },
+    {
+      "path": "tests/r2a-recovery.test.js",
+      "oid": "5ffa194ee70fe3378af6f0e9d3064a363c1246de"
+    },
+    {
+      "path": "tests/r3-0-command-guards.test.js",
+      "oid": "3291533142dd0f4f7deca000593d49c64beffd65"
+    },
+    {
+      "path": "tests/r3-a-preview.test.js",
+      "oid": "c3e729217a58ca87f20fe1c42776c744442d243e"
+    },
+    {
+      "path": "tests/r3-b-action-boundary.repro.test.js",
+      "oid": "7eaaa408e69fe29665817f30988d113518314828"
+    },
+    {
+      "path": "tests/r5a-map-snapshot.test.js",
+      "oid": "2843eb133f8f71bdadfd5320afd9065c9ad33682"
+    },
+    {
+      "path": "tests/r5a-session-menu.test.js",
+      "oid": "f79b45f3d9be28d8da0c5d044896123e9ea81134"
+    },
+    {
+      "path": "tests/r5b-dev-info.test.js",
+      "oid": "48359433cb2e25630a80a2b46b428c176df3878e"
+    },
+    {
+      "path": "tests/r5b-route-overlay.test.js",
+      "oid": "b646dfb83b01e16ec666028bcbdc152fc29c85bb"
+    },
+    {
+      "path": "tests/r6-story-flow.repro.test.js",
+      "oid": "ba1e709737e43501280e5769a124a9b9147cf374"
+    },
+    {
+      "path": "tests/r6-story.test.js",
+      "oid": "26f1c788709826e1dc412c10bb9a3977912df7fd"
+    },
+    {
+      "path": "tests/r7a-battle-orders.test.js",
+      "oid": "a69609e03969e61920d8e11fcff9bb14a1ce5fdf"
+    },
+    {
+      "path": "tests/r7a-encounter-selector.test.js",
+      "oid": "89ff36097eca7f9704fbe72ef8bd46a28d6ae431"
+    },
+    {
+      "path": "tests/r7a-qa-host.test.js",
+      "oid": "103d020fc2af7b8b48ea6e7a08318ab97e99049e"
+    },
+    {
+      "path": "tests/r7a-qa-live.test.js",
+      "oid": "27a08f8de49a168524831c6a264bd56725086ae8"
+    },
+    {
+      "path": "tests/r7a-scenes-integration.test.js",
+      "oid": "1c9b0a11671cd7218420a2ef62618a7a40325c5c"
+    },
+    {
+      "path": "tests/r7b-feedback.test.js",
+      "oid": "03cc1072945069014447ec3f0c4804eec46393a7"
+    },
+    {
+      "path": "tests/random.test.js",
+      "oid": "82d821952dff53a3ae18586d6865f6df35e57f36"
+    },
+    {
+      "path": "tests/rapid-fire.test.js",
+      "oid": "2be860e4a9e3c279bb242a121eb19f0332f2c797"
+    },
+    {
+      "path": "tests/rations-thumbnail-alias.test.js",
+      "oid": "904e7619c25b987f1af6dbb3c68140c0dc72b913"
+    },
+    {
+      "path": "tests/recoverable-pair-contract.test.js",
+      "oid": "82036682dda9f097b01e9e4b5c56f85a7a1620f9"
+    },
+    {
+      "path": "tests/recoverable-pair-types.test.js",
+      "oid": "09e7dbf4d5629c354301062607d574cc492976c2"
+    },
+    {
+      "path": "tests/render-scheduler.test.js",
+      "oid": "0968c52cafa8fa86dcd6abcd82a88e8d1cc78500"
+    },
+    {
+      "path": "tests/renderer-resource-lifecycle.test.js",
+      "oid": "b9f66cf94d17743fe83eb8977fb9ef6e347ac3ed"
+    },
+    {
+      "path": "tests/required-infusion-play.test.js",
+      "oid": "9ad8a6ea41e8292974a824f1b4dff8dc54e133fe"
+    },
+    {
+      "path": "tests/restoration-potion-observation.test.js",
+      "oid": "68d848576b6d6781e03722d927c083649a215eb4"
+    },
+    {
+      "path": "tests/restore-fixture-startup.test.js",
+      "oid": "4d1b5df9cff19b56f105a18ca08c5a6a5e2149b7"
+    },
+    {
+      "path": "tests/restore-flight-stages.test.js",
+      "oid": "38c5d7b8e714a195b49f01054b32fc4a92637fd1"
+    },
+    {
+      "path": "tests/retired-scenes-publication.test.js",
+      "oid": "93e1bb1f479aaba0e5f9a570feb0f274ead0fceb"
+    },
+    {
+      "path": "tests/reward-action-clipping.test.js",
+      "oid": "f183babeabd1fbd36e014d865b4e7cbbbe91819a"
+    },
+    {
+      "path": "tests/reward-atomicity-cloud.test.js",
+      "oid": "fbbce0a9f1e7a6b756a9e5d13c0ce605056d13df"
+    },
+    {
+      "path": "tests/reward-capacity-organizer.test.js",
+      "oid": "426c12dfe0c947ce5157c0111399b3ed8cd55008"
+    },
+    {
+      "path": "tests/reward-capacity-preview.test.js",
+      "oid": "ca7232f58256b570bfd1ea8ed43c777b8252fcb1"
+    },
+    {
+      "path": "tests/reward-card-feedback.test.js",
+      "oid": "2540021e3c4d6798fd87e5eaff674e8c52380193"
+    },
+    {
+      "path": "tests/reward-coins-overview.test.js",
+      "oid": "3c606165eecc17058096eb824636aeed79f90a88"
+    },
+    {
+      "path": "tests/reward-frame-review.test.js",
+      "oid": "2387c3ee00fd82510cdb5f8c134819c3f5ea82da"
+    },
+    {
+      "path": "tests/reward-picker-heading.test.js",
+      "oid": "075f3e3b4ff1979c00a62ea08a4b25199d124920"
+    },
+    {
+      "path": "tests/reward-receipt-clarity.test.js",
+      "oid": "48dd2a4ee7c87509e450079c68cc87262576a023"
+    },
+    {
+      "path": "tests/reward-save-interruptions.test.js",
+      "oid": "2e08f321f3b898f44a8a1ccf20b12f580654e983"
+    },
+    {
+      "path": "tests/rule-config.test.js",
+      "oid": "f456aa76e6fa7a7e95bcbfa17b6c830c15cdad11"
+    },
+    {
+      "path": "tests/run-architecture.test.js",
+      "oid": "c4fe57d966d9d52b81c29be7ffc7df188bfd9ded"
+    },
+    {
+      "path": "tests/run-battle-stats-persistence-cloud.test.js",
+      "oid": "2bd89bd511bc2d66a602e7f8a6248e184f0cbe02"
+    },
+    {
+      "path": "tests/run-fallback-preservation.test.js",
+      "oid": "75a689ef85a7bdc28ea48d0319e7ac8baa7b2634"
+    },
+    {
+      "path": "tests/runtime-asset-aliases.test.js",
+      "oid": "5a11b11c0b6102431252649a924181c396125786"
+    },
+    {
+      "path": "tests/runtime-asset-publication.test.js",
+      "oid": "f7b065d72f1b0c4166ceaf9c322b581ac8ca9199"
+    },
+    {
+      "path": "tests/runtime-asset-redundancy-plugin.test.js",
+      "oid": "8049f627701a861604e979ccb8d4c2c2b96b0f64"
+    },
+    {
+      "path": "tests/runtime-asset-redundancy.test.js",
+      "oid": "041da7ff6cccce1c696c963ab8999afdc7c96045"
+    },
+    {
+      "path": "tests/runtime-hotpaths.test.js",
+      "oid": "a929deef135da21b43964f946cda9afa90c5b79c"
+    },
+    {
+      "path": "tests/sacrifice-layout-readability.test.js",
+      "oid": "7fe25ab65541bad8f149a27482a8b4f1930c7088"
+    },
+    {
+      "path": "tests/sacrifice-scroll-stability.test.js",
+      "oid": "e8ba5c4eba64a01e4db35dccde09d428fa5de79b"
+    },
+    {
+      "path": "tests/safe-pearl-access.test.js",
+      "oid": "983ead27a822fcd030c0ccf21ca07195542e9163"
+    },
+    {
+      "path": "tests/save-compat.test.js",
+      "oid": "bb397e092c50e01d9f08d108eb906509b29dc209"
+    },
+    {
+      "path": "tests/save-prev-fallback.test.js",
+      "oid": "25c2db65e13b131b95e9a158729f443d39191625"
+    },
+    {
+      "path": "tests/save-recovery-session-feedback.test.js",
+      "oid": "7461f850662d0ab1449d6f2e993e07f2b0696057"
+    },
+    {
+      "path": "tests/save-slot-delete-results.test.js",
+      "oid": "42fdd4d187df417602305e8877a1ef57c71b58de"
+    },
+    {
+      "path": "tests/scavenge-mode-feedback.test.js",
+      "oid": "626518e342da43e8d9e1c893d166caf8a7e35080"
+    },
+    {
+      "path": "tests/schema-op-coverage.test.js",
+      "oid": "a16b5ea965cfc355d850ce2549bf277c809b772b"
+    },
+    {
+      "path": "tests/scripts-contract.test.js",
+      "oid": "51abbec24a4f7593c3b1cc18b4a0ba67b9e413a6"
+    },
+    {
+      "path": "tests/selftest-paths.test.js",
+      "oid": "328c1c90ad2e1ed2fc1b8baf24fb74617accce30"
+    },
+    {
+      "path": "tests/settings-page.test.js",
+      "oid": "c5a6c1af18a7b10dcd3e23e9732bc258e4abe07c"
+    },
+    {
+      "path": "tests/setup-commit-gate.test.js",
+      "oid": "021292ed587106233b8f2b9754707c3e4f5e4fb7"
+    },
+    {
+      "path": "tests/shadowed-card-art.test.js",
+      "oid": "5921d6745cf1cc7f235f504d95b499b3ee97249f"
+    },
+    {
+      "path": "tests/shop-carry-cleanup.test.js",
+      "oid": "8d13622869f7ff77773ada952052c0eacf24e781"
+    },
+    {
+      "path": "tests/shop-currency-guidance.test.js",
+      "oid": "5341988ad938a8332596d5d0fcdb0aa54f03dc27"
+    },
+    {
+      "path": "tests/shop-sell-stored-guard.test.js",
+      "oid": "6033a50e1c4df02ef411f0d2e2957e04b2dc73b1"
+    },
+    {
+      "path": "tests/shop-transaction-lifecycle.test.js",
+      "oid": "4132f1391a05aa6ea85d7c93e28f019c9f5ccb88"
+    },
+    {
+      "path": "tests/skull-sword-effective-session.test.js",
+      "oid": "c4f1465d8a5d745b99fb9b4831445f469185a603"
+    },
+    {
+      "path": "tests/sound-bank.test.js",
+      "oid": "e1594321a80e5f63776395d390c7d20bb8dd66f7"
+    },
+    {
+      "path": "tests/sound-diagnostic-policy.test.js",
+      "oid": "3fe67b8087faac1cafcdc8b7d51af53e6adf08cc"
+    },
+    {
+      "path": "tests/sound-f4ngy-draw.test.js",
+      "oid": "0d902d8cd2d04b2fffe7750c0a3d90d9b234a7d0"
+    },
+    {
+      "path": "tests/sound-lifecycle.test.js",
+      "oid": "f0a362a4fee39c7cd1e70834e46ba8cf7e77ae21"
+    },
+    {
+      "path": "tests/sound-music-backend.test.js",
+      "oid": "8007682e72ab6ae41815c87c5742fdbedb7de0d4"
+    },
+    {
+      "path": "tests/sound-music-lifecycle.test.js",
+      "oid": "584a788f3785cd5780b60f682341402aacbf4dab"
+    },
+    {
+      "path": "tests/sound-music.test.js",
+      "oid": "3754d0da6f6c28eee6e334485535a9375b1a1b60"
+    },
+    {
+      "path": "tests/sound-policy.test.js",
+      "oid": "35c38a52f447eecc0639b1d3e8225c76dd5ac4d5"
+    },
+    {
+      "path": "tests/sound-real-foley.test.js",
+      "oid": "d04e00ccaae738d85f92b274ceabc67b742b6e4c"
+    },
+    {
+      "path": "tests/sound-safe-slot-foley.test.js",
+      "oid": "d0dbe0ad627d63b92a1deb5272587f81c6193b73"
+    },
+    {
+      "path": "tests/sound-sample-only.test.js",
+      "oid": "b6a58dd471b3a0e4c301c1b8c465d56afcaea2ff"
+    },
+    {
+      "path": "tests/sound-ui-samples.test.js",
+      "oid": "5a48b9ccb2415a3e3d04e976dc9e99e9e2b3cc00"
+    },
+    {
+      "path": "tests/soundscape.test.js",
+      "oid": "9cff736f17ad16dd18f688081fd43532bc0e9f27"
+    },
+    {
+      "path": "tests/startup-guard.test.js",
+      "oid": "33d1c34a77e183a1571ddd25bafa8e538f6f3c51"
+    },
+    {
+      "path": "tests/startup-transition.test.js",
+      "oid": "6d155568129e15caba89234c88303d2b55f001bf"
+    },
+    {
+      "path": "tests/stealth-term.test.js",
+      "oid": "395e69b47b32db1b677c737124bb5fcc95d17eaa"
+    },
+    {
+      "path": "tests/strict-foundations-types.fixture.ts",
+      "oid": "2a8cfa0d3c4a03fd4ea9fa91238d53c2f80ebb7b"
+    },
+    {
+      "path": "tests/strict-hand-selection-types.fixture.ts",
+      "oid": "4c31945f7fe5387f17223a548d6bfba740303165"
+    },
+    {
+      "path": "tests/strict-selection-types.fixture.ts",
+      "oid": "b3d56bebb3d328b82acbf2e8694297471a82c5f9"
+    },
+    {
+      "path": "tests/structured-onplay-battle.test.js",
+      "oid": "4dd72afedc8ec91cfb82396aeb32302cbc4bac67"
+    },
+    {
+      "path": "tests/suggestions-store.test.js",
+      "oid": "3d08dc9ddd3844ced09fc70b0f19cd74b7760390"
+    },
+    {
+      "path": "tests/surface-motion.test.js",
+      "oid": "beee92df1f3af64157c80d327d167d765ac2d2ed"
+    },
+    {
+      "path": "tests/sword-consume-trigger.test.js",
+      "oid": "92f1551954c0ccd577c16f17f1d11124fe10d768"
+    },
+    {
+      "path": "tests/sync-cards-from-live.test.js",
+      "oid": "401db00f0a2134a3d212fa07553c6a144187b952"
+    },
+    {
+      "path": "tests/sys03-altar-restore-txn.test.js",
+      "oid": "6ada74af6de9a0150c01ed1dcf43495ca2cfb303"
+    },
+    {
+      "path": "tests/sys03-base-key-restore.test.js",
+      "oid": "54db7e680725894af9bedc6f2b6006d8799ef226"
+    },
+    {
+      "path": "tests/sys03-loot-shop-txn.test.js",
+      "oid": "9987828509c328ac9be993c85ef1c03a8938192d"
+    },
+    {
+      "path": "tests/term-tip-rule-copy.test.js",
+      "oid": "7182d38a963ae272c76e95418250bb4e5ca907bd"
+    },
+    {
+      "path": "tests/term-tips-lifecycle.test.js",
+      "oid": "c7ded5364872d33952cabb3a44ab532a0b529dff"
+    },
+    {
+      "path": "tests/terminal-death.test.js",
+      "oid": "9e730e249148edf362496740d23232d810cbd83c"
+    },
+    {
+      "path": "tests/terminal-persistence.test.js",
+      "oid": "f4e3c4fd362daf3a3c38186d8ba4435f98713eeb"
+    },
+    {
+      "path": "tests/terminal-recovery-matrix.test.js",
+      "oid": "c9bd5e95d7c681fa05fc8a07ed204dd025727a0a"
+    },
+    {
+      "path": "tests/terminal-result-readability.test.js",
+      "oid": "4bb0354b67ecfe180849ad9050c6dd957b83a0ee"
+    },
+    {
+      "path": "tests/terminal-retry-copy.test.js",
+      "oid": "920231cde3ae64c2cf72a61db023cb5c4020ac03"
+    },
+    {
+      "path": "tests/terminal-settlement.test.js",
+      "oid": "63281ab433fbbdcf0d7c2931993ff6bb3921edce"
+    },
+    {
+      "path": "tests/title-resource-review.test.js",
+      "oid": "80f3ab2c8342e85eeac26ca23b91dbc9da08ee37"
+    },
+    {
+      "path": "tests/title-wallpaper.test.js",
+      "oid": "4d2d788f06ad26591fc548f89b0ddb0be67a4844"
+    },
+    {
+      "path": "tests/trade-stack-identity-audit.test.js",
+      "oid": "1d546105475e8b1fe328f3eaabc2e6e9b6594cce"
+    },
+    {
+      "path": "tests/transition-diagnostic-policy.test.js",
+      "oid": "4fc7f6d82b06d9086751a1b6174fba50bc6478b5"
+    },
+    {
+      "path": "tests/tt1-material-structured.test.js",
+      "oid": "a463756dbdf846ba9206d295490ba23d73f84cd9"
+    },
+    {
+      "path": "tests/tt12-hitechrd-battle-baseline.test.js",
+      "oid": "f9c64b7ffa034e5e682382c281bce3c25cc8d8a5"
+    },
+    {
+      "path": "tests/tt12-hitechrd-structured.test.js",
+      "oid": "6f973246d31a6336987c760575a54d36e62ca5d9"
+    },
+    {
+      "path": "tests/tt12-structured-battle.test.js",
+      "oid": "ea9ee9f0524906171e826822bf9a219359f4288d"
+    },
+    {
+      "path": "tests/tt12-structured-preplay.test.js",
+      "oid": "29b5d6ef10b2c6bccadf66193f4e296056aad3f7"
+    },
+    {
+      "path": "tests/tt3-effect-baseline.test.js",
+      "oid": "b6a531a4de4329210465316372b99a2c1d09a383"
+    },
+    {
+      "path": "tests/tt3-material-structured.test.js",
+      "oid": "e0fb0c2ee76a9e153b029faeb0d055b82638416f"
+    },
+    {
+      "path": "tests/tt7-frozenight-structured-battle.test.js",
+      "oid": "cf49f60bd17f7d2307a22e7e7221458d5a09f3f0"
+    },
+    {
+      "path": "tests/tt7-hand-payment.test.js",
+      "oid": "94822a06175c5b46df074e151499b2ae74c56c89"
+    },
+    {
+      "path": "tests/tt7-sneak-structured.test.js",
+      "oid": "72eafa11198a686ea69948afef866fe1eb1bef4b"
+    },
+    {
+      "path": "tests/u18-negative-hp-death.test.js",
+      "oid": "0be15c4506624e1f9ab620cbb1e7a4afe9c848e7"
+    },
+    {
+      "path": "tests/u4-nightshift-guards.test.js",
+      "oid": "2b6b5bd9ed2141de6b46660e216592bc6d8b9f36"
+    },
+    {
+      "path": "tests/ui-accessibility-regression.test.js",
+      "oid": "4a549813c4a15c490c0992a5f996abb212e23fda"
+    },
+    {
+      "path": "tests/ui-design-system.test.js",
+      "oid": "5cdb02d8e33bdf616bf81434c7962d79b5fbd0e0"
+    },
+    {
+      "path": "tests/ui-scale.test.js",
+      "oid": "f7a8f8f4648e421cecb0c71ed551f68dc57146e1"
+    },
+    {
+      "path": "tests/venom-staff-passive.test.js",
+      "oid": "ca1ee70f270ac2f031505ca2e0b7730df01d6e51"
+    },
+    {
+      "path": "tests/visible-playback.test.js",
+      "oid": "c2d5a2359aaf254ae8ab6c2339b53787cdc5b19d"
+    },
+    {
+      "path": "tests/vite-card-chunk.test.js",
+      "oid": "9cb2717ac8e447a556894afb53f24e0cc2f5b334"
+    },
+    {
+      "path": "tests/web-up.test.js",
+      "oid": "33e5702e9e3674073b2f4faa24c3505f28fc6867"
+    },
+    {
+      "path": "tests/workflow-browser.test.js",
+      "oid": "1b61d534809a16def978e7efb6fa8c23bb681b44"
+    },
+    {
+      "path": "tests/workflow-change-review.test.js",
+      "oid": "b4b0c4d6276b3eb6fc476bd6adf486ec0230b8e2"
+    },
+    {
+      "path": "tests/workflow-cli-integration.test.js",
+      "oid": "0eaceddc3cb102d69d73afd65377b2a1dfabbbc6"
+    },
+    {
+      "path": "tests/workflow-dependencies.test.js",
+      "oid": "4d9c56d574748c119269719eeeb7da8e004bc235"
+    },
+    {
+      "path": "tests/workflow-doctor.test.js",
+      "oid": "5acc471f74eb5991569c5c80430dbd82213704c8"
+    },
+    {
+      "path": "tests/workflow-gate-receipt.test.js",
+      "oid": "bee1be0c524be1d6a66e3aa924364fa63dc0e3a7"
+    },
+    {
+      "path": "tests/workflow-handoff.test.js",
+      "oid": "debd67598a34427015b814da62fe6faacee1d92a"
+    },
+    {
+      "path": "tests/workflow-index.test.js",
+      "oid": "dcc7e2951819655d0c430ca32ae336205cda33ac"
+    },
+    {
+      "path": "tests/workflow-memory.test.js",
+      "oid": "9babea4028647c974fe55375c4338fb50e542319"
+    },
+    {
+      "path": "tests/workflow-scope.test.js",
+      "oid": "14998c4b3db402d13092777d534bed3326878b15"
+    },
+    {
+      "path": "tests/workflow-ship.test.js",
+      "oid": "1b9d324c86a231ee814b483b0e69fec9207270ff"
+    },
+    {
+      "path": "tests/workflow-staged.test.js",
+      "oid": "7e5ea8706823c739c311f56082c5c63b85f7b9a8"
+    },
+    {
+      "path": "tests/workflow-task-input.test.js",
+      "oid": "f202826cb994f1201fd8ffe679c8626ee07c0c12"
+    },
+    {
+      "path": "tests/workflow-task.test.js",
+      "oid": "0e2807ebc9e42290746812da7ec1b7c984b945f0"
+    },
+    {
+      "path": "tests/workflow-tools.test.js",
+      "oid": "6c239a88f67cfd96cd70d6f905e819b535a3cdf6"
+    },
+    {
+      "path": "tests/xart-z1-batch1.test.js",
+      "oid": "d37c80ff698ed3ff4c44c26a7b976223ca0ae6cc"
+    },
+    {
+      "path": "tests/xart-z1-batch2.test.js",
+      "oid": "64508af5f0db035051e5dd58e1eedfa381538432"
+    }
+  ]
+}

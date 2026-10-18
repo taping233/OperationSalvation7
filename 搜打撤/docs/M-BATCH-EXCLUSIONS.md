@@ -17,11 +17,11 @@
 | foe-orc_jav | 反抗组织掷弹兵 | 敌人图鉴（远程投掷） | map.json `monsters.orc_jav` |
 | foe-wolf_rider | 变异雪狼 | 敌人图鉴（蓄力攻击） | map.json `monsters.wolf_rider` |
 | foe-orc_axe | 甲壳变异体 | 敌人图鉴（防御/反击型） | map.json `monsters.orc_axe` |
-| foe-fire_el | 灼热异变体 | 敌人图鉴（攻击并灼烧） | map.json `monsters.fire_el` |
+| foe-fire_el | 灼热异变体 | 敌人图鉴（普通攻击） | map.json `monsters.fire_el` |
 | foe-water_el | 腐蚀异变体 | 敌人图鉴（防御/反击型） | map.json `monsters.water_el` |
 | foe-grass_el | 滋生异变体 | 敌人图鉴（攻击并施加诅咒） | map.json `monsters.grass_el` |
 | foe-esper_crow | 白鸦 | 敌人图鉴（远程多段） | map.json `monsters.esper_crow` |
-| foe-esper_candle | 烛火 | 敌人图鉴（攻击并灼烧） | map.json `monsters.esper_candle` |
+| foe-esper_candle | 烛火 | 敌人图鉴（普通攻击） | map.json `monsters.esper_candle` |
 | foe-esper_silence | 静默 | 敌人图鉴（攻击并施加诅咒） | map.json `monsters.esper_silence` |
 | foe-esper_echo | 回声 | 敌人图鉴（远程多段） | map.json `monsters.esper_echo` |
 | foe-dragon | 巨兽「荒渊」 | 敌人图鉴（精英；首回合蓄力） | map.json `monsters.dragon`（elite:true/behavior:dragon）；选取 game.run.scenes.js:206 |

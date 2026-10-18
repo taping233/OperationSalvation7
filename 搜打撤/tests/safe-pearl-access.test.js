@@ -102,8 +102,15 @@ describe('安全格珍珠盒直接存取', () => {
 
   it('安全格打开后盒满仍拒绝整叠存入，原始张数和保护保持', () => {
     game.ownedCards = [...copies(pearl, 1, { safe: true }), ...copies(threeKeys, 8, { stored: 1 }), ...copies(key, 2)];
-    bag.showBackpack(true); openSafe(); const before = snapshot(); button('pearlPut', key.name).click();
-    expect(snapshot()).toBe(before); expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('珍珠盒放不下'), 'warn');
+    bag.showBackpack(true); openSafe(); const before = snapshot(), beforeUids = game.ownedCards.map(o => o.uid);
+    const put = button('pearlPut', key.name);
+    expect(put.disabled).toBe(true);
+    expect(put.closest('.container-store-slot').querySelector('.container-store-blocked').textContent).toBe('剩余 1 张空间，放不下整叠');
+    expect(put.getAttribute('aria-label')).toContain('剩余 1 张空间，放不下整叠');
+    UI.log.mockClear(); put.click();
+    expect(UI.log).not.toHaveBeenCalled();
+    expect(snapshot()).toBe(before); expect(game.ownedCards.map(o => o.uid)).toEqual(beforeUids);
+    expect(game.ownedCards).toHaveLength(11); expect(session.safeUsed()).toBe(1);
   });
 
   it('直接取出只解除资源stored，安全格盒子与所有UID保留', () => {
@@ -118,10 +125,29 @@ describe('安全格珍珠盒直接存取', () => {
 
   it('安全格打开后背包仍放不下整叠时拒绝取出', () => {
     game.ownedCards = [...copies(pearl, 1, { safe: true }), ...copies(threeKeys, 9, { stored: 1 }), ...copies(key, 78)];
-    bag.showBackpack(true); openSafe(); const before = snapshot();
+    bag.showBackpack(true); openSafe(); const before = snapshot(), beforeUids = game.ownedCards.map(o => o.uid);
     expect(session.usedSlots()).toBe(26); expect(session.bagCap()).toBe(27);
-    button('pearlTake', threeKeys.name).click();
-    expect(snapshot()).toBe(before); expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('背包放不下'), 'warn');
+    const take = button('pearlTake', threeKeys.name);
+    expect(take.disabled).toBe(true);
+    expect(take.closest('.container-store-slot').querySelector('.container-store-blocked').textContent).toBe('背包空间不足，整叠需 3 格');
+    expect(take.getAttribute('aria-label')).toContain('背包空间不足，整叠需 3 格');
+    UI.log.mockClear(); take.click();
+    expect(UI.log).not.toHaveBeenCalled();
+    expect(snapshot()).toBe(before); expect(game.ownedCards.map(o => o.uid)).toEqual(beforeUids);
+    expect(game.ownedCards).toHaveLength(88); expect(session.safeUsed()).toBe(1);
+  });
+
+  it.each([
+    ['pearlPut', key.name, 8, 2, '珍珠盒放不下'],
+    ['pearlTake', threeKeys.name, 9, 78, '背包放不下'],
+  ])('%s显式调用仍保留容量守卫，不能绕过disabled移动资源', (action, name, storedCount, bagCount, warning) => {
+    game.ownedCards = [...copies(pearl, 1, { safe: true }), ...copies(threeKeys, storedCount, { stored: 1 }), ...copies(key, bagCount)];
+    bag.showBackpack(true); openSafe(); const before = snapshot(), beforeUids = game.ownedCards.map(o => o.uid);
+    expect(button(action, name).disabled).toBe(true);
+    UI.log.mockClear(); UI._acts[action]({ name });
+    expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining(warning), 'warn');
+    expect(snapshot()).toBe(before); expect(game.ownedCards.map(o => o.uid)).toEqual(beforeUids);
+    expect(game.ownedCards).toHaveLength(1 + storedCount + bagCount); expect(session.safeUsed()).toBe(1);
   });
 
   it('安全格旧详情及已返回的存取回调不能抢新页或改变卡牌', () => {

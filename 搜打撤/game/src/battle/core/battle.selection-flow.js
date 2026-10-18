@@ -1,6 +1,7 @@
 /* battle.selection-flow.js —— 战斗内选牌、抉择与发现队列。
  * 弹层状态来自 battle.runtime.js；引擎只注入卡牌执行与战斗收尾操作。 */
-import { G, foes, hand, drawPile, consumed, cardAnims, handSelecting, choosing, discovering, discoverQueue, zeroFeeUntil, turn, delayed, pdef, cardOverrides, set$handSelecting, set$choosing, set$discovering, set$hand } from '../runtime/battle.runtime.js';
+import { G, foes, allSpellsInfused, hand, drawPile, consumed, cardAnims, handSelecting, choosing, discovering, discoverQueue, zeroFeeUntil, turn, delayed, pdef, cardOverrides, set$handSelecting, set$choosing, set$discovering, set$hand } from '../runtime/battle.runtime.js';
+import { missingInfusionReason } from '../effects/battle.infusion.js';
 import { esc } from '../../core/shared.js';
 import { splitEffectClauses as splitClauses } from '../effects/battle.effects.js';
 import { isHandPaymentCandidate, matchesHandSelectKey } from './battle.hand-selection.js';
@@ -29,6 +30,7 @@ export function createBattleSelectionFlow({
       addTempCard,
       queueCardExecution,
       fireCatGift,
+      directPlayReason: card => missingInfusionReason(card, 0, allSpellsInfused),
     },
     interaction: {
       getJobs: () => discoverQueue,

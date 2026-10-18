@@ -316,14 +316,14 @@ describe('M2 semantics in real BattleSession (block 1)', () => {
       ...R(ENEMY_ONE, [
         { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' },
         { op: 'curse', curse: 'healban', duration: 1, bindTarget: 'prevDamage' },
-        { op: 'curse', curse: 'burn', duration: 1, bindTarget: 'prevDamage' },
+        { op: 'curse', curse: 'silence', duration: 1, bindTarget: 'prevDamage' },
         { op: 'draw', perCurseKinds: true },
       ]) };
     const game = await startGame([card, filler()], [foe('percurse')]);
     const before = hand.length;
     await playCard(game, card, 0);
     expect(foes[0].status.healban).toBe(1);
-    expect(foes[0].status.burn).toBe(1);
+    expect(foes[0].status.silence).toBe(1);
     expect(hand.length).toBe(before - 1 + 2);   // 本牌离手后按 2 种诅咒抽 2 张（普通战=初始攻击）
     expect(game.logs.some(line => line.includes('身负 2 种诅咒'))).toBe(true);
   });
@@ -354,6 +354,50 @@ describe('M2 semantics in real BattleSession (block 1)', () => {
     await playCard(game2, summon, 'self');
     const infantry = allies.filter(a => a.name === '步兵');
     expect(infantry.length).toBe(2);
+  });
+
+  it('actual Devour kills the selected second eligible foe and settles once', async () => {
+    const devour = Cards.all().find(card => card.id === 'tt3sp-devour');
+    expect(devour.rules.battle.target).toEqual({ side: 'enemy', area: false });
+    const game = await startGame([devour, filler()], [foe('first-eligible', 6, 4), foe('second-selected', 6, 4)]);
+    const state = await playCard(game, devour, 1);
+    expect(state.foes[0].dead).toBeFalsy();
+    expect(state.foes[1].dead).toBe(true);
+    expect(state.busy).toBe(false);
+    expect(state.actionQueueLength).toBe(0);
+    expect(game.battleActive).toBe(true);
+  });
+
+  it('actual Devour does not redirect from an ineligible selected foe', async () => {
+    const devour = Cards.all().find(card => card.id === 'tt3sp-devour');
+    const game = await startGame([devour, filler()], [foe('eligible', 6, 4), foe('ineligible-selected', 6, 5)]);
+    const uid = game.ownedCards.find(item => item.card.id === devour.id).uid;
+    const before = BattleSession.getSnapshot();
+    expect(BattleSession.commands.getCardPlayAvailability(uid).status).toBe('ready');
+    const availability = BattleSession.commands.getCardPlayAvailability(uid, 1);
+    expect(availability).toMatchObject({ status: 'rejected', reason: { code: 'EXECUTE_TARGET_INELIGIBLE' } });
+    const submitted = BattleSession.commands.submitCardPlay(uid, 1);
+    expect(submitted).toMatchObject({ status: 'rejected', reason: { code: 'EXECUTE_TARGET_INELIGIBLE' } });
+    const state = await waitForIdle();
+    expect(state.energy).toBe(before.energy);
+    expect(state.hand).toEqual(before.hand);
+    expect(state.played).toEqual(before.played);
+    expect(state.foes.every(foe => !foe.dead && foe.hp === 6)).toBe(true);
+    expect(state.busy).toBe(false);
+    expect(state.actionQueueLength).toBe(0);
+  });
+
+  it('Devour with no eligible enemies rejects before targeting and preserves resources', async () => {
+    const devour = Cards.all().find(card => card.id === 'tt3sp-devour');
+    const game = await startGame([devour, filler()], [foe('too-strong', 6, 5)]);
+    const uid = game.ownedCards.find(item => item.card.id === devour.id).uid;
+    const before = BattleSession.getSnapshot();
+    expect(BattleSession.commands.getCardPlayAvailability(uid)).toMatchObject({ status: 'rejected' });
+    expect(BattleSession.commands.submitCardPlay(uid)).toMatchObject({ status: 'rejected' });
+    const after = await waitForIdle();
+    expect(after.energy).toBe(before.energy);
+    expect(after.hand).toEqual(before.hand);
+    expect(after.pendingTarget).toBeFalsy();
   });
 
   it('flips noDrawNext / extraTurn / meleeCost1 flags via ops', async () => {

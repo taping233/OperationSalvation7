@@ -32,7 +32,7 @@ v1 硬约束（v2 设计必须正视）：onPlay 各 op 用 `amountField` 锚定
 |---|---|---|---|---|---|
 | 1 | 伤害直结（攻/法/固定/真实、区间、条件增伤） | **33** | 射击/火球/重斩/斩杀/不稳定射线/龙焰射线 | 部分（damage op 只有 单体/全体×dmg，无区间/条件/随机目标） | ``onPlay: {op:'damage', dmgType, amount|range:[a,b], target: chosenEnemy|allEnemies|randomEnemy, cond?: {foeHpBelow, foeHpHalf, foeStatus, foeFullHp}, bonus?: {...}}`` |
 | 2 | 卡牌获取与牌库（发现/随机获取/洗入/置入手牌） | **25** | 生命箭/寻宝/铁甲阵/三重火球/基础开发 | 极弱（discover 仅 moves×cost 单池） | ``{op:'acquire', n, pool:{kind:'any'|'moves'|'type:X'|'named:Y'|'class:cls'|'cost:N', filter}, dest:'hand'|'deck'|'discover', act?:'play'|'playKeep'|'dup'|'zeroCost'|'decay'}`` |
-| 3 | 诅咒族（流血/中毒/冰冻/沉默/破甲/禁疗/灼烧/随机诅咒/毒爆） | **23** | 血箭/毒箭/冰封千里/致命射线/花鸩/深渊诅咒 | 极弱（仅 freeze+allEnemies） | ``{op:'curse', curse:'bleed'|'poison'|'burn'|'freeze'|'silence'|'abreak'|'healban', stacks|randomKinds, target, duration?, mult?:'double', burst?:n, extend?:n}`` |
+| 3 | 诅咒族（流血/中毒/冰冻/沉默/破甲/禁疗/随机诅咒/毒爆） | **23** | 血箭/毒箭/冰封千里/致命射线/花鸩/深渊诅咒 | 极弱（仅 freeze+allEnemies） | ``{op:'curse', curse:'bleed'|'poison'|'freeze'|'silence'|'abreak'|'healban', stacks|randomKinds, target, duration?, mult?:'double', burst?:n, extend?:n}`` |
 | 4 | 多段与重复（hitCount/触发 N 次/额外施放） | **16** | 流星箭雨/连射/闪电链/快意恩仇/余烬爆裂/元素爆裂 | 部分（hitCount+retarget 有；触发N次/条件重放/每人释放/延迟段缺失） | ``{op:'damage', hits:{count|range|perFoe|untilKill}, recast?:{on:'kill'|'condition', times}, schedule?:'nextTurn'}`` |
 | 5 | 增益·祝福·能量（攻/法伤/潜行/免疫/闪避/能量/上限/形态） | **10** | 狂暴药水/聚能/潜匿/邪能护体/元素符印 | 完全缺失 | ``{op:'blessing', key:'atkUp'|'spellUp'|'stealth'|'immune'|'dodge'|'reduce', stacks, duration, plus {op:'energy'|'energyCap'|'maxHp'|'deckCap', n}}`` |
 | 6 | 护甲与防御（护甲/格挡/所受伤害降为） | **9** | 格挡/坚盾/圣盾/不变应万变/屏障修复 | 部分（armor op 仅卡面字段；无 guard/衰减/条件0费联动） | ``{op:'armor', amount, guard?:true, decayAtTurnEnd?:n}`` |
@@ -114,7 +114,7 @@ v1 硬约束（v2 设计必须正视）：onPlay 各 op 用 `amountField` 锚定
 | `tt3-chain-lightning` | 闪电链 | 法术 | 3′，触发 2 次。 | resolution times=2（2 段） | 多段与重复 | D |
 | `tt12-saturate` | 饱和打击 | 法术 | 造成7点法伤，如果消灭敌人，额外释放一次 | resolution 击杀连锁（如果消灭敌人额外释放一次） | 多段与重复 | V |
 
-### 诅咒族（流血/中毒/冰冻/沉默/破甲/禁疗/灼烧/随机诅咒/毒爆）（23 张）
+### 诅咒族（流血/中毒/冰冻/沉默/破甲/禁疗/随机诅咒/毒爆）（23 张）
 
 | id | 名称 | 类型 | 效果一句话 | 当前实现位置 | 操作族 | 评级 |
 |---|---|---|---|---|---|---|
@@ -389,8 +389,8 @@ v1 硬约束（v2 设计必须正视）：onPlay 各 op 用 `amountField` 锚定
 | `cmtn79743r2n` | 末日浩劫之门 | 生物 | 回合开始时对所有敌方角色各施加一层随机诅咒，优先不重复。 | steps.kills.js curse.doomGate（回合开始经 delayed） | 生物图鉴 | H |
 | `cmtn6ulm4boj` | 步兵 | 生物 | 攻击力4生命4，优先为主人承受伤害，自动攻击敌人 | 随从模板（engine summonAlly 引用） | 生物图鉴 | H |
 | `foe-grass_el` | 滋生异变体 | 生物 | 攻击 5 / 生命 12。变异·第5层。攻击并施加诅咒。 | rules unplayableReasonFor（不可打出）+ battle.enemy-phase.js | 生物图鉴 | H |
-| `foe-fire_el` | 灼热异变体 | 生物 | 攻击 10 / 生命 7。变异·第4层。攻击并灼烧。 | rules unplayableReasonFor（不可打出）+ battle.enemy-phase.js | 生物图鉴 | H |
-| `foe-esper_candle` | 烛火 | 生物 | 攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击并灼烧。 | rules unplayableReasonFor（不可打出）+ battle.enemy-phase.js | 生物图鉴 | H |
+| `foe-fire_el` | 灼热异变体 | 生物 | 攻击 10 / 生命 7。变异·第4层。攻击。 | rules unplayableReasonFor（不可打出）+ battle.enemy-phase.js | 生物图鉴 | H |
+| `foe-esper_candle` | 烛火 | 生物 | 攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击。 | rules unplayableReasonFor（不可打出）+ battle.enemy-phase.js | 生物图鉴 | H |
 | `foe-orc_axe` | 甲壳变异体 | 生物 | 攻击 4 / 生命 7。变异·第3层。防御/反击型，隔回合蓄势。 | rules unplayableReasonFor（不可打出）+ battle.enemy-phase.js | 生物图鉴 | H |
 | `foe-esper_crow` | 白鸦 | 生物 | 攻击 8 / 生命 5。联邦能力者·第4层。碎晶齐射：远程多段攻击。 | rules unplayableReasonFor（不可打出）+ battle.enemy-phase.js | 生物图鉴 | H |
 | `foe-archer` | 联邦射手 | 生物 | 攻击 5 / 生命 3。联邦·第1层。远程攻击。 | rules unplayableReasonFor（不可打出）+ battle.enemy-phase.js | 生物图鉴 | H |

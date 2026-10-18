@@ -1,0 +1,358 @@
+[
+  {
+    "file": "tests/altar-completion-road-cache.test.js",
+    "errors": [
+      " FAIL  tests/altar-completion-road-cache.test.js > 祭坛状态参与地图道路裁剪缓存 > 领取回赠改变待领标记时不依赖visited数量变化重算端点；相同状态仍复用"
+    ]
+  },
+  {
+    "file": "tests/altar-node-completion-view.test.js",
+    "errors": [
+      " FAIL  tests/altar-node-completion-view.test.js > 祭坛完成态的地图信息与脚下入口 > 未激活仍可查看本地内容，不误写已完成，离开返回保留状态",
+      "AssertionError: expected '完成前可回地图整理后重进。' to be '献祭激活 · 选择回赠' // Object.is equality",
+      "Expected: \"献祭激活 · 选择回赠\"",
+      "Received: \"完成前可回地图整理后重进。\"",
+      " ❯ tests/altar-node-completion-view.test.js:33:73"
+    ]
+  },
+  {
+    "file": "tests/archive-motion.test.js",
+    "errors": [
+      " FAIL  tests/archive-motion.test.js > cleans the old handoff before a second camp entry and leaves the new entry alive",
+      "AssertionError: expected 'preparing' to be '1' // Object.is equality",
+      "Expected: \"1\"",
+      "Received: \"preparing\"",
+      " ❯ tests/archive-motion.test.js:114:37"
+    ]
+  },
+  {
+    "file": "tests/battle-decision-readability.test.js",
+    "errors": [
+      " FAIL  tests/battle-decision-readability.test.js > battle decision reading CSS contract > keeps straight shared-card hosts and distinct resting and reading states",
+      "AssertionError: expected 'transform:translateY(var(--hand-rest,…' to contain 'var(--hand-rest,284px)'",
+      "Expected: \"var(--hand-rest,284px)\"",
+      "Received: \"transform:translateY(var(--hand-rest,64px))\"",
+      " ❯ tests/battle-decision-readability.test.js:28:70"
+    ]
+  },
+  {
+    "file": "tests/battle-drag-reference.test.js",
+    "errors": [
+      " FAIL  tests/battle-drag-reference.test.js > keeps a tap resting, selects a target, and takes up only after six CSS pixels",
+      "TypeError: commands.getCardPlayAvailability is not a function",
+      " ❯ cardPlayBlockedReason game/src/battle/view/battle.aim.js:22:35",
+      " ❯ Module.startAim game/src/battle/view/battle.aim.js:453:9",
+      " ❯ begin tests/battle-drag-reference.test.js:31:40",
+      " ❯ tests/battle-drag-reference.test.js:55:3"
+    ]
+  },
+  {
+    "file": "tests/battle-engine-facade.test.js",
+    "errors": [
+      " FAIL  tests/battle-engine-facade.test.js > battle.engine 导出面守卫 > 具名导出集合与基线逐字一致（增删须显式更新本清单）",
+      "AssertionError: expected [ 'R', 'accrueGrowth', …(70) ] to deeply equal [ 'R', 'accrueGrowth', …(68) ]",
+      " ❯ tests/battle-engine-facade.test.js:32:40"
+    ]
+  },
+  {
+    "file": "tests/battle-entry-view.test.js",
+    "errors": [
+      " FAIL  tests/battle-entry-view.test.js > keeps folded hand names synchronized with their printed faces and intent in the same enemy HUD group",
+      "AssertionError: expected undefined to be '初始攻击' // Object.is equality",
+      " ❯ tests/battle-entry-view.test.js:130:62",
+      " ❯ tests/battle-entry-view.test.js:129:9"
+    ]
+  },
+  {
+    "file": "tests/battle-hand-inspector.test.js",
+    "errors": [
+      " FAIL  tests/battle-hand-inspector.test.js > clicking with 1 enemies only inspects; explicit use still requires target confirmation",
+      "TypeError: Cannot read properties of null (reading 'click')",
+      " ❯ tests/battle-hand-inspector.test.js:82:51"
+    ]
+  },
+  {
+    "file": "tests/battle-hand-layout.test.js",
+    "errors": [
+      " FAIL  tests/battle-hand-layout.test.js > keeps 1 hand groups inside the 1920 canvas and their identity strips separated"
+    ]
+  },
+  {
+    "file": "tests/battle-infusion-action-layout.test.js",
+    "errors": [
+      " FAIL  tests/battle-infusion-action-layout.test.js > discovery source presentation and restoration copy > projects both owned and temporary deck-bottom UIDs without changing cards or discovery state",
+      "AssertionError: expected '' to contain '随身牌来源'",
+      " ❯ tests/battle-infusion-action-layout.test.js:246:33"
+    ]
+  },
+  {
+    "file": "tests/battle-potion-bar-layout.test.js",
+    "errors": [
+      " FAIL  tests/battle-potion-bar-layout.test.js > battle potion left-anchor cascade > overrides the original centered bar transform in the complete loaded cascade",
+      "AssertionError: expected [ { …(4) }, { …(4) } ] to deep equally contain ObjectContaining{…}",
+      " ❯ tests/battle-potion-bar-layout.test.js:93:31"
+    ]
+  },
+  {
+    "file": "tests/battle-scenery.test.js",
+    "errors": [
+      " FAIL  tests/battle-scenery.test.js > selects layer index 0 as winter-bridge",
+      "AssertionError: expected 'winter-platform-minimal' to be 'winter-bridge' // Object.is equality",
+      "Expected: \"winter-bridge\"",
+      "Received: \"winter-platform-minimal\"",
+      " ❯ tests/battle-scenery.test.js:5:47"
+    ]
+  },
+  {
+    "file": "tests/battle-settlement-retry.test.js",
+    "errors": [
+      " FAIL  tests/battle-settlement-retry.test.js > 真实战斗奖励刷新续流 > 未领/部分/全领未继续刷新后，胜利事务只完成一次（boss=false）"
+    ]
+  },
+  {
+    "file": "tests/battle-tools-lifecycle.test.js",
+    "errors": [
+      " FAIL  tests/battle-tools-lifecycle.test.js > battle tools template ownership > replaces retained disabled tools with the fresh ready template after a full redraw",
+      "AssertionError: expected '\\n    \\n    1\\n    \\n    ' to contain '可用'",
+      " ❯ tests/battle-tools-lifecycle.test.js:109:33"
+    ]
+  },
+  {
+    "file": "tests/boot.test.js",
+    "errors": [
+      " FAIL  tests/boot.test.js > 启动链（DOMContentLoaded → showTitle） > 战斗数字键/点选与内层卡面键盘输入共享选中、取消和目标结算",
+      "AssertionError: expected null not to be null",
+      " ❯ tests/boot.test.js:658:61"
+    ]
+  },
+  {
+    "file": "tests/chest-callback-lifecycle-audit.test.js",
+    "errors": [
+      " FAIL  tests/chest-callback-lifecycle-audit.test.js > 宝箱回调与探索身份审计 > 未领取宝箱不自动开箱，旧领取动作不能跨局发起开箱",
+      "AssertionError: expected null not to be null",
+      " ❯ tests/chest-callback-lifecycle-audit.test.js:33:65"
+    ]
+  },
+  {
+    "file": "tests/chest-click-flow.test.js",
+    "errors": [
+      " FAIL  tests/chest-click-flow.test.js > 宝箱点击链路 > 放大阅读可安全关闭，从独立或特写按钮领取后原位保留（特写领取=true）"
+    ]
+  },
+  {
+    "file": "tests/chest-multi-queue-regression.test.js",
+    "errors": [
+      " FAIL  tests/chest-multi-queue-regression.test.js > multi-chest leave and take actions advance exactly once per box",
+      "AssertionError: expected '[[icon:archive]] 宝箱奖励' to contain '第 1 / 2'",
+      "Expected: \"第 1 / 2\"",
+      "Received: \"[[icon:archive]] 宝箱奖励\"",
+      " ❯ tests/chest-multi-queue-regression.test.js:42:37"
+    ]
+  },
+  {
+    "file": "tests/chests-reward-capacity-notice.test.js",
+    "errors": [
+      " FAIL  tests/chests-reward-capacity-notice.test.js > 整理背包返回时奖励容量 notice 与真实容量同步 > 普通宝箱：18/18批量领2张，丢木材回17/18只保留领取成功事实"
+    ]
+  },
+  {
+    "file": "tests/docs-consistency.test.js",
+    "errors": [
+      " FAIL  tests/docs-consistency.test.js > 文档一致性守卫 > 现行文档（docs 根）的相对链接无死链",
+      "AssertionError: expected [ …(5) ] to deeply equal []",
+      " ❯ tests/docs-consistency.test.js:138:20"
+    ]
+  },
+  {
+    "file": "tests/event-callback-lifecycle-audit.test.js",
+    "errors": [
+      " FAIL  tests/event-callback-lifecycle-audit.test.js > 事件等待与回调生命周期审计 > F06 三选一明确永久放弃，其余候选刷新后仍不可领取",
+      "AssertionError: expected '\\n    测试三选一领取奖励奖励可分别领取\\n    \\n       …' to contain '其余卡牌永久放弃，无法找回'",
+      " ❯ tests/event-callback-lifecycle-audit.test.js:304:38"
+    ]
+  },
+  {
+    "file": "tests/expedition-battle-presentation.test.js",
+    "errors": [
+      " FAIL  tests/expedition-battle-presentation.test.js > shows one short target instruction and clears auxiliary keyboard help on cancel",
+      "AssertionError: expected '选择手牌，或结束回合' to be '【初始攻击】· 选择 高亮敌人 · Esc 取消' // Object.is equality",
+      "Expected: \"【初始攻击】· 选择 高亮敌人 · Esc 取消\"",
+      "Received: \"选择手牌，或结束回合\"",
+      " ❯ tests/expedition-battle-presentation.test.js:44:31"
+    ]
+  },
+  {
+    "file": "tests/expedition-view.test.js",
+    "errors": [
+      " FAIL  tests/expedition-view.test.js > expedition view route projection > 已访问普通节点仍可通行但标为已探索；门、撤离点保留专用状态",
+      "AssertionError: expected '已完成 · 内容已结算，仍可通行。' to contain '已探索'",
+      "Expected: \"已探索\"",
+      "Received: \"已完成 · 内容已结算，仍可通行。\"",
+      " ❯ tests/expedition-view.test.js:32:24"
+    ]
+  },
+  {
+    "file": "tests/extra-legend-reward-persistence.test.js",
+    "errors": [
+      " FAIL  tests/extra-legend-reward-persistence.test.js > 战后额外传说先持久化待领奖，再原子完成胜利 > 战后暂离先幂等提交击杀和XP；异地存档与读档续领奖不重复结算胜利",
+      "TypeError: state.actions.chestClaim is not a function",
+      " ❯ tests/extra-legend-reward-persistence.test.js:124:19"
+    ]
+  },
+  {
+    "file": "tests/four-player-chest-reload.test.js",
+    "errors": [
+      " FAIL  tests/four-player-chest-reload.test.js > G03 揭晓宝箱持久化 > 恢复真实开箱控制器沿用已展示奖励，不重抽或重复领取",
+      "AssertionError: expected null not to be null",
+      " ❯ tests/four-player-chest-reload.test.js:54:57"
+    ]
+  },
+  {
+    "file": "tests/map-node-state.test.js",
+    "errors": [
+      " FAIL  tests/map-node-state.test.js > 已消耗地图节点展示 > battle 完成结算后保留原类型并标注完成，未消费前保留原说明",
+      "AssertionError: expected '遭遇战' to be '遭遇战 · 已完成' // Object.is equality",
+      "Expected: \"遭遇战 · 已完成\"",
+      "Received: \"遭遇战\"",
+      " ❯ tests/map-node-state.test.js:20:48"
+    ]
+  },
+  {
+    "file": "tests/map-travel-path.test.js",
+    "errors": [
+      " FAIL  tests/map-travel-path.test.js > known map travel path > treats pending entry supply as an endpoint and restores blank travel after collection",
+      "AssertionError: expected '可回地图整理，回到此节点继续领取。' to be '待领取职业补给' // Object.is equality",
+      "Expected: \"待领取职业补给\"",
+      "Received: \"可回地图整理，回到此节点继续领取。\"",
+      " ❯ tests/map-travel-path.test.js:22:76"
+    ]
+  },
+  {
+    "file": "tests/nightshift-u10-teardown-guards.test.js",
+    "errors": [
+      " FAIL  tests/nightshift-u10-teardown-guards.test.js > U10 H2 chests 逐卡揭晓音效守卫 > 揭晓后 document 拆除，音效定时器安全短路，不抛 document 引用错",
+      "TypeError: Cannot read properties of null (reading 'click')",
+      " ❯ tests/nightshift-u10-teardown-guards.test.js:66:52"
+    ]
+  },
+  {
+    "file": "tests/node-retrigger.test.js",
+    "errors": [
+      " FAIL  tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发",
+      "AssertionError: expected 'modal' to be 'idle' // Object.is equality",
+      "Expected: \"idle\"",
+      "Received: \"modal\"",
+      " ❯ tests/node-retrigger.test.js:151:24"
+    ]
+  },
+  {
+    "file": "tests/r7a-qa-live.test.js",
+    "errors": [
+      " FAIL  tests/r7a-qa-live.test.js > loads isolated real view, plays one card, ends and exits without storage writes",
+      "AssertionError: expected undefined to be true // Object.is equality",
+      " ❯ tests/r7a-qa-live.test.js:17:66"
+    ]
+  },
+  {
+    "file": "tests/retired-scenes-publication.test.js",
+    "errors": [
+      " FAIL  tests/retired-scenes-publication.test.js > exact retired scene publication review > fingerprints the scene constructors and DATA mapping, preserving all current scene variants",
+      "AssertionError: game/src/core/art.js: expected '65b909a1848ee71c64cec39c8d709475fc053…' to be 'df02fc4d728391263fdb442f03002fa6e5f99…' // Object.is equality",
+      "Expected: \"df02fc4d728391263fdb442f03002fa6e5f99254ca6584d979a40e344c0710e1\"",
+      "Received: \"65b909a1848ee71c64cec39c8d709475fc0532896754c034b3d2710d0ec62f6a\"",
+      " ❯ tests/retired-scenes-publication.test.js:45:74"
+    ]
+  },
+  {
+    "file": "tests/reward-capacity-preview.test.js",
+    "errors": [
+      " FAIL  tests/reward-capacity-preview.test.js > 奖励页使用同一顺序预估，排除领取/放弃且区分原选择与已掷附赠 > 过滤后pending下标独立，不把原已领/已放弃卡重新发放",
+      "AssertionError: the given combination of arguments (undefined and string) is invalid for this assertion. You can use an array, a map, an object, a set, a string, or a weakset instead of a string",
+      " ❯ tests/reward-capacity-preview.test.js:168:70"
+    ]
+  },
+  {
+    "file": "tests/runtime-asset-redundancy.test.js",
+    "errors": [
+      " FAIL  tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > contains 56 previous paths, 90 retired chest frames, 19 retired scenes and 30 shadowed card files",
+      "AssertionError: expected [ …(4) ] to deeply equal []",
+      " ❯ tests/runtime-asset-redundancy.test.js:58:30"
+    ]
+  },
+  {
+    "file": "tests/selftest-paths.test.js",
+    "errors": [
+      " FAIL  tests/selftest-paths.test.js > ROOT-06 零依赖自测入口（域目录路径） > node game/selftest.js 跑完输出自测结果，退出码 0，无 ENOENT",
+      "AssertionError: 自测未通过：",
+      " ❯ tests/selftest-paths.test.js:19:53"
+    ]
+  },
+  {
+    "file": "tests/shop-transaction-lifecycle.test.js",
+    "errors": [
+      " FAIL  tests/shop-transaction-lifecycle.test.js > 局内商店事务及旧页面动作 > 整理背包正常返回保留货架，但换店后旧背包返回回调不能抢新页面",
+      "TypeError: Cannot read properties of undefined (reading 'ovBody')",
+      " ❯ game/src/run/game.run.shop.js:515:62",
+      " ❯ Object.shopOpenBag game/src/run/game.run.shop.js:483:76",
+      " ❯ tests/shop-transaction-lifecycle.test.js:122:10"
+    ]
+  },
+  {
+    "file": "tests/skull-sword-effective-session.test.js",
+    "errors": [
+      " FAIL  tests/skull-sword-effective-session.test.js > BOSS逐UID变形含临时初始牌，卡面/详情/aria/选敌同源且重复回手不污染原卡",
+      "TypeError: Cannot read properties of null (reading 'textContent')",
+      " ❯ tests/skull-sword-effective-session.test.js:93:45"
+    ]
+  },
+  {
+    "file": "tests/stealth-term.test.js",
+    "errors": [
+      " FAIL  tests/stealth-term.test.js > 潜行卡面词条 > 潜匿与破隐说明都接入独立讲解，点击词条不触发卡牌",
+      "TypeError: Cannot read properties of null (reading 'hidden')",
+      " ❯ tests/stealth-term.test.js:13:16"
+    ]
+  },
+  {
+    "file": "tests/sys03-altar-restore-txn.test.js",
+    "errors": [
+      " FAIL  tests/sys03-altar-restore-txn.test.js > 奖励② 传说+装备：满包时两张保留，整理后领取一次并可继续探索",
+      "AssertionError: expected '\\n    祭坛回赠 · 传说卡与装备卡领取奖励奖励可分别领取\\n    …' to contain '放不下的保留'",
+      " ❯ tests/sys03-altar-restore-txn.test.js:229:37"
+    ]
+  },
+  {
+    "file": "tests/sys03-loot-shop-txn.test.js",
+    "errors": [
+      " FAIL  tests/sys03-loot-shop-txn.test.js > SYS-03 搜刮页事务序（chests.js） > 满包整理通过背包命令入口，返回后保留所选卡与待领状态",
+      "TypeError: Cannot read properties of null (reading 'click')",
+      " ❯ revealFirst tests/sys03-loot-shop-txn.test.js:95:52",
+      " ❯ tests/sys03-loot-shop-txn.test.js:119:14"
+    ]
+  },
+  {
+    "file": "tests/term-tips-lifecycle.test.js",
+    "errors": [
+      " FAIL  tests/term-tips-lifecycle.test.js > term tooltip pointer lifecycle > does not accumulate release listeners across ordinary presses or cancellations",
+      "TypeError: Cannot read properties of null (reading 'hidden')",
+      " ❯ tests/term-tips-lifecycle.test.js:32:19"
+    ]
+  },
+  {
+    "file": "tests/xart-z1-batch1.test.js",
+    "errors": [
+      " FAIL  tests/xart-z1-batch1.test.js > A3-ALTAR-01 祭坛道具献祭路径的复原页跟祭坛身份 > openPocketRestore 道具路径传 opts，不落默认营火休整",
+      "AssertionError: expected '/* ==================================…' to match /openPocketRestore\\(Math\\.min\\(2, rest…/",
+      " ❯ tests/xart-z1-batch1.test.js:36:19",
+      "Error: [vitest-worker]: Timeout calling \"onTaskUpdate\"",
+      " ❯ Object.onTimeoutError ../../../../../../../%E5%A4%AA%E5%B9%B3/AppData/Local/Temp/sdt-staged-7jWVnB/snapshot/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/rpc.-pEldfrD.js:53:10",
+      " ❯ Timeout._onTimeout ../../../../../../../%E5%A4%AA%E5%B9%B3/AppData/Local/Temp/sdt-staged-7jWVnB/snapshot/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/index.B521nVV-.js:59:62",
+      " ❯ listOnTimeout node:internal/timers:605:17",
+      " ❯ processTimers node:internal/timers:541:7",
+      "Error: [vitest-worker]: Timeout calling \"onTaskUpdate\"",
+      " ❯ Object.onTimeoutError ../../../../../../../%E5%A4%AA%E5%B9%B3/AppData/Local/Temp/sdt-staged-7jWVnB/snapshot/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/rpc.-pEldfrD.js:53:10",
+      " ❯ Timeout._onTimeout ../../../../../../../%E5%A4%AA%E5%B9%B3/AppData/Local/Temp/sdt-staged-7jWVnB/snapshot/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vitest/dist/chunks/index.B521nVV-.js:59:62",
+      " ❯ listOnTimeout node:internal/timers:605:17"
+    ]
+  }
+]

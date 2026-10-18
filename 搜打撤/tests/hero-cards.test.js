@@ -295,9 +295,14 @@ describe('英雄卡实打 · 法师', () => {
     expect(snap().pstat.status.spellUp).toBe(1);
     expect(seen(g, '回合开始时'), slice(g)).toBe(true);      // 回合开始段已注册
     BattleSession.commands.endTurn();
-    const s = await nextTurn();
-    expect(seen(g, '发现'), `回合开始应结算发现：${slice(g)}`).toBe(true);
-    if (s.discovering) BattleSession.commands.pickDiscover(0);
+    // 不用 nextTurn 自动代选；必须确认真正出现候选，而非只看到注册日志。
+    for (let i = 0; i < 400 && !snap().discovering; i++) await tick();
+    const s = snap();
+    expect(s.discovering, `回合开始应出现发现候选：${slice(g)}`).toBeTruthy();
+    const handBefore = s.hand.length;
+    BattleSession.commands.pickDiscover(0);
+    await drain();
+    expect(snap().hand.length).toBe(handBefore + 1);
     await drain();
     BattleSession.commands.flee();
     await drain(20);

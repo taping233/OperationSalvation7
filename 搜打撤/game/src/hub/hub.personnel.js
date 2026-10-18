@@ -9,6 +9,7 @@ import { bindCardNavigation } from './hub.presentation.js';
 import { cardBrowserHTML, bindCardBrowser, refreshCardBrowser } from '../ui/card-browser.js';
 import { decorateInventoryZoom } from '../ui/inventory-zoom.js';
 import { animateBaseRefresh } from './base-motion-v4.js';
+import { partnerInteractionHTML, mountPartnerInteraction } from '../ui/partner-interaction.js';
 
 // 配置页默认大图单独版本化，原定稿、外观缩略图与其他页面仍走 Art.skinUrl。
 const personnelDefaultPortraits = Object.freeze({ wu: 'portraits/personnel/wu-default-cutout-v1.webp' });
@@ -76,7 +77,7 @@ function petsHTML(base) {
   return `<div class="companion-toolbar"><button class="mini-btn" data-act="personnelHome">返回角色</button><span>已相遇 <b>${owned.length}/${pets.length}</b></span><button class="mini-btn${browse.hatch ? ' ok' : ''}" data-act="personHatchView" aria-expanded="${browse.hatch}">[[icon:paw]] 孵化新伙伴 <small>${eggs} 枚蛋</small></button></div>
 
     <div class="person-stage partner-stage"><nav class="person-roster" aria-label="伙伴档案切换">${pets.map(pet => `<button class="person-face${pet.id === selected.id ? ' on' : ''}${owned.includes(pet.id) ? '' : ' unowned'}" data-act="personPet" data-id="${pet.id}" aria-label="查看${escAttr(pet.name)}" aria-pressed="${pet.id === selected.id}">${partnerPortrait(pet.id)}<b>${esc(pet.name)}</b><small>${base.carriedPet()?.id === pet.id ? '随行中' : owned.includes(pet.id) ? `Lv.${base.petLevel(pet.id)}` : '未相遇'}</small></button>`).join('')}</nav>
-    <div class="partner-display${have ? '' : ' unowned'}"><small>伙伴 / 0${pets.indexOf(selected) + 1}</small>${partnerPortrait(selected.id)}<h3>${esc(selected.name)}</h3><span class="partner-state${carried ? ' carried' : ''}">${carried ? '随行中' : have ? '已相遇' : '未相遇'}</span></div>
+    <div class="partner-display${have ? '' : ' unowned'}"><small>伙伴 / 0${pets.indexOf(selected) + 1}</small>${have ? partnerInteractionHTML(partnerPortrait(selected.id), selected) : partnerPortrait(selected.id)}<h3>${esc(selected.name)}</h3><span class="partner-state${carried ? ' carried' : ''}">${carried ? '随行中' : have ? '已相遇' : '未相遇'}</span></div>
     <article class="person-details partner-details"><header><small>伙伴档案</small><h3>随行能力</h3></header><p class="partner-perk">${esc(selected.desc.replace(/^携带效果：/, ''))}</p><dl class="warehouse-facts"><div><dt>等级</dt><dd>${have ? `Lv.${lv}` : '未相遇'}</dd></div><div><dt>${have ? '携带时安全格' : '初次携带安全格'}</dt><dd>${safe} 格</dd></div></dl>
     <button class="mini-btn ok base-command base-command-primary" data-act="selPet" data-id="${selected.id}"${!have || carried ? ' disabled' : ''}>${carried ? '当前随行伙伴' : have ? '携带出征' : '相遇后可携带'}</button>
     <section><h4>${have ? '本次培养' : '相遇途径'}</h4>${have ? `<div class="companion-growth"><span>Lv.${lv}<b>→</b>${maxed ? 'MAX' : `Lv.${lv + 1}`}</span><span>安全格 ${safe}<b>→</b>${maxed ? safe : nextSafe}</span></div>${linkedCostsHTML([{name: "口粮", have: base.data.rations, need: maxed ? null : cost}])}<button class="mini-btn ok base-command base-command-primary" data-act="upPet" data-id="${selected.id}"${maxed || base.data.rations < cost ? ' disabled' : ''}>${maxed ? '已达培养上限' : '培养伙伴'}</button><p class="hint">${maxed ? '伙伴已完成培养' : base.data.rations < cost ? `还需 ${cost - base.data.rations} 口粮` : '安全格加成在携带时生效'}</p>${!maxed && base.data.rations < cost ? '<button class="base-link source-link" data-act="hubTab" data-tab="shop" data-trade-mode="buy">交易所补充口粮 →</button>' : ''}` : '<p>在远征宝箱中取得伙伴蛋，回到基地孵化，与尚未拥有的伙伴相遇。</p><button class="mini-btn" data-act="personHatchView">查看孵化条件</button>'}</section></article></div>`;
@@ -171,4 +172,5 @@ export function bindPersonnel({ ui, refresh, sound }) {
     if (result.ok) { sound.ding(); window.SDT.Meta.checkUnlocks(); browse.pet = result.pet.id; }
     refresh();
   });
+  return mountPartnerInteraction(document.querySelector('.partner-display [data-partner-play]'));
 }

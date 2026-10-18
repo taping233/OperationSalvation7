@@ -1,0 +1,50 @@
+{
+  "files": [
+    {
+      "path": "tests/map-render-performance.test.js",
+      "beforeSha256": "ae211c083acebb1c21929a2640c1cb340c7a6458ba678d6df118e7588938288d",
+      "afterSha256": "c31bd16d037ab044c8d71bbd9d2697fdeff44b525a732e71b4c63521a01a2e8b"
+    },
+    {
+      "path": "tests/e4-async-entry.test.js",
+      "beforeSha256": "9a6e16091be42558ca4207aa50fd9560e6b1707d984960b465b9a8b6f90bb107",
+      "afterSha256": "3fbd7e31fc17a69cb0f5960100d75e757db269fb5c7596b1980f71dd29b90caf"
+    },
+    {
+      "path": "tests/dev-tools-lazy-entry.test.js",
+      "beforeSha256": "dd98fc89e32fd02d2feb588d6a138c9464fb4fa997e5c6aacbe9f28d967e6a6e",
+      "afterSha256": "e41d1b61e55722424e28604e238398377bfea46f3874d0c18bee578dec577063"
+    },
+    {
+      "path": "tests/e8-card-inventory.test.js",
+      "beforeSha256": "918a451685fda1973866ba03ac079cea4f3227a0f3ba73dbc6537cc4985aea25",
+      "afterSha256": "ccfa985505433e40969264b8b7a24303eb5c13566ba6dd3062e006a7cab51c96"
+    },
+    {
+      "path": "tests/m-batch-production.test.js",
+      "beforeSha256": "0383c8dfa60a1c540608b0c893eb31c82d13224328dffac95c4ea159e7799a5d",
+      "afterSha256": "a90e150b1f40c3ce369a90df2a9b78d2aa762d5afa6449ffbe8c2e2d2314ab7f"
+    }
+  ],
+  "productionInputs": "Git index text mirror; index-inputs.json pins each source blob",
+  "productionChanges": [],
+  "changes": [
+    "Exact five HTML script roots including cover-context",
+    "Boss launch exact options without directBossStart",
+    "Altar projected icon exact altar",
+    "Five approved production face changes with fixed before/after values; frozen before/CARDS_SYNC unchanged",
+    "Mystery potion exact active-battle/next-turn description and M9 hosted rule; old and new value guards"
+  ],
+  "mutationGuards": "Existing lamp, backupcell and immutable CARDS_SYNC guards preserved; 25 new rejection branches for five exact face revisions plus five for mystery potion",
+  "validation": {
+    "targetFiles": 5,
+    "passed": 74,
+    "skipped": 1,
+    "failed": 0,
+    "skipReason": "Existing explicit inventory export requires opt-in environment; before evidence stays frozen",
+    "eslintExitCode": 0,
+    "diffCheckExitCode": 0,
+    "command": "node D:/素材/代号柒/搜打撤/node_modules/vitest/vitest.mjs run --config vite.integration.config.mjs --fileParallelism --maxWorkers=3 tests/map-render-performance.test.js tests/e4-async-entry.test.js tests/dev-tools-lazy-entry.test.js tests/e8-card-inventory.test.js tests/m-batch-production.test.js"
+  },
+  "boundaries": "No full suite, build, browser, index, shared docs, cards-sync, or in-flight event changes modified."
+}

@@ -1,0 +1,390 @@
+{
+  "status": "generated-awaiting-visual-review",
+  "recipe_baseline": "3.4",
+  "comparison": "overall recipe comparison: artist chain and style language vary together; not artist-only causal attribution",
+  "identity_reference": {
+    "path": "game/assets/portraits/full/wu.webp",
+    "sha256": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc",
+    "use": "visually inspected and translated into character tags; no image upload or vibe encoding"
+  },
+  "style_sources": [
+    "nai5_community_pack_mengshen_korean_0045",
+    "nai5_community_pack_mengshen_september_2026_0662"
+  ],
+  "latest_preference": "D preferred; third and fourth variants D-led",
+  "notes": "Same character, pose, layout, seed, model, size, sampler, quality and UC for all. Variant04 changes lighting/time only from03. Fixed seed does not guarantee identical composition after prompt changes.",
+  "items": [
+    {
+      "id": "01-current-night",
+      "label": "01 / 现行版 · 夜景",
+      "artist_block": "0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::",
+      "style_block": "arknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.",
+      "status": "generated",
+      "request": {
+        "input": "1girl, solo, full body, three-quarter view, looking at viewer, confident smile.\n\nFinished environmental game illustration, arknights, futuristic city.\n\nWu sits sideways on a low modern observation-terrace bench, both boots resting on the deck, knees together, right hand resting on her lap, left palm on the bench beside her hip. She occupies the left half, her face turned toward us; the city fills the right half. Entire head, hair bow and boots in frame. A low railing leads toward layered towers, elevated transit tracks and distant mountains; light snow along roof edges. No other people.\n\nWinter night, deep blue sky, cool blue ambient light on both figure and terrace, small warm city windows below, a subtle warm reflection on her cheek, distant haze.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1216,
+          "height": 832,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": true,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 1771067347,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, holding sword, unsheathed sword, hair over one eye, blue star pattern, upskirt, underwear, medieval castle, animal ears",
+          "characterPrompts": [
+            {
+              "prompt": "1girl, adult woman, pale skin, cyan blue eyes, silver white long hair in a high ponytail, parted bangs, both eyes visible, blue satin ribbon bow at ponytail base, black round sunglasses on top of her head, black rose on her left temple. Off-shoulder charcoal black long-sleeved dress, layered ruffles at neckline cuffs and above-knee hem, black waist sash, bare legs, black ankle boots. Black straight sword sheathed diagonally across her back, hilt behind her right shoulder, sheath tip behind her left leg. Confident gentle smile, small fang.",
+              "uc": "",
+              "center": {
+                "x": 0.32,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, full body, three-quarter view, looking at viewer, confident smile.\n\nFinished environmental game illustration, arknights, futuristic city.\n\nWu sits sideways on a low modern observation-terrace bench, both boots resting on the deck, knees together, right hand resting on her lap, left palm on the bench beside her hip. She occupies the left half, her face turned toward us; the city fills the right half. Entire head, hair bow and boots in frame. A low railing leads toward layered towers, elevated transit tracks and distant mountains; light snow along roof edges. No other people.\n\nWinter night, deep blue sky, cool blue ambient light on both figure and terrace, small warm city windows below, a subtle warm reflection on her cheek, distant haze.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "1girl, adult woman, pale skin, cyan blue eyes, silver white long hair in a high ponytail, parted bangs, both eyes visible, blue satin ribbon bow at ponytail base, black round sunglasses on top of her head, black rose on her left temple. Off-shoulder charcoal black long-sleeved dress, layered ruffles at neckline cuffs and above-knee hem, black waist sash, bare legs, black ankle boots. Black straight sword sheathed diagonally across her back, hilt behind her right shoulder, sheath tip behind her left leg. Confident gentle smile, small fang.",
+                  "centers": [
+                    {
+                      "x": 0.32,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": true,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, holding sword, unsheathed sword, hair over one eye, blue star pattern, upskirt, underwear, medieval castle, animal ears",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.32,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": true,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": ".tmp/nai/wu-style-AD-20261016/01-current-night.png",
+      "sha256": "6766b9d5fe2006e94d5f3dbabf5787886ded8d9e570c3a3766434fb7e8c93b48",
+      "bytes": 1528245,
+      "gallery_asset": "assets/01-current-night.webp",
+      "gallery_sha256": "de4b02596a85ed92117a6d6a527fb26c7a886890119e7fa9d4b0ef21e352bbb2"
+    },
+    {
+      "id": "02-A-night",
+      "label": "02 / A 向 · 夜景",
+      "artist_block": "0.7::artist:yyb::, 0.6::artist:ruoganzhao::, 0.4::artist:wenquangua::, 0.3::artist:kuuus::",
+      "style_block": "arknights, refined painterly anime illustration, clean complete silhouettes, carefully resolved face and hands, grouped hair, dimensional angular cloth folds, subtle material-specific highlights, delicate skin transitions. Crisp focal edges, quieter background detail, rich restrained color, cool gray shadow planes with concentrated colored accents.",
+      "status": "generated",
+      "request": {
+        "input": "1girl, solo, full body, three-quarter view, looking at viewer, confident smile.\n\nFinished environmental game illustration, arknights, futuristic city.\n\nWu sits sideways on a low modern observation-terrace bench, both boots resting on the deck, knees together, right hand resting on her lap, left palm on the bench beside her hip. She occupies the left half, her face turned toward us; the city fills the right half. Entire head, hair bow and boots in frame. A low railing leads toward layered towers, elevated transit tracks and distant mountains; light snow along roof edges. No other people.\n\nWinter night, deep blue sky, cool blue ambient light on both figure and terrace, small warm city windows below, a subtle warm reflection on her cheek, distant haze.\n\n0.7::artist:yyb::, 0.6::artist:ruoganzhao::, 0.4::artist:wenquangua::, 0.3::artist:kuuus::\n\narknights, refined painterly anime illustration, clean complete silhouettes, carefully resolved face and hands, grouped hair, dimensional angular cloth folds, subtle material-specific highlights, delicate skin transitions. Crisp focal edges, quieter background detail, rich restrained color, cool gray shadow planes with concentrated colored accents.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1216,
+          "height": 832,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": true,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 1771067347,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, holding sword, unsheathed sword, hair over one eye, blue star pattern, upskirt, underwear, medieval castle, animal ears",
+          "characterPrompts": [
+            {
+              "prompt": "1girl, adult woman, pale skin, cyan blue eyes, silver white long hair in a high ponytail, parted bangs, both eyes visible, blue satin ribbon bow at ponytail base, black round sunglasses on top of her head, black rose on her left temple. Off-shoulder charcoal black long-sleeved dress, layered ruffles at neckline cuffs and above-knee hem, black waist sash, bare legs, black ankle boots. Black straight sword sheathed diagonally across her back, hilt behind her right shoulder, sheath tip behind her left leg. Confident gentle smile, small fang.",
+              "uc": "",
+              "center": {
+                "x": 0.32,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, full body, three-quarter view, looking at viewer, confident smile.\n\nFinished environmental game illustration, arknights, futuristic city.\n\nWu sits sideways on a low modern observation-terrace bench, both boots resting on the deck, knees together, right hand resting on her lap, left palm on the bench beside her hip. She occupies the left half, her face turned toward us; the city fills the right half. Entire head, hair bow and boots in frame. A low railing leads toward layered towers, elevated transit tracks and distant mountains; light snow along roof edges. No other people.\n\nWinter night, deep blue sky, cool blue ambient light on both figure and terrace, small warm city windows below, a subtle warm reflection on her cheek, distant haze.\n\n0.7::artist:yyb::, 0.6::artist:ruoganzhao::, 0.4::artist:wenquangua::, 0.3::artist:kuuus::\n\narknights, refined painterly anime illustration, clean complete silhouettes, carefully resolved face and hands, grouped hair, dimensional angular cloth folds, subtle material-specific highlights, delicate skin transitions. Crisp focal edges, quieter background detail, rich restrained color, cool gray shadow planes with concentrated colored accents.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "1girl, adult woman, pale skin, cyan blue eyes, silver white long hair in a high ponytail, parted bangs, both eyes visible, blue satin ribbon bow at ponytail base, black round sunglasses on top of her head, black rose on her left temple. Off-shoulder charcoal black long-sleeved dress, layered ruffles at neckline cuffs and above-knee hem, black waist sash, bare legs, black ankle boots. Black straight sword sheathed diagonally across her back, hilt behind her right shoulder, sheath tip behind her left leg. Confident gentle smile, small fang.",
+                  "centers": [
+                    {
+                      "x": 0.32,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": true,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, holding sword, unsheathed sword, hair over one eye, blue star pattern, upskirt, underwear, medieval castle, animal ears",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.32,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": true,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": ".tmp/nai/wu-style-AD-20261016/02-A-night.png",
+      "sha256": "1287101a17fb34c60be3f6f9369593d2daa3e54f0907ea09a87a9d1a12cd99d9",
+      "bytes": 1457967,
+      "gallery_asset": "assets/02-A-night.webp",
+      "gallery_sha256": "15e7df21a264af0c8589f3e1a85bede39df849304362ef8d8eaa428a91952e39"
+    },
+    {
+      "id": "03-D-led-night",
+      "label": "03 / D 主导 A＋D · 夜景",
+      "artist_block": "0.9::artist:anmi::, 0.3::artist:yyb::, 0.3::artist:ruoganzhao::, 0.2::artist:kuuus::",
+      "style_block": "arknights, atmospheric anime game illustration, anime coloring, clean selective lineart, clear grouped shadows, dimensional clothing, refined face and hands. Character and scenery share the same ambient light and reflected colors. Distinct foreground middle distance and distant city, atmospheric perspective, a unified broad color structure, small luminous accents, crisp character focal edges with softer quieter distant architecture.",
+      "status": "generated",
+      "request": {
+        "input": "1girl, solo, full body, three-quarter view, looking at viewer, confident smile.\n\nFinished environmental game illustration, arknights, futuristic city.\n\nWu sits sideways on a low modern observation-terrace bench, both boots resting on the deck, knees together, right hand resting on her lap, left palm on the bench beside her hip. She occupies the left half, her face turned toward us; the city fills the right half. Entire head, hair bow and boots in frame. A low railing leads toward layered towers, elevated transit tracks and distant mountains; light snow along roof edges. No other people.\n\nWinter night, deep blue sky, cool blue ambient light on both figure and terrace, small warm city windows below, a subtle warm reflection on her cheek, distant haze.\n\n0.9::artist:anmi::, 0.3::artist:yyb::, 0.3::artist:ruoganzhao::, 0.2::artist:kuuus::\n\narknights, atmospheric anime game illustration, anime coloring, clean selective lineart, clear grouped shadows, dimensional clothing, refined face and hands. Character and scenery share the same ambient light and reflected colors. Distinct foreground middle distance and distant city, atmospheric perspective, a unified broad color structure, small luminous accents, crisp character focal edges with softer quieter distant architecture.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1216,
+          "height": 832,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": true,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 1771067347,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, holding sword, unsheathed sword, hair over one eye, blue star pattern, upskirt, underwear, medieval castle, animal ears",
+          "characterPrompts": [
+            {
+              "prompt": "1girl, adult woman, pale skin, cyan blue eyes, silver white long hair in a high ponytail, parted bangs, both eyes visible, blue satin ribbon bow at ponytail base, black round sunglasses on top of her head, black rose on her left temple. Off-shoulder charcoal black long-sleeved dress, layered ruffles at neckline cuffs and above-knee hem, black waist sash, bare legs, black ankle boots. Black straight sword sheathed diagonally across her back, hilt behind her right shoulder, sheath tip behind her left leg. Confident gentle smile, small fang.",
+              "uc": "",
+              "center": {
+                "x": 0.32,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, full body, three-quarter view, looking at viewer, confident smile.\n\nFinished environmental game illustration, arknights, futuristic city.\n\nWu sits sideways on a low modern observation-terrace bench, both boots resting on the deck, knees together, right hand resting on her lap, left palm on the bench beside her hip. She occupies the left half, her face turned toward us; the city fills the right half. Entire head, hair bow and boots in frame. A low railing leads toward layered towers, elevated transit tracks and distant mountains; light snow along roof edges. No other people.\n\nWinter night, deep blue sky, cool blue ambient light on both figure and terrace, small warm city windows below, a subtle warm reflection on her cheek, distant haze.\n\n0.9::artist:anmi::, 0.3::artist:yyb::, 0.3::artist:ruoganzhao::, 0.2::artist:kuuus::\n\narknights, atmospheric anime game illustration, anime coloring, clean selective lineart, clear grouped shadows, dimensional clothing, refined face and hands. Character and scenery share the same ambient light and reflected colors. Distinct foreground middle distance and distant city, atmospheric perspective, a unified broad color structure, small luminous accents, crisp character focal edges with softer quieter distant architecture.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "1girl, adult woman, pale skin, cyan blue eyes, silver white long hair in a high ponytail, parted bangs, both eyes visible, blue satin ribbon bow at ponytail base, black round sunglasses on top of her head, black rose on her left temple. Off-shoulder charcoal black long-sleeved dress, layered ruffles at neckline cuffs and above-knee hem, black waist sash, bare legs, black ankle boots. Black straight sword sheathed diagonally across her back, hilt behind her right shoulder, sheath tip behind her left leg. Confident gentle smile, small fang.",
+                  "centers": [
+                    {
+                      "x": 0.32,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": true,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, holding sword, unsheathed sword, hair over one eye, blue star pattern, upskirt, underwear, medieval castle, animal ears",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.32,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": true,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": ".tmp/nai/wu-style-AD-20261016/03-D-led-night.png",
+      "sha256": "400de511c93a2e8d5a02a0bc2b646358e5a2dba178b9c257b733c404e96ac9ff",
+      "bytes": 1306316,
+      "gallery_asset": "assets/03-D-led-night.webp",
+      "gallery_sha256": "627a5a6acdad7f428ddfa9fb362778a674db989d9e15abbaa007e54000eb17c4"
+    },
+    {
+      "id": "04-D-led-day",
+      "label": "04 / D 主导 A＋D · 日间",
+      "artist_block": "0.9::artist:anmi::, 0.3::artist:yyb::, 0.3::artist:ruoganzhao::, 0.2::artist:kuuus::",
+      "style_block": "arknights, atmospheric anime game illustration, anime coloring, clean selective lineart, clear grouped shadows, dimensional clothing, refined face and hands. Character and scenery share the same ambient light and reflected colors. Distinct foreground middle distance and distant city, atmospheric perspective, a unified broad color structure, small luminous accents, crisp character focal edges with softer quieter distant architecture.",
+      "status": "generated",
+      "request": {
+        "input": "1girl, solo, full body, three-quarter view, looking at viewer, confident smile.\n\nFinished environmental game illustration, arknights, futuristic city.\n\nWu sits sideways on a low modern observation-terrace bench, both boots resting on the deck, knees together, right hand resting on her lap, left palm on the bench beside her hip. She occupies the left half, her face turned toward us; the city fills the right half. Entire head, hair bow and boots in frame. A low railing leads toward layered towers, elevated transit tracks and distant mountains; light snow along roof edges. No other people.\n\nWinter daytime, pale blue sky, cool clear daylight on both figure and terrace, gentle warm sunlight on her cheek and silver hair, distant mountains fading into atmospheric haze.\n\n0.9::artist:anmi::, 0.3::artist:yyb::, 0.3::artist:ruoganzhao::, 0.2::artist:kuuus::\n\narknights, atmospheric anime game illustration, anime coloring, clean selective lineart, clear grouped shadows, dimensional clothing, refined face and hands. Character and scenery share the same ambient light and reflected colors. Distinct foreground middle distance and distant city, atmospheric perspective, a unified broad color structure, small luminous accents, crisp character focal edges with softer quieter distant architecture.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1216,
+          "height": 832,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": true,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 1771067347,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, holding sword, unsheathed sword, hair over one eye, blue star pattern, upskirt, underwear, medieval castle, animal ears",
+          "characterPrompts": [
+            {
+              "prompt": "1girl, adult woman, pale skin, cyan blue eyes, silver white long hair in a high ponytail, parted bangs, both eyes visible, blue satin ribbon bow at ponytail base, black round sunglasses on top of her head, black rose on her left temple. Off-shoulder charcoal black long-sleeved dress, layered ruffles at neckline cuffs and above-knee hem, black waist sash, bare legs, black ankle boots. Black straight sword sheathed diagonally across her back, hilt behind her right shoulder, sheath tip behind her left leg. Confident gentle smile, small fang.",
+              "uc": "",
+              "center": {
+                "x": 0.32,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1girl, solo, full body, three-quarter view, looking at viewer, confident smile.\n\nFinished environmental game illustration, arknights, futuristic city.\n\nWu sits sideways on a low modern observation-terrace bench, both boots resting on the deck, knees together, right hand resting on her lap, left palm on the bench beside her hip. She occupies the left half, her face turned toward us; the city fills the right half. Entire head, hair bow and boots in frame. A low railing leads toward layered towers, elevated transit tracks and distant mountains; light snow along roof edges. No other people.\n\nWinter daytime, pale blue sky, cool clear daylight on both figure and terrace, gentle warm sunlight on her cheek and silver hair, distant mountains fading into atmospheric haze.\n\n0.9::artist:anmi::, 0.3::artist:yyb::, 0.3::artist:ruoganzhao::, 0.2::artist:kuuus::\n\narknights, atmospheric anime game illustration, anime coloring, clean selective lineart, clear grouped shadows, dimensional clothing, refined face and hands. Character and scenery share the same ambient light and reflected colors. Distinct foreground middle distance and distant city, atmospheric perspective, a unified broad color structure, small luminous accents, crisp character focal edges with softer quieter distant architecture.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "1girl, adult woman, pale skin, cyan blue eyes, silver white long hair in a high ponytail, parted bangs, both eyes visible, blue satin ribbon bow at ponytail base, black round sunglasses on top of her head, black rose on her left temple. Off-shoulder charcoal black long-sleeved dress, layered ruffles at neckline cuffs and above-knee hem, black waist sash, bare legs, black ankle boots. Black straight sword sheathed diagonally across her back, hilt behind her right shoulder, sheath tip behind her left leg. Confident gentle smile, small fang.",
+                  "centers": [
+                    {
+                      "x": 0.32,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": true,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, holding sword, unsheathed sword, hair over one eye, blue star pattern, upskirt, underwear, medieval castle, animal ears",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.32,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": true,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": ".tmp/nai/wu-style-AD-20261016/04-D-led-day.png",
+      "sha256": "61bede676a6f079eb7076c727ba5ade8b8f1d91d1c20ff4b42951bea4edf4f5f",
+      "bytes": 1371145,
+      "gallery_asset": "assets/04-D-led-day.webp",
+      "gallery_sha256": "1cf897bff1cefb102fa4ee3f0b695476b473fec7721fcdf74d58dc46917fe24b"
+    }
+  ]
+}

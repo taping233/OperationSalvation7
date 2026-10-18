@@ -1,0 +1,24 @@
+{
+  "event": "draw",
+  "source_sha256": "a16225c9beac75c4d83eb0cb9d59f33c773768a9d95d330fe6b56dc81c56cfb7",
+  "runtime_sha256": "a16225c9beac75c4d83eb0cb9d59f33c773768a9d95d330fe6b56dc81c56cfb7",
+  "before_catalog_sha256": "e06c50a41cbc78268ddef215725b40aab740e70dbc3e2129610e5398ca475eb4",
+  "new_catalog_sha256": "51f2065ad4e271872934efa2969aafd59c1aa89eb183ef735e9631ad72510c82",
+  "source": "https://freesound.org/people/f4ngy/sounds/240777/",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "modifications": "none to file; playback gain 0.26; no transcoding/cropping",
+  "ear_reviewed": false,
+  "guard_review": "pending parent independent review; no guard changed",
+  "level_check": {
+    "old_draw1_mono_rms": 0.020307319272,
+    "old_draw1_peak": 0.406335651875,
+    "new_mono_rms": 0.020511879517,
+    "new_peak": 0.615879416466,
+    "old_gain": 0.4,
+    "new_gain": 0.26,
+    "note": "Conservative attenuation keeps mono peak below previous draw1 effective peak; not perceived loudness matching."
+  },
+  "credits_updated": true,
+  "asset_manifest_added_entries": 1,
+  "tests": "119 passed in 2 files; targeted eslint passed"
+}

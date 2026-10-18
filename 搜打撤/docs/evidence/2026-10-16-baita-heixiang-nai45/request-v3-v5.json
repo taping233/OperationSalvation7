@@ -1,0 +1,157 @@
+{
+  "status": "generated",
+  "source_receipt": "request-v3.json",
+  "source_receipt_sha256": "81d1c0641de6a7b9564938aefa88382f425526310049bc19c231bba41c20cf7f",
+  "source_image": "D:\\素材\\代号柒\\.tmp\\nai\\baita-heixiang-nai45-20261016-v3.png",
+  "source_image_sha256": "8b4d8842d4a296b34cce7375a76aebd723b4c9e67f4de10f87d3cc1833cfb615",
+  "request": {
+    "input": "1girl, 1boy, two adults, close three-quarter shot, landscape. Figures fill canvas edge to edge; lower legs and skirt cropped.\n\nSeated woman foreground right overlaps warrior behind left; similar head sizes. He leans forward over her shoulder, brows lowered, stern stare. She sits sideways, face turned toward viewer, unreadable expression, hands on book in lap. His right fingers grip cup handle near mouth; left palm supports saucer below chest. Two books float behind her shoulders.\n\nDark upper half. Narrow cool sidelight from left catches faces and sleeves, bright lower skirt; his far eye and half torso lost in solid black. Dark paneled wall, stone base. Muted jade, bone white, ink black, gold and orange accents, weighty fabric, intimidating stillness.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": true,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 545764184,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, floating cup, floating saucer, giant, miniature person, chibi, white curtain, distant shot, flat cel shading",
+      "characterPrompts": [
+        {
+          "prompt": "adult man, muscular, 1.2::very dark brown skin::, lit skin remains deep brown. His black hair is slicked back from his forehead, fully exposing it. Amber eyes, stitched scar on his left cheek, black combat suit, single shoulder armor, black gloves, brown-orange scarf, greatsword on back, hilt above shoulder.",
+          "uc": "pale skin, light skin, smile",
+          "center": {
+            "x": 0.3,
+            "y": 0.4
+          },
+          "enabled": true
+        },
+        {
+          "prompt": "adult woman, long wavy dark brown hair, two gold hairpins, green eyes, white long-sleeved blouse, dark green suspender long skirt, ancient book on lap.",
+          "uc": "child, chibi, smile",
+          "center": {
+            "x": 0.65,
+            "y": 0.55
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, 1boy, two adults, close three-quarter shot, landscape. Figures fill canvas edge to edge; lower legs and skirt cropped.\n\nSeated woman foreground right overlaps warrior behind left; similar head sizes. He leans forward over her shoulder, brows lowered, stern stare. She sits sideways, face turned toward viewer, unreadable expression, hands on book in lap. His right fingers grip cup handle near mouth; left palm supports saucer below chest. Two books float behind her shoulders.\n\nDark upper half. Narrow cool sidelight from left catches faces and sleeves, bright lower skirt; his far eye and half torso lost in solid black. Dark paneled wall, stone base. Muted jade, bone white, ink black, gold and orange accents, weighty fabric, intimidating stillness.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult man, muscular, 1.2::very dark brown skin::, lit skin remains deep brown. His black hair is slicked back from his forehead, fully exposing it. Amber eyes, stitched scar on his left cheek, black combat suit, single shoulder armor, black gloves, brown-orange scarf, greatsword on back, hilt above shoulder.",
+              "centers": [
+                {
+                  "x": 0.3,
+                  "y": 0.4
+                }
+              ]
+            },
+            {
+              "char_caption": "adult woman, long wavy dark brown hair, two gold hairpins, green eyes, white long-sleeved blouse, dark green suspender long skirt, ancient book on lap.",
+              "centers": [
+                {
+                  "x": 0.65,
+                  "y": 0.55
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, floating cup, floating saucer, giant, miniature person, chibi, white curtain, distant shot, flat cel shading",
+          "char_captions": [
+            {
+              "char_caption": "pale skin, light skin, smile",
+              "centers": [
+                {
+                  "x": 0.3,
+                  "y": 0.4
+                }
+              ]
+            },
+            {
+              "char_caption": "child, chibi, smile",
+              "centers": [
+                {
+                  "x": 0.65,
+                  "y": 0.55
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\baita-heixiang-naiv5-20261016-v3-prompt.png",
+  "only_request_change": "model: nai-diffusion-4-5-full -> nai-diffusion-5-full",
+  "recipe_version": "3.4",
+  "references": [
+    {
+      "path": "C:\\Users\\太平\\Downloads\\2adba93cb14b22a3e68757ac758d4d09236908.png",
+      "role": "composition and extracted metadata; not uploaded",
+      "sha256": "3ada013f563e1a7a39bd36c2e5351b3170b50484686222fb9c844418983c1556"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\baita.webp",
+      "role": "current Baita identity; visually inspected; not uploaded",
+      "sha256": "ab6ab3c9f5c6e185b2d71ac7b719dd970fd259436f2675d163d2ea4aa849b218"
+    },
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp",
+      "role": "current Heixiang identity; visually inspected; not uploaded",
+      "sha256": "d8b76ee16b7d6bc85db83298a603f845fea39f139e42f97f41ebe9972fd50caa"
+    }
+  ],
+  "method": "Text-to-image from exact frozen v3 positive/negative and character prompts; no image upload.",
+  "seed": 545764184,
+  "sha256": "a66e0a8a743d1d42122a908964fed603e96e4dc150e4aae4e94139599ae02cda",
+  "visual_review": {
+    "source": "assistant viewed actual generated PNG",
+    "observations": [
+      "two adults in close landscape composition",
+      "dark-skinned armored Heixiang behind screen-left, frontal direct gaze, cup and saucer held",
+      "Baita brown wavy hair, green eyes, one-sided thin gold hairpins, white blouse, green suspenders and lap book",
+      "two floating books visible",
+      "Baita also holds a second cup, despite base prompt specifying her hands on lap book",
+      "male lower body cropped; standing leg posture not verifiable"
+    ],
+    "user_approved": false
+  },
+  "delivery": {
+    "game_integrated": false,
+    "tests_run": false,
+    "committed": false,
+    "original_image_in_git": false,
+    "single_generated_candidate": true
+  }
+}

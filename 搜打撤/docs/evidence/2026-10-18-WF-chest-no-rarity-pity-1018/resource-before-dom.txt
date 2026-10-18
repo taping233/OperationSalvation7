@@ -1,0 +1,43 @@
+- main:
+  - generic "持有金币":
+    - text: 金币
+    - generic: "0"
+  - generic "攻击力":
+    - text: 攻击
+    - generic: "4"
+  - button "离开对局":
+  - button:
+  - button "生命 30，上限 30":
+    - generic: 生命
+    - generic: 30/30
+  - text: ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT
+  - dialog:
+    - generic: 资源补给
+    - heading "物资投放点" [level=3]
+    - article:
+      - button "放大查看木材":
+        - img "木材"
+        - generic: 资源
+        - generic: ·古朴
+        - generic: 木材
+        - generic: 木材 ×1。
+      - button "收下"
+    - article:
+      - button "放大查看大量木材":
+        - img "大量木材"
+        - generic: 资源
+        - generic: ·稀有
+        - generic: 大量木材
+        - generic: 木材 ×2。
+      - button "收下"
+    - complementary "奖励操作":
+      - button "返回地图" [active]:
+        - generic: 返回地图
+    - button "整理背包"
+    - status: 两张资源卡中选择一张，其余永久放弃；未领取时保留在此处
+- navigation:
+  - generic: 物资格 · 内存隔离
+  - button "标准分档抽取"
+  - button "精英分档抽取"
+  - button "重进原物资格"
+  - status: "当前资源池 {\"稀有\":3,\"古朴\":2,\"史诗\":3}；木材（古朴） / 大量木材（稀有）"

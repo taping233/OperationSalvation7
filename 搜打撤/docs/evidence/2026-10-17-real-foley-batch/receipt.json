@@ -1,0 +1,66 @@
+{
+  "installed_utc": "2026-10-17T22:44:54.024300+00:00",
+  "listening_verified": false,
+  "files": [
+    {
+      "path": "sfx/real-foley/coinflip-01.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 62308,
+      "sha256": "60c652aca20c60e4fa6efe086f061bc52ddc66d7728dd23d9b625b7e6485a96c",
+      "source": "https://opengameart.org/content/fantasy-accessory-sfx-library",
+      "original_path": "accessory/sfx/coinflip-01.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only (foeLunge additionally retains existing 220ms envelope)"
+    },
+    {
+      "path": "sfx/real-foley/coinflip-02.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 43020,
+      "sha256": "44215b7af83d7e0d569b30898c94c5372e080675c05e3a030cfe1a764f843bc5",
+      "source": "https://opengameart.org/content/fantasy-accessory-sfx-library",
+      "original_path": "accessory/sfx/coinflip-02.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only (foeLunge additionally retains existing 220ms envelope)"
+    },
+    {
+      "path": "sfx/real-foley/book-page-02.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 129416,
+      "sha256": "b14e15141984eb84bcbe8841139d3f1d4715eac4e64cf52091acffd8fe440331",
+      "source": "https://opengameart.org/content/fantasy-sound-effects-tinysized-sfx",
+      "original_path": "tinysized/sfx-cc0/book-page-02.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only (foeLunge additionally retains existing 220ms envelope)"
+    },
+    {
+      "path": "sfx/real-foley/wood-tap-01.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 52880,
+      "sha256": "dac92db04d0a040d1d862638b26f0d0c0218b8fa27a2535728103ef24bcc8858",
+      "source": "https://opengameart.org/content/fantasy-accessory-sfx-library",
+      "original_path": "accessory/sfx/wood-bowl-hit-wood-spoon-01.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only (foeLunge additionally retains existing 220ms envelope)"
+    },
+    {
+      "path": "sfx/real-foley/tube-whoosh-01.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 59568,
+      "sha256": "6bf539745db12b4b546bb8bb1ab2f75ccf403db80c07fc8f473fa288d0d428b9",
+      "source": "https://opengameart.org/content/fantasy-sound-effects-tinysized-sfx",
+      "original_path": "tinysized/sfx-cc0/tube-plastic-whoosh-01.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only (foeLunge additionally retains existing 220ms envelope)"
+    },
+    {
+      "path": "sfx/real-foley/tube-whoosh-02.wav",
+      "ext": "wav",
+      "license": "CC0 1.0 — Vehicle / Jan Schupke; original recorded Foley",
+      "bytes": 70876,
+      "sha256": "2ba001b889f1465d949b5531e7c9f61425a0f81d2a40febe3bdb4e449e99c190",
+      "source": "https://opengameart.org/content/fantasy-sound-effects-tinysized-sfx",
+      "original_path": "tinysized/sfx-cc0/tube-plastic-whoosh-02.wav",
+      "processing": "none; original WAV bytes preserved; runtime gain only (foeLunge additionally retains existing 220ms envelope)"
+    }
+  ]
+}

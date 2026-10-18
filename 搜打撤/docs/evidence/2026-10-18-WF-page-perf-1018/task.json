@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-page-perf-1018",
+  "date": "2026-10-18",
+  "owner": "Friday",
+  "goal": "按所有页面入口并行核查并优化性能与资源开销，保持玩法和视觉语义",
+  "paths": [
+    "game/src",
+    "tests",
+    "docs/performance.md",
+    "docs/evidence/2026-10-18-WF-page-perf-1018"
+  ],
+  "doneWhen": [
+    "三个子代理提交分域页面覆盖和可核验的优化证据",
+    "相关定向测试与架构哨兵通过",
+    "当前窗口内置浏览器核验代表页面并如实记录覆盖边界"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "分域性能回归与架构哨兵通过，报告见hub/expedition/battle/shared",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "当前窗口真实新档基地至首战胜利及构造注能输入，见browser/README.md",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "三子代理覆盖表、A/B操作数、基线SHA和独立只读复核已齐",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "未测全部随机分支、长局、GPU/RSS、耳听或code9根因；整树暂存门另记"
+  ],
+  "updatedAt": "2026-10-18T07:13:09.394Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

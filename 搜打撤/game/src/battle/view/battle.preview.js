@@ -104,15 +104,21 @@ function semanticMatch(card, context) {
     && normalizeDesc(card.desc) === spec[3] ? { hits: spec[4] } : null;
 }
 
-/** @param {SnapshotBattleCard | null | undefined} card */
-function cardRuleHint(card) {
+/** @param {SnapshotBattleCard | null | undefined} card @param {string} [mode] */
+function cardRuleHint(card, mode) {
   if (!card) return '';
   const operation = card.rules?.triggers?.onPlay?.find(item => item.op === 'damage' && item.retarget === 'livingFoes');
-  if (!operation) return '';
+  const onPlay = card.rules?.triggers?.onPlay;
+  const drawsByType = onPlay
+    ? onPlay.some(item => item.op === 'draw' && item.filter)
+    : /从牌库中抽取\s*(\d+)\s*张?(初始攻击|装备|法术|武术|杀)牌?/.test(card.desc || '');
+  const drawHint = mode === 'normal' && drawsByType ? '普通战抽牌改为获得初始攻击。' : '';
+  if (!operation) return drawHint;
   const payment = card.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
-  return payment
+  const damageHint = payment
     ? `先消耗 ${payment.count} 张${payment.type || '手牌'}；${operation.hitCount} 段，目标倒下后按战场顺序转移。`
     : `${operation.hitCount} 段；目标倒下后按战场顺序转移。`;
+  return [drawHint, damageHint].filter(Boolean).join(' ');
 }
 
 /** @param {SnapshotFoe} foe */

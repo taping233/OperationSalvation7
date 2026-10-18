@@ -45,6 +45,22 @@ function nestPageBinding() {
     !UI.el?.overlay?.hidden && (!surface || UI.el?.ovBody?.firstElementChild === surface);
 }
 
+// Confirmation owns only presentation; callers recheck their exact cost before committing.
+function confirmNestCost(title, body, confirmLabel, commit, cancel) {
+  UI.showOverlay(title, `${body}<div class="ov-btns">
+    <button class="ov-btn" data-act="nestCostCancel" data-cancel="true">返回</button>
+    <button class="ov-btn danger" data-act="nestCostConfirm">${esc(confirmLabel)}</button></div>`, true);
+  const active = nestPageBinding();
+  let submitted = false;
+  UI.act('nestCostCancel', () => { if (active() && !submitted) { submitted = true; cancel(); } });
+  UI.act('nestCostConfirm', () => { if (active() && !submitted) { submitted = true; commit(); } });
+}
+function nestCardCostHTML(cards) {
+  const counts = new Map();
+  cards.forEach(card => counts.set(card.name, (counts.get(card.name) || 0) + 1));
+  return `<ul>${[...counts].map(([name, count]) => `<li>${esc(name)} ×${count}</li>`).join('')}</ul>`;
+}
+
 /* —— 直线 12 格（Item 17 同款定版思路：格子序列即地图）—— */
 const NEST_MAP = [
   { type: 'start', name: '研究所入口' },
@@ -255,7 +271,7 @@ export function renderNestMap() {
     <div class="ov-btns">${rows}</div>
     ${(game.pendingRunePick || []).length ? `<div class="ov-btns"><span class="dim">中符文箱显形了 3 块符文——选择 1 块带走：</span>
       ${(game.pendingRunePick || []).map((r2, i) => `<button class="mini-btn ok" data-act="nestPickRune${i}">${esc(r2.name)}（${r2.attrs.join('')}·${r2.rarity}）</button>`).join('')}</div>` : ''}
-    ${(game.nestTargetedBox || 0) > 0 ? `<div class="ov-btns"><span class="dim">定向大符文箱 ×${game.nestTargetedBox}——选择属性，立得 3 块该属性随机符文：</span>
+    ${(game.nestTargetedBox || 0) > 0 ? `<div class="ov-btns"><span class="dim">定向大符文箱 ×${game.nestTargetedBox}——选择属性生成 3 块随机符文；当前可收 ${Math.min(3, Math.max(0, 10 + (SDT.Base.data.nestBagUp || 0) - game.nestRunes.length))}/3 块，超出容量会散失：</span>
       ${['水','火','草','光','暗'].map(at => `<button class="mini-btn ok" data-act="nestBox${at}">${at}</button>`).join('')}</div>` : ''}
     <p class="ov-note">点击高亮的<b>下一格</b>推进 · 每次对战后回满血 · 牌盒即牌库（开局 5 张，每回合 2 费抽 1 张）</p>`, true);
   const active = nestPageBinding();
@@ -273,18 +289,33 @@ export function renderNestMap() {
   }));
   ['水','火','草','光','暗'].forEach(at => UI.act('nestBox' + at, () => {
     if (!active() || !(game.nestTargetedBox > 0)) return;
-    const cap = 10 + (SDT.Base.data.nestBagUp || 0);
+    openTargetedRuneBox(at);
+  }));
+}
+
+function openTargetedRuneBox(at) {
+  const cap = 10 + (SDT.Base.data.nestBagUp || 0);
+  const receive = Math.min(3, Math.max(0, cap - game.nestRunes.length));
+  const commit = () => {
+    if (!(game.nestTargetedBox > 0)) { renderNestMap(); return; }
+    const currentCap = 10 + (SDT.Base.data.nestBagUp || 0);
+    const currentRoom = Math.min(3, Math.max(0, currentCap - game.nestRunes.length));
+    if (currentRoom !== receive) { openTargetedRuneBox(at); return; }
     let received = 0;
     for (let k = 0; k < 3; k++) {
       const dual = Random.random('nest') < 0.007;
       const r = rollRune(() => Random.random('nest'), { forceAttrs: dual ? [at, rollAttribute(() => Random.random('nest'), [at])] : [at] });
-      if (game.nestRunes.length < cap) { game.nestRunes.push(r); received++; }
+      if (game.nestRunes.length < currentCap) { game.nestRunes.push(r); received++; }
     }
     game.nestTargetedBox--;
     UI.log(`[[icon:gem]] 定向大符文箱：获得 ${received} 块【${at}】属性符文${received < 3 ? `，背包已满散失 ${3 - received} 块` : ''}`, 'loot');
     saveGame();
     renderNestMap();
-  }));
+  };
+  if (receive === 3) { commit(); return; }
+  confirmNestCost('定向符文箱 · 容量不足', `<p class="ov-stats">符文背包 ${game.nestRunes.length}/${cap} 块</p>
+    <p>消耗 1 个定向箱，生成 3 块【${esc(at)}】属性符文：可收下 <b>${receive}</b> 块，将散失 <b>${3 - receive}</b> 块。</p>
+    <p class="ov-note">返回会保留箱子，本次尚未生成符文。</p>`, `开箱：收下 ${receive} 块，散失 ${3 - receive} 块`, commit, renderNestMap);
 }
 
 function enterNestCell(cell) {
@@ -444,39 +475,52 @@ function addRuneChest(kind) {
 /* —— 符文法阵：献祭 3 张牌选 1 符文；或献祭整个牌盒紧急撤离 —— */
 function openRuneCircle(done) {
   const runes = Array.from({ length: 5 }, () => rollRune(() => Random.random('nest')));
-  UI.showOverlay('[[icon:sparkles]] 符文法阵', `
-    <p class="ov-note">献祭 3 张牌盒中的卡牌（初始攻击不行），从 5 块随机符文中选 1 块；<br>或者献祭<b>整个牌盒</b>，紧急撤出研究所。</p>
-    <div class="ov-btns">${runes.map((r, i) => `<button class="ov-btn ${i === 0 ? 'ok' : ''}" data-act="rc${i}">${esc(r.name)}（${r.attrs.join('')}·${r.rarity}）</button>`).join('')}</div>
-    <div class="ov-btns">
-      <button class="ov-btn ghost" data-act="rcBox">献祭整个牌盒 · 紧急撤离</button>
-      <button class="ov-btn" data-act="rcBack">离开法阵</button>
-    </div>`, true);
-  const active = nestPageBinding();
-  runes.forEach((r, i) => UI.act('rc' + i, () => {
-    if (!active()) return;
-    const cap = 10 + (SDT.Base.data.nestBagUp || 0);
-    if (game.nestRunes.length >= cap) { UI.log('[[icon:gem]] 符文背包已满（' + cap + ' 块）', 'warn'); return; }
-    const sac = game.cardBox.filter(c => !SDT.Base.isSha(c)).slice(0, 3);
-    if (sac.length < 3) { UI.log('[[icon:cross]] 牌盒中可献祭的卡牌不足 3 张（初始攻击不能献祭）', 'warn'); return; }
-    game.cardBox = game.cardBox.filter(c => !sac.includes(c));
-    game.nestRunes.push(r);
-    UI.log(`[[icon:sparkles]] 献祭 3 张卡牌，符文法阵赐下【${esc(r.name)}】（${r.attrs.join('')}）`, 'loot');
-    done();
-  }));
-  UI.act('rcBox', () => {
-    if (!active()) return;
-    game.cardBox = game.cardBox.filter(c => SDT.Base.isSha(c));
-    UI.log('[[icon:exit]] 你献祭了整个牌盒——紧急撤出研究所', 'sys');
-    doNestExtract();
-  });
-  UI.act('rcBack', () => { if (active()) done(); });
+  const eligible = () => game.cardBox.filter(c => !SDT.Base.isSha(c));
+  const render = (notice = '') => {
+    UI.showOverlay('[[icon:sparkles]] 符文法阵', `
+      <p class="ov-note">按牌盒顺序献祭前 3 张非初始攻击卡，从 5 块符文中选 1 块；或献祭全部非初始攻击卡，紧急撤离。确认前会列出具体卡牌。</p>
+      ${notice ? `<p role="status">${esc(notice)}</p>` : ''}
+      <div class="ov-btns">${runes.map((r, i) => `<button class="ov-btn" data-act="rc${i}">${esc(r.name)}（${r.attrs.join('')}·${r.rarity}）</button>`).join('')}</div>
+      <div class="ov-btns"><button class="ov-btn ghost" data-act="rcBox">献祭牌盒 · 紧急撤离</button>
+      <button class="ov-btn" data-act="rcBack">离开法阵</button></div>`, true);
+    const active = nestPageBinding();
+    runes.forEach((r, i) => UI.act('rc' + i, () => {
+      if (!active()) return;
+      const cap = 10 + (SDT.Base.data.nestBagUp || 0), sac = eligible().slice(0, 3);
+      if (game.nestRunes.length >= cap) { UI.log('[[icon:gem]] 符文背包已满（' + cap + ' 块）', 'warn'); return; }
+      if (sac.length < 3) { UI.log('[[icon:cross]] 牌盒中可献祭的卡牌不足 3 张（初始攻击不能献祭）', 'warn'); return; }
+      confirmNestCost('确认献祭 3 张卡牌', `<p>以下卡牌将永久失去，换取【${esc(r.name)}】（${r.attrs.join('')}·${r.rarity}）：</p>${nestCardCostHTML(sac)}`, '献祭 3 张并领取符文', () => {
+        const now = eligible().slice(0, 3);
+        if (now.length !== sac.length || now.some((c, n) => c !== sac[n]) || game.nestRunes.length >= 10 + (SDT.Base.data.nestBagUp || 0)) {
+          render('牌盒或符文容量已变化，请重新确认。'); return;
+        }
+        game.cardBox = game.cardBox.filter(c => !sac.includes(c));
+        game.nestRunes.push(r);
+        UI.log(`[[icon:sparkles]] 献祭 3 张卡牌，符文法阵赐下【${esc(r.name)}】（${r.attrs.join('')}）`, 'loot');
+        done();
+      }, () => render());
+    }));
+    UI.act('rcBox', () => {
+      if (!active()) return;
+      const sac = eligible();
+      confirmNestCost('确认献祭牌盒并撤离', `<p>将永久失去以下 <b>${sac.length}</b> 张卡牌；初始攻击不献祭。随后立即撤离。</p>${nestCardCostHTML(sac)}`, `献祭 ${sac.length} 张并撤离`, () => {
+        const now = eligible();
+        if (now.length !== sac.length || now.some((c, n) => c !== sac[n])) { render('牌盒已变化，请重新确认。'); return; }
+        game.cardBox = game.cardBox.filter(c => SDT.Base.isSha(c));
+        UI.log('[[icon:exit]] 你献祭了整个牌盒——紧急撤出研究所', 'sys');
+        doNestExtract();
+      }, () => render());
+    });
+    UI.act('rcBack', () => { if (active()) done(); });
+  };
+  render();
 }
 
 /* —— 龙巢祭坛：1 英雄卡 + 1 职业卡；或 3 次改变符文属性 —— */
 function openNestAltar(done) {
   let rerolls = 3;
   const render = () => {
-    UI.showOverlay('[[icon:sparkles]] 研究所祭坛', `
+    UI.showOverlay('[[icon:altar]] 研究所祭坛', `
       <p class="ov-note">抉择：获得 1 张<b>英雄卡</b>与 1 张<b>职业卡</b>；或获得 <b>3</b> 次改变任一符文属性的机会（剩 ${rerolls} 次）。</p>
       <div class="ov-btns">
         <button class="ov-btn ok" data-act="naHero">获得英雄卡与职业卡</button>

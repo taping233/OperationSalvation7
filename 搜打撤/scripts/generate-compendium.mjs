@@ -49,11 +49,11 @@ ${ch('1', '游戏概览')}
 ${ch('2', '对局规则与常量')}
 - 玩家规则文档：\`docs/rules.md\`；基础数值源为 \`game/src/core/rule-config.js\`，\`game/src/core/rules.js\` 提供兼容门面。
 - 基础战斗规则：每回合 ${RULE_CONFIG.battle.energy} 能量，手牌上限 ${RULE_CONFIG.battle.handMax}；首脑战初始抽 ${RULE_CONFIG.battle.startDraw} 张、每回合抽 ${RULE_CONFIG.battle.turnDraw} 张，编组 ${RULE_CONFIG.battle.bossDeckSize} 张并加入 ${RULE_CONFIG.battle.starterAttack} 张初始攻击。具体效果与例外查玩家规则。
-- 地图拓扑由 \`game/src/run/map-generator.js\` 按种子生成，恢复使用已校验快照；\`game/data/map.json\` 提供内容配置（${Object.keys(mapData?.monsters || {}).length} 个敌人模板），旧棋盘元数据不描述当前地图几何。
+- 新局地图由 \`game/src/run/map-generator-v4.js\` 按种子生成，第1/3层仅火堆、第2/4层仅商店，恢复使用已校验快照；\`game/data/map.json\` 提供内容配置（${Object.keys(mapData?.monsters || {}).length} 个敌人模板），旧棋盘元数据不描述当前地图几何。
 ${ch('3', '战斗系统')}
 - 流程入口：\`game/src/battle/core/battle.core.js\` 提供命令与快照；\`game/src/battle/effects/battle.target-rules.js\` 提供目标及打出限制，\`game/src/battle/bag/battle.deck.js\` 管理牌堆。
 - 伤害与防御计算：\`game/src/battle/core/combat.js\`；详细伤害类型、诅咒、祝福与例外见 \`docs/rules.md\`。
-- 诅咒与祝福：\`combat.js\` CURSES/BUFFS（中毒、流血、灼烧、冰冻、沉默、破甲、禁疗等；灼烧同为诅咒口径）。
+- 诅咒与祝福：\`combat.js\` CURSES/BUFFS（中毒、流血、冰冻、沉默、破甲、禁疗、攻击降低等）。
 - 注能：卡面「注能」角标主动进入（消耗 N 张手牌强化打出；镭射等可不注能直接打出）；「被注能时」句随注能结算。
 - 指向卡：拖拽 / 点击点选目标；群体卡自动全体；背包砸击为手牌左侧按钮（2 费 · 4 点固定伤害）。
 ${ch('4', '卡牌系统')}

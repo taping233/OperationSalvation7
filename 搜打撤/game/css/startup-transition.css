@@ -1,0 +1,11 @@
+/* Only the desktop host differs; artwork, lettering and motion use the common city cut. */
+.desktop-startup-cut {
+  position: fixed; inset: 0; z-index: 2147483000; overflow: hidden;
+  pointer-events: auto;
+}
+.desktop-startup-cut .page-cut-waiting,
+.desktop-startup-cut .page-cut-waiting *,
+.desktop-startup-cut .page-cut-waiting::before,
+.desktop-startup-cut .page-cut-waiting::after,
+.desktop-startup-cut .page-cut-waiting *::before,
+.desktop-startup-cut .page-cut-waiting *::after { animation-play-state: paused !important; }

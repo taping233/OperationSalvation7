@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>逐页性能 · 内存存档验收</title></head><body>
+<p>正在打开现行游戏的内存存档验收入口…</p>
+<script type="module">
+if (import.meta.env.DEV) {
+  // Install before main.js: the normal game flow uses disposable memory, never player storage.
+  const storageBootstrap = `<script>(function () {
+    function memoryStorage() {
+      const values = new Map();
+      return {
+        get length() { return values.size; },
+        key(index) { return [...values.keys()][index] ?? null; },
+        getItem(key) { return values.get(String(key)) ?? null; },
+        setItem(key, value) { values.set(String(key), String(value)); },
+        removeItem(key) { values.delete(String(key)); },
+        clear() { values.clear(); }
+      };
+    }
+    Object.defineProperty(window, 'localStorage', { value: memoryStorage() });
+    Object.defineProperty(window, 'sessionStorage', { value: memoryStorage() });
+  })();<\/script>`;
+  const response = await fetch('/index.html');
+  if (!response.ok) throw new Error('游戏入口加载失败：' + response.status);
+  const html = await response.text();
+  const badge = '<aside style="position:fixed;right:8px;top:4px;z-index:99999;padding:3px 8px;background:#152331;color:#cfe2ea;font:12px sans-serif;pointer-events:none">性能验收 · 内存存档 · 刷新即失效</aside>';
+  document.open();
+  document.write(html.replace('<head>', '<head><base href="/">' + storageBootstrap).replace('</body>', badge + '</body>'));
+  document.close();
+} else {
+  document.body.textContent = '仅在 Vite 开发环境中开放。';
+}
+</script></body></html>

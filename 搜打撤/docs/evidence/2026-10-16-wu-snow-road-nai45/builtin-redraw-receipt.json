@@ -1,0 +1,33 @@
+{
+  "status": "generated",
+  "tool": "built-in image_gen.imagegen",
+  "source": ".tmp/nai/wu-snow-road-nai5-20261016-v6.png",
+  "source_sha256": "7150dd2ae6889b984e89a466c16fc6c9ff4b661033c86ddaff552b01479eec3d",
+  "output": ".tmp/art/wu-snow-road-builtin-arknights-20261016/wu-snow-road-arknights-refined.png",
+  "sha256": "52b0b7e49f31cc99a674ab740b91c7d2979e942b162affee8f0124a56131eccd",
+  "bytes": 3015144,
+  "dimensions": [
+    1672,
+    941
+  ],
+  "source_dimensions": [
+    1344,
+    768
+  ],
+  "pixel_ratio": 1.524,
+  "prompt": "builtin-redraw-prompt.txt",
+  "visual_review": {
+    "source": "generatedImage returned original rendering",
+    "matched": [
+      "Large right-side foreground head and inward tilt preserved",
+      "Round sunglasses, black rose, blue ribbon, cyan-blue eyes retained",
+      "Cold gray palette, wet highway and snowy farmland retained",
+      "More refined eye/face drawing, hair locks, ruffle shading, cloud forms and snow/road details"
+    ],
+    "deviations": [
+      "Minor redraw differences in clouds and road surface details; not a pixel-identical upscale"
+    ],
+    "user_approval": "pending"
+  },
+  "integration": "Candidate only; not installed in game; no commit."
+}

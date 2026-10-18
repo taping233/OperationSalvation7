@@ -335,26 +335,7 @@
 }
 .sts-cardfly .hs-card { font-size:16px; }   /* 与手牌内卡面同尺寸（脱离 .sts-hand 上下文后需补回） */
 .sts-cardfly .bt-card { width:100%; height:100%; }
-/* 回合过渡横幅（批次F，STS2 Enemy Turn 式）：细带横穿战场中带，文字滑入-停留-滑出
-   09-25 二波美术：26→32px、金光 text-shadow、入场末梢带 4px 回弹顿帧（更"落锤"） */
-.bt-turnbanner { position:absolute; left:0; right:0; top:31%; display:flex; justify-content:center;
-  pointer-events:none; z-index:65; }
-.bt-turnbanner b { font-weight:700; font-size:32px; letter-spacing:.4em; text-indent:.4em;
-  color:#e0ded8; padding:12px 58px; white-space:nowrap;
-  text-shadow:0 0 20px rgba(230,203,118,.42), 0 2px 8px rgba(0,0,0,.85);
-  background:linear-gradient(90deg,transparent,rgba(9,10,10,.78) 22% 78%,transparent);
-  border-top:1px solid rgba(224,222,216,.35); border-bottom:1px solid rgba(224,222,216,.35);
-  animation:btTurnKf 1.25s cubic-bezier(.3,.7,.4,1) forwards; }
-.bt-turnbanner.foe b { color:#e0907c; border-color:rgba(224,144,124,.4);
-  text-shadow:0 0 20px rgba(224,144,124,.38), 0 2px 8px rgba(0,0,0,.85); }
-@keyframes btTurnKf {
-  0% { opacity:0; transform:translateX(90px); }
-  15% { opacity:1; transform:translateX(-4px); }
-  21% { opacity:1; transform:none; }
-  76% { opacity:1; transform:none; }
-  100% { opacity:0; transform:translateX(-90px); }
-}
-@media(prefers-reduced-motion:reduce){ .bt-turnbanner b { animation:none; } }
+/* 回合标题由 feedback-theme.css 维护，与卡牌结果共用冬日色板。 */
 /* 命中特效贴图（NAI 生成，黑底 + screen 混合当发光层）：伤害=斩击，格挡/免伤=护盾碎裂 */
 .sts-impact { position:absolute; z-index:78; width:150px; height:150px; margin:-75px 0 0 -75px;
   pointer-events:none; mix-blend-mode:screen; background:center/contain no-repeat;
@@ -410,12 +391,10 @@
 .sts-spark { position:absolute; z-index:79; border-radius:50%; pointer-events:none; }
 /* 敌方攻击弹道：一次性 canvas 闪现弧线+箭头，层级在卡牌飞行(75)之下 */
 .sts-attack-line { position:absolute; inset:0; z-index:74; pointer-events:none; }
-/* 状态挂件：诅咒持续期间的常驻状态光（冰冻=青晶边光；灼烧=立绘底部向上橙焰光）。
+/* 状态挂件：诅咒持续期间的常驻状态光（冰冻=青晶边光）。
    与交互高亮（can-target 等）是覆盖关系，指向时可被高亮临时接管 */
 .sts-foe.fx-frozen .sts-figure, .sts-me.fx-frozen .sts-figure {
   filter:saturate(.8) brightness(1.05) drop-shadow(0 0 12px rgba(140,217,255,.8)); }
-.sts-foe.fx-burning .sts-figure, .sts-me.fx-burning .sts-figure {
-  filter:brightness(1.06) drop-shadow(0 -7px 16px rgba(255,210,60,.75)); }
 /* SVG 贴纸（替代 emoji）：尺寸由图定，stkPop 动画照常作用于整个 span */
 .sts-float.stk.sticker { font-size:0; }
 .sts-float.stk.sticker img { width:46px; height:46px;
@@ -461,3 +440,17 @@
 @keyframes btUnitInSelf { from { opacity: 0; transform: translateX(-38px) translateY(8px); } }
 @media (prefers-reduced-motion: reduce) {
 }
+
+/* Non-blocking settled-card feedback. Uses the game's own card renderer/assets. */
+.bt-card-results summary { cursor:pointer; color:#b6d8e9; font-size:12px; letter-spacing:.06em; }
+.bt-card-results:not([open]) { background:rgba(14,20,28,.45); box-shadow:none; border-left-color:rgba(143,202,232,.35); }
+.bt-card-feedback-layer { position:absolute; inset:0; z-index:77; pointer-events:none; overflow:hidden; }
+.bt-card-reveal { position:absolute; width:var(--card-feedback-width); height:var(--card-feedback-height); pointer-events:none; filter:drop-shadow(0 7px 18px rgba(0,0,0,.65)); }
+.bt-card-reveal-face { width:var(--card-feedback-width); height:var(--card-feedback-height); overflow:hidden; border-radius:12px; background:#142236; box-shadow:0 0 18px #83d6f44d; }
+.bt-card-reveal-face>.hs-card { width:var(--card-feedback-width); transform-origin:top left; }
+.bt-card-reveal-face>b { display:block; padding:55px 12px; text-align:center; color:#fff; }
+.bt-card-reveal-caption { position:absolute; top:calc(var(--card-feedback-height) + var(--card-feedback-captionGap)); left:50%; transform:translateX(-50%); box-sizing:border-box; min-width:var(--card-feedback-width); max-width:calc(var(--card-feedback-width) + var(--card-feedback-laneGap) / 2); padding:5px 12px; border:1px solid #a8dfff55; border-radius:20px; background:#102033ed; color:#e4f5ff; font-size:var(--card-feedback-captionFont); line-height:1.4; text-align:center; white-space:normal; overflow-wrap:anywhere; }
+.bt-card-arrival { position:absolute; width:60px; height:60px; border:2px solid #b4e6ff; border-radius:50%; box-shadow:0 0 18px #83d6f4; }
+.bt-card-reveal[data-kind="surge"] .bt-card-reveal-face,.bt-card-reveal[data-kind="recast"] .bt-card-reveal-face { box-shadow:0 0 23px #d4a5ff80; }
+.bt-card-feedback-overflow { position:absolute; left:50%; top:76%; transform:translateX(-50%); border-radius:20px; padding:5px 12px; background:#102033ed; color:#d6ebf6; font-size:13px; }
+.bt-card-feedback-layer * { pointer-events:none !important; }

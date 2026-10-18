@@ -24,7 +24,9 @@ import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergen
 import { bindNodeEvent, nodeEventAt, claimResourceReward, entrySupplyAt, entrySupplyGate, nodeActionBinding, resourceRewardAt } from './node-reward-state.js';
 import { createEventCardChoiceController } from './event-card-choice.js';
 import { rewardExitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
+import { createSignalPuzzleState, mountEventSignalPuzzle } from '../ui/event-signal-puzzle.js';
 import { nodeChestRewardAt } from './chest-reward-save.js';
+import { recodeEligibleCards } from './event-recode-candidates.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 const UI = window.SDT.UI;
@@ -132,7 +134,7 @@ export function moveTo(toLi, toIdx) {
       if (!isCurrent()) return;
       const progress = Math.min(1, (now - arrivedAt) / ARRIVAL_DURATION);
       feedback?.update(progress);
-      renderScheduler.invalidate();
+      renderScheduler.invalidateAnimation();
       if (progress >= 1) resolveArrival();
       else frame(settle);
     };
@@ -152,7 +154,7 @@ export function moveTo(toLi, toIdx) {
     const ahead = motion.sample(Math.min(1, time + 65 / motion.duration)).point;
     camera?.updateTravel?.(cameraMotion, sample.point, ahead, now - previousAt);
     previousAt = now;
-    renderScheduler.invalidate();
+    renderScheduler.invalidateAnimation();
     if (time >= 1) finish();
     else frame(tick);
   };
@@ -263,17 +265,25 @@ function resolveCell() {
   openSafeNode();
 }
 
-// 物资格（2026-09-16 Item 17 定版）：按爆率（与商店/宝箱同源权重）刷新 2 张随机资源卡，二选一带走
+// 物资格先按通用掉落权重抽稀有度，再在档内均分；两张候选同名去重。
 function openResourcePick(done) {
   const weights = SDT.Cards.DROP_WEIGHTS;
   const pool = SDT.Cards.all().filter(c => c.type === '资源' && SDT.Cards.isRandomObtainable(c));
   const pickOne = (taken) => {
     const avail = pool.filter(c => !(taken && taken.has(c.name)));
-    const total = avail.reduce((sum, c) => sum + (weights[c.rarity] || 2), 0);
+    const tiers = Object.entries(weights).map(([rarity, weight]) => ({
+      cards: avail.filter(c => c.rarity === rarity),
+      weight: weight * (game.mode === 'elite' && rarity !== '古朴' ? 1.2 : 1),
+    })).filter(tier => tier.cards.length && tier.weight > 0);
+    const total = tiers.reduce((sum, tier) => sum + tier.weight, 0);
     if (!total) return null;
     let roll = Random.random('loot') * total;
-    for (const c of avail) { roll -= (weights[c.rarity] || 2); if (roll <= 0) return c; }
-    return avail[avail.length - 1] || null;
+    let selected = tiers[tiers.length - 1];
+    for (const tier of tiers) {
+      roll -= tier.weight;
+      if (roll <= 0) { selected = tier; break; }
+    }
+    return selected.cards[Math.floor(Random.random('loot') * selected.cards.length)];
   };
   const record = resourceRewardAt(game, () => {
     const first = pickOne(null);
@@ -354,10 +364,10 @@ function runInstant(def, after) {
       const cnt = def.n || 1;
       openFixedRewardsOnCell(Array.from({ length:cnt }, () => card).filter(Boolean), '木材补给', { consumeNode:true });
     } break;
-    // 物资点：搜索建筑内遗留物资，70% 小宝箱（随机 1 张）/ 30% 中宝箱（3 选 1）。
-    case 'chest': openNodeDecision({ tone:'pickup', title:'遗留物资', sub:'你闯进一间废弃配送站。敞开的柜门和散落的包装之间，或许还有值得带走的东西。',
-      act:'nodeChestSearch', label:'搜索物资', detail:'翻找遗留的箱柜，查看可领取的卡牌',
-      run:() => openChestsOnCell([Random.random('loot') < 0.7 ? { kind:'small' } : { kind:'medium' }], null, { resourceOnly:true, consumeNode:true }) }); break;
+    // 宝箱：70% 小宝箱（随机 1 张）/ 30% 中宝箱（3 选 1），使用通用卡牌池。
+    case 'chest': openNodeDecision({ tone:'pickup', title:'宝箱', sub:'你找到一只遗留的宝箱，里面或许还有值得带走的卡牌与补给。',
+      act:'nodeChestSearch', label:'开启宝箱', detail:'打开宝箱，查看可领取的随机卡牌',
+      run:() => openChestsOnCell([Random.random('loot') < 0.7 ? { kind:'small' } : { kind:'medium' }], null, { consumeNode:true }) }); break;
     // 物资格（2026-09-16 Item 17 定版）：按爆率刷新 2 张随机资源卡，二选一带走
     case 'resource': openResourcePick(done); break;
     case 'rations': {
@@ -621,10 +631,14 @@ async function triggerEventCard(card, current) {
   // bag-return-hook 重放本闭包恢复事件页——选项进度由外层 evtSettled 保全，不再吞结算；
   // 每次渲染都重新登记钩子（被消费后再次开背包仍有保护），结算时显式清空
   let evtSettled = false;   // 防连点：事件选项二次触发会重复发奖（2026-09-13 实测连点3次入包2张）
-  const renderEventPage = () => {
+  let selectedChoice = null, pageRevision = 0;
+  const signalPuzzle = card.id === 'tt6-systemsupply'
+    ? createSignalPuzzleState(`${game.mapSeed ?? game.seed ?? ''}|${card.id}|${game.layerIdx},${game.trackPos}`) : null;
+  const renderEventPage = (noticeText = '') => {
     if (evtSettled || !current()) return;
+    const revision = ++pageRevision;
     game.state = 'modal';
-    setBagReturnHook(renderEventPage);
+    setBagReturnHook(() => renderEventPage());
     nodeShell({
       tone: 'event', asset: sceneMeta[2], icon: '[[icon:dice]]', title: card.name,
       sub: esc((narrative && narrative.intro) || card.desc || '神秘事件发生了……'),
@@ -632,22 +646,41 @@ async function triggerEventCard(card, current) {
       foot:'<button class="ov-btn" data-act="evtReturn">返回地图</button><button class="ov-btn" data-act="evtBag">整理背包</button><p class="reward-notice" data-event-capacity role="status"></p>',
     });
     const active = eventPageBinding(choices ? 'evtChoice' : 'evtNext', current);
-    UI.act('evtChoice', (d) => {
-      if (!choices || evtSettled || !active()) return;
-      const choice = choices[+d.i];
-      if (!choice) return;
-      if (choice.canRun && !choice.canRun()) {
-        const notice = UI.el?.ovBody?.querySelector('[data-event-capacity]');
-        if (notice) notice.textContent = '背包放不下木材卡，碎片和本次选择已保留；请先整理背包，或改选碎片与2币。';
+    const choiceCurrent = () => !evtSettled && current() && pageRevision === revision;
+    if (signalPuzzle) mountEventSignalPuzzle(UI.el?.ovBody?.firstElementChild, signalPuzzle, () => choiceCurrent() && active());
+    const executeChoice = index => {
+      if (!choiceCurrent()) return false;
+      const choice = choices?.[index];
+      if (!choice) return false;
+      selectedChoice = index;
+      if ((choice.canRun && !choice.canRun()) || (choice.claim && !choice.claim())) {
+        renderEventPage('当前放不下，奖励与选择已保留。');
         SDT.Sound.sfx('deny');
-        return;
+        return false;
       }
       evtSettled = true;
       setBagReturnHook(null);
       UI.hideOverlay();
       if (!choice.deferConsume) consumeCurrentCell();
       choice.run();
-      if (game.state !== 'modal') finishInstant();   // 选项未自开新页时兜底收尾（幂等）
+      if (game.state !== 'modal') finishInstant();
+      return true;
+    };
+    UI.act('evtChoice', (d) => {
+      if (!choices || evtSettled || !active()) return;
+      const index = Number(d.i), choice = choices[index];
+      if (!choice) return;
+      selectedChoice = index;
+      if (choice.capacityCard && !game.canReceiveCard(choice.capacityCard)) {
+        setBagReturnHook(null);
+        bagSlots.organizeReward({ card:choice.capacityCard, current:choiceCurrent,
+          onReturn:() => { if (choiceCurrent()) renderEventPage(); },
+          onClaim:() => executeChoice(index),
+          onFullBag:() => { if (choiceCurrent()) { renderEventPage(); bagSlots.showBackpack(); } },
+        });
+        return;
+      }
+      executeChoice(index);
     });
     UI.act('evtNext', () => {
       if (choices || evtSettled || !active()) return;
@@ -658,9 +691,20 @@ async function triggerEventCard(card, current) {
       consumeCurrentCell();
       if (game.state !== 'modal') finishInstant();   // 同上（旧事件 default 分支此前漏收尾）
     });
-    UI.act('evtBag', () => { if (!evtSettled && active()) bagSlots.showBackpack(); });
+    UI.act('evtBag', () => {
+      if (evtSettled || !active()) return;
+      const selected = UI.el?.ovBody?.querySelector('.evt-opt.is-selected[data-i]');
+      selectedChoice = selected ? Number(selected.dataset.i) : null;
+      bagSlots.showBackpack();
+    });
     UI.act('evtReturn', () => { if (!evtSettled && active()) closeEventFlow(); });
     UI.refresh(game);
+    const notice = UI.el?.ovBody?.querySelector('[data-event-capacity]');
+    if (notice) notice.textContent = noticeText;
+    if (choices?.length > 1 && Number.isInteger(selectedChoice)) {
+      const option = UI.el?.ovBody?.querySelector(`[data-act="evtChoice"][data-i="${selectedChoice}"]`);
+      option?.click(); option?.focus();
+    }
   };
   renderEventPage();
 }
@@ -723,7 +767,7 @@ function transformCandidates(card) {
 function openEventRecode() {
   SDT.Sound.sfx('recodeStart');
   game.state = 'modal';
-  const eligible = game.ownedCards.filter(o => o && o.card && !o.safe && !o.stored && transformCandidates(o.card).length);
+  const eligible = recodeEligibleCards(game.ownedCards, SDT.Cards.all(), game.myClass, card => SDT.Cards.isRandomObtainable(card));
   const need = Math.min(2, eligible.length);
   if (!need) {
     UI.log('[[icon:cards]] 背包中没有可转换的招式或装备卡', 'warn');
@@ -859,8 +903,9 @@ function eventChoiceSpec(card, narrative = null) {
       const wood = SDT.Cards.all().find(c => c.id === 'tt-wood');
       return [
         { label:'碎片与木材', detail:'获得员工通行证A碎片 ×1，木材卡 ×1；需背包能放下木材卡', tone:'ok',
-          canRun:() => !!wood && game.canReceiveCard(wood),
-          run:settle(() => { grantEventCard(wood); gainFragment(); }) },
+          capacityCard:wood, canRun:() => !!wood && game.canReceiveCard(wood),
+          claim:() => grantEventCard(wood),
+          run:settle(gainFragment) },
         { label:'碎片与货币', detail:'获得员工通行证A碎片 ×1，+2 币；不占背包格', tone:'ok',
           run:settle(() => { gainFragment(); gainCoins(2); }) },
       ];
@@ -896,39 +941,39 @@ function eventChoiceSpec(card, narrative = null) {
       { label: '查看并领取', detail: '获得卡牌「闪金之锤」；放不下时可先整理背包', tone: 'ok', run: () => rewards(SDT.Cards.all().find(c => c.id === 'cmtn0xt0zr7')) },
     ],
     'ev19-vital': () => [
-      { label: '接受强化急救', detail: '生命上限 +3，并回复 3 点生命', tone: 'ok', run: settle(() => {
+      { label: '接受强化急救', tone: 'ok', run: settle(() => {
         game.maxHp += 3; game.hp += 3;
         UI.log(`[[icon:heart]] 强化药剂生效：生命上限 +3（${game.hp}/${game.maxHp}）`, 'ok');
       }) },
     ],
     'ev19-pearlbox': () => [
-      { label: '取走珍珠匣', detail: '获得卡牌「珍珠盒」', tone: 'ok', run: () => rewards(SDT.Cards.all().find(c => c.id === 'tt2-pearlbox')) },
+      { label: '取走珍珠匣', tone: 'ok', run: () => rewards(SDT.Cards.all().find(c => c.id === 'tt2-pearlbox')) },
     ],
     'ev19-fireballs': () => [
-      { label: '接收封装火种', detail: '获得两张「火球」', tone: 'ok', run: () => {
+      { label: '接收封装火种', tone: 'ok', run: () => {
         const fireball = SDT.Cards.all().find(c => c.id === 'tt3-fireball');
         rewards(fireball, fireball);
       } },
     ],
     'ev19-classchest': () => [
-      { label: '启封黑箱', detail: '开启 1 个职业·密封物资箱', tone: 'ok', run: () => {
+      { label: '启封黑箱', tone: 'ok', run: () => {
         openChestsOnCell([{ kind: 'medium', isClass: true }], '军方调拨的黑色职业宝箱');
       } },
     ],
     'ev19-recode': () => [
-      { label: '接入重编台', detail: '选择 2 张招式或装备卡进行同稀有度同类型转换', tone: 'ok', run: openEventRecode },
+      { label: '接入重编台', tone: 'ok', run: openEventRecode },
     ],
     'ev19-potions': () => [
-      { label: '查看药摊', detail: '从 3 瓶随机药水中选择 1 瓶', tone: 'ok', deferConsume:true, run: openEventPotions },
+      { label: '查看药摊', tone: 'ok', deferConsume:true, run: openEventPotions },
     ],
     'ev19-arrows': () => [
-      { label: '打开弹药柜', detail: '获得 2 张随机非职业箭系列卡', tone: 'ok', run: () => {
+      { label: '打开弹药柜', tone: 'ok', run: () => {
         const arrows = uniqueEventPicks(eventPool(['武术', '法术', '装备']).filter(c => /箭/.test(c.name) && c.rarity !== '职业' && !c.cls), 2);
         rewards(...arrows);
       } },
     ],
     'ev19-gamble': () => [
-      { label: '查看黑市货物', detail: '每次 3 币，50% 概率，第 5 次保底；可随时放弃', run: openEventGamble },
+      { label: '查看黑市货物', run: openEventGamble },
     ],
     'ev19-quartermaster': () => [
       { label: '支付 3 币', detail: (game.coins || 0) >= 3 ? '从 3 张装备卡中选择 1 张' : `币不足（现有 ${game.coins || 0}）`, tone: (game.coins || 0) >= 3 ? 'ok' : 'danger', deferConsume:true, run: openEventQuartermaster },
@@ -1014,7 +1059,7 @@ function applyEventEffect(card) {
         UI.refresh(game);
       }, {
         tone: 'event', icon: '[[icon:tools]]', title: '修鞋铺 · 修整行装',
-        sub: '老师傅顺手替你把装备修好了——可以从消耗区复原 <b>1</b> 张卡牌（点击卡面复原）',
+        sub: '老师傅替你修整行装。',
       });
       return;   // openPocketRestore 自管收尾
     default:

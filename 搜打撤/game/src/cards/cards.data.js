@@ -10,7 +10,7 @@ export const dataSlice = {
       { id: 'tt6-goldhammer', name: '满电动力锤', cost: 0, rarity: '衍生', type: '事件', desc: '获得卡牌「闪金之锤」。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-relief', name: '临时救护站', cost: 0, rarity: '衍生', type: '事件', desc: '回复 6 点生命。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-airdrop', name: '污染空投箱', cost: 0, rarity: '衍生', type: '事件', desc: '从木材、口粮、能量饮料、随机药水中选择一项。', value: 0, sellable: false, unrandom: true },
-      { id: 'tt6-chestdraw', name: '熔断双箱', cost: 0, rarity: '衍生', type: '事件', desc: '从大、中、小宝箱中随机抽取 1 个开启。', value: 0, sellable: false, unrandom: true },
+      { id: 'tt6-chestdraw', name: '熔断物资箱', cost: 0, rarity: '衍生', type: '事件', desc: '从大、中、小宝箱中随机抽取 1 个开启。', value: 0, sellable: false, unrandom: true },
       { id: 'tt6-systemsupply', name: '末班配送无人机', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片和木材卡 ×1。', value: 0, sellable: false, unrandom: true },
       { id: 'cmtn7qttxqo4', name: '巷口修鞋匠', cost: 0, rarity: '衍生', type: '事件', desc: '获得员工通行证A碎片；复原 1 张卡牌。', value: 0, sellable: false, unrandom: true },
       { id: 'ev19-vital', name: '高压急救', cost: 0, rarity: '衍生', type: '事件', desc: '生命上限 +3，并回复 3 点生命。', value: 0, sellable: false, unrandom: true },
@@ -41,7 +41,7 @@ export const dataSlice = {
       { id: 'tt-silver',     name: '银币',     cost: 0, rarity: '古朴', type: '道具', desc: '可出售。', value: 6, unrandom: true },
       { id: 'tt-key',        name: '钥匙',     cost: 0, rarity: '初始', type: '资源', desc: '解锁神秘宝箱。', value: 2, rules: { version: 1, base: { material: { kind: 'keys', amount: 1 } } } },
       // —— 第三排 ——
-      { id: 'tt-crystal',    name: '能源结晶', cost: 1, rarity: '古朴', type: '道具', desc: '复活最多 3 张卡牌。', value: 3, rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 3 }] } } },
+      { id: 'tt-crystal',    name: '能源结晶', cost: 1, rarity: '古朴', type: '道具', desc: '地图背包：从消耗区复原最多3张卡牌；战斗：从本场消耗牌复原最多3张回到手牌。对应消耗区为空时不可使用。', value: 3, rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 3 }] } } },
       { id: 'tt-key-one',    name: '一把钥匙', cost: 0, rarity: '古朴', type: '资源', desc: '钥匙 ×3。', value: 6, rules: { version: 1, base: { material: { kind: 'keys', amount: 3 } } } },
       { id: 'tt-token-gold', name: '员工通行证B', cost: 1, rarity: '稀有', type: '道具', desc: '抽取 1 张传说卡。', value: 5 }, // 照片重辨：手写为「传说卡」（[[icon:crystal]]传），非「传统卡」
       { id: 'tt-jinchuangyao', name: '金疮药', cost: 1, rarity: '古朴', type: '道具', desc: '回复 10 点生命。', value: 3 },
@@ -105,7 +105,7 @@ export const dataSlice = {
       // —— 武术（本摞照片重辨补录 1 张）——
       { id: 'tt3wu-shike',       name: '割蚀',     cost: 2, rarity: '古朴', type: '武术', desc: '降低 1 名敌人 2 攻，附加流血。' },
       // —— 法术 / 药水（第一摞 28 张）——
-      { id: 'tt3-mystery-potion', name: '神秘药水', cost: 3, rarity: '古朴', type: '道具', desc: '随机神秘效果。', value: 2 },
+      { id: 'tt3-mystery-potion', name: '神秘药水', cost: 3, rarity: '古朴', type: '道具', desc: '仅战斗中使用。使用后，下回合开始时：变成1张随机招式卡牌，使其费用为0。', value: 2 },
       { id: 'tt3-blue-potion',   name: '蓝瓶药水', cost: 3, rarity: '古朴', type: '道具', desc: '回复 3 点生命，抽 1 张牌。', value: 2 },
       { id: 'tt3-treasure-hunt', name: '寻宝',     cost: 2, rarity: '古朴', type: '法术', desc: "3′，发现 1 张牌。" },
       { id: 'tt3-flame-storm',   name: '火焰风暴', cost: 3, rarity: '稀有', type: '法术', dmg: 3, desc: '对全体敌人造成 3 点伤害。', value: 3 },
@@ -328,12 +328,12 @@ export const dataSlice = {
       { id: 'foe-wolf_rider', name: '变异雪狼',       cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'wolf_rider', desc: '攻击 7 / 生命 6。变异·第3层。蓄力攻击：隔回合强化一击。' },
       { id: 'foe-orc_axe',    name: '甲壳变异体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'orc_axe',    desc: '攻击 4 / 生命 7。变异·第3层。防御/反击型，隔回合蓄势。' },
       // —— 第 4 层 高危战区：元素异变体 + 双阵营能力者 ——
-      { id: 'foe-fire_el',    name: '灼热异变体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'fire_el',    desc: '攻击 10 / 生命 7。变异·第4层。攻击并灼烧。' },
+      { id: 'foe-fire_el',    name: '灼热异变体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'fire_el',    desc: '攻击 10 / 生命 7。变异·第4层。攻击。' },
       { id: 'foe-water_el',   name: '腐蚀异变体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'water_el',   desc: '攻击 7 / 生命 10。变异·第4层。防御/反击型，隔回合蓄势。' },
       { id: 'foe-esper_crow',   name: '白鸦', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'esper_crow',
         desc: '攻击 8 / 生命 5。联邦能力者·第4层。碎晶齐射：远程多段攻击。' },
       { id: 'foe-esper_candle', name: '烛火', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'esper_candle',
-        desc: '攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击并灼烧。' },
+        desc: '攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击。' },
       // —— 第 5 层 污染核心：深层异变 + 双阵营能力者 + 巨兽 ——
       { id: 'foe-grass_el',   name: '滋生异变体',     cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'grass_el',   desc: '攻击 5 / 生命 12。变异·第5层。攻击并施加诅咒。' },
       { id: 'foe-esper_silence', name: '静默', cost: 0, rarity: '衍生', type: '生物', unrandom: true, art: 'esper_silence',
@@ -411,7 +411,7 @@ export const dataSlice = {
       { id: 'tt3-toxin', name: '毒药', cost: 0, rarity: '古朴', type: '法术', desc: '附加 1 层中毒。抽 1 张牌。', dmg: 0, draw: 1, value: 2 },
       { id: 'tt3-frostfall', name: '剑荡妖邪', cost: 2, rarity: '传说', type: '武术', desc: '攻+5，选择手牌中 1 张武术卡直接释放。', dmg: 5, dmgType: 'attack', value: 5 },
       { id: 'tt3wu-shike', name: '割蚀', cost: 1, rarity: '古朴', type: '武术', desc: '降低 1 名敌人 2 攻，持续3回合；附加流血。', dmg: 0, value: 2 },
-      { id: 'tt3-mystery-potion', name: '神秘药水', cost: 0, rarity: '稀有', type: '道具', desc: '回合开始时：变成1张随机招式卡牌，使其费用为0。', dmg: 0, value: 3 },
+      { id: 'tt3-mystery-potion', name: '神秘药水', cost: 0, rarity: '稀有', type: '道具', desc: '仅战斗中使用。使用后，下回合开始时：变成1张随机招式卡牌，使其费用为0。', dmg: 0, value: 3 },
       { id: 'tt3-blue-potion', name: '恢复药水', cost: 0, rarity: '稀有', type: '道具', desc: '回复 5 点生命，回复1点能量。', dmg: 0, heal: 5, value: 2 },
       { id: 'tt3-treasure-hunt', name: '寻宝', cost: 1, rarity: '古朴', type: '法术', desc: '造成4点法术伤害，发现 1 张牌。', dmg: 4, dmgType: 'spell', value: 2 },
       { id: 'tt3-nature-form', cls: '牧师', name: '满月形态', cost: 2, rarity: '职业', type: '法术', desc: '本局战斗中，能量上限 +1。', dmg: 0, value: 3, unrandom: true }, // 2026-10-02 老板：「自然形态」改名「满月形态」并转牧师职业卡（id 不变，存档/卡库按 id 追踪）
@@ -581,7 +581,7 @@ export const dataSlice = {
       { id: "cmtn1r10xnl1", cls: "降临者", name: "黑暗形态", cost: 1, rarity: "职业", type: "法术", dmg: 0, desc: "本局对战中，每当你发现卡牌时，增加1个可选项", value: 2, sellable: false, unrandom: true },
       "cmtn1wnhhym",   // 同名不同效果版本按老板 2026-09-19 规则追加「-改」
       { id: "cmtn28jv33wx", name: "搜索大宝箱", cost: 0, rarity: "衍生", type: "法术", dmg: 0, desc: "随机获取3张卡牌", value: 3, sellable: false },
-      { id: "cmtn6bge52qt", name: "复原药水", cost: 0, rarity: "稀有", type: "道具", dmg: 0, desc: "在背包中才能使用，复原最多两张卡牌", value: 3, sellable: false, rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 2 }] } } },
+      { id: "cmtn6bge52qt", name: "复原药水", cost: 0, rarity: "稀有", type: "道具", dmg: 0, desc: "地图背包：从消耗区复原最多2张卡牌；战斗：从本场消耗牌复原最多2张回到手牌。对应消耗区为空时不可使用。", value: 3, sellable: false, rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount: 2 }] } } },
       { id: "cmtn7qttxqo4", name: "修鞋铺", cost: 0, rarity: "衍生", type: "事件", dmg: 0, desc: "获得员工通行证A碎片；复原1张卡牌", value: 0, sellable: false },
       // —— 以下 25 张共享 id 卡取设计者稿（整卡覆盖） ——
       { id: "starter-emergency-bandage", name: "应急绷带", cost: 0, rarity: "稀有", type: "道具", dmg: 0, heal: 12, desc: "回复12 点生命。", value: 0, sellable: false },
@@ -606,7 +606,7 @@ export const dataSlice = {
       // 敌人图鉴 5 张（与 BESTIARY 同 id）：2026-09-09 老板定版新世界观命名，名字与描述随 BESTIARY 同步
       { id: "foe-orc_axe", name: "甲壳变异体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 4 / 生命 7。变异·第3层。防御/反击型，隔回合蓄势。", value: 0, sellable: false, art: "orc_axe" },
       { id: "foe-wolf_rider", name: "变异雪狼", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 7 / 生命 6。变异·第3层。蓄力攻击：隔回合强化一击。", value: 0, sellable: false, art: "wolf_rider" },
-      { id: "foe-fire_el", name: "灼热异变体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 10 / 生命 7。变异·第4层。攻击并灼烧。", value: 0, sellable: false, art: "fire_el" },
+      { id: "foe-fire_el", name: "灼热异变体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 10 / 生命 7。变异·第4层。攻击。", value: 0, sellable: false, art: "fire_el" },
       { id: "foe-water_el", name: "腐蚀异变体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 7 / 生命 10。变异·第4层。防御/反击型，隔回合蓄势。", value: 0, sellable: false, art: "water_el" },
       { id: "foe-grass_el", name: "滋生异变体", cost: 0, rarity: "衍生", type: "生物", dmg: 0, desc: "攻击 5 / 生命 12。变异·第5层。攻击并施加诅咒。", value: 0, sellable: false, art: "grass_el" },
     ], 'TABLETOP11'),

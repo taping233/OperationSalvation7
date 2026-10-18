@@ -60,13 +60,15 @@ function bindSpotlight() {
   });
 }
 
-function bindSceneAttention() {
+function bindSceneAttention(onVisibilityChange) {
   const zoneOf = node => node?.closest?.('.home-primary') ? 'primary'
     : node?.closest?.('.home-collection') ? 'collection'
       : node?.closest?.('.home-system') ? 'system' : null;
   let pointerZone = null;
   const sync = () => {
-    if (!sceneInteractive()) {
+    const interactive = sceneInteractive();
+    onVisibilityChange?.(interactive);
+    if (!interactive) {
       pointerZone = null;
       delete title.dataset.homeAttention;
       title.style.setProperty('--px', '0');
@@ -185,15 +187,27 @@ if (title && inner && title.classList.contains('home-composed')) {
   const clock = readout.querySelector('[data-clock]');
   const version = readout.querySelector('[data-version]');
   const tick = () => {
-    if (title.hidden || document.hidden) return;
-    clock.textContent = new Date().toLocaleTimeString('en-GB');
-    version.textContent = document.getElementById('gameVersion')?.textContent ?? '';
+    if (!sceneInteractive()) return;
+    const time = new Date().toLocaleTimeString('en-GB');
+    const label = document.getElementById('gameVersion')?.textContent ?? '';
+    if (clock.textContent !== time) clock.textContent = time;
+    if (version.textContent !== label) version.textContent = label;
   };
-  tick();
-  setInterval(tick, 1000);
+  let clockTimer = null;
+  const syncClock = active => {
+    if (active && clockTimer === null) {
+      tick();
+      clockTimer = setInterval(tick, 1000);
+    } else if (!active && clockTimer !== null) {
+      clearInterval(clockTimer);
+      clockTimer = null;
+    }
+  };
+  window.addEventListener('pagehide', () => syncClock(false));
+  window.addEventListener('pageshow', () => syncClock(sceneInteractive()));
 
   bindSpotlight();
-  bindSceneAttention();
+  bindSceneAttention(syncClock);
   bindPick();
   bindWarmupHint();
 }

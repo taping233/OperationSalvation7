@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>伙伴轻触 · 隔离预览</title>
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/cards.css" />
+<link rel="stylesheet" href="/css/overlays.css" />
+<link rel="stylesheet" href="/css/hub.css" />
+<link rel="stylesheet" href="/css/battle.css" />
+<link rel="stylesheet" href="/css/scenes.css" />
+<link rel="stylesheet" href="/css/lab-ending.css" />
+<link rel="stylesheet" href="/css/winter.css" />
+<link rel="stylesheet" href="/css/expedition.css" />
+<link rel="stylesheet" href="/css/expedition-map.css" />
+<link rel="stylesheet" href="/css/map-edge-light.css" />
+<link rel="stylesheet" href="/css/expedition-hub.css" />
+<link rel="stylesheet" href="/css/expedition-inventory.css" />
+<link rel="stylesheet" href="/css/expedition-rewards.css" />
+<link rel="stylesheet" href="/css/expedition-battle.css" />
+<link rel="stylesheet" href="/css/expedition-library.css" />
+<link rel="stylesheet" href="/css/card-v3.css" />
+<link rel="stylesheet" href="/css/expedition-roster.css" />
+<link rel="stylesheet" href="/css/expedition-shop.css" />
+<link rel="stylesheet" href="/css/ui-scale.css" />
+<link rel="stylesheet" href="/css/page-slot-select.css" />
+<link rel="stylesheet" href="/css/page-settings.css" />
+<link rel="stylesheet" href="/css/page-datapage.css" />
+<link rel="stylesheet" href="/css/page-ach.css" />
+<link rel="stylesheet" href="/css/page-cardforge.css" />
+<link rel="stylesheet" href="/css/page-expedition-hud.css" />
+<link rel="stylesheet" href="/css/feedback-oct12.css" />
+<link rel="stylesheet" href="/css/roster-departure-v2.css" />
+<link rel="stylesheet" href="/css/pocket-strip.css" />
+<link rel="stylesheet" href="/css/experience-loot.css" />
+<link rel="stylesheet" href="/css/page-events.css" />
+<link rel="stylesheet" href="/css/page-rewards-bag-help.css" />
+<link rel="stylesheet" href="/css/page-battle-ui.css" />
+<link rel="stylesheet" href="/css/character-idle.css" />
+<link rel="stylesheet" href="/css/page-transitions.css" />
+<link rel="stylesheet" href="/css/ak-skin.css" />
+<link rel="stylesheet" href="/css/base-camp.css" />
+<link rel="stylesheet" href="/css/base-camp-compact.css" />
+<link rel="stylesheet" href="/css/card-layout-selected.css" />
+<link rel="stylesheet" href="/css/battle-stage.css" />
+<link rel="stylesheet" href="/css/preparation.css" />
+<link rel="stylesheet" href="/css/base-camp-rework.css" />
+<link rel="stylesheet" href="/css/base-controls-v4.css" />
+<link rel="stylesheet" href="/css/card-browser.css" />
+<link rel="stylesheet" href="/css/inventory-zoom.css" />
+<link rel="stylesheet" href="/css/base-reward-feedback.css" />
+<link rel="stylesheet" href="/css/base-collection-v4.css" />
+<link rel="stylesheet" href="/css/base-courtyard-v3.css" />
+<link rel="stylesheet" href="/css/base-panel-layout.css" />
+<link rel="stylesheet" href="/css/base-cohesion-v5.css" />
+<link rel="stylesheet" href="/css/base-framework-v7.css" />
+<link rel="stylesheet" href="/css/base-rooms-v7.css" />
+<link rel="stylesheet" href="/css/base-personnel-v12.css" />
+<link rel="stylesheet" href="/css/base-logistics-trade-v12.css" />
+<link rel="stylesheet" href="/css/base-archive-facilities-v12.css" />
+<link rel="stylesheet" href="/css/base-page-motion-v7.css" />
+<link rel="stylesheet" href="/css/base-home-v7.css" />
+<link rel="stylesheet" href="/css/departure-selected.css" />
+<link rel="stylesheet" href="/css/roster-reference.css" />
+<link rel="stylesheet" href="/css/base-shop-v3.css" />
+<link rel="stylesheet" href="/css/base-archive-v3.css" />
+<style>
+.fixture-controls{position:absolute;left:28px;top:18px;z-index:10000;display:flex;gap:12px;align-items:center;padding:8px 14px;background:#142229f5;border:1px solid #758d96;color:#e0eef0;font:19px sans-serif}.fixture-controls button,.fixture-controls select{font:inherit;padding:4px 9px}.fixture-controls label{display:flex;align-items:center;gap:6px}.fixture-exit{padding:110px;color:white;font:28px sans-serif}
+</style></head><body class="page-covered page-opaque">
+<div class="fixture-controls">隔离预览 <select id="fixturePet" aria-label="预览伙伴"></select><label><input type="checkbox" id="fixtureReduced">减少动效</label><label><input type="checkbox" id="fixtureOwned" checked>已相遇</label><button type="button" id="fixtureLeave">离页</button><button type="button" id="fixtureReopen">返回</button><button type="button" id="fixtureHide">隐藏工具栏</button></div>
+<div id="app"><main id="viewport"><div id="overlay" class="opaque" role="dialog" aria-modal="true"><div class="card page"><h2 id="ovTitle" hidden></h2><div id="ovBody"></div></div></div></main></div>
+<script type="module">
+import { partnerInteractionHTML, mountPartnerInteraction } from '/src/ui/partner-interaction.js';
+import { partnerPortrait } from '/src/hub/hub.visuals.js';
+import '/src/ui/ui-scale.js';
+const pets=[['dog','旺财'],['falcon','猎隼'],['cat','猫咪'],['robot','小机器人'],['fire','小火灵'],['penguin','小企鹅']];
+const body=document.querySelector('#ovBody'),choose=document.querySelector('#fixturePet'),owned=document.querySelector('#fixtureOwned');
+choose.innerHTML=pets.map(([id,name])=>`<option value="${id}">${name}</option>`).join('');
+let dispose=()=>{};
+const portrait=id=>partnerPortrait(id).replaceAll('src="assets/','src="/assets/');
+function render(){
+ dispose();
+ const [id,name]=pets.find(([key])=>key===choose.value),have=owned.checked;
+ body.innerHTML=`<div class="pg hub hub-classes base-camp base-frame-v7 base-subpage" id="hubMain" data-page="classes" data-base-layout="open-menu"><header class="hub-head hub-head-min"><div class="camp-brand"><h2>配置</h2></div><span class="hub-slot-label">隔离示例 / 无存档</span><span class="hub-res">储备币 90 · 口粮 12</span></header><div class="hub-body"><main class="hub-page"><div class="personnel-v2 personnel-v12" data-section="companions"><header class="pv12-page-head"><h2>远征伙伴</h2></header><div class="companion-toolbar"><button class="mini-btn" id="fixtureBack">返回角色</button><span>已相遇 <b>${have?1:0}/6</b></span><button class="mini-btn" disabled>孵化新伙伴 <small>0 枚蛋</small></button></div><div class="person-stage partner-stage"><nav class="person-roster" aria-label="伙伴档案切换">${pets.map(([key,label])=>`<button class="person-face${key===id?' on':''}" data-fixture-pet="${key}" aria-label="查看${label}" aria-pressed="${key===id}">${portrait(key)}<b>${label}</b><small>${key===id&&have?'Lv.2':'未相遇'}</small></button>`).join('')}</nav><div class="partner-display${have?'':' unowned'}"><small>伙伴 / 0${pets.findIndex(([key])=>key===id)+1}</small>${have?partnerInteractionHTML(portrait(id),{id,name}):portrait(id)}<h3>${name}</h3><span class="partner-state">${have?'已相遇':'未相遇'}</span></div><article class="person-details partner-details"><header><small>伙伴档案</small><h3>随行能力</h3></header><p class="partner-perk">这是独立展示示例。</p><dl class="warehouse-facts"><div><dt>等级</dt><dd>${have?'Lv.2':'未相遇'}</dd></div><div><dt>携带时安全格</dt><dd>3 格</dd></div></dl><button class="mini-btn ok base-command base-command-primary" disabled>携带出征</button><section><h4>本次培养</h4><div class="companion-growth"><span>Lv.2<b>→</b>Lv.3</span><span>安全格 3<b>→</b>4</span></div><button class="mini-btn ok base-command base-command-primary" disabled>培养伙伴</button><p class="hint">示例页不接业务操作或存档。</p></section></article></div></div></main><nav class="base-navigation-v7" aria-label="示例导航"><button class="hub-tab" disabled>基地</button><button class="hub-tab on" disabled>配置</button><button class="hub-tab" disabled>后勤</button><button class="hub-tab" disabled>交易所</button><button class="hub-tab" disabled>收藏室</button><button class="hub-tab" disabled>建设</button><button class="hub-tab" disabled>庭院</button></nav></div></div>`;
+ dispose=mountPartnerInteraction(body.querySelector('[data-partner-play]'));
+ document.querySelector('#fixtureBack').onclick=leave;
+ for(const button of body.querySelectorAll('[data-fixture-pet]'))button.onclick=()=>{choose.value=button.dataset.fixturePet;render();};
+}
+function leave(){dispose();body.innerHTML='<div class="fixture-exit">已离开预览。工具栏“返回”可重新打开。</div>';}
+choose.onchange=render;owned.onchange=render;
+document.querySelector('#fixtureReduced').onchange=event=>document.body.classList.toggle('reduce-motion',event.target.checked);
+document.querySelector('#fixtureLeave').onclick=leave;document.querySelector('#fixtureReopen').onclick=render;
+document.querySelector('#fixtureHide').onclick=()=>{document.querySelector('.fixture-controls').hidden=true;};
+window.addEventListener('pagehide',()=>dispose());
+render();
+</script></body></html>

@@ -47,3 +47,31 @@ describe('RenderScheduler', () => {
     expect(Math.max(...gaps)).toBeLessThan(13);
   });
 });
+
+describe('render budget preserves input responsiveness', () => {
+  it.each([30, 60, 120])('caps active and decorative invalidation draws at %i on a 165 Hz display', fps => {
+    for (const active of [true, false]) {
+      const scheduler = new RenderScheduler({ activeFps: fps });
+      let draws = 0;
+      for (let now = 0; now < 1000; now += 1000 / 165) {
+        scheduler.invalidateAnimation();
+        if (scheduler.shouldDraw(now, { active })) draws++;
+      }
+      expect(draws).toBeGreaterThanOrEqual(fps - 1);
+      expect(draws).toBeLessThanOrEqual(fps + 1);
+    }
+  });
+  it('does not defer direct input, preserves hidden dirty work and returns to idle', () => {
+    const scheduler = new RenderScheduler({ activeFps: 30 });
+    expect(scheduler.shouldDraw(0)).toBe(true);
+    scheduler.invalidateAnimation();
+    expect(scheduler.shouldDraw(1)).toBe(false);
+    scheduler.invalidate();
+    expect(scheduler.shouldDraw(2)).toBe(true);
+    expect(scheduler.shouldDraw(35)).toBe(false);
+    scheduler.invalidateAnimation();
+    expect(scheduler.shouldDraw(100, { covered: true })).toBe(false);
+    expect(scheduler.shouldDraw(101)).toBe(true);
+    expect(scheduler.shouldDraw(135)).toBe(false);
+  });
+});

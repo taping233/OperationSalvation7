@@ -332,8 +332,9 @@ export const overlayMethods = {
 
   // 面板内「取消语义」按钮探测（Esc / 右上角 × / 遮罩点击共用）
   _findCancelBtn() {
-    return [...this.el.ovBody.querySelectorAll('button')]
-      .find(b => b.dataset.cancel !== 'false' && !b.disabled && !b.closest('[hidden], [aria-hidden="true"]') && (
+    const buttons = [...this.el.ovBody.querySelectorAll('button')]
+      .filter(b => b.dataset.cancel !== 'false' && !b.disabled && !b.closest('[hidden], [aria-hidden="true"]'));
+    return buttons.find(b => b.dataset.cancel === 'true') || buttons.find(b => (
         /跳过|留下|返回|取消|关闭|离开/.test(b.textContent || '') ||
         /^(closeBag|closeCardPage|closeDesigner|pg-close)$/.test(b.dataset.act || '') ||
         /关闭|返回/.test(b.getAttribute('aria-label') || '') || /关闭|返回/.test(b.getAttribute('title') || '')));

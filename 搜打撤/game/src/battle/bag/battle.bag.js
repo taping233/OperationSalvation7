@@ -41,6 +41,7 @@ export function createBattleBag({
   const ITEM_BOSS_FLEE_PATTERN = /非\s*BOSS\s*战/;
   function itemUsability(card) {
     if (!card) return { usable: false, why: '未知道具' };
+    if (['cmtn6bge52qt', 'tt-crystal'].includes(card.id) && !consumed.length) return { usable: false, why: '本场消耗堆是空的，没有可复原的卡牌' };
     if (card.id === 'tt-token-color') return { usable: false, why: '合成材料：集齐 2 枚员工通行证A碎片后在背包里合成' };
     if (mode === 'boss' && ITEM_BOSS_FLEE_PATTERN.test(String(card.desc || ''))) return { usable: false, why: 'BOSS 战中无法逃跑' };
     // M3：结构化 flee op 的 BOSS 禁用（与文本 ITEM_BOSS_FLEE_PATTERN 同口径）
@@ -63,9 +64,13 @@ export function createBattleBag({
       useBattleEffectItem({ ...entry, card }, side);
       return;
     }
+    if (card.id === 'tt3-mystery-potion') {
+      useBattleEffectItem({ ...entry, card }, side);
+      return;
+    }
     const healM = desc.match(/回复\s*(\d+)\s*点生命/);
     const isCrystal = card.id === 'tt-crystal' || /复活最多\s*3\s*张卡牌/.test(desc);
-    const isPotion = card.id === 'tt3-mystery-potion' || /随机神秘效果/.test(desc);
+    const isPotion = /随机神秘效果/.test(desc);
     const rm = desc.match(/获得\s*(\d+)\s*份?\s*口粮/) || desc.match(/口粮\s*[×x]\s*(\d+)/);
     const wm = desc.match(/木材\s*[×x]\s*(\d+)/);
     if (!healM && !isCrystal && !isPotion && !rm && !wm) {
@@ -227,7 +232,7 @@ export function createBattleBag({
     return true;
   }
   function countKinds(foe) {
-    return foe ? ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn', 'atkDown'].filter(k => (foe.status?.[k] || 0) > 0).length : 0;
+    return foe ? ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'atkDown'].filter(k => (foe.status?.[k] || 0) > 0).length : 0;
   }
   // 战斗效果类道具（2026-09-12 药水栏批次）：描述交真实执行器结算，敌方指向道具可拖/点选目标
   function useBattleEffectItem(entry, side) {
@@ -257,6 +262,11 @@ export function createBattleBag({
       throwIfActionCancelled(signal);
       const current = battleBagItems().find(item => item.uid === entry.uid);
       if (!current) return;
+      // 入队后再次核对，防止旧快照或直接调用绕过空堆保护。
+      if (['cmtn6bge52qt', 'tt-crystal'].includes(current.card.id) && !itemUsability(current.card).usable) {
+        G.log('本场消耗堆是空的，没有可复原的卡牌，道具未消耗', 'dim');
+        return;
+      }
       if (needsEnemy && target.dead) {
         G.log(`[[icon:cross]] 【${esc(card.name)}】的目标已失效，道具未消耗`, 'warn');
         return;
@@ -270,6 +280,13 @@ export function createBattleBag({
       if (index < 0) return;
       G.ownedCards.splice(index, 1);
       G.log(`[[icon:bag]] 使用道具【<b>${esc(card.name)}</b>】${target ? `→ ${esc(target.name)}` : ''}`, 'sys');
+      if (current.card.id === 'tt3-mystery-potion') {
+        delayed.push({ special: 'mysteryPotion', text: '变成1张随机招式卡牌，使其费用为0。', cardName: card.name,
+          repeat: false, left: null, notBeforeTurn: getTurn() + 1 });
+        G.log(`[[icon:hourglass]] 【${esc(card.name)}】已使用：下回合开始时获得1张0费随机招式`, 'sys');
+        requestBattleRender();
+        return;
+      }
       if (applyTextEffects.steps) await runStagedSteps(applyTextEffects.steps(card, String(card.desc || ''), target, {}), signal);
       else applyTextEffects(card, String(card.desc || ''), target, {});
       throwIfActionCancelled(signal);
@@ -285,7 +302,7 @@ export function createBattleBag({
   let slamFlipToken = 0;
   let slamUsedToken = -1, slamUsedTurn = -1;
   function slamSkill() {
-    return { ...slamSkillFor(G ? G.myClass : null, slamFlipToken === battleState.token),
+    return { ...slamSkillFor(G ? G.myClass : null, slamFlipToken === battleState.token, mode),
       used: slamUsedToken === battleState.token && slamUsedTurn === getTurn() };
   }
   // 伤害类型按 kind 走现有结算链（Combat.dealDamage）：刺客=固定伤；战士=攻击（同初始攻击结算链，
@@ -437,11 +454,10 @@ export function createBattleBag({
     G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>：回复 <b>${n}</b> 点生命（-${skill.cost} 能量）`, 'sys');
     switchSlamSkill(skill);
   }
-  // 法师·搜刮（2026-10-02 老板）：随机获得一张卡牌入手牌——取池口径对齐神秘药水
-  // （isRandomObtainable 单源，battle.bag useItem 同款）：普通战置入手牌、BOSS 战洗入牌库
+  // 法师·搜刮：沿可随机获得池取一张；普通战置入手牌，BOSS 战排除不可用道具后洗入牌库。
   function resolveSlamAcquire(skill) {
     set$energy(energy - skill.cost);
-    const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c));
+    const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c) && (mode !== 'boss' || c.type !== '道具'));
     const got = pool.length ? pool[Math.floor(Random.random('loot') * pool.length)] : null;
     if (got) {
       if (mode === 'boss') addDeckCard({ ...got });

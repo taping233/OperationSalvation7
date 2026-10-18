@@ -89,6 +89,21 @@ function savedExtractionCards(game, remaining, isSha) {
   })).filter(stack => stack.count > 0));
 }
 
+// The pending snapshot preserves every original roll. Only the same cards accepted by
+// base.pocket count as brought back; successful rolls of initial/career cards are rule losses.
+export function extractionPocketOutcome(pending, isSha = () => false) {
+  const total = Number.isInteger(pending?.totalPocketCount) ? pending.totalPocketCount : 0;
+  const randomLost = Number.isInteger(pending?.lostPocketCount) ? pending.lostPocketCount : 0;
+  if (!Array.isArray(pending?.keptPocket)) {
+    // Legacy receipt callers without a roll list retain their historical count-only contract.
+    return { keptCards: [], keptCount: Math.max(0, total - randomLost), ruleLost: 0, lostCount: randomLost };
+  }
+  const keptCards = pending.keptPocket.filter(s => !isSha(s.card) && s.card.rarity !== '职业');
+  const keptCount = keptCards.reduce((n, s) => n + s.count, 0);
+  const ruleLost = pending.keptPocket.reduce((n, s) => n + s.count, 0) - keptCount;
+  return { keptCards, keptCount, ruleLost, lostCount: randomLost + ruleLost };
+}
+
 // 2026-10-03 老板（SYS-02）：一次远征的「真实回执」——结算命令链在 extractFinish 提交时构造，
 // 随既有事务收据持久化（base._m01.requests 的 output，journal 幂等语义不变，不新增存储机制）；
 // 结算页、跑局记录、Agent 导出三方读同一份事实。只读持久态（pending 的净带回/散失）
@@ -99,8 +114,7 @@ export function buildExtractionReceipt({ game, pending, isSha = () => false, xpM
   const remaining = pending && Array.isArray(pending.remainingCards) ? pending.remainingCards : [];
   const remainingCount = remaining.reduce((n, s) => n + (s.count || 0), 0);
   const ownedNonSha = (game.ownedCards || []).filter(o => o && o.card && !isSha(o.card)).length;
-  const pocketTotal = pending && Number.isInteger(pending.totalPocketCount) ? pending.totalPocketCount : 0;
-  const pocketLost = pending && Number.isInteger(pending.lostPocketCount) ? pending.lostPocketCount : 0;
+  const pocket = extractionPocketOutcome(pending, isSha);
   const resources = pending && pending.resources ? pending.resources : {};
   return {
     version: 1,
@@ -112,7 +126,7 @@ export function buildExtractionReceipt({ game, pending, isSha = () => false, xpM
     savedCards: savedExtractionCards(game, remaining, isSha),   // 随事务回执保留最终入库集合，供跑局记录使用
     netTake: {
       cardsStashed: Math.max(0, ownedNonSha - remainingCount),   // 本局真实入库张数（与携出候选、仓库原持有区分）
-      pocketKept: Math.max(0, pocketTotal - pocketLost),
+      pocketKept: pocket.keptCount,
       wood: Number.isInteger(resources.wood) ? resources.wood : 0,
       rations: Number.isInteger(resources.rations) ? resources.rations : 0,
     },
@@ -120,7 +134,8 @@ export function buildExtractionReceipt({ game, pending, isSha = () => false, xpM
       lostCount: remainingCount,   // 完成整理时未入库的卡牌即散失
       lostNotable: remaining.filter(s => s.card && (s.card.rarity === '传说' || s.card.rarity === '史诗'))
         .slice(0, 6).map(s => ({ name: s.card.name, rarity: s.card.rarity, count: s.count || 1 })),
-      pocketLost,
+      pocketLost: pocket.lostCount,
+      ...(pocket.ruleLost ? { pocketRuleLost: pocket.ruleLost } : {}),
     },
     runCoins: Number.isInteger(game.coins) ? game.coins : null,   // 随身币不带回，只作本局记录
     durationSec: Math.max(0, Math.floor(Number(game.elapsed) || 0)),
@@ -160,9 +175,7 @@ function calculateBaseAndPending({ game, runId, random, baseSnapshot, baseApi, c
   const base = clone(baseSnapshot);
   base.wood += resources.wood;
   base.rations += resources.rations;
-  keptPocket.forEach(stack => {
-    if (!baseApi.isSha(stack.card) && stack.card.rarity !== '职业') stackInto(base.pocket, stack);
-  });
+  extractionPocketOutcome(pending, baseApi.isSha).keptCards.forEach(stack => stackInto(base.pocket, stack));
   base.stats.extracts++;   // 09-24 定版：撤离不再解锁研究所（改钥匙开门，见 game.nest.openNestPrep）
   base.stats.bestRunCoins = Math.max(base.stats.bestRunCoins, game.coins || 0);
   const elapsedNow = Math.max(0, Number(game.elapsed) || 0);

@@ -1,0 +1,73 @@
+- main:
+  - dialog "archive 收获 · 首脑保险柜 · 第 1 / 1":
+    - navigation:
+      - text: 全古朴受控抽卡 / 隔离存档
+      - button "小箱"
+      - button "职业小箱"
+      - button "中箱"
+      - button "大箱"
+      - button "首脑箱"
+      - button "满包小箱"
+      - button "腾出位置"
+      - button "重载奖励" [active]
+      - button "旧三选一"
+    - dialog "首脑保险柜":
+      - button "返回奖励":
+        - generic: ←
+        - text: 返回奖励
+      - generic: 首脑保险柜
+      - heading "领取奖励 · 全部可领" [level=3]
+      - paragraph: 共 5 张 · 横向查看全部
+      - paragraph: 奖励可分别领取
+      - article:
+        - button "放大查看冰刺":
+          - generic: "1"
+          - img "冰刺"
+          - generic: 法术
+          - generic: ·古朴
+          - generic: 冰刺
+          - generic: 隔离测试卡面；生成与领取使用真实宝箱控制器。
+        - button "收下"
+      - article:
+        - button "放大查看冰封千里":
+          - generic: "1"
+          - img "冰封千里"
+          - generic: 法术
+          - generic: ·古朴
+          - generic: 冰封千里
+          - generic: 隔离测试卡面；生成与领取使用真实宝箱控制器。
+        - button "收下"
+      - article:
+        - button "放大查看火球":
+          - generic: "1"
+          - img "火球"
+          - generic: 法术
+          - generic: ·古朴
+          - generic: 火球
+          - generic: 隔离测试卡面；生成与领取使用真实宝箱控制器。
+        - button "收下"
+      - article:
+        - button "放大查看寒霜":
+          - generic: "1"
+          - img "寒霜"
+          - generic: 法术
+          - generic: ·古朴
+          - generic: 寒霜
+          - generic: 隔离测试卡面；生成与领取使用真实宝箱控制器。
+        - button "收下"
+      - article:
+        - button "放大查看冰墙":
+          - generic: "1"
+          - img "冰墙"
+          - generic: 法术
+          - generic: ·古朴
+          - generic: 冰墙
+          - generic: 隔离测试卡面；生成与领取使用真实宝箱控制器。
+        - button "收下"
+      - complementary "奖励操作":
+        - button "全部收下"
+      - img "bag"
+      - text: 0/16 格
+      - button "整理背包"
+      - button "返回地图 · 保留奖励"
+      - button "放弃剩余卡牌"

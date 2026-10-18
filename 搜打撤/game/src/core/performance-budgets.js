@@ -21,7 +21,7 @@ const PERFORMANCE_BUDGETS = Object.freeze({
   packageBytesMax: 112 * 1024 * 1024,
 });
 
-// 启动总预热时优先排入首轮高频遭遇；完整运行时美术与图鉴缩略图随后分批加载。
+// 启动仅预热首轮高频遭遇场景；人物、卡图和图鉴由页面入口按需加载。
 const STARTUP_SCENE_KEYS = Object.freeze(['battle', 'coin', 'wood', 'rations', 'key', 'fire']);
 
 export { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS };

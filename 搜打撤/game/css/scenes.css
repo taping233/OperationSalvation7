@@ -567,6 +567,8 @@
   #overlay :is(.scene,.node-pg)[data-asset-key="scene-event-quartermaster"] { background-image:url('../assets/scenes/event-ev19-quartermaster.webp'); }
 
   .event-choice-hand { align-items:stretch; max-height:calc(var(--game-layout-height, 100vh) * 0.5); overflow:auto; padding:8px 4px 14px; }
+  .event-choice-hand .event-choice-option { display:flex; flex-direction:column; align-items:stretch; gap:12px; }
+  .event-choice-hand .event-choice-option > .ov-btn { width:100%; margin:0; }
   button.event-choice-card { appearance:none; -webkit-appearance:none; padding:0; border:0; background:transparent; color:inherit; cursor:pointer; position:relative; }
   button.event-choice-card:hover,
   button.event-choice-card:focus-visible { transform:translateY(-5px); filter:brightness(1.08); outline:2px solid rgba(126,212,255,.88); outline-offset:3px; }

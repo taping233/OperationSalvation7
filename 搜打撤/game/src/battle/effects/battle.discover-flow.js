@@ -26,8 +26,9 @@ import {
  *   isRandomObtainable: DiscoverCardPredicate,
  *   sellPrice: (card: DiscoverCard) => number,
  *   findByUid: (uid: string) => DiscoverCardEntry | null,
- *   addTempCard: (card: DiscoverCard) => string,
+ *   addTempCard: (card: DiscoverCard, presentation?: { source: 'pouch' | 'discover-cast' }) => string,
  *   queueCardExecution: (uid: string, card: DiscoverCard, fuelUids: string[], target: unknown, freeCost: boolean) => unknown,
+ *   directPlayReason?: (card: DiscoverCard) => string,
  *   fireCatGift: (card: DiscoverCard) => void
  * }} cards
  * @property {{ getJobs: () => DiscoverQueueJob[], get: () => DiscoveringState, set: (state: DiscoveringState) => void, requestRender: () => void }} interaction
@@ -164,6 +165,16 @@ export function createBattleDiscoverFlow(ports) {
     const sourceCardId = queuedState ? state.sourceCardId : null;
     const pool = queuedState ? state.pool : null;
 
+    const directPlayIssue = ['play', 'potion', 'playKeep', 'pouch'].includes(act || '')
+      ? cards.directPlayReason?.(card) || '' : '';
+    if (act === 'pouch' && directPlayIssue) {
+      // Reject before removing the pouch entry or its persistent owned source.
+      // Close this attempt so a pouch containing only gated cards cannot trap input.
+      interaction.set(null);
+      output.log(`[[icon:cross]] ${esc(directPlayIssue)}；锦囊与背包中的卡牌均未消耗`, 'warn');
+      interaction.requestRender();
+      return;
+    }
     interaction.set(null);
     if (deckBottom && deckBottomUids.length) {
       const pickedUid = deckBottomUids[+index] != null ? deckBottomUids[+index] : null;
@@ -176,14 +187,14 @@ export function createBattleDiscoverFlow(ports) {
     if (act !== 'pouch' && !hasStructuredAcquire) cards.fireCatGift(card);
 
     if (act === 'play' || act === 'potion') {
-      const uid = cards.addTempCard(card);
-      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并直接施放（免费用 · 战斗内临时卡，战后消散）`, 'loot');
+      const uid = cards.addTempCard(card, directPlayIssue ? undefined : { source: 'discover-cast' });
+      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】${directPlayIssue ? '未施放，保留在手牌中等待注能' : '并直接施放'}（免费用 · 本场生成：使用或消耗后进入消耗区，未用则战后消散）`, 'loot');
       const entry = cards.findByUid(uid);
       if (!entry) throw new Error(`Missing discovered card after add: ${uid}`);
       cards.queueCardExecution(uid, entry.card, [], battle.firstAliveTarget(), true);
     } else if (act === 'playKeep') {
-      const uid = cards.addTempCard(card);
-      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并直接施放（战斗内临时卡，战后消散）`, 'loot');
+      const uid = cards.addTempCard(card, directPlayIssue ? undefined : { source: 'discover-cast' });
+      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】${directPlayIssue ? '未施放，保留在手牌中等待注能' : '并直接施放'}（本场生成：使用或消耗后进入消耗区，未用则战后消散）`, 'loot');
       const entry = cards.findByUid(uid);
       if (!entry) throw new Error(`Missing discovered card after add: ${uid}`);
       cards.queueCardExecution(uid, entry.card, [], battle.firstAliveTarget(), true);
@@ -199,7 +210,7 @@ export function createBattleDiscoverFlow(ports) {
         if (pouchIndex >= 0) pouch.splice(pouchIndex, 1);
       }
       if (card.pouchUid && effects.removeOwnedCard) effects.removeOwnedCard(String(card.pouchUid));   // 09-29 双向同步：施放即消耗背包母本
-      const uid = cards.addTempCard(card);
+      const uid = cards.addTempCard(card, { source: 'pouch' });
       output.log(`[[icon:question]] <b>法师锦囊</b>：施放其中的【<b>${esc(card.name)}</b>】（锦囊余 ${pouchEntry && Array.isArray(pouchEntry.card._pouch) ? pouchEntry.card._pouch.length : 0} 张）`, 'loot');
       const entry = cards.findByUid(uid);
       if (!entry) throw new Error(`Missing discovered card after add: ${uid}`);
@@ -207,10 +218,10 @@ export function createBattleDiscoverFlow(ports) {
     } else if (act === 'dup') {
       cards.addTempCard(card);
       cards.addTempCard(card);
-      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并额外获得 1 张复制（×2 置入手牌 · 战斗内临时卡，战后消散）`, 'loot');
+      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】并额外获得 1 张复制（×2 置入手牌 · 本场生成：使用或消耗后进入消耗区，未用则战后消散）`, 'loot');
     } else {
       const uid = cards.addTempCard(card);
-      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】置入手牌（战斗内临时卡，战后消散）`, 'loot');
+      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】置入手牌（本场生成：使用或消耗后进入消耗区，未用则战后消散）`, 'loot');
       if (priceArmor) {
         const price = cards.sellPrice(card);
         const armor = effects.addArmor(price);

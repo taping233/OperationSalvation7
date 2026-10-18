@@ -1,3 +1,7 @@
+// Enemy IDs identify species, not combat instances. Indices stay aligned with
+// the snapshot/DOM foe slots, including dead placeholders, for this battle token.
+export const isTargetableEnemy = (foe, index, excludedIndex = null) => !!foe && !foe.dead
+  && Number.isInteger(index) && index >= 0 && index !== excludedIndex;
 // 单次战斗目标会话：负责命中筛选、hover 转换及一次性选择/取消结果。
 export function createTargetSession({ side, snapshot, isBattleCurrent, getTargets, onHover }) {
   let hover = null;
@@ -29,7 +33,7 @@ export function createTargetSession({ side, snapshot, isBattleCurrent, getTarget
       if (!el) return null;
       const idx = +el.dataset.eidx;
       const foe = snapshot?.foes[idx];
-      return foe && !foe.dead ? { kind: 'enemy', idx, el } : null;
+      return isTargetableEnemy(foe, idx, snapshot?.pendingTarget?.excludedTargetIndex) ? { kind: 'enemy', idx, el } : null;
     }
     const el = elAt.closest('#btSelf');
     return el ? { kind: 'self', el } : null;
@@ -47,7 +51,7 @@ export function createTargetSession({ side, snapshot, isBattleCurrent, getTarget
     if (target.kind === 'enemy') {
       const targets = getTargets ? getTargets() : snapshot?.foes;
       const foe = targets?.[target.idx];
-      if (!foe || foe.dead) return false;
+      if (!isTargetableEnemy(foe, target.idx, snapshot?.pendingTarget?.excludedTargetIndex)) return false;
     }
     setHover(null);
     settled = true;
@@ -59,7 +63,7 @@ export function createTargetSession({ side, snapshot, isBattleCurrent, getTarget
     if (kind === 'enemy') {
       const targets = getTargets ? getTargets() : snapshot?.foes;
       const foe = targets?.[idx];
-      if (!foe || foe.dead) return false;
+      if (!isTargetableEnemy(foe, idx, snapshot?.pendingTarget?.excludedTargetIndex)) return false;
       return select({ kind, idx });
     }
     if (kind === 'self' || kind === 'any') return select({ kind });

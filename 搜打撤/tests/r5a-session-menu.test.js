@@ -29,7 +29,7 @@ describe('R5-a real session persistence',()=>{
     expect(['applied','fallback']).toContain(session.game.routePlan.status);
     expect(session.saveGame()).toBe(true);
     const stored=JSON.parse(localStorage.getItem(RunStorage.key(slot)));
-    expect(stored.mapSnapshot.snapshotVersion).toBe(2); expect(stored.routeVersion).toBe('r5-routes-v1');
+    expect(stored.mapSnapshot.snapshotVersion).toBe(2); expect(stored.routeVersion).toBe('r5-routes-v2');
     const plan=structuredClone(stored.mapSnapshot.routePlan);
     expect(session.loadGame(slot).ok).toBe(true); expect(session.game.routePlan).toEqual(plan);
   });

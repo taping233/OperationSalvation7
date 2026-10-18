@@ -4,6 +4,7 @@ import { prepareMapBrushArt } from './map-brush-art.js';
 import { drawTacticalIcon } from './renderer.icons.js';
 import { mapImageReady } from './map-image-ready.js';
 const art = {
+  altar: { url:new URL('../../assets/scenes/map-nodes/altar-symbol-1017-v2.webp',import.meta.url).href, bounds:[134,133,386,402] },
   blank: { url:new URL('../../assets/scenes/map-nodes/blank-symbol-foreground-1013-v1.webp',import.meta.url).href, bounds:[86,77,435,443] },
   fire: { url:new URL('../../assets/scenes/map-nodes/fire-symbol-foreground-1012-v5.webp',import.meta.url).href, bounds:[82,120,428,410] },
   battle: { url:new URL('../../assets/scenes/map-nodes/battle-symbol-foreground-1012-v5.webp',import.meta.url).href, bounds:[75,32,429,477] },

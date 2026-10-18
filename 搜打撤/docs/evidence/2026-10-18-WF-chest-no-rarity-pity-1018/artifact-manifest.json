@@ -1,0 +1,128 @@
+[
+  {
+    "path": "2026-10-18T06-45-57.711Z-683a25a2.json",
+    "bytes": 592743,
+    "sha256": "2470ad641ab99dc62cb3cb5bae44b59d27a3993a5b803de09ad05d52a996d2dc",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "2026-10-18T06-45-57.711Z-683a25a2.log",
+    "bytes": 7041,
+    "sha256": "9ea0fb635111c11ddd19db203db9927bcf981112f525dba133e389a8faa0d928",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "2026-10-18T06-47-29.973Z-f379784a.json",
+    "bytes": 592945,
+    "sha256": "4a59a61b3c058abf2ec582c07d51c1d491db20a1bd5631a3e748f652e67e5d32",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "2026-10-18T06-47-29.973Z-f379784a.log",
+    "bytes": 5466,
+    "sha256": "d6225c02ecb245a9b453b2deb88c2d3367b71db2119290951decbd0bf12f266f",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "2026-10-18T06-54-51.637Z-26fb12df.json",
+    "bytes": 593999,
+    "sha256": "68ca94d5e58cc8525397f2993f0b5e43cb8a031796f6b43acbb417b3b910dadc",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "2026-10-18T06-54-51.637Z-26fb12df.log",
+    "bytes": 13960,
+    "sha256": "73162d1970231b7f02e0eb5a0b3349585132e28619cc54cc275c7e2405c2ba44",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "before/chest-extra-rewards-choice.test.js.txt",
+    "bytes": 17595,
+    "sha256": "fdca90867f69592945e8cbda1604424cd90925beccdd6bb9e70ed94555a1b2ed",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "before/chests.js.txt",
+    "bytes": 46801,
+    "sha256": "0921339ca58b9d23f6759c2def6cbd891b67915a9198345a1e5cfabc635f035d",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "before/event-callback-lifecycle-audit.test.js.txt",
+    "bytes": 27960,
+    "sha256": "3f3076c45bfef7f9ab0be43e214010f8af2198d446a52def818ce6e479b3f57d",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "before/game.run.flow.js.txt",
+    "bytes": 57198,
+    "sha256": "81ccb3cd5238226ede79d0a42dd5d7397f05439448dc1ee34b32c1a09a9c3942",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "before/map.json.txt",
+    "bytes": 9775,
+    "sha256": "7df4cbb54b0e85beb8e85aac0920b8702156288e15a030041bee030d65468420",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "before/pet-egg-chest.test.js.txt",
+    "bytes": 5015,
+    "sha256": "39fdcfeb3a4f5fe65a37f14ef82da20e94a3b83e53849ee413e934dccac5d216",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "before/rules.md.txt",
+    "bytes": 23968,
+    "sha256": "3442f7afb76d043275c1290689bd127fc6425a8693fda9e230564fae68503c5e",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "boss-all-common.png",
+    "bytes": 93952,
+    "sha256": "26a434f6071230991a8a228dd7f1d9524b39b5ad8f09cbffaf5135718cea26b4",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "boss-restored-dom.txt",
+    "bytes": 2463,
+    "sha256": "08cec3b81daa87edae7ea89b22d5cdf4271f11a248908e935ae0767fbb4f4cc8",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "build-chest-review.py",
+    "bytes": 1369,
+    "sha256": "8bfa6f77053a823876c479abfa2fed5cc8f590109a1a765dd1a3491b0e3cf12a",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "medium-all-common.png",
+    "bytes": 74013,
+    "sha256": "70ac385e6bcd10adaa544e3ded94dd660275768ed2f2ae9ced65aad8c2d657bd",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "README.md",
+    "bytes": 2887,
+    "sha256": "30a2a96142aef0e67b8edcc0c28c06c334d6745a63f498e5b51d8cd359b2dc5e",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "resource-before-dom.txt",
+    "bytes": 1364,
+    "sha256": "c6944d3c4cd7315f23ea189e8e607b6539cf5cfa2929cdd03947f25ba67f76ed",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "resource-candidates.png",
+    "bytes": 58588,
+    "sha256": "5b92d703ddcd652c9653bfc4e06c1d2aa31550e0e48ad3ac2e67cc0dd840a189",
+    "gitEligibleSize": true
+  },
+  {
+    "path": "resource-reentered-dom.txt",
+    "bytes": 1364,
+    "sha256": "c6944d3c4cd7315f23ea189e8e607b6539cf5cfa2929cdd03947f25ba67f76ed",
+    "gitEligibleSize": true
+  }
+]

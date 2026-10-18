@@ -23,16 +23,23 @@ export function refreshCardBrowser(root, { reset = false } = {}) {
   const perPage = columns * rows;
   const pages = Math.max(1, Math.ceil(visible.length / perPage));
   state.page = reset ? 0 : Math.min(state.page, pages - 1);
-  track.style.gridTemplateColumns = `repeat(${columns}, minmax(0, ${fixedColumns ? '1fr' : `${minimum}px`}))`;
+  const gridColumns = `repeat(${columns}, minmax(0, ${fixedColumns ? '1fr' : `${minimum}px`}))`;
+  if (track.style.gridTemplateColumns !== gridColumns) track.style.gridTemplateColumns = gridColumns;
   const first = state.page * perPage;
   for (const item of items) {
     const index = visibleIndex.get(item);
-    item.hidden = index === undefined || index < first || index >= first + perPage;
+    const hidden = index === undefined || index < first || index >= first + perPage;
+    if (item.hidden !== hidden) item.hidden = hidden;
   }
-  root.dataset.empty = String(!visible.length);
-  root.querySelector('[data-browser-page="previous"]').disabled = state.page === 0;
-  root.querySelector('[data-browser-page="next"]').disabled = state.page >= pages - 1;
-  root.querySelector('.card-browser-position').textContent = visible.length ? `${state.page + 1} / ${pages}` : '暂无卡牌';
+  const empty = String(!visible.length);
+  if (root.dataset.empty !== empty) root.dataset.empty = empty;
+  const previous = root.querySelector('[data-browser-page="previous"]');
+  const next = root.querySelector('[data-browser-page="next"]');
+  const position = root.querySelector('.card-browser-position');
+  if (previous.disabled !== (state.page === 0)) previous.disabled = state.page === 0;
+  if (next.disabled !== (state.page >= pages - 1)) next.disabled = state.page >= pages - 1;
+  const label = visible.length ? `${state.page + 1} / ${pages}` : '暂无卡牌';
+  if (position.textContent !== label) position.textContent = label;
 }
 export function bindCardBrowser(root, { onOpen, onPage } = {}) {
   if (!root || instances.has(root)) return;

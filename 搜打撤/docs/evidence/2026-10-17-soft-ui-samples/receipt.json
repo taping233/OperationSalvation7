@@ -1,0 +1,76 @@
+{
+  "scope": "Four CC0 original samples for click/cardSelect/confirm/gain/coin only",
+  "files": [
+    {
+      "path": "game/src/audio/sound.js",
+      "bytes": 33302,
+      "sha256": "e53822cce1d1a6650adc18674302861d49f9bd85efb1b77653a01287cc0aadf3"
+    },
+    {
+      "path": "game/src/audio/sound.ui-samples.js",
+      "bytes": 2153,
+      "sha256": "76279f33ae9467025c1099959e016e731c9e96339bfa3960798a527ab76b092f"
+    },
+    {
+      "path": "tests/sound-lifecycle.test.js",
+      "bytes": 10094,
+      "sha256": "3bbab0bbbc618e8fcf4221604741da457c764736368f7df5c6c47a2bab7f485c"
+    },
+    {
+      "path": "tests/sound-ui-samples.test.js",
+      "bytes": 3603,
+      "sha256": "fe7a16a3f6da6a49d54cb8ceeb696f82c452a1f602e24ea2813d90f1fe1f6f7c"
+    },
+    {
+      "path": "docs/audio-system.md",
+      "bytes": 5630,
+      "sha256": "745d8878f0d1e0e9140c0e0e1444131ecb0d7825e3d253c061bb5bc7c52082c0"
+    },
+    {
+      "path": "game/assets/asset-manifest.json",
+      "bytes": 522862,
+      "sha256": "1dddb57e99ffd2b4ed6c2a2056e93320d0400d953c13071e7121761cf6b210aa"
+    },
+    {
+      "path": "game/assets/sfx/interface-soft/confirmation_001.ogg",
+      "bytes": 8968,
+      "sha256": "063564703b6094d70718a3e787a55cc9141611e4ecd6b6637f8828f79b4a8c3a"
+    },
+    {
+      "path": "game/assets/sfx/interface-soft/select_001.ogg",
+      "bytes": 5468,
+      "sha256": "aec0c31ea934a35936ae0d2ab8fac8123c93aa5647f935853a58dbaf90278b7a"
+    },
+    {
+      "path": "game/assets/sfx/interface-soft/README.md",
+      "bytes": 324,
+      "sha256": "a26ae502224ef7a6eba8ec49d24bc65ebb8c013fd79b0a99a90157391bb0ea65"
+    },
+    {
+      "path": "game/assets/sfx/interface-soft/License.txt",
+      "bytes": 574,
+      "sha256": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9"
+    },
+    {
+      "path": "game/assets/sfx/interface-soft/pluck_001.ogg",
+      "bytes": 6317,
+      "sha256": "be97ec4893a02d6eccfb678daa76c83e34cb2583b834ec2593d2641def739fa4"
+    },
+    {
+      "path": "game/assets/sfx/interface-soft/click_001.ogg",
+      "bytes": 4876,
+      "sha256": "ccfb7fa0cccdd9faec0eb16033c732b1e308d139d80f799161495d58f7adcdb9"
+    }
+  ],
+  "source": "https://kenney.nl/assets/interface-sounds",
+  "tests": "6 files, 79 tests passed",
+  "lint": "passed",
+  "types": "8 configurations passed",
+  "unverified": [
+    "No human listening acceptance",
+    "No browser playback acceptance in this worker",
+    "No full suite/build/CI",
+    "No git metadata in recovered cloud copy; handoff cannot run"
+  ],
+  "docs": "Only two existing missing directory links in docs/README.md"
+}

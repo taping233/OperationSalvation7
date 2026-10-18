@@ -1,0 +1,11 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>物资格分档抽卡 · 隔离验证</title>
+<script>
+const memory = new Map();
+Object.defineProperty(window,'localStorage',{value:{getItem:key=>memory.get(key)??null,setItem:(key,value)=>memory.set(key,String(value)),removeItem:key=>memory.delete(key)}});
+</script>
+<script type="module">
+const html = await (await fetch('/index.html')).text();
+document.open();
+document.write(html.replace('<head>','<head><base href="/">').replace('</body>','<script type="module" src="/dev/resource-drop-review.js?review=resource-drop-1018-v2"><\/script></body>'));
+document.close();
+</script></html>

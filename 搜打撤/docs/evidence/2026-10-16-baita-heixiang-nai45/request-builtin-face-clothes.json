@@ -1,0 +1,35 @@
+{
+  "status": "generated",
+  "tool": "image_gen",
+  "prompt": "Edit IMAGE 1 only. Image 1 is the original NAI V5 illustration and is the sole authority for its existing drawing style, line weight, simple grouped shading, level of finish, color palette, light, framing, scale, positions, poses, facial directions, and every prop. Images 2 (Baita) and 3 (Heixiang) supply FACE AND CLOTHING IDENTITY ONLY. Produce one horizontal image.\n\nMake restrained corrections ONLY to their faces, nearby hair details, and clothing. Keep the original anime rendering of image 1 exactly in spirit: economical line drawing, broad clean shadow shapes, minimal facial marks and existing cloth fold density. Match the current detail level. Do not apply the more intricate painted style of images 2 and 3; do not make a glossy or highly polished key visual. No added brush texture, tiny wrinkles, dense strands, extra highlights, iris detail, skin modeling or new material weathering.\n\nHeixiang at left: retain the target's very dark brown skin, forward-facing gaze, lowered brows, face size and expression. Match reference 3's facial identity: broad masculine jaw, strong brows and amber-gold eyes; scar is three short stitched marks only on his anatomical LEFT cheek, viewer-right, without crossing his nose. Correct the hair silhouette to short black swept-back hair, exposed forehead and cropped sides, with a few simple clumps. Clothes retain the same pose and silhouette but match reference 3: fitted BLACK long-sleeved combat outfit and full-finger gloves, a single STEEL-GRAY heavy shoulder plate, BROWN-ORANGE scarf around neck. Keep these colors separated. Do not invent extra armor, ornaments or face markings.\n\nBaita at right: preserve the target's turned face, adult proportions, green eyes, face size and calm expression; match reference 2's facial identity with economical anime eyes and nose/mouth, not a childlike doll or semi-realistic face. Preserve the existing long wavy DARK BROWN hair mass and make only small identity corrections: two adjacent slim straight gold hairpins on one side, with no added jewelry. Clothing: closed white buttoned blouse with small upright collar and gathered long sleeves/cuffs, broad dark-green suspender straps with small plain metal buckles, dark-green long skirt. Preserve the target's folds and light-dark pattern, and remove any invented necktie or maid styling.\n\nEverything else stays as IMAGE 1: Heixiang's single coffee cup and saucer remain in his gloved hands; Baita's existing coffee cup remains at her mouth and her other hand remains on her lap book. Do NOT replace her cup with cake or a fork. Preserve the book's current position and open state, the two floating books, sword on Heixiang's back, dark paneled wall, stone base and all existing cropping. No pose changes, standing/sitting rearrangement, added objects, text, frame, logo or watermark. This is a face-and-costume correction, not a redraw of the whole painting.",
+  "referenced_image_paths": [
+    "D:\\素材\\代号柒\\.tmp\\nai\\baita-heixiang-naiv5-20261016-v3-prompt.png",
+    "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\baita.webp",
+    "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\heixiang.webp"
+  ],
+  "transparent_background": false,
+  "scope": "Only face and clothing identity; retain original NAI V5 rendering, composition, lighting and props.",
+  "game_integrated": false,
+  "output": "C:\\Users\\太平\\.codex\\generated_images\\01a144c7-d822-7eb3-b53a-46969e84145d\\exec-c7d4ddac-d8f5-42c9-aedd-5e3317f2e885.png",
+  "sha256": "01a9ba3978cf5ed2a561024897c0ca868ccedeccf775258a3ef0a0ff23139cad",
+  "size": [
+    1659,
+    948
+  ],
+  "visual_review": {
+    "source": "assistant viewed tool output",
+    "matched": [
+      "original NAI V5 close composition, side light, cups, saucer, lap book and floating books retained",
+      "short swept-back Heixiang hair, left-cheek-only stitched scar, gray shoulder armor and orange scarf",
+      "Baita same-side gold hairpins, buttoned white collar and green buckled suspenders",
+      "simpler grouped shading than rejected painterly refinement"
+    ],
+    "limitations": [
+      "generative edit is not pixel-identical outside edited regions",
+      "no visible full-body standing verification in this close crop"
+    ],
+    "user_approved": false
+  },
+  "tests_run": false,
+  "committed": false
+}

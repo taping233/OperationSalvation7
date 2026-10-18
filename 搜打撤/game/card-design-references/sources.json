@@ -1,0 +1,125 @@
+{
+  "collected": "2026-10-10",
+  "refs": [
+    {
+      "id": "snap",
+      "game": "MARVEL SNAP",
+      "label": "Captain Marvel variants",
+      "source": "https://marvelsnap.com/media/",
+      "url": "https://d2fstzkj6h0nvg.cloudfront.net/wp-content/uploads/2025/03/31182908/CAPTAIN-MARVEL-VARIANT-SHOWCASE.png",
+      "file": "images/snap.png",
+      "bytes": 2728957,
+      "sha256": "18b6216f4cbfc20ccca93b7ec9c15b67dbc764748014b7ce9cb36c1cdc0193e7"
+    },
+    {
+      "id": "mtg-standard",
+      "game": "万智牌",
+      "label": "Talion · 标准框",
+      "source": "https://magic.wizards.com/en/news/announcements/a-first-look-at-wilds-of-eldraine",
+      "url": "https://media.wizards.com/2023/images/daily/en_0284d07b3e.png",
+      "file": "images/mtg-standard.png",
+      "bytes": 1089008,
+      "sha256": "ccb1064ec6655aeebb82892d6a02f80b62aa1e59a331cb1af0e41e8484cff07c"
+    },
+    {
+      "id": "mtg-borderless",
+      "game": "万智牌",
+      "label": "Talion · 无边框",
+      "source": "https://magic.wizards.com/en/news/announcements/a-first-look-at-wilds-of-eldraine",
+      "url": "https://media.wizards.com/2023/images/daily/en_a4c94c7dbb.png",
+      "file": "images/mtg-borderless.png",
+      "bytes": 1192992,
+      "sha256": "28de364373e87ba5a21817e77951dc80b32914b6086ebb84a5b565af20ea3ca4"
+    },
+    {
+      "id": "mtg-showcase",
+      "game": "万智牌",
+      "label": "Cruel Somnophage · 展示框",
+      "source": "https://magic.wizards.com/en/news/announcements/a-first-look-at-wilds-of-eldraine",
+      "url": "https://media.wizards.com/2023/images/daily/en_b5f83c4ed8.png",
+      "file": "images/mtg-showcase.png",
+      "bytes": 1119793,
+      "sha256": "211a6ceefd36ac009bfd629c24fea14bf5cf1c6827bf1568b57ed0750c2740c7"
+    },
+    {
+      "id": "lor-lux",
+      "game": "符文之地传说",
+      "label": "Lux · 单位卡",
+      "source": "https://developer.riotgames.com/docs/lor",
+      "url": "https://dd.b.pvp.net/7_10_0/set1/en_us/img/cards/01DE042.png",
+      "file": "images/lor-lux.png",
+      "bytes": 779484,
+      "sha256": "2df30cfa810d38cb370d635dda171d1e8ff18855756c40ac4831078c4e8aa3b7"
+    },
+    {
+      "id": "lor-deny",
+      "game": "符文之地传说",
+      "label": "Deny · 法术卡",
+      "source": "https://developer.riotgames.com/docs/lor",
+      "url": "https://dd.b.pvp.net/7_10_0/set1/en_us/img/cards/01IO049.png",
+      "file": "images/lor-deny.png",
+      "bytes": 565426,
+      "sha256": "a7173b9d8a46c596f4c10ad03409e4276f632903312db196d4765871438b9148"
+    },
+    {
+      "id": "lor-garen",
+      "game": "符文之地传说",
+      "label": "Garen · 单位卡",
+      "source": "https://developer.riotgames.com/docs/lor",
+      "url": "https://dd.b.pvp.net/7_10_0/set1/en_us/img/cards/01DE012.png",
+      "file": "images/lor-garen.png",
+      "bytes": 736267,
+      "sha256": "bb8a07104169c6e375628cb2df0c2169e2f36feca40074e318d02185a50763c8"
+    },
+    {
+      "id": "spire-cards",
+      "game": "杀戮尖塔 2",
+      "label": "官方卡牌品质展示",
+      "source": "https://megacrit.com/news/2024-11-07-neowsletter-issue-4/",
+      "url": "https://megacrit.com/images/shiny_rare_qol.gif",
+      "file": "images/spire-cards.gif",
+      "bytes": 3002273,
+      "sha256": "0e157a3ac5dc8485dcc731ec016fe3107066f85638144dad43661072e48df37a"
+    },
+    {
+      "id": "spire-game",
+      "game": "杀戮尖塔 2",
+      "label": "官方实机截图",
+      "source": "https://www.megacrit.com/press-kits/slay-the-spire-2/",
+      "url": "https://www.megacrit.com/images/steam_screenshot1_new.png",
+      "file": "images/spire-game.png",
+      "bytes": 3093707,
+      "sha256": "4ad5f844c542c1b7cf49300082e3dea7d07bec85d6467087c6bcd1c8fecd7dca"
+    },
+    {
+      "id": "balatro",
+      "game": "Balatro",
+      "label": "Joker · 官网卡牌",
+      "source": "https://www.playbalatro.com/",
+      "url": "https://www.playbalatro.com/_astro/main_card.CCEQ3skO_Z2jsFf3.png",
+      "file": "images/balatro.png",
+      "bytes": 30542,
+      "sha256": "ae388c72411f9cceb8d8826c5264be38d07d826387a450338aa7bfb7a5908447"
+    },
+    {
+      "id": "hearth-unit",
+      "game": "炉石传说",
+      "label": "Elise · 标准随从框",
+      "source": "https://hearthstone.blizzard.com/en-us/news/24267727/",
+      "url": "https://bnetcmsus-a.akamaihd.net/cms/content_entry_media/GLJW9GBQCD7C1772489162074.png",
+      "file": "images/hearth-unit.png",
+      "bytes": 161965,
+      "sha256": "0dcab6e9c57a7b11cc6a56cc52a12aa622eefa767eebe2e91732ceb315d65ea8"
+    },
+    {
+      "id": "hearth-spell",
+      "game": "炉石传说",
+      "label": "Unleash the Crocolisks · 法术框",
+      "source": "https://hearthstone.blizzard.com/en-us/news/24267727/",
+      "url": "https://bnetcmsus-a.akamaihd.net/cms/content_entry_media/M5U5OL1WU3HY1772489162904.png",
+      "file": "images/hearth-spell.png",
+      "bytes": 137606,
+      "sha256": "316ab9618dc1a9ffd6e0df36b9211555b17d96452611d9c84e0d9c0600e8db85"
+    }
+  ]
+}

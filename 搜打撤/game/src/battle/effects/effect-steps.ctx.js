@@ -13,7 +13,7 @@ const ARROW_TOKEN = { id: 'token-arrow', name: '箭', cost: 0, rarity: '衍生',
  * 「发现 / 随机获取 / 获得 N 张 ____卡/牌」句式中的名词短语 → 卡池谓词。
  * 返回 null = 未识别出限定（走通用随机池，isRandomObtainable 过滤）。 */
 export const POOL_NUM_MAP = { '一': 1, '两': 2, '二': 2, '三': 3, '四': 4, '五': 5 };
-const CURSE_DESC_RE = /诅咒|中毒|流血|冰冻|沉默|破甲|禁疗|灼烧/;
+const CURSE_DESC_RE = /诅咒|中毒|流血|冰冻|沉默|破甲|禁疗/;
 const CURSE_CAPABLE = (c) => ['武术', '法术', '装备', '能力卡'].includes(c.type) &&
   CURSE_DESC_RE.test(String(c.desc || ''));
 

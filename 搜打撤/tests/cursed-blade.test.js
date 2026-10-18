@@ -24,7 +24,7 @@ beforeAll(() => {
   C.ensureEffectFields();
   // 测试专用手牌招式（只在本测试文件的 localStorage 环境内）
   C.upsert({ id: 'test-cb-martial', name: '测试毒斩', cost: 1, rarity: '古朴', type: '武术', dmg: 1, dmgType: 'attack', desc: '攻1，附加 2 层中毒。' });
-  C.upsert({ id: 'test-curse-spell', name: '测试咒焰', cost: 2, rarity: '古朴', type: '法术', dmg: 3, dmgType: 'spell', desc: '造成 3 点法术伤害，附加灼烧；破甲。' });
+  C.upsert({ id: 'test-curse-spell', name: '测试咒焰', cost: 2, rarity: '古朴', type: '法术', dmg: 3, dmgType: 'spell', desc: '造成 3 点法术伤害，附加沉默；破甲。' });
   C.upsert({ id: 'test-no-curse', name: '测试木桩', cost: 1, rarity: '古朴', type: '武术', dmg: 2, dmgType: 'attack', desc: '攻2。' });
 });
 
@@ -96,13 +96,13 @@ describe('诅咒之刃（cc-cursed-blade）', () => {
     const specs = viewApi.handCurseSpecs();
     const get = k => (specs.find(s => s.key === k) || {}).n || 0;
     expect(get('poison')).toBe(2);   // 测试毒斩：附加 2 层中毒（可叠加）
-    expect(get('burn')).toBe(1);     // 测试咒焰：附加灼烧（不叠加）
+    expect(get('silence')).toBe(1);     // 测试咒焰：附加沉默（不叠加）
     expect(get('abreak')).toBe(2);   // 测试咒焰：破甲（引擎缺省 2 回合）
     expect(get('bleed')).toBe(0);    // 手牌没有流血来源
     BattleSession.commands.flee();
   });
 
-  it('打出时命中附加全部诅咒：伤害 3+攻5=8，中毒2/灼烧/破甲到位', async () => {
+  it('打出时命中附加全部诅咒：伤害 3+攻5=8，中毒2/沉默/破甲到位', async () => {
     const g = makeGame([blade(), C.all().find(c => c.id === 'test-cb-martial'),
       C.all().find(c => c.id === 'test-curse-spell')]);
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '诅咒测试' });
@@ -111,7 +111,7 @@ describe('诅咒之刃（cc-cursed-blade）', () => {
     await playByName(g, '诅咒之刃');
     expect(foe().hp).toBe(hp - 8);                     // 攻3 + 攻击力5
     expect(foe().status.poison).toBe(2);
-    expect(foe().status.burn).toBe(1);
+    expect(foe().status.silence).toBe(1);
     expect(foe().status.abreak).toBe(2);
     expect(g.logs.some(l => l.includes('附加手牌招式的诅咒'))).toBe(true);
     BattleSession.commands.flee();

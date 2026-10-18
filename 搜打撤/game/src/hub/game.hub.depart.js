@@ -292,7 +292,7 @@ import '../../css/roster-reference.css';
       }
       const cur = deployPick[key] || 0;
       if (cur >= stack.count) return;
-      // 同名每格叠放上限（初始攻击/火球 5，其余 3，见 game.session stackCapOf；局内第 cap+1 张起另占一格）——
+      // 同名每格叠放上限（装备 1，其余 3，见 game.session stackCapOf；局内第 cap+1 张起另占一格）——
       // 整备来源上按此封顶（2026-09-19 审计）；预设路径的超限多占格已改由 previewDeployment 分段计入（A3-PREP-02）
       const stackCap = game.stackCapOf ? game.stackCapOf(stack.card) : 3;
       const sameNameCount = Object.entries(deployPick).reduce((sum, [pickedKey, count]) => sum + (findDepartureStack(B2.data.stash, pickedKey)?.card.name === name ? count : 0), 0);
@@ -415,7 +415,19 @@ import '../../css/roster-reference.css';
       SDT.Sound.sfx('prepReady');
       if (!deployStart) return;
       const startChoice = deployStart;
-      startDepartureHandoff(() => current() ? startChoice() : false, stage);
+      const recover = error => {
+        if (error) console.error('[departure] 出发未完成', error);
+        // A successful newRun clears deployStart. Never retry that committed run,
+        // or touch a newer page after this handoff has become stale.
+        if (!current() || deployStart !== startChoice) return;
+        deploySubmitting = false;
+        if (button?.isConnected) button.disabled = false;
+        deployHint = '[[icon:cross]] 出发未完成，携带选择已保留；请返回更换人物后重试。';
+        renderDepartPrep();
+      };
+      startDepartureHandoff(async () => current() && await startChoice() === true, stage)
+        .then(completed => { if (!completed) recover(); })
+        .catch(recover);
     });
     act('depBack', () => { openDepartPrep({ chooseAgain: true }); });
     act('depMode', () => { hubBridge.renderHub(); });

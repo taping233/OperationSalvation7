@@ -1,13 +1,14 @@
+import { getPerformanceSettings, onPerformanceSettingsChange } from './performance-settings.js';
 import { sdtDefine } from './sdt-facade.js';
 class RenderScheduler {
-  // idleFps 档已删除（迭代评审 09-20 D-P3 死代码清理）：!active 分支在 shouldDraw 头部
-  // 提前返回，idleInterval 从不可达——空闲策略就是「零绘制+事件失效」，见 :29 与 docs/performance.md
+  // 静态画面零绘制；有限时长动画也遵循预算，输入/状态失效立即补画。
   constructor({ activeFps = 120 } = {}) {
     this.activeInterval = 1000 / activeFps;
     this.lastDraw = -Infinity;
     this.nextDraw = -Infinity;
     this.interval = null;
     this.dirty = true;
+    this.animationDirty = false;
     this.wasActive = null;
     this.wake = null;
   }
@@ -21,26 +22,33 @@ class RenderScheduler {
     this.wake?.();
   }
 
+  invalidateAnimation() {
+    this.animationDirty = true;
+    this.wake?.();
+  }
+
   shouldDraw(now, { covered = false, active = false } = {}) {
     if (covered) return false;
     const activityChanged = this.wasActive !== active;
     this.wasActive = active;
     // 空闲地图是静态画面：首次进入、活动结束的收尾帧、或输入/状态显式失效时才画。
     // 主循环仍负责逻辑计时，但不再无意义地提交 60 次整图 Canvas 绘制。
-    if (!active) {
+    if (!active && !this.animationDirty) {
       if (!this.dirty && !activityChanged) return false;
       this.lastDraw = now;
-      this.nextDraw = Infinity;
-      this.interval = Infinity;
+      this.nextDraw = now + this.activeInterval;
+      this.interval = this.activeInterval;
       this.dirty = false;
+      this.animationDirty = false;
       return true;
     }
-    const interval = this.activeInterval;   // 走到这里 active 恒为 true（!active 已提前返回）
-    if (this.dirty || !Number.isFinite(this.nextDraw)) {
+    const interval = this.activeInterval;
+    if (this.dirty || (activityChanged && active) || !Number.isFinite(this.nextDraw)) {
       this.lastDraw = now;
       this.nextDraw = now + interval;
       this.interval = interval;
       this.dirty = false;
+      this.animationDirty = false;
       return true;
     }
     if (interval !== this.interval) {
@@ -53,13 +61,17 @@ class RenderScheduler {
     const elapsedDeadlines = Math.max(1, Math.floor((now - this.nextDraw) / interval) + 1);
     this.nextDraw += elapsedDeadlines * interval;
     this.lastDraw = now;
+    this.animationDirty = false;
     return true;
   }
 }
 
-// 120fps 目标（老板 2026-09-06）：单帧渲染实测 ~1.4ms（预算 8.33ms），余量充足；
-// active 全速 120（移动/战斗），idle 由状态失效事件驱动，不持续提交静态画面。
-const renderScheduler = new RenderScheduler({ activeFps: 120 });
+// Only draw submission is capped; simulation and direct input invalidations stay immediate.
+const renderScheduler = new RenderScheduler({ activeFps: getPerformanceSettings().fps });
+onPerformanceSettingsChange(({ fps }) => {
+  renderScheduler.activeInterval = 1000 / fps;
+  renderScheduler.invalidate();
+});
 sdtDefine('RenderScheduler', renderScheduler);
 
 export { RenderScheduler, renderScheduler };

@@ -93,7 +93,7 @@ afterAll(() => {
   }
 });
 
-it('preserves decoded winter scenery through simplified entry and rerenders, restoring it on modal return without retrying GPU frames', async () => {
+it('preserves decoded winter scenery through simplified entry and rerenders, retaining it beneath modal views without retrying GPU frames', async () => {
   start(); await flush();
   expect(stage().dataset.battleEntry).toBe('waiting'); expect(frames.attach).toHaveBeenCalledTimes(1);
   const firstScenery = expectPaintedScenery();
@@ -106,16 +106,18 @@ it('preserves decoded winter scenery through simplified entry and rerenders, res
   expect(stage()).toBe(firstStage); expect(stage().querySelector('.battle-entry-note')).toBe(note);
   expect(frames.attach).toHaveBeenCalledTimes(1); expect(expectPaintedScenery()).toEqual(firstScenery);
   expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(firstDecodeCount);
-  BattleSession.commands.openGrave(); frame(); await flush(); expect(stage()).toBeNull();
-  expect(scenery()).toEqual([null, null]);
+  BattleSession.commands.openGrave(); frame(); await flush();
+  expect(stage()).toBe(firstStage); expect(firstStage.hasAttribute('inert')).toBe(true);
+  expect(firstStage.getAttribute('aria-hidden')).toBe('true'); expect(scenery()).toEqual(firstScenery);
   BattleSession.commands.closeGrave(); frame(); await flush();
-  expect(stage()).not.toBe(firstStage); expect(stage()._battleToken).toBe(token);
+  expect(stage()).toBe(firstStage); expect(stage()._battleToken).toBe(token);
   expect(stage().dataset.battleEntry).toBe('degraded'); expect(stage().inert).not.toBe(true);
   expect(stage().querySelectorAll('.battle-entry-note')).toHaveLength(1);
   expect(overlay.querySelector('.battle-entry-status')).toBeNull();
   const restoredScenery = expectPaintedScenery();
-  expect(restoredScenery[0]).not.toBe(firstScenery[0]); expect(restoredScenery[1]).not.toBe(firstScenery[1]);
-  expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(firstDecodeCount + 3);
+  expect(restoredScenery).toEqual(firstScenery);
+  expect(firstStage.hasAttribute('inert')).toBe(false); expect(firstStage.hasAttribute('aria-hidden')).toBe(false);
+  expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(firstDecodeCount);
   expect(frames.attach).toHaveBeenCalledTimes(1);
   start(); await flush();
   expect(stage()._battleToken).not.toBe(token); expect(stage().dataset.battleEntry).toBe('waiting');
@@ -206,83 +208,72 @@ it('ignores a departed battle background decode when the next battle already own
   expect(overlay.querySelectorAll('.battle-scene-foreground')).toHaveLength(1);
 });
 
-it('retains completed ready entry on modal return while rebuilding the full presentation', async () => {
+it('retains completed ready entry and the same presentation on modal return', async () => {
   frames.attach.mockResolvedValue(true); start(); await flush();
   const firstStage = stage(), token = firstStage._battleToken;
   expect(firstStage.dataset.battleEntry).toBe('ready'); expect(frames.attach).toHaveBeenCalledTimes(1);
   BattleSession.commands.openGrave(); frame(); await flush();
   BattleSession.commands.closeGrave(); frame(); await flush();
-  expect(stage()).not.toBe(firstStage); expect(stage()._battleToken).toBe(token);
+  expect(stage()).toBe(firstStage); expect(stage()._battleToken).toBe(token);
   expect(stage().dataset.battleEntry).toBe('ready'); expect(overlay.querySelector('.battle-entry-status')).toBeNull();
-  expect(frames.attach).toHaveBeenCalledTimes(2); expect(overlay.querySelector('.battle-scene-world')).not.toBeNull();
+  expect(frames.attach).toHaveBeenCalledTimes(3);
+  expect(frames.attach.mock.calls.every(([target]) => target === body)).toBe(true);
+  expect(firstStage.hasAttribute('inert')).toBe(false); expect(firstStage.hasAttribute('aria-hidden')).toBe(false);
+  expect(overlay.querySelector('.battle-scene-world')).not.toBeNull();
 });
 
-it.each(['ready', 'degraded'])('holds actual payment and all three hits until the returned stage is %s', async result => {
-  frames.attach.mockResolvedValue(true);
+it.each(['ready', 'degraded'])('keeps the %s stage during payment and charges once only after both choices', async result => {
+  frames.attach.mockResolvedValue(result === 'ready');
   const grudge = Cards.all().find(card => card.id === 'tt7-thundergrudge');
   expect(grudge?.name).toBe('快意恩仇');
   start([{ uid: 'ready-payment-source', card: grudge }, ...[1, 2].map(index => ({ uid: `ready-payment-fuel-${index}`, card: Cards.SHA })), { uid: 'ready-extra-attack', card: Cards.SHA }]); await flush();
-  const firstStage = stage(), token = firstStage._battleToken;
+  if (result === 'degraded') overlay.querySelector('.battle-entry-status button').click();
+  const firstStage = stage(), token = firstStage._battleToken, firstScenery = scenery();
+  const decodeCount = HTMLImageElement.prototype.decode.mock.calls.length;
   BattleSession.commands.beginCardInteraction('ready-payment-source', 0); frame(); await flush();
-  expect(stage()).toBeNull(); expect(body.textContent).toContain('支付代价');
+  expect(stage()).toBe(firstStage); expect(body.textContent).toContain('支付代价');
+  expect(firstStage.hasAttribute('inert')).toBe(true); expect(firstStage.getAttribute('aria-hidden')).toBe('true');
+  expect(scenery()).toEqual(firstScenery);
   const fuel = BattleSession.getSnapshot().hand.filter(uid => uid !== 'ready-payment-source').slice(0, 2);
-  BattleSession.commands.pickHandSelect(fuel[0]); frame(); await flush();
-  const actor = deferred(); frames.attach.mockReturnValue(actor.promise);
   const randomBefore = Random.snapshot();
-  BattleSession.commands.pickHandSelect(fuel[1]); await flush();
-  const restored = stage(), waiting = BattleSession.getSnapshot();
-  expect(restored).not.toBe(firstStage); expect(restored._battleToken).toBe(token);
-  expect(restored.dataset.battleEntry).toBe('loading'); expect(restored.inert).toBe(true);
-  expect(waiting).toMatchObject({ busy: true, phase: 'resolving', energy: 2 });
-  expect(battlePiles.consumed).toEqual([]); expect(waiting.foes[0].hp).toBe(50);
+  BattleSession.commands.pickHandSelect(fuel[0]); frame(); await flush();
+  expect(stage()).toBe(firstStage); expect(firstStage.hasAttribute('inert')).toBe(true);
+  expect(BattleSession.getSnapshot()).toMatchObject({ energy: 2 });
+  expect(battlePiles.consumed).toEqual([]); expect(BattleSession.getSnapshot().foes[0].hp).toBe(50);
   expect(Random.snapshot().streams.gameplay).toBe(randomBefore.streams.gameplay);
-  const curtain = overlay.querySelector('.battle-entry-status');
-  expect(curtain).not.toBeNull(); expect(curtain.querySelector('button').hidden).toBe(true);
-  const restoredDecodeCount = HTMLImageElement.prototype.decode.mock.calls.length;
-  frame(); await flush();
-  expect(stage()).toBe(restored); expect(overlay.querySelector('.battle-entry-status')).toBe(curtain);
-  expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(restoredDecodeCount);
-  actor.resolve(result === 'ready'); await flush();
-  if (result === 'degraded') {
-    expect(restored.dataset.battleEntry).toBe('waiting'); expect(restored.inert).toBe(true);
-    expect(BattleSession.getSnapshot().energy).toBe(2);
-    const fallback = curtain.querySelector('button'); expect(fallback.hidden).toBe(false);
-    fallback.click(); await flush();
-  }
+  BattleSession.commands.pickHandSelect(fuel[1]); await flush();
   for (let i = 0; i < 30; i++) { if (rafQueue.length) frame(); await flush(); }
   const settled = BattleSession.getSnapshot();
   expect(settled.energy).toBe(1); expect(battlePiles.consumed).toEqual(fuel);
   expect(settled.foes[0].hp).toBe(38); expect(settled.busy).toBe(false);
-  expect(stage().dataset.battleEntry).toBe(result); expect(stage()._battleToken).toBe(token);
-  expect(overlay.querySelector('.battle-entry-status')).toBeNull();
-  if (result === 'degraded') expect(frames.attach).toHaveBeenCalledTimes(2);
-  const readyDecodeCount = HTMLImageElement.prototype.decode.mock.calls.length;
+  expect(stage()).toBe(firstStage); expect(stage().dataset.battleEntry).toBe(result); expect(stage()._battleToken).toBe(token);
+  expect(firstStage.hasAttribute('inert')).toBe(false); expect(firstStage.hasAttribute('aria-hidden')).toBe(false);
+  expect(overlay.querySelector('.battle-entry-status')).toBeNull(); expect(scenery()).toEqual(firstScenery);
+  expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(decodeCount);
   BattleSession.commands.beginCardInteraction('ready-extra-attack', 0); await flush();
-  expect(stage()).toBe(restored); expect(overlay.querySelector('.battle-entry-status')).toBeNull();
   for (let i = 0; i < 20; i++) { if (rafQueue.length) frame(); await flush(); }
   expect(BattleSession.getSnapshot()).toMatchObject({ busy: false, energy: 0 });
   expect(BattleSession.getSnapshot().foes[0].hp).toBe(34);
-  expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(readyDecodeCount);
+  expect(stage()).toBe(firstStage); expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(decodeCount);
 });
 
-it('cancels an actual payment action on departure without charging or reviving it after late readiness', async () => {
+it('cleans up the retained stage on real departure without charging an incomplete payment', async () => {
   frames.attach.mockResolvedValue(true);
   const grudge = Cards.all().find(card => card.id === 'tt7-thundergrudge');
   const game = start([{ uid: 'cancel-payment-source', card: grudge }, ...[1, 2].map(index => ({ uid: `cancel-payment-fuel-${index}`, card: Cards.SHA }))]); await flush();
+  const firstStage = stage(), firstScenery = scenery();
   BattleSession.commands.beginCardInteraction('cancel-payment-source', 0); frame(); await flush();
   const fuel = BattleSession.getSnapshot().hand.filter(uid => uid !== 'cancel-payment-source').slice(0, 2);
   BattleSession.commands.pickHandSelect(fuel[0]); frame(); await flush();
-  const actor = deferred(); frames.attach.mockReturnValue(actor.promise);
-  BattleSession.commands.pickHandSelect(fuel[1]); await flush();
-  expect(BattleSession.getSnapshot().energy).toBe(2);
-  UI.hideOverlay(); await flush();
-  expect(BattleSession.getSnapshot()).toMatchObject({ busy: false, energy: 2 }); expect(overlay.querySelector('.battle-entry-status')).toBeNull();
-  actor.resolve(true); await flush();
+  expect(stage()).toBe(firstStage); expect(firstStage.hasAttribute('inert')).toBe(true);
+  expect(BattleSession.getSnapshot().energy).toBe(2); expect(battlePiles.consumed).toEqual([]);
+  BattleSession.commands.flee(); UI.showOverlay('地图', '', 'map'); await flush();
   while (rafQueue.length) frame(); await flush();
+  expect(stage()).toBeNull(); expect(scenery()).toEqual([null, null]);
+  expect(firstStage.isConnected).toBe(false); expect(firstScenery.every(node => !node.isConnected)).toBe(true);
   expect(game.logs.some(log => log.includes('作为出牌代价'))).toBe(false);
-  expect(overlay.hidden).toBe(true);
+  expect(overlay.querySelector('.battle-entry-status')).toBeNull();
 });
-
 
 it.each([[1,'winter-platform-minimal'],[2,'winter-platform-minimal'],[3,'winter-platform-minimal']])('mounts one decoded scene on layer %s and keeps it across rendering and modal return', async (layerIdx,key) => {
   const game=start([], {layerIdx}); await flush();
@@ -294,8 +285,13 @@ it.each([[1,'winter-platform-minimal'],[2,'winter-platform-minimal'],[3,'winter-
   game.layerIdx=0;BattleSession.commands.setPendingHint('static-render');frame();await flush();
   expect(overlay.querySelector('.battle-scene-world')).toBe(world);
   expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(decoded);
-  BattleSession.commands.openGrave();frame();await flush();expect(scenery()).toEqual([null,null]);
+  const retained = stage();
+  BattleSession.commands.openGrave();frame();await flush();
+  expect(stage()).toBe(retained); expect(retained.hasAttribute('inert')).toBe(true);
+  expect(overlay.querySelector('.battle-scene-world')).toBe(world);
   BattleSession.commands.closeGrave();frame();await flush();
+  expect(stage()).toBe(retained); expect(retained.hasAttribute('inert')).toBe(false);
+  expect(HTMLImageElement.prototype.decode).toHaveBeenCalledTimes(decoded);
   expect(stage().dataset.sceneryKey).toBe(key);
   expect(overlay.querySelectorAll('.battle-scene-layer')).toHaveLength(2);
   expect(overlay.querySelector('.battle-scene-foreground')).not.toBeNull();

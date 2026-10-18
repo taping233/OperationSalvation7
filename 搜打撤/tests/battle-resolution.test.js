@@ -541,7 +541,7 @@ describe('battle resolution ports', () => {
  * 运行时语义对齐 combat.js（CURSES/CURSE_META/addCurse/tickPoison）与文本路径
  * effect-steps.curse/.damage/.kills 的日志文案；每键至少 1 正 1 反。 */
 describe('A3 第二批（B5 诅咒族）：结构化 onPlay curse op', () => {
-  const CURSE_KEYS = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn'];
+  const CURSE_KEYS = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban'];
   const setup = ({ foes = [{}], playerStatus = { name: '我', status: {} } } = {}) => {
     const list = foes.map((spec, index) => ({
       name: `敌${index + 1}`, hp: spec.hp ?? 20, maxHp: spec.hp ?? 20, dead: false,
@@ -627,17 +627,10 @@ describe('A3 第二批（B5 诅咒族）：结构化 onPlay curse op', () => {
     expect(logTexts(state.events).some(t => t.includes('禁疗 2 回合（无法回复生命）'))).toBe(true);
   });
 
-  it('burn：randomEnemy 施放时随机一名存活敌人（正）；重复施加不叠加（反）', () => {
-    // makeResolver 的 randomBattle 恒为 0 → 战场首位；点选的是第二名敌人
-    const state = setup({ foes: [{}, {}] });
-    state.resolver(curseCard({ op: 'curse', curse: 'burn', duration: 3, target: 'randomEnemy' }), state.foes[1], false, 0, null);
-    expect(state.foes[0].status.burn, 'randomBattle=0 → 首位存活敌人').toBe(3);
-    expect(state.foes[1].status.burn ?? 0, 'randomEnemy 不取点选目标').toBe(0);
-
-    const again = setup({ foes: [{ status: { burn: 3 } }] });
-    again.resolver(curseCard({ op: 'curse', curse: 'burn', duration: 1, target: 'chosenEnemy' }), again.target, false, 0, null);
-    expect(again.target.status.burn, '灼烧不叠加、取较大剩余（combat.js 定版）').toBe(3);
-    expect(logTexts(again.events).some(t => t.includes('被灼烧（1 回合内每回合结束受 1 点固定伤害，不叠加）'))).toBe(true);
+  it('已移除的灼烧规则不能执行', () => {
+    const state = setup();
+    expect(() => state.resolver(curseCard({ op: 'curse', curse: 'burn', duration: 3, target: 'randomEnemy' }), state.target, false, 0, null)).toThrow();
+    expect(state.foes.every(foe => !foe.status.burn)).toBe(true);
   });
 
   it('damage+curse 复合：按 onPlay 数组顺序先伤害后诅咒，文本句不复算', () => {
@@ -670,7 +663,7 @@ describe('A3 第二批（B5 诅咒族）：结构化 onPlay curse op', () => {
 
     const wide = setup({ foes: [{}] });
     wide.resolver(curseCard({ op: 'curse', randomKinds: 9, target: 'chosenEnemy' }), wide.target, false, 0, null);
-    expect(CURSE_KEYS.filter(key => (wide.target.status[key] || 0) > 0), '池只有 7 种，slice 截断').toHaveLength(7);
+    expect(CURSE_KEYS.filter(key => (wide.target.status[key] || 0) > 0), '移除灼烧后池只有6种，slice截断').toHaveLength(6);
   });
 
   it('double：中毒层数翻倍（正）；计时诅咒没有层数只记日志（反）', () => {

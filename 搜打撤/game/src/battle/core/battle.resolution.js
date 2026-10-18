@@ -30,7 +30,6 @@ const CURSE_VERBS = {
   silence: n => `被沉默 ${n} 回合（技能无效，攻击除外）`,
   abreak: n => `破甲 ${n} 回合（无法减免伤害——元素庇幕失效）`,
   healban: n => `禁疗 ${n} 回合（无法回复生命）`,
-  burn: n => `被灼烧（${n} 回合内每回合结束受 1 点固定伤害，不叠加）`,
   atkDown: n => `攻击力降低（${n} 回合后归还，扣减量见日志）`,
 };
 
@@ -40,7 +39,7 @@ const BLESSING_VALUE_KEYS = new Set(['atkUp', 'spellUp', 'reduce', 'dodge']);
 const BLESSING_TIMED_KEYS = new Set(['stealth', 'immune']);
 
 function createBattleResolution(ports) {
-  const { readState, getPlayerStatus, esc, log, heal, addFloat, addDelayed, takeDeckBottom, deckBottomCount,
+  const { emitRecast = () => {}, readState, getPlayerStatus, esc, log, heal, addFloat, addDelayed, takeDeckBottom, deckBottomCount,
     startSurge, getAllCards, isRandomObtainable, randomBattle, getDamageTypes, getDamageTypeMeta,
     fixedDamageType, hasCurse, getAliveFoes, getGrowth, addArmor, applyStatus, findCard, addTempCard, queueDiscover,
     splitClauses, applyTextEffects, registerTurnStart, registerBattle, castRandomSpells,
@@ -477,6 +476,9 @@ function createBattleResolution(ports) {
     card = getHostedExecutionCard(card);
     // Direct resolution (e.g. ash overflow) bypasses execPlay but retains infusion waivers.
     infused = !!infused || hasInfusionWaiver(card, readState().allSpellsInfused);
+    const stealthBreakBonus = card.id === 'tt7-ghostblade'
+      && card.rules?.battle?.hosted?.includes('stealth-break-bonus') === true;
+    let brokeOwnStealth = false;
     const registeredTriggers = card?._registeredTriggers;
     if (registeredTriggers) {
       assertCardRulesExecutable({ ...card, rules: { ...card.rules, triggers: registeredTriggers } });
@@ -522,7 +524,12 @@ function createBattleResolution(ports) {
     // M3（执行器收编轮）：装备域结构化抑制——卡带 rules.equip 时文本立即句/兜底/回合宿主
     // 一律不再回放（equipment/registerEquip/runner 单路径承接），防止文本与结构化双结算
     const hasStructuredEquip = card.rules != null && Object.prototype.hasOwnProperty.call(card.rules, 'equip');
-    const suppressText = hasStructuredOnPlay || hasStructuredEquip;
+    // 毒杖的定版 hosted 只有法术监听；装备时不能把被动句作为立即施毒再执行。
+    // 显式 DSL / 装备规则继续由各自执行器处理，其他装备的即时文本不受影响。
+    const venomStaffPassive = card.id === 'tt2-venomstaff'
+      && card.rules?.battle?.hosted?.includes('venom-staff')
+      && !card.rules?.triggers && !card.rules?.equip && !card.rules?.bag;
+    const suppressText = hasStructuredOnPlay || hasStructuredEquip || venomStaffPassive;
     // M2 守卫（G13 落地后的新口径）：resolver 只消费 onPlay；其余时点容器（onTurnStart/
     // onDraw/onConsume…）必须先经 battle.triggers.m2.js runner 登记管线（打出/穿戴时登记、
     // 抽到/消耗时直调）。直接喂给 resolver 的卡若携带时点容器＝绕过登记管线＝静默不结算，
@@ -538,7 +545,12 @@ function createBattleResolution(ports) {
     // 江湖救急（2026-09-18 老板定版）：「随机直接给 3 张」才是本意——不走发现面板。
     // 随机池与发现同口径（isRandomObtainable），置入的临时卡在下个回合开始时消耗。
     if (card.id === 'cmtn1wnhhym') {   // 仅限实机版 id——同名旧卡 tt2-jianghu 有自己的发现流程
-      const pool = getAllCards().filter(c => isRandomObtainable(c));
+      const pool = getAllCards().filter(c => isRandomObtainable(c)
+        && (readState().mode !== 'boss' || c.type !== '道具'));
+      if (!pool.length) {
+        log(`[[icon:cards]] <b>${esc(card.name)}</b>：当前没有符合本场战斗规则的随机卡牌`, 'warn');
+        return;
+      }
       const uids = [];
       for (let k = 0; k < 3 && pool.length; k++) {
         const c = pool[Math.floor(randomBattle() * pool.length)];
@@ -682,7 +694,7 @@ function createBattleResolution(ports) {
         };
         // 单段结算：windup → 逐敌（cond 门 → bonus 条件增伤 → hitFoe）→ hit。
         // 返回 { dealt: 本段实际伤害合计, first: 段首目标（null = 无可用目标） }。
-        function* castSegment(segment, label, applyModifiers) {
+        function* castSegment(segment, label, applyModifiers, repeat = null) {
           const windupTargets = pickTargets();
           if (!windupTargets.length) return { dealt: 0, first: null };
           const cue = attackCue(type, card);
@@ -707,6 +719,7 @@ function createBattleResolution(ports) {
                 log(`[[icon:arrow]] <b>${esc(foe.name)}</b> 满足增伤条件，伤害增加（${before} → ${foeDamage}）`, 'sys');
               }
             }
+            if (repeat && !hitThisSegment) emitRecast({ card, uid, ...repeat, scope: 'damage' });
             dealt += hitFoe(foe, damageCard, foeDamage, type, label);
             foesHit.push(foe);
             hitThisSegment = true;
@@ -734,7 +747,8 @@ function createBattleResolution(ports) {
           log(`[[icon:sparkles]] <b>${esc(card.name)}</b>：${operation.recast.on === 'kill' ? '击杀敌人' : '本牌是最后一张手牌'}，再施放${operation.recast.times > 1 ? ` ${operation.recast.times} 次` : '一次'}`, 'sys');
           for (let k = 0; k < operation.recast.times; k++) {
             const result = yield* castSegment(hitCount + k,
-              operation.recast.times > 1 ? `（再施放第 ${k + 1} 次）` : '（再施放）', false);
+              operation.recast.times > 1 ? `（再施放第 ${k + 1} 次）` : '（再施放）', false,
+              { source: operation.recast.on === 'kill' ? '击杀追加' : '末手追加', repeatIndex: k + 1, repeatTotal: operation.recast.times });
             if (result.first === null) break;
             dealtTotal += result.dealt;
           }
@@ -835,7 +849,12 @@ function createBattleResolution(ports) {
               foeDmg += +pierceB[1];
               if (i === 0) log(`[[icon:blood]] <b>${esc(foe.name)}</b> 处于流血状态，伤害 +${pierceB[1]}`, 'sys');
             }
-            dealtTotal += hitFoe(foe, card, foeDmg, type, times > 1 ? `（第 ${i + 1} 段）` : '');
+            // 固定 hosted 规则：只奖励这张牌实际破除自己的潜行，不把敌方潜行当条件。
+            const breakingStealth = stealthBreakBonus && !brokeOwnStealth && combat.isStealthed(getPlayerStatus());
+            if (breakingStealth) foeDmg += 2;
+            const dealt = hitFoe(foe, card, foeDmg, type, times > 1 ? `（第 ${i + 1} 段）` : '');
+            dealtTotal += dealt;
+            if (breakingStealth && dealt > 0 && !combat.isStealthed(getPlayerStatus())) brokeOwnStealth = true;
             hitThisSegment = true;
           }
         }
@@ -856,6 +875,7 @@ function createBattleResolution(ports) {
             yield { kind: 'windup', targets: [next], ...(cue ? { cue } : {}) };
             next = preferred && !preferred.dead ? preferred : getAliveFoes()[0];
             if (!next) break;
+            emitRecast({ card, uid, source: '诅咒追加', repeatIndex: k + 1, repeatTotal: +sm[1], scope: 'damage' });
             hitFoe(next, card, dmgVal, type, `（额外施放第 ${k + 1} 次）`);
             yield { kind: 'hit', segment: k + 1, ...(cue ? { cue } : {}) };
             preferred = next;
@@ -874,7 +894,10 @@ function createBattleResolution(ports) {
         if (recast.length) yield { kind: 'windup', targets: recast, ...(cue ? { cue } : {}) };
         let recastHit = false;
         for (const foe of recast) {
-          if (!foe.dead) { hitFoe(foe, card, dmgVal, type, '（再施放）'); recastHit = true; }
+          if (!foe.dead) {
+            if (!recastHit) emitRecast({ card, uid, source: '击杀追加', repeatIndex: 1, repeatTotal: 1, scope: 'damage' });
+            hitFoe(foe, card, dmgVal, type, '（再施放）'); recastHit = true;
+          }
         }
         if (recastHit) yield { kind: 'hit', segment: times + 1, ...(cue ? { cue } : {}) };
       }
@@ -943,9 +966,10 @@ function createBattleResolution(ports) {
           continue;
         }
         if (operation.op === 'execute') {
+          const singleEnemy = card.rules?.battle?.target?.side === 'enemy' && !card.rules.battle.target.area;
           const execTarget = lastDamageTargets.length
             ? lastDamageTargets[lastDamageTargets.length - 1]
-            : (target && !target.dead ? target : getAliveFoes()[0]);
+            : singleEnemy ? target : (target && !target.dead ? target : getAliveFoes()[0]);
           did = resolveExecute(card, operation, execTarget, m2Deps) || did;
           continue;
         }
@@ -1157,6 +1181,8 @@ function createBattleResolution(ports) {
     });
     let healed = false, armored = false, drawn = false;
     for (const cl of imm) {
+      // 鬼魅的增伤已由伤害段处理；抽牌统一走下方有条件字段分支，避免文本无条件再抽。
+      if (stealthBreakBonus) continue;
       if (foesAnnihilated()) break;   // 终局守卫：前句伤害已全灭，余下立即句不再结算
       // 双镖首段若已击杀原目标，流血不得借文本执行器的空目标回退串到下一名活敌人。
       if (card.id === 'tt7-bloodpoison' && target && target.dead && /流血/.test(cl)) continue;
@@ -1183,7 +1209,7 @@ function createBattleResolution(ports) {
     // 卡面结构化抽卡字段兜底（描述未写「抽 N 张牌」时）——邪能护体 draw:3 依赖此门防未注能白嫖
     const hostedWarlockHandlesItsOwnDraw = card.rules?.battle?.hosted?.includes('warlock') === true;
     if (!suppressText && !(infuseLead && !infused) && !drawn && !skillOnly &&
-        !hostedWarlockHandlesItsOwnDraw && !foesAnnihilated() && drawOf(card) > 0) {
+        !hostedWarlockHandlesItsOwnDraw && (!stealthBreakBonus || brokeOwnStealth) && !foesAnnihilated() && drawOf(card) > 0) {
       const n = drawOf(card);
       if (readState().mode === 'boss') {
         const got = drawCards(n);

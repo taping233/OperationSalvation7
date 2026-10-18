@@ -1,0 +1,20 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>真实卡牌设计参考板</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#202326;color:#eceeec;font:15px/1.6 "Microsoft YaHei",sans-serif}main{max-width:1400px;margin:auto;padding:28px 38px}h1{font-size:28px;margin:0 0 7px}p{color:#b5bcbf;margin:0}a{color:#c5e2ea;text-underline-offset:4px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}article{padding:17px;background:#2d3134;border:1px solid #41464a}article h2{font-size:17px;margin:0 0 5px}article p{font-size:13px}.sample{display:flex;align-items:center;justify-content:center;height:340px;background:#171b1e;margin:14px 0;border:0;width:100%;cursor:zoom-in}.sample img{max-width:100%;max-height:100%;object-fit:contain}article ul{font-size:13px;padding-left:18px;color:#d6dcdf}article a{font-size:12px}dialog{background:#15191c;border:1px solid #717a80;padding:18px;color:white;max-width:94vw;max-height:94vh}dialog::backdrop{background:#000c}dialog img{display:block;max-width:85vw;max-height:78vh;object-fit:contain}dialog button{float:right;color:white;border:0;background:none;font-size:22px;cursor:pointer}footer{margin-top:25px;color:#929c9f;font-size:12px}button:focus-visible,a:focus-visible{outline:2px solid #a7dfef;outline-offset:3px}</style>
+<main><div class="top"><div><h1>真实卡牌设计参考板</h1><p>6 款游戏 · 12 份官方参考图 · 点击原图放大</p></div><a href="../card-design-options-v2.html">看三款重新设计的样板 →</a></div><div class="grid" id="grid"></div><footer>收集日期：2026-10-10。图像版权属于各游戏权利人，仅作为设计研究参考；每项附官方来源。拆解是本轮观察。</footer></main><dialog id="zoom"><button aria-label="关闭参考大图">×</button><p id="caption"></p><img id="large" alt=""></dialog>
+<script type="module">
+const notes={
+'mtg-standard':['名称与费用共用完整上沿，不是漂浮文字。','图窗、类型条、效果底板相扣，阅读区域明确。','外沿薄，主要层次来自内框与分区连接。'],
+'mtg-borderless':['插画扩到外沿，标题与规则板仍有实体轮廓。','深色透明规则板让图与字同时存在。','右下数值牌嵌在底板边缘。'],
+'mtg-showcase':['异形框承担分区，不只围一圈矩形。','同一体系内，特殊卡可以换轮廓而保留信息顺序。'],
+'lor-lux':['费用、阵营、攻防占固定角位，远看就能辨认。','边框由亮沿、暗侧、内沿组成，有厚度但不占大面积。','名称与关键词位于画面下沿，描述由暗部承载。'],
+'lor-garen':['单位卡共用角位与边框结构。','关键数字大，文字和原画分出主次。'],
+'lor-deny':['法术卡用圆形画窗区分单位卡。','类型徽章与关键词同形，轮廓也表达功能。'],
+'snap':['名称是卡牌标志，字号和轮廓都比正文强。','角色、边框与徽章可以前后交叠，形成空间。','参考的是画面/名称主次；其效果区外置不能直接照搬。'],
+'hearth-unit':['椭圆画窗、弯曲名称牌与底部效果板形成完整实体。','费用、攻防用不同形状与角位区分。','可借鉴连接与层次，不沿用木雕和龙形装饰。'],
+'hearth-spell':['法术与随从的画窗外形不同，类别不用靠小字猜。','名称牌压住画窗和规则区的接缝。'],
+'spire-cards':['标题、费用、图窗、卡类与效果区一眼可分。','卡类与稀有度使用边框/牌签呈现。'],
+'spire-game':['悬停大图与手牌小图使用同一套结构。','卡图和效果区保持分区，放大后无需另一套说明板。'],
+'balatro':['少量大形、大对比，缩小后仍有识别度。','仅作简化参照，未采用其像素画风。']};
+const order=['mtg-standard','mtg-borderless','lor-lux','hearth-unit','hearth-spell','snap','lor-deny','lor-garen','mtg-showcase','spire-cards','spire-game','balatro'];
+const data=await fetch('./sources.json').then(r=>r.json());const refs=order.map(id=>data.refs.find(r=>r.id===id));document.querySelector('#grid').innerHTML=refs.map((r,i)=>`<article><h2>${r.game} · ${r.label}</h2><button class="sample" data-ref="${i}" aria-label="放大${r.game}参考"><img src="${r.file}" alt="${r.label}"></button><ul>${notes[r.id].map(n=>`<li>${n}</li>`).join('')}</ul><a href="${r.source}" target="_blank" rel="noreferrer">官方来源 ↗</a></article>`).join('');const dialog=document.querySelector('#zoom');document.querySelector('#grid').addEventListener('click',e=>{const b=e.target.closest('[data-ref]');if(!b)return;const r=refs[+b.dataset.ref];document.querySelector('#caption').textContent=r.game+' / '+r.label;const image=document.querySelector('#large');image.src=r.file;image.alt=r.label;dialog.showModal();});dialog.querySelector('button').onclick=()=>dialog.close();dialog.onclick=e=>{if(e.target===dialog)dialog.close();};
+</script></html>

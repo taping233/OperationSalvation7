@@ -139,11 +139,11 @@ describe('scene BGM crossfades', () => {
     expect(track.load).toHaveBeenCalledTimes(1);
   });
 
-  it('retries stopped same-scene playback but ignores unlock after muting or leaving', () => {
-    const { set, tracks } = harness();
+  it('retries stopped playback on a user gesture but ignores unlock after muting or leaving', () => {
+    const { set, tracks, player } = harness();
     set('title'); tracks.get('title').ready();
     const title = tracks.get('title');
-    title.block(); set('title');
+    title.block(); set('title'); player.retryBlocked();
     expect(title.play).toHaveBeenCalledTimes(2);
     title.block(); set('title', { enabled: false, immediate: true }); title.unlock();
     expect(title.play).toHaveBeenCalledTimes(2);

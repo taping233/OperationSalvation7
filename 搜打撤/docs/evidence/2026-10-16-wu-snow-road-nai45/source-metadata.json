@@ -1,0 +1,102 @@
+{
+  "Description": "1girl, solo,\nupper body, full face, eye level, wide shot, off-center,\nemerging from the right frame, looking at viewer, 1.5::head tilt:: , \noutdoors, asphalt road, empty highway, wet road, puddle, reflection, guard rail, snow, snowy field, winter, utility pole in distance, flat horizon, overcast sky, cold dawn,\ncold atmosphere, blue theme, muted colors, soft ambient lighting, cinematic lighting, diffused light,  glowing particles,\nA girl emerges from the right side off the frame, showing only part of her body, smiling. Wet asphalt road extending toward a distant horizon across a flat snowy landscape under a cold overcast sky. Soft ambient twilight illuminates the wet road surface with faint reflections, accompanied by cold atmospheric haze.\nmasterpiece, best quality, highly detailed, high complexity, very aesthetic, masterpiece, no text, -0.8::feet::, rating:general",
+  "Software": "NovelAI",
+  "Source": "NovelAI Diffusion V4.5 5BB76870",
+  "Generation time": "4.616100341081619e-05",
+  "Comment": {
+    "prompt": "1girl, solo,\nupper body, full face, eye level, wide shot, off-center,\nemerging from the right frame, looking at viewer, 1.5::head tilt:: , \noutdoors, asphalt road, empty highway, wet road, puddle, reflection, guard rail, snow, snowy field, winter, utility pole in distance, flat horizon, overcast sky, cold dawn,\ncold atmosphere, blue theme, muted colors, soft ambient lighting, cinematic lighting, diffused light,  glowing particles,\nA girl emerges from the right side off the frame, showing only part of her body, smiling. Wet asphalt road extending toward a distant horizon across a flat snowy landscape under a cold overcast sky. Soft ambient twilight illuminates the wet road surface with faint reflections, accompanied by cold atmospheric haze.\nmasterpiece, best quality, highly detailed, high complexity, very aesthetic, masterpiece, no text, -0.8::feet::, rating:general",
+    "steps": 28,
+    "height": 832,
+    "width": 1216,
+    "scale": 5.5,
+    "uncond_scale": 0.0,
+    "cfg_rescale": 0.0,
+    "seed": 1552649891,
+    "n_samples": 1,
+    "noise_schedule": "karras",
+    "legacy_v3_extend": false,
+    "reference_information_extracted_multiple": [],
+    "reference_strength_multiple": [],
+    "extra_passthrough_testing": {
+      "prompt": null,
+      "uc": null,
+      "hide_debug_overlay": false,
+      "r": 0.0,
+      "eta": 1.0,
+      "negative_momentum": 0.0,
+      "director_reference_images": null,
+      "director_reference_descriptions": null,
+      "director_reference_information_extracted": null,
+      "director_reference_strengths": null,
+      "director_reference_secondary_strengths": null
+    },
+    "v4_prompt": {
+      "caption": {
+        "base_caption": "1girl, solo,\nupper body, full face, eye level, wide shot, off-center,\nemerging from the right frame, looking at viewer, 1.5::head tilt:: , \noutdoors, asphalt road, empty highway, wet road, puddle, reflection, guard rail, snow, snowy field, winter, utility pole in distance, flat horizon, overcast sky, cold dawn,\ncold atmosphere, blue theme, muted colors, soft ambient lighting, cinematic lighting, diffused light,  glowing particles,\nA girl emerges from the right side off the frame, showing only part of her body, smiling. Wet asphalt road extending toward a distant horizon across a flat snowy landscape under a cold overcast sky. Soft ambient twilight illuminates the wet road surface with faint reflections, accompanied by cold atmospheric haze.\nmasterpiece, best quality, highly detailed, high complexity, very aesthetic, masterpiece, no text, -0.8::feet::, rating:general",
+        "char_captions": [
+          {
+            "char_caption": "maki (camp) (blue archive), girl, backpack, closed mouth, halo,",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true,
+      "legacy_uc": false
+    },
+    "v4_negative_prompt": {
+      "caption": {
+        "base_caption": "blurry, lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, halftone, multiple views, logo, too many watermarks, negative space, blank page",
+        "char_captions": [
+          {
+            "char_caption": "",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": false,
+      "legacy_uc": false
+    },
+    "director_reference_strengths": null,
+    "director_reference_descriptions": null,
+    "director_reference_information_extracted": null,
+    "director_reference_secondary_strengths": null,
+    "sampler": "k_euler_ancestral",
+    "controlnet_strength": 1.0,
+    "controlnet_model": null,
+    "dynamic_thresholding": false,
+    "dynamic_thresholding_percentile": 0.999,
+    "dynamic_thresholding_mimic_scale": 10.0,
+    "sm": false,
+    "sm_dyn": false,
+    "skip_cfg_above_sigma": null,
+    "skip_cfg_below_sigma": 0.0,
+    "lora_unet_weights": null,
+    "lora_clip_weights": null,
+    "deliberate_euler_ancestral_bug": false,
+    "prefer_brownian": true,
+    "cfg_sched_eligibility": "enable_for_post_summer_samplers",
+    "explike_fine_detail": false,
+    "minimize_sigma_inf": false,
+    "uncond_per_vibe": true,
+    "wonky_vibe_correlation": true,
+    "stream": "msgpack",
+    "add_original_image": false,
+    "img2img": null,
+    "version": 1,
+    "uc": "blurry, lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, halftone, multiple views, logo, too many watermarks, negative space, blank page",
+    "request_type": "NativeInfillingRequest",
+    "signed_hash": "odKXG/8TcEeYSo8n75c965kbf1dFLhITC22KzeNWZCNa4Kcs6vKaD/yKPSKO+vwG1oKanHifjP3rHolx4LJ6Aw=="
+  }
+}

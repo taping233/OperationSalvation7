@@ -19,7 +19,7 @@ function declarations(selector) {
 describe('终局结算的阅读与固定操作契约', () => {
   it('失败报告替换720px窄壳，标题和主滚动区有确定高度边界', () => {
     expect(declarations(`${doom} .card:has(.doom-panel)`)).toMatchObject({
-      width:'min(1240px,94%)', height:'94%', 'max-height':'94%',
+      width:'min(1240px,94%)', height:'min(760px,94%)', 'max-height':'94%',
       position:'relative', display:'flex', 'flex-direction':'column', overflow:'hidden',
     });
     expect(declarations(`${doom} .card:has(.doom-panel) > #ovTitle`).font).toContain('34px/');
@@ -55,6 +55,14 @@ describe('终局结算的阅读与固定操作契约', () => {
     expect(copy['max-height']).toBeUndefined();
     expect(copy['text-overflow']).toBeUndefined();
     expect(copy.display).not.toBe('none');
+  });
+
+  it('uses two quiet summary columns and keyboard-focusable native detail headings', () => {
+    expect(declarations(`${doom} .doom-panel .doom-stats`)['grid-template-columns']).toBe('repeat(2,minmax(0,1fr))');
+    expect(declarations(`${doom} .doom-panel .doom-stat`)).toMatchObject({ background:'none',border:'0',padding:'0' });
+    expect(declarations(`${doom} .doom-panel summary`).cursor).toBe('pointer');
+    expect(declarations(`${doom} .doom-panel summary:focus-visible`).outline).toContain('var(--feedback-blue)');
+    expect(declarations(`${doom} .doom-panel .doom-stat-note`).font).toContain('22px/');
   });
 
   it('长损失与复盘在无抢运和六卡抢运两态都保留完整文本和终局入口', () => {

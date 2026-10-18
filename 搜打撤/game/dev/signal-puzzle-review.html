@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>配送无人机 · 可选信号屏预览</title>
+  <link rel="stylesheet" href="/css/entry-events.css">
+  <style>
+    :root { --font-ui:system-ui,"Microsoft YaHei",sans-serif; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:#e8eee9; background:#10191d; font-family:var(--font-ui); }
+    button { font-family:inherit; cursor:pointer; }
+    #overlay,#overlay>.card.page,#ovBody,.pg.node-pg { position:fixed; inset:0; margin:0; padding:0; width:100%; height:100%; }
+    #ovBody { position:absolute; }
+    .pg.node-pg { position:relative; background:url('/assets/scenes/event-tt6-systemsupply.webp') center/cover; }
+    .pg.node-pg::before { content:''; position:absolute; inset:0; pointer-events:none; }
+    .fixture-label { position:fixed; z-index:10; right:20px; top:12px; font:12px/1.4 var(--font-ui); color:#d3e3d7; background:#142924dc; padding:5px 9px; }
+    .fixture-label button { margin-left:10px; border:1px solid #b6cdb870; color:inherit; background:transparent; padding:3px 7px; }
+    .fixture-return { position:fixed; inset:35% 20%; display:grid; place-content:center; gap:20px; background:#122720; text-align:center; }
+    .fixture-return button { padding:12px 24px; }
+  </style>
+</head>
+<body>
+  <div class="fixture-label">隔离UI预览 · 不载入存档<button id="motionToggle" type="button">减少动态</button></div>
+  <div id="overlay"><div class="card page"><div id="ovBody"></div></div></div>
+  <script type="module">
+    import { createSignalPuzzleState, mountEventSignalPuzzle } from '/src/ui/event-signal-puzzle.js?review=r3';
+    import '/css/event-signal-puzzle.css?review=r3';
+    // This isolated preview may share a watch-disabled Vite server with the player's old page.
+    for (const style of document.querySelectorAll('style[data-vite-dev-id]')) {
+      if (style.dataset.viteDevId.endsWith('/event-signal-puzzle.css')) style.remove();
+    }
+    import { eventSceneHTML } from '/src/ui/node-scene-view.js';
+    const state = createSignalPuzzleState(new URL(location.href).searchParams.get('seed') || 'fixture-terminal');
+    const body = document.getElementById('ovBody');
+    let mounted, selected = -1;
+    function render() {
+      mounted?.dispose();
+      body.innerHTML = eventSceneHTML({ tone:'event', title:'配送无人机', asset:'scene-event-systemsupply', region:'城市外围', layer:0,
+        sub:'废弃控制室的补给终端还剩最后一点电量，配送无人机挂在充电架上，货舱里躺着最后的库存。',
+        body:'<button class="evt-opt ok" data-act="fixtureChoice" data-i="0"><b>碎片与木材</b><span>获得员工通行证A碎片 ×1，木材卡 ×1；需背包能放下木材卡</span></button><button class="evt-opt ok" data-act="fixtureChoice" data-i="1"><b>碎片与货币</b><span>获得员工通行证A碎片 ×1，+2 币；不占背包格</span></button>',
+        foot:'<button class="ov-btn" data-act="fixtureLeave">返回地图</button><button class="ov-btn" data-act="fixtureBag">整理背包</button>',
+      });
+      const scene = body.firstElementChild;
+      mounted = mountEventSignalPuzzle(scene, state, () => body.firstElementChild === scene);
+      const options = [...scene.querySelectorAll('.evt-opt')], confirm = scene.querySelector('.event-choice-confirm');
+      const sync = () => { options.forEach((el, i) => el.classList.toggle('is-selected', i === selected)); confirm.disabled = selected < 0; scene.querySelector('.event-choice-clear').disabled = selected < 0; confirm.textContent = selected < 0 ? '选择后确认' : '确认选择'; };
+      options.forEach((el, i) => el.addEventListener('click', () => { selected = i; sync(); }));
+      scene.querySelector('.event-choice-clear').onclick = () => { selected = -1; sync(); };
+      confirm.onclick = () => { confirm.textContent = '预览完成 · 未发放物品'; };
+      for (const action of ['eventExit', 'fixtureLeave', 'fixtureBag']) scene.querySelector(`[data-act=${action}]`).onclick = () => {
+        mounted.dispose(); body.innerHTML = '<section class="fixture-return"><p>已离开预览面板，没有读取或修改任何存档。</p><button type="button">返回事件预览</button></section>'; body.querySelector('button').onclick = render;
+      };
+      sync();
+    }
+    document.getElementById('motionToggle').onclick = event => { const reduced = document.body.classList.toggle('reduce-motion'); event.target.textContent = reduced ? '恢复动态' : '减少动态'; };
+    render();
+  </script>
+</body>
+</html>

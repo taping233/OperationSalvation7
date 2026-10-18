@@ -1,3 +1,4 @@
+import { foeFightTargets, validFoeFightTargets, withFoeFightTargets } from '../effects/battle.foe-fight.js';
 /* battle.exec-play.js —— 出牌结算长流程（自 battle.engine.js 拆出）。
  * queueCardExecution 手牌支付校验与出牌动作入队；execPlay 扣费、注能燃料、结算重放与
  * 打出侧登记。状态读写经 battle.runtime.js（活绑定 + set$Xxx）直连；与 engine 互递归的
@@ -10,13 +11,14 @@ import { throwIfActionCancelled } from '../runtime/battle.staged-playback.js';
 import { rejectUnsupportedCard } from '../effects/battle.rule-guard.js';
 import { inspectCardRuleCapability } from '../../cards/card-rules.capability.js';
 import { isHandPaymentCandidate } from './battle.hand-selection.js';
-import { hasInfusionWaiver } from '../effects/battle.infusion.js';
+import { hasInfusionWaiver, missingInfusionReason } from '../effects/battle.infusion.js';
 import { G, foes, mode, hand, discard, played, consumed, grave, energy, delayed, cardAnims, freeCast, infuseFuels, consumeFireballN, allSpellsInfused, growthNames, killAtkUp, playerCurseImmune, arrowRune, nextSpellTwice, poisonOnSpell, playedMovesThisTurn, playedMartialThisTurn, activeActionSignal, battleState, effectiveHandMax, set$hand, set$energy, set$infuseFuels, set$nextSpellTwice, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$playerCurseImmune, set$allSpellsInfused, set$consumeFireballN, set$stealthStrike, set$lastPlayedType, set$playedMovesThisTurn, set$playedMartialThisTurn, set$activeActionSignal, set$handSelecting, nextActionSeq } from '../runtime/battle.runtime.js';
 
 const R = () => SDT.MAP.rules;
 const alive = () => foes.filter(foe => !foe.dead);
 
 export function createBattleExecPlay({
+  emitRecast = () => {},
   warnCardRuleRejection = message => G.log(message, 'warn'),
   requestBattleRender, findCard, findEffectiveCard, prepareExecutionCard, infusionFuelReason, fireConsumeTriggers, effCostOf,
   resolveInfusedFuel, runStagedSteps, consumeFireballSteps, resolveCardWithFeedback,
@@ -25,7 +27,8 @@ export function createBattleExecPlay({
   triggersM2,
 }) {
   function effectiveExecutionCard(uid, card) {
-    return prepareExecutionCard ? prepareExecutionCard(uid, card) : findEffectiveCard?.(uid, card)?.card || card;
+    const effective = prepareExecutionCard ? prepareExecutionCard(uid, card) : findEffectiveCard?.(uid, card)?.card || card;
+    return foeFightTargets(card) ? withFoeFightTargets(effective, foeFightTargets(card)) : effective;
   }
   function rejectMissingTransform(card) {
     if (!card?._battleTransformMissing) return false;
@@ -40,8 +43,8 @@ export function createBattleExecPlay({
     const capability = inspectCardRuleCapability(card);
     if (!capability.ok) return fail(capability.kind === 'invalid' ? 'RULE_INVALID' : 'RULE_UNSUPPORTED', capability.kind === 'invalid' ? '规则格式非法' : '规则尚未支持');
     const handRequirement = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
-    const infusedGate = card?.rules?.battle?.requirements?.find(rule => rule.kind === 'infused');
-    if (infusedGate && !(fuelUids || []).length && !freeCost) return fail('INFUSION_REQUIRED', `【${card.name}】需要先注能才能打出`);
+    const infusionIssue = missingInfusionReason(card, (fuelUids || []).length, allSpellsInfused);
+    if (infusionIssue) return fail('INFUSION_REQUIRED', infusionIssue);
     if (handRequirement && !requirementsPaid) {
       const excludedUids = [...new Set([uid, ...(fuelUids || [])])];
       const handUids = new Set(hand);
@@ -157,9 +160,22 @@ export function createBattleExecPlay({
     // Every producer, including free selections and automatic releases, uses the
     // same effective face. Resolve again here before any payment or UID movement.
     card = effectiveExecutionCard(uid, card);
+    if (foeFightTargets(card) && !validFoeFightTargets(foeFightTargets(card), alive())) {
+      submission?.reject('TARGET_INVALID', '扰敌目标已失效，本次打出未扣费');
+      G.log('[[icon:cross]] 扰敌目标已失效，本次打出未扣费', 'warn');
+      requestBattleRender();
+      return false;
+    }
     if (rejectMissingTransform(card)) { submission?.reject('MISSING_TRANSFORM', '转换目标缺失，本次未施放'); return false; }
     // Recheck after queueing: rules may have changed before payment is committed.
     if (rejectUnsupportedCard(card, { warn: warnCardRuleRejection })) { submission?.reject('RULE_REJECTED', '规则格式非法或尚未支持'); return false; }
+    const infusionIssue = missingInfusionReason(card, (fuelUids || []).length, allSpellsInfused);
+    if (infusionIssue) {
+      submission?.reject('INFUSION_REQUIRED', infusionIssue);
+      G.log(`[[icon:cross]] ${esc(infusionIssue)}`, 'warn');
+      requestBattleRender();
+      return false;
+    }
     // Revalidate before any payment: a queued transform can invalidate chosen fuel.
     if ((fuelUids || []).some(fuelUid => infusionFuelReason?.(fuelUid))) {
       submission?.reject('FUEL_INVALID', '注能材料已失效，本次打出未扣费');
@@ -282,6 +298,7 @@ export function createBattleExecPlay({
       const recastTimes = lastHandRecastMatch[1] ? +lastHandRecastMatch[1] : 2;   // 未写次数（中文数字）按 2 次
       G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：本牌是最后一张手牌，效果触发 ${recastTimes} 次`, 'sys');
       for (let r = 0; r < recastTimes - 1; r++) {   // 本卡主结算已跑 1 次，此处补足 N 次
+        emitRecast({ card, uid, source: '末手重放', repeatIndex: r + 1, repeatTotal: recastTimes - 1 });
         await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
         await takeSurge(signal);
       }
@@ -290,6 +307,7 @@ export function createBattleExecPlay({
     if (nextSpellTwice > 0 && card.type === '法术') {
       set$nextSpellTwice(0);
       G.log(`[[icon:sparkles]] <b>元素风暴</b>：这张法术额外施放 1 次`, 'sys');
+      emitRecast({ card, uid, source: '元素风暴', repeatIndex: 1, repeatTotal: 1 });
       await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
       await takeSurge(signal);
     }
@@ -331,6 +349,7 @@ export function createBattleExecPlay({
     // 箭矢符文：你的「箭」释放 2 次（第二段免费用）
     if (arrowRune && (card.name === '箭' || card.id === 'token-arrow')) {
       G.log('[[icon:runner]] <b>箭矢符文</b>：箭再度释放', 'sys');
+      emitRecast({ card, uid, source: '箭矢符文', repeatIndex: 1, repeatTotal: 1 });
       await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
       await takeSurge(signal);
     }
@@ -345,6 +364,7 @@ export function createBattleExecPlay({
         (!replay.on || replay.on === 'lastHand') && lastRealCard) {
       G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：本牌是最后一张手牌，效果再触发 ${replay.times} 次`, 'sys');
       for (let r = 0; r < replay.times; r++) {
+        emitRecast({ card, uid, source: '末手重放', repeatIndex: r + 1, repeatTotal: replay.times });
         await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
         await takeSurge(signal);
       }

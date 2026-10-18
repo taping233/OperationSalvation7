@@ -37,6 +37,8 @@ const HELP = `项目流程工具（默认只读；ship --apply 需单独提交�
                                           默认预览；JSON 为 {"cells":[...]}
   verify --task <编号> <--tests <逗号分隔路径>|--paths <逗号分隔路径>|--full|--suite>
          [--date YYYY-MM-DD] [--plan]       复用现有验收门；运行时自动记录证据
+  review --paths <逗号分隔路径> [--input <verify报告JSON>] [--json]
+                                          只读关联现行文档、测试、UI用例与已有结果；无Git明确降级
   evidence --input <报告JSON>              校验证据指纹是否仍匹配，不自动免验
   archive plan                            重复正文/冲突措辞的只读复核候选
   archive snapshot --task <批次> --paths <逗号分隔现行Markdown路径>
@@ -160,6 +162,9 @@ async function main() {
       result = await runCheck(root, options);
       process.exitCode = result.exitCode === 0 ? 0 : 1;
     }
+  } else if (command === 'review') {
+    const { reviewChange } = await import('./workflow-change-review.mjs');
+    result = reviewChange(root, { paths: list(values.paths), input: values.input });
   } else if (command === 'evidence') {
     if (!values.input) throw new Error('必须提供 --input 报告 JSON');
     const report = JSON.parse(readFileSync(values.input, 'utf8'));

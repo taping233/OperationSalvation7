@@ -123,6 +123,7 @@ function markup(v) {
 function drawScene(host, view, assets) {
   const app = new Application({
       resizeTo: host,
+      autoStart: false,
       backgroundAlpha: 0,
       antialias: true,
     }),
@@ -131,17 +132,61 @@ function drawScene(host, view, assets) {
     under = new Container(),
     wall = new Container(),
     objects = new Container();
+  // The room contains static sprites. Render only after a visual change instead
+  // of keeping Pixi's animation ticker running for an unchanged scene.
+  let frame = 0, active = !document.hidden, disposed = false;
+  const pendingTextures = new Map();
+  const requestPaint = () => {
+    if (disposed || !active || frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      if (!disposed && active) app.render();
+    });
+  };
+  const textureFor = (spec) => {
+    const texture = Texture.from(spec.url || `assets/${spec.path}`);
+    const base = texture.baseTexture;
+    if (base && !base.valid && !pendingTextures.has(base)) {
+      const ready = () => {
+        base.off('loaded', ready);
+        base.off('error', failed);
+        pendingTextures.delete(base);
+        requestPaint();
+      };
+      const failed = () => {
+        base.off('loaded', ready);
+        base.off('error', failed);
+        pendingTextures.delete(base);
+      };
+      pendingTextures.set(base, failed);
+      base.on('loaded', ready);
+      base.on('error', failed);
+    }
+    return texture;
+  };
+  app.setHomeActive = (next) => {
+    active = !!next;
+    if (!active && frame) { cancelAnimationFrame(frame); frame = 0; }
+    if (active) requestPaint();
+  };
+  app.disposeHomePaint = () => {
+    disposed = true;
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+    for (const cleanup of pendingTextures.values()) cleanup();
+    pendingTextures.clear();
+  };
   app.stage.addChild(atmosphere, room, under, wall, objects);
   const backSpec = assets?.assets?.find((a) => a.id === "home-room-candidate"),
     back = backSpec
-      ? new Sprite(Texture.from(backSpec.url || `assets/${backSpec.path}`))
+      ? new Sprite(textureFor(backSpec))
       : null;
   if (back) {
     back.anchor.set(0.5, 0.5);
     atmosphere.addChild(back);
   }
   const sprite = (parent, spec, point, scale) => {
-    const s = new Sprite(Texture.from(spec.url || `assets/${spec.path}`));
+    const s = new Sprite(textureFor(spec));
     s.anchor.set(spec.pivot?.x ?? 0.5, spec.pivot?.y ?? 1);
     s.position.set(point.x, point.y);
     s.scale.set(scale);
@@ -206,6 +251,7 @@ function drawScene(host, view, assets) {
     }
     objects.children.sort((a, b) => (a.__depth || 0) - (b.__depth || 0));
     app.homeProjection = p;
+    requestPaint();
   };
   app.redrawHome(view);
   host.appendChild(app.view);
@@ -572,9 +618,9 @@ export function mountHome({ host, view, assets = null, onIntent }) {
     () => editor.removeEventListener("change", change),
   );
   const sync = () => {
-    // Route activity and document visibility are independent; returning to the tab resumes the ticker.
+    // Route activity and document visibility independently gate one-shot paints.
     const run = routeActive && !document.hidden;
-    if (pixi?.ticker) pixi.ticker[run ? "start" : "stop"]();
+    pixi?.setHomeActive?.(run);
     scene.classList.toggle("is-inactive", !run);
   };
   document.addEventListener("visibilitychange", sync);
@@ -608,6 +654,7 @@ export function mountHome({ host, view, assets = null, onIntent }) {
       if (disposed) return;
       disposed = true;
       clean.splice(0).forEach((f) => f());
+      pixi?.disposeHomePaint?.();
       pixi?.destroy(true, { children: true });
       pixi = null;
       host.innerHTML = "";

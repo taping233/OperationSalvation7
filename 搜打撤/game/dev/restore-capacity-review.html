@@ -1,0 +1,52 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><base href="/"><title>复原反馈 · 内存隔离夹具</title><style>#restoreFixtureControls button{font:inherit;min-height:32px;padding:6px 10px}#restoreFixtureControls{flex-wrap:wrap;max-width:100vw;box-sizing:border-box}</style>
+<script>
+// All app persistence stays in this tab's empty memory. Never read the owner's storage.
+const memory = new Map();
+Object.defineProperty(window, 'localStorage', {value:{getItem:key=>memory.get(String(key))??null,setItem:(key,value)=>memory.set(String(key),String(value)),removeItem:key=>memory.delete(String(key)),clear:()=>memory.clear()}});
+Object.defineProperty(window, 'sessionStorage', {value:{getItem:()=>null,setItem(){},removeItem(){},clear(){}}});
+</script></head><body><p>加载隔离夹具…</p><script type="module">
+if (!window.__restoreFixtureStarted) {
+window.__restoreFixtureStarted = true;
+const markup = new DOMParser().parseFromString(await (await fetch('/index.html')).text(), 'text/html');
+for (const style of markup.querySelectorAll('link[rel="stylesheet"]')) document.head.append(style.cloneNode());
+for (const script of markup.querySelectorAll('script')) script.remove();
+document.body.innerHTML = markup.body.innerHTML;
+// Only the unrelated full-catalogue background prefetch is skipped in this fixture.
+// Real visible assets, startup scene decoding and their failures remain unchanged.
+await import('/src/core/art.js');
+window.SDT.Art.prefetchBatched = async () => {};
+const warmupTip = document.getElementById('warmupTip');
+if (warmupTip) warmupTip.style.display = 'none';
+await import('/src/main.js');
+document.dispatchEvent(new Event('DOMContentLoaded', {bubbles:true}));
+await new Promise(resolve=>setTimeout(resolve,100));
+const {game,bagCap} = await import('/src/run/game.session.js');
+const {showBackpack} = await import('/src/hub/game.bag.js');
+const {openPocketRestore} = await import('/src/run/game.run.scenes.js');
+const {UI,Cards} = window.SDT;
+const controls=document.createElement('nav'); controls.id='restoreFixtureControls';
+controls.style.cssText='position:fixed;top:0;left:0;z-index:999999;background:#102030;color:white;padding:8px;display:flex;gap:10px;font:14px sans-serif';
+controls.innerHTML='隔离内存，无真实存档 <button data-case="stack">满包·结晶2张</button><button data-case="potion">满包·药水2张</button><button data-case="single">满包·结晶1张</button><button data-case="fire">祭坛手选·不可复原5张</button>';
+// Keep the fixture controls inside the real modal's interactive boundary.
+UI.el.overlay.append(controls);
+function sizeControls(){controls.style.zoom=String(1/window.SDT.UiScale.scale());}
+sizeControls();window.addEventListener('resize',sizeControls);
+function scenario(mode){
+  document.getElementById('cardZoom')?._closeCardZoom?.(true);
+  UI.hideOverlay({immediate:true});
+  const item=Cards.all().find(c=>c.id===(mode==='potion'?'cmtn6bge52qt':'tt-crystal'));
+  const sample=Cards.all().find(c=>c.type==='法术'&&!c.cls);
+  Object.assign(game,{runActive:true,battleActive:false,state:'idle',seed:811,myClass:'剑士',discoveredPairs:new Set(),layerData:[],layerIdx:0,trackPos:0,
+    ownedCards:Array.from({length:mode==='single'?1:2},(_,i)=>({uid:`fixture-${i}`,card:{...item}})),
+    usedPocket:[{card:{...sample},count:2}],inventory:[],safeCards:[],fragments:0});
+  game.inventory=Array.from({length:bagCap()-1},(_,i)=>({name:`夹具占位${i}`,value:1,count:1,tier:'普通'}));
+  if(mode==='fire'){
+    game.inventory=[];
+    game.usedPocket.push({card:{...item},count:3},{card:{id:'fixture-equipment',name:'夹具装备',type:'装备',rarity:'古朴',desc:'统计测试'},count:2});
+    openPocketRestore(2,()=>showBackpack(),{title:'祭坛回赠 · 复原',sub:'选择卡牌立即复原；这是事件手选页，不是地图营火。'});
+  }else showBackpack();
+}
+controls.addEventListener('click',event=>{const mode=event.target.dataset.case;if(mode)scenario(mode)});
+scenario('stack');
+}
+</script></body></html>

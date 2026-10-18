@@ -17,7 +17,7 @@ import { ensureM3OnplayRules } from '../game/src/cards/cards.sync.m3.js';
 import { dataSlice } from '../game/src/cards/cards.data.js';
 import cardsSyncData from '../game/data/cards-sync.json';
 
-const MARKER = 'sdt-cards-m3-onplay-rules-v3-seeded';
+const MARKER = 'sdt-cards-m3-onplay-rules-v4-seeded';
 
 // canonical 夹具（2026-09-29 镜像收编）：原「逐字照抄定版源行」改为按本批 id 取真源行——
 // CARDS_SYNC=game/data/cards-sync.json 实机覆盖批次；TABLETOP10/11/12=cards.data.js 定版表；
@@ -165,7 +165,7 @@ const EXPECTED_RULES = {
     version: 1,
     battle: { target: { side: 'self', area: false } },
     triggers: { onPlay: [
-      { op: 'acquire', n: 3, pool: { kind: '随机' }, dest: 'discover', act: 'playKeep' },
+      { op: 'acquire', n: 1, pool: { kind: '随机' }, dest: 'discover', act: 'playKeep' },
     ] },
   },
   'tt7-burnharvest': {
@@ -369,5 +369,38 @@ describe('M3 数据迁移批 D5：批次级保守语义', () => {
     for (const id of ALL_IDS.filter(id => id !== 'tt7-maxsupply')) {
       expect(harness.cards().find(card => card.id === id).rules).toEqual(EXPECTED_RULES[id]);
     }
+  });
+});
+
+
+describe('永恒绽放旧章发现轮数迁移', () => {
+  function oldHarness(customized = false) {
+    const oldRules = structuredClone(EXPECTED_RULES['tt7-bladebloom']);
+    oldRules.triggers.onPlay[0].n = 3;
+    const cards = freshCards().map(card => card.id === 'tt7-bladebloom'
+      ? {...card, ...(customized ? {name:card.name + '自订'} : {}), rules:oldRules}
+      : {...card, rules:structuredClone(EXPECTED_RULES[card.id])});
+    const harness = makeHarness(cards);
+    harness.storage.setItem('sdt-cards-m3-onplay-rules-v3-seeded','1');
+    return harness;
+  }
+  it.each([false,true])('旧v3章仅改canonical旧n3，保留自定义=%s及其它规则', customized => {
+    const harness = oldHarness(customized);
+    const other = harness.cards().filter(c => c.id !== 'tt7-bladebloom');
+    ensureM3OnplayRules(harness);
+    expect(harness.cards().find(c => c.id === 'tt7-bladebloom').rules.triggers.onPlay[0].n).toBe(customized ? 3 : 1);
+    expect(harness.cards().filter(c => c.id !== 'tt7-bladebloom')).toEqual(other);
+    const saved = harness.library.saves;
+    ensureM3OnplayRules(harness); expect(harness.library.saves).toBe(saved);
+  });
+  it.each(['false','throw'])('旧n3迁移保存%s失败不盖章，恢复后可重试', failure => {
+    const harness = oldHarness(); const save = harness.library.saveAll;
+    harness.library.saveAll = () => { if(failure === 'throw') throw new Error('probe-save'); return false; };
+    ensureM3OnplayRules(harness);
+    expect(harness.storage.getItem(MARKER)).not.toBe('1');
+    expect(harness.cards().find(c => c.id === 'tt7-bladebloom').rules.triggers.onPlay[0].n).toBe(3);
+    harness.library.saveAll = save; ensureM3OnplayRules(harness);
+    expect(harness.cards().find(c => c.id === 'tt7-bladebloom').rules.triggers.onPlay[0].n).toBe(1);
+    expect(harness.storage.getItem(MARKER)).toBe('1');
   });
 });

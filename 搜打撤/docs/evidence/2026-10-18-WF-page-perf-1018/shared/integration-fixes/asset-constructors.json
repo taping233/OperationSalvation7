@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-18T07:44:27.538Z",
+  "records": [
+    {
+      "file": "game/src/run/chests.js",
+      "previousHeadSha256": "a7c2956e662135d624e7c208e1b21689cc2ae429258ea170cb88fe1379905456",
+      "frozenSha256": "e8518681de2cf1b7d645e8a3a18f58777accf78ce7c74757e4913498ad04d972",
+      "constructorsBefore": 0,
+      "constructorsAfter": 0,
+      "identicalAssetConstructorAST": true,
+      "reviewedClassOnlyTemplateChange": false
+    },
+    {
+      "file": "game/src/battle/view/battle.layers.js",
+      "previousHeadSha256": "bf46e8c3af62472b80dc550900f0ac0489f50853c6dbb8fb53bbdfb11db71531",
+      "frozenSha256": "3efc5862e5326a94e49d8cbb634e6b581083beeca9be3b352a2deade8cd28793",
+      "constructorsBefore": 1,
+      "constructorsAfter": 1,
+      "identicalAssetConstructorAST": true,
+      "reviewedClassOnlyTemplateChange": false
+    },
+    {
+      "file": "game/src/battle/view/battle.vfx.js",
+      "previousHeadSha256": "a439f13c5433f7dfc936a9e7a8c4bfe56350f745e17a69e2661b783d4d667e28",
+      "frozenSha256": "0c7f2fb9b96171c5f03c498c8d5004bb1553403f12723bec15e8922604af04cd",
+      "constructorsBefore": 1,
+      "constructorsAfter": 1,
+      "identicalAssetConstructorAST": true,
+      "reviewedClassOnlyTemplateChange": false
+    },
+    {
+      "file": "game/src/hub/game.bag.view2.js",
+      "previousHeadSha256": "3763b8bb13e113e97f9e09ed0d36ade94892bd6810db2fe711f3e74fee383f6f",
+      "frozenSha256": "d370d6f68772085c6b3b83ddcfaf961bcbb82c5e246aa1f9b29beba263c8cba1",
+      "constructorsBefore": 1,
+      "constructorsAfter": 1,
+      "identicalAssetConstructorAST": false,
+      "reviewedClassOnlyTemplateChange": true
+    },
+    {
+      "file": "game/src/run/game.session.death.js",
+      "previousHeadSha256": "5f48ef82cf0269cc012528c17d956357134b5af3899373b9c39e2b9267737f87",
+      "frozenSha256": "7dabbfc0bdc471252cbe19511b4256250a3001cf04f4220670214eeaa3155044",
+      "constructorsBefore": 1,
+      "constructorsAfter": 1,
+      "identicalAssetConstructorAST": true,
+      "reviewedClassOnlyTemplateChange": false
+    }
+  ],
+  "scope": "Supplement to manual full-diff review; this signature check alone does not approve arbitrary dataflow or new references."
+}

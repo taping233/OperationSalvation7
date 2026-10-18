@@ -6,7 +6,7 @@ import { observeIconHydration } from './icon-hydration.js';
 
   
   const ROOT = 'assets/ui/icons/';
-  const NAMES = new Set('heart broken coin pouch sword swords bag dice upload download book cards home fire skull gem lantern key lock unlock crystal trash door exit tools pocket broom wood bread trophy paw map notes medal shield plate blood flask scroll save helmet question sparkles bolt recycle check cross arrow play skip hourglass gear pen folder archive mouse flag slime demon runner'.split(' '));
+  const NAMES = new Set('altar heart broken coin pouch sword swords bag dice upload download book cards home fire skull gem lantern key lock unlock crystal trash door exit tools pocket broom wood bread trophy paw map notes medal shield plate blood flask scroll save helmet question sparkles bolt recycle check cross arrow play skip hourglass gear pen folder archive mouse flag slime demon runner'.split(' '));
   const missingKeys = new Set();
   function reportMissing(kind, key) {
     const label = `${kind}:${String(key || '(empty)')}`;
@@ -21,8 +21,9 @@ import { observeIconHydration } from './icon-hydration.js';
   function safe(name) { name = ALIAS[name] || name; if (NAMES.has(name)) return name; reportMissing('icon', name); return 'question'; }
   // 金币货币图标统一使用地图资源栏同源美术（2026-10-15 老板指示），不再走 icons/coin.png。
   const COIN_ART_URL = assetUrl('assets/ui/map-hud-1015/gold-is7-v2.webp');
-  function url(name) { return safe(name) === 'coin' ? COIN_ART_URL : assetUrl(`${ROOT}${safe(name)}.png`); }
-  function img(name, cls, alt) { const n=safe(name); return `<img class="ic${cls?' '+esc(cls):''}" src="${url(n)}" alt="${esc(alt||n)}" data-asset-key="icon-${esc(n)}" draggable="false" loading="eager" decoding="async">`; }
+  const ALTAR_ART_URL = assetUrl('assets/scenes/map-nodes/altar-symbol-1017-v2.webp');
+  function url(name) { return safe(name) === 'altar' ? ALTAR_ART_URL : safe(name) === 'coin' ? COIN_ART_URL : assetUrl(`${ROOT}${safe(name)}.png`); }
+  function img(name, cls, alt) { const n=safe(name); if(n==='altar') return `<span class="ic${cls?' '+esc(cls):''}" role="img" aria-label="${esc(alt||'祭坛')}" data-asset-key="icon-altar" style="position:relative;display:inline-block;overflow:hidden;filter:none"><img src="${url(n)}" alt="" draggable="false" loading="eager" decoding="async" style="position:absolute;left:-37.1%;top:-39.6%;width:171.3%;height:171.3%;max-width:none;max-height:none;object-fit:fill;filter:none"></span>`; return `<img class="ic${cls?' '+esc(cls):''}" src="${url(n)}" alt="${esc(alt||n)}" data-asset-key="icon-${esc(n)}" draggable="false" loading="eager" decoding="async">`; }
 
   const MAP = Object.create(null);
   const add = (name, codes) => codes.forEach(code => { MAP[String.fromCodePoint(code)] = name; });
@@ -98,7 +99,6 @@ import { observeIconHydration } from './icon-hydration.js';
     const target=event.target;
     if(target&&target.tagName==='IMG'&&target.dataset&&target.dataset.assetKey) reportMissing('file',target.getAttribute('src'));
   }, true);
-  // 全量图标预热（2026-09-07 老板指示）已由 game.boot.js 的 collectThumbnailAssets/
-  // collectManifestAssets/warmBatched/prefetchBatched 链接管（2026-10-02 审计 A 档删除
-  // 旧预热链 iconUrls/warmAllIcons 及 SDT.Icons.urls/warmAll/DEFS/missingKeys 挂载）。
+  // 图标由可见 DOM 按需加载；启动不枚举全图标目录。
+  // 旧独立 iconUrls/warmAllIcons 预热链已经退役。
   sdtDefine('Icons', {img,url,rich,hydrate,TYPE_ART,NAMES});

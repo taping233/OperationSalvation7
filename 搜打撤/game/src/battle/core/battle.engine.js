@@ -1,3 +1,5 @@
+import { executeTargetReason } from '../effects/effect-steps.m2.js';
+import { isFoeFightCard, withFoeFightTargets } from '../effects/battle.foe-fight.js';
 /* battle.engine.js —— 战斗规则核与编排层（自 battle.core.js 拆出）。
  * 动作队列/逐拍播放/快照建模、装备、战斗背包与入口收尾已由独立模块承接；
  * 规则核（词条时点/出牌结算/命中/死亡）保留共享调用，属地模块经工厂注入解环。
@@ -30,6 +32,7 @@ import { shuffleCards } from '../bag/battle.deck.js';
 import '../bag/battle.piles.js';
 import { isAreaEffect, targetSideFor, unplayableReasonFor, itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { rejectUnsupportedCard } from '../effects/battle.rule-guard.js';
+import { missingInfusionReason } from '../effects/battle.infusion.js';
 import { inspectCardRuleCapability } from '../../cards/card-rules.capability.js';
 
 import { createBattleExecutionSession } from '../runtime/battle.execution-session.js';
@@ -46,6 +49,7 @@ import { createBattleCardInspection } from '../effects/battle.card-inspection.js
 import { calculateEnemyIntent } from './battle.enemy-intent.js';
 import { createBattleSnapshot, createBattleSnapshotSignature } from '../runtime/battle.snapshot.js';
 import { createBattleResolution } from './battle.resolution.js';
+import { createBattlePresentation } from './battle.presentation-events.js';
 import { createBattleFoeLifecycle } from './battle.foe-lifecycle.js';
 import { createBattleDraw } from './battle.draw.js';
 import '../view/battle.feedback.js';
@@ -105,8 +109,8 @@ const requestBattleRender = () => {
     }
   };
 const interactionOf = (kind) => (interaction && interaction.kind === kind ? interaction : null);
-const pendingTargetOf = () => { const i = interactionOf('card'); return i ? { uid: i.uid, card: i.card } : null; };
-const pendingItemOf = () => { const i = interactionOf('item'); return i ? { uid: i.uid, card: i.card } : null; };
+const pendingTargetOf = () => { const i = interactionOf('card'); return i ? { uid: i.uid, card: i.card, hint: i.hint, excludedTargetIndex: i.foeFightFirst ? foes.indexOf(i.foeFightFirst) : null } : null; };
+const pendingItemOf = () => { const i = interactionOf('item'); return i ? { uid: i.uid, card: i.card, hint: i.hint, excludedTargetId: i.foeFightFirst?.id ?? null } : null; };
 function cardIdentity(card) {
     if (card && card.id) return `id:${card.id}`;
     return `legacy:${card?.name || ''}|${card?.type || ''}|${card?.desc || ''}`;
@@ -114,6 +118,10 @@ function cardIdentity(card) {
 const isStarterAttack = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
 const R = () => SDT.MAP.rules;
 const alive = () => foes.filter(f => !f.dead);
+export const { emitBattlePresentation, emitRecast } = createBattlePresentation({
+  readState: () => ({ game: G, foes, signal: activeActionSignal, battleToken: battleState.token }),
+  emitEvent: event => cardAnims.push(event),
+});
 const cardInspection = createBattleCardInspection({
     cards: SDT.Cards,
     curseMeta: Combat.CURSE_META,
@@ -187,6 +195,13 @@ const applyTextEffects = createEffectExecutor({
     pushFloat: value => floats.push(value),
     drawCards,
     grantStarterAttack: grantSha,
+    castStarterAttack: target => {
+      const foes = alive();
+      if (!G?.battleActive || G.hp <= 0 || !foes.length) return false;
+      const enemy = foes.includes(target) ? target : foes[0];
+      const uid = addTempCard(SDT.Cards.SHA, { source: 'effect-cast' });
+      return queueCardExecution(uid, findCard(uid).card, [], enemy, true) !== false;
+    },
     markNoDrawNext: () => { set$noDrawNext(true); },
     queueDiscover: value => discoverQueue.push(value),
     randomDiscoverCard,
@@ -256,11 +271,9 @@ const applyTextEffects = createEffectExecutor({
       const o = uid && findCard(uid);
       return o ? Math.max(0, +(o.card.cost || 0)) : 0;   // 09-29 老板拍板：价格统一按费用（原 sellPrice 卖价口径废弃）
     },
-    dealAoeFixed: n => {
-      alive().slice().forEach(t => {   // 本模块函数名是 alive（此前误写 getAlive，气功波价格伤害一触发即崩）
-        const r = Combat.dealDamage({ atk: G.atk }, t, n, Combat.TYPES.FIXED);
-        if (r.dealt > 0) floats.push({ unit: foeIdx(t), text: '-' + r.dealt, cls: 'dmg' });
-      });
+    dealAoeFixed: (n, card) => {
+      // Preserve the price-derived amount while sharing immunity, protection, stealth and defeat handling.
+      alive().slice().forEach(t => hitFoe(t, card, n, Combat.TYPES.FIXED, '', { preserveBaseDamage: true, deferDefeat: true }));
       sweepDead();
     },
     replaceShaInDeck,
@@ -347,11 +360,11 @@ function beginSpecialTargeting(kind, uid = null, card = null, extra = null) {
     set$interaction({ kind, uid, card, hint: '', ...(extra ? { extra } : {}) });
     requestBattleRender();
   }
-function beginCardTargeting(uid, card, targetIds, hint, fuelUids = []) {
+function beginCardTargeting(uid, card, targetIds, hint, fuelUids = [], foeFightFirst = null) {
     const previous = interactionOf('card');
     if (previous?.uid === uid && !fuelUids.length) fuelUids = previous.fuelUids || [];
     clearTargetSession(uid);
-    set$interaction({ kind: 'card', uid, card, hint: hint || '', fuelUids });
+    set$interaction({ kind: 'card', uid, card, hint: hint || '', fuelUids, foeFightFirst });
     set$battleState(beginTargeting(battleState, uid, targetIds));
     set$pendingHint(hint || '');
     requestBattleRender();
@@ -383,7 +396,7 @@ function usePotion(uid) { if (!hasPendingEndTurn()) return bag.usePotion(uid); }
 function openBag() { return bag.openBag(); }
 function closeBag() { return bag.closeBag(); }
 
-export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, getBattleLiveness, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, slamSkill, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse, deferEndTurn, hasPendingEndTurn };
+export { settlePendingSelections, requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, swapCardCosts, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, snapshotSignature, getBattleLiveness, processDelayed, accrueGrowth, resolveCard, resolveCardWithFeedback, syncCurseCondEquips, useEquipSkill, applyKillRewards, start, fireTurnEndTriggers, addTempCard, fireConsumeTriggers, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, handUnplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, queueCardExecution, aegisBlocked, foeIdx, hitFoe, matchHandSelectKey, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, slamSkill, addPlayerCurse, usePotion, openBag, closeBag, pickChoice, pickDiscover, playerTakeHit, frenzyCurse, elCurse, deferEndTurn, hasPendingEndTurn };
 
 /* —— 六段正文（原行 606-2479，逐字）—— */
   // ---------- 生效时刻 / 持续时间 / 生效条件（设计者 2026-09-02 定版） ----------
@@ -468,7 +481,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
         }
         continue;   // 一次性
       }
-      if (silenced) {
+      // 神秘药水已在本道具入口消费；专用任务兑现产卡，不属于受沉默限制的法术技能。
+      if (silenced && q.special !== 'mysteryPotion') {
         G.log(`[[icon:cross]] 沉默中：【${esc(q.cardName)}】的回合开始效果无法生效`, 'warn');
       } else {
         G.log(`[[icon:hourglass]] <b>回合开始时</b>：【${esc(q.cardName)}】${esc(q.text)}`, 'sys');
@@ -534,6 +548,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // 出牌结算（目标：单点卡 = target；群体卡 = 所有存活敌人；infused = 作为注能主卡打出；
   // fuelCost = 注能牺牲品费用合计，供「N 倍于被注能卡牌价格」类效果折算；uid = 成长/容器定位）
   const resolveCard = createBattleResolution({
+    emitRecast,
     readState: () => ({ mode, playedMovesThisTurn, infuseFuels, grave, allSpellsInfused }),
     getHandSize: () => hand.length,
     getPlayerStatus: () => pstat,
@@ -897,8 +912,19 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // 2026-09-09 老板 #14：手牌代价（消耗 N 张 X / 选择 N 张手牌）不足时同样不可打出。
   function unplayableReason(card) {
     if (card?._battleTransformMissing) return `转换目标「${card._battleTransformMissing}」缺失，暂时无法使用`;
+    if (isFoeFightCard(card) && alive().length < 2) return '场上敌人不足两名，无法互相攻击';
     const handCards = hand.map(u => { const o = findCard(u); return o ? { uid: u, card: o.card } : null; }).filter(Boolean);
     return unplayableReasonFor(card, mode, { handCards, selfCard: card });
+  }
+
+  function equipmentPlayLimit(card) {
+    if (card?.type !== '装备') return null;
+    const cap = equipCap();
+    const worn = equipped.filter(e => !e.passive).length;
+    return worn >= cap ? { card, cap, worn, reason: { code:'EQUIPMENT_FULL', message:`最多同时装配 ${cap} 件装备（已装配 ${worn} 件）——本场无法再穿戴` } } : null;
+  }
+  function handUnplayableReason(card) {
+    return unplayableReason(card) || equipmentPlayLimit(card)?.reason.message || null;
   }
 
   function inspectCardPlay(uid) {
@@ -915,11 +941,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     if (why) return fail('CARD_UNPLAYABLE', `【${card.name}】无法打出：${why}`, card);
     const effCost = effCostOf(card, uid);
     if (effCost > energy) return fail('INSUFFICIENT_ENERGY', `能量不足：【${card.name}】需要 ${effCost} 点能量`, card);
-    if (card.type === '装备') {
-      const cap = equipCap();
-      const worn = equipped.filter(e => !e.passive).length;
-      if (worn >= cap) return { card, cap, worn, reason:{ code:'EQUIPMENT_FULL', message:`最多同时装配 ${cap} 件装备（已装配 ${worn} 件）——本场无法再穿戴` } };
-    }
+    const equipmentLimit = equipmentPlayLimit(card);
+    if (equipmentLimit) return equipmentLimit;
     return { card, reason:null };
   }
   function infusionChoiceReason(uid, card) {
@@ -951,7 +974,10 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     const fuel = pending?.uid === uid ? pending.fuelUids || [] : [];
     const needsTarget = need === 'enemy' && (side == null || side === 'self' || !foes[+side] || foes[+side].dead)
       || need === 'self' && side !== 'self';
-    const reason = needsTarget ? null : execPlayFlow.getExecutionAvailability(uid, card, fuel, freeCast.has(uid));
+    const infusionIssue = missingInfusionReason(card, fuel.length, allSpellsInfused);
+    const executeIssue = executeTargetReason(card, side == null || side === 'self' ? null : foes[+side], alive());
+    const reason = executeIssue || (infusionIssue ? { code:'INFUSION_REQUIRED', message:infusionIssue }
+      : needsTarget ? null : execPlayFlow.getExecutionAvailability(uid, card, fuel, freeCast.has(uid)));
     return reason ? cardPlayRejected(uid, reason) : Object.freeze({ status:'ready', uid, battleToken:battleState.token });
   }
   function performCardPlay(uid, side, forceDirect, submission = false) {
@@ -964,7 +990,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       else if (!['NOT_IN_HAND','INPUT_BUSY','TURN_END_PENDING','CARD_MISSING'].includes(check.reason.code)) G.log(`${check.reason.code === 'INSUFFICIENT_ENERGY' ? '[[icon:bolt]]' : '[[icon:cross]]'} ${esc(check.reason.message)}`, 'warn');
       return submission ? cardPlayRejected(uid, check.reason) : ruleRejected ? false : undefined;
     }
-    const card = check.card;
+    let card = check.card;
     // 只清「上一张卡」的指向槽；背包砸击/血毒双镖/道具点选等非卡牌点选态有自己的生命周期
     // （R3-0：待选期间打出别的卡不吞砸击选择态），一并清会把它们顺带取消。
     const staleCard = interactionOf('card');
@@ -982,6 +1008,17 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     let target = null;
     const isFree = freeCast.has(uid);
     const pendingCard = interactionOf('card');
+    const fuel = pendingCard?.uid === uid ? pendingCard.fuelUids || [] : [];
+    const infusionIssue = missingInfusionReason(card, fuel.length, allSpellsInfused);
+    if (infusionIssue) {
+      G.log(`[[icon:cross]] ${esc(infusionIssue)}`, 'warn');
+      return submission ? cardPlayRejected(uid, { code:'INFUSION_REQUIRED', message:infusionIssue }) : undefined;
+    }
+    const executeIssue = executeTargetReason(card, side == null || side === 'self' ? null : foes[+side], alive());
+    if (executeIssue) {
+      G.log(`[[icon:cross]] ${esc(executeIssue.message)}`, 'warn');
+      return submission ? cardPlayRejected(uid, executeIssue) : undefined;
+    }
     if (need === 'enemy') {
       if (side == null || side === 'self') { beginCardTargeting(uid, card, alive().map(foe => foe.id)); return submission ? cardPlayNeedsInput(uid, 'target') : undefined; }
       target = foes[+side];
@@ -991,11 +1028,26 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     } else {
       target = alive()[0] || null;
     }
+    if (isFoeFightCard(card)) {
+      const first = pendingCard?.uid === uid ? pendingCard.foeFightFirst : null;
+      if (!first || first.dead || !foes.includes(first)) {
+        beginCardTargeting(uid, card, alive().filter(foe => foe !== target).map(foe => foe.id),
+          `已选 ${target.name} 先攻击；再选另一名敌人（存活才反击）· Esc 取消`, fuel, target);
+        return submission ? cardPlayNeedsInput(uid, 'target') : undefined;
+      }
+      if (first === target) {
+        G.log('[[icon:cross]] 扰敌：请选择另一名存活敌人', 'warn');
+        requestBattleRender();
+        return submission ? cardPlayNeedsInput(uid, 'target') : undefined;
+      }
+      card = withFoeFightTargets(card, [first, target]);
+      target = first;
+    }
     if (pendingCard) set$interaction(null);   // 交互正常结算：清卡牌槽（不 cancelTargeting，RESOLVING 迁移接管阶段）
     set$pendingHint('');
     // 「杀化为X」战斗规则：打出的初始攻击以目标卡形态结算（uid 沿用，弃牌簿记不变）
-    if (submission) return execPlayFlow.submitCardExecution(uid, card, pendingCard?.fuelUids || [], target, isFree);
-    queueCardExecution(uid, card, pendingCard?.fuelUids || [], target, isFree);
+    if (submission) return execPlayFlow.submitCardExecution(uid, card, fuel, target, isFree);
+    queueCardExecution(uid, card, fuel, target, isFree);
   }
   function play(uid, side, forceDirect) { return performCardPlay(uid, side, forceDirect); }
   /**
@@ -1078,6 +1130,15 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // 实时扫描下可能到几十 ms，逐次写会造成出牌后的掉帧尖刺。回合开始仍无条件
   // 落盘，窗口内闪退最多回退数秒内的出牌（正常关窗走 beforeunload 全量保存）。
   
+  // 出牌结算和新回合共用同一交互队列入口；各选择器保留自己的防重守卫。
+  function settlePendingSelections() {
+    if (!G?.battleActive) return;
+    processHandSelect();
+    processChoice();
+    processDiscoverQueue();
+    executionSession.resumeTurnEnd();
+  }
+
   const queueBattleAction = createBattleActionRunner({
     session: executionSession,
     getBattleState: () => battleState,
@@ -1092,13 +1153,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     preparePresentation: () => { renderFrameQueued = false; return renderBattle(getSnapshot()); },
     actionCancellationError,
     throwIfActionCancelled,
-    onIdle: () => {
-      if (!G?.battleActive) return;
-      processHandSelect();
-      processChoice();
-      processDiscoverQueue();
-      executionSession.resumeTurnEnd();
-    },
+    onIdle: settlePendingSelections,
   });
   const equipment = createBattleEquipment({
     resolveCardSteps: (card, target) => resolveCard.steps(card, target, false, 0, 'equip-skill'),
@@ -1123,7 +1178,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     session: executionSession, intentFor, cloneData, injectSealCards, applyNestRunes, applyVoidRune,
     drawCards, applyBattleStartPassives: equipment.applyBattleStartPassives,
     isBattleStartEquip: equipment.isBattleStartEquip, isStarterAttack,
-    requestBattleRender, alive, R,
+    requestBattleRender, alive, R, emitBattlePresentation,
     // M2：战斗开始/重开时清空触发器登记（旧战卡对象不得跨战斗泄漏）
     resetTriggers: () => triggersM2.reset(),
     runBattleStartTriggers: () => triggersM2.fireBattleStart(),
@@ -1147,6 +1202,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
 
   // —— 出牌结算长流程（queueCardExecution + execPlay）已拆出 battle.exec-play.js：工厂注入 + 一行转发 shim（具名导出面不变）——
   const execPlayFlow = createBattleExecPlay({
+    emitRecast,
     warnCardRuleRejection,
     requestBattleRender, findCard, findEffectiveCard, infusionFuelReason, fireConsumeTriggers, effCostOf,
     prepareExecutionCard: (uid, card) => findEffectiveCard(uid, card, getHostedExecutionCard)?.card || getHostedExecutionCard(card),
@@ -1171,8 +1227,15 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
   // 敌人数组下标（飘字特效用）：按对象引用找 idx
   function foeIdx(foe) { return foes.indexOf(foe); }
 
+  // 两种生命计量共用：只有实际造成伤害才破除自己的潜行。
+  function breakOwnStealthOnDamage(dealt) {
+    if (dealt > 0 && Combat.breakStealth(pstat)) {
+      G.log('[[icon:runner]] 你造成了伤害，<b>潜行</b>被破除', 'dim');
+    }
+  }
+
   // 对单个敌人结算一次伤害（含潜行/免伤/死亡处理），返回实际伤害
-  function hitFoe(foe, card, amount, type, seg) {
+  function hitFoe(foe, card, amount, type, seg, { preserveBaseDamage = false, deferDefeat = false } = {}) {
     if (foe.dead) return 0;
     // 龙巢：风暴之手存活时，元素领主不可被招式指定（全场命中统一拦截）
     if (foe.protected && foes.some(p => !p.dead && p.protects)) {
@@ -1191,7 +1254,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     // 破隐一击（白梅落影·妄）：自己处于潜行中发动的攻击伤害 ×2
     const stealthedBefore = Combat.isStealthed(pstat);
     let amt = amount;
-    if (stealthStrike && stealthedBefore && amount > 0) {
+    if (!preserveBaseDamage && stealthStrike && stealthedBefore && amount > 0) {
       amt *= 2;
       G.log(`[[icon:runner]] <b>破隐一击</b>：从潜行中发动，伤害翻倍（${amount} → ${amt}）`, 'ok');
     }
@@ -1205,9 +1268,9 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       : { spellUp: 0 };
     // 「对冰冻角色伤害 +N」（寒冰剑）：目标被冰冻时追加
     const frzM = card && String(card.desc || '').match(/对冰冻[^。]*?伤害\s*\+\s*(\d+)/);
-    if (frzM && (foe.status.freeze || 0) > 0) amt += +frzM[1];
+    if (!preserveBaseDamage && frzM && (foe.status.freeze || 0) > 0) amt += +frzM[1];
     // M3：装备被动 cond.vsFreeze（寒冰剑「对冰冻角色伤害 +N」）——穿戴中即对任何攻击生效
-    for (const eq of equipped) {
+    if (!preserveBaseDamage) for (const eq of equipped) {
       const vsFreeze = eq?.card?.rules?.equip?.passive?.cond?.vsFreeze;
       if (Number.isInteger(vsFreeze) && vsFreeze > 0 && (foe.status.freeze || 0) > 0) {
         amt += vsFreeze;
@@ -1216,17 +1279,17 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     }
     // 「触发的流血伤害翻倍」（飞身劈）：流血加成部分再叠一次。
     // M2：registerRule bleedAmp 旗标（pstat.status.bleedAmp）——结构化规则的同一翻倍口径
-    if (card && /流血伤害翻倍/.test(String(card.desc || '')) && (foe.status.bleed || 0) > 0) {
+    if (!preserveBaseDamage && card && /流血伤害翻倍/.test(String(card.desc || '')) && (foe.status.bleed || 0) > 0) {
       amt += foe.status.bleed;
       G.log(`[[icon:blood]] <b>流血伤害翻倍</b>：流血加成 ${foe.status.bleed} → ${foe.status.bleed * 2}`, 'sys');
-    } else if ((pstat.status.bleedAmp || 0) > 0 && (foe.status.bleed || 0) > 0) {
+    } else if (!preserveBaseDamage && (pstat.status.bleedAmp || 0) > 0 && (foe.status.bleed || 0) > 0) {
       amt += foe.status.bleed;
       G.log(`[[icon:blood]] <b>流血伤害翻倍</b>（持续规则）：流血加成 ${foe.status.bleed} → ${foe.status.bleed * 2}`, 'sys');
     }
     // 攻击强化祝福（atkUp）经 status 传入结算（此前 hitFoe 未带 status，攻击 blessings 未生效）；
     // spellUp 已并入 sp，传 statusForHit 防止二次叠加
     // 龙巢·暗羁绊：暗3 对敌人伤害 +1；暗1 对半血敌伤害 +1
-    if (amt > 0) {
+    if (!preserveBaseDamage && amt > 0) {
       if (nestSyn.dark3) amt += 1;
       else if (nestSyn.dark1 && foe.maxHp && foe.hp <= foe.maxHp / 2) amt += 1;
     }
@@ -1252,7 +1315,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
       if (loss > 0) floats.push({ unit: foeIdx(foe), text: '-' + loss + '♥', cls: 'dmg', type,
         hpBefore, hpAfter: foe.hp, maxHp: foe.maxHp });
       G.log(`[[icon:play]] <b>${esc(card.name)}</b> → ${esc(foe.name)}：${isTrue || abreakOn ? '真伤/破甲，' : ''}击碎 <b>${loss}</b> 颗心（余 ${Math.max(0, foe.hp)} 心）`, 'sys');
-      resolveFoeDefeat(foe);
+      breakOwnStealthOnDamage(loss);
+      if (!deferDefeat) resolveFoeDefeat(foe);
       return loss;
     }
     const hpBefore = foe.hp;
@@ -1272,11 +1336,8 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     });
     G.log(`[[icon:play]] <b>${esc(card.name)}</b>${seg || ''} → ${esc(foe.name)}：造成 <b>${r.dealt}</b> 点${Combat.TYPE_NAME[type]}` +
       (r.log.length ? `（${r.log.join('，')}）` : ''), 'sys');
-    // 造成伤害会破除自己的潜行（不造成伤害便不会破除）
-    if (r.dealt > 0 && Combat.breakStealth(pstat)) {
-      G.log('[[icon:runner]] 你造成了伤害，<b>潜行</b>被破除', 'dim');
-    }
-    resolveFoeDefeat(foe);
+    breakOwnStealthOnDamage(r.dealt);
+    if (!deferDefeat) resolveFoeDefeat(foe);
     return r.dealt;
   }
 
@@ -1350,7 +1411,7 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     sweepDead();
   }
 
-  // 玩家侧诅咒统一入口：旧日再临后免疫诅咒（灼烧也是诅咒，2026-09-09 留言口径）
+  // 玩家侧诅咒统一入口：旧日再临后免疫诅咒
   function addPlayerCurse(key, n) {
     if (playerCurseImmune) {
       // 第十二批（2026-09-23）：邪能护体的本回合临时免疫在场时用中性措辞（深渊主宰的
@@ -1486,9 +1547,9 @@ export { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, 
     G.log(`[[icon:bolt]] <b>${esc(foe.name)}</b> 的攻击附加了 <b>1</b> 层${Combat.CURSE_META[key].name}`, 'warn');
   }
 
-  // 附加 1 层随机诅咒（滋生异变体「攻击并施加诅咒」用；灼烧已入池，2026-09-08）
+  // 附加 1 层随机诅咒（滋生异变体「攻击并施加诅咒」用）
   function elCurse(foe) {
-    const keys = ['bleed', 'poison', 'burn'];
+    const keys = ['bleed', 'poison'];
     const key = keys[Math.floor(Random.random('status') * keys.length)];
     addPlayerCurse(key, 1, foe);
     SDT.Sound.sfx('curse');

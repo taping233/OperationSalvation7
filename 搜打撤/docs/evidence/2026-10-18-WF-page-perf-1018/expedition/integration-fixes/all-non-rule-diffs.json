@@ -1,0 +1,128 @@
+[
+  {
+    "id": "cmtn6bge52qt",
+    "fields": [
+      {
+        "field": "desc",
+        "previous": "在背包中才能使用，复原最多两张卡牌",
+        "current": "地图背包：从消耗区复原最多2张卡牌；战斗：从本场消耗牌复原最多2张回到手牌。对应消耗区为空时不可使用。"
+      }
+    ]
+  },
+  {
+    "id": "foe-esper_candle",
+    "fields": [
+      {
+        "field": "desc",
+        "previous": "攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击并灼烧。",
+        "current": "攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击。"
+      }
+    ]
+  },
+  {
+    "id": "foe-fire_el",
+    "fields": [
+      {
+        "field": "desc",
+        "previous": "攻击 10 / 生命 7。变异·第4层。攻击并灼烧。",
+        "current": "攻击 10 / 生命 7。变异·第4层。攻击。"
+      }
+    ]
+  },
+  {
+    "id": "tt-crystal",
+    "fields": [
+      {
+        "field": "desc",
+        "previous": "在背包中才能使用，可以复原最多 3 张卡牌。",
+        "current": "地图背包：从消耗区复原最多3张卡牌；战斗：从本场消耗牌复原最多3张回到手牌。对应消耗区为空时不可使用。"
+      }
+    ]
+  },
+  {
+    "id": "tt12-backupcell",
+    "fields": [
+      {
+        "field": "desc",
+        "previous": "抽2张牌并回复所有费用，消耗口袋中每有一张法术牌，本牌费用-1",
+        "current": "抽2张牌并回复所有费用，消耗区中每有一张法术牌，本牌费用-1"
+      }
+    ]
+  },
+  {
+    "id": "tt3-magic-lamp",
+    "fields": [
+      {
+        "field": "armor",
+        "previous": 5
+      }
+    ]
+  },
+  {
+    "id": "tt3-mystery-potion",
+    "fields": [
+      {
+        "field": "desc",
+        "previous": "回合开始时：变成1张随机招式卡牌，使其费用为0。",
+        "current": "仅战斗中使用。使用后，下回合开始时：变成1张随机招式卡牌，使其费用为0。"
+      }
+    ]
+  },
+  {
+    "id": "tt3-nature-form",
+    "fields": [
+      {
+        "field": "name",
+        "previous": "自然形态",
+        "current": "满月形态"
+      },
+      {
+        "field": "rarity",
+        "previous": "稀有",
+        "current": "职业"
+      },
+      {
+        "field": "cls",
+        "current": "牧师"
+      },
+      {
+        "field": "unrandom",
+        "current": true
+      }
+    ]
+  },
+  {
+    "id": "tt3-noon-duel",
+    "fields": [
+      {
+        "field": "dmg",
+        "previous": 0,
+        "current": 2
+      },
+      {
+        "field": "dmgType",
+        "current": "fixed"
+      }
+    ]
+  },
+  {
+    "id": "tt3-petal",
+    "fields": [
+      {
+        "field": "heal",
+        "previous": 2,
+        "current": 3
+      }
+    ]
+  },
+  {
+    "id": "tt6-chestdraw",
+    "fields": [
+      {
+        "field": "name",
+        "previous": "熔断双箱",
+        "current": "熔断物资箱"
+      }
+    ]
+  }
+]

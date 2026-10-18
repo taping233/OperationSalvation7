@@ -1,6 +1,10 @@
-// One audible track plus a pending/fading track; no eager decoding of the album.
+// Long BGM uses the browser media backend; never falls back to whole-file WebAudio decoding.
 export class SceneMusicPlayer {
-  constructor(createTrack, { fadeInMs = 650, fadeOutMs = 500, onError = () => {} } = {}) {
+  constructor(createTrack, { fadeInMs = 650, fadeOutMs = 500, backend = 'html5', onError = () => {} } = {}) {
+    if (!['html5', 'webaudio'].includes(backend)) throw new Error('Unsupported music backend');
+    this.backend = backend;
+    this.lastError = null;
+    this.failedScene = null;
     this.createTrack = createTrack;
     this.fadeInMs = fadeInMs;
     this.fadeOutMs = fadeOutMs;
@@ -17,6 +21,7 @@ export class SceneMusicPlayer {
   set(scene, { enabled, volume, immediate = false }) {
     const changed = this.desired !== scene || this.enabled !== enabled;
     const gainChanged = this.volume !== volume;
+    if (changed) { this.failedScene = null; this.lastError = null; }
     this.desired = scene;
     this.enabled = !!enabled;
     this.volume = volume;
@@ -31,15 +36,18 @@ export class SceneMusicPlayer {
     }
     if (changed) {
       for (const stale of this.entries.values()) {
-        if (stale.loading && stale.scene !== scene && stale !== this.current) this.release(stale);
+        if (stale.scene !== scene && stale !== this.current && (!stale.confirmed || !stale.track.playing())) this.release(stale);
       }
     }
+    // Waiting/blocked/failed next tracks must not freeze the audible current track's slider or ducking.
+    if (gainChanged && this.current?.scene !== scene && this.current?.track.playing()) this.applyVolume(this.current, volume, 100);
+    if (this.failedScene === scene) return;
     let entry = this.entries.get(scene);
     if (!entry) {
-      entry = { scene, token: 0, timer: null, track: null, loading: false, starting: false };
+      entry = { scene, token: 0, timer: null, track: null, loading: false, starting: false, blocked: false, confirmed: false, backend: this.backend };
       this.entries.set(scene, entry);
       entry.generation = 0;
-      const create = (html5 = false) => {
+      const create = () => {
         const generation = ++entry.generation;
         const current = () => entry.generation === generation && this.entries.get(scene) === entry;
         const callbacks = {
@@ -52,33 +60,30 @@ export class SceneMusicPlayer {
         error: (_, error) => {
           if (!current()) return;
           entry.loading = false;
-          // 解码失败只切换一次浏览器媒体通道；404/403等网络错误保留原错误处理。
-          if (!html5 && /decod/i.test(String(error)) && this.enabled && this.desired === scene) {
-            entry.track.unload();
-            entry.track = create(true);
-            entry.loading = true;
-            entry.track.load();
-            return;
-          }
+          this.failedScene = scene;
+          this.lastError = { scene, stage: 'load', message: String(error) };
           this.onError(scene, error);
           // Keep the previous valid track audible if the next file fails to load.
-          if (this.current !== entry) this.release(entry);
+          if (this.current !== entry || !entry.track.playing()) this.release(entry);
         },
         play: () => {
           if (!current()) return;
           entry.starting = false;
-          // 解锁/媒体播放 Promise 可能晚于滑条和 ducking 更新，开始时采用最新目标。
-          if (this.current === entry && this.enabled && this.desired === scene && entry.targetVolume !== this.volume) {
-            this.applyVolume(entry, this.volume, 100);
-          }
+          if (!this.enabled || this.desired !== scene) return;
+          this.commit(entry);
         },
-        playError: () => { if (current()) entry.starting = false; },
+        playError: (_, error) => {
+          if (!current()) return;
+          entry.starting = false;
+          entry.blocked = true;
+          this.lastError = { scene, stage: 'play', message: String(error || 'Playback blocked; waiting for user gesture') };
+        },
         unlock: () => {
           if (!current()) return;
-          if (!entry.track.playing() && !entry.starting) this.activate(entry);
+          if (this.enabled && this.desired === scene) { entry.blocked = false; this.activate(entry); }
         },
         };
-        return html5 ? this.createTrack(scene, callbacks, { html5:true }) : this.createTrack(scene, callbacks);
+        return this.createTrack(scene, callbacks, { html5: this.backend === 'html5', backend: this.backend });
       };
       entry.track = create();
     }
@@ -92,15 +97,32 @@ export class SceneMusicPlayer {
   }
 
   activate(entry) {
-    if (!this.enabled || this.desired !== entry.scene || this.entries.get(entry.scene) !== entry || entry.starting) return;
+    if (!this.enabled || this.desired !== entry.scene || this.entries.get(entry.scene) !== entry || entry.starting || entry.blocked) return;
     this.cancel(entry);
-    for (const other of this.entries.values()) if (other !== entry) this.fadeOut(other);
-    this.current = entry;
     const track = entry.track;
     track.mute(false);
     entry.targetVolume = this.volume;
-    if (!track.playing()) { track.volume(0); entry.starting = true; track.play(); }
+    if (!track.playing()) {
+      track.volume(0); entry.starting = true;
+      track.play(); // Only a real play callback may retire the previous audible track.
+    } else this.commit(entry);
+  }
+
+  commit(entry) {
+    if (!entry.track.playing()) return;
+    this.cancel(entry);
+    for (const other of this.entries.values()) if (other !== entry) this.fadeOut(other);
+    this.current = entry;
+    entry.confirmed = true; entry.blocked = false;
+    this.lastError = null;
     this.applyVolume(entry, this.volume, this.fadeInMs);
+  }
+
+  retryBlocked() {
+    const entry = this.entries.get(this.desired);
+    if (!this.enabled || !entry?.blocked) return;
+    entry.blocked = false;
+    this.activate(entry);
   }
 
   applyVolume(entry, volume, duration) {
@@ -152,8 +174,14 @@ export class SceneMusicPlayer {
   }
 
   snapshot() {
-    return { requested: this.desired, current: this.current?.scene || null, enabled: this.enabled,
+    const position = entry => {
+      try {
+        const value = entry?.track.seek?.();
+        return typeof value === 'number' && Number.isFinite(value) ? value : null;
+      } catch { return null; }
+    };
+    return { backend: this.backend, volume: this.current?.track.volume() ?? 0, targetVolume: this.volume, playing: this.playing(), positionSeconds: position(this.current), error: this.lastError, requested: this.desired, current: this.current?.scene || null, enabled: this.enabled,
       fadeInMs: this.fadeInMs, fadeOutMs: this.fadeOutMs,
-      tracks: [...this.entries.values()].map(e => ({ scene: e.scene, state: e.track.state(), playing: e.track.playing(), volume: e.track.volume(), fadingOut: e.timer !== null })) };
+      tracks: [...this.entries.values()].map(e => ({ scene: e.scene, backend: e.backend, positionSeconds: position(e), state: e.track.state(), playing: e.track.playing(), volume: e.track.volume(), fadingOut: e.timer !== null })) };
   }
 }

@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import mapData from '../game/data/map.json';
 
 const egg = { id: 'pet-egg', name: '宠物蛋', rarity: '稀有', type: '道具' };
 const other = { id: 'other', name: '普通牌', rarity: '古朴', type: '法术' };
@@ -89,25 +90,56 @@ describe('宝箱宠物蛋结算', () => {
     expect(random.mock.calls).toEqual([['loot'], ['loot'], ['loot']]);
   });
 
-  it.each(['large', 'boss'])('%s 第 150 次奖励同时保留宠物蛋和史诗稀有度保底', kind => {
-    const ordinary = [
-      { id: 'ordinary-a', name: '普通牌甲', rarity: '古朴', type: '法术' },
-      { id: 'ordinary-b', name: '普通牌乙', rarity: '古朴', type: '法术' },
-    ];
-    const epic = { id: 'epic-pity', name: '史诗保底牌', rarity: '史诗', type: '法术' };
-    window.SDT.MAP.chestKinds[kind] = { cards: 2, coins: null, coinCards: [], tokenChance: 0 };
+  it.each(['medium', 'large', 'boss'].flatMap(kind => [false, true].map(withEgg => ({ kind, withEgg }))))(
+    '$kind 不升级全古朴候选，宠物蛋附赠=$withEgg', ({ kind, withEgg }) => {
+    const count = kind === 'boss' ? 5 : 3;
+    const ordinary = Array.from({ length: count }, (_, i) => ({
+      id: `ordinary-${i}`, name: `普通牌${i}`, rarity: '古朴', type: '法术',
+    }));
+    window.SDT.MAP.chestKinds[kind] = {
+      ...(kind === 'medium' ? { pickFrom: count } : { cards: count }),
+      coins: null, coinCards: [],
+    };
     let nextOrdinary = 0;
-    window.SDT.Cards.randomDropCard = () => ordinary[nextOrdinary++];
-    window.SDT.Cards.pickOfRarity = () => epic;
+    window.SDT.Cards.randomDropCard = vi.fn(() => ordinary[nextOrdinary++]);
+    window.SDT.Cards.pickOfRarity = vi.fn(() => ({ id: 'epic', name: '史诗牌', rarity: '史诗', type: '法术' }));
     setRandomService({ random: vi.fn(() => 0.5), reseed: vi.fn(), snapshot: vi.fn(), restore: vi.fn() });
-    base.petEggDropChance.mockReturnValueOnce(1);
+    base.petEggDropChance.mockReturnValueOnce(withEgg ? 1 : 0);
 
     const result = chestFacade.Chests.rollContents(kind);
 
-    expect(result.cards).toEqual([ordinary[0], epic, egg]);
-    expect(result.cards.some(card => card.id === 'pet-egg')).toBe(true);
-    expect(result.cards.some(card => card.rarity === '史诗')).toBe(true);
-    expect(result.pity).toBe('史诗');
-    expect(base.recordPetEggChestResult).toHaveBeenCalledExactlyOnceWith({ eggGranted: true });
+    expect(result.cards).toEqual(withEgg ? [...ordinary, egg] : ordinary);
+    expect(result.claimMode).toBe(kind === 'medium' ? 'one' : 'all');
+    if (kind === 'medium') expect(result.choiceCount).toBe(count);
+    expect(result.pity).toBeUndefined();
+    expect(window.SDT.Cards.randomDropCard).toHaveBeenCalledTimes(count);
+    expect(window.SDT.Cards.pickOfRarity).not.toHaveBeenCalled();
+    expect(base.recordPetEggChestResult).toHaveBeenCalledExactlyOnceWith({ eggGranted: withEgg });
+  });
+
+  it.each([false, true])('首脑箱不额外附赠通行证 B，基础抽取命中=%s', drawnToken => {
+    const token = { id: 'tt-token-gold', name: '员工通行证B', rarity: '传说', type: '道具' };
+    const coins = mapData.chestKinds.boss.coinCards.map((name, i) => ({
+      id: `coin-${i}`, name, rarity: '古朴', type: '资源',
+    }));
+    const ordinary = Array.from({ length: 5 }, (_, i) => ({
+      id: `base-${i}`, name: `基础牌${i}`, rarity: '古朴', type: '法术',
+    }));
+    if (drawnToken) ordinary[0] = token;
+    window.SDT.MAP.chestKinds.boss = structuredClone(mapData.chestKinds.boss);
+    window.SDT.Cards.all = () => [egg, token, ...coins];
+    let next = 0;
+    window.SDT.Cards.randomDropCard = () => ordinary[next++];
+    base.petEggDropChance.mockReturnValueOnce(0);
+    const random = vi.fn(() => 0.1);
+    setRandomService({ random, reseed: vi.fn(), snapshot: vi.fn(), restore: vi.fn() });
+
+    const result = chestFacade.Chests.rollContents('boss');
+
+    expect(result.cards).toEqual([...ordinary, coins[0]]);
+    expect(result.cards.filter(card => card.id === token.id)).toHaveLength(drawnToken ? 1 : 0);
+    expect(result.tokenHit).toBeUndefined();
+    expect(mapData.chestKinds.boss.tokenChance).toBeUndefined();
+    expect(random).toHaveBeenCalledTimes(2); // 宠物蛋与货币卡；没有额外通行证掷骰。
   });
 });

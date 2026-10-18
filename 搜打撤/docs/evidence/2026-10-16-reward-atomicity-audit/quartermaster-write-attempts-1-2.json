@@ -29,7 +29,8 @@
         ],
         "index": 1,
         "context": {
-          "onCell": true
+          "onCell": true,
+          "consumeNode": false
         },
         "current": {
           "kind": "small",
@@ -78,7 +79,8 @@
         ],
         "index": 1,
         "context": {
-          "onCell": true
+          "onCell": true,
+          "consumeNode": false
         },
         "current": {
           "kind": "small",
@@ -115,7 +117,7 @@
       "paidCoins": 3,
       "taken": null
     },
-    "consumed": false,
+    "consumed": true,
     "chestReward": null,
     "mainCardOwned": 0
   },
@@ -144,7 +146,8 @@
       ],
       "index": 1,
       "context": {
-        "onCell": true
+        "onCell": true,
+        "consumeNode": false
       },
       "current": {
         "kind": "small",

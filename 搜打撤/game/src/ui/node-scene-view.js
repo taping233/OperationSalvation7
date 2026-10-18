@@ -1,9 +1,7 @@
 import { esc, escAttr } from '../core/shared.js';
 import '../../css/archive-back.css';
 
-function mergeSingleOptionDescription(body, narrative) {
-  const choices = document.createElement('template');
-  choices.innerHTML = body;
+function mergeSingleOptionDescription(choices, body, narrative) {
   const options = choices.content.querySelectorAll('.evt-opt');
   if (options.length !== 1) return body;
   const detail = options[0].querySelector(':scope > span');
@@ -21,10 +19,10 @@ function mergeSingleOptionDescription(body, narrative) {
 export function eventSceneHTML({ tone, icon = '', title, sub = '', body = '', foot = '', asset, music, region, layer }) {
   const entry = tone === 'entry';
   const themed = ['event', 'entry', 'fire', 'pickup'].includes(tone);
-  const choices = tone === 'event' ? mergeSingleOptionDescription(body, sub) : body;
-  const choiceTemplate = document.createElement('template');
-  choiceTemplate.innerHTML = choices;
-  const choiceCount = tone === 'event' ? choiceTemplate.content.querySelectorAll('.evt-opt[data-act]').length : 0;
+  const choiceTemplate = tone === 'event' ? document.createElement('template') : null;
+  if (choiceTemplate) choiceTemplate.innerHTML = body;
+  const choices = choiceTemplate ? mergeSingleOptionDescription(choiceTemplate, body, sub) : body;
+  const choiceCount = choiceTemplate ? choiceTemplate.content.querySelectorAll('.evt-opt[data-act]').length : 0;
   const eventChoiceFoot = choiceCount > 1 ? `<div class="event-choice-state">
     <div class="event-choice-announcement" role="status" aria-live="polite"><b data-event-choice-name>先选择一个选项</b><small data-event-choice-detail>点击选项查看已知结果，再确认执行。</small></div>
     <button type="button" class="event-choice-clear" disabled>取消选择</button>

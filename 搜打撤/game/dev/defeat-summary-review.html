@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="/"><title>失败结算 · 只读测试数据审查</title>
+<script>
+// Install before any game module: reads and writes only touch this page's memory.
+{const memory=new Map();Object.defineProperty(window,'localStorage',{value:Object.freeze({getItem(key){return memory.get(key)??null},setItem(key,value){memory.set(key,String(value))},removeItem(key){memory.delete(key)},clear(){memory.clear()}})});}
+</script></head><body>
+
+<div id="app"><main id="viewport"><div id="overlay" class="room-view" role="dialog" aria-modal="true">
+<div class="fixture-controls" id="fixtureControls">测试数据 · 不连接存档 <button data-scene="zero" disabled>0保留</button><button data-scene="long" disabled>长清单</button><button data-scene="saved" disabled>有抢运</button><span id="fixtureStatus">载入真实结算组件中…</span></div>
+<div class="card room"><h2 id="ovTitle" hidden></h2><div id="ovBody"></div></div></div></main></div>
+<script type="module" src="/dev/defeat-summary-review.js"></script></body></html>

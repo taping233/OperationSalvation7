@@ -117,7 +117,8 @@ describe('研究所自然节点与奖励生命周期审计', () => {
   it('定向箱按既有符文容量收下可容纳的块数并立即保存，不能二领成负数', () => {
     H.game.nestRunes = Array.from({ length: 9 }, () => ({ name: '已有', attrs: ['火'], rarity: '古朴' }));
     H.game.nestTargetedBox = 1; Nest.renderNestMap(); const claim = actions.nestBox水;
-    claim(); claim();
+    claim();
+    const confirm=actions.nestCostConfirm; confirm(); confirm(); claim();
     expect(H.game.nestRunes).toHaveLength(10); expect(H.game.nestTargetedBox).toBe(0);
     expect(H.saves).toHaveLength(1); expect(H.saves[0].nestTargetedBox).toBe(0);
   });
@@ -125,7 +126,7 @@ describe('研究所自然节点与奖励生命周期审计', () => {
     const { Random } = await import('../game/src/core/random.js');
     const roll = count => {
       Random.reseed(77); H.game.nestRunes = Array.from({ length: count }, () => ({ name: '已有', attrs: ['火'] }));
-      H.game.nestTargetedBox = 1; Nest.renderNestMap(); actions.nestBox水(); return Random.snapshot();
+      H.game.nestTargetedBox = 1; Nest.renderNestMap(); actions.nestBox水(); if (count>7) actions.nestCostConfirm(); return Random.snapshot();
     };
     expect(roll(10)).toEqual(roll(0));
   });
@@ -139,9 +140,75 @@ describe('研究所自然节点与奖励生命周期审计', () => {
     const beforeRandom = Random.snapshot(); claim();
     expect(H.game.cardBox).toEqual(cards); expect(H.game.nestRunes).toHaveLength(10 + upgrade);
     expect(H.game.nestPos).toBe(5); expect(H.saves).toHaveLength(0); expect(Random.snapshot()).toEqual(beforeRandom);
-    H.game.nestRunes.pop(); claim(); claim();
+    H.game.nestRunes.pop(); claim();
+    const confirm=actions.nestCostConfirm; confirm(); confirm(); claim();
     expect(H.game.cardBox).toHaveLength(0); expect(H.game.nestRunes).toHaveLength(10 + upgrade);
     expect(H.game.nestPos).toBe(6); expect(H.saves).toHaveLength(1);
+  });
+  it('法阵确认前列出同名数量，取消不扣牌不重掷，旧确认失效', async () => {
+    const { Random } = await import('../game/src/core/random.js');
+    H.game.cardBox=[H.cards[0], {...H.cards[1]}, {...H.cards[1]}, {...H.cards[2]}, {...H.cards[3]}];
+    H.game.nestPos=5; Nest.renderNestMap(); actions.nestCell6();
+    const before=Random.snapshot(), cards=H.game.cardBox.slice();
+    const choices=H.UI.el.ovBody.textContent;
+    actions.rc0(); const old=actions.nestCostConfirm;
+    expect(H.UI.el.ovBody.textContent).toContain('奖励卡 ×2');
+    expect(H.UI.el.ovBody.textContent).toContain('英雄 ×1');
+    expect(H.UI.el.ovBody.textContent).not.toContain('职业卡 ×1');
+    expect(H.game.cardBox).toEqual(cards); expect(H.game.nestRunes).toHaveLength(0);
+    actions.nestCostCancel(); old();
+    expect(H.UI.el.ovBody.textContent).toBe(choices); expect(Random.snapshot()).toEqual(before);
+    expect(H.game.cardBox).toEqual(cards); expect(H.saves).toHaveLength(0);
+    actions.rc0(); actions.nestCostConfirm();
+    expect(H.game.cardBox).toEqual([H.cards[0],H.cards[3]]);
+    expect(H.game.nestRunes).toHaveLength(1); expect(H.game.nestPos).toBe(6);
+  });
+  it('整盒撤离先列全部非初攻，返回无变化，确认一次才献祭并结算', async () => {
+    H.game.cardBox=[H.cards[0],{...H.cards[1]},{...H.cards[1]},H.cards[2]];
+    H.game.nestPos=5; Nest.renderNestMap(); actions.nestCell6();
+    const cards=H.game.cardBox.slice(); actions.rcBox();
+    expect(H.UI.el.ovBody.textContent).toContain('3 张卡牌');
+    expect(H.UI.el.ovBody.textContent).toContain('奖励卡 ×2');
+    actions.nestCostCancel(); expect(H.game.cardBox).toEqual(cards); expect(H.game.nestActive).toBe(true);
+    actions.rcBox(); const confirm=actions.nestCostConfirm; confirm(); confirm();
+    await vi.waitFor(()=>expect(H.game.nestActive).toBe(false));
+    expect(H.game.cardBox).toEqual([H.cards[0]]);
+    expect(window.SDT.Base.data.stats.labRuns).toBe(1);
+  });
+  it.each([8,9,10])('定向箱已有%i块时先预告收取/散失，取消无RNG无扣箱', async count => {
+    const { Random } = await import('../game/src/core/random.js');
+    H.game.nestRunes=Array.from({length:count},()=>({name:'已有',attrs:['火']}));
+    H.game.nestTargetedBox=1; Nest.renderNestMap();
+    const before=Random.snapshot(); actions.nestBox水(); const old=actions.nestCostConfirm;
+    expect(H.UI.el.ovBody.textContent).toContain(`收下 ${10-count} 块，散失 ${count-7} 块`);
+    expect(H.game.nestRunes).toHaveLength(count); expect(H.game.nestTargetedBox).toBe(1);
+    actions.nestCostCancel(); old();
+    expect(Random.snapshot()).toEqual(before); expect(H.game.nestTargetedBox).toBe(1);
+    expect(H.game.nestRunes).toHaveLength(count); expect(H.saves).toHaveLength(0);
+  });
+  it('定向箱确认时容量变化需重新展示损失，法阵名单变化也不扣牌', () => {
+    H.game.nestRunes=Array.from({length:9},()=>({name:'已有',attrs:['火']}));
+    H.game.nestTargetedBox=1; Nest.renderNestMap(); actions.nestBox水();
+    H.game.nestRunes.push({name:'后来',attrs:['火']}); actions.nestCostConfirm();
+    expect(H.UI.el.ovBody.textContent).toContain('收下 0 块，散失 3 块');
+    expect(H.game.nestTargetedBox).toBe(1); actions.nestCostCancel();
+    H.game.nestRunes=[]; H.game.cardBox=H.cards.slice(1); H.game.nestPos=5;
+    Nest.renderNestMap(); actions.nestCell6(); actions.rc0();
+    H.game.cardBox.pop(); actions.nestCostConfirm();
+    expect(H.game.cardBox).toHaveLength(2); expect(H.game.nestRunes).toHaveLength(0);
+    expect(H.UI.el.ovBody.textContent).toContain('牌盒或符文容量已变化');
+  });
+  it.each(['rune','box','target'])('%s确认页跨新局旧回调不能扣牌扣箱或发奖', kind => {
+    H.game.cardBox=H.cards.slice(1); H.game.nestPos=5;
+    H.game.nestRunes=kind==='target'?Array.from({length:9},()=>({name:'已有',attrs:['火']})):[];
+    H.game.nestTargetedBox=1; Nest.renderNestMap();
+    if(kind==='target') actions.nestBox水();
+    else { actions.nestCell6(); actions[kind==='box'?'rcBox':'rc0'](); }
+    const old=actions.nestCostConfirm, before=JSON.stringify({box:H.game.cardBox,runes:H.game.nestRunes});
+    H.game.discoveredPairs=new Set(); old();
+    expect(JSON.stringify({box:H.game.cardBox,runes:H.game.nestRunes})).toBe(before);
+    expect(H.game.nestTargetedBox).toBe(1); expect(H.game.nestActive).toBe(true);
+    expect(H.saves).toHaveLength(0);
   });
   it.each([0, 3])('研究所商店遵守升级%s的既有上限：满包不扣币或售出，腾位后原商品可购买一次', async upgrade => {
     const { Random } = await import('../game/src/core/random.js');

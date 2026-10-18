@@ -321,6 +321,8 @@ it('火堆：确认才回血复原，结算落盘且重入不重复；继续才�
   );
   const { openFireRest } = await importAltar();
   openFireRest();
+  expect(document.body.textContent).toContain('随机复原至多 2 张');
+  expect(document.querySelector('[data-act="restoreOne"]')).toBeNull();
   expect(game.hp).toBe(20);
   expect(game.visited['0,0']).toBeUndefined();
   const rest = acts.fireRestGo;
@@ -430,7 +432,9 @@ it('入城补给先阅读再逐张领取，刷新不重领，满包补给保留�
   const { openEntrySupply } = await importAltar();
   expect(openEntrySupply()).toBe(true);
   expect(game.ownedCards).toHaveLength(0);
-  expect(document.getElementById('body').textContent).toContain('领完全部补给');
+  expect(document.querySelector('.ui-facts').textContent).toContain('待领补给2 张');
+  expect(document.querySelector('.ui-decision-note').closest('details')).toBeNull();
+  expect(document.getElementById('body').textContent.match(/全部领取后才能继续探索/g)).toHaveLength(1);
   expect(document.getElementById('body').textContent).toContain('全部领取后才能继续探索');
   expect(document.getElementById('body').textContent).not.toContain('可领取最多');
   const reveal = acts.clsEntryReveal;
@@ -439,6 +443,10 @@ it('入城补给先阅读再逐张领取，刷新不重领，满包补给保留�
   expect(document.querySelectorAll('.entry-supply-strips .reward-unit')).toHaveLength(2);
   expect(document.querySelector('.entry-supply-status b').textContent).toBe('0 / 2');
   expect(document.querySelector('.entry-supply-status').getAttribute('aria-live')).toBe('polite');
+  expect(document.querySelector('.reward-rule').textContent).toBe('点卡面查看详情');
+  expect(document.querySelector('.entry-supply-status').textContent).toBe('已领取0 / 2');
+  expect(document.querySelector('.reward-notice').textContent).toBe('领完补给后可继续探索；放不下时请先整理背包');
+  expect(document.querySelector('.entry-supply-status small')).toBeNull();
   expect(document.querySelector('[data-act="clsEntryContinue"]')).toBeNull();
   acts.clsEntryContinue();
   expect(game.state).toBe('modal');
@@ -447,11 +455,13 @@ it('入城补给先阅读再逐张领取，刷新不重领，满包补给保留�
   st.bagCapN = 0;
   acts.entrySupplyTake({ i:0 });
   expect(game.entrySupply.taken).toEqual([]);
+  expect(document.querySelector('.bt-card-reveal')).toBeNull();
   expect(document.querySelector('.reward-notice').textContent).toContain('仍保留在入口');
   expect(document.querySelector('.entry-supply-status b').textContent).toBe('0 / 2');
   st.bagCapN = 1;
   acts.entrySupplyTake({ i:0 });
   expect(game.entrySupply.taken).toEqual([0]);
+  expect(document.querySelector('.bt-card-reveal-caption').textContent).toBe('已入背包');
   expect(document.querySelectorAll('.entry-supply-strips .reward-unit')).toHaveLength(1);
   expect(document.querySelector('.entry-supply-status b').textContent).toBe('1 / 2');
   expect(document.querySelector('.reward-notice').textContent).not.toContain('仍保留在入口');
@@ -476,6 +486,10 @@ it('入城补给先阅读再逐张领取，刷新不重领，满包补给保留�
   expect(game.ownedCards).toHaveLength(2);
   expect(document.querySelectorAll('.entry-supply-strips .reward-unit')).toHaveLength(0);
   expect(document.querySelector('.entry-supply-status b').textContent).toBe('2 / 2');
+  expect(document.querySelector('.reward-rule')).toBeNull();
+  expect(document.querySelector('.entry-reward-complete p').textContent).toBe('补给已领齐');
+  expect(document.querySelector('.entry-supply-status small')).toBeNull();
+  expect(document.querySelector('.reward-notice')).toBeNull();
   expect(document.querySelector('[data-act="clsEntryContinue"]').textContent).toContain('继续探索');
   expect(document.querySelector('[data-act="entrySupplyTake"]')).toBeNull();
   acts.clsEntryContinue();
@@ -496,4 +510,46 @@ it.each([0, 1])('入城补给仅有 %i 张时仍按实际总数显示并在全�
   expect(document.querySelector('.entry-supply-status b').textContent).toBe(`${total} / ${total}`);
   expect(document.querySelector('[data-act="clsEntryContinue"]')).not.toBeNull();
   expect(st.game.ownedCards).toHaveLength(total);
+});
+
+
+it('首脑未解封：保留可见激活步骤和返回，重复进入/旧回调不影响新页面', async () => {
+  const { openBossGate } = await importAltar();
+  openBossGate();
+  expect(st.game.state).toBe('modal');
+  expect(document.body.textContent).toContain('祭坛未激活');
+  expect(document.body.textContent).toContain('弃 3 张');
+  expect(document.body.textContent).toContain('2 枚员工通行证A碎片');
+  expect(document.body.textContent).toContain('仅献祭道具不会激活');
+  expect(document.querySelector('[data-act="bossGateFight"]')).toBeNull();
+  const oldBack = acts.bossGateLockedBack;
+  openBossGate(); oldBack();
+  expect(st.game.state).toBe('modal');
+  expect(document.querySelector('[data-act="bossGateLockedBack"]')).not.toBeNull();
+  acts.bossGateLockedBack();
+  expect(st.game.state).toBe('idle'); expect(document.body.textContent).toBe('');
+  expect(st.game.altarActivated).toBeFalsy(); expect(st.game.visited).toEqual({});
+  openBossGate(); expect(document.body.textContent).toContain('祭坛未激活');
+});
+it('首脑已解封：照常显示迎战入口，旧封印页回调不能关闭迎战页', async () => {
+  const { openBossGate } = await importAltar();
+  openBossGate(); const oldBack = acts.bossGateLockedBack;
+  st.game.altarActivated = true; openBossGate();
+  expect(document.querySelector('[data-act="bossGateFight"]')).not.toBeNull();
+  expect(document.body.textContent).not.toContain('祭坛未激活');
+  oldBack(); expect(document.querySelector('[data-act="bossGateFight"]')).not.toBeNull();
+});
+it('首脑地图状态展示前置但仍是未完成节点；已激活/已击败状态保持原语义', async () => {
+  const { mapNodeStatus, isConsumedMapNode } = await import('../game/src/core/map-node-state.js');
+  const { mapNodeInfo } = await import('../game/src/core/node-info.js');
+  const node = { li:0, idx:0, def:{ type:'boss' } };
+  const before = JSON.stringify(st.game);
+  expect(mapNodeStatus(st.game, node)).toMatchObject({ id:'incomplete', label:'祭坛未激活' });
+  expect(mapNodeInfo(st.game, node)[1]).toContain('污染祭坛');
+  expect(isConsumedMapNode(st.game, node)).toBe(false);
+  expect(JSON.stringify(st.game)).toBe(before);
+  st.game.altarActivated = true;
+  expect(mapNodeStatus(st.game, node)).toMatchObject({ id:'incomplete', label:'未完成' });
+  st.game.bossKilled = true;
+  expect(mapNodeStatus(st.game, node).id).toBe('completed');
 });

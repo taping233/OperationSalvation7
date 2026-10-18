@@ -15,7 +15,7 @@ let uid=0;
 function game(cards){const chosen=cards||[C.SHA,C.SHA];return{ownedCards:chosen.map(card=>({uid:`r7-${uid++}`,card:{...card}})),hp:50,maxHp:50,atk:4,spellPower:0,coins:0,myClass:null,characterId:null,state:'idle',battleActive:false,log(){},heal(n){this.hp=Math.min(this.maxHp,this.hp+n);},addItem(){},onBattleEnd(){}};}
 async function play(defs,targets){const g=game();BattleSession.start(g,defs,{isBoss:false,encounterId:'r7-test'});await drain();for(const target of targets){const card=BattleSession.getSnapshot().hand[0];BattleSession.commands.playCard(card,target);await drain();}BattleSession.commands.endTurn();const s=await runEnemyTurn();return{g,s,checkpoint:BattleSession.serialize()};}
 const L2=[{id:'archer',name:'联邦射手',atk:5,hp:3,behavior:'volley'},{id:'cavalry',name:'联邦机动兵',atk:5,hp:6,behavior:'charge'}];
-const L4=[{id:'fire_el',name:'灼热异变体',atk:10,hp:7,behavior:'burn'},{id:'grass_el',name:'滋生异变体',atk:5,hp:12,behavior:'curse'}];
+const L4=[{id:'fire_el',name:'灼热异变体',atk:10,hp:7,behavior:'strike'},{id:'grass_el',name:'滋生异变体',atk:5,hp:12,behavior:'curse'}];
 
 describe('R7-a legal target orders in real BattleSession',()=>{
   it('L2 low-hp removal costs 5 hp while pressing cavalry costs 10 hp',async()=>{
@@ -23,9 +23,9 @@ describe('R7-a legal target orders in real BattleSession',()=>{
     const b=await play(L2,[1]); expect(b.g.hp).toBe(40); expect(b.s.foes.map(f=>[f.id,f.hp,f.dead])).toEqual([['archer',3,false],['cavalry',2,false]]); BattleSession.commands.flee();
   });
   it('L4 fire-first and grass-first produce real hp/status differences',async()=>{
-    const curseTotal=s=>['bleed','poison','burn'].reduce((n,k)=>n+(s.pstat.status[k]||0),0);
+    const curseTotal=s=>['bleed','poison'].reduce((n,k)=>n+(s.pstat.status[k]||0),0);
     const a=await play(L4,[0,0]); expect(a.g.hp).toBe(45); expect(a.s.pstat.status.burn||0).toBe(0); expect(curseTotal(a.s)).toBeLessThanOrEqual(1); BattleSession.commands.flee();
-    const b=await play(L4,[1,1]); expect(b.g.hp).toBe(35); expect(b.s.pstat.status.burn).toBeGreaterThanOrEqual(1); expect(curseTotal(b.s)).toBeGreaterThanOrEqual(1); BattleSession.commands.flee();
+    const b=await play(L4,[1,1]); expect(b.g.hp).toBe(35); expect(b.s.pstat.status.burn||0).toBe(0); expect(curseTotal(b.s)).toBeGreaterThanOrEqual(1); BattleSession.commands.flee();
   });
   it('L4 dealt=0 with an explicit initial-defense fixture adds neither burn nor curse',async()=>{
     const statusSeed=Array.from({length:100},(_,i)=>`r7-no-burn-${i}`).find(seed=>new SeededRandomService(seed).random('status')<2/3);

@@ -46,23 +46,19 @@ function fanLayout(index, count) {
 }
 
 /* —— 初始攻击恒置顶最左（2026-10-02 老板：「初始攻击」在手牌中永远显示在手牌区第一栏最左边）——
-   只改渲染权重：同名堆叠后的组做稳定分区，初始攻击组恒排最前（多张占最左连续位、
+   只改渲染权重：初始攻击最前，招式在装备之前（同类保持入手顺序、
    组间保持入手相对顺序），hand 数组语义顺序与牌局动画逻辑零改动；
    注能主卡（self 组）不参与排序、保持居尾展示。 */
 const isStarterAttackCard = card => !!card && (card.id === 'starter-attack' || (!card.id && card.name === '初始攻击'));
+const handGroupRank = group => group.self ? 5 : isStarterAttackCard(group.card) ? 0
+  : ['武术', '法术'].includes(group.card?.type) ? 1 : group.card?.type === '装备' ? 4 : 2;
 function orderHandGroups(groups) {
-  const main = groups.filter(group => group.self);
-  const rest = groups.filter(group => !group.self);
-  return [
-    ...rest.filter(group => isStarterAttackCard(group.card)),
-    ...rest.filter(group => !isStarterAttackCard(group.card)),
-    ...main,
-  ];
+  return groups.slice().sort((a, b) => handGroupRank(a) - handGroupRank(b));
 }
 
 export { groupHandCards, fanLayout, orderHandGroups };
 
-// 每回合保留槽号；复制/合并与费用变化按 UID 继承旧槽，新组只追加。
+// 每回合按类别保留槽号；复制/合并与费用变化按UID继承旧槽，新组追加在同类末尾。
 export function createStableHandSlots() {
   let epoch = null, slots = [];
   return (groups, token, turn) => {
@@ -72,10 +68,14 @@ export function createStableHandSlots() {
     const result = groups.map(group => {
       let index = slots.findIndex((slot, i) => !assigned.has(i) && (slot.key === group.key || slot.uids.some(uid => group.uids.includes(uid))));
       if (index < 0) index = slots.length;
-      slots[index] = { key: group.key, uids: group.uids.slice() };
+      slots[index] = { key: group.key, uids: group.uids.slice(), rank:handGroupRank(group) };
       assigned.add(index);
       return { ...group, displaySlot: index };
     });
-    return { groups: result.sort((a,b) => a.displaySlot - b.displaySlot), count: slots.length };
+    // 各类内部保留旧槽和空位；新抽到的招式也排在装备之前。
+    const ordered = slots.map((slot, index) => ({ index, rank:slot.rank })).sort((a,b) => a.rank - b.rank || a.index - b.index);
+    const positions = new Map(ordered.map((slot, index) => [slot.index, index]));
+    return { groups: result.map(group => ({ ...group, displaySlot:positions.get(group.displaySlot) }))
+      .sort((a,b) => a.displaySlot - b.displaySlot), count: slots.length };
   };
 }

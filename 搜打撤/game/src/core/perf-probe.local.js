@@ -1,3 +1,6 @@
+import { transitionDiagnosticPlain } from '../ui/transition-diagnostic-policy.js';
+import { framesDiagnosticStatic } from '../battle/view/battle.frames-diagnostic-policy.js';
+import { installFlightRecorder } from './flight-recorder.local.js';
 // Development-only Vite page probe. Enabled by ?perfProbe=1, never by normal play.
 const DURATION_MS = 6000;
 
@@ -123,6 +126,7 @@ function pageDomSnapshot() {
 
 export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
   if (!SDT?.Renderer?.draw || !canvas || document.getElementById('vitePerfProbe')) return;
+  const flight = new URLSearchParams(location.search).get('flightRecord') === '1' ? installFlightRecorder({ SDT, game }) : null;
   const panel = document.createElement('aside');
   panel.id = 'vitePerfProbe';
   panel.style.cssText = 'position:fixed;left:0;top:50%;z-index:99999;box-sizing:border-box;width:24px;height:64px;padding:0;background:#101820ee;color:#fff;border:1px solid #e0a458;border-radius:0 6px 6px 0;font:12px/1.4 monospace;transform:translateY(-50%)';
@@ -134,7 +138,14 @@ export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
     + '<button type="button" data-perf="page">测当前页面</button> '
     + '<button type="button" data-perf="idle">测静止地图</button> '
     + '<button type="button" data-perf="pan">测受控平移</button> '
-    + '<button type="button" data-perf="loads">读加载</button>'
+    + '<button type="button" data-perf="loads">读加载</button> '
+    + '<button type="button" data-perf="music">读音乐</button>'
+    + '<button type="button" data-perf="flight">读故障记录</button>'
+    + '<button type="button" data-perf="frames">读角色帧</button>'
+    + `<p id="vitePerfTransition" aria-label="入战切幕模式">入战切幕：${transitionDiagnosticPlain(import.meta.env.DEV, location.search) ? 'plain（DEV纯色对照，原时长）' : '默认（跟随减少动态偏好）'}</p>`
+    + '<details open><summary>角色帧资源（只读）</summary><small>展开/读角色帧刷新；采样中每秒刷新。RGBA为去重纹理像素估算，非RSS/GPU驻留；liveApps/session仅计帧模块。</small><pre id="vitePerfFrames" aria-label="角色帧资源快照" style="white-space:pre-wrap;max-height:200px;overflow:auto">尚未读取</pre></details>'
+    + '<details open><summary>音乐播放（只读）</summary><small>展开/读音乐刷新；采样中每秒刷新。进度不代表已听到声音。</small>'
+    + '<pre id="vitePerfMusic" aria-label="音乐播放快照" style="white-space:pre-wrap;max-height:180px;overflow:auto">尚未读取</pre></details>'
     + '<pre id="vitePerfResult" data-state="idle" style="white-space:pre-wrap;max-height:240px;overflow:auto">先选择场景。</pre></section>';
   document.body.append(panel);
   const overlay = document.getElementById('overlay');
@@ -145,8 +156,9 @@ export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
     panel.inert = false;
   };
   syncForegroundMount();
+  let overlayVisibilityObserver;
   if (overlay && typeof MutationObserver === 'function') {
-    const overlayVisibilityObserver = new MutationObserver(records => {
+    overlayVisibilityObserver = new MutationObserver(records => {
       if (records.some(record => record.attributeName === 'hidden')) syncForegroundMount();
     });
     overlayVisibilityObserver.observe(overlay, { attributes: true, attributeFilter: ['hidden'] });
@@ -155,11 +167,47 @@ export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
   const result = panel.querySelector('#vitePerfResult');
   let busy = false;
   let abortCurrentSample = null;
+  let destroyed = false;
+  let musicReadAt = -Infinity;
+  const musicResult = panel.querySelector('#vitePerfMusic');
+  function refreshMusic(now = performance.now(), force = false) {
+    if (destroyed || !panel.isConnected || content.hidden || document.visibilityState !== 'visible') return;
+    if (!force && now - musicReadAt < 1000) return;
+    musicReadAt = now;
+    const frameResult = panel.querySelector('#vitePerfFrames');
+    let frames;
+    try { frames = SDT.Battle?._perf?.frameCacheStats?.() ?? { available: false, phase: 'before-entry',
+      staticDiagnostic: framesDiagnosticStatic(import.meta.env.DEV, location.search) }; }
+    catch { frames = { available: false, error: 'FrameSummaryUnavailable' }; }
+    const frameText = JSON.stringify(frames, null, 2);
+    if (frameResult.textContent !== frameText) frameResult.textContent = frameText;
+    let snapshot;
+    try {
+      snapshot = SDT.Sound?.musicPlayback ?? { available: false, reason: '音乐快照接口不可用' };
+    } catch (error) {
+      snapshot = { available: false, error: String(error?.message || error) };
+    }
+    // One existing text node is updated only when the public snapshot changes.
+    const text = JSON.stringify(snapshot, null, 2);
+    if (musicResult.textContent !== text) musicResult.textContent = text;
+  }
+  function destroy() {
+    if (destroyed) return;
+    destroyed = true;
+    abortCurrentSample?.(new Error('性能探针已销毁'));
+    overlayVisibilityObserver?.disconnect();
+    flight?.stop();
+    panel.removeEventListener('click', onClick);
+    window.removeEventListener('pagehide', destroy);
+    panel.remove();
+  }
+  window.addEventListener('pagehide', destroy);
+
   const onIdleMap = () => game?.runActive && game.state === 'idle' && !game.battleActive
     && document.getElementById('overlay')?.hidden !== false;
 
   async function sample(mode) {
-    if (busy) return;
+    if (busy || destroyed) return;
     const isMapSample = mode === 'idle' || mode === 'pan';
     if (isMapSample && (!game?.cam || !onIdleMap() || !document.getElementById('title')?.hidden)) {
       result.textContent = '请先进入未被弹层遮挡的静止远征地图。';
@@ -220,6 +268,7 @@ export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
             if (mode === 'page' && currentPageMechanism().signature !== pageStart.mechanismSignature) {
               throw new Error('采样期间页面机制已变化');
             }
+            refreshMusic(now);
             if (previousFrame) gaps.push(now - previousFrame);
             previousFrame = now;
             if (mode === 'pan' && camera) {
@@ -269,10 +318,11 @@ export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
         renderScheduler.invalidate();
       }
       busy = false;
+      refreshMusic(performance.now(), true);
     }
   }
 
-  panel.addEventListener('click', event => {
+  function onClick(event) {
     const toggle = event.target.closest('[data-perf-toggle]');
     if (toggle) {
       const collapsed = panel.dataset.collapsed !== 'true';
@@ -294,10 +344,15 @@ export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
       handle.style.height = collapsed ? '64px' : 'auto';
       handle.style.writingMode = collapsed ? 'vertical-rl' : 'horizontal-tb';
       handle.style.textAlign = collapsed ? 'center' : 'left';
+      if (collapsed) abortCurrentSample?.(new Error('性能探针已折叠，采样已中止'));
+      else refreshMusic(performance.now(), true);
       return;
     }
-    if (busy) return;
     const mode = event.target.closest('button[data-perf]')?.dataset.perf;
+    if (mode === 'flight') { result.textContent = JSON.stringify(flight?.read() || { enabled: false, hint: '追加 flightRecord=1 后重载启用；仅记录白名单摘要。' }, null, 2); result.dataset.state = 'done'; return; }
+    if (mode === 'music' || mode === 'frames') { refreshMusic(performance.now(), true); return; }
+    if (busy) return;
+    refreshMusic(performance.now(), true);
     if (mode === 'loads') {
       const navigation = performance.getEntriesByType('navigation')[0];
       const resources = performance.getEntriesByType('resource');
@@ -331,5 +386,7 @@ export function installPerfProbe({ SDT, game, canvas, renderScheduler }) {
       result.dataset.state = mode === 'page' ? 'incomplete' : 'error';
       busy = false;
     });
-  });
+  }
+  panel.addEventListener('click', onClick);
+  return { destroy };
 }

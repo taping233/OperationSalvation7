@@ -15,7 +15,7 @@ function declarations(selector) {
 }
 const model = { bagZone: 'bag', bagFilter: 'all', cap: 16, baseCap: 16, total: 0, safeUsedN: 0, sCap: 2, pkN: 0, used: 0, coins: 0, fragments: 0, tiles: [] };
 beforeEach(() => {
-  window.SDT = { UI: { helpBtn: () => '<button class="help-btn">?</button>' } };
+  window.SDT = { UI: { helpBtn: id => `<button class="help-btn" data-help="${id}">?</button>` } };
   document.body.replaceChildren();
 });
 
@@ -42,9 +42,9 @@ describe('背包横屏布局与独立阅读区', () => {
     expect(declarations(`${view} .bag-grid`)['grid-template-columns']).toBe('repeat(5, minmax(0, 1fr))');
   });
 
-  it('当前1188宽窗口的本页说明与筛选至少13px，主要控件至少36px', () => {
+  it('当前1188宽窗口的筛选与空态至少13px，主要控件至少36px', () => {
     const scale = 1188 / 1920;
-    for (const target of ['.bag-znote', '.bag-pill', '.bag-empty2']) {
+    for (const target of ['.bag-pill', '.bag-empty2']) {
       expect(parseFloat(declarations(`${view} ${target}`)['font-size']) * scale).toBeGreaterThanOrEqual(13);
     }
     for (const [target, property] of [['.bag-pill', 'min-height'], ['.bag-icbtn', 'height'], ['.bag-rz', 'height']]) {
@@ -52,15 +52,22 @@ describe('背包横屏布局与独立阅读区', () => {
     }
   });
 
-  it.each(['bag', 'safe', 'pocket'])('%s区保留全部说明、帮助入口和有名称的分区目标', bagZone => {
-    document.body.innerHTML = pageHTML({ ...model, bagZone });
+  it.each(['bag', 'safe', 'pocket'])('%s区保留计数、帮助入口和有名称的分区目标，主层不渲染解释段落', bagZone => {
+    document.body.innerHTML = pageHTML({ ...model, bagZone, used:3, bagCardN:5, safeUsedN:1, safeCardN:2, sCap:6, pkN:7 });
     expect([...document.querySelectorAll('.bag-rlabel')].map(el => el.textContent)).toEqual(['背包', '安全格', '消耗区']);
     expect(document.querySelector('.bag-rz[data-zone="safe"]').dataset.act).toBe('bagZone');
-    expect(document.querySelector('.bag-title .help-btn')).not.toBeNull();
-    expect(document.querySelectorAll('.bag-znote')).toHaveLength(2);
-    expect(document.querySelector('.bag-board').textContent).toContain('资源卡不计入散装物资估值');
-    if (bagZone === 'pocket') expect(document.querySelector('.bag-board').textContent).toContain('撤离每张 1/3 概率');
-    if (bagZone === 'safe') expect(document.querySelector('.bag-board').textContent).toContain('撤离失败也运回基地');
+    expect(document.querySelector('.bag-title .help-btn').dataset.help).toBe('bag');
+    expect(document.querySelector('.bag-rz[data-zone="bag"]').getAttribute('aria-label')).toBe('随身背包，3/16 格');
+    expect(document.querySelector('.bag-rz[data-zone="safe"]').getAttribute('aria-label')).toBe('安全格，1/6 格');
+    expect(document.querySelector('.bag-rz[data-zone="pocket"]').getAttribute('aria-label')).toBe('消耗区，7 张');
+    expect(document.querySelector(`.bag-rz[data-zone="${bagZone}"]`).getAttribute('aria-pressed')).toBe('true');
+    expect(document.querySelectorAll('.bag-znote, .bag-disclosure')).toHaveLength(0);
+    const capacity = document.querySelector('.bag-capchip').textContent;
+    if (bagZone === 'pocket') expect(capacity).toMatch(/7\s*张 · 不限容量/);
+    else {
+      expect(capacity).toMatch(bagZone === 'safe' ? /1\s*\/6 格/ : /3\s*\/16 格/);
+      expect(document.querySelector('.bag-count-summary').textContent).toMatch(bagZone === 'safe' ? /卡牌\s*2\s*张/ : /卡牌\s*5\s*张/);
+    }
   });
 
   it('详情布局只在打开的背包中生效，全文可滚动且页脚与关闭目标可点', () => {

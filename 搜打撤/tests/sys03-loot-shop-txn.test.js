@@ -1,7 +1,7 @@
 import { continueChestRewards, collectOverviewCoins } from './helpers/chest-actions.js';
 /* SYS-03 物资事务审计（2026-10-03 老板 SYS-03）：搜刮页与商店买卖的事务顺序。
  * 2026-10-12 领奖改为先查看再确认；grantCard 返回值仍决定入包/散落，
- * chestSkip 经剩余确认后结算金币，商店缺币/满包仍拒绝成交。
+ * 开箱结算本箱金币，chestSkip 经剩余确认后放弃卡牌，商店缺币/满包仍拒绝成交。
  * 模式沿用 tests/chest-click-flow.test.js（手搭 window.SDT 后动态 import chests.js）
  * 与 tests/shop-sell-stored-guard.test.js（createShopController 依赖注入）。 */
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -207,14 +207,14 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     expect(ovBody.querySelector('[data-act="chestContinue"]')).toBeNull();
     ovBody.querySelector('[data-act="chestSkip"]').click();
     ovBody.querySelector('[data-act="chestLeave"]').click();
-    expect(ovBody.querySelector('.cqo-box-status').textContent).toContain('已收下 1 张');
+    expect(ovBody.querySelector('.cqo-box-rule').textContent).toContain('已领取 1 张');
     expect(ovBody.querySelector('.cqo-box-complete').disabled).toBe(true);
     expect(ownedCards).toHaveLength(1);
     continueChestRewards(acts);
     expect(game.state).toBe('idle');
   });
 
-  it('三选一（chestPick）满包拒绝：不 next、币不发、面板保留可腾格重选', async () => {
+  it('三选一（chestPick）满包拒绝：不 next、不重复发币、面板保留可腾格重选', async () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const ownedCards = [];
@@ -236,13 +236,13 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     // 直调旧动作也不得绕过当前容量判定。
     acts.chestPick({ i: 0 });
     expect(grantCalls).toHaveLength(1);
-    expect(game.gainCoins).not.toHaveBeenCalled();   // 币只在收取成功后才发
+    expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(7);   // 开箱已收币，卡牌失败不再发币
     expect(game.state).toBe('modal');
     expect(overlay.hidden).toBe(false);
     expect(ovBody.querySelector('[data-act="chestOpenBag"]')).not.toBeNull();
   });
 
-  it('三选一成功只领取卡牌，金币独立收下；明确放弃仍结算金币一次', async () => {
+  it('三选一成功或明确放弃均不重复结算开箱已收金币', async () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const ownedCards = [];
@@ -251,7 +251,7 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     ovBody.querySelector('[data-act="chestSelect"]').click();
     ovBody.querySelector('[data-act="chestPick"]').click();
     expect(ownedCards).toHaveLength(1);
-    expect(game.gainCoins).not.toHaveBeenCalled();
+    expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(7);
     collectOverviewCoins(acts);
     collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
     expect(game.state).toBe('modal');
@@ -263,10 +263,10 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     game.gainCoins.mockClear();
     await revealFirst(game, 'medium');
     ovBody.querySelector('[data-act="chestSkip"]').click();
-    expect(game.gainCoins).not.toHaveBeenCalled();   // 离开确认前不结算
+    expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(7);   // 开箱已收币，离开确认不重复结算
     expect(ovBody.querySelector('.reward-leave-confirm').textContent).toContain('放弃剩余');
     ovBody.querySelector('[data-act="chestStay"]').click();
-    expect(game.gainCoins).not.toHaveBeenCalled();
+    expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(7);
     ovBody.querySelector('[data-act="chestSkip"]').click();
     ovBody.querySelector('[data-act="chestLeave"]').click();
     expect(ownedCards).toHaveLength(0);            // 卡散落
@@ -289,7 +289,7 @@ describe('宝箱开启帧与唯一揭晓', () => {
     return { facade, show };
   }
 
-  it('手动揭晓取消原780ms自动timer，同箱只揭晓一次且不会重复排音效', async () => {
+  it('手动揭晓取消原逐帧timer，同箱只揭晓一次且不会重复排音效', async () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
@@ -302,12 +302,11 @@ describe('宝箱开启帧与唯一揭晓', () => {
     expect(game.ownedCards).toHaveLength(0);
   });
 
-  it('依次播放开启帧，最终帧结束前不公开牌，领奖才发卡和金币一次', async () => {
+  it('依次播放开启帧，最终帧结束前不公开牌，领奖才发卡，开箱金币仅一次', async () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
     await animatedChest(game);
-    vi.advanceTimersByTime(780);
     expect(ovBody.querySelector('.ps-chest').getAttribute('src')).toBe('unlock.webp');
     expect(ovBody.querySelector('.reward-head')).toBeNull();
     vi.advanceTimersByTime(300);
@@ -327,7 +326,7 @@ describe('宝箱开启帧与唯一揭晓', () => {
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
     await animatedChest(game, [{ kind:'small' }, { kind:'small' }]);
-    vi.advanceTimersByTime(830);
+    vi.advanceTimersByTime(50);
     ovBody.querySelector('[data-act="chestReveal"]').click();
     const staleTake = acts.chestTake;
     ovBody.querySelector('[data-act="chestTake"]').click();
@@ -345,7 +344,7 @@ describe('宝箱开启帧与唯一揭晓', () => {
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
     const { facade } = await animatedChest(game);
-    vi.advanceTimersByTime(900);
+    vi.advanceTimersByTime(120);
     facade.Chests.suspend();
     ovBody.innerHTML = '<p>整理背包</p>';
     vi.advanceTimersByTime(2000);
@@ -362,7 +361,7 @@ describe('宝箱开启帧与唯一揭晓', () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
-    window.SDT.Motion = { reduceMotion:() => true };
+    window.SDT.Motion = { reduceMotion:() => true, pop:vi.fn() };
     await animatedChest(game);
     vi.advanceTimersByTime(780);
     expect(ovBody.querySelector('.reward-head')).not.toBeNull();
@@ -375,16 +374,16 @@ describe('宝箱开启帧与唯一揭晓', () => {
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
     await animatedChest(game);
-    vi.advanceTimersByTime(830);
+    vi.advanceTimersByTime(50);
     document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail:'page' }));
     ovBody.innerHTML = '<p>其他节点</p>';
     vi.advanceTimersByTime(2000);
     expect(ovBody.textContent).toBe('其他节点');
     expect(game.ownedCards).toHaveLength(0);
-    expect(game.gainCoins).not.toHaveBeenCalled();
+    expect(game.gainCoins).toHaveBeenCalledExactlyOnceWith(7);
   });
 
-  it('turbo直接到静态结果，卡和币仍只由领取动作发放', async () => {
+  it('turbo直接到静态结果，每次新开箱收币而卡只由领取动作发放', async () => {
     vi.useFakeTimers();
     const { overlay, ovBody } = bootDom();
     const { game } = bootSdt({ overlay, ovBody, ownedCards:[] });
@@ -392,7 +391,8 @@ describe('宝箱开启帧与唯一揭晓', () => {
     const { setTurbo } = await import('../game/src/core/turbo.js');
     setTurbo(true);
     try {
-      // Reopen uses the unchanged presentation-only turbo switch; no card rules change.
+      // New open is a new reward batch; reset the prior batch's coin spy.
+      game.gainCoins.mockClear();
       window.SDT.Chests.open(game, [{ kind:'small' }]);
       ovBody.querySelector('[data-act="chestNext"]').click();
       vi.advanceTimersByTime(0);

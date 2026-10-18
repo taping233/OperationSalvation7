@@ -1,9 +1,26 @@
 import { esc, escAttr } from '../core/shared.js';
 import '../../css/chest-reward-overview.css';
 
+// A resolved candidate is not necessarily a claimed card (one-of choices also mark the rest lost).
+function boxResultRule(box) {
+  const taken = box.takenCount || 0, lost = box.lostCount || 0;
+  if (!taken && !lost) return box.completed ? '已结束' : box.rule || '';
+  const parts = [];
+  if (taken) parts.push(`已领取 ${taken} 张`);
+  if (lost) parts.push(box.choice && taken ? `其余 ${lost} 张${box.completed ? '已放弃' : '未领取'}` : `已放弃 ${lost} 张`);
+  if (!box.completed) {
+    const remaining = Math.max(0, (box.cardCount || 0) - taken - lost);
+    if (remaining) parts.push(`剩余 ${remaining} 张待处理`);
+  }
+  return parts.join(' · ');
+}
+
 // Art, summary, footer, and picker are rendered HTML supplied by the reward flow.
 // This module owns presentation only; opening, claiming, and parking remain commands.
-export function chestRewardOverviewHTML({ boxes = [], coins = null, source = '', title = '本次收获', summary = '', footer = '', complete = false, primaryAction = null, progress = null, notice = '' } = {}) {
+export function chestRewardOverviewHTML({ boxes = [], claimedCards = [], coins = null, source = '', title = '本次收获', summary = '', footer = '', complete = false, primaryAction = null, progress = null, notice = '' } = {}) {
+  const received = new Map();
+  claimedCards.forEach(card => received.set(card.name, (received.get(card.name) || 0) + 1));
+  const receipt = received.size ? `<section class="cqo-receipt" aria-label="本次已入背包"><header class="cqo-receipt-heading"><span class="cqo-receipt-icon" aria-hidden="true">[[icon:bag]]</span><b>已入背包 <span class="cqo-receipt-count">${claimedCards.length} 张</span></b><span class="cqo-receipt-destination">本次收获</span></header><ul>${[...received].map(([name, count]) => `<li>${esc(name)} <strong>×${count}</strong></li>`).join('')}</ul></section>` : '';
   const pending = progress?.pending ?? boxes.filter(box => !box.completed).length;
   const total = progress?.total ?? boxes.length;
   const primaryBox = primaryAction && boxes.find(box => box.index === primaryAction.index);
@@ -14,13 +31,14 @@ export function chestRewardOverviewHTML({ boxes = [], coins = null, source = '',
     : `<button type="button" class="cqo-button cqo-button-quiet" data-act="chestReturn">返回地图 · 保留奖励</button><button type="button" class="cqo-button" data-act="chestOverviewBag">整理背包</button>${nextButton}`;
   const boxHTML = boxes.map(box => {
     const name = box.name || `宝箱 ${box.index + 1}`;
-    const status = box.status || (box.completed ? '已收取' : box.opened ? '待领取' : '待开启');
-    const action = box.completed ? status : box.opened ? '继续领取' : '打开宝箱';
+    const rule = boxResultRule(box);
+    const status = box.completed ? '已结束' : (box.takenCount || box.lostCount) ? '领取中' : box.status || (box.completed ? '已收取' : box.opened ? '待领取' : '待开启');
+    const action = box.completed ? status : box.actionLabel || (box.opened ? '继续领取' : '打开宝箱');
     return `<button type="button" class="cqo-box${box.completed ? ' cqo-box-complete' : ''}${box.active ? ' cqo-box-active' : ''}" data-act="chestOpen" data-i="${escAttr(String(box.index))}" aria-label="${escAttr(`${name}，${action}`)}" aria-pressed="${box.active ? 'true' : 'false'}"${box.completed ? ' disabled' : ''}>
       <span class="cqo-box-status">${esc(status)}</span>
       <span class="cqo-box-art" aria-hidden="true">${box.art || ''}</span>
       <span class="cqo-box-name">${esc(name)}</span>
-      ${box.rule ? `<span class="cqo-box-rule">${esc(box.rule)}</span>` : ''}
+      ${rule ? `<span class="cqo-box-rule">${esc(rule)}</span>` : ''}
       ${box.completed ? '' : `<span class="cqo-box-action">${esc(action)} <span aria-hidden="true">↗</span></span>`}
     </button>`;
   }).join('');
@@ -31,9 +49,10 @@ export function chestRewardOverviewHTML({ boxes = [], coins = null, source = '',
     <p class="cqo-notice" role="status" aria-live="polite">${esc(notice)}</p>
     ${summary ? `<div class="cqo-summary">${summary}</div>` : ''}
     <div class="cqo-rewards">
-      ${coins?.total ? `<section class="cqo-coins" aria-label="金币奖励"><span class="cqo-coin-art" aria-hidden="true">[[icon:coin]]</span><strong>金币</strong><b>×${esc(String(coins.pending || coins.total))}</b>${coins.pending ? '<button type="button" class="cqo-button cqo-button-primary" data-act="chestOverviewCoins">收下金币</button>' : '<span class="cqo-coins-received">已领取</span>'}</section>` : ''}
+      ${coins?.total ? `<section class="cqo-coins" aria-label="金币奖励"><span class="cqo-coin-art" aria-hidden="true">[[icon:coin]]</span><strong>金币</strong><b>待领 ${esc(String(coins.pending || 0))} · 已领 ${esc(String(coins.total - (coins.pending || 0)))}</b>${coins.pending ? '<button type="button" class="cqo-button cqo-button-primary" data-act="chestOverviewCoins">收下金币</button>' : ''}</section>` : ''}
       <div class="cqo-boxes" aria-label="物资箱奖励">${boxHTML || '<p class="cqo-empty">本批没有待领取的宝箱</p>'}</div>
     </div>
+    ${receipt}
     <footer class="cqo-footer">
       ${footer ? `<div class="cqo-footer-note">${footer}</div>` : ''}
       <nav class="cqo-actions" aria-label="奖励操作">${actions}</nav>

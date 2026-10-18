@@ -27,7 +27,7 @@ describe('Canvas背景缓存生命周期', () => {
   it('逻辑视口未变但DPR改变时重烘焙，后续相同输入复用', () => {
     const first = backdrop(); expect(first.width).toBe(800);
     Object.defineProperty(window, 'devicePixelRatio', { value: 2 });
-    const high = backdrop(); expect(high.width).toBe(1600); expect(high).not.toBe(first);
+    const high = backdrop(); expect(high.width).toBe(1200); expect(high).not.toBe(first);
     expect(backdrop()).toBe(high);
   });
   it('停止resize后持续draw不会延后150ms重烘焙', () => {
@@ -46,7 +46,7 @@ describe('Canvas背景缓存生命周期', () => {
   it('pending resize期间DPR变化立即重烘焙，并取消过期resize计时器', () => {
     const first = backdrop(); game.cam.viewW = 900; expect(backdrop()).toBe(first);
     Object.defineProperty(window, 'devicePixelRatio', { value: 2 });
-    const high = backdrop(); expect(high.width).toBe(1800); expect(vi.getTimerCount()).toBe(0);
+    const high = backdrop(); expect(high.width).toBe(1350); expect(vi.getTimerCount()).toBe(0);
     vi.advanceTimersByTime(500); expect(backdrop()).toBe(high);
   });
   it('resize回到原尺寸取消防抖，不无故重建', () => {
@@ -68,4 +68,29 @@ describe('Canvas背景缓存生命周期', () => {
     images.slice(0, 2).forEach(image => image.onload?.()); vi.advanceTimersByTime(1000); expect(wake).not.toHaveBeenCalled();
     renderScheduler.setWake(null);
   });
+});
+
+
+describe('地图玩家可见编号', () => {
+  it.each([0, 7, 10])('内部索引 %i 绘制为同预览的一基编号，绘制不改索引', idx => {
+    const node = { ...game.nodes[0], idx };
+    game.nodes = [node]; game.nodePos = [[node]]; game.trackPos = idx;
+    game.layerData[0].logical = Array.from({ length: idx + 1 }, () => ({ next: [], def: node.def }));
+    game.toggles.index = true;
+    Renderer.draw(ctx, game);
+    expect(ctx.fillText.mock.calls.filter(([text]) => /^\d+$/.test(text)).map(([text]) => text)).toEqual([String(idx + 1)]);
+    expect(node.idx).toBe(idx); expect(game.trackPos).toBe(idx);
+    ctx.fillText.mockClear(); game.toggles.index = false; Renderer.draw(ctx, game);
+    expect(ctx.fillText.mock.calls.filter(([text]) => /^\d+$/.test(text))).toEqual([]);
+  });
+});
+
+
+it('quality changes rebuild only the backdrop sampling budget and keep node text', async () => {
+  const { setPerformanceSettings } = await import('../game/src/core/performance-settings.js');
+  Object.defineProperty(window, 'devicePixelRatio', { value: 3 });
+  setPerformanceSettings({ quality: 'low' }); expect(backdrop().width).toBe(800);
+  setPerformanceSettings({ quality: 'balanced' }); expect(backdrop().width).toBe(1200);
+  setPerformanceSettings({ quality: 'high' }); expect(backdrop().width).toBe(1600);
+  setPerformanceSettings({ quality: 'balanced' });
 });

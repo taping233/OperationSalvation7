@@ -15,6 +15,7 @@ const first = { id: 'first', name: '同名牌', rarity: '古朴', type: '道具'
 const second = { id: 'second', name: '同名牌', rarity: '稀有', type: '法术', cost: 2, variantKey: 'foil' };
 beforeEach(async () => {
   vi.resetModules(); Object.values(ports).forEach(mock => mock.mockReset());
+  ports.handoff.mockReturnValue(new Promise(() => {}));
   actions = {};
   base = { slot: 1, data: { selMode: 'standard', pocket: [], stash: [{ card: first, count: 2 }, { card: second, count: 2 }] },
     PETS: [], bagCap: () => 16, carriedPet: () => null, ownedPets: () => [], setPet: vi.fn(() => true), petById: () => ({ name: '宠物', desc: '效果' }) };

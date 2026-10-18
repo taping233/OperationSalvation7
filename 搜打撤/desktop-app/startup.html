@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'">
+  <title>冬日猜想 · 启动中</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #080b0e; color: #e1e9eb; font: 15px/1.7 'Microsoft YaHei',system-ui,sans-serif; }
+    main { min-height: 100vh; display: grid; place-content: center; padding: 48px; background: radial-gradient(ellipse at 50% 50%, #18262b 0%, #080b0e 65%); }
+    section { width: min(540px, 80vw); }
+    .eyebrow { color: #89a6b0; letter-spacing: .3em; font-size: 11px; }
+    h1 { margin: 18px 0 8px; font-weight: 500; letter-spacing: .14em; font-size: clamp(28px, 4vw, 44px); }
+    .rule { height: 1px; background: #34444b; margin: 32px 0; }
+    .status { display: flex; align-items: center; gap: 14px; }
+    .spinner { flex: 0 0 18px; width: 18px; height: 18px; border: 1px solid #43575e; border-top: 2px solid #bedee8; border-radius: 50%; animation: spin 1.2s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #hint { color: #8fa0a6; margin: 14px 0 0 32px; min-height: 3.4em; font-size: 13px; }
+    .progress-wrap { margin: 26px 0 0 32px; }
+    .progress-label { display: flex; justify-content: space-between; margin-bottom: 10px; color: #89a6b0; font-size: 11px; letter-spacing: .15em; font-variant-numeric: tabular-nums; }
+    .progress-track { height: 3px; background: #293940; overflow: hidden; }
+    .progress-fill { height: 100%; background: #b7d8e3; transform: scaleX(.08); transform-origin: left; transition: transform .6s ease-out; box-shadow: 0 0 12px #a8d6e680; }
+    .actions { margin: 26px 0 0 32px; display: flex; gap: 12px; }
+    button { font: inherit; font-size: 13px; padding: 9px 20px; background: transparent; color: #c2d5dc; border: 1px solid #536c76; cursor: pointer; }
+    button:hover,button:focus-visible { background: #263a43; outline: 2px solid #b4d3df; outline-offset: 3px; }
+    [hidden] { display: none !important; }
+    body.failed .spinner { animation: none; border-color: #d8ac88; }
+    @media (prefers-reduced-motion: reduce) { .spinner { animation: none; } .progress-fill { transition: none; } }
+  </style>
+</head>
+<body>
+  <main><section>
+    <div class="eyebrow">WINTER CONJECTURE / 代号柒</div>
+    <h1>升格会的冬日猜想</h1>
+    <div class="rule"></div>
+    <div class="status" role="status" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span id="status">正在准备进入城市</span></div>
+    <div class="progress-wrap">
+      <div class="progress-label"><span>PREPARING</span><span id="progressNumber">8%</span></div>
+      <div id="progress" class="progress-track" role="progressbar" aria-label="进入城市准备进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="8"><div id="progressFill" class="progress-fill"></div></div>
+    </div>
+    <p id="hint">游戏正在加载，准备完成后将自动进入。</p>
+    <div class="actions"><button id="retry" hidden>重新加载</button><button id="quit">退出游戏</button></div>
+  </section></main>
+  <script>
+    let slowTimer;
+    let progressTimer;
+    let progressValue = 8;
+    function setProgress(value) {
+      progressValue = value;
+      const rounded = Math.round(value);
+      document.getElementById('progressFill').style.transform = 'scaleX(' + value / 100 + ')';
+      document.getElementById('progressNumber').textContent = rounded + '%';
+      document.getElementById('progress').setAttribute('aria-valuenow', rounded);
+      document.getElementById('progress').setAttribute('aria-valuetext', '准备进度 ' + rounded + '%');
+    }
+    function update(status) {
+      clearTimeout(slowTimer);
+      clearInterval(progressTimer);
+      const failed = status === 'failed';
+      const ready = status === 'ready';
+      document.body.classList.toggle('failed', failed);
+      document.getElementById('status').textContent = failed ? '游戏未能完成加载' : ready ? '城市已就绪' : '正在准备进入城市';
+      document.getElementById('hint').textContent = failed ? '请重新加载游戏，或退出后再试。' : '游戏正在加载，准备完成后将自动进入。';
+      document.getElementById('retry').hidden = !failed;
+      // Presentation progress only; real readiness is reported by the game window.
+      if (ready) setProgress(100);
+      else if (!failed) {
+        setProgress(8);
+        progressTimer = setInterval(() => setProgress(Math.min(94, progressValue + Math.max(.25, (94 - progressValue) * .09))), 600);
+      }
+      if (!failed && !ready) slowTimer = setTimeout(() => {
+        document.getElementById('hint').textContent = '本次加载耗时较长，仍在等待游戏就绪。你可以继续稍候，或退出后再试。';
+      }, 12000);
+    }
+    document.getElementById('retry').addEventListener('click', () => window.sdtStartup?.retry());
+    document.getElementById('quit').addEventListener('click', () => window.sdtStartup?.quit());
+    window.sdtStartup?.onStatus(update);
+    window.addEventListener('pagehide', () => { clearTimeout(slowTimer); clearInterval(progressTimer); }, { once: true });
+    update('loading');
+  </script>
+</body>
+</html>

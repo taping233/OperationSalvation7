@@ -1,0 +1,206 @@
+[
+  {
+    "path": "docs/M-BATCH-EXCLUSIONS.md",
+    "sha256": "6707dd1b883136ac209cda8f9aa29ad7d7c358dc54cb01fe38ce30157b2da1c9"
+  },
+  {
+    "path": "docs/PARALLEL-REGISTRY.md",
+    "sha256": "fa83c469baf26c6e3dde5b307b673da4d012a93211324607742f5d886dc777ef"
+  },
+  {
+    "path": "docs/cards/card-rules-v2-taxonomy-2026-09-25.md",
+    "sha256": "2e6e9f051062499c11146344b3373e9bc0ec08234c9ba791b9cb0a2096748f06"
+  },
+  {
+    "path": "docs/evidence/2026-10-18-map-facilities-no-burn/README.md",
+    "sha256": "a78b3b1a6658a32f8beb00c96b82f0659490e9b88fc3b1581b87ddea2a93d74d"
+  },
+  {
+    "path": "docs/game-compendium.md",
+    "sha256": "34dd9fe37acfaa631f857024772f8d36733e5868180066425d62f94c8b13e713"
+  },
+  {
+    "path": "docs/modules/R7-A-DELIVERY.md",
+    "sha256": "e659a5e6dc6358b7fbd33e270defa0535099dbd5eaf0632ebacf463b12dcc50c"
+  },
+  {
+    "path": "docs/modules/R7-A-REVIEW-01.md",
+    "sha256": "418932e5a74a643206efea498aaef4d6d1deecc02bbeca050fbbbaa6ce03c6df"
+  },
+  {
+    "path": "docs/modules/R7-INTEGRATION-PLAN.md",
+    "sha256": "8da3e6ed8ff01b50b813e73eca394b5c9ec3d0aee016843c81ca47956b48931d"
+  },
+  {
+    "path": "docs/rules.md",
+    "sha256": "54972e201bd54275297cb9bfc130070b3aaac5c01e4ca4c78a3da13950679744"
+  },
+  {
+    "path": "docs/save-format.md",
+    "sha256": "265f81cd3206c6ef85782c99918ffd0226bb0ac31cebf7368173bac11ee1b7d8"
+  },
+  {
+    "path": "game/css/battle.css",
+    "sha256": "06b6c9381b79b3b0c2599654cd028802ad6258fa664ca109cbfc0fb6dda87e7a"
+  },
+  {
+    "path": "game/data/map.json",
+    "sha256": "7df4cbb54b0e85beb8e85aac0920b8702156288e15a030041bee030d65468420"
+  },
+  {
+    "path": "game/src/battle/bag/battle.bag.js",
+    "sha256": "6cbb66029bb3103e04341c779d116db0f329a4a332b077ac37e71df7ac2ddf19"
+  },
+  {
+    "path": "game/src/battle/core/battle.enemy-intent.js",
+    "sha256": "c34bd15642947b702ae5e2846731216de081573124d2e2fccc7c3975454c410e"
+  },
+  {
+    "path": "game/src/battle/core/battle.enemy-phase.js",
+    "sha256": "b111a34ec12c9a296d57fded9fea85b1ac4be2291e9a5c276a64db2694942900"
+  },
+  {
+    "path": "game/src/battle/core/battle.engine.js",
+    "sha256": "a3dc9a9fa2dd9b5ae58ffa998f1abd4dc46b935442512f837bf0c1b081a687e8"
+  },
+  {
+    "path": "game/src/battle/core/battle.resolution.js",
+    "sha256": "dad23e700aeaf2a2ef9b8c4e48c02fe345b22e07b3a34727a60deaf0b3526a7e"
+  },
+  {
+    "path": "game/src/battle/core/battle.summary.js",
+    "sha256": "ae62e72ea67c5eda79b1c6d13aa0f09123af4aab33da7e1e0074b09711226e90"
+  },
+  {
+    "path": "game/src/battle/core/combat.js",
+    "sha256": "6a09eecc62e9c11a88e967f0670fcd7fd215a1070d4cce1accb8ac8812dadf4d"
+  },
+  {
+    "path": "game/src/battle/effects/battle.card-inspection.js",
+    "sha256": "54921d61a705554d0aa44a3a41c9d19b7ffa0398d46216b5f8d0fc4cc4a97775"
+  },
+  {
+    "path": "game/src/battle/effects/battle.target-rules.js",
+    "sha256": "54e53d4d8a86a48542de5b15eec98750db96b46f13aa4ced0eac4fb9062e6435"
+  },
+  {
+    "path": "game/src/battle/effects/effect-steps.ctx.js",
+    "sha256": "ab7dd6c9bb94969bfdf5459112ab5562d87d70c7b00f0ead462eafdc8247dc64"
+  },
+  {
+    "path": "game/src/battle/effects/effect-steps.curse.js",
+    "sha256": "a3ef73a4e39122f7751a14e74f82e4196483ca412e2b2dd1e9d05ad51facd28e"
+  },
+  {
+    "path": "game/src/battle/effects/effect-steps.damage.js",
+    "sha256": "3682bdd9742fbdb4df9d7f5edc9bf9323cabed12e3d6fd5ef3f24d75cfcea5ef"
+  },
+  {
+    "path": "game/src/battle/effects/effect-steps.m2.js",
+    "sha256": "c4643ce88e1571a4db5092a91c84a6876c2e583852447861fde8a2d3ebe1c58c"
+  },
+  {
+    "path": "game/src/battle/effects/effect-verbs.js",
+    "sha256": "859f72512ab291535a82c2d9b52c63c9a74669f3ccd3b6bd965b6e178e32c806"
+  },
+  {
+    "path": "game/src/battle/view/battle.layers.js",
+    "sha256": "ba2f0586dd461621b6352ca6bf6eb9a0a819b9ad88e0753cbc1c74b52eda9214"
+  },
+  {
+    "path": "game/src/battle/view/battle.turn-forecast.js",
+    "sha256": "474987b91971e51962219e881952e9b0b17d1079b27a27ff0933f33aa75406cc"
+  },
+  {
+    "path": "game/src/battle/view/battle.vfx.js",
+    "sha256": "0c7f2fb9b96171c5f03c498c8d5004bb1553403f12723bec15e8922604af04cd"
+  },
+  {
+    "path": "game/src/cards/card-rules.schema.js",
+    "sha256": "be1fbd68cb5308ab1200bd757dab8b32f872aa16a634e11a64ed810b095c2e3d"
+  },
+  {
+    "path": "game/src/cards/cards.data.js",
+    "sha256": "1ea076a6c2abc6465a52481995ab25d192aa0c32ca4605a2b55948db5eb62a3d"
+  },
+  {
+    "path": "game/src/cards/cards.view.js",
+    "sha256": "5b0271dcf85708d26b3f039cb13ac65f2dbd9f4eeb10d602a801407b4608fc20"
+  },
+  {
+    "path": "game/src/run/game.session.death.js",
+    "sha256": "7dabbfc0bdc471252cbe19511b4256250a3001cf04f4220670214eeaa3155044"
+  },
+  {
+    "path": "game/src/run/map-generation-rules.js",
+    "sha256": "16e71b65faa2b0604eb56ce8ee8002dfe24262c84bb104ca4a0d956dc751b4b1"
+  },
+  {
+    "path": "game/src/run/map-generator-v4.js",
+    "sha256": "64a1d41a89dbc906b8631086ebddef1f8ea36e907cac11ccdafc774ceb614c1d"
+  },
+  {
+    "path": "game/src/run/map-route-v2.js",
+    "sha256": "43e3f08794fd02b59c553fe176974d5096c0c59fcdd3662b8dc9d2967c47bd1b"
+  },
+  {
+    "path": "game/src/run/map-snapshot.js",
+    "sha256": "a4e9d124f203304c066d2ea01bcc69c4e37fc5cc445763295bc922042d57b2fc"
+  },
+  {
+    "path": "game/src/run/route-choice-preview.js",
+    "sha256": "0a05a0af46c7f95be20f9578a1b3caae9d7359fa0a0d0967d20ea4a0c4328583"
+  },
+  {
+    "path": "game/src/ui/term-tips.js",
+    "sha256": "2e1e70c7389773ffdb8d4e4e20d678e8673f6562fa5bfe5e49e38d4c4a28d3a3"
+  },
+  {
+    "path": "scripts/generate-compendium.mjs",
+    "sha256": "1fdd7bd6fe9e71f0830d4797739881fea2f069662b535c14edfe7d7caea2a2df"
+  },
+  {
+    "path": "tests/a3-battle-rules.test.js",
+    "sha256": "41a3939a9136575e5ba6bdbb8929ea917330c3b875a5743f94f2960eb28d1515"
+  },
+  {
+    "path": "tests/battle-hand-inspector.test.js",
+    "sha256": "89946c618500fda25c13e054f8d1e11aec5daa98758f4d116593a72df547ac4a"
+  },
+  {
+    "path": "tests/battle-resolution.test.js",
+    "sha256": "97979233f17225e764220a45709671cf0ea9a5be20dff38410eabbf8cc03226f"
+  },
+  {
+    "path": "tests/cursed-blade.test.js",
+    "sha256": "801ef7c91fab4d80e785b66d8ccae7eeed2fa59159b7f90e46c985de1fd90b29"
+  },
+  {
+    "path": "tests/fresh-run-settlement-battle-summary.test.js",
+    "sha256": "2b7d4727d351a1b4ab10b5addaf111f698dd6024c3dac3f9ab90f8a7ba5cfad5"
+  },
+  {
+    "path": "tests/m2-contract.test.js",
+    "sha256": "6a0db6c4f0068200e33ffe9b3b9acfe7361e7a8227cf559503f6966f4f3b5ee6"
+  },
+  {
+    "path": "tests/map-facilities-burn-removal.test.js",
+    "sha256": "3c8183805c54c841950c63023eecfd804fd4887b1d3a67caed12e8e9ff1774d9"
+  },
+  {
+    "path": "tests/map-generator-v4.test.js",
+    "sha256": "78c675aa7213fa122e9c67cdf7424a4af23413778ebc62acaa93ef2a33317dc0"
+  },
+  {
+    "path": "tests/map-route-v2-preview.test.js",
+    "sha256": "e39ae5812b33a2696435fc757a8b20fef184c82ed08ea2d99ec4ed9b55493faf"
+  },
+  {
+    "path": "tests/map-route-v2.test.js",
+    "sha256": "650a9505b8398f688ef35c566d2949f8654421981491b91d30cdfa4ce2146292"
+  },
+  {
+    "path": "tests/r7a-battle-orders.test.js",
+    "sha256": "09afec8db5792aa94196a9ce90988817b60c77677ad88f3096a076368a626795"
+  }
+]

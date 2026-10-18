@@ -1,0 +1,77 @@
+{
+  "scope": "Five assigned integration test files only; no production code/index/build/browser changes",
+  "baseline": {
+    "files": 5,
+    "passed": 24,
+    "failed": 14
+  },
+  "current": {
+    "files": 5,
+    "passed": 38,
+    "failed": 0,
+    "results": [
+      {
+        "file": "exp003-extraction-pocket-copy.test.js",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "hub-pages-rework.test.js",
+        "passed": 11,
+        "failed": 0
+      },
+      {
+        "file": "pearl-storage-interface.test.js",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "reward-action-clipping.test.js",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "xart-z1-batch2.test.js",
+        "passed": 8,
+        "failed": 0
+      }
+    ]
+  },
+  "sources": [
+    {
+      "path": "tests/exp003-extraction-pocket-copy.test.js",
+      "beforeBytes": 4297,
+      "beforeSha256": "aad2f4b3c237fe4e6e25de9b38ea5ed888240238909bdb4738c3557907494192",
+      "afterBytes": 4986,
+      "afterSha256": "dae2756e0f065ce0402b0612a804eceee4385a61bae7bff9fa616c82d71061e4"
+    },
+    {
+      "path": "tests/hub-pages-rework.test.js",
+      "beforeBytes": 14240,
+      "beforeSha256": "3e05d998783d774c6a94c711abb09c4e614e240b3aced8746c7170b2c5bd5e86",
+      "afterBytes": 13895,
+      "afterSha256": "65514bdabe3caa95a24f5c5403d92da268bde9e61fc0b4018ea4da406a628f4e"
+    },
+    {
+      "path": "tests/pearl-storage-interface.test.js",
+      "beforeBytes": 8802,
+      "beforeSha256": "e67434035852a5c792aac7195e2fab64b1346afa31df5484c825731276edac66",
+      "afterBytes": 9958,
+      "afterSha256": "c46b9f2f487a39f442c981c8af58d411b8ac904106a64b8e67dd21d0225d15e3"
+    },
+    {
+      "path": "tests/reward-action-clipping.test.js",
+      "beforeBytes": 3892,
+      "beforeSha256": "8fa43238680727de2316fd6b8490b56fdc7d611681c7026dbc4f5baa57f7ef5c",
+      "afterBytes": 4097,
+      "afterSha256": "ab626c239fd7b0d23fe440eabfda9fbea8fa584cebb1d48ba5a98d3acf077e60"
+    },
+    {
+      "path": "tests/xart-z1-batch2.test.js",
+      "beforeBytes": 4439,
+      "beforeSha256": "fddc83ffc21a6003b822f018f5e56864588454f2fc29a26f950fb7049bd08c37",
+      "afterBytes": 5222,
+      "afterSha256": "d7c4aa615ad29c200d4e5e4fed70fc7b72f553ddb305646e338dde26add28c00"
+    }
+  ]
+}

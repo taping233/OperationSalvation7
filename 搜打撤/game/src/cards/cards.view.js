@@ -16,7 +16,7 @@ import { cardFramePresentation } from './card-frame-presentation.js';
 // 时点短语整体标蓝（2026-09-16 留言）：「对战开始时/回合开始时/回合结束时」必须排在
 // 「回合」等单词前面，交替分支按序尝试，长词才会整体命中而不是只染前两个字。
 // （09-23 自 buildCardHTML 体内上移模块顶层并导出——选片台描述复用，卡面行为不变。）
-const DESC_TERMS = ['对战开始时', '回合开始时', '回合结束时', '攻击伤害', '法术伤害', '固定伤害', '真实伤害', '冰冻', '冻结', '中毒', '燃烧', '灼烧', '流血', '护甲', '法伤', '招式', '潜行', '生命', '伤害', '诅咒', '净化', '沉默', '禁疗', '充能', '注能', '发现', '限定', '主动技能', '消耗', '装备', '牌库', '回合', '弃牌', '抽牌', '能量'];
+const DESC_TERMS = ['对战开始时', '回合开始时', '回合结束时', '攻击伤害', '法术伤害', '固定伤害', '真实伤害', '冰冻', '冻结', '中毒', '流血', '护甲', '法伤', '招式', '潜行', '生命', '伤害', '诅咒', '净化', '沉默', '禁疗', '充能', '注能', '发现', '限定', '主动技能', '消耗', '装备', '牌库', '回合', '弃牌', '抽牌', '能量'];
 // 词表与数值规则只编译一次；matchAll 复制正则状态，反复渲染不共享游标。
 const DESC_TOKEN_RE = new RegExp('(' + DESC_TERMS.join('|') + ')|([⁺⁻+-]?[0-9]+(?:\\.[0-9]+)?)', 'g');
 function richDescriptionFragment(text) {
@@ -32,12 +32,22 @@ function richDescriptionFragment(text) {
   }
   return html + esc(text.slice(offset));
 }
+// 内容键避免同 id 改描述后命中旧文案；限制条数和原文长度，定制长文仍正常渲染。
+const richDescriptionMemo = new Map();
+const RICH_DESCRIPTION_LIMIT = 256;
+const RICH_DESCRIPTION_MAX_LENGTH = 2048;
 export function descRich(desc, cardId) {
   const text = displayCardDescription(desc, cardId);
+  if (richDescriptionMemo.has(text)) return richDescriptionMemo.get(text);
   const keyword = text.match(/^([^<>：\n]{1,10})：/);
-  return keyword
+  const html = keyword
     ? `<b class="d-kw">${richDescriptionFragment(keyword[0])}</b>${richDescriptionFragment(text.slice(keyword[0].length))}`
     : richDescriptionFragment(text);
+  if (text.length <= RICH_DESCRIPTION_MAX_LENGTH) {
+    if (richDescriptionMemo.size >= RICH_DESCRIPTION_LIMIT) richDescriptionMemo.delete(richDescriptionMemo.keys().next().value);
+    richDescriptionMemo.set(text, html);
+  }
+  return html;
 }
 
 // 卡背渲染：backId 缺省 = 当前存档装备的卡背（未选档时回退默认）。
@@ -63,6 +73,8 @@ export function cardBackHTML(backId, cls) {
 // 传入，见 costOverride/dmgOverride）；制作坊 upsert 是整卡替换新对象，旧键随之作废。
 // opts 不同的调用（hideCost/low/放大查看）各自命中不同 key，互不污染。
 const cardHTMLMemo = new WeakMap();
+// 卡库对象可存活整个会话，动态费用/加伤的旧变体只保留最近生成的 32 份。
+const CARD_HTML_VARIANTS_LIMIT = 32;
 export function cardHTML(c, cls, opts) {
   let key;
   try { key = (cls || '') + '|' + JSON.stringify(opts || null); }
@@ -74,6 +86,7 @@ export function cardHTML(c, cls, opts) {
     variants = new Map();
     cardHTMLMemo.set(c, variants);
   }
+  if (variants.size >= CARD_HTML_VARIANTS_LIMIT) variants.delete(variants.keys().next().value);
   variants.set(key, html);
   return html;
 }

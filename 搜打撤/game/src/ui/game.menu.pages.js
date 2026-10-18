@@ -1,3 +1,5 @@
+import { recordRestoreStage, traceRestoreStep } from '../core/flight-recorder.local.js';
+import { performanceSettingsHTML, bindPerformanceSettings } from './performance-settings.js';
 import { cancelPendingPageEntries } from './page-entry-cancellation.js';
 import { appendLocalFeedback, completeLocalFeedback, downloadFeedbackRecord, downloadFeedbackRecords, readLocalFeedback, removeLocalFeedback } from './feedback.local.js';
 import { captureBattleContext, invalidateBattleContext } from '../battle/battle-loader.js';
@@ -562,8 +564,12 @@ export function createGameMenuPages(deps, shell) {
                 presentation: 'city-cut',
                 holdVisual: true,
               });
+              if (import.meta.env.DEV) recordRestoreStage('transition-mounted');
               // 显示过场后立即预热，模块和地图素材加载与演出重叠。
-              const resources = Promise.all([ensureBattleReady(), SDT.Renderer?.warm?.()])
+              const resources = Promise.all([
+                import.meta.env.DEV ? traceRestoreStep('battle-module', () => ensureBattleReady()) : ensureBattleReady(),
+                import.meta.env.DEV ? traceRestoreStep('map-warm', () => SDT.Renderer?.warm?.()) : SDT.Renderer?.warm?.(),
+              ])
                 .then(() => ({ ok: true }), error => ({ ok: false, error }));
               if (await transition === false || !transition.isCurrent() || !currentContext()) return false;
               // 存档可能包含战斗快照；必须先加载战斗域，loadGame 才能同步 restore。
@@ -861,6 +867,7 @@ export function createGameMenuPages(deps, shell) {
         </section>
         <section class="settings-group settings-display">
         <h3 class="set-h">[[icon:gear]] 画面与反馈 <span class="set-en">DISPLAY &amp; ACCESS</span></h3>
+        ${performanceSettingsHTML()}
         <label class="chk"><input type="checkbox" id="setShake" ${storeGet('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈 <span class="set-en">SCREEN SHAKE</span></label>
         <label class="chk"><input type="checkbox" id="setReduceMotion" ${storeGet('sdt-reduce-motion') === '1' ? 'checked' : ''}> 减少动态效果 <span class="set-en">REDUCE MOTION</span></label>
         </section>
@@ -900,6 +907,7 @@ export function createGameMenuPages(deps, shell) {
         </div><!-- /.settings -->
       </div><!-- /.pg -->`, 'page');
     initSettingsNavigation(UI.el.ovBody.querySelector('.settings-page'));
+    bindPerformanceSettings(UI.el.ovBody);
     const sync = () => {
       if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index;
       runtime.syncDevVisibility();

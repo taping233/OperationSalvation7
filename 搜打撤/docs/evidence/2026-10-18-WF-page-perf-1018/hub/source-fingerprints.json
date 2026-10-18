@@ -1,0 +1,49 @@
+{
+  "files": [
+    {
+      "path": "game/src/hub/hub.warehouse.js",
+      "bytes": 15602,
+      "sha256": "261c57aeff95f0c6c50a05bf6950713985ed61fb63a7d42b78f3efe3e38f17fb"
+    },
+    {
+      "path": "game/src/hub/game.bag.view2.js",
+      "bytes": 11843,
+      "sha256": "d370d6f68772085c6b3b83ddcfaf961bcbb82c5e246aa1f9b29beba263c8cba1"
+    },
+    {
+      "path": "tests/page-perf-hub.test.js",
+      "bytes": 10439,
+      "sha256": "e548428836209d9ca92666e15ba05751b2486fce6b0b50c5919b0160d7576ca0"
+    },
+    {
+      "path": "tests/backpack-layout.test.js",
+      "bytes": 5776,
+      "sha256": "fb2cf28358e6d118a0c93a839f192b8a223cbfd45eed0a673fb02b6836eab4dc"
+    },
+    {
+      "path": "tests/bag-page-lifecycle-review.test.js",
+      "bytes": 27392,
+      "sha256": "28e62f58e1a1785b2c54ea947f6e34cc7d5c9d83347e2880e5f16497cbec74e9"
+    },
+    {
+      "path": "docs/evidence/2026-10-18-WF-page-perf-1018/hub/baseline/backpack-layout.test.js.txt",
+      "bytes": 5462,
+      "sha256": "add43fc0b23f75fbba6332d1089134a0ba9f7dc08c9c6b084722dd95e631c80a"
+    },
+    {
+      "path": "docs/evidence/2026-10-18-WF-page-perf-1018/hub/baseline/bag-page-lifecycle-review.test.js.txt",
+      "bytes": 25754,
+      "sha256": "a10b151a98e35b5af23ac4577b4fe5d52051b997d1ea9e0650ae31a8acf26043"
+    },
+    {
+      "path": "docs/evidence/2026-10-18-WF-page-perf-1018/hub/baseline/game.bag.view2.js.txt",
+      "bytes": 11525,
+      "sha256": "8042313386ffee47e2cca576e87772ae2a2e0dd7b72c63b14f9883aa11decf2e"
+    },
+    {
+      "path": "docs/evidence/2026-10-18-WF-page-perf-1018/hub/baseline/hub.warehouse.js.txt",
+      "bytes": 14934,
+      "sha256": "53a8c2c43966948314184aa7248d7d306eb2d57679b29083d3ea0d76a1049b58"
+    }
+  ]
+}

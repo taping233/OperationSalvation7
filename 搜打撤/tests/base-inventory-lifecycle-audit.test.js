@@ -164,8 +164,6 @@ describe('基地口袋复原数量与整堆命令一致', () => {
     document.querySelector('.hub-page').innerHTML = feature.warehouseHTML('pocket');
     feature.bindWarehouse({ ui, base, sound: { tick: vi.fn() } });
     document.querySelector('[data-browser-key]').click();
-    // 点卡仅选中浏览（2026-10-15 新契约）；特写页脚经「查看详情」打开
-    ui._acts.warehousePick(document.querySelector('[data-act="warehousePick"]').dataset);
     return button('restoreCard');
   }
   it('按钮明确整堆2张/2钥匙，而不是承诺仅复原1张', async () => {
@@ -193,8 +191,6 @@ it.each([[false, 'variant'], [true, 'variant'], [false, 'id'], [true, 'id']])('�
   feature.bindWarehouse({ui,base,sound:{tick:vi.fn()},openCard:pages.openStashCardView});
   document.querySelectorAll('.stash-cell')[1].click();
   const selected=document.querySelector('.warehouse-selection-v12'); expect(selected.textContent).toContain('2 张');
-  // 点卡仅选中浏览（2026-10-15 新契约）；预览该堆走「查看详情」入口
-  ui._acts.warehousePick(document.querySelector('[data-act="warehousePick"]').dataset);
   if(pocket) expect(button('restoreCard').dataset.stackKey).toBe(identity === 'variant' ? 'card:growth:second' : 'card:second');
   else expect(document.querySelector('.inspect-count').textContent).toContain('2');
 });
@@ -271,4 +267,55 @@ describe('仓库补给物品真实页脚入口', () => {
     expect(base.useStashMaterial).not.toHaveBeenCalled(); expect(base.hatchPet).not.toHaveBeenCalled(); expect(base.openCardPack).not.toHaveBeenCalled();
     expect(ui.log).toHaveBeenCalledWith('库存引用不唯一，请刷新仓库', 'warn');
   });
+});
+
+describe('基地容量与材料信息准确性', () => {
+  it('建设明确永久扩建，并区分当前容量与扩建上限', async () => {
+    const { MAP } = await import('../game/src/run/game.session.js');
+    Object.assign(MAP.rules,{bagMax:30,stashMax:100,bagUpgradeWood:3,stashUpgradeWood:5,stashUpgradeSlots:2});
+    Object.assign(base,{bagCap:()=>16,stashCap:()=>28,canUpgradeBag:()=>true,canUpgradeStash:()=>true});
+    Object.assign(base.data,{wood:20,runes:[]});
+    const before=JSON.stringify(base.data);
+    const { facilitiesHTML, selectFacility }=await import('../game/src/hub/hub.facilities.js');
+    selectFacility('bag'); document.querySelector('.hub-page').innerHTML=facilitiesHTML();
+    expect(document.querySelector('.facility-v12-caption').textContent).toContain('永久增加出征背包容量，每次出征均生效');
+    expect([...document.querySelectorAll('.facility-tile b')].map(el=>el.textContent)).toEqual(['当前 16 格 · 上限 30 格','当前 28 格 · 上限 100 格']);
+    expect(JSON.stringify(base.data)).toBe(before);
+  });
+  it('仓库明确钥匙卡需使用，展示不自行折算库存', async () => {
+    Object.assign(base,{stashUsed:()=>1,stashCap:()=>28});
+    base.data.keys=0; base.data.stash=[{card:{id:'key',name:'一把钥匙',type:'资源'},count:1}];
+    window.SDT.Cards.cardHTML=item=>item.name;
+    const {warehouseHTML}=await import('../game/src/hub/hub.warehouse.js');
+    document.querySelector('.hub-page').innerHTML=warehouseHTML();
+    expect(document.querySelector('.stash-pocket-note').textContent).toContain('单击木材／口粮／钥匙卡使用 1 张，折入基地库存');
+    expect(base.data.keys).toBe(0); expect(base.useStashMaterial).not.toHaveBeenCalled();
+  });
+  it.each([['木材',3],['口粮',2],['钥匙',4]])('材料详情按已有端口显示%s收益%i，不按名称猜数值', (label,amount) => {
+    base.materialInfo=()=>({label}); base.materialAmount=vi.fn(()=>amount);
+    const item={id:'custom-material',name:'重命名材料',type:'资源'};
+    open(item);
+    expect(button('stashUseMat').textContent).toBe(`使用 1 张 → ${label} +${amount}`);
+    expect(base.materialAmount).toHaveBeenCalledWith(item);
+    expect(base.useStashMaterial).not.toHaveBeenCalled();
+  });
+  it('材料端口缺失时保留通用说明，不虚构收益',()=>{
+    base.materialInfo=()=>({label:'钥匙'}); open({id:'key',name:'钥匙',type:'资源'});
+    expect(button('stashUseMat').textContent).toBe('使用 1 张 → 折入基地材料');
+  });
+});
+
+
+it('仓库资源卡单击使用一张，刷新页面，旧页面不能再消费', async () => {
+  const wood={id:'wood',name:'木材',type:'资源'};
+  Object.assign(base,{stashUsed:()=>1,stashCap:()=>25,materialInfo:()=>({label:'木材'})});
+  base.data.stash=[{card:wood,count:1}]; window.SDT.Cards.cardHTML=item=>item.name;
+  const feature=await import('../game/src/hub/hub.warehouse.js');
+  document.querySelector('.hub-page').innerHTML=feature.warehouseHTML();
+  const refresh=vi.fn();
+  feature.bindWarehouse({ui,base,sound:{tick:vi.fn()},refresh});
+  const tile=document.querySelector('.stash-cell');tile.click();
+  expect(base.useStashMaterial).toHaveBeenCalledExactlyOnceWith('木材',false);
+  expect(refresh).toHaveBeenCalledOnce();expect(document.getElementById('cardZoom')).toBeNull();
+  base.slot=2;tile.click();expect(base.useStashMaterial).toHaveBeenCalledTimes(1);
 });

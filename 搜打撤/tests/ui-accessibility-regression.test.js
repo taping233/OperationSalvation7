@@ -22,11 +22,13 @@ describe('核心卡牌交互的键盘与读屏契约', () => {
       'battle/view/battle.anim.view.js', 'battle/view/battle.aim.js', 'battle/view/battle.hover.js']
       .map((f) => source(f)).join('\n');
     // One keyboard stop lives on the card face; the layout wrapper is a group.
-    expect(battle).toContain("rec.card.setAttribute('role', 'group')");
-    expect(battle).toContain('rec.card.tabIndex = -1');
-    expect(battle).toContain("face.setAttribute('role', 'button')");
-    expect(battle).toContain('face.tabIndex = 0');
+    expect(battle).toContain("setHandAttribute(rec.card, 'role', 'group')");
+    expect(battle).toContain("setHandAttribute(rec.card, 'tabindex', -1)");
+    expect(battle).toContain("setHandAttribute(face, 'role', 'button')");
+    expect(battle).toContain("setHandAttribute(face, 'tabindex', 0)");
     expect(battle).toContain("e.key !== 'Enter' && e.key !== ' '");
-    expect(battle).toContain("face.setAttribute('aria-disabled'");
+    expect(battle).toContain("setHandAttribute(face, 'aria-disabled'");
+    expect(battle).toContain('node.getAttribute(name) !== String(value)');
+    expect(battle).toContain('node.setAttribute(name, String(value))');
   });
 });

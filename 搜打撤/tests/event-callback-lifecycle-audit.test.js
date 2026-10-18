@@ -1,3 +1,5 @@
+import { bagSlots } from '../game/src/hub/game.bag.bridge.js';
+import { openRewardCapacityOrganizer } from '../game/src/ui/reward-capacity-organizer.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const H = vi.hoisted(() => ({ game: {}, cards: [], saves: [], uid: 0, slot: null, narrative: async () => null, random: () => 0.9 }));
@@ -41,6 +43,13 @@ beforeEach(() => {
   UI.el = { overlay: document.getElementById('overlay'), ovBody: document.getElementById('ovBody'), ovTitle: document.getElementById('ovTitle') };
   UI.el.ovBody.addEventListener('click', event => { const button = event.target.closest('[data-act]'); if (button) UI._acts[button.dataset.act]?.(button.dataset); });
   UI._acts = {}; UI._overlayInerted = []; UI._lastMode = null; UI._hideTimer = null; UI._roomActive = true; setBagReturnHook(null);
+  bagSlots.organizeReward = options => openRewardCapacityOrganizer({ ...options, UI,
+    readStacks:() => H.game.ownedCards.filter(o => !o.safe).map(o => ({card:o.card,uids:[o.uid],count:1})),
+    canReceive:() => H.game.canReceiveCard(options.card), capacity:() => '背包 9/9 格',
+    moveToSafe:stack => { H.game.ownedCards.find(o => o.uid === stack.uids[0]).safe=true; return true; },
+    discardOne:() => false,
+  });
+  bagSlots.showBackpack = () => UI.showOverlay('背包', '<main>背包</main>', 'page');
   H.saves = []; H.uid = 0; H.slot = null; H.narrative = async () => null;
   Object.assign(H.game, { seed: 7, state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 18, fragments: 0,
     altarActivated:false, altarRewardPending:false, altarItemSacrificed:false, nodeRewards:{}, entrySupply:null,
@@ -236,9 +245,10 @@ describe('事件等待与回调生命周期审计', () => {
     if (full) {
       expect(H.game.fragments).toBe(0);
       expect(H.game.visited).toEqual({});
-      expect(UI.el.ovBody.textContent).toContain('碎片和本次选择已保留');
+      expect(UI.el.ovBody.textContent).toContain('待领取：木材');
+      UI.el.ovBody.querySelector('[data-organize=return]').click();
       expect(H.game.ownedCards).toHaveLength(0);
-      choose({ i:'1' }); choose({ i:'1' }); choose({ i:'0' });
+      const retry=UI._acts.evtChoice; retry({ i:'1' }); retry({ i:'1' }); choose({ i:'0' });
       expect(H.game.coins).toBe(20);
     } else {
       choose({ i:'0' }); choose({ i:'1' });
@@ -248,6 +258,65 @@ describe('事件等待与回调生命周期审计', () => {
     expect(H.game.fragments).toBe(1);
     expect(H.game.visited).toEqual({ '0,1':1 });
     expect(H.saves.at(-1)).toMatchObject({ fragments:1, coins:full ? 20 : 18 });
+  });
+  it('无人机原地腾位后领取木材与碎片一次，旧整理按钮不能重复', async () => {
+    const wood={id:'tt-wood',name:'木材',type:'资源',rarity:'古朴'};
+    H.game.ownedCards=[{uid:'old',card:{id:'old',name:'旧物资',type:'资源'}}];
+    H.game.canReceiveCard=()=>H.game.ownedCards.filter(o=>!o.safe).length<1;
+    await openEvent('tt6-systemsupply',[wood]);
+    UI.el.ovBody.querySelector('[data-act=evtChoice][data-i="0"]').click();
+    UI.el.ovBody.querySelector('.event-choice-confirm').click();
+    expect(H.game.fragments).toBe(0); expect(H.game.visited).toEqual({});
+    UI.el.ovBody.querySelector('[data-organize=safe]').click();
+    const claim=UI.el.ovBody.querySelector('[data-organize=claim]'); claim.click(); claim.click();
+    expect(H.game.ownedCards.map(o=>o.card.id)).toEqual(['old','tt-wood']);
+    expect(H.game.fragments).toBe(1); expect(H.game.coins).toBe(18);
+    expect(H.game.visited).toEqual({'0,1':1});
+  });
+  it('无人机完整背包往返恢复已选木材，旧页和旧整理回调无效', async () => {
+    H.game.canReceiveCard=()=>false;
+    await openEvent('tt6-systemsupply',[{id:'tt-wood',name:'木材',type:'资源'}]);
+    const old=UI._acts.evtChoice; old({i:'0'});
+    const stale=UI.el.ovBody.querySelector('[data-organize=return]');
+    UI.el.ovBody.querySelector('[data-organize=bag]').click(); returnFromBag();
+    expect(UI.el.ovBody.querySelector('[data-i="0"]').getAttribute('aria-pressed')).toBe('true');
+    expect(UI.el.ovBody.querySelector('.event-choice-confirm').disabled).toBe(false);
+    const root=UI.el.ovBody.firstElementChild; stale.click(); old({i:'1'});
+    expect(UI.el.ovBody.firstElementChild).toBe(root); expect(H.game.fragments).toBe(0);
+    H.game.canReceiveCard=()=>true;
+    UI.el.ovBody.querySelector('.event-choice-confirm').click();
+    expect(H.game.fragments).toBe(1); expect(H.game.ownedCards).toHaveLength(1);
+  });
+  it('无人机实际领取拒绝不发碎片不消费节点，保选择且可改选货币', async () => {
+    let checks=0; H.game.canReceiveCard=()=>++checks<3;
+    await openEvent('tt6-systemsupply',[{id:'tt-wood',name:'木材',type:'资源'}]);
+    UI._acts.evtChoice({i:'0'});
+    expect(H.game.fragments).toBe(0); expect(H.game.ownedCards).toHaveLength(0);
+    expect(H.game.visited).toEqual({});
+    expect(UI.el.ovBody.textContent).toContain('奖励与选择已保留');
+    expect(UI.el.ovBody.querySelector('[data-i="0"]').getAttribute('aria-pressed')).toBe('true');
+    UI._acts.evtChoice({i:'1'});
+    expect(H.game.fragments).toBe(1); expect(H.game.coins).toBe(20);
+  });
+  it('无人机返回后改选货币或取消选择，普通背包往返保最新阅读状态', async () => {
+    H.game.canReceiveCard=()=>false;
+    await openEvent('tt6-systemsupply',[{id:'tt-wood',name:'木材',type:'资源'}]);
+    UI._acts.evtChoice({i:'0'}); UI.el.ovBody.querySelector('[data-organize=return]').click();
+    UI.el.ovBody.querySelector('[data-i="1"]').click(); UI._acts.evtBag(); returnFromBag();
+    expect(UI.el.ovBody.querySelector('[data-i="1"]').getAttribute('aria-pressed')).toBe('true');
+    UI.el.ovBody.querySelector('.event-choice-clear').click(); UI._acts.evtBag(); returnFromBag();
+    expect(UI.el.ovBody.querySelector('.event-choice-confirm').disabled).toBe(true);
+    expect(H.game.fragments).toBe(0); expect(H.game.visited).toEqual({});
+  });
+  it('无人机新局后旧整理页不能领取木材与碎片', async () => {
+    H.game.canReceiveCard=()=>false;
+    await openEvent('tt6-systemsupply',[{id:'tt-wood',name:'木材',type:'资源'}]);
+    UI._acts.evtChoice({i:'0'});
+    const back=UI.el.ovBody.querySelector('[data-organize=return]');
+    H.game.discoveredPairs=new Set(); H.game.canReceiveCard=()=>true;
+    back.click();
+    expect(H.game.fragments).toBe(0); expect(H.game.ownedCards).toHaveLength(0);
+    expect(H.game.visited).toEqual({});
   });
   it('F01 祭坛固定候选刷新不重掷，已领卡刷新后不重复发奖', () => {
     H.cards = [{ id:'legend', name:'传说', rarity:'传说', type:'法术' }, { id:'equip', name:'装备', rarity:'古朴', type:'装备' }];
@@ -266,6 +335,50 @@ describe('事件等待与回调生命周期审计', () => {
     UI._acts.chestContinue();
     expect(H.game.state).toBe('idle');
     H.random = () => 0.9;
+  });
+  it.each([
+    ['normal', 0.59, 0.99, '古朴', 11],
+    ['normal', 0.61, 0.01, '稀有', 0],
+    ['normal', 0.61, 0.49, '稀有', 1],
+    ['normal', 0.61, 0.99, '稀有', 3],
+    ['normal', 0.89, 0.99, '史诗', 1],
+    ['normal', 0.98, 0.01, '传说', 0],
+    ['elite', 0.58, 0.01, '稀有', 0],
+  ])('物资格 %s：档位骰 %s、档内骰 %s 抽到 %s 第 %s 张，重进不重抽', (mode, rarityRoll, cardRoll, rarity, index) => {
+    const oldWeights = window.SDT.Cards.DROP_WEIGHTS, oldMode = H.game.mode;
+    const byRarity = Object.fromEntries([['古朴', 12], ['稀有', 4], ['史诗', 2], ['传说', 2]].map(([tier, count]) =>
+      [tier, Array.from({ length:count }, (_, i) => ({ id:`${tier}-${i}`, name:`${tier}资源${i}`, type:'资源', rarity:tier }))]));
+    try {
+      window.SDT.Cards.DROP_WEIGHTS = { 古朴:60, 稀有:28, 史诗:9, 传说:3 };
+      H.game.mode = mode; H.cards = Object.values(byRarity).flat();
+      H.game.layerData[0].logical[1].def.type = 'resource';
+      H.random = vi.fn().mockReturnValueOnce(rarityRoll).mockReturnValueOnce(cardRoll).mockReturnValue(0.1);
+      flow.reenterCell();
+      const record = H.game.nodeRewards['0,1'];
+      expect(record.cardIds[0]).toBe(byRarity[rarity][index].id);
+      expect(new Set(record.cardIds).size).toBe(2);
+      expect(H.random).toHaveBeenCalledTimes(4);
+      const cardIds = [...record.cardIds];
+      UI._acts.resSkip(); flow.reenterCell();
+      expect(H.game.nodeRewards['0,1'].cardIds).toEqual(cardIds);
+      expect(H.random).toHaveBeenCalledTimes(4);
+    } finally {
+      window.SDT.Cards.DROP_WEIGHTS = oldWeights; H.game.mode = oldMode; H.random = () => 0.9;
+    }
+  });
+  it('物资格空档位不参与抽取，同名资源版本仍只出现一次', () => {
+    const oldWeights = window.SDT.Cards.DROP_WEIGHTS;
+    try {
+      window.SDT.Cards.DROP_WEIGHTS = { 古朴:60, 稀有:28, 史诗:9, 传说:3 };
+      H.cards = [
+        { id:'legend-a', name:'传说资源甲', type:'资源', rarity:'传说' },
+        { id:'legend-a-v2', name:'传说资源甲', type:'资源', rarity:'传说' },
+        { id:'legend-b', name:'传说资源乙', type:'资源', rarity:'传说' },
+      ];
+      H.random = () => 0.1; H.game.layerData[0].logical[1].def.type = 'resource';
+      flow.reenterCell();
+      expect(H.game.nodeRewards['0,1'].cardIds).toEqual(['legend-a', 'legend-b']);
+    } finally { window.SDT.Cards.DROP_WEIGHTS = oldWeights; H.random = () => 0.9; }
   });
   it('F15/F41 物资格满包显示整理，领取成功留结果页再继续', () => {
     H.cards = [{ id:'wood', name:'木材', type:'资源', rarity:'古朴' }, { id:'key', name:'钥匙', type:'资源', rarity:'古朴' }];
@@ -330,7 +443,7 @@ describe('事件等待与回调生命周期审计', () => {
   it('B01 首脑战先展示现行牌库与抽牌规则，返回保留挑战', () => {
     H.game.altarActivated = true;
     altar.openBossGate();
-    expect(UI.el.ovBody.textContent).toContain('最多 15 张');
+    expect(UI.el.ovBody.textContent).toContain('选择 15 张招式、装备或能力卡，不足时全部编入');
     expect(UI.el.ovBody.textContent).toContain('5 张初始攻击');
     expect(UI.el.ovBody.textContent).toContain('起手抽 5 张，每回合抽 1 张，手牌上限 8 张');
     UI._acts.bossGateBack();

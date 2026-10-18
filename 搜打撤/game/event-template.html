@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>事件模板 · 独立修改</title>
+<!-- 当前事件页快照（2026-10-15）。不加载游戏入口，不读写存档。
+     修改布局/颜色：下方 design-overrides；修改内容：body 中的叙事和选项。
+     共用基础样式与图片保留项目内引用，请将此文件留在 game 目录。
+     正式样式：css/entry-events.css；结构：src/ui/node-scene-view.js；文案：narrative/events.ink。
+     金币/攻击是演示值；选项确认只演示结果，退出键返回游戏，结果可重新预览。 -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/overlays.css">
+<link rel="stylesheet" href="css/scenes.css">
+<link rel="stylesheet" href="css/ui-scale.css">
+<link rel="stylesheet" href="css/page-events.css">
+<link rel="stylesheet" href="css/archive-back.css">
+<link rel="stylesheet" href="css/entry-events.css">
+<style id="event-template-style">
+/* 独立宿主，事件外观直接沿用正式组件，避免维护第二套覆盖样式。 */
+html,body { margin:0; width:100%; height:100%; overflow:hidden; }
+body { display:block; }
+#viewport { position:fixed; inset:0; width:100%; height:100%; }
+#overlay { position:absolute; inset:0; padding:0; background:none; backdrop-filter:none; }
+#overlay .card.page { display:block; padding:0; margin:0; width:100%; height:100%; overflow:hidden; }
+#ovBody { width:100%; height:100%; }
+#overlay .card.page .pg.node-pg { width:100%; height:100%; min-height:0; max-width:none; margin:0; }
+#resHud { position:fixed; display:flex; align-items:center; }
+</style>
+<style id="design-overrides">
+/* 后续局部试改写这里；确认实装后合并回 css/entry-events.css。 */
+</style>
+</head>
+<body>
+<div id="viewport">
+  <!-- 资源栏演示值 -->
+  <div id="resHud" aria-label="资源演示">
+    <span class="chip-mini res-gold"><img class="res-ic map-resource-art" src="assets/ui/map-hud-1015/gold-is7-v2.webp" alt="金币" width="64" height="64"><b>12</b></span>
+    <span class="chip-mini res-atk"><img class="res-ic map-resource-art" src="assets/ui/map-hud-1015/attack-is7-v2.webp" alt="攻击力" width="64" height="64"><b>4</b></span>
+  </div>
+  <div id="overlay" class="room-view">
+    <div class="card page"><div id="ovBody">
+      <!-- 替换 data-asset-key 可使用 scenes.css 中已有场景；也可直接加 background-image -->
+      <div class="pg node-pg sc-event event-scene event-replica event-themed" data-event-choice-count="2" data-asset-key="scene-event-goldmine">
+        <div class="event-topbar">
+          <a href="./" class="archive-back" aria-label="返回游戏" title="返回游戏"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 12h10M4 12l4-4M4 12l4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="node-panel">
+          <div class="event-context"><div class="node-kicker">城市外围 <span>第 1 层</span></div></div>
+          <!-- 事件标题与叙事 -->
+          <section class="event-story" aria-label="事件与叙事">
+            <header class="pg-head"><h2>废弃金矿</h2></header>
+            <div class="event-narrative" role="region" aria-label="事件叙述"><p>塌陷的矿井里仍有金属反光，但支撑梁正在呻吟。</p></div>
+          </section>
+          <!-- 事件选项：保留 data-result 可演示确认后的文案 -->
+          <section class="event-decisions" aria-label="事件选项">
+            <div class="node-main"><div class="node-summary">
+              <button type="button" class="evt-opt ok" data-result="你只取走入口附近的矿石，在第二次震动前退了出来。"><b>收下 3 币</b><span>稳定收益</span></button>
+              <button type="button" class="evt-opt danger" data-result="更深处确实埋着富矿，代价是被碎石划开的伤口。"><b>冒险挖深</b><span>+6 币，但损失 3 血</span></button>
+            </div></div>
+            <footer class="node-foot"><div class="event-choice-state">
+              <div class="event-choice-announcement" role="status" aria-live="polite">先选择一个选项</div>
+              <button type="button" class="event-choice-clear" disabled>取消选择</button>
+              <button type="button" class="ov-btn ok event-choice-confirm" disabled>选择后确认</button>
+            </div></footer>
+          </section>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</div>
+<script>
+// 仅预览交互：不执行金币、生命或存档写入。
+const scene = document.querySelector('.event-scene');
+const options = [...scene.querySelectorAll('.evt-opt')];
+const clear = scene.querySelector('.event-choice-clear');
+const confirm = scene.querySelector('.event-choice-confirm');
+const announcement = scene.querySelector('[role="status"]');
+const narrative = scene.querySelector('.event-narrative');
+const originalNarrative = narrative.innerHTML;
+let selected = null;
+function reset() {
+  selected = null;
+  options.forEach(option => { option.disabled = false; option.classList.remove('is-selected'); option.setAttribute('aria-pressed', 'false'); });
+  clear.disabled = confirm.disabled = true;
+  clear.textContent = '取消选择';
+  confirm.textContent = '选择后确认';
+  announcement.textContent = '先选择一个选项';
+  narrative.innerHTML = originalNarrative;
+}
+options.forEach(option => {
+  option.setAttribute('aria-pressed', 'false');
+  option.addEventListener('click', () => {
+    selected = option;
+    options.forEach(item => { item.classList.toggle('is-selected', item === option); item.setAttribute('aria-pressed', String(item === option)); });
+    clear.disabled = confirm.disabled = false;
+    confirm.textContent = '确认选择';
+    announcement.textContent = '已选择：' + option.textContent;
+  });
+});
+clear.addEventListener('click', reset);
+confirm.addEventListener('click', () => {
+  if (!selected) return;
+  narrative.textContent = selected.dataset.result;
+  announcement.textContent = '预览结果：' + selected.dataset.result;
+  confirm.textContent = '已确认 · 预览';
+  confirm.disabled = true;
+  options.forEach(option => { option.disabled = true; });
+  clear.textContent = '重新预览';
+});
+document.addEventListener('keydown', event => { if (event.key === 'Escape') reset(); });
+</script>
+</body>
+</html>

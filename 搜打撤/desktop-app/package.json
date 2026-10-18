@@ -26,6 +26,11 @@
       "main.js",
       "preload.js",
       "suggestions-store.cjs",
+      "startup-window.cjs",
+      "startup-preload.cjs",
+      "startup.html",
+      "release-profile.json",
+      "app.ico",
       "package.json"
     ],
     "extraResources": [

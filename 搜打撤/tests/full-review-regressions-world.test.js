@@ -165,6 +165,27 @@ describe('09-30 深审 WORLD 组修复回归', () => {
     expect(H.game.nodeRewards['0,1'].restoredIds).toEqual(['restored']);
   });
 
+  it('营火说明可展开且无副作用，结果区分复原与额外奖励并保留查看入口', () => {
+    const card = { id:'restored-ui', name:'复原牌', type:'武术' };
+    H.cards.push(card);
+    H.game.usedPocket = [{ card, count:1 }];
+    altar.openFireRest();
+    const before = JSON.stringify(H.game);
+    const help = UI.el.ovBody.querySelector('.ui-disclosure');
+    expect(help.open).toBe(false);
+    help.open = true;
+    expect(JSON.stringify(H.game)).toBe(before);
+    expect(UI.el.ovBody.querySelector('.ui-risk').closest('details')).toBeNull();
+    UI._acts.fireRestGo();
+    expect([...UI.el.ovBody.querySelectorAll('.fire-result-label')].map(el => el.textContent)).toEqual(['已复原', '额外获得']);
+    expect(UI.el.ovBody.querySelectorAll('[data-act="fireResultCard"]')).toHaveLength(2);
+    expect(UI.el.ovBody.querySelector('[data-act="fireDone"]').textContent).toContain('继续探索');
+    const after = JSON.stringify(H.game.nodeRewards);
+    altar.openFireRest();
+    expect(JSON.stringify(H.game.nodeRewards)).toBe(after);
+    expect(UI.el.ovBody.querySelectorAll('[data-act="fireResultCard"]')).toHaveLength(2);
+  });
+
   it('WORLD-002c 火堆池仅 1 张可复原：发现该张即止（池不足两张全复原）', () => {
     H.game.usedPocket = [{ uid: 'p1', card: { id: 'x1', name: '孤卡', type: '武术' }, count: 1 }];
     altar.openFireRest();

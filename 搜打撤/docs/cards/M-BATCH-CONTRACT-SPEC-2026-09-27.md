@@ -19,7 +19,8 @@
 | 抽到目标手牌数 | tt7-maxsupply 法力补给、tt8-abyss-sovereign（旧日再临抽到 6 张） | `draw.untilHandN`（Wave1） |
 | 手牌批操作 | tt7-goldencicada 金蝉脱壳、tt3-fate-wheel 命运钟表 | `draw.handOps`（Wave1：consumeHand/dumpHand） |
 | 敌我混排（混合目标） | tt12-sporewall 孢子城墙、cc-demon、tt3-firm-barrier 坚冰结界、tt7-silence 禁言术、tt3-toxin 毒药 | battle.target 混合放行（Wave1） |
-| 多目标可重复点选 | tt7-bloodpoison 血毒双镖、tt7-provoke 扰敌、tt3-magic-lamp 神灯 | `pick` 段级点选（Wave2 §二.1） |
+| 多目标可重复点选 | tt7-bloodpoison 血毒双镖、tt3-magic-lamp 神灯 | `pick` 段级点选（Wave2 §二.1） |
+| 扰敌两名不同目标 | tt7-provoke 扰敌 | 当前已接卡牌目标会话：依次选择两名不同存活敌人；首选不扣费，第二选后一次扣费。先选者攻击后选者，后者存活才反击；取消不消费。 |
 | 获取过滤 | tt7-armup 武装、ev19-arrows 箭系列、tt12-breakthrough 突破进展 | `acquire.filter`（Wave1：cost/costMax） |
 | 禁疗/破甲诅咒 | tt7-abysscurse 深渊诅咒、tt3-skewer 穿刺、tt8-dragonblade 青龙偃月斩 | `curse: healban / abreak`（v2 既有） |
 | 毒伤引爆/层数翻倍 | cc-poison-burst 毒爆、tt3sp-flowerzhen 花鸩、tt3-fly-arrowhawk | `curse.burst / double`（v2 既有） |
@@ -201,6 +202,7 @@ rules: { version: 1,
 { op: 'execute', cap: { maxHpBelow: 20 }, onKill: {…} }
 ```
 - 消费点：battle.resolution.js execute 分支（非 BOSS 免疫口径沿用文本路径）
+- 单敌明确目标只结算该敌，失效或不满足 cap 不转杀其他敌。仅含普通 execute 的单敌卡在手动出牌前校验：具体目标不合格或场上全无合格敌人时拒绝且不扣费/耗牌；仍有合格敌人时可进入选靶。无明确目标的自动结算与无目标多敌效果保留原候选顺序和 count；混合效果不提前套用此纯 execute 预检。
 
 ### 二.6 施放已有牌 / acquire 组合扩展（✅ 部分：discover playKeep「施放1张其余入手」既有支持=永恒绽放口径；pool.kind 注能/其它职业/形态/药水/牌库底 已通；hand/deck 直发 play 通道仍 pending ⏸；acquire.untilHandN ⏸）
 

@@ -1,3 +1,4 @@
+import { getPerformanceSettings, getQualityPreset, onPerformanceSettingsChange } from '../core/performance-settings.js';
 import { assetUrl } from '../core/asset-url.js';
 import { Random } from '../core/random.js';
 import { createRainTableau } from './courtyard.rain-tableau.js';
@@ -28,7 +29,7 @@ export function mountCourtyardV3(root) {
     return () => {};
   }
   const settings = { intensity:40 };
-  let disposed = false, paused = false, frame = 0, previous = 0, image = null, feedbackTimer = 0;
+  let disposed = false, paused = false, frame = 0, previous = null, nextDraw = 0, image = null, feedbackTimer = 0;
   let soundEnabled = false, audio = null, noise = null, rainGain = null, rainFilter = null;
   let engine = null, koi = null;
   const running = () => !disposed && !paused && !document.hidden && !reducedMotion();
@@ -52,7 +53,7 @@ export function mountCourtyardV3(root) {
     if (disposed) return;
     const bounds = scene.getBoundingClientRect();
     // 受控像素预算；仅绘制当前窗口，不启动隐藏副场景。
-    const scale = Math.min(1.25, window.devicePixelRatio || 1, 1500 / Math.max(1, bounds.width));
+    const scale = Math.min(getQualityPreset().courtyardScale, window.devicePixelRatio || 1, 1500 / Math.max(1, bounds.width));
     const width = Math.max(1, Math.round(bounds.width * scale));
     const height = Math.max(1, Math.round(bounds.height * scale));
     if (canvas.width === width && canvas.height === height) return;
@@ -123,8 +124,11 @@ export function mountCourtyardV3(root) {
     frame = 0;
     if (departed()) { dispose(); return; }
     if (!running()) return;
-    if (!previous || time - previous >= 32) {
-      draw(previous ? Math.min(.05, (time - previous) / 1000) : 1 / 30, true);
+    const interval = 1000 / Math.min(30, getPerformanceSettings().fps);
+    if (previous === null || time >= nextDraw - .5) {
+      draw(previous === null ? 1 / 30 : Math.min(.05, (time - previous) / 1000), true);
+      nextDraw = previous === null ? time + interval
+        : nextDraw + Math.max(1, Math.floor((time - nextDraw) / interval) + 1) * interval;
       previous = time;
     }
     frame = requestAnimationFrame(loop);
@@ -133,7 +137,7 @@ export function mountCourtyardV3(root) {
     if (disposed) return;
     if (departed()) { dispose(); return; }
     if (frame) cancelAnimationFrame(frame);
-    frame = 0; previous = 0;
+    frame = 0; previous = null; nextDraw = 0;
     const reduced = reducedMotion();
     host.classList.toggle('is-still', reduced || paused);
     pauseButton.textContent = reduced ? '静态' : paused ? '继续' : '暂停';
@@ -208,9 +212,11 @@ export function mountCourtyardV3(root) {
   canvas.addEventListener('pointermove', hover); canvas.addEventListener('pointerleave', leave);
   controls.addEventListener('click', control); document.addEventListener('visibilitychange', sync);
   media?.addEventListener?.('change', sync);
+  const unsubscribePerformance = onPerformanceSettingsChange(() => { resize(); sync(); });
   function dispose() {
     if (disposed) return;
     disposed = true;
+    unsubscribePerformance();
     clearTimeout(feedbackTimer);
     if (frame) cancelAnimationFrame(frame); frame = 0;
     observer?.disconnect(); motionObserver?.disconnect(); window.removeEventListener('resize', resize);

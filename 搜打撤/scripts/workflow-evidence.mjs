@@ -1,6 +1,6 @@
 import { spawn, spawnSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, readlinkSync, statSync, writeFileSync } from 'node:fs';
+import { appendFileSync, existsSync, lstatSync, mkdirSync, readdirSync, readFileSync, readlinkSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { hash } from './workflow-ledger.mjs';
 import { currentDocuments, filesUnder, git } from './workflow-status.mjs';
@@ -191,10 +191,38 @@ export function previewCheck(root, options) {
     limits: ['只读预检，未运行检查；实际执行仍重新核对；测试覆盖范围由负责人确认'] };
 }
 
+/** Git metadata is optional only for a proven non-repository; never invent HEAD/index. */
+export function repositoryContext(root) {
+  const probe = spawnSync('git', ['rev-parse', '--show-toplevel'], { cwd: root, encoding: 'utf8' });
+  if (probe.error) throw probe.error;
+  if (probe.status !== 0) {
+    let marker = false;
+    for (let directory = path.resolve(root); ; directory = path.dirname(directory)) {
+      try {
+        const location = path.join(directory, '.git'), entry = lstatSync(location);
+        // Sandbox mount placeholders in ancestors are not repository metadata.
+        if (directory === path.resolve(root) || !entry.isDirectory() || existsSync(path.join(location, 'HEAD'))) marker = true;
+      }
+      catch (error) { if (error.code !== 'ENOENT') throw error; }
+      if (path.dirname(directory) === directory) break;
+    }
+    const diagnostic = (probe.stderr || probe.stdout || '').trim();
+    if (probe.status === 128 && /not a git repository/i.test(diagnostic)
+      && !marker && !['GIT_DIR', 'GIT_WORK_TREE', 'GIT_COMMON_DIR', 'GIT_OBJECT_DIRECTORY', 'GIT_INDEX_FILE'].some(key => process.env[key])) {
+      return { mode: 'snapshot', head: null, status: null, reusableReceipt: false,
+        reason: '当前目录没有可用 Git 仓库；仅核验显式输入与文件指纹，不代表 HEAD/index/CI。' };
+    }
+    throw new Error('Git 元数据读取失败，不能按无仓库降级：' + diagnostic);
+  }
+  return { mode: 'git', head: git(root, ['rev-parse', 'HEAD']), status: git(root, ['status', '--short']),
+    reusableReceipt: false, reason: '工作区检查候选；冻结 index 证据仍走 workflow staged。' };
+}
+
 export async function runCheck(root, options) {
   safeId(options.task);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(options.date ?? '')) throw new Error('日期必须为 YYYY-MM-DD');
   const preview = previewCheck(root, options);
+  const repositoryBefore = repositoryContext(root);
   const args = preview.command.slice(1);
   const validation = { ...preview.selection, executed: preview.selection.mode !== 'skip' };
   const directory = path.join(root, 'docs/evidence', options.date + '-' + options.task);
@@ -207,8 +235,6 @@ export async function runCheck(root, options) {
     || options.tests?.some(file => /docs-consistency|workflow-cli-integration|workflow-index/.test(file))), roots: selectedRoots };
   const before = fingerprint(root, scope);
   const startedAt = new Date().toISOString();
-  const head = git(root, ['rev-parse', 'HEAD']);
-  const status = git(root, ['status', '--short']);
   writeFileSync(logPath, '', { flag: 'wx' });
   const execution = await new Promise(resolve => {
     const child = spawn(process.execPath, args, { cwd: root, shell: false, stdio: ['ignore', 'pipe', 'pipe'] });
@@ -222,12 +248,15 @@ export async function runCheck(root, options) {
   try { after = fingerprint(root, scope); }
   catch (error) { after = { sha256: null, manifest: [], environment: null, documents: scope.documents,
     error: error.message, limits: ['结束指纹采集失败，不可复用'] }; }
+  let repositoryAfter;
+  try { repositoryAfter = repositoryContext(root); }
+  catch (error) { repositoryAfter = { mode: 'unavailable', head: null, status: null, error: error.message, reusableReceipt: false }; }
   const report = { schemaVersion: 1, task: options.task, kind: 'automated-local-check', command: [process.execPath, ...args],
-    cwd: root, startedAt, endedAt: new Date().toISOString(), head, statusBefore: status,
-    statusAfter: git(root, ['status', '--short']), before, after, ...execution, validation,
+    cwd: root, startedAt, endedAt: new Date().toISOString(), head: repositoryBefore.head, statusBefore: repositoryBefore.status,
+    statusAfter: repositoryAfter.status, repository: { before: repositoryBefore, after: repositoryAfter }, reusableReceipt: false, before, after, ...execution, validation,
     outcome: execution.exitCode !== 0 ? 'failed' : validation.mode === 'skip' ? 'skip' : 'passed',
     log: path.relative(root, logPath).replaceAll('\\', '/'), logSha256: hash(readFileSync(logPath)),
-    limits: ['仅本命令覆盖范围；没有 build、实页、真实 hover、玩家存档或远端 CI 验收', ...after.limits] };
+    limits: [repositoryBefore.reason, '仅本命令覆盖范围；没有 build、实页、真实 hover、玩家存档或远端 CI 验收', ...after.limits] };
   report.freshness = freshness(report, after);
   writeFileSync(reportPath, JSON.stringify(report, null, 2) + '\n', { flag: 'wx' });
   return { report: path.relative(root, reportPath).replaceAll('\\', '/'), exitCode: execution.exitCode,

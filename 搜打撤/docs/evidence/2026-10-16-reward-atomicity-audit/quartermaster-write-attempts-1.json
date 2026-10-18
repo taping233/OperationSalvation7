@@ -28,7 +28,8 @@
         ],
         "index": 1,
         "context": {
-          "onCell": true
+          "onCell": true,
+          "consumeNode": false
         },
         "current": {
           "kind": "small",
@@ -77,7 +78,8 @@
         ],
         "index": 1,
         "context": {
-          "onCell": true
+          "onCell": true,
+          "consumeNode": false
         },
         "current": {
           "kind": "small",
@@ -127,7 +129,8 @@
       ],
       "index": 1,
       "context": {
-        "onCell": true
+        "onCell": true,
+        "consumeNode": false
       },
       "current": {
         "kind": "small",
@@ -176,7 +179,8 @@
       ],
       "index": 1,
       "context": {
-        "onCell": true
+        "onCell": true,
+        "consumeNode": false
       },
       "current": {
         "kind": "small",

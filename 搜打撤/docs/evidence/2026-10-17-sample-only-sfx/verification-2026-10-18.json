@@ -1,0 +1,97 @@
+{
+  "reconstructedOn": "2026-10-18",
+  "status": "Reconstructed from preserved local files; original README and mapping report absent",
+  "mappingSource": {
+    "path": "docs/evidence/2026-10-17-f4ngy-draw/before/sound.samples.catalog.js",
+    "sha256": "e06c50a41cbc78268ddef215725b40aab740e70dbc3e2129610e5398ca475eb4",
+    "receiptField": "before_catalog_sha256"
+  },
+  "afterDrawSource": {
+    "path": "docs/evidence/2026-10-17-real-foley-batch/before/sound.samples.catalog.js",
+    "sha256": "51f2065ad4e271872934efa2969aafd59c1aa89eb183ef735e9631ad72510c82",
+    "receiptField": "new_catalog_sha256"
+  },
+  "runtime": {
+    "path": "game/src/audio/sound.samples.catalog.js",
+    "sha256": "a7ecef3349db16ce67f51e06a97bb6d2cf18dd789127ce9ba501418c36ae2f10",
+    "events": 106
+  },
+  "restoredMappingEvents": 106,
+  "inventoryKeysMatch": true,
+  "subsequentChangedEvents": [
+    "click",
+    "cardSelect",
+    "characterSelect",
+    "coin",
+    "tradeSell",
+    "safeStore",
+    "safeRetrieve",
+    "searchStart",
+    "recodeStart",
+    "draw",
+    "tradeBuy",
+    "foeLunge"
+  ],
+  "verifiedFiles": [
+    {
+      "path": "game/assets/sfx/real-foley/coinflip-01.wav",
+      "bytes": 62308,
+      "sha256": "60c652aca20c60e4fa6efe086f061bc52ddc66d7728dd23d9b625b7e6485a96c",
+      "receipt": "docs/evidence/2026-10-17-real-foley-batch/receipt.json"
+    },
+    {
+      "path": "game/assets/sfx/real-foley/coinflip-02.wav",
+      "bytes": 43020,
+      "sha256": "44215b7af83d7e0d569b30898c94c5372e080675c05e3a030cfe1a764f843bc5",
+      "receipt": "docs/evidence/2026-10-17-real-foley-batch/receipt.json"
+    },
+    {
+      "path": "game/assets/sfx/real-foley/book-page-02.wav",
+      "bytes": 129416,
+      "sha256": "b14e15141984eb84bcbe8841139d3f1d4715eac4e64cf52091acffd8fe440331",
+      "receipt": "docs/evidence/2026-10-17-real-foley-batch/receipt.json"
+    },
+    {
+      "path": "game/assets/sfx/real-foley/wood-tap-01.wav",
+      "bytes": 52880,
+      "sha256": "dac92db04d0a040d1d862638b26f0d0c0218b8fa27a2535728103ef24bcc8858",
+      "receipt": "docs/evidence/2026-10-17-real-foley-batch/receipt.json"
+    },
+    {
+      "path": "game/assets/sfx/real-foley/tube-whoosh-01.wav",
+      "bytes": 59568,
+      "sha256": "6bf539745db12b4b546bb8bb1ab2f75ccf403db80c07fc8f473fa288d0d428b9",
+      "receipt": "docs/evidence/2026-10-17-real-foley-batch/receipt.json"
+    },
+    {
+      "path": "game/assets/sfx/real-foley/tube-whoosh-02.wav",
+      "bytes": 70876,
+      "sha256": "2ba001b889f1465d949b5531e7c9f61425a0f81d2a40febe3bdb4e449e99c190",
+      "receipt": "docs/evidence/2026-10-17-real-foley-batch/receipt.json"
+    },
+    {
+      "path": "game/assets/sfx/real-foley/lockbox-turn-06.wav",
+      "bytes": 123516,
+      "sha256": "47fba948e9eab77cad4480ce88a75d842ae1fe7e3046fc13446178c4bff5d197",
+      "receipt": "docs/evidence/2026-10-18-safe-slot-foley/receipt.json"
+    },
+    {
+      "path": "game/assets/sfx/real-foley/lockbox-unlock-01.wav",
+      "bytes": 131252,
+      "sha256": "4a8307c941dc56d984fc460b4730b70bf4833252c29922f08457b96d1ce10df0",
+      "receipt": "docs/evidence/2026-10-18-safe-slot-foley/receipt.json"
+    },
+    {
+      "path": "game/assets/sfx/f4ngy/dealing-card-240777-hq.mp3",
+      "bytes": 20979,
+      "sha256": "a16225c9beac75c4d83eb0cb9d59f33c773768a9d95d330fe6b56dc81c56cfb7",
+      "receipt": "docs/evidence/2026-10-17-f4ngy-draw/receipt.json"
+    }
+  ],
+  "limits": [
+    "No historical test output recovered",
+    "No original download archive or listening/A-B report recovered",
+    "Receipt provenance retained; current bytes rechecked against receipt hashes",
+    "No listening verification performed"
+  ]
+}

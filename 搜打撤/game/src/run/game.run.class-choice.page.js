@@ -39,7 +39,6 @@ export function openClassChoice(options = {}) {
   if (globalThis.scheduler?.postTask) globalThis.scheduler.postTask(warmBattleRuntime, { priority: 'background' }).catch(() => {});
   else if (typeof requestIdleCallback === 'function') requestIdleCallback(warmBattleRuntime, { timeout: 3000 });
   else setTimeout(warmBattleRuntime, 500);
-  if (SDT.Art && SDT.Art.warmClassRoster) SDT.Art.warmClassRoster();   // 头像条/大立绘五张 4K 图预热，防露底色（2026-09-19 走查 B8）
   const picks = CHARACTERS.map(c => c.rulesetId).filter(cl => SDT.Cards.classPool(cl).length);
   if (!picks.length) return false;
   game.state = 'modal';
@@ -376,9 +375,9 @@ export function openClassChoice(options = {}) {
     exitToTitle();
   });
   const confirmClass = cl => {
-    if (confirmationStarted || !current()) return;
-    if (onSelect ? options.isConfirmationCurrent && !options.isConfirmationCurrent() : !visible()) return;
-    if (beforeConfirm && beforeConfirm() === false) return;
+    if (confirmationStarted || !current()) return false;
+    if (onSelect ? options.isConfirmationCurrent && !options.isConfirmationCurrent() : !visible()) return false;
+    if (beforeConfirm && beforeConfirm() === false) return false;
     confirmationStarted = true;
     if (!SDT.Base?.data?.ammoTaught) SDT.Base?.markAmmoTaught?.();
     game.myClass = cl;
@@ -415,14 +414,14 @@ export function openClassChoice(options = {}) {
       title: characterName(cl), detail: startLine, duration: 1600,
       presentation: 'city-cut',
     });
-    transition.then(completed => {
-      if (entryPresented || completed === false || !transition.isCurrent() || !currentContext()) return;
+    return transition.then(completed => {
+      if (entryPresented || completed === false || !transition.isCurrent() || !currentContext()) return false;
       entryPresented = true;
       UI.hideOverlay();
       game.state = 'idle';
       saveGame();
       UI.refresh(game);
-
+      return true;
     });
   };
   act('pickClass', () => {

@@ -137,14 +137,19 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
   const finishUp = async () => {
     expect(await doExtract()).toBe(true);
     await UI.acts.exFinish();
+    if (document.querySelector('[data-act=exConfirmFinish]')) await UI.acts.exConfirmFinish();
   };
 
   it('clear 结局：主体文案突出「击破首脑+关键收获」，数字（行动/用时/首探经验）来自回执', async () => {
     await finishUp();
     const text = document.body.textContent;
-    expect(text).toContain('首脑突破 · 满载而归');
-    expect(text).toContain('击破第四层首脑');
-    expect(text).toContain('本局真实入库');
+    expect(text).toContain('首脑突破 / 收获已保存');
+    expect(text).not.toContain('满载而归');
+    expect(text).toContain('待复原4 张');
+    expect(document.querySelector('[data-act=again]')).toBeNull();
+    expect(document.querySelector('[data-act=goBase]').textContent).toContain('返回基地');
+    expect(document.querySelector('.exr-eyebrow').textContent).toContain('首脑突破');
+    expect(text).toContain('已入库 0 张');
     expect(text).not.toContain('保本返回');
     expect(text).toContain('行动 32 次');     // 页面主体读回执 actions
     expect(UI.log).toHaveBeenCalledWith(expect.stringContaining('共 32 次行动'), 'ok');   // 日志行同读回执
@@ -152,7 +157,7 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
     expect(text).toContain('+44');            // 回执 firstExplore.xp（SYS-01 口径，非旧 turn 反推的 84）
     expect(text).toContain('第 4 层');        // 回执 layersReached
     expect(document.querySelector('[data-act="goBase"]')).not.toBeNull();
-    expect(document.querySelector('[data-act="again"]')).not.toBeNull();
+    expect(document.querySelector('[data-act="again"]')).toBeNull();
     expect(recordRun).toHaveBeenCalledTimes(1);
     const [outcome, detail] = recordRun.mock.calls[0];
     expect(outcome).toBe('clear');
@@ -166,6 +171,7 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
     expect(await doExtract()).toBe(true);
     await UI.acts.exAll();
     await UI.acts.exFinish();
+    if (document.querySelector('[data-act=exConfirmFinish]')) await UI.acts.exConfirmFinish();
     const [outcome, detail] = recordRun.mock.calls[0];
     expect(outcome).toBe('clear');
     expect(detail.savedCards).toEqual([{ card: { id: 'b', name: '背包卡' }, count: 1 }]);
@@ -174,11 +180,12 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
   });
 
   it('uses a short smart-storage label while retaining capacity and value priority in its accessible description', async () => {
+    altarState.game.ownedCards = Array.from({ length: 6 }, (_, i) => ({ uid: String(i), card: { id: 'b', name: '背包卡' } }));
     expect(await doExtract()).toBe(true);
     const smart = document.querySelector('[data-act="exSmart"]');
-    expect(smart.textContent).toContain('优先入库高价值卡');
+    expect(smart.textContent).toContain('按估值入库 5 张');
     expect(smart.textContent).not.toContain('上限仓库空格');
-    expect(smart.title).toBe('按仓库剩余空格，优先入库价值最高的卡牌');
+    expect(smart.title).toBe('按估值从高到低入库，同估值按背包原次序。估值不代表稀有度或实战强度，也不表示卡牌可以出售。');
     expect(smart.getAttribute('aria-label')).toBe(smart.title);
   });
 
@@ -189,19 +196,21 @@ describe('结算页从回执读数（slot=null 真实 altar 分支）', () => {
       { uid: 'box', card: { name: '迷之匣', rarity: '史诗', type: '道具' } },
     ];
     await finishUp();
-    expect(document.body.textContent).toContain('未入库 3 张（其中传说/史诗包括：【迷之匣】×1）');
+    expect(document.querySelector('.exr-loss').textContent).toContain('未入库 3 张');
+    expect(document.querySelector('.exr-loss').textContent).toContain('其中传说/史诗包括：【迷之匣】×1');
     expect(recordRun.mock.calls[0][1].receipt.losses).toMatchObject({
       lostCount: 3, lostNotable: [{ name: '迷之匣', rarity: '史诗', count: 1 }],
     });
   });
 
-  it('extract 结局：主体文案突出「保本返回」，与 clear 不共享同一句主体', async () => {
+  it('extract 结局：说明安全撤离，不暗示没有损失，与 clear 区分', async () => {
     for (const k of Object.keys(altarState.game)) delete altarState.game[k];
     Object.assign(altarState.game, makeGame({ bossKilled: false, turn: 21, exploredKeys: null }));
     await finishUp();
     const text = document.body.textContent;
-    expect(text).toContain('保本返回 · 撤离成功');
-    expect(text).toContain('带着战利品安全返回基地');
+    expect(text).toContain('撤离成功');
+    expect(text).not.toContain('保本返回');
+    expect(text).toContain('安全撤离 / 收获已保存');
     expect(text).not.toContain('首脑突破');
     expect(text).not.toContain('击破第四层首脑');
     expect(text).toContain('行动 20 次');     // 旧档无 explored：actions 仍为 turn-1

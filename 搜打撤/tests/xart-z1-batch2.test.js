@@ -7,6 +7,7 @@
 //   A5-ABANDON-01 放弃页抢运清单由纯文本改为 doom-loot 卡面网格（与死亡页同视觉语言）
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
+import { extractionStashHTML } from '../game/src/ui/extraction-rewards-view.js';
 
 const death = readFileSync('game/src/run/game.session.death.js', 'utf8');
 const altar = readFileSync('game/src/run/game.run.altar.js', 'utf8');
@@ -21,8 +22,9 @@ beforeAll(async () => {
 describe('A5-DEATH-01 死亡页展示关键损失明细', () => {
   it('doom-panel 消费 token.receipt.losses 逐名表达', () => {
     expect(death).toContain('token.receipt?.losses');
-    expect(death).toContain('doom-loss-row');
-    expect(death).toContain('lostNotable');
+    expect(death).toContain('deathLoss.lostNotable.map(c => `【${esc(c.name)}】`)');
+    expect(death).toContain("uiDisclosure({label:'物资明细与保留规则',className:'doom-details'");
+    expect(death).toContain('${lossDetails}');
   });
 });
 
@@ -53,9 +55,16 @@ describe('A5-ABANDON-01 放弃页抢运清单卡面网格', () => {
 });
 
 describe('A5-EXSTASH-01 整理页带入卡角标', () => {
-  it('renderExtractStash 按 o.brought 计数并渲染 ext-brought', () => {
+  it('renderExtractStash 按 o.brought 计数，纯展示页标注出发曾带入记录', () => {
     expect(altar).toContain('broughtByName');
-    expect(altar).toContain('ext-brought');
+    expect(altar).toContain('if (o.brought) broughtByName.set(o.card.name');
+    const card={id:'brought-card',name:'携入卡',rarity:'稀有',type:'武术'};
+    const options={remainingCards:[{card,count:3}],room:3,cardHTML:item=>item.name};
+    const html=extractionStashHTML({...options,broughtByName:new Map([[card.name,2]])});
+    expect(html).toContain('class="exr-brought"');
+    expect(html).toContain('出发曾带入 ×2');
+    expect(html).toContain('不代表剩余卡的来源');
+    expect(extractionStashHTML(options)).not.toContain('class="exr-brought"');
   });
 });
 

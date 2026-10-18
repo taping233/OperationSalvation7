@@ -4,6 +4,20 @@ const path = require('path');
 const fs = require('fs');
 const { pathToFileURL } = require('url');
 const { appendSuggestionDocument, deleteSuggestionDocument, parseSuggestionDocument } = require('./suggestions-store.cjs');
+const { attachStartupWindow } = require('./startup-window.cjs');
+
+// A clean portable release uses its own persistent profile, without erasing other editions.
+const releaseProfilePath = path.join(__dirname, 'release-profile.json');
+if (app.isPackaged && fs.existsSync(releaseProfilePath)) {
+  const { directory } = JSON.parse(fs.readFileSync(releaseProfilePath, 'utf8'));
+  if (typeof directory !== 'string' || !/^codename7-clean-[a-z0-9-]+$/.test(directory)) {
+    throw new Error('Invalid portable release profile');
+  }
+  const profileDirectory = path.join(app.getPath('appData'), directory);
+  fs.mkdirSync(profileDirectory, { recursive: true });
+  app.setPath('userData', profileDirectory);
+  app.setPath('sessionData', profileDirectory);
+}
 
 // 2560x1440 / 120 FPS 合成必须使用独显；默认自动选择在本机落到了 Iris Xe。
 // Electron 官方开关会在混合显卡机器上请求高性能 GPU，须在 ready 前设置。
@@ -71,11 +85,10 @@ function createWindow() {
     },
   });
 
-  win.loadURL('app://sdt/index.html');
+  attachStartupWindow({ BrowserWindow, ipcMain, app }, win);
   win.webContents.on('did-fail-load', (_event, code, description, url, isMainFrame) => {
     if (isMainFrame) console.error(`桌面页面加载失败：${code} ${description} (${url})`);
   });
-  win.once('ready-to-show', () => win.show());
   win.webContents.on('before-input-event', (event, input) => {
     if (input.type === 'keyDown' && input.key === 'F12') {
       win.webContents.toggleDevTools();
@@ -99,7 +112,8 @@ if (!gotLock) {
   app.quit();
 } else {
   app.on('second-instance', () => {
-    const win = BrowserWindow.getAllWindows()[0];
+    const windows = BrowserWindow.getAllWindows();
+    const win = windows.find(window => window.isVisible()) || windows[windows.length - 1];
     if (win) {
       if (win.isMinimized()) win.restore();
       win.show();

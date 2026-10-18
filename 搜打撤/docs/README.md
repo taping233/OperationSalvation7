@@ -43,7 +43,7 @@ Codex / ZCode 共用项目规则和事实，各自使用当前平台工具。项
 | 存档 / 基地写入 | [存档契约](save-format.md) | [直写路径审计 09-29](BASE-DIRECT-WRITE-AUDIT-2026-09-29.md)（直写红线、保留簇与挂账） |
 | 性能 | [性能方法与历史基准](performance.md) | [全场景账本 09-29](PERF-LEDGER-2026-09-29.md)（19 场景+热点清单+复跑命令） |
 | 测试 / 验收门 | [质量门](quality-gates.md)、[开发指南](development.md) | [分层验收改造记录](archive/records-2026-09-28/ACCEPTANCE-FAST-GATE-RESULT-2026-09-28.md) |
-| UI / 美术 / 素材 | [当前美术方向](production/art/ART-DIRECTION-BRIEF.md)、[视觉规范](production/art/VISUAL-BIBLE.md)、[人物参考](character-bible/README.md)、[运行素材说明](../game/assets/README.md) | [界面美术指南](UI-ART-OVERHAUL-GUIDE.md)、[验收截图](evidence/game-shots/)、[预览页面](previews/README.md) |
+| UI / 美术 / 素材 | [当前美术方向](production/art/ART-DIRECTION-BRIEF.md)、[视觉规范](production/art/VISUAL-BIBLE.md)、[人物参考](character-bible/README.md)、[运行素材说明](../game/assets/README.md) | [界面美术指南](UI-ART-OVERHAUL-GUIDE.md)、[页面验收覆盖](production/art/UI-PAGE-COVERAGE.md)、[预览页面](previews/README.md) |
 | 音频 | [音频系统](audio-system.md) | — |
 | Agent 接口 / 策略 | [接口协议](agent-protocol.md)、[策略迭代手册](agent-iteration-playbook.md) | — |
 | 并行会话 / 派工 | [热点登记](PARALLEL-REGISTRY.md)、[待拍板台账](PENDING.md)、[派工手册](PARALLEL-DISPATCH-PLAYBOOK.md) | — |
@@ -68,4 +68,4 @@ Codex / ZCode 共用项目规则和事实，各自使用当前平台工具。项
 ## 带时间的记录与证据
 
 - 带日期记录只说明当时的工作树与验证边界，改完的现行事实以源码与测试为准。09-28 前后的状态快照在 [archive/status/](archive/status/)，其余单篇在 [archive/records-2026-09-28/](archive/records-2026-09-28/)；[归档总览](archive/README.md)保存已执行批次的计划、结果和审查，不把批次结果当作现行规则。移动或删除前复核文件归属与引用（[归档审阅与执行记录](DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)）。
-- [验收证据](evidence/README.md)保存报告和测试引用的数据；[预览页面](previews/README.md)含验收宿主与旧设计比较；[模块交付资料](modules/README.md)与各专题归档（[三线原始记录](archive/three-track-2026-09-27/)、实验构建精简、项目概览快照）从 [archive/README.md](archive/README.md) 进入。
+- [验收证据](evidence/README.md)保存报告和测试引用的数据；[预览页面](previews/README.md)含验收宿主与旧设计比较；[模块交付资料](modules/README.md)与各专题归档（三线原始记录、实验构建精简、项目概览快照）从 [归档总览](archive/README.md) 查阅；三线原始资料目录未包含在当前恢复快照中。

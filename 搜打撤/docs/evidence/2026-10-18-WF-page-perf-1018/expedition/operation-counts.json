@@ -1,0 +1,106 @@
+{
+  "scope": "Deterministic synchronous operation counts; no browser FPS/RSS claim",
+  "createdAt": "2026-10-18T06:48:18.716Z",
+  "longRoute": {
+    "fixture": "30 cleared branches meet the same unresolved battle, distant target behind it",
+    "before": {
+      "result": null,
+      "blockedStateQueries": 30
+    },
+    "after": {
+      "result": null,
+      "blockedStateQueries": 1
+    }
+  },
+  "routeProjection": {
+    "adjacentNodes": 6,
+    "before": {
+      "rewardRecordReads": 60
+    },
+    "after": {
+      "rewardRecordReads": 36
+    },
+    "outputsEqual": true
+  },
+  "recode": {
+    "catalogSize": 600,
+    "ownedSize": 80,
+    "eligibleCount": 46,
+    "before": {
+      "catalogEntryReads": 30600,
+      "randomObtainableChecks": 2499
+    },
+    "after": {
+      "catalogEntryReads": 600,
+      "randomObtainableChecks": 450
+    },
+    "outputsEqual": true
+  },
+  "nodeTemplateParsing": [
+    {
+      "kind": "fire",
+      "beforeTemplates": 1,
+      "afterTemplates": 0,
+      "htmlEqual": true
+    },
+    {
+      "kind": "pickup",
+      "beforeTemplates": 1,
+      "afterTemplates": 0,
+      "htmlEqual": true
+    },
+    {
+      "kind": "entry",
+      "beforeTemplates": 1,
+      "afterTemplates": 0,
+      "htmlEqual": true
+    },
+    {
+      "kind": "door",
+      "beforeTemplates": 1,
+      "afterTemplates": 0,
+      "htmlEqual": true
+    },
+    {
+      "kind": "altar",
+      "beforeTemplates": 1,
+      "afterTemplates": 0,
+      "htmlEqual": true
+    },
+    {
+      "kind": "extract",
+      "beforeTemplates": 1,
+      "afterTemplates": 0,
+      "htmlEqual": true
+    },
+    {
+      "kind": "event-multiple",
+      "beforeTemplates": 2,
+      "afterTemplates": 1,
+      "htmlEqual": true
+    },
+    {
+      "kind": "event-single",
+      "beforeTemplates": 3,
+      "afterTemplates": 2,
+      "htmlEqual": true
+    }
+  ],
+  "characterChoice": {
+    "sourceCallSites": [
+      {
+        "warmClassRoster": 1,
+        "visibleFullArt": 2,
+        "rosterAvatarArt": 1
+      },
+      {
+        "warmClassRoster": 0,
+        "visibleFullArt": 2,
+        "rosterAvatarArt": 1
+      }
+    ],
+    "speculativeBatchUrlsBefore": 5,
+    "speculativeBatchUrlsAfter": 0,
+    "boundary": "Five default full-art URLs previously submitted to Art.warm; this is not five guaranteed network transfers, decodes, or an RSS measurement."
+  }
+}

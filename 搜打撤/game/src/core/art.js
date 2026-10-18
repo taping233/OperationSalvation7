@@ -8,6 +8,7 @@ import ART_MANIFEST from '../generated/art-manifest.js';
 import THUMB_MANIFEST from '../generated/thumb-manifest.js';
 import { esc } from './shared.js';
 import { PERFORMANCE_BUDGETS } from './performance-budgets.js';
+import { getQualityPreset, onPerformanceSettingsChange } from './performance-settings.js';
 import { decodeImagesIn } from './image-decode.js';
 import { createForegroundImageYield } from './art-preload-plan.js';
 
@@ -56,6 +57,24 @@ import { createForegroundImageYield } from './art-preload-plan.js';
   // 之后 <img> 首次渲染零解码延迟。重复 warm 同一地址直接跳过。
   const warmedUrls = new Set();
   const prefetchedUrls = new Set();
+  const prefetchInFlight = new Map();
+  function prefetchAsset(url) {
+    if (prefetchedUrls.has(url)) return Promise.resolve();
+    if (prefetchInFlight.has(url)) return prefetchInFlight.get(url);
+    const pending = (async () => {
+      const response = await fetch(url, { cache: 'force-cache', priority: 'low' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      // Consume encoded bytes without retaining a full per-asset ArrayBuffer.
+      if (response.body?.getReader) {
+        const reader = response.body.getReader();
+        try { while (!(await reader.read()).done) { /* cache only */ } }
+        finally { reader.releaseLock(); }
+      } else await response.arrayBuffer();
+      prefetchedUrls.add(url);
+    })().finally(() => prefetchInFlight.delete(url));
+    prefetchInFlight.set(url, pending);
+    return pending;
+  }
   // 持有已预热 Image 的引用：不持有时浏览器可能把刚解码完的位图回收，
   // 首次渲染又要重解码。池子上限兜底，超出按 FIFO 淘汰最早一批。
   // 2026-09-13 卡牌库卡顿排查：原上限 800 大于全量清单（496 张），等于把整份美术的
@@ -67,7 +86,7 @@ import { createForegroundImageYield } from './art-preload-plan.js';
   // 解码位图字节预算：只按张数封顶挡不住大图——CSS 补热的 75 张 1080p 级场景图
   // 恰好落在预热尾声顶掉早期小图，128 张口径理论上可钉住数百 MB。按解码字节数
   // （naturalWidth×naturalHeight×4）双保险封顶，超预算从最旧开始淘汰。
-  const WARM_POOL_BYTES = PERFORMANCE_BUDGETS.retainedImageBytesMax;
+  const warmPoolByteLimit = () => PERFORMANCE_BUDGETS.retainedImageBytesMax * getQualityPreset().retainedImageScale;
   let warmPoolBytes = 0;
   function releaseWarmed(im) {
     const at = warmPool.indexOf(im);
@@ -77,36 +96,76 @@ import { createForegroundImageYield } from './art-preload-plan.js';
     warmPoolBytes -= im.__bytes || 0;
   }
   function releaseWarmedHead() { releaseWarmed(warmPool[0]); }
+  function trimWarmPool() {
+    const limit = warmPoolByteLimit();
+    // A single oversized image must not evict all useful small images to stay pinned.
+    for (const im of [...warmPool]) if ((im.__bytes || 0) > limit) releaseWarmed(im);
+    while (warmPool.length && (warmPoolBytes > limit || warmPool.length > WARM_POOL_CAP)) releaseWarmedHead();
+  }
+  const stopWarmQualitySync = onPerformanceSettingsChange(trimWarmPool);
+  if (import.meta.hot) import.meta.hot.dispose(stopWarmQualitySync);
   function retainWarmed(im) {
     warmPool.push(im);
-    if (warmPool.length > WARM_POOL_CAP) releaseWarmedHead();
-    // load 异步到账后才拿得到尺寸：到账时若已被淘汰（__released）则不再计账
+    trimWarmPool();
+    // Sizes arrive asynchronously. Evicted images never re-enter the accounting.
     im.addEventListener('load', () => {
       if (im.__released) return;
-      im.__bytes = (im.naturalWidth || 0) * (im.naturalHeight || 0) * 4;
-      warmPoolBytes += im.__bytes;
-      while (warmPool.length > 1 && (warmPoolBytes > WARM_POOL_BYTES || warmPool.length > WARM_POOL_CAP)) {
-        releaseWarmedHead();
-      }
+      const bytes = (im.naturalWidth || 0) * (im.naturalHeight || 0) * 4;
+      if (bytes > warmPoolByteLimit()) { releaseWarmed(im); return; }
+      im.__bytes = bytes;
+      warmPoolBytes += bytes;
+      trimWarmPool();
     }, { once: true });
+  }
+  // Speculative warm() calls share two load/decode slots. Visible DOM images and
+  // the existing explicit startup batches retain their own loading lifecycle.
+  const warmQueue = [];
+  const WARM_CONCURRENCY = 2;
+  let warmActive = 0;
+  function drainWarmQueue() {
+    while (warmActive < WARM_CONCURRENCY && warmQueue.length) {
+      const { url, retain } = warmQueue.shift();
+      warmActive++;
+      const im = new Image();
+      im.decoding = 'async';
+      let settled = false, decoding = false, loaded = false, errored = false;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        im.onload = null; im.onerror = null;
+        warmActive--;
+        drainWarmQueue();
+      };
+      const failed = () => {
+        if (settled || errored) return;
+        errored = true;
+        warmedUrls.delete(url);
+        releaseWarmed(im);
+        // An error during decode must not free a slot before that decode settles.
+        if (!decoding) finish();
+      };
+      im.onload = () => {
+        if (settled || loaded) return;
+        loaded = true;
+        if (im.__released) { finish(); return; }
+        decoding = true;
+        let decoded;
+        try { decoded = im.decode?.(); } catch { failed(); finish(); return; }
+        Promise.resolve(decoded).catch(failed).finally(finish);
+      };
+      im.onerror = failed;
+      if (retain) retainWarmed(im);
+      im.src = url;
+    }
   }
   function warm(urls, options = true) {
     const retain = typeof options === 'object' ? options.retain !== false : options !== false;
-    for (let u of urls) {
-      if (!u || warmedUrls.has(u)) continue;
-      warmedUrls.add(u);
-      const im = new Image();
-      im.decoding = 'async';
-      im.onload = () => { try { im.decode?.()?.catch?.(() => { /* 解码失败：图已显示，忽略 */ }); } catch { /* decode 不可用：预热仅求提前缓存 */ } };
-      // 加载失败立即出池（迭代评审 09-20 D-P3）：404 图曾永居预热池上限且无字节记账，
-      // 资产缺失场景下预热池容量被无声侵占（字节尚未记账，无需扣减）
-      im.onerror = () => {
-        warmedUrls.delete(u);
-        releaseWarmed(im);
-      };
-      if (retain) retainWarmed(im);
-      im.src = u;
+    for (const url of urls) {
+      if (!url || warmedUrls.has(url)) continue;
+      warmedUrls.add(url);
+      warmQueue.push({ url, retain });
     }
+    drainWarmQueue();
   }
   // 卡面缩略图（assets/thumbs/**，离线烘焙见 game/tools/bake-card-thumbs.cjs）：
   // 卡牌库网格的插画区被 CSS 钉死在 ≤215×165 CSS px，原图 896~1792 宽等于 4~17 倍过采样，
@@ -163,38 +222,8 @@ import { createForegroundImageYield } from './art-preload-plan.js';
     const m = /^assets\/portraits\/(classes|enemies)\/([^/]+)$/.exec(String(src || ''));
     return m ? `assets/portraits/cut/${m[1]}/${m[2]}` : null;
   };
-  { // 逐张空闲预解码，避免 18 张图片同时解码/上传造成启动长帧
-    const groups = { enemies: Array.from(MONSTER_IDS) };
-    const queue = Object.keys(groups).flatMap(group => groups[group].map(id => `assets/portraits/cut/${group}/${id}.webp`));
-    const schedule = (task) => {
-      if (globalThis.scheduler && typeof globalThis.scheduler.postTask === 'function') {
-        globalThis.scheduler.postTask(task, { priority: 'background' }).catch(() => setTimeout(task, 50));
-      } else if (typeof requestIdleCallback === 'function') requestIdleCallback(task, { timeout: 3000 });
-      else setTimeout(task, 50);
-    };
-    const next = () => {
-      const src = queue.shift();
-      if (!src) return;
-      if (typeof Image === 'undefined') return;   // 非浏览器环境（单测等）直接放弃预解码，避免定时器报错
-      const url = assetUrl(src);
-      if (warmedUrls.has(url)) { schedule(next); return; }
-      warmedUrls.add(url);
-      const im = new Image();
-      im.decoding = 'async';
-      // 敌人预解码也必须进入统一 LRU/字节预算；旧实现用独立 Map 永久钉住约 28.5MiB，
-      // 导致 retainedImageBytesMax 并不是实际图片常驻上限。
-      retainWarmed(im);
-      const failed = () => { warmedUrls.delete(url); releaseWarmed(im); };
-      im.onerror = failed;
-      const ready = typeof im.decode === 'function'
-        ? Promise.resolve().then(() => im.decode()).catch(failed)
-        : new Promise(resolve => { im.onload = resolve; im.onerror = () => { failed(); resolve(); }; });
-      im.src = url;
-      ready.finally(() => schedule(next));
-    };
-    schedule(next);
-  }
-
+  // Enemy cutouts load through the visible battle images in cutoutFigures().
+  // Importing Art on the title page does not decode the unseen enemy catalogue.
 
 // 走运行时拷贝路径（portraits 在 RUNTIME_ASSET_DIRS），避免 new URL 哈希版与拷贝版双打包
 const rosterUrl = assetUrl('assets/portraits/expedition-roster.webp');
@@ -279,7 +308,7 @@ function characterArt(value, full=false, useDefault=false) {
     // CSS background 有自己的图片缓存，JS 持引用帮不到它，只会白占内存。
     warm(urls, opts) { return warm(urls, !opts || opts.retain !== false); },
     // 性能探针只读口径：确认所有预解码图片都受同一张数/字节预算约束。
-    warmStats() { return Object.freeze({ count: warmPool.length, bytes: warmPoolBytes, maxCount: WARM_POOL_CAP, maxBytes: WARM_POOL_BYTES }); },
+    warmStats() { return Object.freeze({ count: warmPool.length, bytes: warmPoolBytes, maxCount: WARM_POOL_CAP, maxBytes: warmPoolByteLimit() }); },
     // 选人页五张 full 立绘预热（2026-09-19 走查 B8）：黑像/星月是 4K 横版图，
     // 首开现场解码慢，头像条/大立绘会先露底色（白/黑）几秒，观感像坏图。
     // openClassChoice 打开选人页前调用，与卡面预热同一解码池。
@@ -332,12 +361,12 @@ function characterArt(value, full=false, useDefault=false) {
     // 全量卡面美术预热（2026-09-07 老板：能首次离线进内存的就不在用时计算）。
     // 复用渲染端同款生成器抽取最终 URL（含 ?v= 构建号），与 <img> 实际 src 完全一致，
     // 保证命中浏览器 HTTP/解码缓存。
-    collectCardAssets(cards) {
+    collectCardAssets(cards, { includePortraits = true } = {}) {
       const urls = [];
       const push = (html) => { const m = /src="([^"]+)"/.exec(html || ''); if (m) urls.push(m[1]); };
       // 立绘优先（2026-09-13 老板：立绘加载卡顿）——战斗首屏的敌人/角色立绘排在卡面前面
-      for (const id of MONSTER_IDS) { try { push(this.monsterArt(id)); } catch { /* 无此立绘：跳过该资产 */ } }
-      for (const name of Object.values(CLASS_NAMES)) {
+      if (includePortraits) for (const id of MONSTER_IDS) { try { push(this.monsterArt(id)); } catch { /* 无此立绘：跳过该资产 */ } }
+      if (includePortraits) for (const name of Object.values(CLASS_NAMES)) {
         try { push(this.classFullArt(name)); } catch { /* 无此立绘：跳过该资产 */ }
         try { push(this.classAvatarArt(name)); } catch { /* 无此立绘：跳过该资产 */ }
         try { push(this.battleArt(name)); } catch { /* 无此立绘：跳过该资产 */ }
@@ -399,6 +428,7 @@ function characterArt(value, full=false, useDefault=false) {
             let settled = false;
             const finish = () => { if (!settled) { settled = true; one(); } };
             im.onload = () => {
+              if (im.__released) { finish(); return; }
               let decoded;
               try { decoded = im.decode?.(); } catch { /* decode 不可用：Promise.resolve(undefined) 兜底 */ }
               Promise.resolve(decoded).catch(() => {}).then(finish);
@@ -411,8 +441,8 @@ function characterArt(value, full=false, useDefault=false) {
         next();
       });
     },
-    // 全量美术只拉入浏览器 HTTP 缓存，不创建 Image、不解码、不占解码位图池。
-    // 启动时仍覆盖完整清单；可见场景与卡库按需解码，避免 888 项解码挤占渲染。
+    // 指定美术只拉入浏览器 HTTP 缓存，不创建 Image、不解码、不占解码位图池。
+    // 启动仅预取常见场景与通用卡框；其余图片由可见场景与卡库入口按需加载。
     prefetchBatched(urls, onProgress, batch = 8) {
       const list = [];
       const seen = new Set();
@@ -444,16 +474,8 @@ function characterArt(value, full=false, useDefault=false) {
           i += slice.length;
           Promise.all(slice.map(async (url) => {
             try {
-              const response = await fetch(url, { cache: 'force-cache', priority: 'low' });
-              if (!response.ok) throw new Error(`HTTP ${response.status}`);
-              // Drain encoded bytes without assembling a second full ArrayBuffer
-              // for every asset; consuming to EOF still populates the HTTP cache.
-              if (response.body?.getReader) {
-                const reader = response.body.getReader();
-                try { while (!(await reader.read()).done) { /* cache only */ } }
-                finally { reader.releaseLock(); }
-              } else await response.arrayBuffer();
-              prefetchedUrls.add(url);
+              // Recheck at execution time: another queued batch may have finished it.
+              await prefetchAsset(url);
             } catch (error) {
               console.warn('[warmup] 美术资源预取失败', url, error);
             } finally {

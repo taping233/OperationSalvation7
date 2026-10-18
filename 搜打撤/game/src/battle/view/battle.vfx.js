@@ -97,7 +97,7 @@ function stageKillBeat() {
   }
   // 诅咒施加彩闪（P1）：按诅咒 key 上色的边缘光一闪（替代已删除的粒子喷发）
   const CURSE_TINT = {
-    burn: 'rgba(255,140,60,', bleed: 'rgba(220,60,70,', poison: 'rgba(140,200,90,',
+    bleed: 'rgba(220,60,70,', poison: 'rgba(140,200,90,',
     freeze: 'rgba(140,215,255,', silence: 'rgba(170,140,200,', abreak: 'rgba(200,170,90,',
     healban: 'rgba(180,90,160,',
   };
@@ -113,21 +113,19 @@ function stageKillBeat() {
     ], { duration: demoMs(700), easing: 'ease-out' });
   }
   // 伤害类型染色（P1）：按伤害类型给命中贴图着色——攻击=原生琥珀不染、固定=炽橙、
-  // 法术=青蓝、真实=纯白；毒/灼烧 DoT 走 tintKey 优先（贴图黑底走 screen 混合，filter 只染纹样）。
+  // 法术=青蓝、真实=纯白；中毒 DoT 走 tintKey 优先（贴图黑底走 screen 混合，filter 只染纹样）。
   // freeze/thunder 键为冰/雷系预留（迭代评审 09-20 美术岗）：卡片透传 tintKey 即生效
   const IMPACT_TINT = {
     fixed: 'sepia(1) saturate(2.8) hue-rotate(-15deg) brightness(1.25)',
     spell: 'sepia(1) saturate(2.4) hue-rotate(160deg) brightness(1.15)',
     true: 'saturate(0) brightness(1.9)',
     poison: 'sepia(1) saturate(2.2) hue-rotate(55deg) brightness(1.1)',
-    burn: 'sepia(1) saturate(3) hue-rotate(-10deg) brightness(1.3)',
     freeze: 'sepia(1) saturate(2.6) hue-rotate(150deg) brightness(1.5)',
     thunder: 'sepia(1) saturate(1.6) hue-rotate(215deg) brightness(1.7)',
   };
   // 元素三系火花参数包（迭代评审 09-20 美术岗 Top3）：颜色/数量/速度差分——
-  // tintKey 命中即换包（毒=绿缓、灼烧=橙密快、冰=蓝疏慢、雷=紫白密更快），未命中走默认琥珀
+  // tintKey 命中即换包（毒=绿缓、冰=蓝疏慢、雷=紫白密更快），未命中走默认琥珀
   const SPARK_PRESETS = {
-    burn: { color: '#ffb34d', count: 16, speed: 1.15 },
     poison: { color: '#8cc85a', count: 10, speed: 0.85 },
     freeze: { color: '#bfe8ff', count: 12, speed: 0.7 },
     thunder: { color: '#e8e0ff', count: 18, speed: 1.4 },
@@ -178,11 +176,11 @@ function stageKillBeat() {
     const x1 = a.left - ovR.left + a.width * 0.35, y1 = a.top - ovR.top + a.height * 0.42;
     const x2 = b.left - ovR.left + b.width * 0.65, y2 = b.top - ovR.top + b.height * 0.42;
     const w = Math.max(2, Math.ceil(ovR.width)), h = Math.max(2, Math.ceil(ovR.height));
-    // 坐标是布局口径：物理密度补上 zoom（大屏 zoom>1 时不糊）
-    const ratio = Math.max(1, (window.devicePixelRatio || 1) * uiScale());
+    // uiRect 是逻辑坐标：位图密度为显示 zoom × DPR，小窗允许低于逻辑 1 倍。
+    const ratio = (window.devicePixelRatio || 1) * uiScale();
     const cv = document.createElement('canvas');
     cv.className = 'sts-attack-line';
-    cv.width = w * ratio; cv.height = h * ratio;
+    cv.width = Math.max(1, Math.round(w * ratio)); cv.height = Math.max(1, Math.round(h * ratio));
     cv.style.width = w + 'px'; cv.style.height = h + 'px';
     ov.appendChild(cv);
     const ctx = cv.getContext('2d');
@@ -302,7 +300,7 @@ function stageKillBeat() {
       const killBoom = (f.cls || '').includes('sticker-boom');
       const stopMs = (heavy || finisher) && !reduced ? (finisher ? 140 : 100) : killBoom && !reduced ? 120 : 0;
       const cue = f.cue;
-      const elementSound = { burn: 'attackFire', fire: 'attackFire', poison: 'attackPoison',
+      const elementSound = { fire: 'attackFire', poison: 'attackPoison',
         ice: 'attackIce', lightning: 'attackLightning', arrow: 'attackArrow', blunt: 'attackBlunt',
         pierce: 'attackPierce', psychic: 'attackPsychic' }[f.tintKey || f.type];
       const cueSound = isSelf ? 'hurt' : elementSound || CUE_HIT_SOUND[cue?.hitSound]

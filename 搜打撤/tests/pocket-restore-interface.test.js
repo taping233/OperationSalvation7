@@ -58,6 +58,18 @@ afterEach(() => {
 });
 
 describe('消耗卡复原公共选择界面', () => {
+  it('修鞋铺入口只提供场景句，次数范围与操作由公共界面说明一次', () => {
+    const flow = readFileSync('game/src/run/game.run.flow.js', 'utf8');
+    const sub = flow.match(/title: '修鞋铺 · 修整行装',\s*sub: '([^']+)'/)[1];
+    expect(sub).toBe('老师傅替你修整行装。');
+    openPocketRestore(1, vi.fn(), { title:'修鞋铺 · 修整行装', sub });
+    expect(remaining()).toContain('还可复原 1 张（最多 1 张）');
+    expect(remaining()).toContain('点击卡牌立即复原 1 张');
+    expect(document.querySelector('.battle-decision-head').textContent).toContain('消耗区');
+    expect(document.querySelector('.battle-decision-summary').textContent.match(/点击卡/g)).toHaveLength(1);
+    expect(document.querySelector('.battle-decision-summary').textContent).toContain('道具/装备共 2 张不可复原');
+  });
+
   it.each([
     [3, { title:'祭坛回赠 · 复原', tone:'altar', icon:'[[icon:crystal]]' }],
     [2, { title:'祭坛回赠 · 复原', tone:'altar' }],
@@ -180,7 +192,7 @@ describe('消耗卡复原公共选择界面', () => {
 
   it('公共CSS只限定复原域，五列240卡/共用滚动区/固定动作栏和可读字号有明确契约', () => {
     const source = readFileSync('game/css/expedition-rewards.css', 'utf8');
-    const added = source.slice(source.indexOf('/* Shared consumed-card restoration'));
+    const added = source.slice(source.indexOf('/* Shared consumed-card restoration'), source.indexOf('/* In-reward organization'));
     const css = postcss.parse(added), values = selector => {
       const result = {}; css.walkRules(selector, rule => rule.walkDecls(d => { result[d.prop] = d.value; })); return result;
     };
@@ -194,5 +206,16 @@ describe('消耗卡复原公共选择界面', () => {
     expect(values(`${scope} .battle-decision-summary .ov-note`)['font-size']).toBe('var(--card-copy-size,24px)');
     expect(parseFloat(values(`${scope} .battle-decision-actions .ov-btn`)['min-height']) * 1188 / 1920).toBeGreaterThanOrEqual(36);
     expect(values('body #overlay .card.discover:has(.pocket-restore)').width).toBe('min(1480px,94%)');
+  });
+});
+
+
+describe('复原禁用数量的张数口径', () => {
+  it.each([true, false])('有无可选卡=%s时，道具装备按张数求和而非堆数', hasChoice => {
+    st.game.usedPocket = [...(hasChoice ? [stack('a', 4)] : []), stack('tool', 3, '道具'), stack('equip', 2, '装备')];
+    openPocketRestore(2, vi.fn());
+    expect(document.querySelector('.battle-decision-summary').textContent).toContain('道具/装备共 5 张不可复原');
+    if (!hasChoice) expect(document.querySelector('.ov-empty').textContent).toContain('另有 5 张道具/装备');
+    expect(document.querySelectorAll('[data-act="restoreOne"]')).toHaveLength(hasChoice ? 1 : 0);
   });
 });

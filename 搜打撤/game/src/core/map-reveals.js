@@ -36,10 +36,11 @@ function drive() {
   driving = true;
   const tick = (now) => {
     if (now < stopAt) {
-      renderScheduler.invalidate();
+      renderScheduler.invalidateAnimation();
       requestAnimationFrame(tick);
     } else {
       driving = false;
+      renderScheduler.invalidate();
     }
   };
   requestAnimationFrame(tick);

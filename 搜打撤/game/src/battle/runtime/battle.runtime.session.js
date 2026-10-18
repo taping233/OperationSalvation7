@@ -74,6 +74,7 @@ export function restoreBattleCombatants(data, intentFor) {
     const foe = {
       id: f.id || null, name: f.name, hp: f.hp, maxHp: f.maxHp, atk: f.atk || 2,
       affix: f.affix || null, affixName: f.affixName || null, behavior: f.behavior || null, dead: !!f.dead,
+      protected: f.protected || undefined, protects: f.protects || undefined,
       status: { ...(f.status || {}) },
       defense: { shield: 0, armor: 0, guard: false, ...(f.defense || {}) },
       intent: f.intent ? clone(f.intent) : null,

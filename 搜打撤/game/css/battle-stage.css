@@ -125,21 +125,23 @@
 #overlay .battle-stage.sts .bt-card>.hs-card{width:100%;height:auto;min-height:0;margin:0;transform:none}
 #overlay .battle-stage.sts .bt-slot:has(.aim-lift)::after{pointer-events:none}
 #overlay .battle-stage.sts .sts-nameplate :is(.sts-stats,.sts-chips):empty{display:none}
-#overlay .battle-stage.sts .bt-slot:is(:hover,:has(:focus-visible)){z-index:90}
-#overlay .battle-stage.sts .bt-slot:is(:hover,:has(:focus-visible)) .bt-card:not(.aim-lift){transform:translateY(0);filter:drop-shadow(0 12px 20px #09162566)}
+#overlay .battle-stage.sts :where(.sts-hand:not([data-hand-hit="fixed"])) .bt-slot:hover,#overlay .battle-stage.sts .bt-slot:is(.hand-reading,:has(:focus-visible)){z-index:90}
+#overlay .battle-stage.sts :where(.sts-hand:not([data-hand-hit="fixed"])) .bt-slot:hover .bt-card:not(.aim-lift),#overlay .battle-stage.sts .bt-slot:is(.hand-reading,:has(:focus-visible)) .bt-card:not(.aim-lift){transform:translateY(0);filter:drop-shadow(0 12px 20px #09162566)}
 #overlay .battle-stage.sts .bt-slot:has(.aim-lift){z-index:100}
 #overlay .battle-stage.sts .bt-card.aim-lift{transition:none}
 #overlay .battle-stage.sts .sts-hand .bt-card.aim-lift,#overlay .battle-stage.sts .sts-hand .bt-card.aim-lift *{pointer-events:none}
 #overlay .battle-stage.sts .bt-card.click-selected,#overlay .battle-stage.sts .bt-card.sel{outline:2px solid #c8e8f0;outline-offset:3px}
 #overlay .battle-stage.sts .bt-card[data-hand-state="blocked"]{opacity:.72}
-#overlay .battle-stage.sts .bt-slot:hover .bt-card[data-hand-state="blocked"]{opacity:.96}
+#overlay .battle-stage.sts :where(.sts-hand:not([data-hand-hit="fixed"])) .bt-slot:hover .bt-card[data-hand-state="blocked"],#overlay .battle-stage.sts .bt-slot:is(.hand-reading,:has(:focus-visible)) .bt-card[data-hand-state="blocked"]{opacity:.96}
 #overlay .battle-stage.sts .bt-card::before,#overlay .battle-stage.sts .bt-card.click-selected::after{content:none}
 #overlay .battle-stage.sts .bt-count{position:absolute;left:48px;right:auto;top:12px;z-index:12;min-width:24px;padding:2px 5px;background:#162b39eb;border:1px solid #b8cdd54d;border-radius:3px;color:#f3dfb4;font-size:14px}
 #overlay .battle-stage.sts .bt-infchip{position:absolute;top:8px;right:8px;z-index:15;min-height:40px;padding:5px 8px;border:1px solid #b7cbd36b;border-radius:3px;background:#19303ef5;color:#e2edf1;font-size:20px;line-height:1.3;cursor:pointer}
-#overlay .battle-stage.sts .bt-infchip{top:56px}
+#overlay .battle-stage.sts .bt-infchip{top:56px;bottom:auto}
 #overlay .battle-stage.sts .bt-card:has(.bt-infchip) .bt-cursechips{top:104px}
 #overlay .battle-stage.sts .bt-cursechips{position:absolute;top:78px;left:12px;right:12px;z-index:12;display:flex;flex-wrap:wrap;gap:3px;pointer-events:auto}
 #overlay .battle-stage.sts .bt-cursechip-i{padding:2px 5px;color:#ddc7ed;background:#302d43e6;font-size:11px}
+#overlay .battle-stage.sts .sts-hp .sts-hp-armor{position:absolute;left:0;top:0;bottom:0;z-index:4;display:grid;place-items:center;min-width:44px;box-sizing:border-box;padding:0 6px;border:0;border-right:1px solid #b7c6d4;border-radius:0;background:#354752;color:#fff;font:700 18px/1 var(--font-ui);text-align:center;white-space:nowrap}
+#overlay .battle-stage.sts .sts-hp .sts-hp-armor[hidden]{display:none}
 #overlay .battle-stage.sts .sts-hand>.ov-empty{position:absolute;top:300px;left:0;right:0;color:#c5d9e2;text-align:center;font-size:22px}
 #overlay .battle-stage.sts[data-phase="enemy"] .sts-hand{opacity:.3;translate:0 90px;pointer-events:none}
 #overlay .battle-stage.sts[data-phase="enemy"] .sts-hand *{pointer-events:none}
@@ -188,3 +190,31 @@
 /* Blur is limited to fixed controls; dragged cards and the painted world stay sharp. */
 #overlay .battle-stage.sts :is(.sts-encounter,.sts-options>summary,.sts-resource-dock,.sts-tactics,.bt-pile,.bt-hand-page,.bt-slam-btn,.sts-unit-vitals){backdrop-filter:blur(14px) saturate(115%);box-shadow:var(--battle-glass-shadow)}
 @supports not (backdrop-filter:blur(1px)){#overlay .battle-stage.sts{--battle-panel:#263640a8}}
+
+/* Keep persistent card results in the central HUD lane, clear of items.
+   Cap the whole scroll box above the active infusion prompt. */
+#overlay .battle-stage.sts>.bt-card-results{top:24px;right:auto;left:570px;width:420px;max-height:76px;box-sizing:border-box;z-index:11}
+/* The spanning transparent HUD must not intercept the result log beneath it.
+   Its actual controls (including the options descendants) remain interactive. */
+#overlay .battle-stage.sts .sts-topbar{pointer-events:none}
+#overlay .battle-stage.sts .sts-topbar > :is(.sts-encounter,.sts-options){pointer-events:auto}
+
+/* Settled-event feedback stays at its hand slot/page control; it owns no input. */
+#overlay .battle-stage.sts .bt-hand-acquired{position:absolute;top:40px;left:50%;z-index:16;transform:translateX(-50%);padding:6px 12px;border:1px solid #d9f3ffbf;border-radius:5px;background:#102331ed;color:#effaff;font:700 20px/1.3 var(--font-ui,sans-serif);white-space:nowrap;pointer-events:none;animation:btAcquiredEdge .8s ease-out both}
+#overlay .battle-stage.sts .bt-hand-acquired::before{content:'';position:absolute;left:-28px;right:-28px;top:-7px;height:2px;background:linear-gradient(90deg,transparent,#ddf7ff,transparent);box-shadow:0 0 13px #91d5f5;pointer-events:none}
+#overlay .battle-stage.sts .bt-hand-page-new{display:inline-block;margin-left:10px;padding:2px 7px;border:1px solid #ccebf28c;border-radius:4px;background:#122c3acc;color:#effaff;font-size:18px;line-height:1.3;pointer-events:none}
+#overlay .battle-stage.sts .bt-recast-feedback{position:absolute;z-index:45;display:grid;gap:3px;box-sizing:border-box;width:220px;padding:13px 16px;transform:translateX(-50%);border:1px solid #d0edfa9c;border-radius:5px;background:linear-gradient(135deg,#223f54f5,#09121cf5 72%);box-shadow:inset 0 1px 0 #eefaff52,0 6px 18px #07121c4d;color:#e9f8ff;text-align:center;pointer-events:none}
+#overlay .battle-stage.sts .bt-recast-feedback::before{content:'';position:absolute;inset:5px -7px -5px 7px;z-index:-1;border:1px solid #9bd6ef57;border-radius:5px;background:#08121e47;pointer-events:none;animation:btRecastEcho .48s ease-out both}
+#overlay .battle-stage.sts .bt-recast-feedback b{font-size:22px;line-height:1.25;color:#f1fbff}
+#overlay .battle-stage.sts .bt-recast-feedback span{font-size:20px;line-height:1.3;overflow-wrap:anywhere}
+#overlay .battle-stage.sts .bt-recast-feedback small{font-size:16px;line-height:1.3;color:#bcd9e9}
+#overlay .bt-turnbanner.bt-extra-turn b{font-size:28px;letter-spacing:.18em;text-indent:.18em;padding:10px 38px;border-color:#cceeff70;color:#eaf8ff;background:linear-gradient(90deg,transparent,#112a3be6 22% 78%,transparent);animation-duration:.85s}
+#overlay .battle-stage.sts .bt-hand-acquired[data-reduced-motion="true"],#overlay .bt-turnbanner.bt-extra-turn[data-reduced-motion="true"] b{animation:none}
+#overlay .battle-stage.sts .bt-recast-feedback[data-reduced-motion="true"]::before{content:none}
+@keyframes btAcquiredEdge{0%{opacity:0;box-shadow:0 0 20px #b5e9ff9c}20%,80%{opacity:1}100%{opacity:1;box-shadow:none}}
+@keyframes btRecastEcho{from{opacity:.8;transform:translate(0,0)}to{opacity:0;transform:translate(12px,-8px)}}
+@media(prefers-reduced-motion:reduce){#overlay .battle-stage.sts .bt-hand-acquired,#overlay .bt-turnbanner.bt-extra-turn b{animation:none}#overlay .battle-stage.sts .bt-recast-feedback::before{content:none}}
+
+/* Lucide layers-plus: decoration only; the adjacent count remains accessible. */
+#overlay .battle-stage.sts :is(.bt-hand-acquired,.bt-hand-page-new){display:inline-flex;align-items:center;gap:5px}
+#overlay .battle-stage.sts .bt-acquisition-icon{width:16px;height:16px;flex:none;color:inherit;pointer-events:none}

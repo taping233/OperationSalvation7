@@ -3,10 +3,53 @@
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { rect as uiRect } from '../../ui/ui-scale.js';
-import { esc } from '../../core/shared.js';
 import { play as playUnitFrames } from './battle.frames.js';
 import { schedulePresentationMs } from '../runtime/battle.clock.js';
 import { showBattleCardResults } from './battle.card-results.js';
+import { showBattleEffectFeedback } from './battle.effect-feedback.js';
+import { showTurnFeedback } from './battle.turn-feedback.js';
+import { quietFeedback } from '../../ui/feedback-theme.js';
+// Each live pile owns its presentation-clock cancellation functions.
+const pileEffects = new Map();
+function clearPileEffects(pile) {
+  const state = pileEffects.get(pile);
+  if (!state) return;
+  for (const [cls, cancel] of state.cancels) { cancel(); pile.classList.remove(cls); }
+  state.observer.disconnect();
+  pileEffects.delete(pile);
+}
+function clearAllPileEffects() { for (const pile of pileEffects.keys()) clearPileEffects(pile); }
+function onPileOverlayMode(event) { if (event.detail !== 'battle') clearAllPileEffects(); }
+document.addEventListener('sdt-overlay-close', clearAllPileEffects);
+document.addEventListener('sdt-overlay-mode', onPileOverlayMode);
+if (import.meta.hot) import.meta.hot.dispose(() => {
+  clearAllPileEffects();
+  document.removeEventListener('sdt-overlay-close', clearAllPileEffects);
+  document.removeEventListener('sdt-overlay-mode', onPileOverlayMode);
+});
+function replayPileClass(pile, cls, ms) {
+  const host = pile.closest('#overlay') || pile.parentElement;
+  if (!pile.isConnected || !host || host.hidden) return;
+  let state = pileEffects.get(pile);
+  if (!state) {
+    state = { cancels: new Map(), observer: new MutationObserver(() => {
+      if (!pile.isConnected || !host.contains(pile) || host.hidden) clearPileEffects(pile);
+    }) };
+    state.observer.observe(host, { childList: true, subtree: true, attributes: true, attributeFilter: ['hidden'] });
+    pileEffects.set(pile, state);
+  }
+  state.cancels.get(cls)?.();
+  pile.classList.remove(cls);
+  void pile.offsetWidth;
+  pile.classList.add(cls);
+  const cancel = schedulePresentationMs(() => {
+    if (pileEffects.get(pile) !== state || state.cancels.get(cls) !== cancel) return;
+    pile.classList.remove(cls);
+    state.cancels.delete(cls);
+    if (!state.cancels.size) clearPileEffects(pile);
+  }, ms);
+  state.cancels.set(cls, cancel);
+}
   // ---------- 牌局动画（2026-09-09）：离场克隆飞行 / 新牌飞入 / 幸存者归位 / 手牌区显隐 ----------
   // 渲染是整块重建，跨渲染的位移全部走 WAAPI：离场牌在 overlay 常驻层放克隆体飞行，
   // 入场/归位用 composite:'add' 加法合成——不破坏槽位自身的扇形 transform。
@@ -64,17 +107,6 @@ import { showBattleCardResults } from './battle.card-results.js';
     }
     return { x: rect.left + rect.width / 2, y: rect.top - 80, scale: 0.5, dur: 460, fade: 0, burn: true };
   }
-  // 回合过渡横幅（批次F，STS2 Enemy Turn 式）：细带横穿战场中带，文字滑入-停留-滑出
-  function showTurnBanner(text, side) {
-    const ov = UI.el.overlay;
-    if (!ov) return;
-    SDT.Sound.sfx('phase', { side });   // 回合权交接提示音，与横幅同帧触发
-    const el = document.createElement('div');
-    el.className = `bt-turnbanner ${side === 'foe' ? 'foe' : 'self'}`;
-    el.innerHTML = `<b>${esc(text)}</b>`;
-    ov.appendChild(el);
-    schedulePresentationMs(() => el.remove(), 1450);
-  }
   // WAAPI 防冻保护：遮挡/后台 webview 里文档时间线可能被冻结（currentTime 恒 0），
   // 动画会永远停在第一帧（例如把手牌钉在敌方阶段的 0.08 透明度）——起跑失败就取消，
   // 让声明式 CSS 的两端状态兜底。健康环境下 currentTime 正常推进，永不触发。
@@ -105,22 +137,24 @@ import { showBattleCardResults } from './battle.card-results.js';
     const handEl = body.querySelector('.sts-hand');
     const stage = body.querySelector('.battle-stage');
     showBattleCardResults(stage, events);
+    showBattleEffectFeedback(stage, events, prev);
+    showTurnFeedback(stage, events);
     // —— 手牌区随回合显隐：玩家→敌人 下沉退场；敌人→玩家 升回 ——
-    //    批次F：过渡同时放回合横幅（STS2 Enemy Turn 式）
-    if (handEl && stage && prev && prev.phase != null && handEl.animate) {
+    // 回合标题由真实事件单独驱动；手牌位移仍沿阶段差分。
+    const quiet = quietFeedback();
+    if (quiet) cancelHandPhaseAnims();
+    if (!quiet && handEl && stage && prev && prev.phase != null && handEl.animate) {
       const ph = stage.dataset.phase;
       if (ph === 'enemy' && prev.phase !== 'enemy') {
         cancelHandPhaseAnims();
         handPhaseAnims.push(animateSafe(handEl,
           [{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(72%)', opacity: 0.08 }],
           { duration: 300, easing: 'ease-in', fill: 'forwards' }));
-        showTurnBanner('敌方回合', 'foe');
       } else if (ph && ph !== 'enemy' && prev.phase === 'enemy') {
         cancelHandPhaseAnims();
         handPhaseAnims.push(animateSafe(handEl,
           [{ transform: 'translateY(72%)', opacity: 0.08 }, { transform: 'translateY(0)', opacity: 1 }],
           { duration: 380, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' }));
-        showTurnBanner('你的回合', 'self');
       }
     }
     // —— 能量变化脉冲（花费/回复都闪一下）——
@@ -130,7 +164,7 @@ import { showBattleCardResults } from './battle.card-results.js';
       const orb = stage.querySelector('.sts-energy');
       if (!isNaN(now) && now !== prev.energy && orb) {
         SDT.Sound.sfx(now > prev.energy ? 'energyUp' : 'energyDown');
-        if (orb.animate) {
+        if (!quiet && orb.animate && !events.some(event => ['player-turn-start', 'extra-turn-start'].includes(event.kind))) {
           orb.animate(
             [{ filter: 'brightness(1)' }, { filter: 'brightness(1.9) saturate(1.3)' }, { filter: 'brightness(1)' }],
             { duration: 380, easing: 'ease-out' });
@@ -142,12 +176,10 @@ import { showBattleCardResults } from './battle.card-results.js';
     const ovR = uiRect(ov);   // 布局口径：飞卡定位/目标换算
     const played = new Set(), drawn = new Set();
     const shuffles = [];   // 洗入牌动画事件（addDeckCard：「将 X 洗入牌库」）
-    const surges = [];     // 法力奔涌逐发演出事件（castRandomSpells 慢动作）
     events.forEach(ev => {
       if (ev.kind === 'draw') drawn.add(ev.uid);
       else if (ev.kind === 'shuffle') shuffles.push(ev);
-      else if (ev.kind === 'surge') surges.push(ev);
-      else played.add(ev.uid);
+      else if (['play', 'dump', 'burn'].includes(ev.kind)) played.add(ev.uid);
     });
     drawn.forEach(u => played.delete(u));   // 打出又回手（不朽斩）：同帧两事件抵消不演
     if (events.some(ev => ev.kind === 'burn')) SDT.Sound.sfx('burn');   // 同帧多张消耗卡合并为一次燃烧提示
@@ -156,69 +188,14 @@ import { showBattleCardResults } from './battle.card-results.js';
     // 并清旧定时器（否则旧 timer 到点摘类截断新一轮）
     const pileEl = body.querySelector('.sts-hud-l .bt-pile');
     if (pileEl) {
-      const pileAnimTimers = { 'pile-pulse': 0, 'pile-shuffle': 0 };
-      const replayPileClass = (cls, ms) => {
-        if (pileAnimTimers[cls]) clearTimeout(pileAnimTimers[cls]);
-        pileEl.classList.remove(cls);
-        void pileEl.offsetWidth;
-        pileEl.classList.add(cls);
-        pileAnimTimers[cls] = schedulePresentationMs(() => pileEl.classList.remove(cls), ms);
-      };
-      if (drawn.size) replayPileClass('pile-pulse', 1600);
-      if (shuffles.length) {
-        replayPileClass('pile-shuffle', 1600 + shuffles.length * 250);
-        // 洗入牌动画：卡背从手牌区中央飞向牌库图标，旋入消失
-        const pileR = uiRect(pileEl);
-        shuffles.forEach((ev, i) => {
-          const fly = document.createElement('div');
-          fly.className = 'sts-cardfly pile-fly';
-          const startX = ovR.width / 2 - 55, startY = ovR.height * 0.72;
-          fly.style.cssText = `left:${startX}px;top:${startY}px;width:110px;height:150px`;
-          ov.appendChild(fly);
-          const dx = (pileR.left + pileR.width / 2) - (startX + 55);
-          const dy = (pileR.top + pileR.height / 2) - (startY + 75);
-          const anim = fly.animate([
-            { transform: 'translate(0,0) rotate(-14deg) scale(1)', opacity: 0.25 },
-            { transform: `translate(${dx * 0.55}px,${dy * 0.55 - 70}px) rotate(160deg) scale(0.82)`, opacity: 1, offset: 0.55 },
-            { transform: `translate(${dx}px,${dy}px) rotate(346deg) scale(0.35)`, opacity: 0.05 },
-          ], { duration: 1200, delay: i * 250, easing: 'cubic-bezier(.3,.7,.4,1)', fill: 'forwards' });
-          anim.onfinish = () => fly.remove();
-          schedulePresentationMs(() => fly.remove(), 1600 + i * 250);
-          flightMs = Math.max(flightMs, 1200 + i * 250);
-        });
-      }
+      if (drawn.size) replayPileClass(pileEl, 'pile-pulse', 1600);
+      if (shuffles.length) replayPileClass(pileEl, 'pile-shuffle', 900);
     }
-    // 卡名与目标保留在结果栏；卡面在手牌区上方停留后飞向目标。
-    // 同一渲染批次才错峰，分帧到达的后续发数不再重复累加等待。
-    if (surges.length) {
-      const STEP = 850, FLY = 640;
-      surges.forEach((ev, index) => {
-        const delay = 180 + index * STEP;
-        const clone = document.createElement('div');
-        clone.className = 'sts-cardfly surge-fly';
-        const sx = ovR.width / 2 - 66, sy = ovR.height * 0.6;
-        clone.style.cssText = `left:${sx}px;top:${sy}px;width:132px;height:180px`;
-        clone.innerHTML = SDT.Cards.cardHTML ? SDT.Cards.cardHTML(ev.card || { name: ev.name }, 'sm') : esc(ev.name || '');
-        ov.appendChild(clone);
-        const foeEl = (ev.target != null && ev.target >= 0) ? body.querySelector(`.sts-foe[data-eidx="${ev.target}"]`) : null;
-        const fr = foeEl ? uiRect(foeEl) : null;
-        const dx = fr ? (fr.left + fr.width / 2) - (sx + 66) : 0;
-        const dy = fr ? (fr.top + fr.height / 2) - (sy + 90) : -ovR.height * 0.32;
-        const anim = clone.animate([
-          { transform: 'translate(0,14px) scale(.7)', opacity: 0 },
-          { transform: 'translate(0,0) scale(1)', opacity: 1, offset: 0.16 },
-          { transform: 'translate(0,0) scale(1)', opacity: 1, offset: 0.62 },
-          { transform: `translate(${dx}px,${dy}px) scale(.32)`, opacity: 0 },
-        ], { duration: FLY, delay, easing: 'cubic-bezier(.3,.7,.4,1)', fill: 'both' });
-        anim.onfinish = () => clone.remove();
-        schedulePresentationMs(() => clone.remove(), delay + FLY + 300);
-        flightMs = Math.max(flightMs, delay + FLY);
-      });
-    }
+    // Acquisition and random-cast faces use the independent feedback queue.
     // —— 出牌队列演出（批次F，STS2 NCardPlayQueue）：同一渲染帧打出多张时，克隆体先飞到
     //    手牌区上方的队列位横排站定（按结算次序错开入场），停顿一拍再依次飞向去处——
     //    单张仍直飞（保留原上弓弧线手感）。原卡节点由手牌常驻层差分移除，飞行由克隆体接管 ——
-    const playedEvs = events.filter(ev => played.has(ev.uid));
+    const playedEvs = events.filter(ev => ['play', 'dump', 'burn'].includes(ev.kind) && played.has(ev.uid));
     const queueIdx = new Map();
     playedEvs.forEach(ev => { if (ev.kind === 'play') queueIdx.set(ev.uid, queueIdx.size); });
     const queueN = queueIdx.size;

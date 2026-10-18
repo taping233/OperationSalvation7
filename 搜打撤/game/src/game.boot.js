@@ -799,7 +799,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     };
     if ('requestIdleCallback' in window) window.requestIdleCallback(warmHubWallpaper, { timeout: 4000 });
     else window.setTimeout(warmHubWallpaper, 2000);
-    // 网页完整预取；桌面本地文件只准备首轮场景和通用卡框，避免首启扫读全部资源。
+    // 启动只HTTP预取六张常见场景和现行卡框；图片解码沿页面入口按需执行。
     const warmupTip = document.getElementById('warmupTip');
     const warmupBar = document.getElementById('warmupBar');
     const warmupNum = document.getElementById('warmupNum');
@@ -807,23 +807,13 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     if (sceneUrls.length > PERFORMANCE_BUDGETS.startupPreloadMax) {
       throw new Error(`首轮场景预热超预算：${sceneUrls.length}/${PERFORMANCE_BUDGETS.startupPreloadMax}`);
     }
-    const localArtwork = location.protocol === 'app:';
-    const urls = planStartupArtPreload({
-      sceneUrls,
-      figureUrls: localArtwork ? [] : SDT.Art.collectCardAssets?.([]) || [],
-      thumbnailUrls: localArtwork ? [] : SDT.Art.collectThumbnailAssets(),
-      manifestUrls: localArtwork ? [] : SDT.Art.collectManifestAssets(),
-    });
+    const urls = planStartupArtPreload({ sceneUrls });
     if (warmupTip && urls.length) {
       warmupTip.hidden = false;
-      const sceneSet = new Set(sceneUrls);
-      const deferredUrls = urls.filter(url => !sceneSet.has(url));
-      SDT.Art.warmBatched(sceneUrls, null, 2).then(() => SDT.Art.prefetchBatched(deferredUrls, (done, total) => {
-        const complete = sceneUrls.length + done;
-        const grand = sceneUrls.length + total;
-        if (warmupNum) warmupNum.textContent = `${complete}/${grand}`;
-        if (warmupBar) warmupBar.style.width = `${Math.round(complete / grand * 100)}%`;
-      }, 4)).then(() => setTimeout(() => {
+      SDT.Art.prefetchBatched(urls, (done, total) => {
+        if (warmupNum) warmupNum.textContent = `${done}/${total}`;
+        if (warmupBar) warmupBar.style.width = `${Math.round(done / total * 100)}%`;
+      }, 4).then(() => setTimeout(() => {
         warmupTip.classList.add('done');
         setTimeout(() => { warmupTip.hidden = true; }, 600);
       }, 350)).catch(error => console.warn('[warmup] 首屏资源预取未完成', error));
@@ -831,4 +821,4 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
       try { SDT.Art.prefetchBatched(urls, null, 4).catch(error => console.warn('[warmup] 首屏资源预取未完成', error)); } catch { /* 预取降级失败：不阻塞启动 */ }
     }
     requestLoopFrame();
-  });
+  }, { once: true });

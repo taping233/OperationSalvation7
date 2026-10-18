@@ -1,4 +1,5 @@
 import { esc } from '../core/shared.js';
+import { previousRoutePlan, routeChoicePreview } from './route-choice-preview.js';
 import { mapNodeInfo } from '../core/node-info.js';
 import { isConsumedMapNode, mapNodeStatus } from '../core/map-node-state.js';
 import '../../css/map-node-status.css';
@@ -30,12 +31,14 @@ export function expeditionRoutes(game) {
     const door = layer.doors?.find(d => d.at === idx);
     const cleared = isConsumedMapNode(game, { li, idx, def: cell.def });
     const content = mapNodeStatus(game, { li, idx, def:cell.def });
-    const [name, hint, icon, tone] = mapNodeInfo(game, { li, idx, def:cell.def });
-    const plan=game.routePlan?.status==='applied' && game.routePlan.layerIndex===li && current.id===game.routePlan.startNodeId ? game.routePlan : null;
+    const [name, hint, icon, tone] = mapNodeInfo(game, { li, idx, def:cell.def }, content);
+    const previous=previousRoutePlan(game);
+    const plan=previous?.status==='applied' && previous.layerIndex===li && current.id===previous.startNodeId ? previous : null;
+    const choice=routeChoicePreview(game,{li,idx},content.id);
     const role=!cleared && plan && cell.id===plan.supplyNodeId?'supply':!cleared && plan && cell.id===plan.riskNodeId?'risk':null;
-    const routeName=role==='supply'?'补给支路 · 物资点':role==='risk'?'交战支路 · 遭遇战':name;
+    const routeName=choice?.name || (role==='supply'?'补给支路 · 物资点':role==='risk'?'交战支路 · 遭遇战':name);
     const routeHint=role==='supply'?'已知物资节点 · 具体收获进入后决定':role==='risk'?'已知战斗风险 · 胜利后按现有规则结算':hint;
-    return [{ li, idx, baseName: routeName, name:routeName, icon, tone: cleared ? 'quiet' : tone,
+    return [{ li, idx, baseName: routeName, name:routeName, choiceHint:choice?.hint || null, icon, tone: cleared ? 'quiet' : tone,
       door: !!(door && !door.reverse),   // W1-10：前进层间闸门卡给专属高亮钩子
       hint: content.id === 'pending' ? hint : cleared ? hint : door?.reverse ? '返回上一片区域' : routeHint,
       direction: door ? (door.reverse ? 'return' : 'deeper') : cleared ? 'return' : 'explore',
@@ -119,8 +122,8 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
         <button data-expedition-tool="safe" aria-label="安全格：保护物资 ${safe}/${safeCap}" ${disabled ? 'disabled' : ''}>${iconHTML('lock')}<span>安全格</span><strong>${safe}<small>/${safeCap}</small></strong></button>
         <button data-expedition-tool="pocket" aria-label="消耗区：已消耗卡牌 ${pocket}" ${disabled ? 'disabled' : ''}>${iconHTML('cards')}<span>消耗区</span><strong>${pocket}</strong></button>
         <span class="expedition-toolbar-space"></span>
-        <button class="map-view-tool" data-expedition-tool="focus" ${disabled ? 'disabled' : ''}>${iconHTML('map')}<span>定位</span><kbd>F</kbd></button>
-        <button class="map-view-tool" data-expedition-tool="overview" ${disabled ? 'disabled' : ''}>${iconHTML('map')}<span>总览</span><kbd>G</kbd></button>
+        <button class="map-view-tool" data-expedition-tool="focus" title="回到当前位置与相邻路线 · F" aria-label="定位：当前位置与相邻路线" ${disabled ? 'disabled' : ''}>${iconHTML('map')}<span>定位</span><kbd>F</kbd></button>
+        <button class="map-view-tool" data-expedition-tool="overview" title="查看整层路线，未探明地点仅显示剪影 · G" aria-label="全景：整层路线，未知地点保留迷雾" ${disabled ? 'disabled' : ''}>${iconHTML('map')}<span>全景</span><kbd>G</kbd></button>
       </nav>`;
     }
 
@@ -158,18 +161,19 @@ export function renderExpeditionPanel(panel, game, iconHTML) {
   const selectedSupply = selectedNode && supply?.layerIdx === selectedNode.li && supply.trackPos === selectedNode.idx &&
     (supply.taken?.length || 0) < (supply.cardIds?.length || 0);
   const [nodeName, nodeHint, nodeIcon] = selectedNode
-    ? mapNodeInfo(game, selectedNode)
+    ? mapNodeInfo(game, selectedNode, content)
     : [];
   const name = selectedSupply ? '入城补给' : route?.name || nodeName;
-  const hint = content.label ? content.detail : route?.hint || nodeHint;
+  const hint = route?.choiceHint || (content.label ? content.detail : route?.hint || nodeHint);
   const status = moving && preview ? `前往中 · ${Math.min(travel.segmentIndex, travel.path.length - 1)}/${travel.path.length - 1} 段` : travel?.phase === 'arrived' && isCurrent ? '已抵达' : isCurrent ? '当前位置' : reachable ? '可以前往' : '暂不可前往';
   const danger = !pending && !selectedSpent && !selectedDoor && ['battle','boss','elite','battleElite'].includes(selectedNode?.def?.type);
   const lowLife = danger && game.hp > 0 && game.hp / game.maxHp <= .25;
   const cam = game.cam;
   const previousInset = cam?.detailInset || 0;
-  cam?.setDetailInset?.(name ? cam.viewW * (570 / 1920) : 0);
-  if (cam?.frameExploration && previousInset !== cam.detailInset && cam.frameMode !== 'manual') {
-    cam.frameExploration(game, cam.frameMode === 'overview');
+  // 移动事务持有镜头；侧栏变化不能打断跟随或硬切取景。
+  if (cam?.frameMode !== 'travel') cam?.setDetailInset?.(name ? cam.viewW * (570 / 1920) : 0);
+  if (cam?.frameExploration && previousInset !== cam.detailInset && !['manual', 'travel'].includes(cam.frameMode)) {
+    cam.frameExploration(game, cam.frameMode === 'overview', { glide:true });
   }
   const actionLabel = completedLocal ? content.id === 'shop-closed' ? '本店交易已结束' : '本地内容已完成'
     : pending ? isCurrent ? '继续领奖' : '前往领奖'

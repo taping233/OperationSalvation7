@@ -44,7 +44,7 @@ const VERBS = [
   { id: 'draw', label: '抽牌', impl: 'battle.effects', pattern: /抽\s*[\d一两二三四五六七八九十]+(?:\s*-\s*\d+)?\s*张|抽牌|抽出\s*\d+\s*张/ },
   { id: 'drawUntil', label: '抽到指定手牌数 / 从牌库定向抽取', impl: 'battle.effects', pattern: /抽牌[^。；]*?直到|直到有\s*\d+\s*张手牌|从牌库(?:中|底)?(?:抽取|发现|取)\s*\d*\s*张?/ },
   { id: 'noDraw', label: '下回合无法抽牌', impl: 'battle.effects', pattern: /下(?:个)?回合无法抽牌/ },
-  { id: 'curseAdd', label: '附加诅咒（流血/中毒/冰冻/沉默/破甲/禁疗/灼烧）', impl: 'battle.effects', pattern: /附加[^。；]*(流血|中毒|冰冻|冻结|沉默|破甲|禁疗|灼烧)|施加[^。；]*(流血|中毒|灼烧)|冰冻\s*(?:所有|\d|[一两二三四五])|冻结|沉默\s*\d|破甲|禁疗|中毒层数翻倍|延长[^。]*冰冻/ },
+  { id: 'curseAdd', label: '附加诅咒（流血/中毒/冰冻/沉默/破甲/禁疗）', impl: 'battle.effects', pattern: /附加[^。；]*(流血|中毒|冰冻|冻结|沉默|破甲|禁疗)|施加[^。；]*(流血|中毒)|冰冻\s*(?:所有|\d|[一两二三四五])|冻结|沉默\s*\d|破甲|禁疗|中毒层数翻倍|延长[^。]*冰冻/ },
   { id: 'curseRandom', label: '随机诅咒', impl: 'battle.effects', pattern: /随机诅咒|种随机诅咒|每有\s*1\s*种诅咒|诅咒状态/ },
   { id: 'curseCopyAll', label: '复制手牌招式上的全部诅咒', impl: 'battle.effects', pattern: /附加手牌中的招式所具有的全部诅咒/ },
   { id: 'purify', label: '净化自身', impl: 'battle.effects', pattern: /净化/ },

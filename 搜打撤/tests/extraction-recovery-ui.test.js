@@ -98,6 +98,7 @@ it.each(['exStash', 'exAll', 'exSmart'])('完成事务中断后点击 %s 保留�
   const runId = UIState.game.pendingExtraction.runId;
   UIState.failAfterBase = true;
   await UIState.acts.exFinish();
+  if (document.querySelector('[data-act=exConfirmFinish]')) await UIState.acts.exConfirmFinish();
   expect(document.querySelector('#exMain')).not.toBeNull();
   expect(localStorage.getItem('sdt-tx-v1-slot2')).not.toBeNull();
 
@@ -107,6 +108,7 @@ it.each(['exStash', 'exAll', 'exSmart'])('完成事务中断后点击 %s 保留�
   expect(window.SDT.UI.log).toHaveBeenLastCalledWith(expect.stringContaining('完成整理'), 'warn');
 
   await UIState.acts.exFinish();
+  if (document.querySelector('[data-act=exConfirmFinish]')) await UIState.acts.exConfirmFinish();
   expect(document.querySelector('[data-act="goBase"]')).not.toBeNull();
   expect(document.querySelector('#exMain')).toBeNull();
   expect(UIState.game.pendingExtraction).toBeNull();

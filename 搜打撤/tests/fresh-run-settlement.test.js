@@ -5,7 +5,7 @@ const UI = { showOverlay:vi.fn(), log:vi.fn(), refresh:vi.fn(), act:(name, fn) =
 window.SDT = { UI, Sound:{sfx:vi.fn(),music:vi.fn()}, FX:{feedback:vi.fn()},
   Cards:{cardHTML:card => `<span>${card.name}</span>`} };
 const { createDeathSettlement, buildDeathReceipt } = await import('../game/src/run/game.session.death.js');
-let activeSlot, generation, progress, base, game, commit, doDeath;
+let activeSlot, generation, progress, base, game, commit, doDeath, openBaseHub;
 const html = () => UI.showOverlay.mock.calls.at(-1)?.[1] || '';
 beforeEach(() => {
   activeSlot=1; generation=0; actions.clear(); UI.showOverlay.mockClear(); UI.log.mockClear();
@@ -14,7 +14,8 @@ beforeEach(() => {
   window.SDT.Meta={classSummary:() => [progress],checkUnlocks:vi.fn(),classLv:() => progress.lv,perkText:() => ''};
   game={runActive:true,state:'idle',hp:0,maxHp:30,myClass:'侠客',surrenderedRun:false,inventory:[],ownedCards:[],usedPocket:[],turn:3,elapsed:5,terminalPending:null,pos:{x:0,y:0}};
   commit=vi.fn(async () => {progress={...progress,xp:75};return {ok:true,receipt:{output:{levelsGained:0}}};});
-  ({doDeath}=createDeathSettlement({ game,runtime:{openBaseHub:vi.fn()},
+  openBaseHub=vi.fn();
+  ({doDeath}=createDeathSettlement({ game,runtime:{openBaseHub},
     terminalCommands:{createAttempt:async () => ({ok:true,attempt:{}}),commitAttempt:(...args) => commit(...args)},
     getActiveSlot:() => activeSlot,getTerminalGeneration:() => generation,nextTerminalGeneration:() => ++generation,
     cardStacks:() => game.ownedCards.filter(o => o.safe).map(o => ({card:o.card,count:1})),safeUsed:() => 1,safeCap:() => 2,pearlBoxId:'pearl' }));
@@ -77,4 +78,47 @@ it('reports the final failure XP even when it crosses a level', async () => {
   progress={cls:'侠客',lv:1,xp:47,need:50};
   commit.mockImplementation(async () => {progress={cls:'侠客',lv:2,xp:2,need:80};return {ok:true,receipt:{output:{levelsGained:1}}};});
   await doDeath();expect(html()).toContain('+5 XP');expect(html()).toContain('当前累计进度 Lv.2：2/80');
+});
+
+
+it('keeps zero losses and zero rescued cards visible without three empty statistic tiles', async () => {
+  await doDeath(); document.body.innerHTML=html();
+  const stats=document.querySelector('.doom-stats');
+  expect(stats.querySelectorAll('.doom-stat')).toHaveLength(2);
+  expect(stats.textContent).toContain('卡牌散失0 张');
+  expect(stats.textContent).toContain('消耗区另散失 0 张');
+  expect(stats.textContent).toContain('抢运回基地0 张');
+  expect(stats.textContent).toContain('安全格占用 1/2');
+  expect(stats.textContent).not.toContain('估值损失');
+  expect(document.querySelector('.doom-details').open).toBe(false);
+  expect(document.querySelector('.doom-details summary').textContent).toBe('物资明细与保留规则');
+});
+
+it('keeps long loss lists and full damage attribution in native details after the review summary', async () => {
+  game.ownedCards=[{card:{id:'legend',name:'极长的传说卡牌名称<不可执行>',rarity:'传说'}}];
+  game.usedPocket=[{count:37}];
+  await doDeath({battleSummary:{round:6,remainingFoes:[{name:'首脑',hp:17,maxHp:45}],damageTaken:[{source:'中毒',damage:3}]},battleIsBoss:true});
+  document.body.innerHTML=html();
+  const panel=document.querySelector('.doom-panel');
+  const review=panel.querySelector('.doom-review');
+  const details=panel.querySelector('.doom-details');
+  expect(panel.querySelector('.doom-stats').textContent).toContain('卡牌散失1 张');
+  expect(panel.querySelector('.doom-stats').textContent).toContain('消耗区另散失 37 张');
+  expect(details.textContent).toContain('极长的传说卡牌名称<不可执行>');
+  expect(details.querySelector('不可执行')).toBeNull();
+  expect([...panel.children].indexOf(review)).toBeLessThan([...panel.children].indexOf(details));
+  expect(review.textContent).toContain('首脑剩余：首脑 17/45 生命');
+  const damage=review.querySelector('details');
+  expect(damage.open).toBe(false);
+  expect(damage.textContent).toContain('中毒 3');
+  expect(damage.textContent).toContain('其他卡牌或反噬伤害未归因');
+});
+
+it('keeps both terminal actions unique and opens the same deployment destination', async () => {
+  await doDeath(); document.body.innerHTML=html();
+  for (const action of ['goBase','again']) {
+    expect(document.querySelectorAll(`[data-act="${action}"]`)).toHaveLength(1);
+    actions.get(action)();
+  }
+  expect(openBaseHub.mock.calls).toEqual([['deploy'],['deploy']]);
 });

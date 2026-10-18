@@ -1,0 +1,30 @@
+[
+  {
+    "pack": "tinysized",
+    "author": "Vehicle / Jan Schupke",
+    "page": "https://opengameart.org/content/fantasy-sound-effects-tinysized-sfx",
+    "download": "https://opengameart.org/sites/default/files/tinysized.zip",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "bytes": 13235099,
+    "sha256": "7f00e2b1dae15e68db0e1d6096767f03755e9e7c247128afc3e935e63774d7db",
+    "retrieved": "2026-10-17T22:39:45Z",
+    "source_type": "original publicly linked WAV archive",
+    "author_processing": "normalization only",
+    "original_wav_count": 96
+  },
+  {
+    "pack": "accessory",
+    "author": "Vehicle / Jan Schupke",
+    "page": "https://opengameart.org/content/fantasy-accessory-sfx-library",
+    "download": "https://opengameart.org/sites/default/files/accessory.zip",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "bytes": 14561483,
+    "sha256": "1d1166b2469be771d8894cd77ffcd6d500bcb676e2b6cb1c9cecacf97e957217",
+    "retrieved": "2026-10-17T22:39:45Z",
+    "source_type": "original publicly linked WAV archive",
+    "author_processing": "normalization only",
+    "original_wav_count": 155
+  }
+]

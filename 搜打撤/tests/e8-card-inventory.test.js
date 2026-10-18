@@ -19,9 +19,28 @@ const M_BATCH_ONPLAY_IDS = [
 const ALL_M_BATCH_IDS = [...readFileSync('docs/M-BATCH-MATRIX.md', 'utf8')
   .matchAll(/^\| ([a-z][\w-]+) \|/gm)].map(match => match[1]).filter(id => id !== 'id');
 const APPROVED_IDS = [...MIGRATED_IDS, ...ALL_M_BATCH_IDS].filter(id => !RETIRED_1010.has(id));
-const currentBaseline = approvedRevisionBaseline(beforeInventory);
+// 2026-10-18 已批准的生产文案/名称修订；固定前后值投影，原 before 与 CARDS_SYNC 不改。
+const APPROVED_PRODUCTION_FACE_REVISIONS = [
+  ["cmtn6bge52qt","desc","在背包中才能使用，复原最多两张卡牌","地图背包：从消耗区复原最多2张卡牌；战斗：从本场消耗牌复原最多2张回到手牌。对应消耗区为空时不可使用。"],
+  ["foe-esper_candle","desc","攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击并灼烧。","攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击。"],
+  ["foe-fire_el","desc","攻击 10 / 生命 7。变异·第4层。攻击并灼烧。","攻击 10 / 生命 7。变异·第4层。攻击。"],
+  ["tt-crystal","desc","在背包中才能使用，可以复原最多 3 张卡牌。","地图背包：从消耗区复原最多3张卡牌；战斗：从本场消耗牌复原最多3张回到手牌。对应消耗区为空时不可使用。"],
+  ["tt6-chestdraw","name","熔断双箱","熔断物资箱"],
+];
+function approvedProductionFaceBaseline(original) {
+  const baseline = approvedRevisionBaseline(original);
+  for (const [id, field, previous, current] of APPROVED_PRODUCTION_FACE_REVISIONS) {
+    const card = baseline.production.cards.find(row => row.id === id)?.card;
+    if (!card || card[field] !== previous) throw new Error(`Unreviewed original ${id}.${field}`);
+    card[field] = current;
+  }
+  return baseline;
+}
+const currentBaseline = approvedProductionFaceBaseline(beforeInventory);
 const APPROVED_FACE_BY_ID = {
   'tt3-noon-duel': { dmg: 2, dmgType: 'fixed' },
+  // 现行规则：本道具主动用于战斗，产卡在使用后的下回合兑现。
+  'tt3-mystery-potion': { desc: '仅战斗中使用。使用后，下回合开始时：变成1张随机招式卡牌，使其费用为0。' },
   // 2026-09-29 老板裁决：花瓣法阵 heal 2→3，desc「回复 3」与 before 快照一致故仅 heal 差异。
   'tt3-petal': { heal: 3 },
   // 2026-10-02 老板拍板：自然形态改名满月形态并转牧师职业卡（id 不变，存档/卡库按 id 追踪；rules 仍由 M 批测试守护）。
@@ -30,6 +49,7 @@ const APPROVED_FACE_BY_ID = {
 const APPROVED_RULES_BY_ID = Object.fromEntries([
   ...MIGRATED_IDS.map(id => [id, HEAL_RULES]),
   ...ALL_M_BATCH_IDS.map(id => [id, null]),
+  ['tt3-mystery-potion', { version:1, battle:{ hosted:['mystery-potion'] } }],
 ]);
 // Captured read-only at the beginning of the second window, not during the first export.
 const SYNC_SOURCE_SHA256 = 'd2f38387dd0c49ca90628aeea5334790286de906838b34e6c7aece0652511244';
@@ -191,6 +211,39 @@ describe('E8 isolated production inventory', () => {
     changedSync.cardsSync.cards[0].card.desc += 'changed';
     expect(() => compareMigrationInventories(currentBaseline, changedSync, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
       .toThrow('CARDS_SYNC card fields changed');
+  });
+
+  it('五条生产修订精确锁定旧值与新值，规则、费用、回退旧文案或额外字段均拒绝', () => {
+    for (const [id, field, previous] of APPROVED_PRODUCTION_FACE_REVISIONS) {
+      const current = inventory.production.cards.find(row => row.id === id).card;
+      expect(current).toEqual(currentBaseline.production.cards.find(row => row.id === id).card);
+      for (const mutate of [
+        card => { card[field] = previous; }, card => { card[field] += '额外说明'; },
+        card => { card.cost++; }, card => { card.rules = { version:1 }; }, card => { card.extra = true; },
+      ]) {
+        const changed = clone(inventory);
+        mutate(changed.production.cards.find(row => row.id === id).card);
+        expect(() => compareMigrationInventories(currentBaseline, changed, APPROVED_IDS,
+          HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID)).toThrow('changed IDs differ from approved IDs');
+      }
+    }
+  });
+
+  it('神秘药水只接受主动战斗使用的新文案与精确 M9 宿主，改写和扩效拒绝', () => {
+    const previous = currentBaseline.production.cards.find(row => row.id === 'tt3-mystery-potion').card;
+    expect(previous.desc).toBe('回合开始时：变成1张随机招式卡牌，使其费用为0。');
+    const current = inventory.production.cards.find(row => row.id === 'tt3-mystery-potion').card;
+    expect(current.desc).toBe(APPROVED_FACE_BY_ID['tt3-mystery-potion'].desc);
+    expect(current.rules).toEqual(APPROVED_RULES_BY_ID['tt3-mystery-potion']);
+    for (const mutate of [
+      card => { card.desc = previous.desc; }, card => { card.desc += '额外效果'; }, card => { card.cost++; },
+      card => { card.rules.battle.hosted = ['other-choice']; }, card => { card.extra = true; },
+    ]) {
+      const changed = clone(inventory);
+      mutate(changed.production.cards.find(row => row.id === 'tt3-mystery-potion').card);
+      expect(() => compareMigrationInventories(currentBaseline, changed, APPROVED_IDS,
+        HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID)).toThrow('tt3-mystery-potion changed beyond approved rules addition');
+    }
   });
 
   it('allows only the exact backupcell description rename with its existing rules unchanged', () => {

@@ -107,7 +107,7 @@ const COPY_RANDOM_ALLOWED_KEYS = new Set(['op']);
 const STATUS_ALLOWED_KEYS = new Set(['op', 'status', 'target', 'duration']);
 const DISCOVER_ALLOWED_KEYS = new Set(['op', 'count', 'pool', 'costDecayPerTurn']);
 // v2 —— G2 诅咒枚举（与 combat.js CURSES / CURSE_META 对齐；M2 加 atkDown 攻击降低）
-const CURSE_KEYS = new Set(['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn', 'atkDown']);
+const CURSE_KEYS = new Set(['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'atkDown']);
 const STACKING_CURSE_KEYS = new Set(['bleed', 'poison']);
 const CONDITION_KEYS = new Set(['foeHpBelow', 'foeHpHalf', 'foeStatus', 'foeFullHp',
   // M2：目标身负任意诅咒（暗影射击「若对手处于诅咒状态」）
@@ -196,7 +196,7 @@ function validateCondition(record, path, error) {
     error(`${path}.foeFullHp`, 'must equal true when provided');
   }
   if (record.foeStatus !== undefined && !CURSE_KEYS.has(record.foeStatus)) {
-    error(`${path}.foeStatus`, "must be one of 'bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn'");
+    error(`${path}.foeStatus`, "must be one of 'bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban'");
   }
   if (record.anyCurse !== undefined && record.anyCurse !== true) {
     error(`${path}.anyCurse`, 'must equal true when provided');
@@ -364,7 +364,7 @@ function validateCurseOperation(operation, path, error) {
   }
   if (hasCurseKey) {
     if (!CURSE_KEYS.has(operation.curse)) {
-      error(`${path}.curse`, "must be one of 'bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'burn', 'atkDown'");
+      error(`${path}.curse`, "must be one of 'bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'atkDown'");
     } else if (STACKING_CURSE_KEYS.has(operation.curse)) {
       if (!isPositiveInteger(operation.stacks)) {
         error(`${path}.stacks`, 'must be a positive integer for stacking curses (bleed/poison)');

@@ -401,3 +401,48 @@ body.reduce-motion:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[
   body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] .expedition-map-preview { animation:none; }
   body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #sidebar[data-expedition-layout="map"] button { transition:none; }
 }
+
+/* Map health: quiet status, one-shot feedback, and a touch/keyboard disclosure. */
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #topBtns #hpHud[data-health-hud] {
+  cursor:pointer; touch-action:manipulation; isolation:isolate;
+}
+#hpHud[data-health-hud] .map-health-heading {
+  display:flex; align-items:center; gap:7px; color:var(--ak-sub, #9aa9ad);
+  font:500 18px/20px var(--font-ui); letter-spacing:1px;
+}
+/* Keep the larger label inside the existing 62px toolbar footprint. */
+body:not(.lobby):not(.page-opaque):not(.scene-battle-3d) #hpHud[data-health-hud] .hp-hud-body { gap:1px; }
+#hpHud[data-health-hud] .map-resource-tip { font-size:20px; line-height:1.45; }
+#hpHud[data-health-hud] .map-resource-tip strong { font-size:20px; line-height:1.4; }
+#hpHud[data-health-hud] .map-health-state { color:var(--fx-hurt, #ec4b3f); letter-spacing:1px; }
+#hpHud[data-health-hud] .map-health-delta {
+  position:absolute; top:0; right:0; font:600 12px/12px var(--font-num); letter-spacing:0;
+  opacity:0; pointer-events:none;
+}
+#topBtns #hpHud[data-health-hud] #hpBarWrap { animation:none; will-change:auto; }
+#topBtns #hpHud[data-health-hud] #hpBar { transition:width 260ms ease; }
+#hpHud[data-health-hud] .hp-hud-body::after {
+  content:''; position:absolute; inset:-5px -8px; border:1px solid currentColor;
+  opacity:0; pointer-events:none;
+}
+#hpHud[data-health-hud].health-hurt { --health-feedback:var(--fx-hurt, #ec4b3f); }
+#hpHud[data-health-hud].health-heal { --health-feedback:var(--fx-heal, #5fd38d); }
+#hpHud[data-health-hud]:is(.health-hurt,.health-heal) .hp-hud-body::after {
+  color:var(--health-feedback); animation:map-health-flash 700ms ease-out both;
+}
+#hpHud[data-health-hud]:is(.health-hurt,.health-heal) .map-health-delta {
+  color:var(--health-feedback); animation:map-health-delta 1000ms ease-out both;
+}
+#hpHud[data-health-hud][aria-expanded="true"] .map-resource-tip { opacity:1; visibility:visible; transform:none; }
+#hpHud[data-health-hud][data-health-dismissed="true"] .map-resource-tip { opacity:0; visibility:hidden; }
+#hpHud[data-health-hud][data-health-active="false"] .map-resource-tip { display:none; }
+@keyframes map-health-flash { 0%,20% { opacity:.55; } 100% { opacity:0; } }
+@keyframes map-health-delta { 0%,65% { opacity:1; transform:translateY(0); } 100% { opacity:0; transform:translateY(-5px); } }
+body.reduce-motion #topBtns #hpHud[data-health-hud] #hpBar { transition:none; }
+body.reduce-motion #hpHud[data-health-hud] .hp-hud-body::after { animation:none; }
+body.reduce-motion #hpHud[data-health-hud]:is(.health-hurt,.health-heal) .map-health-delta { animation:none; opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce) {
+  #topBtns #hpHud[data-health-hud] #hpBar { transition:none; }
+  #hpHud[data-health-hud] .hp-hud-body::after { animation:none; }
+  #hpHud[data-health-hud]:is(.health-hurt,.health-heal) .map-health-delta { animation:none; opacity:1; transform:none; }
+}

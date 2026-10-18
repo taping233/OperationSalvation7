@@ -1,0 +1,75 @@
+diff --git a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-18-WF-page-perf-1018/battle/baseline/battle.infusion-view.js.txt b/game/src/battle/view/battle.infusion-view.js
+index 66c176fc..75d45cd7 100644
+--- a/D:/素材/代号柒/搜打撤/docs/evidence/2026-10-18-WF-page-perf-1018/battle/baseline/battle.infusion-view.js.txt
++++ b/game/src/battle/view/battle.infusion-view.js
+@@ -7,6 +7,7 @@ import { groupHandCards, orderHandGroups } from '../core/battle.hand.js';
+ import { requiresInfusion } from '../effects/battle.infusion.js';
+ 
+ let keyCleanup = null;
++if (import.meta.hot) import.meta.hot.dispose(() => { keyCleanup?.(); keyCleanup = null; });
+ 
+ // Selection is presentation only. The battle commands remain the authority for
+ // eligibility, counts, final target confirmation and atomic resource spending.
+@@ -54,14 +55,19 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
+   workspace._battleToken = snapshot.battleToken; workspace._sourceUid = infusion.uid;
+   workspace.querySelector('.infusion-materials').scrollTop = scroll;
+   if (focused) [...page.querySelectorAll('button')].find(button => button.dataset.act === focused.act && button.dataset.i === focused.i)?.focus({ preventScroll:true });
+-  const current = () => page.isConnected && !UI.el.overlay.hidden && UI.el.ovBody.querySelector('.battle-decision') === page
+-    && getSnapshot().battleToken === snapshot.battleToken && getSnapshot().infusing?.uid === infusion.uid
+-    && !document.getElementById('cardZoom') && !getSnapshot().busy && ['player', 'targeting'].includes(getSnapshot().phase);
+-  const adjust = (data, remove) => {
+-    if (!current()) return;
++  // A snapshot checks all current values; share it only within this synchronous
++  // input. Later inputs must see in-place state changes before the next render.
++  const current = () => {
++    if (!page.isConnected || UI.el.overlay.hidden || UI.el.ovBody.querySelector('.battle-decision') !== page
++      || document.getElementById('cardZoom')) return null;
++    const now = getSnapshot();
++    return now.battleToken === snapshot.battleToken && now.infusing?.uid === infusion.uid
++      && !now.busy && ['player', 'targeting'].includes(now.phase) ? now : null;
++  };
++  const adjust = (data, remove, now = current()) => {
++    if (!now) return;
+     const group = groups[Number(data.i)];
+     if (!group) return;
+-    const now = getSnapshot();
+     const uid = remove ? group.uids.find(id => now.infusing.picked.includes(id))
+       : now.infusing.picked.length < now.infusing.need && group.uids.find(id => now.hand.includes(id) && !now.infusing.picked.includes(id) && !infusionFuelReason(id));
+     if (uid) commands.selectInfusion(uid);
+@@ -77,18 +83,30 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
+   });
+   UI.act('btInfuseCancel', () => { if (current()) commands.cancelInfusion(); });
+   UI.act('btInfuseDirect', () => { if (current() && !required) commands.playDirect(infusion.uid); });
+-  UI.act('btInfuseGo', () => { if (current() && getSnapshot().infusing.picked.length === getSnapshot().infusing.need) commands.confirmInfusion(); });
++  UI.act('btInfuseGo', () => { const now = current(); if (now && now.infusing.picked.length === now.infusing.need) commands.confirmInfusion(); });
+   const onKey = event => {
+-    if (!current() || event.isComposing || event.keyCode === 229 || event.defaultPrevented || document.getElementById('cardZoom')) return;
++    if (event.isComposing || event.keyCode === 229 || event.defaultPrevented) return;
++    const materialKey = /^[1-9]$/.test(event.key) && !/INPUT|TEXTAREA|SELECT/.test(event.target?.tagName || '') && !event.shiftKey;
++    if (event.key !== 'Escape' && !materialKey) return;
++    const now = current();
++    if (!now) return;
+     if (event.key === 'Escape') { event.preventDefault(); event.stopImmediatePropagation(); commands.cancelInfusion(); }
+     // Detached hand-layer shortcuts must not select a hidden material.
+-    if (/^[1-9]$/.test(event.key) && !/INPUT|TEXTAREA|SELECT/.test(event.target?.tagName || '') && !event.shiftKey) {
++    if (materialKey) {
+       event.preventDefault(); event.stopImmediatePropagation();
+-      const i = Number(event.key) - 1, group = groups[i], now = getSnapshot().infusing;
+-      if (group) adjust({ i }, now.picked.length >= now.need || group.uids.every(uid => now.picked.includes(uid)));
++      const i = Number(event.key) - 1, group = groups[i], infusionNow = now.infusing;
++      if (group) adjust({ i }, infusionNow.picked.length >= infusionNow.need || group.uids.every(uid => infusionNow.picked.includes(uid)), now);
+     }
+   };
+   document.addEventListener('keydown', onKey, true);
+-  keyCleanup = () => document.removeEventListener('keydown', onKey, true);
++  const cleanup = () => {
++    document.removeEventListener('keydown', onKey, true);
++    document.removeEventListener('sdt-overlay-mode', cleanup);
++    document.removeEventListener('sdt-overlay-close', cleanup);
++    if (keyCleanup === cleanup) keyCleanup = null;
++  };
++  document.addEventListener('sdt-overlay-mode', cleanup);
++  document.addEventListener('sdt-overlay-close', cleanup);
++  keyCleanup = cleanup;
+   UI.refresh(window.SDT.game);
+ }

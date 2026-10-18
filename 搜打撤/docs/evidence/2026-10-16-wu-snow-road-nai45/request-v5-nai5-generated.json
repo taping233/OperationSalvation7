@@ -1,0 +1,119 @@
+{
+  "status": "generated",
+  "prepared_source": "request-v5-nai5-prepared.json",
+  "request": {
+    "input": "1girl, solo, wide landscape composition, 1.4::foreground face at the extreme upper-right edge, tightly cropped character::, looking directly at viewer, 1.4::head tilted sideways toward screen-left::, subtle smile\n\nHer face is near the upper-right corner; crown and outer side of her hair are cut by the top and right canvas borders. Both eyes visible. Only her face and a narrow slice of shoulder occupy the far-right quarter; her torso and hands are outside the frame. The open road fills the other three quarters. An empty two-lane asphalt highway runs straight to a flat horizon at the upper third. Worn dashed white center markings, solid white edge lines. Snow-capped corrugated steel crash barriers on both sides. Level snowy farmland, low distant tree line, utility poles.\n\nCold low-saturation blue-gray palette. Heavy overcast winter sky, faint warm-gray dawn strip at the horizon. Dark wet asphalt, irregular fine aggregate, patchy meltwater, restrained silver-gray vertical reflections. Cool shaded face, softly lit eyes. Snow piled along guardrails and road verges, atmospheric haze, a few faint white light points.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, painterly anime promotional illustration, grouped shadows, angular cloth folds, delicate skin transitions, selective facial linework, rich controlled color, crisp facial features and readable landscape.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": true,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1552649891,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, duplicate character, full body, cowboy shot, visible waist, visible hands, bent over, leaning forward, bokeh, depth of field, blurred background, plain road surface, featureless road, fence, mountains, hills, bright clear sky, saturated pink sky, continuous center line, thick center line, thin railing, uniform road texture, foreground pillar, foreground post, wall, door frame, pink glow, pink road, magenta lighting, neon reflections, orange sparks, sunset glow, centered character, mid-frame character, visible torso, visible arms",
+      "characterPrompts": [
+        {
+          "prompt": "silver-white long hair, high ponytail tied with a blue ribbon bow, parted bangs, both cyan-blue eyes visible, pale skin, tiny fang at the corner of her slight smile, black round sunglasses on head, thin black round frames, dark tinted lenses, sunglasses pushed up onto her hair, black rose on her left temple, black charcoal off-shoulder long-sleeved dress, ruffled neckline, black sword sheathed on her back, black shoulder strap",
+          "uc": "goggles, ski goggles, swimming goggles, aviator goggles, safety goggles, halo, hat, backpack, red hair, braid, hair over one eye, holding sword, wide open mouth, long skirt, high-low skirt, long back hem, dress train, floor-length dress, blue star pattern, stockings, pantyhose, thighhighs, holding pole, holding pillar, gripping, raised hands, reaching, hand gesture",
+          "center": {
+            "x": 0.95,
+            "y": 0.25
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1girl, solo, wide landscape composition, 1.4::foreground face at the extreme upper-right edge, tightly cropped character::, looking directly at viewer, 1.4::head tilted sideways toward screen-left::, subtle smile\n\nHer face is near the upper-right corner; crown and outer side of her hair are cut by the top and right canvas borders. Both eyes visible. Only her face and a narrow slice of shoulder occupy the far-right quarter; her torso and hands are outside the frame. The open road fills the other three quarters. An empty two-lane asphalt highway runs straight to a flat horizon at the upper third. Worn dashed white center markings, solid white edge lines. Snow-capped corrugated steel crash barriers on both sides. Level snowy farmland, low distant tree line, utility poles.\n\nCold low-saturation blue-gray palette. Heavy overcast winter sky, faint warm-gray dawn strip at the horizon. Dark wet asphalt, irregular fine aggregate, patchy meltwater, restrained silver-gray vertical reflections. Cool shaded face, softly lit eyes. Snow piled along guardrails and road verges, atmospheric haze, a few faint white light points.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, painterly anime promotional illustration, grouped shadows, angular cloth folds, delicate skin transitions, selective facial linework, rich controlled color, crisp facial features and readable landscape.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "silver-white long hair, high ponytail tied with a blue ribbon bow, parted bangs, both cyan-blue eyes visible, pale skin, tiny fang at the corner of her slight smile, black round sunglasses on head, thin black round frames, dark tinted lenses, sunglasses pushed up onto her hair, black rose on her left temple, black charcoal off-shoulder long-sleeved dress, ruffled neckline, black sword sheathed on her back, black shoulder strap",
+              "centers": [
+                {
+                  "x": 0.95,
+                  "y": 0.25
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, multiple girls, duplicate character, full body, cowboy shot, visible waist, visible hands, bent over, leaning forward, bokeh, depth of field, blurred background, plain road surface, featureless road, fence, mountains, hills, bright clear sky, saturated pink sky, continuous center line, thick center line, thin railing, uniform road texture, foreground pillar, foreground post, wall, door frame, pink glow, pink road, magenta lighting, neon reflections, orange sparks, sunset glow, centered character, mid-frame character, visible torso, visible arms",
+          "char_captions": [
+            {
+              "char_caption": "goggles, ski goggles, swimming goggles, aviator goggles, safety goggles, halo, hat, backpack, red hair, braid, hair over one eye, holding sword, wide open mouth, long skirt, high-low skirt, long back hem, dress train, floor-length dress, blue star pattern, stockings, pantyhose, thighhighs, holding pole, holding pillar, gripping, raised hands, reaching, hand gesture",
+              "centers": [
+                {
+                  "x": 0.95,
+                  "y": 0.25
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": true,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": ".tmp/nai/wu-snow-road-nai5-20261016-v5.png",
+  "method": "Shared nai_gen/nai_guard, current environment HTTPS proxy, one candidate",
+  "raw_t5_budget": {
+    "positive": [
+      383,
+      113
+    ],
+    "positive_total": 496,
+    "negative": [
+      277,
+      109
+    ],
+    "negative_total": 386,
+    "note": "Local T5 diagnostic only; not a statement of V5 server context limits."
+  },
+  "seed": 1552649891,
+  "bytes": 1676148,
+  "sha256": "49b1b152b6b574e7da37b7c7be79f24476e53cfaf914886d2387aaf3b16ee9a9",
+  "visual_review": {
+    "source": "view_image of generated original PNG",
+    "matched": [
+      "Pink glow suppressed; cool gray road reflections",
+      "Flat snowy farmland, snow-capped steel guardrails, dashed road markings",
+      "Character moved to upper-right edge with sideways head tilt",
+      "Round sunglasses on head; no foreground pillar or gripping gesture"
+    ],
+    "deviations": [
+      "Face is smaller than source and cropped too far right",
+      "Part of outer face cut by right canvas boundary",
+      "Narrow torso strip remains visible down right border"
+    ],
+    "user_approval": "pending"
+  },
+  "user_feedback": "人物占比太小了，对照原图修改"
+}

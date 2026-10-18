@@ -74,6 +74,12 @@ function expectUniqueTools({ ready = true, pages = true } = {}) {
   expect(stage().querySelectorAll('[data-act="btHandPage"]')).toHaveLength(pages ? 1 : 0);
   return tools[0];
 }
+function expectCoveredStage(scene = stage()) {
+  expect(stage()).toBe(scene);
+  expect(scene.hasAttribute('inert')).toBe(true);
+  expect(scene.getAttribute('aria-hidden')).toBe('true');
+  expect(UI.el.ovBody.querySelector('.battle-secondary-panel')).not.toBeNull();
+}
 beforeEach(() => {
   frames = []; vi.clearAllMocks();
   Random.reseed('battle-tools-lifecycle');
@@ -114,16 +120,18 @@ describe('battle tools template ownership', () => {
   it.each([
     ['grave', 'btGrave', 'btGraveBack'],
     ['settings', 'btSettings', 'btSettingsBack'],
-  ])('keeps one fresh set after repeated %s open/return and incremental patches', (_kind, open, close) => {
+  ])('keeps one current set after repeated %s open/return and incremental patches', (_kind, open, close) => {
     start();
     for (let i = 0; i < 4; i++) {
-      const oldTools = expectUniqueTools();
+      const oldTools = expectUniqueTools(), scene = stage();
       if (open === 'btGrave') BattleSession.commands.openGrave();
       else UI.el.ovBody.querySelector(`[data-act="${open}"]`).click();
       flush();
-      expect(stage()).toBeNull();
+      expectCoveredStage(scene);
       UI.el.ovBody.querySelector(`[data-act="${close}"]`).click(); flush();
-      expectUniqueTools(); expect(oldTools.isConnected).toBe(false);
+      expect(expectUniqueTools()).toBe(oldTools); expect(oldTools.isConnected).toBe(true);
+      expect(stage().hasAttribute('inert')).toBe(false);
+      expect(stage().hasAttribute('aria-hidden')).toBe(false);
       render(); expectUniqueTools();
     }
   });
@@ -144,7 +152,7 @@ describe('battle tools template ownership', () => {
     BattleSession.commands.playCard('tt3-magic-lamp'); flush();
     expect(snapshot().pendingTarget?.uid).toBe('tt3-magic-lamp');
     stage().querySelector('.bt-foe[data-eidx="0"]').click(); await settle();
-    expect(snapshot().choosing?.cardName).toBe('神灯'); expect(stage()).toBeNull();
+    expect(snapshot().choosing?.cardName).toBe('神灯'); expectCoveredStage();
     const choice = UI.el.ovBody.querySelector('[data-act="btChoicePick"][data-i="2"]');
     expect(choice.textContent).toContain('冰冻 2 名角色');
     choice.click(); await settle();
@@ -158,7 +166,7 @@ describe('battle tools template ownership', () => {
   it('returns from real discovery with one current set and preserves subsequent updates', async () => {
     start();
     BattleSession.commands.playCard('tt3-treasure-hunt', 0); await settle();
-    expect(snapshot().discovering?.options.length).toBeGreaterThan(0); expect(stage()).toBeNull();
+    expect(snapshot().discovering?.options.length).toBeGreaterThan(0); expectCoveredStage();
     await new Promise(resolve => setTimeout(resolve, 360));
     UI.el.ovBody.querySelector('[data-act="btDiscover"][data-i="0"]').click(); await settle();
     expect(snapshot().discovering).toBeNull(); expectUniqueTools();
@@ -173,11 +181,14 @@ describe('battle tools template ownership', () => {
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true })); flush();
     expect(snapshot().pendingTarget).toBeNull(); expectUniqueTools();
     BattleSession.commands.beginInfusion('tt3sp-bloodstorm'); flush();
-    expectUniqueTools({ ready: false });
+    expectUniqueTools(); expectCoveredStage();
+    const energy = snapshot().energy;
+    skill().click();
+    expect(snapshot().energy).toBe(energy); // Retained tools are behind the inert input shield.
     UI.el.ovBody.querySelector('[data-act="btInfuseCancel"]').click(); flush();
     expect(snapshot().infusing).toBeNull(); expectUniqueTools();
     game.hp = 1; render(); UI.el.ovBody.querySelector('[data-act="btEnd"]').click();
-    expect(stage()).toBeNull();
+    expectCoveredStage();
     UI.el.ovBody.querySelector('[data-act="btRiskBack"]').click();
     expect(game.hp).toBe(1); expectUniqueTools();
   });
@@ -194,7 +205,7 @@ describe('battle tools template ownership', () => {
       page().click(); expect(page().textContent).toBe(firstPage); expectUniqueTools();
       UI.el.ovBody.querySelector('[data-act="btSettings"]').click();
       UI.el.ovBody.querySelector('[data-act="btSettingsBack"]').click();
-      expect(button.isConnected).toBe(false); expectUniqueTools();
+      expect(button.isConnected).toBe(true); expect(skill()).toBe(button); expectUniqueTools();
     }
     const onSkill = vi.fn(); actions.set('btSlam', onSkill);
     skill().click(); expect(onSkill).toHaveBeenCalledTimes(1);

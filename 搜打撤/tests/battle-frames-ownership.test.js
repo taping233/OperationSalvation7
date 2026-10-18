@@ -176,7 +176,7 @@ it('shares normal same-token rerenders without interrupting an attack', async ()
   expect(document.getElementById('unitFrames').dataset.action).toBe('atk');
   expect(pixi.sprites.at(-1).texture).toBe(texture); expect(pixi.loaded).toHaveLength(loads);
 });
-it('waits for a cancelled Pixi load to unload before a new battle immediately takes ownership', async () => {
+it('shares a cancelled pending URL with its new owner and unloads only after that owner exits', async () => {
   const body = mount(50), oldImg = body.querySelector('img');
   pixi.loadGate = new Promise(resolve => { pixi.finishLoad = resolve; });
   const first = attach(body);
@@ -189,9 +189,12 @@ it('waits for a cancelled Pixi load to unload before a new battle immediately ta
   await flush(); expect(pixi.loaded).toHaveLength(1); expect(img.style.visibility).toBe('hidden');
   pixi.finishLoad(); pixi.loadGate = null;
   expect(await first).toBe(false); expect(await next).toBe(true);
-  expect(pixi.unloaded).toContain(oldLoad); expect(img.style.visibility).toBe('hidden');
+  expect(pixi.unloaded).not.toContain(oldLoad); expect(img.style.visibility).toBe('hidden');
+  expect(pixi.loaded.filter(url => url === oldLoad)).toHaveLength(1);
   expect(document.getElementById('unitFrames').hidden).toBe(false);
   expect(cacheStats().roleNames).toEqual(['changwuyu']);
+  await hide();
+  expect(pixi.unloaded).toContain(oldLoad);
 });
 it.each(['role', 'token'])('aborts an old pending alpha probe on %s replacement and does not share its attachment', async kind => {
   const normalFetch = globalThis.fetch;
@@ -243,4 +246,52 @@ it('settles a dying old role and hides its frame layer while a replacement role 
   await flush(); expect(oldDeathDone).toBe(true); expect(stage.inert).toBeFalsy();
   pixi.finishLoad(); pixi.loadGate = null; expect(await next).toBe(true);
   expect(play('atk')).toBe(true); expect(document.getElementById('unitFrames').dataset.role).toBe('baita');
+});
+
+it.each(Object.keys(runtimeSequences))('measures only the geometry anchor for fixed-canvas %s, retaining all delivered texture frames', async role => {
+  const bitmapBefore = globalThis.createImageBitmap;
+  const bitmaps = [];
+  globalThis.fetch = vi.fn(async () => ({ blob: async () => new Blob() }));
+  globalThis.createImageBitmap = vi.fn(async () => {
+    const bitmap = { width: 512, height: 342, close: vi.fn() }; bitmaps.push(bitmap); return bitmap;
+  });
+  vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null);
+  try {
+    const body = mount(200); body.querySelector('img').setAttribute('data-asset-key', `battle-${role}`);
+    expect(await attach(body)).toBe(true); await finishFrames(role);
+    expect(globalThis.fetch).toHaveBeenCalledTimes(1);
+    expect(globalThis.fetch.mock.calls[0][0]).toContain(runtimeSequences[role].idle[0]);
+    expect(globalThis.createImageBitmap).toHaveBeenCalledTimes(1);
+    expect(bitmaps[0].close).toHaveBeenCalledOnce();
+    expect(new Set(pixi.loaded).size).toBe(deliveredNames(role).length);
+    const firstLoads = pixi.loaded.length;
+    play('atk'); play('cast'); play('hurt');
+    expect(pixi.loaded).toHaveLength(firstLoads);
+    expect(globalThis.fetch).toHaveBeenCalledTimes(1);
+  } finally { globalThis.createImageBitmap = bitmapBefore; }
+});
+
+it('measures the next available idle when the first texture is missing and releases all successful textures', async () => {
+  const bitmapBefore = globalThis.createImageBitmap;
+  const role = 'changwuyu', [missing, fallback] = runtimeSequences[role].idle;
+  const bitmaps = [];
+  globalThis.fetch = vi.fn(async () => ({ blob: async () => new Blob() }));
+  globalThis.createImageBitmap = vi.fn(async () => {
+    const bitmap = { width: 768, height: 512, close: vi.fn() }; bitmaps.push(bitmap); return bitmap;
+  });
+  vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null);
+  pixi.missing.add(`/${role}/${missing}.webp`);
+  try {
+    const body = mount(201);
+    expect(await attach(body)).toBe(true); await finishFrames(role);
+    expect(globalThis.fetch).toHaveBeenCalledTimes(2);
+    expect(globalThis.fetch.mock.calls[1][0]).toContain(fallback);
+    expect(document.getElementById('unitFrames').dataset.frame).toBe(fallback);
+    expect(bitmaps).toHaveLength(2);
+    bitmaps.forEach(bitmap => expect(bitmap.close).toHaveBeenCalledOnce());
+    await hide();
+    expect(pixi.unloaded).toHaveLength(deliveredNames(role).length - 1);
+    expect(pixi.unloaded.some(url => url.includes(`/${missing}.webp`))).toBe(false);
+    expect(cacheStats().roles).toBe(0);
+  } finally { pixi.missing.clear(); globalThis.createImageBitmap = bitmapBefore; }
 });

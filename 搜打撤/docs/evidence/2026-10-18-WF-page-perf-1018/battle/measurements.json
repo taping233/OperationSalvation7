@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-18",
+  "environment": "Vitest 3.2.7 / jsdom; controlled requestAnimationFrame and performance.now for discovery",
+  "metrics": {
+    "hand": { "groups": 9, "renders": 20, "beforeDomMutationRecords": 3060, "afterDomMutationRecords": 0 },
+    "infusion": { "unrelatedKeys": 20, "beforeUnrelatedSnapshots": 80, "afterUnrelatedSnapshots": 0, "beforeMaterialKeySnapshots": 10, "afterMaterialKeySnapshots": 1 },
+    "discovery": { "candidates": 2, "openingFrames": 20, "beforeOpeningDomMutationRecords": 80, "afterOpeningDomMutationRecords": 0, "beforeReadyDomMutationRecords": 4, "afterReadyDomMutationRecords": 4, "admissionDelayMs": 350 }
+  },
+  "sourceSha256": {
+    "game/src/battle/view/battle.layers.js": { "before": "1a8686fc0bc8fb687c3ad3c33f4ceb511354b26992403819df8ef8ef69a4bab4", "after": "1edb9488dba72d62ee6cc66233b1ac88fddf59f28e2956a1054dcf76721a789d" },
+    "game/src/battle/view/battle.infusion-view.js": { "before": "c25d11b5e165801afdacdd1eac49dcada23ded8e526a4c4e6a375d55c89660a4", "after": "d79405d53e93fa2a8234c23ca0ac216b01ac20378fd0edfddd56f29ed38d73be" },
+    "game/src/battle/view/battle.view.js": { "before": "d01485ff9779a298f89eeef3e9c63e0e00449d6beb5ede9be234cedf1d388376", "after": "330ba953e430d18e27aa22b40e2ba231acd1c0c282430ee77d8e82f38b379d22" }
+  },
+  "tests": { "newTestCount": 9, "uniquePassedAcrossReports": 134, "uniqueFiles": 12, "remainingFailed": 0 },
+  "boundaries": ["Operation counts, not measured FPS or elapsed-time savings", "No browser or GPU/RSS claim", "No natural-path code 9 cause or resolution claim"]
+}

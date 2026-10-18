@@ -4,6 +4,7 @@ const pond = vi.hoisted(() => ({ resize: vi.fn(), tap: vi.fn(), pointer: vi.fn()
 vi.mock('../game/src/hub/courtyard-vendor/KoiPond.js', () => ({ createKoiPond: () => pond }));
 const rain = vi.hoisted(() => ({ resize:vi.fn(), render:vi.fn(), tap:vi.fn(() => true), setIntensity:vi.fn(), setPalette:vi.fn(), dispose:vi.fn() }));
 vi.mock('../game/src/hub/courtyard.rain-tableau.js', () => ({ createRainTableau:() => rain }));
+import { setPerformanceSettings } from '../game/src/core/performance-settings.js';
 import { courtyardV3HTML, mountCourtyardV3 } from '../game/src/hub/hub.courtyard-v3.js';
 
 let media, frames, raf, cancel, resizeObserver, dispose, hidden;
@@ -22,7 +23,7 @@ beforeEach(() => {
   hidden = vi.spyOn(document, 'hidden', 'get').mockReturnValue(false);
   vi.stubGlobal('AudioContext', vi.fn());
 });
-afterEach(() => { dispose?.(); dispose = null; document.body.replaceChildren(); document.body.classList.remove('reduce-motion'); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
+afterEach(() => { dispose?.(); dispose = null; setPerformanceSettings({ quality: 'balanced', fps: 60 }); document.body.replaceChildren(); document.body.classList.remove('reduce-motion'); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 const mount = async view => {
   document.body.innerHTML = courtyardV3HTML(view);
   dispose = mountCourtyardV3(document.body, view);
@@ -140,4 +141,22 @@ describe('庭院独立页生命周期', () => {
     document.body.classList.add('reduce-motion'); await Promise.resolve();
     expect(frames.size).toBe(0); expect(root.classList.contains('is-still')).toBe(true);
   });
+});
+
+
+it('updates courtyard sampling immediately, caps at 30 and unsubscribes on exit', async () => {
+  const root = await mount('koi');
+  const canvas = root.querySelector('.courtyard-v3-canvas');
+  expect(canvas.width).toBe(900);
+  setPerformanceSettings({ quality: 'low', fps: 30 });
+  expect(canvas.width).toBe(675);
+  pond.render.mockClear();
+  for (let sample = 0; sample < 165; sample++) {
+    const time = sample * 1000 / 165;
+    const current = [...frames]; frames.clear(); current.forEach(([, callback]) => callback(time));
+  }
+  expect(pond.render.mock.calls.filter(([, animate]) => animate).length).toBe(30);
+  dispose(); expect(canvas.width).toBe(1);
+  setPerformanceSettings({ quality: 'high', fps: 120 });
+  expect(canvas.width).toBe(1); expect(frames.size).toBe(0);
 });

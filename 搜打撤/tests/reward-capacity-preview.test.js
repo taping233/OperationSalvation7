@@ -87,7 +87,7 @@ describe('真实发卡与只读顺序容量预估一致',()=>{
           let expected=false;
           if (candidate) {
             const count=H.game.ownedCards.filter(o=>!o.safe&&!o.stored&&o.card.name===candidate.name).length;
-            const limit=['初始攻击','火球'].includes(candidate.name)?5:3;
+            const limit=candidate.type==='装备'?1:3;
             expected=(count>0&&count%limit!==0)||Bag.usedSlots()<18||(candidate.type==='资源'&&Bag.usedSlots()<Bag.bagCap());
           }
           expect(H.game.canReceiveCard(candidate)).toBe(expected);checked++;
@@ -103,10 +103,10 @@ describe('真实发卡与只读顺序容量预估一致',()=>{
     ['普通空堆一格',ordinary,0,17,4,[0,1,2],[3]],
     ['普通空堆跨两格',ordinary,0,16,7,[0,1,2,3,4,5],[6]],
     ['普通2/3跨堆',ordinary,2,17,5,[0,1,2,3],[4]],
-    ['初始1/5满包',starter,1,18,5,[0,1,2,3],[4]],
-    ['初始5/5满包',starter,5,18,2,[],[0,1]],
-    ['初始4/5跨堆',starter,4,17,7,[0,1,2,3,4,5],[6]],
-    ['火球1/5满包',fireball,1,18,5,[0,1,2,3],[4]],
+    ['初始1/3满包',starter,1,18,5,[0,1],[2,3,4]],
+    ['初始3/3满包',starter,3,18,2,[],[0,1]],
+    ['初始2/3跨堆',starter,2,17,7,[0,1,2,3],[4,5,6]],
+    ['火球1/3满包',fireball,1,18,5,[0,1],[2,3,4]],
   ])('%s',(_name,card,n,used,rewardCount,accepted,blocked)=>{
     arrange(copies(card,n),used);compareRealGrant(Array(rewardCount).fill(card),accepted,blocked);
   });
@@ -145,8 +145,8 @@ describe('真实发卡与只读顺序容量预估一致',()=>{
   it('前卡占掉最后基础格后珍珠盒被拒，不产生虚假扩容',()=>{
     arrange([],17);compareRealGrant([resource(0),pearl,resource(1)],[0],[1,2]);
   });
-  it('同名珍珠盒满基础格可并堆，每张成功入包仍再扩9格',()=>{
-    arrange(copies(pearl,1));compareRealGrant([pearl,...Array.from({length:19},(_,i)=>resource(i))],Array.from({length:19},(_,i)=>i),[19]);
+  it('同名装备珍珠盒不能并堆突破基础容量',()=>{
+    arrange(copies(pearl,1));compareRealGrant([pearl,...Array.from({length:10},(_,i)=>resource(i))],Array.from({length:9},(_,i)=>i+1),[0,10]);
   });
   it('预估支持冻结输入，不修改owned/card/奖励数组或flags',()=>{
     arrange(copies(ordinary,2),17);
@@ -156,7 +156,7 @@ describe('真实发卡与只读顺序容量预估一致',()=>{
   });
   it('bag旧stackCap/珍珠盒ID导出仍与共享规则同一接口',()=>{
     expect(Bag.stackCapOf).toBe(stackCapOf);expect(Bag.PEARL_BOX_ID).toBe(PEARL_BOX_ID);
-    expect([stackCapOf(ordinary),stackCapOf(starter),stackCapOf(fireball)]).toEqual([3,5,5]);
+    expect([stackCapOf(ordinary),stackCapOf(starter),stackCapOf(fireball)]).toEqual([3,3,3]);
   });
 });
 

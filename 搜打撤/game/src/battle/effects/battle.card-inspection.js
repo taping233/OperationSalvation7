@@ -7,7 +7,6 @@ import { hasInfusionWaiver } from './battle.infusion.js';
 const CURSE_SCAN = [
   { key: 'bleed',   re: /(?:附加|施加)\s*(?:(\d+)\s*层?)?\s*流血/, def: 1 },
   { key: 'poison',  re: /(?:附加|施加)\s*(?:(\d+)\s*层)?\s*中毒/, def: 1 },
-  { key: 'burn',    re: /(?:附加|施加|攻击并)\s*(?:\d+\s*层?\s*)?灼烧/, def: 1 },
   { key: 'freeze',  re: /附加冰冻|冰冻所有|冰冻\s*(?:\d+|[一两二三四五])?\s*名|冻结/, def: 1 },
   { key: 'silence', re: /沉默/, def: 1 },
   { key: 'abreak',  re: /破甲/, def: 2 },

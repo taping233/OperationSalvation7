@@ -126,6 +126,23 @@ it('casts area attacks from empty battlefield space using a live enemy for resol
   expect(commands.submitCardPlay).toHaveBeenCalledExactlyOnceWith('drag-card', 1, false);
 });
 
+it('previews every living enemy over legal area-drop space and clears on invalid space or cancellation', async () => {
+  const { showFoePreview, clearFoePreview } = await import('../game/src/battle/view/battle.hover.js');
+  state.card.rules = { battle: { target: { area: true } } };
+  const second = foe.cloneNode(true); second.dataset.eidx = '1'; foe.after(second);
+  state.snap.foes.push({ hp: 20, dead: false });
+  begin(); move(800, 700); step();
+  expect(showFoePreview).toHaveBeenCalledWith(foe, 0, 'drag-card', state.card, 'drag');
+  expect(showFoePreview).toHaveBeenCalledWith(second, 1, 'drag-card', state.card, 'drag');
+  expect(commands.submitCardPlay).not.toHaveBeenCalled();
+  document.elementFromPoint.mockReturnValue(document.querySelector('.sts-hud'));
+  move(800, 650); step();
+  expect(clearFoePreview).toHaveBeenCalledWith(foe, expect.anything(), expect.anything());
+  expect(clearFoePreview).toHaveBeenCalledWith(second, expect.anything(), expect.anything());
+  Aim.cancelAim();
+  expect(commands.submitCardPlay).not.toHaveBeenCalled();
+});
+
 it.each(['self', 'enemy'])('keeps field-cast %s cards out of hand and HUD drop zones', side => {
   state.card.side = side;
   state.card.rules = { battle: { target: { area: true } } };

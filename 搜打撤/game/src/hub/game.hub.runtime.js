@@ -51,7 +51,7 @@ let achievementReturn = 'rewards';
 let stashFromPersonnel = false;
 let shopParent = 'stash', facilityParent = 'stash';
 let tradeState = createTradeShopState();
-let disposeTrade = () => {};
+let disposeTrade = () => {}, disposePersonnel = () => {};
 let hubStashView = 'cards';
 let hubPersonView = 'wu';
 let courtyardView = 'rain';
@@ -124,7 +124,7 @@ preparationFeature = createHubPreparationAdapter({
     const focused = document.activeElement?.closest?.('#hubMain [data-act], #hubMain [data-browser-key]');
     const currentFocus = focused ? { ...focused.dataset } : null;
     disposeCourtyard(); disposeCourtyard = () => {};
-    disposeTrade(); disposeTrade = () => {};
+    disposeTrade(); disposeTrade = () => {}; disposePersonnel(); disposePersonnel = () => {};
     homeScene.leave();
     disposePreparation();
     const B = SDT.Base;
@@ -385,7 +385,7 @@ preparationFeature = createHubPreparationAdapter({
     });
     hubAct('campFacility', d => { selectFacility(d.id); renderHub(); });
     bindWarehouse({ ui: hubUI, base: B, cards: SDT.Cards, meta: M, sound: Sfx, refresh: renderHub, notify: notice, openCard:openStashCardView });
-    bindPersonnel({ ui: hubUI, sound: Sfx, refresh: renderHub });
+    disposePersonnel = bindPersonnel({ ui: hubUI, sound: Sfx, refresh: renderHub });
     bindArchive(hubUI, { openAchievements:() => { achievementReturn = hubCollectionView === 'backs' ? 'backs' : 'rewards'; hubCollectionView = 'achievements'; renderHub(); } });
     bindArchiveV3({ ui:hubUI, base:B, meta:M, cards:SDT.Cards, refresh:renderHub });
     bindBaseMotion(document.getElementById('hubMain'));
@@ -404,7 +404,7 @@ preparationFeature = createHubPreparationAdapter({
     hubRenderRevision++;
     cancelPendingPageEntries();
     disposeCourtyard(); disposeCourtyard = () => {};
-    disposeTrade(); disposeTrade = () => {};
+    disposeTrade(); disposeTrade = () => {}; disposePersonnel(); disposePersonnel = () => {};
     zoomFocusObserver?.disconnect();
     zoomFocusObserver = null;
     homeScene.leave();

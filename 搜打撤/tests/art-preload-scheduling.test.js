@@ -3,6 +3,8 @@ import frames from '../game/data/card-frame-layout.json';
 import manifest from '../game/src/generated/art-manifest.js';
 import thumbnails from '../game/src/generated/thumb-manifest.js';
 import { assetUrl } from '../game/src/core/asset-url.js';
+import { PRELOAD_SCENES } from '../game/src/run/game.run.data.js';
+import { STARTUP_SCENE_KEYS } from '../game/src/core/performance-budgets.js';
 import { createForegroundImageYield, planStartupArtPreload } from '../game/src/core/art-preload-plan.js';
 
 let idle, Art, requests, now;
@@ -31,37 +33,39 @@ afterEach(() => {
 });
 
 describe('启动预热集合与顺序', () => {
-  it('桌面本地资源只预取首轮场景和通用卡框，不扫描全人物、原图或缩略图', () => {
-    const sceneUrls = ['current-scene.webp'];
-    const urls = planStartupArtPreload({ protocol: 'app:', sceneUrls,
-      figureUrls: ['figure.webp'], thumbnailUrls: ['thumb.webp'], manifestUrls: ['catalog.webp'] });
-    expect(urls).toEqual([...sceneUrls, ...frameUrls()]);
-    expect(urls).not.toContain('catalog.webp');
+  it('battle card-only collection excludes unrelated portraits while general collectors remain available', () => {
+    const cards = [{ id: 'starter-attack', name: '杀', type: '武术' }];
+    const allPortraits = Art.collectCardAssets([]);
+    expect(allPortraits.some(url => url.includes('portraits/enemies/'))).toBe(true);
+    expect(allPortraits.some(url => url.includes('portraits/full/'))).toBe(true);
+    const cardsOnly = Art.collectCardAssets(cards, { includePortraits: false });
+    const expectedUrl = /src="([^"]+)"/.exec(Art.cardIcon(cards[0]))[1];
+    expect(cardsOnly).toEqual([expectedUrl]);
+    expect(Art.collectCardAssets([], { includePortraits: false })).toEqual([]);
+    expect(Art.collectCardAssets(cards)).toEqual([...allPortraits, expectedUrl]);
   });
-  it('保留旧清单完整集合，新增项仅是现行人物URL与现行卡框，且先于全缩略图', () => {
-    const sceneUrls = ['current-scene.webp'];
+  it.each(['https:', 'http:', 'app:'])('%s startup keeps only six common scenes and thirteen current card frames', protocol => {
+    const sceneUrls = STARTUP_SCENE_KEYS.map(key => PRELOAD_SCENES[key]);
     const figureUrls = Art.collectCardAssets([]);
     const thumbnailUrls = thumbnails.map(path => assetUrl(`assets/thumbs/${path}`));
     const manifestUrls = manifest.map(path => assetUrl(`assets/${path}`));
-    const original = [...sceneUrls, ...thumbnailUrls, ...manifestUrls];
-    const urls = planStartupArtPreload({ sceneUrls, figureUrls, thumbnailUrls, manifestUrls });
-    expect(new Set(urls)).toEqual(new Set([...original, ...figureUrls, ...frameUrls()]));
-    expect(urls).toHaveLength(new Set(urls).size);
-    expect(urls[0]).toBe(sceneUrls[0]);
-    const firstThumbnail = urls.indexOf(thumbnailUrls[0]);
-    for (const url of [...figureUrls, ...frameUrls()]) expect(urls.indexOf(url)).toBeLessThan(firstThumbnail);
-    expect(figureUrls.some(url => url.includes('portraits/frames/'))).toBe(false);
+    const urls = planStartupArtPreload({ protocol, sceneUrls, figureUrls, thumbnailUrls, manifestUrls });
+    expect(sceneUrls).toHaveLength(6);
+    expect(frameUrls()).toHaveLength(13);
+    expect(urls).toEqual([...sceneUrls, ...frameUrls()]);
+    expect(urls).toHaveLength(19);
+    expect(urls.some(url => url.includes('/thumbs/') || url.includes('/portraits/'))).toBe(false);
   });
-  it('URL查询参数原样保留，不以路径相同为由丢失实际渲染版本，也不改输入数组', () => {
-    const figureUrls = ['portrait.webp?art=current&v=release'];
-    const manifestUrls = ['portrait.webp?v=release', 'scene.webp?v=release'];
-    const urls = planStartupArtPreload({ figureUrls, manifestUrls, thumbnailUrls: ['thumb.webp', 'thumb.webp'] });
-    expect(urls[0]).toBe(figureUrls[0]);
-    expect(urls).toContain(manifestUrls[0]);
-    expect(urls.filter(url => url === 'thumb.webp')).toHaveLength(1);
-    expect(manifestUrls).toEqual(['portrait.webp?v=release', 'scene.webp?v=release']);
+  it('keeps final versioned scene URLs, deduplicates equal URLs and does not mutate inputs', () => {
+    const sceneUrls = ['scene.webp?art=current&v=release', 'scene.webp?v=release', 'scene.webp?v=release', frameUrls()[0]];
+    const before = [...sceneUrls];
+    const urls = planStartupArtPreload({ sceneUrls });
+    expect(urls).toEqual([...new Set([...sceneUrls, ...frameUrls()])]);
+    expect(urls).toContain('scene.webp?art=current&v=release');
+    expect(urls).toContain('scene.webp?v=release');
+    expect(sceneUrls).toEqual(before);
   });
-  it('无人物或可选清单时仍包含全部现行卡框，不生成手写过期路径', () => {
+  it('no optional catalogue fallback: an empty scene plan still includes only current card frames', () => {
     expect(planStartupArtPreload()).toEqual([...new Set(frameUrls())]);
   });
 });
@@ -110,6 +114,39 @@ describe('前台未完成图片让路', () => {
 });
 
 describe('后台预取批次调度', () => {
+  it('重叠调用共享同一未完成请求，各自进度仍完整结算', async () => {
+    const firstProgress = vi.fn(), secondProgress = vi.fn();
+    const first = Art.prefetchBatched(['shared.webp'], firstProgress);
+    const second = Art.prefetchBatched(['shared.webp'], secondProgress);
+    idle.shift()(); idle.shift()();
+    expect(requests.map(request => request.url)).toEqual(['shared.webp']);
+    requests[0].resolve({ ok: true, arrayBuffer: async () => new ArrayBuffer(0) });
+    await flush(); while (idle.length) idle.shift()(); await Promise.all([first, second]);
+    expect(firstProgress.mock.calls.at(-1)).toEqual([1, 1]);
+    expect(secondProgress.mock.calls.at(-1)).toEqual([1, 1]);
+  });
+  it('重叠失败结算后释放in-flight，下次调用可重试', async () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const first = Art.prefetchBatched(['retry-shared.webp']);
+    const second = Art.prefetchBatched(['retry-shared.webp']);
+    idle.shift()(); idle.shift()(); expect(requests).toHaveLength(1);
+    requests[0].resolve({ ok: false, status: 503 });
+    await flush(); while (idle.length) idle.shift()(); await Promise.all([first, second]);
+    const retry = Art.prefetchBatched(['retry-shared.webp']); idle.shift()();
+    expect(requests).toHaveLength(2);
+    requests[1].resolve({ ok: true, arrayBuffer: async () => new ArrayBuffer(0) });
+    await flush(); while (idle.length) idle.shift()(); await retry;
+  });
+  it('较晚执行的旧队列复核已完成集合，不重复预取', async () => {
+    const first = Art.prefetchBatched(['queued.webp']);
+    const queued = Art.prefetchBatched(['queued.webp']);
+    const firstStart = idle.shift(), queuedStart = idle.shift(); firstStart();
+    requests[0].resolve({ ok: true, arrayBuffer: async () => new ArrayBuffer(0) });
+    await flush(); while (idle.length) idle.shift()(); await first;
+    queuedStart(); await flush(); while (idle.length) idle.shift()(); await queued;
+    expect(requests).toHaveLength(1);
+  });
+
   it.each(['hidden', 'moving', 'input'])('%s期间让出后台批次，恢复后继续原清单', async reason => {
     const hidden = vi.spyOn(document, 'hidden', 'get').mockReturnValue(reason === 'hidden');
     document.body.dataset.state = reason === 'moving' ? 'moving' : 'idle';

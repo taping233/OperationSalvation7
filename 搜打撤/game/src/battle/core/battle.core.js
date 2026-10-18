@@ -4,7 +4,7 @@ import { refillDrawPile } from '../bag/battle.deck.js';
 import { COMBAT_HOOKS } from './combat.js';
 import { BATTLE_PHASES } from '../runtime/battle.state.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
-import { hasInfusionWaiver } from '../effects/battle.infusion.js';
+import { hasInfusionWaiver, missingInfusionReason } from '../effects/battle.infusion.js';
 import * as Combat from './combat.js';
 import {
   battleState, G, foes, opts, mode, hand, energy, maxEnergy, pstat, busy, infusing,
@@ -13,7 +13,7 @@ import {
   battleRestartCheckpoint, set$energy, set$interaction, set$viewingGrave, set$viewingDeck,
   set$pendingHint, bindBattleRenderer, showDread, takeBattleFloats, takeBattleCardAnims,
 } from '../runtime/battle.runtime.js';
-import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, getBattleLiveness, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover, slamSkill } from './battle.engine.js';
+import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, getBattleLiveness, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, handUnplayableReason as unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover, slamSkill } from './battle.engine.js';
 import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
 import { getCardPlayAvailability, submitCardPlay } from './battle.engine.js';
 import { endTurn, surrender } from './battle.enemy-phase.js';
@@ -276,6 +276,7 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     const selectedFuelUids = pendingCard && pendingCard.uid === uid
       ? (pendingCard.fuelUids || []).slice()
       : (infusing && infusing.uid === uid ? [...infusing.picked] : []);
+    if (!illegalReason) illegalReason = missingInfusionReason(card, selectedFuelUids.length, allSpellsInfused);
     const targetIndexes = need === 'enemy'
       ? foes.map((foe, index) => !foe.dead ? index : -1).filter(index => index >= 0)
       : [];
@@ -410,7 +411,12 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
     resolveDart,
     beginInfusion: beginInfuse,
     // 09-20 老板定版：注能条「不注能直接打出」——退出注能态并跳过注能分流走直接打出
-    playDirect: uid => { cancelInfuse(); play(uid, null, true); },
+    playDirect: uid => {
+      const card = findEffectiveCard(uid)?.card;
+      const reason = missingInfusionReason(card, 0, allSpellsInfused);
+      if (reason) { G.log(reason, 'warn'); return; }
+      cancelInfuse(); play(uid, null, true);
+    },
     useEquipSkill,
     selectDeckCard: toggleDeckCard,
     confirmDeck: beginBoss,

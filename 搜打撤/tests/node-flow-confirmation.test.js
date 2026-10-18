@@ -54,7 +54,7 @@ it('宝箱必须确认搜索；返回不发奖励，双击搜索只打开一次'
   reenter(); const search = st.acts.nodeChestSearch;
   search(); search();
   expect(st.chests).toHaveBeenCalledTimes(1);
-  expect(st.chests.mock.lastCall[2]).toMatchObject({ resourceOnly:true, consumeNode:true });
+  expect(st.chests.mock.lastCall[2]).toEqual({ consumeNode:true });
 });
 it('点击实际入口才派发补给页，旧档与旁边节点不合成补给', () => {
   st.game.entrySupply = { version:1, layerIdx:0, trackPos:0, cardIds:['a'], taken:[] };

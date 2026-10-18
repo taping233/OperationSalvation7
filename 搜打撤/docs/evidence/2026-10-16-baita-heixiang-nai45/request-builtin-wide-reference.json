@@ -1,0 +1,39 @@
+{
+  "status": "generated",
+  "tool": "image_gen",
+  "prompt": "Edit IMAGE 1, the latest corrected Baita and Heixiang illustration. IMAGE 2 is a STYLE AND LIGHTING REFERENCE ONLY. Make one expanded horizontal wallpaper with the same aspect ratio as the game's existing homepage wallpaper: exactly 1672:941 (approximately 16:9). This is wider than the input's 7:4 canvas. Aim for a 1672 by 941 canvas, or a proportional larger canvas.\n\nExpand the composition naturally to the sides and slightly below the current crop; pull back just enough to give the figures, the chair and the draped skirt more breathing room. Keep the two people as large dominant subjects, not tiny figures in a vast empty room. Heixiang remains standing immediately left and behind seated Baita, leaning slightly forward and looking at the viewer. Baita remains seated sideways at right, her head turned toward the viewer. Preserve comparable adult head sizes and their existing overlapping relationship. Extend visible lower torso, skirt, carved chair and quiet stone floor where needed, maintaining coherent perspective and natural human proportions.\n\nREMOVE BOTH FLOATING BOOKS behind their heads completely and reconstruct the dark wall behind them. Keep the one OPEN ANCIENT BOOK physically resting on Baita's lap. Do not remove that lap book. Preserve the giant sword on Heixiang's back, his one coffee cup and saucer physically held in his gloved hands, Baita's coffee cup near her mouth and her other hand touching her lap book. No new props, cake, fork or magical effects.\n\nPreserve the corrected character identities and costume designs of IMAGE 1. Heixiang: adult massive muscular very dark brown-skinned man, short black swept-back hair with exposed forehead, amber eyes, three short stitched marks only on his anatomical left cheek (viewer-right), black combat clothes and gloves, one steel-gray shoulder plate, brown-orange neck scarf, back-carried greatsword. Baita: adult woman, long wavy dark-brown hair, green eyes, two adjacent thin gold hairpins on one side, closed buttoned white blouse and gathered long sleeves, wide dark-green buckled suspenders, long dark-green skirt. Do not copy the characters, pink/silver hair, hats, bows, kimono or frills from IMAGE 2.\n\nBorrow IMAGE 2's drawing grammar closely: restrained anime illustration, economical delicate facial marks, natural eyes without excessive polish, smooth quiet broad color fields, clear but subtle grouped fabric shadows, matte materials, selective soft and firm edges, soft sparse texture only. Deep desaturated olive-green and nearly black upper background, warm pale ivory sleeves and skirt catching a narrow bright side light, faint warm reflected skin tones. Strong dark-to-light hierarchy: upper room mostly dark, illuminated faces and hands, light spilling across the lower clothing and stone. Quiet panelled architectural background. Keep Heixiang's skin dark even under the light, and his far torso blending into the dark wall. Avoid dense material scratches, chipped-metal texture, crisp engraving, busy hair strands, thick conspicuous brush strokes, photorealistic skin or glossy splash-art finishing. The detail density and atmospheric softness should resemble IMAGE 2 more than a highly polished promotional painting. No text, logos, frame, UI, extra people, or any books floating behind them.",
+  "referenced_image_paths": [
+    "C:\\Users\\太平\\.codex\\generated_images\\01a144c7-d822-7eb3-b53a-46969e84145d\\exec-c7d4ddac-d8f5-42c9-aedd-5e3317f2e885.png",
+    "C:\\Users\\太平\\AppData\\Local\\Temp\\codex-clipboard-d68167a7-e88d-4d7b-8f05-5ef81a28dad1.png"
+  ],
+  "transparent_background": false,
+  "homepage_wallpaper": "game/assets/reconstruction/wallpaper-snow-road-1016.webp",
+  "homepage_wallpaper_dimensions": [
+    1672,
+    941
+  ],
+  "requested_ratio": "1672:941",
+  "scope": "Expand current candidate, follow attached reference style and lighting, remove only the two background floating books.",
+  "game_integrated": false,
+  "source_output": "C:\\Users\\太平\\.codex\\generated_images\\01a144c7-d822-7eb3-b53a-46969e84145d\\exec-d4a2aab9-e0a4-42c2-a14f-1ff29a8817b8.png",
+  "output": "D:\\素材\\代号柒\\.tmp\\art\\baita-heixiang-home-ratio-20261016.png",
+  "size": [
+    1672,
+    941
+  ],
+  "sha256": "698cc0ab746f90a69b16b69a0b3cd20a39ca2db414bd4ad23c16baec2bd78068",
+  "homepage_ratio_exact_match": true,
+  "visual_review": {
+    "source": "assistant viewed generated output",
+    "matched": [
+      "both background floating books removed",
+      "open lap book retained",
+      "expanded sides, skirt, carved chair and floor",
+      "dark olive room and directional light with quieter detail",
+      "current character costumes and both coffee cups retained"
+    ],
+    "user_approved": false
+  },
+  "tests_run": false,
+  "committed": false
+}

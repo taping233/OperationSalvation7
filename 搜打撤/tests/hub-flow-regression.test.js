@@ -27,7 +27,7 @@ describe('基地出发与选角回流回归', () => {
     expect(hub).toContain("deployHint = '[[icon:cross]] 基地出征整备未保存，请重试；当前没有开始新局。'");
     // 顺序守卫：失败分支 → 重置选牌 → 成功返回；中间允许有限的合法插入（音效/埋点），不锁死相邻字节（CRLF 教训同族）
     expect(hub).toMatch(/if \(started === false\) \{[\s\S]*?return false;\s*\}\s*replaceDeployPick\(null\);\s*[\s\S]{0,300}?return true;/);
-    expect(altar).toContain('if (beforeConfirm && beforeConfirm() === false) return;');
+    expect(altar).toContain('if (beforeConfirm && beforeConfirm() === false) return false;');
     expect(altar.indexOf('beforeConfirm() === false')).toBeLessThan(altar.indexOf('const card = SDT.Cards.randomClassCard(cl)'));
   });
 });

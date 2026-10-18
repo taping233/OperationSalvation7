@@ -1,7 +1,7 @@
 // Shared live/preview card receipt rules. No game state, browser, grant or RNG access.
 export const PEARL_BOX_ID = 'tt2-pearlbox';
 export const PEARL_BOX_SLOTS = 9;
-export const stackCapOf = card => ['初始攻击', '火球'].includes(card?.name) ? 5 : 3;
+export const stackCapOf = card => card?.type === '装备' ? 1 : 3;
 
 const normalCardCount = (ownedCards, card) => ownedCards.filter(o => !o.safe && !o.stored && o.card.name === card.name).length;
 
@@ -31,4 +31,10 @@ export function previewCardRewards(pendingCards, { ownedCards, usedSlots, baseCa
     acceptedIndices.push(index);
   });
   return { canTake:acceptedIndices.length, cant:blockedIndices.length, acceptedIndices, blockedIndices, usedSlots, totalCap };
+}
+
+// Moving a whole named stack may merge into an already occupied destination slot.
+export function stackTransferSlotDelta(ownedCards, name, toSafe, count, cap) {
+  const sameSide = ownedCards.filter(o => !!o.safe === !!toSafe && !o.stored && o.card.name === name).length;
+  return Math.ceil((sameSide + count) / cap) - Math.ceil(sameSide / cap);
 }

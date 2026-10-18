@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-18",
+  "finalUniquePassingFiles": 10,
+  "finalUniquePassingTests": 142,
+  "finalOutstandingFailures": 0,
+  "batches": [
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/page-perf-expedition.test.js tests/map-travel-path.test.js tests/expedition-view.test.js tests/event-callback-lifecycle-audit.test.js tests/departure-class-confirmation.test.js tests/event-scene-selection.test.js tests/event-scene-readability.test.js tests/contracts.test.js tests/architecture-boundaries.test.js",
+      "exitCode": 1,
+      "passingExistingFiles": 8,
+      "passingExistingTests": 125,
+      "newTestPasses": 11,
+      "newTestFailures": 1,
+      "failure": "New class-choice test motion stub lacked preview(); test-only stub fixed after this run.",
+      "existingPassingFiles": {
+        "tests/map-travel-path.test.js": 10,
+        "tests/expedition-view.test.js": 22,
+        "tests/event-callback-lifecycle-audit.test.js": 36,
+        "tests/departure-class-confirmation.test.js": 3,
+        "tests/event-scene-selection.test.js": 3,
+        "tests/event-scene-readability.test.js": 10,
+        "tests/contracts.test.js": 17,
+        "tests/architecture-boundaries.test.js": 24
+      }
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/page-perf-expedition.test.js",
+      "exitCode": 0,
+      "passed": 12,
+      "failed": 0,
+      "durationSeconds": 2.56
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/map-route-v2-preview.test.js",
+      "exitCode": 0,
+      "passed": 5,
+      "failed": 0,
+      "durationSeconds": 2.88
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js game/src/run/expedition.view.js game/src/run/map-travel-path.js game/src/run/event-recode-candidates.js game/src/run/game.run.flow.js game/src/run/game.run.class-choice.page.js game/src/ui/node-scene-view.js tests/page-perf-expedition.test.js tests/event-callback-lifecycle-audit.test.js",
+      "exitCode": 0
+    },
+    {
+      "command": "node docs/evidence/2026-10-18-WF-page-perf-1018/expedition/benchmark.mjs",
+      "exitCode": 0,
+      "output": "operation-counts.json"
+    }
+  ],
+  "earlierFeedback": "Initial run exposed one stale B01 boss-gate copy assertion and incomplete new motion test stubs. B01 was verified against current game.run.altar.js and battle.lifecycle.js minimum-deck rules, then only the expected wording was updated. Final valid results above supersede those failures.",
+  "scope": "No full suite, build, browser service, browser operation, or commit by this subagent. Parent owns current-window browser and integration checks."
+}

@@ -59,7 +59,7 @@ describe('SFX mute and audio instance lifecycle', () => {
     sound.ensure();
     for (let i=0;i<800;i++) await Promise.resolve();
     const urls = fetch.mock.calls.map(([url]) => url);
-    const confirm = urls.findIndex(url => url.includes('/jsfxr/confirm.wav'));
+    const confirm = urls.findIndex(url => url.includes('/interface-soft/confirmation_001.ogg'));
     const battle = urls.findIndex(url => url.includes('/battle/'));
     expect(confirm).toBeGreaterThanOrEqual(0);
     expect(battle).toBeGreaterThan(confirm);
@@ -147,29 +147,56 @@ describe('SFX mute and audio instance lifecycle', () => {
 });
 
 describe('partial SFX asset availability', () => {
-  it.each(['click', 'hover', 'switch', 'hit'])('retains successful %s siblings when one file is missing', async cue => {
-    const missing = { click: '/click1.wav', hover: '/rollover1.wav', switch: '/switch1.wav', hit: '/hit-1.ogg' }[cue];
+  it.each(['hit', 'hurt', 'parry', 'draw'])('retains successful %s siblings when one file is missing', async cue => {
+    const missing = { hit: '/hit-1.ogg', hurt: '/hurt-1.ogg', parry: '/parry-1.ogg', draw: '/draw-1.ogg' }[cue];
     const sound = await importSound(async url => ({ ok: !url.split('?')[0].endsWith(missing), status: 404, arrayBuffer: async () => new ArrayBuffer(1) }));
     sound.ensure(); await flush(); sound.sfx(cue);
     expect(context.contexts[0].oscillators).toHaveLength(0);
     expect(context.contexts[0].sources).toHaveLength(1);
   });
 
-  it('keeps synthetic fallback when every sampled sibling fails', async () => {
+  it('stays silent without synthesis when every sampled sibling fails', async () => {
     const sound = await importSound(async () => ({ ok: false, status: 404 }));
     sound.ensure(); await flush(); sound.sfx('click');
-    expect(context.contexts[0].oscillators).toHaveLength(1);
+    expect(context.contexts[0].oscillators).toHaveLength(0);
+    expect(context.contexts[0].sources).toHaveLength(0);
   });
 
-  it('normalizes a jsfxr sample only once', async () => {
+  it('preserves original sample dynamics without normalization', async () => {
     const buffers = [];
     const sound = await importSound(); sound.ensure();
     context.contexts[0].decodeAudioData.mockImplementation(() => {
       const buffer = context.contexts[0].createBuffer(); buffers.push(buffer); return Promise.resolve(buffer);
     });
-    await flush(); sound.sfx('confirm');
+    await flush(); sound.sfx('deny');
     const buffer = context.contexts[0].sources[0].buffer;
     expect(buffers).toContain(buffer);
-    expect(buffer.getChannelData).toHaveBeenCalledTimes(2);
+    expect(buffer.getChannelData).not.toHaveBeenCalled();
   });
+});
+
+describe('CC0 UI integration', () => {
+  it('plays the original-dynamics UI buffer and shares mute bus', async () => {
+    const sound = await importSound(); sound.ensure(); await flush();
+    const ctx = context.contexts[0];
+    sound.sfx('confirm');
+    const source = ctx.sources.at(-1);
+    expect(Array.from(source.buffer.getChannelData(0))).toEqual([expect.closeTo(0.4), -0.5]);
+    expect(ctx.gains.at(-1).gain.value).toBe(0.24);
+    sound.setSfxMuted(true); expect(ctx.gains[1].gain.value).toBe(0);
+    const urls = fetch.mock.calls.map(([url]) => url);
+    const confirm = urls.findIndex(url => url.includes('/interface-soft/confirmation_001.ogg'));
+    expect(confirm).toBeGreaterThanOrEqual(0);
+    expect(confirm).toBeLessThan(urls.findIndex(url => url.includes('/battle/')));
+    expect(urls.some(url => url.includes('/real-foley/wood-tap-01.wav'))).toBe(true);
+  });
+});
+
+it('does not request or play legacy synthesis when CC0 confirmation fails', async () => {
+  const sound = await importSound(async url => ({ ok: !url.includes('/interface-soft/'), status: 404, arrayBuffer: async () => new ArrayBuffer(1) }));
+  sound.ensure(); await flush(); sound.sfx('confirm');
+  const ctx = context.contexts[0];
+  expect(ctx.sources).toHaveLength(0);
+  expect(ctx.oscillators).toHaveLength(0);
+  expect(fetch.mock.calls.some(([url]) => url.includes('/jsfxr/'))).toBe(false);
 });

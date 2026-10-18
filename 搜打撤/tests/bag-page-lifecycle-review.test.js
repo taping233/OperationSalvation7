@@ -22,7 +22,7 @@ beforeEach(async () => {
     usedPocket: [], cardOrder: [], hp: 10, maxHp: 30, coins: 0, fragments: 0, stackCapOf: () => 3, heal: vi.fn(n => { H.game.hp += n; }) });
   document.body.innerHTML = '<div id="overlay" hidden><div id="ovBody"></div></div>';
   const overlay = document.getElementById('overlay'), body = document.getElementById('ovBody');
-  ui = { el: { overlay, ovBody: body }, _acts: {}, helpTopics: {}, act(name, fn) { this._acts[name] = fn; }, log: vi.fn(), refresh: vi.fn(), helpBtn: () => '', registerHelp(id, def) { this.helpTopics[id] = def; },
+  ui = { el: { overlay, ovBody: body }, _acts: {}, helpTopics: {}, act(name, fn) { this._acts[name] = fn; }, log: vi.fn(), refresh: vi.fn(), helpBtn: id => `<button class="help-btn" data-help="${id}">?</button>`, registerHelp(id, def) { this.helpTopics[id] = def; },
     showOverlay(_title, html, mode) { document.getElementById('cardZoom')?.remove(); overlay.hidden = false; overlay.classList.remove('closing'); overlay.classList.toggle('bag-full', mode === 'bagpage'); body.innerHTML = html; },
     hideOverlay() { overlay.hidden = true; },
     showCardZoom(_card, options) { document.getElementById('cardZoom')?.remove(); const zoom = document.createElement('div'); zoom.id = 'cardZoom'; zoom.classList.toggle('inventory-zoom', options.presentation === 'inventory'); zoom.innerHTML = `<button class="cz-backdrop"></button><button class="cz-close"></button><div class="cz-card"></div><div class="cz-foot">${options.footer}</div>`; zoom.querySelector('.cz-backdrop').onclick = () => { zoom.remove(); options.returnFocus?.focus(); }; document.body.append(zoom); },
@@ -38,6 +38,30 @@ function inspect(name = potion.name) { document.querySelector(`[data-act="inspec
 function pointer(type, target, id = 1, x = 20) { const event = new Event(type, { bubbles: true, cancelable: true }); Object.assign(event, { pointerId: id, button: 0, clientX: x, clientY: 20 }); target.dispatchEvent(event); }
 function startDrag() { const source = document.querySelector('[data-stack="木材卡"]'); pointer('pointerdown', source); pointer('pointermove', window, 1, 200); frames.at(-1)(); return source; }
 describe('背包旧详情/页面回调与正常返回', () => {
+  it('神秘药水地图详情禁用，直接旧回调也不消费/回血/发金币', () => {
+    const mystery = { id:'tt3-mystery-potion', name:'神秘药水', type:'道具', desc:'随机神秘效果。' };
+    H.game.ownedCards = [{ uid:'mystery', card:mystery }];
+    bag.showBackpack(true); inspect(mystery.name);
+    const button = document.querySelector('[data-act="useDetailCard"]');
+    expect(button.disabled).toBe(true); expect(button.textContent).toContain('仅战斗');
+    ui._acts.useDetailCard();
+    expect(H.game.ownedCards).toHaveLength(1); expect(H.game.coins).toBe(0);
+    expect(H.game.heal).not.toHaveBeenCalled(); expect(H.save).not.toHaveBeenCalled();
+  });
+
+  it.each([['cmtn6bge52qt', 2, 0], ['cmtn6bge52qt', 2, 1], ['cmtn6bge52qt', 2, 3], ['tt-crystal', 3, 0], ['tt-crystal', 3, 1], ['tt-crystal', 3, 4]])('%s地图消耗区 %s上限/%s张时的详情按钮和执行守卫', (id, amount, count) => {
+    const restore = { id, name: id === 'tt-crystal' ? '能源结晶' : '复原药水', type: '道具', rules: { version: 1, bag: { use: [{ op: 'restoreConsumed', amount }] } } };
+    H.game.ownedCards = [{ uid: 'restore', card: restore }];
+    H.game.usedPocket = count ? [{ card: spell, count }] : [];
+    bag.showBackpack(true); inspect(restore.name);
+    expect(document.querySelector('[data-act="useDetailCard"]').disabled).toBe(count === 0);
+    // Direct callback invocation also exercises the execution guard, independent of disabled UI.
+    ui._acts.useDetailCard();
+    expect(H.game.ownedCards.some(entry => entry.uid === 'restore')).toBe(count === 0);
+    expect(H.game.ownedCards.filter(entry => entry.card.id === spell.id)).toHaveLength(Math.min(count, amount));
+    expect(H.game.usedPocket.reduce((n, entry) => n + entry.count, 0)).toBe(Math.max(0, count - amount));
+    expect(H.save).toHaveBeenCalledTimes(count ? 1 : 0);
+  });
   it.each([false, true])('战斗中的通用背包入口拒绝打开/刷新（刷新=%s），不转发旧战斗背包命令', refresh => {
     ui.hideOverlay(); H.game.battleActive = true;
     const openBag = vi.fn(); window.SDT.Battle = { commands:{ openBag } };
@@ -84,6 +108,37 @@ describe('背包旧详情/页面回调与正常返回', () => {
     const help = ui.helpTopics.bag; ui.showOverlay('', '<div class="help-body">帮助</div>'); help.back(); expect(document.querySelector('.bag-view')).not.toBeNull();
     const latest = ui.helpTopics.bag; ui.showOverlay('', '<div id="newPage">新页</div>'); latest.back(); expect(document.getElementById('newPage')).not.toBeNull();
   });
+  it('锦囊使用显式安全取消入口，与珍珠盒一样可由共享 Esc 返回背包', async () => {
+    inspect('法师锦囊'); ui._acts.pouchStoreZoom();
+    const { overlayMethods } = await import('../game/src/ui/overlay.js');
+    ui._lastMode = undefined;
+    ui._findCancelBtn = overlayMethods._findCancelBtn;
+    const back = ui._findCancelBtn();
+    expect(back.dataset.act).toBe('pouchBack'); expect(back.dataset.cancel).toBe('true');
+    expect(overlayMethods.closeTopOverlayByEsc.call(ui)).toBe(true);
+    expect(document.querySelector('.bag-view')).not.toBeNull();
+  });
+  it.each([['珍珠盒', 'pearl', 'wood'], ['法师锦囊', 'pouch', 'spell']])('%s真实入口共用面板，帮助折叠、详情不搬牌', (name, prefix, uid) => {
+    inspect(name); ui._acts[`${prefix}StoreZoom`]();
+    expect(document.querySelector('.battle-decision-unified.container-store')).not.toBeNull();
+    expect(document.querySelector('.container-store-help').open).toBe(false);
+    expect(document.querySelector(`[data-act="${prefix}Back"]`).dataset.cancel).toBe('true');
+    const before = JSON.stringify(H.game.ownedCards);
+    const button = document.querySelector(`[data-act="${prefix}Inspect"]`);
+    ui._acts[`${prefix}Inspect`](button.dataset);
+    expect(document.getElementById('cardZoom')).not.toBeNull();
+    expect(JSON.stringify(H.game.ownedCards)).toBe(before);
+    expect(H.game.ownedCards.find(x => x.uid === uid).stored).toBeUndefined();
+  });
+  it.each([['珍珠盒', 'pearl', resource, 9], ['法师锦囊', 'pouch', spell, 3]])('%s整叠超容量在动作旁显示原因且禁用', (name, prefix, card, limit) => {
+    H.game.ownedCards.push(...Array.from({ length: limit }, (_, i) => ({ uid: `stored-${i}`, card, stored: 1, ...(prefix === 'pouch' ? { pouchOf: 'tt7-stratagem' } : {}) })));
+    inspect(name); ui._acts[`${prefix}StoreZoom`]();
+    expect(document.querySelector(`[data-act="${prefix}Put"]`).disabled).toBe(true);
+    expect(document.querySelector('.container-store-blocked').textContent).toContain('放不下整叠');
+    const before = JSON.stringify(H.game.ownedCards);
+    ui._acts[`${prefix}Put`]({ name: card.name });
+    expect(JSON.stringify(H.game.ownedCards)).toBe(before);
+  });
   it('正常使用与当前容器连续存取/返回保持可用', () => {
     inspect(); ui._acts.useDetailCard(); expect(H.game.hp).toBe(13);
     inspect('法师锦囊'); ui._acts.pouchStoreZoom(); ui._acts.pouchPut({ name: spell.name }); expect(H.game.ownedCards.find(item => item.card.id === 'spell').stored).toBe(1);
@@ -111,31 +166,49 @@ describe('背包pointer拖动取消/会话身份', () => {
 
 describe('新号背包真实入口反馈', () => {
   const filter = value => document.querySelector(`[data-act="bagFilter"][data-f="${value}"]`).click();
-  it('招式与物资按钮使用实际键值筛选，不将散装物资混入招式', () => {
-    H.game.inventory = [{ name: '口粮', count: 2, value: 3 }]; bag.showBackpack(true);
+  it('招式不混入散装物资，全部保留物资和生物且不单设筛选入口', () => {
+    H.game.inventory = [{ name: '口粮', count: 2, value: 3 }];
+    H.game.ownedCards.push({ uid:'creature', card:{ id:'creature', name:'生物牌', type:'生物' } });
+    bag.showBackpack(true);
+    expect([...document.querySelectorAll('.bag-tools [data-act="bagFilter"]')].map(button => button.dataset.f)).toEqual(['all', 'move', '装备', '道具', '资源']);
+    expect(document.querySelector('.bag-grid [data-supply]').dataset.supply).toBe('口粮');
+    expect(document.querySelector('[data-stack="生物牌"]')).not.toBeNull();
     filter('move');
     expect([...document.querySelectorAll('.bag-grid [data-stack]')].map(el => el.dataset.stack)).toEqual(['法术']);
     expect(document.querySelector('.bag-grid [data-supply]')).toBeNull();
-    filter('supply');
-    expect(document.querySelector('.bag-grid [data-supply]').dataset.supply).toBe('口粮');
-    expect(document.querySelector('.bag-grid [data-stack]')).toBeNull();
-    H.game.inventory = []; filter('supply');
+    filter('资源');
+    expect([...document.querySelectorAll('.bag-grid [data-stack]')].map(el => el.dataset.stack)).toEqual(['木材卡']);
+    expect(document.querySelector('.bag-grid [data-supply]')).toBeNull();
+    filter('装备');
     expect(document.querySelector('.bag-empty2').textContent).toContain('该分类没有');
     document.querySelector('.bag-empty2 [data-f="all"]').click();
     expect(document.querySelector('[data-stack="法术"]')).not.toBeNull();
+    expect(document.querySelector('[data-stack="生物牌"]')).not.toBeNull();
+    expect(document.querySelector('.bag-grid [data-supply]').dataset.supply).toBe('口粮');
   });
-  it('安全格标题容量和伙伴名称跟随分区，口袋区分火堆可复原类型与张数', () => {
+  it('安全格和口袋显示真实容量张数与复原角标，伙伴及复原说明保留在帮助', () => {
     window.SDT.Base.carriedPet = () => ({ name: '旺财' });
     H.game.ownedCards[0].safe = true;
     H.game.usedPocket = [{ card: spell, count: 3 }, { card: { id: 'armor', name: '盔甲', type: '装备' }, count: 2 }];
     bag.showBackpack(true); document.querySelector('[data-zone="safe"].bag-rz').click();
     expect(document.querySelector('.bag-title h2').textContent).toContain('安全格');
     expect(document.querySelector('.bag-capchip').textContent).toMatch(/1\s*\/6 格/);
-    expect(document.querySelector('.bag-znote').textContent).toContain('旺财');
+    expect(document.querySelector('.bag-count-summary').textContent).toMatch(/卡牌\s*1\s*张/);
+    expect(document.querySelector('.bag-title .help-btn').dataset.help).toBe('bag');
+    const help = document.createElement('section'); help.innerHTML = ui.helpTopics.bag.html;
+    expect(help.textContent).toContain('由旺财看守');
+    expect(help.textContent).toContain('只有安全格里的卡牌会被抢运回基地');
+    expect(help.textContent).toContain('道具和装备不能在火堆复原');
+    expect(help.textContent).toContain('能源结晶按消耗区顺序复原最多 3 张');
+    expect(help.textContent).toContain('撤离时每张仅 1/3 概率带回基地消耗区');
     document.querySelector('[data-zone="pocket"].bag-rz').click();
     expect(document.querySelector('.bag-capchip').textContent).toContain('不限容量');
-    expect(document.querySelector('.bag-znote').textContent).toContain('火堆可复原 3 张／不可复原 2 张');
+    expect(document.querySelector('.bag-capchip b').textContent).toBe('5');
+    expect(document.querySelector('[data-stack="法术"] .bag-tct').textContent).toBe('×3');
+    expect(document.querySelector('[data-stack="盔甲"] .bag-tct').textContent).toBe('×2');
+    expect(document.querySelector('[data-stack="法术"] .bag-tstate').textContent).toBe('火堆可复原');
     expect(document.querySelector('[data-stack="盔甲"] .bag-tstate').textContent).toBe('火堆不可复原');
+    expect(document.querySelectorAll('.bag-znote, .bag-disclosure')).toHaveLength(0);
   });
   it('按钮丢弃确认不误称拖拽，碎片库存与门槛分列且排序按钮有名称', () => {
     H.game.fragments = 4; bag.showBackpack(true);
@@ -217,5 +290,41 @@ describe('背包键盘查看与分区焦点', () => {
   it('卡格去掉卡面内部重复Tab停靠，不嵌套焦点控件', () => {
     window.SDT.Cards.cardHTML = card => `<div><div tabindex="0">${card.name}</div></div>`; bag.showBackpack(true);
     expect(document.querySelector('.bag-tile [tabindex]')).toBeNull();
+  });
+});
+
+describe('地图道具角标与详情用途一致', () => {
+  const rule = use => ({ version: 1, bag: { use } });
+  it.each([
+    ['神秘药水', { id: 'tt3-mystery-potion' }, '战斗使用', true],
+    ['剧毒药水', { rules: rule([{ op: 'curse', curse: 'poison', stacks: 1, target: 'allEnemies' }]) }, '战斗使用', true],
+    ['治疗药', { rules: rule([{ op: 'heal', amount: 3 }]) }, '可用', false],
+    ['复原药', { rules: rule([{ op: 'restoreConsumed', amount: 2 }]) }, '可用', false],
+    ['通行证', { rules: rule([{ op: 'acquire', pool: { kind: 'legendary' }, n: 1 }]) }, '可用', false],
+    ['觉醒药', { rules: rule([{ op: 'acquire', pool: { kind: 'classAbility' }, n: 1 }]) }, '可用', false],
+    ['混合药', { rules: rule([{ op: 'heal', amount: 3 }, { op: 'energy', amount: 1 }]) }, '可用', false],
+    ['旧文本药', { desc: '回复 3 点生命' }, '查看用法', false],
+    ['未知用法', {}, '查看用法', false],
+  ])('%s只描述已有地图用途，查看不消耗', (name, fields, label, disabled) => {
+    const card = { id: `item-${name}`, name, type: '道具', ...fields };
+    H.game.ownedCards = [{ uid: 'item', card }];
+    const before = JSON.stringify(H.game.ownedCards);
+    bag.showBackpack(true);
+    expect(document.querySelector('.bag-tstate').textContent).toBe(label);
+    inspect(name);
+    const button = document.querySelector('#cardZoom [data-act="useDetailCard"]');
+    expect(button.disabled).toBe(disabled);
+    if (disabled) expect(button.textContent).toBe('仅战斗中使用');
+    expect(JSON.stringify(H.game.ownedCards)).toBe(before);
+    expect(H.game.hp).toBe(10);
+    expect(H.save).not.toHaveBeenCalled();
+  });
+
+  it('战斗道具在安全格与消耗区仍优先显示原区域说明', async () => {
+    const { tileHTML } = await import('../game/src/hub/game.bag.view2.js');
+    const card = { id: 'tt3-mystery-potion', name: '神秘药水', type: '道具' };
+    const tile = { card, name: card.name, type: card.type, count: 1 };
+    expect(tileHTML({ ...tile, zone: 'safe', safe: true })).toContain('>押运</span>');
+    expect(tileHTML({ ...tile, zone: 'pocket' })).toContain('>火堆不可复原</span>');
   });
 });

@@ -1,0 +1,65 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>奖励整理组件 · 隔离视觉夹具</title><link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/cards.css">
+<link rel="stylesheet" href="../css/overlays.css">
+<link rel="stylesheet" href="../css/hub.css">
+<link rel="stylesheet" href="../css/battle.css">
+<link rel="stylesheet" href="../css/scenes.css">
+<link rel="stylesheet" href="../css/lab-ending.css">
+<link rel="stylesheet" href="../css/winter.css">
+<link rel="stylesheet" href="../css/expedition.css">
+<link rel="stylesheet" href="../css/expedition-map.css">
+<link rel="stylesheet" href="../css/map-edge-light.css">
+<link rel="stylesheet" href="../css/expedition-hub.css">
+<link rel="stylesheet" href="../css/expedition-inventory.css">
+<link rel="stylesheet" href="../css/expedition-rewards.css">
+<link rel="stylesheet" href="../css/expedition-battle.css">
+<link rel="stylesheet" href="../css/expedition-library.css">
+<link rel="stylesheet" href="../css/card-v3.css">
+<link rel="stylesheet" href="../css/expedition-roster.css">
+<link rel="stylesheet" href="../css/expedition-shop.css">
+<link rel="stylesheet" href="../css/ui-scale.css">
+<link rel="stylesheet" href="../css/page-slot-select.css">
+<link rel="stylesheet" href="../css/page-settings.css">
+<link rel="stylesheet" href="../css/page-datapage.css">
+<link rel="stylesheet" href="../css/page-ach.css">
+<link rel="stylesheet" href="../css/page-cardforge.css">
+<link rel="stylesheet" href="../css/page-expedition-hud.css">
+<link rel="stylesheet" href="../css/feedback-oct12.css">
+<link rel="stylesheet" href="../css/roster-departure-v2.css">
+<link rel="stylesheet" href="../css/pocket-strip.css">
+<link rel="stylesheet" href="../css/experience-loot.css">
+<link rel="stylesheet" href="../css/page-events.css">
+<link rel="stylesheet" href="../css/page-rewards-bag-help.css">
+<link rel="stylesheet" href="../css/page-battle-ui.css">
+<link rel="stylesheet" href="../css/character-idle.css">
+<link rel="stylesheet" href="../css/cover-remaining.css">
+<link rel="stylesheet" href="../css/page-transitions.css">
+<link rel="stylesheet" href="../css/ak-skin.css">
+<link rel="stylesheet" href="../css/base-camp.css">
+<link rel="stylesheet" href="../css/base-camp-compact.css">
+<link rel="stylesheet" href="../css/card-layout-selected.css">
+<link rel="stylesheet" href="../css/battle-stage.css"><style>
+.fixture-controls{position:absolute;left:30px;top:20px;z-index:10000;background:#111e30;color:white;padding:10px 16px;font:22px sans-serif;display:flex;gap:12px;align-items:center}.fixture-controls button{font:inherit;padding:6px 12px}.fixture-result{padding:50px;font-size:26px;color:#e5f1ff}body{background:#111c2c}
+</style></head><body><div class="fixture-controls">隔离夹具 · 不读取/保存游戏档案 <button id="long">16条长列表</button><button id="short">3条短列表</button><span id="result"></span></div>
+<div id="app"><main id="viewport"><div id="overlay" class="pick-veil" role="dialog" aria-modal="true" aria-labelledby="ovTitle"><div class="card wide chest"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div></main></div>
+<script type="module">
+import '../src/ui/ui-scale.js';
+import {openRewardCapacityOrganizer} from '../src/ui/reward-capacity-organizer.js';
+const overlay=document.querySelector('#overlay'),body=document.querySelector('#ovBody');
+const UI={el:{overlay,ovBody:body},showOverlay(title,html){document.querySelector('#ovTitle').textContent=title;body.innerHTML=html;overlay.hidden=false;}};
+let stacks=[],safe=0,active=true;
+function reset(count){
+ active=true;safe=0;document.querySelector('#result').textContent='';
+ stacks=Array.from({length:count},(_,i)=>({card:{name:i===0?'百炼青虹剑':i===1?'坚冰结界':i===2?'极寒长夜中的远行者珍藏护甲':'静态示例卡牌 '+(i+1)},uids:Array.from({length:i===0?3:1},(_,j)=>`fixture-${i}-${j}`),count:i===0?3:1}));
+ const full=count;
+ const finish=message=>{active=false;body.innerHTML='<p class="fixture-result">'+message+'。可用上方按钮重新打开夹具。</p>';document.querySelector('#result').textContent=message;};
+ openRewardCapacityOrganizer({UI,card:{name:'冰封千里'},readStacks:()=>stacks,current:()=>active,
+ capacity:()=>`背包 ${stacks.length}/${full} 格 · 安全格 ${safe}/3 格`,canReceive:()=>stacks.length<full,
+ moveToSafe(stack){if(safe>=3)return false;stacks=stacks.filter(s=>s!==stack);safe++;return true;},
+ discardOne(stack){stack.uids.shift();stack.count--;if(!stack.count)stacks=stacks.filter(s=>s!==stack);return true;},
+ onReturn:()=>finish('已返回奖励，夹具整理结果保留'),onClaim:()=>finish('已模拟领取1张'),onFullBag:()=>finish('完整背包兜底入口，仅记录此次点击')});
+}
+document.querySelector('#long').onclick=()=>reset(16);document.querySelector('#short').onclick=()=>reset(3);
+document.addEventListener('keydown',event=>{if(event.key==='Escape')body.querySelector('[data-cancel="true"]')?.click();});
+reset(16);
+</script></body></html>
