@@ -1,0 +1,49 @@
+{
+  "code": {
+    "at": "2026-10-18T08:29:06.389Z",
+    "commit": "173e998e731c482d68cc48b32ac11ee4b2629e71",
+    "parent": "eb8d66901dc0fd0baa9f20bb8fd2e68cc9b44233",
+    "files": 873,
+    "receipt": "docs/evidence/2026-10-18-staged-check/2026-10-18T08-01-24.518Z-a6a1c1f1-staged.json",
+    "receiptSha256": "4ad3a6ba9830dcefe04fe863ba10dd05ee68a5a6421cbfe19f5ba605cab3e018",
+    "indexSha256": "2cc7726c4452161a5c15557fa4d79fb54467be409ff052fa33737f83fd3ebbde",
+    "preservedActiveFiles": [
+      "搜打撤/game/src/run/game.run.flow.js",
+      "搜打撤/game/src/run/game.run.shop.js"
+    ],
+    "hooks": "Original pre-commit, exact staged receipt verification; no bypass."
+  },
+  "guard": {
+    "at": "2026-10-18T08:35:47.482Z",
+    "commit": "faa36806d2dfcc51cdc9e7a1607c4ca5b1741e2a",
+    "parent": "173e998e731c482d68cc48b32ac11ee4b2629e71",
+    "paths": [
+      "搜打撤/scripts/runtime-asset-redundancy.mjs",
+      "搜打撤/tests/runtime-asset-redundancy.test.js"
+    ],
+    "receipt": "docs/evidence/2026-10-18-staged-check/2026-10-18T08-34-17.298Z-86197944-staged.json",
+    "receiptSha256": "ec3134c66e14f9272cea6cf1ee7adcdf628c7cdbcad2c530d44ceb1a54389872",
+    "indexSha256": "e59b922938fcfc1b23f7bd9746a405f3bd6e149f91ccf7de2b2919535b7c8443",
+    "hooks": "Original pre-commit, exact staged receipt verification; no bypass."
+  },
+  "remaining": [
+    {
+      "scope": "art-source",
+      "commit": "418feedbc8df12abac8309f85aa3faf884778b00",
+      "files": 1579,
+      "commitOutput": " create mode 100644 搜打撤/game/art-source/ui/settings-transition-20261011/novelai-receipt.json |  create mode 100644 搜打撤/game/art-source/ui/settings-transition-20261011/novelai-request.json"
+    },
+    {
+      "scope": "nai",
+      "commit": "c416f111e1fc7b48649944c3978cfd2502d84e4b",
+      "files": 10,
+      "commitOutput": " create mode 100644 搜打撤/tools/tests/test_nai_multichar.py |  create mode 100644 搜打撤/tools/tests/test_nai_vibe.py"
+    }
+  ],
+  "sourceSelection": "docs/evidence/2026-10-18-WF-page-perf-1018/shipping-selection.json",
+  "limits": [
+    "Local commits only; no push.",
+    "Active event work remains unstaged.",
+    "Large receipts and EXE remain local; see local-artifacts.json."
+  ]
+}

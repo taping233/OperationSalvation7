@@ -1,0 +1,39 @@
+{"mode":"quick","paths":["scripts/runtime-asset-redundancy.mjs","tests/runtime-asset-redundancy.test.js"],"reasons":[],"tests":["tests/runtime-asset-redundancy-plugin.test.js","tests/runtime-asset-redundancy.test.js"]}
+[gate] 模式：quick
+[gate] 变更：scripts/runtime-asset-redundancy.mjs
+[gate] 变更：tests/runtime-asset-redundancy.test.js
+[gate] 测试：tests/runtime-asset-redundancy-plugin.test.js
+[gate] 测试：tests/runtime-asset-redundancy.test.js
+[gate] 剧情编译
+Compiled narrative: narrative\events.ink -> game\src\generated\narrative-events.js
+[gate] 静态检查并行：语法 / 数据 / 类型 / ESLint
+[gate] 语法检查：OK
+Syntax check passed (478 project files).
+
+[gate] 内容数据检查：OK
+[validate-data] 全部通过（pets 6 / 成就 26 / 怪物 15 / 场景 12 / 同步卡 57）
+
+[gate] 类型契约检查：OK
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+
+[gate] ESLint：OK
+[gate] 定向 Vitest（完整测试留给 CI/阶段收尾）
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 C:/Users/太平/AppData/Local/Temp/sdt-staged-lni464/snapshot/搜打撤
+
+····························
+
+ Test Files  2 passed (2)
+      Tests  28 passed (28)
+   Start at  16:34:56
+   Duration  3.09s (transform 123ms, setup 0ms, collect 170ms, tests 4.06s, environment 0ms, prepare 227ms)
+
+[gate] PASS：quick 验收完成

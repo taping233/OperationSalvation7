@@ -1,0 +1,34 @@
+{
+  "commit": "173e998e731c482d68cc48b32ac11ee4b2629e71",
+  "scope": [
+    "game/**",
+    "desktop-app/**"
+  ],
+  "files": 3129,
+  "bytes": 371749902,
+  "exactMatchFiles": 3127,
+  "missing": [],
+  "generatedOutputDifferences": [
+    {
+      "path": "game/src/generated/art-manifest.js",
+      "frozenObject": "fba7fe569607f1da758256bea1123e309a89ff4b",
+      "builtObject": "80e794e056061ff6f10685ba31710cd2dc3015a4",
+      "beforeEntries": 931,
+      "afterEntries": 1023,
+      "addedEntries": 92,
+      "removedEntries": 0
+    },
+    {
+      "path": "game/src/generated/thumb-manifest.js",
+      "frozenObject": "07a0ea83ea7ea48fe0cc767d5cec3a41d9db458d",
+      "builtObject": "1ccbf03842b5de9f95a12afa90d0441806b4c121",
+      "beforeEntries": 336,
+      "afterEntries": 315,
+      "addedEntries": 0,
+      "removedEntries": 21
+    }
+  ],
+  "unexpectedDifferences": [],
+  "readSource": "Git objects from the parent-confirmed frozen code commit compared with snapshot files; shared worktree event increments were not read.",
+  "nonGeneratedProductionObjectsMatch": true
+}

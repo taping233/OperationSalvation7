@@ -1,0 +1,17 @@
+const fs=require('fs'),path=require('path'),cp=require('child_process'),crypto=require('crypto');
+const root=path.resolve(__dirname,'../..'),repo=path.dirname(root),snapshot=path.join(__dirname,'exe-build/project');
+const commit='173e998e731c482d68cc48b32ac11ee4b2629e71';
+const listing=cp.execFileSync('git',['ls-tree','-r','-z',commit,'--','搜打撤/game','搜打撤/desktop-app'],{cwd:repo,maxBuffer:16*1024*1024});
+let files=0,bytes=0;const different=[],missing=[],generatedOutputDifferences=[];
+const generated=new Set(['game/src/generated/art-manifest.js','game/src/generated/thumb-manifest.js']);
+for(const record of listing.toString('utf8').split('\0').filter(Boolean)){
+ const tab=record.indexOf('\t'),[mode,type,oid]=record.slice(0,tab).split(' '),relative=record.slice(tab+1).slice('搜打撤/'.length);
+ if(type!=='blob'||!['100644','100755'].includes(mode))throw Error('Unexpected production object type '+relative);
+ const target=path.join(snapshot,relative);if(!fs.existsSync(target)){missing.push(relative);continue;}
+ const body=fs.readFileSync(target),actual=crypto.createHash('sha1').update('blob '+body.length+'\0').update(body).digest('hex');
+ files++;bytes+=body.length;if(actual!==oid){different.push(relative);if(generated.has(relative)){const original=cp.execFileSync('git',['show',commit+':搜打撤/'+relative],{cwd:repo,encoding:'utf8'});const parse=text=>JSON.parse(text.slice(text.indexOf('export default ')+15).trim().replace(/;$/,''));const before=parse(original),after=parse(body.toString('utf8'));generatedOutputDifferences.push({path:relative,frozenObject:oid,builtObject:actual,beforeEntries:before.length,afterEntries:after.length,addedEntries:after.filter(value=>!before.includes(value)).length,removedEntries:before.filter(value=>!after.includes(value)).length});}}
+}
+const unexpectedDifferences=different.filter(file=>!generated.has(file));
+const report={commit,scope:['game/**','desktop-app/**'],files,bytes,exactMatchFiles:files-different.length,missing,generatedOutputDifferences,unexpectedDifferences,readSource:'Git objects from the parent-confirmed frozen code commit compared with snapshot files; shared worktree event increments were not read.',nonGeneratedProductionObjectsMatch:!missing.length&&!unexpectedDifferences.length};
+fs.writeFileSync(path.join(root,'docs/evidence/2026-10-18-WF-page-perf-1018/desktop-exe/production-object-check.json'),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report,null,2));if(!report.nonGeneratedProductionObjectsMatch)process.exitCode=1;

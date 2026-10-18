@@ -1,0 +1,25 @@
+{
+  "file": "tests/node-retrigger.test.js",
+  "beforeSha256": "8cab589bdba5f4c4df49ee57fd8c00bbba95192576d953bcda77790d587f511b",
+  "afterSha256": "711a335df5145c7f6c906194110b1b926f6272b2608ffb9639176d3c9d192c27",
+  "cause": "Fixture considered arbitrary event neighbors sweepable. sweep selects evtChoice but never submits the independent event-choice-confirm button, so legitimate multi-choice event stays modal.",
+  "reproduction": {
+    "frozenProduction": true,
+    "realEventNeighbor": true,
+    "fixedExistingEvent": "tt6-demondeal",
+    "state": "modal",
+    "stuckAt": "enabled button.event-choice-confirm without data-act",
+    "failedAssertion": "node-retrigger.test.js:171"
+  },
+  "fix": "Only first test neighbor whitelist: entrance, blank, shop, fire. Generic sweep and original reward/shop/return locks unchanged. No new rerolls or production edits.",
+  "validation": {
+    "command": "node D:/素材/代号柒/搜打撤/node_modules/vitest/vitest.mjs run --config vite.integration.config.mjs --testTimeout=20000 tests/node-retrigger.test.js",
+    "passed": 8,
+    "failed": 0,
+    "exitCode": 0,
+    "durationSeconds": 6.43,
+    "eslintExitCode": 0,
+    "diffCheckExitCode": 0
+  },
+  "boundaries": "No production, event increments, index or full suite changes."
+}

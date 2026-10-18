@@ -1,0 +1,52 @@
+const fs = require('fs');
+const path = require('path');
+const cp = require('child_process');
+const crypto = require('crypto');
+const root = cp.execFileSync('git', ['rev-parse', '--show-toplevel'], { encoding:'utf8' }).trim();
+const expected = '56961cf91a8e395727ade83ba9b562dd050da4470a2ad2c88b022685664a64f0';
+const base = path.join(root, '搜打撤/.tmp/page-perf-1018/exe-build');
+const project = path.join(base, 'project');
+const listing = () => cp.execFileSync('git', ['ls-files', '--stage', '-z'], { cwd:root, maxBuffer:32*1024*1024 });
+const digest = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
+const before = listing();
+if (digest(before) !== expected) throw Error('Frozen index fingerprint mismatch before export');
+if (fs.existsSync(project)) throw Error('Refusing to overwrite existing snapshot');
+fs.mkdirSync(project, { recursive:true });
+const entries = before.toString('utf8').split('\0').filter(Boolean).map(record => {
+  const tab = record.indexOf('\t'), fields = record.slice(0,tab).split(' ');
+  return { mode:fields[0], oid:fields[1], stage:fields[2], file:record.slice(tab+1) };
+}).filter(entry => entry.file.startsWith('搜打撤/'));
+for (const entry of entries) {
+  if (entry.stage !== '0' || !['100644','100755'].includes(entry.mode)) throw Error('Unsupported index entry '+entry.file);
+  const relative = entry.file.slice('搜打撤/'.length), target = path.resolve(project,relative);
+  if (!target.startsWith(project+path.sep)) throw Error('Snapshot path escapes workspace');
+  entry.target=target;
+}
+const child = cp.spawn('git', ['cat-file','--batch'], { cwd:root, windowsHide:true, stdio:['pipe','pipe','pipe'] });
+let buffer=Buffer.alloc(0), active=null, separator=false, index=0, bytes=0, stderr='';
+child.stderr.on('data',chunk=>{stderr+=chunk.toString();});
+child.stdout.on('data',chunk=>{
+  buffer=buffer.length?Buffer.concat([buffer,chunk]):chunk;
+  while (buffer.length) {
+    if (separator) { if (buffer[0]!==10) throw Error('Missing Git object separator'); buffer=buffer.subarray(1);separator=false;continue; }
+    if (!active) {
+      const newline=buffer.indexOf(10);if(newline<0)return;
+      const fields=buffer.subarray(0,newline).toString('ascii').split(' ');buffer=buffer.subarray(newline+1);
+      const entry=entries[index];if(!entry||fields[0]!==entry.oid||fields[1]!=='blob')throw Error('Unexpected Git object header');
+      const size=Number(fields[2]);fs.mkdirSync(path.dirname(entry.target),{recursive:true});
+      active={entry,size,left:size,fd:fs.openSync(entry.target,'wx'),hash:crypto.createHash('sha1').update('blob '+size+'\0')};
+    }
+    const count=Math.min(buffer.length,active.left),data=buffer.subarray(0,count);
+    if(count){fs.writeSync(active.fd,data);active.hash.update(data);active.left-=count;bytes+=count;buffer=buffer.subarray(count);}
+    if(active.left===0){fs.closeSync(active.fd);if(active.hash.digest('hex')!==active.entry.oid)throw Error('Exported blob hash mismatch');index++;active=null;separator=true;if(index%2000===0)process.stdout.write('Exported '+index+' frozen files\n');}
+    else return;
+  }
+});
+child.on('close',code=>{
+  if(code!==0||index!==entries.length||active)throw Error('Incomplete frozen export '+code+' '+stderr);
+  if(digest(listing())!==expected)throw Error('Index changed while exporting snapshot');
+  const report={indexSha256:expected,head:cp.execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),project,files:index,bytes,verified:'Each raw blob SHA1 matched its frozen index object; index unchanged before/after export',runtimeSource:'Frozen index only; unstaged event changes excluded'};
+  fs.writeFileSync(path.join(base,'source-provenance.json'),JSON.stringify(report,null,2)+'\n');
+  process.stdout.write(JSON.stringify(report)+'\n');
+});
+child.stdin.end(entries.map(entry=>entry.oid).join('\n')+'\n');

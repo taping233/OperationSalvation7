@@ -1,0 +1,63 @@
+{
+  "artifact": {
+    "path": "D:\\素材\\代号柒\\搜打撤\\.tmp\\page-perf-1018\\delivery\\搜打撤-代号7.exe",
+    "bytes": 287814301,
+    "machine": "0x14c",
+    "sha256": "8f98a7a45de29988fd59a47b345eb30baa765b19b260905e0144b8d67991746d"
+  },
+  "target": "Windows x64 portable single EXE",
+  "runtime": {
+    "path": "D:\\素材\\代号柒\\搜打撤\\.tmp\\page-perf-1018\\delivery\\win-unpacked\\搜打撤·代号7.exe",
+    "bytes": 245290496,
+    "machine": "0x8664"
+  },
+  "app": {
+    "name": "codename7-soudache",
+    "version": "0.60.0",
+    "gameVersion": "0.60.0",
+    "entry": "main.js",
+    "optionalReleaseProfilePresent": false
+  },
+  "structuralVerification": {
+    "electronRuntimeFiles": 6,
+    "gameFiles": 1526,
+    "gameComparison": {
+      "compared": 1526,
+      "omitted": [
+        "assets\\cards\\.gitkeep",
+        "assets\\portraits\\enemies\\.gitkeep"
+      ]
+    },
+    "htmlDependencies": 13,
+    "asarRuntimeFilesVerified": 7,
+    "packagedDesktopMatchesFrozenSnapshot": true,
+    "localAppProtocol": true,
+    "externalNodeOrBrowserRequired": false
+  },
+  "source": {
+    "indexSha256": "56961cf91a8e395727ade83ba9b562dd050da4470a2ad2c88b022685664a64f0",
+    "head": "eb8d66901dc0fd0baa9f20bb8fd2e68cc9b44233",
+    "project": "D:\\素材\\代号柒\\搜打撤\\.tmp\\page-perf-1018\\exe-build\\project",
+    "files": 14348,
+    "bytes": 943757009,
+    "verified": "Each raw blob SHA1 matched its frozen index object; index unchanged before/after export",
+    "runtimeSource": "Frozen index only; unstaged event changes excluded"
+  },
+  "overlay": {
+    "source": "scripts/runtime-asset-redundancy.mjs",
+    "target": ".tmp/page-perf-1018/exe-build/project/scripts/runtime-asset-redundancy.mjs",
+    "sha256": "8c84ca869399b79c2261768ce5255df4a7f2b581ff4d4139cd2f16242eece9d4",
+    "authorization": "Parent-approved inert SVG raw and license TXT URL guard repair; all game/desktop production inputs remain frozen index objects"
+  },
+  "budget": {
+    "passed": false,
+    "failures": 5,
+    "thresholdsUnchanged": true,
+    "record": "../exe-build/build-game-approved.log"
+  },
+  "limits": [
+    "Portable test build: standard postbuild exited 1 on five performance budgets; no thresholds were raised.",
+    "Native GUI launch and gameplay not verified: current platform has no native-app control surface.",
+    "PE/resource/ASAR checks do not substitute native gameplay verification."
+  ]
+}

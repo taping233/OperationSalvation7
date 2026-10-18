@@ -1,0 +1,31 @@
+const fs=require('fs'),path=require('path'),crypto=require('crypto'),{createRequire}=require('module');
+const root=path.resolve(__dirname,'../..'),delivery=path.join(__dirname,'delivery');
+const exe=path.join(delivery,'搜打撤-代号7.exe'),unpacked=path.join(delivery,'win-unpacked');
+const snapshot=path.join(__dirname,'exe-build/project'),desktopPackage=JSON.parse(fs.readFileSync(path.join(snapshot,'desktop-app/package.json'),'utf8'));
+function pe(file){const fd=fs.openSync(file,'r'),head=Buffer.alloc(4096);fs.readSync(fd,head,0,head.length,0);fs.closeSync(fd);const offset=head.readUInt32LE(60);if(head.toString('ascii',0,2)!=='MZ'||head.toString('ascii',offset,offset+4)!=='PE\0\0')throw Error('Invalid PE '+file);return{path:file,bytes:fs.statSync(file).size,machine:'0x'+head.readUInt16LE(offset+4).toString(16)};}
+function count(dir){return fs.readdirSync(dir,{withFileTypes:true}).reduce((sum,entry)=>sum+(entry.isDirectory()?count(path.join(dir,entry.name)):1),0);}
+function compareGameBytes(source,destination){let compared=0;const omitted=[];function visit(dir){for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory()){visit(file);continue;}const relative=path.relative(source,file),target=path.join(destination,relative);if(!fs.existsSync(target)){if(entry.name==='.gitkeep'){omitted.push(relative);continue;}throw Error('Packaged game file missing '+relative);}if(!fs.readFileSync(file).equals(fs.readFileSync(target)))throw Error('Packaged game file differs '+relative);compared++;}}visit(source);return{compared,omitted};}
+async function main(){
+ const wrapper=pe(exe),runtime=pe(path.join(unpacked,desktopPackage.productName+'.exe'));
+ if(runtime.machine!=='0x8664')throw Error('Expected Windows x64 Electron runtime');
+ const required=['ffmpeg.dll','icudtl.dat','resources.pak','chrome_100_percent.pak','chrome_200_percent.pak','v8_context_snapshot.bin'];
+ for(const file of required)if(!fs.statSync(path.join(unpacked,file)).isFile())throw Error('Missing Electron runtime '+file);
+ const resources=path.join(unpacked,'resources'),game=path.join(resources,'game'),html=fs.readFileSync(path.join(game,'index.html'),'utf8');
+ const asarRequire=createRequire(path.join(root,'desktop-app/node_modules/app-builder-lib/package.json')),asar=asarRequire('@electron/asar'),archive=path.join(resources,'app.asar');
+ const appPackage=JSON.parse(asar.extractFile(archive,'package.json').toString('utf8')),mainSource=asar.extractFile(archive,'main.js').toString('utf8');
+ if(appPackage.main!=='main.js'||!mainSource.includes("path.join(process.resourcesPath, 'game')")||!mainSource.includes("protocol.handle('app'"))throw Error('Desktop entry not self-contained');
+ const startupFiles=['main.js','preload.js','startup-window.cjs','startup-preload.cjs','startup.html','suggestions-store.cjs','app.ico'];
+ const optionalReleaseProfilePresent=fs.existsSync(path.join(snapshot,'desktop-app/release-profile.json'));
+ if(optionalReleaseProfilePresent)startupFiles.push('release-profile.json');
+ for(const file of startupFiles){const packaged=asar.extractFile(archive,file),frozen=fs.readFileSync(path.join(snapshot,'desktop-app',file));if(!packaged.equals(frozen))throw Error('Packaged desktop source differs from frozen snapshot '+file);}
+ if(Object.keys(appPackage.dependencies||{}).length)throw Error('Unexpected external production dependency');
+ const refs=[...html.replace(/<!--[\s\S]*?-->/g,'').matchAll(/(?:src|href)=["']([^"']+)["']/g)].map(match=>match[1]).filter(ref=>!ref.startsWith('#')&&!/^(?:[a-z]+:|\/\/)/i.test(ref));
+ for(const ref of refs){const relative=decodeURIComponent(ref.split(/[?#]/)[0]).replace(/^\//,'');if(!fs.existsSync(path.join(game,relative)))throw Error('Built HTML dependency missing '+relative);}
+ const version=JSON.parse(fs.readFileSync(path.join(game,'version.json'),'utf8'));
+ const gameComparison=compareGameBytes(path.join(snapshot,'desktop-app/game'),game);
+ if(version.version!==appPackage.version)throw Error('Game and desktop version mismatch');
+ const sha256=await new Promise((resolve,reject)=>{const hash=crypto.createHash('sha256');fs.createReadStream(exe).on('data',chunk=>hash.update(chunk)).on('end',()=>resolve(hash.digest('hex'))).on('error',reject);});
+ const report={artifact:{...wrapper,sha256},target:'Windows x64 portable single EXE',runtime,app:{name:appPackage.name,version:appPackage.version,gameVersion:version.version,entry:appPackage.main,optionalReleaseProfilePresent},structuralVerification:{electronRuntimeFiles:required.length,gameFiles:count(game),gameComparison,htmlDependencies:refs.length,asarRuntimeFilesVerified:startupFiles.length,packagedDesktopMatchesFrozenSnapshot:true,localAppProtocol:true,externalNodeOrBrowserRequired:false},source:JSON.parse(fs.readFileSync(path.join(__dirname,'exe-build/source-provenance.json'),'utf8')),overlay:JSON.parse(fs.readFileSync(path.join(__dirname,'exe-build/build-overlay.json'),'utf8')),budget:{passed:false,failures:5,thresholdsUnchanged:true,record:'../exe-build/build-game-approved.log'},limits:['Portable test build: standard postbuild exited 1 on five performance budgets; no thresholds were raised.','Native GUI launch and gameplay not verified: current platform has no native-app control surface.','PE/resource/ASAR checks do not substitute native gameplay verification.']};
+ fs.writeFileSync(path.join(delivery,'exe-verification.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+}
+main().catch(error=>{console.error(error.message);process.exitCode=1;});
