@@ -227,6 +227,28 @@ describe('reviewed production-only asset omissions', () => {
     expect(() => assertRuntimeExclusionPlanUnchanged(new Set([legacy]), new Set())).toThrow(/changed during build/);
     expect(() => assertRuntimeExclusionPlanUnchanged(new Set([legacy]), new Set([oldMap]))).toThrow(/changed during build/);
   });
+
+  it('accepts only static license URLs and inert raw SVG exports while rejecting restored asset references', () => {
+    const excluded = new Set([oldMap]);
+    const module = { id: '/game/src/ui/vendor/layers-plus.svg?raw',
+      code: `export default ${JSON.stringify('<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0h1" /></svg>')};` };
+    expect(() => assertExcludedRuntimeAssetReferences([module], excluded)).not.toThrow();
+    const license = { id: '/game/src/ui/vendor/LICENSE.txt?url&no-inline', code: 'export default "assets/LICENSE-review.txt";' };
+    expect(() => assertExcludedRuntimeAssetReferences([license], excluded)).not.toThrow();
+    expect(() => assertExcludedRuntimeAssetReferences([{ ...license, code: `export default ${JSON.stringify(oldMap)};` }], excluded)).toThrow(/Excluded runtime asset/);
+    expect(() => assertExcludedRuntimeAssetReferences([{ ...license, code: 'export default loadText();' }], excluded)).toThrow(/Unsupported runtime source/);
+    expect(() => assertExcludedRuntimeAssetReferences([{ ...license, id: '/game/src/ui/vendor/LICENSE.txt?raw' }], excluded)).toThrow(/Unsupported runtime source/);
+    const referenced = { ...module, code: `export default ${JSON.stringify(`<svg><desc>${oldMap}</desc></svg>`)};` };
+    expect(() => assertExcludedRuntimeAssetReferences([referenced], excluded)).toThrow(/Excluded runtime asset/);
+    for (const changed of [
+      { ...module, id: '/game/src/icon.svg?url' },
+      { ...module, id: '/game/src/new.vue?raw' },
+      { ...module, code: 'export default loadDynamicSvg();' },
+      ...['<svg><script>load()</script></svg>', '<svg onload="load()"></svg>',
+        '<svg><image href="image.webp" /></svg>', '<svg><path style="fill:url(asset)" /></svg>']
+        .map(svg => ({ ...module, code: `export default ${JSON.stringify(svg)};` })),
+    ]) expect(() => assertExcludedRuntimeAssetReferences([changed], excluded)).toThrow(/Unsupported runtime source/);
+  });
 });
 
 it('pins indirect URL inputs even when their change has no recognizable asset constructor', () => {

@@ -175,13 +175,30 @@ export function collectReviewedRuntimeAssetExclusions(projectRoot) {
 // The early manifest decision and the actual complete Rollup graph must agree.
 // An async module restoring a reference (or files changing during the build)
 // must fail loudly rather than publish a manifest that requests missing files.
+function isStaticRawData(module) {
+  const [filename, query = ''] = posix(module?.id || '').split('#')[0].split('?');
+  const params = new URLSearchParams(query);
+  const svgRaw = filename.endsWith('.svg') && params.has('raw');
+  const textUrl = filename.endsWith('.txt') && params.has('url') && params.has('no-inline');
+  if (!svgRaw && !textUrl) return false;
+  try {
+    const ast = parse(module.code || '', { ecmaVersion: 'latest', sourceType: 'module' });
+    const value = ast.body.length === 1 && ast.body[0].type === 'ExportDefaultDeclaration'
+      && ast.body[0].declaration.type === 'Literal' ? ast.body[0].declaration.value : null;
+    if (typeof value !== 'string') return false;
+    if (textUrl) return true;
+    return /^\s*<svg[\s>]/i.test(value) && /<\/svg>\s*$/i.test(value)
+      && !/<(?:script|foreignObject)\b|\bon\w+\s*=|\b(?:href|src)\s*=|url\s*\(/i.test(value);
+  } catch { return false; }
+}
+
 export function assertExcludedRuntimeAssetReferences(modules, excludedAssets) {
   if (!excludedAssets?.size) return;
   if (!modules) throw new Error('Cannot verify reviewed asset exclusions without the complete Rollup module graph.');
   for (const module of modules) {
     const id = posix(module?.id || '').split(/[?#]/)[0];
     const code = module?.code || '';
-    if (id.includes('/game/src/') && !/\.(?:[cm]?js|jsx|tsx?|json|css)$/.test(id)) {
+    if (id.includes('/game/src/') && !/\.(?:[cm]?js|jsx|tsx?|json|css)$/.test(id) && !isStaticRawData(module)) {
       throw new Error(`Unsupported runtime source type ${id}; retain reviewed assets before building.`);
     }
     if (id.includes('/game/') && !id.includes('/game/src/') && JS_SOURCE_RE.test(id)
