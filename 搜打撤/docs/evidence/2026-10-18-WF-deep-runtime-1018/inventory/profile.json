@@ -1,0 +1,730 @@
+{
+  "environment": {
+    "node": "v24.13.0",
+    "platform": "win32",
+    "catalog": 268,
+    "bagCap": 30,
+    "stashCap": 100,
+    "scope": "Actual bag/warehouse/departure, Cards/Art/Icons/overlay and DOM. Session save + character choice/handoff ports controlled. No image network/decode, browser layout/GPU, audio, delayed rAF. Mutation-observer microtasks included. Instrumentation is diagnostic; timings are not thresholds."
+  },
+  "scenarios": [
+    {
+      "name": "bag.refresh.25",
+      "n": 13,
+      "medianMs": 19.718299999999545,
+      "p95Ms": 42.42579999999998,
+      "meanCpuMs": 23.076923076923077,
+      "medianCpuMs": 16,
+      "p95CpuMs": 79,
+      "breakdown": {
+        "Cards.rarityOf": {
+          "calls": 20,
+          "ms": 0.014199999998709245,
+          "selfMs": 0.014199999998709245
+        },
+        "Cards.all": {
+          "calls": 1,
+          "ms": 0.0010000000002037268,
+          "selfMs": 0.0010000000002037268
+        },
+        "Cards.cardHTML": {
+          "calls": 23,
+          "ms": 0.029499999999643478,
+          "selfMs": 0.029499999999643478
+        },
+        "UI.showOverlay": {
+          "calls": 1,
+          "ms": 19.023800000000847,
+          "selfMs": 1.6832000000013068
+        },
+        "Icons.rich": {
+          "calls": 2,
+          "ms": 0.25649999999950523,
+          "selfMs": 0.25649999999950523
+        },
+        "DOM.innerHTML": {
+          "calls": 2,
+          "ms": 13.965000000001055,
+          "selfMs": 13.965000000001055
+        },
+        "DOM.querySelectorAll": {
+          "calls": 1,
+          "ms": 0.14570000000003347,
+          "selfMs": 0.14570000000003347
+        },
+        "DOM.querySelector": {
+          "calls": 4,
+          "ms": 1.8786000000000058,
+          "selfMs": 1.8786000000000058
+        },
+        "DOM.addEventListener": {
+          "calls": 2,
+          "ms": 0.0067000000003645255,
+          "selfMs": 0.0067000000003645255
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\bag.refresh.25.cpuprofiles.json"
+    },
+    {
+      "name": "bag.filter.25",
+      "n": 13,
+      "medianMs": 8.056499999999687,
+      "p95Ms": 8.874700000000303,
+      "meanCpuMs": 5.769230769230769,
+      "medianCpuMs": 0,
+      "p95CpuMs": 15,
+      "breakdown": {
+        "Cards.rarityOf": {
+          "calls": 20,
+          "ms": 0.011699999998199928,
+          "selfMs": 0.011699999998199928
+        },
+        "Cards.cardHTML": {
+          "calls": 4,
+          "ms": 0.010999999998603016,
+          "selfMs": 0.010999999998603016
+        },
+        "UI.showOverlay": {
+          "calls": 1,
+          "ms": 7.572599999999511,
+          "selfMs": 1.4380000000010114
+        },
+        "Icons.rich": {
+          "calls": 2,
+          "ms": 0.09909999999945285,
+          "selfMs": 0.09909999999945285
+        },
+        "DOM.innerHTML": {
+          "calls": 2,
+          "ms": 5.365499999999884,
+          "selfMs": 5.365499999999884
+        },
+        "DOM.querySelectorAll": {
+          "calls": 1,
+          "ms": 0.07909999999992579,
+          "selfMs": 0.07909999999992579
+        },
+        "DOM.querySelector": {
+          "calls": 4,
+          "ms": 0.6405999999997221,
+          "selfMs": 0.6405999999997221
+        },
+        "DOM.addEventListener": {
+          "calls": 2,
+          "ms": 0.006400000000212458,
+          "selfMs": 0.006400000000212458
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\bag.filter.25.cpuprofiles.json"
+    },
+    {
+      "name": "bag.moveSafe.25",
+      "n": 13,
+      "medianMs": 19.292900000000373,
+      "p95Ms": 43.283400000000256,
+      "meanCpuMs": 26.615384615384617,
+      "medianCpuMs": 16,
+      "p95CpuMs": 94,
+      "breakdown": {
+        "Cards.rarityOf": {
+          "calls": 20,
+          "ms": 0.012100000003556488,
+          "selfMs": 0.012100000003556488
+        },
+        "Cards.all": {
+          "calls": 1,
+          "ms": 0.0010000000002037268,
+          "selfMs": 0.0010000000002037268
+        },
+        "Cards.cardHTML": {
+          "calls": 23,
+          "ms": 0.029800000000250293,
+          "selfMs": 0.029800000000250293
+        },
+        "UI.showOverlay": {
+          "calls": 1,
+          "ms": 18.35899999999856,
+          "selfMs": 1.583600000001752
+        },
+        "Icons.rich": {
+          "calls": 2,
+          "ms": 0.2701999999990221,
+          "selfMs": 0.2701999999990221
+        },
+        "DOM.innerHTML": {
+          "calls": 2,
+          "ms": 14.267300000001342,
+          "selfMs": 14.267300000001342
+        },
+        "DOM.querySelectorAll": {
+          "calls": 1,
+          "ms": 0.13730000000032305,
+          "selfMs": 0.13730000000032305
+        },
+        "DOM.querySelector": {
+          "calls": 4,
+          "ms": 2.0054000000000087,
+          "selfMs": 2.0054000000000087
+        },
+        "DOM.addEventListener": {
+          "calls": 2,
+          "ms": 0.008300000001327135,
+          "selfMs": 0.008300000001327135
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\bag.moveSafe.25.cpuprofiles.json"
+    },
+    {
+      "name": "bag.refresh.90",
+      "n": 13,
+      "medianMs": 64.19350000000122,
+      "p95Ms": 79.01889999999912,
+      "meanCpuMs": 78.23076923076923,
+      "medianCpuMs": 63,
+      "p95CpuMs": 125,
+      "breakdown": {
+        "Cards.rarityOf": {
+          "calls": 64,
+          "ms": 0.030399999999644933,
+          "selfMs": 0.030399999999644933
+        },
+        "Cards.all": {
+          "calls": 1,
+          "ms": 0.001299999999901047,
+          "selfMs": 0.001299999999901047
+        },
+        "Cards.cardHTML": {
+          "calls": 67,
+          "ms": 0.07609999999476713,
+          "selfMs": 0.07609999999476713
+        },
+        "UI.showOverlay": {
+          "calls": 1,
+          "ms": 62.65090000000055,
+          "selfMs": 1.823500000002241
+        },
+        "Icons.rich": {
+          "calls": 2,
+          "ms": 1.0514000000002852,
+          "selfMs": 1.0514000000002852
+        },
+        "DOM.innerHTML": {
+          "calls": 2,
+          "ms": 52.91120000000228,
+          "selfMs": 52.91120000000228
+        },
+        "DOM.querySelectorAll": {
+          "calls": 1,
+          "ms": 0.4350000000013097,
+          "selfMs": 0.4350000000013097
+        },
+        "DOM.querySelector": {
+          "calls": 4,
+          "ms": 7.827899999996589,
+          "selfMs": 7.827899999996589
+        },
+        "DOM.addEventListener": {
+          "calls": 2,
+          "ms": 0.010200000000622822,
+          "selfMs": 0.010200000000622822
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\bag.refresh.90.cpuprofiles.json"
+    },
+    {
+      "name": "bag.filter.90",
+      "n": 13,
+      "medianMs": 15.88590000000113,
+      "p95Ms": 28.645199999999022,
+      "meanCpuMs": 22.923076923076923,
+      "medianCpuMs": 16,
+      "p95CpuMs": 94,
+      "breakdown": {
+        "Cards.rarityOf": {
+          "calls": 64,
+          "ms": 0.027999999998428393,
+          "selfMs": 0.027999999998428393
+        },
+        "Cards.cardHTML": {
+          "calls": 11,
+          "ms": 0.018999999992956873,
+          "selfMs": 0.018999999992956873
+        },
+        "UI.showOverlay": {
+          "calls": 1,
+          "ms": 15.273300000000745,
+          "selfMs": 1.4847000000081607
+        },
+        "Icons.rich": {
+          "calls": 2,
+          "ms": 0.17919999999867287,
+          "selfMs": 0.17919999999867287
+        },
+        "DOM.innerHTML": {
+          "calls": 2,
+          "ms": 12.258499999996275,
+          "selfMs": 12.258499999996275
+        },
+        "DOM.querySelectorAll": {
+          "calls": 1,
+          "ms": 0.12740000000121654,
+          "selfMs": 0.12740000000121654
+        },
+        "DOM.querySelector": {
+          "calls": 4,
+          "ms": 1.2135999999991327,
+          "selfMs": 1.2135999999991327
+        },
+        "DOM.addEventListener": {
+          "calls": 2,
+          "ms": 0.008099999995465623,
+          "selfMs": 0.008099999995465623
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\bag.filter.90.cpuprofiles.json"
+    },
+    {
+      "name": "bag.moveSafe.90",
+      "n": 13,
+      "medianMs": 67.38639999999577,
+      "p95Ms": 104.20669999999518,
+      "meanCpuMs": 90.23076923076923,
+      "medianCpuMs": 79,
+      "p95CpuMs": 125,
+      "breakdown": {
+        "Cards.rarityOf": {
+          "calls": 65,
+          "ms": 0.027699999991455115,
+          "selfMs": 0.027699999991455115
+        },
+        "Cards.all": {
+          "calls": 1,
+          "ms": 0.000800000001618173,
+          "selfMs": 0.000800000001618173
+        },
+        "Cards.cardHTML": {
+          "calls": 68,
+          "ms": 0.07780000002094312,
+          "selfMs": 0.07780000002094312
+        },
+        "UI.showOverlay": {
+          "calls": 1,
+          "ms": 65.89569999999367,
+          "selfMs": 1.921200000011595
+        },
+        "Icons.rich": {
+          "calls": 2,
+          "ms": 1.0714000000007218,
+          "selfMs": 1.0714000000007218
+        },
+        "DOM.innerHTML": {
+          "calls": 2,
+          "ms": 56.78900000000431,
+          "selfMs": 56.78900000000431
+        },
+        "DOM.querySelectorAll": {
+          "calls": 1,
+          "ms": 0.45829999999841675,
+          "selfMs": 0.45829999999841675
+        },
+        "DOM.querySelector": {
+          "calls": 4,
+          "ms": 9.308100000002014,
+          "selfMs": 9.308100000002014
+        },
+        "DOM.addEventListener": {
+          "calls": 2,
+          "ms": 0.0070000000050640665,
+          "selfMs": 0.0070000000050640665
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\bag.moveSafe.90.cpuprofiles.json"
+    },
+    {
+      "name": "warehouse.open.25",
+      "n": 13,
+      "medianMs": 28.383899999993446,
+      "p95Ms": 42.76909999999771,
+      "meanCpuMs": 50.46153846153846,
+      "medianCpuMs": 32,
+      "p95CpuMs": 172,
+      "breakdown": {
+        "Cards.cardHTML": {
+          "calls": 25,
+          "ms": 0.01679999998304993,
+          "selfMs": 0.01679999998304993
+        },
+        "UI.showOverlay": {
+          "calls": 1,
+          "ms": 24.249199999998382,
+          "selfMs": 2.902699999991455
+        },
+        "DOM.querySelector": {
+          "calls": 7,
+          "ms": 2.652699999976903,
+          "selfMs": 2.652699999976903
+        },
+        "Icons.rich": {
+          "calls": 2,
+          "ms": 0.2982999999949243,
+          "selfMs": 0.2982999999949243
+        },
+        "DOM.innerHTML": {
+          "calls": 2,
+          "ms": 17.746500000001106,
+          "selfMs": 17.746500000001106
+        },
+        "DOM.querySelectorAll": {
+          "calls": 3,
+          "ms": 1.2807000000175321,
+          "selfMs": 1.2807000000175321
+        },
+        "DOM.addEventListener": {
+          "calls": 7,
+          "ms": 0.03560000001016306,
+          "selfMs": 0.03560000001016306
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\warehouse.open.25.cpuprofiles.json"
+    },
+    {
+      "name": "warehouse.filter.25",
+      "n": 13,
+      "medianMs": 5.8224000000045635,
+      "p95Ms": 7.400899999993271,
+      "meanCpuMs": 4.846153846153846,
+      "medianCpuMs": 0,
+      "p95CpuMs": 16,
+      "breakdown": {
+        "DOM.querySelectorAll": {
+          "calls": 3,
+          "ms": 1.5820999999996275,
+          "selfMs": 1.5820999999996275
+        },
+        "DOM.querySelector": {
+          "calls": 7,
+          "ms": 1.4221000000252388,
+          "selfMs": 1.4221000000252388
+        },
+        "DOM.innerHTML": {
+          "calls": 1,
+          "ms": 0.2071999999898253,
+          "selfMs": 0.2071999999898253
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\warehouse.filter.25.cpuprofiles.json"
+    },
+    {
+      "name": "departure.open.25",
+      "n": 13,
+      "medianMs": 35.79109999998764,
+      "p95Ms": 51.009500000000116,
+      "meanCpuMs": 43.23076923076923,
+      "medianCpuMs": 47,
+      "p95CpuMs": 78,
+      "breakdown": {
+        "Cards.all": {
+          "calls": 1,
+          "ms": 0.0011999999987892807,
+          "selfMs": 0.0011999999987892807
+        },
+        "Cards.cardHTML": {
+          "calls": 27,
+          "ms": 0.017899999918881804,
+          "selfMs": 0.017899999918881804
+        },
+        "UI.showOverlay": {
+          "calls": 1,
+          "ms": 29.709900000001653,
+          "selfMs": 1.5927000000083353
+        },
+        "Icons.rich": {
+          "calls": 2,
+          "ms": 0.33830000000307336,
+          "selfMs": 0.33830000000307336
+        },
+        "DOM.innerHTML": {
+          "calls": 2,
+          "ms": 22.62390000000596,
+          "selfMs": 22.62390000000596
+        },
+        "DOM.querySelectorAll": {
+          "calls": 3,
+          "ms": 0.8145999999978812,
+          "selfMs": 0.8145999999978812
+        },
+        "DOM.querySelector": {
+          "calls": 13,
+          "ms": 8.092299999974784,
+          "selfMs": 8.092299999974784
+        },
+        "DOM.addEventListener": {
+          "calls": 33,
+          "ms": 0.04809999999997672,
+          "selfMs": 0.04809999999997672
+        },
+        "Cards.rarityOf": {
+          "calls": 25,
+          "ms": 0.013399999952525832,
+          "selfMs": 0.013399999952525832
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\departure.open.25.cpuprofiles.json"
+    },
+    {
+      "name": "departure.add.25",
+      "n": 13,
+      "medianMs": 11.969899999996414,
+      "p95Ms": 35.40780000000086,
+      "meanCpuMs": 25.307692307692307,
+      "medianCpuMs": 16,
+      "p95CpuMs": 156,
+      "breakdown": {
+        "Cards.all": {
+          "calls": 2,
+          "ms": 0.0013000000035390258,
+          "selfMs": 0.0013000000035390258
+        },
+        "Cards.cardHTML": {
+          "calls": 3,
+          "ms": 0.005399999994551763,
+          "selfMs": 0.005399999994551763
+        },
+        "DOM.querySelectorAll": {
+          "calls": 2,
+          "ms": 1.0635000000038417,
+          "selfMs": 1.0635000000038417
+        },
+        "DOM.querySelector": {
+          "calls": 115,
+          "ms": 6.133599999884609,
+          "selfMs": 6.133599999884609
+        },
+        "Icons.rich": {
+          "calls": 3,
+          "ms": 0.033300000010058284,
+          "selfMs": 0.033300000010058284
+        },
+        "DOM.innerHTML": {
+          "calls": 4,
+          "ms": 2.2384999999922,
+          "selfMs": 2.2384999999922
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\departure.add.25.cpuprofiles.json"
+    },
+    {
+      "name": "departure.filter.25",
+      "n": 13,
+      "medianMs": 0.53080000000773,
+      "p95Ms": 0.8271000000240747,
+      "meanCpuMs": 1.2307692307692308,
+      "medianCpuMs": 0,
+      "p95CpuMs": 16,
+      "breakdown": {},
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\departure.filter.25.cpuprofiles.json"
+    },
+    {
+      "name": "warehouse.open.100",
+      "n": 13,
+      "medianMs": 110.12160000001313,
+      "p95Ms": 142.3346999999776,
+      "meanCpuMs": 191.15384615384616,
+      "medianCpuMs": 141,
+      "p95CpuMs": 672,
+      "breakdown": {
+        "Cards.cardHTML": {
+          "calls": 100,
+          "ms": 0.048199999815551564,
+          "selfMs": 0.048199999815551564
+        },
+        "UI.showOverlay": {
+          "calls": 1,
+          "ms": 94.44250000000466,
+          "selfMs": 5.493399999977555
+        },
+        "DOM.querySelector": {
+          "calls": 7,
+          "ms": 14.834700000006706,
+          "selfMs": 14.834700000006706
+        },
+        "Icons.rich": {
+          "calls": 2,
+          "ms": 1.3804999999993015,
+          "selfMs": 1.3804999999993015
+        },
+        "DOM.innerHTML": {
+          "calls": 2,
+          "ms": 73.67699999999604,
+          "selfMs": 73.67699999999604
+        },
+        "DOM.querySelectorAll": {
+          "calls": 3,
+          "ms": 7.3523999999742955,
+          "selfMs": 7.3523999999742955
+        },
+        "DOM.addEventListener": {
+          "calls": 7,
+          "ms": 0.03940000000875443,
+          "selfMs": 0.03940000000875443
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\warehouse.open.100.cpuprofiles.json"
+    },
+    {
+      "name": "warehouse.filter.100",
+      "n": 13,
+      "medianMs": 26.591300000000047,
+      "p95Ms": 56.08129999999073,
+      "meanCpuMs": 30.23076923076923,
+      "medianCpuMs": 31,
+      "p95CpuMs": 78,
+      "breakdown": {
+        "DOM.querySelectorAll": {
+          "calls": 3,
+          "ms": 8.710000000020955,
+          "selfMs": 8.710000000020955
+        },
+        "DOM.querySelector": {
+          "calls": 7,
+          "ms": 8.817200000019511,
+          "selfMs": 8.817200000019511
+        },
+        "DOM.innerHTML": {
+          "calls": 1,
+          "ms": 0.27109999998356216,
+          "selfMs": 0.27109999998356216
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\warehouse.filter.100.cpuprofiles.json"
+    },
+    {
+      "name": "departure.open.100",
+      "n": 13,
+      "medianMs": 142.79749999998603,
+      "p95Ms": 670.3913999999932,
+      "meanCpuMs": 436.3076923076923,
+      "medianCpuMs": 203,
+      "p95CpuMs": 2875,
+      "breakdown": {
+        "Cards.all": {
+          "calls": 1,
+          "ms": 0.0011999999987892807,
+          "selfMs": 0.0011999999987892807
+        },
+        "Cards.cardHTML": {
+          "calls": 102,
+          "ms": 0.09350000007543713,
+          "selfMs": 0.09350000007543713
+        },
+        "UI.showOverlay": {
+          "calls": 1,
+          "ms": 114.41459999998915,
+          "selfMs": 1.9012000000220723
+        },
+        "Icons.rich": {
+          "calls": 2,
+          "ms": 1.9268000000156462,
+          "selfMs": 1.9268000000156462
+        },
+        "DOM.innerHTML": {
+          "calls": 2,
+          "ms": 94.4487000000081,
+          "selfMs": 94.4487000000081
+        },
+        "DOM.querySelectorAll": {
+          "calls": 3,
+          "ms": 3.4984999999869615,
+          "selfMs": 3.4984999999869615
+        },
+        "DOM.querySelector": {
+          "calls": 13,
+          "ms": 37.6131999999634,
+          "selfMs": 37.6131999999634
+        },
+        "DOM.addEventListener": {
+          "calls": 33,
+          "ms": 0.04689999998663552,
+          "selfMs": 0.04689999998663552
+        },
+        "Cards.rarityOf": {
+          "calls": 100,
+          "ms": 0.049799999862443656,
+          "selfMs": 0.049799999862443656
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\departure.open.100.cpuprofiles.json"
+    },
+    {
+      "name": "departure.add.100",
+      "n": 13,
+      "medianMs": 40.68390000000363,
+      "p95Ms": 561.578199999989,
+      "meanCpuMs": 257.2307692307692,
+      "medianCpuMs": 47,
+      "p95CpuMs": 2766,
+      "breakdown": {
+        "Cards.all": {
+          "calls": 2,
+          "ms": 0.001400000008288771,
+          "selfMs": 0.001400000008288771
+        },
+        "Cards.cardHTML": {
+          "calls": 3,
+          "ms": 0.005200000014156103,
+          "selfMs": 0.005200000014156103
+        },
+        "DOM.querySelectorAll": {
+          "calls": 2,
+          "ms": 3.937000000005355,
+          "selfMs": 3.937000000005355
+        },
+        "DOM.querySelector": {
+          "calls": 265,
+          "ms": 26.403099999937695,
+          "selfMs": 26.403099999937695
+        },
+        "Icons.rich": {
+          "calls": 3,
+          "ms": 0.04079999995883554,
+          "selfMs": 0.04079999995883554
+        },
+        "DOM.innerHTML": {
+          "calls": 4,
+          "ms": 2.2848999999987427,
+          "selfMs": 2.2848999999987427
+        }
+      },
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\departure.add.100.cpuprofiles.json"
+    },
+    {
+      "name": "departure.filter.100",
+      "n": 13,
+      "medianMs": 0.9275999999954365,
+      "p95Ms": 2.102199999964796,
+      "meanCpuMs": 0,
+      "medianCpuMs": 0,
+      "p95CpuMs": 0,
+      "breakdown": {},
+      "correct": true,
+      "cpuProfile": ".tmp\\deep-perf-1018\\inventory\\departure.filter.100.cpuprofiles.json"
+    }
+  ],
+  "validForFinal": false,
+  "status": "Exploratory single-process diagnostic, superseded by departure-ab.json. Per-sample inspector overhead and unbounded long jsdom matrix made this unsuitable for final timing claims."
+}

@@ -1,0 +1,16 @@
+import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';
+const root=process.cwd(),base=path.join(root,'.tmp/deep-perf-1018/inventory'),out=path.join(root,'docs/evidence/2026-10-18-WF-deep-runtime-1018/inventory');
+const results=[];
+for(const name of fs.readdirSync(base).filter(x=>x.startsWith('ab.')&&x.endsWith('.cpuprofile'))){
+ const profiles=[JSON.parse(fs.readFileSync(path.join(base,name),'utf8'))],counts=new Map(),products=new Map(),categories=new Map();let total=0;
+ for(const p of profiles){const nodes=new Map(p.nodes.map(n=>[n.id,n])),parents=new Map();for(const n of p.nodes)for(const c of n.children||[])parents.set(c,n.id);
+  for(const id of p.samples||[]){total++;let node=nodes.get(id);const leaf=`${node.callFrame.functionName||'(anonymous)'} @ ${node.callFrame.url||'(native)'}`;counts.set(leaf,(counts.get(leaf)||0)+1);
+   const url=node.callFrame.url||'',category=url.includes('/nwsapi/')?'CSS selector engine':url.includes('/parse5/')?'HTML parser':url.includes('/jsdom/')?'jsdom DOM':url.includes('/game/src/')||url.includes('/inventory/baseline/')?'game source':node.callFrame.functionName==='(garbage collector)'?'GC':'runtime/harness/other';categories.set(category,(categories.get(category)||0)+1);
+   while(node){if(node.callFrame.url?.includes('/game/src/')||node.callFrame.url?.includes('/inventory/baseline/')){const logical=node.callFrame.url.includes('/game/src/')?node.callFrame.url.split('/game/src/')[1]:'hub/'+node.callFrame.url.split('/inventory/baseline/')[1];const k=`${node.callFrame.functionName||'(anonymous)'} @ ${logical}`;products.set(k,(products.get(k)||0)+1);break;}node=nodes.get(parents.get(node.id));}
+  }
+ }
+ const top=m=>[...m].sort((a,b)=>b[1]-a[1]).slice(0,18).map(([label,samples])=>({label,samples,pct:100*samples/total}));
+ const file=path.join(base,name),bytes=fs.readFileSync(file);results.push({operation:name.replace('.cpuprofile',''),scope:'40 steady actions, controlled frame/hydration flush after each. cpuLeaf/category are exclusive leaf self samples; nearestProductFrame is mutually exclusive closest-product attribution, not function self time. Do not add these two views.',totalSamples:total,profiles:profiles.length,bytes:bytes.length,sha256:crypto.createHash('sha256').update(bytes).digest('hex'),categories:top(categories),cpuLeaf:top(counts),nearestProductFrame:top(products)});
+}
+fs.writeFileSync(path.join(out,'cpu-summary.json'),JSON.stringify(results,null,2));
+console.log(JSON.stringify(results.map(r=>({operation:r.operation,samples:r.totalSamples,top:r.nearestProductFrame.slice(0,5)}))));

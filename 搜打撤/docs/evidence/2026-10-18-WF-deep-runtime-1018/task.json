@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-deep-runtime-1018",
+  "date": "2026-10-18",
+  "owner": "Friday",
+  "goal": "以真实操作链CPU、分配和资源存活证据深入优化地图渲染、战斗、背包与资源生命周期，不继续实玩",
+  "paths": [
+    "game/src/core/renderer.js",
+    "game/src/battle/view/battle.layers.js",
+    "game/src/battle/view/battle.frame-assets.js",
+    "game/src/audio/sound.js",
+    "game/src/hub/game.hub.depart.js",
+    "game/src/hub/departure.view-updates.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "tests/renderer-road-invalidation.test.js",
+    "tests/battle-hand-content-diff.test.js",
+    "tests/frame-assets-cancellation-perf.test.js",
+    "tests/sound-muted-startup-perf.test.js",
+    "tests/departure-render-performance.test.js",
+    "docs/evidence/2026-10-18-WF-deep-runtime-1018"
+  ],
+  "doneWhen": [
+    "主耗时来源经真实模块典型及合理高负载剖析确认",
+    "高价值改动有交替采样的前后CPU耗时及输出或状态等价证据",
+    "按风险完成自动化回归、保留未覆盖的浏览器及原生指标边界并沿授权提交交付"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "已核对五处真实模块热点与交替A/B、状态或HTML等价、生命周期及交叉复核",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "冻结index全量614文件6011通过16跳过，语法数据类型lint通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "隔离标准npm build已产出游戏资源，原有五项包体预算仍超限，未改阈值",
+      "result": "failed"
+    }
+  ],
+  "unverified": [
+    "按老板要求未继续浏览器实玩或原生EXE GUI；不声称FPS、GPU或RSS收益",
+    "远端CI未推送核验；便携封装核验另在收官记录补充"
+  ],
+  "updatedAt": "2026-10-18T10:50:30.426Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

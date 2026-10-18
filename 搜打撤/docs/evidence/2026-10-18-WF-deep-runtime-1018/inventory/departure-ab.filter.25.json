@@ -1,0 +1,29 @@
+{
+  "scope": "Alternating baseline/candidate pairs, identical reset for each variant; setup + frame flush outside timings. Actual module handlers, templates, card faces, Icons, overlay and jsdom. Operation completes after controlled first-frame + hydration/observer queues settle. All action samples explicitly labelled first/steady. No browser layout/GPU, asset decode/network or audio.",
+  "samplesPerVariant": 17,
+  "operations": [
+    {
+      "name": "filter.25",
+      "steady": true,
+      "baseline": {
+        "n": 17,
+        "medianMs": 0.2440999999998894,
+        "p95Ms": 0.4094999999997526,
+        "meanCpuMs": 0,
+        "medianCpuMs": 0,
+        "p95CpuMs": 0,
+        "breakdown": {}
+      },
+      "candidate": {
+        "n": 17,
+        "medianMs": 0.2319999999999709,
+        "p95Ms": 0.29970000000002983,
+        "meanCpuMs": 0,
+        "medianCpuMs": 0,
+        "p95CpuMs": 0,
+        "breakdown": {}
+      },
+      "outputEqual": true
+    }
+  ]
+}

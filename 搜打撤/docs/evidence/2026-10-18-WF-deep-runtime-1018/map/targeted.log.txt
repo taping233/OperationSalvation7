@@ -1,0 +1,15 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/map-render-performance.test.js (6 tests) 11ms
+ ✓ tests/renderer-road-invalidation.test.js (4 tests) 528ms
+   ✓ 预览改变仅重裁关联道路，其余道路保留纹理输入对象  410ms
+ ✓ tests/renderer-resource-lifecycle.test.js (11 tests) 817ms
+   ✓ Canvas背景缓存生命周期 > 逻辑视口未变但DPR改变时重烘焙，后续相同输入复用  413ms
+
+ Test Files  3 passed (3)
+      Tests  21 passed (21)
+   Start at  18:31:34
+   Duration  2.04s (transform 210ms, setup 0ms, collect 215ms, tests 1.36s, environment 2.57s, prepare 324ms)
+

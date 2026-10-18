@@ -1,0 +1,1107 @@
+{
+  "date": "2026-10-18",
+  "instrumented": false,
+  "environment": {
+    "node": "v24.13.0",
+    "platform": "win32",
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700H",
+    "cpus": 20
+  },
+  "boundaries": {
+    "core": "actual BattleSession/Combat/cards/availability/snapshot/preview/render modules",
+    "graphics": "frame renderer, image entry gate, audio, artwork URLs stubbed; jsdom has no layout/paint/GPU",
+    "ui": "actual battle layers; host overlay/HUD refresh stubbed; actual hudMethods.log with bounded60lines",
+    "presentation": "production VITEST branch resolves presentation waits immediately; no user-visible pace conclusion",
+    "load": "2foes/12hand and4foes/28hand;2equips applied via real commands,3potions,9energy; bounded15samples per operation"
+  },
+  "reports": [
+    {
+      "name": "typical",
+      "hand": 12,
+      "foes": 2,
+      "handIds": [
+        "tt3-arrow-rain",
+        "tt3-blood-arrow",
+        "tt3-fatal-pierce",
+        "tt3-bandage",
+        "tt3-double-shot",
+        "tt3-chain-lightning",
+        "tt3-armor-rush",
+        "tt3-purify-arrow",
+        "tt3-wave-slash",
+        "tt3-qi-wave",
+        "tt3-hold-fast",
+        "tt3-venom-arrow"
+      ],
+      "equipped": [
+        "长剑",
+        "法杖"
+      ],
+      "potions": 3,
+      "operations": [
+        {
+          "name": "snapshot.cache-hit",
+          "n": 15,
+          "meanMs": 0.17741333333330356,
+          "medianMs": 0.15729999999985012,
+          "p95Ms": 0.24289999999973588,
+          "minMs": 0.14269999999987704,
+          "maxMs": 0.24289999999973588,
+          "segments": []
+        },
+        {
+          "name": "snapshot.changed",
+          "n": 15,
+          "meanMs": 0.2062266666666498,
+          "medianMs": 0.1924999999996544,
+          "p95Ms": 0.30169999999998254,
+          "minMs": 0.15270000000009532,
+          "maxMs": 0.30169999999998254,
+          "segments": []
+        },
+        {
+          "name": "availability.whole-hand",
+          "n": 15,
+          "meanMs": 0.6444866666667015,
+          "medianMs": 0.5203000000001339,
+          "p95Ms": 1.4184999999997672,
+          "minMs": 0.4052999999998974,
+          "maxMs": 1.4184999999997672,
+          "segments": []
+        },
+        {
+          "name": "preview.single",
+          "n": 15,
+          "meanMs": 0.30742000000006253,
+          "medianMs": 0.2958000000003267,
+          "p95Ms": 0.5131000000001222,
+          "minMs": 0.20719999999982974,
+          "maxMs": 0.5131000000001222,
+          "segments": []
+        },
+        {
+          "name": "preview.all-targets",
+          "n": 15,
+          "meanMs": 0.33791999999987943,
+          "medianMs": 0.3097000000002481,
+          "p95Ms": 0.6439999999997781,
+          "minMs": 0.24699999999984357,
+          "maxMs": 0.6439999999997781,
+          "segments": []
+        },
+        {
+          "name": "forecast.enemy-turn",
+          "n": 15,
+          "meanMs": 0.17260666666667626,
+          "medianMs": 0.14240000000017972,
+          "p95Ms": 0.29719999999997526,
+          "minMs": 0.13049999999975626,
+          "maxMs": 0.29719999999997526,
+          "segments": []
+        },
+        {
+          "name": "render.no-change",
+          "n": 15,
+          "meanMs": 5.441720000000047,
+          "medianMs": 4.684200000000146,
+          "p95Ms": 9.011400000000322,
+          "minMs": 3.774699999999939,
+          "maxMs": 9.011400000000322,
+          "segments": []
+        },
+        {
+          "name": "render.hp-change",
+          "n": 15,
+          "meanMs": 6.99984000000001,
+          "medianMs": 6.892800000000079,
+          "p95Ms": 9.114100000000235,
+          "minMs": 5.7116000000000895,
+          "maxMs": 9.114100000000235,
+          "segments": []
+        },
+        {
+          "name": "render.hand-page",
+          "n": 15,
+          "meanMs": 12.25622666666665,
+          "medianMs": 12.1253999999999,
+          "p95Ms": 16.759000000000015,
+          "minMs": 8.817799999999806,
+          "maxMs": 16.759000000000015,
+          "segments": []
+        },
+        {
+          "name": "log.single-line",
+          "n": 15,
+          "meanMs": 0.11000666666662558,
+          "medianMs": 0.1044000000001688,
+          "p95Ms": 0.1376999999997679,
+          "minMs": 0.09960000000000946,
+          "maxMs": 0.1376999999997679,
+          "segments": []
+        }
+      ],
+      "profile": {
+        "sampledMs": 550.509,
+        "samples": 736,
+        "topSelf": [
+          {
+            "function": "post",
+            "url": "node:inspector",
+            "line": 115,
+            "ms": 122.417,
+            "percent": 22.237056978178376
+          },
+          {
+            "function": "namedItem",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCollection-impl.js",
+            "line": 25,
+            "ms": 9.969,
+            "percent": 1.810869577064135
+          },
+          {
+            "function": "namedItem",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCollection-impl.js",
+            "line": 25,
+            "ms": 9.235,
+            "percent": 1.677538423531677
+          },
+          {
+            "function": "(garbage collector)",
+            "url": "",
+            "line": 0,
+            "ms": 8.746,
+            "percent": 1.5887115378676826
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 5.49,
+            "percent": 0.9972589003994485
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 4.787,
+            "percent": 0.869558899127898
+          },
+          {
+            "function": "following",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 220,
+            "ms": 4.582,
+            "percent": 0.8323206341767346
+          },
+          {
+            "function": "namedItem",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCollection-impl.js",
+            "line": 25,
+            "ms": 4.561,
+            "percent": 0.8285059826451521
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 4.094,
+            "percent": 0.7436753985856726
+          },
+          {
+            "function": "byTag",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/nwsapi/src/nwsapi.js",
+            "line": 507,
+            "ms": 4.064,
+            "percent": 0.7382258963976974
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 3.999,
+            "percent": 0.7264186416570846
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 3.976,
+            "percent": 0.722240689979637
+          },
+          {
+            "function": "namedItem",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCollection-impl.js",
+            "line": 25,
+            "ms": 3.863,
+            "percent": 0.7017142317382641
+          },
+          {
+            "function": "following",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 220,
+            "ms": 3.541,
+            "percent": 0.6432229082539976
+          },
+          {
+            "function": "byTag",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/nwsapi/src/nwsapi.js",
+            "line": 507,
+            "ms": 3.48,
+            "percent": 0.6321422538051149
+          },
+          {
+            "function": "following",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 220,
+            "ms": 3.287,
+            "percent": 0.5970837897291417
+          },
+          {
+            "function": "query",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 101,
+            "ms": 3.035,
+            "percent": 0.5513079713501505
+          },
+          {
+            "function": "treeToArray",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 338,
+            "ms": 3.006,
+            "percent": 0.5460401192351079
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 2.894,
+            "percent": 0.5256953110666673
+          },
+          {
+            "function": "following",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 220,
+            "ms": 2.879,
+            "percent": 0.5229705599726798
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 2.861,
+            "percent": 0.5197008586598948
+          },
+          {
+            "function": "following",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 220,
+            "ms": 2.856,
+            "percent": 0.5187926082952322
+          },
+          {
+            "function": "wrapperForImpl",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/utils.js",
+            "line": 78,
+            "ms": 2.829,
+            "percent": 0.5138880563260546
+          },
+          {
+            "function": "render",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 338,
+            "ms": 2.805,
+            "percent": 0.5095284545756745
+          },
+          {
+            "function": "treeToArray",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 338,
+            "ms": 2.72,
+            "percent": 0.49408819837641166
+          },
+          {
+            "function": "wrapperForImpl",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/utils.js",
+            "line": 78,
+            "ms": 2.659,
+            "percent": 0.48300754392752887
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 2.572,
+            "percent": 0.467203987582401
+          },
+          {
+            "function": "contains",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/helpers/ordered-set.js",
+            "line": 59,
+            "ms": 2.48,
+            "percent": 0.4504921808726106
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 2.398,
+            "percent": 0.43559687489214527
+          },
+          {
+            "function": "following",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 220,
+            "ms": 2.382,
+            "percent": 0.4326904737252252
+          }
+        ],
+        "topBattleInclusive": [
+          {
+            "function": "(anonymous)",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/.tmp/deep-perf-1018/battle/probe.test.js",
+            "line": 105,
+            "ms": 541.763,
+            "percent": 98.41128846213232
+          },
+          {
+            "function": "render",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 338,
+            "ms": 242.146,
+            "percent": 43.985838560314185
+          },
+          {
+            "function": "(anonymous)",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 596,
+            "ms": 242.146,
+            "percent": 43.985838560314185
+          },
+          {
+            "function": "render",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 338,
+            "ms": 172.963,
+            "percent": 31.418741564624735
+          },
+          {
+            "function": "(anonymous)",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/.tmp/deep-perf-1018/battle/probe.test.js",
+            "line": 95,
+            "ms": 122.951,
+            "percent": 22.334058117124332
+          },
+          {
+            "function": "post",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/.tmp/deep-perf-1018/battle/probe.test.js",
+            "line": 95,
+            "ms": 122.951,
+            "percent": 22.334058117124332
+          },
+          {
+            "function": "updateHand",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 380,
+            "ms": 93.583,
+            "percent": 16.99935877524255
+          },
+          {
+            "function": "(anonymous)",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 403,
+            "ms": 59.895,
+            "percent": 10.879931118292344
+          },
+          {
+            "function": "showBattleStage",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 274,
+            "ms": 41.776,
+            "percent": 7.588613446828299
+          },
+          {
+            "function": "showBattleStage",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 274,
+            "ms": 40.123,
+            "percent": 7.28834587627087
+          },
+          {
+            "function": "mountUnitLayer",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 565,
+            "ms": 36.341,
+            "percent": 6.601345300440138
+          },
+          {
+            "function": "mountUnitLayer",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 565,
+            "ms": 34.781,
+            "percent": 6.317971186665432
+          },
+          {
+            "function": "updateHand",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 380,
+            "ms": 27.714,
+            "percent": 5.034250121251424
+          },
+          {
+            "function": "syncBattleSlot",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 263,
+            "ms": 17.992,
+            "percent": 3.2682481122016167
+          },
+          {
+            "function": "syncBattleSlot",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 263,
+            "ms": 16.064,
+            "percent": 2.918026771587749
+          },
+          {
+            "function": "animateBattleTransition",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.anim.view.js",
+            "line": 138,
+            "ms": 10.936,
+            "percent": 1.9865251975898668
+          },
+          {
+            "function": "animateBattleTransition",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.anim.view.js",
+            "line": 138,
+            "ms": 9.34,
+            "percent": 1.6966116811895902
+          },
+          {
+            "function": "updateHandAcquisitionFeedback",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.effect-feedback.js",
+            "line": 70,
+            "ms": 8.511,
+            "percent": 1.546023770728544
+          },
+          {
+            "function": "layoutBattleScenery",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 67,
+            "ms": 6.365,
+            "percent": 1.1562027142153897
+          },
+          {
+            "function": "syncBattleScenery",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 107,
+            "ms": 6.365,
+            "percent": 1.1562027142153897
+          },
+          {
+            "function": "(anonymous)",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 486,
+            "ms": 6.164,
+            "percent": 1.1196910495559564
+          },
+          {
+            "function": "restoreCombatScene",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.secondary-overlay.js",
+            "line": 25,
+            "ms": 5.83,
+            "percent": 1.0590199251965
+          },
+          {
+            "function": "updateUnits",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 704,
+            "ms": 5.724,
+            "percent": 1.0397650174656545
+          },
+          {
+            "function": "restoreCombatScene",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.secondary-overlay.js",
+            "line": 25,
+            "ms": 5.212,
+            "percent": 0.9467601801242124
+          },
+          {
+            "function": "layoutBattleScenery",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 67,
+            "ms": 5.166,
+            "percent": 0.9384042767693171
+          }
+        ]
+      }
+    },
+    {
+      "name": "high",
+      "hand": 28,
+      "foes": 4,
+      "handIds": [
+        "tt3-arrow-rain",
+        "tt3-blood-arrow",
+        "tt3-fatal-pierce",
+        "tt3-bandage",
+        "tt3-double-shot",
+        "tt3-chain-lightning",
+        "tt3-armor-rush",
+        "tt3-purify-arrow",
+        "tt3-wave-slash",
+        "tt3-qi-wave",
+        "tt3-hold-fast",
+        "tt3-venom-arrow",
+        "tt3-toxin",
+        "tt3-reshot",
+        "tt3-frost-slash",
+        "tt3-holy-water",
+        "tt3-skewer",
+        "tt3-holy-shield",
+        "tt3-nature-form",
+        "tt3-ice-spike",
+        "tt3-thornfield",
+        "tt3-grope",
+        "tt3sp-silverthorn",
+        "tt3sp-shadowshot",
+        "tt3sp-bloodstorm",
+        "tt3-treasure-hunt",
+        "tt3-firm-barrier",
+        "tt3-execute"
+      ],
+      "equipped": [
+        "长剑",
+        "法杖"
+      ],
+      "potions": 3,
+      "operations": [
+        {
+          "name": "snapshot.cache-hit",
+          "n": 15,
+          "meanMs": 0.10848000000011476,
+          "medianMs": 0.1014999999997599,
+          "p95Ms": 0.14469999999982974,
+          "minMs": 0.09680000000025757,
+          "maxMs": 0.14469999999982974,
+          "segments": []
+        },
+        {
+          "name": "snapshot.changed",
+          "n": 15,
+          "meanMs": 0.11506000000008498,
+          "medianMs": 0.11340000000018335,
+          "p95Ms": 0.14570000000003347,
+          "minMs": 0.09940000000005966,
+          "maxMs": 0.14570000000003347,
+          "segments": []
+        },
+        {
+          "name": "availability.whole-hand",
+          "n": 15,
+          "meanMs": 0.7911266666666658,
+          "medianMs": 0.7510000000002037,
+          "p95Ms": 1.097700000000259,
+          "minMs": 0.6472000000003391,
+          "maxMs": 1.097700000000259,
+          "segments": []
+        },
+        {
+          "name": "preview.single",
+          "n": 15,
+          "meanMs": 0.22264666666675717,
+          "medianMs": 0.22490000000016153,
+          "p95Ms": 0.26370000000042637,
+          "minMs": 0.18670000000020082,
+          "maxMs": 0.26370000000042637,
+          "segments": []
+        },
+        {
+          "name": "preview.all-targets",
+          "n": 15,
+          "meanMs": 0.40954000000007607,
+          "medianMs": 0.3977999999997337,
+          "p95Ms": 0.6482000000005428,
+          "minMs": 0.3344999999999345,
+          "maxMs": 0.6482000000005428,
+          "segments": []
+        },
+        {
+          "name": "forecast.enemy-turn",
+          "n": 15,
+          "meanMs": 0.14587999999985185,
+          "medianMs": 0.1426000000001295,
+          "p95Ms": 0.17809999999917636,
+          "minMs": 0.13909999999941647,
+          "maxMs": 0.17809999999917636,
+          "segments": []
+        },
+        {
+          "name": "render.no-change",
+          "n": 15,
+          "meanMs": 3.0235733333332973,
+          "medianMs": 2.905399999999645,
+          "p95Ms": 4.568599999999606,
+          "minMs": 2.690400000000409,
+          "maxMs": 4.568599999999606,
+          "segments": []
+        },
+        {
+          "name": "render.hp-change",
+          "n": 15,
+          "meanMs": 5.513939999999942,
+          "medianMs": 5.709899999999834,
+          "p95Ms": 7.221499999999651,
+          "minMs": 3.3506999999999607,
+          "maxMs": 7.221499999999651,
+          "segments": []
+        },
+        {
+          "name": "render.hand-page",
+          "n": 15,
+          "meanMs": 14.841806666666647,
+          "medianMs": 15.988800000000083,
+          "p95Ms": 22.352700000000368,
+          "minMs": 7.955699999999524,
+          "maxMs": 22.352700000000368,
+          "segments": []
+        },
+        {
+          "name": "log.single-line",
+          "n": 15,
+          "meanMs": 0.11232666666680112,
+          "medianMs": 0.10200000000077125,
+          "p95Ms": 0.19459999999980937,
+          "minMs": 0.09540000000015425,
+          "maxMs": 0.19459999999980937,
+          "segments": []
+        }
+      ],
+      "profile": {
+        "sampledMs": 672.229,
+        "samples": 908,
+        "topSelf": [
+          {
+            "function": "post",
+            "url": "node:inspector",
+            "line": 115,
+            "ms": 144.849,
+            "percent": 21.547567867497534
+          },
+          {
+            "function": "namedItem",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCollection-impl.js",
+            "line": 25,
+            "ms": 11.148,
+            "percent": 1.65836344459998
+          },
+          {
+            "function": "(garbage collector)",
+            "url": "",
+            "line": 0,
+            "ms": 8.978,
+            "percent": 1.335556781989471
+          },
+          {
+            "function": "namedItem",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCollection-impl.js",
+            "line": 25,
+            "ms": 8.483,
+            "percent": 1.2619211607949077
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 6.603,
+            "percent": 0.9822545590862637
+          },
+          {
+            "function": "following",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 220,
+            "ms": 6.361,
+            "percent": 0.9462549220578107
+          },
+          {
+            "function": "namedItem",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCollection-impl.js",
+            "line": 25,
+            "ms": 5.979,
+            "percent": 0.8894290487319054
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 5.427,
+            "percent": 0.8073141741876653
+          },
+          {
+            "function": "namedItem",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCollection-impl.js",
+            "line": 25,
+            "ms": 5.406,
+            "percent": 0.8041902387430473
+          },
+          {
+            "function": "byTag",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/nwsapi/src/nwsapi.js",
+            "line": 507,
+            "ms": 5.22,
+            "percent": 0.7765210962335751
+          },
+          {
+            "function": "following",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 220,
+            "ms": 5.166,
+            "percent": 0.7684881193759864
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 4.743,
+            "percent": 0.7055631339915416
+          },
+          {
+            "function": "byTag",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/nwsapi/src/nwsapi.js",
+            "line": 507,
+            "ms": 4.645,
+            "percent": 0.690984768583325
+          },
+          {
+            "function": "following",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 220,
+            "ms": 4.586,
+            "percent": 0.6822079975722559
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 4.566,
+            "percent": 0.6792328209583341
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 4.505,
+            "percent": 0.6701585322858727
+          },
+          {
+            "function": "contains",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/helpers/ordered-set.js",
+            "line": 59,
+            "ms": 4.413,
+            "percent": 0.6564727198618328
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 4.299,
+            "percent": 0.6395142131624789
+          },
+          {
+            "function": "following",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 220,
+            "ms": 4.046,
+            "percent": 0.6018782289963688
+          },
+          {
+            "function": "getOwnPropertyDescriptor",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/HTMLCollection.js",
+            "line": 245,
+            "ms": 4.007,
+            "percent": 0.5960766345992214
+          },
+          {
+            "function": "query",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 101,
+            "ms": 3.93,
+            "percent": 0.5846222046356226
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 3.787,
+            "percent": 0.5633496918460822
+          },
+          {
+            "function": "has",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/HTMLCollection.js",
+            "line": 211,
+            "ms": 3.775,
+            "percent": 0.5615645858777292
+          },
+          {
+            "function": "contains",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/helpers/ordered-set.js",
+            "line": 59,
+            "ms": 3.741,
+            "percent": 0.5565067856340622
+          },
+          {
+            "function": "query",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 101,
+            "ms": 3.73,
+            "percent": 0.5548704384964053
+          },
+          {
+            "function": "query",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 101,
+            "ms": 3.705,
+            "percent": 0.551151467729003
+          },
+          {
+            "function": "filter",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+            "line": 104,
+            "ms": 3.638,
+            "percent": 0.5411846260723653
+          },
+          {
+            "function": "contains",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/helpers/ordered-set.js",
+            "line": 59,
+            "ms": 3.543,
+            "percent": 0.5270525371562369
+          },
+          {
+            "function": "following",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+            "line": 220,
+            "ms": 3.532,
+            "percent": 0.52541619001858
+          },
+          {
+            "function": "CSSStyleDeclaration",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/cssstyle/lib/CSSStyleDeclaration.js",
+            "line": 25,
+            "ms": 3.527,
+            "percent": 0.5246723958650995
+          }
+        ],
+        "topBattleInclusive": [
+          {
+            "function": "(anonymous)",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/.tmp/deep-perf-1018/battle/probe.test.js",
+            "line": 105,
+            "ms": 662.649,
+            "percent": 98.57489040193148
+          },
+          {
+            "function": "(anonymous)",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 596,
+            "ms": 291.283,
+            "percent": 43.33091848164837
+          },
+          {
+            "function": "render",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 338,
+            "ms": 290.73,
+            "percent": 43.24865484827343
+          },
+          {
+            "function": "render",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 338,
+            "ms": 219.608,
+            "percent": 32.66862929150632
+          },
+          {
+            "function": "(anonymous)",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/.tmp/deep-perf-1018/battle/probe.test.js",
+            "line": 95,
+            "ms": 145.454,
+            "percent": 21.637566960068668
+          },
+          {
+            "function": "post",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/.tmp/deep-perf-1018/battle/probe.test.js",
+            "line": 95,
+            "ms": 145.454,
+            "percent": 21.637566960068668
+          },
+          {
+            "function": "updateHand",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 380,
+            "ms": 112.273,
+            "percent": 16.701600198741797
+          },
+          {
+            "function": "(anonymous)",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 403,
+            "ms": 69.334,
+            "percent": 10.314044767482509
+          },
+          {
+            "function": "mountUnitLayer",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 565,
+            "ms": 49.415,
+            "percent": 7.350917618847149
+          },
+          {
+            "function": "showBattleStage",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 274,
+            "ms": 43.107,
+            "percent": 6.412546914816231
+          },
+          {
+            "function": "showBattleStage",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 274,
+            "ms": 43.015,
+            "percent": 6.398861102392191
+          },
+          {
+            "function": "mountUnitLayer",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 565,
+            "ms": 41.43,
+            "percent": 6.163078355738893
+          },
+          {
+            "function": "updateHand",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 380,
+            "ms": 32.56,
+            "percent": 4.843587527464599
+          },
+          {
+            "function": "syncBattleSlot",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 263,
+            "ms": 21.001,
+            "percent": 3.124084203448527
+          },
+          {
+            "function": "syncBattleSlot",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 263,
+            "ms": 19.452,
+            "percent": 2.8936567747002884
+          },
+          {
+            "function": "animateBattleTransition",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.anim.view.js",
+            "line": 138,
+            "ms": 14.125,
+            "percent": 2.101218483582232
+          },
+          {
+            "function": "animateBattleTransition",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.anim.view.js",
+            "line": 138,
+            "ms": 11.616,
+            "percent": 1.7279825773657487
+          },
+          {
+            "function": "updateHandAcquisitionFeedback",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.effect-feedback.js",
+            "line": 70,
+            "ms": 10.852,
+            "percent": 1.6143308307139381
+          },
+          {
+            "function": "restoreCombatScene",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.secondary-overlay.js",
+            "line": 25,
+            "ms": 8.466,
+            "percent": 1.2593922606730743
+          },
+          {
+            "function": "layoutBattleScenery",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 67,
+            "ms": 8.147,
+            "percent": 1.2119381936810223
+          },
+          {
+            "function": "syncBattleScenery",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 107,
+            "ms": 8.147,
+            "percent": 1.2119381936810223
+          },
+          {
+            "function": "updateHandAcquisitionFeedback",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.effect-feedback.js",
+            "line": 70,
+            "ms": 7.29,
+            "percent": 1.0844518757744757
+          },
+          {
+            "function": "updateUnits",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.layers.js",
+            "line": 704,
+            "ms": 7.28,
+            "percent": 1.082964287467515
+          },
+          {
+            "function": "layoutBattleScenery",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 67,
+            "ms": 7.179,
+            "percent": 1.0679396455672099
+          },
+          {
+            "function": "syncBattleScenery",
+            "url": "file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/battle/view/battle.view.js",
+            "line": 107,
+            "ms": 7.179,
+            "percent": 1.0679396455672099
+          }
+        ]
+      }
+    }
+  ],
+  "plays": [
+    {
+      "id": "tt3-blood-arrow",
+      "status": "queued",
+      "wallMs": 40.75460000000021,
+      "cpuMs": 31,
+      "handRemoved": true,
+      "segments": []
+    },
+    {
+      "id": "tt3-arrow-rain",
+      "status": "queued",
+      "wallMs": 40.45749999999953,
+      "cpuMs": 31,
+      "handRemoved": true,
+      "segments": []
+    },
+    {
+      "id": "tt3-bandage",
+      "status": "queued",
+      "wallMs": 38.40310000000045,
+      "cpuMs": 62,
+      "handRemoved": true,
+      "segments": []
+    },
+    {
+      "id": "tt3-chain-lightning",
+      "status": "queued",
+      "wallMs": 29.601799999999457,
+      "cpuMs": 15,
+      "handRemoved": true,
+      "segments": []
+    }
+  ]
+}

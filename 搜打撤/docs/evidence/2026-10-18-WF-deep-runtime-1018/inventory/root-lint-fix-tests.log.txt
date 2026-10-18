@@ -1,0 +1,11 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/departure-render-performance.test.js (15 tests) 790ms
+
+ Test Files  1 passed (1)
+      Tests  15 passed (15)
+   Start at  18:42:24
+   Duration  1.67s (transform 105ms, setup 0ms, collect 44ms, tests 790ms, environment 589ms, prepare 78ms)
+

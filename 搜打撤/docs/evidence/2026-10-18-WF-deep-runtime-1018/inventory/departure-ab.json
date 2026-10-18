@@ -1,0 +1,626 @@
+{
+  "independentFork": true,
+  "frameQueueSettled": true,
+  "pairsPerCase": 17,
+  "scope": "Alternating baseline/candidate pairs, identical reset for each variant; setup + frame flush outside timings. Actual module handlers, templates, card faces, Icons, overlay and jsdom. Operation completes after controlled first-frame + hydration/observer queues settle. All action samples explicitly labelled first/steady. No browser layout/GPU, asset decode/network or audio.",
+  "operations": [
+    {
+      "name": "open.25",
+      "steady": false,
+      "baseline": {
+        "n": 17,
+        "medianMs": 34.39300000000003,
+        "p95Ms": 42.42250000000058,
+        "meanCpuMs": 55.11764705882353,
+        "medianCpuMs": 46,
+        "p95CpuMs": 172,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.001299999999901047,
+            "selfMs": 0.001299999999901047
+          },
+          "Cards.cardHTML": {
+            "calls": 27,
+            "ms": 0.018500000000130967,
+            "selfMs": 0.018500000000130967
+          },
+          "UI.showOverlay": {
+            "calls": 1,
+            "ms": 25.000100000000202,
+            "selfMs": 1.2885000000001128
+          },
+          "Icons.rich": {
+            "calls": 2,
+            "ms": 0.29759999999987485,
+            "selfMs": 0.29759999999987485
+          },
+          "DOM.innerHTML": {
+            "calls": 2,
+            "ms": 20.662099999999555,
+            "selfMs": 20.662099999999555
+          },
+          "DOM.querySelectorAll": {
+            "calls": 5,
+            "ms": 3.4630999999994856,
+            "selfMs": 3.4630999999994856
+          },
+          "DOM.querySelector": {
+            "calls": 15,
+            "ms": 6.841099999999642,
+            "selfMs": 6.841099999999642
+          },
+          "DOM.addEventListener": {
+            "calls": 33,
+            "ms": 0.03589999999940119,
+            "selfMs": 0.03589999999940119
+          },
+          "Cards.rarityOf": {
+            "calls": 25,
+            "ms": 0.015399999999317515,
+            "selfMs": 0.015399999999317515
+          }
+        }
+      },
+      "candidate": {
+        "n": 17,
+        "medianMs": 36.2482,
+        "p95Ms": 47.22980000000007,
+        "meanCpuMs": 54.23529411764706,
+        "medianCpuMs": 46,
+        "p95CpuMs": 172,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0011999999996987754,
+            "selfMs": 0.0011999999996987754
+          },
+          "Cards.cardHTML": {
+            "calls": 29,
+            "ms": 0.02080000000069049,
+            "selfMs": 0.02080000000069049
+          },
+          "UI.showOverlay": {
+            "calls": 1,
+            "ms": 24.766099999999824,
+            "selfMs": 1.2803000000003522
+          },
+          "Icons.rich": {
+            "calls": 2,
+            "ms": 0.2980999999999767,
+            "selfMs": 0.2980999999999767
+          },
+          "DOM.innerHTML": {
+            "calls": 2,
+            "ms": 20.50579999999991,
+            "selfMs": 20.50579999999991
+          },
+          "DOM.querySelectorAll": {
+            "calls": 5,
+            "ms": 3.609100000000126,
+            "selfMs": 3.609100000000126
+          },
+          "DOM.querySelector": {
+            "calls": 14,
+            "ms": 6.57819999999947,
+            "selfMs": 6.57819999999947
+          },
+          "DOM.addEventListener": {
+            "calls": 33,
+            "ms": 0.03410000000076252,
+            "selfMs": 0.03410000000076252
+          },
+          "Cards.rarityOf": {
+            "calls": 25,
+            "ms": 0.015199999999822467,
+            "selfMs": 0.015199999999822467
+          }
+        }
+      },
+      "outputEqual": true
+    },
+    {
+      "name": "steadyAdd.25",
+      "steady": true,
+      "baseline": {
+        "n": 17,
+        "medianMs": 9.406300000000101,
+        "p95Ms": 13.71140000000014,
+        "meanCpuMs": 11.941176470588236,
+        "medianCpuMs": 15,
+        "p95CpuMs": 16,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0009999999997489795,
+            "selfMs": 0.0009999999997489795
+          },
+          "Cards.cardHTML": {
+            "calls": 4,
+            "ms": 0.0065999999997075065,
+            "selfMs": 0.0065999999997075065
+          },
+          "DOM.querySelectorAll": {
+            "calls": 6,
+            "ms": 0.6693999999997686,
+            "selfMs": 0.6693999999997686
+          },
+          "DOM.querySelector": {
+            "calls": 117,
+            "ms": 4.457299999997758,
+            "selfMs": 4.457299999997758
+          },
+          "Icons.rich": {
+            "calls": 3,
+            "ms": 0.07630000000062864,
+            "selfMs": 0.07630000000062864
+          },
+          "DOM.innerHTML": {
+            "calls": 4,
+            "ms": 2.1703999999981534,
+            "selfMs": 2.1703999999981534
+          }
+        }
+      },
+      "candidate": {
+        "n": 17,
+        "medianMs": 1.3654999999998836,
+        "p95Ms": 1.675799999999981,
+        "meanCpuMs": 0,
+        "medianCpuMs": 0,
+        "p95CpuMs": 0,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0009000000000014552,
+            "selfMs": 0.0009000000000014552
+          },
+          "Cards.cardHTML": {
+            "calls": 4,
+            "ms": 0.004400000000714499,
+            "selfMs": 0.004400000000714499
+          },
+          "Icons.rich": {
+            "calls": 2,
+            "ms": 0.014699999999720603,
+            "selfMs": 0.014699999999720603
+          },
+          "DOM.innerHTML": {
+            "calls": 1,
+            "ms": 0.23439999999936845,
+            "selfMs": 0.23439999999936845
+          },
+          "DOM.querySelectorAll": {
+            "calls": 3,
+            "ms": 0.06120000000009895,
+            "selfMs": 0.06120000000009895
+          }
+        }
+      },
+      "outputEqual": true
+    },
+    {
+      "name": "steadyRemove.25",
+      "steady": true,
+      "baseline": {
+        "n": 17,
+        "medianMs": 8.197400000000016,
+        "p95Ms": 11.696599999999307,
+        "meanCpuMs": 14.647058823529411,
+        "medianCpuMs": 15,
+        "p95CpuMs": 78,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0007999999997991836,
+            "selfMs": 0.0007999999997991836
+          },
+          "Cards.cardHTML": {
+            "calls": 4,
+            "ms": 0.005600000000413274,
+            "selfMs": 0.005600000000413274
+          },
+          "DOM.querySelectorAll": {
+            "calls": 6,
+            "ms": 0.5706000000000131,
+            "selfMs": 0.5706000000000131
+          },
+          "DOM.querySelector": {
+            "calls": 117,
+            "ms": 3.7898000000004686,
+            "selfMs": 3.7898000000004686
+          },
+          "Icons.rich": {
+            "calls": 3,
+            "ms": 0.059799999999995634,
+            "selfMs": 0.059799999999995634
+          },
+          "DOM.innerHTML": {
+            "calls": 4,
+            "ms": 1.949200000000019,
+            "selfMs": 1.949200000000019
+          }
+        }
+      },
+      "candidate": {
+        "n": 17,
+        "medianMs": 1.2786000000000968,
+        "p95Ms": 5.429900000000089,
+        "meanCpuMs": 4.588235294117647,
+        "medianCpuMs": 0,
+        "p95CpuMs": 47,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0007000000005064066,
+            "selfMs": 0.0007000000005064066
+          },
+          "Cards.cardHTML": {
+            "calls": 4,
+            "ms": 0.0039000000006126356,
+            "selfMs": 0.0039000000006126356
+          },
+          "Icons.rich": {
+            "calls": 2,
+            "ms": 0.01239999999961583,
+            "selfMs": 0.01239999999961583
+          },
+          "DOM.innerHTML": {
+            "calls": 1,
+            "ms": 0.1952000000001135,
+            "selfMs": 0.1952000000001135
+          },
+          "DOM.querySelectorAll": {
+            "calls": 3,
+            "ms": 0.06059999999979482,
+            "selfMs": 0.06059999999979482
+          }
+        }
+      },
+      "outputEqual": true
+    },
+    {
+      "name": "lastExtraRemove.25",
+      "steady": true,
+      "baseline": {
+        "n": 17,
+        "medianMs": 8.554200000000492,
+        "p95Ms": 10.022599999999784,
+        "meanCpuMs": 9.235294117647058,
+        "medianCpuMs": 15,
+        "p95CpuMs": 31,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0010000000002037268,
+            "selfMs": 0.0010000000002037268
+          },
+          "Cards.cardHTML": {
+            "calls": 2,
+            "ms": 0.004399999999805004,
+            "selfMs": 0.004399999999805004
+          },
+          "DOM.querySelectorAll": {
+            "calls": 34,
+            "ms": 0.8036999999990257,
+            "selfMs": 0.8036999999990257
+          },
+          "DOM.querySelector": {
+            "calls": 115,
+            "ms": 3.7808999999951993,
+            "selfMs": 3.7808999999951993
+          },
+          "Icons.rich": {
+            "calls": 3,
+            "ms": 0.02280000000155269,
+            "selfMs": 0.02280000000155269
+          },
+          "DOM.innerHTML": {
+            "calls": 4,
+            "ms": 1.4610999999999876,
+            "selfMs": 1.4610999999999876
+          }
+        }
+      },
+      "candidate": {
+        "n": 17,
+        "medianMs": 2.355199999999968,
+        "p95Ms": 3.43100000000004,
+        "meanCpuMs": 7.294117647058823,
+        "medianCpuMs": 0,
+        "p95CpuMs": 62,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0010000000002037268,
+            "selfMs": 0.0010000000002037268
+          },
+          "Cards.cardHTML": {
+            "calls": 2,
+            "ms": 0.0028999999999541615,
+            "selfMs": 0.0028999999999541615
+          },
+          "Icons.rich": {
+            "calls": 2,
+            "ms": 0.014499999999770807,
+            "selfMs": 0.014499999999770807
+          },
+          "DOM.innerHTML": {
+            "calls": 2,
+            "ms": 0.31970000000001164,
+            "selfMs": 0.31970000000001164
+          },
+          "DOM.querySelectorAll": {
+            "calls": 32,
+            "ms": 0.3291999999996733,
+            "selfMs": 0.3291999999996733
+          }
+        }
+      },
+      "outputEqual": true
+    },
+    {
+      "name": "reorderPicks.25",
+      "steady": true,
+      "baseline": {
+        "n": 17,
+        "medianMs": 8.490399999999681,
+        "p95Ms": 10.0628999999999,
+        "meanCpuMs": 12.058823529411764,
+        "medianCpuMs": 16,
+        "p95CpuMs": 47,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0009999999997489795,
+            "selfMs": 0.0009999999997489795
+          },
+          "Cards.cardHTML": {
+            "calls": 4,
+            "ms": 0.00650000000041473,
+            "selfMs": 0.00650000000041473
+          },
+          "DOM.querySelectorAll": {
+            "calls": 7,
+            "ms": 0.6403000000000247,
+            "selfMs": 0.6403000000000247
+          },
+          "DOM.querySelector": {
+            "calls": 117,
+            "ms": 3.864699999995537,
+            "selfMs": 3.864699999995537
+          },
+          "Icons.rich": {
+            "calls": 3,
+            "ms": 0.0696999999995569,
+            "selfMs": 0.0696999999995569
+          },
+          "DOM.innerHTML": {
+            "calls": 4,
+            "ms": 1.9682000000002517,
+            "selfMs": 1.9682000000002517
+          }
+        }
+      },
+      "candidate": {
+        "n": 17,
+        "medianMs": 1.3134000000000015,
+        "p95Ms": 1.9193999999997686,
+        "meanCpuMs": 0,
+        "medianCpuMs": 0,
+        "p95CpuMs": 0,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0009000000000014552,
+            "selfMs": 0.0009000000000014552
+          },
+          "Cards.cardHTML": {
+            "calls": 4,
+            "ms": 0.004399999999350257,
+            "selfMs": 0.004399999999350257
+          },
+          "Icons.rich": {
+            "calls": 2,
+            "ms": 0.013299999999617285,
+            "selfMs": 0.013299999999617285
+          },
+          "DOM.innerHTML": {
+            "calls": 1,
+            "ms": 0.18960000000015498,
+            "selfMs": 0.18960000000015498
+          },
+          "DOM.querySelectorAll": {
+            "calls": 4,
+            "ms": 0.10030000000097061,
+            "selfMs": 0.10030000000097061
+          }
+        }
+      },
+      "outputEqual": true
+    },
+    {
+      "name": "filter.25",
+      "steady": true,
+      "baseline": {
+        "n": 17,
+        "medianMs": 0.2440999999998894,
+        "p95Ms": 0.4094999999997526,
+        "meanCpuMs": 0,
+        "medianCpuMs": 0,
+        "p95CpuMs": 0,
+        "breakdown": {}
+      },
+      "candidate": {
+        "n": 17,
+        "medianMs": 0.2319999999999709,
+        "p95Ms": 0.29970000000002983,
+        "meanCpuMs": 0,
+        "medianCpuMs": 0,
+        "p95CpuMs": 0,
+        "breakdown": {}
+      },
+      "outputEqual": true
+    },
+    {
+      "name": "steadyAdd.100",
+      "steady": true,
+      "baseline": {
+        "n": 17,
+        "medianMs": 24.673999999999978,
+        "p95Ms": 31.91439999999966,
+        "meanCpuMs": 22.88235294117647,
+        "medianCpuMs": 16,
+        "p95CpuMs": 32,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0009000000000014552,
+            "selfMs": 0.0009000000000014552
+          },
+          "Cards.cardHTML": {
+            "calls": 4,
+            "ms": 0.006199999999807915,
+            "selfMs": 0.006199999999807915
+          },
+          "DOM.querySelectorAll": {
+            "calls": 6,
+            "ms": 2.2686000000003332,
+            "selfMs": 2.2686000000003332
+          },
+          "DOM.querySelector": {
+            "calls": 267,
+            "ms": 15.242400000005546,
+            "selfMs": 15.242400000005546
+          },
+          "Icons.rich": {
+            "calls": 3,
+            "ms": 0.07700000000113505,
+            "selfMs": 0.07700000000113505
+          },
+          "DOM.innerHTML": {
+            "calls": 4,
+            "ms": 2.100800000000163,
+            "selfMs": 2.100800000000163
+          }
+        }
+      },
+      "candidate": {
+        "n": 17,
+        "medianMs": 2.8438999999998487,
+        "p95Ms": 3.4830000000001746,
+        "meanCpuMs": 5.529411764705882,
+        "medianCpuMs": 0,
+        "p95CpuMs": 63,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0008999999990919605,
+            "selfMs": 0.0008999999990919605
+          },
+          "Cards.cardHTML": {
+            "calls": 4,
+            "ms": 0.004799999998795101,
+            "selfMs": 0.004799999998795101
+          },
+          "Icons.rich": {
+            "calls": 2,
+            "ms": 0.017100000000937143,
+            "selfMs": 0.017100000000937143
+          },
+          "DOM.innerHTML": {
+            "calls": 1,
+            "ms": 0.23539999999957217,
+            "selfMs": 0.23539999999957217
+          },
+          "DOM.querySelectorAll": {
+            "calls": 3,
+            "ms": 0.07549999999991996,
+            "selfMs": 0.07549999999991996
+          }
+        }
+      },
+      "outputEqual": true
+    },
+    {
+      "name": "steadyRemove.100",
+      "steady": true,
+      "baseline": {
+        "n": 17,
+        "medianMs": 23.980400000000373,
+        "p95Ms": 27.03809999999976,
+        "meanCpuMs": 24.941176470588236,
+        "medianCpuMs": 31,
+        "p95CpuMs": 47,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0010000000002037268,
+            "selfMs": 0.0010000000002037268
+          },
+          "Cards.cardHTML": {
+            "calls": 4,
+            "ms": 0.005700000000615546,
+            "selfMs": 0.005700000000615546
+          },
+          "DOM.querySelectorAll": {
+            "calls": 6,
+            "ms": 2.184000000002925,
+            "selfMs": 2.184000000002925
+          },
+          "DOM.querySelector": {
+            "calls": 267,
+            "ms": 14.407699999985198,
+            "selfMs": 14.407699999985198
+          },
+          "Icons.rich": {
+            "calls": 3,
+            "ms": 0.07380000000011933,
+            "selfMs": 0.07380000000011933
+          },
+          "DOM.innerHTML": {
+            "calls": 4,
+            "ms": 2.111000000000786,
+            "selfMs": 2.111000000000786
+          }
+        }
+      },
+      "candidate": {
+        "n": 17,
+        "medianMs": 2.678600000001097,
+        "p95Ms": 7.337699999999131,
+        "meanCpuMs": 7.294117647058823,
+        "medianCpuMs": 0,
+        "p95CpuMs": 63,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0010000000002037268,
+            "selfMs": 0.0010000000002037268
+          },
+          "Cards.cardHTML": {
+            "calls": 4,
+            "ms": 0.004599999999300053,
+            "selfMs": 0.004599999999300053
+          },
+          "Icons.rich": {
+            "calls": 2,
+            "ms": 0.01569999999992433,
+            "selfMs": 0.01569999999992433
+          },
+          "DOM.innerHTML": {
+            "calls": 1,
+            "ms": 0.2217000000000553,
+            "selfMs": 0.2217000000000553
+          },
+          "DOM.querySelectorAll": {
+            "calls": 3,
+            "ms": 0.06389999999919382,
+            "selfMs": 0.06389999999919382
+          }
+        }
+      },
+      "outputEqual": true
+    }
+  ]
+}

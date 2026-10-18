@@ -1,0 +1,31 @@
+{
+  "headAtFinalization": "a3df7fabb1b6075d5197eae30be3f17c01031ecb",
+  "node": "v24.13.0",
+  "capturedAt": "2026-10-18T10:33:20.060Z",
+  "files": [
+    {
+      "path": "game/src/audio/sound.js",
+      "bytes": 13850,
+      "sha256": "46007097da42f3084068fb28e8b21f9ddfc23fef41631f1776c409ed359708db",
+      "lfSha256": "46007097da42f3084068fb28e8b21f9ddfc23fef41631f1776c409ed359708db"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-assets.js",
+      "bytes": 2985,
+      "sha256": "57771c894feae0623bbb3e0192fcb10dd59bce97062326ea6234949ca86ebaf0",
+      "lfSha256": "57771c894feae0623bbb3e0192fcb10dd59bce97062326ea6234949ca86ebaf0"
+    },
+    {
+      "path": "tests/sound-muted-startup-perf.test.js",
+      "bytes": 6537,
+      "sha256": "0e2fe4fca172c53d5e7c1ffcec217707d252387c623ee4e181f81744c04b1edf",
+      "lfSha256": "0e2fe4fca172c53d5e7c1ffcec217707d252387c623ee4e181f81744c04b1edf"
+    },
+    {
+      "path": "tests/frame-assets-cancellation-perf.test.js",
+      "bytes": 5436,
+      "sha256": "7291dc131df9b1decae95c3f26b356992d0c65b0bfd11201ae083e7e7bba7d1a",
+      "lfSha256": "7291dc131df9b1decae95c3f26b356992d0c65b0bfd11201ae083e7e7bba7d1a"
+    }
+  ]
+}

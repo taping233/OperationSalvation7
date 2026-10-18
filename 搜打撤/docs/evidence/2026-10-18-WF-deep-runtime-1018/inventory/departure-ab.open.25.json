@@ -1,0 +1,121 @@
+{
+  "scope": "Alternating baseline/candidate pairs, identical reset for each variant; setup + frame flush outside timings. Actual module handlers, templates, card faces, Icons, overlay and jsdom. Operation completes after controlled first-frame + hydration/observer queues settle. All action samples explicitly labelled first/steady. No browser layout/GPU, asset decode/network or audio.",
+  "samplesPerVariant": 17,
+  "operations": [
+    {
+      "name": "open.25",
+      "steady": false,
+      "baseline": {
+        "n": 17,
+        "medianMs": 34.39300000000003,
+        "p95Ms": 42.42250000000058,
+        "meanCpuMs": 55.11764705882353,
+        "medianCpuMs": 46,
+        "p95CpuMs": 172,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.001299999999901047,
+            "selfMs": 0.001299999999901047
+          },
+          "Cards.cardHTML": {
+            "calls": 27,
+            "ms": 0.018500000000130967,
+            "selfMs": 0.018500000000130967
+          },
+          "UI.showOverlay": {
+            "calls": 1,
+            "ms": 25.000100000000202,
+            "selfMs": 1.2885000000001128
+          },
+          "Icons.rich": {
+            "calls": 2,
+            "ms": 0.29759999999987485,
+            "selfMs": 0.29759999999987485
+          },
+          "DOM.innerHTML": {
+            "calls": 2,
+            "ms": 20.662099999999555,
+            "selfMs": 20.662099999999555
+          },
+          "DOM.querySelectorAll": {
+            "calls": 5,
+            "ms": 3.4630999999994856,
+            "selfMs": 3.4630999999994856
+          },
+          "DOM.querySelector": {
+            "calls": 15,
+            "ms": 6.841099999999642,
+            "selfMs": 6.841099999999642
+          },
+          "DOM.addEventListener": {
+            "calls": 33,
+            "ms": 0.03589999999940119,
+            "selfMs": 0.03589999999940119
+          },
+          "Cards.rarityOf": {
+            "calls": 25,
+            "ms": 0.015399999999317515,
+            "selfMs": 0.015399999999317515
+          }
+        }
+      },
+      "candidate": {
+        "n": 17,
+        "medianMs": 36.2482,
+        "p95Ms": 47.22980000000007,
+        "meanCpuMs": 54.23529411764706,
+        "medianCpuMs": 46,
+        "p95CpuMs": 172,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0011999999996987754,
+            "selfMs": 0.0011999999996987754
+          },
+          "Cards.cardHTML": {
+            "calls": 29,
+            "ms": 0.02080000000069049,
+            "selfMs": 0.02080000000069049
+          },
+          "UI.showOverlay": {
+            "calls": 1,
+            "ms": 24.766099999999824,
+            "selfMs": 1.2803000000003522
+          },
+          "Icons.rich": {
+            "calls": 2,
+            "ms": 0.2980999999999767,
+            "selfMs": 0.2980999999999767
+          },
+          "DOM.innerHTML": {
+            "calls": 2,
+            "ms": 20.50579999999991,
+            "selfMs": 20.50579999999991
+          },
+          "DOM.querySelectorAll": {
+            "calls": 5,
+            "ms": 3.609100000000126,
+            "selfMs": 3.609100000000126
+          },
+          "DOM.querySelector": {
+            "calls": 14,
+            "ms": 6.57819999999947,
+            "selfMs": 6.57819999999947
+          },
+          "DOM.addEventListener": {
+            "calls": 33,
+            "ms": 0.03410000000076252,
+            "selfMs": 0.03410000000076252
+          },
+          "Cards.rarityOf": {
+            "calls": 25,
+            "ms": 0.015199999999822467,
+            "selfMs": 0.015199999999822467
+          }
+        }
+      },
+      "outputEqual": true
+    }
+  ]
+}

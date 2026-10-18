@@ -1,0 +1,86 @@
+{
+  "scope": "Alternating baseline/candidate pairs, identical reset for each variant; setup + frame flush outside timings. Actual module handlers, templates, card faces, Icons, overlay and jsdom. Operation completes after controlled first-frame + hydration/observer queues settle. All action samples explicitly labelled first/steady. No browser layout/GPU, asset decode/network or audio.",
+  "samplesPerVariant": 17,
+  "operations": [
+    {
+      "name": "steadyRemove.25",
+      "steady": true,
+      "baseline": {
+        "n": 17,
+        "medianMs": 8.197400000000016,
+        "p95Ms": 11.696599999999307,
+        "meanCpuMs": 14.647058823529411,
+        "medianCpuMs": 15,
+        "p95CpuMs": 78,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0007999999997991836,
+            "selfMs": 0.0007999999997991836
+          },
+          "Cards.cardHTML": {
+            "calls": 4,
+            "ms": 0.005600000000413274,
+            "selfMs": 0.005600000000413274
+          },
+          "DOM.querySelectorAll": {
+            "calls": 6,
+            "ms": 0.5706000000000131,
+            "selfMs": 0.5706000000000131
+          },
+          "DOM.querySelector": {
+            "calls": 117,
+            "ms": 3.7898000000004686,
+            "selfMs": 3.7898000000004686
+          },
+          "Icons.rich": {
+            "calls": 3,
+            "ms": 0.059799999999995634,
+            "selfMs": 0.059799999999995634
+          },
+          "DOM.innerHTML": {
+            "calls": 4,
+            "ms": 1.949200000000019,
+            "selfMs": 1.949200000000019
+          }
+        }
+      },
+      "candidate": {
+        "n": 17,
+        "medianMs": 1.2786000000000968,
+        "p95Ms": 5.429900000000089,
+        "meanCpuMs": 4.588235294117647,
+        "medianCpuMs": 0,
+        "p95CpuMs": 47,
+        "breakdown": {
+          "Cards.all": {
+            "calls": 1,
+            "ms": 0.0007000000005064066,
+            "selfMs": 0.0007000000005064066
+          },
+          "Cards.cardHTML": {
+            "calls": 4,
+            "ms": 0.0039000000006126356,
+            "selfMs": 0.0039000000006126356
+          },
+          "Icons.rich": {
+            "calls": 2,
+            "ms": 0.01239999999961583,
+            "selfMs": 0.01239999999961583
+          },
+          "DOM.innerHTML": {
+            "calls": 1,
+            "ms": 0.1952000000001135,
+            "selfMs": 0.1952000000001135
+          },
+          "DOM.querySelectorAll": {
+            "calls": 3,
+            "ms": 0.06059999999979482,
+            "selfMs": 0.06059999999979482
+          }
+        }
+      },
+      "outputEqual": true
+    }
+  ]
+}

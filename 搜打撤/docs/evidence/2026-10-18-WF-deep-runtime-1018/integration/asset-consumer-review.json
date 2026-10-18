@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-18T10:31:05.918Z",
+  "base": "a3df7fabb1b6075d5197eae30be3f17c01031ecb",
+  "entries": [
+    {
+      "file": "game/src/core/renderer.js",
+      "oldDigest": "18cdb10981704d668587e6247c2a30c4571838117e88c61bc9c2693563214743",
+      "newDigest": "2340256b7775262fa191d247518a85c0fdd2cd05e2d7cc75ddeb599d55c66f18",
+      "assetContractEntries": 16,
+      "review": "Full source delta reviewed: map endpoint-dependent cache invalidation; hand face versus reading hint DOM diff; muted/SFX-off input guard. Asset selector functions, URLs, imports, decode/card rendering inputs unchanged."
+    },
+    {
+      "file": "game/src/battle/view/battle.layers.js",
+      "oldDigest": "3efc5862e5326a94e49d8cbb634e6b581083beeca9be3b352a2deade8cd28793",
+      "newDigest": "0f6a16665c20d6791e36a4506d32d7d107d3bec91d88560fcc9391ee7807a082",
+      "assetContractEntries": 27,
+      "review": "Full source delta reviewed: map endpoint-dependent cache invalidation; hand face versus reading hint DOM diff; muted/SFX-off input guard. Asset selector functions, URLs, imports, decode/card rendering inputs unchanged."
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "oldDigest": "bd228d9259fce1c51b4cb128043c51757a89f082b4ac9511ec54caf6aa81157a",
+      "newDigest": "46007097da42f3084068fb28e8b21f9ddfc23fef41631f1776c409ed359708db",
+      "assetContractEntries": 9,
+      "review": "Full source delta reviewed: map endpoint-dependent cache invalidation; hand face versus reading hint DOM diff; muted/SFX-off input guard. Asset selector functions, URLs, imports, decode/card rendering inputs unchanged."
+    }
+  ]
+}

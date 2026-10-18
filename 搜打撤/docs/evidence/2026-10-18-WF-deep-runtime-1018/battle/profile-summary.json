@@ -1,0 +1,919 @@
+{
+  "date": "2026-10-18",
+  "scope": "24 real renders plus 12 read-only AOE preview sets per scenario; CPU and heap collected separately after warmup",
+  "boundaries": "jsdom engine+DOM CPU/allocated objects; no browser layout/paint/GPU. Sampling allocations are estimates including collected objects, not retained bytes/RSS. Inclusive rows overlap and must not be summed.",
+  "scenarios": [
+    {
+      "scene": "typical",
+      "operations": [
+        {
+          "name": "snapshot.cache-hit",
+          "medianMs": 0.11529999999993379,
+          "p95Ms": 0.16660000000001673,
+          "meanCpuMs": 0,
+          "segments": [
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.12226000000003599,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:snapshotSignature",
+              "msPerOperation": 0.10597333333331942,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/runtime/battle.snapshot.js:createBattleSnapshotSignature",
+              "msPerOperation": 0.10351333333337606,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:captureSnapshotInput",
+              "msPerOperation": 0.010046666666615542,
+              "callsPerOperation": 1
+            }
+          ]
+        },
+        {
+          "name": "snapshot.changed",
+          "medianMs": 0.12820000000010623,
+          "p95Ms": 0.151299999999992,
+          "meanCpuMs": 0,
+          "segments": [
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.12692666666671357,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:snapshotSignature",
+              "msPerOperation": 0.09645333333331413,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/runtime/battle.snapshot.js:createBattleSnapshotSignature",
+              "msPerOperation": 0.09521999999994174,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/runtime/battle.snapshot.js:createBattleSnapshot",
+              "msPerOperation": 0.01754666666662767,
+              "callsPerOperation": 0.9333333333333333
+            },
+            {
+              "name": "battle/core/battle.engine.js:captureSnapshotInput",
+              "msPerOperation": 0.007159999999991366,
+              "callsPerOperation": 1
+            }
+          ]
+        },
+        {
+          "name": "availability.whole-hand",
+          "medianMs": 0.42219999999997526,
+          "p95Ms": 0.604399999999714,
+          "meanCpuMs": 2.066666666666667,
+          "segments": [
+            {
+              "name": "battle/core/battle.engine.js:getCardPlayAvailability",
+              "msPerOperation": 0.44032666666659376,
+              "callsPerOperation": 12
+            },
+            {
+              "name": "battle/core/battle.engine.js:inspectCardPlay",
+              "msPerOperation": 0.2943333333332703,
+              "callsPerOperation": 12
+            },
+            {
+              "name": "battle/core/battle.engine.js:unplayableReason",
+              "msPerOperation": 0.11737333333321658,
+              "callsPerOperation": 12
+            }
+          ]
+        },
+        {
+          "name": "preview.single",
+          "medianMs": 0.2913000000003194,
+          "p95Ms": 0.332300000000032,
+          "meanCpuMs": 0,
+          "segments": [
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.15454666666673803,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:snapshotSignature",
+              "msPerOperation": 0.13390666666673495,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/runtime/battle.snapshot.js:createBattleSnapshotSignature",
+              "msPerOperation": 0.13188000000003133,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:getCardPlayAvailability",
+              "msPerOperation": 0.04986666666676077,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.core.js:getPreviewContext",
+              "msPerOperation": 0.03872666666669223,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:inspectCardPlay",
+              "msPerOperation": 0.03233333333337214,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.preview.js:previewAction",
+              "msPerOperation": 0.02495333333332989,
+              "callsPerOperation": 1
+            }
+          ]
+        },
+        {
+          "name": "preview.all-targets",
+          "medianMs": 0.28389999999990323,
+          "p95Ms": 0.33039999999982683,
+          "meanCpuMs": 1.0666666666666667,
+          "segments": [
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.14592000000002373,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:snapshotSignature",
+              "msPerOperation": 0.12627333333339266,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/runtime/battle.snapshot.js:createBattleSnapshotSignature",
+              "msPerOperation": 0.12440000000005966,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:getCardPlayAvailability",
+              "msPerOperation": 0.07263333333339687,
+              "callsPerOperation": 2
+            },
+            {
+              "name": "battle/core/battle.engine.js:inspectCardPlay",
+              "msPerOperation": 0.04558666666665279,
+              "callsPerOperation": 2
+            },
+            {
+              "name": "battle/core/battle.core.js:getPreviewContext",
+              "msPerOperation": 0.04504666666665192,
+              "callsPerOperation": 2
+            },
+            {
+              "name": "battle/core/battle.engine.js:unplayableReason",
+              "msPerOperation": 0.0384000000000924,
+              "callsPerOperation": 4
+            }
+          ]
+        },
+        {
+          "name": "forecast.enemy-turn",
+          "medianMs": 0.15170000000034634,
+          "p95Ms": 0.24739999999974316,
+          "meanCpuMs": 0,
+          "segments": [
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.14645333333331412,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:snapshotSignature",
+              "msPerOperation": 0.12947333333328667,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/runtime/battle.snapshot.js:createBattleSnapshotSignature",
+              "msPerOperation": 0.12736666666663343,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:captureSnapshotInput",
+              "msPerOperation": 0.009920000000026146,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.turn-forecast.js:forecastEnemyTurn",
+              "msPerOperation": 0.008539999999993598,
+              "callsPerOperation": 1
+            }
+          ]
+        },
+        {
+          "name": "render.no-change",
+          "medianMs": 2.702400000000125,
+          "p95Ms": 3.4918000000002394,
+          "meanCpuMs": 5.2,
+          "segments": [
+            {
+              "name": "battle/view/battle.view.js:render",
+              "msPerOperation": 2.632553333333332,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateHand",
+              "msPerOperation": 0.5783200000000458,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:mountUnitLayer",
+              "msPerOperation": 0.559326666666675,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateUnits",
+              "msPerOperation": 0.2887200000000727,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateFoes",
+              "msPerOperation": 0.18804000000000087,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.1506466666667317,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:handGroupState",
+              "msPerOperation": 0.1401933333332939,
+              "callsPerOperation": 9
+            }
+          ]
+        },
+        {
+          "name": "render.hp-change",
+          "medianMs": 4.949499999999716,
+          "p95Ms": 6.320299999999861,
+          "meanCpuMs": 8.333333333333334,
+          "segments": [
+            {
+              "name": "battle/view/battle.view.js:render",
+              "msPerOperation": 4.672186666666615,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.view.js:showBattleStage",
+              "msPerOperation": 1.9614000000000185,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.view.js:syncBattleSlot",
+              "msPerOperation": 0.7588666666665025,
+              "callsPerOperation": 10.266666666666667
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateHand",
+              "msPerOperation": 0.6281200000000656,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:mountUnitLayer",
+              "msPerOperation": 0.5922866666666777,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateUnits",
+              "msPerOperation": 0.29893999999997806,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.19173999999996644,
+              "callsPerOperation": 1
+            }
+          ]
+        },
+        {
+          "name": "render.hand-page",
+          "medianMs": 10.346199999999953,
+          "p95Ms": 18.122199999999793,
+          "meanCpuMs": 21.866666666666667,
+          "segments": [
+            {
+              "name": "battle/view/battle.view.js:render",
+              "msPerOperation": 10.259433333333345,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateHand",
+              "msPerOperation": 5.364739999999953,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.view.js:showBattleStage",
+              "msPerOperation": 2.3848333333333054,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.view.js:syncBattleSlot",
+              "msPerOperation": 0.7838600000000345,
+              "callsPerOperation": 11
+            },
+            {
+              "name": "battle/view/battle.layers.js:mountUnitLayer",
+              "msPerOperation": 0.7707866666667542,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateUnits",
+              "msPerOperation": 0.33606666666664753,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:handGroupState",
+              "msPerOperation": 0.21584666666682703,
+              "callsPerOperation": 6.2
+            }
+          ]
+        },
+        {
+          "name": "log.single-line",
+          "medianMs": 0.09679999999980282,
+          "p95Ms": 0.11740000000008877,
+          "meanCpuMs": 2.066666666666667,
+          "segments": []
+        }
+      ],
+      "cpu": {
+        "totalSampledMs": 411.944,
+        "inspectorSelfMs": 101.499,
+        "gameInclusive": [
+          {
+            "source": "battle/view/battle.view.js:render",
+            "ms": 299.027,
+            "percentOfNonInspectorSample": 96.32205382595951
+          },
+          {
+            "source": "battle/view/battle.view.js:(anonymous)",
+            "ms": 171.868,
+            "percentOfNonInspectorSample": 55.361819323873796
+          },
+          {
+            "source": "battle/view/battle.layers.js:updateHand",
+            "ms": 90.487,
+            "percentOfNonInspectorSample": 29.147514052408642
+          },
+          {
+            "source": "battle/view/battle.layers.js:(anonymous)",
+            "ms": 65.827,
+            "percentOfNonInspectorSample": 21.204078017040057
+          },
+          {
+            "source": "battle/view/battle.view.js:showBattleStage",
+            "ms": 56.402,
+            "percentOfNonInspectorSample": 18.168113514471163
+          },
+          {
+            "source": "battle/view/battle.layers.js:mountUnitLayer",
+            "ms": 52.438,
+            "percentOfNonInspectorSample": 16.891236773019376
+          },
+          {
+            "source": "battle/view/battle.view.js:syncBattleSlot",
+            "ms": 21.519,
+            "percentOfNonInspectorSample": 6.931662613345359
+          },
+          {
+            "source": "battle/view/battle.anim.view.js:animateBattleTransition",
+            "ms": 14.922,
+            "percentOfNonInspectorSample": 4.8066485206719385
+          },
+          {
+            "source": "battle/view/battle.layers.js:updateUnits",
+            "ms": 9.589,
+            "percentOfNonInspectorSample": 3.0887918955048397
+          },
+          {
+            "source": "battle/view/battle.secondary-overlay.js:restoreCombatScene",
+            "ms": 7.877,
+            "percentOfNonInspectorSample": 2.537325452173493
+          },
+          {
+            "source": "battle/view/battle.effect-feedback.js:updateHandAcquisitionFeedback",
+            "ms": 7.873,
+            "percentOfNonInspectorSample": 2.536036979175055
+          },
+          {
+            "source": "battle/view/battle.view.js:layoutBattleScenery",
+            "ms": 7.617,
+            "percentOfNonInspectorSample": 2.4535747072750405
+          }
+        ]
+      },
+      "allocation": {
+        "samplingInterval": 32768,
+        "totalSampledAllocatedBytes": 169014456,
+        "sourceInclusive": [
+          {
+            "source": "battle/view/battle.view.js:render",
+            "bytes": 167013928
+          },
+          {
+            "source": "battle/view/battle.layers.js:updateHand",
+            "bytes": 53976088
+          },
+          {
+            "source": "battle/view/battle.layers.js:mountUnitLayer",
+            "bytes": 40559280
+          },
+          {
+            "source": "battle/view/battle.view.js:showBattleStage",
+            "bytes": 34813744
+          },
+          {
+            "source": "battle/core/battle.engine.js:getSnapshot",
+            "bytes": 5431648
+          },
+          {
+            "source": "battle/runtime/battle.snapshot.js:createBattleSnapshotSignature",
+            "bytes": 4672296
+          },
+          {
+            "source": "battle/view/battle.preview.js:previewAction",
+            "bytes": 98400
+          }
+        ]
+      },
+      "raw": [
+        {
+          "path": ".tmp/deep-perf-1018/battle/typical.cpuprofile",
+          "bytes": 365957,
+          "sha256": "b3a6a8d55fac8f80160cd8b8c558c7a246c333d280a892a63d172af8578cdf01"
+        },
+        {
+          "path": ".tmp/deep-perf-1018/battle/typical.heapprofile",
+          "bytes": 934287,
+          "sha256": "e37974abe9984e67ae5c8743c5befb776235881c6346ca189e4dc6b8f939ec6b"
+        }
+      ]
+    },
+    {
+      "scene": "high",
+      "operations": [
+        {
+          "name": "snapshot.cache-hit",
+          "medianMs": 0.10999999999967258,
+          "p95Ms": 0.13279999999940628,
+          "meanCpuMs": 0,
+          "segments": [
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.11250000000006063,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:snapshotSignature",
+              "msPerOperation": 0.10162666666668277,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/runtime/battle.snapshot.js:createBattleSnapshotSignature",
+              "msPerOperation": 0.09953333333335952,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:captureSnapshotInput",
+              "msPerOperation": 0.00770666666667239,
+              "callsPerOperation": 1
+            }
+          ]
+        },
+        {
+          "name": "snapshot.changed",
+          "medianMs": 0.12370000000009895,
+          "p95Ms": 0.13220000000001164,
+          "meanCpuMs": 0,
+          "segments": [
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.12356666666655655,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:snapshotSignature",
+              "msPerOperation": 0.10087333333334149,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/runtime/battle.snapshot.js:createBattleSnapshotSignature",
+              "msPerOperation": 0.09916666666655753,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/runtime/battle.snapshot.js:createBattleSnapshot",
+              "msPerOperation": 0.012126666666699749,
+              "callsPerOperation": 0.9333333333333333
+            },
+            {
+              "name": "battle/core/battle.engine.js:captureSnapshotInput",
+              "msPerOperation": 0.006260000000050544,
+              "callsPerOperation": 1
+            }
+          ]
+        },
+        {
+          "name": "availability.whole-hand",
+          "medianMs": 0.7953999999999724,
+          "p95Ms": 1.0820999999996275,
+          "meanCpuMs": 1,
+          "segments": [
+            {
+              "name": "battle/core/battle.engine.js:getCardPlayAvailability",
+              "msPerOperation": 0.8119733333342083,
+              "callsPerOperation": 28
+            },
+            {
+              "name": "battle/core/battle.engine.js:inspectCardPlay",
+              "msPerOperation": 0.575453333333644,
+              "callsPerOperation": 28
+            },
+            {
+              "name": "battle/core/battle.engine.js:unplayableReason",
+              "msPerOperation": 0.31986000000015335,
+              "callsPerOperation": 28
+            }
+          ]
+        },
+        {
+          "name": "preview.single",
+          "medianMs": 0.18690000000060536,
+          "p95Ms": 0.21700000000055297,
+          "meanCpuMs": 0,
+          "segments": [
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.11919333333329026,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:snapshotSignature",
+              "msPerOperation": 0.10674000000005132,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/runtime/battle.snapshot.js:createBattleSnapshotSignature",
+              "msPerOperation": 0.10533999999982674,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:getCardPlayAvailability",
+              "msPerOperation": 0.03104666666671013,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.core.js:getPreviewContext",
+              "msPerOperation": 0.02442666666659837,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:unplayableReason",
+              "msPerOperation": 0.024100000000059178,
+              "callsPerOperation": 2
+            },
+            {
+              "name": "battle/core/battle.engine.js:inspectCardPlay",
+              "msPerOperation": 0.022739999999976133,
+              "callsPerOperation": 1
+            }
+          ]
+        },
+        {
+          "name": "preview.all-targets",
+          "medianMs": 0.35679999999956635,
+          "p95Ms": 0.40319999999974243,
+          "meanCpuMs": 1.0666666666666667,
+          "segments": [
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.13702666666674002,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:snapshotSignature",
+              "msPerOperation": 0.12187999999987369,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/runtime/battle.snapshot.js:createBattleSnapshotSignature",
+              "msPerOperation": 0.12028666666671294,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:getCardPlayAvailability",
+              "msPerOperation": 0.10490666666676891,
+              "callsPerOperation": 4
+            },
+            {
+              "name": "battle/core/battle.engine.js:unplayableReason",
+              "msPerOperation": 0.09971333333329918,
+              "callsPerOperation": 8
+            },
+            {
+              "name": "battle/core/battle.core.js:getPreviewContext",
+              "msPerOperation": 0.08599333333349932,
+              "callsPerOperation": 4
+            },
+            {
+              "name": "battle/core/battle.engine.js:inspectCardPlay",
+              "msPerOperation": 0.07735333333366726,
+              "callsPerOperation": 4
+            }
+          ]
+        },
+        {
+          "name": "forecast.enemy-turn",
+          "medianMs": 0.14660000000003492,
+          "p95Ms": 0.17039999999997235,
+          "meanCpuMs": 0,
+          "segments": [
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.13545333333331655,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:snapshotSignature",
+              "msPerOperation": 0.12431999999989785,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/runtime/battle.snapshot.js:createBattleSnapshotSignature",
+              "msPerOperation": 0.12287333333339727,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.turn-forecast.js:forecastEnemyTurn",
+              "msPerOperation": 0.010266666666575474,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/core/battle.engine.js:captureSnapshotInput",
+              "msPerOperation": 0.007439999999951397,
+              "callsPerOperation": 1
+            }
+          ]
+        },
+        {
+          "name": "render.no-change",
+          "medianMs": 3.147599999999329,
+          "p95Ms": 5.5231000000003405,
+          "meanCpuMs": 3.1333333333333333,
+          "segments": [
+            {
+              "name": "battle/view/battle.view.js:render",
+              "msPerOperation": 3.2171866666666875,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:mountUnitLayer",
+              "msPerOperation": 0.8449800000002748,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateHand",
+              "msPerOperation": 0.650533333333442,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateUnits",
+              "msPerOperation": 0.36459999999988213,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateFoes",
+              "msPerOperation": 0.265313333333385,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:handGroupState",
+              "msPerOperation": 0.194000000000536,
+              "callsPerOperation": 9
+            },
+            {
+              "name": "battle/core/battle.engine.js:getSnapshot",
+              "msPerOperation": 0.17517333333332014,
+              "callsPerOperation": 1
+            }
+          ]
+        },
+        {
+          "name": "render.hp-change",
+          "medianMs": 4.9155000000000655,
+          "p95Ms": 5.959799999999632,
+          "meanCpuMs": 8.333333333333334,
+          "segments": [
+            {
+              "name": "battle/view/battle.view.js:render",
+              "msPerOperation": 4.699993333333501,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.view.js:showBattleStage",
+              "msPerOperation": 1.7807933333333494,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.view.js:syncBattleSlot",
+              "msPerOperation": 0.6449199999996078,
+              "callsPerOperation": 10.266666666666667
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateHand",
+              "msPerOperation": 0.6197133333334932,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:mountUnitLayer",
+              "msPerOperation": 0.60639999999997,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateUnits",
+              "msPerOperation": 0.38478666666651407,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateFoes",
+              "msPerOperation": 0.26917333333331045,
+              "callsPerOperation": 1
+            }
+          ]
+        },
+        {
+          "name": "render.hand-page",
+          "medianMs": 10.514500000000226,
+          "p95Ms": 14.791400000000067,
+          "meanCpuMs": 13.533333333333333,
+          "segments": [
+            {
+              "name": "battle/view/battle.view.js:render",
+              "msPerOperation": 10.001479999999901,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateHand",
+              "msPerOperation": 5.791819999999946,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.view.js:showBattleStage",
+              "msPerOperation": 1.898460000000038,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.view.js:syncBattleSlot",
+              "msPerOperation": 0.6395799999999023,
+              "callsPerOperation": 11
+            },
+            {
+              "name": "battle/view/battle.layers.js:mountUnitLayer",
+              "msPerOperation": 0.5847266666666352,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:updateUnits",
+              "msPerOperation": 0.3607466666666369,
+              "callsPerOperation": 1
+            },
+            {
+              "name": "battle/view/battle.layers.js:handGroupState",
+              "msPerOperation": 0.2669466666668086,
+              "callsPerOperation": 7.4
+            }
+          ]
+        },
+        {
+          "name": "log.single-line",
+          "medianMs": 0.07780000000002474,
+          "p95Ms": 0.08140000000003056,
+          "meanCpuMs": 0,
+          "segments": []
+        }
+      ],
+      "cpu": {
+        "totalSampledMs": 471.68,
+        "inspectorSelfMs": 95.96,
+        "gameInclusive": [
+          {
+            "source": "battle/view/battle.view.js:render",
+            "ms": 355.815,
+            "percentOfNonInspectorSample": 94.70217183008623
+          },
+          {
+            "source": "battle/view/battle.view.js:(anonymous)",
+            "ms": 205.755,
+            "percentOfNonInspectorSample": 54.762855317789835
+          },
+          {
+            "source": "battle/view/battle.layers.js:updateHand",
+            "ms": 111.971,
+            "percentOfNonInspectorSample": 29.80171404237198
+          },
+          {
+            "source": "battle/view/battle.layers.js:(anonymous)",
+            "ms": 77.034,
+            "percentOfNonInspectorSample": 20.50303417438518
+          },
+          {
+            "source": "battle/view/battle.layers.js:mountUnitLayer",
+            "ms": 64.082,
+            "percentOfNonInspectorSample": 17.05578622378367
+          },
+          {
+            "source": "battle/view/battle.view.js:showBattleStage",
+            "ms": 62.745,
+            "percentOfNonInspectorSample": 16.699936122644523
+          },
+          {
+            "source": "battle/view/battle.view.js:syncBattleSlot",
+            "ms": 23.046,
+            "percentOfNonInspectorSample": 6.133823059725327
+          },
+          {
+            "source": "battle/view/battle.anim.view.js:animateBattleTransition",
+            "ms": 18.93,
+            "percentOfNonInspectorSample": 5.03832641328649
+          },
+          {
+            "source": "battle/view/battle.effect-feedback.js:updateHandAcquisitionFeedback",
+            "ms": 12.735,
+            "percentOfNonInspectorSample": 3.3894921750239537
+          },
+          {
+            "source": "battle/view/battle.secondary-overlay.js:restoreCombatScene",
+            "ms": 11.979,
+            "percentOfNonInspectorSample": 3.1882785052698823
+          },
+          {
+            "source": "battle/view/battle.layers.js:updateUnits",
+            "ms": 11.433,
+            "percentOfNonInspectorSample": 3.0429575215586073
+          },
+          {
+            "source": "battle/view/battle.view.js:layoutBattleScenery",
+            "ms": 7.363,
+            "percentOfNonInspectorSample": 1.9597040349196209
+          }
+        ]
+      },
+      "allocation": {
+        "samplingInterval": 32768,
+        "totalSampledAllocatedBytes": 191341408,
+        "sourceInclusive": [
+          {
+            "source": "battle/view/battle.view.js:render",
+            "bytes": 187712960
+          },
+          {
+            "source": "battle/view/battle.layers.js:updateHand",
+            "bytes": 62274552
+          },
+          {
+            "source": "battle/view/battle.layers.js:mountUnitLayer",
+            "bytes": 46317032
+          },
+          {
+            "source": "battle/view/battle.view.js:showBattleStage",
+            "bytes": 33662632
+          },
+          {
+            "source": "battle/core/battle.engine.js:getSnapshot",
+            "bytes": 8662696
+          },
+          {
+            "source": "battle/runtime/battle.snapshot.js:createBattleSnapshotSignature",
+            "bytes": 7538208
+          },
+          {
+            "source": "battle/view/battle.preview.js:previewAction",
+            "bytes": 163984
+          }
+        ]
+      },
+      "raw": [
+        {
+          "path": ".tmp/deep-perf-1018/battle/high.cpuprofile",
+          "bytes": 422319,
+          "sha256": "717178c84aa2f6eb479a114c539dbc428689d935a36f7280a301fe7a787b901e"
+        },
+        {
+          "path": ".tmp/deep-perf-1018/battle/high.heapprofile",
+          "bytes": 923064,
+          "sha256": "0095cf24e2d723a0c3897be66a21a5aaf857921cc8545e3e8b9a29621f83087e"
+        }
+      ]
+    }
+  ]
+}

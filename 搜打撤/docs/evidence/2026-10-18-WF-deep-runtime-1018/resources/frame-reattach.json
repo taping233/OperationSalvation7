@@ -1,0 +1,137 @@
+{
+  "method": "Actual battle.frames attach with Pixi renderer/texture boundary controlled. Candidate is an external stable-identity+geometry fast-path model, not yet production code. No real GPU/FPS claim.",
+  "warmup": 200,
+  "rows": [
+    {
+      "variant": "baseline",
+      "cycles": 1000,
+      "cpuMs": 157,
+      "wallMs": 93.04019999999991,
+      "rendererSubmissions": 1000,
+      "rectReads": 1000,
+      "textureLoads": 0
+    },
+    {
+      "variant": "candidate",
+      "cycles": 1000,
+      "cpuMs": 31,
+      "wallMs": 13.7483000000002,
+      "rendererSubmissions": 0,
+      "rectReads": 1000,
+      "textureLoads": 0
+    },
+    {
+      "variant": "candidate",
+      "cycles": 1000,
+      "cpuMs": 46,
+      "wallMs": 15.153700000000299,
+      "rendererSubmissions": 0,
+      "rectReads": 1000,
+      "textureLoads": 0
+    },
+    {
+      "variant": "baseline",
+      "cycles": 1000,
+      "cpuMs": 125,
+      "wallMs": 86.2464,
+      "rendererSubmissions": 1000,
+      "rectReads": 1000,
+      "textureLoads": 0
+    },
+    {
+      "variant": "baseline",
+      "cycles": 1000,
+      "cpuMs": 125,
+      "wallMs": 83.8771999999999,
+      "rendererSubmissions": 1000,
+      "rectReads": 1000,
+      "textureLoads": 0
+    },
+    {
+      "variant": "candidate",
+      "cycles": 1000,
+      "cpuMs": 16,
+      "wallMs": 11.279599999999846,
+      "rendererSubmissions": 0,
+      "rectReads": 1000,
+      "textureLoads": 0
+    },
+    {
+      "variant": "candidate",
+      "cycles": 1000,
+      "cpuMs": 0,
+      "wallMs": 11.317799999999806,
+      "rendererSubmissions": 0,
+      "rectReads": 1000,
+      "textureLoads": 0
+    },
+    {
+      "variant": "baseline",
+      "cycles": 1000,
+      "cpuMs": 94,
+      "wallMs": 71.25160000000005,
+      "rendererSubmissions": 1000,
+      "rectReads": 1000,
+      "textureLoads": 0
+    },
+    {
+      "variant": "baseline",
+      "cycles": 1000,
+      "cpuMs": 78,
+      "wallMs": 63.74689999999964,
+      "rendererSubmissions": 1000,
+      "rectReads": 1000,
+      "textureLoads": 0
+    },
+    {
+      "variant": "candidate",
+      "cycles": 1000,
+      "cpuMs": 15,
+      "wallMs": 11.233700000000226,
+      "rendererSubmissions": 0,
+      "rectReads": 1000,
+      "textureLoads": 0
+    }
+  ],
+  "alive": {
+    "roles": 1,
+    "roleNames": [
+      "xingyue"
+    ],
+    "textureCount": 50,
+    "baseTextures": 50,
+    "basePixels": 19456000,
+    "rgbaEstimateBytes": 77824000,
+    "liveApps": 1,
+    "activeFrameSessions": 1,
+    "pendingAttach": 0,
+    "backingWidth": 683,
+    "backingHeight": 384,
+    "resolution": 0.5333333333333333,
+    "phase": "all-ready",
+    "rendererBackend": "webgl",
+    "staticDiagnostic": false
+  },
+  "afterHide": {
+    "cache": {
+      "roles": 0,
+      "roleNames": [],
+      "textureCount": 0,
+      "baseTextures": 0,
+      "basePixels": 0,
+      "rgbaEstimateBytes": 0,
+      "liveApps": 1,
+      "activeFrameSessions": 0,
+      "pendingAttach": 0,
+      "backingWidth": 683,
+      "backingHeight": 384,
+      "resolution": 0.5333333333333333,
+      "phase": "released",
+      "rendererBackend": "webgl",
+      "staticDiagnostic": false
+    },
+    "textures": 0,
+    "timers": 0
+  },
+  "appsCreated": 1
+}

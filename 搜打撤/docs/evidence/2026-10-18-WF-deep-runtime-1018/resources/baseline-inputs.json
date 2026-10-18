@@ -1,0 +1,14 @@
+[
+  {
+    "path": "game/src/audio/sound.js",
+    "baseline": "docs/evidence/2026-10-18-WF-deep-runtime-1018/resources/baseline/sound.js.txt",
+    "bytes": 13829,
+    "sha256": "bd228d9259fce1c51b4cb128043c51757a89f082b4ac9511ec54caf6aa81157a"
+  },
+  {
+    "path": "game/src/battle/view/battle.frame-assets.js",
+    "baseline": "docs/evidence/2026-10-18-WF-deep-runtime-1018/resources/baseline/frame-assets.js.txt",
+    "bytes": 1726,
+    "sha256": "50660be99e5370cea76fa7fa4df85a9ded693787e596955ca64d2886e789c7b3"
+  }
+]

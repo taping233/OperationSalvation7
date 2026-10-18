@@ -1,0 +1,13 @@
+import { defineConfig } from 'vitest/config';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
+const candidate=path.join(root,'.tmp/deep-perf-1018/inventory/candidate');
+export default defineConfig({ root, cacheDir:path.join(root,'.tmp/deep-perf-1018/inventory/cache'),
+  plugins:[{name:'private-inventory-candidate',enforce:'pre',resolveId(source,importer){
+    const directory=importer?.replaceAll('\\','/').includes('/inventory/baseline/')?path.join(root,'.tmp/deep-perf-1018/inventory/baseline'):candidate;
+    if(!importer?.replaceAll('\\','/').startsWith(directory.replaceAll('\\','/'))||!source.startsWith('.'))return;
+    const target=path.resolve(root,'game/src/hub',source);
+    return source==='./departure.view-updates.js'?path.join(directory,'departure.view-updates.js'):target;
+  }}],
+  test:{ environment:'jsdom', include:['.tmp/deep-perf-1018/inventory/profile.test.js'], pool:'forks', maxWorkers:1, minWorkers:1, testTimeout:180000 } });

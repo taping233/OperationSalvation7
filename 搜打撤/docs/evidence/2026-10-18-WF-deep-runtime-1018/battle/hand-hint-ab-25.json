@@ -1,0 +1,569 @@
+{
+  "date": "2026-10-18",
+  "load": {
+    "hand": 25,
+    "foes": 4,
+    "equips": 2,
+    "potions": 3,
+    "reduceMotion": false
+  },
+  "warmups": 8,
+  "sameSnapshotAndFullStageHTML": true,
+  "alternatingOrder": true,
+  "summary": [
+    {
+      "variant": "baseline",
+      "operations": 20,
+      "wall": {
+        "n": 20,
+        "meanMs": 44.593329999999966,
+        "medianMs": 42.224199999999655,
+        "p95Ms": 59.311000000000604,
+        "minMs": 32.6911999999993,
+        "maxMs": 71.72569999999996
+      },
+      "cpu": {
+        "n": 20,
+        "meanMs": 42.25,
+        "medianMs": 47,
+        "p95Ms": 63,
+        "minMs": 15,
+        "maxMs": 94
+      },
+      "render": {
+        "n": 20,
+        "meanMs": 32.12445500000003,
+        "medianMs": 30.55210000000079,
+        "p95Ms": 41.30130000000008,
+        "minMs": 24.73109999999997,
+        "maxMs": 52.49010000000089
+      },
+      "renderCounts": [
+        3
+      ],
+      "cardInnerHTMLWritesPerPlay": [
+        17
+      ],
+      "retainedFaces": 160,
+      "survivingFaces": 500
+    },
+    {
+      "variant": "candidate",
+      "operations": 20,
+      "wall": {
+        "n": 20,
+        "meanMs": 35.21214499999978,
+        "medianMs": 33.311899999998786,
+        "p95Ms": 50.737200000000485,
+        "minMs": 21.53099999999995,
+        "maxMs": 72.67700000000059
+      },
+      "cpu": {
+        "n": 20,
+        "meanMs": 49.3,
+        "medianMs": 47,
+        "p95Ms": 95,
+        "minMs": 15,
+        "maxMs": 141
+      },
+      "render": {
+        "n": 20,
+        "meanMs": 23.08855499999995,
+        "medianMs": 19.76260000000184,
+        "p95Ms": 41.42840000000069,
+        "minMs": 15.850000000000364,
+        "maxMs": 55.20650000000023
+      },
+      "renderCounts": [
+        3
+      ],
+      "cardInnerHTMLWritesPerPlay": [
+        0
+      ],
+      "retainedFaces": 500,
+      "survivingFaces": 500
+    }
+  ],
+  "records": [
+    {
+      "variant": "baseline",
+      "id": "tt3-blood-arrow",
+      "round": 0,
+      "renderMs": 32.48489999999947,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 43.183500000000095,
+      "cpuMs": 63
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-blood-arrow",
+      "round": 0,
+      "renderMs": 41.42840000000069,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 50.737200000000485,
+      "cpuMs": 47
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-arrow-rain",
+      "round": 0,
+      "renderMs": 41.30130000000008,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 59.311000000000604,
+      "cpuMs": 63
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-arrow-rain",
+      "round": 0,
+      "renderMs": 24.799699999999575,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 40.36869999999999,
+      "cpuMs": 62
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-bandage",
+      "round": 0,
+      "renderMs": 40.309299999999894,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 56.099600000000464,
+      "cpuMs": 47
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-bandage",
+      "round": 0,
+      "renderMs": 27.211099999999533,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 42.80249999999978,
+      "cpuMs": 31
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-chain-lightning",
+      "round": 0,
+      "renderMs": 37.03790000000026,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 49.435599999999795,
+      "cpuMs": 62
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-chain-lightning",
+      "round": 0,
+      "renderMs": 23.32849999999962,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 30.51209999999992,
+      "cpuMs": 31
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-blood-arrow",
+      "round": 1,
+      "renderMs": 18.684799999999086,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 24.748900000000503,
+      "cpuMs": 15
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-blood-arrow",
+      "round": 1,
+      "renderMs": 31.104999999999563,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 41.54320000000007,
+      "cpuMs": 47
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-arrow-rain",
+      "round": 1,
+      "renderMs": 24.540799999999763,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 41.03069999999934,
+      "cpuMs": 62
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-arrow-rain",
+      "round": 1,
+      "renderMs": 36.047200000000885,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 47.075700000000325,
+      "cpuMs": 47
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-bandage",
+      "round": 1,
+      "renderMs": 55.20650000000023,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 72.67700000000059,
+      "cpuMs": 141
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-bandage",
+      "round": 1,
+      "renderMs": 52.49010000000089,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 71.72569999999996,
+      "cpuMs": 62
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-chain-lightning",
+      "round": 1,
+      "renderMs": 19.102100000000974,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 40.07900000000063,
+      "cpuMs": 31
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-chain-lightning",
+      "round": 1,
+      "renderMs": 25.030500000000757,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 49.39170000000013,
+      "cpuMs": 32
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-blood-arrow",
+      "round": 2,
+      "renderMs": 27.586700000001656,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 32.6911999999993,
+      "cpuMs": 31
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-blood-arrow",
+      "round": 2,
+      "renderMs": 16.701200000000426,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 21.53099999999995,
+      "cpuMs": 16
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-arrow-rain",
+      "round": 2,
+      "renderMs": 27.236799999999675,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 38.59719999999925,
+      "cpuMs": 63
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-arrow-rain",
+      "round": 2,
+      "renderMs": 17.689900000000307,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 30.47109999999975,
+      "cpuMs": 47
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-bandage",
+      "round": 2,
+      "renderMs": 26.09429999999975,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 35.68080000000009,
+      "cpuMs": 15
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-bandage",
+      "round": 2,
+      "renderMs": 18.309799999999086,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 28.631999999999607,
+      "cpuMs": 31
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-chain-lightning",
+      "round": 2,
+      "renderMs": 24.73109999999997,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 42.224199999999655,
+      "cpuMs": 16
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-chain-lightning",
+      "round": 2,
+      "renderMs": 17.316899999999805,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 22.726300000000265,
+      "cpuMs": 16
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-blood-arrow",
+      "round": 3,
+      "renderMs": 18.042699999999968,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 37.980499999999665,
+      "cpuMs": 32
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-blood-arrow",
+      "round": 3,
+      "renderMs": 39.86670000000049,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 51.84319999999934,
+      "cpuMs": 94
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-arrow-rain",
+      "round": 3,
+      "renderMs": 20.933100000002014,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 33.311899999998786,
+      "cpuMs": 95
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-arrow-rain",
+      "round": 3,
+      "renderMs": 31.021999999997206,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 41.15099999999984,
+      "cpuMs": 47
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-bandage",
+      "round": 3,
+      "renderMs": 15.850000000000364,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 29.507700000000114,
+      "cpuMs": 16
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-bandage",
+      "round": 3,
+      "renderMs": 27.52099999999882,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 35.41240000000107,
+      "cpuMs": 31
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-chain-lightning",
+      "round": 3,
+      "renderMs": 19.76260000000184,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 29.059299999998984,
+      "cpuMs": 94
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-chain-lightning",
+      "round": 3,
+      "renderMs": 30.483899999999267,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 36.81760000000031,
+      "cpuMs": 32
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-blood-arrow",
+      "round": 4,
+      "renderMs": 25.756100000000515,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 36.70139999999992,
+      "cpuMs": 15
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-blood-arrow",
+      "round": 4,
+      "renderMs": 22.188799999998082,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 39.30749999999898,
+      "cpuMs": 31
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-arrow-rain",
+      "round": 4,
+      "renderMs": 26.359600000001592,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 38.828300000001036,
+      "cpuMs": 31
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-arrow-rain",
+      "round": 4,
+      "renderMs": 23.307800000000498,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 36.13959999999861,
+      "cpuMs": 94
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-bandage",
+      "round": 4,
+      "renderMs": 29.472599999999147,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 42.72849999999926,
+      "cpuMs": 16
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-bandage",
+      "round": 4,
+      "renderMs": 18.054599999999482,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 26.91229999999996,
+      "cpuMs": 47
+    },
+    {
+      "variant": "baseline",
+      "id": "tt3-chain-lightning",
+      "round": 4,
+      "renderMs": 30.55210000000079,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 17,
+      "survivingFaces": 25,
+      "retainedFaces": 8,
+      "wallMs": 41.42479999999887,
+      "cpuMs": 31
+    },
+    {
+      "variant": "candidate",
+      "id": "tt3-chain-lightning",
+      "round": 4,
+      "renderMs": 19.311799999997675,
+      "renderCount": 3,
+      "cardInnerHTMLWrites": 0,
+      "survivingFaces": 25,
+      "retainedFaces": 25,
+      "wallMs": 25.70759999999973,
+      "cpuMs": 47
+    }
+  ]
+}

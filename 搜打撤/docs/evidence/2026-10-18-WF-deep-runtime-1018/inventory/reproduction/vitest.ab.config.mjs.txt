@@ -1,0 +1,3 @@
+import config from './vitest.config.mjs';
+config.test.include=['.tmp/deep-perf-1018/inventory/ab.test.js'];
+export default config;

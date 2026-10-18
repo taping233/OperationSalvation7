@@ -1,0 +1,18 @@
+  • electron-builder  version=26.15.3 os=10.0.26200
+  • loaded configuration  file=package.json ("build" field)
+  • skipped dependencies rebuild  reason=npmRebuild is set to false
+  • packaging       platform=win32 arch=x64 electron=44.1.0 appOutDir=.tmp\deep-perf-1018\delivery\win-unpacked
+  • using custom unpacked Electron distribution  electronDist=desktop-app\node_modules\electron\dist
+  • copying unpacked Electron  source=D:\素材\代号柒\搜打撤\desktop-app\node_modules\electron\dist destination=D:\素材\代号柒\搜打撤\.tmp\deep-perf-1018\delivery\win-unpacked
+  • searching for node modules  pm=npm searchDir=D:\素材\代号柒\搜打撤\.tmp\deep-perf-1018\exe-project\desktop-app
+  • searching for node modules  pm=traversal searchDir=D:\素材\代号柒\搜打撤\.tmp\deep-perf-1018\exe-project\desktop-app
+  • using manual traversal of node_modules to build dependency tree
+  • no node modules returned while searching directories  searchDirectories=[".tmp\\deep-perf-1018\\exe-project\\desktop-app"]
+  • updating asar integrity executable resource  executablePath=.tmp\deep-perf-1018\delivery\win-unpacked\搜打撤·代号7.exe
+  • executable resource editing and code signing skipped — signAndEditExecutable is false. To skip only code signing while keeping icon and metadata applied, use signExecutable: false instead.  exe=.tmp\deep-perf-1018\delivery\win-unpacked\搜打撤·代号7.exe
+  • building        target=portable file=.tmp\deep-perf-1018\delivery\搜打撤-代号7.exe archs=x64
+  • resolved ELECTRON_BUILDER_NSIS_DIR from environment variable  ELECTRON_BUILDER_NSIS_DIR=C:\Users\太平\AppData\Local\electron-builder\Cache\nsis-3.0.4.1\nsis-3.0.4.1-1mx3n
+  • resolved ELECTRON_BUILDER_7ZIP_PATH from environment variable  ELECTRON_BUILDER_7ZIP_PATH=C:\Users\太平\AppData\Local\electron-builder\Cache\7zip@1.0.0\7zip-win-x64-1nrf7\bin\7za.exe
+  • resolved ELECTRON_BUILDER_NSIS_RESOURCES_DIR from environment variable  ELECTRON_BUILDER_NSIS_RESOURCES_DIR=C:\Users\太平\AppData\Local\electron-builder\Cache\nsis-resources-3.4.1\nsis-resources-3.4.1-2jx2y
+  • resolved ELECTRON_BUILDER_NSIS_DIR from environment variable  ELECTRON_BUILDER_NSIS_DIR=C:\Users\太平\AppData\Local\electron-builder\Cache\nsis-3.0.4.1\nsis-3.0.4.1-1mx3n
+  • file signing skipped via signExecutable configuration  file=.tmp\deep-perf-1018\delivery\搜打撤-代号7.exe

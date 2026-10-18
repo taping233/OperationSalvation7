@@ -1,0 +1,12 @@
+import fs from 'node:fs';import path from 'node:path';import {spawnSync} from 'node:child_process';
+const root=process.cwd(),out=path.join(root,'docs/evidence/2026-10-18-WF-deep-runtime-1018/inventory');
+const cases=['open.25','steadyAdd.25','steadyRemove.25','lastExtraRemove.25','reorderPicks.25','filter.25','steadyAdd.100','steadyRemove.100'];
+const rows=[];
+for(const name of cases){
+ const result=spawnSync(process.execPath,['node_modules/vitest/vitest.mjs','run','--config','.tmp/deep-perf-1018/inventory/vitest.ab.config.mjs'],{cwd:root,env:{...process.env,INVENTORY_CASE:name},encoding:'utf8',maxBuffer:4*1024*1024});
+ fs.writeFileSync(path.join(out,'ab.'+name+'.log.txt'),result.stdout+result.stderr);
+ if(result.status!==0)throw new Error(name+' failed '+result.status+'\n'+result.stdout+'\n'+result.stderr);
+ const data=JSON.parse(fs.readFileSync(path.join(out,'departure-ab.'+name+'.json'),'utf8'));rows.push(...data.operations);
+ console.log(JSON.stringify({name,status:result.status,...rows.at(-1),baseline:undefined,candidate:undefined,b:rows.at(-1).baseline.medianMs,c:rows.at(-1).candidate.medianMs}));
+ fs.writeFileSync(path.join(out,'departure-ab.json'),JSON.stringify({independentFork:true,frameQueueSettled:true,pairsPerCase:17,scope:data.scope,operations:rows},null,2));
+}

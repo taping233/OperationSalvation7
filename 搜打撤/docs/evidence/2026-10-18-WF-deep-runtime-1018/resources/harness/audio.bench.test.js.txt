@@ -1,0 +1,35 @@
+import {expect,it,vi} from 'vitest';
+import fs from 'node:fs';
+import path from 'node:path';
+const h=vi.hoisted(()=>({players:[],contexts:[],fetches:0,decodes:0,sources:0,connections:0}));
+vi.mock('howler',()=>({Howl:class{},Howler:{mute(){},ctx:null}}));
+vi.mock('../../../game/src/audio/sound.samples.player.js',async original=>{
+ const actual=await original();return{...actual,SampleOnlyPlayer:class extends actual.SampleOnlyPlayer{constructor(...args){super(...args);h.players.push(new WeakRef(this));}}};
+});
+const root=process.cwd(),output=path.join(root,'docs/evidence/2026-10-18-WF-deep-runtime-1018/resources');
+const flush=async()=>{for(let i=0;i<1800;i++)await Promise.resolve();};
+const cpu=before=>{const value=process.cpuUsage(before);return(value.user+value.system)/1000;};
+function contextClass(){
+ const parameter=()=>({value:0,setValueAtTime(){},linearRampToValueAtTime(){}});
+ const node=()=>({gain:parameter(),frequency:parameter(),Q:parameter(),playbackRate:parameter(),threshold:parameter(),knee:parameter(),ratio:parameter(),attack:parameter(),release:parameter(),connect(){h.connections++;},disconnect(){},start(){h.sources++;},stop(){}});
+ return class{constructor(){this.state='running';this.currentTime=0;h.contexts.push(this);}createGain(){return node();}createDynamicsCompressor(){return node();}createBiquadFilter(){return node();}createBufferSource(){return node();}resume(){return Promise.resolve();}close(){this.state='closed';return Promise.resolve();}decodeAudioData(){h.decodes++;return Promise.resolve({duration:.2,numberOfChannels:1});}};
+}
+async function run(variant,setting){
+ window.SDT?.Sound?.dispose?.();vi.resetModules();localStorage.clear();
+ localStorage.setItem(setting==='global-muted'?'sdt-muted':'sdt-sfx-off','1');
+ h.players=[];h.contexts=[];h.fetches=0;h.decodes=0;h.sources=0;h.connections=0;
+ vi.stubGlobal('AudioContext',contextClass());vi.stubGlobal('fetch',async()=>{h.fetches++;return{ok:true,arrayBuffer:async()=>new ArrayBuffer(1)};});
+ if(variant==='baseline')await import('./sound.baseline.js');else await import('../../../game/src/audio/sound.js');
+ const sound=window.SDT.Sound;
+ const start=process.cpuUsage(),wall=performance.now();
+ document.dispatchEvent(new Event('pointerdown'));await flush();
+ const result={variant,setting,cpuMs:cpu(start),wallMs:performance.now()-wall,contextsCreated:h.contexts.length,fetchJobs:h.fetches,decodeJobs:h.decodes,cachedBuffers:h.players.at(-1)?.deref()?.buffers.size||0,activeVoices:h.players.at(-1)?.deref()?.voices.size||0};
+ sound.dispose();await flush();result.liveContextsAfterDispose=h.contexts.filter(context=>context.state!=='closed').length;result.buffersAfterDispose=h.players.at(-1)?.deref()?.buffers.size||0;
+ vi.unstubAllGlobals();return result;
+}
+it('alternates muted real-module startup after warmup and checks resource ownership',async()=>{
+ await run('baseline','global-muted');await run('candidate','global-muted');
+ const rows=[];for(const setting of ['global-muted','sfx-off'])for(let repeat=0;repeat<5;repeat++)for(const variant of repeat%2?['candidate','baseline']:['baseline','candidate'])rows.push(await run(variant,setting));
+ for(const row of rows){expect(row.liveContextsAfterDispose).toBe(0);expect(row.buffersAfterDispose).toBe(0);if(row.variant==='candidate'){expect(row.fetchJobs).toBe(0);expect(row.contextsCreated).toBe(0);}else expect(row.decodeJobs).toBeGreaterThan(20);}
+ fs.writeFileSync(path.join(output,'audio-startup.json'),JSON.stringify({method:'Preserved original versus modified actual sound.js and actual SampleOnlyPlayer, with controlled fetch/WebAudio boundaries; fixed microtask drain on both variants. No real decoder, device audio, FPS or native RSS claim.',candidate:'Production kick skips ensure when global mute or SFX-off is set; public ensure remains unchanged.',warmup:2,rows},null,2)+'\n');
+});

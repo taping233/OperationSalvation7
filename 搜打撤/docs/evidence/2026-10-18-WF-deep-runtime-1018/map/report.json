@@ -1,0 +1,185 @@
+{
+  "scope": "Actual generated v5 map; largest real layer, real renderer/node/road modules; jsdom with controlled canvas/Image. Measures JavaScript, excludes browser layout/raster/GPU.",
+  "layer": 2,
+  "layerNodeCounts": [
+    7,
+    11,
+    16,
+    16
+  ],
+  "nodes": 16,
+  "totalNodes": 50,
+  "scenarios": {
+    "pan": {
+      "baseline": {
+        "medianMs": 0.07752666666666906,
+        "p95Ms": 0.10287666666666458,
+        "cpuMsPerDraw": 0.034444444444444444
+      },
+      "candidate": {
+        "medianMs": 0.07819333333332755,
+        "p95Ms": 0.09847666666666252,
+        "cpuMsPerDraw": 0.19111111111111112
+      }
+    },
+    "zoom": {
+      "baseline": {
+        "medianMs": 0.2223033333333357,
+        "p95Ms": 0.3083599999999933,
+        "cpuMsPerDraw": 0.26222222222222225
+      },
+      "candidate": {
+        "medianMs": 0.21637666666666366,
+        "p95Ms": 0.252486666666664,
+        "cpuMsPerDraw": 0.3288888888888889
+      }
+    },
+    "selection": {
+      "baseline": {
+        "medianMs": 0.19984666666665968,
+        "p95Ms": 0.24964333333332434,
+        "cpuMsPerDraw": 0.24333333333333335
+      },
+      "candidate": {
+        "medianMs": 0.1006333333333411,
+        "p95Ms": 0.16450333333333825,
+        "cpuMsPerDraw": 0.12111111111111111
+      }
+    }
+  },
+  "equivalence": {
+    "geometryCases": 160,
+    "includes": "zoom .35–1.775, selection changes, in-place visited changes, pending and completed entry supply; exact numeric curve/clip/alpha equality",
+    "selectionSectionChanges": {
+      "baseline": 1360,
+      "candidate": 539
+    }
+  },
+  "cpuTop": [
+    {
+      "frame": "get file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/.tmp/deep-perf-1018/map/profile.test.js:11",
+      "samples": 75
+    },
+    {
+      "frame": "drawMapBrushRoad file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/map-brush-art.js:62",
+      "samples": 64
+    },
+    {
+      "frame": "mapTravelPoint file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/run/map-travel-path.js:23",
+      "samples": 52
+    },
+    {
+      "frame": "mapBrushVariant file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/map-brush-art.js:29",
+      "samples": 30
+    },
+    {
+      "frame": "drawIcons file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/renderer.js:310",
+      "samples": 28
+    },
+    {
+      "frame": "mapTravelCurve file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/run/map-travel-path.js:9",
+      "samples": 26
+    },
+    {
+      "frame": "drawLinks file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/renderer.js:397",
+      "samples": 26
+    },
+    {
+      "frame": "isConsumedMapNode file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/map-node-state.js:54",
+      "samples": 25
+    },
+    {
+      "frame": "(garbage collector) :0",
+      "samples": 21
+    },
+    {
+      "frame": "drawMapNodeBadge file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/map-node-art.js:165",
+      "samples": 19
+    },
+    {
+      "frame": "draw file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/renderer.js:491",
+      "samples": 18
+    },
+    {
+      "frame": "clippedMapRoad file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/renderer.js:374",
+      "samples": 16
+    },
+    {
+      "frame": "drawMapContentStatus file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/map-node-art.js:152",
+      "samples": 12
+    },
+    {
+      "frame": "exit file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/renderer.js:387",
+      "samples": 10
+    },
+    {
+      "frame": "pad file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/renderer.js:378",
+      "samples": 9
+    },
+    {
+      "frame": "exports.qname file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/xml-name-validator/lib/xml-name-validator.js:7",
+      "samples": 9
+    },
+    {
+      "frame": "parse file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/nwsapi/src/nwsapi.js:1750",
+      "samples": 9
+    },
+    {
+      "frame": "nodeRestoreAt file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/run/node-restore-state.js:23",
+      "samples": 8
+    },
+    {
+      "frame": "t file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:33",
+      "samples": 7
+    },
+    {
+      "frame": "mapNodeStatus file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/map-node-state.js:21",
+      "samples": 7
+    },
+    {
+      "frame": "mapNodeInfo file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/node-info.js:25",
+      "samples": 7
+    },
+    {
+      "frame": "get file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/run/expedition.view.js:4",
+      "samples": 7
+    },
+    {
+      "frame": "set file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/.tmp/deep-perf-1018/map/profile.test.js:17",
+      "samples": 6
+    },
+    {
+      "frame": "splitMapCurve file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/renderer.js:362",
+      "samples": 6
+    },
+    {
+      "frame": "context file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/.tmp/deep-perf-1018/map/profile.test.js:9",
+      "samples": 6
+    },
+    {
+      "frame": "exports.setAttributeValue file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/attributes.js:242",
+      "samples": 6
+    },
+    {
+      "frame": "(anonymous) file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/.tmp/deep-perf-1018/map/profile.test.js:15",
+      "samples": 5
+    },
+    {
+      "frame": "drawMapTraveller file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/map-node-art.js:224",
+      "samples": 5
+    },
+    {
+      "frame": "point file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/map-brush-art.js:35",
+      "samples": 5
+    },
+    {
+      "frame": "collect file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/nwsapi/src/nwsapi.js:1914",
+      "samples": 5
+    }
+  ],
+  "environment": {
+    "node": "v24.13.0",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

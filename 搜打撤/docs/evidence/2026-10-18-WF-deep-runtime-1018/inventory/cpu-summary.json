@@ -1,0 +1,788 @@
+[
+  {
+    "operation": "ab.baseline.100",
+    "scope": "40 steady actions, controlled frame/hydration flush after each. cpuLeaf/category are exclusive leaf self samples; nearestProductFrame is mutually exclusive closest-product attribution, not function self time. Do not add these two views.",
+    "totalSamples": 886,
+    "profiles": 1,
+    "bytes": 389364,
+    "sha256": "85cc923b61f5663cceac0cc13f739802b7e2452b4bbf021e17dda7dd09cef003",
+    "categories": [
+      {
+        "label": "jsdom DOM",
+        "samples": 553,
+        "pct": 62.41534988713318
+      },
+      {
+        "label": "runtime/harness/other",
+        "samples": 174,
+        "pct": 19.63882618510158
+      },
+      {
+        "label": "CSS selector engine",
+        "samples": 99,
+        "pct": 11.173814898419865
+      },
+      {
+        "label": "game source",
+        "samples": 35,
+        "pct": 3.950338600451467
+      },
+      {
+        "label": "GC",
+        "samples": 18,
+        "pct": 2.0316027088036117
+      },
+      {
+        "label": "HTML parser",
+        "samples": 7,
+        "pct": 0.7900677200902935
+      }
+    ],
+    "cpuLeaf": [
+      {
+        "label": "_node @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+        "samples": 96,
+        "pct": 10.835214446952596
+      },
+      {
+        "label": "get id @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/Element.js",
+        "samples": 54,
+        "pct": 6.094808126410835
+      },
+      {
+        "label": "namedItem @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCollection-impl.js",
+        "samples": 47,
+        "pct": 5.3047404063205414
+      },
+      {
+        "label": "query @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+        "samples": 45,
+        "pct": 5.07900677200903
+      },
+      {
+        "label": "byTag @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/nwsapi/src/nwsapi.js",
+        "samples": 35,
+        "pct": 3.950338600451467
+      },
+      {
+        "label": "byId @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/nwsapi/src/nwsapi.js",
+        "samples": 28,
+        "pct": 3.160270880361174
+      },
+      {
+        "label": "wrapperForImpl @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/utils.js",
+        "samples": 27,
+        "pct": 3.0474040632054176
+      },
+      {
+        "label": "filter @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+        "samples": 19,
+        "pct": 2.144469525959368
+      },
+      {
+        "label": "get firstElementChild @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/ParentNode-impl.js",
+        "samples": 18,
+        "pct": 2.0316027088036117
+      },
+      {
+        "label": "exports.asciiLowercase @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/helpers/strings.js",
+        "samples": 18,
+        "pct": 2.0316027088036117
+      },
+      {
+        "label": "(garbage collector) @ (native)",
+        "samples": 18,
+        "pct": 2.0316027088036117
+      },
+      {
+        "label": "contains @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/helpers/ordered-set.js",
+        "samples": 17,
+        "pct": 1.9187358916478556
+      },
+      {
+        "label": "get nextElementSibling @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/Element.js",
+        "samples": 17,
+        "pct": 1.9187358916478556
+      },
+      {
+        "label": "exports.getAttributeByName @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/attributes.js",
+        "samples": 17,
+        "pct": 1.9187358916478556
+      },
+      {
+        "label": "Resolver @ (native)",
+        "samples": 16,
+        "pct": 1.8058690744920993
+      },
+      {
+        "label": "treeToArray @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+        "samples": 14,
+        "pct": 1.580135440180587
+      },
+      {
+        "label": "following @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+        "samples": 13,
+        "pct": 1.4672686230248306
+      },
+      {
+        "label": "_clearMemoizedQueries @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/Node-impl.js",
+        "samples": 12,
+        "pct": 1.3544018058690745
+      }
+    ],
+    "nearestProductFrame": [
+      {
+        "label": "updateDepartureView @ hub/departure.view-updates.js",
+        "samples": 584,
+        "pct": 65.91422121896163
+      },
+      {
+        "label": "syncRecommendationButtons @ hub/game.hub.depart.js",
+        "samples": 141,
+        "pct": 15.914221218961625
+      },
+      {
+        "label": "reconcileBag @ hub/departure.view-updates.js",
+        "samples": 81,
+        "pct": 9.142212189616252
+      },
+      {
+        "label": "(anonymous) @ core/icon-hydration.js",
+        "samples": 22,
+        "pct": 2.4830699774266365
+      },
+      {
+        "label": "scrubAttrs @ core/icons-bitmap.js",
+        "samples": 9,
+        "pct": 1.0158013544018059
+      },
+      {
+        "label": "hydrate @ core/icons-bitmap.js",
+        "samples": 4,
+        "pct": 0.45146726862302483
+      },
+      {
+        "label": "renderDepartPrep @ hub/game.hub.depart.js",
+        "samples": 4,
+        "pct": 0.45146726862302483
+      },
+      {
+        "label": "findDepartureStack @ hub/base-departure.commands.js",
+        "samples": 3,
+        "pct": 0.33860045146726864
+      },
+      {
+        "label": "rich @ core/icons-bitmap.js",
+        "samples": 2,
+        "pct": 0.22573363431151242
+      },
+      {
+        "label": "(anonymous) @ hub/game.hub.depart.js",
+        "samples": 1,
+        "pct": 0.11286681715575621
+      },
+      {
+        "label": "reducedMotion @ hub/hub.presentation.js",
+        "samples": 1,
+        "pct": 0.11286681715575621
+      },
+      {
+        "label": "departureSummary @ hub/departure.summary.js",
+        "samples": 1,
+        "pct": 0.11286681715575621
+      },
+      {
+        "label": "assetUrl @ core/asset-url.js",
+        "samples": 1,
+        "pct": 0.11286681715575621
+      },
+      {
+        "label": "hasTokens @ core/icons-bitmap.js",
+        "samples": 1,
+        "pct": 0.11286681715575621
+      },
+      {
+        "label": "current @ hub/game.hub.depart.js",
+        "samples": 1,
+        "pct": 0.11286681715575621
+      }
+    ]
+  },
+  {
+    "operation": "ab.baseline.25",
+    "scope": "40 steady actions, controlled frame/hydration flush after each. cpuLeaf/category are exclusive leaf self samples; nearestProductFrame is mutually exclusive closest-product attribution, not function self time. Do not add these two views.",
+    "totalSamples": 346,
+    "profiles": 1,
+    "bytes": 284861,
+    "sha256": "a3190eaf5b409ba9593d9e9ccfb88f41e7908c0695e0d0887793502349c29918",
+    "categories": [
+      {
+        "label": "jsdom DOM",
+        "samples": 213,
+        "pct": 61.5606936416185
+      },
+      {
+        "label": "runtime/harness/other",
+        "samples": 68,
+        "pct": 19.653179190751445
+      },
+      {
+        "label": "CSS selector engine",
+        "samples": 32,
+        "pct": 9.248554913294798
+      },
+      {
+        "label": "GC",
+        "samples": 13,
+        "pct": 3.7572254335260116
+      },
+      {
+        "label": "game source",
+        "samples": 12,
+        "pct": 3.468208092485549
+      },
+      {
+        "label": "HTML parser",
+        "samples": 8,
+        "pct": 2.3121387283236996
+      }
+    ],
+    "cpuLeaf": [
+      {
+        "label": "_node @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+        "samples": 27,
+        "pct": 7.803468208092486
+      },
+      {
+        "label": "filter @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+        "samples": 16,
+        "pct": 4.624277456647399
+      },
+      {
+        "label": "get id @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/Element.js",
+        "samples": 15,
+        "pct": 4.335260115606936
+      },
+      {
+        "label": "(garbage collector) @ (native)",
+        "samples": 13,
+        "pct": 3.7572254335260116
+      },
+      {
+        "label": "get firstElementChild @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/ParentNode-impl.js",
+        "samples": 11,
+        "pct": 3.179190751445087
+      },
+      {
+        "label": "Resolver @ (native)",
+        "samples": 10,
+        "pct": 2.8901734104046244
+      },
+      {
+        "label": "following @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+        "samples": 8,
+        "pct": 2.3121387283236996
+      },
+      {
+        "label": "query @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+        "samples": 7,
+        "pct": 2.023121387283237
+      },
+      {
+        "label": "exports.asciiLowercase @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/helpers/strings.js",
+        "samples": 7,
+        "pct": 2.023121387283237
+      },
+      {
+        "label": "get firstElementChild @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/Element.js",
+        "samples": 7,
+        "pct": 2.023121387283237
+      },
+      {
+        "label": "CSSStyleDeclaration @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/cssstyle/lib/CSSStyleDeclaration.js",
+        "samples": 7,
+        "pct": 2.023121387283237
+      },
+      {
+        "label": "exports.is @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/Element.js",
+        "samples": 6,
+        "pct": 1.7341040462427746
+      },
+      {
+        "label": "byTag @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/nwsapi/src/nwsapi.js",
+        "samples": 6,
+        "pct": 1.7341040462427746
+      },
+      {
+        "label": "contains @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/helpers/ordered-set.js",
+        "samples": 6,
+        "pct": 1.7341040462427746
+      },
+      {
+        "label": "_remove @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/Node-impl.js",
+        "samples": 5,
+        "pct": 1.4450867052023122
+      },
+      {
+        "label": "getOwnPropertyDescriptor @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/HTMLCollection.js",
+        "samples": 5,
+        "pct": 1.4450867052023122
+      },
+      {
+        "label": "wrapperForImpl @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/utils.js",
+        "samples": 5,
+        "pct": 1.4450867052023122
+      },
+      {
+        "label": "getAttribute @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/Element.js",
+        "samples": 5,
+        "pct": 1.4450867052023122
+      }
+    ],
+    "nearestProductFrame": [
+      {
+        "label": "updateDepartureView @ hub/departure.view-updates.js",
+        "samples": 182,
+        "pct": 52.60115606936416
+      },
+      {
+        "label": "reconcileBag @ hub/departure.view-updates.js",
+        "samples": 78,
+        "pct": 22.54335260115607
+      },
+      {
+        "label": "syncRecommendationButtons @ hub/game.hub.depart.js",
+        "samples": 38,
+        "pct": 10.982658959537572
+      },
+      {
+        "label": "(anonymous) @ core/icon-hydration.js",
+        "samples": 10,
+        "pct": 2.8901734104046244
+      },
+      {
+        "label": "hydrate @ core/icons-bitmap.js",
+        "samples": 7,
+        "pct": 2.023121387283237
+      },
+      {
+        "label": "renderDepartPrep @ hub/game.hub.depart.js",
+        "samples": 3,
+        "pct": 0.8670520231213873
+      },
+      {
+        "label": "scrubAttrs @ core/icons-bitmap.js",
+        "samples": 2,
+        "pct": 0.5780346820809249
+      },
+      {
+        "label": "(anonymous) @ hub/departure.view-updates.js",
+        "samples": 2,
+        "pct": 0.5780346820809249
+      },
+      {
+        "label": "(anonymous) @ hub/base-departure.commands.js",
+        "samples": 1,
+        "pct": 0.28901734104046245
+      },
+      {
+        "label": "(anonymous) @ hub/game.hub.depart.js",
+        "samples": 1,
+        "pct": 0.28901734104046245
+      },
+      {
+        "label": "findDepartureStack @ hub/base-departure.commands.js",
+        "samples": 1,
+        "pct": 0.28901734104046245
+      },
+      {
+        "label": "rich @ core/icons-bitmap.js",
+        "samples": 1,
+        "pct": 0.28901734104046245
+      }
+    ]
+  },
+  {
+    "operation": "ab.candidate.100",
+    "scope": "40 steady actions, controlled frame/hydration flush after each. cpuLeaf/category are exclusive leaf self samples; nearestProductFrame is mutually exclusive closest-product attribution, not function self time. Do not add these two views.",
+    "totalSamples": 84,
+    "profiles": 1,
+    "bytes": 54192,
+    "sha256": "d0c7cdcbf5177ba4e36d96676a4b05a0d48d6880c8233bf7104cbd7620bd5680",
+    "categories": [
+      {
+        "label": "jsdom DOM",
+        "samples": 56,
+        "pct": 66.66666666666667
+      },
+      {
+        "label": "game source",
+        "samples": 17,
+        "pct": 20.238095238095237
+      },
+      {
+        "label": "runtime/harness/other",
+        "samples": 10,
+        "pct": 11.904761904761905
+      },
+      {
+        "label": "HTML parser",
+        "samples": 1,
+        "pct": 1.1904761904761905
+      }
+    ],
+    "cpuLeaf": [
+      {
+        "label": "filter @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+        "samples": 11,
+        "pct": 13.095238095238095
+      },
+      {
+        "label": "query @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+        "samples": 9,
+        "pct": 10.714285714285714
+      },
+      {
+        "label": "updateDepartureView @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/hub/departure.view-updates.js",
+        "samples": 7,
+        "pct": 8.333333333333334
+      },
+      {
+        "label": "exports.is @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/DOMTokenList.js",
+        "samples": 4,
+        "pct": 4.761904761904762
+      },
+      {
+        "label": "currentView @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/hub/departure.view-updates.js",
+        "samples": 4,
+        "pct": 4.761904761904762
+      },
+      {
+        "label": "contains @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/helpers/ordered-set.js",
+        "samples": 4,
+        "pct": 4.761904761904762
+      },
+      {
+        "label": "attrCamelCase @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/DOMStringMap-impl.js",
+        "samples": 4,
+        "pct": 4.761904761904762
+      },
+      {
+        "label": "_update @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCollection-impl.js",
+        "samples": 3,
+        "pct": 3.5714285714285716
+      },
+      {
+        "label": "treeToArray @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+        "samples": 3,
+        "pct": 3.5714285714285716
+      },
+      {
+        "label": "contains @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/Node.js",
+        "samples": 2,
+        "pct": 2.380952380952381
+      },
+      {
+        "label": "_node @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+        "samples": 2,
+        "pct": 2.380952380952381
+      },
+      {
+        "label": "CSSStyleDeclaration @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/cssstyle/lib/CSSStyleDeclaration.js",
+        "samples": 2,
+        "pct": 2.380952380952381
+      },
+      {
+        "label": "post @ node:inspector",
+        "samples": 1,
+        "pct": 1.1904761904761905
+      },
+      {
+        "label": "getAttribute @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/Element-impl.js",
+        "samples": 1,
+        "pct": 1.1904761904761905
+      },
+      {
+        "label": "namedItem @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCollection-impl.js",
+        "samples": 1,
+        "pct": 1.1904761904761905
+      },
+      {
+        "label": "exports.implementation @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/DOMStringMap-impl.js",
+        "samples": 1,
+        "pct": 1.1904761904761905
+      },
+      {
+        "label": "hasTokens @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/icons-bitmap.js",
+        "samples": 1,
+        "pct": 1.1904761904761905
+      },
+      {
+        "label": "contains @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/DOMTokenList.js",
+        "samples": 1,
+        "pct": 1.1904761904761905
+      }
+    ],
+    "nearestProductFrame": [
+      {
+        "label": "currentView @ hub/departure.view-updates.js",
+        "samples": 41,
+        "pct": 48.80952380952381
+      },
+      {
+        "label": "updateDepartureView @ hub/departure.view-updates.js",
+        "samples": 23,
+        "pct": 27.38095238095238
+      },
+      {
+        "label": "setHTML @ hub/departure.view-updates.js",
+        "samples": 7,
+        "pct": 8.333333333333334
+      },
+      {
+        "label": "reconcileCells @ hub/departure.view-updates.js",
+        "samples": 3,
+        "pct": 3.5714285714285716
+      },
+      {
+        "label": "hydrate @ core/icons-bitmap.js",
+        "samples": 2,
+        "pct": 2.380952380952381
+      },
+      {
+        "label": "hasTokens @ core/icons-bitmap.js",
+        "samples": 1,
+        "pct": 1.1904761904761905
+      },
+      {
+        "label": "departureStackKey @ hub/base-departure.commands.js",
+        "samples": 1,
+        "pct": 1.1904761904761905
+      },
+      {
+        "label": "(anonymous) @ hub/game.hub.depart.js",
+        "samples": 1,
+        "pct": 1.1904761904761905
+      },
+      {
+        "label": "(anonymous) @ hub/base-departure.commands.js",
+        "samples": 1,
+        "pct": 1.1904761904761905
+      }
+    ]
+  },
+  {
+    "operation": "ab.candidate.25",
+    "scope": "40 steady actions, controlled frame/hydration flush after each. cpuLeaf/category are exclusive leaf self samples; nearestProductFrame is mutually exclusive closest-product attribution, not function self time. Do not add these two views.",
+    "totalSamples": 95,
+    "profiles": 1,
+    "bytes": 56839,
+    "sha256": "2249d95c0342d12dbe7fc9321eee61bf3eeb7a1bbfbf2d73065ff409ff043382",
+    "categories": [
+      {
+        "label": "jsdom DOM",
+        "samples": 60,
+        "pct": 63.1578947368421
+      },
+      {
+        "label": "game source",
+        "samples": 23,
+        "pct": 24.210526315789473
+      },
+      {
+        "label": "runtime/harness/other",
+        "samples": 10,
+        "pct": 10.526315789473685
+      },
+      {
+        "label": "HTML parser",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      },
+      {
+        "label": "CSS selector engine",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      }
+    ],
+    "cpuLeaf": [
+      {
+        "label": "query @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+        "samples": 13,
+        "pct": 13.68421052631579
+      },
+      {
+        "label": "updateDepartureView @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/hub/departure.view-updates.js",
+        "samples": 8,
+        "pct": 8.421052631578947
+      },
+      {
+        "label": "attrCamelCase @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/DOMStringMap-impl.js",
+        "samples": 4,
+        "pct": 4.2105263157894735
+      },
+      {
+        "label": "treeToArray @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/symbol-tree/lib/SymbolTree.js",
+        "samples": 4,
+        "pct": 4.2105263157894735
+      },
+      {
+        "label": "namedItem @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/HTMLCollection-impl.js",
+        "samples": 3,
+        "pct": 3.1578947368421053
+      },
+      {
+        "label": "currentView @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/hub/departure.view-updates.js",
+        "samples": 3,
+        "pct": 3.1578947368421053
+      },
+      {
+        "label": "contains @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/DOMTokenList.js",
+        "samples": 3,
+        "pct": 3.1578947368421053
+      },
+      {
+        "label": "rich @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/game/src/core/icons-bitmap.js",
+        "samples": 3,
+        "pct": 3.1578947368421053
+      },
+      {
+        "label": "filter @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/node.js",
+        "samples": 3,
+        "pct": 3.1578947368421053
+      },
+      {
+        "label": "get textContent @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/nodes/Node-impl.js",
+        "samples": 2,
+        "pct": 2.1052631578947367
+      },
+      {
+        "label": "get innerHTML @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/Element.js",
+        "samples": 2,
+        "pct": 2.1052631578947367
+      },
+      {
+        "label": "exports.is @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/HTMLCollection.js",
+        "samples": 2,
+        "pct": 2.1052631578947367
+      },
+      {
+        "label": "contains @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/helpers/ordered-set.js",
+        "samples": 2,
+        "pct": 2.1052631578947367
+      },
+      {
+        "label": "wrapperForImpl @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/utils.js",
+        "samples": 2,
+        "pct": 2.1052631578947367
+      },
+      {
+        "label": "getOwnPropertyDescriptor @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/DOMStringMap.js",
+        "samples": 2,
+        "pct": 2.1052631578947367
+      },
+      {
+        "label": "get classList @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/Element.js",
+        "samples": 2,
+        "pct": 2.1052631578947367
+      },
+      {
+        "label": "exports.asciiLowercase @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/helpers/strings.js",
+        "samples": 2,
+        "pct": 2.1052631578947367
+      },
+      {
+        "label": "set textContent @ file:///D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/jsdom/lib/jsdom/living/generated/Node.js",
+        "samples": 2,
+        "pct": 2.1052631578947367
+      }
+    ],
+    "nearestProductFrame": [
+      {
+        "label": "updateDepartureView @ hub/departure.view-updates.js",
+        "samples": 34,
+        "pct": 35.78947368421053
+      },
+      {
+        "label": "currentView @ hub/departure.view-updates.js",
+        "samples": 27,
+        "pct": 28.42105263157895
+      },
+      {
+        "label": "reconcileCells @ hub/departure.view-updates.js",
+        "samples": 9,
+        "pct": 9.473684210526315
+      },
+      {
+        "label": "rich @ core/icons-bitmap.js",
+        "samples": 4,
+        "pct": 4.2105263157894735
+      },
+      {
+        "label": "renderDepartPrep @ hub/game.hub.depart.js",
+        "samples": 3,
+        "pct": 3.1578947368421053
+      },
+      {
+        "label": "departurePreview @ hub/game.hub.depart.js",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      },
+      {
+        "label": "(anonymous) @ hub/base-departure.commands.js",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      },
+      {
+        "label": "departureOptions @ hub/game.hub.depart.js",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      },
+      {
+        "label": "departureStackKey @ hub/base-departure.commands.js",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      },
+      {
+        "label": "current @ hub/game.hub.depart.js",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      },
+      {
+        "label": "scrubAttrs @ core/icons-bitmap.js",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      },
+      {
+        "label": "hasTokens @ core/icons-bitmap.js",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      },
+      {
+        "label": "hydrate @ core/icons-bitmap.js",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      },
+      {
+        "label": "renderDepartureCard @ hub/game.hub.depart.js",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      },
+      {
+        "label": "(anonymous) @ core/icon-hydration.js",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      },
+      {
+        "label": "addPick @ hub/game.hub.depart.js",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      },
+      {
+        "label": "safe @ core/icons-bitmap.js",
+        "samples": 1,
+        "pct": 1.0526315789473684
+      }
+    ]
+  }
+]

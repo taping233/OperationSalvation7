@@ -1,0 +1,81 @@
+import {afterAll,beforeAll,expect,it,vi} from 'vitest';
+import fs from 'node:fs';
+import path from 'node:path';
+const h=vi.hoisted(()=>({renders:0,loads:0,unloads:0,live:new Map(),apps:0,rects:0,owners:[],seen:new WeakSet(),tag:'warm',cancelWait:false,hold:false,idleUrl:'',gate:null,ticker:null}));
+vi.mock('../../../game/src/battle/view/battle.frame-assets.js',async original=>{
+ const actual=await original(),baseline=await import('./frame-assets.baseline.js');return{createFrameAssets(){const old=baseline.createFrameAssets(),fixed=actual.createFrameAssets(),owners=new WeakMap();return{release(owner){return owners.get(owner)?.release(owner)||Promise.resolve([]);},load(url,owner,Assets){if(!h.seen.has(owner)){h.seen.add(owner);h.owners.push({tag:h.tag,ref:new WeakRef(owner)});}let api=owners.get(owner);if(!api){api=h.cancelWait?fixed:old;owners.set(owner,api);}return api.load(url,owner,Assets);}};}};
+});
+vi.mock('pixi.js',()=>({utils:{isWebGLSupported:()=>true},RENDERER_TYPE:{WEBGL:1,CANVAS:2},Texture:{EMPTY:{}},
+ Application:class{constructor(options){h.apps++;this.view=document.createElement('canvas');this.stage={addChild(){}};this.ticker={maxFPS:0,remove(){},add(fn){h.ticker=fn;},start(){},stop(){}};const view=this.view;this.renderer={type:1,resolution:options.resolution,get width(){return view.width;},get height(){return view.height;},resize(width,height){view.width=Math.round(width*this.resolution);view.height=Math.round(height*this.resolution);},render(){h.renders++;}};}start(){}stop(){}},
+ Sprite:class{constructor(){this.anchor={set(){}};this.position={set(){}};this.scale={set(){}};}},
+ Assets:{async load(url){h.loads++;if(h.hold&&!url.includes(h.idleUrl))await h.gate.promise;const tex={width:512,height:760,baseTexture:{width:512,height:760,realWidth:512,realHeight:760}};h.live.set(url,tex);return tex;},async unload(url){h.unloads++;h.live.delete(url);}}
+}));
+import SDT from '../../../game/src/core/sdt-facade.js';
+import {attach,hide,cacheStats} from '../../../game/src/battle/view/battle.frames.js';
+import {THREE_ROLE_FRAME_SEQUENCES} from '../../../game/src/battle/view/battle.frame-catalog-three-role.js';
+const output=path.join(process.cwd(),'docs/evidence/2026-10-18-WF-deep-runtime-1018/resources');
+const flush=async(count=300)=>{for(let i=0;i<count;i++)await Promise.resolve();};
+const turn=()=>new Promise(resolve=>setImmediate(resolve));
+const collect=async()=>{await turn();global.gc();await turn();global.gc();};
+let token=0;
+function mount(){
+ if(!document.getElementById('overlay'))document.body.innerHTML='<div id="overlay"><div id="ovBody"></div></div>';
+ const overlay=document.getElementById('overlay');overlay.hidden=false;Object.defineProperties(overlay,{clientWidth:{configurable:true,value:1280},clientHeight:{configurable:true,value:720}});
+ const body=document.getElementById('ovBody');body.innerHTML='<div class="battle-stage sts"><div id="btSelf"><div class="sts-figure"><img data-asset-key="battle-xingyue" src="/assets/portraits/battle/xingyue.webp"></div></div></div>';
+ body.querySelector('.battle-stage')._battleToken=++token;
+ body.querySelector('.sts-figure').getBoundingClientRect=()=>{h.rects++;return{left:100,top:100,width:200,height:300,right:300,bottom:400};};return body;
+}
+function stableAttachModel(initial){
+ let body=initial,fig=initial.querySelector('.sts-figure'),img=fig.querySelector('img'),battleToken=fig.closest('.battle-stage')._battleToken,source=img.getAttribute('src'),r=fig.getBoundingClientRect();
+ return async next=>{const nextFig=next.querySelector('.sts-figure'),nextImg=nextFig?.querySelector('img'),rect=nextFig?.getBoundingClientRect();if(next===body&&nextFig===fig&&nextImg===img&&fig.isConnected&&!document.getElementById('overlay').hidden&&battleToken===fig.closest('.battle-stage')._battleToken&&source===img.getAttribute('src')&&r.left===rect.left&&r.top===rect.top&&r.width===rect.width&&r.height===rect.height)return true;const result=await attach(next);body=next;fig=nextFig;img=nextImg;battleToken=fig.closest('.battle-stage')._battleToken;source=img.getAttribute('src');r=rect;return result;};
+}
+beforeAll(()=>{expect(typeof global.gc).toBe('function');vi.useFakeTimers({toFake:['setInterval','clearInterval','setTimeout','clearTimeout']});Object.defineProperty(document,'hidden',{configurable:true,value:false});SDT.Motion={reduceMotion:()=>false};vi.stubGlobal('fetch',async()=>{throw Error('Controlled frame alpha probe unavailable');});h.idleUrl='/xingyue/'+THREE_ROLE_FRAME_SEQUENCES.xingyue.idle[0]+'.webp';});
+afterAll(async()=>{h.gate?.resolve();await flush(1500);await hide();vi.useRealTimers();vi.unstubAllGlobals();});
+
+it('measures unchanged-figure reattach CPU and explicit renderer submissions',async()=>{
+ const body=mount();expect(await attach(body)).toBe(true);await flush(1500);
+ const optimized=stableAttachModel(body);
+ for(let i=0;i<100;i++)await attach(body);for(let i=0;i<100;i++)await optimized(body);
+ const rows=[];
+ for(let repeat=0;repeat<5;repeat++)for(const variant of repeat%2?['candidate','baseline']:['baseline','candidate']){
+  const rendered=h.renders,rects=h.rects,load=h.loads,start=process.cpuUsage(),wall=performance.now();
+  for(let i=0;i<1000;i++)await(variant==='baseline'?attach(body):optimized(body));
+  const time=process.cpuUsage(start);rows.push({variant,cycles:1000,cpuMs:(time.user+time.system)/1000,wallMs:performance.now()-wall,rendererSubmissions:h.renders-rendered,rectReads:h.rects-rects,textureLoads:h.loads-load});
+ }
+ const alive=cacheStats();await hide();await flush();
+ expect(rows.filter(row=>row.variant==='baseline').every(row=>row.rendererSubmissions===1000)).toBe(true);expect(rows.filter(row=>row.variant==='candidate').every(row=>row.rendererSubmissions===0)).toBe(true);
+ fs.writeFileSync(path.join(output,'frame-reattach.json'),JSON.stringify({method:'Actual battle.frames attach with Pixi renderer/texture boundary controlled. Candidate is an external stable-identity+geometry fast-path model, not yet production code. No real GPU/FPS claim.',warmup:200,rows,alive,afterHide:{cache:cacheStats(),textures:h.live.size,timers:vi.getTimerCount()},appsCreated:h.apps},null,2)+'\n');
+});
+
+it('measures old frame-session liveness while a shared Pixi tail load never settles',async()=>{
+ h.hold=true;let resolve;h.gate={promise:new Promise(done=>{resolve=done;}),resolve:()=>resolve()};
+ h.owners=[];h.seen=new WeakSet();
+ // Warm the same code paths, then settle once so measurement starts without warm retained records.
+ for(const candidate of [false,true]){h.cancelWait=candidate;h.tag='warm';expect(await attach(mount())).toBe(true);await flush();await hide();}
+ h.gate.resolve();await flush(1500);await collect();
+ let finish;h.gate={promise:new Promise(done=>{finish=done;}),resolve:()=>finish()};h.owners=[];h.seen=new WeakSet();
+ const typical=[];
+ for(const variant of ['baseline','candidate']){
+  h.cancelWait=variant==='candidate';h.tag='typical-'+variant;
+  for(let i=1;i<=10;i++){
+   expect(await attach(mount())).toBe(true);await flush(40);await hide();
+   if([1,5,10].includes(i)){await collect();typical.push({variant,cycles:i,retainedSessionOwners:h.owners.filter(owner=>owner.tag===h.tag&&owner.ref.deref()).length,liveTextures:h.live.size,timers:vi.getTimerCount()});}
+  }
+ }
+ h.gate.resolve();await flush(2500);await collect();
+ const typicalSettledOwners=h.owners.filter(owner=>owner.ref.deref()).length;
+ let stress;h.gate={promise:new Promise(done=>{stress=done;}),resolve:()=>stress()};h.owners=[];h.seen=new WeakSet();
+ const rows=[];
+ for(let repeat=0;repeat<4;repeat++)for(const variant of repeat%2?['candidate','baseline']:['baseline','candidate']){
+  h.cancelWait=variant==='candidate';h.tag=variant+'-'+repeat;await collect();const before=process.memoryUsage().heapUsed,start=process.cpuUsage();
+  for(let i=0;i<100;i++){expect(await attach(mount())).toBe(true);await flush(40);await hide();}
+  await collect();const memory=process.memoryUsage(),time=process.cpuUsage(start),group=h.owners.filter(owner=>owner.tag===h.tag);
+  rows.push({variant,repeat,cycles:100,cpuMs:(time.user+time.system)/1000,heapDeltaBytes:memory.heapUsed-before,retainedSessionOwners:group.filter(owner=>owner.ref.deref()).length,allRetainedSessionOwners:h.owners.filter(owner=>owner.ref.deref()).length,liveTextures:h.live.size,timers:vi.getTimerCount(),cache:cacheStats()});
+ }
+ h.gate.resolve();await flush(2500);await collect();
+ const settled={retainedSessionOwners:h.owners.filter(owner=>owner.ref.deref()).length,liveTextures:h.live.size,timers:vi.getTimerCount(),heapUsed:process.memoryUsage().heapUsed};
+ h.hold=false;h.cancelWait=false;
+ expect(rows.filter(row=>row.variant==='baseline').every(row=>row.retainedSessionOwners===100)).toBe(true);expect(rows.filter(row=>row.variant==='candidate').every(row=>row.retainedSessionOwners===0)).toBe(true);
+ expect(typical.filter(row=>row.variant==='baseline').map(row=>row.retainedSessionOwners)).toEqual([1,5,10]);expect(typical.filter(row=>row.variant==='candidate').map(row=>row.retainedSessionOwners)).toEqual([0,0,0]);
+ fs.writeFileSync(path.join(output,'frame-pending-owners.json'),JSON.stringify({method:'Actual battle.frames using preserved original versus modified actual createFrameAssets. WeakRef observes session owner records without retaining them. Pixi first idle completes, three shared tail URLs remain pending; 10-cycle typical trace then alternating 100 attach/hide cycles per row, explicit GC between rows. Candidate uses production shared-waiter cancellation; texture backend is controlled, not GPU. Heap includes jsdom/fixture and is not RSS.',gcExposed:typeof global.gc==='function',typical,typicalSettledOwners,rows,afterTailSettled:settled},null,2)+'\n');
+});

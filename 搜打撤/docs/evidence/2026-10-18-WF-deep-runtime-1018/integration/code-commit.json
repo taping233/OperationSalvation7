@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-18T10:50:34.457Z",
+  "commit": "828563a306126e2ac69ef0304d630abaf86f8f3a",
+  "parent": "a3df7fabb1b6075d5197eae30be3f17c01031ecb",
+  "paths": [
+    "搜打撤/game/src/core/renderer.js",
+    "搜打撤/game/src/battle/view/battle.layers.js",
+    "搜打撤/game/src/battle/view/battle.frame-assets.js",
+    "搜打撤/game/src/audio/sound.js",
+    "搜打撤/game/src/hub/game.hub.depart.js",
+    "搜打撤/game/src/hub/departure.view-updates.js",
+    "搜打撤/scripts/runtime-asset-redundancy-review.mjs",
+    "搜打撤/tests/renderer-road-invalidation.test.js",
+    "搜打撤/tests/battle-hand-content-diff.test.js",
+    "搜打撤/tests/frame-assets-cancellation-perf.test.js",
+    "搜打撤/tests/sound-muted-startup-perf.test.js",
+    "搜打撤/tests/departure-render-performance.test.js"
+  ],
+  "receipt": "docs/evidence/2026-10-18-staged-check/2026-10-18T10-42-54.103Z-fcad6fa7-staged.json",
+  "receiptSha256": "5a7dd1dc73425cbde1f8ee60b5bb7581d58f4863665281652d41b5ce2b9cf400",
+  "indexSha256": "e502f82bd481594c597de70c1a0cc0404f5d6df691820fbd04fd30b8491ac4e2",
+  "buildInputsSha256": "2947bf20dcc229584eb70239f8584ecc4103f79a5319bd19180efb9da6738995",
+  "codeInputsSha256": "939f41653ca9dc9ca3bd59db1b667367b30c05f9b478cc63a17f8146e06d7500",
+  "hooks": "Original hook with exact frozen-index receipt; no bypass or push."
+}

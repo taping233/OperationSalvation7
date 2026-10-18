@@ -1,0 +1,25 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { parse } from 'acorn';
+import { createHash } from 'node:crypto';
+const here=path.dirname(fileURLToPath(import.meta.url)),root=path.resolve(here,'../../..');
+const evidence=path.join(root,'docs/evidence/2026-10-18-WF-deep-runtime-1018/resources');
+fs.mkdirSync(path.join(evidence,'baseline'),{recursive:true});
+const records=[];
+for(const [relative,name]of [['game/src/audio/sound.js','sound'],['game/src/battle/view/battle.frame-assets.js','frame-assets']]){
+ const sourceFile=path.join(root,relative),backup=path.join(evidence,'baseline',name+'.js.txt');
+ if(!fs.existsSync(backup))fs.writeFileSync(backup,fs.readFileSync(sourceFile),{flag:'wx'});
+ const bytes=fs.readFileSync(backup);
+ let source=bytes.toString('utf8').replaceAll('\r\n','\n');
+ const ast=parse(source,{ecmaVersion:'latest',sourceType:'module'});
+ for(const node of ast.body.filter(node=>node.type==='ImportDeclaration').reverse()){
+  const value=node.source.value;if(!value.startsWith('.'))continue;
+  const target=path.resolve(path.dirname(sourceFile),value).replaceAll('\\','/');
+  source=source.slice(0,node.source.start)+JSON.stringify(target)+source.slice(node.source.end);
+ }
+ fs.writeFileSync(path.join(here,name+'.baseline.js'),source);
+ records.push({path:relative,baseline:path.relative(root,backup).replaceAll('\\','/'),bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});
+}
+fs.writeFileSync(path.join(evidence,'baseline-inputs.json'),JSON.stringify(records,null,2)+'\n');
+console.log(JSON.stringify(records));

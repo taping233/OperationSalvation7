@@ -1,0 +1,176 @@
+import { it, expect, vi } from 'vitest';
+import fs from 'node:fs';
+import path from 'node:path';
+import inspector from 'node:inspector';
+import { performance } from 'node:perf_hooks';
+const H = vi.hoisted(() => ({ choice:null, uid:0 }));
+vi.mock('../../../game/src/run/game.session.js', async () => {
+  const kernel = await import('../../../game/src/run/game.session.kernel.js');
+  const bag = await import('../../../game/src/run/game.session.bag.js');
+  const modes = await import('../../../game/src/run/game.session.modes.js');
+  return { ...kernel, ...bag, ...modes, saveGame:() => true, newUid:() => `probe-${++H.uid}`,
+    requestClassChoice:options => { H.choice=options; return Promise.resolve(true); }, newRun:() => true };
+});
+vi.mock('../../../game/src/hub/game.cardslib.js', () => ({ _set_cardPageOpen:() => {}, Sfx:{ tick(){} } }));
+vi.mock('../../../game/src/hub/game.bag.settle.js', () => ({ bindBagMixins:() => {}, resumeBattleRewards:() => {} }));
+vi.mock('../../../game/src/ui/departure-transition.js', () => ({ enterDepartureCut:() => {}, startDepartureHandoff:() => Promise.resolve(true) }));
+
+const root=process.cwd(), out=path.join(root,'docs/evidence/2026-10-18-WF-deep-runtime-1018/inventory');
+const temp=path.join(root,'.tmp/deep-perf-1018/inventory');
+let current=null, depth=0;
+const frames=new Map();let nextFrame=0;
+async function flushFrames() {
+  for(let i=0;i<12;i++) {
+    await Promise.resolve();await Promise.resolve();
+    if(!frames.size) return;
+    const callbacks=[...frames.values()];frames.clear();
+    for(const callback of callbacks)callback(performance.now());
+  }
+  expect(frames.size,'queued frame work must settle').toBe(0);
+}
+function instrument(obj,name,label=name) {
+  const original=obj[name]; if(typeof original!=='function') return;
+  obj[name]=function(...args) {
+    if(!current) return original.apply(this,args);
+    const rec=current.breakdown[label] ||= {calls:0,ms:0,selfMs:0}; rec.calls++;
+    const start=performance.now(), parent=current.child;
+    current.child=0; depth++;
+    try { return original.apply(this,args); }
+    finally { depth--; const elapsed=performance.now()-start, child=current.child; rec.ms+=elapsed;rec.selfMs+=elapsed-child;current.child=parent+elapsed; }
+  };
+  return ()=>{obj[name]=original;};
+}
+function quantile(xs,q) {const x=[...xs].sort((a,b)=>a-b);return x[Math.min(x.length-1,Math.ceil(x.length*q)-1)];}
+function summarize(samples) {
+  const labels=new Set(samples.flatMap(s=>Object.keys(s.breakdown))), breakdown={};
+  for(const key of labels) breakdown[key]={calls:quantile(samples.map(s=>s.breakdown[key]?.calls||0),.5),ms:quantile(samples.map(s=>s.breakdown[key]?.ms||0),.5),selfMs:quantile(samples.map(s=>s.breakdown[key]?.selfMs||0),.5)};
+  return {n:samples.length,medianMs:quantile(samples.map(s=>s.ms),.5),p95Ms:quantile(samples.map(s=>s.ms),.95),meanCpuMs:samples.reduce((sum,s)=>sum+s.cpuMs,0)/samples.length,medianCpuMs:quantile(samples.map(s=>s.cpuMs),.5),p95CpuMs:quantile(samples.map(s=>s.cpuMs),.95),breakdown};
+}
+async function measured(fn) {
+  const rec={breakdown:{},child:0}, cpu=process.cpuUsage(), start=performance.now();current=rec;
+  try {await fn();await flushFrames();}
+  finally {current=null;rec.ms=performance.now()-start;const used=process.cpuUsage(cpu);rec.cpuMs=(used.user+used.system)/1000;delete rec.child;}
+  return rec;
+}
+function post(session,method,params={}) {return new Promise((resolve,reject)=>session.post(method,params,(e,r)=>e?reject(e):resolve(r)));}
+
+it('profile actual inventory modules without browser layout/GPU',async()=>{
+  fs.mkdirSync(out,{recursive:true});fs.mkdirSync(temp,{recursive:true});
+  vi.stubGlobal('matchMedia',()=>({matches:true,addEventListener(){},removeEventListener(){}}));
+  window.matchMedia=globalThis.matchMedia;
+  vi.stubGlobal('requestAnimationFrame',callback=>{frames.set(++nextFrame,callback);return nextFrame;});vi.stubGlobal('cancelAnimationFrame',id=>frames.delete(id));
+  window.requestAnimationFrame=globalThis.requestAnimationFrame;window.cancelAnimationFrame=globalThis.cancelAnimationFrame;
+  document.body.innerHTML='<div id="viewport"></div><div id="overlay" hidden tabindex="-1"><div class="card"><h2 id="ovTitle"></h2><button id="ovCloseX"></button><div id="ovBody"></div></div></div><div id="tooltip" hidden></div><div id="log"></div>';
+  window.SDT={Sound:{sfx(){},scene(){},tick(){},ding(){}},Motion:{reduceMotion:()=>true}};
+  const {UI}=await import('../../../game/src/ui/ui.js');
+  UI.el=Object.fromEntries(['overlay','ovTitle','ovBody','ovCloseX','viewport','tooltip','log'].map(id=>[id,document.getElementById(id)]));
+  UI.log=()=>{};UI.refresh=()=>{};
+  await import('../../../game/src/core/icons-bitmap.js');
+  await import('../../../game/src/core/art.js');
+  await import('../../../game/src/cards/cards.js');
+  await import('../../../game/src/hub/base.js');
+  const SDT=window.SDT,Cards=SDT.Cards,Base=SDT.Base;
+  localStorage.clear();Cards.ensureStarters();Cards.ensureSha();Cards.ensureTabletop();Cards.ensureDmgTypes();Cards.ensureEffectFields();
+  const catalog=Cards.all();expect(catalog.length).toBeGreaterThan(200);
+  Base.use(1);Base.data.bagUp=20;Base.data.stashUp=30;
+  const session=await import('../../../game/src/run/game.session.js'), game=session.game;
+  const bag=await import('../../../game/src/hub/game.bag.js');
+  const warehouse=await import('../../../game/src/hub/hub.warehouse.js');
+  const baselineDepart=await import('./baseline/game.hub.depart.js');
+  const candidateDepart=await import('../../../game/src/hub/game.hub.depart.js');
+  let depart=baselineDepart;
+  const {departureStackKey}=await import('../../../game/src/hub/base-departure.commands.js');
+  await flushFrames();
+  const originals=[];
+  for(const key of Object.keys(Cards)) if(typeof Cards[key]==='function') originals.push(instrument(Cards,key,`Cards.${key}`));
+  originals.push(instrument(SDT.Art,'cardIcon','Art.cardIcon'),instrument(SDT.Icons,'rich','Icons.rich'),instrument(UI,'showOverlay','UI.showOverlay'));
+  originals.push(instrument(EventTarget.prototype,'addEventListener','DOM.addEventListener'),instrument(Element.prototype,'querySelectorAll','DOM.querySelectorAll'),instrument(Element.prototype,'querySelector','DOM.querySelector'));
+  const descriptor=Object.getOwnPropertyDescriptor(Element.prototype,'innerHTML');
+  Object.defineProperty(Element.prototype,'innerHTML',{...descriptor,set(value){
+    if(!current)return descriptor.set.call(this,value);
+    const rec=current.breakdown['DOM.innerHTML']||={calls:0,ms:0,selfMs:0,chars:0};rec.calls++;rec.chars+=String(value).length;
+    const start=performance.now(),parent=current.child;current.child=0;
+    try{return descriptor.set.call(this,value);}finally{const elapsed=performance.now()-start,child=current.child;rec.ms+=elapsed;rec.selfMs+=elapsed-child;current.child=parent+elapsed;}
+  }});
+  const pool=catalog.filter(c=>c.rarity!=='职业'&&c.type!=='事件'&&c.id!==Cards.SHA.id&&c.type!=='能力卡');
+  const pearl=catalog.find(c=>c.id==='tt2-pearlbox');
+  function runFixture(n) {
+    const stored=n>30?20:2,safe=n>30?6:3,normal=n-stored-safe;
+    const owned=[];
+    for(let i=0;i<normal;i++)owned.push({uid:`bag-${i}`,card: n>30&&i<4?pearl:pool[i%pool.length]});
+    for(let i=0;i<safe;i++)owned.push({uid:`safe-${i}`,card:pool[i%2],safe:true});
+    for(let i=0;i<stored;i++)owned.push({uid:`stored-${i}`,card:pool[i%3],stored:true});
+    return {owned,inventory:[{name:'木材',count:6,value:1},{name:'口粮',count:3,value:1}],pocket:[{card:pool[0],count:3},{card:pool[1],count:2}]};
+  }
+  function setRun(f) {
+    Object.assign(game,{seed:'profile',discoveredPairs:new Set(),runActive:true,battleActive:false,state:'idle',myClass:'法师',coins:20,fragments:0,hp:20,maxHp:30,
+      ownedCards:f.owned.map(x=>({...x})),inventory:f.inventory.map(x=>({...x})),usedPocket:f.pocket.map(x=>({...x})),cardOrder:[]});
+    UI.el.overlay.hidden=true;bag.showBackpackSection('main');UI._acts.bagFilter({f:'all'});
+  }
+  function stashFixture(n){return pool.slice(0,n).map((card,i)=>({card,count:3,variantKey:i%3?'':undefined}));}
+  function mountWarehouse(stash) {
+    Base.data.stash=stash.map(s=>({...s}));Base.data.pocket=[{card:pool[0],count:2}];warehouse.clearWarehouseFilters();
+    UI.showOverlay('',warehouse.warehouseHTML(),'page');warehouse.bindWarehouse({ui:UI,base:Base,sound:SDT.Sound,refresh:()=>mountWarehouse(Base.data.stash)});
+  }
+  async function setDepart(stash) {
+    Base.data.stash=stash.map(s=>({...s}));Base.data.pocket=[];Base.data.selMode='standard';
+    depart.setDeployPick({});UI.el.overlay.hidden=true;
+    const opened=depart.openDepartPrep();
+    H.choice.onSelect('法师',()=>true);await opened;
+  }
+  const {bagSlots}=await import('../../../game/src/hub/game.bag.bridge.js');
+  const scenarios=[];
+  for(const n of [25,90]) {
+    const f=runFixture(n);
+    scenarios.push({name:`bag.refresh.${n}`,setup:()=>setRun(f),op:()=>bag.showBackpack(true),check:()=>expect(document.querySelector('.bag-view')).not.toBeNull()});
+    scenarios.push({name:`bag.filter.${n}`,setup:()=>setRun(f),op:()=>UI._acts.bagFilter({f:'道具'}),check:()=>expect([...document.querySelectorAll('.bag-grid [data-stack]')].every(x=>!x.dataset.supply)).toBe(true)});
+    scenarios.push({name:`bag.moveSafe.${n}`,setup:()=>setRun(f),op:()=>{const name=game.ownedCards.find(x=>x.uid==='safe-0').card.name;bagSlots.moveStackSafe(name,false);},check:()=>expect(game.ownedCards.find(x=>x.uid==='safe-0').safe).toBe(false)});
+  }
+  for(const n of [25,100]) {
+    const stash=stashFixture(n);
+    scenarios.push({name:`warehouse.open.${n}`,setup:()=>{Base.data.stash=stash.map(s=>({...s}));warehouse.clearWarehouseFilters();UI.el.ovBody.replaceChildren();},op:()=>mountWarehouse(stash),check:()=>expect(document.querySelectorAll('[data-browser-key]')).toHaveLength(stash.length)});
+    scenarios.push({name:`warehouse.filter.${n}`,setup:()=>mountWarehouse(stash),op:()=>{const input=document.querySelector('[data-warehouse-filter="query"]');input.value=stash[0].card.name;input.dispatchEvent(new Event('input',{bubbles:true}));},check:()=>expect(document.querySelector('[data-browser-key]:not([hidden])').dataset.name).toBe(stash[0].card.name)});
+    scenarios.push({name:`departure.open.${n}`,setup:()=>{},op:()=>setDepart(stash),check:()=>expect(document.querySelectorAll('#depPool .dep-card')).toHaveLength(stash.length)});
+    scenarios.push({name:`departure.add.${n}`,setup:()=>setDepart(stash),op:()=>UI._acts.pickAdd({stackKey:departureStackKey(stash[0])}),check:()=>expect(depart.deployPick[departureStackKey(stash[0])]).toBe(1)});
+    scenarios.push({name:`departure.filter.${n}`,setup:()=>setDepart(stash),op:()=>{const input=document.getElementById('depFilterType');input.value=stash[0].card.type;input.dispatchEvent(new Event('change',{bubbles:true}));},check:()=>expect(document.querySelector('#depPool .dep-card:not([hidden])')).not.toBeNull()});
+  }
+
+  function dropFromBag(key) {
+    const event=new Event('drop',{bubbles:true,cancelable:true});
+    Object.defineProperty(event,'dataTransfer',{value:{getData:()=>key}});
+    document.getElementById('depPool').dispatchEvent(event);
+  }
+  const normalize=()=>({html:UI.el.ovBody.innerHTML,picks:{...depart.deployPick},pool:[...document.querySelectorAll('#depPool .dep-card')].map(n=>({key:n.dataset.stackKey,name:n.dataset.name,hidden:n.hidden,pressed:n.getAttribute('aria-pressed'),own:n.getElementsByClassName('dep-own')[0]?.textContent,picked:n.getElementsByClassName('dep-picked-count')[0]?.textContent})),bag:[...document.getElementById('depBag').children].map(n=>({key:n.dataset.stackKey,name:n.dataset.name,count:n.getElementsByClassName('dep-n')[0]?.textContent,html:n.getElementsByClassName('hs-card')[0]?.outerHTML})),capacity:document.getElementById('depCapacity').textContent,summary:document.getElementById('depSummary').textContent,filters:[...document.querySelectorAll('#depMain select')].map(n=>[n.id,n.value]),button:document.getElementById('btnDeploy').disabled});
+  const abReport={scope:'Alternating baseline/candidate pairs, identical reset for each variant; setup + frame flush outside timings. Actual module handlers, templates, card faces, Icons, overlay and jsdom. Operation completes after controlled first-frame + hydration/observer queues settle. All action samples explicitly labelled first/steady. No browser layout/GPU, asset decode/network or audio.',samplesPerVariant:17,operations:[]};
+  const inputs=[];
+  for(const n of [25,100]){
+    const stash=stashFixture(n),a=departureStackKey(stash[0]),b=departureStackKey(stash[1]);
+    inputs.push({name:'open.'+n,setup:async()=>{},op:()=>setDepart(stash),steady:false});
+    inputs.push({name:'firstAdd.'+n,setup:()=>setDepart(stash),op:()=>UI._acts.pickAdd({stackKey:a}),steady:false});
+    inputs.push({name:'steadyAdd.'+n,setup:async()=>{await setDepart(stash);UI._acts.pickAdd({stackKey:a});UI._acts.pickAdd({stackKey:b});},op:()=>UI._acts.pickAdd({stackKey:a}),steady:true});
+    inputs.push({name:'steadyRemove.'+n,setup:async()=>{await setDepart(stash);UI._acts.pickAdd({stackKey:a});UI._acts.pickAdd({stackKey:a});UI._acts.pickAdd({stackKey:b});},op:()=>dropFromBag(a),steady:true});
+    inputs.push({name:'lastExtraRemove.'+n,setup:async()=>{await setDepart(stash);UI._acts.pickAdd({stackKey:a});},op:()=>dropFromBag(a),steady:true});
+    inputs.push({name:'reorderPicks.'+n,setup:async()=>{await setDepart(stash);UI._acts.pickAdd({stackKey:a});UI._acts.pickAdd({stackKey:b});},op:()=>{const value=depart.deployPick[a];delete depart.deployPick[a];depart.deployPick[a]=value;UI._acts.pickAdd({stackKey:b});},steady:true});
+    inputs.push({name:'filter.'+n,setup:async()=>{await setDepart(stash);UI._acts.pickAdd({stackKey:a});},op:()=>{const select=document.getElementById('depFilterType');select.value=stash[0].card.type;select.dispatchEvent(new Event('change',{bubbles:true}));},steady:true});
+  }
+  for(const input of inputs.filter(input=>!process.env.INVENTORY_CASE||input.name===process.env.INVENTORY_CASE)){
+    for(const variant of [baselineDepart,candidateDepart]){depart=variant;for(let i=0;i<3;i++){await input.setup();await flushFrames();await input.op();await flushFrames();}}
+    const samples={baseline:[],candidate:[]};let expected;
+    for(let round=0;round<17;round++)for(const variant of round%2?[['candidate',candidateDepart],['baseline',baselineDepart]]:[['baseline',baselineDepart],['candidate',candidateDepart]]){
+      depart=variant[1];await input.setup();await flushFrames();samples[variant[0]].push(await measured(input.op));const actual=normalize();
+      if(!expected)expected=actual;else expect(actual).toEqual(expected);
+    }
+    const row={name:input.name,steady:input.steady,baseline:summarize(samples.baseline),candidate:summarize(samples.candidate),outputEqual:true};abReport.operations.push(row);
+    console.log(JSON.stringify({name:row.name,steady:row.steady,b:[row.baseline.medianMs,row.baseline.p95Ms],c:[row.candidate.medianMs,row.candidate.p95Ms],selectors:[row.baseline.breakdown['DOM.querySelector']?.calls,row.candidate.breakdown['DOM.querySelector']?.calls],parses:[row.baseline.breakdown['DOM.innerHTML']?.calls,row.candidate.breakdown['DOM.innerHTML']?.calls]}));
+    fs.writeFileSync(path.join(out,'departure-ab.'+input.name+'.json'),JSON.stringify(abReport,null,2));
+  }
+  const cpu=new inspector.Session();cpu.connect();await post(cpu,'Profiler.enable');await post(cpu,'Profiler.setSamplingInterval',{interval:500});
+  for(const n of [25,100].filter(n=>process.env.INVENTORY_CASE==='steadyAdd.'+n))for(const [label,variant] of [['baseline',baselineDepart],['candidate',candidateDepart]]){
+    depart=variant;const stash=stashFixture(n),key=departureStackKey(stash[0]);await setDepart(stash);UI._acts.pickAdd({stackKey:key});await flushFrames();
+    await post(cpu,'Profiler.start');
+    for(let i=0;i<20;i++){UI._acts.pickAdd({stackKey:key});await flushFrames();dropFromBag(key);await flushFrames();}
+    const {profile}=await post(cpu,'Profiler.stop');fs.writeFileSync(path.join(temp,'ab.'+label+'.'+n+'.cpuprofile'),JSON.stringify(profile));
+  }
+  await post(cpu,'Profiler.disable');cpu.disconnect();
+  for(const restore of originals.reverse())restore?.();Object.defineProperty(Element.prototype,'innerHTML',descriptor);vi.unstubAllGlobals();
+});

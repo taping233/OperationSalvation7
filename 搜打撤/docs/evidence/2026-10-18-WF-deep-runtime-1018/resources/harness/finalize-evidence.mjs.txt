@@ -1,0 +1,29 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+
+const here = path.dirname(fileURLToPath(import.meta.url)), root = path.resolve(here, '../../..');
+const evidence = path.join(root, 'docs/evidence/2026-10-18-WF-deep-runtime-1018/resources');
+const sha = data => createHash('sha256').update(data).digest('hex');
+const files = ['game/src/audio/sound.js', 'game/src/battle/view/battle.frame-assets.js',
+  'tests/sound-muted-startup-perf.test.js', 'tests/frame-assets-cancellation-perf.test.js'];
+const provenance = { headAtFinalization: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
+  node: process.version, capturedAt: new Date().toISOString(), files: files.map(relative => {
+    const data = fs.readFileSync(path.join(root, relative));
+    return { path: relative, bytes: data.length, sha256: sha(data), lfSha256: sha(data.toString('utf8').replaceAll('\r\n', '\n')) };
+  }) };
+fs.mkdirSync(path.join(evidence, 'harness'), { recursive: true });
+for (const file of ['prepare-probes.mjs', 'audio.bench.test.js', 'frames.bench.test.js', 'vitest.config.mjs', 'finalize-evidence.mjs']) {
+  fs.copyFileSync(path.join(here, file), path.join(evidence, 'harness', file + '.txt'));
+}
+fs.writeFileSync(path.join(evidence, 'source-inputs.json'), JSON.stringify(provenance, null, 2) + '\n');
+const commands = [
+  { command: 'node node_modules/vitest/vitest.mjs run tests/frame-assets-cancellation-perf.test.js tests/battle-frame-assets.test.js tests/battle-frames-pending-release.test.js tests/battle-frames-ownership.test.js', exitCode: 0, files: 4, passed: 33, failed: 0 },
+  { command: 'node node_modules/vitest/vitest.mjs run tests/sound-muted-startup-perf.test.js tests/sound-lifecycle.test.js tests/sound-music-lifecycle.test.js tests/sound-music-backend.test.js', exitCode: 0, files: 4, passed: 45, failed: 0 },
+  { command: 'node --expose-gc node_modules/vitest/vitest.mjs run --config .tmp/deep-perf-1018/resources/vitest.config.mjs .tmp/deep-perf-1018/resources/audio.bench.test.js .tmp/deep-perf-1018/resources/frames.bench.test.js', exitCode: 0, files: 2, passed: 3, failed: 0 },
+  { command: 'node node_modules/eslint/bin/eslint.js ' + files.join(' '), exitCode: 0, errors: 0, warnings: 0 },
+];
+fs.writeFileSync(path.join(evidence, 'validation.json'), JSON.stringify({ basis: 'Observed successful scoped commands in this task; no full suite, build, or browser run.', commands }, null, 2) + '\n');
+console.log(JSON.stringify(provenance));

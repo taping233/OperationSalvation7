@@ -1,0 +1,32 @@
+{
+  "basis": "Observed successful scoped commands in this task; no full suite, build, or browser run.",
+  "commands": [
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/frame-assets-cancellation-perf.test.js tests/battle-frame-assets.test.js tests/battle-frames-pending-release.test.js tests/battle-frames-ownership.test.js",
+      "exitCode": 0,
+      "files": 4,
+      "passed": 33,
+      "failed": 0
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run tests/sound-muted-startup-perf.test.js tests/sound-lifecycle.test.js tests/sound-music-lifecycle.test.js tests/sound-music-backend.test.js",
+      "exitCode": 0,
+      "files": 4,
+      "passed": 45,
+      "failed": 0
+    },
+    {
+      "command": "node --expose-gc node_modules/vitest/vitest.mjs run --config .tmp/deep-perf-1018/resources/vitest.config.mjs .tmp/deep-perf-1018/resources/audio.bench.test.js .tmp/deep-perf-1018/resources/frames.bench.test.js",
+      "exitCode": 0,
+      "files": 2,
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js game/src/audio/sound.js game/src/battle/view/battle.frame-assets.js tests/sound-muted-startup-perf.test.js tests/frame-assets-cancellation-perf.test.js",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 0
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+import fs from 'node:fs';import path from 'node:path';
+const base=path.join(process.cwd(),'.tmp/deep-perf-1018/inventory');
+fs.mkdirSync(path.join(base,'baseline'),{recursive:true});
+for(const name of ['game.hub.depart.js','departure.view-updates.js'])fs.copyFileSync(path.join(process.cwd(),'docs/evidence/2026-10-18-WF-deep-runtime-1018/inventory/baseline',name+'.txt'),path.join(base,'baseline',name));
+let text=fs.readFileSync(path.join(base,'profile.test.js'),'utf8');
+text=text.slice(0,text.indexOf('  const cpu=new inspector.Session();'));
+text=text.replace("const depart=await import('../../../game/src/hub/game.hub.depart.js');","const baselineDepart=await import('./baseline/game.hub.depart.js');\n  const candidateDepart=await import('../../../game/src/hub/game.hub.depart.js');\n  let depart=baselineDepart;");
+text+=`
+  function dropFromBag(key) {
+    const event=new Event('drop',{bubbles:true,cancelable:true});
+    Object.defineProperty(event,'dataTransfer',{value:{getData:()=>key}});
+    document.getElementById('depPool').dispatchEvent(event);
+  }
+  const normalize=()=>({html:UI.el.ovBody.innerHTML,picks:{...depart.deployPick},pool:[...document.querySelectorAll('#depPool .dep-card')].map(n=>({key:n.dataset.stackKey,name:n.dataset.name,hidden:n.hidden,pressed:n.getAttribute('aria-pressed'),own:n.getElementsByClassName('dep-own')[0]?.textContent,picked:n.getElementsByClassName('dep-picked-count')[0]?.textContent})),bag:[...document.getElementById('depBag').children].map(n=>({key:n.dataset.stackKey,name:n.dataset.name,count:n.getElementsByClassName('dep-n')[0]?.textContent,html:n.getElementsByClassName('hs-card')[0]?.outerHTML})),capacity:document.getElementById('depCapacity').textContent,summary:document.getElementById('depSummary').textContent,filters:[...document.querySelectorAll('#depMain select')].map(n=>[n.id,n.value]),button:document.getElementById('btnDeploy').disabled});
+  const abReport={scope:'Alternating baseline/candidate pairs, identical reset for each variant; setup + frame flush outside timings. Actual module handlers, templates, card faces, Icons, overlay and jsdom. Operation completes after controlled first-frame + hydration/observer queues settle. All action samples explicitly labelled first/steady. No browser layout/GPU, asset decode/network or audio.',samplesPerVariant:17,operations:[]};
+  const inputs=[];
+  for(const n of [25,100]){
+    const stash=stashFixture(n),a=departureStackKey(stash[0]),b=departureStackKey(stash[1]);
+    inputs.push({name:'open.'+n,setup:async()=>{},op:()=>setDepart(stash),steady:false});
+    inputs.push({name:'firstAdd.'+n,setup:()=>setDepart(stash),op:()=>UI._acts.pickAdd({stackKey:a}),steady:false});
+    inputs.push({name:'steadyAdd.'+n,setup:async()=>{await setDepart(stash);UI._acts.pickAdd({stackKey:a});UI._acts.pickAdd({stackKey:b});},op:()=>UI._acts.pickAdd({stackKey:a}),steady:true});
+    inputs.push({name:'steadyRemove.'+n,setup:async()=>{await setDepart(stash);UI._acts.pickAdd({stackKey:a});UI._acts.pickAdd({stackKey:a});UI._acts.pickAdd({stackKey:b});},op:()=>dropFromBag(a),steady:true});
+    inputs.push({name:'lastExtraRemove.'+n,setup:async()=>{await setDepart(stash);UI._acts.pickAdd({stackKey:a});},op:()=>dropFromBag(a),steady:true});
+    inputs.push({name:'reorderPicks.'+n,setup:async()=>{await setDepart(stash);UI._acts.pickAdd({stackKey:a});UI._acts.pickAdd({stackKey:b});},op:()=>{const value=depart.deployPick[a];delete depart.deployPick[a];depart.deployPick[a]=value;UI._acts.pickAdd({stackKey:b});},steady:true});
+    inputs.push({name:'filter.'+n,setup:async()=>{await setDepart(stash);UI._acts.pickAdd({stackKey:a});},op:()=>{const select=document.getElementById('depFilterType');select.value=stash[0].card.type;select.dispatchEvent(new Event('change',{bubbles:true}));},steady:true});
+  }
+  for(const input of inputs.filter(input=>!process.env.INVENTORY_CASE||input.name===process.env.INVENTORY_CASE)){
+    for(const variant of [baselineDepart,candidateDepart]){depart=variant;for(let i=0;i<3;i++){await input.setup();await flushFrames();await input.op();await flushFrames();}}
+    const samples={baseline:[],candidate:[]};let expected;
+    for(let round=0;round<17;round++)for(const variant of round%2?[['candidate',candidateDepart],['baseline',baselineDepart]]:[['baseline',baselineDepart],['candidate',candidateDepart]]){
+      depart=variant[1];await input.setup();await flushFrames();samples[variant[0]].push(await measured(input.op));const actual=normalize();
+      if(!expected)expected=actual;else expect(actual).toEqual(expected);
+    }
+    const row={name:input.name,steady:input.steady,baseline:summarize(samples.baseline),candidate:summarize(samples.candidate),outputEqual:true};abReport.operations.push(row);
+    console.log(JSON.stringify({name:row.name,steady:row.steady,b:[row.baseline.medianMs,row.baseline.p95Ms],c:[row.candidate.medianMs,row.candidate.p95Ms],selectors:[row.baseline.breakdown['DOM.querySelector']?.calls,row.candidate.breakdown['DOM.querySelector']?.calls],parses:[row.baseline.breakdown['DOM.innerHTML']?.calls,row.candidate.breakdown['DOM.innerHTML']?.calls]}));
+    fs.writeFileSync(path.join(out,'departure-ab.'+input.name+'.json'),JSON.stringify(abReport,null,2));
+  }
+  const cpu=new inspector.Session();cpu.connect();await post(cpu,'Profiler.enable');await post(cpu,'Profiler.setSamplingInterval',{interval:500});
+  for(const n of [25,100].filter(n=>process.env.INVENTORY_CASE==='steadyAdd.'+n))for(const [label,variant] of [['baseline',baselineDepart],['candidate',candidateDepart]]){
+    depart=variant;const stash=stashFixture(n),key=departureStackKey(stash[0]);await setDepart(stash);UI._acts.pickAdd({stackKey:key});await flushFrames();
+    await post(cpu,'Profiler.start');
+    for(let i=0;i<20;i++){UI._acts.pickAdd({stackKey:key});await flushFrames();dropFromBag(key);await flushFrames();}
+    const {profile}=await post(cpu,'Profiler.stop');fs.writeFileSync(path.join(temp,'ab.'+label+'.'+n+'.cpuprofile'),JSON.stringify(profile));
+  }
+  await post(cpu,'Profiler.disable');cpu.disconnect();
+  for(const restore of originals.reverse())restore?.();Object.defineProperty(Element.prototype,'innerHTML',descriptor);vi.unstubAllGlobals();
+});
+`;
+fs.writeFileSync(path.join(base,'ab.test.js'),text);

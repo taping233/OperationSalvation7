@@ -1,0 +1,16 @@
+{
+  "commit": "a3df7fabb1b6075d5197eae30be3f17c01031ecb",
+  "project": "D:\\素材\\代号柒\\搜打撤\\.tmp\\deep-perf-1018\\exe-project",
+  "files": 4095,
+  "bytes": 358723599,
+  "excluded": [
+    "搜打撤/game/art-source/",
+    "搜打撤/docs/evidence/"
+  ],
+  "method": "Immutable Git blobs, every object SHA1 verified; live unrelated changes excluded.",
+  "dependencies": {
+    "vitePackage": "D:\\素材\\代号柒\\搜打撤\\node_modules\\vite\\package.json",
+    "version": "6.4.4",
+    "usage": "Existing ancestor dependencies with identical semantic npm lock; no installs, no source links."
+  }
+}

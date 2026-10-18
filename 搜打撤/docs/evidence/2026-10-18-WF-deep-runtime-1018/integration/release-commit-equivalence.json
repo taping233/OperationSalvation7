@@ -1,0 +1,66 @@
+{
+  "commit": "828563a306126e2ac69ef0304d630abaf86f8f3a",
+  "sourceBase": "a3df7fabb1b6075d5197eae30be3f17c01031ecb",
+  "productionFiles": 6,
+  "reviewFiles": 1,
+  "entries": [
+    {
+      "path": "game/src/core/renderer.js",
+      "releaseRawSha256": "2340256b7775262fa191d247518a85c0fdd2cd05e2d7cc75ddeb599d55c66f18",
+      "commitRawSha256": "2340256b7775262fa191d247518a85c0fdd2cd05e2d7cc75ddeb599d55c66f18",
+      "normalizedLfSha256": "2340256b7775262fa191d247518a85c0fdd2cd05e2d7cc75ddeb599d55c66f18",
+      "equalAfterGitLfNormalization": true
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "releaseRawSha256": "97b39646be273d56c5c7f18f857d591fc8a620c3ebe5d1d16d61cc8dec9d1d2f",
+      "commitRawSha256": "0f6a16665c20d6791e36a4506d32d7d107d3bec91d88560fcc9391ee7807a082",
+      "normalizedLfSha256": "0f6a16665c20d6791e36a4506d32d7d107d3bec91d88560fcc9391ee7807a082",
+      "equalAfterGitLfNormalization": true
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-assets.js",
+      "releaseRawSha256": "57771c894feae0623bbb3e0192fcb10dd59bce97062326ea6234949ca86ebaf0",
+      "commitRawSha256": "57771c894feae0623bbb3e0192fcb10dd59bce97062326ea6234949ca86ebaf0",
+      "normalizedLfSha256": "57771c894feae0623bbb3e0192fcb10dd59bce97062326ea6234949ca86ebaf0",
+      "equalAfterGitLfNormalization": true
+    },
+    {
+      "path": "game/src/audio/sound.js",
+      "releaseRawSha256": "46007097da42f3084068fb28e8b21f9ddfc23fef41631f1776c409ed359708db",
+      "commitRawSha256": "46007097da42f3084068fb28e8b21f9ddfc23fef41631f1776c409ed359708db",
+      "normalizedLfSha256": "46007097da42f3084068fb28e8b21f9ddfc23fef41631f1776c409ed359708db",
+      "equalAfterGitLfNormalization": true
+    },
+    {
+      "path": "game/src/hub/game.hub.depart.js",
+      "releaseRawSha256": "6467f1eaf0959a79d36e1a58fac5332a2852cbfe4f83d236004bd3dbf0d05554",
+      "commitRawSha256": "d2c6c091d976c904b51329f7e683e1831487278f1b6ded61d46a091c18e27f58",
+      "normalizedLfSha256": "d2c6c091d976c904b51329f7e683e1831487278f1b6ded61d46a091c18e27f58",
+      "equalAfterGitLfNormalization": true
+    },
+    {
+      "path": "game/src/hub/departure.view-updates.js",
+      "releaseRawSha256": "5dda514d93cda0024bdf192c58dec108f55c74e6e3a9076b4a81501f99dd0b64",
+      "commitRawSha256": "5dda514d93cda0024bdf192c58dec108f55c74e6e3a9076b4a81501f99dd0b64",
+      "normalizedLfSha256": "5dda514d93cda0024bdf192c58dec108f55c74e6e3a9076b4a81501f99dd0b64",
+      "equalAfterGitLfNormalization": true
+    },
+    {
+      "path": "scripts/runtime-asset-redundancy-review.mjs",
+      "releaseRawSha256": "801744b62a36286802954f8c55282327bb3f452bd7a3d287929282e97b502590",
+      "commitRawSha256": "801744b62a36286802954f8c55282327bb3f452bd7a3d287929282e97b502590",
+      "normalizedLfSha256": "801744b62a36286802954f8c55282327bb3f452bd7a3d287929282e97b502590",
+      "equalAfterGitLfNormalization": true
+    }
+  ],
+  "testOnlyDelta": [
+    {
+      "path": "tests/departure-render-performance.test.js",
+      "beforeSha256": "1d4df4f71b48c428aae3fafd2868ab92a6a817045dd52d9a127c9576974042c4",
+      "afterSha256": "edc47b0f57bf4a3d4f9a9dd4aedcb9e62c674bf79b7ce9509c88662621d096de",
+      "reason": "Three HTMLTemplateElement references qualified through window for ESLint globals; no production change."
+    }
+  ],
+  "testsNotShipped": true
+}

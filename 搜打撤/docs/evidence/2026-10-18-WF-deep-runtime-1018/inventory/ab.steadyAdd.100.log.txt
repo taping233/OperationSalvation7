@@ -1,0 +1,14 @@
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+stdout | .tmp/deep-perf-1018/inventory/ab.test.js > profile actual inventory modules without browser layout/GPU
+{"name":"steadyAdd.100","steady":true,"b":[24.673999999999978,31.91439999999966],"c":[2.8438999999998487,3.4830000000001746],"selectors":[267,null],"parses":[4,1]}
+
+ ✓ .tmp/deep-perf-1018/inventory/ab.test.js (1 test) 11284ms
+   ✓ profile actual inventory modules without browser layout/GPU  11283ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  18:37:43
+   Duration  12.90s (transform 422ms, setup 0ms, collect 83ms, tests 11.28s, environment 1.14s, prepare 104ms)
+

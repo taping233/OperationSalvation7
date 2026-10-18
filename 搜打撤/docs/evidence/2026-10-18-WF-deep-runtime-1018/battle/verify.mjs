@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { basename } from 'node:path';
+const root=process.cwd();
+const evidence=`${root}/docs/evidence/2026-10-18-WF-deep-runtime-1018/battle`;
+const bytes=path=>readFileSync(path);
+const json=path=>JSON.parse(bytes(path));
+const sha=path=>createHash('sha256').update(bytes(path)).digest('hex');
+const current=`${root}/game/src/battle/view/battle.layers.js`;
+assert(bytes(current).equals(bytes(`${evidence}/battle.layers.js.after.txt`)),'Production changed after captured A/B source');
+const target=json(`${evidence}/targeted-final.json`);
+assert.equal(target.success,true);assert.equal(target.numPassedTests,58);assert.equal(target.numFailedTests,0);assert.equal(target.numPendingTests,0);
+const comparisons=[25,28].map(hand=>{
+  const result=json(`${evidence}/hand-hint-ab-${hand}.json`);
+  assert.equal(result.load.hand,hand);assert.equal(result.load.reduceMotion,false);
+  assert.equal(result.sameSnapshotAndFullStageHTML,true);assert.equal(result.alternatingOrder,true);
+  const before=result.summary.find(row=>row.variant==='baseline'),after=result.summary.find(row=>row.variant==='candidate');
+  assert.equal(before.operations,20);assert.equal(after.operations,20);
+  assert.deepEqual(before.renderCounts,[3]);assert.deepEqual(after.renderCounts,[3]);
+  assert.deepEqual(before.cardInnerHTMLWritesPerPlay,[17]);assert.deepEqual(after.cardInnerHTMLWritesPerPlay,[0]);
+  assert.equal(after.retainedFaces,500);assert.equal(after.survivingFaces,500);
+  return {hand,file:`hand-hint-ab-${hand}.json`,operationsPerVariant:20,sameStateAndHTML:true,renderCountPerPlay:3,faceWritesBefore:17,faceWritesAfter:0,before,after};
+});
+const profiles=json(`${evidence}/profile-summary.json`);
+const rawProfiles=profiles.scenarios.flatMap(scene=>scene.raw.map(item=>{
+  const path=`${evidence}/raw-${basename(item.path)}`;
+  assert.equal(sha(path),item.sha256);assert(bytes(path).length<=1024*1024);
+  return {...item,archivedPath:`docs/evidence/2026-10-18-WF-deep-runtime-1018/battle/raw-${basename(item.path)}`};
+}));
+const paths=['game/src/battle/view/battle.layers.js','tests/battle-hand-content-diff.test.js'];
+const files=paths.map(path=>({path,sha256:sha(`${root}/${path}`)}));
+const evidenceFiles=['battle.layers.js.before.txt','battle.layers.js.after.txt','probe.test.js','vitest.config.mjs','analyze-profiles.mjs','targeted-final.json','profile-summary.json','hand-hint-ab-25.json','hand-hint-ab-28.json'].map(path=>({path,sha256:sha(`${evidence}/${path}`)}));
+const report={date:'2026-10-18',scope:'Only battle.layers card face / reading-hint diff, plus one new regression file',targeted:{files:4,passed:58,failed:0,pending:0},comparisons,files,evidenceFiles,rawProfiles,assetContract:'No changes to dynamic asset selectors, URL/path construction, image source selection or decodeIn; review fingerprints owned by parent',boundaries:'Node/jsdom actual battle modules; no layout/paint/GPU or presentation waits. All A/B samples retained. 25-card process CPU and render p95 did not improve; no universal tail-latency claim.'};
+writeFileSync(`${evidence}/verification.json`,`${JSON.stringify(report,null,2)}\n`);
+console.log(JSON.stringify({passed:58,comparisons:comparisons.length,productionMatchesSavedAfter:true,files}));

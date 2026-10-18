@@ -1,0 +1,250 @@
+{
+  "date": "2026-10-18",
+  "scope": "Only battle.layers card face / reading-hint diff, plus one new regression file",
+  "targeted": {
+    "files": 4,
+    "passed": 58,
+    "failed": 0,
+    "pending": 0
+  },
+  "comparisons": [
+    {
+      "hand": 25,
+      "file": "hand-hint-ab-25.json",
+      "operationsPerVariant": 20,
+      "sameStateAndHTML": true,
+      "renderCountPerPlay": 3,
+      "faceWritesBefore": 17,
+      "faceWritesAfter": 0,
+      "before": {
+        "variant": "baseline",
+        "operations": 20,
+        "wall": {
+          "n": 20,
+          "meanMs": 44.593329999999966,
+          "medianMs": 42.224199999999655,
+          "p95Ms": 59.311000000000604,
+          "minMs": 32.6911999999993,
+          "maxMs": 71.72569999999996
+        },
+        "cpu": {
+          "n": 20,
+          "meanMs": 42.25,
+          "medianMs": 47,
+          "p95Ms": 63,
+          "minMs": 15,
+          "maxMs": 94
+        },
+        "render": {
+          "n": 20,
+          "meanMs": 32.12445500000003,
+          "medianMs": 30.55210000000079,
+          "p95Ms": 41.30130000000008,
+          "minMs": 24.73109999999997,
+          "maxMs": 52.49010000000089
+        },
+        "renderCounts": [
+          3
+        ],
+        "cardInnerHTMLWritesPerPlay": [
+          17
+        ],
+        "retainedFaces": 160,
+        "survivingFaces": 500
+      },
+      "after": {
+        "variant": "candidate",
+        "operations": 20,
+        "wall": {
+          "n": 20,
+          "meanMs": 35.21214499999978,
+          "medianMs": 33.311899999998786,
+          "p95Ms": 50.737200000000485,
+          "minMs": 21.53099999999995,
+          "maxMs": 72.67700000000059
+        },
+        "cpu": {
+          "n": 20,
+          "meanMs": 49.3,
+          "medianMs": 47,
+          "p95Ms": 95,
+          "minMs": 15,
+          "maxMs": 141
+        },
+        "render": {
+          "n": 20,
+          "meanMs": 23.08855499999995,
+          "medianMs": 19.76260000000184,
+          "p95Ms": 41.42840000000069,
+          "minMs": 15.850000000000364,
+          "maxMs": 55.20650000000023
+        },
+        "renderCounts": [
+          3
+        ],
+        "cardInnerHTMLWritesPerPlay": [
+          0
+        ],
+        "retainedFaces": 500,
+        "survivingFaces": 500
+      }
+    },
+    {
+      "hand": 28,
+      "file": "hand-hint-ab-28.json",
+      "operationsPerVariant": 20,
+      "sameStateAndHTML": true,
+      "renderCountPerPlay": 3,
+      "faceWritesBefore": 17,
+      "faceWritesAfter": 0,
+      "before": {
+        "variant": "baseline",
+        "operations": 20,
+        "wall": {
+          "n": 20,
+          "meanMs": 39.32585000000013,
+          "medianMs": 39.59949999999935,
+          "p95Ms": 47.42950000000019,
+          "minMs": 30.75340000000142,
+          "maxMs": 48.434299999999894
+        },
+        "cpu": {
+          "n": 20,
+          "meanMs": 40.65,
+          "medianMs": 32,
+          "p95Ms": 62,
+          "minMs": 31,
+          "maxMs": 78
+        },
+        "render": {
+          "n": 20,
+          "meanMs": 29.33837499999995,
+          "medianMs": 29.263199999999415,
+          "p95Ms": 35.968299999998635,
+          "minMs": 23.81540000000132,
+          "maxMs": 38.95089999999982
+        },
+        "renderCounts": [
+          3
+        ],
+        "cardInnerHTMLWritesPerPlay": [
+          17
+        ],
+        "retainedFaces": 160,
+        "survivingFaces": 500
+      },
+      "after": {
+        "variant": "candidate",
+        "operations": 20,
+        "wall": {
+          "n": 20,
+          "meanMs": 30.612269999999807,
+          "medianMs": 28.94290000000001,
+          "p95Ms": 41.79119999999966,
+          "minMs": 22.19970000000103,
+          "maxMs": 44.498499999999694
+        },
+        "cpu": {
+          "n": 20,
+          "meanMs": 30.6,
+          "medianMs": 31,
+          "p95Ms": 47,
+          "minMs": 15,
+          "maxMs": 63
+        },
+        "render": {
+          "n": 20,
+          "meanMs": 20.524080000000414,
+          "medianMs": 20.4363000000003,
+          "p95Ms": 25.000300000000607,
+          "minMs": 16.07549999999901,
+          "maxMs": 30.045799999999872
+        },
+        "renderCounts": [
+          3
+        ],
+        "cardInnerHTMLWritesPerPlay": [
+          0
+        ],
+        "retainedFaces": 500,
+        "survivingFaces": 500
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "97b39646be273d56c5c7f18f857d591fc8a620c3ebe5d1d16d61cc8dec9d1d2f"
+    },
+    {
+      "path": "tests/battle-hand-content-diff.test.js",
+      "sha256": "e8a1e067917934d86a9e92b17eea6f41d99724b49aa94a58994823b5e786d752"
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "battle.layers.js.before.txt",
+      "sha256": "1edb9488dba72d62ee6cc66233b1ac88fddf59f28e2956a1054dcf76721a789d"
+    },
+    {
+      "path": "battle.layers.js.after.txt",
+      "sha256": "97b39646be273d56c5c7f18f857d591fc8a620c3ebe5d1d16d61cc8dec9d1d2f"
+    },
+    {
+      "path": "probe.test.js",
+      "sha256": "dfaa450dd8888980ef0194741803ff5e6598a6f6002cc334681edd5d93bf077d"
+    },
+    {
+      "path": "vitest.config.mjs",
+      "sha256": "a1b793e0e6f1098233f4734a5b5a95dd3b97bd3b9f19cab8f52054859a64a02d"
+    },
+    {
+      "path": "analyze-profiles.mjs",
+      "sha256": "9a717850838d7d6c87b4be6412b5f75c596fcd084cf8d88bfe4e80dc16ddac8e"
+    },
+    {
+      "path": "targeted-final.json",
+      "sha256": "9b070acaa12d1d53a87ce088f36d525267962a7cd15312690525fd3589271420"
+    },
+    {
+      "path": "profile-summary.json",
+      "sha256": "b5950cdb590654e210585eea0c09ed89a0d0b4c5ab11b3107b3ef892b3d76de5"
+    },
+    {
+      "path": "hand-hint-ab-25.json",
+      "sha256": "8f720fdb06e52d7d86c265d71ce77d48eb9a832086f08ce265d9ebd75ce77bb5"
+    },
+    {
+      "path": "hand-hint-ab-28.json",
+      "sha256": "71831b1bcf0ef5ab06fe89095f9c8045663779eb23a207a3b42557cce79106c7"
+    }
+  ],
+  "rawProfiles": [
+    {
+      "path": ".tmp/deep-perf-1018/battle/typical.cpuprofile",
+      "bytes": 365957,
+      "sha256": "b3a6a8d55fac8f80160cd8b8c558c7a246c333d280a892a63d172af8578cdf01",
+      "archivedPath": "docs/evidence/2026-10-18-WF-deep-runtime-1018/battle/raw-typical.cpuprofile"
+    },
+    {
+      "path": ".tmp/deep-perf-1018/battle/typical.heapprofile",
+      "bytes": 934287,
+      "sha256": "e37974abe9984e67ae5c8743c5befb776235881c6346ca189e4dc6b8f939ec6b",
+      "archivedPath": "docs/evidence/2026-10-18-WF-deep-runtime-1018/battle/raw-typical.heapprofile"
+    },
+    {
+      "path": ".tmp/deep-perf-1018/battle/high.cpuprofile",
+      "bytes": 422319,
+      "sha256": "717178c84aa2f6eb479a114c539dbc428689d935a36f7280a301fe7a787b901e",
+      "archivedPath": "docs/evidence/2026-10-18-WF-deep-runtime-1018/battle/raw-high.cpuprofile"
+    },
+    {
+      "path": ".tmp/deep-perf-1018/battle/high.heapprofile",
+      "bytes": 923064,
+      "sha256": "0095cf24e2d723a0c3897be66a21a5aaf857921cc8545e3e8b9a29621f83087e",
+      "archivedPath": "docs/evidence/2026-10-18-WF-deep-runtime-1018/battle/raw-high.heapprofile"
+    }
+  ],
+  "assetContract": "No changes to dynamic asset selectors, URL/path construction, image source selection or decodeIn; review fingerprints owned by parent",
+  "boundaries": "Node/jsdom actual battle modules; no layout/paint/GPU or presentation waits. All A/B samples retained. 25-card process CPU and render p95 did not improve; no universal tail-latency claim."
+}
