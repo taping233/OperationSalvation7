@@ -1,0 +1,14 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+stderr | tests/boot.test.js
+[music] load failed title No codec support for selected audio sources.
+
+ ✓ tests/boot.test.js (22 tests | 21 skipped) 3ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 21 skipped (22)
+   Start at  19:17:47
+   Duration  6.18s (transform 3.25s, setup 0ms, collect 4.84s, tests 3ms, environment 934ms, prepare 140ms)
+

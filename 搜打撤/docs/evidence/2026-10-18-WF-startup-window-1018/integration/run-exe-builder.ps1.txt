@@ -1,0 +1,31 @@
+$ErrorActionPreference = 'Stop'
+$taskDir = $PSScriptRoot
+$sourceProject = (Resolve-Path -LiteralPath (Join-Path $taskDir '../..')).Path
+$desktopProject = Join-Path $taskDir 'exe-project/desktop-app'
+$deliveryDir = Join-Path $taskDir 'delivery'
+$builderCache = Join-Path $deliveryDir 'builder-cache'
+$userBuilderCache = Join-Path $env:USERPROFILE 'AppData/Local/electron-builder/Cache'
+$runtimeDir = Join-Path $sourceProject 'desktop-app/node_modules/electron/dist'
+$builderCLI = Join-Path $sourceProject 'desktop-app/node_modules/electron-builder/cli.js'
+$env:ELECTRON_BUILDER_NSIS_DIR = Join-Path $userBuilderCache 'nsis-3.0.4.1/nsis-3.0.4.1-1mx3n'
+$env:ELECTRON_BUILDER_NSIS_RESOURCES_DIR = Join-Path $userBuilderCache 'nsis-resources-3.4.1/nsis-resources-3.4.1-2jx2y'
+$env:ELECTRON_BUILDER_7ZIP_PATH = Join-Path $userBuilderCache '7zip@1.0.0/7zip-win-x64-1nrf7/bin/7za.exe'
+$env:ELECTRON_BUILDER_CACHE = $builderCache
+$env:ELECTRON_SKIP_BINARY_DOWNLOAD = '1'
+$env:CSC_IDENTITY_AUTO_DISCOVERY = 'false'
+$env:npm_config_offline = 'true'
+$env:ELECTRON_BUILDER_BINARIES_MIRROR = ([uri](Join-Path $deliveryDir 'offline-no-download/')).AbsoluteUri
+$env:ELECTRON_MIRROR = $env:ELECTRON_BUILDER_BINARIES_MIRROR
+foreach ($required in @($builderCLI, (Join-Path $runtimeDir 'electron.exe'), (Join-Path $env:ELECTRON_BUILDER_NSIS_DIR 'Bin/makensis.exe'), (Join-Path $env:ELECTRON_BUILDER_NSIS_RESOURCES_DIR 'plugins'), $env:ELECTRON_BUILDER_7ZIP_PATH, (Join-Path $desktopProject 'game/index.html'), (Join-Path $taskDir 'build-inputs.json'))) {
+  if (-not (Test-Path -LiteralPath $required)) { throw "Required offline release input missing: $required" }
+}
+if (Test-Path -LiteralPath (Join-Path $deliveryDir '搜打撤-代号7.exe')) { throw 'Refusing to overwrite an existing EXE in this delivery directory.' }
+New-Item -ItemType Directory -Path $deliveryDir, $builderCache -Force | Out-Null
+node (Join-Path $taskDir 'check-release-inputs.cjs') 2>&1 | Tee-Object -FilePath (Join-Path $deliveryDir 'release-input-check.log')
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+$inputsSha = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $taskDir 'build-inputs.json')).Hash.ToLowerInvariant()
+$startedAt = [DateTimeOffset]::UtcNow.ToString('o')
+node $builderCLI --projectDir $desktopProject --win portable --x64 --publish never "--config.electronDist=$runtimeDir" "--config.directories.output=$deliveryDir" --config.npmRebuild=false --config.win.signAndEditExecutable=false --config.win.signExecutable=false 2>&1 | Tee-Object -FilePath (Join-Path $deliveryDir 'build-portable.log')
+$builderExit = $LASTEXITCODE
+@{ startedAt = $startedAt; finishedAt = [DateTimeOffset]::UtcNow.ToString('o'); exitCode = $builderExit; project = $desktopProject; buildInputsSha256 = $inputsSha; runtimeVersion = '44.1.0'; target = 'Windows x64 portable'; signed = $false; published = $false; installedDependencies = $false } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $deliveryDir 'builder-result.json') -Encoding utf8
+exit $builderExit

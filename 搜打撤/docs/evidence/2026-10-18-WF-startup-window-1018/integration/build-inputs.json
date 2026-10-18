@@ -1,0 +1,79 @@
+{
+  "at": "2026-10-18T11:20:34.016Z",
+  "base": {
+    "commit": "a39866285f",
+    "project": "D:\\素材\\代号柒\\搜打撤\\.tmp\\startup-fix-1018\\exe-project",
+    "files": 4100,
+    "bytes": 358767150,
+    "excluded": [
+      "搜打撤/game/art-source/",
+      "搜打撤/docs/evidence/"
+    ],
+    "method": "Immutable Git blobs, every object SHA1 verified; live unrelated changes excluded.",
+    "dependencies": {
+      "vitePackage": "D:\\素材\\代号柒\\搜打撤\\node_modules\\vite\\package.json",
+      "version": "6.4.4",
+      "usage": "Existing ancestor dependencies with identical semantic npm lock; no installs, no source links."
+    }
+  },
+  "releaseProject": "D:\\素材\\代号柒\\搜打撤\\.tmp\\startup-fix-1018\\exe-project",
+  "overlays": [
+    {
+      "path": "desktop-app/main.js",
+      "bytes": 7628,
+      "sha256": "dd0e486a330520ac708a621320e956f1283b75d46bdcc1d7b8ea716a1ebda294",
+      "mtimeMs": 1792322127557.4094
+    },
+    {
+      "path": "desktop-app/preload.js",
+      "bytes": 2897,
+      "sha256": "788c1dd10f9d369608b698ef482b30f3cc39cac287014ec1309ebc7e58dbf455",
+      "mtimeMs": 1792322147482.1267
+    },
+    {
+      "path": "desktop-app/startup-window.cjs",
+      "bytes": 4164,
+      "sha256": "1ddc8bd1aafa039421a44e9d80d65761cfa29a5d6660e1a508284465f97d7776",
+      "mtimeMs": 1792322127557.4094
+    },
+    {
+      "path": "desktop-app/startup.html",
+      "bytes": 5448,
+      "sha256": "068bc6b9f7090bafe0859af0de7c748b8065d3b5522ea662e9a5eb49875ac554",
+      "mtimeMs": 1792322147482.1267
+    },
+    {
+      "path": "game/src/game.boot.js",
+      "bytes": 43555,
+      "sha256": "88ae559d71f117857e4959e89afa40b55ee8dc3987cf5a2e15b7086dbf22cb37",
+      "mtimeMs": 1792322266321.5918
+    },
+    {
+      "path": "tests/desktop-startup.test.js",
+      "bytes": 15001,
+      "sha256": "d0b881ab060f954e57b6363ce0a2bd6cf17e6416222bf52274a3934247984a4b",
+      "mtimeMs": 1792322192359.1665
+    },
+    {
+      "path": "tests/boot.test.js",
+      "bytes": 47106,
+      "sha256": "2a46a37dcf08d01cc8f1378613fc069a2f3829eac2642e1d91f96353af6d11b1",
+      "mtimeMs": 1792322239139.0735
+    },
+    {
+      "path": "docs/development.md",
+      "bytes": 46097,
+      "sha256": "55317eaee218eb486b7ed5858888b6f510e7d0dfb820d4aa14c3b05a0127954b",
+      "mtimeMs": 1792322266322.13
+    }
+  ],
+  "assetGuard": {
+    "omitted": 195,
+    "warnings": []
+  },
+  "limits": [
+    "Active event/card/art changes excluded.",
+    "Only listed own completed overlays replace immutable HEAD blobs.",
+    "Ancestor locked dependencies reused; no installs or source links."
+  ]
+}

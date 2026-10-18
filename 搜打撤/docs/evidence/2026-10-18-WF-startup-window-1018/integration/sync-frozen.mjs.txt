@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+import {pathToFileURL} from 'node:url';
+const root=process.cwd(),base=path.join(root,'.tmp/startup-fix-1018'),release=path.join(base,'exe-project');
+const files=JSON.parse(fs.readFileSync(path.join(base,'own-code-paths.json'),'utf8'));
+const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
+const entries=files.map(file=>{
+  if(!/^(?:game\/src\/|tests\/|desktop-app\/|docs\/development\.md$)/.test(file)||file.includes('..'))throw Error('Unexpected owned file '+file);
+  const source=path.join(root,file),bytes=fs.readFileSync(source);
+  return {path:file,bytes:bytes.length,sha256:hash(bytes),mtimeMs:fs.statSync(source).mtimeMs,content:bytes};
+});
+for(const entry of entries){const destination=path.join(release,entry.path);fs.mkdirSync(path.dirname(destination),{recursive:true});fs.writeFileSync(destination,entry.content);if(hash(fs.readFileSync(destination))!==entry.sha256)throw Error('Overlay mismatch');}
+for(const entry of entries)if(fs.statSync(entry.path).mtimeMs!==entry.mtimeMs||hash(fs.readFileSync(entry.path))!==entry.sha256)throw Error('Concurrent edit '+entry.path);
+const {collectReviewedRuntimeAssetExclusions}=await import(pathToFileURL(path.join(release,'scripts/runtime-asset-redundancy.mjs')));
+const assets=collectReviewedRuntimeAssetExclusions(release);
+if(assets.warnings.length||assets.excludedAssets.size!==195)throw Error(`Asset proof mismatch ${assets.excludedAssets.size} ${JSON.stringify(assets.warnings)}`);
+const report={at:new Date().toISOString(),base:JSON.parse(fs.readFileSync(path.join(base,'source-provenance.json'),'utf8')),releaseProject:release,
+  overlays:entries.map(({content,...entry})=>entry),assetGuard:{omitted:assets.excludedAssets.size,warnings:assets.warnings},
+  limits:['Active event/card/art changes excluded.','Only listed own completed overlays replace immutable HEAD blobs.','Ancestor locked dependencies reused; no installs or source links.']};
+fs.writeFileSync(path.join(base,'build-inputs.json'),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({files:entries.length,release,assetGuard:report.assetGuard}));

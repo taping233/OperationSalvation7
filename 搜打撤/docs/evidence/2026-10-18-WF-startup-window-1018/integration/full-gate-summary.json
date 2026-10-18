@@ -1,0 +1,18 @@
+{
+  "report": "docs/evidence/2026-10-18-staged-check/2026-10-18T11-20-46.141Z-695d04b8-staged.json",
+  "reportSha256": "4d97e23d2e140346b7a2dc9c53bdc82f60fe793e4120231fa6f435f1cabe2b72",
+  "indexSha256": "c8f53291caac552ffe9531406082efac5925e3d934c1abba107938bf1cee27e5",
+  "mode": "full",
+  "validation": {
+    "executed": true,
+    "passed": true,
+    "reusableReceipt": true,
+    "reason": "STAGED_PASSED"
+  },
+  "testSummary": [
+    " Test Files  614 passed (614)",
+    "      Tests  6020 passed | 16 skipped (6036)",
+    "   Duration  367.00s (transform 8.86s, setup 0ms, collect 121.69s, tests 547.98s, environment 561.60s, prepare 88.98s)"
+  ],
+  "rawReportRetainedLocally": true
+}

@@ -1,0 +1,58 @@
+{
+  "kind": "read-only original defect observation",
+  "recordedAt": "2026-10-18",
+  "command": "node node_modules/vitest/vitest.mjs run --config .tmp/startup-readiness-1018/battle/vitest.config.mjs",
+  "exitCode": 0,
+  "passedTests": 1,
+  "testDurationMs": 1146,
+  "totalDurationSeconds": 6.46,
+  "bootSourceSha256": "9a83ebdce8b1656cbf6ea9bcc9f3c7d7aa320edaa0991c04f1d9727b3cba7e64",
+  "observationSource": "Captured console ORIGINAL_BOOT_READINESS from the original command tool output; copied here after the run.",
+  "snapshots": [
+    {
+      "phase": "after-DOMContentLoaded",
+      "state": "title",
+      "bodyState": null,
+      "controlsBound": "true",
+      "titleHidden": false,
+      "lobby": true,
+      "loopTicks": 0
+    },
+    {
+      "phase": "after-loop-1",
+      "state": "title",
+      "bodyState": null,
+      "controlsBound": "true",
+      "titleHidden": false,
+      "lobby": true,
+      "loopTicks": 1
+    },
+    {
+      "phase": "after-loop-2",
+      "state": "title",
+      "bodyState": null,
+      "controlsBound": "true",
+      "titleHidden": false,
+      "lobby": true,
+      "loopTicks": 2
+    },
+    {
+      "phase": "after-loop-3",
+      "state": "title",
+      "bodyState": null,
+      "controlsBound": "true",
+      "titleHidden": false,
+      "lobby": true,
+      "loopTicks": 3
+    },
+    {
+      "phase": "after-loop-4",
+      "state": "title",
+      "bodyState": null,
+      "controlsBound": "true",
+      "titleHidden": false,
+      "lobby": true,
+      "loopTicks": 4
+    }
+  ]
+}

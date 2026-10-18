@@ -1,0 +1,108 @@
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+const { createRequire } = require('module');
+const { readReleaseInputs, readBudgetThresholds, readJson, hash, sourceRoot, snapshot } = require('./check-release-inputs.cjs');
+const delivery = path.join(__dirname, 'delivery');
+const exe = path.join(delivery, '搜打撤-代号7.exe');
+const unpacked = path.join(delivery, 'win-unpacked');
+
+function walk(dir, prefix = '') {
+  return fs.readdirSync(path.join(dir, prefix), { withFileTypes: true }).flatMap(entry => {
+    const file = path.join(prefix, entry.name);
+    return entry.isDirectory() ? walk(dir, file) : [file];
+  });
+}
+function pe(file) {
+  const fd = fs.openSync(file, 'r');
+  const header = Buffer.alloc(64);
+  fs.readSync(fd, header, 0, header.length, 0);
+  const offset = header.readUInt32LE(60), signature = Buffer.alloc(6);
+  fs.readSync(fd, signature, 0, signature.length, offset); fs.closeSync(fd);
+  if (header.toString('ascii', 0, 2) !== 'MZ' || signature.toString('ascii', 0, 4) !== 'PE\0\0') throw Error('Invalid PE: ' + file);
+  return { path: file, bytes: fs.statSync(file).size, machine: '0x' + signature.readUInt16LE(4).toString(16) };
+}
+function compareFiles(source, destination) {
+  const sourceFiles = new Set(walk(source)), destinationFiles = walk(destination), omitted = [];
+  let compared = 0, bytes = 0;
+  for (const relative of sourceFiles) {
+    const target = path.join(destination, relative);
+    if (!fs.existsSync(target)) {
+      if (path.basename(relative) === '.gitkeep') { omitted.push(relative); continue; }
+      throw Error('Packaged game file missing: ' + relative);
+    }
+    const original = fs.readFileSync(path.join(source, relative)), packaged = fs.readFileSync(target);
+    if (!original.equals(packaged)) throw Error('Packaged game file differs: ' + relative);
+    compared++; bytes += packaged.length;
+  }
+  for (const file of destinationFiles) if (!sourceFiles.has(file)) throw Error('Unexpected packaged game file: ' + file);
+  return { compared, bytes, omitted, unexpectedFiles: 0 };
+}
+function checkLocalReference(game, documentFile, reference) {
+  if (!reference || reference.startsWith('#') || /^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(reference)) return false;
+  const decoded = decodeURIComponent(reference.split(/[?#]/)[0]);
+  const file = decoded.startsWith('/') ? path.resolve(game, '.' + decoded) : path.resolve(path.dirname(documentFile), decoded);
+  const relative = path.relative(game, file);
+  if (relative === '..' || relative.startsWith('..' + path.sep) || path.isAbsolute(relative)) throw Error('Local reference escapes game: ' + reference);
+  if (!fs.existsSync(file) || !fs.statSync(file).isFile()) throw Error('Local dependency missing in ' + path.relative(game, documentFile) + ': ' + reference);
+  return true;
+}
+function verifyReferences(game) {
+  const sourceRequire = createRequire(path.join(sourceRoot, 'package.json'));
+  const { parse } = sourceRequire('acorn'), { full } = sourceRequire('acorn-walk');
+  let html = 0, css = 0, js = 0;
+  for (const relative of walk(game)) {
+    const file = path.join(game, relative);
+    if (!/\.(?:html|css|m?js)$/.test(relative)) continue;
+    const text = fs.readFileSync(file, 'utf8');
+    if (relative.endsWith('.html')) for (const match of text.replace(/<!--[\s\S]*?-->/g, '').matchAll(/(?:src|href)=["']([^"']+)["']/g)) if (checkLocalReference(game, file, match[1])) html++;
+    if (relative.endsWith('.css')) for (const match of text.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/url\(\s*(?:"([^"]*)"|'([^']*)'|([^\s)]+))\s*\)/g)) if (checkLocalReference(game, file, match[1] ?? match[2] ?? match[3])) css++;
+    if (/\.m?js$/.test(relative)) full(parse(text, { ecmaVersion: 'latest', sourceType: 'module' }), node => {
+      const source = ['ImportDeclaration', 'ExportNamedDeclaration', 'ExportAllDeclaration', 'ImportExpression'].includes(node.type) ? node.source : null;
+      if (source?.type === 'Literal' && typeof source.value === 'string' && /^(?:\.{1,2}\/|\/)/.test(source.value) && checkLocalReference(game, file, source.value)) js++;
+    });
+  }
+  return { html, css, js };
+}
+function readBudgetResult() {
+  const argument = process.argv.find(value => value.startsWith('--build-log='));
+  const file = argument ? path.resolve(sourceRoot, argument.slice('--build-log='.length)) : path.join(__dirname, 'build-game.log');
+  const log = fs.readFileSync(file, 'utf8').replace(/\x1b\[[0-9;]*m/g, '');
+  const lines = log.split(/\r?\n/).filter(line => line.includes('[perf-budget]'));
+  if (!lines.length) throw Error('Standard postbuild performance record unavailable');
+  const failures = lines.filter(line => line.includes('[perf-budget] FAIL:'));
+  const passed = failures.length === 0 && lines.some(line => line.includes('[perf-budget] PASS'));
+  if (!passed && !failures.length) throw Error('Performance budget record is incomplete');
+  return { log: file, passed, failureCount: failures.length, failures, lines, thresholdsUnchanged: true, previousDeliveryFailureCount: 5 };
+}
+async function main() {
+  const inputs = readReleaseInputs(), thresholds = await readBudgetThresholds();
+  const builder = readJson(path.join(delivery, 'builder-result.json'));
+  if (builder.exitCode !== 0 || builder.buildInputsSha256 !== inputs.buildInputsSha256) throw Error('Successful builder result does not match frozen inputs');
+  const desktop = readJson(path.join(snapshot, 'desktop-app/package.json'));
+  const artifact = pe(exe), runtime = pe(path.join(unpacked, desktop.productName + '.exe'));
+  if (runtime.machine !== '0x8664') throw Error('Expected x64 Electron runtime');
+  const dist = path.join(sourceRoot, 'desktop-app/node_modules/electron/dist');
+  const runtimeFiles = fs.readdirSync(dist, { withFileTypes: true }).filter(entry => entry.isFile() && /\.(?:dll|pak|dat|bin|json)$/.test(entry.name)).map(entry => entry.name);
+  for (const file of runtimeFiles) if (!fs.readFileSync(path.join(dist, file)).equals(fs.readFileSync(path.join(unpacked, file)))) throw Error('Electron runtime resource differs: ' + file);
+  const locales = compareFiles(path.join(dist, 'locales'), path.join(unpacked, 'locales'));
+  const resources = path.join(unpacked, 'resources'), game = path.join(resources, 'game');
+  const asarRequire = createRequire(path.join(sourceRoot, 'desktop-app/node_modules/app-builder-lib/package.json')), asar = asarRequire('@electron/asar');
+  const archive = path.join(resources, 'app.asar'), appPackage = JSON.parse(asar.extractFile(archive, 'package.json').toString('utf8'));
+  const startupFiles = ['main.js', 'preload.js', 'startup-window.cjs', 'startup-preload.cjs', 'startup.html', 'suggestions-store.cjs', 'app.ico'];
+  const optionalReleaseProfilePresent = fs.existsSync(path.join(snapshot, 'desktop-app/release-profile.json'));
+  if (optionalReleaseProfilePresent) startupFiles.push('release-profile.json');
+  for (const file of startupFiles) if (!asar.extractFile(archive, file).equals(fs.readFileSync(path.join(snapshot, 'desktop-app', file)))) throw Error('ASAR source differs: ' + file);
+  const main = asar.extractFile(archive, 'main.js').toString('utf8');
+  if (appPackage.main !== 'main.js' || !main.includes("path.join(process.resourcesPath, 'game')") || !main.includes("protocol.handle('app'")) throw Error('Desktop local entry is incomplete');
+  if (Object.keys(appPackage.dependencies || {}).length) throw Error('Unexpected external production dependency');
+  const gameFiles = compareFiles(path.join(snapshot, 'desktop-app/game'), game), references = verifyReferences(game);
+  const gameVersion = readJson(path.join(game, 'version.json')).version;
+  if (appPackage.version !== desktop.version || gameVersion !== desktop.version) throw Error('Packaged versions disagree');
+  const budget = { ...readBudgetResult(), thresholds };
+  const sha256 = await new Promise((resolve, reject) => { const digest = crypto.createHash('sha256'); fs.createReadStream(exe).on('data', chunk => digest.update(chunk)).on('end', () => resolve(digest.digest('hex'))).on('error', reject); });
+  const report = { artifact: { ...artifact, sha256 }, target: 'Windows x64 portable single EXE', runtime, app: { version: appPackage.version, gameVersion, entry: appPackage.main, optionalReleaseProfilePresent }, verification: { runtimeFiles: runtimeFiles.length, locales, startupFilesVerified: startupFiles.length, desktopBytesMatchSnapshot: true, gameFiles, references, localAppProtocol: true, extraProductionDependencies: 0 }, source: inputs, builder, budget, limits: ['Portable test build; standard postbuild performance result is preserved separately and no threshold was raised.', 'Native GUI launch and gameplay have not been verified by this script.', 'No claim is made about FPS, actual RSS or native save/gameplay behavior.'] };
+  fs.writeFileSync(path.join(delivery, 'exe-verification.json'), JSON.stringify(report, null, 2) + '\n');
+  console.log(JSON.stringify(report, null, 2));
+}
+main().catch(error => { console.error(error.message); process.exitCode = 1; });

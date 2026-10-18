@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-18T11:29:57.916Z",
+  "commit": "f373954ad9bb983ac5c8d49836ca57100e28dc57",
+  "parent": "a39866285f06ac9dc2859d6f29ab1c6e7f864446",
+  "paths": [
+    "搜打撤/desktop-app/main.js",
+    "搜打撤/desktop-app/preload.js",
+    "搜打撤/desktop-app/startup-window.cjs",
+    "搜打撤/desktop-app/startup.html",
+    "搜打撤/game/src/game.boot.js",
+    "搜打撤/tests/desktop-startup.test.js",
+    "搜打撤/tests/boot.test.js",
+    "搜打撤/docs/development.md"
+  ],
+  "receipt": "docs/evidence/2026-10-18-staged-check/2026-10-18T11-20-46.141Z-695d04b8-staged.json",
+  "receiptSha256": "4d97e23d2e140346b7a2dc9c53bdc82f60fe793e4120231fa6f435f1cabe2b72",
+  "indexSha256": "c8f53291caac552ffe9531406082efac5925e3d934c1abba107938bf1cee27e5",
+  "buildInputsSha256": "301f54226b5e6cebe8691cbf76cda8ebc62d3e411f9efe5df348e0af94a0d258",
+  "codeInputsSha256": "301f54226b5e6cebe8691cbf76cda8ebc62d3e411f9efe5df348e0af94a0d258",
+  "hooks": "Original hook with exact frozen-index receipt; no bypass or push."
+}

@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-18T11:30:15.102Z",
+  "files": [
+    {
+      "path": "搜打撤/docs/evidence/2026-10-18-staged-check/2026-10-18T11-20-46.141Z-695d04b8-staged.json",
+      "bytes": 3894668,
+      "sha256": "4d97e23d2e140346b7a2dc9c53bdc82f60fe793e4120231fa6f435f1cabe2b72",
+      "acquisition": "This task original frozen-index gate output, retained locally."
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-18-staged-check/2026-10-18T11-20-46.141Z-695d04b8-staged.log",
+      "bytes": 18489,
+      "sha256": "2c1158cbcab0ea9cb8b42d26b7d1158ac24748b808c0a58754799bceb97f28b7",
+      "acquisition": "This task original frozen-index gate output, retained locally."
+    },
+    {
+      "path": "搜打撤/.tmp/startup-fix-1018/delivery/搜打撤-代号7.exe",
+      "bytes": 287812412,
+      "sha256": "605f7ff6a99a3be2a2c1f2c000001e653d98b48b632f8bdc9393d5af5c3ac155",
+      "acquisition": "Offline Windows x64 portable single-EXE build from immutable Git source and the eight recorded owned overlays."
+    }
+  ]
+}

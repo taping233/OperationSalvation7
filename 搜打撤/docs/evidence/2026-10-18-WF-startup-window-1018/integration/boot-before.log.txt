@@ -1,0 +1,59 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+stderr | tests/boot.test.js
+[music] load failed title No codec support for selected audio sources.
+
+ ❯ tests/boot.test.js (22 tests | 1 failed | 21 skipped) 9ms
+   × 启动链（DOMContentLoaded → showTitle） > 标题已可用时立即发布桌面就绪状态，不等待被封面跳过的地图循环 8ms
+     → expected undefined to be 'title' // Object.is equality
+   ↓ 启动链（DOMContentLoaded → showTitle） > 重复DOMContentLoaded不会再次初始化UI或启动后台预取
+   ↓ 启动链（DOMContentLoaded → showTitle） > 启动完成后 body 挂上 lobby 类（局内控件在标题页隐藏）
+   ↓ 启动链（DOMContentLoaded → showTitle） > 标题封面处于显示状态
+   ↓ 启动链（DOMContentLoaded → showTitle） > 真实启动接线的 Ctrl+L 在四个控制台页签均可关闭，长按与输入法组合不重复切换
+   ↓ 启动链（DOMContentLoaded → showTitle） > 基地首次打开的真实 Escape 接线只取消待开请求，不重置已保存档案
+   ↓ 启动链（DOMContentLoaded → showTitle） > 照相馆动态载入可被快捷切页或真实 Escape 取消并恢复来源页状态
+   ↓ 启动链（DOMContentLoaded → showTitle） > 标题→选档→基地→选档往返保留档案，按钮与 Escape 语义一致
+   ↓ 启动链（DOMContentLoaded → showTitle） > 卡牌档案馆可打开、筛选、清空与排序
+   ↓ 启动链（DOMContentLoaded → showTitle） > 照相馆以照片背签打开，默认大图仍用卡牌面且保留 footer 委托
+   ↓ 启动链（DOMContentLoaded → showTitle） > 开始游戏 / 设置 / 退出按钮已绑定监听（可点击响应）
+   ↓ 启动链（DOMContentLoaded → showTitle） > 跨文件 mixin 已延迟绑定（TDZ 回归点）
+   ↓ 启动链（DOMContentLoaded → showTitle） > 成就陈列室按整页暂停背景，并完成退场后返回标题
+   ↓ 启动链（DOMContentLoaded → showTitle） > 核心模块已发布，战斗域按需加载后发布
+   ↓ 启动链（DOMContentLoaded → showTitle） > 运行时按 mapSeed 重建局部几何，并以稳定节点提交移动事务
+   ↓ 启动链（DOMContentLoaded → showTitle） > 地图首次点击只预览，再次点击同节点才开始移动
+   ↓ 启动链（DOMContentLoaded → showTitle） > 非 reduced-motion 的 fake rAF 移动最终只提交一次
+   ↓ 启动链（DOMContentLoaded → showTitle） > 第一层 door 确认后进入第二层，终层仍保留 extraction
+   ↓ 启动链（DOMContentLoaded → showTitle） > enterLayer 将入口与可走分支一起构图，隐藏节点不占据画面
+   ↓ 启动链（DOMContentLoaded → showTitle） > 战斗数字键/点选与内层卡面键盘输入共享选中、取消和目标结算
+   ↓ 启动链（DOMContentLoaded → showTitle） > 唯一敌人也需确认目标；键盘选中可取消且确认前不扣资源
+   ↓ 启动链（DOMContentLoaded → showTitle） > 卡牌大页 Esc 关闭与加载态强关：输入法组合态（isComposing / keyCode 229）不误触
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/boot.test.js > 启动链（DOMContentLoaded → showTitle） > 标题已可用时立即发布桌面就绪状态，不等待被封面跳过的地图循环
+AssertionError: expected undefined to be 'title' // Object.is equality
+
+- Expected: 
+"title"
+
++ Received: 
+undefined
+
+ ❯ tests/boot.test.js:87:41
+     85|     expect(document.getElementById('title').dataset.controlsBound).toB…
+     86|     expect(document.getElementById('title').hidden).toBe(false);
+     87|     expect(document.body.dataset.state).toBe('title');
+       |                                         ^
+     88|   });
+     89|   it('重复DOMContentLoaded不会再次初始化UI或启动后台预取', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 21 skipped (22)
+   Start at  19:17:20
+   Duration  4.11s (transform 1.22s, setup 0ms, collect 2.96s, tests 9ms, environment 797ms, prepare 115ms)
+

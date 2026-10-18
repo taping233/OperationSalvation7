@@ -1,0 +1,7 @@
+{
+  "gameBootSha256": "88ae559d71f117857e4959e89afa40b55ee8dc3987cf5a2e15b7086dbf22cb37",
+  "exitCode": 0,
+  "passedTests": 1,
+  "command": "node node_modules/vitest/vitest.mjs run --config .tmp/startup-readiness-1018/battle/vitest-candidate.config.mjs",
+  "observed": "body.dataset.state is title immediately after DOMContentLoaded, before the first loop frame; four subsequent real loop frames preserve it."
+}

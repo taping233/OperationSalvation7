@@ -1,0 +1,14 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+ ✓ tests/desktop-startup.test.js (18 tests) 163ms
+ ✓ tests/startup-transition.test.js (4 tests) 194ms
+ ✓ tests/startup-guard.test.js (22 tests) 277ms
+ ✓ tests/light-startup-boot.test.js (4 tests) 874ms
+
+ Test Files  4 passed (4)
+      Tests  48 passed (48)
+   Start at  19:17:57
+   Duration  18.27s (transform 900ms, setup 0ms, collect 415ms, tests 1.51s, environment 65.07s, prepare 3.05s)
+

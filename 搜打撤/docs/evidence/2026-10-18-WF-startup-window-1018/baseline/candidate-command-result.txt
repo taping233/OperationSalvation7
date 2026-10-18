@@ -1,0 +1,103 @@
+
+ RUN  v3.2.7 D:/素材/代号柒/搜打撤
+
+stderr | .tmp/startup-readiness-1018/battle/probe-candidate.test.js
+[music] load failed title No codec support for selected audio sources.
+
+stderr | .tmp/startup-readiness-1018/battle/probe-candidate.test.js > observes actual title DOM readiness through queued real boot frames
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/battle/platform-minimal-1016/far.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-coin-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-wood-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-rations-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 3)
+
+stderr | .tmp/startup-readiness-1018/battle/probe-candidate.test.js > observes actual title DOM readiness through queued real boot frames
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-key-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-fire-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/initial.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/common.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 3)
+
+stderr | .tmp/startup-readiness-1018/battle/probe-candidate.test.js > observes actual title DOM readiness through queued real boot frames
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/rare.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/epic.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/legendary.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/prism.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 3)
+
+stderr | .tmp/startup-readiness-1018/battle/probe-candidate.test.js > observes actual title DOM readiness through queued real boot frames
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/token.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/wu.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/xingyue.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/changwuyu.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 3)
+
+stderr | .tmp/startup-readiness-1018/battle/probe-candidate.test.js > observes actual title DOM readiness through queued real boot frames
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/baita.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/heixiang.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/neutral.webp?v=dev TypeError: response.arrayBuffer is not a function
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:72:29
+    at D:\素材\代号柒\搜打撤\game\src\core\art.js:478:15
+    at async Promise.all (index 2)
+
+stdout | .tmp/startup-readiness-1018/battle/probe-candidate.test.js > observes actual title DOM readiness through queued real boot frames
+CANDIDATE_BOOT_READINESS [{"phase":"after-DOMContentLoaded","state":"title","bodyState":"title","controlsBound":"true","titleHidden":false,"lobby":true,"loopTicks":0},{"phase":"after-loop-1","state":"title","bodyState":"title","controlsBound":"true","titleHidden":false,"lobby":true,"loopTicks":1},{"phase":"after-loop-2","state":"title","bodyState":"title","controlsBound":"true","titleHidden":false,"lobby":true,"loopTicks":2},{"phase":"after-loop-3","state":"title","bodyState":"title","controlsBound":"true","titleHidden":false,"lobby":true,"loopTicks":3},{"phase":"after-loop-4","state":"title","bodyState":"title","controlsBound":"true","titleHidden":false,"lobby":true,"loopTicks":4}]
+
+ ✓ .tmp/startup-readiness-1018/battle/probe-candidate.test.js (1 test) 1147ms
+   ✓ observes actual title DOM readiness through queued real boot frames  1146ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  19:19:02
+   Duration  8.15s (transform 2.36s, setup 0ms, collect 5.26s, tests 1.15s, environment 1.36s, prepare 126ms)
+

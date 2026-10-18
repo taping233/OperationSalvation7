@@ -1,0 +1,47 @@
+[
+  {
+    "phase": "after-DOMContentLoaded",
+    "state": "title",
+    "bodyState": "title",
+    "controlsBound": "true",
+    "titleHidden": false,
+    "lobby": true,
+    "loopTicks": 0
+  },
+  {
+    "phase": "after-loop-1",
+    "state": "title",
+    "bodyState": "title",
+    "controlsBound": "true",
+    "titleHidden": false,
+    "lobby": true,
+    "loopTicks": 1
+  },
+  {
+    "phase": "after-loop-2",
+    "state": "title",
+    "bodyState": "title",
+    "controlsBound": "true",
+    "titleHidden": false,
+    "lobby": true,
+    "loopTicks": 2
+  },
+  {
+    "phase": "after-loop-3",
+    "state": "title",
+    "bodyState": "title",
+    "controlsBound": "true",
+    "titleHidden": false,
+    "lobby": true,
+    "loopTicks": 3
+  },
+  {
+    "phase": "after-loop-4",
+    "state": "title",
+    "bodyState": "title",
+    "controlsBound": "true",
+    "titleHidden": false,
+    "lobby": true,
+    "loopTicks": 4
+  }
+]

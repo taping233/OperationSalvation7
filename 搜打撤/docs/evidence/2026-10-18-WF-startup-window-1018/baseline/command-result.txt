@@ -1,0 +1,10 @@
+Original command: node node_modules/vitest/vitest.mjs run --config .tmp/startup-readiness-1018/battle/vitest.config.mjs
+Exit code: 0
+Test Files 1 passed (1)
+Tests 1 passed (1)
+Start at 19:17:40
+Duration 6.46s (transform 1.17s, setup 0ms, collect 3.58s, tests 1.15s, environment 1.34s, prepare 145ms)
+
+Console observation: ORIGINAL_BOOT_READINESS [{"phase":"after-DOMContentLoaded","state":"title","bodyState":null,"controlsBound":"true","titleHidden":false,"lobby":true,"loopTicks":0},{"phase":"after-loop-1","state":"title","bodyState":null,"controlsBound":"true","titleHidden":false,"lobby":true,"loopTicks":1},{"phase":"after-loop-2","state":"title","bodyState":null,"controlsBound":"true","titleHidden":false,"lobby":true,"loopTicks":2},{"phase":"after-loop-3","state":"title","bodyState":null,"controlsBound":"true","titleHidden":false,"lobby":true,"loopTicks":3},{"phase":"after-loop-4","state":"title","bodyState":null,"controlsBound":"true","titleHidden":false,"lobby":true,"loopTicks":4}]
+
+Environment-only warnings: Audio codec unavailable in jsdom; fetch fixture lacks response.arrayBuffer so background art prefetch reports failures. These warnings do not gate showTitle, and the test asserts the actual title DOM and loop ticks rather than asset completion. This file copies the relevant command result from tool output; it is not a full raw stderr transcript.
