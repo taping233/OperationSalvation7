@@ -208,9 +208,12 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
           next.el.classList.add('drop-here');
           // 全体牌保持跟手；合法空地预览每名敌人，不提前提交或消耗注能材料。
           if (a.fieldPlayable && a.side === 'enemy') {
+            // One synchronous hover transition shares current state; a later
+            // pointer transition or renderer refresh takes a new snapshot.
+            const hoverSnapshot = getSnapshot();
             a.stage.querySelectorAll('.bt-foe[data-eidx]').forEach(el => {
               const idx = +el.dataset.eidx;
-              if (!getSnapshot().foes[idx]?.dead) showFoePreview(el, idx, a.uid, a.card, 'drag');
+              if (!hoverSnapshot.foes[idx]?.dead) showFoePreview(el, idx, a.uid, a.card, 'drag', hoverSnapshot);
             });
           }
         }

@@ -269,7 +269,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/src/core/icons-bitmap.js": "71e1d0b742254726786fa9a2af57448646bff6881fa04a39b4d15abfd86eed86",
     "game/src/home/home.scene.js": "5315be0ae9feb71523ed8cafea826415341dab33980e4458344e8f169a8edd40",
     "game/src/hub/base-chibi-v2.skin.js": "53a4a3e47e3b01b53d134776a0ee62335f5253e714edc5e775ca16c733906f86",
-    "game/src/hub/hub.presentation.js": "eb0f264f8c8f2cfbed1cd008156f73da707c8477393e7e90b20a61f9d54f5cb3",
+    "game/src/hub/hub.presentation.js": "5c60ba882c596467a699bfc4adc27369ddabbf62c807a7e84c7216a1e9bebacc",
     "game/src/hub/hub.visuals.js": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78",
     "game/src/rarity-design-lab.js": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775",
     "game/src/run/lab.ending.js": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c",

@@ -198,6 +198,7 @@ function updatePersonnelV12(page, next, reduced, before) {
       }
     };
     loading.onload = () => {
+      if (!image.isConnected || image.dataset.portraitRequest !== request) return;
       if (loading.decode) loading.decode().then(reveal, reveal);
       else reveal();
     };

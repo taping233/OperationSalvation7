@@ -5,7 +5,7 @@ import { esc } from '../../core/shared.js';
 import { cardRuleHint, previewAction } from './battle.preview.js';
 import { commands, getSnapshot, Combat, getPreviewContext } from '../core/battle.core.js';
   // ---------- 指向悬停效果预览（松手前暗示打出结果；card = 指向中的卡） ----------
-  function showFoePreview(el, idx, uid, card, interactionMode) {
+  function showFoePreview(el, idx, uid, card, interactionMode, hoverSnapshot = null) {
     // 气泡每次都用同一时刻的当前快照/上下文重算，避免拖拽缓存与新 core 状态混用。
     if (interactionMode === 'click') {
       document.querySelectorAll('.bt-foe .bt-fpreview[data-preview-mode="click"]').forEach(preview => {
@@ -15,7 +15,7 @@ import { commands, getSnapshot, Combat, getPreviewContext } from '../core/battle
     const existing = el.querySelector('.bt-fpreview');
     const previousMode = existing && existing.dataset.previewMode;
     if (existing) existing.remove();
-    const snapshot = getSnapshot();
+    const snapshot = hoverSnapshot || getSnapshot();
     const foe = snapshot.foes[idx];
     const useCard = card || (snapshot.pendingTarget && snapshot.pendingTarget.card) || null;
     if (!foe || foe.dead || !useCard) return;

@@ -253,10 +253,10 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
 
   // ---------- 背包显示顺序（v0.21：卡牌堆可拖拽排序，随存档保存） ----------
   // cardOrder = 卡名列表；新出现的堆追加到末尾，已消失的堆自动移除
-  function syncCardOrder() {
+  function syncCardOrder(bagStacks = cardStacks(false), safeStacks = cardStacks(true)) {
     const known = [];
-    cardStacks(false).forEach(s => known.push(s.card.name));
-    cardStacks(true).forEach(s => known.push(s.card.name));
+    bagStacks.forEach(s => known.push(s.card.name));
+    safeStacks.forEach(s => known.push(s.card.name));
     const ord = (game.cardOrder || []).filter(n => known.includes(n));
     known.forEach(n => { if (!ord.includes(n)) ord.push(n); });
     game.cardOrder = ord;
@@ -582,16 +582,16 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
   // —— v2 玻璃界面（2026-10-15 WF-bag-redesign-1015 实装，老板拍板绝区零方向）：
   // 表现层在纯渲染切片 game.bag.view2.js（架构门：壳行数不上浮、切片不得 import 壳）；
   // 壳负责数据组装（bagZoneTiles）与动作注册，跨区移动 = 拖到左栏分区钮或点详情按钮。
-  function bagZoneTiles() {
+  function bagZoneTiles(bagStacks, safeStacks) {
     if (bagZone === 'safe') {
-      return sortStacksByOrder(cardStacks(true)).map(st => ({ name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 1, zone: 'safe' }));
+      return sortStacksByOrder(safeStacks).map(st => ({ name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 1, zone: 'safe' }));
     }
     if (bagZone === 'pocket') {
       return game.usedPocket.map(p => ({ name: p.card.name, card: p.card, rarity: bagV2Rarity(p.card), type: p.card.type, cost: p.card.cost, count: p.count, zone: 'pocket' }));
     }
     const supplies = game.inventory.flatMap(it => Array.from({ length:Math.ceil((it.count || 1) / 3) }, (_, index) =>
       ({ name:it.name, value:it.value, tier:it.tier, count:Math.min(3, (it.count || 1) - index * 3), supply:1, zone:'bag' })));
-    let cards = sortStacksByOrder(cardStacks(false)).map(st => ({ name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 0, zone: 'bag', useStatus:st.card.type === '道具' ? bagUseStatus(st.card, st.uids[0], { game, usedSlots, bagCap }) : null }));
+    let cards = sortStacksByOrder(bagStacks).map(st => ({ name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 0, zone: 'bag', useStatus:st.card.type === '道具' ? bagUseStatus(st.card, st.uids[0], { game, usedSlots, bagCap }) : null }));
     if (bagFilter === 'supply') return supplies;
     if (bagFilter !== 'all') cards = cards.filter(c => bagFilter === 'move' ? ['武术', '法术', '能力卡'].includes(c.type) : c.type === bagFilter);
     return bagFilter === 'all' ? [...supplies, ...cards] : cards;
@@ -712,10 +712,12 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     game.state = 'modal';
     backpackOpen = true;
     _set_cardPageOpen(false);
-    syncCardOrder();
+    // This snapshot belongs to this render; actions keep using live capacity checks.
+    const bagStacks = cardStacks(false), safeStacks = cardStacks(true);
+    syncCardOrder(bagStacks, safeStacks);
     const cap = bagCap(), sCap = safeCap(), baseCap = SDT.Base.bagCap();
     const total = game.inventory.reduce((a, b) => a + b.value * (b.count || 1), 0);
-    const safeUsedN = cardStacks(true).length;
+    const safeUsedN = safeStacks.length;
     const pkN = game.usedPocket.reduce((a, b) => a + b.count, 0);
     if (requestedBagSection) {
       bagZone = requestedBagSection === 'main' ? 'bag' : requestedBagSection;
@@ -740,9 +742,9 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       cap, baseCap, pearlStoredN:game.ownedCards.filter(o => o.stored && !o.pouchOf).length, capacityText:game.bagCapacityText?.() || '', total, safeUsedN, sCap, pkN,
       petName: SDT.Base.carriedPet?.()?.name || '随行伙伴', receipt: bagReceipt?.cards === game.ownedCards ? bagReceipt.text : '',
       used: usedSlots(), coins: game.coins, fragments: game.fragments || 0,
-      bagCardN:cardStacks(false).reduce((n, st) => n + st.count, 0), safeCardN:cardStacks(true).reduce((n, st) => n + st.count, 0),
+      bagCardN:bagStacks.reduce((n, st) => n + st.count, 0), safeCardN:safeStacks.reduce((n, st) => n + st.count, 0),
       supplyN:game.inventory.reduce((n, item) => n + (item.count || 1), 0),
-      tiles: bagZoneTiles(),
+      tiles: bagZoneTiles(bagStacks, safeStacks),
     }), 'bagpage');
     // 分区 / 筛选 / 排序 / 点选详情：格子打开独立全文阅读与操作区，
     // inspectStack 契约与原有卡面特写返回路径不变。
