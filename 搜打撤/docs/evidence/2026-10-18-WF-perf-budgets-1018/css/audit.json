@@ -1,0 +1,454 @@
+{
+  "date": "2026-10-18",
+  "input": ".tmp/page-perf-1018/exe-build/project/desktop-app/game/assets",
+  "budget": 139264,
+  "files": [
+    {
+      "name": "battle-CCiJZ0A2.css",
+      "sha256": "200adc75efe206977cadccb52297af13014451f267fc00a2446cd09d9b0b8003",
+      "bytes": 32390,
+      "gzip": 5706,
+      "rules": 222,
+      "selectorBytes": 15033,
+      "declarationsBytes": 16201,
+      "fontFaceBytes": 0,
+      "keyframesBytes": 0,
+      "layers": 0
+    },
+    {
+      "name": "game.cardslib-yC5B5_9s.css",
+      "sha256": "11e5451a86f100f26f671cd8b6e8a4941fcdee1106345c6959e1c2353f6b760d",
+      "bytes": 72633,
+      "gzip": 13139,
+      "rules": 367,
+      "selectorBytes": 27822,
+      "declarationsBytes": 42310,
+      "fontFaceBytes": 0,
+      "keyframesBytes": 678,
+      "layers": 0
+    },
+    {
+      "name": "game.menu-Bp_7M2KP.css",
+      "sha256": "1976735e71da0dbadaaef240bb240e255b8678405788233f6d45bfb44428d05b",
+      "bytes": 43275,
+      "gzip": 9334,
+      "rules": 332,
+      "selectorBytes": 15428,
+      "declarationsBytes": 25789,
+      "fontFaceBytes": 0,
+      "keyframesBytes": 765,
+      "layers": 0
+    },
+    {
+      "name": "home-djRd51SW.css",
+      "sha256": "0bcd1de5b274e2aa0818dcee0b8ce07a9f9cc2522a9ffbd7648d63832ba0cf21",
+      "bytes": 6275,
+      "gzip": 1973,
+      "rules": 63,
+      "selectorBytes": 1727,
+      "declarationsBytes": 4236,
+      "fontFaceBytes": 0,
+      "keyframesBytes": 0,
+      "layers": 0
+    },
+    {
+      "name": "home-layers-CGeD3b0U.css",
+      "sha256": "859fb623803b4549c88765d28de8f062b140d4a4e96606305dbf606f68afb206",
+      "bytes": 7062,
+      "gzip": 1771,
+      "rules": 57,
+      "selectorBytes": 2798,
+      "declarationsBytes": 3838,
+      "fontFaceBytes": 0,
+      "keyframesBytes": 464,
+      "layers": 0
+    },
+    {
+      "name": "home-menu-motion-ChDSp1Xr.css",
+      "sha256": "726592152d6e23122f02a0c6332b00918e1e22a41b002308dfada373288ee90e",
+      "bytes": 5346,
+      "gzip": 973,
+      "rules": 47,
+      "selectorBytes": 2562,
+      "declarationsBytes": 2230,
+      "fontFaceBytes": 0,
+      "keyframesBytes": 1100,
+      "layers": 0
+    },
+    {
+      "name": "home-polish-8Wc6XNpi.css",
+      "sha256": "6a4b328446868cea1c27a6ed25640e649c40d9241b96f2f2242ad5747ca2797f",
+      "bytes": 32383,
+      "gzip": 6599,
+      "rules": 235,
+      "selectorBytes": 14469,
+      "declarationsBytes": 16517,
+      "fontFaceBytes": 0,
+      "keyframesBytes": 2055,
+      "layers": 0
+    },
+    {
+      "name": "index-BPiAp5x-.css",
+      "sha256": "649119bd72a577d1fa192797bc1f7b508f4f8883a089c6681f5b0f35e3aecc22",
+      "bytes": 1011695,
+      "gzip": 176693,
+      "rules": 7698,
+      "selectorBytes": 393405,
+      "declarationsBytes": 573461,
+      "fontFaceBytes": 1496,
+      "keyframesBytes": 23992,
+      "layers": 0
+    },
+    {
+      "name": "interface-motion-Cm3pw1Zg.css",
+      "sha256": "70a846aa0f98653f24d49ddab3cbf0b1c3634d86b333c1c14da531213821e214",
+      "bytes": 6043,
+      "gzip": 971,
+      "rules": 43,
+      "selectorBytes": 3333,
+      "declarationsBytes": 2327,
+      "fontFaceBytes": 0,
+      "keyframesBytes": 749,
+      "layers": 0
+    },
+    {
+      "name": "motion-transitions-BdxbKqrz.css",
+      "sha256": "384d22f6f74838e97adb6820fbd7fef206f077f89905c98be8664bc44fe3a2f6",
+      "bytes": 6985,
+      "gzip": 2002,
+      "rules": 66,
+      "selectorBytes": 2149,
+      "declarationsBytes": 4266,
+      "fontFaceBytes": 0,
+      "keyframesBytes": 1001,
+      "layers": 0
+    }
+  ],
+  "experiments": {
+    "same-parent-exact-duplicates": {
+      "files": [
+        {
+          "name": "battle-CCiJZ0A2.css",
+          "bytes": 32390,
+          "gzip": 5706,
+          "sha256": "200adc75efe206977cadccb52297af13014451f267fc00a2446cd09d9b0b8003"
+        },
+        {
+          "name": "game.cardslib-yC5B5_9s.css",
+          "bytes": 72633,
+          "gzip": 13139,
+          "sha256": "11e5451a86f100f26f671cd8b6e8a4941fcdee1106345c6959e1c2353f6b760d"
+        },
+        {
+          "name": "game.menu-Bp_7M2KP.css",
+          "bytes": 43275,
+          "gzip": 9334,
+          "sha256": "1976735e71da0dbadaaef240bb240e255b8678405788233f6d45bfb44428d05b"
+        },
+        {
+          "name": "home-djRd51SW.css",
+          "bytes": 6275,
+          "gzip": 1973,
+          "sha256": "0bcd1de5b274e2aa0818dcee0b8ce07a9f9cc2522a9ffbd7648d63832ba0cf21"
+        },
+        {
+          "name": "home-layers-CGeD3b0U.css",
+          "bytes": 7062,
+          "gzip": 1771,
+          "sha256": "859fb623803b4549c88765d28de8f062b140d4a4e96606305dbf606f68afb206"
+        },
+        {
+          "name": "home-menu-motion-ChDSp1Xr.css",
+          "bytes": 5346,
+          "gzip": 973,
+          "sha256": "726592152d6e23122f02a0c6332b00918e1e22a41b002308dfada373288ee90e"
+        },
+        {
+          "name": "home-polish-8Wc6XNpi.css",
+          "bytes": 32383,
+          "gzip": 6599,
+          "sha256": "6a4b328446868cea1c27a6ed25640e649c40d9241b96f2f2242ad5747ca2797f"
+        },
+        {
+          "name": "index-BPiAp5x-.css",
+          "bytes": 1011695,
+          "gzip": 176693,
+          "sha256": "649119bd72a577d1fa192797bc1f7b508f4f8883a089c6681f5b0f35e3aecc22"
+        },
+        {
+          "name": "interface-motion-Cm3pw1Zg.css",
+          "bytes": 6043,
+          "gzip": 971,
+          "sha256": "70a846aa0f98653f24d49ddab3cbf0b1c3634d86b333c1c14da531213821e214"
+        },
+        {
+          "name": "motion-transitions-BdxbKqrz.css",
+          "bytes": 6985,
+          "gzip": 2002,
+          "sha256": "384d22f6f74838e97adb6820fbd7fef206f077f89905c98be8664bc44fe3a2f6"
+        }
+      ],
+      "removed": [],
+      "merged": [],
+      "total": {
+        "bytes": 1224087,
+        "gzip": 219161
+      },
+      "saved": {
+        "bytes": 0,
+        "gzip": 0
+      }
+    },
+    "adjacent-identical-declarations": {
+      "files": [
+        {
+          "name": "battle-CCiJZ0A2.css",
+          "bytes": 32390,
+          "gzip": 5706,
+          "sha256": "200adc75efe206977cadccb52297af13014451f267fc00a2446cd09d9b0b8003"
+        },
+        {
+          "name": "game.cardslib-yC5B5_9s.css",
+          "bytes": 72633,
+          "gzip": 13139,
+          "sha256": "11e5451a86f100f26f671cd8b6e8a4941fcdee1106345c6959e1c2353f6b760d"
+        },
+        {
+          "name": "game.menu-Bp_7M2KP.css",
+          "bytes": 43275,
+          "gzip": 9334,
+          "sha256": "1976735e71da0dbadaaef240bb240e255b8678405788233f6d45bfb44428d05b"
+        },
+        {
+          "name": "home-djRd51SW.css",
+          "bytes": 6275,
+          "gzip": 1973,
+          "sha256": "0bcd1de5b274e2aa0818dcee0b8ce07a9f9cc2522a9ffbd7648d63832ba0cf21"
+        },
+        {
+          "name": "home-layers-CGeD3b0U.css",
+          "bytes": 7062,
+          "gzip": 1771,
+          "sha256": "859fb623803b4549c88765d28de8f062b140d4a4e96606305dbf606f68afb206"
+        },
+        {
+          "name": "home-menu-motion-ChDSp1Xr.css",
+          "bytes": 5321,
+          "gzip": 973,
+          "sha256": "d2c3a797d1691cc025375d61544dd1151e2e4eeb4a2c33b948f888ac1ce610df"
+        },
+        {
+          "name": "home-polish-8Wc6XNpi.css",
+          "bytes": 32357,
+          "gzip": 6596,
+          "sha256": "3528b9acacb4ee0b6c1ab52e4e984787d2450aeb5e80a1131dad6fa5ddc8f0d9"
+        },
+        {
+          "name": "index-BPiAp5x-.css",
+          "bytes": 1011610,
+          "gzip": 176696,
+          "sha256": "e9bc457a1021f9b2c59629ed0fbac7140cca25ecd99b5edbf4a217b7d1ecfe6b"
+        },
+        {
+          "name": "interface-motion-Cm3pw1Zg.css",
+          "bytes": 6018,
+          "gzip": 970,
+          "sha256": "420cbb91d90bd2ac473910de14ecb39dbb27f79bdc24fe97aa3a053e6381a16b"
+        },
+        {
+          "name": "motion-transitions-BdxbKqrz.css",
+          "bytes": 6985,
+          "gzip": 2002,
+          "sha256": "384d22f6f74838e97adb6820fbd7fef206f077f89905c98be8664bc44fe3a2f6"
+        }
+      ],
+      "removed": [],
+      "merged": [
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "before": [
+            "#title.home-composed[data-home-phase]",
+            "#title.home-composed[data-home-phase=rest] .home-plate,#title.home-composed[data-home-phase=rest] .home-brand,#title.home-composed[data-home-phase=rest] .home-footer"
+          ],
+          "bytes": 24
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "before": [
+            "body.reduce-motion #title.home-composed .home-grain,body.reduce-motion #title.home-composed .home-spark",
+            "body.reduce-motion #title.home-composed .home-near-snow"
+          ],
+          "bytes": 12
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "before": [
+            "body #title.home-composed .home-grain,body #title.home-composed .home-spark",
+            "body #title.home-composed .home-near-snow"
+          ],
+          "bytes": 12
+        },
+        {
+          "file": "index-BPiAp5x-.css",
+          "before": [
+            "#overlay .scene[data-asset-key=scene-event-cobbler]",
+            "#overlay .node-pg[data-asset-key=scene-event-cobbler]"
+          ],
+          "bytes": 54
+        },
+        {
+          "file": "index-BPiAp5x-.css",
+          "before": [
+            "#overlay #hubMain.pg.hub.base-camp .person-details>.mini-btn",
+            "#overlay #hubMain.pg.hub.base-camp .companion-toolbar .mini-btn"
+          ],
+          "bytes": 29
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "before": [
+            "body.interface-motion #overlay[data-ui-motion] #ovBody>.pg",
+            "body.interface-motion #overlay[data-ui-motion] #hubMain .hub-page.page-in"
+          ],
+          "bytes": 24
+        }
+      ],
+      "total": {
+        "bytes": 1223926,
+        "gzip": 219160
+      },
+      "saved": {
+        "bytes": 161,
+        "gzip": 1
+      }
+    },
+    "both": {
+      "files": [
+        {
+          "name": "battle-CCiJZ0A2.css",
+          "bytes": 32390,
+          "gzip": 5706,
+          "sha256": "200adc75efe206977cadccb52297af13014451f267fc00a2446cd09d9b0b8003"
+        },
+        {
+          "name": "game.cardslib-yC5B5_9s.css",
+          "bytes": 72633,
+          "gzip": 13139,
+          "sha256": "11e5451a86f100f26f671cd8b6e8a4941fcdee1106345c6959e1c2353f6b760d"
+        },
+        {
+          "name": "game.menu-Bp_7M2KP.css",
+          "bytes": 43275,
+          "gzip": 9334,
+          "sha256": "1976735e71da0dbadaaef240bb240e255b8678405788233f6d45bfb44428d05b"
+        },
+        {
+          "name": "home-djRd51SW.css",
+          "bytes": 6275,
+          "gzip": 1973,
+          "sha256": "0bcd1de5b274e2aa0818dcee0b8ce07a9f9cc2522a9ffbd7648d63832ba0cf21"
+        },
+        {
+          "name": "home-layers-CGeD3b0U.css",
+          "bytes": 7062,
+          "gzip": 1771,
+          "sha256": "859fb623803b4549c88765d28de8f062b140d4a4e96606305dbf606f68afb206"
+        },
+        {
+          "name": "home-menu-motion-ChDSp1Xr.css",
+          "bytes": 5321,
+          "gzip": 973,
+          "sha256": "d2c3a797d1691cc025375d61544dd1151e2e4eeb4a2c33b948f888ac1ce610df"
+        },
+        {
+          "name": "home-polish-8Wc6XNpi.css",
+          "bytes": 32357,
+          "gzip": 6596,
+          "sha256": "3528b9acacb4ee0b6c1ab52e4e984787d2450aeb5e80a1131dad6fa5ddc8f0d9"
+        },
+        {
+          "name": "index-BPiAp5x-.css",
+          "bytes": 1011610,
+          "gzip": 176696,
+          "sha256": "e9bc457a1021f9b2c59629ed0fbac7140cca25ecd99b5edbf4a217b7d1ecfe6b"
+        },
+        {
+          "name": "interface-motion-Cm3pw1Zg.css",
+          "bytes": 6018,
+          "gzip": 970,
+          "sha256": "420cbb91d90bd2ac473910de14ecb39dbb27f79bdc24fe97aa3a053e6381a16b"
+        },
+        {
+          "name": "motion-transitions-BdxbKqrz.css",
+          "bytes": 6985,
+          "gzip": 2002,
+          "sha256": "384d22f6f74838e97adb6820fbd7fef206f077f89905c98be8664bc44fe3a2f6"
+        }
+      ],
+      "removed": [],
+      "merged": [
+        {
+          "file": "home-menu-motion-ChDSp1Xr.css",
+          "before": [
+            "#title.home-composed[data-home-phase]",
+            "#title.home-composed[data-home-phase=rest] .home-plate,#title.home-composed[data-home-phase=rest] .home-brand,#title.home-composed[data-home-phase=rest] .home-footer"
+          ],
+          "bytes": 24
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "before": [
+            "body.reduce-motion #title.home-composed .home-grain,body.reduce-motion #title.home-composed .home-spark",
+            "body.reduce-motion #title.home-composed .home-near-snow"
+          ],
+          "bytes": 12
+        },
+        {
+          "file": "home-polish-8Wc6XNpi.css",
+          "before": [
+            "body #title.home-composed .home-grain,body #title.home-composed .home-spark",
+            "body #title.home-composed .home-near-snow"
+          ],
+          "bytes": 12
+        },
+        {
+          "file": "index-BPiAp5x-.css",
+          "before": [
+            "#overlay .scene[data-asset-key=scene-event-cobbler]",
+            "#overlay .node-pg[data-asset-key=scene-event-cobbler]"
+          ],
+          "bytes": 54
+        },
+        {
+          "file": "index-BPiAp5x-.css",
+          "before": [
+            "#overlay #hubMain.pg.hub.base-camp .person-details>.mini-btn",
+            "#overlay #hubMain.pg.hub.base-camp .companion-toolbar .mini-btn"
+          ],
+          "bytes": 29
+        },
+        {
+          "file": "interface-motion-Cm3pw1Zg.css",
+          "before": [
+            "body.interface-motion #overlay[data-ui-motion] #ovBody>.pg",
+            "body.interface-motion #overlay[data-ui-motion] #hubMain .hub-page.page-in"
+          ],
+          "bytes": 24
+        }
+      ],
+      "total": {
+        "bytes": 1223926,
+        "gzip": 219160
+      },
+      "saved": {
+        "bytes": 161,
+        "gzip": 1
+      }
+    }
+  },
+  "total": {
+    "bytes": 1224087,
+    "gzip": 219161
+  },
+  "excess": 79897
+}

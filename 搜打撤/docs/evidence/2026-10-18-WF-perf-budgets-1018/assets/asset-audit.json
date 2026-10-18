@@ -1,0 +1,3387 @@
+{
+  "source": {
+    "frozen": "D:\\素材\\代号柒\\搜打撤\\.tmp\\page-perf-1018\\exe-build\\project",
+    "indexSha256": "56961cf91a8e395727ade83ba9b562dd050da4470a2ad2c88b022685664a64f0",
+    "sharedWorktreeEventFilesRead": false,
+    "currentScopedAssetDrift": [
+      "scenes/chests/large-rig-v1/.gitignore",
+      "portraits/frames/baita/sprite-v1/animations.json",
+      "portraits/frames/changwuyu/sprite-v1/animations.json",
+      "portraits/frames/heixiang/sprite-v1/animations.json",
+      "portraits/frames/wu/sprite-v1/animations.json",
+      "portraits/frames/xingyue/sprite-v1/animations.json"
+    ],
+    "selectorFingerprints": [
+      {
+        "path": "game/src/run/chests.js",
+        "expected": "e8518681de2cf1b7d645e8a3a18f58777accf78ce7c74757e4913498ad04d972",
+        "frozenHash": "e8518681de2cf1b7d645e8a3a18f58777accf78ce7c74757e4913498ad04d972",
+        "currentHash": "e8518681de2cf1b7d645e8a3a18f58777accf78ce7c74757e4913498ad04d972",
+        "matchesReview": true,
+        "currentMatchesFrozen": true
+      },
+      {
+        "path": "game/src/run/chest-opening-art.js",
+        "expected": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf",
+        "frozenHash": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf",
+        "currentHash": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf",
+        "matchesReview": true,
+        "currentMatchesFrozen": true
+      }
+    ]
+  },
+  "baseline": {
+    "files": 1528,
+    "packageBytes": 212695157,
+    "duplicateBytes": 10419979,
+    "existingExcludedCount": 195,
+    "warnings": [],
+    "categoryTotals": {
+      "chests": {
+        "candidates": 90,
+        "present": 90,
+        "excluded": 90,
+        "excludedBytes": 20222734,
+        "published": 0
+      },
+      "frames": {
+        "candidates": 39,
+        "present": 39,
+        "excluded": 39,
+        "excludedBytes": 1958624,
+        "published": 0
+      },
+      "map": {
+        "candidates": 12,
+        "present": 12,
+        "excluded": 12,
+        "excludedBytes": 1575882,
+        "published": 0
+      },
+      "transitions": {
+        "candidates": 5,
+        "present": 5,
+        "excluded": 5,
+        "excludedBytes": 433676,
+        "published": 0
+      },
+      "retired-scenes": {
+        "candidates": 19,
+        "present": 19,
+        "excluded": 19,
+        "excludedBytes": 3428566,
+        "published": 0
+      },
+      "shadowed-card-art": {
+        "candidates": 30,
+        "present": 30,
+        "excluded": 30,
+        "excludedBytes": 1291352,
+        "published": 0
+      }
+    }
+  },
+  "groups": [
+    {
+      "path": "scenes/chests/boss-rig-v1",
+      "files": 18,
+      "bytes": 14730488,
+      "publishedFiles": 18,
+      "publishedBytes": 14730488
+    },
+    {
+      "path": "scenes/chests/medium-rig-v1",
+      "files": 18,
+      "bytes": 13708766,
+      "publishedFiles": 18,
+      "publishedBytes": 13708766
+    },
+    {
+      "path": "scenes/chests/class-rig-v1",
+      "files": 18,
+      "bytes": 13419428,
+      "publishedFiles": 18,
+      "publishedBytes": 13419428
+    },
+    {
+      "path": "scenes/chests/small-rig-v1",
+      "files": 18,
+      "bytes": 11323102,
+      "publishedFiles": 18,
+      "publishedBytes": 11323102
+    },
+    {
+      "path": "scenes/chests/large-rig-v1",
+      "files": 15,
+      "bytes": 11301064,
+      "publishedFiles": 15,
+      "publishedBytes": 11301064
+    },
+    {
+      "path": "portraits/frames/changwuyu/sprite-v1",
+      "files": 65,
+      "bytes": 11580558,
+      "publishedFiles": 63,
+      "publishedBytes": 11145946
+    },
+    {
+      "path": "portraits/frames/baita/sprite-v1",
+      "files": 51,
+      "bytes": 3228710,
+      "publishedFiles": 51,
+      "publishedBytes": 3228710
+    },
+    {
+      "path": "portraits/frames/xingyue/sprite-v1",
+      "files": 51,
+      "bytes": 3122732,
+      "publishedFiles": 51,
+      "publishedBytes": 3122732
+    },
+    {
+      "path": "scenes/chests/supply-opening-v6",
+      "files": 16,
+      "bytes": 3016056,
+      "publishedFiles": 16,
+      "publishedBytes": 3016056
+    },
+    {
+      "path": "portraits/frames/wu/sprite-v1",
+      "files": 52,
+      "bytes": 2787004,
+      "publishedFiles": 52,
+      "publishedBytes": 2787004
+    },
+    {
+      "path": "portraits/frames/heixiang/sprite-v1",
+      "files": 51,
+      "bytes": 2081334,
+      "publishedFiles": 51,
+      "publishedBytes": 2081334
+    },
+    {
+      "path": "scenes/chests/safe-simple-v7",
+      "files": 5,
+      "bytes": 945872,
+      "publishedFiles": 5,
+      "publishedBytes": 945872
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1",
+      "files": 18,
+      "bytes": 4413216,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1",
+      "files": 18,
+      "bytes": 3879692,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1",
+      "files": 18,
+      "bytes": 4519974,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1",
+      "files": 18,
+      "bytes": 4042006,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1",
+      "files": 18,
+      "bytes": 3367846,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/atk-hit-1.webp",
+      "files": 1,
+      "bytes": 49416,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/atk-hit.webp",
+      "files": 1,
+      "bytes": 49398,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/atk-wind-1.webp",
+      "files": 1,
+      "bytes": 46318,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/atk-wind.webp",
+      "files": 1,
+      "bytes": 45360,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/cast-1.webp",
+      "files": 1,
+      "bytes": 46318,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/cast-2.webp",
+      "files": 1,
+      "bytes": 45378,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/cast-3.webp",
+      "files": 1,
+      "bytes": 49398,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/cast-4.webp",
+      "files": 1,
+      "bytes": 49416,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/cast-5.webp",
+      "files": 1,
+      "bytes": 43210,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/cast.webp",
+      "files": 1,
+      "bytes": 45360,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/hurt-1.webp",
+      "files": 1,
+      "bytes": 46014,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/hurt.webp",
+      "files": 1,
+      "bytes": 46014,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/idle-1.webp",
+      "files": 1,
+      "bytes": 39744,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/idle-breathe.webp",
+      "files": 1,
+      "bytes": 39744,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/baita/idle.webp",
+      "files": 1,
+      "bytes": 39906,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/changwuyu/atk-hit-1.webp",
+      "files": 1,
+      "bytes": 51546,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/changwuyu/atk-hit.webp",
+      "files": 1,
+      "bytes": 52416,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/changwuyu/atk-wind-1.webp",
+      "files": 1,
+      "bytes": 57014,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/changwuyu/atk-wind.webp",
+      "files": 1,
+      "bytes": 57014,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/changwuyu/cast-1.webp",
+      "files": 1,
+      "bytes": 54364,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/changwuyu/cast-2.webp",
+      "files": 1,
+      "bytes": 51282,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/changwuyu/cast.webp",
+      "files": 1,
+      "bytes": 54366,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/changwuyu/hurt-1.webp",
+      "files": 1,
+      "bytes": 50092,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/changwuyu/hurt.webp",
+      "files": 1,
+      "bytes": 50092,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/changwuyu/idle-1.webp",
+      "files": 1,
+      "bytes": 44474,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/changwuyu/idle-breathe.webp",
+      "files": 1,
+      "bytes": 44474,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/changwuyu/idle.webp",
+      "files": 1,
+      "bytes": 44826,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/wu/atk-hit-1.webp",
+      "files": 1,
+      "bytes": 61574,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/wu/atk-hit.webp",
+      "files": 1,
+      "bytes": 57444,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/wu/atk-wind-1.webp",
+      "files": 1,
+      "bytes": 57484,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/wu/atk-wind-2.webp",
+      "files": 1,
+      "bytes": 63240,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/wu/atk-wind.webp",
+      "files": 1,
+      "bytes": 55804,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/wu/cast-1.webp",
+      "files": 1,
+      "bytes": 62366,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/wu/cast.webp",
+      "files": 1,
+      "bytes": 62366,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/wu/hurt-1.webp",
+      "files": 1,
+      "bytes": 47084,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/wu/hurt.webp",
+      "files": 1,
+      "bytes": 47084,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/wu/idle-1.webp",
+      "files": 1,
+      "bytes": 51082,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/wu/idle-breathe.webp",
+      "files": 1,
+      "bytes": 49030,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    },
+    {
+      "path": "portraits/frames/wu/idle.webp",
+      "files": 1,
+      "bytes": 51112,
+      "publishedFiles": 0,
+      "publishedBytes": 0
+    }
+  ],
+  "proposal": {
+    "strategy": "Add only reviewed original-resolution *-rig-v1 frame files to guarded publication exclusions; preserve sources and active timelines.",
+    "files": 86,
+    "removedBytes": 64482788,
+    "removedPublishedBytes": 64482788,
+    "zeroSourceReferences": true,
+    "remainingPackageBytes": 148212369,
+    "remainingDuplicateBytes": 134099,
+    "duplicateBytesSaved": 10285880,
+    "exactFiles": [
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-00.webp",
+        "bytes": 751734,
+        "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+        "builtBytes": 751734,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-01.webp",
+        "bytes": 751734,
+        "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+        "builtBytes": 751734,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-02.webp",
+        "bytes": 751734,
+        "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+        "builtBytes": 751734,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-03.webp",
+        "bytes": 750080,
+        "sha256": "94774a45ac99c0720101d00499acec25f0b3587e89549f1e3dfcd057a0c5b0af",
+        "builtBytes": 750080,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-04.webp",
+        "bytes": 748088,
+        "sha256": "85c351a0ca47d24795e6d17de751b773c8f8146a2bb92e02fcd309364d5b4693",
+        "builtBytes": 748088,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-05.webp",
+        "bytes": 740294,
+        "sha256": "76247c76e962518439e3900a52afc673a8b9b521c01710e7609fca66439ad46c",
+        "builtBytes": 740294,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-06.webp",
+        "bytes": 721984,
+        "sha256": "afd33fb7c3d10c97e66680398ed571ebb9a087849e9c70a218994705594a3163",
+        "builtBytes": 721984,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-07.webp",
+        "bytes": 704586,
+        "sha256": "be7b2032aa42be8f8acde5665b7440c21aa22a760f67e09f12651de210e17caa",
+        "builtBytes": 704586,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-08.webp",
+        "bytes": 672068,
+        "sha256": "15e9ea046a13215383721aea6185e3cd12e0473ae6b4718a53f86fe7628b3d26",
+        "builtBytes": 672068,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-09.webp",
+        "bytes": 732554,
+        "sha256": "e387404cfc53c74d2f6dcbbbe4b5436bd586bd0ff169d18c4f0ecd699c1ad9f8",
+        "builtBytes": 732554,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-10.webp",
+        "bytes": 817668,
+        "sha256": "e11c191cff5816fcc6224e8bc38158a3fd19b1a9d9e86d7e92d5bc4714970603",
+        "builtBytes": 817668,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-11.webp",
+        "bytes": 869646,
+        "sha256": "502aa60a6c7254510df1fd487927a77b57a0d07ee5f8af6f97e4faf9a5877cf8",
+        "builtBytes": 869646,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-12.webp",
+        "bytes": 910658,
+        "sha256": "054ccc3177b0eea5a247906abca5078d18c919d5de3b3812fde84c28d4b178b2",
+        "builtBytes": 910658,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-13.webp",
+        "bytes": 940500,
+        "sha256": "d1844400e2857fa0cfa087c1c6a99ba798a5d119ec0708e4756632de14ef5f32",
+        "builtBytes": 940500,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-14.webp",
+        "bytes": 954970,
+        "sha256": "6339875d2d0a993127863536d71277b4a62d37a208335c7a5ece5805ffd08e6c",
+        "builtBytes": 954970,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-15.webp",
+        "bytes": 966790,
+        "sha256": "9913806c04a932529e2c2c92cd7e504d6cb360230a89683b411d81a6b5682f1e",
+        "builtBytes": 966790,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-16.webp",
+        "bytes": 972700,
+        "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+        "builtBytes": 972700,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-17.webp",
+        "bytes": 972700,
+        "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+        "builtBytes": 972700,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-00.webp",
+        "bytes": 648016,
+        "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+        "builtBytes": 648016,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-01.webp",
+        "bytes": 648016,
+        "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+        "builtBytes": 648016,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-02.webp",
+        "bytes": 648016,
+        "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+        "builtBytes": 648016,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-03.webp",
+        "bytes": 639192,
+        "sha256": "b99a25df8026fddb7b356301d3bfccb5328e2761c6ad304fc708b8ab9d6fcdc4",
+        "builtBytes": 639192,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-04.webp",
+        "bytes": 633806,
+        "sha256": "68f6a8547a27509136da6e5cee62470524c578b6b74716a5207fdfd1410846df",
+        "builtBytes": 633806,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-05.webp",
+        "bytes": 620352,
+        "sha256": "c3450e00acfbcfc34f137c85117c76abff205c7a791bba8bd0c565cdaefdbd13",
+        "builtBytes": 620352,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-06.webp",
+        "bytes": 610920,
+        "sha256": "70611229c98bb520cdb777ab2dc2e1de9a5a23d3198cdded5878c9be671bd81a",
+        "builtBytes": 610920,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-07.webp",
+        "bytes": 591430,
+        "sha256": "fc1b858328fcf566b29fa2f1c28013436961068dfdbd13f531b80add2360915f",
+        "builtBytes": 591430,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-08.webp",
+        "bytes": 626874,
+        "sha256": "f6abb429ba3f0e8ffa3a4defe27b6b2920cd4f7aa0a4076182a11232bcfb6ff0",
+        "builtBytes": 626874,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-09.webp",
+        "bytes": 711226,
+        "sha256": "bf5d11e7295b1c218d57311c38c888e1f4162196f0a6e8db82f67facf4b29d9c",
+        "builtBytes": 711226,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-10.webp",
+        "bytes": 783548,
+        "sha256": "fe08a53bba55e94a2a5472f4f52cac03020bcef46031cfe048e5fe6929ace088",
+        "builtBytes": 783548,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-11.webp",
+        "bytes": 835788,
+        "sha256": "c17cb89ecc7ba187a397f69e03f996eb70426cf9c1c37d1f0968717c82f7eb15",
+        "builtBytes": 835788,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-12.webp",
+        "bytes": 872292,
+        "sha256": "58a49b9d1f7a06f4ca3d48781ee4a552c269c59c9c1888939c9fa1ee509d6cdb",
+        "builtBytes": 872292,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-13.webp",
+        "bytes": 891564,
+        "sha256": "e2f3752f9c6f34d2815e6fdcf6f1afc0fc2cb8ae4238fbecdd5bd40e258df8b8",
+        "builtBytes": 891564,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-14.webp",
+        "bytes": 907492,
+        "sha256": "d5a969be35552c4422491864128b3843ce92e1db73ea76aa22c4fb04c5070fab",
+        "builtBytes": 907492,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-15.webp",
+        "bytes": 914936,
+        "sha256": "93de68584716f24b2ccfaf2b59a67a10ec5bce2a19bc4b1262f24bf231dc0c94",
+        "builtBytes": 914936,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-16.webp",
+        "bytes": 917980,
+        "sha256": "cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8",
+        "builtBytes": 917980,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-17.webp",
+        "bytes": 917980,
+        "sha256": "cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8",
+        "builtBytes": 917980,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-00.webp",
+        "bytes": 766072,
+        "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+        "builtBytes": 766072,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-01.webp",
+        "bytes": 766072,
+        "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+        "builtBytes": 766072,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-02.webp",
+        "bytes": 766072,
+        "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+        "builtBytes": 766072,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-03.webp",
+        "bytes": 765548,
+        "sha256": "acdbc06634b9960c6ab3a80c5957b1c8e6eec715bfad6b129febeb9176b337fa",
+        "builtBytes": 765548,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-04.webp",
+        "bytes": 762668,
+        "sha256": "62fe905a6a76d74e0516ac57d20c297c05a8b6b1c36709049de22a4a1c5187a4",
+        "builtBytes": 762668,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-05.webp",
+        "bytes": 754590,
+        "sha256": "d19e76451620ece3aacfde2ca6910b2b1448bb93497cd9fc813872f238d66ff0",
+        "builtBytes": 754590,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-06.webp",
+        "bytes": 747762,
+        "sha256": "6891c14ff4fbae815c5aff5f8e889bed20f04579362c0a7dd01f7c8f3b38c41b",
+        "builtBytes": 747762,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-07.webp",
+        "bytes": 729294,
+        "sha256": "fe300781aaa662d0429735d0aa6aef50a574cd20cf3a2f52fa8cec582683f380",
+        "builtBytes": 729294,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-08.webp",
+        "bytes": 711808,
+        "sha256": "f311793b0381ebd8c44366252f01f24f0cc3dd90fb1c3ade9f2e3e3e094a11c3",
+        "builtBytes": 711808,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-09.webp",
+        "bytes": 779662,
+        "sha256": "a59a77a69518637de8f7286896d6635fcff64fb52b73642c1920e8d8930ebbff",
+        "builtBytes": 779662,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-10.webp",
+        "bytes": 861496,
+        "sha256": "c7e9efec08a649571fe480f1dd75d7be86b4ab8bcec15bc9de87e42d84ccf603",
+        "builtBytes": 861496,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-11.webp",
+        "bytes": 922416,
+        "sha256": "defb9bf1a7fd881335c2adbe3e0ab4e0bd5c196a8c4dae3e1dd75a0f17d75976",
+        "builtBytes": 922416,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-12.webp",
+        "bytes": 969988,
+        "sha256": "2960725c4a976b74afad8e13c4ff6743ff6c535eaf757a3440c84d34c23a8f12",
+        "builtBytes": 969988,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-13.webp",
+        "bytes": 997556,
+        "sha256": "6fb5df55d0e1fe6458b354293f2544890413a0075e6f46397fc64536d967bbea",
+        "builtBytes": 997556,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-00.webp",
+        "bytes": 643182,
+        "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+        "builtBytes": 643182,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-01.webp",
+        "bytes": 643182,
+        "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+        "builtBytes": 643182,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-02.webp",
+        "bytes": 643182,
+        "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+        "builtBytes": 643182,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-03.webp",
+        "bytes": 643518,
+        "sha256": "e12a3dd6a4e6843a9fbb416c2c34067b160483603927946a4dea023a56b1550b",
+        "builtBytes": 643518,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-04.webp",
+        "bytes": 646744,
+        "sha256": "06412732701b7784a440b907dabefbadf1896088ea05b7d7d95d0546254fe41b",
+        "builtBytes": 646744,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-05.webp",
+        "bytes": 629792,
+        "sha256": "1b4c69216e9567b1f990e7a1589746934f68113ccf7cf020f25adab0b26dbc03",
+        "builtBytes": 629792,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-06.webp",
+        "bytes": 612078,
+        "sha256": "be1e03f49b3777ba6a8113c42da4578d5e89bbafa6ee505c77769dfed6417e06",
+        "builtBytes": 612078,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-07.webp",
+        "bytes": 589424,
+        "sha256": "bc270061bc8cec9379688793e3d110f1fc3a62cce16cd3b017329ab0fd105e34",
+        "builtBytes": 589424,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-08.webp",
+        "bytes": 631424,
+        "sha256": "47158af5913abfa92a500669d11bc39a9ee10648d14f7a11208f0e894e6e92ea",
+        "builtBytes": 631424,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-09.webp",
+        "bytes": 721898,
+        "sha256": "d2d9a3542caa8a0a45860c189fc27285920e18f60eb4a2010366c9fc35c1ae37",
+        "builtBytes": 721898,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-10.webp",
+        "bytes": 801686,
+        "sha256": "9776c1b80b0c937bb5299695e8e1d1aed837c8514be08009154f9bbe557af8fd",
+        "builtBytes": 801686,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-11.webp",
+        "bytes": 859722,
+        "sha256": "c150a3ac827c42507b18d8debed5c85ec024b58c485e5adf354ed5e020f3c798",
+        "builtBytes": 859722,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-12.webp",
+        "bytes": 903232,
+        "sha256": "360774e5d972dd5f007f1f91a61633cb34c2d85cfebffc9c59dffedff9c7cac1",
+        "builtBytes": 903232,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-13.webp",
+        "bytes": 924400,
+        "sha256": "ae338a4aac3d89a5dd7c6ef14067ddf7d67ea19ed6ace7a06358346beda3d353",
+        "builtBytes": 924400,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-14.webp",
+        "bytes": 944076,
+        "sha256": "13192f1d4fdb8794abfeb97907e2a80c5a01fbd5dde609aea1cbdd80325cb5b3",
+        "builtBytes": 944076,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-15.webp",
+        "bytes": 954854,
+        "sha256": "dd1d299273c6a1cf64360818588eab531ba28bcdb51bf0618672653e2f2a2061",
+        "builtBytes": 954854,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-16.webp",
+        "bytes": 958186,
+        "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+        "builtBytes": 958186,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-17.webp",
+        "bytes": 958186,
+        "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+        "builtBytes": 958186,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-00.webp",
+        "bytes": 487716,
+        "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+        "builtBytes": 487716,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-01.webp",
+        "bytes": 487716,
+        "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+        "builtBytes": 487716,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-02.webp",
+        "bytes": 487716,
+        "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+        "builtBytes": 487716,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-03.webp",
+        "bytes": 494282,
+        "sha256": "5fe2dfa385585d5faa2b7801f0f1d28c8510533bd96126b82dff3fd32dce68af",
+        "builtBytes": 494282,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-04.webp",
+        "bytes": 496444,
+        "sha256": "b51ff0795fa7aac4420d4904a511e0829e32140d1a6a212f20a3834bc04d1ea1",
+        "builtBytes": 496444,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-05.webp",
+        "bytes": 488200,
+        "sha256": "21d3558c2acd849175cda86447944e4c8d6361b4744d6d8b977aedfc55d71a8a",
+        "builtBytes": 488200,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-06.webp",
+        "bytes": 475914,
+        "sha256": "875c073a6873a8a53c88c589638c78d1b16af8b311d63e5aa7ae1211b2b62fe0",
+        "builtBytes": 475914,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-07.webp",
+        "bytes": 448244,
+        "sha256": "19c120f9864e0bc545aedcb9064f7c58d239a5f1f815ead347369526d44ca5de",
+        "builtBytes": 448244,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-08.webp",
+        "bytes": 492662,
+        "sha256": "5de58f883a4433fde77cb26eef5069dcd4f6115c707e0ea67017a8319be3f9af",
+        "builtBytes": 492662,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-09.webp",
+        "bytes": 592628,
+        "sha256": "4483917748d8001e87b2455157ac47ec49d300107ce0bfba47817c14fb90aa5f",
+        "builtBytes": 592628,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-10.webp",
+        "bytes": 675322,
+        "sha256": "7c3682abdd6c04374a08dc69c9366766e1195b6bbacc94e7c5923fef549e2f39",
+        "builtBytes": 675322,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-11.webp",
+        "bytes": 742316,
+        "sha256": "4960e6105e5148ed97250bffe233db1e50eff9a844eb1e0e6e128913fe9ebb37",
+        "builtBytes": 742316,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-12.webp",
+        "bytes": 785162,
+        "sha256": "0316963668739a206eb24312c0cbeee0b5ac4cf62d6c5a85f16353189458ec09",
+        "builtBytes": 785162,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-13.webp",
+        "bytes": 813230,
+        "sha256": "d31fc632f3ac86869ccc424e736adeac78022991b0e38f58f26b9e629b96a5b4",
+        "builtBytes": 813230,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-14.webp",
+        "bytes": 828056,
+        "sha256": "1d44b980a0895e079995015da9007f180eefde61a65b84faa1ab5ac6fe0918f6",
+        "builtBytes": 828056,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-15.webp",
+        "bytes": 840346,
+        "sha256": "3053276a6984192f45d2a3f6ab7b25dc7e8f8c7b307bb486f410315a76460424",
+        "builtBytes": 840346,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-16.webp",
+        "bytes": 843574,
+        "sha256": "d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa",
+        "builtBytes": 843574,
+        "references": []
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-17.webp",
+        "bytes": 843574,
+        "sha256": "d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa",
+        "builtBytes": 843574,
+        "references": []
+      }
+    ],
+    "byteIdenticalAliasFallback": [
+      {
+        "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+        "bytes": 766072,
+        "paths": [
+          "assets/scenes/chests/large-rig-v1/frame-00.webp",
+          "assets/scenes/chests/large-rig-v1/frame-01.webp",
+          "assets/scenes/chests/large-rig-v1/frame-02.webp"
+        ],
+        "duplicateBytes": 1532144
+      },
+      {
+        "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+        "bytes": 751734,
+        "paths": [
+          "assets/scenes/chests/boss-rig-v1/frame-00.webp",
+          "assets/scenes/chests/boss-rig-v1/frame-01.webp",
+          "assets/scenes/chests/boss-rig-v1/frame-02.webp"
+        ],
+        "duplicateBytes": 1503468
+      },
+      {
+        "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+        "bytes": 648016,
+        "paths": [
+          "assets/scenes/chests/class-rig-v1/frame-00.webp",
+          "assets/scenes/chests/class-rig-v1/frame-01.webp",
+          "assets/scenes/chests/class-rig-v1/frame-02.webp"
+        ],
+        "duplicateBytes": 1296032
+      },
+      {
+        "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+        "bytes": 643182,
+        "paths": [
+          "assets/scenes/chests/medium-rig-v1/frame-00.webp",
+          "assets/scenes/chests/medium-rig-v1/frame-01.webp",
+          "assets/scenes/chests/medium-rig-v1/frame-02.webp"
+        ],
+        "duplicateBytes": 1286364
+      },
+      {
+        "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+        "bytes": 487716,
+        "paths": [
+          "assets/scenes/chests/small-rig-v1/frame-00.webp",
+          "assets/scenes/chests/small-rig-v1/frame-01.webp",
+          "assets/scenes/chests/small-rig-v1/frame-02.webp"
+        ],
+        "duplicateBytes": 975432
+      },
+      {
+        "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+        "bytes": 972700,
+        "paths": [
+          "assets/scenes/chests/boss-rig-v1/frame-16.webp",
+          "assets/scenes/chests/boss-rig-v1/frame-17.webp"
+        ],
+        "duplicateBytes": 972700
+      },
+      {
+        "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+        "bytes": 958186,
+        "paths": [
+          "assets/scenes/chests/medium-rig-v1/frame-16.webp",
+          "assets/scenes/chests/medium-rig-v1/frame-17.webp"
+        ],
+        "duplicateBytes": 958186
+      },
+      {
+        "sha256": "cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8",
+        "bytes": 917980,
+        "paths": [
+          "assets/scenes/chests/class-rig-v1/frame-16.webp",
+          "assets/scenes/chests/class-rig-v1/frame-17.webp"
+        ],
+        "duplicateBytes": 917980
+      },
+      {
+        "sha256": "d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa",
+        "bytes": 843574,
+        "paths": [
+          "assets/scenes/chests/small-rig-v1/frame-16.webp",
+          "assets/scenes/chests/small-rig-v1/frame-17.webp"
+        ],
+        "duplicateBytes": 843574
+      }
+    ]
+  },
+  "existingExclusions": [
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-00.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 143532,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-01.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 143532,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-02.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 143532,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-03.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 145560,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-04.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 148288,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-05.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 148314,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-06.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 146944,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-07.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 140484,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-08.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 155110,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-09.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 179648,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-10.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 202252,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-11.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 219170,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-12.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 230116,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-13.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 235438,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-14.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 242876,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-15.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 246530,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-16.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 248260,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/small-rig-640-v1/frame-17.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 248260,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-00.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 191356,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-01.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 191356,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-02.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 191356,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-03.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 192418,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-04.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 192152,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-05.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 191562,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-06.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 186902,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-07.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 179380,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-08.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 193256,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-09.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 215096,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-10.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 235546,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-11.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 250360,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-12.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 260920,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-13.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 266132,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-14.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 272194,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-15.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 276092,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-16.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 277964,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/medium-rig-640-v1/frame-17.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 277964,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-00.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 224682,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-01.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 224682,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-02.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 224682,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-03.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 225630,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-04.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 226818,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-05.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 225804,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-06.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 223952,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-07.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 220500,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-08.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 216390,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-09.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 234128,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-10.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 253966,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-11.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 269236,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-12.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 279460,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-13.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 285092,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-14.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 292330,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-15.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 295830,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-16.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 298396,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/large-rig-640-v1/frame-17.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 298396,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-00.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 186658,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-01.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 186658,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-02.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 186658,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-03.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 187202,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-04.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 185880,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-05.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 184568,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-06.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 181588,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-07.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 177448,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-08.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 188688,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-09.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 208722,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-10.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 226422,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-11.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 239398,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-12.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 247988,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-13.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 251882,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-14.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 257424,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-15.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 260064,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-16.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 261222,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/class-rig-640-v1/frame-17.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 261222,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-00.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 226926,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-01.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 226926,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-02.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 226926,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-03.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 227264,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-04.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 228460,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-05.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 226622,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-06.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 221112,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-07.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 218610,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-08.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 208360,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-09.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 224066,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-10.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 243836,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-11.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 257822,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-12.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 268188,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-13.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 274934,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-14.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 279864,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-15.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 283340,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-16.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 284980,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/chests/boss-rig-640-v1/frame-17.webp",
+      "category": "chests",
+      "present": true,
+      "bytes": 284980,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/wu/atk-hit-1.webp",
+      "category": "frames",
+      "role": "wu",
+      "present": true,
+      "bytes": 61574,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/wu/atk-hit.webp",
+      "category": "frames",
+      "role": "wu",
+      "present": true,
+      "bytes": 57444,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/wu/atk-wind-1.webp",
+      "category": "frames",
+      "role": "wu",
+      "present": true,
+      "bytes": 57484,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/wu/atk-wind-2.webp",
+      "category": "frames",
+      "role": "wu",
+      "present": true,
+      "bytes": 63240,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/wu/atk-wind.webp",
+      "category": "frames",
+      "role": "wu",
+      "present": true,
+      "bytes": 55804,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/wu/cast-1.webp",
+      "category": "frames",
+      "role": "wu",
+      "present": true,
+      "bytes": 62366,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/wu/cast.webp",
+      "category": "frames",
+      "role": "wu",
+      "present": true,
+      "bytes": 62366,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/wu/hurt-1.webp",
+      "category": "frames",
+      "role": "wu",
+      "present": true,
+      "bytes": 47084,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/wu/hurt.webp",
+      "category": "frames",
+      "role": "wu",
+      "present": true,
+      "bytes": 47084,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/wu/idle-1.webp",
+      "category": "frames",
+      "role": "wu",
+      "present": true,
+      "bytes": 51082,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/wu/idle-breathe.webp",
+      "category": "frames",
+      "role": "wu",
+      "present": true,
+      "bytes": 49030,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/wu/idle.webp",
+      "category": "frames",
+      "role": "wu",
+      "present": true,
+      "bytes": 51112,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/atk-hit-1.webp",
+      "category": "frames",
+      "role": "changwuyu",
+      "present": true,
+      "bytes": 51546,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/atk-hit.webp",
+      "category": "frames",
+      "role": "changwuyu",
+      "present": true,
+      "bytes": 52416,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/atk-wind-1.webp",
+      "category": "frames",
+      "role": "changwuyu",
+      "present": true,
+      "bytes": 57014,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/atk-wind.webp",
+      "category": "frames",
+      "role": "changwuyu",
+      "present": true,
+      "bytes": 57014,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/cast-1.webp",
+      "category": "frames",
+      "role": "changwuyu",
+      "present": true,
+      "bytes": 54364,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/cast-2.webp",
+      "category": "frames",
+      "role": "changwuyu",
+      "present": true,
+      "bytes": 51282,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/cast.webp",
+      "category": "frames",
+      "role": "changwuyu",
+      "present": true,
+      "bytes": 54366,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/hurt-1.webp",
+      "category": "frames",
+      "role": "changwuyu",
+      "present": true,
+      "bytes": 50092,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/hurt.webp",
+      "category": "frames",
+      "role": "changwuyu",
+      "present": true,
+      "bytes": 50092,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/idle-1.webp",
+      "category": "frames",
+      "role": "changwuyu",
+      "present": true,
+      "bytes": 44474,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/idle-breathe.webp",
+      "category": "frames",
+      "role": "changwuyu",
+      "present": true,
+      "bytes": 44474,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/changwuyu/idle.webp",
+      "category": "frames",
+      "role": "changwuyu",
+      "present": true,
+      "bytes": 44826,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/atk-hit-1.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 49416,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/atk-hit.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 49398,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/atk-wind-1.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 46318,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/atk-wind.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 45360,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/cast-1.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 46318,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/cast-2.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 45378,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/cast-3.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 49398,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/cast-4.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 49416,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/cast-5.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 43210,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/cast.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 45360,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/hurt-1.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 46014,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/hurt.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 46014,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/idle-1.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 39744,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/idle-breathe.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 39744,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "portraits/frames/baita/idle.webp",
+      "category": "frames",
+      "role": "baita",
+      "present": true,
+      "bytes": 39906,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/map-nodes/battle-security-shard-1011.webp",
+      "category": "map",
+      "present": true,
+      "bytes": 68314,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/map-nodes/battle-security-shard-style-1012-v2.webp",
+      "category": "map",
+      "present": true,
+      "bytes": 142158,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/map-nodes/event-record-fragments-1011.webp",
+      "category": "map",
+      "present": true,
+      "bytes": 98378,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/map-nodes/event-record-fragments-style-1012-v2.webp",
+      "category": "map",
+      "present": true,
+      "bytes": 149144,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/map-nodes/passage-transit-core-1011.webp",
+      "category": "map",
+      "present": true,
+      "bytes": 98528,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/map-nodes/passage-transit-core-palette-1012-v3.webp",
+      "category": "map",
+      "present": true,
+      "bytes": 146620,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/map-nodes/passage-transit-core-style-1012-v2.webp",
+      "category": "map",
+      "present": true,
+      "bytes": 149218,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/map-nodes/rest-heat-cell-1011.webp",
+      "category": "map",
+      "present": true,
+      "bytes": 80176,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/map-nodes/rest-heat-cell-style-1012-v2.webp",
+      "category": "map",
+      "present": true,
+      "bytes": 179626,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/map-nodes/shop-exchange-token-1011.webp",
+      "category": "map",
+      "present": true,
+      "bytes": 114100,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/map-nodes/shop-exchange-token-palette-1012-v3.webp",
+      "category": "map",
+      "present": true,
+      "bytes": 171656,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/map-nodes/shop-exchange-token-style-1012-v2.webp",
+      "category": "map",
+      "present": true,
+      "bytes": 177964,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/transition-battle-v1.webp",
+      "category": "transitions",
+      "present": true,
+      "bytes": 91104,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/transition-boss-v1.webp",
+      "category": "transitions",
+      "present": true,
+      "bytes": 106012,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/transition-camp-v1.webp",
+      "category": "transitions",
+      "present": true,
+      "bytes": 70900,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/transition-field-v1.webp",
+      "category": "transitions",
+      "present": true,
+      "bytes": 96750,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/transition-photo-v1.webp",
+      "category": "transitions",
+      "present": true,
+      "bytes": 68910,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/base-home-v4.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 103974,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/battle-street-amber-anime-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 414722,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/entry/winter-arrival-1011-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 112604,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/entry/winter-arrival-1011-v2.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 88082,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/rewards/chest-small-1011-v2.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 526708,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/rewards/chest-small-cardstyle-1011-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 815604,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/scene-chest-boss-anime-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 124864,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/scene-chest-class-anime-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 93464,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/scene-chest-large-anime-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 156162,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/scene-chest-medium-anime-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 131346,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/scene-chest-small-anime-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 131822,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/ui-loop-0925/expedition-banner.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 118232,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "scenes/ui-loop-0925/rewards-convoy-success.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 127652,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/scenes/battle-street-amber-anime-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 17594,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-boss-anime-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 95232,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-class-anime-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 71490,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-large-anime-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 109926,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-medium-anime-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 97124,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/scenes/scene-chest-small-anime-v1.webp",
+      "category": "retired-scenes",
+      "present": true,
+      "bytes": 91964,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/spell-tt8-curse1.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 75020,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse1.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 17406,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/spell-tt8-curse2.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 103200,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse2.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 22768,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/spell-tt8-curse3.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 92638,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse3.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 23322,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/spell-tt8-curse4.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 97694,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/spell-tt8-curse4.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 23126,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/equip-tt3-staff.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 15740,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-staff.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 16954,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/equip-tt3-fate-wheel.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 79746,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-fate-wheel.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 11766,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/equip-tt3-wolf-bow.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 73274,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-wolf-bow.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 8538,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/equip-tt3-twinwater-mail.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 116328,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-twinwater-mail.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 16416,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/equip-tt3-grass-armor.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 139890,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-grass-armor.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 18848,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/equip-tt3-blooddrinker.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 58146,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt3-blooddrinker.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 8334,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/equip-tt8-demonslay.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 18100,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-demonslay.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 3630,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/equip-tt8-archdemon.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 16904,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-archdemon.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 3170,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/equip-tt8-heavensword.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 53908,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt8-heavensword.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 12068,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/equip-tt7-arcanescroll.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 85072,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt7-arcanescroll.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 11656,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "cards/equip-tt12-raygun.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 59680,
+      "excluded": true,
+      "published": false
+    },
+    {
+      "path": "thumbs/cards/equip-tt12-raygun.webp",
+      "category": "shadowed-card-art",
+      "present": true,
+      "bytes": 8010,
+      "excluded": true,
+      "published": false
+    }
+  ],
+  "portraitRoles": [
+    {
+      "role": "wu",
+      "requiredImages": 51,
+      "sourceImages": 63,
+      "publishedImages": 51,
+      "publishedBytes": 2782318,
+      "unused": [
+        {
+          "path": "portraits/frames/wu/atk-hit-1.webp",
+          "bytes": 61574,
+          "sha256": "9fff76805caf90a0609dd61ccaf7ec08208eee84a890774e3e515651adcd6248",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/wu/atk-hit.webp",
+          "bytes": 57444,
+          "sha256": "0f78de0055550c19cc6c2d8338344cd8e3da25ae1064ef058fddcc536af83e61",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/wu/atk-wind-1.webp",
+          "bytes": 57484,
+          "sha256": "77fee63a7670a136800786da55d76d111e34530565efdb7e392cf0289372fb53",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/wu/atk-wind-2.webp",
+          "bytes": 63240,
+          "sha256": "84d7d870874f8d5061367c44706fefeca0c2a0215578221825831a95929255cb",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/wu/atk-wind.webp",
+          "bytes": 55804,
+          "sha256": "3efd3c2ca05a8ec170e06c6d93d2120bb8c99bf751482cf3a0fd374243b2b25e",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/wu/cast-1.webp",
+          "bytes": 62366,
+          "sha256": "e63de959c4de2d21352a5e14f110f36780578cd6d41362274e15b854b2e44df1",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/wu/cast.webp",
+          "bytes": 62366,
+          "sha256": "e63de959c4de2d21352a5e14f110f36780578cd6d41362274e15b854b2e44df1",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/wu/hurt-1.webp",
+          "bytes": 47084,
+          "sha256": "cf707b3a0dacdc53cfe76d6471dd0a9d299ece149558c85285a28fbae6fc4650",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/wu/hurt.webp",
+          "bytes": 47084,
+          "sha256": "cf707b3a0dacdc53cfe76d6471dd0a9d299ece149558c85285a28fbae6fc4650",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/wu/idle-1.webp",
+          "bytes": 51082,
+          "sha256": "8fde65d9a80232668378ce45744e582b400411c9506a02859a7c32617dc5f11e",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/wu/idle-breathe.webp",
+          "bytes": 49030,
+          "sha256": "fb6247efbfe3115bcb196f717279a7a0204c2a2da9b961f483238d7fdb763dae",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/wu/idle.webp",
+          "bytes": 51112,
+          "sha256": "719d873ffc760b628e7e131fca7ee946fc131070151605e24d20cd65ce21be2f",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        }
+      ]
+    },
+    {
+      "role": "changwuyu",
+      "requiredImages": 64,
+      "sourceImages": 76,
+      "publishedImages": 62,
+      "publishedBytes": 11140558,
+      "unused": [
+        {
+          "path": "portraits/frames/changwuyu/atk-hit-1.webp",
+          "bytes": 51546,
+          "sha256": "2c382c2dcefedb715358a6026d598c971494dec1cfe3860fdbb700c5ea19a131",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/changwuyu/atk-hit.webp",
+          "bytes": 52416,
+          "sha256": "c613b5e85ea46fc74650a12669100f6a1c94a9fa219201dde5fab9dde6bdce80",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/changwuyu/atk-wind-1.webp",
+          "bytes": 57014,
+          "sha256": "dbc3ad24358832d4889e40cb821d73700c4194b0b724ba5f9e2d9b3e0359f305",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/changwuyu/atk-wind.webp",
+          "bytes": 57014,
+          "sha256": "dbc3ad24358832d4889e40cb821d73700c4194b0b724ba5f9e2d9b3e0359f305",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/changwuyu/cast-1.webp",
+          "bytes": 54364,
+          "sha256": "29f89ea39d35de8c089f21f5a1d664157258d330cb95ecb9af0562ed9d5a8fd2",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/changwuyu/cast-2.webp",
+          "bytes": 51282,
+          "sha256": "def6d953511dd3f166736a93ea452312f838557f8e04b848a60869c095f0701b",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/changwuyu/cast.webp",
+          "bytes": 54366,
+          "sha256": "cb189e4934f74c91334b733490e9f5455a3a1466dbc2e55eba74ecc24429c474",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/changwuyu/hurt-1.webp",
+          "bytes": 50092,
+          "sha256": "4341e4c9e6dc662635f3f5fdb8f1806b441ec719c2f7d1cd19e742349ceb3380",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/changwuyu/hurt.webp",
+          "bytes": 50092,
+          "sha256": "4341e4c9e6dc662635f3f5fdb8f1806b441ec719c2f7d1cd19e742349ceb3380",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/changwuyu/idle-1.webp",
+          "bytes": 44474,
+          "sha256": "c6b00ef708cd38eef1a356b8d3e9b39764aa01ae6f27e788eea2658b6097b689",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/changwuyu/idle-breathe.webp",
+          "bytes": 44474,
+          "sha256": "c6b00ef708cd38eef1a356b8d3e9b39764aa01ae6f27e788eea2658b6097b689",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/changwuyu/idle.webp",
+          "bytes": 44826,
+          "sha256": "2748e1c37db768944aaf66eb4e85135969ecf3e191fcb444d2d0c2751d375c3e",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        }
+      ]
+    },
+    {
+      "role": "baita",
+      "requiredImages": 50,
+      "sourceImages": 65,
+      "publishedImages": 50,
+      "publishedBytes": 3223658,
+      "unused": [
+        {
+          "path": "portraits/frames/baita/atk-hit-1.webp",
+          "bytes": 49416,
+          "sha256": "804e4c49abd81b6780d33cf24494e78281221ec99da6cf6de43fbb97cc67f7fe",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/atk-hit.webp",
+          "bytes": 49398,
+          "sha256": "5d1825a9868bc4cc96b844905b8cb185cc53e7a84b9594231e57b412c68d394d",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/atk-wind-1.webp",
+          "bytes": 46318,
+          "sha256": "6bef546a844a8bd6e8275ce6149901f00abc2592b86adb20aae246a0788617f3",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/atk-wind.webp",
+          "bytes": 45360,
+          "sha256": "a5565427df3a42ede7250571fd82a4668b75885be9838a13c64c39774cefcc57",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/cast-1.webp",
+          "bytes": 46318,
+          "sha256": "6bef546a844a8bd6e8275ce6149901f00abc2592b86adb20aae246a0788617f3",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/cast-2.webp",
+          "bytes": 45378,
+          "sha256": "d6ce31eb233e0ed07fa023786fa83097806957437697f630f5b1438fefa8ab9d",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/cast-3.webp",
+          "bytes": 49398,
+          "sha256": "5d1825a9868bc4cc96b844905b8cb185cc53e7a84b9594231e57b412c68d394d",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/cast-4.webp",
+          "bytes": 49416,
+          "sha256": "804e4c49abd81b6780d33cf24494e78281221ec99da6cf6de43fbb97cc67f7fe",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/cast-5.webp",
+          "bytes": 43210,
+          "sha256": "a0f74157eb834cd750c61ce394247fbd4b2d74a1b80883697ae2a91ebcc80a3f",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/cast.webp",
+          "bytes": 45360,
+          "sha256": "a5565427df3a42ede7250571fd82a4668b75885be9838a13c64c39774cefcc57",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/hurt-1.webp",
+          "bytes": 46014,
+          "sha256": "2d79440fd30261729f001b75f4c07753b191087a3f414e60f008cbf276a4d38b",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/hurt.webp",
+          "bytes": 46014,
+          "sha256": "2d79440fd30261729f001b75f4c07753b191087a3f414e60f008cbf276a4d38b",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/idle-1.webp",
+          "bytes": 39744,
+          "sha256": "102fa5876ccae4a2cd0eb54f1452044b2a408298ffefdb75da4e9b2f92b3873e",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/idle-breathe.webp",
+          "bytes": 39744,
+          "sha256": "102fa5876ccae4a2cd0eb54f1452044b2a408298ffefdb75da4e9b2f92b3873e",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        },
+        {
+          "path": "portraits/frames/baita/idle.webp",
+          "bytes": 39906,
+          "sha256": "95f72c8e282d109e51c654ccfb4bdc0b82ebfe049bf8aef8c33ed74074b2f00f",
+          "published": false,
+          "existingExclusion": true,
+          "references": []
+        }
+      ]
+    },
+    {
+      "role": "heixiang",
+      "requiredImages": 50,
+      "sourceImages": 50,
+      "publishedImages": 50,
+      "publishedBytes": 2076630,
+      "unused": []
+    },
+    {
+      "role": "xingyue",
+      "requiredImages": 50,
+      "sourceImages": 50,
+      "publishedImages": 50,
+      "publishedBytes": 3117680,
+      "unused": []
+    }
+  ],
+  "duplicateGroups": [
+    {
+      "sha256": "302b4781796599b42a36ee2a678bedaeb001988d75cd43783c6bd18ff1873889",
+      "bytes": 766072,
+      "paths": [
+        "assets/scenes/chests/large-rig-v1/frame-00.webp",
+        "assets/scenes/chests/large-rig-v1/frame-01.webp",
+        "assets/scenes/chests/large-rig-v1/frame-02.webp"
+      ],
+      "duplicateBytes": 1532144
+    },
+    {
+      "sha256": "03e8e586b44ead9cd5cef819f657f67e0c8ad34c02e05275ad4411541482b1fb",
+      "bytes": 751734,
+      "paths": [
+        "assets/scenes/chests/boss-rig-v1/frame-00.webp",
+        "assets/scenes/chests/boss-rig-v1/frame-01.webp",
+        "assets/scenes/chests/boss-rig-v1/frame-02.webp"
+      ],
+      "duplicateBytes": 1503468
+    },
+    {
+      "sha256": "01db5a9461106587f853fc334bbf4e9276b875e7e5c58f4789a30c98ef589576",
+      "bytes": 648016,
+      "paths": [
+        "assets/scenes/chests/class-rig-v1/frame-00.webp",
+        "assets/scenes/chests/class-rig-v1/frame-01.webp",
+        "assets/scenes/chests/class-rig-v1/frame-02.webp"
+      ],
+      "duplicateBytes": 1296032
+    },
+    {
+      "sha256": "ecb63c2375ec35e76a75a106d6a76db2bc7886f636c06732b79a5fbcc065e763",
+      "bytes": 643182,
+      "paths": [
+        "assets/scenes/chests/medium-rig-v1/frame-00.webp",
+        "assets/scenes/chests/medium-rig-v1/frame-01.webp",
+        "assets/scenes/chests/medium-rig-v1/frame-02.webp"
+      ],
+      "duplicateBytes": 1286364
+    },
+    {
+      "sha256": "d853a13538c68818ec573ced838208232bd2c42aa99f37a57d46b98ec2502c61",
+      "bytes": 487716,
+      "paths": [
+        "assets/scenes/chests/small-rig-v1/frame-00.webp",
+        "assets/scenes/chests/small-rig-v1/frame-01.webp",
+        "assets/scenes/chests/small-rig-v1/frame-02.webp"
+      ],
+      "duplicateBytes": 975432
+    },
+    {
+      "sha256": "2fe904b1edea85063ffba69c0a6ab252f636da57bc808b7fd46a9d58c27e009d",
+      "bytes": 972700,
+      "paths": [
+        "assets/scenes/chests/boss-rig-v1/frame-16.webp",
+        "assets/scenes/chests/boss-rig-v1/frame-17.webp"
+      ],
+      "duplicateBytes": 972700
+    },
+    {
+      "sha256": "8db593ca1e301e321eb8150ac8353e3c6283c426ea6e4b3f8a1ab4dfafddba73",
+      "bytes": 958186,
+      "paths": [
+        "assets/scenes/chests/medium-rig-v1/frame-16.webp",
+        "assets/scenes/chests/medium-rig-v1/frame-17.webp"
+      ],
+      "duplicateBytes": 958186
+    },
+    {
+      "sha256": "cc91c7e7361146ac33af952f07f2f1f0c90244b38643f45974d2582a684c46e8",
+      "bytes": 917980,
+      "paths": [
+        "assets/scenes/chests/class-rig-v1/frame-16.webp",
+        "assets/scenes/chests/class-rig-v1/frame-17.webp"
+      ],
+      "duplicateBytes": 917980
+    },
+    {
+      "sha256": "d3caa80535fb08b3e3faa3df4d92eb3452e7b17e9866728db2a13253cc17b7aa",
+      "bytes": 843574,
+      "paths": [
+        "assets/scenes/chests/small-rig-v1/frame-16.webp",
+        "assets/scenes/chests/small-rig-v1/frame-17.webp"
+      ],
+      "duplicateBytes": 843574
+    },
+    {
+      "sha256": "e9a8c4854370de18e05ca552a2880e7a70a75f85b67c18f22f0887a11bee16a2",
+      "bytes": 105624,
+      "paths": [
+        "assets/ui/card-frames/paper-1015/initial.webp",
+        "assets/ui/card-frames/paper-1015/neutral.webp"
+      ],
+      "duplicateBytes": 105624
+    },
+    {
+      "sha256": "692ee3a6f1821402ca649ff735bee9591dc4846c8098fc7d6a90fd15fa57c1af",
+      "bytes": 5859,
+      "paths": [
+        "assets/sfx/battle/additions/card-discard.ogg",
+        "assets/sfx/interface-soft/drop_001.ogg"
+      ],
+      "duplicateBytes": 5859
+    },
+    {
+      "sha256": "aec0c31ea934a35936ae0d2ab8fac8123c93aa5647f935853a58dbaf90278b7a",
+      "bytes": 5468,
+      "paths": [
+        "assets/sfx/battle/additions/card-select.ogg",
+        "assets/sfx/interface-soft/select_001.ogg"
+      ],
+      "duplicateBytes": 5468
+    },
+    {
+      "sha256": "c61fd20e53913c49ad2f537a7559a3fbad77e949715399979a0113ab1b229992",
+      "bytes": 5052,
+      "paths": [
+        "assets/portraits/frames/baita/sprite-v1/animations.json",
+        "assets/portraits/frames/xingyue/sprite-v1/animations.json"
+      ],
+      "duplicateBytes": 5052
+    },
+    {
+      "sha256": "900988cc960fd6c7aed97bf9396cf1f1f3c5eed6f61445d6179f0693748e1600",
+      "bytes": 523,
+      "paths": [
+        "assets/ui/icons/book.png",
+        "assets/ui/icons/cards.png",
+        "assets/ui/icons/notes.png",
+        "assets/ui/icons/save.png",
+        "assets/ui/icons/scroll.png"
+      ],
+      "duplicateBytes": 2092
+    },
+    {
+      "sha256": "9dc63a90f75aef35944748a8f29cc7da676e5d8e950c6e649fade926c2c63fd3",
+      "bytes": 802,
+      "paths": [
+        "assets/ui/icons/helmet.png",
+        "assets/ui/icons/plate.png",
+        "assets/ui/icons/shield.png"
+      ],
+      "duplicateBytes": 1604
+    },
+    {
+      "sha256": "3362c5cf5b4595c0fbf5c8f30975ee5d3c86f0aa6e6b2bb3ec58cd108d6f9865",
+      "bytes": 678,
+      "paths": [
+        "assets/ui/icons/broom.png",
+        "assets/ui/icons/pen.png",
+        "assets/ui/icons/tools.png"
+      ],
+      "duplicateBytes": 1356
+    },
+    {
+      "sha256": "a1a658559032a8d1d411f8fef3b74a56d0d1e2cb37602fa01403dbd6fab9071c",
+      "bytes": 526,
+      "paths": [
+        "assets/ui/icons/bag.png",
+        "assets/ui/icons/pocket.png",
+        "assets/ui/icons/pouch.png"
+      ],
+      "duplicateBytes": 1052
+    },
+    {
+      "sha256": "eed29dcd9bb3886667a114f33e3e696b2270342f70214280f82290d5cee0b017",
+      "bytes": 1029,
+      "paths": [
+        "assets/ui/icons/crystal.png",
+        "assets/ui/icons/gem.png"
+      ],
+      "duplicateBytes": 1029
+    },
+    {
+      "sha256": "021a10d8171794d481fb3d858809aeb77b08e88d054cce4e2c77a8808f35b2fa",
+      "bytes": 508,
+      "paths": [
+        "assets/ui/icons/archive.png",
+        "assets/ui/icons/folder.png",
+        "assets/ui/icons/trash.png"
+      ],
+      "duplicateBytes": 1016
+    },
+    {
+      "sha256": "850dea1856efa746c133f5619b61d95be50faacb8e68f7832a1265d58cf26ba2",
+      "bytes": 430,
+      "paths": [
+        "assets/ui/icons/arrow.png",
+        "assets/ui/icons/exit.png",
+        "assets/ui/icons/upload.png"
+      ],
+      "duplicateBytes": 860
+    },
+    {
+      "sha256": "a44a4000c632324eb56fe7f7f488b967ff754ecded9287980784cb7ea6c7e89d",
+      "bytes": 768,
+      "paths": [
+        "assets/ui/icons/hourglass.png",
+        "assets/ui/icons/mouse.png"
+      ],
+      "duplicateBytes": 768
+    },
+    {
+      "sha256": "95d63a00e1408fc4f15ea9ca0ea7df505021215a4ff1e5a6e9d4c7dc81f8afb4",
+      "bytes": 664,
+      "paths": [
+        "assets/ui/icons/lantern.png",
+        "assets/ui/icons/sparkles.png"
+      ],
+      "duplicateBytes": 664
+    },
+    {
+      "sha256": "b49aa9c56b04528b95913de13e506a0f7c5e807b9925db9bfef86af1f91120db",
+      "bytes": 608,
+      "paths": [
+        "assets/sfx/battle/kenney-license.txt",
+        "assets/sfx/impact-soft/License.txt"
+      ],
+      "duplicateBytes": 608
+    },
+    {
+      "sha256": "727e9d57603cd329a853d2a2e747c8fcb681fb4989fbbcbcb8d43bdb13c5376d",
+      "bytes": 538,
+      "paths": [
+        "assets/ui/icons/door.png",
+        "assets/ui/icons/home.png"
+      ],
+      "duplicateBytes": 538
+    },
+    {
+      "sha256": "e3c08dff79c895a747a6aa526a6b2b2159580f25e7eea97def7ccb48097ab47b",
+      "bytes": 508,
+      "paths": [
+        "assets/ui/icons/play.png",
+        "assets/ui/icons/skip.png"
+      ],
+      "duplicateBytes": 508
+    },
+    {
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "paths": [
+        "assets/cards/.gitkeep",
+        "assets/portraits/enemies/.gitkeep"
+      ],
+      "duplicateBytes": 1
+    }
+  ]
+}

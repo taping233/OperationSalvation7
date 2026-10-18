@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-18T10:13:12.909Z",
+  "files": [
+    {
+      "path": "搜打撤/docs/evidence/2026-10-18-staged-check/2026-10-18T09-57-58.106Z-9feb1523-staged.json",
+      "bytes": 3859904,
+      "sha256": "f8d51d6b5daf9f16c0ab814b2b72476ff0cefd96801d8271c653866f82670e0f",
+      "acquisition": "Generated locally by this task with check:staged:isolate; retained at the recorded original path."
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-18-staged-check/2026-10-18T09-57-58.106Z-9feb1523-staged.log",
+      "bytes": 18940,
+      "sha256": "dc3136595b37050de6993663654edb1c164fb50f870d33c241333978eac09293",
+      "acquisition": "Generated locally by this task with check:staged:isolate; retained at the recorded original path."
+    },
+    {
+      "path": "搜打撤/docs/evidence/2026-10-18-WF-perf-budgets-1018/css/runtime/undefined",
+      "bytes": 1791,
+      "sha256": "b12192037bbf74a78e9bc63e3060e2ea2c40e462ef9da8479257fbbaa31ec46f",
+      "acquisition": "Intermediate agent fixture output, preserved locally and excluded from Git."
+    },
+    {
+      "path": "搜打撤/.tmp/perf-budgets-1018/delivery/搜打撤-代号7.exe",
+      "bytes": 287822081,
+      "sha256": "cd6ff02a0030d59b57f0aa08a2c2e84920e0788348da9c50acbf480c2041f5b1",
+      "acquisition": "Local offline Electron portable build from the immutable HEAD export and nine verified overlays; copy this one EXE from the recorded local path."
+    }
+  ]
+}

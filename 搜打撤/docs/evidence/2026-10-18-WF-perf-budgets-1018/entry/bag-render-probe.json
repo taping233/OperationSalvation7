@@ -1,0 +1,870 @@
+{
+  "note": "Current source versus preserved baseline, actual status rules. Full page HTML with controlled card renderer; no browser timing.",
+  "cases": 54,
+  "results": [
+    {
+      "fixtureKind": "mixed",
+      "zone": "bag",
+      "filter": "all",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 9,
+        "visits": 117
+      },
+      "after": {
+        "groupings": 5,
+        "visits": 65
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "bag",
+      "filter": "move",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 9,
+        "visits": 117
+      },
+      "after": {
+        "groupings": 5,
+        "visits": 65
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "bag",
+      "filter": "装备",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 9,
+        "visits": 117
+      },
+      "after": {
+        "groupings": 5,
+        "visits": 65
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "bag",
+      "filter": "道具",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 9,
+        "visits": 117
+      },
+      "after": {
+        "groupings": 5,
+        "visits": 65
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "bag",
+      "filter": "资源",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 9,
+        "visits": 117
+      },
+      "after": {
+        "groupings": 5,
+        "visits": 65
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "bag",
+      "filter": "supply",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 9,
+        "visits": 117
+      },
+      "after": {
+        "groupings": 5,
+        "visits": 65
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "safe",
+      "filter": "all",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 104
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "safe",
+      "filter": "move",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 104
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "safe",
+      "filter": "装备",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 104
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "safe",
+      "filter": "道具",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 104
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "safe",
+      "filter": "资源",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 104
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "safe",
+      "filter": "supply",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 104
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "pocket",
+      "filter": "all",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 91
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "pocket",
+      "filter": "move",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 91
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "pocket",
+      "filter": "装备",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 91
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "pocket",
+      "filter": "道具",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 91
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "pocket",
+      "filter": "资源",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 91
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "mixed",
+      "zone": "pocket",
+      "filter": "supply",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 91
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "bag",
+      "filter": "all",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "bag",
+      "filter": "move",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "bag",
+      "filter": "装备",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "bag",
+      "filter": "道具",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "bag",
+      "filter": "资源",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "bag",
+      "filter": "supply",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "safe",
+      "filter": "all",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "safe",
+      "filter": "move",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "safe",
+      "filter": "装备",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "safe",
+      "filter": "道具",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "safe",
+      "filter": "资源",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "safe",
+      "filter": "supply",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "pocket",
+      "filter": "all",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "pocket",
+      "filter": "move",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "pocket",
+      "filter": "装备",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "pocket",
+      "filter": "道具",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "pocket",
+      "filter": "资源",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "empty",
+      "zone": "pocket",
+      "filter": "supply",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 0
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 0
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "bag",
+      "filter": "all",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 9,
+        "visits": 117
+      },
+      "after": {
+        "groupings": 5,
+        "visits": 65
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "bag",
+      "filter": "move",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 9,
+        "visits": 117
+      },
+      "after": {
+        "groupings": 5,
+        "visits": 65
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "bag",
+      "filter": "装备",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 9,
+        "visits": 117
+      },
+      "after": {
+        "groupings": 5,
+        "visits": 65
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "bag",
+      "filter": "道具",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 9,
+        "visits": 117
+      },
+      "after": {
+        "groupings": 5,
+        "visits": 65
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "bag",
+      "filter": "资源",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 9,
+        "visits": 117
+      },
+      "after": {
+        "groupings": 5,
+        "visits": 65
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "bag",
+      "filter": "supply",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 9,
+        "visits": 117
+      },
+      "after": {
+        "groupings": 5,
+        "visits": 65
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "safe",
+      "filter": "all",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 104
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "safe",
+      "filter": "move",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 104
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "safe",
+      "filter": "装备",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 104
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "safe",
+      "filter": "道具",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 104
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "safe",
+      "filter": "资源",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 104
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "safe",
+      "filter": "supply",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 8,
+        "visits": 104
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "pocket",
+      "filter": "all",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 91
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "pocket",
+      "filter": "move",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 91
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "pocket",
+      "filter": "装备",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 91
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "pocket",
+      "filter": "道具",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 91
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "pocket",
+      "filter": "资源",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 91
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    },
+    {
+      "fixtureKind": "atCapacity",
+      "zone": "pocket",
+      "filter": "supply",
+      "modelEqual": true,
+      "htmlEqual": true,
+      "inPlaceMutationEqual": true,
+      "before": {
+        "groupings": 7,
+        "visits": 91
+      },
+      "after": {
+        "groupings": 4,
+        "visits": 52
+      }
+    }
+  ]
+}

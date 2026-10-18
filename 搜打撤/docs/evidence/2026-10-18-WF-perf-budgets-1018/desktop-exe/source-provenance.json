@@ -1,0 +1,16 @@
+{
+  "commit": "4f27eae68e665dd55c6c56fae3520077476c5f01",
+  "project": "D:\\素材\\代号柒\\搜打撤\\.tmp\\perf-budgets-1018\\project",
+  "files": 4092,
+  "bytes": 358702641,
+  "excluded": [
+    "搜打撤/game/art-source/",
+    "搜打撤/docs/evidence/"
+  ],
+  "method": "All exported HEAD blobs SHA1 verified again after the export finished; active worktree changes excluded.",
+  "dependencies": {
+    "vitePackage": "D:\\素材\\代号柒\\搜打撤\\node_modules\\vite\\package.json",
+    "version": "6.4.4",
+    "usage": "Existing ancestor workspace dependencies, unchanged npm lock; no installs, no source links. Frozen build validation will record its own dependency scope."
+  }
+}

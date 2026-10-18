@@ -1,0 +1,69 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import vm from 'node:vm';
+import { fileURLToPath,pathToFileURL } from 'node:url';
+import { parse } from 'acorn';
+import { full } from 'acorn-walk';
+
+const here=path.dirname(fileURLToPath(import.meta.url)),root=path.resolve(here,'../../..');
+const frozen=path.join(root,'.tmp/page-perf-1018/exe-build/project');
+const output=path.join(root,'docs/evidence/2026-10-18-WF-perf-budgets-1018/assets');
+const audit=JSON.parse(fs.readFileSync(path.join(output,'asset-audit.json'),'utf8'));
+const old=new Set(audit.proposal.exactFiles.map(file=>file.path));
+const art=fs.readFileSync(path.join(frozen,'game/src/core/art.js'),'utf8');
+const ast=parse(art,{ecmaVersion:'latest',sourceType:'module'});
+function declaration(name){let match;full(ast,node=>{if(node.type==='FunctionDeclaration'&&node.id?.name===name)match=node;});if(!match)throw Error('Missing actual function '+name);return art.slice(match.start,match.end);}
+function method(name){let match;full(ast,node=>{if(node.type==='Property'&&node.method&&node.key?.name===name)match=node;});if(!match)throw Error('Missing actual method '+name);return art.slice(match.start,match.end);}
+const planSource=fs.readFileSync(path.join(frozen,'game/src/core/art-preload-plan.js'),'utf8');
+const planAst=parse(planSource,{ecmaVersion:'latest',sourceType:'module'});
+const planNode=planAst.body.find(node=>node.type==='ExportNamedDeclaration'&&node.declaration?.id?.name==='planStartupArtPreload').declaration;
+const planFunction=planSource.slice(planNode.start,planNode.end);
+const scenesSource=fs.readFileSync(path.join(frozen,'game/src/run/game.run.data.js'),'utf8');
+const scenesAst=parse(scenesSource,{ecmaVersion:'latest',sourceType:'module'});
+const sceneDeclarations=scenesAst.body.filter(node=>node.type==='VariableDeclaration'&&node.declarations.some(item=>['WINTER_BATTLE_LAYERS','PRELOAD_SCENES'].includes(item.id.name))).map(node=>scenesSource.slice(node.start,node.end).replaceAll('import.meta.url',JSON.stringify(pathToFileURL(path.join(frozen,'game/src/run/game.run.data.js')).href))).join('\n');
+const {STARTUP_SCENE_KEYS}=await import(pathToFileURL(path.join(frozen,'game/src/core/performance-budgets.js')));
+const frames=JSON.parse(fs.readFileSync(path.join(frozen,'game/data/card-frame-layout.json'),'utf8'));
+const manifestText=fs.readFileSync(path.join(frozen,'game/src/generated/art-manifest.js'),'utf8');
+const manifest=JSON.parse(manifestText.slice(manifestText.indexOf('export default ')+15).trim().replace(/;$/,''));
+const filtered=manifest.filter(file=>!old.has(file));
+const url=value=>'app://game/'+value;
+const startupUrls=vm.runInNewContext(`${sceneDeclarations}\n${planFunction}\nplanStartupArtPreload({sceneUrls:STARTUP_SCENE_KEYS.map(key=>PRELOAD_SCENES[key]).filter(Boolean)});`,{URL,frames,STARTUP_SCENE_KEYS,assetUrl:url});
+const collected=list=>vm.runInNewContext(`({${method('collectManifestAssets')}}).collectManifestAssets();`,{ART_MANIFEST:list,assetUrl:url});
+async function runActualPrefetch(urls){
+ const requests=[];let active=0,peak=0,images=0,decodes=0;
+ const context={urls,requests,Promise,Set,Map,console,queueMicrotask,
+  prefetchedUrls:new Set(),prefetchInFlight:new Map(),
+  document:{hidden:false,body:{dataset:{state:'idle'},classList:{contains:()=>false}}},navigator:{},
+  createForegroundImageYield:()=>()=>false,
+  requestIdleCallback:callback=>queueMicrotask(callback),setTimeout:callback=>queueMicrotask(callback),
+  fetch:async (address,options)=>{requests.push({url:address,cache:options.cache,priority:options.priority});active++;peak=Math.max(peak,active);return{ok:true,body:{getReader:()=>({read:async()=>{active--;return{done:true};},releaseLock(){}})}};},
+  Image:class{constructor(){images++;}decode(){decodes++;return Promise.resolve();}},
+ };
+ await vm.runInNewContext(`${declaration('prefetchAsset')}\n({${method('prefetchBatched')}}).prefetchBatched(urls,null,4);`,context);
+ return{requests:requests.length,oldRigRequests:requests.filter(request=>/\/(?:small|medium|large|class|boss)-rig-v1\//.test(request.url)).length,peakRequests:peak,imageConstructions:images,decodeCalls:decodes};
+}
+const calls=[];
+for(const filename of fs.readdirSync(path.join(frozen,'desktop-app/game/assets/js')).filter(file=>file.endsWith('.js'))){
+ const code=fs.readFileSync(path.join(frozen,'desktop-app/game/assets/js',filename),'utf8');
+ const tree=parse(code,{ecmaVersion:'latest',sourceType:'module'});
+ full(tree,node=>{if(node.type!=='CallExpression'||node.callee.type!=='MemberExpression')return;const member=node.callee.property;const name=member.type==='Identifier'&&!node.callee.computed?member.name:member.type==='Literal'?member.value:null;if(['collectManifestAssets','collectThumbnailAssets','warmBatched','prefetchBatched'].includes(name))calls.push({chunk:filename,method:name});});
+}
+function dimensions(body){
+ for(let offset=12;offset+8<=body.length;){const kind=body.toString('ascii',offset,offset+4),size=body.readUInt32LE(offset+4),at=offset+8;
+  if(kind==='VP8X')return{width:body.readUIntLE(at+4,3)+1,height:body.readUIntLE(at+7,3)+1};
+  if(kind==='VP8 ')return{width:body.readUInt16LE(at+6)&0x3fff,height:body.readUInt16LE(at+8)&0x3fff};
+  if(kind==='VP8L'){const bits=body.readUInt32LE(at+1);return{width:(bits&0x3fff)+1,height:((bits>>>14)&0x3fff)+1};}
+  offset=at+size+(size&1);
+ }throw Error('Unsupported WebP frame');
+}
+const intrinsicFrames=audit.proposal.exactFiles.map(file=>{const size=dimensions(fs.readFileSync(path.join(frozen,'game/assets',file.path)));return{path:file.path,...size,pixels:size.width*size.height};});
+const report={
+ source:'Actual functions and generated chunks from the delivered frozen EXE build. No shared event worktree files were read. Fetch/Image/schedulers replaced only in the controlled VM; no network or browser used.',
+ manifest:{before:manifest.length,after:filtered.length,oldRigBefore:manifest.filter(file=>old.has(file)).length,oldRigAfter:filtered.filter(file=>old.has(file)).length,collectorBefore:collected(manifest).length,collectorAfter:collected(filtered).length},
+ realBuildCallSites:calls,normalStartupPlan:{urls:startupUrls.length,oldRigUrls:startupUrls.filter(value=>/-rig-v1\//.test(value)).length},
+ controlledActualStartup:{before:await runActualPrefetch(startupUrls),after:await runActualPrefetch(startupUrls)},
+ potentialOnly:{oldRigFrames:intrinsicFrames.length,pixels:intrinsicFrames.reduce((sum,file)=>sum+file.pixels,0),rgba8Bytes:intrinsicFrames.reduce((sum,file)=>sum+file.pixels*4,0),frames:intrinsicFrames,note:'Intrinsic image size only. No actual old-rig decoding was observed or scheduled by the normal startup plan; these numbers are not actual RSS, GPU memory or measured savings.'},
+ decision:'The 86 original-resolution frames occupy package bytes and manifest entries, but the delivered game does not call the full-manifest collector or decoder. Removing them has no demonstrated normal-play request/decoding/cache benefit. Do not implement under the latest gameplay-benefit condition.'
+};
+fs.writeFileSync(path.join(output,'runtime-preload-check.json'),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({...report,potentialOnly:{...report.potentialOnly,frames:undefined}},null,2));

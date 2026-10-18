@@ -1,0 +1,56 @@
+{
+  "source": {
+    "renderer": "game/src/hub/hub.personnel.js",
+    "presentation": "game/src/hub/hub.presentation.js",
+    "baseline": "baseline/hub.presentation.js.txt",
+    "rendererSha256": "11b0420650d8e3a09e2e5f8a9160422f62bd7318dd2fd501a4ff88dddd90f21b",
+    "presentationBeforeSha256": "eb0f264f8c8f2cfbed1cd008156f73da707c8477393e7e90b20a61f9d54f5cb3",
+    "presentationAfterSha256": "5c60ba882c596467a699bfc4adc27369ddabbf62c807a7e84c7216a1e9bebacc",
+    "actualUpdaterMatchesCandidate": true
+  },
+  "method": "Actual personnel renderer and preserved baseline updatePersonnelV12 function in jsdom; Image load/decode completion is controlled. The local candidate is compared with the actual modified updater. This counts explicit decode calls, not real browser time or RSS.",
+  "baselineRapidSwitch": {
+    "switches": 4,
+    "departBeforeLoad": false,
+    "loadingImages": 4,
+    "decodeCalls": 4,
+    "decodedSources": [
+      "http://controlled.test/portraits/full/heixiang.webp",
+      "http://controlled.test/portraits/full/baita.webp",
+      "http://controlled.test/portraits/full/xingyue.webp",
+      "http://controlled.test/portraits/full/changwuyu.webp"
+    ],
+    "committedSource": "http://controlled.test/portraits/full/changwuyu.webp"
+  },
+  "candidateRapidSwitch": {
+    "switches": 4,
+    "departBeforeLoad": false,
+    "loadingImages": 4,
+    "decodeCalls": 1,
+    "decodedSources": [
+      "http://controlled.test/portraits/full/changwuyu.webp"
+    ],
+    "committedSource": "http://controlled.test/portraits/full/changwuyu.webp"
+  },
+  "baselineLeaveBeforeLoad": {
+    "switches": 4,
+    "departBeforeLoad": true,
+    "loadingImages": 4,
+    "decodeCalls": 4,
+    "decodedSources": [
+      "http://controlled.test/portraits/full/heixiang.webp",
+      "http://controlled.test/portraits/full/baita.webp",
+      "http://controlled.test/portraits/full/xingyue.webp",
+      "http://controlled.test/portraits/full/changwuyu.webp"
+    ],
+    "committedSource": "/assets/portraits/personnel/wu-default-cutout-v1.webp"
+  },
+  "candidateLeaveBeforeLoad": {
+    "switches": 4,
+    "departBeforeLoad": true,
+    "loadingImages": 4,
+    "decodeCalls": 0,
+    "decodedSources": [],
+    "committedSource": "/assets/portraits/personnel/wu-default-cutout-v1.webp"
+  }
+}

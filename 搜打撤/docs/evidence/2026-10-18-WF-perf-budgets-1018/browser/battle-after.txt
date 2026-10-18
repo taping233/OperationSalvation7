@@ -1,0 +1,122 @@
+Browser tab: 3, Title: "战斗二级层 · 存储隔离评审", URL: "http://127.0.0.1:5319/dev/combat-overlay-review.html".
+1 AXWebArea 战斗二级层 · 存储隔离评审, URL: 127.0.0.1:5319/dev/combat-overlay-review.html
+	2 container overlay
+		3 container Description: 隔离评审入口, ID: fixtureControls
+			167 text 普通战已重置 ｜ 当前层：无 ｜ normal / player / 回合 1 / 能量 7 / 手牌 11 / 牌库 0 / 墓地 0 ｜ 吸血：回复 6 点生命
+			20 button 展开入口, ID: fixtureCollapse
+		22 container
+			23 image flask
+			24 text  道具
+			25 button 使用冰冻药水：附加冰冻，持续 1 回合。，随后选择敌人
+				26 image flask
+				27 text 冰冻药水
+				168 text ↳敌
+			29 container
+				30 image flask
+				31 text 能源结晶
+			169 text 第 1 回合
+			170 text 你的行动
+			171 button (collapsed) gear 选项, Secondary Actions: Expand
+				172 image gear
+				173 text 选项
+			37 container Description: 未选择人物，自己, Help: 你自己——治疗 / 净化 / 护盾 / 格挡类卡牌拖到这里打出, ID: btSelf
+				38 container 未选择人物
+				39 container
+					40 text 30/30
+				41 container
+					42 image swords
+					43 text 攻 4
+				44 container 职业技能与手牌分栏
+					174 button 猛击，2费，可用，攻击一次；每回合一次
+			46 container
+				47 container 训练木桩，敌方单位
+					48 container 训练木桩
+					49 container
+						175 text 97/100
+					51 button (collapsed) Description: 训练木桩的意图：攻击 · 1。基础攻击 1。点击查看完整说明, Secondary Actions: Expand
+						52 image swords
+						53 text 攻击 1
+				54 container 训练木桩，敌方单位
+					55 container 训练木桩
+					56 container
+						176 text 97/100
+					58 button (collapsed) Description: 训练木桩的意图：攻击 · 1。基础攻击 1。点击查看完整说明, Secondary Actions: Expand
+						59 image swords
+						60 text 攻击 1
+			164 container 能量 7，每回合 9
+				165 text 7
+				166 text /9
+			64 container
+				65 container 初始攻击 · 1 费。费用 1 · 点击选择敌人；也可直接拖到敌人身上使用
+					177 checkbox Description: 初始攻击 · 1 费。 费用 1 · 点击选择敌人；也可直接拖到敌人身上使用, Value: 0
+						178 text 1
+						179 container
+							180 image 初始攻击
+							181 text 武术 · 初始
+							182 text 初始攻击
+							183 text 造成等同于你的攻击力的 攻击伤害 。
+					184 text ×6
+				74 container 神灯 · 1 费。费用 1 · 点击选择敌人；也可直接拖到敌人身上使用
+					185 checkbox Description: 神灯 · 1 费。 费用 1 · 点击选择敌人；也可直接拖到敌人身上使用, Value: 0
+						186 text 1
+						187 container
+							188 image 神灯
+							189 text 法术 · 史诗
+							190 text 神灯
+							191 container 完整卡牌规则，可滚动阅读
+								192 text 抉择：
+								193 text ①
+								194 text 发现
+								195 text 1
+								196 text  张卡牌并直接施放；②消灭 
+								197 text 1
+								198 text  名受伤的非 BOSS 敌人；③
+								199 text 冰冻
+								200 text 2
+								201 text  名角色，你获得 
+								202 text 5
+								203 text  点
+								204 text 护甲
+								205 text 。
+				96 container 挖宝 · 1 费。无法打出：「牌库」词条只有对战 BOSS 时生效——普通战斗没有牌库与墓地，无法打出
+					97 checkbox (disabled) Description: 挖宝 · 1 费。 无法打出：「牌库」词条只有对战 BOSS 时生效——普通战斗没有牌库与墓地，无法打出, Value: 0
+						98 text 1
+						99 container
+							100 image 挖宝
+							101 text 武术 · 古朴
+							102 text 挖宝
+							103 container
+								104 text 无法打出：「牌库」词条只有对战 BOSS 时生效——普通战斗没有牌库与墓地，无法打出 从你的 牌库 底 发现 1  张牌；你获得等同于所选卡牌价格的 护甲 。
+				105 container 快意恩仇 · 1 费。先消耗 2 张初始攻击；3 段，目标倒下后按战场顺序转移。 费用 1 · 点击选择敌人；也可直接拖到敌人身上使用
+					206 checkbox Description: 快意恩仇 · 1 费。先消耗 2 张初始攻击；3 段，目标倒下后按战场顺序转移。 费用 1 · 点击选择敌人；也可直接拖到敌人身上使用, Value: 0
+						207 text 1
+						208 container
+							209 image 快意恩仇
+							210 text 武术 · 侠客
+							211 text 快意恩仇
+							212 container
+								213 text 消耗 2  张「初始攻击」，对目标攻击  3  次。 先消耗 2 张初始攻击；3 段，目标倒下后按战场顺序转移。
+				114 container 剑荡妖邪 · 2 费。费用 2 · 点击选择敌人；也可直接拖到敌人身上使用
+					214 checkbox Description: 剑荡妖邪 · 2 费。 费用 2 · 点击选择敌人；也可直接拖到敌人身上使用, Value: 0
+						215 text 2
+						216 container
+							217 image 剑荡妖邪
+							218 text 武术 · 传说
+							219 text 剑荡妖邪
+							220 text 造成（你的攻击力 +  5 ）点 攻击伤害 ；选择手牌中的  1  张武术牌，直接施放。
+				152 container 命运钟表 · 0 费。费用 0 · 点击选择自己；也可直接拖到战场空地或左侧人物使用
+					221 checkbox Description: 命运钟表 · 0 费。 费用 0 · 点击选择自己；也可直接拖到战场空地或左侧人物使用, Value: 0
+						222 text 0
+						223 container
+							224 image 命运钟表
+							225 text 装备 · 史诗
+							226 text 命运钟表
+							227 text 主动技能 ： 消耗 你的所有手牌，你获得  1  个额外 回合 。
+			228 container 战术操作
+				229 container 按当前状态估算；回合末触发、随从攻击与随机效果可能改变结果。
+					230 text 估算承伤
+					231 text 2
+					232 text 余  28  生命 未计随从攻击与回合末触发
+				233 button 结束回合
+
+The focused UI element is 2 container overlay

@@ -1,0 +1,6 @@
+{
+  "source": "game/src/hub/hub.presentation.js",
+  "normalizedSha256": "5c60ba882c596467a699bfc4adc27369ddabbf62c807a7e84c7216a1e9bebacc",
+  "review": "Complete source delta is one onload connection/request-token check, identical to existing reveal validity. Asset URLs, selectors, constructor arguments and image source assignment remain unchanged.",
+  "base": "4f27eae68e665dd55c6c56fae3520077476c5f01"
+}

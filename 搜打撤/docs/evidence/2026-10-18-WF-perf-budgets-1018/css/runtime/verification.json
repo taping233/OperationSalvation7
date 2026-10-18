@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-18",
+  "scope": "One synchronous AOE hover transition; actual aim/hover view modules with mocked core availability/context in jsdom",
+  "initialSnapshotRequests": {
+    "before": 8,
+    "after": 1
+  },
+  "reentrySnapshotRequests": {
+    "before": 7,
+    "after": 1
+  },
+  "previewOuterHTMLIdentical": true,
+  "initialPreviewCount": 4,
+  "reentryPreviewCount": 3,
+  "stableHoverFrameSnapshotRequests": 0,
+  "submittedCardPlays": 0,
+  "targeted": {
+    "passed": 36,
+    "failed": 0,
+    "pending": 0
+  },
+  "files": [
+    {
+      "path": "game/src/battle/view/battle.aim.js",
+      "sha256": "41858976f6bf189dfddac5c5c0cfa0c83f5726c63db7e6ff0b9774834b5b2bdc"
+    },
+    {
+      "path": "game/src/battle/view/battle.hover.js",
+      "sha256": "def25be83801d839aa1ac25614d1eae1bb369f9c84dca9811759faa2dba5e051"
+    },
+    {
+      "path": "tests/battle-area-hover-snapshot.test.js",
+      "sha256": "878187c14f6ff3c5f11ba04c55606dce71739616d8e02679713cb33b8e0db738"
+    },
+    {
+      "path": "tests/battle-drag-reference.test.js",
+      "sha256": "b57214bf8704e8fb06f5172d6e3b804a35b3ffe9d328c1e12e9503bd773fcb42"
+    }
+  ],
+  "before": [
+    {
+      "path": "battle.aim.js.before.txt",
+      "sha256": "12d980534303dc9fcd929b44625ab23905acb8474e858f12c31cb39c0dbfb044"
+    },
+    {
+      "path": "battle.hover.js.before.txt",
+      "sha256": "b142b3d75301ee0f91ea4ed0c80fee1da19144a1c7ca0b51cf7031468242ffd1"
+    },
+    {
+      "path": "battle-drag-reference.test.js.before.txt",
+      "sha256": "4254e4df1090be50bc1659b87a4a55d3697aa64ff36125bf0f857eb3e22a6b13"
+    }
+  ],
+  "browserValidation": "Delegated to parent on current-window built-in browser, isolated copy port 5319; not performed by this subagent"
+}

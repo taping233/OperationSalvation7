@@ -1,0 +1,75 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
+const here=path.dirname(fileURLToPath(import.meta.url));
+const root=path.resolve(here,'../../..');
+const frozen=path.join(root,'.tmp/page-perf-1018/exe-build/project');
+const output=path.join(root,'docs/evidence/2026-10-18-WF-perf-budgets-1018/assets');
+const {collectReviewedRuntimeAssetExclusions}=await import(pathToFileURL(path.join(root,'scripts/runtime-asset-redundancy.mjs')));
+const {RUNTIME_REDUNDANCY_REVIEW:review}=await import(pathToFileURL(path.join(root,'scripts/runtime-asset-redundancy-review.mjs')));
+const sha=body=>crypto.createHash('sha256').update(body).digest('hex');
+const normalizedHash=body=>sha(body.toString('utf8').replaceAll('\r\n','\n'));
+const posix=value=>value.replaceAll('\\','/');
+function walk(base,relative=''){
+ if(!fs.existsSync(path.join(base,relative)))return [];
+ return fs.readdirSync(path.join(base,relative),{withFileTypes:true}).flatMap(entry=>{
+  const next=path.join(relative,entry.name);
+  return entry.isDirectory()?walk(base,next):[posix(next)];
+ });
+}
+function record(base,file){const body=fs.readFileSync(path.join(base,file));return{path:file,bytes:body.length,sha256:sha(body)};}
+function duplicateBytes(files){const seen=new Set();let bytes=0;for(const file of files){if(seen.has(file.sha256))bytes+=file.bytes;else seen.add(file.sha256);}return bytes;}
+const assets=path.join(frozen,'game/assets'),built=path.join(frozen,'desktop-app/game');
+const builtFiles=walk(built).map(file=>record(built,file));
+const builtMap=new Map(builtFiles.map(file=>[file.path,file]));
+const scopedFiles=['scenes/chests','portraits/frames'].flatMap(prefix=>walk(assets,prefix)).map(file=>record(assets,file));
+const sourceRecords=[];
+for(const directory of ['game/src','game/css','game/data'])for(const file of walk(frozen,directory)){
+ if(file.startsWith('game/src/generated/')||file.endsWith('.d.ts')||! /\.(?:[cm]?js|jsx|tsx?|json|css)$/.test(file))continue;
+ sourceRecords.push({path:file,code:fs.readFileSync(path.join(frozen,file),'utf8')});
+}
+for(const file of fs.readdirSync(path.join(frozen,'game')))if(file.endsWith('.html'))sourceRecords.push({path:'game/'+file,code:fs.readFileSync(path.join(frozen,'game',file),'utf8')});
+const plan=collectReviewedRuntimeAssetExclusions(frozen);
+const currentDrift=[];
+for(const file of scopedFiles){const target=path.join(root,'game/assets',file.path);if(!fs.existsSync(target)||sha(fs.readFileSync(target))!==file.sha256)currentDrift.push(file.path);}
+const selectors=Object.entries(review.consumerFingerprints.chests).map(([file,expected])=>{
+ const frozenHash=normalizedHash(fs.readFileSync(path.join(frozen,file))),currentHash=normalizedHash(fs.readFileSync(path.join(root,file)));
+ return{path:file,expected,frozenHash,currentHash,matchesReview:frozenHash===expected,currentMatchesFrozen:currentHash===frozenHash};
+});
+const oldRig=scopedFiles.filter(file=>/^scenes\/chests\/(?:small|medium|large|class|boss)-rig-v1\/frame-\d{2}\.webp$/.test(file.path)).map(file=>{
+ const needle=path.posix.basename(path.posix.dirname(file.path));
+ const references=sourceRecords.filter(source=>source.code.includes(file.path)||source.code.includes(needle)).map(source=>source.path);
+ return{...file,builtBytes:builtMap.get('assets/'+file.path)?.bytes||0,references};
+});
+const oldPaths=new Set(oldRig.map(file=>'assets/'+file.path));
+const remaining=builtFiles.filter(file=>!oldPaths.has(file.path));
+const exclusions=review.candidates.map(candidate=>{
+ const target=path.join(assets,candidate.path),present=fs.existsSync(target),excluded=plan.excludedAssets.has(candidate.path);
+ return{...candidate,present,bytes:present?fs.statSync(target).size:0,excluded,published:builtMap.has('assets/'+candidate.path)};
+});
+const groups=new Map();for(const file of scopedFiles){const key=file.path.startsWith('scenes/chests/')?file.path.split('/').slice(0,3).join('/'):file.path.split('/').slice(0,4).join('/');const group=groups.get(key)||{path:key,files:0,bytes:0,publishedFiles:0,publishedBytes:0};group.files++;group.bytes+=file.bytes;if(builtMap.has('assets/'+file.path)){group.publishedFiles++;group.publishedBytes+=file.bytes;}groups.set(key,group);}
+const portraitRoles=[];
+for(const role of ['wu','changwuyu','baita','heixiang','xingyue']){
+ const prefix=`portraits/frames/${role}/`,catalog=JSON.parse(fs.readFileSync(path.join(assets,prefix,'sprite-v1/animations.json'),'utf8'));
+ const required=new Set(Object.values(catalog.sequences).flat().map(name=>name+'.webp'));
+ if(catalog.staticFallback)required.add(catalog.staticFallback+'.webp');required.add('sprite-v1/neutral.webp');
+ const files=scopedFiles.filter(file=>file.path.startsWith(prefix)&&/\.webp$/.test(file.path));
+ const unused=files.filter(file=>!required.has(file.path.slice(prefix.length))).map(file=>({...file,published:builtMap.has('assets/'+file.path),existingExclusion:plan.excludedAssets.has(file.path),references:sourceRecords.filter(source=>source.code.includes(file.path)||source.code.includes(path.posix.basename(file.path))).map(source=>source.path)}));
+ portraitRoles.push({role,requiredImages:required.size,sourceImages:files.length,publishedImages:files.filter(file=>builtMap.has('assets/'+file.path)).length,publishedBytes:files.filter(file=>builtMap.has('assets/'+file.path)).reduce((n,file)=>n+file.bytes,0),unused});
+}
+const duplicateGroups=new Map();for(const file of builtFiles){const group=duplicateGroups.get(file.sha256)||{sha256:file.sha256,bytes:file.bytes,paths:[]};group.paths.push(file.path);duplicateGroups.set(file.sha256,group);}
+const duplicates=[...duplicateGroups.values()].filter(group=>group.paths.length>1).map(group=>({...group,duplicateBytes:(group.paths.length-1)*group.bytes})).sort((a,b)=>b.duplicateBytes-a.duplicateBytes);
+const equalPairs=duplicates.filter(group=>group.paths.every(file=>oldPaths.has(file)));
+const categoryTotals={};for(const file of exclusions){const group=categoryTotals[file.category]||{candidates:0,present:0,excluded:0,excludedBytes:0,published:0};group.candidates++;if(file.present)group.present++;if(file.excluded){group.excluded++;group.excludedBytes+=file.bytes;}if(file.published)group.published++;categoryTotals[file.category]=group;}
+const total=files=>files.reduce((n,file)=>n+file.bytes,0);
+const report={
+ source:{frozen,indexSha256:'56961cf91a8e395727ade83ba9b562dd050da4470a2ad2c88b022685664a64f0',sharedWorktreeEventFilesRead:false,currentScopedAssetDrift:currentDrift,selectorFingerprints:selectors},
+ baseline:{files:builtFiles.length,packageBytes:total(builtFiles),duplicateBytes:duplicateBytes(builtFiles),existingExcludedCount:plan.excludedAssets.size,warnings:plan.warnings,categoryTotals},
+ groups:[...groups.values()].sort((a,b)=>b.publishedBytes-a.publishedBytes),
+ proposal:{strategy:'Add only reviewed original-resolution *-rig-v1 frame files to guarded publication exclusions; preserve sources and active timelines.',files:oldRig.length,removedBytes:total(oldRig),removedPublishedBytes:oldRig.reduce((n,file)=>n+file.builtBytes,0),zeroSourceReferences:oldRig.every(file=>!file.references.length),remainingPackageBytes:total(remaining),remainingDuplicateBytes:duplicateBytes(remaining),duplicateBytesSaved:duplicateBytes(builtFiles)-duplicateBytes(remaining),exactFiles:oldRig,byteIdenticalAliasFallback:equalPairs},
+ existingExclusions:exclusions,portraitRoles,duplicateGroups:duplicates,
+};
+fs.mkdirSync(output,{recursive:true});fs.writeFileSync(path.join(output,'asset-audit.json'),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({baseline:report.baseline,proposal:{...report.proposal,exactFiles:undefined,byteIdenticalAliasFallback:undefined},portraitRoles:portraitRoles.map(({unused,...role})=>({...role,unused:unused.length,unusedPublished:unused.filter(file=>file.published).length})),currentScopedAssetDrift:currentDrift,selectors},null,2));

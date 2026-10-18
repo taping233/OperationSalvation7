@@ -1,0 +1,566 @@
+{
+  "source": "Actual functions and generated chunks from the delivered frozen EXE build. No shared event worktree files were read. Fetch/Image/schedulers replaced only in the controlled VM; no network or browser used.",
+  "manifest": {
+    "before": 1023,
+    "after": 937,
+    "oldRigBefore": 86,
+    "oldRigAfter": 0,
+    "collectorBefore": 1023,
+    "collectorAfter": 937
+  },
+  "realBuildCallSites": [
+    {
+      "chunk": "index-B-KHXR-Q.js",
+      "method": "prefetchBatched"
+    },
+    {
+      "chunk": "index-B-KHXR-Q.js",
+      "method": "prefetchBatched"
+    }
+  ],
+  "normalStartupPlan": {
+    "urls": 19,
+    "oldRigUrls": 0
+  },
+  "controlledActualStartup": {
+    "before": {
+      "requests": 19,
+      "oldRigRequests": 0,
+      "peakRequests": 4,
+      "imageConstructions": 0,
+      "decodeCalls": 0
+    },
+    "after": {
+      "requests": 19,
+      "oldRigRequests": 0,
+      "peakRequests": 4,
+      "imageConstructions": 0,
+      "decodeCalls": 0
+    }
+  },
+  "potentialOnly": {
+    "oldRigFrames": 86,
+    "pixels": 135236376,
+    "rgba8Bytes": 540945504,
+    "frames": [
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-00.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-01.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-02.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-03.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-04.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-05.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-06.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-07.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-08.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-09.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-10.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-11.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-12.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-13.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-14.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-15.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-16.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/boss-rig-v1/frame-17.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-00.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-01.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-02.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-03.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-04.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-05.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-06.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-07.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-08.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-09.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-10.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-11.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-12.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-13.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-14.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-15.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-16.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/class-rig-v1/frame-17.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-00.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-01.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-02.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-03.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-04.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-05.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-06.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-07.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-08.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-09.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-10.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-11.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-12.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/large-rig-v1/frame-13.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-00.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-01.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-02.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-03.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-04.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-05.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-06.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-07.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-08.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-09.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-10.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-11.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-12.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-13.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-14.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-15.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-16.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/medium-rig-v1/frame-17.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-00.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-01.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-02.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-03.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-04.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-05.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-06.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-07.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-08.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-09.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-10.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-11.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-12.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-13.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-14.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-15.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-16.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      },
+      {
+        "path": "scenes/chests/small-rig-v1/frame-17.webp",
+        "width": 1254,
+        "height": 1254,
+        "pixels": 1572516
+      }
+    ],
+    "note": "Intrinsic image size only. No actual old-rig decoding was observed or scheduled by the normal startup plan; these numbers are not actual RSS, GPU memory or measured savings."
+  },
+  "decision": "The 86 original-resolution frames occupy package bytes and manifest entries, but the delivered game does not call the full-manifest collector or decoder. Removing them has no demonstrated normal-play request/decoding/cache benefit. Do not implement under the latest gameplay-benefit condition."
+}

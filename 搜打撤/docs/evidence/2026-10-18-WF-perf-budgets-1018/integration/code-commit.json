@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-18T10:09:38.209Z",
+  "commit": "f51800565037c78601e8d2c48e01dba394526dec",
+  "parent": "4f27eae68e665dd55c6c56fae3520077476c5f01",
+  "paths": [
+    "搜打撤/game/src/battle/view/battle.aim.js",
+    "搜打撤/game/src/battle/view/battle.hover.js",
+    "搜打撤/game/src/hub/hub.presentation.js",
+    "搜打撤/game/src/hub/game.bag.js",
+    "搜打撤/scripts/runtime-asset-redundancy-review.mjs",
+    "搜打撤/tests/battle-area-hover-snapshot.test.js",
+    "搜打撤/tests/battle-drag-reference.test.js",
+    "搜打撤/tests/personnel-preview-lifecycle-perf.test.js",
+    "搜打撤/tests/bag-render-snapshot.test.js"
+  ],
+  "receipt": "docs/evidence/2026-10-18-staged-check/2026-10-18T09-57-58.106Z-9feb1523-staged.json",
+  "receiptSha256": "f8d51d6b5daf9f16c0ab814b2b72476ff0cefd96801d8271c653866f82670e0f",
+  "indexSha256": "ad2ddf12cc98635e4c9cef36a1b5cae85dea44f4fa1891bf75845753039e33b4",
+  "buildInputsSha256": "28fd0ccad1771831804802cb5eda98e60a74c60b020ad43685e99e8d5fe421c8",
+  "hooks": "Original pre-commit; exact frozen index receipt reused. No bypass, no push."
+}

@@ -1,0 +1,54 @@
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+const { spawnSync } = require('child_process');
+const { pathToFileURL } = require('url');
+
+const sourceRoot = path.resolve(__dirname, '../..');
+const snapshot = path.join(__dirname, 'exe-project');
+const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
+const readJson = file => JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, ''));
+const baselineBudgets = Object.freeze({ packageBytesMax: 112 * 1024 * 1024, packagedDuplicateBytesMax: 904 * 1024, entryGzipBytesMax: 270 * 1024, initialJsGzipBytesMax: 310 * 1024, cssGzipBytesMax: 136 * 1024 });
+
+function readReleaseInputs() {
+  const source = readJson(path.join(__dirname, 'source-provenance.json'));
+  const releaseSource = readJson(path.join(__dirname, 'release-source.json'));
+  const inputsFile = path.join(__dirname, 'build-inputs.json');
+  const inputs = readJson(inputsFile);
+  if (path.resolve(inputs.releaseProject) !== snapshot || path.resolve(releaseSource.project) !== snapshot) throw Error('Release snapshot path mismatch');
+  if (source.commit !== releaseSource.commit || source.commit !== inputs.base.commit) throw Error('Immutable source commit mismatch');
+  if (!Array.isArray(inputs.overlays) || !inputs.overlays.length) throw Error('Frozen overlays unavailable');
+  for (const entry of inputs.overlays) {
+    const file = path.resolve(snapshot, entry.path);
+    if (!file.startsWith(snapshot + path.sep)) throw Error('Frozen input escapes snapshot: ' + entry.path);
+    const bytes = fs.readFileSync(file);
+    if (hash(bytes) !== entry.sha256 || bytes.length !== entry.bytes) throw Error('Frozen input mismatch: ' + entry.path);
+  }
+  if (inputs.assetGuard?.omitted !== 195 || inputs.assetGuard.warnings?.length) throw Error('Reviewed 195-asset publication proof unavailable');
+  return { source, releaseSource, buildInputs: inputs, buildInputsSha256: hash(fs.readFileSync(inputsFile)) };
+}
+
+async function readBudgetThresholds() {
+  const { PERFORMANCE_BUDGETS } = await import(pathToFileURL(path.join(snapshot, 'game/src/core/performance-budgets.js')).href);
+  for (const [key, expected] of Object.entries(baselineBudgets)) if (PERFORMANCE_BUDGETS[key] !== expected) throw Error('Original performance threshold changed: ' + key);
+  return baselineBudgets;
+}
+
+async function main() {
+  const inputs = readReleaseInputs();
+  const budgets = await readBudgetThresholds();
+  const desktop = readJson(path.join(snapshot, 'desktop-app/package.json'));
+  const expected = desktop.devDependencies.electron.replace(/^[^0-9]*/, '');
+  if (expected !== '44.1.0') throw Error('Frozen Electron version differs from approved offline runtime');
+  const executable = path.join(sourceRoot, 'desktop-app/node_modules/electron/dist/electron.exe');
+  const probe = spawnSync(executable, ['--version'], { encoding: 'utf8', windowsHide: true });
+  const actual = (probe.stdout || '').trim().replace(/^v/, '');
+  if (probe.status !== 0 || actual !== expected) throw Error(`Electron runtime mismatch: expected ${expected}, actual ${actual || 'unavailable'}; ${probe.error?.code || probe.status}`);
+  require(path.join(snapshot, 'scripts/check-version.cjs'));
+  const built = readJson(path.join(snapshot, 'desktop-app/game/version.json'));
+  if (built.version !== desktop.version) throw Error('Built game and desktop version mismatch');
+  console.log(JSON.stringify({ commit: inputs.source.commit, overlaysVerified: inputs.buildInputs.overlays.length, buildInputsSha256: inputs.buildInputsSha256, electronVersion: actual, version: desktop.version, originalBudgetThresholds: budgets }));
+}
+
+module.exports = { readReleaseInputs, readBudgetThresholds, readJson, hash, sourceRoot, snapshot };
+if (require.main === module) main().catch(error => { console.error(error.message); process.exitCode = 1; });

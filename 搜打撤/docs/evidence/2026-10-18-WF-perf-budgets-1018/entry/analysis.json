@@ -1,0 +1,4640 @@
+{
+  "project": "D:\\素材\\代号柒\\搜打撤\\.tmp\\page-perf-1018\\exe-build\\project",
+  "initial": [
+    {
+      "file": "./assets/js/index-B-KHXR-Q.js",
+      "raw": 994778,
+      "gzip": 333351
+    },
+    {
+      "file": "./assets/js/game-card-catalog-C1ezr8ug.js",
+      "raw": 123341,
+      "gzip": 33498
+    },
+    {
+      "file": "./assets/js/vendor-runtime-DkOp-1lm.js",
+      "raw": 45159,
+      "gzip": 13100
+    }
+  ],
+  "initialGzip": 379949,
+  "chunks": [
+    {
+      "file": "index-B-KHXR-Q.js",
+      "raw": 994778,
+      "gzip": 333351
+    },
+    {
+      "file": "vendor-render-Db_6dXB4.js",
+      "raw": 498639,
+      "gzip": 151308
+    },
+    {
+      "file": "battle.core-Dm4h0Nzf.js",
+      "raw": 308044,
+      "gzip": 104548
+    },
+    {
+      "file": "game.hub.runtime-CHQdpwrj.js",
+      "raw": 189243,
+      "gzip": 66171
+    },
+    {
+      "file": "battle.view-F8JCC_gS.js",
+      "raw": 164487,
+      "gzip": 59154
+    },
+    {
+      "file": "game-card-catalog-C1ezr8ug.js",
+      "raw": 123341,
+      "gzip": 33498
+    },
+    {
+      "file": "vendor-narrative-BRMhodx6.js",
+      "raw": 127951,
+      "gzip": 31699
+    },
+    {
+      "file": "game.menu.pages-B3sH24hx.js",
+      "raw": 78573,
+      "gzip": 28831
+    },
+    {
+      "file": "game.cardslib.page-DeeTTUrT.js",
+      "raw": 51341,
+      "gzip": 18626
+    },
+    {
+      "file": "vendor-render-canvas-CmZ-Lk-i.js",
+      "raw": 41575,
+      "gzip": 13405
+    },
+    {
+      "file": "vendor-runtime-DkOp-1lm.js",
+      "raw": 45159,
+      "gzip": 13100
+    },
+    {
+      "file": "game.run.class-choice.page-B4I0RCaL.js",
+      "raw": 19577,
+      "gzip": 7970
+    },
+    {
+      "file": "hub.courtyard-runtime-O5ZY2aq2.js",
+      "raw": 18522,
+      "gzip": 7970
+    },
+    {
+      "file": "game.run.dev-C01aYN7c.js",
+      "raw": 16002,
+      "gzip": 6714
+    },
+    {
+      "file": "home.scene-DEttCKFu.js",
+      "raw": 15203,
+      "gzip": 6420
+    },
+    {
+      "file": "agent.scenes.runtime-CB1uGdLT.js",
+      "raw": 10644,
+      "gzip": 4683
+    },
+    {
+      "file": "narrative-events-C2FxCESg.js",
+      "raw": 7229,
+      "gzip": 3481
+    },
+    {
+      "file": "home.visuals-BN_-2JGN.js",
+      "raw": 6325,
+      "gzip": 2434
+    },
+    {
+      "file": "comm-feed-V7x-TClG.js",
+      "raw": 3547,
+      "gzip": 1907
+    },
+    {
+      "file": "achievement-medals-BWdjVapR.js",
+      "raw": 1599,
+      "gzip": 743
+    }
+  ],
+  "roots": [
+    "game/src/ui/title-credits.js",
+    "game/src/ui/title-wallpaper.js",
+    "game/src/main.js",
+    "game/src/ui/startup-transition.js",
+    "game/src/ui/cover-context.js"
+  ],
+  "staticModuleCount": 237,
+  "sourceStream": {
+    "raw": 1193363,
+    "gzip": 368107
+  },
+  "actualEntryGzip": 333351,
+  "estimateBoundary": "Per-module esbuild transform only; no Rollup/build. Source-stream compression deltas are prioritisation estimates, not delivered chunk measurements. Existing catalog manual chunk excluded; bare dependency library bytes are separate actual chunks.",
+  "candidates": [
+    {
+      "file": "game/src/game.boot.js",
+      "exclusiveModules": 16,
+      "sourceCompressedDelta": 28857,
+      "normalizedEntryEstimate": 26132,
+      "incoming": [
+        "game/src/main.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/game.boot.js",
+          "raw": 20386,
+          "gzip": 7990
+        },
+        {
+          "file": "game/src/agent/agent.policy.js",
+          "raw": 17641,
+          "gzip": 7090
+        },
+        {
+          "file": "game/src/agent/agent.runner.js",
+          "raw": 11657,
+          "gzip": 5064
+        },
+        {
+          "file": "game/src/agent/agent.state.js",
+          "raw": 8852,
+          "gzip": 3351
+        },
+        {
+          "file": "game/src/agent/agent.llm.js",
+          "raw": 4922,
+          "gzip": 2464
+        },
+        {
+          "file": "game/src/agent/agent.protocol.js",
+          "raw": 2692,
+          "gzip": 1143
+        },
+        {
+          "file": "game/src/ui/quick-nav.js",
+          "raw": 2555,
+          "gzip": 1130
+        },
+        {
+          "file": "game/src/agent/agent.surface.js",
+          "raw": 2128,
+          "gzip": 996
+        },
+        {
+          "file": "game/src/experience/pocket-strip.js",
+          "raw": 1441,
+          "gzip": 811
+        },
+        {
+          "file": "game/src/battle/bag/battle.slam-skill.js",
+          "raw": 2215,
+          "gzip": 772
+        },
+        {
+          "file": "game/src/agent/agent.weights.js",
+          "raw": 1252,
+          "gzip": 740
+        },
+        {
+          "file": "game/src/agent/agent.scenes.js",
+          "raw": 1230,
+          "gzip": 722
+        },
+        {
+          "file": "game/src/agent/agent.js",
+          "raw": 1615,
+          "gzip": 666
+        },
+        {
+          "file": "game/src/agent/agent.scenes.catalog.js",
+          "raw": 1301,
+          "gzip": 543
+        },
+        {
+          "file": "game/src/run/encounter-meta.js",
+          "raw": 724,
+          "gzip": 393
+        },
+        {
+          "file": "game/src/run/game.session.browser.js",
+          "raw": 133,
+          "gzip": 136
+        }
+      ]
+    },
+    {
+      "file": "game/src/cards/cards.js",
+      "exclusiveModules": 22,
+      "sourceCompressedDelta": 27345,
+      "normalizedEntryEstimate": 24763,
+      "incoming": [
+        "game/src/main.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "raw": 94185,
+          "gzip": 17899
+        },
+        {
+          "file": "game/src/cards/card-rules.schema.js",
+          "raw": 36238,
+          "gzip": 9517
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "raw": 24780,
+          "gzip": 7651
+        },
+        {
+          "file": "game/src/cards/cards.rules.js",
+          "raw": 6565,
+          "gzip": 2760
+        },
+        {
+          "file": "game/src/cards/cards.js",
+          "raw": 5871,
+          "gzip": 2340
+        },
+        {
+          "file": "game/src/cards/card-rules.capability.js",
+          "raw": 4854,
+          "gzip": 1847
+        },
+        {
+          "file": "game/src/cards/cards.sync.m3.js",
+          "raw": 3499,
+          "gzip": 1293
+        },
+        {
+          "file": "game/src/cards/cards.sync.backfiller.js",
+          "raw": 2824,
+          "gzip": 1222
+        },
+        {
+          "file": "game/src/cards/cards.sync.m2.js",
+          "raw": 2375,
+          "gzip": 909
+        },
+        {
+          "file": "game/src/cards/cards.sync.m7.js",
+          "raw": 2215,
+          "gzip": 835
+        },
+        {
+          "file": "game/src/cards/cards.sync.m9.js",
+          "raw": 1538,
+          "gzip": 778
+        },
+        {
+          "file": "game/src/cards/cards.sync.m11.js",
+          "raw": 1201,
+          "gzip": 703
+        },
+        {
+          "file": "game/src/cards/cards.consts.js",
+          "raw": 1536,
+          "gzip": 678
+        },
+        {
+          "file": "game/src/cards/cards.sync.m8.js",
+          "raw": 1979,
+          "gzip": 671
+        },
+        {
+          "file": "game/src/cards/cards.sync.m6.js",
+          "raw": 1573,
+          "gzip": 606
+        },
+        {
+          "file": "game/src/cards/cards.sync.m5.js",
+          "raw": 1403,
+          "gzip": 544
+        },
+        {
+          "file": "game/src/cards/cards.catalog.js",
+          "raw": 1117,
+          "gzip": 520
+        },
+        {
+          "file": "game/src/cards/cards.sync.m10.js",
+          "raw": 754,
+          "gzip": 453
+        },
+        {
+          "file": "game/src/cards/cards.sync.m1.js",
+          "raw": 969,
+          "gzip": 451
+        },
+        {
+          "file": "game/src/cards/cards.sync.face-refresh.js",
+          "raw": 555,
+          "gzip": 364
+        },
+        {
+          "file": "game/src/cards/cards.sync.m4.js",
+          "raw": 381,
+          "gzip": 292
+        },
+        {
+          "file": "game/src/cards/card-rarity.js",
+          "raw": 374,
+          "gzip": 235
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "exclusiveModules": 12,
+      "sourceCompressedDelta": 25465,
+      "normalizedEntryEstimate": 23061,
+      "incoming": [
+        "game/src/main.js",
+        "game/src/game.boot.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/hub/game.bag.js",
+          "raw": 31653,
+          "gzip": 9561
+        },
+        {
+          "file": "game/src/hub/game.bag.settle.js",
+          "raw": 14563,
+          "gzip": 5154
+        },
+        {
+          "file": "game/src/hub/game.bag.view2.js",
+          "raw": 10105,
+          "gzip": 3843
+        },
+        {
+          "file": "game/src/hub/battle-settlement.commands.js",
+          "raw": 8687,
+          "gzip": 2415
+        },
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "raw": 5911,
+          "gzip": 2294
+        },
+        {
+          "file": "game/src/hub/game.bag.drag.js",
+          "raw": 5000,
+          "gzip": 2138
+        },
+        {
+          "file": "game/src/ui/reward-capacity-organizer.js",
+          "raw": 3594,
+          "gzip": 1601
+        },
+        {
+          "file": "game/src/hub/game.container-store.view.js",
+          "raw": 2777,
+          "gzip": 1247
+        },
+        {
+          "file": "game/src/ui/inventory-zoom.js",
+          "raw": 1331,
+          "gzip": 746
+        },
+        {
+          "file": "game/src/hub/game.reward-organizer.js",
+          "raw": 1090,
+          "gzip": 664
+        },
+        {
+          "file": "game/src/hub/battle-victory-progress.js",
+          "raw": 860,
+          "gzip": 502
+        },
+        {
+          "file": "game/src/cards/card-battle-start-explanation.js",
+          "raw": 328,
+          "gzip": 288
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/art.js",
+      "exclusiveModules": 4,
+      "sourceCompressedDelta": 12834,
+      "normalizedEntryEstimate": 11622,
+      "incoming": [
+        "game/src/main.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/generated/art-manifest.js",
+          "raw": 39854,
+          "gzip": 5884
+        },
+        {
+          "file": "game/src/core/art.js",
+          "raw": 13135,
+          "gzip": 5291
+        },
+        {
+          "file": "game/src/generated/thumb-manifest.js",
+          "raw": 10764,
+          "gzip": 2374
+        },
+        {
+          "file": "game/src/core/image-decode.js",
+          "raw": 1060,
+          "gzip": 547
+        }
+      ]
+    },
+    {
+      "file": "game/src/run/game.nest.js",
+      "exclusiveModules": 4,
+      "sourceCompressedDelta": 12561,
+      "normalizedEntryEstimate": 11375,
+      "incoming": [
+        "game/src/main.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/run/game.nest.js",
+          "raw": 29666,
+          "gzip": 9661
+        },
+        {
+          "file": "game/src/battle/runes.js",
+          "raw": 5135,
+          "gzip": 1880
+        },
+        {
+          "file": "game/src/hub/nest-settlement.commands.js",
+          "raw": 4769,
+          "gzip": 1592
+        },
+        {
+          "file": "game/src/run/lab.ending.js",
+          "raw": 2628,
+          "gzip": 1337
+        }
+      ]
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "exclusiveModules": 4,
+      "sourceCompressedDelta": 10416,
+      "normalizedEntryEstimate": 9433,
+      "incoming": [
+        "game/src/main.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/run/chests.js",
+          "raw": 24844,
+          "gzip": 9507
+        },
+        {
+          "file": "game/src/ui/chest-reward-overview.js",
+          "raw": 5262,
+          "gzip": 2016
+        },
+        {
+          "file": "game/src/run/chest-opening-art.js",
+          "raw": 3638,
+          "gzip": 1051
+        },
+        {
+          "file": "game/src/ui/reward-picker-heading.js",
+          "raw": 361,
+          "gzip": 258
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "exclusiveModules": 9,
+      "sourceCompressedDelta": 7685,
+      "normalizedEntryEstimate": 6959,
+      "incoming": [
+        "game/src/main.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/base.commands.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/hub/base.js",
+          "raw": 13438,
+          "gzip": 5474
+        },
+        {
+          "file": "game/src/hub/base-state.js",
+          "raw": 2456,
+          "gzip": 1068
+        },
+        {
+          "file": "game/src/hub/base-meta.commands.js",
+          "raw": 2135,
+          "gzip": 976
+        },
+        {
+          "file": "game/src/hub/base-departure.commands.js",
+          "raw": 1420,
+          "gzip": 732
+        },
+        {
+          "file": "game/src/hub/base-economy.js",
+          "raw": 1321,
+          "gzip": 725
+        },
+        {
+          "file": "game/src/hub/base-progression.commands.js",
+          "raw": 808,
+          "gzip": 419
+        },
+        {
+          "file": "game/src/hub/base-mutation.js",
+          "raw": 592,
+          "gzip": 392
+        },
+        {
+          "file": "game/src/hub/base-pet-egg.commands.js",
+          "raw": 493,
+          "gzip": 323
+        },
+        {
+          "file": "game/src/hub/base-elapsed.commands.js",
+          "raw": 563,
+          "gzip": 290
+        }
+      ]
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "exclusiveModules": 7,
+      "sourceCompressedDelta": 6398,
+      "normalizedEntryEstimate": 5794,
+      "incoming": [
+        "game/src/main.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/audio/sound.js",
+          "raw": 5627,
+          "gzip": 2383
+        },
+        {
+          "file": "game/src/audio/sound.samples.catalog.js",
+          "raw": 11159,
+          "gzip": 1531
+        },
+        {
+          "file": "game/src/audio/sound.music.player.js",
+          "raw": 4254,
+          "gzip": 1469
+        },
+        {
+          "file": "game/src/audio/sound.samples.player.js",
+          "raw": 2185,
+          "gzip": 1012
+        },
+        {
+          "file": "game/src/audio/sound.policy.js",
+          "raw": 1364,
+          "gzip": 696
+        },
+        {
+          "file": "game/src/audio/sound.music.catalog.js",
+          "raw": 790,
+          "gzip": 416
+        },
+        {
+          "file": "game/src/audio/sound.diagnostic-policy.js",
+          "raw": 173,
+          "gzip": 156
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/renderer.js",
+      "exclusiveModules": 4,
+      "sourceCompressedDelta": 6139,
+      "normalizedEntryEstimate": 5559,
+      "incoming": [
+        "game/src/main.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/core/renderer.js",
+          "raw": 14274,
+          "gzip": 6298
+        },
+        {
+          "file": "game/src/core/renderer.primitives.js",
+          "raw": 990,
+          "gzip": 509
+        },
+        {
+          "file": "game/src/core/map-city-atmosphere.js",
+          "raw": 684,
+          "gzip": 458
+        },
+        {
+          "file": "game/src/core/map-node-glow.js",
+          "raw": 634,
+          "gzip": 377
+        }
+      ]
+    },
+    {
+      "file": "game/src/battle/core/combat.js",
+      "exclusiveModules": 1,
+      "sourceCompressedDelta": 4046,
+      "normalizedEntryEstimate": 3664,
+      "incoming": [
+        "game/src/main.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/battle/core/combat.js",
+          "raw": 13373,
+          "gzip": 4303
+        }
+      ]
+    },
+    {
+      "file": "game/src/ui/term-tips.js",
+      "exclusiveModules": 1,
+      "sourceCompressedDelta": 3613,
+      "normalizedEntryEstimate": 3272,
+      "incoming": [
+        "game/src/main.js",
+        "game/src/cards/cards.view.js",
+        "game/src/ui/ui.js",
+        "game/src/cards/card-description-links.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/ui/term-tips.js",
+          "raw": 12991,
+          "gzip": 4302
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/meta.js",
+      "exclusiveModules": 1,
+      "sourceCompressedDelta": 2965,
+      "normalizedEntryEstimate": 2685,
+      "incoming": [
+        "game/src/main.js",
+        "game/src/hub/terminal.commands.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/hub/meta.js",
+          "raw": 9517,
+          "gzip": 3679
+        }
+      ]
+    },
+    {
+      "file": "game/src/hub/game.notes.js",
+      "exclusiveModules": 1,
+      "sourceCompressedDelta": 2656,
+      "normalizedEntryEstimate": 2405,
+      "incoming": [
+        "game/src/main.js",
+        "game/src/game.boot.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/hub/game.notes.js",
+          "raw": 8442,
+          "gzip": 3303
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/icons-bitmap.js",
+      "exclusiveModules": 2,
+      "sourceCompressedDelta": 2462,
+      "normalizedEntryEstimate": 2230,
+      "incoming": [
+        "game/src/main.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/core/icons-bitmap.js",
+          "raw": 5360,
+          "gzip": 2660
+        },
+        {
+          "file": "game/src/core/icon-hydration.js",
+          "raw": 871,
+          "gzip": 490
+        }
+      ]
+    },
+    {
+      "file": "game/src/core/camera.js",
+      "exclusiveModules": 1,
+      "sourceCompressedDelta": 1815,
+      "normalizedEntryEstimate": 1644,
+      "incoming": [
+        "game/src/main.js",
+        "game/src/game.boot.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/core/camera.js",
+          "raw": 5447,
+          "gzip": 1972
+        }
+      ]
+    },
+    {
+      "file": "game/src/ui/character-idle.js",
+      "exclusiveModules": 1,
+      "sourceCompressedDelta": 434,
+      "normalizedEntryEstimate": 393,
+      "incoming": [
+        "game/src/main.js"
+      ],
+      "exclusive": [
+        {
+          "file": "game/src/ui/character-idle.js",
+          "raw": 1282,
+          "gzip": 675
+        }
+      ]
+    }
+  ],
+  "topModules": [
+    {
+      "file": "game/src/cards/cards.data.js",
+      "raw": 94185,
+      "gzip": 17899,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "raw": 36656,
+      "gzip": 13179,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.altar.js",
+      "raw": 36636,
+      "gzip": 12078,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-description-text.js",
+      "raw": 59810,
+      "gzip": 10463,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.nest.js",
+      "raw": 29666,
+      "gzip": 9661,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "raw": 31653,
+      "gzip": 9561,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "raw": 36238,
+      "gzip": 9517,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "raw": 24844,
+      "gzip": 9507,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "raw": 24972,
+      "gzip": 8271,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/game.boot.js",
+      "raw": 20386,
+      "gzip": 7990,
+      "dynamic": [
+        "./core/perf-probe.local.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "raw": 19823,
+      "gzip": 7920,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.js",
+      "raw": 24780,
+      "gzip": 7651,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "raw": 20278,
+      "gzip": 7472,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "raw": 17641,
+      "gzip": 7090,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/renderer.js",
+      "raw": 14274,
+      "gzip": 6298,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/generated/art-manifest.js",
+      "raw": 39854,
+      "gzip": 5884,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/ui.js",
+      "raw": 15834,
+      "gzip": 5626,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "raw": 13438,
+      "gzip": 5474,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/art.js",
+      "raw": 13135,
+      "gzip": 5291,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.bag.settle.js",
+      "raw": 14563,
+      "gzip": 5154,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.runner.js",
+      "raw": 11657,
+      "gzip": 5064,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.death.js",
+      "raw": 11802,
+      "gzip": 4750,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "raw": 14416,
+      "gzip": 4715,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/expedition.view.js",
+      "raw": 10662,
+      "gzip": 4509,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-snapshot.js",
+      "raw": 11875,
+      "gzip": 4349,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/battle/core/combat.js",
+      "raw": 13373,
+      "gzip": 4303,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/term-tips.js",
+      "raw": 12991,
+      "gzip": 4302,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/game.menu.js",
+      "raw": 9262,
+      "gzip": 4104,
+      "dynamic": [
+        "./game.menu.pages.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/extraction-rewards-view.js",
+      "raw": 11621,
+      "gzip": 4075,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-node-art.js",
+      "raw": 10227,
+      "gzip": 3920,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-generator.js",
+      "raw": 9557,
+      "gzip": 3847,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.bag.view2.js",
+      "raw": 10105,
+      "gzip": 3843,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-route-v2.js",
+      "raw": 9092,
+      "gzip": 3812,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/overlay.js",
+      "raw": 10618,
+      "gzip": 3686,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/meta.js",
+      "raw": 9517,
+      "gzip": 3679,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.state.js",
+      "raw": 8852,
+      "gzip": 3351,
+      "dynamic": [
+        "../battle/core/battle.core.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.notes.js",
+      "raw": 8442,
+      "gzip": 3303,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/surface-motion.js",
+      "raw": 12768,
+      "gzip": 3077,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.view.js",
+      "raw": 6861,
+      "gzip": 3028,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/card-result-feedback.js",
+      "raw": 6753,
+      "gzip": 2977,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/flight-recorder.local.js",
+      "raw": 6586,
+      "gzip": 2964,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/recovery.commands.js",
+      "raw": 8029,
+      "gzip": 2792,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/event-card-choice.js",
+      "raw": 6460,
+      "gzip": 2791,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.rules.js",
+      "raw": 6565,
+      "gzip": 2760,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/icons-bitmap.js",
+      "raw": 5360,
+      "gzip": 2660,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.data.js",
+      "raw": 6402,
+      "gzip": 2615,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.recorder.js",
+      "raw": 5774,
+      "gzip": 2525,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.llm.js",
+      "raw": 4922,
+      "gzip": 2464,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.js",
+      "raw": 8687,
+      "gzip": 2415,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/camp-entry.js",
+      "raw": 6029,
+      "gzip": 2400,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-generator-v4.js",
+      "raw": 4851,
+      "gzip": 2396,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/home-fx.js",
+      "raw": 5821,
+      "gzip": 2384,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "raw": 5627,
+      "gzip": 2383,
+      "dynamic": [],
+      "bare": [
+        "howler"
+      ]
+    },
+    {
+      "file": "game/src/generated/thumb-manifest.js",
+      "raw": 10764,
+      "gzip": 2374,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.js",
+      "raw": 5871,
+      "gzip": 2340,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/interface-motion.js",
+      "raw": 5963,
+      "gzip": 2329,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.bag.rules.js",
+      "raw": 5911,
+      "gzip": 2294,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.storage.js",
+      "raw": 5687,
+      "gzip": 2293,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/event-signal-puzzle.js",
+      "raw": 4942,
+      "gzip": 2266,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.bag.drag.js",
+      "raw": 5000,
+      "gzip": 2138,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/chest-reward-overview.js",
+      "raw": 5262,
+      "gzip": 2016,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/home-menu-motion.js",
+      "raw": 5119,
+      "gzip": 1997,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/camera.js",
+      "raw": 5447,
+      "gzip": 1972,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/battle/runes.js",
+      "raw": 5135,
+      "gzip": 1880,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-rules.capability.js",
+      "raw": 4854,
+      "gzip": 1847,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/home/story.last-lamp.js",
+      "raw": 4505,
+      "gzip": 1841,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/node-decision-view.js",
+      "raw": 5122,
+      "gzip": 1839,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base.commands.js",
+      "raw": 4761,
+      "gzip": 1687,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/terminal.commands.js",
+      "raw": 4436,
+      "gzip": 1678,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/page-visual-ready.js",
+      "raw": 3930,
+      "gzip": 1618,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.bag.js",
+      "raw": 3264,
+      "gzip": 1612,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-node-state.js",
+      "raw": 3546,
+      "gzip": 1603,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/reward-capacity-organizer.js",
+      "raw": 3594,
+      "gzip": 1601,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/chest-reward-save.js",
+      "raw": 4123,
+      "gzip": 1600,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/nest-settlement.commands.js",
+      "raw": 4769,
+      "gzip": 1592,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/page-motion-profiles.js",
+      "raw": 4446,
+      "gzip": 1590,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/recoverable-pair.js",
+      "raw": 4133,
+      "gzip": 1560,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.samples.catalog.js",
+      "raw": 11159,
+      "gzip": 1531,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/node-scene-view.js",
+      "raw": 3145,
+      "gzip": 1518,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/page-loading.js",
+      "raw": 3069,
+      "gzip": 1501,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.js",
+      "raw": 3283,
+      "gzip": 1496,
+      "dynamic": [
+        "./game.run.class-choice.page.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/route-overlay.js",
+      "raw": 3155,
+      "gzip": 1472,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.music.player.js",
+      "raw": 4254,
+      "gzip": 1469,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.hub.js",
+      "raw": 3425,
+      "gzip": 1448,
+      "dynamic": [
+        "./game.hub.runtime.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.js",
+      "raw": 3258,
+      "gzip": 1443,
+      "dynamic": [
+        "./game.cardslib.page.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/diagnostics.local.js",
+      "raw": 3275,
+      "gzip": 1427,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/cinematics.js",
+      "raw": 3419,
+      "gzip": 1423,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/node-reward-state.js",
+      "raw": 3580,
+      "gzip": 1407,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-description-links.js",
+      "raw": 2502,
+      "gzip": 1395,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.dev-loader.js",
+      "raw": 2946,
+      "gzip": 1355,
+      "dynamic": [
+        "./game.run.dev.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/lab.ending.js",
+      "raw": 2628,
+      "gzip": 1337,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.map.js",
+      "raw": 2732,
+      "gzip": 1312,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/hud.js",
+      "raw": 2901,
+      "gzip": 1298,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m3.js",
+      "raw": 3499,
+      "gzip": 1293,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-generation-rules.js",
+      "raw": 3065,
+      "gzip": 1282,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/notes.js",
+      "raw": 4024,
+      "gzip": 1251,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.container-store.view.js",
+      "raw": 2777,
+      "gzip": 1247,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/run-save-validation.js",
+      "raw": 2971,
+      "gzip": 1240,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/node-info.js",
+      "raw": 2389,
+      "gzip": 1238,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-brush-art.js",
+      "raw": 2434,
+      "gzip": 1224,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "raw": 2824,
+      "gzip": 1222,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/map-health-hud.js",
+      "raw": 2632,
+      "gzip": 1222,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.board.js",
+      "raw": 2381,
+      "gzip": 1210,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/rule-config.js",
+      "raw": 3057,
+      "gzip": 1179,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.protocol.js",
+      "raw": 2692,
+      "gzip": 1143,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/quick-nav.js",
+      "raw": 2555,
+      "gzip": 1130,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-state.js",
+      "raw": 2456,
+      "gzip": 1068,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/transitions-director.js",
+      "raw": 2007,
+      "gzip": 1051,
+      "dynamic": [
+        "./comm-feed.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/chest-opening-art.js",
+      "raw": 3638,
+      "gzip": 1051,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/versioned-slot-reader.js",
+      "raw": 1975,
+      "gzip": 1035,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.samples.player.js",
+      "raw": 2185,
+      "gzip": 1012,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/terminal-settlement.js",
+      "raw": 1953,
+      "gzip": 1005,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.battle-stats.js",
+      "raw": 1816,
+      "gzip": 1002,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.surface.js",
+      "raw": 2128,
+      "gzip": 996,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-travel-path.js",
+      "raw": 1850,
+      "gzip": 990,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-meta.commands.js",
+      "raw": 2135,
+      "gzip": 976,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/characters.js",
+      "raw": 2056,
+      "gzip": 961,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/startup-transition.js",
+      "raw": 1871,
+      "gzip": 950,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/home-layers.js",
+      "raw": 1978,
+      "gzip": 946,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-travel-motion.js",
+      "raw": 1698,
+      "gzip": 940,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/performance-settings.js",
+      "raw": 2078,
+      "gzip": 936,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.stats.js",
+      "raw": 1892,
+      "gzip": 923,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/battle/battle-loader.js",
+      "raw": 1999,
+      "gzip": 918,
+      "dynamic": [
+        "./view/battle.view.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m2.js",
+      "raw": 2375,
+      "gzip": 909,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/node-restore-state.js",
+      "raw": 1772,
+      "gzip": 863,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/home-linked-interactions.js",
+      "raw": 1595,
+      "gzip": 857,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.kernel.js",
+      "raw": 1423,
+      "gzip": 851,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m7.js",
+      "raw": 2215,
+      "gzip": 835,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/fire-rest-view.js",
+      "raw": 1694,
+      "gzip": 834,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/home/narrative.js",
+      "raw": 1899,
+      "gzip": 829,
+      "dynamic": [
+        "inkjs",
+        "../generated/narrative-events.js",
+        "inkjs",
+        "../generated/narrative-events.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/expedition-feedback.js",
+      "raw": 1397,
+      "gzip": 812,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/experience/pocket-strip.js",
+      "raw": 1441,
+      "gzip": 811,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/shop-browse-state.js",
+      "raw": 1633,
+      "gzip": 787,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m9.js",
+      "raw": 1538,
+      "gzip": 778,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/battle/bag/battle.slam-skill.js",
+      "raw": 2215,
+      "gzip": 772,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/cover-context.js",
+      "raw": 1532,
+      "gzip": 770,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/random.js",
+      "raw": 1405,
+      "gzip": 760,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/inventory-zoom.js",
+      "raw": 1331,
+      "gzip": 746,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/encounter-selector.js",
+      "raw": 1828,
+      "gzip": 744,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.store.js",
+      "raw": 1482,
+      "gzip": 743,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.weights.js",
+      "raw": 1252,
+      "gzip": 740,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-departure.commands.js",
+      "raw": 1420,
+      "gzip": 732,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-economy.js",
+      "raw": 1321,
+      "gzip": 725,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.scenes.js",
+      "raw": 1230,
+      "gzip": 722,
+      "dynamic": [
+        "./agent.scenes.runtime.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.modes.js",
+      "raw": 1252,
+      "gzip": 707,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m11.js",
+      "raw": 1201,
+      "gzip": 703,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.policy.js",
+      "raw": 1364,
+      "gzip": 696,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/input.js",
+      "raw": 1272,
+      "gzip": 689,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/motion.js",
+      "raw": 1250,
+      "gzip": 687,
+      "dynamic": [],
+      "bare": [
+        "motion/mini"
+      ]
+    },
+    {
+      "file": "game/src/cards/cards.consts.js",
+      "raw": 1536,
+      "gzip": 678,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/character-idle.js",
+      "raw": 1282,
+      "gzip": 675,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m8.js",
+      "raw": 1979,
+      "gzip": 671,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.js",
+      "raw": 1615,
+      "gzip": 666,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.reward-organizer.js",
+      "raw": 1090,
+      "gzip": 664,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/art-preload-plan.js",
+      "raw": 1034,
+      "gzip": 622,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/route-choice-preview.js",
+      "raw": 1166,
+      "gzip": 616,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/title-wallpaper.js",
+      "raw": 1116,
+      "gzip": 610,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m6.js",
+      "raw": 1573,
+      "gzip": 606,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/layeredMap.js",
+      "raw": 1523,
+      "gzip": 599,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/archive-motion.js",
+      "raw": 1085,
+      "gzip": 591,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/card-capacity.js",
+      "raw": 1013,
+      "gzip": 586,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.data.js",
+      "raw": 1971,
+      "gzip": 575,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/reward-scene-view.js",
+      "raw": 1051,
+      "gzip": 566,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/render-scheduler.js",
+      "raw": 1335,
+      "gzip": 552,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/image-decode.js",
+      "raw": 1060,
+      "gzip": 547,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-graph.js",
+      "raw": 999,
+      "gzip": 547,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m5.js",
+      "raw": 1403,
+      "gzip": 544,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.scenes.catalog.js",
+      "raw": 1301,
+      "gzip": 543,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/event-bus.js",
+      "raw": 895,
+      "gzip": 531,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/motion-presets.js",
+      "raw": 919,
+      "gzip": 521,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/renderer.icons.js",
+      "raw": 1523,
+      "gzip": 521,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.catalog.js",
+      "raw": 1117,
+      "gzip": 520,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.common.js",
+      "raw": 925,
+      "gzip": 515,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/renderer.primitives.js",
+      "raw": 990,
+      "gzip": 509,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-frame-presentation.js",
+      "raw": 756,
+      "gzip": 508,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/ui-scale.js",
+      "raw": 927,
+      "gzip": 504,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/battle-victory-progress.js",
+      "raw": 860,
+      "gzip": 502,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/icon-hydration.js",
+      "raw": 871,
+      "gzip": 490,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/motion-primitives.js",
+      "raw": 862,
+      "gzip": 481,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/navigation-motion.js",
+      "raw": 766,
+      "gzip": 470,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/title-credits.js",
+      "raw": 848,
+      "gzip": 459,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-city-atmosphere.js",
+      "raw": 684,
+      "gzip": 458,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m10.js",
+      "raw": 754,
+      "gzip": 453,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m1.js",
+      "raw": 969,
+      "gzip": 451,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/home/story.commands.js",
+      "raw": 804,
+      "gzip": 427,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-progression.commands.js",
+      "raw": 808,
+      "gzip": 419,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.music.catalog.js",
+      "raw": 790,
+      "gzip": 416,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/commands.shared.js",
+      "raw": 572,
+      "gzip": 400,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/rules.js",
+      "raw": 879,
+      "gzip": 398,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/encounter-meta.js",
+      "raw": 724,
+      "gzip": 393,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-mutation.js",
+      "raw": 592,
+      "gzip": 392,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-reveals.js",
+      "raw": 615,
+      "gzip": 389,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/meta-progression.js",
+      "raw": 665,
+      "gzip": 379,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-node-glow.js",
+      "raw": 634,
+      "gzip": 377,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.face-refresh.js",
+      "raw": 555,
+      "gzip": 364,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-presentation.js",
+      "raw": 720,
+      "gzip": 363,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-draw-explanation.js",
+      "raw": 382,
+      "gzip": 356,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "raw": 739,
+      "gzip": 343,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/event-recode-candidates.js",
+      "raw": 479,
+      "gzip": 341,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/ui-decision.js",
+      "raw": 492,
+      "gzip": 330,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-pet-egg.commands.js",
+      "raw": 493,
+      "gzip": 323,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-image-ready.js",
+      "raw": 569,
+      "gzip": 320,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/performance-budgets.js",
+      "raw": 427,
+      "gzip": 298,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/reward-card-feedback.js",
+      "raw": 425,
+      "gzip": 298,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m4.js",
+      "raw": 381,
+      "gzip": 292,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-elapsed.commands.js",
+      "raw": 563,
+      "gzip": 290,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/feedback-theme.js",
+      "raw": 356,
+      "gzip": 290,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-battle-start-explanation.js",
+      "raw": 328,
+      "gzip": 288,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/asset-url.js",
+      "raw": 389,
+      "gzip": 281,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/main.js",
+      "raw": 932,
+      "gzip": 268,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/data-loader.js",
+      "raw": 455,
+      "gzip": 259,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/reward-picker-heading.js",
+      "raw": 361,
+      "gzip": 258,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/random-core.js",
+      "raw": 356,
+      "gzip": 255,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/renderer.fx.js",
+      "raw": 364,
+      "gzip": 245,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/ui-disclosure.js",
+      "raw": 313,
+      "gzip": 242,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-rarity.js",
+      "raw": 374,
+      "gzip": 235,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/motion-transitions.js",
+      "raw": 318,
+      "gzip": 224,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/transition-diagnostic-policy.js",
+      "raw": 319,
+      "gzip": 223,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/page-entry-cancellation.js",
+      "raw": 268,
+      "gzip": 193,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/turbo.js",
+      "raw": 261,
+      "gzip": 188,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/shared.js",
+      "raw": 209,
+      "gzip": 180,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/mapData.js",
+      "raw": 206,
+      "gzip": 180,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.diagnostic-policy.js",
+      "raw": 173,
+      "gzip": 156,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/general-transition.js",
+      "raw": 126,
+      "gzip": 141,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/sdt-facade.js",
+      "raw": 138,
+      "gzip": 139,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.browser.js",
+      "raw": 133,
+      "gzip": 136,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/storage.js",
+      "raw": 180,
+      "gzip": 135,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/bag-return-hook.js",
+      "raw": 148,
+      "gzip": 128,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/departure.selection-state.js",
+      "raw": 77,
+      "gzip": 87,
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.bag.bridge.js",
+      "raw": 34,
+      "gzip": 54,
+      "dynamic": [],
+      "bare": []
+    }
+  ],
+  "edges": [
+    {
+      "file": "game/src/ui/title-credits.js",
+      "static": [
+        "game/src/ui/home-fx.js",
+        "game/src/ui/home-menu-motion.js",
+        "game/src/ui/home-layers.js",
+        "game/src/ui/home-linked-interactions.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/home-fx.js",
+      "static": [
+        "game/src/ui/interface-motion.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/interface-motion.js",
+      "static": [
+        "game/src/ui/surface-motion.js",
+        "game/src/ui/camp-entry.js",
+        "game/src/ui/page-motion-profiles.js",
+        "game/src/ui/archive-motion.js",
+        "game/src/ui/navigation-motion.js",
+        "game/src/ui/page-visual-ready.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/surface-motion.js",
+      "static": [
+        "game/src/ui/page-motion-profiles.js",
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/navigation-motion.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/page-motion-profiles.js",
+      "static": [
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/navigation-motion.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/motion-presets.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/navigation-motion.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/camp-entry.js",
+      "static": [
+        "game/src/ui/page-visual-ready.js",
+        "game/src/core/map-image-ready.js",
+        "game/src/ui/general-transition.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/page-visual-ready.js",
+      "static": [
+        "game/src/core/map-image-ready.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-image-ready.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/general-transition.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/archive-motion.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/home-menu-motion.js",
+      "static": [
+        "game/src/ui/interface-motion.js",
+        "game/src/ui/motion-presets.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/home-layers.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/home-linked-interactions.js",
+      "static": [
+        "game/src/ui/motion-presets.js",
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/shared.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/title-wallpaper.js",
+      "static": [
+        "game/src/core/storage.js",
+        "game/src/ui/home-menu-motion.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/storage.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/main.js",
+      "static": [
+        "game/src/ui/ui-scale.js",
+        "game/src/core/random.js",
+        "game/src/core/rules.js",
+        "game/src/core/mapData.js",
+        "game/src/core/art.js",
+        "game/src/core/icons-bitmap.js",
+        "game/src/audio/sound.js",
+        "game/src/core/camera.js",
+        "game/src/core/motion.js",
+        "game/src/core/input.js",
+        "game/src/core/event-bus.js",
+        "game/src/core/notes.js",
+        "game/src/cards/cards.js",
+        "game/src/battle/core/combat.js",
+        "game/src/hub/base.js",
+        "game/src/hub/meta.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/renderer.fx.js",
+        "game/src/core/renderer.js",
+        "game/src/ui/ui.js",
+        "game/src/ui/term-tips.js",
+        "game/src/ui/character-idle.js",
+        "game/src/core/shared.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/run/chests.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/game.store.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.nest.js",
+        "game/src/run/game.run.js",
+        "game/src/hub/game.hub.js",
+        "game/src/hub/game.bag.js",
+        "game/src/hub/game.notes.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/game.boot.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/ui-scale.js",
+      "static": [
+        "game/src/core/sdt-facade.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/sdt-facade.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/random.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/random-core.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/random-core.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/rules.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/rule-config.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/rule-config.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/mapData.js",
+      "static": [
+        "game/src/core/rules.js",
+        "game/src/core/sdt-facade.js",
+        "game/data/map.json"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/data/map.json",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/art.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/characters.js",
+        "game/src/core/asset-url.js",
+        "game/src/core/data-loader.js",
+        "game/src/generated/art-manifest.js",
+        "game/src/generated/thumb-manifest.js",
+        "game/src/core/shared.js",
+        "game/src/core/performance-budgets.js",
+        "game/src/core/performance-settings.js",
+        "game/src/core/image-decode.js",
+        "game/src/core/art-preload-plan.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/characters.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/asset-url.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/data-loader.js",
+      "static": [
+        "game/data/pets.json",
+        "game/data/achievements.json",
+        "game/data/art-mapping.json",
+        "game/data/scenes.json",
+        "game/data/map.json",
+        "game/data/cards-sync.json"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/data/pets.json",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/data/achievements.json",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/data/art-mapping.json",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/data/scenes.json",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/data/cards-sync.json",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/generated/art-manifest.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/generated/thumb-manifest.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/performance-budgets.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/performance-settings.js",
+      "static": [
+        "game/src/core/storage.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/image-decode.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/art-preload-plan.js",
+      "static": [
+        "game/data/card-frame-layout.json",
+        "game/src/core/asset-url.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/data/card-frame-layout.json",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/icons-bitmap.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/asset-url.js",
+        "game/src/core/shared.js",
+        "game/src/core/icon-hydration.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/icon-hydration.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/asset-url.js",
+        "game/src/audio/sound.samples.player.js",
+        "game/src/audio/sound.policy.js",
+        "game/src/audio/sound.music.catalog.js",
+        "game/src/audio/sound.music.player.js",
+        "game/src/audio/sound.diagnostic-policy.js"
+      ],
+      "dynamic": [],
+      "bare": [
+        "howler"
+      ]
+    },
+    {
+      "file": "game/src/audio/sound.samples.player.js",
+      "static": [
+        "game/src/audio/sound.samples.catalog.js",
+        "game/src/audio/sound.policy.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.samples.catalog.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.policy.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.music.catalog.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.music.player.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/audio/sound.diagnostic-policy.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/camera.js",
+      "static": [
+        "game/src/core/render-scheduler.js",
+        "game/src/core/motion-primitives.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/render-scheduler.js",
+      "static": [
+        "game/src/core/performance-settings.js",
+        "game/src/core/sdt-facade.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/motion-primitives.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/motion.js",
+      "static": [
+        "game/src/core/sdt-facade.js"
+      ],
+      "dynamic": [],
+      "bare": [
+        "motion/mini"
+      ]
+    },
+    {
+      "file": "game/src/core/input.js",
+      "static": [
+        "game/src/core/sdt-facade.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/event-bus.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/diagnostics.local.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/diagnostics.local.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/notes.js",
+      "static": [
+        "game/src/core/sdt-facade.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.js",
+      "static": [
+        "game/src/core/random.js",
+        "game/src/cards/cards.view.js",
+        "game/src/core/data-loader.js",
+        "game/src/cards/cards.consts.js",
+        "game/src/cards/cards.rules.js",
+        "game/src/cards/cards.data.js",
+        "game/src/cards/cards.sync.js",
+        "game/src/cards/cards.sync.m1.js",
+        "game/src/cards/cards.sync.m2.js",
+        "game/src/cards/cards.sync.m3.js",
+        "game/src/cards/cards.sync.m4.js",
+        "game/src/cards/cards.sync.m5.js",
+        "game/src/cards/cards.sync.m6.js",
+        "game/src/cards/cards.sync.m7.js",
+        "game/src/cards/cards.sync.m8.js",
+        "game/src/cards/cards.sync.face-refresh.js",
+        "game/src/cards/cards.sync.m9.js",
+        "game/src/cards/cards.sync.m10.js",
+        "game/src/cards/cards.sync.m11.js",
+        "game/src/cards/card-rules.schema.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.view.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/ui/term-tips.js",
+        "game/src/core/shared.js",
+        "game/src/cards/card-description-text.js",
+        "game/src/cards/card-frame-presentation.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/term-tips.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/ui/ui-scale.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-description-text.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-frame-presentation.js",
+      "static": [
+        "game/data/card-frame-layout.json",
+        "game/src/core/asset-url.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.consts.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.rules.js",
+      "static": [
+        "game/src/cards/cards.consts.js",
+        "game/src/core/random.js",
+        "game/src/core/data-loader.js",
+        "game/src/cards/card-rarity.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-rarity.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.data.js",
+      "static": [
+        "game/src/cards/cards.catalog.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.catalog.js",
+      "static": [
+        "game/src/core/data-loader.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.js",
+      "static": [
+        "game/src/cards/cards.consts.js",
+        "game/src/core/random.js",
+        "game/src/core/data-loader.js",
+        "game/src/cards/card-rules.schema.js",
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m1.js",
+      "static": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "static": [
+        "game/src/cards/cards.consts.js",
+        "game/src/cards/card-rules.schema.js",
+        "game/src/cards/card-rules.capability.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-rules.capability.js",
+      "static": [
+        "game/src/cards/card-rules.schema.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m2.js",
+      "static": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m3.js",
+      "static": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m4.js",
+      "static": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m5.js",
+      "static": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m6.js",
+      "static": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m7.js",
+      "static": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m8.js",
+      "static": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.face-refresh.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m9.js",
+      "static": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m10.js",
+      "static": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/cards.sync.m11.js",
+      "static": [
+        "game/src/cards/cards.sync.backfiller.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/battle/core/combat.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/hub/base-state.js",
+        "game/src/core/random.js",
+        "game/src/core/data-loader.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/versioned-slot-reader.js",
+        "game/src/hub/base-mutation.js",
+        "game/src/hub/base-economy.js",
+        "game/src/hub/base-progression.commands.js",
+        "game/src/hub/base-departure.commands.js",
+        "game/src/hub/base-pet-egg.commands.js",
+        "game/src/hub/base-elapsed.commands.js",
+        "game/src/hub/base-meta.commands.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-state.js",
+      "static": [
+        "game/src/core/characters.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.storage.js",
+      "static": [
+        "game/src/core/characters.js",
+        "game/src/hub/versioned-slot-reader.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/versioned-slot-reader.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-mutation.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-economy.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-progression.commands.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-departure.commands.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-pet-egg.commands.js",
+      "static": [
+        "game/src/core/rule-config.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-elapsed.commands.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base-meta.commands.js",
+      "static": [
+        "game/src/core/characters.js",
+        "game/src/hub/meta-progression.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/meta-progression.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/meta.js",
+      "static": [
+        "game/src/core/data-loader.js",
+        "game/src/core/characters.js",
+        "game/src/core/random.js",
+        "game/src/hub/meta-progression.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/renderer.fx.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/renderer.js",
+      "static": [
+        "game/src/core/performance-settings.js",
+        "game/src/core/map-brush-art.js",
+        "game/src/core/renderer.primitives.js",
+        "game/src/core/map-reveals.js",
+        "game/src/core/motion-primitives.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/node-info.js",
+        "game/src/core/map-node-state.js",
+        "game/src/core/map-city-atmosphere.js",
+        "game/src/core/map-node-art.js",
+        "game/src/core/map-node-glow.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/core/map-image-ready.js",
+        "game/src/run/expedition.view.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-brush-art.js",
+      "static": [
+        "game/src/core/map-image-ready.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/renderer.primitives.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-reveals.js",
+      "static": [
+        "game/src/core/render-scheduler.js",
+        "game/src/core/motion-primitives.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/node-info.js",
+      "static": [
+        "game/src/core/map-node-state.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-node-state.js",
+      "static": [
+        "game/src/run/node-restore-state.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/node-restore-state.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-city-atmosphere.js",
+      "static": [
+        "game/src/core/map-image-ready.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-node-art.js",
+      "static": [
+        "game/src/core/map-brush-art.js",
+        "game/src/core/renderer.icons.js",
+        "game/src/core/map-image-ready.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/renderer.icons.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/map-node-glow.js",
+      "static": [
+        "game/src/core/performance-settings.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/motion.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/node-reward-state.js",
+      "static": [
+        "game/src/run/node-restore-state.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/expedition.view.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/run/route-choice-preview.js",
+        "game/src/core/node-info.js",
+        "game/src/core/map-node-state.js",
+        "game/src/core/map-node-art.js",
+        "game/src/run/map-travel-path.js",
+        "game/src/run/map-travel-path.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/route-choice-preview.js",
+      "static": [
+        "game/src/run/map-route-v2.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-route-v2.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/core/random-core.js",
+        "game/src/run/map-generation-rules.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-generation-rules.js",
+      "static": [
+        "game/src/run/map-generator.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-generator.js",
+      "static": [
+        "game/src/core/random-core.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-travel-path.js",
+      "static": [
+        "game/src/core/map-node-state.js",
+        "game/src/run/node-reward-state.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/ui.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/core/motion.js",
+        "game/src/cards/card-description-links.js",
+        "game/src/cards/card-draw-explanation.js",
+        "game/src/hub/photo-studio-presentation.js",
+        "game/src/ui/term-tips.js",
+        "game/src/ui/overlay.js",
+        "game/src/ui/cinematics.js",
+        "game/src/ui/hud.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-description-links.js",
+      "static": [
+        "game/src/cards/cards.view.js",
+        "game/src/cards/card-description-text.js",
+        "game/src/ui/term-tips.js",
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-draw-explanation.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/photo-studio-presentation.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/overlay.js",
+      "static": [
+        "game/src/ui/motion-transitions.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/motion-transitions.js",
+      "static": [
+        "game/src/ui/transitions-director.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/transitions-director.js",
+      "static": [
+        "game/src/core/motion.js"
+      ],
+      "dynamic": [
+        "./comm-feed.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/cinematics.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/hud.js",
+      "static": [
+        "game/src/ui/map-health-hud.js",
+        "game/src/core/storage.js",
+        "game/src/run/expedition.view.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/map-health-hud.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/character-idle.js",
+      "static": [
+        "game/src/core/sdt-facade.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/battle/battle-loader.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/diagnostics.local.js"
+      ],
+      "dynamic": [
+        "./view/battle.view.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/random.js",
+        "game/src/core/card-capacity.js",
+        "game/src/core/shared.js",
+        "game/src/ui/reward-card-feedback.js",
+        "game/src/ui/reward-picker-heading.js",
+        "game/src/ui/reward-scene-view.js",
+        "game/src/ui/chest-reward-overview.js",
+        "game/src/core/turbo.js",
+        "game/src/run/chest-reward-save.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/run/chest-opening-art.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/card-capacity.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/reward-card-feedback.js",
+      "static": [
+        "game/src/ui/card-result-feedback.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/card-result-feedback.js",
+      "static": [
+        "game/src/ui/feedback-theme.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/feedback-theme.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/reward-picker-heading.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/reward-scene-view.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/chest-reward-overview.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/turbo.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/chest-reward-save.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.bag.bridge.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/chest-opening-art.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.store.js",
+      "static": [
+        "game/src/core/sdt-facade.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "static": [
+        "game/src/core/flight-recorder.local.js",
+        "game/src/core/shared.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/run-save-validation.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/hub/terminal.commands.js",
+        "game/src/ui/game.menu.js",
+        "game/src/agent/agent.data.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/core/random.js",
+        "game/src/run/map-generator.js",
+        "game/src/run/map-snapshot.js",
+        "game/src/run/game.session.kernel.js",
+        "game/src/run/game.session.modes.js",
+        "game/src/run/game.session.bag.js",
+        "game/src/core/card-capacity.js",
+        "game/src/run/game.session.map.js",
+        "game/src/run/game.session.board.js",
+        "game/src/run/game.session.death.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/game.session.kernel.js",
+        "game/src/run/game.session.modes.js",
+        "game/src/run/game.session.bag.js",
+        "game/src/run/game.session.map.js",
+        "game/src/run/game.session.board.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/core/flight-recorder.local.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/run-save-validation.js",
+      "static": [
+        "game/src/run/chest-reward-save.js",
+        "game/src/run/node-reward-state.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/recovery.commands.js",
+      "static": [
+        "game/src/hub/base.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/recoverable-pair.js",
+        "game/src/hub/commands.shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/recoverable-pair.js",
+      "static": [
+        "game/src/hub/commands.shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/commands.shared.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "static": [
+        "game/src/hub/commands.shared.js",
+        "game/src/core/rule-config.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/terminal.commands.js",
+      "static": [
+        "game/src/core/characters.js",
+        "game/src/hub/meta.js",
+        "game/src/hub/commands.shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/game.menu.js",
+      "static": [
+        "game/src/ui/page-entry-cancellation.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/core/storage.js",
+        "game/src/ui/page-loading.js"
+      ],
+      "dynamic": [
+        "./game.menu.pages.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/page-entry-cancellation.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/page-loading.js",
+      "static": [
+        "game/src/core/motion.js",
+        "game/src/ui/camp-entry.js",
+        "game/src/ui/page-visual-ready.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.data.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/agent/agent.stats.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.recorder.js",
+      "static": [
+        "game/src/core/random.js",
+        "game/src/agent/agent.battle-stats.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.battle-stats.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.stats.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-snapshot.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/run/layeredMap.js",
+        "game/src/run/map-route-v2.js",
+        "game/src/run/map-generation-rules.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/layeredMap.js",
+      "static": [
+        "game/src/run/map-generator.js",
+        "game/src/run/map-generator-v4.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-generator-v4.js",
+      "static": [
+        "game/src/run/map-generator.js",
+        "game/src/core/random-core.js",
+        "game/src/core/shared.js",
+        "game/src/run/map-generation-rules.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.kernel.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/mapData.js",
+        "game/src/hub/game.store.js",
+        "game/src/core/random.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.modes.js",
+      "static": [
+        "game/src/run/game.session.kernel.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.bag.js",
+      "static": [
+        "game/src/run/game.session.kernel.js",
+        "game/src/run/game.session.modes.js",
+        "game/src/core/card-capacity.js",
+        "game/src/core/card-capacity.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.map.js",
+      "static": [
+        "game/src/core/random.js",
+        "game/src/run/map-graph.js",
+        "game/src/run/layeredMap.js",
+        "game/src/run/map-generator.js",
+        "game/src/run/map-generation-rules.js",
+        "game/src/ui/route-overlay.js",
+        "game/src/run/map-route-v2.js",
+        "game/src/run/game.session.kernel.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-graph.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/route-overlay.js",
+      "static": [
+        "game/src/run/map-generator.js",
+        "game/src/run/map-generation-rules.js",
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.board.js",
+      "static": [
+        "game/src/run/game.session.kernel.js",
+        "game/src/core/map-reveals.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.death.js",
+      "static": [
+        "game/src/ui/terminal-settlement.js",
+        "game/src/core/characters.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/core/shared.js",
+        "game/src/ui/ui-disclosure.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/terminal-settlement.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/ui-disclosure.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.nest.js",
+      "static": [
+        "game/src/core/random.js",
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/ui/ui.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/hub/nest-settlement.commands.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/battle/runes.js",
+        "game/src/core/event-bus.js",
+        "game/src/run/lab.ending.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/nest-settlement.commands.js",
+      "static": [
+        "game/src/hub/commands.shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/battle/runes.js",
+      "static": [
+        "game/src/core/sdt-facade.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/lab.ending.js",
+      "static": [
+        "game/src/core/asset-url.js",
+        "game/src/core/sdt-facade.js",
+        "game/src/core/turbo.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "static": [
+        "game/src/run/game.session.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/game.run.flow.js",
+        "game/src/run/game.run.dev-loader.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/run/game.run.data.js",
+        "game/src/core/random.js",
+        "game/src/core/random-core.js",
+        "game/src/run/game.run.shop.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/node-restore-state.js",
+        "game/src/run/encounter-selector.js",
+        "game/src/core/turbo.js",
+        "game/src/ui/transition-diagnostic-policy.js",
+        "game/src/core/motion.js",
+        "game/src/ui/camp-entry.js",
+        "game/src/ui/node-scene-view.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.js",
+      "static": [
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/run/game.session.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/page-entry-cancellation.js",
+        "game/src/ui/surface-motion.js"
+      ],
+      "dynamic": [
+        "./game.cardslib.page.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.cardslib.common.js",
+      "static": [
+        "game/src/ui/page-entry-cancellation.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.data.js",
+      "static": [
+        "game/src/core/data-loader.js",
+        "game/src/core/performance-budgets.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "static": [
+        "game/src/core/random.js",
+        "game/src/core/shared.js",
+        "game/src/cards/cards.view.js",
+        "game/src/core/motion-primitives.js",
+        "game/src/run/shop-browse-state.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/shop-browse-state.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/bag-return-hook.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/encounter-selector.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/transition-diagnostic-policy.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/node-scene-view.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.altar.js",
+      "static": [
+        "game/src/core/map-node-state.js",
+        "game/src/core/characters.js",
+        "game/src/ui/expedition-feedback.js",
+        "game/src/run/game.run.class-choice.js",
+        "game/src/ui/reward-card-feedback.js",
+        "game/src/ui/node-decision-view.js",
+        "game/src/ui/fire-rest-view.js",
+        "game/src/ui/reward-scene-view.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/node-restore-state.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/extraction.commands.js",
+        "game/src/hub/game.hub.js",
+        "game/src/ui/extraction-rewards-view.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/core/random.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/recovery.commands.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/expedition-feedback.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.js",
+      "static": [
+        "game/src/run/game.session.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/page-entry-cancellation.js"
+      ],
+      "dynamic": [
+        "./game.run.class-choice.page.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/node-decision-view.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/ui/ui-disclosure.js",
+        "game/src/ui/ui-decision.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/ui-decision.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/fire-rest-view.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/ui/ui-disclosure.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.hub.js",
+      "static": [
+        "game/src/run/game.session.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/ui/page-loading.js",
+        "game/src/ui/page-entry-cancellation.js",
+        "game/src/hub/departure.selection-state.js"
+      ],
+      "dynamic": [
+        "./game.hub.runtime.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/departure.selection-state.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/extraction-rewards-view.js",
+      "static": [
+        "game/src/ui/ui-disclosure.js",
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/run/game.run.data.js",
+        "game/src/core/random.js",
+        "game/src/home/narrative.js",
+        "game/src/home/story.last-lamp.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/home/story.commands.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/core/turbo.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/run/map-travel-path.js",
+        "game/src/run/map-travel-motion.js",
+        "game/src/run/game.run.scenes.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/event-card-choice.js",
+        "game/src/ui/reward-scene-view.js",
+        "game/src/ui/event-signal-puzzle.js",
+        "game/src/run/chest-reward-save.js",
+        "game/src/run/event-recode-candidates.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/home/narrative.js",
+      "static": [],
+      "dynamic": [
+        "inkjs",
+        "../generated/narrative-events.js",
+        "inkjs",
+        "../generated/narrative-events.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/home/story.last-lamp.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/home/story.commands.js",
+      "static": [
+        "game/src/hub/base.commands.js",
+        "game/src/home/story.last-lamp.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/base.commands.js",
+      "static": [
+        "game/src/hub/base.js",
+        "game/src/hub/commands.shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/map-travel-motion.js",
+      "static": [
+        "game/src/run/map-travel-path.js",
+        "game/src/core/motion-primitives.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/event-card-choice.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/hub/game.bag.bridge.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/event-signal-puzzle.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/event-recode-candidates.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.run.dev-loader.js",
+      "static": [
+        "game/src/run/game.session.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/hub/game.cardslib.common.js",
+        "game/src/ui/page-entry-cancellation.js"
+      ],
+      "dynamic": [
+        "./game.run.dev.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "static": [
+        "game/src/hub/game.container-store.view.js",
+        "game/src/core/card-capacity.js",
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/core/random.js",
+        "game/src/hub/bag-return-hook.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/hub/game.bag.drag.js",
+        "game/src/hub/game.bag.rules.js",
+        "game/src/hub/game.bag.view2.js",
+        "game/src/battle/battle-loader.js",
+        "game/src/hub/game.reward-organizer.js",
+        "game/src/ui/inventory-zoom.js",
+        "game/src/hub/game.bag.settle.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.container-store.view.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.bag.drag.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/battle/battle-loader.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.bag.rules.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/core/card-capacity.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.bag.view2.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/core/shared.js",
+        "game/src/hub/game.bag.rules.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.reward-organizer.js",
+      "static": [
+        "game/src/core/card-capacity.js",
+        "game/src/ui/reward-capacity-organizer.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/reward-capacity-organizer.js",
+      "static": [
+        "game/src/core/shared.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/inventory-zoom.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/cards/card-battle-start-explanation.js",
+        "game/src/cards/cards.view.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/cards/card-battle-start-explanation.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.bag.settle.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/core/rule-config.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.storage.js",
+        "game/src/hub/battle-settlement.commands.js",
+        "game/src/hub/recovery.commands.js",
+        "game/src/core/random.js",
+        "game/src/core/event-bus.js",
+        "game/src/run/game.run.js",
+        "game/src/hub/game.bag.bridge.js",
+        "game/src/run/chest-reward-save.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.js",
+      "static": [
+        "game/src/hub/commands.shared.js",
+        "game/src/hub/battle-victory-progress.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/battle-victory-progress.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/core/characters.js",
+        "game/src/hub/meta-progression.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/hub/game.notes.js",
+      "static": [
+        "game/src/core/shared.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.session.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/game.boot.js",
+      "static": [
+        "game/src/hub/game.notes.js",
+        "game/src/ui/game.menu.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.session.js",
+        "game/src/run/game.run.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/run/game.run.dev-loader.js",
+        "game/src/run/game.run.data.js",
+        "game/src/run/game.run.altar.js",
+        "game/src/core/performance-budgets.js",
+        "game/src/core/art-preload-plan.js",
+        "game/src/hub/game.hub.js",
+        "game/src/hub/game.bag.js",
+        "game/src/run/game.run.shop.js",
+        "game/src/hub/game.notes.js",
+        "game/src/hub/game.cardslib.js",
+        "game/src/core/render-scheduler.js",
+        "game/src/core/camera.js",
+        "game/src/core/storage.js",
+        "game/src/run/game.session.js",
+        "game/src/run/expedition.view.js",
+        "game/src/core/map-node-state.js",
+        "game/src/run/map-travel-path.js",
+        "game/src/agent/agent.js",
+        "game/src/ui/quick-nav.js",
+        "game/src/experience/pocket-strip.js",
+        "game/src/run/game.session.browser.js"
+      ],
+      "dynamic": [
+        "./core/perf-probe.local.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.js",
+      "static": [
+        "game/src/core/sdt-facade.js",
+        "game/src/agent/agent.state.js",
+        "game/src/agent/agent.runner.js",
+        "game/src/agent/agent.protocol.js",
+        "game/src/core/turbo.js",
+        "game/src/agent/agent.policy.js",
+        "game/src/agent/agent.llm.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/agent/agent.stats.js",
+        "game/src/agent/agent.scenes.js",
+        "game/src/agent/agent.data.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.state.js",
+      "static": [
+        "game/src/run/game.session.js",
+        "game/src/run/node-reward-state.js",
+        "game/src/agent/agent.surface.js",
+        "game/src/agent/agent.protocol.js",
+        "game/src/agent/agent.recorder.js"
+      ],
+      "dynamic": [
+        "../battle/core/battle.core.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.surface.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.protocol.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.runner.js",
+      "static": [
+        "game/src/agent/agent.protocol.js",
+        "game/src/agent/agent.surface.js",
+        "game/src/agent/agent.state.js",
+        "game/src/core/turbo.js",
+        "game/src/agent/agent.recorder.js",
+        "game/src/run/game.run.flow.js",
+        "game/src/run/game.session.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "static": [
+        "game/src/core/random.js",
+        "game/src/agent/agent.weights.js",
+        "game/src/battle/bag/battle.slam-skill.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.weights.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/battle/bag/battle.slam-skill.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.llm.js",
+      "static": [
+        "game/src/agent/agent.protocol.js",
+        "game/src/agent/agent.policy.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.scenes.js",
+      "static": [
+        "game/src/agent/agent.scenes.catalog.js"
+      ],
+      "dynamic": [
+        "./agent.scenes.runtime.js"
+      ],
+      "bare": []
+    },
+    {
+      "file": "game/src/agent/agent.scenes.catalog.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/quick-nav.js",
+      "static": [
+        "game/src/ui/page-entry-cancellation.js",
+        "game/src/run/game.session.js",
+        "game/src/hub/game.hub.js",
+        "game/src/hub/game.cardslib.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/experience/pocket-strip.js",
+      "static": [
+        "game/src/run/encounter-meta.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/encounter-meta.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/run/game.session.browser.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/startup-transition.js",
+      "static": [
+        "game/src/ui/camp-entry.js",
+        "game/src/ui/page-visual-ready.js"
+      ],
+      "dynamic": [],
+      "bare": []
+    },
+    {
+      "file": "game/src/ui/cover-context.js",
+      "static": [],
+      "dynamic": [],
+      "bare": []
+    }
+  ]
+}

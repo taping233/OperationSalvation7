@@ -1,0 +1,37 @@
+const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
+const {JSDOM}=require('jsdom'),{parse}=require('acorn'),{full}=require('acorn-walk');
+const root=path.resolve(__dirname,'../../..');
+const rendererPath=path.join(root,'game/src/hub/hub.personnel.js'),presentationPath=path.join(root,'game/src/hub/hub.presentation.js');
+const baselinePath=path.join(root,'docs/evidence/2026-10-18-WF-perf-budgets-1018/assets/baseline/hub.presentation.js.txt');
+const renderer=fs.readFileSync(rendererPath,'utf8'),presentation=fs.readFileSync(fs.existsSync(baselinePath)?baselinePath:presentationPath,'utf8');
+const rendererAst=parse(renderer,{ecmaVersion:'latest',sourceType:'module'}),presentationAst=parse(presentation,{ecmaVersion:'latest',sourceType:'module'});
+const renderProgram=rendererAst.body.filter(node=>node.type!=='ImportDeclaration').map(node=>node.type==='ExportNamedDeclaration'?renderer.slice(node.declaration.start,node.declaration.end):renderer.slice(node.start,node.end)).join('\n');
+let updaterNode;full(presentationAst,node=>{if(node.type==='FunctionDeclaration'&&node.id?.name==='updatePersonnelV12')updaterNode=node;});
+const updater=presentation.slice(updaterNode.start,updaterNode.end);
+const candidate=updater.replace(/loading\.onload = \(\) => \{\r?\n/,match=>match+'      if (!image.isConnected || image.dataset.portraitRequest !== request) return;\n');
+if(candidate===updater)throw Error('In-memory proposal patch did not match');
+const actualPresentation=fs.readFileSync(presentationPath,'utf8');
+let actualUpdaterNode;full(parse(actualPresentation,{ecmaVersion:'latest',sourceType:'module'}),node=>{if(node.type==='FunctionDeclaration'&&node.id?.name==='updatePersonnelV12')actualUpdaterNode=node;});
+const actualUpdater=actualPresentation.slice(actualUpdaterNode.start,actualUpdaterNode.end);
+async function run(code,depart=false){
+ const dom=new JSDOM('<!doctype html><body></body>',{url:'http://controlled.test/'}),{window}=dom;
+ const ids=['wu','heixiang','baita','xingyue','changwuyu'];
+ const characters=new Map(ids.map(id=>[id,{id,name:id,rulesetId:id}]));
+ window.SDT={Base:{slot:1,data:{}},Meta:{classSummary:()=>ids.map(cls=>({cls,lv:1,xp:0,need:50,maxed:false})),perkText:()=>'+1'},Art:{listSkins:()=>[],skinUrl:id=>'/portraits/full/'+id+'.webp',classAvatarArt:id=>`<img src="/avatars/${id}.webp" alt="">`},Cards:{classPool:()=>[]}};
+ const pending=[],decoded=[];
+ const context=vm.createContext({window,document:window.document,URL,Map,Set,console,portraitRequest:0,esc:value=>String(value??''),escAttr:value=>String(value??''),assetUrl:value=>'/'+value,characterFor:id=>characters.get(id),getCharacter:()=>({selectedSkinId:'default',availableSkinIds:['default']}),Image:class{constructor(){pending.push(this);}decode(){decoded.push(this.src);return Promise.resolve();}}});
+ vm.runInContext(renderProgram+'\nsetPersonnelGroup("people");setPersonnelSection("profile");globalThis.render=personnelHTML;',context);
+ vm.runInContext(code+'\nglobalThis.update=updatePersonnelV12;',context);
+ const page=window.document.createElement('main');page.innerHTML=context.render('wu');window.document.body.append(page);
+ for(const id of ids.slice(1)){const next=window.document.createElement('main');next.innerHTML=context.render(id);context.update(page,next,true,{view:'classes/profile'});}
+ if(depart)page.remove();
+ for(const image of pending)image.onload();
+ await new Promise(resolve=>setImmediate(resolve));
+ const report={switches:4,departBeforeLoad:depart,loadingImages:pending.length,decodeCalls:decoded.length,decodedSources:decoded,committedSource:page.querySelector('.pv12-agent-image-stage img').getAttribute('src')};
+ dom.window.close();return report;
+}
+(async()=>{
+ const report={source:{renderer:'game/src/hub/hub.personnel.js',presentation:'game/src/hub/hub.presentation.js',baseline:'baseline/hub.presentation.js.txt',rendererSha256:crypto.createHash('sha256').update(renderer).digest('hex'),presentationBeforeSha256:crypto.createHash('sha256').update(presentation).digest('hex'),presentationAfterSha256:crypto.createHash('sha256').update(actualPresentation).digest('hex'),actualUpdaterMatchesCandidate:actualUpdater.replaceAll('\r\n','\n')===candidate.replaceAll('\r\n','\n')},method:'Actual personnel renderer and preserved baseline updatePersonnelV12 function in jsdom; Image load/decode completion is controlled. The local candidate is compared with the actual modified updater. This counts explicit decode calls, not real browser time or RSS.',baselineRapidSwitch:await run(updater),candidateRapidSwitch:await run(candidate),baselineLeaveBeforeLoad:await run(updater,true),candidateLeaveBeforeLoad:await run(candidate,true)};
+ if(report.baselineRapidSwitch.decodeCalls!==4||report.candidateRapidSwitch.decodeCalls!==1||report.baselineLeaveBeforeLoad.decodeCalls!==4||report.candidateLeaveBeforeLoad.decodeCalls!==0||report.baselineRapidSwitch.committedSource!==report.candidateRapidSwitch.committedSource)throw Error('Controlled lifecycle comparison failed');
+ fs.writeFileSync(path.join(root,'docs/evidence/2026-10-18-WF-perf-budgets-1018/assets/personnel-preview-audit.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+})().catch(error=>{console.error(error);process.exitCode=1;});

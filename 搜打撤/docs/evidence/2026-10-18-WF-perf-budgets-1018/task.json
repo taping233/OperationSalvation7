@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-perf-budgets-1018",
+  "date": "2026-10-18",
+  "owner": "Friday",
+  "goal": "优先改善游玩时的操作响应、切页等待和地图/战斗流畅度；资源精简以真实加载、解码及内存收益为依据，保留玩法、视觉与原预算阈值",
+  "paths": [
+    "game/src/battle/view/battle.aim.js",
+    "game/src/battle/view/battle.hover.js",
+    "game/src/hub/hub.presentation.js",
+    "game/src/hub/game.bag.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "tests/bag-render-snapshot.test.js",
+    "tests/battle-area-hover-snapshot.test.js",
+    "tests/battle-drag-reference.test.js",
+    "tests/personnel-preview-lifecycle-perf.test.js",
+    "docs/evidence/2026-10-18-WF-perf-budgets-1018"
+  ],
+  "doneWhen": [
+    "三域归因与可实施改动均有字节或行为证据",
+    "实施范围定向验证通过并如实记录预算与实页边界",
+    "可安全交付时生成更新的独立Windows EXE并保留旧版"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "完整隔离门609文件5968项通过16跳过，静态门通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "新版EXE封装及PE/ASAR/资源字节校验通过",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "按老板指示停止实玩，背包后续实页及原生EXE交互未验证；原五项资源预算失败保留"
+  ],
+  "updatedAt": "2026-10-18T10:12:09.992Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}
