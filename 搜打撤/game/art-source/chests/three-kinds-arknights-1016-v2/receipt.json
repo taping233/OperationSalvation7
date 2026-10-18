@@ -1,0 +1,80 @@
+[
+  {
+    "kind": "small",
+    "path": "game/art-source/chests/three-kinds-arknights-1016-v2/small.png",
+    "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-b735ffe8-41db-42ce-bfd6-26ca72825e90.png",
+    "bytes": 958518,
+    "sha256": "b18dcb6d5784dd341f8e22f27da55d444d93945ddb77ab80dc7171b184543d0e",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "solidAlphaBBox": [
+      108,
+      277,
+      1173,
+      1006
+    ],
+    "opaqueBorderPixels": 0,
+    "status": "candidate-not-installed",
+    "tool": "built-in image_gen",
+    "acquisition": "Use original sourcePath or regenerate using prompts.json; copied without image edits."
+  },
+  {
+    "kind": "medium",
+    "path": "game/art-source/chests/three-kinds-arknights-1016-v2/medium.png",
+    "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-876ac692-aee1-454f-ba49-c00a7ec961ad.png",
+    "bytes": 1415861,
+    "sha256": "908e9ff55a88e7e567a538b7d20cd985e68f3cca0a8fa29f9c867434c81f60a2",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "solidAlphaBBox": [
+      125,
+      129,
+      1155,
+      1173
+    ],
+    "opaqueBorderPixels": 0,
+    "status": "candidate-not-installed",
+    "tool": "built-in image_gen",
+    "acquisition": "Use original sourcePath or regenerate using prompts.json; copied without image edits."
+  },
+  {
+    "kind": "large",
+    "path": "game/art-source/chests/three-kinds-arknights-1016-v2/large.png",
+    "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-d119ece3-72f7-48c8-b2dd-8123e402dedc.png",
+    "bytes": 1439006,
+    "sha256": "f7665f514ebe1bc6edf986bb03df534e2427b1c0e543677b1552a6e82e322152",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "solidAlphaBBox": [
+      48,
+      210,
+      1206,
+      1114
+    ],
+    "opaqueBorderPixels": 0,
+    "status": "candidate-not-installed",
+    "tool": "built-in image_gen",
+    "acquisition": "Use original sourcePath or regenerate using prompts.json; copied without image edits."
+  }
+]

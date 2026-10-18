@@ -1,0 +1,41 @@
+{
+  "files": [
+    {
+      "path": "prompts.json",
+      "bytes": 11222,
+      "sha256": "cc4b11d0b1206777fda45f14bb28c28712b8b779699cbc5e6c37ee4b8f765f5b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1010,
+      "sha256": "3ac6e1bdae556effba906eebddab87e2bd82f61b574720fe99723a3912d20139"
+    },
+    {
+      "path": "sprite.json",
+      "bytes": 621,
+      "sha256": "6d917a22f7ec2879ae0a50d3b407d180c6c3cd4472dc4fb2da32b9e61698cd08"
+    },
+    {
+      "path": "frames/attack-01.png",
+      "bytes": 1535985,
+      "sha256": "c355da2f65c5ed27ca9bef1b11a4c8d801130e73dc78233908a3c2afda41967b"
+    },
+    {
+      "path": "frames/attack-02.png",
+      "bytes": 1607693,
+      "sha256": "11a1ba532ff2ab493325b7922a324219785b7de53d3e7dfe92ec87e48e466c2a"
+    },
+    {
+      "path": "frames/attack-03.png",
+      "bytes": 1642768,
+      "sha256": "a4ffc78a9e9625912cdea5de837b887341d3bdb7ef5e42bc71d67fd9c2859bed"
+    },
+    {
+      "path": "frames/attack-04.png",
+      "bytes": 1363351,
+      "sha256": "41aa85c13cdb07e494ee628a1a89b3b946339bd38ce28cc9ea99cd57d43e746d"
+    }
+  ],
+  "retrieval": "生成原始路径与完整提示词见prompts.json；原样复制至frames",
+  "tool": "built-in image_gen"
+}

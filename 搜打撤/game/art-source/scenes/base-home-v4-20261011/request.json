@@ -1,0 +1,28 @@
+{
+  "channel": "existing project NovelAI client -> built-in ImageGen redraw",
+  "model": "nai-diffusion-4-5-full",
+  "recipeVersion": "1.3",
+  "cleanupVersion": "1.0",
+  "artistBlock": "1.2::miv4t::, 0.8::quasarcake::",
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "width": 1024,
+  "height": 576,
+  "seed": 1011206400,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nscenery, indoors, winter, no humans. A welcoming expedition base rest room, a lived-in winter refuge, not a cafe or a medieval hall. A single compact life-trace focal group at the centre: one simple paper-white cushioned reading chair with a folded muted terracotta-red blanket, one small charcoal-gray side table holding a plain warm ceramic teacup and one closed book. Behind this group is one broad rectangular window overlooking a quiet snow-covered courtyard in blue-gray winter dusk. The room has cool paper-white plaster wall planes, matte blue-gray stone floor, a few broad dark steel frame shapes, and a low pale ash storage bench. The comfortable chair and blanket clearly belong to returning expeditioners. No people or animals.\n\nA wide 16:9 base homepage background, an original indoor place of rest and belonging, with no interface baked into the image.\n\nHuman eye-level wide interior view, complete believable room structure. The life-trace group is the single focal point near horizontal centre, within the middle third. LEFT 28 percent is quiet broad wall and floor without objects for navigation. LOWER-RIGHT 28 percent is quiet blue-gray wall/floor with no furniture or props for the departure panel. TOP 13 percent is a calm broad darker architectural plane without ornaments for the resource bar. Large uncluttered spatial layers, no exaggerated tilted perspective, no diagonal beam crossings. The chair, blanket, cup and book stay within the central focus group rather than scattered around the room.\n\nCool gray, desaturated deep blue-gray and paper-white dominate. Muted terracotta-red blanket is the only strong color accent. One very small restrained warm lamp light within the central group creates a gentle sense of return, not a second focal point. Clear soft winter ambient illumination with broad hard-edged shadow planes and opaque economical painted masses. Low detail density, simplified broad hand-painted brushwork, very few seams. The floor is matte, no reflections; pale wood appears only as broad ash-colored planes, no woodgrain. No brown or golden room color cast, no cinematic spotlight or excessive glow.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "negativePrompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, person, people, girl, boy, character, portrait, animal, outdoor foreground, sitting on the ground, scattered paper, tilted bookshelves, brown room, golden room, dark wood floor, woodgrain, ornate furniture, medieval, restaurant, cafe, busy composition, many props, tiny repeated details, detailed window frames, shiny floor, reflections, glossy 3d, photorealistic, cinematic glow, lens flare, neon, interface, icons, captions, letters, clutter, extreme perspective",
+  "referenceChecksums": {
+    "game\\assets\\portraits\\full\\wu.webp": "71948f3902351f877de9a8375af33358dc44975ce2965f57d5b4c2d123cf43dc",
+    "game\\assets\\portraits\\full\\changwuyu.webp": "98e69d19b6c2129d0f85d320bb95e4609584576c94b041663a523067ff946185",
+    "game\\assets\\portraits\\full\\baita.webp": "e0731848113da23e419bb6ddfcab2bcbaa83598065511945d11aa7306076bcbb",
+    "game\\assets\\portraits\\full\\heixiang.webp": "e186722f97369b3a63a45dca056e2fe6c10f7b211c8de9403f71639d4f6bda6e",
+    "game\\assets\\portraits\\full\\xingyue.webp": "7fb82912770395c264bfb5c6918badfd176aa503ddf11cd07f0da0cd9300600c"
+  },
+  "briefZh": "冬日远征基地休憩厅；中央灰白座椅、赤陶红披毯、茶杯书本为单一生活焦点；左侧28%、右下28%与上栏低纹理留白；冷灰深蓝灰纸白为主，不画人物。"
+}

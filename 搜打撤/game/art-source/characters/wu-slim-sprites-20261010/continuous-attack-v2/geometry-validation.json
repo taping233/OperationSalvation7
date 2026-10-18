@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "samples": 241,
+  "canvas": [
+    768,
+    768
+  ],
+  "boneLengthError": 1.4210854715202004e-13,
+  "swordLengthError": 2.8421709430404007e-13,
+  "weaponBounds": [
+    189,
+    62.437624931118705,
+    746.8960387782159,
+    626
+  ],
+  "forearmLeadDegrees": 39,
+  "upperArmDuringLeadDegrees": 0,
+  "endpointPoseIdentical": true
+}

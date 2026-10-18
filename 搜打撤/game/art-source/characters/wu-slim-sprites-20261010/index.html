@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>无 · 四动作动画帧</title>
+<style>
+body{margin:0;background:#151b25;color:#e9edf5;font:16px system-ui}main{max-width:1060px;margin:auto;padding:24px}h1{font-size:25px;margin:0 0 8px}p{color:#aebaca}nav{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}button,select{padding:10px 18px;border:1px solid #55657b;border-radius:8px;background:#253247;color:#e9edf5;cursor:pointer}button[aria-pressed=true]{background:#315a8d}#stage{position:relative;width:min(70vh,100%);aspect-ratio:1;margin:auto;background:repeating-conic-gradient(#243040 0% 25%,#2b394b 0% 50%) 50%/28px 28px;border:1px solid #4a5870;border-radius:12px}#frame{width:100%;height:100%;object-fit:contain}#status{display:block;text-align:center;padding:12px;color:#bdd2ef}.controls{display:flex;align-items:center;justify-content:center;gap:12px;margin:15px}#notes{font-size:14px;line-height:1.7}a{color:#9ec9ff}
+</style>
+<main>
+<h1>无 · 待机 / 攻击 / 受击 / 死亡</h1>
+<p>修腿版候选帧。待机为轻微呼吸与手部细小摆动；死亡播放后保持倒地。</p>
+<nav aria-label="动作选择">
+<button data-action="idle" aria-pressed="true">待机</button>
+<button data-action="attack" aria-pressed="false">攻击</button>
+<button data-action="hurt" aria-pressed="false">受击</button>
+<button data-action="death" aria-pressed="false">死亡</button>
+<button id="chain">待机 → 攻击 → 受击 → 死亡</button>
+</nav>
+<div id="stage"><img id="frame" alt="无动画帧"></div>
+<output id="status">正在加载帧</output>
+<div class="controls"><button id="pause">暂停</button><button id="next">下一帧</button><button id="restart">重播</button><label>速度 <select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div>
+<p id="notes">素材仅在此预览，尚未替换游戏运行帧。<a href="validation.json">分帧验证</a> · <a href="receipt.json">文件及 SHA256</a> · <a href="README.md">制作说明与提示词</a></p>
+</main>
+<script type="module" src="preview.js"></script>
+</html>

@@ -1,0 +1,57 @@
+{
+  "status": "generated",
+  "request": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\nHand-painted anime prop, elegant simple silhouette, opaque connected color masses, nuanced secondary color planes, firm handmade edges and a few broad directional strokes, selective thin structural accents. Quiet large surfaces, readable simply painted parts, restrained neutral colors with a tiny chromatic accent. No photorealism, no 3D render, no dense outlining, no overall grain, no facet mosaics, no text.\n\nno humans, one small freestanding square safe, CLOSED front door. Warm off-white painted steel front, charcoal gray body, a muted gray-green side plane and ONE small vermilion-red latch accent. Simple solid round charcoal combination knob, short rectangular lever, one clean recessed door seam, two discreet left hinges. A compact carefully proportioned object with an appealing bold contour and few parts.\n\nOriginal anime game prop concept, single object, no animation grid.\n\nThree-quarter view slightly above from right, full object with generous transparent-like empty margins, plain neutral dark background.\n\nMatte coated metal with broad ivory light planes and connected cool-gray shadows, a few precise brush accents at knob and hinge. No brass trim, no gold decoration, no exposed screws or rows of locking bolts.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1024,
+      "height": 1024,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1674910215,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, ornate, filigree, armor plates, rivets, screws, gold trim, brass, jewelry, blue and gold, glossy metal, chrome, vector logo, crosshatching, coin, treasure",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nHand-painted anime prop, elegant simple silhouette, opaque connected color masses, nuanced secondary color planes, firm handmade edges and a few broad directional strokes, selective thin structural accents. Quiet large surfaces, readable simply painted parts, restrained neutral colors with a tiny chromatic accent. No photorealism, no 3D render, no dense outlining, no overall grain, no facet mosaics, no text.\n\nno humans, one small freestanding square safe, CLOSED front door. Warm off-white painted steel front, charcoal gray body, a muted gray-green side plane and ONE small vermilion-red latch accent. Simple solid round charcoal combination knob, short rectangular lever, one clean recessed door seam, two discreet left hinges. A compact carefully proportioned object with an appealing bold contour and few parts.\n\nOriginal anime game prop concept, single object, no animation grid.\n\nThree-quarter view slightly above from right, full object with generous transparent-like empty margins, plain neutral dark background.\n\nMatte coated metal with broad ivory light planes and connected cool-gray shadows, a few precise brush accents at knob and hinge. No brass trim, no gold decoration, no exposed screws or rows of locking bolts.",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, ornate, filigree, armor plates, rivets, screws, gold trim, brass, jewelry, blue and gold, glossy metal, chrome, vector logo, crosshatching, coin, treasure",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "game\\art-source\\chests\\safe-simple-v7\\nai.png",
+  "direction": "Owner requested simpler shape and new palette; arknights-art-ui-design + current project painting grammar. Prior blue/gold versions rejected; do not reuse their design.",
+  "sha256": "095012ef98b89606395f0bca91c444474003683e6924465825af377617e594d7"
+}

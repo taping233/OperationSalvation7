@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>白塔 · 黑像 · 星月｜四动作重制</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#151b25;color:#e7e4dc;font:15px/1.6 system-ui,sans-serif}
+    main{max-width:1500px;margin:auto;padding:24px}h1{font-size:26px;margin:0 0 8px}p{margin:0 0 16px;color:#bbc2c9}
+    .toolbar,.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.toolbar{margin:20px 0}
+    button,select{border:1px solid #56626f;background:#283241;color:inherit;border-radius:5px;padding:8px 13px;font:inherit;cursor:pointer}
+    button:hover{background:#384859}button[aria-pressed=true]{border-color:#d3b579;color:#f7dc9e}button:disabled{opacity:.4}
+    #roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.role{border:1px solid #45505d;border-radius:10px;padding:14px;background:#1f2733;min-width:0}
+    h2{font-size:20px;margin:0 0 8px}.view{border-radius:6px;overflow:hidden;background-color:#d8d6ce;background-image:linear-gradient(45deg,#c7c5bd 25%,transparent 25%),linear-gradient(-45deg,#c7c5bd 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#c7c5bd 75%),linear-gradient(-45deg,transparent 75%,#c7c5bd 75%);background-size:24px 24px;background-position:0 0,0 12px,12px -12px,-12px 0}
+    body[data-background=light] .view{background:#e8e6df}body[data-background=dark] .view{background:#202734}
+    canvas{display:block;width:100%;height:auto;aspect-ratio:768/512}input[type=range]{width:100%;margin:14px 0 4px}.actions{margin:12px 0}.actions button{flex:1;padding:7px 8px;white-space:nowrap}
+    .readout{font-variant-numeric:tabular-nums;color:#bfc8d2;min-height:24px}.notes{font-size:13px;color:#afb8c1;margin-top:12px}#error{color:#ffb4a9;white-space:pre-wrap}
+    .link{color:#e0c995}.bottom{margin-top:24px;border-top:1px solid #45505d;padding-top:16px}
+  </style>
+</head>
+<body data-background="checker">
+<main>
+  <h1>白塔 · 黑像 · 星月</h1>
+  <p>向右的战斗立绘与四动作重制。可单独播放、暂停、逐帧，或连续查看待机 → 攻击 → 受击 → 倒地。</p>
+  <div class="toolbar">
+    <button id="demo" disabled>三人一起演示</button><button id="reset" disabled>全部回待机</button>
+    <label>背景 <select id="background"><option value="checker">透明棋盘</option><option value="light">浅色</option><option value="dark">深色</option></select></label>
+    <label>速度 <select id="speed"><option value="1">正常</option><option value="0.5">半速</option><option value="0.25">四分之一</option></select></label>
+    <span id="status">正在载入透明帧…</span>
+  </div>
+  <div id="error" role="alert"></div><div id="roles"></div>
+  <div class="bottom">
+    <p>待机 3 秒循环；攻击 417ms；受击 334ms；死亡 875ms 后保持倒地。重复时间步保留蓄力与命中停顿。</p>
+    <p class="notes">当前为独立制作预览。正式战斗接入状态见任务记录；未改变选人立绘。</p>
+    <a class="link" href="./README.md">制作说明</a>
+  </div>
+</main>
+<script type="module" src="./preview.js"></script>
+</body></html>

@@ -1,0 +1,301 @@
+{
+  "sourceArchive": "C:\\Users\\太平\\Downloads\\wu-hurt-v1-43 (1).zip",
+  "sourceArchiveSha256": "56c80e951b057dcbcf163a38e60c0683d133134831a0902d0039cd0a25e95843",
+  "files": [
+    {
+      "path": "export.json",
+      "bytes": 84329,
+      "sha256": "104517c6df0658392fbcfc25d70e76c39b10f423a3fc3be3d88b25e4a4eabc8d"
+    },
+    {
+      "path": "index.html",
+      "bytes": 2127,
+      "sha256": "468d43a70d5ae2a39ce0a91bf77dbceee85f25c5dd503f7ccac7db5d51cfe313"
+    },
+    {
+      "path": "package_frames.py",
+      "bytes": 4080,
+      "sha256": "7b5e32a4034b1803f014960609226049eb9bb027f1b46980156b812aa3a4b54e"
+    },
+    {
+      "path": "paired-idle-rest.png",
+      "bytes": 258859,
+      "sha256": "9bae277a2ca7d7a951e215fe048cdaa4cd42929cbcaf3696b8e45dd43a90fcc3"
+    },
+    {
+      "path": "preview.js",
+      "bytes": 4438,
+      "sha256": "6b438a499532644aa31af332d894a5bc56c968bf16097a0f33122fe5efb7cb49"
+    },
+    {
+      "path": "preview.webp",
+      "bytes": 6628368,
+      "sha256": "ff44d5f2a1cd71b18e770fa095c4407ae9f8e10d9227b52ba213f27aa9fbc4ad"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1158,
+      "sha256": "2065e02cc983b2e8bdd5cac5e8d2bd46ad92faaf996f78d39dd62b9e290d9fc4"
+    },
+    {
+      "path": "rig.js",
+      "bytes": 5755,
+      "sha256": "1d45faa3d11621d112a016f7d5f2991e8719326ea92ac1ee5e203d9305be1f32"
+    },
+    {
+      "path": "sprite.json",
+      "bytes": 1860,
+      "sha256": "499ad2bde5535761e7624934fdb5620327bd0dcfcbbe2f5675611ee393fbea7b"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 2165,
+      "sha256": "282e6f1d09942c68f1a4c8dd787507b6a955d4f7fff188d89e45bfa2d00cdee5"
+    },
+    {
+      "path": "frames/hurt-000.png",
+      "bytes": 258859,
+      "sha256": "9bae277a2ca7d7a951e215fe048cdaa4cd42929cbcaf3696b8e45dd43a90fcc3"
+    },
+    {
+      "path": "frames/hurt-001.png",
+      "bytes": 284256,
+      "sha256": "2920e95ef63716a82a935f6452e39b8e07dbc1ecd6d1ff7b578aa0786f0ce1ee"
+    },
+    {
+      "path": "frames/hurt-002.png",
+      "bytes": 292826,
+      "sha256": "d8ee0f5d7d3122142f477daa2ae3ecc88e3174ba9ba2236ebe39ab536cb20d47"
+    },
+    {
+      "path": "frames/hurt-003.png",
+      "bytes": 275342,
+      "sha256": "b35b30bb78a45f7aa40668aa096686c31d54d4c679cc56f4da7af1ffd65b75c5"
+    },
+    {
+      "path": "frames/hurt-004.png",
+      "bytes": 261954,
+      "sha256": "c1a1432a6ee62ee2dbbb5e9bd60359da2c675ddd8c50bee0441ad9fd7c45f12a"
+    },
+    {
+      "path": "frames/hurt-005.png",
+      "bytes": 258822,
+      "sha256": "effcf099db7ed6c64f9201bb4a9ac484609ea56b911c8369e19eadfbc38e1639"
+    },
+    {
+      "path": "frames/hurt-006.png",
+      "bytes": 258743,
+      "sha256": "e95d406a6000da9412343d4a5c7c9a3bcc421824c05e10ad4c4fef4598f4fc6c"
+    },
+    {
+      "path": "frames/hurt-007.png",
+      "bytes": 258571,
+      "sha256": "9a7b9008354b4680d318eb6c698ec8d84d81e00c83ed8d929d5816edcc9d1b5e"
+    },
+    {
+      "path": "frames/hurt-008.png",
+      "bytes": 259698,
+      "sha256": "f4a2bd60a519a6c715381be6003645c8fd575f58ef64910313ba4e1371c5262e"
+    },
+    {
+      "path": "frames/hurt-009.png",
+      "bytes": 249179,
+      "sha256": "3b850e532c904e670e6b1d3f6aad73bfe9a569b5280c1f9fba4a7752624b3560"
+    },
+    {
+      "path": "frames/hurt-010.png",
+      "bytes": 249751,
+      "sha256": "f35402ba739d61acfbdb6a957c88f45f300fc0b457806c42edea29e4f14d2835"
+    },
+    {
+      "path": "frames/hurt-011.png",
+      "bytes": 249596,
+      "sha256": "539c3735f67565fdc147f3602d9004d73f79d13112bfc874cd639d793945f9b5"
+    },
+    {
+      "path": "frames/hurt-012.png",
+      "bytes": 249523,
+      "sha256": "9914e03de84194edfcdaeda9aae9cf8be09936b1168430f24d9897f8fe829ac6"
+    },
+    {
+      "path": "frames/hurt-013.png",
+      "bytes": 249459,
+      "sha256": "14db6d964558cc202391c38aa54c75449ea6013d7cc8775c24c4b87c2b895336"
+    },
+    {
+      "path": "frames/hurt-014.png",
+      "bytes": 249426,
+      "sha256": "ba577e9cca89df68187e75df91e16dfc3669c0b6a4ea50f275331f5a01810d04"
+    },
+    {
+      "path": "frames/hurt-015.png",
+      "bytes": 249716,
+      "sha256": "09504127c4753270342d04a5c275787c14976b958f015e2e3f33d29106b3bd34"
+    },
+    {
+      "path": "frames/hurt-016.png",
+      "bytes": 249746,
+      "sha256": "0fcfe09367a394c471d9be9fde80dc0a8dad790f3ac8d3e2e9412abc9eaf8036"
+    },
+    {
+      "path": "frames/hurt-017.png",
+      "bytes": 249476,
+      "sha256": "6a76b645b4bb991e6e065aa7f8bd2bcb969c0134984b942e3533cda3bf47fd8a"
+    },
+    {
+      "path": "frames/hurt-018.png",
+      "bytes": 249436,
+      "sha256": "68f83f11db1c13a2130252f8ed3d42cf87e1c18163811fd8ea3294165ae221e0"
+    },
+    {
+      "path": "frames/hurt-019.png",
+      "bytes": 249096,
+      "sha256": "ceb4be930dea1f9a417f32d34e26adeb8f0d7ab56471e20e92585b39c296dde7"
+    },
+    {
+      "path": "frames/hurt-020.png",
+      "bytes": 249615,
+      "sha256": "3d671a46ed41191c2182d74996c56dafe165c0bf6b6223733fb76d7445bf3202"
+    },
+    {
+      "path": "frames/hurt-021.png",
+      "bytes": 249335,
+      "sha256": "1b582c2cd0a8a1f3fec55db4ead241d81becb772626f096930f6b821c46e3a2d"
+    },
+    {
+      "path": "frames/hurt-022.png",
+      "bytes": 249485,
+      "sha256": "78a615703d1f0c0ecafebcff34df6d62bc3672a7674750f1e35f4d4284c9311e"
+    },
+    {
+      "path": "frames/hurt-023.png",
+      "bytes": 250172,
+      "sha256": "7d84c8ea3530d673fd7ee887af05f395ec3d79928ebb64983d5c3642f6c0e898"
+    },
+    {
+      "path": "frames/hurt-024.png",
+      "bytes": 250358,
+      "sha256": "d075a14efbae310a2cf180c7211b7d325c94f0c213592976dcbfc99e16767b6d"
+    },
+    {
+      "path": "frames/hurt-025.png",
+      "bytes": 250070,
+      "sha256": "a1b64c2aef0caf41ea5fb97ee154d4354a299d296df08bcc1db4ac62258e974e"
+    },
+    {
+      "path": "frames/hurt-026.png",
+      "bytes": 250243,
+      "sha256": "6c1fbbc87010475b92eac08c23128f62641840bac09a68d171493bf58568ae1c"
+    },
+    {
+      "path": "frames/hurt-027.png",
+      "bytes": 249687,
+      "sha256": "832b5729084de7accb3f85f7e9d7af36eb2f30c5f82b6c52817f12f7943ab400"
+    },
+    {
+      "path": "frames/hurt-028.png",
+      "bytes": 250413,
+      "sha256": "d4d00a305ca7e516cbfb2ac0a6d2188597d9d1bd69d7687faa42bd84fdd1e7f3"
+    },
+    {
+      "path": "frames/hurt-029.png",
+      "bytes": 254426,
+      "sha256": "476ca7106f87b3279ef6e25f38118c20263ffb6bc9482bc4e9e80d40cfea09bd"
+    },
+    {
+      "path": "frames/hurt-030.png",
+      "bytes": 251310,
+      "sha256": "303bd639f5b0e2f24edbe14a89c39aafa7ae60963bb0cfe8d14204844bc25eac"
+    },
+    {
+      "path": "frames/hurt-031.png",
+      "bytes": 251286,
+      "sha256": "80b4645de865f5258582c8eca2d11c4bdc276af9c393beafe6b9cbdfc4b569ba"
+    },
+    {
+      "path": "frames/hurt-032.png",
+      "bytes": 251341,
+      "sha256": "bd29353cb2cefe7c4fde73686068957990214c7b965f342fca65e01ff88672b8"
+    },
+    {
+      "path": "frames/hurt-033.png",
+      "bytes": 251177,
+      "sha256": "6feb6e25b0051906c92a759254dbae8b6a897c5ec4a46b32a40acb360a61e489"
+    },
+    {
+      "path": "frames/hurt-034.png",
+      "bytes": 251334,
+      "sha256": "0f9a2c2dfa5384d21a119b75971f2c11205c49672c3f49d6939b9e06416ceeb4"
+    },
+    {
+      "path": "frames/hurt-035.png",
+      "bytes": 251116,
+      "sha256": "7740e003d45f4fbb44d47e3c950e51976fc9c09624e67a4d62b3f98e007d3e00"
+    },
+    {
+      "path": "frames/hurt-036.png",
+      "bytes": 250582,
+      "sha256": "f47164f71a73f19692127eece2cb5e4dcde4efe92616929d3d7c319c9aab309f"
+    },
+    {
+      "path": "frames/hurt-037.png",
+      "bytes": 251238,
+      "sha256": "893044d831c9c857eb1259532ae5d82dbb52fa50631910581de109bd976ac9ce"
+    },
+    {
+      "path": "frames/hurt-038.png",
+      "bytes": 251538,
+      "sha256": "5ca6f1c552ece874330f97cd0e68ecf5c8b32f0d4964cb30b656ac8bfe3f8fe9"
+    },
+    {
+      "path": "frames/hurt-039.png",
+      "bytes": 252151,
+      "sha256": "783b8d620f64d8768f26fcb26013bf2529c91ad3d89cf6d61f8a3bbe993da5f2"
+    },
+    {
+      "path": "frames/hurt-040.png",
+      "bytes": 257246,
+      "sha256": "febf004d21de551feee994e1ac4bdcf82657d3b7905ba294e64f8ae1aabfab96"
+    },
+    {
+      "path": "frames/hurt-041.png",
+      "bytes": 258928,
+      "sha256": "2bd4f3ae2b863161dfc15ce711e40b87b3b37fa9427559600ce69d1ead45ca13"
+    },
+    {
+      "path": "frames/hurt-042.png",
+      "bytes": 258859,
+      "sha256": "9bae277a2ca7d7a951e215fe048cdaa4cd42929cbcaf3696b8e45dd43a90fcc3"
+    },
+    {
+      "path": "parts/body.png",
+      "bytes": 229068,
+      "sha256": "621e1672d6ebffaeb59e4b5aac6e8f5692ee904ad82b28fb2de7700e54917deb"
+    },
+    {
+      "path": "parts/hand.png",
+      "bytes": 11140,
+      "sha256": "04c8cb06ec73731edc41696e5a995d2fe9a56d5ca7de381cdd3048e12017737a"
+    },
+    {
+      "path": "parts/lower.png",
+      "bytes": 26128,
+      "sha256": "71f10b67d7c93b51b6800cbe0349521408d3edde2ecb257e5a5169d22008ae49"
+    },
+    {
+      "path": "parts/shoulderCover.png",
+      "bytes": 13351,
+      "sha256": "f1f55693e1ef28997645e747cb96a6bc09060261c2927cc3ba53b73ee14ff61f"
+    },
+    {
+      "path": "parts/upper.png",
+      "bytes": 21489,
+      "sha256": "2e577caa54cfa9dcd13fb9ef9c38413645ed9badc6086d4fae21432a36b9c152"
+    },
+    {
+      "path": "parts/weapon.png",
+      "bytes": 29612,
+      "sha256": "1ebbf29a2b539df89d478655089aa18e991fc32298243f7c5c0ebf1362a05a4f"
+    }
+  ]
+}

@@ -1,0 +1,418 @@
+{
+  "initial": {
+    "path": "game/art-source/card-frame-study-1014/initial.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13af3-f57f-7f83-a705-1618730a1a97\\exec-5e3609da-e7e3-413f-81a6-379ef50e4496.png",
+    "sha256": "0ac3f7ff754296f6a59065b74175e2f9341fadbbb587d068c083b10ce413b354",
+    "bytes": 1207678,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      120,
+      154,
+      903,
+      1380
+    ],
+    "rails": {
+      "left": 84,
+      "right": 85,
+      "top": 85,
+      "bottom": 84
+    },
+    "previewRails": {
+      "left": 24.89,
+      "right": 25.19,
+      "top": 25.19,
+      "bottom": 24.89
+    },
+    "preview": {
+      "width": 303.4074,
+      "left": -35.5556,
+      "top": -45.6296,
+      "apertureHeight": 363.2593
+    }
+  },
+  "common": {
+    "path": "game/art-source/card-frame-study-1014/common.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13af3-f57f-7f83-a705-1618730a1a97\\exec-9aa91dba-34de-4e81-9138-0c99251fea15.png",
+    "sha256": "6aa7951c9126fd4e4a55db24e0fc829a41217a2433ffe7c335547488c5e2d5f0",
+    "bytes": 1176439,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      122,
+      155,
+      903,
+      1380
+    ],
+    "rails": {
+      "left": 86,
+      "right": 86,
+      "top": 86,
+      "bottom": 86
+    },
+    "previewRails": {
+      "left": 25.55,
+      "right": 25.55,
+      "top": 25.55,
+      "bottom": 25.55
+    },
+    "preview": {
+      "width": 304.1844,
+      "left": -36.2407,
+      "top": -46.0435,
+      "apertureHeight": 363.8924
+    }
+  },
+  "rare": {
+    "path": "game/art-source/card-frame-study-1014/rare.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13c0e-5097-78e2-95bf-a3b333c47843\\exec-c8158618-379d-422b-a8ac-4ff4461468ac.png",
+    "sha256": "88420dfb245276c2d067f5af6f7177fb4640a35bd178077a9a86fbc39d8e0840",
+    "bytes": 1212072,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      123,
+      156,
+      902,
+      1380
+    ],
+    "rails": {
+      "left": 87,
+      "right": 87,
+      "top": 87,
+      "bottom": 87
+    },
+    "previewRails": {
+      "left": 25.91,
+      "right": 25.91,
+      "top": 25.91,
+      "bottom": 25.91
+    },
+    "preview": {
+      "width": 304.9653,
+      "left": -36.6316,
+      "top": -46.4596,
+      "apertureHeight": 364.5289
+    }
+  },
+  "epic": {
+    "path": "game/art-source/card-frame-study-1014/epic.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13af3-f57f-7f83-a705-1618730a1a97\\exec-7d90f8eb-1a98-4a1c-9cf4-eb370f0b3018.png",
+    "sha256": "91bfd574e3dee4cb750c8c74d429e958eab00da24fa414632ac29c433a7b1447",
+    "bytes": 1284703,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      122,
+      155,
+      903,
+      1380
+    ],
+    "rails": {
+      "left": 85,
+      "right": 86,
+      "top": 86,
+      "bottom": 85
+    },
+    "previewRails": {
+      "left": 25.25,
+      "right": 25.55,
+      "top": 25.55,
+      "bottom": 25.25
+    },
+    "preview": {
+      "width": 304.1844,
+      "left": -36.2407,
+      "top": -46.0435,
+      "apertureHeight": 363.8924
+    }
+  },
+  "legendary": {
+    "path": "game/art-source/card-frame-study-1014/legendary.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13af3-f57f-7f83-a705-1618730a1a97\\exec-e6330b08-55f3-4de2-a767-725beeab2581.png",
+    "sha256": "65f487d145862eab08a4cb7081866da1113638ab95856d61e90027586c09e661",
+    "bytes": 1375187,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      121,
+      155,
+      903,
+      1380
+    ],
+    "rails": {
+      "left": 84,
+      "right": 85,
+      "top": 86,
+      "bottom": 84
+    },
+    "previewRails": {
+      "left": 24.92,
+      "right": 25.22,
+      "top": 25.51,
+      "bottom": 24.92
+    },
+    "preview": {
+      "width": 303.7954,
+      "left": -35.8977,
+      "top": -45.9847,
+      "apertureHeight": 363.4271
+    }
+  },
+  "prism": {
+    "path": "game/art-source/card-frame-study-1014/prism.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13af3-f57f-7f83-a705-1618730a1a97\\exec-a2f0d895-f98c-4387-a485-5f9def565121.png",
+    "sha256": "358864389f52a1436618b5bede92c9bf732fb6a278264b1de5a09ca8d0cc3b9a",
+    "bytes": 1248152,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      122,
+      155,
+      902,
+      1379
+    ],
+    "rails": {
+      "left": 85,
+      "right": 86,
+      "top": 86,
+      "bottom": 86
+    },
+    "previewRails": {
+      "left": 25.28,
+      "right": 25.58,
+      "top": 25.58,
+      "bottom": 25.58
+    },
+    "preview": {
+      "width": 304.5744,
+      "left": -36.2872,
+      "top": -46.1026,
+      "apertureHeight": 364.0615
+    }
+  },
+  "wu": {
+    "path": "game/art-source/card-frame-study-1014/wu.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13af3-f57f-7f83-a705-1618730a1a97\\exec-16a3039f-5e14-4f66-be62-bdc83488192c.png",
+    "sha256": "35cdae2c55b8c9a2122e8fa7e48ea9c189f4b6ee2a1d743c78bfaff754079d7c",
+    "bytes": 1221048,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      122,
+      160,
+      903,
+      1380
+    ],
+    "rails": {
+      "left": 86,
+      "right": 86,
+      "top": 91,
+      "bottom": 85
+    },
+    "previewRails": {
+      "left": 25.55,
+      "right": 25.55,
+      "top": 27.03,
+      "bottom": 25.25
+    },
+    "preview": {
+      "width": 304.1844,
+      "left": -36.2407,
+      "top": -47.5288,
+      "apertureHeight": 362.4072
+    }
+  },
+  "heixiang": {
+    "path": "game/art-source/card-frame-study-1014/heixiang.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13af3-f57f-7f83-a705-1618730a1a97\\exec-b1ecedc5-bc9d-4fb0-961c-be0204f5206c.png",
+    "sha256": "aac80d6c4d4692a0e11bbc0196d06a521909fa5234057429d9e06441c64ceb8b",
+    "bytes": 1221153,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      121,
+      155,
+      903,
+      1379
+    ],
+    "rails": {
+      "left": 84,
+      "right": 85,
+      "top": 84,
+      "bottom": 87
+    },
+    "previewRails": {
+      "left": 24.92,
+      "right": 25.22,
+      "top": 24.92,
+      "bottom": 25.81
+    },
+    "preview": {
+      "width": 303.7954,
+      "left": -35.8977,
+      "top": -45.9847,
+      "apertureHeight": 363.1304
+    }
+  },
+  "baita": {
+    "path": "game/art-source/card-frame-study-1014/baita.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13af3-f57f-7f83-a705-1618730a1a97\\exec-0f550682-8737-4c88-8d55-999a7906bf72.png",
+    "sha256": "f34c6bc3067ada0d0b3a5c5e92351b50fa55eb121e6cbf74d171f33fadf07dd3",
+    "bytes": 1189145,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      122,
+      156,
+      903,
+      1381
+    ],
+    "rails": {
+      "left": 85,
+      "right": 85,
+      "top": 85,
+      "bottom": 84
+    },
+    "previewRails": {
+      "left": 25.25,
+      "right": 25.25,
+      "top": 25.25,
+      "bottom": 24.95
+    },
+    "preview": {
+      "width": 304.1844,
+      "left": -36.2407,
+      "top": -46.3406,
+      "apertureHeight": 363.8924
+    }
+  },
+  "xingyue": {
+    "path": "game/art-source/card-frame-study-1014/xingyue.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13af3-f57f-7f83-a705-1618730a1a97\\exec-f311c1fa-bd63-4775-addb-848605563ee2.png",
+    "sha256": "20ac3bc05c7dfd1f546b7770ddf9fb9a34a1fb4e016fbc90e060f11b0e154733",
+    "bytes": 1315576,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      121,
+      155,
+      903,
+      1380
+    ],
+    "rails": {
+      "left": 84,
+      "right": 85,
+      "top": 85,
+      "bottom": 85
+    },
+    "previewRails": {
+      "left": 24.92,
+      "right": 25.22,
+      "top": 25.22,
+      "bottom": 25.22
+    },
+    "preview": {
+      "width": 303.7954,
+      "left": -35.8977,
+      "top": -45.9847,
+      "apertureHeight": 363.4271
+    }
+  },
+  "changwuyu": {
+    "path": "game/art-source/card-frame-study-1014/changwuyu.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13af3-f57f-7f83-a705-1618730a1a97\\exec-4002aa18-b27d-4ecc-8b1a-1f02e322edc1.png",
+    "sha256": "ab25280ec64bd2569089bb25f2b8146281d7e824eda0b4b821975c5b03ef93c4",
+    "bytes": 1246879,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      122,
+      155,
+      902,
+      1379
+    ],
+    "rails": {
+      "left": 84,
+      "right": 86,
+      "top": 87,
+      "bottom": 86
+    },
+    "previewRails": {
+      "left": 24.98,
+      "right": 25.58,
+      "top": 25.88,
+      "bottom": 25.58
+    },
+    "preview": {
+      "width": 304.5744,
+      "left": -36.2872,
+      "top": -46.1026,
+      "apertureHeight": 364.0615
+    }
+  },
+  "neutral": {
+    "path": "game/art-source/card-frame-study-1014/neutral.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13af3-f57f-7f83-a705-1618730a1a97\\exec-880fba07-9cfb-4fe1-a58b-8b14c2b8a760.png",
+    "sha256": "970ccac6554eaf39893d3acea90ad66287a3ad162a98392375aa112a25a0bd62",
+    "bytes": 1135665,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      122,
+      156,
+      902,
+      1379
+    ],
+    "rails": {
+      "left": 86,
+      "right": 87,
+      "top": 88,
+      "bottom": 86
+    },
+    "previewRails": {
+      "left": 25.58,
+      "right": 25.88,
+      "top": 26.17,
+      "bottom": 25.58
+    },
+    "preview": {
+      "width": 304.5744,
+      "left": -36.2872,
+      "top": -46.4,
+      "apertureHeight": 363.7641
+    }
+  },
+  "token": {
+    "path": "game/art-source/card-frame-study-1014/token.png",
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a13af3-f57f-7f83-a705-1618730a1a97\\exec-65499dbb-1970-4c85-9eeb-c48366d9ea20.png",
+    "sha256": "40e919aa843b8c2e8d7c3eb1638129bdc08b7e1ba551eb8a9e2a51d92884b96c",
+    "bytes": 1137667,
+    "width": 1024,
+    "height": 1536,
+    "opening": [
+      121,
+      155,
+      904,
+      1380
+    ],
+    "rails": {
+      "left": 84,
+      "right": 85,
+      "top": 86,
+      "bottom": 85
+    },
+    "previewRails": {
+      "left": 24.89,
+      "right": 25.19,
+      "top": 25.48,
+      "bottom": 25.19
+    },
+    "preview": {
+      "width": 303.4074,
+      "left": -35.8519,
+      "top": -45.9259,
+      "apertureHeight": 362.963
+    }
+  }
+}

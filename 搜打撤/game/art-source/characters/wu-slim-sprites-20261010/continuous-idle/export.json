@@ -1,0 +1,25 @@
+{
+  "width": 576,
+  "height": 560,
+  "frames": 72,
+  "fps": 24,
+  "durationMs": 3000,
+  "character": "wu",
+  "animation": "idle",
+  "loop": true,
+  "method": "one fixed base PNG; continuous compact-region displacement; native browser raster export",
+  "strength": 2,
+  "amplitudesPx": {
+    "chest": 3.3,
+    "rightHand": [
+      1.3,
+      1.3
+    ],
+    "leftHand": [
+      2.3,
+      1.5
+    ],
+    "hair": 1.1
+  },
+  "swordAngleRadians": 0.0035
+}

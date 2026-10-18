@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="680" viewBox="0 0 1000 680" fill="none">
+  <defs>
+    <path id="spark" d="M0-18 4-4 18 0 4 4 0 18-4 4-18 0-4-4Z"/>
+    <path id="star" d="m0-16 4 11 12 1-9 7 3 12-10-7-10 7 3-12-9-7 12-1Z"/>
+  </defs>
+  <g stroke="#8aa6d5" stroke-width="2.2" stroke-linecap="round">
+    <path d="M106 148 77 209 89 275M78 434l28 71 53 27M887 159l38 70-8 53M887 502l41-58-6-70" opacity=".5"/>
+    <circle cx="78" cy="209" r="5" fill="#8aa6d5"/>
+    <circle cx="89" cy="275" r="4"/>
+    <circle cx="106" cy="505" r="4"/>
+    <circle cx="925" cy="229" r="5"/>
+    <circle cx="928" cy="444" r="4" fill="#8aa6d5"/>
+  </g>
+  <g fill="#6387c4">
+    <use href="#spark" transform="translate(116 359) scale(1.35)"/>
+    <use href="#spark" transform="translate(870 332) scale(1.1)"/>
+    <use href="#spark" transform="translate(920 520) scale(.55)"/>
+    <use href="#star" transform="translate(158 116) scale(.6)"/>
+  </g>
+  <g fill="#dcc377">
+    <use href="#spark" transform="translate(78 146) scale(.65)"/>
+    <use href="#spark" transform="translate(146 463) scale(.55)"/>
+    <use href="#star" transform="translate(882 121) scale(.75)"/>
+    <use href="#spark" transform="translate(914 388) scale(.75)"/>
+    <circle cx="110" cy="414" r="3"/>
+    <circle cx="876" cy="462" r="3"/>
+  </g>
+  <g stroke="#c6d4ed" stroke-width="2.2">
+    <use href="#star" transform="translate(158 255) scale(.65)"/>
+    <use href="#star" transform="translate(861 429) scale(.6)"/>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "attackFrames": 33,
+  "idleFrames": 72,
+  "canvas": [
+    768,
+    768
+  ],
+  "fps": 24,
+  "durationMs": 1375,
+  "endpointEqualsPairedIdle": true,
+  "solesPixelIdentical": true,
+  "silverHairPixelsOnHand": 0,
+  "uniqueAttackFrames": 32,
+  "limits": [
+    "native animation assets only; no battle integration",
+    "colour check supplements visual inspection; it is not a general segmentation proof"
+  ]
+}

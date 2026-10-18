@@ -1,0 +1,246 @@
+{
+  "sourceArchive": "C:\\Users\\太平\\Downloads\\wu-portrait-attack-v5-31 (1).zip",
+  "sourceArchiveSha256": "5a8058f37491b16923d1e3f51576f008594b46ec5cb3474f09dd7fb7e78bbef1",
+  "files": [
+    {
+      "path": "base.png",
+      "bytes": 347829,
+      "sha256": "e55e2a85aa50d55750cbaf81fcc6a97b29c88f3601078c8d7a892e6e8df7e3ba"
+    },
+    {
+      "path": "body-repair.png",
+      "bytes": 760447,
+      "sha256": "622cbc3c5b0d4ebd9646f0ae8d0c1d69c271d4a599bff16838765743d817a1ff"
+    },
+    {
+      "path": "export.json",
+      "bytes": 55394,
+      "sha256": "9db1d5e21edd73100d2af7e691806e81d7fc78e3ce4bb2a7b756b192a3cbc444"
+    },
+    {
+      "path": "index.html",
+      "bytes": 2179,
+      "sha256": "63d40f252dfeb73d03cde01ec712d5edb555f82124697c73c63a6bbfd5a0afe7"
+    },
+    {
+      "path": "package_frames.py",
+      "bytes": 2740,
+      "sha256": "7afdd0b126b66aa63ea5caed1b13444cc2b722d0424bcd7f9c03dd81c0b00b93"
+    },
+    {
+      "path": "preview.js",
+      "bytes": 5122,
+      "sha256": "00e8db6e20223ee9a4e56c9f5dd476edb02cc29c8cbf6f9963cbf732cb3ae5e1"
+    },
+    {
+      "path": "preview.webp",
+      "bytes": 4348104,
+      "sha256": "2739082cfc5e372703d85032b42128b97ebf149093361efda19b58096a609dee"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1371,
+      "sha256": "95c5118254d83b57ac128ad2019beb88eff426ab50383195192b4cd39b98b83d"
+    },
+    {
+      "path": "rig.js",
+      "bytes": 11848,
+      "sha256": "bf5e897cfa5fc5e17aa068968589bf006a37711b9468a526d01592462f1cc1e5"
+    },
+    {
+      "path": "sprite.json",
+      "bytes": 1481,
+      "sha256": "bed6fd769dff00b54b2ef66759f85af06b608a6174921d2fe7fc454b7323b8cb"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 248,
+      "sha256": "ef1c7d1ea7ee16d7a7c69c1c3a471b431900cc83faddb5ff5bae2e00e56cbcf8"
+    },
+    {
+      "path": "frames/attack-000.png",
+      "bytes": 260757,
+      "sha256": "8b2408c36d811b5d5cb88af79933c7dc912bfac50754e39e1ab89fda772f2907"
+    },
+    {
+      "path": "frames/attack-001.png",
+      "bytes": 252138,
+      "sha256": "7a70e59baf92eec338a05d0729e2cd0f6e95f858f1a68b2cf99a4a812b19b8fc"
+    },
+    {
+      "path": "frames/attack-002.png",
+      "bytes": 247493,
+      "sha256": "4a1e06f5e6778d1beb3f35c76f7c981ced5acfeefe2166b9b399c7ef8a624033"
+    },
+    {
+      "path": "frames/attack-003.png",
+      "bytes": 250505,
+      "sha256": "f6a988f99f0160fc6fd803acba16c5708cff77c9ba533fa4f3de8521bcd6cd97"
+    },
+    {
+      "path": "frames/attack-004.png",
+      "bytes": 250644,
+      "sha256": "d4aba1f562da7392d880fef42fd47a4cfc2ff28b7a63d2540c99e14a98fca9ad"
+    },
+    {
+      "path": "frames/attack-005.png",
+      "bytes": 250587,
+      "sha256": "24de002a827103545daa3db1af18948271efd9346001c141da1b853050168deb"
+    },
+    {
+      "path": "frames/attack-006.png",
+      "bytes": 245624,
+      "sha256": "2c194acc5ad69ae3845bcd656c1ac2085022f48fd2550ab4a43faf00a8901fa2"
+    },
+    {
+      "path": "frames/attack-007.png",
+      "bytes": 244309,
+      "sha256": "3f6c098ac52ab9eaa2104d6d2e408b95ad89dac36d57a085fecee9ac74dadb28"
+    },
+    {
+      "path": "frames/attack-008.png",
+      "bytes": 244290,
+      "sha256": "549a4a67bc107951fc29331ac4b27e3f60a8c0107d3ec533b5b9d8616491e945"
+    },
+    {
+      "path": "frames/attack-009.png",
+      "bytes": 244612,
+      "sha256": "79c42e0a95543e30f6b2b6aa5a7eca242cf66c787f87d627f4a8ce29fd2eeafc"
+    },
+    {
+      "path": "frames/attack-010.png",
+      "bytes": 248471,
+      "sha256": "3bdf2bc814e5bd6fda094cf3e256c18f8e3128c24078725aeb2e9c1cb5c5c74d"
+    },
+    {
+      "path": "frames/attack-011.png",
+      "bytes": 293861,
+      "sha256": "fd82e5ec80f7480f243fc5023974940900f2c85d12a43af96acd22af09e089f0"
+    },
+    {
+      "path": "frames/attack-012.png",
+      "bytes": 249278,
+      "sha256": "b9a2d0379ec413cc0d6531a9aed8e56541e192c3bb0b8e84993a4dd9b654d039"
+    },
+    {
+      "path": "frames/attack-013.png",
+      "bytes": 249278,
+      "sha256": "b9a2d0379ec413cc0d6531a9aed8e56541e192c3bb0b8e84993a4dd9b654d039"
+    },
+    {
+      "path": "frames/attack-014.png",
+      "bytes": 249278,
+      "sha256": "b9a2d0379ec413cc0d6531a9aed8e56541e192c3bb0b8e84993a4dd9b654d039"
+    },
+    {
+      "path": "frames/attack-015.png",
+      "bytes": 248202,
+      "sha256": "c9ce3edf7bb4dbd29d81530ada047ce3e5c5eec79a2d4154c4070956cc7bdb8b"
+    },
+    {
+      "path": "frames/attack-016.png",
+      "bytes": 251405,
+      "sha256": "fb686f76704ef0a90571539128fdb4f9c24fa187a05aa4f7c5bd60476ae0a4db"
+    },
+    {
+      "path": "frames/attack-017.png",
+      "bytes": 250460,
+      "sha256": "e19c1cd421e485fca862f052f339a22282a8dc8e3041e9e4fd0d1a8b072c2ece"
+    },
+    {
+      "path": "frames/attack-018.png",
+      "bytes": 249920,
+      "sha256": "8de708964c202c02b5316bc9291547dd5a4d6336f6797a074f40db75a50d6863"
+    },
+    {
+      "path": "frames/attack-019.png",
+      "bytes": 249914,
+      "sha256": "b403072adca45f56d2244082c5de452e617556b8ea6d779723201dca28283d7d"
+    },
+    {
+      "path": "frames/attack-020.png",
+      "bytes": 248422,
+      "sha256": "4b6dde228c9873e6df9259f70615bccdc91ea12e7b7b2e27f88d07a63c7e4549"
+    },
+    {
+      "path": "frames/attack-021.png",
+      "bytes": 245840,
+      "sha256": "b192313335a3d29c56966fa415701f3c19a88070aab64cf89fff8d3d38550b55"
+    },
+    {
+      "path": "frames/attack-022.png",
+      "bytes": 245784,
+      "sha256": "b093794f7e0c2496e89adcf935702464f3eed79a085790942c4ab4ee6323cb96"
+    },
+    {
+      "path": "frames/attack-023.png",
+      "bytes": 247062,
+      "sha256": "19c2050f21179523c4da358d0524297ea76f0179935cf1134d4c08a456c11caf"
+    },
+    {
+      "path": "frames/attack-024.png",
+      "bytes": 247052,
+      "sha256": "263e47a936d31977c5664dc60ed2c58fbc700de8a17268433ca81df6e5c1db45"
+    },
+    {
+      "path": "frames/attack-025.png",
+      "bytes": 247216,
+      "sha256": "c6846a532e713531eaaf6faafce97d1e87f7853b684f082f7d6dc63fe050398c"
+    },
+    {
+      "path": "frames/attack-026.png",
+      "bytes": 247851,
+      "sha256": "db3fd2946e2af5cf1f3ffff1f35c319d84ad23517a99cfae3fce7d6c6a06604b"
+    },
+    {
+      "path": "frames/attack-027.png",
+      "bytes": 247938,
+      "sha256": "c5c0247bfe31e4a0cb31c9e23e3f32c2f55da500bd15788528e2a1564ca8d1eb"
+    },
+    {
+      "path": "frames/attack-028.png",
+      "bytes": 249547,
+      "sha256": "a8b27bb73c3475b30afdd7f9243ee37449e48c3d5be635a75e20d3c9c8b36a65"
+    },
+    {
+      "path": "frames/attack-029.png",
+      "bytes": 254830,
+      "sha256": "0fa86abaae23ed5dbe0eecdaf445fdca4323ca9462c3c1dae99add765fa9fb3d"
+    },
+    {
+      "path": "frames/attack-030.png",
+      "bytes": 260757,
+      "sha256": "8b2408c36d811b5d5cb88af79933c7dc912bfac50754e39e1ab89fda772f2907"
+    },
+    {
+      "path": "parts/body.png",
+      "bytes": 229068,
+      "sha256": "621e1672d6ebffaeb59e4b5aac6e8f5692ee904ad82b28fb2de7700e54917deb"
+    },
+    {
+      "path": "parts/hand.png",
+      "bytes": 11140,
+      "sha256": "04c8cb06ec73731edc41696e5a995d2fe9a56d5ca7de381cdd3048e12017737a"
+    },
+    {
+      "path": "parts/lower.png",
+      "bytes": 26128,
+      "sha256": "71f10b67d7c93b51b6800cbe0349521408d3edde2ecb257e5a5169d22008ae49"
+    },
+    {
+      "path": "parts/shoulderCover.png",
+      "bytes": 13351,
+      "sha256": "f1f55693e1ef28997645e747cb96a6bc09060261c2927cc3ba53b73ee14ff61f"
+    },
+    {
+      "path": "parts/upper.png",
+      "bytes": 21489,
+      "sha256": "2e577caa54cfa9dcd13fb9ef9c38413645ed9badc6086d4fae21432a36b9c152"
+    },
+    {
+      "path": "parts/weapon.png",
+      "bytes": 26985,
+      "sha256": "f668b6415b7f2c285b82aa9ba0e1216bf060db2eee0996dd631c8f1e4c22faae"
+    }
+  ]
+}

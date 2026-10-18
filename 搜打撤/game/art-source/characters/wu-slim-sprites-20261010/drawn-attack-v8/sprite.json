@@ -1,0 +1,19 @@
+{
+ "character":"wu",
+ "animation":"attack",
+ "method":"four complete painted poses",
+ "status":"unreviewed-candidate",
+ "frameWidth":1536,
+ "frameHeight":1024,
+ "motionDurationMs":760,
+ "loop":false,
+ "returnToIdle":true,
+ "frames":[
+  {"label":"准备","durationMs":70},
+  {"path":"frames/attack-01.png","label":"慢蓄力举剑","durationMs":230},
+  {"path":"frames/attack-02.png","label":"快速前下斩","durationMs":70},
+  {"path":"frames/attack-03.png","label":"命中短停","durationMs":65},
+  {"path":"frames/attack-04.png","label":"缓收势","durationMs":255},
+  {"label":"回到待机","durationMs":70}
+ ]
+}

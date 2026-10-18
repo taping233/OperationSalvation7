@@ -1,0 +1,12 @@
+{
+  "tool": "built-in image_gen",
+  "role": "local weapon and background correction",
+  "args": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:\\Users\\太平\\.codex\\generated_images\\01a1243b-1e89-7443-8aca-d1d95c3ab781\\exec-761bb1a5-de8f-48de-a6b2-ab846e0da2d9.png",
+      "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-slim-sprites-20261010\\continuous-attack-v7\\base.png"
+    ],
+    "prompt": "Use case precise-object-edit + background-extraction. INPUT 1 is the EDIT TARGET six-pose 3x2 animation sheet. INPUT 2 is ONLY the exact weapon design reference. Make ONLY two local corrections to INPUT 1:\n(1) Remove ALL gray/black vignette backdrop and halos from every cell. Real alpha-transparent empty area, not black, gray, white or checkerboard paint. Keep silver hair edges clean. No shadow or glow background.\n(2) Unify the SIX swords into the exact same sword as INPUT 2 / top-left cell. In target sheet top-left has the correct slender straight blade, modest angular rectangular guard, simple grip and small dark angular pommel. Other cells incorrectly added ornate pointy guards or round pommels and varied sword length. Replace only those weapon pixels with the same rigid silhouette geometry from top-left, rotated/transferred to match each existing sword direction and existing hand grip. Every cell has the EXACT SAME on-image physical blade length, blade width, same tip taper, hilt length and small guard outline. No foreshortening. Blade extends a little further when needed to match the top-left blade length. Do not enlarge the guard. Keep full blade within cell.\n\nPreserve ALL existing character pixels and the six poses/layout as much as possible: face, head sizes, hair, blue bow/black rose, goggles, body proportions, shoulders, dress folds and straps, bare legs, ankle boots, positions, direction, lighting, scale. Do not regenerate bodies, redesign clothes, move feet, add blue stars or change expressions. No captions or lines. Output the same six-pose sheet on truly transparent background."
+  }
+}

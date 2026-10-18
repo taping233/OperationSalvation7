@@ -1,0 +1,201 @@
+{
+  "character": "changwuyu",
+  "animation": "death",
+  "texture": "sheet.webp",
+  "frameWidth": 768,
+  "frameHeight": 512,
+  "columns": 4,
+  "rows": 2,
+  "poseSlots": 8,
+  "sequence": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+    4,
+    4,
+    4,
+    4,
+    5,
+    5,
+    5,
+    5,
+    6,
+    6,
+    6,
+    6,
+    7,
+    7,
+    7
+  ],
+  "durationsMs": [
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42
+  ],
+  "durationMs": 1167,
+  "sampleRate": 24,
+  "loop": false,
+  "holdLastFrame": true,
+  "firstFrame": 0,
+  "lastFrame": 7,
+  "phases": [
+    {
+      "name": "待机起点",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "name": "失去支撑",
+      "start": 1,
+      "end": 4
+    },
+    {
+      "name": "屈膝撑地",
+      "start": 5,
+      "end": 12
+    },
+    {
+      "name": "侧身落地",
+      "start": 13,
+      "end": 20
+    },
+    {
+      "name": "倒地停留",
+      "start": 21,
+      "end": 27
+    }
+  ],
+  "alignment": [
+    {
+      "frame": 0,
+      "exactIdleCopy": true
+    },
+    {
+      "frame": 1,
+      "scale": 1.0217864923747277,
+      "offset": [
+        204,
+        32
+      ],
+      "sourceBounds": [
+        645,
+        35,
+        916,
+        480
+      ]
+    },
+    {
+      "frame": 2,
+      "scale": 1.0217864923747277,
+      "offset": [
+        227,
+        70
+      ],
+      "sourceBounds": [
+        124,
+        473,
+        440,
+        881
+      ]
+    },
+    {
+      "frame": 3,
+      "scale": 1.0217864923747277,
+      "offset": [
+        150,
+        186
+      ],
+      "sourceBounds": [
+        592,
+        585,
+        996,
+        880
+      ]
+    },
+    {
+      "frame": 4,
+      "scale": 1.0217864923747277,
+      "offset": [
+        148,
+        198
+      ],
+      "sourceBounds": [
+        47,
+        896,
+        498,
+        1179
+      ]
+    },
+    {
+      "frame": 5,
+      "scale": 1.0217864923747277,
+      "offset": [
+        148,
+        293
+      ],
+      "sourceBounds": [
+        590,
+        981,
+        1036,
+        1171
+      ]
+    },
+    {
+      "frame": 6,
+      "scale": 1.0217864923747277,
+      "offset": [
+        147,
+        324
+      ],
+      "sourceBounds": [
+        46,
+        1234,
+        505,
+        1393
+      ]
+    },
+    {
+      "frame": 7,
+      "exactFallenCopy": true
+    }
+  ],
+  "endpointSource": "../idle/frames/idle-000.png",
+  "noFireball": true,
+  "noStaff": true,
+  "method": "built-in imagegen poses; common idle PNG endpoints, alignment and fixed final fallen frame"
+}

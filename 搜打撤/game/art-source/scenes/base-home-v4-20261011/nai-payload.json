@@ -1,0 +1,81 @@
+{
+  "input": "1.2::miv4t::, 0.8::quasarcake::\n\nscenery, indoors, winter, no humans. A welcoming expedition base rest room, a lived-in winter refuge, not a cafe or a medieval hall. A single compact life-trace focal group at the centre: one simple paper-white cushioned reading chair with a folded muted terracotta-red blanket, one small charcoal-gray side table holding a plain warm ceramic teacup and one closed book. Behind this group is one broad rectangular window overlooking a quiet snow-covered courtyard in blue-gray winter dusk. The room has cool paper-white plaster wall planes, matte blue-gray stone floor, a few broad dark steel frame shapes, and a low pale ash storage bench. The comfortable chair and blanket clearly belong to returning expeditioners. No people or animals.\n\nA wide 16:9 base homepage background, an original indoor place of rest and belonging, with no interface baked into the image.\n\nHuman eye-level wide interior view, complete believable room structure. The life-trace group is the single focal point near horizontal centre, within the middle third. LEFT 28 percent is quiet broad wall and floor without objects for navigation. LOWER-RIGHT 28 percent is quiet blue-gray wall/floor with no furniture or props for the departure panel. TOP 13 percent is a calm broad darker architectural plane without ornaments for the resource bar. Large uncluttered spatial layers, no exaggerated tilted perspective, no diagonal beam crossings. The chair, blanket, cup and book stay within the central focus group rather than scattered around the room.\n\nCool gray, desaturated deep blue-gray and paper-white dominate. Muted terracotta-red blanket is the only strong color accent. One very small restrained warm lamp light within the central group creates a gentle sense of return, not a second focal point. Clear soft winter ambient illumination with broad hard-edged shadow planes and opaque economical painted masses. Low detail density, simplified broad hand-painted brushwork, very few seams. The floor is matte, no reflections; pale wood appears only as broad ash-colored planes, no woodgrain. No brown or golden room color cast, no cinematic spotlight or excessive glow.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "model": "nai-diffusion-4-5-full",
+  "action": "generate",
+  "parameters": {
+    "params_version": 3,
+    "width": 1024,
+    "height": 576,
+    "scale": 6.5,
+    "sampler": "k_euler_ancestral",
+    "steps": 28,
+    "variety_plus": true,
+    "n_samples": 1,
+    "ucPresetId": "none",
+    "qualityPresetId": "none",
+    "autoSmea": false,
+    "straight_alpha": false,
+    "dynamic_thresholding": false,
+    "controlnet_strength": 1,
+    "legacy": false,
+    "legacy_v3_extend": false,
+    "legacy_uc": false,
+    "add_original_image": true,
+    "cfg_rescale": 0.0,
+    "noise_schedule": "karras",
+    "use_coords": false,
+    "normalize_reference_strength_multiple": true,
+    "inpaintImg2ImgStrength": 1.0,
+    "seed": 1011206400,
+    "negative_prompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, person, people, girl, boy, character, portrait, animal, outdoor foreground, sitting on the ground, scattered paper, tilted bookshelves, brown room, golden room, dark wood floor, woodgrain, ornate furniture, medieval, restaurant, cafe, busy composition, many props, tiny repeated details, detailed window frames, shiny floor, reflections, glossy 3d, photorealistic, cinematic glow, lens flare, neon, interface, icons, captions, letters, clutter, extreme perspective",
+    "characterPrompts": [
+      {
+        "prompt": "",
+        "uc": "",
+        "center": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "enabled": true
+      }
+    ],
+    "v4_prompt": {
+      "caption": {
+        "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nscenery, indoors, winter, no humans. A welcoming expedition base rest room, a lived-in winter refuge, not a cafe or a medieval hall. A single compact life-trace focal group at the centre: one simple paper-white cushioned reading chair with a folded muted terracotta-red blanket, one small charcoal-gray side table holding a plain warm ceramic teacup and one closed book. Behind this group is one broad rectangular window overlooking a quiet snow-covered courtyard in blue-gray winter dusk. The room has cool paper-white plaster wall planes, matte blue-gray stone floor, a few broad dark steel frame shapes, and a low pale ash storage bench. The comfortable chair and blanket clearly belong to returning expeditioners. No people or animals.\n\nA wide 16:9 base homepage background, an original indoor place of rest and belonging, with no interface baked into the image.\n\nHuman eye-level wide interior view, complete believable room structure. The life-trace group is the single focal point near horizontal centre, within the middle third. LEFT 28 percent is quiet broad wall and floor without objects for navigation. LOWER-RIGHT 28 percent is quiet blue-gray wall/floor with no furniture or props for the departure panel. TOP 13 percent is a calm broad darker architectural plane without ornaments for the resource bar. Large uncluttered spatial layers, no exaggerated tilted perspective, no diagonal beam crossings. The chair, blanket, cup and book stay within the central focus group rather than scattered around the room.\n\nCool gray, desaturated deep blue-gray and paper-white dominate. Muted terracotta-red blanket is the only strong color accent. One very small restrained warm lamp light within the central group creates a gentle sense of return, not a second focal point. Clear soft winter ambient illumination with broad hard-edged shadow planes and opaque economical painted masses. Low detail density, simplified broad hand-painted brushwork, very few seams. The floor is matte, no reflections; pale wood appears only as broad ash-colored planes, no woodgrain. No brown or golden room color cast, no cinematic spotlight or excessive glow.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+        "char_captions": [
+          {
+            "char_caption": "",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true
+    },
+    "v4_negative_prompt": {
+      "caption": {
+        "base_caption": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, person, people, girl, boy, character, portrait, animal, outdoor foreground, sitting on the ground, scattered paper, tilted bookshelves, brown room, golden room, dark wood floor, woodgrain, ornate furniture, medieval, restaurant, cafe, busy composition, many props, tiny repeated details, detailed window frames, shiny floor, reflections, glossy 3d, photorealistic, cinematic glow, lens flare, neon, interface, icons, captions, letters, clutter, extreme perspective",
+        "char_captions": [
+          {
+            "char_caption": "",
+            "centers": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ]
+          }
+        ]
+      },
+      "use_coords": false,
+      "use_order": true
+    },
+    "deliberate_euler_ancestral_bug": false,
+    "prefer_brownian": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "status": "candidate-unapproved",
+  "source": "C:/Users/太平/.codex/generated_images/01a14007-0162-7603-a140-79f54236520e/exec-7267b497-665e-4b36-b16a-4e7f5a1a6f82.png",
+  "prompt": "Precise rendering/style revision. Image 1 is the EDIT TARGET. Keep its exact safe design, all six cylindrical bolts, dial ticks, handle, hinges, front door angle, camera, silhouette and empty luminous interior. Images 2 and 3 are STYLE references only, not subjects. Repaint the whole safe with the same finely controlled hand-painted anime drawing grammar as the references: large connected cool blue-gray and charcoal shadow planes with nuanced secondary midtone shapes; selected firm colored contours that partly merge into the adjacent color; irregular but confidently placed opaque painted highlights; strong clean material shapes, carefully resolved mechanism details. Keep the dial, hinge and bolt craftsmanship every bit as detailed and legible as image 1, but render their lighting as shaped painted color patches instead of photo-like metal reflections. Specifically remove long slick white mirror bands from the safe's bevels and brass. Replace them with a few short irregular pale warm and cool painted marks. Brass uses rich muted ochre base, amber reflected planes and small ivory glints, no polished chrome gradients. The broad front door and side panels retain quiet matte surfaces with a small number of decisive broad strokes, no brush texture pasted everywhere. Keep the hard occlusion shadows, thin purposeful mechanical seams and layered door cross section accurate. This should read as a detailed hand-painted anime PROP painted by the artist of the game character, not a 3D inventory render, vector cartoon or rough color-block sketch. Do not add scratches, grime or low-poly facets. Interior ONLY white-gold light and a few sharp star glints, no reward objects. Genuine transparent alpha background, preserve clean edges and semitransparent glow. No characters, decorative clothing motifs, scenery, text, watermark or checkerboard.",
+  "base": "game/art-source/chests/safe-detail-v5/open-candidate.png",
+  "references": [
+    "game/assets/portraits/full/wu.webp",
+    "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png"
+  ],
+  "runtime_installed": false
+}

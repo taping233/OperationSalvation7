@@ -1,0 +1,11 @@
+{
+  "tool": "built-in imagegen",
+  "reference": "C:/Users/太平/AppData/Local/Temp/codex-clipboard-afb3848e-daba-4610-836a-f128933c4349.png",
+  "selectedPrompts": {
+    "idle": "参考图同一无角色，保持精致二次元画风、黑灰裙、配饰、长马尾、细腿、同一长剑。制作3列2行严格等大六格透明动画精灵图，六个连续动作姿势。每格512x512，人物站立身高只有380像素，脚底在格内y=455，头顶y=75。全身、全部发尾和完整剑都必须距离格边至少30像素，缩小人物留足空白。无文字无线框，无灰雾、光晕、投影、背景，背景alpha=0。待机：六帧仅轻微呼吸和双手细微摆动。固定脚底腰胯头部位置，不能大幅晃动或改变姿势。1原图姿势，2胸肩吸气微升手腕轻抬，3吸气顶点手部小幅外摆，4呼气手腕缓落，5呼气低点，6返回原姿势。剑仅随持剑手极小摆动，马尾裙摆只有少量跟随。",
+    "attack": "Edit this sprite sheet only: preserve the six attack poses, same character rendering and details. Keep exactly 3 equal columns and 2 equal rows on a 1536x1024 canvas. Shrink each entire character AND its sword uniformly to 85% around the center of its own 512x512 cell so every sword tip and hair strand stays within its cell with ample transparent margin. Remove ALL background glow and surrounding haze: only character and sword pixels, clean transparency. No text, no numbers, no added effects. Do not add a diagram or labels.",
+    "hurt": "参考人物的受击动画精灵图，3列2行，六格等大，无文字。六帧依次：朝右原图待机、突然后仰皱眉、后仰顶点空手护胸、屈膝稳住、恢复、原图待机。保留同一精致二次元角色、纤细腿型、长直高马尾、黑花蓝结、圆黑护目镜、黑灰露肩短裙、裸腿黑靴和同一长剑。每格完整人物和剑、留足空白、不越格，尺度和脚底基线一致。背景完全透明，无光晕无灰雾无影子。",
+    "death": "参考图同一无角色，保持精致二次元画风、黑灰裙、配饰、长马尾、细腿、同一长剑。制作3列2行严格等大六格透明动画精灵图，六个连续动作姿势。每格512x512，人物站立身高只有380像素，脚底在格内y=455，头顶y=75。全身、全部发尾和完整剑都必须距离格边至少30像素，缩小人物留足空白。无文字无线框，无灰雾、光晕、投影、背景，背景alpha=0。死亡：1原图朝右持剑待机，2失去支撑双膝下沉上身前倾，3单膝着地用空手撑地，4侧身缓倒重心落地，5侧躺双腿自然蜷曲闭眼，6保持同一个侧躺倒地姿势头发与衣摆沉落。保持真实站立尺度不能随倒地把人物放大。死亡最终停在倒地，不站起来。剑始终同一把，随持剑手落到地面，不穿身体不增加武器。"
+  },
+  "notes": "User clarified idle: slight breathing and subtle hand swaying. Multiple network retries; source images retain semi-transparent halo."
+}

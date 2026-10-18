@@ -1,0 +1,80 @@
+[
+  {
+    "kind": "small",
+    "version": "transparent-detail-v4",
+    "path": "game/art-source/chests/three-kinds-node-style-1016-v3/small.png",
+    "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-af40bad3-9a19-4c73-9604-a2bd8e86f89f.png",
+    "sha256": "579ced720980e194bef17c7c4d005f088bd5e555c5f82e5a09ca468c88ac66f7",
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 931363,
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "solidAlphaBBox": [
+      115,
+      288,
+      1166,
+      1054
+    ],
+    "opaqueBorderPixels": 0,
+    "status": "candidate-not-installed",
+    "acquisition": "Built-in image_gen. Original file copied without image processing; prompts and edit-source chain in prompts.json."
+  },
+  {
+    "kind": "medium",
+    "version": "transparent-detail-v4",
+    "path": "game/art-source/chests/three-kinds-node-style-1016-v3/medium.png",
+    "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-2c6b867b-ccf1-4dc9-8c04-aa46d51f1af1.png",
+    "sha256": "b2ff5206c74cc20b97bbc302d8afaae9949fc76da649d173a97efecf74fee300",
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 1101758,
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "solidAlphaBBox": [
+      141,
+      230,
+      1155,
+      1109
+    ],
+    "opaqueBorderPixels": 0,
+    "status": "candidate-not-installed",
+    "acquisition": "Built-in image_gen. Original file copied without image processing; prompts and edit-source chain in prompts.json."
+  },
+  {
+    "kind": "large",
+    "version": "transparent-detail-v4",
+    "path": "game/art-source/chests/three-kinds-node-style-1016-v3/large.png",
+    "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-bcac848c-9177-4fdc-bedb-a2b9a47803a5.png",
+    "sha256": "6415e03cc0c64975515b47598092f6fd953b693afcc84b17398a7e6d71124153",
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 973894,
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "solidAlphaBBox": [
+      128,
+      316,
+      1175,
+      990
+    ],
+    "opaqueBorderPixels": 0,
+    "status": "candidate-not-installed",
+    "acquisition": "Built-in image_gen. Original file copied without image processing; prompts and edit-source chain in prompts.json."
+  }
+]

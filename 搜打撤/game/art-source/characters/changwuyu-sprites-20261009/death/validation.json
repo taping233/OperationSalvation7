@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "action": "death",
+  "startMatchesIdle": true,
+  "endMatchesIdle": false,
+  "heldFallenEnd": true,
+  "neutralSha256": "30c12759545b1fc4621ea320020ec89f700b30fb08879b24d68511e98c508526",
+  "durationMs": 1167,
+  "bounds": [
+    [
+      246,
+      21,
+      544,
+      490
+    ],
+    [
+      207,
+      35,
+      484,
+      490
+    ],
+    [
+      230,
+      73,
+      552,
+      490
+    ],
+    [
+      154,
+      189,
+      566,
+      490
+    ],
+    [
+      151,
+      201,
+      611,
+      490
+    ],
+    [
+      151,
+      296,
+      607,
+      490
+    ],
+    [
+      150,
+      327,
+      619,
+      489
+    ],
+    [
+      150,
+      327,
+      619,
+      489
+    ]
+  ],
+  "uniqueRasterPoses": 7,
+  "visibleAtlasMatchesFrames": true
+}

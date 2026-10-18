@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>分界面过场图预览</title>
+<style>
+body { margin:0; background:#10191f; color:#f4f3f1; font-family:sans-serif; }
+nav { padding:20px; display:flex; gap:16px; } button { padding:10px 20px; }
+#overlay { position:relative; height:calc(100vh - 85px); overflow:hidden; }
+#overlay .camp-entry-cut { animation:none; }
+#overlay .camp-entry-scenery { animation:none; opacity:1; }
+#overlay .camp-entry-caption, #overlay .camp-entry-register { animation:none; opacity:1; }
+</style>
+<nav><button data-scene="camp">基地</button><button data-scene="photo">照相馆</button><button data-scene="field">出征地图</button><button data-scene="battle">遭遇战</button><button data-scene="boss">首脑接敌</button><button data-scene="achievement">成就总览</button></nav>
+<div id="overlay"></div>
+<script type="module">
+import { createCityCut } from '../../../src/ui/camp-entry.js';
+const host = document.getElementById('overlay');
+const captions = {
+  camp: ['基地档案', 'BASE CAMP / 冬日远征档案室', 'BASE CAMP'],
+  photo: ['馆藏档案', 'PHOTO STUDIO / 冬日影像档案', 'PHOTO STUDIO'],
+  field: ['远征档案', 'EXPEDITION / 开始探索', 'EXPEDITION'],
+  battle: ['接敌档案', 'BATTLE / 准备接敌', 'BATTLE'],
+  boss: ['接敌档案', 'BATTLE / 高危目标', 'BATTLE'],
+  achievement: ['荣誉档案', 'ACHIEVEMENTS / 远征荣誉陈列', 'ACHIEVEMENTS'],
+};
+function show(button) {
+  const scene = button.dataset.scene;
+  const [archive, subtitle, destination] = captions[scene];
+  host.replaceChildren(createCityCut({ scene, archive, subtitle, destination, title:button.textContent, watermark:scene.toUpperCase() }));
+}
+document.querySelectorAll('button').forEach(button => button.addEventListener('click', () => show(button)));
+show(document.querySelector('button'));
+</script></html>

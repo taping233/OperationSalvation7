@@ -1,0 +1,65 @@
+{
+  "character": "changwuyu",
+  "animation": "attack",
+  "texture": "sheet.webp",
+  "frameWidth": 768,
+  "frameHeight": 512,
+  "columns": 3,
+  "rows": 2,
+  "poseSlots": 5,
+  "sequence": [
+    0,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    3,
+    3,
+    4,
+    4,
+    4
+  ],
+  "durationsMs": [
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42
+  ],
+  "durationMs": 500,
+  "sampleRate": 24,
+  "loop": false,
+  "firstFrame": 0,
+  "lastFrame": 4,
+  "noFireball": true,
+  "noStaff": true,
+  "movingLimb": "anatomical left arm: face-level arm on screen-right",
+  "phases": [
+    {
+      "name": "左手起势",
+      "start": 0,
+      "end": 2
+    },
+    {
+      "name": "左手向右挥动",
+      "start": 3,
+      "end": 6
+    },
+    {
+      "name": "收回左手",
+      "start": 7,
+      "end": 11
+    }
+  ],
+  "method": "generated anatomical-left arm; protected hat and clean revealed face plate; immutable idle outside arm corridor",
+  "protectedPixels": "right waist-hand and all pixels outside anatomical-left arm corridor; body, lower robe, boots and cloud"
+}

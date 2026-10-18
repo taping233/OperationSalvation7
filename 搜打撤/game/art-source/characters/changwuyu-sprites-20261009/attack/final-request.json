@@ -1,0 +1,8 @@
+{
+  "tool": "built-in imagegen",
+  "prompt": "Correct anatomical LEFT-HAND attack. In this reference, the character's LEFT arm is on SCREEN RIGHT and its glove is currently BESIDE HIS FACE. That is the hand that moves. His RIGHT hand is the one ACROSS HIS WAIST and stays exactly there. Create FOUR FULL-BODY poses, 2 columns x 2 rows, landscape 1536x1024: 1 exact reference; 2 LEFT glove leaves the face and starts extending right; 3 LEFT arm extends toward SCREEN RIGHT with an open black-gloved palm at shoulder height; 4 LEFT arm retracts halfway. In poses 2,3,4 THERE IS NO HAND TOUCHING THE GLASSES: erase the original face-hand when it moves, do not leave a duplicate. EVERY pose has EXACTLY TWO ARMS/TWO HANDS: one unmoving RIGHT waist hand and one moving LEFT hand. Never move the waist hand. Keep head/face/round glasses/hat, torso, black-purple robe, legs/boots/cloud, scale/camera identical. Same male elf, silver low bun, golden eyes, feather-blue gem, black gloves, painterly anime style. Full-body padding, genuine transparent RGBA, no fireball, effects, staff, text or grid. Follow the actual reference hand positions stated above, not viewer-left naming. Only the screen-right face-level LEFT arm changes.",
+  "reference": "../idle/frames/idle-000.png",
+  "output": "anatomical-left-source.png",
+  "review": "five exported frames reviewed; anatomical left is screen-right face-level arm; right waist-hand fixed",
+  "source": "C:/Users/太平/.codex/generated_images/01a1215d-b4cb-71b1-9ef2-31a30a2e2f98/exec-fb3a9cdd-451c-44b7-88aa-b7c39339ecaa.png"
+}

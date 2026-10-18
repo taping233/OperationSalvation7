@@ -1,0 +1,438 @@
+{
+  "size": [
+    640,
+    640
+  ],
+  "format": "RGBA PNG + lossless RGBA WebP",
+  "processing": "Grid crop, uniform scaling and translation only; no repaint, recolor, masking or added effects.",
+  "states": [
+    "closed",
+    "unlock",
+    "half-open-flash",
+    "open-afterglow"
+  ],
+  "assets": {
+    "small": {
+      "frames": [
+        {
+          "frame": 0,
+          "png": "small/frame-00.png",
+          "webp": "small/frame-00.webp",
+          "sourceAnchor": [
+            321.0,
+            580,
+            536
+          ],
+          "scale": 0.9328358208955224,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 560,
+          "alphaBBox": [
+            67,
+            163,
+            577,
+            561
+          ],
+          "pngSHA256": "539052f3d823cb8393f15fb54f6c06ff3522c0894a02b4f2a7e0f8f5e31c138e",
+          "webpSHA256": "f4bc3b12a1d73a7ca28d57f49be6cd7f348bf00c39f0367c627b4efcfc36ace1"
+        },
+        {
+          "frame": 1,
+          "png": "small/frame-01.png",
+          "webp": "small/frame-01.webp",
+          "sourceAnchor": [
+            309.0,
+            580,
+            536
+          ],
+          "scale": 0.9328358208955224,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 560,
+          "alphaBBox": [
+            67,
+            160,
+            579,
+            561
+          ],
+          "pngSHA256": "21ace2c70752f6e035ca8cb71dac688a93e7dca7b75779d60149e38e4f47ea3c",
+          "webpSHA256": "c236d9e2c68a9089e4893d2ea352c4f119dea70e90d8173c889daf93d5581693"
+        },
+        {
+          "frame": 2,
+          "png": "small/frame-02.png",
+          "webp": "small/frame-02.webp",
+          "sourceAnchor": [
+            320.5,
+            573,
+            533
+          ],
+          "scale": 0.9380863039399625,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 560,
+          "alphaBBox": [
+            66,
+            66,
+            586,
+            561
+          ],
+          "pngSHA256": "044f44b8a6cf84cabd1b0124751cf46427290d4625f7fa6787afd07f003e096c",
+          "webpSHA256": "2dc92257e01a1e986c7ad783bfc63607c1021da024f010bc8ca9a49b6a1f71d7"
+        },
+        {
+          "frame": 3,
+          "png": "small/frame-03.png",
+          "webp": "small/frame-03.webp",
+          "sourceAnchor": [
+            303.5,
+            576,
+            525
+          ],
+          "scale": 0.9523809523809523,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 560,
+          "alphaBBox": [
+            67,
+            27,
+            589,
+            561
+          ],
+          "pngSHA256": "fc12c4756a64214b3d7a9da6947857c66c8892fb82252133e828249c1907b6a5",
+          "webpSHA256": "9060930ad9c5642089f790f120e11658a478643891749ee99ec7b4fbddd39425"
+        }
+      ],
+      "durationsMs": [
+        600,
+        160,
+        140,
+        900
+      ],
+      "preview": "small/opening.webp",
+      "apng": "small/opening.png",
+      "fittedBodyWidth": 500,
+      "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-4d26a42b-0dc9-4e1e-936a-d8a19a8a4732.png",
+      "sheet": "small-sheet.png",
+      "sheetSize": [
+        1254,
+        1254
+      ],
+      "sheetSHA256": "40e5e732f0397549d3ea9b8970d493b7f964cd3c558b79de2c42ee6494358b72"
+    },
+    "medium": {
+      "frames": [
+        {
+          "frame": 0,
+          "png": "medium/frame-00.png",
+          "webp": "medium/frame-00.webp",
+          "sourceAnchor": [
+            350.0,
+            561,
+            418
+          ],
+          "scale": 1.0855680427283854,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 560,
+          "alphaBBox": [
+            56,
+            120,
+            569,
+            562
+          ],
+          "pngSHA256": "153ba7f614ad2c7c924cf4e91a04d5801591bab024dd033ccf0cd942f5369703",
+          "webpSHA256": "e8b9e6df5866fa0070826ebea30ce74df1aaf96d02c5ea86da956d14baff7074"
+        },
+        {
+          "frame": 1,
+          "png": "medium/frame-01.png",
+          "webp": "medium/frame-01.webp",
+          "sourceAnchor": [
+            309.0,
+            562,
+            408
+          ],
+          "scale": 1.1121751025991793,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 560,
+          "alphaBBox": [
+            55,
+            108,
+            568,
+            560
+          ],
+          "pngSHA256": "b156d97dc6a81105a17c3f85197632fc7d251a271f0ee3b5cee6d98781ed1810",
+          "webpSHA256": "73f78dba3f021cfd690fb8d883d76cc65908f14acd47d597edf1e8cba35f3cb3"
+        },
+        {
+          "frame": 2,
+          "png": "medium/frame-02.png",
+          "webp": "medium/frame-02.webp",
+          "sourceAnchor": [
+            346.0,
+            545,
+            400
+          ],
+          "scale": 1.1344186046511628,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 560,
+          "alphaBBox": [
+            75,
+            36,
+            584,
+            560
+          ],
+          "pngSHA256": "435e40ef79a7109d36f0efe3c0b7b982bad097e08aae3a8e3e08a5c2ccaf95e5",
+          "webpSHA256": "e7855b11569518790a4c83335e52dfb2d7b389dabbcc131953e7f94dd20639b7"
+        },
+        {
+          "frame": 3,
+          "png": "medium/frame-03.png",
+          "webp": "medium/frame-03.webp",
+          "sourceAnchor": [
+            309.0,
+            545,
+            396
+          ],
+          "scale": 1.145877378435518,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 560,
+          "alphaBBox": [
+            84,
+            18,
+            582,
+            560
+          ],
+          "pngSHA256": "0cbd991075239a9cae41538a1af5d8f8c32d7f6d25571fcf98894f78faba7361",
+          "webpSHA256": "6a8df7fc91d6ac57007ec32afbd778dd2d66433155334959c0ee7047e28334fc"
+        }
+      ],
+      "durationsMs": [
+        600,
+        160,
+        140,
+        900
+      ],
+      "preview": "medium/opening.webp",
+      "apng": "medium/opening.png",
+      "fittedBodyWidth": 453.7674418604651,
+      "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-eb2ddcd9-9b0f-41e6-b791-bc771ccbfe3a.png",
+      "sheet": "medium-sheet.png",
+      "sheetSize": [
+        1254,
+        1254
+      ],
+      "sheetSHA256": "db474f9022edd653a87b79e32c03ea3f40acd510529e5d6a2c3bd9947ed3d1b2"
+    },
+    "large": {
+      "frames": [
+        {
+          "frame": 0,
+          "png": "large/frame-00.png",
+          "webp": "large/frame-00.webp",
+          "sourceAnchor": [
+            327.5,
+            520,
+            549
+          ],
+          "scale": 0.9107468123861566,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 560,
+          "alphaBBox": [
+            53,
+            210,
+            586,
+            560
+          ],
+          "pngSHA256": "e1e190e1477d6f2a770e6297f75c992ff720c01da04f7eeda3083d803781f302",
+          "webpSHA256": "13cf0284e0a1f93d3714fd8af33840c85408b5e424ad4f4dc29cec276c7a9d80"
+        },
+        {
+          "frame": 1,
+          "png": "large/frame-01.png",
+          "webp": "large/frame-01.webp",
+          "sourceAnchor": [
+            313.5,
+            520,
+            545
+          ],
+          "scale": 0.9174311926605505,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 560,
+          "alphaBBox": [
+            53,
+            206,
+            584,
+            561
+          ],
+          "pngSHA256": "7eac10b9584471f4fba72970fa1f90237c680e4889bf00e33fb8a2a822085412",
+          "webpSHA256": "4d8e8d57a98986eda8712eb877e9a3d6f693fd7441e265dc2b55ffa747d8578a"
+        },
+        {
+          "frame": 2,
+          "png": "large/frame-02.png",
+          "webp": "large/frame-02.webp",
+          "sourceAnchor": [
+            325.5,
+            534,
+            539
+          ],
+          "scale": 0.9276437847866419,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 560,
+          "alphaBBox": [
+            55,
+            99,
+            592,
+            561
+          ],
+          "pngSHA256": "6fe373b4f56f6e36e0a3ca47fae1b1a4b19ea8b29e9763f7ac750eab0dc5d2dc",
+          "webpSHA256": "dd0084eca1915e39be859ff53b13678e66e16d9b3d02b4f662d92cee968065da"
+        },
+        {
+          "frame": 3,
+          "png": "large/frame-03.png",
+          "webp": "large/frame-03.webp",
+          "sourceAnchor": [
+            312.5,
+            536,
+            533
+          ],
+          "scale": 0.9380863039399625,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 560,
+          "alphaBBox": [
+            57,
+            86,
+            586,
+            560
+          ],
+          "pngSHA256": "428d1f7498d159372a33c8bda570abfe12022f45066ea6e3befb4e47d0ab073a",
+          "webpSHA256": "9b1e43248c8d3e47843a903e6d719150fcd4c263dbf1ca4cbf0d27f52230e4cb"
+        }
+      ],
+      "durationsMs": [
+        600,
+        160,
+        140,
+        900
+      ],
+      "preview": "large/opening.webp",
+      "apng": "large/opening.png",
+      "fittedBodyWidth": 500,
+      "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-317a7d88-efd6-4638-a303-71b9e16e0517.png",
+      "sheet": "large-sheet.png",
+      "sheetSize": [
+        1254,
+        1254
+      ],
+      "sheetSHA256": "1a8533f650441bda89fccd0238e51b957b0713000fa7232ebfbad1ddc74744fc"
+    },
+    "fx": {
+      "frames": [
+        {
+          "frame": 0,
+          "png": "fx/frame-00.png",
+          "webp": "fx/frame-00.webp",
+          "sourceAnchor": [
+            314,
+            454,
+            1
+          ],
+          "scale": 1.0,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 470,
+          "alphaBBox": [
+            176,
+            439,
+            478,
+            517
+          ],
+          "pngSHA256": "6d6552228589649bd5719c1d9d3854190a1c1ce19aa4c1ebd5df6e270acd0788",
+          "webpSHA256": "01f2eee1c6959f0f92091cf8a0f96f523231c8c893bf0ed575812be3896ab252"
+        },
+        {
+          "frame": 1,
+          "png": "fx/frame-01.png",
+          "webp": "fx/frame-01.webp",
+          "sourceAnchor": [
+            309,
+            452,
+            1
+          ],
+          "scale": 1.0,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 470,
+          "alphaBBox": [
+            155,
+            295,
+            506,
+            525
+          ],
+          "pngSHA256": "62476d4c5bb9cf4275faa4526f1c227f4de54417fc43e5c1e28c45ef25f151ef",
+          "webpSHA256": "ee722034118b816238bd75e8ac73ef58d3ee5687ea24ef1c0e5b555193e2918e"
+        },
+        {
+          "frame": 2,
+          "png": "fx/frame-02.png",
+          "webp": "fx/frame-02.webp",
+          "sourceAnchor": [
+            312,
+            439,
+            1
+          ],
+          "scale": 1.0,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 470,
+          "alphaBBox": [
+            51,
+            86,
+            602,
+            517
+          ],
+          "pngSHA256": "6f0913b1fe81d6a41f6fdec21131bedc5d21b54a8eb98de484086926dc834da0",
+          "webpSHA256": "e7486a6d7c5b1c18e18c64432083649f1a19fc05720b153869928d1d54af7c92"
+        },
+        {
+          "frame": 3,
+          "png": "fx/frame-03.png",
+          "webp": "fx/frame-03.webp",
+          "sourceAnchor": [
+            314,
+            440,
+            1
+          ],
+          "scale": 1.0,
+          "outputBodyCenterX": 320,
+          "outputBaselineY": 470,
+          "alphaBBox": [
+            229,
+            319,
+            427,
+            499
+          ],
+          "pngSHA256": "89cf965800c32f89e49deb92c20108ada9288b874748a649f68fa06fb8f2cc95",
+          "webpSHA256": "dcbcaba475d527fa35972c09af7c717f2581b61f101b5323ab7e3a844cb42988"
+        }
+      ],
+      "durationsMs": [
+        180,
+        100,
+        100,
+        500
+      ],
+      "preview": "fx/opening.webp",
+      "apng": "fx/opening.png",
+      "fittedBodyWidth": 1,
+      "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-81848ff7-d449-4b43-9c2d-1982ce375849.png",
+      "sheet": "fx-sheet.png",
+      "sheetSize": [
+        1254,
+        1254
+      ],
+      "sheetSHA256": "bf8c1f5896f5ee2c927640d1a195146cf881411862077037d6fd806cfc1e45c6",
+      "states": [
+        "gather",
+        "flash-start",
+        "burst",
+        "afterglow"
+      ]
+    }
+  }
+}

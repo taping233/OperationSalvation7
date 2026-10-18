@@ -1,0 +1,98 @@
+[
+  {
+    "kind": "small",
+    "name": "小型物资箱",
+    "path": "game/art-source/chests/three-kinds-redraw-1016/small.png",
+    "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-9d222f17-44f0-4ed4-aaf2-f33c31fcbc38.png",
+    "bytes": 927701,
+    "sha256": "f7b3bacd640f04697b25e26d406d61dcd82dd6e0a8c4b8fc728d54f6e1fc3072",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "alphaBBox": [
+      49,
+      154,
+      1208,
+      1190
+    ],
+    "status": "candidate-not-installed",
+    "acquisition": "内置image_gen生成，原始提示词见prompts.json；按sourcePath原样复制",
+    "solidAlphaBBox": [
+      60,
+      325,
+      1199,
+      994
+    ],
+    "opaqueBorderPixels": 0
+  },
+  {
+    "kind": "medium",
+    "name": "密封物资箱",
+    "path": "game/art-source/chests/three-kinds-redraw-1016/medium.png",
+    "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-3ea20bbd-88c4-4f67-be03-adc2eaf70a45.png",
+    "bytes": 1195942,
+    "sha256": "04fb79f978dda993ed214964347864c3858ee28ce34cd4a88062ce78e921900a",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "alphaBBox": [
+      0,
+      79,
+      1228,
+      1222
+    ],
+    "status": "candidate-not-installed",
+    "acquisition": "内置image_gen生成，原始提示词见prompts.json；按sourcePath原样复制",
+    "solidAlphaBBox": [
+      37,
+      220,
+      1224,
+      1091
+    ],
+    "opaqueBorderPixels": 0
+  },
+  {
+    "kind": "large",
+    "name": "军用保险柜",
+    "path": "game/art-source/chests/three-kinds-redraw-1016/large.png",
+    "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-7fc44fe3-de93-4700-b545-ee377fe8dc14.png",
+    "bytes": 1473828,
+    "sha256": "9b865282145a64910a1c26df3ed77ebfb21e232d475bc93ebd039aa3cd9ef1f2",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "alphaBBox": [
+      0,
+      30,
+      1238,
+      1254
+    ],
+    "status": "candidate-not-installed",
+    "acquisition": "内置image_gen生成，原始提示词见prompts.json；按sourcePath原样复制",
+    "solidAlphaBBox": [
+      166,
+      33,
+      1090,
+      1220
+    ],
+    "opaqueBorderPixels": 0
+  }
+]

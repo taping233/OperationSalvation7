@@ -1,0 +1,272 @@
+[
+  {
+    "path": "fx/frame-00.png",
+    "bytes": 54450,
+    "sha256": "6d6552228589649bd5719c1d9d3854190a1c1ce19aa4c1ebd5df6e270acd0788",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "fx/frame-00.webp",
+    "bytes": 37444,
+    "sha256": "01f2eee1c6959f0f92091cf8a0f96f523231c8c893bf0ed575812be3896ab252",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "fx/frame-01.png",
+    "bytes": 129169,
+    "sha256": "62476d4c5bb9cf4275faa4526f1c227f4de54417fc43e5c1e28c45ef25f151ef",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "fx/frame-01.webp",
+    "bytes": 90870,
+    "sha256": "ee722034118b816238bd75e8ac73ef58d3ee5687ea24ef1c0e5b555193e2918e",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "fx/frame-02.png",
+    "bytes": 269139,
+    "sha256": "6f0913b1fe81d6a41f6fdec21131bedc5d21b54a8eb98de484086926dc834da0",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "fx/frame-02.webp",
+    "bytes": 197186,
+    "sha256": "e7486a6d7c5b1c18e18c64432083649f1a19fc05720b153869928d1d54af7c92",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "fx/frame-03.png",
+    "bytes": 69249,
+    "sha256": "89cf965800c32f89e49deb92c20108ada9288b874748a649f68fa06fb8f2cc95",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "fx/frame-03.webp",
+    "bytes": 46866,
+    "sha256": "dcbcaba475d527fa35972c09af7c717f2581b61f101b5323ab7e3a844cb42988",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "fx/opening.png",
+    "bytes": 520588,
+    "sha256": "92612568865ed59fa8b056f22e217c67ad5467c057fc609608ad6b51dc79804e",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "fx/opening.webp",
+    "bytes": 371686,
+    "sha256": "92c038d787ef018237d578ff58e54f813531e2191604a8d679c44328611dd3fc",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "fx-sheet.png",
+    "bytes": 722527,
+    "sha256": "bf8c1f5896f5ee2c927640d1a195146cf881411862077037d6fd806cfc1e45c6",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "large/frame-00.png",
+    "bytes": 284683,
+    "sha256": "e1e190e1477d6f2a770e6297f75c992ff720c01da04f7eeda3083d803781f302",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "large/frame-00.webp",
+    "bytes": 199256,
+    "sha256": "13cf0284e0a1f93d3714fd8af33840c85408b5e424ad4f4dc29cec276c7a9d80",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "large/frame-01.png",
+    "bytes": 291544,
+    "sha256": "7eac10b9584471f4fba72970fa1f90237c680e4889bf00e33fb8a2a822085412",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "large/frame-01.webp",
+    "bytes": 204976,
+    "sha256": "4d8e8d57a98986eda8712eb877e9a3d6f693fd7441e265dc2b55ffa747d8578a",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "large/frame-02.png",
+    "bytes": 384067,
+    "sha256": "6fe373b4f56f6e36e0a3ca47fae1b1a4b19ea8b29e9763f7ac750eab0dc5d2dc",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "large/frame-02.webp",
+    "bytes": 272688,
+    "sha256": "dd0084eca1915e39be859ff53b13678e66e16d9b3d02b4f662d92cee968065da",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "large/frame-03.png",
+    "bytes": 380032,
+    "sha256": "428d1f7498d159372a33c8bda570abfe12022f45066ea6e3befb4e47d0ab073a",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "large/frame-03.webp",
+    "bytes": 269756,
+    "sha256": "9b1e43248c8d3e47843a903e6d719150fcd4c263dbf1ca4cbf0d27f52230e4cb",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "large/opening.png",
+    "bytes": 1333543,
+    "sha256": "b22b1bf7406f2ca31ec482c808eaeb675e9f54a2e839de6bd6ab2ac3d41bbb49",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "large/opening.webp",
+    "bytes": 946650,
+    "sha256": "77e5b328ce9c8b9140df60db1ed5af166a1376c99b9a28322b884e2fa91a6b7e",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "large-sheet.png",
+    "bytes": 1578346,
+    "sha256": "1a8533f650441bda89fccd0238e51b957b0713000fa7232ebfbad1ddc74744fc",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "medium/frame-00.png",
+    "bytes": 301556,
+    "sha256": "153ba7f614ad2c7c924cf4e91a04d5801591bab024dd033ccf0cd942f5369703",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "medium/frame-00.webp",
+    "bytes": 195656,
+    "sha256": "e8b9e6df5866fa0070826ebea30ce74df1aaf96d02c5ea86da956d14baff7074",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "medium/frame-01.png",
+    "bytes": 317976,
+    "sha256": "b156d97dc6a81105a17c3f85197632fc7d251a271f0ee3b5cee6d98781ed1810",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "medium/frame-01.webp",
+    "bytes": 207138,
+    "sha256": "73f78dba3f021cfd690fb8d883d76cc65908f14acd47d597edf1e8cba35f3cb3",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "medium/frame-02.png",
+    "bytes": 375894,
+    "sha256": "435e40ef79a7109d36f0efe3c0b7b982bad097e08aae3a8e3e08a5c2ccaf95e5",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "medium/frame-02.webp",
+    "bytes": 249302,
+    "sha256": "e7855b11569518790a4c83335e52dfb2d7b389dabbcc131953e7f94dd20639b7",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "medium/frame-03.png",
+    "bytes": 348191,
+    "sha256": "0cbd991075239a9cae41538a1af5d8f8c32d7f6d25571fcf98894f78faba7361",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "medium/frame-03.webp",
+    "bytes": 224342,
+    "sha256": "6a8df7fc91d6ac57007ec32afbd778dd2d66433155334959c0ee7047e28334fc",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "medium/opening.png",
+    "bytes": 1343568,
+    "sha256": "e41fde3db2bfc954af56f2d70aaa4c40957d93daa3d7c5b78fcf673162b3875e",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "medium/opening.webp",
+    "bytes": 875240,
+    "sha256": "eda566d3fea7662c64ddb537c13460abb97c8a0b87234eba5f05834e8a392a60",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "medium-sheet.png",
+    "bytes": 1189250,
+    "sha256": "db474f9022edd653a87b79e32c03ea3f40acd510529e5d6a2c3bd9947ed3d1b2",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "review-board.png",
+    "bytes": 1083685,
+    "sha256": "15c4d086cff0fa0be65701d2e34294e08547dc1ae01e9b4a0963d887600afcf1",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "small/frame-00.png",
+    "bytes": 276997,
+    "sha256": "539052f3d823cb8393f15fb54f6c06ff3522c0894a02b4f2a7e0f8f5e31c138e",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "small/frame-00.webp",
+    "bytes": 179456,
+    "sha256": "f4bc3b12a1d73a7ca28d57f49be6cd7f348bf00c39f0367c627b4efcfc36ace1",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "small/frame-01.png",
+    "bytes": 284942,
+    "sha256": "21ace2c70752f6e035ca8cb71dac688a93e7dca7b75779d60149e38e4f47ea3c",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "small/frame-01.webp",
+    "bytes": 185150,
+    "sha256": "c236d9e2c68a9089e4893d2ea352c4f119dea70e90d8173c889daf93d5581693",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "small/frame-02.png",
+    "bytes": 354285,
+    "sha256": "044f44b8a6cf84cabd1b0124751cf46427290d4625f7fa6787afd07f003e096c",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "small/frame-02.webp",
+    "bytes": 227368,
+    "sha256": "2dc92257e01a1e986c7ad783bfc63607c1021da024f010bc8ca9a49b6a1f71d7",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "small/frame-03.png",
+    "bytes": 355371,
+    "sha256": "fc12c4756a64214b3d7a9da6947857c66c8892fb82252133e828249c1907b6a5",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "small/frame-03.webp",
+    "bytes": 228602,
+    "sha256": "9060930ad9c5642089f790f120e11658a478643891749ee99ec7b4fbddd39425",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "small/opening.png",
+    "bytes": 1265716,
+    "sha256": "cca764fa06301aae06c0eb59be2465126b927249e294f467c47da308e206b88a",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "small/opening.webp",
+    "bytes": 819240,
+    "sha256": "6bc3fb2928691b85d478f9bd4040f97b6e637341bef87dc396026ee5800de014",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  },
+  {
+    "path": "small-sheet.png",
+    "bytes": 1506810,
+    "sha256": "40e5e732f0397549d3ea9b8970d493b7f964cd3c558b79de2c42ee6494358b72",
+    "acquisition": "Sheets: original image_gen output named in source-map.json; frames/animations: run export-frames.py; review-board: QA composition only."
+  }
+]

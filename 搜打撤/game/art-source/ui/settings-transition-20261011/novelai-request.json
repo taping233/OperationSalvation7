@@ -1,0 +1,18 @@
+{
+  "channel": "NovelAI draft then built-in imagegen finish",
+  "model": "nai-diffusion-4-5-full",
+  "parameters": {
+    "steps": 28,
+    "scale": 6.5,
+    "cfg_rescale": 0.0,
+    "sampler": "k_euler_ancestral",
+    "noise_schedule": "karras",
+    "variety_plus": true
+  },
+  "width": 1344,
+  "height": 768,
+  "seed": 101121438,
+  "prompt": "1.2::miv4t::, 0.8::quasarcake::\n\nNo humans. Front-facing close-up of two broad overlapping smoky blue-gray glass shutters in a winter expedition terminal. The shutters fill the whole image. Large matte charcoal metal planes frame the left and right outer edges. A single restrained diagonal join descends near the centre. A few broad hand-painted frosted ice planes cling to the upper-left and lower-right corners. One understated mechanical calibration disc is partially visible in the right outer third, formed from three large dark concentric planes and one short dull gold notch. Very sparse details, no tiny bolts or repeated markings.\n\nProduction artwork for a full-screen settings page transition in a painterly anime game. An opaque clean shutter texture that code will split into left and right halves and animate. No interface or typography baked into the painting.\n\nWide landscape 16:9, flat front view, no perspective tilt. Two complete large shutter planes cover every pixel, no holes, no scene visible through them. Middle third is quiet dark glass with a simple diagonal seam. Frost and calibration objects stay at the outside edges. Three or four large angular light and shadow masses, no busy decoration.\n\nCharcoal black, desaturated deep navy, cold gray-blue glass, a few paper-white frost brush marks and one small muted champagne-gold accent. Broad opaque painted color blocks, hard-edged shadows, low detail density, visible economical dry brush strokes. Restrained reflected winter light only along a few edges. Dark overall exposure, no bright central glow, no neon, no lens flare, no photorealistic materials.\n\nmasterpiece, best quality, painterly, sketch, visible brush strokes, loose hand-painted texture, broken edges, blocky volume modeling.\n\nA complete illustration with the freshness of a painted sketch, not an unfinished draft. Soft directional light reveals the planes of forms. Build volumes from confident planes of light and shadow with visible brush edges, while letting selected outer contours remain open. Use broad flowing paint masses, dry uneven strokes, and crisp small highlights appropriate to each material. Vary the brush size and edge sharpness between different materials. Preserve deliberate brush marks instead of smoothing every surface.",
+  "negativePrompt": "flat cel shading, smooth airbrush, no brush texture, clean closed lineart, fully rendered polished painting, plastic texture, waxy texture, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, human, person, girl, character, face, letters, numbers, logo, interface, buttons, icons, gears everywhere, many gears, intricate circuit lines, detailed machinery, tiny bolts, repeated markings, holes, transparency, checkerboard, bright centre, vivid neon, glowing rings, lens flare, photorealism, glossy 3d render, sprite sheet",
+  "briefZh": "设置转场：正视双幅深色玻璃闸片、宽面金属、边角概括冰霜、右外侧暗色校准圆盘；冷蓝灰与一点暖金，无人物文字。"
+}

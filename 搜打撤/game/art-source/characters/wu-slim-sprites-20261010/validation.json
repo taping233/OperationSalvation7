@@ -1,0 +1,319 @@
+{
+  "method": "equal-grid pixel crop; no synthetic pose deformation",
+  "actions": {
+    "idle": {
+      "frameSize": [
+        576,
+        560
+      ],
+      "sourceBounds": [
+        [
+          53,
+          48,
+          511,
+          513
+        ],
+        [
+          61,
+          48,
+          519,
+          513
+        ],
+        [
+          65,
+          48,
+          528,
+          513
+        ],
+        [
+          50,
+          48,
+          512,
+          512
+        ],
+        [
+          61,
+          48,
+          519,
+          512
+        ],
+        [
+          72,
+          48,
+          529,
+          512
+        ]
+      ],
+      "alphaCoverage": [
+        {
+          "clear": 224948,
+          "solid": 62629,
+          "pixels": 322560
+        },
+        {
+          "clear": 223698,
+          "solid": 62866,
+          "pixels": 322560
+        },
+        {
+          "clear": 229304,
+          "solid": 63418,
+          "pixels": 322560
+        },
+        {
+          "clear": 228952,
+          "solid": 62793,
+          "pixels": 322560
+        },
+        {
+          "clear": 229206,
+          "solid": 63005,
+          "pixels": 322560
+        },
+        {
+          "clear": 230343,
+          "solid": 62718,
+          "pixels": 322560
+        }
+      ],
+      "durationMs": 1560
+    },
+    "attack": {
+      "frameSize": [
+        576,
+        560
+      ],
+      "sourceBounds": [
+        [
+          63,
+          64,
+          508,
+          497
+        ],
+        [
+          101,
+          64,
+          481,
+          497
+        ],
+        [
+          91,
+          98,
+          511,
+          494
+        ],
+        [
+          66,
+          111,
+          560,
+          463
+        ],
+        [
+          94,
+          45,
+          523,
+          468
+        ],
+        [
+          71,
+          50,
+          512,
+          482
+        ]
+      ],
+      "alphaCoverage": [
+        {
+          "clear": 227514,
+          "solid": 56741,
+          "pixels": 322560
+        },
+        {
+          "clear": 238813,
+          "solid": 47631,
+          "pixels": 322560
+        },
+        {
+          "clear": 236183,
+          "solid": 49918,
+          "pixels": 322560
+        },
+        {
+          "clear": 235980,
+          "solid": 49412,
+          "pixels": 322560
+        },
+        {
+          "clear": 236712,
+          "solid": 52758,
+          "pixels": 322560
+        },
+        {
+          "clear": 228260,
+          "solid": 57549,
+          "pixels": 322560
+        }
+      ],
+      "durationMs": 600
+    },
+    "hurt": {
+      "frameSize": [
+        576,
+        560
+      ],
+      "sourceBounds": [
+        [
+          46,
+          21,
+          538,
+          540
+        ],
+        [
+          40,
+          57,
+          544,
+          544
+        ],
+        [
+          32,
+          57,
+          536,
+          544
+        ],
+        [
+          78,
+          40,
+          543,
+          518
+        ],
+        [
+          47,
+          32,
+          544,
+          522
+        ],
+        [
+          32,
+          32,
+          521,
+          523
+        ]
+      ],
+      "alphaCoverage": [
+        {
+          "clear": 200787,
+          "solid": 76415,
+          "pixels": 322560
+        },
+        {
+          "clear": 188660,
+          "solid": 75309,
+          "pixels": 322560
+        },
+        {
+          "clear": 205317,
+          "solid": 71841,
+          "pixels": 322560
+        },
+        {
+          "clear": 224196,
+          "solid": 64578,
+          "pixels": 322560
+        },
+        {
+          "clear": 210926,
+          "solid": 69918,
+          "pixels": 322560
+        },
+        {
+          "clear": 214375,
+          "solid": 70497,
+          "pixels": 322560
+        }
+      ],
+      "durationMs": 400
+    },
+    "death": {
+      "frameSize": [
+        576,
+        560
+      ],
+      "sourceBounds": [
+        [
+          60,
+          81,
+          515,
+          528
+        ],
+        [
+          93,
+          129,
+          518,
+          528
+        ],
+        [
+          119,
+          241,
+          519,
+          526
+        ],
+        [
+          50,
+          196,
+          521,
+          421
+        ],
+        [
+          52,
+          290,
+          521,
+          424
+        ],
+        [
+          52,
+          290,
+          523,
+          425
+        ]
+      ],
+      "alphaCoverage": [
+        {
+          "clear": 230736,
+          "solid": 54858,
+          "pixels": 322560
+        },
+        {
+          "clear": 235733,
+          "solid": 52667,
+          "pixels": 322560
+        },
+        {
+          "clear": 239878,
+          "solid": 48894,
+          "pixels": 322560
+        },
+        {
+          "clear": 242930,
+          "solid": 48566,
+          "pixels": 322560
+        },
+        {
+          "clear": 258647,
+          "solid": 35614,
+          "pixels": 322560
+        },
+        {
+          "clear": 262810,
+          "solid": 35637,
+          "pixels": 322560
+        }
+      ],
+      "durationMs": 880
+    }
+  },
+  "backgroundStatus": "candidate: in-browser checkerboard renders largely clear; low-alpha fringe remains, final edge cleanup not verified",
+  "endpointEquality": {
+    "attack": true,
+    "hurt": true,
+    "death": true
+  }
+}

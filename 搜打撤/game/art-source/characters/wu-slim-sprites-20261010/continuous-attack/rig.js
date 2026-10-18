@@ -1,0 +1,135 @@
+export const SIZE={width:768,height:768,padX:24,padY:144,fps:24,frames:33,durationMs:1375};
+export const REST={hip:[290,280],shoulder:[251,163],elbow:[224,232],wrist:[218,289]};
+export const WEAPON=[[165,266],[172,258],[183,266],[221,290],[229,296],[238,291],[249,294],[247,302],[504,473],[512,478],[504,482],[240,310],[245,320],[237,315],[228,331],[223,329],[231,306],[210,290],[170,272]];
+const UPPER=[[236,150],[264,151],[267,174],[264,185],[246,207],[251,220],[242,248],[220,250],[202,247],[188,232],[196,220],[206,197],[225,179],[230,161]];
+const LOWER=[[190,230],[223,219],[243,220],[260,244],[256,268],[239,276],[235,292],[232,305],[212,307],[207,297],[208,281],[198,272],[190,260],[183,247]];
+const SLEEVE=[[183,230],[223,219],[246,220],[260,246],[260,278],[255,304],[243,325],[211,327],[192,310],[182,286],[178,249]];
+const HAND=[[208,276],[219,273],[229,279],[234,290],[232,305],[218,306],[207,296],[206,284]];
+const KEYS=[
+ [0,0,0,0,0,0,0], [.08,0,-48,38,-.006,-1,2],
+ [.20,-12,-113,48,-.012,-2,3], [.30,-24,-111,52,-.012,-2,3],
+ // The forearm opens first; the upper arm follows after a short lead.
+ [.35,-24,-72,42,.006,0,3], [.46,-46,-29,50,.03,4,4],
+ [.56,-52,-8,60,.02,5,3], [.82,-16,8,6,.008,2,1], [1,0,0,0,0,0,0],
+];
+const rad=Math.PI/180;
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ease=t=>t*t*(3-2*t);
+function turn(point,pivot,angle){const x=point[0]-pivot[0],y=point[1]-pivot[1],c=Math.cos(angle),s=Math.sin(angle);return [pivot[0]+x*c-y*s,pivot[1]+x*s+y*c];}
+export function pose(phase){
+ const t=Math.max(0,Math.min(1,phase));let i=0;
+ while(i<KEYS.length-2&&t>KEYS[i+1][0])i++;
+ const a=KEYS[i],b=KEYS[i+1],q=ease((t-a[0])/(b[0]-a[0]));
+ const v=a.slice(1).map((n,j)=>lerp(n,b[j+1],q));
+ return {phase:t,upper:v[0]*rad,lower:v[1]*rad,wrist:v[2]*rad,lean:v[3],lunge:v[4],squat:v[5]};
+}
+export function world(point,p){const q=turn(point,REST.hip,p.lean);return [q[0]+p.lunge,q[1]+p.squat];}
+export function upperPoint(point,p){return world(turn(point,REST.shoulder,p.upper),p);}
+export function lowerPoint(point,p){return world(turn(turn(point,REST.elbow,p.lower),REST.shoulder,p.upper),p);}
+export function handPoint(point,p){return lowerPoint(turn(point,REST.wrist,p.wrist),p);}
+export function geometry(p){return {shoulder:world(REST.shoulder,p),elbow:upperPoint(REST.elbow,p),wrist:lowerPoint(REST.wrist,p),weapon:WEAPON.map(point=>handPoint(point,p))};}
+function canvas(){const c=document.createElement('canvas');c.width=576;c.height=560;return c;}
+function path(points){const p=new Path2D();points.forEach((v,i)=>i?p.lineTo(...v):p.moveTo(...v));p.closePath();return p;}
+function clip(image,points){const c=canvas(),ctx=c.getContext('2d');ctx.save();ctx.clip(path(points));ctx.drawImage(image,0,0);ctx.restore();return c;}
+function stripAttachedHair(part,original,replacement){
+ const n=576*560,a=part.data,o=original.data,r=replacement.data,candidate=new Uint8Array(n),seen=new Uint8Array(n),queue=[];
+ for(let p=0;p<n;p++){
+  const i=p*4;if(!a[i+3])continue;
+  const lo=Math.min(o[i],o[i+1],o[i+2]),hi=Math.max(o[i],o[i+1],o[i+2]);
+  candidate[p]=lo>118&&hi-lo<38&&o[i]-o[i+2]<11?1:0;
+  const match=r[i+3]>96&&Math.min(r[i],r[i+1],r[i+2])>145&&r[i]-r[i+2]<11&&Math.max(Math.abs(o[i]-r[i]),Math.abs(o[i+1]-r[i+1]),Math.abs(o[i+2]-r[i+2]))<55;
+  const x=p%576,y=Math.floor(p/576);
+  const boundary=x===0||y===0||x===575||y===559||a[i-4+3]<32||a[i+4+3]<32||a[i-576*4+3]<32||a[i+576*4+3]<32;
+  if(candidate[p]&&lo>150&&match&&boundary){queue.push(p);seen[p]=1;}
+ }
+ for(let k=0;k<queue.length;k++){
+  const p=queue[k];a[p*4+3]=0;
+  for(const q of [p-1,p+1,p-576,p+576]){
+   if(q>=0&&q<n&&!seen[q]&&candidate[q]){seen[q]=1;queue.push(q);}
+  }
+ }
+}
+function layers(image,repair){
+ const source=canvas(),ctx=source.getContext('2d');ctx.drawImage(image,0,0);
+ const original=ctx.getImageData(0,0,576,560);
+ const upper=clip(source,UPPER),lower=clip(source,SLEEVE),hand=clip(source,HAND),weapon=clip(source,WEAPON);
+ const uc=upper.getContext('2d'),lc=lower.getContext('2d'),hc=hand.getContext('2d'),wc=weapon.getContext('2d');
+ const u=uc.getImageData(0,0,576,560),l=lc.getImageData(0,0,576,560),h=hc.getImageData(0,0,576,560),w=wc.getImageData(0,0,576,560);
+ const removal=canvas(),rc=removal.getContext('2d');rc.fillStyle='white';rc.fill(path(WEAPON));rc.strokeStyle='white';rc.lineWidth=6;rc.stroke(path(WEAPON));
+ const wm=rc.getImageData(0,0,576,560);
+ const patched=canvas(),pc=patched.getContext('2d');
+ // Align only the occluded repair pixels; retain the selected portrait elsewhere.
+ pc.setTransform(.45,0,0,.458,6,1);pc.drawImage(repair,0,0);pc.setTransform(1,0,0,1,0,0);
+ const replacement=pc.getImageData(0,0,576,560),body=ctx.getImageData(0,0,576,560);
+ stripAttachedHair(u,original,replacement);stripAttachedHair(l,original,replacement);stripAttachedHair(w,original,replacement);
+ for(let i=0;i<original.data.length;i+=4){
+  const r=original.data[i],g=original.data[i+1],b=original.data[i+2],x=(i/4)%576,y=Math.floor(i/4/576);
+  const metal=Math.max(r,g,b)-Math.min(r,g,b)<17&&r-b<11;
+  if(!metal)w.data[i+3]=0;
+  // Exclude pale back-hair at the outer sleeve boundary.
+  const hair=(x<237&&y<180&&r+g+b>410&&r-b<8)||(x<198&&r+g+b>450&&Math.abs(r-b)<9);
+  if(hair){u.data[i+3]=0;l.data[i+3]=0;}
+  if(b-r>30&&b-g>15){u.data[i+3]=0;l.data[i+3]=0;h.data[i+3]=0;w.data[i+3]=0;}
+  const skin=r>130&&r-b>10&&r-g>2;
+  const cuff=y<283&&Math.max(r,g,b)<125&&original.data[i+3]>128;
+  if(!skin&&!cuff)h.data[i+3]=0;
+  if(w.data[i+3]>0){u.data[i+3]=0;l.data[i+3]=0;h.data[i+3]=0;}
+  if(h.data[i+3]>0)l.data[i+3]=0;
+  const removed=Math.max(u.data[i+3],l.data[i+3],h.data[i+3],wm.data[i+3]);
+  if(removed>0){
+   const ratio=original.data[i+3]?Math.min(1,removed/original.data[i+3]):0;
+   for(let k=0;k<4;k++)body.data[i+k]=Math.round(lerp(original.data[i+k],replacement.data[i+k],ratio));
+  }
+ }
+ uc.putImageData(u,0,0);lc.putImageData(l,0,0);hc.putImageData(h,0,0);wc.putImageData(w,0,0);ctx.putImageData(body,0,0);
+ return {body:source,upper,lower,hand,weapon};
+}
+const BODY_SHADER=`
+precision highp float;varying vec2 uv;uniform sampler2D image;uniform vec3 body;uniform float trail;
+float bump(float v,float c,float r){float t=abs(v-c)/r;return t>=1.?0.:pow(1.-t*t,2.);}
+vec2 move(vec2 p){
+ float weight=1.-smoothstep(320.,485.,p.y);
+ vec2 v=p-vec2(290.,280.);float c=cos(body.x),s=sin(body.x);
+ vec2 d=(vec2(v.x*c-v.y*s,v.x*s+v.y*c)-v+body.yz)*weight;
+ d.x-=trail*bump(p.x,135.,105.)*bump(p.y,267.,122.);
+ d.x-=2.*body.y*bump(p.x,415.,35.)*bump(p.y,280.,65.)*.2;
+ if(p.y>485.)d=vec2(0.);return d;
+}
+void main(){vec2 p=vec2(uv.x,1.-uv.y)*vec2(576.,560.);vec2 q=p-move(p);q=p-move(q);gl_FragColor=texture2D(image,vec2(q.x/576.,1.-q.y/560.));}`;
+function bodyRenderer(source){
+ const out=canvas(),gl=out.getContext('webgl',{alpha:true,premultipliedAlpha:true,preserveDrawingBuffer:true,antialias:false});
+ if(!gl)throw new Error('当前内置浏览器未提供WebGL');
+ const compile=(kind,code)=>{const s=gl.createShader(kind);gl.shaderSource(s,code);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s;};
+ const program=gl.createProgram();gl.attachShader(program,compile(gl.VERTEX_SHADER,'attribute vec2 position; varying vec2 uv;void main(){gl_Position=vec4(position,0.,1.);uv=(position+1.)*.5;}'));gl.attachShader(program,compile(gl.FRAGMENT_SHADER,BODY_SHADER));gl.linkProgram(program);
+ if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));gl.useProgram(program);
+ gl.bindBuffer(gl.ARRAY_BUFFER,gl.createBuffer());gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+ const a=gl.getAttribLocation(program,'position');gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
+ gl.bindTexture(gl.TEXTURE_2D,gl.createTexture());gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,source);
+ for(const name of [gl.TEXTURE_MIN_FILTER,gl.TEXTURE_MAG_FILTER])gl.texParameteri(gl.TEXTURE_2D,name,gl.LINEAR);
+ for(const name of [gl.TEXTURE_WRAP_S,gl.TEXTURE_WRAP_T])gl.texParameteri(gl.TEXTURE_2D,name,gl.CLAMP_TO_EDGE);
+ const body=gl.getUniformLocation(program,'body'),trail=gl.getUniformLocation(program,'trail');gl.viewport(0,0,576,560);
+ return {canvas:out,render(p){gl.uniform3f(body,p.lean,p.lunge,p.squat);gl.uniform1f(trail,6*Math.sin(p.phase*Math.PI)*Math.sin(p.phase*Math.PI));gl.drawArrays(gl.TRIANGLES,0,6);}};
+}
+export function createAttackRenderer(output,image,repair,neutral){
+ output.width=SIZE.width;output.height=SIZE.height;
+ const parts=layers(image,repair),body=bodyRenderer(parts.body),ctx=output.getContext('2d');
+ function parent(p){ctx.translate(REST.hip[0]+p.lunge,REST.hip[1]+p.squat);ctx.rotate(p.lean);ctx.translate(-REST.hip[0],-REST.hip[1]);}
+ function upper(p){ctx.translate(...REST.shoulder);ctx.rotate(p.upper);ctx.translate(-REST.shoulder[0],-REST.shoulder[1]);}
+ function lower(p){ctx.translate(...REST.elbow);ctx.rotate(p.lower);ctx.translate(-REST.elbow[0],-REST.elbow[1]);}
+ function wrist(p){ctx.translate(...REST.wrist);ctx.rotate(p.wrist);ctx.translate(-REST.wrist[0],-REST.wrist[1]);}
+ function paintPart(texture,p,isLower,isHand=false){ctx.save();parent(p);upper(p);if(isLower)lower(p);if(isHand)wrist(p);ctx.drawImage(texture,0,0);ctx.restore();}
+ const render=function render(phase,debug=false){
+  const p=pose(phase);ctx.clearRect(0,0,SIZE.width,SIZE.height);ctx.save();ctx.translate(SIZE.padX,SIZE.padY);
+  if(phase<=0||phase>=1){ctx.drawImage(neutral,0,0);ctx.restore();return p;}
+  body.render(p);ctx.drawImage(body.canvas,0,0);
+  paintPart(parts.upper,p,false);paintPart(parts.lower,p,true);paintPart(parts.hand,p,true,true);
+  paintPart(parts.weapon,p,true,true);
+  // Preserve the raster of the grounded sole band exactly.
+  ctx.clearRect(-SIZE.padX,490,SIZE.width,SIZE.height-490-SIZE.padY);
+  ctx.drawImage(neutral,0,490,576,70,0,490,576,70);
+  if(debug){const g=geometry(p);ctx.save();ctx.strokeStyle='#72eab4';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(...g.shoulder);ctx.lineTo(...g.elbow);ctx.lineTo(...g.wrist);ctx.stroke();for(const q of [g.shoulder,g.elbow,g.wrist]){ctx.beginPath();ctx.arc(...q,4,0,Math.PI*2);ctx.stroke();}ctx.restore();}
+  ctx.restore();return p;
+ };
+ render.parts=parts;
+ return render;
+}

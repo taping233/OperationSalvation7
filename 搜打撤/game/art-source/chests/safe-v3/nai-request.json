@@ -1,0 +1,59 @@
+{
+  "status": "generated",
+  "request": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\nHand-painted anime prop illustration. Opaque economical color masses, broad directional curved or elongated strokes, firm handmade edges, connected main shadow shapes, selected irregular overlaps surrounded by quiet surfaces. Readable simply painted mechanical structure. Muted coherent cool and warm colors with concentrated vivid accents. No dense outlines, no crosshatching, no global grain, no glossy 3D, no uniform vector fill, no triangular mosaics. no text.\n\nno humans. A heavy freestanding steel SAFE, upright square silhouette, thick graphite-blue body, broad ivory front door bevel, large circular brass combination dial, short three-spoke locking wheel, two thick hinges on LEFT edge of front door. One striking amber lock accent. SIX consecutive opening animation frames of the same safe. First closed, second unlocking, third narrow vertical light gap, fourth front door swinging LEFT to 40 degrees, fifth front door wide open 100 degrees with a bright white-gold treasure eruption, sixth door stays wide open with warm luminous contents.\n\nSix equally spaced animation cells, 3 columns by 2 rows, same fixed camera and same safe body.\n\nAlmost front view slightly from above and right. Complete object in each cell with ample margin. Fixed body and baseline across frames. Safe door pivots to LEFT, never opens upward. Uniform dark neutral background.\n\nMatte hand-painted metal, broad cool gray shadow shapes, a few warm opaque edge strokes, simple appealing bold silhouette. Treasure light confined to interior and local rays.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1474910215,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, girl, boy, person, treasure chest, suitcase, top lid, open top, canvas texture, hatch marks, scenery, checkerboard",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nHand-painted anime prop illustration. Opaque economical color masses, broad directional curved or elongated strokes, firm handmade edges, connected main shadow shapes, selected irregular overlaps surrounded by quiet surfaces. Readable simply painted mechanical structure. Muted coherent cool and warm colors with concentrated vivid accents. No dense outlines, no crosshatching, no global grain, no glossy 3D, no uniform vector fill, no triangular mosaics. no text.\n\nno humans. A heavy freestanding steel SAFE, upright square silhouette, thick graphite-blue body, broad ivory front door bevel, large circular brass combination dial, short three-spoke locking wheel, two thick hinges on LEFT edge of front door. One striking amber lock accent. SIX consecutive opening animation frames of the same safe. First closed, second unlocking, third narrow vertical light gap, fourth front door swinging LEFT to 40 degrees, fifth front door wide open 100 degrees with a bright white-gold treasure eruption, sixth door stays wide open with warm luminous contents.\n\nSix equally spaced animation cells, 3 columns by 2 rows, same fixed camera and same safe body.\n\nAlmost front view slightly from above and right. Complete object in each cell with ample margin. Fixed body and baseline across frames. Safe door pivots to LEFT, never opens upward. Uniform dark neutral background.\n\nMatte hand-painted metal, broad cool gray shadow shapes, a few warm opaque edge strokes, simple appealing bold silhouette. Treasure light confined to interior and local rays.",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, girl, boy, person, treasure chest, suitcase, top lid, open top, canvas texture, hatch marks, scenery, checkerboard",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "game\\art-source\\chests\\safe-v3\\safe-nai.png",
+  "style_source": "docs/production/art/ART-STYLE-V1.md",
+  "style_override": "Replace conflicting shared STYLE_BLOCK with prop-specific v1.0 painting grammar; artist chain unchanged.",
+  "direction": "Owner: safe with front door opening, replacing rejected top-lid chest.",
+  "sha256": "ae1c519fef1c95464eb513b4ed6dedf1f12e362701f540d65ecf62db71c34921"
+}

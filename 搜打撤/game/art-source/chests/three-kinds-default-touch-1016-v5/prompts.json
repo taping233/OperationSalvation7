@@ -1,0 +1,40 @@
+{
+  "tool": "built-in image_gen",
+  "transparent_background": true,
+  "defaultStyleSource": "docs/production/art/ART-STYLE-V1.md",
+  "jobs": [
+    {
+      "key": "small",
+      "name": "小型物资箱",
+      "prompt": "图1是唯一编辑目标：现有的透明宝箱。图2、图3只作为游戏默认v1.0手绘块面画法参考，绝不带入人物、服装、配色、背景或饰物。请在图1上加入一点这种默认画风，轻量混合，不全面改画。保持原箱子大约八成的视觉设计：轮廓、比例、视角、三四组主要色面、盖沿、卡扣/锁芯、压线及原配色都要保留。只在箱盖转折、正侧面交界和少数金属闭锁部位加几笔不透明宽弧形或长条覆盖笔，主要明暗边界更像手绘自然落笔，少数笔触末端有不规则覆盖与收尖。大片内部仍安静，不把箱面画满颗粒或碎笔，不把箱子拆成三角马赛克。用灰化综合色与少数较鲜的冷暖笔触表现原材质，保留颜色层级。把连续光滑的塑料式高光轻微打断成两三段宽笔亮面；不新增做旧划痕，不大幅增加对比或饱和度。细节仍清楚，手绘感只在结构转折处出现。原开口小亮点保留。必须是独立宝箱，箱外全部是真alpha0透明，无暗圆、黑底、地面、投影、光雾、文字、人物或新装饰。整只箱体完整、不裁切。",
+      "source": "D:/素材/代号柒/搜打撤/game/art-source/chests/three-kinds-node-style-1016-v3/small.png",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/art-source/chests/three-kinds-node-style-1016-v3/small.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png"
+      ]
+    },
+    {
+      "key": "medium",
+      "name": "密封物资箱",
+      "prompt": "图1是唯一编辑目标：现有的透明宝箱。图2、图3只作为游戏默认v1.0手绘块面画法参考，绝不带入人物、服装、配色、背景或饰物。请在图1上加入一点这种默认画风，轻量混合，不全面改画。保持原箱子大约八成的视觉设计：轮廓、比例、视角、三四组主要色面、盖沿、卡扣/锁芯、压线及原配色都要保留。只在箱盖转折、正侧面交界和少数金属闭锁部位加几笔不透明宽弧形或长条覆盖笔，主要明暗边界更像手绘自然落笔，少数笔触末端有不规则覆盖与收尖。大片内部仍安静，不把箱面画满颗粒或碎笔，不把箱子拆成三角马赛克。用灰化综合色与少数较鲜的冷暖笔触表现原材质，保留颜色层级。把连续光滑的塑料式高光轻微打断成两三段宽笔亮面；不新增做旧划痕，不大幅增加对比或饱和度。细节仍清楚，手绘感只在结构转折处出现。原开口小亮点保留。必须是独立宝箱，箱外全部是真alpha0透明，无暗圆、黑底、地面、投影、光雾、文字、人物或新装饰。整只箱体完整、不裁切。",
+      "source": "D:/素材/代号柒/搜打撤/game/art-source/chests/three-kinds-node-style-1016-v3/medium.png",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/art-source/chests/three-kinds-node-style-1016-v3/medium.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png"
+      ]
+    },
+    {
+      "key": "large",
+      "name": "军用保险柜",
+      "prompt": "图1是唯一编辑目标：现有的透明宝箱。图2、图3只作为游戏默认v1.0手绘块面画法参考，绝不带入人物、服装、配色、背景或饰物。请在图1上加入一点这种默认画风，轻量混合，不全面改画。保持原箱子大约八成的视觉设计：轮廓、比例、视角、三四组主要色面、盖沿、卡扣/锁芯、压线及原配色都要保留。只在箱盖转折、正侧面交界和少数金属闭锁部位加几笔不透明宽弧形或长条覆盖笔，主要明暗边界更像手绘自然落笔，少数笔触末端有不规则覆盖与收尖。大片内部仍安静，不把箱面画满颗粒或碎笔，不把箱子拆成三角马赛克。用灰化综合色与少数较鲜的冷暖笔触表现原材质，保留颜色层级。把连续光滑的塑料式高光轻微打断成两三段宽笔亮面；不新增做旧划痕，不大幅增加对比或饱和度。细节仍清楚，手绘感只在结构转折处出现。原开口小亮点保留。必须是独立宝箱，箱外全部是真alpha0透明，无暗圆、黑底、地面、投影、光雾、文字、人物或新装饰。整只箱体完整、不裁切。",
+      "source": "D:/素材/代号柒/搜打撤/game/art-source/chests/three-kinds-node-style-1016-v3/large.png",
+      "references": [
+        "D:/素材/代号柒/搜打撤/game/art-source/chests/three-kinds-node-style-1016-v3/large.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png"
+      ]
+    }
+  ]
+}

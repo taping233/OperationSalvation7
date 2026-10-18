@@ -1,0 +1,83 @@
+{
+  "character": "changwuyu",
+  "animation": "hurt",
+  "texture": "sheet.webp",
+  "frameWidth": 768,
+  "frameHeight": 512,
+  "columns": 5,
+  "rows": 4,
+  "poseSlots": 19,
+  "sequence": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "durationsMs": [
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42,
+    41,
+    42,
+    42
+  ],
+  "durationMs": 792,
+  "sampleRate": 24,
+  "loop": false,
+  "firstFrame": 0,
+  "lastFrame": 18,
+  "noFireball": true,
+  "noStaff": true,
+  "phases": [
+    {
+      "name": "待机起点",
+      "start": 0,
+      "end": 0
+    },
+    {
+      "name": "受击后仰",
+      "start": 1,
+      "end": 4
+    },
+    {
+      "name": "逐渐回稳",
+      "start": 5,
+      "end": 17
+    },
+    {
+      "name": "回到待机",
+      "start": 18,
+      "end": 18
+    }
+  ],
+  "method": "same accepted idle drawing; bounded 8px upper-body recoil and 2px settle baked continuously; no pose redraw",
+  "endpointSource": "../idle/frames/idle-000.png"
+}

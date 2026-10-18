@@ -1,0 +1,27 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>常无欲 · 四动作 Sprite</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#141b26;color:#e7edf8;font:16px/1.6 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:22px}h1{font-size:23px;margin:0 0 6px}p{margin:0 0 12px;color:#afbbd0}.stage{background:radial-gradient(ellipse at 50% 70%,#354255,#1b2431 65%);border:1px solid #40516a;border-radius:12px;overflow:hidden}.stage canvas{display:block;width:auto;max-width:100%;height:auto;max-height:53vh;margin:auto}nav{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}button,a{background:#273750;color:#e7edf8;border:1px solid #526984;border-radius:6px;padding:6px 11px;text-decoration:none;font:inherit}button{cursor:pointer}button:disabled{opacity:.45}output{display:block;color:#adbfda}.light .stage{background:#bbc5d1}label{display:flex;gap:10px;align-items:center}input{flex:1}.note{font-size:14px}
+</style>
+<main><h1>常无欲 · 四动作</h1><p>胸腹呼吸、角色自身左手挥动、连续受击回稳（约0.8秒）、分阶段侧身倒地。无火球、无杖。</p>
+<div class="stage"><canvas width="768" height="512" aria-label="常无欲四动作逐帧动画"></canvas></div>
+<nav><button id="idle" disabled>待机</button><button id="attack" disabled>左手挥动</button><button id="hurt" disabled>受击</button><button id="death" disabled>死亡倒地</button><button id="suite" disabled>全套连播</button></nav>
+<nav><button id="pause" disabled>暂停</button><button id="first" disabled>当前动作首帧</button><button id="last" disabled>当前动作尾帧</button><button id="bg">切换浅色背景</button></nav>
+<label>动作进度<input id="timeline" aria-label="动作进度" type="range" min="0" max="71" value="0" disabled></label><output>正在加载四组帧图…</output>
+<p class="note">攻击和受击首尾复用待机初始帧；死亡从同一帧起步，最后保持倒地。</p>
+<nav><a id="texture" href="idle/sheet.webp" download>当前帧图</a><a id="config" href="idle/sprite.json" download>当前动作配置</a><a href="README.md">素材说明</a></nav></main>
+<script type="module">
+const keys=['idle','attack','hurt','death'],names={idle:'待机',attack:'左手挥动',hurt:'受击',death:'死亡倒地'};
+const buttons=Object.fromEntries([...keys,'suite','pause','first','last','bg'].map(id=>[id,document.querySelector('#'+id)]));const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),status=document.querySelector('output'),timeline=document.querySelector('#timeline');buttons.bg.onclick=()=>document.body.classList.toggle('light');
+try{
+const specs={},sheets={};await Promise.all(keys.map(async key=>{const spec=await fetch(key+'/sprite.json?v=motion-review-v4').then(r=>{if(!r.ok)throw Error(names[key]+'配置加载失败');return r.json()});specs[key]=spec;const img=new Image();img.src=key+'/'+spec.texture+'?v=motion-review-v4';await img.decode();sheets[key]=img;}));
+const makeSteps=key=>specs[key].sequence.map((frame,i)=>({key,frame,ms:specs[key].durationsMs[i],step:i,phase:specs[key].phases.find(p=>i>=p.start&&i<=p.end).name}));
+const bank=Object.fromEntries(keys.map(key=>[key,makeSteps(key)]));const suite=[...bank.idle,...bank.attack,...bank.idle.slice(0,24),...bank.hurt,...bank.idle.slice(0,24),...bank.death];
+let selected='idle',schedule=bank.idle,index=0,elapsed=0,repeat=true,active=!matchMedia('(prefers-reduced-motion: reduce)').matches,lastTime=performance.now();
+function draw(){const item=schedule[index],spec=specs[item.key];ctx.clearRect(0,0,768,512);ctx.drawImage(sheets[item.key],(item.frame%spec.columns)*768,Math.floor(item.frame/spec.columns)*512,768,512,0,0,768,512);selected=item.key;canvas.dataset.action=selected;canvas.dataset.frame=item.frame;canvas.dataset.phase=item.phase;timeline.max=spec.sequence.length-1;timeline.value=item.step;document.querySelector('#texture').href=selected+'/'+spec.texture;document.querySelector('#config').href=selected+'/sprite.json';status.textContent=`${active?'播放中':'已暂停'} · ${names[selected]} · ${item.phase} · 第 ${item.frame+1} 帧${selected==='death'&&!active&&item.frame===spec.lastFrame?' · 保持倒地':''}`;buttons.pause.textContent=active?'暂停':'继续';}
+function start(key){selected=key;schedule=bank[key];index=0;elapsed=0;repeat=key==='idle';active=true;lastTime=performance.now();draw();}
+function show(item){schedule=[item];index=0;elapsed=0;repeat=false;active=false;draw();}
+function tick(now){const delta=now-lastTime;lastTime=now;if(active&&!document.hidden){elapsed+=delta;while(active&&elapsed>=schedule[index].ms){elapsed-=schedule[index].ms;if(index===schedule.length-1){if(repeat)index=0;else active=false;}else index++;draw();}}requestAnimationFrame(tick);}
+for(const key of keys)buttons[key].onclick=()=>start(key);buttons.suite.onclick=()=>{schedule=suite;index=0;elapsed=0;repeat=false;active=true;lastTime=performance.now();draw();};buttons.pause.onclick=()=>{active=!active;lastTime=performance.now();draw();};buttons.first.onclick=()=>show(bank[selected][0]);buttons.last.onclick=()=>show(bank[selected][bank[selected].length-1]);timeline.oninput=()=>show(bank[selected][Number(timeline.value)]);document.addEventListener('visibilitychange',()=>lastTime=performance.now());for(const button of Object.values(buttons))button.disabled=false;timeline.disabled=false;draw();requestAnimationFrame(tick);
+}catch(error){status.textContent='加载失败：'+error.message;console.error(error);}
+</script></html>

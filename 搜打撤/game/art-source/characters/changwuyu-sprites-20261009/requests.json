@@ -1,0 +1,70 @@
+{
+  "status": "implemented-unverified-per-user",
+  "scope": [
+    "idle",
+    "attack",
+    "hurt",
+    "death"
+  ],
+  "userCorrection": "无火球；角色自身左手（画面右侧扶镜手）挥动；受击约0.8秒；完成后逐帧自审",
+  "base": {
+    "prompt": "Create ONE full-body transparent battle-ready character image of CHANGWUYU. Reference 1 is EXACT CHARACTER IDENTITY (male mage); reference 2 is ONLY the economical painterly anime STYLE, never use reference 2's female identity, clothes, goggles or sword. Changwuyu: elegant slender MALE elf mage, pale skin, yellow/golden eyes, pointed ears, thin round metal eyeglasses, silver-gray long hair tied in a LOW bun behind head, two simple long straight sidelocks. A large BLACK wide-brim witch hat with a bent pointed tip and PURPLE underside. Black HIGH-COLLAR long robe/cape down to ankles, PURPLE lining, minimal GOLD edging, black gloves and black ankle/military boots. White feather plus blue sapphire in small gold brooch on LEFT chest (not on hat). NO STAFF, no wand, no sword. Battle body and eyes face SCREEN RIGHT in a gentle three-quarter SIDE view, calm male face, right gloved hand near the eyeglass bridge, left gloved hand relaxed near waist, feet modestly apart and stable, no dramatic lunge. Keep only a SMALL solid black ink-cloud companion just behind the shoulder on screen-left, compact and clearly readable. NO fire orb, NO fireball or flame, NO casting glow or magical projectile. Match exact clothing construction/hat/face from reference 1 while greatly simplifying detail: broad angular opaque color blocks, economical hand-painted anime edges, hard-edged light and shadow planes, only 3-5 large robe fold masses, simple straight hair shapes, no dense wrinkles, fine trim patterns or photorealistic textures. Same level of simplification as Wu battle sprite. Full body hat tip, boots and compact cloud entirely in the landscape 1536x1024 canvas, generous transparent padding 8% on all sides, the whole group centered; reserve right-side room for future casting. GENUINELY transparent RGBA background; no white backdrop, ground, shadow, smoke backdrop, glow halo, text, watermarks or grid. The purple lining/gold trim and white feather-blue gem are the only clothing accent colors. This image will be the immutable FIRST FRAME of idle, attack, hurt and death.",
+    "references": [
+      "game/assets/portraits/full/changwuyu.webp",
+      "C:/Users/太平/.codex/skills/artifact-template-wu/assets/reference.png"
+    ],
+    "transparent_background": true,
+    "status": "generated on 2026-10-10; base.png"
+  },
+  "actions": [
+    {
+      "name": "idle",
+      "dependency": "base",
+      "method": "same standard as Wu: accepted base -> 72 continuous breathing samples at 24fps over 3s, no independent hair/cloud wind"
+    },
+    {
+      "name": "attack",
+      "dependency": "base",
+      "prompt": "Same exact Changwuyu identity and economical painterly anime style as the new approved baseline; male, yellow eyes, round thin glasses, elf ears, silver-gray LOW bun and simple straight sidelocks, black bent-tip wide-brim witch hat with purple underside, black high-collar robe with purple lining and minimal gold trim, black gloves/boots, white feather-blue sapphire LEFT chest brooch. NO staff, no wand, NO FIREBALL, NO flame/projectile or casting glow. Whole character and compact existing black-cloud companion in every cell with transparent padding, stable camera and body proportions; no text or labels. EIGHT consecutive full-body keyposes, two columns x four rows. Ready baseline; small arm pullback and torso coil; RIGHT hand accelerates in a smooth outward gesture; open gloved palm and arm sweep to SCREEN RIGHT with weight transfer; follow-through; retract; settle; ready again. Gesture only, no effects. Export replaces first and final PNG with the exact baseline."
+    },
+    {
+      "name": "hurt",
+      "dependency": "base",
+      "prompt": "Same exact Changwuyu identity and economical painterly anime style as the new approved baseline; male, yellow eyes, round thin glasses, elf ears, silver-gray LOW bun and simple straight sidelocks, black bent-tip wide-brim witch hat with purple underside, black high-collar robe with purple lining and minimal gold trim, black gloves/boots, white feather-blue sapphire LEFT chest brooch. NO staff, no wand, NO FIREBALL, NO flame/projectile or casting glow. Whole character and compact existing black-cloud companion in every cell with transparent padding, stable camera and body proportions; no text or labels. FOUR keyposes, two columns x two rows: ready; short backward upper-body recoil from a hit from the right, narrowed eyes and inward guarding hand; brace/recover; ready. Preserve round glasses and hat, don't slide feet. Export replaces first/final PNG with exact baseline."
+    },
+    {
+      "name": "death",
+      "dependency": "base",
+      "prompt": "Same exact Changwuyu identity and economical painterly anime style as the new approved baseline; male, yellow eyes, round thin glasses, elf ears, silver-gray LOW bun and simple straight sidelocks, black bent-tip wide-brim witch hat with purple underside, black high-collar robe with purple lining and minimal gold trim, black gloves/boots, white feather-blue sapphire LEFT chest brooch. NO staff, no wand, NO FIREBALL, NO flame/projectile or casting glow. Whole character and compact existing black-cloud companion in every cell with transparent padding, stable camera and body proportions; no text or labels. EIGHT keyposes, two columns x four rows: ready; strength leaves body; knees buckle; one knee and free hand touch floor; hip lands to left; torso follows softly down; settled lying on left side; identical fallen endpoint. Long robe folds coherently, boots and hat remain complete; compact black cloud fades away during fall, no flame. Export exact baseline first PNG, final two PNG identical fallen pose, loop false and holdLastFrame true."
+    }
+  ],
+  "checks": [
+    "exact PNG byte/rgba equality for attack/hurt endpoints and all starting frames",
+    "transparent complete silhouettes with margin",
+    "consistent canvas/scale/ground",
+    "visible atlas cells match independent frames",
+    "24fps timeline sums",
+    "current-window Codex built-in browser real controls and combined transitions; no external browser"
+  ],
+  "fallback": {
+    "apiKeyConfigured": false,
+    "explicitChoiceRequired": true,
+    "selected": false
+  },
+  "selectedChannel": "built-in imagegen",
+  "userChannelDecision": "继续使用内置生图通道",
+  "finalInputs": {
+    "attack": "attack/anatomical-left-source.png",
+    "hurt": "hurt/source.png",
+    "death": "death/source.png"
+  },
+  "anatomicalSide": "LEFT is the face-level arm on screen-right; RIGHT is the waist-level hand",
+  "runtime": "game/assets/portraits/frames/changwuyu/sprite-v1",
+  "checksAfterInstall": "老板要求停止检查，未新增测试或实页复验",
+  "currentMethods": {
+    "idle": "3px chest/abdomen breathing; head/hat/cloud/feet fixed",
+    "attack": "anatomical-left arm corridor plus cleaned hat/face plate",
+    "hurt": "19 continuous same-image recoil frames, 792ms",
+    "death": "new collapse poses, 1167ms, held final frame"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "frames": 72,
+  "durationMs": 3000,
+  "fixedLowerBody": true,
+  "headAndHatFixed": true,
+  "leftCloudRegionFixed": true,
+  "breathMaxPx": 3,
+  "uniqueRasterFrames": 37,
+  "neutralSha256": "30c12759545b1fc4621ea320020ec89f700b30fb08879b24d68511e98c508526",
+  "neutralBounds": [
+    246,
+    21,
+    544,
+    490
+  ]
+}

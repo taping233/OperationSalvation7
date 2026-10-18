@@ -1,0 +1,38 @@
+{
+  "status": "candidate",
+  "character": "wu",
+  "animation": "idle",
+  "frameWidth": 576,
+  "frameHeight": 560,
+  "frameCount": 6,
+  "sequence": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "durationsMs": [
+    240,
+    260,
+    300,
+    260,
+    260,
+    240
+  ],
+  "durationMs": 1560,
+  "loop": true,
+  "holdLastFrame": false,
+  "sourceSheet": "../idle-source.png",
+  "columns": 3,
+  "rows": 2,
+  "frames": [
+    "idle-000.webp",
+    "idle-001.webp",
+    "idle-002.webp",
+    "idle-003.webp",
+    "idle-004.webp",
+    "idle-005.webp"
+  ]
+}

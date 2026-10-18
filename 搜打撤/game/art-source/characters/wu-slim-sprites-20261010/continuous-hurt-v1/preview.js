@@ -1,0 +1,21 @@
+import {createHurtRenderer,SIZE,pose,geometry} from './rig.js';
+import {zip} from '../continuous-idle/zip.js';
+const load=async url=>{const im=new Image();im.src=url;await im.decode();return im;};
+const stage=document.querySelector('#stage'),status=document.querySelector('#status');
+const [base,repair,neutral]=await Promise.all(['../continuous-attack-v7/base.png','../continuous-attack-v7/body-repair.png','../continuous-idle/frames/idle-000.png'].map(load));
+const hurt=createHurtRenderer(stage,base,repair,neutral);
+let mode='idle',phase=0,elapsed=0,last=0,playing=true,loop=true,exporting=false,speed=1;
+const index=()=>Math.min(SIZE.frames-1,Math.floor(phase*SIZE.frames+.0001));
+function show(){if(mode==='idle'){hurt.idle((elapsed%3000)/3000,document.querySelector('#sword-guide').checked);status.textContent=`待机 · ${playing?'播放中':'已暂停'}`;}else{const i=index(),t=i/(SIZE.frames-1);hurt(t,false,document.querySelector('#smear').checked,document.querySelector('#sword-guide').checked);document.querySelector('#seek').value=i;status.textContent=`受击 ${i+1}/${SIZE.frames} · ${t<.08?'快速后撤':t<.28?'承受冲击':t<.76?'缓慢恢复':'回稳'} · ${playing?'播放中':'已暂停'}`;}document.body.dataset.mode=mode;document.body.dataset.ready='true';}
+function start(){mode='hurt';phase=0;playing=true;document.querySelector('#pause').textContent='暂停';show();}
+for(const b of document.querySelectorAll('button'))b.disabled=false;
+document.querySelector('#hurt').onclick=()=>{loop=false;document.querySelector('#loop').textContent='循环演示';start();};
+document.querySelector('#loop').onclick=()=>{loop=!loop;document.querySelector('#loop').textContent=loop?'停止循环':'循环演示';if(loop)start();};
+document.querySelector('#pause').onclick=()=>{playing=!playing;document.querySelector('#pause').textContent=playing?'暂停':'继续';show();};
+document.querySelector('#step').onclick=()=>{mode='hurt';playing=false;phase=((index()+1)%SIZE.frames)/SIZE.frames;document.querySelector('#pause').textContent='继续';show();};
+document.querySelector('#seek').oninput=e=>{mode='hurt';playing=false;phase=Number(e.target.value)/SIZE.frames;document.querySelector('#pause').textContent='继续';show();};
+document.querySelector('#speed').onchange=e=>speed=Number(e.target.value);
+document.querySelector('#smear').onchange=show;document.querySelector('#sword-guide').onchange=show;
+document.querySelector('#export').onclick=async()=>{exporting=true;const controls=[...document.querySelectorAll('button,input')];controls.forEach(c=>c.disabled=true);const files=[];try{for(let i=0;i<SIZE.frames;i++){hurt(i/(SIZE.frames-1),false,document.querySelector('#smear').checked);const blob=await new Promise(r=>stage.toBlob(r,'image/png'));files.push({name:`frames/hurt-${String(i).padStart(3,'0')}.png`,bytes:new Uint8Array(await blob.arrayBuffer())});status.textContent=`导出 ${i+1}/${SIZE.frames}`;}hurt.idle(0);const rest=await new Promise(r=>stage.toBlob(r,'image/png'));files.push({name:'paired-idle-rest.png',bytes:new Uint8Array(await rest.arrayBuffer())});for(const [name,part] of Object.entries(hurt.parts)){const blob=await new Promise(r=>part.toBlob(r,'image/png'));files.push({name:`parts/${name}.png`,bytes:new Uint8Array(await blob.arrayBuffer())});}const spec={...SIZE,character:'wu',animation:'hurt',loop:false,sourcePortrait:'../continuous-attack-v7/base.png',endpointSource:'paired-idle-rest.png',method:'approved attack-v7 portrait and rigid sword; quick recoil; shoulder/chest lean; arms withdraw; hair lag; eased return; planted soles',samples:Array.from({length:SIZE.frames},(_,i)=>({phase:i/(SIZE.frames-1),...geometry(pose(i/(SIZE.frames-1)))}))};files.push({name:'export.json',bytes:new TextEncoder().encode(JSON.stringify(spec,null,2))});const url=URL.createObjectURL(zip(files)),a=document.createElement('a');a.href=url;a.download='wu-hurt-v1-43.zip';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}catch(e){status.textContent=String(e);document.body.dataset.error=String(e);}finally{controls.forEach(c=>c.disabled=false);exporting=false;show();}};
+function tick(now){const dt=last?Math.min(now-last,100):0;last=now;if(playing&&!exporting){elapsed+=dt*speed;if(mode==='hurt'){phase=Math.min(1,phase+dt*speed/SIZE.durationMs);if(phase>=1){mode='idle';elapsed=0;}}else if(loop&&elapsed>850)start();show();}requestAnimationFrame(tick);}
+show();requestAnimationFrame(tick);

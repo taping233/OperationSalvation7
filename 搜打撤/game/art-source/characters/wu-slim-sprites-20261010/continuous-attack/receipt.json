@@ -1,0 +1,1151 @@
+{
+  "files": [
+    {
+      "path": "attack-atlas.png",
+      "bytes": 5996890,
+      "sha256": "3703870bc93551e1547886a3f83db8d02864322f377f3ce9c69afe3c137cd478"
+    },
+    {
+      "path": "base.png",
+      "bytes": 347829,
+      "sha256": "e55e2a85aa50d55750cbaf81fcc6a97b29c88f3601078c8d7a892e6e8df7e3ba"
+    },
+    {
+      "path": "body-repair.png",
+      "bytes": 760447,
+      "sha256": "622cbc3c5b0d4ebd9646f0ae8d0c1d69c271d4a599bff16838765743d817a1ff"
+    },
+    {
+      "path": "check-geometry.mjs",
+      "bytes": 1796,
+      "sha256": "166d1b91dea71f7b6459fd69eed3d50a5b1303665e10b75d32cdc1aef1cc6160"
+    },
+    {
+      "path": "export.json",
+      "bytes": 58585,
+      "sha256": "870bdf53f6b6c732153d2135b56321ca11410886e0ec321d07671657b0b2d9e2"
+    },
+    {
+      "path": "geometry-validation.json",
+      "bytes": 361,
+      "sha256": "ac8fe3c7a9f03bd74357054ef0c75f5d28f9172f37d4f4138232d4cf7d3074e5"
+    },
+    {
+      "path": "index.html",
+      "bytes": 1747,
+      "sha256": "02e13695f14d97bdfab151ac4f9016e916b7c85764b765e07a9aaad855dba62f"
+    },
+    {
+      "path": "package_frames.py",
+      "bytes": 4364,
+      "sha256": "44ffab0e270b735ca1792db04942d9e2d10b5828d3ad0650213623e830996fcd"
+    },
+    {
+      "path": "preview.js",
+      "bytes": 4534,
+      "sha256": "9e2bb85e95885f80396ee47f4dde1c78a6bf2a5ec386d042aa5178141247aa71"
+    },
+    {
+      "path": "preview.webp",
+      "bytes": 5024860,
+      "sha256": "1766d142196474632051c11165c181909d874769daff2e9736be5cfe4508ad15"
+    },
+    {
+      "path": "rig.js",
+      "bytes": 10375,
+      "sha256": "c16600fe6946adfc65173fe3dd2ec09aa83d30af974cfc4a05d638b517db6f24"
+    },
+    {
+      "path": "sprite.json",
+      "bytes": 2034,
+      "sha256": "22096a2c360c41472030014b96cccc66ec67173d43d112088d8dbce2b73cdf8d"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 444,
+      "sha256": "e57f5ae34afa733eee92e96e74c759659ecf56cf69ea0c479ea3c78a10f58833"
+    },
+    {
+      "path": "frames/attack-000.png",
+      "bytes": 257532,
+      "sha256": "13c307f6b2a8c1e0a48b25614c5374752627233f1e5f1fca77957e346952baf0"
+    },
+    {
+      "path": "frames/attack-000.webp",
+      "bytes": 142166,
+      "sha256": "9d5778543001a8ae10eb127dac8e5a168bcd90e0238608f24a87fc0ad8b257e9"
+    },
+    {
+      "path": "frames/attack-001.png",
+      "bytes": 248142,
+      "sha256": "862b75f4f8bdcfc5ad5c11da8e1982498d01b9daf8c5004e075893bb2a1dedf6"
+    },
+    {
+      "path": "frames/attack-001.webp",
+      "bytes": 136294,
+      "sha256": "bb2d02cd39585cf5e85aa6384e7356ebab567735bbb25ab4713ed1499a5d2f4d"
+    },
+    {
+      "path": "frames/attack-002.png",
+      "bytes": 248291,
+      "sha256": "c43037df32b62ff3243ea953078c31831043db223003c99113101944784b33fb"
+    },
+    {
+      "path": "frames/attack-002.webp",
+      "bytes": 136588,
+      "sha256": "141e9a654c04626c313968ea215eaeb421b91b04db707fdc34e2a4ddf42fbdb7"
+    },
+    {
+      "path": "frames/attack-003.png",
+      "bytes": 248792,
+      "sha256": "049d225d22b5f025c17edbd0de6c5ed0c7b599215a73012b2cae6d5519e758d4"
+    },
+    {
+      "path": "frames/attack-003.webp",
+      "bytes": 136354,
+      "sha256": "a9c695f196aa04322efece0641d7634db5e0ba7f8f194183cb5cd475d3e6b82f"
+    },
+    {
+      "path": "frames/attack-004.png",
+      "bytes": 247331,
+      "sha256": "e8f16885ff00958f3b3bc9cbb4fc2ea186c47f8c94795f517ae73eee351b10c2"
+    },
+    {
+      "path": "frames/attack-004.webp",
+      "bytes": 134876,
+      "sha256": "cb3b740612774d30ee8d7d985f078196ff0af68a558835ec8699169ebf76c80f"
+    },
+    {
+      "path": "frames/attack-005.png",
+      "bytes": 248718,
+      "sha256": "a9983e40cb9d997ef8911815da92d72dc2df8f762f1e069fc6b8bcbc492f02da"
+    },
+    {
+      "path": "frames/attack-005.webp",
+      "bytes": 136510,
+      "sha256": "b0900d9660f61218cdcc62e3c104a6721160800f3e1bc8e93cd5537db3576fe1"
+    },
+    {
+      "path": "frames/attack-006.png",
+      "bytes": 248596,
+      "sha256": "02dcec0b99a30058903de9e1dbd058aadbc460b390438565ffb4e45e9ea9a662"
+    },
+    {
+      "path": "frames/attack-006.webp",
+      "bytes": 135416,
+      "sha256": "5f3e88c91c489c7ce9998e088a38a86bbfb0ca89606cc156c958379cefe8ec57"
+    },
+    {
+      "path": "frames/attack-007.png",
+      "bytes": 248554,
+      "sha256": "bbdea9d1432d46e8f276cf79cac177905ae57236e63ea840e5c0b0e64e4f6ee9"
+    },
+    {
+      "path": "frames/attack-007.webp",
+      "bytes": 135580,
+      "sha256": "47aa48a3b42798e2e00484a1773b0b909167020288c94e4911da8a8e7e28fd4c"
+    },
+    {
+      "path": "frames/attack-008.png",
+      "bytes": 248397,
+      "sha256": "b041e113877d62a27dc04389af74da232d52a92948a2cd6f854f0d9bf7c9cf38"
+    },
+    {
+      "path": "frames/attack-008.webp",
+      "bytes": 135590,
+      "sha256": "1d3ea40bd194f26f8d86cd2cf23dd303087de8907f59d481844d5550dd10b7e0"
+    },
+    {
+      "path": "frames/attack-009.png",
+      "bytes": 247859,
+      "sha256": "8623358fbd1af9eca77188b8c72711f4d1f099477dddee21a316f10dcc895ee4"
+    },
+    {
+      "path": "frames/attack-009.webp",
+      "bytes": 135516,
+      "sha256": "bd3be59c9b376479d791aa4664698948501403f9e3f3e31aec869286d5479b9b"
+    },
+    {
+      "path": "frames/attack-010.png",
+      "bytes": 247540,
+      "sha256": "cb765147edee5db7beb77a9fb30bd3289863f5cad7511b503ffe51ea27302613"
+    },
+    {
+      "path": "frames/attack-010.webp",
+      "bytes": 135106,
+      "sha256": "85db1275c70e1c2183100829153faa4759a0ba5f6889686f9b07193421f9e496"
+    },
+    {
+      "path": "frames/attack-011.png",
+      "bytes": 248222,
+      "sha256": "ba6eb3d9e57111354c833892a39ef580e2137b523336136c91695adf5926e9c7"
+    },
+    {
+      "path": "frames/attack-011.webp",
+      "bytes": 136636,
+      "sha256": "38fee447821ea793085e4da72fe65bd1fc62e98d8417a8a021ef15fe5383bd8f"
+    },
+    {
+      "path": "frames/attack-012.png",
+      "bytes": 247951,
+      "sha256": "fdab21daa4cd46aaa2bd071bd61e81030bfa04dd51322d2c48b1a3adef76705d"
+    },
+    {
+      "path": "frames/attack-012.webp",
+      "bytes": 135310,
+      "sha256": "e364472ee7eb7c93fd1609f0e3052adbd76ba4624871b2d95872720989cb5c36"
+    },
+    {
+      "path": "frames/attack-013.png",
+      "bytes": 247568,
+      "sha256": "601b57395884ce7da64ad89a1498af8e98041cc3dd9453ae614ab9be88a648df"
+    },
+    {
+      "path": "frames/attack-013.webp",
+      "bytes": 135340,
+      "sha256": "e8821005365ad6377aaae8dd4005ef38e20b4b099a33536c33d4b1d6f675ce0d"
+    },
+    {
+      "path": "frames/attack-014.png",
+      "bytes": 247302,
+      "sha256": "40605ffbfff5328d70e4f16ecfafe9d106e85134045d4f35d21cfef06a1dcf99"
+    },
+    {
+      "path": "frames/attack-014.webp",
+      "bytes": 134980,
+      "sha256": "416c7a41b32d553a0d723dbe0a4b3db3b3ffa2651a104ddd28ba972a58aff1b9"
+    },
+    {
+      "path": "frames/attack-015.png",
+      "bytes": 247146,
+      "sha256": "e8c226b598795089d747dc34c691090343278ba940990ac8684f1c82758d6481"
+    },
+    {
+      "path": "frames/attack-015.webp",
+      "bytes": 134964,
+      "sha256": "dcf58abd4f4507dba436fe88260ed8920e6f520101754b26c5bcc1d3107c85c1"
+    },
+    {
+      "path": "frames/attack-016.png",
+      "bytes": 245700,
+      "sha256": "ed024b698ca26bcb7b5cc12e33d8a2443de80888ba917ad34be07b8b5ce753e4"
+    },
+    {
+      "path": "frames/attack-016.webp",
+      "bytes": 134676,
+      "sha256": "6721c48e07373546d7aa40f279d398c84480f0639b5540edfaaac4e227a9c9a0"
+    },
+    {
+      "path": "frames/attack-017.png",
+      "bytes": 246661,
+      "sha256": "9d0ff749152495604b8b74b4972b9b7ce406f2a5519c7ec52dd5f30cfd2b0816"
+    },
+    {
+      "path": "frames/attack-017.webp",
+      "bytes": 135594,
+      "sha256": "c6dac63011af3bbb5e4ad2bdfa9a92afa5117caf5623bfa1056e3f3c3ee0e7a1"
+    },
+    {
+      "path": "frames/attack-018.png",
+      "bytes": 247799,
+      "sha256": "9599caf4219b95d319e6ce393324fec53a78baa3e74548ad0a081c2a55072b21"
+    },
+    {
+      "path": "frames/attack-018.webp",
+      "bytes": 135868,
+      "sha256": "cbccf8f4695806dde23288cd2c9b9acbf0e5cd9be1b6c22d0e3bd2143ea5e4c1"
+    },
+    {
+      "path": "frames/attack-019.png",
+      "bytes": 247817,
+      "sha256": "4f4c296e4fea3a5c34ee574608debad858b543e361dd5b20542324d87fe9ecae"
+    },
+    {
+      "path": "frames/attack-019.webp",
+      "bytes": 136374,
+      "sha256": "e240b12f9ff0ea95ec005b9da20dfc7de4bebf155368d394b0f24445a9e58b22"
+    },
+    {
+      "path": "frames/attack-020.png",
+      "bytes": 247727,
+      "sha256": "56f8c7692f3413df0612cbee5d5cc9586109ba6c2944d76c41f6d81e9cd54355"
+    },
+    {
+      "path": "frames/attack-020.webp",
+      "bytes": 135882,
+      "sha256": "ff15ccb098e890823e465e275a2a46851739e0b0f1ad912d57efd7bfd4af834b"
+    },
+    {
+      "path": "frames/attack-021.png",
+      "bytes": 247440,
+      "sha256": "67a955d63cf7890e93a9d96b3dbfe12590ad1eaa5079819cdbef32014cc5faf5"
+    },
+    {
+      "path": "frames/attack-021.webp",
+      "bytes": 136688,
+      "sha256": "23963cc7fe61aa23e24ba2214c02923b7d8043903b95116552cb7f733ee37d15"
+    },
+    {
+      "path": "frames/attack-022.png",
+      "bytes": 246822,
+      "sha256": "8d17eee2c554f63f5e4f5bae917eb4f8a6da3225328f29e3d132a1d3976f1cab"
+    },
+    {
+      "path": "frames/attack-022.webp",
+      "bytes": 136170,
+      "sha256": "c6a27764ef7df2312578d2c4d2de340fcd70ed784b92d6945766eebdf9e0a7e2"
+    },
+    {
+      "path": "frames/attack-023.png",
+      "bytes": 246765,
+      "sha256": "81fadd93bddae9188aee7e18ef25bbff283a186f0d92d62ab9ac77b10215b365"
+    },
+    {
+      "path": "frames/attack-023.webp",
+      "bytes": 135758,
+      "sha256": "40bf799786873b64b871a7e50f5cfbbfc2d0a5f1bb50981050bb2ee41fd19789"
+    },
+    {
+      "path": "frames/attack-024.png",
+      "bytes": 246233,
+      "sha256": "c3c70c6c1991d730074ecd815fb11ad3b25ed415d284465d589c14f4cc8c6ff1"
+    },
+    {
+      "path": "frames/attack-024.webp",
+      "bytes": 135386,
+      "sha256": "750ede643f11bf926a7ebd6c431cfa9f3e693609126bbe5fe58d93a90f402c0f"
+    },
+    {
+      "path": "frames/attack-025.png",
+      "bytes": 247474,
+      "sha256": "5e2d6ac82b960d59690910e26cdb63a9d16657a01a690481668b9b907e34cb92"
+    },
+    {
+      "path": "frames/attack-025.webp",
+      "bytes": 136236,
+      "sha256": "8fbb8f98064b8a108ac85db6cb85cafc0d02163159bd1697e858763e198b2243"
+    },
+    {
+      "path": "frames/attack-026.png",
+      "bytes": 247075,
+      "sha256": "0cd4d25cc4b18036b9232dd71bf02e53703239d74aac98c0a073a9f05f958a00"
+    },
+    {
+      "path": "frames/attack-026.webp",
+      "bytes": 136342,
+      "sha256": "507b4b2aa575275686fc543e05a7543b241773097c4f277252889dacb0add783"
+    },
+    {
+      "path": "frames/attack-027.png",
+      "bytes": 246985,
+      "sha256": "561011d1cf75ee5ea9e269738cd9a5def82ec304af0a2973c31a5f9c1b84ff35"
+    },
+    {
+      "path": "frames/attack-027.webp",
+      "bytes": 136468,
+      "sha256": "bc00898e1b9f03a4b40322b883b5688b63336dc0852ba931aea0184e8a81d2d7"
+    },
+    {
+      "path": "frames/attack-028.png",
+      "bytes": 248132,
+      "sha256": "52f30de611073d8dafe3f45c784453774cabc28c6eb8d277888959d078e12bfe"
+    },
+    {
+      "path": "frames/attack-028.webp",
+      "bytes": 136670,
+      "sha256": "0daca83c4b4da38653ee72cd201c8a8432618abd4b565c5a5d79f4ba8c765c2e"
+    },
+    {
+      "path": "frames/attack-029.png",
+      "bytes": 247799,
+      "sha256": "1511af4875415f7600147bbbd16d2c69045e0a6c77fa93a361d2df793a2bbad3"
+    },
+    {
+      "path": "frames/attack-029.webp",
+      "bytes": 136580,
+      "sha256": "9b4b79c4198d25217affbadd572f956b5bdd9e66cc4a0d5d3909a34acb3d80ec"
+    },
+    {
+      "path": "frames/attack-030.png",
+      "bytes": 248560,
+      "sha256": "4a22a913d67ff8d3bb6d39220ba489b5e931355699d2d912bde41a5638ebeff0"
+    },
+    {
+      "path": "frames/attack-030.webp",
+      "bytes": 137052,
+      "sha256": "3794e5e8e74f6923039bfa1a710ace0fb1b3ea7cc76ca06a1a54bcb10142c9b4"
+    },
+    {
+      "path": "frames/attack-031.png",
+      "bytes": 253196,
+      "sha256": "2fb1e30f3365b9474ae0dde39ef984bd333e1c4ac84cc1e977976cda024fbade"
+    },
+    {
+      "path": "frames/attack-031.webp",
+      "bytes": 139672,
+      "sha256": "5664ec85679640cd85a53c2faf11c99536fd81e73e06342f9330f28f84770124"
+    },
+    {
+      "path": "frames/attack-032.png",
+      "bytes": 257532,
+      "sha256": "13c307f6b2a8c1e0a48b25614c5374752627233f1e5f1fca77957e346952baf0"
+    },
+    {
+      "path": "frames/attack-032.webp",
+      "bytes": 142166,
+      "sha256": "9d5778543001a8ae10eb127dac8e5a168bcd90e0238608f24a87fc0ad8b257e9"
+    },
+    {
+      "path": "idle-compatible/sprite.json",
+      "bytes": 3673,
+      "sha256": "a9f316672970713358c0372818d3ea70ee3e3dfa461bebb73491375620f7d52d"
+    },
+    {
+      "path": "parts/body.png",
+      "bytes": 230174,
+      "sha256": "214d95623a382456026c14bfffc121d8e2847f9b20e7e51e7ef200ef5d178ee2"
+    },
+    {
+      "path": "parts/hand.png",
+      "bytes": 11140,
+      "sha256": "04c8cb06ec73731edc41696e5a995d2fe9a56d5ca7de381cdd3048e12017737a"
+    },
+    {
+      "path": "parts/lower.png",
+      "bytes": 26128,
+      "sha256": "71f10b67d7c93b51b6800cbe0349521408d3edde2ecb257e5a5169d22008ae49"
+    },
+    {
+      "path": "parts/upper.png",
+      "bytes": 21489,
+      "sha256": "2e577caa54cfa9dcd13fb9ef9c38413645ed9badc6086d4fae21432a36b9c152"
+    },
+    {
+      "path": "parts/weapon.png",
+      "bytes": 26985,
+      "sha256": "f668b6415b7f2c285b82aa9ba0e1216bf060db2eee0996dd631c8f1e4c22faae"
+    },
+    {
+      "path": "idle-compatible/frames/idle-000.png",
+      "bytes": 218134,
+      "sha256": "11a8abb164bb0ea3bd55a8984f36a390f4522cd8141dd8c0735d83b8303062d0"
+    },
+    {
+      "path": "idle-compatible/frames/idle-000.webp",
+      "bytes": 142166,
+      "sha256": "9d5778543001a8ae10eb127dac8e5a168bcd90e0238608f24a87fc0ad8b257e9"
+    },
+    {
+      "path": "idle-compatible/frames/idle-001.png",
+      "bytes": 218240,
+      "sha256": "29b0cf4b9c73bfa0725c27645943a3f77cd8da49de828ffe25f17b986d26e691"
+    },
+    {
+      "path": "idle-compatible/frames/idle-001.webp",
+      "bytes": 142368,
+      "sha256": "a28124bfebb9011fc93553d5c665749d6e293f290540afc712af6cd8285dc69d"
+    },
+    {
+      "path": "idle-compatible/frames/idle-002.png",
+      "bytes": 218032,
+      "sha256": "69b68a170c8e39f8d6006b2cc581b3cba4760f17add04738c714899bf086ef2d"
+    },
+    {
+      "path": "idle-compatible/frames/idle-002.webp",
+      "bytes": 142382,
+      "sha256": "096b740624b50df10190d4e784dae4e2599b3e6e1f560a3da70f91df0bf62692"
+    },
+    {
+      "path": "idle-compatible/frames/idle-003.png",
+      "bytes": 217740,
+      "sha256": "e317894d7d7bd7e98a8fad1512430a1f8a38785925496bf45d4adcf1c428388e"
+    },
+    {
+      "path": "idle-compatible/frames/idle-003.webp",
+      "bytes": 142108,
+      "sha256": "11508fc0b2ff6b753a00345c356c2a21bbc787c9f5de8ad9d2c8d2203c3712b4"
+    },
+    {
+      "path": "idle-compatible/frames/idle-004.png",
+      "bytes": 217418,
+      "sha256": "129c5a406ed11d46d7733711391082538ca6c53cfbd902fcae8d158bfaa3177c"
+    },
+    {
+      "path": "idle-compatible/frames/idle-004.webp",
+      "bytes": 142004,
+      "sha256": "718cafcd2b2d398d63387ebeff15480d64f55fc767d7e116262ac4af2ad39275"
+    },
+    {
+      "path": "idle-compatible/frames/idle-005.png",
+      "bytes": 217194,
+      "sha256": "7d29f84212e1c6840335d22b52799eb787456d2eb427b393562905d086471c4a"
+    },
+    {
+      "path": "idle-compatible/frames/idle-005.webp",
+      "bytes": 141918,
+      "sha256": "de1d619474fe83d95ecbfede4c943bb3c7a2c918bc82e479424e4f701ba6c26d"
+    },
+    {
+      "path": "idle-compatible/frames/idle-006.png",
+      "bytes": 216796,
+      "sha256": "e0b12bb1eae4843f956814ed52f4e6431cd052c12eb667c285ba53af9fdc30ee"
+    },
+    {
+      "path": "idle-compatible/frames/idle-006.webp",
+      "bytes": 141586,
+      "sha256": "a71d234f36dc27cc1ddb81cdda9c31413c0d09f1263baace3a1300c5f8edb149"
+    },
+    {
+      "path": "idle-compatible/frames/idle-007.png",
+      "bytes": 216524,
+      "sha256": "45c35ca2cbdc300329ad6eb4a229e7f72a94da3335fdd2a17ea8eadfdd31deee"
+    },
+    {
+      "path": "idle-compatible/frames/idle-007.webp",
+      "bytes": 141314,
+      "sha256": "1ac648d6e7d95b89e963fc91f9ef433fcb796e35f3573997d6530185764017c7"
+    },
+    {
+      "path": "idle-compatible/frames/idle-008.png",
+      "bytes": 216335,
+      "sha256": "06dca7cbc795f9a5f02fda75400016769c49db58483ba6d7a2a2c193e1b1a07c"
+    },
+    {
+      "path": "idle-compatible/frames/idle-008.webp",
+      "bytes": 141400,
+      "sha256": "f2d06c65ca84eb2a78486f1ed8dc0257e574582dd21b9020cae70459bf7cae23"
+    },
+    {
+      "path": "idle-compatible/frames/idle-009.png",
+      "bytes": 216217,
+      "sha256": "a87dd3e80f4348fcb83d920e3a888d79e090af80dca0923117fa755c708529f1"
+    },
+    {
+      "path": "idle-compatible/frames/idle-009.webp",
+      "bytes": 141302,
+      "sha256": "accafc26d80fec6fb781e335396680d4d44bd95584134c06bab0897e3dd4b3a0"
+    },
+    {
+      "path": "idle-compatible/frames/idle-010.png",
+      "bytes": 216035,
+      "sha256": "09360a63949ac3b9938e542b6da04eb5fc85cc08e91274196cdc284d0c2fe2a7"
+    },
+    {
+      "path": "idle-compatible/frames/idle-010.webp",
+      "bytes": 141012,
+      "sha256": "16b7c4b039d9505b97a15ba93673073ce1289042a6c4880c5fa23c1e21ba32b0"
+    },
+    {
+      "path": "idle-compatible/frames/idle-011.png",
+      "bytes": 216101,
+      "sha256": "74be1a1800a5dc215f2d7f59cd932b7438a10ee6dafdcb01f54929e1f92e249f"
+    },
+    {
+      "path": "idle-compatible/frames/idle-011.webp",
+      "bytes": 141056,
+      "sha256": "548179e7dfd92ad8cae64241705b272d4f079b9eb6f067140ff2964b96e52bf2"
+    },
+    {
+      "path": "idle-compatible/frames/idle-012.png",
+      "bytes": 215944,
+      "sha256": "e7af1392e52981e34da24888380c9d198c442479e38d851c2996edd5f313f188"
+    },
+    {
+      "path": "idle-compatible/frames/idle-012.webp",
+      "bytes": 141184,
+      "sha256": "0166fbc051d3fae66a80a9974ad6ebe226c3a89e2d4ad1cfe96a6ddb65cf8ad4"
+    },
+    {
+      "path": "idle-compatible/frames/idle-013.png",
+      "bytes": 215910,
+      "sha256": "53103101d4dd39d3aa8d5985e7d2c4a4c1fbc222f76be8973c941caa92b148ce"
+    },
+    {
+      "path": "idle-compatible/frames/idle-013.webp",
+      "bytes": 141106,
+      "sha256": "59a009f743ab11d1bc61cece76bb50ec6069351b3e7e9facaca9067115efa2a4"
+    },
+    {
+      "path": "idle-compatible/frames/idle-014.png",
+      "bytes": 215815,
+      "sha256": "1b21faa7159abd924109d53d217483a97217dd19b467fc25afa0e5fd7518489d"
+    },
+    {
+      "path": "idle-compatible/frames/idle-014.webp",
+      "bytes": 141202,
+      "sha256": "523faadf0342f0712c8241c50a485a5cc9c8ec8dfdd27cb1a754c9fdb42e8a7b"
+    },
+    {
+      "path": "idle-compatible/frames/idle-015.png",
+      "bytes": 215895,
+      "sha256": "7aba9a10d7425eb8be3e0d781276abe32560d4fedbf019e0f16f3f759e0b4e44"
+    },
+    {
+      "path": "idle-compatible/frames/idle-015.webp",
+      "bytes": 141194,
+      "sha256": "d249e4d22f7a41662a6d0d94d8e659ccfb730d395da22513f877ce8958ff906b"
+    },
+    {
+      "path": "idle-compatible/frames/idle-016.png",
+      "bytes": 215845,
+      "sha256": "ddffea80879b46483a127a3e53a167831045b63bef98843278c8e4e0c255fcff"
+    },
+    {
+      "path": "idle-compatible/frames/idle-016.webp",
+      "bytes": 141052,
+      "sha256": "87f0ddeab3a0886d535d3e93916ea62da96cbed8197e3c5376e1a4c9b7672f15"
+    },
+    {
+      "path": "idle-compatible/frames/idle-017.png",
+      "bytes": 215884,
+      "sha256": "d2ae6bf96c5dca63bfff3f18e552be889d30fb567339ffd643aaf651b06664a3"
+    },
+    {
+      "path": "idle-compatible/frames/idle-017.webp",
+      "bytes": 140986,
+      "sha256": "a423804e3a83492a96c46957beeb5f94138cd3bbb26b811565ee65912c3e7ab7"
+    },
+    {
+      "path": "idle-compatible/frames/idle-018.png",
+      "bytes": 215957,
+      "sha256": "831706779fb823c3f52c5657093637009bb59baf6f64681f969fd9df7b1c8237"
+    },
+    {
+      "path": "idle-compatible/frames/idle-018.webp",
+      "bytes": 140988,
+      "sha256": "0154023b2d27f113f6a5b96a58a2e57e3bccb0bb2995033d46ce0302b6b8091a"
+    },
+    {
+      "path": "idle-compatible/frames/idle-019.png",
+      "bytes": 215789,
+      "sha256": "f42d6912c9a94701679bc9cc70c84d2dfba372a4cd4cb3cc4660eaf46bd10e61"
+    },
+    {
+      "path": "idle-compatible/frames/idle-019.webp",
+      "bytes": 141102,
+      "sha256": "cb4cbd4bc4d99f458ebc3c890be023ba9cea39c9ce18c0ac4df4975a28f639f7"
+    },
+    {
+      "path": "idle-compatible/frames/idle-020.png",
+      "bytes": 215957,
+      "sha256": "54d4d1892807c2ed962e7370cf77275172ccf2f1b750ef56f19d10818eede37e"
+    },
+    {
+      "path": "idle-compatible/frames/idle-020.webp",
+      "bytes": 140996,
+      "sha256": "5a00d19118a69d61868e628e1a36d5a2ab7f2ad9d86f3bc1f8d794dd854052af"
+    },
+    {
+      "path": "idle-compatible/frames/idle-021.png",
+      "bytes": 215927,
+      "sha256": "7cacf48037f2362bcaed034a34707b4b07b556e7bbec5e3c5dd7eb45efa09fbf"
+    },
+    {
+      "path": "idle-compatible/frames/idle-021.webp",
+      "bytes": 141088,
+      "sha256": "4fb88ea4a9029ea01d04a3b050317be7d9e61c6f31db3d2fa673ae01e248830c"
+    },
+    {
+      "path": "idle-compatible/frames/idle-022.png",
+      "bytes": 215904,
+      "sha256": "d364101940d775faa0fb941c2f9ebf8826d42219332e2d34f56b43f0a67145ca"
+    },
+    {
+      "path": "idle-compatible/frames/idle-022.webp",
+      "bytes": 140908,
+      "sha256": "c8588cb1e334a546b0f13b9263d29391bb6a857fe5224f74388e6e296de4a67f"
+    },
+    {
+      "path": "idle-compatible/frames/idle-023.png",
+      "bytes": 215884,
+      "sha256": "a23b9f9caae1c3165b4c6bb238e58df9949fd6b4abe8ef6122fc644f3cf1b961"
+    },
+    {
+      "path": "idle-compatible/frames/idle-023.webp",
+      "bytes": 140970,
+      "sha256": "a05b9d107c05ca745eae454e62c310b2a971fa8fee643f5431eaf03bbde1ebfc"
+    },
+    {
+      "path": "idle-compatible/frames/idle-024.png",
+      "bytes": 215782,
+      "sha256": "3f7ae73dce1b6a1aa6244394648c475e264267cc5359dc70d53660597de54ebc"
+    },
+    {
+      "path": "idle-compatible/frames/idle-024.webp",
+      "bytes": 141022,
+      "sha256": "34c10f5df8473b515bfed3593f53617d9ed548d8d87f00cc58b3cd35df310f9b"
+    },
+    {
+      "path": "idle-compatible/frames/idle-025.png",
+      "bytes": 215677,
+      "sha256": "75fa007e1234efbda7b0de4af69940b9ad05b1f823197e99bc610f67c82f0cae"
+    },
+    {
+      "path": "idle-compatible/frames/idle-025.webp",
+      "bytes": 140910,
+      "sha256": "d97d23ede4306464fb2b20fb5b9e8130ea2509b3baf53fed64cf78f2100f19b7"
+    },
+    {
+      "path": "idle-compatible/frames/idle-026.png",
+      "bytes": 215816,
+      "sha256": "b72fbabd1a60bed4a33fae07a36059facc1084d6aaa6b667e9d5eda7d4f611ac"
+    },
+    {
+      "path": "idle-compatible/frames/idle-026.webp",
+      "bytes": 140830,
+      "sha256": "0118068b01b928b4e4ec849fb3fa8227673482b8fd51bcbc18dc3f5cd0b250d5"
+    },
+    {
+      "path": "idle-compatible/frames/idle-027.png",
+      "bytes": 216002,
+      "sha256": "d8103fa625358e27d24becbe697b819e8e8bd26071d1b4df643fe4069fd40da3"
+    },
+    {
+      "path": "idle-compatible/frames/idle-027.webp",
+      "bytes": 141020,
+      "sha256": "6edcfc9e884ca68364cd5504d66c69d23e888e5c7e64bfb904a9cb2afa2428a6"
+    },
+    {
+      "path": "idle-compatible/frames/idle-028.png",
+      "bytes": 215925,
+      "sha256": "f91254a6cf430b606d681af3d12e626c2bd305e468b528cce1264cccb07522c1"
+    },
+    {
+      "path": "idle-compatible/frames/idle-028.webp",
+      "bytes": 140948,
+      "sha256": "50ca0d38871e221aa822598ce8abc899d8030b40f8f9d3a74eb88c621f025fe4"
+    },
+    {
+      "path": "idle-compatible/frames/idle-029.png",
+      "bytes": 215776,
+      "sha256": "173a8b624a3b06e8929f228efdfb0ae4adcbc0d67be07105ab7c44ba9181ec74"
+    },
+    {
+      "path": "idle-compatible/frames/idle-029.webp",
+      "bytes": 140962,
+      "sha256": "1e9323d79a35de6853e8b3a336bd1993277063e15887840a5eac5f061fc6c01b"
+    },
+    {
+      "path": "idle-compatible/frames/idle-030.png",
+      "bytes": 215906,
+      "sha256": "344b52ca0d99a5cfe9712ee3a97cf2d496cd7fa61fb6e89dfe84d12367b8a839"
+    },
+    {
+      "path": "idle-compatible/frames/idle-030.webp",
+      "bytes": 140944,
+      "sha256": "d279cfcca67eb9a966706022e04c11ad07a62c3f5b0e3fba5450d00f6cdf3aed"
+    },
+    {
+      "path": "idle-compatible/frames/idle-031.png",
+      "bytes": 215992,
+      "sha256": "0f4aa4af9ed326b9c85c9d3237978696ecda039bdc5f5e8f9732786301cab001"
+    },
+    {
+      "path": "idle-compatible/frames/idle-031.webp",
+      "bytes": 140808,
+      "sha256": "677a718b60a1413a11a968a2da83b220dbc5964db4b6ee70a2184de45a98bfee"
+    },
+    {
+      "path": "idle-compatible/frames/idle-032.png",
+      "bytes": 216051,
+      "sha256": "c4ed72f13736859244a3eb1d1a196be0afd1cda7a2018c5cf15ee82e952541bc"
+    },
+    {
+      "path": "idle-compatible/frames/idle-032.webp",
+      "bytes": 140828,
+      "sha256": "41fdfc29b831067196591f26bd9124c348c65c2d49d1fbecbe107ede699a713b"
+    },
+    {
+      "path": "idle-compatible/frames/idle-033.png",
+      "bytes": 216247,
+      "sha256": "e1d207a5284c58d116305bf48b63f59b4b98ff11a2b7dcee9eb05405ac8549f5"
+    },
+    {
+      "path": "idle-compatible/frames/idle-033.webp",
+      "bytes": 140894,
+      "sha256": "11edcfd10122ab38022d78b9b3d912218d540c98e7c2d3bf704fa7e3abecc28c"
+    },
+    {
+      "path": "idle-compatible/frames/idle-034.png",
+      "bytes": 216314,
+      "sha256": "8e8f126474df9b35cf71981e7977554e57dc456d34c7ff4730e7bd203198a9b3"
+    },
+    {
+      "path": "idle-compatible/frames/idle-034.webp",
+      "bytes": 141112,
+      "sha256": "ed603cc5a52dfa810a329e27bb16e07ef31afd2f97f049d0dcca52962053edd8"
+    },
+    {
+      "path": "idle-compatible/frames/idle-035.png",
+      "bytes": 216524,
+      "sha256": "46386d9f29b7c709ada4494ab9d39d1dac01e34a51085aa8c7b8d0600e818845"
+    },
+    {
+      "path": "idle-compatible/frames/idle-035.webp",
+      "bytes": 141318,
+      "sha256": "9efb311b79994bddc0ec6680b950f1751e20037471777a8e5b42aafb03e801de"
+    },
+    {
+      "path": "idle-compatible/frames/idle-036.png",
+      "bytes": 217024,
+      "sha256": "0e4c9b5a7d97c39fc10fe2be2e96c34e7389e8dfe7299f1ec73eccf9d96f5a90"
+    },
+    {
+      "path": "idle-compatible/frames/idle-036.webp",
+      "bytes": 141588,
+      "sha256": "18cfde498e3cabe7c7c8f3db6b772dd0293f824f33d78ba50b90001b6f59ff8f"
+    },
+    {
+      "path": "idle-compatible/frames/idle-037.png",
+      "bytes": 216849,
+      "sha256": "fd3ec6497ad99ecb4f2499072f68383c94b1364023ae73817c149c1d61259f08"
+    },
+    {
+      "path": "idle-compatible/frames/idle-037.webp",
+      "bytes": 141586,
+      "sha256": "a3e9af9a37156dd8c1bb1332442735c4dd072dbde2cecca1a250a637e94632db"
+    },
+    {
+      "path": "idle-compatible/frames/idle-038.png",
+      "bytes": 216698,
+      "sha256": "32d7b649c6ffe9d1138698f82930725c3abb98a2b53310c0b692edd0ebe01dfa"
+    },
+    {
+      "path": "idle-compatible/frames/idle-038.webp",
+      "bytes": 141420,
+      "sha256": "f2dd91a8d8b8ef4e747e0cb644aadb7a08abeb71d42e1479e691092c3b8f0414"
+    },
+    {
+      "path": "idle-compatible/frames/idle-039.png",
+      "bytes": 216715,
+      "sha256": "a53ba593cc32c494d63b7fca8083a283a51932097225c91cfdd38298d8456696"
+    },
+    {
+      "path": "idle-compatible/frames/idle-039.webp",
+      "bytes": 141150,
+      "sha256": "87d1bc8eacb0a4cadfa254e95b463068767e9817faa86e4be5908aff36f87126"
+    },
+    {
+      "path": "idle-compatible/frames/idle-040.png",
+      "bytes": 216649,
+      "sha256": "bf34f408b40b5386f78e4b1099eb80e406c7ccbab073ad908edb6f9ad362b0ad"
+    },
+    {
+      "path": "idle-compatible/frames/idle-040.webp",
+      "bytes": 141138,
+      "sha256": "2b71d6a0e385515b09a35af88f07e08270525f8d0431daf43f43fd9cdd3c00d2"
+    },
+    {
+      "path": "idle-compatible/frames/idle-041.png",
+      "bytes": 216671,
+      "sha256": "a0ffe632dc880f3eae63b7361227f358eeb1d027c1b42c606d4e8be89d5e3f43"
+    },
+    {
+      "path": "idle-compatible/frames/idle-041.webp",
+      "bytes": 141200,
+      "sha256": "5db2098fe44c6f931439e2a15164e6199a3bd0891e38c4617467998d7ef7ca6b"
+    },
+    {
+      "path": "idle-compatible/frames/idle-042.png",
+      "bytes": 216715,
+      "sha256": "fb8428fe4e90e416882ddad174ba7f62990bf1b7b4fc2c19548bbf99495995f5"
+    },
+    {
+      "path": "idle-compatible/frames/idle-042.webp",
+      "bytes": 141024,
+      "sha256": "18ddf9f22ba0cb10aabc2005b3cae60879f9aa53f32dc40cbb2aff40b59f13f8"
+    },
+    {
+      "path": "idle-compatible/frames/idle-043.png",
+      "bytes": 216702,
+      "sha256": "a892b748b0e99fbe6868056d3098c9957d98d1adb848e71ce20675582b511590"
+    },
+    {
+      "path": "idle-compatible/frames/idle-043.webp",
+      "bytes": 140864,
+      "sha256": "feb5dbe0e6c227fae641bd60eb8572d8d2d908ccb485c5100bc17b1db592204d"
+    },
+    {
+      "path": "idle-compatible/frames/idle-044.png",
+      "bytes": 216466,
+      "sha256": "290e53330f7a5120c1c04e7ad341e536d5b437ee2a97b45bedb711650bab380d"
+    },
+    {
+      "path": "idle-compatible/frames/idle-044.webp",
+      "bytes": 141000,
+      "sha256": "5896e6027a8b73c085dc2748e4f0f2ebd39f70d2bbe2094c4b0c5308c94db194"
+    },
+    {
+      "path": "idle-compatible/frames/idle-045.png",
+      "bytes": 216461,
+      "sha256": "80474b3225ad775d4f468aae897ee7a6b4cafffcc4a3dcb4b0e6961f390cfc73"
+    },
+    {
+      "path": "idle-compatible/frames/idle-045.webp",
+      "bytes": 140790,
+      "sha256": "0a34fed69995fb3c96f4ed104f6c8354349fbf372623fb75e95fa882303853eb"
+    },
+    {
+      "path": "idle-compatible/frames/idle-046.png",
+      "bytes": 216596,
+      "sha256": "fc61047d60f9e0be9d3518ea6d653b9f4d5c03903c065a2123149d9c672b5ff7"
+    },
+    {
+      "path": "idle-compatible/frames/idle-046.webp",
+      "bytes": 141088,
+      "sha256": "445e827132559f97f3c6f22b85ed9b590c48750d532b4799adfaeb5eefcbb798"
+    },
+    {
+      "path": "idle-compatible/frames/idle-047.png",
+      "bytes": 216066,
+      "sha256": "23cf01ffd9327adab1dcd2d953ad1ed35d9936a9692b05bbd15da4168e3dc94a"
+    },
+    {
+      "path": "idle-compatible/frames/idle-047.webp",
+      "bytes": 140954,
+      "sha256": "51087e8653644898a538a07f3f02bb2f4584daa814535322406b38b17e606a24"
+    },
+    {
+      "path": "idle-compatible/frames/idle-048.png",
+      "bytes": 216154,
+      "sha256": "52dee3dd369a3fdd95b7fd17d7ca123d2d83a87083faf6837422ce60ed00bfc2"
+    },
+    {
+      "path": "idle-compatible/frames/idle-048.webp",
+      "bytes": 141130,
+      "sha256": "675c9ef5373126aa2082739d60ed9dca1ed53ec1ca3d20af9bfed48289d0a4ca"
+    },
+    {
+      "path": "idle-compatible/frames/idle-049.png",
+      "bytes": 216063,
+      "sha256": "6588d90a26adf9715575e65e911016eceea9ac89ea33a8cf9d5c893349e2e079"
+    },
+    {
+      "path": "idle-compatible/frames/idle-049.webp",
+      "bytes": 141110,
+      "sha256": "c23cc888f3d6c15b675686ffa760fc7c974ef87523883198c04ae443dbe6fae4"
+    },
+    {
+      "path": "idle-compatible/frames/idle-050.png",
+      "bytes": 215936,
+      "sha256": "d0d72cf8bc45f94276a1e48884e86e53a2f31c7099bdfb45d2f040bd990f0a6b"
+    },
+    {
+      "path": "idle-compatible/frames/idle-050.webp",
+      "bytes": 140906,
+      "sha256": "585dbb7c5e1d894ddf394a3cc40f67566bbd38e80d8fb6c7faf04da4a22e5ab4"
+    },
+    {
+      "path": "idle-compatible/frames/idle-051.png",
+      "bytes": 215794,
+      "sha256": "ace4b0b7ca03c5fa5476fdca930aa548156c9ee8a8ffa3133d0303748858f4a8"
+    },
+    {
+      "path": "idle-compatible/frames/idle-051.webp",
+      "bytes": 140894,
+      "sha256": "08557a573ef17e09b0e1e146e95bf7af2d6d427bccea53a89ebdd46ebc3484ed"
+    },
+    {
+      "path": "idle-compatible/frames/idle-052.png",
+      "bytes": 215653,
+      "sha256": "66963394a1fff327dae4ee51d20f9a148bbb6050d3571bcfc3b9330fee85b2ad"
+    },
+    {
+      "path": "idle-compatible/frames/idle-052.webp",
+      "bytes": 140806,
+      "sha256": "a45f6a7d6c1b48cd867616f90214b90e3d0558088227fc2385401d4b15bfaf33"
+    },
+    {
+      "path": "idle-compatible/frames/idle-053.png",
+      "bytes": 215692,
+      "sha256": "71aaf96f83bca1c6b4ad112484042ff19ecaa3d6e3528625456f36e42ce53474"
+    },
+    {
+      "path": "idle-compatible/frames/idle-053.webp",
+      "bytes": 140864,
+      "sha256": "d2802500d27b2798473045665957da4662e9d6092771c2f6f0ca81b2e0230b08"
+    },
+    {
+      "path": "idle-compatible/frames/idle-054.png",
+      "bytes": 215983,
+      "sha256": "2d919ca8d7fd377cdf62325a5997ddb2fe71e0835dd31bb2a9184618e253d038"
+    },
+    {
+      "path": "idle-compatible/frames/idle-054.webp",
+      "bytes": 141030,
+      "sha256": "39903f8609a71ca42d18aef41ea042dec2030bb5d36ae5281ca82f0e7a666c18"
+    },
+    {
+      "path": "idle-compatible/frames/idle-055.png",
+      "bytes": 215840,
+      "sha256": "bc2b7ffb7aaea0c7fd8fbf6f94eb024502227e773cdc3207de86d09965453dee"
+    },
+    {
+      "path": "idle-compatible/frames/idle-055.webp",
+      "bytes": 141026,
+      "sha256": "20da9b89f329a9df10baa0a60d6a7376e75f492187f5843af15efe891d8fc874"
+    },
+    {
+      "path": "idle-compatible/frames/idle-056.png",
+      "bytes": 215795,
+      "sha256": "6d649659263aa326ee341bd090a5cffdabbfe1e05abbcbb753a2b56a5e053806"
+    },
+    {
+      "path": "idle-compatible/frames/idle-056.webp",
+      "bytes": 140772,
+      "sha256": "b6d18c04958f858c869fafe84df3ef29a597f5099267dec831755dbe4e808859"
+    },
+    {
+      "path": "idle-compatible/frames/idle-057.png",
+      "bytes": 215898,
+      "sha256": "39b439873a416883c2bdfa768d9ddb812284a238e72543fd5d9f303d5bae830b"
+    },
+    {
+      "path": "idle-compatible/frames/idle-057.webp",
+      "bytes": 140840,
+      "sha256": "5d53efcb5932243dbf141f4aa90623694a1fad798cae9707a383fff7c3a5dd7c"
+    },
+    {
+      "path": "idle-compatible/frames/idle-058.png",
+      "bytes": 216022,
+      "sha256": "2e6c72804938a841fdbeca5bbd8af20a9509d5544e75fcc9d1859c489d0b9d51"
+    },
+    {
+      "path": "idle-compatible/frames/idle-058.webp",
+      "bytes": 140972,
+      "sha256": "1b9650cc88095a37583c130b1fdda8e4db864085ba26b42fffc4f97ac0606bbc"
+    },
+    {
+      "path": "idle-compatible/frames/idle-059.png",
+      "bytes": 215735,
+      "sha256": "4079830c38607b733c0784e73efcb6fa1830f085c605e5c47c1f859b879be0a3"
+    },
+    {
+      "path": "idle-compatible/frames/idle-059.webp",
+      "bytes": 140982,
+      "sha256": "80c65313a00a93bf82f62b58571f45fa8c25cb8cf07e794262d7522602ff4fb4"
+    },
+    {
+      "path": "idle-compatible/frames/idle-060.png",
+      "bytes": 215739,
+      "sha256": "e11620565bea387c5563bd300d103df6a864cbfe70890305b1ea6665e2100769"
+    },
+    {
+      "path": "idle-compatible/frames/idle-060.webp",
+      "bytes": 140928,
+      "sha256": "7ae3c0837476d370046aa6bfd146488a7cf669385c939b0aedcceba2af789001"
+    },
+    {
+      "path": "idle-compatible/frames/idle-061.png",
+      "bytes": 215732,
+      "sha256": "8a1b21d79cc43445886a5d6baf89a83c0f41b6e7a0490bad854a609465575805"
+    },
+    {
+      "path": "idle-compatible/frames/idle-061.webp",
+      "bytes": 140844,
+      "sha256": "d9cd9ec009f242b2750f70c8877037d73b2a44b2475d9ee5316c4521979f17d0"
+    },
+    {
+      "path": "idle-compatible/frames/idle-062.png",
+      "bytes": 215876,
+      "sha256": "d3bff697d709ff9bf89f3af4d341c5ce645d9e30ad298e00514cfffea1010dd9"
+    },
+    {
+      "path": "idle-compatible/frames/idle-062.webp",
+      "bytes": 140686,
+      "sha256": "fd456496953db769b29670698d5c998b4bf5f05a5762c884549d23e0f3516424"
+    },
+    {
+      "path": "idle-compatible/frames/idle-063.png",
+      "bytes": 215885,
+      "sha256": "3a67f6dfcdbdecee76ce976f78b44ad3a417a2976be2d43db95cefdb3ac70d12"
+    },
+    {
+      "path": "idle-compatible/frames/idle-063.webp",
+      "bytes": 140884,
+      "sha256": "27a52c9a11bf69de2442b0618b55ad92734195de3011da0e830d98cb7e53bd1f"
+    },
+    {
+      "path": "idle-compatible/frames/idle-064.png",
+      "bytes": 216181,
+      "sha256": "6f7529c8dcb4b321398507af8cfceca4d561b02e0d568aed9c28efc4e425f4e9"
+    },
+    {
+      "path": "idle-compatible/frames/idle-064.webp",
+      "bytes": 141088,
+      "sha256": "7d2217fe913ab2e3992a164d22ef88b7f847c6ad382637660df88dfe4a363c24"
+    },
+    {
+      "path": "idle-compatible/frames/idle-065.png",
+      "bytes": 216688,
+      "sha256": "95b08f6c9ca5155847ac93e6fd8679d24c6f5ae27e67695062761dd69d66f074"
+    },
+    {
+      "path": "idle-compatible/frames/idle-065.webp",
+      "bytes": 141172,
+      "sha256": "3f4a2aeed8aa505cdb2ec42407439fc5aac84557f24da9d072d335412933a1d6"
+    },
+    {
+      "path": "idle-compatible/frames/idle-066.png",
+      "bytes": 216840,
+      "sha256": "063843d9fddbec4b144317004c5e765bea606a9ad6ff788e4819a3d28a2a03af"
+    },
+    {
+      "path": "idle-compatible/frames/idle-066.webp",
+      "bytes": 141640,
+      "sha256": "a67714058f5fe75cd005330b5794c0061be9db7d621ffe721ef6edc80f8aef31"
+    },
+    {
+      "path": "idle-compatible/frames/idle-067.png",
+      "bytes": 217067,
+      "sha256": "33e0fc31250978d7f25a018772dbed50c1da5dc68b9ea0f495def0371d4046ce"
+    },
+    {
+      "path": "idle-compatible/frames/idle-067.webp",
+      "bytes": 141908,
+      "sha256": "a939601887691d77e58a437cd2cd87468015d0751dac0309722cfc0e6cb222b9"
+    },
+    {
+      "path": "idle-compatible/frames/idle-068.png",
+      "bytes": 217341,
+      "sha256": "60030f4b444082557333d72f7788739f6b6a89d79fa3c0ff2367136cb43e0c78"
+    },
+    {
+      "path": "idle-compatible/frames/idle-068.webp",
+      "bytes": 141852,
+      "sha256": "394af0406196c2cf0ab41a58facad35c068ddc97581486a12e6513116da8eaee"
+    },
+    {
+      "path": "idle-compatible/frames/idle-069.png",
+      "bytes": 217784,
+      "sha256": "51c13a65f3088340a22813466fdd18e789c58df827ec9a2fe8c6a79e4b5d4340"
+    },
+    {
+      "path": "idle-compatible/frames/idle-069.webp",
+      "bytes": 142068,
+      "sha256": "31bc4fb585d1f0956f201a24ea0c874b9370b5f147a9d03bf8c5e9b6ce6f191b"
+    },
+    {
+      "path": "idle-compatible/frames/idle-070.png",
+      "bytes": 217881,
+      "sha256": "87d1c79480bc93c3f902289fb02b35c18ab2c384ece7413c699e66ef02cbfea9"
+    },
+    {
+      "path": "idle-compatible/frames/idle-070.webp",
+      "bytes": 142264,
+      "sha256": "86455e8c14c4b8ba1f688db3d1cf0e4d5904574f019b8df18c57f283e539efe4"
+    },
+    {
+      "path": "idle-compatible/frames/idle-071.png",
+      "bytes": 218128,
+      "sha256": "3b3655bb8a33a3a93d4984499f3c4c45c03d11c59d5337a8319e683df6a8af45"
+    },
+    {
+      "path": "idle-compatible/frames/idle-071.webp",
+      "bytes": 142546,
+      "sha256": "3f36552beb187187b890a688b7f535e40d309d2268a701d337c7673164a99146"
+    }
+  ],
+  "sourceArchive": "C:\\Users\\太平\\Downloads\\wu-continuous-attack-33.zip",
+  "sourceArchiveSha256": "ff447bf984dead4c67ea33af82b7a5fccda7e1e835ed89307bb7551668b726bc"
+}

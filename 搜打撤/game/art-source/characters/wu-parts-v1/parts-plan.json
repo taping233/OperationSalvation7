@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "character": "wu",
+  "purpose": "22件简化骨骼动画部件，逐件制作，尚未接入游戏",
+  "referenceCanvas": {
+    "width": 1536,
+    "height": 1024
+  },
+  "facing": "画面右侧，三分侧面；左右均为角色自身",
+  "style": "手绘二次元，低细节，大块不透明色面，硬边明暗，概括笔触",
+  "sourceReference": "C:/Users/太平/.codex/skills/artifact-template-wu/assets/wu-battle-base-frame000.png",
+  "rules": [
+    "同一母版比例与朝向",
+    "透明PNG，保留alpha",
+    "关节处补齐遮挡区域并留重叠",
+    "蓝星纹只在膝上等长裙边",
+    "整把黑灰长剑合为一件，沿母版剑形和长度"
+  ],
+  "generationOrder": [
+    1,
+    8,
+    9,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    22,
+    2,
+    4,
+    3,
+    5,
+    6,
+    7
+  ],
+  "parts": [
+    {
+      "id": "01",
+      "name": "躯干／上衣",
+      "slug": "torso",
+      "scope": "上胸、领口、肩带、收腰衣身；无头颈、手臂与裙摆",
+      "status": "draft-ready",
+      "file": "part-01-torso-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "02",
+      "name": "头脸＋脖子",
+      "slug": "head-neck",
+      "status": "draft-ready",
+      "file": "part-02-head-neck-v4.png",
+      "placement": "按统一母版比例重新配准"
+    },
+    {
+      "id": "03",
+      "name": "刘海＋鬓发",
+      "slug": "front-hair",
+      "status": "draft-ready",
+      "file": "part-03-front-hair-v2.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "04",
+      "name": "后脑头发",
+      "slug": "back-hair",
+      "status": "draft-ready",
+      "file": "part-04-back-hair-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "05",
+      "name": "长直马尾",
+      "slug": "ponytail",
+      "status": "draft-ready",
+      "file": "part-05-ponytail-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "06",
+      "name": "黑蔷薇＋蓝缎带",
+      "slug": "rose-ribbon",
+      "status": "draft-ready",
+      "file": "part-06-rose-ribbon-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "07",
+      "name": "护目镜",
+      "slug": "goggles",
+      "status": "draft-ready",
+      "file": "part-07-goggles-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "08",
+      "name": "后裙摆",
+      "slug": "skirt-back",
+      "status": "draft-ready",
+      "file": "part-08-skirt-back-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "09",
+      "name": "前裙摆",
+      "slug": "skirt-front",
+      "status": "draft-ready",
+      "file": "part-09-skirt-front-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "10",
+      "name": "右上臂＋袖子",
+      "slug": "right-upper-arm",
+      "status": "draft-ready",
+      "file": "part-10-right-upper-arm-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "11",
+      "name": "右前臂＋袖子",
+      "slug": "right-forearm",
+      "status": "draft-ready",
+      "file": "part-11-right-forearm-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "12",
+      "name": "右握剑手",
+      "slug": "right-hand-grip",
+      "status": "draft-ready",
+      "file": "part-12-right-hand-grip-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "13",
+      "name": "左上臂＋袖子",
+      "slug": "left-upper-arm",
+      "status": "draft-ready",
+      "file": "part-13-left-upper-arm-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "14",
+      "name": "左前臂＋袖子",
+      "slug": "left-forearm",
+      "status": "draft-ready",
+      "file": "part-14-left-forearm-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "15",
+      "name": "左平衡手",
+      "slug": "left-hand-open",
+      "status": "draft-ready",
+      "file": "part-15-left-hand-open-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "16",
+      "name": "右大腿",
+      "slug": "right-thigh",
+      "scope": "大腿根至膝，排除小腿",
+      "status": "draft-ready",
+      "file": "part-16-right-thigh-v3.png",
+      "placement": "按统一母版比例重新配准"
+    },
+    {
+      "id": "17",
+      "name": "右小腿",
+      "slug": "right-calf",
+      "scope": "膝至踝，排除脚",
+      "status": "draft-ready",
+      "file": "part-17-right-calf-v3.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "18",
+      "name": "右踝靴",
+      "slug": "right-boot",
+      "status": "draft-ready",
+      "file": "part-18-right-boot-v1.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "19",
+      "name": "左大腿",
+      "slug": "left-thigh",
+      "scope": "大腿根至膝，排除小腿",
+      "status": "draft-ready",
+      "file": "part-19-left-thigh-v3.png",
+      "placement": "按统一母版比例重新配准"
+    },
+    {
+      "id": "20",
+      "name": "左小腿",
+      "slug": "left-calf",
+      "scope": "膝至踝，排除脚",
+      "status": "draft-ready",
+      "file": "part-20-left-calf-v2.png",
+      "placement": "独立源图，待拼装配准"
+    },
+    {
+      "id": "21",
+      "name": "左踝靴",
+      "slug": "left-boot",
+      "status": "draft-ready",
+      "file": "part-21-left-boot-v2.png",
+      "placement": "按统一母版比例重新配准"
+    },
+    {
+      "id": "22",
+      "name": "长剑",
+      "slug": "sword",
+      "status": "draft-ready",
+      "file": "part-22-sword-v1.png",
+      "placement": "独立源图，待拼装配准"
+    }
+  ]
+}

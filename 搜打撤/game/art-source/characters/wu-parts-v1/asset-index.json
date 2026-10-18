@@ -1,0 +1,723 @@
+{
+  "01": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-bd1b63c3-4d85-4a82-995a-bd1a2f30475b.png",
+    "file": "part-01-torso-v1.png",
+    "width": 1536,
+    "height": 1024,
+    "solidBounds": [
+      352,
+      169,
+      1182,
+      775
+    ],
+    "alphaBounds": [
+      105,
+      32,
+      1522,
+      961
+    ],
+    "transparentRatio": 0.7775,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1120961,
+    "sha256": "d7dfab7ffa5d1269cca162bd8f1cca0e5fe426e4c652f500d759138f4d47ef85",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "08": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-6138290c-dd42-4278-8154-5a697252bb51.png",
+    "file": "part-08-skirt-back-v1.png",
+    "width": 1536,
+    "height": 1024,
+    "solidBounds": [
+      288,
+      167,
+      1278,
+      864
+    ],
+    "alphaBounds": [
+      65,
+      32,
+      1344,
+      1024
+    ],
+    "transparentRatio": 0.7008,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1160982,
+    "sha256": "aa10c29a5600ebaab3290b68ceb6041ec0aeca3b01bf4e59c2e98048cdb1781e",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "09": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-ec32bc4e-138d-4788-a57c-91568ecb0d87.png",
+    "file": "part-09-skirt-front-v1.png",
+    "width": 1536,
+    "height": 1024,
+    "solidBounds": [
+      190,
+      145,
+      1378,
+      904
+    ],
+    "alphaBounds": [
+      65,
+      21,
+      1381,
+      954
+    ],
+    "transparentRatio": 0.6061,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1378645,
+    "sha256": "23d8761432061d36a678d079c12fdac579e0d2a537751b37390008ac022b322a",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "16": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-570a07ad-31fa-4dc4-988e-66645860915f.png",
+    "file": "part-16-right-thigh-v3.png",
+    "width": 1024,
+    "height": 1536,
+    "solidBounds": [
+      259,
+      46,
+      767,
+      1462
+    ],
+    "alphaBounds": [
+      65,
+      19,
+      770,
+      1470
+    ],
+    "transparentRatio": 0.6797,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1094797,
+    "sha256": "9e7fed974b3bcc9fdc7e280fb3a5d813bdb234540c99c4626016ac7569db2aff",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review",
+    "boneAnchors": [
+      [
+        0.502953,
+        0.060028
+      ],
+      [
+        0.58563,
+        0.939972
+      ]
+    ],
+    "joinWidths": [
+      372,
+      250
+    ],
+    "sourcePose": "neutral-vertical"
+  },
+  "17": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-ce50716f-0a29-447e-8219-b1ec78ae74b7.png",
+    "file": "part-17-right-calf-v3.png",
+    "width": 1024,
+    "height": 1536,
+    "solidBounds": [
+      327,
+      46,
+      721,
+      1478
+    ],
+    "alphaBounds": [
+      65,
+      41,
+      1010,
+      1486
+    ],
+    "transparentRatio": 0.7531,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1042137,
+    "sha256": "87a4a0317190493a426670064ca528d6d4339210ab50c10f58869132cbf916c8",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review",
+    "boneAnchors": [
+      [
+        0.525381,
+        0.060056
+      ],
+      [
+        0.581218,
+        0.939944
+      ]
+    ],
+    "joinWidths": [
+      263,
+      197
+    ],
+    "sourcePose": "neutral-vertical"
+  },
+  "18": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-bd6ffd97-32d2-4d9e-a4ad-1db0d2e5835b.png",
+    "file": "part-18-right-boot-v1.png",
+    "width": 1374,
+    "height": 1145,
+    "solidBounds": [
+      325,
+      139,
+      1113,
+      1056
+    ],
+    "alphaBounds": [
+      120,
+      20,
+      1303,
+      1073
+    ],
+    "transparentRatio": 0.7435,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 583746,
+    "sha256": "0b63f0cfbad2bc212c5156fbf81ef3526847eaad48c21ea99cfa6555098262aa",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "19": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-97e99634-fc44-41ba-a8a1-f398a0ae3b4b.png",
+    "file": "part-19-left-thigh-v3.png",
+    "width": 1024,
+    "height": 1536,
+    "solidBounds": [
+      255,
+      36,
+      777,
+      1478
+    ],
+    "alphaBounds": [
+      65,
+      0,
+      874,
+      1490
+    ],
+    "transparentRatio": 0.6677,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1087219,
+    "sha256": "83931d2906a8bb7cb0a8f21557a7049ee767e06b76743c746faf4601692e7dff",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review",
+    "boneAnchors": [
+      [
+        0.469349,
+        0.060333
+      ],
+      [
+        0.556513,
+        0.939667
+      ]
+    ],
+    "joinWidths": [
+      381,
+      242
+    ],
+    "sourcePose": "neutral-vertical"
+  },
+  "20": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-0e4da38d-7771-428a-bc2e-85259379fb77.png",
+    "file": "part-20-left-calf-v2.png",
+    "width": 1024,
+    "height": 1536,
+    "solidBounds": [
+      342,
+      48,
+      716,
+      1464
+    ],
+    "alphaBounds": [
+      64,
+      19,
+      964,
+      1472
+    ],
+    "transparentRatio": 0.7702,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1039092,
+    "sha256": "a02e1399ab2859c5746e896309d340bd7ee8fef58f54aceca6362f5d1811ca39",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review",
+    "boneAnchors": [
+      [
+        0.489305,
+        0.060028
+      ],
+      [
+        0.528075,
+        0.939972
+      ]
+    ],
+    "joinWidths": [
+      275,
+      202
+    ],
+    "sourcePose": "neutral-vertical"
+  },
+  "21": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-454b1ad2-de58-4352-8cf9-ff2fd8bc4ffd.png",
+    "file": "part-21-left-boot-v2.png",
+    "width": 1024,
+    "height": 1536,
+    "solidBounds": [
+      275,
+      398,
+      822,
+      1266
+    ],
+    "alphaBounds": [
+      113,
+      67,
+      962,
+      1368
+    ],
+    "transparentRatio": 0.8237,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1008429,
+    "sha256": "e6a5b7d9a3491e0a68bd4f3ed28c4a29a685c7a702960fd482087890b0903e62",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "10": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-00116a78-3b41-48df-ad3a-7d84bb06f555.png",
+    "file": "part-10-right-upper-arm-v1.png",
+    "width": 1024,
+    "height": 1536,
+    "solidBounds": [
+      209,
+      227,
+      834,
+      1249
+    ],
+    "alphaBounds": [
+      65,
+      223,
+      1010,
+      1494
+    ],
+    "transparentRatio": 0.7767,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1061018,
+    "sha256": "ebc9a0cf9f657a38b93495e5de2863cfe5b133645bf358536a0780a54c83fefe",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "11": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-050dfb73-bda8-40f9-ae6e-104fb878d8a8.png",
+    "file": "part-11-right-forearm-v1.png",
+    "width": 1024,
+    "height": 1536,
+    "solidBounds": [
+      117,
+      166,
+      928,
+      1361
+    ],
+    "alphaBounds": [
+      65,
+      33,
+      1010,
+      1495
+    ],
+    "transparentRatio": 0.7222,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1138940,
+    "sha256": "908662e52ecb0f57a5b6dc2d9a47bb854ebd08a418d65c75a6cb72ecc5fe3cac",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "12": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-0f40b51f-ca4f-4e15-ad25-35b59d11692f.png",
+    "file": "part-12-right-hand-grip-v1.png",
+    "width": 1536,
+    "height": 1024,
+    "solidBounds": [
+      443,
+      334,
+      1090,
+      740
+    ],
+    "alphaBounds": [
+      437,
+      21,
+      1340,
+      967
+    ],
+    "transparentRatio": 0.8868,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 850021,
+    "sha256": "8610a99c83153a292db89a5b88c90b4d6081ff6e600f2713cb64126e27454bbd",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "13": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-425cc896-d71e-43d3-bdab-7f7084e5eb34.png",
+    "file": "part-13-left-upper-arm-v1.png",
+    "width": 1024,
+    "height": 1536,
+    "solidBounds": [
+      264,
+      203,
+      802,
+      1222
+    ],
+    "alphaBounds": [
+      65,
+      200,
+      805,
+      1464
+    ],
+    "transparentRatio": 0.7944,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1053918,
+    "sha256": "b3113d3b1fef833fe4379f857da86a0badf70d5835e8bddd3ec94878eae5842b",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "14": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-3fb0ebbf-a281-4eb5-a556-583535fdf4a6.png",
+    "file": "part-14-left-forearm-v1.png",
+    "width": 1024,
+    "height": 1536,
+    "solidBounds": [
+      137,
+      175,
+      938,
+      1364
+    ],
+    "alphaBounds": [
+      65,
+      172,
+      942,
+      1462
+    ],
+    "transparentRatio": 0.7345,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1087791,
+    "sha256": "0c11b85a85e0e190bbaf06fe244f1db7919840f37630800fe3492b08f9395571",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "15": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-967d75be-e77c-4362-89a8-c667fa5aa934.png",
+    "file": "part-15-left-hand-open-v1.png",
+    "width": 1536,
+    "height": 1024,
+    "solidBounds": [
+      403,
+      311,
+      1139,
+      778
+    ],
+    "alphaBounds": [
+      65,
+      21,
+      1344,
+      936
+    ],
+    "transparentRatio": 0.8846,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 917630,
+    "sha256": "7de960d4e00512ad19114cdc0c1fe734ffc70d56c2a0c6018466905c41bd0a80",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "22": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-5f3e1990-b23e-4685-a886-822e2f1b15fa.png",
+    "file": "part-22-sword-v1.png",
+    "width": 2172,
+    "height": 724,
+    "solidBounds": [
+      93,
+      268,
+      2090,
+      458
+    ],
+    "alphaBounds": [
+      90,
+      138,
+      2102,
+      507
+    ],
+    "transparentRatio": 0.8991,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 222119,
+    "sha256": "c5866ab96cad3567d71998cae8de695070cb034440ce178c685a3c0d61c81471",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "02": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-b52afd79-357e-4b3b-b760-b1a74a1513c6.png",
+    "file": "part-02-head-neck-v4.png",
+    "width": 1254,
+    "height": 1254,
+    "solidBounds": [
+      277,
+      132,
+      993,
+      1127
+    ],
+    "alphaBounds": [
+      103,
+      33,
+      1198,
+      1198
+    ],
+    "transparentRatio": 0.6819,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 624906,
+    "sha256": "0ee72b7dc01830b9be13fbe2cd0b2def77518f3fc9681c746a41357017f7ffda",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review",
+    "variants": {
+      "hurt": {
+        "file": "part-02-hurt-head-neck-v2.png",
+        "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-f61fc88e-cef6-4c8f-8e72-003e029fc532.png",
+        "width": 1254,
+        "height": 1254,
+        "solidBounds": [
+          278,
+          131,
+          993,
+          1127
+        ],
+        "bytes": 609084,
+        "sha256": "bd5b75f758e746b36c651558b6869d19f3f8cb56ff5cec8b9020ee29d5ee8666",
+        "cornerAlpha": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "pixelCheck": "passed"
+      }
+    }
+  },
+  "04": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-e0048c4b-2310-4226-a2c9-a6f9d44d25aa.png",
+    "file": "part-04-back-hair-v1.png",
+    "width": 1278,
+    "height": 1230,
+    "solidBounds": [
+      288,
+      145,
+      1029,
+      1017
+    ],
+    "alphaBounds": [
+      25,
+      141,
+      1088,
+      1141
+    ],
+    "transparentRatio": 0.7518,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 622752,
+    "sha256": "2a1ac5f0eeb44e838931296d1aa4c4bbd6d5d7c56f777c71c4eb136255381cdc",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "03": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-a6ee9df8-d9f5-4c1d-8fd3-4c9a32ace2e8.png",
+    "file": "part-03-front-hair-v2.png",
+    "width": 1278,
+    "height": 1230,
+    "solidBounds": [
+      168,
+      138,
+      1097,
+      1118
+    ],
+    "alphaBounds": [
+      138,
+      133,
+      1226,
+      1173
+    ],
+    "transparentRatio": 0.7639,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 584396,
+    "sha256": "2816ba212f23a5cdd0429265f8ec5406a257a2fd5becb68a5a20d55724bcd26d",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "05": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-19799294-e9f5-40f4-afb4-41cf0a0e312c.png",
+    "file": "part-05-ponytail-v1.png",
+    "width": 1024,
+    "height": 1536,
+    "solidBounds": [
+      108,
+      55,
+      783,
+      1414
+    ],
+    "alphaBounds": [
+      97,
+      36,
+      962,
+      1425
+    ],
+    "transparentRatio": 0.7365,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1294260,
+    "sha256": "ab0c250833c6d9207f6742fb391f22f8303a37069767ef6118ef6a6d3cc53030",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "06": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-b15068d1-952b-4609-97a6-c74331528234.png",
+    "file": "part-06-rose-ribbon-v1.png",
+    "width": 1536,
+    "height": 1024,
+    "solidBounds": [
+      510,
+      33,
+      1086,
+      975
+    ],
+    "alphaBounds": [
+      65,
+      30,
+      1344,
+      978
+    ],
+    "transparentRatio": 0.8584,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 988992,
+    "sha256": "dab21b17279555430449fb09e31c41a1af0ea3045d8df751bb2c0742bdddbcb7",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  },
+  "07": {
+    "source": "C:\\Users\\太平\\.codex\\generated_images\\01a109fc-c83b-7991-92eb-481ce79ed9df\\exec-a1942f9c-4312-4793-90c3-a5ed48c0cb25.png",
+    "file": "part-07-goggles-v1.png",
+    "width": 1536,
+    "height": 1024,
+    "solidBounds": [
+      90,
+      261,
+      1448,
+      752
+    ],
+    "alphaBounds": [
+      86,
+      151,
+      1520,
+      952
+    ],
+    "transparentRatio": 0.812,
+    "cornerAlpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bytes": 1050582,
+    "sha256": "b437b312af006f58d08de29e513d435c615ef6872da05000c281bbe6dde6e7a3",
+    "pixelCheck": "passed",
+    "visualStage": "needs-assembly-review"
+  }
+}

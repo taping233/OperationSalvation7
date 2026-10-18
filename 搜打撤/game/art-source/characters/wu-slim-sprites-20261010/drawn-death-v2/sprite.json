@@ -1,0 +1,18 @@
+{
+  "character":"wu",
+  "animation":"death",
+  "method":"four complete hand-drawn poses generated from approved current portrait",
+  "status":"candidate",
+  "frameWidth":1024,
+  "frameHeight":1024,
+  "motionDurationMs":550,
+  "loop":false,
+  "holdLast":true,
+  "frames":[
+    {"path":"../continuous-attack-v7/base.png","label":"当前站立基准","durationMs":80},
+    {"path":"frames/death-01.png","label":"受创失衡","durationMs":140,"offsetY":0},
+    {"path":"frames/death-02.png","label":"屈膝跪撑","durationMs":180,"offsetY":62},
+    {"path":"frames/death-03.png","label":"侧倒接地","durationMs":150,"offsetY":74},
+    {"path":"frames/death-04.png","label":"最终躺倒","durationMs":1200,"offsetY":100}
+  ]
+}

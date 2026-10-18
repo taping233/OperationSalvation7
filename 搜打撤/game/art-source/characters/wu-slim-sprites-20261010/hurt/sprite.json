@@ -1,0 +1,38 @@
+{
+  "status": "candidate",
+  "character": "wu",
+  "animation": "hurt",
+  "frameWidth": 576,
+  "frameHeight": 560,
+  "frameCount": 6,
+  "sequence": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "durationsMs": [
+    40,
+    55,
+    65,
+    70,
+    80,
+    90
+  ],
+  "durationMs": 400,
+  "loop": false,
+  "holdLastFrame": false,
+  "sourceSheet": "../hurt-source.png",
+  "columns": 3,
+  "rows": 2,
+  "frames": [
+    "hurt-000.webp",
+    "hurt-001.webp",
+    "hurt-002.webp",
+    "hurt-003.webp",
+    "hurt-004.webp",
+    "hurt-005.webp"
+  ]
+}

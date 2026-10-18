@@ -1,0 +1,2 @@
+# Raw generated PNGs stay local. Source paths, prompts and SHA256 live in JSON receipts.
+*.png

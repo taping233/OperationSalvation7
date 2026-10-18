@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "frameCount": 31,
+  "endpointEqualsSelectedIdle": true,
+  "solesPixelIdentical": true,
+  "impactHoldPixelIdentical": true,
+  "scope": "pixel anchors and hold only; naturalness and residual cleanup assessed visually"
+}

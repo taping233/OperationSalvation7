@@ -1,0 +1,57 @@
+{
+  "status": "generated",
+  "request": {
+    "input": "1.2::miv4t::, 0.8::quasarcake::\n\nRefined hand-painted anime illustration, detailed believable mechanical design, layered matte color planes, confident selective colored contours and purposeful opaque brush marks. Fine structure at locking mechanism and hinge, large coherent shadows on broad surfaces. Rich restrained blue grays and warm ivory, concentrated gold light. Accurate volumetric construction and varied edges, not crude flat blocks, not global grain, not plastic 3D, no text.\n\nno humans, one heavy freestanding square steel safe, front door swung open toward left, three-quarter view from right and slightly above. Deep midnight slate body, layered ivory reinforced door rim, circular brass combination dial, polished short brass handle, thick steel door cross section, six cylindrical locking bolts and two articulated left hinges. Accurate hardware connections, carefully designed industrial fantasy prop. Inside compartment is EMPTY, filled only with a luminous white-gold flash and a few sharp star-shaped glints. No physical rewards.\n\nOne full-resolution game prop concept, single object, not sprite sheet or collage.\n\nEntire safe and opened attached door visible, clear strong silhouette, object occupies 78 percent of square canvas. Plain dark neutral background, no environment.\n\nSoft cool top light reveals layered painted metal, intense internal white-gold light spills onto inner door and bevel, narrow selective highlights on brass. Refined economical painted details, no uniform dirty scratches.",
+    "model": "nai-diffusion-4-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1024,
+      "height": 1024,
+      "scale": 6.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": true,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1574910215,
+      "negative_prompt": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, person, chest, suitcase, top lid, room door, coins, gold bars, jewelry, gems, treasure objects, vector, low poly, rough sketch, crosshatching, dirty metal, pixel art",
+      "characterPrompts": [],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1.2::miv4t::, 0.8::quasarcake::\n\nRefined hand-painted anime illustration, detailed believable mechanical design, layered matte color planes, confident selective colored contours and purposeful opaque brush marks. Fine structure at locking mechanism and hinge, large coherent shadows on broad surfaces. Rich restrained blue grays and warm ivory, concentrated gold light. Accurate volumetric construction and varied edges, not crude flat blocks, not global grain, not plastic 3D, no text.\n\nno humans, one heavy freestanding square steel safe, front door swung open toward left, three-quarter view from right and slightly above. Deep midnight slate body, layered ivory reinforced door rim, circular brass combination dial, polished short brass handle, thick steel door cross section, six cylindrical locking bolts and two articulated left hinges. Accurate hardware connections, carefully designed industrial fantasy prop. Inside compartment is EMPTY, filled only with a luminous white-gold flash and a few sharp star-shaped glints. No physical rewards.\n\nOne full-resolution game prop concept, single object, not sprite sheet or collage.\n\nEntire safe and opened attached door visible, clear strong silhouette, object occupies 78 percent of square canvas. Plain dark neutral background, no environment.\n\nSoft cool top light reveals layered painted metal, intense internal white-gold light spills onto inner door and bevel, narrow selective highlights on brass. Refined economical painted details, no uniform dirty scratches.",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, worst quality, bad quality, jpeg artifacts, photorealistic, 3d, plastic texture, waxy texture, unfinished sketch, fragmented silhouette, canvas grain, blurry fingers, extra fingers, missing fingers, fused fingers, text, watermark, signature, frame, collage, multiple views, people, person, chest, suitcase, top lid, room door, coins, gold bars, jewelry, gems, treasure objects, vector, low poly, rough sketch, crosshatching, dirty metal, pixel art",
+          "char_captions": []
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "output": "game\\art-source\\chests\\safe-detail-v5\\nai.png",
+  "direction": "Owner rejected v3/v4 as insufficiently detailed and inconsistent style. Single design revision; no runtime installation.",
+  "sha256": "347e55127ce06352b47b00b3fee5d1f74163ac5245dd5abafccd541cdf51f5ca"
+}

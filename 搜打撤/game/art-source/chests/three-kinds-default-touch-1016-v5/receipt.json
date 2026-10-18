@@ -1,0 +1,77 @@
+[
+  {
+    "kind": "small",
+    "version": "default-touch-v5",
+    "path": "game/art-source/chests/three-kinds-default-touch-1016-v5/small.png",
+    "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-f4099422-fba0-47cb-bd67-fbc047c5a943.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "solidAlphaBBox": [
+      65,
+      254,
+      1219,
+      1108
+    ],
+    "bytes": 1271285,
+    "sha256": "728d3340bcedbb7b29803bb86316bde662b1d7929427d78cec4a45352f7eb6d7",
+    "status": "candidate-not-installed",
+    "acquisition": "Original built-in image_gen result copied without image processing. Edit targets and reference paths are in prompts.json."
+  },
+  {
+    "kind": "medium",
+    "version": "default-touch-v5",
+    "path": "game/art-source/chests/three-kinds-default-touch-1016-v5/medium.png",
+    "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-fc0f64ad-7a56-4fbb-b187-081b74d2faf1.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "solidAlphaBBox": [
+      134,
+      220,
+      1161,
+      1111
+    ],
+    "bytes": 1170056,
+    "sha256": "9d42911efa16fcb7f95e55ee34197f52cabac459ea6896b25d17958745f12122",
+    "status": "candidate-not-installed",
+    "acquisition": "Original built-in image_gen result copied without image processing. Edit targets and reference paths are in prompts.json."
+  },
+  {
+    "kind": "large",
+    "version": "default-touch-v5",
+    "path": "game/art-source/chests/three-kinds-default-touch-1016-v5/large.png",
+    "sourcePath": "C:\\Users\\太平\\.codex\\generated_images\\01a144bf-e46e-7a33-a751-68f09f9e8cdf\\exec-ac3ae93e-cd78-4b43-90ff-935074bb17fa.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "solidAlphaBBox": [
+      75,
+      266,
+      1215,
+      1012
+    ],
+    "bytes": 1158145,
+    "sha256": "3c70e38203d1e7b1a221b3c1b26f3b2b3b0ccd376ee16bcac5f92c66223a48fd",
+    "status": "candidate-not-installed",
+    "acquisition": "Original built-in image_gen result copied without image processing. Edit targets and reference paths are in prompts.json."
+  }
+]

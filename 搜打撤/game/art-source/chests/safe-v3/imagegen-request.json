@@ -1,0 +1,46 @@
+{
+  "status": "imported",
+  "direction": "2026-10-15 老板指定保险箱正面侧开门；否决先前工业物资箱稿。统一保险箱动作供五类宝箱使用，档位标题与规则沿现行实现。",
+  "style_source": "docs/production/art/ART-STYLE-V1.md",
+  "images": [
+    {
+      "role": "animation atlas",
+      "source": "C:/Users/太平/.codex/generated_images/01a14007-0162-7603-a140-79f54236520e/exec-c46bc765-6d87-4436-b06a-65378c6fcf31.png",
+      "prompt": "Use case: stylized-concept. Production game animation atlas on a genuinely transparent background, 1536×1024, EXACTLY 3 columns by 2 rows, six equal square cells, no grid lines. Images 1, 2, 3 are painting grammar references ONLY, in priority order: broad opaque brush shapes, quiet large surfaces, economical structure, hand-painted anime color planes. Do not borrow any human, costume, hat, jewelry or scenery. Image 4 is a NAI light progression rough ONLY: its tall door geometry is WRONG and must NOT be copied. Draw a freestanding compact SQUARE heavy steel SAFE with depth, body width equal to body height, thick charcoal/slate-blue casing, broad warm ivory bevel around front door, ONE prominent round brass combination dial and a short sturdy handle, chunky left-edge hinges and visible retracting bolts. A solid appealing weighty silhouette, sparse purposeful detail. Camera almost frontal with a small right side visible, slightly above. This is a safe, not a top-opening chest, locker or a room door. Paint with opaque economical hand-painted color masses and a handful of broad directional strokes. Firm handmade edges, connected main shadows, selected irregular stroke endings and overlaps surrounded by quiet surfaces. Muted coherent cool-warm colors with concentrated amber accents. No all-over outlining, hatch marks, distressed textures, vector fill, glossy 3D, triangular mosaics or airbrushed finish. Each cell contains ONE complete safe at exactly the same scale, BODY stays at exactly the same position and baseline (85% cell height) throughout. Leave room on LEFT for door opening; safe body center at x60% of each cell. Frame order row-major: (1) fully CLOSED; (2) still closed, brass dial turned, bolts retracting and subtle narrow amber seam; (3) front door cracks out by 10 degrees, vertical warm light gap on right; (4) thick front door swings LEFT outward to 55 degrees, lit internal compartment visible; (5) door swings fully LEFT to 110 degrees, behind and to the left of body, dramatic white-gold treasure light spilling from interior with a few broad rays and 3 bright star shapes; (6) door remains open at 110 degrees, calmer golden contents and a few suspended motes. ALL OPENINGS ARE SIDE-HINGED, NEVER UPWARD. Door remains attached at same left hinge. Whole safe and door fully fit each cell, no cross-cell overlap. Background alpha0, effects have natural semitransparent alpha. No floor, backdrop, rectangle, labels, text, watermark or checkerboard.",
+      "tool": "built-in imagegen",
+      "transparent_background": true,
+      "grid": [
+        3,
+        2
+      ],
+      "row_offsets_y": [
+        0,
+        32
+      ],
+      "references": [
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-5.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-8.png",
+        "C:/Users/太平/.codex/skills/artifact-template-anime-block-brush/assets/source-1.png",
+        "game/art-source/chests/safe-v3/safe-nai.png"
+      ],
+      "local_source": "game/art-source/chests/safe-v3/safe-atlas.png",
+      "sha256": "f2b0bc60150504f3c1ce8aa2388c1f8f146414129e7dec1fe8f7724313e4b3cc"
+    },
+    {
+      "role": "burst overlay",
+      "source": "C:/Users/太平/.codex/generated_images/01a14007-0162-7603-a140-79f54236520e/exec-91bb80a4-9466-486f-a2cb-4441d6ad13ad.png",
+      "prompt": "Use case: stylized-concept. A single production game VFX overlay, genuinely transparent background with natural semitransparent alpha. Hand-painted anime treasure eruption from an opened heavy safe, WHITE GOLD core with pale amber edge accents. One compact irregular bright core slightly below center, five or six broad tapering upward fan rays, a few fast curved painterly streaks and a sparse constellation of differently sized four-point stars and tiny diamonds drifting upwards. Shape has a strong narrow-to-wide surge, asymmetric and lively, large transparent gaps between rays. Opaque economical hand-painted color masses, firm handmade edges, a few broad directional curved or elongated strokes, quiet empty regions. No uniform gradients covering canvas, no fog bank, no global grain, no realistic lens flare, no circular badge/ring, no outlines, no 3D. Fits fully within square canvas with 12% empty margins. Effect only: NO safe, box, treasure objects, coins, people, floor, rectangle, backdrop, text, letters, watermark, checkerboard. Semi-transparent peripheral glow fades to alpha0. This image is composited over an actual safe animation; keep core small enough that safe's body stays readable.",
+      "tool": "built-in imagegen",
+      "transparent_background": true,
+      "references": [],
+      "local_source": "game/art-source/chests/safe-v3/burst-source.png",
+      "sha256": "3b304b342bc449e9017695b695af3ae672579423256b1698e852af9862dc9fa3"
+    }
+  ],
+  "rejected": {
+    "reason": "老板否决工业物资箱造型及画风；未接入。",
+    "nai_directory": "game/art-source/chests/nai-v2",
+    "imagegen_source": "C:/Users/太平/.codex/generated_images/01a14007-0162-7603-a140-79f54236520e/exec-4d0f2b89-c793-41e8-8cc3-f6618c26de55.png",
+    "prompt": "Use case: stylized-concept. Asset type: production game sprite atlas, 3 columns × 2 rows, six equal 512×512 square cells, 1536×1024 landscape canvas. Input image: NAI rough design reference for material and palette ONLY; it failed to open its lids. Redraw a coherent six-keyframe opening animation of ONE compact olive canvas expedition supply chest, graphite reinforced corners, ivory metal rim, small brass clasp. Correct its proportions to a low wide chest (width about 1.7 times body height), fixed three-quarter front/right view, hinge on back. Hand-drawn anime game prop, clean confident selective linework, matte painterly color planes, tasteful wear, no crosshatch texture. Every cell has exactly one complete chest, same size, same body geometry, same baseline at 85% of cell height; all effects kept inside their own cell with generous margins. Row major: 1 closed and quiet; 2 closed with warm amber lock and narrow luminous lid seam; 3 lid physically hinged up by 15 degrees, white-gold light through gap; 4 lid physically at 50 degrees, bright interior; 5 lid physically at 100 degrees with a dramatic amber/white treasure eruption, broad upward rays and several sharp stars; 6 lid still open 100 degrees, calm warm glowing contents and a few floating luminous dust flecks. The open lid must be a separate visible panel above and behind the box. Box body stays fixed, aligned and identical across all six cells. Empty background is genuinely transparent alpha, preserve semi-transparent glow. No solid backdrop, floor, rectangular color fields, grid lines, numbers, labels, text, people, extra boxes, duplicated lids, weapons, checkerboard, watermark. This is a continuous physical opening animation, not six closed box variants."
+  }
+}

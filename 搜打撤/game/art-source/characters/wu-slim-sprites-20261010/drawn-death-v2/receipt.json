@@ -1,0 +1,51 @@
+{
+  "retrieval": "原始路径与完整提示词见prompts.json；生成后原样复制到frames目录",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 1806,
+      "sha256": "52442790dce249dcd93a819a5201627ee70073a1a9cde1cd46ae843ccd9d44ea"
+    },
+    {
+      "path": "preview.js",
+      "bytes": 2052,
+      "sha256": "9aec656aa97a8b2dc12730f720e851fd151a439164eb8497046f821514d0dd69"
+    },
+    {
+      "path": "prompts.json",
+      "bytes": 9954,
+      "sha256": "4df56d33b2cb4220512603e3728bd7b41a44af1778ec445114fd35776c533f6e"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1365,
+      "sha256": "20fdc83ddb54b1f044f7df2822ef15a8e1cbbd8c1df1aa020ef07185811bde07"
+    },
+    {
+      "path": "sprite.json",
+      "bytes": 728,
+      "sha256": "4ef16b91475fafc277c0acd24f45cd029abdda5f9bc008ca62dfa54f45b6b74e"
+    },
+    {
+      "path": "frames/death-01.png",
+      "bytes": 1019879,
+      "sha256": "78769830d8637488ca7f6712479191fd15b35bb7d53bb38b989fa6ab4b9af7d7"
+    },
+    {
+      "path": "frames/death-02.png",
+      "bytes": 782421,
+      "sha256": "71743b5bcb990c8d3a7563a6e46c9c24afaffe6f5048ec11b5ca4a8773d32d09"
+    },
+    {
+      "path": "frames/death-03.png",
+      "bytes": 606262,
+      "sha256": "70988a7d72fa5299ae264953e4a3c053e547e136d5b3a0cf13e01f6c7043bb41"
+    },
+    {
+      "path": "frames/death-04.png",
+      "bytes": 647771,
+      "sha256": "3f160c0d0c3ebe7b4cd8c409e3be429b9373fca6a0ff64d3e6d5c28d7b89d7ae"
+    }
+  ],
+  "tool": "built-in image_gen"
+}

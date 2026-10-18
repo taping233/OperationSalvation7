@@ -1,0 +1,38 @@
+{
+  "status": "candidate",
+  "character": "wu",
+  "animation": "death",
+  "frameWidth": 576,
+  "frameHeight": 560,
+  "frameCount": 6,
+  "sequence": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "durationsMs": [
+    90,
+    120,
+    130,
+    140,
+    160,
+    240
+  ],
+  "durationMs": 880,
+  "loop": false,
+  "holdLastFrame": true,
+  "sourceSheet": "../death-source.png",
+  "columns": 3,
+  "rows": 2,
+  "frames": [
+    "death-000.webp",
+    "death-001.webp",
+    "death-002.webp",
+    "death-003.webp",
+    "death-004.webp",
+    "death-005.webp"
+  ]
+}

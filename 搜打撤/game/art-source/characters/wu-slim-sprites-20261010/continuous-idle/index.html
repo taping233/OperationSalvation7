@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>无 · 连续待机对照</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#151b25;color:#ecf0f7;font:15px system-ui}main{max-width:1240px;margin:auto;padding:22px}h1{font-size:24px;margin:0 0 8px}p{color:#b8c5d6;margin:0 0 16px}nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}button{padding:9px 16px;border:1px solid #526981;background:#253247;color:inherit;border-radius:7px;cursor:pointer}button[disabled]{opacity:.5}label{display:flex;align-items:center;gap:7px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}article h2{font-size:16px;margin:0 0 8px}.stage{aspect-ratio:576/560;background:repeating-conic-gradient(#243040 0% 25%,#2b394b 0% 50%) 50%/28px 28px;border:1px solid #4a5870;border-radius:10px;overflow:hidden;position:relative}.stage img,.stage canvas{width:100%;height:100%;object-fit:contain;display:block}.stage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.hint{margin:8px 0;color:#b8c5d6;line-height:1.6}output{display:block;color:#bad5f6;margin-top:12px}footer{margin-top:12px;color:#aebaca;font-size:13px}a{color:#9ac8ff}
+[hidden]{display:none!important}
+.pair.solo{grid-template-columns:1fr;max-width:620px;margin:auto}
+</style>
+<main><h1>无 · 连续待机对照</h1><p>新版只做轻呼吸和手腕微摆，固定脚底、腰胯与头脸。</p>
+<nav><button id="pause">暂停</button><button id="reset">回到起点</button><button id="step">下一帧</button><label>动作幅度 <input type="range" id="strength" min="1" max="4" step="0.25" value="2" aria-label="动作幅度"><span id="strength-value">2×</span></label><label><input type="checkbox" id="comparison">对照旧版</label><label><input type="checkbox" id="anchors">显示固定位置</label><button id="export" disabled>导出72帧</button></nav>
+<section class="pair solo" id="pair"><article id="old-panel" hidden><h2>旧版 · 六张独立绘制</h2><div class="stage"><img id="old" alt="旧版待机"></div><p class="hint">6帧 / 1.56秒。衣褶、发束与轮廓逐帧变化。</p></article><article><h2>新版 · 同一张立绘连续运动</h2><div class="stage"><canvas id="new" width="576" height="560" aria-label="新版无连续待机"></canvas><svg id="marks" viewBox="0 0 576 560" hidden><g fill="none" stroke="#72eab4" stroke-width="1"><path d="M120 512H414 M264 225H312"/><circle cx="318" cy="111" r="22"/><circle cx="153" cy="500" r="13"/><circle cx="389" cy="498" r="13"/></g></svg></div><p class="hint">72帧 / 3秒。胸肩微起伏，双手轻摆，剑随持剑手微动。</p></article></section>
+<output id="status">正在载入</output><footer>候选待机素材，未替换游戏运行帧。<a href="README.md">制作说明</a></footer></main><script type="module" src="preview.js"></script>
+</html>

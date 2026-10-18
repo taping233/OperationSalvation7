@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-11",
+  "status": "v2-candidate-not-integrated",
+  "channel": "builtin-imagegen",
+  "generatedSource": "C:/Users/太平/.codex/generated_images/01a1298a-2e01-78d1-9eba-1e774d8871fc/exec-2c8aeee3-a442-48b1-a9a7-6c2bfa994e93.png",
+  "png": {
+    "width": 1672,
+    "height": 941,
+    "mode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ]
+  },
+  "vectorFont": "Cascadia Code Bold OFL; embedded from project font",
+  "files": [
+    {
+      "path": "game/art-source/ui/home-wordmark-20261011/cn-wordmark-v1.png",
+      "bytes": 1200968,
+      "sha256": "5121edad2f15d58ca9af5d80103379921f86dbf916f50e781ceff93f7a3ddd40",
+      "gitAllowed": false,
+      "status": "rejected-by-user"
+    },
+    {
+      "path": "game/art-source/ui/home-wordmark-20261011/cn-wordmark-v2.png",
+      "bytes": 1319020,
+      "sha256": "a95fb0fa9f8633efa1bf136625c5229c0a8394c1df56350e43a57617e1a6eac9",
+      "gitAllowed": false,
+      "status": "candidate"
+    },
+    {
+      "path": "game/art-source/ui/home-wordmark-20261011/english-v1.svg",
+      "bytes": 24666,
+      "sha256": "38fc68621ca8edd9beee9be6f64aac313a1a289a63950b04f4181ac6d57cc969",
+      "gitAllowed": true,
+      "status": "candidate"
+    },
+    {
+      "path": "game/art-source/ui/home-wordmark-20261011/ornaments-v1.svg",
+      "bytes": 1513,
+      "sha256": "1a3e7d9fd5d817f5f133ab96af2dd4f8e50dad81ce920a0eddca6c76aa71f8ae",
+      "gitAllowed": true,
+      "status": "candidate"
+    },
+    {
+      "path": "game/art-source/ui/home-wordmark-20261011/preview.html",
+      "bytes": 3123,
+      "sha256": "9efa37edf72ddc0f4554f85740412c244077ea3aa4ecdeffad5f81862bc72a11",
+      "gitAllowed": true,
+      "status": "candidate"
+    }
+  ]
+}
