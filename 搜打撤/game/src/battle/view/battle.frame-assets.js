@@ -1,6 +1,36 @@
 // Local ownership for frame URLs only. Pending loads cannot block unrelated disposal.
 export function createFrameAssets() {
   const entries = new Map();
+  const waits = new WeakMap();
+  function waitFor(promise, signal) {
+    if (!signal) return promise;
+    if (signal.aborted) return Promise.resolve(null);
+    let waiters = waits.get(promise);
+    if (!waiters) {
+      waiters = new Set();
+      waits.set(promise, waiters);
+      const finish = (failed, value) => {
+        waits.delete(promise);
+        for (const waiter of waiters) {
+          waiter.signal.removeEventListener('abort', waiter.abort);
+          (failed ? waiter.reject : waiter.resolve)(value);
+        }
+        waiters.clear();
+      };
+      // One continuation per operation: cancelled sessions leave no waiter behind.
+      promise.then(value => finish(false, value), error => finish(true, error));
+    }
+    return new Promise((resolve, reject) => {
+      const waiter = { signal, resolve, reject, abort: null };
+      waiter.abort = () => {
+        waiters.delete(waiter);
+        signal.removeEventListener('abort', waiter.abort);
+        resolve(null);
+      };
+      waiters.add(waiter);
+      signal.addEventListener('abort', waiter.abort, { once: true });
+    });
+  }
   function dispose(entry) {
     if (entry.owners.size || !entry.settled || entry.unloading) return entry.unloading;
     entry.unloading = Promise.resolve().then(() => entry.Assets.unload(entry.url))
@@ -10,13 +40,15 @@ export function createFrameAssets() {
     return entry.unloading;
   }
   async function load(url, owner, Assets) {
+    const signal = owner.controller?.signal;
     let entry = entries.get(url);
     // An unloading texture cannot acquire a new owner. Only this URL waits.
     while (entry?.unloading) {
-      await entry.unloading;
+      await waitFor(entry.unloading, signal);
+      if (owner.cancelled || signal?.aborted) return null;
       entry = entries.get(url);
     }
-    if (owner.cancelled) return null;
+    if (owner.cancelled || signal?.aborted) return null;
     if (!entry) {
       entry = { url, Assets, owners: new Set(), settled: false, unloading: null, promise: null };
       entries.set(url, entry);
@@ -31,7 +63,7 @@ export function createFrameAssets() {
     }
     entry.owners.add(owner);
     (owner.frameAssets ||= new Set()).add(entry);
-    return entry.promise;
+    return waitFor(entry.promise, signal);
   }
   function release(owner) {
     const disposing = [];

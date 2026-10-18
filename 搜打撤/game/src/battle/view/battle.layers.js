@@ -446,10 +446,17 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       // 卡面外的角标（目标侧/费用变化/注能/诅咒）带 [[icon:]] 宏——写入时统一渲染，否则宏原文直接上屏
       // One reading hint: a current block takes priority over supplementary rules.
       const readingHint = st.blockedReason ? `无法打出：${st.blockedReason}` : st.ruleHint;
-      const renderSig = `${st.inner}\u0000${st.ruleHint}\u0000${st.blockedReason}`;
-      if (rec.sig !== renderSig) {
+      if (rec.sig !== st.inner) {
         rec.card.innerHTML = SDT.Icons.rich(st.inner);
+        rec.sig = st.inner;
+        rec.hintSig = null;
+      }
+      // Busy/energy/target hints change independently of the rendered card face.
+      // Keep the face and its controls connected when only the reading hint changes.
+      const hintSig = `${st.ruleHint}\u0000${st.blockedReason}`;
+      if (rec.hintSig !== hintSig) {
         const desc = rec.card.querySelector('.hsc-desc');
+        desc?.querySelector('.bt-rulehint')?.remove();
         if (desc && readingHint && !desc.textContent.includes(st.blockedReason || readingHint)) {
           const hint = document.createElement('span');
           hint.className = 'bt-rulehint';
@@ -457,7 +464,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
           if (st.blockedReason) desc.prepend(hint);
           else desc.appendChild(hint);
         }
-        rec.sig = renderSig;
+        rec.hintSig = hintSig;
       }
       const face = rec.card.querySelector('.hs-card');
       if (face) {

@@ -426,8 +426,11 @@ const SDT = window.SDT;
       if(!mapBrushRoadInView(descriptor.curve,unit/z,view))continue;
       // Keep one paint object/canvas per edge across zoom and content changes.
       // Offscreen edges catch up lazily when panned back into the viewport.
+      // A preview only changes the inset of its incident edges; emphasis is drawn below.
       if(!descriptor.paint||descriptor.zoom!==z||descriptor.viewW!==game.cam.viewW
-          ||descriptor.selectedKey!==selectedKey||descriptor.contentKey!==contentKey){
+          ||descriptor.contentKey!==contentKey
+          ||descriptor.selectedKey!==selectedKey&&(descriptor.fromKey===selectedKey||descriptor.toKey===selectedKey
+            ||descriptor.fromKey===descriptor.selectedKey||descriptor.toKey===descriptor.selectedKey)){
         descriptor.paint=Object.assign(descriptor.paint||{},clippedMapRoad(descriptor.from,descriptor.to,game,unit,statuses),
           {edgeKey:descriptor.edgeKey,fromKey:descriptor.fromKey,toKey:descriptor.toKey,legal:descriptor.legal});
         Object.assign(descriptor,{zoom:z,viewW:game.cam.viewW,selectedKey,contentKey});

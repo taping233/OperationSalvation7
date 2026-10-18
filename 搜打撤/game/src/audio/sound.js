@@ -199,7 +199,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
   }
   // 首次输入恢复被浏览器挂起的上下文，并重试未能开始的当前 BGM。
   function kick() {
-    if (!ensure()) return;
+    if (!muted && !sfxOff && !ensure()) return;
     musicPlayer.retryBlocked();
     // 已解锁且 BGM 正常播放、WebAudio 也未挂起时，后续每次按键/点击直接跳过——
     // 否则每个输入都重走 syncBgm（Howler mute/volume 写入），还会打断进行中的音量淡入淡出。

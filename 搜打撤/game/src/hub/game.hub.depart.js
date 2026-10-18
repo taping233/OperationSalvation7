@@ -19,6 +19,19 @@ import { bindDepartureDrag } from './departure.drag.js';
 import { departureStackKey, findDepartureStack } from './base-departure.commands.js';
 import { deployPick, replaceDeployPick } from './departure.selection-state.js';
 import '../../css/roster-reference.css';
+const departureFaces = new WeakMap();
+const recommendationViews = new WeakMap();
+function renderDepartureCard(card) {
+  let signature;
+  try { signature = JSON.stringify(card); }
+  catch { return SDT.Cards.cardHTML({ ...card }, 'sm'); }
+  let face = departureFaces.get(card);
+  if (!face || face.signature !== signature) {
+    face = { signature, card:{ ...card } };
+    departureFaces.set(card, face);
+  }
+  return SDT.Cards.cardHTML(face.card, 'sm');
+}
   // 基地首页：房间入口、行动难度与出征整备。
   function hubDeployHTML() {
     const B = SDT.Base;
@@ -146,7 +159,7 @@ import '../../css/roster-reference.css';
           data-act="pickAdd" data-name="${escAttr(s.card.name)}" data-stack-key="${escAttr(key)}"
           aria-label="带入${escAttr(s.card.name)}，还可带 ${left} 张"
           title="${escAttr(s.card.name)} · 点击或拖到右侧背包带入（还可带 ${left}）">
-        <div class="dep-card-face">${SDT.Cards.cardHTML(s.card, 'sm')}</div>
+        <div class="dep-card-face">${renderDepartureCard(s.card)}</div>
         <div class="dep-quantity"><span>剩余 <b class="dep-own">${left}</b></span><span>已带 <b class="dep-picked-count">${n}</b></span></div>
       </div>`;
     }).join('') +
@@ -162,14 +175,13 @@ import '../../css/roster-reference.css';
     const full = slots >= preview.capacity;
     game.state = 'modal';
     _set_cardPageOpen(true);
-    const bagCells = Array.from({ length: Math.max(preview.capacity, preview.cells.length) }, (_, i) => {
-      const cell = preview.cells[i];
+    const renderCell = cell => {
       if (!cell) return '<div class="bag-cell empty" aria-hidden="true"></div>';
       const { card, count, fixed, stackKey } = cell;
       return `<div class="bag-cell ${fixed ? 'fixed' : 'filled'}" ${fixed ? '' : 'draggable="true"'} role="button" tabindex="0" data-act="bagZoom" data-name="${escAttr(card.name)}"${stackKey ? ` data-stack-key="${escAttr(stackKey)}"` : ''}
         aria-label="${escAttr(card.name)} ×${count}，${fixed ? '含固定初始牌' : '点击查看，拖回仓库移除'}" title="${escAttr(card.name)} ×${count}">
-        ${SDT.Cards.cardHTML(card, 'sm')}<b class="dep-n on">×${count}</b></div>`;
-    }).join('');
+        ${renderDepartureCard(card)}<b class="dep-n on">×${count}</b></div>`;
+    };
     // —— 宠物携带选择（需求 #4：出发界面增加选择宠物携带的功能）——
     const petStrip = B.PETS.filter(p => B.ownedPets().includes(p.id)).map(p => {
       const on = B.carriedPet() && B.carriedPet().id === p.id;
@@ -183,14 +195,14 @@ import '../../css/roster-reference.css';
     const currentStage = document.getElementById('depMain');
     if (!deployJustOpened && currentStage?.dataset.departureView === 'cover-v3'
       && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing')) {
-      updateDepartureView(currentStage, {
-        stash: B.data.stash, picks: deployPick, bagHtml: bagCells,
+      const updated = updateDepartureView(currentStage, {
+        stash: B.data.stash, picks: deployPick, cells:preview.cells, renderCell, renderCard:renderDepartureCard,
         slots, capacity: preview.capacity, capacityHtml, hint: deployHint,
         summaryHtml, petId: B.carriedPet()?.id || '', rich: html => SDT.Icons.rich(html),
       });
-      syncRecommendationButtons(currentStage);
-      return;
+      if (updated !== false) { syncRecommendationButtons(currentStage); return; }
     }
+    const bagCells = Array.from({ length:Math.max(preview.capacity, preview.cells.length) }, (_, i) => renderCell(preview.cells[i])).join('');
     UI.showOverlay('', `
       <div class="pg hub departure-cover departure-glass camp-detail camp-depart-detail" id="depMain" data-departure-view="cover-v3">
         <button class="ak-sq ak-exit ak-back-tl" data-act="depBack" title="返回人物选择（Esc）" aria-label="返回人物选择">
@@ -274,6 +286,7 @@ import '../../css/roster-reference.css';
       deployHint = '已撤销推荐，恢复应用前的携带选择；仓库未扣卡。'; renderDepartPrep();
     });
     bindDepartureFilters(stage, B.data.stash, {
+      cells:preview.cells, renderCard:renderDepartureCard,
       filters: deployFilters, rarities: SDT.Cards.RARITIES, types: SDT.Cards.TYPES,
       rarityOf: card => SDT.Cards.rarityOf(card),
       onFiltersChange: filters => { if (current()) deployFilters = filters; },
@@ -440,9 +453,18 @@ import '../../css/roster-reference.css';
   }
   function syncRecommendationButtons(root) {
     if (!root) return;
-    const apply = root.querySelector('[data-act="depRecommendApply"]'), undo = root.querySelector('[data-act="depRecommendUndo"]');
-    if (apply) apply.disabled = !(deployRecommendation?.added.length && deployRecommendation.signature === recommendationSignature());
-    if (undo) undo.disabled = !(deployUndo && deployUndo.after === JSON.stringify(deployPick));
+    let buttons = recommendationViews.get(root);
+    if (!buttons || [buttons.apply, buttons.undo].some(node => node && !root.contains(node))) {
+      const panel = root.getElementsByClassName('dep-recommend')[0];
+      const controls = [...(panel?.children || [])];
+      buttons = { apply:controls.find(node => node.dataset.act === 'depRecommendApply'), undo:controls.find(node => node.dataset.act === 'depRecommendUndo') };
+      recommendationViews.set(root, buttons);
+    }
+    const { apply, undo } = buttons;
+    const applyDisabled = !(deployRecommendation?.added.length && deployRecommendation.signature === recommendationSignature());
+    const undoDisabled = !(deployUndo && deployUndo.after === JSON.stringify(deployPick));
+    if (apply && apply.disabled !== applyDisabled) apply.disabled = applyDisabled;
+    if (undo && undo.disabled !== undoDisabled) undo.disabled = undoDisabled;
   }
   function departurePreview() {
     return departureSummary(departureOptions());
