@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
+const { verifyPortable } = require('./verify-portable.cjs');
 
 const projectDir = __dirname;
 const packageJson = require('./package.json');
@@ -65,9 +66,10 @@ async function main() {
   if (!artifactOk) {
     throw new Error(`electron-builder 未产出有效产物（exit=${status}${error ? ` error=${error.message}` : ''}），构建日志：${buildLogPath}`);
   }
-  if (status !== 0) {
-    console.warn(`[build-portable] 构建进程退出码 ${status}，但产物已验证为本次新产出，继续发布`);
-  }
+  if (status !== 0) throw new Error(`electron-builder 失败（exit=${status}），不交付残留产物`);
+  const verification = await verifyPortable(source, path.join(stagingDir, 'portable-verification.json'));
+  fs.mkdirSync(path.join(projectDir, 'dist'), { recursive: true });
+  fs.writeFileSync(path.join(projectDir, 'dist', artifactName + '.verification.json'), JSON.stringify(verification, null, 2));
 
   const published = await runPublisher();
   mark(`publisher done status=${published.status}`);

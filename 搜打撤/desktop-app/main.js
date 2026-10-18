@@ -1,10 +1,11 @@
 /* 搜打撤 · 代号7 —— 唯一 Electron 外壳实现 */
-const { app, BrowserWindow, Menu, protocol, ipcMain, shell, net, screen } = require('electron');
+const { app, BrowserWindow, Menu, protocol, ipcMain, shell, screen, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
-const { pathToFileURL } = require('url');
+const { createGameFileHandler } = require('./game-file-protocol.cjs');
 const { appendSuggestionDocument, deleteSuggestionDocument, parseSuggestionDocument } = require('./suggestions-store.cjs');
 const { attachStartupWindow } = require('./startup-window.cjs');
+const { installDesktopGuard } = require('./runtime-guard.cjs');
 
 // A clean portable release uses its own persistent profile, without erasing other editions.
 const releaseProfilePath = path.join(__dirname, 'release-profile.json');
@@ -18,6 +19,8 @@ if (app.isPackaged && fs.existsSync(releaseProfilePath)) {
   app.setPath('userData', profileDirectory);
   app.setPath('sessionData', profileDirectory);
 }
+
+const runtimeGuard = installDesktopGuard({ app, dialog, ipcMain });
 
 // 2560x1440 / 120 FPS 合成必须使用独显；默认自动选择在本机落到了 Iris Xe。
 // Electron 官方开关会在混合显卡机器上请求高性能 GPU，须在 ready 前设置。
@@ -44,24 +47,7 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 function registerGameProtocol() {
-  const root = path.normalize(GAME_DIR);
-  protocol.handle('app', async (req) => {
-    try {
-      const url = new URL(req.url);
-      let rel = decodeURIComponent(url.pathname);
-      if (rel === '/' || rel === '') rel = '/index.html';
-      const file = path.normalize(path.join(root, rel));
-      if (file !== root && !file.startsWith(root + path.sep)) {
-        return new Response('forbidden', { status: 403 });
-      }
-
-      const stat = await fs.promises.stat(file).catch(() => null);
-      if (!stat || !stat.isFile()) return new Response('not found', { status: 404 });
-      return net.fetch(pathToFileURL(file).toString());
-    } catch (_) {
-      return new Response('not found', { status: 404 });
-    }
-  });
+  protocol.handle('app', createGameFileHandler(GAME_DIR, message => runtimeGuard.record('resource-error', { message })));
 }
 
 function createWindow() {
@@ -85,6 +71,7 @@ function createWindow() {
     },
   });
 
+  runtimeGuard.attach(win);
   attachStartupWindow({ BrowserWindow, ipcMain, app, screen }, win);
   win.webContents.on('did-fail-load', (_event, code, description, url, isMainFrame) => {
     if (isMainFrame) console.error(`桌面页面加载失败：${code} ${description} (${url})`);

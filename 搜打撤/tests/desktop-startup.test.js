@@ -15,8 +15,8 @@ function setup(workArea) {
   class Window extends EventEmitter {
     constructor(options) {
       super(); this.options = options; windows.push(this);
-      this.webContents = new EventEmitter();
-      this.webContents.send = vi.fn();
+      this.contents = new EventEmitter();
+      this.contents.send = vi.fn();
       this.show = vi.fn();
       this.destroyed = false;
       this.destroy = vi.fn(() => { this.destroyed = true; this.emit('closed'); });
@@ -24,6 +24,10 @@ function setup(workArea) {
       this.loadFile = vi.fn(() => Promise.resolve());
     }
     isDestroyed() { return this.destroyed; }
+    get webContents() {
+      if (this.destroyed) throw new Error('Object has been destroyed');
+      return this.contents;
+    }
   }
   const game = new Window();
   game.getBounds = vi.fn(() => ({ x: -1600, y: 120, width: 1400, height: 850 }));
@@ -144,10 +148,10 @@ describe('desktop startup window lifecycle', () => {
     expect(app.quit).not.toHaveBeenCalled();
     ipcMain.emit('startup-quit', { sender: splash.webContents });
     expect(app.quit).toHaveBeenCalledOnce();
-    game.emit('closed');
+    game.destroy();
     expect(splash.destroy).toHaveBeenCalledOnce();
     expect(ipcMain.eventNames()).toHaveLength(0);
-    expect(game.webContents.listenerCount('render-process-gone')).toBe(0);
+    expect(game.contents.listenerCount('render-process-gone')).toBe(0);
     splash.emit('ready-to-show');
     expect(game.loadURL).not.toHaveBeenCalled();
   });
@@ -168,6 +172,29 @@ describe('desktop startup window lifecycle', () => {
     expect(game.show).toHaveBeenCalledOnce();
     expect(game.loadURL).toHaveBeenCalledOnce();
     expect(app.quit).not.toHaveBeenCalled();
+  });
+
+  it('cleans up after a revealed game closes with destroyed native window accessors', () => {
+    const { game, splash, ipcMain } = setup();
+    splash.emit('ready-to-show');
+    ipcMain.emit('startup-ready', { sender: game.webContents });
+    ipcMain.emit('startup-covered', { sender: game.webContents });
+    expect(splash.isDestroyed()).toBe(true);
+    expect(() => game.destroy()).not.toThrow();
+    expect(ipcMain.eventNames()).toHaveLength(0);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it('ignores a rejected game load delivered after native window destruction', async () => {
+    const { game, splash } = setup();
+    let rejectLoad;
+    game.loadURL.mockImplementationOnce(() => new Promise((_resolve, reject) => { rejectLoad = reject; }));
+    splash.emit('ready-to-show');
+    game.destroy();
+    rejectLoad(new Error('navigation aborted during exit'));
+    await Promise.resolve();
+    expect(vi.getTimerCount()).toBe(0);
+    expect(game.contents.send).not.toHaveBeenCalled();
   });
 });
 
@@ -205,7 +232,7 @@ describe('desktop readiness bridge', () => {
 
   it('includes all splash resources in the desktop package', () => {
     const pkg = JSON.parse(readFileSync('desktop-app/package.json', 'utf8'));
-    for (const file of ['startup-window.cjs', 'startup-preload.cjs', 'startup.html']) {
+    for (const file of ['startup-window.cjs', 'startup-preload.cjs', 'startup.html', 'game-file-protocol.cjs']) {
       expect(pkg.build.files).toContain(file);
       expect(readFileSync(`desktop-app/${file}`, 'utf8').length).toBeGreaterThan(0);
     }

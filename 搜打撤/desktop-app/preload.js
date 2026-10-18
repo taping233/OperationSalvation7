@@ -1,5 +1,17 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
+// Record failed visible resources as well as script errors in the persistent desktop log.
+window.addEventListener('error', event => {
+  const target = event.target;
+  const url = target?.currentSrc || target?.src || target?.href || event.filename;
+  if (typeof url === 'string' && url.startsWith('app://sdt/')) {
+    ipcRenderer.send('desktop-page-error', { type: target?.tagName || 'script', url, message: event.message || '' });
+  }
+}, true);
+window.addEventListener('unhandledrejection', event => {
+  ipcRenderer.send('desktop-page-error', { type: 'unhandledrejection', url: location.href, message: String(event.reason?.stack || event.reason || '') });
+});
+
 // The isolated preload reads DOM readiness, never the page's JavaScript namespace.
 window.addEventListener('DOMContentLoaded', () => {
   let sentReady = false;

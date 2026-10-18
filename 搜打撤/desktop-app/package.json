@@ -8,6 +8,7 @@
   "scripts": {
     "check:version": "node ../scripts/check-version.cjs",
     "check:runtime": "node check-electron-runtime.cjs",
+    "verify:portable": "node verify-portable.cjs",
     "prestart": "npm run build:game && npm run check:runtime && npm run check:version",
     "start": "electron .",
     "predist": "npm run check:runtime && npm run check:version",
@@ -24,6 +25,8 @@
     "electronDist": "node_modules/electron/dist",
     "files": [
       "main.js",
+      "game-file-protocol.cjs",
+      "runtime-guard.cjs",
       "preload.js",
       "suggestions-store.cjs",
       "startup-window.cjs",
@@ -46,6 +49,7 @@
       ]
     },
     "portable": {
+      "unpackDirName": true,
       "artifactName": "搜打撤-代号7.exe"
     }
   }
