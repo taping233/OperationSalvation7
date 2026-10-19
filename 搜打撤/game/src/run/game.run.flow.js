@@ -318,12 +318,12 @@ function openResourcePick(done) {
   };
   const render = () => {
   const finished = record.taken !== null;
-  UI.showOverlay('', rewardSceneHTML({ className:'reward-v14 resource-reward-scene', title:'物资投放点', source:'资源补给', count:cards.length,
+  UI.showOverlay('', rewardSceneHTML({ className:'reward-v14 resource-reward-scene', title:finished ? '物资已领取' : '选择一份物资', source:'物资投放点', count:cards.length,
     cards:cards.map((card, i) => {
       if (!card) return '<p>该物资暂不可用</p>';
       const fits = game.canReceiveCard?.(card) !== false;
       const action = finished ? `<span class="reward-unit-state">${record.taken === i ? '已入背包' : '已永久放弃'}</span>`
-        : `<button class="reward-claim" data-act="${fits ? 'resTake' : 'resBag'}" data-i="${i}">${fits ? '收下' : '整理背包 · 当前放不下'}</button>`;
+        : `<button class="reward-claim" data-act="${fits ? 'resTake' : 'resBag'}" data-i="${i}">${fits ? '选择这张' : '整理背包 · 当前放不下'}</button>`;
       return `<article class="reward-unit${record.taken === i ? ' got' : ''}"><button class="reward-card" data-act="resRead" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button>${action}</article>`;
     }).join(''),
     actions:rewardExitHTML('resSkip', finished ? '继续探索' : '返回地图'), footer:`<button class="reward-bag" data-act="resBag">整理背包</button><span class="reward-notice" role="status">${finished ? '领取完成 · 1 张已入背包，其余卡牌已永久放弃' : '两张资源卡中选择一张，其余永久放弃；未领取时保留在此处'}</span>`,
@@ -334,10 +334,14 @@ function openResourcePick(done) {
     const i = Number(data.i), card = cards[i];
     if (!active() || !card) return;
     const fits = game.canReceiveCard?.(card) !== false;
-    UI.showCardZoom(card, { hideNote:true, presentation:'expedition', footer:finished ? '' : `<button class="ov-btn ok" data-act="${fits ? 'resTake' : 'resBag'}" data-i="${i}">${fits ? '收下' : '整理背包 · 当前放不下'}</button>` });
+    UI.showCardZoom(card, { hideNote:true, presentation:'expedition', footer:finished ? '' : `<button class="ov-btn ok" data-act="${fits ? 'resTake' : 'resBag'}" data-i="${i}">${fits ? '选择这张' : '整理背包 · 当前放不下'}</button>` });
   });
   UI.act('resTake', data => take(Number(data.i)));
-  UI.act('resBag', () => { if (active()) bagSlots.showBackpack(); });
+  UI.act('resBag', () => {
+    if (!active()) return;
+    document.getElementById('cardZoom')?._closeCardZoom?.(true);
+    bagSlots.showBackpack();
+  });
   UI.act('resSkip', () => { if (!active()) return; setBagReturnHook(null); UI.hideOverlay(); done(record.taken !== null); });
   };
   render();

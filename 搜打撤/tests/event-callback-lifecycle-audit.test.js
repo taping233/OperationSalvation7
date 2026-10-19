@@ -408,6 +408,7 @@ describe('事件等待与回调生命周期审计', () => {
     H.game.canReceiveCard = () => false;
     flow.reenterCell();
     expect(UI.el.ovBody.textContent).toContain('当前放不下');
+    expect(UI.el.ovBody.querySelector('.reward-head h3').textContent).toBe('选择一份物资');
     expect(UI.el.ovBody.querySelector('[data-act="resTake"]')).toBeNull();
     H.game.canReceiveCard = () => true;
     UI.showOverlay('背包', '<main>背包</main>', 'page'); returnFromBag();
@@ -418,6 +419,26 @@ describe('事件等待与回调生命周期审计', () => {
     expect(UI.el.ovBody.querySelector('[data-act="resTake"]')).toBeNull();
     UI._acts.resSkip();
     expect(H.game.state).toBe('idle');
+  });
+  it('物资格特写的整理按钮一次进入背包，返回仍是原候选', () => {
+    H.cards = [{ id:'wood', name:'木材', type:'资源', rarity:'古朴' }, { id:'key', name:'钥匙', type:'资源', rarity:'古朴' }];
+    H.game.layerData[0].logical[1].def.type = 'resource';
+    H.game.canReceiveCard = () => false;
+    flow.reenterCell();
+    const ids = [...H.game.nodeRewards['0,1'].cardIds];
+    const zoom = document.createElement('div'); zoom.id = 'cardZoom';
+    zoom._closeCardZoom = vi.fn(() => zoom.remove()); document.body.append(zoom);
+    bagSlots.showBackpack = vi.fn(() => {
+      expect(document.getElementById('cardZoom')).toBeNull();
+      UI.showOverlay('背包', '<main>背包</main>', 'page');
+    });
+    UI._acts.resBag();
+    expect(zoom._closeCardZoom).toHaveBeenCalledWith(true);
+    expect(bagSlots.showBackpack).toHaveBeenCalledTimes(1);
+    returnFromBag();
+    expect(H.game.nodeRewards['0,1'].cardIds).toEqual(ids);
+    expect(H.game.ownedCards).toHaveLength(0);
+    expect(UI.el.ovBody.querySelector('.resource-reward-scene')).not.toBeNull();
   });
   it('F35 闸门确认前可返回当前层，旧进入动作不会换层', () => {
     altar.openDoorModal({ pair:'p1', toLayer:1, arriveAt:0 }, {});

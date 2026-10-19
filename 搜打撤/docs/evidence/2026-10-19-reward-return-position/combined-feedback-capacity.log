@@ -1,0 +1,167 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+···················································································································stderr | tests/node-retrigger.test.js
+[music] load failed title No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版）
+[music] load failed board No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版）
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/battle/platform-minimal-1016/far.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-coin-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-wood-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-rations-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-pickup-key-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 http://localhost:3000/game/assets/scenes/scene-fire-anime-v2.webp TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/common.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at processTimers (node:internal/timers:568:9)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/prism.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+·····stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/token.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/wu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/xingyue.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/changwuyu.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 3)
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 收益完成即锁；商店离开才锁；返回均不重复触发
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/baita.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 0)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/heixiang.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 1)
+[warmup] 美术资源预取失败 assets/ui/card-frames/paper-1015/neutral.webp?v=0.60.0 TypeError: response.arrayBuffer is not a function
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:72:29
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/core/art.js:481:15
+    at async Promise.all (index 2)
+
+··stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 商店关闭不消耗，离开所在格才变普通
+[music] load failed shop No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 商店关闭不消耗，离开所在格才变普通
+[music] load failed board No codec support for selected audio sources.
+
+stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > wood满包可暂离、真实存读档与离开重进保留未领奖；腾格领取只结算一次
+[SDT.Art] missing asset mapping: class:武
+
+···stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 门旁商队关闭重进保留购买记录，穿门后旧店关闭且旧购买动作失效
+[music] load failed board No codec support for selected audio sources.
+
+·stderr | tests/node-retrigger.test.js > 节点完成/离开后的消耗时机（2026-09-20 定版） > 门旁商队关闭重进保留购买记录，穿门后旧店关闭且旧购买动作失效
+[music] load failed board No codec support for selected audio sources.
+
+·························
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/map-overview-review.test.js [ tests/map-overview-review.test.js ]
+Error: Failed to resolve import "../game/dev/map-overview-review.js" from "tests/map-overview-review.test.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/map-overview-review.test.js:15:18
+  14 |      canvas.getContext=()=>({setTransform:vi.fn()});
+  15 |      vi.stubGlobal('requestAnimationFrame',vi.fn(()=>1));
+  16 |      await import('../game/dev/map-overview-review.js');
+     |                   ^
+  17 |      document.querySelector('[data-expedition-tool="overview"]').click();
+  18 |      document.querySelector('[data-review="check"]').click();
+ ❯ TransformPluginContext._formatLog ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41
+ ❯ TransformPluginContext.error ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16
+ ❯ normalizeUrl ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23
+ ❯ ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+ ❯ TransformPluginContext.transform ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7
+ ❯ EnvironmentPluginContainer.transform ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18
+ ❯ loadAndTransform ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 7 passed (8)
+      Tests  151 passed (151)
+   Start at  17:04:57
+   Duration  8.45s (transform 1.93s, setup 0ms, collect 3.57s, tests 8.80s, environment 2.81s, prepare 552ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+·
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  17:05:45
+   Duration  908ms (transform 187ms, setup 0ms, collect 42ms, tests 296ms, environment 333ms, prepare 69ms)
+
