@@ -65,6 +65,8 @@ function cascade(element, property, { withoutReset = false } = {}) {
         ancestor = ancestor.parent;
       }
       for (const selector of resolvedSelectors(rule)) {
+        // Pseudo-elements style generated boxes, never the element itself.
+        if (/::[\w-]+/.test(selector)) continue;
         if (!element.matches(selector)) continue;
         if (rule.parent.type !== 'root') {
           throw new Error(`Conditional/nested matching cascade needs explicit coverage: ${file}:${rule.source.start.line} ${selector}`);
@@ -88,6 +90,18 @@ beforeEach(() => {
 afterEach(() => { document.body.innerHTML = ''; });
 
 describe('battle potion left-anchor cascade', () => {
+  it('keeps count, label and emphasized tooltip text light on the dark item surfaces', () => {
+    const potion = document.querySelector('.bt-potion');
+    potion.innerHTML += '<span class="bt-potion-n">×3</span>';
+    const tip = document.querySelector('.bt-potion-tip'); tip.innerHTML = '<b>回复生命</b>';
+    for (const selector of ['.bt-potion-n', '.bt-potions-label', '.bt-potion-tip b']) {
+      expect(cascade(document.querySelector(selector), 'color').winner).toMatchObject({file:'game/css/battle-stage.css',value:'#fff'});
+    }
+    const label = document.querySelector('.bt-potions-label');
+    expect(cascade(label, 'background').winner.value).toBe('#090c10');
+    expect(cascade(label, 'text-shadow').winner.value).toBe('none');
+  });
+
   it('overrides the original centered bar transform in the complete loaded cascade', () => {
     const bar = document.querySelector('.bt-potions');
     const transform = cascade(bar, 'transform');
