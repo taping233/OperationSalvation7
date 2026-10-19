@@ -213,7 +213,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "retired-scenes": {
       "game/data/art-mapping.json": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99",
       "game/src/core/art.js": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
-      "game/src/run/chests.js": "7a1b49ccbc6d156087f3363aa4454ec07cf5630fb222c24e7bc52e49c3c2e74c",
+      "game/src/run/chests.js": "d886f0fa9a87e5f96e563b49caf474b288ef84b51f9af607da0697a36bdea215",
       "game/src/run/chest-opening-art.js": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf",
       "game/src/run/game.run.data.js": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8",
       "game/src/run/game.run.scenes.js": "019d6c5b68cb39456b158e8b730f1a2c7495b2bfc3f6d6070a4301f222ecb701",
@@ -223,7 +223,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
       "game/css/scenes.css": "9cfa703fecf0e80eba1c2d4a7ead00f3d851e6f155eaf5b14b7d83ebf0f3d8f6"
     },
     "chests": {
-      "game/src/run/chests.js": "7a1b49ccbc6d156087f3363aa4454ec07cf5630fb222c24e7bc52e49c3c2e74c",
+      "game/src/run/chests.js": "d886f0fa9a87e5f96e563b49caf474b288ef84b51f9af607da0697a36bdea215",
       "game/src/run/chest-opening-art.js": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf"
     },
     "frames": {
@@ -275,7 +275,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/src/core/icons-bitmap.js": "71e1d0b742254726786fa9a2af57448646bff6881fa04a39b4d15abfd86eed86",
     "game/src/home/home.scene.js": "5315be0ae9feb71523ed8cafea826415341dab33980e4458344e8f169a8edd40",
     "game/src/hub/base-chibi-v2.skin.js": "53a4a3e47e3b01b53d134776a0ee62335f5253e714edc5e775ca16c733906f86",
-    "game/src/hub/hub.presentation.js": "5c60ba882c596467a699bfc4adc27369ddabbf62c807a7e84c7216a1e9bebacc",
+    "game/src/hub/hub.presentation.js": "52d24bc34fe9b781127723c580183aad5818c82d14a14034db88d261147ab7ce",
     "game/src/hub/hub.visuals.js": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78",
     "game/src/rarity-design-lab.js": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775",
     "game/src/run/lab.ending.js": "8a6fe31c4fbef1acbaae9cb06c759fbc5a2e4e16f84c365eb93371232b495ba8",

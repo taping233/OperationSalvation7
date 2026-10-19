@@ -63,8 +63,11 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
 
     if (settlement.promise) return settlement.promise;
     if (['done', 'chests', 'extraRewards'].includes(settlement.phase)) return;
+    const canPresentRewardReturn = () => !settlement.rewardReturnView || settlement.rewardReturnView.isCurrent();
     const retry = error => {
-      if (!sameRun()) return false;
+      if (!sameRun() || !canPresentRewardReturn()) return false;
+      // The retry page owns subsequent attempts; it is no longer the reward page.
+      settlement.rewardReturnView = null;
       if (error) console.error('[battle:settle] 战后结算未完成', error);
       UI.log('[[icon:cross]] 战后结算未保存，请重试；本场奖励不会重新发放', 'warn');
       game.state = settlement.slotId && win === true ? 'battleSettlement' : 'modal';
@@ -249,7 +252,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
           }
           clearBattleSettlementPending(settlement.slotId, settlement.runId);
           game.elapsedSynced = settlement.elapsedCheckpoint;
-          game.state = 'idle';
+          if (canPresentRewardReturn()) game.state = 'idle';
         } else {
           // 无档位胜利和非胜利仍保留原有内存/普通保存语义，不创建永久结算键。
           game.state = 'idle';
@@ -270,10 +273,14 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
         }
         settlement.retryButton = null;
         settlement.retryAction = null;
-        UI.refresh(game);
+        if (canPresentRewardReturn()) UI.refresh(game);
         if (parking) {
-          settlement.phase = 'chests'; game.state = 'modal';
-          SDT.Chests.resume();
+          settlement.phase = 'chests';
+          if (canPresentRewardReturn()) {
+            game.state = 'modal';
+            if (settlement.rewardReturnView) settlement.rewardReturnView.resume();
+            else SDT.Chests.resume();
+          }
         } else teachAmmoOnce();   // 首胜后一次性说明「卡牌是消耗品」
         return true;
       })().catch(error => sameRun() ? retry(error) : false).finally(() => { settlement.commitPromise = null; });
@@ -359,14 +366,17 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
       extraLegendaryPrepared:!!settlement.extraLegendaryPrepared,
       progressCommitted:!!settlement.victoryCommitted,
     });
-    const beforeMapReturn = async continuation => {
+    const beforeMapReturn = async (continuation, view) => {
       if (settlement.victoryCommitted) return true;
+      settlement.rewardReturnView = view;
       settlement.activeRewardContinuation = continuation;
       // 与原胜利 Base+Run 事务共用节点幂等键；afterRun 同时保留未领奖快照。
       continuation.progressCommitted = true;
-      const committed = await settle(true);
-      if (!committed) continuation.progressCommitted = false;
-      return committed;
+      try {
+        const committed = await settle(true);
+        if (!committed) continuation.progressCommitted = false;
+        return committed;
+      } finally { settlement.rewardReturnView = null; }
     };
     const afterRewards = async () => {
       if (settlement.phase === 'done') return true;
@@ -461,16 +471,19 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
       progressRecorded:continuation.progressRecorded, extraLegendaryPrepared:continuation.extraLegendaryPrepared === true };
     settlement.victoryCommitted = continuation.progressCommitted === true;
     settlements.set(opts, settlement);
-    const beforeMapReturn = async current => {
+    const beforeMapReturn = async (current, view) => {
       // 复用正常收尾事务，但保留已揭晓快照及领奖页；已提交的胜利不再累加进度。
       if (settlement.victoryCommitted) return true;
+      settlement.rewardReturnView = view;
       settlement.activeRewardContinuation = current;
       current.progressCommitted = true;
       settlement.parkingRewards = true;
       settlement.phase = 'saving';
-      const committed = await onBattleEnd(opts, [], true, []);
-      if (!committed) current.progressCommitted = false;
-      return committed === true;
+      try {
+        const committed = await onBattleEnd(opts, [], true, []);
+        if (!committed) current.progressCommitted = false;
+        return committed === true;
+      } finally { settlement.rewardReturnView = null; }
     };
     return SDT.Chests.restore(game, saved, () => {
       // The saved bag already contains card consumption and any claimed rewards.

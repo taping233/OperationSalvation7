@@ -58,10 +58,23 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
   };
   async function returnToMap() {
     if (!isCurrentRewardRun() || !cur || G.state !== 'modal' || returningToMap) return false;
+    const binding = saveBinding, box = cur;
+    const surfaceNow = () => UI.el?.ovBody?.querySelector('.cqo-overview, .reward-v14');
+    let surface = surfaceNow();
+    // Settlement may redraw this page, but cannot reclaim a replacement page.
+    const view = {
+      isCurrent: () => binding === saveBinding && box === cur && isCurrentRewardRun()
+        && !!surface && surfaceNow() === surface && !UI.el?.overlay?.hidden
+        && !UI.el?.overlay?.classList?.contains('closing'),
+      resume: () => {
+        if (!view.isCurrent()) return false;
+        resume(); surface = surfaceNow(); return true;
+      },
+    };
     returningToMap = true;
     try {
-      if (beforeMapReturn && !await beforeMapReturn(saveContext?.battleSettlement)) return false;
-      if (!isCurrentRewardRun() || !cur) return false;
+      if (beforeMapReturn && !await beforeMapReturn(saveContext?.battleSettlement, view)) return false;
+      if (!view.isCurrent()) return false;
       if (overviewMode) rewardScreen = 'overview';
       persistReward();
       closeRewardZoom(); cancelPresentation(); searchSeq++;

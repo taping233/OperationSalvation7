@@ -1,6 +1,8 @@
+@import url('./secondary-ui-tokens.css');
 /* Reference: Arknights travelling merchant, with Slay the Spire's direct card shelves. */
 #overlay .shop-pg.sc-shop {
-  --shop-ink:#f0f1ee; --shop-muted:#b5bec1; --shop-gold:#e0c98c; --shop-line:#a6afb13d;
+  --shop-ink:var(--ui-ink); --shop-muted:var(--ui-muted); --shop-gold:#e0c98c; --shop-line:var(--ui-line);
+  --shop-on-gold:#20251f; --shop-action-hover:#eddaa9;
   box-sizing:border-box; display:flex; flex-direction:column; justify-content:flex-start;
   height:100%; min-height:0; padding:28px 42px 24px; gap:24px; overflow:hidden;
   color:var(--shop-ink); border:0; box-shadow:none; background-color:#181c1f;
@@ -93,11 +95,11 @@ body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { wi
 #overlay .shop-pg.shop-market .shop-detail-facts strong { font-weight:500; }
 #overlay .shop-pg.shop-market .shop-detail-facts :is(.tone-ready,.tone-complete) { color:#b4d0bd; }
 #overlay .shop-pg.shop-market .shop-detail-facts .tone-limited { color:#e0aa98; }
-#overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done) { width:100%; min-height:56px; padding:12px 18px; border:1px solid #f2dfac80; border-radius:0; background:#e0c98c; color:#20251f; font:650 20px/1.4 var(--font-ui); cursor:pointer; }
+#overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done) { width:100%; min-height:56px; padding:12px 18px; border:1px solid #f2dfac80; border-radius:0; background:var(--shop-gold); color:var(--shop-on-gold); font:650 20px/1.4 var(--font-ui); cursor:pointer; }
 #overlay .shop-pg.shop-market .shop-detail-buy { display:flex; align-items:center; justify-content:space-between; gap:12px; }
 #overlay .shop-pg.shop-market .shop-buy-price { display:inline-flex; align-items:center; white-space:nowrap; font-variant-numeric:tabular-nums; }
 #overlay .shop-pg.shop-market .shop-buy-price .shop-coin-icon { --coin-size:30px; margin:0 4px; }
-#overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done):hover:not(:disabled) { background:#eddaa9; border-color:#f2dfac; }
+#overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done):hover:not(:disabled) { background:var(--shop-action-hover); border-color:#f2dfac; }
 #overlay .shop-pg.shop-market .shop-detail-done { background:#253732; border-color:#789a8d66; color:#c9ded4; }
 #overlay .shop-pg.shop-market .shop-detail-done:hover:not(:disabled) { background:#344b43; }
 #overlay .shop-pg.shop-market .shop-detail-buy.short:disabled { border-color:#b19a8055; background:#3a3330; color:#ddb5a5; opacity:1; cursor:not-allowed; }
@@ -117,12 +119,14 @@ body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { wi
 #overlay .shop-pg.sc-shop .shop-bag-btn { display:inline-flex; align-items:center; justify-content:flex-start; gap:10px; min-height:48px; padding:11px 4px; border:0; border-radius:0; background:#16282b5e; color:var(--shop-ink); font:500 18px/1.4 var(--font-ui); cursor:pointer; }
 #overlay .shop-pg.sc-shop .shop-bag-btn .ic { width:18px; height:18px; }
 #overlay .shop-pg.shop-market .shop-market-footer { flex:none; display:flex; align-items:center; gap:24px; min-height:56px; padding:0; border:0; }
-#overlay .shop-pg.sc-shop .shop-back { position:static; display:flex; align-items:center; justify-content:center; gap:14px; flex:none; align-self:flex-end; min-width:208px; min-height:64px; margin:0 0 0 auto; padding:12px 28px; border:0; border-radius:0; background:#c7d2cde8; color:#163034; font:600 23px/1.4 var(--font-ui); letter-spacing:0; transform:none; box-shadow:none; clip-path:none; }
+#overlay .shop-pg.sc-shop .shop-back { position:static; display:flex; align-items:center; justify-content:center; gap:14px; flex:none; align-self:flex-end; min-width:208px; min-height:64px; margin:0 0 0 auto; padding:12px 28px; border:0; border-radius:0; background:var(--ui-blue); color:var(--ui-on-primary); font:600 23px/1.4 var(--font-ui); letter-spacing:0; transform:none; box-shadow:none; clip-path:none; }
 #overlay .shop-pg.shop-market .shop-market-footer .shop-back { order:3; margin-left:0; }
 #overlay .shop-pg.shop-market .shop-live { order:1; flex:1 1 auto; min-width:0; color:#afc0c1; font-size:16px; line-height:1.5; text-align:left; }
 #overlay .shop-pg.shop-market .shop-return-note { order:2; flex:none; margin-left:auto; color:var(--shop-muted); font-size:14px; line-height:1.5; white-space:nowrap; }
 #overlay .shop-pg.shop-market .shop-live:empty { display:none; }
-#overlay .shop-pg.sc-shop :is(.shop-back,.shop-sellpost,.shop-bag-btn):hover { transform:none; filter:none; background:#394347; }
+#overlay .shop-pg.sc-shop :is(.shop-sellpost,.shop-bag-btn):hover { transform:none; filter:none; background:#394347; }
+/* Navigation keeps a paired foreground/background in every state. */
+#overlay .shop-pg.sc-shop .shop-back:hover:not(:disabled) { transform:none; filter:none; background:var(--ui-hover); color:var(--ui-ink); }
 #overlay .shop-pg.sc-shop :is(button,[tabindex]):focus-visible { outline:2px solid var(--shop-gold); outline-offset:3px; }
 /* The acquisition desk keeps its ledger, with the same resource and action hierarchy. */
 #overlay .shop-pg.shop-exchange .sell-board { flex:1; min-height:0; overflow:auto; overscroll-behavior:contain; }

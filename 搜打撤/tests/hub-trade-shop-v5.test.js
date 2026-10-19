@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { restoreHubFocus } from '../game/src/hub/hub.presentation.js';
 import { departureStackKey } from '../game/src/hub/base-departure.commands.js';
 import { bindTradeShopV5, createTradeShopState, tradeShopV5HTML } from '../game/src/hub/hub.trade-shop-v5.js';
 
@@ -202,4 +203,47 @@ describe('独立交易所的现行经济与同页交易台', () => {
     expect(host.querySelector('[data-tab="stash"]')).not.toBeNull();
     expect(host.querySelector('.trade-v5-checkout')).toBeNull();
   });
+});
+
+
+function restoreTradeFocus(data) {
+  host.id = 'hubMain';
+  const page = host.firstElementChild;
+  page.classList.add('hub-page'); page.dataset.view = `shop/${state.mode}`;
+  restoreHubFocus(page.dataset.view, new Map([[page.dataset.view, data]]));
+}
+
+it.each(['coins', 'capacity'])('购买后%s不足禁用主按钮，焦点留在当前商品供继续浏览', reason => {
+  if (reason === 'coins') base.data.coins = 6;
+  render();
+  button('tradeShopBuy').focus();
+  if (reason === 'capacity') base.stashRoom.mockReturnValue(0);
+  // The command succeeds once, then the refreshed availability changes.
+  if (reason === 'capacity') base.purchase.mockImplementationOnce(input => { base.stashRoom.mockReturnValue(0); base.data.coins -= input.price; return {ok:true}; });
+  if (reason === 'capacity') base.stashRoom.mockReturnValueOnce(3);
+  click('tradeShopBuy');
+  expect(base.purchase).toHaveBeenCalledOnce();
+  expect(button('tradeShopBuy').disabled).toBe(true);
+  restoreTradeFocus({ act:'tradeShopBuy' });
+  expect(document.activeElement).toBe(host.querySelector('[data-act="tradeShopSelectGood"][aria-pressed="true"]'));
+  expect(base.purchase).toHaveBeenCalledOnce();
+});
+
+it('最后可售卡售空后焦点回当前交易方式，切回购入可继续键盘浏览', () => {
+  base.data.stash = [{ card:cheap, count:1 }]; sellMode();
+  button('tradeShopSellOne').focus();
+  click('tradeShopSellOne'); click('tradeShopSellOne');
+  expect(base.sellStashCards).toHaveBeenCalledOnce();
+  expect(button('tradeShopSellOne')).toBeNull();
+  restoreTradeFocus({ act:'tradeShopSellOne' });
+  expect(document.activeElement).toBe(host.querySelector('[data-act="tradeShopMode"][data-mode="sell"]'));
+  ui._acts.tradeShopMode({ mode:'buy' });
+  restoreTradeFocus({ act:'tradeShopMode', mode:'buy' });
+  expect(document.activeElement).toBe(host.querySelector('[data-act="tradeShopMode"][data-mode="buy"]'));
+});
+
+it('主按钮仍可使用时保持原动作焦点，不转移到浏览回退项', () => {
+  button('tradeShopBuy').focus(); click('tradeShopBuy');
+  restoreTradeFocus({ act:'tradeShopBuy' });
+  expect(document.activeElement).toBe(button('tradeShopBuy'));
 });

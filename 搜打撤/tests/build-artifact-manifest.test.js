@@ -53,3 +53,15 @@ it('workflow archives only successful builds, preserves budget failure and limit
   expect(workflow).toContain('retention-days: 7');
   expect(workflow).toContain('contents: read');
 });
+
+it('matches archive hidden-path exclusions and reports them without removing source files', () => {
+  const input = fixture();
+  writeFileSync(path.join(input.outDir, 'assets/.gitkeep'), '');
+  mkdirSync(path.join(input.outDir, '.hidden'));
+  writeFileSync(path.join(input.outDir, '.hidden/private.txt'), 'not archived');
+  const result = writeBuildProvenance(input);
+  expect(result.fileCount).toBe(3);
+  expect(result.excludedHiddenPaths).toEqual(['.hidden', 'assets/.gitkeep']);
+  expect(readFileSync(path.join(input.outDir, '.hidden/private.txt'), 'utf8')).toBe('not archived');
+  expect(result.files.some(file => file.path.includes('.hidden'))).toBe(false);
+});

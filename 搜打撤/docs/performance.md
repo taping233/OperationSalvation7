@@ -140,3 +140,5 @@ Intel PresentMon 2.5.1 的 ETW 侧采样显示交换链为 `Composed: Flip`、`S
 ### DEV 入战切幕对照
 
 仅开发环境且`?perfProbe=1&flightRecord=1&transitionDiagnostic=plain`时，battle/boss的city-cut视觉替换为现有纯色node-cut；公开性能panel显示“入战切幕：plain（DEV纯色对照，原时长）”。入口原演出等待、点击跳过与续局持幕release时点保持不变；默认URL、其他场景切幕、减少动态偏好、战斗资源与玩法不变。此参数不写设置或存档。用于独立比较入战全屏插画/clip/mask切幕与纯色切幕，不能据单轮差异确证code9根因。
+
+战斗卡牌起拖、停靠与回位按时间指数趋近，保持原 60Hz 响应和终点阈值；回位途中重新抓牌保留当前位置与缩放。后台隐藏清理瞄准与回位，减少动态效果时回位直接到终态。

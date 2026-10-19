@@ -530,6 +530,56 @@ describe('真实重试弹层的结算归属', () => {
   });
 });
 
+it.each([true, false])('返回地图等待结算结果 %s 时换页，事务完成但不抢占新页面', async ok => {
+  const onBattleEnd = await bind();
+  await onBattleEnd({ isBoss:false, foeNames:['敌人'] }, [], true, []);
+  const options = window.SDT.Chests.open.mock.calls[0][3];
+  let resolveCommit;
+  state.commands.commitAttempt.mockImplementationOnce(() => new Promise(resolve => { resolveCommit = resolve; }));
+  let current = true;
+  const view = { isCurrent:() => current, resume:vi.fn() };
+  const pending = options.beforeMapReturn(options.battleSettlement, view);
+  await vi.waitFor(() => expect(resolveCommit).toBeTypeOf('function'));
+  current = false; state.game.state = 'new-page';
+  const shown = window.SDT.UI.showOverlay.mock.calls.length;
+  const refreshed = window.SDT.UI.refresh.mock.calls.length;
+  resolveCommit(ok ? { ok:true, replay:false, receipt:{} } : { ok:false, code:'SAVE_FAILED' });
+  expect(await pending).toBe(ok);
+  expect(state.commands.createAttempt).toHaveBeenCalledTimes(1);
+  expect(state.commands.commitAttempt).toHaveBeenCalledTimes(1);
+  expect(state.game.state).toBe('new-page');
+  expect(window.SDT.UI.showOverlay).toHaveBeenCalledTimes(shown);
+  expect(window.SDT.UI.refresh).toHaveBeenCalledTimes(refreshed);
+  expect(view.resume).not.toHaveBeenCalled();
+  expect(options.battleSettlement.progressCommitted).toBe(ok);
+});
+
+it('返回地图结算仍在原页时，通过页面所有者恢复奖励再交还返回动作', async () => {
+  const onBattleEnd = await bind();
+  await onBattleEnd({ isBoss:false, foeNames:['敌人'] }, [], true, []);
+  const options = window.SDT.Chests.open.mock.calls[0][3];
+  const view = { isCurrent:() => true, resume:vi.fn() };
+  expect(await options.beforeMapReturn(options.battleSettlement, view)).toBe(true);
+  expect(view.resume).toHaveBeenCalledOnce();
+  expect(state.game.state).toBe('modal');
+  expect(state.commands.commitAttempt).toHaveBeenCalledOnce();
+});
+
+it('原页返回结算失败后重试页接管，重试复用原attempt且恢复奖励', async () => {
+  const onBattleEnd = await bind();
+  await onBattleEnd({ isBoss:false, foeNames:['敌人'] }, [], true, []);
+  const options = window.SDT.Chests.open.mock.calls[0][3];
+  window.SDT.Chests.resume = vi.fn();
+  state.commitResponses.push({ ok:false, code:'SAVE_FAILED' });
+  const view = { isCurrent:() => true, resume:vi.fn() };
+  expect(await options.beforeMapReturn(options.battleSettlement, view)).toBe(false);
+  expect(state.actions.battleSettleRetry).toBeTypeOf('function');
+  await state.actions.battleSettleRetry();
+  expect(state.commands.createAttempt).toHaveBeenCalledTimes(1);
+  expect(state.commands.commitAttempt).toHaveBeenCalledTimes(2);
+  expect(window.SDT.Chests.resume).toHaveBeenCalledOnce();
+});
+
 describe('真实 session 的战后保存入口', () => {
   it('payload构造不写盘，pending事务阻断普通saveGame直到清除', async () => {
     vi.doUnmock('../game/src/run/game.session.js');
@@ -601,3 +651,4 @@ describe('真实 session 的战后保存入口', () => {
     expect(Base.data.stats.playSeconds).toBe(initialStats + 10);
   });
 });
+

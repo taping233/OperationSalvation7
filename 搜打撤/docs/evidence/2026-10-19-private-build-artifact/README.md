@@ -6,3 +6,5 @@
 - upload-artifact固定官方v4当前commit ea165f8d65b6e75b540449e92b4886f43607fa02；仅上传desktop-app/game生成目录，contents仍read，无权限扩张。
 - 5组91项集中验证通过（制品清单/构建输出/脚本契约/review/保存退出）；ESLint、Node语法、YAML解析通过。完整真实构建与制品下载须在提交后的CI核验，当前不完整恢复目录不能替代完整dist。
 - 本轮未创建/配置Sites。已知4项性能预算超标不在此处放宽；源字体许可禁止修改，未进行WOFF2转换或子集化。
+
+实际制品核验：b4ed9d3 的 ZIP 与 GitHub digest 一致，1637 个归档文件逐项字节数与 SHA256 一致，9 份许可齐全。原清单额外包含上传器默认排除的 5 个 .gitkeep/.gitignore（438 字节）；未缺运行资源。后续清单按相同隐藏路径规则记录 excludedHiddenPaths，原文件不删除。构建成功、性能预算失败分开保留。

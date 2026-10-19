@@ -158,3 +158,36 @@ it('放弃后取消再重选保留横向卡列位置，且不重抽不发奖', (
   expect(Chests.serialize(game).current).toMatchObject({ taken:[], lost:[] });
   expect(game.grantCard).not.toHaveBeenCalled(); expect(drawn).not.toHaveBeenCalled();
 });
+
+it.each(['overview', 'cards'])('等待返回地图时 %s 被新页面替换，迟到成功不能关新页', async screen => {
+  let resolveCommit;
+  const beforeMapReturn = vi.fn(() => new Promise(resolve => { resolveCommit = resolve; }));
+  Chests.open(game, [{ kind:'small' }], vi.fn(), { onCell:true, beforeMapReturn });
+  if (screen === 'cards') { actions.chestNext(); actions.chestReveal(); }
+  const pending = actions.chestReturn();
+  UI.showOverlay('背包', '<main id="replacement">新页面</main>');
+  const saves = game.persistSave.mock.calls.length;
+  resolveCommit(true);
+  expect(await pending).toBe(false);
+  expect(UI.el.overlay.hidden).toBe(false);
+  expect(game.state).toBe('modal');
+  expect(document.getElementById('replacement').textContent).toBe('新页面');
+  expect(game.persistSave).toHaveBeenCalledTimes(saves);
+});
+
+it('正常结算重绘后仍返回地图，重复点击只提交一次，失败后可以重试', async () => {
+  let resolveCommit;
+  const beforeMapReturn = vi.fn(() => new Promise(resolve => { resolveCommit = resolve; }));
+  Chests.open(game, [{ kind:'small' }], vi.fn(), { onCell:true, beforeMapReturn });
+  const first = actions.chestReturn();
+  expect(await actions.chestReturn()).toBe(false);
+  resolveCommit(false); expect(await first).toBe(false);
+  expect(UI.el.overlay.hidden).toBe(false);
+  const retry = actions.chestReturn();
+  // Real settlement restores the reward view before resolving its successful commit.
+  beforeMapReturn.mock.calls.at(-1)[1].resume(); resolveCommit(true);
+  expect(await retry).toBe(true);
+  expect(beforeMapReturn).toHaveBeenCalledTimes(2);
+  expect(UI.el.overlay.hidden).toBe(true);
+  expect(game.state).toBe('idle');
+});

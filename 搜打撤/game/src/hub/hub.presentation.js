@@ -327,8 +327,13 @@ export function restoreHubFocus(viewKey, focus) {
     if (document.querySelector('#hubMain .hub-page')?.dataset.view !== viewKey) return;
     const data = focus.get(viewKey);
     if (!data) return;
-    const target = [...document.querySelectorAll('#hubMain [data-act], #hubMain [data-browser-key]')].find(element =>
-      data.browserKey ? element.dataset.browserKey === data.browserKey : Object.entries(data).every(([key, value]) => key === 'initialFocus' || element.dataset[key] === value));
+    const available = element => !element.matches(':disabled') && !element.closest('[hidden], [inert], [aria-hidden="true"]');
+    const controls = [...document.querySelectorAll('#hubMain [data-act], #hubMain [data-browser-key]')].filter(available);
+    // A completed trade can disable or remove its action. Keep keyboard browsing
+    // on the page's declared safe target, without activating another transaction.
+    const target = controls.find(element =>
+      data.browserKey ? element.dataset.browserKey === data.browserKey : Object.entries(data).every(([key, value]) => key === 'initialFocus' || element.dataset[key] === value))
+      || controls.find(element => element.hasAttribute('data-focus-fallback'));
     target?.setAttribute('data-initial-focus', '');
     target?.focus({ preventScroll: true });
   };

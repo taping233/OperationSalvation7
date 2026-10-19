@@ -187,3 +187,61 @@ it('refreshes target data across a compatible redraw and cancels a changed hand 
   card.parentElement.style.setProperty('--fx', 'changed'); Aim.resumeAimAfterRender(state.snap);
   expect(Aim.aim).toBeNull(); expect(commands.submitCardPlay).not.toHaveBeenCalled();
 });
+
+it('reaches the same following pose after equal elapsed time at 30, 60 and 144Hz', () => {
+  const poses = [30, 60, 144].map(hz => {
+    begin(); step(); move(800, 700);
+    for (let i = 0; i < hz / 3; i++) step(1000 / hz);
+    const pose = { ...Aim.aim.motion };
+    Aim.cancelAim(); settleReturn();
+    return pose;
+  });
+  for (const pose of poses.slice(1)) {
+    expect(pose.x).toBeCloseTo(poses[0].x, 8);
+    expect(pose.y).toBeCloseTo(poses[0].y, 8);
+    expect(pose.scale).toBeCloseTo(poses[0].scale, 8);
+  }
+});
+
+it('continues a returning card from its visible position and scale on repeated pickup', () => {
+  begin(); move(800, 700); step(); step(100);
+  expect(Aim.aim.motion.scale).toBeLessThan(1);
+  const pose = Aim.aim.motion;
+  Aim.cancelAim(); step();
+  const displayedPose = { ...pose }, displayedTransform = card.style.transform;
+  begin();
+  expect(Aim.aim.motion).toEqual(displayedPose);
+  expect(card.style.transform).toBe(displayedTransform);
+  expect(commands.submitCardPlay).not.toHaveBeenCalled();
+});
+
+it('restores the exact hand state and stops return frames after convergence', () => {
+  card.style.transform = 'rotate(3deg)'; card.style.transition = 'transform 100ms';
+  begin(); move(800, 700); step(); Aim.cancelAim(); settleReturn();
+  expect(card.style.transform).toBe('rotate(3deg)');
+  expect(card.style.transition).toBe('transform 100ms');
+  expect(frames.size).toBe(0);
+});
+
+it('settles an in-progress return when reduced motion is enabled', () => {
+  begin(); move(800, 700); step(); Aim.cancelAim();
+  expect(card.style.transform).toContain('translate3d');
+  reduced = true; step();
+  expect(card.style.transform).toBe(''); expect(frames.size).toBe(0);
+  begin(); move(610, 850); step(); Aim.cancelAim();
+  expect(card.style.transform).toBe('');
+  expect(commands.submitCardPlay).not.toHaveBeenCalled();
+});
+
+it.each([false, true])('settles background cards without replaying stale motion (already returning: %s)', returning => {
+  begin(); move(800, 700); step();
+  if (returning) Aim.cancelAim();
+  vi.spyOn(document, 'hidden', 'get').mockReturnValue(true);
+  document.dispatchEvent(new Event('visibilitychange'));
+  expect(Aim.aim).toBeNull(); expect(card.style.transform).toBe('');
+  expect(frames.size).toBe(0); expect(commands.submitCardPlay).not.toHaveBeenCalled();
+  vi.spyOn(document, 'hidden', 'get').mockReturnValue(false);
+  step(60000); begin(); move(610, 850); step();
+  expect(Aim.aim.motion.x).toBeGreaterThan(310);
+  expect(Aim.aim.motion.x).toBeLessThan(610);
+});

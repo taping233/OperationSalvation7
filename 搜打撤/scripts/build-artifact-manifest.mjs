@@ -12,10 +12,13 @@ export function writeBuildProvenance({ outDir, sourceSha, runId, budgetOutcome, 
   if (lstatSync(root).isSymbolicLink() || !lstatSync(root).isDirectory()) throw new Error('Build root must be a regular directory');
   const digest = buffer => createHash('sha256').update(buffer).digest('hex');
   const files = [];
+  const excludedHiddenPaths = [];
   function visit(relative) {
     for (const entry of readdirSync(path.join(root, relative), { withFileTypes: true })) {
       const file = path.posix.join(relative, entry.name);
       if (entry.isSymbolicLink()) throw new Error('Build artifact cannot contain symlinks: ' + file);
+      // Match upload-artifact default: hidden paths are not transferred.
+      if (entry.name.startsWith('.')) { excludedHiddenPaths.push(file); continue; }
       if (entry.isDirectory()) visit(file);
       else if (entry.isFile() && file !== 'build-provenance.json') {
         const bytes = readFileSync(path.join(root, file));
@@ -35,6 +38,7 @@ export function writeBuildProvenance({ outDir, sourceSha, runId, budgetOutcome, 
   const result = { schemaVersion: 1, sourceSha, runId, generatedAt: new Date().toISOString(), build: 'success',
     performanceBudget: budgetOutcome, tests: 'separate CI workflow; verify its result for this SHA',
     intendedUse: 'Private review artifact; build success is not full CI or real-page acceptance',
+    excludedHiddenPaths: excludedHiddenPaths.sort(),
     fileCount: files.length, totalBytes: files.reduce((sum, file) => sum + file.bytes, 0),
     notices: files.filter(file => /(?:license|notice)/i.test(path.posix.basename(file.path))).map(file => file.path),
     files: files.sort((a, b) => a.path.localeCompare(b.path)) };

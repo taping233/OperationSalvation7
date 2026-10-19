@@ -89,6 +89,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   window.addEventListener('pointerup', finishConsumedPointerPress, true);
   window.addEventListener('pointercancel', cancelConsumedPointerPress, true);
   window.addEventListener('blur', clearConsumedPointerGesture);
+  document.addEventListener('visibilitychange', onAimVisibilityChange);
   if (import.meta.hot) import.meta.hot.dispose(() => {
     cancelAim();
     submittedCards.forEach(ticket => releaseSubmittedCard(ticket));
@@ -101,6 +102,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     window.removeEventListener('pointerup', finishConsumedPointerPress, true);
     window.removeEventListener('pointercancel', cancelConsumedPointerPress, true);
     window.removeEventListener('blur', clearConsumedPointerGesture);
+    document.removeEventListener('visibilitychange', onAimVisibilityChange);
   });
   function targetSessionBattleCurrent(token) {
     // 视图层不直读战斗运行时（架构守卫）：经 core 轻查询判定场次与阶段。
@@ -521,7 +523,8 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       playY: isCard ? playZoneY(e.clientY) : -1,
       hasLeftCancel: false, hasEnteredPlay: false,
       originalTransform, originalTransition, originalInert:returning ? returning.originalInert : el.inert,
-      targetMode:'release', motion:{ x:r.left + r.width / 2, y:r.top + r.height / 2, scale:1 },
+      targetMode:'release', motion:returning ? { ...returning.motion }
+        : { x:r.left + r.width / 2, y:r.top + r.height / 2, scale:1 },
       reducedMotion: !!SDT.Motion?.reduceMotion?.(),
     };
     aim.targetSession = makeAimTargetSession(aim);
@@ -546,7 +549,6 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     document.addEventListener('contextmenu', aimCtxSuppress, true);
     window.addEventListener('blur', cancelAim);
     window.addEventListener('resize', cancelAim);
-    document.addEventListener('visibilitychange', onAimVisibilityChange);
     document.addEventListener('compositionstart', cancelAim, true);
     document.addEventListener('keydown', onAimKeydown, true);
     aim.captureHost?.addEventListener('lostpointercapture', onAimLostCapture);
@@ -585,7 +587,11 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     a.el.style.transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) scale(${pose.scale.toFixed(4)})`;
   }
   function advanceCardPose(a, target, delta, base = cardLayoutBase(a.el)) {
-    const alpha = Math.min(1, delta * 7), scaleAlpha = Math.min(1, delta * 8);
+    // Exponential following composes over elapsed time: 30/60/144Hz reach the same pose.
+    // Keep the established 60Hz response while preserving the latest pose on retarget.
+    const elapsedFrames = Math.max(0, delta) * 60;
+    const alpha = 1 - Math.pow(1 - 7 / 60, elapsedFrames);
+    const scaleAlpha = 1 - Math.pow(1 - 8 / 60, elapsedFrames);
     a.motion.x += (target.x - a.motion.x) * alpha;
     a.motion.y += (target.y - a.motion.y) * alpha;
     a.motion.scale += (target.scale - a.motion.scale) * scaleAlpha;
@@ -611,7 +617,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     motionTime = now;
     if (aim) aimPointerFrame(delta);
     returningCards.forEach((record, el) => {
-      if (!el.isConnected || UI.el.overlay.hidden || !record.stage?.isConnected) { finishCardReturn(el, record); return; }
+      if (!el.isConnected || UI.el.overlay.hidden || !record.stage?.isConnected || SDT.Motion?.reduceMotion?.()) { finishCardReturn(el, record); return; }
       const base = cardLayoutBase(el), target = {
         x:base.x + record.rest.x * base.scale, y:base.y + record.rest.y * base.scale, scale:record.rest.scale,
       };
@@ -678,7 +684,8 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     el.style.transition = 'none';
     el.style.transform = a.originalTransform;
     el.inert = a.originalInert;
-    if (!returnToHand || !el.isConnected || !a.stage?.isConnected || UI.el.overlay.hidden) {
+    if (!returnToHand || !el.isConnected || !a.stage?.isConnected || UI.el.overlay.hidden
+      || document.hidden || SDT.Motion?.reduceMotion?.()) {
       el.style.transition = a.originalTransition;
       return;
     }
@@ -705,7 +712,6 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     document.removeEventListener('contextmenu', aimCtxSuppress, true);
     window.removeEventListener('blur', cancelAim);
     window.removeEventListener('resize', cancelAim);
-    document.removeEventListener('visibilitychange', onAimVisibilityChange);
     document.removeEventListener('compositionstart', cancelAim, true);
     document.removeEventListener('keydown', onAimKeydown, true);
     a.captureHost?.removeEventListener('lostpointercapture', onAimLostCapture);
@@ -865,7 +871,14 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   function onAimLostCapture(e) {
     if (aim && e.pointerId === aim.pointerId && (!aim.follow || aim.leftDown)) cancelAim();
   }
-  function onAimVisibilityChange() { if (document.hidden) cancelAim(); }
+  function onAimVisibilityChange() {
+    if (!document.hidden) return;
+    // A background tab must not retain an invisible return tween or stale pointer capture.
+    cancelAim();
+    returningCards.forEach((record, el) => finishCardReturn(el, record));
+    if (motionFrame) cancelAnimationFrame(motionFrame);
+    motionFrame = 0; motionTime = 0;
+  }
   function onAimKeydown(e) {
     const a = aim;
     if (a?.follow && (a.mode === 'target' || a.mode === 'clickTarget') && e.key === 'Enter'
