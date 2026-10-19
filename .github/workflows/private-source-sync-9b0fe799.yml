@@ -1,0 +1,629 @@
+name: Private source sync 9b0fe799
+on:
+  push:
+    branches: [sync/cloud-9b0fe799-20261019]
+    paths: [.github/workflows/private-source-sync-9b0fe799.yml]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out fixed source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # verified v4
+        with:
+          ref: 9b0fe799969b81bd2d6ae7642f36450fd8c1b360
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Export exact tracked source and checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = 9b0fe799969b81bd2d6ae7642f36450fd8c1b360
+          test "$(git rev-parse 'HEAD^{tree}')" = 3844cf878a10fb7d3c94537f31bdb8ea0f1f4c16
+          mkdir -p sync-export .git/info
+          printf '* -export-ignore -export-subst\n' > .git/info/attributes
+          git archive --format=tar HEAD | gzip -n -1 > sync-export/source-9b0fe799.tar.gz
+          python3 - <<'PYTHON'
+          import hashlib, json, pathlib, subprocess
+          out = pathlib.Path('sync-export')
+          archive = out / 'source-9b0fe799.tar.gz'
+          whole = hashlib.sha256()
+          parts = []
+          with archive.open('rb') as source:
+              while data := source.read(24 * 1024 * 1024):
+                  n = len(parts)
+                  assert n < 64, 'archive exceeds 64-part bound'
+                  name = f'source-9b0fe799.tar.gz.part{n:02d}'
+                  (out / name).write_bytes(data)
+                  whole.update(data)
+                  parts.append({'order': n, 'file_name': name, 'size_bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
+          manifest = {'format': 'ordered-byte-parts-v1', 'source_head': '9b0fe799969b81bd2d6ae7642f36450fd8c1b360', 'source_tree': '3844cf878a10fb7d3c94537f31bdb8ea0f1f4c16', 'archive_file_name': archive.name, 'archive_size_bytes': archive.stat().st_size, 'archive_sha256': whole.hexdigest(), 'parts': parts}
+          (out / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
+          print(json.dumps(manifest))
+          PYTHON
+      - name: Upload manifest
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # verified v4
+        with:
+          name: source-9b0fe799-manifest
+          path: sync-export/manifest.json
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 00
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part00') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part00
+          path: sync-export/source-9b0fe799.tar.gz.part00
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 01
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part01') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part01
+          path: sync-export/source-9b0fe799.tar.gz.part01
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 02
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part02') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part02
+          path: sync-export/source-9b0fe799.tar.gz.part02
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 03
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part03') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part03
+          path: sync-export/source-9b0fe799.tar.gz.part03
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 04
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part04') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part04
+          path: sync-export/source-9b0fe799.tar.gz.part04
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 05
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part05') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part05
+          path: sync-export/source-9b0fe799.tar.gz.part05
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 06
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part06') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part06
+          path: sync-export/source-9b0fe799.tar.gz.part06
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 07
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part07') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part07
+          path: sync-export/source-9b0fe799.tar.gz.part07
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 08
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part08') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part08
+          path: sync-export/source-9b0fe799.tar.gz.part08
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 09
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part09') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part09
+          path: sync-export/source-9b0fe799.tar.gz.part09
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 10
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part10') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part10
+          path: sync-export/source-9b0fe799.tar.gz.part10
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 11
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part11') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part11
+          path: sync-export/source-9b0fe799.tar.gz.part11
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 12
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part12') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part12
+          path: sync-export/source-9b0fe799.tar.gz.part12
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 13
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part13') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part13
+          path: sync-export/source-9b0fe799.tar.gz.part13
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 14
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part14') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part14
+          path: sync-export/source-9b0fe799.tar.gz.part14
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 15
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part15') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part15
+          path: sync-export/source-9b0fe799.tar.gz.part15
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 16
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part16') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part16
+          path: sync-export/source-9b0fe799.tar.gz.part16
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 17
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part17') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part17
+          path: sync-export/source-9b0fe799.tar.gz.part17
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 18
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part18') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part18
+          path: sync-export/source-9b0fe799.tar.gz.part18
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 19
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part19') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part19
+          path: sync-export/source-9b0fe799.tar.gz.part19
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 20
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part20') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part20
+          path: sync-export/source-9b0fe799.tar.gz.part20
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 21
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part21') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part21
+          path: sync-export/source-9b0fe799.tar.gz.part21
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 22
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part22') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part22
+          path: sync-export/source-9b0fe799.tar.gz.part22
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 23
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part23') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part23
+          path: sync-export/source-9b0fe799.tar.gz.part23
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 24
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part24') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part24
+          path: sync-export/source-9b0fe799.tar.gz.part24
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 25
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part25') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part25
+          path: sync-export/source-9b0fe799.tar.gz.part25
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 26
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part26') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part26
+          path: sync-export/source-9b0fe799.tar.gz.part26
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 27
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part27') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part27
+          path: sync-export/source-9b0fe799.tar.gz.part27
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 28
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part28') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part28
+          path: sync-export/source-9b0fe799.tar.gz.part28
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 29
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part29') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part29
+          path: sync-export/source-9b0fe799.tar.gz.part29
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 30
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part30') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part30
+          path: sync-export/source-9b0fe799.tar.gz.part30
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 31
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part31') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part31
+          path: sync-export/source-9b0fe799.tar.gz.part31
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 32
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part32') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part32
+          path: sync-export/source-9b0fe799.tar.gz.part32
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 33
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part33') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part33
+          path: sync-export/source-9b0fe799.tar.gz.part33
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 34
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part34') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part34
+          path: sync-export/source-9b0fe799.tar.gz.part34
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 35
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part35') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part35
+          path: sync-export/source-9b0fe799.tar.gz.part35
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 36
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part36') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part36
+          path: sync-export/source-9b0fe799.tar.gz.part36
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 37
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part37') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part37
+          path: sync-export/source-9b0fe799.tar.gz.part37
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 38
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part38') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part38
+          path: sync-export/source-9b0fe799.tar.gz.part38
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 39
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part39') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part39
+          path: sync-export/source-9b0fe799.tar.gz.part39
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 40
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part40') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part40
+          path: sync-export/source-9b0fe799.tar.gz.part40
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 41
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part41') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part41
+          path: sync-export/source-9b0fe799.tar.gz.part41
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 42
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part42') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part42
+          path: sync-export/source-9b0fe799.tar.gz.part42
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 43
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part43') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part43
+          path: sync-export/source-9b0fe799.tar.gz.part43
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 44
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part44') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part44
+          path: sync-export/source-9b0fe799.tar.gz.part44
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 45
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part45') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part45
+          path: sync-export/source-9b0fe799.tar.gz.part45
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 46
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part46') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part46
+          path: sync-export/source-9b0fe799.tar.gz.part46
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 47
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part47') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part47
+          path: sync-export/source-9b0fe799.tar.gz.part47
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 48
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part48') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part48
+          path: sync-export/source-9b0fe799.tar.gz.part48
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 49
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part49') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part49
+          path: sync-export/source-9b0fe799.tar.gz.part49
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 50
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part50') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part50
+          path: sync-export/source-9b0fe799.tar.gz.part50
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 51
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part51') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part51
+          path: sync-export/source-9b0fe799.tar.gz.part51
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 52
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part52') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part52
+          path: sync-export/source-9b0fe799.tar.gz.part52
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 53
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part53') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part53
+          path: sync-export/source-9b0fe799.tar.gz.part53
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 54
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part54') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part54
+          path: sync-export/source-9b0fe799.tar.gz.part54
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 55
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part55') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part55
+          path: sync-export/source-9b0fe799.tar.gz.part55
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 56
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part56') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part56
+          path: sync-export/source-9b0fe799.tar.gz.part56
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 57
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part57') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part57
+          path: sync-export/source-9b0fe799.tar.gz.part57
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 58
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part58') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part58
+          path: sync-export/source-9b0fe799.tar.gz.part58
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 59
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part59') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part59
+          path: sync-export/source-9b0fe799.tar.gz.part59
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 60
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part60') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part60
+          path: sync-export/source-9b0fe799.tar.gz.part60
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 61
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part61') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part61
+          path: sync-export/source-9b0fe799.tar.gz.part61
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 62
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part62') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part62
+          path: sync-export/source-9b0fe799.tar.gz.part62
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+      - name: Upload part 63
+        if: ${{ hashFiles('sync-export/source-9b0fe799.tar.gz.part63') != '' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-9b0fe799-part63
+          path: sync-export/source-9b0fe799.tar.gz.part63
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
