@@ -12,6 +12,8 @@
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
+| Friday（无绑定与双动作 WF-wu-battle-production-1019） | 自有`game/art-source/characters/wu-battle-rig-20261019/`、`docs/evidence/2026-10-19-wu-battle-rig/`、`.tmp/tools/synfig-1.5.5/`；运行`game/assets/portraits/frames/wu/rig-v1/`与既有animations.json/neutral、battle/wu.webp，清单仅本角色条目；旧wu-parts-v1只读 | v4已确认，14件绑定、待机与普通攻击样板；官方Synfig便携版已解压校验并通过CLI PNG导出，Spine未下载安装。样板接现有序列帧，保留原动作总时长，其他动作暂沿既有帧。不改全局配置、不提交 | 2026-10-19 | 编辑中 |
+| Friday / 无整套皮肤重置 01a14e7e | 无三皮肤`wu-casual-v14.webp`、`wu-spring-v15.webp`、`wu-beach.webp`，清单仅对应三条，自有`docs/evidence/2026-10-18-wu-skins-reset/`、根`.tmp/nai/wu-skins-reset-1018/` | NAI底稿+内置重绘，现行默认画风；保留三主题和默认立绘，素材备份后接入，不改其他属地 | 2026-10-18 | 编辑中 |
 | Friday / 隔离预览5319 WF-perf-budgets-1018 | 纯副本`.tmp/perf-budgets-1018/project`，启动工作目录`D:/素材/代号柒/搜打撤`，Vite5319/PID25100/exec70568 | 源码占用已释放；老板要求停止实玩后已停止浏览器操作，当前窗口仍引用5319，页面与服务现场保留。PID为本会话启动核验时点，未认领其他服务 | 2026-10-18 | 已交付 |
 | Friday / 事件选项与玩家投骰 01a14ddd | `game/src/run/game.run.flow.js`事件段、`game/src/run/game.run.shop.js`委托段、`game/src/ui/event-dice.js`、`game/css/event-dice.css`、事件数据/叙事及相关测试与自有证据 | 暴雨逃跑、余粮投骰、动力锤下店免单委托、救护站招式与事件随机投骰；保留原改动。本轮进行中增量不得纳入其他会话打包；不动index、不build | 2026-10-18 | 编辑中 |
 | Friday / 网页服务 01a14d8f | Vite D:/素材/代号柒/搜打撤、5200、PID48716、本会话创建；node_modules/.cache/web-up-5200.json | 按老板拉起网页版授权恢复，保留供试玩；桌面启动动画编辑已释放，见近期已释放 | 2026-10-18 | 已交付 |
@@ -25,10 +27,90 @@
 
 ## 近期已释放
 
+### 2026-10-19 本地提交 / Friday WF-submit-tools-1019
+
+完成范围已核对，编辑释放，进入冻结提交检查。属地为美术接入与工作流短入口工具、专属测试、WORKFLOW导航和对应证据；老板已授权提交，提交SHA以Git日志为准，不推送。Python11项和570链接文档检查通过，快照验收结果单列；保留战斗绑定、皮肤在途素材、共享清单及临时文件。详见[本批边界](evidence/2026-10-19-WF-submit-tools/README.md)。
+
+### 2026-10-19 无全身待机重排 / Friday WF-wu-battle-stance-v4-1019
+
+修图候选完成未提交，编辑释放。沿WF-wu-battle-rig-1019自有目录新增pose-v4.png，老板否定v3姿态后重新协调躯干、肩臂、骨盆与脚底重心；右手靠髋低位斜下持剑，左手自然下垂，现行身份衣装沿用。提示/来源/大小/SHA已入原证据，PNG本地忽略；RGBA/尺寸/源副本核对通过，当前Codex内置浏览器5200当前窗口512×342画布已加载v4，截图pose-v4-browser.png。PENDING46更新，造型仍待反馈；旧版本保留，未绑定/动作/接游戏，未build/提交，无新服务。
+
+### 2026-10-19 无待机收步 / Friday WF-wu-battle-stance-1019
+
+局部修图完成未提交，编辑释放。沿WF-wu-battle-rig-1019自有目录新增pose-v3.png，按老板反馈收窄双脚间距、轻微错步、减少屈膝，保留持剑及衣装；审阅页默认切v3，旧图与构型板保留。提示词/来源/大小/SHA随原证据更新，PNG本地忽略；RGBA/尺寸/源副本检查通过，当前Codex内置浏览器5200当前窗口512×342画布加载正常，截图pose-v3-browser.png。造型尚待反馈，PENDING46同步；未绑定/制作动作/接游戏，未build/提交，无新服务。
+
+### 2026-10-19 无战斗骨骼样板造型预览 / Friday WF-wu-battle-rig-1019
+
+阶段预览完成未提交，编辑释放，整项动画尚未完成。自有`game/art-source/characters/wu-battle-rig-20261019/`、[证据](evidence/2026-10-19-wu-battle-rig/README.md)。交付持剑造型与24件构型板；PNG均大于1MB、本地忽略并记录SHA。当前Codex内置浏览器5200审阅页、当前窗口真实点击与棋盘透明/缩放显示通过，读取error为空；只读尺寸/alpha/源副本检查通过。构型板仍需腰腹补全、去重复头发与关节配准；造型反馈见PENDING #46。未确认Spine安装/许可，未安装MCP、未改配置，未做绑定/动作/游戏接入或战斗验收。未build/提交，无新服务；旧拆件和运行素材未改。
+
+### 2026-10-19 工作流短入口标准化 / Friday 01a14f3d
+
+实现完成、编辑释放。自有`tools/workflow-summary.mjs`、`tools/nai-workflow.py`、`tools/browser-personnel.mjs`及`tests/workflow-standardize.test.js`、`tools/tests/test_nai_workflow.py`，`docs/workflow-recipes.md`与WORKFLOW导航、自有[证据](evidence/2026-10-19-workflow-standardize/README.md)。13项Vitest+6项Python、ESLint与567链接守卫通过；NAI只读状态和请求准备通过、未联网发图/上传/扣额；当前Codex内置浏览器5200静音后六步真实导航到常无欲皮肤预览并一次取证，默认装备不变、图片完整、error空；刷新读档/战斗未验。新工具已汇总真实报告并保留passed/observed及未核项；不自动释放台账/提交。无游戏业务或运行图片改动，无新服务，未build/全量，本会话未动index/提交。
+
+### 2026-10-19 美术接入效率工具 / Friday 01a14f3d
+
+实现完成、编辑释放。本轮属地`src`运行图不变；自有`tools/skin-import.py`、`tools/art-check.mjs`、`tools/browser-evidence.mjs`，`scripts/asset-audit{,-lib}.cjs`新增目标报告，专属`tests/art-workflow-tools.test.js`、`tools/tests/test_skin_import.py`及既有资产测试扩充，`docs/art-workflow-tools.md`、WORKFLOW工具导航与[证据](evidence/2026-10-19-art-workflow-tools/README.md)。24项Vitest+5项Python、ESLint及563链接文档守卫通过；真实源图项目外cwd预览通过；当前Codex内置浏览器静态素材页一次取证成功，未重复游戏流程。Codex记忆已备份、写入并检索命中。全局资产95项范围外错误单列未修；未build/全量/新服务。本会话未操作index或提交，同树整合会话状态另计。
+
+### 2026-10-19 常无欲鼓房皮肤 / Friday 01a14f3d
+
+接入完成、编辑释放。自有`game/src/core/art.js`常无欲`drum-room`项、新增`game/assets/portraits/full/changwuyu-drum-room.webp`及清单单条、人物页皮肤段和[接入证据](evidence/2026-10-19-changwuyu-drum-skin/README.md)。18项定向通过；当次素材0问题、范围外98项错误单列；Codex内置浏览器5200当前窗口真实预览、装备及恢复默认通过，大图/缩略图正常、error空，截图已落盘；未验刷新读档/选人实操/战斗。默认和战斗立绘不变。本会话未build/提交；此前验证待补文案与占用状态已回填。
+
+Friday / 玩家反馈续改 WF-feedback-34-1018，2026-10-18：实现完成未提交，编辑占用释放，待老板验收。新增14条及公共卡面右下角价格：自有`core/renderer.js`、`hub/game.bag.js`及view2/容器view、`cards/cards.js`/view/description/新增rot-seed-revision、battle目标规则/aim/overlays/layers/hosted/resolution/exec-play/engine/foe-lifecycle/core注释、ui/interface-motion/page-visual-ready/cinematics/card-result-feedback/新增rarity-reveal和map-passage、对应CSS与腐化之种既有回归用例；flow仅移动跨层展示接线，shop仅页脚。现行说明更新`docs/rules.md`、`docs/cards/card-display.md`、UI-PAGE-COVERAGE。老板自行验收，未测试/浏览器/build/打包/提交/推送，无新服务；[逐条实现与边界](evidence/2026-10-18-feedback-34/README.md)。前20条沿原归属保留。
+
+Friday / 玩家反馈 WF-feedback-1020-1018，2026-10-18：实现完成未提交，编辑占用释放，待老板验收。自有`game/src/hub/game.bag.view2.js`、`game.bag.drag.js`、`game.hub.depart.js`、`hub.warehouse.js`，`game/src/run/game.run.altar.js`、`game.run.scenes.js`、`game.run.flow.js`仅重编结果接入、`expedition.view.js`、`chests.js`，`game/src/ui/overlay.js`、`node-scene-view.js`、新增`event-recode-result.js`，`game/src/audio/sound.music.player.js`，样式`battle-stage.css`、`battle-infusion.css`、新增`feedback-1018.css`、`event-choice-feedback.css`、`event-recode-result.css`及对应四个现有测试的本轮增量。原事件负责人已确认停止写入并释放重编属地，保留其其他改动。老板明确“不用复核，改完即可”后停止复核，无最终测试/实页通过结论；未build/提交/推送/打包，无新服务。[逐条交付记录](evidence/2026-10-18-feedback-20/README.md)。
+
+Friday / EXE稳定性修复 01a14f4c，2026-10-18：完成未提交，编辑/封装占用释放。自有`desktop-app/{main.js,package.json,preload.js,game-file-protocol.cjs,build-portable.cjs,runtime-guard.cjs,verify-portable.cjs}`、`tests/{desktop-runtime-guard,desktop-file-protocol}.test.js`及`docs/development.md`增量。每次启动独立解压、全生命周期故障日志/恢复、实际EXE重叠启动失败阻止交付；77项不同定向用例、语法/目标测试lint、559链接检查通过。新EXE`.tmp/exe-stability-1018/delivery/搜打撤-代号7-资源修复版-20261018.exe`，326036949字节；实际两次启动目录独立，1837资源存续，1912载荷与解包目录一致，游戏内容与上一包逐字节一致，协议读取失败0，见[证据](evidence/2026-10-18-exe-stability/README.md)。未原生游戏实玩/对方机器验证，旧5项性能预算超限保留；实验子进程39788/43500已结束，无新服务，不提交推送，不纳入他人在途改动。
+
+Friday / EXE故障审查 01a14f4c，2026-10-18：只读审查完成，编辑/实验占用释放。实际交付EXE载荷1912文件与解包目录一致、1475位图解码/409静态引用/600次协议并发取消核验通过；实际EXE在隔离TEMP下两次Node模式启动，确认固定解压目录被第二启动器清理，首进程立绘先消失33秒、第二进程退出后再次消失。发现P1重复启动资源目录竞争、P2入场后移除唯一崩溃监听，见[审查证据](evidence/2026-10-18-exe-review/README.md)。未复现真实游戏渲染崩溃，不认定对方全部故障同源；生产源码/EXE未改，四个自有实验PID均结束，无服务、不提交。
+
+Friday / 换肤修复EXE 01a14f4c，2026-10-18：已交付，编辑占用释放。老板追问后冻结并补验停止现场中的事件改动，17文件245项已核验通过（副本补齐启动器后contracts17项补过）；桌面与换肤5文件64项通过。新包`.tmp/exe-refresh-1018/delivery/搜打撤-代号7-20261018-换肤修复.exe`，326032977字节，builder退出0，1837游戏文件与冻结副本一致且真实协议读取失败0。三皮肤在途素材采用HEAD；Vite编译成功、postbuild5项性能预算超限如实保留，未原生开关窗口实测；[交付证据](evidence/2026-10-18-exe-refresh/README.md)。无新服务，不改共享产物、不提交推送，其他会话登记未代改。
+
+### 2026-10-18 常无欲鼓房NAI续图 / Friday 01a14f3d
+
+已交付底稿，编辑占用释放。NAI5 Full、1344×768、28步、CFG5.5、Euler Ancestral/Karras、seed1375806249，HTTP200；原图根`.tmp/nai/changwuyu-drums-20261018/candidate-free-hatless.png`（>1MB仅本地），完整请求/SHA256见`docs/evidence/2026-10-18-changwuyu-drums-nai5/request-free-hatless.json`。灰发低髻/黄瞳/尖耳/圆镜/无帽与休闲服已目检；鼓组布局较原图简化，颈部仍偏长、画法细线偏多，属于助手观察、待老板评价。未替换运行素材、未测试/build/提交，无新增服务。
+
+Friday / 选人换肤位移 01a14f4c，2026-10-18：完成未提交，编辑占用释放。自有`game/src/ui/character-view-motion.js`、`tests/character-view-motion.test.js`及[证据](evidence/2026-10-18-skin-swap-position/README.md)。换肤复用画框、同级图层仅透明度交叠并保持待机进度；2文件12项与目标ESLint通过。当前窗口内置浏览器5200真实依次切换四套外观，画框/图片容器坐标尺寸一致，页面错误为空，截图已目检。未build/提交，无新增服务。
+
+### 2026-10-18 常无欲鼓房免费档 / Friday 01a14f3d
+
+请求受阻，编辑占用释放。老板授权切1344×768免费横屏，完整参数/人物/画师链/种子沿用原请求；`docs/evidence/2026-10-18-changwuyu-drums-nai5/request-free.json`保存请求。NAI返回HTTP429并触发客户端共享15分钟冷却；未产图、未自动重试、未替换运行素材、未测试/提交。
+
+### 2026-10-18 常无欲鼓房 NAI5 / Friday 01a14f3d
+
+请求受阻，编辑占用释放。自有`docs/evidence/2026-10-18-changwuyu-drums-nai5/`保存生成脚本与完整请求；NAI5 Full、2048×1152、现行四画师链，原图鼓房坐姿与休闲服，常无欲灰发低髻/黄瞳/尖耳/圆镜/弯尖帽。服务返回HTTP402，未产图、未重试、未替换运行素材、未测试/提交。原图仅作本地观察与提示词依据，未上传。
+
+### 2026-10-18 首页玻璃工具钮 / Friday 01a14f3b
+
+完成未提交、编辑释放。自有`game/css/home-polish.css`音量和留言入口局部样式及[证据](evidence/2026-10-18-home-glass-tools/README.md)。按老板最终要求撤回首轮外观调整，恢复原版，仅填充层背景模糊8→18px；CSS定向7项重验通过，Codex内置浏览器5200当前窗口已核对原版尺寸/侧条/切角恢复及18px模糊。原交互验证复用；既有5200保留，无新服务，未build/提交。
+
+### 2026-10-18 EXE启闭与资源故障 / Friday WF-exe-errors-1018
+
+完成未提交、编辑释放。自有 `desktop-app/{main.js,startup-window.cjs,game-file-protocol.cjs,package.json}`、`tests/desktop-{startup,file-protocol}.test.js`、`docs/development.md` 本轮说明及[证据](evidence/2026-10-18-WF-exe-errors/README.md)。修复销毁窗口访问并直接流式提供资源，52项定向测试及新包1526文件无窗口协议/字节核验通过；修复EXE位于`.tmp/exe-errors-1018/delivery-fixed/搜打撤-代号7-修复版-20261018.exe`，SHA256见证据。老板要求不操作前端，截图对应具体失败URL与原生启闭/画面未实测；不宣称实页通过。builder exec64859退出0，无遗留服务/端口；旧包、首次失败目录和他人在途修改保留，未提交/推送。
+
+### 2026-10-18 六宠物实装 / Friday 01a14ee5
+
+完成未提交、编辑释放。自有`game/assets/icons/base-v3/companion-{dog,falcon,cat,robot,fire,penguin}.webp`、清单仅对应六条及[证据](evidence/2026-10-18-pets-redesign/README.md)。老板授权采用旺财v2、猎鹰/猫v1、机器人/火/企鹅保留NAI结构v2；720方RGBA透明、哈希与六图目标资产审计通过。Codex内置浏览器5200当前窗口真实逐只切换，六图大图/缩略图正常、七图节点720且complete、error空；全局97项范围外资产错误未修。旧图备份保留、无新服务、未build/提交。
+
+### 2026-10-18 六只宠物 NAI＋内置重绘候选 / Friday 01a14ee5
+
+已交付候选，编辑与生成占用释放。自有`game/art-source/pets/redesign-20261018/`及[证据](evidence/2026-10-18-pets-redesign/README.md)。六张NAI1024方图均HTTP200，内置透明候选10张含修订；RGBA/alpha/尺寸/SHA验证通过，完整请求与来源已保存。旺财按老板反馈缩短耳朵；首轮多张细化可爱过度，火焰精灵/企鹅/机器人按老板指定NAI原结构重做v2，待评价，未视为认可。未替换运行素材、未build/提交，无新增服务。
+
+### 2026-10-18 无背剑与剑带 / Friday 01a14eb6
+
+完成未提交，编辑释放。自有`game/assets/portraits/full/wu.webp`、人设参考副本及wu/README说明、素材清单无条目、`game/art-source/characters/wu-back-sword-20261018/`及[证据](evidence/2026-10-18-wu-back-sword/README.md)。现行图补背后黑剑、黑鞘、胸前带扣剑带与腰侧固定环，保留白底交错站姿，1024×1536；旧图备份保留，四人不变。尺寸/副本一致性、目标素材零问题、549文档链接与差异检查通过；当前Codex内置浏览器5200培养实页已核并截图。无新服务，未build/提交。
+
+### 2026-10-18 四人恢复原版、无指定原图与默认画风 / Friday 01a14eb6
+
+完成未提交，编辑占用释放。老板最终要求四位同伴恢复本轮重绘前10-13版本，四个原始备份SHA256逐一匹配，运行图和参考副本同步；无保留指定10-16原图，五张均1024×1536。默认规范恢复10-16双图块面厚涂；培养默认图与选人共源、完整画布白底。自有五图/参考及六页人设说明、清单五条、`hub.personnel.js`、`base-personnel-v12.css`、`hub-personnel-portrait.test.js`、默认画风三页及[收官证据](evidence/2026-10-18-roster-reference-final/README.md)。素材目标零问题；12项定向、ESLint、552链接检查通过；恢复后当前Codex内置浏览器5200培养页真实切换四人加载正常，无的白底原图已截图目检。常无欲灰发要求保留为人设纠正，旧图按最终授权原样恢复。未build/提交，无新服务；旧图和各轮候选均保留。
+
 ### 2026-10-18 桌面启动死锁与加载窗口修复 / Friday WF-startup-window-1018
 
 - 已释放桌面启动文件、game.boot 就绪同步、对应回归、development 启动说明与自有证据/隔离构建目录；修复标题就绪信号死锁、加载窗同屏居中和原生拖动，增加缺帧兜底与失败重试。
 - 启动定向 48 项、完整冻结门通过；隔离 Windows x64 EXE 与包内字节校验通过。原有五项体积预算仍红；按老板要求未实玩，原生窗口位置/拖动及冷启动耗时未实测。代码 f373954ad9；[证据](evidence/2026-10-18-WF-startup-window-1018/README.md)。无本会话后台服务/端口。
+
+### 2026-10-18 五人立绘统一 / Friday 01a14eb6
+
+完成未提交，编辑占用释放。五张`game/assets/portraits/full/{wu,changwuyu,baita,heixiang,xingyue}.webp`、人设参考副本及六页说明、素材清单五条、VISUAL-BIBLE当前尺寸说明、自有`game/art-source/characters/roster-unified-20261018/`及[证据](evidence/2026-10-18-roster-unified/README.md)。内置重绘沿10-18默认精修半厚涂，统一1024×1536，整图等比缩放至922×1382居中补白边；旧图本地备份、源PNG仅本地保留。五图尺寸/参考一致性、目标素材检查、549链接文档检查通过；Codex内置浏览器5200当前1280×720窗口真实切换五人，五张实页截图已目检。未出征、未build/提交，无新增服务；既有5200保留。
 
 ### 2026-10-18 游玩运行时深层性能优化 / Friday WF-deep-runtime-1018
 
@@ -37,9 +119,36 @@
 - 新独立EXE已离线封装、静态核验；287818619字节，SHA256 `560493f3442f46cdcd6bcea0f26cf074f025b125c63861dd1c2c512729151ed8`。原五项包体预算仍超限，测试版；按老板要求无继续实玩/原生GUI，不主张FPS/RSS/GPU。
 - 证据：[本轮收官](evidence/2026-10-18-WF-deep-runtime-1018/completion.md)。无新增浏览器/端口/后台服务；封装会话18867退出0，既有5319沿原登记保留。自有编辑占用释放，其余在途现场不动。
 
+### 2026-10-18 无搭腿与脚踝修订v3至v5 / Friday 01a14e81
+
+已交付候选，编辑和生成占用释放。按老板连续反馈内置重绘搭腿、前向舒展及脚踝上翘，最终根output/imagegen/wu-boots-socks-1018/wu-boots-socks-ankle-v5.png，1024×1536 RGB。请求词、图片核对、SHA及版本反馈见[修订记录](evidence/2026-10-18-wu-boots-socks/raised-v3-v5.md)。保留黑色打底短裤遮挡和双手靴袜，旧图保留，未接入游戏、未提交。
+
+
+### 2026-10-18 无抬腿构图修订 / Friday 01a14e81
+
+已交付候选，编辑及生成占用释放。沿NAI居中构图内置重绘：一腿抬起悬空、另一脚落地，补黑色不透明打底短裤遮挡；双手持靴袜与身旁另一对保留。1024×1536 RGB，图片验证与SHA见[修订记录](evidence/2026-10-18-wu-boots-socks/raised-v2.md)，完整词另存。旧图保留，未接入游戏、未提交，待老板评价。
+
+
+### 2026-10-18 无靴袜立绘 / Friday 01a14e81
+
+已交付，编辑及生成进程占用释放。NAI V5 Full 832×1216原稿HTTP200，内置精修1024×1536 RGB；一手拿靴一手拿袜、另一对置于旁边，双腿双脚裸露与近大远小透视。自有请求、完整精修词、图片核对及SHA见[本轮记录](evidence/2026-10-18-wu-boots-socks/README.md)。大于1MB原图与成图仅本地保留；根output/imagegen/wu-boots-socks-1018/wu-boots-socks-final.png。未接入运行素材、未提交，候选待老板评价。
+
+
 ### 2026-10-18 游玩操作链效率优化 / Friday WF-perf-budgets-1018
 
 源码/测试/素材审查占用已释放。`f51800565037c78601e8d2c48e01dba394526dec`提交4生产源码、1条素材指纹更新及4测试文件：角色过期decode4→1/离页4→0，4敌AOE悬停快照8→1，背包同次刷新分组普通9→5/安全8→4/消耗7→4，均为受控计数与输出等价。609文件5968项通过/16跳过，静态检查通过；完整凭据与代码边界见[收官记录](evidence/2026-10-18-WF-perf-budgets-1018/completion.md)。新版portable EXE已离线封装并校验，旧版保留；原5预算红、无原生窗口实测。老板明确停止实玩后没有继续浏览器操作，背包后续实页未做；5319页面/服务现场保留如上，其他会话事件在途增量未纳入，未推送。
+
+### 2026-10-18 默认画风更新 / Friday 01a14e66
+
+完成未提交，编辑占用释放。自有`docs/production/art/{ART-STYLE-V1,ART-DIRECTION-BRIEF,VISUAL-BIBLE}.md`、`docs/character-bible/wu.md`画风链接及[本轮证据](evidence/2026-10-18-default-art-style/README.md)。老板选定第一张精修图为默认：精修二次元半厚涂，皮肤细腻过渡和柔和光泽，材质细节协调。旧规范快照保留；文档检查542链接通过、差异空白检查通过、参考SHA核对一致。未修改NAI共享配方、个人技能或运行素材，未提交。
+
+### 2026-10-18 无透视修订 / Friday 01a14e72
+
+编辑占用释放，生成未完成。脚底第一焦点重绘被内置工具output安全检查拦截，没有新图、没有重复请求，原图保留；[失败记录](evidence/2026-10-18-wu-boots/perspective-v2-status.md)。
+
+### 2026-10-18 无脱靴立绘 / Friday 01a14e66
+
+已交付，编辑与生成进程占用释放。NAI免费档初稿+内置重绘，最终1024×1536 RGB；根`output/imagegen/wu-boots-1018/wu-boots-final.png`及`.tmp/nai/wu-boots-1018/`原图仅本地保留，不入Git。自有请求、提示词、SHA及图片核对见[证据](evidence/2026-10-18-wu-boots/README.md)。仅候选，未替换运行立绘，未提交；大图请求402及免费档200如实保留。
 
 ### 2026-10-18 本地完成改动提交与 EXE 交付 / Friday WF-completed-ship-1018
 
@@ -515,6 +624,21 @@ Friday（Codex 地图天气 01a13c12），2026-10-15：game/css/expedition-map.c
 
 | 会话/来源 | 属地 | 事项 | 状态 |
 |---|---|---|---|
+| Codex（本地整合 WF-local-closeout-1019） | 整合完成范围434文件；提交3721e42a；不覆盖并发美术工具后续增量 | 冻结全量618文件6065通过/16原有跳过，语法/数据/类型/lint通过；选中资源133通过。未重新浏览器试玩、build或验证远端CI；历史资源债务保留。 | 2026-10-19 完成，编辑释放；详见 docs/evidence/2026-10-19-WF-local-closeout-1019/README.md |
+| Friday（子页面点击与进入音静音 WF-subpage-sfx-silence-1018） | game/src/audio/sound.js、game/src/audio/sound.samples.catalog.js、game/src/ui/archive-motion.js、game/assets/sfx/original-ui-1018/library.json、game/sfx-review.html、docs/audio-system.md及自有证据 | 完成未提交，释放编辑占用。统一拦截子页面click/hover，主菜单与背包入口自动点击/悬停静音；navigate空样本，移除选档动画840ms场景音。其余独立反馈保留；试听清单和现行说明同步。按老板要求未测试、build、浏览器或听感验证；未启停服务、未提交推送。 | 2026-10-18 |
+| Friday（取消四项音效 WF-sfx-four-silence-1018） | game/src/audio/sound.samples.catalog.js仅close/curseEnd/attackIce/heal；original-ui-1018/library.json同步；game/sfx-review.html、docs/audio-system.md说明与自有证据 | 完成未提交，编辑占用释放。4项设为空文件/零增益；试听清单同步为10项静音；cardRestore及其余102项配置保留。按老板要求未运行测试、构建、浏览器或听感验证；不启停服务，未提交推送。 | 2026-10-18 |
+| Friday（老板点选15项音效二轮替换 WF-selected15-sfx-r2-1018） | game/src/audio/sound.samples.catalog.js仅15项、sfx-review.sources.js、sfx-review.js与sfx-audition.js静音兼容；selected15-r2-1018音频/来源；asset-manifest.json新增项；original-ui-1018/library.json、game/sfx-review.html说明、docs/audio-system.md及自有证据 | 完成未提交，编辑占用释放。按后续指示6个界面进入项取消音效，剩余9项换为8个新WAV；其他91项保留。来源指纹与前后映射见receipt.json和mapping.json，试听显示静音项并禁用播放，勾选备注保留；制作名单音效署名未加回。按老板要求未测试/build/浏览器及听感验收；不启停服务、未提交推送。 | 2026-10-18 |
+| Friday（制作名单音效署名移除 WF-credits-audio-remove-1018） | game/index.html音效署名标题及三段说明；docs/audio-system.md对应说明；自有docs/evidence/2026-10-18-selected32-sfx/后续记录 | 完成未提交，编辑占用释放。按老板经另一会话转达的明确要求移除完整音效署名区块；其他制作名单、音效映射、来源与许可文件保留。未测试/build/浏览器验收；未提交推送。 | 2026-10-18 |
+| Friday（老板点选32项音效替换 WF-selected32-sfx-1018） | game/src/audio/sound.samples.catalog.js仅32项与sfx-review.sources.js；game/assets/sfx/selected32-1018/、asset-manifest.json新增项、original-ui-1018/library.json；game/index.html音频署名、game/sfx-review.html说明、docs/audio-system.md及自有证据 | 完成未提交，编辑占用释放。用23份免费可商用音源替换精确32触发，74项保持原定义；更新试听与署名。原件/运行件路径及SHA256见receipt.json，前后映射见mapping.json。按老板要求未测试/build/浏览器及听感验收；未启停服务、未提交推送。 | 2026-10-18 |
+| Friday（试听页资源地址修复 WF-sfx-review-playback-fix-1018） | game/src/audio/sfx-review.js资源读取段；docs/evidence/2026-10-18-sfx-current-review/README.md及playback-fix.json | 完成未提交，编辑占用释放。改用assetUrl(file)，定位并消除Vite动态URL的错误glob导入；已读服务模块确认返回新实现，音源直读HTTP200。未测试/build/浏览器及听感验收；不改游戏映射、不启停服务。 | 2026-10-18 |
+| Friday（唱片构图整改 WF-ost-refine-v5-1018） | 自有 docs/evidence/2026-10-18-ost-snow-road/、根 output/ost-snow-road-1018/；完成未提交，编辑释放 | v5成片1080p30/91.43秒约36MB；去唱针、背景无重复大脸、窄盘沿/靠近曲名/乐句断线和轻雪；全片解码、音画时长、旋转检查及六帧目检通过，风格待老板评价；exec24043退出0，无后台/端口，未发布 | 2026-10-18 完成未提交 |
+| Friday（当前音效审听网页 WF-sfx-current-review-1018） | game/sfx-review.html、game/css/sfx-review.css、game/src/audio/sfx-review{,.labels,.sources}.js；docs/audio-system.md新增入口；docs/evidence/2026-10-18-sfx-current-review/ | 完成未提交，编辑占用释放。当前106个触发/34组声音/35个文件；可逐项试听、切版本、标记更换、备注并复制清单。按老板要求未测试/build/浏览器或听感验收；不改运行映射，B未接入；复用他会话5200服务，不认领/启停。 | 2026-10-18 |
+| Friday（唱片式OST修订 WF-ost-snow-road-v2-1018） | 自有 docs/evidence/2026-10-18-ost-snow-road/、根 output/ost-snow-road-1018/；视频风格未通过，编辑释放 | v3与v4渲染均已退出0，exec76963/2652及其FFmpeg已结束，无本会话后台/端口；v3技术核验通过、v4未验且老板反馈突兀。最新请求为看图诊断，本轮未继续修改画面；现有文件保留，未提交/发布 | 2026-10-18 诊断交付，视频待整改 |
+| Friday（雪原公路OST视频 WF-ost-snow-road-1018） | 自有 docs/evidence/2026-10-18-ost-snow-road/、根 output/ost-snow-road-1018/；完成未提交，编辑释放 | 1080p30/91.43秒MP4约56MB；全片解码、音画时长、音频相关性与六帧目检通过；exec26972退出0，无本会话后台服务/端口；游戏未改、未发布 | 2026-10-18 完成未提交 |
+| Friday（认可音效接入 WF-original-ui-install-1018） | game/src/audio/sound.samples.catalog.js、sfx-audition.js；game/assets/sfx/original-ui-1018/、asset-manifest新增三条；game/index.html音频说明；docs/audio-system.md与自有证据 | 已接入认可V2点击/确认、列表首项V3奖励A；39个按钮/奖励触发，67个其他事件保持现状。母版WAV保原字节、常规gain0.65/悬停0.08；音乐未改 | 2026-10-18 完成未提交、编辑释放；按老板要求未验证/构建/浏览器验收，无新服务；音频不进Git。证据 docs/evidence/2026-10-18-original-ui-install/README.md |
+| Friday（方舟音效微改接回 WF-arknights-sfx-return-1018） | 仅自有 docs/evidence/2026-10-18-arknights-sfx-return/；原游戏属地未写入 | 找回A2/A4后收到老板不侵权约束，取消原音接入；从零独立设计点击105ms、确认290ms、奖励480ms三样，无第三方音频输入。脚本与来源判断留档 | 2026-10-18 原创候选完成未提交、编辑释放；未接入游戏，待老板试听；按要求未测试/构建/浏览器验收/人工耳听，无侵权与否法律认定。证据 docs/evidence/2026-10-18-arknights-sfx-return/README.md |
+| Friday（高品质音效换库 WF-premium-ui-sfx-1018） | game/src/audio/sound.samples.catalog.js、sfx-audition.js、game/assets/sfx/mixkit-1018/、asset-manifest新增40条、game/index.html署名、docs/audio-system.md、tests/sound-web-library.test.js与自有证据 | 106事件换用Mixkit成品界面/奖励/战斗音效；40份完整WAV保原字节，点击0.20s。旧素材保留；音频按许可不进Git，来源URL与SHA逐件留档 | 2026-10-18 完成未提交、编辑释放；按老板要求未测试/构建/浏览器验收/人工耳听，交老板试听；复用5200，无新进程。证据 docs/evidence/2026-10-18-premium-ui-sfx/README.md |
+| Friday（网络音效整套替换 WF-web-sfx-1018） | game/src/audio/sound.samples.catalog.js、sfx-audition.js；game/assets/sfx/web-foley-1018/；asset-manifest新增45条；game/index.html音频署名；docs/audio-system.md；4份音效测试与自有证据 | 联网新选六库，106事件/43运行剪辑；点击95ms，普通/稀有/胜利奖励分开。保留旧素材与他人清单条目；复用5200/PID48716，无新进程 | 2026-10-18 完成未提交、编辑释放；老板要求不用验证并接手试听。收到前173定向测试、lint/docs检查通过，内置页43解码/106构造播放及真实按钮起音已记录；不代表听感通过。原静音恢复，试听页已留；无build/提交。证据 docs/evidence/2026-10-18-web-sfx-replacement/README.md |
 | Friday（地图节点调整 WF-map-node-rules-1018，聊天01a14d8c） | 宝箱更名/通用掉落入口；新局5/9配额7/11/16/16；旧3/9、4/9快照保留；对应源码/地图测试/旧图fixture与docs规则及game/dev/map-node-rules-review.html | 完成未提交，编辑释放；9文件61项通过，增量后3文件30项通过；lint/docs检查与Codex当前窗口构造实页核验通过；未build、提交、推送。证据docs/evidence/2026-10-18-WF-map-node-rules-1018/ | 2026-10-18 |
 | Friday（双图默认画风 WF-default-art-style-1016） | 2026-10-16 | 完成未提交；编辑占用释放。自有 `docs/production/art/ART-STYLE-V1.md`、`docs/production/art/ART-DIRECTION-BRIEF.md`、`docs/production/art/VISUAL-BIBLE.md`、`docs/production/art/ART-STYLE.md` 与 `docs/evidence/2026-10-16-default-art-style/`；双图确认为默认，保留头发/裙子有结构的细碎块面、叠色与硬边笔触 | docs:check通过，7条本地链接可达，diff --check通过，双图SHA256核对一致且大图已忽略；新提示词未出图验证；无服务、不改运行素材、不提交 |
 | Friday（通用过场 WF-general-transition-1016） | game/src/ui/general-transition.js、camp-entry.js；run/game.run.scenes.js；battle/view/battle.presentation-ready.js；game/css/battle.css；两battle-entry测试；通用过场图及manifest本图条目；docs/development.md对应段；自有evidence | NAI起稿+内置重绘，已按老板反馈恢复原图左侧虚化；战斗/首脑入口与资源等待共用远征画面 | 完成未提交、编辑释放；5套82项及末版3套41项通过，lint/docs/diff通过；当前内置窗口构造过场与真实简化按钮通过，未完整实战；本图登记校验通过，工作区另有95项资产审计错误；无build/新服务/提交。证据docs/evidence/2026-10-16-WF-general-transition-1016/ |

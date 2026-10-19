@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-18T17:25:08.011Z",
+  "inputKind": "static-inspection",
+  "detail": "当前Codex内置浏览器直接查看已接入WebP；仅验证取证助手，不重复人物装备流程。",
+  "screenshot": {
+    "path": "capture-smoke.png",
+    "bytes": 131770,
+    "sha256": "5e03f94e2f9e2669518aeed0894155a6a8f486e012d972cd74a153c09c72456b"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/assets/portraits/full/changwuyu-drum-room.webp",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 948,
+      "src": "http://localhost:5200/assets/portraits/full/changwuyu-drum-room.webp",
+      "width": 1659
+    }
+  ],
+  "console": []
+}

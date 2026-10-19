@@ -1,0 +1,49 @@
+{
+  "ok": true,
+  "steps": [
+    {
+      "name": "vitest",
+      "exitCode": 0,
+      "passed": 13
+    },
+    {
+      "name": "python",
+      "exitCode": 0,
+      "passed": 6
+    },
+    {
+      "name": "eslint",
+      "exitCode": 0
+    },
+    {
+      "name": "docs",
+      "exitCode": 0,
+      "checkedRelativeLinks": 567
+    }
+  ],
+  "after": {
+    "manifest": [
+      {
+        "file": "tools/workflow-summary.mjs",
+        "sha256": "473b8a9a5f1aa60a0de6b92588154d9bbfc27825d2f7b457ac7d06f343e50851"
+      },
+      {
+        "file": "tools/nai-workflow.py",
+        "sha256": "aa7520770a4249ab119ffebd5d2795bd592ead6e80f78975707a6ddc3b94b28d"
+      },
+      {
+        "file": "tools/browser-personnel.mjs",
+        "sha256": "2ab53214920919de10f5a04863522564dcd07bc873ca2b40440e1cc1fe557817"
+      },
+      {
+        "file": "tests/workflow-standardize.test.js",
+        "sha256": "d123256f13201c79aee50bcb9bf7921412b99b29c71953213bf0a9a6cf0f28bc"
+      },
+      {
+        "file": "tools/tests/test_nai_workflow.py",
+        "sha256": "6d6884def417ddb1b43651aedd852b9ebc007367f64ae17d07fe102b7e10e9fc"
+      }
+    ]
+  },
+  "scope": "Observed command results; source snapshot taken after scoped checks. Not a native frozen gate receipt."
+}

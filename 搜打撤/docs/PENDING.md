@@ -33,6 +33,7 @@
 
 | # | 事项 | 提出 | 来源 | 备注 |
 |---|---|---|---|---|
+| 46 | 无战斗骨骼样板v4造型已确认 | 10-19 | WF-wu-battle-rig-1019；docs/evidence/2026-10-19-wu-battle-rig/README.md | 老板明确“很好了”；按v4固定待机姿势、身份衣装和武器，继续已授权的生产拆件、绑定与待机/攻击制作。Spine安装与许可由Friday自行检查，不再向老板索取路径。 |
 | 27 | 提交机制旧提案 | 10-14核对 | archive/WF-ledger-cleanup-1014/originals/docs/PENDING.md | 已销账；R1/R2/R4/R6已实施，R3已有定性；R5归#28，不重复挂账 |
 | 30 | 状态写入通道选择 | 10-14核对 | docs/evidence/2026-10-02-DEBT-1/characterization.md | 已决；维持已采纳方案A，未启动方案B |
 | 45 | 删除两份旧 v6 基地样机 | 10-15 | WF-code-clean-1015；老板在当前聊天批准精确两路径 | 已删除 `game/src/ui/base-design-preview-v6.js` 与 `game/src/hub/hub.navigation-v6.js`；逐件哈希与删除后核对见 `docs/evidence/2026-10-15-WF-code-clean-1015/deletion-receipt.json`；两文件原为未跟踪稿，未改已冻结 index |

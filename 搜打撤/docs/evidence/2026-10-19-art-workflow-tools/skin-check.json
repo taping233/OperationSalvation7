@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "exitCode": 0,
+  "steps": [
+    {
+      "name": "selected-assets",
+      "exitCode": 0,
+      "durationMs": 5361,
+      "stdout": "{\"scope\":\"selected\",\"ok\":true,\"selected\":[\"portraits/full/changwuyu-drum-room.webp\"],\"errors\":[],\"assets\":[{\"path\":\"portraits/full/changwuyu-drum-room.webp\",\"bytes\":321748,\"sha256\":\"9cffdf6b725f8301ff3b944030b0d1e532e9e0b8072153bcb177d12a61117c58\"}],\"global\":{\"ok\":false,\"errorCount\":95,\"historicalWarningCount\":617,\"manifestIssues\":[]}}\n",
+      "stderr": ""
+    }
+  ]
+}

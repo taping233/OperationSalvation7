@@ -1,0 +1,12 @@
+{
+  "subjectIdentity": "adult man, silver-gray long hair in a low bun, yellow eyes, elf ears, thin round glasses, no hat, dark gray T-shirt, olive overshirt, black trousers, pale sneakers",
+  "sceneAction": "1boy, solo, seated behind drums, relaxed shoulders leaning forward, holding two drumsticks across lap",
+  "composition": "wide horizontal drum rehearsal studio, centered seated full body",
+  "lightMaterial": "warm overhead spotlight, muted olive and gunmetal, restrained brass reflections",
+  "allowedChanges": ["natural head and neck proportions", "painterly rendering"],
+  "preserve": ["hatless identity", "casual clothes", "drum room scene"],
+  "width": 1344,
+  "height": 768,
+  "seed": 1375806249,
+  "references": [{"path": "game/assets/portraits/full/changwuyu-drum-room.webp", "role": "composition"}]
+}

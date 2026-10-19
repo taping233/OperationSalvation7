@@ -61,7 +61,7 @@ function duplicateSummary(files, rootDir) {
 
 function main() {
   if (process.argv.includes('--help')) {
-    console.log('asset-audit [--root <project>] [--check] [--scope global|selected] [--paths-json <JSON array>] [--json] [--report <file>]\nDefault global gate remains unchanged. Selected scope reports target issues and a separate global summary.');
+    console.log('asset-audit [--root <project>] [--check] [--scope global|selected] [--path <asset path> ... | --paths-json <JSON array>] [--json] [--report <file>]\nDefault global gate remains unchanged. Selected scope reports target issues and a separate global summary.');
     return;
   }
   const check = process.argv.includes('--check');
@@ -69,6 +69,11 @@ function main() {
   const pathsIndex = process.argv.indexOf('--paths-json');
   if (pathsIndex >= 0 && !process.argv[pathsIndex + 1]) throw new Error('--paths-json requires a JSON array');
   const paths = pathsIndex >= 0 ? JSON.parse(process.argv[pathsIndex + 1]) : [];
+  for (let index = 2; index < process.argv.length; index++) {
+    if (process.argv[index] !== '--path') continue;
+    if (!process.argv[index + 1] || process.argv[index + 1].startsWith('--')) throw new Error('--path requires an asset path');
+    paths.push(process.argv[++index]);
+  }
   const scopeIndex = process.argv.indexOf('--scope');
   const scope = scopeIndex < 0 ? 'global' : process.argv[scopeIndex + 1];
   if (!['global', 'selected'].includes(scope)) throw new Error('--scope must be global or selected');

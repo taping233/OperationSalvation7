@@ -40,6 +40,18 @@ describe('incremental asset registration gate', () => {
     expect(() => auditSelectedAssets({ root, paths: [] })).toThrow();
     expect(auditSelectedAssets({ root, paths: ['game/assets/missing.webp'] }).errors[0].code).toBe('selected-missing');
   });
+  it('allows a correctly registered selection while reporting unrelated new errors separately', () => {
+    const { root } = fixture([{ path: 'target.webp', ext: 'webp', bytes: 6, license: 'CC0' }], { 'target.webp': 'target' });
+    writeFileSync(path.join(root, 'game/assets/other.webp'), 'new');
+    const result = auditSelectedAssets({ root, paths: ['game/assets/target.webp'] });
+    expect(result.ok).toBe(true);
+    expect(result.global.ok).toBe(false);
+    expect(auditAssets({ root }).ok).toBe(false);
+    const command = path.resolve('scripts/asset-audit.cjs');
+    const run = spawnSync(process.execPath, [command, '--root', root, '--scope', 'selected', '--path', 'game/assets/target.webp', '--json'], { encoding: 'utf8' });
+    expect(run.status, run.stderr).toBe(0);
+    expect(JSON.parse(run.stdout).global.errorCount).toBe(1);
+  });
   it('warns for unchanged frozen debt without accepting new unregistered assets', () => {
     const { root } = fixture([], { 'old.png': 'old' });
     expect(auditAssets({ root }).warnings.map(item => item.code)).toEqual(['unlisted']);

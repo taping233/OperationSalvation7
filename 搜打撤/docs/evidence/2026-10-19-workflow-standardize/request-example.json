@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "status": "prepared",
+  "recipeVersion": "3.4",
+  "specification": {
+    "subjectIdentity": "adult man, silver-gray long hair in a low bun, yellow eyes, elf ears, thin round glasses, no hat, dark gray T-shirt, olive overshirt, black trousers, pale sneakers",
+    "sceneAction": "1boy, solo, seated behind drums, relaxed shoulders leaning forward, holding two drumsticks across lap",
+    "composition": "wide horizontal drum rehearsal studio, centered seated full body",
+    "lightMaterial": "warm overhead spotlight, muted olive and gunmetal, restrained brass reflections",
+    "allowedChanges": [
+      "natural head and neck proportions",
+      "painterly rendering"
+    ],
+    "preserve": [
+      "hatless identity",
+      "casual clothes",
+      "drum room scene"
+    ],
+    "width": 1344,
+    "height": 768,
+    "seed": 1375806249,
+    "references": [
+      {
+        "path": "game/assets/portraits/full/changwuyu-drum-room.webp",
+        "role": "composition"
+      }
+    ]
+  },
+  "references": [
+    {
+      "path": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\changwuyu-drum-room.webp",
+      "role": "composition",
+      "sha256": "9cffdf6b725f8301ff3b944030b0d1e532e9e0b8072153bcb177d12a61117c58",
+      "uploaded": false
+    }
+  ],
+  "request": {
+    "input": "1boy, solo, seated behind drums, relaxed shoulders leaning forward, holding two drumsticks across lap\n\nAllowed changes: natural head and neck proportions; painterly rendering. Preserve: hatless identity; casual clothes; drum room scene\n\nwide horizontal drum rehearsal studio, centered seated full body\n\nwarm overhead spotlight, muted olive and gunmetal, restrained brass reflections\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+    "model": "nai-diffusion-5-full",
+    "action": "generate",
+    "parameters": {
+      "params_version": 3,
+      "width": 1344,
+      "height": 768,
+      "scale": 5.5,
+      "sampler": "k_euler_ancestral",
+      "steps": 28,
+      "variety_plus": false,
+      "n_samples": 1,
+      "ucPresetId": "none",
+      "qualityPresetId": "none",
+      "autoSmea": false,
+      "straight_alpha": false,
+      "dynamic_thresholding": false,
+      "controlnet_strength": 1,
+      "legacy": false,
+      "legacy_v3_extend": false,
+      "legacy_uc": false,
+      "add_original_image": true,
+      "cfg_rescale": 0.0,
+      "noise_schedule": "karras",
+      "use_coords": false,
+      "normalize_reference_strength_multiple": true,
+      "inpaintImg2ImgStrength": 1.0,
+      "seed": 1375806249,
+      "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+      "characterPrompts": [
+        {
+          "prompt": "adult man, silver-gray long hair in a low bun, yellow eyes, elf ears, thin round glasses, no hat, dark gray T-shirt, olive overshirt, black trousers, pale sneakers",
+          "uc": "",
+          "center": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "enabled": true
+        }
+      ],
+      "v4_prompt": {
+        "caption": {
+          "base_caption": "1boy, solo, seated behind drums, relaxed shoulders leaning forward, holding two drumsticks across lap\n\nAllowed changes: natural head and neck proportions; painterly rendering. Preserve: hatless identity; casual clothes; drum room scene\n\nwide horizontal drum rehearsal studio, centered seated full body\n\nwarm overhead spotlight, muted olive and gunmetal, restrained brass reflections\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+          "char_captions": [
+            {
+              "char_caption": "adult man, silver-gray long hair in a low bun, yellow eyes, elf ears, thin round glasses, no hat, dark gray T-shirt, olive overshirt, black trousers, pale sneakers",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "v4_negative_prompt": {
+        "caption": {
+          "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+          "char_captions": [
+            {
+              "char_caption": "",
+              "centers": [
+                {
+                  "x": 0.5,
+                  "y": 0.5
+                }
+              ]
+            }
+          ]
+        },
+        "use_coords": false,
+        "use_order": true
+      },
+      "deliberate_euler_ancestral_bug": false,
+      "prefer_brownian": true
+    }
+  },
+  "preflight": {
+    "networkAttempted": false,
+    "stateWritten": false,
+    "credential": "file-present-unverified",
+    "accountBalance": "unknown",
+    "serverAvailability": "unverified",
+    "readyToAttempt": true,
+    "blocks": [],
+    "cooldownSeconds": 0,
+    "pacingSeconds": 0,
+    "quotaDay": "2026-10-19",
+    "largeImage": false,
+    "largeUsed": 0,
+    "largeLimit": 20,
+    "width": 1344,
+    "height": 768,
+    "steps": 28,
+    "model": "nai-diffusion-5-full",
+    "withinKnownFreeThreshold": true,
+    "proxyEndpoints": {
+      "HTTP_PROXY": "http://127.0.0.1:12450",
+      "HTTPS_PROXY": "http://127.0.0.1:12450",
+      "ALL_PROXY": "http://127.0.0.1:12450"
+    }
+  },
+  "limits": [
+    "Prepared only; no network request, upload or quota reservation",
+    "Use nai_gen.generate_image and its guard for an authorized generation"
+  ]
+}

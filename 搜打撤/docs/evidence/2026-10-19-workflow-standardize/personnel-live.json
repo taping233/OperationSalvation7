@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-18T17:50:39.351Z",
+  "inputKind": "real-input",
+  "detail": "Personnel route: enter-city, enter-selected-slot, open-personnel, choose-character, open-appearance, preview-skin; no refresh/readback test",
+  "screenshot": {
+    "path": "personnel-live.png",
+    "bytes": 98057,
+    "sha256": "c09de36443f8ead5f3ba943ad3b24e8e9fa0fcf3349bd03e1de2b15c0972e40c"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 948,
+      "src": "http://localhost:5200/assets/portraits/full/changwuyu-drum-room.webp?v=0.60.0",
+      "width": 1659
+    }
+  ],
+  "console": []
+}

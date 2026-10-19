@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-19",
+  "vitest": {"files": ["tests/asset-audit.test.js", "tests/art-workflow-tools.test.js"], "passed": 24},
+  "python": {"command": "python -B -m unittest discover -s tools/tests -p test_skin_import.py -v", "passed": 5},
+  "eslint": {"passed": true, "scope": "Changed audit modules, JS tests and new Node helpers"},
+  "docs": {"passed": true, "checkedRelativeLinks": 563},
+  "liveImport": {"mode": "preview", "cwd": "D:/素材/代号柒", "sourceSize": [1659, 948], "runtimeWrites": false},
+  "browser": {"source": "Codex in-app browser current tab", "inputKind": "static-inspection", "record": "capture-smoke.json", "scope": "Evidence helper captures existing WebP; not a gameplay retest"},
+  "memory": {"written": true, "backups": true, "retrieval": "workflow memory --source codex --query 皮肤接入 退出码 --limit 1 --json", "status": "matched"},
+  "globalAssetGate": {"passed": false, "errorsAtCheck": 95, "historicalWarningsAtCheck": 617, "targetIssues": 0},
+  "build": "not-run",
+  "fullTests": "not-run",
+  "gitMutationByThisSession": false
+}

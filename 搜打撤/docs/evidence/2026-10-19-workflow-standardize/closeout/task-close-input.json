@@ -1,0 +1,21 @@
+{
+  "stage": "complete-uncommitted",
+  "doneWhenConfirmed": true,
+  "checks": [
+    {
+      "kind": "manual",
+      "result": "unverified",
+      "description": "docs/evidence/2026-10-19-workflow-standardize/checks.json: reported passed; owner must review coverage/freshness before declaring a passed check"
+    },
+    {
+      "kind": "manual",
+      "result": "unverified",
+      "description": "docs/evidence/2026-10-19-workflow-standardize/personnel-live.json: reported observed; owner must review coverage/freshness before declaring a passed check"
+    }
+  ],
+  "unverified": [
+    "未验证刷新读档或自然战斗",
+    "未运行全量测试或build；无提交授权",
+    "NAI服务器和余额未探测；仅本地状态预检"
+  ]
+}

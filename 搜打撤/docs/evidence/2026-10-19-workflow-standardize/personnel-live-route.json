@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "status": "preview-observed",
+  "slot": 1,
+  "characterName": "常无欲",
+  "skinId": "drum-room",
+  "applyRequested": false,
+  "actions": [
+    "enter-city",
+    "enter-selected-slot",
+    "open-personnel",
+    "choose-character",
+    "open-appearance",
+    "preview-skin"
+  ],
+  "errors": [],
+  "inputKind": "real-input",
+  "limits": [
+    "Preview does not prove refresh/readback or natural gameplay"
+  ],
+  "url": "http://localhost:5200/",
+  "lastSnapshot": "- main:\n  - text: 金币 攻击 ENTER THE CITY BRIEFING ACHIEVEMENTS PHOTO STUDIO SYSTEM CREDITS DISCONNECT\n  - dialog:\n    - button \"返回角色\":\n    - heading \"配置\" [level=2]\n    - generic: 档案 / 01\n    - generic \"基地物资\":\n      - generic \"木材 0\":\n        - generic: \"0\"\n        - generic: 木材\n        - text: 木材\n      - generic \"口粮 0\":\n        - generic: \"0\"\n        - generic: 口粮\n        - text: 口粮\n      - generic \"钥匙 0\":\n        - generic: \"0\"\n        - generic: 钥匙\n        - text: 钥匙\n      - generic \"储备币 0\":\n        - generic: \"0\"\n        - generic: 储备币\n        - text: 储备币\n    - main:\n      - figure \"常无欲 余响·鼓房\":\n        - img \"常无欲完整立绘\"\n        - heading \"常无欲\" [level=2]\n        - text: 余响·鼓房\n      - navigation \"人物切换\":\n        - button \"查看无\":\n          - img \"无\"\n          - generic: 无\n        - button \"查看黑像\":\n          - img \"黑像\"\n          - generic: 黑像\n        - button \"查看星月\":\n          - img \"星月\"\n          - generic: 星月\n        - button \"查看白塔\":\n          - img \"白塔\"\n          - generic: 白塔\n        - button \"查看常无欲\" [pressed]:\n          - img \"常无欲\"\n          - generic: 常无欲\n      - article:\n        - generic: 降临者 · 浏览档案\n        - heading \"常无欲\" [level=3]\n        - generic: 外观\n        - heading \"余响·鼓房\" [level=4]\n        - paragraph: 浏览预览中 · 当前使用：默认外观\n        - button \"默认外观 默认 已装备\":\n          - img \"默认外观\"\n          - generic: 默认\n          - generic: 已装备\n        - button \"余响·鼓房 余响·鼓房 预览中\" [active] [pressed]:\n          - img \"余响·鼓房\"\n          - generic: 余响·鼓房\n          - generic: 预览中\n        - button \"应用此外观\"\n      - navigation \"角色操作\":\n        - button \"培养\"\n        - button \"招式\"\n        - button \"外观\" [pressed]\n        - button \"伙伴\"\n    - navigation \"基地房间\":\n      - button \"基地\":\n        - generic: 基地\n      - button \"配置 当前房间\" [pressed]:\n        - generic: 配置\n        - generic: 当前房间\n      - button \"后勤\":\n        - generic: 后勤\n      - button \"交易所\":\n        - generic: 交易所\n      - button \"收藏室\":\n        - generic: 收藏室\n      - button \"建设\":\n        - generic: 建设\n      - button \"庭院\":\n        - generic: 庭院",
+  "proof": {
+    "version": 1,
+    "status": "captured",
+    "source": "Codex current in-app browser tab",
+    "capturedAt": "2026-10-18T17:50:39.351Z",
+    "inputKind": "real-input",
+    "detail": "Personnel route: enter-city, enter-selected-slot, open-personnel, choose-character, open-appearance, preview-skin; no refresh/readback test",
+    "screenshot": {
+      "path": "personnel-live.png",
+      "bytes": 98057,
+      "sha256": "c09de36443f8ead5f3ba943ad3b24e8e9fa0fcf3349bd03e1de2b15c0972e40c"
+    },
+    "errors": [],
+    "url": "http://localhost:5200/",
+    "images": [
+      {
+        "complete": true,
+        "fit": "contain",
+        "height": 948,
+        "src": "http://localhost:5200/assets/portraits/full/changwuyu-drum-room.webp?v=0.60.0",
+        "width": 1659
+      }
+    ],
+    "console": []
+  }
+}
