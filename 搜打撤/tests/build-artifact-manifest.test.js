@@ -3,7 +3,7 @@ import { it, expect } from 'vitest';
 import { mkdirSync, mkdtempSync, readFileSync, writeFileSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { writeBuildProvenance } from '../scripts/build-artifact-manifest.mjs';
+import { writeBuildProvenance, verifyBuildArtifact } from '../scripts/build-artifact-manifest.mjs';
 function fixture() {
   const base = mkdtempSync(path.join(tmpdir(), 'sdt-artifact-'));
   const outDir = path.join(base, 'output'), fontLicenseDir = path.join(base, 'licenses');
@@ -64,4 +64,25 @@ it('matches archive hidden-path exclusions and reports them without removing sou
   expect(result.excludedHiddenPaths).toEqual(['.hidden', 'assets/.gitkeep']);
   expect(readFileSync(path.join(input.outDir, '.hidden/private.txt'), 'utf8')).toBe('not archived');
   expect(result.files.some(file => file.path.includes('.hidden'))).toBe(false);
+});
+
+it('verifies downloaded files against an explicit source and retains failed budget status', () => {
+  const input = fixture();writeBuildProvenance(input);
+  const result = verifyBuildArtifact({ outDir: input.outDir, expectedSha: input.sourceSha });
+  expect(result.verifiedFiles).toBe(3);
+  expect(result.performanceBudget).toBe('failure');
+  expect(() => verifyBuildArtifact({ outDir: input.outDir, expectedSha: 'b'.repeat(40) })).toThrow('provenance mismatch');
+  writeFileSync(path.join(input.outDir, 'assets/js/main.js'), 'modified');
+  expect(() => verifyBuildArtifact({ outDir: input.outDir, expectedSha: input.sourceSha })).toThrow('file mismatch');
+});
+it('rejects extra files and unsafe or duplicate manifest paths', () => {
+  const input = fixture();writeBuildProvenance(input);
+  const target = path.join(input.outDir, 'build-provenance.json');
+  const manifest = JSON.parse(readFileSync(target, 'utf8'));
+  manifest.files.push({ ...manifest.files[0] });writeFileSync(target, JSON.stringify(manifest));
+  expect(() => verifyBuildArtifact({ outDir: input.outDir, expectedSha: input.sourceSha })).toThrow('duplicate');
+  manifest.files.pop();manifest.files[0].path = '../outside';writeFileSync(target, JSON.stringify(manifest));
+  expect(() => verifyBuildArtifact({ outDir: input.outDir, expectedSha: input.sourceSha })).toThrow('Unsafe');
+  writeBuildProvenance(input);writeFileSync(path.join(input.outDir, 'unexpected.txt'), 'extra');
+  expect(() => verifyBuildArtifact({ outDir: input.outDir, expectedSha: input.sourceSha })).toThrow('inventory');
 });

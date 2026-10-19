@@ -20,7 +20,7 @@ describe('终局入口幂等', () => {
     const depositCards = vi.fn();
     const UI = {
       showOverlay(_title, html) {
-        document.body.innerHTML = `<div id="ovBody">${html}</div>`;
+        document.body.innerHTML = `<div id="overlay"><div id="ovBody">${html}</div></div>`;
       },
       act(name, fn) { actions.set(name, fn); },
       hideOverlay: vi.fn(), refresh: vi.fn(), log: vi.fn(),

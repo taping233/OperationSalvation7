@@ -46,13 +46,13 @@ export function extractionStashHTML({ remainingCards = [], savedCards = [], kept
   const remaining = countOf(remainingCards), saved = countOf(savedCards);
   const canStore = Math.min(remaining, Math.max(0, room));
   const allFit = remaining > 0 && canStore === remaining;
-  const bulk = !remaining ? '<p class="exr-ready">[[icon:check]] 卡牌整理完毕</p>'
+  const bulk = !remaining ? ''
     : allFit ? `<button type="button" class="exr-button exr-primary" data-act="exAll">全部入库 <b>${remaining} 张</b></button>`
       : `<button type="button" class="exr-button exr-primary" data-act="exSmart" ${canStore ? '' : 'disabled'} title="${smartDescription}" aria-label="${smartDescription}"><span>${canStore ? `按估值入库 ${canStore} 张` : '仓库已满'}</span></button>`;
   return `<div class="pg exr-page sdt-feedback-theme" id="exMain" data-unclaimed-cards="${remaining}" data-reveal="${!notice}">
     <header class="exr-header"><div><p class="exr-eyebrow">安全撤离 / 整理战利品</p><h2 class="exr-success-title">撤离成功</h2></div><div class="exr-step"><span class="is-current">01</span><i></i><span>02</span>${help}</div></header>
     <div class="exr-layout"><section class="exr-loot" aria-label="本次战利品">
-      <div class="exr-section-title"><div><h3>待入库 <b>${remaining}</b><small> 张</small></h3></div><p>选择要留下的卡牌</p></div>
+      <div class="exr-section-title"><div><h3>待入库 <b>${remaining}</b><small> 张</small></h3></div>${remaining ? '<p>选择要留下的卡牌</p>' : ''}</div>
       <p class="exr-notice" role="status" aria-live="polite">${esc(notice)}</p>
       <div class="exr-card-scroll"><div class="exr-card-grid">${remaining ? cardGrid(remainingCards, { cardHTML, rarityOf, action: 'exInspect', pending: true, room, broughtByName }) : `<div class="exr-empty"><span>[[icon:archive]]</span><h3>${saved ? '卡牌已妥善入库' : '本次没有待入库卡牌'}</h3></div>`}</div>
         ${saved ? `<details class="exr-saved-shelf"><summary>[[icon:check]] 本次已入库 ${saved} 张 </summary><div class="exr-card-grid">${cardGrid(savedCards, { cardHTML, rarityOf, action: 'exSavedInspect' })}</div></details>` : ''}
@@ -78,7 +78,7 @@ export function extractionDoneHTML({ receipt = {}, stashUsed = 0, stashCap = 0, 
     <header class="exr-header"><div><p class="exr-eyebrow">${clear ? '首脑突破' : '安全撤离'} / 收获已保存</p><h2 class="exr-success-title">撤离成功</h2></div><div class="exr-step"><span>01</span><i></i><span class="is-current">02</span></div></header>
 
     <div class="exr-layout"><section class="exr-loot" aria-label="本局真实入库">
-      <div class="exr-section-title"><div><h3>已入库 <b>${net.cardsStashed ?? 0}</b><small> 张</small></h3></div><p>[[icon:check]] 已保存</p></div>
+      <div class="exr-section-title"><div><h3>已入库 <b>${net.cardsStashed ?? 0}</b><small> 张</small></h3></div></div>
       <div class="exr-card-scroll"><div class="exr-card-grid">${savedCards.length ? cardGrid(savedCards, { cardHTML, rarityOf, action: 'exDoneInspect' }) : '<div class="exr-empty"><span>[[icon:archive]]</span><h3>本次没有卡牌入库</h3></div>'}</div></div>
     </section><aside class="exr-sidebar" aria-label="其他收获与散失"><div class="exr-sidebar-scroll">
       <section class="exr-resource-block"><h3>[[icon:archive]] 资源已入库</h3>${resourcesHTML(net.wood ?? 0, net.rations ?? 0)}</section>

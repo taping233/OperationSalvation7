@@ -45,10 +45,51 @@ export function writeBuildProvenance({ outDir, sourceSha, runId, budgetOutcome, 
   writeFileSync(path.join(root, 'build-provenance.json'), JSON.stringify(result, null, 2) + '\n');
   return result;
 }
+// Verify an extracted artifact locally; expected SHA must come from the selected release.
+export function verifyBuildArtifact({ outDir, expectedSha }) {
+  if (!/^[a-f0-9]{40}$/.test(expectedSha || '')) throw new Error('Exact expected source SHA required');
+  const root = path.resolve(outDir);
+  if (lstatSync(root).isSymbolicLink() || !lstatSync(root).isDirectory()) throw new Error('Artifact root must be a regular directory');
+  const manifestPath = path.join(root, 'build-provenance.json');
+  if (lstatSync(manifestPath).isSymbolicLink()) throw new Error('Manifest cannot be a symlink');
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  if (manifest.schemaVersion !== 1 || manifest.sourceSha !== expectedSha || manifest.build !== 'success') throw new Error('Artifact source or build provenance mismatch');
+  if (!Array.isArray(manifest.files) || !Array.isArray(manifest.notices)) throw new Error('Invalid artifact file manifest');
+  const actual = new Map();
+  function walk(relative) {
+    for (const entry of readdirSync(path.join(root, relative), { withFileTypes: true })) {
+      const file = path.posix.join(relative, entry.name);
+      if (entry.isSymbolicLink()) throw new Error('Artifact contains symlink: ' + file);
+      if (entry.isDirectory()) walk(file);
+      else if (entry.isFile() && file !== 'build-provenance.json') {
+        const bytes = readFileSync(path.join(root, file));
+        actual.set(file, { bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') });
+      }
+      else if (!entry.isFile()) throw new Error('Unsupported artifact entry: ' + file);
+    }
+  }
+  walk('');
+  const seen = new Set();
+  let totalBytes = 0;
+  for (const file of manifest.files) {
+    if (typeof file.path !== 'string' || file.path.startsWith('/') || file.path.includes('\\') || file.path.split('/').some(part => !part || part === '.' || part === '..') || seen.has(file.path)) throw new Error('Unsafe or duplicate artifact path');
+    seen.add(file.path);
+    const data = actual.get(file.path);
+    if (!data || data.bytes !== file.bytes || data.sha256 !== file.sha256) throw new Error('Artifact file mismatch: ' + file.path);
+    totalBytes += data.bytes;
+  }
+  if (actual.size !== seen.size || manifest.fileCount !== seen.size || manifest.totalBytes !== totalBytes) throw new Error('Artifact file inventory mismatch');
+  if (!seen.has('index.html') || ![...seen].some(file => file.startsWith('assets/js/')) || !manifest.notices.length || manifest.notices.some(file => !seen.has(file))) throw new Error('Missing artifact entry or license notice');
+  return { sourceSha: manifest.sourceSha, runId: manifest.runId, verifiedFiles: seen.size, verifiedBytes: totalBytes, performanceBudget: manifest.performanceBudget, tests: manifest.tests };
+}
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   try {
+    if (process.argv[2] === '--verify') {
+      console.log(JSON.stringify(verifyBuildArtifact({ outDir: process.argv[3], expectedSha: process.argv[4] })));
+    } else {
     const result = writeBuildProvenance({ outDir: 'desktop-app/game', fontLicenseDir: 'game/assets/fonts',
       sourceSha: process.env.SOURCE_SHA, runId: process.env.WORKFLOW_RUN_ID, budgetOutcome: process.env.BUDGET_OUTCOME });
     console.log(JSON.stringify({ sourceSha: result.sourceSha, files: result.fileCount, bytes: result.totalBytes, performanceBudget: result.performanceBudget }));
+    }
   } catch (error) { console.error(error.message); process.exitCode = 1; }
 }
