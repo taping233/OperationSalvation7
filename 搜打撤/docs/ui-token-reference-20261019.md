@@ -28,3 +28,5 @@
 未核验：商店正常/hover/focus 实际输入、购买详情关闭与返回、战斗发现/选牌/规则弹层滚动及关闭后的焦点回归；需由当前平台内置浏览器在最终集成版本验证。没有运行外部浏览器或 headless 替代，也没有进行构建或宣称全量通过。
 
 本恢复副本不含 Git 元数据，限定路径的 handoff 命令因 git rev-parse 失败；文件属地和冻结结果已交由发布协调者统一登记。
+
+集成检查：1004f21 全量 CI 暴露旧 secondary-glass-style 契约仍断言局部 feedback-blue 名称。改为校验公共 ui-blue 引用、原蓝色值 #b6cbd7 及 battle-secondary-panel 作用域，透明面板和 hover 反馈断言保留。

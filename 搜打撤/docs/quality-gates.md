@@ -19,7 +19,7 @@ npm run build
 | 暂存变化 | 本地选择 |
 | --- | --- |
 | 能确认直接或近邻测试的源码 | 定向测试 + contracts / architecture-boundaries 哨兵 |
-| 数据、剧情、fixture / helpers | 依赖图或引用定向；剧情编译仍在门内执行 |
+| 数据、剧情、fixture / helpers | 依赖图或引用定向；测试 helper 透明传递到实际测试，不占业务邻近层数；剧情编译仍在门内执行 |
 | 已映射流程脚本、Agent compare / provenance | 专属契约测试；未映射用 scripts-contract 与哨兵 |
 | 纯删除 / 改名 | 删除引用定向 + 哨兵；孤立新源码或类型变化保守升级 |
 | game/assets 图片 / 清单、资产审计债基线 | 静态与增量资产检查；新增/修改债阻断，旧债警告 |

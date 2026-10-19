@@ -20,5 +20,8 @@
   "ignoreDependencies": [
     "@stryker-mutator/vitest-runner"
   ],
-  "ignoreBinaries": []
+  "ignoreBinaries": [],
+  "ignore": [
+    ".tmp/**"
+  ]
 }

@@ -4,7 +4,7 @@
 
 - `npm run quality:property`：稳定手牌支付规则；4条属性各500样本，固定 seed 20261018，以及3条既有测试。
 - `npm run quality:mutation`：仅变异 `battle.hand-selection.js`，单进程；不改业务源文件。当前1个语义等价变异存活，报告如实保留，不跳过、不修改断言求满分。
-- `npm run quality:unused`：Knip仅报告。独立tests/tools/knip.report.json配置将游戏JS列为入口以保护副作用/动态注册，因而不能据此声称死文件已清零。禁止自动fix/delete。
+- `npm run quality:unused`：Knip仅报告。独立tests/tools/knip.report.json配置将游戏JS列为入口以保护副作用/动态注册，因而不能据此声称死文件已清零。忽略 `.tmp/**` 中的生成式变异沙箱副本，仍报告真实源码、历史引用和外部工具缺口；缺失恢复文件不能视为已删除。禁止自动fix/delete。
 - `npm run quality:axe-dom`：在JSDOM读取静态index，审查9类标签/ARIA规则；不执行应用脚本，不加载外部资源，不跑浏览器。退出0表示无已确认违规，仍须查看incomplete。不包含对比度、布局、Canvas或实页体验。
 
 Stryker的配置与测试只覆盖一个纯模块；新模块要按真实边界另定范围。Stryker不能发现规格本身的误解。所有工具都不能自动证明审美、趣味或完整玩家体验。

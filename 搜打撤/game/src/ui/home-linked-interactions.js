@@ -14,12 +14,23 @@ export function linkedCostsHTML(rows, note = '持有 / 需要') {
 
 const linkedAnimations = new Set();
 const pausedAnimations = new Set();
+function releaseLinkedAnimation(animation) {
+  linkedAnimations.delete(animation);
+  pausedAnimations.delete(animation);
+}
+function cancelDetachedAnimation(animation) {
+  if (animation.effect?.target?.isConnected !== false) return false;
+  releaseLinkedAnimation(animation);
+  animation.cancel();
+  return true;
+}
 export function trackLinkedAnimation(animation) {
   if (!animation) return animation;
   linkedAnimations.add(animation);
-  const release = () => { linkedAnimations.delete(animation); pausedAnimations.delete(animation); };
+  const release = () => releaseLinkedAnimation(animation);
   animation.finished.then(release, release);
-  if (document.hidden && (animation.playState === 'running' || animation.pending)) {
+  // pending also includes a caller's pause request; only running belongs to this clock.
+  if (document.hidden && animation.playState === 'running') {
     animation.pause();
     pausedAnimations.add(animation);
   }
@@ -32,12 +43,14 @@ const syncVisibility = () => {
   document.body.classList.toggle('linked-backgrounded', document.hidden);
   if (document.hidden) {
     for (const animation of linkedAnimations) {
-      if (animation.playState !== 'running' && !animation.pending) continue;
+      if (animation.playState !== 'running' || cancelDetachedAnimation(animation)) continue;
       animation.pause();
       pausedAnimations.add(animation);
     }
   } else {
-    for (const animation of pausedAnimations) if (animation.playState === 'paused') animation.play();
+    for (const animation of pausedAnimations) {
+      if (!cancelDetachedAnimation(animation) && animation.playState === 'paused') animation.play();
+    }
     pausedAnimations.clear();
   }
 };

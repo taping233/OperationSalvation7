@@ -349,6 +349,7 @@ describe('地图道具角标与详情用途一致', () => {
     ['未知用法', {}, '查看用法', false],
   ])('%s只描述已有地图用途，查看不消耗', (name, fields, label, disabled) => {
     const card = { id: `item-${name}`, name, type: '道具', ...fields };
+    if (name === '复原药') H.game.usedPocket = [{card:spell,count:1}];
     H.game.ownedCards = [{ uid: 'item', card }];
     const before = JSON.stringify(H.game.ownedCards);
     bag.showBackpack(true);
@@ -430,4 +431,53 @@ describe('retained backpack pane across actions', () => {
     expect(document.querySelector('.bag-board')).toBe(board);expect(document.activeElement.dataset.f).toBe('move');expect(document.querySelector('[data-stack="法术"]')).not.toBeNull();expect(document.querySelector('[data-stack="药剂"]')).toBeNull();
     const sort=document.querySelector('[data-act="bagSortCycle"]');sort.focus();sort.click();expect(document.activeElement.dataset.act).toBe('bagSortCycle');expect(document.querySelector('[data-stack="法术"]')).not.toBeNull();
   });
+});
+
+
+it.each([0, 1])('纯治疗道具满血预览与详情一致，受伤后恢复可用（amountField=%s）', field => {
+  const card = { id:'heal-status', name:'治疗状态药', type:'道具', heal:3,
+    rules:{version:1,bag:{use:[field ? {op:'heal',amountField:'heal'} : {op:'heal',amount:3}]}} };
+  H.game.ownedCards = [{uid:'heal-status',card}]; H.game.hp = H.game.maxHp;
+  bag.showBackpack(true);
+  expect(document.querySelector('.bag-tstate').textContent).toBe('生命已满');
+  inspect(card.name);
+  expect(document.querySelector('[data-act="useDetailCard"]').disabled).toBe(true);
+  ui._acts.useDetailCard();
+  expect(H.game.ownedCards).toHaveLength(1); expect(H.game.heal).not.toHaveBeenCalled(); expect(H.save).not.toHaveBeenCalled();
+  H.game.hp -= 3; bag.showBackpack(true); inspect(card.name);
+  expect(document.querySelector('[data-act="useDetailCard"]').disabled).toBe(false);
+  ui._acts.useDetailCard();
+  expect(H.game.hp).toBe(H.game.maxHp); expect(H.game.ownedCards).toHaveLength(0); expect(H.save).toHaveBeenCalledOnce();
+});
+
+it('结构化复原道具不靠卡牌ID判断空消耗区，加入可复原卡后恢复可用', () => {
+  const card = {id:'custom-restore',name:'结构化复原药',type:'道具',rules:{version:1,bag:{use:[{op:'restoreConsumed',amount:1}]}}};
+  H.game.ownedCards = [{uid:'custom-restore',card}]; bag.showBackpack(true); inspect(card.name);
+  expect(document.querySelector('[data-act="useDetailCard"]').disabled).toBe(true);
+  ui._acts.useDetailCard(); expect(H.game.ownedCards).toHaveLength(1); expect(H.save).not.toHaveBeenCalled();
+  H.game.usedPocket = [{card:spell,count:1}]; bag.showBackpack(true); inspect(card.name);
+  expect(document.querySelector('[data-act="useDetailCard"]').disabled).toBe(false);
+  ui._acts.useDetailCard(); expect(H.game.ownedCards[0].card.id).toBe(spell.id); expect(H.save).toHaveBeenCalledOnce();
+});
+
+it.each([['mixed',false], ['tt-crystal',false], ['mixed',true], ['tt-crystal',true]])('治疗加复原混合道具%s满血=%s仍可使用有效的另一项效果', (id, full) => {
+  const card = {id,name:'混合药',type:'道具',rules:{version:1,bag:{use:[{op:'heal',amount:3},{op:'restoreConsumed',amount:1}]}}};
+  H.game.ownedCards = [{uid:id,card}]; H.game.usedPocket = full ? [{card:spell,count:1}] : [];
+  if (full) H.game.hp = H.game.maxHp;
+  bag.showBackpack(true); inspect(card.name);
+  expect(document.querySelector('[data-act="useDetailCard"]').disabled).toBe(false);
+  ui._acts.useDetailCard();
+  if (full) { expect(H.game.heal).not.toHaveBeenCalled(); expect(H.game.ownedCards[0].card.id).toBe(spell.id); }
+  else expect(H.game.heal).toHaveBeenCalledWith(3);
+  expect(H.save).toHaveBeenCalledOnce();
+});
+
+
+it.each(['heal', 'restoreConsumed'])('含null的旧结构化%s规则保守显示可用且不崩溃', op => {
+  const card = {id:'nullable-rule',name:'旧规则药',type:'道具',rules:{version:1,bag:{use:[null,{op,amount:3}]}}};
+  H.game.ownedCards = [{uid:'nullable-rule',card}]; H.game.hp = H.game.maxHp;
+  expect(() => { bag.showBackpack(true); inspect(card.name); }).not.toThrow();
+  expect(document.querySelector('[data-act="useDetailCard"]').disabled).toBe(false);
+  ui._acts.useDetailCard();
+  expect(H.game.ownedCards).toHaveLength(1); expect(H.game.heal).not.toHaveBeenCalled(); expect(H.save).not.toHaveBeenCalled();
 });

@@ -37,7 +37,12 @@ describe('secondary glass and unboxed capacity presentation contracts', () => {
       expect(declaration('battle-secondary-overlay', `${panel} ${child}`, 'backdrop-filter')).toBeUndefined();
     }
     expect(declaration('battle-secondary-overlay', 'body #overlay .battle-secondary-panel .infusion-source', 'background')).toBe('transparent');
-    expect(declaration('battle-secondary-overlay', `${panel} .battle-decision-actions .ov-btn.ok`, 'background')).toBe('var(--feedback-blue)');
+    expect(declaration('battle-secondary-overlay', `${panel} .battle-decision-actions .ov-btn.ok`, 'background')).toBe('var(--ui-blue)');
+    const blue = [];
+    css('secondary-ui-tokens').walkDecls('--ui-blue', decl => blue.push(decl));
+    expect(blue).toHaveLength(1);
+    expect(blue[0].value).toBe('#b6cbd7');
+    expect(blue[0].parent.selector).toContain('.battle-secondary-panel');
     expect(declaration('battle-secondary-overlay', `${panel} .choice-opt:is(:hover,:focus-visible)`, 'background')).toBe('#b6cbd714');
   });
   it('removes the capacity chip box at its source, without hiding capacity content', () => {

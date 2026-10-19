@@ -478,6 +478,17 @@ describe('planner 显式 root 与查询故障隔离', () => {
     expect(() => selectPlan(['tests/first.test.js'])).toThrow('显式');
     expect(() => reverseImports()).toThrow('显式');
   });
+  it('测试helper透明连接直接测试且循环不会遗漏或无限遍历', () => {
+    const root = createRoot();
+    put(root, 'game/src/local.js', 'export const local = 1;');
+    put(root, 'tests/helpers/first.js', "import '../../game/src/local.js'; import './second.js';");
+    put(root, 'tests/helpers/second.js', "import './first.js';");
+    mkdirSync(path.join(root, 'game/data'), { recursive: true });
+    for (let i = 0; i < 13; i++) put(root, `tests/helper-${i}.test.js`, "import './helpers/second.js';");
+    const plan = selectPlan(['game/src/local.js'], { root });
+    expect(plan.mode).toBe('quick');
+    for (let i = 0; i < 13; i++) expect(plan.tests).toContain(`tests/helper-${i}.test.js`);
+  });
   it('兼容导出从其他cwd导入仍定位模块项目，保持定向选择', () => {
     const root = createRoot();
     const url = pathToFileURL(path.resolve('scripts/acceptance-gate.mjs')).href;

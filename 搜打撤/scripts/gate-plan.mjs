@@ -152,16 +152,19 @@ export function reverseImports(root) {
 
 function nearbyTests(filename, reverse, hops) {
   const found = new Set();
-  const visited = new Set([filename]);
+  const visited = new Map([[filename, 0]]);
   const queue = [[filename, 0]];
   while (queue.length) {
     const [current, distance] = queue.shift();
     if (distance >= hops) continue;
     for (const importer of reverse.get(current) || []) {
-      if (visited.has(importer)) continue;
-      visited.add(importer);
+      const helper = importer.startsWith('tests/') && !importer.endsWith('.test.js');
+      const nextDistance = distance + (helper ? 0 : 1);
+      if (visited.has(importer) && visited.get(importer) <= nextDistance) continue;
+      visited.set(importer, nextDistance);
       if (importer.startsWith('tests/') && importer.endsWith('.test.js')) found.add(importer);
-      else if (importer.startsWith('game/src/')) queue.push([importer, distance + 1]);
+      // Test fixtures are transparent adapters, not another production impact hop.
+      else if (helper || importer.startsWith('game/src/')) queue.push([importer, nextDistance]);
     }
   }
   return [...found].sort();

@@ -27,10 +27,17 @@ export function restorationCapacityReason(game, ownedIndex, { usedSlots, bagCap 
 export function bagUseStatus(card, uid, { game, usedSlots, bagCap }) {
   if (card.id === 'tt3-mystery-potion') return { label:'仅战斗中使用', badge:'战斗使用', reason:'神秘药水仅能在战斗中使用' };
   if (bagUseLocation(card) === 'battle') return { label:'仅战斗中使用', badge:'战斗使用', reason:'该道具的效果需要在战斗中使用' };
-  const empty = ['cmtn6bge52qt', 'tt-crystal'].includes(card.id) && !game.usedPocket.length;
+  const operations = card.rules?.bag?.use;
+  const structured = Array.isArray(operations) && operations.length > 0;
+  // Only pure effects can be ruled out here: mixed cards may still have another useful effect.
+  const restoreOnly = structured && operations.every(op => op?.op === 'restoreConsumed');
+  const legacyRestore = !structured && ['cmtn6bge52qt', 'tt-crystal'].includes(card.id);
+  if (structured && operations.every(op => op?.op === 'heal') && game.hp >= game.maxHp) {
+    return { label:'生命值已满，无需治疗', badge:'生命已满', reason:'生命值已满，暂时不需要使用；卡牌未消耗' };
+  }
+  const empty = (restoreOnly || legacyRestore) && !game.usedPocket.length;
   if (empty) return { label:'消耗区为空，无法复原', badge:'无可复原卡', reason:'消耗区是空的，无需复原' };
-  const restoreOnly = card.rules?.bag?.use?.length && card.rules.bag.use.every(op => op.op === 'restoreConsumed');
-  const capacityReason = restoreOnly || ['cmtn6bge52qt', 'tt-crystal'].includes(card.id)
+  const capacityReason = restoreOnly || legacyRestore
     ? restorationCapacityReason(game, game.ownedCards.findIndex(o => o.uid === uid), { usedSlots, bagCap }) : '';
   if (capacityReason) return { label:capacityReason, badge:'需腾位', reason:`${capacityReason}；卡牌未消耗` };
   return { label:'使用这张道具', badge:bagUseLocation(card) === 'map' ? '可用' : '查看用法', reason:'' };
