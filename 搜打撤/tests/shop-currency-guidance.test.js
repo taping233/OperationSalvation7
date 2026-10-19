@@ -131,6 +131,38 @@ describe('商店金币与交易状态引导', () => {
     expect(host.querySelector('.shop-detail-done')).not.toBeNull();
   });
 
+  it('连续补货保留展开规则、阅读位置与摘要焦点，并明确每次支出', () => {
+    const card={...makeCard('long'),desc:'完整材料规则。'.repeat(30)};
+    const {acts,host}=shop({coins:5,stock:[{card,price:1,shaReplenish:5,sold:false}]});
+    acts.shopInspect({i:0});const rules=host.querySelector('.shop-detail-rules');rules.open=true;
+    host.querySelector('.shop-detail-scroll').scrollTop=120;rules.querySelector('summary').focus();
+    acts.buySha({i:0});
+    expect(host.querySelector('.shop-detail-rules').open).toBe(true);
+    expect(host.querySelector('.shop-detail-scroll').scrollTop).toBe(120);
+    expect(document.activeElement.tagName).toBe('SUMMARY');
+    expect(host.querySelector('.shop-live').textContent).toContain('支出 1 币 · 剩余 4 币');
+  });
+  it('免费成交明确未扣币，重绘回执把卡名作为文字呈现', () => {
+    const {acts,host}=shop({stock:[{card:makeCard('gift','<b>礼物</b>'),price:0,free:true,sold:false}]});
+    acts.buyCard({i:0});acts.backShop();
+    expect(host.querySelector('.shop-live').textContent).toBe('免费领取「<b>礼物</b>」 · 未扣币 · 剩余 5 币');
+    expect(host.querySelector('.shop-live b')).toBeNull();
+  });
+  it('收购规则默认收拢，卖出显示实际收入并保留列表位置和下张操作焦点', () => {
+    const frames=[];vi.spyOn(window,'requestAnimationFrame').mockImplementation(fn=>{frames.push(fn);return frames.length;});
+    vi.spyOn(HTMLElement.prototype,'getClientRects').mockImplementation(()=>[{}]);
+    const {acts,host,game}=shop();
+    game.ownedCards.push(...['one','two'].map(uid=>({uid,card:{...makeCard(uid),sellable:true,value:3}})));
+    acts.openSell();expect(host.querySelector('.sell-ledger-rule').tagName).toBe('DETAILS');expect(host.querySelector('.sell-ledger-rule').open).toBe(false);
+    host.querySelector('.shop-board').scrollTop=140;host.querySelector('[data-act="sellCard"]').focus();
+    acts.sellCard({uid:'one'});frames.splice(0).forEach(fn=>fn());
+    expect(host.querySelector('.shop-live').textContent).toContain('收入 3 币 · 当前 8 币');
+    expect(host.querySelector('.shop-board').scrollTop).toBe(140);
+    expect(document.activeElement.dataset.uid).toBe('two');
+    acts.sellCard({uid:'two'});frames.splice(0).forEach(fn=>fn());
+    expect(document.activeElement.dataset.act).toBe('backShop');
+  });
+
   it('收购收入明确标为卖出可得，出售后返店重新投影余额和可买状态', () => {
     const { acts, host, game } = shop({coins:2});
     game.ownedCards.push({uid:'sellable', card:{...makeCard('铜币'), sellable:true, value:3}});

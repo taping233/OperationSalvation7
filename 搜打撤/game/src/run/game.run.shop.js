@@ -1,3 +1,4 @@
+import { uiDisclosure } from '../ui/ui-disclosure.js';
 import { Random } from '../core/random.js';
 import { esc } from '../core/shared.js';
 import { descRich } from '../cards/cards.view.js';
@@ -354,7 +355,7 @@ function createShopController({
         </aside>
         <aside class="shop-detail" role="dialog" aria-label="当前商品详情"${selectedShopIndex == null ? ' hidden' : ''}>${shopDetailHTML()}</aside>
         </div>
-        <footer class="shop-market-footer"><span class="shop-live" id="shopLive" aria-live="polite">${shopNotice}</span><button class="shop-back" data-act="closeShop">[[icon:arrow]] 返回地图</button></footer>
+        <footer class="shop-market-footer"><span class="shop-live" id="shopLive" aria-live="polite">${esc(shopNotice)}</span><button class="shop-back" data-act="closeShop">[[icon:arrow]] 返回地图</button></footer>
       </div>`, 'page');
     const shopRoot = document.querySelector('.shop-replica');
     registerShopActs(shopRoot);
@@ -403,7 +404,7 @@ function createShopController({
     UI.showOverlay('', `
       <div class="pg shop-pg shop-exchange node-pg sc-shop" data-asset-key="scene-shop-bg">
         <header class="pg-head">
-          <div class="shop-heading"><span class="shop-kicker">ACQUISITION DESK // 08</span><h2>[[icon:cards]] 收购台 ${UI.helpBtn('shopSell')}</h2><p>只收带有“可出售”备注的卡牌，其他卡不会出现在这里。</p></div>
+          <div class="shop-heading"><span class="shop-kicker">ACQUISITION DESK // 08</span><h2>[[icon:cards]] 收购台 ${UI.helpBtn('shopSell')}</h2><p>选择卡牌，按标价卖出</p></div>
           <button class="shop-bag-btn" data-act="shopOpenBag" title="打开背包整理卡牌">[[icon:bag]] 背包</button>
           <div class="shop-resources"><span class="shop-resource coin">${coinIconHTML()}<small>可用金币</small><b>${game.coins}</b><em>币</em></span><span class="shop-resource"><small>可出售</small><b>${total}</b><em>张</em></span></div>
         </header>
@@ -414,7 +415,7 @@ function createShopController({
               <h3>商队收购单</h3>
               <div class="sell-ledger-total"><small>本页卖出共可得</small><b>${coinIconHTML()}${totalValue}</b><span>币</span></div>
               <dl><div><dt>持有卡牌</dt><dd>${ownedAll} 张</dd></div><div><dt>符合条件</dt><dd>${total} 张</dd></div><div><dt>当前金币</dt><dd>${game.coins} 币</dd></div></dl>
-              <div class="sell-ledger-rule"><b>收购规则</b><p>仅识别带“可出售”备注的货币与宝石类卡牌。点击“确认卖出”后立即成交，价格等于卡面币值。</p></div>
+              ${uiDisclosure({className:'sell-ledger-rule',label:'收购规则',content:'<p>仅收购带“可出售”备注的货币与宝石类卡牌。点击“确认卖出”后立即成交，价格等于卡面币值。</p>'})}
             </aside>
             <section class="sell-catalog" aria-label="可出售卡牌">
               <div class="sell-catalog-head"><div><span>APPRAISAL LIST</span><h3>待估物清单</h3></div><b>${total} 件</b></div>
@@ -422,7 +423,7 @@ function createShopController({
             </section>
           </div>
         </div>
-        <button class="shop-back" data-act="backShop">[[icon:arrow]] 返回商店</button>
+        <footer class="shop-market-footer"><span class="shop-live" role="status" aria-live="polite">${esc(shopNotice)}</span><button class="shop-back" data-act="backShop">[[icon:arrow]] 返回商店</button></footer>
       </div>`, 'page');
     registerShopActs(document.querySelector('.shop-exchange'));
     UI.refresh(game);
@@ -447,12 +448,18 @@ function createShopController({
     if (detail) {
       detail.hidden = selectedShopIndex == null;
       const detailHadFocus = detail.contains(document.activeElement);
+      const focusedAction = document.activeElement?.dataset?.act;
+      const focusedSummary = detail.contains(document.activeElement) && document.activeElement.tagName === 'SUMMARY';
+      const rulesOpen = !!detail.querySelector('.shop-detail-rules')?.open;
       const scrollTop = detail.querySelector('.shop-detail-scroll')?.scrollTop || 0;
       detail.innerHTML = SDT.Icons?.rich?.(shopDetailHTML()) || shopDetailHTML();
+      const rules = detail.querySelector('.shop-detail-rules');
+      if (rules) rules.open = rulesOpen;
       const scroller = detail.querySelector('.shop-detail-scroll');
       if (scroller) scroller.scrollTop = scrollTop;
       if (detailHadFocus) {
-        const nextAction = detail.querySelector('.shop-detail-buy:not(:disabled), .shop-detail-done, .shop-detail-bag');
+        const sameAction = [...detail.querySelectorAll('button:not(:disabled)')].find(button => button.dataset.act === focusedAction);
+        const nextAction = (focusedSummary ? rules?.querySelector('summary') : sameAction) || detail.querySelector('.shop-detail-buy:not(:disabled), .shop-detail-done, .shop-detail-bag');
         (nextAction || document.querySelector(`.shop-board-grid .shop-preview[data-i="${selectedShopIndex}"]`))?.focus({ preventScroll:true });
       }
     }
@@ -585,7 +592,7 @@ function createShopController({
       game.coins -= slot.price;
       slot.sold = true;
       game.ownedCards.push({ uid: newUid(), card: { ...slot.card } });
-      shopNotice = `已购入「${slot.card.name}」 · 剩余 ${game.coins} 币`;
+      shopNotice = `${slot.price === 0 ? '免费领取' : '已购入'}「${slot.card.name}」 · ${slot.price === 0 ? '未扣币' : `支出 ${slot.price} 币`} · 剩余 ${game.coins} 币`;
       SDT.Sound.sfx('tradeBuy');
       UI.log(`[[icon:bag]] 购买卡牌【<b>${esc(slot.card.name)}</b>】（- ${slot.price} 币，剩 ${game.coins}）`, 'coin');
       saveGame();
@@ -614,7 +621,7 @@ function createShopController({
       game.coins -= slot.price;
       slot.shaReplenish--;
       game.ownedCards.push({ uid: newUid(), card: { ...slot.card } });
-      shopNotice = `已补充初始攻击 ×1 · 剩余 ${game.coins} 币`;
+      shopNotice = `已补充初始攻击 ×1 · 支出 ${slot.price} 币 · 剩余 ${game.coins} 币`;
       SDT.Sound.sfx('tradeBuy');
       UI.log(`[[icon:bag]] 补充初始攻击 ×1（- ${slot.price} 币，剩 ${game.coins} · 本站还可补 ${slot.shaReplenish} 张）`, 'coin');
       saveGame();
@@ -630,14 +637,30 @@ function createShopController({
         return;
       }
       if (owned.stored) return;   // 珍珠盒存放中的卡不可出售（G-2，2026-09-29 夜班：与收购台渲染过滤同口径，直调 act 不再放行）
+      const sellRoot = document.querySelector('.shop-exchange');
+      const browseState = captureShopBrowseState(sellRoot, UI.el?.ovBody);
+      const rulesOpen = !!sellRoot?.querySelector('.sell-ledger-rule')?.open;
+      const saleButtons = [...(sellRoot?.querySelectorAll('[data-act="sellCard"]') || [])];
+      const saleIndex = saleButtons.findIndex(button => button.dataset.uid === owned.uid);
       const price = SDT.Cards.sellPrice(owned.card);
       game.ownedCards.splice(index, 1);
       game.coins += price;
       SDT.Sound.sfx('tradeSell');
-      shopNotice = `已出售「${owned.card.name}」 · 当前 ${game.coins} 币`;
+      shopNotice = `已出售「${owned.card.name}」 · 收入 ${price} 币 · 当前 ${game.coins} 币`;
       UI.log(`[[icon:coin]] 出售卡牌【<b>${esc(owned.card.name)}</b>】（+ ${price} 币，现有 ${game.coins}）`, 'coin');
       saveGame();
       renderSellPage();
+      const restoredRoot = document.querySelector('.shop-exchange'), restoredVersion = pageVersion;
+      const restoredRules = restoredRoot?.querySelector('.sell-ledger-rule');
+      if (restoredRules) restoredRules.open = rulesOpen;
+      const remaining = [...(restoredRoot?.querySelectorAll('[data-act="sellCard"]') || [])];
+      if (browseState?.focus?.keys?.act === 'sellCard') {
+        const next = remaining[Math.min(saleIndex, remaining.length - 1)];
+        browseState.focus.keys = next ? {act:'sellCard',uid:next.dataset.uid} : {act:'backShop'};
+      }
+      requestAnimationFrame(() => {
+        if (pageVersion === restoredVersion && currentSession(session) && restoredRoot?.isConnected) restoreShopBrowseState(restoredRoot, UI.el?.ovBody, browseState);
+      });
     });
     register('openSell', renderSellPage);
     register('backShop', renderShop);

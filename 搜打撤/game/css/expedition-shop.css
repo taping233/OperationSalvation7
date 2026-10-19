@@ -157,3 +157,8 @@ body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { wi
 #overlay .shop-pg.shop-exchange .shop-sell-empty { min-height:190px; display:grid; place-items:center; margin:0; padding:24px; color:var(--shop-muted); font-size:17px; text-align:center; line-height:1.7; }
 body.reduce-motion #overlay .shop-pg.sc-shop * { animation:none; transition:none; }
 @media (prefers-reduced-motion:reduce) { #overlay .shop-pg.sc-shop * { animation:none; transition:none; } }
+
+/* Share transaction feedback rhythm across buying and selling. */
+#overlay .shop-pg.shop-exchange .shop-market-footer { display:flex; align-items:center; gap:24px; min-height:56px; }
+#overlay .shop-pg.shop-exchange .shop-live { flex:1; min-width:0; color:var(--shop-ink); font-size:16px; line-height:1.5; }
+#overlay .shop-pg.shop-exchange .shop-live:empty { display:none; }
