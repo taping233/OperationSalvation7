@@ -1,5 +1,7 @@
 # Vite 游戏素材目录
 
+2026-10-19已按批准清单清理195项不再使用的旧素材：旧宝箱/人物帧、旧地图与转场、退役场景和被新映射覆盖的卡图/缩略图；对应资源登记与生成缩略索引已同步。精确路径、原始指纹和验收边界见[清理记录](../../docs/evidence/2026-10-19-unused-cleanup/README.md)。当前素材映射、人物sprite-v1、许可证和可编辑源按各自入口维护，不用旧路径推断现行素材仍存在。
+
 本目录存放 Vite 版游戏的图片、字体和音频。是否在当前运行时被引用，应核对 `game/data/art-mapping.json`、`game/src/` 的加载路径与 `game/assets/asset-manifest.json`；仅凭文件存在或清单条目不能判断素材可删。
 
 第一层普通战斗使用 `scenes/battle/stage-reset-1015/{backdrop,ground,foreground}.webp` 三层独立场景，来源为 NAI 起稿后内置重绘，接入见 `src/battle/view/battle.scenery.js`。地板的远沿过渡由 `css/battle-stage.css` 维护；后续章节及首脑场景仍按场景目录选择。[来源与实装记录](../../docs/evidence/2026-10-15-battle-stage-reset/README.md)注明本轮按老板要求未做实装验收。

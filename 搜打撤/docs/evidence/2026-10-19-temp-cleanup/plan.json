@@ -1,0 +1,128 @@
+{
+  "status": "awaiting-exact-path-approval",
+  "generatedAt": "2026-10-19T11:20:15.852Z",
+  "files": 20230,
+  "bytes": 5252530829,
+  "directories": [
+    {
+      "path": ".tmp/exe-stability-1018/extracted",
+      "files": 1912,
+      "bytes": 646802493,
+      "treeSha256": "05060642e7099f6f094e5476cf26b900eadbcf13318bbc206052bd82330a8204"
+    },
+    {
+      "path": ".tmp/exe-review-1018/extracted",
+      "files": 1912,
+      "bytes": 646797265,
+      "treeSha256": "66a1a56b393d5b5efd218a86d2252bc6cb043d0f0a5a16b908d3d817d49dc06b"
+    },
+    {
+      "path": ".tmp/clean-exe-1016/project/desktop-app/node_modules",
+      "files": 7380,
+      "bytes": 467831339,
+      "treeSha256": "28207e39a1d2e85ef29e63c5d7b9a3d54a733aafd8f6aab45cb6551d5f3a5438"
+    },
+    {
+      "path": ".tmp/clean-exe-1016/project/builder-cache",
+      "files": 378,
+      "bytes": 16183252,
+      "treeSha256": "866a726689e5cb64d1eea4daddaf31a1b1f0e60270d1d6c34a54ebf4ceb70ea8"
+    },
+    {
+      "path": ".tmp/page-perf-1018/delivery/win-unpacked",
+      "files": 1601,
+      "bytes": 597449495,
+      "treeSha256": "ff2fb43e79d6b1914efe251083aa67ecdd7bd9760737c5ee9f6e2a97483702d0"
+    },
+    {
+      "path": ".tmp/deep-perf-1018/delivery/win-unpacked",
+      "files": 1601,
+      "bytes": 597453984,
+      "treeSha256": "6fc3d565aca5cdc91ce0f2452733eccbd1892420f7c01ac8943ea1b7b77f0b77"
+    },
+    {
+      "path": ".tmp/startup-fix-1018/delivery/win-unpacked",
+      "files": 1601,
+      "bytes": 597455351,
+      "treeSha256": "50fa96091bc02b272035f73448b7aae0c6267cf44d605da3f5069cda8722d5f5"
+    },
+    {
+      "path": ".tmp/exe-errors-1018/delivery/win-unpacked",
+      "files": 332,
+      "bytes": 438301135,
+      "treeSha256": "e868ba8514f1b91caa408ae50882b1fb7febfecfd680cc0369c0738cf382edc1"
+    },
+    {
+      "path": ".tmp/exe-errors-1018/delivery-fixed/win-unpacked",
+      "files": 1601,
+      "bytes": 597459250,
+      "treeSha256": "cde4d35fa43c02ead85309f5b6b12e4b06618a16a7a805ee4419623b6ec0ec50"
+    },
+    {
+      "path": ".tmp/exe-refresh-1018/delivery/win-unpacked",
+      "files": 1912,
+      "bytes": 646797265,
+      "treeSha256": "3ef924014803af76657dc061f31b121454badd066c6949c5effc7166782356dc"
+    }
+  ],
+  "retainedPortableExes": [
+    {
+      "path": ".tmp/page-perf-1018/delivery/搜打撤-代号7.exe",
+      "bytes": 287814301,
+      "sha256": "8f98a7a45de29988fd59a47b345eb30baa765b19b260905e0144b8d67991746d"
+    },
+    {
+      "path": ".tmp/deep-perf-1018/delivery/搜打撤-代号7.exe",
+      "bytes": 287818619,
+      "sha256": "560493f3442f46cdcd6bcea0f26cf074f025b125c63861dd1c2c512729151ed8"
+    },
+    {
+      "path": ".tmp/startup-fix-1018/delivery/搜打撤-代号7.exe",
+      "bytes": 287812412,
+      "sha256": "605f7ff6a99a3be2a2c1f2c000001e653d98b48b632f8bdc9393d5af5c3ac155"
+    },
+    {
+      "path": ".tmp/exe-errors-1018/delivery-fixed/搜打撤-代号7-修复版-20261018.exe",
+      "bytes": 287814417,
+      "sha256": "58439159bfd8abd4ae1648c803c9598ceceeb10598b861da86ac425664bc5325"
+    },
+    {
+      "path": ".tmp/exe-refresh-1018/delivery/搜打撤-代号7-20261018-换肤修复.exe",
+      "bytes": 326032977,
+      "sha256": "c8cd0c4f83750f4e6a77bc8ba9b46dd68f0cd579a3b9c7a64bd27c16a2746c4e"
+    },
+    {
+      "path": ".tmp/exe-stability-1018/delivery/搜打撤-代号7-资源修复版-20261018.exe",
+      "bytes": 326036949,
+      "sha256": "395b54650f7b724a62b79e2d10908c3c286defb54ac84ab4bf84da341b05fe0c"
+    }
+  ],
+  "duplicates": [
+    {
+      "removed": ".tmp/exe-stability-1018/extracted",
+      "duplicateOf": ".tmp/exe-stability-1018/delivery/win-unpacked",
+      "verifiedFiles": 1912
+    },
+    {
+      "removed": ".tmp/exe-review-1018/extracted",
+      "duplicateOf": ".tmp/exe-refresh-1018/delivery/win-unpacked",
+      "verifiedFiles": 1912
+    }
+  ],
+  "localInventory": {
+    "path": ".tmp/cleanup-plan-1019/inventory.json",
+    "bytes": 4418302,
+    "sha256": "08b34295ed24dfe547d847badb7d3e6825a0965f497a581996bb56be01db4e8b",
+    "method": "Run this prepare.mjs read-only hash inventory; no deletion performed"
+  },
+  "retainedDirectories": [
+    ".tmp/page-motion-1019",
+    ".tmp/perf-budgets-1018",
+    ".tmp/music-workstation",
+    ".tmp/imagegen",
+    ".tmp/tools",
+    ".tmp/nai",
+    ".tmp/exe-stability-1018/delivery/win-unpacked"
+  ],
+  "reason": "Remove obsolete unpacked build output and reinstallable caches; preserve portable EXEs, source snapshots, art/music originals and logs."
+}

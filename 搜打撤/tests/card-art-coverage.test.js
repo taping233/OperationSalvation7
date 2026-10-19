@@ -94,6 +94,9 @@ describe('卡面实装守卫：定稿卡面清单', () => {
   const artMapping = JSON.parse(readFileSync(path.join(ROOT, 'game', 'data', 'art-mapping.json'), 'utf8'));
   const HERO_KEY_BY_CARD = artMapping.heroCardArt || {};
   const landmarkFileMissing = (key) => {
+    const id = key.replace(/^(martial|spell|equip)-/, '');
+    const override = artMapping.cardArtOverrides?.[id];
+    if (override) return !existsSync(path.join(ROOT, 'game/assets', override));
     if (/^(martial|spell|equip)-/.test(key)) return !existsSync(path.join(CARDS_DIR, `${key}.webp`));
     const heroKey = HERO_KEY_BY_CARD[key];
     return !heroKey || !existsSync(path.join(CARDS_DIR, `${heroKey}.webp`));

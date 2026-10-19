@@ -66,7 +66,7 @@
 - `battle/view/battle.discover-input.js` 维护发现页的UI输入门：同轮语义快照复用展开期限，每次页面绑定分配标识，提交前核验最新快照并锁定本轮；不抽牌、不改选择效果或存档。页面标识通过候选data属性传入普通UI动作委托。
 - `ui/term-tips.js` 维护挂在body的公共解释单例：`data-term`用于既有词条，`data-ui-tip`与title/text/note属性提供动态控件说明，动态说明不拦截控件点击。战斗职业技能和能量沿此入口；已禁用技能通过外层锚点接受说明聚焦，发动条件仍在原按钮。
 - `renderer.js`：Canvas 地图编排与视觉特效；`renderer.primitives.js` 提供纯绘图工具；`render-scheduler.js` 决定何时绘制。
-- `audio/sound.js`：音频门面，装配 `sound.music.catalog.js`、`sound.music.player.js` 与 `sound.scape.js`。原创配乐按场景加载和切换；短音效优先采样，缺位或未解码时回退程序化合成。具体曲目与混音行为见[音频说明](audio-system.md)。
+- `audio/sound.js`：音频门面，装配 `sound.music.catalog.js`、`sound.music.player.js` 与 `sound.samples.player.js`。原创配乐按场景加载和切换；短音效仅播放已解码采样，未就绪时静默。旧声景和采样实现已退役清理。具体曲目与混音行为见[音频说明](audio-system.md)。
 - `motion.js`：基于 Motion Mini 的 DOM 微动效门面，并统一处理减少动态效果偏好。
 - `battle/view/battle.frames.js`：按需加载 PixiJS 播放战斗序列帧；`battle.vfx.js` 的轻量受击火花使用 WAAPI 动画。
 - `narrative.js`：使用 inkjs 读取预编译剧情；全部 10 个 tt6 事件（选项、文案与效果标注）定义在 `narrative/events.ink`，构建、测试和开发启动前由 `scripts/compile-narrative.mjs` 生成运行时代码；效果结算通过 `game.run.js` 的效果端口表执行。

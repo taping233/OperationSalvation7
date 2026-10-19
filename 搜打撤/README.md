@@ -36,13 +36,14 @@ npm run build
 - 五个独立存档、基地、仓库、背包、安全格、职业熟练度、成就和卡背；
 - 普通战斗、BOSS 牌库战、词条时点、祝福诅咒、注能、墓地与指向施法；
 - 卡牌数据与同步迁移、事件、商店、宝箱和本地持久化；制作坊写入口保持关闭；
-- Canvas 地图、位图角色/场景、采样与程序化音效；
+- Canvas 地图、位图角色/场景、文件采样音效与分场景配乐；
 - `SDT.Agent` 结构化观察与动作接口、自动游玩、跑局统计及批量策略实验工具。
 
 ## 文档导航
 
 - [制作资料总入口（章程、GDD、视觉、工程、迭代与验收）](docs/production/README.md)
 - [项目状态入口](docs/STATUS.md)
+- [清理后文件与当前保留交付包](docs/CLEANUP-STATUS.md)
 - [文档导航（含按改动找文档路由表）](docs/README.md)
 - [Agent 接口协议](docs/agent-protocol.md)
 - [Agent 策略迭代手册](docs/agent-iteration-playbook.md)

@@ -1,13 +1,15 @@
 // @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { RUNTIME_REDUNDANCY_REVIEW } from '../scripts/runtime-asset-redundancy-review.mjs';
 import { assertExcludedRuntimeAssetReferences, planReviewedRuntimeAssetExclusions } from '../scripts/runtime-asset-redundancy.mjs';
 
 const read = file => readFileSync(new URL(`../${file}`, import.meta.url));
 const hash = text => createHash('sha256').update(text).digest('hex');
 const receipt = JSON.parse(read('docs/evidence/2026-10-16-WF-cloud-retired-scenes/receipt.json'));
+const deletionPlan = JSON.parse(read('docs/evidence/2026-10-19-unused-cleanup/deletion-plan.json'));
+const deletionReceipt = JSON.parse(read('docs/evidence/2026-10-19-unused-cleanup/deletion-receipt.json'));
 const candidates = RUNTIME_REDUNDANCY_REVIEW.candidates.filter(item => item.category === 'retired-scenes');
 const active = [
   ...['00', '01', '02', '03'].map(frame => `scenes/chests/safe-simple-v7/frame-${frame}.webp`),
@@ -26,14 +28,20 @@ function fixture() {
 const inspect = f => planReviewedRuntimeAssetExclusions(f.sources, {}, f.review);
 
 describe('exact retired scene publication review', () => {
-  it('registers exactly the approved 19 R2 paths and retains original bytes', () => {
+  it('registers exactly the 19 retired R2 paths and verifies their approved deletion fingerprints', () => {
     expect(candidates).toHaveLength(19);
     expect(candidates.map(item => `assets/${item.path}`)).toEqual(receipt.files.map(item => item.path));
     expect(receipt.bytes).toBe(3428566);
     for (const item of receipt.files) {
-      const raw = read(`game/${item.path}`);
-      expect(raw.length).toBe(item.bytes);
-      expect(hash(raw)).toBe(item.sha256);
+      const file = `game/${item.path}`;
+      const approved = deletionPlan.files.find(entry => entry.path === file);
+      expect(approved, file).toBeDefined();
+      expect(approved.bytes).toBe(item.bytes);
+      expect(approved.sha256).toBe(item.sha256);
+      expect(deletionReceipt.status).toBe('deleted-approved-files');
+      expect(deletionReceipt.planSha256).toBe(hash(read('docs/evidence/2026-10-19-unused-cleanup/deletion-plan.json')));
+      expect(deletionReceipt.files.find(entry => entry.path === file)).toEqual(approved);
+      expect(existsSync(new URL(`../${file}`, import.meta.url)), file).toBe(false);
     }
   });
 

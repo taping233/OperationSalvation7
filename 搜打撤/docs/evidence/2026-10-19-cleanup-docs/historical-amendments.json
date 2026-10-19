@@ -1,0 +1,209 @@
+{
+  "amendments": [
+    {
+      "file": "docs/evidence/2026-09-29-nightshift/review-U4-0035.md",
+      "affectedReports": [
+        "docs/evidence/2026-09-29-nightshift/review-U4-0035.md"
+      ],
+      "originalSha256": "22963859270afce06685e4720f543308e95089b6535d363efbef1112309374a4",
+      "updatedSha256": "5e243adf9b23a74c4f53228674a1f3d92910cfd5a4b891f8602a21137006beee",
+      "insertionOffset": 86,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-09-30-full-repository-review/infrastructure/test-review.md",
+      "affectedReports": [
+        "docs/evidence/2026-09-30-full-repository-review/infrastructure/test-review.md"
+      ],
+      "originalSha256": "88931639062d01b293db8f2220e45917928dfcf60a8ecfb9e92eb53277a9d59f",
+      "updatedSha256": "3c54560daf9717d5089fc492922491520b810fb0b566f669dc0a2defd1112abf",
+      "insertionOffset": 45,
+      "insertionBytes": 415,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-01-full-audit-fix-perf/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-01-full-audit-fix-perf/perf-audit-report.md"
+      ],
+      "originalSha256": "ed0fde744a6c6179d56c0144279c5ab27354990741b91512d838890478632d78",
+      "updatedSha256": "809d3a1c7f6b23f0873b7eae6fec4d43899c0a53ca03ed099adcb8218fab2b6b",
+      "insertionOffset": 77,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-01-sfx-listening/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-01-sfx-listening/README.md"
+      ],
+      "originalSha256": "695c7c322e2e1a1c29548606385dcbe182fbbf47c74323ed767bbed790979589",
+      "updatedSha256": "dd0ff75a440e6b886997b2dde5dd99d7e7c9dc9f68c1fa1e52f867364a0dfa95",
+      "insertionOffset": 55,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-02-production-research/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-02-production-research/diagnosis/experience/REPORT.md",
+        "docs/evidence/2026-10-02-production-research/planning/systems/SYSTEM-PLAN.md"
+      ],
+      "originalSha256": "8416e9b5a5b4c0ded38e2d0a0065753238e763490b9b584d22b6752e0b7b1577",
+      "updatedSha256": "28e9a669ae5dc3a8bcef8876263ba2a4e0c7195eccc6943fbaac818ece486e6d",
+      "insertionOffset": 222,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-04-sfx-opensource/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-04-sfx-opensource/README.md"
+      ],
+      "originalSha256": "468c44a47a68a71eceef21f4fc10ba2f7142707d6c9ab5ae22464a8454c4ba97",
+      "updatedSha256": "25cc37dbc7e559aa93b02cf533e973242448eef4ddda31181d65093d419ce326",
+      "insertionOffset": 52,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-09-WF-doc-system-followup-1009/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-09-WF-doc-system-followup-1009/PENDING-preview.md"
+      ],
+      "originalSha256": "d17eece5810c3e7f075c9146c53913452b7319a06eded6674ca50d4f94563b0d",
+      "updatedSha256": "5dab70d3762986c68d1d93953de18ad13cce39c6aba2a7dbd51c14f250e7ba95",
+      "insertionOffset": 42,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-11-WF-base-cohesion-1011/agent-art.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-11-WF-base-cohesion-1011/agent-art.md"
+      ],
+      "originalSha256": "337c4edd3ceb4d681d905e99d499571a865c8ca9f24dd739d55522eb246f43b7",
+      "updatedSha256": "645a6d5990377c849dc01cc88bbc064800bcdd011ff0c344c4ab01532c2ebb0d",
+      "insertionOffset": 33,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-research-reset/chest-cardstyle/README.md",
+        "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/art-research-reset/SHOP-ENTRY.md",
+        "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/entry-events/ART-GEN.md",
+        "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/entry-events/IMPLEMENTATION.md"
+      ],
+      "originalSha256": "e6f823617b271825bd08c1321285890703c5901697ed975258786da323df73bb",
+      "updatedSha256": "accf8d98007cd80214bf0363b8becce34d8cd61dfbb62ed182742f8df2fec0fe",
+      "insertionOffset": 48,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-13-WF-nonbrowser-repairs-1013/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-13-WF-nonbrowser-repairs-1013/asset-second-batch.md"
+      ],
+      "originalSha256": "1006f64ef2a5e085dd4875d93f40a4dfa7d9da641ea6ae8834fe36934c9d00a9",
+      "updatedSha256": "768e1690f6ea449ccfbfb69bd6d12079aade81d9470b85b54db30fb02f96c18d",
+      "insertionOffset": 46,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-16-shadowed-card-audit/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-16-shadowed-card-audit/README.md"
+      ],
+      "originalSha256": "56bf0599c6bbea1b4eb7b8ae86998897f78a05e2445c7936f81467d2c5df1637",
+      "updatedSha256": "dde653d459967d5863cccda170f0de76c668436e0585f78bc6e3401b14ef4bfe",
+      "insertionOffset": 39,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-16-WF-cloud-retired-scenes/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-16-WF-cloud-retired-scenes/README.md"
+      ],
+      "originalSha256": "9dfff04bfeebdf55289e51c3c40cdd02bed062156258434cca06e3fa88c2ee13",
+      "updatedSha256": "7423bb53ea8528edfe83696cb57888dd6cf7a6ee7bbad97d718cf064957f9e62",
+      "insertionOffset": 27,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-18-exe-refresh/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-18-exe-refresh/README.md"
+      ],
+      "originalSha256": "93394e29600133f25f6e22d38a4feadcc3b0ef6b0564a482801f1f727f70fc8a",
+      "updatedSha256": "52e49c544f3fc6738981f9d4b5fa27205844bfde27020c394c3a0b5ef4bfba2c",
+      "insertionOffset": 40,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-18-exe-review/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-18-exe-review/README.md"
+      ],
+      "originalSha256": "841658c1cc9dbc1ec11bee256aa1f839be2c3ef20a0e29dbb810758bbd493f5c",
+      "updatedSha256": "4b40983ef8f58bc78e18acb405e47d96734362999bac056fe8b2aec96cbd20d5",
+      "insertionOffset": 45,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-18-WF-deep-runtime-1018/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-18-WF-deep-runtime-1018/completion.md",
+        "docs/evidence/2026-10-18-WF-deep-runtime-1018/desktop-exe/README.md"
+      ],
+      "originalSha256": "bbf5831f1d1190610fcad60bbfdfc47bfafe54de2a01553f85e7fa1bec2ab9af",
+      "updatedSha256": "41b480cb3676e661e6185080d279dd1bf5cbcb2bc1a9a81c106b1e012dc09d3d",
+      "insertionOffset": 36,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-18-WF-exe-errors/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-18-WF-exe-errors/README.md"
+      ],
+      "originalSha256": "681832c6b43d661254b713ce3a5457125afde36ef79d318d475fbc97aaaa898c",
+      "updatedSha256": "d0c6a061ccfe24621284e3e38a15073d6eacb35b41524c294615068c51076a6f",
+      "insertionOffset": 36,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-18-WF-page-perf-1018/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-18-WF-page-perf-1018/desktop-exe/README.md",
+        "docs/evidence/2026-10-18-WF-page-perf-1018/shared/README.md"
+      ],
+      "originalSha256": "a7c2c07957d54213222efa7b28ab03a84831efb1f2c8d4f86714eabe6a38d502",
+      "updatedSha256": "047dfaae4423f3df794da5ccea1e0d750e6ccdccb5790206d02f19b252545e99",
+      "insertionOffset": 30,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    },
+    {
+      "file": "docs/evidence/2026-10-18-WF-startup-window-1018/README.md",
+      "affectedReports": [
+        "docs/evidence/2026-10-18-WF-startup-window-1018/README.md"
+      ],
+      "originalSha256": "53261410ac7dec85d6ff47a5818c74e947b02ddf53498556c7c5f2046c177f2f",
+      "updatedSha256": "759cd1a674ea04c555e477c71966d5ddb53b5fff7dffa6f78a9fe308baf223b9",
+      "insertionOffset": 42,
+      "insertionBytes": 412,
+      "historicalBodyPreserved": true
+    }
+  ],
+  "rawSnapshotsAndArchiveOriginalsUnchanged": true
+}

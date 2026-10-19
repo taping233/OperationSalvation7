@@ -1,6 +1,9 @@
 // 2026-10-19 background timers: only visibility/cleanup scheduling changed; asset paths and selectors unchanged.
 // Reviewed selectors and opaque dynamic paths; re-audit before changing fingerprints.
-// Source originals are retained. An unreviewed/changed selector preserves its assets.
+// Approved historical sources were deleted under docs/evidence/2026-10-19-unused-cleanup/.
+// Historical path protections remain: an unreviewed/changed selector preserves its assets.
+// Submission uses the reviewed committed consumer versions; concurrent edits remain unstaged.
+// The uncommitted consumer review remains historical evidence, not the committed snapshot fingerprint.
 // Current consumer reviews: docs/evidence/2026-10-16-WF-integration-ship-1016/asset-contracts.md
 // Retired scenes: docs/evidence/2026-10-16-WF-cloud-retired-scenes/README.md
 // Shadowed card art: docs/evidence/2026-10-16-shadowed-card-audit/README.md
@@ -264,9 +267,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/src/hub/game.bag.view2.js": "13b039c864bc6d51c5be479cd14a7da5600025cbcfc0ad98388e30797e214006",
     "game/card-design-options-v2.html": "cead324bf47437043376cfb40dcc7cec7c9fde1e0bda644a4da356e240a5f9ee",
     "game/src/audio/sfx-audition.js": "0d6dd150075b4a5204d3786d6ce31f4ab124c26ad145f399501796dad8fbc60f",
-    "game/src/audio/sound.bank.js": "81b9bdf76f7440c6adccdc757b10a1240201830d76f8b4dea695dc9812b0fdf4",
     "game/src/audio/sound.js": "407ba1bbbab63e0c0fedb8f153f2c7514156159621c3c5b8377dc7ab254bcdcf",
-    "game/src/audio/sound.ui-samples.js": "76279f33ae9467025c1099959e016e731c9e96339bfa3960798a527ab76b092f",
     "game/src/battle/view/battle.frames.js": "7cb2dea8e6ae11f567852e3739248dbb76b987ca46a3d0dd436b1bc8348f4abd",
     "game/src/battle/view/battle.layers.js": "1f438814d23f7f60a555f6369bf013cb12366c5763b5636696c4c6f790491127",
     "game/src/battle/view/battle.vfx.js": "0c7f2fb9b96171c5f03c498c8d5004bb1553403f12723bec15e8922604af04cd",

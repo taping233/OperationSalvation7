@@ -1,0 +1,1188 @@
+{
+  "authorizedDirectories": [
+    "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\frames\\wu\\rig-v1",
+    "D:\\素材\\代号柒\\搜打撤\\game\\art-source\\characters\\wu-battle-rig-20261019"
+  ],
+  "deletedFiles": [
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-002.webp",
+      "bytes": 29244,
+      "sha256": "6ee927d8365f3dace9487871a02d5eac818b81d84f247d7f93195337e488f920"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-004.webp",
+      "bytes": 28974,
+      "sha256": "dd2e1945fcd6601f780481a5b30e4373e3db3216643fc5f39c46153099f9d0d0"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-006.webp",
+      "bytes": 28648,
+      "sha256": "b014f2846ea5e34e6c33922bd99a1090cbf159aa004e0e51b1eed906b3a043a9"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-008.webp",
+      "bytes": 27808,
+      "sha256": "4006063c1bde6757002f5b655efb81d87994357ee9b5ce593aa6c6294f5b8734"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-010.webp",
+      "bytes": 29030,
+      "sha256": "9dbd211e722a74bb3b70d65c746db877f5d73ed4fa611c9833283e8e6f85d929"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-012.webp",
+      "bytes": 28780,
+      "sha256": "24932ba0700527272f2dcd74c8d40bd6087c89e88f8b2d984899df7a9b49d619"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-014.webp",
+      "bytes": 28358,
+      "sha256": "41bfa0755aded2cb352344faed06b68a217689550a088eb266a4f560ac1fafed"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-017.webp",
+      "bytes": 28862,
+      "sha256": "294cc2ff724ef5422ce5628a3e39cf9111af04de023b44a7d8659f6eeff86d9e"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-019.webp",
+      "bytes": 28010,
+      "sha256": "61d21c482a5499469886fdd9544426c74487dfaee1ec8a7d2e80528853b05a28"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-021.webp",
+      "bytes": 28560,
+      "sha256": "15af493eccfdfd38ecce517d7c1c6c7afa426fe5cc54cdf645def7a79042c440"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-023.webp",
+      "bytes": 28128,
+      "sha256": "3b807c0b4b6b3969d5c1dcb19d1805fc2c23071b9d8e41e71f8c0f6ed467b88f"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-025.webp",
+      "bytes": 28226,
+      "sha256": "d37cdde8e05e8994e806c1b4c0dc9507f1b3219aeb98e28fdb4d845ee4daea77"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-027.webp",
+      "bytes": 28548,
+      "sha256": "74300498ae7f406ac84e81c4b4f8a4790f412205802b4f03511198dd4947edff"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-029.webp",
+      "bytes": 28732,
+      "sha256": "75f8a85c8217161289e5e58ef4b855ac47bf90a22e07fbfd84da09ed4df95b65"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\attack-031.webp",
+      "bytes": 29502,
+      "sha256": "4acb68ab998c1881e95888d062795b4d1b4c4e8b4188636ce061887d363d0ae9"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-002.webp",
+      "bytes": 29856,
+      "sha256": "4c0a81d0360ba023a66f700ac17ab20e973fd28f1adf3ada29d4d5e8980aac38"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-003.webp",
+      "bytes": 29744,
+      "sha256": "b7ad21de6afdfcc766fe854aacc261154f451c9488f50392467de81af0e38fdf"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-005.webp",
+      "bytes": 29812,
+      "sha256": "e5b9896656a14165369931cd5ec01437c1d0c1434553d10ce8c71a6d3f9058fa"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-006.webp",
+      "bytes": 29784,
+      "sha256": "982e773c26d04ac3f2bac073fb981f387570a7e1689b2ee165cf4b8d905aa5a2"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-008.webp",
+      "bytes": 29812,
+      "sha256": "f05c434e98793c676a01a04c82f263004dc47713d956dfe2150185e1d7ef3bf4"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-010.webp",
+      "bytes": 29898,
+      "sha256": "82e02c1f20dc5defdb93f69fc3848c78c37d5a193e29a3fee2182d1fcabcf57d"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-011.webp",
+      "bytes": 30002,
+      "sha256": "d5e738b3ce61d13adfd3e594b7fdd2bf28e04be5035e146e2162addaad9c5b21"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-013.webp",
+      "bytes": 30090,
+      "sha256": "5bd94d3c730319fd92e83d7a8fb66aa65dbfe633f33d6e1cb11e5c742fb31601"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-014.webp",
+      "bytes": 29968,
+      "sha256": "94d0f4b4ef1b53faef7c5dd0a913bdd05b3049c9d21fb708d3836b186b4868d0"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-016.webp",
+      "bytes": 29800,
+      "sha256": "f23ec8eb8b42cb2818c8aeb5a08edf1d94ed16761a85aaa04e68931513f8056b"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-018.webp",
+      "bytes": 29922,
+      "sha256": "d170dadd3d5285999560622fc81122cbd6d6e812c00db652192b5028b3ffb416"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-019.webp",
+      "bytes": 30036,
+      "sha256": "8ac99b09f1921d1a407c20cce171a409e337e34140855e7e964f019fe87f3705"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-021.webp",
+      "bytes": 29590,
+      "sha256": "14782e6a609bbf7856cd54eed05d67689a900e62b02d88d513c102857950cb53"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-022.webp",
+      "bytes": 29946,
+      "sha256": "2ead8bad5820de64ca4d97a38771071e81a3f3b04ed1d40e6154a644307ed376"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-024.webp",
+      "bytes": 29866,
+      "sha256": "9c79ab1d0e73ee08f8f26f3423f8d9e3160fc64aaa8bc07ab61a1af4025c3605"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-026.webp",
+      "bytes": 29976,
+      "sha256": "401a487849f8d901e70f583b6f0b140465ec7cfbd7e4388511c5ce4cc41c45e1"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-027.webp",
+      "bytes": 29672,
+      "sha256": "5476f2dbea36d4fc01d5696f31abf9982d1d456e5dfa964733a502adb956b7e5"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-029.webp",
+      "bytes": 29564,
+      "sha256": "188323f4aa5ad081fd69e681e9bd8f2a78d32a41fa4e600c4833a4b2580680ec"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-030.webp",
+      "bytes": 29550,
+      "sha256": "7590ddd2ffacf6bc09e8bee06776910f3b461a04adf5a80c456d1b70b696c0da"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-032.webp",
+      "bytes": 29498,
+      "sha256": "bbf6918fe10ca38eccd3fbd985cfbc913413e001110b3182e466f32eada0ad70"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-034.webp",
+      "bytes": 29396,
+      "sha256": "adc8450d896663bd939fff74c1e96a42ba1e151ca0d701db5292e5994ffa051c"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-035.webp",
+      "bytes": 29904,
+      "sha256": "adf3fc0b2a32dd59fd1ed21abc7b608fc3907d741d98c98f0104ee0c70170599"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-037.webp",
+      "bytes": 29440,
+      "sha256": "b102f9aa2c1341b1f435503bb49b060cf31fb6c37b4746cbabeb65bf2a73a467"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-039.webp",
+      "bytes": 29760,
+      "sha256": "bb29a18abb1b591b276343830a45b4d2dfb96c1355cae247f6cf7d1759df271a"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-040.webp",
+      "bytes": 29762,
+      "sha256": "0c872500e4dc3e2fc90efc4dbdd5af1f29e6bdc91bac0eca47cba221cee61c5d"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-042.webp",
+      "bytes": 29710,
+      "sha256": "5fbdd09ea6e05db8810ca3d52cdd0d5dd3abe2662ed350e32b478220eae6ed7b"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-043.webp",
+      "bytes": 29638,
+      "sha256": "1e5a1b3482aa0e86a33236abd91e30f1fabb8e62f868422b991876d85fb0994e"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-045.webp",
+      "bytes": 29536,
+      "sha256": "edd91e673c2b2714570eee573ade541d7a5f74d8c3c95a177ffd7912470a4008"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-047.webp",
+      "bytes": 29370,
+      "sha256": "e442017cfb3bcb2e613811e5e06ddd6bf73e69b8d81beb171b4a6898933c7fb8"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-048.webp",
+      "bytes": 29372,
+      "sha256": "3ee48f67a28904ab695b13898ac9246fab161db391b19227fe1bf7af6a7903f6"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-050.webp",
+      "bytes": 29306,
+      "sha256": "fee614b672e880808be23192b8f5600c2f539482991d83d3106d864623f85b55"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-051.webp",
+      "bytes": 29340,
+      "sha256": "32c3288f49b92543fe91b13601d2a0b1e8a26d6bb4b39223f3ad6cb0911b801a"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-053.webp",
+      "bytes": 29400,
+      "sha256": "4248883314cae3f605869ef1f26cec506999b2be52f978d7e534c791806cdbe7"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-055.webp",
+      "bytes": 29360,
+      "sha256": "f6d77378b89d894b838ab35eb8fb52b64e41f78812b7059f1b54ff094f5a20dc"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-056.webp",
+      "bytes": 29316,
+      "sha256": "cbdd362ac24e3fd59610a9b2068a234c47609eaac0b35b1ec08893eb82839060"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-058.webp",
+      "bytes": 29384,
+      "sha256": "78151a44aaef3efdace8bde99338a71d622a34f0042ba0e3658905a4844b8480"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-059.webp",
+      "bytes": 29430,
+      "sha256": "cbf65d7f5e04b959f27e1881de0d534462e49822177653adc1c759fb68d20d40"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-061.webp",
+      "bytes": 29370,
+      "sha256": "158a06929498359dd9dba5bcc01aa4598f85090ecb2a48c49c3c83c0f7d05303"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-063.webp",
+      "bytes": 29800,
+      "sha256": "efd9f574481f9351a4512e6ed0924cc6a929398b19ab0249b165300d8526f077"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-064.webp",
+      "bytes": 29670,
+      "sha256": "1d8e3dd73ff165efb06029179b040078b0023a7fcbcd7306b77c89c01c14594a"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-066.webp",
+      "bytes": 29542,
+      "sha256": "352e1e35c643cb2a2a14240dcbed66d5f716a4635690fe5477091d1da96439f9"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-067.webp",
+      "bytes": 29704,
+      "sha256": "f6cdd625e2295289c3b568bc917f6d1e1bccb8f9d5ff4e99924aed847baf359b"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-069.webp",
+      "bytes": 29720,
+      "sha256": "49315da944f696d724e535c407bad21e92c10a1838fe72015591423081e8dfe5"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-071.webp",
+      "bytes": 29898,
+      "sha256": "3112df03e788793db07825f3c71b5a740cf18411b21163de5cba7858a6d83e23"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-072.webp",
+      "bytes": 29600,
+      "sha256": "0fbb4908e55601e4fb169491a58d1528cee960388f031c2a5caa880daae952ce"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-074.webp",
+      "bytes": 29762,
+      "sha256": "44ab1a90d2ef4d91a2a7cb50059b20231e0f89f189099b67abf9cee4effffff6"
+    },
+    {
+      "path": "game\\assets\\portraits\\frames\\wu\\rig-v1\\idle-075.webp",
+      "bytes": 29504,
+      "sha256": "0db9e793eb738d45186b989acdb607d5a66be1ef02bb7bf2891403f205247b5d"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\.gitignore",
+      "bytes": 18,
+      "sha256": "1ded4ac6a9661c1db656dc4db21356543db7e3b05d9aa390d476d23f980b795c"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\animation-preview.js",
+      "bytes": 3195,
+      "sha256": "c22c6c02579447eac23531a73d92691e62ca55f9c62d74061a266538746f9b4b"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\animation.html",
+      "bytes": 2579,
+      "sha256": "af324a48ab92e8138f06e915144d99602f5e955aa18f737c28487c03a30b961f"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\export-frames.mjs",
+      "bytes": 2322,
+      "sha256": "688aae5da87c9f9170847fc3d6f0f527e1c350bb98589705393eb500f4de8d8e"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\export-synfig.mjs",
+      "bytes": 4547,
+      "sha256": "f027e020bf003ce7744b92c7900de2f7713e47780667b9ef17f568a4a73d4fbd"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\animations.json",
+      "bytes": 3396,
+      "sha256": "9441305de0f78f6d68b7838852cd0422b0078fa78bbea025d1742f4077008393"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-000.webp",
+      "bytes": 52302,
+      "sha256": "2961e600d37843de08a10b8928bd4eb086115c67bf6173ce57419e616db4bf29"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-001.webp",
+      "bytes": 52806,
+      "sha256": "e537b9e5cc2018006826e2581d3ff3b627188cfef767705c5702caa6222113f2"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-002.webp",
+      "bytes": 51836,
+      "sha256": "23a2aa69f1bd6fa51dec61898c6361828de1571c4e4ae5a1f6c6c500fe45cbe2"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-003.webp",
+      "bytes": 50728,
+      "sha256": "bfbca9a402e37d608e780dcea63b45b42a0c3250f2f83229c741147e64dcd53c"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-004.webp",
+      "bytes": 51538,
+      "sha256": "4c74c4594a324a92c9511f35d410fa171a5e9efc45b4fa7a7a0ccbdb1d80aa21"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-005.webp",
+      "bytes": 52300,
+      "sha256": "8e8b1e0aeb522419c988f278f1171ad768d53adcc1e0a994dabd683702f34994"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-006.webp",
+      "bytes": 51290,
+      "sha256": "3e934c82c7af55f596dc2f9f47e7b6cdaa96ab0146c9c7fe91a62a38051b53fb"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-007.webp",
+      "bytes": 50546,
+      "sha256": "1e0aa5ba1c84e9899ffa6b4d3af9ba6332b5f3c3587062642f9daf96afd2d108"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-008.webp",
+      "bytes": 49232,
+      "sha256": "3e0fd156504530a658918d24865b72f11084504184a22c9dd6753eb8d3397169"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-009.webp",
+      "bytes": 50258,
+      "sha256": "1a1a4067d3a06a9f8af48c02723ee042976b52838353020a285d957dc7c4d6a3"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-010.webp",
+      "bytes": 52168,
+      "sha256": "8cd9b2ed211be445d45122c4799db957be3da60870786ae37abc571ec9ba5748"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-011.webp",
+      "bytes": 52106,
+      "sha256": "9259ea73bac4ad32d6414281bd0dea8f406ade508b611cc1db0e238d7d675993"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-012.webp",
+      "bytes": 51662,
+      "sha256": "3b2ed35257a557cc0b20e1fccb3ae5747bfdde3144fdcfd18eb28ff8b22ec571"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-013.webp",
+      "bytes": 49908,
+      "sha256": "afd5e60a497036fc32448adbb6df3ddd1a4ad91b550037e142633bf520251d99"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-014.webp",
+      "bytes": 50230,
+      "sha256": "b566d7f91c7c055126cf3e7e1a797f35e38075b530e63b6f046aabed86c51cb9"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-015.webp",
+      "bytes": 52258,
+      "sha256": "82e7f0340598de63c79f6e20208ba0028e5e0d9c82c2fabffe5907f9aede0ed2"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-016.webp",
+      "bytes": 51954,
+      "sha256": "604e402510cef6d72eff3b12a6177414c94ff32cc1748e973b9bddd7233ac95c"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-017.webp",
+      "bytes": 51508,
+      "sha256": "28ae528fce74440e52410c1921cfdabdda8b47398eaa417c30d0d9b7b3238a80"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-018.webp",
+      "bytes": 50764,
+      "sha256": "b9fc59bccc3dd7e340a8c28116d1bcad42a9f287e13e88151d5b7cb617582bcd"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-019.webp",
+      "bytes": 50022,
+      "sha256": "907c30864f071418f309477d65358abfeb4d3406a3e9946e79ecb635949e2b3b"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-020.webp",
+      "bytes": 50076,
+      "sha256": "3615d008aa369a287624cc1b16cce4123ae1386db935997ded621579e8b4332f"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-021.webp",
+      "bytes": 50376,
+      "sha256": "94bf05afdae1ddcfd858e7f37bfa68cfcb779f6474e964269d293b118dfb27d7"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-022.webp",
+      "bytes": 49908,
+      "sha256": "d5093bef08ffb5cf806fa7c772e70e3c62c4fec285993a2363cac4f5400eef8e"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-023.webp",
+      "bytes": 49836,
+      "sha256": "7e2a26234f335a4a92fc888e73335ba005efdb9583d6a95c1e06b0165d790ad7"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-024.webp",
+      "bytes": 49872,
+      "sha256": "23fccc8cbad0a6bb9e4a97ce4ee9e544d5d372366dbb1a89cb2542d4403e19a6"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-025.webp",
+      "bytes": 49636,
+      "sha256": "9e694a0e0eb54b38cb2cca3827abc0762f0b6ee191e1b44ff410ae2d8c1d61b6"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-026.webp",
+      "bytes": 49954,
+      "sha256": "bc63fcc8a137c1c4af23e10b79810d3b0c1641f005a6bdc79b920530221a1f0b"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-027.webp",
+      "bytes": 50320,
+      "sha256": "1586f9af1236dcea607b91a90c7ab2fa2b3f9f9db0fd8d82891561d12c0f574e"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-028.webp",
+      "bytes": 50824,
+      "sha256": "dc43dead0624354e93ae8cebab103ca77391b8c3c203f2ecd50ba71c76e9d632"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-029.webp",
+      "bytes": 51164,
+      "sha256": "4d59e4288ce2d4000190b055c93379d42b38361851855e05bb4a9700ad1f28ae"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-030.webp",
+      "bytes": 51454,
+      "sha256": "50e7bea5b99c98726bfde9971916ca9c7ca9e55defdf6a2e7cb1e5b20839210a"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-031.webp",
+      "bytes": 52116,
+      "sha256": "eb95320a1fdcca22f3eeb4bfd0c3db471f3af26f91f218183c897f26aba0a7dd"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-032.webp",
+      "bytes": 51928,
+      "sha256": "587a10382665e760d55557612031d1fd3fb41234b826b4d1981af56352ee39c2"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-033.webp",
+      "bytes": 52302,
+      "sha256": "2961e600d37843de08a10b8928bd4eb086115c67bf6173ce57419e616db4bf29"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-32.png",
+      "bytes": 589154,
+      "sha256": "2a508ffdb926f34d34c7a1bd63ae6f3a52dea2ae73a68ba0a8724696db859bba"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-46.png",
+      "bytes": 585271,
+      "sha256": "52ae22ca55d31b6a3d929ece32004a8ff1d57d70b43ad7fc9227d55004658291"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\attack-64.png",
+      "bytes": 571759,
+      "sha256": "df67cdb482f81d1910e7ed4f8600692100267c0631473741daf9f6ce129924e0"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-000.webp",
+      "bytes": 52302,
+      "sha256": "2961e600d37843de08a10b8928bd4eb086115c67bf6173ce57419e616db4bf29"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-001.webp",
+      "bytes": 52386,
+      "sha256": "883aaac355ca1a05f0840ae444a216cb579579b4b87e4a2c19b2dd08c1ea0645"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-002.webp",
+      "bytes": 52630,
+      "sha256": "189777437ba4ee3a365a82fea434aad4244a073c67ec18ab55fc89625b9d5672"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-003.webp",
+      "bytes": 52368,
+      "sha256": "9f0b0598250686a5b821513e0817019d282eed7483900da178ca86c2ac088382"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-004.webp",
+      "bytes": 52720,
+      "sha256": "d34eaf40a9d454d23e3053e6ad894f16caace661ab2394453b6b5daf861dd75e"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-005.webp",
+      "bytes": 52282,
+      "sha256": "86638926db13279abba022b65fde6a232391b77d3d8ece97de4957791a98cb36"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-006.webp",
+      "bytes": 52426,
+      "sha256": "5ce6e1196c7b71994ec3d7c9ceb05c28089680aeaf42af000a4d14c71010ea56"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-007.webp",
+      "bytes": 52334,
+      "sha256": "b714799ee0c457ff9a74a52e73067f960a2525b3b5a7c9def19894aabdc1a2f6"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-008.webp",
+      "bytes": 52490,
+      "sha256": "6a783d7712fd2f625b1d218a2539201b56e467ecc1dc3fab648019bc0fb350db"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-009.webp",
+      "bytes": 52568,
+      "sha256": "41ef89e4969842d0b4af230032c42ff75af78cfb3ae57e2dddb02f69dedd13f2"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-010.webp",
+      "bytes": 52704,
+      "sha256": "53acf7a55ccad98dda4e8930dbc0132b251bbc9898e081a4f782458b9f620a52"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-011.webp",
+      "bytes": 52684,
+      "sha256": "1303ed134b431b5b700608a5b99a89e6ff2454e50838afeaa2af50be74aaaf63"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-012.webp",
+      "bytes": 52962,
+      "sha256": "5ceb714d84506b185bbc25976948503b5af208ea846944e00fd6b5364dffec24"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-013.webp",
+      "bytes": 52356,
+      "sha256": "54dc7b447c761503ce3dce20625cf663bb7ba6a1f5ef9f805a80616068189c20"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-014.webp",
+      "bytes": 52550,
+      "sha256": "9dc20eef294a1a0c23ae96f53e0c90800242fc618a5001be46a14767d0d5782c"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-015.webp",
+      "bytes": 52780,
+      "sha256": "ee4b2db0e3c5da2f1011ad0313ad43c797e3b793f6c1c261ca8db05ef69ddcaf"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-016.webp",
+      "bytes": 52894,
+      "sha256": "da68e1a737d710bbd0d668b9b696f4007615ade6005fe00527ed5fcbddaa20e7"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-017.webp",
+      "bytes": 52672,
+      "sha256": "5571cc1227dafeb8dcc0a16e8ac2f5752317104be21e81febde14764bc751e50"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-018.webp",
+      "bytes": 52746,
+      "sha256": "2f04af8f95b98973b1bea9121e3813e01b61074ba4d5b96bb73217a96c9ad5ad"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-019.webp",
+      "bytes": 52618,
+      "sha256": "b7ccc521cc947ba39e6ff53dcb39c31940f96873bbd7f452ed5c1724b4747f63"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-020.webp",
+      "bytes": 52640,
+      "sha256": "9afc448354108fbb468a641bb276f451fe56965b0da54b5dd15d77439b700806"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-021.webp",
+      "bytes": 52576,
+      "sha256": "ba8489bbf65450103389c039c7b7648c371c585dfca34d9ba1c62f04b239d104"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-022.webp",
+      "bytes": 52658,
+      "sha256": "4ec226fa375eace104c566fe6dd2f1710757d61ed9d8ca369732652a99fcc066"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-023.webp",
+      "bytes": 52506,
+      "sha256": "fc0bb847b04cf874b17c1ee43d4028fc578c7ede0778a77e6ad163d1083bce97"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-024.webp",
+      "bytes": 52534,
+      "sha256": "7a2019806008fe590f69a18bdd33ac430fae80803a4a190d4ffef99484c503af"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-025.webp",
+      "bytes": 52582,
+      "sha256": "7307a20132a02091b846ff74c54ae2cf6c3996abf88435e0649425146fe8246a"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-026.webp",
+      "bytes": 52952,
+      "sha256": "c5c2e92c2b3f1c728314c47202afd867fc7b2ba50445e4b17cb3fb203f56750a"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-027.webp",
+      "bytes": 52634,
+      "sha256": "26ef99727d1674d60c437fe56ccf7e81c585a191543f4b8a4b7fc1f5f5ff2ec4"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-028.webp",
+      "bytes": 52574,
+      "sha256": "7fc4eb47e7c41a81dac2618883b80e3600eb062e5b1069093b8d199a1856b918"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-029.webp",
+      "bytes": 52524,
+      "sha256": "098e497397f41b04c0de095d975fedcbd016b2e019015ecde680f77476810c2f"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-030.webp",
+      "bytes": 52598,
+      "sha256": "6116c0870a60703096872a55a0f06f8b157492b800b3b22906d854556054cd29"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-031.webp",
+      "bytes": 52458,
+      "sha256": "b0802ea90f91f3bb27ab9e8e7c641db09dff69d36c5e3bc211373be60b7d4087"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-032.webp",
+      "bytes": 52454,
+      "sha256": "118c10d8b496ca415ec47f695c4882993592960625a5ee875305b5a29d17ab44"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-033.webp",
+      "bytes": 52672,
+      "sha256": "7ba963cfb2e6289c3c8b3ca408215510561fa6f12f9f9c4d95334b4aefaa6e6c"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-034.webp",
+      "bytes": 53010,
+      "sha256": "8ccbd703d0e353073182757b75fcb84394cb5cdfeea904e43b5ad60008709abd"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-035.webp",
+      "bytes": 52432,
+      "sha256": "ff4d7b0c9ca717ae15a739f4381f1b96aa69b9b314e189e17a0b3aafdb00413d"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-036.webp",
+      "bytes": 52488,
+      "sha256": "cdb1f2001631a09e92cec48b5f385c153578bd1862de113bc30c4fd2100e1d6d"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-037.webp",
+      "bytes": 52486,
+      "sha256": "74cb97f0dd297fe7e6d12a0826c0eedee2534400695497d86802508ff7cc0773"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-038.webp",
+      "bytes": 52358,
+      "sha256": "6d6b02d105a51e8fe38f37f94ddb52caf4548b7d2a1889ab4db34e2752db8ca6"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-039.webp",
+      "bytes": 52262,
+      "sha256": "d652341cef22885cf97a63ce09613e8acf1fcba6cc0f48c0cff5909f6881cba5"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-040.webp",
+      "bytes": 52440,
+      "sha256": "9689530a48f89d9ea7f778060bdd09e3e5e6cd5c3443df9e101cacdf882bb69d"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-041.webp",
+      "bytes": 52328,
+      "sha256": "3fc3b0602627567cb397da8a710454ea8af2a21a9d572f355f31a5739a2b1838"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-042.webp",
+      "bytes": 52350,
+      "sha256": "b424389505e9d370b5b44956d524bd1576cd840c1b5b3f96b797b54188a75d7a"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-043.webp",
+      "bytes": 52274,
+      "sha256": "e6ad699db51e41c56501c54415d3f7a1e23197910c5ad1739faa76389d2b8ed0"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-044.webp",
+      "bytes": 52194,
+      "sha256": "271c689a800910f401ab28ecb008b1226bce8f02ed625210b21b460550915242"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-045.webp",
+      "bytes": 52542,
+      "sha256": "12e62a571a9825c9e4a19e65865e55f010f8a998571b0b2b7eb178df92b80845"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-046.webp",
+      "bytes": 52472,
+      "sha256": "e466dcc36a8c4185bd47174815f96159183625135953b1cd84bb2bbc0e2e5ce1"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-047.webp",
+      "bytes": 52178,
+      "sha256": "50d7d508e72d7ee3d0924650ca4fbf143cf51d20e637e5de1dd6b506af6636b3"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-048.webp",
+      "bytes": 52088,
+      "sha256": "915c43dea9896fd502fcf380a69a25426c4519c032d4127303825659e89f2af7"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-049.webp",
+      "bytes": 52230,
+      "sha256": "7d03d0487e3bb63fd0077aeda9ec22bee5f749eccb1b846a3de5b6a70d2f41ab"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-050.webp",
+      "bytes": 52326,
+      "sha256": "c663c1d580177ae51bcaa9266616f560c22dd0d689c2dccbd4d3b9259915b483"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-051.webp",
+      "bytes": 52350,
+      "sha256": "3124affce33e55e799aa3d1c1177c88ac86a1c90311a75eda8ad64d12ab3b56d"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-052.webp",
+      "bytes": 52238,
+      "sha256": "c98011f96f42a6900403101ada8037a6377c45114b88deb3f472124865ed91b3"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-053.webp",
+      "bytes": 52280,
+      "sha256": "292624a08e40c7113142b3a8ae3df40b9ffb61dfc52e2eee991cfa0f1bcebe84"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-054.webp",
+      "bytes": 52168,
+      "sha256": "0bd9241cf6c5855488694187dcc927e9c2182408e3d10e69201e90c85f214e71"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-055.webp",
+      "bytes": 52142,
+      "sha256": "a9c1ea890a7bbdb3351ace6c269ab6a769075f63669f01f4746a26f1708fe7f1"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-056.webp",
+      "bytes": 52330,
+      "sha256": "7a9aacf1b8f9925846123ba4ad155c7fcbc97b5ca7af469184ddb4edce9ea406"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-057.webp",
+      "bytes": 51912,
+      "sha256": "2708ab95e087e2cbafe5e8bfc0fe60b669b7b20d2f153bb3afb8c5ed7e8736b3"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-058.webp",
+      "bytes": 52334,
+      "sha256": "29cc16a8fa226876d6ae24566c7d9108c5732947745aa519c99680e4f57dbd9f"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-059.webp",
+      "bytes": 52630,
+      "sha256": "93b6163d3cc3e7b47b438b4c7868a32f78f301aa42531b888d92d390ae4ae667"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-060.webp",
+      "bytes": 52146,
+      "sha256": "348a6c9e4ca25e79a9983970db6e780dd58c07ab16614038d63109802a8232bb"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-061.webp",
+      "bytes": 52124,
+      "sha256": "228f6a292a78ff59882f55606a4f2b43e3a74b27e62bc5eba756a092dae2ed1e"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-062.webp",
+      "bytes": 52876,
+      "sha256": "7686222501a8af915f7c4d739c7bfbbaf70425dcdf88e4902d65fde1cafc3768"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-063.webp",
+      "bytes": 52572,
+      "sha256": "db8c8bcb635a49b4a4e451bc453479aca1ab469db8472364e76cfeb837c608e2"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-064.webp",
+      "bytes": 52316,
+      "sha256": "b77ed72128058dd3514dae6e5648a2b8681c8067379e4a0b30c7440e979e3b70"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-065.webp",
+      "bytes": 52156,
+      "sha256": "78bf8bb3b12b67dc797bb253dd584c75b8627daba3a70b8567fcf1ae47f1fdcb"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-066.webp",
+      "bytes": 52206,
+      "sha256": "c707c72c061b6fa537f3efab910994e9ba07f8d30fee364a3cff9e6fed0d7fc0"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-067.webp",
+      "bytes": 52350,
+      "sha256": "670c37d88fc73b6286f04903f2dac6c0400dc3a086a28f0c645d75fbea3de1e7"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-068.webp",
+      "bytes": 52458,
+      "sha256": "616533606c6c2c075bebe9fbf4b3a6d00a726c21fb590c74420ad8cdb0e54316"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-069.webp",
+      "bytes": 52192,
+      "sha256": "92168dca096a9696c58eb9f623de7ff20901cbaa47f2356f7b6ca03c69223406"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-070.webp",
+      "bytes": 52270,
+      "sha256": "a79bf203bcaa594e1ca70547591de7cc9344223cbb6f11b46e7d09ebe39ba1d7"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-071.webp",
+      "bytes": 52740,
+      "sha256": "74fd9e93378fce34afbfdb88f1c44d47f38d62e153dbc5713ac852620dad55f1"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-072.webp",
+      "bytes": 52524,
+      "sha256": "ad78b309ad5178bd21f240a063e383e837694a2b48edca534251377040e3d77f"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-073.webp",
+      "bytes": 52304,
+      "sha256": "d3b163ad6200b8a200f153ff65a6e5bc68f08d3eadb2406268a1ff52c4cc238d"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-074.webp",
+      "bytes": 52484,
+      "sha256": "2d4bbb4062b40b810bab79bfeb7cc5ae87305467732f4f95f3490c0d5a88a9d3"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-075.webp",
+      "bytes": 52442,
+      "sha256": "48dfb0e92af637b033dc2ba0c9259c2119fbdb95427108d3e339ca0f5d53d203"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-076.webp",
+      "bytes": 52180,
+      "sha256": "76cbeb1c5b6b90a1f7cc9b8f1c20dcf3c5104877937b21f2b4f14155071c0eab"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\idle-25.png",
+      "bytes": 602410,
+      "sha256": "69cbcd0c3965f32bbabf249ebe1e606b4f52c8c944903615ca2b51d21d6262aa"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\static-0.png",
+      "bytes": 598722,
+      "sha256": "260513d1173a9fa5a2e6fad28ace481bb66c28f77c02b3bbeaa1a6ceb6af9c24"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\exports\\synfig-idle.png",
+      "bytes": 736682,
+      "sha256": "c312d5e6c8fcd9d39e615d21ad4dc3abc9c57aa57926ef86b7a8ce4e6f3491b0"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\install-runtime.mjs",
+      "bytes": 5200,
+      "sha256": "ecf48c2bdf85591af0d9f736c8a2ac568970e0806863ceed5d131cba73f28823"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\parts-review-v1.png",
+      "bytes": 2009391,
+      "sha256": "a6a8f698ffe553ac88effff344c31213e237693c0e6295c6d7e45b1796d6ae10"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\parts.json",
+      "bytes": 3598,
+      "sha256": "e54ea154a531347636579a5c1cbf3aacb3e49f80c66fa12cde3291f50e37734b"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\pose-v1.png",
+      "bytes": 1744102,
+      "sha256": "8b42aad69dcae4c7cc43ef4b5ef107ebe4a2ac1da4eb9a3baf2a5d8cf8f7fd98"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\pose-v2.png",
+      "bytes": 1571653,
+      "sha256": "de094b93a0ca2e2fb654ca6ef256d4a8c7a9c59a948154ed942343cfb554bcb1"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\pose-v3.png",
+      "bytes": 1445451,
+      "sha256": "6af0a91da85a606953e68f891d221feaacf1e991c89fa0ed752409ca891a2f31"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\pose-v4.png",
+      "bytes": 1419849,
+      "sha256": "3a4c93916f5dc4fbaa9f10e82d864b6f6cace384e7975851550cedd2b92e46e6"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\prepare-parts.mjs",
+      "bytes": 2272,
+      "sha256": "388a5b60e576bf58214768d50d410aa5978c741c7a90cb2fa84b880d5fcad478"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\production-arms-v1.png",
+      "bytes": 1632788,
+      "sha256": "a03c5e5fdec154cfb6b0e63cdfffb3912ff4e6d5bcb7aae72955dc00a19e008b"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\production-core-v1.png",
+      "bytes": 1866450,
+      "sha256": "d86a784abd20fe8209eac08da7a716c9760edd10f8431e2393c20cb55a062601"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\production-lower-v1.png",
+      "bytes": 1136969,
+      "sha256": "2c2c7d30aa944cbd78d08708cc8295ba4381fb330b56bdf7550c93cb255b8be5"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\production-receipt.json",
+      "bytes": 4899,
+      "sha256": "5a0db486f3507317157165c7a2535ed63e7292c25a095d4bc94d1ce0da024d94"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\production-request.json",
+      "bytes": 8921,
+      "sha256": "65dab792a9f4c6f7e82ebedf0c889d3b9329d2f951e078013e7bca806cc693d7"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\render-rig.js",
+      "bytes": 4686,
+      "sha256": "03594d2823bc78359d30216328ceb88791680276c11e7c80067c59305ab098cb"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\review.html",
+      "bytes": 4485,
+      "sha256": "2ee3ac7a16920009889a36d1ab852be9b77ba989c892e628ae8f8214d72e3772"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\rig-check.json",
+      "bytes": 401,
+      "sha256": "8016cf1fbbeab8f10b2bce712c7f09aed72544ed32567008ab8e480f30650b15"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\rig-v4.js",
+      "bytes": 3660,
+      "sha256": "294e3df3d60be5fd381b5861c4d479006528a7eba910d89428e7ea057d170912"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\skeleton.json",
+      "bytes": 4884,
+      "sha256": "cf09f266907178ce1fc99d638f4842e13c2e1ea15b5731136c362c4c2a5f5930"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\handL.png",
+      "bytes": 13378,
+      "sha256": "4f9878cc2f657bab9cbee8836aaf46f17ac34d6f9b61cdea6ddcb79395f47386"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\handR.png",
+      "bytes": 15509,
+      "sha256": "18c902785a0a7cec43dfec733533b1ef9c453103a56b9d588c0655089170a301"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\head.png",
+      "bytes": 90683,
+      "sha256": "b71e23e6ec9bb8479d30f92e0b041e74b87a1751c3a1549f08153b26083992df"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\legL.png",
+      "bytes": 71680,
+      "sha256": "7959396b69c610e108116cc901135b511ed20e85d5f9a450e1f186b4a3acf226"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\legR.png",
+      "bytes": 86151,
+      "sha256": "1b550188ae7426043fd644e8dd841baa60c70ce1385480796fd947476b66e744"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\lowerL.png",
+      "bytes": 32545,
+      "sha256": "eac36cbdb35607885fa4e9774a26576532087d70e208b194b86f9d0b5e8159eb"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\lowerR.png",
+      "bytes": 31102,
+      "sha256": "43858490a7cfda423e6192e2fdd0c25c85c1cae32b6817665ce111b08b389a3d"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\ponytail.png",
+      "bytes": 268452,
+      "sha256": "a136abdd313b0ff544e9913a23127ad9f3130fb5f579c45bf0c79f442a03a7f9"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\sheath.png",
+      "bytes": 36633,
+      "sha256": "ec0838ac4d7969de105fa56528acc3548886cc1abb366c7bbdfbc02c94a2e146"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\skirt.png",
+      "bytes": 111629,
+      "sha256": "85ea0bcf389be2bf24bf726779feb36de26bc70b2b4989115e9fb59f726bf4bb"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\sword.png",
+      "bytes": 55141,
+      "sha256": "effac49f2ced607da1a28d1fb692c4ed5fda86ccdfa24699dfeefa65b4999cae"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\torso.png",
+      "bytes": 111256,
+      "sha256": "fd16d452b3662679803a4285444a28bdbe31ad2729f7426ae3db199c05e0b2e4"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\upperL.png",
+      "bytes": 41709,
+      "sha256": "7f1aa6bc3caf837c224a0bda52c55f0e0635e952e0429337b0efddfa00009817"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\images\\upperR.png",
+      "bytes": 42829,
+      "sha256": "dc41d7bc36fe7064a06051f2db1c610dd44b7ba89556efea50f1b75e6cf27ccf"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\wu-attack.sif",
+      "bytes": 180092,
+      "sha256": "39a51315196a54843a0e5ad4cf2bb1089d0afc9a684e21ed02350bdc085739ce"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\synfig\\wu-idle.sif",
+      "bytes": 383040,
+      "sha256": "e8cb9f3d6259721ae85dedc59c725b432153030a15ac3dde08944c5a81a73959"
+    },
+    {
+      "path": "game\\art-source\\characters\\wu-battle-rig-20261019\\verify-rig.mjs",
+      "bytes": 3009,
+      "sha256": "715f666f4d682e8f7a12820de837352b08841d7a34a6d02565c6d888962f3d3e"
+    }
+  ],
+  "restores": [
+    {
+      "path": "game/assets/portraits/battle/wu.webp",
+      "sha256": "a2b608c2ec0c2fc160129cad97e6fbf8744d97c10b5f983a47b3a0b5ac6340ce"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/neutral.webp",
+      "sha256": "57ffd12fac024595631df559179eef54deb95db8ba183a9602f8dd721d072071"
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/sprite-v1/animations.json",
+      "sha256": "322055d9c310af548716f4be77005540c29658032ecb38f3fd697b389a1423a8"
+    }
+  ],
+  "removedManifestEntries": [
+    "portraits/frames/wu/rig-v1/idle-002.webp",
+    "portraits/frames/wu/rig-v1/idle-003.webp",
+    "portraits/frames/wu/rig-v1/idle-005.webp",
+    "portraits/frames/wu/rig-v1/idle-006.webp",
+    "portraits/frames/wu/rig-v1/idle-008.webp",
+    "portraits/frames/wu/rig-v1/idle-010.webp",
+    "portraits/frames/wu/rig-v1/idle-011.webp",
+    "portraits/frames/wu/rig-v1/idle-013.webp",
+    "portraits/frames/wu/rig-v1/idle-014.webp",
+    "portraits/frames/wu/rig-v1/idle-016.webp",
+    "portraits/frames/wu/rig-v1/idle-018.webp",
+    "portraits/frames/wu/rig-v1/idle-019.webp",
+    "portraits/frames/wu/rig-v1/idle-021.webp",
+    "portraits/frames/wu/rig-v1/idle-022.webp",
+    "portraits/frames/wu/rig-v1/idle-024.webp",
+    "portraits/frames/wu/rig-v1/idle-026.webp",
+    "portraits/frames/wu/rig-v1/idle-027.webp",
+    "portraits/frames/wu/rig-v1/idle-029.webp",
+    "portraits/frames/wu/rig-v1/idle-030.webp",
+    "portraits/frames/wu/rig-v1/idle-032.webp",
+    "portraits/frames/wu/rig-v1/idle-034.webp",
+    "portraits/frames/wu/rig-v1/idle-035.webp",
+    "portraits/frames/wu/rig-v1/idle-037.webp",
+    "portraits/frames/wu/rig-v1/idle-039.webp",
+    "portraits/frames/wu/rig-v1/idle-040.webp",
+    "portraits/frames/wu/rig-v1/idle-042.webp",
+    "portraits/frames/wu/rig-v1/idle-043.webp",
+    "portraits/frames/wu/rig-v1/idle-045.webp",
+    "portraits/frames/wu/rig-v1/idle-047.webp",
+    "portraits/frames/wu/rig-v1/idle-048.webp",
+    "portraits/frames/wu/rig-v1/idle-050.webp",
+    "portraits/frames/wu/rig-v1/idle-051.webp",
+    "portraits/frames/wu/rig-v1/idle-053.webp",
+    "portraits/frames/wu/rig-v1/idle-055.webp",
+    "portraits/frames/wu/rig-v1/idle-056.webp",
+    "portraits/frames/wu/rig-v1/idle-058.webp",
+    "portraits/frames/wu/rig-v1/idle-059.webp",
+    "portraits/frames/wu/rig-v1/idle-061.webp",
+    "portraits/frames/wu/rig-v1/idle-063.webp",
+    "portraits/frames/wu/rig-v1/idle-064.webp",
+    "portraits/frames/wu/rig-v1/idle-066.webp",
+    "portraits/frames/wu/rig-v1/idle-067.webp",
+    "portraits/frames/wu/rig-v1/idle-069.webp",
+    "portraits/frames/wu/rig-v1/idle-071.webp",
+    "portraits/frames/wu/rig-v1/idle-072.webp",
+    "portraits/frames/wu/rig-v1/idle-074.webp",
+    "portraits/frames/wu/rig-v1/idle-075.webp",
+    "portraits/frames/wu/rig-v1/attack-002.webp",
+    "portraits/frames/wu/rig-v1/attack-004.webp",
+    "portraits/frames/wu/rig-v1/attack-006.webp",
+    "portraits/frames/wu/rig-v1/attack-008.webp",
+    "portraits/frames/wu/rig-v1/attack-010.webp",
+    "portraits/frames/wu/rig-v1/attack-012.webp",
+    "portraits/frames/wu/rig-v1/attack-014.webp",
+    "portraits/frames/wu/rig-v1/attack-017.webp",
+    "portraits/frames/wu/rig-v1/attack-019.webp",
+    "portraits/frames/wu/rig-v1/attack-021.webp",
+    "portraits/frames/wu/rig-v1/attack-023.webp",
+    "portraits/frames/wu/rig-v1/attack-025.webp",
+    "portraits/frames/wu/rig-v1/attack-027.webp",
+    "portraits/frames/wu/rig-v1/attack-029.webp",
+    "portraits/frames/wu/rig-v1/attack-031.webp"
+  ],
+  "unrelatedEntriesPreserved": 1614,
+  "startedAt": "2026-10-19T10:51:33.857Z"
+}

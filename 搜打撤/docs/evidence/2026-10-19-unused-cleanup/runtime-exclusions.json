@@ -1,0 +1,980 @@
+{
+  "warnings": [],
+  "files": [
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-00.webp",
+      "exists": true,
+      "bytes": 143532
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-01.webp",
+      "exists": true,
+      "bytes": 143532
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-02.webp",
+      "exists": true,
+      "bytes": 143532
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-03.webp",
+      "exists": true,
+      "bytes": 145560
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-04.webp",
+      "exists": true,
+      "bytes": 148288
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-05.webp",
+      "exists": true,
+      "bytes": 148314
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-06.webp",
+      "exists": true,
+      "bytes": 146944
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-07.webp",
+      "exists": true,
+      "bytes": 140484
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-08.webp",
+      "exists": true,
+      "bytes": 155110
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-09.webp",
+      "exists": true,
+      "bytes": 179648
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-10.webp",
+      "exists": true,
+      "bytes": 202252
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-11.webp",
+      "exists": true,
+      "bytes": 219170
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-12.webp",
+      "exists": true,
+      "bytes": 230116
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-13.webp",
+      "exists": true,
+      "bytes": 235438
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-14.webp",
+      "exists": true,
+      "bytes": 242876
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-15.webp",
+      "exists": true,
+      "bytes": 246530
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-16.webp",
+      "exists": true,
+      "bytes": 248260
+    },
+    {
+      "path": "game/assets/scenes/chests/small-rig-640-v1/frame-17.webp",
+      "exists": true,
+      "bytes": 248260
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-00.webp",
+      "exists": true,
+      "bytes": 191356
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-01.webp",
+      "exists": true,
+      "bytes": 191356
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-02.webp",
+      "exists": true,
+      "bytes": 191356
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-03.webp",
+      "exists": true,
+      "bytes": 192418
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-04.webp",
+      "exists": true,
+      "bytes": 192152
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-05.webp",
+      "exists": true,
+      "bytes": 191562
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-06.webp",
+      "exists": true,
+      "bytes": 186902
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-07.webp",
+      "exists": true,
+      "bytes": 179380
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-08.webp",
+      "exists": true,
+      "bytes": 193256
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-09.webp",
+      "exists": true,
+      "bytes": 215096
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-10.webp",
+      "exists": true,
+      "bytes": 235546
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-11.webp",
+      "exists": true,
+      "bytes": 250360
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-12.webp",
+      "exists": true,
+      "bytes": 260920
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-13.webp",
+      "exists": true,
+      "bytes": 266132
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-14.webp",
+      "exists": true,
+      "bytes": 272194
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-15.webp",
+      "exists": true,
+      "bytes": 276092
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-16.webp",
+      "exists": true,
+      "bytes": 277964
+    },
+    {
+      "path": "game/assets/scenes/chests/medium-rig-640-v1/frame-17.webp",
+      "exists": true,
+      "bytes": 277964
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-00.webp",
+      "exists": true,
+      "bytes": 224682
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-01.webp",
+      "exists": true,
+      "bytes": 224682
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-02.webp",
+      "exists": true,
+      "bytes": 224682
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-03.webp",
+      "exists": true,
+      "bytes": 225630
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-04.webp",
+      "exists": true,
+      "bytes": 226818
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-05.webp",
+      "exists": true,
+      "bytes": 225804
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-06.webp",
+      "exists": true,
+      "bytes": 223952
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-07.webp",
+      "exists": true,
+      "bytes": 220500
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-08.webp",
+      "exists": true,
+      "bytes": 216390
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-09.webp",
+      "exists": true,
+      "bytes": 234128
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-10.webp",
+      "exists": true,
+      "bytes": 253966
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-11.webp",
+      "exists": true,
+      "bytes": 269236
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-12.webp",
+      "exists": true,
+      "bytes": 279460
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-13.webp",
+      "exists": true,
+      "bytes": 285092
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-14.webp",
+      "exists": true,
+      "bytes": 292330
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-15.webp",
+      "exists": true,
+      "bytes": 295830
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-16.webp",
+      "exists": true,
+      "bytes": 298396
+    },
+    {
+      "path": "game/assets/scenes/chests/large-rig-640-v1/frame-17.webp",
+      "exists": true,
+      "bytes": 298396
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-00.webp",
+      "exists": true,
+      "bytes": 186658
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-01.webp",
+      "exists": true,
+      "bytes": 186658
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-02.webp",
+      "exists": true,
+      "bytes": 186658
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-03.webp",
+      "exists": true,
+      "bytes": 187202
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-04.webp",
+      "exists": true,
+      "bytes": 185880
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-05.webp",
+      "exists": true,
+      "bytes": 184568
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-06.webp",
+      "exists": true,
+      "bytes": 181588
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-07.webp",
+      "exists": true,
+      "bytes": 177448
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-08.webp",
+      "exists": true,
+      "bytes": 188688
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-09.webp",
+      "exists": true,
+      "bytes": 208722
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-10.webp",
+      "exists": true,
+      "bytes": 226422
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-11.webp",
+      "exists": true,
+      "bytes": 239398
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-12.webp",
+      "exists": true,
+      "bytes": 247988
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-13.webp",
+      "exists": true,
+      "bytes": 251882
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-14.webp",
+      "exists": true,
+      "bytes": 257424
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-15.webp",
+      "exists": true,
+      "bytes": 260064
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-16.webp",
+      "exists": true,
+      "bytes": 261222
+    },
+    {
+      "path": "game/assets/scenes/chests/class-rig-640-v1/frame-17.webp",
+      "exists": true,
+      "bytes": 261222
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-00.webp",
+      "exists": true,
+      "bytes": 226926
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-01.webp",
+      "exists": true,
+      "bytes": 226926
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-02.webp",
+      "exists": true,
+      "bytes": 226926
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-03.webp",
+      "exists": true,
+      "bytes": 227264
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-04.webp",
+      "exists": true,
+      "bytes": 228460
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-05.webp",
+      "exists": true,
+      "bytes": 226622
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-06.webp",
+      "exists": true,
+      "bytes": 221112
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-07.webp",
+      "exists": true,
+      "bytes": 218610
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-08.webp",
+      "exists": true,
+      "bytes": 208360
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-09.webp",
+      "exists": true,
+      "bytes": 224066
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-10.webp",
+      "exists": true,
+      "bytes": 243836
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-11.webp",
+      "exists": true,
+      "bytes": 257822
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-12.webp",
+      "exists": true,
+      "bytes": 268188
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-13.webp",
+      "exists": true,
+      "bytes": 274934
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-14.webp",
+      "exists": true,
+      "bytes": 279864
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-15.webp",
+      "exists": true,
+      "bytes": 283340
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-16.webp",
+      "exists": true,
+      "bytes": 284980
+    },
+    {
+      "path": "game/assets/scenes/chests/boss-rig-640-v1/frame-17.webp",
+      "exists": true,
+      "bytes": 284980
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/atk-hit-1.webp",
+      "exists": true,
+      "bytes": 61574
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/atk-hit.webp",
+      "exists": true,
+      "bytes": 57444
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/atk-wind-1.webp",
+      "exists": true,
+      "bytes": 57484
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/atk-wind-2.webp",
+      "exists": true,
+      "bytes": 63240
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/atk-wind.webp",
+      "exists": true,
+      "bytes": 55804
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/cast-1.webp",
+      "exists": true,
+      "bytes": 62366
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/cast.webp",
+      "exists": true,
+      "bytes": 62366
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/hurt-1.webp",
+      "exists": true,
+      "bytes": 47084
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/hurt.webp",
+      "exists": true,
+      "bytes": 47084
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/idle-1.webp",
+      "exists": true,
+      "bytes": 51082
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/idle-breathe.webp",
+      "exists": true,
+      "bytes": 49030
+    },
+    {
+      "path": "game/assets/portraits/frames/wu/idle.webp",
+      "exists": true,
+      "bytes": 51112
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/atk-hit-1.webp",
+      "exists": true,
+      "bytes": 51546
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/atk-hit.webp",
+      "exists": true,
+      "bytes": 52416
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/atk-wind-1.webp",
+      "exists": true,
+      "bytes": 57014
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/atk-wind.webp",
+      "exists": true,
+      "bytes": 57014
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/cast-1.webp",
+      "exists": true,
+      "bytes": 54364
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/cast-2.webp",
+      "exists": true,
+      "bytes": 51282
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/cast.webp",
+      "exists": true,
+      "bytes": 54366
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/hurt-1.webp",
+      "exists": true,
+      "bytes": 50092
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/hurt.webp",
+      "exists": true,
+      "bytes": 50092
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/idle-1.webp",
+      "exists": true,
+      "bytes": 44474
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/idle-breathe.webp",
+      "exists": true,
+      "bytes": 44474
+    },
+    {
+      "path": "game/assets/portraits/frames/changwuyu/idle.webp",
+      "exists": true,
+      "bytes": 44826
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/atk-hit-1.webp",
+      "exists": true,
+      "bytes": 49416
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/atk-hit.webp",
+      "exists": true,
+      "bytes": 49398
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/atk-wind-1.webp",
+      "exists": true,
+      "bytes": 46318
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/atk-wind.webp",
+      "exists": true,
+      "bytes": 45360
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/cast-1.webp",
+      "exists": true,
+      "bytes": 46318
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/cast-2.webp",
+      "exists": true,
+      "bytes": 45378
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/cast-3.webp",
+      "exists": true,
+      "bytes": 49398
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/cast-4.webp",
+      "exists": true,
+      "bytes": 49416
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/cast-5.webp",
+      "exists": true,
+      "bytes": 43210
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/cast.webp",
+      "exists": true,
+      "bytes": 45360
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/hurt-1.webp",
+      "exists": true,
+      "bytes": 46014
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/hurt.webp",
+      "exists": true,
+      "bytes": 46014
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/idle-1.webp",
+      "exists": true,
+      "bytes": 39744
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/idle-breathe.webp",
+      "exists": true,
+      "bytes": 39744
+    },
+    {
+      "path": "game/assets/portraits/frames/baita/idle.webp",
+      "exists": true,
+      "bytes": 39906
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/battle-security-shard-1011.webp",
+      "exists": true,
+      "bytes": 68314
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/battle-security-shard-style-1012-v2.webp",
+      "exists": true,
+      "bytes": 142158
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/event-record-fragments-1011.webp",
+      "exists": true,
+      "bytes": 98378
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/event-record-fragments-style-1012-v2.webp",
+      "exists": true,
+      "bytes": 149144
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/passage-transit-core-1011.webp",
+      "exists": true,
+      "bytes": 98528
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/passage-transit-core-palette-1012-v3.webp",
+      "exists": true,
+      "bytes": 146620
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/passage-transit-core-style-1012-v2.webp",
+      "exists": true,
+      "bytes": 149218
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/rest-heat-cell-1011.webp",
+      "exists": true,
+      "bytes": 80176
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/rest-heat-cell-style-1012-v2.webp",
+      "exists": true,
+      "bytes": 179626
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/shop-exchange-token-1011.webp",
+      "exists": true,
+      "bytes": 114100
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/shop-exchange-token-palette-1012-v3.webp",
+      "exists": true,
+      "bytes": 171656
+    },
+    {
+      "path": "game/assets/scenes/map-nodes/shop-exchange-token-style-1012-v2.webp",
+      "exists": true,
+      "bytes": 177964
+    },
+    {
+      "path": "game/assets/scenes/transition-battle-v1.webp",
+      "exists": true,
+      "bytes": 91104
+    },
+    {
+      "path": "game/assets/scenes/transition-boss-v1.webp",
+      "exists": true,
+      "bytes": 106012
+    },
+    {
+      "path": "game/assets/scenes/transition-camp-v1.webp",
+      "exists": true,
+      "bytes": 70900
+    },
+    {
+      "path": "game/assets/scenes/transition-field-v1.webp",
+      "exists": true,
+      "bytes": 96750
+    },
+    {
+      "path": "game/assets/scenes/transition-photo-v1.webp",
+      "exists": true,
+      "bytes": 68910
+    },
+    {
+      "path": "game/assets/scenes/base-home-v4.webp",
+      "exists": true,
+      "bytes": 103974
+    },
+    {
+      "path": "game/assets/scenes/battle-street-amber-anime-v1.webp",
+      "exists": true,
+      "bytes": 414722
+    },
+    {
+      "path": "game/assets/scenes/entry/winter-arrival-1011-v1.webp",
+      "exists": true,
+      "bytes": 112604
+    },
+    {
+      "path": "game/assets/scenes/entry/winter-arrival-1011-v2.webp",
+      "exists": true,
+      "bytes": 88082
+    },
+    {
+      "path": "game/assets/scenes/rewards/chest-small-1011-v2.webp",
+      "exists": true,
+      "bytes": 526708
+    },
+    {
+      "path": "game/assets/scenes/rewards/chest-small-cardstyle-1011-v1.webp",
+      "exists": true,
+      "bytes": 815604
+    },
+    {
+      "path": "game/assets/scenes/scene-chest-boss-anime-v1.webp",
+      "exists": true,
+      "bytes": 124864
+    },
+    {
+      "path": "game/assets/scenes/scene-chest-class-anime-v1.webp",
+      "exists": true,
+      "bytes": 93464
+    },
+    {
+      "path": "game/assets/scenes/scene-chest-large-anime-v1.webp",
+      "exists": true,
+      "bytes": 156162
+    },
+    {
+      "path": "game/assets/scenes/scene-chest-medium-anime-v1.webp",
+      "exists": true,
+      "bytes": 131346
+    },
+    {
+      "path": "game/assets/scenes/scene-chest-small-anime-v1.webp",
+      "exists": true,
+      "bytes": 131822
+    },
+    {
+      "path": "game/assets/scenes/ui-loop-0925/expedition-banner.webp",
+      "exists": true,
+      "bytes": 118232
+    },
+    {
+      "path": "game/assets/scenes/ui-loop-0925/rewards-convoy-success.webp",
+      "exists": true,
+      "bytes": 127652
+    },
+    {
+      "path": "game/assets/thumbs/scenes/battle-street-amber-anime-v1.webp",
+      "exists": true,
+      "bytes": 17594
+    },
+    {
+      "path": "game/assets/thumbs/scenes/scene-chest-boss-anime-v1.webp",
+      "exists": true,
+      "bytes": 95232
+    },
+    {
+      "path": "game/assets/thumbs/scenes/scene-chest-class-anime-v1.webp",
+      "exists": true,
+      "bytes": 71490
+    },
+    {
+      "path": "game/assets/thumbs/scenes/scene-chest-large-anime-v1.webp",
+      "exists": true,
+      "bytes": 109926
+    },
+    {
+      "path": "game/assets/thumbs/scenes/scene-chest-medium-anime-v1.webp",
+      "exists": true,
+      "bytes": 97124
+    },
+    {
+      "path": "game/assets/thumbs/scenes/scene-chest-small-anime-v1.webp",
+      "exists": true,
+      "bytes": 91964
+    },
+    {
+      "path": "game/assets/cards/spell-tt8-curse1.webp",
+      "exists": true,
+      "bytes": 75020
+    },
+    {
+      "path": "game/assets/thumbs/cards/spell-tt8-curse1.webp",
+      "exists": true,
+      "bytes": 17406
+    },
+    {
+      "path": "game/assets/cards/spell-tt8-curse2.webp",
+      "exists": true,
+      "bytes": 103200
+    },
+    {
+      "path": "game/assets/thumbs/cards/spell-tt8-curse2.webp",
+      "exists": true,
+      "bytes": 22768
+    },
+    {
+      "path": "game/assets/cards/spell-tt8-curse3.webp",
+      "exists": true,
+      "bytes": 92638
+    },
+    {
+      "path": "game/assets/thumbs/cards/spell-tt8-curse3.webp",
+      "exists": true,
+      "bytes": 23322
+    },
+    {
+      "path": "game/assets/cards/spell-tt8-curse4.webp",
+      "exists": true,
+      "bytes": 97694
+    },
+    {
+      "path": "game/assets/thumbs/cards/spell-tt8-curse4.webp",
+      "exists": true,
+      "bytes": 23126
+    },
+    {
+      "path": "game/assets/cards/equip-tt3-staff.webp",
+      "exists": true,
+      "bytes": 15740
+    },
+    {
+      "path": "game/assets/thumbs/cards/equip-tt3-staff.webp",
+      "exists": true,
+      "bytes": 16954
+    },
+    {
+      "path": "game/assets/cards/equip-tt3-fate-wheel.webp",
+      "exists": true,
+      "bytes": 79746
+    },
+    {
+      "path": "game/assets/thumbs/cards/equip-tt3-fate-wheel.webp",
+      "exists": true,
+      "bytes": 11766
+    },
+    {
+      "path": "game/assets/cards/equip-tt3-wolf-bow.webp",
+      "exists": true,
+      "bytes": 73274
+    },
+    {
+      "path": "game/assets/thumbs/cards/equip-tt3-wolf-bow.webp",
+      "exists": true,
+      "bytes": 8538
+    },
+    {
+      "path": "game/assets/cards/equip-tt3-twinwater-mail.webp",
+      "exists": true,
+      "bytes": 116328
+    },
+    {
+      "path": "game/assets/thumbs/cards/equip-tt3-twinwater-mail.webp",
+      "exists": true,
+      "bytes": 16416
+    },
+    {
+      "path": "game/assets/cards/equip-tt3-grass-armor.webp",
+      "exists": true,
+      "bytes": 139890
+    },
+    {
+      "path": "game/assets/thumbs/cards/equip-tt3-grass-armor.webp",
+      "exists": true,
+      "bytes": 18848
+    },
+    {
+      "path": "game/assets/cards/equip-tt3-blooddrinker.webp",
+      "exists": true,
+      "bytes": 58146
+    },
+    {
+      "path": "game/assets/thumbs/cards/equip-tt3-blooddrinker.webp",
+      "exists": true,
+      "bytes": 8334
+    },
+    {
+      "path": "game/assets/cards/equip-tt8-demonslay.webp",
+      "exists": true,
+      "bytes": 18100
+    },
+    {
+      "path": "game/assets/thumbs/cards/equip-tt8-demonslay.webp",
+      "exists": true,
+      "bytes": 3630
+    },
+    {
+      "path": "game/assets/cards/equip-tt8-archdemon.webp",
+      "exists": true,
+      "bytes": 16904
+    },
+    {
+      "path": "game/assets/thumbs/cards/equip-tt8-archdemon.webp",
+      "exists": true,
+      "bytes": 3170
+    },
+    {
+      "path": "game/assets/cards/equip-tt8-heavensword.webp",
+      "exists": true,
+      "bytes": 53908
+    },
+    {
+      "path": "game/assets/thumbs/cards/equip-tt8-heavensword.webp",
+      "exists": true,
+      "bytes": 12068
+    },
+    {
+      "path": "game/assets/cards/equip-tt7-arcanescroll.webp",
+      "exists": true,
+      "bytes": 85072
+    },
+    {
+      "path": "game/assets/thumbs/cards/equip-tt7-arcanescroll.webp",
+      "exists": true,
+      "bytes": 11656
+    },
+    {
+      "path": "game/assets/cards/equip-tt12-raygun.webp",
+      "exists": true,
+      "bytes": 59680
+    },
+    {
+      "path": "game/assets/thumbs/cards/equip-tt12-raygun.webp",
+      "exists": true,
+      "bytes": 8010
+    }
+  ]
+}

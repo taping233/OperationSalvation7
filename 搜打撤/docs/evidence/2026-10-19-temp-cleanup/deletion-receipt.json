@@ -1,0 +1,82 @@
+{
+  "status": "completed",
+  "ok": true,
+  "startedAt": "2026-10-19T11:24:36.2159257Z",
+  "planSha256": "df15230e6c3265cc61241466b52fba8562274ea4fa5051e70bdd7fee6520e874",
+  "approvedDirectories": [
+    ".tmp/exe-stability-1018/extracted",
+    ".tmp/exe-review-1018/extracted",
+    ".tmp/clean-exe-1016/project/desktop-app/node_modules",
+    ".tmp/clean-exe-1016/project/builder-cache",
+    ".tmp/page-perf-1018/delivery/win-unpacked",
+    ".tmp/deep-perf-1018/delivery/win-unpacked",
+    ".tmp/startup-fix-1018/delivery/win-unpacked",
+    ".tmp/exe-errors-1018/delivery/win-unpacked",
+    ".tmp/exe-errors-1018/delivery-fixed/win-unpacked",
+    ".tmp/exe-refresh-1018/delivery/win-unpacked"
+  ],
+  "deletedDirectories": [
+    ".tmp/exe-stability-1018/extracted",
+    ".tmp/exe-review-1018/extracted",
+    ".tmp/clean-exe-1016/project/desktop-app/node_modules",
+    ".tmp/clean-exe-1016/project/builder-cache",
+    ".tmp/page-perf-1018/delivery/win-unpacked",
+    ".tmp/deep-perf-1018/delivery/win-unpacked",
+    ".tmp/startup-fix-1018/delivery/win-unpacked",
+    ".tmp/exe-errors-1018/delivery/win-unpacked",
+    ".tmp/exe-errors-1018/delivery-fixed/win-unpacked",
+    ".tmp/exe-refresh-1018/delivery/win-unpacked"
+  ],
+  "deletedFiles": 20230,
+  "deletedBytes": 5252530829,
+  "retainedPortableExes": [
+    {
+      "path": ".tmp/page-perf-1018/delivery/搜打撤-代号7.exe",
+      "bytes": 287814301,
+      "sha256": "8f98a7a45de29988fd59a47b345eb30baa765b19b260905e0144b8d67991746d"
+    },
+    {
+      "path": ".tmp/deep-perf-1018/delivery/搜打撤-代号7.exe",
+      "bytes": 287818619,
+      "sha256": "560493f3442f46cdcd6bcea0f26cf074f025b125c63861dd1c2c512729151ed8"
+    },
+    {
+      "path": ".tmp/startup-fix-1018/delivery/搜打撤-代号7.exe",
+      "bytes": 287812412,
+      "sha256": "605f7ff6a99a3be2a2c1f2c000001e653d98b48b632f8bdc9393d5af5c3ac155"
+    },
+    {
+      "path": ".tmp/exe-errors-1018/delivery-fixed/搜打撤-代号7-修复版-20261018.exe",
+      "bytes": 287814417,
+      "sha256": "58439159bfd8abd4ae1648c803c9598ceceeb10598b861da86ac425664bc5325"
+    },
+    {
+      "path": ".tmp/exe-refresh-1018/delivery/搜打撤-代号7-20261018-换肤修复.exe",
+      "bytes": 326032977,
+      "sha256": "c8cd0c4f83750f4e6a77bc8ba9b46dd68f0cd579a3b9c7a64bd27c16a2746c4e"
+    },
+    {
+      "path": ".tmp/exe-stability-1018/delivery/搜打撤-代号7-资源修复版-20261018.exe",
+      "bytes": 326036949,
+      "sha256": "395b54650f7b724a62b79e2d10908c3c286defb54ac84ab4bf84da341b05fe0c"
+    }
+  ],
+  "retainedUnpackedDirectory": ".tmp/exe-stability-1018/delivery/win-unpacked",
+  "freeBytesBefore": 99632316416,
+  "endedAt": "2026-10-19T11:24:42.2300604Z",
+  "freeBytesAfter": 104920952832,
+  "observedFreeSpaceIncrease": 5288636416,
+  "finalVerification": {
+    "approvedTargetsAbsent": true,
+    "retainedPortableExesUnchanged": true,
+    "retainedLatestUnpackedPresent": true,
+    "mainGameEntryPresent": true,
+    "mainViteDependencyPresent": true
+  },
+  "localVerificationEvidence": {
+    "path": ".tmp/cleanup-plan-1019/verified.json",
+    "bytes": 3663370,
+    "sha256": "ec7b6ed2a81c7cce81c56d1485a85e9f8a0f40279b74a1a29e2b49ae777354dc",
+    "method": "node docs/evidence/2026-10-19-temp-cleanup/verify.mjs before deletion; historical snapshot retained locally"
+  }
+}

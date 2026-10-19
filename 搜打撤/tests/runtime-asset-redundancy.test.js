@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
   assertExcludedRuntimeAssetReferences, assertRuntimeExclusionPlanUnchanged,
@@ -12,6 +12,18 @@ import { RUNTIME_REDUNDANCY_REVIEW } from '../scripts/runtime-asset-redundancy-r
 
 const projectRoot = fileURLToPath(new URL('..', import.meta.url));
 const hash = code => createHash('sha256').update(code).digest('hex');
+const retirementPlan = JSON.parse(readFileSync(new URL('../docs/evidence/2026-10-19-unused-cleanup/deletion-plan.json', import.meta.url), 'utf8'));
+const retirementReceipt = JSON.parse(readFileSync(new URL('../docs/evidence/2026-10-19-unused-cleanup/deletion-receipt.json', import.meta.url), 'utf8'));
+function expectRetiredAsset(asset) {
+  const file = 'game/assets/' + asset;
+  const approved = retirementPlan.files.find(entry => entry.path === file);
+  expect(approved, file).toBeDefined();
+  expect(retirementReceipt.status).toBe('deleted-approved-files');
+  expect(retirementReceipt.count).toBe(203);
+  expect(retirementReceipt.planSha256).toBe(hash(readFileSync(new URL('../docs/evidence/2026-10-19-unused-cleanup/deletion-plan.json', import.meta.url))));
+  expect(retirementReceipt.files.find(entry => entry.path === file)).toEqual(approved);
+  expect(existsSync(new URL(`../${file}`, import.meta.url)), file).toBe(false);
+}
 const legacy = 'portraits/frames/wu/idle.webp';
 const oldMap = 'scenes/map-nodes/battle-security-shard-1011.webp';
 const oldTransition = 'scenes/transition-battle-v1.webp';
@@ -59,7 +71,7 @@ describe('reviewed production-only asset omissions', () => {
     expect(current.excludedAssets.size).toBe(195);
     for (const asset of current.excludedAssets) {
       expect(asset).not.toMatch(/sprite-v1\/|portraits\/(?:full|battle|avatars)\/|fonts\/|safe-simple-v7\/|symbol-foreground|map-atmosphere|city-ghost-props|transition-.*-v2/);
-      expect(readFileSync(new URL(`../game/assets/${asset}`, import.meta.url)).byteLength).toBeGreaterThan(0);
+      expectRetiredAsset(asset);
     }
   });
 
@@ -84,7 +96,7 @@ describe('reviewed production-only asset omissions', () => {
         const asset = `${prefix}cards/${stem}.webp`;
         expect(current.excludedAssets.has(asset)).toBe(true);
         expect(current.excludedAssets.has(`${prefix}${replacement}`)).toBe(false);
-        expect(readFileSync(new URL(`../game/assets/${asset}`, import.meta.url)).byteLength).toBeGreaterThan(0);
+        expectRetiredAsset(asset);
         expect(readFileSync(new URL(`../game/assets/${prefix}${replacement}`, import.meta.url)).byteLength).toBeGreaterThan(0);
       }
     }

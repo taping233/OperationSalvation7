@@ -32,14 +32,16 @@ describe('safe-slot recorded Foley integration', () => {
     expect(SAMPLE_CUES.phaseSelf).toEqual(BEFORE.phaseSelf);
     expect(SAMPLE_CUES.phaseFoe).toEqual(BEFORE.phaseFoe);
   });
-  it('adds exactly two pinned original CC0 WAVs without changing previous manifest entries', () => {
+  it('adds exactly two pinned original CC0 WAVs without changing previous audio manifest entries', () => {
     const current = readJson('game/assets/asset-manifest.json');
     const before = readJson(`${evidence}before/game/assets/asset-manifest.json`);
     const receipt = readJson(`${evidence}receipt.json`);
     const paths = pins.map(pin => pin.path);
     expect(receipt.files.map(file => file.path)).toEqual(paths);
     for (const asset of before.assets.filter(item => item.path.startsWith('sfx/'))) expect(current.assets.find(item => item.path === asset.path)).toEqual(asset);
-    expect(current.count).toBeGreaterThanOrEqual(before.count + 2);
+    // Retired images may be deleted independently; preserve the audio integration contract.
+    expect(current.assets.filter(asset => asset.path.startsWith('sfx/')).length)
+      .toBeGreaterThanOrEqual(before.assets.filter(asset => asset.path.startsWith('sfx/')).length + 2);
     expect(current.count).toBe(current.assets.length);
     for (const pin of pins) {
       const matches = current.assets.filter(item => item.path === pin.path);

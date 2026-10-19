@@ -51,6 +51,7 @@ Codex / ZCode 共用项目规则和事实，各自使用当前平台工具。项
 | 新特性 / 制作目标 | [项目章程](production/project/CHARTER.md)、[玩法概览](production/design/GDD.md)、[路线图](roadmap.md) | [UI Token 提案](UI-TOKEN-SYSTEM-PROPOSAL.md)（候选方案）、[旧规格流程](archive/SPEC-PROCESS.md) |
 | 叙事 / 事件 | [设计入口](design.md)、`narrative/events.ink` | [游戏全书](game-compendium.md)（生成物，不手改） |
 | 文档编辑 / 归档 | 根 [文档规则](../../AGENTS.md#文档写作与维护)、[流程指南](WORKFLOW-TOOLS.md#归档与替代) | [09-28 归档审阅记录](DOCUMENT-ARCHIVE-AUDIT-2026-09-28.md)（涉及该批次文件时核对） |
+| 已删资源、旧包与临时目录在哪里 | [清理后文件与当前交付](CLEANUP-STATUS.md) | 各批精确清单、原始指纹和执行回执沿该入口查询；历史路径不代表当前可用 |
 
 ## 现行说明
 
