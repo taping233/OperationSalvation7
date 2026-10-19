@@ -139,6 +139,7 @@ export function openEntrySupply() {
   const finish = () => { setBagReturnHook(null); UI.hideOverlay(); finishInstant(); };
   const showResult = () => {
     const complete = supply.taken.length === supply.cardIds.length;
+    setBagReturnHook(() => { if (isCurrent()) { game.state = 'modal'; showResult(); } });
     UI.showOverlay('', rewardSceneHTML({ className:`pg entry-reward-scene entry-supply-strips${complete ? ' reward-complete' : ''}`, title:'随行补给', source:characterName(game.myClass), rule:complete ? '' : '点卡面查看详情', count:supply.cardIds.length - supply.taken.length,
       cards:complete ? '<div class="entry-reward-complete"><span class="entry-complete-symbol" aria-hidden="true">[[icon:exit]]</span><p>补给已领齐</p><button type="button" class="entry-complete-confirm" data-act="clsEntryContinue"><span aria-hidden="true">✓</span> 继续探索</button></div>' : cards().map((card, i) => supply.taken.includes(i) ? '' : card ? `<article class="reward-unit"><button class="reward-card" data-act="clsEntryCard" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button><div class="entry-reward-label">${esc(card.name)}</div><div class="entry-reward-amount"><span>×</span>1</div><button type="button" class="reward-claim" data-act="entrySupplyTake" data-i="${i}">收下</button></article>` : '<p class="reward-empty">该职业补给暂不可用</p>').join(''),
       actions:`<div class="entry-supply-status" role="status" aria-live="polite"><span>已领取</span><b>${supply.taken.length} / ${supply.cardIds.length}</b></div>`,
@@ -153,13 +154,18 @@ export function openEntrySupply() {
         footer:supply.taken.includes(index) ? '' : `<button class="ov-btn ok" data-act="entrySupplyTake" data-i="${index}">收下</button>` });
     });
     UI.act('entrySupplyTake', data => { if (isCurrent() && active()) take(Number(data.i)); });
-    UI.act('entrySupplyBag', () => { if (isCurrent() && active()) bagSlots.showBackpack(); });
+    UI.act('entrySupplyBag', () => {
+      if (!isCurrent() || !active()) return;
+      document.getElementById('cardZoom')?._closeCardZoom?.(true);
+      bagSlots.showBackpack();
+    });
   };
   const take = (index = null) => {
     if (!Number.isInteger(index)) return;
     const received = claimEntrySupply(game, { findCard:id => SDT.Cards.all().find(card => card.id === id),
       canReceive:card => game.canReceiveCard ? game.canReceiveCard(card) : usedSlots() < bagCap(), newUid, index });
     if (!received.length) {
+      document.getElementById('cardZoom')?._closeCardZoom?.(true);
       claimNotice = '当前补给未领取，仍保留在入口。请整理背包后再试。';
       UI.log('[[icon:bag]] 当前补给未领取，请整理背包后再试', 'warn');
       showResult();

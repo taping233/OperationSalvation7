@@ -420,6 +420,23 @@ describe('事件等待与回调生命周期审计', () => {
     UI._acts.resSkip();
     expect(H.game.state).toBe('idle');
   });
+  it('入城补给满包反馈不被特写遮住，整理返回不重放介绍页', () => {
+    H.cards = [{ id:'wood', name:'木材', type:'资源', rarity:'古朴' }];
+    H.game.entrySupply = {version:1, layerIdx:0, trackPos:1, cardIds:['wood'], taken:[]};
+    H.game.canReceiveCard = () => false;
+    altar.openEntrySupply(); UI._acts.clsEntryReveal();
+    const zoom = document.createElement('div'); zoom.id = 'cardZoom';
+    zoom._closeCardZoom = vi.fn(() => zoom.remove()); document.body.append(zoom);
+    UI._acts.entrySupplyTake({i:'0'});
+    expect(document.getElementById('cardZoom')).toBeNull();
+    expect(UI.el.ovBody.textContent).toContain('仍保留在入口');
+    for (let n=0;n<2;n++) {
+      UI._acts.entrySupplyBag(); returnFromBag();
+      expect(UI.el.ovBody.querySelector('.entry-supply-strips')).not.toBeNull();
+      expect(UI.el.ovBody.querySelector('[data-act="clsEntryReveal"]')).toBeNull();
+      expect(H.game.entrySupply.taken).toEqual([]);
+    }
+  });
   it('物资格特写的整理按钮一次进入背包，返回仍是原候选', () => {
     H.cards = [{ id:'wood', name:'木材', type:'资源', rarity:'古朴' }, { id:'key', name:'钥匙', type:'资源', rarity:'古朴' }];
     H.game.layerData[0].logical[1].def.type = 'resource';

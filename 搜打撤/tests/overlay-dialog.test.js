@@ -174,6 +174,17 @@ describe('overlay dialog accessibility contract', () => {
     zoom._closeCardZoom(true);
   });
 
+  it.each(['reward-card', 'event-choice-card', 'bt-card'])('卡牌%s正文含返回/离开不会成为取消按钮', className => {
+    UI.showOverlay('领取补给', `<button class="${className}" data-act="readCard">离开战斗时返回背包</button><button data-act="back">返回地图</button>`, 'chest');
+    const read = vi.fn(), back = vi.fn(); UI.act('readCard', read); UI.act('back', back);
+    expect(UI._findCancelBtn()?.dataset.act).toBe('back');
+    UI.closeTopOverlayByEsc();
+    expect(read).not.toHaveBeenCalled(); expect(back).toHaveBeenCalledOnce();
+    UI.showOverlay('强制领取', `<button class="${className}" data-act="claim">返回手牌</button>`, 'chest');
+    expect(UI._findCancelBtn()).toBeUndefined();
+    expect(UI.closeTopOverlayByEsc()).toBe(false);
+  });
+
   it('显式安全取消优先于猜测文案，并由 Esc 调用原返回操作', () => {
     UI.showOverlay('锦囊', '<button data-act="leave">离开</button><button data-act="pouchBack" data-cancel="true">收好锦囊</button>');
     const leave = vi.fn(), back = vi.fn(); UI.act('leave', leave); UI.act('pouchBack', back);
