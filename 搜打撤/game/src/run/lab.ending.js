@@ -45,7 +45,7 @@ export function playLabEnding(onDone) {
 
   const pages = [...root.querySelectorAll('.lab-end-page')];
   const sfx = (n) => { try { if (SDT.Sound) SDT.Sound.sfx(n); } catch { /* 静音环境忽略 */ } };
-  let idx = 0, timer = null, typed = false;
+  let idx = 0, timer = null, typed = false, finished = false, typedCount = 0, revealFrame = 0;
 
   const stopType = () => { if (timer) { clearInterval(timer); timer = null; } };
   const completePage = () => {
@@ -55,30 +55,42 @@ export function playLabEnding(onDone) {
     typed = true;
     el.parentElement.classList.add('done');
   };
-  const type = (el, full) => {
+  const resumeType = () => {
+    if (finished || typed || timer || document.hidden || !root.isConnected) return;
+    const el = pages[idx].querySelector('.lab-end-typed');
+    const full = PAGES[idx].text;
+    timer = setInterval(() => {
+      if (document.hidden || !root.isConnected) { stopType(); return; }
+      el.textContent = full.slice(0, ++typedCount);
+      if (typedCount >= full.length) completePage();
+    }, 30);
+  };
+  const onVisibility = () => { if (document.hidden) stopType(); else resumeType(); };
+  const type = (el) => {
     stopType();
     typed = false;
+    typedCount = 0;
     el.parentElement.classList.remove('done');
     el.textContent = '';
-    let i = 0;
-    timer = setInterval(() => {
-      el.textContent = full.slice(0, ++i);
-      if (i >= full.length) completePage();
-    }, 30);
+    resumeType();
   };
   const show = (i) => {
     idx = i;
     pages.forEach((pg, k) => pg.classList.toggle('on', k === i));
-    type(pages[i].querySelector('.lab-end-typed'), PAGES[i].text);
+    type(pages[i].querySelector('.lab-end-typed'));
     sfx(i === 0 ? 'victory' : 'legend');
   };
   const finish = () => {
+    if (finished) return;
+    finished = true;
     stopType();
+    cancelAnimationFrame(revealFrame);
+    document.removeEventListener('visibilitychange', onVisibility);
     document.removeEventListener('keydown', onKey, true);
     root.remove();
     if (onDone) onDone();
   };
-  const advance = () => { if (typed) { idx + 1 < PAGES.length ? show(idx + 1) : finish(); } else completePage(); };
+  const advance = () => { if (finished) return; if (typed) { idx + 1 < PAGES.length ? show(idx + 1) : finish(); } else completePage(); };
   const onKey = (e) => {
     if (e.key === 'Escape') { finish(); return; }
     if (e.key === 'Enter' || e.key === ' ') { advance(); }
@@ -89,6 +101,7 @@ export function playLabEnding(onDone) {
     advance();
   });
   document.addEventListener('keydown', onKey, true);
-  requestAnimationFrame(() => root.classList.add('on'));   // 触发淡入
+  document.addEventListener('visibilitychange', onVisibility);
+  revealFrame = requestAnimationFrame(() => { revealFrame = 0; if (!finished) root.classList.add('on'); });   // 触发淡入
   show(0);
 }

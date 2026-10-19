@@ -1,0 +1,106 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+··stderr | tests/nest-node-lifecycle-audit.test.js > 研究所自然节点与奖励生命周期审计 > 战斗入口rejection失败后还原原随身牌/规则并可重试，不覆盖另一局
+[nest] 战斗入口未完成 Error: 模拟加载失败
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/nest-node-lifecycle-audit.test.js:72:77
+    at startNestBattle (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/run/game.nest.js:374:21)
+    at enterNestCell (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/run/game.nest.js:323:38)
+    at Object.nestCell1 (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/run/game.nest.js:278:133)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/nest-node-lifecycle-audit.test.js:73:19
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:863:59
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20
+    at new Promise (<anonymous>)
+
+·······································································
+
+ Test Files  4 passed (4)
+      Tests  73 passed (73)
+   Start at  17:39:27
+   Duration  2.83s (transform 786ms, setup 0ms, collect 1.46s, tests 2.39s, environment 1.41s, prepare 228ms)
+
+
+=== syntax/types/lint/resource contracts ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 check:syntax
+> node scripts/check-syntax.mjs
+
+Syntax check passed (497 project files).
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 typecheck
+> node scripts/check-types.mjs
+
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > keeps original source files, filters the production art manifest and copy, and retains the rations thumbnail lookup key
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > filters both shadowed card manifests and output, preserves every replacement and source, and restores the whole category
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 165
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 54 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 36 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+·stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > fails explicitly if a lazy reference or selector changes after early manifest selection
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+
+····stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores a selected legacy resource in the next manifests/copy and a redrawn rations image on a reused config
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 194
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 41 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+·······················
+
+ Test Files  2 passed (2)
+      Tests  28 passed (28)
+   Start at  17:40:28
+   Duration  2.74s (transform 127ms, setup 0ms, collect 159ms, tests 3.83s, environment 0ms, prepare 129ms)
+

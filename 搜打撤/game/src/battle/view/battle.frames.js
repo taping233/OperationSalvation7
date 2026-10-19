@@ -523,7 +523,14 @@ function startLoop() {
     });
     app.stop();   // autoStart=false：只在 wakeRenderer 拉起时跑
   });
-  if (!pollTimer) {
+  startGeometryPolling();
+}
+
+function stopGeometryPolling() {
+  if (pollTimer) { clearInterval(pollTimer); pollTimer = 0; }
+}
+function startGeometryPolling() {
+  if (!pollTimer && cur && !document.hidden) {
     pollTimer = setInterval(() => {   // 静止期轮询：rect 变了（回合沉浮/hover）拉起渲染
       if (!cur || document.hidden) return;
       syncFrameSurface();
@@ -712,7 +719,7 @@ function hide(diagnostic = 'released') {
   if (appPromise) appPromise.then(rt => { if (rt) rt.app.stop(); });
   // 轮询 interval 只在战斗立绘在场时有意义：hide 后不清理会全程空转（每 200ms
   // 一次 rect 读取直到进程结束）。
-  if (pollTimer) { clearInterval(pollTimer); pollTimer = 0; }
+  stopGeometryPolling();
   const released = releaseTextureSets();
   setDiagnosticPhase(diagnostic === 'static' ? 'static' : 'released');
   return released;
@@ -733,8 +740,10 @@ function cacheStats() {
 // UiScale's dependency registers its resize listener first, so this sees new zoom.
 window.addEventListener('resize', () => syncFrameSurface(true));
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) { if (appPromise) appPromise.then(rt => { if (rt) rt.app.stop(); }); }
-  else if (cur) { syncFrameSurface(true); wakeRenderer(600); }
+  if (document.hidden) {
+    stopGeometryPolling();
+    if (appPromise) appPromise.then(rt => { if (rt) rt.app.stop(); });
+  } else if (cur) { startGeometryPolling(); syncFrameSurface(true); wakeRenderer(600); }
 });
 
 // 战斗结束必卸载（老板 09-12 实机 bug：胜利画面/地图上人物残影）——#unitFrames 挂在

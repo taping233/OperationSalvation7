@@ -1,3 +1,4 @@
+// 2026-10-19 background timers: only visibility/cleanup scheduling changed; asset paths and selectors unchanged.
 // Reviewed selectors and opaque dynamic paths; re-audit before changing fingerprints.
 // Source originals are retained. An unreviewed/changed selector preserves its assets.
 // Current consumer reviews: docs/evidence/2026-10-16-WF-integration-ship-1016/asset-contracts.md
@@ -226,7 +227,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
       "game/src/run/chest-opening-art.js": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf"
     },
     "frames": {
-      "game/src/battle/view/battle.frames.js": "8524a43a2772fb941b0237cc9ae7aca4e8fda7502bed0050fd5b821ac9e27686",
+      "game/src/battle/view/battle.frames.js": "6b660407249caa51296952c1ee6e714d79bcd8f0e2bc95dee1dbf25000e995f1",
       "game/src/battle/view/battle.frame-catalog.js": "7396a3a49f206d63e16e5ed8bab02d4d5fbd39e7ef934c354f1dc0fcda756bd0",
       "game/src/battle/view/battle.frame-catalog-changwuyu.js": "774594287f6417bf0ffba60f77817ffc7dff42d5d78f937f6c13c72973a4a77d",
       "game/src/battle/view/battle.frame-catalog-three-role.js": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
@@ -266,7 +267,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/src/audio/sound.bank.js": "81b9bdf76f7440c6adccdc757b10a1240201830d76f8b4dea695dc9812b0fdf4",
     "game/src/audio/sound.js": "7a6fbb71985cdae7285b8c33a02c0041e2f4af4f6c7b8d01b91ee3cbc0db6d08",
     "game/src/audio/sound.ui-samples.js": "76279f33ae9467025c1099959e016e731c9e96339bfa3960798a527ab76b092f",
-    "game/src/battle/view/battle.frames.js": "8524a43a2772fb941b0237cc9ae7aca4e8fda7502bed0050fd5b821ac9e27686",
+    "game/src/battle/view/battle.frames.js": "6b660407249caa51296952c1ee6e714d79bcd8f0e2bc95dee1dbf25000e995f1",
     "game/src/battle/view/battle.layers.js": "1f438814d23f7f60a555f6369bf013cb12366c5763b5636696c4c6f790491127",
     "game/src/battle/view/battle.vfx.js": "0c7f2fb9b96171c5f03c498c8d5004bb1553403f12723bec15e8922604af04cd",
     "game/src/cards/card-frame-presentation.js": "79ef8241faad2ed89bb1c19b6866f0e352ddd43e9498d1e0842e436335099d9a",
@@ -277,7 +278,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/src/hub/hub.presentation.js": "5c60ba882c596467a699bfc4adc27369ddabbf62c807a7e84c7216a1e9bebacc",
     "game/src/hub/hub.visuals.js": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78",
     "game/src/rarity-design-lab.js": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775",
-    "game/src/run/lab.ending.js": "4ebedd8dd70253956410986e19b45d61a3b993514fb5a1dbc4fab1bc01d91b6c",
+    "game/src/run/lab.ending.js": "8a6fe31c4fbef1acbaae9cb06c759fbc5a2e4e16f84c365eb93371232b495ba8",
     "game/src/ui/base-preview-rooms-v7.js": "c68c228942c7aaa41d1d52343c8f34346f4b424327c14619c2e5c5943a4e9fb8",
     "game/src/ui/game.menu.js": "cea11326c01a46240c7f902d37a667d528589502fe743652145ffe7654573010",
     "game/src/ui/ui.js": "8a1eb7d22e5fea5bb874aec022f240c090e550da8192093f5d42ab64c7fb642d",

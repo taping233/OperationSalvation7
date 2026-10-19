@@ -154,6 +154,27 @@ describe('battle frame lifecycle', () => {
     expect(pixi.lastApp.ticker.maxFPS).toBe(60);
   });
 
+  it('stops hidden geometry polling and resumes only one interval for a live figure', async () => {
+    const hidden = vi.spyOn(document, 'hidden', 'get').mockReturnValue(false);
+    const interval = vi.spyOn(globalThis, 'setInterval');
+    const clear = vi.spyOn(globalThis, 'clearInterval');
+    await attach(document.getElementById('ovBody')); await finishFrames('changwuyu');
+    const pollCalls = () => interval.mock.calls.filter(args => args[1] === 200);
+    expect(pollCalls()).toHaveLength(1);
+    const pollIndex = interval.mock.calls.findIndex(args => args[1] === 200);
+    const first = interval.mock.results[pollIndex].value;
+    hidden.mockReturnValue(true); document.dispatchEvent(new Event('visibilitychange'));
+    expect(clear).toHaveBeenCalledWith(first);
+    document.dispatchEvent(new Event('visibilitychange'));
+    expect(pollCalls()).toHaveLength(1);
+    hidden.mockReturnValue(false); document.dispatchEvent(new Event('visibilitychange'));
+    document.dispatchEvent(new Event('visibilitychange'));
+    expect(pollCalls()).toHaveLength(2);
+    await hide();
+    document.dispatchEvent(new Event('visibilitychange'));
+    expect(pollCalls()).toHaveLength(2);
+  });
+
   it('syncs output pixels on resize, DPR-only ticks, visible recovery and app reuse', async () => {
     vi.stubGlobal('innerWidth', 1180);
     vi.stubGlobal('innerHeight', 595);
