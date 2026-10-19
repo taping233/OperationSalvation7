@@ -17,16 +17,16 @@ afterEach(() => {
 });
 
 describe('byte-identical chest output aliases', () => {
-  it('aliases only equal existing candidate pairs and preserves changed/missing frames', () => {
+  it.each(['rig-640-v1', 'rig-v1'])('%s aliases only equal existing candidate pairs and preserves changed/missing frames', format => {
     const root = mkdtempSync(path.join(os.tmpdir(), 'sdt-chest-alias-'));
     fixtures.push(root);
-    const rig = path.join(root, 'scenes/chests/small-rig-640-v1');
+    const rig = path.join(root, `scenes/chests/small-${format}`);
     mkdirSync(rig, { recursive: true });
     for (const [frame, body] of [['00', 'same'], ['01', 'same'], ['02', 'redrawn'], ['16', 'last']]) {
       writeFileSync(path.join(rig, `frame-${frame}.webp`), body);
     }
-    const alias = 'scenes/chests/small-rig-640-v1/frame-01.webp';
-    expect([...collectVerifiedChestFrameAliases(root)]).toEqual([[alias, 'scenes/chests/small-rig-640-v1/frame-00.webp']]);
+    const alias = `scenes/chests/small-${format}/frame-01.webp`;
+    expect([...collectVerifiedChestFrameAliases(root)]).toEqual([[alias, `scenes/chests/small-${format}/frame-00.webp`]]);
     writeFileSync(path.join(rig, 'frame-01.webp'), 'changed after first check');
     expect(collectVerifiedChestFrameAliases(root).has(alias)).toBe(false);
     const portraits = path.join(root, 'portraits');
@@ -39,6 +39,23 @@ describe('byte-identical chest output aliases', () => {
     expect([...collectVerifiedRuntimeAssetAliases(root)]).toEqual([[spriteAlias, 'portraits/battle/changwuyu.webp']]);
     writeFileSync(path.join(portraits, 'battle/changwuyu.webp'), 'new battle portrait');
     expect(collectVerifiedRuntimeAssetAliases(root).has(spriteAlias)).toBe(false);
+  });
+
+  it('never merges across resolutions or the non-identical large closing frame', () => {
+    const root = mkdtempSync(path.join(os.tmpdir(), 'sdt-chest-resolution-'));
+    fixtures.push(root);
+    for (const format of ['rig-640-v1', 'rig-v1']) {
+      const rig = path.join(root, `scenes/chests/large-${format}`);
+      mkdirSync(rig, { recursive: true });
+      for (const [frame, body] of [['00', 'shared'], ['01', 'shared'], ['16', 'close'], ['17', 'different close']]) {
+        writeFileSync(path.join(rig, `frame-${frame}.webp`), body);
+      }
+    }
+    const aliases = collectVerifiedChestFrameAliases(root);
+    expect([...aliases]).toEqual(['rig-640-v1', 'rig-v1'].map(format => [
+      `scenes/chests/large-${format}/frame-01.webp`, `scenes/chests/large-${format}/frame-00.webp`,
+    ]));
+    expect(aliases.size).toBe(2);
   });
 
   it('verifies rations original and thumbnail pairs independently, retaining missing or redrawn canonical/source files', () => {
@@ -67,11 +84,11 @@ describe('byte-identical chest output aliases', () => {
     const source = readFileSync(path.join(gameRoot, 'src/run/chests.js'), 'utf8');
     const openingArt = readFileSync(path.join(gameRoot, 'src/run/chest-opening-art.js'), 'utf8');
     const aliases = collectVerifiedChestFrameAliases(assetsRoot);
-    expect(aliases.size).toBeLessThanOrEqual(15);
+    expect(aliases.size).toBeLessThanOrEqual(30);
     for (const [alias, canonical] of aliases) {
       expect(readFileSync(path.join(assetsRoot, alias)).equals(readFileSync(path.join(assetsRoot, canonical)))).toBe(true);
       for (const asset of [alias, canonical]) {
-        expect(asset).toMatch(/^scenes\/chests\/(?:small|medium|large|class|boss)-rig-640-v1\/frame-\d{2}\.webp$/);
+        expect(asset).toMatch(/^scenes\/chests\/(?:small|medium|large|class|boss)-rig(?:-640)?-v1\/frame-\d{2}\.webp$/);
         expect(openingArt).not.toContain(asset);
       }
     }
@@ -86,7 +103,7 @@ describe('byte-identical chest output aliases', () => {
     }
   });
 
-  it('uses the same canonical URLs in Vite assets, preload manifests, and copied output; rechecks reused hooks', async () => {
+  it.each(['rig-640-v1', 'rig-v1'])('%s uses the same canonical URLs in Vite assets, preload manifests, and copied output; rechecks reused hooks', async format => {
     vi.resetModules();
     // Exercise plugin hooks against an entirely virtual filesystem. No build,
     // generated directory cleanup, or real asset write is performed.
@@ -95,9 +112,9 @@ describe('byte-identical chest output aliases', () => {
     const add = (relative, body) => files.set(path.join(root, relative), Buffer.from(body));
     add('game/data/art-mapping.json', '{"itemArt":{}}');
     add('game/version.json', '{"version":"test"}');
-    add('game/assets/scenes/chests/small-rig-640-v1/frame-00.webp', 'same');
-    add('game/assets/scenes/chests/small-rig-640-v1/frame-01.webp', 'same');
-    add('game/assets/scenes/chests/small-rig-640-v1/frame-02.webp', 'different');
+    add(`game/assets/scenes/chests/small-${format}/frame-00.webp`, 'same');
+    add(`game/assets/scenes/chests/small-${format}/frame-01.webp`, 'same');
+    add(`game/assets/scenes/chests/small-${format}/frame-02.webp`, 'different');
     add('game/assets/portraits/battle/changwuyu.webp', 'portrait');
     add('game/assets/portraits/frames/changwuyu/sprite-v1/f000.webp', 'portrait');
     add('game/assets/portraits/frames/changwuyu/sprite-v1/neutral.webp', 'portrait');
@@ -135,8 +152,8 @@ describe('byte-identical chest output aliases', () => {
     const { default: config } = await import('../vite.config.js');
     const plugin = config.plugins.find(entry => entry.name === 'copy-static');
     const filename = config.build.rollupOptions.output.assetFileNames;
-    const alias = 'scenes/chests/small-rig-640-v1/frame-01.webp';
-    const canonical = 'scenes/chests/small-rig-640-v1/frame-00.webp';
+    const alias = `scenes/chests/small-${format}/frame-01.webp`;
+    const canonical = `scenes/chests/small-${format}/frame-00.webp`;
     expect(filename({ originalFileNames: [`assets/${alias}`] })).toBe(`assets/${canonical}`);
     expect(JSON.parse(plugin.config({}, { command: 'serve' }).define.__RUNTIME_ASSET_ALIASES__)).toEqual({});
     const buildAliases = JSON.parse(plugin.config({}, { command: 'build' }).define.__RUNTIME_ASSET_ALIASES__);

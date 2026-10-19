@@ -1,0 +1,92 @@
+{
+  "baseline": "c76298b93366187a0bce50ed726eeb026676c40b",
+  "groups": [
+    {
+      "sha": "e09c4f2a84c3b8f6f70014837521d95ab244a5ca",
+      "bytes": 766072,
+      "duplicateBytes": 1532144,
+      "paths": [
+        "game/assets/scenes/chests/large-rig-v1/frame-00.webp",
+        "game/assets/scenes/chests/large-rig-v1/frame-01.webp",
+        "game/assets/scenes/chests/large-rig-v1/frame-02.webp"
+      ]
+    },
+    {
+      "sha": "e594ede5bf2211e860072f7495e0c4795454d060",
+      "bytes": 751734,
+      "duplicateBytes": 1503468,
+      "paths": [
+        "game/assets/scenes/chests/boss-rig-v1/frame-00.webp",
+        "game/assets/scenes/chests/boss-rig-v1/frame-01.webp",
+        "game/assets/scenes/chests/boss-rig-v1/frame-02.webp"
+      ]
+    },
+    {
+      "sha": "e5090eaafac3f9a7836791458d641f288dd8bfc8",
+      "bytes": 648016,
+      "duplicateBytes": 1296032,
+      "paths": [
+        "game/assets/scenes/chests/class-rig-v1/frame-00.webp",
+        "game/assets/scenes/chests/class-rig-v1/frame-01.webp",
+        "game/assets/scenes/chests/class-rig-v1/frame-02.webp"
+      ]
+    },
+    {
+      "sha": "a5e5f75bc33b67d610e6a911a6370cab0300d86c",
+      "bytes": 643182,
+      "duplicateBytes": 1286364,
+      "paths": [
+        "game/assets/scenes/chests/medium-rig-v1/frame-00.webp",
+        "game/assets/scenes/chests/medium-rig-v1/frame-01.webp",
+        "game/assets/scenes/chests/medium-rig-v1/frame-02.webp"
+      ]
+    },
+    {
+      "sha": "a75b5cd3f090177a1b613c336c88c595f4a114a0",
+      "bytes": 487716,
+      "duplicateBytes": 975432,
+      "paths": [
+        "game/assets/scenes/chests/small-rig-v1/frame-00.webp",
+        "game/assets/scenes/chests/small-rig-v1/frame-01.webp",
+        "game/assets/scenes/chests/small-rig-v1/frame-02.webp"
+      ]
+    },
+    {
+      "sha": "da272439e57dc0c60d1cb760ff90edbbd47bb97b",
+      "bytes": 972700,
+      "duplicateBytes": 972700,
+      "paths": [
+        "game/assets/scenes/chests/boss-rig-v1/frame-16.webp",
+        "game/assets/scenes/chests/boss-rig-v1/frame-17.webp"
+      ]
+    },
+    {
+      "sha": "a673e212f3bab7a8b554cf19a97c9a9012c52ed3",
+      "bytes": 958186,
+      "duplicateBytes": 958186,
+      "paths": [
+        "game/assets/scenes/chests/medium-rig-v1/frame-16.webp",
+        "game/assets/scenes/chests/medium-rig-v1/frame-17.webp"
+      ]
+    },
+    {
+      "sha": "42b267305f0aaa952a8df527c80247d340a68a25",
+      "bytes": 917980,
+      "duplicateBytes": 917980,
+      "paths": [
+        "game/assets/scenes/chests/class-rig-v1/frame-16.webp",
+        "game/assets/scenes/chests/class-rig-v1/frame-17.webp"
+      ]
+    },
+    {
+      "sha": "4275bc7473e04fa5bd40615793af47e55f1f30ba",
+      "bytes": 843574,
+      "duplicateBytes": 843574,
+      "paths": [
+        "game/assets/scenes/chests/small-rig-v1/frame-16.webp",
+        "game/assets/scenes/chests/small-rig-v1/frame-17.webp"
+      ]
+    }
+  ],
+  "duplicateBytes": 10285880
+}

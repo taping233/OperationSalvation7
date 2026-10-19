@@ -1,0 +1,206 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+stdout | tests/runtime-asset-publication.test.js > production runtime asset publication > publishes active samples and verbatim notices through the real Vite copy plugin
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 1
+[assets] asset URLs versioned: ?v=test
+[assets] omitted unused development SFX libraries: sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 1
+[assets] asset URLs versioned: ?v=test
+
+ ❯ tests/runtime-asset-publication.test.js (8 tests | 1 failed) 201ms
+   × production runtime asset publication > publishes JSON-referenced frames and guide art plus dynamically named battle stickers at stable paths 9ms
+     → ENOENT: no such file or directory, open '/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/assets/ui/card-frames/paper-1015/initial.webp'
+   ✓ production runtime asset publication > loads fallback Noto fonts on demand without changing the primary font or removing bundled fallbacks 2ms
+   ✓ production runtime asset publication > omits only the three unused audition libraries and keeps active samples and artwork 2ms
+   ✓ production runtime asset publication > retains a library referenced by a loaded module or asynchronous feature catalog 1ms
+   ✓ production runtime asset publication > preserves concatenated roots and Windows module paths and fails open without a graph 1ms
+   ✓ production runtime asset publication > does not confuse similar directory names or ordinary variable names with references 1ms
+   ✓ production runtime asset publication > lists only existing license documents, never font binaries, and preserves their bytes 4ms
+   ✓ production runtime asset publication > publishes active samples and verbatim notices through the real Vite copy plugin 181ms
+stdout | tests/runtime-asset-aliases.test.js > byte-identical chest output aliases > rig-640-v1 uses the same canonical URLs in Vite assets, preload manifests, and copied output; rechecks reused hooks
+[assets] reviewed unused production images omitted: 0
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 3 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 0 images -> game/src/generated/thumb-manifest.js
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 0
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 5 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 0 images -> game/src/generated/thumb-manifest.js
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stderr | tests/runtime-asset-aliases.test.js > byte-identical chest output aliases > rig-640-v1 uses the same canonical URLs in Vite assets, preload manifests, and copied output; rechecks reused hooks
+[assets] Runtime source scan unavailable (Missing runtime source directory: game/src); retaining reviewed assets.
+[assets] Runtime source scan unavailable (Missing runtime source directory: game/css); retaining reviewed assets.
+
+stdout | tests/runtime-asset-aliases.test.js > byte-identical chest output aliases > rig-v1 uses the same canonical URLs in Vite assets, preload manifests, and copied output; rechecks reused hooks
+[assets] reviewed unused production images omitted: 0
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 3 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 0 images -> game/src/generated/thumb-manifest.js
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 0
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 5 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 0 images -> game/src/generated/thumb-manifest.js
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stderr | tests/runtime-asset-aliases.test.js > byte-identical chest output aliases > rig-v1 uses the same canonical URLs in Vite assets, preload manifests, and copied output; rechecks reused hooks
+[assets] Runtime source scan unavailable (Missing runtime source directory: game/src); retaining reviewed assets.
+[assets] Runtime source scan unavailable (Missing runtime source directory: game/css); retaining reviewed assets.
+
+ ❯ tests/runtime-asset-aliases.test.js (6 tests | 1 failed) 291ms
+   ✓ byte-identical chest output aliases > rig-640-v1 aliases only equal existing candidate pairs and preserves changed/missing frames 7ms
+   ✓ byte-identical chest output aliases > rig-v1 aliases only equal existing candidate pairs and preserves changed/missing frames 4ms
+   ✓ byte-identical chest output aliases > verifies rations original and thumbnail pairs independently, retaining missing or redrawn canonical/source files 4ms
+   × byte-identical chest output aliases > aliases only byte-identical legacy rig output and preserves the active safe timeline URLs 34ms
+     → ENOENT: no such file or directory, open '/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/assets/scenes/chests/safe-simple-v7/frame-00.webp'
+   ✓ byte-identical chest output aliases > rig-640-v1 uses the same canonical URLs in Vite assets, preload manifests, and copied output; rechecks reused hooks 195ms
+   ✓ byte-identical chest output aliases > rig-v1 uses the same canonical URLs in Vite assets, preload manifests, and copied output; rechecks reused hooks 46ms
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > keeps original source files, filters the production art manifest and copy, and retains the rations thumbnail lookup key
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > filters both shadowed card manifests and output, preserves every replacement and source, and restores the whole category
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 165
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 54 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 36 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > fails explicitly if a lazy reference or selector changes after early manifest selection
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores a selected legacy resource in the next manifests/copy and a redrawn rations image on a reused config
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 194
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 41 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+ ✓ tests/runtime-asset-redundancy-plugin.test.js (5 tests) 1390ms
+   ✓ reviewed asset omissions through real Vite hooks without a build > keeps original source files, filters the production art manifest and copy, and retains the rations thumbnail lookup key  424ms
+   ✓ reviewed asset omissions through real Vite hooks without a build > filters both shadowed card manifests and output, preserves every replacement and source, and restores the whole category  438ms
+   ✓ reviewed asset omissions through real Vite hooks without a build > restores a selected legacy resource in the next manifests/copy and a redrawn rations image on a reused config  390ms
+ ❯ tests/runtime-asset-redundancy.test.js (23 tests | 1 failed) 2504ms
+   ✓ keeps reviewed asset decisions identical across Git LF and Windows CRLF sources 11ms
+   × reviewed production-only asset omissions > contains 56 previous paths, 90 retired chest frames, 19 retired scenes and 30 shadowed card files 1325ms
+     → ENOENT: no such file or directory, open '/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/assets/scenes/entry/winter-arrival-1011-v1.webp'
+   ✓ reviewed production-only asset omissions > omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs  1029ms
+   ✓ reviewed production-only asset omissions > retains shadowed card files after override, renderer or data-loader changes and rejects restored lazy references 120ms
+   ✓ reviewed production-only asset omissions > keeps the current safe timeline and restores any referenced or changed retired rig selector 1ms
+   ✓ reviewed production-only asset omissions > omits only unused reviewed files and retains future static or configured references 0ms
+   ✓ reviewed production-only asset omissions > reads all catalog sequence and static fallback names on every decision, including restored legacy frames 1ms
+   ✓ reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: undefined 0ms
+   ✓ reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {} 1ms
+   ✓ reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{}} 0ms
+   ✓ reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":[]}} 2ms
+   ✓ reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":[0]}} 0ms
+   ✓ reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":["sprite-v1/frame-001"]},"staticFallback":1} 0ms
+   ✓ reviewed production-only asset omissions > retains a whole category after a selector changes or disappears 0ms
+   ✓ reviewed production-only asset omissions > retains every candidate for new or changed opaque constructors and syntax/read uncertainty 2ms
+   ✓ reviewed production-only asset omissions > does not treat ordinary static assets or unrelated template strings as opaque 0ms
+   ✓ reviewed production-only asset omissions > checks the complete Rollup graph including async modules and generated manifests 1ms
+   ✓ reviewed production-only asset omissions > rejects a selection change between early manifest generation and final copy 0ms
+   ✓ reviewed production-only asset omissions > accepts only static license URLs and inert raw SVG exports while rejecting restored asset references 3ms
+   ✓ pins indirect URL inputs even when their change has no recognizable asset constructor 2ms
+   ✓ retains all candidates when an explicit path dependency or its owning consumer is missing 1ms
+   ✓ explicit indirect inputs retain normalized CRLF equivalence and invalidate between calls 0ms
+   ✓ keeps the reviewed sample callback and catalog in the explicit sound path dependency set 0ms
+ ✓ tests/asset-url-aliases.test.js (3 tests) 6ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lossless-runtime-assets.test.js [ tests/lossless-runtime-assets.test.js ]
+Error: ENOENT: no such file or directory, open '/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/assets/asset-manifest.json'
+ ❯ read tests/lossless-runtime-assets.test.js:6:34
+      4| import { readFileSync } from 'node:fs';
+      5| 
+      6| const read = file => readFileSync(new URL(`../${file}`, import.meta.ur…
+       |                                  ^
+      7| const json = file => JSON.parse(read(file));
+      8| const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+ ❯ json tests/lossless-runtime-assets.test.js:7:33
+ ❯ tests/lossless-runtime-assets.test.js:9:18
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/runtime-asset-aliases.test.js > byte-identical chest output aliases > aliases only byte-identical legacy rig output and preserves the active safe timeline URLs
+Error: ENOENT: no such file or directory, open '/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/assets/scenes/chests/safe-simple-v7/frame-00.webp'
+ ❯ tests/runtime-asset-aliases.test.js:83:14
+     81|       const asset = `scenes/chests/safe-simple-v7/${frame}.webp`;
+     82|       expect(openingArt).toContain(`new URL('../../assets/${asset}', i…
+     83|       expect(readFileSync(path.join(assetsRoot, asset)).byteLength).to…
+       |              ^
+     84|       expect(aliases.has(asset)).toBe(false);
+     85|       expect([...aliases.values()]).not.toContain(asset);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/runtime-asset-publication.test.js > production runtime asset publication > publishes JSON-referenced frames and guide art plus dynamically named battle stickers at stable paths
+Error: ENOENT: no such file or directory, open '/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/assets/ui/card-frames/paper-1015/initial.webp'
+ ❯ tests/runtime-asset-publication.test.js:31:14
+     29|     for (const asset of assets) {
+     30|       expect(RUNTIME_ASSET_DIRS.some(directory => asset.startsWith(`${…
+     31|       expect(readFileSync(path.join(assetsRoot, asset)).byteLength, as…
+       |              ^
+     32|     }
+     33|     const config = readFileSync(new URL('../vite.config.js', import.me…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > contains 56 previous paths, 90 retired chest frames, 19 retired scenes and 30 shadowed card files
+Error: ENOENT: no such file or directory, open '/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/assets/scenes/entry/winter-arrival-1011-v1.webp'
+ ❯ tests/runtime-asset-redundancy.test.js:62:26
+     60|     for (const asset of current.excludedAssets) {
+     61|       expect(asset).not.toMatch(/sprite-v1\/|portraits\/(?:full|battle…
+     62|       expect(readFileSync(new URL(`../game/assets/${asset}`, import.me…
+       |                          ^
+     63|     }
+     64|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  4 failed | 2 passed (6)
+      Tests  3 failed | 42 passed (45)
+   Start at  15:07:36
+   Duration  3.17s (transform 502ms, setup 0ms, collect 652ms, tests 4.39s, environment 1ms, prepare 437ms)
+

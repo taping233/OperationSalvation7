@@ -1,0 +1,100 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ✓ tests/asset-url-aliases.test.js (3 tests) 4ms
+stdout | tests/runtime-asset-aliases.test.js > byte-identical chest output aliases > rig-640-v1 uses the same canonical URLs in Vite assets, preload manifests, and copied output; rechecks reused hooks
+[assets] reviewed unused production images omitted: 0
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 3 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 0 images -> game/src/generated/thumb-manifest.js
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 0
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 5 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 0 images -> game/src/generated/thumb-manifest.js
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stderr | tests/runtime-asset-aliases.test.js > byte-identical chest output aliases > rig-640-v1 uses the same canonical URLs in Vite assets, preload manifests, and copied output; rechecks reused hooks
+[assets] Runtime source scan unavailable (Missing runtime source directory: game/src); retaining reviewed assets.
+[assets] Runtime source scan unavailable (Missing runtime source directory: game/css); retaining reviewed assets.
+
+stdout | tests/runtime-asset-aliases.test.js > byte-identical chest output aliases > rig-v1 uses the same canonical URLs in Vite assets, preload manifests, and copied output; rechecks reused hooks
+[assets] reviewed unused production images omitted: 0
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 3 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 0 images -> game/src/generated/thumb-manifest.js
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 0
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 5 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 0 images -> game/src/generated/thumb-manifest.js
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stderr | tests/runtime-asset-aliases.test.js > byte-identical chest output aliases > rig-v1 uses the same canonical URLs in Vite assets, preload manifests, and copied output; rechecks reused hooks
+[assets] Runtime source scan unavailable (Missing runtime source directory: game/src); retaining reviewed assets.
+[assets] Runtime source scan unavailable (Missing runtime source directory: game/css); retaining reviewed assets.
+
+ ✓ tests/runtime-asset-aliases.test.js (7 tests) 186ms
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > keeps original source files, filters the production art manifest and copy, and retains the rations thumbnail lookup key
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > filters both shadowed card manifests and output, preserves every replacement and source, and restores the whole category
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 165
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 54 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 36 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > fails explicitly if a lazy reference or selector changes after early manifest selection
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores a selected legacy resource in the next manifests/copy and a redrawn rations image on a reused config
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 194
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 41 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+ ✓ tests/runtime-asset-redundancy-plugin.test.js (5 tests) 1191ms
+   ✓ reviewed asset omissions through real Vite hooks without a build > keeps original source files, filters the production art manifest and copy, and retains the rations thumbnail lookup key  334ms
+   ✓ reviewed asset omissions through real Vite hooks without a build > filters both shadowed card manifests and output, preserves every replacement and source, and restores the whole category  393ms
+   ✓ reviewed asset omissions through real Vite hooks without a build > restores a selected legacy resource in the next manifests/copy and a redrawn rations image on a reused config  329ms
+
+ Test Files  3 passed (3)
+      Tests  15 passed (15)
+   Start at  15:09:06
+   Duration  1.50s (transform 152ms, setup 0ms, collect 200ms, tests 1.38s, environment 1ms, prepare 191ms)
+
