@@ -488,8 +488,15 @@ function advance(now) {
   }
 }
 
+// Reuse the existing hide/release path when the preference changes mid-session.
+function stopForReducedMotion() {
+  if (!reduceMotion()) return false;
+  hide();
+  return true;
+}
+
 function tickLoop() {
-  if (!cur || document.hidden) return;
+  if (!cur || document.hidden || stopForReducedMotion()) return;
   syncFrameSurface();
   const geometry = cur.fig && uiRect(cur.fig);
   tickGeometry = geometry;
@@ -532,7 +539,7 @@ function stopGeometryPolling() {
 function startGeometryPolling() {
   if (!pollTimer && cur && !document.hidden) {
     pollTimer = setInterval(() => {   // 静止期轮询：rect 变了（回合沉浮/hover）拉起渲染
-      if (!cur || document.hidden) return;
+      if (!cur || document.hidden || stopForReducedMotion()) return;
       syncFrameSurface();
       const r = cur.fig && uiRect(cur.fig);   // 与 lastRect（布局口径）同尺比较
       if (!r || !r.width) return;
@@ -596,18 +603,19 @@ async function attachCurrent(body) {
   img.style.visibility = 'hidden';
   imageOwners.set(img, token);
   const restoreStatic = () => { if (imageOwners.get(img) === token) { img.style.visibility = ''; imageOwners.delete(img); } };
+  const cancelled = () => token !== lifecycle || stopForReducedMotion();
   armBattleEndHide();
   if (releasePromise) await releasePromise;
-  if (token !== lifecycle) { restoreStatic(); return; }
+  if (cancelled()) { restoreStatic(); return; }
   const rt = await ensureApp();
-  if (!rt || token !== lifecycle) { restoreStatic(); return false; }
+  if (!rt || cancelled()) { restoreStatic(); return false; }
   syncFrameSurface(true);
   const set = await loadSet(role, battleToken);
   // 资源探测是异步的：战斗可能已结束并切到搜刮/奖励页，旧 fig 即使仍有引用也不能复活帧层。
-  if (!set || token !== lifecycle || !isCurrentFigure()) { restoreStatic(); return false; }
+  if (!set || cancelled() || !isCurrentFigure()) { restoreStatic(); return false; }
   const fill = await portraitFillOf(role, img);
   // 量立绘占比也是异步的，fig 可能在等待期间随战斗结束被移除，复活前再查一次。
-  if (token !== lifecycle || !isCurrentFigure()) { restoreStatic(); return; }
+  if (cancelled() || !isCurrentFigure()) { restoreStatic(); return; }
   if (cur && cur.role === role) {
     // 同战斗内重渲染：只换 DOM 引用（ovBody 重建后 fig/img 是新节点），不重置播放状态，
     // 否则出牌结算的多次 render 会把正在播的攻击/受击动作打断
@@ -640,7 +648,7 @@ async function attachCurrent(body) {
 
 // 动作触发：'atk' 攻击（起手连命中）/ 'cast' 施法 / 'hurt' 受击
 function play(name) {
-  if (!cur || !cur.set || cur.dying || document.hidden) return false;
+  if (!cur || !cur.set || cur.dying || document.hidden || stopForReducedMotion()) return false;
   if (!ACT_SEQS[name]) return false;
   if (fixedFrameRole(cur.role)) {
     cur.resumeAfter = null;

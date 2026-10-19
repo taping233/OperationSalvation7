@@ -127,7 +127,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
     src: [MUSIC_TRACKS[scene]], format: ['opus'], loop: true, html5,
     preload: false, volume: 0, onload: callbacks.load, onloaderror: callbacks.error,
     onplay: callbacks.play, onplayerror: callbacks.playError, onunlock: callbacks.unlock,
-  }), { backend: 'html5', onError: (scene, error) => console.warn('[music] load failed', scene, error) });
+  }), { backend: 'html5', onStateChange: () => document.dispatchEvent(new Event('sdt-music-state')), onError: (scene, error) => console.warn('[music] load failed', scene, error) });
   function currentMusicScene() { return resolveMusicScene(musicMode, sceneTone, battleBoss ? battleBossId : ''); }
   function syncBgm() {
     if (disposed) return;
@@ -139,6 +139,10 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
       volume: BASE_MUSIC * dbGain(musicVol) * (ducked ? 0.45 : 1),
       immediate: muted || musicOff || diagnosticBgmOff || !visible,
     });
+  }
+  function retryMusic() {
+    if (disposed || muted || musicOff || diagnosticBgmOff || document.hidden) return false;
+    return musicPlayer.retryFailed();
   }
   function scene(tone, asset = '', metadata = {}) {
     const next = overlayMusicScene(tone, { ...metadata, asset }, sceneTone);
@@ -264,7 +268,7 @@ import { bgmDiagnosticDisabled } from './sound.diagnostic-policy.js';
   if (import.meta.hot) import.meta.hot.dispose(dispose);
 
   sdtDefine('Sound', {
-    sfx, music, scene, setMuted, setMusicMuted, setMusicSource, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, setBoss, setBattlePressure, ensure, dispose,
+    sfx, music, scene, retryMusic, setMuted, setMusicMuted, setMusicSource, setSfxMuted, setMusicVolume, setSfxVolume, setDucked, setBoss, setBattlePressure, ensure, dispose,
     get muted() { return muted; },
     get musicMuted() { return musicOff; },
     get sfxMuted() { return sfxOff; },

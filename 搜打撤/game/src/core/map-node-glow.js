@@ -22,7 +22,7 @@ export function noteGlowPulse(time) {
   if (driving || typeof requestAnimationFrame !== 'function') return;
   driving = true;
   const tick = (now) => {
-    if (now < stopAt && getPerformanceSettings().quality !== 'low') {
+    if (now < stopAt && !reduceMotion() && getPerformanceSettings().quality !== 'low') {
       renderScheduler.invalidateAnimation();
       requestAnimationFrame(tick);
     } else {

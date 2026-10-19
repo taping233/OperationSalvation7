@@ -4,6 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { JSDOM } from 'jsdom';
 import { reviewChange, relatedUiCases } from '../scripts/workflow-change-review.mjs';
 import { fingerprint, repositoryContext, runCheck } from '../scripts/workflow-evidence.mjs';
 import { hash } from '../scripts/workflow-ledger.mjs';
@@ -133,5 +134,71 @@ describe('change review without Git', () => {
   it('a broken Git marker is an error, not an implicit snapshot exemption', () => {
     const root = fixture(); write(root, '.git', 'gitdir: nonexistent-git-dir');
     expect(() => repositoryContext(root)).toThrow('不能按无仓库降级');
+  });
+});
+
+describe('impact-type advice and reusable style candidates', () => {
+  it('spots a changed reviewed resource consumer without rewriting the guard', () => {
+    const root = fixture();
+    const guard = 'scripts/runtime-asset-redundancy-review.mjs';
+    const source = '"game/src/ui/example.js": "' + 'a'.repeat(64) + '"';
+    write(root, guard, source);
+    const result = reviewChange(root, { paths: ['game/src/ui/example.js'] });
+    expect(result.advice.fingerprints).toMatchObject([{ file: 'game/src/ui/example.js', line: 1, status: 'changed-needs-review' }]);
+    expect(result.advice.checks.map(item => item.id)).toEqual(['syntax', 'types', 'lint', 'accessibility', 'resource-selection']);
+    expect(result.advice.checks.every(item => item.status === 'not-run')).toBe(true);
+    expect(readFileSync(path.join(root, guard), 'utf8')).toBe(source);
+    write(root, guard, source.replace('a'.repeat(64), hash(readFileSync(path.join(root, 'game/src/ui/example.js')))));
+    expect(reviewChange(root, { paths: ['game/src/ui/example.js'] }).advice.fingerprints[0].status).toBe('matches');
+  });
+  it('reports exact token candidates with locations, skips unrelated CSS and exposes parse errors', () => {
+    const root = fixture();
+    write(root, 'game/css/secondary-ui-tokens.css', '.ui-design-system { --ui-text-label:18px; --ui-ink:#eef1ed; }');
+    write(root, 'game/css/example.css', '.label { font-size:18px; color:var(--ui-ink); }\n.other { color:#eef1ed; }');
+    write(root, 'game/css/other.css', '.unrelated {font-size:18px}');
+    let result = reviewChange(root, { paths: ['game/css/example.css'] });
+    expect(result.styles.scanned).toEqual(['game/css/example.css']);
+    expect(result.styles.candidates).toMatchObject([
+      { file: 'game/css/example.css', line: 1, property: 'font-size', tokens: ['--ui-text-label'], status: 'candidate-needs-context' },
+      { line: 2, property: 'color', tokens: ['--ui-ink'] },
+    ]);
+    expect(result.plan.mode).toBe('skip');
+    write(root, 'game/css/example.css', '.broken {');
+    result = reviewChange(root, { paths: ['game/css/example.css'] });
+    expect(result.styles.errors).toHaveLength(1);
+  });
+  it('missing recovery data is visible and doc-only changes do not trigger game checks', () => {
+    const root = fixture();
+    const result = reviewChange(root, { paths: ['docs/quality-gates.md'] });
+    expect(result.advice.guardPresent).toBe(false);
+    expect(result.styles.tokenFilePresent).toBe(false);
+    expect(result.advice.checks).toEqual([]);
+    expect(result.styles.candidates).toEqual([]);
+  });
+});
+
+
+describe('production-style UI specimen', () => {
+  it('uses production CSS, real semantic states and isolated local actions', () => {
+    const html = readFileSync('game/dev/ui-state-review.html', 'utf8');
+    const script = readFileSync('game/dev/ui-state-review.js', 'utf8');
+    const dom = new JSDOM(html, { runScripts: 'outside-only' });
+    const document = dom.window.document;
+    expect(document.querySelector('link').getAttribute('href')).toBe('../css/ui-design-system.css');
+    expect(document.querySelector('[aria-busy="true"]').disabled).toBe(true);
+    expect(document.querySelector('.review-narrow')).not.toBeNull();
+    dom.window.eval(script);
+    const toggle = document.querySelector('[data-review-toggle]');
+    toggle.click();
+    expect(toggle.getAttribute('aria-pressed')).toBe('false');
+    expect(toggle.textContent).toContain('未选');
+    toggle.click();
+    expect(toggle.getAttribute('aria-pressed')).toBe('true');
+    const prior = document.querySelector('output').textContent;
+    document.querySelector('[aria-busy]').click();
+    expect(document.querySelector('output').textContent).toBe(prior);
+    expect(script).not.toMatch(/localStorage|sessionStorage|fetch\s*\(|setInterval/);
+    expect(relatedUiCases(process.cwd(), ['game/css/ui-design-system.css']).some(item => item.file === 'game/dev/ui-state-review.html')).toBe(true);
+    dom.window.close();
   });
 });

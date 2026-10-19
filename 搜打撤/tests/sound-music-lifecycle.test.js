@@ -39,11 +39,40 @@ describe('scene BGM explicit media lifecycle', () => {
       error: { scene: 'title', stage: 'load', message: 'Decoding audio data failed.' } });
     expect(h.player.snapshot().tracks).toHaveLength(0);
   });
-  it('does not retry network failure until the user disables and reenables music', () => {
+  it('does not automatically retry network failure; toggling music still recovers', () => {
     const h = harness(); h.set('title'); h.tracks[0].fail('404'); h.set('title');
     expect(h.tracks).toHaveLength(1); expect(h.errors).toEqual([['title', '404']]);
     h.set('title', { enabled: false, immediate: true }); h.set('title');
     expect(h.tracks).toHaveLength(2); expect(h.tracks[1].options.html5).toBe(true);
+  });
+  it('retries only the current failed load once per explicit request and ignores stale callbacks', () => {
+    const h = harness(); h.set('title'); const failed = h.tracks[0]; failed.fail('network');
+    expect(h.player.snapshot().canRetry).toBe(true);
+    expect(h.player.retryFailed()).toBe(true);
+    expect(h.player.snapshot()).toMatchObject({ canRetry: false, error: null });
+    expect(h.player.retryFailed()).toBe(false); h.set('title');
+    expect(h.tracks).toHaveLength(2); expect(h.tracks[1].load).toHaveBeenCalledOnce();
+    failed.fail('late'); failed.ready(); expect(h.player.snapshot().error).toBe(null);
+    h.tracks[1].fail('still offline'); expect(h.player.snapshot().canRetry).toBe(true);
+    expect(h.player.retryFailed()).toBe(true); h.tracks[2].ready(); h.tracks[2].advance(17);
+    expect(h.player.retryFailed()).toBe(false);
+    expect(h.tracks[2].play).toHaveBeenCalledOnce(); expect(h.player.snapshot().positionSeconds).toBe(17);
+  });
+  it('keeps old music and latest gain until an explicitly retried scene actually starts', () => {
+    const h = harness(); h.set('board'); const old = h.tracks[0]; old.ready(); old.advance(12);
+    h.set('shop'); h.tracks[1].fail('offline'); h.set('shop', { volume: .06 });
+    h.player.retryFailed(); expect(old.play).toHaveBeenCalledOnce(); expect(old.pause).not.toHaveBeenCalled();
+    const next = h.tracks[2]; next.play.mockImplementation(() => {}); next.ready();
+    expect(h.player.snapshot().current).toBe('board'); next.started();
+    expect(next.pendingFade).toBe(.06); vi.advanceTimersByTime(932); expect(old.unload).toHaveBeenCalledOnce();
+  });
+  it.each(['mute', 'leave', 'dispose'])('does not retry a stale failure after %s', action => {
+    const h = harness(); h.set('title'); h.tracks[0].fail('offline');
+    if (action === 'mute') h.set('title', { enabled: false, immediate: true });
+    if (action === 'leave') h.set('shop');
+    if (action === 'dispose') h.player.dispose();
+    const count = h.tracks.length;
+    expect(h.player.retryFailed()).toBe(false); expect(h.tracks).toHaveLength(count);
   });
   it('keeps previous music if the next media load fails, without another channel', () => {
     const h = harness(); h.set('board'); h.tracks[0].ready();

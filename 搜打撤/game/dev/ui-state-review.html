@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>公共按钮与决策卡状态样例</title>
+<link rel="stylesheet" href="../css/ui-design-system.css">
+<style>
+/* Specimen layout only. Component appearance comes from production CSS. */
+:root { --font-ui:system-ui,sans-serif; color-scheme:dark; }
+body { margin:24px; background:#101820; color:#eef1ed; font:18px/1.6 var(--font-ui); }
+main { max-width:1200px; margin:auto; }
+.review-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:24px; }
+.review-case { min-width:0; border:1px dashed #627b88; padding:16px; }
+.review-case p { margin:8px 0; }
+.review-case h2 { font-size:20px; }
+.review-narrow { max-width:320px; }
+#reviewResult { min-height:2em; }
+</style>
+</head>
+<body><main>
+<h1>公共按钮与决策卡状态样例</h1>
+<p>开发夹具，不连接存档、音频或游戏指令。悬停和 Tab 焦点使用真实浏览器状态；选中和处理中展示语义属性及文案，未实现的独立视觉状态会原样暴露。样例不是实页验收结果。</p>
+<div id="overlay"><div class="card page"><div class="pg node-pg"><div class="review-grid">
+<section class="review-case ui-design-system"><h2>普通 / 悬停 / 焦点</h2>
+<button type="button" class="ui-action">查看详情<span aria-hidden="true">→</span></button>
+<p>鼠标悬停；Tab 聚焦；回车或空格激活。</p></section>
+<section class="review-case ui-design-system"><h2>主要动作 / 禁用</h2>
+<button type="button" class="ui-action ui-action-primary">确认领取</button>
+<button type="button" class="ui-action" disabled>容量不足，暂不可领取</button></section>
+<section class="review-case ui-design-system ui-node-decision"><h2>选中 / 可取消</h2>
+<button type="button" class="ui-choice" aria-pressed="true" data-review-toggle><b>已选：保留当前装备</b><span>点击切换选中状态；只修改本页样例。</span></button></section>
+<section class="review-case ui-design-system"><h2>处理中 / 防重复</h2>
+<button type="button" class="ui-action" aria-busy="true" disabled>正在整理，请稍候…</button>
+<p>禁用且有状态文案，不会执行真实整理。</p></section>
+<section class="review-case review-narrow ui-design-system ui-node-decision"><h2>320px 长中文决策卡</h2>
+<button type="button" class="ui-choice"><b>将当前背包里所有符合条件的资源整理到仓库，然后返回上一次浏览的位置</b><span>检查换行、信息层级、边界和键盘焦点是否清楚；保持原有装备与存档不变。</span></button></section>
+</div></div></div></div>
+<output id="reviewResult" aria-live="polite">尚未激活样例。</output>
+</main><script type="module" src="./ui-state-review.js"></script></body></html>

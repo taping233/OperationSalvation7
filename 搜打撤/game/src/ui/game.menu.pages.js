@@ -8,6 +8,7 @@ import { storeGet, storeSet } from '../core/storage.js';
 import { achievementGalleryHTML, bindAchievementGallery } from './achievement-gallery.js';
 import { beginnerGuideHTML, beginnerGuidePageCount, updateBeginnerGuide } from './beginner-guide.js';
 import { SLOT_EMBLEMS } from './slot-emblems.js';
+import { bindSettingsAudio } from './settings-audio.js';
 import { initSettingsNavigation } from './settings-navigation.js';
 import { enterAchievementCut } from './camp-entry.js';
 import { reduceMotion } from '../core/motion.js';
@@ -875,6 +876,10 @@ export function createGameMenuPages(deps, shell) {
         <h3 class="set-h">[[icon:gear]] 音频 <span class="set-en">AUDIO</span></h3>
         <label class="chk"><input type="checkbox" id="setMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}> 背景音乐 <span class="set-en">MUSIC</span></label>
         <label class="chk vol"><span>音乐音量 <span class="set-en">MUSIC VOL</span></span><input type="range" id="setMusicVol" min="0" max="100" value="${Math.round(SDT.Sound.musicVolume * 100)}"><b id="setMusicVolVal">${Math.round(SDT.Sound.musicVolume * 100)}</b></label>
+        <div class="settings-music-recovery">
+          <p class="hint" id="setMusicStatus" role="status" aria-live="polite"></p>
+          <button class="mini-btn" type="button" id="setMusicRetry" hidden>重试加载音乐</button>
+        </div>
         <label class="chk"><input type="checkbox" id="setSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效 <span class="set-en">SOUND FX</span></label>
         <label class="chk vol"><span>音效音量 <span class="set-en">SFX VOL</span></span><input type="range" id="setSfxVol" min="0" max="100" value="${Math.round(SDT.Sound.sfxVolume * 100)}"><b id="setSfxVolVal">${Math.round(SDT.Sound.sfxVolume * 100)}</b></label>
         <p class="hint">音乐与音效可分别调节，修改自动保存。侧边栏按钮控制全局静音。</p>
@@ -976,6 +981,7 @@ export function createGameMenuPages(deps, shell) {
       document.body.classList.toggle('reduce-motion', e.target.checked);
       if (SDT.Motion?.refreshReduceMotion) SDT.Motion.refreshReduceMotion();   // 失效缓存（09-20 D-P3），下一次动画立即生效
     });
+    bindSettingsAudio(UI.el.ovBody.querySelector('.settings-page'), UI.el.overlay, SDT.Sound);
     // 音乐 / 音效独立开关（即时生效，随 localStorage 持久化）
     document.getElementById('setMusic').addEventListener('change', (e) => {
       SDT.Sound.setMusicMuted(!e.target.checked);

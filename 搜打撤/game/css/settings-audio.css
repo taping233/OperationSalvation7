@@ -1,0 +1,2 @@
+/* The settings theme uses inline-flex on buttons; preserve the recovery visibility gate. */
+#overlay .pg.settings-page #setMusicRetry[hidden] { display: none; }

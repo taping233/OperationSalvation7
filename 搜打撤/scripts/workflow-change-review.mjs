@@ -5,6 +5,7 @@ import { impactQuery } from './impact-query.mjs';
 import { fingerprint, freshness, repositoryContext } from './workflow-evidence.mjs';
 import { filesUnder } from './workflow-status.mjs';
 import { hash } from './workflow-ledger.mjs';
+import { changeAdvice, styleCandidates } from './workflow-change-advice.mjs';
 import { toProjectPath } from './gate-plan.mjs';
 
 // Navigation hints, not a second gate or a claim of complete UI coverage.
@@ -116,6 +117,7 @@ export function reviewChange(root, { paths, input } = {}) {
     paths: impact.paths, missingPaths: impact.missingPaths,
     registry: { editingRowCount: impact.registry.editingRowCount, hits: impact.registry.hits },
     plan: impact.plan, documents: docs,
+    advice: changeAdvice(root, impact.paths), styles: styleCandidates(root, impact.paths),
     ui: { status: uiRequired ? 'needs-manual-review' : 'not-required-for-tool-only-change', candidates: uiCases,
       limits: ['只按静态引用寻找用例候选，不是完整覆盖清单；实页与真实输入按质量门单独验证。'] },
     verification, commands: impact.commands,

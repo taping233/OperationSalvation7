@@ -24,6 +24,7 @@ export const WORKFLOW_TESTS = new Map([
   ['scripts/workflow-task-input.mjs', ['tests/workflow-task-input.test.js', 'tests/docs-consistency.test.js', 'tests/workflow-cli-integration.test.js']],
   ['scripts/workflow-doctor.mjs', ['tests/workflow-doctor.test.js', 'tests/workflow-cli-integration.test.js']],
   ['scripts/workflow-evidence.mjs', ['tests/workflow-scope.test.js', 'tests/workflow-tools.test.js', 'tests/workflow-change-review.test.js']],
+  ['scripts/workflow-change-advice.mjs', ['tests/workflow-change-review.test.js']],
   ['scripts/workflow-change-review.mjs', ['tests/workflow-change-review.test.js']],
   ['scripts/workflow-dependencies.mjs', ['tests/workflow-dependencies.test.js', 'tests/workflow-scope.test.js']],
   ['scripts/workflow-status.mjs', ['tests/workflow-handoff.test.js', 'tests/workflow-tools.test.js']],

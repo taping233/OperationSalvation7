@@ -535,6 +535,46 @@ describe('battle frame lifecycle', () => {
     } finally { facade.Motion = previous; }
   });
 
+  it('restores static art when reduced motion changes while the first texture is pending', async () => {
+    const facade = (await import('../game/src/core/sdt-facade.js')).default;
+    const previous = facade.Motion;
+    let reduced = false;
+    facade.Motion = { reduceMotion: () => reduced };
+    pixi.loadGate = new Promise(resolve => { pixi.finishLoad = resolve; });
+    try {
+      const pending = attach(document.getElementById('ovBody'));
+      await vi.waitFor(() => expect(pixi.inFlight).toBe(1));
+      reduced = true; pixi.finishLoad(); pixi.loadGate = null;
+      await pending;
+      expect(cacheStats().activeFrameSessions).toBe(0);
+      expect(document.querySelector('#btSelf img').style.visibility).toBe('');
+      expect(document.getElementById('unitFrames').hidden).toBe(true);
+    } finally { facade.Motion = previous; }
+  });
+
+  it.each(['tick', 'action', 'poll'])('retires live character frames on reduced motion before the next %s', async action => {
+    const facade = (await import('../game/src/core/sdt-facade.js')).default;
+    const previous = facade.Motion;
+    let reduced = false;
+    facade.Motion = { reduceMotion: () => reduced };
+    const intervals = vi.spyOn(globalThis, 'setInterval');
+    try {
+      await attach(document.getElementById('ovBody')); await finishFrames('changwuyu');
+      const rendered = pixi.rendered;
+      reduced = true;
+      if (action === 'tick') pixi.tick();
+      else if (action === 'poll') intervals.mock.calls.find(call => call[1] === 200)[0]();
+      else expect(play('atk')).toBe(false);
+      expect(pixi.rendered).toBe(rendered);
+      expect(cacheStats().activeFrameSessions).toBe(0);
+      expect(document.querySelector('#btSelf img').style.visibility).toBe('');
+      expect(document.getElementById('unitFrames').hidden).toBe(true);
+      reduced = false;
+      expect(await attach(document.getElementById('ovBody'))).toBe(true);
+      expect(cacheStats().activeFrameSessions).toBe(1);
+    } finally { facade.Motion = previous; }
+  });
+
   it('waits for pending frame batches to unload before a new attach', async () => {
     hide();
     const body = document.getElementById('ovBody');

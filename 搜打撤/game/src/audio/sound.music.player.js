@@ -1,6 +1,6 @@
 // Long BGM uses the browser media backend; never falls back to whole-file WebAudio decoding.
 export class SceneMusicPlayer {
-  constructor(createTrack, { fadeInMs = 1100, fadeOutMs = 900, backend = 'html5', onError = () => {} } = {}) {
+  constructor(createTrack, { fadeInMs = 1100, fadeOutMs = 900, backend = 'html5', onError = () => {}, onStateChange = () => {} } = {}) {
     if (!['html5', 'webaudio'].includes(backend)) throw new Error('Unsupported music backend');
     this.backend = backend;
     this.lastError = null;
@@ -9,6 +9,7 @@ export class SceneMusicPlayer {
     this.fadeInMs = fadeInMs;
     this.fadeOutMs = fadeOutMs;
     this.onError = onError;
+    this.onStateChange = onStateChange;
     this.entries = new Map();
     this.current = null;
     this.desired = null;
@@ -18,7 +19,12 @@ export class SceneMusicPlayer {
 
   playing() { return !!this.current?.track.playing(); }
 
-  set(scene, { enabled, volume, immediate = false }) {
+  set(scene, options) {
+    this.setState(scene, options);
+    this.onStateChange();
+  }
+
+  setState(scene, { enabled, volume, immediate = false }) {
     const changed = this.desired !== scene || this.enabled !== enabled;
     const gainChanged = this.volume !== volume;
     if (changed) { this.failedScene = null; this.lastError = null; }
@@ -56,6 +62,7 @@ export class SceneMusicPlayer {
           entry.loading = false;
           if (this.desired === scene && this.enabled) this.activate(entry);
           else this.release(entry);
+          this.onStateChange();
         },
         error: (_, error) => {
           if (!current()) return;
@@ -65,22 +72,25 @@ export class SceneMusicPlayer {
           this.onError(scene, error);
           // Keep the previous valid track audible if the next file fails to load.
           if (this.current !== entry || !entry.track.playing()) this.release(entry);
+          this.onStateChange();
         },
         play: () => {
           if (!current()) return;
           entry.starting = false;
           if (!this.enabled || this.desired !== scene) return;
           this.commit(entry);
+          this.onStateChange();
         },
         playError: (_, error) => {
           if (!current()) return;
           entry.starting = false;
           entry.blocked = true;
           this.lastError = { scene, stage: 'play', message: String(error || 'Playback blocked; waiting for user gesture') };
+          this.onStateChange();
         },
         unlock: () => {
           if (!current()) return;
-          if (this.enabled && this.desired === scene) { entry.blocked = false; this.activate(entry); }
+          if (this.enabled && this.desired === scene) { entry.blocked = false; this.activate(entry); this.onStateChange(); }
         },
         };
         return this.createTrack(scene, callbacks, { html5: this.backend === 'html5', backend: this.backend });
@@ -118,11 +128,22 @@ export class SceneMusicPlayer {
     this.applyVolume(entry, this.volume, this.fadeInMs);
   }
 
+  retryFailed() {
+    // Explicit retry only: normal sync/input must not repeatedly download a failed file.
+    if (!this.enabled || !this.desired || this.failedScene !== this.desired) return false;
+    if (this.current?.scene === this.desired && this.current.track.playing()) return false;
+    this.failedScene = null;
+    this.lastError = null;
+    this.set(this.desired, { enabled: this.enabled, volume: this.volume });
+    return true;
+  }
+
   retryBlocked() {
     const entry = this.entries.get(this.desired);
     if (!this.enabled || !entry?.blocked) return;
     entry.blocked = false;
     this.activate(entry);
+    this.onStateChange();
   }
 
   applyVolume(entry, volume, duration) {
@@ -180,7 +201,7 @@ export class SceneMusicPlayer {
         return typeof value === 'number' && Number.isFinite(value) ? value : null;
       } catch { return null; }
     };
-    return { backend: this.backend, volume: this.current?.track.volume() ?? 0, targetVolume: this.volume, playing: this.playing(), positionSeconds: position(this.current), error: this.lastError, requested: this.desired, current: this.current?.scene || null, enabled: this.enabled,
+    return { backend: this.backend, volume: this.current?.track.volume() ?? 0, targetVolume: this.volume, playing: this.playing(), positionSeconds: position(this.current), error: this.lastError, canRetry: !!(this.enabled && this.desired && this.failedScene === this.desired && !(this.current?.scene === this.desired && this.current.track.playing())), requested: this.desired, current: this.current?.scene || null, enabled: this.enabled,
       fadeInMs: this.fadeInMs, fadeOutMs: this.fadeOutMs,
       tracks: [...this.entries.values()].map(e => ({ scene: e.scene, backend: e.backend, positionSeconds: position(e), state: e.track.state(), playing: e.track.playing(), volume: e.track.volume(), fadingOut: e.timer !== null })) };
   }

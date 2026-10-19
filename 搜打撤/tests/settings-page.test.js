@@ -34,7 +34,7 @@ describe('settings page layout and controls', () => {
     const { acts, UI } = openSettings();
     const root = UI.el.ovBody.querySelector('.settings-page');
     expect(root.querySelectorAll('.settings-group')).toHaveLength(6);
-    for (const id of ['setIndex', 'setHint', 'setBanner', 'setDev', 'setShake', 'setReduceMotion', 'setQuality', 'setFrameLimit', 'setMusic', 'setMusicVol', 'setSfx', 'setSfxVol']) {
+    for (const id of ['setIndex', 'setHint', 'setBanner', 'setDev', 'setShake', 'setReduceMotion', 'setQuality', 'setFrameLimit', 'setMusic', 'setMusicVol', 'setMusicStatus', 'setMusicRetry', 'setSfx', 'setSfxVol']) {
       expect(root.querySelector(`#${id}`), `missing #${id}`).not.toBeNull();
     }
     expect(root.querySelector('#setMusicSource')).toBeNull(); // 配乐固定使用已实装原创曲库。
