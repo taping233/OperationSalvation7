@@ -219,7 +219,9 @@ export function createBattleLifecycle({
     // Restore uses this same entry. Visible fighters load through their own scene images.
     try {
       if (SDT.Art?.collectCardAssets && SDT.Art?.warm) {
-        const cards = (G.ownedCards || []).map(o => o && o.card).filter(Boolean);
+        // These inventory-only types never enter combat hand, deck selection or item dock.
+        const cards = (G.ownedCards || []).map(o => o && o.card)
+          .filter(card => card && !['资源', '事件', '生物'].includes(card.type));
         SDT.Art.warm(SDT.Art.collectCardAssets(cards, { includePortraits: false }), { retain: false });
       }
     } catch { /* Optional artwork warmup must not block battle entry. */ }

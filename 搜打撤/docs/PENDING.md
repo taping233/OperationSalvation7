@@ -23,6 +23,10 @@
 | 31 | 收据表修剪的重放契约策略如何定版（原审计B-3） | 10-02 | docs/evidence/2026-10-02-code-audit/REPORT.md；archive/WF-ledger-cleanup-1014/originals/docs/PENDING.md | A档清理和B-1已完成，不再待批；B-2走格落盘优化转roadmap。B-3仍需定义重放保留边界，未实施 |
 | 32 | 是否安排Git历史瘦身及强推窗口 | 10-02 | docs/evidence/2026-10-02-flow-efficiency/README.md；docs/evidence/2026-10-14-WF-local-cleanup-1014/README.md | 10-14已清理工作区固定历史媒体，未重写Git历史；原体积为历史测量。重写会改变提交SHA并影响协作，仍待选择保守保留或另开迁移窗口 |
 
+## 员工通行证C的地图使用语义（2026-10-19复核）
+
+现行 rules.md:120 与地图消费器为随机直授，原卡面/M-BATCH-MATRIX:186为发现；9/27 M6-D8-RESULT:64引用9/9“背包中使用直接获得”且保留迁移待拍板记录。战斗消费器当前明确打开发现。缺少后续直接定版证据，暂维持现状，不将整卡统一改随机、不迁移玩法；须明确地图应随机还是交互发现，再同步按场景文案并保护自定义描述。
+
 ## 已决记录（不计入活账）
 
 历史决定、旧编号重复和原验收状态保留在[整理前原文](archive/WF-ledger-cleanup-1014/originals/docs/PENDING.md)；本轮逐项处置见[清理记录](evidence/2026-10-14-WF-ledger-cleanup-1014/README.md)。
