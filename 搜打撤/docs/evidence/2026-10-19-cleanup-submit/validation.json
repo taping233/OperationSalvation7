@@ -1,0 +1,54 @@
+{
+  "commit": "3c5d850febc10d68a67e503f04e468a9bb2bd5b2",
+  "files": 271,
+  "mode": "full",
+  "outcome": "passed",
+  "validation": {
+    "executed": true,
+    "passed": true,
+    "reusableReceipt": true,
+    "reason": "STAGED_PASSED"
+  },
+  "snapshotRemoved": true,
+  "testFilesPassed": 648,
+  "testsPassed": 6469,
+  "testsSkipped": 16,
+  "firstAttempt": {
+    "testsPassed": 6467,
+    "testsFailed": 2,
+    "reason": "ignored EXE link / missing historical README / obsolete total manifest count",
+    "resolved": true
+  },
+  "acquisition": "npm run --silent workflow -- staged --task WF-cleanup-submit-1019 --json",
+  "reports": [
+    {
+      "path": "docs/evidence/2026-10-19-WF-cleanup-submit-1019/2026-10-19T12-41-15.110Z-0ac2762d-staged.json",
+      "bytes": 3918828,
+      "sha256": "58edb1010f7b65f24c3cea846ab2001c744f85e3e1cacd19c26d0e1d4d91515b",
+      "storage": "local generated evidence; not added to Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-19-WF-cleanup-submit-1019/2026-10-19T12-41-15.110Z-0ac2762d-staged.log",
+      "bytes": 46380,
+      "sha256": "8c299f6a023bf8c33416d31f7d53580663e18d0ede28fdd6e0f143140c029be1",
+      "storage": "local generated evidence; not added to Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-19-WF-cleanup-submit-1019/2026-10-19T12-53-07.363Z-3562518c-staged.json",
+      "bytes": 4081035,
+      "sha256": "a19ceca9b1d914db7e16098e12b8f4784a7feb70b16805a86d8815820da707f3",
+      "storage": "local generated evidence; not added to Git"
+    },
+    {
+      "path": "docs/evidence/2026-10-19-WF-cleanup-submit-1019/2026-10-19T12-53-07.363Z-3562518c-staged.log",
+      "bytes": 44984,
+      "sha256": "be1fabdd87c09ce9739ebbb95c89e4e3372fe71f3dc871ffb6abd0994636cd89",
+      "storage": "local generated evidence; not added to Git"
+    }
+  ],
+  "limits": [
+    "No build or game browser work",
+    "Not pushed; remote CI does not cover this commit",
+    "Other sessions and coupled incomplete changes remain unstaged"
+  ]
+}
