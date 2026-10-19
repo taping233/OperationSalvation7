@@ -1,0 +1,64 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ✓ tests/architecture-boundaries.test.js (24 tests) 625ms
+   ✓ 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向  606ms
+ ✓ tests/contracts.test.js (17 tests) 680ms
+   ✓ ESM 依赖方向 > src 模块不存在循环依赖  637ms
+ ✓ tests/base-hub-business-lifecycle-audit.test.js (14 tests) 1492ms
+   ✓ 基地恢复、扩建与外观旧动作 > 换档之后旧restoreCard不能调用新档业务命令  508ms
+stdout | tests/card-browser-state.test.js > retained card browser state > 100 identical filters/selections keep 200 controls and emit zero list mutations
+200 retained controls, 100 unchanged projections: 0 list DOM mutations; selection change: 4 attribute mutations
+
+ ✓ tests/hub-personnel-portrait.test.js (8 tests) 169ms
+ ✓ tests/card-browser-state.test.js (13 tests) 547ms
+   ✓ retained card browser state > 100 identical filters/selections keep 200 controls and emit zero list mutations  391ms
+ ✓ tests/base-inventory-lifecycle-audit.test.js (45 tests) 2302ms
+   ✓ coalesces warehouse image load bursts into one layout refresh and ignores departed pages  333ms
+ ✓ tests/hub-collection-v4.test.js (4 tests) 152ms
+ ✓ tests/card-browser.test.js (2 tests) 73ms
+ ✓ tests/runtime-asset-redundancy.test.js (23 tests) 2194ms
+   ✓ reviewed production-only asset omissions > contains 56 previous paths, 90 retired chest frames, 19 retired scenes and 30 shadowed card files  1099ms
+   ✓ reviewed production-only asset omissions > omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs  959ms
+
+ Test Files  9 passed (9)
+      Tests  150 passed (150)
+   Start at  16:39:43
+   Duration  5.68s (transform 576ms, setup 0ms, collect 784ms, tests 8.23s, environment 2.98s, prepare 569ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 check:syntax
+> node scripts/check-syntax.mjs
+
+Syntax check passed (497 project files).
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 typecheck
+> node scripts/check-types.mjs
+
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 lint
+> eslint game/src game/tools tests scripts "*config.{js,mjs,cjs}"
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

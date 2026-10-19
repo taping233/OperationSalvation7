@@ -41,6 +41,29 @@ describe('retained card browser state', () => {
     expect(observer.read()).toHaveLength(4); observer.stop();
     console.log('200 retained controls, 100 unchanged projections: 0 list DOM mutations; selection change: 4 attribute mutations');
   });
+  it('keeps keyboard focus on visible cards when paging and filtering, including an empty result', () => {
+    const root=mount(9), items=cardBrowserItems(root);
+    items[1].focus();items[1].dispatchEvent(new KeyboardEvent('keydown',{key:'PageDown',bubbles:true}));
+    expect(document.activeElement).toBe(items[4]);expect(items[4].hidden).toBe(false);
+    filterCardBrowserItems(root,item=>item.dataset.browserKey==='8');refreshCardBrowser(root,{reset:true});
+    expect(document.activeElement).toBe(items[8]);
+    filterCardBrowserItems(root,()=>false);refreshCardBrowser(root,{reset:true});
+    expect(document.activeElement).toBe(root);expect(root.querySelector('.card-browser-position').textContent).toBe('暂无卡牌');
+  });
+  it('keeps the focused card visible across column changes without stealing search focus', () => {
+    const root=mount(12), items=cardBrowserItems(root);
+    root.querySelector('[data-browser-page="next"]').click();items[6].focus();
+    root.dataset.browserColumns='2';refreshCardBrowser(root);
+    expect(document.activeElement).toBe(items[6]);expect(items[6].hidden).toBe(false);
+    const search=document.createElement('input');document.body.append(search);search.focus();
+    filterCardBrowserItems(root,()=>false);refreshCardBrowser(root,{reset:true});expect(document.activeElement).toBe(search);
+  });
+  it.each(['inert','hidden','closing'])('does not page while the browser is %s', state => {
+    const root=mount(9);
+    if(state==='closing')root.classList.add('closing');else root.setAttribute(state,'');
+    root.querySelector('[data-browser-page="next"]').click();
+    expect(root.querySelector('.card-browser-position').textContent).toBe('1 / 3');
+  });
   it('same-call items skip another selector scan; replacement and insertion require a fresh list', () => {
     const root = mount(8), track = root.querySelector('.card-browser-track');
     const {items} = filterCardBrowserItems(root, () => true);
@@ -88,7 +111,10 @@ describe('collection and personnel consumers', () => {
     expect(reads).toBe(1); expect(document.querySelector('[data-act="collectionV12Zoom"]')).toBe(detail);
     expect(observer.read()).toHaveLength(0); observer.stop();
     catalog[1].name='更新后的卡'; button.click(); expect(document.querySelector('.collection-v12-stage').textContent).toContain('更新后的卡');
-    const input=document.querySelector('[data-collection-query]'); input.value='无匹配'; input.dispatchEvent(new Event('input'));
+    const input=document.querySelector('[data-collection-query]'); input.value='无匹配';
+    input.dispatchEvent(new InputEvent('input',{isComposing:true}));
+    expect(browser.querySelector('[data-browser-key]').hidden).toBe(false);
+    input.dispatchEvent(new window.CompositionEvent('compositionend'));
     expect([...browser.querySelectorAll('[data-browser-key]')].every(item=>item.hidden)).toBe(true);
     ui.acts.collectionReset(); expect(browser.querySelector('[data-browser-key]').hidden).toBe(false);
   });
@@ -111,5 +137,11 @@ describe('collection and personnel consumers', () => {
     expect(observer.read()).toHaveLength(0); expect(cardBrowserItems(root)).toEqual(items);
     ui.acts.personPoolPick({id:'1'}); expect(observer.read()).toHaveLength(4);
     expect(ui.showCardZoom).toHaveBeenCalledOnce(); observer.stop();
+    root.querySelector('[data-browser-page="next"]').click();
+    expect(root.querySelector('.card-browser-position').textContent).toBe('2 / 3');
+    ui.acts.personPoolType({type:''});expect(root.querySelector('.card-browser-position').textContent).toBe('2 / 3');
+    const saved=document.body.innerHTML;document.body.innerHTML=saved;
+    bindPersonnel({ui,refresh:vi.fn(),sound:{tick:vi.fn()}});
+    expect(document.querySelector('.card-browser-position').textContent).toBe('2 / 3');
   });
 });

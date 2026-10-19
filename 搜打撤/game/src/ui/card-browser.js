@@ -22,6 +22,11 @@ export function refreshCardBrowser(root, { reset = false, items: suppliedItems =
   const fixedColumns = Math.max(0, Number(root.dataset.browserColumns) || 0);
   const columns = fixedColumns || Math.min(fit, Math.max(1, Math.ceil(visible.length / rows)));
   const perPage = columns * rows;
+  const focused = document.activeElement;
+  const focusedItem = focused?.closest?.('[data-browser-key]');
+  const focusedIndex = visibleIndex.get(focusedItem);
+  if (!reset && state.perPage && state.perPage !== perPage && focusedIndex !== undefined) state.page = Math.floor(focusedIndex / perPage);
+  state.perPage = perPage;
   const pages = Math.max(1, Math.ceil(visible.length / perPage));
   state.page = reset ? 0 : Math.min(state.page, pages - 1);
   const gridColumns = `repeat(${columns}, minmax(0, ${fixedColumns ? '1fr' : `${minimum}px`}))`;
@@ -41,17 +46,23 @@ export function refreshCardBrowser(root, { reset = false, items: suppliedItems =
   if (next.disabled !== (state.page >= pages - 1)) next.disabled = state.page >= pages - 1;
   const label = visible.length ? `${state.page + 1} / ${pages}` : '暂无卡牌';
   if (position.textContent !== label) position.textContent = label;
+  // Paging/filtering must not strand keyboard focus in a newly hidden card or disabled arrow.
+  if (root.contains(focused) && ((focusedItem && focusedItem.hidden) || focused?.matches?.('[data-browser-page]:disabled'))) {
+    const target = visible[first] || [previous, next].find(button => !button.disabled);
+    if (target) target.focus({ preventScroll:true });
+    else { root.tabIndex = -1; root.focus({ preventScroll:true }); }
+  }
 }
 export function bindCardBrowser(root, { onOpen, onPage } = {}) {
   if (!root || instances.has(root)) return;
   const key = `${window.SDT?.Base?.slot || ''}/${root.dataset.cardBrowser}`;
-  const state = positions.get(key) || { page: 0 };
+  const state = { ...(positions.get(key) || { page: 0 }) };
   positions.delete(key); positions.set(key, state);
   while (positions.size > 64) positions.delete(positions.keys().next().value);
   instances.set(root, state);
   let loadFrame = 0;
   root.addEventListener('click', event => {
-    if (!isCardBrowserCurrent(root)) return;
+    if (!isCardBrowserCurrent(root) || root.closest('[hidden], [inert], [aria-hidden="true"], .closing')) return;
     const paging = event.target.closest('[data-browser-page]');
     if (paging && root.contains(paging) && !paging.disabled) {
       state.page += paging.dataset.browserPage === 'next' ? 1 : -1;
@@ -61,8 +72,8 @@ export function bindCardBrowser(root, { onOpen, onPage } = {}) {
     if (item && root.contains(item) && !item.hidden) onOpen?.(item.dataset.browserKey, item);
   });
   root.addEventListener('keydown', event => {
-    if (!isCardBrowserCurrent(root)) return;
-    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    if (!isCardBrowserCurrent(root) || root.closest('[hidden], [inert], [aria-hidden="true"], .closing')) return;
+    if (event.defaultPrevented || event.isComposing || event.altKey || event.ctrlKey || event.metaKey || event.target?.closest?.('input, textarea, select, [contenteditable="true"]')) return;
     const direction = event.key === 'PageDown' ? 'next' : event.key === 'PageUp' ? 'previous' : null;
     if (direction) { event.preventDefault(); root.querySelector(`[data-browser-page="${direction}"]`).click(); }
   });

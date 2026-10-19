@@ -112,12 +112,21 @@ export function bindPersonnel({ ui, refresh, sound }) {
       && (!browse.poolType || card.dataset.type === browse.poolType));
     poolRoot.querySelector('[data-person-pool-count]').textContent = `${visible.length} / ${items.length} 张`;
     poolRoot.querySelector('.pool-empty').hidden = visible.length > 0;
-    refreshCardBrowser(browser, { reset: true, items });
+    refreshCardBrowser(browser, { reset: animate, items });
     if (!visible.some(button => button.dataset.id === browse.poolPick)) browse.poolPick = visible[0]?.dataset.id || '';
     if (animate) animateBaseRefresh(browser.querySelector('.card-browser-track'));
     selectCardBrowserItems(items, browse.poolPick, { key:'id' });
   };
-  for (const input of poolRoot?.querySelectorAll('[data-person-pool]') || []) input.addEventListener(input.tagName === 'SELECT' ? 'change' : 'input', () => { if (!isCardBrowserCurrent(poolRoot)) return; if (input.dataset.personPool === 'query') browse.query = input.value; else browse.poolStatus = input.value; applyPoolFilter(true); });
+  for (const input of poolRoot?.querySelectorAll('[data-person-pool]') || []) {
+    const applyInput = event => {
+      if (!isCardBrowserCurrent(poolRoot) || event.isComposing) return;
+      if (input.dataset.personPool === 'query') { if (browse.query === input.value) return; browse.query = input.value; }
+      else { if (browse.poolStatus === input.value) return; browse.poolStatus = input.value; }
+      applyPoolFilter(true);
+    };
+    input.addEventListener(input.tagName === 'SELECT' ? 'change' : 'input', applyInput);
+    if (input.tagName !== 'SELECT') input.addEventListener('compositionend', applyInput);
+  }
   bindCardBrowser(browser, { onPage: () => { sound.tick(); animateBaseRefresh(browser.querySelector('.card-browser-track')); }, onOpen: (id, from) => {
     if (!isCardBrowserCurrent(poolRoot)) return;
     const card = window.SDT.Cards.classPool(characterFor(browse.poolCharacter)?.rulesetId).find(item => item.id === id);
@@ -131,7 +140,7 @@ export function bindPersonnel({ ui, refresh, sound }) {
   applyPoolFilter();
 
   bindCardNavigation(browser?.querySelector('.card-browser-track'), '.person-pool-card', { activate: false });
-  ui.act('personPoolType', data => { if (!isCardBrowserCurrent(poolRoot)) return; browse.poolType = data.type; for (const button of poolRoot.querySelectorAll('[data-act="personPoolType"]')) { const on = button.dataset.type === browse.poolType; button.classList.toggle('ok', on); button.setAttribute('aria-pressed', String(on)); } applyPoolFilter(true); sound.tick(); });
+  ui.act('personPoolType', data => { if (!isCardBrowserCurrent(poolRoot) || browse.poolType === data.type) return; browse.poolType = data.type; for (const button of poolRoot.querySelectorAll('[data-act="personPoolType"]')) { const on = button.dataset.type === browse.poolType; button.classList.toggle('ok', on); button.setAttribute('aria-pressed', String(on)); } applyPoolFilter(true); sound.tick(); });
   ui.act('personPoolReset', () => { if (!isCardBrowserCurrent(poolRoot)) return; browse.query = ''; browse.poolStatus = ''; browse.poolType = ''; for (const button of poolRoot?.querySelectorAll('[data-act="personPoolType"]') || []) { const on = !button.dataset.type; button.classList.toggle('ok', on); button.setAttribute('aria-pressed', String(on)); } for (const input of poolRoot?.querySelectorAll('[data-person-pool]') || []) input.value = ''; applyPoolFilter(true); });
   ui.act('personPoolPick', data => {
     if (!isCardBrowserCurrent(poolRoot)) return;

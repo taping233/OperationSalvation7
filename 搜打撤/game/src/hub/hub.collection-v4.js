@@ -80,8 +80,11 @@ export function bindCollectionCards({ root, base, cards, ui }) {
     decorateInventoryZoom(card);
   });
   bindCardNavigation(browser.querySelector('.card-browser-track'), '[data-browser-key]', { activate:false });
-  content.querySelector('[data-collection-query]').addEventListener('input', event => { if (!current()) return; query = event.target.value; update(true); });
-  content.querySelector('[data-collection-type]').addEventListener('change', event => { if (!current()) return; type = event.target.value; update(true); });
+  const queryInput = content.querySelector('[data-collection-query]');
+  const applyQuery = event => { if (!current() || event.isComposing || query === queryInput.value) return; query = queryInput.value; update(true); };
+  queryInput.addEventListener('input', applyQuery);
+  queryInput.addEventListener('compositionend', applyQuery);
+  content.querySelector('[data-collection-type]').addEventListener('change', event => { if (!current() || type === event.target.value) return; type = event.target.value; update(true); });
   ui.act('collectionReset', () => { if (!current()) return; query = ''; type = ''; content.querySelector('input').value = ''; content.querySelector('select').value = ''; update(true); });
   update();
 }
