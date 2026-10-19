@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { runTerminalSettlement } from '../game/src/ui/terminal-settlement.js';
 import { createGameMenuController } from './helpers/menu-controller.js';
 
 beforeEach(() => {
@@ -50,4 +51,48 @@ describe('终局入口幂等', () => {
     expect(UI.log).toHaveBeenCalledTimes(2);
   });
 
+});
+
+
+describe('shared terminal retry feedback', () => {
+  it.each([
+    ['run.death', 'retryDeath'], ['run.abandon', 'retryAbandon'],
+  ])('%s shows pending feedback and restores retry after failed persistence', async (command, retryAct) => {
+    document.body.innerHTML = '<div id="ovBody"></div>';
+    const root = document.getElementById('ovBody'), actions = new Map();
+    let settle;
+    const pending = new Promise(resolve => { settle = resolve; });
+    const commands = {
+      createAttempt: vi.fn().mockResolvedValueOnce({ ok: false, message: '请重试' })
+        .mockResolvedValue({ ok: true, attempt: { id: 'one-attempt' } }),
+      commitAttempt: vi.fn().mockReturnValueOnce(pending).mockResolvedValue({ ok: true }),
+    };
+    const finish = vi.fn(() => { root.textContent = '结算完成'; return true; });
+    const token = { busy: false, promise: null };
+    const UI = { el: { ovBody: root }, showOverlay(_title, html) { root.innerHTML = html; },
+      act(name, action) { actions.set(name, action); }, refresh() {} };
+    await runTerminalSettlement({ token, current: () => true, game: {}, UI, finish,
+      command, retryAct, terminalCommands: commands });
+    const retry = root.querySelector('button');
+    expect(retry.disabled).toBe(false);
+    const result = actions.get(retryAct)();
+    expect(retry.disabled).toBe(true);
+    expect(retry.getAttribute('aria-busy')).toBe('true');
+    expect(retry.textContent).toBe('正在结算…');
+    expect(root.querySelector('[role="status"]').textContent).toContain('正在保存结算');
+    actions.get(retryAct)(); await Promise.resolve();
+    expect(commands.createAttempt).toHaveBeenCalledTimes(2);
+    expect(commands.commitAttempt).toHaveBeenCalledOnce();
+    settle({ ok: false, message: '仍未保存' }); await result;
+    expect(root.querySelector('button').disabled).toBe(false);
+    expect(root.querySelector('button').textContent).toBe('重试结算');
+    expect(root.querySelector('[role="status"]').textContent).toBe('');
+    expect(root.textContent).toContain('仍未保存');
+    expect(finish).not.toHaveBeenCalled();
+    expect(await actions.get(retryAct)()).toBe(true);
+    expect(commands.createAttempt).toHaveBeenCalledTimes(2);
+    expect(commands.commitAttempt).toHaveBeenCalledTimes(2);
+    expect(finish).toHaveBeenCalledOnce();
+    expect(root.textContent).toBe('结算完成');
+  });
 });

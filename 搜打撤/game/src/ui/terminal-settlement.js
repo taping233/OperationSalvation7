@@ -16,7 +16,7 @@ import { esc } from '../core/shared.js';
  * @param {{busy: boolean, promise: (Promise<boolean>|null), ephemeral?: *, attempt?: *, cards?: *}} p.token
  * @param {() => boolean} p.current  终局态仍成立的守卫（失效即放弃后续提交与提示）
  * @param {object} p.game  传给 UI.refresh 的对局对象
- * @param {{showOverlay: (title: string, html: string) => void, act: (name: string, handler: () => void) => void, refresh: (game: object) => void}} p.UI
+ * @param {{el?: {ovBody?: HTMLElement}, showOverlay: (title: string, html: string) => void, act: (name: string, handler: () => void) => void, refresh: (game: object) => void}} p.UI
  * @param {(levelsGained?: *) => *} p.finish
  * @param {string} p.command
  * @param {string} p.retryAct
@@ -35,8 +35,21 @@ export function runTerminalSettlement({ token, current, game, UI, finish, comman
     // 刷新兜底是因为待恢复事务会由恢复流程自动续完，普通失败则对局档原样保留。
     UI.showOverlay('[[icon:cross]] 终局结算未保存', `<p class="ov-note">${esc(message || '基地与对局尚未完成结算，原对局仍保留。')}</p>` +
       '<p class="ov-note">你的对局进度和能抢运的卡牌都还保留在本档位里，不会丢失；下面重试不会重复扣牌、也不会重复发奖。若暂时重试不成，退出游戏再进入也能继续。</p>' +
-      `<button class="ov-btn ok" data-act="${retryAct}">重试结算</button>`);
-    UI.act(retryAct, () => { if (current() && !token.busy) return run(); });
+      `<button class="ov-btn ok" data-terminal-retry data-act="${retryAct}">重试结算</button>` +
+      '<p class="ov-note" data-terminal-retry-status role="status" aria-live="polite"></p>');
+    const button = UI.el?.ovBody?.querySelector('button[data-terminal-retry]');
+    const status = UI.el?.ovBody?.querySelector('[data-terminal-retry-status]');
+    UI.act(retryAct, () => {
+      if (!current() || token.busy) return;
+      // Both death and abandon reuse native button states; transaction ownership stays below.
+      if (button && button instanceof HTMLButtonElement) {
+        button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
+        button.textContent = '正在结算…';
+      }
+      if (status) status.textContent = '正在保存结算，请稍候…';
+      return run();
+    });
     UI.refresh(game);
   };
   const run = async () => {

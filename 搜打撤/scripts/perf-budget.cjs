@@ -54,28 +54,47 @@ function inspectInitialJs(outDir, html, { exists = existsSync, stat = statSync }
 
 // Equal content must have equal byte length. Only same-size candidates need hashing.
 // Inputs are the completed build output; stat failures remain fatal, as before.
-function inspectPackageBytes(files, { stat = statSync, read = readFileSync } = {}) {
+function inspectPackageBytes(files, { stat = statSync, read = readFileSync, details = false, root = null } = {}) {
   let packageBytes = 0;
-  const sizes = new Map();
+  const sizes = new Map(), entries = [], categories = new Map(), duplicateGroups = [];
+  const relative = file => root ? path.relative(root, file).split(path.sep).join('/') : file;
   for (const file of files) {
     const bytes = stat(file).size;
     packageBytes += bytes;
+    if (details) {
+      const extension = path.extname(file).toLowerCase() || '(no extension)';
+      const category = categories.get(extension) || { extension, bytes: 0, files: 0 };
+      category.bytes += bytes; category.files++;
+      categories.set(extension, category);
+      entries.push({ file: relative(file), bytes });
+    }
     const group = sizes.get(bytes) || [];
     group.push(file);
     sizes.set(bytes, group);
   }
   let duplicateBytes = 0;
-  for (const candidates of sizes.values()) {
+  for (const [bytes, candidates] of sizes) {
     if (candidates.length < 2) continue;
-    const hashes = new Set();
+    const hashes = new Map();
     for (const file of candidates) {
       const body = read(file);
       const hash = createHash('sha256').update(body).digest('hex');
       if (hashes.has(hash)) duplicateBytes += body.length;
-      else hashes.add(hash);
+      const copies = hashes.get(hash) || [];
+      copies.push(file);
+      hashes.set(hash, copies);
+    }
+    if (details) for (const copies of hashes.values()) {
+      if (copies.length > 1) duplicateGroups.push({ files: copies.slice(0, 12).map(relative), copies: copies.length, filesTruncated: copies.length > 12,
+        wastedBytes: bytes * (copies.length - 1) });
     }
   }
-  return { packageBytes, duplicateBytes };
+  const order = (a, b) => b.bytes - a.bytes || String(a.file || a.extension).localeCompare(String(b.file || b.extension));
+  return { packageBytes, duplicateBytes, ...(details ? { composition: {
+    categories: [...categories.values()].sort(order), largest: entries.sort(order).slice(0, 12),
+    duplicateGroups: duplicateGroups.sort((a, b) => b.wastedBytes - a.wastedBytes).slice(0, 12),
+    scope: 'Completed build bytes, not startup downloads or decoded runtime memory. Duplicate groups are candidates, not deletion permission.',
+  } } : {}) };
 }
 
 async function run() {
@@ -91,7 +110,7 @@ async function run() {
   if (!existsSync(path.join(outDir, 'index.html'))) failures.push(`构建目录不存在或不完整：${outDir}`);
 
   const files = walk(outDir);
-  const { packageBytes, duplicateBytes } = inspectPackageBytes(files);
+  const { packageBytes, duplicateBytes, composition } = inspectPackageBytes(files, { details: true, root: outDir });
   if (packageBytes > PERFORMANCE_BUDGETS.packageBytesMax) {
     failures.push(`构建体积 ${mib(packageBytes)} > ${mib(PERFORMANCE_BUDGETS.packageBytesMax)}`);
   }
@@ -136,6 +155,7 @@ async function run() {
     failures.push(`CSS gzip ${kib(cssGzip)} > ${kib(PERFORMANCE_BUDGETS.cssGzipBytesMax)}`);
   }
 
+  console.log('[perf-budget:composition] ' + JSON.stringify(composition));
   console.log(`[perf-budget] startup=${STARTUP_SCENE_KEYS.length}/${PERFORMANCE_BUDGETS.startupPreloadMax}`);
   console.log(`[perf-budget] package=${mib(packageBytes)}, duplicates=${mib(duplicateBytes)}`);
   console.log(`[perf-budget] entry-gzip=${kib(entryGzip)}, initial-js-gzip=${kib(initialJsGzip)}, battle-gzip=${kib(featureGzip)}, narrative-gzip=${kib(narrativeGzip)}, css-gzip=${kib(cssGzip)}`);

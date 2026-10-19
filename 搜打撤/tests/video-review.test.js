@@ -4,7 +4,8 @@ import { execFileSync } from 'node:child_process';
 import { mkdtemp, readFile, rm, mkdir } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { analyzeSamples, reviewVideo } from '../scripts/video-review.mjs';
+import { JSDOM } from 'jsdom';
+import { analyzeSamples, reviewVideo, reportHTML } from '../scripts/video-review.mjs';
 const available = (() => { try { execFileSync('ffmpeg',['-version'],{stdio:'ignore'});execFileSync('ffprobe',['-version'],{stdio:'ignore'});return true;}catch{return false;} })();
 it('detects only candidate ranges and keeps sample times separate from source FPS', () => {
   const a=analyzeSamples(Uint8Array.from([0,0,255,0,90,90,90,90,90]),{width:1,height:1,fps:1});
@@ -16,6 +17,7 @@ it('detects only candidate ranges and keeps sample times separate from source FP
 });
 it('rejects invalid limits before creating a destination', async () => {
   await expect(reviewVideo({input:'x',out:'x',fps:0})).rejects.toThrow('sample-fps');
+  await expect(reviewVideo({input:'x',out:'x',startSeconds:-1})).rejects.toThrow('start-seconds');
 });
 describe.skipIf(!available)('offline ffmpeg pipeline (synthetic fixtures only)',()=>{
   it('extracts color frames, a contact sheet, candidates and an escaped comparison report', async()=>{
@@ -37,8 +39,38 @@ describe.skipIf(!available)('offline ffmpeg pipeline (synthetic fixtures only)',
       await expect(reviewVideo({input:video,out})).rejects.toThrow();
       const limited=await reviewVideo({input:video,out:path.join(temp,'limited'),fps:2,maxSeconds:1});
       expect(limited.videos[0].truncated).toBe(true);expect(limited.videos[0].samples).toHaveLength(2);
+      const tail=await reviewVideo({input:video,out:path.join(temp,'tail'),fps:2,startSeconds:4,maxSeconds:2});
+      expect(tail.videos[0].sampleStartSeconds).toBe(4);
+      expect(tail.videos[0].samples[0].time).toBe(4);
+      expect(tail.videos[0].samples).toHaveLength(4);
+      expect(tail.videos[0].samples.every(s=>s.time>=4&&s.time<6)).toBe(true);
       const existing=path.join(temp,'keep');await mkdir(existing);
       await expect(reviewVideo({input:video,out:existing})).rejects.toThrow();
     } finally { await rm(temp,{recursive:true,force:true}); }
   },60000);
+});
+
+
+it('opens candidate timelines and synchronizes sampled previews without silently stretching shorter video', () => {
+  const video = { source:'<unsafe>.mp4', durationSeconds:20, sampleStartSeconds:10, sampledSeconds:3, sampleFps:1, contactStride:1,
+    metadata:{reportedFrameRate:'60/1'}, samples:[{time:10,luminance:20,difference:null},{time:11,luminance:25,difference:5},{time:12,luminance:26,difference:1}],
+    candidates:[{kind:'dark-screen',start:11,end:12}] };
+  const html=reportHTML({videos:[video,{...video,source:'short.mp4',sampledSeconds:1,samples:video.samples.slice(0,1),candidates:[]}],syntheticFixture:true});
+  expect(html).toContain('&lt;unsafe&gt;.mp4');
+  const dom=new JSDOM(html,{runScripts:'dangerously',url:'https://fixture.invalid/'}),document=dom.window.document;
+  const link=document.querySelector('[data-candidate]');
+  expect(link.hash).toBe('#before-1');
+  link.dispatchEvent(new dom.window.MouseEvent('click',{bubbles:true,cancelable:true}));
+  expect(document.querySelector('details').open).toBe(true);
+  const slider=document.querySelector('#reviewTime');slider.value='12';slider.dispatchEvent(new dom.window.Event('input'));
+  const panels=document.querySelectorAll('[data-review-panel]');
+  expect(panels[0].querySelector('img').getAttribute('src')).toBe('before/frame-00003.jpg');
+  expect(panels[1].querySelector('img').getAttribute('src')).toBe('after/frame-00001.jpg');
+  expect(panels[1].querySelector('[data-review-time]').textContent).toContain('超出此片段');
+  dom.window.close();
+});
+
+it('prints a useful CLI entry without requiring input or creating a report', () => {
+  const text=execFileSync(process.execPath,['scripts/video-review.mjs','--help'],{encoding:'utf8'});
+  expect(text).toContain('--start-seconds');expect(text).toContain('ffmpeg and ffprobe');
 });

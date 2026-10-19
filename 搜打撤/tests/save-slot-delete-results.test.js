@@ -1,8 +1,9 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
+import { cancelPageVisual } from '../game/src/ui/page-visual-ready.js';
 
 const ctx = new Proxy({}, { get: () => () => ctx, set: () => true });
 window.HTMLCanvasElement.prototype.getContext = () => ctx;
-document.body.innerHTML = '<canvas id="game"></canvas><div id="title"></div><div id="exitScr"></div><div id="ovBody"></div>';
+document.body.innerHTML = '<canvas id="game"></canvas><div id="title"></div><div id="exitScr"></div><div id="overlay"><div id="ovBody"></div></div>';
 window.SDT = {
   Icons: { img: () => '', TYPE_ART: {} }, Sound: { music() {}, sfx() {}, setDucked() {} }, FX: { feedback() {} },
   MAP: { rules: { playerMaxHp: 50, playerAtk: 4, fireHeal: 5, battleEnergy: 2, battleHandMax: 10, bossDeckSize: 10, starterSha: 0, battleStartDraw: 5, battleTurnDraw: 1, diceSides: 6 }, items: { rations: { name: '口粮' }, wood: { name: '木材' } } },
@@ -32,10 +33,15 @@ beforeEach(() => {
     battleActive: false, runActive: false, nestActive: false, state: 'title', elapsed: 0, elapsedSynced: 0 });
   session.configureGameRuntime({ openClassChoice: vi.fn() });
   UI.el.ovBody = document.getElementById('ovBody');
+  UI.el.overlay = document.getElementById('overlay');
   UI.log.mockClear();
   window.SDT.Battle.restore.mockReset().mockReturnValue(true);
 });
-afterEach(() => vi.restoreAllMocks());
+afterEach(() => {
+  cancelPageVisual();
+  document.dispatchEvent(new Event('sdt-overlay-close'));
+  vi.restoreAllMocks();
+});
 
 function prepareSlot(slot = 1) {
   const run = JSON.stringify({ version: 2, seed: `delete-fixture-${slot}`, nestActive: true,
