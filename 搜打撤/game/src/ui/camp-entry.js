@@ -1,6 +1,7 @@
 // 基地初次展开独立编排；只保留选档画面的短暂装饰副本，不接管存档或焦点。
 import '../../css/camp-entry.css';
 import { waitPageVisual } from './page-visual-ready.js';
+import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
 import { mapImageReady } from '../core/map-image-ready.js';
 import { GENERAL_TRANSITION_ART } from './general-transition.js';
 const CUT_SCENES = {
@@ -146,17 +147,13 @@ export function playPreparedCut(page, cut, duration = cityCutDuration, onFinish)
   const finish = () => {
     if (finished) return;
     finished = true; controller.abort(); clearTimeout(timer);
-    observer.disconnect(); cut.remove(); onFinish?.();
+    lifetime.dispose(); cut.remove(); onFinish?.();
   };
-  const observer = new MutationObserver(() => {
-    if (!page.isConnected || !overlay.contains(page) || overlay.hidden || overlay.dataset.uiClosing) finish();
-  });
-  observer.observe(overlay, { childList: true, subtree: true, attributes: true,
-    attributeFilter: ['hidden', 'data-ui-closing'] });
+  const lifetime = createPageSurfaceLifetime(page, { overlay, onInvalidate: finish });
   Promise.all([prepareCityCut(cut, { signal: controller.signal }),
     waitPageVisual(page, { signal: controller.signal, background: window.SDT?.UI?._pageBgReady })])
     .then(([cutReady, ready]) => {
-      if (!cutReady || !ready || finished) return;
+      if (!cutReady || !ready || finished || !lifetime.current()) { finish(); return; }
       cut.classList.remove('page-cut-waiting');
       timer = setTimeout(finish, duration);
     }).catch(finish);

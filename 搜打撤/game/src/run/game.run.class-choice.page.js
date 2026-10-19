@@ -412,6 +412,7 @@ export function openClassChoice(options = {}) {
     const transition = showRunTransition({
       tone: 'door', asset: 'scene-door-bg', eyebrow: 'EXPEDITION START',
       title: characterName(cl), detail: startLine, duration: 1600,
+      prepare: () => SDT.Renderer?.warm?.(),
       presentation: 'city-cut',
     });
     return transition.then(completed => {

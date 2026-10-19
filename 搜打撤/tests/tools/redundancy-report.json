@@ -1,0 +1,9 @@
+{
+  "minTokens": 70,
+  "minLines": 6,
+  "mode": "weak",
+  "format": ["javascript"],
+  "ignore": ["**/node_modules/**", "**/generated/**", "**/vendor/**", "**/courtyard-vendor/**"],
+  "reporters": ["json"],
+  "workers": 1
+}

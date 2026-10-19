@@ -1,0 +1,20 @@
+[
+  {
+    "path": "docs/evidence/2026-10-17-runtime-hotpaths/card-browser.before.txt",
+    "source": "/workspace/scratch/b7a53a06c872/deliverables/game-complete-delta-eb8d669-20261018/current/docs/evidence/2026-10-17-runtime-hotpaths/card-browser.before.txt",
+    "bytes": 4026,
+    "sha256": "c3ef040f3dc04a056f4f1c64463e6f658eb70201a23cad9a4062a00b4342d9c2",
+    "manifest": "/workspace/scratch/b7a53a06c872/deliverables/game-complete-delta-eb8d669-20261018/manifest.json",
+    "manifest_sha256": "fa1a454e1ccaa5e121dc4a90ebd33dcc84ae79dad2ca5a48dad7fa58c9ed2a4f",
+    "verification": "Exact bytes/size match historical manifest; copy identical. No Git blob asserted."
+  },
+  {
+    "path": "docs/evidence/2026-10-17-runtime-hotpaths/cards.view.before.txt",
+    "source": "/workspace/scratch/b7a53a06c872/deliverables/game-complete-delta-eb8d669-20261018/current/docs/evidence/2026-10-17-runtime-hotpaths/cards.view.before.txt",
+    "bytes": 12077,
+    "sha256": "d100f89cd30cd69f6d5179d595991e4669d1f582fdaaa118ad0bb0f2a2006074",
+    "manifest": "/workspace/scratch/b7a53a06c872/deliverables/game-complete-delta-eb8d669-20261018/manifest.json",
+    "manifest_sha256": "fa1a454e1ccaa5e121dc4a90ebd33dcc84ae79dad2ca5a48dad7fa58c9ed2a4f",
+    "verification": "Exact bytes/size match historical manifest; copy identical. No Git blob asserted."
+  }
+]

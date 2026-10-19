@@ -1,0 +1,31 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/搜打撤
+
+ ✓ tests/cov-target-session.test.js (23 tests) 19ms
+ ✓ tests/architecture-boundaries.test.js (24 tests) 854ms
+   ✓ 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向  832ms
+ ✓ tests/contracts.test.js (17 tests) 856ms
+   ✓ ESM 依赖方向 > src 模块不存在循环依赖  809ms
+ ✓ tests/battle-hand-inspector.test.js (88 tests) 6940ms
+   ✓ selects a target on one bridge pointer tap and suppresses the following synthetic click  333ms
+   ✓ starts self-target equipment selection from the stable folded slot without spending or requiring a second click  335ms
+   ✓ adds distinct material UIDs through the workspace and ignores a detached repeated button  385ms
+   ✓ describes and cycles three hand pages without changing cards or combat state  1157ms
+   ✓ keeps touch untargeted pickup pending until field confirmation or Escape  331ms
+   ✓ directly plays an untargeted card from focused card-face Enter  350ms
+   ✓ allows a new primary pointer to continue a pickup only after its owner releases  331ms
+   ✓ lets real window aim cancellation consume the down before the retained hand can pick up another card  331ms
+   ✓ 扰敌同种三敌DOM点击0→2：重绘只排首实例，拒重复，单次扣费且不打中间敌  371ms
+
+ Test Files  4 passed (4)
+      Tests  152 passed (152)
+   Start at  03:04:20
+   Duration  9.16s (transform 1.05s, setup 0ms, collect 2.16s, tests 8.67s, environment 1.57s, prepare 254ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

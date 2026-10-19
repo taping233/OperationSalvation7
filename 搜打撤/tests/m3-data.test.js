@@ -17,7 +17,7 @@ import { ensureM3OnplayRules } from '../game/src/cards/cards.sync.m3.js';
 import { dataSlice } from '../game/src/cards/cards.data.js';
 import cardsSyncData from '../game/data/cards-sync.json';
 
-const MARKER = 'sdt-cards-m3-onplay-rules-v4-seeded';
+const MARKER = 'sdt-cards-m3-onplay-rules-v5-seeded';
 
 // canonical 夹具（2026-09-29 镜像收编）：原「逐字照抄定版源行」改为按本批 id 取真源行——
 // CARDS_SYNC=game/data/cards-sync.json 实机覆盖批次；TABLETOP10/11/12=cards.data.js 定版表；
@@ -129,7 +129,7 @@ const EXPECTED_RULES = {
     version: 1,
     battle: { target: { side: 'self', area: false } },
     triggers: { onPlay: [
-      { op: 'acquire', n: 1, pool: { kind: '注能' }, dest: 'hand', act: 'noInfuse' },
+      { op: 'acquire', n: 1, pool: { kind: '注能' }, dest: 'discover', act: 'noInfuse' },
     ] },
   },
   'cmtn1p9vb5au': {
@@ -403,4 +403,14 @@ describe('永恒绽放旧章发现轮数迁移', () => {
     expect(harness.cards().find(c => c.id === 'tt7-bladebloom').rules.triggers.onPlay[0].n).toBe(1);
     expect(harness.storage.getItem(MARKER)).toBe('1');
   });
+});
+
+it.each([false,true])('v5仅迁移灵能召唤精确旧hand规则，保留自改=%s', customized => {
+  const all=freshCards().map(card=>({...card,rules:structuredClone(EXPECTED_RULES[card.id])}));
+  const source=all.find(card=>card.id==='cmtn1epgt20j');source.rules.triggers.onPlay[0].dest='hand';
+  if(customized)source.name='我的灵能召唤';
+  const harness=makeHarness(all);harness.storage.setItem('sdt-cards-m3-onplay-rules-v4-seeded','1');
+  ensureM3OnplayRules(harness);
+  expect(harness.cards().find(card=>card.id===source.id).rules.triggers.onPlay[0].dest).toBe(customized?'hand':'discover');
+  expect(harness.storage.getItem(MARKER)).toBe('1');
 });

@@ -5,7 +5,8 @@ import { previewCardRewards } from '../core/card-capacity.js';
 import { esc, escAttr } from '../core/shared.js';
 import { showRewardCardFeedback } from '../ui/reward-card-feedback.js';
 import { rewardPickerTitle } from '../ui/reward-picker-heading.js';
-import { rewardSceneHTML, rewardExitHTML } from '../ui/reward-scene-view.js';
+import { rewardCardState, rewardProgress, REWARD_RECEIVED } from '../ui/reward-state.js';
+import { rewardSceneHTML, rewardExitHTML, rewardClaimHTML } from '../ui/reward-scene-view.js';
 import { chestRewardOverviewHTML, chestRewardFrameHTML } from '../ui/chest-reward-overview.js';
 import { turboMs, isTurbo } from '../core/turbo.js';
 import { serializeChestReward, restoreChestReward } from './chest-reward-save.js';
@@ -366,7 +367,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
         ? hasCoins ? '继续领取并收金币' : '继续领取'
         : hasCoins ? '开箱并收金币' : '打开宝箱';
     };
-    const claimedCards = queue.flatMap(slot => slot.reward ? slot.reward.cards.filter((_, i) => slot.reward.taken?.has(i)) : []);
+    const claimedCards = queue.flatMap(slot => slot.reward ? rewardProgress(slot.reward.cards, slot.reward.taken, slot.reward.lost).received : []);
     const complete = allBoxesResolved();
     return chestRewardOverviewHTML({
       title:queue.some(box => box.battleSummary) ? '战斗胜利' : '本次收获',
@@ -506,16 +507,13 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const cardsHTML = cur.cards.map((card, i) => {
       const got = taken.has(i), dropped = lost.has(i);
       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
-      const action = got || dropped
-        ? `<span class="reward-unit-state">${got ? (isChoice(i) ? '✓ 已选择 · 已入背包' : '已入背包') : '已永久放弃'}</span>`
-        : fits ? `<button type="button" class="reward-claim" data-act="${isChoice(i) ? 'chestPick' : 'chestTake1'}" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>${isChoice(i) ? '选择这张' : '收下'}</button>`
-          : `<button type="button" class="reward-claim" data-act="chestMakeRoom" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>腾位置领取</button>`;
+      const action = rewardClaimHTML({ index:i, state:rewardCardState(taken, lost, i), choice:isChoice(i), fits, disabled:cur.leaveConfirm });
       return `<article class="reward-unit${selected === i && !got && !dropped ? ' is-pending-target' : ''}${got ? ' got' : dropped ? ' dropped' : ''}" data-reward-rarity="${escAttr(rewardRarity(card))}">
         <button type="button" class="reward-card" data-act="chestSelect" data-i="${i}" aria-label="放大查看${escAttr(card.name || '卡牌')}" title="放大查看">${SDT.Cards.cardHTML(card)}</button>${selected === i && !got && !dropped ? '<span class="reward-target-label">待领取</span>' : ''}${action}</article>`;
     }).join('');
     // 容量预检（2026-09-09 老板定向）：全部收下放不下时先提示清理背包——
     // 按实际顺序模拟同名分堆/占格；成功收到珍珠盒后，后续资源可使用其扩格。
-    const rest = cur.cards.filter((c, i) => !taken.has(i) && !lost.has(i));
+    const rest = rewardProgress(cur.cards, taken, lost).pending;
     let cant = 0, canTake = 0;
     // 逐张判断当前候选；满格仍可能通过同名叠放领取，不能用格数直接禁用。
     const pickNoFit = isPick && !cur.cards.some((c, i) => isChoice(i) && !taken.has(i) && !lost.has(i) && (G.canReceiveCard ? G.canReceiveCard(c) : true));
@@ -551,7 +549,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const outcome = cur.battleSummary?.cardOutcome;
     const details = outcome ? `<details class="loot-outcome"><summary>本战卡牌去向</summary>${[['进入消耗区',outcome.pocket],['直接消散',outcome.gone],['仍在背包',outcome.retained]].map(([label,names]) => `<p><b>${label}</b>：${names.length ? names.map(esc).join('、') : '无'}</p>`).join('')}</details>` : '';
     const coins = !overviewMode && cur.coins ? `<article class="reward-unit reward-coin-unit${cur.coinsReceived ? ' got' : ''}" aria-label="金币奖励"><div class="reward-coin-art" aria-hidden="true">[[icon:coin]]</div><div class="reward-coin-amount">×${cur.coins}</div>${cur.coinsReceived ? '<span class="reward-unit-state">已获得</span>' : `<button type="button" class="reward-claim" data-act="chestCoins"${cur.leaveConfirm ? ' disabled' : ''}>收下</button>`}</article>` : '';
-    const finalNotice = [taken.size ? `${taken.size} 张已入背包` : '', lost.size ? `${lost.size} 张已永久放弃` : '',
+    const finalNotice = [taken.size ? `${taken.size} 张${REWARD_RECEIVED}` : '', lost.size ? `${lost.size} 张已永久放弃` : '',
       !overviewMode && cur.coins ? cur.coinsReceived ? '金币已入账' : '金币待领取' : ''].filter(Boolean).join(' · ') || '已处理';
     const footer = `<span class="reward-capacity">[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span>${!finished ? `<button type="button" class="reward-bag${noneFit ? ' is-primary' : ''}" data-act="chestOpenBag">整理背包</button>` : ''}${!boxResolved(cur) && !cur.leaveConfirm ? '<button type="button" class="reward-bag" data-act="chestReturn">返回地图 · 保留奖励</button>' : ''}${!finished && !cur.leaveConfirm ? '<button type="button" class="reward-bag danger" data-act="chestSkip" data-cancel="false">放弃剩余卡牌</button>' : ''}${capacityNote && !finished && !cur.leaveConfirm ? `<span class="reward-capacity-note" role="status">${esc(capacityNote)}</span>` : ''}${finished ? `<span class="reward-final" role="status">${esc(finalNotice)}</span>` : ''}${leaveConfirmation}`;
     const extraCount = Math.max(0, cur.cards.length - (cur.choiceCount ?? cur.cards.length))
@@ -606,7 +604,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
       const source = UI.el.ovBody.querySelector(`[data-act="chestSelect"][data-i="${i}"]`);
       UI.showCardZoom?.(card, { from:source, returnFocus:source, hideNote:true, presentation:'expedition',
-        footer:available ? fits ? `<button class="ov-btn ok" data-act="${isChoice(i) ? 'chestPick' : 'chestTake1'}" data-i="${i}">收下</button>` : `<button type="button" class="reward-claim" data-act="chestMakeRoom" data-i="${i}"${cur.leaveConfirm ? ' disabled' : ''}>腾位置领取</button>` : '' });
+        footer:available ? rewardClaimHTML({ index:i, choice:isChoice(i), fits, disabled:cur.leaveConfirm, zoom:true }) : '' });
       rewardZoom = document.getElementById('cardZoom');
     });
     UI.act('chestTake1', d => {

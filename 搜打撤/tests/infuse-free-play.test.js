@@ -58,10 +58,13 @@ describe('灵能召唤获得的免注能牌：真实出牌结算', () => {
     };
     BattleSession.start(game, [{ id: 'infuse-free-foe', name: '靶子', hp: 999, atk: 1 }], { isBoss: false });
     await drain();
-    // 仅固定随机获取候选；真实灵能召唤规则、临时牌实例和出牌链完整执行。
+    // 仅固定发现候选；真实灵能召唤规则、临时牌实例和出牌链完整执行。
     vi.spyOn(Cards, 'all').mockReturnValue([target]);
     BattleSession.commands.playCard('source', 'self');
     let state = await drain();
+    expect(state.discovering?.act).toBe('noInfuse');
+    expect(state.hand.some(value=>viewApi.findCard(value)?.card.id===target.id)).toBe(false);
+    BattleSession.commands.pickDiscover(0); state=await drain();
     const uid = state.hand.find(value => viewApi.findCard(value)?.card.id === target.id);
     expect(uid).toBeTruthy();
     expect(viewApi.findCard(uid).card._noInfuse).toBe(true);

@@ -170,3 +170,51 @@ describe('shared page loading cover', () => {
     expect(document.querySelector('.page-loading')).toBeNull();
   });
 });
+
+describe('mounted destination ownership during readiness', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.stubGlobal('requestAnimationFrame', fn => setTimeout(() => fn(performance.now()), 16));
+    vi.stubGlobal('cancelAnimationFrame', clearTimeout);
+    reduceMotion.mockReturnValue(false); mapImageReady.mockResolvedValue(true);
+    document.body.innerHTML = '<main id="viewport"><div id="overlay"><div class="card"><div id="ovBody"></div></div></div></main>';
+    window.SDT = {UI:{_pageBgReady:new Promise(() => {})}};
+  });
+  afterEach(() => { window.SDT = {}; vi.useRealTimers(); vi.unstubAllGlobals(); });
+  it.each(['replace','hidden','closing','native-closing','detached'])('%s cancels old reveal and releases only its own cover', async change => {
+    const reveal = vi.fn();
+    const pending = runPageLoading({title:'旧页',detail:'准备中',onRevealStart:reveal,open:() => {
+      document.getElementById('ovBody').innerHTML = '<main id="oldPage">旧页</main>'; return 'ready';
+    }});
+    await vi.advanceTimersByTimeAsync(64);
+    expect(document.querySelector('.page-loading:not(.leaving)')).not.toBeNull();
+    const overlay = document.getElementById('overlay');
+    if (change === 'replace') document.getElementById('ovBody').innerHTML = '<main>新页</main>';
+    if (change === 'hidden') overlay.hidden = true;
+    if (change === 'closing') overlay.dataset.uiClosing = '1';
+    if (change === 'native-closing') overlay.classList.add('closing');
+    if (change === 'detached') overlay.remove();
+    await Promise.resolve();
+    await expect(pending).resolves.toBe(false);
+    expect(reveal).not.toHaveBeenCalled();
+    expect(document.querySelector('.page-loading')).toBeNull();
+    if (change === 'replace') {
+      window.SDT.UI._pageBgReady = Promise.resolve();
+      const freshReveal = vi.fn();
+      const fresh = runPageLoading({title:'新页',detail:'',open:() => 'fresh',onRevealStart:freshReveal});
+      await vi.runAllTimersAsync();
+      await expect(fresh).resolves.toBe('fresh');
+      expect(freshReveal).toHaveBeenCalledOnce();
+    } else await vi.runAllTimersAsync();
+    expect(vi.getTimerCount()).toBe(0);
+  });
+  it('background readiness timeout remains a successful fallback, not cancellation', async () => {
+    const reveal = vi.fn();
+    const pending = runPageLoading({title:'页面',detail:'',onRevealStart:reveal,open:() => {
+      document.getElementById('ovBody').innerHTML = '<main>页面</main>'; return 'ready';
+    }});
+    await vi.runAllTimersAsync();
+    await expect(pending).resolves.toBe('ready');
+    expect(reveal).toHaveBeenCalledOnce();
+  });
+});

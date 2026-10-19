@@ -32,8 +32,8 @@ body #overlay .card.bag-page .bag-v2 .bag-detail {
   border: 1px solid rgba(255, 255, 255, .10); border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, .32);
 }
-/* 左栏分区（顶部让位给左上角 archive-back 退出键，样式复用 archive-back.css） */
-body #overlay .card.bag-page .bag-v2 .bag-rail { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 88px 0 20px; }
+/* 退出键已在左栏内，随分区沿同一中线排布；不再预留悬浮按钮的顶部空洞。 */
+body #overlay .card.bag-page .bag-v2 .bag-rail { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 20px 10px; box-sizing: border-box; }
 body #overlay .card.bag-page .bag-v2 .bag-rz {
   position: relative; width: 84px; height: 88px; border: 0; border-radius: 16px; cursor: pointer;
   background: transparent; color: #aebfc9; display: flex; flex-direction: column; gap: 7px; align-items: center; justify-content: center;
@@ -60,11 +60,11 @@ body #overlay .card.bag-page .bag-v2 .bag-head2 {
 body #overlay .card.bag-page .bag-v2 .bag-kick { display: block; font-size: 10px; letter-spacing: .42em; color: rgba(226, 232, 238, .34); }
 body #overlay .card.bag-page .bag-v2 .bag-head2 h2 { display: flex; align-items: center; gap: 14px; margin: 2px 0 0; font-size: 40px; font-weight: 800; letter-spacing: .06em; line-height: 1.2; color: #f2f4f6; }
 body #overlay .card.bag-page .bag-v2 .bag-title .help-btn { width: 60px; height: 60px; font-size: 22px; flex: none; }
-body #overlay .card.bag-page .bag-v2 .archive-back { width: 60px; height: 60px; }
+/* Match the shared archive-back ID specificity; geometry stays scoped to this rail. */
+body #overlay#overlay#overlay .card.bag-page .bag-v2 .bag-rail > .archive-back { position: static; inset: auto; flex: none; margin: 0 0 20px; width: 64px; height: 64px; }
 body #overlay .card.bag-page .bag-v2 .bag-capchip {
-  margin-left: auto; display: flex; align-items: center; gap: 10px; padding: 11px 20px; border-radius: 999px;
-  background: rgba(14, 18, 26, .52); backdrop-filter: blur(26px) saturate(1.35); -webkit-backdrop-filter: blur(26px) saturate(1.35);
-  border: 1px solid rgba(255, 255, 255, .10);
+  margin-left: auto; display: flex; align-items: center; gap: 10px; padding: 0; border-radius: 0;
+  background: none; border: 0; box-shadow: none;
 }
 body #overlay .card.bag-page .bag-v2 .bag-capk { font-size: 18px; letter-spacing: .12em; color: #aebfc9; }
 body #overlay .card.bag-page .bag-v2 .bag-capbar { position: relative; width: 130px; height: 8px; border-radius: 4px; background: rgba(255, 255, 255, .10); overflow: hidden; }

@@ -1,0 +1,9 @@
+Node v22.23.3. Isolated evaluation only; no project dependency added.
+
+npm --cache /tmp/ui-style-npm-cache install --prefix /tmp/dependency-cruiser-trial --save-exact dependency-cruiser@18.6.0 --ignore-scripts --no-audit --no-fund
+
+From the game project directory:
+/tmp/dependency-cruiser-trial/node_modules/.bin/depcruise game/src --config docs/evidence/2026-10-18-redundancy-tools/dependency-trial.config.cjs --output-type json > /tmp/dependency-trial-reproduced.json
+
+Original installation path was inspected: realpath /tmp/dependency-cruiser-trial; package.json contained only dependency-cruiser 18.6.0; report.cjs matched the retained evidence configuration.
+After parent explicitly authorized removing this exact new isolated install directory, copied LICENSE and removed /tmp/dependency-cruiser-trial on 2026-10-18 UTC. No other directory removed. npm shared download cache retained, not represented as an installed tool.

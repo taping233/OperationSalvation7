@@ -62,7 +62,7 @@
 | cc-mana-surge | 法力奔涌 | 法术 | hosted:mana-surge（随机施放 4 个随机法术，默认已注能） | 混合实现（execute 域无「随机法术池」；注能默认化全场旗标） | XL | B-M5 | 与 allSpellsInfused 宿主旗标（battle.core.js:113）联动 |
 | cc-poison-burst | 毒爆 | 法术 | onPlay[curse {burst:2}] | 现有能力 | S | B-M1 | burst 引爆已消费（battle.resolution.js:189-193），层数保留 |
 | cc-rot-seed | 腐化之种 | 法术 | hosted:rot-seed（中毒 2 层 + 死亡时层数转移）onPlay[curse poison stacks:2] + onKill 转移 | 混合实现（宿主 poisonLegacy/transferPoisonLegacy battle.engine.js:171、battle.core.js:95） | XL | B-M4 | 敌人死亡钩子（onKill 系）+ 层数转移；宿主已实现，迁移=收编为 rules |
-| cmtn1epgt20j | 灵能召唤 | 法术 | onPlay[discover {count:1, pool:{kind:'infusable'}, act:'noInfuse'}] | 规格新增:discover.pool.kind='infusable' + discover.act='noInfuse'（现 discover 域无此 act，capability.js:24-25） | M | B-M2 | 「使其无需注能」=noInfuse；acquire.hand 已有同名词可对齐语义 |
+| cmtn1epgt20j | 灵能召唤 | 法术 | onPlay[acquire {n:1, pool:{kind:'注能'}, dest:'discover', act:'noInfuse'}] | 已接线：acquire.dest='discover' + act='noInfuse'，候选确认后仅所选实例免注能（M3 v5） | M | B-M2 | 「使其无需注能」=noInfuse；acquire.hand 已有同名词可对齐语义 |
 | cmtn1lbhbqi4 | 充能火球 | 法术 | hosted:charge-fireball（onPlay[damage amount:4 dmgType:spell] + 手牌中每回合伤害+1） | 混合实现（宿主充能卡清单 battle.core.js:87） | XL | B-M4 | 手牌内成长是常驻回合钩子，非 onPlay |
 | cmtn1p9vb5au | 千变万化 | 法术 | onPlay[discover {count:1, pool:{kind:'form'}, act:'play'}] | 规格新增:pool.kind='form'（形态卡池） | M | B-M2 | 形态=自然形态/剑仙形态/黑暗形态等场域卡的子集定义需规格 |
 | cmtn1r10xnl1 | 黑暗形态 | 法术 | 规格新增 registerRule:{rule:'discoverPlus'}（本局每次发现可选项+1） | 规格/接线:registerRule（键位 schema:68 现三种，解释器 pending） | L | B-M4 | 本局全局规则；「增加可选项」作用于 discover 交互 |

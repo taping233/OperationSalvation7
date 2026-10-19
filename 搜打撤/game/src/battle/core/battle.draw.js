@@ -98,12 +98,14 @@ function drawCards(n) {
 function addTempCard(tpl, presentation = null) {
     const uid = 'bts' + Date.now().toString(36) + nextTmpSeq();
     granted.push({ uid, card: { ...tpl } });
-    hand.push(uid);
-    cardAnims.push({ kind: 'draw', uid, name: tpl.name || '', card: { ...tpl }, acquired: true,
+    // 临时道具由快捷栏读取；直接施放沿既有队列占位与表现来源，不另给一份可用道具。
+    const entersHand = tpl.type !== '道具' || isQueuedCastSource(presentation?.source);
+    if (entersHand) hand.push(uid);
+    if (entersHand) cardAnims.push({ kind: 'draw', uid, name: tpl.name || '', card: { ...tpl }, acquired: true,
       ...(isQueuedCastSource(presentation?.source) ? { source: presentation.source } : {}) });
     // 置入手牌视同「抽到」（2026-09-11 英雄卡审计）：万剑归宗普通战分支走
     // grantStarterAttack→addTempCard，此前不进 lastDrawnUids，「直接释放其中武术」永远放 0 张
-    lastDrawnUids.push(uid);
+    if (entersHand) lastDrawnUids.push(uid);
     // M3：onAcquire 触发器（阿猫的礼物「发现或随机获取该牌时」）——获取即结算，防自递归
     if (tpl?.rules?.triggers?.onAcquire?.length && !tpl._m2Acquiring) {
       const acquiring = { ...tpl, _m2Acquiring: true };
@@ -113,6 +115,7 @@ function addTempCard(tpl, presentation = null) {
     return uid;
   }
 function addDeckCard(tpl) {
+    if (tpl.type === '道具') return addTempCard(tpl);
     const uid = 'btd' + Date.now().toString(36) + nextTmpSeq();
     granted.push({ uid, card: { ...tpl } });
     drawPile.push(uid);

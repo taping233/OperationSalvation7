@@ -1,3 +1,4 @@
+import { isCardBrowserCurrent, cardBrowserItems, filterCardBrowserItems, selectCardBrowserItems } from '../ui/card-browser-state.js';
 import { esc, escAttr } from '../core/shared.js';
 import { stackKeyOf } from './collection.commands.js';
 import { characterFor } from '../core/characters.js';
@@ -34,9 +35,9 @@ function warehouseSelectionHTML(rows) {
   const stack = rows.find(item => inventoryKeyOf(item) === state.key);
   return stack ? `<div><small>当前浏览</small><b>${esc(stack.card.name)}</b><span>${stack.count} 张${window.SDT.Base.isCollected?.(stack.card) ? ' · 收藏保护' : ''}</span></div>` : '<p>单击卡牌使用</p>';
 }
-function refreshWarehouseBrowser(browser, reset = false) {
+function refreshWarehouseBrowser(browser, reset = false, suppliedItems = null) {
   const track = browser.querySelector('.card-browser-track');
-  const items = [...track.querySelectorAll('[data-browser-key]')];
+  const items = cardBrowserItems(track, suppliedItems);
   const visible = items.filter(item => item.dataset.browseFiltered !== 'true');
   // Each tile reserves its complete framed art and caption height; rows never share the art slot.
   const columns = Math.max(1, Math.floor((track.clientWidth + 24) / 348));
@@ -68,8 +69,8 @@ export function warehouseHTML(view = 'cards') {
   state.key = inventoryKeyOf(rows.find(item => inventoryKeyOf(item) === state.key) || rows[0] || { card: { name: '' } });
   const person = characterFor(state.character);
   const options = (field, label) => `<option value="">${label}</option>` + [...new Set(base.data.stash.map(stack => stack.card[field]))].filter(Boolean).map(value => `<option value="${escAttr(value)}"${state[field] === value ? ' selected' : ''}>${esc(value)}</option>`).join('');
-  return `<div class="warehouse-v3 warehouse-v2" data-pocket="${pocket}"><header class="camp-section-head"><h2>${pocket ? '待复原' : '后勤仓库'}</h2><div class="warehouse-header-actions">${warehouseSectionsHTML(base, view)}${pocket ? '' : '<button type="button" class="base-link" data-act="rawItem" data-kind="wood">木材 ↗</button><button type="button" class="base-link" data-act="rawItem" data-kind="rations">口粮 ↗</button><button class="base-link" data-act="hubTab" data-tab="shop">交易所 ↗</button>'}<div class="warehouse-capacity"><span class="camp-page-stat">${base.stashUsed()} / ${base.stashCap()} 格</span><button class="base-link" data-act="hubTab" data-tab="upgrade" data-facility="stash">扩建 ↗</button></div></div></header>
-    ${uiDisclosure({ className:'warehouse-rules', label:'仓库说明', content:'<p>卡牌每张占一格。单击木材、口粮、钥匙卡使用一张，折入基地库存；其他卡单击打开操作台。</p>' })}<div class="warehouse-controls-v12">${pocket ? '<p class="stash-pocket-note">下次出征时，未复原卡牌会清空。</p>' : `${warehouseCategoriesV7HTML(state.group)}<div class="warehouse-purpose"${person ? '' : ' hidden'}>${person ? `<b>${esc(person.name)} · 归档培养</b><button class="mini-btn" data-act="hubTab" data-tab="classes" data-group="people" data-section="profile" data-character="${person.id}">返回${esc(person.name)} →</button>` : ''}</div><div class="warehouse-toolbar"><input data-warehouse-filter="query" aria-label="搜索仓库卡牌" placeholder="搜索卡牌" value="${escAttr(state.query)}"><select data-warehouse-filter="type" aria-label="筛选卡牌类型">${options('type', '全部类型')}</select><select data-warehouse-filter="rarity" aria-label="筛选卡牌品质">${options('rarity', '全部品质')}</select><span data-warehouse-count>${rows.length} 种</span></div>`}</div>
+  return `<div class="warehouse-v3 warehouse-v2" data-pocket="${pocket}"><header class="camp-section-head"><h2>${pocket ? '待复原' : '后勤仓库'}</h2><div class="warehouse-header-actions">${warehouseSectionsHTML(base, view)}${pocket ? `<span class="camp-page-stat" data-warehouse-pocket-count>待复原 ${base.data.pocket.reduce((sum, stack) => sum + stack.count, 0)} 张</span>` : '<button type="button" class="base-link" data-act="rawItem" data-kind="wood">木材 ↗</button><button type="button" class="base-link" data-act="rawItem" data-kind="rations">口粮 ↗</button><button class="base-link" data-act="hubTab" data-tab="shop">交易所 ↗</button>'}<div class="warehouse-capacity"><span class="camp-page-stat">${base.stashUsed()} / ${base.stashCap()} 格</span><button class="base-link" data-act="hubTab" data-tab="upgrade" data-facility="stash">扩建 ↗</button></div></div></header>
+    ${uiDisclosure({ className:'warehouse-rules', label:pocket ? '复原说明' : '仓库说明', content:pocket ? '<p>点击卡牌查看复原操作。下次出征时，未复原卡牌会清空；出发前请检查待复原数量。</p>' : '<p>卡牌每张占一格。单击木材、口粮、钥匙卡使用一张，折入基地库存；其他卡单击打开操作台。</p>' })}<div class="warehouse-controls-v12">${pocket ? '' : `${warehouseCategoriesV7HTML(state.group)}<div class="warehouse-purpose"${person ? '' : ' hidden'}>${person ? `<b>${esc(person.name)} · 归档培养</b><button class="mini-btn" data-act="hubTab" data-tab="classes" data-group="people" data-section="profile" data-character="${person.id}">返回${esc(person.name)} →</button>` : ''}</div><div class="warehouse-toolbar"><input data-warehouse-filter="query" aria-label="搜索仓库卡牌" placeholder="搜索卡牌" value="${escAttr(state.query)}"><select data-warehouse-filter="type" aria-label="筛选卡牌类型">${options('type', '全部类型')}</select><select data-warehouse-filter="rarity" aria-label="筛选卡牌品质">${options('rarity', '全部品质')}</select><span data-warehouse-count>${rows.length} 种</span></div>`}</div>
     <div class="warehouse-workspace-v12"><section class="warehouse-inventory-v12"><section class="card-browser" data-card-browser="${pocket ? 'warehouse-pocket' : 'warehouse'}" aria-label="${pocket ? '待复原卡牌' : '战利品卡牌'}"><div class="card-browser-track" tabindex="0" aria-label="向下滚动浏览卡牌">${itemsHTML(base, cards, pocket)}</div></section>
     <div class="warehouse-no-results"${rows.length ? ' hidden' : ''}>${emptyWarehouseHTML(base, pocket)}</div></section><aside class="warehouse-selection-v12" aria-label="当前浏览卡牌">${warehouseSelectionHTML(rows)}</aside></div></div>`;
 }
@@ -77,7 +78,7 @@ export function bindWarehouse({ ui, base, sound, openCard, refresh = () => {} })
   const root = document.querySelector('.warehouse-v3');
   if (!root) return;
   const slotId = base.slot;
-  const currentWarehouse = () => window.SDT.Base === base && base.slot === slotId && root.isConnected && document.querySelector('.warehouse-v3') === root;
+  const currentWarehouse = () => window.SDT.Base === base && base.slot === slotId && isCardBrowserCurrent(root) && document.querySelector('.warehouse-v3') === root;
   const pocket = root.dataset.pocket === 'true';
   const browser = root.querySelector('[data-card-browser]');
   const update = (reset = false) => {
@@ -92,15 +93,12 @@ export function bindWarehouse({ ui, base, sound, openCard, refresh = () => {} })
     }
     const rows = pocket ? list : list.filter(stack => matches(stack.card));
     state.key = inventoryKeyOf(rows.find(item => inventoryKeyOf(item) === state.key) || rows[0] || { card: { name: '' } });
-    for (const button of browser.querySelectorAll('[data-browser-key]')) {
+    const { items } = filterCardBrowserItems(browser, button => {
       const stack = byKey.get(button.dataset.stackKey);
-      const filtered = String(!stack || !pocket && !matches(stack.card));
-      if (button.dataset.browseFiltered !== filtered) button.dataset.browseFiltered = filtered;
-      const selected = button.dataset.stackKey === state.key;
-      if (button.classList.contains('selected') !== selected) button.classList.toggle('selected', selected);
-      if (button.getAttribute('aria-pressed') !== String(selected)) button.setAttribute('aria-pressed', String(selected));
-    }
-    refreshWarehouseBrowser(browser, reset);
+      return !!stack && (pocket || matches(stack.card));
+    });
+    selectCardBrowserItems(items, state.key, { key:'stackKey', className:'selected' });
+    refreshWarehouseBrowser(browser, reset, items);
     if (reset) animateBaseRefresh(browser.querySelector('.card-browser-track'));
     const empty = root.querySelector('.warehouse-no-results'); empty.hidden = rows.length > 0;
     if (!rows.length) empty.innerHTML = emptyWarehouseHTML(base, pocket);

@@ -1,0 +1,185 @@
+{
+  "duplicates": [
+    {
+      "firstFile": {
+        "end": 92,
+        "endLoc": {
+          "column": 43,
+          "line": 92,
+          "position": 6963
+        },
+        "name": "core/battle.enemy-phase.js",
+        "start": 82,
+        "startLoc": {
+          "column": 23,
+          "line": 82,
+          "position": 6321
+        }
+      },
+      "format": "javascript",
+      "fragment": "    set$extraTurn(false);\n    set$turn(turn + 1);\n    pdef.guard = false;   // 格挡只覆盖施放当回合，额外回合同样到期。\n    foes.forEach(foe => { if (!foe.dead) foe.intent = intentFor(foe, turn); });\n    set$energy(maxEnergy);\n    // 额外回合=新回合：打出计数清零（对齐 afterEnemies 新回合口径，追斩/连续射击按本回合计）；\n    // 回合成长同步累积（老板 2026-09-29 拍板：额外回合吃回合成长——充能火球等「回合开始时本牌伤害+1」照常 +1）\n    set$playedMartialThisTurn(0);\n    set$playedMovesThisTurn(0);\n    accrueGrowth();\n    if ((pstat.status.natureForm || 0) > 0) set$energy(energy + 1);",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 11,
+      "secondFile": {
+        "end": 338,
+        "endLoc": {
+          "column": 43,
+          "line": 338,
+          "position": 20105
+        },
+        "name": "core/battle.enemy-phase.js",
+        "start": 329,
+        "startLoc": {
+          "column": 24,
+          "line": 329,
+          "position": 19479
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 394,
+        "endLoc": {
+          "column": 10,
+          "line": 394,
+          "position": 28389
+        },
+        "name": "core/battle.resolution.js",
+        "start": 388,
+        "startLoc": {
+          "column": 8,
+          "line": 388,
+          "position": 28086
+        }
+      },
+      "format": "javascript",
+      "fragment": "        gained.push(c.name);\n      }\n      if (gained.length) {\n        const counts = {};\n        gained.forEach(name => { counts[name] = (counts[name] || 0) + 1; });\n        const detail = Object.keys(counts).map(name => `【${esc(name)}】×${counts[name] * (act === 'dup' ? 2 : 1)}`).join('、');\n        if (isBoss) {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 421,
+        "endLoc": {
+          "column": 9,
+          "line": 421,
+          "position": 29650
+        },
+        "name": "core/battle.resolution.js",
+        "start": 415,
+        "startLoc": {
+          "column": 6,
+          "line": 415,
+          "position": 29358
+        }
+      },
+      "tokens": 91
+    },
+    {
+      "firstFile": {
+        "end": 155,
+        "endLoc": {
+          "column": 8,
+          "line": 155,
+          "position": 7394
+        },
+        "name": "view/battle.effect-feedback.js",
+        "start": 147,
+        "startLoc": {
+          "column": 64,
+          "line": 147,
+          "position": 7085
+        }
+      },
+      "format": "javascript",
+      "fragment": "    if (!['extra-turn-start', 'recast'].includes(event.kind) || event.battleToken !== state.token) continue;\n    if (Number.isSafeInteger(event.eventId) && event.eventId > 0) {\n      if (event.eventId <= state.lastEventId) continue;\n      state.lastEventId = event.eventId;\n    } else {\n      if (state.seen.has(event)) continue;\n      state.seen.add(event);\n    }\n    if (event.kind === 'extra-turn-start') {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 9,
+      "secondFile": {
+        "end": 60,
+        "endLoc": {
+          "column": 8,
+          "line": 60,
+          "position": 2616
+        },
+        "name": "view/battle.turn-feedback.js",
+        "start": 52,
+        "startLoc": {
+          "column": 8,
+          "line": 52,
+          "position": 2307
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 294,
+        "endLoc": {
+          "column": 14,
+          "line": 294,
+          "position": 19255
+        },
+        "name": "view/battle.view.js",
+        "start": 279,
+        "startLoc": {
+          "column": 17,
+          "line": 279,
+          "position": 18385
+        }
+      },
+      "format": "javascript",
+      "fragment": "    if (!canReuse) {\n      clearPotionTip();\n      clearBattleScenery();\n      UI.showOverlay('', html, 'battle');\n      const fresh = body.firstElementChild;\n      fresh._battleToken = token;\n      fresh._battleTemplate = fresh.cloneNode(true);\n      fresh._battleHtml = html;   // F4：模板字符串精确签名（见下方复用路径）\n      battleEntry.begin(fresh, token, UI.el.overlay);\n      fresh.classList.add('bt-entrance');   // 单位入场演出只挂场次首建；复用渲染绝不再带（令牌守卫）\n      return;\n    }\n    // F4（09-30 性能审计）：html 与上一帧完全一致时，整舞台 rich 宏替换+解析与 12 个\n    // syncBattleSlot 的 outerHTML 序列化比对必然全部无更新——字符串精确相等是零误判\n    // 签名，直接短路（模板含随机内容时永不命中=退化为原行为，无损）。\n    if (stage._battleHtml === html) {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 16,
+      "secondFile": {
+        "end": 315,
+        "endLoc": {
+          "column": 14,
+          "line": 315,
+          "position": 20128
+        },
+        "name": "view/battle.view.js",
+        "start": 303,
+        "startLoc": {
+          "column": 100,
+          "line": 303,
+          "position": 19737
+        }
+      },
+      "tokens": 82
+    }
+  ],
+  "statistics": {
+    "detectionDate": "2026-10-18T18:54:34.607Z",
+    "formats": {
+      "javascript": {
+        "clones": 4,
+        "duplicatedLines": 43,
+        "duplicatedTokens": 325,
+        "lines": 17918,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 0.2399821408639357,
+        "percentageTokens": 0.1966288735888097,
+        "sources": 102,
+        "tokens": 165286
+      }
+    },
+    "total": {
+      "clones": 4,
+      "duplicatedLines": 43,
+      "duplicatedTokens": 325,
+      "lines": 17918,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 0.2399821408639357,
+      "percentageTokens": 0.1966288735888097,
+      "sources": 102,
+      "tokens": 165286
+    }
+  }
+}

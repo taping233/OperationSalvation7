@@ -1,0 +1,57 @@
+{
+  "dateUTC": "2026-10-18",
+  "reviewedOldSource": "/workspace/scratch/b7a53a06c872/game_handoff_78455b83/source/搜打撤/game/src/hub/hub.personnel.js",
+  "oldSha256": "11b0420650d8e3a09e2e5f8a9160422f62bd7318dd2fd501a4ff88dddd90f21b",
+  "currentSha256": "f363ac2ad34b21fe99a1b650642deb2537e397c918175f58d5325ad4366bbe72",
+  "artSha256": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
+  "reviewedArtSha256": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
+  "skinUrlOutputs": [
+    {
+      "path": "portraits/full/wu.webp",
+      "exists": true,
+      "excludedCandidate": false
+    },
+    {
+      "path": "portraits/full/changwuyu.webp",
+      "exists": true,
+      "excludedCandidate": false
+    },
+    {
+      "path": "portraits/full/baita.webp",
+      "exists": true,
+      "excludedCandidate": false
+    },
+    {
+      "path": "portraits/full/heixiang.webp",
+      "exists": true,
+      "excludedCandidate": false
+    },
+    {
+      "path": "portraits/full/xingyue.webp",
+      "exists": true,
+      "excludedCandidate": false
+    },
+    {
+      "path": "portraits/full/changwuyu-drum-room.webp",
+      "exists": true,
+      "excludedCandidate": false
+    },
+    {
+      "path": "portraits/full/wu-casual-v14.webp",
+      "exists": true,
+      "excludedCandidate": false
+    },
+    {
+      "path": "portraits/full/wu-spring-v15.webp",
+      "exists": true,
+      "excludedCandidate": false
+    },
+    {
+      "path": "portraits/full/wu-beach.webp",
+      "exists": true,
+      "excludedCandidate": false
+    }
+  ],
+  "removedSpecialCase": "portraits/personnel/wu-default-cutout-v1.webp",
+  "removedSpecialCaseExcluded": false
+}

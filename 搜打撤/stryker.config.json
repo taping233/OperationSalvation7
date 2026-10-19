@@ -1,0 +1,29 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "mutate": [
+    "game/src/battle/core/battle.hand-selection.js"
+  ],
+  "testRunner": "vitest",
+  "vitest": {
+    "configFile": "tests/tools/quality.vitest.config.mjs"
+  },
+  "coverageAnalysis": "perTest",
+  "concurrency": 1,
+  "reporters": [
+    "clear-text",
+    "json"
+  ],
+  "jsonReporter": {
+    "fileName": "node_modules/.cache/quality-tools/mutation.json"
+  },
+  "tempDirName": ".tmp/stryker-quality-trial",
+  "timeoutMS": 10000,
+  "ignorePatterns": [
+    "/docs",
+    "/game/assets",
+    "/game/css",
+    "/game/data",
+    "/desktop-app",
+    "/.tmp"
+  ]
+}

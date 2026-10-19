@@ -22,7 +22,8 @@ export function calculateEffectiveCardCost(card, uid, state) {
   if (state.unlimitedRune && ['武术', '法术'].includes(card.type) && uid && String(uid).startsWith('bts')) {
     return Math.max(0, (+(card.cost || 0)) - 1);
   }
-  if (uid && ((state.zeroFeeTurn || 0) >= state.turn)) return 0;
+  // Nature Staff stores one target turn, not an inclusive expiry deadline.
+  if (uid && state.zeroFeeTurn != null && state.zeroFeeTurn === state.turn) return 0;
   if (state.cosmosForm > 0) return 1;
   if (state.spellCost1 && card.type === '法术') return 1;
   if (state.meleeCost1 && card.type === '武术') return 1;

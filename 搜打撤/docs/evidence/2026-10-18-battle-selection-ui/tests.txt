@@ -1,0 +1,34 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/搜打撤
+
+ ✓ tests/contracts.test.js (17 tests) 635ms
+   ✓ ESM 依赖方向 > src 模块不存在循环依赖  595ms
+ ✓ tests/battle-esc-ime-guard.test.js (4 tests) 931ms
+   ✓ battle Esc IME guard (F-003) > 组合态（isComposing）Esc 不取消点选/瞄准态，也不 preventDefault  921ms
+ ✓ tests/battle-hand-keyword-interaction.test.js (11 tests) 250ms
+ ✓ tests/architecture-boundaries.test.js (24 tests) 637ms
+   ✓ 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向  609ms
+ ✓ tests/battle-infusion-action-layout.test.js (30 tests) 1487ms
+ ✓ tests/battle-drag-reference.test.js (21 tests) 96ms
+ ✓ tests/battle-selection-ui.test.js (22 tests) 56ms
+
+⎯⎯⎯⎯ Unhandled Rejection ⎯⎯⎯⎯⎯
+Error: Channel closed
+ ❯ target.send node:internal/child_process:794:16
+ ❯ ProcessWorker.send ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinypool/dist/index.js:140:41
+ ❯ MessagePort.<anonymous> ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinypool/dist/index.js:149:62
+ ❯ [nodejs.internal.kHybridDispatch] node:internal/event_target:856:20
+ ❯ MessagePort.<anonymous> node:internal/per_context/messageport:23:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { code: 'ERR_IPC_CHANNEL_CLOSED' }
+
+
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

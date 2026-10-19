@@ -25,10 +25,10 @@ export function battlePileBodyHTML({ cards, cardHTML, kind, isBoss }) {
   const types = Object.entries(byType).sort((a,b) => b[1]-a[1]).map(([type,count]) => `<span>${esc(type)} <b>${count}</b></span>`).join('');
   const grave = kind === 'grave';
   const list = stacks.map((stack, i) => `<button type="button" class="bt-gy-row battle-pile-card${i === 0 ? ' is-inspected' : ''}" data-act="btInspectPile" data-i="${i}" aria-pressed="${i === 0}" aria-label="查看 ${escAttr(stack.card.name)} 的完整规则，${stack.count} 张">${cardHTML(stack.card, 'sm')}${stack.count > 1 ? `<span class="bt-count">×${stack.count}</span>` : ''}</button>`).join('');
-  const note = isBoss ? grave ? '消耗牌不会洗回。打出的牌进入弃牌堆，牌库抽空后参与洗回。' : '牌库抽空后洗回弃牌堆；消耗牌不会洗回。' : '普通战不使用循环牌库。消耗去向按本场卡牌规则结算。';
+  const note = isBoss ? grave ? '本场消耗牌堆中的牌不会洗回。打出的牌进入弃牌堆，牌库抽空后参与洗回。' : '牌库抽空后洗回弃牌堆；本场消耗牌堆中的牌不会洗回。' : '普通战不使用循环牌库。消耗去向按本场卡牌规则结算。';
   return { stacks, html:`<div class="ov-stats battle-pile-summary"><span>${grave ? '本场消耗' : '剩余'} <b>${cards.length}</b> 张</span><div class="battle-pile-types">${types}</div></div>
     <div data-decision-content="pile" class="battle-pile-context"><span>${isBoss ? '首脑战' : '遭遇战'} · 按同一卡牌合并展示</span><span>点击卡牌查看完整规则</span></div>
-    ${stacks.length ? `<div class="battle-pile-layout"><div class="bt-gy-list">${list}</div>${pileDetailHTML(stacks[0])}</div>` : `<div class="battle-decision-empty"><b>${grave ? '还没有消耗牌' : '牌库已空'}</b><p>${grave ? '被消耗的牌会显示在这里。' : isBoss ? '弃牌堆洗回后，这里会补充卡牌。' : '普通战不使用循环牌库。'}</p></div>`}
+    ${stacks.length ? `<div class="battle-pile-layout"><div class="bt-gy-list">${list}</div>${pileDetailHTML(stacks[0])}</div>` : `<div class="battle-decision-empty"><b>${grave ? '本场还没有消耗牌' : '牌库已空'}</b><p>${grave ? '本场被消耗的牌会显示在这里。' : isBoss ? '弃牌堆洗回后，这里会补充卡牌。' : '普通战不使用循环牌库。'}</p></div>`}
     <div class="ov-btns"><p class="battle-pile-note">${note}</p><button class="ov-btn ok" data-act="${grave ? 'btGraveBack' : 'btDeckBack'}">返回战斗</button></div>` };
 }
 
@@ -54,5 +54,5 @@ export function battleHandSelectBodyHTML({ pool, handSelecting, cardHTML }) {
 export function battleDiscoverLifecycleNote({ act, isBoss, fromDeckBottom }) {
   if (act === 'pouch') return '取出后立即施放，无需另付该法术费用 · 背包原牌随之消耗';
   const origin = fromDeckBottom ? '来自当前牌库底 · 选中牌以本场副本入手' : '本场生成';
-  return isBoss ? `${origin}。通常打出后进弃牌堆并参与洗回；被消耗时进入本场消耗牌，战后按临时牌规则处理。` : `${origin}${fromDeckBottom ? '；' : '：'}使用或消耗后进入消耗区，未用则战后消散`;
+  return isBoss ? `${origin}。通常打出后进弃牌堆并参与洗回；被消耗时进入本场消耗牌堆，战后按临时牌规则处理。` : `${origin}${fromDeckBottom ? '；' : '：'}使用或消耗后进入消耗区，未用则战后消散`;
 }

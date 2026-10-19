@@ -1,0 +1,24 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "game/**/*.html",
+    "game/src/**/*.js",
+    "game/tools/**/*.js",
+    "scripts/**/*.{js,mjs,cjs}",
+    "tests/**/*.test.js",
+    "tests/tools/**/*.{mjs,js}",
+    "desktop-app/**/*.{js,cjs}",
+    "*config.{js,mjs,cjs}"
+  ],
+  "project": [
+    "game/src/**/*.js",
+    "game/tools/**/*.js",
+    "scripts/**/*.{js,mjs,cjs}",
+    "tests/**/*.{js,mjs}",
+    "desktop-app/**/*.{js,cjs}"
+  ],
+  "ignoreDependencies": [
+    "@stryker-mutator/vitest-runner"
+  ],
+  "ignoreBinaries": []
+}

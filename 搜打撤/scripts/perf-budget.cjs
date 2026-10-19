@@ -52,6 +52,32 @@ function inspectInitialJs(outDir, html, { exists = existsSync, stat = statSync }
   return { entryFiles: [...entryFiles], initialFiles: [...initialFiles], failures };
 }
 
+// Equal content must have equal byte length. Only same-size candidates need hashing.
+// Inputs are the completed build output; stat failures remain fatal, as before.
+function inspectPackageBytes(files, { stat = statSync, read = readFileSync } = {}) {
+  let packageBytes = 0;
+  const sizes = new Map();
+  for (const file of files) {
+    const bytes = stat(file).size;
+    packageBytes += bytes;
+    const group = sizes.get(bytes) || [];
+    group.push(file);
+    sizes.set(bytes, group);
+  }
+  let duplicateBytes = 0;
+  for (const candidates of sizes.values()) {
+    if (candidates.length < 2) continue;
+    const hashes = new Set();
+    for (const file of candidates) {
+      const body = read(file);
+      const hash = createHash('sha256').update(body).digest('hex');
+      if (hashes.has(hash)) duplicateBytes += body.length;
+      else hashes.add(hash);
+    }
+  }
+  return { packageBytes, duplicateBytes };
+}
+
 async function run() {
   const { PERFORMANCE_BUDGETS, STARTUP_SCENE_KEYS } = await import(pathToFileURL(path.join(ROOT, 'game/src/core/performance-budgets.js')).href);
   const outDir = process.env.SDT_BUILD_OUT_DIR
@@ -65,20 +91,11 @@ async function run() {
   if (!existsSync(path.join(outDir, 'index.html'))) failures.push(`构建目录不存在或不完整：${outDir}`);
 
   const files = walk(outDir);
-  const packageBytes = files.reduce((sum, file) => sum + statSync(file).size, 0);
+  const { packageBytes, duplicateBytes } = inspectPackageBytes(files);
   if (packageBytes > PERFORMANCE_BUDGETS.packageBytesMax) {
     failures.push(`构建体积 ${mib(packageBytes)} > ${mib(PERFORMANCE_BUDGETS.packageBytesMax)}`);
   }
 
-  const groups = new Map();
-  for (const file of files) {
-    const body = readFileSync(file);
-    const hash = createHash('sha256').update(body).digest('hex');
-    const group = groups.get(hash) || { bytes: body.length, files: [] };
-    group.files.push(file);
-    groups.set(hash, group);
-  }
-  const duplicateBytes = [...groups.values()].reduce((sum, group) => sum + (group.files.length - 1) * group.bytes, 0);
   if (duplicateBytes > PERFORMANCE_BUDGETS.packagedDuplicateBytesMax) {
     failures.push(`重复资源 ${mib(duplicateBytes)} > ${mib(PERFORMANCE_BUDGETS.packagedDuplicateBytesMax)}`);
   }
@@ -135,4 +152,4 @@ if (require.main === module) run().catch(error => {
   process.exitCode = 1;
 });
 
-module.exports = { run, walk, inspectInitialJs };
+module.exports = { run, walk, inspectInitialJs, inspectPackageBytes };

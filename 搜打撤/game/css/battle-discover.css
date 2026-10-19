@@ -1,3 +1,4 @@
+@import url('./secondary-ui-tokens.css');
 /* Battle discovery owns its glass surface; other discover-mode producers keep their own UI. */
 body #overlay .card.discover:has(.battle-decision[data-decision-kind="discover"]) {
   --discover-ink:#e7eff3;
@@ -12,11 +13,11 @@ body #overlay .card.discover:has(.battle-decision[data-decision-kind="discover"]
   min-height:0;
   padding:0!important;
   overflow:hidden!important;
-  border:1px solid rgba(255,255,255,.2)!important;
+  border:1px solid var(--ui-glass-line)!important;
   border-radius:20px!important;
-  background:rgba(22,32,41,.76)!important;
-  backdrop-filter:blur(18px)!important;
-  -webkit-backdrop-filter:blur(18px)!important;
+  background:var(--ui-glass-surface)!important;
+  backdrop-filter:blur(var(--ui-glass-blur))!important;
+  -webkit-backdrop-filter:blur(var(--ui-glass-blur))!important;
   box-shadow:0 24px 72px rgba(4,10,16,.38)!important;
   color:var(--discover-ink)!important;
   text-align:left;

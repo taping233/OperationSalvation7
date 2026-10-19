@@ -14,7 +14,7 @@ import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, WINTER_BA
 import { Random } from '../core/random.js';
 import { hashSeed } from '../core/random-core.js';
 import { createShopController } from './game.run.shop.js';
-import { captureBattleContext, startBattle } from '../battle/battle-loader.js';
+import { captureBattleContext, ensureBattleReady, startBattle } from '../battle/battle-loader.js';
 import { setBagReturnHook } from '../hub/bag-return-hook.js';
 import { bagSlots } from '../hub/game.bag.bridge.js';
 import { nodeActionBinding } from './node-reward-state.js';
@@ -24,6 +24,8 @@ import { turboMs } from '../core/turbo.js';
 import { usePlainBattleTransition } from '../ui/transition-diagnostic-policy.js';
 import { reduceMotion } from '../core/motion.js';
 import { createCityCut, cityCutDuration } from '../ui/camp-entry.js';
+import { createPageSurfaceLifetime } from '../ui/page-surface-lifetime.js';
+import { prepareTransition } from '../ui/transition-preparation.js';
 import { eventSceneHTML } from '../ui/node-scene-view.js';
 import '../../css/entry-events.css';
 import '../../css/expedition-transitions.css';
@@ -198,13 +200,14 @@ export function consumeCurrentCell() { consumeCell(); }
 
 // 节点短过场沿原定时与跳过生命周期；战斗入口共用通用远征画面。
 let transitionRequest = 0;
-export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = cityCutDuration, presentation = '', holdVisual = false }) {
+export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = cityCutDuration, presentation = '', holdVisual = false, prepare }) {
   // 结束时必须恢复状态：战斗/节点流程下游会自行改状态，但「继续对局」路径
   // 过渡后无人收拾，曾导致 game.state 卡死在 modal、侧栏按钮永久禁用
   const prevState = game.state;
   const currentContext = captureBattleContext(game);
   const request = ++transitionRequest;
-  const isCurrent = () => currentContext() && request === transitionRequest;
+  let lifetime = null, cancelTransition = null;
+  const isCurrent = () => currentContext() && request === transitionRequest && (!holdVisual || !lifetime || lifetime.current());
   const cityCut = presentation === 'city-cut' && !reduceMotion();
   const plainCut = usePlainBattleTransition(import.meta.env.DEV, location.search, tone, presentation);
   // Keep the original transition timer and held-release delay; only replace its visual DOM.
@@ -214,14 +217,15 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
     let done = false;
     let timer = null;
     let surface = null;
+    cancelTransition = () => { if (done) return; done = true; clearTimeout(timer); resolve(false); };
     const finish = () => {
       if (done) return;
       done = true;
       if (timer) clearTimeout(timer);
-      if (!isCurrent()) { resolve(false); return; }
+      if (!isCurrent()) { lifetime?.dispose(); resolve(false); return; }
       // 过场只拥有自己挂载的画面；迟到回调不能关掉已打开的背包或新页面。
-      if (surface && (!surface.isConnected || !UI.el.ovBody.contains(surface))) { resolve(false); return; }
-      if (!holdVisual) UI.hideOverlay({ immediate: tone === 'battle' });
+      if (surface && (!surface.isConnected || !UI.el.ovBody.contains(surface) || (lifetime && !lifetime.current()))) { lifetime?.dispose(); resolve(false); return; }
+      if (!holdVisual) { lifetime?.dispose(); UI.hideOverlay({ immediate: tone === 'battle' }); }
       // 战斗 modal 态（Battle.restore 置位）不得降级为 idle，否则战斗界面丢失且移动锁死
       game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
       resolve(true);
@@ -261,6 +265,10 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
     timer = setTimeout(finish, reduceMotion() ? 0 : turboMs(duration));
     UI.refresh(game);
   });
+  if (heldSurface && UI.el.overlay) lifetime = createPageSurfaceLifetime(heldSurface, {
+    overlay: UI.el.overlay, onInvalidate: () => cancelTransition?.(),
+  });
+  const preparation = prepareTransition(prepare, { signal: lifetime?.signal, isCurrent });
   // resolve 与消费者的 then/await 之间仍可能启动新过场；保留该次只读核验。
   const ownsSurface = () => request === transitionRequest && heldSurface?.isConnected
     && UI.el.ovBody.contains(heldSurface);
@@ -273,7 +281,7 @@ export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', 
     // 恢复战斗/奖励/选角可能已经换页，只收起本次续局自己的过场。
     if (ownsSurface()) UI.hideOverlay({ immediate: true });
   };
-  return Object.assign(transition, { isCurrent, release });
+  return Object.assign(transition, { isCurrent, release, preparation });
 }
 
 export function enterNode(kind, done) {
@@ -288,8 +296,27 @@ export function enterNode(kind, done) {
   };
   const spec = transitions[kind] || { title: '进入节点' };
   const combat = kind === 'battle' || kind === 'boss';
-  const transition = showRunTransition(combat ? { ...spec, duration: 650 } : { ...spec, presentation: 'node-cut', duration: 240 });
-  return transition.then(current => current && transition.isCurrent() ? done() : false);
+  const transition = showRunTransition(combat
+    ? { ...spec, duration: 650, holdVisual: true, prepare: ensureBattleReady }
+    : { ...spec, presentation: 'node-cut', duration: 240 });
+  return transition.then(async current => {
+    if (!current || !transition.isCurrent()) return false;
+    if (!combat) return done();
+    // Keep the mounted curtain/input state while module preparation completes.
+    game.state = 'modal';
+    const prepared = await transition.preparation;
+    if (prepared.cancelled || !transition.isCurrent()) return false;
+    // A failed speculative import is not readiness: startBattle retains its retry,
+    // diagnostic and failure state handling, all beneath this same held curtain.
+    try {
+      const result = await done();
+      if (result === false) await transition.release({ immediate: true });
+      return result;
+    } catch (error) {
+      await transition.release({ immediate: true });
+      throw error;
+    }
+  });
 }
 
 // 场景/即时效果结束后的收尾：事件连锁移动优先，否则回待机并存档

@@ -8,6 +8,7 @@
 import { BOSS_ALTAR_REQUIREMENT } from '../core/map-node-state.js';
 import { characterFor, characterName } from '../core/characters.js';
 import { installExpeditionFeedback } from '../ui/expedition-feedback.js';
+import { showLayerPassage } from '../ui/map-passage.js';
 import { openClassChoice as requestClassChoicePage } from './game.run.class-choice.js';
 import { showRewardCardFeedback } from '../ui/reward-card-feedback.js';
 import { altarRitualHTML, altarRewardHTML, entrySupplyIntroHTML } from '../ui/node-decision-view.js';
@@ -199,9 +200,9 @@ export function openDoorModal(door, cellDef) {
     tone: 'door', icon: '[[icon:door]]', title: '层间闸门',
     sub: door.reverse ? '这条通路返回已探索的区域。' : '穿过闸门后进入下一层。确认前可返回当前层检查遗漏，或先整理背包。',
     body:
-      nodeOpt('goDoor', `${door.reverse ? '返回' : '进入'}${target.name}`, '', 'ok') +
+      nodeOpt('goDoor', `${door.reverse ? '返回' : '进入'}${target.name}`, '', 'ok', 'data-cancel="false"') +
       (shopOpen() ? nodeOpt('doorShop', '逛商队', '闸门旁的拾荒商队还在营业') : ''),
-    foot:'<button class="ov-btn" data-act="doorBag">整理背包</button><button class="ov-btn" data-act="doorBack">返回当前层</button>',
+    foot:'<button class="ov-btn" data-act="doorBag">整理背包</button><button class="ov-btn" data-act="doorBack" data-cancel="true">返回当前层</button>',
   });
   const active = altarPageBinding('goDoor');
   let entering = false;
@@ -213,10 +214,13 @@ export function openDoorModal(door, cellDef) {
     entering = true;
     if (cellDef?.type === 'shop') consumeCurrentCell();
     setBagReturnHook(null);
-    UI.hideOverlay();
+    const passage = showLayerPassage(game, game.layerIdx, door.toLayer);
+    // The layer curtain already owns the handoff; do not stack the map-return veil.
+    UI.hideOverlay({ immediate: true });
     UI.log(`穿过隔离闸门 → <b>${target.name}</b>`, 'sys');
     // 穿门换层走镜头补间（2026-09-27 二轮动效）：壁纸交叉溶解 + 相机滑入新环，不再硬切
-    enterLayer(door.toLayer, door.arriveAt, { glideCam: true });
+    try { enterLayer(door.toLayer, door.arriveAt, { glideCam: true }); }
+    catch (error) { passage?.dispose(); throw error; }
     SDT.Sound.sfx('layerEnter');
   });
   UI.act('doorShop', () => { if (active() && !entering && shopOpen()) openShop('door:' + door.pair); });
@@ -518,7 +522,7 @@ export function openEmergencyModal() {
       nodeShell({
         tone: 'exit', icon: '[[icon:lock]]', title: '停用的撤离点',
         sub: '撤离信标没有响应——只有第三层的紧急撤离点仍在工作',
-        body: nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
+        body: nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点', '', 'data-cancel="true"'),
       });
       const active = altarPageBinding('stayHere');
       UI.act('stayHere', () => { if (!active()) return; UI.hideOverlay(); game.state = 'idle'; UI.refresh(game); });
@@ -533,8 +537,8 @@ export function openEmergencyModal() {
         coinHint +
         nodeOpt('payExit', '紧急撤离（献祭 3 张卡牌）', payment.canPay
           ? '从背包选择 3 张卡牌献祭，带着剩余战利品返回基地'
-          : `卡牌不足（现有 ${payment.available}/3）——至少需要 3 张卡牌`, payment.canPay ? 'ok' : '', payment.canPay ? '' : 'disabled title="至少需要 3 张卡牌"') +
-        nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
+          : `卡牌不足（现有 ${payment.available}/3）——至少需要 3 张卡牌`, payment.canPay ? 'ok' : '', `data-cancel="false" ${payment.canPay ? '' : 'disabled title="至少需要 3 张卡牌"'}`) +
+        nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点', '', 'data-cancel="true"'),
     });
     const active = altarPageBinding('stayHere');
     UI.act('payExit', () => {
@@ -561,14 +565,14 @@ export function openEmergencyModal() {
       sub: '污染核心的首脑已被击破——撤离信标无条件放行',
       body:
         coinHint +
-        nodeOpt('payExit', '立即撤离', '带着全部战利品返回基地', 'ok') +
-        nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
+        nodeOpt('payExit', '立即撤离', '带着全部战利品返回基地', 'ok', 'data-cancel="false"') +
+        nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点', '', 'data-cancel="true"'),
     });
   } else {
     nodeShell({
       tone: 'exit', icon: '[[icon:lock]]', title: '终局撤离点',
       sub: '撤离信标被污染核心压制——击败第四层的首脑后才能撤离',
-      body: nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点'),
+      body: nodeOpt('stayHere', '继续深入', '留在地图上，继续选择相邻节点', '', 'data-cancel="true"'),
     });
   }
   const active = altarPageBinding('stayHere');
@@ -706,7 +710,10 @@ function renderExtractStash(notice = '', finishSignature = null) {
       <p class="help-item"><b>自动入库</b>木材/口粮已入库。消耗区逐张以 1/3 概率结算；初始攻击与职业卡不能带回基地，其余实际保留的卡进入基地消耗区，需用钥匙复原。</p>
       <p class="help-item"><b>按估值入库</b>按卡牌估值从高到低，同估值按背包原次序。估值不代表稀有度或实战强度，也不表示卡牌可以出售。入库立即保存，本页不能撤回或换选。</p>
       <p class="help-item"><b>仓库容量</b>可在基地「升级」页用 [[icon:wood]] 木材×${MAP.rules.stashUpgradeWood} 扩建 +${MAP.rules.stashUpgradeSlots} 张。入库选择会逐次保存，卡牌下次出发时可以携带。</p>`,
-    back: () => renderExtractStash(),
+    back: () => {
+      if (viewRevision !== extractViewRevision || getActiveSlot() !== viewSlot || game.pendingExtraction !== pending) return;
+      renderExtractStash(notice, finishSignature);
+    },
   });
   UI.showOverlay('', extractionStashHTML({
     remainingCards: extractLeft, savedCards: receipt.savedCards, keptPocket: pocket.keptCards,

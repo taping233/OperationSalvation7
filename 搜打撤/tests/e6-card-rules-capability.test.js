@@ -31,7 +31,7 @@ describe('E6 battle-entry rule capability', () => {
 
   it('does not equate schema-valid acquisition combinations and ignored filters with support', () => {
     for (const operation of [acquire({ dest: 'hand', act: 'play' }), acquire({ dest: 'deck', act: 'decay' }),
-      acquire({ dest: 'discover', act: 'noInfuse' }), acquire({ filter: { type: '法术' } })]) {
+      acquire({ filter: { type: '法术' } })]) {
       const card = cardFor([{ op: 'coins', n: 5 }, operation]);
       expect(validateCardRules(card)).toEqual({ ok: true, errors: [], pending: [] });
       const before = JSON.stringify(card);
@@ -44,7 +44,7 @@ describe('E6 battle-entry rule capability', () => {
 
   it('preserves every currently implemented acquire destination/action combination and default', () => {
     const supported = { hand: [undefined, 'dup', 'noInfuse'], deck: [undefined, 'dup', 'zeroCost', 'noInfuse'],
-      discover: [undefined, 'play', 'playKeep', 'dup', 'zeroCost', 'decay'] };
+      discover: [undefined, 'play', 'playKeep', 'dup', 'zeroCost', 'decay', 'noInfuse'] };
     for (const [dest, acts] of Object.entries(supported)) for (const act of acts) {
       expect(inspectCardRuleCapability(cardFor([acquire({ dest, act })])), `${dest}/${act}`)
         .toEqual({ kind: 'supported', ok: true });

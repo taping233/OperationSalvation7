@@ -34,7 +34,7 @@ const SUPPORTED_ACQUIRE_FILTER_KEYS = new Set(['cost', 'costMax', 'exceptIds']);
 const ACQUIRE_ACTIONS = {
   hand: ['dup', 'noInfuse'],
   deck: ['dup', 'zeroCost', 'noInfuse'],
-  discover: ['play', 'playKeep', 'dup', 'zeroCost', 'decay'],
+  discover: ['play', 'playKeep', 'dup', 'zeroCost', 'decay', 'noInfuse'],
 };
 
 /** @param {unknown} value @returns {value is object} */

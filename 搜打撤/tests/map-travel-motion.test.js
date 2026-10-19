@@ -1,3 +1,4 @@
+import { cancelLayerPassage } from '../game/src/ui/map-passage.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 const harness = vi.hoisted(() => ({ game: {}, save: vi.fn(), consume: vi.fn(), safePage: vi.fn() }));
 vi.mock('../game/src/run/game.session.js', () => ({
@@ -44,7 +45,7 @@ beforeEach(() => {
   });
 });
 const arrive = () => callbacks.pop()(performance.now() + 500);
-afterEach(() => { vi.useRealTimers(); });
+afterEach(() => { cancelLayerPassage(); vi.useRealTimers(); });
 describe('continuous travel commits stable nodes', () => {
   it('avatar interpolation uses the same eased curve as route rendering and retains direct cross-layer travel', () => {
     const g = harness.game;
@@ -59,6 +60,8 @@ describe('continuous travel commits stable nodes', () => {
     expect(g.pos).toEqual(mapTravelPoint(travel.path[0], travel.path[1], travel.progress));
     arrive();
     expect(g).toMatchObject({ layerIdx: 1, trackPos: 1, turn: 2, pos: { x: 120, y: 120 } });
+    expect(document.querySelectorAll('.map-layer-passage')).toHaveLength(1);
+    expect(moveTo(0, 0)).toBe(false);
   });
   it('shares one route clock: commits passed stable nodes, rejects reentry and resolves the destination', () => {
     const g = harness.game;
@@ -135,4 +138,22 @@ describe('continuous travel commits stable nodes', () => {
     expect(window.SDT.UI.refresh.mock.calls.length).toBeGreaterThan(0);
     harness.save.mockReset();
   });
+});
+
+it('cross-layer arrival resolves only once after the shared curtain, without a second travel commit', async () => {
+  vi.useFakeTimers();
+  vi.stubGlobal('requestAnimationFrame', cb => { callbacks.push(cb); return callbacks.length; });
+  const g=harness.game;
+  g.layerData[0].logical[0].next=[[1,1]];
+  g.layerData.push({doors:[],logical:[null,{def:{type:'coin'},next:[]}]});
+  g.visited['1,1']=1;
+  expect(moveTo(1,1)).toBe(true);
+  arrive(); arrive();
+  expect(g).toMatchObject({state:'moving',layerIdx:1,trackPos:1,turn:2});
+  expect(document.querySelectorAll('.map-layer-passage')).toHaveLength(1);
+  await vi.advanceTimersByTimeAsync(1000);
+  expect(g).toMatchObject({state:'idle',layerIdx:1,trackPos:1,turn:2});
+  expect(getMapTravelPresentation(g)).toBeNull();
+  expect(document.querySelector('.map-layer-passage')).toBeNull();
+  await vi.runAllTimersAsync(); expect(g.turn).toBe(2);
 });

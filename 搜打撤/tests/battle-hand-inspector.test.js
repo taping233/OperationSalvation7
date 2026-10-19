@@ -1028,3 +1028,196 @@ it('卡文已包含禁用原因时不追加相同阅读提示', () => {
   expect(desc.textContent).toContain(reason);
   expect(desc.querySelector('.bt-rulehint')).toBeNull();
 });
+
+it.each(['enemy', 'self'])('键盘选牌 Esc 取消后恢复 %s 原卡面焦点且不消费', side => {
+  start(2, side === 'self' ? Cards.all().find(item => item.id === 'tt3-longsword') : Cards.SHA);
+  const face = card().querySelector('.hs-card');
+  const before = infusionResources();
+  face.focus();
+  face.dispatchEvent(new KeyboardEvent('keydown', { key:'Enter', bubbles:true, cancelable:true }));
+  expect(document.activeElement).toBe(stage().querySelector(side === 'self' ? '#btSelf' : '.bt-foe'));
+  document.activeElement.dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true, cancelable:true }));
+  flush();
+  expect(Aim.clickSelectedUid).toBeNull();
+  expect(stage().querySelector('.can-target')).toBeNull();
+  expect(infusionResources()).toEqual(before);
+  expect(document.activeElement).toBe(face);
+});
+
+it('鼠标来源选牌即便目标获得焦点，Esc 也不抢回手牌', () => {
+  start(2);
+  Aim.selectCardByClick('inspect-card', false, { autoSingleTarget:false });
+  const target = stage().querySelector('.bt-foe.can-target');
+  target.focus();
+  target.dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true, cancelable:true }));
+  expect(Aim.clickSelectedUid).toBeNull();
+  expect(document.activeElement).toBe(target);
+});
+
+it.each(['removed-card', 'changed-token', 'detached-stage', 'hidden-overlay', 'inert-stage', 'busy'])('键盘取消不恢复已失效来源：%s', async invalidation => {
+  start(2);
+  const face = card().querySelector('.hs-card');
+  face.dispatchEvent(new KeyboardEvent('keydown', { key:'Enter', bubbles:true, cancelable:true }));
+  const focus = vi.spyOn(face, 'focus');
+  if (invalidation === 'removed-card') {
+    const { set$hand } = await import('../game/src/battle/runtime/battle.runtime.piles.js');
+    set$hand([]);
+  } else if (invalidation === 'changed-token') stage()._battleToken = 'another-battle';
+  else if (invalidation === 'detached-stage') stage().remove();
+  else if (invalidation === 'hidden-overlay') UI.el.overlay.hidden = true;
+  else if (invalidation === 'inert-stage') stage().setAttribute('inert', '');
+  else {
+    const { set$busy } = await import('../game/src/battle/runtime/battle.runtime.session.js');
+    set$busy(true);
+  }
+  Aim.cancelClickSelection({ restoreFocus:true });
+  expect(focus).not.toHaveBeenCalled();
+  if (invalidation === 'busy') {
+    const { set$busy } = await import('../game/src/battle/runtime/battle.runtime.session.js');
+    set$busy(false);
+  }
+});
+
+it('键盘选牌后主动转焦其他控件，Esc 不抢走新焦点', () => {
+  start(2);
+  card().querySelector('.hs-card').dispatchEvent(new KeyboardEvent('keydown', { key:'Enter', bubbles:true, cancelable:true }));
+  const other = stage().querySelector('[data-act=btSlam]');
+  other.focus();
+  other.dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true, cancelable:true }));
+  expect(Aim.clickSelectedUid).toBeNull();
+  expect(document.activeElement).toBe(other);
+});
+
+it('键盘正常确认出牌不恢复原卡焦点', async () => {
+  start(2);
+  const face = card().querySelector('.hs-card');
+  face.dispatchEvent(new KeyboardEvent('keydown', { key:'Enter', bubbles:true, cancelable:true }));
+  const focus = vi.spyOn(face, 'focus');
+  document.activeElement.dispatchEvent(new KeyboardEvent('keydown', { key:'Enter', bubbles:true, cancelable:true }));
+  await settle();
+  expect(BattleSession.getSnapshot().hand).not.toContain('inspect-card');
+  expect(focus).not.toHaveBeenCalled();
+});
+
+it('扰敌首个目标后提供可点击取消，清提示和高亮且不消费', () => {
+  start(2, Cards.all().find(entry => entry.id === 'tt7-provoke'));
+  const before = infusionResources();
+  Aim.selectCardByClick('inspect-card', false);
+  stage().querySelector('.bt-foe[data-eidx="0"]').click(); flush();
+  expect(BattleSession.getSnapshot().pendingTarget).not.toBeNull();
+  expect(stage().querySelector('[data-selection-prompt]')?.textContent).toContain('已选 敌人0');
+  expect(stage().querySelector('.bt-thought-bubble[data-target-prompt]')).toBeNull();
+  const cancel = stage().querySelector('[data-act="btPickCancel"]');
+  expect(cancel).not.toBeNull();
+  cancel.click(); flush();
+  expect(BattleSession.getSnapshot().pendingTarget).toBeNull();
+  expect(stage().querySelector('.bt-thought-bubble[data-target-prompt]')).toBeNull();
+  expect(stage().querySelector('.can-target')).toBeNull();
+  expect(stage().querySelector('[data-act="btPickCancel"]')).toBeNull();
+  expect(infusionResources()).toEqual(before);
+});
+
+it('扰敌触屏取消条转义牌名，正常第二次选靶完成后移除', async () => {
+  const name = '<img src=x onerror=alert(1)>扰敌';
+  start(2, { ...Cards.all().find(entry => entry.id === 'tt7-provoke'), name });
+  Aim.selectCardByClick('inspect-card', false);
+  stage().querySelector('.bt-foe[data-eidx="0"]').click(); flush();
+  const bar = stage().querySelector('.bt-pick');
+  expect(bar.textContent).toContain(name);
+  expect(bar.querySelector('.bt-infuse-title img')).toBeNull();
+  expect(bar.querySelectorAll('[data-act="btPickCancel"]')).toHaveLength(1);
+  stage().querySelector('.bt-foe[data-eidx="1"]').click(); await settle();
+  expect(BattleSession.getSnapshot().pendingTarget).toBeNull();
+  expect(BattleSession.getSnapshot().hand).not.toContain('inspect-card');
+  expect(BattleSession.getSnapshot().energy).toBe(8);
+  expect(BattleSession.getSnapshot().foes.map(foe => foe.hp)).toEqual([39, 39]);
+  expect(stage().querySelector('.bt-pick')).toBeNull();
+  expect(stage().querySelector('.bt-thought-bubble[data-target-prompt]')).toBeNull();
+});
+
+it('点击选牌、职业技能和卡牌目标共用唯一可见取消条', () => {
+  start(2);
+  const before=infusionResources();
+  Aim.selectCardByClick('inspect-card',false);
+  expect(stage().querySelectorAll('[data-selection-prompt]')).toHaveLength(1);
+  stage().querySelector('[data-act="btPickCancel"]').click();flush();
+  expect(Aim.clickSelectedUid).toBeNull();expect(stage().querySelector('.can-target')).toBeNull();expect(infusionResources()).toEqual(before);
+  stage().querySelector('[data-act="btSlam"]').click();flush();
+  expect(BattleSession.getSnapshot().slamPending).toBe(true);
+  expect(stage().querySelectorAll('[data-selection-prompt]')).toHaveLength(1);
+  stage().querySelector('[data-act="btPickCancel"]').click();flush();
+  expect(BattleSession.getSnapshot().slamPending).toBe(false);expect(stage().querySelector('.can-target')).toBeNull();expect(infusionResources()).toEqual(before);
+});
+
+it('旧取消按钮不能撤销同场新选择，当前按钮仍可正常取消', () => {
+  start(2,Cards.SHA,[{uid:'next-card',card:Cards.all().find(entry=>entry.id==='tt3-fireball')}]);
+  Aim.selectCardByClick('inspect-card',false);const old=stage().querySelector('[data-act="btPickCancel"]');
+  Aim.selectCardByClick('next-card',false);
+  old.click();expect(Aim.clickSelectedUid).toBe('next-card');
+  stage().querySelector('[data-act="btPickCancel"]').click();expect(Aim.clickSelectedUid).toBeNull();
+});
+
+it.each(['Escape','Enter','pointer'])('键盘选牌后焦点转到取消控件，%s 按来源恢复焦点', input => {
+  start(2);const face=card().querySelector('.hs-card');
+  face.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));
+  const cancel=stage().querySelector('[data-act="btPickCancel"]');cancel.focus();
+  const focus=vi.spyOn(face,'focus');
+  if(input==='Escape')cancel.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}));
+  else cancel.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,detail:input==='pointer'?1:0}));
+  flush();expect(Aim.clickSelectedUid).toBeNull();
+  if(input==='pointer')expect(focus).not.toHaveBeenCalled();else expect(document.activeElement).toBe(face);
+});
+
+it('普通战从空本场消耗牌堆到实际注能材料均可查看，返回保持战斗', async () => {
+  start(2,{id:'pile-infusion',name:'注能护盾',type:'法术',cost:1,infuse:1,desc:'注能(1)：获得6点护盾。'},[{uid:'pile-fuel',card:Cards.SHA}]);
+  const badge=()=>stage().querySelector('[data-act="btGrave"]');
+  expect(badge().textContent).toContain('0');badge().click();flush();
+  expect(UI.el.ovBody.textContent).toContain('本场还没有消耗牌');
+  UI.el.ovBody.querySelector('[data-act="btGraveBack"]').click();flush();
+  BattleSession.commands.beginInfusion('inspect-card');flush();
+  BattleSession.commands.selectInfusion('pile-fuel');flush();
+  BattleSession.commands.confirmInfusion();await settle();
+  const snap=BattleSession.getSnapshot();
+  expect(snap.consumed).toContain('pile-fuel');expect(snap.grave).not.toContain('pile-fuel');
+  expect(badge().textContent).toContain('1');badge().click();flush();
+  expect(UI.el.ovBody.querySelector('.battle-pile-summary').textContent).toContain('1');
+  expect(UI.el.ovBody.querySelector('.battle-pile-card').textContent).toContain('初始攻击');
+  UI.el.ovBody.querySelector('[data-act="btGraveBack"]').click();flush();
+  expect(BattleSession.getSnapshot().consumed).toEqual(snap.consumed);
+});
+
+it('shows only active player rules via readonly snapshot and clears retained chips immediately', async () => {
+  const effects = await import('../game/src/battle/runtime/battle.runtime.effects.js');
+  const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
+  start();
+  const before = BattleSession.getSnapshot();
+  expect(document.querySelector('[data-player-effect]')).toBeNull();
+  effects.set$playerCurseImmune(true); effects.set$spellCost1(true); effects.set$meleeCost1(true);
+  effects.set$nextSpellTwice(1); effects.set$allSpellsInfused(true);
+  runtime.pstat.status.discoverPlus = 2; runtime.pstat.status.bleedAmp = 1;
+  effects.set$deathSave(2); effects.set$extraTurn(true);
+  runtime.delayed.push({ special: 'curseImmuneOff', restore: false });
+  const snapshot = BattleSession.getSnapshot();
+  expect(snapshot).not.toBe(before);
+  expect(snapshot.playerEffects).toHaveLength(8);
+  expect(Object.isFrozen(snapshot.playerEffects[0])).toBe(true);
+  render(); flush();
+  const chips = [...document.querySelectorAll('#btSelf [data-player-effect]')];
+  expect(chips).toHaveLength(8);
+  expect(chips.every(chip => chip.hasAttribute('data-ui-tip') && chip.hasAttribute('data-term') && chip.tabIndex === 0)).toBe(true);
+  expect(chips.find(chip => chip.dataset.playerEffect === 'curseImmunity').textContent).toContain('本回合');
+  expect(chips.find(chip => chip.dataset.playerEffect === 'moveCost').textContent).toContain('招式1费');
+  expect(runtime.delayed).toHaveLength(1);
+  delete runtime.delayed[0].restore; // old jobs restore false through the same boolean coercion
+  expect(BattleSession.getSnapshot().playerEffects.find(effect => effect.key === 'curseImmunity').duration).toBe('本回合');
+  runtime.delayed[0].restore = true;
+  expect(BattleSession.getSnapshot().playerEffects.find(effect => effect.key === 'curseImmunity').duration).toBe('本场');
+  effects.set$playerCurseImmune(false); effects.set$spellCost1(false); effects.set$meleeCost1(false);
+  effects.set$nextSpellTwice(0); effects.set$allSpellsInfused(false);
+  runtime.pstat.status.discoverPlus = 0; runtime.pstat.status.bleedAmp = 0;
+  effects.set$deathSave(0); effects.set$extraTurn(false);
+  render(); flush();
+  expect(document.querySelector('[data-player-effect]')).toBeNull();
+  expect(runtime.delayed).toHaveLength(1);
+  expect(snapshot.playerEffects).toHaveLength(8);
+});

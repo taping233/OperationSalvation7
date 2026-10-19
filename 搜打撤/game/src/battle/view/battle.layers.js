@@ -52,11 +52,10 @@ import { commands, getSnapshot, AFFIX_META, Combat, aegisBlocked, effCostOf, fin
   const resolveSlam = commands.resolveSlam;
   const resolveDart = commands.resolveDart;   // 血毒双镖二段点选（2026-09-16 留言）
   const useItemCmd = commands.useItem;
-  const cancelPendingTarget = commands.cancelPendingTarget;
   const HAND_PAGE_SIZE = 9;   // 2026-09-16 老板：每栏最多 9 张（原 battle.view 渲染段，随 updateHand 的 handIndex 落位迁入——批5）
 import { animateSafe } from './battle.anim.view.js';
 import { schedulePresentationMs } from '../runtime/battle.clock.js';
-import { aim, clickSelectedUid, clickSelectedTarget, setTargetable, startAim, cancelAim, cancelClickSelection, selectCardByClick, syncSubmittedCardPoses } from './battle.aim.js';
+import { aim, clickSelectedUid, clickSelectedTarget, setTargetable, startAim, cancelBattleSelection, selectCardByClick, syncSubmittedCardPoses } from './battle.aim.js';
 import { showFoePreview, clearFoePreview } from './battle.hover.js';
 import { cardRuleHint } from './battle.preview.js';
 import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
@@ -68,14 +67,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       // 输入法组合中（keyCode 229）：Esc 是取消拼音组合，不是取消瞄准/点选/注能
       if (e.isComposing || e.keyCode === 229) return;
       if (e.defaultPrevented || !UI.el.ovBody?.querySelector('.battle-stage')) return;
-      const snap = getSnapshot();
-      const pending = snap.pendingTarget || snap.pendingItem || snap.slamPending || snap.dartPending;
-      if (aim || clickSelectedUid != null || pending || snap.infusing) {
+      if (cancelBattleSelection({ restoreFocus:true })) {
         e.preventDefault(); e.stopPropagation();
-        if (aim) cancelAim();
-        if (clickSelectedUid != null) cancelClickSelection();
-        if (pending) cancelPendingTarget();
-        if (snap.infusing) commands.cancelInfusion();   // 注能态 Esc 取消（09-25 三批走查：原唯一入口是注能条按钮）
       }
       return;
     }
@@ -729,7 +722,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       ? `<span class="sts-stat">[[icon:crystal]] 法伤 ${spShow}${spBuff ? `<span title="含法术强化 +${spBuff}">（含+${spBuff}）</span>` : ''}</span>` : '';
     setSection(selfParts.stats, sig, 'stats',
       `<span class="sts-stat">[[icon:swords]] 攻 ${atkShow}${atkTag}</span>${spTag}${pdef.shield ? '<span class="sts-stat">[[icon:shield]] 盾 ' + pdef.shield + '</span>' : ''}${pdef.armor ? '<span class="sts-stat">[[icon:plate]] 甲 ' + pdef.armor + '</span>' : ''}${pdef.guard ? '<span class="sts-stat">格挡中</span>' : ''}`);
-    setSection(selfParts.chips, sig, 'chips', curseChips(pstat.status));
+    setSection(selfParts.chips, sig, 'chips', curseChips(pstat.status) + (snapshot.playerEffects || []).map(effect =>
+      `<span class="bt-buff" tabindex="0" data-player-effect="${escAttr(effect.key)}" data-term="${escAttr(effect.key)}" data-ui-tip data-ui-tip-title="${escAttr(effect.name)}" data-ui-tip-text="${escAttr(effect.description)}" data-ui-tip-note="${escAttr(effect.duration)}">[[icon:${escAttr(effect.icon)}]] ${esc(effect.name)} ${esc(effect.duration)}</span>`).join(' '));
     // 状态挂件（P2）：玩家自己被冰冻时同样点亮常驻状态光
     selfUnit.classList.toggle('fx-frozen', (pstat.status.freeze || 0) > 0);
     const pendingCard = ctx.pendingTarget && findCard(ctx.pendingTarget.uid);

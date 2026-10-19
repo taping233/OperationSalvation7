@@ -120,3 +120,84 @@ describe('BOSS 编组 · 开战装备勾选（2026-09-10 #35）', () => {
     await drain(20);
   });
 });
+
+
+// FB040: exercise the real deck/lifecycle and the start-passive entry independently.
+const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
+const { createBattleEquipment } = await import('../game/src/battle/bag/battle.equipment.js');
+const talisman = () => C.all().find(c => c.id === 'tt7-talisman');
+
+describe('灵符自动装配消耗', () => {
+  it('选入BOSS套牌后消耗，离开可用牌区，战后传出一次消耗UID', async () => {
+    const g = makeGame([talisman(), eye(), filler()]);
+    let ended;
+    g.onBattleEnd = (...args) => { ended = args; };
+    const uid = g.ownedCards[0].uid;
+    const eyeUid = g.ownedCards[1].uid;
+    BattleSession.start(g, [foeDef()], { isBoss: true });
+    fillDeck(snap().deckSelection.cards, []);
+    BattleSession.commands.confirmDeck();
+    await drain();
+    const consumed = [...runtime.consumed];
+    const grave = [...runtime.grave];
+    const available = [...runtime.hand, ...runtime.drawPile, ...runtime.discard];
+    BattleSession.commands.flee();
+    await drain(20);
+    expect(consumed).toEqual([uid]);
+    expect(grave).toContain(uid);
+    expect(available).not.toContain(uid);
+    expect(consumed).not.toContain(eyeUid);
+    expect(ended[3]).toEqual([uid]);
+  });
+
+  it.each([false, true])('普通战或未选入BOSS时不消耗（BOSS=%s）', async isBoss => {
+    const g = makeGame([talisman(), filler(), filler(), filler()]);
+    const uid = g.ownedCards[0].uid;
+    BattleSession.start(g, [foeDef()], { isBoss });
+    if (isBoss) {
+      for (const card of snap().deckSelection.cards.filter(o => o.uid !== uid).slice(0, 3)) {
+        BattleSession.commands.selectDeckCard(card.uid);
+      }
+      BattleSession.commands.confirmDeck();
+    }
+    await drain();
+    const consumed = [...runtime.consumed];
+    const equipped = [...runtime.equipped];
+    BattleSession.commands.flee();
+    await drain(20);
+    expect(consumed).not.toContain(uid);
+    expect(equipped.some(o => o.uid === uid)).toBe(false);
+  });
+
+  it('同一UID只触发一次，重复调用不追加墓地；旧无UID不产生消耗记录', () => {
+    const card = talisman();
+    let draws = 0;
+    const api = createBattleEquipment({ triggersM2: { resolveEquipOps() { draws++; } } });
+    runtime.set$G(makeGame([card]));
+    runtime.set$mode('boss');
+    const uid = runtime.G.ownedCards[0].uid;
+    runtime.set$sel(new Set([uid]));
+    runtime.set$equipped([]);
+    runtime.set$consumed([]);
+    runtime.set$grave([]);
+    runtime.set$hand([uid, 'other']);
+    runtime.set$drawPile([uid]);
+    runtime.set$discard([uid, uid]);
+    api.applyBattleStartPassives();
+    api.applyBattleStartPassives();
+    expect(draws).toBe(1);
+    expect(runtime.consumed).toEqual([uid]);
+    expect(runtime.grave).toEqual([uid]);
+    expect(runtime.hand).toEqual(['other']);
+    expect(runtime.drawPile).toEqual([]);
+    expect(runtime.discard).toEqual([]);
+    runtime.set$G({ ownedCards: [{ card }], log() {} });
+    runtime.set$sel(new Set([undefined]));
+    runtime.set$equipped([]);
+    runtime.set$consumed([]);
+    runtime.set$grave([]);
+    api.applyBattleStartPassives();
+    expect(runtime.consumed).toEqual([]);
+    expect(runtime.grave).toEqual([]);
+  });
+});

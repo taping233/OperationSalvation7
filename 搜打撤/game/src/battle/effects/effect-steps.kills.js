@@ -282,11 +282,8 @@ export function killsSteps(s) {
         when: (ctx) => /发现\s*(?:一|1)\s*张注能卡/.test(ctx.desc) ? true : null,
         run: (ctx) => {
           const pred = parsePoolNoun('注能', ctx.myClass);
-          const c = pred ? randomDiscoverCard(pred) : null;
-          if (c) {
-            addTempCard({ ...c, _noInfuse: true });
-            log(`[[icon:crystal]] <b>灵能召唤</b>：发现【<b>${esc(c.name)}</b>】，其无需注能即可打出`, 'loot');
-          } else log('[[icon:question]] 没有可发现的注能卡', 'dim');
+          queueDiscover({ n:1, pred, act:'noInfuse', sourceCardId:ctx.card.id });
+          log(`[[icon:crystal]] <b>${esc(ctx.card.name)}</b>：选择一张注能卡，使其无需注能`, 'sys');
           ctx.did = true;
         },
       },

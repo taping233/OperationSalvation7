@@ -1,0 +1,28 @@
+{
+  "repository": "taping233/OperationSalvation7",
+  "ref": "cd98745f03a6d8313a7138386b1499d8fe5ab4f6",
+  "retrieval": "official github_fetch_file, base64 decoded without text normalization",
+  "files": [
+    {
+      "path": "docs/evidence/2026-10-17-f4ngy-draw/before/sound.samples.catalog.js",
+      "bytes": 13062,
+      "sha256": "e06c50a41cbc78268ddef215725b40aab740e70dbc3e2129610e5398ca475eb4",
+      "gitBlob": "06463993de4419a8bc3d90582d9abadb6aa33d65",
+      "sourceURL": "https://github.com/taping233/OperationSalvation7/blob/cd98745f03a6d8313a7138386b1499d8fe5ab4f6/%E6%90%9C%E6%89%93%E6%92%A4/docs/evidence/2026-10-17-f4ngy-draw/before/sound.samples.catalog.js"
+    },
+    {
+      "path": "docs/evidence/2026-10-17-real-foley-batch/before/sound.samples.catalog.js",
+      "bytes": 12982,
+      "sha256": "51f2065ad4e271872934efa2969aafd59c1aa89eb183ef735e9631ad72510c82",
+      "gitBlob": "b11f571764a1c002c550687dd0f9bd3e043ce01b",
+      "sourceURL": "https://github.com/taping233/OperationSalvation7/blob/cd98745f03a6d8313a7138386b1499d8fe5ab4f6/%E6%90%9C%E6%89%93%E6%92%A4/docs/evidence/2026-10-17-real-foley-batch/before/sound.samples.catalog.js"
+    },
+    {
+      "path": "docs/evidence/2026-10-18-safe-slot-foley/before/game/src/audio/sound.samples.catalog.js",
+      "bytes": 13085,
+      "sha256": "4a0aff5302c2bc319b13dc0e01d4c31f62c52885a7b83f63f135a3764e9f7a6e",
+      "gitBlob": "0fe6bfaaa8998baf16f53abec585cbd1bf85e480",
+      "sourceURL": "https://github.com/taping233/OperationSalvation7/blob/cd98745f03a6d8313a7138386b1499d8fe5ab4f6/%E6%90%9C%E6%89%93%E6%92%A4/docs/evidence/2026-10-18-safe-slot-foley/before/game/src/audio/sound.samples.catalog.js"
+    }
+  ]
+}

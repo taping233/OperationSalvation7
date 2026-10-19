@@ -1,0 +1,29 @@
+{
+  "source": "/workspace/scratch/b7a53a06c872/game_feedback_20261018/sdt-feedback-all-2026-10-18T16-11-06-012Z.json",
+  "records": [
+    {
+      "number": 18,
+      "ts": "2026-10-18T14:31:25.139Z",
+      "page": {
+        "id": "hub-stash",
+        "name": "基地 · 仓库"
+      },
+      "target": {
+        "name": "基地 · 仓库 · stash-pocket-note"
+      },
+      "text": "这行文字删掉"
+    },
+    {
+      "number": 20,
+      "ts": "2026-10-18T14:35:14.571Z",
+      "page": {
+        "id": "hub-stash",
+        "name": "基地 · 仓库"
+      },
+      "target": {
+        "name": "基地 · 仓库 · stash-pocket-note"
+      },
+      "text": "这里也不要有这么多文字，收进二级界面里"
+    }
+  ]
+}

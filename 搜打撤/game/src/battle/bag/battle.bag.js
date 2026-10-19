@@ -6,7 +6,7 @@ import { Random } from '../../core/random.js';
 import * as Combat from '../core/combat.js';
 import { itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
-import { G, foes, mode, energy, busy, infusing, discovering, choosing, handSelecting, viewingGrave, selectingDeck, pstat, floats, consumed, grave, hand, cardAnims, delayed, set$energy, set$viewingBag, battleState } from '../runtime/battle.runtime.js';
+import { G, foes, mode, energy, busy, infusing, discovering, choosing, handSelecting, viewingGrave, selectingDeck, pstat, floats, consumed, grave, hand, granted, played, discard, drawPile, cardAnims, delayed, set$energy, set$viewingBag, battleState } from '../runtime/battle.runtime.js';
 import { slamSkillFor } from './battle.slam-skill.js';
 import { removeUid } from './battle.piles.js';
 
@@ -35,7 +35,22 @@ export function createBattleBag({
 
   // 战斗道具快捷栏独立于地图背包；战斗期间禁用背包页面。
   function battleBagItems() {
-    return (G.ownedCards || []).filter(o => o.card && o.card.type === '道具' && !o.safe);
+    // BOSS 不开放随身永久道具；本场生成且不在施放/牌堆流程中的道具可用。
+    const unavailable = new Set([...hand, ...played, ...consumed, ...grave, ...discard, ...drawPile]);
+    const temporary = granted.filter(o => !unavailable.has(o.uid));
+    const owned = mode === 'boss' ? [] : (G.ownedCards || []);
+    return [...owned, ...temporary].filter(o => o.card && o.card.type === '道具' && !o.safe);
+  }
+  function consumeBattleItem(uid) {
+    if (!battleBagItems().some(o => o.uid === uid)) return false;
+    const temporaryIndex = granted.findIndex(o => o.uid === uid);
+    // 临时道具保留来源以供战后消耗区结算；played 同时阻止再次使用。
+    if (temporaryIndex >= 0) { played.push(uid); return true; }
+    const items = G.ownedCards;
+    const index = items.findIndex(o => o.uid === uid);
+    if (index < 0) return false;
+    items.splice(index, 1);
+    return true;
   }
   // 道具栏可用性（2026-09-09 老板 #10）：不可用的道具在栏内虚化并说明原因，点击不再消耗
   const ITEM_BOSS_FLEE_PATTERN = /非\s*BOSS\s*战/;
@@ -80,7 +95,7 @@ export function createBattleBag({
     }
     // 先扣再用（与地图侧道具一致）：用掉即从背包移除
     clearTargetSession();
-    G.ownedCards.splice(G.ownedCards.indexOf(entry), 1);
+    if (!consumeBattleItem(entry.uid)) return;
     G.log(`[[icon:bag]] 使用道具【<b>${esc(card.name)}</b>】`, 'sys');
     if (healM) {
       const n = +healM[1];
@@ -108,7 +123,7 @@ export function createBattleBag({
         if (got) {
           if (mode === 'boss') addDeckCard({ ...got });
           else addTempCard({ ...got });
-          G.log(`[[icon:flask]] 神秘药水：随机获得【<b>${esc(got.name)}</b>】${mode === 'boss' ? '（洗入牌库）' : '（置入手牌）'}`, 'loot');
+          G.log(`[[icon:flask]] 神秘药水：随机获得【<b>${esc(got.name)}</b>】${got.type === '道具' ? '（置入道具栏）' : mode === 'boss' ? '（洗入牌库）' : '（置入手牌）'}`, 'loot');
           if (!got.rules?.triggers?.onAcquire?.length) fireCatGift(got);   // 结构化 onAcquire 已由 addTempCard 触发
         }
       }
@@ -126,9 +141,7 @@ export function createBattleBag({
     const chosen = side != null ? foes[+side] : null;
     const target = chosen && !chosen.dead ? chosen : (alive()[0] || null);
     const aliveBefore = alive().length;   // 击杀奖励总账基数（对齐 resolveDart：饮血剑 per-kill 增益）
-    const index = G.ownedCards.findIndex(item => item.uid === entry.uid);
-    if (index < 0) return true;
-    G.ownedCards.splice(index, 1);
+    if (!consumeBattleItem(entry.uid)) return true;
     G.log(`[[icon:bag]] 使用道具【<b>${esc(card.name)}</b>】${target ? `→ ${esc(target.name)}` : ''}`, 'sys');
     for (const op of ops) {
       if (!op || typeof op !== 'object') continue;
@@ -215,7 +228,7 @@ export function createBattleBag({
         const got = randomDiscoverCard(c => c.rarity === '传说');
         if (got) {
           addTempCard({ ...got });
-          G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽取传说卡【<b>${esc(got.name)}</b>】置入手牌`, 'loot');
+          G.log(`[[icon:cards]] <b>${esc(card.name)}</b>：抽取传说卡【<b>${esc(got.name)}</b>】${got.type === '道具' ? '置入道具栏' : '置入手牌'}`, 'loot');
         } else {
           G.log('[[icon:cross]] 没有可获取的传说卡', 'warn');
         }
@@ -276,9 +289,7 @@ export function createBattleBag({
         useStructuredBattleBag(current, needsEnemy ? foes.indexOf(target) : side);
         return;
       }
-      const index = G.ownedCards.indexOf(current);
-      if (index < 0) return;
-      G.ownedCards.splice(index, 1);
+      if (!consumeBattleItem(current.uid)) return;
       G.log(`[[icon:bag]] 使用道具【<b>${esc(card.name)}</b>】${target ? `→ ${esc(target.name)}` : ''}`, 'sys');
       if (current.card.id === 'tt3-mystery-potion') {
         delayed.push({ special: 'mysteryPotion', text: '变成1张随机招式卡牌，使其费用为0。', cardName: card.name,
@@ -462,7 +473,7 @@ export function createBattleBag({
     if (got) {
       if (mode === 'boss') addDeckCard({ ...got });
       else addTempCard({ ...got });
-      G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>：随机获得【<b>${esc(got.name)}</b>】${mode === 'boss' ? '（洗入牌库）' : '（置入手牌）'}`, 'loot');
+      G.log(`[[icon:${skill.icon}]] <b>${esc(skill.name)}</b>：随机获得【<b>${esc(got.name)}</b>】${got.type === '道具' ? '（置入道具栏）' : mode === 'boss' ? '（洗入牌库）' : '（置入手牌）'}`, 'loot');
       if (!got.rules?.triggers?.onAcquire?.length) fireCatGift(got);   // 结构化 onAcquire 已由 addTempCard 触发
     } else {
       G.log(`[[icon:cross]] ${esc(skill.name)}：没有可获得的卡牌`, 'warn');

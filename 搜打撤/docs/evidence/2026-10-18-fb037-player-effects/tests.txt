@@ -1,0 +1,30 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/搜打撤
+
+ ✓ tests/battle-hand-inspector.test.js (97 tests) 8416ms
+   ✓ selects a target on one bridge pointer tap and suppresses the following synthetic click  339ms
+   ✓ starts self-target equipment selection from the stable folded slot without spending or requiring a second click  356ms
+   ✓ adds distinct material UIDs through the workspace and ignores a detached repeated button  409ms
+   ✓ describes and cycles three hand pages without changing cards or combat state  1163ms
+   ✓ keeps touch untargeted pickup pending until field confirmation or Escape  335ms
+   ✓ directly plays an untargeted card from focused card-face Enter  356ms
+   ✓ allows a new primary pointer to continue a pickup only after its owner releases  337ms
+   ✓ lets real window aim cancellation consume the down before the retained hand can pick up another card  342ms
+   ✓ 扰敌同种三敌DOM点击0→2：重绘只排首实例，拒重复，单次扣费且不打中间敌  408ms
+ ✓ tests/term-tips-lifecycle.test.js (5 tests) 97ms
+ ✓ tests/battle-snapshot-integration.test.js (1 test) 11ms
+ ✓ tests/battle-snapshot.test.js (3 tests) 11ms
+ ✓ tests/battle-player-effects.test.js (11 tests) 8ms
+
+ Test Files  5 passed (5)
+      Tests  117 passed (117)
+   Start at  04:07:29
+   Duration  12.45s (transform 854ms, setup 0ms, collect 1.82s, tests 8.54s, environment 1.00s, prepare 302ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

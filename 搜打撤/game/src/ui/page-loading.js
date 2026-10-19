@@ -1,27 +1,10 @@
 import { reduceMotion } from '../core/motion.js';
 import { createCityCut, cityCutDuration, prepareCityCut } from './camp-entry.js';
 import '../../css/page-loading.css';
-import { waitPageVisual } from './page-visual-ready.js';
+import { waitPageVisual, visualFrame } from './page-visual-ready.js';
+import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
 
 let pending = null;
-
-// A second frame lets the loading screen paint before a synchronous page mounts.
-// The timeout also lets a background or suspended preview finish opening.
-function nextFrame(signal) {
-  return new Promise(resolve => {
-    let frame;
-    const finish = () => {
-      clearTimeout(timer);
-      cancelAnimationFrame(frame);
-      signal?.removeEventListener('abort', finish);
-      resolve();
-    };
-    const timer = setTimeout(finish, 150);
-    frame = requestAnimationFrame(finish);
-    signal?.addEventListener('abort', finish, { once: true });
-    if (signal?.aborted) finish();
-  });
-}
 
 /** Show the shared page cover before preparing an expensive destination. */
 export function runPageLoading({ title, detail, open, signal, presentation, onRevealStart }) {
@@ -63,6 +46,7 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
   pending = operation;
   const cutController = new AbortController();
   let released = false;
+  let surface = null;
   const releaseInput = () => {
     if (released) return;
     released = true;
@@ -72,6 +56,7 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
   };
   const cleanup = () => {
     cutController.abort();
+    surface?.dispose();
     cover.remove();
     releaseInput();
     if (pending === operation) pending = null;
@@ -85,22 +70,27 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
       // Artwork loading and destination preparation overlap under the painted
       // curtain; neither can reveal the page before the other is ready.
       const curtainReady = cut ? prepareCityCut(cut, { signal: cutController.signal }) : Promise.resolve(true);
-      await nextFrame(signal);
-      await nextFrame(signal);
+      await visualFrame(cutController.signal);
+      await visualFrame(cutController.signal);
       if (signal?.aborted) return false;
       const prepared = performance.now();
       const result = await Promise.race([Promise.resolve().then(open), cancelled]);
       if (signal?.aborted) return false;
       if (result === false) return false;
       const mounted = performance.now();
-      if (result !== false) await Promise.race([
-        Promise.all([curtainReady,
-          waitPageVisual(document.getElementById('ovBody'), { signal, background: window.SDT?.UI?._pageBgReady })]),
-        cancelled,
+      const body = document.getElementById('ovBody');
+      // Non-overlay clients keep the existing loading-only contract.
+      // Overlay clients bind readiness and reveal to the exact mounted page.
+      if (body) surface = createPageSurfaceLifetime(body.firstElementChild || body, { onInvalidate: onAbort });
+      const current = () => !cutController.signal.aborted && (!surface || surface.current());
+      const ready = await Promise.race([
+        Promise.all([curtainReady, body
+          ? waitPageVisual(body, { signal: cutController.signal, background: window.SDT?.UI?._pageBgReady })
+          : true]), cancelled,
       ]);
-      if (signal?.aborted) return false;
-      await nextFrame(signal);
-      if (signal?.aborted) return false;
+      if (!ready || !ready.every(Boolean) || !current()) return false;
+      await visualFrame(cutController.signal);
+      if (!current()) return false;
       if (import.meta.env.DEV && new URLSearchParams(location.search).has('photoFps')) {
         console.info('[page-loading]', JSON.stringify({
           prepareMs: +(prepared - started).toFixed(1), mountMs: +(mounted - prepared).toFixed(1),
@@ -113,11 +103,11 @@ export function runPageLoading({ title, detail, open, signal, presentation, onRe
         if (cut && result !== false) cut.classList.remove('page-cut-waiting');
         // Initialize the destination while it is still covered. Starting it after
         // cleanup would hide an already visible page again and look like a refresh.
-        if (result !== false && !signal?.aborted) onRevealStart?.();
+        if (current()) onRevealStart?.();
         cover.classList.add('leaving');
         releaseInput();
         await Promise.race([new Promise(resolve => setTimeout(resolve, cityCut ? cityCutDuration : 180)), cancelled]);
-      } else if (result !== false && !signal?.aborted) {
+      } else if (current()) {
         onRevealStart?.();
         if (cityPresentation) cover.classList.add('leaving');
         releaseInput();

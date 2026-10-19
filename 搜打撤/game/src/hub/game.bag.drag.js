@@ -11,24 +11,30 @@ import { captureBattleContext } from '../battle/battle-loader.js';
   // ---------- 背包拖拽（v0.21 → v2 2026-10-15）：堆排序 · 左栏分区钮拖放跨区 · 双击进特写 ----------
   export let bagDrag = null;   // {name, fromSafe, cell, ghost, card3d, sx, sy, lx, ly, vx, vy, moved}
 
+  let clearGridBindings = null;
+  const clickSuppression = new WeakMap();
   function bindBagDrag() {
+    clearGridBindings?.();
+    clearGridBindings = null;
     const body = UI.el.ovBody;
     const bagGrid = body.querySelector('.bag-grid');
     if (!bagGrid) return;
     const sameRun = captureBattleContext(game), cards = game.ownedCards;
-    let suppressClick = false;
-    bagGrid.addEventListener('click', event => {
-      if (suppressClick) { event.preventDefault(); event.stopImmediatePropagation(); suppressClick = false; }
-    }, true);
+
+    const onClick = event => {
+      if (clickSuppression.get(bagGrid)) { event.preventDefault(); event.stopImmediatePropagation(); clickSuppression.delete(bagGrid); }
+    };
+    bagGrid.addEventListener('click', onClick, true);
     const current = () => sameRun() && !game.battleActive && game.ownedCards === cards && bagGrid.isConnected
       && body === UI.el.ovBody && body.querySelector('.bag-grid') === bagGrid
       && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
-    bagGrid.addEventListener('keydown', e => {
+    const onKey = e => {
       if (!current() || e.repeat || !['Enter', ' '].includes(e.key)) return;
       const cell = e.target.closest('.bag-tile[data-act="inspectStack"]');
       if (!cell || e.target !== cell) return;
       e.preventDefault(); e.stopPropagation(); cell.click();
-    });
+    };
+    bagGrid.addEventListener('keydown', onKey);
     // 按住拖动（pointer 事件，鼠标/触屏通用）；单击看卡走格子上的 inspectStack（v2 看卡操作台）
     const onDown = (e) => {
       if (!current() || e.button !== 0 || bagDrag) return;
@@ -40,7 +46,7 @@ import { captureBattleContext } from '../battle/battle-loader.js';
         name: cell.dataset.stack, fromSafe: cell.dataset.safe === '1', cell, pointerId: e.pointerId, current,
         sx: e.clientX, sy: e.clientY, lx: e.clientX, ly: e.clientY,
         vx: 0, vy: 0, moved: false, ghost: null, card3d: null,
-        suppressClick: () => { suppressClick = true; setTimeout(() => { suppressClick = false; }, 0); },
+        suppressClick: () => { clickSuppression.set(bagGrid, true); setTimeout(() => { clickSuppression.delete(bagGrid); }, 0); },
       };
       cell.classList.add('dragging');
       SDT.Sound.sfx('pick');
@@ -50,6 +56,11 @@ import { captureBattleContext } from '../battle/battle-loader.js';
       window.addEventListener('blur', resetBagDrag);
     };
     bagGrid.addEventListener('pointerdown', onDown);
+    clearGridBindings = () => {
+      bagGrid.removeEventListener('click', onClick, true);
+      bagGrid.removeEventListener('keydown', onKey);
+      bagGrid.removeEventListener('pointerdown', onDown);
+    };
   }
 
   // 拖拽浮影：真正的卡面 + 跟随速度的 3D 姿态

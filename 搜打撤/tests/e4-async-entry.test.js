@@ -296,6 +296,7 @@ describe('DEV plain battle transition diagnostic', () => {
     history.replaceState(null, '', '/?perfProbe=1&flightRecord=1&transitionDiagnostic=plain');
     const motion = await import('../game/src/core/motion.js');
     vi.spyOn(motion, 'reduceMotion').mockReturnValue(false);
+    gate.resolve();
     const done = vi.fn(); const request = scenes.enterNode(kind, done);
     expect(UI.el.ovBody.querySelector('.expedition-cut')).toBeTruthy();
     expect(UI.el.ovBody.querySelector('.camp-entry-cut')).toBeNull();
@@ -314,5 +315,48 @@ describe('DEV plain battle transition diagnostic', () => {
     await vi.advanceTimersByTimeAsync(219); expect(UI.hideOverlay).not.toHaveBeenCalled();
     await vi.advanceTimersByTimeAsync(1); await released;
     expect(UI.hideOverlay).toHaveBeenCalledExactlyOnceWith({ immediate: true });
+  });
+});
+
+// These clocks establish overlap/ownership, not real browser latency.
+describe('combat transition preparation overlap', () => {
+  it.each(['battle','boss'])('%s starts module preparation before the unchanged 650ms timer and holds the old surface while slow', async kind => {
+    const motion = await import('../game/src/core/motion.js'); vi.spyOn(motion,'reduceMotion').mockReturnValue(false);
+    const done=vi.fn(() => { game.battleActive=true; UI.showOverlay('战斗','<main class="battle-stage"></main>'); return true; });
+    const pending=scenes.enterNode(kind,done);
+    await vi.advanceTimersByTimeAsync(0); await entered.promise;
+    expect(done).not.toHaveBeenCalled(); expect(UI.hideOverlay).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(650);
+    expect(done).not.toHaveBeenCalled(); expect(UI.el.overlay.hidden).toBe(false); expect(game.state).toBe('modal');
+    await vi.advanceTimersByTimeAsync(350); gate.resolve();
+    expect(await pending).toBe(true); expect(done).toHaveBeenCalledOnce();
+    expect(document.querySelector('.battle-stage')).not.toBeNull(); expect(UI.hideOverlay).not.toHaveBeenCalled();
+  });
+  it('preparation failures stay covered through the authoritative loader failure path', async () => {
+    const error=vi.spyOn(console,'error').mockImplementation(() => {});
+    const pending=scenes.enterNode('battle',() => scenes.openBattleCell(null,[{name:'foe'}]));
+    await vi.advanceTimersByTimeAsync(0); await entered.promise;
+    gate.reject(new Error('offline')); await vi.advanceTimersByTimeAsync(0);
+    expect(UI.hideOverlay).not.toHaveBeenCalled();
+    handlers.flowContinue(); expect(await pending).toBe(false);
+    expect(battle.start).not.toHaveBeenCalled(); expect(game.state).toBe('idle');
+    expect(UI.log).toHaveBeenCalledWith(expect.stringContaining('战斗模块加载失败'),'warn');
+    expect(UI.hideOverlay).toHaveBeenCalledOnce(); error.mockRestore();
+  });
+  it('replacing a held surface cancels its resource wait immediately and cannot start old battle', async () => {
+    const done=vi.fn(), pending=scenes.enterNode('battle',done);
+    await vi.advanceTimersByTimeAsync(0); await entered.promise; handlers.flowContinue();
+    UI.showOverlay('新页面','<main id="replacement">新页面</main>');
+    expect(await pending).toBe(false); gate.resolve(); await Promise.resolve();
+    expect(done).not.toHaveBeenCalled(); expect(document.getElementById('replacement')).not.toBeNull();
+    expect(UI.hideOverlay).not.toHaveBeenCalled();
+  });
+  it('class departure starts map warmup under its existing 1600ms curtain', async () => {
+    SDT.Battle=battle; SDT.Renderer={warm:vi.fn(async () => true)};
+    const {openClassChoice}=await import('../game/src/run/game.run.class-choice.page.js');
+    openClassChoice(); handlers.pickClass(); await Promise.resolve(); await Promise.resolve();
+    expect(SDT.Renderer.warm).toHaveBeenCalledOnce(); expect(game.state).toBe('modal');
+    expect(document.querySelector('.flow-transition')).not.toBeNull();
+    handlers.flowContinue(); await Promise.resolve();
   });
 });

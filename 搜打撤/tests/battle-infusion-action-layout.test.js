@@ -112,7 +112,7 @@ describe('shared infusion action bar', () => {
     expect(bar().querySelector('[data-infusion-workspace]')).not.toBeNull();
     expect(bar().textContent).toContain('选择 2 张材料');
     expect(bar().textContent).toContain('已选 0/2');
-    expect(bar().textContent).toContain('材料进入墓地，不再抽回');
+    expect(bar().textContent).toContain('材料进入本场消耗牌堆，不再抽回');
     expect(bar().textContent).toContain('道具、装备不可在火堆复原');
     expect(bar().querySelector('.infusion-rules').textContent).toContain('触发 2 次');
     expect([...bar().querySelectorAll('.infusion-footer button')].map(button => button.dataset.act)).toEqual(['btInfuseCancel', 'btInfuseDirect', 'btInfuseGo']);
@@ -405,7 +405,7 @@ describe('discovery source presentation and restoration copy', () => {
     const piles = renderCombatPiles({ mode: 'normal', drawCount: [], discardCount: [], graveCount: ['spent'],
       pileTip: () => '', cardBackHTML: '', escAttr: value => value });
     const host = document.createElement('div'); host.innerHTML = piles.rest;
-    expect(host.querySelector('.bt-pile:last-child').title).toBe('墓地：被消耗的牌战后进消耗区，道具、装备不可在火堆复原');
+    expect(host.querySelector('.bt-pile:last-child').title).toBe('本场消耗牌堆：（点击查看；战后进入消耗区，道具、装备不可在火堆复原）');
   });
 });
 

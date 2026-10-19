@@ -326,6 +326,8 @@ export function createBattleExecPlay({
     // 旧日再临（深渊主宰·妲莉薇特，2026-09-16 定版）：免疫诅咒 + 招式均已注能 + 召唤 4 名无攻血封印肢体
     if (!hasStructuredRules && /免疫诅咒/.test(String(card.desc || ''))) {
       set$playerCurseImmune(true);
+      // 永久来源在临时窗口内获得时，到期也必须保留。
+      delayed.forEach(q => { if (q.special === 'curseImmuneOff') q.restore = true; });
       G.log('[[icon:shield]] <b>旧日再临</b>：诅咒无法侵染深渊主宰', 'ok');
     }
     // 第十二批·邪能护体（2026-09-23）：「本回合免疫所有伤害和诅咒效果」——注能打出才登记；
@@ -335,7 +337,10 @@ export function createBattleExecPlay({
     if (!hasStructuredRules && infusedBase && /免疫所有伤害和诅咒效果/.test(String(card.desc || ''))) {
       const prior = playerCurseImmune;
       set$playerCurseImmune(true);
-      delayed.push({ special: 'curseImmuneOff', restore: !!prior });
+      // 同一临时窗口只保留最早基值，重复使用不能把临时 true 记成永久来源。
+      if (!delayed.some(q => q.special === 'curseImmuneOff')) {
+        delayed.push({ special: 'curseImmuneOff', restore: !!prior });
+      }
       G.log('[[icon:shield]] <b>邪能护体</b>：本回合免疫所有伤害与诅咒效果', 'ok');
     }
     if (!hasStructuredRules && /均视为已注能|均已注能/.test(String(card.desc || ''))) {

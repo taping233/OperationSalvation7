@@ -1,3 +1,4 @@
+import { isCardBrowserCurrent, cardBrowserItems, filterCardBrowserItems, selectCardBrowserItems } from '../ui/card-browser-state.js';
 import { linkedCostsHTML } from '../ui/home-linked-interactions.js';
 import { esc, escAttr } from '../core/shared.js';
 import { characterFor } from '../core/characters.js';
@@ -103,26 +104,26 @@ export function bindPersonnel({ ui, refresh, sound }) {
   const browser = poolRoot?.querySelector('[data-card-browser]');
   const applyPoolFilter = (animate = false) => {
     if (!poolRoot) return;
-    let count = 0;
-    for (const card of poolRoot.querySelectorAll('.person-pool-card')) {
-      const filtered = !!(browse.query.trim() && !card.dataset.search.toLowerCase().includes(browse.query.trim().toLowerCase())) || !!(browse.poolStatus && card.dataset.recorded !== browse.poolStatus) || !!(browse.poolType && card.dataset.type !== browse.poolType);
-      card.dataset.browseFiltered = String(filtered);
-      if (!filtered) count++;
-    }
-    poolRoot.querySelector('[data-person-pool-count]').textContent = `${count} / ${poolRoot.querySelectorAll('.person-pool-card').length} 张`;
-    poolRoot.querySelector('.pool-empty').hidden = count > 0;
-    const visible = [...poolRoot.querySelectorAll('.person-pool-card')].filter(button => button.dataset.browseFiltered !== 'true');
-    refreshCardBrowser(browser, { reset: true });
+    if (!isCardBrowserCurrent(poolRoot)) return;
+    const search = browse.query.trim().toLowerCase();
+    const { items, visible } = filterCardBrowserItems(browser, card =>
+      (!search || card.dataset.search.toLowerCase().includes(search))
+      && (!browse.poolStatus || card.dataset.recorded === browse.poolStatus)
+      && (!browse.poolType || card.dataset.type === browse.poolType));
+    poolRoot.querySelector('[data-person-pool-count]').textContent = `${visible.length} / ${items.length} 张`;
+    poolRoot.querySelector('.pool-empty').hidden = visible.length > 0;
+    refreshCardBrowser(browser, { reset: true, items });
     if (!visible.some(button => button.dataset.id === browse.poolPick)) browse.poolPick = visible[0]?.dataset.id || '';
     if (animate) animateBaseRefresh(browser.querySelector('.card-browser-track'));
-    for (const button of poolRoot.querySelectorAll('.person-pool-card')) { button.classList.toggle('on', button.dataset.id === browse.poolPick); button.setAttribute('aria-pressed', String(button.dataset.id === browse.poolPick)); }
+    selectCardBrowserItems(items, browse.poolPick, { key:'id' });
   };
-  for (const input of poolRoot?.querySelectorAll('[data-person-pool]') || []) input.addEventListener(input.tagName === 'SELECT' ? 'change' : 'input', () => { if (input.dataset.personPool === 'query') browse.query = input.value; else browse.poolStatus = input.value; applyPoolFilter(true); });
+  for (const input of poolRoot?.querySelectorAll('[data-person-pool]') || []) input.addEventListener(input.tagName === 'SELECT' ? 'change' : 'input', () => { if (!isCardBrowserCurrent(poolRoot)) return; if (input.dataset.personPool === 'query') browse.query = input.value; else browse.poolStatus = input.value; applyPoolFilter(true); });
   bindCardBrowser(browser, { onPage: () => { sound.tick(); animateBaseRefresh(browser.querySelector('.card-browser-track')); }, onOpen: (id, from) => {
+    if (!isCardBrowserCurrent(poolRoot)) return;
     const card = window.SDT.Cards.classPool(characterFor(browse.poolCharacter)?.rulesetId).find(item => item.id === id);
     if (!card) return;
     browse.poolPick = card.id;
-    for (const button of poolRoot.querySelectorAll('.person-pool-card')) { button.classList.toggle('on', button.dataset.id === id); button.setAttribute('aria-pressed', String(button.dataset.id === id)); }
+    selectCardBrowserItems(cardBrowserItems(browser), id, { key:'id' });
     sound.tick();
     ui.showCardZoom(card, { presentation:'inventory', from });
     decorateInventoryZoom(card);
@@ -130,14 +131,15 @@ export function bindPersonnel({ ui, refresh, sound }) {
   applyPoolFilter();
 
   bindCardNavigation(browser?.querySelector('.card-browser-track'), '.person-pool-card', { activate: false });
-  ui.act('personPoolType', data => { if (!poolRoot) return; browse.poolType = data.type; for (const button of poolRoot.querySelectorAll('[data-act="personPoolType"]')) { const on = button.dataset.type === browse.poolType; button.classList.toggle('ok', on); button.setAttribute('aria-pressed', String(on)); } applyPoolFilter(true); sound.tick(); });
-  ui.act('personPoolReset', () => { browse.query = ''; browse.poolStatus = ''; browse.poolType = ''; for (const button of poolRoot?.querySelectorAll('[data-act="personPoolType"]') || []) { const on = !button.dataset.type; button.classList.toggle('ok', on); button.setAttribute('aria-pressed', String(on)); } for (const input of poolRoot?.querySelectorAll('[data-person-pool]') || []) input.value = ''; applyPoolFilter(true); });
+  ui.act('personPoolType', data => { if (!isCardBrowserCurrent(poolRoot)) return; browse.poolType = data.type; for (const button of poolRoot.querySelectorAll('[data-act="personPoolType"]')) { const on = button.dataset.type === browse.poolType; button.classList.toggle('ok', on); button.setAttribute('aria-pressed', String(on)); } applyPoolFilter(true); sound.tick(); });
+  ui.act('personPoolReset', () => { if (!isCardBrowserCurrent(poolRoot)) return; browse.query = ''; browse.poolStatus = ''; browse.poolType = ''; for (const button of poolRoot?.querySelectorAll('[data-act="personPoolType"]') || []) { const on = !button.dataset.type; button.classList.toggle('ok', on); button.setAttribute('aria-pressed', String(on)); } for (const input of poolRoot?.querySelectorAll('[data-person-pool]') || []) input.value = ''; applyPoolFilter(true); });
   ui.act('personPoolPick', data => {
+    if (!isCardBrowserCurrent(poolRoot)) return;
     const card = window.SDT.Cards.classPool(characterFor(browse.poolCharacter)?.rulesetId).find(item => item.id === data.id);
     if (!card || !poolRoot) return;
 
     browse.poolPick = card.id;
-    for (const button of poolRoot.querySelectorAll('.person-pool-card')) { button.classList.toggle('on', button.dataset.id === card.id); button.setAttribute('aria-pressed', String(button.dataset.id === card.id)); }
+    selectCardBrowserItems(cardBrowserItems(browser), card.id, { key:'id' });
     ui.showCardZoom(card, { presentation:'inventory', from:poolRoot.querySelector(`[data-id="${card.id}"]`) });
     decorateInventoryZoom(card);
 

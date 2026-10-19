@@ -143,8 +143,10 @@ export function createBattleDiscoverFlow(ports) {
     if (battle.battleActive && !battle.battleActive()) return;
     const state = interaction.get();
     if (!state) return;
-    const card = state.options[+index];
-    if (!card) return;
+    const candidate = state.options[+index];
+    if (!candidate) return;
+    // Only the chosen instance receives the modifier; catalog/options stay immutable.
+    const card = state.act === 'noInfuse' ? { ...candidate, _noInfuse:true } : candidate;
 
     const queuedState = 'tempUids' in state;
     const n = state.n;

@@ -135,7 +135,7 @@ function createBattleSnapshotSignature(input, renderDependencies) {
 function createBattleSnapshot(input) {
   const {
     battleToken, mode, turn, energy, maxEnergy, busy, phase, actionQueueLength,
-    opts, player, pdef, pstat, foes, deathFxPending, allies, hand, drawPile, discard, grave, playedMovesThisTurn, endTurnContext,
+    opts, player, pdef, pstat, foes, deathFxPending, allies, hand, drawPile, discard, grave, consumed = [], playedMovesThisTurn, endTurnContext, playerEffects = [],
     infusing, discovering, handSelecting, choosing, pendingTarget, pendingHint,
     viewingGrave, viewingDeck, viewingBag, dreadShown, selectingDeck, deckNeed, selDeckMax,
     selShaN, sel, selPool, potionBar, pendingItem, slamPending, dartPending,
@@ -186,6 +186,7 @@ function createBattleSnapshot(input) {
   return Object.freeze({
     battleToken, mode, turn, energy, maxEnergy, busy, phase, actionQueueLength,
     playedMovesThisTurn: playedMovesThisTurn || 0, endTurnContext: freezeObject(endTurnContext),
+    playerEffects: Object.freeze(playerEffects.map(effect => Object.freeze({ ...effect }))),
     opts: freezeObject(opts),
     player: player ? Object.freeze({ ...player }) : null,
     pdef: playerDefense,
@@ -196,6 +197,7 @@ function createBattleSnapshot(input) {
     drawPile: Object.freeze(drawPile.slice()),
     discard: Object.freeze(discard.slice()),
     grave: Object.freeze(grave.slice()),
+    consumed: Object.freeze(consumed.slice()),
     infusing: readonlyInfusing,
     discovering: readonlyDiscovering,
     handSelecting: readonlyHandSelecting,

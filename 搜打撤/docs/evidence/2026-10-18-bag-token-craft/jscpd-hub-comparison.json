@@ -1,0 +1,71 @@
+{
+  "configuration": "tests/tools/redundancy-report.json",
+  "scope": "game/src/hub",
+  "node": "v22.23.3",
+  "before": {
+    "clones": 6,
+    "duplicatedLines": 59,
+    "duplicatedTokens": 599,
+    "lines": 12949,
+    "newClones": 0,
+    "newDuplicatedLines": 0,
+    "percentage": 0.45563363966329445,
+    "percentageTokens": 0.44412150689908286,
+    "sources": 78,
+    "tokens": 134873
+  },
+  "after": {
+    "clones": 4,
+    "duplicatedLines": 37,
+    "duplicatedTokens": 336,
+    "lines": 12944,
+    "newClones": 0,
+    "newDuplicatedLines": 0,
+    "percentage": 0.2858467243510507,
+    "percentageTokens": 0.24935805144494083,
+    "sources": 79,
+    "tokens": 134746
+  },
+  "remaining": [
+    {
+      "first": "battle-settlement.commands.js",
+      "start": 122,
+      "end": 132,
+      "second": "battle-settlement.commands.js",
+      "start2": 164,
+      "end2": 176,
+      "lines": 11,
+      "tokens": 92
+    },
+    {
+      "first": "departure.view-updates.js",
+      "start": 131,
+      "end": 138,
+      "second": "departure.view-updates.js",
+      "start2": 164,
+      "end2": 173,
+      "lines": 8,
+      "tokens": 71
+    },
+    {
+      "first": "extraction.commands.js",
+      "start": 357,
+      "end": 367,
+      "second": "extraction.commands.js",
+      "start2": 394,
+      "end2": 406,
+      "lines": 11,
+      "tokens": 98
+    },
+    {
+      "first": "game.bag.js",
+      "start": 411,
+      "end": 417,
+      "second": "game.bag.js",
+      "start2": 487,
+      "end2": 493,
+      "lines": 7,
+      "tokens": 75
+    }
+  ]
+}

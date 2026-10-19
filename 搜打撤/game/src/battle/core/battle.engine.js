@@ -8,7 +8,7 @@ const SDT = window.SDT;
 import {
   renderBattle, battleState, G, foes, opts, mode, drawPile, hand, discard, granted, consumed,
   grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, discoverQueue,
-  handSelecting, choosing, stealthStrike, interaction, pendingHint, delayed, viewingGrave,
+  handSelecting, choosing, stealthStrike, nextSpellTwice, interaction, pendingHint, delayed, viewingGrave,
   viewingDeck, viewingBag, floats, cardAnims, dreadShown, spellCost1, meleeCost1, shaTransform,
   consumeFireballN, lastDrawnUids, lastPlayedType, playedMartialThisTurn, playedMovesThisTurn,
   selPool, selShaN, sel, selectingDeck, selDeckMax, allies, growthNames, growth, infuseFuels,
@@ -47,6 +47,7 @@ import { emit as emitBattleEvent } from '../../core/event-bus.js';
 import { decayEffectiveCardCost } from '../effects/battle.card-cost.js';
 import { createBattleCardInspection } from '../effects/battle.card-inspection.js';
 import { calculateEnemyIntent } from './battle.enemy-intent.js';
+import { projectPlayerEffects } from '../runtime/battle.player-effects.js';
 import { createBattleSnapshot, createBattleSnapshotSignature } from '../runtime/battle.snapshot.js';
 import { createBattleResolution } from './battle.resolution.js';
 import { createBattlePresentation } from './battle.presentation-events.js';
@@ -285,7 +286,11 @@ const applyTextEffects = createEffectExecutor({
     registerGrowthCard: card => { if (card && card.name) growthNames.add(card.name); },
     setAllSpellsInfused: v => { set$allSpellsInfused(!!v); },
     setPoisonLegacy: v => { set$poisonLegacy(!!v); },
-    setPlayerCurseImmune: v => { set$playerCurseImmune(!!v); },
+    setPlayerCurseImmune: v => {
+      set$playerCurseImmune(!!v);
+      // 结构化永久免疫与旧日再临同口径；false 保持原撤销语义。
+      if (v) delayed.forEach(q => { if (q.special === 'curseImmuneOff') q.restore = true; });
+    },
     unlockSeal: name => tryUnlockSeal(name),
     checkElementSealProgress,
     randomAcquired: card => fireCatGift(card),
@@ -297,6 +302,7 @@ const isAOE = isAreaEffect;
 function captureSnapshotInput() {
     const pTgt = pendingTargetOf();
     const pItem = pendingItemOf();
+    const curseImmunityReset = delayed.find(q => q.special === 'curseImmuneOff');
     const potionBar = G && !selectingDeck ? battleBagItems().reduce((acc, o) => {
         const g = acc.find(p => p.name === o.card.name);
         if (g) g.count++;
@@ -309,9 +315,13 @@ function captureSnapshotInput() {
     return {
       battleToken: battleState.token, mode, turn, energy, maxEnergy, busy, phase: battleState.phase,
       actionQueueLength: actionQueue.length, playedMovesThisTurn, endTurnContext: { deathSave, timeRune, extraTurn },
+      playerEffects: projectPlayerEffects({ playerCurseImmune,
+        curseImmunityTemporary: !!curseImmunityReset && !curseImmunityReset.restore,
+        holyRune, turn, spellCost1, meleeCost1, nextSpellTwice, allSpellsInfused,
+        discoverPlus: pstat?.status?.discoverPlus, bleedAmp: pstat?.status?.bleedAmp, deathSave, extraTurn }),
       opts,
       player: G ? { hp: G.hp, maxHp: G.maxHp, atk: G.atk, spellPower: G.spellPower || 0, myClass: G.myClass || null, characterId: G.characterId || null } : null,
-      pdef, pstat, foes, deathFxPending: foes.map(foe => stagedDeathFx.has(foe)), allies, hand, drawPile, discard, grave, infusing, discovering,
+      pdef, pstat, foes, deathFxPending: foes.map(foe => stagedDeathFx.has(foe)), allies, hand, drawPile, discard, grave, consumed, infusing, discovering,
       handSelecting, choosing, pendingTarget: pTgt, pendingHint, viewingGrave, viewingDeck, viewingBag,
       dreadShown, selectingDeck, deckNeed: R().bossDeckSize, selDeckMax, selShaN, sel, selPool,
       potionBar, pendingItem: pItem, slamPending: !!interactionOf('slam'), dartPending: !!interactionOf('dart'),
@@ -435,6 +445,7 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
     if (!delayed.length) return;
     const silenced = (pstat.status.silence || 0) > 0;
     const keep = [];
+    let curseImmunityRestored = false;
     for (const q of delayed) {
       if (q.notBeforeTurn && turn < q.notBeforeTurn) { keep.push(q); continue; }
       if (q.special === 'consumeTemps') {
@@ -443,7 +454,9 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
       }
       // 第十二批（2026-09-23）两个一次性 special：均不走沉默门（状态还原/费用记账非技能句）
       if (q.special === 'curseImmuneOff') {
-        set$playerCurseImmune(!!q.restore);
+        // 旧战斗存档可能保留重复任务，只兑现最早记录的基值。
+        if (!curseImmunityRestored) set$playerCurseImmune(!!q.restore);
+        curseImmunityRestored = true;
         continue;   // 一次性，不保留
       }
       if (q.special === 'costDecay' || q.special === 'ruleCostDecay') {
@@ -846,8 +859,11 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
     let n = 0;
     for (const u of (uids || [])) {
       const idx = hand.indexOf(u);
-      if (idx < 0) continue;
-      hand.splice(idx, 1);
+      // 临时道具改入快捷栏后仍遵守到期回收；已使用/消耗的 UID 不再重复结算。
+      const temporaryItem = granted.some(o => o.uid === u && o.card.type === '道具') &&
+        battleBagItems().some(o => o.uid === u);
+      if (idx < 0 && !temporaryItem) continue;
+      if (idx >= 0) hand.splice(idx, 1);
       consumed.push(u);
       if (mode === 'boss') grave.push(u);
       const o = findCard(u);

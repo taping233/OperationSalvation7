@@ -1,0 +1,21 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/搜打撤
+
+ ✓ tests/required-infusion-play.test.js (14 tests) 1527ms
+ ✓ tests/battle-bloom-discovery.test.js (2 tests) 73ms
+ ✓ tests/battle-turn-start-discover.test.js (10 tests) 94ms
+ ✓ tests/battle-discover-retained-feedback.test.js (6 tests) 41ms
+ ✓ tests/battle-snapshot.test.js (3 tests) 9ms
+
+ Test Files  5 passed (5)
+      Tests  35 passed (35)
+   Start at  03:51:14
+   Duration  5.44s (transform 529ms, setup 0ms, collect 1.42s, tests 1.74s, environment 1.30s, prepare 280ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

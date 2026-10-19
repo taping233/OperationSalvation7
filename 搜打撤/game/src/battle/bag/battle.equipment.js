@@ -3,7 +3,7 @@
 import { esc } from '../../core/shared.js';
 import * as Combat from '../core/combat.js';
 import { splitEffectClauses } from '../effects/battle.effects.js';
-import { G, equipped, nestSyn, pstat, busy, infusing, discovering, choosing, handSelecting, hand, mode, sel } from '../runtime/battle.runtime.js';
+import { G, equipped, nestSyn, pstat, busy, infusing, discovering, choosing, handSelecting, hand, drawPile, discard, consumed, grave, mode, sel } from '../runtime/battle.runtime.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
 import { assertCardRulesExecutable } from '../effects/battle.rule-guard.js';
 
@@ -224,7 +224,8 @@ export function createBattleEquipment({
     // 对战开始时的装备只能在 BOSS 战中使用（2026-09-10 需求）：普通战斗不再自动生效
     if (mode !== 'boss') return;
     const chosen = (G.ownedCards || []).filter(o => o.card && isBattleStartEquip(o.card) && sel.has(o.uid))
-      .map(o => ({ ...o, card: getHostedExecutionCard(o.card) }));
+      .map(o => ({ ...o, card: getHostedExecutionCard(o.card) }))
+      .filter(o => !(o.card.id === 'tt7-talisman' && o.uid != null && consumed.includes(o.uid)));
     // 开战被动同样算「已穿戴」——角色信息区一并列出（老板 #9）；
     // passive=true：不占用 #18 的 2 件装配上限（勾选即生效，未经打出装配）
     chosen.forEach(o => {
@@ -233,6 +234,17 @@ export function createBattleEquipment({
     if (!chosen.length) return;
     G.log(`[[icon:bolt]] 开战被动：${chosen.map(o => esc(o.card.name)).join('、')} 自动生效`, 'ok');
     chosen.forEach(o => {
+      // 灵符开战触发即消耗；先退出可用牌区，额外抽牌不能再抽到或使用本牌。
+      // 旧档缺少 UID 时不写消耗记录，避免结算误删其他缺 UID 卡。
+      if (o.card.id === 'tt7-talisman' && o.uid != null) {
+        consumed.push(o.uid);
+        if (!grave.includes(o.uid)) grave.push(o.uid);
+        for (const pile of [hand, drawPile, discard]) {
+          for (let i = pile.length - 1; i >= 0; i--) {
+            if (pile[i] === o.uid) pile.splice(i, 1);
+          }
+        }
+      }
       // M3 收编：rules.equip.battleStart 单路径（runner 合成卡结算）；仅未迁卡走 desc 文本
       if (o.card.rules?.equip?.battleStart?.length && triggersM2) {
         triggersM2.resolveEquipOps(o.card, o.card.rules.equip.battleStart);

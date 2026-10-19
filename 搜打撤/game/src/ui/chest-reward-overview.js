@@ -1,26 +1,15 @@
 import { esc, escAttr } from '../core/shared.js';
 import '../../css/chest-reward-overview.css';
 
-// A resolved candidate is not necessarily a claimed card (one-of choices also mark the rest lost).
-function boxResultRule(box) {
-  const taken = box.takenCount || 0, lost = box.lostCount || 0;
-  if (!taken && !lost) return box.completed ? '已结束' : box.rule || '';
-  const parts = [];
-  if (taken) parts.push(`已领取 ${taken} 张`);
-  if (lost) parts.push(box.choice && taken ? `其余 ${lost} 张${box.completed ? '已放弃' : '未领取'}` : `已放弃 ${lost} 张`);
-  if (!box.completed) {
-    const remaining = Math.max(0, (box.cardCount || 0) - taken - lost);
-    if (remaining) parts.push(`剩余 ${remaining} 张待处理`);
-  }
-  return parts.join(' · ');
-}
+import { rewardBoxSummary, REWARD_RECEIVED } from './reward-state.js';
+import { rewardReturnHTML } from './reward-scene-view.js';
 
 // Art, summary, footer, and picker are rendered HTML supplied by the reward flow.
 // This module owns presentation only; opening, claiming, and parking remain commands.
 export function chestRewardOverviewHTML({ boxes = [], claimedCards = [], coins = null, source = '', title = '本次收获', summary = '', footer = '', complete = false, primaryAction = null, progress = null, notice = '' } = {}) {
   const received = new Map();
   claimedCards.forEach(card => received.set(card.name, (received.get(card.name) || 0) + 1));
-  const receipt = received.size ? `<section class="cqo-receipt" aria-label="本次已入背包"><header class="cqo-receipt-heading"><span class="cqo-receipt-icon" aria-hidden="true">[[icon:bag]]</span><b>已入背包 <span class="cqo-receipt-count">${claimedCards.length} 张</span></b><span class="cqo-receipt-destination">本次收获</span></header><ul>${[...received].map(([name, count]) => `<li>${esc(name)} <strong>×${count}</strong></li>`).join('')}</ul></section>` : '';
+  const receipt = received.size ? `<section class="cqo-receipt" aria-label="本次已入背包"><header class="cqo-receipt-heading"><span class="cqo-receipt-icon" aria-hidden="true">[[icon:bag]]</span><b>${REWARD_RECEIVED} <span class="cqo-receipt-count">${claimedCards.length} 张</span></b><span class="cqo-receipt-destination">本次收获</span></header><ul>${[...received].map(([name, count]) => `<li>${esc(name)} <strong>×${count}</strong></li>`).join('')}</ul></section>` : '';
   const pending = progress?.pending ?? boxes.filter(box => !box.completed).length;
   const total = progress?.total ?? boxes.length;
   const primaryBox = primaryAction && boxes.find(box => box.index === primaryAction.index);
@@ -31,7 +20,7 @@ export function chestRewardOverviewHTML({ boxes = [], claimedCards = [], coins =
     : `<button type="button" class="cqo-button cqo-button-quiet" data-act="chestReturn">返回地图 · 保留奖励</button><button type="button" class="cqo-button" data-act="chestOverviewBag">整理背包</button>${nextButton}`;
   const boxHTML = boxes.map(box => {
     const name = box.name || `宝箱 ${box.index + 1}`;
-    const rule = boxResultRule(box);
+    const rule = rewardBoxSummary(box);
     const status = box.completed ? '已结束' : (box.takenCount || box.lostCount) ? '领取中' : box.status || (box.completed ? '已收取' : box.opened ? '待领取' : '待开启');
     const action = box.completed ? status : box.actionLabel || (box.opened ? '继续领取' : '打开宝箱');
     return `<button type="button" class="cqo-box${box.completed ? ' cqo-box-complete' : ''}${box.active ? ' cqo-box-active' : ''}" data-act="chestOpen" data-i="${escAttr(String(box.index))}" aria-label="${escAttr(`${name}，${action}`)}" aria-pressed="${box.active ? 'true' : 'false'}"${box.completed ? ' disabled' : ''}>
@@ -65,7 +54,7 @@ export function chestRewardFrameHTML({ overview = '', picker = '', label = '宝�
     <div class="cqo-background"${picker ? ' inert aria-hidden="true"' : ''}>${overview}</div>
     ${picker ? `<div class="cqp-shade">
       <section class="cqp-dialog" role="dialog" aria-modal="true" aria-label="${escAttr(label)}" tabindex="-1">
-        <header class="cqp-toolbar"><button type="button" class="cqp-close" data-act="chestClosePicker"><span aria-hidden="true">←</span> 返回奖励</button><span class="cqp-label">${esc(label)}</span></header>
+        <header class="cqp-toolbar">${rewardReturnHTML({ action:"chestClosePicker", className:"cqp-close", arrow:true })}<span class="cqp-label">${esc(label)}</span></header>
         <div class="cqp-scroll">${picker}</div>
       </section>
     </div>` : ''}

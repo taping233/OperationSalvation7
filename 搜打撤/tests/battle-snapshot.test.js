@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createBattleSnapshot } from '../game/src/battle/runtime/battle.snapshot.js';
+import { createBattleSnapshot, createBattleSnapshotSignature } from '../game/src/battle/runtime/battle.snapshot.js';
 
 describe('battle snapshot builder', () => {
   it('preserves absent and explicit null cards in optional battle projections', () => {
@@ -26,12 +26,14 @@ describe('battle snapshot builder', () => {
   it('isolates nested state and freezes collections without mutating source values', () => {
     const foe = { hp: 4, status: { bleed: 2 }, defense: { armor: 1 }, intent: { type: 'attack' } };
     const hand = ['a'];
+    const consumed = ['spent'];
     const picked = new Set(['fuel']);
     const input = {
       battleToken: 't1', mode: 'boss', turn: 2, energy: 3, maxEnergy: 4, busy: false,
       phase: 'player', actionQueueLength: 0, opts: { stage: 1 }, player: { hp: 8 },
       pdef: { armor: 2 }, pstat: { hp: 8, status: { poison: 1 } }, foes: [foe], allies: [],
-      hand, drawPile: [], discard: [], grave: [],
+      playerEffects: [{ key: 'nextSpell', name: '法术额外施放', icon: 'sparkles', duration: '下一张', description: '触发后消失' }],
+      hand, drawPile: [], discard: [], grave: [], consumed,
       infusing: { uid: 'a', card: { name: 'card' }, picked }, discovering: null,
       handSelecting: null, choosing: null, pendingTarget: null, pendingHint: '',
       viewingGrave: false, viewingBag: false, dreadShown: false, selectingDeck: false,
@@ -44,6 +46,17 @@ describe('battle snapshot builder', () => {
     expect(Object.isFrozen(snapshot.foes[0].status)).toBe(true);
     expect(Object.isFrozen(snapshot.infusing.picked)).toBe(true);
     expect(Object.isFrozen(snapshot.potionBar[0])).toBe(true);
+    expect(Object.isFrozen(snapshot.playerEffects)).toBe(true);
+    expect(Object.isFrozen(snapshot.playerEffects[0])).toBe(true);
+    const effectSignature = createBattleSnapshotSignature(input, {});
+    input.playerEffects[0].duration = 'changed';
+    expect(snapshot.playerEffects[0].duration).toBe('下一张');
+    expect(createBattleSnapshotSignature(input, {})).not.toBe(effectSignature);
+    const beforeConsumedSignature=createBattleSnapshotSignature(input,{});
+    consumed.push('later');
+    expect(createBattleSnapshotSignature(input,{})).not.toBe(beforeConsumedSignature);
+    expect(snapshot.consumed).toEqual(['spent']);
+    expect(Object.isFrozen(snapshot.consumed)).toBe(true);
     hand.push('b');
     picked.add('later');
     foe.status.bleed = 9;

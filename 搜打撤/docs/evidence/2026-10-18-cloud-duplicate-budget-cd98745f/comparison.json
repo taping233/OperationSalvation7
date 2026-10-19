@@ -1,0 +1,134 @@
+{
+  "fixture": "/workspace/scratch/b7a53a06c872/eb8d669-restore/runtime-dev/搜打撤/desktop-app/game",
+  "node": "v22.23.3",
+  "files": 1396,
+  "scope": "Read-only existing older build, not the current snapshot. Alternating warm-cache microbenchmark; no browser/game FPS or current build claim.",
+  "runs": [
+    {
+      "round": 0,
+      "order": [
+        "baseline",
+        "optimized"
+      ],
+      "baseline": {
+        "packageBytes": 146710016,
+        "duplicateBytes": 122164,
+        "elapsedMs": 199.230417,
+        "filesRead": 1396,
+        "bytesRead": 146710016
+      },
+      "optimized": {
+        "packageBytes": 146710016,
+        "duplicateBytes": 122164,
+        "elapsedMs": 12.162453999999968,
+        "filesRead": 80,
+        "bytesRead": 2399737
+      }
+    },
+    {
+      "round": 1,
+      "order": [
+        "optimized",
+        "baseline"
+      ],
+      "optimized": {
+        "packageBytes": 146710016,
+        "duplicateBytes": 122164,
+        "elapsedMs": 8.120045000000005,
+        "filesRead": 80,
+        "bytesRead": 2399737
+      },
+      "baseline": {
+        "packageBytes": 146710016,
+        "duplicateBytes": 122164,
+        "elapsedMs": 144.381772,
+        "filesRead": 1396,
+        "bytesRead": 146710016
+      }
+    },
+    {
+      "round": 2,
+      "order": [
+        "baseline",
+        "optimized"
+      ],
+      "baseline": {
+        "packageBytes": 146710016,
+        "duplicateBytes": 122164,
+        "elapsedMs": 154.00152400000002,
+        "filesRead": 1396,
+        "bytesRead": 146710016
+      },
+      "optimized": {
+        "packageBytes": 146710016,
+        "duplicateBytes": 122164,
+        "elapsedMs": 8.796448000000055,
+        "filesRead": 80,
+        "bytesRead": 2399737
+      }
+    },
+    {
+      "round": 3,
+      "order": [
+        "optimized",
+        "baseline"
+      ],
+      "optimized": {
+        "packageBytes": 146710016,
+        "duplicateBytes": 122164,
+        "elapsedMs": 7.592336000000046,
+        "filesRead": 80,
+        "bytesRead": 2399737
+      },
+      "baseline": {
+        "packageBytes": 146710016,
+        "duplicateBytes": 122164,
+        "elapsedMs": 136.27977399999997,
+        "filesRead": 1396,
+        "bytesRead": 146710016
+      }
+    },
+    {
+      "round": 4,
+      "order": [
+        "baseline",
+        "optimized"
+      ],
+      "baseline": {
+        "packageBytes": 146710016,
+        "duplicateBytes": 122164,
+        "elapsedMs": 146.35887200000002,
+        "filesRead": 1396,
+        "bytesRead": 146710016
+      },
+      "optimized": {
+        "packageBytes": 146710016,
+        "duplicateBytes": 122164,
+        "elapsedMs": 7.778637000000003,
+        "filesRead": 80,
+        "bytesRead": 2399737
+      }
+    },
+    {
+      "round": 5,
+      "order": [
+        "optimized",
+        "baseline"
+      ],
+      "optimized": {
+        "packageBytes": 146710016,
+        "duplicateBytes": 122164,
+        "elapsedMs": 7.043886000000043,
+        "filesRead": 80,
+        "bytesRead": 2399737
+      },
+      "baseline": {
+        "packageBytes": 146710016,
+        "duplicateBytes": 122164,
+        "elapsedMs": 162.110952,
+        "filesRead": 1396,
+        "bytesRead": 146710016
+      }
+    }
+  ]
+}

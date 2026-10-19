@@ -273,3 +273,61 @@ describe('真实小/中宝箱的基础候选与附赠边界', () => {
   });
 
 });
+
+describe('三选一与附赠的总览状态连续性', () => {
+  it('尚未选择时总览只陈述选择规则，不提前宣布放弃', async () => {
+    const h = await setup({ kind:'medium' });
+    h.reveal(); h.click('chestClosePicker');
+    const rule = h.body.querySelector('.cqo-box-rule').textContent;
+    expect(rule).toBe('3 张中选 1 张');
+    expect(h.saved().current).toMatchObject({ taken:[], lost:[] });
+  });
+
+  it.each([false, true])('已选择且附赠待领，重载=%s：总览与卡牌页均明确其余基础卡已放弃', async reload => {
+    const h = await setup({ kind:'medium', capacity:1 });
+    h.reveal();
+    const oldPick = h.acts.chestPick;
+    h.click('chestPick', 0);
+    h.click('chestClosePicker');
+    if (reload) h.reload();
+    expect(h.saved().current).toMatchObject({ taken:[0], lost:[1, 2] });
+    expect(h.saved().queue[0].completed).toBe(false);
+    const rule = h.body.querySelector('.cqo-box-rule').textContent;
+    expect(rule).toContain('其余 2 张已放弃');
+    expect(rule).toContain('剩余 1 张待处理');
+    expect(rule).not.toContain('未领取');
+    h.click('chestOpen', 0);
+    expect([...h.body.querySelectorAll('.reward-unit.dropped .reward-unit-state')].map(el => el.textContent)).toEqual(['已永久放弃', '已永久放弃']);
+    const before = h.game.grantCard.mock.calls.length;
+    oldPick({ i:1 }); h.acts.chestPick({ i:1 });
+    expect(h.game.grantCard).toHaveBeenCalledTimes(before);
+    expect(h.saved().current).toMatchObject({ taken:[0], lost:[1, 2] });
+  });
+
+  it('附赠全部领完后总览保留真实放弃数并允许继续探索', async () => {
+    const h = await setup({ kind:'medium' }); h.reveal();
+    h.click('chestPick', 0); h.click('chestTake1', 3);
+    expect(h.body.querySelector('.cqo-box-rule').textContent).toBe('已领取 2 张 · 其余 2 张已放弃');
+    expect(h.saved().current).toMatchObject({ taken:[0, 3], lost:[1, 2] });
+    h.click('chestFinish'); expect(h.done).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('真实领奖卡面与详情共用动作', () => {
+  it.each([['medium', 16], ['small', 16], ['medium', 1], ['small', 1]])('%s 容量%s时详情与卡面动作一致且不暗中领卡', async (kind, capacity) => {
+    const h = await setup({ kind, capacity });
+    if (capacity === 1) h.game.ownedCards.push({ card:{ id:'full', name:'占位', type:'法术' } });
+    const zoom = vi.fn(); window.SDT.UI.showCardZoom = zoom;
+    h.reveal();
+    const original = h.body.querySelector('.reward-unit [data-act]:not([data-act="chestSelect"])');
+    h.click('chestSelect', 0);
+    const footer = document.createElement('div'); footer.innerHTML = zoom.mock.calls[0][1].footer;
+    const button = footer.querySelector('button');
+    expect(button.dataset.act).toBe(original.dataset.act);
+    expect(button.textContent).toBe(original.textContent);
+    expect(button.dataset.cancel).toBe('false');
+    if (kind === 'medium') expect(footer.textContent).toContain('其余基础卡永久放弃');
+    expect(h.game.grantCard).not.toHaveBeenCalled();
+    expect(h.saved().current).toMatchObject({ taken:[], lost:[] });
+  });
+});

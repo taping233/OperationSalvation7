@@ -36,6 +36,7 @@ import { commands, getSnapshot, getBattleLiveness, findEffectiveCard as findCard
 import { showFoePreview, clearFoePreview, showThoughtBubble, clearThoughtBubble } from './battle.hover.js';
 import { createTargetSession, isTargetableEnemy } from '../core/battle.target-session.js';
 import { isAreaEffect, isRandomEnemyEffect } from '../effects/battle.target-rules.js';
+import { cancelSelection, syncSelectionPrompt } from './battle.selection-ui.js';
 import { BATTLE_PHASES } from '../runtime/battle.state.js';
   // ---------- 指向施法 ----------
   // 状态分支依据本地 NMouseCardPlay / NTargetManager；DOM 命中与 UI 缩放沿本项目接口。
@@ -51,6 +52,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   let aimPlayedAt = 0;       // 拖动松手被处理的时间戳（抑制随后误触发的 click 锁定）
   let clickSelectedUid = null; // 点击选中的指向卡；拖拽路径仍由 aim 独立处理
   let clickTargetSession = null;
+  let clickFocusOrigin = null;
   const returningCards = new Map();
   const submittedCards = new Map();
   let motionFrame = 0, motionTime = 0, consumedPointerClick = null, consumedPointerPress = null;
@@ -289,7 +291,11 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     }
     aimArrowRemove();
   }
-  function cancelClickSelection() {
+  function cancelClickSelection({ restoreFocus = false } = {}) {
+    const origin = clickFocusOrigin;
+    const focusedTarget = document.activeElement?.matches('#btSelf.can-target, .bt-foe.can-target')
+      || origin?.stage.contains(document.activeElement) && document.activeElement?.matches('[data-selection-prompt] [data-act="btPickCancel"]');
+    clickFocusOrigin = null;
     clickTargetSession?.cancel();
     clickTargetSession = null;
     if (clickSelectedUid == null) return false;
@@ -301,6 +307,15 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     });
     updateClickSelectionUI();
     syncClickTargetPreviews();
+    // Only explicit keyboard cancellation returns to its still-current hand card.
+    // Render cleanup, pointer selection and successful submissions never steal focus.
+    const snapshot = restoreFocus && origin && focusedTarget ? getSnapshot() : null;
+    if (snapshot && origin.stage.isConnected && origin.stage._battleToken === origin.token
+      && snapshot.battleToken === origin.token && !snapshot.busy
+      && ['player', 'targeting'].includes(snapshot.phase) && snapshot.hand?.includes(origin.uid)) {
+      const card = [...origin.stage.querySelectorAll('.sts-hand .bt-card')].find(el => el.dataset.uid === origin.uid);
+      if (card && !card.closest('[inert], [hidden]')) card.querySelector('.hs-card[role="button"]')?.focus({ preventScroll: true });
+    }
     return true;
   }
   function setTargetable(el, enabled, label) {
@@ -321,6 +336,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
     if (clickSelectedUid != null && !clickTargetSession?.isCurrent()) {
       clickTargetSession?.cancel();
       clickTargetSession = null;
+      clickFocusOrigin = null;
       clickSelectedUid = null;
       document.querySelectorAll('.sts-hand .bt-card.click-selected').forEach(el => {
         el.classList.remove('click-selected');
@@ -348,8 +364,18 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       }
     });
   }
+  function cancelBattleSelection({ restoreFocus = false } = {}) {
+    const cancelled = cancelSelection({ snapshot:getSnapshot(), commands, hasAim:!!aim, clickUid:clickSelectedUid,
+      clearAim:cancelAim, clearClick:cancelClickSelection, clearFeedback:clearThoughtBubble, restoreFocus });
+    if (cancelled) updateClickSelectionUI();
+    return cancelled;
+  }
   function updateClickSelectionUI() {
-    return false; // 选中状态由卡牌与目标高亮表达，不再写顶部操作提示。
+    syncSelectionPrompt(UI.el.ovBody?.querySelector('.battle-stage'), getSnapshot(), {
+      clickUid:clickSelectedUid, findCard,
+      getCurrent:() => ({ snapshot:getSnapshot(), clickUid:clickSelectedUid, stage:UI.el.ovBody?.querySelector('.battle-stage') }),
+      onCancel:({ restoreFocus }) => cancelBattleSelection({ restoreFocus }),
+    });
   }
   function selectCardByClick(uid, focusTarget = false, { autoSingleTarget = true } = {}) {
     // 键盘/显式点击兼容入口独立于鼠标拖牌会话，不能让两套目标同时存活。
@@ -392,6 +418,8 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       el.dataset.handState = el.dataset.blockReason ? 'blocked' : 'ready';
     });
     const el = [...document.querySelectorAll('.sts-hand .bt-card')].find(x => x.dataset.uid === uid);
+    clickFocusOrigin = focusTarget && el?.closest('.battle-stage')
+      ? { uid, token: snap.battleToken, stage: el.closest('.battle-stage') } : null;
     if (el) {
       el.classList.add('click-selected');
       el.querySelector('.hs-card')?.setAttribute('aria-pressed', 'true');
@@ -440,6 +468,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       return false;
     }
     clickTargetSession = null;
+    clickFocusOrigin = null;
     clickSelectedUid = null;
     play(uid, side === 'enemy' ? idx : side === 'self' ? 'self' : undefined);
     return true;
@@ -527,7 +556,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
   function onAimPointerDown(e) {
     const a = aim;
     if (!a || e.isPrimary === false) return;
-    if (e.button === 2) { e.preventDefault(); cancelAim(); return; }
+    if (e.button === 2) { e.preventDefault(); cancelBattleSelection(); return; }
     if (e.button !== 0) return;
     // Mouse, pen and touch may each be primary. A held gesture keeps its owner;
     // after release, a fresh pointer may still confirm the existing pickup.
@@ -852,7 +881,7 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
       || !['Escape', 'Tab', aim.el.dataset.handIndex].includes(e.key)) return;
     e.preventDefault();
     e.stopImmediatePropagation();
-    cancelAim();
+    cancelBattleSelection({ restoreFocus:true });
   }
 
 function setClickSelectedUid(v) {
@@ -868,4 +897,4 @@ if (!document.getElementById('btMisTargetStyle')) {
   document.head.insertAdjacentHTML('beforeend',
     '<style id="btMisTargetStyle">@keyframes bt-mis-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}45%{transform:translateX(5px)}70%{transform:translateX(-3px)}88%{transform:translateX(2px)}}.bt-foe.mis-target{animation:bt-mis-shake .45s cubic-bezier(.36,.07,.19,.97) both;outline:2px solid #d05b4b;outline-offset:3px;border-radius:6px;filter:drop-shadow(0 0 8px rgba(208,91,75,.65))!important}</style>');
 }
-export { aim, aimPlayedAt, clickSelectedUid, updateClickSelectionUI, selectCardByClick, clickSelectedTarget, setTargetable, showCardBlockReason, showHandCardDetails, closeHandCardDetails, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, cancelClickSelection, setClickSelectedUid, syncSubmittedCardPoses };
+export { cancelBattleSelection, aim, aimPlayedAt, clickSelectedUid, updateClickSelectionUI, selectCardByClick, clickSelectedTarget, setTargetable, showCardBlockReason, showHandCardDetails, closeHandCardDetails, startAim, cancelAim, canPreserveAim, resumeAimAfterRender, cancelClickSelection, setClickSelectedUid, syncSubmittedCardPoses };

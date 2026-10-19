@@ -1,3 +1,4 @@
+import { cardBrowserItems, isCardBrowserCurrent } from './card-browser-state.js';
 import { escAttr } from '../core/shared.js';
 import '../../css/card-browser.css';
 
@@ -6,14 +7,14 @@ const positions = new Map();
 export function cardBrowserHTML(id, label, itemsHTML, { rows = 2, columns = 0 } = {}) {
   return `<section class="card-browser" data-card-browser="${escAttr(id)}" data-browser-rows="${rows}" data-browser-columns="${columns}" aria-label="${escAttr(label)}"><div class="card-browser-track">${itemsHTML}</div><footer class="card-browser-footer"><div><button type="button" class="card-browser-page" data-browser-page="previous" aria-label="上一页卡牌">←</button><span class="card-browser-position" role="status" aria-live="polite"></span><button type="button" class="card-browser-page" data-browser-page="next" aria-label="下一页卡牌">→</button></div></footer></section>`;
 }
-export function refreshCardBrowser(root, { reset = false } = {}) {
+export function refreshCardBrowser(root, { reset = false, items: suppliedItems = null } = {}) {
   const state = instances.get(root);
-  if (!state || !root.isConnected) return;
+  if (!state || !isCardBrowserCurrent(root)) return;
   const track = root.querySelector('.card-browser-track');
   const style = getComputedStyle(track);
   const minimum = parseFloat(style.getPropertyValue('--card-browser-min')) || 210;
   const gap = parseFloat(style.columnGap) || 20;
-  const items = [...track.querySelectorAll('[data-browser-key]')];
+  const items = cardBrowserItems(track, suppliedItems);
   const visible = items.filter(item => item.dataset.browseFiltered !== 'true');
   const visibleIndex = new Map(visible.map((item, index) => [item, index]));
   const rows = Math.max(1, Number(root.dataset.browserRows) || 2);
@@ -50,6 +51,7 @@ export function bindCardBrowser(root, { onOpen, onPage } = {}) {
   instances.set(root, state);
   let loadFrame = 0;
   root.addEventListener('click', event => {
+    if (!isCardBrowserCurrent(root)) return;
     const paging = event.target.closest('[data-browser-page]');
     if (paging && root.contains(paging) && !paging.disabled) {
       state.page += paging.dataset.browserPage === 'next' ? 1 : -1;
@@ -59,12 +61,13 @@ export function bindCardBrowser(root, { onOpen, onPage } = {}) {
     if (item && root.contains(item) && !item.hidden) onOpen?.(item.dataset.browserKey, item);
   });
   root.addEventListener('keydown', event => {
+    if (!isCardBrowserCurrent(root)) return;
     if (event.altKey || event.ctrlKey || event.metaKey) return;
     const direction = event.key === 'PageDown' ? 'next' : event.key === 'PageUp' ? 'previous' : null;
     if (direction) { event.preventDefault(); root.querySelector(`[data-browser-page="${direction}"]`).click(); }
   });
   root.addEventListener('load', () => {
-    if (loadFrame) return;
+    if (!isCardBrowserCurrent(root) || loadFrame) return;
     loadFrame = requestAnimationFrame(() => {
       loadFrame = 0;
       refreshCardBrowser(root);

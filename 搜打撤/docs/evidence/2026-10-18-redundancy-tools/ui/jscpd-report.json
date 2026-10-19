@@ -1,0 +1,71 @@
+{
+  "duplicates": [
+    {
+      "firstFile": {
+        "end": 115,
+        "endLoc": {
+          "column": 36,
+          "line": 115,
+          "position": 4654
+        },
+        "name": "page-visual-ready.js",
+        "start": 109,
+        "startLoc": {
+          "column": 55,
+          "line": 109,
+          "position": 4326
+        }
+      },
+      "format": "javascript",
+      "fragment": "      window.removeEventListener('keydown', block, true);\n      await new Promise(resolve => {\n        const timer = setTimeout(finish, 160);\n        function finish() { clearTimeout(timer); controller.signal.removeEventListener('abort', finish); resolve(); }\n        controller.signal.addEventListener('abort', finish, { once: true });\n      });\n    } catch (error) { console.error('返回地图视觉准备失败：', error); }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 161,
+        "endLoc": {
+          "column": 20,
+          "line": 161,
+          "position": 6759
+        },
+        "name": "page-visual-ready.js",
+        "start": 154,
+        "startLoc": {
+          "column": 35,
+          "line": 154,
+          "position": 6425
+        }
+      },
+      "tokens": 75
+    }
+  ],
+  "statistics": {
+    "detectionDate": "2026-10-18T18:54:34.715Z",
+    "formats": {
+      "javascript": {
+        "clones": 1,
+        "duplicatedLines": 7,
+        "duplicatedTokens": 75,
+        "lines": 8201,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 0.08535544445799292,
+        "percentageTokens": 0.10339978492844736,
+        "sources": 73,
+        "tokens": 72534
+      }
+    },
+    "total": {
+      "clones": 1,
+      "duplicatedLines": 7,
+      "duplicatedTokens": 75,
+      "lines": 8201,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 0.08535544445799292,
+      "percentageTokens": 0.10339978492844736,
+      "sources": 73,
+      "tokens": 72534
+    }
+  }
+}

@@ -328,3 +328,64 @@ describe('地图道具角标与详情用途一致', () => {
     expect(tileHTML({ ...tile, zone: 'pocket' })).toContain('>火堆不可复原</span>');
   });
 });
+
+describe('shared token crafting through live stack zoom', () => {
+  const gold={id:'tt-token-gold',name:'员工通行证B',type:'道具'};
+  const color={id:'tt-token-color',name:'员工通行证A',type:'道具'};
+  const final={id:'cmtmvq6ss84l',name:'觉醒通行证',type:'道具'};
+  function prepare(kind) {
+    H.game.ownedCards=kind==='gold'?[1,2,3,4].map(i=>({uid:`g${i}`,card:gold})):[{uid:'a1',card:color},{uid:'a2',card:color,safe:true}];
+    H.game.fragments=4;window.SDT.Cards.all=()=>[color,final];bag.showBackpack(true);
+    inspect(kind==='gold'?gold.name:color.name);
+    return ui._acts[kind==='gold'?'craftColorToken':'craftColorTokenByFragments'];
+  }
+  it.each(['gold','fragments'])('%s recipe allocates and saves exactly once; repeated old callback is inert', kind => {
+    const act=prepare(kind);act();
+    expect(H.uid).toBe(1);expect(H.save).toHaveBeenCalledOnce();
+    expect(ui.log.mock.calls.filter(([,level])=>level==='loot')).toHaveLength(1);
+    expect(H.game.ownedCards.map(o=>o.uid)).toEqual(kind==='gold'?['g4','new-1']:['a2','new-1']);
+    expect(H.game.fragments).toBe(kind==='gold'?4:2);
+    expect(H.game.ownedCards.at(-1).safe).toBeUndefined();
+    expect(document.getElementById('cardZoom')).toBeNull();
+    act();expect(H.uid).toBe(1);expect(H.save).toHaveBeenCalledOnce();
+  });
+  it.each(['gold','fragments'])('%s missing output never consumes, allocates, saves or logs success', kind => {
+    const act=prepare(kind), before=structuredClone(H.game.ownedCards);window.SDT.Cards.all=()=>[];act();
+    expect(H.game.ownedCards).toEqual(before);expect(H.game.fragments).toBe(4);expect(H.uid).toBe(0);expect(H.save).not.toHaveBeenCalled();
+    expect(ui.log.mock.calls.some(([,level])=>level==='loot')).toBe(false);
+  });
+  it('live in-place material removal and fragment depletion are checked after opening', () => {
+    let act=prepare('gold');H.game.ownedCards.splice(0,2);const remaining=H.game.ownedCards.slice();act();
+    expect(H.game.ownedCards).toEqual(remaining);expect(H.save).not.toHaveBeenCalled();
+    act=prepare('fragments');H.game.fragments=1;act();
+    expect(H.game.ownedCards).toHaveLength(2);expect(H.game.fragments).toBe(1);expect(H.uid).toBe(0);expect(H.save).not.toHaveBeenCalled();
+  });
+});
+
+describe('retained backpack pane across actions', () => {
+  it.each(['safe','pearl'])('drag to %s retains unaffected cards/scroll and updates source state', destination => {
+    const board=document.querySelector('.bag-board'),grid=document.querySelector('.bag-grid'),potionTile=document.querySelector('[data-stack="药剂"]');
+    board.scrollTop=167;potionTile.focus();startDrag();
+    document.elementFromPoint.mockReturnValue(document.querySelector(destination==='safe'?'.bag-rz[data-zone="safe"]':'[data-stack="珍珠盒"]'));
+    pointer('pointerup',window,1,200);
+    expect(document.querySelector('.bag-board')).toBe(board);expect(document.querySelector('.bag-grid')).toBe(grid);expect(document.querySelector('[data-stack="药剂"]')).toBe(potionTile);expect(board.scrollTop).toBe(167);expect(document.activeElement).toBe(potionTile);
+    expect(document.querySelector('[data-stack="木材卡"]')).toBeNull();expect(H.game.ownedCards.find(o=>o.uid==='wood')[destination==='safe'?'safe':'stored']).toBeTruthy();expect(drag.bagDrag).toBeNull();
+  });
+  it('repeated retained-grid refresh binds keyboard and pointer once and reads replacement inventory', () => {
+    const grid=document.querySelector('.bag-grid');for(let i=0;i<5;i++)bag.showBackpack(true);
+    H.game.ownedCards=[...H.game.ownedCards];bag.showBackpack(true);expect(document.querySelector('.bag-grid')).toBe(grid);
+    const zoom=vi.spyOn(ui,'showCardZoom'),tile=document.querySelector('[data-stack="药剂"]');tile.focus();tile.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));expect(zoom).toHaveBeenCalledOnce();document.querySelector('.cz-backdrop').click();
+    window.SDT.Sound.sfx.mockClear();pointer('pointerdown',tile);expect(window.SDT.Sound.sfx.mock.calls.filter(([sound])=>sound==='pick')).toHaveLength(1);expect(drag.bagDrag).not.toBeNull();
+  });
+  it('refresh during drag clears old gesture and later pointerup cannot move inventory', () => {
+    startDrag();const before=JSON.stringify(H.game.ownedCards);bag.showBackpack(true);
+    expect(drag.bagDrag).toBeNull();expect(document.querySelector('.bag-ghost')).toBeNull();
+    document.elementFromPoint.mockReturnValue(document.querySelector('.bag-rz[data-zone="safe"]'));pointer('pointermove',window,1,200);pointer('pointerup',window,1,200);
+    expect(JSON.stringify(H.game.ownedCards)).toBe(before);expect(document.querySelector('.dragging')).toBeNull();
+  });
+  it('filter and sort refresh preserve control focus and correct visible cards',()=>{
+    const board=document.querySelector('.bag-board'),filter=document.querySelector('[data-act="bagFilter"][data-f="move"]');filter.focus();filter.click();
+    expect(document.querySelector('.bag-board')).toBe(board);expect(document.activeElement.dataset.f).toBe('move');expect(document.querySelector('[data-stack="法术"]')).not.toBeNull();expect(document.querySelector('[data-stack="药剂"]')).toBeNull();
+    const sort=document.querySelector('[data-act="bagSortCycle"]');sort.focus();sort.click();expect(document.activeElement.dataset.act).toBe('bagSortCycle');expect(document.querySelector('[data-stack="法术"]')).not.toBeNull();
+  });
+});

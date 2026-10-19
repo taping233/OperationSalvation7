@@ -19,3 +19,83 @@ describe('奖励上下文腾位',()=>{
   it('旧渲染按钮和旧页面回调均不能提交',()=>{const old=root.querySelector('[data-organize="safe"]');click('discard');old.click();expect(options.moveToSafe).not.toHaveBeenCalled();UI.el.ovBody.innerHTML='<p>其他页</p>';click('confirm');expect(options.discardOne).not.toHaveBeenCalled();});
   it('领取前再核容量与当前会话',()=>{click('safe');fits=false;click('claim');expect(options.onClaim).not.toHaveBeenCalled();expect(root.textContent).toContain('空间已变化');});
 });
+
+describe('奖励整理连续键盘焦点', () => {
+  const button = (action, index) => root.querySelector(`[data-organize="${action}"]${index == null ? '' : `[data-index="${index}"]`}`);
+  const activate = (action, index) => { const target = button(action, index); target.focus(); target.click(); return target; };
+  beforeEach(() => {
+    stacks = ['木材', '草药', '矿石'].map((name, i) => ({ card:{ name, type:'资源' }, uids:[`${i}a`, `${i}b`], count:2 }));
+    options.discardOne.mockImplementation(stack => {
+      const item = stacks.find(s => s.uids[0] === stack.uids[0]);
+      item.uids.shift(); item.count--;
+      stacks = stacks.filter(s => s.count);
+      return true;
+    });
+    root = openRewardCapacityOrganizer(options);
+  });
+  it('第二张卡进入丢弃确认时聚焦安全的保留，不自动丢弃', () => {
+    activate('discard', 1);
+    expect(document.activeElement).toBe(button('keep'));
+    expect(options.discardOne).not.toHaveBeenCalled();
+  });
+  it('保留后回到原卡丢弃入口，数据不变', () => {
+    activate('discard', 1); activate('keep');
+    expect(document.activeElement).toBe(button('discard', 1));
+    expect(stacks[1].count).toBe(2);
+  });
+  it('确认仅丢弃一张，仍有同叠时焦点留在同卡入口', () => {
+    activate('discard', 1); activate('confirm');
+    expect(document.activeElement).toBe(button('discard', 1));
+    expect(stacks[1].count).toBe(1);
+    expect(options.discardOne).toHaveBeenCalledOnce();
+  });
+  it('原卡整叠消失后聚焦相邻卡，不跳回列表头', () => {
+    stacks[1].uids = ['1a']; stacks[1].count = 1;
+    root = openRewardCapacityOrganizer(options);
+    activate('discard', 1); activate('confirm');
+    expect(stacks.map(s => s.card.name)).toEqual(['木材', '矿石']);
+    expect(document.activeElement).toBe(button('discard', 1));
+  });
+  it('最后一张丢弃后聚焦返回奖励，不自动离开或领取', () => {
+    stacks = [{card:{name:'草药',type:'资源'},uids:['a'],count:1}];
+    root = openRewardCapacityOrganizer(options);
+    activate('discard', 0); activate('confirm');
+    expect(document.activeElement).toBe(button('return'));
+    expect(options.onReturn).not.toHaveBeenCalled();
+    expect(options.onClaim).not.toHaveBeenCalled();
+  });
+  it('移入安全格清空列表后也保留可继续操作的焦点', () => {
+    activate('safe', 1);
+    expect(document.activeElement).toBe(button('return'));
+    expect(options.onClaim).not.toHaveBeenCalled();
+  });
+  it('最后一行移除后退到前一行，焦点恢复不触发页面滚动', () => {
+    stacks[2].uids = ['2a']; stacks[2].count = 1;
+    root = openRewardCapacityOrganizer(options);
+    const focus = vi.spyOn(HTMLElement.prototype, 'focus');
+    try {
+      activate('discard', 2); activate('confirm');
+      expect(document.activeElement).toBe(button('discard', 1));
+      expect(focus).toHaveBeenLastCalledWith({preventScroll:true});
+    } finally { focus.mockRestore(); }
+  });
+  it('安全格失败且新状态禁用时退到同卡非破坏性的操作入口', () => {
+    options.safeAvailability = () => ({ok:true,reason:''});
+    options.moveToSafe.mockImplementation(() => { options.safeAvailability = () => ({ok:false,reason:'安全格已满'}); return false; });
+    // Use a dynamic port so a capacity change is observed by the same organizer.
+    root = openRewardCapacityOrganizer({...options,safeAvailability:stack => options.safeAvailability(stack)});
+    activate('safe', 1);
+    expect(button('safe', 1).disabled).toBe(true);
+    expect(document.activeElement).toBe(button('discard', 1));
+    expect(options.discardOne).not.toHaveBeenCalled();
+  });
+  it('旧页面按钮不能抢走新页面焦点', () => {
+    activate('discard', 1);
+    const stale = button('keep');
+    UI.el.ovBody.innerHTML = '<button id="new-page">新页面</button>';
+    const next = document.querySelector('#new-page'); next.focus(); stale.click();
+    expect(document.activeElement).toBe(next);
+    expect(options.discardOne).not.toHaveBeenCalled();
+  });
+
+});

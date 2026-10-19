@@ -1,3 +1,4 @@
+import { isCardBrowserCurrent, cardBrowserItems, filterCardBrowserItems, selectCardBrowserItems } from '../game/src/ui/card-browser-state.js';
 import { uiDisclosure } from '../game/src/ui/ui-disclosure.js';
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
@@ -14,10 +15,10 @@ const bagCurrent = readFileSync(resolve('game/src/hub/game.bag.view2.js'), 'utf8
 function mountWarehouse(source, size = 200, pocket = false) {
   const keyOf = vi.fn(stack => `card:${stack.card.id}${stack.card.variantKey ? `:${stack.card.variantKey}` : ''}`);
   const factory = new Function('esc', 'escAttr', 'stackKeyOf', 'characterFor', 'bindCardNavigation',
-    'decorateInventoryZoom', 'warehouseCategoriesV7HTML', 'animateBaseRefresh', 'uiDisclosure',
+    'decorateInventoryZoom', 'warehouseCategoriesV7HTML', 'animateBaseRefresh', 'uiDisclosure', 'cardBrowserItems', 'filterCardBrowserItems', 'selectCardBrowserItems', 'isCardBrowserCurrent',
     source.replace(/^import .*;\r?$/gm, '').replace(/export /g, '') + '\nreturn { warehouseHTML, bindWarehouse };');
   const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[char]);
-  const feature = factory(escape, escape, keyOf, () => null, () => {}, () => {}, () => '', () => {}, uiDisclosure);
+  const feature = factory(escape, escape, keyOf, () => null, () => {}, () => {}, () => '', () => {}, uiDisclosure, cardBrowserItems, filterCardBrowserItems, selectCardBrowserItems, isCardBrowserCurrent);
   const stacks = Array.from({ length:size }, (_, index) => ({
     card:{ id:`test-${index}`, name:`卡牌${index}`, type:'法术', rarity:'古朴' }, count:2,
   }));

@@ -172,3 +172,13 @@ describe('出征真实页面选择与扣仓身份', () => {
     expect(base.data.stash.map(stack => stack.count)).toEqual([2, 1]); expect(ports.start).toHaveBeenCalledTimes(2);
   });
 });
+
+ it('出发最终动作旁保留动态待复原清空风险，不折叠到说明中', () => {
+   base.data.pocket = [{ card:first, count:2 }, { card:second, count:3 }];
+   open();
+   const button=document.querySelector('[data-act="confirmDeploy"]');
+   const warning=button.parentElement.querySelector('.camp-depart-next.warning');
+   expect(warning.textContent).toBe('待复原卡牌 5 张 · 出发后清空');
+   expect(warning.closest('details')).toBeNull();
+   expect(warning.hidden).toBe(false);expect(button.disabled).toBe(false);
+ });

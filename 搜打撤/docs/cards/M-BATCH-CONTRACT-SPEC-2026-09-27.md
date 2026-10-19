@@ -212,6 +212,8 @@ rules: { version: 1,
 ```
 - Wave2：`acquire.untilHandN`（随机置入直至手牌 N 张，perAcquired 类折算挂接）；hand/deck 的 `act: 'play'/'playKeep'/'zeroCost'/'decay'` 直接施放通道（现 capability 拒，先例：江湖救急专支、发现面板 act）
 
+- 已支持 `acquire {n, pool:{kind:'注能'}, dest:'discover', act:'noInfuse'}`：沿既有发现队列展示候选，确认后仅选中实例复制并携带 `_noInfuse:true`；不在候选生成时授予或改全局模板。连续发现保留 `act`，每轮独立实例；灵能召唤结构化与旧文本路径对齐此契约。M3 v5 仅对精确匹配旧 `dest:'hand'` 规则和定版卡面的存档迁移，玩家自改卡保留。
+
 ### 二.7 `damage.graveyard` 墓地计数伤害（✅ M2 已接线——damage 分支 grave 计数×perCard，普通战无墓地不生效）
 
 ```js

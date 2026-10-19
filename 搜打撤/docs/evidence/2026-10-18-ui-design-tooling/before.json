@@ -1,0 +1,98 @@
+[
+  {
+    "source": "game/css/card-browser.css",
+    "deprecations": [],
+    "invalidOptionWarnings": [],
+    "parseErrors": [],
+    "errored": false,
+    "warnings": [
+      {
+        "line": 7,
+        "column": 224,
+        "endLine": 7,
+        "endColumn": 241,
+        "rule": "declaration-property-value-disallowed-list",
+        "severity": "warning",
+        "text": "Review raw font size against secondary-ui-tokens.css; card art, icon glyphs and display numbers may intentionally differ. (declaration-property-value-disallowed-list)"
+      }
+    ]
+  },
+  {
+    "source": "game/css/container-store.css",
+    "deprecations": [],
+    "invalidOptionWarnings": [],
+    "parseErrors": [],
+    "errored": false,
+    "warnings": [
+      {
+        "line": 6,
+        "column": 108,
+        "endLine": 6,
+        "endColumn": 112,
+        "rule": "declaration-property-value-disallowed-list",
+        "severity": "warning",
+        "text": "Review raw font size against secondary-ui-tokens.css; card art, icon glyphs and display numbers may intentionally differ. (declaration-property-value-disallowed-list)"
+      },
+      {
+        "line": 16,
+        "column": 71,
+        "endLine": 16,
+        "endColumn": 75,
+        "rule": "declaration-property-value-disallowed-list",
+        "severity": "warning",
+        "text": "Review raw font size against secondary-ui-tokens.css; card art, icon glyphs and display numbers may intentionally differ. (declaration-property-value-disallowed-list)"
+      },
+      {
+        "line": 19,
+        "column": 65,
+        "endLine": 19,
+        "endColumn": 90,
+        "rule": "declaration-property-value-disallowed-list",
+        "severity": "warning",
+        "text": "Review raw font size against secondary-ui-tokens.css; card art, icon glyphs and display numbers may intentionally differ. (declaration-property-value-disallowed-list)"
+      },
+      {
+        "line": 25,
+        "column": 111,
+        "endLine": 25,
+        "endColumn": 115,
+        "rule": "declaration-property-value-disallowed-list",
+        "severity": "warning",
+        "text": "Review raw font size against secondary-ui-tokens.css; card art, icon glyphs and display numbers may intentionally differ. (declaration-property-value-disallowed-list)"
+      },
+      {
+        "line": 26,
+        "column": 89,
+        "endLine": 26,
+        "endColumn": 93,
+        "rule": "declaration-property-value-disallowed-list",
+        "severity": "warning",
+        "text": "Review raw font size against secondary-ui-tokens.css; card art, icon glyphs and display numbers may intentionally differ. (declaration-property-value-disallowed-list)"
+      }
+    ]
+  },
+  {
+    "source": "game/css/ui-design-system.css",
+    "deprecations": [],
+    "invalidOptionWarnings": [],
+    "parseErrors": [],
+    "errored": false,
+    "warnings": []
+  },
+  {
+    "source": "game/css/bag-design-system.css",
+    "deprecations": [],
+    "invalidOptionWarnings": [],
+    "parseErrors": [],
+    "errored": false,
+    "warnings": []
+  },
+  {
+    "source": "game/css/secondary-ui-tokens.css",
+    "deprecations": [],
+    "invalidOptionWarnings": [],
+    "parseErrors": [],
+    "errored": false,
+    "warnings": []
+  }
+]

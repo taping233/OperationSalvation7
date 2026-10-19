@@ -10,7 +10,7 @@ import { on as onBattleEvent } from '../../core/event-bus.js';
 import { groupHandCards, orderHandGroups, createStableHandSlots } from '../core/battle.hand.js';
 import { getPace, setPace } from '../runtime/battle.pace.js';
 import { schedulePresentationMs } from '../runtime/battle.clock.js';
-import { renderCombatPiles } from './battle.piles.view.js';
+import { renderCombatPiles, consumedPileUids } from './battle.piles.view.js';
 import { careerSkillButtonHTML } from './battle.skill-view.js';
 import { renderInfusionSelection } from './battle.infusion-view.js';
 import { discoverInfusionNote } from './battle.discover-infusion.js';
@@ -194,7 +194,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   const openGrave = commands.openGrave;
   const openDeckView = commands.openDeckView;
   const closeDeckView = commands.closeDeckView;
-  const cancelPendingTarget = commands.cancelPendingTarget;
   const pickDiscover = commands.pickDiscover;
   const pickChoice = commands.pickChoice;
   const pickHandSelect = commands.pickHandSelect;
@@ -353,7 +352,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     if (snapshot.phase !== 'player' || snapshot.busy || snapshot.pendingItem || snapshot.slamPending || snapshot.dartPending) setClickSelectedUid(null);
     const {
       mode, turn, energy, maxEnergy, busy, phase = 'player', opts, player, pstat,
-      foes, hand, drawPile, discard, grave, infusing, discovering, handSelecting, choosing,
+      foes, hand, drawPile, discard, infusing, discovering, handSelecting, choosing,
       pendingTarget, viewingGrave, viewingBag, dreadShown, deckSelection,
       potionBar, pendingItem, slamPending, dartPending, viewingDeck,
     } = snapshot;
@@ -405,6 +404,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       const discoverAction = {
         play: '选择 1 张免费施放', potion: '选择 1 张免费施放',
         playKeep: '选中牌免费施放，其余候选置入手牌',
+        noInfuse: '选择 1 张置入手牌，使其无需注能',
         pouch: '从锦囊取出 1 张施放', dup: '选 1 张，获得两张复制并置入手牌',
       }[discovering.act] || '选择 1 张置入手牌';
       const discoverSource = discovering.sourceCardId
@@ -497,7 +497,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       mode,
       drawCount: drawPile,
       discardCount: discard,
-      graveCount: grave,
+      graveCount: consumedPileUids(snapshot),
       pileTip,
       cardBackHTML: SDT.Cards.cardBackHTML(),
       escAttr,
@@ -507,19 +507,13 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const tip = mode === 'boss'
       ? `开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 弃牌堆抽空后自动洗回 · 墓地（被消耗的牌）不洗回`
       : '点击手牌查看大卡，确认使用后选择目标；也可直接拖拽到敌人、自己或战场空地。数字键与 Enter 同样先查看。';
-    // 药水栏点选提示条（点敌人使用 / 取消）
-    const itemBar = pendingItem ? `
-      <div class="bt-infuse bt-pick">
-        <div class="bt-infuse-copy"><p class="bt-infuse-title">[[icon:flask]] 已选【<b>${esc(pendingItem.card.name)}</b>】：<b>点击一名敌人</b>使用，或直接拖到敌人身上</p></div>
-        <div class="bt-infuse-actions"><button class="mini-btn" data-act="btPickCancel">[[icon:cross]] 取消</button></div>
-      </div>` : '';
     // —— 道具栏（2026-09-12 老板定向）：战斗界面上方常驻，点击使用 / 拖到敌人身上 ——
     // 2026-09-09 玩法定版：BOSS 战没有道具栏（背包里的道具无法使用）
     // 09-20 P1-7：空道具时整栏隐藏——顶部不再常驻「背包里没有道具」占位
     // 09-20 老板：药水说明不再挂系统 title（悬停延迟且触屏无效），改为自绘文字栏——
     // 悬停 / 按下药水时在药水栏正下方弹出（data-potion-idx 对应 potions 数组下标）
     const potions = potionBar || [];
-    const showItemBar = mode !== 'boss' && potions.length > 0;
+    const showItemBar = potions.length > 0;
     const potionsHTML = showItemBar ? `
       <div class="bt-potions">
         <span class="bt-potions-label">[[icon:flask]] 道具</span>
@@ -567,7 +561,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         <div class="sts-allies" data-unit-mount="allies"></div>
         <div class="sts-foes" data-unit-mount="foes"></div>
       </div>
-      ${itemBar}
       <div class="sts-hud">
         <div class="sts-resource-dock">
         <div class="sts-hud-l" aria-label="抽牌堆">${drawPileHTML}</div>
@@ -616,7 +609,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       });
     });
     UI.act('btBossRules', () => {
-      showBattleDecision('首脑战 · 循环牌库', `<p class="ov-stats">地图首脑开战前可整理牌库，选择 ${R().bossDeckSize} 张招式、装备或能力卡；不足时全部编入，可沿用上次有效编组。</p><p class="ov-note">另加入 ${R().starterSha} 张初始攻击，缺少的初始攻击为本场临时牌。开局抽 ${R().battleStartDraw} 张，之后每回合抽 ${R().battleTurnDraw} 张，手牌上限 ${R().battleHandMax}。打出的牌进入弃牌，牌库空时洗回；注能等消耗牌进入墓地，不洗回。开战装备计入编组，混沌之眼增加5张上限。普通战直接使用随身可用牌，抽牌改为临时初始攻击。</p><div class="ov-btns"><button class="ov-btn" data-act="btRulesBack">返回战斗</button></div>`, 'settings', getSnapshot());
+      showBattleDecision('首脑战 · 循环牌库', `<p class="ov-stats">地图首脑开战前可整理牌库，选择 ${R().bossDeckSize} 张招式、装备或能力卡；不足时全部编入，可沿用上次有效编组。</p><p class="ov-note">另加入 ${R().starterSha} 张初始攻击，缺少的初始攻击为本场临时牌。开局抽 ${R().battleStartDraw} 张，之后每回合抽 ${R().battleTurnDraw} 张，手牌上限 ${R().battleHandMax}。打出的牌进入弃牌，牌库空时洗回；注能等消耗牌进入本场消耗牌堆，不洗回。开战装备计入编组，混沌之眼增加5张上限。普通战直接使用随身可用牌，抽牌改为临时初始攻击。</p><div class="ov-btns"><button class="ov-btn" data-act="btRulesBack">返回战斗</button></div>`, 'settings', getSnapshot());
       UI.act('btRulesBack', () => render());
     });
     // 战斗设置（2026-09-13 留言：战斗界面保留设置键）——轻量浮层，不动 game.state，
@@ -682,7 +675,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       bagSlam();
     });   // 背包砸击按钮（2026-09-16 老板：改回按钮形态，置于手牌左侧）；09-20 老板：支持按住拖到敌人身上松手释放
     UI.act('btInfuseStart', (d) => commands.beginInfusion(d.uid));
-    UI.act('btPickCancel', cancelPendingTarget);
     UI.act('btEquipSkill', (d) => useEquipSkill(d.uid));   // 已穿戴装备的限定技能（老板 #9）
     // —— 药水栏（2026-09-12 老板定向）：点击使用；敌方指向药水按住可拖到敌人身上 ——
     UI.act('btPotion', (d) => {
@@ -768,10 +760,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     // 单位区常驻层挂载 + 差分更新（批次B）：玩家/随从/敌人节点跨渲染复用（须在手牌层之前挂载）
     const unitMounts = mountUnitLayer(body, snapshot.battleToken);
     if (unitMounts) updateUnits(unitMounts, snapshot, { isBoss: opts.isBoss, pendingTarget, pendingItem, slamPending, dartPending });
-    if (pendingTarget?.hint) {
-      showThoughtBubble(pendingTarget.hint, true);
-      body.querySelector('.bt-thought-bubble')?.setAttribute('data-target-prompt', 'true');
-    } else body.querySelector('.bt-thought-bubble[data-target-prompt]')?.remove();
+    // Selection instructions and cancellation share the status strip; no duplicate bubble.
+    body.querySelector('.bt-thought-bubble[data-target-prompt]')?.remove();
     if (SDT.Art.cutoutFigures) SDT.Art.cutoutFigures(body);
     const entryStage = body.querySelector('.battle-stage.sts');
     const simplifiedEntry = entryStage?.dataset.battleEntry === 'degraded';

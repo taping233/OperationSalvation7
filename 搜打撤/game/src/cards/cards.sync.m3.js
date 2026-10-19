@@ -24,8 +24,8 @@
  *                     curse bleed stacks:1（atkDown 计时型必填 amount/duration，与 stacks 互斥）；
  *   tt7-armup         从牌库抽 2 张装备牌 → draw amount:2 filter{type:'装备'}
  *                     （BOSS 战 deckDraw 定向，普通战降级获得初始攻击——执行器既有口径）；
- *   cmtn1epgt20j      发现一张注能卡，使其无需注能 → acquire n:1 pool{kind:'注能'} dest:'hand'
- *                     act:'noInfuse'（文本先例为随机直发入手，非发现面板——执行器注释点名）；
+ *   cmtn1epgt20j      发现一张注能卡，使其无需注能 → acquire n:1 pool{kind:'注能'} dest:'discover'
+ *                     act:'noInfuse'（展示候选，选中实例免注能；v5修正旧随机直发）；
  *   cmtn1p9vb5au      发现一种形态并释放 → acquire n:1 pool{kind:'形态'} dest:'discover' act:'play'；
  *   tt12-chargeray    5 点法伤，每注能过 1 张 +2 → damage amount:5 + perInfusedInHand:2；
  *   tt3-holy-water    回复 5 点生命并净化自身 → heal amountField:'heal' + cleanse self；
@@ -62,7 +62,7 @@
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
 
 // v4：永恒绽放只发现一轮，三张是候选数，不是发现轮数。
-const M3_MARKER_KEY = 'sdt-cards-m3-onplay-rules-v4-seeded';
+const M3_MARKER_KEY = 'sdt-cards-m3-onplay-rules-v5-seeded';
 
 const R = (battle, onPlay) => ({ rules: { version: 1, battle, triggers: { onPlay } } });
 const ENEMY_ONE = { target: { side: 'enemy', area: false } };
@@ -101,7 +101,7 @@ const definitions = new Map([
     { op: 'curse', curse: 'bleed', stacks: 1, target: 'chosenEnemy' },
   ])],
   ['tt7-armup', R(SELF, [{ op: 'draw', amount: 2, filter: { type: '装备' } }])],
-  ['cmtn1epgt20j', R(SELF, [acquire(1, '注能', 'hand', 'noInfuse')])],
+  ['cmtn1epgt20j', R(SELF, [acquire(1, '注能', 'discover', 'noInfuse')])],
   ['cmtn1p9vb5au', R(SELF, [acquire(1, '形态', 'discover', 'play')])],
   ['tt12-chargeray', R(ENEMY_ONE, [
     { op: 'damage', amount: 5, target: 'chosenEnemy', perInfusedInHand: 2 },
@@ -167,6 +167,7 @@ export const ensureM3OnplayRules = createRuleBackfiller({
   // 整卡（canonical 卡面 + 旧版 rules）精确匹配的存档视为本批旧版产物，允许重写为现行版；
   // 玩家改名/改字段的卡深不相等，仍保守跳过。
   previousRulesById: new Map([
+    ['cmtn1epgt20j', R(SELF, [acquire(1, '注能', 'hand', 'noInfuse')]).rules],
     ['tt7-bladebloom', R(SELF, [acquire(3, '随机', 'discover', 'playKeep')]).rules],
     ['tt2-turtlearmor', R(SELF, [{ op: 'armor', amount: 10, consumeEquip: true }]).rules],
     ['cc-last-stand', R(ENEMY_ONE, [{ ...dmgField(), recast: { on: 'lastHand', times: 2 } }]).rules],

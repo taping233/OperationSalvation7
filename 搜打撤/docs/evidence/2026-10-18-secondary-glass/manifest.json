@@ -1,0 +1,30 @@
+[
+  {
+    "file": "game/css/secondary-ui-tokens.css",
+    "sha256": "131dfaf79f89e62a13a14307719f4035714743b501ec8adb3f856b3119c36edf"
+  },
+  {
+    "file": "game/css/battle-secondary-overlay.css",
+    "sha256": "f376efbd5ce94059f2177de669dfb5670e38e3bb3418d22a9a4cdfeac252dfa7"
+  },
+  {
+    "file": "game/css/battle-discover.css",
+    "sha256": "3931704685a1e929ebf160924c5a01f00b9eaf832b57c6fdd31c24b8098314b4"
+  },
+  {
+    "file": "game/css/expedition-inventory.css",
+    "sha256": "fd079e1fa8e625b6945a359416a10c87cc2e6ae15933211822018208ce891521"
+  },
+  {
+    "file": "game/css/bag-design-system.css",
+    "sha256": "bef297db588c767f5f8bc3b0610dd5d55e2a6da6410d25cf08e4908d187d3e4f"
+  },
+  {
+    "file": "tests/secondary-glass-style.test.js",
+    "sha256": "ac9c4c8ac88ff68acf8e84255ede005334f37e606bc29984344e457d2eb13a4b"
+  },
+  {
+    "file": "docs/modules/secondary-ui-style.md",
+    "sha256": "af9aba88bcaa3dfae21ed0aa1b6e7c4c4fc380bd32df531cdd8763991bd23b8c"
+  }
+]

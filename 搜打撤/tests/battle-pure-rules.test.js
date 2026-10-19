@@ -22,14 +22,17 @@ describe('纯费用规则：优先级与限时折扣', () => {
   it('无限符文优先于限时零费与形态折扣，且仅折扣战斗内获得的招式', () => {
     const card = { type: '武术', cost: 2 };
     expect(cost(card, { unlimitedRune: true, zeroFeeTurn: 4, turn: 3, cosmosForm: 1 }, 'bts-1')).toBe(1);
+    expect(cost(card, { unlimitedRune: true, zeroFeeTurn: 3, turn: 3 }, 'bts-1')).toBe(1);
     expect(cost(card, { unlimitedRune: true }, 'deck-1')).toBe(2);
     expect(cost({ type: '道具', cost: 2 }, { unlimitedRune: true }, 'bts-2')).toBe(2);
   });
 
-  it('零费有效期含截止回合，过期后恢复原费；零费高于宇宙形态', () => {
+  it('零费仅在指定回合生效，提前与过期均不生效；零费高于宇宙形态', () => {
     const card = { type: '法术', cost: 3 };
+    expect(cost(card, { zeroFeeTurn: 4, turn: 3 }, 'uid')).toBe(3);
     expect(cost(card, { zeroFeeTurn: 3, turn: 3, cosmosForm: 1 }, 'uid')).toBe(0);
     expect(cost(card, { zeroFeeTurn: 2, turn: 3 }, 'uid')).toBe(3);
+    expect(cost(card, { zeroFeeTurn: undefined, turn: 0 }, 'uid')).toBe(3);
   });
 
   it('宇宙形态、法术单费、武术单费按既有顺序压过文本折扣', () => {

@@ -837,11 +837,12 @@ describe('A3 第三批（G3 acquire 族）：结构化 onPlay acquire/coins op',
       acquireCard({ op: 'acquire', n: 1, dest: 'deck', act: 'decay', pool: { kind: '随机' } }),
       pendingDeck.callState.target, false, 0, null,
     )).toThrow(TypeError);
-    const pendingDiscoverNoInfuse = setup({ discoverPool: [CARD('牌')] });
-    expect(() => pendingDiscoverNoInfuse.resolver(
-      acquireCard({ op: 'acquire', n: 1, dest: 'discover', act: 'noInfuse', pool: { kind: '随机' } }),
-      pendingDiscoverNoInfuse.callState.target, false, 0, null,
-    )).toThrow(TypeError);
+    const supportedDiscoverNoInfuse = setup({ discoverPool: [CARD('牌')] });
+    supportedDiscoverNoInfuse.resolver(
+      acquireCard({ op:'acquire', n:1, dest:'discover', act:'noInfuse', pool:{kind:'随机'} }),
+      supportedDiscoverNoInfuse.callState.target,false,0,null);
+    expect(supportedDiscoverNoInfuse.events.find(event=>event[0]==='discover')[1].act).toBe('noInfuse');
+    expect(supportedDiscoverNoInfuse.events.some(event=>event[0]==='temp')).toBe(false);
   });
 
   it('池空兜底：dim 日志不炸结算；coins：获得 N 币入账（实打）', () => {

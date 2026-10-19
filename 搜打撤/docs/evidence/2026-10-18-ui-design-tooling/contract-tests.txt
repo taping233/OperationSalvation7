@@ -1,0 +1,57 @@
+(node:7) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 quality:styles:test
+> node --test tests/tools/ui-style-contract.test.mjs
+
+(node:20) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+TAP version 13
+# (node:27) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: raw size is advisory in the secondary UI design domain
+ok 1 - raw size is advisory in the secondary UI design domain
+  ---
+  duration_ms: 61.413892
+  type: 'test'
+  ...
+# Subtest: font shorthand is also audited
+ok 2 - font shorthand is also audited
+  ---
+  duration_ms: 3.507649
+  type: 'test'
+  ...
+# Subtest: semantic size, layout pixels and intentional theme colors remain valid
+ok 3 - semantic size, layout pixels and intentional theme colors remain valid
+  ---
+  duration_ms: 4.335853
+  type: 'test'
+  ...
+# Subtest: other themes and the token source may define raw sizes
+ok 4 - other themes and the token source may define raw sizes
+  ---
+  duration_ms: 4.157672
+  type: 'test'
+  ...
+# Subtest: invalid hex and property mistakes are blocking errors
+ok 5 - invalid hex and property mistakes are blocking errors
+  ---
+  duration_ms: 1.725171
+  type: 'test'
+  ...
+# Subtest: container label reuses the existing 18px semantic token
+ok 6 - container label reuses the existing 18px semantic token
+  ---
+  duration_ms: 10.800828
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 363.489454

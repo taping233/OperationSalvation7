@@ -1,0 +1,48 @@
+import { afterEach, beforeEach, expect, it, vi } from 'vitest';
+import { createPageSurfaceLifetime } from '../game/src/ui/page-surface-lifetime.js';
+import { stagePageVisual, cancelPageVisual } from '../game/src/ui/page-visual-ready.js';
+let ui;
+beforeEach(() => {
+  vi.useFakeTimers();
+  vi.stubGlobal('requestAnimationFrame', fn => setTimeout(fn,16)); vi.stubGlobal('cancelAnimationFrame', clearTimeout);
+  document.body.innerHTML = '<div id="overlay"><div class="card"><div id="ovBody"><main>旧页</main></div></div></div>';
+  ui = {_overlayRevision:1, el:{overlay:document.getElementById('overlay'),ovBody:document.getElementById('ovBody')},_pageBgReady:new Promise(() => {})};
+});
+afterEach(() => { cancelPageVisual(); vi.useRealTimers(); vi.unstubAllGlobals(); document.body.replaceChildren(); });
+it('revision guards synchronous stale calls before MutationObserver delivery; invalidation occurs once', async () => {
+  const invalidated = vi.fn();
+  const lifetime = createPageSurfaceLifetime(document.querySelector('main'),{getRevision:()=>ui._overlayRevision,onInvalidate:invalidated});
+  expect(lifetime.current()).toBe(true);
+  ui._overlayRevision++;
+  expect(lifetime.current()).toBe(false);
+  ui.el.ovBody.innerHTML = '<main>新页</main>';
+  await Promise.resolve();
+  expect(lifetime.signal.aborted).toBe(true); expect(invalidated).toHaveBeenCalledOnce();
+  lifetime.dispose(); expect(invalidated).toHaveBeenCalledOnce();
+});
+it('ordinary page handoff ignores late old readiness and retains a new page cover', async () => {
+  const oldReveal=vi.fn(), newReveal=vi.fn();
+  stagePageVisual(ui,oldReveal); await vi.advanceTimersByTimeAsync(48);
+  ui.el.ovBody.innerHTML = '<main>新页</main>'; ui._overlayRevision++;
+  stagePageVisual(ui,newReveal); await vi.advanceTimersByTimeAsync(48);
+  expect(document.querySelectorAll('.page-visual-handoff')).toHaveLength(1);
+  expect(oldReveal).not.toHaveBeenCalled(); expect(newReveal).not.toHaveBeenCalled();
+  await vi.runAllTimersAsync();
+  expect(oldReveal).not.toHaveBeenCalled(); expect(newReveal).toHaveBeenCalledOnce();
+  expect(document.querySelector('.page-visual-handoff')).toBeNull();
+});
+it('native closing invalidates an ordinary reveal without hiding the overlay itself', async () => {
+  const reveal=vi.fn(); stagePageVisual(ui,reveal);
+  ui.el.overlay.classList.add('closing'); await Promise.resolve(); await vi.runAllTimersAsync();
+  expect(reveal).not.toHaveBeenCalled(); expect(ui.el.overlay.hidden).toBe(false);
+  expect(document.querySelector('.page-visual-handoff')).toBeNull();
+});
+
+it('an already hidden host invalidates without waiting for a later DOM mutation', async () => {
+  ui.el.overlay.hidden = true;
+  const invalidated = vi.fn();
+  const lifetime = createPageSurfaceLifetime(document.querySelector('main'), {onInvalidate:invalidated});
+  expect(lifetime.current()).toBe(false);
+  await Promise.resolve();
+  expect(invalidated).toHaveBeenCalledOnce(); expect(lifetime.signal.aborted).toBe(true);
+});

@@ -19,7 +19,7 @@ import { isTurbo } from '../core/turbo.js';
 import { renderScheduler } from '../core/render-scheduler.js';
 import { findMapTravelPath, setMapTravelPresentation } from './map-travel-path.js';
 import { createTravelMotion, createArrivalFeedback } from './map-travel-motion.js';
-import { showLayerPassage } from '../ui/map-passage.js';
+import { showLayerPassage, isLayerPassageActive } from '../ui/map-passage.js';
 import { cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, finishInstant, grantEventCard, nodeOpt, nodeShell, openBattleCell, openChestsOnCell, openFixedRewardsOnCell, openPickupPage, openPocketRestore, openShop, preloadCellScene, resumeChestsOnCell } from './game.run.scenes.js';
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal, openEntrySupply, resumeNodeRestore } from './game.run.altar.js';
 import { bindNodeEvent, nodeEventAt, claimResourceReward, entrySupplyAt, entrySupplyGate, nodeActionBinding, resourceRewardAt } from './node-reward-state.js';
@@ -44,7 +44,7 @@ const moveUsesReducedMotion = () => {
 };
 export function moveTo(toLi, toIdx) {
   if (activeMove && game.state !== 'moving') activeMove.cancel?.();
-  if (game.state !== 'idle' || activeMove) return false;
+  if (game.state !== 'idle' || activeMove || isLayerPassageActive(game)) return false;
   if (entrySupplyGate(game)) { UI.log('[[icon:door]] 领完入城补给后才能前往其他地点', 'warn'); return false; }
   const path = findMapTravelPath(game, { li: toLi, idx: toIdx });
   if (!path?.length) return false;
@@ -58,6 +58,7 @@ export function moveTo(toLi, toIdx) {
   const presentation = { path: route, segmentIndex: 1, progress: 0, phase: 'moving' };
   setMapTravelPresentation(game, presentation);
   let committed = 0, done = false, watchdog = null, arrival = null, feedback = null;
+  let passage = null, passageWaiting = false, passageFinished = false;
   const clock = () => performance.now();
   const startedAt = clock();
   let previousAt = startedAt;
@@ -66,6 +67,7 @@ export function moveTo(toLi, toIdx) {
   const cleanup = () => {
     if (watchdog != null) clearTimeout(watchdog);
     if (arrival != null) clearTimeout(arrival);
+    passage?.dispose();
     feedback?.dispose();
     feedback = null;
   };
@@ -89,7 +91,7 @@ export function moveTo(toLi, toIdx) {
   const commitNode = () => {
     const from = route[committed], to = route[++committed];
     const current = game.layerData[from.li]?.logical[from.idx];
-    if (!reduced && from.li !== to.li) showLayerPassage(game, from.li, to.li);
+    if (!reduced && from.li !== to.li) passage = showLayerPassage(game, from.li, to.li);
     game.pos = { x: to.x, y: to.y };
     game.layerIdx = to.li;
     game.trackPos = to.idx;
@@ -109,6 +111,13 @@ export function moveTo(toLi, toIdx) {
   };
   const resolveArrival = () => {
     if (!isCurrent()) return;
+    if (passage && !passageFinished) {
+      if (!passageWaiting) {
+        passageWaiting = true;
+        passage.done.then(() => { passageFinished = true; resolveArrival(); });
+      }
+      return;
+    }
     done = true;
     cleanup();
     activeMove = null;
@@ -178,7 +187,7 @@ export function moveTo(toLi, toIdx) {
 
 // 点击脚下所在格可重开尚未完成的内容；完成结算的节点已写 visited，商店则在离开时写入。
 export function reenterCell() {
-  if (game.state !== 'idle' || activeMove) return false;
+  if (game.state !== 'idle' || activeMove || isLayerPassageActive(game)) return false;
   resolveCell();
   return true;
 }

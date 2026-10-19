@@ -1,0 +1,15 @@
+{
+  "sourceBaseline": "cd98745f",
+  "node": "22.23.3",
+  "implementation": {
+    "scripts/perf-budget.cjs": {
+      "sha256": "a011fa0ceb9a94cbababe1f869f3b01f777e410313f65352850c35aa08430670",
+      "byteIdenticalToPreviouslyReviewed": true
+    },
+    "tests/perf-budget-duplicates.test.js": {
+      "sha256": "5ee6cd6c605f286f4b5bf25ced92b9cdfb45e16bd5f953d955e42080b1fbf2af",
+      "byteIdenticalToPreviouslyReviewed": true
+    }
+  },
+  "reusedBenchmark": "comparison.json from 78455b83 cloud task; older runtime-dev build input, no rerun on cd98745f"
+}

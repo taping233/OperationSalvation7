@@ -102,3 +102,13 @@ describe('U10 M1 settle 过场非当前后续流静默终止', () => {
     expect(state.saveGame).not.toHaveBeenCalled();
   });
 });
+
+it('retreat passes map preparation to the unchanged 1050ms transition without moving settlement earlier', async () => {
+  let finish;
+  window.SDT.Renderer={warm:vi.fn(async () => true)};
+  state.transition=vi.fn(options => { expect(options.duration).toBe(1050); options.prepare(); return new Promise(resolve => {finish=resolve;}); });
+  const onBattleEnd=await bind(); const pending=onBattleEnd({isBoss:false,foeNames:[]},[],null,[]);
+  await vi.waitFor(() => expect(state.transition).toHaveBeenCalledOnce());
+  expect(window.SDT.Renderer.warm).toHaveBeenCalledOnce(); expect(state.saveGame).not.toHaveBeenCalled();
+  finish(true); await pending; expect(state.saveGame).toHaveBeenCalled();
+});

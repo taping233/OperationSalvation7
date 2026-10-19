@@ -239,3 +239,20 @@ it('equal estimates keep original backpack order even when rarity display differ
   expect(game.pendingExtraction).toBeNull();
   expect(base.data.stash[0].card.id).toBe('a');
 });
+
+it.each(['slot', 'pending'])('撤离帮助返回拒绝旧%s，并保留完成确认状态', async change => {
+  game.layerIdx = 3; game.bossKilled = true;
+  openEmergencyModal(); await UI.acts.payExit();
+  await vi.waitFor(() => expect(document.querySelector('[data-act=exFinish]')).not.toBeNull());
+  await UI.acts.exFinish();
+  expect(document.querySelector('[data-act=exConfirmFinish]')).not.toBeNull();
+  const help = UI.registerHelp.mock.calls.at(-1)[1];
+  help.back();
+  expect(document.querySelector('[data-act=exConfirmFinish]')).not.toBeNull();
+  const currentHelp = UI.registerHelp.mock.calls.at(-1)[1];
+  if (change === 'slot') altarState.slot = 2;
+  else game.pendingExtraction = {...game.pendingExtraction};
+  const current = UI.el.ovBody.firstElementChild;
+  currentHelp.back();
+  expect(UI.el.ovBody.firstElementChild).toBe(current);
+});

@@ -1,0 +1,109 @@
+{
+  "duplicates": [
+    {
+      "firstFile": {
+        "end": 47,
+        "endLoc": {
+          "column": 4,
+          "line": 47,
+          "position": 1809
+        },
+        "name": "game.run.dev-loader.js",
+        "start": 40,
+        "startLoc": {
+          "column": 9,
+          "line": 40,
+          "position": 1380
+        }
+      },
+      "format": "javascript",
+      "fragment": "  return {\n    visible, state:game.state, battleActive:game.battleActive, cardPageOpen,\n    html:visible ? body.innerHTML : '', nodes:visible ? [...body.childNodes] : [],\n    title:UI.el.ovTitle?.innerHTML || '', mode:UI._lastMode,\n    acts:{ ...UI._acts }, input:UI._inputHandler, hover:UI._hoverHandler,\n    roomActive:UI._roomActive, bagClose:UI._bagCloseHook,\n    returnFocus:UI._overlayReturnFocus, focus:document.activeElement,\n  };",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 107,
+        "endLoc": {
+          "column": 4,
+          "line": 107,
+          "position": 5499
+        },
+        "name": "game.run.dev.js",
+        "start": 100,
+        "startLoc": {
+          "column": 37,
+          "line": 100,
+          "position": 5070
+        }
+      },
+      "tokens": 106
+    },
+    {
+      "firstFile": {
+        "end": 26,
+        "endLoc": {
+          "column": 1,
+          "line": 26,
+          "position": 1726
+        },
+        "name": "layeredMap.js",
+        "start": 12,
+        "startLoc": {
+          "column": 38,
+          "line": 12,
+          "position": 778
+        }
+      },
+      "format": "javascript",
+      "fragment": "  const generated = generateLayeredMap(seed);\n  // 第四层（li=3）由生成器直接产出「祭坛 → 首脑」终局三连格（弃3激活祭坛选奖励、\n  // 过祭坛战首脑、胜后终局撤离），本层只做透传与显示命名。\n  return generated.layers.map((layer, li) => ({\n    id: `layer-${li + 1}`, name: `第${li + 1}层 · ${LAYER_NAMES[li]}`,\n    nameEn: `Layer ${li + 1} · ${LAYER_NAMES_EN[li]}`, color: LAYER_COLORS[li],\n    generatorVersion: generated.generatorVersion, layoutVersion: generated.layoutVersion,\n    gridBounds: layer.gridBounds,\n    nodes: layer.nodes, entrances: [layer.entry], entranceNames: [layer.nodes[layer.entry].name],\n    doors: layer.doors || [], altarEntrances: layer.altarEntrances || [], exit: layer.exit,\n    logical: layer.nodes.map(n => ({ grid: [], fire: n.type === 'fire', oldIdx: n.idx,\n      def: { type: n.type, name: n.name, extraction: n.extraction }, id: n.id,\n      row: n.row, x: n.x, next: n.next })),\n  }));\n}",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 15,
+      "secondFile": {
+        "end": 43,
+        "endLoc": {
+          "column": 1,
+          "line": 43,
+          "position": 2771
+        },
+        "name": "layeredMap.js",
+        "start": 30,
+        "startLoc": {
+          "column": 45,
+          "line": 30,
+          "position": 1907
+        }
+      },
+      "tokens": 216
+    }
+  ],
+  "statistics": {
+    "detectionDate": "2026-10-18T18:54:34.940Z",
+    "formats": {
+      "javascript": {
+        "clones": 2,
+        "duplicatedLines": 23,
+        "duplicatedTokens": 322,
+        "lines": 9460,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 0.24312896405919662,
+        "percentageTokens": 0.312821808148911,
+        "sources": 42,
+        "tokens": 102934
+      }
+    },
+    "total": {
+      "clones": 2,
+      "duplicatedLines": 23,
+      "duplicatedTokens": 322,
+      "lines": 9460,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 0.24312896405919662,
+      "percentageTokens": 0.312821808148911,
+      "sources": 42,
+      "tokens": 102934
+    }
+  }
+}

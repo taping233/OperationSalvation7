@@ -45,13 +45,14 @@ function stackIcon(name, type, supply) {
 export function tileHTML(t, resourceCards = null) {
   const rc = t.supply ? '#aebfc9' : (RARITY_TINT[t.rarity] || '#9fb0ba');
   const select = t.supply ? '' : ` role="button" aria-label="查看${escAttr(t.name)}，${t.count}张${t.zone === 'pocket' ? '，已消耗' : ''}" data-act="inspectStack" data-name="${escAttr(t.name)}" data-safe="${t.safe ? 1 : 0}"${t.zone === 'pocket' ? ' data-pocket="1"' : ''}`;
+  const identity = Array.isArray(t.uids) ? ` data-pane-key="${escAttr(JSON.stringify(t.uids))}"` : '';
   const stack = t.supply ? ` data-supply="${escAttr(t.name)}"` : ` data-stack="${escAttr(t.name)}"`;
   const spent = t.zone === 'pocket' ? ' spent' : '';
   const state = t.zone === 'safe' ? '押运' : t.zone === 'pocket' ? (['道具', '装备'].includes(t.type) ? '火堆不可复原' : '火堆可复原') : (t.type === '道具' ? (t.useStatus?.badge || { map: '可用', battle: '战斗使用' }[bagUseLocation(t.card)] || '查看用法') : '');
   if (t.card) {
     // 真实卡面（2026-10-15 老板反馈：格子接入现行卡面样式）；卡面自带名称与费用，
     // 点击开基地同款 inventory-zoom 看卡操作台
-    return `<div class="bag-tile bag-slot card-face${spent}"${stack}${select} tabindex="0"
+    return `<div class="bag-tile bag-slot card-face${spent}"${stack}${select}${identity} tabindex="0"
       style="--tint:${rc}1c;--glow:${rc}30"
       title="${escAttr(t.name)}${t.count > 1 ? ` ×${t.count}` : ''} · 点击查看 · 按住拖动整理">
       ${SDT.Cards.cardHTML(t.card, '', { hideCost: false }).replace(/\s+tabindex="0"/g, '')}

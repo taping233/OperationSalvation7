@@ -1,3 +1,4 @@
+@import url('./secondary-ui-tokens.css');
 /* Combat secondary pages share a transparent shield over the retained scene.
    The panel grows with content; no full-page paint or fixed empty height. */
 body #overlay:has(.battle-secondary-layer) { background:transparent!important; backdrop-filter:none!important; }
@@ -20,10 +21,12 @@ body #overlay .battle-secondary-layer {
   box-sizing:border-box; padding:54px 40px; background:transparent; isolation:isolate;
 }
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel {
+  --feedback-panel:var(--ui-glass-surface);
   flex:0 1 auto!important; width:max-content!important; max-width:min(1280px,100%)!important;
   height:auto!important; max-height:100%!important; min-height:0!important;
-  border:1px solid var(--feedback-line)!important; border-radius:6px;
+  border:1px solid var(--ui-glass-line)!important; border-radius:6px;
   background:var(--feedback-panel)!important; color:var(--feedback-ink);
+  backdrop-filter:blur(var(--ui-glass-blur)); -webkit-backdrop-filter:blur(var(--ui-glass-blur));
   box-shadow:0 12px 32px #07101d55; overflow:hidden;
 }
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-head { padding:18px 24px 8px; gap:24px; }
@@ -38,7 +41,8 @@ body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .b
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel :is(.battle-decision-source,.battle-decision-guidance,.battle-pile-context,.battle-pile-note) { font-size:20px; color:var(--feedback-blue); }
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-guidance { margin-top:10px; }
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .choice-list { flex-wrap:nowrap; gap:18px; padding:16px 0; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .choice-opt { flex:1 1 280px; min-width:220px; min-height:220px; max-width:380px; padding:20px 24px; border-radius:4px; border-color:var(--feedback-line); background:#263947; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .choice-opt { flex:1 1 280px; min-width:220px; min-height:220px; max-width:380px; padding:20px 24px; border-radius:4px; border-color:var(--feedback-line); background:transparent; box-shadow:none; }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .choice-opt:is(:hover,:focus-visible) { background:#b6cbd714; }
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-option-text { font-size:27px; padding:18px 0; }
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-option-action { font-size:21px; color:var(--feedback-blue); }
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-discover-options { justify-content:safe center!important; align-items:start!important; gap:24px!important; padding:12px 6px!important; overflow:auto!important; max-height:none!important; }
@@ -54,18 +58,19 @@ body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .b
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .bt-gy-list { grid-template-columns:repeat(auto-fit,220px); gap:20px; }
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-pile-card { width:220px; }
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-pile-card .hs-card { font-size:22px; }
-body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-inspect { padding:18px; background:#263947; border-color:var(--feedback-line); }
+body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-inspect { padding:18px; background:transparent; border-color:var(--feedback-line); }
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-inspect-rules { font-size:22px; }
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel .battle-decision-empty { min-height:140px; }
 body #overlay .battle-decision.battle-decision-unified.battle-secondary-panel[data-decision-kind="infusion"] { width:1160px!important; }
 body #overlay .battle-secondary-panel [data-infusion-workspace] { grid-template-columns:260px minmax(0,1fr); gap:20px; }
-body #overlay .battle-secondary-panel .infusion-source { padding:16px; border-color:var(--feedback-line); background:#263947; }
+body #overlay .battle-secondary-panel .infusion-source { padding:16px; border-color:var(--feedback-line); background:transparent; box-shadow:none; }
 body #overlay .battle-secondary-panel .infusion-materials { max-height:440px; }
 body #overlay .battle-secondary-panel .infusion-footer { flex-wrap:wrap; gap:12px; }
 body #overlay .battle-secondary-panel .infusion-footer p { flex-basis:240px; }
+/* Inner sections stay unpainted: the outer panel alone owns glass and blur. */
 /* Existing details preserve their own focus/return semantics, same winter skin. */
 body #overlay .bt-hand-detail .bt-hand-detail-scrim { background:transparent; backdrop-filter:none; }
-body #overlay .bt-hand-detail .bt-hand-detail-surface { background:var(--feedback-panel,#15212cef); border:1px solid var(--feedback-line,#9bafbc66); border-radius:6px; box-shadow:0 12px 32px #07101d55; }
+body #overlay .bt-hand-detail .bt-hand-detail-surface { background:var(--ui-glass-surface); backdrop-filter:blur(var(--ui-glass-blur)); -webkit-backdrop-filter:blur(var(--ui-glass-blur)); border:1px solid var(--ui-glass-line); border-radius:6px; box-shadow:0 12px 32px #07101d55; }
 body #overlay .bt-hand-detail :is(.bt-hand-detail-close,.bt-hand-detail-use) { border-radius:4px; border:1px solid #9bafbc66; }
 body #overlay .bt-hand-detail .bt-hand-detail-use { background:#b6cbd7; color:#17232b; }
 body:has(#overlay .battle-stage) #cardZoom:not(.cz-photo) .cz-backdrop { background:transparent; backdrop-filter:none; }

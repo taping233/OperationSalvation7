@@ -1,0 +1,9 @@
+{"side":"any","selector":"#fieldChild","iterations":1000,"elementFromPointCalls":2000,"accepted":1000}
+{"side":"any","selector":".bt-card","iterations":1000,"elementFromPointCalls":2000,"accepted":0}
+{"side":"any","selector":".sts-hud","iterations":1000,"elementFromPointCalls":1000,"accepted":0}
+{"side":"any","selector":".sts-topbar","iterations":1000,"elementFromPointCalls":1000,"accepted":0}
+{"side":"any","selector":".bt-potions","iterations":1000,"elementFromPointCalls":1000,"accepted":0}
+{"side":"any","selector":"button","iterations":1000,"elementFromPointCalls":2000,"accepted":0}
+{"side":"any","selector":"[data-ui-tip]","iterations":1000,"elementFromPointCalls":2000,"accepted":0}
+{"side":"any","selector":".cover","iterations":1000,"elementFromPointCalls":1000,"accepted":0}
+{"side":"enemy","selector":".bt-foe","iterations":1000,"elementFromPointCalls":1000,"accepted":1000}

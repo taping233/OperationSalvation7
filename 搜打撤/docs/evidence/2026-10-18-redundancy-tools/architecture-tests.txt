@@ -1,0 +1,22 @@
+(node:74) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/搜打撤
+
+(node:110) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/contracts.test.js (17 tests) 762ms
+   ✓ ESM 依赖方向 > src 模块不存在循环依赖  708ms
+(node:130) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ tests/architecture-boundaries.test.js (24 tests) 737ms
+   ✓ 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向  715ms
+
+ Test Files  2 passed (2)
+      Tests  41 passed (41)
+   Start at  03:55:25
+   Duration  2.99s (transform 122ms, setup 0ms, collect 244ms, tests 1.50s, environment 768ms, prepare 126ms)
+
+(node:150) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)

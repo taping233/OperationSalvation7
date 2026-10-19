@@ -1,10 +1,13 @@
-.card-browser { min-width:0; --card-browser-min:210px; --card-browser-gap:24px; }
+@import url('./secondary-ui-tokens.css');
+.card-browser { min-width:0; --card-browser-min:210px; --card-browser-gap:var(--ui-space-6); }
 .card-browser-track { display:grid; gap:var(--card-browser-gap); align-items:start; justify-content:start; min-width:0; }
 .card-browser-track > [data-browser-key] { min-width:0; width:100%; }
-.card-browser-footer { display:flex; justify-content:center; align-items:center; padding:12px 0; margin-top:18px; color:var(--camp-muted,#717980); font:19px/1.4 var(--font-ui,sans-serif); }
-.card-browser-footer > div { display:flex; align-items:center; gap:24px; }
-.card-browser-page { display:grid; place-items:center; width:48px; height:42px; border:1px solid var(--camp-line,#313a4526); border-radius:0; background:transparent; color:var(--camp-ink,#252d36); font:25px/1 sans-serif; cursor:pointer; }
+.card-browser-footer { display:flex; justify-content:center; align-items:center; padding:var(--ui-space-3) 0; margin-top:18px; color:var(--camp-muted,#717980); font:var(--ui-text-label)/1.4 var(--font-ui,sans-serif); }
+.card-browser-footer > div { display:flex; align-items:center; gap:var(--ui-space-6); }
+.card-browser-page { display:grid; place-items:center; width:48px; height:var(--ui-control-compact); border:1px solid var(--camp-line,#313a4526); border-radius:0; background:transparent; color:var(--camp-ink,#252d36); font:25px/1 sans-serif; cursor:pointer; }
 .card-browser-page:hover:not(:disabled) { background:var(--camp-dark,#202b37); color:white; }
 .card-browser-page:disabled { opacity:.28; cursor:default; }
-.card-browser-position { min-width:65px; text-align:center; font-family:var(--font-num,sans-serif); }
+.card-browser-position { min-width:65px; text-align:center; font-variant-numeric:tabular-nums; font-family:var(--font-num,sans-serif); }
 .card-browser[data-empty="true"] .card-browser-footer { display:none; }
+
+.card-browser-page:focus-visible { outline:var(--ui-focus-width) solid var(--camp-ink,var(--ui-blue)); outline-offset:var(--ui-focus-offset); }

@@ -1,0 +1,57 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/搜打撤
+
+ ✓ tests/battle-discover-result-source.test.js (5 tests) 76ms
+stdout | tests/e6-card-rules-capability.test.js > E6 battle-entry rule capability > checks the actual seeded production catalogue and original synchronization source separately
+E6 production catalogue support census {"domains":{"bag":19,"base":8,"battle":165,"equip":16,"triggers":123},"operations":{"acquire":22,"armor":14,"blessing":3,"cleanse":2,"curse":23,"damage":60,"discover":1,"draw":15,"energy":1,"energyCap":1,"execute":2,"heal":4,"noDrawNext":1,"registerRule":4,"status":1,"stealAtk":1,"summon":1}}
+
+ ✓ tests/e6-card-rules-capability.test.js (6 tests) 85ms
+ ✓ tests/infuse-free-play.test.js (3 tests) 651ms
+ ✓ tests/battle-resolution.test.js (58 tests) 47ms
+stderr | tests/m3-data.test.js > M3 数据迁移批 D5：批次级保守语义 > 库内缺卡：整体保守退出，不标记、不部分回填
+[cards] M3 rule migration cards missing: [
+  'cc-cursed-blade',   'cc-last-stand',
+  'cc-rapid-fire',     'cmtn0xt0zr7',
+  'tt2-turtlearmor',   'tt3-dig-treasure',
+  'tt3-fly-arrowhawk', 'tt3-purify-arrow',
+  'tt3sp-shadowbug',   'tt3wu-shike',
+  'tt7-armup',         'cmtn1epgt20j',
+  'cmtn1p9vb5au',      'tt12-chargeray',
+  'tt3-holy-water',    'tt3-thunderblast',
+  'tt7-bladebloom',    'tt7-burnharvest',
+  'tt7-maxsupply',     'tt7-recruit',
+  'tt3sp-devour',      'tt3sp-magicoil',
+  'tt3sp-shadowshot'
+]
+
+stderr | tests/m3-data.test.js > M3 数据迁移批 D5：批次级保守语义 > 缺 canonical 定版表：整体保守退出，不标记
+[cards] M3 rule migration canonical missing: tt12-chargeray
+
+stderr | tests/m3-data.test.js > M3 数据迁移批 D5：批次级保守语义 > saveAll 返回 false：不标记
+[cards] M3 rule migration save returned false; marker was not written.
+
+stderr | tests/m3-data.test.js > 永恒绽放旧章发现轮数迁移 > 旧n3迁移保存false失败不盖章，恢复后可重试
+[cards] M3 rule migration save returned false; marker was not written.
+
+stderr | tests/m3-data.test.js > 永恒绽放旧章发现轮数迁移 > 旧n3迁移保存throw失败不盖章，恢复后可重试
+[cards] M3 rule migration save failed; marker was not written: Error: probe-save
+    at Object.harness.library.saveAll (/workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/搜打撤/tests/m3-data.test.js:398:69)
+    at ensureBatch (/workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/搜打撤/game/src/cards/cards.sync.backfiller.js:140:31)
+    at /workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/搜打撤/tests/m3-data.test.js:399:24
+    at file:///workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:863:59
+    at file:///workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11
+    at file:///workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26
+    at file:///workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)
+    at runTest (file:///workspace/scratch/b7a53a06c872/game_handoff_cd98745f/source/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)
+
+ ✓ tests/m3-data.test.js (86 tests) 97ms
+
+ Test Files  5 passed (5)
+      Tests  158 passed (158)
+   Start at  03:50:11
+   Duration  4.16s (transform 589ms, setup 0ms, collect 1.33s, tests 956ms, environment 943ms, prepare 271ms)
+

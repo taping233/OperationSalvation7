@@ -4,6 +4,7 @@ import { displayCardDescription } from '../../cards/card-description-text.js';
 import { descRich } from '../../cards/cards.view.js';
 import { groupHandCards, orderHandGroups } from '../core/battle.hand.js';
 
+import { cancelSelection } from './battle.selection-ui.js';
 import { requiresInfusion } from '../effects/battle.infusion.js';
 
 let keyCleanup = null;
@@ -42,7 +43,7 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
     <aside class="infusion-source"><span class="infusion-eyebrow">将要使用</span><h4>${esc(infusion.card.name)}</h4><p class="infusion-cost">消耗 ${effCostOf(infusion.card, infusion.uid)} 点能量 + ${infusion.need} 张材料</p>
       <div class="infusion-rules"><h5>打出效果</h5><p>${descRich(displayCardDescription(infusion.card.desc || '暂无规则描述', infusion.card.id), infusion.card.id)}</p></div>
       <details class="infusion-source-details" ${sourceExpanded ? 'open' : ''}><summary>查看卡面</summary><div class="infusion-source-card">${cardHTML(infusion.card, 'sm')}</div></details>
-      <p class="infusion-destination">材料进入墓地，不再抽回；战后进入消耗区。道具、装备不可在火堆复原。</p>
+      <p class="infusion-destination">材料进入本场消耗牌堆，不再抽回；战后进入消耗区。道具、装备不可在火堆复原。</p>
     </aside>
     <section class="infusion-selection"><header><div><h4>选择 ${infusion.need} 张材料</h4></div><strong class="infusion-progress${remaining ? '' : ' is-ready'}" role="status">已选 ${picked.length}/${infusion.need}${remaining ? '' : '<small>材料已齐</small>'}</strong></header>
       <div class="infusion-materials">${materialHTML || '<p>没有可选材料</p>'}</div>
@@ -81,7 +82,8 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
     const entry = group && findCard(group.uids[0]);
     if (entry) UI.showCardZoom(entry.card, { returnFocus:page.querySelector(`[data-act="btInfuseInspect"][data-i="${Number(data.i)}"]`) });
   });
-  UI.act('btInfuseCancel', () => { if (current()) commands.cancelInfusion(); });
+  const cancel = () => { const now = current(); return !!now && cancelSelection({ snapshot:now, commands }); };
+  UI.act('btInfuseCancel', cancel);
   UI.act('btInfuseDirect', () => { if (current() && !required) commands.playDirect(infusion.uid); });
   UI.act('btInfuseGo', () => { const now = current(); if (now && now.infusing.picked.length === now.infusing.need) commands.confirmInfusion(); });
   const onKey = event => {
@@ -90,7 +92,7 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
     if (event.key !== 'Escape' && !materialKey) return;
     const now = current();
     if (!now) return;
-    if (event.key === 'Escape') { event.preventDefault(); event.stopImmediatePropagation(); commands.cancelInfusion(); }
+    if (event.key === 'Escape') { event.preventDefault(); event.stopImmediatePropagation(); cancel(); }
     // Detached hand-layer shortcuts must not select a hidden material.
     if (materialKey) {
       event.preventDefault(); event.stopImmediatePropagation();

@@ -1,3 +1,4 @@
+import { BATTLE_CONSUMED_LABEL, consumedPileUids } from './battle.piles.view.js';
 /* 由 battle.view.js 拆出（2026-09-22 六文件重构批5）：独立弹层渲染（renderDeckSelection / renderGrave / renderBattleBag + 卡身份键）。
  * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
 const SDT = window.SDT;
@@ -87,9 +88,9 @@ function installPileInspection(stacks) {
   }
 
   function renderGrave(snapshot) {
-    const cards = snapshot.grave.map(findCard).filter(Boolean);
+    const cards = consumedPileUids(snapshot).map(findCard).filter(Boolean);
     const { html, stacks } = battlePileBodyHTML({ cards, cardHTML:SDT.Cards.cardHTML, kind:'grave', isBoss:!!snapshot.opts.isBoss });
-    showBattleDecision('[[icon:skull]] 消耗牌', html, true, snapshot);
+    showBattleDecision(`[[icon:skull]] ${BATTLE_CONSUMED_LABEL}`, html, true, snapshot);
     UI.act('btGraveBack', closeGrave);
     installPileInspection(stacks);
     UI.refresh(SDT.game);

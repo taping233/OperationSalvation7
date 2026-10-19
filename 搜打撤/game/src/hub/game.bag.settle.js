@@ -289,6 +289,7 @@ bagSlots.resumeBattleRewards = resumeBattleRewards;
           eyebrow: 'TACTICAL RETREAT', title: '全身而退',
           detail: opts.isBoss ? '你撤出了 BOSS战 · 已结算的战利品完好保存' : '撤出战斗 · 打出过的卡照常结算',
           duration: 1050,
+          prepare: () => SDT.Renderer?.warm?.(),
         });
         // M1（U10 2026-09-29）：resolve(false)=过场非当前（被新过场顶替/上下文失效/测试环境拆除），
         // 屏幕已易主——静默终止本续流，不再 UI.log/续结算（teardown 后此处续流摸 document 抛错的根因）。

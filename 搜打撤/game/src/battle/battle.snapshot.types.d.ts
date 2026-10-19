@@ -86,6 +86,8 @@ export type SnapshotFoeInput = {
   [key: string]: unknown;
 };
 
+export type PlayerEffectView = { key: string; name: string; icon: string; duration: string; description: string };
+
 export type BattleSnapshotInput = {
   battleToken: number;
   mode: string;
@@ -96,6 +98,7 @@ export type BattleSnapshotInput = {
   phase: string;
   actionQueueLength: number;
   playedMovesThisTurn?: number;
+  playerEffects?: PlayerEffectView[];
   endTurnContext?: { deathSave: number; timeRune: boolean; extraTurn: boolean };
   opts: Record<string, unknown> | null;
   player: { hp: number; maxHp: number; atk: number; spellPower: number; [key: string]: unknown } | null;
@@ -108,6 +111,7 @@ export type BattleSnapshotInput = {
   drawPile: string[];
   discard: string[];
   grave: string[];
+  consumed?: string[];
   infusing: ({ uid: string; card?: BattleCardInput | null; picked: Set<string>; [key: string]: unknown }) | null;
   discovering: ({ options: BattleCardInput[]; [key: string]: unknown }) | null;
   handSelecting: ({ srcCard?: BattleCardInput | null; payment?: ({ card?: BattleCardInput | null; [key: string]: unknown }) | null; [key: string]: unknown }) | null;
@@ -176,6 +180,7 @@ export type BattleSnapshot = {
   readonly phase: string;
   readonly actionQueueLength: number;
   readonly playedMovesThisTurn?: number;
+  readonly playerEffects?: readonly Readonly<PlayerEffectView>[];
   readonly endTurnContext?: Readonly<{ deathSave: number; timeRune: boolean; extraTurn: boolean }>;
   readonly opts: Readonly<Record<string, unknown>> | null;
   readonly player: ({ readonly atk: number; readonly spellPower: number; readonly [key: string]: unknown }) | null;
@@ -187,6 +192,7 @@ export type BattleSnapshot = {
   readonly drawPile: readonly string[];
   readonly discard: readonly string[];
   readonly grave: readonly string[];
+  readonly consumed?: readonly string[];
   readonly infusing: ({ readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly picked: readonly string[]; readonly [key: string]: unknown }) | null;
   readonly discovering: ({ readonly options: readonly SnapshotBattleCard[]; readonly [key: string]: unknown }) | null;
   readonly handSelecting: SnapshotHandSelecting | null;

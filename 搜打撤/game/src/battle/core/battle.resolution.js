@@ -302,7 +302,7 @@ function createBattleResolution(ports) {
   // act 修饰（G3 行「动作 play|playKeep|dup|zeroCost|decay|noInfuse」）按 dest×act 组合门放行：
   //   discover：play/playKeep/dup（面板原生 act，pickDiscover 直接施放/施放+入手/×2 置手）、
   //             zeroCost/decay（面板 zeroCost/decayEachTurn 费用修饰）——全部有既有机制承载；
-  //             noInfuse 不支持（发现面板置入无免注能透传键；文本先例灵能召唤实为随机直发，应写 dest:'hand'）。
+  //             noInfuse：进入发现选择，仅所选临时实例免注能（不修改候选模板）。
   //   hand：dup（本体+复制 ×2 置手，二刀流语义）、noInfuse（模板透传 _noInfuse，灵能召唤先例）；
   //         play/playKeep 需要面板外的直接施放执行通道（既有文本路径一律经发现面板承载）——pending；
   //         zeroCost/decay 需 cardOverrides/费用衰减登记（selection-flow 内部态，无对外端口）——pending。
@@ -361,13 +361,13 @@ function createBattleResolution(ports) {
       queueDiscoverTracked({
         n: operation.n,
         pred,
-        act: ['play', 'playKeep', 'dup'].includes(act) ? act : undefined,
+        act: ['play', 'playKeep', 'dup', 'noInfuse'].includes(act) ? act : undefined,
         zeroCost: act === 'zeroCost' ? true : undefined,
         decayEachTurn: act === 'decay' ? true : undefined,
         sourceCardId: card.id,
       });
       const actLabel = act === 'play' ? '发现并直接施放' : act === 'playKeep' ? '发现（施放 1 张，其余入手）'
-        : act === 'zeroCost' ? '发现（入手后费用变为 0）' : act === 'decay' ? '发现（每回合开始费用 -1）' : '发现';
+        : act === 'noInfuse' ? '发现（所选牌无需注能）' : act === 'zeroCost' ? '发现（入手后费用变为 0）' : act === 'decay' ? '发现（每回合开始费用 -1）' : '发现';
       log(`[[icon:question]] <b>${esc(card.name)}</b>：${actLabel} ${operation.n} 张${poolSuffix}卡牌`, 'sys');
       return true;
     }

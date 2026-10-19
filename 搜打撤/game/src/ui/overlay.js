@@ -5,18 +5,20 @@
 // T4 全界面开合成对动画（2026-10-04 D9-T4）：纯副作用 import——模块向 document.head
 // 注入 css/motion-transitions.css <link>（恒在 winter.css 等静态样式之后生效）
 import './motion-transitions.js';
+import { captureOverlayReturnState, createOverlayReturn, restoreOverlayReturnState } from './overlay-return-state.js';
 
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const SDT = window.SDT;
 
 export const overlayMethods = {
-  helpTopics: {},  // pageId -> { title, html, back }（? 帮助弹层主题，页面渲染时注册）
+  helpTopics: {},  // pageId -> { title, html, before?, back }（? 帮助弹层主题，页面渲染时注册）
   _overlayReturnFocus: null,
   _overlayInerted: [],
 
   // ---------- ? 帮助弹层：页面说明文字统一收进二级界面 ----------
-  // 页面渲染时 registerHelp(id, {title, html, back})，并在页头放 helpBtn(id)；
-  // 点 ? 打开帮助，点「返回」执行 back() 重绘原页面。
+  // 页面渲染时 registerHelp(id, {title, html, before?, back})，并在页头放 helpBtn(id)；
+  // 默认保留滚动与帮助入口焦点；back 负责原页面重建和领域有效性检查。
+  // 可选 before() 捕获额外页面状态，交给 back(state)；旧返回动作不能跨页面复用。
   registerHelp(id, def) { this.helpTopics[id] = def; },
   helpBtn(id) {
     if (id === 'bag') return '<button class="bag-guide-trigger bag-icbtn" data-act="openHelp" data-page="bag" aria-label="背包使用指南" title="背包使用指南"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 4h6l2 2 2-2h6v15h-6l-2 2-2-2H4Z"/><path d="M12 6v15M7 8h2M7 12h2M15 8h2M15 12h2"/></svg></button>';
@@ -26,10 +28,18 @@ export const overlayMethods = {
   showHelp(page) {
     const t = this.helpTopics[page];
     if (!t) return;
+    const focusTarget = [...this.el.ovBody.querySelectorAll('[data-act="openHelp"]')].find(element => element.dataset.page === page);
+    const presentation = captureOverlayReturnState(this.el.overlay, focusTarget);
+    const returnState = typeof t.before === 'function' ? t.before() : undefined;
     this.showOverlay(`[[icon:question]] ${t.title}`, `
       <div class="help-body${page === 'bag' ? ' bag-guide' : ''}">${page === 'bag' ? '<header class="bag-guide-heading"><small>FIELD MANUAL / 01</small><h2>收纳与押运</h2></header>' : ''}${t.html}</div>
-      <div class="ov-btns"><button class="ov-btn ok" data-act="helpBack">↩ 返回</button></div>`, true);
-    this.act('helpBack', () => { if (typeof t.back === 'function') t.back(); });
+      <div class="ov-btns"><button class="ov-btn ok" data-act="helpBack" data-cancel="true">↩ 返回</button></div>`, true);
+    this.act('helpBack', createOverlayReturn({
+      revision: this._overlayRevision, getRevision: () => this._overlayRevision,
+      isOpen: () => !this.el.overlay.hidden && !this.el.overlay.classList.contains('closing'),
+      back: typeof t.back === 'function' ? () => t.back(returnState) : undefined,
+      restore: () => restoreOverlayReturnState(this.el.overlay, presentation),
+    }));
   },
 
   beginRoom() {

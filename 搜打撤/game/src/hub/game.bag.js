@@ -1,3 +1,4 @@
+import { planBagTokenCraft } from './game.bag.token-craft.js';
 import { patchBackpackPane } from './bag-pane-view.js';
 import { containerStoreHTML, restoreContainerFocus } from './game.container-store.view.js';
 import { stackTransferSlotDelta } from '../core/card-capacity.js';
@@ -335,6 +336,20 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     bagAct('cancelDragDiscard', () => showBackpack(true));
   }
 
+  function craftBagToken(kind, sourceUid) {
+    const plan = planBagTokenCraft(game, kind, SDT.Cards.all(), sourceUid);
+    if (!plan.ok) { UI.log(plan.reason, 'warn'); return; }
+    // Allocate the output before committing either inventory or fragment changes.
+    const output = { uid:newUid(), card:plan.card };
+    const sourceUids = new Set(plan.sourceUids);
+    game.ownedCards = game.ownedCards.filter(entry => !sourceUids.has(entry.uid));
+    game.ownedCards.push(output);
+    if (plan.fragments) game.fragments -= plan.fragments;
+    UI.log(plan.message, 'loot');
+    saveGame();
+    showBackpack(true);
+  }
+
   // eslint-disable-next-line no-unused-vars -- 局部豁免：被 game/selftest.js:87 源码正则 /function showBagCardDetail/ 锚定，删除会挂红自检；#27 改版后入口已由 inspectStack 承担，函数历史保留
   function showBagCardDetail(name, fromSafe) {
     const o = game.ownedCards.find(x => !!x.safe === !!fromSafe && x.card.name === name);
@@ -362,31 +377,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     // 特写挂在 body（overlay 之外）：动作执行前先模拟点背景收回，回到背包页
     const closeZoom = () => document.getElementById('cardZoom')?.querySelector('.cz-backdrop')?.click();
     bagAct('useDetailCard', () => { closeZoom(); useOwnedCard(o.uid); });
-    bagAct('craftColorToken', () => {
-      closeZoom();
-      // 2026-09-06 #10：3 张员工通行证B合成 1 张员工通行证A
-      const golds = game.ownedCards.filter(x => x.card.id === 'tt-token-gold').slice(0, 3);
-      if (golds.length < 3) { UI.log('员工通行证B不足 3 张，无法合成', 'warn'); return; }
-      const goldIds = new Set(golds.map(g => g.uid));
-      game.ownedCards = game.ownedCards.filter(x => !goldIds.has(x.uid));
-      const color = SDT.Cards.all().find(c => c.id === 'tt-token-color');
-      if (color) game.ownedCards.push({ uid: newUid(), card: { ...color } });
-      UI.log('[[icon:sparkles]] 合成成功：3 张员工通行证B → 1 张<b>员工通行证A</b>', 'loot');
-      saveGame();
-      showBackpack(true);
-    });
-    bagAct('craftColorTokenByFragments', () => {
-      closeZoom();
-      // 2026-09-09 Q6 老板定向：隐藏计数器碎片——集齐 2 枚碎片 + 员工通行证A → 合成员工通行证A
-      if ((game.fragments || 0) < 2) { UI.log('员工通行证A碎片不足 2 枚，无法合成', 'warn'); return; }
-      game.ownedCards.splice(game.ownedCards.indexOf(o), 1);
-      game.fragments -= 2;
-      const token = SDT.Cards.all().find(c => c.id === 'cmtmvq6ss84l');
-      if (token) game.ownedCards.push({ uid: newUid(), card: { ...token } });
-      UI.log('[[icon:sparkles]] 合成成功：员工通行证A + 2 枚碎片 → 1 张<b>员工通行证A</b>（使用后获取本职业能力卡）', 'loot');
-      saveGame();
-      showBackpack(true);
-    });
+    bagAct('craftColorToken', () => { closeZoom(); craftBagToken('gold'); });
+    bagAct('craftColorTokenByFragments', () => { closeZoom(); craftBagToken('fragments', o.uid); });
     bagAct('detailFromSafe', () => { closeZoom(); moveStackSafe(name, false); });
     bagAct('detailToSafe', () => { closeZoom(); moveStackSafe(name, true); });
     bagAct('detailDiscard', () => { closeZoom(); showDiscardConfirm(name, fromSafe); });
@@ -585,14 +577,14 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
   // 壳负责数据组装（bagZoneTiles）与动作注册，跨区移动 = 拖到左栏分区钮或点详情按钮。
   function bagZoneTiles(bagStacks, safeStacks) {
     if (bagZone === 'safe') {
-      return sortStacksByOrder(safeStacks).map(st => ({ name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 1, zone: 'safe' }));
+      return sortStacksByOrder(safeStacks).map(st => ({ uids:st.uids, name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 1, zone: 'safe' }));
     }
     if (bagZone === 'pocket') {
       return game.usedPocket.map(p => ({ name: p.card.name, card: p.card, rarity: bagV2Rarity(p.card), type: p.card.type, cost: p.card.cost, count: p.count, zone: 'pocket' }));
     }
     const supplies = game.inventory.flatMap(it => Array.from({ length:Math.ceil((it.count || 1) / 3) }, (_, index) =>
       ({ name:it.name, value:it.value, tier:it.tier, count:Math.min(3, (it.count || 1) - index * 3), supply:1, zone:'bag' })));
-    let cards = sortStacksByOrder(bagStacks).map(st => ({ name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 0, zone: 'bag', useStatus:st.card.type === '道具' ? bagUseStatus(st.card, st.uids[0], { game, usedSlots, bagCap }) : null }));
+    let cards = sortStacksByOrder(bagStacks).map(st => ({ uids:st.uids, name: st.card.name, card: st.card, rarity: bagV2Rarity(st.card), type: st.card.type, cost: st.card.cost, count: st.count, safe: 0, zone: 'bag', useStatus:st.card.type === '道具' ? bagUseStatus(st.card, st.uids[0], { game, usedSlots, bagCap }) : null }));
     if (bagFilter === 'supply') return supplies;
     if (bagFilter !== 'all') cards = cards.filter(c => bagFilter === 'move' ? ['武术', '法术', '能力卡'].includes(c.type) : c.type === bagFilter);
     return bagFilter === 'all' ? [...supplies, ...cards] : cards;
@@ -647,31 +639,8 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     if (card.id === 'tt2-pearlbox') bagAct('pearlStoreZoom', () => { closeZoom(); openPearlStore(); });
     if (card.id === 'tt7-stratagem' && !safeFlag) bagAct('pouchStoreZoom', () => { closeZoom(); openPouchStore(); });
     bagAct('detailDiscard', () => { closeZoom(); showDiscardConfirm(card.name, safeFlag); });
-    bagAct('craftColorToken', () => {
-      closeZoom();
-      const golds = game.ownedCards.filter(x => x.card && x.card.id === 'tt-token-gold').slice(0, 3);
-      if (golds.length < 3) { UI.log('员工通行证B不足 3 张，无法合成', 'warn'); return; }
-      const goldIds = new Set(golds.map(g => g.uid));
-      game.ownedCards = game.ownedCards.filter(x => !goldIds.has(x.uid));
-      const color = SDT.Cards.all().find(c => c.id === 'tt-token-color');
-      if (color) game.ownedCards.push({ uid: newUid(), card: { ...color } });
-      UI.log('[[icon:sparkles]] 合成成功：3 张员工通行证B → 1 张<b>员工通行证A</b>', 'loot');
-      saveGame();
-      showBackpack(true);
-    });
-    bagAct('craftColorTokenByFragments', () => {
-      closeZoom();
-      if ((game.fragments || 0) < 2) { UI.log('员工通行证A碎片不足 2 枚，无法合成', 'warn'); return; }
-      const i = game.ownedCards.findIndex(x => x.card && x.card.id === 'tt-token-color');
-      if (i < 0) return;
-      game.ownedCards.splice(i, 1);
-      game.fragments -= 2;
-      const token = SDT.Cards.all().find(c => c.id === 'cmtmvq6ss84l');
-      if (token) game.ownedCards.push({ uid: newUid(), card: { ...token } });
-      UI.log('[[icon:sparkles]] 合成成功：员工通行证A + 2 枚碎片 → 1 张<b>员工通行证A</b>（使用后获取本职业能力卡）', 'loot');
-      saveGame();
-      showBackpack(true);
-    });
+    bagAct('craftColorToken', () => { closeZoom(); craftBagToken('gold'); });
+    bagAct('craftColorTokenByFragments', () => { closeZoom(); craftBagToken('fragments'); });
     decorateInventoryZoom(card);
   }
   function showBackpack(refreshOnly) {
@@ -724,7 +693,6 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       bagZone = requestedBagSection === 'main' ? 'bag' : requestedBagSection;
       requestedBagSection = null;
     }
-    // 说明文字统一收进 ? 帮助弹层
     const helpCurrent = captureBattleContext(game), helpCards = game.ownedCards;
     UI.registerHelp('bag', {
       title: '背包说明',
@@ -736,7 +704,9 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
         <p class="help-item"><b>用道具复原</b>能源结晶按消耗区顺序复原最多 3 张，也能复原道具和装备。背包要放得下。</p>
         <details><summary>撤离后怎么处理？</summary><p>撤离时每张仅 1/3 概率带回基地消耗区（用钥匙复原）。下次出发时，未复原的牌会消散。</p></details>
         <p class="help-item"><b>丢弃</b>把卡牌拖到背包页面外可申请丢弃 1 张——丢弃的牌无法取回，请谨慎操作。</p>`,
-      back: () => { if (helpCurrent() && game.ownedCards === helpCards && UI.el.ovBody?.querySelector('.help-body')) showBackpack(true); },
+      back: () => { if (helpCurrent() && game.ownedCards === helpCards && UI.el.ovBody?.querySelector('.help-body')) {
+        showBackpack(true);
+      } },
     });
     const markup = bagV2PageHTML({
       bagZone, bagFilter, bagSortKey,

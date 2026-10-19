@@ -1,3 +1,4 @@
+import { isCardBrowserCurrent, cardBrowserItems, filterCardBrowserItems, selectCardBrowserItems } from '../ui/card-browser-state.js';
 import { animateBaseRefresh } from './base-motion-v4.js';
 import { esc, escAttr } from '../core/shared.js';
 import { cardBrowserHTML, bindCardBrowser, refreshCardBrowser } from '../ui/card-browser.js';
@@ -13,6 +14,16 @@ const ownedCards = (base, cards) => {
     const card = catalog.get(id) || stash.get(id);
     return { id, card, name:card?.name || record.name || id };
   });
+};
+const ownedCard = (base, cards, id) => {
+  if (!Object.hasOwn(base.data.collection || {}, id)) return null;
+  const record = base.data.collection[id];
+  if (!record) return null;
+  // Match the catalog/stash Maps used by the initial render: the last duplicate wins.
+  let card;
+  for (const candidate of cards.all()) if (candidate.id === id) card = candidate;
+  if (!card) for (const stack of base.data.stash || []) if (stack.card.id === id) card = stack.card;
+  return { id, card, name:card?.name || record.name || id };
 };
 const synchronize = base => { if (slot !== base.slot) { slot = base.slot; query = ''; type = ''; selectedId = ''; } };
 const detailHTML = (row, cards) => row ? `<div class="collection-v12-display">${row.card ? cards.cardHTML(row.card, 'sm') : '<span class="collection-legacy">旧收藏档案</span>'}</div><div class="collection-v12-info"><span>已收藏 · 卡牌预览</span><h3>${esc(row.name)}</h3>${row.card ? `<dl><div><dt>类型</dt><dd>${esc(row.card.type || '卡牌')}</dd></div><div><dt>稀有度</dt><dd>${esc(row.card.rarity || '—')}</dd></div></dl><button type="button" class="mini-btn base-command" data-act="collectionV12Zoom" data-id="${escAttr(row.id)}">查看卡牌详情 →</button>` : '<p>旧收藏档案</p>'}</div>` : '';
@@ -30,43 +41,47 @@ export function bindCollectionCards({ root, base, cards, ui }) {
   const content = root.querySelector('.collection-cards-v4');
   if (!content) return;
   const browser = content.querySelector('[data-card-browser]');
+  const slotId = base.slot;
+  const current = () => isCardBrowserCurrent(content) && root.contains(content) && base.slot === slotId;
+  let lastDetailHTML = null;
   const select = (id, animate = true) => {
-    const row = ownedCards(base, cards).find(item => item.id === id);
+    if (!current()) return;
+    const row = ownedCard(base, cards, id);
     selectedId = row?.id || '';
     const stage = content.querySelector('.collection-v12-stage');
     const html = detailHTML(row, cards);
-    if (stage.innerHTML !== html) { stage.innerHTML = html; if (animate) animateBaseRefresh(stage); }
-    content.querySelectorAll('[data-browser-key]').forEach(button => {
-      const on = button.dataset.browserKey === selectedId;
-      button.classList.toggle('on', on); button.setAttribute('aria-pressed', String(on));
-    });
+    if (lastDetailHTML !== html) {
+      if (stage.innerHTML !== html) { stage.innerHTML = html; if (animate) animateBaseRefresh(stage); }
+      lastDetailHTML = html;
+    }
+    selectCardBrowserItems(cardBrowserItems(browser), selectedId);
   };
   const update = (reset = false) => {
-    let count = 0;
-    for (const button of content.querySelectorAll('[data-browser-key]')) {
-      const excluded = !!query.trim() && !button.dataset.search.toLowerCase().includes(query.trim().toLowerCase()) || !!type && button.dataset.type !== type;
-      button.dataset.browseFiltered = String(excluded);
-      if (!excluded) count++;
-    }
-    refreshCardBrowser(browser, { reset });
+    if (!current()) return;
+    const search = query.trim().toLowerCase();
+    const { items, visible } = filterCardBrowserItems(browser, button =>
+      (!search || button.dataset.search.toLowerCase().includes(search)) && (!type || button.dataset.type === type));
+    const count = visible.length;
+    refreshCardBrowser(browser, { reset, items });
     if (reset) animateBaseRefresh(browser.querySelector('.card-browser-track'));
     content.querySelector('[data-collection-count]').textContent = `${count} 张已收藏`;
     content.querySelector('.collection-empty').hidden = count > 0;
     content.dataset.empty = String(count === 0);
-    const selected = content.querySelector('[data-browser-key].on');
-    if (!selected || selected.dataset.browseFiltered === 'true') select([...content.querySelectorAll('[data-browser-key]')].find(button => button.dataset.browseFiltered !== 'true')?.dataset.browserKey, reset);
+    const selected = items.find(button => button.classList.contains('on'));
+    if (!selected || selected.dataset.browseFiltered === 'true') select(visible[0]?.dataset.browserKey, reset);
   };
   bindCardBrowser(browser, { onPage:() => animateBaseRefresh(browser.querySelector('.card-browser-track')), onOpen:id => select(id) });
   ui.act('collectionV12Zoom', data => {
+    if (!current()) return;
     const id = data.id;
-    const card = ownedCards(base, cards).find(row => row.id === id)?.card;
+    const card = ownedCard(base, cards, id)?.card;
     if (!card) return;
     ui.showCardZoom(card, { presentation:'inventory', from:content.querySelector('[data-act="collectionV12Zoom"]') });
     decorateInventoryZoom(card);
   });
   bindCardNavigation(browser.querySelector('.card-browser-track'), '[data-browser-key]', { activate:false });
-  content.querySelector('[data-collection-query]').addEventListener('input', event => { query = event.target.value; update(true); });
-  content.querySelector('[data-collection-type]').addEventListener('change', event => { type = event.target.value; update(true); });
-  ui.act('collectionReset', () => { query = ''; type = ''; content.querySelector('input').value = ''; content.querySelector('select').value = ''; update(true); });
+  content.querySelector('[data-collection-query]').addEventListener('input', event => { if (!current()) return; query = event.target.value; update(true); });
+  content.querySelector('[data-collection-type]').addEventListener('change', event => { if (!current()) return; type = event.target.value; update(true); });
+  ui.act('collectionReset', () => { if (!current()) return; query = ''; type = ''; content.querySelector('input').value = ''; content.querySelector('select').value = ''; update(true); });
   update();
 }

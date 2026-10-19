@@ -1,4 +1,5 @@
 import { mapImageReady } from '../core/map-image-ready.js';
+import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
 import '../../css/page-visual-ready.css';
 
 let handoff = null;
@@ -121,30 +122,26 @@ export function stagePageVisual(ui, reveal) {
   cancelPageVisual();
   const overlay = ui.el.overlay;
   const body = ui.el.ovBody;
-  const source = body.firstElementChild;
-  const revision = ui._overlayRevision;
+  const source = body.firstElementChild || body;
   const controller = new AbortController();
   const cover = document.createElement('div');
   cover.className = 'page-visual-handoff';
   cover.setAttribute('aria-hidden', 'true');
   document.body.append(cover);
-  const current = () => handoff === operation && !controller.signal.aborted && !overlay.hidden
-    && !overlay.dataset.uiClosing && ui._overlayRevision === revision && body.firstElementChild === source;
+  const current = () => handoff === operation && !controller.signal.aborted && lifetime.current();
   const block = event => {
     if (event.key === 'Escape' || event.altKey) return;
     event.preventDefault(); event.stopImmediatePropagation();
   };
   window.addEventListener('keydown', block, true);
   const cleanup = () => {
-    controller.abort(); cover.remove(); observer.disconnect();
+    controller.abort(); cover.remove(); lifetime.dispose();
     window.removeEventListener('keydown', block, true);
     if (handoff === operation) handoff = null;
   };
   const operation = { cancel: cleanup };
   handoff = operation;
-  const observer = new MutationObserver(() => { if (!current()) cleanup(); });
-  observer.observe(overlay, { attributes: true, attributeFilter: ['hidden', 'data-ui-closing'] });
-  observer.observe(body, { childList: true });
+  const lifetime = createPageSurfaceLifetime(source, { overlay, getRevision: () => ui._overlayRevision, onInvalidate: cleanup });
   (async () => {
     try {
       await visualFrame(controller.signal);
