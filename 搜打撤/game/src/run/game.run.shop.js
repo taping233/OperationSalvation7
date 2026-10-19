@@ -195,8 +195,8 @@ function createShopController({
       <div class="shop-detail-facts">${exhausted ? `<strong class="tone-complete">${esc(status)}</strong>`
         : unavailable ? `${moneyStatus ? `<strong class="tone-limited">${esc(moneyStatus)}</strong>` : ''}${capacityStatus ? `<strong class="tone-limited">${esc(capacityStatus)}</strong>` : ''}`
           : `<strong class="tone-ready">${status}</strong>`}</div>
-      ${exhausted ? '<button type="button" class="shop-detail-done" data-act="shopCloseInspect">继续浏览</button>' : `<button type="button" class="shop-detail-buy${unavailable ? ' short' : ''}" data-act="${buyAct}" data-i="${selectedShopIndex}"${unavailable ? ` disabled aria-disabled="true" title="${esc(status)}"` : ''}>${slot.free && !unavailable ? '免费领取' : `<span>${unavailable ? !hasMoney ? '金币不足' : '背包装不下' : '购买'}</span><span class="shop-buy-price"> · ${coinIconHTML()}${slot.price} 币</span>`}</button>`}
-      ${!exhausted && !fits ? '<button type="button" class="shop-detail-bag" data-act="shopOpenBag">整理背包</button>' : ''}</div>`;
+      ${exhausted ? '<button type="button" class="shop-detail-done ui-control" data-act="shopCloseInspect">继续浏览</button>' : `<button type="button" class="shop-detail-buy ui-control${unavailable ? ' short' : ''}" data-act="${buyAct}" data-i="${selectedShopIndex}"${unavailable ? ` disabled aria-disabled="true" title="${esc(status)}"` : ''}>${slot.free && !unavailable ? '免费领取' : `<span>${unavailable ? !hasMoney ? '金币不足' : '背包装不下' : '购买'}</span><span class="shop-buy-price"> · ${coinIconHTML()}${slot.price} 币</span>`}</button>`}
+      ${!exhausted && !fits ? '<button type="button" class="shop-detail-bag ui-control-compact" data-act="shopOpenBag">整理背包</button>' : ''}</div>`;
   }
 
   // 买不起/装不下时的货位即时反馈（2026-09-19 留言 #1：点了没反应像"买不了"）：
@@ -332,9 +332,9 @@ function createShopController({
       back: () => { if (version === pageVersion && currentSession(session) && document.querySelector('.help-body')) renderShop(); },
     });
     UI.showOverlay('', `
-      <div class="pg shop-pg shop-market shop-v14 shop-replica node-pg sc-shop" data-asset-key="scene-shop-bg">
+      <div class="pg shop-pg shop-market shop-v14 shop-replica node-pg sc-shop ui-scale-system" data-asset-key="scene-shop-bg">
         <header class="pg-head">
-          <div class="shop-heading"><h2>补给站 ${UI.helpBtn('shop')}</h2><p class="shop-browse-hint">挑选商品查看详情，再确认购买</p></div>
+          <div class="shop-heading"><h2>补给站 ${UI.helpBtn('shop')}</h2></div>
           <div class="shop-resources" aria-label="远征资源"><span class="shop-resource coin">${coinIconHTML()}<small>可用金币</small><b id="resCoins">${game.coins}</b><em>币</em></span><span class="shop-resource"><small>容量</small><b id="resCap">${usedSlots()}/${bagCap()}</b><em>格</em></span></div>
         </header>
         <div class="shop-layout">

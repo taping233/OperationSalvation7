@@ -292,7 +292,7 @@ describe('迟到选角操作失效', () => {
 
 describe('DEV plain battle transition diagnostic', () => {
   afterEach(() => { history.replaceState(null, '', '/'); });
-  it.each(['battle', 'boss'])('uses plain artwork for %s while retaining the current 650ms combat timer', async kind => {
+  it.each(['battle', 'boss'])('uses plain artwork for %s while retaining the current 450ms combat timer', async kind => {
     history.replaceState(null, '', '/?perfProbe=1&flightRecord=1&transitionDiagnostic=plain');
     const motion = await import('../game/src/core/motion.js');
     vi.spyOn(motion, 'reduceMotion').mockReturnValue(false);
@@ -300,7 +300,7 @@ describe('DEV plain battle transition diagnostic', () => {
     const done = vi.fn(); const request = scenes.enterNode(kind, done);
     expect(UI.el.ovBody.querySelector('.expedition-cut')).toBeTruthy();
     expect(UI.el.ovBody.querySelector('.camp-entry-cut')).toBeNull();
-    await vi.advanceTimersByTimeAsync(649); expect(done).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(449); expect(done).not.toHaveBeenCalled();
     await vi.advanceTimersByTimeAsync(1); await request; expect(done).toHaveBeenCalledTimes(1);
   });
   it('preserves the held transition release delay', async () => {

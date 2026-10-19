@@ -1,5 +1,6 @@
 import { clone, fail } from './commands.shared.js';
 import { RULE_CONFIG } from '../core/rule-config.js';
+import { LEVEL_MAX, xpForNext } from './meta-progression.js';
 
 function validStack(stack) {
   return !!stack && typeof stack === 'object' && !Array.isArray(stack) &&
@@ -52,13 +53,32 @@ const stackInto = (list, stack) => {
 };
 
 function addXp(base, cls, amount, characterFor, addXpToProgress) {
-  if (!cls || amount <= 0) return;
+  if (!cls || amount <= 0) return null;
   const character = characterFor(cls);
   const group = character ? 'characters' : 'classes';
   const key = character ? character.id : cls;
   base[group] ||= {};
   base[group][key] ||= { lv: 1, xp: 0 };
-  base[group][key] = addXpToProgress(base[group][key], amount).after;
+  const before = clone(base[group][key]);
+  const progress = addXpToProgress(before, amount);
+  const after = clone(progress.after);
+  base[group][key] = after;
+  let actualXp = after.xp - before.xp;
+  for (let level = before.lv; level < after.lv; level++) actualXp += xpForNext(level);
+  let remainingXp = -before.xp;
+  for (let level = before.lv; level < LEVEL_MAX; level++) remainingXp += xpForNext(level);
+  // Legacy progression keeps excess XP after reaching max level; it has no further growth value.
+  // Preserve that stored progress while the receipt reports only the amount usable up to the cap.
+  actualXp = Math.min(amount, Math.max(0, actualXp), Math.max(0, remainingXp));
+  const maxed = after.lv >= LEVEL_MAX;
+  return {
+    version: 1, source: 'extraction', characterId: character?.id || null, characterName: character?.name || cls,
+    awardedXp: amount, actualXp, overflowXp: Math.max(0, amount - actualXp), before, after,
+    levelsGained: Math.max(0, after.lv - before.lv), maxed,
+    nextLevelXp: maxed ? null : xpForNext(after.lv),
+    xpToNext: maxed ? 0 : Math.max(0, xpForNext(after.lv) - after.xp),
+    effects: [{ label: '出征生命加成', before: Math.max(0, before.lv - 1), after: Math.max(0, after.lv - 1) }],
+  };
 }
 
 // 2026-10-03 老板（SYS-02）：首探量与撤离经验公式各只留一份——加经验与结算回执
@@ -123,6 +143,7 @@ export function buildExtractionReceipt({ game, pending, isSha = () => false, xpM
     layersReached: Number.isInteger(game.layerIdx) ? game.layerIdx + 1 : null,
     actions: Math.max(0, (Number(game.turn) || 0) - 1),
     firstExplore: { moves, xp: extractionXp(moves, xpMul) },
+    ...(pending?.growth ? { growth: clone(pending.growth) } : {}),
     savedCards: savedExtractionCards(game, remaining, isSha),   // 随事务回执保留最终入库集合，供跑局记录使用
     netTake: {
       cardsStashed: Math.max(0, ownedNonSha - remainingCount),   // 本局真实入库张数（与携出候选、仓库原持有区分）
@@ -182,7 +203,8 @@ function calculateBaseAndPending({ game, runId, random, baseSnapshot, baseApi, c
   const elapsedSynced = Math.max(0, Number(game.elapsedSynced) || 0);
   const playDelta = Math.max(0, elapsedNow - elapsedSynced);
   base.stats.playSeconds = Math.max(0, Number(base.stats.playSeconds) || 0) + playDelta;
-  addXp(base, game.myClass, extractionXp(firstExploreMoves(game), xpMul), characterFor, addXpToProgress);
+  const growth = addXp(base, game.myClass, extractionXp(firstExploreMoves(game), xpMul), characterFor, addXpToProgress);
+  if (growth) pending.growth = growth;
   return { pending, base, elapsedSynced: elapsedNow };
 }
 

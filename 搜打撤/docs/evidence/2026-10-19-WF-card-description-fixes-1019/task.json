@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-card-description-fixes-1019",
+  "date": "2026-10-19",
+  "owner": "Friday",
+  "goal": "按当前可见卡面修正23张已确认差异，3个Sol中档代理并行，全部实现后集中验证",
+  "paths": [
+    "game/src/battle",
+    "game/src/cards/cards.sync.js",
+    "game/src/cards/cards.sync.m6.js",
+    "game/src/cards/cards.sync.m10.js",
+    "game/src/cards/cards.rules.js",
+    "game/src/cards/card-rules.schema.js",
+    "game/src/cards/card-rules.capability.js",
+    "game/src/cards/card-rules.capability.types.d.ts",
+    "game/src/run/game.run.flow.js",
+    "tests/card-description-audit-battle.test.js",
+    "tests/card-description-fix-pools.test.js",
+    "tests/card-description-fix-lifecycle.test.js",
+    "tests/card-description-fix-target-effects.test.js",
+    "tests/card-description-fix-auxiliary.test.js",
+    "docs/PENDING.md",
+    "docs/evidence/2026-10-19-card-description-fixes",
+    "game/src/cards/cards.sync.m3.js",
+    "game/dev/card-description-fixes-review.html",
+    "game/dev/card-description-fixes-review.js",
+    "tests/m3-data.test.js",
+    "tests/m6-data.test.js",
+    "tests/m10-data.test.js",
+    "tests/event-node-binding-cloud.test.js",
+    "docs/rules.md",
+    "docs/save-format.md"
+  ],
+  "doneWhen": [
+    "23张已确认差异按卡面完成修正，低血代价遵循老板新决定",
+    "共享接口与旧存档兼容完成，各组停止编辑后集中定向回归和必要实页复核",
+    "只读审查快照保留，修复现状另列，歧义与未闭合项不虚假销账"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "集中定向27个不同测试文件；原9项失败已由对应补验覆盖，保留1项条件skip。8组类型与相关lint通过，真实输入确认3类背包效果；精确范围见card-description-fixes/verification.md。",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "非全量质量门；未build、提交或推送；未逐卡实页或真实玩家存档验证。",
+    "原审查8项语义待定、5项场景缺口、12条链路未闭合仍保留。"
+  ],
+  "updatedAt": "2026-10-19T12:41:24.074Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

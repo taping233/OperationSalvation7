@@ -8,7 +8,7 @@ import { Random } from '../game/src/core/random.js';
 
 // 独立断言不调用被测 validator 来证明其自身正确。
 function assertRules(map) {
-  expect(map).toMatchObject({ generatorVersion: 5, layoutVersion: 9 });
+  expect(map).toMatchObject({ generatorVersion: 6, layoutVersion: 9 });
   expect(map.layers.map(layer => layer.nodes.length)).toEqual([7, 11, 16, 16]);
   expect(map.layers.map(layer => layer.nodes.filter(node => node.type === 'resource').length)).toEqual([0, 1, 1, 1]);
   expect(map.layers.map(layer => layer.nodes.filter(node => node.type === 'event').length)).toEqual([1, 2, 3, 2]);
@@ -36,6 +36,15 @@ function assertRules(map) {
     expect(layer.nodes.filter(node => node.type === 'fire')).toHaveLength(li % 2 === 0 ? 1 : 0);
     expect(layer.nodes.filter(node => node.type === 'shop')).toHaveLength(li % 2 === 0 ? 0 : 1);
     expect(facility.x).toBeGreaterThanOrEqual(li === 0 ? 1 : 2);
+    if (fire) {
+      // 独立按边反复松弛：路径花费是经过的普通战斗数，不是移动步数。
+      const costs = layer.nodes.map(() => Infinity); costs[layer.entry] = 0;
+      for (let pass = 1; pass < layer.nodes.length; pass++) for (const node of layer.nodes) {
+        for (const next of adjacent(node.idx)) costs[next] = Math.min(costs[next], costs[node.idx] + Number(layer.nodes[next].type === 'battle'));
+      }
+      expect(costs[fire.idx]).toBeLessThanOrEqual(2);
+      if (li === 0) expect(costs[fire.idx]).toBeGreaterThanOrEqual(1);
+    }
     if (li === 0) expect(distances(layer.entry, new Set(layer.nodes.filter(node => node.type === 'battle').map(node => node.idx))).has(fire.idx)).toBe(false);
     if (li === 2) expect(layer.nodes.find(node => node.type === 'emergencyExit').x).toBeGreaterThanOrEqual(4);
     if (li === 3) {
@@ -47,7 +56,7 @@ function assertRules(map) {
   });
 }
 
-describe('5/9 新局约束生成', () => {
+describe('6/9 新局约束生成', () => {
   it.each([0, 24, 625, 1884, 4])('旧反例 %s 在新版本满足全部约束', number => {
     const seed = `audit-map-20261017-${number}`, map = generateCurrentLayeredMap(seed);
     assertRules(map);
@@ -115,10 +124,10 @@ describe('5/9 新局约束生成', () => {
     const statuses = new Set();
     for (let i = 0; i < 100; i++) {
       const base = createCurrentLayeredMap(`v4-overlay-${i}`);
-      const result = applyRouteOverlay({ generatorVersion: 5, layoutVersion: 9, layerData: base });
+      const result = applyRouteOverlay({ generatorVersion: 6, layoutVersion: 9, layerData: base });
       expect(result.ok).toBe(true); statuses.add(result.value.status);
       const layers = result.value.layerData.map(layer => ({ ...layer, entry: layer.entrances[0] }));
-      assertRules({ generatorVersion: 5, layoutVersion: 9, layers });
+      assertRules({ generatorVersion: 6, layoutVersion: 9, layers });
       expect(validateCurrentGeneratedMap(layers).ok).toBe(true);
     }
     expect([...statuses].sort()).toEqual(['applied', 'fallback']);

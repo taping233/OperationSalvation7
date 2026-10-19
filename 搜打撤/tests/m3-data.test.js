@@ -17,7 +17,7 @@ import { ensureM3OnplayRules } from '../game/src/cards/cards.sync.m3.js';
 import { dataSlice } from '../game/src/cards/cards.data.js';
 import cardsSyncData from '../game/data/cards-sync.json';
 
-const MARKER = 'sdt-cards-m3-onplay-rules-v5-seeded';
+const MARKER = 'sdt-cards-m3-onplay-rules-v6-seeded';
 
 // canonical 夹具（2026-09-29 镜像收编）：原「逐字照抄定版源行」改为按本批 id 取真源行——
 // CARDS_SYNC=game/data/cards-sync.json 实机覆盖批次；TABLETOP10/11/12=cards.data.js 定版表；
@@ -92,7 +92,6 @@ const EXPECTED_RULES = {
     battle: { target: { side: 'enemy', area: false } },
     triggers: { onPlay: [
       { op: 'damage', amountField: 'dmg', target: 'chosenEnemy' },
-      { op: 'registerRule', rule: 'bleedAmp' },
     ] },
   },
   'tt3-purify-arrow': {
@@ -413,4 +412,67 @@ it.each([false,true])('v5仅迁移灵能召唤精确旧hand规则，保留自改
   ensureM3OnplayRules(harness);
   expect(harness.cards().find(card=>card.id===source.id).rules.triggers.onPlay[0].dest).toBe(customized?'hand':'discover');
   expect(harness.storage.getItem(MARKER)).toBe('1');
+});
+
+describe('M3 v6：已盖v5章的飞身劈升级', () => {
+  function oldV5Harness(variant = 'canonical') {
+    const cards = freshCards().map(card => ({ ...card, rules: structuredClone(EXPECTED_RULES[card.id]) }));
+    const flying = cards.find(card => card.id === 'tt3-fly-arrowhawk');
+    flying.rules.triggers.onPlay.push({ op: 'registerRule', rule: 'bleedAmp' });
+    if (variant === 'name') flying.name += '自订';
+    if (variant === 'description') flying.desc += ' 自订说明。';
+    if (variant === 'value') flying.value = 99;
+    if (variant === 'rules') flying.rules.triggers.onPlay[0].amountField = 'value';
+    const harness = makeHarness(cards);
+    harness.storage.setItem('sdt-cards-m3-onplay-rules-v5-seeded', '1');
+    return harness;
+  }
+
+  it('精确旧飞身劈只删除持续规则；射线原有perInfusedInHand声明和其余卡逐键保持', () => {
+    const harness = oldV5Harness();
+    const before = structuredClone(harness.cards());
+    const rayBefore = before.find(card => card.id === 'tt12-chargeray');
+    expect(rayBefore.rules.triggers.onPlay[0].perInfusedInHand).toBe(2);
+    ensureM3OnplayRules(harness);
+    const after = harness.cards();
+    const upgraded = after.find(card => card.id === 'tt3-fly-arrowhawk');
+    expect(upgraded.rules).toEqual(EXPECTED_RULES['tt3-fly-arrowhawk']);
+    const { rules: oldRules, ...oldFace } = before.find(card => card.id === upgraded.id);
+    const { rules: newRules, ...newFace } = upgraded;
+    expect(newFace).toEqual(oldFace);
+    expect(oldRules.triggers.onPlay).toHaveLength(newRules.triggers.onPlay.length + 1);
+    expect(after.filter(card => card.id !== upgraded.id)).toEqual(before.filter(card => card.id !== upgraded.id));
+    expect(after.find(card => card.id === 'tt12-chargeray')).toEqual(rayBefore);
+    expect(harness.storage.getItem(KEY)).toBe(JSON.stringify(after));
+    expect(harness.storage.getItem(MARKER)).toBe('1');
+    expect(harness.storage.getItem('sdt-cards-m3-onplay-rules-v5-seeded')).toBe('1');
+    expect(harness.library.saves).toBe(1);
+    ensureM3OnplayRules(harness);
+    expect(harness.library.saves).toBe(1);
+  });
+
+  it.each(['name', 'description', 'value', 'rules'])('完整快照不相同的自定义%s保留，仍完成新章且重复执行不写库', variant => {
+    const harness = oldV5Harness(variant);
+    const before = structuredClone(harness.cards());
+    ensureM3OnplayRules(harness);
+    expect(harness.cards()).toEqual(before);
+    expect(harness.storage.getItem(MARKER)).toBe('1');
+    expect(harness.library.saves).toBe(0);
+    ensureM3OnplayRules(harness);
+    expect(harness.library.saves).toBe(0);
+  });
+
+  it.each(['false', 'throw'])('v5旧飞身劈保存%s失败不盖v6章，恢复后可重试', failure => {
+    const harness = oldV5Harness();
+    const before = structuredClone(harness.cards());
+    const save = harness.library.saveAll;
+    harness.library.saveAll = () => { if (failure === 'throw') throw Error('v6-save-probe'); return false; };
+    ensureM3OnplayRules(harness);
+    expect(harness.storage.getItem(MARKER)).toBe(null);
+    expect(harness.cards()).toEqual(before);
+    harness.library.saveAll = save;
+    ensureM3OnplayRules(harness);
+    expect(harness.cards().find(card => card.id === 'tt3-fly-arrowhawk').rules).toEqual(EXPECTED_RULES['tt3-fly-arrowhawk']);
+    expect(harness.storage.getItem(MARKER)).toBe('1');
+  });
 });

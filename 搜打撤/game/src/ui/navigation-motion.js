@@ -1,5 +1,7 @@
 // Navigation has one spatial language: rooms move horizontally; details unfold nearby.
-export const navigationTiming = Object.freeze({ enter: 260, detail: 220, refresh: 160, stagger: 22, staggerMax: 66 });
+import { motionTiming } from './motion-presets.js';
+export const navigationTiming = Object.freeze({ enter: motionTiming.navigation, detail: motionTiming.navigationDetail,
+  refresh: motionTiming.change, stagger: motionTiming.navigationStagger, staggerMax: motionTiming.navigationStaggerMax });
 const rooms = ['deploy', 'classes', 'stash', 'shop', 'ach', 'upgrade', 'courtyard'];
 const sections = ['cards', 'pocket', 'profile', 'pool', 'appearance', 'collection', 'pets', 'rewards', 'achievements', 'backs', 'stories'];
 export function navigationState(root) {

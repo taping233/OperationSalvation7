@@ -2,6 +2,10 @@
 import { motionTiming } from './motion-presets.js';
 import { navigationTiming } from './navigation-motion.js';
 const profiles = [
+  { key: 'backpack', root: '.bag-v2', duration: motionTiming.detailEnter, rise: 0, staggerMax: 44, groups: [
+    ['.bag-rail', 'nav', 0], ['.bag-head2', 'heading', 0],
+    ['.bag-tools', 'nav', 22], ['.bag-board', 'content', 44], ['.bag-side', 'content', 44],
+  ] },
   { key: 'inbox', root: '.sugin-page', groups: [
     ['.pg-head', 'heading', 40], ['#sugBox', 'content', 140],
   ] },

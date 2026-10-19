@@ -96,7 +96,7 @@ describe('真实小/中宝箱的基础候选与附赠边界', () => {
       h.reload(); h.reveal(); h.reload();
       expect(h.body.querySelectorAll('[data-act="chestPick"]')).toHaveLength(3);
       expect(h.body.querySelectorAll('[data-act="chestTake1"]')).toHaveLength(withEgg ? 1 : 0);
-      if (withEgg) expect(h.body.textContent).toContain('附赠可另领');
+      if (withEgg) expect(h.body.textContent).toContain('附赠另领');
       const oldPick = h.acts.chestPick;
       h.click('chestPick', 0); oldPick({ i:0 });
       expect(h.saved().current).toMatchObject({ taken:[0], lost:[1, 2], choiceCount:3 });
@@ -178,7 +178,7 @@ describe('真实小/中宝箱的基础候选与附赠边界', () => {
 
   it.each(['large', 'boss'])('%s 保持全部领取，宠物蛋与原有附赠不受选择边界影响', async kind => {
     const h = await setup({ kind }); h.reveal();
-    expect(h.body.querySelector('.reward-count').textContent).toContain(`共 ${h.saved().current.cards.length} 张 · 含额外 1 张`);
+    expect(h.body.querySelector('.reward-count')).toBeNull();
     expect(h.saved().current.claimMode).toBe('all'); expect(h.saved().current.choiceCount).toBeUndefined();
     expect(h.body.querySelectorAll('[data-act="chestPick"]')).toHaveLength(0);
     const count = h.saved().current.cards.length;
@@ -297,7 +297,7 @@ describe('三选一与附赠的总览状态连续性', () => {
     expect(rule).toContain('剩余 1 张待处理');
     expect(rule).not.toContain('未领取');
     h.click('chestOpen', 0);
-    expect([...h.body.querySelectorAll('.reward-unit.dropped .reward-unit-state')].map(el => el.textContent)).toEqual(['已永久放弃', '已永久放弃']);
+    expect([...h.body.querySelectorAll('.reward-unit.dropped .reward-unit-state')].map(el => el.textContent)).toEqual(['已放弃', '已放弃']);
     const before = h.game.grantCard.mock.calls.length;
     oldPick({ i:1 }); h.acts.chestPick({ i:1 });
     expect(h.game.grantCard).toHaveBeenCalledTimes(before);
@@ -326,7 +326,7 @@ describe('真实领奖卡面与详情共用动作', () => {
     expect(button.dataset.act).toBe(original.dataset.act);
     expect(button.textContent).toBe(original.textContent);
     expect(button.dataset.cancel).toBe('false');
-    if (kind === 'medium') expect(footer.textContent).toContain('其余基础卡永久放弃');
+    if (kind === 'medium') expect(footer.textContent).toContain('其余选项将放弃');
     expect(h.game.grantCard).not.toHaveBeenCalled();
     expect(h.saved().current).toMatchObject({ taken:[], lost:[] });
   });

@@ -187,7 +187,7 @@ describe('照片弹层收回生命周期', () => {
       SDT.Motion.refreshReduceMotion();
     }
   });
-  it.each(['.cz-photo-layout', '.cz-photo-main', '.cz-photo-info', '.cz-hint', '.cz-backdrop'])('点击照片外的 %s 可收回', selector => {
+  it.each(['.cz-photo-layout', '.cz-photo-main', '.cz-photo-info', '.cz-backdrop'])('点击照片外的 %s 可收回', selector => {
     const zoom = openPhoto();
     zoom.querySelector(selector).click();
     expect(zoom.classList.contains('cz-photo-closing')).toBe(true);

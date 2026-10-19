@@ -1,5 +1,6 @@
 import { FEEDBACK_TIMING, quietFeedback } from './feedback-theme.js';
 import { rewardRarity, hasRareReveal } from './rarity-reveal.js';
+import { clearRewardAcquisition, showRewardAcquisition } from './reward-acquisition-motion.js';
 
 // Settled events only: this queue never returns a battle wait or mutates a card.
 const states = new Map();
@@ -12,6 +13,7 @@ export const CARD_FEEDBACK_LAYOUT = Object.freeze({
 const rect = element => window.SDT?.UiScale?.rect(element) || element.getBoundingClientRect();
 const reduced = quietFeedback;
 export function clearCardFeedback(host) {
+  clearRewardAcquisition(host);
   for (const [key, state] of states) {
     if (host && key !== host) continue;
     state.observer.disconnect();
@@ -151,6 +153,7 @@ export function showSettledCardFeedback(stage, events = [], options = {}) {
   for (const event of eligible) {
     if (state.seen.has(event)) continue;
     state.seen.add(event);
+    if (options.rewardSource && event.kind === 'bag' && showRewardAcquisition(stage, event.card, { ...options, mode, token, count: event.count })) continue;
     const last = state.queue.at(-1);
     if (last && ['bag','draw','shuffle'].includes(event.kind) && last.event.kind === event.kind && last.event.name === event.name) last.count += event.count || 1;
     else state.queue.push({event,count:event.count || 1});

@@ -163,10 +163,17 @@ export function compareMigrationInventories(before, after, approvedIds, expected
     const expectedFace = expectedFaceById[id] || {};
     const lampRemoval = id === 'tt3-magic-lamp';
     const expectedFields = ['rules', ...Object.keys(expectedFace), ...(lampRemoval ? ['armor'] : [])].sort();
-    if (oldCard.rules !== undefined || !equal(fields, expectedFields)
-      || (lampRemoval && !isApprovedLampArmorRemoval(oldCard, nextCard))
-      || Object.entries(expectedFace).some(([key, value]) => !equal(nextCard[key], value))
-      || (expected !== null && !equal(nextCard.rules, expected))) {
+    const ironPhalanxRevision = id === 'tt7-ironphalanx'
+      && equal(fields, ['rules'])
+      && expected !== null
+      && equal(oldCard.rules, { ...expected, triggers: { onPlay: expected.triggers.onPlay.map((op, index) =>
+        index === 1 ? { ...op, act: 'zeroCost' } : op) } })
+      && equal(nextCard, { ...oldCard, rules: expected });
+    if (id === 'tt7-ironphalanx' ? !ironPhalanxRevision
+      : oldCard.rules !== undefined || !equal(fields, expectedFields)
+        || (lampRemoval && !isApprovedLampArmorRemoval(oldCard, nextCard))
+        || Object.entries(expectedFace).some(([key, value]) => !equal(nextCard[key], value))
+        || (expected !== null && !equal(nextCard.rules, expected))) {
       throw new Error(`migration: ${id} changed beyond approved rules addition`);
     }
     return { id, fields, before: clone(oldCard), after: clone(nextCard) };

@@ -306,11 +306,11 @@ export const overlayMethods = {
     // 等淡出动画播完再真正隐藏并还原布局类，避免淡出期间跳版；
     // 期间 hidden 仍为 false，输入拦截逻辑不受影响
     this._finishHide = finish;
-    // T4 时序常量：战斗快档 160ms（卡片反向动画 .14s / 玻璃确认 .16s，取 max）；其余 225ms
-    // （标准弹层容器淡出 0.22s 完整收场 + 5ms 裕量；对 boot.test.js:256 固定等 230ms
+    // 公共编排提供实际退出时长；未安装公共编排时沿用原生窗口。
+    // 原生普通窗口保留225ms裕量（对 boot.test.js:256 固定等 230ms
     // 留出容错，避免同到期零裕量竞态；opaque 卡片 0.24s 尾段 15ms 在容器已透明后，
     // 截断不可辨）
-    this._hideTimer = setTimeout(finish, btFastClose ? 160 : 225);
+    this._hideTimer = setTimeout(finish, this._motionExitDuration ?? (btFastClose ? 160 : 225));
   },
 
   // Esc 关闭当前浮层（2026-09-09 老板：浮层要能按 Esc 关）。

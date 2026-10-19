@@ -1,3 +1,4 @@
+import { withBlessingChoices } from '../effects/random-blessings.js';
 import { executeTargetReason } from '../effects/effect-steps.m2.js';
 import { isFoeFightCard, withFoeFightTargets } from '../effects/battle.foe-fight.js';
 /* battle.engine.js —— 战斗规则核与编排层（自 battle.core.js 拆出）。
@@ -11,7 +12,7 @@ import {
   handSelecting, choosing, stealthStrike, nextSpellTwice, interaction, pendingHint, delayed, viewingGrave,
   viewingDeck, viewingBag, floats, cardAnims, dreadShown, spellCost1, meleeCost1, shaTransform,
   consumeFireballN, lastDrawnUids, lastPlayedType, playedMartialThisTurn, playedMovesThisTurn,
-  selPool, selShaN, sel, selectingDeck, selDeckMax, allies, growthNames, growth, infuseFuels,
+  selPool, selShaN, sel, selectingDeck, selDeckMax, allies, growthNames, growth, infuseFuels, handInfuseCounts,
   sealUnlocked, deathSave, killAtkUp, nestRunes, nestSyn, unyieldRune, timeRune, extraTurn,
   unlimitedRune, holyRune, armorMul, sealDone, playerCurseImmune, zeroFeeUntil, cardOverrides,
   equipped, freeCast, allSpellsInfused, activeActionSignal, surgeWaiter, lastPersistAt, snapCache,
@@ -188,6 +189,9 @@ const combatPort = {
 const applyTextEffects = createEffectExecutor({
     combat: combatPort,
     getAlive: alive,
+    getAllies: () => allies,
+    getFrozenTargetBonus: target => (target?.status?.freeze || 0) > 0
+      ? equipped.reduce((sum, eq) => sum + (+eq?.card?.rules?.equip?.passive?.cond?.vsFreeze || 0), 0) : 0,
     getPlayerStatus: () => pstat,
     getPlayerDefense: () => pdef,
     getMode: () => mode,
@@ -321,6 +325,7 @@ function captureSnapshotInput() {
         discoverPlus: pstat?.status?.discoverPlus, bleedAmp: pstat?.status?.bleedAmp, deathSave, extraTurn }),
       opts,
       player: G ? { hp: G.hp, maxHp: G.maxHp, atk: G.atk, spellPower: G.spellPower || 0, myClass: G.myClass || null, characterId: G.characterId || null } : null,
+      handInfuseCounts,
       pdef, pstat, foes, deathFxPending: foes.map(foe => stagedDeathFx.has(foe)), allies, hand, drawPile, discard, grave, consumed, infusing, discovering,
       handSelecting, choosing, pendingTarget: pTgt, pendingHint, viewingGrave, viewingDeck, viewingBag,
       dreadShown, selectingDeck, deckNeed: R().bossDeckSize, selDeckMax, selShaN, sel, selPool,
@@ -423,15 +428,15 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
   // 注册「回合开始时」延迟段（2026-09-09 老板定向 Q3）：
   //   repeat = 装备卡 /「每回合开始时」/ 能力卡或形态卡（形态=每回合）→ 每回合开始触发；
   //   「持续 N 回合」= 重复 N 次（left 计数递减）；其余一次性
-  function registerTurnStart(card, items) {
+  function registerTurnStart(card, items, target) {
     const descDur = +(((String(card.desc || '').match(/持续\s*(\d+)\s*回合/)) || [])[1] || 0);
     const formLike = card.type === '能力卡' || /形态/.test(String(card.name || ''));
     items.forEach(it => {
       const dur = +(((String(it.text).match(/持续\s*(\d+)\s*回合/)) || [])[1] || 0) || descDur;
-      let repeat = card.type === '装备' || it.each || formLike;
+      let repeat = card.type === '装备' || card.id === 'cmtn7err0a7' || it.each || formLike;
       let left = null;
       if (!repeat && dur > 0) { repeat = true; left = dur; }   // 持续 N 回合 = 重复 N 次
-      delayed.push({ text: it.text, cardName: card.name, repeat, left });
+      delayed.push({ text: withBlessingChoices(it.text, card.desc), cardName: card.name, repeat, left, targetIndex: foeIdx(target) });
       G.log(`[[icon:hourglass]] <b>回合开始时</b>：【${esc(card.name)}】${esc(it.text)}（下个回合开始${repeat ? (left ? `起共 ${left} 次` : '起每回合') : ''}生效）`, 'sys');
     });
   }
@@ -439,6 +444,8 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
   // 回合开始：结算延迟段（沉默中技能无效——一次性段被吞掉，重复段保留到下回合；
   // notBeforeTurn = 花开两面未选之门「两回合后」的定时刻；special = 江湖救急临时卡消耗）
   async function processDelayed(signal = activeActionSignal) {
+    throwIfActionCancelled(signal);
+    if (!G?.battleActive || G.hp <= 0 || !alive().length) return;
     // M2：结构化 onTurnStart 触发（登记卡 + 装备 focus 光环）——置于任何早退之前，
     // 与 delayed 文本管线同一回合开始时点
     triggersM2.fireTurnStart();
@@ -447,6 +454,11 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
     const keep = [];
     let curseImmunityRestored = false;
     for (const q of delayed) {
+      throwIfActionCancelled(signal);
+      if (!G?.battleActive || G.hp <= 0 || !alive().length) break;
+      const selected = Number.isInteger(q.targetIndex) ? foes[q.targetIndex] : null;
+      // 与直接施放相同：原目标失效后回退首名存活敌人，存活时保持原目标。
+      const delayedTarget = selected && !selected.dead ? selected : alive()[0] || null;
       if (q.notBeforeTurn && turn < q.notBeforeTurn) { keep.push(q); continue; }
       if (q.special === 'consumeTemps') {
         await consumeHandUids(q.uids || [], q.cardName, signal);
@@ -491,7 +503,7 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
               triggers: { onPlay: q.ops.map(op => { const rest = { ...op }; delete rest.schedule; return rest; }) },
             },
           };
-          resolveCard(synthetic, alive()[0] || null, false, 0, 'm2-scheduled');
+          await resolveCardWithFeedback(synthetic, delayedTarget, false, 0, 'm2-scheduled', signal);
         }
         continue;   // 一次性
       }
@@ -501,9 +513,9 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
       } else {
         G.log(`[[icon:hourglass]] <b>回合开始时</b>：【${esc(q.cardName)}】${esc(q.text)}`, 'sys');
         if (applyTextEffects.steps) {
-          await runStagedSteps(applyTextEffects.steps({ name: q.cardName }, q.text, alive()[0] || null, {}), signal);
+          await runStagedSteps(applyTextEffects.steps({ name: q.cardName }, q.text, delayedTarget, {}), signal);
         } else {
-          applyTextEffects({ name: q.cardName }, q.text, alive()[0] || null);
+          applyTextEffects({ name: q.cardName }, q.text, delayedTarget);
         }
       }
       if (q.repeat) {
@@ -511,16 +523,19 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
         else keep.push(q);
       }
     }
+    if (!G?.battleActive) return;
     set$delayed(keep);
   }
 
   // 「回合开始时，本牌伤害+N」成长：所有在场/在库副本按 uid 累积（充能火球）
   function accrueGrowth() {
-    if (!growthNames.size) return;
-    [...hand, ...drawPile, ...discard, ...grave].forEach(uid => {
-      const o = findCard(uid);
-      if (o && growthNames.has(o.card.name)) growth[uid] = (growth[uid] || 0) + 1;
-    });
+    for (const uid of new Set([...hand, ...drawPile, ...discard, ...grave])) {
+      const o = findEffectiveCard(uid) || findCard(uid);
+      const card = o?.card;
+      if (!card) continue;
+      const amount = +(String(card.desc || '').match(/回合开始时[，,]?\s*本牌伤害\s*\+\s*(\d+)/)?.[1] || 0);
+      if (amount > 0) growth[uid] = (growth[uid] || 0) + amount;
+    }
   }
 
   // 「本局对战内」持续效果：注册并结算其中已支持的部分（增益本身即战斗内长期有效）
@@ -583,6 +598,8 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
     hasCurse: foe => Combat.hasCurse(foe),
     getAliveFoes: alive,
     getGrowth: uid => growth[uid],
+    getHandInfuseCount: uid => handInfuseCounts[uid] || 0,
+    getFoeIndex: foeIdx,
     applyStatus: (foe, status, duration) => {
       const applied = Combat.addCurse(foe, status, duration);
       if (applied > 0 && foe && !foe.dead) {
@@ -857,7 +874,10 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
   // 江湖救急：回合开始将其置入的临时卡消耗（会正确触发「每消耗 1 张」联动）
   async function consumeHandUids(uids, cardName, signal = activeActionSignal) {
     let n = 0;
-    for (const u of (uids || [])) {
+    for (const u of new Set(uids || [])) {
+      throwIfActionCancelled(signal);
+      if (!G?.battleActive || G.hp <= 0 || !alive().length) break;
+      if (consumed.includes(u)) continue;
       const idx = hand.indexOf(u);
       // 临时道具改入快捷栏后仍遵守到期回收；已使用/消耗的 UID 不再重复结算。
       const temporaryItem = granted.some(o => o.uid === u && o.card.type === '道具') &&
@@ -868,8 +888,8 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
       if (mode === 'boss') grave.push(u);
       const o = findCard(u);
       cardAnims.push({ kind: 'burn', uid: u, name: o ? o.card.name : '' });
-      if (o) resolveInfusedFuel(o.card, alive()[0] || null);
-      if (consumeFireballN > 0) await runStagedSteps(consumeFireballSteps(consumeFireballN), signal);
+      if (o) await runStagedSteps(onHandConsumed(o.card), signal);
+      else if (consumeFireballN > 0) await runStagedSteps(consumeFireballSteps(consumeFireballN), signal);
       n++;
     }
     if (n) G.log(`[[icon:flask]] <b>${esc(cardName || '临时卡')}</b>：回合开始，消耗了 ${n} 张临时卡`, 'sys');
@@ -1296,10 +1316,10 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
     }
     // 「触发的流血伤害翻倍」（飞身劈）：流血加成部分再叠一次。
     // M2：registerRule bleedAmp 旗标（pstat.status.bleedAmp）——结构化规则的同一翻倍口径
-    if (!preserveBaseDamage && card && /流血伤害翻倍/.test(String(card.desc || '')) && (foe.status.bleed || 0) > 0) {
+    if (!preserveBaseDamage && type === Combat.TYPES.ATTACK && card && (card.id === 'tt3-fly-arrowhawk' || /流血伤害翻倍/.test(String(card.desc || ''))) && (foe.status.bleed || 0) > 0) {
       amt += foe.status.bleed;
       G.log(`[[icon:blood]] <b>流血伤害翻倍</b>：流血加成 ${foe.status.bleed} → ${foe.status.bleed * 2}`, 'sys');
-    } else if (!preserveBaseDamage && (pstat.status.bleedAmp || 0) > 0 && (foe.status.bleed || 0) > 0) {
+    } else if (!preserveBaseDamage && type === Combat.TYPES.ATTACK && (pstat.status.bleedAmp || 0) > 0 && (foe.status.bleed || 0) > 0) {
       amt += foe.status.bleed;
       G.log(`[[icon:blood]] <b>流血伤害翻倍</b>（持续规则）：流血加成 ${foe.status.bleed} → ${foe.status.bleed * 2}`, 'sys');
     }

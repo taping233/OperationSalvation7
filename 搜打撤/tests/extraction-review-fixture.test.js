@@ -2,6 +2,8 @@ import { beforeEach, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { createExtractionCommands, buildExtractionReceipt, extractionPocketOutcome } from '../game/src/hub/extraction.commands.js';
 import { extractionStashHTML, extractionDoneHTML } from '../game/src/ui/extraction-rewards-view.js';
+import { characterFor } from '../game/src/core/characters.js';
+import { addXpToProgress } from '../game/src/hub/meta-progression.js';
 
 const source = readFileSync('game/dev/extraction-rewards-review.html', 'utf8');
 const ids = ['tt12-felguard','tt3-azure-sword','tt3-ice-spike','tt2-pearlbox','tt3eq-mistbox','tt12-backupcell','tt4-woodify'];
@@ -16,10 +18,10 @@ beforeEach(async () => {
   // Execute the actual dev fixture body, with only card artwork/catalog and icon rendering substituted.
   // Commands and receipt/render functions are the production imports, and all fixture controls are real handlers.
   h = await new AsyncFunction('SDT','sdtDefine','rulesSlice','dataSlice','cardHTML',
-    'createExtractionCommands','buildExtractionReceipt','extractionPocketOutcome','extractionStashHTML','extractionDoneHTML',
+    'createExtractionCommands','buildExtractionReceipt','extractionPocketOutcome','extractionStashHTML','extractionDoneHTML','characterFor','addXpToProgress',
     script + '\nreturn { reset, deposit, finish, state:()=>({game,base,finalReceipt}) };')(
     SDT,(key,value)=>{SDT[key]=value;},rulesSlice,dataSlice,c=>`<div class="hs-card">${c.name}</div>`,
-    createExtractionCommands,buildExtractionReceipt,extractionPocketOutcome,extractionStashHTML,extractionDoneHTML);
+    createExtractionCommands,buildExtractionReceipt,extractionPocketOutcome,extractionStashHTML,extractionDoneHTML,characterFor,addXpToProgress);
 });
 
 it('actual fixture bulk action deposits seven and finishes with the same receipt', async () => {
@@ -61,6 +63,13 @@ it('empty rewards and the final-receipt control both complete using real command
   await document.querySelector('#complete').onclick();
   expect(h.state().finalReceipt.netTake.cardsStashed).toBe(7);
   expect(h.state().game.runActive).toBe(false);
+  expect(h.state().finalReceipt.growth).toMatchObject({ characterId: 'wu', characterName: '无',
+    awardedXp: 168, actualXp: 168, overflowXp: 0, before: { lv: 1, xp: 40 }, after: { lv: 3, xp: 68 },
+    levelsGained: 2, effects: [{ label: '出征生命加成', before: 0, after: 2 }] });
+  expect(h.state().base.data.characters.wu).toEqual({ lv: 3, xp: 68 });
+  expect(document.querySelector('.exr-growth').closest('details')).toBeNull();
+  expect(document.querySelector('.exr-growth').textContent).toContain('撤离经验 +168');
+  expect(document.querySelector('.exr-growth-effects').textContent).toContain('出征生命加成+0 → +2');
 });
 
 

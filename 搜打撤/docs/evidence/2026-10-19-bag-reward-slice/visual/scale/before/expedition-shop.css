@@ -1,0 +1,168 @@
+@import url('./secondary-ui-tokens.css');
+/* Reference: Arknights travelling merchant, with Slay the Spire's direct card shelves. */
+#overlay .shop-pg.sc-shop {
+  --shop-ink:var(--ui-ink); --shop-muted:var(--ui-muted); --shop-gold:#e0c98c; --shop-line:var(--ui-line);
+  --shop-on-gold:#20251f; --shop-action-hover:#eddaa9;
+  box-sizing:border-box; display:flex; flex-direction:column; justify-content:flex-start;
+  height:100%; min-height:0; padding:28px 42px 24px; gap:24px; overflow:hidden;
+  color:var(--shop-ink); border:0; box-shadow:none; background-color:#181c1f;
+  /* Asset hydration must retain the approved merchant illustration. */
+  background-image:linear-gradient(90deg,#10121300 20%,#09151b35 32%,#09151b88 100%),url('../assets/scenes/shop/shop-cardstyle-approved-1011.webp')!important;
+  background-position:center; background-size:cover; background-repeat:no-repeat;
+}
+#overlay .shop-pg.sc-shop::before { background:none; }
+#overlay .card.page .shop-pg.sc-shop .pg-head { flex:none; display:flex; align-items:center; justify-content:space-between; margin:0; padding:0 0 12px; gap:24px; border:0; background:none; box-shadow:none; animation:none; }
+#overlay .card.page .shop-pg.sc-shop .shop-heading { flex:1; min-width:0; }
+#overlay .card.page .shop-pg.sc-shop .shop-heading h2 { display:block; margin:0; padding:0; border:0; color:var(--shop-ink); font:650 34px/1.3 var(--font-ui); letter-spacing:.03em; text-shadow:none; }
+#overlay .shop-pg.sc-shop .shop-heading p { margin:7px 0 0; color:#c3cacb; font-size:16px; }
+#overlay .shop-pg.sc-shop .shop-kicker { display:block; margin-bottom:7px; color:#b4bec1; font:500 13px/1.4 var(--font-ui); letter-spacing:.12em; }
+#overlay .shop-pg.sc-shop .shop-resources { display:flex; align-items:center; gap:22px; padding:0; background:none; cursor:default; }
+#overlay .shop-pg.sc-shop .shop-resource { display:grid; grid-template-columns:auto auto auto; align-items:baseline; gap:7px; min-width:80px; padding:0; border:0; background:none; }
+#overlay .shop-pg.sc-shop .shop-resource:first-child { border-left:0; }
+#overlay .shop-pg.sc-shop .shop-resource small { color:var(--shop-muted); font-size:15px; }
+#overlay .shop-pg.sc-shop .shop-resource b { color:var(--shop-ink); font:650 27px/1.2 var(--font-ui); font-variant-numeric:tabular-nums; }
+#overlay .shop-pg.sc-shop .shop-resource.coin b { color:var(--shop-gold); }
+#overlay .shop-pg.sc-shop .shop-resource em { align-self:end; color:var(--shop-muted); font-size:13px; font-style:normal; }
+#overlay .shop-pg.sc-shop .shop-coin-icon { --coin-size:28px; display:inline-grid; place-items:center; flex:none; width:var(--coin-size); height:var(--coin-size); vertical-align:middle; }
+/* The approved coin illustration has transparent breathing room; size the visible art, not its canvas. */
+#overlay .shop-pg.sc-shop .shop-coin-icon > .ic { display:block; width:calc(var(--coin-size) * 1.7); height:calc(var(--coin-size) * 1.7); max-width:none; margin:0; object-fit:contain; }
+/* 金币使用透明信息栏，与容量共享页面底色。 */
+#overlay .shop-pg.sc-shop .shop-resource.coin { display:flex; align-items:center; gap:10px; padding:9px 18px 9px 12px; border:0; background:none; box-shadow:none; }
+#overlay .shop-pg.sc-shop .shop-resource.coin > .shop-coin-icon { --coin-size:48px; }
+#overlay .shop-pg.sc-shop .shop-resource.coin > small { font-size:16px; white-space:nowrap; }
+#overlay .shop-pg.sc-shop .shop-resource.coin > b { color:var(--shop-gold); font-size:42px; line-height:1; }
+#overlay .shop-pg.sc-shop .shop-resource.coin > em { align-self:center; font-size:15px; }
+#overlay .shop-pg.sc-shop .shop-resources:hover .shop-resource:not(.coin) b { color:var(--shop-ink); }
+#overlay .shop-pg.shop-market .shop-layout { position:relative; flex:1; min-height:0; display:grid; grid-template-columns:minmax(230px,26fr) minmax(0,74fr); gap:40px; }
+#overlay .shop-pg.sc-shop .shop-board { position:relative; min-width:0; max-width:none; margin:0; padding:0; background:none; border:0; box-shadow:none; clip-path:none; }
+#overlay .shop-pg.shop-market .shop-board { grid-column:2; grid-row:1; min-height:0; overflow:auto; overscroll-behavior:contain; padding:4px 6px 10px; }
+#overlay .shop-pg.shop-market .shop-board-grid { display:grid; height:100%; min-height:580px; grid-template-columns:repeat(5,minmax(0,1fr)); grid-template-rows:repeat(2,minmax(0,1fr)); gap:22px 18px; align-items:stretch; }
+/* These two properties override the fixed legacy winter sleeve, at its source boundary. */
+#overlay .shop-pg.shop-market .shop-slot { position:relative; display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; gap:0; min-width:0; min-height:0; padding:0; background:#12212666!important; border:0!important; border-radius:0; box-shadow:none; cursor:default; transition:background-color .16s; }
+#overlay .shop-pg.shop-market .shop-slot:is(:hover,:active) { transform:none; translate:none; box-shadow:none; }
+#overlay .shop-pg.shop-market .shop-slot.selected { background:#8b754b2e!important; box-shadow:inset 0 -2px var(--shop-gold); }
+#overlay .shop-pg.shop-market .shop-slot.sold { opacity:1; filter:none; }
+#overlay .shop-pg.shop-market .shop-preview { appearance:none; display:flex; flex-direction:column; align-items:center; width:100%; height:100%; min-height:0; gap:0; padding:0; border:0; border-radius:0; background:none; color:var(--shop-ink); font:inherit; cursor:pointer; }
+#overlay .shop-pg.shop-market .shop-preview { transition:background-color .16s ease; }
+#overlay .shop-pg.shop-market .shop-preview:hover { background:#e0c98c12; }
+#overlay .shop-pg.shop-market .shop-item-art { display:grid; place-items:center; container-type:size; flex:1; min-height:0; width:100%; padding:0; }
+#overlay .shop-pg.shop-market .shop-item-title { box-sizing:border-box; display:block; width:100%; min-height:29px; padding:0 12px 5px; color:var(--shop-ink); background:none; font-size:17px; font-weight:500; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+body:has(#viewport) #overlay .shop-pg.shop-market .shop-preview .hs-card { flex:none; width:min(226px,calc((100cqh - 12px) * 2 / 3)); max-width:100%; margin:0; font-size:13px; pointer-events:none; }
+#overlay .shop-pg.shop-market .shop-preview .hs-card:is(.rv4,.rv7,.rv-prism) { margin:0; }
+#overlay .shop-pg.shop-market .shop-offer { display:flex; align-items:center; justify-content:space-between; box-sizing:border-box; width:100%; min-height:66px; margin:0; padding:10px 12px; gap:10px; background:#09131873; border-top:1px solid #b5c8c720; }
+#overlay .shop-pg.shop-market .shop-offer-copy { display:grid; min-width:0; gap:4px; text-align:left; }
+#overlay .shop-pg.shop-market .shop-stock-state { color:#c6d1ce; font-size:17px; line-height:1.4; }
+#overlay .shop-pg.shop-market .shop-slot[data-availability="ready"] .shop-stock-state { color:#e0c98c; }
+#overlay .shop-pg.shop-market .shop-slot:is([data-availability="short"],[data-availability="full"]) .shop-stock-state { color:#edb7a4; }
+#overlay .shop-pg.shop-market .shop-owned { color:#a8bbbf; font-size:14px; line-height:1.4; text-align:left; }
+#overlay .shop-pg.shop-market .shop-v14-price { display:inline-flex; flex:none; align-items:center; gap:3px; margin-left:auto; color:var(--shop-gold); font-size:30px; font-weight:650; font-variant-numeric:tabular-nums; white-space:nowrap; }
+#overlay .shop-pg.shop-market .shop-v14-price .shop-coin-icon { --coin-size:36px; }
+#overlay .shop-pg.sc-shop .shop-money-unit { margin-left:1px; color:var(--shop-muted); font-size:14px; font-weight:400; }
+#overlay .shop-pg.shop-market .shop-slot.unaffordable .shop-v14-price { color:#dfbd8e; }
+#overlay .shop-pg.shop-market .shop-slot.sold .shop-item-art { opacity:.38; filter:grayscale(.75); }
+#overlay .shop-pg.shop-market .shop-slot.sold .shop-v14-price { color:#99a5a3; opacity:.65; }
+#overlay .shop-pg.shop-market .shop-slot.sold .shop-money-value { text-decoration:line-through; text-decoration-thickness:1px; }
+#overlay .shop-pg.shop-market .shop-slot.sold .shop-item-title { color:#c1c8c9; }
+#overlay .shop-pg.sc-shop .shop-card-mystery { box-sizing:border-box; display:flex; flex:none; flex-direction:column; align-items:center; justify-content:center; gap:10px; width:min(226px,calc((100cqh - 12px) * 2 / 3)); max-width:100%; aspect-ratio:272/406; min-height:0; height:auto; margin:0; border:1px solid #94b9b55c; border-radius:0; background:#13232be8; color:#c9e0da; font:400 42px/1 var(--font-ui); text-shadow:none; }
+#overlay .shop-pg.sc-shop .shop-card-mystery .ic { width:24px; height:24px; color:var(--shop-muted); }
+#overlay .shop-pg.sc-shop .shop-card-mystery span { color:var(--shop-muted); font-size:14px; }
+#overlay .shop-pg.shop-market .shop-empty { box-sizing:border-box; display:grid; place-content:center; width:100%; height:100%; min-height:0; padding:18px; border:0; color:var(--shop-muted); font-size:16px; text-align:center; }
+#overlay .shop-pg.shop-market .shop-detail { position:absolute; z-index:6; inset:-18px -6px; width:auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; min-width:0; min-height:0; padding:24px; overflow:hidden; border:0; background:#050b10d6; box-shadow:none; }
+#overlay .shop-pg.shop-market .shop-detail[hidden] { display:none; }
+#overlay .shop-pg.shop-market .shop-detail[data-shop-motion="in"] { animation:shop-detail-in var(--motion-region-enter,280ms) var(--motion-ease-enter,cubic-bezier(.22,1,.36,1)) both; }
+#overlay .shop-pg.shop-market .shop-detail[data-shop-motion="out"] { animation:shop-detail-out var(--motion-exit,180ms) var(--motion-ease-exit,cubic-bezier(.4,0,.7,1)) both; pointer-events:none; }
+#overlay .shop-pg.shop-market .shop-detail[data-shop-motion="in"] :is(.shop-detail-scroll,.shop-detail-actions) { animation:shop-detail-card-in var(--motion-region-enter,280ms) var(--motion-ease-enter,cubic-bezier(.22,1,.36,1)) both; }
+#overlay .shop-pg.shop-market .shop-detail[data-shop-motion="out"] :is(.shop-detail-scroll,.shop-detail-actions) { animation:shop-detail-card-out var(--motion-exit,180ms) var(--motion-ease-exit,cubic-bezier(.4,0,.7,1)) both; }
+@keyframes shop-detail-in { from { opacity:0; } to { opacity:1; } }
+@keyframes shop-detail-out { from { opacity:1; } to { opacity:0; } }
+@keyframes shop-detail-card-in { from { transform:translateY(18px) scale(.94); } to { transform:translateY(0) scale(1); } }
+@keyframes shop-detail-card-out { from { transform:translateY(0) scale(1); } to { transform:translateY(12px) scale(.94); } }
+#overlay .shop-pg.shop-market .shop-detail-dismiss { position:absolute; inset:0; padding:0; border:0; background:none; cursor:zoom-out; }
+#overlay .shop-pg.shop-market .shop-detail-close { position:absolute; z-index:2; top:14px; right:18px; width:44px; height:44px; padding:0; border:1px solid #c8d6d344; border-radius:50%; background:#0b171be6; color:#d5dfdc; font:400 30px/1 var(--font-ui); cursor:pointer; }
+#overlay .shop-pg.shop-market .shop-detail-scroll { position:relative; display:flex; flex:0 1 auto; flex-direction:column; align-items:center; gap:16px; width:min(620px,88%); min-height:0; padding:22px 28px 14px; overflow:auto; overscroll-behavior:contain; }
+#overlay .shop-pg.shop-market .shop-detail-art { display:grid; place-items:center; flex:none; min-width:0; padding:10px 12px; }
+body:has(#viewport) #overlay .shop-pg.shop-market .shop-detail-art .hs-card { width:350px; max-width:none; font-size:23px; }
+#overlay .shop-pg.shop-market .shop-detail-art .shop-card-mystery { width:350px; max-width:none; margin:0; }
+#overlay .shop-pg.shop-market .shop-detail-art .shop-card-mystery small { font-size:18px; color:#a9c8c6; }
+#overlay .shop-pg.shop-market .shop-detail-rules { align-self:stretch; padding:12px 20px; border:0; background:#16282bcc; }
+#overlay .shop-pg.shop-market .shop-detail-rules summary { color:#b9d3d1; font-size:17px; cursor:pointer; }
+#overlay .shop-pg.shop-market .shop-detail-rules p { margin:14px 0 0; color:#d1dfde; font-size:19px; line-height:1.65; white-space:pre-line; }
+#overlay .shop-pg.shop-market .shop-detail-actions { position:relative; flex:none; display:grid; gap:9px; width:350px; padding:0; border:0; background:none; }
+#overlay .shop-pg.shop-market .shop-detail-account { display:flex; justify-content:space-between; gap:18px; padding:11px 0; border-block:1px solid #b5c8c729; }
+#overlay .shop-pg.shop-market .shop-detail-account > span { display:grid; gap:4px; color:var(--shop-muted); font-size:13px; }
+#overlay .shop-pg.shop-market .shop-detail-account strong { display:inline-flex; align-items:center; gap:3px; color:var(--shop-gold); font-size:22px; font-weight:600; font-variant-numeric:tabular-nums; }
+#overlay .shop-pg.shop-market .shop-detail-facts { display:flex; flex-wrap:wrap; align-items:center; gap:6px 14px; color:#b9c3c6; font-size:15px; line-height:1.45; }
+#overlay .shop-pg.shop-market .shop-detail-facts strong { font-weight:500; }
+#overlay .shop-pg.shop-market .shop-detail-facts :is(.tone-ready,.tone-complete) { color:#b4d0bd; }
+#overlay .shop-pg.shop-market .shop-detail-facts .tone-limited { color:#e0aa98; }
+#overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done) { width:100%; min-height:56px; padding:12px 18px; border:1px solid #f2dfac80; border-radius:0; background:var(--shop-gold); color:var(--shop-on-gold); font:650 20px/1.4 var(--font-ui); cursor:pointer; }
+#overlay .shop-pg.shop-market .shop-detail-buy { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+#overlay .shop-pg.shop-market .shop-buy-price { display:inline-flex; align-items:center; white-space:nowrap; font-variant-numeric:tabular-nums; }
+#overlay .shop-pg.shop-market .shop-buy-price .shop-coin-icon { --coin-size:30px; margin:0 4px; }
+#overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done):hover:not(:disabled) { background:var(--shop-action-hover); border-color:#f2dfac; }
+#overlay .shop-pg.shop-market .shop-detail-done { background:#253732; border-color:#789a8d66; color:#c9ded4; }
+#overlay .shop-pg.shop-market .shop-detail-done:hover:not(:disabled) { background:#344b43; }
+#overlay .shop-pg.shop-market .shop-detail-buy.short:disabled { border-color:#b19a8055; background:#3a3330; color:#ddb5a5; opacity:1; cursor:not-allowed; }
+#overlay .shop-pg.shop-market .shop-detail-bag { width:100%; min-height:46px; border:1px solid #a6afb155; border-radius:0; background:#30383b; color:#e1e6e6; font:500 17px/1.4 var(--font-ui); cursor:pointer; }
+#overlay .shop-pg.shop-market .shop-merchant { grid-column:1; grid-row:1; display:flex; flex-direction:column; justify-content:flex-end; min-width:0; min-height:0; padding:0 20px 0 0; gap:26px; }
+#overlay .shop-pg.shop-market .shop-merchant-caption { padding:18px 6px; border:0; background:linear-gradient(90deg,#07151aac,transparent); }
+#overlay .shop-pg.shop-market .shop-merchant-caption > span { color:#c4e0d5; font-size:23px; font-weight:600; }
+#overlay .shop-pg.shop-market .shop-merchant-caption p { margin:10px 0 0; color:#e0e6e0; font-size:21px; line-height:1.65; }
+#overlay .shop-pg.shop-market .shop-services { display:grid; gap:10px; }
+#overlay .shop-pg.shop-market .shop-sellpost { position:relative; grid-column:auto; justify-self:stretch; align-self:stretch; display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:12px; min-width:0; min-height:68px; margin:0; padding:12px 4px; border:0; border-top:1px solid #b6cfca66; border-radius:0; background:#16282b5e; color:var(--shop-ink); text-align:left; box-shadow:none; cursor:pointer; }
+#overlay .shop-pg.shop-market .sellpost-copy { display:grid; gap:6px; }
+#overlay .shop-pg.shop-market .shop-sellpost > .shop-coin-icon { --coin-size:36px; }
+#overlay .shop-pg.shop-market .shop-sellpost .sellpost-copy { margin-right:auto; }
+#overlay .shop-pg.shop-market .sellpost-name { color:var(--shop-ink); font:600 21px/1.3 var(--font-ui); letter-spacing:0; text-shadow:none; }
+#overlay .shop-pg.shop-market .sellpost-hint { color:var(--shop-muted); font:400 14px/1.4 var(--font-ui); text-shadow:none; }
+#overlay .shop-pg.shop-market .sellpost-enter { color:#cbd2d3; font-size:15px; white-space:nowrap; }
+#overlay .shop-pg.sc-shop .shop-bag-btn { display:inline-flex; align-items:center; justify-content:flex-start; gap:10px; min-height:48px; padding:11px 4px; border:0; border-radius:0; background:#16282b5e; color:var(--shop-ink); font:500 18px/1.4 var(--font-ui); cursor:pointer; }
+#overlay .shop-pg.sc-shop .shop-bag-btn .ic { width:18px; height:18px; }
+#overlay .shop-pg.shop-market .shop-market-footer { flex:none; display:flex; align-items:center; gap:24px; min-height:56px; padding:0; border:0; }
+#overlay .shop-pg.sc-shop .shop-back { position:static; display:flex; align-items:center; justify-content:center; gap:14px; flex:none; align-self:flex-end; min-width:208px; min-height:64px; margin:0 0 0 auto; padding:12px 28px; border:0; border-radius:0; background:var(--ui-blue); color:var(--ui-on-primary); font:600 23px/1.4 var(--font-ui); letter-spacing:0; transform:none; box-shadow:none; clip-path:none; }
+#overlay .shop-pg.shop-market .shop-market-footer .shop-back { order:3; margin-left:0; }
+#overlay .shop-pg.shop-market .shop-live { order:1; flex:1 1 auto; min-width:0; color:#afc0c1; font-size:16px; line-height:1.5; text-align:left; }
+#overlay .shop-pg.shop-market .shop-return-note { order:2; flex:none; margin-left:auto; color:var(--shop-muted); font-size:14px; line-height:1.5; white-space:nowrap; }
+#overlay .shop-pg.shop-market .shop-live:empty { display:none; }
+#overlay .shop-pg.sc-shop :is(.shop-sellpost,.shop-bag-btn):hover { transform:none; filter:none; background:#394347; }
+/* Navigation keeps a paired foreground/background in every state. */
+#overlay .shop-pg.sc-shop .shop-back:hover:not(:disabled) { transform:none; filter:none; background:var(--ui-hover); color:var(--ui-ink); }
+#overlay .shop-pg.sc-shop :is(button,[tabindex]):focus-visible { outline:2px solid var(--shop-gold); outline-offset:3px; }
+/* The acquisition desk keeps its ledger, with the same resource and action hierarchy. */
+#overlay .shop-pg.shop-exchange .sell-board { flex:1; min-height:0; overflow:auto; overscroll-behavior:contain; }
+#overlay .shop-pg.shop-exchange .sell-desk { display:grid; grid-template-columns:minmax(240px,28fr) minmax(0,72fr); gap:24px; align-items:start; }
+#overlay .shop-pg.shop-exchange .sell-ledger { position:sticky; top:0; padding:24px; border:0; background:#1a2023f0; }
+#overlay .shop-pg.shop-exchange .sell-ledger-kicker { color:var(--shop-muted); font-size:13px; letter-spacing:.08em; }
+#overlay .shop-pg.shop-exchange .sell-ledger h3 { margin:10px 0 24px; color:var(--shop-ink); font:600 25px/1.4 var(--font-ui); }
+#overlay .shop-pg.shop-exchange .sell-ledger-total { display:grid; grid-template-columns:1fr auto; align-items:end; gap:7px; padding:16px 0; border-block:1px solid var(--shop-line); }
+#overlay .shop-pg.shop-exchange .sell-ledger-total small { grid-column:1/-1; color:var(--shop-muted); font-size:15px; }
+#overlay .shop-pg.shop-exchange .sell-ledger-total b { color:var(--shop-gold); font-size:36px; font-variant-numeric:tabular-nums; }
+#overlay .shop-pg.shop-exchange .sell-ledger-total b { display:flex; align-items:center; gap:8px; }
+#overlay .shop-pg.shop-exchange .sell-ledger-total .shop-coin-icon { --coin-size:36px; }
+#overlay .shop-pg.shop-exchange .sell-ledger-total > span { color:var(--shop-muted); font-size:15px; }
+#overlay .shop-pg.shop-exchange .sell-ledger dl { display:grid; gap:14px; margin:24px 0; }
+#overlay .shop-pg.shop-exchange .sell-ledger dl > div { display:flex; justify-content:space-between; gap:12px; font-size:15px; }
+#overlay .shop-pg.shop-exchange .sell-ledger dt { color:var(--shop-muted); }
+#overlay .shop-pg.shop-exchange .sell-ledger dd { margin:0; color:var(--shop-ink); }
+#overlay .shop-pg.shop-exchange .sell-ledger-rule { padding-top:18px; border-top:1px solid var(--shop-line); }
+#overlay .shop-pg.shop-exchange .sell-ledger-rule b { color:var(--shop-ink); font-size:17px; }
+#overlay .shop-pg.shop-exchange .sell-ledger-rule p { margin:10px 0 0; color:var(--shop-muted); font-size:15px; line-height:1.75; }
+#overlay .shop-pg.shop-exchange .sell-catalog { min-width:0; padding:24px; background:#1a2023e8; }
+#overlay .shop-pg.shop-exchange .sell-catalog-head { display:flex; align-items:end; justify-content:space-between; gap:18px; padding-bottom:18px; border-bottom:1px solid var(--shop-line); }
+#overlay .shop-pg.shop-exchange .sell-catalog-head span { color:var(--shop-muted); font-size:13px; letter-spacing:.08em; }
+#overlay .shop-pg.shop-exchange .sell-catalog-head h3 { margin:5px 0 0; color:var(--shop-ink); font-size:25px; }
+#overlay .shop-pg.shop-exchange .sell-catalog-head > b { color:var(--shop-gold); font-size:18px; }
+#overlay .shop-pg.shop-exchange .shop-sell { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; max-height:none; overflow:visible; padding:18px 0 0; }
+#overlay .shop-pg.shop-exchange .sell-item { display:flex; flex-direction:column; align-items:center; gap:16px; min-width:0; padding:26px 16px 16px; border:0; background:#252d30cc; }
+#overlay .shop-pg.shop-exchange .sell-item-offer { display:flex; justify-content:space-between; align-items:baseline; gap:8px; width:100%; margin-top:auto; padding-top:14px; border-top:1px solid var(--shop-line); }
+#overlay .shop-pg.shop-exchange .sell-item-offer span { color:var(--shop-muted); font-size:14px; }
+#overlay .shop-pg.shop-exchange .sell-item-offer b { display:inline-flex; align-items:center; gap:5px; color:var(--shop-gold); font-size:22px; white-space:nowrap; }
+#overlay .shop-pg.shop-exchange .sell-item .mini-btn { width:100%; min-height:48px; border:1px solid var(--shop-gold); border-radius:0; background:var(--shop-gold); color:#1c2124; font:600 17px/1.4 var(--font-ui); }
+#overlay .shop-pg.shop-exchange .shop-sell-empty { min-height:190px; display:grid; place-items:center; margin:0; padding:24px; color:var(--shop-muted); font-size:17px; text-align:center; line-height:1.7; }
+body.reduce-motion #overlay .shop-pg.sc-shop * { animation:none; transition:none; }
+@media (prefers-reduced-motion:reduce) { #overlay .shop-pg.sc-shop * { animation:none; transition:none; } }
+
+/* Share transaction feedback rhythm across buying and selling. */
+#overlay .shop-pg.shop-exchange .shop-market-footer { display:flex; align-items:center; gap:24px; min-height:56px; }
+#overlay .shop-pg.shop-exchange .shop-live { flex:1; min-width:0; color:var(--shop-ink); font-size:16px; line-height:1.5; }
+#overlay .shop-pg.shop-exchange .shop-live:empty { display:none; }

@@ -142,7 +142,7 @@ export function openEntrySupply() {
   const showResult = () => {
     const complete = supply.taken.length === supply.cardIds.length;
     setBagReturnHook(() => { if (isCurrent()) { game.state = 'modal'; showResult(); } });
-    UI.showOverlay('', rewardSceneHTML({ className:`pg entry-reward-scene entry-supply-strips${complete ? ' reward-complete' : ''}`, title:'随行补给', source:characterName(game.myClass), rule:complete ? '' : '点卡面查看详情', count:supply.cardIds.length - supply.taken.length,
+    UI.showOverlay('', rewardSceneHTML({ className:`pg entry-reward-scene entry-supply-strips${complete ? ' reward-complete' : ''}`, title:'随行补给', source:characterName(game.myClass), rule:'', count:supply.cardIds.length - supply.taken.length,
       cards:complete ? '<div class="entry-reward-complete"><span class="entry-complete-symbol" aria-hidden="true">[[icon:exit]]</span><p>补给已领齐</p><button type="button" class="entry-complete-confirm" data-act="clsEntryContinue"><span aria-hidden="true">✓</span> 继续探索</button></div>' : cards().map((card, i) => supply.taken.includes(i) ? '' : card ? `<article class="reward-unit"><button class="reward-card" data-act="clsEntryCard" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button><div class="entry-reward-label">${esc(card.name)}</div><div class="entry-reward-amount"><span>×</span>1</div><button type="button" class="reward-claim" data-act="entrySupplyTake" data-i="${i}">收下</button></article>` : '<p class="reward-empty">该职业补给暂不可用</p>').join(''),
       actions:`<div class="entry-supply-status" role="status" aria-live="polite"><span>已领取</span><b>${supply.taken.length} / ${supply.cardIds.length}</b></div>`,
       footer:`<button class="reward-bag" data-act="entrySupplyBag">整理背包</button>${saveFailed ? '<p class="entry-save-warning" role="status">当前进度未保存，请查看存档错误提示。</p>' : ''}${complete ? '' : `<span class="reward-notice" role="status">${claimNotice || '领完补给后可继续探索；放不下时请先整理背包'}</span>`}`,
@@ -714,7 +714,7 @@ function renderExtractStash(notice = '', finishSignature = null) {
   _set_cardPageOpen(false); // Esc cannot bypass the explicit finish-and-loss action.
   UI.registerHelp('extract', {
     title: '整理入库说明',
-    html: `<p class="help-item"><b>背包卡牌</b>点击卡面查看详情，再点击下方「入库」；同叠按仓库剩余空位部分入库。未入库的卡牌（含出发带入卡）在完成整理时永久丢失。</p>
+    html: `<p class="help-item"><b>背包卡牌</b>同叠按仓库剩余空位部分入库。未入库的卡牌（含出发带入卡）在完成整理时永久丢失。</p>
       <p class="help-item"><b>自动入库</b>木材/口粮已入库。消耗区逐张以 1/3 概率结算；初始攻击与职业卡不能带回基地，其余实际保留的卡进入基地消耗区，需用钥匙复原。</p>
       <p class="help-item"><b>按估值入库</b>按卡牌估值从高到低，同估值按背包原次序。估值不代表稀有度或实战强度，也不表示卡牌可以出售。入库立即保存，本页不能撤回或换选。</p>
       <p class="help-item"><b>仓库容量</b>可在基地「升级」页用 [[icon:wood]] 木材×${MAP.rules.stashUpgradeWood} 扩建 +${MAP.rules.stashUpgradeSlots} 张。入库选择会逐次保存，卡牌下次出发时可以携带。</p>`,

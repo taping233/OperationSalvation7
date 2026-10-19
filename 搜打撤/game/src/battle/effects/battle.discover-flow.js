@@ -77,7 +77,7 @@ export function createBattleDiscoverFlow(ports) {
     const structuredPool = job.pool;
     /** @type {DiscoverCardPredicate | null} */
     const structuredPred = structuredPool?.kind === 'moves'
-      ? card => card.type === '武术' && (structuredPool.cost === undefined || (Number(card.cost) || 0) === structuredPool.cost)
+      ? card => ['武术', '法术'].includes(card.type || '') && (structuredPool.cost === undefined || (Number(card.cost) || 0) === structuredPool.cost)
       // 传说池（闪耀通行证「从传说卡中发现」）：资格边界仍由 buildDiscoverPool 的
       // isRandomObtainable 统一把关（排除衍生/unrandom/生物/事件等）
       : structuredPool?.kind === 'legendary'

@@ -859,7 +859,7 @@ export function createGameMenuPages(deps, shell) {
     const prev = game.state;
     game.state = 'modal';
     UI.showOverlay('', `
-      <div class="pg settings-page">
+      <div class="pg settings-page ui-scale-system">
         <!-- 2026-09-07 留言：右上叉号去掉。2026-09-25 老板：返回键统一 = 主页左上退出键
              （ak-sq ak-exit）同款同位，底部大返回钮取消，Esc 仍可关 -->
         ${linkedBackHTML('closeSettings', '返回', 'ak-back-tl')}
@@ -913,7 +913,7 @@ export function createGameMenuPages(deps, shell) {
         <div class="btn-row danger-row">
           <button class="mini-btn danger danger-max" data-act="wipeSave">清空全部存档</button>
         </div>
-        <p class="hint">清空操作需点击两次确认，完成后无法恢复。<br>「清空全部存档」会删除五个档位的全部档案。</p>
+        <p class="hint">清空后无法恢复。<br>「清空全部存档」会删除五个档位的全部档案。</p>
         </section>
         </div><!-- /.settings -->
       </div><!-- /.pg -->`, 'page');

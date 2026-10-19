@@ -30,24 +30,18 @@ it('accepts a fully contained action and never changes scroll positions or DOM',
   expect(inspectVisibleLayout(root).issues).toEqual([]);
   expect(root.outerHTML).toBe(before);expect(root.querySelector('.scroll').scrollTop).toBe(0);
 });
-it('picker uses the remaining stage height, shrinks whitespace before the face, and reserves the claim row',()=>{
+it('picker preserves readable card width and its own scroll fallback with a separate action row',()=>{
   const css=postcss.parse(readFileSync('game/css/chest-reward-overview.css','utf8'));
   const values=selector=>{const result={};css.walkRules(rule=>{if(rule.selectors.includes(`body #overlay .card .cqo-frame .cqp-dialog ${selector}`))rule.walkDecls(d=>result[d.prop]=d.value);});return result;};
   expect(values('.reward-stage')).toMatchObject({'container-type':'size',flex:'1 1 0',overflow:'auto'});
-  expect(values('.reward-objects')).toMatchObject({flex:'none','min-height':'0'});
+  expect(values('.reward-objects')).toMatchObject({flex:'none','min-height':'100%','overflow-x':'auto'});
   expect(values('.reward-unit .reward-card')['--reward-card-space']).toBe('clamp(8px,calc((100cqh - 480px) / 2),30px)');
-  const faceWidth = 'clamp(180px,calc((100cqh - 116px - var(--reward-card-space) * 2) * 2 / 3),280px)';
+  const faceWidth = '280px';
   expect(values('.reward-unit .reward-card')['max-width']).toBe(faceWidth);
   expect(values('.reward-unit:has(.reward-target-label) .reward-card')['max-width']).toBe(faceWidth);
   expect(values('.reward-unit .reward-card .hs-card')['aspect-ratio']).toBe('2/3');
   expect(values('.reward-replica[data-reward-count] .reward-unit .reward-card')['margin-block']).toBe('var(--reward-card-space)');
   expect(values('.reward-claim')['min-height']).toBe('46px');
-  // Conservative vertical budget includes 46px action + 12px gap + 11px unit
-  // borders/padding + 9px rounding slack + 38px shared target-label space.
-  const reserve=116;
-  for(const height of [440,480,500,540,600]){
-    const space=Math.max(8,Math.min(30,(height-480)/2));
-    const width=Math.max(180,Math.min(280,(height-reserve-space*2)*2/3));
-    expect(width*1.5+space*2+reserve).toBeLessThanOrEqual(height);
-  }
+  expect(values('.reward-unit .reward-card')['min-width']).toBe(faceWidth);
+  expect(values('.reward-objects:has(> .reward-unit:nth-child(5))')['grid-auto-columns']).toBe(faceWidth);
 });

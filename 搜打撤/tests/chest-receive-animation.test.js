@@ -47,7 +47,11 @@ it.each(['all','one'])('%s animates only committed rewards after render and neve
   if(claimMode==='all')actions.chestTake();else actions.chestPick({i:0});
   expect(game.ownedCards).toHaveLength(claimMode==='all'?2:1);expect(game.grantCard).toHaveBeenCalledTimes(claimMode==='all'?3:1);
   expect(feedback).toHaveBeenLastCalledWith(ovBody,claimMode==='all'?[card,card]:[card],{token:game});
-  if(claimMode==='all')expect(ovBody.textContent).toContain('放不下');
+  if(claimMode==='all'){
+    expect(ovBody.textContent).toContain('剩余 1 张待处理');
+    expect(ovBody.querySelector('.reward-capacity-note')?.textContent).toBe('暂时无法领取');
+    expect(ovBody.querySelector('[data-act="chestTake1"][data-i="2"]')).not.toBeNull();
+  }
   feedback.mockClear();actions.chestTake1({i:2});expect(feedback).not.toHaveBeenCalled();
   actions.chestTake1({i:0});expect(feedback).not.toHaveBeenCalled();expect(game.ownedCards).toHaveLength(claimMode==='all'?2:1);
 });

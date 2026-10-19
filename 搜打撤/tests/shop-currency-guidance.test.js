@@ -45,7 +45,7 @@ describe('商店金币与交易状态引导', () => {
     const wallet = host.querySelector('.shop-resource.coin');
     expect(wallet.textContent).toBe('可用金币5币');
     expect(wallet.querySelector('img').src).toContain('map-hud-1015/gold-is7-v2.webp');
-    expect(host.querySelector('.shop-browse-hint').textContent).toContain('再确认购买');
+    expect(host.querySelector('.shop-browse-hint')).toBeNull();
     acts.shopInspect({i:0});
     const button = host.querySelector('.shop-detail-buy');
     expect(button.textContent).toBe('购买 · 5 币');

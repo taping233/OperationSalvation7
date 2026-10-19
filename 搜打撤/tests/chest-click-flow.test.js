@@ -114,7 +114,8 @@ describe('宝箱点击链路', () => {
     expect(ownedCards).toHaveLength(1);
     expect(ovBody.querySelector('.cqo-box-complete')).not.toBeNull();
     expect(ovBody.querySelector('[data-act="chestTake1"]')).toBeNull();
-    expect(ovBody.querySelector('.cqo-notice').textContent).toContain('已收下 1 张');
+    expect(ovBody.querySelector('.cqo-receipt-count').textContent).toBe('1 张');
+    expect(ovBody.querySelector('.cqo-notice').textContent).toBe('');
     continueChestRewards(acts);
     expect(game.state).toBe('idle');
     expect(overlay.hidden).toBe(true);

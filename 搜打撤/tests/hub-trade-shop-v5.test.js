@@ -110,6 +110,22 @@ describe('独立交易所的现行经济与同页交易台', () => {
     expect(protectedIds.has(collected.id)).toBe(true);
   });
 
+  it('永久收录不等于禁售，交易台以新的收藏保护状态为准', () => {
+    base.isCollected = vi.fn(() => true);
+    base.isCollectionProtected = vi.fn(() => false);
+    sellMode(); selectStack('收藏卡');
+    expect(host.querySelector('.trade-v5-protection')).toBeNull();
+    expect(button('tradeShopSellOne').disabled).toBe(false);
+    expect(host.querySelector('[data-act="tradeShopSelectStack"][aria-pressed="true"]').classList.contains('is-protected')).toBe(false);
+    expect(base.isCollected).not.toHaveBeenCalled();
+
+    base.isCollectionProtected.mockReturnValue(true); render();
+    expect(button('tradeShopSellOne').disabled).toBe(true);
+    ui._acts.tradeShopSellOne();
+    expect(base.sellStashCards).not.toHaveBeenCalled();
+    expect(base.isCollected).not.toHaveBeenCalled();
+  });
+
   it('普通堆单张直接出售，最后一张必须二次确认', () => {
     sellMode(); click('tradeShopSellOne'); click('tradeShopSellOne');
     expect(base.sellStashCards).toHaveBeenCalledTimes(2); expect(stashCount(cheap.id)).toBe(1);

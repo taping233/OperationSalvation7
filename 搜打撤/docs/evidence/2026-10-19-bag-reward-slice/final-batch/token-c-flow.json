@@ -1,0 +1,36 @@
+{
+  "source": "Codex current in-app browser",
+  "inputKind": "real-input",
+  "fixture": "feedback-1018-review.html; no active player slot",
+  "firstLegendaryChoices": [
+    {
+      "index": "0",
+      "label": "选择骷髅王剑"
+    },
+    {
+      "index": "1",
+      "label": "选择员工通行证C"
+    },
+    {
+      "index": "2",
+      "label": "选择斗神酒"
+    }
+  ],
+  "reopenedLegendaryChoices": [
+    {
+      "index": "0",
+      "label": "选择骷髅王剑"
+    },
+    {
+      "index": "1",
+      "label": "选择员工通行证C"
+    },
+    {
+      "index": "2",
+      "label": "选择斗神酒"
+    }
+  ],
+  "sameChoices": true,
+  "claimedSnapshot": "Browser tab: 4, Title: \"升格会的冬日猜想 v0.60.0\", URL: \"http://localhost:5200/dev/feedback-1018-review.html\".\n1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: localhost:5200/dev/feedback-1018-review.html\n\t2 container bag 背包, ID: overlay\n\t\t3 container\n\t\t\t4 button 关闭背包\n\t\t\t5 checkbox Description: 随身背包，8/16 格, Value: 1\n\t\t\t6 checkbox Description: 安全格，0/2 格, Value: 0\n\t\t\t7 checkbox Description: 消耗区，0 张, Value: 0\n\t\t\t8 container\n\t\t\t\t9 heading 随身背包 背包使用指南, Value: 2\n\t\t\t\t\t10 text 随身背包\n\t\t\t\t\t11 button 背包使用指南\n\t\t\t\t12 container 占格与卡牌张数\n\t\t\t\t\t13 text 占格\n\t\t\t\t\t14 text 8\n\t\t\t\t\t15 text /16 格\n\t\t\t\t\t16 text 卡牌 \n\t\t\t\t\t17 text 9\n\t\t\t\t\t18 text  张 · 散装物资 4 件\n\t\t\t19 checkbox 全部, Value: 1\n\t\t\t20 checkbox 招式, Value: 0\n\t\t\t21 checkbox 装备, Value: 0\n\t\t\t22 checkbox 道具, Value: 0\n\t\t\t23 checkbox 资源, Value: 0\n\t\t\t24 button 切换背包排序\n\t\t\t25 button 按稀有度整理背包\n\t\t\t26 container\n\t\t\t\t27 text 使用【员工通行证C】：获得传说卡【骷髅王剑】\n\t\t\t\t28 container\n\t\t\t\t\t29 container\n\t\t\t\t\t\t30 image 木材\n\t\t\t\t\t\t31 text 资源 · 古朴\n\t\t\t\t\t\t32 text 木材\n\t\t\t\t\t\t33 text 木材 × 1 。\n\t\t\t\t\t34 container\n\t\t\t\t\t\t35 image coin\n\t\t\t\t\t\t36 text 1\n\t\t\t\t\t37 text ×3\n\t\t\t\t38 container\n\t\t\t\t\t39 image 木材\n\t\t\t\t\t40 container\n\t\t\t\t\t\t41 text 资源 · 古朴\n\t\t\t\t\t42 container\n\t\t\t\t\t\t43 text 木材 木材 × 1 。\n\t\t\t\t\t44 image coin\n\t\t\t\t\t45 text 1\n\t\t\t\t46 button 查看员工通行证C，1张\n\t\t\t\t\t47 container\n\t\t\t\t\t\t48 text 0\n\t\t\t\t\t\t49 image 员工通行证C\n\t\t\t\t\t\t50 container\n\t\t\t\t\t\t\t51 text 道具 · 传说\n\t\t\t\t\t\t52 container\n\t\t\t\t\t\t\t53 text 员工通行证C 发现 1  张传说卡。\n\t\t\t\t\t\t54 image coin\n\t\t\t\t\t\t55 text 4\n\t\t\t\t\t56 text 可用\n\t\t\t\t57 button 查看草甲，1张\n\t\t\t\t\t58 container\n\t\t\t\t\t\t59 text 0\n\t\t\t\t\t\t60 image 草甲\n\t\t\t\t\t\t61 container\n\t\t\t\t\t\t\t62 text 装备 · 古朴\n\t\t\t\t\t\t63 container\n\t\t\t\t\t\t\t64 text 草甲 装备 本牌时，你获得  5  点 护甲 。\n\t\t\t\t\t\t65 image coin\n\t\t\t\t\t\t66 text 2\n\t\t\t\t67 button 查看草甲，1张\n\t\t\t\t\t68 container\n\t\t\t\t\t\t69 text 0\n\t\t\t\t\t\t70 image 草甲\n\t\t\t\t\t\t71 container\n\t\t\t\t\t\t\t72 text 装备 · 古朴\n\t\t\t\t\t\t73 container\n\t\t\t\t\t\t\t74 text 草甲 装备 本牌时，你获得  5  点 护甲 。\n\t\t\t\t\t\t75 image coin\n\t\t\t\t\t\t76 text 2\n\t\t\t\t77 button 查看初始攻击，3张\n\t\t\t\t\t78 container\n\t\t\t\t\t\t79 text 1\n\t\t\t\t\t\t80 image 初始攻击\n\t\t\t\t\t\t81 container\n\t\t\t\t\t\t\t82 text 武术 · 初始\n\t\t\t\t\t\t83 container\n\t\t\t\t\t\t\t84 text 初始攻击 造成等同于你的攻击力的 攻击伤害 。\n\t\t\t\t\t\t85 image coin\n\t\t\t\t\t\t86 text 1\n\t\t\t\t\t87 text ×3\n\t\t\t\t88 button 查看初始攻击，2张\n\t\t\t\t\t89 container\n\t\t\t\t\t\t90 text 1\n\t\t\t\t\t\t91 image 初始攻击\n\t\t\t\t\t\t92 container\n\t\t\t\t\t\t\t93 text 武术 · 初始\n\t\t\t\t\t\t94 container\n\t\t\t\t\t\t\t95 text 初始攻击 造成等同于你的攻击力的 攻击伤害 。\n\t\t\t\t\t\t96 image coin\n\t\t\t\t\t\t97 text 1\n\t\t\t\t\t98 text ×2\n\t\t\t\t99 button 查看骷髅王剑，1张\n\t\t\t\t\t100 container\n\t\t\t\t\t\t101 text 0\n\t\t\t\t\t\t102 image 骷髅王剑\n\t\t\t\t\t\t103 container\n\t\t\t\t\t\t\t104 text 装备 · 传说\n\t\t\t\t\t\t105 container\n\t\t\t\t\t\t\t106 text 骷髅王剑 对战开始时 ，你的每张「初始攻击」变为  1  张「不朽斩」。\n\t\t\t\t\t\t107 image coin\n\t\t\t\t\t\t108 text 5\n\nThe focused UI element is 1 AXWebArea 升格会的冬日猜想 v0.60.0, URL: localhost:5200/dev/feedback-1018-review.html",
+  "captureStatus": "captured"
+}

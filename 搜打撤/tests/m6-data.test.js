@@ -14,7 +14,7 @@ import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capabili
 import { ensureM6BagRules } from '../game/src/cards/cards.sync.m6.js';
 import { dataSlice } from '../game/src/cards/cards.data.js';
 
-const MARKER = 'sdt-cards-m6-bag-rules-v1-seeded';
+const MARKER = 'sdt-cards-m6-bag-rules-v2-seeded';
 
 // canonical 夹具（2026-09-29 镜像收编）：原「逐字照抄 TABLETOP10/11 定版行」改为按本批 id
 // 取 dataSlice 真源行（tt3sp-doom / tt-token-gold 在 TABLETOP10 是 cards-sync 字符串引用，
@@ -34,7 +34,7 @@ const EXPECTED_RULES = {
   'tt3-iceheart-potion': { version: 1, bag: { use: [{ op: 'curse', curse: 'freeze', duration: 1 }] } },
   'tt3-mind-potion': { version: 1, bag: { use: [{ op: 'draw', amountField: 'draw' }] } },
   'tt3-mixed-potion': { version: 1, bag: { use: [{ op: 'damage', amount: 2 }, { op: 'curse', curse: 'bleed' }] } },
-  'tt3-python-potion': { version: 1, bag: { use: [{ op: 'damage', amount: 2, target: 'allEnemies' }] } },
+  'tt3-python-potion': { version: 1, bag: { use: [{ op: 'damage', amount: 2, dmgType: 'spell', target: 'allEnemies' }] } },
   'tt3-turnabout-potion': { version: 1, bag: { use: [{ op: 'curse', curse: 'poison', stacks: 1, target: 'allEnemies' }] } },
   'tt3sp-doom': { version: 1, bag: { use: [{ op: 'execute', cap: { atk: 5 }, count: 2 }] } },
   'cmtmvq6ss84l': { version: 1, bag: { use: [{ op: 'acquire', pool: { kind: 'classAbility' } }] } },
@@ -90,6 +90,30 @@ function makeHarness(cards) {
 }
 
 describe('M6 数据迁移批 D8：每张迁的卡', () => {
+  it('已完成v1的定版火焰药水升级为法术伤害，重入不重复写库', () => {
+    const cards = freshCards().map(card => ({ ...card, rules: EXPECTED_RULES[card.id] }));
+    const flame = cards.find(card => card.id === 'tt3-python-potion');
+    flame.rules = { version:1, bag:{ use:[{op:'damage',amount:2,target:'allEnemies'}] } };
+    const harness = makeHarness(cards);
+    harness.storage.setItem('sdt-cards-m6-bag-rules-v1-seeded', '1');
+    ensureM6BagRules(harness);
+    expect(harness.cards().find(card => card.id === flame.id).rules).toEqual(EXPECTED_RULES[flame.id]);
+    expect(harness.storage.getItem(MARKER)).toBe('1');
+    const saves = harness.library.saves;
+    ensureM6BagRules(harness);
+    expect(harness.library.saves).toBe(saves);
+  });
+
+  it('火焰药水旧rules存在但卡面已自定义时不覆盖自定义版本', () => {
+    const cards = freshCards();
+    const flame = cards.find(card => card.id === 'tt3-python-potion');
+    flame.desc = '作者自定义的火焰效果';
+    flame.rules = { version:1, bag:{ use:[{op:'damage',amount:2,target:'allEnemies'}] } };
+    const harness = makeHarness(cards);
+    ensureM6BagRules(harness);
+    expect(harness.cards().find(card => card.id === flame.id)).toEqual(flame);
+  });
+
   for (const id of ALL_IDS) {
     describe(id, () => {
       it.skipIf(!probe[id].ok)(`双门通过：schema 校验 ok 且 capability supported【${probe[id].reason}】`, () => {

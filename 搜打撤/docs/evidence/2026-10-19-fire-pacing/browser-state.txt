@@ -1,0 +1,114 @@
+Browser tab: 4, Title: "地图节点规则核验", URL: "http://localhost:5200/dev/map-node-rules-review.html".
+1 AXWebArea 地图节点规则核验, URL: localhost:5200/dev/map-node-rules-review.html
+	2 heading 地图节点规则核验, Value: 1
+		3 text 地图节点规则核验
+	4 text 构造种子：audit-map-20261017-3（旧5/9第三层火堆须先经过3场普通战）。直接加载当前地图生成、路线和快照模块；不读取或写入玩家存档。
+	5 container result
+		6 text 6/9新局生成、路线覆盖与快照校验通过
+		7 text 火堆从各层入口至多经过2场普通战可达；首层至少先打1场，不计事件额外战斗。
+		8 table
+			9 row
+				10 cell
+					11 text 层数
+				12 cell
+					13 text 总节点
+				14 cell
+					15 text 战斗
+				16 cell
+					17 text 宝箱
+				18 cell
+					19 text 事件
+				20 cell
+					21 text 物资格
+				22 cell
+					23 text 火堆
+				24 cell
+					25 text 商店
+				26 cell
+					27 text 火堆前最少普通战
+			28 row
+				29 cell
+					30 text 第1层
+				31 cell
+					32 text 7
+				33 cell
+					34 text 2
+				35 cell
+					36 text 1
+				37 cell
+					38 text 1
+				39 cell
+					40 text 0
+				41 cell
+					42 text 1
+				43 cell
+					44 text 0
+				45 cell
+					46 text 1
+			47 row
+				48 cell
+					49 text 第2层
+				50 cell
+					51 text 11
+				52 cell
+					53 text 3
+				54 cell
+					55 text 2
+				56 cell
+					57 text 2
+				58 cell
+					59 text 1
+				60 cell
+					61 text 0
+				62 cell
+					63 text 1
+				64 cell
+					65 text —
+			66 row
+				67 cell
+					68 text 第3层
+				69 cell
+					70 text 16
+				71 cell
+					72 text 4
+				73 cell
+					74 text 4
+				75 cell
+					76 text 3
+				77 cell
+					78 text 1
+				79 cell
+					80 text 1
+				81 cell
+					82 text 0
+				83 cell
+					84 text 2
+			85 row
+				86 cell
+					87 text 第4层
+				88 cell
+					89 text 16
+				90 cell
+					91 text 4
+				92 cell
+					93 text 4
+				94 cell
+					95 text 2
+				96 cell
+					97 text 1
+				98 cell
+					99 text 0
+				100 cell
+					101 text 1
+				102 cell
+					103 text —
+		104 heading 首层节点名称, Value: 2
+			105 text 首层节点名称
+		106 text 入口 遭遇战 火堆 遭遇战 宝箱 未知事件 层间闸门
+		107 heading 宝箱节点, Value: 2
+			108 text 宝箱节点
+		109 text 宝箱：开启宝箱 · 获取随机卡牌
+		110 text 70%小型物资箱（随机1张），30%密封物资箱（3选1）。使用通用掉落池，不限资源卡。
+		111 text 已有3/9、4/9、5/9对局沿原快照恢复，火堆不迁移，节点不删减、不重排。
+
+The focused UI element is 1 AXWebArea 地图节点规则核验, URL: localhost:5200/dev/map-node-rules-review.html

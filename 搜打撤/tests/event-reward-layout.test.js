@@ -13,21 +13,25 @@ const values = suffix => {
 };
 it('固定事件共享居中舞台与明确操作，空操作栏不占侧列，滚动仅在卡区', () => {
   expect(values(' .reward-main')).toMatchObject({ display:'flex', 'flex-direction':'column' });
-  expect(values(' .reward-objects:has(> .reward-unit:only-child)')).toMatchObject({ 'justify-content':'center', 'grid-template-columns':'minmax(0,300px)' });
+  expect(values(' .reward-objects:has(> .reward-unit:only-child)')).toMatchObject({ 'justify-content':'center', 'grid-template-columns':'280px' });
   expect(values(' .loot-actions:empty').display).toBe('none');
   expect(values(' .reward-stage')).toMatchObject({ 'container-type':'size', overflow:'auto', flex:'1 1 0' });
   expect(values(' .reward-foot')).toMatchObject({ flex:'none', 'flex-wrap':'wrap' });
-  expect(values(' :is(.reward-exit,.reward-secondary,.reward-bag)')).toMatchObject({ 'min-height':'44px', 'border-radius':'12px' });
+  expect(values(' :is(.reward-exit,.reward-secondary,.reward-bag)')).toMatchObject({ 'min-height':'44px', 'border-radius':'6px' });
   expect(values(' .reward-claim')['min-height']).toBe('46px');
   expect(values(' .reward-head').display).toBe('block');
-  expect(values(' .reward-head .reward-source').display).toBeUndefined();
-  expect(values('')['--cqo-accent']).toBe('#e4d2ae');
+  expect(values(' .reward-head .reward-source').display).toBe('block');
+  expect(values('')['--cqo-accent']).toBe('#91c2c6');
 });
 it('共享规则只显式接入独立领取，不改变其他奖励入口或战斗箱既有声明', () => {
+  const sceneLayers = new Set([
+    'body #overlay .card .cqo-frame.reward-replica',
+    'body #overlay .card .cqo-frame.reward-replica::before',
+  ]);
   let shared = 0;
   css.walkRules(rule => {
     if (!rule.selectors.some(selector => selector.startsWith(prefix))) return;
-    expect(rule.selectors.every(selector => selector.startsWith(prefix) || selector.startsWith('body #overlay .card .cqo-frame .cqp-dialog '))).toBe(true);
+    expect(rule.selectors.every(selector => selector.startsWith(prefix) || selector.startsWith('body #overlay .card .cqo-frame .cqp-dialog ') || sceneLayers.has(selector))).toBe(true);
     if (rule.selectors.length === 2) shared++;
   });
   expect(shared).toBeGreaterThan(20);

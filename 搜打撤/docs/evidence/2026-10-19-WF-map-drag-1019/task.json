@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-map-drag-1019",
+  "date": "2026-10-19",
+  "owner": "Friday",
+  "goal": "用既有Motion惯性发生器改善地图拖拽：跟手、松手衰减、边界阻尼与回弹，保点击和取消语义",
+  "paths": [
+    "game/src/core/camera.js",
+    "game/src/core/map-drag-motion.js",
+    "game/src/game.boot.js",
+    "tests/map-drag-motion.test.js",
+    "tests/global-boot-pointer-lifecycle.test.js",
+    "docs/map-travel.md",
+    "docs/evidence/2026-10-19-map-drag"
+  ],
+  "doneWhen": [
+    "拖拽直接跟手，释放惯性有界并自然停止，新输入/取消/程序取景可中止",
+    "点击命中、拖动不误点、失焦与捕获生命周期相关回归通过",
+    "当前窗口内置浏览器目标地图操作复核或明确实际阻碍"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "既有Motion惯性接入；4文件30项通过，相关ESLint通过。当前内置浏览器隔离场景真实拖动和定位，地图移动且未误入节点。",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "自动输入只证明位置变化；主观手感待老板试玩，未声称人的释放速度已验。",
+    "未build、提交、推送，未改路线或节点规则。"
+  ],
+  "updatedAt": "2026-10-19T12:41:24.101Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

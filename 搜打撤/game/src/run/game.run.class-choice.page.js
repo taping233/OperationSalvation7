@@ -200,7 +200,7 @@ export function openClassChoice(options = {}) {
     if (!cards.length) return '<div class="pool-grid pool-grid-empty" id="poolGrid"><p>当前档案暂无卡牌</p></div>';
     return `<div class="pool-grid" id="poolGrid">${cards.map(({ card: c, index }, i) => {
       const ro = SDT.Cards.rarityOf(c);   // 衍生牌全量扫卡库，单卡只调一次
-      return `<div class="pool-cell"><span class="pool-rarity-tag${ro === '棱彩' ? ' prism' : ''}">${esc(ro)}</span><button class="lib-cardwrap pool-card-button${i === 0 ? ' selected' : ''}" data-act="poolZoom" data-i="${index}" title="点击放大查看" aria-label="查看 ${escAttr(c.name)} 详情">${SDT.Cards.cardHTML(c)}</button></div>`;
+      return `<div class="pool-cell"><span class="pool-rarity-tag${ro === '棱彩' ? ' prism' : ''}">${esc(ro)}</span><button class="lib-cardwrap pool-card-button${i === 0 ? ' selected' : ''}" data-act="poolZoom" data-i="${index}" aria-label="查看 ${escAttr(c.name)} 详情">${SDT.Cards.cardHTML(c)}</button></div>`;
     }).join('')}</div>`;
   };
   // 预解码下一页插画（翻页零解码等待，同卡牌库 warmNextLibPage）

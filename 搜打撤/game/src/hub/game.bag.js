@@ -14,7 +14,7 @@ import { setBagReturnHook as _setBagReturnHook, takeBagReturnHook } from './bag-
 import { _set_cardPageOpen } from './game.cardslib.js';
 import { bagSlots } from './game.bag.bridge.js';
 import { bagDrag, resetBagDrag } from './game.bag.drag.js';
-import { bagUseStatus, restorationCapacityReason, useStructuredBagRule, canReplaceBagCard } from './game.bag.rules.js';
+import { bagUseStatus, restorationCapacityReason, useStructuredBagRule, canReplaceBagCard, openBagLegendaryDiscovery } from './game.bag.rules.js';
 import { pageHTML as bagV2PageHTML, rarityOf as bagV2Rarity } from './game.bag.view2.js';
 import { captureBattleContext } from '../battle/battle-loader.js';
 import { createRewardOrganizer } from './game.reward-organizer.js';
@@ -76,7 +76,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     if (card.type === '事件') { UI.log('[[icon:dice]] 事件卡只能在事件格中触发，无法在背包中使用（背包只记录触发历史）', 'warn'); return; }
     if (card.type !== '道具') { UI.log('只有道具卡可以直接使用', 'warn'); return; }
     if (card.id === 'tt3-mystery-potion') { UI.log('神秘药水仅能在战斗中使用；卡牌未消耗', 'warn'); return; }
-    if (useStructuredBagRule(card, i, { UI, SDT, game, Random, newUid, saveGame, showBackpack, usedSlots, bagCap, setReceipt: text => { bagReceipt = { text, cards: game.ownedCards }; } })) return;
+    if (useStructuredBagRule(card, i, { UI, SDT, game, Random, newUid, saveGame, showBackpack, usedSlots, bagCap, captureContext:() => captureBattleContext(game), setReceipt: text => { bagReceipt = { text, cards: game.ownedCards }; } })) return;
     const desc = card.desc || '';
     // 能源结晶：就地复原消耗区中最多 3 张卡牌（2026-09-13 需求：背包满时不能复原出超容量的卡）
     if (card.id === 'tt-crystal' || /复活最多\s*3\s*张卡牌/.test(desc)) {
@@ -164,18 +164,11 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       showBackpack(true);
       return;
     }
-    // 员工通行证C（发现 1 张传说卡 → 背包中使用直接获得，2026-09-09 留言 #11：
-    // 此前没有使用入口，会落进「效果将在 M1 战斗中实装」的兜底提示）
+    // 未带结构化规则的旧卡快照也走同一发现选择入口。
     if (card.id === 'tt4-shine-token' || /发现\s*1\s*张传说卡/.test(desc)) {
-      const pool = SDT.Cards.all().filter(c => c.rarity === '传说' && SDT.Cards.isRandomObtainable(c));
-      if (!pool.length) { UI.log('卡牌库中没有可获得的传说卡', 'warn'); return; }
-      game.ownedCards.splice(i, 1);
-      const got = pool[Math.floor(Random.random('loot') * pool.length)];
-      game.ownedCards.push({ uid: newUid(), card: { ...got } });
-      UI.log(`[[icon:sparkles]] 使用【<b>${esc(card.name)}</b>】：发现传说卡【<b>${esc(got.name)}</b>】`, 'loot');
-      UI.showLegendGet(got);
-      saveGame();
-      showBackpack(true);
+      openBagLegendaryDiscovery(card, i, { UI, SDT, game, Random, newUid, saveGame, showBackpack,
+        usedSlots, bagCap, captureContext:() => captureBattleContext(game),
+        setReceipt:text => { bagReceipt = { text, cards:game.ownedCards }; } });
       return;
     }
     // 2026-09-06 #15：神秘药水（随机神秘效果）→ 背包中随机三选一

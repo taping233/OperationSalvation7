@@ -31,9 +31,9 @@ function renderPreset(preset, model) {
     <div class="prep-fields"><label>人物<select data-field="characterId">${optionList(model.characterOptions, preset.characterId, '未选择人物')}</select></label><label>宠物<select data-field="petId">${optionList(model.petOptions, preset.petId, '未选择宠物')}</select></label></div>
     <div class="prep-picks">${preset.picks.length ? preset.picks.map(pick => { const hit = preview?.resolvedPicks?.find(item => item.card.cardId === pick.card.cardId && (item.card.variantKey || '') === (pick.card.variantKey || '')); return `<div class="prep-pick ${esc(hit?.status || '')}"><span><b>${esc(hit?.name || pick.name || pick.card.cardId)}</b> ×${pick.count}</span><small>${hit ? esc(statusText(hit)) : '尚未预览'}</small><button data-action="preset-pick-remove" data-card-id="${esc(pick.card.cardId)}" aria-label="移除 ${esc(hit?.name || pick.card.cardId)}">移除</button></div>`; }).join('') : '<p class="prep-empty">还没有选择带入卡牌。</p>'}</div>
     <div class="prep-add"><select data-role="card-add">${optionList(model.cardOptions, null, '选择仓库卡牌')}</select><input data-role="count-add" type="number" min="1" max="99" value="1" aria-label="数量"><button data-action="preset-pick-add">加入愿望清单</button></div>
-    ${preview ? `<div class="prep-summary ${preview.canStart ? 'ready' : 'blocked'}"><b>${preview.canStart ? '可以应用' : '需要处理'}</b><span>带入 ${preview.costs.stashCards} 张 · 占 ${preview.costs.slotsUsed} 格${preview.costs.extraStackSlots ? `（同名超限多占 ${preview.costs.extraStackSlots} 格）` : ''} · ${preview.missing.length} 缺失 · ${preview.forbidden.length} 禁带</span>${qualificationHints(preview.qualification)}</div>` : ''}
+    ${preview ? `<div class="prep-summary ${preview.canStart ? 'ready' : 'blocked'}"><b>${preview.canStart ? '可以应用' : '需要处理'}</b><span>带入 ${preview.costs.stashCards} 张 · 占 ${preview.costs.slotsUsed}${Number.isFinite(preview.costs.bagCapacity) ? `/${preview.costs.bagCapacity}` : ''} 格${preview.costs.extraStackSlots ? `（同名超限多占 ${preview.costs.extraStackSlots} 格）` : ''} · ${preview.missing.length} 缺失 · ${preview.forbidden.length} 禁带</span>${qualificationHints(preview.qualification)}${preview.errors?.includes('BAG_CAPACITY_EXCEEDED') ? '<small class="prep-qual-hint">背包容量不足，请减少携带卡牌或扩建背包。</small>' : ''}</div>` : ''}
     <div class="prep-actions"><button data-action="preset-preview">重新预览</button><button data-action="preset-apply"${preview?.canStart ? '' : ' disabled'}>应用到整备</button></div>
-    <p class="prep-empty">应用带入卡牌后，在整备页确认宠物并出发；人物仍在出发后选择。</p>
+    <p class="prep-empty">应用预设会带入已选人物、宠物和卡牌；先确认人物，再在整备页确认宠物并出发。</p>
   </section>`;
 }
 
@@ -47,7 +47,7 @@ function render(model) {
   </section>`;
 }
 
-export function buildPreparationViewModel({ baseSnapshot, preparation, cardCatalog = [], characters = [], pets = [], catalogVersion = 'unknown', mode = 'standard', bagCapacity = Infinity, busy = false, error = '' } = {}) {
+export function buildPreparationViewModel({ baseSnapshot, preparation, cardCatalog = [], characters = [], pets = [], catalogVersion = 'unknown', mode = 'standard', bagCapacity = Infinity, starterCount = 5, starterCard, busy = false, error = '' } = {}) {
   const prep = preparation || { tracked: [], presets: [] };
   const byId = new Map(cardCatalog.map(card => [card.id, card]));
   const goals = (prep.tracked || []).map(id => {
@@ -58,7 +58,7 @@ export function buildPreparationViewModel({ baseSnapshot, preparation, cardCatal
   const characterOptions = characters.map(item => ({ id: item.id, name: item.name || item.id, owned: !!baseSnapshot?.characters?.[item.id] }));
   const petOptions = pets.map(item => ({ id: item.id, name: item.name || item.id, owned: !!baseSnapshot?.pets?.[item.id] }));
   const cardOptions = cardCatalog.filter(card => stashIds.has(card.id)).map(card => ({ id: card.id, name: card.name || card.id }));
-  const presets = (prep.presets || []).map(preset => ({ ...preset, picks: preset.picks || [], preview: previewDeployment({ baseSnapshot, preset, mode, cardCatalog, characters, pets, bagCapacity }) }));
+  const presets = (prep.presets || []).map(preset => ({ ...preset, picks: preset.picks || [], preview: previewDeployment({ baseSnapshot, preset, mode, cardCatalog, characters, pets, bagCapacity, starterCount, starterCard }) }));
   return Object.freeze({ goals, targetOptions: cardCatalog.map(card => ({ id: card.id, name: card.name || card.id })), presets, characterOptions, petOptions, cardOptions, busy, error });
 }
 

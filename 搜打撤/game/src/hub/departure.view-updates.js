@@ -186,7 +186,7 @@ export function updateDepartureView(root, { stash, picks, bagHtml, cells, render
     if (card.classList.contains('drained') !== (remaining <= 0)) card.classList.toggle('drained', remaining <= 0);
     setAttribute(card, 'aria-pressed', selected > 0 ? 'true' : 'false');
     setAttribute(card, 'aria-label', `带入${name}，还可带 ${remaining} 张`);
-    setAttribute(card, 'title', `${name} · 点击或拖到右侧背包带入（还可带 ${remaining}）`);
+    setAttribute(card, 'title', `${name} · 还可带 ${remaining}`);
     setText(owned, String(remaining), true);
     if (pickedCount) {
       setText(pickedCount, String(selected), true);

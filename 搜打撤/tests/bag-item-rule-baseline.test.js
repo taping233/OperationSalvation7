@@ -255,11 +255,18 @@ describe('复原道具满包零收益保护', () => {
   });
 });
 
-it('真实卡库通行证C的背包按钮可用，消费后只获得一张传说卡', async () => {
+it('真实卡库通行证C进入三选一，选中后才消费并获得所选传说卡', async () => {
   const token=window.SDT.Cards.all().find(c=>c.id==='tt4-shine-token');
   setScenario({ownedCards:[{uid:'token-c',card:{...token}}]});
   await useItem('tt4-shine-token','token-c');
+  expect(game.ownedCards[0].uid).toBe('token-c');
+  const options = [...document.querySelectorAll('[data-act="bagDiscoverPick"]')];
+  expect(options).toHaveLength(3);
+  const chosenId = game.ownedCards[0].bagDiscover.cardIds[1];
+  options[1].click();
+  await vi.advanceTimersByTimeAsync(280);
   expect(game.ownedCards).toHaveLength(1);
   expect(game.ownedCards[0].uid).not.toBe('token-c');
   expect(game.ownedCards[0].card.rarity).toBe('传说');
+  expect(game.ownedCards[0].card.id).toBe(chosenId);
 });

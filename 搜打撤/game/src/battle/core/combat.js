@@ -26,7 +26,7 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'at
     stealth:    { name: '潜行', icon: '[[icon:runner]]', timed: true, desc: '无法成为被攻击对象；造成伤害会破除潜行' },
     immune:     { name: '免疫伤害', icon: '[[icon:sparkles]]', timed: true, desc: '不受到任何伤害' },
     reduce:     { name: '减伤', icon: '[[icon:plate]]', value: true, desc: '每次受到的伤害 -N（真实伤害除外）' },
-    dodge:      { name: '闪避', icon: '[[icon:runner]]', value: true, desc: '免疫下一次攻击（每层避开 1 次，完整躲掉该段伤害）' },
+    dodge:      { name: '闪避', icon: '[[icon:runner]]', value: true, desc: '避开下一段伤害（每层避开 1 段）' },
     swordForm:  { name: '剑仙形态', icon: '[[icon:sword]]', flag: true, desc: '回合开始时额外抽 1 张' },
     natureForm: { name: '满月形态', icon: '[[icon:wood]]', flag: true, desc: '回合开始时额外获得 1 点能量' }, // 2026-10-02 老板：形态更名「满月形态」（内部键 natureForm 保留）
     cosmosForm: { name: '宇宙形态', icon: '[[icon:sparkles]]', flag: true, desc: '本局对战所有卡牌变为 1 费' },
@@ -78,12 +78,11 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'at
       r.log.push('潜行：无法成为被攻击对象');
       return r;
     }
-    // 闪避（祝福，09-20 老板定版）：免疫下一次攻击——完整避开这次攻击并消耗 1 层。
-    // 仅对攻击类型生效（法术/固定/真实不可闪避）；非攻击伤害不消耗层数。
-    if ((target.status.dodge || 0) > 0 && type === TYPES.ATTACK) {
+    // 闪避按卡面避开下一段合法伤害；所有伤害类型统一消耗 1 层。
+    if ((target.status.dodge || 0) > 0) {
       target.status.dodge -= 1;
       r.dodged = true;
-      r.log.push('闪避：避开这次攻击');
+      r.log.push('闪避：避开这段伤害');
       return r;
     }
 
@@ -431,7 +430,7 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'at
     eq('  减伤后 HP 扣 7', B.hp, 23);
     eq('  真实伤害无视减伤', dealDamage({ atk: 0 }, B, 5, TYPES.TRUE).dealt, 5);
 
-    // 20b 闪避（09-20 老板定版）：免疫下一次攻击——完整避开并消耗 1 层，不是减伤
+    // 20b 闪避：每层完整避开下一段伤害，包含法术、固定与真实伤害。
     B = { hp: 30 };
     addBlessing(B, 'dodge', 1, 1);
     eq('闪避 1：攻击 12 完整避开', dealDamage({ atk: 12 }, B, 1, TYPES.ATTACK).dealt, 0);
@@ -442,10 +441,12 @@ const CURSES = ['bleed', 'poison', 'freeze', 'silence', 'abreak', 'healban', 'at
     addBlessing(B, 'dodge', 2, 1);
     dealDamage({ atk: 9 }, B, 1, TYPES.ATTACK);
     eq('  2 层闪避挡 1 次剩 1 层', B.status.dodge, 1);
-    eq('  闪避不挡法术（层数保留）', dealDamage({ spellPower: 4 }, B, 3, TYPES.SPELL).dealt, 7);
-    eq('    法术后仍剩 1 层', B.status.dodge, 1);
-    eq('  闪避不挡固定伤害', dealDamage({ atk: 0 }, B, 5, TYPES.FIXED).dealt, 5);
-    eq('    固定伤害后仍剩 1 层', B.status.dodge, 1);
+    eq('  闪避挡法术', dealDamage({ spellPower: 4 }, B, 3, TYPES.SPELL).dealt, 0);
+    eq('    法术后层数用尽', B.status.dodge, 0);
+    addBlessing(B, 'dodge', 2, 1);
+    eq('  闪避挡固定伤害', dealDamage({ atk: 0 }, B, 5, TYPES.FIXED).dealt, 0);
+    eq('  闪避挡真实伤害', dealDamage({}, B, 5, TYPES.TRUE).dealt, 0);
+    addBlessing(B, 'dodge', 1, 1);
     tickDurations(B);
     eq('  「本回合」1 回合后过期', B.status.dodge, 0);
 

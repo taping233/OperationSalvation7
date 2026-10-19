@@ -1,0 +1,27 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>出征预设内存隔离验收</title></head><body>
+<p>正在加载出征预设隔离夹具…</p>
+<script type="module">
+// 在现行启动脚本之前隔离所有页面存储；不读取或转发原 Storage。
+function memoryStorage() {
+  const entries = new Map();
+  return Object.create(null, {
+    length: { get: () => entries.size },
+    key: { value: index => [...entries.keys()][index] ?? null },
+    getItem: { value: key => entries.get(String(key)) ?? null },
+    setItem: { value: (key, value) => { entries.set(String(key), String(value)); } },
+    removeItem: { value: key => { entries.delete(String(key)); } },
+    clear: { value: () => entries.clear() },
+  });
+}
+Object.defineProperty(window, 'localStorage', { configurable: true, value: memoryStorage() });
+Object.defineProperty(window, 'sessionStorage', { configurable: true, value: memoryStorage() });
+const markup = new DOMParser().parseFromString(await (await fetch('/index.html')).text(), 'text/html');
+const base = document.createElement('base');
+base.href = '/';
+document.head.prepend(base);
+for (const style of markup.querySelectorAll('link[rel="stylesheet"], style')) document.head.append(style.cloneNode(true));
+for (const script of markup.querySelectorAll('script')) script.remove();
+document.body.innerHTML = markup.body.innerHTML;
+// 先安装现行 DOM，再仅导入一次 main；模块自身交付实际 boot 就绪后才构造夹具。
+await import('/dev/preparation-preset-review.js');
+</script></body></html>

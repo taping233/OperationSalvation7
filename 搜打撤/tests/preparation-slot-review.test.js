@@ -16,4 +16,12 @@ describe('整备预设slot与完整CardRef', () => {
   it('换slot后旧intent不能提交到新slot', async () => { const h = harness(); h.setSlot(2); const pending = h.intent({ type: 'goal-add', payload: { targetId: 'a' } }); h.resolve({ ok: true }); await pending; expect(h.commit).not.toHaveBeenCalled(); });
   it('旧slot命令成功后不读新slot或更新旧页面', async () => { const h = harness(); const pending = h.intent({ type: 'goal-add', payload: { targetId: 'a' } }); await Promise.resolve(); const reads = h.read.mock.calls.length, updates = h.update.mock.calls.length; h.setSlot(2); h.resolve({ ok: true }); await pending; expect(h.read.mock.calls.length).toBe(reads); expect(h.update.mock.calls.length).toBe(updates); });
   it('预设应用保存cardId+堆级variant身份', async () => { const h = harness(); await h.intent({ type: 'preset-apply', payload: { presetId: 'preset-1' } }); expect(h.navigation.applyPicks).toHaveBeenCalledWith({ 'card:b:foil': 1 }); expect(h.navigation.openDeparture).toHaveBeenCalledOnce(); });
+  it('换slot后旧预设应用不读取新档或覆盖新档选择', async () => {
+    const h = harness(), reads = h.read.mock.calls.length;
+    h.setSlot(2);
+    await h.intent({ type: 'preset-apply', payload: { presetId: 'preset-1' } });
+    expect(h.read.mock.calls.length).toBe(reads);
+    expect(h.navigation.applyPicks).not.toHaveBeenCalled();
+    expect(h.navigation.openDeparture).not.toHaveBeenCalled();
+  });
 });

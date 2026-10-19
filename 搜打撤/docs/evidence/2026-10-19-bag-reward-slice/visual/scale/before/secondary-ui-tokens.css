@@ -1,0 +1,11 @@
+/* Shared secondary UI vocabulary, scoped to explicit consumers. Design-canvas pixels. */
+:where(.shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind="discover"])) {
+  --ui-ink:#eef1ed; --ui-muted:#b9c9d2; --ui-blue:#b6cbd7; --ui-gold:#c6b487;
+  --ui-panel:#15212cef; --ui-line:#a8bbc238; --ui-risk:#e4bea8;
+  --ui-space-1:4px; --ui-space-2:8px; --ui-space-3:12px; --ui-space-4:16px; --ui-space-6:24px; --ui-space-8:32px;
+  --ui-text-label:18px; --ui-text-body:22px; --ui-text-object:26px; --ui-text-title:36px; --ui-text-dialog-title:30px;
+  --ui-radius:3px; --ui-control-height:60px; --ui-control-compact:44px;
+  --ui-on-primary:#17232b; --ui-hover:#243745; --ui-disabled:#313b42;
+  --ui-glass-surface:rgba(21,33,44,.5); --ui-glass-line:rgba(182,203,215,.3); --ui-glass-blur:12px;
+  --ui-leading-body:1.6; --ui-focus-width:2px; --ui-focus-offset:4px;
+}

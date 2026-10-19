@@ -43,7 +43,7 @@ describe('E6 battle-entry rule capability', () => {
   });
 
   it('preserves every currently implemented acquire destination/action combination and default', () => {
-    const supported = { hand: [undefined, 'dup', 'noInfuse'], deck: [undefined, 'dup', 'zeroCost', 'noInfuse'],
+    const supported = { hand: [undefined, 'dup', 'noInfuse'], deck: [undefined, 'dup', 'zeroCost', 'costMinusOne', 'noInfuse'],
       discover: [undefined, 'play', 'playKeep', 'dup', 'zeroCost', 'decay', 'noInfuse'] };
     for (const [dest, acts] of Object.entries(supported)) for (const act of acts) {
       expect(inspectCardRuleCapability(cardFor([acquire({ dest, act })])), `${dest}/${act}`)

@@ -23,17 +23,18 @@
 | 31 | 收据表修剪的重放契约策略如何定版（原审计B-3） | 10-02 | docs/evidence/2026-10-02-code-audit/REPORT.md；archive/WF-ledger-cleanup-1014/originals/docs/PENDING.md | A档清理和B-1已完成，不再待批；B-2走格落盘优化转roadmap。B-3仍需定义重放保留边界，未实施 |
 | 32 | 是否安排Git历史瘦身及强推窗口 | 10-02 | docs/evidence/2026-10-02-flow-efficiency/README.md；docs/evidence/2026-10-14-WF-local-cleanup-1014/README.md | 10-14已清理工作区固定历史媒体，未重写Git历史；原体积为历史测量。重写会改变提交SHA并影响协作，仍待选择保守保留或另开迁移窗口 |
 
-## 员工通行证C的地图使用语义（2026-10-19复核）
-
-现行 rules.md:120 与地图消费器为随机直授，原卡面/M-BATCH-MATRIX:186为发现；9/27 M6-D8-RESULT:64引用9/9“背包中使用直接获得”且保留迁移待拍板记录。战斗消费器当前明确打开发现。缺少后续直接定版证据，暂维持现状，不将整卡统一改随机、不迁移玩法；须明确地图应随机还是交互发现，再同步按场景文案并保护自定义描述。
-
 ## 已决记录（不计入活账）
 
 历史决定、旧编号重复和原验收状态保留在[整理前原文](archive/WF-ledger-cleanup-1014/originals/docs/PENDING.md)；本轮逐项处置见[清理记录](evidence/2026-10-14-WF-ledger-cleanup-1014/README.md)。
 
 | # | 事项 | 提出 | 来源 | 备注 |
 |---|---|---|---|---|
-| 46 | 无战斗骨骼样板v4造型已确认 | 10-19 | WF-wu-battle-rig-1019；docs/evidence/2026-10-19-wu-battle-rig/README.md | 老板明确“很好了”；按v4固定待机姿势、身份衣装和武器，继续已授权的生产拆件、绑定与待机/攻击制作。Spine安装与许可由Friday自行检查，不再向老板索取路径。 |
+| 通行证C | 地图使用按卡面发现传说卡 | 10-19 | 老板当前聊天明确“按卡面：从候选中发现并选择一张传说卡”；本批cards证据 | 地图结构化与旧卡入口统一三选一，确认前不消费，候选随源条目保留；B维持随机直授。现行行为见rules.md与save-format.md，自定义描述不覆盖 |
+| 卡牌低血代价 | 隧道血契损失5血、塌方采掘点损失3血均足额扣除，允许因此死亡 | 10-19 | 老板当前聊天明确“按卡面足额扣血，允许因此死亡”；WF-card-description-fixes-1019 | 实施接现有非战斗死亡结算，致死后不继续开箱或将状态重置为idle；不再强制保留1血 |
+| 49 | 10个旧临时解包/缓存目录已清理 | 10-19 | WF-temp-cleanup-1019；docs/evidence/2026-10-19-temp-cleanup/deletion-receipt.json | 老板批准精确清单，20230文件SHA复核后删除5.25GB，10目录均不存在；6份便携EXE哈希不变、最新解包版及源稿/工具/当前任务保留。5200服务未动，未改游戏/主项目依赖/index，未build/提交/推送 |
+| 48 | 无用资源与旧代码203文件清理完成 | 10-19 | WF-unused-cleanup-1019；docs/evidence/2026-10-19-unused-cleanup/README.md | 老板批准执行，203项SHA复核一致后已删除，27.61MiB；资源清单、索引、退役/定稿契约与说明已同步，定向测试通过。保留活跃改动与95项范围外资产登记错误；未build/提交/推送 |
+| 47 | 无失败动画两目录清理完成 | 10-19 | WF-wu-animation-revert-1019；docs/evidence/2026-10-19-wu-animation-revert/deletion-completed.json | 原自动审批阻断已随执行权限环境变更解除；沿原批准范围复核220文件SHA后删除rig-v1与wu-battle-rig-20261019两目录并确认不存在，运行维持上一版 |
+| 46 | 无战斗骨骼样板已取消，恢复上一版 | 10-19 | WF-wu-battle-rig-1019；docs/evidence/2026-10-19-wu-animation-revert/README.md | v4造型曾获确认，后续动作被老板否决；老板已授权回退并删除本版、原会话归档。运行恢复、原制作停止，目录清理亦已完成见47，不继续绑定或重新接入 |
 | 27 | 提交机制旧提案 | 10-14核对 | archive/WF-ledger-cleanup-1014/originals/docs/PENDING.md | 已销账；R1/R2/R4/R6已实施，R3已有定性；R5归#28，不重复挂账 |
 | 30 | 状态写入通道选择 | 10-14核对 | docs/evidence/2026-10-02-DEBT-1/characterization.md | 已决；维持已采纳方案A，未启动方案B |
 | 45 | 删除两份旧 v6 基地样机 | 10-15 | WF-code-clean-1015；老板在当前聊天批准精确两路径 | 已删除 `game/src/ui/base-design-preview-v6.js` 与 `game/src/hub/hub.navigation-v6.js`；逐件哈希与删除后核对见 `docs/evidence/2026-10-15-WF-code-clean-1015/deletion-receipt.json`；两文件原为未跟踪稿，未改已冻结 index |

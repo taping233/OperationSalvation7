@@ -1,0 +1,911 @@
+{
+  "source": "Codex current in-app browser",
+  "inputKind": "real-input",
+  "fixture": "card-description-fixes-review.html; no active player slot",
+  "before": {
+    "mode": "normal",
+    "turn": 1,
+    "phase": "player",
+    "busy": false,
+    "actionQueueLength": 0,
+    "player": {
+      "hp": 100,
+      "maxHp": 100,
+      "atk": 5,
+      "spellPower": 2,
+      "defense": {
+        "shield": 0,
+        "armor": 0,
+        "guard": false
+      },
+      "status": {
+        "bleed": 0,
+        "poison": 0,
+        "freeze": 0,
+        "silence": 0,
+        "abreak": 0,
+        "healban": 0,
+        "atkDown": 0,
+        "atkUp": 0,
+        "spellUp": 0,
+        "stealth": 0,
+        "immune": 0,
+        "reduce": 0,
+        "dodge": 0,
+        "swordForm": 0,
+        "natureForm": 0,
+        "cosmosForm": 0
+      }
+    },
+    "energy": 2,
+    "maxEnergy": 2,
+    "hand": [
+      "飞身劈",
+      "寒冰剑",
+      "血箭",
+      "霜月斩",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击"
+    ],
+    "consumed": [],
+    "grave": [],
+    "bag": [
+      {
+        "name": "精神药水",
+        "count": 1,
+        "usable": true,
+        "why": ""
+      },
+      {
+        "name": "火焰药水",
+        "count": 1,
+        "usable": true,
+        "why": ""
+      },
+      {
+        "name": "TNT",
+        "count": 1,
+        "usable": true,
+        "why": ""
+      }
+    ],
+    "equipped": [],
+    "foes": [
+      {
+        "index": 0,
+        "name": "首脑训练靶",
+        "hp": 200,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": "grow",
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 1,
+        "name": "普通训练靶甲",
+        "hp": 200,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 2,
+        "name": "普通训练靶乙",
+        "hp": 200,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 3,
+        "name": "普通训练靶丙",
+        "hp": 200,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 4,
+        "name": "攻击6训练靶",
+        "hp": 200,
+        "maxHp": 200,
+        "atk": 6,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      }
+    ]
+  },
+  "afterMind": {
+    "mode": "normal",
+    "turn": 1,
+    "phase": "player",
+    "busy": false,
+    "actionQueueLength": 0,
+    "player": {
+      "hp": 100,
+      "maxHp": 100,
+      "atk": 5,
+      "spellPower": 2,
+      "defense": {
+        "shield": 0,
+        "armor": 0,
+        "guard": false
+      },
+      "status": {
+        "bleed": 0,
+        "poison": 0,
+        "freeze": 0,
+        "silence": 0,
+        "abreak": 0,
+        "healban": 0,
+        "atkDown": 0,
+        "atkUp": 0,
+        "spellUp": 0,
+        "stealth": 0,
+        "immune": 0,
+        "reduce": 0,
+        "dodge": 0,
+        "swordForm": 0,
+        "natureForm": 0,
+        "cosmosForm": 0
+      }
+    },
+    "energy": 2,
+    "maxEnergy": 2,
+    "hand": [
+      "飞身劈",
+      "寒冰剑",
+      "血箭",
+      "霜月斩",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击"
+    ],
+    "consumed": [],
+    "grave": [],
+    "bag": [
+      {
+        "name": "火焰药水",
+        "count": 1,
+        "usable": true,
+        "why": ""
+      },
+      {
+        "name": "TNT",
+        "count": 1,
+        "usable": true,
+        "why": ""
+      }
+    ],
+    "equipped": [],
+    "foes": [
+      {
+        "index": 0,
+        "name": "首脑训练靶",
+        "hp": 200,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": "grow",
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 1,
+        "name": "普通训练靶甲",
+        "hp": 200,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 2,
+        "name": "普通训练靶乙",
+        "hp": 200,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 3,
+        "name": "普通训练靶丙",
+        "hp": 200,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 4,
+        "name": "攻击6训练靶",
+        "hp": 200,
+        "maxHp": 200,
+        "atk": 6,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      }
+    ]
+  },
+  "afterFlame": {
+    "mode": "normal",
+    "turn": 1,
+    "phase": "player",
+    "busy": false,
+    "actionQueueLength": 0,
+    "player": {
+      "hp": 100,
+      "maxHp": 100,
+      "atk": 5,
+      "spellPower": 2,
+      "defense": {
+        "shield": 0,
+        "armor": 0,
+        "guard": false
+      },
+      "status": {
+        "bleed": 0,
+        "poison": 0,
+        "freeze": 0,
+        "silence": 0,
+        "abreak": 0,
+        "healban": 0,
+        "atkDown": 0,
+        "atkUp": 0,
+        "spellUp": 0,
+        "stealth": 0,
+        "immune": 0,
+        "reduce": 0,
+        "dodge": 0,
+        "swordForm": 0,
+        "natureForm": 0,
+        "cosmosForm": 0
+      }
+    },
+    "energy": 2,
+    "maxEnergy": 2,
+    "hand": [
+      "飞身劈",
+      "寒冰剑",
+      "血箭",
+      "霜月斩",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击"
+    ],
+    "consumed": [],
+    "grave": [],
+    "bag": [
+      {
+        "name": "TNT",
+        "count": 1,
+        "usable": true,
+        "why": ""
+      }
+    ],
+    "equipped": [],
+    "foes": [
+      {
+        "index": 0,
+        "name": "首脑训练靶",
+        "hp": 196,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": "grow",
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 1,
+        "name": "普通训练靶甲",
+        "hp": 196,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 2,
+        "name": "普通训练靶乙",
+        "hp": 196,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 3,
+        "name": "普通训练靶丙",
+        "hp": 196,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 4,
+        "name": "攻击6训练靶",
+        "hp": 196,
+        "maxHp": 200,
+        "atk": 6,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      }
+    ]
+  },
+  "afterTnt": {
+    "mode": "normal",
+    "turn": 1,
+    "phase": "player",
+    "busy": false,
+    "actionQueueLength": 0,
+    "player": {
+      "hp": 100,
+      "maxHp": 100,
+      "atk": 5,
+      "spellPower": 2,
+      "defense": {
+        "shield": 0,
+        "armor": 0,
+        "guard": false
+      },
+      "status": {
+        "bleed": 0,
+        "poison": 0,
+        "freeze": 0,
+        "silence": 0,
+        "abreak": 0,
+        "healban": 0,
+        "atkDown": 0,
+        "atkUp": 0,
+        "spellUp": 0,
+        "stealth": 0,
+        "immune": 0,
+        "reduce": 0,
+        "dodge": 0,
+        "swordForm": 0,
+        "natureForm": 0,
+        "cosmosForm": 0
+      }
+    },
+    "energy": 2,
+    "maxEnergy": 2,
+    "hand": [
+      "飞身劈",
+      "寒冰剑",
+      "血箭",
+      "霜月斩",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击",
+      "初始攻击"
+    ],
+    "consumed": [],
+    "grave": [],
+    "bag": [],
+    "equipped": [],
+    "foes": [
+      {
+        "index": 0,
+        "name": "首脑训练靶",
+        "hp": 196,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": "grow",
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 1,
+        "name": "普通训练靶甲",
+        "hp": 0,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": null,
+        "dead": true,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 2,
+        "name": "普通训练靶乙",
+        "hp": 0,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": null,
+        "dead": true,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 3,
+        "name": "普通训练靶丙",
+        "hp": 196,
+        "maxHp": 200,
+        "atk": 1,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      },
+      {
+        "index": 4,
+        "name": "攻击6训练靶",
+        "hp": 196,
+        "maxHp": 200,
+        "atk": 6,
+        "affix": null,
+        "dead": false,
+        "status": {
+          "bleed": 0,
+          "poison": 0,
+          "freeze": 0,
+          "silence": 0,
+          "abreak": 0,
+          "healban": 0,
+          "atkDown": 0,
+          "atkUp": 0,
+          "spellUp": 0,
+          "stealth": 0,
+          "immune": 0,
+          "reduce": 0,
+          "dodge": 0,
+          "swordForm": 0,
+          "natureForm": 0,
+          "cosmosForm": 0
+        },
+        "defense": {
+          "shield": 0,
+          "armor": 0,
+          "guard": false
+        }
+      }
+    ]
+  },
+  "captureStatus": "captured"
+}

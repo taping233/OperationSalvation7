@@ -1,3 +1,4 @@
+@import url('./ui-design-system.css');
 /* Settings only: the feedback archive keeps its own page layout. */
 #overlay .card.page:has(.pg.settings-page.settings-tabbed) {
   background: #11171f;
@@ -41,9 +42,9 @@
 #overlay .settings-tabbed .pg-head::before,
 #overlay .settings-tabbed .pg-head::after,
 #overlay .settings-tabbed .pg-head h2::before { display: none; }
-#overlay .settings-tabbed .pg-head h2 {
+#overlay .pg.settings-page.settings-tabbed .pg-head h2 {
   display: flex; align-items: center; gap: 12px;
-  font-size: var(--home-ui-label); color: #e8eef4; letter-spacing: 3px; text-shadow: none;
+  font-size: var(--ui-text-title); color: #e8eef4; letter-spacing: 3px; text-shadow: none;
 }
 #overlay .settings-tabbed .settings-gear-r2 { filter: grayscale(1); }
 #overlay .pg.settings-tabbed .settings.settings-layout {
@@ -71,11 +72,11 @@
   width: 100%; min-height: 74px; padding: 16px 20px;
   border: 1px solid transparent; border-left: 3px solid transparent;
   border-radius: 2px; background: transparent; box-shadow: none;
-  color: #a7b5c2; text-align: left; font-size: var(--home-ui-label); letter-spacing: 1px;
+  color: #a7b5c2; text-align: left; font-size: var(--ui-text-body); letter-spacing: 1px;
   transition: background var(--home-ui-feedback) var(--settings-ease), color var(--home-ui-feedback) var(--settings-ease), box-shadow var(--home-ui-feedback) var(--settings-ease);
 }
 #overlay .settings-tabbed .settings-tab small {
-  font-size: var(--home-ui-sub); letter-spacing: 2px; color: rgba(var(--settings-tint),.68);
+  font-size: var(--ui-text-label); letter-spacing: 2px; color: rgba(var(--settings-tint),.68);
 }
 #overlay .settings-tabbed .settings-tab:hover { background: #b5c7d014; color: #edf3f9; }
 #overlay .settings-tabbed .settings-tab:active { background: #bacbdc24; }
@@ -113,11 +114,11 @@
   color: rgb(var(--settings-tint)); font-size: var(--home-ui-sub); letter-spacing: 2.5px;
 }
 #overlay .settings-tabbed .settings-panel-head h3 {
-  margin: 8px 0 10px; font-size: var(--home-ui-title); font-weight: 600; letter-spacing: 2px;
+  margin: 8px 0 10px; font-size: var(--ui-text-object); font-weight: 600; letter-spacing: 2px;
   color: #f0f3f6; text-shadow: 0 2px 8px #02050966;
 }
 #overlay .settings-tabbed .settings-panel-head p {
-  color: #aab7c2; font-size: var(--home-ui-sub); margin: 0; line-height: 1.8;
+  color: #aab7c2; font-size: var(--ui-text-label); margin: 0; line-height: 1.8;
 }
 #overlay .settings-tabbed .chk { font-size: var(--home-ui-copy); }
 /* 两侧信息区从各自方向展开，背景与点击区域保持既有布局。 */
@@ -131,7 +132,7 @@ body #overlay#overlay#overlay#overlay[data-surface-layout="settings"] [data-surf
 #overlay .settings-tabbed :is(.settings-general,.settings-display,.settings-audio,.settings-credits) > .set-h { display: none; }
 #overlay .settings-tabbed .set-h {
   margin: 20px 0 12px; padding: 0; border: 0;
-  color: #d5dfe7; font-size: 20px; text-shadow: none; letter-spacing: 1px;
+  color: #d5dfe7; font-size: var(--ui-text-object); text-shadow: none; letter-spacing: 1px;
 }
 #overlay .settings-tabbed .set-h::before,
 #overlay .settings-tabbed .set-h::after { display: none; }
@@ -145,7 +146,7 @@ body #overlay#overlay#overlay#overlay[data-surface-layout="settings"] [data-surf
   background: linear-gradient(105deg, rgba(125,135,145,.22), rgba(60,70,81,.24));
   border: 1px solid #d9e6ef21; border-radius: 4px;
   box-shadow: inset 0 1px 0 #ecf4ff12, inset 0 -1px 0 #03080e33, 0 3px 8px #02060926;
-  color: #e7edf3; font-size: 23px; animation: none;
+  color: #e7edf3; font-size: var(--ui-text-body); animation: none;
   transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
 }
 #overlay .settings-tabbed .chk:hover {
@@ -169,7 +170,7 @@ body #overlay#overlay#overlay#overlay[data-surface-layout="settings"] [data-surf
 #overlay .settings-tabbed .vol > span { font-weight: 500; letter-spacing: .4px; }
 #overlay .settings-tabbed .chk .set-en {
   display: block; margin: 6px 0 0; padding: 0; min-width: 0;
-  font-size: var(--home-ui-sub); color: #98a9b7; text-align: left; line-height: 1.3;
+  font-size: var(--ui-text-label); color: #98a9b7; text-align: left; line-height: 1.3;
 }
 #overlay .settings-tabbed .chk input[type="checkbox"] {
   appearance: none; position: relative; flex: 0 0 48px;
@@ -211,14 +212,14 @@ body #overlay#overlay#overlay#overlay[data-surface-layout="settings"] [data-surf
 #overlay .settings-tabbed .vol input[type="range"]:focus-visible + b {
   color: #eff6fb; border-color: #c2d4e166; text-shadow: none;
 }
-#overlay .settings-tabbed .hint { color: #95a8b9; line-height: 1.9; font-size: 17px; }
+#overlay .settings-tabbed .hint { color: #95a8b9; line-height: 1.9; font-size: var(--ui-text-label); }
 #overlay .pg.settings-tabbed .btn-row .mini-btn {
-  padding: 16px 28px; font-size: 20px; letter-spacing: 1px; line-height: 1.5;
+  padding: var(--ui-space-2) var(--ui-space-4); font-size: var(--ui-text-label); letter-spacing: 1px; line-height: 1.5;
 }
 #overlay .settings-tabbed :is(.mini-btn,.ov-btn) {
-  padding: 16px 24px; min-height: 54px; background: #91a9bc21;
+  padding: var(--ui-space-2) var(--ui-space-4); min-height: var(--ui-control-compact); background: #91a9bc21;
   border: 1px solid #c2d4e136; border-radius: 4px;
-  color: #dde7ee; box-shadow: inset 0 1px 0 #eff6ff0d, 0 5px 14px #02050940; font-size: 20px;
+  color: #dde7ee; box-shadow: inset 0 1px 0 #eff6ff0d, 0 5px 14px #02050940; font-size: var(--ui-text-label);
   clip-path: none; transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
 }
 #overlay .settings-tabbed :is(.mini-btn,.ov-btn):hover { background: #abc1d237; }

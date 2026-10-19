@@ -55,6 +55,8 @@ import {cardHTML} from '../src/cards/cards.view.js';
 import {extractionStashHTML,extractionDoneHTML} from '../src/ui/extraction-rewards-view.js?review=extraction-r3';
 import '../css/extraction-rewards.css?review=extraction-r3';
 import {createExtractionCommands,buildExtractionReceipt,extractionPocketOutcome} from '../src/hub/extraction.commands.js';
+import {characterFor} from '../src/core/characters.js';
+import {addXpToProgress} from '../src/hub/meta-progression.js';
 const catalog=Object.values(dataSlice).filter(Array.isArray).flat(),byId=new Map(catalog.map(c=>[c.id,c]));
 sdtDefine('Cards',{...rulesSlice,all:()=>catalog,cardHTML});
 const pick=id=>{const card=byId.get(id);if(!card)throw Error('Unknown fixture card '+id);return {...card};};
@@ -109,9 +111,9 @@ async function reset(mode='partial'){
  displayOnly=['confirm','long','zero'].includes(mode);confirmFinish=mode==='confirm'||mode==='long';
  const stacks=mode==='empty'||mode==='zero'?[]:mode==='long'?Array.from({length:30},(_,i)=>({card:{...cards[i%cards.length],id:'fixture-long-'+i,name:`展示卡牌 ${String(i+1).padStart(2,'0')} · 长清单滚动核验`},count:i%3+1})):mode==='single'?[{card:cards[1],count:5}]:initial;
  finalReceipt=null;detail.hidden=true;
- game={runActive:true,ownedCards:stacks.flatMap(s=>Array.from({length:s.count},()=>({card:{...s.card}}))),inventory:mode==='empty'?[]:[{name:'木材',count:2},{name:'口粮',count:3}],usedPocket:mode==='empty'?[]:[{card:cards[0],count:20},{card:cards[2],count:10}],coins:49,elapsed:1652,turn:75,layerIdx:3,bossKilled:true};
- base={isSha:()=>false,stashCap:()=>28,data:{_m01:{revision:0,requests:{}},wood:0,rations:0,pocket:[],stash:[{card:{name:'往局仓库卡'},count:mode==='full'?28:mode==='single'?26:21}],stats:{extracts:0,bestRunCoins:0,stashTotal:0}}};
- let rolls=0;commands=createExtractionCommands({game,baseApi:base,getActiveSlot:()=>null,random:()=>++rolls%3===0?.9:.1});
+ game={runActive:true,myClass:'侠客',ownedCards:stacks.flatMap(s=>Array.from({length:s.count},()=>({card:{...s.card}}))),inventory:mode==='empty'?[]:[{name:'木材',count:2},{name:'口粮',count:3}],usedPocket:mode==='empty'?[]:[{card:cards[0],count:20},{card:cards[2],count:10}],coins:49,elapsed:1652,turn:75,layerIdx:3,bossKilled:true};
+ base={isSha:()=>false,stashCap:()=>28,data:{_m01:{revision:0,requests:{}},wood:0,rations:0,pocket:[],characters:{wu:{lv:1,xp:40}},stash:[{card:{name:'往局仓库卡'},count:mode==='full'?28:mode==='single'?26:21}],stats:{extracts:0,bestRunCoins:0,stashTotal:0}}};
+ let rolls=0;commands=createExtractionCommands({game,baseApi:base,getActiveSlot:()=>null,random:()=>++rolls%3===0?.9:.1,characterFor,addXpToProgress});
  const result=await commands.begin();if(!result.ok)throw Error(result.message);game.pendingExtraction=result.value;paint();
 }
 document.querySelector('#partial').onclick=()=>reset();document.querySelector('#single').onclick=()=>reset('single');

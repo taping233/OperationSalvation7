@@ -168,10 +168,10 @@ export function applyGuardedRoute({ generatorVersion, layoutVersion, layerData, 
 }
 
 /** 只校验与逆还原。返回的 baseLayers 仍须由快照层按冻结 route-v1 协议校验 baseRoutePlan。 */
-export function validateGuardedRoute(input, plan, previousFacilities = false, budgets = previousFacilities ? PREVIOUS_MAP_TYPE_BUDGETS : MAP_TYPE_BUDGETS) {
+export function validateGuardedRoute(input, plan, previousFacilities = false, budgets = previousFacilities ? PREVIOUS_MAP_TYPE_BUDGETS : MAP_TYPE_BUDGETS, enforceFirePacing = true) {
   const bad = () => ({ ok:false });
   if (!plan || plan.layerIndex !== 1 || !/^v1:[\da-f]{16}$/.test(plan.baseFingerprint || '')) return bad();
-  const layers = raw(input); if (!validateCurrentGeneratedMap(layers, budgets).ok) return bad();
+  const layers = raw(input); if (!validateCurrentGeneratedMap(layers, budgets, enforceFirePacing).ok) return bad();
   if (plan.status === 'fallback') {
     if (!exact(plan,['layerIndex','status','fallbackReason','baseFingerprint','baseRoutePlan'])
       || !REASONS.has(plan.fallbackReason) || !baseTopologyOk(layers) || routeBaseFingerprint(input) !== plan.baseFingerprint) return bad();
@@ -209,7 +209,7 @@ export function validateGuardedRoute(input, plan, previousFacilities = false, bu
     removed.add(key); changeEdge(target,a,b,true);
   }
   const before = raw(base), old = before[1], oldGraph = adjacent(old);
-  if (!baseTopologyOk(before) || routeBaseFingerprint(base) !== plan.baseFingerprint || !validateCurrentGeneratedMap(before, budgets).ok) return bad();
+  if (!baseTopologyOk(before) || routeBaseFingerprint(base) !== plan.baseFingerprint || !validateCurrentGeneratedMap(before, budgets, enforceFirePacing).ok) return bad();
   const oldMetrics = metrics(old,oldGraph,old.nodes.map(n => n.type)), next = metrics(layer,graph,types);
   if (next.battles !== oldMetrics.battles || ['fire','shop','exit'].some(k => next[k]-oldMetrics[k] > 2)
     || longestNoncombat(graph,types) > longestNoncombat(oldGraph,old.nodes.map(n => n.type))) return bad();

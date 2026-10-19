@@ -12,6 +12,7 @@ import { createBaseDepartureCommands, departureStackKey } from './base-departure
 import { createBasePetEggCommands } from './base-pet-egg.commands.js';
 import { createBaseElapsedCommands } from './base-elapsed.commands.js';
 import { createBaseMetaCommands } from './base-meta.commands.js';
+import { isCollectionProtected as collectionProtection } from './collection-protection.js';
 
   const SLOT_KEY = (i) => 'sdt-base-v2-slot' + i;
   const LEGACY_KEY = 'sdt-base-v1';   // 旧版全局基地（v0.20 及之前），启动时迁移
@@ -598,7 +599,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     }, { ok: false, why: 'save', msg: '基地存档未保存，请重新载入后重试' });
   }
 
-  // 卖出仓库中某卡牌堆的 n 张（[[icon:sparkles]]收藏中的堆受保护，需先取消收藏；
+  // 卖出仓库中某卡牌堆的 n 张（受保护的堆需先取消保护；
   // 材料卡不可卖出换币）。返回 { ok, msg, coins } 或 { ok:false, why }
   function sellStashCards(name, n, stackKey) {
     // Existing name-only callers retain their legacy behavior. New UI passes a full identity.
@@ -609,7 +610,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     const i = stackKey === undefined ? data.stash.findIndex(x => x.card.name === name) : matching[0].index;
     if (i < 0) return { ok: false, why: 'empty' };
     const stack = data.stash[i];
-    if (data.collection[stack.card.id]) return { ok: false, why: 'collected' };
+    if (isCollectionProtected(stack.card)) return { ok: false, why: 'collected' };
     if (materialInfo(stack.card)) return { ok: false, why: 'material' };
     const price = window.SDT.Cards.sellPrice(stack.card);
     const qty = Math.min(Math.max(1, n || 1), stack.count || 1);
@@ -622,18 +623,19 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     }, { ok: false, why: 'save', msg: '基地存档未保存，请重新载入后重试' });
   }
 
-  // 收藏 / 取消收藏（图鉴记录 = [[icon:sparkles]]标记本身；收藏中的堆不可卖出）
+  // 切换收藏保护；取消保护保留图鉴记录，不消耗卡牌或发放经验。
   function collectToggle(card) {
     if (!card || !card.id) return false;
-    if (data.collection[card.id]) {
-      return mutate(draft => { delete draft.collection[card.id]; return false; }, null);
-    }
+    const protect = !isCollectionProtected(card);
     return mutate(draft => {
-      draft.collection[card.id] = { name: card.name, rarity: card.rarity || '?', ts: Date.now() };
-      return true;
-    }, null); // null=保存失败；false 仍只表示成功取消收藏。
+      const record = draft.collection[card.id];
+      draft.collection[card.id] = { ...(record && typeof record === 'object' ? record
+        : { name: card.name, rarity: card.rarity || '?', ts: Date.now() }), protected: protect };
+      return protect;
+    }, null); // null=保存失败；false 仍只表示成功取消保护。
   }
   const isCollected = (card) => !!card && !!card.id && !!data.collection[card.id];
+  const isCollectionProtected = card => collectionProtection(data, card);
 
   // ---------- 宝藏大门 ----------
   // 钥匙计数：真实钥匙储备 + 仓库里的钥匙类卡牌（「一串钥匙」= 2 把，其余钥匙 = 1 把）
@@ -677,7 +679,7 @@ import { createBaseMetaCommands } from './base-meta.commands.js';
     nestBagCap, canUpgradeNestBag, upgradeNestBag,
     petUpCost, petLevel, PET_LEVEL_MAX, PET_UP_COSTS,
     deposit, depositCards, restore, pocketKeyCost, takeStashCards,
-    sellStashCards, collectToggle, isCollected,
+    sellStashCards, collectToggle, isCollected, isCollectionProtected,
     useStashMaterial, materialInfo, materialAmount,
     keyCount, KEY_NEEDED,
     isSha,

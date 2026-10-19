@@ -18,6 +18,7 @@ import '../../css/departure-selected.css';
 import { bindDepartureDrag } from './departure.drag.js';
 import { departureStackKey, findDepartureStack } from './base-departure.commands.js';
 import { deployPick, replaceDeployPick } from './departure.selection-state.js';
+import { stackCapOf } from '../core/card-capacity.js';
 import '../../css/roster-reference.css';
 const departureFaces = new WeakMap();
 const recommendationViews = new WeakMap();
@@ -46,13 +47,17 @@ function renderDepartureCard(card) {
   // 带入背包的卡牌才能在战斗中使用；「初始攻击」固定携带、不入库也不会出现在这里。
   // 共享选择引用归纯状态模块；本页仍负责规范化和完整整备生命周期。
   let deployPickFresh = false;   // 整备入口刚注入过预设选择（随后打开整备页时保留）
-  function setDeployPick(v) {
+  function setDeployPick(v, { characterId = null, petId = null } = {}) {
+    const character = characterId ? characterFor(characterId) : null;
+    if (characterId && !character) return false;
+    if (petId && !SDT.Base.setPet(petId)) return false;
     departureGeneration++;
     replaceDeployPick(v == null ? null : Object.fromEntries(Object.entries(v).map(([key, count]) => {
       const stack = findDepartureStack(SDT.Base.data.stash, key);
       return [stack ? departureStackKey(stack) : key, count];
     })));
-    deployPickFresh = true; deploymentSlot = SDT.Base.slot; deployCharacter = null; deployStart = null;
+    deployPickFresh = true; deploymentSlot = SDT.Base.slot; deployCharacter = character?.rulesetId || null; deployStart = null;
+    return true;
   }
   let deployCharacter = null;
   let deployStart = null;
@@ -158,7 +163,7 @@ function renderDepartureCard(card) {
       return `<div class="dep-card${n > 0 ? ' picked' : ''}${left <= 0 ? ' drained' : ''}" draggable="true" role="button" tabindex="0" aria-pressed="${n > 0 ? 'true' : 'false'}"
           data-act="pickAdd" data-name="${escAttr(s.card.name)}" data-stack-key="${escAttr(key)}"
           aria-label="带入${escAttr(s.card.name)}，还可带 ${left} 张"
-          title="${escAttr(s.card.name)} · 点击或拖到右侧背包带入（还可带 ${left}）">
+          title="${escAttr(s.card.name)} · 还可带 ${left}">
         <div class="dep-card-face">${renderDepartureCard(s.card)}</div>
         <div class="dep-quantity"><span>剩余 <b class="dep-own">${left}</b></span><span>已带 <b class="dep-picked-count">${n}</b></span></div>
       </div>`;
@@ -186,7 +191,7 @@ function renderDepartureCard(card) {
     const petStrip = B.PETS.filter(p => B.ownedPets().includes(p.id)).map(p => {
       const on = B.carriedPet() && B.carriedPet().id === p.id;
       return `<button class="pet-chip${on ? ' on' : ''}" data-act="depPet" data-id="${p.id}"
-          title="${escAttr(p.desc)}（点击携带出战）">
+          title="${escAttr(p.desc)}">
         [[icon:${p.icon}]] <b>${esc(p.name)}</b><span class="pet-chip-lv">Lv.${B.petLevel(p.id)}</span>
       </button>`;
     }).join('');
@@ -204,7 +209,7 @@ function renderDepartureCard(card) {
     }
     const bagCells = Array.from({ length:Math.max(preview.capacity, preview.cells.length) }, (_, i) => renderCell(preview.cells[i])).join('');
     UI.showOverlay('', `
-      <div class="pg hub departure-cover departure-glass camp-detail camp-depart-detail" id="depMain" data-departure-view="cover-v3">
+      <div class="pg hub departure-cover departure-glass camp-detail camp-depart-detail ui-scale-system" id="depMain" data-departure-view="cover-v3">
         <button class="ak-sq ak-exit ak-back-tl" data-act="depBack" title="返回人物选择（Esc）" aria-label="返回人物选择">
           <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
             <path d="M9 4h9a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 18 20H9"
@@ -224,7 +229,7 @@ function renderDepartureCard(card) {
             <div class="camp-depart-person-copy"><small>DEPARTURE CHECKLIST</small><h3>本次人物：${esc(characterName(deployCharacter))}</h3><button class="mini-btn" data-act="depBack">更换人物</button></div>
           </aside>
           <section class="hub-card dep-storage">
-            <h3>仓库候选 <span class="set-tip">点击或拖拽带入</span></h3>
+            <h3>仓库候选</h3>
             <div class="dep-recommend"><button class="mini-btn" data-act="depRecommendPreview">预览推荐装配</button><button class="mini-btn" data-act="depRecommendApply" disabled>应用预览</button><button class="mini-btn" data-act="depRecommendUndo" disabled>撤销推荐</button></div>
             <div class="dep-filters">
               <label>稀有度<select id="depFilterRarity" aria-label="按稀有度筛选仓库卡牌"></select></label>
@@ -239,7 +244,6 @@ function renderDepartureCard(card) {
             <h3>本次携带</h3><p class="dep-summary" id="depSummary" aria-live="polite">${summaryHtml}</p>
             <div class="bag-grid${full ? ' full' : ''}" id="depBag">${bagCells}</div>
             ${petStrip ? `<div class="pet-strip"><span class="pet-strip-label">[[icon:paw]] 随行宠物</span>${petStrip}</div>` : ''}
-            <p class="camp-pack-note">点击卡面查看规则；拖回仓库移出额外携带。</p>
             <details class="dep-survival"${B.data.ammoTaught ? '' : ' open'}><summary>用过的牌去哪了？</summary><p>所有用过的牌都进入<b>消耗区</b>，复原后可以再用。</p><p>复原方法在背包查看；撤离时再确认带回结果。</p></details>
           </section>
         </div>
@@ -247,7 +251,7 @@ function renderDepartureCard(card) {
         <footer class="dep-foot">
           <span class="dep-capacity" id="depCapacity">${capacityHtml}</span>
           ${B.data.pocket.length ? `<span class="camp-depart-next warning">待复原卡牌 ${B.data.pocket.reduce((n, s) => n + s.count, 0)} 张 · 出发后清空</span>` : ''}
-          <button id="btnDeploy" data-act="confirmDeploy">出发 <span aria-hidden="true">→</span></button>
+          <button id="btnDeploy" class="ui-control" data-act="confirmDeploy">出发 <span aria-hidden="true">→</span></button>
         </footer>
       </div>`, 'page');
     const stage = document.getElementById('depMain'), slot = B.slot, generation = departureGeneration;
@@ -474,7 +478,7 @@ function renderDepartureCard(card) {
     return { starterCount: MAP.rules.starterSha, starterCard: SDT.Cards.SHA,
       fireball: SDT.Cards.all?.().find(card => card.id === 'tt3-fireball'), pet: B.carriedPet(),
       stash: B.data.stash, picks: deployPick, capacity: B.bagCap(),
-      stackCapOf: game.stackCapOf || (card => ['初始攻击', '火球'].includes(card.name) ? 5 : 3) };
+      stackCapOf: game.stackCapOf || stackCapOf };
   }
   function deploySlotsUsed() { return departurePreview().slots; }
 

@@ -9,7 +9,7 @@
  */
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
 
-const MARKER_KEY = 'sdt-cards-m10-hosted-equipment-v1-seeded';
+const MARKER_KEY = 'sdt-cards-m10-hosted-equipment-v2-seeded';
 export const M10_HOSTED_EQUIPMENT_MARKER_KEY = MARKER_KEY;
 const hostedRuleById = new Map([
   ['tt2-frostsword', 'frost-sword'],
@@ -24,7 +24,9 @@ const hostedRuleById = new Map([
   ['tt3-reverse-bow', 'reverse-bow'],
 ]);
 const definitions = new Map([...hostedRuleById].map(([id, name]) => [id, {
-  rules: { version: 1, battle: { hosted: [name] } },
+  rules: { version: 1, battle: { hosted: [name] },
+    ...(id === 'tt2-frostsword' ? { equip: { passive: { cond: { vsFreeze: 2 } } } } : {}),
+  },
 }]));
 const CANONICAL_TABLE_BY_ID = new Map([...hostedRuleById.keys()].map(id => [id, 'TABLETOP10']));
 
@@ -33,4 +35,5 @@ export const ensureM10HostedEquipmentRules = createRuleBackfiller({
   markerKey: MARKER_KEY,
   definitions,
   canonicalTableById: CANONICAL_TABLE_BY_ID,
+  previousRulesById: new Map([['tt2-frostsword', { version: 1, battle: { hosted: ['frost-sword'] } }]]),
 });

@@ -17,6 +17,8 @@ export function createHubPreparationAdapter({ SDT, UI, returnToBase, applyPicks,
       characters: () => CHARACTERS.map(character => ({ id: character.id, name: character.name })),
       pets: () => SDT.Base.PETS || [],
       bagCapacity: () => SDT.Base.bagCap(),
+      starterCount: () => SDT.MAP?.rules?.starterSha,
+      starterCard: () => SDT.Cards.SHA,
     },
     view: {
       openPanel: () => {

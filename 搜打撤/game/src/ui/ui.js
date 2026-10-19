@@ -150,7 +150,7 @@ function revealPhotoSource(request) {
       // 2026-09-19 留言 #29：特写多一个「馆方记录」区，展示老板手写的正式记录（卡牌库可编辑）
       const note = (opts.note != null ? opts.note : (card.note || '')) || '';
       const noteLabel = opts.noteLabel || '备注';
-      const notePlaceholder = opts.notePlaceholder || '点击这里写备注……';
+      const notePlaceholder = opts.notePlaceholder || '写备注……';
       const noteHTML = opts.hideNote ? '' : opts.noteEditable ? `
         <label class="cz-note${note && !opts.notePending ? ' has' : ''} editable">
           <span class="cz-note-tag">[[icon:pen]] ${esc(noteLabel)}</span>
@@ -238,8 +238,7 @@ function revealPhotoSource(request) {
         <span class="cz-flash" aria-hidden="true"></span>
         <button type="button" class="cz-close" aria-label="${photoMode ? '收回照片' : '关闭卡牌大图'}">[[icon:cross]]</button>
         ${photoMode ? photoHTML : `<div class="cz-card">${SDT.Cards.cardHTML(card, 'lg')}</div>${noteHTML}`}
-        ${opts.footer ? `<div class="cz-foot">${opts.footer}</div>` : ''}
-        <span class="cz-hint">${photoMode ? (opts.noteEditable ? '点击照片外或按 Esc 收回 · 背签可编辑' : '点击照片外或按 Esc 收回') : 'Esc 或点击背景收回'}</span>`;
+        ${opts.footer ? `<div class="cz-foot">${opts.footer}</div>` : ''}`;
       if (photoMode) {
         // Keep the dismissal control beside the back-sign, within the same photo group.
         el.querySelector('.cz-photo-info').prepend(el.querySelector('.cz-close'));

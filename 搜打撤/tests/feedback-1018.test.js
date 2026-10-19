@@ -12,8 +12,8 @@ describe('10-18 留言规则回归', () => {
     expect(previewCardRewards([card], {ownedCards:[{card}],usedSlots:18,baseCap:18,totalCap:18}).blockedIndices).toEqual([0]);
     expect(previewCardRewards([card,card], {ownedCards:[],usedSlots:17,baseCap:18,totalCap:18}).acceptedIndices).toEqual([0]);
   });
-  it('通行证C在地图可用，消耗一张并获得可随机获取的传说卡', () => {
-    const card = {id:'tt4-shine-token',name:'员工通行证C',type:'道具',rules:{bag:{use:[{op:'discover',count:1,pool:{kind:'legendary'}}]}}};
+  it('通行证B在地图可用，消耗一张并随机获得可随机获取的传说卡', () => {
+    const card = {id:'tt-token-gold',name:'员工通行证B',type:'道具',rules:{bag:{use:[{op:'acquire',pool:{kind:'legendary'}}]}}};
     const got = {id:'legend',name:'传说招式',type:'法术',rarity:'传说'};
     const game = {ownedCards:[{uid:'token',card}],usedPocket:[],myClass:'侠客'};
     const saveGame = vi.fn(), showBackpack = vi.fn();

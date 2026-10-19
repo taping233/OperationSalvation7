@@ -17,7 +17,7 @@
  *   tt2-turtlearmor   消耗 1 张装备牌 +10 甲 → armor amount:10 + consumeEquip:true（付不出则无效）；
  *   tt3-dig-treasure  牌库底发现 1 张牌，获等同其价格的护甲 → acquire n:1 pool{kind:'牌库底'} +
  *                     armor priceOf:'discovered'（锚定发现牌价格）；
- *   tt3-fly-arrowhawk 攻（+3），触发的流血伤害翻倍 → damage + registerRule bleedAmp；
+ *   tt3-fly-arrowhawk 攻（+3），本次攻击流血加成翻倍 → damage（命中入口按本卡处理）；
  *   tt3-purify-arrow  攻（-1），净化自身 → damage（负攻词条需 dmgType attack）+ cleanse self；
  *   tt3sp-shadowbug   偷取 1 名敌人攻击力至 1 点 → stealAtk capTo:1（缺省 1 回合后归还）；
  *   tt3wu-shike       降 1 名敌人 2 攻持续 3 回合，附加流血 → curse atkDown amount:2 duration:3 +
@@ -61,8 +61,8 @@
  * 本文件只保留 definitions 数据与批次参数；迁移数据行为不变（m3-data.test.js 守护）。 */
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
 
-// v4：永恒绽放只发现一轮，三张是候选数，不是发现轮数。
-const M3_MARKER_KEY = 'sdt-cards-m3-onplay-rules-v5-seeded';
+// v6：飞身劈仅当次攻击翻倍流血加成，移除旧持续 bleedAmp 声明。
+const M3_MARKER_KEY = 'sdt-cards-m3-onplay-rules-v6-seeded';
 
 const R = (battle, onPlay) => ({ rules: { version: 1, battle, triggers: { onPlay } } });
 const ENEMY_ONE = { target: { side: 'enemy', area: false } };
@@ -93,7 +93,7 @@ const definitions = new Map([
     // 护甲锚定发现牌价格（普通战无牌库时发现池降级随机，执行器既有口径）
     { op: 'armor', priceOf: 'discovered' },
   ])],
-  ['tt3-fly-arrowhawk', R(ENEMY_ONE, [dmgField(), { op: 'registerRule', rule: 'bleedAmp' }])],
+  ['tt3-fly-arrowhawk', R(ENEMY_ONE, [dmgField()])],
   ['tt3-purify-arrow', R(ENEMY_ONE, [dmgField(), { op: 'cleanse', target: 'self' }])],
   ['tt3sp-shadowbug', R(ENEMY_ONE, [{ op: 'stealAtk', capTo: 1, target: 'chosenEnemy' }])],
   ['tt3wu-shike', R(ENEMY_ONE, [
@@ -167,6 +167,7 @@ export const ensureM3OnplayRules = createRuleBackfiller({
   // 整卡（canonical 卡面 + 旧版 rules）精确匹配的存档视为本批旧版产物，允许重写为现行版；
   // 玩家改名/改字段的卡深不相等，仍保守跳过。
   previousRulesById: new Map([
+    ['tt3-fly-arrowhawk', R(ENEMY_ONE, [dmgField(), { op: 'registerRule', rule: 'bleedAmp' }]).rules],
     ['cmtn1epgt20j', R(SELF, [acquire(1, '注能', 'hand', 'noInfuse')]).rules],
     ['tt7-bladebloom', R(SELF, [acquire(3, '随机', 'discover', 'playKeep')]).rules],
     ['tt2-turtlearmor', R(SELF, [{ op: 'armor', amount: 10, consumeEquip: true }]).rules],

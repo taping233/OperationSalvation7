@@ -28,6 +28,24 @@ export const personnelPageKey = () => `${browse.group}/${browse.section}/${brows
 export const personnelViewKey = () => `${browse.group}/${browse.section}/${browse.pet}/${browse.hatch ? "hatch" : "browse"}`;
 export function setPersonnelGroup(group) { browse.group = group === 'pets' ? 'pets' : 'people'; }
 export function setPersonnelSection(section) { if (['profile', 'pool', 'appearance'].includes(section)) browse.section = section; }
+export function petSafeSlots(pet, level) {
+  return Math.min(MAP.rules.safeMax, MAP.rules.safeStart + level - 1) + (pet?.effect?.safeBonus || 0);
+}
+export function upgradePetFromPersonnel({ base, id, notice, sound, ui, meta, refresh }) {
+  const pet = base.petById(id);
+  if (!pet) return;
+  const beforeLevel = base.petLevel(id);
+  const beforeSafe = petSafeSlots(pet, beforeLevel);
+  const cost = base.petUpCost(id);
+  if (!base.upgradePet(id)) return;
+  const level = base.petLevel(id);
+  const safe = petSafeSlots(pet, level);
+  notice(`${pet.name} Lv.${beforeLevel} → Lv.${level} · 安全格 ${beforeSafe} → ${safe} · 口粮 −${cost}`);
+  sound.ding();
+  ui.log(`[[icon:paw]] <b>「${esc(pet.name)}」</b> Lv.${beforeLevel} → <b>Lv.${level}</b>：携带时安全格 ${beforeSafe} → <b>${safe}</b> 格（口粮 −${cost}）`, 'ok');
+  meta.checkUnlocks();
+  refresh();
+}
 export function personnelBackTarget() {
   if (browse.group === 'pets' && browse.hatch) return { action:'personHatchView', label:'返回伙伴' };
   return browse.group === 'pets' || browse.section !== 'profile' ? { action:'personnelHome', label:'返回角色' } : null;
@@ -42,8 +60,8 @@ function petsHTML(base) {
   const lv = have ? base.petLevel(selected.id) : 1;
   const maxed = lv >= base.PET_LEVEL_MAX;
   const cost = base.petUpCost(selected.id);
-  const safe = Math.min(MAP.rules.safeMax, MAP.rules.safeStart + lv - 1) + (selected.effect?.safeBonus || 0);
-  const nextSafe = Math.min(MAP.rules.safeMax, MAP.rules.safeStart + lv) + (selected.effect?.safeBonus || 0);
+  const safe = petSafeSlots(selected, lv);
+  const nextSafe = petSafeSlots(selected, lv + 1);
   const carried = base.carriedPet()?.id === selected.id;
   const eggs = base.data.stash.filter(stack => stack.card.id === base.PET_EGG_ID).reduce((n, stack) => n + stack.count, 0);
   const hatchReady = eggs > 0 && base.data.coins >= base.HATCH_COST && owned.length < pets.length;

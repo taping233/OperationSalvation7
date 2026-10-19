@@ -5,7 +5,7 @@ import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import { hand, consumed, foes, allies, equipped, pstat, set$pstat, set$hand,
-  set$infuseFuels, set$playedMovesThisTurn, set$extraTurn, set$noDrawNext, set$meleeCost1, set$consumed } from '../game/src/battle/runtime/battle.runtime.js';
+  set$infuseFuels, recordHandInfusion, set$playedMovesThisTurn, set$extraTurn, set$noDrawNext, set$meleeCost1, set$consumed } from '../game/src/battle/runtime/battle.runtime.js';
 import { createTriggerRunner } from '../game/src/battle/effects/battle.triggers.m2.js';
 import { resolveStealAtk, restoreAtkDown, countCurseKinds } from '../game/src/battle/effects/effect-steps.m2.js';
 import { calculateEnemyIntent } from '../game/src/battle/core/battle.enemy-intent.js';
@@ -268,11 +268,12 @@ describe('M2 semantics in real BattleSession (block 1)', () => {
     expect(game.coins).toBe(2);
   });
 
-  it('scales damage with perInfusedInHand on the global infusion counter', async () => {
+  it('scales damage with perInfusedInHand for that instance while held', async () => {
     const card = { id: 'm2-infused-live', name: '充能射线', cost: 0, type: '法术', dmg: 5, dmgType: 'fixed', desc: '',
       ...R(ENEMY_ONE, [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy', perInfusedInHand: 2 }]) };
     const game = await startGame([card, filler()], [foe('infused')]);
-    set$infuseFuels(2);
+    recordHandInfusion(hand);
+    recordHandInfusion(hand);
     const state = await playCard(game, card, 0);
     expect(state.foes[0].hp).toBe(1000 - 5 - 2 * 2);
   });

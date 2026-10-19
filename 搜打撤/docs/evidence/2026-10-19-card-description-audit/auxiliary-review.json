@@ -1,0 +1,3079 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-10-19T11:39:32.671Z",
+  "catalogSha256": "b3033644e45a8fd0aee2dfa204ebfd1f093f620f5c0114dd9aa8725d572ee6c2",
+  "expectedCount": 91,
+  "count": 91,
+  "counts": {
+    "道具": 20,
+    "资源": 15,
+    "事件": 19,
+    "生物": 25,
+    "能力卡": 12
+  },
+  "statusCounts": {
+    "aligned-static": 54,
+    "reference-card-static": 24,
+    "mismatch-static": 7,
+    "context-gap": 5,
+    "fixed-awaiting-browser": 1
+  },
+  "limits": [
+    "仅C地图修复已实施，其余只读审查。",
+    "静态相符不等于真实实战通过。",
+    "foe基础数值与map.json逐值比对，不以精英缩放差异或生物不可打出报错。",
+    "源码清单为审查时快照，不构成冻结index或远端CI凭证。"
+  ],
+  "sourceInventory": [
+    {
+      "file": "game/src/hub/game.bag.rules.js",
+      "sha256": "e59150392b517d9f398d0b1a45c254c5bb00e14425869d97dbf655b8ee0bb0c5"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.js",
+      "sha256": "2221d2871649d9113654f9bbc91a639789676e851a6b8963a559cd26c1f83d45"
+    },
+    {
+      "file": "tests/bag-item-rule-baseline.test.js",
+      "sha256": "98f61f66f1174a0bccbba76f731a0b1f1f967820e2d637f0e10c458847e45d84"
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-candidates.js",
+      "sha256": "0c6d781eb98dcdf9b89af3fbe6b966ae4f9dde84e404ab3be0ec228c0c33320c"
+    },
+    {
+      "file": "game/src/cards/cards.rules.js",
+      "sha256": "613d57098bd70abb98862c9df4ade7bc04b52e8effb7e27e185231642af485ed"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m2.js",
+      "sha256": "c4643ce88e1571a4db5092a91c84a6876c2e583852447861fde8a2d3ebe1c58c"
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "sha256": "ce808ed30bda27ddf8ac6c2f87fae2f21793f9eed9a6b4822bd66605664ba19b"
+    },
+    {
+      "file": "tests/bag-token-discover.test.js",
+      "sha256": "a0ea794cb714e2b704c74b6b24dccb3e7bf6831a5b4d960a19a665b5dd8dff58"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.damage.js",
+      "sha256": "3682bdd9742fbdb4df9d7f5edc9bf9323cabed12e3d6fd5ef3f24d75cfcea5ef"
+    },
+    {
+      "file": "game/src/battle/effects/battle.hosted.js",
+      "sha256": "eb244a886de6f3babd7b7394a5a800a819d5b5e77596809f641052d340875974"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "sha256": "f814bef1c89b894c7b0154425dad5f0d574a0fb7d8bf7e161790ec20a8355a66"
+    },
+    {
+      "file": "game/src/hub/game.hub.pages.js",
+      "sha256": "33695d0624c5a3feaa18b8b8269d385b540873178cb117f7b18486639faba402"
+    },
+    {
+      "file": "game/src/run/game.nest.js",
+      "sha256": "ef0b6b65eb4bc2e5531b969e30f3197de0a5ade816eb8933edf38f41ed6a85c2"
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "sha256": "199a150e6f5381472d8dc57e43007239335cffc095e94fd1912ae22d5bc18440"
+    },
+    {
+      "file": "game/src/run/event-card-choice.js",
+      "sha256": "ea3d6fd229c8ce27f796cb331e48dedd3690b0671b942cb7be7a32030ab376b1"
+    },
+    {
+      "file": "game/data/map.json",
+      "sha256": "26697f5cd8915023e19ba8444c335a15e4b972a59c5bf2166756218bff31e389"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.js",
+      "sha256": "39fc6c8bb9c4cb464f613c098480fb83168f3c384604e73eb2b9efe6c3f685c3"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "sha256": "b111a34ec12c9a296d57fded9fea85b1ac4be2291e9a5c276a64db2694942900"
+    },
+    {
+      "file": "game/src/battle/core/battle.selection-flow.js",
+      "sha256": "522f25a1f1b36583d87881a80d351acc46e40259aa1cd5249967c16e3c942be8"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.kills.js",
+      "sha256": "19b0e5f820fe526ac04b0b9e8e6e9c301e966e9457a7a31e177bf73315568ca7"
+    },
+    {
+      "file": "game/src/cards/cards.data.js",
+      "sha256": "aa8b906221e8ab99d659d9f43981d7d2a181c1aab65af0f7757b4db1d8c25873"
+    },
+    {
+      "file": "game/src/cards/cards.sync.js",
+      "sha256": "d71d173e2085e1dfa33eda32f9f9f43e84a0d37e4c8d71c4b4743089b786a88d"
+    },
+    {
+      "file": "game/src/battle/effects/battle.target-rules.js",
+      "sha256": "d30d0ec7fbbf1cd04a12a8fcd01b9deb012e25b094e24f3243f948ae931c5b20"
+    },
+    {
+      "file": "game/src/run/game.session.modes.js",
+      "sha256": "97bdd16eefa10e6b3e9144299f9920f62cafc15ab117ec2c3f55f05da33fb2a7"
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.js",
+      "sha256": "987f65e95472fcfb28b2001fd974439ea5cd8d11a8533c89872b41fe8d060cf1"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.audit.js",
+      "sha256": "bb5d819d19e4e968379645f4b80c14de34a32be1fe207c15fd6c395d57c7c1fc"
+    },
+    {
+      "file": "tests/abyss-sovereign.test.js",
+      "sha256": "b2f8077ddd311ac4ac5c02c7da3ee717ca14b2d2ac80267510415cea290f9b93"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.curse.js",
+      "sha256": "a3ef73a4e39122f7751a14e74f82e4196483ca412e2b2dd1e9d05ad51facd28e"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.rules.js",
+      "sha256": "d3a65b037ab591f5cf73a5f7d173f29d17c0bee57f5011b779371d48f83ea973"
+    },
+    {
+      "file": "tests/hero-cards.test.js",
+      "sha256": "9fcd1b6552a85ad5863a5a6da49ed59257d08e158f7ba781bef2eafbd9216edf"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.tail.js",
+      "sha256": "1c767d3a1c64e37567f46ba789c25fcbc6e82df127c9464281acaadea05ed1d6"
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.js",
+      "sha256": "3f6fb6649df1f5ed4ff25bf409566aba9005c5a1acfddaf9bcb287b835eb88cc"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.deck.js",
+      "sha256": "6b3143e8782770df7be6fab75a69b299783e3db22a22e2b42006b3cb14edc4e5"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.recovery.js",
+      "sha256": "e4c8950f2bf2a0ec79209ce455977e572eb774a4b0c1bd7c310168661d42141a"
+    },
+    {
+      "file": "game/src/battle/core/battle.draw.js",
+      "sha256": "54df4acb533fd8ac9a7a96bf9b08a67bfed6accad69491497202007320e243ca"
+    }
+  ],
+  "rows": [
+    {
+      "id": "cmtmvq6ss84l",
+      "name": "员工通行证A",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "你获得本职业的能力卡。",
+      "rawDescription": "获取本职业的能力卡",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "acquire",
+              "pool": {
+                "kind": "classAbility"
+              }
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 148,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 212,
+          "note": ""
+        }
+      ],
+      "evidence": "地图/战斗均从本职业能力池直接获得1张，不打开发现；与“获取本职业的能力卡”相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "cmtn6bge52qt",
+      "name": "复原药水",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "地图背包：从消耗区复原最多2张卡牌；战斗：从本场消耗牌复原最多2张回到手牌。对应消耗区为空时不可使用。",
+      "rawDescription": "地图背包：从消耗区复原最多2张卡牌；战斗：从本场消耗牌复原最多2张回到手牌。对应消耗区为空时不可使用。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "restoreConsumed",
+              "amount": 2
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 179,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 169,
+          "note": ""
+        },
+        {
+          "file": "tests/bag-item-rule-baseline.test.js",
+          "line": 84,
+          "note": ""
+        }
+      ],
+      "evidence": "地图从usedPocket顺序复原至多规则amount张；战斗restoreConsumed回手。空区与容量守卫已有定向证据。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "cmtn6ulm4boj",
+      "name": "步兵",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击力 4 点，生命 4 点；优先替你承受伤害，并自动攻击敌人。",
+      "rawDescription": "攻击力4生命4，优先为主人承受伤害，自动攻击敌人",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 779,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.enemy-phase.js",
+          "line": 148,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.enemy-phase.js",
+          "line": 207,
+          "note": ""
+        }
+      ],
+      "evidence": "步兵是召唤随从参考卡；4/4数值来自召唤参数，活体随从优先承伤、玩家回合结束自动攻击。生物卡本身不可直接打出。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "cmtn79743r2n",
+      "name": "末日浩劫之门",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "回合开始时，对全体敌方角色各附加 1 层随机诅咒，优先选择该角色没有的诅咒。",
+      "rawDescription": "回合开始时对所有敌方角色各施加一层随机诅咒，优先不重复。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/core/battle.selection-flow.js",
+          "line": 235,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.damage.js",
+          "line": 172,
+          "note": ""
+        }
+      ],
+      "evidence": "由花开两面抉择展开的持续场面物件，每回合开始对所有存活敌方各随机1层诅咒，优先未拥有；不是可直接打出的生物牌。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "cmtn7err0a7",
+      "name": "天国之门",
+      "type": "生物",
+      "status": "mismatch-static",
+      "description": "回合开始时，为全体友方随机施加 1 项祝福，优先选择未获得的祝福。祝福包括：潜行 1 回合、攻击力增加 1 点、法伤增加 1 点、减伤 1 点、获得 5 点护甲或净化。",
+      "rawDescription": "回合开始时随机获取一项祝福，对全体友方施放，优先不重复。（获得潜行，持续 1 回合。获得 1 点攻击力。法伤 +1。减伤 1。获得 5 点护甲。净化。从这些中随机）",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/effect-steps.kills.js",
+          "line": 219,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.kills.js",
+          "line": 223,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.selection-flow.js",
+          "line": 266,
+          "note": ""
+        }
+      ],
+      "evidence": "天国之门卡面写全体友方；随机祝福实现仅更新ctx.pstat/pdef，不遍历allies。并且作为花开两面第二扇门时，延期文本未附括号候选词，随机祝福列表可能为空。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "cmtn7qttxqo4",
+      "name": "巷口修鞋匠",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "你获得员工通行证A碎片，并复原 1 张卡牌。",
+      "rawDescription": "获得员工通行证A碎片；复原 1 张卡牌。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1148,
+          "note": ""
+        }
+      ],
+      "evidence": "获得1碎片，openPocketRestore(1)在本事件复原1张；与描述相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "ev19-arrows",
+      "name": "海堤箭库",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "随机获得 2 张非职业的箭系列卡牌。",
+      "rawDescription": "获得 2 张随机非职业箭系列卡牌。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1065,
+          "note": ""
+        }
+      ],
+      "evidence": "随机池限武术/法术/装备、名称含箭，且非职业且无cls，投骰发2张；与描述相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "ev19-classchest",
+      "name": "黑箱调拨",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "获得 1 个职业·密封物资箱。",
+      "rawDescription": "获得 1 个职业·密封物资箱。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1054,
+          "note": ""
+        }
+      ],
+      "evidence": "openChestsOnCell medium+isClass=true，职业密封物资箱；与描述相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "ev19-fireballs",
+      "name": "双焰走私",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "你获得 2 张「火球」。",
+      "rawDescription": "获得两张「火球」。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1048,
+          "note": ""
+        }
+      ],
+      "evidence": "固定查tt3-fireball并奖励同卡2张；与描述相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "ev19-gamble",
+      "name": "地下商场黑市",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "你每次投入 3 币，有 50% 概率获得预览的 1 张装备牌和 2 张招式；第 5 次必定成功，你可随时放弃。",
+      "rawDescription": "每次投入 3 币，50% 获得预览的 1 张装备和 2 张招式；第 5 次必定成功，可随时放弃。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1071,
+          "note": ""
+        }
+      ],
+      "evidence": "骰面1–3落空、4–6命中，每次3币、第5次必中；货物1装备+2招式、可返回，见现行规则107。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "ev19-pearlbox",
+      "name": "遗落的珍珠匣",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "你获得 1 张「珍珠盒」。",
+      "rawDescription": "获得卡牌「珍珠盒」。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1045,
+          "note": ""
+        }
+      ],
+      "evidence": "固定奖励tt2-pearlbox，满包沿固定待领奖；与描述相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "ev19-potions",
+      "name": "避难市集药摊",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "从 3 瓶随机药水中选择 1 瓶获得。",
+      "rawDescription": "从 3 瓶随机药水中选择 1 瓶获得。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 893,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/event-card-choice.js",
+          "line": 19,
+          "note": ""
+        }
+      ],
+      "evidence": "随机药水3候选，eventCardChoice保留候选、选1张；与描述相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "ev19-quartermaster",
+      "name": "装备征用令",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "花费 3 币，从 3 张随机装备卡中选择 1 张获得。",
+      "rawDescription": "花费 3 币，从 3 张随机装备卡中选择 1 张获得。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 905,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/event-card-choice.js",
+          "line": 19,
+          "note": ""
+        }
+      ],
+      "evidence": "先检查并支付3币，3装备候选选1；中断恢复不重复收费，见eventCardChoiceController。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "ev19-recode",
+      "name": "故障重编",
+      "type": "事件",
+      "status": "context-gap",
+      "description": "选择 2 张招式或装备牌，使这些牌随机变为同稀有度、同类型的卡牌。",
+      "rawDescription": "选择 2 张招式或装备卡，随机变为同稀有度、同类型的卡牌。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1059,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 828,
+          "note": ""
+        }
+      ],
+      "evidence": "同稀有度/同类型替换已选条目；但need=Math.min(2,eligible.length)，只有1张合格卡时只转换1张，卡面固定“选择2张”缺少“至多”。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "ev19-vital",
+      "name": "高压急救",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "你的生命上限增加 3 点，并回复 3 点生命。",
+      "rawDescription": "生命上限 +3，并回复 3 点生命。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1039,
+          "note": ""
+        }
+      ],
+      "evidence": "maxHp+=3且hp+=3；与卡面上限+3/回复3一致。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-archer",
+      "name": "联邦射手",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 5 / 生命 3。联邦·第1层。远程攻击。",
+      "rawDescription": "攻击 5 / 生命 3。联邦·第1层。远程攻击。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 322,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 92,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血5/3，map.json真源5/3，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=volley，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-bandit",
+      "name": "反抗组织拾荒者",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 3 / 生命 3。反抗·第1层。普通近战，成群出现（盗匪横行 ×5）。",
+      "rawDescription": "攻击 3 / 生命 3。反抗·第1层。普通近战，成群出现（盗匪横行 ×5）。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 323,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 49,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血3/3，map.json真源3/3，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=strike，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-boss_elem",
+      "name": "异能领主",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 8 / 生命 48。BOSS·能力者。词缀【元素庇幕】：偶数回合减免所有伤害（破甲可克制）。",
+      "rawDescription": "攻击 8 / 生命 48。BOSS·能力者。词缀【元素庇幕】：偶数回合减免所有伤害（破甲可克制）。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 349,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 501,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血8/48，map.json真源8/48，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=element_boss，词缀=aegis，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-boss_general",
+      "name": "肃清总督",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 5 / 生命 50。BOSS·联邦。词缀【军威】：每个回合结束时攻击力 +2。",
+      "rawDescription": "攻击 5 / 生命 50。BOSS·联邦。词缀【军威】：每个回合结束时攻击力 +2。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 345,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 471,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血5/50，map.json真源5/50，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=general，词缀=grow，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-boss_orc",
+      "name": "变异巢母",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 4 / 生命 45。BOSS·变异。词缀【狂乱】：每回合攻击两次，每次附加 1 层流血或中毒。",
+      "rawDescription": "攻击 4 / 生命 45。BOSS·变异。词缀【狂乱】：每回合攻击两次，每次附加 1 层流血或中毒。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 347,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 486,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血4/45，map.json真源4/45，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=orc_boss，词缀=frenzy，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-cavalry",
+      "name": "联邦机动兵",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 5 / 生命 6。联邦·第2层。蓄力攻击：隔回合强化一击。",
+      "rawDescription": "攻击 5 / 生命 6。联邦·第2层。蓄力攻击：隔回合强化一击。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 325,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 106,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血5/6，map.json真源5/6，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=charge，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-dragon",
+      "name": "巨兽「荒渊」",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 7 / 生命 40。变异·第5层精英。重击/特殊；第一回合蓄力不会攻击。",
+      "rawDescription": "攻击 7 / 生命 40。变异·第5层精英。重击/特殊；第一回合蓄力不会攻击。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 343,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 183,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血7/40，map.json真源7/40，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=dragon，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-esper_candle",
+      "name": "烛火",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击。",
+      "rawDescription": "攻击 9 / 生命 6。反抗能力者·第4层。掌心烈焰：攻击。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 335,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 155,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血9/6，map.json真源9/6，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=strike，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-esper_crow",
+      "name": "白鸦",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 8 / 生命 5。联邦能力者·第4层。碎晶齐射：远程多段攻击。",
+      "rawDescription": "攻击 8 / 生命 5。联邦能力者·第4层。碎晶齐射：远程多段攻击。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 333,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 148,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血8/5，map.json真源8/5，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=volley，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-esper_echo",
+      "name": "回声",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 9 / 生命 7。反抗能力者·第5层。声波叠伤：远程多段攻击。",
+      "rawDescription": "攻击 9 / 生命 7。反抗能力者·第5层。声波叠伤：远程多段攻击。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 341,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 176,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血9/7，map.json真源9/7，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=volley，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-esper_silence",
+      "name": "静默",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 7 / 生命 9。联邦能力者·第5层。声场压制：攻击并施加诅咒。",
+      "rawDescription": "攻击 7 / 生命 9。联邦能力者·第5层。声场压制：攻击并施加诅咒。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 339,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 169,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血7/9，map.json真源7/9，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=curse，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-fire_el",
+      "name": "灼热异变体",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 10 / 生命 7。变异·第4层。攻击。",
+      "rawDescription": "攻击 10 / 生命 7。变异·第4层。攻击。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 331,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 134,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血10/7，map.json真源10/7，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=strike，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-grass_el",
+      "name": "滋生异变体",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 5 / 生命 12。变异·第5层。攻击并施加诅咒。",
+      "rawDescription": "攻击 5 / 生命 12。变异·第5层。攻击并施加诅咒。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 338,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 162,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血5/12，map.json真源5/12，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=curse，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-infantry",
+      "name": "联邦巡防兵",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 4 / 生命 4。联邦·第1层。普通近战，行动无特殊之处。",
+      "rawDescription": "攻击 4 / 生命 4。联邦·第1层。普通近战，行动无特殊之处。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 321,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 85,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血4/4，map.json真源4/4，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=strike，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-orc_axe",
+      "name": "甲壳变异体",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 4 / 生命 7。变异·第3层。防御/反击型，隔回合蓄势。",
+      "rawDescription": "攻击 4 / 生命 7。变异·第3层。防御/反击型，隔回合蓄势。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 329,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 127,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血4/7，map.json真源4/7，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=guard，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-orc_jav",
+      "name": "反抗组织掷弹兵",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 6 / 生命 4。反抗·第2层。远程投掷。",
+      "rawDescription": "攻击 6 / 生命 4。反抗·第2层。远程投掷。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 326,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 113,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血6/4，map.json真源6/4，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=volley，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-water_el",
+      "name": "腐蚀异变体",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 7 / 生命 10。变异·第4层。防御/反击型，隔回合蓄势。",
+      "rawDescription": "攻击 7 / 生命 10。变异·第4层。防御/反击型，隔回合蓄势。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 332,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 141,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血7/10，map.json真源7/10，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=guard，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "foe-wolf_rider",
+      "name": "变异雪狼",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "攻击 7 / 生命 6。变异·第3层。蓄力攻击：隔回合强化一击。",
+      "rawDescription": "攻击 7 / 生命 6。变异·第3层。蓄力攻击：隔回合强化一击。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/cards/cards.data.js",
+          "line": 328,
+          "note": ""
+        },
+        {
+          "file": "game/data/map.json",
+          "line": 120,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.sync.js",
+          "line": 311,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 84,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.session.modes.js",
+          "line": 18,
+          "note": ""
+        }
+      ],
+      "evidence": "敌人图鉴、无法打出且排除随机池。描述基础攻血7/6，map.json真源7/6，逐值一致；精英模式×1.5由scaledEnemy派生，图鉴不是当前场次缩放值。行为标签=charge，词缀/行为入口另列，不把不可打出当缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "pet-egg",
+      "name": "宠物蛋",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "可以孵化宠物。",
+      "rawDescription": "可以孵化宠物。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 507,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/game.hub.pages.js",
+          "line": 93,
+          "note": ""
+        }
+      ],
+      "evidence": "仓库确有孵化入口：1蛋+50储备币，获得未拥有宠物；描述“可以孵化”不声明免费。界面另显示费用。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "starter-emergency-bandage",
+      "name": "应急绷带",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "你回复 12 点生命。",
+      "rawDescription": "回复12 点生命。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "heal",
+              "amountField": "heal"
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 140,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 137,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 162,
+          "note": ""
+        }
+      ],
+      "evidence": "治疗amountField=heal，运行卡库heal=12，与描述治疗值逐项核对；战斗禁疗仍沿共享规则。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-copper",
+      "name": "铜币",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "可出售。",
+      "rawDescription": "可出售。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/base.js",
+          "line": 603,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.rules.js",
+          "line": 223,
+          "note": ""
+        }
+      ],
+      "evidence": "出售类资源按value/稀有度由共享出售入口结算；描述没有声称战斗效果。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-crystal",
+      "name": "能源结晶",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "地图背包：从消耗区复原最多3张卡牌；战斗：从本场消耗牌复原最多3张回到手牌。对应消耗区为空时不可使用。",
+      "rawDescription": "地图背包：从消耗区复原最多3张卡牌；战斗：从本场消耗牌复原最多3张回到手牌。对应消耗区为空时不可使用。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "restoreConsumed",
+              "amount": 3
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 179,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 169,
+          "note": ""
+        },
+        {
+          "file": "tests/bag-item-rule-baseline.test.js",
+          "line": 84,
+          "note": ""
+        }
+      ],
+      "evidence": "地图从usedPocket顺序复原至多规则amount张；战斗restoreConsumed回手。空区与容量守卫已有定向证据。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-econpack",
+      "name": "经济卡包",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "只能在仓库界面使用；随机获得 5 张卡牌。",
+      "rawDescription": "只能在仓库界面点击使用，获得5张随机卡牌",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.hub.pages.js",
+          "line": 238,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/game.hub.pages.js",
+          "line": 246,
+          "note": ""
+        }
+      ],
+      "evidence": "仅仓库详情拆包，通用合法池随机5张写入卡牌仓库；先要求5格，符合卡面入口及数量。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-gold",
+      "name": "金币",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "贵重货币，可出售。",
+      "rawDescription": "贵重货币，可出售。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/base.js",
+          "line": 603,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.rules.js",
+          "line": 223,
+          "note": ""
+        }
+      ],
+      "evidence": "出售类资源按value/稀有度由共享出售入口结算；描述没有声称战斗效果。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-jinchuangyao",
+      "name": "金疮药",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "你回复 20 点生命。",
+      "rawDescription": "回复 20 点生命。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "heal",
+              "amountField": "heal"
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 140,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 137,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 162,
+          "note": ""
+        }
+      ],
+      "evidence": "治疗amountField=heal，运行卡库heal=20，与描述治疗值逐项核对；战斗禁疗仍沿共享规则。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-key",
+      "name": "一把钥匙",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "解锁大门。",
+      "rawDescription": "解锁大门。",
+      "rules": {
+        "version": 1,
+        "base": {
+          "material": {
+            "kind": "keys",
+            "amount": 1
+          }
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.nest.js",
+          "line": 135,
+          "note": ""
+        }
+      ],
+      "evidence": "仓库材料规则折入真实钥匙×1；研究所大门消费真实钥匙。没有把卡牌直接当战斗道具。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-key-one",
+      "name": "三把钥匙",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "钥匙 ×3。",
+      "rawDescription": "钥匙 ×3。",
+      "rules": {
+        "version": 1,
+        "base": {
+          "material": {
+            "kind": "keys",
+            "amount": 3
+          }
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.nest.js",
+          "line": 135,
+          "note": ""
+        }
+      ],
+      "evidence": "仓库材料规则折入真实钥匙×3；研究所大门消费真实钥匙。没有把卡牌直接当战斗道具。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-keys-bunch",
+      "name": "两把钥匙",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "钥匙 ×2。",
+      "rawDescription": "钥匙 ×2。",
+      "rules": {
+        "version": 1,
+        "base": {
+          "material": {
+            "kind": "keys",
+            "amount": 2
+          }
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/run/game.nest.js",
+          "line": 135,
+          "note": ""
+        }
+      ],
+      "evidence": "仓库材料规则折入真实钥匙×2；研究所大门消费真实钥匙。没有把卡牌直接当战斗道具。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-rations",
+      "name": "口粮",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "升级宠物。",
+      "rawDescription": "升级宠物。",
+      "rules": {
+        "version": 1,
+        "base": {
+          "material": {
+            "kind": "rations",
+            "amount": 1
+          }
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/base.js",
+          "line": 603,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.rules.js",
+          "line": 223,
+          "note": ""
+        }
+      ],
+      "evidence": "仓库使用按结构化material折入rations×1；对照卡名/描述数量相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-silver",
+      "name": "银币",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "可出售。",
+      "rawDescription": "可出售。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/base.js",
+          "line": 603,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.rules.js",
+          "line": 223,
+          "note": ""
+        }
+      ],
+      "evidence": "出售类资源按value/稀有度由共享出售入口结算；描述没有声称战斗效果。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-token-gold",
+      "name": "员工通行证B",
+      "type": "道具",
+      "status": "context-gap",
+      "description": "随机获得 1 张传说卡牌（不含棱彩卡牌）。",
+      "rawDescription": "随机获取 1 张传说卡（不含棱彩卡）。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "acquire",
+              "pool": {
+                "kind": "legendary"
+              }
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 225,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.discover-candidates.js",
+          "line": 26,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.rules.js",
+          "line": 237,
+          "note": ""
+        }
+      ],
+      "evidence": "地图acquire随机直授与卡面相符。战斗legendary专用pred路径未调用isRandomObtainable，存在进入unrandom传说的全局卡池边界风险；不是“随机/发现”混淆。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-wood",
+      "name": "木材",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "木材 ×1。",
+      "rawDescription": "木材 ×1。",
+      "rules": {
+        "version": 1,
+        "base": {
+          "material": {
+            "kind": "wood",
+            "amount": 1
+          }
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/base.js",
+          "line": 603,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.rules.js",
+          "line": 223,
+          "note": ""
+        }
+      ],
+      "evidence": "仓库使用按结构化material折入wood×1；对照卡名/描述数量相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt-wood-lots",
+      "name": "大量木材",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "木材 ×2。",
+      "rawDescription": "木材 ×2。",
+      "rules": {
+        "version": 1,
+        "base": {
+          "material": {
+            "kind": "wood",
+            "amount": 2
+          }
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/base.js",
+          "line": 603,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.rules.js",
+          "line": 223,
+          "note": ""
+        }
+      ],
+      "evidence": "仓库使用按结构化material折入wood×2；对照卡名/描述数量相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-blue-potion",
+      "name": "恢复药水",
+      "type": "道具",
+      "status": "context-gap",
+      "description": "你回复 5 点生命和 1 点能量。",
+      "rawDescription": "回复 5 点生命，回复1点能量。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "heal",
+              "amountField": "heal"
+            },
+            {
+              "op": "energy",
+              "n": 1
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 5,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 147,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 171,
+          "note": ""
+        }
+      ],
+      "evidence": "战斗heal5+energy1按两op执行；地图可使用却只过滤并执行heal，energy被静默略过。卡面未说明地图只有治疗，需补场景限定或确认地图使用规则。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-demon-potion",
+      "name": "法力药水",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "你的法伤增加 2 点，持续 1 回合。",
+      "rawDescription": "法伤 +2。持续 1 回合。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "blessing",
+              "key": "spellUp",
+              "stacks": 2,
+              "duration": 1
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 140,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 137,
+          "note": ""
+        }
+      ],
+      "evidence": "按该ID结构化bag.use逐op核对地图/战斗消费者；静态相符，不代表逐卡实页通过。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-diamond",
+      "name": "钻石",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "贵重货币，可出售。",
+      "rawDescription": "贵重货币，可出售。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/base.js",
+          "line": 603,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.rules.js",
+          "line": 223,
+          "note": ""
+        }
+      ],
+      "evidence": "出售类资源按value/稀有度由共享出售入口结算；描述没有声称战斗效果。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-garnet-marble",
+      "name": "石榴弹珠",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "漂亮的小玩意，可出售。",
+      "rawDescription": "漂亮的小玩意，可出售。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/base.js",
+          "line": 603,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.rules.js",
+          "line": 223,
+          "note": ""
+        }
+      ],
+      "evidence": "出售类资源按value/稀有度由共享出售入口结算；描述没有声称战斗效果。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-houyi-potion",
+      "name": "狂暴药水",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "你的攻击力增加 2 点，持续 1 回合。",
+      "rawDescription": "获得 2 点攻击力。持续 1 回合。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "blessing",
+              "key": "atkUp",
+              "stacks": 2,
+              "duration": 1
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 140,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 137,
+          "note": ""
+        }
+      ],
+      "evidence": "按该ID结构化bag.use逐op核对地图/战斗消费者；静态相符，不代表逐卡实页通过。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-iceheart-potion",
+      "name": "冰冻药水",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "对目标附加冰冻，持续 1 回合。",
+      "rawDescription": "附加冰冻，持续 1 回合。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "curse",
+              "curse": "freeze",
+              "duration": 1
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 140,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 137,
+          "note": ""
+        }
+      ],
+      "evidence": "按该ID结构化bag.use逐op核对地图/战斗消费者；静态相符，不代表逐卡实页通过。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-mind-potion",
+      "name": "精神药水",
+      "type": "道具",
+      "status": "mismatch-static",
+      "description": "抽 2 张牌。",
+      "rawDescription": "抽 2 张牌。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "draw",
+              "amountField": "draw"
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 149,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 189,
+          "note": ""
+        }
+      ],
+      "evidence": "卡面/运行数据draw=2，规则amountField=draw；战斗amount仅支持amountField=heal，其余落op.n||1，所以实际抽1（普通战置入1张初始攻击）。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-mixed-potion",
+      "name": "流血药水",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "造成 2 点固定伤害；对目标附加 1 层流血。",
+      "rawDescription": "造成 2 点固定伤害，附加流血。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "damage",
+              "amount": 2
+            },
+            {
+              "op": "curse",
+              "curse": "bleed"
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 140,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 137,
+          "note": ""
+        }
+      ],
+      "evidence": "按该ID结构化bag.use逐op核对地图/战斗消费者；静态相符，不代表逐卡实页通过。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-mystery-potion",
+      "name": "神秘药水",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "仅战斗中使用。使用后，下回合开始时：变成1张随机招式卡牌，使其费用为0。",
+      "rawDescription": "仅战斗中使用。使用后，下回合开始时：变成1张随机招式卡牌，使其费用为0。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "mystery-potion"
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.js",
+          "line": 78,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.damage.js",
+          "line": 188,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        }
+      ],
+      "evidence": "地图明确拒绝；战斗hosted登记次回合开始，随机招式变形且费用0，与现行场景描述相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-python-potion",
+      "name": "火焰药水",
+      "type": "道具",
+      "status": "mismatch-static",
+      "description": "对全体敌人造成 2 点法术伤害。",
+      "rawDescription": "对所有敌人造成2点法伤",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "damage",
+              "amount": 2,
+              "target": "allEnemies"
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 194,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 199,
+          "note": ""
+        }
+      ],
+      "evidence": "卡面写对全体2点法伤；bag damage规则无dmgType，消费者以fixed默认结算。法伤加成与伤害类型不符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-ration-double",
+      "name": "双份口粮",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "口粮 ×2。",
+      "rawDescription": "口粮 ×2。",
+      "rules": {
+        "version": 1,
+        "base": {
+          "material": {
+            "kind": "rations",
+            "amount": 2
+          }
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/base.js",
+          "line": 603,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.rules.js",
+          "line": 223,
+          "note": ""
+        }
+      ],
+      "evidence": "仓库使用按结构化material折入rations×2；对照卡名/描述数量相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-savior-elixir",
+      "name": "斗神酒",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "你回复 99 点生命。",
+      "rawDescription": "回复 99 点生命。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "heal",
+              "amountField": "heal"
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 140,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 137,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 162,
+          "note": ""
+        }
+      ],
+      "evidence": "治疗amountField=heal，运行卡库heal=99，与描述治疗值逐项核对；战斗禁疗仍沿共享规则。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-turnabout-potion",
+      "name": "剧毒药水",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "对全体敌人附加 1 层中毒。",
+      "rawDescription": "对所有敌人附加1层中毒。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "curse",
+              "curse": "poison",
+              "stacks": 1,
+              "target": "allEnemies"
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 140,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 137,
+          "note": ""
+        }
+      ],
+      "evidence": "按该ID结构化bag.use逐op核对地图/战斗消费者；静态相符，不代表逐卡实页通过。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3-wood-bundle",
+      "name": "一捆木材",
+      "type": "资源",
+      "status": "aligned-static",
+      "description": "木材 ×3。",
+      "rawDescription": "木材 ×3。",
+      "rules": {
+        "version": 1,
+        "base": {
+          "material": {
+            "kind": "wood",
+            "amount": 3
+          }
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/base.js",
+          "line": 582,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/base.js",
+          "line": 603,
+          "note": ""
+        },
+        {
+          "file": "game/src/cards/cards.rules.js",
+          "line": 223,
+          "note": ""
+        }
+      ],
+      "evidence": "仓库使用按结构化material折入wood×3；对照卡名/描述数量相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt3sp-doom",
+      "name": "TNT",
+      "type": "道具",
+      "status": "mismatch-static",
+      "description": "消灭 2 名攻击力不超过 5 点的非 BOSS 敌人。",
+      "rawDescription": "消灭 2 名 攻击力5点及以下小怪",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "execute",
+              "cap": {
+                "atk": 5
+              },
+              "count": 2
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 200,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.m2.js",
+          "line": 257,
+          "note": ""
+        }
+      ],
+      "evidence": "卡面仅攻击<=5的小怪；bag execute只检攻击/死亡，不排affix/BOSS，低攻击首脑也进入目标。通用resolveExecute另有!foe.affix排除，两个消费器不一致。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt4-shine-token",
+      "name": "员工通行证C",
+      "type": "道具",
+      "status": "fixed-awaiting-browser",
+      "description": "发现 1 张传说卡。",
+      "rawDescription": "发现 1 张传说卡。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "discover",
+              "count": 1,
+              "pool": {
+                "kind": "legendary"
+              }
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 61,
+          "note": ""
+        },
+        {
+          "file": "game/src/hub/game.bag.js",
+          "line": 169,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 235,
+          "note": ""
+        },
+        {
+          "file": "tests/bag-token-discover.test.js",
+          "line": 67,
+          "note": ""
+        }
+      ],
+      "evidence": "本轮按老板拍板修复地图三选一，B未改变；13项专属事务、真实RunStorage写读及旧卡入口已有证据。战斗原发现独立保留；unrandom卡池风险同B另记。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt4-smoke-bomb",
+      "name": "烟雾弹",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "在非 BOSS 战斗中，你逃跑 1 次。",
+      "rawDescription": "非 BOSS 战逃跑一次。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "flee"
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 64,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 159,
+          "note": ""
+        }
+      ],
+      "evidence": "地图禁用，战斗flee显式非BOSS守卫，finish(null)为逃跑而非战败。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt4-woodify",
+      "name": "能量饮料",
+      "type": "道具",
+      "status": "aligned-static",
+      "description": "你回复 6 点生命。",
+      "rawDescription": "回复 6 点生命。",
+      "rules": {
+        "version": 1,
+        "bag": {
+          "use": [
+            {
+              "op": "heal",
+              "amountField": "heal"
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/hub/game.bag.rules.js",
+          "line": 140,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 137,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.bag.js",
+          "line": 162,
+          "note": ""
+        }
+      ],
+      "evidence": "治疗amountField=heal，运行卡库heal=6，与描述治疗值逐项核对；战斗禁疗仍沿共享规则。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt6-airdrop",
+      "name": "污染空投箱",
+      "type": "事件",
+      "status": "context-gap",
+      "description": "从「木材」「口粮」「能量饮料」和随机药水中选择 1 项获得。",
+      "rawDescription": "从木材、口粮、能量饮料、随机药水中选择一项。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1010,
+          "note": ""
+        }
+      ],
+      "evidence": "木材、口粮为卡牌；能量饮料分支立即回血6，随机药水投骰得1张。卡面“选择一项”未限定所有分支必须发卡，列出这一场景差异。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt6-bandits",
+      "name": "暴雨劫道",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "可逃离，或迎战反抗组织拾荒者 ×3~5（随层数增加），胜利获得密封物资箱 ×2。",
+      "rawDescription": "可逃离，或迎战反抗组织拾荒者 ×3~5（随层数增加），胜利获得密封物资箱 ×2。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1110,
+          "note": ""
+        }
+      ],
+      "evidence": "叙事迎战分支走eventEnemies配置，随层数3–5个bandit；胜利两个medium箱；可逃离不领奖。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt6-chestdraw",
+      "name": "熔断物资箱",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "随机开启 1 个宝箱：军用保险柜、密封物资箱或小型物资箱。",
+      "rawDescription": "从大、中、小宝箱中随机抽取 1 个开启。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1022,
+          "note": ""
+        }
+      ],
+      "evidence": "六面骰1–2小、3–4中、5–6大，等概率开1箱，与“随机抽取1个”相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt6-demondeal",
+      "name": "隧道血契",
+      "type": "事件",
+      "status": "mismatch-static",
+      "description": "你损失 5 点生命，并获得 1 个军用保险柜。",
+      "rawDescription": "-5 血，获得 1 个军用保险柜。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1002,
+          "note": ""
+        }
+      ],
+      "evidence": "卡面扣5血；实现Math.max(1,hp-5)，低于6血时不足额扣款且保留1血，仍领军用箱。需按描述决定低血拒绝还是允许致死成本，尚未扩改。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt6-goldhammer",
+      "name": "满电动力锤",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "选择领取「闪金之锤」，或接受送信委托：下一家商店随机两格商品免费，排除初始攻击。",
+      "rawDescription": "选择领取「闪金之锤」，或接受送信委托：下一家商店随机两格商品免费，排除初始攻击。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1028,
+          "note": ""
+        }
+      ],
+      "evidence": "领取指定闪金之锤或记录下一店两格免费委托，二选一；与描述相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt6-goldmine",
+      "name": "塌方采掘点",
+      "type": "事件",
+      "status": "mismatch-static",
+      "description": "抉择：①你获得 3 币；②你获得 6 币，并损失 3 点生命。",
+      "rawDescription": "稳妥取走 3 币，或冒险深挖获得 6 币并损失 3 血。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1086,
+          "note": ""
+        }
+      ],
+      "evidence": "稳妥+3币；深挖+6币但hp=Math.max(1,hp-3)，低于4血时实际损失少于3；卡面未说明保命钳位。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt6-mystery",
+      "name": "实验室余粮",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "投骰领取：1~3 点获得员工通行证A碎片 ×1，4~6 点获得 3 币；也可离开。",
+      "rawDescription": "投骰领取：1~3 点获得员工通行证A碎片 ×1，4~6 点获得 3 币；也可离开。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 985,
+          "note": ""
+        }
+      ],
+      "evidence": "六面骰前三面1碎片、后三面3币，可离开；与描述相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt6-relief",
+      "name": "临时救护站",
+      "type": "事件",
+      "status": "aligned-static",
+      "description": "选择回复 6 点生命，或投骰获得 1 张随机招式。",
+      "rawDescription": "选择回复 6 点生命，或投骰获得 1 张随机招式。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 1034,
+          "note": ""
+        }
+      ],
+      "evidence": "治疗6与投骰随机武术/法术二选一；与描述相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt6-systemsupply",
+      "name": "末班配送无人机",
+      "type": "事件",
+      "status": "context-gap",
+      "description": "你获得员工通行证A碎片和 1 张「木材」。",
+      "rawDescription": "获得员工通行证A碎片和木材卡 ×1。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/run/game.run.flow.js",
+          "line": 659,
+          "note": ""
+        }
+      ],
+      "evidence": "实际另有“碎片+2币”分支，卡面只有“碎片+木材”；现行rules明确二选一，属描述遗漏。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-abyss-sovereign",
+      "name": "深渊主宰·妲莉薇特",
+      "type": "能力卡",
+      "status": "aligned-static",
+      "description": "旧日再临：抽牌，直到你有 6 张手牌；你免疫诅咒，能量上限增加 1 点，法伤增加 1 点；你的所有可注能与必须注能的招式均视为已注能；召唤 4 名封印肢体。",
+      "rawDescription": "旧日再临：抽牌直到有 6 张手牌；免疫诅咒，能量上限 +1，法伤 +1，所有可注能与必须注能的招式均视为已注能；召唤 4 名封印肢体。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "sovereign"
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 1374,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.exec-play.js",
+          "line": 350,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.audit.js",
+          "line": 9,
+          "note": ""
+        },
+        {
+          "file": "tests/abyss-sovereign.test.js",
+          "line": 69,
+          "note": ""
+        }
+      ],
+      "evidence": "抽到6、免诅咒、能量/法伤+1、注能视为已满足与4无攻血肢体均有明确接线。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-curseimmune",
+      "name": "封印肢体1",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
+      "rawDescription": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 1373,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 1401,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 83,
+          "note": ""
+        }
+      ],
+      "evidence": "封印肢体本牌无法打出、入手无即时效果；只在5张封印集齐检查中计数。不是普通敌人图鉴；以ID集合与受缚之残影共同触发化形。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-energycap",
+      "name": "封印肢体2",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
+      "rawDescription": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 1373,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 1401,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 83,
+          "note": ""
+        }
+      ],
+      "evidence": "封印肢体本牌无法打出、入手无即时效果；只在5张封印集齐检查中计数。不是普通敌人图鉴；以ID集合与受缚之残影共同触发化形。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-healplus",
+      "name": "封印肢体4",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
+      "rawDescription": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 1373,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 1401,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 83,
+          "note": ""
+        }
+      ],
+      "evidence": "封印肢体本牌无法打出、入手无即时效果；只在5张封印集齐检查中计数。不是普通敌人图鉴；以ID集合与受缚之残影共同触发化形。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-hero-assassin",
+      "name": "白梅落影·妄",
+      "type": "能力卡",
+      "status": "aligned-static",
+      "description": "遁入虚空：净化自身，你进入潜行状态，持续 2 回合；你破除潜行的首次攻击伤害翻倍。",
+      "rawDescription": "遁入虚空：净化自身，潜行 2 回合；破隐一击伤害翻倍。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "assassin"
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.curse.js",
+          "line": 129,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.rules.js",
+          "line": 39,
+          "note": ""
+        },
+        {
+          "file": "tests/hero-cards.test.js",
+          "line": 139,
+          "note": ""
+        }
+      ],
+      "evidence": "净化+潜行2、破隐伤害翻倍分别接线；非只写描述。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-hero-descender",
+      "name": "充能火山",
+      "type": "能力卡",
+      "status": "aligned-static",
+      "description": "寂灭苍穹：你的法伤增加 1 点；本场战斗中，你每消耗 1 张卡牌，施放 1 次「火球」。",
+      "rawDescription": "寂灭苍穹：法伤 +1，本局对战中，每消耗 1 张卡牌，施放 1 次‘火球’。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "consume-fireball"
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.exec-play.js",
+          "line": 324,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 672,
+          "note": ""
+        },
+        {
+          "file": "tests/hero-cards.test.js",
+          "line": 337,
+          "note": ""
+        }
+      ],
+      "evidence": "法伤+1与consume-fireball被动登记；消耗卡时引擎施放火球。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-hero-guardian",
+      "name": "圣剑化身",
+      "type": "能力卡",
+      "status": "aligned-static",
+      "description": "诛邪圣剑：本场战斗中，你的能量上限增加 1 点，装备上限增加 1 件。",
+      "rawDescription": "诛邪圣剑：本局对战中，能量上限 +1，装备上限 +1。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "guardian"
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.tail.js",
+          "line": 23,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/bag/battle.equipment.js",
+          "line": 64,
+          "note": ""
+        },
+        {
+          "file": "tests/hero-cards.test.js",
+          "line": 203,
+          "note": ""
+        }
+      ],
+      "evidence": "能量上限+1由尾段、装备上限+1由已打出卡规则读取，两者分工明确。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-hero-mage",
+      "name": "博览者的狂语",
+      "type": "能力卡",
+      "status": "aligned-static",
+      "description": "万法乾坤：你的法伤增加 1 点；回合开始时，你发现 1 张卡牌。",
+      "rawDescription": "万法乾坤：法伤 +1，回合开始时发现 1 张卡牌。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "mage"
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.rules.js",
+          "line": 29,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.curse.js",
+          "line": 152,
+          "note": ""
+        },
+        {
+          "file": "tests/hero-cards.test.js",
+          "line": 291,
+          "note": ""
+        }
+      ],
+      "evidence": "法伤+1，句内回合开始发现登记为重复延迟效果；已有turn-start发现测试。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-hero-priest",
+      "name": "浪掷风吟",
+      "type": "能力卡",
+      "status": "aligned-static",
+      "description": "甘霖降世：将随机卡牌置入你的手牌，直到你有 6 张手牌；每置入 1 张法术牌，你回复 3 点生命。",
+      "rawDescription": "甘霖降世：置入随机卡牌直至手牌达到 6 张；其中每置入1 张法术，回复 3 血。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "priest"
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.kills.js",
+          "line": 174,
+          "note": ""
+        },
+        {
+          "file": "tests/hero-cards.test.js",
+          "line": 270,
+          "note": ""
+        }
+      ],
+      "evidence": "置入随机牌补到6；统计其中法术张数，每张回血3；不是普通draw代替。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-hero-ranger",
+      "name": "天剑诛魔·云阳",
+      "type": "能力卡",
+      "status": "aligned-static",
+      "description": "断念：将「天启剑」与「诛魔剑」洗入你的牌库。",
+      "rawDescription": "断念：将天启剑与诛魔剑洗入牌库。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "ranger"
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.deck.js",
+          "line": 9,
+          "note": ""
+        },
+        {
+          "file": "tests/hero-cards.test.js",
+          "line": 184,
+          "note": ""
+        }
+      ],
+      "evidence": "指名天启剑与诛魔剑，拆多卡名洗入；两剑后续合成仍为已有PENDING40，非本能力卡缺失。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-hero-sealer",
+      "name": "受缚之残影",
+      "type": "能力卡",
+      "status": "aligned-static",
+      "description": "深海封印：对战开始时，将本牌与 4 张「封印肢体」洗入你的牌库；你在手牌中集齐这 5 张封印之牌后，破除封印，化为「深渊主宰·妲莉薇特」。本牌无法打出。",
+      "rawDescription": "深海封印：对战开始时，将本牌与四张「封印肢体」洗入牌库；手牌中集齐这 5 张封印之牌后破除封印，化为深渊主宰·妲莉薇特。无法打出。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "seal-chain"
+          ],
+          "requirements": [
+            {
+              "kind": "unplayable"
+            }
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 1385,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 1401,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 98,
+          "note": ""
+        },
+        {
+          "file": "tests/hero-cards.test.js",
+          "line": 335,
+          "note": ""
+        }
+      ],
+      "evidence": "入场按选中能力注入4肢体，5张手牌集齐后消耗封印并加入主宰；无法打出闸存在。普通战不能使用能力卡是共享规则。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-hero-summoner",
+      "name": "花开两面",
+      "type": "能力卡",
+      "status": "mismatch-static",
+      "description": "元素潮汐：抉择，开启「末日浩劫之门」或「天国之门」；2 回合后，开启你未选择的另 1 扇门。",
+      "rawDescription": "元素潮汐：抉择：打开‘末日浩劫之门’或者‘天国之门’。两回合后，开启未选择的那扇‘门’",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "gate-choices"
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.selection-flow.js",
+          "line": 258,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.selection-flow.js",
+          "line": 266,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.kills.js",
+          "line": 219,
+          "note": ""
+        },
+        {
+          "file": "tests/hero-cards.test.js",
+          "line": 312,
+          "note": ""
+        }
+      ],
+      "evidence": "两门抉择及延后2回合登记存在；但第二门若为天国之门，缺括号候选且祝福仅玩家，未满足全部描述。现有hero测试只查门日志，不能排除该缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-hero-sword",
+      "name": "无量仙剑·云风",
+      "type": "能力卡",
+      "status": "aligned-static",
+      "description": "万剑归宗：抽 5 张牌，并直接施放其中的所有武术牌。",
+      "rawDescription": "万剑归宗：抽 5 张牌，直接释放其中武术。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "sword"
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.recovery.js",
+          "line": 146,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.draw.js",
+          "line": 106,
+          "note": ""
+        },
+        {
+          "file": "tests/hero-cards.test.js",
+          "line": 164,
+          "note": ""
+        }
+      ],
+      "evidence": "抽5并autoPlayHandType释放其中武术；主流程有刚抽UID记录，不把普通战能力禁用误判缺陷。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-hero-warlock",
+      "name": "禁术解放",
+      "type": "能力卡",
+      "status": "aligned-static",
+      "description": "无定横行：将 4 张禁咒洗入你的牌库，并抽 2 张牌。",
+      "rawDescription": "无定横行：将四张禁咒洗入牌库，然后抽 2 张牌。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "warlock"
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.deck.js",
+          "line": 54,
+          "note": ""
+        },
+        {
+          "file": "tests/hero-cards.test.js",
+          "line": 245,
+          "note": ""
+        }
+      ],
+      "evidence": "四张禁咒系列按名称前缀洗入，再抽2；牌库操作仅BOSS场景有效。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-hero-warrior",
+      "name": "青龙化身",
+      "type": "能力卡",
+      "status": "aligned-static",
+      "description": "真龙降世：本场战斗中，你的「初始攻击」变为「青龙偃月斩」。",
+      "rawDescription": "真龙降世：本局对战中，将‘初始攻击’化为‘青龙偃月斩’。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "hosted": [
+            "kill-transform"
+          ]
+        }
+      },
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/effects/battle.hosted.js",
+          "line": 21,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/effect-steps.rules.js",
+          "line": 9,
+          "note": ""
+        },
+        {
+          "file": "tests/hero-cards.test.js",
+          "line": 230,
+          "note": ""
+        }
+      ],
+      "evidence": "初始攻击变形规则登记并用于后续取卡；本场对战作用域，与卡面相符。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    },
+    {
+      "id": "tt8-nofocus",
+      "name": "封印肢体3",
+      "type": "生物",
+      "status": "reference-card-static",
+      "description": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
+      "rawDescription": "受缚之残影的封印肢体。入手时无效果，无法打出；集齐 5 张封印之牌后破除封印。",
+      "rules": null,
+      "implementationRefs": [
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 1373,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/core/battle.engine.js",
+          "line": 1401,
+          "note": ""
+        },
+        {
+          "file": "game/src/battle/effects/battle.target-rules.js",
+          "line": 83,
+          "note": ""
+        }
+      ],
+      "evidence": "封印肢体本牌无法打出、入手无即时效果；只在5张封印集齐检查中计数。不是普通敌人图鉴；以ID集合与受缚之残影共同触发化形。",
+      "coverage": "逐ID静态来源/消费者核对；未在本审查中逐卡实战。C修复测试另列。"
+    }
+  ]
+}

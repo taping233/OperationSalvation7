@@ -33,7 +33,7 @@ const SUPPORTED_ACQUIRE_FILTER_KEYS = new Set(['cost', 'costMax', 'exceptIds']);
 /** @type {Readonly<Record<AcquireDestination, readonly AcquireAction[]>>} */
 const ACQUIRE_ACTIONS = {
   hand: ['dup', 'noInfuse'],
-  deck: ['dup', 'zeroCost', 'noInfuse'],
+  deck: ['dup', 'zeroCost', 'costMinusOne', 'noInfuse'],
   discover: ['play', 'playKeep', 'dup', 'zeroCost', 'decay', 'noInfuse'],
 };
 
@@ -65,7 +65,7 @@ function isAcquireDestination(value) {
 /** @param {unknown} value @returns {value is AcquireAction} */
 function isAcquireAction(value) {
   return value === 'play' || value === 'playKeep' || value === 'dup' || value === 'zeroCost' ||
-    value === 'decay' || value === 'noInfuse';
+    value === 'costMinusOne' || value === 'decay' || value === 'noInfuse';
 }
 
 /**

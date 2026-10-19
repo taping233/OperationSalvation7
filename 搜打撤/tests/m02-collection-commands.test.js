@@ -38,6 +38,7 @@ describe('M02-A/B 收藏转换与幂等事务', () => {
     expect(first.value.firstRegistrations).toEqual([{ cardId: CARD_ID }]);
     expect(first.value.xpChanges[0]).toMatchObject({ characterId: 'wu', before: { lv: 1, xp: 0 }, after: { lv: 1, xp: 10 } });
     expect(Base.data.stash.find(stack => stack.card.id === CARD_ID).count).toBe(1);
+    expect(Base.data.collection[CARD_ID].protected).toBe(false);
 
     const second = await convertCollection(context('m02-a-2'), { stackKey: key, count: 1 });
     expect(second.ok).toBe(true);
@@ -77,6 +78,56 @@ describe('M02-A/B 收藏转换与幂等事务', () => {
     expect(failed.code).toBe('SAVE_FAILED');
     expect(JSON.stringify(Base.data)).toBe(beforeMemory);
     expect(localStorage.getItem('sdt-base-v2-slot5')).toBe(beforeDisk);
+  });
+
+  it('旧保护记录不能被经验命令绕过；取消保护后收录仍在且可以继续转化', async () => {
+    const key = put(card(), 2);
+    Base.data.collection[CARD_ID] = { name: card().name, rarity: '职业', ts: 1 };
+    Base.save();
+    const before = JSON.stringify(Base.data);
+    expect((await convertCollection(context('protected'), { stackKey: key, count: 1 })).code).toBe('COLLECTION_PROTECTED');
+    expect(JSON.stringify(Base.data)).toBe(before);
+    expect(Base.collectToggle(card())).toBe(false);
+    expect(Base.isCollected(card())).toBe(true);
+    const result = await convertCollection(context('unprotected'), { stackKey: key, count: 1 });
+    expect(result.ok).toBe(true);
+    expect(result.value.firstRegistrations).toEqual([]);
+    expect(result.value.conversion).toMatchObject({ actualXp: 10, protected: false, before: { lv: 1, xp: 0 }, after: { lv: 1, xp: 10 } });
+  });
+
+  it('批量不能超过到满级所需最少张数，末张溢出按实际经验记收据', async () => {
+    const ability = Cards.all().find(item => item.type === '能力卡' && item.cls === '侠客');
+    expect(ability).toBeTruthy();
+    const key = put(ability, 3);
+    Base.data.characters ||= {};
+    Base.data.characters.wu = { lv: 9, xp: 360 };
+    Base.save();
+    const before = JSON.stringify(Base.data);
+    expect((await convertCollection(context('over-cap'), { stackKey: key, count: 2 })).code).toBe('CONVERSION_LIMIT');
+    expect(JSON.stringify(Base.data)).toBe(before);
+    const result = await convertCollection(context('reach-cap'), { stackKey: key, count: 1 });
+    expect(result.ok).toBe(true);
+    expect(result.value.conversion).toMatchObject({ count: 1, perCardXp: 50, actualXp: 10, overflowXp: 40,
+      before: { lv: 9, xp: 360 }, after: { lv: 10, xp: 0 } });
+    expect(result.value.xpChanges[0]).toMatchObject({ actualXp: 10, overflowXp: 40, after: { lv: 10, xp: 0 } });
+    expect(Base.data.stash.find(stack => stack.card.id === ability.id).count).toBe(2);
+  });
+
+  it('满级首次图鉴只允许消耗1张经验0，已收录后拒绝纯经验转化', async () => {
+    const key = put(card(), 3);
+    Base.data.characters ||= {};
+    Base.data.characters.wu = { lv: 10, xp: 0 };
+    Base.save();
+    expect((await convertCollection(context('max-first-many'), { stackKey: key, count: 2 })).code).toBe('CONVERSION_LIMIT');
+    const first = await convertCollection(context('max-first'), { stackKey: key, count: 1 });
+    expect(first.ok).toBe(true);
+    expect(first.value.conversion).toMatchObject({ registrationOnly: true, actualXp: 0, overflowXp: 0, count: 1 });
+    expect(first.value.firstRegistrations).toEqual([{ cardId: CARD_ID }]);
+    const before = JSON.stringify(Base.data);
+    expect((await convertCollection(context('max-again'), { stackKey: key, count: 1 })).code).toBe('CHARACTER_MAXED');
+    expect(JSON.stringify(Base.data)).toBe(before);
+    expect(Base.data.stash.find(stack => stack.card.id === CARD_ID).count).toBe(2);
+    expect(getCollection(readBase(SLOT).value, Cards).find(item => item.card.cardId === CARD_ID).canConvert).toBe(false);
   });
 });
 

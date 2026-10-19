@@ -73,7 +73,7 @@ async function selectFirstTwoCostMove(researchUid) {
   expect(state.discovering, '改写描述后仍应进入结构化发现').toBeTruthy();
   const options = state.discovering.options || [];
   expect(options.length).toBeGreaterThan(0);
-  expect(options.every(card => card.type === '武术' && Number(card.cost) === 2)).toBe(true);
+  expect(options.every(card => ['武术', '法术'].includes(card.type) && Number(card.cost) === 2)).toBe(true);
   const selected = options[0];
   BattleSession.commands.pickDiscover(0);
   state = await drain();

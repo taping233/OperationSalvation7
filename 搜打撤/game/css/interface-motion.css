@@ -6,10 +6,10 @@ body.interface-motion {
 }
 body.interface-motion #t1Gate { display: none !important; }
 body.interface-motion #overlay[data-ui-motion] {
-  --ui-in: var(--motion-page-enter,500ms); --ui-out: var(--motion-exit,180ms); --ui-rise: 14px; --ui-return: 9px; --ui-scale: .992;
+  --ui-in: var(--motion-page-enter,260ms); --ui-out: var(--motion-exit,180ms); --ui-rise: 10px; --ui-return: 6px; --ui-scale: 1;
 }
-body.interface-motion #overlay[data-ui-motion="panel"] { --ui-in: var(--motion-detail-enter,320ms); --ui-rise: 12px; --ui-scale: .985; }
-body.interface-motion #overlay[data-ui-motion="confirm"] { --ui-in: var(--motion-detail-enter,320ms); --ui-out: var(--motion-exit,180ms); --ui-rise: 6px; --ui-return: 5px; --ui-scale: .98; }
+body.interface-motion #overlay[data-ui-motion="panel"] { --ui-in: var(--motion-detail-enter,220ms); --ui-rise: 10px; --ui-scale: .992; }
+body.interface-motion #overlay[data-ui-motion="confirm"] { --ui-in: var(--motion-detail-enter,220ms); --ui-out: var(--motion-exit,180ms); --ui-rise: 6px; --ui-return: 5px; --ui-scale: .992; }
 body.interface-motion #overlay[data-ui-motion="fast"] { --ui-in: var(--motion-fast-enter,180ms); --ui-out: var(--motion-fast-exit,110ms); --ui-rise: 4px; --ui-return: 4px; --ui-scale: 1; }
 body.interface-motion #overlay[data-ui-motion][data-ui-instant-close] { --ui-out: var(--motion-fast-exit,110ms); --ui-return: 4px; --ui-scale: 1; }
 

@@ -64,9 +64,9 @@ describe('消耗卡复原公共选择界面', () => {
     expect(sub).toBe('老师傅替你修整行装。');
     openPocketRestore(1, vi.fn(), { title:'修鞋铺 · 修整行装', sub });
     expect(remaining()).toContain('还可复原 1 张（最多 1 张）');
-    expect(remaining()).toContain('点击卡牌立即复原 1 张');
+    expect(remaining()).not.toContain('点击卡牌');
     expect(document.querySelector('.battle-decision-head').textContent).toContain('消耗区');
-    expect(document.querySelector('.battle-decision-summary').textContent.match(/点击卡/g)).toHaveLength(1);
+    expect(document.querySelector('.battle-decision-summary').textContent).not.toContain('点击卡');
     expect(document.querySelector('.battle-decision-summary').textContent).toContain('道具/装备共 2 张不可复原');
   });
 

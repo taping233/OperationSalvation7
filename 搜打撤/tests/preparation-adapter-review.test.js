@@ -28,6 +28,26 @@ describe('整备adapter真实Base读取与DOM视图', () => {
     await vi.waitFor(() => expect(navigation.applyPicks).toHaveBeenCalledExactlyOnceWith({ 'card:adapter-card:foil': 1 }));
     expect(navigation.openDeparture).toHaveBeenCalledOnce(); expect(Base.data.stash).toEqual(before);
   });
+  it('人物宠物应用失败留在预设页显示错误，重试成功后才导航', async () => {
+    Base.data.pets.robot = { lv: 1 };
+    Object.assign(Base.data.goals.presets['preset-1'], { characterId: 'baita', petId: 'robot' });
+    expect(Base.save()).toBe(true);
+    navigation.applyPicks.mockReturnValueOnce(false).mockReturnValueOnce(true);
+    expect(feature.open()).toBe(true);
+    const before = structuredClone(Base.data.stash);
+    const button = () => document.querySelector('[data-preset="preset-1"] [data-action="preset-apply"]');
+    button().click();
+    await vi.waitFor(() => expect(document.querySelector('.prep-error')?.textContent).toContain('人物或宠物设置未能应用'));
+    expect(navigation.applyPicks).toHaveBeenCalledExactlyOnceWith(
+      { 'card:adapter-card:foil': 1 }, { characterId: 'baita', petId: 'robot' });
+    expect(navigation.openDeparture).not.toHaveBeenCalled();
+    expect(Base.data.stash).toEqual(before);
+    expect(button().disabled).toBe(false);
+    button().click();
+    await vi.waitFor(() => expect(navigation.openDeparture).toHaveBeenCalledOnce());
+    expect(navigation.applyPicks).toHaveBeenCalledTimes(2);
+    expect(Base.data.stash).toEqual(before);
+  });
   it('换slot后旧返回不能导航或读取新档', () => {
     expect(feature.open()).toBe(true); const oldBack = actions.preparationBack; Base.use(2); oldBack();
     expect(navigation.returnToBase).not.toHaveBeenCalled(); expect(navigation.applyPicks).not.toHaveBeenCalled(); expect(Base.slot).toBe(2);

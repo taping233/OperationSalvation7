@@ -41,9 +41,9 @@ export function eventSceneHTML({ tone, icon = '', title, sub = '', body = '', fo
   const choices = choiceTemplate ? decorateChoices(choiceTemplate) : body;
   const choiceCount = choiceTemplate ? choiceTemplate.content.querySelectorAll('.evt-opt[data-act]').length : 0;
   const eventChoiceFoot = choiceCount > 1 ? `<div class="event-choice-state">
-    <div class="event-choice-announcement" role="status" aria-live="polite"><b data-event-choice-name>先选择一个选项</b><small data-event-choice-detail>点击选项查看已知结果，再确认执行。</small></div>
+    <div class="event-choice-announcement" role="status" aria-live="polite"><b data-event-choice-name>未选择</b><small data-event-choice-detail></small></div>
     <button type="button" class="event-choice-clear" disabled>取消选择</button>
-    <button type="button" class="ov-btn ok event-choice-confirm" disabled>选择后确认</button>
+    <button type="button" class="ov-btn ok event-choice-confirm" disabled>确认选择</button>
   </div>` : '';
   // 四类插画事件页复用公共退出键和真实资源 HUD；结算仍由调用者处理。
   const topbar = themed ? `<div class="event-topbar">

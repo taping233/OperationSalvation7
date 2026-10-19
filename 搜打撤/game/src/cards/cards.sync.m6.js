@@ -10,8 +10,8 @@
  *   tt3-houyi-potion     狂暴药水   blessing atkUp stacks:2 duration:1（与 demon-potion 同构）；
  *   tt3-iceheart-potion  冰冻药水   curse freeze duration:1（敌方指向由宿主 itemTargetSideFor 承担）；
  *   tt3-mind-potion      精神药水   draw amountField:'draw'（draw:2；地图侧无牌可抽，消费端需 battle-only 作用域）；
- *   tt3-mixed-potion     流血药水   damage amount:2 + curse bleed（bag.use 参数白名单无 dmgType，固定伤）；
- *   tt3-python-potion    火焰药水   damage amount:2 target:'allEnemies'（同上，法伤口径由消费端定）；
+ *   tt3-mixed-potion     流血药水   damage amount:2 + curse bleed（未声明伤害类型时为固定伤）；
+ *   tt3-python-potion    火焰药水   damage amount:2 dmgType:'spell' target:'allEnemies'；
  *   tt3-turnabout-potion 剧毒药水   curse poison stacks:1 target:'allEnemies'（SPEC §二.13 表达例同款）；
  *   tt3sp-doom           TNT        execute cap:{atk:5} count:2（按 SPEC §二.5 已定版键位，含 BOSS 排除）；
  *   cmtmvq6ss84l         员工通行证A acquire pool:{kind:'classAbility'}（直授版；与 tt-token-color 同名不同 id，陷阱 T8 不合并）；
@@ -23,7 +23,7 @@
  * 双门现状（2026-09-27 实测）：并行 M3 批已放行 bag.use 扩展 op——schema BAG_SUPPORTED_OPS
  * 十一种（heal/restoreConsumed/energy/blessing/curse/draw/damage/execute/acquire/discover/flee，
  * card-rules.schema.js BAG_OP_KEYS 参数白名单）+ capability 同名收口（card-rules.capability.js）。
- * 本批十三张全部过双门（damage 参数白名单无 dmgType——bag 域伤害为固定伤口径，数据已按白名单收敛）。
+ * damage 可显式声明伤害类型，未声明时仍为固定伤；写入前由双门校验。
  * 消费端（battle.bag.js useItem 文本路径 / game.bag.js useStructuredBagRule 单 op heal）收编在途：
  * 回填器仍沿用 m1 保守语义——先校验后保存，任何失败路径抛错整体退出不标记、库内数据不动。
  * 注意接线时序：rules.bag.use 一旦落库，地图侧结构化分支优先于 id/文本分支，消费端 bag.use
@@ -33,7 +33,7 @@
  * 本文件只保留 definitions 数据与批次参数；迁移数据行为不变（m6-data.test.js 守护）。 */
 import { createRuleBackfiller } from './cards.sync.backfiller.js';
 
-const M6_MARKER_KEY = 'sdt-cards-m6-bag-rules-v1-seeded';
+const M6_MARKER_KEY = 'sdt-cards-m6-bag-rules-v2-seeded';
 
 // definitions 值与 A3/m1 同为「卡形部分定义」（{ rules: {...} }），回填只取其 .rules。
 const BAG = (use) => ({ rules: { version: 1, bag: { use } } });
@@ -52,7 +52,7 @@ const definitions = new Map([
     { op: 'damage', amount: 2 },
     { op: 'curse', curse: 'bleed' },
   ])],
-  ['tt3-python-potion', BAG([{ op: 'damage', amount: 2, target: 'allEnemies' }])],
+  ['tt3-python-potion', BAG([{ op: 'damage', amount: 2, dmgType: 'spell', target: 'allEnemies' }])],
   ['tt3-turnabout-potion', BAG([{ op: 'curse', curse: 'poison', stacks: 1, target: 'allEnemies' }])],
   ['tt3sp-doom', BAG([{ op: 'execute', cap: { atk: 5 }, count: 2 }])],
   ['cmtmvq6ss84l', BAG([{ op: 'acquire', pool: { kind: 'classAbility' } }])],
@@ -86,4 +86,7 @@ export const ensureM6BagRules = createRuleBackfiller({
   markerKey: M6_MARKER_KEY,
   definitions,
   canonicalTableById: CANONICAL_TABLE_BY_ID,
+  previousRulesById: new Map([
+    ['tt3-python-potion', BAG([{ op: 'damage', amount: 2, target: 'allEnemies' }]).rules],
+  ]),
 });

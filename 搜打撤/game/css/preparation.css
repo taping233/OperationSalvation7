@@ -60,7 +60,9 @@
 }
 
 /* ── 摘要条：金/青双色语义 ── */
-.prep-summary { border-left-width: 3px; border-radius:0; font-variant-numeric: tabular-nums; }
+.prep-summary { flex-wrap: wrap; gap: 6px 10px; border-left-width: 3px; border-radius:0; font-variant-numeric: tabular-nums; }
+.prep-summary > b { flex-shrink: 0; }
+.prep-summary > span { flex: 1 1 200px; min-width: 0; }
 .prep-summary.ready {
   border-left-color: var(--gold-main);
   background: linear-gradient(90deg, rgba(84,65,22,.45), rgba(30,25,12,.55) 72%);

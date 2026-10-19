@@ -1,0 +1,35 @@
+{
+  "source": "Codex current in-app browser",
+  "steps": [
+    {
+      "action": "chestTake1",
+      "index": "1",
+      "received": 1
+    },
+    {
+      "action": "chestTake1",
+      "index": "2",
+      "received": 2
+    },
+    {
+      "action": "chestTake1",
+      "index": "3",
+      "received": 3
+    },
+    {
+      "action": "chestTake1",
+      "index": "4",
+      "received": 4
+    },
+    {
+      "action": "chestTake1",
+      "index": "5",
+      "received": 5
+    },
+    {
+      "action": "chestContinue",
+      "index": null,
+      "received": 6
+    }
+  ]
+}

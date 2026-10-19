@@ -1,6 +1,6 @@
 // @ts-check
 import { validateGeneratedMap } from '../run/map-generator.js';
-import { CURRENT_GENERATOR_VERSION, validateCurrentGeneratedMap } from '../run/map-generation-rules.js';
+import { CURRENT_GENERATOR_VERSION, MAP_TYPE_BUDGETS, validateCurrentGeneratedMap } from '../run/map-generation-rules.js';
 import { clone } from '../core/shared.js';
 
 /** 覆盖层数据形状（与 run/layeredMap.js createLayeredMap 输出对齐，仅声明本文件触达的成员）。
@@ -91,7 +91,7 @@ function candidates(layer) {
 
 /** 路线覆盖层入口：对第 2 层做「支线格 ↔ 宝箱格」换位制造支线环，失败则原样降级（fallback）。
  * @param {object} p
- * @param {number} p.generatorVersion  生成器版本（旧 3 或新局 4，各走自己的最终质量门）
+ * @param {number} p.generatorVersion  生成器版本（旧 3/5 或新局 6，各走对应版本的最终质量门）
  * @param {number} p.layoutVersion  布局版本（须为 9，否则拒绝输入）
  * @param {MapLayer[]} p.layerData  四层地图数据（createLayeredMap 产物）
  * @param {string} [p.routeVersion]  路线协议版本，缺省取 ROUTE_VERSION
@@ -100,7 +100,7 @@ function candidates(layer) {
 export function applyRouteOverlay({ generatorVersion, layoutVersion, layerData, routeVersion=ROUTE_VERSION }) {
   let original=null;
   try {
-    if(![3,CURRENT_GENERATOR_VERSION].includes(generatorVersion) || layoutVersion!==9 || routeVersion!==ROUTE_VERSION || !Array.isArray(layerData) || layerData.length!==4)
+    if(![3,5,CURRENT_GENERATOR_VERSION].includes(generatorVersion) || layoutVersion!==9 || routeVersion!==ROUTE_VERSION || !Array.isArray(layerData) || layerData.length!==4)
       return {ok:false,code:'INVALID_ROUTE_INPUT',message:'路线覆盖输入无效'};
     original=clone(layerData); const work=clone(layerData), layer=work[1];
     const choices=candidates(layer);
@@ -114,7 +114,7 @@ export function applyRouteOverlay({ generatorVersion, layoutVersion, layerData, 
         if(!layer.logical[donor] || layer.logical[donor].def.type!=='chest') continue;
         const draft=clone(work), dl=draft[1], beforeSupply=clone(dl.logical[choice.supply].def), beforeDonor=clone(dl.logical[donor].def);
         setDef(dl,choice.supply,beforeDonor); setDef(dl,donor,beforeSupply);
-        const raw=rawLayers(draft), quality=generatorVersion===CURRENT_GENERATOR_VERSION ? validateCurrentGeneratedMap(raw) : validateGeneratedMap(raw);
+        const raw=rawLayers(draft), quality=generatorVersion===3 ? validateGeneratedMap(raw) : validateCurrentGeneratedMap(raw, MAP_TYPE_BUDGETS, generatorVersion===CURRENT_GENERATOR_VERSION);
         if(!quality.ok || !battleAdjacencyOk(raw)) continue;
         return {ok:true,value:{layerData:draft,routeVersion:ROUTE_VERSION,status:'applied',routePlan:{
           layerIndex:1,status:'applied',startNodeId:dl.logical[choice.start].id,rejoinNodeId:dl.logical[choice.rejoin].id,

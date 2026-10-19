@@ -58,6 +58,11 @@ async function harness(slot = 2, failpoint = null) {
 const expectedReceipt = {
   version: 1, outcome: 'clear', bossKilled: true, layersReached: 4,
   actions: 8, firstExplore: { moves: 8, xp: 36 },   // 旧档无 explored：回退 turn-1；20+8*2
+  growth: {
+    version: 1, source: 'extraction', characterId: 'wu', characterName: 'wu', awardedXp: 36, actualXp: 36, overflowXp: 0,
+    before: { lv: 1, xp: 0 }, after: { lv: 1, xp: 36 }, levelsGained: 0, maxed: false,
+    nextLevelXp: 50, xpToNext: 14, effects: [{ label: '出征生命加成', before: 0, after: 0 }],
+  },
   savedCards: [{ card, count: 1 }],
   netTake: { cardsStashed: 1, pocketKept: 1, wood: 3, rations: 2 },
   losses: { lostCount: 1, lostNotable: [{ name: '回执测试卡', rarity: '史诗', count: 1 }], pocketLost: 1 },

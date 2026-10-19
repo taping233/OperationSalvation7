@@ -1,0 +1,79 @@
+{
+  "paths": [
+    "game/css/bag-design-system.css",
+    "game/css/chest-reward-overview.css",
+    "game/src/ui/chest-reward-overview.js",
+    "game/src/ui/reward-scene-view.js",
+    "game/src/run/chests.js",
+    "tests/event-reward-layout.test.js",
+    "tests/reward-picker-continuity.test.js",
+    "game/dev/bag-reward-slice-review.html",
+    "game/dev/bag-reward-slice-review.js"
+  ],
+  "limits": [
+    "One sequential local sample; not a speedup guarantee or percentage.",
+    "Reuses the same verify report; no tests/browser repeated.",
+    "Command count excludes the already completed verification and browser capture."
+  ],
+  "inputsUnchangedDuringComparison": true,
+  "slice": {
+    "wallClockMs": 4940.4538,
+    "explicitSummaryInputFiles": 0,
+    "internalTiming": {
+      "planningMs": 3899.4279,
+      "checkingMs": 0.0005999999998493877,
+      "totalMs": 4761.0037
+    },
+    "nodeCommands": 1
+  },
+  "version": 1,
+  "scope": "partial",
+  "browserReports": [],
+  "inventory": [
+    {
+      "sha256": "9e08bf867316eac0038a76b97177a7b06d09e1d1e3d59066fc0169e491a7ca3f",
+      "file": "game/css/bag-design-system.css"
+    },
+    {
+      "sha256": "1a76e4d31bf386bbdb5e6d1f8ad7aa15ce7774bdfedc279e7403c43ddaf48714",
+      "file": "game/css/chest-reward-overview.css"
+    },
+    {
+      "sha256": "9628e6d153c9003eebdf49a4f331f9727a46d6b44ca385419cf77a7f9b3303f6",
+      "file": "game/src/ui/chest-reward-overview.js"
+    },
+    {
+      "sha256": "b5fd8b0f12861b6b216afe94a7df99ef5b7db8198c5b81a01d7228ca290b39b9",
+      "file": "game/src/ui/reward-scene-view.js"
+    },
+    {
+      "sha256": "1f58a9b779a7f1f3654fc6d19f04f5bb80c5fa42e63012e5c2226fe59ae1ebb8",
+      "file": "game/src/run/chests.js"
+    },
+    {
+      "sha256": "aabfba2e2c7d7209381728222efe525a4acbcf29fd71ce98fa897cabd6fa523c",
+      "file": "tests/event-reward-layout.test.js"
+    },
+    {
+      "sha256": "53cdaa52cfe0f1799ee2f90109b71a2b72dae86f2abb493acb049a5601f5710b",
+      "file": "tests/reward-picker-continuity.test.js"
+    },
+    {
+      "sha256": "658224f98484bb4f092b65d7fe2b1008b95414de4d9ac7e065296d00b7c0bbc8",
+      "file": "game/dev/bag-reward-slice-review.html"
+    },
+    {
+      "sha256": "8e239ef6e8ece1671a20dec890bf08120cd7c1307b16efd91d0356538d863479",
+      "file": "game/dev/bag-reward-slice-review.js"
+    }
+  ],
+  "sameReportResults": true,
+  "legacy": {
+    "wallClockMs": 5214.6177,
+    "explicitSummaryInputFiles": 1,
+    "nodeCommands": 2
+  },
+  "verifyReport": "docs/evidence/2026-10-19-WF-bag-reward-slice-1019/2026-10-19T11-08-52.327Z-6a60e224.json",
+  "gate": "full",
+  "measuredAt": "2026-10-19T11:09:56.5500568Z"
+}

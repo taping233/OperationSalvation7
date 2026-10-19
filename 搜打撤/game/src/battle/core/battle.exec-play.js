@@ -12,7 +12,7 @@ import { rejectUnsupportedCard } from '../effects/battle.rule-guard.js';
 import { inspectCardRuleCapability } from '../../cards/card-rules.capability.js';
 import { isHandPaymentCandidate } from './battle.hand-selection.js';
 import { hasInfusionWaiver, missingInfusionReason } from '../effects/battle.infusion.js';
-import { G, foes, mode, hand, discard, played, consumed, grave, energy, delayed, cardAnims, freeCast, infuseFuels, consumeFireballN, allSpellsInfused, growthNames, killAtkUp, playerCurseImmune, arrowRune, nextSpellTwice, poisonOnSpell, playedMovesThisTurn, playedMartialThisTurn, activeActionSignal, battleState, effectiveHandMax, set$hand, set$energy, set$infuseFuels, set$nextSpellTwice, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$playerCurseImmune, set$allSpellsInfused, set$consumeFireballN, set$stealthStrike, set$lastPlayedType, set$playedMovesThisTurn, set$playedMartialThisTurn, set$activeActionSignal, set$handSelecting, nextActionSeq } from '../runtime/battle.runtime.js';
+import { G, foes, mode, hand, discard, played, consumed, grave, energy, delayed, cardAnims, freeCast, infuseFuels, recordHandInfusion, consumeFireballN, allSpellsInfused, growthNames, killAtkUp, playerCurseImmune, arrowRune, nextSpellTwice, poisonOnSpell, playedMovesThisTurn, playedMartialThisTurn, activeActionSignal, battleState, effectiveHandMax, set$hand, set$energy, set$infuseFuels, set$nextSpellTwice, set$killAtkUp, set$poisonOnSpell, set$poisonLegacy, set$playerCurseImmune, set$allSpellsInfused, set$consumeFireballN, set$stealthStrike, set$lastPlayedType, set$playedMovesThisTurn, set$playedMartialThisTurn, set$activeActionSignal, set$handSelecting, nextActionSeq } from '../runtime/battle.runtime.js';
 
 const R = () => SDT.MAP.rules;
 const alive = () => foes.filter(foe => !foe.dead);
@@ -257,6 +257,7 @@ export function createBattleExecPlay({
     fuelUids.forEach(f => removeUid(hand, f));
     for (const f of fuelUids) {
       consumed.push(f);
+      recordHandInfusion(hand);
       // v0.25：被消耗的牌进入墓地——墓地不参与洗回，战胜 BOSS 后可在整理背包放回
       if (mode === 'boss') grave.push(f);
       const o = findCard(f);

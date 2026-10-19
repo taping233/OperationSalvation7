@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-19",
+  "status": "passed",
+  "scope": "整备预设容量计算、人物/宠物应用与流程文案",
+  "tests": [
+    {
+      "files": 16,
+      "passed": 146,
+      "command": "npm run test:target -- tests/m06-preparation.test.js tests/m06-sources-view.test.js tests/xart-z1-batch1.test.js tests/xart-z1-batch2.test.js tests/departure-summary.test.js tests/game-hub-preparation-feature.test.js tests/preparation-adapter-review.test.js tests/preparation-slot-review.test.js tests/departure-stack-lifecycle-review.test.js tests/departure-browse-state.test.js tests/departure-rejected-start.test.js tests/departure-render-performance.test.js tests/hub-architecture.test.js tests/full-review-regressions-hub.test.js tests/contracts.test.js tests/architecture-boundaries.test.js"
+    },
+    {
+      "files": 3,
+      "passed": 10,
+      "overlapsPrimary": true,
+      "command": "npm run test:target -- tests/m06-sources-view.test.js tests/preparation-adapter-review.test.js tests/esc-semantics.test.js"
+    }
+  ],
+  "eslint": {
+    "passed": true,
+    "scope": "7个生产/夹具JS及7个自有测试文件"
+  },
+  "docs": {
+    "passed": true,
+    "checkedRelativeLinks": 597,
+    "findings": []
+  },
+  "diffCheck": {
+    "passed": true
+  },
+  "browser": {
+    "platform": "Codex in-app browser",
+    "url": "http://localhost:5200/dev/preparation-preset-review.html",
+    "viewport": "当前窗口；未设置尺寸覆盖",
+    "state": "内存构造",
+    "input": "真实点击容量夹具按钮、应用预设、下一步选择卡牌",
+    "checks": [
+      "6/5格时容量不足且应用禁用",
+      "6/6格可应用",
+      "白塔预选正确",
+      "变形机器人携带正确",
+      "实际初始牌7张和装备3张共6格",
+      "最终容量提示无重叠",
+      "最终新页error日志为空"
+    ],
+    "artifacts": [
+      {
+        "Name": "browser-errors.json",
+        "Bytes": 2,
+        "SHA256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945"
+      },
+      {
+        "Name": "departure-applied.png",
+        "Bytes": 79229,
+        "SHA256": "543140756B6854E05BD3D9BE439709340583F86023FE3EA4B8E628503AD15AA9"
+      },
+      {
+        "Name": "preset-blocked.png",
+        "Bytes": 52890,
+        "SHA256": "AC325EB8726C2C87BE62C7A1CE9E0B8711C1EB4AE87C7B616AC94C5AA057B4F7"
+      }
+    ]
+  },
+  "boundaries": [
+    "第三项首次目标未改",
+    "未创建正式对局或改动玩家Base/Run存档",
+    "未跑整项目全量、build或CI",
+    "未提交"
+  ]
+}

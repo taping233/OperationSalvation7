@@ -16,7 +16,7 @@ export function deckSteps(s) {
         run: (ctx, m) => {
           const added = [];
           // 铁甲阵：洗入随机卡时使其费用均 -1（2026-09-08 老板指定补实装）
-          const cheap = /费用均?\s*[-－]\s*1/.test(ctx.desc);
+          const cheap = /费用均?\s*[-－]\s*1|费用均?(?:减少|降低)\s*1\s*点?/.test(ctx.desc);
           if (m.shR) {
             for (let i = 0; i < +m.shR[1]; i++) {
               const discovered = randomDiscoverCard(null);

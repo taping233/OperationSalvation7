@@ -1,0 +1,63 @@
+{
+  "source": "Codex current in-app browser",
+  "url": "http://127.0.0.1:5200/dev/bag-reward-slice-review.html",
+  "input": "first 收下 button press Enter",
+  "focusAfterClaim": {
+    "action": "chestSelect",
+    "index": "0"
+  },
+  "diagnostic": {
+    "sameCardNodes": 0,
+    "initialCardNodes": 6,
+    "sameImageNodes": 0,
+    "initialImageNodes": 19,
+    "focus": {},
+    "owned": [
+      {
+        "name": "冰刺",
+        "safe": false
+      }
+    ],
+    "layout": {
+      "viewport": {
+        "width": 1523,
+        "height": 956
+      },
+      "checked": 15,
+      "issues": [
+        {
+          "type": "action-outside-scrollport",
+          "label": "放大查看草甲",
+          "axis": "x",
+          "ancestor": "reward-objects"
+        },
+        {
+          "type": "action-outside-scrollport",
+          "label": "收下",
+          "axis": "x",
+          "ancestor": "reward-objects"
+        },
+        {
+          "type": "action-outside-scrollport",
+          "label": "放大查看剑落纷霜",
+          "axis": "x",
+          "ancestor": "reward-objects"
+        },
+        {
+          "type": "action-outside-viewport",
+          "label": "放大查看剑落纷霜"
+        },
+        {
+          "type": "action-outside-scrollport",
+          "label": "收下",
+          "axis": "x",
+          "ancestor": "reward-objects"
+        },
+        {
+          "type": "action-outside-viewport",
+          "label": "收下"
+        }
+      ]
+    }
+  }
+}

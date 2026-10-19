@@ -3,6 +3,7 @@ import { chestRewardOverviewHTML } from '../game/src/ui/chest-reward-overview.js
 import { stackTransferSlotDelta } from '../game/src/core/card-capacity.js';
 import { createRewardOrganizer } from '../game/src/hub/game.reward-organizer.js';
 import fs from 'node:fs';
+import postcss from 'postcss';
 
 describe('本批收获摘要与安全格可用性',()=>{
   it('只按显式领取记录聚合同名，显示去向，不把箱子候选当收获',()=>{
@@ -51,9 +52,13 @@ describe('本批收获摘要与安全格可用性',()=>{
     expect(JSON.stringify(game.ownedCards)).toBe(before);
     expect(document.body.textContent).toContain('整叠需 0 格，安全格余 0 格');
   });
-  it('四项使用四列并收紧装饰间距，完成摘要有限高可滚动',()=>{
-    const css=fs.readFileSync('game/css/chest-reward-overview.css','utf8');
-    expect(css).toMatch(/data-reward-count="4"\] \.reward-objects\s*\{grid-template-columns:repeat\(4,minmax\(0,1fr\)\);max-width:none/);
-    expect(css).toMatch(/\.cqo-receipt\{[^}]*max-height:180px;overflow:auto/);
+  it('四项保留四列阅读宽度，完成摘要有限高可滚动',()=>{
+    const css=postcss.parse(fs.readFileSync('game/css/chest-reward-overview.css','utf8'));
+    const values=selector=>{const result={};css.walkRules(rule=>{if(rule.selectors.includes(selector))rule.walkDecls(decl=>result[decl.prop]=decl.value);});return result;};
+    expect(values('body #overlay .card .cqo-frame .cqp-dialog .reward-replica[data-reward-count="4"] .reward-objects')).toMatchObject({'grid-template-columns':'repeat(4,280px)','max-width':'none'});
+    const receipt=values('body #overlay .card .cqo-frame .cqo-receipt');
+    expect(receipt.overflow).toBe('auto');
+    expect(Number.parseFloat(receipt['max-height'])).toBeGreaterThan(0);
+    expect(Number.parseFloat(receipt['max-height'])).toBeLessThanOrEqual(180);
   });
 });

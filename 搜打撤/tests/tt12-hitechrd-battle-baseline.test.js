@@ -102,8 +102,8 @@ describe('tt12-hitechrd legacy BattleSession baseline', () => {
     BattleSession.commands.playCard(researchUid, null);
     state = await waitForDiscovery();
     const options = state.discovering?.options || [];
-    const pickIndex = options.findIndex(card => card.type === '武术' && Number(card.cost) === 2);
-    expect(pickIndex, `应实际显示 2 费武术候选；当前候选为 ${options.map(card => `${card.id}:${card.type}:${card.cost}`).join(', ')}`).toBeGreaterThanOrEqual(0);
+    const pickIndex = options.findIndex(card => ['武术', '法术'].includes(card.type) && Number(card.cost) === 2);
+    expect(pickIndex, `应实际显示 2 费招式候选；当前候选为 ${options.map(card => `${card.id}:${card.type}:${card.cost}`).join(', ')}`).toBeGreaterThanOrEqual(0);
     const selected = options[pickIndex];
     const libraryCard = Cards.all().find(card => card.id === selected.id);
     expect(libraryCard?.cost).toBe(2);

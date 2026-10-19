@@ -254,7 +254,7 @@ export function restoreAtkDown(foe) {
  * execute：消灭满足 cap 的敌人（吞噬「攻 4 及以下小怪」/ TNT）。
  * perCurseKinds=true 时消灭数量锚定目标诅咒种类数；onKill 奖励复用击杀奖励键。
  */
-function matchesExecuteCap(foe, cap = {}) {
+export function matchesExecuteCap(foe, cap = {}) {
   return !foe.affix && (cap.atk === undefined || (foe.atk || 0) <= cap.atk) &&
     (cap.maxHpBelow === undefined || (foe.maxHp || 0) < cap.maxHpBelow);
 }

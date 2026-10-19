@@ -102,7 +102,7 @@ it('固定事件使用独立领取样式，保留来源和既有动作；返回�
   expect(root.querySelector('.reward-standalone-picker')).not.toBeNull();
   expect(root.querySelector('.reward-source').textContent).toBe('污染空投箱');
   expect(root.querySelector('.reward-head h3').textContent).toBe('领取奖励');
-  expect(root.querySelector('.reward-count').textContent).toBe('共 1 张');
+  expect(root.querySelector('.reward-count')).toBeNull();
   expect(root.querySelector('.cqo-overview,.cqp-dialog,[data-act="chestClosePicker"]')).toBeNull();
   for (const action of ['chestSelect','chestTake1','chestOpenBag','chestReturn','chestSkip']) {
     expect(root.querySelector(`[data-act="${action}"]`)).not.toBeNull();

@@ -135,7 +135,7 @@ function createBattleSnapshotSignature(input, renderDependencies) {
 function createBattleSnapshot(input) {
   const {
     battleToken, mode, turn, energy, maxEnergy, busy, phase, actionQueueLength,
-    opts, player, pdef, pstat, foes, deathFxPending, allies, hand, drawPile, discard, grave, consumed = [], playedMovesThisTurn, endTurnContext, playerEffects = [],
+    opts, player, pdef, pstat, foes, deathFxPending, allies, hand, drawPile, discard, grave, consumed = [], handInfuseCounts = {}, playedMovesThisTurn, endTurnContext, playerEffects = [],
     infusing, discovering, handSelecting, choosing, pendingTarget, pendingHint,
     viewingGrave, viewingDeck, viewingBag, dreadShown, selectingDeck, deckNeed, selDeckMax,
     selShaN, sel, selPool, potionBar, pendingItem, slamPending, dartPending,
@@ -198,6 +198,7 @@ function createBattleSnapshot(input) {
     discard: Object.freeze(discard.slice()),
     grave: Object.freeze(grave.slice()),
     consumed: Object.freeze(consumed.slice()),
+    handInfuseCounts: Object.freeze({ ...handInfuseCounts }),
     infusing: readonlyInfusing,
     discovering: readonlyDiscovering,
     handSelecting: readonlyHandSelecting,

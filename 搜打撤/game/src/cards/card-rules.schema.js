@@ -554,8 +554,8 @@ function validatePendingOperation(operation, path, op, error) {
     if (operation.dest !== undefined && !['hand', 'deck', 'discover'].includes(operation.dest)) {
       error(`${path}.dest`, "must be 'hand', 'deck', or 'discover'");
     }
-    if (operation.act !== undefined && !['play', 'playKeep', 'dup', 'zeroCost', 'decay', 'noInfuse'].includes(operation.act)) {
-      error(`${path}.act`, "must be 'play', 'playKeep', 'dup', 'zeroCost', 'decay', or 'noInfuse'");
+    if (operation.act !== undefined && !['play', 'playKeep', 'dup', 'zeroCost', 'costMinusOne', 'decay', 'noInfuse'].includes(operation.act)) {
+      error(`${path}.act`, "must be 'play', 'playKeep', 'dup', 'zeroCost', 'costMinusOne', 'decay', or 'noInfuse'");
     }
     if (operation.filter !== undefined) {
       // M1：filter 基础扩展——在池谓词上叠加约束（类型 / 费用等于 / 费用上限）。
@@ -1055,7 +1055,7 @@ export function validateCardRules(card) {
         // M3：bag.use 扩为多操作数组（恢复药水=heal+energy），复用 onPlay op 校验；
         // op 支持集由 capability 收口（战斗/地图双消费端按 op 语义各自承载）
         const BAG_OP_KEYS = new Set(['op', 'target', 'amountField', 'amount', 'range', 'upTo', 'curse', 'stacks',
-          'duration', 'key', 'n', 'pool', 'dest', 'cap', 'count', 'perCurseKinds', 'what', 'schedule']);
+          'duration', 'key', 'n', 'pool', 'dest', 'cap', 'count', 'perCurseKinds', 'what', 'schedule', 'dmgType']);
         bag.use.forEach((operation, index) => {
           const path = `rules.bag.use[${index}]`;
           if (!isRecord(operation)) {
@@ -1068,6 +1068,9 @@ export function validateCardRules(card) {
           }
           for (const key of Object.keys(operation)) {
             if (!BAG_OP_KEYS.has(key)) error(`${path}.${key}`, 'is not accepted for bag use operations');
+          }
+          if (operation.dmgType !== undefined && (operation.op !== 'damage' || !SUPPORTED_DAMAGE_TYPES.has(operation.dmgType))) {
+            error(`${path}.dmgType`, 'requires a damage operation and a supported damage type');
           }
           if (operation.op === 'heal') {
             if (operation.amountField !== undefined && operation.amountField !== 'heal') {

@@ -53,7 +53,7 @@ it.each([[true, true, false], [true, false, false], [false, true, false], [false
       ovBody.querySelector('[data-act="chestLeave"]').click();
     }
     if (ovBody.querySelector('[data-act="chestClosePicker"]')) actions.chestClosePicker();
-    expect.soft(ovBody.querySelector('.cqo-notice').textContent).toBe(claimed ? `已收下 ${claimed} 张${index === 0 ? ' · 还有奖励' : ''}` : '');
+    expect.soft(ovBody.querySelector('.cqo-notice').textContent).toBe('');
     const receipt = ovBody.querySelector('.cqo-receipt');
     if (claimed) expect([...receipt.querySelectorAll('li')].map(el => el.textContent)).toEqual(
       distinct && claimed === 2 ? ['队列测试卡 ×1', '队列测试卡二 ×1'] : [`队列测试卡 ×${claimed}`]);

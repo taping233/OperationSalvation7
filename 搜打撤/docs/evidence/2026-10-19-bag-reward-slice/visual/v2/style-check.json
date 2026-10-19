@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "status": "implemented-awaiting-current-window-review",
+  "checks": [
+    {
+      "command": "PowerShell here-string | node --input-type=module",
+      "details": "In-process stylelint.lint; PostCSS opt-in scope and paint-only tile checks; Acorn parse; strict equality of tileHTML body; exact data-act list comparison",
+      "exitCode": 0,
+      "result": "All passed; stylelint zero errors/warnings"
+    },
+    {
+      "command": "git diff --check -- game/css/bag-design-system.css game/src/hub/game.bag.view2.js tests/bag-ui-language.test.js",
+      "exitCode": 0,
+      "result": "Passed; Git reports existing CRLF-to-LF normalization notice for the updated test"
+    }
+  ],
+  "files": [
+    {
+      "path": "game/css/bag-design-system.css",
+      "currentSHA256": "31435ae6393dff36143e9ee205a21b713beb5d32cd66f17882e5dc6f5e1bd629",
+      "beforeSHA256": "9e08bf867316eac0038a76b97177a7b06d09e1d1e3d59066fc0169e491a7ca3f"
+    },
+    {
+      "path": "game/src/hub/game.bag.view2.js",
+      "currentSHA256": "d1675005719122928bdcbab7c44e1d116df2afa23cd1d4f085bb77ff61921c00",
+      "beforeSHA256": "13b039c864bc6d51c5be479cd14a7da5600025cbcfc0ad98388e30797e214006"
+    },
+    {
+      "path": "tests/bag-ui-language.test.js",
+      "currentSHA256": "da4557c66a541bf901fc2763b6d35251562783984ef5284cd6eee5d768c91314",
+      "beforeSHA256": "35f8318a2e835144990000aa13f4f307402dc0a77d25ba173244502905c9fec5"
+    }
+  ],
+  "notRun": "Final Vitest and in-app browser checks are consolidated by parent/interaction lane; no new browser or performance claims."
+}

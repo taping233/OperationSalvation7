@@ -55,7 +55,7 @@ async function createBrowsingHarness() {
     Icons: { img: () => '' },
   };
   vi.doMock('../game/src/run/game.session.js', () => ({
-    MAP: { rules: { bagMax:30, stashMax:100, bagUpgradeWood:2, stashUpgradeWood:2, stashUpgradeSlots:3 }, items: { wood: { name: '木材' }, rations: { name: '口粮' } } },
+    MAP: { rules: { bagMax:30, stashMax:100, bagUpgradeWood:2, stashUpgradeWood:2, stashUpgradeSlots:3, safeStart:2, safeMax:6 }, items: { wood: { name: '木材' }, rations: { name: '口粮' } } },
     game: { state: '' }, getActiveSlot: () => activeSlot,
     startNewGame: vi.fn(), setLobby: vi.fn(),
   }));
@@ -103,6 +103,30 @@ async function createBrowsingHarness() {
   };
 }
 
+
+describe('伙伴升级回执', () => {
+  it('升级未随行伙伴时按目标伙伴显示容量前后和实际口粮消费', async () => {
+    harness = await createBrowsingHarness();
+    const robot = {id:'robot',name:'机器人'};let level=1;
+    Object.assign(harness.base, {
+      petById: id => id==='robot'?robot:null, petLevel: () => level, petUpCost: () => 2,
+      safeCap: () => 2, upgradePet: vi.fn(() => {level=2;return true;}),
+    });
+    harness.runtime.openBaseHub('stash');harness.ui._acts.upPet({id:'robot'});
+    expect(harness.ui.log).toHaveBeenLastCalledWith(expect.stringContaining('携带时安全格 2 → <b>3</b> 格（口粮 −2）'), 'ok');
+    expect(harness.host.textContent).toContain('机器人 Lv.1 → Lv.2 · 安全格 2 → 3 · 口粮 −2');
+  });
+  it('升级未保存时不展示成功成长或消费', async () => {
+    harness = await createBrowsingHarness();
+    Object.assign(harness.base, {
+      petById: () => ({id:'robot',name:'机器人'}),petLevel: () => 1,petUpCost: () => 2,
+      upgradePet: vi.fn(() => false),
+    });
+    harness.runtime.openBaseHub('stash');harness.ui._acts.upPet({id:'robot'});
+    expect(harness.ui.log).not.toHaveBeenCalled();
+    expect(harness.host.textContent).not.toContain('机器人 Lv.');
+  });
+});
 
 describe('基地恢复、扩建与外观旧动作', () => {
   const pocketCard = { id:'audit-pocket', name:'待复原测试', type:'法术', rarity:'古朴' };

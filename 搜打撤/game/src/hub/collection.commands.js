@@ -1,9 +1,10 @@
 import { DATA } from '../core/data-loader.js';
 import { characterFor } from '../core/characters.js';
 import { commitBase, readBase, readBaseReceipt } from './base.commands.js';
-import { addXpToProgress, collectionXpFor, LEVEL_MAX, perkText, xpForNext } from './meta.js';
+import { LEVEL_MAX, perkText, xpForNext } from './meta.js';
 import { SKIN_FULL_ART, setActiveSkin } from '../core/art.js';
 import { clone, fail, freezeDeep } from './commands.shared.js';
+import { previewCollectionConversion } from './collection-conversion.js';
 
 const catalogCards = catalog => {
   if (Array.isArray(catalog)) return catalog;
@@ -27,12 +28,15 @@ function getCollection(baseSnapshot, cardCatalog) {
     const matching = stacks.filter(stack => sameRef(stack.card, card));
     const sourceIds = matching.map(stackKeyOf).filter(Boolean);
     const ownedCount = matching.reduce((sum, stack) => sum + Math.max(0, Number(stack.count) || 0), 0);
+    const conversion = previewCollectionConversion({ baseSnapshot: snapshot, card, availableCount: ownedCount });
     return {
       card: cardRef(card),
       registered: !!records[card.id],
       ownedCount,
       characterId: characterFor(card.cls)?.id,
-      canConvert: ownedCount > 0 && sourceIds.length === new Set(sourceIds).size,
+      protected: !!conversion.protected,
+      canConvert: ownedCount > 0 && sourceIds.length === new Set(sourceIds).size
+        && conversion.canConvert,
       sourceIds,
     };
   });
@@ -126,11 +130,13 @@ function createCollectionCommands(deps = {}) {
     const canonical = cards.find(item => sameRef(item, card));
     if (!canonical) return fail('NOT_FOUND', '卡牌配置中找不到该卡牌', false, { cardId: card.id });
     if (!collectible(canonical)) return fail('NOT_COLLECTIBLE', '这张卡不能转化为人物经验', false, { cardId: card.id });
+    const conversion = previewCollectionConversion({ baseSnapshot: draft, card: canonical, availableCount: stack.count, count: input.count });
+    if (!conversion.canConvert) return fail(conversion.code, conversion.message, false, { conversion });
 
     const beforeReached = new Set(reachedMilestones(draft, cards));
     const first = !draft.collection?.[card.id];
     draft.collection ||= {};
-    if (first) draft.collection[card.id] = { name: canonical.name, rarity: canonical.rarity, ts: Date.now() };
+    if (first) draft.collection[card.id] = { name: canonical.name, rarity: canonical.rarity, ts: Date.now(), protected: false };
     draft.collXp ||= {};
     if (canonical.rarity === '职业') draft.collXp[card.id] = true;
     stack.count -= input.count;
@@ -138,15 +144,15 @@ function createCollectionCommands(deps = {}) {
 
     const character = characterFor(canonical.cls);
     draft.characters ||= {};
-    const gain = collectionXpFor(canonical) * input.count;
-    const progress = addXpToProgress(draft.characters[character.id] || { lv: 1, xp: 0 }, gain);
-    draft.characters[character.id] = { ...progress.after };
+    draft.characters[character.id] = { ...conversion.after };
     const afterReached = reachedMilestones(draft, cards);
     const newUnlocks = afterReached.filter(id => !beforeReached.has(id));
     const receipt = {
       consumed: [{ stackKey: input.stackKey, count: input.count }],
       firstRegistrations: first ? [cardRef(canonical)] : [],
-      xpChanges: [{ characterId: character.id, before: progress.before, after: progress.after }],
+      xpChanges: [{ characterId: character.id, before: conversion.before, after: conversion.after,
+        actualXp: conversion.actualXp, overflowXp: conversion.overflowXp }],
+      conversion,
       rewards: [],
       newUnlocks,
     };
@@ -158,7 +164,8 @@ function createCollectionCommands(deps = {}) {
       output: receipt,
       events: [{
         type: 'collection.committed',
-        payload: { cardId: canonical.id, stackKey: input.stackKey, count: input.count, characterId: character.id, xp: gain, firstRegistration: first },
+        payload: { cardId: canonical.id, stackKey: input.stackKey, count: input.count, characterId: character.id,
+          xp: conversion.actualXp, overflowXp: conversion.overflowXp, firstRegistration: first },
       }],
     });
     return unwrapCommit(committed);

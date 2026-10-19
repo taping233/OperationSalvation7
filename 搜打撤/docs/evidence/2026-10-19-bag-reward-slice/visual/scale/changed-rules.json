@@ -1,0 +1,807 @@
+[
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-ink",
+    "before": null,
+    "after": "#eef1ed"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-muted",
+    "before": null,
+    "after": "#b9c9d2"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-blue",
+    "before": null,
+    "after": "#b6cbd7"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-gold",
+    "before": null,
+    "after": "#c6b487"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-panel",
+    "before": null,
+    "after": "#15212cef"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-line",
+    "before": null,
+    "after": "#a8bbc238"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-risk",
+    "before": null,
+    "after": "#e4bea8"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-space-1",
+    "before": null,
+    "after": "4px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-space-2",
+    "before": null,
+    "after": "8px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-space-3",
+    "before": null,
+    "after": "12px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-space-4",
+    "before": null,
+    "after": "16px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-space-6",
+    "before": null,
+    "after": "24px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-space-8",
+    "before": null,
+    "after": "32px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-text-label",
+    "before": null,
+    "after": "18px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-text-body",
+    "before": null,
+    "after": "22px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-text-object",
+    "before": null,
+    "after": "26px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-text-title",
+    "before": null,
+    "after": "36px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-text-dialog-title",
+    "before": null,
+    "after": "30px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-radius",
+    "before": null,
+    "after": "3px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-control-height",
+    "before": null,
+    "after": "60px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-control-compact",
+    "before": null,
+    "after": "44px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-on-primary",
+    "before": null,
+    "after": "#17232b"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-hover",
+    "before": null,
+    "after": "#243745"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-disabled",
+    "before": null,
+    "after": "#313b42"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-glass-surface",
+    "before": null,
+    "after": "rgba(21,33,44,.5)"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-glass-line",
+    "before": null,
+    "after": "rgba(182,203,215,.3)"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-glass-blur",
+    "before": null,
+    "after": "12px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-leading-body",
+    "before": null,
+    "after": "1.6"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-focus-width",
+    "before": null,
+    "after": "2px"
+  },
+  {
+    "path": "game/css/secondary-ui-tokens.css",
+    "selector": " / :where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind=\"discover\"]))",
+    "property": "--ui-focus-offset",
+    "before": null,
+    "after": "4px"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control",
+    "property": "box-sizing",
+    "before": null,
+    "after": "border-box"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control",
+    "property": "min-height",
+    "before": null,
+    "after": "var(--ui-control-height)"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control",
+    "property": "padding",
+    "before": null,
+    "after": "var(--ui-space-3) var(--ui-space-6)"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control",
+    "property": "font",
+    "before": null,
+    "after": "600 var(--ui-text-body)/1.4 var(--font-ui)"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control-compact",
+    "property": "box-sizing",
+    "before": null,
+    "after": "border-box"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control-compact",
+    "property": "min-height",
+    "before": null,
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control-compact",
+    "property": "padding",
+    "before": null,
+    "after": "var(--ui-space-2) var(--ui-space-4)"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control-compact",
+    "property": "font",
+    "before": null,
+    "after": "500 var(--ui-text-label)/1.4 var(--font-ui)"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control-icon",
+    "property": "box-sizing",
+    "before": null,
+    "after": "border-box"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control-icon",
+    "property": "width",
+    "before": null,
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control-icon",
+    "property": "height",
+    "before": null,
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control-icon",
+    "property": "min-height",
+    "before": null,
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/ui-design-system.css",
+    "selector": " / #overlay :is(.ui-design-system,.ui-scale-system) .ui-control-icon",
+    "property": "padding",
+    "before": null,
+    "after": "0"
+  },
+  {
+    "path": "game/css/bag-design-system.css",
+    "selector": " / body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3",
+    "property": "--bag-type-title",
+    "before": "40px",
+    "after": "var(--ui-text-title)"
+  },
+  {
+    "path": "game/css/bag-design-system.css",
+    "selector": " / body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-icbtn",
+    "property": "width",
+    "before": null,
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/bag-design-system.css",
+    "selector": " / body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-icbtn",
+    "property": "height",
+    "before": null,
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/bag-design-system.css",
+    "selector": " / body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-icbtn",
+    "property": "min-height",
+    "before": null,
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/bag-design-system.css",
+    "selector": " / body #overlay .card.bag-page .bag-v2.ui-design-system.bag-art-v3 .bag-icbtn",
+    "property": "padding",
+    "before": null,
+    "after": "0"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .card.page .shop-pg.sc-shop .shop-heading h2",
+    "property": "font",
+    "before": "650 34px/1.3 var(--font-ui)",
+    "after": "650 var(--ui-text-title)/1.3 var(--font-ui)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.sc-shop .shop-resource small",
+    "property": "font-size",
+    "before": "15px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.sc-shop .shop-resource em",
+    "property": "font-size",
+    "before": "13px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.sc-shop .shop-resource.coin > small",
+    "property": "font-size",
+    "before": "16px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.sc-shop .shop-resource.coin > em",
+    "property": "font-size",
+    "before": "15px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-market .shop-detail-rules summary",
+    "property": "font-size",
+    "before": "17px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-market .shop-detail-rules p",
+    "property": "font-size",
+    "before": "19px",
+    "after": "var(--ui-text-body)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-market .shop-detail-account > span",
+    "property": "font-size",
+    "before": "13px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-market .shop-detail-facts",
+    "property": "font-size",
+    "before": "15px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done)",
+    "property": "min-height",
+    "before": "56px",
+    "after": "var(--ui-control-height)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done)",
+    "property": "padding",
+    "before": "12px 18px",
+    "after": "var(--ui-space-3) var(--ui-space-6)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-market :is(.shop-detail-buy,.shop-detail-done)",
+    "property": "font",
+    "before": "650 20px/1.4 var(--font-ui)",
+    "after": "650 var(--ui-text-body)/1.4 var(--font-ui)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-market .shop-detail-bag",
+    "property": "min-height",
+    "before": "46px",
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-market .shop-detail-bag",
+    "property": "font",
+    "before": "500 17px/1.4 var(--font-ui)",
+    "after": "500 var(--ui-text-label)/1.4 var(--font-ui)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.sc-shop .shop-bag-btn",
+    "property": "min-height",
+    "before": "48px",
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.sc-shop .shop-bag-btn",
+    "property": "font",
+    "before": "500 18px/1.4 var(--font-ui)",
+    "after": "500 var(--ui-text-label)/1.4 var(--font-ui)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.sc-shop .shop-back",
+    "property": "min-height",
+    "before": "64px",
+    "after": "var(--ui-control-height)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.sc-shop .shop-back",
+    "property": "font",
+    "before": "600 23px/1.4 var(--font-ui)",
+    "after": "600 var(--ui-text-body)/1.4 var(--font-ui)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-market .shop-live",
+    "property": "font-size",
+    "before": "16px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-market .shop-return-note",
+    "property": "font-size",
+    "before": "14px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-exchange .sell-ledger h3",
+    "property": "font",
+    "before": "600 25px/1.4 var(--font-ui)",
+    "after": "600 var(--ui-text-object)/1.4 var(--font-ui)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-exchange .sell-ledger-rule p",
+    "property": "font-size",
+    "before": "15px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-exchange .sell-item .mini-btn",
+    "property": "min-height",
+    "before": "48px",
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/expedition-shop.css",
+    "selector": " / #overlay .shop-pg.shop-exchange .sell-item .mini-btn",
+    "property": "font",
+    "before": "600 17px/1.4 var(--font-ui)",
+    "after": "600 var(--ui-text-label)/1.4 var(--font-ui)"
+  },
+  {
+    "path": "game/css/base-logistics-trade-v12.css",
+    "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage / & :is(.warehouse-v3.warehouse-v2,.trade-v5.trade-v12)",
+    "property": "--base-type-body",
+    "before": null,
+    "after": "var(--ui-text-body)"
+  },
+  {
+    "path": "game/css/base-logistics-trade-v12.css",
+    "selector": "#overlay#overlay #hubMain.pg.hub.base-camp.base-frame-v7.base-subpage / & :is(.warehouse-v3.warehouse-v2,.trade-v5.trade-v12)",
+    "property": "--base-type-label",
+    "before": null,
+    "after": "var(--ui-text-label)\n  "
+  },
+  {
+    "path": "game/css/base-logistics-trade-v12.css",
+    "selector": "& :is(.warehouse-v3.warehouse-v2,.trade-v5.trade-v12) / & > :is(.camp-section-head,.trade-v5-heading) h2",
+    "property": "font",
+    "before": "800 30px/1.2 var(--base-font-title)",
+    "after": "700 var(--ui-text-title)/1.2 var(--base-font-title)"
+  },
+  {
+    "path": "game/css/base-logistics-trade-v12.css",
+    "selector": "& .warehouse-v3.warehouse-v2 / & .warehouse-categories-v7 button",
+    "property": "padding",
+    "before": "10px 18px",
+    "after": "var(--ui-space-3) var(--ui-space-6)"
+  },
+  {
+    "path": "game/css/base-logistics-trade-v12.css",
+    "selector": "& .warehouse-v3.warehouse-v2 / & .warehouse-categories-v7 button",
+    "property": "min-height",
+    "before": "0",
+    "after": "var(--ui-control-height)"
+  },
+  {
+    "path": "game/css/base-logistics-trade-v12.css",
+    "selector": "& .warehouse-v3.warehouse-v2 / & .warehouse-toolbar :is(input,select)",
+    "property": "min-height",
+    "before": "46px",
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/base-logistics-trade-v12.css",
+    "selector": "& .warehouse-v3.warehouse-v2 / & .warehouse-toolbar :is(input,select)",
+    "property": "padding",
+    "before": "8px 12px",
+    "after": "var(--ui-space-2) var(--ui-space-3)"
+  },
+  {
+    "path": "game/css/base-logistics-trade-v12.css",
+    "selector": "& .warehouse-v3.warehouse-v2 / & .warehouse-toolbar :is(input,select)",
+    "property": "font-size",
+    "before": "21px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/base-logistics-trade-v12.css",
+    "selector": "& .warehouse-v3.warehouse-v2 / & .card-browser-page",
+    "property": "width",
+    "before": "34px",
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/base-logistics-trade-v12.css",
+    "selector": "& .warehouse-v3.warehouse-v2 / & .card-browser-page",
+    "property": "height",
+    "before": "30px",
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .settings-tabbed .pg-head h2",
+    "property": "font-size",
+    "before": "var(--home-ui-label)",
+    "after": "var(--ui-text-title)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .settings-tabbed .settings-tab",
+    "property": "font-size",
+    "before": "var(--home-ui-label)",
+    "after": "var(--ui-text-body)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .settings-tabbed .settings-tab small",
+    "property": "font-size",
+    "before": "var(--home-ui-sub)",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .settings-tabbed .settings-panel-head h3",
+    "property": "font-size",
+    "before": "var(--home-ui-title)",
+    "after": "var(--ui-text-object)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .settings-tabbed .settings-panel-head p",
+    "property": "font-size",
+    "before": "var(--home-ui-sub)",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .settings-tabbed .set-h",
+    "property": "font-size",
+    "before": "20px",
+    "after": "var(--ui-text-object)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .settings-tabbed .settings-group .chk",
+    "property": "font-size",
+    "before": "23px",
+    "after": "var(--ui-text-body)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .settings-tabbed .chk .set-en",
+    "property": "font-size",
+    "before": "var(--home-ui-sub)",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .settings-tabbed .hint",
+    "property": "font-size",
+    "before": "17px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .pg.settings-tabbed .btn-row .mini-btn",
+    "property": "padding",
+    "before": "16px 28px",
+    "after": "var(--ui-space-2) var(--ui-space-4)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .pg.settings-tabbed .btn-row .mini-btn",
+    "property": "font-size",
+    "before": "20px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .settings-tabbed :is(.mini-btn,.ov-btn)",
+    "property": "padding",
+    "before": "16px 24px",
+    "after": "var(--ui-space-2) var(--ui-space-4)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .settings-tabbed :is(.mini-btn,.ov-btn)",
+    "property": "min-height",
+    "before": "54px",
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/settings-navigation.css",
+    "selector": " / #overlay .settings-tabbed :is(.mini-btn,.ov-btn)",
+    "property": "font-size",
+    "before": "20px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .camp-detail-heading h2",
+    "property": "font-size",
+    "before": "30px",
+    "after": "var(--ui-text-title)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .camp-depart-person-copy h3",
+    "property": "font",
+    "before": "600 24px/1.4 var(--font-ui)",
+    "after": "600 var(--ui-text-object)/1.4 var(--font-ui)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .camp-depart-person-copy .mini-btn",
+    "property": "min-height",
+    "before": "44px",
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .camp-depart-person-copy .mini-btn",
+    "property": "font-size",
+    "before": "18px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .hub-card > h3",
+    "property": "font",
+    "before": "600 25px/1.3 var(--font-ui)",
+    "after": "600 var(--ui-text-object)/1.3 var(--font-ui)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .dep-recommend .mini-btn",
+    "property": "padding",
+    "before": "5px 9px",
+    "after": "var(--ui-space-2) var(--ui-space-3)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .dep-recommend .mini-btn",
+    "property": "font-size",
+    "before": "14px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .dep-recommend .mini-btn",
+    "property": "min-height",
+    "before": null,
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .dep-recommend small",
+    "property": "font-size",
+    "before": "13px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .dep-survival",
+    "property": "font-size",
+    "before": "14px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .dep-filters label",
+    "property": "font-size",
+    "before": "16px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .dep-filters :is(select,button)",
+    "property": "min-height",
+    "before": "40px",
+    "after": "var(--ui-control-compact)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .dep-filters :is(select,button)",
+    "property": "font",
+    "before": "500 16px/1.4 var(--font-ui)",
+    "after": "500 var(--ui-text-label)/1.4 var(--font-ui)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & #depFilterCount",
+    "property": "font-size",
+    "before": "15px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .dep-capacity",
+    "property": "font-size",
+    "before": "20px",
+    "after": "var(--ui-text-body)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & .camp-depart-next",
+    "property": "font-size",
+    "before": "16px",
+    "after": "var(--ui-text-label)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & #btnDeploy",
+    "property": "min-height",
+    "before": "58px",
+    "after": "var(--ui-control-height)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & #btnDeploy",
+    "property": "padding",
+    "before": "12px 24px",
+    "after": "var(--ui-space-3) var(--ui-space-6)"
+  },
+  {
+    "path": "game/css/departure-selected.css",
+    "selector": "body #overlay #depMain.pg.hub.departure-cover.departure-glass / & #btnDeploy",
+    "property": "font",
+    "before": "650 23px/1.4 var(--font-ui)",
+    "after": "650 var(--ui-text-body)/1.4 var(--font-ui)"
+  }
+]

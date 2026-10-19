@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "capturedAt": "2026-10-19T11:40:13.984Z",
+  "scope": "actual exported pure candidate builder and actual exported blessing step only; not a full battle",
+  "probes": [
+    {
+      "name": "legendary pred pool",
+      "input": [
+        {
+          "id": "normal",
+          "type": "法术",
+          "rarity": "传说"
+        },
+        {
+          "id": "locked",
+          "type": "法术",
+          "rarity": "传说",
+          "unrandom": true
+        }
+      ],
+      "result": [
+        "normal",
+        "locked"
+      ],
+      "observation": "unrandom locked remains in the explicit predicate pool"
+    },
+    {
+      "name": "heaven full description",
+      "calls": [
+        {
+          "target": "player",
+          "key": "stealth"
+        }
+      ],
+      "allyStatus": {},
+      "observation": "only player pstat is passed to blessing; ally untouched"
+    },
+    {
+      "name": "heaven delayed sentence without parenthetical candidate list",
+      "calls": [],
+      "observation": "no candidate keyword means no blessing applied"
+    }
+  ]
+}

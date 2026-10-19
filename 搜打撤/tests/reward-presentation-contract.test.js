@@ -16,8 +16,8 @@ describe('奖励呈现共享契约', () => {
   it.each([
     [false, true, 'chestTake1', '收下'],
     [true, true, 'chestPick', '选择这张'],
-    [false, false, 'chestMakeRoom', '腾位置领取'],
-    [true, false, 'chestMakeRoom', '腾位置领取'],
+    [false, false, 'chestMakeRoom', '整理背包'],
+    [true, false, 'chestMakeRoom', '整理背包'],
   ])('卡下与放大入口共用动作 choice=%s fits=%s', (choice, fits, action, label) => {
     for (const zoom of [false, true]) {
       document.body.innerHTML = rewardClaimHTML({ index:2, choice, fits, zoom });
@@ -31,7 +31,7 @@ describe('奖励呈现共享契约', () => {
   it.each(['received', 'forfeited'])('已处理%s不重新提供领取按钮', state => {
     document.body.innerHTML = rewardClaimHTML({ index:1, state, choice:true });
     expect(document.querySelector('button')).toBeNull();
-    expect(document.body.textContent).toBe(rewardCardStatus(state, true));
+    expect(document.body.textContent).toBe(state === 'received' ? '已选择' : '已放弃');
   });
   it('确认放弃中禁用领取；取消回到拥有者，不与放弃混用', () => {
     document.body.innerHTML = rewardClaimHTML({ index:0, disabled:true });

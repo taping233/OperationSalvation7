@@ -1,6 +1,6 @@
 /* 二刀流（cc-dual-wield，2026-09-10 需求）真实战斗实打：
- * 1 费稀有武术——「发现一张武术卡并额外获得1张复制」。
- * 覆盖：入库字段 / 打出后三选一发现武术 / 本体+复制共 2 张同名置入手牌。 */
+ * 1 费稀有武术——发现一张招式卡并额外获得1张复制。
+ * 覆盖：入库字段 / 打出后三选一发现招式 / 本体+复制共 2 张同名置入手牌。 */
 import { describe, it, expect, beforeAll } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
@@ -72,7 +72,7 @@ describe('二刀流（cc-dual-wield）', () => {
     expect(c.type).toBe('武术');
   });
 
-  it('打出 → 三选一发现武术 → 本体+复制共 2 张同名置入手牌', async () => {
+  it('打出 → 三选一发现招式 → 本体+复制共 2 张同名置入手牌', async () => {
     const g = makeGame([dual()]);
     BattleSession.start(g, [foeDef()], { isBoss: false, name: '双刀测试' });
     await drain();
@@ -85,7 +85,7 @@ describe('二刀流（cc-dual-wield）', () => {
     const totalCount = nonSlam.reduce((acc, o) => acc + (o.count || 1), 0);
     expect(totalCount, `本体+复制应共 2 张，实际条目 ${nonSlam.length}：${JSON.stringify(nonSlam.map(o => o.card.name))}`).toBe(2);
     expect(nonSlam[0].card.name).toBe(nonSlam[nonSlam.length - 1].card.name);   // 复制=同名
-    expect(nonSlam[0].card.type).toBe('武术');
+    expect(['武术', '法术']).toContain(nonSlam[0].card.type);
     // 发现的是候选项之一（三选一面板第一项），且为招式限制池（acquire 日志池括注在中段）
     expect(g.logs.some(l => l.includes('发现 1 张【招式】')), 'acquire discover 日志').toBe(true);
     BattleSession.commands.flee();

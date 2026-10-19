@@ -34,6 +34,6 @@ export function entrySupplyIntroHTML({ count, character, capacity }) {
     ${uiDecisionFacts([['待领补给', `${count} 张`], ['背包', capacity]])}
     <p class="ui-decision-note">${character ? `${esc(character)}的职业卡` : '随行职业卡'}，全部领取后才能继续探索。</p>
     <button type="button" class="ui-action ui-action-primary" data-act="clsEntryReveal">查看职业补给 <span aria-hidden="true">→</span></button>
-    ${uiDisclosure({ label:'领取说明', content:'<p>放不下时可先整理背包，未领取的补给保留在入口。点卡面可查看详情，收下后进入本次远征背包。</p>' })}
+    ${uiDisclosure({ label:'领取说明', content:'<p>放不下的补给保留在入口，可整理背包后继续领取。</p>' })}
   </section>`;
 }

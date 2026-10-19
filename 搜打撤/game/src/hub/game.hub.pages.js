@@ -16,6 +16,9 @@ import { Sfx } from './game.cardslib.js';
 import { Random } from '../core/random.js';
 import { readBase } from './base.commands.js';
 import { convertCollection, stackKeyOf } from './collection.commands.js';
+import { previewCollectionConversion } from './collection-conversion.js';
+import { collectionConversionHTML, conversionSignature } from './collection-conversion-view.js';
+import { isCollectionProtected } from './collection-protection.js';
 import { homeErrorMessage } from '../home/home.presenter.js';
 import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // 别名防局部 slots（收藏槽位等）遮蔽
   // —— 仓库页：卡牌仓库（容量 / 卖出 / 收藏）+ 消耗区 + 物资 ——
@@ -82,7 +85,8 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       const cur = freshStack(), n = cur ? cur.count : 0;
       const marked = B.isCollected(card);
       const convertType = !!card.cls && (card.rarity === '职业' || card.type === '能力卡');
-      const collectXp = card.type === '能力卡' ? 50 : 10;
+      const protectedCard = isCollectionProtected(B.data, card);
+      const conversion = convertType ? previewCollectionConversion({ baseSnapshot: B.data, card, availableCount: n }) : null;
       const btns = [];
       if (mat) {
         const amount = B.materialAmount?.(card);
@@ -94,18 +98,20 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
       } else if (isPack) {
         btns.push('<button class="ov-btn ok" data-act="stashOpenPack">拆开 1 包 · 获得 5 张随机卡牌</button>');
       } else {
-        if (convertType && !marked) {
-          btns.push(`<button class="ov-btn ok" data-act="stashCollectOne">收藏 1 张</button>`);
-          if (n > 1) btns.push(`<button class="ov-btn" data-act="stashCollectAll">全部收藏 · ${n} 张</button>`);
-        } else {
-          btns.push(`<button class="ov-btn${marked ? '' : ' ok'}" data-act="stashCollectToggle">${marked ? '取消收藏' : '收藏卡牌'}</button>`);
-        }
+        if (convertType) {
+          btns.push(`<button class="ov-btn ok" data-act="stashCollectOne"${conversion.canConvert ? '' : ' disabled'}>${conversion.registrationOnly ? '仅收录图鉴 · 消耗 1 张' : conversion.code === 'CHARACTER_MAXED' ? '转化经验 · 已满级' : '转化经验 · 1 张'}</button>`);
+          if (conversion.maxCount > 1) btns.push(`<button class="ov-btn" data-act="stashCollectAll"${conversion.protected ? ' disabled' : ''}>批量转化 · ${conversion.maxCount} 张</button>`);
+          if (marked) btns.push(`<button class="ov-btn" data-act="stashCollectToggle">${protectedCard ? '取消保护' : '保护卡牌'}</button>`);
+        } else btns.push(`<button class="ov-btn${protectedCard ? '' : ' ok'}" data-act="stashCollectToggle">${protectedCard ? '取消保护' : '保护卡牌'}</button>`);
       }
-      const hint = mat ? '使用资源卡后折入基地材料；最后一张或整堆使用需再次确认。'
-        : isEgg ? '消耗 1 枚宠物蛋与 50 储备币，随机孵化未拥有的伙伴；再次点击确认。'
-        : isPack ? '随机卡牌存入后勤仓库，需至少 5 格空位；最后一包需再次确认。'
-        : convertType && !marked ? `收藏后转化为 ${collectXp} 点人物经验，消耗对应卡牌` : marked ? '已加入收藏' : '加入收藏，卡牌保留在仓库';
-      return `<div class="camp-detail camp-card-actions"><div class="inspect-meta"><span class="inspect-count">持有 <b>${n}</b> 张</span><span class="inspect-collection-state">${marked ? '已收藏' : '仓库卡牌'}</span></div><p class="inspect-collection-hint">${hint}</p>${btns.length ? `<div class="ov-btns">${btns.join('')}</div>` : ''}</div>`;
+      const hint = mat ? '使用资源卡后折入基地材料。'
+        : isEgg ? '随机孵化未拥有的伙伴。'
+        : isPack ? '随机卡牌存入后勤仓库，需至少 5 格空位。'
+        : convertType ? conversion.registrationOnly ? '人物熟练度已满，首次收录图鉴只消耗 1 张，不再增加经验。'
+          : conversion.code === 'CHARACTER_MAXED' ? '人物熟练度已满且图鉴已收录，已停止经验转化，卡牌保留。'
+          : `${marked ? '图鉴已收录；重复卡仍可转化经验。' : '首次转化会同时收录图鉴。'}${n > conversion.maxCount && conversion.maxCount > 0 ? `批量最多消耗 ${conversion.maxCount} 张，余下 ${n - conversion.maxCount} 张保留。` : ''}`
+        : protectedCard ? '卡牌受保护；取消保护会保留图鉴收录。' : '保护标记不消耗卡牌、不发放人物经验；图鉴收录独立保留。';
+      return `<div class="camp-detail camp-card-actions"><div class="inspect-meta"><span class="inspect-count">持有 <b>${n}</b> 张</span><span class="inspect-collection-state">${marked ? '图鉴已收录' : '尚未收录'}${protectedCard ? ' · 已保护' : ''}</span></div><p class="inspect-collection-hint">${hint}</p>${conversion ? `<p class="inspect-collection-hint" data-conversion-preview role="status">${collectionConversionHTML(conversion)}</p>` : ''}${btns.length ? `<div class="ov-btns">${btns.join('')}</div>` : ''}</div>`;
     };
     const refreshZoom = () => {
       if (!currentDetail()) return;
@@ -116,12 +122,12 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
 
     // 就地二次确认：首点变红「确认？」，2.6s 内再点才执行（页脚刷新会自然解除）
     let armSequence = 0;
-    const armOrRun = (act, run) => {
+    const armOrRun = (act, run, extraSignature = '') => {
       if (!currentDetail()) return;
       let btn = zoom.querySelector(`.cz-foot [data-act="${act}"]`);
       const cur = freshStack();
       if (!btn || btn.disabled || !cur) return;
-      const signature = `${stackKey}:${cur.count}`;
+      const signature = `${stackKey}:${cur.count}:${extraSignature}`;
       if (btn.dataset.arm === '1' && btn.dataset.armSignature === signature) { run(); return; }
       if (btn.dataset.arm === '1') {
         UI.log('库存数量已变化，请重新确认', 'warn');
@@ -144,55 +150,66 @@ import { slots as hubBridge, homeRequestId } from './game.hub.bridge.js';   // �
         btn.classList.remove('danger');
       }, 2600);
     };
-    // —— 收藏（普通卡只记录不消耗；职业卡/能力卡收藏即用掉，2026-09-16 Item 15 定版）——
+    // 保护操作保留图鉴；职业卡/能力卡首次收录仍由下方消耗卡牌的转换完成。
     detailAct('stashCollectToggle', () => {
       const cur = freshStack();
       if (!cur) { closeZoom(); return; }
+      if (!B.isCollected(card) && card.cls && (card.rarity === '职业' || card.type === '能力卡')) {
+        UI.log('职业卡或能力卡需通过消耗卡牌转化后首次收录', 'warn'); return;
+      }
       const now = B.collectToggle(card);
-      if (now === null) { UI.log('基地存档未保存，收藏状态未改变', 'warn'); return; }
+      if (now === null) { UI.log('基地存档未保存，保护状态未改变', 'warn'); return; }
       Sfx.ding();
-      // 经验结算必须最先：checkUnlocks → syncCollXp 会把已收藏的职业卡回填为
-      // 「已结算」，若先于 onCollect 执行，首次收藏的 +10 就被吃掉了
-      SDT.Meta.onCollect(card, now);
-      // 2026-09-10 留言 #39 定版：收藏只记录 + 转化经验，卡牌保留在仓库
       UI.log(now
-        ? `[[icon:sparkles]] 已收藏【<b>${esc(card.name)}</b>】入职业收藏室，转化为人物熟练度经验（卡牌保留在仓库）${special ? '（特殊收藏品）' : ''}`
-        : `[[icon:sparkles]] 已取消收藏【<b>${esc(card.name)}</b>】`, now ? 'loot' : 'dim');
+        ? `[[icon:sparkles]] 已保护【<b>${esc(card.name)}</b>】（卡牌保留，不获得人物经验）${special ? '（特殊收藏品）' : ''}`
+        : `[[icon:sparkles]] 已取消【<b>${esc(card.name)}</b>】的保护，图鉴收录保留`, now ? 'loot' : 'dim');
       SDT.Meta.checkUnlocks();
       hubBridge.renderHub();
       refreshZoom();
     });
     let converting = false;
-    const convertStash = async (n, logText) => {
+    const convertStash = async (preview) => {
       if (!currentDetail() || converting) return;
       const cur = freshStack();
       if (!cur) { closeZoom(); return; }
-      const first = !B.isCollected(card);
       const read = readBase(slotId);
       if (!read.ok) { UI.log(homeErrorMessage(read), 'warn'); return; }
+      const stored = read.value.stash.find(stack => stackKeyOf(stack) === stackKey);
+      const latest = previewCollectionConversion({ baseSnapshot: read.value, card, availableCount: stored?.count || 0, count: preview.count });
+      if (!latest.canConvert || conversionSignature(latest) !== conversionSignature(preview)) {
+        UI.log(latest.canConvert ? '人物进度或保护状态已变化，请重新确认转化预览' : latest.message, 'warn'); refreshZoom(); return;
+      }
       converting = true;
       zoom?.querySelectorAll('.cz-foot button').forEach(button => { button.disabled = true; });
       let result;
-      try { result = await convertCollection({ slotId, requestId: homeRequestId('stash-collect'), expectedRevision: read.revision }, { stackKey: stackKeyOf(cur), count: n }); }
+      try { result = await convertCollection({ slotId, requestId: homeRequestId('stash-collect'), expectedRevision: read.revision }, { stackKey: stackKeyOf(cur), count: preview.count }); }
       catch { result = { ok:false, message:'归档未保存，请重试' }; }
       finally { converting = false; }
       if (!currentDetail()) return;
       if (!result.ok) { UI.log(result.message || '收藏失败，卡牌未消耗', 'warn'); refreshZoom(); return; }
       Sfx.ding();
-      UI.log(logText(first), 'loot');
+      const actual = result.value?.conversion || latest;
+      UI.log(`[[icon:medal]] ${esc(actual.characterName)}：消耗【<b>${esc(card.name)}</b>】×${actual.count}，${actual.registrationOnly ? '仅收录图鉴，经验 +0' : `实际经验 +${actual.actualXp}`}${actual.overflowXp ? `（末张溢出 ${actual.overflowXp}）` : ''} · Lv.${actual.before.lv} / ${actual.before.xp} XP → Lv.${actual.after.lv} / ${actual.after.xp} XP`, 'loot');
       hubBridge.renderHub();
       refreshZoom();
     };
+    const conversionPreview = (batch = false) => {
+      const cur = freshStack();
+      if (!cur) { closeZoom(); return null; }
+      const first = previewCollectionConversion({ baseSnapshot: B.data, card, availableCount: cur.count });
+      const preview = batch && first.maxCount > 1 ? previewCollectionConversion({ baseSnapshot: B.data, card, availableCount: cur.count, count: first.maxCount }) : first;
+      if (!preview.canConvert) { UI.log(preview.message, 'warn'); refreshZoom(); return null; }
+      const target = zoom.querySelector('[data-conversion-preview]');
+      if (target) target.innerHTML = collectionConversionHTML(preview);
+      return preview;
+    };
     detailAct('stashCollectOne', () => {
-      armOrRun('stashCollectOne', () => convertStash(1, first =>
-        `[[icon:medal]] 已收藏【<b>${esc(card.name)}</b>】并转化为人物经验（卡牌用掉，不再占格${first ? '，收藏进度 +1' : ''}）`));
+      const preview = conversionPreview();
+      if (preview) armOrRun('stashCollectOne', () => convertStash(preview), conversionSignature(preview));
     });
     detailAct('stashCollectAll', () => {
-      armOrRun('stashCollectAll', () => {
-        const cur = freshStack();
-        const n = cur ? cur.count : 0;
-        convertStash(n, () => `[[icon:medal]] 已收藏【<b>${esc(card.name)}</b>】×${n}，全部转化为人物经验（卡牌用掉）`);
-      });
+      const preview = conversionPreview(true);
+      if (preview) armOrRun('stashCollectAll', () => convertStash(preview), conversionSignature(preview));
     });
 
     // —— 材料使用（不可卖出，2026-09-08 定版；最后一张/整堆需确认）——

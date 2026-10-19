@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "title": "背包领奖样板对照",
+  "paths": [
+    {
+      "file": "game/css/bag-design-system.css",
+      "exists": true,
+      "sha256": "9e08bf867316eac0038a76b97177a7b06d09e1d1e3d59066fc0169e491a7ca3f"
+    },
+    {
+      "file": "game/css/chest-reward-overview.css",
+      "exists": true,
+      "sha256": "1a76e4d31bf386bbdb5e6d1f8ad7aa15ce7774bdfedc279e7403c43ddaf48714"
+    },
+    {
+      "file": "game/src/ui/chest-reward-overview.js",
+      "exists": true,
+      "sha256": "9628e6d153c9003eebdf49a4f331f9727a46d6b44ca385419cf77a7f9b3303f6"
+    },
+    {
+      "file": "game/src/ui/reward-scene-view.js",
+      "exists": true,
+      "sha256": "b5fd8b0f12861b6b216afe94a7df99ef5b7db8198c5b81a01d7228ca290b39b9"
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "exists": true,
+      "sha256": "1f58a9b779a7f1f3654fc6d19f04f5bb80c5fa42e63012e5c2226fe59ae1ebb8"
+    },
+    {
+      "file": "tests/event-reward-layout.test.js",
+      "exists": true,
+      "sha256": "aabfba2e2c7d7209381728222efe525a4acbcf29fd71ce98fa897cabd6fa523c"
+    },
+    {
+      "file": "tests/reward-picker-continuity.test.js",
+      "exists": true,
+      "sha256": "53cdaa52cfe0f1799ee2f90109b71a2b72dae86f2abb493acb049a5601f5710b"
+    },
+    {
+      "file": "game/dev/bag-reward-slice-review.html",
+      "exists": true,
+      "sha256": "658224f98484bb4f092b65d7fe2b1008b95414de4d9ac7e065296d00b7c0bbc8"
+    },
+    {
+      "file": "game/dev/bag-reward-slice-review.js",
+      "exists": true,
+      "sha256": "8e239ef6e8ece1671a20dec890bf08120cd7c1307b16efd91d0356538d863479"
+    }
+  ],
+  "reports": [
+    {
+      "path": "docs/evidence/2026-10-19-WF-bag-reward-slice-1019/2026-10-19T11-08-52.327Z-6a60e224.json",
+      "sha256": "ab3bff712243efbcfe66aa05003fb36ff8f61a0eb0522bde64b0ac76878dae14",
+      "result": "stale",
+      "warnings": [
+        "Changed since report: docs/PARALLEL-REGISTRY.md",
+        "Changed since report: game/src/generated/art-manifest.js"
+      ],
+      "coverage": "workflow verify: partial; stale; gate full"
+    }
+  ],
+  "unverified": [
+    "workflow review: stale",
+    "现有报告未覆盖全部所选范围。",
+    "UI候选仍待当前平台内置浏览器验证；已附截图仅保留其声明的输入范围。",
+    "docs/evidence/2026-10-19-WF-bag-reward-slice-1019/2026-10-19T11-08-52.327Z-6a60e224.json: stale"
+  ],
+  "hasFailure": false,
+  "ownerCompletionDeclared": false,
+  "closeInput": {
+    "stage": "partial",
+    "doneWhenConfirmed": false,
+    "checks": [
+      {
+        "kind": "manual",
+        "result": "unverified",
+        "description": "docs/evidence/2026-10-19-WF-bag-reward-slice-1019/2026-10-19T11-08-52.327Z-6a60e224.json: reported stale; owner must review coverage/freshness before declaring a passed check"
+      }
+    ],
+    "unverified": [
+      "workflow review: stale",
+      "现有报告未覆盖全部所选范围。",
+      "UI候选仍待当前平台内置浏览器验证；已附截图仅保留其声明的输入范围。",
+      "docs/evidence/2026-10-19-WF-bag-reward-slice-1019/2026-10-19T11-08-52.327Z-6a60e224.json: stale"
+    ]
+  },
+  "limits": [
+    "Read-only aggregation; never closes tasks, changes ledgers, grants commit permission or substitutes for workflow evidence/ship gates",
+    "Browser observed is not a gameplay pass; source inventory hashes do not establish test freshness"
+  ]
+}

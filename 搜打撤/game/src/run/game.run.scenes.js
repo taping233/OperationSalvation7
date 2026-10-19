@@ -26,6 +26,7 @@ import { reduceMotion } from '../core/motion.js';
 import { createCityCut, cityCutDuration } from '../ui/camp-entry.js';
 import { createPageSurfaceLifetime } from '../ui/page-surface-lifetime.js';
 import { prepareTransition } from '../ui/transition-preparation.js';
+import { motionTiming } from '../ui/motion-presets.js';
 import { eventSceneHTML } from '../ui/node-scene-view.js';
 import '../../css/entry-events.css';
 import '../../css/expedition-transitions.css';
@@ -114,11 +115,11 @@ function wireEventChoiceSelection(root, key) {
       item.classList.toggle('is-selected', index === selected);
       item.setAttribute('aria-pressed', String(index === selected));
     });
-    name.textContent = option?.querySelector('b')?.textContent || '先选择一个选项';
-    detail.textContent = option?.querySelector('span')?.textContent || (option ? '结果未知，确认后执行。' : '点击选项查看已知结果，再确认执行。');
+    name.textContent = option?.querySelector('b')?.textContent || '未选择';
+    detail.textContent = option?.querySelector('span')?.textContent || (option ? '结果未知' : '');
     confirm.disabled = !option || executing;
     clear.disabled = !option || executing;
-    confirm.textContent = option ? '确认选择' : '选择后确认';
+    confirm.textContent = '确认选择';
   };
   const choose = index => {
     if (executing || options[index]?.disabled) return;
@@ -297,8 +298,8 @@ export function enterNode(kind, done) {
   const spec = transitions[kind] || { title: '进入节点' };
   const combat = kind === 'battle' || kind === 'boss';
   const transition = showRunTransition(combat
-    ? { ...spec, duration: 650, holdVisual: true, prepare: ensureBattleReady }
-    : { ...spec, presentation: 'node-cut', duration: 240 });
+    ? { ...spec, duration: motionTiming.sceneEnter, holdVisual: true, prepare: ensureBattleReady }
+    : { ...spec, presentation: 'node-cut', duration: motionTiming.sceneEnter });
   return transition.then(async current => {
     if (!current || !transition.isCurrent()) return false;
     if (!combat) return done();
@@ -529,15 +530,15 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
       ? list.map(p => `
           <button type="button" class="bt-card fire-restore-card${left <= 0 ? ' off' : ''}" data-act="restoreOne" data-cancel="false" data-name="${escAttr(p.card.name)}" ${left <= 0 ? 'disabled' : ''}
             aria-label="${escAttr(`${p.card.name}，消耗区剩余 ${p.count} 张，复原 1 张回背包`)}" aria-description="${escAttr(p.card.desc || '')}"
-            title="${escAttr(p.card.desc || p.card.name)}——点击复原一张回背包">
+            title="${escAttr(p.card.desc || p.card.name)}">
             <span class="pocket-restore-art" aria-hidden="true">${SDT.Cards.cardHTML(p.card, 'sm')}</span>
             <span class="pocket-restore-caption"><b>${esc(p.card.name)}</b><span>复原 1 张 · 剩余 ${p.count} 张</span></span>
           </button>`).join('')
       : `<p class="ov-empty">（消耗区里没有可复原的卡牌${blockedN ? `——另有 ${blockedN} 张道具/装备不可在此复原` : ''}）</p>`;
-    UI.showOverlay(`${icon} ${title}`, `<section class="battle-decision pocket-restore" data-decision-kind="pocket-restore">
+    UI.showOverlay('', `<section class="battle-decision pocket-restore" data-decision-kind="pocket-restore">
       <header class="battle-decision-head"><h3>${icon} ${title}</h3><span>消耗区 · ${list.length} 种可复原卡牌</span></header>
       <div class="battle-decision-summary">
-        <p class="ov-note" role="status" aria-live="polite" aria-atomic="true">还可复原 <b>${left}</b> 张（最多 ${picks} 张）· 点击卡牌立即复原 1 张</p>
+        <p class="ov-note" role="status" aria-live="polite" aria-atomic="true">还可复原 <b>${left}</b> 张（最多 ${picks} 张）</p>
         <p class="ov-note">${opts.sub != null ? opts.sub : '<span class="eps-fate">复原=撤离全额带回，否则每张仅 1/3 幸存</span>'}${blockedN ? ` · 道具/装备共 ${blockedN} 张不可复原` : ''}</p>
       </div>
       <div class="battle-decision-content pocket-restore-content"><div class="bt-hand fire-restore-hand">${cardsHTML}</div></div>

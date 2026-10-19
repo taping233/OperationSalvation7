@@ -37,7 +37,7 @@ const WHITELIST = {
     'stealthStrike', 'nextSpellTwice', 'spellCost1', 'meleeCost1',
     'shaTransform', 'consumeFireballN', 'lastPlayedType',
     'playedMartialThisTurn', 'playedMovesThisTurn', 'growthNames', 'growth',
-    'infuseFuels', 'sealUnlocked', 'extraTurn', 'deathSave', 'killAtkUp',
+    'infuseFuels', 'handInfuseCounts', 'sealUnlocked', 'extraTurn', 'deathSave', 'killAtkUp',
     'poisonOnSpell', 'poisonLegacy', 'nestRunes', 'nestSyn', 'timeRune',
     'arrowRune', 'unyieldRune', 'ashRune', 'unlimitedRune', 'holyRune',
     'fireballRuneOn', 'freezeRuneOn', 'swiftRune', 'timeSpaceRune',
@@ -113,8 +113,8 @@ describe('战斗运行态字段完整性守卫', () => {
     }
   });
 
-  it('白名单总数 = 90（改动即红灯，防止静默增减）', () => {
+  it('白名单总数 = 91（改动即红灯，防止静默增减）', () => {
     const total = Object.values(WHITELIST).reduce((n, list) => n + list.length, 0);
-    expect(total).toBe(90);
+    expect(total).toBe(91);
   });
 });

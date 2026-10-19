@@ -4,6 +4,14 @@
 
 ## 收官汇总
 
+一批明确文件可用单入口串起改动核验、现有选验和摘要：
+
+```powershell
+node tools/workflow-slice.mjs --paths game/src/ui/reward-scene-view.js --out docs/evidence/<任务>/attempt1 --run --task <编号> --date YYYY-MM-DD
+```
+
+去掉 `--run --task --date` 只规划；已有 verify 报告改用 `--input <报告>`，可重复 `--report <浏览器取证JSON>` 汇总当前平台证据。输出 `run.json`、候选页面路径及 `summary/`，不覆盖已有输出。`full/quick/skip` 沿原门选择，失败保留原退出码并停止后续检查；跳过、过期、部分覆盖和截图观察不等于通过。计划为 `full`、本批按质量门只作显式定向反馈时，先沿 `verify --tests` 留证，再用 `--input` 汇总，仍标部分覆盖。页面只列候选，不启动浏览器；负责人按质量门核对实际覆盖。耗时只代表本次调用，无可比基线不宣称省时。
+
 ```powershell
 node tools/workflow-summary.mjs --input docs/evidence/<任务>/summary-input.json --out docs/evidence/<任务>/closeout --write
 ```

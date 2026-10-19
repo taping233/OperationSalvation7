@@ -40,6 +40,27 @@ function capacityHTML(used, cap, room) {
   return `<div class="exr-capacity"><div><span>[[icon:archive]] 仓库容量</span><strong>${used}<small> / ${cap} 张</small></strong></div><div class="exr-meter" role="meter" aria-label="仓库容量" aria-valuemin="0" aria-valuemax="${cap}" aria-valuenow="${used}"><i style="width:${percent}%"></i></div><p>${room ? `还能入库 <b>${room}</b> 张` : '仓库已满'}</p></div>`;
 }
 
+function growthHTML(receipt) {
+  const growth = receipt.growth;
+  if (!growth?.before || !growth?.after) {
+    return receipt.firstExplore ? `<section class="exr-growth" aria-label="本次结算成长"><h3>[[icon:medal]] 本次结算成长</h3><p class="exr-growth-heading">首探经验 <b>+${receipt.firstExplore.xp ?? 0}</b></p><p class="exr-growth-note">旧结算记录未保存等级变化明细。</p></section>` : '';
+  }
+  const { before, after } = growth;
+  const gained = Math.max(0, Number(growth.actualXp) || 0);
+  const need = Math.max(1, Number(growth.nextLevelXp) || 1);
+  const xp = Math.min(need, Math.max(0, Number(after.xp) || 0));
+  const percent = growth.maxed ? 100 : xp / need * 100;
+  const effects = (growth.effects || []).filter(effect => effect.after > effect.before);
+  return `<section class="exr-growth" aria-label="本次结算成长"><h3>[[icon:medal]] 本次结算成长</h3>
+    <div class="exr-growth-heading"><b>${esc(growth.characterName || '人物')}</b><span>撤离经验 <strong>+${gained}</strong></span></div>
+    <p class="exr-growth-level">Lv.${before.lv} <span aria-hidden="true">→</span> Lv.${after.lv}${growth.maxed ? ' · MAX' : ''}</p>
+    <div class="exr-growth-progress" role="progressbar" aria-label="结算后人物经验" aria-valuemin="0" aria-valuemax="${growth.maxed ? 100 : need}" aria-valuenow="${growth.maxed ? 100 : xp}"><i style="width:${percent}%"></i></div>
+    <p class="exr-growth-note">${growth.maxed ? (before.lv === after.lv ? '人物已满级，本次撤离未增加经验。' : '人物熟练度已满。') : `${after.xp} / ${need} XP · 距 Lv.${after.lv + 1} 还差 ${growth.xpToNext} XP`}</p>
+    ${growth.overflowXp > 0 ? `<p class="exr-growth-note exr-growth-overflow">本次撤离奖励 ${growth.awardedXp} XP，实际用于成长 ${gained} XP；溢出 ${growth.overflowXp} XP 不再提升等级。</p>` : ''}
+    ${effects.length ? `<ul class="exr-growth-effects">${effects.map(effect => `<li><span>${esc(effect.label)}</span><b>+${effect.before} → +${effect.after}</b></li>`).join('')}</ul><p class="exr-growth-note">成长加成在下次出征生效。</p>` : ''}
+  </section>`;
+}
+
 export function extractionStashHTML({ remainingCards = [], savedCards = [], keptPocket = [], pocketKept = 0, pocketLost = 0, pocketRuleLost = 0,
   wood = 0, rations = 0, stashUsed = 0, stashCap = 0, room = 0, coins = 0, shaN = 0, starterSha = 0, otherN = 0,
   broughtByName = new Map(), cardHTML, rarityOf, help = '', notice = '', confirmFinish = false } = {}) {
@@ -80,11 +101,12 @@ export function extractionDoneHTML({ receipt = {}, stashUsed = 0, stashCap = 0, 
     <div class="exr-layout"><section class="exr-loot" aria-label="本局真实入库">
       <div class="exr-section-title"><div><h3>已入库 <b>${net.cardsStashed ?? 0}</b><small> 张</small></h3></div></div>
       <div class="exr-card-scroll"><div class="exr-card-grid">${savedCards.length ? cardGrid(savedCards, { cardHTML, rarityOf, action: 'exDoneInspect' }) : '<div class="exr-empty"><span>[[icon:archive]]</span><h3>本次没有卡牌入库</h3></div>'}</div></div>
-    </section><aside class="exr-sidebar" aria-label="其他收获与散失"><div class="exr-sidebar-scroll">
+    </section><aside class="exr-sidebar" aria-label="成长、其他收获与散失"><div class="exr-sidebar-scroll">
+      ${growthHTML(r)}
       <section class="exr-resource-block"><h3>[[icon:archive]] 资源已入库</h3>${resourcesHTML(net.wood ?? 0, net.rations ?? 0)}</section>
       ${pocketHTML({ pocketKept: net.pocketKept ?? 0, pocketLost: loss.pocketLost ?? 0, pocketRuleLost: loss.pocketRuleLost ?? 0, compact: true })}
       ${(loss.lostCount || loss.pocketLost) ? `<details class="exr-loss"><summary>[[icon:cross]] 散失明细</summary><p>未入库 <b>${loss.lostCount || 0}</b> 张 · 消耗区散失 <b>${loss.pocketLost || 0}</b> 张</p>${loss.lostNotable?.length ? `<p>其中传说/史诗包括：${loss.lostNotable.map(c => `【${esc(c.name)}】×${c.count}`).join('、')}</p>` : ''}</details>` : '<p class="exr-ready">[[icon:check]] 本次没有卡牌散失</p>'}
-      <details class="exr-expedition-details"><summary>远征记录</summary><div class="exr-run-facts"><span>用时 <b>${time}</b></span><span>行动 <b>${r.actions ?? 0}</b> 次</span><span>抵达 <b>第 ${r.layersReached ?? '-'} 层</b></span><span>剩余生命 <b>${hp}/${maxHp}</b></span><span>首探经验 <b>+${r.firstExplore?.xp ?? 0}</b></span></div><p class="exr-currency-note">本局携带 ${r.runCoins ?? 0} 币留在局中；储备币 ${baseCoins} 币留在基地，不进局。</p></details>
+      <details class="exr-expedition-details"><summary>远征记录</summary><div class="exr-run-facts"><span>用时 <b>${time}</b></span><span>行动 <b>${r.actions ?? 0}</b> 次</span><span>抵达 <b>第 ${r.layersReached ?? '-'} 层</b></span><span>剩余生命 <b>${hp}/${maxHp}</b></span><span>${r.growth ? '撤离经验' : '首探经验'} <b>+${r.growth?.actualXp ?? r.firstExplore?.xp ?? 0}</b></span></div><p class="exr-currency-note">本局携带 ${r.runCoins ?? 0} 币留在局中；储备币 ${baseCoins} 币留在基地，不进局。</p></details>
     </div></aside></div>
     <footer class="exr-footer"><div class="exr-finish-note"><b>本次收获已保存</b><span>仓库 ${stashUsed}/${stashCap} · 图鉴 ${collectionCount}</span></div><button type="button" class="exr-button exr-primary" data-act="goBase">[[icon:home]] 返回基地 <span aria-hidden="true">→</span></button></footer>
   </div>`;

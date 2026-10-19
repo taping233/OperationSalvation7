@@ -1,0 +1,103 @@
+import '../../css/selection-state-motion.css';
+import { retargetVisual, clearVisual } from './target-motion.js';
+
+const definitions = [
+  { group: '.bag-rail', item: '.bag-rz', selected: '.bag-rz.on', kind: 'zone' },
+  { group: '.bag-tools', item: '.bag-pill', selected: '.bag-pill.on', kind: 'filter' },
+  { group: '.settings-nav', item: '.settings-tab', selected: '.settings-tab[aria-selected="true"]', kind: 'settings' },
+];
+const installations = new WeakMap();
+
+// One decorative plate per retained control group; business selection stays synchronous.
+export function installSelectionStateMotion(root = document.body) {
+  if (!root) return () => {};
+  if (installations.has(root)) return installations.get(root);
+  const groups = new Map();
+  let frame = 0;
+  let disposed = false;
+  const schedule = () => {
+    if (!disposed && !frame) frame = requestAnimationFrame(update);
+  };
+  const resize = typeof ResizeObserver === 'function' ? new ResizeObserver(schedule) : null;
+  function release(group, state) {
+    clearVisual(state.plate);
+    state.plate.remove();
+    delete group.dataset.selectionMotion;
+    resize?.unobserve(group);
+    for (const item of state.items) resize?.unobserve(item);
+    groups.delete(group);
+  }
+  function update() {
+    frame = 0;
+    if (disposed) return;
+    for (const [group, state] of groups) if (!root.contains(group)) release(group, state);
+    for (const definition of definitions) {
+      const candidates = [...root.querySelectorAll(definition.group)];
+      if (root.matches?.(definition.group)) candidates.unshift(root);
+      for (const group of candidates) {
+        let state = groups.get(group);
+        if (!state) {
+          const plate = document.createElement('span');
+          plate.className = 'selection-state-plate';
+          plate.setAttribute('aria-hidden', 'true');
+          group.dataset.selectionMotion = definition.kind;
+          group.append(plate);
+          state = { plate, definition, signature: '', ready: false, items: new Set() };
+          groups.set(group, state);
+          resize?.observe(group);
+        }
+        const items = new Set(group.querySelectorAll(definition.item));
+        for (const item of state.items) if (!items.has(item)) resize?.unobserve(item);
+        for (const item of items) if (!state.items.has(item)) resize?.observe(item);
+        state.items = items;
+        const selected = group.querySelector(definition.selected);
+        const bounds = group.getBoundingClientRect();
+        const rect = selected?.getBoundingClientRect();
+        const visible = rect && rect.width > 0 && rect.height > 0 && bounds.width > 0 && bounds.height > 0;
+        if (!visible) {
+          if (state.signature !== 'hidden') retargetVisual(state.plate, { opacity: 0 });
+          state.signature = 'hidden';
+          state.ready = false;
+          continue;
+        }
+        // Rectangles include ancestor page scaling; animation coordinates belong to the group.
+        const scaleX = group.offsetWidth ? bounds.width / group.offsetWidth : 1;
+        const scaleY = group.offsetHeight ? bounds.height / group.offsetHeight : 1;
+        const computed = getComputedStyle(selected);
+        const tint = definition.kind === 'settings'
+          ? computed.getPropertyValue('--settings-category-tint').trim() || '204,181,139'
+          : '108,155,169';
+        const target = {
+          x: (rect.left - bounds.left) / scaleX + group.scrollLeft - group.clientLeft,
+          y: (rect.top - bounds.top) / scaleY + group.scrollTop - group.clientTop,
+          width: rect.width / scaleX, height: rect.height / scaleY,
+          color: `rgb(${tint})`, opacity: 1,
+        };
+        const signature = JSON.stringify(target);
+        if (state.signature === signature) continue;
+        retargetVisual(state.plate, target, state.ready ? {} : { duration: 0 });
+        state.signature = signature;
+        state.ready = true;
+      }
+    }
+  }
+  // Ignore animated inline styles: observing them would create a frame feedback loop.
+  const observer = new MutationObserver(schedule);
+  observer.observe(root, { subtree: true, childList: true, attributes: true,
+    attributeFilter: ['class', 'aria-selected', 'aria-pressed', 'hidden'] });
+  window.addEventListener('resize', schedule);
+  root.addEventListener('scroll', schedule, true);
+  const dispose = () => {
+    disposed = true;
+    observer.disconnect();
+    resize?.disconnect();
+    cancelAnimationFrame(frame);
+    window.removeEventListener('resize', schedule);
+    root.removeEventListener('scroll', schedule, true);
+    for (const [group, state] of groups) release(group, state);
+    installations.delete(root);
+  };
+  installations.set(root, dispose);
+  update();
+  return dispose;
+}

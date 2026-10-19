@@ -1,5 +1,12 @@
 // Reconcile only the mounted backpack presentation; inventory rules stay in its callers.
 function syncAttributes(current, next) {
+  if (current.matches('.bag-tile[data-card-state-motion="true"]')) {
+    next.dataset.cardStateMotion = 'true';
+    for (const property of ['transform','outline-color']) {
+      const value = current.style.getPropertyValue(property);
+      if (value) next.style.setProperty(property, value, current.style.getPropertyPriority(property));
+    }
+  }
   for (const { name } of [...current.attributes]) if (!next.hasAttribute(name)) current.removeAttribute(name);
   for (const { name, value } of next.attributes) if (current.getAttribute(name) !== value) current.setAttribute(name, value);
 }
@@ -39,6 +46,22 @@ function replacePart(root, nextRoot, selector, before) {
   else if (next) root.insertBefore(next, before || null);
 }
 
+// Keep filter controls and their moving selection plate mounted during same-zone refreshes.
+function reconcileTools(root, nextRoot, board) {
+  const current = root.querySelector('.bag-tools'), next = nextRoot.querySelector('.bag-tools');
+  if (!current || !next) { replacePart(root, nextRoot, '.bag-tools', board); return; }
+  const retained = new Set();
+  for (const wanted of [...next.children]) {
+    const item = [...current.children].find(node => node.dataset.act === wanted.dataset.act
+      && node.dataset.f === wanted.dataset.f && node.className.replace(/\bon\b/g, '').trim() === wanted.className.replace(/\bon\b/g, '').trim());
+    if (!item) { current.insertBefore(wanted, current.querySelector('.selection-state-plate')); retained.add(wanted); continue; }
+    retained.add(item);
+    syncAttributes(item, wanted);
+    if (item.innerHTML !== wanted.innerHTML) item.innerHTML = wanted.innerHTML;
+  }
+  for (const item of [...current.children]) if (!retained.has(item) && !item.classList.contains('selection-state-plate')) item.remove();
+}
+
 export function patchBackpackPane(UI, SDT, markup, bagZone, refreshOnly) {
   const mountedBag = refreshOnly && UI.el.ovBody?.querySelector('.bag-v2');
   if (!mountedBag || UI.el.overlay.hidden || UI.el.overlay.classList?.contains('closing')) return false;
@@ -58,7 +81,7 @@ export function patchBackpackPane(UI, SDT, markup, bagZone, refreshOnly) {
   else {
     reconcileGrid(grid, nextGrid);
     replacePart(previous, next, '.bag-head2', board);
-    replacePart(previous, next, '.bag-tools', board);
+    reconcileTools(previous, next, board);
     replacePart(board, nextBoard, '.bag-receipt', grid);
     replacePart(board, nextBoard, '.bag-empty2');
     if (focused && document.activeElement !== focused) {

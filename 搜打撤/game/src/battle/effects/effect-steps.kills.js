@@ -216,27 +216,6 @@ export function killsSteps(s) {
         run: (ctx) => { fleeBattle(); ctx.did = true; },
       },
       {
-        id: 'buff.randomBlessing', gate: 'fresh', label: '随机获取一项祝福（天国之门）',
-        when: (ctx) => /随机获取一项祝福/.test(ctx.desc) ? true : null,
-        run: (ctx) => {
-          const cand = [];
-          if (/潜行/.test(ctx.desc)) cand.push({ key: 'stealth', run: () => combat.addBlessing(ctx.pstat, 'stealth', 1), name: '潜行' });
-          if (/攻击力/.test(ctx.desc)) cand.push({ key: 'atkUp', run: () => combat.addBlessing(ctx.pstat, 'atkUp', 1), name: '攻击力 +1' });
-          if (/法伤/.test(ctx.desc)) cand.push({ key: 'spellUp', run: () => combat.addBlessing(ctx.pstat, 'spellUp', 1), name: '法伤 +1' });
-          if (/减伤/.test(ctx.desc)) cand.push({ key: 'reduce', run: () => combat.addBlessing(ctx.pstat, 'reduce', 1), name: '减伤 1' });
-          if (/护甲/.test(ctx.desc)) cand.push({ key: '_armor', run: () => { ctx.pdef.armor += 5; }, name: '护甲 5' });
-          if (/净化/.test(ctx.desc)) cand.push({ key: '_purify', run: () => combat.purify(ctx.pstat), name: '净化' });
-          if (cand.length) {
-            const fresh = cand.filter(c => c.key.startsWith('_') || !((ctx.pstat.status[c.key] || 0) > 0));
-            const pool = fresh.length ? fresh : cand;
-            const pick = pool[Math.floor(random01() * pool.length)];
-            pick.run();
-            log(`[[icon:sparkles]] <b>祝福·${esc(pick.name)}</b>（随机祝福，优先不重复）`, 'ok');
-            ctx.did = true;
-          }
-        },
-      },
-      {
         id: 'draw.fromDeck', gate: 'fresh', label: '从牌库中抽取 N 张指定类型（武装）',
         when: (ctx) => ctx.desc.match(/从牌库中抽取\s*(\d+)\s*张?(初始攻击|装备|法术|武术|杀)牌?/),
         run: (ctx, m) => {
@@ -254,17 +233,17 @@ export function killsSteps(s) {
         id: 'hand.curseCards', gate: 'fresh', label: '随机获取 N 张能施加诅咒的卡牌/招式（厄运）',
         when: (ctx) => ctx.desc.match(/随机获取\s*(\d+)\s*张能施加诅咒的(卡牌|招式)/),
         run: (ctx, m) => {
-          const wantType = m[2] === '招式' ? '武术' : null;
+          const wantMoves = m[2] === '招式';
           const pool = allCards().filter(c =>
             c.rarity !== '衍生' && ['武术', '法术', '装备', '能力卡'].includes(c.type) &&
-            (!wantType || c.type === wantType) &&
+            (!wantMoves || ['武术', '法术'].includes(c.type)) &&
             /诅咒|中毒|流血|冰冻|沉默|破甲|禁疗/.test(String(c.desc || '')));
           let got = 0;
           for (let i = 0; i < +m[1] && pool.length; i++) {
             const c = pool[Math.floor(random01() * pool.length)];
             addTempCard(c); got++;
           }
-          log(`[[icon:skull]] <b>${esc(ctx.card.name)}</b>：随机获得 ${got} 张【能施加诅咒${wantType ? '的招式' : ''}】的卡牌（置入手牌，战后消散）`, 'loot');
+          log(`[[icon:skull]] <b>${esc(ctx.card.name)}</b>：随机获得 ${got} 张【能施加诅咒${wantMoves ? '的招式' : ''}】的卡牌（置入手牌，战后消散）`, 'loot');
           if (got) ctx.did = true;
         },
       },
@@ -325,7 +304,7 @@ export function killsSteps(s) {
         },
         run: (ctx, dPool) => {
           const n0 = POOL_NUM_MAP[dPool[1]] != null ? POOL_NUM_MAP[dPool[1]] : (dPool[1] ? +dPool[1] : 1);
-          // 招式尾拼回名词（2费招式 → parsePoolNoun 才能同时吃费用+武术两道限制）；牌/卡尾维持原样丢弃
+          // 招式尾拼回名词（2费招式 → parsePoolNoun 才能同时吃费用+武术/法术两道限制）；牌/卡尾维持原样丢弃
           const noun = (dPool[2] || '') + (dPool[3] === '招式' ? '招式' : '');
           const pred = parsePoolNoun(noun, ctx.myClass);
           const n = /等量随机卡牌/.test(ctx.desc) ? 2 : n0;   // 魔法锅炉「发现等量随机卡牌」（消耗至多 2 张）

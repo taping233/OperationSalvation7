@@ -13,15 +13,18 @@ let base, ui, cards;
 
 beforeEach(() => {
   vi.resetModules(); ports.convert.mockReset(); ports.read.mockReset(); ports.refresh.mockReset(); ports.ding.mockReset();
-  ports.read.mockReturnValue({ ok: true, value: {}, revision: 7 });
+  ports.read.mockImplementation(() => ({ ok: true, value: structuredClone(base.data), revision: 7 }));
   vi.stubGlobal('matchMedia', () => ({ matches: true }));
   const marked = new Set();
   base = {
-    slot: 1, data: { wood: 0, rations: 0, coins: 0, stash: [{ card: normal, count: 2 }, { card: rare, count: 1 }], pocket: [] },
+    slot: 1, data: { wood: 0, rations: 0, coins: 0, collection: {}, stash: [{ card: normal, count: 2 }, { card: rare, count: 1 }], pocket: [] },
     PETS: [], PET_EGG_ID: 'egg', HATCH_COST: 50,
     stashUsed: () => base.data.stash.reduce((sum, stack) => sum + stack.count, 0), stashCap: () => 25,
-    isCollected: card => marked.has(card.id), materialInfo: () => null,
-    collectToggle: vi.fn(card => { if (marked.has(card.id)) { marked.delete(card.id); return false; } marked.add(card.id); return true; }),
+    isCollected: card => !!base.data.collection[card.id], materialInfo: () => null,
+    collectToggle: vi.fn(card => {
+      if (marked.has(card.id)) { marked.delete(card.id); base.data.collection[card.id].protected = false; return false; }
+      marked.add(card.id); base.data.collection[card.id] = { name: card.name, protected: true }; return true;
+    }),
     sellStashCards: vi.fn((name, count) => {
       const stack = base.data.stash.find(item => item.card.name === name);
       if (!stack || marked.has(stack.card.id) || stack.count < count) return { ok: false };
@@ -119,17 +122,17 @@ describe('仓库双排浏览与原特写事务边界', () => {
     expect(base.data.stash[0].count).toBe(2);
   });
 
-  it('普通收藏保留原卡堆，特写刷新显示收藏状态且取消后恢复', async () => {
+  it('普通卡保护保留原卡堆，不发经验；取消保护保留图鉴收录', async () => {
     await mount(); open('甲'); footer('stashCollectToggle').click();
     expect(base.collectToggle).toHaveBeenCalledWith(normal);
     expect(base.data.stash[0].count).toBe(2);
-    expect(window.SDT.Meta.onCollect).toHaveBeenCalledWith(normal, true);
-    expect(document.querySelector('#cardZoom .inspect-collection-state').textContent).toBe('已收藏');
-    expect(footer('stashCollectToggle').textContent).toBe('取消收藏');
+    expect(window.SDT.Meta.onCollect).not.toHaveBeenCalled();
+    expect(document.querySelector('#cardZoom .inspect-collection-state').textContent).toBe('图鉴已收录 · 已保护');
+    expect(footer('stashCollectToggle').textContent).toBe('取消保护');
     expect(base.sellStashCards).not.toHaveBeenCalled();
     footer('stashCollectToggle').click();
-    expect(document.querySelector('#cardZoom .inspect-collection-state').textContent).toBe('仓库卡牌');
-    expect(footer('stashCollectToggle').textContent).toBe('收藏卡牌');
+    expect(document.querySelector('#cardZoom .inspect-collection-state').textContent).toBe('图鉴已收录');
+    expect(footer('stashCollectToggle').textContent).toBe('保护卡牌');
     expect(base.data.stash[0].count).toBe(2);
   });
 

@@ -1,6 +1,7 @@
 /* 由 effect-steps.js 拆出（2026-09-22 六文件重构批1）。原第 127-217 行，逐字搬迁。
  * 铁律：顺序即语义——本分节在壳 effect-steps.js 的 concat 顺序即旧 if 链物理顺序，勿重排。
- * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
+ * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量）。 */
+import { applyRandomBlessings } from './random-blessings.js';
 export function gatesSteps(s) {
   const {combat, log, queueChoice, registerTurnStartText, getInfuseFuels, unlockSeal, esc, HALT, FRESH_RESULT} = s;
   return [
@@ -87,6 +88,17 @@ export function gatesSteps(s) {
             log(`[[icon:question]] <b>${esc(ctx.card.name)}</b>：抉择（${options.length} 选 1）——请从面板中选择`, 'sys');
             return HALT(FRESH_RESULT(true));
           }
+        },
+      },
+      {
+        id: 'buff.randomBlessing', gate: 'fresh', label: '随机祝福整句（候选不逐项生效）',
+        when: (ctx) => /随机(?:获取|获得|施加).*祝福/.test(ctx.desc) ? true : null,
+        run: (ctx) => {
+          const applied = applyRandomBlessings({ text: ctx.desc, player: ctx.pstat, playerDefense: ctx.pdef,
+            allies: typeof s.getAllies === 'function' ? s.getAllies() : [], combat,
+            random01: s.random01, log, esc });
+          // 候选中的潜行、净化等是备选动作，不能再被后续 always 步骤逐项发给玩家。
+          return HALT(FRESH_RESULT(applied > 0));
         },
       },
       {

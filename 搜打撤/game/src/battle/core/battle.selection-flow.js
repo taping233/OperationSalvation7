@@ -6,6 +6,7 @@ import { esc } from '../../core/shared.js';
 import { splitEffectClauses as splitClauses } from '../effects/battle.effects.js';
 import { isHandPaymentCandidate, matchesHandSelectKey } from './battle.hand-selection.js';
 import { createBattleDiscoverFlow } from '../effects/battle.discover-flow.js';
+import { withBlessingChoices } from '../effects/random-blessings.js';
 
 /** @typedef {import('../battle.snapshot.types.js').BattleCardInput & { rarity?: string, cls?: string, _pouch?: import('../battle.snapshot.types.js').BattleCardInput[] }} SelectionCard */
 /** @typedef {{ all: () => SelectionCard[], isRandomObtainable: (card: SelectionCard) => boolean, sellPrice: (card: SelectionCard) => number }} SelectionCardsPort */
@@ -236,10 +237,7 @@ export function createBattleSelectionFlow({
       const parts = splitClauses(String(ref.desc || ''));
       if (parts.turnStart.length) {
         parts.turnStart.forEach(it => {
-          // 天国之门类「随机获取一项祝福」：把括号里的候选词池拼进注册文本，供回合结算识别
-          let text = it.text;
-          const paren = String(ref.desc || '').match(/（[^）]*从这些中随机[^）]*）/);
-          if (paren && /随机获取一项祝福/.test(text)) text += paren[0];
+          const text = withBlessingChoices(it.text, ref.desc);
           delayed.push({ text, cardName: ref.name, repeat: true });
         });
         G.log(`[[icon:hourglass]] <b>${esc(ref.name)}</b> 展开：${esc(parts.turnStart.map(it => it.text).join('；'))}（每回合开始生效）`, 'sys');
@@ -263,7 +261,7 @@ export function createBattleSelectionFlow({
         const ref2 = q2 && cards.all().find(c => c.name === q2[1]);
         if (ref2 && ref2.type === '生物') {
           const parts2 = splitClauses(String(ref2.desc || ''));
-          parts2.turnStart.forEach(it => delayed.push({ text: it.text, cardName: ref2.name, repeat: true, notBeforeTurn: turn + 2 }));
+          parts2.turnStart.forEach(it => delayed.push({ text: withBlessingChoices(it.text, ref2.desc), cardName: ref2.name, repeat: true, notBeforeTurn: turn + 2 }));
           if (parts2.turnStart.length) G.log(`[[icon:hourglass]] <b>两回合后</b>：未选择的【${esc(ref2.name)}】也将展开`, 'sys');
         }
       }

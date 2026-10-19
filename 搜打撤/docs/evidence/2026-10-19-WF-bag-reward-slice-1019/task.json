@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-bag-reward-slice-1019",
+  "date": "2026-10-19",
+  "owner": "Friday",
+  "goal": "背包—领奖样板：开发提效、公共视觉与连续交互并行实施，集中定向验收",
+  "paths": [
+    "game/src/hub/game.bag.js",
+    "game/src/hub/game.bag.view2.js",
+    "game/src/hub/game.bag.drag.js",
+    "game/src/hub/game.bag.settle.js",
+    "game/src/hub/game.reward-organizer.js",
+    "game/src/ui/chest-reward-overview.js",
+    "game/src/ui/reward-capacity-organizer.js",
+    "game/src/ui/reward-picker-heading.js",
+    "game/src/ui/reward-scene-view.js",
+    "game/src/run/chests.js",
+    "game/css/bag-design-system.css",
+    "game/css/card-browser.css",
+    "game/css/chest-reward-overview.css",
+    "game/css/page-rewards-bag-help.css",
+    "tools/workflow-slice.mjs",
+    "tests/workflow-slice.test.js",
+    "docs/workflow-recipes.md",
+    "game/dev/bag-reward-slice-review.html",
+    "game/dev/bag-reward-slice-review.js",
+    "docs/evidence/2026-10-19-bag-reward-slice",
+    "game/css/secondary-ui-tokens.css",
+    "game/css/ui-design-system.css",
+    "game/css/expedition-shop.css",
+    "game/css/base-logistics-trade-v12.css",
+    "game/css/settings-navigation.css",
+    "game/css/departure-selected.css",
+    "docs/evidence/2026-10-19-bag-reward-slice/visual/scale/static-check.json"
+  ],
+  "doneWhen": [
+    "两个目标页面的公共视觉与连续交互问题按现码完成，玩法和存档规则保持",
+    "工具入口真实运行并保留耗时/命令与失败边界",
+    "相关定向检查及当前窗口内置浏览器代表场景集中复核，缺口如实记录"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "v3有色玻璃和奖励背景压暗/模糊完成；定向首批6文件92通过，sys03补验21通过。当前窗口实页确认连续领取、满包直达背包、三选一重入与设置标题36px；workflow-slice真实运行对照见各自证据。",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "代表页面检查，未穷尽所有页面；v3审美待老板反馈。",
+    "未build、提交、推送；先前不同窗口宽度由用户改变，不作为代理多尺寸验收。"
+  ],
+  "updatedAt": "2026-10-19T12:41:24.087Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

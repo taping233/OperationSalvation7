@@ -61,11 +61,14 @@ describe('backpack winter UI facts', () => {
     for (const action of ['closeBag','bagZone','bagFilter','bagSortCycle','bagTidy']) expect(document.querySelector(`[data-act="${action}"]`)).not.toBeNull();
     expect(JSON.stringify(data)).toBe(before);
   });
-  it('limits styles to opted-in backpack UI without changing cards, grid, drag or interaction layers', () => {
+  it('limits v3 artwork to opted-in backpack surfaces and decorative tile properties', () => {
     const css = readFileSync('game/css/bag-design-system.css','utf8');
     postcss.parse(css).walkRules(rule => {
-      expect(rule.selector).toContain('.bag-v2.ui-design-system');
-      expect(rule.selector).not.toMatch(/\.hs-card|\.bag-grid|\.bag-tile|\.bag-ghost/);
+      expect(rule.selector).toContain('.bag-v2.ui-design-system.bag-art-v3');
+      expect(rule.selector).not.toMatch(/\.hs-card|\.bag-grid|\.bag-ghost/);
+      if (rule.selector.includes('.bag-tile')) {
+        rule.walkDecls(decl => expect(['background','border-radius','border-bottom-color','border-color','box-shadow','outline','outline-offset'], `${rule.selector}: ${decl.prop}`).toContain(decl.prop));
+      }
     });
     expect(css).not.toMatch(/z-index|pointer-events|transform:|grid-template|!important/);
     expect(css).toContain('padding:var(--ui-space-6) 20px');

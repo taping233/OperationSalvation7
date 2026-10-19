@@ -1,0 +1,25 @@
+{
+  "paths": [
+    "game/css/bag-design-system.css",
+    "game/css/chest-reward-overview.css",
+    "game/src/ui/chest-reward-overview.js",
+    "game/src/ui/reward-scene-view.js",
+    "game/src/run/chests.js",
+    "tests/event-reward-layout.test.js",
+    "tests/reward-picker-continuity.test.js",
+    "game/dev/bag-reward-slice-review.html",
+    "game/dev/bag-reward-slice-review.js"
+  ],
+  "title": "背包领奖样板对照",
+  "reports": [
+    {
+      "path": "docs/evidence/2026-10-19-WF-bag-reward-slice-1019/2026-10-19T11-08-52.327Z-6a60e224.json",
+      "coverage": "workflow verify: partial; stale; gate full"
+    }
+  ],
+  "unverified": [
+    "workflow review: stale",
+    "现有报告未覆盖全部所选范围。",
+    "UI候选仍待当前平台内置浏览器验证；已附截图仅保留其声明的输入范围。"
+  ]
+}

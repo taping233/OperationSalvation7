@@ -54,7 +54,7 @@ export function tileHTML(t, resourceCards = null) {
     // 点击开基地同款 inventory-zoom 看卡操作台
     return `<div class="bag-tile bag-slot card-face${spent}"${stack}${select}${identity} tabindex="0"
       style="--tint:${rc}1c;--glow:${rc}30"
-      title="${escAttr(t.name)}${t.count > 1 ? ` ×${t.count}` : ''} · 点击查看 · 按住拖动整理">
+      title="${escAttr(t.name)}${t.count > 1 ? ` ×${t.count}` : ''}">
       ${SDT.Cards.cardHTML(t.card, '', { hideCost: false }).replace(/\s+tabindex="0"/g, '')}
       ${state ? `<span class="bag-tstate"${t.useStatus?.reason ? ` title="${escAttr(t.useStatus.reason)}"` : ''}>${esc(state)}</span>` : ''}
       ${t.count > 1 ? `<span class="bag-tct">×${t.count}</span>` : ''}
@@ -102,7 +102,7 @@ export function pageHTML(m) {  const zoneNames = { bag: '随身背包', safe: '�
   const cardCount = m.bagZone === 'pocket' ? m.pkN : m.bagZone === 'safe' ? (m.safeCardN ?? m.tiles.reduce((n, t) => n + t.count, 0)) : (m.bagCardN ?? m.tiles.filter(t => !t.supply).reduce((n, t) => n + t.count, 0));
   const head = `
       <header class="bag-head2">
-        <div class="bag-title"><span class="bag-kick">DEPOT</span><h2>${zoneNames[m.bagZone]} ${window.SDT.UI.helpBtn('bag')}</h2></div>
+        <div class="bag-title"><h2>${zoneNames[m.bagZone]} ${window.SDT.UI.helpBtn('bag')}</h2></div>
         <div class="bag-capchip" aria-label="${zoneCap == null ? '消耗区卡牌数量' : '占格与卡牌张数'}">
           <span class="bag-capk">${zoneCap == null ? '卡牌' : '占格'}</span><span class="bag-capbar"><i style="width:${pct}%"></i></span>
           <b>${zoneUsed}</b><small>${zoneCap == null ? ' 张 · 不限容量' : `/${zoneCap} 格`}${m.bagZone === 'bag' && ext ? ` · ${m.capacityText ? esc(m.capacityText) : `扩展+${ext}`}` : ''}${m.bagZone === 'bag' && ext ? ` · 盒内 ${m.pearlStoredN || 0}/${ext} 张（不占格）` : ''}</small>
@@ -112,8 +112,8 @@ export function pageHTML(m) {  const zoneNames = { bag: '随身背包', safe: '�
   const tools = m.bagZone === 'bag' ? `
       <div class="bag-tools">
         ${pills}<span class="bag-tgap"></span>
-        <button class="bag-icbtn" data-act="bagSortCycle" aria-label="切换背包排序" title="排序：稀有度 ⇄ 种类（当前${m.bagSortKey === 'rarity' ? '稀有度' : '种类'}）">${svgIcon(RAIL_ICONS.sort, 'currentColor')}</button>
-        <button class="bag-icbtn gold" data-act="bagTidy" aria-label="按稀有度整理背包" title="一键整理（按稀有度）">${svgIcon(RAIL_ICONS.tidy, 'currentColor')}</button>
+        <button class="bag-icbtn ui-control-icon" data-act="bagSortCycle" aria-label="切换背包排序" title="排序：稀有度 ⇄ 种类（当前${m.bagSortKey === 'rarity' ? '稀有度' : '种类'}）">${svgIcon(RAIL_ICONS.sort, 'currentColor')}</button>
+        <button class="bag-icbtn gold ui-control-icon" data-act="bagTidy" aria-label="按稀有度整理背包" title="一键整理（按稀有度）">${svgIcon(RAIL_ICONS.tidy, 'currentColor')}</button>
       </div>` : '';
   const board = `
       <div class="bag-board">
@@ -129,7 +129,7 @@ export function pageHTML(m) {  const zoneNames = { bag: '随身背包', safe: '�
                 fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>`;
-  return `<div class="bag-view bag-v2 ui-design-system">
+  return `<div class="bag-view bag-v2 ui-design-system bag-art-v3">
       <img class="bag-bg" src="assets/scenes/map-nodes/map-atmosphere-is7-1012.webp" alt="" aria-hidden="true">
       <div class="bag-shell">
         <nav class="bag-rail">
@@ -137,7 +137,6 @@ export function pageHTML(m) {  const zoneNames = { bag: '随身背包', safe: '�
           ${railBtn('bag', m.used)}
           ${railBtn('safe', `${m.safeUsedN}/${m.sCap}`)}
           ${railBtn('pocket', m.pkN)}
-          <span class="bag-rlogo">DEPOT</span>
         </nav>
         <section class="bag-col">${head}${tools}${board}</section>
       </div>

@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-19T11:47:35.750Z",
+  "inputKind": "static-inspection",
+  "detail": "老板反馈背景抢眼后，当前窗口独立观察：场景层模糊、降低亮度与饱和度，卡面文字不套背景滤镜。浏览器区域在两次观察间由用户改变宽度，未作同窗口A/B或多尺寸验收。",
+  "screenshot": {
+    "path": "reward-background-muted.png",
+    "bytes": 14874,
+    "sha256": "9829509489f9f82480c003ad3b82c74e42741673c5fd2c4e24f5a1f3d07067ff"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/dev/bag-reward-slice-review.html",
+  "images": [
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://localhost:5200/assets/cards/spell-tt3-ice-spike.webp?art=ice-spike-frozen-gear-20261011&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://localhost:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://localhost:5200/assets/cards/equip-tt3-azure-sword.webp?art=original-rough-20261010&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://localhost:5200/assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 1024,
+      "src": "http://localhost:5200/assets/cards/items/tt4-woodify.webp?v=0.60.0",
+      "width": 1024
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://localhost:5200/assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 1024,
+      "src": "http://localhost:5200/assets/cards/items/tt3-iceheart-potion.webp?v=0.60.0",
+      "width": 1024
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://localhost:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://localhost:5200/assets/cards/studio-expanded/tt3-grass-armor.webp?art=studio-square-outpaint-20261011&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://localhost:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://localhost:5200/assets/cards/martial-tt3-frostfall.webp?art=tt3-frostfall-cropped-action-builtin-20261010&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://localhost:5200/assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/bag.png?v=0.60.0",
+      "width": 128
+    }
+  ],
+  "console": []
+}

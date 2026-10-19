@@ -19,13 +19,16 @@
 #overlay .card.scene:has(.expedition-cut)::after { display:none; }
 #overlay .card.scene:has(.expedition-cut) #ovBody { width:100%; height:100%; }
 #overlay .scene.flow-transition.expedition-cut { display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:24px; width:100%; height:100%; margin:0; padding:8% 12%; background:#171c20; animation:none; overflow:hidden; }
-#overlay .expedition-cut::before,#overlay .expedition-cut::after { display:none; }
-#overlay .expedition-cut h2 { margin:0; font:600 44px/1.2 var(--font-ui); color:#f1f2ed; letter-spacing:.08em; animation:expeditionCutTitle .2s ease-out both; }
-.expedition-cut-rule { width:110px; height:4px; background:#9acbc5; transform-origin:left; animation:expeditionCutRule .2s ease-out both; }
+#overlay .expedition-cut::before { content:''; display:block; position:absolute; inset:0; background:linear-gradient(115deg,#10171b 0 34%,#1c2a30 34% 66%,#132127 66%); animation:expeditionCutField var(--motion-scene-enter,450ms) var(--motion-ease-enter,ease-out) both; pointer-events:none; }
+#overlay .expedition-cut::after { display:none; }
+#overlay .expedition-cut > * { position:relative; }
+#overlay .expedition-cut h2 { margin:0; font:600 44px/1.2 var(--font-ui); color:#f1f2ed; letter-spacing:.08em; animation:expeditionCutTitle var(--motion-detail-enter,220ms) var(--motion-ease-enter,ease-out) both; }
+.expedition-cut-rule { width:110px; height:4px; background:#9acbc5; transform-origin:left; animation:expeditionCutRule var(--motion-detail-enter,220ms) var(--motion-ease-enter,ease-out) both; }
+@keyframes expeditionCutField { from { transform:translateX(-8%); } to { transform:none; } }
 @keyframes expeditionCutTitle { from { opacity:0; transform:translateX(14px); } to { opacity:1; transform:none; } }
 @keyframes expeditionCutRule { from { transform:scaleX(.1); } to { transform:scaleX(1); } }
-body.reduce-motion .expedition-cut * { animation:none!important; }
-@media (prefers-reduced-motion:reduce) { .expedition-cut * { animation:none!important; } }
+body.reduce-motion .expedition-cut *,body.reduce-motion .expedition-cut::before { animation:none!important; }
+@media (prefers-reduced-motion:reduce) { .expedition-cut *,.expedition-cut::before { animation:none!important; } }
 
 .departure-handoff { position:fixed; inset:0; z-index:1500; display:grid; place-items:center; background:#10171b; pointer-events:auto; animation:departureCover .15s ease-out both; }
 .departure-handoff i { width:96px; height:3px; background:#b2d8d1; transform-origin:left; animation:expeditionCutRule .16s ease-out both; }

@@ -18,11 +18,11 @@ export function containerStoreHTML({ title, icon, prefix, count, cap, stored, av
     </div>`;
   }).join('') || `<p class="ov-empty">${take ? `${title}是空的` : `背包里没有${type}卡`}</p>`;
   return `<section class="battle-decision battle-decision-unified pearl-store container-store" data-decision-kind="${prefix}-store">
-    <header class="battle-decision-head"><div class="container-store-title"><small>FIELD STORAGE</small><h3>[[icon:${icon}]] ${title}</h3></div><span class="container-store-capacity" role="status" aria-live="polite"><b>${count}</b><span>/ ${cap}</span><i aria-hidden="true" style="--store-fill:${Math.min(100, count / Math.max(1, cap) * 100)}%"></i></span></header>
-    <div class="battle-decision-summary"><p class="ov-note">点击即整叠移动 · 存入后不占背包格</p></div>
+    <header class="battle-decision-head"><div class="container-store-title"><h3>[[icon:${icon}]] ${title}</h3></div><span class="container-store-capacity" role="status" aria-live="polite"><b>${count}</b><span>/ ${cap}</span><i aria-hidden="true" style="--store-fill:${Math.min(100, count / Math.max(1, cap) * 100)}%"></i></span></header>
+    <div class="battle-decision-summary"><p class="ov-note">整叠存取 · 存入后不占背包格</p></div>
     <div class="battle-decision-content pearl-store-columns">
-      <section><header class="container-column-head"><small>01 / STORED</small><h4>${title}中</h4><span>点击卡牌取出</span></header><div class="pearl-store-list">${cards(stored, true)}</div></section>
-      <section><header class="container-column-head"><small>02 / BACKPACK</small><h4>随身背包</h4><span>点击卡牌存入</span></header><div class="pearl-store-list">${cards(available, false)}</div></section>
+      <section><header class="container-column-head"><h4>${title}中</h4></header><div class="pearl-store-list">${cards(stored, true)}</div></section>
+      <section><header class="container-column-head"><h4>随身背包</h4></header><div class="pearl-store-list">${cards(available, false)}</div></section>
     </div>
     <footer class="battle-decision-actions"><details class="container-store-help"><summary>收纳说明</summary><p>${esc(help)}</p></details>
       <div class="ov-btns"><button type="button" class="ov-btn ok" data-act="${prefix}Back" data-cancel="true" aria-label="收好${title}，返回背包">[[icon:arrow]] 返回背包</button></div></footer>

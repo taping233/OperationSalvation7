@@ -1,0 +1,15 @@
+{
+  "report": "docs/evidence/2026-10-19-WF-completed-commit-1019/2026-10-19T14-12-28.046Z-43f454c5-staged.json",
+  "outcome": "failed",
+  "mode": "full",
+  "tests": {
+    "passed": 6671,
+    "failed": 18,
+    "skipped": 16,
+    "filesPassed": 650,
+    "filesFailed": 12
+  },
+  "indexStable": true,
+  "snapshotMutations": [],
+  "explanation": "首轮隔离快照，尚未纳入稍后完成的地图/局外成长；原报告保留，失败集中修复后重新冻结。"
+}

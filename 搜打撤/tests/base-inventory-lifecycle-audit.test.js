@@ -44,13 +44,18 @@ it('coalesces warehouse image load bursts into one layout refresh and ignores de
 beforeEach(async () => {
   vi.resetModules(); vi.useFakeTimers();
   for (const port of Object.values(ports)) port.mockReset();
-  ports.read.mockReturnValue({ ok: true, revision: 4 });
+  ports.read.mockImplementation(() => ({ ok: true, value: structuredClone(base.data), revision: 4 }));
   ports.convert.mockResolvedValue({ ok: false, message: '保持库存' });
   base = {
     slot: 1, data: { stash: [], collection: {} }, PET_EGG_ID: 'egg',
     materialInfo: item => item.type === '资源' ? { kind: 'wood' } : null,
     isCollected: item => !!base.data.collection[item.id],
-    collectToggle: vi.fn(item => { base.data.collection[item.id] = { name: item.name }; return true; }),
+    collectToggle: vi.fn(item => {
+      const record = base.data.collection[item.id];
+      const protect = !(record && record.protected !== false);
+      base.data.collection[item.id] = { ...record, name: item.name, protected: protect };
+      return protect;
+    }),
     useStashMaterial: vi.fn(() => ({ ok: true, msg: '已使用' })),
     hatchPet: vi.fn(() => ({ ok: false, why: 'poor' })),
     stashRoom: () => 10,
@@ -150,7 +155,62 @@ describe('仓库特写操作上下文', () => {
   it('正常收藏刷新并保留卡牌与当前详情', () => {
     const zoom = open(card); ui._acts.stashCollectToggle();
     expect(base.collectToggle).toHaveBeenCalledExactlyOnceWith(card); expect(base.data.stash[0].count).toBe(2);
-    expect(document.getElementById('cardZoom')).toBe(zoom); expect(document.querySelector('.inspect-collection-state').textContent).toBe('已收藏');
+    expect(document.getElementById('cardZoom')).toBe(zoom); expect(document.querySelector('.inspect-collection-state').textContent).toBe('图鉴已收录 · 已保护');
+  });
+  it('已收录未保护的重复卡固定有经验入口，不取消图鉴也不免费发经验', () => {
+    base.data.collection[growth.id] = { name: growth.name, protected: false };
+    open(growth);
+    expect(button('stashCollectOne').disabled).toBe(false);
+    expect(button('stashCollectToggle').textContent).toBe('保护卡牌');
+    expect(document.querySelector('[data-conversion-preview]').textContent).toContain('实际经验 +10');
+    ui._acts.stashCollectOne(); ui._acts.stashCollectOne();
+    expect(ports.convert).toHaveBeenCalledWith(expect.any(Object), { stackKey: 'card:growth', count: 1 });
+    expect(base.collectToggle).not.toHaveBeenCalled();
+    expect(window.SDT.Meta.onCollect).not.toHaveBeenCalled();
+  });
+  it('旧收藏保护明确禁用经验入口，取消保护保留收录再允许转换', () => {
+    base.data.collection[growth.id] = { name: growth.name, ts: 1 };
+    open(growth);
+    expect(button('stashCollectOne').disabled).toBe(true);
+    expect(button('stashCollectAll').disabled).toBe(true);
+    ui._acts.stashCollectOne();
+    expect(ports.convert).not.toHaveBeenCalled();
+    button('stashCollectToggle').click();
+    expect(base.data.collection[growth.id]).toMatchObject({ ts: 1, protected: false });
+    expect(button('stashCollectOne').disabled).toBe(false);
+  });
+  it('满级未收录仅显示1张收录与经验0，已收录后不再允许转化', () => {
+    base.data.characters = { wu: { lv: 10, xp: 0 } };
+    open(growth);
+    expect(button('stashCollectOne').textContent).toBe('仅收录图鉴 · 消耗 1 张');
+    expect(button('stashCollectAll')).toBeNull();
+    expect(button('stashCollectToggle')).toBeNull();
+    expect(document.querySelector('[data-conversion-preview]').textContent).toContain('仅收录图鉴，经验 0，消耗 1 张');
+    base.data.collection[growth.id] = { protected: false };
+    pages.openStashCardView(0);
+    expect(button('stashCollectOne').disabled).toBe(true);
+    expect(document.querySelector('[data-conversion-preview]').textContent).toContain('不再消耗卡牌');
+    expect(document.querySelector('#cardZoom .cz-foot').textContent).not.toContain('重复卡仍可转化经验');
+  });
+  it('批量确认预览与提交都限制为满级所需张数，并提前说明末张溢出', () => {
+    base.data.characters = { wu: { lv: 9, xp: 345 } };
+    open(growth); base.data.stash[0].count = 9; pages.openStashCardView(0);
+    expect(button('stashCollectAll').textContent).toBe('批量转化 · 3 张');
+    button('stashCollectAll').click();
+    expect(ports.convert).not.toHaveBeenCalled();
+    expect(document.querySelector('[data-conversion-preview]').textContent).toContain('消耗【同名卡】×3');
+    expect(document.querySelector('[data-conversion-preview]').textContent).toContain('实际经验 +25');
+    expect(document.querySelector('[data-conversion-preview]').textContent).toContain('末张溢出 5 经验');
+    button('stashCollectAll').click();
+    expect(ports.convert).toHaveBeenCalledWith(expect.any(Object), { stackKey: 'card:growth', count: 3 });
+  });
+  it('确认期间人物经验或保护变化必须重看预览，不沿用已确认的收益', () => {
+    open(growth); ui._acts.stashCollectOne();
+    base.data.characters = { wu: { lv: 1, xp: 40 } };
+    ui._acts.stashCollectOne();
+    expect(ports.convert).not.toHaveBeenCalled();
+    ui._acts.stashCollectOne();
+    expect(ports.convert).toHaveBeenCalledOnce();
   });
 });
 

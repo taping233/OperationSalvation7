@@ -1,0 +1,1156 @@
+{
+  "generatedAt": "2026-10-19T11:47:14.269Z",
+  "source": "tests/card-description-audit-battle.test.js",
+  "scope": "真实执行器/Combat/发现流程与受控内存BattleSession；未改生产或玩家存档。断言当前现状，含已确认不符。",
+  "observed": [
+    {
+      "id": "starter-attack",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          5
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          5
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "cc-chase-slash",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          5
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          5
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "cc-cursed-blade",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          8
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          8
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "cc-double-boom",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          5
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          5
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "cc-ember-burst",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          4
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "cc-lava-blast",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          11
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          11
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt2-bloodblade",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          7
+        ],
+        "extras": {
+          "heal": 7
+        }
+      },
+      "described": {
+        "damage": [
+          7
+        ],
+        "extras": {
+          "heal": 7
+        }
+      }
+    },
+    {
+      "id": "tt2-comboarrow",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          4
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt2-forestarrow",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4
+        ],
+        "extras": {
+          "armor": 3
+        }
+      },
+      "described": {
+        "damage": [
+          4
+        ],
+        "extras": {
+          "armor": 3
+        }
+      }
+    },
+    {
+      "id": "tt2-piercearrow",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4
+        ],
+        "extras": {
+          "armor": 3
+        }
+      },
+      "described": {
+        "damage": [
+          4
+        ],
+        "extras": {
+          "armor": 3
+        }
+      }
+    },
+    {
+      "id": "tt2-shoot",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          2
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          2
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt2-swiftarrow",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4
+        ],
+        "extras": {
+          "draw": 1
+        }
+      },
+      "described": {
+        "damage": [
+          4
+        ],
+        "extras": {
+          "draw": 1
+        }
+      }
+    },
+    {
+      "id": "tt3-armor-rush",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          9
+        ],
+        "extras": {
+          "bleed": 2
+        }
+      },
+      "described": {
+        "damage": [
+          9
+        ],
+        "extras": {
+          "bleed": 2
+        }
+      }
+    },
+    {
+      "id": "tt3-arrow-rain",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          4
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt3-bandage",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [],
+        "extras": {
+          "heal": 3,
+          "armor": 3
+        }
+      },
+      "described": {
+        "damage": [],
+        "extras": {
+          "heal": 3,
+          "armor": 3
+        }
+      }
+    },
+    {
+      "id": "tt3-blood-arrow",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4
+        ],
+        "extras": {
+          "bleed": 1
+        }
+      },
+      "described": {
+        "damage": [
+          4
+        ],
+        "extras": {
+          "bleed": 1
+        }
+      }
+    },
+    {
+      "id": "tt3-double-shot",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          2,
+          2,
+          2
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          2,
+          2,
+          2
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt3-frost-slash",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          7
+        ],
+        "extras": {
+          "freeze": 1,
+          "healban": 1
+        }
+      },
+      "described": {
+        "damage": [
+          7
+        ],
+        "extras": {
+          "freeze": 1,
+          "healban": 1
+        }
+      }
+    },
+    {
+      "id": "tt3-hold-fast",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [],
+        "extras": {
+          "armor": 5,
+          "draw": 1
+        }
+      },
+      "described": {
+        "damage": [],
+        "extras": {
+          "armor": 5,
+          "draw": 1
+        }
+      }
+    },
+    {
+      "id": "tt3-life-arrow",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          4
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt3-purify-arrow",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          4
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt3-reshot",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          7
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          7
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt3-skewer",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          7
+        ],
+        "extras": {
+          "abreak": 1
+        }
+      },
+      "described": {
+        "damage": [
+          7
+        ],
+        "extras": {
+          "abreak": 1
+        }
+      }
+    },
+    {
+      "id": "tt3-venom-arrow",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4
+        ],
+        "extras": {
+          "poison": 1
+        }
+      },
+      "described": {
+        "damage": [
+          4
+        ],
+        "extras": {
+          "poison": 1
+        }
+      }
+    },
+    {
+      "id": "tt3-wave-slash",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          8
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          8
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt7-bulwark",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [],
+        "extras": {
+          "armor": 8
+        }
+      },
+      "described": {
+        "damage": [],
+        "extras": {
+          "armor": 8
+        }
+      }
+    },
+    {
+      "id": "tt7-demonbreaker",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          10
+        ],
+        "extras": {
+          "abreak": 2
+        }
+      },
+      "described": {
+        "damage": [
+          10
+        ],
+        "extras": {
+          "abreak": 2
+        }
+      }
+    },
+    {
+      "id": "tt7-fullstrike",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          10
+        ],
+        "extras": {
+          "draw": 1
+        }
+      },
+      "described": {
+        "damage": [
+          10
+        ],
+        "extras": {
+          "draw": 1
+        }
+      }
+    },
+    {
+      "id": "tt7-ironcharge",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [],
+        "extras": {
+          "armor": 12,
+          "draw": 2
+        }
+      },
+      "described": {
+        "damage": [],
+        "extras": {
+          "armor": 12,
+          "draw": 2
+        }
+      }
+    },
+    {
+      "id": "tt7-meteorrain",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4,
+          4
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          4,
+          4
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt7-sneak",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          4
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt7-throwblade",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          2
+        ],
+        "extras": {
+          "bleed": 1,
+          "draw": 1
+        }
+      },
+      "described": {
+        "damage": [
+          2
+        ],
+        "extras": {
+          "bleed": 1,
+          "draw": 1
+        }
+      }
+    },
+    {
+      "id": "tt7-whirlwind",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt8-dragonblade",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          11
+        ],
+        "extras": {
+          "abreak": 2,
+          "bleed": 1
+        }
+      },
+      "described": {
+        "damage": [
+          11
+        ],
+        "extras": {
+          "abreak": 2,
+          "bleed": 1
+        }
+      }
+    },
+    {
+      "id": "cmtna0nb1yxt",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          7
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          7
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt12-barriermend",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [],
+        "extras": {
+          "armor": 6
+        }
+      },
+      "described": {
+        "damage": [],
+        "extras": {
+          "armor": 6
+        }
+      }
+    },
+    {
+      "id": "tt12-elemburst",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt12-firecracker",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          1
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          1
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt12-infectray",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt12-sporewall",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [],
+        "extras": {
+          "armor": 6,
+          "poison": 2
+        }
+      },
+      "described": {
+        "damage": [],
+        "extras": {
+          "armor": 6,
+          "poison": 2
+        }
+      }
+    },
+    {
+      "id": "tt12-unstableray",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt3-chain-lightning",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          5,
+          5
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          5,
+          5
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt3-fireball",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt3-flame-storm",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt3-holy-shield",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [],
+        "extras": {
+          "armor": 6
+        }
+      },
+      "described": {
+        "damage": [],
+        "extras": {
+          "armor": 6
+        }
+      }
+    },
+    {
+      "id": "tt3-holy-water",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [],
+        "extras": {
+          "heal": 5
+        }
+      },
+      "described": {
+        "damage": [],
+        "extras": {
+          "heal": 5
+        }
+      }
+    },
+    {
+      "id": "tt3-ice-spike",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          4
+        ],
+        "extras": {
+          "freeze": 1
+        }
+      },
+      "described": {
+        "damage": [
+          4
+        ],
+        "extras": {
+          "freeze": 1
+        }
+      }
+    },
+    {
+      "id": "tt3-thunderblast",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          9
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          9
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt3-toxin",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [],
+        "extras": {
+          "poison": 1,
+          "draw": 1
+        }
+      },
+      "described": {
+        "damage": [],
+        "extras": {
+          "poison": 1,
+          "draw": 1
+        }
+      }
+    },
+    {
+      "id": "tt3-treasure-hunt",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt3sp-shadowshot",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          5
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          5
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt7-bloodpotion",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          5
+        ],
+        "extras": {
+          "heal": 5
+        }
+      },
+      "described": {
+        "damage": [
+          5
+        ],
+        "extras": {
+          "heal": 5
+        }
+      }
+    },
+    {
+      "id": "tt7-burnharvest",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          9
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          9
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt7-livingwater",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [],
+        "extras": {
+          "draw": 5
+        }
+      },
+      "described": {
+        "damage": [],
+        "extras": {
+          "draw": 5
+        }
+      }
+    },
+    {
+      "id": "tt7-twinfireball",
+      "scenario": "实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端",
+      "actual": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      },
+      "described": {
+        "damage": [
+          6
+        ],
+        "extras": {}
+      }
+    },
+    {
+      "id": "tt7-ironphalanx",
+      "scenario": "首脑执行器：随机池固定为真实2费风暴火球模板",
+      "actual": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "described": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "tt12-basicdev",
+      "scenario": "0费招式实际谓词对毒药（法术/0费）",
+      "actual": false,
+      "described": true
+    },
+    {
+      "id": "tt12-breakthrough",
+      "scenario": "1费招式实际谓词对冰刺（法术/1费）",
+      "actual": false,
+      "described": true
+    },
+    {
+      "id": "tt12-magicfind",
+      "scenario": "1费招式实际谓词对冰刺（法术/1费）",
+      "actual": false,
+      "described": true
+    },
+    {
+      "id": "cmtn1gfhczzj",
+      "scenario": "能施加诅咒的招式实际谓词对冰刺（法术/1费）",
+      "actual": false,
+      "described": true
+    },
+    {
+      "id": "tt12-hitechrd",
+      "scenario": "实际发现流程，2费武术与2费法术各1张输入",
+      "actual": [
+        "武术"
+      ],
+      "described": [
+        "武术",
+        "法术"
+      ]
+    },
+    {
+      "id": "tt12-chargeray",
+      "scenario": "本场先注能3张，本牌随后入手，期间没有再注能",
+      "actual": 11,
+      "described": 5
+    },
+    {
+      "id": "tt2-frostsword",
+      "scenario": "装配寒冰剑→对冰冻目标打初始攻击，攻击力5",
+      "actual": 5,
+      "described": 7
+    },
+    {
+      "id": "tt3-fly-arrowhawk",
+      "scenario": "目标2层流血，攻击力5；飞身劈后打初始攻击",
+      "actual": [
+        10,
+        9
+      ],
+      "described": [
+        12,
+        7
+      ]
+    },
+    {
+      "id": "cmtn1lbhbqi4",
+      "scenario": "从第1回合持有到第2回合开始，首次打出；受控额外回合走生产回合管线",
+      "actual": 4,
+      "described": 5
+    },
+    {
+      "id": "tt3-noon-duel",
+      "scenario": "首回合指定第二敌人；第2回合真实延迟执行器结算，双方均存活",
+      "actual": [
+        992,
+        1000
+      ],
+      "described": [
+        1000,
+        992
+      ]
+    },
+    {
+      "id": "tt2-wreck",
+      "scenario": "生产consumeTemps到期消耗；随后正常消耗钩作正对照",
+      "actual": {
+        "expiredEffect": 0,
+        "normalConsumeEffect": 2
+      },
+      "described": {
+        "expiredEffect": 2,
+        "normalConsumeEffect": 2
+      }
+    },
+    {
+      "id": "tt3-azure-sword",
+      "scenario": "生产consumeTemps到期消耗；随后正常消耗钩作正对照",
+      "actual": {
+        "expiredEffect": 0,
+        "normalConsumeEffect": 5
+      },
+      "described": {
+        "expiredEffect": 5,
+        "normalConsumeEffect": 5
+      }
+    },
+    {
+      "id": "tt3-sapper-bomb",
+      "scenario": "生产consumeTemps到期消耗；随后正常消耗钩作正对照",
+      "actual": {
+        "expiredEffect": 0,
+        "normalConsumeEffect": 4
+      },
+      "described": {
+        "expiredEffect": 4,
+        "normalConsumeEffect": 4
+      }
+    },
+    {
+      "id": "tt7-arcanescroll",
+      "scenario": "生产consumeTemps到期消耗；随后正常消耗钩作正对照",
+      "actual": {
+        "expiredEffect": 0,
+        "normalConsumeEffect": 3
+      },
+      "described": {
+        "expiredEffect": 3,
+        "normalConsumeEffect": 3
+      }
+    },
+    {
+      "id": "tt3sp-dodge",
+      "scenario": "本回合先受到3点固定伤害",
+      "actual": {
+        "damage": 3,
+        "remainingDodge": 1
+      },
+      "described": {
+        "damage": 0,
+        "remainingDodge": 0
+      }
+    },
+    {
+      "id": "tt7-smite",
+      "scenario": "目标半血，法伤加成2；当前先放大基础值",
+      "actual": 17,
+      "described": "若“本次伤害+50%”包含法伤，应为18；待裁定加成顺序"
+    },
+    {
+      "id": "cc-rapid-fire",
+      "scenario": "本回合此前0张与2张招式",
+      "actual": [
+        [],
+        [
+          2,
+          2
+        ]
+      ],
+      "described": "当前是总段数N；卡面首句2点与后句触发N次是否另含基础1段待裁定"
+    },
+    {
+      "id": "cc-demon",
+      "scenario": "击杀最后敌人",
+      "actual": 0,
+      "described": "受现行终局守卫裁决影响，作为规则边界记录，不据此报新缺陷"
+    }
+  ]
+}

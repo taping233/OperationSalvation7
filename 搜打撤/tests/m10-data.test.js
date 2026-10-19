@@ -29,7 +29,9 @@ const RULE_NAME = new Map([
 const CANONICAL = [...RULE_NAME.keys()].map(id => Cards.TABLETOP10.find(card => card.id === id));
 if (CANONICAL.some(card => !card)) throw new Error('M10 canonical TABLETOP10 equipment row missing');
 const EXPECTED = Object.fromEntries([...RULE_NAME].map(([id, name]) => [id,
-  { version: 1, battle: { hosted: [name] } },
+  { version: 1, battle: { hosted: [name] },
+    ...(id === 'tt2-frostsword' ? { equip: { passive: { cond: { vsFreeze: 2 } } } } : {}),
+  },
 ]));
 
 function makeHarness(cards) {
@@ -78,6 +80,16 @@ describe('M10 hosted 装备数据回填', () => {
     expect(harness.storage.getItem(M10_HOSTED_EQUIPMENT_MARKER_KEY)).toBe('1');
     expect(harness.library.saves).toBe(1);
     ensureM10HostedEquipmentRules(harness);
+    expect(harness.library.saves).toBe(1);
+  });
+
+  it('旧版寒冰剑 hosted 声明补入冰冻增伤，保留其他装备声明', () => {
+    const legacy = CANONICAL.map(card => ({ ...card, rules: { version: 1, battle: { hosted: [RULE_NAME.get(card.id)] } } }));
+    const harness = makeHarness(legacy);
+    harness.storage.setItem('sdt-cards-m10-hosted-equipment-v1-seeded', '1');
+    ensureM10HostedEquipmentRules(harness);
+    expect(harness.cards()[0].rules).toEqual(EXPECTED['tt2-frostsword']);
+    expect(harness.cards()[1]).toEqual(legacy[1]);
     expect(harness.library.saves).toBe(1);
   });
 

@@ -1,0 +1,11 @@
+{
+  "scope": "初始实现实页发现，已在第一轮前修复；原错误保留",
+  "entries": [
+    {
+      "level": "error",
+      "message": "InvalidStateError: Failed to execute 'commitStyles' on 'Animation': Target element is not rendered.\n    at NativeAnimation.commitStyles (http://localhost:5200/@fs/D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/.vite/deps/chunk-HEY6OPAC.js?v=bae5e7b4:2082:71)\n    at NativeAnimation.stop (http://localhost:5200/@fs/D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/.vite/deps/chunk-HEY6OPAC.js?v=bae5e7b4:2061:12)\n    at http://localhost:5200/@fs/D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/.vite/deps/chunk-HEY6OPAC.js?v=bae5e7b4:2507:63\n    at Array.forEach (<anonymous>)\n    at GroupAnimationWithThen.runAll (http://localhost:5200/@fs/D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/.vite/deps/chunk-HEY6OPAC.js?v=bae5e7b4:2507:21)\n    at GroupAnimation.stop (http://localhost:5200/@fs/D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/.vite/deps/chunk-HEY6OPAC.js?v=bae5e7b4:2456:28)\n    at stopVisual (http://localhost:5200/src/ui/target-motion.js?t=1792414462416:38:21)\n    at clearVisual (http://localhost:5200/src/ui/target-motion.js?t=1792414462416:44:5)\n    at releaseVisual (http://localhost:5200/src/ui/surface-motion.js?t=1792414462416:18:5)\n    at MutationObserver.<anonymous> (http://localhost:5200/src/ui/surface-motion.js?t=1792414462416:327:7)",
+      "timestamp": "2026-10-19T13:00:31.917Z",
+      "url": "http://localhost:5200/@fs/D:/%E7%B4%A0%E6%9D%90/%E4%BB%A3%E5%8F%B7%E6%9F%92/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/.vite/deps/chunk-HEY6OPAC.js?v=bae5e7b4"
+    }
+  ]
+}

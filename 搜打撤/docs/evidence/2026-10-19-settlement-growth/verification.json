@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-19",
+  "owner": "Friday / 01a1541e",
+  "status": "implemented-targeted-checks-passed-browser-pending",
+  "groups": [
+    {"scope":"terminal", "files":3, "tests":14, "passed":true},
+    {"scope":"collection-protection", "files":4, "tests":57, "passed":true},
+    {"scope":"collection-conversion", "files":7, "tests":104, "passed":true},
+    {"scope":"extraction-growth", "files":11, "tests":146, "passed":true},
+    {"scope":"partner", "files":3, "tests":34, "passed":true},
+    {"scope":"contracts-and-save", "files":5, "tests":78, "passed":true}
+  ],
+  "typeConfigsPassed": 8,
+  "syntaxFilesPassed": 507,
+  "targetedEslintPassed": true,
+  "targetedStylelintPassed": true,
+  "docsCheckPassed": true,
+  "browser": {
+    "platform":"Codex",
+    "available":false,
+    "reason":"mcp__cua_repl removed from current tool set",
+    "intendedFixture":"http://localhost:5200/dev/extraction-rewards-review.html",
+    "realInputVerified":false,
+    "visualVerified":false,
+    "externalBrowserUsed":false
+  },
+  "buildRun":false,
+  "fullSuiteRun":false,
+  "committed":false,
+  "playerSaveTouched":false,
+  "historicalStashTotalBackfilled":false
+}

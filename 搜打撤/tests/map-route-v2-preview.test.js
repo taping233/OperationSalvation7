@@ -5,8 +5,8 @@ import { applyGuardedRoute } from '../game/src/run/map-route-v2.js';
 import { expeditionRoutes,renderExpeditionPanel,setExpeditionPreview } from '../game/src/run/expedition.view.js';
 import { findMapTravelPath } from '../game/src/run/map-travel-path.js';
 function makeGame(seed=appliedSeed) {
-  const previous=applyRouteOverlay({generatorVersion:5,layoutVersion:9,layerData:createCurrentLayeredMap(seed)}).value;
-  const value=applyGuardedRoute({generatorVersion:5,layoutVersion:9,layerData:previous.layerData,baseRoutePlan:previous.routePlan}).value;
+  const previous=applyRouteOverlay({generatorVersion:6,layoutVersion:9,layerData:createCurrentLayeredMap(seed)}).value;
+  const value=applyGuardedRoute({generatorVersion:6,layoutVersion:9,layerData:previous.layerData,baseRoutePlan:previous.routePlan}).value;
   const plan=value.routePlan,layer=value.layerData[1],idx=id=>layer.nodes.findIndex(n=>n.id===id),fork=idx(plan.forkNodeId);
   return {...value,layerIdx:1,trackPos:fork,runActive:true,state:'idle',visited:{},seen:{},nodes:value.layerData.flatMap((l,li)=>l.logical.map((n,idx)=>({li,idx,def:n.def}))),hp:30,maxHp:30,ownedCards:[],usedPocket:[],coins:0,
     fork,guard:idx(plan.guardNodeId),reward:idx(plan.rewardNodeId),fire:idx(plan.recoveryNodeId)};

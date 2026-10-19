@@ -44,3 +44,14 @@ it('hatching is a dedicated child page with conditions and returns one level at 
   expect(personnelBackTarget().label).toBe('返回角色');
   expect(JSON.stringify(base.data)).toBe(before);
 });
+
+it('partner growth previews the selected non-carried partner and its own safe-slot bonus',()=>{
+  const penguin={id:'penguin',name:'咕嘎',desc:'携带效果：安全格增加',effect:{safeBonus:2}};
+  base.PETS.push(penguin);base.ownedPets=()=>['dog','penguin'];
+  base.petLevel=id=>id==='penguin'?2:1;base.petUpCost=()=>3;base.data.rations=3;
+  render();actions.get('personGroup')({group:'pets'});actions.get('personPet')({id:'penguin'});
+  const growth=document.querySelector('.companion-growth').textContent;
+  expect(growth).toContain('Lv.2→Lv.3');expect(growth).toContain('安全格 5→6');
+  expect(document.querySelector('[data-act="upPet"]').disabled).toBe(false);
+  expect(base.carriedPet().id).toBe('dog');
+});

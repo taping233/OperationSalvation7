@@ -1,0 +1,1531 @@
+{
+  "schemaVersion": 1,
+  "task": "WF-ui-target-motion-1019",
+  "kind": "automated-local-check",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "scripts/acceptance-gate.mjs",
+    "--target-tests",
+    "tests/target-motion.test.js",
+    "tests/card-state-motion.test.js",
+    "tests/reward-acquisition-motion.test.js",
+    "tests/selection-state-motion.test.js",
+    "tests/target-surface.test.js",
+    "tests/surface-motion.test.js",
+    "tests/reward-card-feedback.test.js",
+    "tests/bag-pane-retained.test.js"
+  ],
+  "cwd": "D:\\素材\\代号柒\\搜打撤",
+  "startedAt": "2026-10-19T13:07:13.298Z",
+  "endedAt": "2026-10-19T13:07:20.370Z",
+  "head": "29f401e077be555d163a17e95ef954184830789e",
+  "statusBefore": "M docs/PARALLEL-REGISTRY.md\n M docs/PENDING.md\n M docs/map-travel.md\n M docs/production/art/VISUAL-BIBLE.md\n M docs/roadmap.md\n M docs/rules.md\n M docs/save-format.md\n M docs/workflow-recipes.md\n M game/assets/portraits/frames/wu/sprite-v1/animations.json\n M game/css/bag-design-system.css\n M game/css/base-logistics-trade-v12.css\n M game/css/chest-reward-overview.css\n M game/css/departure-selected.css\n M game/css/expedition-shop.css\n M game/css/expedition-transitions.css\n M game/css/interface-motion.css\n M game/css/page-transitions.css\n M game/css/page-visual-ready.css\n M game/css/preparation.css\n M game/css/secondary-ui-tokens.css\n M game/css/settings-navigation.css\n M game/css/ui-design-system.css\n M game/dev/map-node-rules-review.html\n M game/src/battle/bag/battle.bag.js\n M game/src/battle/battle.snapshot.types.d.ts\n M game/src/battle/core/battle.engine.js\n M game/src/battle/core/battle.exec-play.js\n M game/src/battle/core/battle.resolution.js\n M game/src/battle/core/battle.selection-flow.js\n M game/src/battle/core/combat.js\n M game/src/battle/effects/battle.discover-flow.js\n M game/src/battle/effects/effect-steps.ctx.js\n M game/src/battle/effects/effect-steps.damage.js\n M game/src/battle/effects/effect-steps.deck.js\n M game/src/battle/effects/effect-steps.gates.js\n M game/src/battle/effects/effect-steps.kills.js\n M game/src/battle/effects/effect-steps.m2.js\n M game/src/battle/runtime/battle.runtime.effects.js\n M game/src/battle/runtime/battle.snapshot.js\n M game/src/cards/card-rules.capability.js\n M game/src/cards/card-rules.capability.types.d.ts\n M game/src/cards/card-rules.schema.js\n M game/src/cards/cards.sync.js\n M game/src/cards/cards.sync.m10.js\n M game/src/cards/cards.sync.m3.js\n M game/src/cards/cards.sync.m6.js\n M game/src/core/camera.js\n M game/src/game.boot.js\n M game/src/generated/art-manifest.js\n M game/src/hub/bag-pane-view.js\n M game/src/hub/departure.summary.js\n M game/src/hub/departure.view-updates.js\n M game/src/hub/game.bag.drag.js\n M game/src/hub/game.bag.js\n M game/src/hub/game.bag.rules.js\n M game/src/hub/game.bag.view2.js\n M game/src/hub/game.container-store.view.js\n M game/src/hub/game.hub.depart.js\n M game/src/hub/game.hub.pages.js\n M game/src/hub/game.hub.preparation-ports.js\n M game/src/hub/game.hub.preparation.js\n M game/src/hub/hub.warehouse.js\n M game/src/hub/preparation.commands.js\n M game/src/hub/preparation.view.js\n M game/src/run/chests.js\n M game/src/run/game.nest.js\n M game/src/run/game.run.altar.js\n M game/src/run/game.run.class-choice.page.js\n M game/src/run/game.run.flow.js\n M game/src/run/game.run.scenes.js\n M game/src/run/game.run.shop.js\n M game/src/run/map-generation-rules.js\n M game/src/run/map-generator-v4.js\n M game/src/run/map-route-v2.js\n M game/src/run/map-snapshot.js\n M game/src/ui/card-result-feedback.js\n M game/src/ui/chest-reward-overview.js\n M game/src/ui/cinematics.js\n M game/src/ui/game.menu.pages.js\n M game/src/ui/interface-motion.js\n M game/src/ui/motion-presets.js\n M game/src/ui/navigation-motion.js\n M game/src/ui/node-decision-view.js\n M game/src/ui/node-scene-view.js\n M game/src/ui/overlay.js\n M game/src/ui/page-motion-profiles.js\n M game/src/ui/page-visual-ready.js\n M game/src/ui/reward-card-feedback.js\n M game/src/ui/reward-picker-heading.js\n M game/src/ui/reward-scene-view.js\n M game/src/ui/route-overlay.js\n M game/src/ui/surface-motion.js\n M game/src/ui/ui.js\n M tests/bag-item-rule-baseline.test.js\n M tests/bag-pane-retained.test.js\n M tests/bag-pouch-capacity.test.js\n M tests/bag-ui-language.test.js\n M tests/battle-runtime-state-guard.test.js\n M tests/blackmarket-card-preview.test.js\n M tests/chest-batch-receipt.test.js\n M tests/chest-callback-lifecycle-audit.test.js\n M tests/chest-click-flow.test.js\n M tests/chest-extra-rewards-choice.test.js\n M tests/chests-reward-capacity-notice.test.js\n M tests/departure-stack-lifecycle-review.test.js\n M tests/e6-card-rules-capability.test.js\n M tests/event-node-binding-cloud.test.js\n M tests/event-reward-layout.test.js\n M tests/feedback-1018.test.js\n M tests/game-hub-preparation-feature.test.js\n M tests/m06-preparation.test.js\n M tests/m06-sources-view.test.js\n M tests/m10-data.test.js\n M tests/m2-contract.test.js\n M tests/m3-data.test.js\n M tests/m6-data.test.js\n M tests/map-facilities-burn-removal.test.js\n M tests/map-generator-v4.test.js\n M tests/map-route-v2-preview.test.js\n M tests/map-route-v2.test.js\n M tests/map-version-compat.test.js\n M tests/page-surface-lifetime.test.js\n M tests/photo-zoom-lifecycle.test.js\n M tests/pocket-restore-interface.test.js\n M tests/preparation-adapter-review.test.js\n M tests/preparation-slot-review.test.js\n M tests/reward-action-clipping.test.js\n M tests/reward-capacity-preview.test.js\n M tests/reward-picker-heading.test.js\n M tests/reward-presentation-contract.test.js\n M tests/reward-receipt-clarity.test.js\n M tests/surface-motion.test.js\n M tests/sys03-altar-restore-txn.test.js\n M tests/tt12-hitechrd-battle-baseline.test.js\n M tests/tt12-hitechrd-structured.test.js\n M tests/xart-z1-batch2.test.js\n?? ../.codex/config.toml.bak-nai-domain-20261013-224601\n?? ../.codex/config.toml.bak-nai-network-20261013-224312\n?? ../.codex/config.toml.bak-nai-open-20261013-230419\n?? ../.codex/config.toml.bak-nai-profile-20261015-215723\n?? ../nul\n?? .tmp-ship-plan-1016.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json\n?? docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png\n?? docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json\n?? docs/evidence/2026-10-04-WF-home-minako-layout/before-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r2-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r3-final-1280x720.png\n?? docs/evidence/2026-10-05-WF-exe-1005/2026-10-05T14-42-18.695Z-2378777f-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-25-13.937Z-efceee45-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-29-39.744Z-c5028f6a-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-33-43.811Z-46b41035-staged.json\n?? docs/evidence/2026-10-09-card-history-document/catalog.json\n?? docs/evidence/2026-10-09-card-history-document/render-final/\n?? docs/evidence/2026-10-09-card-history-document/render/\n?? docs/evidence/2026-10-10-feedback-four/cardback-draft-v2.png\n?? docs/evidence/2026-10-10-ship-1010-code/\n?? docs/evidence/2026-10-10-ship-1010-docs/\n?? docs/evidence/2026-10-10-ship-1010/\n?? docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-redesign/references/hsr-swarm-map.png\n?? docs/evidence/2026-10-11-WF-selection-map-implementation-1011/shop-redesign/references/is6-shop.png\n?? docs/evidence/2026-10-12-WF-ark-ui-reference-1012/reference-board.html\n?? docs/evidence/2026-10-12-WF-ark-ui-reference-1012/refs/shop.png\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-27-52.891Z-e636bc69-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-33-38.079Z-f2a8cb09-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-38-26.643Z-4d250ec6-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-42-16.244Z-c0730111-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-54-14.797Z-8ec76a47-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-56-35.602Z-46aff0bc-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T13-07-05.583Z-34869b8e-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T13-12-27.686Z-7696777f-staged.json\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/arknights-is6-shop.png\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/slay-the-spire-rewards.png\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/sts2-current-1.png\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/sts2-current-2.png\n?? docs/evidence/2026-10-13-WF-friday-clean-ship-1013/2026-10-13T15-45-29.459Z-7f7ad856-staged.json\n?? docs/evidence/2026-10-13-WF-ship-pathspec-1013/2026-10-13T12-23-54.978Z-2ef564e2-staged.json\n?? docs/evidence/2026-10-13-staged-check/\n?? docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/2026-10-13T17-49-45.109Z-d01f6cb7-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/2026-10-13T17-50-31.504Z-f157ed90-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-36-05.140Z-76220423-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-48-39.716Z-50fb0198-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-53-28.761Z-08fb9eb3-staged.json\n?? docs/evidence/2026-10-15-WF-arknights-skill-forward-test/\n?? docs/evidence/2026-10-15-WF-battle-redesign/demo-annotations.png\n?? docs/evidence/2026-10-15-WF-battle-redesign/demo-battle-state.png\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-27-07.086Z-e5659d7f-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-36-33.044Z-44f26dd1-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-42-26.497Z-e40c60a6-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-07-12.000Z-a53807c9-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-10-07.249Z-a8fd9382-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-46-50.258Z-a84e6896-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-48-17.941Z-f2f8b882-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-29-49.679Z-05d5722a-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-36-13.432Z-d9e909a6-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-44-04.372Z-009b62e3-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-54-11.804Z-937bd0f9-staged.json\n?? docs/evidence/2026-10-16-WF-final-cloud-ship-1016/2026-10-16T15-25-34.836Z-1c28528c-staged.json\n?? docs/evidence/2026-10-16-WF-final-cloud-ship-1016/2026-10-16T15-32-57.322Z-cf0f8c7b-staged.json\n?? docs/evidence/2026-10-18-WF-perf-budgets-1018/css/runtime/undefined\n?? docs/evidence/2026-10-18-arknights-sfx-return/design-original.py\n?? docs/evidence/2026-10-18-arknights-sfx-return/redesign-v2.py\n?? docs/evidence/2026-10-18-arknights-sfx-return/reward-v3.py\n?? docs/evidence/2026-10-18-changwuyu-drums-nai5/\n?? docs/evidence/2026-10-18-free-sfx-library-search/fetch-sonniss-mirror.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/fetch-sonniss.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/make-japanese-preview.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/make-preview.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/make-sonniss-preview.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/sources/\n?? docs/evidence/2026-10-18-original-ui-install/install.mjs\n?? docs/evidence/2026-10-18-ost-snow-road/ledger.mjs\n?? docs/evidence/2026-10-18-ost-snow-road/registry-add.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-close.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-update.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v2-add.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v2-close.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v2-update.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v5-add.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v5-close.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v5-update.json\n?? docs/evidence/2026-10-18-ost-snow-road/render_ost.py\n?? docs/evidence/2026-10-18-ost-snow-road/render_ost_v2.py\n?? docs/evidence/2026-10-18-ost-snow-road/render_ost_v3.py\n?? docs/evidence/2026-10-18-ost-snow-road/verify_ost.py\n?? docs/evidence/2026-10-18-pets-redesign/.gitignore\n?? docs/evidence/2026-10-18-pets-redesign/builtin-prompts-revisions.json\n?? docs/evidence/2026-10-18-pets-redesign/builtin-prompts.json\n?? docs/evidence/2026-10-18-pets-redesign/cat-request.json\n?? docs/evidence/2026-10-18-pets-redesign/dog-request.json\n?? docs/evidence/2026-10-18-pets-redesign/falcon-request.json\n?? docs/evidence/2026-10-18-pets-redesign/finalize.py\n?? docs/evidence/2026-10-18-pets-redesign/fire-request.json\n?? docs/evidence/2026-10-18-pets-redesign/generate.py\n?? docs/evidence/2026-10-18-pets-redesign/install.py\n?? docs/evidence/2026-10-18-pets-redesign/penguin-request.json\n?? docs/evidence/2026-10-18-pets-redesign/robot-request.json\n?? docs/evidence/2026-10-18-premium-ui-sfx/download.py\n?? docs/evidence/2026-10-18-premium-ui-sfx/install.mjs\n?? docs/evidence/2026-10-18-premium-ui-sfx/sources/\n?? docs/evidence/2026-10-18-roster-reference-final/finish.py\n?? docs/evidence/2026-10-18-roster-reference-final/gray-import.py\n?? docs/evidence/2026-10-18-roster-reference-final/gray-prepare.py\n?? docs/evidence/2026-10-18-roster-reference-final/gray-request.json\n?? docs/evidence/2026-10-18-roster-reference-final/import.py\n?? docs/evidence/2026-10-18-roster-reference-final/request.json\n?? docs/evidence/2026-10-18-roster-reference-final/restore-four.py\n?? docs/evidence/2026-10-18-roster-reference-final/update-docs-tests.py\n?? docs/evidence/2026-10-18-roster-unified/import.py\n?? docs/evidence/2026-10-18-roster-unified/request.json\n?? docs/evidence/2026-10-18-roster-unified/restore-default.py\n?? docs/evidence/2026-10-18-scifi-ui-candidates/sources/\n?? docs/evidence/2026-10-18-selected15-sfx-r2/install.mjs\n?? docs/evidence/2026-10-18-selected15-sfx-r2/prepare.py\n?? docs/evidence/2026-10-18-selected15-sfx-r2/registry-close.json\n?? docs/evidence/2026-10-18-selected15-sfx-r2/registry-open.json\n?? docs/evidence/2026-10-18-selected15-sfx-r2/registry-update.json\n?? docs/evidence/2026-10-18-selected32-sfx/install.mjs\n?? docs/evidence/2026-10-18-selected32-sfx/prepare.py\n?? docs/evidence/2026-10-18-selected32-sfx/registry-close.json\n?? docs/evidence/2026-10-18-selected32-sfx/registry-credits-close.json\n?? docs/evidence/2026-10-18-selected32-sfx/registry-credits-open.json\n?? docs/evidence/2026-10-18-selected32-sfx/registry-open.json\n?? docs/evidence/2026-10-18-selected32-sfx/sources/\n?? docs/evidence/2026-10-18-sfx-current-review/registry-close.json\n?? docs/evidence/2026-10-18-sfx-current-review/registry-fix-close.json\n?? docs/evidence/2026-10-18-sfx-current-review/registry-fix-open.json\n?? docs/evidence/2026-10-18-sfx-current-review/registry-open.json\n?? docs/evidence/2026-10-18-sfx-four-silence/registry-close.json\n?? docs/evidence/2026-10-18-sfx-four-silence/registry-open.json\n?? docs/evidence/2026-10-18-staged-check/\n?? docs/evidence/2026-10-18-subpage-sfx-silence/registry-close.json\n?? docs/evidence/2026-10-18-subpage-sfx-silence/registry-open.json\n?? docs/evidence/2026-10-18-web-sfx-replacement/install.mjs\n?? docs/evidence/2026-10-18-web-sfx-replacement/prepare.py\n?? docs/evidence/2026-10-18-web-sfx-replacement/sources/\n?? docs/evidence/2026-10-18-wu-back-sword/import.py\n?? docs/evidence/2026-10-18-wu-back-sword/prepare.py\n?? docs/evidence/2026-10-18-wu-back-sword/request.json\n?? docs/evidence/2026-10-18-wu-boots-socks/prepare_generate.py\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v2-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v3-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v4-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v5-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/request.json\n?? docs/evidence/2026-10-18-wu-boots/game-default-action-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/game-default-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/hand-fix-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/nai-request-free.json\n?? docs/evidence/2026-10-18-wu-boots/nai-request-large-failed.json\n?? docs/evidence/2026-10-18-wu-boots/prompt-v2.txt\n?? docs/evidence/2026-10-18-wu-boots/prompt-v3.txt\n?? docs/evidence/2026-10-18-wu-boots/prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/refine-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/sock-fix-prompt.txt\n?? docs/evidence/2026-10-18-wu-skins-reset/check-assets.cjs\n?? docs/evidence/2026-10-18-wu-skins-reset/generate.py\n?? docs/evidence/2026-10-18-wu-skins-reset/install.py\n?? docs/evidence/2026-10-18-wu-skins-reset/request.json\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019-final/\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019-v2/\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019-v3/\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019/\n?? docs/evidence/2026-10-19-WF-card-description-audit-1019/\n?? docs/evidence/2026-10-19-WF-card-description-fixes-1019/\n?? docs/evidence/2026-10-19-WF-cleanup-submit-1019/\n?? docs/evidence/2026-10-19-WF-local-closeout-1019-r2/\n?? docs/evidence/2026-10-19-WF-local-closeout-1019/2026-10-18T16-49-09.933Z-a2bd94d3-staged.json\n?? docs/evidence/2026-10-19-WF-local-github-baseline-1018/\n?? docs/evidence/2026-10-19-WF-map-drag-1019/\n?? docs/evidence/2026-10-19-WF-submit-tools-1019/\n?? docs/evidence/2026-10-19-WF-token-c-discover-1019/\n?? docs/evidence/2026-10-19-WF-ui-target-motion-1019/\n?? docs/evidence/2026-10-19-art-workflow-tools/save_memory.py\n?? docs/evidence/2026-10-19-bag-reward-slice/\n?? docs/evidence/2026-10-19-card-description-audit/\n?? docs/evidence/2026-10-19-card-description-fixes/\n?? docs/evidence/2026-10-19-changwuyu-drum-skin/import_skin.py\n?? docs/evidence/2026-10-19-fire-pacing/\n?? docs/evidence/2026-10-19-map-drag/\n?? docs/evidence/2026-10-19-preparation-preset-fix/\n?? docs/evidence/2026-10-19-ui-motion-douyin-reference/\n?? docs/evidence/2026-10-19-ui-target-motion/\n?? docs/evidence/2026-10-19-unified-page-motion/\n?? docs/evidence/2026-10-19-workflow-standardize/build-summary-input.py\n?? docs/evidence/2026-10-19-wu-battle-rig/inspect_art.py\n?? docs/evidence/2026-10-19-wu-battle-rig/pose-browser.png\n?? docs/evidence/2026-10-19-wu-battle-rig/pose-v3-browser.png\n?? docs/evidence/2026-10-19-wu-battle-rig/pose-v4-browser.png\n?? docs/evidence/2026-10-19-wu-battle-rig/receipt.json\n?? docs/evidence/2026-10-19-wu-battle-rig/request.json\n?? docs/evidence/2026-10-19-wu-battle-rig/runtime-check.json\n?? docs/evidence/2026-10-19-wu-battle-rig/runtime-install.json\n?? docs/evidence/2026-10-19-wu-battle-rig/stance-revision.json\n?? docs/evidence/2026-10-19-wu-battle-rig/stance-v4-revision.json\n?? game/art-source/characters/changwuyu-sprites-20261009/attack/hat-clean-source.png\n?? game/art-source/characters/changwuyu-sprites-20261009/death/previous-source.png\n?? game/art-source/characters/changwuyu-sprites-20261009/hurt/preview.gif\n?? game/art-source/characters/changwuyu-sprites-20261009/hurt/sheet.webp\n?? game/art-source/characters/roster-reference-final-20261018/\n?? game/art-source/characters/roster-reference-gray-20261018/\n?? game/art-source/characters/roster-unified-20261018/\n?? game/art-source/characters/wu-back-sword-20261018/\n?? game/art-source/characters/wu-roster-20261009.png\n?? game/art-source/pets/\n?? game/art-source/ui/home-wordmark-20261011/cn-wordmark-v1.png\n?? game/art-source/ui/home-wordmark-20261011/cn-wordmark-v2.png\n?? game/css/card-state-motion.css\n?? game/css/selection-state-motion.css\n?? game/dev/bag-reward-slice-review.html\n?? game/dev/bag-reward-slice-review.js\n?? game/dev/card-description-fixes-review.html\n?? game/dev/card-description-fixes-review.js\n?? game/dev/preparation-preset-review.html\n?? game/dev/preparation-preset-review.js\n?? game/src/battle/effects/random-blessings.js\n?? game/src/core/map-drag-motion.js\n?? game/src/ui/card-state-motion.js\n?? game/src/ui/reward-acquisition-motion.js\n?? game/src/ui/selection-state-motion.js\n?? game/src/ui/target-motion.js\n?? pv/\n?? tests/bag-token-discover.test.js\n?? tests/card-description-audit-battle.test.js\n?? tests/card-description-fix-auxiliary.test.js\n?? tests/card-description-fix-lifecycle.test.js\n?? tests/card-description-fix-pools.test.js\n?? tests/card-description-fix-target-effects.test.js\n?? tests/card-state-motion.test.js\n?? tests/fixtures/map-v5-late-fire.json\n?? tests/map-drag-motion.test.js\n?? tests/map-fire-pacing.test.js\n?? tests/reward-acquisition-motion.test.js\n?? tests/reward-picker-continuity.test.js\n?? tests/selection-state-motion.test.js\n?? tests/target-motion.test.js\n?? tests/target-surface.test.js\n?? tests/workflow-slice.test.js\n?? tools/workflow-slice.mjs",
+  "statusAfter": "M docs/PARALLEL-REGISTRY.md\n M docs/PENDING.md\n M docs/map-travel.md\n M docs/production/art/VISUAL-BIBLE.md\n M docs/roadmap.md\n M docs/rules.md\n M docs/save-format.md\n M docs/workflow-recipes.md\n M game/assets/portraits/frames/wu/sprite-v1/animations.json\n M game/css/bag-design-system.css\n M game/css/base-logistics-trade-v12.css\n M game/css/chest-reward-overview.css\n M game/css/departure-selected.css\n M game/css/expedition-shop.css\n M game/css/expedition-transitions.css\n M game/css/interface-motion.css\n M game/css/page-transitions.css\n M game/css/page-visual-ready.css\n M game/css/preparation.css\n M game/css/secondary-ui-tokens.css\n M game/css/settings-navigation.css\n M game/css/ui-design-system.css\n M game/dev/map-node-rules-review.html\n M game/src/battle/bag/battle.bag.js\n M game/src/battle/battle.snapshot.types.d.ts\n M game/src/battle/core/battle.engine.js\n M game/src/battle/core/battle.exec-play.js\n M game/src/battle/core/battle.resolution.js\n M game/src/battle/core/battle.selection-flow.js\n M game/src/battle/core/combat.js\n M game/src/battle/effects/battle.discover-flow.js\n M game/src/battle/effects/effect-steps.ctx.js\n M game/src/battle/effects/effect-steps.damage.js\n M game/src/battle/effects/effect-steps.deck.js\n M game/src/battle/effects/effect-steps.gates.js\n M game/src/battle/effects/effect-steps.kills.js\n M game/src/battle/effects/effect-steps.m2.js\n M game/src/battle/runtime/battle.runtime.effects.js\n M game/src/battle/runtime/battle.snapshot.js\n M game/src/cards/card-rules.capability.js\n M game/src/cards/card-rules.capability.types.d.ts\n M game/src/cards/card-rules.schema.js\n M game/src/cards/cards.sync.js\n M game/src/cards/cards.sync.m10.js\n M game/src/cards/cards.sync.m3.js\n M game/src/cards/cards.sync.m6.js\n M game/src/core/camera.js\n M game/src/game.boot.js\n M game/src/generated/art-manifest.js\n M game/src/hub/bag-pane-view.js\n M game/src/hub/departure.summary.js\n M game/src/hub/departure.view-updates.js\n M game/src/hub/game.bag.drag.js\n M game/src/hub/game.bag.js\n M game/src/hub/game.bag.rules.js\n M game/src/hub/game.bag.view2.js\n M game/src/hub/game.container-store.view.js\n M game/src/hub/game.hub.depart.js\n M game/src/hub/game.hub.pages.js\n M game/src/hub/game.hub.preparation-ports.js\n M game/src/hub/game.hub.preparation.js\n M game/src/hub/hub.warehouse.js\n M game/src/hub/preparation.commands.js\n M game/src/hub/preparation.view.js\n M game/src/run/chests.js\n M game/src/run/game.nest.js\n M game/src/run/game.run.altar.js\n M game/src/run/game.run.class-choice.page.js\n M game/src/run/game.run.flow.js\n M game/src/run/game.run.scenes.js\n M game/src/run/game.run.shop.js\n M game/src/run/map-generation-rules.js\n M game/src/run/map-generator-v4.js\n M game/src/run/map-route-v2.js\n M game/src/run/map-snapshot.js\n M game/src/ui/card-result-feedback.js\n M game/src/ui/chest-reward-overview.js\n M game/src/ui/cinematics.js\n M game/src/ui/game.menu.pages.js\n M game/src/ui/interface-motion.js\n M game/src/ui/motion-presets.js\n M game/src/ui/navigation-motion.js\n M game/src/ui/node-decision-view.js\n M game/src/ui/node-scene-view.js\n M game/src/ui/overlay.js\n M game/src/ui/page-motion-profiles.js\n M game/src/ui/page-visual-ready.js\n M game/src/ui/reward-card-feedback.js\n M game/src/ui/reward-picker-heading.js\n M game/src/ui/reward-scene-view.js\n M game/src/ui/route-overlay.js\n M game/src/ui/surface-motion.js\n M game/src/ui/ui.js\n M tests/bag-item-rule-baseline.test.js\n M tests/bag-pane-retained.test.js\n M tests/bag-pouch-capacity.test.js\n M tests/bag-ui-language.test.js\n M tests/battle-runtime-state-guard.test.js\n M tests/blackmarket-card-preview.test.js\n M tests/chest-batch-receipt.test.js\n M tests/chest-callback-lifecycle-audit.test.js\n M tests/chest-click-flow.test.js\n M tests/chest-extra-rewards-choice.test.js\n M tests/chests-reward-capacity-notice.test.js\n M tests/departure-stack-lifecycle-review.test.js\n M tests/e6-card-rules-capability.test.js\n M tests/event-node-binding-cloud.test.js\n M tests/event-reward-layout.test.js\n M tests/feedback-1018.test.js\n M tests/game-hub-preparation-feature.test.js\n M tests/m06-preparation.test.js\n M tests/m06-sources-view.test.js\n M tests/m10-data.test.js\n M tests/m2-contract.test.js\n M tests/m3-data.test.js\n M tests/m6-data.test.js\n M tests/map-facilities-burn-removal.test.js\n M tests/map-generator-v4.test.js\n M tests/map-route-v2-preview.test.js\n M tests/map-route-v2.test.js\n M tests/map-version-compat.test.js\n M tests/page-surface-lifetime.test.js\n M tests/photo-zoom-lifecycle.test.js\n M tests/pocket-restore-interface.test.js\n M tests/preparation-adapter-review.test.js\n M tests/preparation-slot-review.test.js\n M tests/reward-action-clipping.test.js\n M tests/reward-capacity-preview.test.js\n M tests/reward-picker-heading.test.js\n M tests/reward-presentation-contract.test.js\n M tests/reward-receipt-clarity.test.js\n M tests/surface-motion.test.js\n M tests/sys03-altar-restore-txn.test.js\n M tests/tt12-hitechrd-battle-baseline.test.js\n M tests/tt12-hitechrd-structured.test.js\n M tests/xart-z1-batch2.test.js\n?? ../.codex/config.toml.bak-nai-domain-20261013-224601\n?? ../.codex/config.toml.bak-nai-network-20261013-224312\n?? ../.codex/config.toml.bak-nai-open-20261013-230419\n?? ../.codex/config.toml.bak-nai-profile-20261015-215723\n?? ../nul\n?? .tmp-ship-plan-1016.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json\n?? docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png\n?? docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json\n?? docs/evidence/2026-10-04-WF-home-minako-layout/before-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r2-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r3-final-1280x720.png\n?? docs/evidence/2026-10-05-WF-exe-1005/2026-10-05T14-42-18.695Z-2378777f-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-25-13.937Z-efceee45-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-29-39.744Z-c5028f6a-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-33-43.811Z-46b41035-staged.json\n?? docs/evidence/2026-10-09-card-history-document/catalog.json\n?? docs/evidence/2026-10-09-card-history-document/render-final/\n?? docs/evidence/2026-10-09-card-history-document/render/\n?? docs/evidence/2026-10-10-feedback-four/cardback-draft-v2.png\n?? docs/evidence/2026-10-10-ship-1010-code/\n?? docs/evidence/2026-10-10-ship-1010-docs/\n?? docs/evidence/2026-10-10-ship-1010/\n?? docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-redesign/references/hsr-swarm-map.png\n?? docs/evidence/2026-10-11-WF-selection-map-implementation-1011/shop-redesign/references/is6-shop.png\n?? docs/evidence/2026-10-12-WF-ark-ui-reference-1012/reference-board.html\n?? docs/evidence/2026-10-12-WF-ark-ui-reference-1012/refs/shop.png\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-27-52.891Z-e636bc69-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-33-38.079Z-f2a8cb09-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-38-26.643Z-4d250ec6-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-42-16.244Z-c0730111-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-54-14.797Z-8ec76a47-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-56-35.602Z-46aff0bc-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T13-07-05.583Z-34869b8e-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T13-12-27.686Z-7696777f-staged.json\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/arknights-is6-shop.png\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/slay-the-spire-rewards.png\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/sts2-current-1.png\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/sts2-current-2.png\n?? docs/evidence/2026-10-13-WF-friday-clean-ship-1013/2026-10-13T15-45-29.459Z-7f7ad856-staged.json\n?? docs/evidence/2026-10-13-WF-ship-pathspec-1013/2026-10-13T12-23-54.978Z-2ef564e2-staged.json\n?? docs/evidence/2026-10-13-staged-check/\n?? docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/2026-10-13T17-49-45.109Z-d01f6cb7-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/2026-10-13T17-50-31.504Z-f157ed90-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-36-05.140Z-76220423-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-48-39.716Z-50fb0198-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-53-28.761Z-08fb9eb3-staged.json\n?? docs/evidence/2026-10-15-WF-arknights-skill-forward-test/\n?? docs/evidence/2026-10-15-WF-battle-redesign/demo-annotations.png\n?? docs/evidence/2026-10-15-WF-battle-redesign/demo-battle-state.png\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-27-07.086Z-e5659d7f-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-36-33.044Z-44f26dd1-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-42-26.497Z-e40c60a6-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-07-12.000Z-a53807c9-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-10-07.249Z-a8fd9382-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-46-50.258Z-a84e6896-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-48-17.941Z-f2f8b882-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-29-49.679Z-05d5722a-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-36-13.432Z-d9e909a6-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-44-04.372Z-009b62e3-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-54-11.804Z-937bd0f9-staged.json\n?? docs/evidence/2026-10-16-WF-final-cloud-ship-1016/2026-10-16T15-25-34.836Z-1c28528c-staged.json\n?? docs/evidence/2026-10-16-WF-final-cloud-ship-1016/2026-10-16T15-32-57.322Z-cf0f8c7b-staged.json\n?? docs/evidence/2026-10-18-WF-perf-budgets-1018/css/runtime/undefined\n?? docs/evidence/2026-10-18-arknights-sfx-return/design-original.py\n?? docs/evidence/2026-10-18-arknights-sfx-return/redesign-v2.py\n?? docs/evidence/2026-10-18-arknights-sfx-return/reward-v3.py\n?? docs/evidence/2026-10-18-changwuyu-drums-nai5/\n?? docs/evidence/2026-10-18-free-sfx-library-search/fetch-sonniss-mirror.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/fetch-sonniss.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/make-japanese-preview.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/make-preview.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/make-sonniss-preview.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/sources/\n?? docs/evidence/2026-10-18-original-ui-install/install.mjs\n?? docs/evidence/2026-10-18-ost-snow-road/ledger.mjs\n?? docs/evidence/2026-10-18-ost-snow-road/registry-add.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-close.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-update.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v2-add.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v2-close.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v2-update.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v5-add.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v5-close.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v5-update.json\n?? docs/evidence/2026-10-18-ost-snow-road/render_ost.py\n?? docs/evidence/2026-10-18-ost-snow-road/render_ost_v2.py\n?? docs/evidence/2026-10-18-ost-snow-road/render_ost_v3.py\n?? docs/evidence/2026-10-18-ost-snow-road/verify_ost.py\n?? docs/evidence/2026-10-18-pets-redesign/.gitignore\n?? docs/evidence/2026-10-18-pets-redesign/builtin-prompts-revisions.json\n?? docs/evidence/2026-10-18-pets-redesign/builtin-prompts.json\n?? docs/evidence/2026-10-18-pets-redesign/cat-request.json\n?? docs/evidence/2026-10-18-pets-redesign/dog-request.json\n?? docs/evidence/2026-10-18-pets-redesign/falcon-request.json\n?? docs/evidence/2026-10-18-pets-redesign/finalize.py\n?? docs/evidence/2026-10-18-pets-redesign/fire-request.json\n?? docs/evidence/2026-10-18-pets-redesign/generate.py\n?? docs/evidence/2026-10-18-pets-redesign/install.py\n?? docs/evidence/2026-10-18-pets-redesign/penguin-request.json\n?? docs/evidence/2026-10-18-pets-redesign/robot-request.json\n?? docs/evidence/2026-10-18-premium-ui-sfx/download.py\n?? docs/evidence/2026-10-18-premium-ui-sfx/install.mjs\n?? docs/evidence/2026-10-18-premium-ui-sfx/sources/\n?? docs/evidence/2026-10-18-roster-reference-final/finish.py\n?? docs/evidence/2026-10-18-roster-reference-final/gray-import.py\n?? docs/evidence/2026-10-18-roster-reference-final/gray-prepare.py\n?? docs/evidence/2026-10-18-roster-reference-final/gray-request.json\n?? docs/evidence/2026-10-18-roster-reference-final/import.py\n?? docs/evidence/2026-10-18-roster-reference-final/request.json\n?? docs/evidence/2026-10-18-roster-reference-final/restore-four.py\n?? docs/evidence/2026-10-18-roster-reference-final/update-docs-tests.py\n?? docs/evidence/2026-10-18-roster-unified/import.py\n?? docs/evidence/2026-10-18-roster-unified/request.json\n?? docs/evidence/2026-10-18-roster-unified/restore-default.py\n?? docs/evidence/2026-10-18-scifi-ui-candidates/sources/\n?? docs/evidence/2026-10-18-selected15-sfx-r2/install.mjs\n?? docs/evidence/2026-10-18-selected15-sfx-r2/prepare.py\n?? docs/evidence/2026-10-18-selected15-sfx-r2/registry-close.json\n?? docs/evidence/2026-10-18-selected15-sfx-r2/registry-open.json\n?? docs/evidence/2026-10-18-selected15-sfx-r2/registry-update.json\n?? docs/evidence/2026-10-18-selected32-sfx/install.mjs\n?? docs/evidence/2026-10-18-selected32-sfx/prepare.py\n?? docs/evidence/2026-10-18-selected32-sfx/registry-close.json\n?? docs/evidence/2026-10-18-selected32-sfx/registry-credits-close.json\n?? docs/evidence/2026-10-18-selected32-sfx/registry-credits-open.json\n?? docs/evidence/2026-10-18-selected32-sfx/registry-open.json\n?? docs/evidence/2026-10-18-selected32-sfx/sources/\n?? docs/evidence/2026-10-18-sfx-current-review/registry-close.json\n?? docs/evidence/2026-10-18-sfx-current-review/registry-fix-close.json\n?? docs/evidence/2026-10-18-sfx-current-review/registry-fix-open.json\n?? docs/evidence/2026-10-18-sfx-current-review/registry-open.json\n?? docs/evidence/2026-10-18-sfx-four-silence/registry-close.json\n?? docs/evidence/2026-10-18-sfx-four-silence/registry-open.json\n?? docs/evidence/2026-10-18-staged-check/\n?? docs/evidence/2026-10-18-subpage-sfx-silence/registry-close.json\n?? docs/evidence/2026-10-18-subpage-sfx-silence/registry-open.json\n?? docs/evidence/2026-10-18-web-sfx-replacement/install.mjs\n?? docs/evidence/2026-10-18-web-sfx-replacement/prepare.py\n?? docs/evidence/2026-10-18-web-sfx-replacement/sources/\n?? docs/evidence/2026-10-18-wu-back-sword/import.py\n?? docs/evidence/2026-10-18-wu-back-sword/prepare.py\n?? docs/evidence/2026-10-18-wu-back-sword/request.json\n?? docs/evidence/2026-10-18-wu-boots-socks/prepare_generate.py\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v2-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v3-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v4-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v5-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/request.json\n?? docs/evidence/2026-10-18-wu-boots/game-default-action-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/game-default-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/hand-fix-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/nai-request-free.json\n?? docs/evidence/2026-10-18-wu-boots/nai-request-large-failed.json\n?? docs/evidence/2026-10-18-wu-boots/prompt-v2.txt\n?? docs/evidence/2026-10-18-wu-boots/prompt-v3.txt\n?? docs/evidence/2026-10-18-wu-boots/prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/refine-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/sock-fix-prompt.txt\n?? docs/evidence/2026-10-18-wu-skins-reset/check-assets.cjs\n?? docs/evidence/2026-10-18-wu-skins-reset/generate.py\n?? docs/evidence/2026-10-18-wu-skins-reset/install.py\n?? docs/evidence/2026-10-18-wu-skins-reset/request.json\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019-final/\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019-v2/\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019-v3/\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019/\n?? docs/evidence/2026-10-19-WF-card-description-audit-1019/\n?? docs/evidence/2026-10-19-WF-card-description-fixes-1019/\n?? docs/evidence/2026-10-19-WF-cleanup-submit-1019/\n?? docs/evidence/2026-10-19-WF-local-closeout-1019-r2/\n?? docs/evidence/2026-10-19-WF-local-closeout-1019/2026-10-18T16-49-09.933Z-a2bd94d3-staged.json\n?? docs/evidence/2026-10-19-WF-local-github-baseline-1018/\n?? docs/evidence/2026-10-19-WF-map-drag-1019/\n?? docs/evidence/2026-10-19-WF-submit-tools-1019/\n?? docs/evidence/2026-10-19-WF-token-c-discover-1019/\n?? docs/evidence/2026-10-19-WF-ui-target-motion-1019/\n?? docs/evidence/2026-10-19-art-workflow-tools/save_memory.py\n?? docs/evidence/2026-10-19-bag-reward-slice/\n?? docs/evidence/2026-10-19-card-description-audit/\n?? docs/evidence/2026-10-19-card-description-fixes/\n?? docs/evidence/2026-10-19-changwuyu-drum-skin/import_skin.py\n?? docs/evidence/2026-10-19-fire-pacing/\n?? docs/evidence/2026-10-19-map-drag/\n?? docs/evidence/2026-10-19-preparation-preset-fix/\n?? docs/evidence/2026-10-19-ui-motion-douyin-reference/\n?? docs/evidence/2026-10-19-ui-target-motion/\n?? docs/evidence/2026-10-19-unified-page-motion/\n?? docs/evidence/2026-10-19-workflow-standardize/build-summary-input.py\n?? docs/evidence/2026-10-19-wu-battle-rig/inspect_art.py\n?? docs/evidence/2026-10-19-wu-battle-rig/pose-browser.png\n?? docs/evidence/2026-10-19-wu-battle-rig/pose-v3-browser.png\n?? docs/evidence/2026-10-19-wu-battle-rig/pose-v4-browser.png\n?? docs/evidence/2026-10-19-wu-battle-rig/receipt.json\n?? docs/evidence/2026-10-19-wu-battle-rig/request.json\n?? docs/evidence/2026-10-19-wu-battle-rig/runtime-check.json\n?? docs/evidence/2026-10-19-wu-battle-rig/runtime-install.json\n?? docs/evidence/2026-10-19-wu-battle-rig/stance-revision.json\n?? docs/evidence/2026-10-19-wu-battle-rig/stance-v4-revision.json\n?? game/art-source/characters/changwuyu-sprites-20261009/attack/hat-clean-source.png\n?? game/art-source/characters/changwuyu-sprites-20261009/death/previous-source.png\n?? game/art-source/characters/changwuyu-sprites-20261009/hurt/preview.gif\n?? game/art-source/characters/changwuyu-sprites-20261009/hurt/sheet.webp\n?? game/art-source/characters/roster-reference-final-20261018/\n?? game/art-source/characters/roster-reference-gray-20261018/\n?? game/art-source/characters/roster-unified-20261018/\n?? game/art-source/characters/wu-back-sword-20261018/\n?? game/art-source/characters/wu-roster-20261009.png\n?? game/art-source/pets/\n?? game/art-source/ui/home-wordmark-20261011/cn-wordmark-v1.png\n?? game/art-source/ui/home-wordmark-20261011/cn-wordmark-v2.png\n?? game/css/card-state-motion.css\n?? game/css/selection-state-motion.css\n?? game/dev/bag-reward-slice-review.html\n?? game/dev/bag-reward-slice-review.js\n?? game/dev/card-description-fixes-review.html\n?? game/dev/card-description-fixes-review.js\n?? game/dev/preparation-preset-review.html\n?? game/dev/preparation-preset-review.js\n?? game/src/battle/effects/random-blessings.js\n?? game/src/core/map-drag-motion.js\n?? game/src/ui/card-state-motion.js\n?? game/src/ui/reward-acquisition-motion.js\n?? game/src/ui/selection-state-motion.js\n?? game/src/ui/target-motion.js\n?? pv/\n?? tests/bag-token-discover.test.js\n?? tests/card-description-audit-battle.test.js\n?? tests/card-description-fix-auxiliary.test.js\n?? tests/card-description-fix-lifecycle.test.js\n?? tests/card-description-fix-pools.test.js\n?? tests/card-description-fix-target-effects.test.js\n?? tests/card-state-motion.test.js\n?? tests/fixtures/map-v5-late-fire.json\n?? tests/map-drag-motion.test.js\n?? tests/map-fire-pacing.test.js\n?? tests/reward-acquisition-motion.test.js\n?? tests/reward-picker-continuity.test.js\n?? tests/selection-state-motion.test.js\n?? tests/target-motion.test.js\n?? tests/target-surface.test.js\n?? tests/workflow-slice.test.js\n?? tools/workflow-slice.mjs",
+  "repository": {
+    "before": {
+      "mode": "git",
+      "head": "29f401e077be555d163a17e95ef954184830789e",
+      "status": "M docs/PARALLEL-REGISTRY.md\n M docs/PENDING.md\n M docs/map-travel.md\n M docs/production/art/VISUAL-BIBLE.md\n M docs/roadmap.md\n M docs/rules.md\n M docs/save-format.md\n M docs/workflow-recipes.md\n M game/assets/portraits/frames/wu/sprite-v1/animations.json\n M game/css/bag-design-system.css\n M game/css/base-logistics-trade-v12.css\n M game/css/chest-reward-overview.css\n M game/css/departure-selected.css\n M game/css/expedition-shop.css\n M game/css/expedition-transitions.css\n M game/css/interface-motion.css\n M game/css/page-transitions.css\n M game/css/page-visual-ready.css\n M game/css/preparation.css\n M game/css/secondary-ui-tokens.css\n M game/css/settings-navigation.css\n M game/css/ui-design-system.css\n M game/dev/map-node-rules-review.html\n M game/src/battle/bag/battle.bag.js\n M game/src/battle/battle.snapshot.types.d.ts\n M game/src/battle/core/battle.engine.js\n M game/src/battle/core/battle.exec-play.js\n M game/src/battle/core/battle.resolution.js\n M game/src/battle/core/battle.selection-flow.js\n M game/src/battle/core/combat.js\n M game/src/battle/effects/battle.discover-flow.js\n M game/src/battle/effects/effect-steps.ctx.js\n M game/src/battle/effects/effect-steps.damage.js\n M game/src/battle/effects/effect-steps.deck.js\n M game/src/battle/effects/effect-steps.gates.js\n M game/src/battle/effects/effect-steps.kills.js\n M game/src/battle/effects/effect-steps.m2.js\n M game/src/battle/runtime/battle.runtime.effects.js\n M game/src/battle/runtime/battle.snapshot.js\n M game/src/cards/card-rules.capability.js\n M game/src/cards/card-rules.capability.types.d.ts\n M game/src/cards/card-rules.schema.js\n M game/src/cards/cards.sync.js\n M game/src/cards/cards.sync.m10.js\n M game/src/cards/cards.sync.m3.js\n M game/src/cards/cards.sync.m6.js\n M game/src/core/camera.js\n M game/src/game.boot.js\n M game/src/generated/art-manifest.js\n M game/src/hub/bag-pane-view.js\n M game/src/hub/departure.summary.js\n M game/src/hub/departure.view-updates.js\n M game/src/hub/game.bag.drag.js\n M game/src/hub/game.bag.js\n M game/src/hub/game.bag.rules.js\n M game/src/hub/game.bag.view2.js\n M game/src/hub/game.container-store.view.js\n M game/src/hub/game.hub.depart.js\n M game/src/hub/game.hub.pages.js\n M game/src/hub/game.hub.preparation-ports.js\n M game/src/hub/game.hub.preparation.js\n M game/src/hub/hub.warehouse.js\n M game/src/hub/preparation.commands.js\n M game/src/hub/preparation.view.js\n M game/src/run/chests.js\n M game/src/run/game.nest.js\n M game/src/run/game.run.altar.js\n M game/src/run/game.run.class-choice.page.js\n M game/src/run/game.run.flow.js\n M game/src/run/game.run.scenes.js\n M game/src/run/game.run.shop.js\n M game/src/run/map-generation-rules.js\n M game/src/run/map-generator-v4.js\n M game/src/run/map-route-v2.js\n M game/src/run/map-snapshot.js\n M game/src/ui/card-result-feedback.js\n M game/src/ui/chest-reward-overview.js\n M game/src/ui/cinematics.js\n M game/src/ui/game.menu.pages.js\n M game/src/ui/interface-motion.js\n M game/src/ui/motion-presets.js\n M game/src/ui/navigation-motion.js\n M game/src/ui/node-decision-view.js\n M game/src/ui/node-scene-view.js\n M game/src/ui/overlay.js\n M game/src/ui/page-motion-profiles.js\n M game/src/ui/page-visual-ready.js\n M game/src/ui/reward-card-feedback.js\n M game/src/ui/reward-picker-heading.js\n M game/src/ui/reward-scene-view.js\n M game/src/ui/route-overlay.js\n M game/src/ui/surface-motion.js\n M game/src/ui/ui.js\n M tests/bag-item-rule-baseline.test.js\n M tests/bag-pane-retained.test.js\n M tests/bag-pouch-capacity.test.js\n M tests/bag-ui-language.test.js\n M tests/battle-runtime-state-guard.test.js\n M tests/blackmarket-card-preview.test.js\n M tests/chest-batch-receipt.test.js\n M tests/chest-callback-lifecycle-audit.test.js\n M tests/chest-click-flow.test.js\n M tests/chest-extra-rewards-choice.test.js\n M tests/chests-reward-capacity-notice.test.js\n M tests/departure-stack-lifecycle-review.test.js\n M tests/e6-card-rules-capability.test.js\n M tests/event-node-binding-cloud.test.js\n M tests/event-reward-layout.test.js\n M tests/feedback-1018.test.js\n M tests/game-hub-preparation-feature.test.js\n M tests/m06-preparation.test.js\n M tests/m06-sources-view.test.js\n M tests/m10-data.test.js\n M tests/m2-contract.test.js\n M tests/m3-data.test.js\n M tests/m6-data.test.js\n M tests/map-facilities-burn-removal.test.js\n M tests/map-generator-v4.test.js\n M tests/map-route-v2-preview.test.js\n M tests/map-route-v2.test.js\n M tests/map-version-compat.test.js\n M tests/page-surface-lifetime.test.js\n M tests/photo-zoom-lifecycle.test.js\n M tests/pocket-restore-interface.test.js\n M tests/preparation-adapter-review.test.js\n M tests/preparation-slot-review.test.js\n M tests/reward-action-clipping.test.js\n M tests/reward-capacity-preview.test.js\n M tests/reward-picker-heading.test.js\n M tests/reward-presentation-contract.test.js\n M tests/reward-receipt-clarity.test.js\n M tests/surface-motion.test.js\n M tests/sys03-altar-restore-txn.test.js\n M tests/tt12-hitechrd-battle-baseline.test.js\n M tests/tt12-hitechrd-structured.test.js\n M tests/xart-z1-batch2.test.js\n?? ../.codex/config.toml.bak-nai-domain-20261013-224601\n?? ../.codex/config.toml.bak-nai-network-20261013-224312\n?? ../.codex/config.toml.bak-nai-open-20261013-230419\n?? ../.codex/config.toml.bak-nai-profile-20261015-215723\n?? ../nul\n?? .tmp-ship-plan-1016.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json\n?? docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png\n?? docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json\n?? docs/evidence/2026-10-04-WF-home-minako-layout/before-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r2-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r3-final-1280x720.png\n?? docs/evidence/2026-10-05-WF-exe-1005/2026-10-05T14-42-18.695Z-2378777f-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-25-13.937Z-efceee45-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-29-39.744Z-c5028f6a-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-33-43.811Z-46b41035-staged.json\n?? docs/evidence/2026-10-09-card-history-document/catalog.json\n?? docs/evidence/2026-10-09-card-history-document/render-final/\n?? docs/evidence/2026-10-09-card-history-document/render/\n?? docs/evidence/2026-10-10-feedback-four/cardback-draft-v2.png\n?? docs/evidence/2026-10-10-ship-1010-code/\n?? docs/evidence/2026-10-10-ship-1010-docs/\n?? docs/evidence/2026-10-10-ship-1010/\n?? docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-redesign/references/hsr-swarm-map.png\n?? docs/evidence/2026-10-11-WF-selection-map-implementation-1011/shop-redesign/references/is6-shop.png\n?? docs/evidence/2026-10-12-WF-ark-ui-reference-1012/reference-board.html\n?? docs/evidence/2026-10-12-WF-ark-ui-reference-1012/refs/shop.png\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-27-52.891Z-e636bc69-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-33-38.079Z-f2a8cb09-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-38-26.643Z-4d250ec6-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-42-16.244Z-c0730111-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-54-14.797Z-8ec76a47-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-56-35.602Z-46aff0bc-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T13-07-05.583Z-34869b8e-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T13-12-27.686Z-7696777f-staged.json\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/arknights-is6-shop.png\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/slay-the-spire-rewards.png\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/sts2-current-1.png\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/sts2-current-2.png\n?? docs/evidence/2026-10-13-WF-friday-clean-ship-1013/2026-10-13T15-45-29.459Z-7f7ad856-staged.json\n?? docs/evidence/2026-10-13-WF-ship-pathspec-1013/2026-10-13T12-23-54.978Z-2ef564e2-staged.json\n?? docs/evidence/2026-10-13-staged-check/\n?? docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/2026-10-13T17-49-45.109Z-d01f6cb7-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/2026-10-13T17-50-31.504Z-f157ed90-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-36-05.140Z-76220423-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-48-39.716Z-50fb0198-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-53-28.761Z-08fb9eb3-staged.json\n?? docs/evidence/2026-10-15-WF-arknights-skill-forward-test/\n?? docs/evidence/2026-10-15-WF-battle-redesign/demo-annotations.png\n?? docs/evidence/2026-10-15-WF-battle-redesign/demo-battle-state.png\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-27-07.086Z-e5659d7f-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-36-33.044Z-44f26dd1-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-42-26.497Z-e40c60a6-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-07-12.000Z-a53807c9-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-10-07.249Z-a8fd9382-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-46-50.258Z-a84e6896-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-48-17.941Z-f2f8b882-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-29-49.679Z-05d5722a-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-36-13.432Z-d9e909a6-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-44-04.372Z-009b62e3-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-54-11.804Z-937bd0f9-staged.json\n?? docs/evidence/2026-10-16-WF-final-cloud-ship-1016/2026-10-16T15-25-34.836Z-1c28528c-staged.json\n?? docs/evidence/2026-10-16-WF-final-cloud-ship-1016/2026-10-16T15-32-57.322Z-cf0f8c7b-staged.json\n?? docs/evidence/2026-10-18-WF-perf-budgets-1018/css/runtime/undefined\n?? docs/evidence/2026-10-18-arknights-sfx-return/design-original.py\n?? docs/evidence/2026-10-18-arknights-sfx-return/redesign-v2.py\n?? docs/evidence/2026-10-18-arknights-sfx-return/reward-v3.py\n?? docs/evidence/2026-10-18-changwuyu-drums-nai5/\n?? docs/evidence/2026-10-18-free-sfx-library-search/fetch-sonniss-mirror.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/fetch-sonniss.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/make-japanese-preview.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/make-preview.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/make-sonniss-preview.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/sources/\n?? docs/evidence/2026-10-18-original-ui-install/install.mjs\n?? docs/evidence/2026-10-18-ost-snow-road/ledger.mjs\n?? docs/evidence/2026-10-18-ost-snow-road/registry-add.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-close.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-update.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v2-add.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v2-close.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v2-update.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v5-add.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v5-close.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v5-update.json\n?? docs/evidence/2026-10-18-ost-snow-road/render_ost.py\n?? docs/evidence/2026-10-18-ost-snow-road/render_ost_v2.py\n?? docs/evidence/2026-10-18-ost-snow-road/render_ost_v3.py\n?? docs/evidence/2026-10-18-ost-snow-road/verify_ost.py\n?? docs/evidence/2026-10-18-pets-redesign/.gitignore\n?? docs/evidence/2026-10-18-pets-redesign/builtin-prompts-revisions.json\n?? docs/evidence/2026-10-18-pets-redesign/builtin-prompts.json\n?? docs/evidence/2026-10-18-pets-redesign/cat-request.json\n?? docs/evidence/2026-10-18-pets-redesign/dog-request.json\n?? docs/evidence/2026-10-18-pets-redesign/falcon-request.json\n?? docs/evidence/2026-10-18-pets-redesign/finalize.py\n?? docs/evidence/2026-10-18-pets-redesign/fire-request.json\n?? docs/evidence/2026-10-18-pets-redesign/generate.py\n?? docs/evidence/2026-10-18-pets-redesign/install.py\n?? docs/evidence/2026-10-18-pets-redesign/penguin-request.json\n?? docs/evidence/2026-10-18-pets-redesign/robot-request.json\n?? docs/evidence/2026-10-18-premium-ui-sfx/download.py\n?? docs/evidence/2026-10-18-premium-ui-sfx/install.mjs\n?? docs/evidence/2026-10-18-premium-ui-sfx/sources/\n?? docs/evidence/2026-10-18-roster-reference-final/finish.py\n?? docs/evidence/2026-10-18-roster-reference-final/gray-import.py\n?? docs/evidence/2026-10-18-roster-reference-final/gray-prepare.py\n?? docs/evidence/2026-10-18-roster-reference-final/gray-request.json\n?? docs/evidence/2026-10-18-roster-reference-final/import.py\n?? docs/evidence/2026-10-18-roster-reference-final/request.json\n?? docs/evidence/2026-10-18-roster-reference-final/restore-four.py\n?? docs/evidence/2026-10-18-roster-reference-final/update-docs-tests.py\n?? docs/evidence/2026-10-18-roster-unified/import.py\n?? docs/evidence/2026-10-18-roster-unified/request.json\n?? docs/evidence/2026-10-18-roster-unified/restore-default.py\n?? docs/evidence/2026-10-18-scifi-ui-candidates/sources/\n?? docs/evidence/2026-10-18-selected15-sfx-r2/install.mjs\n?? docs/evidence/2026-10-18-selected15-sfx-r2/prepare.py\n?? docs/evidence/2026-10-18-selected15-sfx-r2/registry-close.json\n?? docs/evidence/2026-10-18-selected15-sfx-r2/registry-open.json\n?? docs/evidence/2026-10-18-selected15-sfx-r2/registry-update.json\n?? docs/evidence/2026-10-18-selected32-sfx/install.mjs\n?? docs/evidence/2026-10-18-selected32-sfx/prepare.py\n?? docs/evidence/2026-10-18-selected32-sfx/registry-close.json\n?? docs/evidence/2026-10-18-selected32-sfx/registry-credits-close.json\n?? docs/evidence/2026-10-18-selected32-sfx/registry-credits-open.json\n?? docs/evidence/2026-10-18-selected32-sfx/registry-open.json\n?? docs/evidence/2026-10-18-selected32-sfx/sources/\n?? docs/evidence/2026-10-18-sfx-current-review/registry-close.json\n?? docs/evidence/2026-10-18-sfx-current-review/registry-fix-close.json\n?? docs/evidence/2026-10-18-sfx-current-review/registry-fix-open.json\n?? docs/evidence/2026-10-18-sfx-current-review/registry-open.json\n?? docs/evidence/2026-10-18-sfx-four-silence/registry-close.json\n?? docs/evidence/2026-10-18-sfx-four-silence/registry-open.json\n?? docs/evidence/2026-10-18-staged-check/\n?? docs/evidence/2026-10-18-subpage-sfx-silence/registry-close.json\n?? docs/evidence/2026-10-18-subpage-sfx-silence/registry-open.json\n?? docs/evidence/2026-10-18-web-sfx-replacement/install.mjs\n?? docs/evidence/2026-10-18-web-sfx-replacement/prepare.py\n?? docs/evidence/2026-10-18-web-sfx-replacement/sources/\n?? docs/evidence/2026-10-18-wu-back-sword/import.py\n?? docs/evidence/2026-10-18-wu-back-sword/prepare.py\n?? docs/evidence/2026-10-18-wu-back-sword/request.json\n?? docs/evidence/2026-10-18-wu-boots-socks/prepare_generate.py\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v2-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v3-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v4-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v5-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/request.json\n?? docs/evidence/2026-10-18-wu-boots/game-default-action-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/game-default-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/hand-fix-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/nai-request-free.json\n?? docs/evidence/2026-10-18-wu-boots/nai-request-large-failed.json\n?? docs/evidence/2026-10-18-wu-boots/prompt-v2.txt\n?? docs/evidence/2026-10-18-wu-boots/prompt-v3.txt\n?? docs/evidence/2026-10-18-wu-boots/prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/refine-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/sock-fix-prompt.txt\n?? docs/evidence/2026-10-18-wu-skins-reset/check-assets.cjs\n?? docs/evidence/2026-10-18-wu-skins-reset/generate.py\n?? docs/evidence/2026-10-18-wu-skins-reset/install.py\n?? docs/evidence/2026-10-18-wu-skins-reset/request.json\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019-final/\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019-v2/\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019-v3/\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019/\n?? docs/evidence/2026-10-19-WF-card-description-audit-1019/\n?? docs/evidence/2026-10-19-WF-card-description-fixes-1019/\n?? docs/evidence/2026-10-19-WF-cleanup-submit-1019/\n?? docs/evidence/2026-10-19-WF-local-closeout-1019-r2/\n?? docs/evidence/2026-10-19-WF-local-closeout-1019/2026-10-18T16-49-09.933Z-a2bd94d3-staged.json\n?? docs/evidence/2026-10-19-WF-local-github-baseline-1018/\n?? docs/evidence/2026-10-19-WF-map-drag-1019/\n?? docs/evidence/2026-10-19-WF-submit-tools-1019/\n?? docs/evidence/2026-10-19-WF-token-c-discover-1019/\n?? docs/evidence/2026-10-19-WF-ui-target-motion-1019/\n?? docs/evidence/2026-10-19-art-workflow-tools/save_memory.py\n?? docs/evidence/2026-10-19-bag-reward-slice/\n?? docs/evidence/2026-10-19-card-description-audit/\n?? docs/evidence/2026-10-19-card-description-fixes/\n?? docs/evidence/2026-10-19-changwuyu-drum-skin/import_skin.py\n?? docs/evidence/2026-10-19-fire-pacing/\n?? docs/evidence/2026-10-19-map-drag/\n?? docs/evidence/2026-10-19-preparation-preset-fix/\n?? docs/evidence/2026-10-19-ui-motion-douyin-reference/\n?? docs/evidence/2026-10-19-ui-target-motion/\n?? docs/evidence/2026-10-19-unified-page-motion/\n?? docs/evidence/2026-10-19-workflow-standardize/build-summary-input.py\n?? docs/evidence/2026-10-19-wu-battle-rig/inspect_art.py\n?? docs/evidence/2026-10-19-wu-battle-rig/pose-browser.png\n?? docs/evidence/2026-10-19-wu-battle-rig/pose-v3-browser.png\n?? docs/evidence/2026-10-19-wu-battle-rig/pose-v4-browser.png\n?? docs/evidence/2026-10-19-wu-battle-rig/receipt.json\n?? docs/evidence/2026-10-19-wu-battle-rig/request.json\n?? docs/evidence/2026-10-19-wu-battle-rig/runtime-check.json\n?? docs/evidence/2026-10-19-wu-battle-rig/runtime-install.json\n?? docs/evidence/2026-10-19-wu-battle-rig/stance-revision.json\n?? docs/evidence/2026-10-19-wu-battle-rig/stance-v4-revision.json\n?? game/art-source/characters/changwuyu-sprites-20261009/attack/hat-clean-source.png\n?? game/art-source/characters/changwuyu-sprites-20261009/death/previous-source.png\n?? game/art-source/characters/changwuyu-sprites-20261009/hurt/preview.gif\n?? game/art-source/characters/changwuyu-sprites-20261009/hurt/sheet.webp\n?? game/art-source/characters/roster-reference-final-20261018/\n?? game/art-source/characters/roster-reference-gray-20261018/\n?? game/art-source/characters/roster-unified-20261018/\n?? game/art-source/characters/wu-back-sword-20261018/\n?? game/art-source/characters/wu-roster-20261009.png\n?? game/art-source/pets/\n?? game/art-source/ui/home-wordmark-20261011/cn-wordmark-v1.png\n?? game/art-source/ui/home-wordmark-20261011/cn-wordmark-v2.png\n?? game/css/card-state-motion.css\n?? game/css/selection-state-motion.css\n?? game/dev/bag-reward-slice-review.html\n?? game/dev/bag-reward-slice-review.js\n?? game/dev/card-description-fixes-review.html\n?? game/dev/card-description-fixes-review.js\n?? game/dev/preparation-preset-review.html\n?? game/dev/preparation-preset-review.js\n?? game/src/battle/effects/random-blessings.js\n?? game/src/core/map-drag-motion.js\n?? game/src/ui/card-state-motion.js\n?? game/src/ui/reward-acquisition-motion.js\n?? game/src/ui/selection-state-motion.js\n?? game/src/ui/target-motion.js\n?? pv/\n?? tests/bag-token-discover.test.js\n?? tests/card-description-audit-battle.test.js\n?? tests/card-description-fix-auxiliary.test.js\n?? tests/card-description-fix-lifecycle.test.js\n?? tests/card-description-fix-pools.test.js\n?? tests/card-description-fix-target-effects.test.js\n?? tests/card-state-motion.test.js\n?? tests/fixtures/map-v5-late-fire.json\n?? tests/map-drag-motion.test.js\n?? tests/map-fire-pacing.test.js\n?? tests/reward-acquisition-motion.test.js\n?? tests/reward-picker-continuity.test.js\n?? tests/selection-state-motion.test.js\n?? tests/target-motion.test.js\n?? tests/target-surface.test.js\n?? tests/workflow-slice.test.js\n?? tools/workflow-slice.mjs",
+      "reusableReceipt": false,
+      "reason": "工作区检查候选；冻结 index 证据仍走 workflow staged。"
+    },
+    "after": {
+      "mode": "git",
+      "head": "29f401e077be555d163a17e95ef954184830789e",
+      "status": "M docs/PARALLEL-REGISTRY.md\n M docs/PENDING.md\n M docs/map-travel.md\n M docs/production/art/VISUAL-BIBLE.md\n M docs/roadmap.md\n M docs/rules.md\n M docs/save-format.md\n M docs/workflow-recipes.md\n M game/assets/portraits/frames/wu/sprite-v1/animations.json\n M game/css/bag-design-system.css\n M game/css/base-logistics-trade-v12.css\n M game/css/chest-reward-overview.css\n M game/css/departure-selected.css\n M game/css/expedition-shop.css\n M game/css/expedition-transitions.css\n M game/css/interface-motion.css\n M game/css/page-transitions.css\n M game/css/page-visual-ready.css\n M game/css/preparation.css\n M game/css/secondary-ui-tokens.css\n M game/css/settings-navigation.css\n M game/css/ui-design-system.css\n M game/dev/map-node-rules-review.html\n M game/src/battle/bag/battle.bag.js\n M game/src/battle/battle.snapshot.types.d.ts\n M game/src/battle/core/battle.engine.js\n M game/src/battle/core/battle.exec-play.js\n M game/src/battle/core/battle.resolution.js\n M game/src/battle/core/battle.selection-flow.js\n M game/src/battle/core/combat.js\n M game/src/battle/effects/battle.discover-flow.js\n M game/src/battle/effects/effect-steps.ctx.js\n M game/src/battle/effects/effect-steps.damage.js\n M game/src/battle/effects/effect-steps.deck.js\n M game/src/battle/effects/effect-steps.gates.js\n M game/src/battle/effects/effect-steps.kills.js\n M game/src/battle/effects/effect-steps.m2.js\n M game/src/battle/runtime/battle.runtime.effects.js\n M game/src/battle/runtime/battle.snapshot.js\n M game/src/cards/card-rules.capability.js\n M game/src/cards/card-rules.capability.types.d.ts\n M game/src/cards/card-rules.schema.js\n M game/src/cards/cards.sync.js\n M game/src/cards/cards.sync.m10.js\n M game/src/cards/cards.sync.m3.js\n M game/src/cards/cards.sync.m6.js\n M game/src/core/camera.js\n M game/src/game.boot.js\n M game/src/generated/art-manifest.js\n M game/src/hub/bag-pane-view.js\n M game/src/hub/departure.summary.js\n M game/src/hub/departure.view-updates.js\n M game/src/hub/game.bag.drag.js\n M game/src/hub/game.bag.js\n M game/src/hub/game.bag.rules.js\n M game/src/hub/game.bag.view2.js\n M game/src/hub/game.container-store.view.js\n M game/src/hub/game.hub.depart.js\n M game/src/hub/game.hub.pages.js\n M game/src/hub/game.hub.preparation-ports.js\n M game/src/hub/game.hub.preparation.js\n M game/src/hub/hub.warehouse.js\n M game/src/hub/preparation.commands.js\n M game/src/hub/preparation.view.js\n M game/src/run/chests.js\n M game/src/run/game.nest.js\n M game/src/run/game.run.altar.js\n M game/src/run/game.run.class-choice.page.js\n M game/src/run/game.run.flow.js\n M game/src/run/game.run.scenes.js\n M game/src/run/game.run.shop.js\n M game/src/run/map-generation-rules.js\n M game/src/run/map-generator-v4.js\n M game/src/run/map-route-v2.js\n M game/src/run/map-snapshot.js\n M game/src/ui/card-result-feedback.js\n M game/src/ui/chest-reward-overview.js\n M game/src/ui/cinematics.js\n M game/src/ui/game.menu.pages.js\n M game/src/ui/interface-motion.js\n M game/src/ui/motion-presets.js\n M game/src/ui/navigation-motion.js\n M game/src/ui/node-decision-view.js\n M game/src/ui/node-scene-view.js\n M game/src/ui/overlay.js\n M game/src/ui/page-motion-profiles.js\n M game/src/ui/page-visual-ready.js\n M game/src/ui/reward-card-feedback.js\n M game/src/ui/reward-picker-heading.js\n M game/src/ui/reward-scene-view.js\n M game/src/ui/route-overlay.js\n M game/src/ui/surface-motion.js\n M game/src/ui/ui.js\n M tests/bag-item-rule-baseline.test.js\n M tests/bag-pane-retained.test.js\n M tests/bag-pouch-capacity.test.js\n M tests/bag-ui-language.test.js\n M tests/battle-runtime-state-guard.test.js\n M tests/blackmarket-card-preview.test.js\n M tests/chest-batch-receipt.test.js\n M tests/chest-callback-lifecycle-audit.test.js\n M tests/chest-click-flow.test.js\n M tests/chest-extra-rewards-choice.test.js\n M tests/chests-reward-capacity-notice.test.js\n M tests/departure-stack-lifecycle-review.test.js\n M tests/e6-card-rules-capability.test.js\n M tests/event-node-binding-cloud.test.js\n M tests/event-reward-layout.test.js\n M tests/feedback-1018.test.js\n M tests/game-hub-preparation-feature.test.js\n M tests/m06-preparation.test.js\n M tests/m06-sources-view.test.js\n M tests/m10-data.test.js\n M tests/m2-contract.test.js\n M tests/m3-data.test.js\n M tests/m6-data.test.js\n M tests/map-facilities-burn-removal.test.js\n M tests/map-generator-v4.test.js\n M tests/map-route-v2-preview.test.js\n M tests/map-route-v2.test.js\n M tests/map-version-compat.test.js\n M tests/page-surface-lifetime.test.js\n M tests/photo-zoom-lifecycle.test.js\n M tests/pocket-restore-interface.test.js\n M tests/preparation-adapter-review.test.js\n M tests/preparation-slot-review.test.js\n M tests/reward-action-clipping.test.js\n M tests/reward-capacity-preview.test.js\n M tests/reward-picker-heading.test.js\n M tests/reward-presentation-contract.test.js\n M tests/reward-receipt-clarity.test.js\n M tests/surface-motion.test.js\n M tests/sys03-altar-restore-txn.test.js\n M tests/tt12-hitechrd-battle-baseline.test.js\n M tests/tt12-hitechrd-structured.test.js\n M tests/xart-z1-batch2.test.js\n?? ../.codex/config.toml.bak-nai-domain-20261013-224601\n?? ../.codex/config.toml.bak-nai-network-20261013-224312\n?? ../.codex/config.toml.bak-nai-open-20261013-230419\n?? ../.codex/config.toml.bak-nai-profile-20261015-215723\n?? ../nul\n?? .tmp-ship-plan-1016.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-40-53.381Z-9a1affee-staged.json\n?? docs/evidence/2026-10-02-WF-package-1002/2026-10-02T15-56-38.896Z-d5ca5df9-staged.json\n?? docs/evidence/2026-10-02-seven-departments-review/tmp/contact-3.png\n?? docs/evidence/2026-10-02-staged-check/2026-10-02T01-22-15.433Z-e5d284fd-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-19-39.159Z-5fbee550-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-27-43.086Z-63530fe5-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-46-33.917Z-9cb2485d-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-51-21.366Z-f2ed6511-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T16-59-11.935Z-35c52133-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-03-58.112Z-5cc22689-staged.json\n?? docs/evidence/2026-10-03-WF-package-1002/2026-10-02T17-08-10.704Z-da12b315-staged.json\n?? docs/evidence/2026-10-04-WF-home-minako-layout/before-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r2-1280x720.png\n?? docs/evidence/2026-10-04-WF-home-minako-layout/r3-final-1280x720.png\n?? docs/evidence/2026-10-05-WF-exe-1005/2026-10-05T14-42-18.695Z-2378777f-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-25-13.937Z-efceee45-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-29-39.744Z-c5028f6a-staged.json\n?? docs/evidence/2026-10-05-WF-package-cleanup-1005/2026-10-05T12-33-43.811Z-46b41035-staged.json\n?? docs/evidence/2026-10-09-card-history-document/catalog.json\n?? docs/evidence/2026-10-09-card-history-document/render-final/\n?? docs/evidence/2026-10-09-card-history-document/render/\n?? docs/evidence/2026-10-10-feedback-four/cardback-draft-v2.png\n?? docs/evidence/2026-10-10-ship-1010-code/\n?? docs/evidence/2026-10-10-ship-1010-docs/\n?? docs/evidence/2026-10-10-ship-1010/\n?? docs/evidence/2026-10-11-WF-selection-map-implementation-1011/map-redesign/references/hsr-swarm-map.png\n?? docs/evidence/2026-10-11-WF-selection-map-implementation-1011/shop-redesign/references/is6-shop.png\n?? docs/evidence/2026-10-12-WF-ark-ui-reference-1012/reference-board.html\n?? docs/evidence/2026-10-12-WF-ark-ui-reference-1012/refs/shop.png\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-27-52.891Z-e636bc69-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-33-38.079Z-f2a8cb09-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-38-26.643Z-4d250ec6-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-42-16.244Z-c0730111-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-54-14.797Z-8ec76a47-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T12-56-35.602Z-46aff0bc-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T13-07-05.583Z-34869b8e-staged.json\n?? docs/evidence/2026-10-13-WF-completed-pack-1013-b2/2026-10-13T13-12-27.686Z-7696777f-staged.json\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/arknights-is6-shop.png\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/slay-the-spire-rewards.png\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/sts2-current-1.png\n?? docs/evidence/2026-10-13-WF-expedition-experience-1013/reference-images/sts2-current-2.png\n?? docs/evidence/2026-10-13-WF-friday-clean-ship-1013/2026-10-13T15-45-29.459Z-7f7ad856-staged.json\n?? docs/evidence/2026-10-13-WF-ship-pathspec-1013/2026-10-13T12-23-54.978Z-2ef564e2-staged.json\n?? docs/evidence/2026-10-13-staged-check/\n?? docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/2026-10-13T17-49-45.109Z-d01f6cb7-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/2026-10-13T17-50-31.504Z-f157ed90-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-36-05.140Z-76220423-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-48-39.716Z-50fb0198-staged.json\n?? docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/2026-10-13T16-53-28.761Z-08fb9eb3-staged.json\n?? docs/evidence/2026-10-15-WF-arknights-skill-forward-test/\n?? docs/evidence/2026-10-15-WF-battle-redesign/demo-annotations.png\n?? docs/evidence/2026-10-15-WF-battle-redesign/demo-battle-state.png\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-27-07.086Z-e5659d7f-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-36-33.044Z-44f26dd1-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T06-42-26.497Z-e40c60a6-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-07-12.000Z-a53807c9-staged.json\n?? docs/evidence/2026-10-15-WF-code-clean-1015/2026-10-15T07-10-07.249Z-a8fd9382-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-46-50.258Z-a84e6896-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T12-48-17.941Z-f2f8b882-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-29-49.679Z-05d5722a-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-36-13.432Z-d9e909a6-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-44-04.372Z-009b62e3-staged.json\n?? docs/evidence/2026-10-16-WF-completed-commit-1016/2026-10-16T13-54-11.804Z-937bd0f9-staged.json\n?? docs/evidence/2026-10-16-WF-final-cloud-ship-1016/2026-10-16T15-25-34.836Z-1c28528c-staged.json\n?? docs/evidence/2026-10-16-WF-final-cloud-ship-1016/2026-10-16T15-32-57.322Z-cf0f8c7b-staged.json\n?? docs/evidence/2026-10-18-WF-perf-budgets-1018/css/runtime/undefined\n?? docs/evidence/2026-10-18-arknights-sfx-return/design-original.py\n?? docs/evidence/2026-10-18-arknights-sfx-return/redesign-v2.py\n?? docs/evidence/2026-10-18-arknights-sfx-return/reward-v3.py\n?? docs/evidence/2026-10-18-changwuyu-drums-nai5/\n?? docs/evidence/2026-10-18-free-sfx-library-search/fetch-sonniss-mirror.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/fetch-sonniss.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/make-japanese-preview.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/make-preview.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/make-sonniss-preview.py\n?? docs/evidence/2026-10-18-free-sfx-library-search/sources/\n?? docs/evidence/2026-10-18-original-ui-install/install.mjs\n?? docs/evidence/2026-10-18-ost-snow-road/ledger.mjs\n?? docs/evidence/2026-10-18-ost-snow-road/registry-add.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-close.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-update.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v2-add.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v2-close.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v2-update.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v5-add.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v5-close.json\n?? docs/evidence/2026-10-18-ost-snow-road/registry-v5-update.json\n?? docs/evidence/2026-10-18-ost-snow-road/render_ost.py\n?? docs/evidence/2026-10-18-ost-snow-road/render_ost_v2.py\n?? docs/evidence/2026-10-18-ost-snow-road/render_ost_v3.py\n?? docs/evidence/2026-10-18-ost-snow-road/verify_ost.py\n?? docs/evidence/2026-10-18-pets-redesign/.gitignore\n?? docs/evidence/2026-10-18-pets-redesign/builtin-prompts-revisions.json\n?? docs/evidence/2026-10-18-pets-redesign/builtin-prompts.json\n?? docs/evidence/2026-10-18-pets-redesign/cat-request.json\n?? docs/evidence/2026-10-18-pets-redesign/dog-request.json\n?? docs/evidence/2026-10-18-pets-redesign/falcon-request.json\n?? docs/evidence/2026-10-18-pets-redesign/finalize.py\n?? docs/evidence/2026-10-18-pets-redesign/fire-request.json\n?? docs/evidence/2026-10-18-pets-redesign/generate.py\n?? docs/evidence/2026-10-18-pets-redesign/install.py\n?? docs/evidence/2026-10-18-pets-redesign/penguin-request.json\n?? docs/evidence/2026-10-18-pets-redesign/robot-request.json\n?? docs/evidence/2026-10-18-premium-ui-sfx/download.py\n?? docs/evidence/2026-10-18-premium-ui-sfx/install.mjs\n?? docs/evidence/2026-10-18-premium-ui-sfx/sources/\n?? docs/evidence/2026-10-18-roster-reference-final/finish.py\n?? docs/evidence/2026-10-18-roster-reference-final/gray-import.py\n?? docs/evidence/2026-10-18-roster-reference-final/gray-prepare.py\n?? docs/evidence/2026-10-18-roster-reference-final/gray-request.json\n?? docs/evidence/2026-10-18-roster-reference-final/import.py\n?? docs/evidence/2026-10-18-roster-reference-final/request.json\n?? docs/evidence/2026-10-18-roster-reference-final/restore-four.py\n?? docs/evidence/2026-10-18-roster-reference-final/update-docs-tests.py\n?? docs/evidence/2026-10-18-roster-unified/import.py\n?? docs/evidence/2026-10-18-roster-unified/request.json\n?? docs/evidence/2026-10-18-roster-unified/restore-default.py\n?? docs/evidence/2026-10-18-scifi-ui-candidates/sources/\n?? docs/evidence/2026-10-18-selected15-sfx-r2/install.mjs\n?? docs/evidence/2026-10-18-selected15-sfx-r2/prepare.py\n?? docs/evidence/2026-10-18-selected15-sfx-r2/registry-close.json\n?? docs/evidence/2026-10-18-selected15-sfx-r2/registry-open.json\n?? docs/evidence/2026-10-18-selected15-sfx-r2/registry-update.json\n?? docs/evidence/2026-10-18-selected32-sfx/install.mjs\n?? docs/evidence/2026-10-18-selected32-sfx/prepare.py\n?? docs/evidence/2026-10-18-selected32-sfx/registry-close.json\n?? docs/evidence/2026-10-18-selected32-sfx/registry-credits-close.json\n?? docs/evidence/2026-10-18-selected32-sfx/registry-credits-open.json\n?? docs/evidence/2026-10-18-selected32-sfx/registry-open.json\n?? docs/evidence/2026-10-18-selected32-sfx/sources/\n?? docs/evidence/2026-10-18-sfx-current-review/registry-close.json\n?? docs/evidence/2026-10-18-sfx-current-review/registry-fix-close.json\n?? docs/evidence/2026-10-18-sfx-current-review/registry-fix-open.json\n?? docs/evidence/2026-10-18-sfx-current-review/registry-open.json\n?? docs/evidence/2026-10-18-sfx-four-silence/registry-close.json\n?? docs/evidence/2026-10-18-sfx-four-silence/registry-open.json\n?? docs/evidence/2026-10-18-staged-check/\n?? docs/evidence/2026-10-18-subpage-sfx-silence/registry-close.json\n?? docs/evidence/2026-10-18-subpage-sfx-silence/registry-open.json\n?? docs/evidence/2026-10-18-web-sfx-replacement/install.mjs\n?? docs/evidence/2026-10-18-web-sfx-replacement/prepare.py\n?? docs/evidence/2026-10-18-web-sfx-replacement/sources/\n?? docs/evidence/2026-10-18-wu-back-sword/import.py\n?? docs/evidence/2026-10-18-wu-back-sword/prepare.py\n?? docs/evidence/2026-10-18-wu-back-sword/request.json\n?? docs/evidence/2026-10-18-wu-boots-socks/prepare_generate.py\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v2-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v3-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v4-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/refine-v5-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots-socks/request.json\n?? docs/evidence/2026-10-18-wu-boots/game-default-action-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/game-default-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/hand-fix-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/nai-request-free.json\n?? docs/evidence/2026-10-18-wu-boots/nai-request-large-failed.json\n?? docs/evidence/2026-10-18-wu-boots/prompt-v2.txt\n?? docs/evidence/2026-10-18-wu-boots/prompt-v3.txt\n?? docs/evidence/2026-10-18-wu-boots/prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/refine-prompt.txt\n?? docs/evidence/2026-10-18-wu-boots/sock-fix-prompt.txt\n?? docs/evidence/2026-10-18-wu-skins-reset/check-assets.cjs\n?? docs/evidence/2026-10-18-wu-skins-reset/generate.py\n?? docs/evidence/2026-10-18-wu-skins-reset/install.py\n?? docs/evidence/2026-10-18-wu-skins-reset/request.json\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019-final/\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019-v2/\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019-v3/\n?? docs/evidence/2026-10-19-WF-bag-reward-slice-1019/\n?? docs/evidence/2026-10-19-WF-card-description-audit-1019/\n?? docs/evidence/2026-10-19-WF-card-description-fixes-1019/\n?? docs/evidence/2026-10-19-WF-cleanup-submit-1019/\n?? docs/evidence/2026-10-19-WF-local-closeout-1019-r2/\n?? docs/evidence/2026-10-19-WF-local-closeout-1019/2026-10-18T16-49-09.933Z-a2bd94d3-staged.json\n?? docs/evidence/2026-10-19-WF-local-github-baseline-1018/\n?? docs/evidence/2026-10-19-WF-map-drag-1019/\n?? docs/evidence/2026-10-19-WF-submit-tools-1019/\n?? docs/evidence/2026-10-19-WF-token-c-discover-1019/\n?? docs/evidence/2026-10-19-WF-ui-target-motion-1019/\n?? docs/evidence/2026-10-19-art-workflow-tools/save_memory.py\n?? docs/evidence/2026-10-19-bag-reward-slice/\n?? docs/evidence/2026-10-19-card-description-audit/\n?? docs/evidence/2026-10-19-card-description-fixes/\n?? docs/evidence/2026-10-19-changwuyu-drum-skin/import_skin.py\n?? docs/evidence/2026-10-19-fire-pacing/\n?? docs/evidence/2026-10-19-map-drag/\n?? docs/evidence/2026-10-19-preparation-preset-fix/\n?? docs/evidence/2026-10-19-ui-motion-douyin-reference/\n?? docs/evidence/2026-10-19-ui-target-motion/\n?? docs/evidence/2026-10-19-unified-page-motion/\n?? docs/evidence/2026-10-19-workflow-standardize/build-summary-input.py\n?? docs/evidence/2026-10-19-wu-battle-rig/inspect_art.py\n?? docs/evidence/2026-10-19-wu-battle-rig/pose-browser.png\n?? docs/evidence/2026-10-19-wu-battle-rig/pose-v3-browser.png\n?? docs/evidence/2026-10-19-wu-battle-rig/pose-v4-browser.png\n?? docs/evidence/2026-10-19-wu-battle-rig/receipt.json\n?? docs/evidence/2026-10-19-wu-battle-rig/request.json\n?? docs/evidence/2026-10-19-wu-battle-rig/runtime-check.json\n?? docs/evidence/2026-10-19-wu-battle-rig/runtime-install.json\n?? docs/evidence/2026-10-19-wu-battle-rig/stance-revision.json\n?? docs/evidence/2026-10-19-wu-battle-rig/stance-v4-revision.json\n?? game/art-source/characters/changwuyu-sprites-20261009/attack/hat-clean-source.png\n?? game/art-source/characters/changwuyu-sprites-20261009/death/previous-source.png\n?? game/art-source/characters/changwuyu-sprites-20261009/hurt/preview.gif\n?? game/art-source/characters/changwuyu-sprites-20261009/hurt/sheet.webp\n?? game/art-source/characters/roster-reference-final-20261018/\n?? game/art-source/characters/roster-reference-gray-20261018/\n?? game/art-source/characters/roster-unified-20261018/\n?? game/art-source/characters/wu-back-sword-20261018/\n?? game/art-source/characters/wu-roster-20261009.png\n?? game/art-source/pets/\n?? game/art-source/ui/home-wordmark-20261011/cn-wordmark-v1.png\n?? game/art-source/ui/home-wordmark-20261011/cn-wordmark-v2.png\n?? game/css/card-state-motion.css\n?? game/css/selection-state-motion.css\n?? game/dev/bag-reward-slice-review.html\n?? game/dev/bag-reward-slice-review.js\n?? game/dev/card-description-fixes-review.html\n?? game/dev/card-description-fixes-review.js\n?? game/dev/preparation-preset-review.html\n?? game/dev/preparation-preset-review.js\n?? game/src/battle/effects/random-blessings.js\n?? game/src/core/map-drag-motion.js\n?? game/src/ui/card-state-motion.js\n?? game/src/ui/reward-acquisition-motion.js\n?? game/src/ui/selection-state-motion.js\n?? game/src/ui/target-motion.js\n?? pv/\n?? tests/bag-token-discover.test.js\n?? tests/card-description-audit-battle.test.js\n?? tests/card-description-fix-auxiliary.test.js\n?? tests/card-description-fix-lifecycle.test.js\n?? tests/card-description-fix-pools.test.js\n?? tests/card-description-fix-target-effects.test.js\n?? tests/card-state-motion.test.js\n?? tests/fixtures/map-v5-late-fire.json\n?? tests/map-drag-motion.test.js\n?? tests/map-fire-pacing.test.js\n?? tests/reward-acquisition-motion.test.js\n?? tests/reward-picker-continuity.test.js\n?? tests/selection-state-motion.test.js\n?? tests/target-motion.test.js\n?? tests/target-surface.test.js\n?? tests/workflow-slice.test.js\n?? tools/workflow-slice.mjs",
+      "reusableReceipt": false,
+      "reason": "工作区检查候选；冻结 index 证据仍走 workflow staged。"
+    }
+  },
+  "reusableReceipt": false,
+  "before": {
+    "sha256": "1a3c765005d49d0398004ffbc854f18b3bf0288097e15977280c776ad641a91d",
+    "manifest": [
+      {
+        "file": ".githooks/pre-commit",
+        "sha256": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-full-repository-review/task.json",
+        "sha256": "56c99a5e2f865aac7d3651fafd2c4bc771b87034342b4b92c51284c0f6fbf817"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+        "sha256": "fb10db8484d2015531c6f50d1142e56d40b78114f3c470810f54d0cec377b00f"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-workflow-review-fixes/task.json",
+        "sha256": "7529efb752cfe4d3875ab415597adc4b88f63bad9ee9c8885aa9ef9a7b37d840"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-1/task.json",
+        "sha256": "87f5c33558af6f52c7a50b9fe86f8f5133ed0a58b3e9ef380ca53fc604a9329b"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-2/task.json",
+        "sha256": "6bdb06bbbf26bcbc029e167c0d6a6bd21420e098e2c4329f96035d3de72bd902"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-3/task.json",
+        "sha256": "fdc2ed6aad1c5cf20d3258d32f7836f0cb047852e6b7e5dcc5b70d94f55f46d0"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-automation/task.json",
+        "sha256": "ee4018aad4f0e98cd82c9104476a6c217e7000b8e42e1531ad4a39c5a87749ae"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-decouple/task.json",
+        "sha256": "2250963edfa165dea21d46d679d03c2b1295f30cbd47fd09da74cdb3c958f27d"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-redesign/task.json",
+        "sha256": "d6c88a124e7d714f29e28fe61a86e0d8a528b42a21575aa437ac7ec4097d445c"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-production-research/task.json",
+        "sha256": "bb2934f113227ef9b03071f2c7656e0a61b320a13c3b59e751e7917f8a4f3c27"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes-crossplatform/task.json",
+        "sha256": "af714f27e7067293f4b2fd00ab38b9d476650e6342c0c971b1533c5fe9507167"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes/task.json",
+        "sha256": "4bf05ca76394be31df66ac841a98b6e8a6c9c1a93b0bedcd7f4d012a3cdaf0a3"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-review/task.json",
+        "sha256": "cefc4ecf8fe895d9bd322122b6d380660e6d42b2df0f10e98eb3e119973f7586"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-v2/task.json",
+        "sha256": "776320fc8065871d96b6bce0c0806e325518717ed0b20e09077ca77539e9274c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-experience-art-plan/task.json",
+        "sha256": "e3ea75d9bb5fbf657664cfc0521e93bab1381b735647a7a4fcc9224939ae605b"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-experience-art-exec/task.json",
+        "sha256": "5751581ca69fe5ba1d81c4d803fe01cce046b85d15a55887f58c031ad626ed0c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-art-v2/task.json",
+        "sha256": "2f4eb76b9c9594d7594f6dd04127dd44035204ed9c4a394d2f646ac112de63ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-layout/task.json",
+        "sha256": "6f74540ad681ec952da2e8ec1d49b36b8321cfce09319ce6508d3046731febf6"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-xart-z1/task.json",
+        "sha256": "6c872e2e62530e22818ef3bbf5c49343a206647ec59dac0523184f2de4a676ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-1004/task.json",
+        "sha256": "3179b2f8a0919fe52a1b5f7b77156c057e91eed06ca04cacbce78cdd6d99cfe1"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r2/task.json",
+        "sha256": "e20177c47ef50180968058350a01d053d0869912d33424bd93d3d3f58dfd98ec"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r3/task.json",
+        "sha256": "8f3cfeca13faf07df5d021fb4c13c3806ae623a4c49bdd5e4f386dd03200e7c2"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r4/task.json",
+        "sha256": "6230d9073433b0c4e7f92a2a122b749af131053c529f9e25b9d10b9294caaafe"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r5/task.json",
+        "sha256": "c7e969cd6fb3646dedf66d88b7ef78b7697228aa0158a7353a5fba1f60e63c3f"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-photo-studio-unified/task.json",
+        "sha256": "5b3b6a5e64dcd00a1db4ec607585efd0dd1219ee36f1c2dc421b64d75afb2f01"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/task.json",
+        "sha256": "beff569b4672957dfd05f7bcd9be0b557ce9723e57027db0f8820826c0e2671b"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-fullmoon/task.json",
+        "sha256": "b2cc8f2eb4839568fa83656113c07df3fa01dc10619e285081754a2f06b8d7e8"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-wind-song/task.json",
+        "sha256": "0a5ee0d13ac9fa61bfd8e8202c059a95e28351c884d3609f1287256a7f05529c"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-card-ally-redesign/task.json",
+        "sha256": "cb1eb9a7ae68374d3ddf23c96c4433e7d8e4013e0d7bc5ce926269f2c7066ce7"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-music-independent-review/task.json",
+        "sha256": "5268a56c5bd8b6aa9b060a0ce58de90dfb204033a43887571565c56f03fdb16c"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-wu-parts-full/task.json",
+        "sha256": "54db65ff123f33b88215567abcffe668f1b52ec4c35cb8e66a93cda6cdda18aa"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-base-camp-redo/task.json",
+        "sha256": "6e74985acc2dee360c2d21e396d36d610e8a970c0e292c6bfd3d813da4309437"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-doc-system-art-cards-1009/task.json",
+        "sha256": "5e6d07f936a166a6db1f976aae0866b0f1e5488b4e892bb6349c5b9969f2533d"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-doc-system-followup-1009/task.json",
+        "sha256": "bfac99e2107eb081eadb33853daa0b566e33fc90d9994c47272267a91381476d"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-four-layer-slice-1009/task.json",
+        "sha256": "6b76da44e620f640f8fae2e8012a1bed1be1b75af9e24d67a5a5f77ede194cad"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-base-pages/task.json",
+        "sha256": "ffb3721016601fd48dafa2222e61803ee78ab5e548985fe001ff983d044a7229"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-base-design-audit-1010/task.json",
+        "sha256": "f153d84f877361b40ce5e3bafbe5e8974459c5c6982b474e75d094d68c3d360b"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-base-iterate-1010/task.json",
+        "sha256": "72356812448563a9d12fb9267fb463e06e347c272fe41fdf0ac12fcd6f117458"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-base-style-prune-1010/task.json",
+        "sha256": "9482da5b57fcac5d62393cc4f07a8a0873916fa66d1dd807e602aa24cc972db4"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-base-ui-polish-1010/task.json",
+        "sha256": "2a914434e81264598a933570601b3eb87de8698bec1e60b88e6bf8d6bb319a12"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-base-ui-reference-1010/task.json",
+        "sha256": "f737900b92ede47d62519374a4b14d915cda18db871a961b540c992364277a78"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-base-ui-review-1010/task.json",
+        "sha256": "0bbe8e22cd4cb600dba17d809267408d6f11ca91f07abf3337f7e51208eb1cae"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-wu-continuous-attack-v2-1010/task.json",
+        "sha256": "4e4a98215271489dfd4221b924753eaf66439ea8dbd829ab8bb0c028469534eb"
+      },
+      {
+        "file": "docs/evidence/2026-10-11-WF-base-cohesion-1011/task.json",
+        "sha256": "24a01907fd1ba40c9643ad6b9bda991e7ebe397fd3237300f4df48bd77096226"
+      },
+      {
+        "file": "docs/evidence/2026-10-11-WF-base-framework-1011/task.json",
+        "sha256": "346fd9ac6448aa76c247df89eaf5a4232f41e5fe58ea8385ef9008ddbbfb5cd9"
+      },
+      {
+        "file": "docs/evidence/2026-10-11-WF-base-iterate-1011/task.json",
+        "sha256": "fb319d10b9b5592edd08b4409a3cf96fc4e04da8350652b7669802a9a6a7b80a"
+      },
+      {
+        "file": "docs/evidence/2026-10-11-WF-base-redesign-v7/task.json",
+        "sha256": "d5d5726c13b12b0e31d456c21f74328ac9d68d95a32d68bc0e31356b849fd843"
+      },
+      {
+        "file": "docs/evidence/2026-10-11-WF-base-refine-1011/task.json",
+        "sha256": "474a4d0dfaa525cec193c2944795d515b483d3448695a45de2c3358a2257c802"
+      },
+      {
+        "file": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/task.json",
+        "sha256": "2b0abf92b5edf87a877d7029a7c3dd10a9a33000b3b1decfe703e1c17f2f6bbc"
+      },
+      {
+        "file": "docs/evidence/2026-10-12-WF-ark-ui-reference-1012/task.json",
+        "sha256": "c20be8a5ee35cc6b4865d2eb072c2005b4b21b89d1bc569e91c1e1f6f3ebac28"
+      },
+      {
+        "file": "docs/evidence/2026-10-12-WF-battle-ui-overhaul/task.json",
+        "sha256": "65cb4e95b14794b4638b5565bc553e97ea88dc52e26fe7040689f144cee271c0"
+      },
+      {
+        "file": "docs/evidence/2026-10-12-WF-four-character-skins/task.json",
+        "sha256": "f923d865ea91cb6685c3d8133ce053f7e7db716004a020483e75f95d3b1c2902"
+      },
+      {
+        "file": "docs/evidence/2026-10-12-WF-four-player-review/task.json",
+        "sha256": "a15fcf08eb600699edd52c22f74c64f78b8e1fa1d536c2f19aec4a700eea01bf"
+      },
+      {
+        "file": "docs/evidence/2026-10-12-WF-selfplay-fixes/task.json",
+        "sha256": "07aa1c703d19149c1383b52cb9021e8488f683bc237b506feaced32ff1617568"
+      },
+      {
+        "file": "docs/evidence/2026-10-12-WF-zzz-base-overhaul/task.json",
+        "sha256": "aeb2d3be2ec9fa9271e2d19a5a0cba0715cf51840a70452a0c799b8320ff7a17"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-code-audit-efficiency-1013/task.json",
+        "sha256": "4e6509283799c1104dce2e543b9f925c9f91ea1878fe839da2aea01984efbad2"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-code-audit-efficiency-b2-1013/task.json",
+        "sha256": "9cee0f1b023376f2dab38e1918a1e351d1e276623377bb9eb3dca8f1f2a060c6"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-completed-pack-1013-b2/task.json",
+        "sha256": "53189777c421df685dccbebf1c7260143098ce285726c4fe1c27341feaad2dfe"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-four-player-fixes-1013/task.json",
+        "sha256": "3beea4e7168b185cab0837ca315d316640b5e1fb4e5115473e5fc6bae31ccb2c"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-friday-clean-ship-1013/task.json",
+        "sha256": "25bb9c7c3b2a8556ab1e7a03cb3559ef625b1a766aadda7bf358b4933ad2bbf6"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-nonbrowser-failures-b2-1013/task.json",
+        "sha256": "2f06360f0b2196748dfd71cc1fc9729d6cc056595fd34cc1566d9741c4853fbf"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-nonbrowser-repairs-1013/task.json",
+        "sha256": "8228d92731907eee50422b54a85df8fb27bdec70600155273b5456396edd6579"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-ship-pathspec-1013/task.json",
+        "sha256": "ad0c1a38b4aa31b22ef37264d7c4865f354ff29d39c5ccd2fde442b7609c1585"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-teaser-pv-1013/task.json",
+        "sha256": "9e185d75c453e8ea5db81e7c5565ed3d1272966ca98bf84f99656d03b8c4aacb"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-teaser-pv-v2-1013/task.json",
+        "sha256": "e8b3b85b51f22ec94b669280830fe055a913bc50470bb4ef897631d300f1befe"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-teaser-pv-v3-1013/task.json",
+        "sha256": "111631305ddb483b33d09dfe7b84a22eeb00637f1034d2b84569e659fe8f2113"
+      },
+      {
+        "file": "docs/evidence/2026-10-14-WF-cloud-review-integration-1014/task.json",
+        "sha256": "c143be2b6f75dcac64408b8cf79cb837e8dc7fba95939f734bc56cd0773a549a"
+      },
+      {
+        "file": "docs/evidence/2026-10-14-WF-friday-cloud-review-1014/task.json",
+        "sha256": "f493ba1547a8bd9ac5992854b3d82ade97714436f1e3e06bd7a5a10e76779b53"
+      },
+      {
+        "file": "docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/task.json",
+        "sha256": "33a53b5f3fc33ffe6bf04037f4b7f91ffcc7d20309f4d0d813ea496fca4a8e8f"
+      },
+      {
+        "file": "docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/task.json",
+        "sha256": "997f07fa5f9d4cb2203ade817d6f97adc031d2e396a4df1a3957293901a75ea1"
+      },
+      {
+        "file": "docs/evidence/2026-10-14-WF-retired-art-1014/task.json",
+        "sha256": "778e2ce5f11565c97eb731306f7a71d3be4bd235d3bbe0973c9fd98b416ca97f"
+      },
+      {
+        "file": "docs/evidence/2026-10-15-WF-arknights-art-ui-skill-r2/task.json",
+        "sha256": "4982c5b89e426c2e05f819c32953f9a28c43b07a2fca2aa31af72bb2fc522c58"
+      },
+      {
+        "file": "docs/evidence/2026-10-15-WF-arknights-art-ui-skill-r3/task.json",
+        "sha256": "88ac65ad80721bd43b810949a2695248e76cbb1f35e30acd39331090e7de0884"
+      },
+      {
+        "file": "docs/evidence/2026-10-15-WF-arknights-art-ui-skill/task.json",
+        "sha256": "c743e135b23c1c2878c3fc990be8390b0919046cb890a00bdf0c29ff4bc757bd"
+      },
+      {
+        "file": "docs/evidence/2026-10-15-WF-arknights-skill-forward-test/task.json",
+        "sha256": "4ec10786c88a0104da945fe3aa71010f92266769121f796fb64fb81ee4eef085"
+      },
+      {
+        "file": "docs/evidence/2026-10-15-WF-arknights-skill-review-fix/task.json",
+        "sha256": "910b04de111f7f5e54e9f2ac3090ca1566186148a8b16c352c07104c8541d545"
+      },
+      {
+        "file": "docs/evidence/2026-10-15-WF-fresh-run-fixes-1015/task.json",
+        "sha256": "a21d45f476129e0da5bbe11b4d967f48fe9bc36bd8d5c85b0e539f8f179dea41"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-visible-playback-waits/task.json",
+        "sha256": "89cc0327461c3c17f7643afac817a44af88a69be048177282033a405777c002a"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-glass-1016/task.json",
+        "sha256": "35cfba7a0350fc5353794f9b499e0861861096035af2bf98dc682b16a3a844f9"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-input-guards-1016/task.json",
+        "sha256": "f142f27bac8637c85f5fdeccd16721e1ebb3edd648093cf9714db42fa8655ebc"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-pile-readability-1016/task.json",
+        "sha256": "9589f147efb7f4cffe08fd0f16e469447d64fa11274bf796f6782cc4482b6075"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-platform-live-1016/task.json",
+        "sha256": "dc1fdd0a868855ef8d665462cb430f17a5fd6aaa801cc61f24b09524e02621d7"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-platform-minimal-1016/task.json",
+        "sha256": "71b67a4f97b1217601d7c8cca3639d5f8eeb7ab80d6ac0d63785ef5e37c74e24"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-play-feedback-1016/task.json",
+        "sha256": "fc6b5ab11f87e918c24f22ada15c942957a5bcbe97cb27e7bd34a8befe4b6e36"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-return-1016/task.json",
+        "sha256": "ee934bd2ae13763d70ab56707a8376e1cdc0f30f2247866d7f9e75d78ad39feb"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-expedition-renewal-1016/task.json",
+        "sha256": "5ecab68eed575da134ef8bf1c6ca8db3cfe6e6d6872ed4bfd972a90c896ff752"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-final-cloud-ship-1016/task.json",
+        "sha256": "4c0a188eeea124ce15fd6318725b30a54fb9718c2dd7ae72cbc36f0e94d81af2"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-game-performance-1016/task.json",
+        "sha256": "af6444d695d2a8ed1a1b70184cd608d1c5f4a7ded60939c3a99a061b0841ece2"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-game-performance-wide-1016/task.json",
+        "sha256": "4cb9f7e000b68c31c825120cd90651acb867d34ba4d38791a4635b1c0c96b27d"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-integration-ship-1016/task.json",
+        "sha256": "b27f79dee8d8e89be6e5b4746fd771aab05ddff0a8cc116bea1f0011f51e2b7a"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-local-cloud-handoff-1016/task.json",
+        "sha256": "e70a9e728b44975c20eec25f44708c3287fa34612aecdab6e329455a6449051d"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-map-node-status-1016/task.json",
+        "sha256": "045ed53e0bca7e0161f6304d7901ca7416957f84837dd291278ca93e522efc63"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-reward-experience-1016/task.json",
+        "sha256": "8aba12ab46d62ba57bf72dca3edb6c28fde8badc9f2b18fa159cd64e1afb1c0c"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-shop-continuity-1016/task.json",
+        "sha256": "880de7d2d1fcb6c6122490d2b0384910231edaff0bd0164eb6dc5dfaf18c7a0e"
+      },
+      {
+        "file": "docs/evidence/2026-10-18-WF-deep-runtime-1018/task.json",
+        "sha256": "84cb84bacb7d4c6d071f4ed6a718c86b3667766942226c580b94713361652b06"
+      },
+      {
+        "file": "docs/evidence/2026-10-18-WF-page-perf-1018/task.json",
+        "sha256": "4d1d997d73dbfd8592d069c48461510bd8bd13076fdbb0817dd553352233c9b9"
+      },
+      {
+        "file": "docs/evidence/2026-10-18-WF-perf-budgets-1018/task.json",
+        "sha256": "25fc17e02a027ca81d2a82a9fda35dc32aff681ca9bdaab8426df5937af98a13"
+      },
+      {
+        "file": "docs/evidence/2026-10-19-WF-bag-reward-slice-1019/task.json",
+        "sha256": "11daba0dcf7a245dc3a78426184e670e684e2a0c73a81a985acfe53b0c4d8fb3"
+      },
+      {
+        "file": "docs/evidence/2026-10-19-WF-card-description-audit-1019/task.json",
+        "sha256": "79275df3c4eb54a44076958bf49d81660e49eb00d6480608b16277e33b86ac3d"
+      },
+      {
+        "file": "docs/evidence/2026-10-19-WF-card-description-fixes-1019/task.json",
+        "sha256": "88c609c1f92aabed84b9646ce4faf3ab96efa30671528902e12362c8772ea0bb"
+      },
+      {
+        "file": "docs/evidence/2026-10-19-WF-map-drag-1019/task.json",
+        "sha256": "27b6d46808942892e3b26690b0444ab7a104e33fd6eb79cb2a78b8e580dc925a"
+      },
+      {
+        "file": "docs/evidence/2026-10-19-WF-ui-target-motion-1019/task.json",
+        "sha256": "7ab9e0c20a3b82a1702412077dd461785ed466d03ae79123208332b4a3808c28"
+      },
+      {
+        "file": "docs/PARALLEL-REGISTRY.md",
+        "sha256": "eb9df6fb56022539c67e26ffe11b903e77b5f2c64cd73693e9173883bd59716e"
+      },
+      {
+        "file": "docs/PENDING.md",
+        "sha256": "e5e6c395a61d371fa0376baac63ddb4b908454f573849583960ba61297d3782e"
+      },
+      {
+        "file": "docs/STATUS.md",
+        "sha256": "3ad8d38b462fc1b2096254f5b7fc48809ebea7fd79a9fed51f8968eeea9f5fb3"
+      },
+      {
+        "file": "eslint.config.js",
+        "sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae"
+      },
+      {
+        "file": "game/css/archive-motion.css",
+        "sha256": "5fd3a8a99f91579defa7ca26bd314c9dcafd2e8ece886990411932e9d8a76873"
+      },
+      {
+        "file": "game/css/camp-entry.css",
+        "sha256": "dbe20d117eb58295f75eb805ac97be191c6f31c8646a20ef2946e987a78a0cb4"
+      },
+      {
+        "file": "game/css/card-state-motion.css",
+        "sha256": "60c1703c56e31fadec5e341b7a9be306c226469d0ca9404608abd9055a175f96"
+      },
+      {
+        "file": "game/css/feedback-theme.css",
+        "sha256": "fca3128dbd349bebaad2dcc7aae55822ec57c9dbc7656dd86705d664dd872dc7"
+      },
+      {
+        "file": "game/css/page-visual-ready.css",
+        "sha256": "1f45d138d9d3cc1ed4319cebfd3f1bd4d2bffeb01c98a8a93d9ed074e8ce1bb4"
+      },
+      {
+        "file": "game/css/rarity-reveal.css",
+        "sha256": "923d49e4d5a9aa78c736af8957e132b0b8e50f28c9bb9e4bf889f0b7d4f4c464"
+      },
+      {
+        "file": "game/css/selection-state-motion.css",
+        "sha256": "0a13e0c5a3050aaa0ea3e62622f61b8c111c8963cc709130d2a2e39a6fb66c99"
+      },
+      {
+        "file": "game/src/core/map-image-ready.js",
+        "sha256": "77f5a75f98b42c2c567ba9411c1ea29d0583f7db3edd4908e9a4e3d283dce3fb"
+      },
+      {
+        "file": "game/src/hub/bag-pane-view.js",
+        "sha256": "2f45ee252c9b8984963777b41943920af162d48e78296d0487ce30c3717cbc83"
+      },
+      {
+        "file": "game/src/ui/archive-motion.js",
+        "sha256": "ac5d29f524551f9c65787f2f16ae6812b2bb8df31fbd17dde4be6c2b83c96dc0"
+      },
+      {
+        "file": "game/src/ui/camp-entry.js",
+        "sha256": "84a03a47534afbe1ca284ede88975597e044e948b76df97921123b47454cb4e0"
+      },
+      {
+        "file": "game/src/ui/card-result-feedback.js",
+        "sha256": "b17b33826b2ffd3169f5926ee3c63f64872e4c4e5eee19260820241e162d971b"
+      },
+      {
+        "file": "game/src/ui/card-state-motion.js",
+        "sha256": "550aa2ad983f1b7358231a3f6492c82b5deed953b324c62a817b2a9c0d60c7fe"
+      },
+      {
+        "file": "game/src/ui/feedback-theme.js",
+        "sha256": "926bfbfdbab55743ec18d48bc1837ad3b02ebe58bd936d1d9ad6cb5f97eb43aa"
+      },
+      {
+        "file": "game/src/ui/general-transition.js",
+        "sha256": "73ba11f673b79f5948056013cb0c1fafd0eca1f5d7ad4034d579a74ca904b6af"
+      },
+      {
+        "file": "game/src/ui/interface-motion.js",
+        "sha256": "3c023dc3833cc517629e1c5f9467051b55d0f8c78df1aec65f95c43a31d7f6b3"
+      },
+      {
+        "file": "game/src/ui/motion-presets.js",
+        "sha256": "057b6dbd3c990d6c89fceeb22c37025da4c2c4c10f93f18183e796e19e424b04"
+      },
+      {
+        "file": "game/src/ui/navigation-motion.js",
+        "sha256": "0f2a81d62befd407d9ed21f93af15cd8dbdc32625a251d9a681b3c5c3e25d53f"
+      },
+      {
+        "file": "game/src/ui/page-motion-profiles.js",
+        "sha256": "e2775cb99528cd7d53c6d59b06d23c45b8937c6018814bf716c93c292401bdf8"
+      },
+      {
+        "file": "game/src/ui/page-surface-lifetime.js",
+        "sha256": "82a86bfa261992aa48a7f93fc109ea173e3532ff52cefc37a064b4420aa0761d"
+      },
+      {
+        "file": "game/src/ui/page-visual-ready.js",
+        "sha256": "70e4534e757047502ee45d0b743cfee823147cdac659fbdf8216a0fdbea5d342"
+      },
+      {
+        "file": "game/src/ui/rarity-reveal.js",
+        "sha256": "952191567d461dd42ffdf80534d636c516c40fab2fa2d5386de245d333c001b6"
+      },
+      {
+        "file": "game/src/ui/reward-acquisition-motion.js",
+        "sha256": "b22a616aa4dd247afe736df4b47dca25f55539aac8701430481f195ac8b7ff85"
+      },
+      {
+        "file": "game/src/ui/reward-card-feedback.js",
+        "sha256": "3161e576c826ca73aeb4444a34072b8364bd1b6ae72f7cdec860c4c5db82054c"
+      },
+      {
+        "file": "game/src/ui/reward-state.js",
+        "sha256": "43e6827dc4e737f6f193a478c4745179a59e55fc814a0786bad8da51feb4b315"
+      },
+      {
+        "file": "game/src/ui/selection-state-motion.js",
+        "sha256": "4f611afaa34fa07126f20915959cd0d99e47fa24623f9b8b35c6d064ddbd2cea"
+      },
+      {
+        "file": "game/src/ui/surface-motion.js",
+        "sha256": "ad2b98ba2170595f97c43c50089bd20cf764b0a17d77016bd7a03e85854da854"
+      },
+      {
+        "file": "game/src/ui/target-motion.js",
+        "sha256": "3e24255a2a7b58788ec86e129a27af5c426ebfeed65650574f4e2c9bc87c1206"
+      },
+      {
+        "file": "jsconfig.battle-settlement.json",
+        "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+      },
+      {
+        "file": "jsconfig.battle-snapshot.json",
+        "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+      },
+      {
+        "file": "jsconfig.card-rules.json",
+        "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+      },
+      {
+        "file": "jsconfig.json",
+        "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+      },
+      {
+        "file": "jsconfig.strict-foundations.json",
+        "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+      },
+      {
+        "file": "jsconfig.strict-hand-selection.json",
+        "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+      },
+      {
+        "file": "jsconfig.strict-selection.json",
+        "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+      },
+      {
+        "file": "jsconfig.strict-ui.json",
+        "sha256": "a53bcb7a075a6fab45f5b1076b97cb3449e3313eca05b193da1ede8ec5695abc"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "ccc6dcf969aad1ca0d5779932a1bfec3c52f8052957192b9358251505c90d156"
+      },
+      {
+        "file": "package.json",
+        "sha256": "64c0e6e37863d632fcd052a9b32e31b007081d81e6cfec630a53a6a6cf83775d"
+      },
+      {
+        "file": "tests/bag-pane-retained.test.js",
+        "sha256": "559b4699ec0c8f91012757533537031bb96aa47dd7dc42ba4ad8ff4f48b321c4"
+      },
+      {
+        "file": "tests/card-state-motion.test.js",
+        "sha256": "47410e94f427222bee90d795c7eac164dc4b0edb67f9a0c2dee31f15c2bad6e2"
+      },
+      {
+        "file": "tests/reward-acquisition-motion.test.js",
+        "sha256": "efb42bdadf69d0c36d00f711c15fb8110422469e6b8e3ed9663a55a97e8a0d77"
+      },
+      {
+        "file": "tests/reward-card-feedback.test.js",
+        "sha256": "edc267ad0e8f73de52848ed2abb9275304cc21ffbdbd6eefe39bafaec3fdbe9a"
+      },
+      {
+        "file": "tests/selection-state-motion.test.js",
+        "sha256": "679fd016be878db96ff05510280075fc14b92c044092b9d21629cac9a212ca02"
+      },
+      {
+        "file": "tests/surface-motion.test.js",
+        "sha256": "45c9b3477736830ab7769161db8c863060ec03fbc6b84ba069566dd8d192b251"
+      },
+      {
+        "file": "tests/target-motion.test.js",
+        "sha256": "612578a4d82e3344cd21cd3580a79dee258b1a2b104209a66d34ae4714725050"
+      },
+      {
+        "file": "tests/target-surface.test.js",
+        "sha256": "00d693dfe47a087d8f58d4caa6440aa309eec6d4034b632b5ef7c9e97fbffdaa"
+      },
+      {
+        "file": "vite.config.js",
+        "sha256": "2cb7165c3c125369b8d0078d9a752700e61cde336ca6a0ce107d1afcdf6a14d0"
+      }
+    ],
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "arch": "x64",
+      "dependencies": {
+        "vitest": "3.2.7",
+        "vite": "6.4.4",
+        "typescript": "7.0.2",
+        "eslint": "10.11.0",
+        "jsdom": "25.0.1",
+        "acorn": "8.18.0",
+        "acorn-walk": "8.3.5"
+      },
+      "ci": null,
+      "nodeOptions": null,
+      "forceFullTests": null
+    },
+    "documents": false,
+    "assets": false,
+    "selection": {
+      "mode": "targeted",
+      "roots": [
+        "tests/target-motion.test.js",
+        "tests/card-state-motion.test.js",
+        "tests/reward-acquisition-motion.test.js",
+        "tests/selection-state-motion.test.js",
+        "tests/target-surface.test.js",
+        "tests/surface-motion.test.js",
+        "tests/reward-card-feedback.test.js",
+        "tests/bag-pane-retained.test.js"
+      ],
+      "files": [
+        "game/css/archive-motion.css",
+        "game/css/camp-entry.css",
+        "game/css/card-state-motion.css",
+        "game/css/feedback-theme.css",
+        "game/css/page-visual-ready.css",
+        "game/css/rarity-reveal.css",
+        "game/css/selection-state-motion.css",
+        "game/src/core/map-image-ready.js",
+        "game/src/hub/bag-pane-view.js",
+        "game/src/ui/archive-motion.js",
+        "game/src/ui/camp-entry.js",
+        "game/src/ui/card-result-feedback.js",
+        "game/src/ui/card-state-motion.js",
+        "game/src/ui/feedback-theme.js",
+        "game/src/ui/general-transition.js",
+        "game/src/ui/interface-motion.js",
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/navigation-motion.js",
+        "game/src/ui/page-motion-profiles.js",
+        "game/src/ui/page-surface-lifetime.js",
+        "game/src/ui/page-visual-ready.js",
+        "game/src/ui/rarity-reveal.js",
+        "game/src/ui/reward-acquisition-motion.js",
+        "game/src/ui/reward-card-feedback.js",
+        "game/src/ui/reward-state.js",
+        "game/src/ui/selection-state-motion.js",
+        "game/src/ui/surface-motion.js",
+        "game/src/ui/target-motion.js",
+        "tests/bag-pane-retained.test.js",
+        "tests/card-state-motion.test.js",
+        "tests/reward-acquisition-motion.test.js",
+        "tests/reward-card-feedback.test.js",
+        "tests/selection-state-motion.test.js",
+        "tests/surface-motion.test.js",
+        "tests/target-motion.test.js",
+        "tests/target-surface.test.js"
+      ],
+      "existence": [],
+      "inventories": [],
+      "contracts": [],
+      "reason": "逐根独立证明输入范围；未知根不能借其他测试的fixture契约豁免"
+    },
+    "groups": {
+      "code": "e71d33d4e15ea4415d8c59750ac8b22487705b106ece290eb6c226108a005d47",
+      "docs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "state": "1cb29b685496a77abcb6723871807e27d2e519d27260bdea5f78517afcc1f620",
+      "environment": "360f22bba2965b75cae34d33a710caaeb18e52a7b9a0df3e5de864672bbd9e76"
+    },
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  },
+  "after": {
+    "sha256": "7bf0e49eac895de9935a67d2ab109c3952bbd8b0589e7eafabe894420d7c621d",
+    "manifest": [
+      {
+        "file": ".githooks/pre-commit",
+        "sha256": "47893464ecbcb80013cbd41db3db5cd3db5c7429a0cbffc9dbb0e6912ba52068"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-full-repository-review/task.json",
+        "sha256": "56c99a5e2f865aac7d3651fafd2c4bc771b87034342b4b92c51284c0f6fbf817"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-lean-workflow/task.json",
+        "sha256": "fb10db8484d2015531c6f50d1142e56d40b78114f3c470810f54d0cec377b00f"
+      },
+      {
+        "file": "docs/evidence/2026-09-30-workflow-review-fixes/task.json",
+        "sha256": "7529efb752cfe4d3875ab415597adc4b88f63bad9ee9c8885aa9ef9a7b37d840"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-1/task.json",
+        "sha256": "87f5c33558af6f52c7a50b9fe86f8f5133ed0a58b3e9ef380ca53fc604a9329b"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-2/task.json",
+        "sha256": "6bdb06bbbf26bcbc029e167c0d6a6bd21420e098e2c4329f96035d3de72bd902"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-DEBT-3/task.json",
+        "sha256": "fdc2ed6aad1c5cf20d3258d32f7836f0cb047852e6b7e5dcc5b70d94f55f46d0"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-automation/task.json",
+        "sha256": "ee4018aad4f0e98cd82c9104476a6c217e7000b8e42e1531ad4a39c5a87749ae"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-decouple/task.json",
+        "sha256": "2250963edfa165dea21d46d679d03c2b1295f30cbd47fd09da74cdb3c958f27d"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-flow-redesign/task.json",
+        "sha256": "d6c88a124e7d714f29e28fe61a86e0d8a528b42a21575aa437ac7ec4097d445c"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-production-research/task.json",
+        "sha256": "bb2934f113227ef9b03071f2c7656e0a61b320a13c3b59e751e7917f8a4f3c27"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes-crossplatform/task.json",
+        "sha256": "af714f27e7067293f4b2fd00ab38b9d476650e6342c0c971b1533c5fe9507167"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-quality-art-fixes/task.json",
+        "sha256": "4bf05ca76394be31df66ac841a98b6e8a6c9c1a93b0bedcd7f4d012a3cdaf0a3"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-review/task.json",
+        "sha256": "cefc4ecf8fe895d9bd322122b6d380660e6d42b2df0f10e98eb3e119973f7586"
+      },
+      {
+        "file": "docs/evidence/2026-10-02-seven-departments-v2/task.json",
+        "sha256": "776320fc8065871d96b6bce0c0806e325518717ed0b20e09077ca77539e9274c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-experience-art-plan/task.json",
+        "sha256": "e3ea75d9bb5fbf657664cfc0521e93bab1381b735647a7a4fcc9224939ae605b"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-experience-art-exec/task.json",
+        "sha256": "5751581ca69fe5ba1d81c4d803fe01cce046b85d15a55887f58c031ad626ed0c"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-art-v2/task.json",
+        "sha256": "2f4eb76b9c9594d7594f6dd04127dd44035204ed9c4a394d2f646ac112de63ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-home-layout/task.json",
+        "sha256": "6f74540ad681ec952da2e8ec1d49b36b8321cfce09319ce6508d3046731febf6"
+      },
+      {
+        "file": "docs/evidence/2026-10-03-WF-xart-z1/task.json",
+        "sha256": "6c872e2e62530e22818ef3bbf5c49343a206647ec59dac0523184f2de4a676ea"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-1004/task.json",
+        "sha256": "3179b2f8a0919fe52a1b5f7b77156c057e91eed06ca04cacbce78cdd6d99cfe1"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r2/task.json",
+        "sha256": "e20177c47ef50180968058350a01d053d0869912d33424bd93d3d3f58dfd98ec"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r3/task.json",
+        "sha256": "8f3cfeca13faf07df5d021fb4c13c3806ae623a4c49bdd5e4f386dd03200e7c2"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r4/task.json",
+        "sha256": "6230d9073433b0c4e7f92a2a122b749af131053c529f9e25b9d10b9294caaafe"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-feedback-r5/task.json",
+        "sha256": "c7e969cd6fb3646dedf66d88b7ef78b7697228aa0158a7353a5fba1f60e63c3f"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-photo-studio-unified/task.json",
+        "sha256": "5b3b6a5e64dcd00a1db4ec607585efd0dd1219ee36f1c2dc421b64d75afb2f01"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-shadow-cards-lowdetail/task.json",
+        "sha256": "beff569b4672957dfd05f7bcd9be0b557ce9723e57027db0f8820826c0e2671b"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-fullmoon/task.json",
+        "sha256": "b2cc8f2eb4839568fa83656113c07df3fa01dc10619e285081754a2f06b8d7e8"
+      },
+      {
+        "file": "docs/evidence/2026-10-04-WF-xingyue-wind-song/task.json",
+        "sha256": "0a5ee0d13ac9fa61bfd8e8202c059a95e28351c884d3609f1287256a7f05529c"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-card-ally-redesign/task.json",
+        "sha256": "cb1eb9a7ae68374d3ddf23c96c4433e7d8e4013e0d7bc5ce926269f2c7066ce7"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-music-independent-review/task.json",
+        "sha256": "5268a56c5bd8b6aa9b060a0ce58de90dfb204033a43887571565c56f03fdb16c"
+      },
+      {
+        "file": "docs/evidence/2026-10-05-WF-wu-parts-full/task.json",
+        "sha256": "54db65ff123f33b88215567abcffe668f1b52ec4c35cb8e66a93cda6cdda18aa"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-base-camp-redo/task.json",
+        "sha256": "6e74985acc2dee360c2d21e396d36d610e8a970c0e292c6bfd3d813da4309437"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-doc-system-art-cards-1009/task.json",
+        "sha256": "5e6d07f936a166a6db1f976aae0866b0f1e5488b4e892bb6349c5b9969f2533d"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-doc-system-followup-1009/task.json",
+        "sha256": "bfac99e2107eb081eadb33853daa0b566e33fc90d9994c47272267a91381476d"
+      },
+      {
+        "file": "docs/evidence/2026-10-09-WF-four-layer-slice-1009/task.json",
+        "sha256": "6b76da44e620f640f8fae2e8012a1bed1be1b75af9e24d67a5a5f77ede194cad"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-base-pages/task.json",
+        "sha256": "ffb3721016601fd48dafa2222e61803ee78ab5e548985fe001ff983d044a7229"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-base-design-audit-1010/task.json",
+        "sha256": "f153d84f877361b40ce5e3bafbe5e8974459c5c6982b474e75d094d68c3d360b"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-base-iterate-1010/task.json",
+        "sha256": "72356812448563a9d12fb9267fb463e06e347c272fe41fdf0ac12fcd6f117458"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-base-style-prune-1010/task.json",
+        "sha256": "9482da5b57fcac5d62393cc4f07a8a0873916fa66d1dd807e602aa24cc972db4"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-base-ui-polish-1010/task.json",
+        "sha256": "2a914434e81264598a933570601b3eb87de8698bec1e60b88e6bf8d6bb319a12"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-base-ui-reference-1010/task.json",
+        "sha256": "f737900b92ede47d62519374a4b14d915cda18db871a961b540c992364277a78"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-base-ui-review-1010/task.json",
+        "sha256": "0bbe8e22cd4cb600dba17d809267408d6f11ca91f07abf3337f7e51208eb1cae"
+      },
+      {
+        "file": "docs/evidence/2026-10-10-WF-wu-continuous-attack-v2-1010/task.json",
+        "sha256": "4e4a98215271489dfd4221b924753eaf66439ea8dbd829ab8bb0c028469534eb"
+      },
+      {
+        "file": "docs/evidence/2026-10-11-WF-base-cohesion-1011/task.json",
+        "sha256": "24a01907fd1ba40c9643ad6b9bda991e7ebe397fd3237300f4df48bd77096226"
+      },
+      {
+        "file": "docs/evidence/2026-10-11-WF-base-framework-1011/task.json",
+        "sha256": "346fd9ac6448aa76c247df89eaf5a4232f41e5fe58ea8385ef9008ddbbfb5cd9"
+      },
+      {
+        "file": "docs/evidence/2026-10-11-WF-base-iterate-1011/task.json",
+        "sha256": "fb319d10b9b5592edd08b4409a3cf96fc4e04da8350652b7669802a9a6a7b80a"
+      },
+      {
+        "file": "docs/evidence/2026-10-11-WF-base-redesign-v7/task.json",
+        "sha256": "d5d5726c13b12b0e31d456c21f74328ac9d68d95a32d68bc0e31356b849fd843"
+      },
+      {
+        "file": "docs/evidence/2026-10-11-WF-base-refine-1011/task.json",
+        "sha256": "474a4d0dfaa525cec193c2944795d515b483d3448695a45de2c3358a2257c802"
+      },
+      {
+        "file": "docs/evidence/2026-10-11-WF-selection-map-implementation-1011/task.json",
+        "sha256": "2b0abf92b5edf87a877d7029a7c3dd10a9a33000b3b1decfe703e1c17f2f6bbc"
+      },
+      {
+        "file": "docs/evidence/2026-10-12-WF-ark-ui-reference-1012/task.json",
+        "sha256": "c20be8a5ee35cc6b4865d2eb072c2005b4b21b89d1bc569e91c1e1f6f3ebac28"
+      },
+      {
+        "file": "docs/evidence/2026-10-12-WF-battle-ui-overhaul/task.json",
+        "sha256": "65cb4e95b14794b4638b5565bc553e97ea88dc52e26fe7040689f144cee271c0"
+      },
+      {
+        "file": "docs/evidence/2026-10-12-WF-four-character-skins/task.json",
+        "sha256": "f923d865ea91cb6685c3d8133ce053f7e7db716004a020483e75f95d3b1c2902"
+      },
+      {
+        "file": "docs/evidence/2026-10-12-WF-four-player-review/task.json",
+        "sha256": "a15fcf08eb600699edd52c22f74c64f78b8e1fa1d536c2f19aec4a700eea01bf"
+      },
+      {
+        "file": "docs/evidence/2026-10-12-WF-selfplay-fixes/task.json",
+        "sha256": "07aa1c703d19149c1383b52cb9021e8488f683bc237b506feaced32ff1617568"
+      },
+      {
+        "file": "docs/evidence/2026-10-12-WF-zzz-base-overhaul/task.json",
+        "sha256": "aeb2d3be2ec9fa9271e2d19a5a0cba0715cf51840a70452a0c799b8320ff7a17"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-code-audit-efficiency-1013/task.json",
+        "sha256": "4e6509283799c1104dce2e543b9f925c9f91ea1878fe839da2aea01984efbad2"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-code-audit-efficiency-b2-1013/task.json",
+        "sha256": "9cee0f1b023376f2dab38e1918a1e351d1e276623377bb9eb3dca8f1f2a060c6"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-completed-pack-1013-b2/task.json",
+        "sha256": "53189777c421df685dccbebf1c7260143098ce285726c4fe1c27341feaad2dfe"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-four-player-fixes-1013/task.json",
+        "sha256": "3beea4e7168b185cab0837ca315d316640b5e1fb4e5115473e5fc6bae31ccb2c"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-friday-clean-ship-1013/task.json",
+        "sha256": "25bb9c7c3b2a8556ab1e7a03cb3559ef625b1a766aadda7bf358b4933ad2bbf6"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-nonbrowser-failures-b2-1013/task.json",
+        "sha256": "2f06360f0b2196748dfd71cc1fc9729d6cc056595fd34cc1566d9741c4853fbf"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-nonbrowser-repairs-1013/task.json",
+        "sha256": "8228d92731907eee50422b54a85df8fb27bdec70600155273b5456396edd6579"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-ship-pathspec-1013/task.json",
+        "sha256": "ad0c1a38b4aa31b22ef37264d7c4865f354ff29d39c5ccd2fde442b7609c1585"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-teaser-pv-1013/task.json",
+        "sha256": "9e185d75c453e8ea5db81e7c5565ed3d1272966ca98bf84f99656d03b8c4aacb"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-teaser-pv-v2-1013/task.json",
+        "sha256": "e8b3b85b51f22ec94b669280830fe055a913bc50470bb4ef897631d300f1befe"
+      },
+      {
+        "file": "docs/evidence/2026-10-13-WF-teaser-pv-v3-1013/task.json",
+        "sha256": "111631305ddb483b33d09dfe7b84a22eeb00637f1034d2b84569e659fe8f2113"
+      },
+      {
+        "file": "docs/evidence/2026-10-14-WF-cloud-review-integration-1014/task.json",
+        "sha256": "c143be2b6f75dcac64408b8cf79cb837e8dc7fba95939f734bc56cd0773a549a"
+      },
+      {
+        "file": "docs/evidence/2026-10-14-WF-friday-cloud-review-1014/task.json",
+        "sha256": "f493ba1547a8bd9ac5992854b3d82ade97714436f1e3e06bd7a5a10e76779b53"
+      },
+      {
+        "file": "docs/evidence/2026-10-14-WF-friday-runtime-assets-1014/task.json",
+        "sha256": "33a53b5f3fc33ffe6bf04037f4b7f91ffcc7d20309f4d0d813ea496fca4a8e8f"
+      },
+      {
+        "file": "docs/evidence/2026-10-14-WF-friday-runtime-ship-1013/task.json",
+        "sha256": "997f07fa5f9d4cb2203ade817d6f97adc031d2e396a4df1a3957293901a75ea1"
+      },
+      {
+        "file": "docs/evidence/2026-10-14-WF-retired-art-1014/task.json",
+        "sha256": "778e2ce5f11565c97eb731306f7a71d3be4bd235d3bbe0973c9fd98b416ca97f"
+      },
+      {
+        "file": "docs/evidence/2026-10-15-WF-arknights-art-ui-skill-r2/task.json",
+        "sha256": "4982c5b89e426c2e05f819c32953f9a28c43b07a2fca2aa31af72bb2fc522c58"
+      },
+      {
+        "file": "docs/evidence/2026-10-15-WF-arknights-art-ui-skill-r3/task.json",
+        "sha256": "88ac65ad80721bd43b810949a2695248e76cbb1f35e30acd39331090e7de0884"
+      },
+      {
+        "file": "docs/evidence/2026-10-15-WF-arknights-art-ui-skill/task.json",
+        "sha256": "c743e135b23c1c2878c3fc990be8390b0919046cb890a00bdf0c29ff4bc757bd"
+      },
+      {
+        "file": "docs/evidence/2026-10-15-WF-arknights-skill-forward-test/task.json",
+        "sha256": "4ec10786c88a0104da945fe3aa71010f92266769121f796fb64fb81ee4eef085"
+      },
+      {
+        "file": "docs/evidence/2026-10-15-WF-arknights-skill-review-fix/task.json",
+        "sha256": "910b04de111f7f5e54e9f2ac3090ca1566186148a8b16c352c07104c8541d545"
+      },
+      {
+        "file": "docs/evidence/2026-10-15-WF-fresh-run-fixes-1015/task.json",
+        "sha256": "a21d45f476129e0da5bbe11b4d967f48fe9bc36bd8d5c85b0e539f8f179dea41"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-visible-playback-waits/task.json",
+        "sha256": "89cc0327461c3c17f7643afac817a44af88a69be048177282033a405777c002a"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-glass-1016/task.json",
+        "sha256": "35cfba7a0350fc5353794f9b499e0861861096035af2bf98dc682b16a3a844f9"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-input-guards-1016/task.json",
+        "sha256": "f142f27bac8637c85f5fdeccd16721e1ebb3edd648093cf9714db42fa8655ebc"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-pile-readability-1016/task.json",
+        "sha256": "9589f147efb7f4cffe08fd0f16e469447d64fa11274bf796f6782cc4482b6075"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-platform-live-1016/task.json",
+        "sha256": "dc1fdd0a868855ef8d665462cb430f17a5fd6aaa801cc61f24b09524e02621d7"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-platform-minimal-1016/task.json",
+        "sha256": "71b67a4f97b1217601d7c8cca3639d5f8eeb7ab80d6ac0d63785ef5e37c74e24"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-play-feedback-1016/task.json",
+        "sha256": "fc6b5ab11f87e918c24f22ada15c942957a5bcbe97cb27e7bd34a8befe4b6e36"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-battle-return-1016/task.json",
+        "sha256": "ee934bd2ae13763d70ab56707a8376e1cdc0f30f2247866d7f9e75d78ad39feb"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-expedition-renewal-1016/task.json",
+        "sha256": "5ecab68eed575da134ef8bf1c6ca8db3cfe6e6d6872ed4bfd972a90c896ff752"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-final-cloud-ship-1016/task.json",
+        "sha256": "4c0a188eeea124ce15fd6318725b30a54fb9718c2dd7ae72cbc36f0e94d81af2"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-game-performance-1016/task.json",
+        "sha256": "af6444d695d2a8ed1a1b70184cd608d1c5f4a7ded60939c3a99a061b0841ece2"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-game-performance-wide-1016/task.json",
+        "sha256": "4cb9f7e000b68c31c825120cd90651acb867d34ba4d38791a4635b1c0c96b27d"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-integration-ship-1016/task.json",
+        "sha256": "b27f79dee8d8e89be6e5b4746fd771aab05ddff0a8cc116bea1f0011f51e2b7a"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-local-cloud-handoff-1016/task.json",
+        "sha256": "e70a9e728b44975c20eec25f44708c3287fa34612aecdab6e329455a6449051d"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-map-node-status-1016/task.json",
+        "sha256": "045ed53e0bca7e0161f6304d7901ca7416957f84837dd291278ca93e522efc63"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-reward-experience-1016/task.json",
+        "sha256": "8aba12ab46d62ba57bf72dca3edb6c28fde8badc9f2b18fa159cd64e1afb1c0c"
+      },
+      {
+        "file": "docs/evidence/2026-10-16-WF-shop-continuity-1016/task.json",
+        "sha256": "880de7d2d1fcb6c6122490d2b0384910231edaff0bd0164eb6dc5dfaf18c7a0e"
+      },
+      {
+        "file": "docs/evidence/2026-10-18-WF-deep-runtime-1018/task.json",
+        "sha256": "84cb84bacb7d4c6d071f4ed6a718c86b3667766942226c580b94713361652b06"
+      },
+      {
+        "file": "docs/evidence/2026-10-18-WF-page-perf-1018/task.json",
+        "sha256": "4d1d997d73dbfd8592d069c48461510bd8bd13076fdbb0817dd553352233c9b9"
+      },
+      {
+        "file": "docs/evidence/2026-10-18-WF-perf-budgets-1018/task.json",
+        "sha256": "25fc17e02a027ca81d2a82a9fda35dc32aff681ca9bdaab8426df5937af98a13"
+      },
+      {
+        "file": "docs/evidence/2026-10-19-WF-bag-reward-slice-1019/task.json",
+        "sha256": "11daba0dcf7a245dc3a78426184e670e684e2a0c73a81a985acfe53b0c4d8fb3"
+      },
+      {
+        "file": "docs/evidence/2026-10-19-WF-card-description-audit-1019/task.json",
+        "sha256": "79275df3c4eb54a44076958bf49d81660e49eb00d6480608b16277e33b86ac3d"
+      },
+      {
+        "file": "docs/evidence/2026-10-19-WF-card-description-fixes-1019/task.json",
+        "sha256": "88c609c1f92aabed84b9646ce4faf3ab96efa30671528902e12362c8772ea0bb"
+      },
+      {
+        "file": "docs/evidence/2026-10-19-WF-map-drag-1019/task.json",
+        "sha256": "27b6d46808942892e3b26690b0444ab7a104e33fd6eb79cb2a78b8e580dc925a"
+      },
+      {
+        "file": "docs/evidence/2026-10-19-WF-ui-target-motion-1019/task.json",
+        "sha256": "7ab9e0c20a3b82a1702412077dd461785ed466d03ae79123208332b4a3808c28"
+      },
+      {
+        "file": "docs/PARALLEL-REGISTRY.md",
+        "sha256": "9d3bdc80b88b85bc592422ada72c7050692060ad67aa532674828d65a17269e4"
+      },
+      {
+        "file": "docs/PENDING.md",
+        "sha256": "e5e6c395a61d371fa0376baac63ddb4b908454f573849583960ba61297d3782e"
+      },
+      {
+        "file": "docs/STATUS.md",
+        "sha256": "3ad8d38b462fc1b2096254f5b7fc48809ebea7fd79a9fed51f8968eeea9f5fb3"
+      },
+      {
+        "file": "eslint.config.js",
+        "sha256": "e29079fdc795c560e4ba742018455f2ba098192581ef847bb3f6e2a32bda26ae"
+      },
+      {
+        "file": "game/css/archive-motion.css",
+        "sha256": "5fd3a8a99f91579defa7ca26bd314c9dcafd2e8ece886990411932e9d8a76873"
+      },
+      {
+        "file": "game/css/camp-entry.css",
+        "sha256": "dbe20d117eb58295f75eb805ac97be191c6f31c8646a20ef2946e987a78a0cb4"
+      },
+      {
+        "file": "game/css/card-state-motion.css",
+        "sha256": "60c1703c56e31fadec5e341b7a9be306c226469d0ca9404608abd9055a175f96"
+      },
+      {
+        "file": "game/css/feedback-theme.css",
+        "sha256": "fca3128dbd349bebaad2dcc7aae55822ec57c9dbc7656dd86705d664dd872dc7"
+      },
+      {
+        "file": "game/css/page-visual-ready.css",
+        "sha256": "1f45d138d9d3cc1ed4319cebfd3f1bd4d2bffeb01c98a8a93d9ed074e8ce1bb4"
+      },
+      {
+        "file": "game/css/rarity-reveal.css",
+        "sha256": "923d49e4d5a9aa78c736af8957e132b0b8e50f28c9bb9e4bf889f0b7d4f4c464"
+      },
+      {
+        "file": "game/css/selection-state-motion.css",
+        "sha256": "0a13e0c5a3050aaa0ea3e62622f61b8c111c8963cc709130d2a2e39a6fb66c99"
+      },
+      {
+        "file": "game/src/core/map-image-ready.js",
+        "sha256": "77f5a75f98b42c2c567ba9411c1ea29d0583f7db3edd4908e9a4e3d283dce3fb"
+      },
+      {
+        "file": "game/src/hub/bag-pane-view.js",
+        "sha256": "2f45ee252c9b8984963777b41943920af162d48e78296d0487ce30c3717cbc83"
+      },
+      {
+        "file": "game/src/ui/archive-motion.js",
+        "sha256": "ac5d29f524551f9c65787f2f16ae6812b2bb8df31fbd17dde4be6c2b83c96dc0"
+      },
+      {
+        "file": "game/src/ui/camp-entry.js",
+        "sha256": "84a03a47534afbe1ca284ede88975597e044e948b76df97921123b47454cb4e0"
+      },
+      {
+        "file": "game/src/ui/card-result-feedback.js",
+        "sha256": "b17b33826b2ffd3169f5926ee3c63f64872e4c4e5eee19260820241e162d971b"
+      },
+      {
+        "file": "game/src/ui/card-state-motion.js",
+        "sha256": "550aa2ad983f1b7358231a3f6492c82b5deed953b324c62a817b2a9c0d60c7fe"
+      },
+      {
+        "file": "game/src/ui/feedback-theme.js",
+        "sha256": "926bfbfdbab55743ec18d48bc1837ad3b02ebe58bd936d1d9ad6cb5f97eb43aa"
+      },
+      {
+        "file": "game/src/ui/general-transition.js",
+        "sha256": "73ba11f673b79f5948056013cb0c1fafd0eca1f5d7ad4034d579a74ca904b6af"
+      },
+      {
+        "file": "game/src/ui/interface-motion.js",
+        "sha256": "3c023dc3833cc517629e1c5f9467051b55d0f8c78df1aec65f95c43a31d7f6b3"
+      },
+      {
+        "file": "game/src/ui/motion-presets.js",
+        "sha256": "057b6dbd3c990d6c89fceeb22c37025da4c2c4c10f93f18183e796e19e424b04"
+      },
+      {
+        "file": "game/src/ui/navigation-motion.js",
+        "sha256": "0f2a81d62befd407d9ed21f93af15cd8dbdc32625a251d9a681b3c5c3e25d53f"
+      },
+      {
+        "file": "game/src/ui/page-motion-profiles.js",
+        "sha256": "e2775cb99528cd7d53c6d59b06d23c45b8937c6018814bf716c93c292401bdf8"
+      },
+      {
+        "file": "game/src/ui/page-surface-lifetime.js",
+        "sha256": "82a86bfa261992aa48a7f93fc109ea173e3532ff52cefc37a064b4420aa0761d"
+      },
+      {
+        "file": "game/src/ui/page-visual-ready.js",
+        "sha256": "70e4534e757047502ee45d0b743cfee823147cdac659fbdf8216a0fdbea5d342"
+      },
+      {
+        "file": "game/src/ui/rarity-reveal.js",
+        "sha256": "952191567d461dd42ffdf80534d636c516c40fab2fa2d5386de245d333c001b6"
+      },
+      {
+        "file": "game/src/ui/reward-acquisition-motion.js",
+        "sha256": "b22a616aa4dd247afe736df4b47dca25f55539aac8701430481f195ac8b7ff85"
+      },
+      {
+        "file": "game/src/ui/reward-card-feedback.js",
+        "sha256": "3161e576c826ca73aeb4444a34072b8364bd1b6ae72f7cdec860c4c5db82054c"
+      },
+      {
+        "file": "game/src/ui/reward-state.js",
+        "sha256": "43e6827dc4e737f6f193a478c4745179a59e55fc814a0786bad8da51feb4b315"
+      },
+      {
+        "file": "game/src/ui/selection-state-motion.js",
+        "sha256": "4f611afaa34fa07126f20915959cd0d99e47fa24623f9b8b35c6d064ddbd2cea"
+      },
+      {
+        "file": "game/src/ui/surface-motion.js",
+        "sha256": "ad2b98ba2170595f97c43c50089bd20cf764b0a17d77016bd7a03e85854da854"
+      },
+      {
+        "file": "game/src/ui/target-motion.js",
+        "sha256": "3e24255a2a7b58788ec86e129a27af5c426ebfeed65650574f4e2c9bc87c1206"
+      },
+      {
+        "file": "jsconfig.battle-settlement.json",
+        "sha256": "ff9c6acca637b6583dc514e35f0870e8c39aa903f758919364ca3a10c4478f03"
+      },
+      {
+        "file": "jsconfig.battle-snapshot.json",
+        "sha256": "3fb7f26a7982e73c077b006c059b9a565b4353689ad04e0e634ebbe1b46a35c2"
+      },
+      {
+        "file": "jsconfig.card-rules.json",
+        "sha256": "426fb5f7c2781a1cf9427f29d326bea7e47cde4cd9338b99b3d178593632230d"
+      },
+      {
+        "file": "jsconfig.json",
+        "sha256": "3f2e1bd99ddc0cb8eb95ef70a7818e56fbcc687a8970d4615d6319396dbc2da1"
+      },
+      {
+        "file": "jsconfig.strict-foundations.json",
+        "sha256": "7d2f1e714dc03b4a67604a3928a5d1172c5214c6fce00443bacf4e56c6668c90"
+      },
+      {
+        "file": "jsconfig.strict-hand-selection.json",
+        "sha256": "4a4b2d33af7297b95a05976e5bc81aaf0baf3e64e3b8313516013994fbf11ba0"
+      },
+      {
+        "file": "jsconfig.strict-selection.json",
+        "sha256": "a141c4996d7ed5630a222e882738c6bf22c5473527a3c9e53e82686a8bd88f98"
+      },
+      {
+        "file": "jsconfig.strict-ui.json",
+        "sha256": "a53bcb7a075a6fab45f5b1076b97cb3449e3313eca05b193da1ede8ec5695abc"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "ccc6dcf969aad1ca0d5779932a1bfec3c52f8052957192b9358251505c90d156"
+      },
+      {
+        "file": "package.json",
+        "sha256": "64c0e6e37863d632fcd052a9b32e31b007081d81e6cfec630a53a6a6cf83775d"
+      },
+      {
+        "file": "tests/bag-pane-retained.test.js",
+        "sha256": "559b4699ec0c8f91012757533537031bb96aa47dd7dc42ba4ad8ff4f48b321c4"
+      },
+      {
+        "file": "tests/card-state-motion.test.js",
+        "sha256": "47410e94f427222bee90d795c7eac164dc4b0edb67f9a0c2dee31f15c2bad6e2"
+      },
+      {
+        "file": "tests/reward-acquisition-motion.test.js",
+        "sha256": "efb42bdadf69d0c36d00f711c15fb8110422469e6b8e3ed9663a55a97e8a0d77"
+      },
+      {
+        "file": "tests/reward-card-feedback.test.js",
+        "sha256": "edc267ad0e8f73de52848ed2abb9275304cc21ffbdbd6eefe39bafaec3fdbe9a"
+      },
+      {
+        "file": "tests/selection-state-motion.test.js",
+        "sha256": "679fd016be878db96ff05510280075fc14b92c044092b9d21629cac9a212ca02"
+      },
+      {
+        "file": "tests/surface-motion.test.js",
+        "sha256": "45c9b3477736830ab7769161db8c863060ec03fbc6b84ba069566dd8d192b251"
+      },
+      {
+        "file": "tests/target-motion.test.js",
+        "sha256": "612578a4d82e3344cd21cd3580a79dee258b1a2b104209a66d34ae4714725050"
+      },
+      {
+        "file": "tests/target-surface.test.js",
+        "sha256": "00d693dfe47a087d8f58d4caa6440aa309eec6d4034b632b5ef7c9e97fbffdaa"
+      },
+      {
+        "file": "vite.config.js",
+        "sha256": "2cb7165c3c125369b8d0078d9a752700e61cde336ca6a0ce107d1afcdf6a14d0"
+      }
+    ],
+    "environment": {
+      "node": "v24.13.0",
+      "platform": "win32",
+      "arch": "x64",
+      "dependencies": {
+        "vitest": "3.2.7",
+        "vite": "6.4.4",
+        "typescript": "7.0.2",
+        "eslint": "10.11.0",
+        "jsdom": "25.0.1",
+        "acorn": "8.18.0",
+        "acorn-walk": "8.3.5"
+      },
+      "ci": null,
+      "nodeOptions": null,
+      "forceFullTests": null
+    },
+    "documents": false,
+    "assets": false,
+    "selection": {
+      "mode": "targeted",
+      "roots": [
+        "tests/target-motion.test.js",
+        "tests/card-state-motion.test.js",
+        "tests/reward-acquisition-motion.test.js",
+        "tests/selection-state-motion.test.js",
+        "tests/target-surface.test.js",
+        "tests/surface-motion.test.js",
+        "tests/reward-card-feedback.test.js",
+        "tests/bag-pane-retained.test.js"
+      ],
+      "files": [
+        "game/css/archive-motion.css",
+        "game/css/camp-entry.css",
+        "game/css/card-state-motion.css",
+        "game/css/feedback-theme.css",
+        "game/css/page-visual-ready.css",
+        "game/css/rarity-reveal.css",
+        "game/css/selection-state-motion.css",
+        "game/src/core/map-image-ready.js",
+        "game/src/hub/bag-pane-view.js",
+        "game/src/ui/archive-motion.js",
+        "game/src/ui/camp-entry.js",
+        "game/src/ui/card-result-feedback.js",
+        "game/src/ui/card-state-motion.js",
+        "game/src/ui/feedback-theme.js",
+        "game/src/ui/general-transition.js",
+        "game/src/ui/interface-motion.js",
+        "game/src/ui/motion-presets.js",
+        "game/src/ui/navigation-motion.js",
+        "game/src/ui/page-motion-profiles.js",
+        "game/src/ui/page-surface-lifetime.js",
+        "game/src/ui/page-visual-ready.js",
+        "game/src/ui/rarity-reveal.js",
+        "game/src/ui/reward-acquisition-motion.js",
+        "game/src/ui/reward-card-feedback.js",
+        "game/src/ui/reward-state.js",
+        "game/src/ui/selection-state-motion.js",
+        "game/src/ui/surface-motion.js",
+        "game/src/ui/target-motion.js",
+        "tests/bag-pane-retained.test.js",
+        "tests/card-state-motion.test.js",
+        "tests/reward-acquisition-motion.test.js",
+        "tests/reward-card-feedback.test.js",
+        "tests/selection-state-motion.test.js",
+        "tests/surface-motion.test.js",
+        "tests/target-motion.test.js",
+        "tests/target-surface.test.js"
+      ],
+      "existence": [],
+      "inventories": [],
+      "contracts": [],
+      "reason": "逐根独立证明输入范围；未知根不能借其他测试的fixture契约豁免"
+    },
+    "groups": {
+      "code": "e71d33d4e15ea4415d8c59750ac8b22487705b106ece290eb6c226108a005d47",
+      "docs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "state": "8e806c52a7e6c8e124a0e99098c2312a1c2383041dedeaa0299e4587a7bd00b9",
+      "environment": "360f22bba2965b75cae34d33a710caaeb18e52a7b9a0df3e5de864672bbd9e76"
+    },
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  },
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "validation": {
+    "mode": "targeted",
+    "paths": [],
+    "tests": [
+      "tests/target-motion.test.js",
+      "tests/card-state-motion.test.js",
+      "tests/reward-acquisition-motion.test.js",
+      "tests/selection-state-motion.test.js",
+      "tests/target-surface.test.js",
+      "tests/surface-motion.test.js",
+      "tests/reward-card-feedback.test.js",
+      "tests/bag-pane-retained.test.js"
+    ],
+    "reasons": [
+      "显式测试列表"
+    ],
+    "executed": true
+  },
+  "outcome": "passed",
+  "log": "docs/evidence/2026-10-19-WF-ui-target-motion-1019/2026-10-19T13-07-13.100Z-9867fa71.log",
+  "logSha256": "85d4dee7aa159fe922af0a8042748a08f7b7273b0bc002445b6278fe3f725f40",
+  "limits": [
+    "工作区检查候选；冻结 index 证据仍走 workflow staged。",
+    "仅本命令覆盖范围；没有 build、实页、真实 hover、玩家存档或远端 CI 验收",
+    "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+  ],
+  "freshness": {
+    "eligibleForReview": true,
+    "codeEligibleForReview": true,
+    "result": "state-changed",
+    "parts": {
+      "code": {
+        "before": "e71d33d4e15ea4415d8c59750ac8b22487705b106ece290eb6c226108a005d47",
+        "after": "e71d33d4e15ea4415d8c59750ac8b22487705b106ece290eb6c226108a005d47",
+        "current": "e71d33d4e15ea4415d8c59750ac8b22487705b106ece290eb6c226108a005d47",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      },
+      "docs": {
+        "before": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "after": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "current": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "covered": false,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "not-covered",
+        "eligibleForReview": false
+      },
+      "state": {
+        "before": "1cb29b685496a77abcb6723871807e27d2e519d27260bdea5f78517afcc1f620",
+        "after": "8e806c52a7e6c8e124a0e99098c2312a1c2383041dedeaa0299e4587a7bd00b9",
+        "current": "8e806c52a7e6c8e124a0e99098c2312a1c2383041dedeaa0299e4587a7bd00b9",
+        "covered": true,
+        "changedDuringCheck": true,
+        "changedSinceCheck": false,
+        "status": "changed-during-check",
+        "eligibleForReview": false
+      },
+      "environment": {
+        "before": "360f22bba2965b75cae34d33a710caaeb18e52a7b9a0df3e5de864672bbd9e76",
+        "after": "360f22bba2965b75cae34d33a710caaeb18e52a7b9a0df3e5de864672bbd9e76",
+        "current": "360f22bba2965b75cae34d33a710caaeb18e52a7b9a0df3e5de864672bbd9e76",
+        "covered": true,
+        "changedDuringCheck": false,
+        "changedSinceCheck": false,
+        "status": "candidate",
+        "eligibleForReview": true
+      }
+    },
+    "recheck": [
+      "state"
+    ],
+    "limits": [
+      "未监控图片/声音、node_modules 字节、浏览器与机器负载；匹配只表示候选证据，不自动免验"
+    ]
+  }
+}

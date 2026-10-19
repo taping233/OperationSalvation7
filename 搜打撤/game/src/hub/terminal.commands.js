@@ -3,6 +3,7 @@ import { addXpToProgress } from './meta.js';
 import { clone, fail } from './commands.shared.js';
 
 function applyCards(base, cards, isSha) {
+  let stashed = 0;
   for (const item of cards || []) {
     const card = item && item.card;
     if (!card || isSha(card)) continue;
@@ -10,6 +11,11 @@ function applyCards(base, cards, isSha) {
     const stack = base.stash.find(x => x.card && x.card.name === card.name);
     if (stack) stack.count = (Number(stack.count) || 0) + count;
     else base.stash.push({ card: clone(card), count });
+    stashed += count;
+  }
+  if (stashed) {
+    base.stats ||= {};
+    base.stats.stashTotal = (Number(base.stats.stashTotal) || 0) + stashed;
   }
 }
 

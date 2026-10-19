@@ -1,4 +1,4 @@
-/* 新局5/9的数量与硬约束唯一来源；旧3/9、4/9快照保留各自配额。 */
+/* 新局6/9的数量与硬约束唯一来源；旧3/9、4/9、5/9快照保留各自规则。 */
 import { validateGeneratedMap as validateLegacyMap } from './map-generator.js';
 
 /**
@@ -7,8 +7,9 @@ import { validateGeneratedMap as validateLegacyMap } from './map-generator.js';
  * @typedef {ReadonlyArray<MapLayerTypeBudget>} MapTypeBudgets
  */
 
-export const CURRENT_GENERATOR_VERSION = 5;
+export const CURRENT_GENERATOR_VERSION = 6;
 export const CURRENT_LAYOUT_VERSION = 9;
+export const FIRE_BATTLE_LIMIT = 2;
 /** @type {MapTypeBudgets} */
 export const PREVIOUS_MAP_TYPE_BUDGETS = Object.freeze([
   Object.freeze({ entrance: 1, door: 1, battle: 2, chest: 1, fire: 1, shop: 1 }),
@@ -54,6 +55,23 @@ export function graphDistances(neighbors, start, blocked = new Set()) {
   return distances;
 }
 
+// 只计普通战斗节点；事件是否额外触发战斗取决于实际内容与选择。
+export function minimumBattlesTo(layer, target, battleNodes = new Set(layer.nodes.filter(node => node.type === 'battle').map(node => node.idx))) {
+  const neighbors = layerNeighbors(layer), costs = neighbors.map(() => Infinity), queue = [layer.entry];
+  costs[layer.entry] = 0;
+  while (queue.length) {
+    queue.sort((a, b) => costs[a] - costs[b]);
+    const at = queue.shift();
+    for (const next of neighbors[at]) {
+      const cost = costs[at] + Number(battleNodes.has(next));
+      if (cost >= costs[next]) continue;
+      costs[next] = cost;
+      queue.push(next);
+    }
+  }
+  return costs[target];
+}
+
 export function finaleOrderOk(layer, altar, boss) {
   const neighbors = layerNeighbors(layer);
   const depth = graphDistances(neighbors, layer.entry);
@@ -62,7 +80,7 @@ export function finaleOrderOk(layer, altar, boss) {
 }
 
 // 只校验，不修补。任何后置覆盖也必须经过这一最终门，不能重引入已消除的冲突。
-export function validateCurrentGeneratedMap(layers, budgets = MAP_TYPE_BUDGETS) {
+export function validateCurrentGeneratedMap(layers, budgets = MAP_TYPE_BUDGETS, enforceFirePacing = true) {
   let legacy;
   try { legacy = validateLegacyMap(layers); }
   catch { return { ok: false, issues: ['新地图结构无效'] }; }
@@ -78,6 +96,9 @@ export function validateCurrentGeneratedMap(layers, budgets = MAP_TYPE_BUDGETS) 
     const neighbors = layerNeighbors(layer);
     const fire = layer.nodes.find(node => node.type === 'fire');
     const shop = layer.nodes.find(node => node.type === 'shop');
+    if (fire && enforceFirePacing && minimumBattlesTo(layer, fire.idx) > FIRE_BATTLE_LIMIT) {
+      issues.push(`层 ${li + 1} 火堆须经过超过 ${FIRE_BATTLE_LIMIT} 场普通战斗`);
+    }
     if (fire && shop && neighbors[fire.idx].includes(shop.idx)) issues.push(`层 ${li + 1} 火堆与补给站相邻`);
     if (layer.nodes.some(node => node.type === 'battle'
       && neighbors[node.idx].filter(idx => layer.nodes[idx]?.type === 'battle').length > 1)) {

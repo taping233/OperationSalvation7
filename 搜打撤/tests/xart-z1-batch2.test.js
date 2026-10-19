@@ -79,14 +79,14 @@ describe('A3-PREP-02 预设预览按分段占格计容', () => {
 
   it('同名 5 张按 cap=3 分段占 2 格（不再是种类数 1 格）', () => {
     const preview = commands.previewDeployment({ ...args, bagCapacity: 16 });
-    expect(preview.costs.slotsUsed).toBe(3);   // ceil(5/3)=2 + 初始攻击 1
-    expect(preview.costs.extraStackSlots).toBe(1);
+    expect(preview.costs.slotsUsed).toBe(4);   // 普通牌 ceil(5/3)=2 + 初始攻击 ceil(5/3)=2
+    expect(preview.costs.extraStackSlots).toBe(2);
     expect(preview.canStart).toBe(true);
   });
 
-  it('容量判定按分段格数：2 格容量装不下（5 张同名 + 初始攻击）', () => {
-    const preview = commands.previewDeployment({ ...args, bagCapacity: 2 });
-    expect(preview.costs.slotsUsed).toBe(3);
+  it('容量判定按分段格数：3 格容量装不下（5 张同名 + 5 张初始攻击）', () => {
+    const preview = commands.previewDeployment({ ...args, bagCapacity: 3 });
+    expect(preview.costs.slotsUsed).toBe(4);
     expect(preview.canStart).toBe(false);
     expect(preview.errors).toContain('BAG_CAPACITY_EXCEEDED');
   });

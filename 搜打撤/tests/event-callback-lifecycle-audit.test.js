@@ -497,7 +497,7 @@ describe('事件等待与回调生命周期审计', () => {
     saved.current.claimMode = 'one'; saved.current.choiceCount = 3;
     saved.queue[0].reward = saved.current;
     expect(scenes.resumeChestsOnCell(saved)).toBe(true);
-    expect(UI.el.ovBody.textContent).toContain('其余卡牌永久放弃，无法找回');
+    expect(UI.el.ovBody.textContent).toContain('任选1张，其余放弃');
     UI._acts.chestPick({ i:'1' });
     const after = window.SDT.Chests.serialize(H.game);
     expect(after.current.taken).toEqual([1]);
@@ -507,17 +507,17 @@ describe('事件等待与回调生命周期审计', () => {
     expect(UI.el.ovBody.querySelector('[data-act="chestPick"]')).toBeNull();
     expect(H.game.ownedCards.map(o => o.card.id)).toEqual(['pick2']);
   });
-  it('F42 奖励提示同时说明点击与自动收起，两种关闭均有效', async () => {
+  it('F42 奖励提示精简后，点击与自动收起均有效', async () => {
     const { cinematicsMethods } = await import('../game/src/ui/cinematics.js');
     const cinema = { ...cinematicsMethods, _cardGetQueue:[], _cardGetShowing:false };
     const card = { id:'reward', name:'奖励', type:'法术', rarity:'古朴' };
     cinema.showCardReward(card);
-    expect(document.querySelector('#cardGet .lg-hint').textContent).toBe('点击收起 · 稍后自动收起');
+    expect(document.querySelector('#cardGet .lg-hint').textContent).toBe('收起');
     document.getElementById('cardGet').click();
     await vi.advanceTimersByTimeAsync(500);
     expect(document.getElementById('cardGet')).toBeNull();
     cinema.showLegendGet({ ...card, rarity:'传说' });
-    expect(document.querySelector('#legendGet .lg-hint').textContent).toBe('点击收起 · 稍后自动收起');
+    expect(document.querySelector('#legendGet .lg-hint').textContent).toBe('收起');
     await vi.advanceTimersByTimeAsync(3300);
     expect(document.getElementById('legendGet')).toBeNull();
   });

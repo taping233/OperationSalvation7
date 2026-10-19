@@ -27,8 +27,9 @@ it('caps animated regions rather than animating every card in a large list', () 
   root.innerHTML = `<main>${'<article>Card</article>'.repeat(200)}</main>`;
   motion.enterSurface(root, { fast: true });
   expect(root.dataset.surfaceMotion).toBe('fast');
-  expect(root.querySelectorAll('[data-surface-block]')).toHaveLength(8);
-  expect(root.querySelector('article').style.getPropertyValue('--surface-delay')).toBe('0ms');
+  expect(root.querySelectorAll('[data-surface-block]')).toHaveLength(1);
+  expect(root.querySelector('main').style.getPropertyValue('--surface-delay')).toBe('0ms');
+  expect(root.querySelector('article').dataset.surfaceBlock).toBeUndefined();
 });
 
 it('keeps hidden and close behavior with the caller, and clears only animation phase', () => {
@@ -139,4 +140,38 @@ it('same-page base updates stay quiet while leaving the base retains normal entr
   await vi.advanceTimersByTimeAsync(500);   // 离开基地的整页切换先遮层，就绪后重放区域入场
   expect(root.dataset.surfacePhase).toBeDefined();
   expect(root.dataset.uiEnter).toBeUndefined();   // 卡面翻入动画由遮层淡出替代，不提前播放
+});
+
+it('different pages sharing an empty heading still wait and reveal the new page once', async () => {
+  vi.useFakeTimers();
+  vi.stubGlobal('requestAnimationFrame', fn => setTimeout(fn, 16));
+  vi.stubGlobal('cancelAnimationFrame', clearTimeout);
+  const { root, ui } = await installOverlay();
+  ui.showOverlay('', '<main class="settings-page"><section class="settings-content">Settings</section></main>', 'page');
+  await vi.advanceTimersByTimeAsync(400);
+  ui.showOverlay('', '<main class="beginner-guide"><div class="bg-copy">Guide</div></main>', 'page');
+  expect(root.dataset.visualPending).toBe('page');
+  await vi.advanceTimersByTimeAsync(400);
+  expect(root.dataset.surfaceLayout).toBe('guide');
+  expect(root.querySelector('.bg-copy').dataset.surfaceRole).toBe('content');
+  expect(document.querySelector('.page-visual-handoff')).toBeNull();
+});
+
+it('backpack filters do not replay entry, and closing uses its paired panel duration', async () => {
+  vi.useFakeTimers();
+  vi.stubGlobal('requestAnimationFrame', fn => setTimeout(fn, 16));
+  vi.stubGlobal('cancelAnimationFrame', clearTimeout);
+  const { root, ui } = await installOverlay();
+  const bag = '<main class="bag-v2"><nav class="bag-rail">Zones</nav><section class="bag-col"><header class="bag-head2">Bag</header><div class="bag-board">Cards</div></section></main>';
+  ui.showOverlay('Bag', bag, 'bagpage');
+  await vi.advanceTimersByTimeAsync(400);
+  expect(root.dataset.surfaceLayout).toBe('backpack');
+  ui.showOverlay('Bag', bag, 'bagpage');
+  expect(root.dataset.surfacePhase).toBeUndefined();
+  expect(document.querySelector('.page-visual-handoff')).toBeNull();
+  ui.hideOverlay();
+  expect(ui._motionExitDuration).toBe(160);
+  expect(root.hidden).toBe(false);
+  await vi.advanceTimersByTimeAsync(170);
+  expect(root.hidden).toBe(true);
 });

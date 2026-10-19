@@ -98,7 +98,7 @@ describe('黑市投入前卡牌详情', () => {
       expect(UI.el.overlay.inert).toBe(false); expect(document.activeElement).toBe(button);
       expect(UI.el.ovBody.firstElementChild).toBe(page); expect(readers()[i]).toBe(button);
     }
-    expect(UI.el.ovBody.textContent).toContain('点击卡牌放大查看');
+    expect(UI.el.ovBody.textContent).not.toContain('点击卡牌放大查看');
   });
 
   it('重复查看只读且不重建黑市，不扣币、不保存、不抽随机、不改变尝试数或候选', async () => {

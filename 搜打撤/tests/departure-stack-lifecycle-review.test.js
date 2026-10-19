@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createBaseDepartureCommands } from '../game/src/hub/base-departure.commands.js';
+import { characterFor } from '../game/src/core/characters.js';
 const ports = vi.hoisted(() => ({ choice: vi.fn(), start: vi.fn(), hub: vi.fn(), handoff: vi.fn() }));
 vi.mock('../game/src/run/game.session.js', () => ({
   MAP: { rules: { starterSha: 5 } }, MODES: { standard: { id: 'standard', name: '标准' } },
@@ -94,6 +95,32 @@ function open() {
 }
 function clickSecond() { document.querySelectorAll('#depPool .dep-card')[1].click(); }
 describe('出征真实页面选择与扣仓身份', () => {
+  it('预设人物作为选角初值，预设宠物通过正常保存入口应用', () => {
+    expect(departure.setDeployPick({ 'card:second:foil': 1 }, { characterId: 'baita', petId: 'robot' })).not.toBe(false);
+    expect(base.setPet).toHaveBeenCalledExactlyOnceWith('robot');
+    departure.openDepartPrep();
+    expect(characterFor(ports.choice.mock.lastCall[0].initialCharacter)?.id).toBe('baita');
+    expect(departure.deployPick).toEqual({ 'card:second:foil': 1 });
+    expect(ports.start).not.toHaveBeenCalled();
+  });
+  it('预设宠物保存失败时保留原卡牌选择和人物初值', () => {
+    departure.setDeployPick({ 'card:first': 1 }, { characterId: 'heixiang' });
+    base.setPet.mockReturnValueOnce(false);
+    expect(departure.setDeployPick({ 'card:second:foil': 1 }, { characterId: 'baita', petId: 'robot' })).toBe(false);
+    expect(departure.deployPick).toEqual({ 'card:first': 1 });
+    departure.openDepartPrep();
+    expect(characterFor(ports.choice.mock.lastCall[0].initialCharacter)?.id).toBe('heixiang');
+    expect(ports.start).not.toHaveBeenCalled();
+  });
+  it('切换slot后不沿用上一档的预设人物和卡牌', () => {
+    departure.setDeployPick({ 'card:second:foil': 1 }, { characterId: 'baita', petId: 'robot' });
+    base.slot = 2;
+    departure.openDepartPrep();
+    expect(ports.choice.mock.lastCall[0].initialCharacter).toBeNull();
+    expect(departure.deployPick).toEqual({});
+    expect(base.setPet).toHaveBeenCalledTimes(1);
+    expect(ports.start).not.toHaveBeenCalled();
+  });
   it('点第二堆预览其卡面和数量，确认出征只扣第二堆', () => {
     open(); clickSecond();
     const bag = [...document.querySelectorAll('#depBag [data-name="同名牌"]')];

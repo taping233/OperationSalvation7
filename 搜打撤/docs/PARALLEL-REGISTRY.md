@@ -12,10 +12,10 @@
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
-| Friday（无绑定与双动作 WF-wu-battle-production-1019） | 自有`game/art-source/characters/wu-battle-rig-20261019/`、`docs/evidence/2026-10-19-wu-battle-rig/`、`.tmp/tools/synfig-1.5.5/`；运行`game/assets/portraits/frames/wu/rig-v1/`与既有animations.json/neutral、battle/wu.webp，清单仅本角色条目；旧wu-parts-v1只读 | v4已确认，14件绑定、待机与普通攻击样板；官方Synfig便携版已解压校验并通过CLI PNG导出，Spine未下载安装。样板接现有序列帧，保留原动作总时长，其他动作暂沿既有帧。不改全局配置、不提交 | 2026-10-19 | 编辑中 |
+| Friday / 网页启动 01a15472 | Vite `D:/素材/代号柒/搜打撤`，5200，PID18456；`node_modules/.cache/web-up-5200.json` | 老板授权拉起网页版；后台隐藏启动，沿用剧情产物，入口及PNG/WebP响应有效，服务保留供试玩 | 2026-10-19 | 已交付 |
+| Friday / 网页启动 WF-web-up-1019 | Vite `D:/素材/代号柒/搜打撤`，5200，PID26772；`node_modules/.cache/web-up-5200.json` | 老板授权拉起网页版；2026-10-19 18:45后台隐藏启动，入口与PNG/WebP响应有效；沿用现有剧情产物，服务保留供试玩 | 2026-10-19 | 已交付 |
 | Friday / 无整套皮肤重置 01a14e7e | 无三皮肤`wu-casual-v14.webp`、`wu-spring-v15.webp`、`wu-beach.webp`，清单仅对应三条，自有`docs/evidence/2026-10-18-wu-skins-reset/`、根`.tmp/nai/wu-skins-reset-1018/` | NAI底稿+内置重绘，现行默认画风；保留三主题和默认立绘，素材备份后接入，不改其他属地 | 2026-10-18 | 编辑中 |
 | Friday / 隔离预览5319 WF-perf-budgets-1018 | 纯副本`.tmp/perf-budgets-1018/project`，启动工作目录`D:/素材/代号柒/搜打撤`，Vite5319/PID25100/exec70568 | 源码占用已释放；老板要求停止实玩后已停止浏览器操作，当前窗口仍引用5319，页面与服务现场保留。PID为本会话启动核验时点，未认领其他服务 | 2026-10-18 | 已交付 |
-| Friday / 事件选项与玩家投骰 01a14ddd | `game/src/run/game.run.flow.js`事件段、`game/src/run/game.run.shop.js`委托段、`game/src/ui/event-dice.js`、`game/css/event-dice.css`、事件数据/叙事及相关测试与自有证据 | 暴雨逃跑、余粮投骰、动力锤下店免单委托、救护站招式与事件随机投骰；保留原改动。本轮进行中增量不得纳入其他会话打包；不动index、不build | 2026-10-18 | 编辑中 |
 | Friday / 网页服务 01a14d8f | Vite D:/素材/代号柒/搜打撤、5200、PID48716、本会话创建；node_modules/.cache/web-up-5200.json | 按老板拉起网页版授权恢复，保留供试玩；桌面启动动画编辑已释放，见近期已释放 | 2026-10-18 | 已交付 |
 
 ## 无主物品（只记录勿动，等认领/处置）
@@ -25,7 +25,99 @@
 | `docs/evidence/2026-10-02-staged-check/`大报告 | 原9d4b5ef隔离门证据，超过1MB留本地 | 10-03 | 已有证据来源，不是无主代码；保留原位，不纳入Git |
 | 根`.codex/config.toml.bak-nai-*`三个备份与`nul` | 当前Git未跟踪；备份关联NAI试验，nul内容/归属未核实 | 2026-10-14 | 仅登记，不删除；NAI备份不等同待提交配置 |
 
+| `docs/production/art/NAI-PROMPTING.md`、`tools/NAI-PROMPTS.md`、`tools/nai_gen.py`参考图换人流程增量 | 提交期间出现，未见对应当前归属记录 | 2026-10-19 | 保留工作树，不纳入本批提交，等原会话确认 |
+
 ## 近期已释放
+
+### 2026-10-19 完成项提交 / Friday WF-completed-commit-1019
+
+完成项范围与编辑归属已核对。二轮隔离全量6728项通过、1项架构行数守卫失败；主会话将伙伴升级回执移回hub.personnel，壳仅装配受守卫动作，保持原430行上限。runtime/personnel收口完成、编辑释放，5文件66项及相关ESLint通过；最终实际index隔离全量664文件6729项通过、16项原条件跳过，0失败，静态检查通过。收尾资料随本批本地Git提交交付，未推送。卡牌、公共UI/动效、地图最终撤回版本、火堆/整备、已完成局外成长及workflow-slice统一纳入；三个Sol中档子代理修正首轮全量18项旧断言/审计/资源指纹失配，UI131项、资源27项、卡牌12项与1项原条件skip、CSS3项分别通过。各子域未提交，主会话按老板授权统一本地提交；不build/推送，当前内置浏览器缺口保留。最终结果见[收尾证据](evidence/2026-10-19-completed-commit/README.md)。
+
+
+### 2026-10-19 参考换人流程与星月钢琴 / Friday 01a15483
+
+老板随后授权免费档出图，单次NAI5请求1344×768/28步/CFG5/native/seed0返回HTTP429，客户端共享冷却15分钟，未产图、未自动重试。新增自有`generate_free.py`与`request-free.json`保存本次完整请求和失败状态，原402请求保留；编辑释放，无新增服务，未测试或提交。
+
+老板后续指定默认横版使用免费档：已同步`tools/nai_gen.py`默认1344×768、NAI入口与组合手册、项目换人技能及Codex长期记忆摘要；28步上限，参考尺寸/原图参数不自动升级付费尺寸。该修改不触发重新出图，原HTTP402请求快照保留。
+
+流程完成未提交、编辑释放。根`.agents/skills/nai-reference-remix/SKILL.md`为项目技能入口，`docs/production/art/NAI-PROMPTING.md`维护标准流程；技能校验通过。按老板最终要求保留我们的画师串和星月身份、移除参考人物身份，服装重新设计并用参考图象牙白/冷灰/浅青蓝与棕手套配色；原图支持参数沿用，1516×1037调整1536×1024。NAI5单次请求HTTP402未产图，停止重试；完整请求与失败状态见`docs/evidence/2026-10-19-xingyue-piano-nai5/request.json`。未接入运行素材、未build/提交，无新增服务。
+
+### 2026-10-19 结算与局外成长 / Friday 01a1541e
+
+实现完成未提交，编辑占用释放，实页待补。自有Base/collection-protection/conversion及view/collection.commands/game.hub.pages、warehouse/trade保护接线、terminal抢运统计、extraction.commands及rewards-view成长快照、runtime/personnel伙伴回执、对应测试/CSS/内存撤离夹具与docs/rules、save-format自有段落；[验证记录](evidence/2026-10-19-settlement-growth/README.md)。6组定向测试均通过（逐组数量与复用边界见证据），全部8组类型、相关ESLint/Stylelint/语法/文档守卫通过；旧保护保留、取消保护不删图鉴、满级限制和转化预览贯通命令、抢运幂等累计、成长摘要区分名义/有效/溢出，伙伴日志读取目标容量。保留原有pages/warehouse差异，未改altar原有差异；平台已移除内置浏览器工具，未用外部浏览器、未宣称实页通过。无新服务，不build/提交，不改玩家存档。
+
+### 2026-10-19 恢复地图缩放 / Friday WF-map-zoom-restore-1019
+
+完成未提交，编辑释放。老板否决上一轮缩放效果，已撤回renderer/map-node-art同步缩放、camera倍率/滚轮换算、boot命中半径及对应新增测试，恢复修改前的缩放逻辑；保留节点拖动边界、额外80px有限留白与原惯性。5个相关文件46项通过；当前无内置浏览器工具，实页未验。未build/提交/推送或新建服务。[恢复说明](evidence/2026-10-19-map-zoom/README.md)。
+
+### 2026-10-19 地图留白与同步缩放 / Friday WF-map-zoom-1019
+
+完成未提交，编辑释放。core/camera、map-drag-motion、renderer、map-node-art；game.boot滚轮/图标命中段；camera-interaction与renderer-road-invalidation专测、docs/map-travel和[自有证据](evidence/2026-10-19-map-zoom/README.md)。移除图标/名称/状态/道路/当前位置反向倍率补偿，全部随镜头同步缩放；额外有限留白80px基准，统一手动/探索上限3.4及滚轮幅度。首批7文件104项通过；绘制批127项通过/1项旧阈值问题，修正后3文件28项通过，其余结果复用。当前无内置浏览器工具，实页验收阻塞；未build/提交/推送/改玩家存档或新建服务，保留原有未提交改动。
+
+### 2026-10-19 公共目标过渡 / Friday WF-ui-target-motion-1019
+
+实现完成、编辑释放，最终实页仍待验。归属为公共target/card/selection/surface与bag节点保留、相关CSS/测试、VISUAL-BIBLE和[本批证据](evidence/2026-10-19-ui-target-motion/README.md)。两轮结束14文件119项通过；随后修复存档加载覆盖，8文件103项通过，相关lint与8组类型通过。后者全局freshness受另一会话地图改动影响，未冒称冻结回执。内置浏览器不可用，第二轮和存档动效实页缺口保留，任务以partial释放；老板已授权本地提交，实际暂存检查及打包结果另记收尾证据。不build、不推送，无自建服务。
+
+
+### 2026-10-19 地图空白拖动 / Friday WF-map-pan-bounds-1019
+
+完成未提交，编辑释放。自有增量为core/camera.js、map-drag-motion.js及camera-interaction/map-drag-motion专测、docs/map-travel.md；保留原拖动任务既有改动。边界按当前层节点、缩放、窗口和侧栏计算，整层能显示的轴居中，放大后限至节点区域边缘。4个直接相关文件通过；完整6文件命令77项通过、2项架构检查因其他会话局外成长缺失collection-protection.js失败；相关ESLint与diff检查通过。当前无内置浏览器工具，实页验收阻塞。无新服务、不build/提交/推送。[验收记录](evidence/2026-10-19-map-pan-bounds/README.md)。
+
+### 2026-10-19 火堆两战内可达 / Friday 01a1541e
+
+完成未提交，编辑占用释放。自有 `game/src/run/{map-generator-v4,map-generation-rules,map-snapshot,map-route-v2}.js`、`game/src/ui/route-overlay.js`、map-generator-v4/map-route-v2/map-route-v2-preview/map-version-compat/map-facilities-burn-removal/map-fire-pacing六份测试、`tests/fixtures/map-v5-late-fire.json`、`game/dev/map-node-rules-review.html`与docs/rules、save-format自有段落及[验收记录](evidence/2026-10-19-fire-pacing/README.md)。新6/9图的1/3层火堆至多两场普通战可达，首层至少先打一场，旧5/4/3地图不重排。16文件162项、全部类型配置、定向ESLint通过；200种子独立计战零违例；当前窗口内置浏览器构造页面核对反例从3战改2战，error为空。保留共享文档其他改动；无新服务、不build/提交，不改玩家存档。
+
+### 2026-10-19 整备预设容量与选择 / Friday 01a1541e
+
+完成未提交，编辑占用释放。自有 `game/src/hub/{preparation.commands,preparation.view,game.hub.preparation,game.hub.preparation-ports,game.hub.depart,departure.summary}.js`、`game/css/preparation.css`、m06-preparation/m06-sources-view/xart-z1-batch2/game-hub-preparation-feature/preparation-adapter-review/preparation-slot-review/departure-stack-lifecycle-review七份测试、`game/dev/preparation-preset-review.{html,js}`及[验收记录](evidence/2026-10-19-preparation-preset-fix/README.md)。预设统一权威计格并传人物/宠物，失败留原选择，新文案与容量提示已接入；首次目标未动，保留depart既有外观改动。首批16文件146项、补验3文件10项（有重叠）、定向ESLint/文档/差异检查通过；当前窗口内置浏览器内存隔离场景真实点击确认6/5阻止、6/6可应用、白塔/机器人及实际占格一致。无新服务、不build/提交，不改玩家存档。
+
+### 2026-10-19 全卡差异修复 / Friday WF-card-description-fixes-1019
+
+完成未提交，编辑释放。3个Sol中档代理与主会话修复23张确认差异：池/费用/冰冻加成、在手注能和到期消耗、延迟目标、全友方祝福和当次增伤/闪避、背包道具及足额致死代价。归属为battle相关实现、cards.sync/m3/m6/m10及规则声明、run.flow事件致死、对应测试、rules/save-format与自有证据；精确分工见[修复结果](evidence/2026-10-19-card-description-fixes/README.md)。集中27个不同测试文件，原9项失败已由对应补验覆盖，保留1项条件skip；最终受影响4文件118项通过，8组类型及相关lint通过。实页真实输入确认3类背包道具，未扩称逐卡实战或全量门。原8项语义待定、5项场景缺口、12条未闭合链路保留。未build、提交、推送，现有未提交改动归本任务保护。
+
+### 2026-10-19 背包领奖与公共尺度 / Friday WF-bag-reward-slice-1019
+
+完成未提交，编辑释放。背包/奖励v3有色玻璃、奖励背景降亮/降饱和/模糊，满包直接完整背包、连续领取保留节点与焦点；公共7CSS和18个呈现来源统一尺度/减字，workflow-slice工具及专测完成。原7文件113项覆盖中，旧断言和共享夹具泄漏已修，失败文件补验21项通过；相关lint通过。当前内置浏览器隔离场景已检查连续领取、满包返回、三选一重入、设置标题36px及最终两页呈现。[本批证据](evidence/2026-10-19-bag-reward-slice/README.md)。v3审美待老板反馈；未穷尽所有页面、未build/提交/推送，不碰他人皮肤和全局转场属地。未创建服务，复用5200。
+
+### 2026-10-19 地图拖动 / Friday WF-map-drag-1019
+
+完成未提交，编辑释放。core/camera.js、core/map-drag-motion.js、game.boot.js及对应测试/说明归本任务；复用Motion实现跟手、惯性与阻尼回弹，4文件30项与lint通过。当前内置浏览器隔离地图真实拖动/定位未误入节点，主观手感待老板试玩。[证据](evidence/2026-10-19-map-drag/README.md)。无新依赖/服务，未改路线规则、未build/提交/推送。
+
+### 2026-10-19 全卡描述核对 / Friday WF-card-description-audit-1019
+
+完成未提交，编辑释放。战斗177张、辅助91张逐ID归档，268张覆盖无重复缺失；game.bag.js/rules.js、相关测试、rules/save-format/PENDING中C对应说明与自有审查证据归本任务。通行证C按发现候选选择实现，取消/重入/选择实页和原子事务定向覆盖完成；23张确认差异由独立修复任务收口，历史快照保留。8项待定、5项场景缺口、12条未闭合链路不冒称通过。[审查范围](evidence/2026-10-19-card-description-audit/README.md)。未build/提交/推送。
+
+### 2026-10-19 抖音UI与动效参考 / Friday
+
+只读分析完成，编辑释放。Sol中档代理实际分段播放老板指定两条视频，记录卡牌抬升、目标聚焦、背景退后与尺寸/旋转/颜色插值，并区分观察和建议；自有[参考记录](evidence/2026-10-19-ui-motion-douyin-reference/README.md)。没有搬运素材或改生产动效，参考页已收尾。
+
+### 2026-10-19 清理后文档审查 / Friday WF-cleanup-docs-1019
+
+完成未提交，编辑释放。扫描1569份Markdown，现行相对链接缺件0；新增CLEANUP-STATUS统一当前交付与删除回执，更新README/STATUS/文档/证据/归档导航，修正performance的旧原稿保留描述及README旧音效描述。18个历史报告入口补提示覆盖24报告，去除提示后正文SHA与原文一致；归档原文/源码快照不改。历史1451个链接缺件候选仅留审计表，不作为现行故障或擅自恢复文件；6个临时/链接目录跳过范围明确。文档守卫591链接通过，无游戏测试/build/浏览器/提交；[审查证据](evidence/2026-10-19-cleanup-docs/README.md)。
+
+### 2026-10-19 自然跑局验收文案 / Friday 01a1541e
+
+完成未提交，编辑占用释放。自有 `docs/roadmap.md` 末段：按老板本轮确认，将完整自然跑局改为已完成验收，不再列作当前缺口；旧试玩记录与其他专项验证范围保留。本表仅新增自有记录；无游戏改动、服务或提交。
+
+### 2026-10-19 旧交付包清理 / Friday WF-old-delivery-cleanup-1019
+
+已完成，编辑释放。老板授权在上轮6包中只留最新有效包；进程及六包SHA核对后删除5份旧EXE共1.48GB，五路径均确认不存在，仅保留exe-stability资源修复版（326036949字节，SHA不变）及其完整解包版。`.tmp/README.md`已同步；未碰游戏/当前任务/index，不build/提交/推送。[精确路径与完成回执](evidence/2026-10-19-old-delivery-cleanup/README.md)。
+
+### 2026-10-19 临时目录整理 / Friday WF-temp-cleanup-1019
+
+已执行清理，编辑释放，PENDING49销账。老板批准10个精确目录，20230文件二次SHA/目录树/进程核对后删除5.25GB；10目录均不存在，6份便携EXE哈希不变，最新解包版及全部源稿/工具/当前任务保留。当前5200/PID26772服务未动，主项目入口和Vite依赖在位。`.tmp/README.md`索引已更新；未改游戏源码/素材/主依赖或index，不build/提交/推送；[执行回执与清单](evidence/2026-10-19-temp-cleanup/README.md)。
+
+### 2026-10-19 无用资源与旧代码审计 / Friday WF-unused-cleanup-1019
+
+执行完成，编辑释放，PENDING48已销账。老板批准203文件精确清单，SHA复核后删除27.61MiB；同步资源登记148条、缩略索引21条、退役/定稿卡面契约和说明。11文件216项、补验7文件82项、最终预加载2文件45项均通过（有重叠，不累加独立数）；全局资产仍95项范围外错误/570历史警告，本批路径0错误。保护并行页面切换/皮肤源码，未build/提交/推送，未操作浏览器。上轮已批准无失败目录220文件亦清理完成，合计423文件52.16MiB；[精确清单与执行证据](evidence/2026-10-19-unused-cleanup/README.md)。
+
+### 2026-10-19 事件选项与玩家投骰 / Friday 01a14ddd
+
+老板在页面切换整改会话中明确确认本任务已经结束，并授权销账、接管。原 `game/src/run/game.run.flow.js` 事件段、`game.run.shop.js` 委托段、`game/src/ui/event-dice.js`、`game/css/event-dice.css`、事件数据/叙事及相关测试的编辑占用释放，现有内容保留；结束依据为老板确认，本次未追加事件功能验收或代称原会话验证通过。页面过渡相关入口由 WF-page-motion-1019 接管，提交状态以实时 Git 为准。
+
+### 2026-10-19 无战斗动画回退 / Friday WF-wu-animation-revert-1019
+
+回退与删除均完成，编辑释放。上一版battle/wu、neutral、animations已恢复，3项专测通过；原制作会话已按老板要求归档，不再通知。早先递归删除受策略阻断，后执行权限环境变更，沿原批准清单复核220文件SHA后完成两目录删除并确认不存在，PENDING47已销账。未进真实战斗、未build/提交/推送，服务保留；[回退与完成回执](evidence/2026-10-19-wu-animation-revert/README.md)。
 
 ### 2026-10-19 本地提交 / Friday WF-submit-tools-1019
 
@@ -624,6 +716,7 @@ Friday（Codex 地图天气 01a13c12），2026-10-15：game/css/expedition-map.c
 
 | 会话/来源 | 属地 | 事项 | 状态 |
 |---|---|---|---|
+| Friday（页面切换统一 WF-page-motion-1019） | game/src/ui/{interface-motion,surface-motion,navigation-motion,motion-presets,page-motion-profiles,page-visual-ready,overlay}.js；game/src/run/game.run.scenes.js；game/css/{interface-motion,page-transitions,page-visual-ready,expedition-transitions}.css；tests/{surface-motion,page-surface-lifetime}.test.js；VISUAL-BIBLE与docs/evidence/2026-10-19-unified-page-motion/ | 实现完成未提交、编辑释放，待老板验收。取消验证前150项定向回归、目标ESLint与语法通过；实页核对基地方向、背包开合、真实战斗入口。老板要求不再验证后停止测试/浏览器；战斗返回链及全页手感未完成验收。自建5321/PID27384/exec64615已停并释放，既有5200保留；事件01a14ddd按老板确认销账。证据见自有README，无build/提交/推送 | 2026-10-19 |
 | Codex（本地整合 WF-local-closeout-1019） | 整合完成范围434文件；提交3721e42a；不覆盖并发美术工具后续增量 | 冻结全量618文件6065通过/16原有跳过，语法/数据/类型/lint通过；选中资源133通过。未重新浏览器试玩、build或验证远端CI；历史资源债务保留。 | 2026-10-19 完成，编辑释放；详见 docs/evidence/2026-10-19-WF-local-closeout-1019/README.md |
 | Friday（子页面点击与进入音静音 WF-subpage-sfx-silence-1018） | game/src/audio/sound.js、game/src/audio/sound.samples.catalog.js、game/src/ui/archive-motion.js、game/assets/sfx/original-ui-1018/library.json、game/sfx-review.html、docs/audio-system.md及自有证据 | 完成未提交，释放编辑占用。统一拦截子页面click/hover，主菜单与背包入口自动点击/悬停静音；navigate空样本，移除选档动画840ms场景音。其余独立反馈保留；试听清单和现行说明同步。按老板要求未测试、build、浏览器或听感验证；未启停服务、未提交推送。 | 2026-10-18 |
 | Friday（取消四项音效 WF-sfx-four-silence-1018） | game/src/audio/sound.samples.catalog.js仅close/curseEnd/attackIce/heal；original-ui-1018/library.json同步；game/sfx-review.html、docs/audio-system.md说明与自有证据 | 完成未提交，编辑占用释放。4项设为空文件/零增益；试听清单同步为10项静音；cardRestore及其余102项配置保留。按老板要求未运行测试、构建、浏览器或听感验证；不启停服务，未提交推送。 | 2026-10-18 |

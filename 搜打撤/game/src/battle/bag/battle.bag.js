@@ -6,6 +6,7 @@ import { Random } from '../../core/random.js';
 import * as Combat from '../core/combat.js';
 import { itemTargetSideFor } from '../effects/battle.target-rules.js';
 import { getHostedExecutionCard } from '../effects/battle.hosted.js';
+import { matchesExecuteCap } from '../effects/effect-steps.m2.js';
 import { G, foes, mode, energy, busy, infusing, discovering, choosing, handSelecting, viewingGrave, selectingDeck, pstat, floats, consumed, grave, hand, granted, played, discard, drawPile, cardAnims, delayed, set$energy, set$viewingBag, battleState } from '../runtime/battle.runtime.js';
 import { slamSkillFor } from './battle.slam-skill.js';
 import { removeUid } from './battle.piles.js';
@@ -146,7 +147,7 @@ export function createBattleBag({
     for (const op of ops) {
       if (!op || typeof op !== 'object') continue;
       const amount = Number.isInteger(op.amount) ? op.amount
-        : op.amountField === 'heal' ? Math.max(0, +(card.heal || 0)) : (op.n || 1);
+        : ['heal', 'draw'].includes(op.amountField) ? Math.max(0, +(card[op.amountField] || 0)) : (op.n || 1);
       if (op.schedule !== undefined) {
         // M3：delayed 消费端（急救合剂「回合开始时回复 6 点，持续 3 回合」式）
         delayed.push({ special: 'triggerOps', ops: [{ ...op, schedule: undefined }], cardName: card.name,
@@ -203,8 +204,7 @@ export function createBattleBag({
         let killed = 0;
         for (const foe of alive().slice()) {
           if (killed >= count) break;
-          if (cap.atk !== undefined && (foe.atk || 0) > cap.atk) continue;
-          if (foe.dead) continue;
+          if (foe.dead || !matchesExecuteCap(foe, cap)) continue;
           hitFoe(foe, { ...card, desc: '' }, foe.hp + 9999, 'true', '（消灭）');
           killed++;
         }

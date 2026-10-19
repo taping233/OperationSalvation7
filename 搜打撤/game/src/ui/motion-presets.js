@@ -1,12 +1,16 @@
 /* 界面动效唯一参数来源；业务计时、转场跳过和路由仍由各自模块负责。 */
 export const motionTiming = Object.freeze({
-  pageEnter: 500, regionEnter: 360, change: 280, detailEnter: 320,
+  pageEnter: 260, regionEnter: 260, change: 160, detailEnter: 220,
   exit: 180, feedback: 180, fastEnter: 180, fastExit: 110,
   stagger: 35, staggerMax: 105,
+  navigation: 260, navigationDetail: 220, navigationStagger: 22, navigationStaggerMax: 66,
+  panelExit: 160, handoff: 180, sceneEnter: 450,
+  cardReturn: 120, acquire: 340,
 });
 export const motionEasing = Object.freeze({
   enter: 'cubic-bezier(.22,1,.36,1)',
   exit: 'cubic-bezier(.4,0,.7,1)',
+  travel: 'cubic-bezier(.32,0,.18,1)',
 });
 export function motionReduced() {
   return document.body.classList.contains('reduce-motion')

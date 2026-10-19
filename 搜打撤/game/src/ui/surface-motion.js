@@ -3,7 +3,112 @@
 import { pageMotionProfile, pageMotionBlocks } from './page-motion-profiles.js';
 import { motionTiming, motionEasing } from './motion-presets.js';
 import { navigationTiming } from './navigation-motion.js';
+import { retargetVisual, clearVisual } from './target-motion.js';
 export const surfaceTiming = { enter: motionTiming.pageEnter, stagger: motionTiming.stagger, exit: motionTiming.exit, fastEnter: motionTiming.fastEnter, fastExit: motionTiming.fastExit };
+
+// Keep the logical phase contract, but let ordinary surfaces change visual targets.
+// Dedicated archive/loading, home and camp sequences keep their choreography.
+const visualSurfaces = new Map();
+const dedicatedLayouts = new Set(['archives', 'base-content', 'preparation', 'departure']);
+
+function releaseVisual(root) {
+  const state = visualSurfaces.get(root);
+  if (!state) return;
+  for (const [el, saved] of state.elements) {
+    clearVisual(el);
+    if (saved.animation) el.style.setProperty('animation', saved.animation, saved.priority);
+    else el.style.removeProperty('animation');
+    delete el.dataset.surfaceTarget;
+  }
+  visualSurfaces.delete(root);
+}
+
+function targetSurface(root, regions, profile, fast, restart, phase) {
+  // Fast close preparation can omit the page profile. Read the live content too,
+  // so archive dealing and saved-run cuts never receive inline animation:none.
+  const dedicatedScene = root.id === 'overlay' && root.querySelector(
+    '#ovBody .slot-page:not(.camp-entry-ghost), #ovBody .city-run-transition, #ovBody .expedition-cut',
+  );
+  if (root.id === 'title' || dedicatedLayouts.has(profile?.key) || dedicatedScene) {
+    releaseVisual(root);
+    return;
+  }
+  if (reduced()) { releaseVisual(root); return; }
+  let state = visualSurfaces.get(root);
+  const reversing = phase === 'out' || state?.leaving;
+  const continuing = !!state && (!restart || reversing);
+  const preparingExit = root.dataset.uiClosing === '1' || root.dataset.uiMotionScreen === 'close';
+  if (!state) {
+    state = { elements: new Map() };
+    visualSurfaces.set(root, state);
+  }
+  state.leaving = false;
+  const duration = fast ? surfaceTiming.fastEnter
+    : profile?.duration ?? (root.dataset.uiMotion === 'panel' || root.dataset.uiMotion === 'confirm'
+      ? motionTiming.detailEnter : surfaceTiming.enter);
+  const entries = new Map();
+  const panel = root.id === 'overlay' ? root.querySelector(':scope > .card') : root;
+  // One opacity owner per content chain: the surface reveals/hides the whole layer.
+  // Shells and regions only move, so their alpha curves cannot multiply the veil.
+  entries.set(root, { from: { opacity: profile ? 1 : 0 }, target: { opacity: 1 }, exit: { opacity: 0 }, delay: 0 });
+  if (panel) {
+    const shell = {
+      from: profile ? { y: 0, scale: 1 } : { y: 10, scale: .992 },
+      target: { y: 0, scale: 1 },
+      exit: profile ? { y: 0, scale: 1 } : { y: 6, scale: .992 }, delay: 0,
+    };
+    if (panel === root) {
+      for (const part of ['from', 'target', 'exit']) Object.assign(shell[part], entries.get(root)[part]);
+    }
+    entries.set(panel, shell);
+  }
+  for (const el of regions) {
+    let x = parseFloat(el.style.getPropertyValue('--surface-x')) || -10;
+    let y = 0;
+    let scale = 1;
+    if (profile) {
+      x = 0;
+      y = profile.rise ?? 12;
+      if (el.dataset.surfaceRole === 'heading') y = -8;
+      if (el.dataset.surfaceRole === 'nav') { x = -12; y = 0; }
+      if (el.dataset.surfaceRole === 'portrait') { x = -24; y = 0; scale = 1.025; }
+      if (el.dataset.surfaceRole === 'actions') y = 8;
+      if (profile.expedition) { x = 8; y = 0; scale = 1; }
+      if (profile.key === 'backpack') { x = 24; y = 0; }
+    }
+    entries.set(el, {
+      from: { x, y, scale }, target: { x: 0, y: 0, scale: 1 },
+      exit: profile?.key === 'backpack' ? { x: 24, y: 0, scale: 1 }
+        : { x: 0, y: -6, scale: 1 },
+      delay: fast ? 0 : parseFloat(el.style.getPropertyValue('--surface-delay')) || 0,
+    });
+  }
+  for (const [el, saved] of state.elements) {
+    if (entries.has(el)) continue;
+    clearVisual(el);
+    if (saved.animation) el.style.setProperty('animation', saved.animation, saved.priority);
+    else el.style.removeProperty('animation');
+    delete el.dataset.surfaceTarget;
+    state.elements.delete(el);
+  }
+  for (const [el, entry] of entries) {
+    const previous = state.elements.get(el);
+    if (!previous) state.elements.set(el, {
+      animation: el.style.getPropertyValue('animation'), priority: el.style.getPropertyPriority('animation'), ...entry,
+    });
+    else Object.assign(previous, entry);
+    el.dataset.surfaceTarget = '1';
+    // Inline priority also defeats theme-owned keyframes without changing theme files.
+    el.style.setProperty('animation', 'none', 'important');
+    if (continuing && previous && !reversing) continue;
+    retargetVisual(el, entry.target, {
+      duration, delay: continuing || preparingExit ? 0 : entry.delay,
+      // Refresh/contentOnly can leave visible regions unregistered until closing.
+      // Enrol those at rest; the paired leave call supplies their actual exit.
+      from: preparingExit && !previous ? entry.target : entry.from,
+    });
+  }
+}
 
 function reduced() {
   return document.body.classList.contains('reduce-motion')
@@ -17,7 +122,7 @@ function blocks(root) {
   const visible = el => !el.matches('script, style, link, dialog, [hidden], [aria-hidden="true"]');
   const children = [...content.children].filter(visible);
   // Most pages have one layout wrapper. Animate its regions, never each item in a large list.
-  const regions = children.length === 1 && children[0].children.length > 1
+  const regions = children.length === 1 && children[0].children.length > 1 && children[0].children.length <= 8
     ? [...children[0].children].filter(visible) : children;
   return regions.slice(0, 8);
 }
@@ -75,7 +180,8 @@ export function enterSurface(root, { restart = true, fast = false, contentOnly =
       el.style.setProperty('--surface-clip', right ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)');
     }
   });
-  if (restart && phase && !reduced()) {
+  targetSurface(root, regions, profile, fast, restart, phase);
+  if (restart && phase && !reduced() && !visualSurfaces.has(root)) {
     // 同一帧内关闭/重开或连续换页会合并样式更新，a→b→a可能被当作未变化。
     // 先提交无入场标记的样式，再给本次页面设置新阶段，确保重播。
     delete root.dataset.surfacePhase;
@@ -85,11 +191,22 @@ export function enterSurface(root, { restart = true, fast = false, contentOnly =
 }
 
 export function leaveSurface(root) {
-  if (root) root.dataset.surfacePhase = 'out';
+  if (!root) return;
+  root.dataset.surfacePhase = 'out';
+  if (reduced()) { releaseVisual(root); return; }
+  const state = visualSurfaces.get(root);
+  if (state) state.leaving = true;
+  const duration = parseFloat(root.style.getPropertyValue('--page-out'))
+    || (root.dataset.surfaceMotion === 'fast' ? surfaceTiming.fastExit : surfaceTiming.exit);
+  for (const [el, entry] of state?.elements ?? []) {
+    retargetVisual(el, entry.exit, { duration, easing: motionEasing.exit });
+  }
 }
 
-export function clearSurface(root) {
-  if (root) delete root.dataset.surfacePhase;
+export function clearSurface(root, { preserveVisual = false } = {}) {
+  if (!root) return;
+  delete root.dataset.surfacePhase;
+  if (!preserveVisual) releaseVisual(root);
 }
 
 // One stylesheet owns navigation animation. Repeated #overlay deliberately outranks
@@ -103,6 +220,9 @@ body [data-surface-motion] {
 }
 body [data-surface-motion="fast"] {
   --surface-in: ${surfaceTiming.fastEnter}ms; --surface-out: ${surfaceTiming.fastExit}ms;
+}
+body #overlay[data-ui-motion="panel"], body #overlay[data-ui-motion="confirm"] {
+  --surface-in: ${motionTiming.detailEnter}ms;
 }
 body #overlay#overlay#overlay[data-surface-motion][data-surface-phase] {
   animation: surfaceVeilIn var(--surface-in) var(--surface-ease) both !important;
@@ -189,6 +309,14 @@ body #overlay#overlay#overlay#overlay[data-surface-context="expedition"] [data-s
 body #overlay#overlay#overlay#overlay[data-surface-context="expedition"] .evt-opt {
   animation: none !important;
 }
+/* Backpack is one attached surface: all regions enter from the right and leave there. */
+body #overlay#overlay#overlay#overlay[data-surface-layout="backpack"] [data-surface-role] {
+  --page-x: 24px; --page-y: 0px; --page-scale: 1;
+}
+body #overlay#overlay#overlay#overlay[data-surface-layout="backpack"][data-surface-phase="out"] [data-surface-role] {
+  animation-name: surfacePanelReturn !important;
+}
+@keyframes surfacePanelReturn { to { opacity: 0; transform: translateX(24px); } }
 /* 玻璃父层只动画 transform，opacity 两端均为 1 也不纳入动画。 */
 body #overlay#overlay#overlay#overlay[data-surface-layout="base-content"] [data-surface-role] {
   --page-x: var(--base-region-x,28px); --page-y: 0px; --page-scale: 1;
@@ -200,7 +328,6 @@ body #overlay#overlay#overlay#overlay[data-surface-layout="base-content"][data-s
 body #overlay#overlay#overlay#overlay[data-surface-layout][data-surface-phase="out"] {
   animation: surfaceVeilOut var(--page-out,.18s) ease-out both !important;
 }
-body #overlay#overlay#overlay#overlay[data-surface-layout][data-ui-instant-close] { --page-out: 140ms; }
 body #overlay#overlay#overlay#overlay[data-surface-layout][data-surface-phase="out"] > .card { animation: none !important; }
 body #overlay#overlay#overlay#overlay[data-surface-layout][data-surface-phase="out"] [data-surface-role] {
   animation: surfacePageOut var(--page-out,140ms) ease-out both !important;
@@ -211,6 +338,28 @@ body #overlay#overlay#overlay#overlay[data-surface-layout][data-surface-phase="o
 `.replaceAll('body ', 'body:not(.reduce-motion) ');
 style.textContent = `@media (prefers-reduced-motion: no-preference) { ${style.textContent} }`;
 document.head.appendChild(style);
+
+// DOM owners still hide/unmount. Release only our visual state when that happens.
+const visualLifecycle = new MutationObserver(() => {
+  for (const [root, state] of visualSurfaces) {
+    if (!root.isConnected || root.closest('[hidden]') || reduced()) {
+      releaseVisual(root);
+      continue;
+    }
+    for (const [el, saved] of state.elements) {
+      if (el.isConnected) continue;
+      clearVisual(el);
+      if (saved.animation) el.style.setProperty('animation', saved.animation, saved.priority);
+      else el.style.removeProperty('animation');
+      delete el.dataset.surfaceTarget;
+      state.elements.delete(el);
+    }
+  }
+});
+visualLifecycle.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['hidden', 'class'] });
+window.matchMedia?.('(prefers-reduced-motion: reduce)').addEventListener?.('change', () => {
+  if (reduced()) for (const root of visualSurfaces.keys()) releaseVisual(root);
+});
 
 // Home and native dialogs own their lifecycle outside UI.showOverlay/showScreen.
 const title = document.getElementById('title');

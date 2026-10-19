@@ -11,6 +11,12 @@ export let playedMovesThisTurn = 0;
 export let growthNames = new Set();
 export let growth = {};
 export let infuseFuels = 0;
+// 实际注能事件只归属当时仍在手牌中的实例；离手暂停累计，回手保留已有值。
+export let handInfuseCounts = {};
+export function set$handInfuseCounts(value) { handInfuseCounts = { ...value }; }
+export function recordHandInfusion(uids) {
+  for (const uid of new Set(uids)) handInfuseCounts[uid] = (handInfuseCounts[uid] || 0) + 1;
+}
 export let sealUnlocked = false;
 export let extraTurn = false;
 export let deathSave = 0;
@@ -74,6 +80,7 @@ export function restoreEffectState(data) {
 }
 export function restoreEffectRules(data) {
   growth = { ...(data.growth || {}) }; growthNames = new Set(data.growthNames || []);
+  set$handInfuseCounts(data.handInfuseCounts || {});
   infuseFuels = +data.infuseFuels || 0; sealUnlocked = !!data.sealUnlocked;
   extraTurn = !!data.extraTurn; deathSave = +data.deathSave || 0;
   killAtkUp = +data.killAtkUp || 0; poisonOnSpell = !!data.poisonOnSpell;
@@ -108,7 +115,7 @@ export function applyRuneFlag(kind) {
  * effects 属地的 14 个散 set$ 收敛为域内一个入口；符文旗经 resetRuneFlags 一并清）。
  * 字段集与守卫测试白名单的 effects 片一致——新增跨战清零字段请同步此函数。 */
 export function resetBattleEffectFlags() {
-  growthNames = new Set(); growth = {};
+  growthNames = new Set(); growth = {}; handInfuseCounts = {};
   infuseFuels = 0; sealUnlocked = false; extraTurn = false; deathSave = 0;
   killAtkUp = 0; poisonOnSpell = false; poisonLegacy = false;
   sealDone = false; playerCurseImmune = false; allSpellsInfused = false;

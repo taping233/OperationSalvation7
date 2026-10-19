@@ -99,6 +99,50 @@ it('rolls back an explicit sale on storage failure and preserves collection prot
   expect(Base.data.stash.map(stack => stack.count)).toEqual([9, 2]);
 });
 
+it('keeps legacy catalog records when protection is cancelled and restores protection by stable card id', async () => {
+  const Base = await realBase();
+  const card = Base.data.stash[1].card;
+  const record = { name: '历史收录名称', rarity: '稀有', ts: 123, source: 'legacy' };
+  Base.data.collection[card.id] = record;
+  expect(Base.save()).toBe(true);
+  expect(Base.isCollected(card)).toBe(true);
+  expect(Base.isCollectionProtected(Base.data.stash[0].card)).toBe(true);
+  expect(Base.isCollectionProtected({ ...card, id: 'different-id' })).toBe(false);
+
+  expect(Base.collectToggle(card)).toBe(false);
+  expect(Base.isCollected(card)).toBe(true);
+  expect(Base.isCollectionProtected(card)).toBe(false);
+  expect(Base.data.collection[card.id]).toEqual({ ...record, protected: false });
+  expect(Base.sellStashCards(card.name, 1, 'card:missing')).toMatchObject({ ok: false, why: 'identity' });
+  expect(Base.sellStashCards(card.name, 1, 'card:same-card:second')).toMatchObject({ ok: true, qty: 1, coins: 4 });
+  expect(Base.data.stash.map(stack => stack.count)).toEqual([9, 1]);
+
+  expect(Base.collectToggle(card)).toBe(true);
+  expect(Base.data.collection[card.id]).toEqual({ ...record, protected: true });
+  expect(Base.sellStashCards(card.name, 1, 'card:same-card:first')).toMatchObject({ ok: false, why: 'collected' });
+  Base.use(1);
+  expect(Base.isCollected(card)).toBe(true);
+  expect(Base.isCollectionProtected(card)).toBe(true);
+});
+
+it.each([true, false])('protection toggle storage failure preserves catalog, inventory and protected=%s', async protectedState => {
+  const Base = await realBase();
+  const card = Base.data.stash[1].card;
+  Base.data.collection[card.id] = { name: card.name, ts: 1, protected: protectedState };
+  expect(Base.save()).toBe(true);
+  const before = structuredClone(Base.data), raw = localStorage.getItem(Base.SLOT_KEY(1));
+  const original = Storage.prototype.setItem;
+  vi.spyOn(Storage.prototype, 'setItem').mockImplementation(function (key, value) {
+    if (key === Base.SLOT_KEY(1)) throw new Error('quota fixture');
+    return original.call(this, key, value);
+  });
+  expect(Base.collectToggle(card)).toBeNull();
+  expect(Base.data).toEqual(before);
+  expect(localStorage.getItem(Base.SLOT_KEY(1))).toBe(raw);
+  expect(Base.isCollected(card)).toBe(true);
+  expect(Base.isCollectionProtected(card)).toBe(protectedState);
+});
+
 it('passes the selected variant identity from actual shop buttons into the real Base transaction', async () => {
   const base = await realBase();
   const cards = { all: () => base.data.stash.map(stack => stack.card), sellPrice: c => c.value,

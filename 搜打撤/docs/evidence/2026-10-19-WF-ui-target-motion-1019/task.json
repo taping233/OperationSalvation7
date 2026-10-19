@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-ui-target-motion-1019",
+  "date": "2026-10-19",
+  "owner": "Friday",
+  "goal": "公共目标过渡接入后，按老板要求打磨两轮：连续性/层级，再速度/幅度/收尾；集中验证",
+  "paths": [
+    "game/src/ui/target-motion.js",
+    "game/src/ui/interface-motion.js",
+    "game/src/ui/surface-motion.js",
+    "game/src/ui/reward-card-feedback.js",
+    "game/src/ui/card-result-feedback.js",
+    "game/src/hub/bag-pane-view.js",
+    "game/src/hub/game.bag.view2.js",
+    "docs/evidence/2026-10-19-ui-target-motion",
+    "game/src/ui/motion-presets.js",
+    "game/src/ui/card-state-motion.js",
+    "game/src/ui/reward-acquisition-motion.js",
+    "game/src/ui/selection-state-motion.js",
+    "game/css/card-state-motion.css",
+    "game/css/selection-state-motion.css",
+    "game/dev/bag-reward-slice-review.js",
+    "tests/target-motion.test.js",
+    "tests/card-state-motion.test.js",
+    "tests/reward-acquisition-motion.test.js",
+    "tests/selection-state-motion.test.js",
+    "tests/target-surface.test.js",
+    "tests/surface-motion.test.js",
+    "docs/production/art/VISUAL-BIBLE.md",
+    "tests/bag-pane-retained.test.js"
+  ],
+  "doneWhen": [
+    "公共Motion目标过渡支持中断续接、共享参数及减少动态，不创建永久逐帧循环",
+    "卡牌聚焦与成功收纳、菜单筛选底板、普通面板开合真实接入且保留现有业务与视觉",
+    "所有实现完成后集中定向回归和当前内置浏览器代表场景检查，真实缺口明确"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-19-WF-ui-target-motion-1019/2026-10-19T13-51-34.857Z-076e5f0a.json",
+      "result": "passed",
+      "sha256": "07d5f604d6d74419f63f0bbb8e3f79d16572b93b8e7448cbb28f6e827e33edf3",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "两轮实现已冻结；最终14文件119项通过，8组类型、相关ESLint/Stylelint通过，现行文档600链接0问题。精确边界见ui-target-motion/verification.md。",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "第二轮最终实页：恢复时平台已移除mcp__cua_repl；保留第一轮证据，未使用外部浏览器或旧图替代。",
+      "result": "unverified"
+    },
+    {
+      "kind": "manual",
+      "description": "存档动效回归修复：修复前4项复现失败；修复后8文件103项通过，相关ESLint及8组类型通过。报告14-02-46全局freshness因另一会话camera/map-drag变化，按原样保留；自有surface与专测输入稳定，非冻结回执。",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "第二轮最终视觉及存档列阵/专用加载过场因当前平台内置浏览器不可用待实页复核，第一轮截图不能替代。",
+    "老板授权本地提交，收尾将另验实际暂存快照；不build、不推送。"
+  ],
+  "updatedAt": "2026-10-19T14:09:09.832Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

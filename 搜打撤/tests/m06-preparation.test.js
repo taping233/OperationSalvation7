@@ -53,6 +53,44 @@ describe('M06-B/C deployment preview', () => {
     expect(JSON.stringify(base)).toBe(before); expect(spy).not.toHaveBeenCalled(); spy.mockRestore();
   });
 
+  it('counts each equipment card as one slot and blocks an over-capacity preset', () => {
+    const equipment = { id: 'equipment-a', name: '远行护甲', type: '装备', rarity: '稀有' };
+    const preview = previewDeployment({
+      baseSnapshot: { stash: [{ card: equipment, count: 3 }] },
+      preset: { picks: [{ card: { cardId: equipment.id }, count: 3 }] },
+      cardCatalog: [equipment],
+      bagCapacity: 4,
+    });
+    expect(preview.costs).toMatchObject({ stashCards: 3, slotsUsed: 5, extraStackSlots: 3 });
+    expect(preview.canStart).toBe(false);
+    expect(preview.errors).toContain('BAG_CAPACITY_EXCEEDED');
+  });
+
+  it('uses the supplied starter count and merges same-name variant picks before counting slots', () => {
+    const variants = ['a', 'b'].map(variant => ({ ...cards[0], id: `variant-${variant}` }));
+    const baseSnapshot = { stash: variants.map(card => ({ card, count: 2 })) };
+    const preset = { picks: variants.map(card => ({ card: { cardId: card.id }, count: 2 })) };
+    const preview = previewDeployment({ baseSnapshot, preset, cardCatalog: variants, starterCount: 3, bagCapacity: 3 });
+    expect(preview.costs).toMatchObject({ stashCards: 4, slotsUsed: 3, extraStackSlots: 1 });
+    expect(preview.canStart).toBe(true);
+  });
+
+  it('uses the preset pet before the carried pet, including extra starter cards and fireball merging', () => {
+    const starter = { id: 'starter-attack', name: '初始攻击', type: '武术' };
+    const fireball = { id: 'tt3-fireball', name: '火球', type: '法术' };
+    const pets = [{ id: 'robot', effect: { extraSha: 2 } }, { id: 'fire', effect: { shaToFireball: true } }];
+    const baseSnapshot = { stash: [{ card: fireball, count: 1 }], petSel: 'robot', pets: { robot: { lv: 1 }, fire: { lv: 1 } } };
+    const before = structuredClone(baseSnapshot);
+    const options = { baseSnapshot, cardCatalog: [starter, fireball], pets, bagCapacity: 3 };
+    const carried = previewDeployment({ ...options, preset: { picks: [] } });
+    expect(carried.costs.slotsUsed).toBe(3);
+    expect(carried.canStart).toBe(true);
+    const selected = previewDeployment({ ...options, preset: { petId: 'fire', picks: [{ card: { cardId: fireball.id }, count: 1 }] } });
+    expect(selected.costs).toMatchObject({ stashCards: 1, slotsUsed: 2, extraStackSlots: 1 });
+    expect(selected.canStart).toBe(true);
+    expect(baseSnapshot).toEqual(before);
+  });
+
   it('rechecks current inventory and delegates run creation only to injected M11', async () => {
     const port = memoryPort(); const preset = { presetId: 'preset-1', name: '可用', characterId: 'wu', petId: 'dog', picks: [{ card: { cardId: 'common-a' }, count: 2 }] };
     const api0 = createPreparationCommands(port);

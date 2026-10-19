@@ -12,5 +12,5 @@ export function showRewardCardFeedback(stage, cards, { mode = 'chest', token, sc
     if (item) item.count++;
     else groups.set(key, { kind:REWARD_DESTINATION, name:card.name, card:{ ...card }, count:1 });
   }
-  showSettledCardFeedback(stage, [...groups.values()], { mode, token, sceneSelector });
+  showSettledCardFeedback(stage, [...groups.values()], { mode, token, sceneSelector, rewardSource: true });
 }

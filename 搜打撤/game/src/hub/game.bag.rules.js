@@ -1,5 +1,6 @@
-import { esc } from '../core/shared.js';
+import { esc, escAttr } from '../core/shared.js';
 import { stackCapOf, canReceiveCardFromBag, canAcceptCardAtCapacity } from '../core/card-capacity.js';
+import { rewardSceneHTML } from '../ui/reward-scene-view.js';
 
 const isMapBagOperation = operation => operation &&
   (operation.op === 'heal' || operation.op === 'restoreConsumed' ||
@@ -55,19 +56,99 @@ export function canReplaceBagCard(game, ownedIndex, card, { usedSlots, bagCap, b
     canAcceptCard:target => canAcceptCardAtCapacity(target, {usedSlots:projected,baseCap:baseCap(),totalCap:bagCap()}) });
 }
 
+// Candidates live on the existing owned entry, so the normal run save preserves
+// a cancelled/interrupted discovery without consuming its source or rerolling.
+export function openBagLegendaryDiscovery(card, ownedIndex, {
+  UI, SDT, game, Random, newUid, saveGame, showBackpack, usedSlots, bagCap,
+  setReceipt = () => {}, captureContext = () => () => true,
+}) {
+  const entries = game.ownedCards, source = entries[ownedIndex];
+  if (!source || source.card !== card) return true;
+  let openingNotice = '';
+  const pool = SDT.Cards.all().filter(candidate => candidate.id && candidate.rarity === '传说' && SDT.Cards.isRandomObtainable(candidate));
+  if (!pool.length) { UI.log('卡牌库中没有可获得的传说卡；卡牌未消耗', 'warn'); return true; }
+  if (!source.bagDiscover) {
+    const available = [...new Map(pool.map(candidate => [candidate.id, candidate])).values()], cardIds = [];
+    while (available.length && cardIds.length < 3) {
+      const index = Math.floor(Random.random('loot') * available.length);
+      cardIds.push(available.splice(index, 1)[0].id);
+    }
+    source.bagDiscover = { version:1, cardIds };
+    try {
+      if (saveGame() === false) openingNotice = '候选尚未保存，通行证已保留；请在刷新前重试保存。';
+    } catch { openingNotice = '候选尚未保存，通行证已保留；请在刷新前重试保存。'; }
+  }
+  const pending = source.bagDiscover;
+  const ids = pending?.cardIds;
+  const candidates = Array.isArray(ids) ? ids.map(id => pool.find(candidate => candidate.id === id)) : [];
+  if (pending?.version !== 1 || !candidates.length || candidates.length > 3 || candidates.some(candidate => !candidate)
+    || new Set(ids).size !== ids.length) {
+    UI.log('发现候选暂不可用；通行证与原候选已保留', 'warn'); return true;
+  }
+  const sameContext = captureContext();
+  let settled = false, root;
+  const current = () => !settled && sameContext() && !game.battleActive && game.ownedCards === entries
+    && entries.includes(source) && source.bagDiscover === pending;
+  const live = () => current() && root?.isConnected && UI.el.ovBody.contains(root)
+    && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
+  const canTake = got => canReplaceBagCard(game, entries.indexOf(source), got,
+    { usedSlots, bagCap, baseCap:SDT.Base?.bagCap || bagCap });
+  function render(notice = '') {
+    UI.showOverlay('发现传说卡', rewardSceneHTML({
+      title:'发现传说卡', countLabel:`${candidates.length} 选 1`, count:candidates.length,
+      className:'reward-v14 reward-standalone-picker bag-discover',
+      cards:candidates.map((candidate, i) => `<div class="reward-unit"><button type="button" class="bt-card reward-card" data-act="bagDiscoverPick" data-i="${i}" data-cancel="false" aria-label="选择${escAttr(candidate.name)}">${SDT.Cards.cardHTML(candidate, 'sm')}</button></div>`).join(''),
+      actions:'<button type="button" class="ov-btn" data-act="bagDiscoverCancel" data-cancel="true">返回背包</button>',
+      warning:`<p class="reward-notice" role="status">${esc(notice || '选择后才消耗通行证；返回可保留候选。')}</p>`,
+    }), 'discover');
+    root = UI.el.ovBody.querySelector('.bag-discover');
+    const view = root;
+    UI.act('bagDiscoverCancel', () => {
+      if (!live() || root !== view) return false;
+      settled = true; showBackpack(true); return true;
+    });
+    UI.act('bagDiscoverPick', data => {
+      if (!live() || root !== view) return false;
+      const index = Number(data.i), got = candidates[index];
+      if (!Number.isInteger(index) || !got) return false;
+      if (!canTake(got)) { render('背包空间不足；请返回整理，通行证与候选已保留。'); return false; }
+      const sourceIndex = entries.indexOf(source);
+      const reward = { uid:newUid(), card:{ ...got } };
+      settled = true;
+      entries.splice(sourceIndex, 1); entries.push(reward);
+      let saved;
+      try { saved = saveGame(); } catch { saved = false; }
+      if (saved === false) {
+        entries.splice(entries.indexOf(reward), 1); entries.splice(sourceIndex, 0, source);
+        settled = false;
+        if (current()) render('保存未成功；通行证与候选已保留，请重试。');
+        return false;
+      }
+      const receipt = `使用【${card.name}】：获得传说卡【${got.name}】`;
+      setReceipt(receipt); UI.log(esc(receipt), 'loot'); showBackpack(true); return true;
+    });
+  }
+  render(openingNotice);
+  return true;
+}
+
 
 /**
  * 结构化背包用法的地图侧消费器。
  * 结算治疗、复原与直接获取；依赖由背包壳注入，避免规则片反向依赖壳。
  */
 export function useStructuredBagRule(card, ownedIndex, {
-  UI, SDT, game, Random, newUid, saveGame, showBackpack, usedSlots, bagCap, setReceipt = () => {},
+  UI, SDT, game, Random, newUid, saveGame, showBackpack, usedSlots, bagCap, setReceipt = () => {}, captureContext,
 }) {
   const bagRules = card.rules?.bag;
   if (!bagRules || !Object.hasOwn(bagRules, 'use')) return false;
   const operations = Array.isArray(bagRules.use) ? bagRules.use : [];
   if (!operations.length) return false;
   const mapSide = operations.filter(isMapBagOperation);
+  if (mapSide.some(operation => operation.op === 'discover' && operation.pool?.kind === 'legendary')) {
+    return openBagLegendaryDiscovery(card, ownedIndex, { UI, SDT, game, Random, newUid, saveGame,
+      showBackpack, usedSlots, bagCap, setReceipt, captureContext });
+  }
   const receipts = [];
   const report = (message, tone) => { UI.log(message, tone); receipts.push(message.replace(/<[^>]*>|\[\[icon:[^\]]+\]\]/g, '')); };
   if (!mapSide.length) {

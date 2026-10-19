@@ -19,6 +19,23 @@ describe('M06-D source evidence', () => {
 });
 
 describe('M06 mountable view', () => {
+  it('explains an over-capacity preset and disables applying it', () => {
+    const card = { id: 'armor', name: '护甲', type: '装备', rarity: '稀有' };
+    const root = document.createElement('div');
+    const model = buildPreparationViewModel({
+      baseSnapshot: { stash: [{ card, count: 3 }] },
+      preparation: { tracked: [], presets: [{ id: 'preset-1', name: '护甲方案', picks: [{ card: { cardId: card.id }, count: 3 }] }] },
+      cardCatalog: [card], bagCapacity: 4,
+    });
+    const view = mountPreparationView(root, { model });
+    expect(root.textContent).toContain('占 5/4 格');
+    expect(root.textContent).toContain('背包容量不足');
+    expect(root.querySelector('[data-action="preset-apply"]').disabled).toBe(true);
+    expect(root.textContent).toContain('先确认人物，再在整备页确认宠物并出发');
+    expect(root.textContent).not.toContain('人物仍在出发后选择');
+    view.dispose();
+  });
+
   it('builds the shared model from snapshots without consuming inventory', () => {
     const base = { stash: [{ card: { id: 'random', name: '远行短刃', rarity: '古朴', type: '武术' }, count: 1 }], characters: { wu: { lv: 1 } }, pets: { dog: { lv: 1 } } };
     const before = JSON.stringify(base);

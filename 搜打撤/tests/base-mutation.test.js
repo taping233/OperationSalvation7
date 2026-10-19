@@ -152,7 +152,11 @@ describe('基地同步草稿提交', () => {
   it('收藏成功保留未变化的仓库卡堆引用，失败仍不改任何引用', () => {
     const stash = Base.data.stash;
     const stack = stash[0];
+    const characters = structuredClone(Base.data.characters);
     expect(Base.collectToggle(card)).toBe(true);
+    expect(Base.isCollected(card)).toBe(true);
+    expect(Base.isCollectionProtected(card)).toBe(true);
+    expect(Base.data.characters).toEqual(characters);
     expect(Base.data.stash).toBe(stash);
     expect(Base.data.stash[0]).toBe(stack);
     const collection = Base.data.collection;

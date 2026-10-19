@@ -18,7 +18,7 @@ const M_BATCH_ONPLAY_IDS = [
 ];
 const ALL_M_BATCH_IDS = [...readFileSync('docs/M-BATCH-MATRIX.md', 'utf8')
   .matchAll(/^\| ([a-z][\w-]+) \|/gm)].map(match => match[1]).filter(id => id !== 'id');
-const APPROVED_IDS = [...MIGRATED_IDS, ...ALL_M_BATCH_IDS].filter(id => !RETIRED_1010.has(id));
+const APPROVED_IDS = [...MIGRATED_IDS, ...ALL_M_BATCH_IDS, 'tt7-ironphalanx'].filter(id => !RETIRED_1010.has(id));
 // 2026-10-18 已批准的生产文案/名称修订；固定前后值投影，原 before 与 CARDS_SYNC 不改。
 const APPROVED_PRODUCTION_FACE_REVISIONS = [
   ["cmtn6bge52qt","desc","在背包中才能使用，复原最多两张卡牌","地图背包：从消耗区复原最多2张卡牌；战斗：从本场消耗牌复原最多2张回到手牌。对应消耗区为空时不可使用。"],
@@ -50,6 +50,9 @@ const APPROVED_RULES_BY_ID = Object.fromEntries([
   ...MIGRATED_IDS.map(id => [id, HEAL_RULES]),
   ...ALL_M_BATCH_IDS.map(id => [id, null]),
   ['tt3-mystery-potion', { version:1, battle:{ hosted:['mystery-potion'] } }],
+  ['tt7-ironphalanx', { version: 1, battle: { target: { side: 'self', area: false } },
+    triggers: { onPlay: [{ op: 'armor', amount: 10 },
+      { op: 'acquire', n: 5, pool: { kind: '随机' }, dest: 'deck', act: 'costMinusOne' }] } }],
 ]);
 // Captured read-only at the beginning of the second window, not during the first export.
 const SYNC_SOURCE_SHA256 = 'd2f38387dd0c49ca90628aeea5334790286de906838b34e6c7aece0652511244';
@@ -211,6 +214,29 @@ describe('E8 isolated production inventory', () => {
     changedSync.cardsSync.cards[0].card.desc += 'changed';
     expect(() => compareMigrationInventories(currentBaseline, changedSync, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
       .toThrow('CARDS_SYNC card fields changed');
+  });
+
+  it('铁甲阵仅将洗入牌库的获取动作由费用归零改为费用减1', () => {
+    const current = inventory.production.cards.find(row => row.id === 'tt7-ironphalanx').card;
+    expect(current.rules).toEqual(APPROVED_RULES_BY_ID['tt7-ironphalanx']);
+    const reverted = clone(inventory);
+    reverted.production.cards.find(row => row.id === 'tt7-ironphalanx').card.rules.triggers.onPlay[1].act = 'zeroCost';
+    expect(() => compareMigrationInventories(currentBaseline, reverted, APPROVED_IDS,
+      HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
+      .toThrow('missing=tt7-ironphalanx');
+    for (const mutate of [
+      card => { card.rules.triggers.onPlay[1].dest = 'hand'; },
+      card => { card.rules.triggers.onPlay[1].n = 4; },
+      card => { card.desc += '额外效果'; },
+      card => { card.cost++; },
+      card => { card.extra = true; },
+    ]) {
+      const changed = clone(inventory);
+      mutate(changed.production.cards.find(row => row.id === 'tt7-ironphalanx').card);
+      expect(() => compareMigrationInventories(currentBaseline, changed, APPROVED_IDS,
+        HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
+        .toThrow('tt7-ironphalanx changed beyond approved rules addition');
+    }
   });
 
   it('五条生产修订精确锁定旧值与新值，规则、费用、回退旧文案或额外字段均拒绝', () => {

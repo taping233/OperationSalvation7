@@ -1,0 +1,34 @@
+{
+  "outcome": "passed",
+  "mode": "full",
+  "tests": {
+    "passed": 6729,
+    "skipped": 16,
+    "total": 6745,
+    "failed": 0,
+    "files": 664
+  },
+  "baseline": "29f401e077be555d163a17e95ef954184830789e",
+  "report": "docs/evidence/2026-10-19-WF-completed-commit-1019/2026-10-19T14-38-16.496Z-34614936-staged.json",
+  "reportSha256": "89551d1518aed368f49fed5221a89c6ea48ef16a61f08717eff5685943bce507",
+  "log": "docs/evidence/2026-10-19-WF-completed-commit-1019/2026-10-19T14-38-16.496Z-34614936-staged.log",
+  "logSha256": "34eb58a4ae0ded56f6777eed71075bc979e121db5427e393583556ee60b78873",
+  "indexStable": true,
+  "snapshotMutations": [],
+  "staticChecks": [
+    "507 project files syntax",
+    "content data",
+    "8 type configurations",
+    "ESLint"
+  ],
+  "docs": {
+    "checkedRelativeLinks": 606,
+    "findings": 0,
+    "scope": "current docs guard; evidence is separately reviewed"
+  },
+  "unverified": [
+    "Final in-app-browser visuals and real-input playback",
+    "build and remote CI"
+  ],
+  "metadataUpdate": "Only evidence and REGISTRY are appended after the gate; existing receipt rules exclude these state records. Code, normal documents and dependencies remain frozen."
+}

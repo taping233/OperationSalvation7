@@ -91,6 +91,22 @@ describe('common two-row card browser', () => {
 });
 
 describe('base page and inventory return contracts', () => {
+  it('仓库保护标识使用保护状态，保留收录的未保护卡不显示禁售标记', () => {
+    const card = { id:'catalogued', name:'已收录卡牌', type:'武术', rarity:'古朴' };
+    const base = window.SDT.Base = { slot:++serial, PET_EGG_ID:'egg', data:{ stash:[{card,count:2}], pocket:[] },
+      stashUsed:() => 2, stashCap:() => 25, isCollected:vi.fn(() => true), isCollectionProtected:vi.fn(() => false) };
+    window.SDT.Cards = { cardHTML:item => `<span>${item.name}</span>` };
+    document.body.innerHTML = warehouseHTML();
+    expect(document.querySelector('.warehouse-protected')).toBeNull();
+    expect(document.querySelector('.warehouse-selection-v12').textContent).not.toContain('收藏保护');
+    expect(base.isCollected).not.toHaveBeenCalled();
+
+    base.isCollectionProtected.mockReturnValue(true);
+    document.body.innerHTML = warehouseHTML();
+    expect(document.querySelector('.warehouse-protected').textContent).toBe('收藏保护');
+    expect(document.querySelector('.warehouse-selection-v12').textContent).toContain('收藏保护');
+  });
+
   it('moves glass regions during base subpage entry without animating opacity', () => {
     const animate = vi.fn(() => ({ finished:Promise.resolve(), cancel:vi.fn() }));
     const originalAnimate = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'animate');

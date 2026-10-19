@@ -1,0 +1,383 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-19T11:59:06.4232050Z",
+  "basis": "卡牌效果以当前可见描述为准；本文件只汇总既有分组审查，不改变玩法",
+  "catalog": {
+    "file": "catalog.json",
+    "count": 268,
+    "capturedAt": "2026-10-19T11:30:11.661Z",
+    "source": "fresh in-memory production catalog with normal seed/migrations",
+    "sha256": "b3033644e45a8fd0aee2dfa204ebfd1f093f620f5c0114dd9aa8725d572ee6c2"
+  },
+  "coverage": {
+    "exact": true,
+    "battle": 177,
+    "auxiliary": 91,
+    "reviewed": 268,
+    "uniqueReviewed": 268,
+    "catalogDuplicateIds": [],
+    "reviewDuplicateIds": [],
+    "missingIds": [],
+    "extraIds": [],
+    "nameTypeRawDescriptionMismatchIds": []
+  },
+  "sourceIdentity": {
+    "matched": true,
+    "battleSourceCatalog": "catalog.json",
+    "battleCatalogCapturedAt": "2026-10-19T11:30:11.661Z",
+    "auxiliaryCatalogSha256": "b3033644e45a8fd0aee2dfa204ebfd1f093f620f5c0114dd9aa8725d572ee6c2",
+    "scope": "核对同一卡库快照的ID、名称、类型、原始描述及来源标识；分组源码指纹仍为审查时记录，不等于当前全源码冻结"
+  },
+  "reviewStatusCounts": {
+    "aligned-static": 54,
+    "consistent": 141,
+    "context-gap": 5,
+    "fixed-awaiting-browser": 1,
+    "mismatch": 16,
+    "mismatch-static": 7,
+    "needs-decision": 8,
+    "not-verified": 12,
+    "reference-card-static": 24
+  },
+  "aggregate": {
+    "consistent": 141,
+    "alignedStatic": 54,
+    "referenceCardStatic": 24,
+    "unfixedDifferences": 23,
+    "battleMismatch": 16,
+    "auxiliaryMismatchStatic": 7,
+    "needsDecision": 8,
+    "contextGap": 5,
+    "notVerified": 12,
+    "fixedWithScopedBrowserEvidence": 1,
+    "sum": 268
+  },
+  "priorities": [
+    {
+      "priority": "先处理",
+      "basis": "越权目标、错误目标或错误范围",
+      "ids": [
+        "tt3sp-doom",
+        "tt3-noon-duel",
+        "cmtn7err0a7",
+        "tt8-hero-summoner"
+      ],
+      "authorization": "仅建议顺序，23项均未在本轮批改"
+    },
+    {
+      "priority": "随后处理",
+      "basis": "费用、卡池、伤害、成长与触发不符",
+      "ids": [
+        "tt7-ironphalanx",
+        "cmtn1gfhczzj",
+        "tt12-basicdev",
+        "tt12-breakthrough",
+        "tt12-hitechrd",
+        "tt12-magicfind",
+        "tt12-chargeray",
+        "tt2-frostsword",
+        "tt3-fly-arrowhawk",
+        "cmtn1lbhbqi4",
+        "tt2-wreck",
+        "tt3-azure-sword",
+        "tt3-sapper-bomb",
+        "tt7-arcanescroll",
+        "tt3sp-dodge",
+        "tt3-mind-potion",
+        "tt3-python-potion"
+      ],
+      "authorization": "仅建议顺序，逐项依据分组报告"
+    },
+    {
+      "priority": "先定低血成本边界",
+      "basis": "描述与保命钳位差异明确，低血拒绝或允许致死未拍板",
+      "ids": [
+        "tt6-demondeal",
+        "tt6-goldmine"
+      ],
+      "authorization": "不代老板选择玩法"
+    }
+  ],
+  "differences": [
+    {
+      "id": "cmtn1gfhczzj",
+      "name": "厄运",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B02",
+      "detail": "能施咒的招式池追加仅武术谓词，排除了满足条件的法术。",
+      "implementationChanged": false
+    },
+    {
+      "id": "cmtn1lbhbqi4",
+      "name": "充能火球",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B06",
+      "detail": "成长名只有打出时才登记；首次持有经过回合开始没有+1。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt12-basicdev",
+      "name": "基础开发",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B02",
+      "detail": "0费招式池仅武术，未覆盖法术。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt12-breakthrough",
+      "name": "突破进展",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B02",
+      "detail": "分别0/1/2费各1张数量正确，三池均只武术。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt12-chargeray",
+      "name": "充能射线",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B03",
+      "detail": "读取本场全局infuseFuels，没有记录该副本何时在手；迟入手错误吃到此前注能。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt12-hitechrd",
+      "name": "高端研发",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B02",
+      "detail": "真实发现structured moves/cost2只匹配武术；所选实例以后每回合-1的延迟绑定本身已读。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt12-magicfind",
+      "name": "魔法新发现",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B02",
+      "detail": "发现所选0费修饰正确；1费招式池漏法术。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt2-frostsword",
+      "name": "寒冰剑",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B04",
+      "detail": "hosted保留卡面，但伤害入口只认rules.equip.passive.cond.vsFreeze；本卡缺该结构，穿戴无+2。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt2-wreck",
+      "name": "沉船宝盒",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B08",
+      "detail": "正常显式消耗得2随机卡；到期临时卡消耗漏同一钩。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt3-azure-sword",
+      "name": "百炼青虹剑",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B08",
+      "detail": "正常显式消耗排队施放一次初始攻击；到期消耗不触发。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt3-fly-arrowhawk",
+      "name": "飞身劈",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B05",
+      "detail": "结构化伤害清空desc使本次流血翻倍未命中；之后注册永久bleedAmp，影响后续攻击，时机和范围都不符。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt3-noon-duel",
+      "name": "正午决战",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B07",
+      "detail": "确实延迟下回合4×2固定；队列没有保留选中目标，实际打首个活敌。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt3-sapper-bomb",
+      "name": "矿工炸药",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B08",
+      "detail": "正常显式消耗向目标固定4，未指定时首个活敌；到期消耗漏钩。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt3sp-dodge",
+      "name": "闪避",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B09",
+      "detail": "文案第1段伤害没有类型限制；Combat只免下一次攻击，固定/法术/真实均命中且不耗闪避。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt7-arcanescroll",
+      "name": "奥术残卷",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B08",
+      "detail": "正常显式消耗抽3；到期消耗漏钩。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt7-ironphalanx",
+      "name": "铁甲阵",
+      "status": "mismatch",
+      "source": "battle-review.json",
+      "finding": "B01",
+      "detail": "实际act=zeroCost把所有随机模板改成0费，而卡面是均减1费。",
+      "implementationChanged": false
+    },
+    {
+      "id": "cmtn7err0a7",
+      "name": "天国之门",
+      "status": "mismatch-static",
+      "source": "auxiliary-review.json",
+      "finding": null,
+      "detail": "天国之门卡面写全体友方；随机祝福实现仅更新ctx.pstat/pdef，不遍历allies。并且作为花开两面第二扇门时，延期文本未附括号候选词，随机祝福列表可能为空。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt3-mind-potion",
+      "name": "精神药水",
+      "status": "mismatch-static",
+      "source": "auxiliary-review.json",
+      "finding": null,
+      "detail": "卡面/运行数据draw=2，规则amountField=draw；战斗amount仅支持amountField=heal，其余落op.n||1，所以实际抽1（普通战置入1张初始攻击）。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt3-python-potion",
+      "name": "火焰药水",
+      "status": "mismatch-static",
+      "source": "auxiliary-review.json",
+      "finding": null,
+      "detail": "卡面写对全体2点法伤；bag damage规则无dmgType，消费者以fixed默认结算。法伤加成与伤害类型不符。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt3sp-doom",
+      "name": "TNT",
+      "status": "mismatch-static",
+      "source": "auxiliary-review.json",
+      "finding": null,
+      "detail": "卡面仅攻击<=5的小怪；bag execute只检攻击/死亡，不排affix/BOSS，低攻击首脑也进入目标。通用resolveExecute另有!foe.affix排除，两个消费器不一致。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt6-demondeal",
+      "name": "隧道血契",
+      "status": "mismatch-static",
+      "source": "auxiliary-review.json",
+      "finding": null,
+      "detail": "卡面扣5血；实现Math.max(1,hp-5)，低于6血时不足额扣款且保留1血，仍领军用箱。需按描述决定低血拒绝还是允许致死成本，尚未扩改。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt6-goldmine",
+      "name": "塌方采掘点",
+      "status": "mismatch-static",
+      "source": "auxiliary-review.json",
+      "finding": null,
+      "detail": "稳妥+3币；深挖+6币但hp=Math.max(1,hp-3)，低于4血时实际损失少于3；卡面未说明保命钳位。",
+      "implementationChanged": false
+    },
+    {
+      "id": "tt8-hero-summoner",
+      "name": "花开两面",
+      "status": "mismatch-static",
+      "source": "auxiliary-review.json",
+      "finding": null,
+      "detail": "两门抉择及延后2回合登记存在；但第二门若为天国之门，缺括号候选且祝福仅玩家，未满足全部描述。现有hero测试只查门日志，不能排除该缺陷。",
+      "implementationChanged": false
+    }
+  ],
+  "unresolved": {
+    "needsDecisionIds": [
+      "cc-rapid-fire",
+      "tt12-freezeray",
+      "tt3-firm-barrier",
+      "tt3sp-flowerzhen",
+      "tt7-silence",
+      "tt7-smite",
+      "tt8-demonslay",
+      "tt8-heavensword"
+    ],
+    "contextGapIds": [
+      "ev19-recode",
+      "tt-token-gold",
+      "tt3-blue-potion",
+      "tt6-airdrop",
+      "tt6-systemsupply"
+    ],
+    "notVerifiedIds": [
+      "cc-mana-surge",
+      "cc-rot-seed",
+      "cmtn233trmeg",
+      "cmtn28jv33wx",
+      "tt3-frostfall",
+      "tt3-magic-lamp",
+      "tt3eq-mistbox",
+      "tt7-bladebloom",
+      "tt7-bloodpoison",
+      "tt7-naturestaff",
+      "tt7-provoke",
+      "tt7-stratagem"
+    ],
+    "details": [
+      "battle-review.md",
+      "auxiliary-review.md"
+    ],
+    "sharedRisk": "员工通行证B/C战斗传奇专用池对unrandom边界仍沿辅助报告，不因C地图修复一并标通过"
+  },
+  "tokenC": {
+    "id": "tt4-shine-token",
+    "sourceStatus": "fixed-awaiting-browser",
+    "currentSummaryStatus": "fixed-scoped-browser-passed",
+    "authorization": "老板明确授权地图发现修复",
+    "browser": {
+      "source": "父会话反馈",
+      "page": "feedback-1018-review.html",
+      "environment": "隔离局，当前内置浏览器真实输入",
+      "sequence": [
+        "初始2张C",
+        "展示3张不同传说",
+        "取消后仍2张C",
+        "重开保持同一候选",
+        "选骷髅王剑后C剩1张、该剑1张"
+      ],
+      "passed": true,
+      "realPlayerSaveReloadVerified": false
+    },
+    "storageEvidence": "tests/bag-token-discover.test.js：真实RunStorage写读专测，独立于浏览器隔离局证据",
+    "sourceReportPreserved": true
+  },
+  "validation": {
+    "battleProbePassed": 75,
+    "battleProbeFailed": 0,
+    "report": "battle-probes-final.json",
+    "meaning": "含已知错误重现断言，75通过不代表效果正确；74张有受控观测，非177张逐卡完整实战",
+    "auxiliaryProbes": "auxiliary-probes.json：纯候选构造/祝福步骤，非完整战斗",
+    "thisMerge": "仅一次程序合并覆盖与快照标识核对，未新增测试或实页",
+    "limits": [
+      "静态相符不等于逐卡实战通过",
+      "23项差异未批改；仅通行证C例外已授权修复",
+      "未解决歧义及未闭合证据沿分组报告保留"
+    ]
+  }
+}

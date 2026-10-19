@@ -1,0 +1,58 @@
+{
+  "sameCardNodes": 6,
+  "initialCardNodes": 6,
+  "sameImageNodes": 19,
+  "initialImageNodes": 19,
+  "focus": {},
+  "owned": [
+    {
+      "name": "冰刺",
+      "safe": false
+    },
+    {
+      "name": "百炼青虹剑",
+      "safe": false
+    },
+    {
+      "name": "能量饮料",
+      "safe": false
+    },
+    {
+      "name": "冰心药水",
+      "safe": false
+    },
+    {
+      "name": "草甲",
+      "safe": false
+    },
+    {
+      "name": "剑落纷霜",
+      "safe": false
+    }
+  ],
+  "layout": {
+    "viewport": {
+      "width": 390,
+      "height": 956
+    },
+    "checked": 8,
+    "issues": [
+      {
+        "type": "horizontal-overflow",
+        "label": "隔离奖励领取奖励 2 法术古朴 冰刺 1′，附加冰冻。 1 已收下 2 装备稀有 百炼青虹剑 消耗时 +4 甲，将其置于牌库底。 1 已收下"
+      },
+      {
+        "type": "action-outside-scrollport",
+        "label": "放大查看冰刺",
+        "axis": "x",
+        "ancestor": "reward-objects"
+      },
+      {
+        "type": "action-outside-scrollport",
+        "label": "放大查看百炼青虹剑",
+        "axis": "x",
+        "ancestor": "reward-objects"
+      }
+    ]
+  }
+}

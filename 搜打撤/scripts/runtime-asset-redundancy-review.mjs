@@ -216,17 +216,17 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "retired-scenes": {
       "game/data/art-mapping.json": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99",
       "game/src/core/art.js": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
-      "game/src/run/chests.js": "d886f0fa9a87e5f96e563b49caf474b288ef84b51f9af607da0697a36bdea215",
+      "game/src/run/chests.js": "42bb906b3705cc82fad25ff9bb8faeabff47df47943bea4d858f6a968da537b0",
       "game/src/run/chest-opening-art.js": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf",
       "game/src/run/game.run.data.js": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8",
-      "game/src/run/game.run.scenes.js": "019d6c5b68cb39456b158e8b730f1a2c7495b2bfc3f6d6070a4301f222ecb701",
+      "game/src/run/game.run.scenes.js": "601910c257052f30360b8eb9b54d024515dc901ce9c03db778d09744862f38a3",
       "game/src/battle/view/battle.scenery.js": "bcbff054eb7c23c6a7336c868c5f2a0b2b14e6406628a7bd64a9349935b8172f",
       "game/src/run/game.session.death.js": "7dabbfc0bdc471252cbe19511b4256250a3001cf04f4220670214eeaa3155044",
       "game/css/entry-events.css": "0d488a1c0174cf7b0c77702e178937ef4a5ba5238b88adf70727f89a7f71185b",
       "game/css/scenes.css": "9cfa703fecf0e80eba1c2d4a7ead00f3d851e6f155eaf5b14b7d83ebf0f3d8f6"
     },
     "chests": {
-      "game/src/run/chests.js": "d886f0fa9a87e5f96e563b49caf474b288ef84b51f9af607da0697a36bdea215",
+      "game/src/run/chests.js": "42bb906b3705cc82fad25ff9bb8faeabff47df47943bea4d858f6a968da537b0",
       "game/src/run/chest-opening-art.js": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf"
     },
     "frames": {
@@ -261,10 +261,10 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
   },
   opaqueConsumers: {
     "game/src/audio/sfx-review.js": "2d7d38a1a9d6248e2cb7a8cffb28b0b118dfda587f4401b1cd019397c938b927",
-    "game/src/ui/game.menu.pages.js": "c37dd5f80321f1254db193a07bc81e86da8bd59c8e9bea534aa7833104e03bda",
+    "game/src/ui/game.menu.pages.js": "63142a3f9e1f4e025f7957e4b189c920784f04aec293a66ffb1d340e223e2a60",
     "game/src/hub/hub.personnel.js": "f363ac2ad34b21fe99a1b650642deb2537e397c918175f58d5325ad4366bbe72",
     "game/src/core/art-preload-plan.js": "1b7cc057cdb5c307a3eea5601a45a1bb8837dcedcec8486eb6d1fc56701f75fe",
-    "game/src/hub/game.bag.view2.js": "13b039c864bc6d51c5be479cd14a7da5600025cbcfc0ad98388e30797e214006",
+    "game/src/hub/game.bag.view2.js": "22d64eb1d194e29b6542bc9d1f4ab63f096c04bc6e92b02ce05ef1da3ff3800d",
     "game/card-design-options-v2.html": "cead324bf47437043376cfb40dcc7cec7c9fde1e0bda644a4da356e240a5f9ee",
     "game/src/audio/sfx-audition.js": "0d6dd150075b4a5204d3786d6ce31f4ab124c26ad145f399501796dad8fbc60f",
     "game/src/audio/sound.js": "407ba1bbbab63e0c0fedb8f153f2c7514156159621c3c5b8377dc7ab254bcdcf",
@@ -282,7 +282,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/src/run/lab.ending.js": "8a6fe31c4fbef1acbaae9cb06c759fbc5a2e4e16f84c365eb93371232b495ba8",
     "game/src/ui/base-preview-rooms-v7.js": "c68c228942c7aaa41d1d52343c8f34346f4b424327c14619c2e5c5943a4e9fb8",
     "game/src/ui/game.menu.js": "cea11326c01a46240c7f902d37a667d528589502fe743652145ffe7654573010",
-    "game/src/ui/ui.js": "8a1eb7d22e5fea5bb874aec022f240c090e550da8192093f5d42ab64c7fb642d",
+    "game/src/ui/ui.js": "cff10befcd3e1cfa8618a6fcfddb50555574245e1e48348c2ef89702c2d38adf",
     "game/src/wu-career-frame-preview.js": "2715b703789fef835432d3eb7cbffdedc249f8355a22714e6faff8ef49cfee38"
   },
 });

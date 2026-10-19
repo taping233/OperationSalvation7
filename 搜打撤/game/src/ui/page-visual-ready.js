@@ -1,8 +1,34 @@
 import { mapImageReady } from '../core/map-image-ready.js';
 import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
+import { motionTiming, motionReduced } from './motion-presets.js';
 import '../../css/page-visual-ready.css';
 
 let handoff = null;
+
+function visualCover(kind, returning = false) {
+  const cover = document.createElement('div');
+  cover.className = `page-visual-handoff${returning ? ' page-visual-return' : ''}`;
+  cover.dataset.kind = kind;
+  cover.setAttribute('aria-hidden', 'true');
+  if (kind !== 'panel') {
+    for (let index = 0; index < 3; index++) {
+      const band = document.createElement('i');
+      band.style.setProperty('--band', String(index));
+      cover.append(band);
+    }
+  }
+  return cover;
+}
+
+function finishVisual(signal) {
+  if (motionReduced()) return Promise.resolve();
+  return new Promise(resolve => {
+    const finish = () => { clearTimeout(timer); signal.removeEventListener('abort', finish); resolve(); };
+    const timer = setTimeout(finish, motionTiming.handoff + 2 * motionTiming.navigationStagger);
+    signal.addEventListener('abort', finish, { once: true });
+    if (signal.aborted) finish();
+  });
+}
 
 export function visualFrame(signal) {
   return new Promise(resolve => {
@@ -63,20 +89,18 @@ export async function waitPageVisual(root, { signal, extraRoots = [], background
 export function cancelPageVisual() { handoff?.cancel(); }
 
 // Returning from a full page can resize the map; retain a veil until its new first frame.
-export function stageMapReturn(ui, game) {
+export function stageMapReturn(ui, game, { kind = 'page' } = {}) {
   cancelPageVisual();
   const controller = new AbortController();
   const run = game.discoveredPairs;
   const overlay = ui.el.overlay;
-  const cover = document.createElement('div');
-  cover.className = 'page-visual-handoff page-visual-return';
-  if (ui.el.ovBody.querySelector('.node-pg, .event-scene, .reward-replica, .cqo-overview, .shop-market')) {
+  const cover = visualCover(kind, true);
+  if (kind !== 'panel' && ui.el.ovBody.querySelector('.node-pg, .event-scene, .reward-replica, .cqo-overview, .shop-market')) {
     cover.classList.add('node-map-return');
     const label = document.createElement('span');
     label.textContent = '返回探索';
     cover.append(label);
   }
-  cover.setAttribute('aria-hidden', 'true');
   document.body.append(cover);
   const block = event => {
     if (event.key === 'Escape' || event.altKey) return;
@@ -107,26 +131,21 @@ export function stageMapReturn(ui, game) {
       if (!current()) return;
       cover.classList.add('leaving');
       window.removeEventListener('keydown', block, true);
-      await new Promise(resolve => {
-        const timer = setTimeout(finish, 160);
-        function finish() { clearTimeout(timer); controller.signal.removeEventListener('abort', finish); resolve(); }
-        controller.signal.addEventListener('abort', finish, { once: true });
-      });
+      await finishVisual(controller.signal);
     } catch (error) { console.error('返回地图视觉准备失败：', error); }
     finally { cleanup(); }
   })();
 }
 
 // Preserve the synchronous UI API: only presentation is delayed, never route/save actions.
-export function stagePageVisual(ui, reveal) {
+export function stagePageVisual(ui, reveal, { kind = 'page' } = {}) {
   cancelPageVisual();
   const overlay = ui.el.overlay;
   const body = ui.el.ovBody;
   const source = body.firstElementChild || body;
   const controller = new AbortController();
-  const cover = document.createElement('div');
-  cover.className = 'page-visual-handoff';
-  cover.setAttribute('aria-hidden', 'true');
+  const cover = visualCover(kind);
+  overlay.dataset.visualPending = kind;
   document.body.append(cover);
   const current = () => handoff === operation && !controller.signal.aborted && lifetime.current();
   const block = event => {
@@ -137,7 +156,10 @@ export function stagePageVisual(ui, reveal) {
   const cleanup = () => {
     controller.abort(); cover.remove(); lifetime.dispose();
     window.removeEventListener('keydown', block, true);
-    if (handoff === operation) handoff = null;
+    if (handoff === operation) {
+      delete overlay.dataset.visualPending;
+      handoff = null;
+    }
   };
   const operation = { cancel: cleanup };
   handoff = operation;
@@ -149,14 +171,11 @@ export function stagePageVisual(ui, reveal) {
       if (body.parentElement.querySelector('.camp-entry-cut')) cover.style.visibility = 'hidden';
       const ready = await waitPageVisual(body, { signal: controller.signal, background: ui._pageBgReady });
       if (!ready || !current()) return;
+      delete overlay.dataset.visualPending;
       reveal();
       window.removeEventListener('keydown', block, true);
       cover.classList.add('leaving');
-      await new Promise(resolve => {
-        const timer = setTimeout(finish, 160);
-        function finish() { clearTimeout(timer); controller.signal.removeEventListener('abort', finish); resolve(); }
-        controller.signal.addEventListener('abort', finish, { once: true });
-      });
+      await finishVisual(controller.signal);
     } catch (error) {
       console.error('界面视觉准备失败：', error);
     } finally { cleanup(); }

@@ -138,3 +138,15 @@ body:has(#viewport) #overlay .exr-page .exr-card-preview .hs-card { width:100%; 
 #overlay .exr-page .exr-confirm-list li b { flex:none; }
 #overlay .exr-page .exr-confirm-actions { display:flex; justify-content:flex-end; gap:16px; }
 #overlay .exr-page .exr-confirm-actions button { flex:0 1 auto; }
+
+/* The committed growth result stays visible beside the saved loot. */
+#overlay .exr-page .exr-growth { padding-bottom:20px; border-bottom:1px solid var(--exr-line); overflow-wrap:anywhere; }
+#overlay .exr-page .exr-growth-heading { display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+#overlay .exr-page .exr-growth h3 { color:var(--exr-ink); font-size:22px; font-weight:550; }
+#overlay .exr-page .exr-growth-heading > span { color:#b9d0bb; font-size:20px; }
+#overlay .exr-page .exr-growth-level { color:#c6dbcc; font-size:22px; margin-top:10px; }
+#overlay .exr-page .exr-growth-progress { height:6px; margin:12px 0; background:#9aafb729; }
+#overlay .exr-page .exr-growth-progress i { display:block; height:100%; background:var(--feedback-blue); }
+#overlay .exr-page .exr-growth-effects { display:grid; gap:8px; margin:12px 0 0; padding:0; list-style:none; color:#c6dbcc; font-size:19px; line-height:1.5; }
+#overlay .exr-page .exr-growth-effects li { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+#overlay .exr-page .exr-growth-note { color:var(--exr-muted); font-size:18px; line-height:1.6; margin-top:10px; }

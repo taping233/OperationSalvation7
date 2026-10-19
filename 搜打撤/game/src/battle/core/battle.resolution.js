@@ -60,6 +60,7 @@ function createBattleResolution(ports) {
     // 命令体与文本路径专支同一批引擎函数（engine 端口装配处透传，不新增引擎逻辑）。
     markNoDrawNext, setExtraTurn, setBleedAmp, setMeleeCost1, setSpellCost1,
     summonAlly, getPriceOfLastDrawn, deckDraw, getTurn, getPlayerSpellPower, setNextSpellTwice,
+    getHandInfuseCount = () => 0, getFoeIndex = () => -1,
   } = ports;
   // 吸血/回复等量生命公共体（09-29 jscpd 收敛批，PENDING #12 档一）：
   // 结构化路径 operation.lifesteal 与文本路径「回复等量生命」同语义，统一禁疗判定与演出。
@@ -270,7 +271,7 @@ function createBattleResolution(ports) {
   // —— A3 第三批（G3 acquire 族，2026-09-25）：结构化 acquire/coins 结算 ——
   // 语义真源：docs/cards/card-rules-v2-taxonomy-2026-09-25.md §3「卡牌获取与牌库」25 张效果一句话 + G3 行。
   // 池谓词（B6 定版「池谓词复用 parsePoolNoun 语义；注意 isRandomObtainable 口径」）：
-  //   {kind:'moves', cost?} —— v1 discover 结构化池形状，与 selection-flow structuredPred 同款（武术 + 可选费用）；
+  //   {kind:'moves', cost?} —— v1 discover 结构化池形状，与 selection-flow structuredPred 同款（武术/法术 + 可选费用）；
   //   其他非空 kind —— 中文池名词直透 parsePoolNoun（'武术'/'装备'/'火球'/'2费招式'/'能施加诅咒的招式'/
   //   '传说或能力卡'…）；parsePoolNoun 未识别时再试 named 具体卡名通道（'二次爆炸'/'流光照影'——
   //   文本路径 deck.gainNamed 的 find-by-name 口径，parsePoolNoun 名词清单不含具体卡名）；
@@ -283,7 +284,7 @@ function createBattleResolution(ports) {
     if (!pool || typeof pool !== 'object' || typeof pool.kind !== 'string' || !pool.kind.trim()) return null;
     if (pool.kind === 'moves') {
       const cost = pool.cost;
-      return card => card.type === '武术' && (cost === undefined || (+card.cost || 0) === cost);
+      return card => ['武术', '法术'].includes(card.type) && (cost === undefined || (+card.cost || 0) === cost);
     }
     const noun = parsePoolNoun(pool.kind, myClass);
     if (noun) return noun;
@@ -299,15 +300,15 @@ function createBattleResolution(ports) {
   //   'deck'    洗入牌库（addDeckCard + shuffleDeck，deck.insert 文本路径同一底层）——仅 BOSS 战有牌库；
   //             普通战无牌库时降级为直接置入手牌（deckDraw/grantSha 先例口径「普通战斗无牌库，改为直接获得」）；
   //   'discover' 走发现面板 queueDiscover（面板原生 n 展开、防重、act/费用修饰）。
-  // act 修饰（G3 行「动作 play|playKeep|dup|zeroCost|decay|noInfuse」）按 dest×act 组合门放行：
+  // act 修饰（G3 行「动作 play|playKeep|dup|zeroCost|costMinusOne|decay|noInfuse」）按 dest×act 组合门放行：
   //   discover：play/playKeep/dup（面板原生 act，pickDiscover 直接施放/施放+入手/×2 置手）、
   //             zeroCost/decay（面板 zeroCost/decayEachTurn 费用修饰）——全部有既有机制承载；
   //             noInfuse：进入发现选择，仅所选临时实例免注能（不修改候选模板）。
   //   hand：dup（本体+复制 ×2 置手，二刀流语义）、noInfuse（模板透传 _noInfuse，灵能召唤先例）；
   //         play/playKeep 需要面板外的直接施放执行通道（既有文本路径一律经发现面板承载）——pending；
   //         zeroCost/decay 需 cardOverrides/费用衰减登记（selection-flow 内部态，无对外端口）——pending。
-  //   deck：dup（×2 洗入）、zeroCost（洗入模板静态 cost:0——铁甲阵「费用均-1」同款改模板法，
-  //         卡在牌库中无费用修饰状态，抽出即 0 费）、noInfuse（模板透传）；
+  //   deck：dup（×2 洗入）、zeroCost（固定0费）、costMinusOne（原费用减1，最低0）、
+  //         noInfuse（模板透传）；费用只修改本次获取的副本，牌库模板保持原值。
   //         play/playKeep 同 hand 理由 pending；decay（逐回合 -1 费）对牌库中的卡无结算观测点——pending。
   // dest×act and unconsumed filter are rejected by the complete-list capability guard.
   function resolveAcquireOperation(card, operation) {
@@ -350,9 +351,10 @@ function createBattleResolution(ports) {
     const namedExact = typeof getAllCards === 'function' && pred
       ? getAllCards().find(c => c.name === operation.pool.kind) : null;
     const drawOne = namedExact ? () => ({ ...namedExact }) : () => randomDiscoverCard(pred);
-    // act 在直发路径的模板修饰：zeroCost 洗入模板静态 0 费（铁甲阵改模板先例）；noInfuse 透传 _noInfuse
+    // act 在直发路径的模板修饰：zeroCost 固定为0，costMinusOne 原费用减1；noInfuse 透传 _noInfuse
     const decorate = tpl => {
       if (act === 'zeroCost') return { ...tpl, cost: 0 };
+      if (act === 'costMinusOne') return { ...tpl, cost: Math.max(0, (+tpl.cost || 0) - 1) };
       if (act === 'noInfuse') return { ...tpl, _noInfuse: true };
       return { ...tpl };
     };
@@ -587,7 +589,8 @@ function createBattleResolution(ports) {
       }
       return;
     }
-    const parts = splitClauses(desc);
+    const parts = splitClauses(card.id === 'cmtn7err0a7'
+      ? desc.replace(/（[^）]*从这些中随机[^）]*）|祝福包括[^。]*(?:。|$)/g, '') : desc);
     // 「限定技能：」装备：打出只穿戴，技能句留给角色信息区的技能按钮发动（2026-09-09 老板 #9）。
     // 卡面若只有技能句，结构化 heal/armor/draw 兜底也一并跳过，否则穿戴即自动放了一次技能。
     const skillOnly = parts.skill.length > 0 && !parts.immediate.length && !parts.turnStart.length &&
@@ -626,7 +629,7 @@ function createBattleResolution(ports) {
         // M2：schedule:'nextTurn'/'nextTurnStart'——该段延迟到下回合开始结算（正午决战「下回合
         // 开始时连开四枪」），走 delayed 管线 triggerOps 通道；本回合不产出任何伤害
         if (operation.schedule !== undefined) {
-          addDelayed({ special: 'triggerOps', ops: [operation], cardName: card.name, srcCard: card, notBeforeTurn: getTurn() + 1 });
+          addDelayed({ special: 'triggerOps', ops: [operation], cardName: card.name, srcCard: card, targetIndex: getFoeIndex(target), notBeforeTurn: getTurn() + 1 });
           log(`[[icon:hourglass]] <b>回合开始时</b>：【${esc(card.name)}】延迟效果将在下个回合开始结算`, 'sys');
           did = true;
           continue;
@@ -640,12 +643,12 @@ function createBattleResolution(ports) {
           : sources[0] === 'amount' ? operation.amount + growth
           : sources[0] === 'range' ? rollRange(operation.range)
           : getPriceOfLastDrawn();
-        // M2：perInfusedInHand——「本牌在手时每注能过 1 张卡牌，伤害 +N」（充能射线，infuseFuels 全局计数）
+        // 本牌当前在手期间发生的注能次数；离手重入后重新计数。
         if (operation.perInfusedInHand !== undefined) {
-          const infusedCount = readState().infuseFuels;
+          const infusedCount = getHandInfuseCount(uid);
           if (infusedCount > 0) {
             baseDamage += infusedCount * operation.perInfusedInHand;
-            log(`[[icon:crystal]] <b>${esc(card.name)}</b>：本局已注能 ${infusedCount} 张，伤害 +${infusedCount * operation.perInfusedInHand}`, 'sys');
+            log(`[[icon:crystal]] <b>${esc(card.name)}</b>：本牌在手期间已注能 ${infusedCount} 张，伤害 +${infusedCount * operation.perInfusedInHand}`, 'sys');
           }
         }
         // M2：infuseBonus——注能打出时伤害 +N（镭射「注能(1)：伤害+3」口径，infused 由 exec 层传入）
@@ -807,12 +810,12 @@ function createBattleResolution(ports) {
         }
       }
       // 注能在手增伤（第十二批·充能射线 2026-09-23）：「本牌在你手牌中时每注能过 1 张卡牌，伤害 +N」——
-      // 打出时本牌必在手，计数取本局累计注能数（state.infuseFuels，与元素符印同一计数器）。
+      // 计数由手牌实例生命周期提供，离手重入后重新计数。
       const inhandM = desc.match(/每注能过\s*1?\s*张?卡牌[^。；]*?伤害\s*\+\s*(\d+)/);
-      if (inhandM && readState().infuseFuels > 0) {
-        const infusedCount = readState().infuseFuels;
+      if (inhandM && getHandInfuseCount(uid) > 0) {
+        const infusedCount = getHandInfuseCount(uid);
         dmgVal += infusedCount * +inhandM[1];
-        log(`[[icon:crystal]] <b>${esc(card.name)}</b>：本局已注能 ${infusedCount} 张，伤害 +${infusedCount * +inhandM[1]}`, 'sys');
+        log(`[[icon:crystal]] <b>${esc(card.name)}</b>：本牌在手期间已注能 ${infusedCount} 张，伤害 +${infusedCount * +inhandM[1]}`, 'sys');
       }
       // 斩杀阈值（斩杀：对 N 血以下角色才造成伤害）
       const hpCap = +((desc.match(/对\s*(\d+)\s*血以下/) || [])[1] || 0);
@@ -1231,7 +1234,7 @@ function createBattleResolution(ports) {
       did = true;
     }
     // —— 「回合开始时」生效时刻词条 ——
-    if (!suppressText && parts.turnStart.length) { registerTurnStart(card, parts.turnStart); did = true; }
+    if (!suppressText && parts.turnStart.length) { registerTurnStart(card, parts.turnStart, target); did = true; }
     // —— 「本局对战内」持续时间词条 ——
     if (!suppressText) parts.battle.forEach(cl => { did = registerBattle(card, cl, target) || did; });
     // 「被注能时」句在打出时不结算（splitClauses 已剥出，留给 resolveInfusedFuel）

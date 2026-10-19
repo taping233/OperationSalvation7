@@ -181,29 +181,34 @@ it('奖励腾位只操作可见普通背包UID：移安全格保容器，同名�
   expect(game.ownedCards.find(o=>o.uid==='stored-copy').safe).toBeFalsy();
 });
 
-it('真实箱奖励→原地存安全格→原grant领取，Esc返回无损，旧整理页不能重领', async () => {
+it('真实箱奖励直接开完整背包，Esc返回无损；存安全格后原grant仅领取一次', async () => {
   await import('../game/src/run/chests.js');
   const Chests=window.SDT.Chests;
   const reward={id:'organizer-reward',name:'腾位奖励',type:'法术',rarity:'古朴'};
   Object.assign(game,{seed:77,layerIdx:0,trackPos:0,discoveredPairs:new Set(),state:'modal'});
   game.ownedCards=Array.from({length:16},(_,i)=>({uid:`full-${i}`,card:{id:`full-${i}`,name:`占位${i}`,type:'法术',rarity:'古朴'}}));
   game.inventory=[];
+  showBackpack(true); UI._acts.closeBag();
   const {grantEventCard}=await import('../game/src/run/game.run.scenes.js');
   game.grantCard=(card,opts)=>grantEventCard(card,opts);
   expect(Chests.restore(game,{version:1,screen:'cards',seed:77,layerIdx:0,trackPos:0,queue:[{kind:'small'}],index:1,context:{onCell:true},
     current:{kind:'small',cards:[reward],coins:0,coinsReceived:false,taken:[],lost:[],rewardStage:'cards',claimMode:'all'}},()=>{})).toBe(true);
   UI._acts.chestMakeRoom({i:0});
-  expect(document.activeElement.textContent).toBe('返回奖励');
+  expect(document.querySelector('.bag-view')).not.toBeNull();
+  expect(document.querySelector('.reward-capacity-organizer')).toBeNull();
   UI.closeTopOverlayByEsc();
   expect(Chests.serialize(game).current.taken).toEqual([]);
+  expect(Chests.serialize(game).current.lost).toEqual([]);
+  expect(document.querySelector('[data-act="chestMakeRoom"]').textContent).toBe('整理背包');
   UI._acts.chestMakeRoom({i:0});
-  const oldClaim=document.querySelector('[data-organize="claim"]');
-  document.querySelector('[data-organize="safe"]').click();
+  UI._acts.inspectStack({name:'占位0',safe:'0'});
+  UI._acts.zoomMoveToSafe();
   expect(session.usedSlots()).toBe(15);
-  document.querySelector('[data-organize="claim"]').click();
+  UI._acts.closeBag();
+  UI._acts.chestTake1({i:0});
   expect(game.ownedCards.filter(o=>o.card.id===reward.id)).toHaveLength(1);
   expect(game.ownedCards.find(o=>o.uid==='full-0').safe).toBe(true);
-  oldClaim.click();expect(game.ownedCards.filter(o=>o.card.id===reward.id)).toHaveLength(1);
+  UI._acts.chestTake1({i:0});expect(game.ownedCards.filter(o=>o.card.id===reward.id)).toHaveLength(1);
 });
 
 it('奖励腾位安全格已满时不移动卡；存放/锦囊/初始攻击不列作腾位对象', async () => {

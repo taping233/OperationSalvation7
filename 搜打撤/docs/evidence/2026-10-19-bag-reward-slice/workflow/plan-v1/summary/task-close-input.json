@@ -1,0 +1,11 @@
+{
+  "stage": "partial",
+  "doneWhenConfirmed": false,
+  "checks": [],
+  "unverified": [
+    "生产源码仍在修改，本次只规划",
+    "仅规划，自动检查尚未执行。",
+    "workflow review: not-provided",
+    "UI候选仍待当前平台内置浏览器验证；已附截图仅保留其声明的输入范围。"
+  ]
+}

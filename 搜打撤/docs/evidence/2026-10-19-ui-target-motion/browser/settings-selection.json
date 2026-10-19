@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-19T13:00:14.568Z",
+  "inputKind": "real-input",
+  "detail": "通过主菜单打开真实设置页，真实连续切换画面→音频→画面。选中项即时生效，导航只有一个装饰底板；没有修改持久设置。普通面板/区域由公共target层接入。",
+  "screenshot": {
+    "path": "settings-selection.png",
+    "bytes": 53169,
+    "sha256": "fdfa68222d728ced6dcfbbf5a89f49fd56ef0fd8527bbcb661676092b187cf27"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/dev/feedback-1018-review.html",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/gear.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/gear.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/gear.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/book.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/archive.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/trophy.png?v=0.60.0",
+      "width": 128
+    }
+  ],
+  "console": []
+}

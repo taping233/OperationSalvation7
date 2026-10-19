@@ -692,6 +692,7 @@ async function triggerEventCard(card, current) {
       UI.hideOverlay();
       if (!choice.deferConsume && !choice.rolls) consumeCurrentCell();
       choice.run();
+      if (game.hp <= 0 || game.terminalPending || game.state === 'done' || game.state === 'terminalPending') return true;
       if (game.state !== 'modal') finishInstant();
       return true;
     };
@@ -944,7 +945,6 @@ function openEventGamble() {
       tone: 'event', asset: 'scene-event-gamble', icon: '[[icon:dice]]', title: '地下商场黑市',
       sub: `每次投入 <b>3 币</b>后亲手投骰：<b>1～3 点落空，4～6 点拿走三张卡（50%）</b>；第 <b>5</b> 次任意点数都成功。已尝试 ${attempts}/5 次。${lastMiss ? '<br><b class="danger">指示灯变红，这次什么也没拿到。</b>' : ''}`,
       body: `<div class="bt-hand event-choice-hand">${prizes.map((c, i) => `<button type="button" class="bt-card event-choice-card" data-act="eventGambleRead" data-i="${i}" aria-label="放大查看${escAttr(c.name)}" aria-haspopup="dialog">${SDT.Cards.cardHTML(c, 'sm')}</button>`).join('')}</div>
-        <p class="loot-footer-note">点击卡牌放大查看</p>
         <div class="scene-ops"><button class="ov-btn" data-act="eventGambleLeave">放弃并离开</button><button class="ov-btn ok" data-act="eventGambleTry" ${(game.coins || 0) < 3 || !prizes.length ? 'disabled' : ''}>[[icon:coin]] 投入 3 币${attempts === 4 ? '（本次保底）' : ''}</button></div>`,
     });
     const active = eventPageBinding('eventGambleTry', current);
@@ -972,7 +972,11 @@ function openEventGamble() {
 // 事件分支只覆盖已有资源/效果；未列出的旧事件继续单按钮结算，兼容旧存档与自定义事件卡。
 function eventChoiceSpec(card, narrative = null) {
   if (!card) return null;
-  const settle = (run) => () => { run(); game.state = 'idle'; saveGame(); UI.refresh(game); };
+  const settle = (run) => () => {
+    run();
+    if (game.hp <= 0 || game.terminalPending || game.state === 'done' || game.state === 'terminalPending') return;
+    game.state = 'idle'; saveGame(); UI.refresh(game);
+  };
   const rewards = (...cards) => openFixedRewardsOnCell(cards, card.name);
   const gainFragment = () => {
     game.fragments = (game.fragments || 0) + 1;
@@ -1002,7 +1006,8 @@ function eventChoiceSpec(card, narrative = null) {
     },
     'tt6-demondeal': () => [
       { label: '成交', detail: '-5 血，获得 1 个军用保险柜', tone: 'danger', run: () => {
-        game.hp = Math.max(1, game.hp - 5);
+        game.damage(5, '隧道血契');
+        if (game.hp <= 0 || game.terminalPending) return;
         UI.log('[[icon:demon]] 恶魔收走了 5 点生命力，并丢给你一个军用保险柜', 'warn');
         openChestsOnCell([{ kind: 'large' }], '恶魔的报酬');
       } },
@@ -1085,7 +1090,7 @@ function eventChoiceSpec(card, narrative = null) {
     };
     const effects = {
       goldmine_safe: settle(() => { narrate(); gainCoins(3); }),
-      goldmine_deep: settle(() => { narrate(); gainCoins(6); game.hp = Math.max(1, game.hp - 3); UI.log('[[icon:tools]] 挖矿过深，获得 6 币但损失 3 血', 'warn'); }),
+      goldmine_deep: settle(() => { narrate(); gainCoins(6); game.damage(3, '塌方采掘点'); }),
       airdrop_wood: () => { narrate(); rewards(SDT.Cards.all().find(x => x.id === 'tt-wood')); },   // 需求 #10：物资以卡牌入包
       airdrop_rations: () => { narrate(); rewards(SDT.Cards.all().find(x => x.id === 'tt-rations')); },
       airdrop_heal: settle(() => { narrate(); game.heal(3); }),

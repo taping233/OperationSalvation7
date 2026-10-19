@@ -57,6 +57,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
 
     canvas.addEventListener('pointerdown', (e) => {
       if (e.button !== 0 || pointerId != null) return;
+      cam.cancelPan?.();
       pointerId = e.pointerId;
       canvas.setPointerCapture?.(pointerId);
       downPos = lastPos = { x: e.clientX, y: e.clientY };
@@ -72,10 +73,12 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
 
     canvas.addEventListener('pointermove', (e) => {
       if (downPos && e.pointerId === pointerId) {
-        if (!dragging && Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y) > 8) dragging = true;
+        const startsDrag = !dragging && Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y) > 8;
+        if (startsDrag) { dragging = true; cam.beginPan?.(); }
         game.camDragging = dragging;   // 拖拽中主循环不得抢镜头（留言：地图无法正常拖动）
         if (dragging) {
-          const dx = e.clientX - lastPos.x, dy = e.clientY - lastPos.y;
+          const origin = startsDrag ? downPos : lastPos;
+          const dx = e.clientX - origin.x, dy = e.clientY - origin.y;
           cam.panBy(dx, dy);
           renderScheduler.invalidate();
           canvas.style.cursor = 'grabbing';
@@ -104,6 +107,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     const cancelPointer = (id = pointerId) => {
       if (pointerId == null || id !== pointerId) return;
       releasePointer();
+      cam.cancelPan?.(true);
       pendingHover = null;
       if (hoverFrame) cancelAnimationFrame(hoverFrame);
       hoverFrame = 0;
@@ -139,12 +143,15 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
           }
         }
       }
-      if (releasePointer()) scheduleHover(e);
+      if (releasePointer()) {
+        cam.endPan?.(() => game.state === 'idle' && !game.battleActive && UI.el.overlay.hidden && !document.hidden);
+        scheduleHover(e);
+      }
     };
     canvas.addEventListener('pointerup', endPointer);
     canvas.addEventListener('pointercancel', (e) => endPointer(e, true));
     canvas.addEventListener('lostpointercapture', (e) => cancelPointer(e.pointerId));
-    window.addEventListener('blur', () => cancelPointer());
+    window.addEventListener('blur', () => { cancelPointer(); cam.cancelPan?.(true); });
 
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
     canvas.addEventListener('pointerleave', () => {

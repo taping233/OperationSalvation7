@@ -43,10 +43,18 @@ beforeEach(() => {
   UI._acts = {}; UI._overlayInerted = []; UI._lastMode = null; UI._hideTimer = null; UI._roomActive = true; setBagReturnHook(null);
   H.random = () => 0.9; H.pick = a => a[0];
   H.saves = []; H.uid = 0; H.slot = null; H.narrative = async () => null;
+  for (const key of Object.keys(H.game)) delete H.game[key];
   Object.assign(H.game, { seed: 7, state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 18, fragments: 0,
     altarActivated:false, altarRewardPending:false, altarItemSacrificed:false, nodeRewards:{}, entrySupply:null,
     discoveredPairs: new Set(), layerData: [{ logical: [{ def: { type: 'entrance' } }, { def: { type: 'event' } }] }],
     canReceiveCard: () => true, heal: n => H.game.hp = Math.min(H.game.maxHp, H.game.hp + n),
+    damage: vi.fn((n, reason) => {
+      H.game.hp -= n;
+      if (H.game.hp <= 0) {
+        H.game.terminalPending = { kind:'death', endReason:reason };
+        H.game.state = 'terminalPending';
+      }
+    }),
     grantCard: (card, opts) => scenes.grantEventCard(card, opts), bagCap:() => 9, usedSlots:() => H.game.ownedCards.length,
   });
 });
@@ -62,6 +70,56 @@ async function openBoundEvent() {
   const pending = flow.runEventDeck();
   await vi.advanceTimersByTimeAsync(1000); await pending;
 }
+
+describe('事件卡足额生命代价', () => {
+  it.each([1, 5, 6])('隧道血契从%s血足额扣5，致死不打开宝箱或覆盖终局状态', async hp => {
+    H.cards = [events[1]];
+    H.game.hp = hp;
+    const open = vi.spyOn(window.SDT.Chests, 'open').mockImplementation(() => { H.game.state = 'modal'; });
+    await openBoundEvent();
+    UI._acts.evtChoice({ i:'0' });
+    expect(H.game.damage).toHaveBeenCalledTimes(1);
+    expect(H.game.damage).toHaveBeenCalledWith(5, '隧道血契');
+    expect(H.game.hp).toBe(hp - 5);
+    if (hp <= 5) {
+      expect(open).not.toHaveBeenCalled();
+      expect(H.game.terminalPending).toMatchObject({ kind:'death', endReason:'隧道血契' });
+      expect(H.game.state).toBe('terminalPending');
+      expect(H.saves.every(save => save.hp > 0)).toBe(true);
+    } else {
+      expect(open).toHaveBeenCalledTimes(1);
+      expect(H.game.state).toBe('modal');
+      expect(H.game.terminalPending).toBeUndefined();
+    }
+    UI._acts.evtChoice?.({ i:'0' });
+    expect(H.game.damage).toHaveBeenCalledTimes(1);
+  });
+
+  it.each([1, 3, 4])('塌方采掘点从%s血足额扣3，不能由收尾复活', async hp => {
+    H.cards = [{ id:'tt6-goldmine', name:'塌方采掘点', type:'事件', desc:'获得6币并损失3点生命' }];
+    H.game.hp = hp;
+    H.narrative = async () => ({ intro:'矿洞', choices:[
+      { label:'稳妥', effect:'goldmine_safe', choose:() => '' },
+      { label:'深挖', effect:'goldmine_deep', choose:() => '' },
+    ] });
+    await openBoundEvent();
+    UI._acts.evtChoice({ i:'1' });
+    expect(H.game.damage).toHaveBeenCalledTimes(1);
+    expect(H.game.damage).toHaveBeenCalledWith(3, '塌方采掘点');
+    expect(H.game.hp).toBe(hp - 3);
+    expect(H.game.coins).toBe(24);
+    if (hp <= 3) {
+      expect(H.game.terminalPending).toMatchObject({ kind:'death', endReason:'塌方采掘点' });
+      expect(H.game.state).toBe('terminalPending');
+      expect(H.saves.every(save => save.hp > 0)).toBe(true);
+    } else {
+      expect(H.game.state).toBe('idle');
+      expect(H.game.terminalPending).toBeUndefined();
+    }
+    UI._acts.evtChoice?.({ i:'1' });
+    expect(H.game.damage).toHaveBeenCalledTimes(1);
+  });
+});
 
 describe('未知节点首次事件绑定', () => {
   it('第一次仍按原卡池抽一次，未选一级动作退出重进不重抽、不消费节点', async () => {

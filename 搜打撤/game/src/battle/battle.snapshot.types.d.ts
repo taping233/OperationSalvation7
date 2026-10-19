@@ -112,6 +112,7 @@ export type BattleSnapshotInput = {
   discard: string[];
   grave: string[];
   consumed?: string[];
+  handInfuseCounts?: Record<string, number>;
   infusing: ({ uid: string; card?: BattleCardInput | null; picked: Set<string>; [key: string]: unknown }) | null;
   discovering: ({ options: BattleCardInput[]; [key: string]: unknown }) | null;
   handSelecting: ({ srcCard?: BattleCardInput | null; payment?: ({ card?: BattleCardInput | null; [key: string]: unknown }) | null; [key: string]: unknown }) | null;
@@ -193,6 +194,7 @@ export type BattleSnapshot = {
   readonly discard: readonly string[];
   readonly grave: readonly string[];
   readonly consumed?: readonly string[];
+  readonly handInfuseCounts?: Readonly<Record<string, number>>;
   readonly infusing: ({ readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly picked: readonly string[]; readonly [key: string]: unknown }) | null;
   readonly discovering: ({ readonly options: readonly SnapshotBattleCard[]; readonly [key: string]: unknown }) | null;
   readonly handSelecting: SnapshotHandSelecting | null;

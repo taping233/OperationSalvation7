@@ -1,5 +1,7 @@
 import { readBase, readBaseReceipt, commitBase } from './base.commands.js';
 import { clone, fail, freezeDeep } from './commands.shared.js';
+import { stackCapOf } from '../core/card-capacity.js';
+import { departureSummary } from './departure.summary.js';
 
 const PRESET_IDS = Object.freeze(['preset-1', 'preset-2']);
 const DEFAULT_PRESETS = Object.freeze({
@@ -56,11 +58,11 @@ function stashCount(baseSnapshot, ref) {
   }, 0);
 }
 
-export function previewDeployment({ baseSnapshot, preset, mode = 'standard', cardCatalog = [], characters = [], pets = [], bagCapacity = Infinity } = {}) {
+export function previewDeployment({ baseSnapshot, preset, mode = 'standard', cardCatalog = [], characters = [], pets = [], bagCapacity = Infinity, starterCount = 5, starterCard } = {}) {
   const picks = normalizePicks(preset?.picks);
   if (!baseSnapshot || !preset || !picks) return freezeDeep({ resolvedPicks: [], missing: [], forbidden: [], costs: { stashCards: 0, slotsUsed: 0, extraStackSlots: 0 }, qualification: {}, lossRuleSummary: '未生成预览', canStart: false, errors: ['INVALID_ARGUMENT'] });
   const cards = catalogMap(cardCatalog);
-  const missing = [], forbidden = [], resolvedPicks = [];
+  const missing = [], forbidden = [], resolvedPicks = [], previewStacks = [];
   for (const pick of picks) {
     const card = cards.get(pick.card.cardId) || (baseSnapshot.stash || []).find(s => s?.card?.id === pick.card.cardId)?.card || null;
     const availableCount = stashCount(baseSnapshot, pick.card);
@@ -74,22 +76,28 @@ export function previewDeployment({ baseSnapshot, preset, mode = 'standard', car
       missing.push({ card: pick.card, name, requestedCount: pick.count, availableCount, missingCount: pick.count - availableCount, code: availableCount ? 'INSUFFICIENT_CARDS' : 'CARD_NOT_OWNED' });
     }
     resolvedPicks.push({ card: pick.card, name, requestedCount: pick.count, availableCount, appliedCount, status });
+    if (status === 'ready') previewStacks.push({ stackKey: `preview:${previewStacks.length}`, card: card || { id: pick.card.cardId, name }, count: appliedCount });
   }
   const characterKnown = !preset.characterId || characters.some(item => item.id === preset.characterId);
   const characterOwned = !preset.characterId || !!baseSnapshot.characters?.[preset.characterId];
   const petKnown = !preset.petId || pets.some(item => item.id === preset.petId);
   const petOwned = !preset.petId || !!baseSnapshot.pets?.[preset.petId];
   const qualification = { characterId: preset.characterId || null, characterKnown, characterOwned, petId: preset.petId || null, petKnown, petOwned };
-  // A3-PREP-02：局内同名卡第 cap+1 张起另占一格（game.session.bag.js stackCapOf/cardStacks 口径）。
-  // 本模块保持纯函数不引 kernel 单例，这里同口径内联；改叠放规则须两处同步（xart-z1-batch1 测试钉值）。
-  const stackCapOfLocal = card => (card && (card.name === '初始攻击' || card.name === '火球')) ? 5 : 3;
-  const slotsFromPicks = resolvedPicks
-    .filter(item => item.status === 'ready')
-    .reduce((sum, item) => sum + Math.ceil(item.appliedCount / stackCapOfLocal(cards.get(item.card.cardId))), 0);
-  const slotsUsed = slotsFromPicks + 1;   // +1：初始攻击恒占一格
-  const extraStackSlots = slotsFromPicks - resolvedPicks.filter(item => item.status === 'ready').length;
-  const capacityOk = !Number.isFinite(bagCapacity) || slotsUsed <= bagCapacity;
-  return freezeDeep({ mode, resolvedPicks, missing, forbidden, costs: { stashCards: resolvedPicks.reduce((sum, item) => sum + item.appliedCount, 0), slotsUsed, extraStackSlots, bagCapacity }, qualification, lossRuleSummary: '只有实际带入并在对局中消耗或未成功撤回的卡牌按现有对局规则处理；本预览不扣卡。', canStart: !missing.length && !forbidden.length && characterKnown && characterOwned && petKnown && petOwned && capacityOk, errors: capacityOk ? [] : ['BAG_CAPACITY_EXCEEDED'] });
+  // 与主整备共用纯摘要：同名合堆、初始牌和宠物加成都按权威叠放规则计格。
+  const summary = departureSummary({
+    starterCount,
+    starterCard: starterCard || cards.get('starter-attack') || cardCatalog.find(card => card?.name === '初始攻击') || { id: 'starter-attack', name: '初始攻击', type: '武术' },
+    fireball: cards.get('tt3-fireball'),
+    pet: pets.find(pet => pet.id === (preset.petId || baseSnapshot.petSel)),
+    stash: previewStacks,
+    picks: Object.fromEntries(previewStacks.map(stack => [stack.stackKey, stack.count])),
+    capacity: bagCapacity,
+    stackCapOf,
+  });
+  const slotsUsed = summary.slots;
+  const extraStackSlots = slotsUsed - new Set(summary.cells.map(cell => cell.card.name)).size;
+  const capacityOk = !Number.isFinite(summary.capacity) || slotsUsed <= summary.capacity;
+  return freezeDeep({ mode, resolvedPicks, missing, forbidden, costs: { stashCards: resolvedPicks.reduce((sum, item) => sum + item.appliedCount, 0), slotsUsed, extraStackSlots, bagCapacity: summary.capacity }, qualification, lossRuleSummary: '只有实际带入并在对局中消耗或未成功撤回的卡牌按现有对局规则处理；本预览不扣卡。', canStart: !missing.length && !forbidden.length && characterKnown && characterOwned && petKnown && petOwned && capacityOk, errors: capacityOk ? [] : ['BAG_CAPACITY_EXCEEDED'] });
 }
 
 export function createPreparationCommands(deps = {}) {

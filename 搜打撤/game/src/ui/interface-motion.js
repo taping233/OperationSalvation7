@@ -5,6 +5,10 @@ import { pageMotionProfile } from './page-motion-profiles.js';
 import { enterArchive, clearArchiveMotion } from './archive-motion.js';
 import { navigationState, navigationChange } from './navigation-motion.js';
 import { stagePageVisual, stageMapReturn, cancelPageVisual } from './page-visual-ready.js';
+import { motionTiming } from './motion-presets.js';
+import { ownsVisualAnimation, installTargetMotionLifecycle } from './target-motion.js';
+import { installCardStateMotion } from './card-state-motion.js';
+import { installSelectionStateMotion } from './selection-state-motion.js';
 const installed = new WeakSet();
 const overlay = document.getElementById('overlay');
 let pendingClose = null;
@@ -51,14 +55,18 @@ function cancelLegacyCardTween() {
     const card = document.getElementById('ovBody')?.parentElement;
     let canceled = false;
     card?.getAnimations?.().forEach(animation => {
-      if (animation.effect?.target === card && !('animationName' in animation)) {
+      if (animation.effect?.target === card && !('animationName' in animation) && !ownsVisualAnimation(card, animation)) {
         animation.cancel();
         canceled = true;
       }
     });
     if (canceled) {
-      card.style.removeProperty('opacity');
-      card.style.removeProperty('transform');
+      // A legacy tween may coexist with the new target. Its cleanup must not
+      // erase the seed/committed pose of the still-owned visual animation.
+      if (!(card.getAnimations?.() || []).some(animation => ownsVisualAnimation(card, animation))) {
+        card.style.removeProperty('opacity');
+        card.style.removeProperty('transform');
+      }
     }
   });
 }
@@ -98,7 +106,7 @@ function install(ui = window.SDT?.UI) {
     if (!refreshHub) clearCampEntry();
     const motionKeyChanged = options?.motionKey && options.motionKey !== this._motionKey;
     // 背包分区、同页选牌与数量变化只刷新内容；不再清空遮罩并重播整页入场。
-    const contentRefresh = wasOpen && this._lastMode === mode && !motionKeyChanged && !refreshHub
+    let contentRefresh = wasOpen && this._lastMode === mode && !motionKeyChanged && !refreshHub
       && (mode === 'bagpage' && !!body?.querySelector('.bag-v2') && html.includes('bag-v2')
         || this._motionHeading === heading && mode !== 'battle' && oldProfile !== 'base-content');
     this._motionHeading = heading;
@@ -109,14 +117,23 @@ function install(ui = window.SDT?.UI) {
       delete overlay.dataset.uiEnter;
       delete overlay.dataset.uiClosing;
       delete overlay.dataset.uiInstantClose;
-      clearSurface(overlay);
+      clearSurface(overlay, { preserveVisual:true });
     } else markEntry(kindFor(this, mode, null), restart);
     withinShow = true;
     let result;
     try { result = showOverlay.call(this, heading, html, mode, options); }
     finally { withinShow = false; }
     const currentBody = document.getElementById('ovBody');
+    // An empty/reused heading does not make two different pages the same page.
+    if (contentRefresh && mode === 'page' && oldProfile !== pageMotionProfile(currentBody)?.key) {
+      contentRefresh = false;
+      markEntry(kindFor(this, mode, currentBody), true);
+    }
     overlay.dataset.uiMotion = kindFor(this, mode, currentBody);
+    // Presentation semantics remain independent of the business mode/route.
+    overlay.dataset.uiTransition = mode === 'bagpage' ? 'panel'
+      : currentBody?.querySelector('.flow-transition') ? 'scene'
+      : mode === 'page' ? 'page' : 'dialog';
     const tabChanged = refreshHub && oldTab !== tabKey(currentBody);
     const navChange = navigationChange(oldNavigation, navigationState(currentBody?.querySelector('#hubMain')));
     const dedicated = !!currentBody?.querySelector('.city-run-transition, .expedition-cut')
@@ -124,7 +141,7 @@ function install(ui = window.SDT?.UI) {
     const reveal = () => {
     if (contentRefresh) {
       delete overlay.dataset.uiEnter;
-      clearSurface(overlay);
+      clearSurface(overlay, { preserveVisual:true });
       return;
     }
     if (refreshHub || initialCamp) {
@@ -160,9 +177,9 @@ function install(ui = window.SDT?.UI) {
     const staged = !contentRefresh && !dedicated && !initialCamp && !refreshHub
       && (mode === 'page' || mode === 'bagpage' || (this._roomActive && mode !== 'battle'));
     if (staged) {
-      clearSurface(overlay);
+      clearSurface(overlay, { preserveVisual:true });
       delete overlay.dataset.uiEnter;
-      stagePageVisual(this, reveal);
+      stagePageVisual(this, reveal, { kind: mode === 'bagpage' ? 'panel' : 'page' });
     } else {
       cancelPageVisual();
       reveal();
@@ -177,7 +194,7 @@ function install(ui = window.SDT?.UI) {
     if (!options?.immediate && !overlay.hidden && game?.runActive && !game.battleActive && !game.nestActive
       && (overlay.classList.contains('opaque') || overlay.dataset.surfaceContext === 'expedition'
         || !!this.el.ovBody?.querySelector('.node-pg:not(.flow-transition), .event-scene, .reward-replica, .cqo-overview, .shop-market'))) {
-      stageMapReturn(this, game);
+      stageMapReturn(this, game, { kind: overlay.dataset.uiTransition === 'panel' ? 'panel' : 'page' });
     }
     clearCampEntry();
     if (pendingClose) {
@@ -190,7 +207,9 @@ function install(ui = window.SDT?.UI) {
     const card = document.getElementById('ovBody')?.parentElement;
     const nativeFastClose = !!card?.querySelector('.bt-settings, .bt-gy-list, .glass-panel');
     const instantRoom = overlay.classList.contains('room-view') && !nativeFastClose;
-    const exitDuration = overlay.dataset.surfaceContext === 'expedition' ? 220 : 140;
+    const exitDuration = overlay.dataset.uiTransition === 'panel' ? motionTiming.panelExit
+      : nativeFastClose ? motionTiming.fastExit : motionTiming.exit;
+    this._motionExitDuration = exitDuration;
     overlay.style.setProperty('--page-out', `${exitDuration}ms`);
     enterSurface(overlay, { restart: false, fast: instantRoom || nativeFastClose || overlay.dataset.uiMotion === 'fast' });
     leaveSurface(overlay);
@@ -232,6 +251,9 @@ function install(ui = window.SDT?.UI) {
 }
 
 if (overlay) {
+  installTargetMotionLifecycle(document.body);
+  installCardStateMotion(document.body);
+  installSelectionStateMotion(document.body);
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = new URL('../../css/interface-motion.css', import.meta.url).href;

@@ -1,0 +1,340 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-19T12:31:46.619Z",
+  "inputKind": "real-input",
+  "detail": "当前窗口隔离普通战，生产UI依次使用精神药水、火焰药水、TNT：手牌9→11；面板法伤2时五敌各200→196；TNT跳过低攻首脑词缀及攻6目标，仅消灭两名低攻普通敌人。构造场景，不读写玩家档位，不替代自然跑局或真正首脑模式验证。",
+  "screenshot": {
+    "path": "items-after.png",
+    "bytes": 142202,
+    "sha256": "0961934d5f1747c0c65b94a0816f4ee66ebdb8db171bc2f7034778c1e1b79ae9"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/dev/card-description-fixes-review.html",
+  "images": [
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/gear.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/runner.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/gear.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 941,
+      "src": "http://localhost:5200/assets/scenes/battle/platform-minimal-1016/far.webp",
+      "width": 1672
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 941,
+      "src": "http://localhost:5200/assets/scenes/battle/platform-minimal-1016/ground.webp",
+      "width": 1672
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 342,
+      "src": "http://localhost:5200/assets/portraits/frames/heixiang/sprite-v1/neutral.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/crystal.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/tools.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 512,
+      "src": "http://localhost:5200/assets/ui/battle-controls-glass-1016/attack.webp",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 760,
+      "src": "http://localhost:5200/assets/portraits/cut/enemies/infantry.webp?v=0.60.0",
+      "width": 521
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/arrow.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/arrow.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 760,
+      "src": "http://localhost:5200/assets/portraits/cut/enemies/infantry.webp?v=0.60.0",
+      "width": 521
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 760,
+      "src": "http://localhost:5200/assets/portraits/cut/enemies/infantry.webp?v=0.60.0",
+      "width": 521
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 760,
+      "src": "http://localhost:5200/assets/portraits/cut/enemies/infantry.webp?v=0.60.0",
+      "width": 521
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 760,
+      "src": "http://localhost:5200/assets/portraits/cut/enemies/infantry.webp?v=0.60.0",
+      "width": 521
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 512,
+      "src": "http://localhost:5200/assets/ui/battle-controls-glass-1016/energy.webp",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/cards.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/skull.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://localhost:5200/assets/cards/expedition-starters/basic-attack.webp?art=basicattack-original-rough-20261010&v=0.60.0",
+      "width": 1441
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://localhost:5200/assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://localhost:5200/assets/cards/martial-tt3-fly-arrowhawk.webp?art=flying-cleave-simple-stroke-20261011&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://localhost:5200/assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://localhost:5200/assets/cards/martial-tt3-blood-arrow.webp?art=blood-arrow-original-rough-20261010&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://localhost:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://localhost:5200/assets/cards/martial-tt3-frost-slash.webp?art=frostslash-original-rough-20261010&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://localhost:5200/assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/icons/swords.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://localhost:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 941,
+      "src": "http://localhost:5200/assets/scenes/battle/platform-minimal-1016/foreground.webp",
+      "width": 1672
+    }
+  ],
+  "console": []
+}

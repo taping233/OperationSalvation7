@@ -15,7 +15,7 @@ export function previewRecommendedDeparture(options) {
     const key = departureStackKey(stack);
     if (findDepartureStack(options.stash, key) !== stack || Object.entries(picks).some(([selected, n]) => n > 0 && findDepartureStack(options.stash, selected)?.card.name === stack.card.name)) continue;
     const next = { ...picks, [key]: 1 }, summary = departureSummary({ ...options, picks: next });
-    const preview = options.previewDeployment({ baseSnapshot: { stash: options.stash }, preset: presetFor(next), cardCatalog: options.stash.map(item => item.card), bagCapacity: summary.capacity });
+    const preview = options.previewDeployment({ baseSnapshot: { stash: options.stash, petSel: options.pet?.id }, preset: presetFor(next), cardCatalog: options.stash.map(item => item.card), pets: options.pet ? [options.pet] : [], bagCapacity: options.capacity, starterCount: options.starterCount, starterCard: options.starterCard });
     if (!preview.canStart || summary.slots > Math.max(0, options.capacity - 3)) continue;
     picks[key] = 1; added.push(stack.card.name);
   }

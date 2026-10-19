@@ -5,11 +5,11 @@ import { chestRewardOverviewHTML } from '../game/src/ui/chest-reward-overview.js
 it.each([
   [{isPick:true,count:3},'选择 1 张'],
   [{isPick:true,randomSingle:true,count:1},'选择 1 张'],
-  [{randomSingle:true,count:1},'随机收获 · 1 张'],
-  [{randomSingle:true,count:2},'领取奖励 · 全部可领'],
-  [{choice:true,count:4},'领取附赠奖励'],
-  [{count:1},'领取 1 张'],
-  [{count:3},'领取奖励 · 全部可领'],
+  [{randomSingle:true,count:1},'随机收获'],
+  [{randomSingle:true,count:2},'领取奖励'],
+  [{choice:true,count:4},'附赠奖励'],
+  [{count:1},'领取奖励'],
+  [{count:3},'领取奖励'],
   [{finished:true,isPick:true},'奖励已处理'],
 ])('标题遵循当前模式 %j',(input,expected)=>expect(rewardPickerTitle(input)).toBe(expected));
 it('成功回执按实际入包张数计数，不按候选或去重种类计数',()=>{

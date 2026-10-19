@@ -1,10 +1,10 @@
-/* 新局 5/9：复用冻结 3/9 的候选几何，第二至四层各删一个非关键节点，再赋型。
+/* 新局 6/9：复用冻结 3/9 的候选几何，第二至四层各删一个非关键节点，再赋型。
  * 地图内独立子流，不推进对局随机流；旧 3/9 的生成和重建入口保持逐字冻结。 */
 import { generateLayeredMap } from './map-generator.js';
 import { hashSeed, nextRandom } from '../core/random-core.js';
 import { clone } from '../core/shared.js';
 import { CURRENT_GENERATOR_VERSION, CURRENT_LAYOUT_VERSION, MAP_TYPE_BUDGETS,
-  layerNeighbors, graphDistances, finaleOrderOk, validateCurrentGeneratedMap } from './map-generation-rules.js';
+  FIRE_BATTLE_LIMIT, minimumBattlesTo, layerNeighbors, graphDistances, finaleOrderOk, validateCurrentGeneratedMap } from './map-generation-rules.js';
 
 export const MAX_CURRENT_MAP_ATTEMPTS = 64;
 const FALLBACK_TOPOLOGY_SEED = 'map-v4-fallback-20261017';
@@ -58,7 +58,10 @@ function chooseBattles(layer, pool, count, fire) {
   };
   const search = offset => {
     if (chosen.size === count) {
-      return layer.nodes[0].li !== 0 || !Number.isFinite(graphDistances(neighbors, layer.entry, chosen)[fire]);
+      const li = layer.nodes[0].li;
+      if (!MAP_TYPE_BUDGETS[li].fire) return true;
+      const battles = minimumBattlesTo(layer, fire, chosen);
+      return battles <= FIRE_BATTLE_LIMIT && (li !== 0 || battles >= 1);
     }
     if (pool.length - offset < count - chosen.size) return false;
     for (let i = offset; i < pool.length; i++) {
@@ -169,6 +172,6 @@ export function generateCurrentLayeredMap(seed = 0, buildCandidate = defaultCand
   }
   // 独立于可注入候选源的已验证几何；最后仍经过相同赋型与质量门。
   const fallback = prepare(seed, legacyMap(FALLBACK_TOPOLOGY_SEED).layers, `${seed}:v4:fallback`);
-  if (!fallback) throw new Error('5/9 地图生成失败：候选与保底地图均未满足最终约束');
+  if (!fallback) throw new Error('6/9 地图生成失败：候选与保底地图均未满足最终约束');
   return { ...fallback, generation: { attempts: MAX_CURRENT_MAP_ATTEMPTS, fallback: true } };
 }

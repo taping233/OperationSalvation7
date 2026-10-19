@@ -2,17 +2,17 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createHubPreparationFeature } from '../game/src/hub/game.hub.preparation.js';
 
-function createHarness({ availableCards = 2, failCommit = false, commitGate = null } = {}) {
+function createHarness({ availableCards = 2, failCommit = false, commitGate = null, presetSelection = {} } = {}) {
   const card = { id: 'card-a', name: '北境短刀', rarity: '普通', type: '武术' };
   let revision = 4;
   let snapshot = {
     stash: availableCards ? [{ card, count: availableCards }] : [],
-    characters: {},
-    pets: {},
+    characters: { baita: { lv: 1 } },
+    pets: { robot: { lv: 1 } },
     goals: {
       tracked: [],
       presets: {
-        'preset-1': { id: 'preset-1', name: '猛攻', characterId: null, petId: null, picks: [{ card: { cardId: card.id }, count: 1 }] },
+        'preset-1': { id: 'preset-1', name: '猛攻', characterId: null, petId: null, ...presetSelection, picks: [{ card: { cardId: card.id }, count: 1 }] },
         'preset-2': { id: 'preset-2', name: '跑刀', characterId: null, petId: null, picks: [] },
       },
     },
@@ -47,8 +47,8 @@ function createHarness({ availableCards = 2, failCommit = false, commitGate = nu
       commitBase,
       slotId: () => 'slot-1',
       cardCatalog: () => [card],
-      characters: () => [],
-      pets: () => [],
+      characters: () => [{ id: 'baita' }],
+      pets: () => [{ id: 'robot' }],
       bagCapacity: () => 5,
     },
     view,
@@ -138,6 +138,16 @@ describe('基地整备功能端口', () => {
     expect(h.navigation.applyPicks).toHaveBeenCalledWith({ 'card:card-a': 1 });
     expect(h.navigation.openDeparture).toHaveBeenCalledTimes(1);
     expect(h.view.controller.dispose).toHaveBeenCalledTimes(1);
+  });
+
+  it('非默认人物与宠物随预设卡牌一并交给出征入口', async () => {
+    const h = createHarness({ presetSelection: { characterId: 'baita', petId: 'robot' } });
+    h.feature.open();
+    await h.view.lastIntent({ type: 'preset-apply', payload: { presetId: 'preset-1' } });
+    expect(h.navigation.applyPicks).toHaveBeenCalledExactlyOnceWith(
+      { 'card:card-a': 1 }, { characterId: 'baita', petId: 'robot' });
+    expect(h.navigation.openDeparture).toHaveBeenCalledOnce();
+    expect(h.commitBase).not.toHaveBeenCalled();
   });
 
   it('A3-PREP-04 异步 intent 期间推送 busy:true，命令 settle 后回 false', async () => {

@@ -23,7 +23,7 @@ const make = (seed, version, routed = false) => {
   return createMapSnapshot({ mapSeed: seed, generatorVersion: version, layoutVersion: 9, layerData, routeVersion, routePlan });
 };
 
-describe('地图3/9冻结与4/9明确分派', () => {
+describe('地图3/9冻结与现行6/9明确分派', () => {
   it.each(golden)('旧seed %s的完整输出保持冻结金样例', (seed, sha) => { expect(hash(generateLayeredMap(seed))).toBe(sha); });
 
   it('无快照旧3/9重建保留已知旧图缺陷，不悄悄修成新图', () => {
@@ -35,7 +35,7 @@ describe('地图3/9冻结与4/9明确分派', () => {
     expect(planMapRestore({ seed: 'new-without-snapshot', generatorVersion: 4, layoutVersion: 9, layerIdx: 0, trackPos: 0 })).toMatchObject({ ok: false, preserveRun: true, code: 'UNSUPPORTED_LEGACY_MAP' });
   });
 
-  it.each([[3, false], [3, true], [5, false], [5, true]])('%s版有无路线%s的快照逐字往返且保当前位置/内容索引', (version, routed) => {
+  it.each([[3, false], [3, true], [5, false], [5, true], [6, false], [6, true]])('%s版有无路线%s的快照逐字往返且保当前位置/内容索引', (version, routed) => {
     const made = make('version-roundtrip', version, routed); expect(made.ok).toBe(true);
     expect(made.value.generatorVersion).toBe(version); expect(made.value.snapshotVersion).toBe(routed ? 2 : 1);
     const run = { mapSeed: made.value.mapSeed, generatorVersion: version, layoutVersion: 9, layerIdx: 2, trackPos: 6,
@@ -47,17 +47,17 @@ describe('地图3/9冻结与4/9明确分派', () => {
     expect(hydrateMapSnapshot(made.value).value.layerData[2].logical[6]).toEqual(restored.value.layerData[2].logical[6]);
   });
 
-  it('旧缺陷快照仍可恢复，伪造4/9身份必须经过新最终quality', () => {
+  it('旧缺陷快照仍可恢复，伪造6/9身份必须经过新最终quality', () => {
     const old = make('audit-map-20261017-625', 3).value;
     expect(validateMapSnapshot(old).ok).toBe(true);
-    const forged = structuredClone(old); forged.generatorVersion = 4;
+    const forged = structuredClone(old); forged.generatorVersion = 6;
     expect(validateMapSnapshot(forged)).toMatchObject({ ok: false, preserveRun: true, code: 'INVALID_MAP_SNAPSHOT' });
-    for (const generatorVersion of [2, 6, 999]) expect(validateMapSnapshot({ ...old, generatorVersion })).toMatchObject({ ok: false, code: 'UNSUPPORTED_MAP_SNAPSHOT' });
+    for (const generatorVersion of [2, 7, 999]) expect(validateMapSnapshot({ ...old, generatorVersion })).toMatchObject({ ok: false, code: 'UNSUPPORTED_MAP_SNAPSHOT' });
   });
 
-  it('新局安装4/9并保存可恢复v2；安装旧快照不会重新调用新局生成', () => {
+  it('新局安装6/9并保存可恢复v2；安装旧快照不会重新调用新局生成', () => {
     buildNewRunDerived('real-derived-new');
-    expect(game).toMatchObject({ mapSeed: 'real-derived-new', generatorVersion: 5, layoutVersion: 9, routeVersion: 'r5-routes-v2' });
+    expect(game).toMatchObject({ mapSeed: 'real-derived-new', generatorVersion: 6, layoutVersion: 9, routeVersion: 'r5-routes-v2' });
     const saved = createMapSnapshot(game); expect(saved.ok).toBe(true); expect(saved.value.snapshotVersion).toBe(2);
     const old = planMapRestore({ seed: 'audit-map-20261017-625', generatorVersion: 3, layoutVersion: 9, layerIdx: 0, trackPos: 2 }).value;
     installDerived(old.layerData, old.mapSeed, old.generatorVersion, old.layoutVersion, old.routeVersion, old.routePlan);

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "collectedAt": "2026-10-19T11:12:10.3915021Z",
+  "files": [
+    {
+      "file": "tools/workflow-slice.mjs",
+      "sha256": "118d932a3add0dcd59da1a0baa2a73e1dc247643346e85db3f2f43dd44c695b8",
+      "lastWriteTimeUtc": "2026-10-19T11:05:41.2729167Z"
+    },
+    {
+      "file": "tests/workflow-slice.test.js",
+      "sha256": "967f6500fdd22a9968bade2012bcfed81757f96219d1c036566a95fbfde9e8d4",
+      "lastWriteTimeUtc": "2026-10-19T11:05:41.4676562Z"
+    },
+    {
+      "file": "docs/workflow-recipes.md",
+      "sha256": "08e68f7501647b6b0cd9db49cf0f9c4036f185d2337eb68d171376c274efce8e",
+      "lastWriteTimeUtc": "2026-10-19T11:07:44.7154746Z"
+    }
+  ],
+  "limits": [
+    "Collected after the tool test run; inventory only.",
+    "The native verify manifest does not include tools/workflow-slice.mjs; it must not be used alone to establish freshness of this tool.",
+    "No tool source edits occurred after the recorded final contract run in this lane."
+  ]
+}

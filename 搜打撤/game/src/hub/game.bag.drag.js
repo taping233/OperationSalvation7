@@ -168,7 +168,7 @@ import { captureBattleContext } from '../battle/battle-loader.js';
       const stack = cardStacks(false).find(st => st.card.name === d.name);
       if (!stack) return;
       if (stack.card.type !== '资源') {
-        UI.log('[[icon:gem]] 珍珠盒只收资源卡（木材/口粮/钥匙/货币等）——点击珍珠盒可打开存放界面', 'warn');
+        UI.log('[[icon:gem]] 珍珠盒只收资源卡（木材/口粮/钥匙/货币等）', 'warn');
         SDT.Sound.sfx('deny');
         bagSlots.showBackpack(true);
         return;

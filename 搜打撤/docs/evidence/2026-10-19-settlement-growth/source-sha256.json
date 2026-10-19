@@ -1,0 +1,77 @@
+[
+  {
+    "path": "game/src/hub/base.js",
+    "bytes": 33811,
+    "sha256": "a7988240b494cbb43aa3d01b5ecabbbf6e8ccc1de8ead02211fad60de3cd771f"
+  },
+  {
+    "path": "game/src/hub/collection-protection.js",
+    "bytes": 259,
+    "sha256": "3c1fc2d49c87a920328ce67acd5789aaa0078a04a854a1ffd384342da15213a4"
+  },
+  {
+    "path": "game/src/hub/collection-conversion.js",
+    "bytes": 2981,
+    "sha256": "2cf884eb03b5368b110a5d103f0e4cfc2ca892f80f8c1f0640eb05b966c04681"
+  },
+  {
+    "path": "game/src/hub/collection-conversion-view.js",
+    "bytes": 1379,
+    "sha256": "fab4442d5ce15457c8ed7e113734333c054dfef33d5314a4f1efb600374282e3"
+  },
+  {
+    "path": "game/src/hub/collection.commands.js",
+    "bytes": 11655,
+    "sha256": "c36bc51918453cef69d070fbed2eedb1421a7b8c72d0ba2cf8a4e2b69a03f27d"
+  },
+  {
+    "path": "game/src/hub/game.hub.pages.js",
+    "bytes": 20418,
+    "sha256": "4e8772ad4d8b278e73f58439b3507614fa448488c11f79c28afd262e4297c141"
+  },
+  {
+    "path": "game/src/hub/game.hub.runtime.js",
+    "bytes": 25599,
+    "sha256": "45f9e580ebe06ad3dbb9c7a54aea7b0d6913fdb8e267d61ebbc140af7a93cae5"
+  },
+  {
+    "path": "game/src/hub/hub.personnel.js",
+    "bytes": 21192,
+    "sha256": "1e7c864a729087273390150d14996e8006c3645bb6320e8d9c26ba31bbaa2c2b"
+  },
+  {
+    "path": "game/src/hub/hub.warehouse.js",
+    "bytes": 15678,
+    "sha256": "4ec83d978d84c45b79e53ddbf27cc223a2a4a1851ad3966f2cda5cd21cbb3fab"
+  },
+  {
+    "path": "game/src/hub/hub.trade-shop-v5.js",
+    "bytes": 15252,
+    "sha256": "70bf5e8aeb1c549017850bd7003a2da020e772d9091aea0e938fb6a597284022"
+  },
+  {
+    "path": "game/src/hub/terminal.commands.js",
+    "bytes": 7527,
+    "sha256": "37e83c42ff7046cd47814394721e798e7f4a7301f7c11172fd41b3da285e8aea"
+  },
+  {
+    "path": "game/src/hub/extraction.commands.js",
+    "bytes": 26358,
+    "sha256": "e36ef82395c7f39f8c3987a18c2a79bc3aa057d0b104b14684cf07bbe4b598e9"
+  },
+  {
+    "path": "game/src/ui/extraction-rewards-view.js",
+    "bytes": 13851,
+    "sha256": "38aaff884b1539c0bd243b6b295d9f77b120224dde0c48490ef3bd5e47928c03"
+  },
+  {
+    "path": "game/css/extraction-rewards.css",
+    "bytes": 15599,
+    "sha256": "3a9014e1397eea279a54ccd33cbfdca55adadf183c26104aba656d86512501af"
+  },
+  {
+    "path": "game/dev/extraction-rewards-review.html",
+    "bytes": 10965,
+    "sha256": "535ac9ea349ac7fbe565a2cb6a155d9164aeff8ce7a477a65373ece0245dbd8c"
+  }
+]

@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-19T11:17:43.928Z",
+  "inputKind": "real-input",
+  "detail": "新版两者结合样板，当前1523×956；生产背包构造夹具，24/24目标图加载，9张/7格；隐藏开发工具后观察矿白导航与标题、石墨卡牌舞台；审美待老板反馈。",
+  "screenshot": {
+    "path": "bag.png",
+    "bytes": 115858,
+    "sha256": "9216063578925903bd91300292f3d86207634fe5d444fb070cb9ce3293237a72"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/dev/feedback-1018-review.html",
+  "images": [
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 941,
+      "src": "http://127.0.0.1:5200/assets/scenes/map-nodes/map-atmosphere-is7-1012.webp",
+      "width": 1672
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1024,
+      "src": "http://127.0.0.1:5200/assets/cards/resources/wood.webp?v=0.60.0",
+      "width": 1024
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1024,
+      "src": "http://127.0.0.1:5200/assets/cards/resources/wood.webp?v=0.60.0",
+      "width": 1024
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 1024,
+      "src": "http://127.0.0.1:5200/assets/cards/items/tt4-shine-token.webp?v=0.60.0",
+      "width": 1024
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/studio-expanded/tt3-grass-armor.webp?art=studio-square-outpaint-20261011&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/plate.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/studio-expanded/tt3-grass-armor.webp?art=studio-square-outpaint-20261011&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/plate.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://127.0.0.1:5200/assets/cards/expedition-starters/basic-attack.webp?art=basicattack-original-rough-20261010&v=0.60.0",
+      "width": 1441
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://127.0.0.1:5200/assets/cards/expedition-starters/basic-attack.webp?art=basicattack-original-rough-20261010&v=0.60.0",
+      "width": 1441
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    }
+  ],
+  "console": []
+}

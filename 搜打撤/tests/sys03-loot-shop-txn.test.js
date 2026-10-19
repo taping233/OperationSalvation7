@@ -174,7 +174,8 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     expect(ownedCards).toHaveLength(1);
     expect(showCount).not.toHaveBeenCalled();
     expect(ovBody.querySelector('.loot-scroll').scrollTop).toBe(32);
-    expect(document.activeElement.dataset.act).toBe('chestSelect');
+    expect(document.activeElement.dataset.act).toBe('chestTake1');
+    expect(document.activeElement.dataset.i).toBe('1');
     const callsAfterTake1 = grantCalls.length;
     acts.chestTake();   // 重绘前的批量请求仍不得重复领取已收卡。
     expect(grantCalls.length).toBeGreaterThan(callsAfterTake1);
@@ -203,7 +204,7 @@ describe('SYS-03 搜刮页事务序（chests.js）', () => {
     collectOverviewCoins(acts); expect(game.gainCoins).toHaveBeenCalledTimes(1);
     expect(game.gainCoins).toHaveBeenCalledWith(7);
     expect(ovBody.querySelector('.reward-final')).toBeNull();
-    expect(ovBody.querySelector('.reward-capacity-note').textContent).toContain('放不下');
+    expect(ovBody.querySelector('.reward-capacity-note').textContent).toBe('暂时无法领取');
     expect(ovBody.querySelector('[data-act="chestContinue"]')).toBeNull();
     ovBody.querySelector('[data-act="chestSkip"]').click();
     ovBody.querySelector('[data-act="chestLeave"]').click();

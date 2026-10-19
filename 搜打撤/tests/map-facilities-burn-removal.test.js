@@ -21,7 +21,7 @@ it('旧4/9双设施存档保持原地图并可恢复，新配额不回写旧存�
   for (let seed = 0; seed < 100; seed++) {
     const layers = createLayeredMap(`audit-map-20261017-${seed}`);
     const raw = layers.map(layer => ({ ...layer, entry: layer.entrances[0] }));
-    if (validateCurrentGeneratedMap(raw, PREVIOUS_MAP_TYPE_BUDGETS).ok) { old = layers; break; }
+    if (validateCurrentGeneratedMap(raw, PREVIOUS_MAP_TYPE_BUDGETS, false).ok) { old = layers; break; }
   }
   expect(old).toBeDefined();
   const made = createMapSnapshot({mapSeed:'old-facilities', generatorVersion:4, layoutVersion:9, layerData:old});

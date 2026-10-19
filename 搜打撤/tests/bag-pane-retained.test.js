@@ -35,3 +35,12 @@ it('zone changes retain existing replacement boundary and hidden/closing pages r
  const pane=document.querySelector('.bag-col');patch(markup(tile('s','S'),{zone:'safe'}),'safe');expect(document.querySelector('.bag-col')).not.toBe(pane);
  UI.el.overlay.hidden=true;expect(patchBackpackPane(UI,SDT,markup(''),'bag',true)).toBe(false);
 });
+it('retains card motion state on same-zone refresh while accepting new material and removing stale business state',()=>{
+ const a=document.querySelector('[data-stack="A"]');a.dataset.cardStateMotion='true';a.dataset.safe='1';
+ a.style.cssText='--tint:#57a8f01c;--glow:#57a8f030;transform:translateY(-6px) scale(1.02);outline-color:rgba(87,168,240,.84)';
+ const transform=a.style.transform,outline=a.style.outlineColor;
+ patch(markup(tile('a','A',2,'style="--tint:#b184e81c;--glow:#b184e830"')));
+ expect(document.querySelector('[data-stack="A"]')).toBe(a);expect(a.dataset.cardStateMotion).toBe('true');expect(a.dataset.safe).toBeUndefined();
+ expect(a.style.transform).toBe(transform);expect(a.style.outlineColor).toBe(outline);expect(a.style.getPropertyValue('--tint')).toBe('#b184e81c');expect(a.style.getPropertyValue('--glow')).toBe('#b184e830');
+ delete a.dataset.cardStateMotion;patch(markup(tile('a','A',3)));expect(a.hasAttribute('style')).toBe(false);
+});

@@ -273,7 +273,7 @@ export function renderNestMap() {
       ${(game.pendingRunePick || []).map((r2, i) => `<button class="mini-btn ok" data-act="nestPickRune${i}">${esc(r2.name)}（${r2.attrs.join('')}·${r2.rarity}）</button>`).join('')}</div>` : ''}
     ${(game.nestTargetedBox || 0) > 0 ? `<div class="ov-btns"><span class="dim">定向大符文箱 ×${game.nestTargetedBox}——选择属性生成 3 块随机符文；当前可收 ${Math.min(3, Math.max(0, 10 + (SDT.Base.data.nestBagUp || 0) - game.nestRunes.length))}/3 块，超出容量会散失：</span>
       ${['水','火','草','光','暗'].map(at => `<button class="mini-btn ok" data-act="nestBox${at}">${at}</button>`).join('')}</div>` : ''}
-    <p class="ov-note">点击高亮的<b>下一格</b>推进 · 每次对战后回满血 · 牌盒即牌库（开局 5 张，每回合 2 费抽 1 张）</p>`, true);
+    <p class="ov-note">每次对战后回满血 · 牌盒即牌库（开局 5 张，每回合 2 费抽 1 张）</p>`, true);
   const active = nestPageBinding();
   NEST_MAP.forEach((cell, i) => UI.act('nestCell' + i, () => { if (active() && !game.battleActive && i === game.nestPos + 1) return enterNestCell(cell); }));
   const runePicks = game.pendingRunePick;

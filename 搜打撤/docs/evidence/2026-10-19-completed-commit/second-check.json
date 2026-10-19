@@ -1,0 +1,16 @@
+{
+  "report": "docs/evidence/2026-10-19-WF-completed-commit-1019/2026-10-19T14-27-57.086Z-526af4d5-staged.json",
+  "sha256": "aefb47e59e27b040321c83622b9fe9d1412dd0dde648459ab7c4ffb2da76d33b",
+  "outcome": "failed",
+  "mode": "full",
+  "tests": {
+    "passed": 6728,
+    "failed": 1,
+    "skipped": 16,
+    "filesPassed": 663,
+    "filesFailed": 1
+  },
+  "indexStable": true,
+  "snapshotMutations": [],
+  "failure": "hub-architecture 原有430行壳守卫：伙伴回执增加到435行。将升级反馈迁回hub.personnel，保留原守卫；定向5文件66项与相关ESLint通过。"
+}

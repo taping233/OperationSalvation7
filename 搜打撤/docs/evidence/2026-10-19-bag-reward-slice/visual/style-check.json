@@ -1,0 +1,45 @@
+{
+  "status": "styles-implemented-awaiting-live-review",
+  "checks": [
+    {
+      "name": "stylelint in process",
+      "command": "PowerShell here-string | node --input-type=module; await stylelint.lint({files:[\"game/css/bag-design-system.css\",\"game/css/chest-reward-overview.css\"],formatter:\"string\"})",
+      "exitCode": 0,
+      "result": "No errors or warnings"
+    },
+    {
+      "name": "PostCSS baseline comparison",
+      "command": "Same Node invocation; parse before/current CSS and assert card/scroll geometry declarations are unchanged",
+      "exitCode": 0,
+      "result": "Backpack opt-in scope retained; reward face size, aspect ratio, row reserve and scrolling geometry unchanged"
+    },
+    {
+      "name": "Existing targeted tests",
+      "command": "npm run test:target -- tests/bag-ui-language.test.js tests/event-reward-layout.test.js tests/reward-action-clipping.test.js tests/reward-frame-review.test.js",
+      "exitCode": 1,
+      "result": "Gate stopped at spawnSync git EPERM before Vitest; merged final test run delegated to interaction lane"
+    }
+  ],
+  "files": [
+    {
+      "path": "game/css/bag-design-system.css",
+      "currentSHA256": "9e08bf867316eac0038a76b97177a7b06d09e1d1e3d59066fc0169e491a7ca3f",
+      "beforeSHA256": "bef297db588c767f5f8bc3b0610dd5d55e2a6da6410d25cf08e4908d187d3e4f"
+    },
+    {
+      "path": "game/css/chest-reward-overview.css",
+      "currentSHA256": "1a76e4d31bf386bbdb5e6d1f8ad7aa15ce7774bdfedc279e7403c43ddaf48714",
+      "beforeSHA256": "05ed6893cb79992352a49f1eaad876885a2248385249a87fe271b00c67fca606"
+    },
+    {
+      "path": "tests/event-reward-layout.test.js",
+      "currentSHA256": "aabfba2e2c7d7209381728222efe525a4acbcf29fd71ce98fa897cabd6fa523c",
+      "beforeSHA256": "bd880d0844d098cd89d595c75e9937ea7bcf077952320701db362f341e0b9e9d"
+    }
+  ],
+  "baselineSources": {
+    "bag-design-system.css": "Initial git status verified clean. Parent approved HEAD bytes after backup request arrived following the bag patch. Saved via cmd git show direct binary redirection.",
+    "chest-reward-overview.css": "Copy-Item before modification; original bytes retained.",
+    "event-reward-layout.test.js": "Copy-Item before modification; original bytes retained."
+  }
+}

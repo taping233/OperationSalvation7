@@ -6,7 +6,8 @@ const MATERIAL_CARD_IDS = { wood: 'tt-wood', rations: 'tt-rations' };
 const GOOD_KEY = good => String(good.material || good.id || '');
 const STACK_KEY = departureStackKey;
 const quantity = stack => Math.max(0, Number(stack?.count) || 0);
-const protectedStack = (base, stack) => !!base.isCollected?.(stack.card);
+const protectedStack = (base, stack) => typeof base.isCollectionProtected === 'function'
+  ? !!base.isCollectionProtected(stack.card) : !!base.isCollected?.(stack.card);
 const sellableStack = (base, stack) => quantity(stack) > 0 && stack.card.id !== base.PET_EGG_ID
   && stack.card.id !== 'tt-econpack' && !base.materialInfo?.(stack.card);
 const salePrice = (cards, card) => Math.max(0, Number(cards.sellPrice(card)) || 0);

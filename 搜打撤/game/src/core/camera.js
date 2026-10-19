@@ -1,5 +1,6 @@
 import { renderScheduler } from './render-scheduler.js';
 import { ease } from './motion-primitives.js';
+import { cameraPanBounds, createMapDragMotion } from './map-drag-motion.js';
 
   const SDT = window.SDT;
 
@@ -12,10 +13,16 @@ import { ease } from './motion-primitives.js';
     this.zoom = 1;
     this.frameMode = 'routes';
     this.detailInset = 0;
+    this._pan = createMapDragMotion(this, {
+      invalidate: active => active ? renderScheduler.invalidateAnimation() : renderScheduler.invalidate(),
+      reduced: () => SDT.Motion?.reduceMotion?.() || false,
+    });
   }
 
   Camera.prototype.resize = function (w, h) {
+    this._pan.cancel();
     this.viewW = w; this.viewH = h;
+    this.clamp();
   };
 
   Camera.prototype.screenToWorld = function (sx, sy) {
@@ -33,6 +40,7 @@ import { ease } from './motion-primitives.js';
   };
 
   Camera.prototype.panBy = function (dx, dy) { // 屏幕像素位移
+    if (this._pan.dragging) { this._pan.move(dx, dy); return; }
     this._stopGlide();
     this.frameMode = 'manual';
     this.cx -= dx / this.zoom;
@@ -52,13 +60,16 @@ import { ease } from './motion-primitives.js';
   };
 
   Camera.prototype.clamp = function () {
-    const m = 160; // 允许超出地图边缘的空白余量（世界像素，按 zoom 换算到屏幕）
-    const mapW = this.map.cols * this.map.tile;
-    const mapH = this.map.rows * this.map.tile;
-    // Edge routes must be able to sit at the centre of the screen as well.
-    this.cx = Math.min(mapW + m, Math.max(-m, this.cx));
-    this.cy = Math.min(mapH + m, Math.max(-m, this.cy));
+    const { minX, minY, maxX, maxY } = cameraPanBounds(this.map, this);
+    this.cx = Math.min(maxX, Math.max(minX, this.cx));
+    this.cy = Math.min(maxY, Math.max(minY, this.cy));
   };
+
+  Camera.prototype.beginPan = function () {
+    this._stopGlide(); this.frameMode = 'manual'; this._pan.begin();
+  };
+  Camera.prototype.endPan = function (allowed) { this._pan.release(allowed); };
+  Camera.prototype.cancelPan = function (clamp = false) { this._pan.cancel(clamp); };
 
   Camera.prototype.focus = function (x, y) {
     this._stopGlide();
@@ -72,6 +83,7 @@ import { ease } from './motion-primitives.js';
    * 每帧 invalidate 保持重绘；任何手动操作（panBy/zoomAt/focus）立即挂断补间。
    * 无 rAF（测试/node）或减动效时退化为直接贴合。 */
   Camera.prototype._stopGlide = function () {
+    this._pan.cancel();
     if (this._glide) { this._glide.dead = true; this._glide = null; }
   };
 
@@ -117,6 +129,7 @@ import { ease } from './motion-primitives.js';
   };
 
   Camera.prototype.fitLayer = function (game, padding = 96) {
+    this.layerGame = game;
     const points = game && game.nodePos && game.nodePos[game.layerIdx];
     if (!points || !points.length) return false;
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
@@ -141,6 +154,7 @@ import { ease } from './motion-primitives.js';
   };
 
   Camera.prototype.frameExploration = function (game, overview = false, opts = null) {
+    this.layerGame = game;
     const li = game?.layerIdx;
     const points = game?.nodePos?.[li];
     const current = game?.layerData?.[li]?.logical?.[game.trackPos];

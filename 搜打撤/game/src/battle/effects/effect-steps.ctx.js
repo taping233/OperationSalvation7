@@ -35,7 +35,7 @@ export function parsePoolNoun(raw, myClass) {
   }
   if (/^(其它|其他)职业/.test(s)) { s = ''; preds.push(c => !!c.cls && !!myClass && c.cls !== myClass && c.type !== '能力卡'); }   // 江湖救急只发现其它职业的招式与装备（2026-09-16 留言）
   else if (/^本职业/.test(s)) { s = ''; preds.push(c => !!c.cls && c.cls === myClass); }
-  if (/^招式/.test(s)) { s = s.replace(/^招式/, ''); preds.push(c => c.type === '武术'); }
+  if (/^招式/.test(s)) { s = s.replace(/^招式/, ''); preds.push(c => ['武术', '法术'].includes(c.type)); }
   // 复合池必须带「或」；纯稀有度名词仅按品质过滤。
   // 「发现一张传说或能力卡」的名词会被上层后缀匹配吃掉「能力卡」只剩「传说或」，
   // 因此结尾的「能力/或」都要兼容（2026-09-16 留言「神秘召唤卡池错误」修复）
@@ -72,11 +72,14 @@ const FRESH_RESULT = (did) => ({ did, drawn: false, healed: false, armored: fals
 
 /** 对单个目标结算伤害并冒伤害数字（原 effect-steps.js 117-124，逐字搬迁）。 */
 export function makeHitFoe(deps) {
-  const {combat, pushFloat, foeIndexOf, sweepDead} = deps;
+  const {combat, pushFloat, foeIndexOf, sweepDead, getFrozenTargetBonus} = deps;
     const hitFoe = (ctx, t, n, type, caster = {}, segmentOrder) => {
       const hpBefore = t.hp;
       const shieldBefore = t.defense?.shield || 0;
-      const r = combat.dealDamage(caster, t, n, type);
+      const bonus = typeof getFrozenTargetBonus === 'function' ? getFrozenTargetBonus(t) : 0;
+      const bleedBonus = type === 'attack' && (ctx.card?.id === 'tt3-fly-arrowhawk' || /流血伤害翻倍/.test(String(ctx.card?.desc || '')))
+        ? Math.max(0, +t.status?.bleed || 0) : 0;
+      const r = combat.dealDamage(caster, t, n + bonus + bleedBonus, type);
       const shieldBreak = shieldBefore > 0 && !(t.defense?.shield || 0);
       if (r.dealt > 0 || shieldBreak) pushFloat({ unit: foeIndexOf ? foeIndexOf(t) : 0,
         text: r.dealt > 0 ? '-' + r.dealt : '护盾破碎', cls: r.dealt > 0 ? 'dmg' : 'block', type,

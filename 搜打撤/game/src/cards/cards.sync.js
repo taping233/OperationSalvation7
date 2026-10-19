@@ -1057,7 +1057,7 @@ export const syncSlice = {
         ['cmtn1i64j7y7', R(SELF, [acquire(1, '装备', 'discover')])],
         ['tt7-ironphalanx', R(SELF, [
           { op: 'armor', amount: 10 },
-          acquire(5, '随机', 'deck', 'zeroCost'),
+          acquire(5, '随机', 'deck', 'costMinusOne'),
         ])],
         ['tt7-twinfireball', dmgOne([acquire(2, '火球', 'hand')])],
         ['cmtn1gfhczzj', R(SELF, [acquire(1, '能施加诅咒的招式', 'hand')])],

@@ -7,10 +7,10 @@ import { applyGuardedRoute,validateGuardedRoute,routeBaseFingerprint,MAX_ROUTE_A
 import { createMapSnapshot,planMapRestore,validateMapSnapshot } from '../game/src/run/map-snapshot.js';
 import { Random } from '../game/src/core/random.js';
 import { V4_MAP_TYPE_BUDGETS } from '../game/src/run/map-generation-rules.js';
-const base = seed => applyRouteOverlay({generatorVersion:5,layoutVersion:9,layerData:createCurrentLayeredMap(seed)}).value;
-const apply = old => applyGuardedRoute({generatorVersion:5,layoutVersion:9,layerData:old.layerData,baseRoutePlan:old.routePlan});
+const base = seed => applyRouteOverlay({generatorVersion:6,layoutVersion:9,layerData:createCurrentLayeredMap(seed)}).value;
+const apply = old => applyGuardedRoute({generatorVersion:6,layoutVersion:9,layerData:old.layerData,baseRoutePlan:old.routePlan});
 const map = seed => apply(base(seed)).value;
-const snapshot = (seed,value=map(seed)) => createMapSnapshot({mapSeed:seed,generatorVersion:5,layoutVersion:9,...value}).value;
+const snapshot = (seed,value=map(seed)) => createMapSnapshot({mapSeed:seed,generatorVersion:6,layoutVersion:9,...value}).value;
 const samples = Array.from({length:200},(_,i)=>`audit-map-20261017-${i}`);
 const appliedSeed = samples.find(seed => { const value=map(seed); return value.status==='applied' && value.routePlan.swaps.length && value.routePlan.removedEdges.length; });
 const fallbackSeed = samples.find(seed => map(seed).status==='fallback');
@@ -68,7 +68,7 @@ describe('L2有战斗门槛与休整时序的route-v2',()=>{
   });
   it('新快照应用/回退均逐字往返，读档保位置与原对象',()=>{
     for(const seed of ['audit-map-20261017-0','audit-map-20261017-1','audit-map-20261017-2']){
-      const made=snapshot(seed),run={mapSeed:seed,generatorVersion:5,layoutVersion:9,routeVersion:'r5-routes-v2',layerIdx:1,trackPos:3,mapSnapshot:made},before=JSON.stringify(run);
+      const made=snapshot(seed),run={mapSeed:seed,generatorVersion:6,layoutVersion:9,routeVersion:'r5-routes-v2',layerIdx:1,trackPos:3,mapSnapshot:made},before=JSON.stringify(run);
       const restored=planMapRestore(run);expect(restored.ok).toBe(true);expect(createMapSnapshot(restored.value).value).toEqual(made);expect(JSON.stringify(run)).toBe(before);
     }
   });
@@ -86,16 +86,16 @@ describe('L2有战斗门槛与休整时序的route-v2',()=>{
     for(const alter of cases){const bad=structuredClone(good);alter(bad);const before=JSON.stringify(bad);expect(validateMapSnapshot(bad)).toMatchObject({ok:false,preserveRun:true});expect(JSON.stringify(bad)).toBe(before);}
     const fallback=snapshot(fallbackSeed);fallback.routePlan.fallbackReason='fabricated';expect(validateMapSnapshot(fallback).ok).toBe(false);
   });
-  it('4/9已开始的v1快照身份与地图不变；生成器和v1覆盖源逐字冻结',()=>{
+  it('4/9已开始的v1快照身份与地图不变；生成器和兼容覆盖源逐字冻结',()=>{
     const previousMaps=JSON.parse(readFileSync('tests/fixtures/map-v4-before-resource-removal.json','utf8'));
     for(const made of previousMaps){
       const restored=planMapRestore({mapSeed:made.mapSeed,generatorVersion:4,layoutVersion:9,routeVersion:made.routeVersion,mapSnapshot:made,layerIdx:1,trackPos:0});
       expect(restored.ok).toBe(true);expect(restored.value.generatorVersion).toBe(4);expect(createMapSnapshot(restored.value).value).toEqual(made);
-      const previous=validateGuardedRoute(made.layers,made.routePlan,false,V4_MAP_TYPE_BUDGETS);
+      const previous=validateGuardedRoute(made.layers,made.routePlan,false,V4_MAP_TYPE_BUDGETS,false);
       const v1={...made,layers:previous.baseLayers,routeVersion:'r5-routes-v1',routePlan:made.routePlan.baseRoutePlan};
       expect(validateMapSnapshot(v1).ok).toBe(true);
     }
-    const protectedFiles={'game/src/run/layeredMap.js':'c2a37a78cd6026e7af0fae01b8a102b936eb9c47b682f569b1596bdefd2e6600','game/src/ui/route-overlay.js':'6847033d7c7da22ccc39b6352b10a5e9023a335512b99e3e551078242c5387bf'};
+    const protectedFiles={'game/src/run/layeredMap.js':'c2a37a78cd6026e7af0fae01b8a102b936eb9c47b682f569b1596bdefd2e6600','game/src/ui/route-overlay.js':'1d738d479ccb09f77b60371eb667745790b8029868f1e008aacc8cc8beaa1910'};
     for(const[path,hash]of Object.entries(protectedFiles))expect(createHash('sha256').update(readFileSync(path)).digest('hex')).toBe(hash);
   });
   it('指纹不受next数组顺序变化影响，但边或类型改变一定被本例拒绝',()=>{

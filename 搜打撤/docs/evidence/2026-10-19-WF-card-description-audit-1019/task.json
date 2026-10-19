@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-card-description-audit-1019",
+  "date": "2026-10-19",
+  "owner": "Friday",
+  "goal": "按老板确认的卡牌描述逐张核对全部运行卡牌与各场景实现；先修员工通行证C发现选择，其余差异列证据",
+  "paths": [
+    "game/src/cards",
+    "game/src/battle/effects",
+    "game/src/battle/bag",
+    "game/src/hub/game.bag.js",
+    "game/src/hub/game.bag.rules.js",
+    "docs/rules.md",
+    "docs/save-format.md",
+    "docs/PENDING.md",
+    "tests/bag-token-discover.test.js",
+    "tests/bag-item-rule-baseline.test.js",
+    "tests/feedback-1018.test.js",
+    "docs/evidence/2026-10-19-card-description-audit"
+  ],
+  "doneWhen": [
+    "完整运行卡库逐ID有核对状态与实现入口，确定不符与未决/未覆盖分开",
+    "通行证C地图发现候选选择、源牌与奖励原子处理、取消重入和相关回归完成",
+    "汇总检查范围、确定差异与需要老板决定的事项，其他审查不擅自批量改玩法"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "268张逐ID归档，177战斗+91辅助，覆盖无重复缺失；C发现选择回归与真实输入取消/重开/选择通过。23张确认差异另由修复任务交付，历史快照保留。",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "逐ID有核对状态不代表逐张实战正确；8项语义待定、5项场景缺口、12条未闭合链路保留。",
+    "C浏览器使用隔离内存，真实RunStorage写读由专测覆盖；未声称玩家存档重载实页通过。"
+  ],
+  "updatedAt": "2026-10-19T12:41:24.106Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

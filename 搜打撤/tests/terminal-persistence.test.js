@@ -80,6 +80,7 @@ describe('死亡/放弃两键终局事务', () => {
       expect(localStorage.getItem(RunStorage.key(h.slotId))).toBeNull();
       const base = JSON.parse(localStorage.getItem(Base.SLOT_KEY(h.slotId)));
       expect(base.stats.deaths).toBe(1);
+      expect(base.stats.stashTotal).toBe(1);
       expect(base.characters.wu.xp).toBe(5);
       expect(base.stash.find(s => s.card.id === safeCard.id).count).toBe(1);
 
@@ -88,9 +89,43 @@ describe('死亡/放弃两键终局事务', () => {
       expect(replay.replay).toBe(true);
       const afterReplay = JSON.parse(localStorage.getItem(Base.SLOT_KEY(h.slotId)));
       expect(afterReplay.stats.deaths).toBe(1);
+      expect(afterReplay.stats.stashTotal).toBe(1);
       expect(afterReplay.stash.find(s => s.card.id === safeCard.id).count).toBe(1);
     });
   }
+
+  it.each(['run.death', 'run.abandon'])('%s 抢运实际入库推进累计20张成就，过滤初攻且重放不重复计数', async command => {
+    const h = await harness(5);
+    Base.data.stats.stashTotal = 19;
+    expect(Base.save()).toBe(true);
+    const achievement = window.SDT.Meta.achById('stash20');
+    expect(window.SDT.Meta.isUnlocked(achievement)).toBe(false);
+
+    const created = await h.commands.createAttempt({ slotId: h.slotId, command,
+      cards: [{ card: safeCard, count: 1 }, { card: window.SDT.Cards.SHA, count: 5 }], deathClass: '侠客' });
+    expect(created.ok).toBe(true);
+    expect(Base.data.stats.stashTotal).toBe(19);
+    expect((await h.commands.commitAttempt(created.attempt)).ok).toBe(true);
+    const saved = JSON.parse(localStorage.getItem(Base.SLOT_KEY(h.slotId)));
+    expect(saved.stats.stashTotal).toBe(20);
+    expect(saved.stash.find(stack => stack.card.id === safeCard.id).count).toBe(1);
+    expect(saved.stash.some(stack => stack.card.id === window.SDT.Cards.SHA.id)).toBe(false);
+    expect(window.SDT.Meta.isUnlocked(achievement, saved)).toBe(true);
+
+    expect((await h.newCommands().commitAttempt(created.attempt)).replay).toBe(true);
+    expect(JSON.parse(localStorage.getItem(Base.SLOT_KEY(h.slotId))).stats.stashTotal).toBe(20);
+  });
+
+  it('没有实际抢运入库时不推进累计入库进度', async () => {
+    const h = await harness(5);
+    Base.data.stats.stashTotal = 19;
+    expect(Base.save()).toBe(true);
+    const created = await h.commands.createAttempt({ slotId: h.slotId, command: 'run.abandon',
+      cards: [{ card: window.SDT.Cards.SHA, count: 5 }] });
+    expect(created.ok).toBe(true);
+    expect((await h.commands.commitAttempt(created.attempt)).ok).toBe(true);
+    expect(JSON.parse(localStorage.getItem(Base.SLOT_KEY(h.slotId))).stats.stashTotal).toBe(19);
+  });
 
   it('attempt等待恢复时同档换runId，旧卡牌快照被拒绝', async () => {
     const h = await harness(3);
@@ -123,6 +158,7 @@ describe('死亡/放弃两键终局事务', () => {
     expect((await h.newCommands().commitAttempt(second.attempt)).ok).toBe(true);
     const base = JSON.parse(localStorage.getItem(Base.SLOT_KEY(4)));
     expect(base.stash.find(s => s.card.id === safeCard.id).count).toBe(2);
+    expect(base.stats.stashTotal).toBe(2);
     expect(base.stats.deaths).toBe(0);
   });
 });

@@ -38,6 +38,8 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
       pets: data.pets(),
       catalogVersion: 'm06-v1',
       bagCapacity: data.bagCapacity(),
+      starterCount: data.starterCount?.(),
+      starterCard: data.starterCard?.(),
       busy,
       error,
     });
@@ -130,6 +132,8 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
               characters: data.characters(),
               pets: data.pets(),
               bagCapacity: data.bagCapacity(),
+              starterCount: data.starterCount?.(),
+              starterCard: data.starterCard?.(),
             });
             if (!preview.canStart) { repaint('库存或资格已变化，预设无法应用。'); return; }
             const picks = {};
@@ -140,7 +144,11 @@ function createHubPreparationFeature({ data, view, navigation, reportError, form
               picks[departureStackKey(stack)] = item.appliedCount;
             }
             if (!isCurrent(token)) return;
-            navigation.applyPicks(picks);
+            const selection = {};
+            if (preset.characterId) selection.characterId = preset.characterId;
+            if (preset.petId) selection.petId = preset.petId;
+            const applied = Object.keys(selection).length ? navigation.applyPicks(picks, selection) : navigation.applyPicks(picks);
+            if (applied === false) { repaint('人物或宠物设置未能应用，请检查选择并重试；携带卡牌未改变。'); return; }
             dispose();
             navigation.openDeparture();
             return;

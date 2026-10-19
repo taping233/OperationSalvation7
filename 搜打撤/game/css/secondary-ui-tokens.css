@@ -1,5 +1,5 @@
 /* Shared secondary UI vocabulary, scoped to explicit consumers. Design-canvas pixels. */
-:where(.shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind="discover"])) {
+:where(.ui-scale-system, .trade-v5.trade-v12, .shop-pg.sc-shop, .ui-design-system, .exr-page, .sc-fire:has(.ui-design-system), .event-scene:has(.ui-node-decision), .container-store, .card-browser, .bag-guide, .battle-secondary-panel, .bt-hand-detail-surface, .card.discover:has(.battle-decision[data-decision-kind="discover"])) {
   --ui-ink:#eef1ed; --ui-muted:#b9c9d2; --ui-blue:#b6cbd7; --ui-gold:#c6b487;
   --ui-panel:#15212cef; --ui-line:#a8bbc238; --ui-risk:#e4bea8;
   --ui-space-1:4px; --ui-space-2:8px; --ui-space-3:12px; --ui-space-4:16px; --ui-space-6:24px; --ui-space-8:32px;

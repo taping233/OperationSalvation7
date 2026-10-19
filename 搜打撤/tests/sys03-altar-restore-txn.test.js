@@ -74,6 +74,8 @@ beforeEach(async () => {
   document.body.innerHTML = '<div id="body"></div>';
   // mock 工厂在首次执行时捕获 st.game 引用且 resetModules 不重跑工厂——
   // 必须原地 Object.assign 复用同一对象（extraction-flow.test.js 同款），不得换新实例
+  // 先清掉上一用例动态添加的领奖/补给状态，避免失败中断后污染后续地图投影。
+  for (const key of Object.keys(st.game)) delete st.game[key];
   Object.assign(st.game, makeGame());
   st.saves = [];
   st.curLayer = { logical: [{ def: { type: 'altar' } }] };
@@ -228,7 +230,15 @@ it('奖励② 传说+装备：满包时两张保留，整理后领取一次并�
   expect(game.altarRewardPending).toBe(false);   // 固定奖励已交由持久化领奖页接管
   acts.chestTake();
   expect(window.SDT.Chests.serialize(game).current).toMatchObject({ taken:[], lost:[] });
-  expect(document.body.textContent).toContain('2 张放不下');
+  expect(game.ownedCards).toHaveLength(0);
+  expect(document.querySelector('.reward-capacity').textContent).toContain('0/0');
+  expect(document.body.textContent).toContain('暂时无法领取');
+  const makeRoom = [...document.querySelectorAll('[data-act="chestMakeRoom"]')];
+  expect(makeRoom.map(button => button.dataset.i)).toEqual(['0', '1']);
+  expect(makeRoom.map(button => button.textContent)).toEqual(['整理背包', '整理背包']);
+  for (const i of ['0', '1']) acts.chestTake1({ i });
+  expect(window.SDT.Chests.serialize(game).current).toMatchObject({ taken:[], lost:[] });
+  expect(game.ownedCards).toHaveLength(0);
   st.bagCapN = 10;
   window.SDT.Chests.resume();
   const take = acts.chestTake;
@@ -445,7 +455,7 @@ it('入城补给先阅读再逐张领取，刷新不重领，满包补给保留�
   expect(document.querySelectorAll('.entry-supply-strips .reward-unit')).toHaveLength(2);
   expect(document.querySelector('.entry-supply-status b').textContent).toBe('0 / 2');
   expect(document.querySelector('.entry-supply-status').getAttribute('aria-live')).toBe('polite');
-  expect(document.querySelector('.reward-rule').textContent).toBe('点卡面查看详情');
+  expect(document.querySelector('.reward-rule')).toBeNull();
   expect(document.querySelector('.entry-supply-status').textContent).toBe('已领取0 / 2');
   expect(document.querySelector('.reward-notice').textContent).toBe('领完补给后可继续探索；放不下时请先整理背包');
   expect(document.querySelector('.entry-supply-status small')).toBeNull();

@@ -138,7 +138,7 @@ describe('U10 H4 cinematics 发卡队列续棒守卫', () => {
     const queued = [...document.querySelectorAll('#cardGet')].at(-1);
     expect(queued.dataset.combat).toBe('false');
     expect(queued.querySelector('.lg-name').textContent).toBe('能力样本');
-    expect(queued.querySelector('.lg-hint').textContent).toBe('点击收起 · 稍后自动收起');
+    expect(queued.querySelector('.lg-hint').textContent).toBe('收起');
   });
 });
 

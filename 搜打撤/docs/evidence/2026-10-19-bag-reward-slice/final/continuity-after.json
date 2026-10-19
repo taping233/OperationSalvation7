@@ -1,0 +1,135 @@
+{
+  "source": "Codex current in-app browser",
+  "input": "five sequential Enter presses on pending 收下",
+  "steps": [
+    {
+      "action": "chestTake1",
+      "index": "1",
+      "received": 1,
+      "rect": {
+        "height": 37.42499923706055,
+        "width": 204.6374969482422,
+        "x": 496.5625,
+        "y": 527.1875
+      },
+      "viewport": {
+        "height": 956,
+        "width": 1523
+      }
+    },
+    {
+      "action": "chestTake1",
+      "index": "2",
+      "received": 2,
+      "rect": {
+        "height": 37.42499923706055,
+        "width": 204.6374969482422,
+        "x": 721.8375244140625,
+        "y": 527.1875
+      },
+      "viewport": {
+        "height": 956,
+        "width": 1523
+      }
+    },
+    {
+      "action": "chestTake1",
+      "index": "3",
+      "received": 3,
+      "rect": {
+        "height": 37.42499923706055,
+        "width": 204.6374969482422,
+        "x": 947.1124877929688,
+        "y": 527.1875
+      },
+      "viewport": {
+        "height": 956,
+        "width": 1523
+      }
+    },
+    {
+      "action": "chestTake1",
+      "index": "4",
+      "received": 4,
+      "rect": {
+        "height": 37.42499923706055,
+        "width": 204.6374969482422,
+        "x": 1049.1875,
+        "y": 527.1875
+      },
+      "viewport": {
+        "height": 956,
+        "width": 1523
+      }
+    },
+    {
+      "action": "chestTake1",
+      "index": "5",
+      "received": 5,
+      "rect": {
+        "height": 37.42499923706055,
+        "width": 204.6374969482422,
+        "x": 1049.6624755859375,
+        "y": 554.9375
+      },
+      "viewport": {
+        "height": 956,
+        "width": 1523
+      }
+    }
+  ],
+  "diagnostic": {
+    "sameCardNodes": 6,
+    "initialCardNodes": 6,
+    "sameImageNodes": 19,
+    "initialImageNodes": 19,
+    "focus": {},
+    "owned": [
+      {
+        "name": "冰刺",
+        "safe": false
+      },
+      {
+        "name": "百炼青虹剑",
+        "safe": false
+      },
+      {
+        "name": "能量饮料",
+        "safe": false
+      },
+      {
+        "name": "冰心药水",
+        "safe": false
+      },
+      {
+        "name": "草甲",
+        "safe": false
+      }
+    ],
+    "layout": {
+      "viewport": {
+        "width": 1523,
+        "height": 956
+      },
+      "checked": 11,
+      "issues": [
+        {
+          "type": "action-outside-scrollport",
+          "label": "放大查看冰刺",
+          "axis": "x",
+          "ancestor": "reward-objects"
+        },
+        {
+          "type": "action-outside-viewport",
+          "label": "放大查看冰刺"
+        },
+        {
+          "type": "action-outside-scrollport",
+          "label": "放大查看百炼青虹剑",
+          "axis": "x",
+          "ancestor": "reward-objects"
+        }
+      ]
+    }
+  }
+}

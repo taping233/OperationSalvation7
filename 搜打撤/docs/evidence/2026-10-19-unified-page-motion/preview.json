@@ -1,0 +1,20 @@
+{
+  "directory": "D:\\素材\\代号柒\\搜打撤\\.tmp\\page-motion-1019",
+  "port": 5321,
+  "pid": 27384,
+  "assets": "Read-only consumption of shared game/assets junction",
+  "hashes": {
+    "game/src/ui/interface-motion.js": "1f766e13af51685149d3e8dd80de06db23f63a5254744c45397a1220f88dd460",
+    "game/src/ui/surface-motion.js": "49b0afbb4b137a8b6c248ef29c06aba953dd1123047875b68ccbd1b0a1f1e7ce",
+    "game/src/ui/navigation-motion.js": "0f2a81d62befd407d9ed21f93af15cd8dbdc32625a251d9a681b3c5c3e25d53f",
+    "game/src/ui/motion-presets.js": "057b6dbd3c990d6c89fceeb22c37025da4c2c4c10f93f18183e796e19e424b04",
+    "game/src/ui/page-motion-profiles.js": "e2775cb99528cd7d53c6d59b06d23c45b8937c6018814bf716c93c292401bdf8",
+    "game/src/ui/page-visual-ready.js": "70e4534e757047502ee45d0b743cfee823147cdac659fbdf8216a0fdbea5d342",
+    "game/src/ui/overlay.js": "c09d39f1a113f876d64f2485d81ff45bcd648080eb65904f0f9834f136bce8a3",
+    "game/src/run/game.run.scenes.js": "0d01cc7991039e70cfd88981e50a87d612f83c470126b6f9b7feb98ff92d7c7f",
+    "game/css/interface-motion.css": "73802087838d72127edc07064a1defe1f5dacf1416fcac8ec79575bc23bdc745",
+    "game/css/page-transitions.css": "5f3b292e6d2cd3584351e13c6f0a5299f0efb55340437f9c3b37eb7ecc82623d",
+    "game/css/page-visual-ready.css": "1f45d138d9d3cc1ed4319cebfd3f1bd4d2bffeb01c98a8a93d9ed074e8ce1bb4",
+    "game/css/expedition-transitions.css": "63d06e13355debbc37c4ee8a250fc9221ab96625566d5062498ea55cfa450b87"
+  }
+}

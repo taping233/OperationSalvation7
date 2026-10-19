@@ -1,0 +1,2262 @@
+{
+  "generatorVersion": 6,
+  "layoutVersion": 9,
+  "sample": {
+    "count": 200,
+    "seedPrefix": "pacing-audit-20261019-",
+    "firstIndex": 0,
+    "lastIndex": 199
+  },
+  "method": {
+    "pipeline": "createCurrentLayeredMap -> applyRouteOverlay(CURRENT) -> applyGuardedRoute(CURRENT)",
+    "minimumBattles": "Independent 0-1 shortest path within the same layer, from its entrance to its fire node; entering a battle node costs 1 and all other nodes cost 0. Does not call minimumBattlesTo.",
+    "excluded": "Event-triggered battles, boss battles, combat outcome, card costs, and browser play.",
+    "constraints": {
+      "layer1": "1 <= minimum ordinary battles <= 2",
+      "layer3": "0 <= minimum ordinary battles <= 2"
+    },
+    "snapshot": "createMapSnapshot -> planMapRestore at layer 3 entrance -> createMapSnapshot; serialized snapshots must match and original input must remain unchanged."
+  },
+  "sourceSha256": {
+    "game/src/run/map-generator-v4.js": "0114d9b622b99db238a1c67d97ce881d211514e09665fb324b73275451399775",
+    "game/src/run/map-generation-rules.js": "1f90ec484c147edd2398d14bee7f2ef4356825e57d4a5c693e4407a72f383734",
+    "game/src/run/map-snapshot.js": "f90c34ed9322e43b31e540c99ce03382bcb4e41d69e2d10f26f81fc5b3d50f85",
+    "game/src/run/map-route-v2.js": "b9bc0ced62c5e62f142a3300f08d5e37d5dcc1510fc3cfb6c50f6c17fc55d203",
+    "game/src/run/layeredMap.js": "c2a37a78cd6026e7af0fae01b8a102b936eb9c47b682f569b1596bdefd2e6600",
+    "game/src/ui/route-overlay.js": "1d738d479ccb09f77b60371eb667745790b8029868f1e008aacc8cc8beaa1910"
+  },
+  "fireMinimumBattles": {
+    "layer1": {
+      "1": 179,
+      "2": 21
+    },
+    "layer3": {
+      "0": 52,
+      "1": 72,
+      "2": 76
+    }
+  },
+  "routeStatuses": {
+    "v1": {
+      "applied": 117,
+      "fallback": 83
+    },
+    "v2": {
+      "NO_VALID_FORK": 136,
+      "applied": 58,
+      "PACING_LIMIT": 5,
+      "DISTANCE_LIMIT": 1
+    }
+  },
+  "quality": {
+    "passed": 200,
+    "failed": 0
+  },
+  "snapshotRoundTrip": {
+    "passed": 200,
+    "failed": 0
+  },
+  "violations": [],
+  "rows": [
+    {
+      "seed": "pacing-audit-20261019-0",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-1",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-2",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-3",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-4",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-5",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-6",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-7",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-8",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-9",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-10",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-11",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-12",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-13",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-14",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-15",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-16",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-17",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-18",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-19",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-20",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-21",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-22",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-23",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-24",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-25",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-26",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-27",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-28",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-29",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-30",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-31",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-32",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-33",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-34",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-35",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-36",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-37",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-38",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-39",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-40",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-41",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-42",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-43",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-44",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-45",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-46",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-47",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-48",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-49",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-50",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-51",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-52",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-53",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-54",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-55",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-56",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-57",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-58",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-59",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-60",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-61",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-62",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-63",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-64",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-65",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-66",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-67",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-68",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-69",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-70",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-71",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-72",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-73",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-74",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-75",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-76",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-77",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-78",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-79",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-80",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-81",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-82",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-83",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-84",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-85",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-86",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-87",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-88",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-89",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-90",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-91",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-92",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-93",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-94",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-95",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-96",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-97",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-98",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-99",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-100",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-101",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-102",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-103",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-104",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-105",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-106",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-107",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-108",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-109",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-110",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-111",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-112",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-113",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-114",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-115",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-116",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-117",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-118",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-119",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-120",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-121",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-122",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-123",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-124",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-125",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-126",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-127",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-128",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-129",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-130",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-131",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-132",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-133",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-134",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-135",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-136",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-137",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-138",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-139",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-140",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-141",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-142",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-143",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-144",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-145",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-146",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-147",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-148",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-149",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-150",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-151",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-152",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-153",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-154",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-155",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-156",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-157",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-158",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-159",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-160",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-161",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-162",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-163",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-164",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-165",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-166",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-167",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-168",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-169",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-170",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-171",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-172",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-173",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-174",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-175",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-176",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 2,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-177",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-178",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-179",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-180",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-181",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-182",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-183",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-184",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-185",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-186",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-187",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-188",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-189",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-190",
+      "v1": "applied",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-191",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-192",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-193",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-194",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-195",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-196",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-197",
+      "v1": "fallback",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 0
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-198",
+      "v1": "applied",
+      "v2": "applied",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 1
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    },
+    {
+      "seed": "pacing-audit-20261019-199",
+      "v1": "fallback",
+      "v2": "fallback",
+      "minimumFireBattles": {
+        "layer1": 1,
+        "layer3": 2
+      },
+      "qualityPassed": true,
+      "snapshotRoundTripPassed": true
+    }
+  ]
+}

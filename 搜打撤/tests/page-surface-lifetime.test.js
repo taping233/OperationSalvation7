@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { createPageSurfaceLifetime } from '../game/src/ui/page-surface-lifetime.js';
-import { stagePageVisual, cancelPageVisual } from '../game/src/ui/page-visual-ready.js';
+import { stagePageVisual, stageMapReturn, cancelPageVisual } from '../game/src/ui/page-visual-ready.js';
 let ui;
 beforeEach(() => {
   vi.useFakeTimers();
@@ -45,4 +45,44 @@ it('an already hidden host invalidates without waiting for a later DOM mutation'
   expect(lifetime.current()).toBe(false);
   await Promise.resolve();
   expect(invalidated).toHaveBeenCalledOnce(); expect(lifetime.signal.aborted).toBe(true);
+});
+
+it('a cancelled page cannot clear the pending state of the next attached panel', async () => {
+  const oldReveal = vi.fn(), newReveal = vi.fn();
+  stagePageVisual(ui, oldReveal);
+  await vi.advanceTimersByTimeAsync(48);
+  ui.el.ovBody.innerHTML = '<main>背包</main>'; ui._overlayRevision++;
+  stagePageVisual(ui, newReveal, { kind: 'panel' });
+  await vi.advanceTimersByTimeAsync(48);
+  expect(ui.el.overlay.dataset.visualPending).toBe('panel');
+  const cover = document.querySelector('.page-visual-handoff');
+  expect(cover.dataset.kind).toBe('panel'); expect(cover.children).toHaveLength(0);
+  cancelPageVisual();
+  await vi.runAllTimersAsync();
+  expect(ui.el.overlay.dataset.visualPending).toBeUndefined();
+  expect(oldReveal).not.toHaveBeenCalled(); expect(newReveal).not.toHaveBeenCalled();
+});
+
+it('reduced motion reveals once readiness completes without a decorative exit wait', async () => {
+  document.body.classList.add('reduce-motion');
+  ui._pageBgReady = Promise.resolve();
+  const reveal = vi.fn(); stagePageVisual(ui, reveal);
+  await vi.advanceTimersByTimeAsync(100);
+  expect(reveal).toHaveBeenCalledOnce();
+  expect(document.querySelector('.page-visual-handoff')).toBeNull();
+  document.body.classList.remove('reduce-motion');
+});
+
+it('backpack return retains a transparent input guard until the first map frame', async () => {
+  let ready; const prepare = vi.fn(() => new Promise(resolve => { ready = resolve; }));
+  window.SDT = { Renderer: { prepare } };
+  const game = { discoveredPairs: [], runActive: true, battleActive: false, nestActive: false };
+  stageMapReturn(ui, game, { kind: 'panel' });
+  ui.el.overlay.hidden = true;
+  await vi.advanceTimersByTimeAsync(32);
+  const cover = document.querySelector('.page-visual-return');
+  expect(cover.dataset.kind).toBe('panel'); expect(cover.children).toHaveLength(0);
+  expect(prepare).toHaveBeenCalledOnce();
+  ready(); await vi.advanceTimersByTimeAsync(300);
+  expect(document.querySelector('.page-visual-return')).toBeNull();
 });

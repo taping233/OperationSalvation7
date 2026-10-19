@@ -4,7 +4,7 @@ export type BattleOperationName = 'damage' | 'heal' | 'armor' | 'draw' | 'status
   | 'foeFight' | 'copyRandom';
 export type OperationTarget = 'chosenEnemy' | 'allEnemies' | 'randomEnemy' | 'self';
 export type AcquireDestination = 'hand' | 'deck' | 'discover';
-export type AcquireAction = 'play' | 'playKeep' | 'dup' | 'zeroCost' | 'decay' | 'noInfuse';
+export type AcquireAction = 'play' | 'playKeep' | 'dup' | 'zeroCost' | 'costMinusOne' | 'decay' | 'noInfuse';
 export type HostedBattleRuleName = 'imitate' | 'mana-surge' | 'rot-seed' | 'charge-fireball'
   | 'pouch-container' | 'pearl-container' | 'venom-staff' | 'element-seal' | 'cost-swap'
   | 'dark-fort' | 'nature-staff' | 'ranger-chain' | 'sovereign' | 'assassin'

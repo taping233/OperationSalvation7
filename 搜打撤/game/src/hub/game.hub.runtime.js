@@ -30,7 +30,7 @@ import '../../css/base-archive-facilities-v12.css';
 import { baseNavigationV7HTML } from './hub.navigation-v7.js';
 import { bindBasePageMotionV7, animateBaseModeChangeV12 } from './base-page-motion-v7.js';
 import { createTradeShopState, tradeShopV5HTML, bindTradeShopV5 } from './hub.trade-shop-v5.js';
-import { bindPersonnel, setPersonnelGroup, setPersonnelSection, personnelViewKey, personnelPageKey, personnelBackTarget } from './hub.personnel.js';
+import { bindPersonnel, setPersonnelGroup, setPersonnelSection, personnelViewKey, personnelPageKey, personnelBackTarget, upgradePetFromPersonnel } from './hub.personnel.js';
 import { bindBaseMotion } from './base-motion-v4.js';
 import { selectFacility } from './hub.facilities.js';
 import { bindArchive } from './hub.archive.js';
@@ -310,15 +310,7 @@ preparationFeature = createHubPreparationAdapter({
       SDT.Meta.checkUnlocks();
       renderHub();
     });
-    hubAct('upPet', (d) => {
-      const pet = SDT.Base.petById(d.id);
-      if (!SDT.Base.upgradePet(d.id)) return;
-      notice(`${pet.name}已升级 · Lv.${SDT.Base.petLevel(d.id)}`);
-      Sfx.ding();
-      UI.log(`[[icon:paw]] <b>「${esc(pet.name)}」</b>升级到 <b>Lv.${SDT.Base.petLevel(d.id)}</b>：安全格 <b>${B.safeCap()}</b> 格`, 'ok');
-      SDT.Meta.checkUnlocks();
-      renderHub();
-    });
+    hubAct('upPet', d => upgradePetFromPersonnel({ base:SDT.Base, id:d.id, notice, sound:Sfx, ui:UI, meta:SDT.Meta, refresh:renderHub }));
     hubAct('selPet', (d) => {
       if (!SDT.Base.setPet(d.id)) return;
       const pet = SDT.Base.petById(d.id);

@@ -142,4 +142,34 @@ describe('整层全景与安全取景',()=>{
     const g=fixture();g.nodePos=[[{x:100,y:100}]];g.layerData[0].logical=[{next:[]}];
     cam.frameExploration(g,true);expect([cam.cx,cam.cy,cam.zoom].every(Number.isFinite)).toBe(true);
   });
+  it('全景仅允许有限留白位移，详情侧栏仍保留节点可见',()=>{
+    const cam=new window.SDT.Camera({cols:300,rows:300,tile:48},1180,664);
+    const game=fixture(); cam.setDetailInset(350); cam.frameExploration(game,true);
+    const before={cx:cam.cx,cy:cam.cy};
+    cam.panBy(100000,-100000);
+    expect((before.cx-cam.cx)*cam.zoom).toBeCloseTo(1180/1280*80);
+    expect((cam.cy-before.cy)*cam.zoom).toBeCloseTo(1180/1280*80);
+    for(const p of game.nodePos[0]){
+      const s=cam.worldToScreen(p.x,p.y);
+      expect(s.x).toBeGreaterThan(0);expect(s.x).toBeLessThan(830);
+      expect(s.y).toBeGreaterThan(0);expect(s.y).toBeLessThan(664);
+    }
+  });
+  it('放大后只能滑到节点包围盒边缘，换层和窗口变化重新计算',()=>{
+    const cam=new window.SDT.Camera({cols:300,rows:300,tile:48},1180,664);
+    const game=fixture(); cam.frameExploration(game); cam.zoom=2;
+    cam.panBy(100000,100000);
+    const first=cam.worldToScreen(100,100);
+    expect(first.x).toBeCloseTo(1180/1280*200);
+    expect(first.y).toBeCloseTo(1180/1280*185);
+    cam.panBy(-100000,-100000);
+    const last=cam.worldToScreen(1360,1360);
+    expect(last.x).toBeCloseTo(1180-1180/1280*200);
+    expect(last.y).toBeCloseTo(664-1180/1280*270);
+    game.nodePos.push([{x:300,y:400}]);game.layerIdx=1;
+    cam.resize(900,600);
+    const only=cam.worldToScreen(300,400);
+    expect(only.x).toBeCloseTo(450-80*900/1280);
+    expect(only.y).toBeCloseTo(300-(190-105)*900/1280/2-80*900/1280);
+  });
 });
