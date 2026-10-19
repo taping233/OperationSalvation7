@@ -233,22 +233,21 @@ export const overlayMethods = {
   _bagCloseHook: null,
 
   hideOverlay(opts) {
+    const immediate = !!(opts && opts.immediate);
+    // 已关闭或正在淡出时，不重复广播关闭、撤销页面任务或推进返回令牌。
+    if (!this._hideTimer && this.el.overlay.hidden) return;
+    if (this._hideTimer) {
+      if (immediate) {
+        clearTimeout(this._hideTimer);
+        this._finishHide();
+      }
+      return;
+    }
     this._overlayRevision = (this._overlayRevision || 0) + 1;
     this._cancelPageBg?.();
     this.hideTooltip?.();
     document.getElementById('cardZoom')?._closeCardZoom?.(true);
     document.dispatchEvent(new CustomEvent('sdt-overlay-close'));
-    const immediate = !!(opts && opts.immediate);
-    // 已关闭且无挂起收尾：短路（迭代评审 09-20 客户端岗）——迟到的 transition/chest 收尾
-    // 不再空跑 finish、重放 close 音
-    if (!this._hideTimer && this.el.overlay.hidden) return;
-    // 淡出中重复触发：普通调用忽略；immediate 调用清掉挂起收尾改为同步执行——
-    // 消灭「210ms 淡出窗口内二次跳转/开层被旧 finish 撕掉」竞态（龙巢撤离死锁根因）
-    if (this._hideTimer) {
-      if (!immediate) return;
-      clearTimeout(this._hideTimer);
-      this._hideTimer = null;
-    }
     this._lastMode = null;
     this._acts = {};
     this._inputHandler = null;

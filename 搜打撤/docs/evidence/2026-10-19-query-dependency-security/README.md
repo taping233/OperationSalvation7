@@ -7,7 +7,7 @@
 - https://github.com/advisories/GHSA-x5fp-wj9c-mxmx ：数组限制绕过，6.16.0 修复。
 - https://github.com/advisories/GHSA-4mjr-xmp4-gh2g ：isBuffer 拒绝服务，6.16.0 修复。
 
-新 Node 回归通过实际 Stryker→client 解析 qs，验证版本、null/undefined、数组限制、恶意 isBuffer、正常查询及 REST client getUrl；6 项通过，与现有工具测试合并 13 项通过。npm ci、types、lint 通过；stylelint 0 错误、5 个既存复杂度警告。
+新 Node 回归通过实际 Stryker→client 解析 qs，验证版本、null/undefined、数组限制、恶意 isBuffer、正常查询及 REST client getUrl；6 项通过，与现有工具测试合并 13 项通过。npm ci、types、lint 通过；stylelint 0 错误、5 个既存原始字号 token 审查警告。
 
 npm audit 从 11 项降至 9 项，qs 与 typed-rest-client 告警移除。仍有 1 moderate / 6 high / 2 critical：直接开发依赖 vitest、stylelint；传递开发依赖 @vitest/mocker、tinypool、source-map-js、braces、micromatch、fast-glob、globby。全部属开发工具链，不等于没有开发/CI 风险。braces 官方公告 https://github.com/advisories/GHSA-vfj7-8cjw-p6xm 在核查时没有修复版本，stylelint 链不能靠兼容补丁消除；未采用 audit 建议的跨大版本回退。剩余问题未宣称已修复。
 

@@ -1,0 +1,17 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 quality:styles
+> stylelint "game/css/{secondary-ui-tokens,bag-design-system,container-store,card-browser,ui-design-system}.css"
+
+
+game/css/card-browser.css
+  7:224  ⚠  Review raw font size against secondary-ui-tokens.css; card art, icon glyphs and display numbers may intentionally differ.  declaration-property-value-disallowed-list
+
+game/css/container-store.css
+   6:108  ⚠  Review raw font size against secondary-ui-tokens.css; card art, icon glyphs and display numbers may intentionally differ.  declaration-property-value-disallowed-list
+  16:71   ⚠  Review raw font size against secondary-ui-tokens.css; card art, icon glyphs and display numbers may intentionally differ.  declaration-property-value-disallowed-list
+  19:65   ⚠  Review raw font size against secondary-ui-tokens.css; card art, icon glyphs and display numbers may intentionally differ.  declaration-property-value-disallowed-list
+  25:111  ⚠  Review raw font size against secondary-ui-tokens.css; card art, icon glyphs and display numbers may intentionally differ.  declaration-property-value-disallowed-list
+
+⚠ 5 problems (0 errors, 5 warnings)
+

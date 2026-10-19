@@ -1,0 +1,42 @@
+{
+  "scope": "Static game/index.html in JSDOM; no application execution, layout, canvas, color contrast or real-page acceptance",
+  "version": "4.14.0",
+  "rules": [
+    "button-name",
+    "link-name",
+    "image-alt",
+    "label",
+    "aria-valid-attr",
+    "aria-valid-attr-value",
+    "aria-allowed-role",
+    "document-title",
+    "html-has-lang"
+  ],
+  "detectorControl": "unnamed button detected",
+  "violations": [],
+  "incomplete": [
+    {
+      "id": "aria-valid-attr-value",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/aria-valid-attr-value?application=axeAPI",
+      "count": 1,
+      "nodes": [
+        {
+          "target": [
+            "#mCredits"
+          ],
+          "html": "<button class=\"home-plate home-makers\" id=\"mCredits\" title=\"制作名单\" aria-haspopup=\"dialog\" aria-controls=\"homeCredits\">",
+          "failureSummary": "Fix all of the following:\n  Unable to determine if aria-controls referenced ID exists on the page while using aria-haspopup: aria-controls=\"homeCredits\""
+        }
+      ]
+    }
+  ],
+  "passes": [
+    "aria-allowed-role",
+    "aria-valid-attr-value",
+    "aria-valid-attr",
+    "button-name",
+    "document-title",
+    "html-has-lang",
+    "image-alt"
+  ]
+}

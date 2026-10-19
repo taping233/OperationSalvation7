@@ -1,0 +1,22 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[32m15:15:04 (28) INFO ProjectReader[39m Found 1 of 1288 file(s) to be mutated.
+[32m15:15:04 (28) INFO Instrumenter[39m Instrumented 1 source file(s) with 28 mutant(s)
+[32m15:15:05 (28) INFO ConcurrencyTokenProvider[39m Creating 1 test runner process(es).
+[32m15:15:06 (28) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[33m15:15:07 (76) WARN VitestTestRunner[39m Vitest failed to find test files related to mutated files. Either disable `vitest.related` or import your source files directly from your test files. See https://stryker-mutator.io/docs/stryker-js/troubleshooting/#vitest-failed-to-find-test-files-related-to-mutated-files
+[32m15:15:07 (28) INFO DryRunExecutor[39m No tests were found
+[91m15:15:07 (28) ERROR Stryker[39m No tests were executed. Stryker will exit prematurely. Please check your configuration.
+file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@stryker-mutator/core/dist/src/process/3-dry-run-executor.js:47
+            throw new ConfigError('No tests were executed. Stryker will exit prematurely. Please check your configuration.');
+                  ^
+
+ConfigError: No tests were executed. Stryker will exit prematurely. Please check your configuration.
+    at DryRunExecutor.execute (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@stryker-mutator/core/dist/src/process/3-dry-run-executor.js:47:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async Stryker.run (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@stryker-mutator/core/dist/src/stryker.js:52:53)
+    at async Stryker.runMutationTest (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@stryker-mutator/core/dist/src/stryker.js:27:20)
+    at async Command.<anonymous> (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@stryker-mutator/core/dist/src/stryker-cli.js:51:13) {
+  innerError: undefined
+}
+
+Node.js v24.19.0

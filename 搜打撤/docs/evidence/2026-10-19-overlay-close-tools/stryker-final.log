@@ -1,0 +1,30 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[32m15:20:28 (104) INFO ProjectReader[39m Found 1 of 1472 file(s) to be mutated.
+[32m15:20:28 (104) INFO Instrumenter[39m Instrumented 1 source file(s) with 28 mutant(s)
+[32m15:20:29 (104) INFO ConcurrencyTokenProvider[39m Creating 1 test runner process(es).
+[32m15:20:30 (104) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m15:20:31 (104) INFO DryRunExecutor[39m Initial test run succeeded. Ran 6 tests in 1 second (net 401.5138189999998 ms, overhead 723.4861810000002 ms).
+
+All tests/overlay-lifecycle.property.test.js
+  ✓ hidden and repeated fade-out close calls have no extra close event or revision (killed 10)
+  ✓ immediate escalation finishes the existing close once and cannot tear down a newly opened page (killed 5)
+  ✓ generated open/close/immediate/tick sequences preserve model state and one close event per transition (killed 8)
+  ~ reopen during fade remains visible (covered 21)
+  ✓ a real close advances the return token once and cancels owned feedback once (killed 2)
+  ✓ optional background, tooltip and zoom handlers may be absent during close (killed 3)
+
+Ran 2.32 tests per mutant on average.
+------------|------------------|----------|-----------|------------|----------|----------|
+            | % Mutation score |          |           |            |          |          |
+File        |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+------------|--------|---------|----------|-----------|------------|----------|----------|
+All files   | 100.00 |  100.00 |       28 |         0 |          0 |        0 |        0 |
+ overlay.js | 100.00 |  100.00 |       28 |         0 |          0 |        0 |        0 |
+------------|--------|---------|----------|-----------|------------|----------|----------|
+[32m15:20:49 (104) INFO JsonReporter[39m Your report can be found at: file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/.cache/quality-tools/overlay-mutation.json
+[32m15:20:49 (104) INFO MutationTestExecutor[39m Done in 20 seconds.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

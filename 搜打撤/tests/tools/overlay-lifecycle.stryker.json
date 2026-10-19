@@ -1,0 +1,28 @@
+{
+  "$schema": "../../node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "mutate": [
+    "game/src/ui/overlay.js:235:0-252:0"
+  ],
+  "testRunner": "vitest",
+  "vitest": {
+    "configFile": "tests/tools/overlay-lifecycle.vitest.config.mjs"
+  },
+  "coverageAnalysis": "perTest",
+  "concurrency": 1,
+  "reporters": [
+    "clear-text",
+    "json"
+  ],
+  "jsonReporter": {
+    "fileName": "node_modules/.cache/quality-tools/overlay-mutation.json"
+  },
+  "tempDirName": ".tmp/stryker-overlay-lifecycle",
+  "timeoutMS": 10000,
+  "ignorePatterns": [
+    "/docs",
+    "/game/assets",
+    "/game/data",
+    "/desktop-app",
+    "/.tmp"
+  ]
+}

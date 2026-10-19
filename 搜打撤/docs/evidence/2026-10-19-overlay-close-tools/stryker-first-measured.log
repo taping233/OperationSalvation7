@@ -1,0 +1,121 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[32m15:18:03 (20) INFO ProjectReader[39m Found 1 of 1472 file(s) to be mutated.
+[32m15:18:03 (20) INFO Instrumenter[39m Instrumented 1 source file(s) with 28 mutant(s)
+[32m15:18:04 (20) INFO ConcurrencyTokenProvider[39m Creating 1 test runner process(es).
+[32m15:18:05 (20) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m15:18:06 (20) INFO DryRunExecutor[39m Initial test run succeeded. Ran 4 tests in 1 second (net 366.32015100000035 ms, overhead 735.6798489999996 ms).
+
+All tests/overlay-lifecycle.property.test.js
+  ✓ hidden and repeated fade-out close calls have no extra close event or revision (killed 10)
+  ✓ immediate escalation finishes the existing close once and cannot tear down a newly opened page (killed 5)
+  ✓ generated open/close/immediate/tick sequences preserve model state and one close event per transition (killed 4)
+  ~ reopen during fade remains visible (covered 21)
+
+[NoCoverage] BooleanLiteral
+game/src/ui/overlay.js:249:59
+-       document.getElementById('cardZoom')?._closeCardZoom?.(true);
++       document.getElementById('cardZoom')?._closeCardZoom?.(false);
+
+[Survived] ArithmeticOperator
+game/src/ui/overlay.js:246:29
+-       this._overlayRevision = (this._overlayRevision || 0) + 1;
++       this._overlayRevision = (this._overlayRevision || 0) - 1;
+Tests ran:
+    hidden and repeated fade-out close calls have no extra close event or revision
+    immediate escalation finishes the existing close once and cannot tear down a newly opened page
+    generated open/close/immediate/tick sequences preserve model state and one close event per transition
+  and 1 more test!
+
+
+[Survived] ConditionalExpression
+game/src/ui/overlay.js:246:30
+-       this._overlayRevision = (this._overlayRevision || 0) + 1;
++       this._overlayRevision = (true) + 1;
+Tests ran:
+    hidden and repeated fade-out close calls have no extra close event or revision
+    immediate escalation finishes the existing close once and cannot tear down a newly opened page
+    generated open/close/immediate/tick sequences preserve model state and one close event per transition
+  and 1 more test!
+
+
+[Survived] ConditionalExpression
+game/src/ui/overlay.js:246:30
+-       this._overlayRevision = (this._overlayRevision || 0) + 1;
++       this._overlayRevision = (false) + 1;
+Tests ran:
+    hidden and repeated fade-out close calls have no extra close event or revision
+    immediate escalation finishes the existing close once and cannot tear down a newly opened page
+    generated open/close/immediate/tick sequences preserve model state and one close event per transition
+  and 1 more test!
+
+
+[Survived] LogicalOperator
+game/src/ui/overlay.js:246:30
+-       this._overlayRevision = (this._overlayRevision || 0) + 1;
++       this._overlayRevision = (this._overlayRevision && 0) + 1;
+Tests ran:
+    hidden and repeated fade-out close calls have no extra close event or revision
+    immediate escalation finishes the existing close once and cannot tear down a newly opened page
+    generated open/close/immediate/tick sequences preserve model state and one close event per transition
+  and 1 more test!
+
+
+[Survived] OptionalChaining
+game/src/ui/overlay.js:247:5
+-       this._cancelPageBg?.();
++       this._cancelPageBg();
+Tests ran:
+    hidden and repeated fade-out close calls have no extra close event or revision
+    immediate escalation finishes the existing close once and cannot tear down a newly opened page
+    generated open/close/immediate/tick sequences preserve model state and one close event per transition
+  and 1 more test!
+
+
+[Survived] OptionalChaining
+game/src/ui/overlay.js:248:5
+-       this.hideTooltip?.();
++       this.hideTooltip();
+Tests ran:
+    hidden and repeated fade-out close calls have no extra close event or revision
+    immediate escalation finishes the existing close once and cannot tear down a newly opened page
+    generated open/close/immediate/tick sequences preserve model state and one close event per transition
+  and 1 more test!
+
+
+[Survived] OptionalChaining
+game/src/ui/overlay.js:249:5
+-       document.getElementById('cardZoom')?._closeCardZoom?.(true);
++       document.getElementById('cardZoom')?._closeCardZoom(true);
+Tests ran:
+    hidden and repeated fade-out close calls have no extra close event or revision
+    immediate escalation finishes the existing close once and cannot tear down a newly opened page
+    generated open/close/immediate/tick sequences preserve model state and one close event per transition
+  and 1 more test!
+
+
+[Survived] StringLiteral
+game/src/ui/overlay.js:249:29
+-       document.getElementById('cardZoom')?._closeCardZoom?.(true);
++       document.getElementById("")?._closeCardZoom?.(true);
+Tests ran:
+    hidden and repeated fade-out close calls have no extra close event or revision
+    immediate escalation finishes the existing close once and cannot tear down a newly opened page
+    generated open/close/immediate/tick sequences preserve model state and one close event per transition
+  and 1 more test!
+
+
+Ran 2.18 tests per mutant on average.
+------------|------------------|----------|-----------|------------|----------|----------|
+            | % Mutation score |          |           |            |          |          |
+File        |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+------------|--------|---------|----------|-----------|------------|----------|----------|
+All files   |  67.86 |   70.37 |       19 |         0 |          8 |        1 |        0 |
+ overlay.js |  67.86 |   70.37 |       19 |         0 |          8 |        1 |        0 |
+------------|--------|---------|----------|-----------|------------|----------|----------|
+[32m15:18:26 (20) INFO JsonReporter[39m Your report can be found at: file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/.cache/quality-tools/overlay-mutation.json
+[32m15:18:26 (20) INFO MutationTestExecutor[39m Done in 23 seconds.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

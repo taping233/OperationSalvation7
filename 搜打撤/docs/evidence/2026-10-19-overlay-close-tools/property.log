@@ -1,0 +1,12 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ✓ tests/tools/overlay-lifecycle.property.test.js (6 tests) 384ms
+   ✓ generated open/close/immediate/tick sequences preserve model state and one close event per transition  349ms
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  15:20:26
+   Duration  1.07s (transform 74ms, setup 0ms, collect 178ms, tests 384ms, environment 303ms, prepare 65ms)
+

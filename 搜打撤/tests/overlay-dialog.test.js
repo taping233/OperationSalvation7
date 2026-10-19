@@ -34,6 +34,21 @@ describe('overlay dialog accessibility contract', () => {
     UI.init();
   });
 
+  it('axe validates actual dialog markup after repeated close and reopening', async () => {
+    const { default: axe } = await import('axe-core');
+    const options = { runOnly: { type: 'rule', values: ['button-name', 'aria-dialog-name', 'aria-valid-attr', 'aria-valid-attr-value', 'aria-allowed-role'] } };
+    UI.showOverlay('返回确认', '<button data-cancel="true">返回游戏</button>', 'page');
+    const before = await axe.run(UI.el.overlay, options);
+    expect(before.violations).toEqual([]);
+    UI.hideOverlay(); UI.hideOverlay(); UI.hideOverlay({ immediate: true });
+    UI.showOverlay('下一页', '<button data-cancel="true">继续</button>', 'page');
+    const after = await axe.run(UI.el.overlay, options);
+    expect(after.violations).toEqual([]);
+    expect(after.incomplete).toEqual([]);
+    expect(UI.el.overlay.hidden).toBe(false);
+    UI.hideOverlay({ immediate: true });
+  });
+
   it('照相馆卡牌IMG跳过背景样式读取，房间背景仍保留加载检测', () => {
     const style = vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue({ backgroundImage: 'url("/room.webp")' });
     try {

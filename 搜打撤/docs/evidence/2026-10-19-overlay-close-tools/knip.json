@@ -1,0 +1,707 @@
+{
+  "issues": [
+    {
+      "file": "scripts/perf-benchmark.cjs",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [
+        {
+          "name": "electron",
+          "line": 74,
+          "col": 11,
+          "pos": 2722
+        }
+      ],
+      "unresolved": []
+    },
+    {
+      "file": "desktop-app/main.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [
+        {
+          "name": "electron",
+          "line": 2,
+          "col": 9,
+          "pos": 44
+        }
+      ],
+      "unresolved": [
+        {
+          "name": "./game-file-protocol.cjs",
+          "line": 5,
+          "col": 9,
+          "pos": 200
+        },
+        {
+          "name": "./suggestions-store.cjs",
+          "line": 6,
+          "col": 9,
+          "pos": 271
+        },
+        {
+          "name": "./startup-window.cjs",
+          "line": 7,
+          "col": 9,
+          "pos": 395
+        },
+        {
+          "name": "./runtime-guard.cjs",
+          "line": 8,
+          "col": 9,
+          "pos": 460
+        }
+      ]
+    },
+    {
+      "file": "scripts/electron-gpu-info.cjs",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [
+        {
+          "name": "electron",
+          "line": 1,
+          "col": 9,
+          "pos": 8
+        }
+      ],
+      "unresolved": []
+    },
+    {
+      "file": "game/tools/bake-cutouts.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [
+        {
+          "name": "electron",
+          "line": 14,
+          "col": 9,
+          "pos": 493
+        }
+      ],
+      "unresolved": []
+    },
+    {
+      "file": "tests/desktop-file-protocol.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../desktop-app/game-file-protocol.cjs",
+          "line": 8,
+          "col": 9,
+          "pos": 302
+        }
+      ]
+    },
+    {
+      "file": "tests/desktop-runtime-guard.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../desktop-app/runtime-guard.cjs",
+          "line": 11,
+          "col": 9,
+          "pos": 432
+        },
+        {
+          "name": "../desktop-app/startup-window.cjs",
+          "line": 12,
+          "col": 9,
+          "pos": 527
+        }
+      ]
+    },
+    {
+      "file": "tests/desktop-startup.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../desktop-app/startup-window.cjs",
+          "line": 9,
+          "col": 9,
+          "pos": 334
+        }
+      ]
+    },
+    {
+      "file": "tests/hand-fixed-hit.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../game/dev/hand-fixed-hit.js",
+          "line": 3,
+          "col": 74,
+          "pos": 150
+        }
+      ]
+    },
+    {
+      "file": "tests/hand-pointer-log.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../game/dev/hand-pointer-log.js",
+          "line": 2,
+          "col": 34,
+          "pos": 97
+        }
+      ]
+    },
+    {
+      "file": "tests/map-overview-review.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../game/dev/map-overview-review.js",
+          "line": 15,
+          "col": 18,
+          "pos": 876
+        }
+      ]
+    },
+    {
+      "file": "tests/node-design-review.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../game/dev/visible-layout-check.js",
+          "line": 3,
+          "col": 38,
+          "pos": 124
+        },
+        {
+          "name": "../game/dev/node-design-review.js",
+          "line": 9,
+          "col": 12,
+          "pos": 490
+        }
+      ]
+    },
+    {
+      "file": "tests/reward-action-clipping.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../game/dev/visible-layout-check.js",
+          "line": 4,
+          "col": 38,
+          "pos": 160
+        }
+      ]
+    },
+    {
+      "file": "tests/sound-f4ngy-draw.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../docs/evidence/2026-10-18-web-sfx-replacement/before.catalog.js",
+          "line": 6,
+          "col": 29,
+          "pos": 373
+        }
+      ]
+    },
+    {
+      "file": "tests/sound-real-foley.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../docs/evidence/2026-10-18-web-sfx-replacement/before.catalog.js",
+          "line": 6,
+          "col": 29,
+          "pos": 373
+        }
+      ]
+    },
+    {
+      "file": "tests/sound-safe-slot-foley.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../docs/evidence/2026-10-18-web-sfx-replacement/before.catalog.js",
+          "line": 6,
+          "col": 29,
+          "pos": 373
+        }
+      ]
+    },
+    {
+      "file": "tests/sound-web-library.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../docs/evidence/2026-10-18-premium-ui-sfx/before.catalog.js",
+          "line": 5,
+          "col": 29,
+          "pos": 235
+        },
+        {
+          "name": "../docs/evidence/2026-10-18-web-sfx-replacement/before.catalog.js",
+          "line": 6,
+          "col": 39,
+          "pos": 337
+        }
+      ]
+    },
+    {
+      "file": "tests/suggestions-store.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../desktop-app/suggestions-store.cjs",
+          "line": 5,
+          "col": 9,
+          "pos": 149
+        }
+      ]
+    },
+    {
+      "file": "docs/evidence/2026-10-13-WF-four-player-fixes-1013/G03-shared-baseline-repro.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../../../../game/src/run/chests.js",
+          "line": 12,
+          "col": 16,
+          "pos": 1203
+        }
+      ]
+    },
+    {
+      "file": "docs/evidence/2026-09-30-full-repository-review/root/bag-and-preparation.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../snapshot/game/src/cards/cards.js",
+          "line": 7,
+          "col": 14,
+          "pos": 472
+        },
+        {
+          "name": "../snapshot/game/src/ui/ui.js",
+          "line": 8,
+          "col": 14,
+          "pos": 525
+        },
+        {
+          "name": "../snapshot/game/src/hub/base.js",
+          "line": 9,
+          "col": 14,
+          "pos": 572
+        },
+        {
+          "name": "../snapshot/game/src/run/game.session.js",
+          "line": 10,
+          "col": 30,
+          "pos": 638
+        },
+        {
+          "name": "../snapshot/game/src/hub/game.bag.js",
+          "line": 17,
+          "col": 9,
+          "pos": 894
+        },
+        {
+          "name": "../snapshot/game/src/hub/game.bag.bridge.js",
+          "line": 18,
+          "col": 9,
+          "pos": 973
+        },
+        {
+          "name": "../snapshot/game/src/hub/game.hub.depart.js",
+          "line": 19,
+          "col": 32,
+          "pos": 1078
+        },
+        {
+          "name": "../snapshot/game/src/hub/game.hub.preparation.js",
+          "line": 20,
+          "col": 9,
+          "pos": 1134
+        },
+        {
+          "name": "../snapshot/game/src/run/game.run.scenes.js",
+          "line": 21,
+          "col": 29,
+          "pos": 1260
+        },
+        {
+          "name": "../snapshot/game/src/run/game.run.altar.js",
+          "line": 22,
+          "col": 28,
+          "pos": 1335
+        },
+        {
+          "name": "../snapshot/game/src/run/game.run.flow.js",
+          "line": 23,
+          "col": 27,
+          "pos": 1408
+        },
+        {
+          "name": "../snapshot/game/src/hub/bag-return-hook.js",
+          "line": 24,
+          "col": 9,
+          "pos": 1462
+        }
+      ]
+    },
+    {
+      "file": "docs/evidence/2026-09-30-full-repository-review/root/icons-integration.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../snapshot/game/src/core/shared.js",
+          "line": 2,
+          "col": 21,
+          "pos": 57
+        },
+        {
+          "name": "../snapshot/game/src/core/icons-bitmap.js",
+          "line": 6,
+          "col": 16,
+          "pos": 261
+        }
+      ]
+    },
+    {
+      "file": "docs/evidence/2026-09-30-full-repository-review/root/test-gap-probe.mjs",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../snapshot/scripts/index-validation.mjs",
+          "line": 4,
+          "col": 39,
+          "pos": 135
+        }
+      ]
+    },
+    {
+      "file": "docs/evidence/2026-09-30-full-repository-review/world_ui/repro.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../snapshot/game/src/ui/overlay.js",
+          "line": 26,
+          "col": 11,
+          "pos": 2123
+        },
+        {
+          "name": "../snapshot/game/src/hub/bag-return-hook.js",
+          "line": 30,
+          "col": 59,
+          "pos": 2462
+        },
+        {
+          "name": "../snapshot/game/src/run/game.run.scenes.js",
+          "line": 31,
+          "col": 25,
+          "pos": 2535
+        },
+        {
+          "name": "../snapshot/game/src/run/game.run.altar.js",
+          "line": 32,
+          "col": 24,
+          "pos": 2606
+        },
+        {
+          "name": "../snapshot/game/src/run/game.run.flow.js",
+          "line": 33,
+          "col": 23,
+          "pos": 2675
+        },
+        {
+          "name": "../snapshot/game/src/ui/game.menu.js",
+          "line": 70,
+          "col": 13,
+          "pos": 5195
+        }
+      ]
+    },
+    {
+      "file": "docs/evidence/2026-10-09-WF-doc-system-art-cards-1009/originals/tests/compendium.test.js",
+      "binaries": [],
+      "catalog": [],
+      "catalogReferences": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "duplicates": [],
+      "enumMembers": [],
+      "exports": [],
+      "files": [],
+      "namespaceMembers": [],
+      "optionalPeerDependencies": [],
+      "types": [],
+      "unlisted": [],
+      "unresolved": [
+        {
+          "name": "../game/src/cards/cards.js",
+          "line": 16,
+          "col": 14,
+          "pos": 758
+        },
+        {
+          "name": "../game/src/core/data-loader.js",
+          "line": 18,
+          "col": 28,
+          "pos": 848
+        }
+      ]
+    }
+  ]
+}

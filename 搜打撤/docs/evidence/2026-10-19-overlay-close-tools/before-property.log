@@ -1,0 +1,109 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ❯ tests/tools/overlay-lifecycle.property.test.js (3 tests | 3 failed) 35ms
+   × hidden and repeated fade-out close calls have no extra close event or revision 14ms
+     → expected "spy" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st spy call:
+
+    Array [
+      CustomEvent {
+        "isTrusted": false,
+      },
+    ]
+
+
+Number of calls: 1
+
+   × immediate escalation finishes the existing close once and cannot tear down a newly opened page 9ms
+     → expected "spy" to be called 1 times, but got 2 times
+   × generated open/close/immediate/tick sequences preserve model state and one close event per transition 12ms
+     → Property failed after 1 tests
+{ seed: 20261019, path: "0", endOnFailure: true }
+Counterexample: [["immediate"]]
+Shrunk 0 time(s)
+
+Hint: Enable verbose mode in order to have the list of all failing values encountered during the run
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/tools/overlay-lifecycle.property.test.js > hidden and repeated fade-out close calls have no extra close event or revision
+AssertionError: expected "spy" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st spy call:
+
+    Array [
+      CustomEvent {
+        "isTrusted": false,
+      },
+    ]
+
+
+Number of calls: 1
+
+ ❯ tests/tools/overlay-lifecycle.property.test.js:20:40
+     18| 
+     19| it('hidden and repeated fade-out close calls have no extra close event…
+     20|   UI.hideOverlay(); expect(closed).not.toHaveBeenCalled(); expect(UI._…
+       |                                        ^
+     21|   open(); UI.hideOverlay(); const revision = UI._overlayRevision;
+     22|   UI.hideOverlay(); expect(closed).toHaveBeenCalledTimes(1); expect(UI…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/tools/overlay-lifecycle.property.test.js > immediate escalation finishes the existing close once and cannot tear down a newly opened page
+AssertionError: expected "spy" to be called 1 times, but got 2 times
+ ❯ tests/tools/overlay-lifecycle.property.test.js:28:59
+     26|   open(); UI.hideOverlay(); const revision = UI._overlayRevision;
+     27|   UI.hideOverlay({ immediate: true });
+     28|   expect(UI.el.overlay.hidden).toBe(true); expect(closed).toHaveBeenCa…
+       |                                                           ^
+     29|   expect(UI._overlayRevision).toBe(revision);
+     30|   open(); vi.advanceTimersByTime(500);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/tools/overlay-lifecycle.property.test.js > generated open/close/immediate/tick sequences preserve model state and one close event per transition
+Error: Property failed after 1 tests
+{ seed: 20261019, path: "0", endOnFailure: true }
+Counterexample: [["immediate"]]
+Shrunk 0 time(s)
+
+Hint: Enable verbose mode in order to have the list of all failing values encountered during the run
+ ❯ buildError ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/fast-check/lib/fast-check.js:2469:16
+ ❯ throwIfFailed ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/fast-check/lib/fast-check.js:2476:8
+ ❯ reportRunDetails ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/fast-check/lib/fast-check.js:2492:14
+ ❯ Module.assert ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/fast-check/lib/fast-check.js:2662:7
+ ❯ tests/tools/overlay-lifecycle.property.test.js:34:6
+     32| });
+     33| it('generated open/close/immediate/tick sequences preserve model state…
+     34|   fc.assert(fc.property(fc.array(fc.constantFrom('open', 'close', 'imm…
+       |      ^
+     35|     vi.clearAllTimers(); setup(); closed.mockClear();
+     36|     let state = 'hidden', closeCount = 0;
+
+Caused by: AssertionError: expected "spy" to be called +0 times, but got 1 times
+ ❯ tests/tools/overlay-lifecycle.property.test.js:47:22
+ ❯ Property.predicate ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/fast-check/lib/fast-check.js:1355:99
+ ❯ Property.run ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/fast-check/lib/fast-check.js:1324:24
+ ❯ propertyExecution ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/fast-check/lib/fast-check.js:2549:23
+ ❯ run ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/fast-check/lib/fast-check.js:2639:91
+ ❯ runIt ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/fast-check/lib/fast-check.js:2542:15
+ ❯ check ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/fast-check/lib/fast-check.js:2655:14
+ ❯ Module.assert ../%E6%90%9C%E6%89%93%E6%92%A4/node_modules/fast-check/lib/fast-check.js:2660:14
+ ❯ tests/tools/overlay-lifecycle.property.test.js:34:6
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  15:13:16
+   Duration  777ms (transform 59ms, setup 0ms, collect 178ms, tests 35ms, environment 331ms, prepare 73ms)
+
