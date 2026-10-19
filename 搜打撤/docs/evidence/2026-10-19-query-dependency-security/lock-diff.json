@@ -1,0 +1,17 @@
+[
+  {
+    "path": "node_modules/typed-rest-client",
+    "old": "2.3.1",
+    "new": null
+  },
+  {
+    "path": "node_modules/typed-rest-client/node_modules/qs",
+    "old": "6.15.1",
+    "new": null
+  },
+  {
+    "path": "node_modules/@stryker-mutator/core/node_modules/typed-rest-client",
+    "old": null,
+    "new": "2.3.0"
+  }
+]

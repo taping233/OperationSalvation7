@@ -7,11 +7,12 @@ await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
+const { addTempCard } = await import('../game/src/battle/core/battle.engine.js');
 const R = await import('../game/src/battle/runtime/battle.runtime.js');
 const { RUNE_KINDS } = await import('../game/src/battle/runes.js');
 const { assertUniqueZones } = await import('../game/src/battle/bag/battle.piles.js');
 
-beforeEach(() => { vi.useFakeTimers(); R.set$lastDeckSel([]); window.SDT.MAP.rules.battleStartDraw = 20; });
+beforeEach(() => { temporaryItems.clear(); vi.useFakeTimers(); R.set$lastDeckSel([]); window.SDT.MAP.rules.battleStartDraw = 20; });
 afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); });
 const canonical = id => { const card = C.all().find(c => c.id === id); expect(card, id).toBeTruthy(); return card; };
 function makeGame(cards) {
@@ -21,6 +22,15 @@ function makeGame(cards) {
     log(message) { this.logs.push(message); }, heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); },
     addItem() {}, onBattleEnd() {}, };
 }
+const temporaryItems = new Map();
+function useAvailablePotion(uid) {
+  if (R.mode !== 'boss') { BattleSession.commands.usePotion(uid); return; }
+  if (!temporaryItems.has(R.G)) temporaryItems.set(R.G, new Map());
+  const items = temporaryItems.get(R.G);
+  if (!items.has(uid)) items.set(uid, addTempCard(R.G.ownedCards.find(o => o.uid === uid).card));
+  BattleSession.commands.usePotion(items.get(uid));
+}
+
 async function settle() { await vi.advanceTimersByTimeAsync(1000); expect(R.busy).toBe(false); }
 
 async function infuseInBoss(extra = [], boss = true) {
@@ -44,9 +54,10 @@ async function infuseInBoss(extra = [], boss = true) {
 describe('运行态补审真实入口回归', () => {
   it('BOSS 镭射注能后，能源结晶复原燃料应从墓地移动到手牌且只占一个牌区', async () => {
     const game = await infuseInBoss();
-    BattleSession.commands.usePotion('runtime-2');
+    useAvailablePotion('runtime-2');
     await settle();
-    expect(game.ownedCards.some(o => o.uid === 'runtime-2')).toBe(false);
+    expect(game.ownedCards.some(o => o.uid === 'runtime-2')).toBe(true);
+    expect(BattleSession.getSnapshot().potionBar).toEqual([]);
     expect(R.consumed).toEqual([]);
     expect(R.hand).toContain('runtime-1');
     expect(R.grave).not.toContain('runtime-1');
@@ -55,12 +66,12 @@ describe('运行态补审真实入口回归', () => {
 
   it('普通战燃料不在墓地时照常复原，重复点击已消费结晶不会复制手牌', async () => {
     const game = await infuseInBoss([], false);
-    BattleSession.commands.usePotion('runtime-2');
+    useAvailablePotion('runtime-2');
     await settle();
     expect(R.hand).toEqual(['runtime-1']);
     expect(R.grave).toEqual([]);
     const afterFirstUse = BattleSession.getSnapshot();
-    BattleSession.commands.usePotion('runtime-2');
+    useAvailablePotion('runtime-2');
     await settle();
     expect(BattleSession.getSnapshot()).toBe(afterFirstUse);
     expect(game.ownedCards.filter(o => o.uid === 'runtime-2')).toEqual([]);
@@ -69,7 +80,7 @@ describe('运行态补审真实入口回归', () => {
   it('同名牌不同 UID：只移出实际燃料，未被消耗的另一实例仍在手牌一次', async () => {
     await infuseInBoss([canonical('tt3sp-shadowbug')]);
     expect(R.hand).toEqual(['runtime-3']);
-    BattleSession.commands.usePotion('runtime-2');
+    useAvailablePotion('runtime-2');
     await settle();
     expect(R.hand).toEqual(['runtime-3', 'runtime-1']);
     expect(R.grave).toEqual([]);
@@ -78,7 +89,7 @@ describe('运行态补审真实入口回归', () => {
 
   it('合法复原后同一燃料再注能、再复原，牌区仍唯一且保留 LIFO 次序', async () => {
     await infuseInBoss([canonical('tt3sp-silverthorn'), canonical('tt-crystal')]);
-    BattleSession.commands.usePotion('runtime-2');
+    useAvailablePotion('runtime-2');
     await settle();
     BattleSession.commands.beginInfusion('runtime-3');
     BattleSession.commands.selectInfusion('runtime-1');
@@ -86,7 +97,7 @@ describe('运行态补审真实入口回归', () => {
     await settle();
     expect(R.consumed).toEqual(['runtime-1']);
     expect(R.grave).toEqual(['runtime-1']);
-    BattleSession.commands.usePotion('runtime-4');
+    useAvailablePotion('runtime-4');
     await settle();
     expect(R.hand).toEqual(['runtime-1']);
     expect(R.consumed).toEqual([]);
@@ -104,7 +115,7 @@ describe('运行态补审真实入口回归', () => {
     BattleSession.start(game, [{ id: 'nest-dark-elem', name: '黑暗元素', hp: 30, atk: 9, rotateImmune: true }], { isBoss: true, nest: { runes: [rune] } });
     expect(R.hand).toHaveLength(1);
     expect(R.drawPile).toHaveLength(2);
-    BattleSession.commands.usePotion('runtime-3');
+    useAvailablePotion('runtime-3');
     await settle();
     expect(R.foes[0].status.freeze).toBe(1);
     expect(R.hand).toHaveLength(3);
@@ -119,20 +130,20 @@ describe('运行态补审真实入口回归', () => {
     const defs = [{ id: 'nest-dark-elem', name: '黑暗元素', hp: 30, atk: 9 }];
     const withRune = makeGame(cards);
     BattleSession.start(withRune, defs, { isBoss: true, nest: { runes: [{ ...kind, kind: kind.id, attrs: ['暗'] }] } });
-    BattleSession.commands.usePotion('runtime-3');
+    useAvailablePotion('runtime-3');
     await settle();
     expect(R.hand).toHaveLength(3);
     expect(withRune.logs.filter(log => log.includes('冰冻符文') && log.includes('抽 2 张牌'))).toHaveLength(1);
     const noRune = makeGame(cards);
     BattleSession.start(noRune, defs, { isBoss: true, nest: { runes: [] } });
-    BattleSession.commands.usePotion('runtime-3');
+    useAvailablePotion('runtime-3');
     await settle();
     expect(R.freezeRuneOn).toBe(false);
     expect(R.hand).toHaveLength(1);
     expect(noRune.logs.some(log => log.includes('冰冻符文'))).toBe(false);
     const normal = makeGame(cards);
     BattleSession.start(normal, defs, { isBoss: false });
-    BattleSession.commands.usePotion('runtime-3');
+    useAvailablePotion('runtime-3');
     await settle();
     expect(R.freezeRuneOn).toBe(false);
     expect(R.hand).toHaveLength(3);
@@ -159,7 +170,7 @@ describe('运行态补审真实入口回归', () => {
     await settle();
     expect(R.consumed).toEqual(['runtime-1', 'runtime-2']);
     expect(R.grave).toEqual(['runtime-1', 'runtime-2']);
-    BattleSession.commands.usePotion('runtime-3');
+    useAvailablePotion('runtime-3');
     await settle();
     expect(R.hand).toEqual(['runtime-2', 'runtime-1']);
     expect(R.grave).toEqual([]);

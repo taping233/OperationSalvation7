@@ -19,6 +19,7 @@ window.SDT.MAP = { rules: { battleEnergy: 9, battleHandMax: 99, bossDeckSize: 15
 await import('../game/src/cards/cards.js');
 const Cards = window.SDT.Cards;
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
+const { addTempCard } = await import('../game/src/battle/core/battle.engine.js');
 const runtime = await import('../game/src/battle/runtime/battle.runtime.js');
 let activeGame;
 const tick = () => new Promise(resolve => setTimeout(resolve, 5));
@@ -94,7 +95,7 @@ describe('E8 legacy BattleSession contract investigation (not migration benefit)
     expect(resources(game)).toEqual(after);
     expect(game.hp).toBe(50 + card.heal);
   });
-  it.each(oldCards)('$id is rejected from boss hand, usable from ordinary/boss bag', async card => {
+  it.each(oldCards)('$id is rejected from boss hand, usable from ordinary bag or boss temporary slot', async card => {
     const game = await start(card, { boss: true });
     const before = resources(game);
     BattleSession.commands.playCard('e8-card', 'self'); await idle();
@@ -102,10 +103,16 @@ describe('E8 legacy BattleSession contract investigation (not migration benefit)
     expect(game.logs.some(line => line.includes('道具卡只能在普通战斗中使用'))).toBe(true);
     for (const boss of [false, true]) {
       const bagGame = await start(card, { boss, hand: false });
-      BattleSession.commands.useItem('e8-card'); await idle();
+      if (boss) {
+        const untouched = resources(bagGame);
+        BattleSession.commands.useItem('e8-card'); await idle();
+        expect(resources(bagGame)).toEqual(untouched);
+      }
+      BattleSession.commands.useItem(boss ? addTempCard(clone(card)) : 'e8-card'); await idle();
       expect(bagGame.hp).toBe(50 + card.heal);
       expect(bagGame.healCalls).toEqual([card.heal]);
-      expect(bagGame.ownedCards).toHaveLength(0);
+      expect(bagGame.ownedCards).toHaveLength(boss ? 1 : 0);
+      if (boss) expect(bagGame.ownedCards[0].card).toEqual(card);
     }
   });
   it('keeps the actual STARTERS two-point bandage and an existing run copy legacy', async () => {
@@ -222,12 +229,18 @@ describe('E8 migrated rules against recorded legacy outcomes', () => {
       expect(game.logs.some(line => line.includes('道具卡只能在普通战斗中使用'))).toBe(true);
       for (const boss of [false, true]) for (const [, hp, status] of cases) {
         const bagGame = await start(card, { hp, status, boss, hand: false });
-        BattleSession.commands.useItem('e8-card'); await idle();
+        if (boss) {
+          const untouched = resources(bagGame);
+          BattleSession.commands.useItem('e8-card'); await idle();
+          expect(resources(bagGame)).toEqual(untouched);
+        }
+        BattleSession.commands.useItem(boss ? addTempCard(clone(card)) : 'e8-card'); await idle();
         const heals = !status.healban;
         expect(bagGame.hp, JSON.stringify({ id, structured: !!card.rules, boss, hp, status,
           actualStatus: runtime.pstat.status, logs: bagGame.logs })).toBe(heals ? Math.min(100, hp + card.heal) : hp);
         expect(bagGame.healCalls).toEqual(heals ? [card.heal] : []);
-        expect(bagGame.ownedCards).toHaveLength(0);
+        expect(bagGame.ownedCards).toHaveLength(boss ? 1 : 0);
+        if (boss) expect(bagGame.ownedCards[0].card).toEqual(card);
       }
       const textProbe = await start({ ...card, heal: 77, desc: '回复 3 点生命。' }, { hand: false });
       BattleSession.commands.useItem('e8-card'); await idle();

@@ -73,5 +73,10 @@
     "motion": "^13.2.0",
     "pixi.js": "^7.4.3",
     "pixi.js-legacy": "7.4.3"
+  },
+  "overrides": {
+    "@stryker-mutator/core": {
+      "typed-rest-client": "2.3.0"
+    }
   }
 }

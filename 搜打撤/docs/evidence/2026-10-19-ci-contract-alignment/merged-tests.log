@@ -1,0 +1,220 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ✓ tests/battle-infusion-action-layout.test.js (30 tests) 1536ms
+ ✓ tests/bag-page-lifecycle-review.test.js (63 tests) 3241ms
+ ✓ tests/m3-contract.test.js (24 tests) 743ms
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > does not mark or pollute cache on throw save failure
+[cards] E8 fixed-heal bag rule migration failed; marker was not written: Error: save failure
+    at Object.<anonymous> (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:310:90)
+    at Object.mockCall (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.saveAll (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at Object.ensureE8FixedHealRules (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/cards/cards.sync.js:171:26)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:316:11
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > does not mark or pollute cache on storage-write save failure
+[cards] 自定义卡库保存失败（存储空间可能已满）： Error: quota
+    at Object.<anonymous> (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:313:32)
+    at Object.mockCall (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.setItem (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at Object.saveAll (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/cards/cards.js:173:22)
+    at Object.ensureE8FixedHealRules (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/cards/cards.sync.js:171:26)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:316:11
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > retries marker failure without another card save
+[cards] E8 fixed-heal bag rule migration failed; marker was not written: Error: marker write
+    at Object.<anonymous> (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:324:33)
+    at Object.mockCall (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.setItem (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at Object.ensureE8FixedHealRules (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/cards/cards.sync.js:174:22)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:326:11
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > does not interpret sdt-cards-e8-fixed-heal-bag-rules-v1-seeded read failure as an unmarked empty library
+[cards] E8 fixed-heal bag rule migration failed; marker was not written: Error: read failure
+    at Object.<anonymous> (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:336:37)
+    at Object.mockCall (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.getItem (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at Object.ensureE8FixedHealRules (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/cards/cards.sync.js:122:26)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:338:11
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > does not interpret sdt-cards-v1 read failure as an unmarked empty library
+[cards] E8 fixed-heal bag rule migration failed; marker was not written: Error: read failure
+    at Object.<anonymous> (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:336:37)
+    at Object.mockCall (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.getItem (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at Object.ensureE8FixedHealRules (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/cards/cards.sync.js:126:34)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:338:11
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > does not stamp an absent, empty, corrupt or ambiguous library: {bad
+[cards] E8 fixed-heal bag rule migration failed; marker was not written: SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+    at JSON.parse (<anonymous>)
+    at Object.ensureE8FixedHealRules (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/cards/cards.sync.js:128:34)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:345:13
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > preserves external replacement when original saveAll sees a concurrent change
+[cards] 检测到卡牌库已被其他标签页或外部修改，本次写回已放弃（不覆盖新数据）；下次读取将自动刷新到最新库
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > will not mark a previously degraded corrupt cache after storage is replaced
+[cards] 自定义卡库串损坏，已降级为空库并暂停所有卡库写回（含启动自动播种）。原串已备份到 sdt-cards-corrupt。人工恢复：localStorage.setItem('sdt-cards-v1', localStorage.getItem('sdt-cards-corrupt')) 后刷新页面
+
+stderr | tests/e8-card-migration.test.js > E8 conservative persistent backfill in isolated memory > does not stamp after successful save followed by read-failure
+[cards] E8 fixed-heal bag rule migration failed; marker was not written: Error: post-save read
+    at Object.<anonymous> (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:400:67)
+    at Object.mockCall (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/spy/dist/index.js:96:15)
+    at Object.getItem (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/tinyspy/dist/index.js:47:80)
+    at Object.ensureE8FixedHealRules (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/cards/cards.sync.js:172:28)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/e8-card-migration.test.js:403:11
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:20
+
+ ✓ tests/e8-card-migration.test.js (43 tests) 4970ms
+   ✓ E8 recorded legacy real map backpack UI baseline > 'tt-jinchuangyao' heals, caps and consumes once through actual UI-bound useOwnedCard  341ms
+   ✓ E8 migrated rules against recorded legacy outcomes > tt-jinchuangyao preserves BOSS rejection and uses fields for structured battle bag behavior  749ms
+   ✓ E8 migrated rules against recorded legacy outcomes > tt4-woodify preserves BOSS rejection and uses fields for structured battle bag behavior  735ms
+   ✓ E8 migrated rules against recorded legacy outcomes > starter-emergency-bandage preserves BOSS rejection and uses fields for structured battle bag behavior  727ms
+ ✓ tests/e4-async-entry.test.js (39 tests) 2794ms
+   ✓ E4 real async entry chains (render/storage ports stubbed) > enters a node through the real transition and lazy loader  383ms
+ ✓ tests/chest-extra-rewards-choice.test.js (33 tests) 1482ms
+ ✓ tests/departure-stack-lifecycle-review.test.js (19 tests) 741ms
+ ✓ tests/hub-flow-regression.test.js (12 tests) 1501ms
+   ✓ 基地操作键盘语义与危险操作保护 > 仓库卡牌为可聚焦的非提交按钮，整备拖拽卡面提供键盘语义与焦点样式  372ms
+ ✓ tests/extraction-flow.test.js (18 tests) 908ms
+ ✓ tests/battle-hand-inspector.test.js (97 tests) 7672ms
+   ✓ selects a target on one bridge pointer tap and suppresses the following synthetic click  339ms
+   ✓ starts self-target equipment selection from the stable folded slot without spending or requiring a second click  335ms
+   ✓ adds distinct material UIDs through the workspace and ignores a detached repeated button  429ms
+   ✓ describes and cycles three hand pages without changing cards or combat state  1136ms
+   ✓ keeps touch untargeted pickup pending until field confirmation or Escape  353ms
+   ✓ directly plays an untargeted card from focused card-face Enter  357ms
+   ✓ allows a new primary pointer to continue a pickup only after its owner releases  331ms
+   ✓ lets real window aim cancellation consume the down before the retained hand can pick up another card  337ms
+   ✓ 扰敌同种三敌DOM点击0→2：重绘只排首实例，拒重复，单次扣费且不打中间敌  406ms
+ ✓ tests/page-loading.test.js (15 tests) 87ms
+ ✓ tests/bag-slam-button.test.js (10 tests) 1475ms
+   ✓ 背包砸击按钮形态 > 牧师圣疗与惩戒每次使用后交替，取消选敌不切换，每回合只能使用一次  301ms
+ ✓ tests/tools/reward-sequences.property.test.js (4 tests) 1456ms
+   ✓ real reward modules: generated sequences > production inventory adapter keeps double-confirm discard and repeated final claim idempotent  681ms
+   ✓ real reward modules: generated sequences > real organizer never grants implicitly or repeats terminal callbacks/committed discard under stale UI sequences  394ms
+ ✓ tests/battle-runtime-completion-1014.test.js (12 tests) 72ms
+ ✓ tests/mystery-potion-observation.test.js (19 tests) 141ms
+stdout | tests/page-perf-hub.test.js > warehouse bounded work and live inventory > replaces per-tile inventory scans with linear action work and opens a card once
+hub warehouse controlled operation counts {"stacks":200,"before":{"filterKeyReads":20103,"clickKeyReads":41602,"clickSounds":2},"after":{"filterKeyReads":203,"clickKeyReads":1001,"clickSounds":1}}
+
+ ✓ tests/map-travel-motion.test.js (7 tests) 39ms
+stdout | tests/page-perf-hub.test.js > warehouse bounded work and live inventory > image completion with unchanged layout produces no DOM attribute writes
+hub warehouse unchanged image-load DOM writes {"stacks":200,"before":1,"after":0}
+
+stdout | tests/page-perf-hub.test.js > bag resource art work per render > keeps the entire HTML while filtering a 300-card catalog once for 30 supply tiles
+hub bag resource catalog operation counts {"catalog":300,"supplyTiles":30,"before":{"catalogCalls":30,"typeReads":9000},"after":{"catalogCalls":1,"typeReads":330}}
+
+ ✓ tests/page-perf-hub.test.js (11 tests) 737ms
+   ✓ warehouse bounded work and live inventory > replaces per-tile inventory scans with linear action work and opens a card once  487ms
+ ✓ tests/architecture-boundaries.test.js (24 tests) 699ms
+   ✓ 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向  676ms
+ ✓ tests/contracts.test.js (17 tests) 881ms
+   ✓ ESM 依赖方向 > src 模块不存在循环依赖  788ms
+ ✓ tests/node-cancel-semantics.test.js (9 tests) 191ms
+ ✓ tests/reward-frame-review.test.js (13 tests) 99ms
+stdout | tests/card-browser-state.test.js > retained card browser state > 100 identical filters/selections keep 200 controls and emit zero list mutations
+200 retained controls, 100 unchanged projections: 0 list DOM mutations; selection change: 4 attribute mutations
+
+ ✓ tests/card-browser-state.test.js (8 tests) 496ms
+   ✓ retained card browser state > 100 identical filters/selections keep 200 controls and emit zero list mutations  369ms
+ ✓ tests/battle-pile-readability.test.js (6 tests) 74ms
+ ✓ tests/boss-equip-select.test.js (7 tests) 531ms
+ ✓ tests/battle-temp-item-destination.test.js (17 tests) 67ms
+ ✓ tests/reward-capacity-organizer.test.js (15 tests) 146ms
+stdout | tests/e6-card-rules-capability.test.js > E6 battle-entry rule capability > checks the actual seeded production catalogue and original synchronization source separately
+E6 production catalogue support census {"domains":{"bag":19,"base":8,"battle":165,"equip":16,"triggers":123},"operations":{"acquire":22,"armor":14,"blessing":3,"cleanse":2,"curse":23,"damage":60,"discover":1,"draw":15,"energy":1,"energyCap":1,"execute":2,"heal":4,"noDrawNext":1,"registerRule":4,"status":1,"stealAtk":1,"summon":1}}
+
+ ✓ tests/e6-card-rules-capability.test.js (6 tests) 73ms
+ ✓ tests/nightshift-u10-settle-transition.test.js (4 tests) 33ms
+ ✓ tests/battle-selection-ui.test.js (26 tests) 67ms
+ ✓ tests/bag-help-return-continuity.test.js (8 tests) 614ms
+ ✓ tests/camp-entry-readiness.test.js (11 tests) 73ms
+ ✓ tests/battle-discover-result-source.test.js (5 tests) 81ms
+ ✓ tests/help-return-lifecycle.test.js (11 tests) 449ms
+ ✓ tests/bag-pane-retained.test.js (6 tests) 208ms
+ ✓ tests/scavenge-mode-feedback.test.js (5 tests) 35ms
+ ✓ tests/secondary-glass-style.test.js (5 tests) 49ms
+ ✓ tests/map-passage.test.js (8 tests) 49ms
+ ✓ tests/battle-curse-immunity-lifetime.test.js (6 tests) 51ms
+ ✓ tests/battle-temp-item-settlement.test.js (3 tests) 45ms
+ ✓ tests/backpack-rail-alignment.test.js (3 tests) 40ms
+ ✓ tests/infuse-free-play.test.js (3 tests) 660ms
+ ✓ tests/battle-talisman-settlement.test.js (1 test) 25ms
+ ✓ tests/bag-token-craft.test.js (6 tests) 4ms
+ ✓ tests/reward-presentation-contract.test.js (8 tests) 25ms
+ ✓ tests/page-surface-lifetime.test.js (4 tests) 33ms
+ ✓ tests/transition-preparation.test.js (3 tests) 5ms
+ ✓ tests/battle-snapshot.test.js (3 tests) 8ms
+ ✓ tests/battle-pure-rules.test.js (12 tests) 7ms
+stderr | tests/m3-data.test.js > M3 数据迁移批 D5：批次级保守语义 > 库内缺卡：整体保守退出，不标记、不部分回填
+[cards] M3 rule migration cards missing: [
+  'cc-cursed-blade',   'cc-last-stand',
+  'cc-rapid-fire',     'cmtn0xt0zr7',
+  'tt2-turtlearmor',   'tt3-dig-treasure',
+  'tt3-fly-arrowhawk', 'tt3-purify-arrow',
+  'tt3sp-shadowbug',   'tt3wu-shike',
+  'tt7-armup',         'cmtn1epgt20j',
+  'cmtn1p9vb5au',      'tt12-chargeray',
+  'tt3-holy-water',    'tt3-thunderblast',
+  'tt7-bladebloom',    'tt7-burnharvest',
+  'tt7-maxsupply',     'tt7-recruit',
+  'tt3sp-devour',      'tt3sp-magicoil',
+  'tt3sp-shadowshot'
+]
+
+stderr | tests/m3-data.test.js > M3 数据迁移批 D5：批次级保守语义 > 缺 canonical 定版表：整体保守退出，不标记
+[cards] M3 rule migration canonical missing: tt12-chargeray
+
+stderr | tests/m3-data.test.js > M3 数据迁移批 D5：批次级保守语义 > saveAll 返回 false：不标记
+[cards] M3 rule migration save returned false; marker was not written.
+
+stderr | tests/m3-data.test.js > 永恒绽放旧章发现轮数迁移 > 旧n3迁移保存false失败不盖章，恢复后可重试
+[cards] M3 rule migration save returned false; marker was not written.
+
+stderr | tests/m3-data.test.js > 永恒绽放旧章发现轮数迁移 > 旧n3迁移保存throw失败不盖章，恢复后可重试
+[cards] M3 rule migration save failed; marker was not written: Error: probe-save
+    at Object.harness.library.saveAll (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/m3-data.test.js:398:69)
+    at ensureBatch (/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/src/cards/cards.sync.backfiller.js:140:31)
+    at /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/tests/m3-data.test.js:399:24
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:863:59
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26
+    at file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1863:10)
+    at runTest (file:///workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/%E6%90%9C%E6%89%93%E6%92%A4/node_modules/@vitest/runner/dist/chunk-hooks.js:1574:12)
+
+ ✓ tests/m3-data.test.js (86 tests) 89ms
+ ✓ tests/battle-resolution.test.js (58 tests) 50ms
+ ✓ tests/perf-budget-duplicates.test.js (5 tests) 6ms
+ ✓ tests/battle-nature-staff-cost.test.js (4 tests) 6ms
+ ✓ tests/tools/hand-selection.property.test.js (4 tests) 45ms
+ ✓ tests/battle-player-effects.test.js (11 tests) 5ms
+
+ Test Files  54 passed (54)
+      Tests  887 passed (887)
+   Start at  14:46:19
+   Duration  18.71s (transform 2.70s, setup 0ms, collect 10.16s, tests 35.61s, environment 15.93s, prepare 3.20s)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -15,6 +15,7 @@ await import('../game/src/cards/cards.js');
 const C = window.SDT.Cards;
 C.ensureSha(); C.ensureStarters(); C.ensureTabletop(); C.ensureDmgTypes(); C.ensureEffectFields();
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
+const { addTempCard } = await import('../game/src/battle/core/battle.engine.js');
 const R = await import('../game/src/battle/runtime/battle.runtime.js');
 
 beforeEach(() => { observation.lootRoll = null; vi.useFakeTimers(); R.set$lastDeckSel([]); window.SDT.MAP.rules.battleStartDraw = 20; });
@@ -56,10 +57,12 @@ it.each([false, true])('普通/BOSS=%s：0能量使用排队，下回合仅一�
   vi.spyOn(C, 'all').mockReturnValue([allowedMove('candidate-spell')]);
   R.set$energy(0);
   const coins = game.coins, hp = game.hp;
-  BattleSession.commands.usePotion('runtime-0');
-  BattleSession.commands.usePotion('runtime-0');
+  const potionUid = boss ? addTempCard(game.ownedCards[0].card) : 'runtime-0';
+  BattleSession.commands.usePotion(potionUid);
+  BattleSession.commands.usePotion(potionUid);
   await settle();
-  expect(game.ownedCards.some(o => o.uid === 'runtime-0')).toBe(false);
+  expect(game.ownedCards.some(o => o.uid === 'runtime-0')).toBe(boss);
+  expect(BattleSession.getSnapshot().potionBar.some(o => o.uid === potionUid)).toBe(false);
   expect(game.coins).toBe(coins); expect(game.hp).toBe(hp);
   expect(R.granted.some(o => o.card.id === 'candidate-spell')).toBe(false);
   expect(R.delayed).toHaveLength(1);

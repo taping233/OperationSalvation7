@@ -1,0 +1,42 @@
+{
+  "commit": "e55ae96e8c109613d951b682653bb96891bcb828",
+  "previousComparableCommit": "3721e42a4abfbed2fd623e75d4264f5a428a22b3",
+  "baseCommit": "cd98745f03a6d8313a7138386b1499d8fe5ab4f6",
+  "baseIsDocsOnlyChildOfComparable": true,
+  "previousRun": "https://github.com/taping233/OperationSalvation7/actions/runs/39149322262",
+  "currentRun": "https://github.com/taping233/OperationSalvation7/actions/runs/39204846917",
+  "metrics": {
+    "packageMiB": [
+      221.83,
+      221.85,
+      112
+    ],
+    "duplicatesMiB": [
+      9.94,
+      9.94,
+      0.88
+    ],
+    "entryGzipKiB": [
+      332,
+      335,
+      270
+    ],
+    "initialGzipKiB": [
+      377.6,
+      380.7,
+      310
+    ],
+    "cssGzipKiB": [
+      216.9,
+      217.5,
+      136
+    ]
+  },
+  "thresholdsChanged": false,
+  "viteConfigChanged": false,
+  "sameExcludedImageCount": 195,
+  "sameExcludedSfxLibraries": true,
+  "budgetScriptChange": "Equivalent size-group hashing optimization with tests; limits unchanged",
+  "assetReviewChange": "Consumer fingerprints only; reviewed candidate list unchanged",
+  "conclusion": "Five budget failures predate recovered batch; small additional byte growth in new batch. No claim of zero regression or full cause attribution."
+}

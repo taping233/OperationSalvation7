@@ -1,0 +1,21 @@
+✔ Stryker client resolves the patched qs 6.x dependency (1.016968ms)
+✔ comma stringification tolerates null and undefined entries (0.757756ms)
+✔ bracket-key comma arrays enforce the configured array limit (0.872459ms)
+✔ untrusted isBuffer properties cannot break query serialization (0.625656ms)
+✔ ordinary nested and repeated query parameters keep their contract (1.585317ms)
+✔ the actual REST client builds ordinary and nullable comma queries (1.339866ms)
+✔ local clone scan detects copied logic but excludes generated/vendor/license files (76.613347ms)
+✔ raw size is advisory in the secondary UI design domain (51.66757ms)
+✔ font shorthand is also audited (2.933585ms)
+✔ semantic size, layout pixels and intentional theme colors remain valid (3.178425ms)
+✔ other themes and the token source may define raw sizes (3.454283ms)
+✔ invalid hex and property mistakes are blocking errors (1.659038ms)
+✔ container label reuses the existing 18px semantic token (7.519429ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 320.540468

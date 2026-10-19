@@ -31,22 +31,23 @@ async function settle() { await vi.advanceTimersByTimeAsync(1000); expect(R.busy
 
 
 
-it.each([false,true])('scavenge mode=%s uses matching destination and pool',async boss=>{
+it.each([[false,true],[false,false],[true,false]])('scavenge boss=%s item=%s uses matching destination and pool',async (boss,item)=>{
  const potion=canonical('tt3-turnabout-potion'),spell=canonical('tt3sp-shadowbug');const game=makeGame([C.SHA]);game.myClass='法师';
  BattleSession.start(game,[{id:'foe',name:'靶',hp:100,atk:0}],{isBoss:boss,directBossStart:boss});
- vi.spyOn(C,'all').mockReturnValue(boss?[potion,spell]:[potion]);
+ vi.spyOn(C,'all').mockReturnValue(boss?[potion,spell]:[item?potion:spell]);
  const before={hand:R.hand.length,deck:R.drawPile.length,energy:R.energy};
  const skill=BattleSession.commands.slamSkill();
  const host=document.createElement('div');host.innerHTML=careerSkillButtonHTML({skill,state:'ready',availability:'可用',effect:skill.hint,disabled:false});
- expect(host.querySelector('[data-ui-tip]').dataset.uiTipText).toContain(boss?'非道具卡洗入牌库':'卡牌入手牌');
- expect(host.querySelector('button').getAttribute('aria-label')).toContain(boss?'洗入牌库':'入手牌');
+ expect(host.querySelector('[data-ui-tip]').dataset.uiTipText).toContain(boss?'非道具卡洗入牌库':'道具进入道具栏');
+ expect(host.querySelector('button').getAttribute('aria-label')).toContain(boss?'洗入牌库':'道具进入道具栏');
  BattleSession.commands.bagSlam();await settle();
- const generated=R.granted.find(o=>o.card.id===(boss?spell.id:potion.id));expect(generated).toBeTruthy();
- expect(R.hand.length).toBe(before.hand+(boss?0:1));expect(R.drawPile.length).toBe(before.deck+(boss?1:0));expect(R.energy).toBe(before.energy-1);
- expect(game.logs.some(log=>log.includes(boss?'洗入牌库':'置入手牌'))).toBe(true);
+ const generated=R.granted.find(o=>o.card.id===(item?potion.id:spell.id));expect(generated).toBeTruthy();
+ expect(R.hand.length).toBe(before.hand+(!boss&&!item?1:0));expect(R.drawPile.length).toBe(before.deck+(boss?1:0));expect(R.energy).toBe(before.energy-1);
+ expect(BattleSession.getSnapshot().potionBar.some(o=>o.uid===generated.uid)).toBe(item);
+ expect(game.logs.some(log=>log.includes(boss?'洗入牌库':item?'置入道具栏':'置入手牌'))).toBe(true);
  expect(BattleSession.commands.slamSkill().used).toBe(true);
  BattleSession.commands.bagSlam();await settle();expect(R.energy).toBe(before.energy-1);
- expect(R.granted.filter(o=>o.card.id===(boss?spell.id:potion.id))).toHaveLength(1);
+ expect(R.granted.filter(o=>o.card.id===(item?potion.id:spell.id))).toHaveLength(1);
  BattleSession.commands.flee();await settle();
 });
 it('empty boss pool retains existing fee/use semantics and gives explicit feedback',async()=>{
@@ -59,7 +60,7 @@ it('empty boss pool retains existing fee/use semantics and gives explicit feedba
  BattleSession.commands.flee();await settle();
 });
 it('selection explains both destinations while unrelated skill descriptions stay unchanged',()=>{
- expect(slamSkillFor('法师').hint).toContain('普通战入手，首脑战排除道具并洗入牌库');
+ expect(slamSkillFor('法师').hint).toContain('普通战道具进栏、其他卡牌入手，首脑战排除道具并洗入牌库');
  expect(slamSkillFor('战士',false,'boss')).toEqual(slamSkillFor('战士',false,'normal'));
  expect(slamSkillFor('牧师',true,'boss').name).toBe('惩戒');
 });

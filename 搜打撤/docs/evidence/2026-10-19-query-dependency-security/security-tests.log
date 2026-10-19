@@ -1,0 +1,13 @@
+✔ Stryker client resolves the patched qs 6.x dependency (0.988564ms)
+✔ comma stringification tolerates null and undefined entries (0.812899ms)
+✔ bracket-key comma arrays enforce the configured array limit (0.690414ms)
+✔ untrusted isBuffer properties cannot break query serialization (1.366486ms)
+✔ ordinary nested and repeated query parameters keep their contract (0.881042ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 108.605249

@@ -61,7 +61,7 @@ it.each([
   [{lostCount:3,completed:true}, '已放弃 3 张'],
   [{takenCount:1,lostCount:2,completed:true}, '已领取 1 张 · 已放弃 2 张'],
   [{takenCount:1,lostCount:2,completed:true,choice:true}, '已领取 1 张 · 其余 2 张已放弃'],
-  [{takenCount:1,lostCount:1,opened:true,choice:true}, '已领取 1 张 · 其余 1 张未领取 · 剩余 1 张待处理'],
+  [{takenCount:1,lostCount:1,opened:true,choice:true}, '已领取 1 张 · 其余 1 张已放弃 · 剩余 1 张待处理'],
 ])('总览状态%j不在结束后继续承诺可领取', (state, text) => {
   const box={index:0,name:'箱',cardCount:3,takenCount:0,lostCount:0,rule:'3 张 · 可全部领取',...state};
   const before=JSON.stringify(box);

@@ -11,7 +11,7 @@ const SLAM_SKILLS = {
   '战士': { kind: 'attack',   name: '猛击', icon: 'swords', cost: 2, needsTarget: true,
             hint: '2 费 · 攻击一次（等同打出一张初始攻击）· 不消耗卡牌', aimDesc: '攻击一次' },
   '法师': { kind: 'acquire',  name: '搜刮', icon: 'cards',  cost: 1, needsTarget: false,
-            hint: '1 费 · 随机获得一张卡牌入手牌 · 不消耗卡牌', aimDesc: '' },
+            hint: '1 费 · 随机获得一张卡牌：道具进入道具栏，其他卡牌入手牌 · 不消耗卡牌', aimDesc: '' },
   '降临者': { kind: 'fireball', name: '火球', icon: 'fire', cost: 2, dmg: 4, needsTarget: true,
             hint: '2 费 · 施放一次火球（4 点法伤）· 不消耗卡牌', aimDesc: '4 点法术伤害' },
   '牧师': { kind: 'heal',     name: '圣疗', icon: 'heart',  cost: 1, heal: 3, needsTarget: false,
@@ -24,7 +24,7 @@ const SLAM_SKILL_PRIEST_FLIPPED = { kind: 'spell', name: '惩戒', icon: 'fire',
 function slamSkillFor(cls, flipped = false, mode = null) {
   if (cls === '法师') {
     const destination = mode === 'boss' ? '随机获得一张非道具卡洗入牌库'
-      : mode === 'normal' ? '随机获得一张卡牌入手牌' : '随机获得一张卡牌：普通战入手，首脑战排除道具并洗入牌库';
+      : mode === 'normal' ? '随机获得一张卡牌：道具进入道具栏，其他卡牌入手牌' : '随机获得一张卡牌：普通战道具进栏、其他卡牌入手，首脑战排除道具并洗入牌库';
     return { ...SLAM_SKILLS[cls], hint: `1 费 · ${destination} · 不消耗卡牌` };
   }
   if (cls === '牧师' && flipped) return SLAM_SKILL_PRIEST_FLIPPED;

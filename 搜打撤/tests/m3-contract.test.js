@@ -217,11 +217,13 @@ describe('M3 gap-2: bag.use potion expansion', () => {
     // nest:true 跳过编组直开 BOSS 战（mode='boss'）
     const game = await startGame([smoke], [foe('smoke-boss')], { isBoss: true, nest: true });
     const entry = game.ownedCards.find(item => item.card.id === 'm3-smoke-boss');
-    engine.useItem(entry.uid, null);   // 与 agent 命令通道同一引擎入口
+    const temporaryUid = engine.addTempCard(smoke);
+    engine.useItem(temporaryUid, null);   // 合法临时来源，仍走真实命令闸
     await waitForIdle();
     expect(game.battleActive).toBe(true);   // finish 未触发：战斗未结束
     expect(game.ownedCards.some(o => o.uid === entry.uid)).toBe(true);   // 道具未消耗
     expect(game.logs.some(line => line.includes('BOSS 战中无法逃跑'))).toBe(true);
+    expect(BattleSession.getSnapshot().potionBar.some(o => o.uid === temporaryUid)).toBe(true);
     await finishBattle();
   });
 

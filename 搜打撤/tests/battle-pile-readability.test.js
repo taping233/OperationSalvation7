@@ -45,7 +45,7 @@ beforeEach(() => {
   fixture.entries.set('duplicate', { uid:'duplicate', card:first });
   fixture.entries.set('second', { uid:'second', card:second });
   fixture.snapshot = {
-    battleToken:1, opts:{ isBoss:true }, turn:1, energy:2, maxEnergy:2,
+    battleToken:1, mode:'boss', opts:{ isBoss:true }, turn:1, energy:2, maxEnergy:2,
     drawPile:['first', 'duplicate', 'second'], grave:['first', 'duplicate', 'second'],
   };
 });
