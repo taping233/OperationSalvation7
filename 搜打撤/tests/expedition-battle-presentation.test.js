@@ -105,3 +105,17 @@ it('transfers the complete carried group while preserving existing safe and stor
   expect(carried.every(entry => entry.safe)).toBe(true); expect(safe.safe).toBe(true); expect(stored.safe).toBe(false);
   expect(game.safeUsed()).toBe(3); expect(UI.el.ovBody.querySelector('[data-act="btSafeMove"]')).toBeNull();
 });
+
+it.each(['reopen','hidden','inert','closing','other-page'])('does not move or save cards through an obsolete bag action: %s', state => {
+  let saves=0; game.saveGame=()=>{saves++;};
+  renderBattleBag(BattleSession.getSnapshot());
+  const button=UI.el.ovBody.querySelector('[data-act="btSafeMove"]'), data={...button.dataset};
+  const oldMove=actions.get('btSafeMove');
+  if(state==='reopen')renderBattleBag(BattleSession.getSnapshot());
+  if(state==='other-page')UI.showOverlay('宝箱','<button>领取</button>');
+  if(state==='hidden')UI.el.overlay.hidden=true;
+  if(state==='inert')UI.el.overlay.setAttribute('inert','');
+  if(state==='closing')UI.el.overlay.classList.add('closing');
+  oldMove(data);
+  expect(game.ownedCards.some(entry=>entry.safe)).toBe(false);expect(saves).toBe(0);
+});

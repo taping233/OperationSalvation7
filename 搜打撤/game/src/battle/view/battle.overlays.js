@@ -80,11 +80,11 @@ function installPileInspection(stacks) {
         <button class="ov-btn ok" data-act="bossGo" ${ready ? '' : 'disabled'}>${ready ? `[[icon:swords]] 开始战斗（牌库 ${selected.length + deckSelection.starterCount} 张）` : `还需选择 ${need - selected.length} 张…`}</button>
         <button class="ov-btn" data-act="bossCancel">↩ 放弃挑战</button>
       </div>`, true, snapshot);
-    UI.act('bossSel', data => selectDeckCard(data.uid));
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'bossSel', data => selectDeckCard(data.uid));
     const formation = UI.el.ovBody.querySelector('[data-decision-kind="formation"]');
     if (formation) formation._formationPoolKey = poolKey;
-    UI.act('bossGo', confirmDeck);
-    UI.act('bossCancel', cancelDeck);
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'bossGo', confirmDeck);
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'bossCancel', cancelDeck);
     UI.refresh(SDT.game);
   }
 
@@ -162,13 +162,14 @@ function installPileInspection(stacks) {
       <div class="bag-grid battle-bag-grid">${safeHTML}</div></section>
       <div class="ov-btns"><button class="ov-btn ok" data-act="btBagBack">↩ 返回战斗（B）</button></div>`, true, snapshot);
     (() => { const card = document.querySelector('#overlay .card'); if (card) card.classList.add('battle-bag'); })();
-    UI.act('btUseItem', (d) => useItemCmd(d.uid));
-    UI.act('btInspectBag', data => {
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btUseItem', (d) => useItemCmd(d.uid));
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btInspectBag', data => {
       const stack = inspectCards[+data.i];
       const detail = UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="bag"] .battle-decision-inspect');
       if (stack && detail) detail.outerHTML = pileDetailHTML({ card:stack.card, count:stack.uids.length });
     });
-    UI.act('btSafeMove', (d) => {
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btSafeMove', (d) => {
+      if (!safeStacks.some(stack => stack.key === d.cardKey)) return;
       const g = SDT.game;
       const group = (g.ownedCards || []).filter(o => o.card && !o.safe && !o.stored && cardIdentityKey(o.card) === d.cardKey);
       if (!group.length) return;
@@ -180,7 +181,7 @@ function installPileInspection(stacks) {
       if (g.saveGame) g.saveGame();
       renderBattleBag(getSnapshot());
     });
-    UI.act('btBagBack', closeBagCmd);
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btBagBack', closeBagCmd);
     UI.refresh(SDT.game);
   }
 

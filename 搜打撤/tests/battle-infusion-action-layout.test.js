@@ -350,6 +350,31 @@ describe('visible forecast uncertainty', () => {
     expect(snapshot()).toEqual(before);
   });
 
+  it('does not let an old lethal confirmation end the turn after returning to play', () => {
+    start(); game.hp=1; render(); actions.get('btEnd')();
+    const oldContinue=actions.get('btRiskContinue'); actions.get('btRiskBack')();
+    const before=snapshot(); oldContinue(); flush();
+    expect(snapshot().turn).toBe(before.turn); expect(snapshot().phase).toBe(before.phase);
+    expect(snapshot().busy).toBe(false); expect(game.hp).toBe(1);
+  });
+  it('ignores detached settings inputs after returning to the battlefield', () => {
+    start(); const mute=vi.fn();window.SDT.Sound.setMusicMuted=mute;
+    actions.get('btSettings')();const input=document.getElementById('btSetMusic');
+    actions.get('btSettingsBack')();input.checked=false;input.dispatchEvent(new Event('change',{bubbles:true}));
+    expect(mute).not.toHaveBeenCalled();
+    actions.get('btSettings')();const current=document.getElementById('btSetMusic');
+    current.checked=false;current.dispatchEvent(new Event('change',{bubbles:true}));expect(mute).toHaveBeenCalledWith(true);
+  });
+  it('keeps old settings and rules returns from dismissing newer secondary pages', () => {
+    start(); actions.get('btSettings')();
+    const oldSettingsBack=actions.get('btSettingsBack'); oldSettingsBack();
+    actions.get('btBossRules')(); const rules=UI.el.ovBody.querySelector('.battle-decision');
+    oldSettingsBack(); expect(UI.el.ovBody.querySelector('.battle-decision')).toBe(rules);
+    const oldRulesBack=actions.get('btRulesBack');oldRulesBack();
+    BattleSession.commands.beginInfusion('infusion');flush();
+    const infusion=bar();oldRulesBack();expect(bar()).toBe(infusion);expect(snapshot().infusing.uid).toBe('infusion');
+  });
+
   it('keeps possible-death language and the same estimate in the confirmation dialog', () => {
     start(); game.hp = 1; render();
     const expected = forecastEnemyTurn(snapshot()); expect(expected.lethal).toBe(true);

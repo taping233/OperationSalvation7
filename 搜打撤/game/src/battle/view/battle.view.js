@@ -599,23 +599,23 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       else selectCardByClick(d.uid, false, { autoSingleTarget: false });
     };
     UI.act('btPlay', playHandCard);
-    UI.act('btEnd', () => {
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btEnd', () => {
       const current = getSnapshot(), forecast = forecastEnemyTurn(current);
       if (!forecast.lethal) { endTurn(); return; }
       showBattleDecision('回合结束可能致死', `<p class="ov-stats">当前 ${current.player.hp} 生命；估算承伤 ${forecast.damage}。</p><p class="ov-note">${forecast.note}</p><div class="ov-btns"><button class="ov-btn" data-act="btRiskBack">返回操作</button><button class="ov-btn" data-act="btRiskContinue">仍然结束回合</button></div>`, 'settings', current);
-      UI.act('btRiskBack', () => render());
-      UI.act('btRiskContinue', () => {
+      bindBattlePageAction({ UI, getSnapshot, snapshot:current }, 'btRiskBack', () => render());
+      bindBattlePageAction({ UI, getSnapshot, snapshot:current }, 'btRiskContinue', () => {
         if (getSnapshot().battleToken !== current.battleToken) return;
         render(); endTurn();
       });
-    });
-    UI.act('btBossRules', () => {
+    }, '.battle-stage');
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btBossRules', () => {
       showBattleDecision('首脑战 · 循环牌库', `<p class="ov-stats">地图首脑开战前可整理牌库，选择 ${R().bossDeckSize} 张招式、装备或能力卡；不足时全部编入，可沿用上次有效编组。</p><p class="ov-note">另加入 ${R().starterSha} 张初始攻击，缺少的初始攻击为本场临时牌。开局抽 ${R().battleStartDraw} 张，之后每回合抽 ${R().battleTurnDraw} 张，手牌上限 ${R().battleHandMax}。打出的牌进入弃牌，牌库空时洗回；注能等消耗牌进入本场消耗牌堆，不洗回。开战装备计入编组，混沌之眼增加5张上限。普通战直接使用随身可用牌，抽牌改为临时初始攻击。</p><div class="ov-btns"><button class="ov-btn" data-act="btRulesBack">返回战斗</button></div>`, 'settings', getSnapshot());
-      UI.act('btRulesBack', () => render());
-    });
+      bindBattlePageAction({ UI, getSnapshot, snapshot:getSnapshot() }, 'btRulesBack', () => render());
+    }, '.battle-stage');
     // 战斗设置（2026-09-13 留言：战斗界面保留设置键）——轻量浮层，不动 game.state，
     // 关闭直接重渲染战斗（openSettings 全功能版会清 overlay 导致战斗界面丢失）
-    UI.act('btSettings', () => {
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btSettings', () => {
       showBattleDecision('[[icon:gear]] 战斗设置', `
         <div class="bt-settings">
           <label class="chk"><input type="checkbox" id="btSetMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}> 背景音乐</label>
@@ -627,14 +627,18 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         </div>`, true);
       // 迭代评审 09-20：删除无参 setDucked()——它被 setDucked 内部 !!v 强转成 false，
       // 战斗中关音乐会静默解除侧链压低；setMusicMuted 内部已走 syncBgm，无需额外调用
+      const settingsPage = UI.el.ovBody.querySelector('.battle-decision');
+      const onSetting = handler => event => {
+        if (isInteractiveBattlePage(UI, settingsPage) && getSnapshot().battleToken === snapshot.battleToken) handler(event);
+      };
       const syncMusic = (on) => { SDT.Sound.setMusicMuted(!on); };
-      document.getElementById('btSetMusic').addEventListener('change', (e) => syncMusic(e.target.checked));
-      document.getElementById('btSetSfx').addEventListener('change', (e) => { SDT.Sound.setSfxMuted(!e.target.checked); });
-      document.getElementById('btSetShake').addEventListener('change', (e) => { storeSet('sdt-reduce-shake', e.target.checked ? '0' : '1'); });
+      document.getElementById('btSetMusic').addEventListener('change', onSetting((e) => syncMusic(e.target.checked)));
+      document.getElementById('btSetSfx').addEventListener('change', onSetting((e) => { SDT.Sound.setSfxMuted(!e.target.checked); }));
+      document.getElementById('btSetShake').addEventListener('change', onSetting((e) => { storeSet('sdt-reduce-shake', e.target.checked ? '0' : '1'); }));
       // 2× 演示倍率（迭代评审 09-20）：单一倍率同步缩放步进/序列帧/前摇/飘字四处时长（battle.pace.js）
-      document.getElementById('btSetPace').addEventListener('change', (e) => { setPace(e.target.checked ? 2 : 1); });
-      UI.act('btSettingsBack', () => render());
-    });
+      document.getElementById('btSetPace').addEventListener('change', onSetting((e) => { setPace(e.target.checked ? 2 : 1); }));
+      bindBattlePageAction({ UI, getSnapshot, snapshot:getSnapshot() }, 'btSettingsBack', () => render());
+    }, '.battle-stage');
     // U4（2026-09-19 走查）：BOSS 态两钮不再 disabled——点了给 log+音效说明原因，
     // 不再让玩家对着灰按钮悬停猜（dis 类保留禁用观感，但可接收点击）。
     UI.act('btFlee', () => {

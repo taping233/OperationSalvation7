@@ -1,0 +1,114 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ❯ tests/expedition-battle-presentation.test.js (12 tests | 5 failed) 237ms
+   ✓ highlights targets without reviving the retired secondary caption and clears access on cancel 30ms
+   ✓ keeps the canonical full rule when inspecting the deck surface 24ms
+   ✓ keeps the canonical full rule when inspecting the bag surface 17ms
+   ✓ stores only the visible carried group when stored cards share the same id 20ms
+   ✓ keeps all cards unchanged when the carried group does not fit in the safe capacity 19ms
+   ✓ does not expose a purely stored group or mutate it through a stale safe-move action 13ms
+   ✓ transfers the complete carried group while preserving existing safe and stored entries 16ms
+   × does not move or save cards through an obsolete bag action: reopen 33ms
+     → expected true to be false // Object.is equality
+   × does not move or save cards through an obsolete bag action: hidden 14ms
+     → expected true to be false // Object.is equality
+   × does not move or save cards through an obsolete bag action: inert 15ms
+     → expected true to be false // Object.is equality
+   × does not move or save cards through an obsolete bag action: closing 17ms
+     → expected true to be false // Object.is equality
+   × does not move or save cards through an obsolete bag action: other-page 17ms
+     → expected true to be false // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/expedition-battle-presentation.test.js > does not move or save cards through an obsolete bag action: reopen
+ FAIL  tests/expedition-battle-presentation.test.js > does not move or save cards through an obsolete bag action: hidden
+ FAIL  tests/expedition-battle-presentation.test.js > does not move or save cards through an obsolete bag action: inert
+ FAIL  tests/expedition-battle-presentation.test.js > does not move or save cards through an obsolete bag action: closing
+ FAIL  tests/expedition-battle-presentation.test.js > does not move or save cards through an obsolete bag action: other-page
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/expedition-battle-presentation.test.js:120:51
+    118|   if(state==='closing')UI.el.overlay.classList.add('closing');
+    119|   oldMove(data);
+    120|   expect(game.ownedCards.some(entry=>entry.safe)).toBe(false);expect(s…
+       |                                                   ^
+    121| });
+    122| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 7 passed (12)
+   Start at  16:17:03
+   Duration  1.90s (transform 537ms, setup 0ms, collect 1.03s, tests 237ms, environment 364ms, prepare 71ms)
+
+
+=== AFTER ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ✓ tests/architecture-boundaries.test.js (24 tests) 685ms
+   ✓ 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向  655ms
+ ✓ tests/contracts.test.js (17 tests) 759ms
+   ✓ ESM 依赖方向 > src 模块不存在循环依赖  709ms
+ ✓ tests/battle-decision-lifecycle.test.js (9 tests) 170ms
+ ✓ tests/runtime-asset-redundancy.test.js (23 tests) 2870ms
+   ✓ reviewed production-only asset omissions > contains 56 previous paths, 90 retired chest frames, 19 retired scenes and 30 shadowed card files  1486ms
+   ✓ reviewed production-only asset omissions > omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs  1176ms
+ ✓ tests/expedition-battle-presentation.test.js (12 tests) 157ms
+ ✓ tests/battle-infusion-action-layout.test.js (37 tests) 1903ms
+ ✓ tests/battle-secondary-overlay.test.js (14 tests) 134ms
+ ✓ tests/battle-decision-shell-review.test.js (9 tests) 66ms
+
+ Test Files  8 passed (8)
+      Tests  145 passed (145)
+   Start at  16:18:17
+   Duration  5.34s (transform 1.27s, setup 0ms, collect 3.34s, tests 6.74s, environment 2.74s, prepare 647ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 check:syntax
+> node scripts/check-syntax.mjs
+
+Syntax check passed (497 project files).
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 typecheck
+> node scripts/check-types.mjs
+
+Type-checking jsconfig.json
+Type-checking jsconfig.battle-settlement.json
+Type-checking jsconfig.battle-snapshot.json
+Type-checking jsconfig.card-rules.json
+Type-checking jsconfig.strict-foundations.json
+Type-checking jsconfig.strict-selection.json
+Type-checking jsconfig.strict-hand-selection.json
+Type-checking jsconfig.strict-ui.json
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> codename7-soudache-game@0.60.0 lint
+> eslint game/src game/tools tests scripts "*config.{js,mjs,cjs}"
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
