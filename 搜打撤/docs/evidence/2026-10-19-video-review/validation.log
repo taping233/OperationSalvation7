@@ -1,0 +1,36 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+·······················································································
+
+ Test Files  4 passed (4)
+      Tests  87 passed (87)
+   Start at  17:58:50
+   Duration  7.54s (transform 116ms, setup 0ms, collect 448ms, tests 8.10s, environment 969ms, prepare 240ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+=== after restoring exact baseline docs fixture ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+··················································
+
+ Test Files  2 passed (2)
+      Tests  50 passed (50)
+   Start at  17:59:33
+   Duration  10.34s (transform 116ms, setup 0ms, collect 315ms, tests 10.96s, environment 0ms, prepare 117ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
