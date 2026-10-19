@@ -54,3 +54,20 @@ it('旧详情动作在换页、隐藏或换战斗后无效',()=>{
   const hidden=open();UI.el.overlay.hidden=true;hidden({i:'0'});expect(document.querySelector('#cardZoom')).toBeNull();
   const stale=open();snapshot={...snapshot,battleToken:100};stale({i:'0'});expect(document.querySelector('#cardZoom')).toBeNull();
 });
+
+it.each(['closing', 'inert', 'aria-hidden'])('rejects detail actions on a noninteractive page: %s', state => {
+  show('选牌',battleHandSelectBodyHTML({pool:[{uid:'a',card}],handSelecting:{n:1,act:'copy',mandatory:false},cardHTML:face}),'discover',snapshot);
+  bindBattleDecisionInspection({UI,getSnapshot:()=>snapshot,cards:[card],snapshot});
+  if(state==='closing')UI.el.overlay.classList.add('closing');else UI.el.overlay.setAttribute(state,state==='inert'?'':'true');
+  UI._acts.btDecisionInspect({i:'0'});expect(document.querySelector('#cardZoom')).toBeNull();
+});
+it('returns secondary page focus to the original battlefield opener', async () => {
+  const {restoreCombatScene}=await import('../game/src/battle/view/battle.secondary-overlay.js');
+  UI.showOverlay('', '<div class="battle-stage"><button id="pileOpener">消耗牌堆</button></div>', 'battle');
+  const scene=document.querySelector('.battle-stage');scene._battleToken=snapshot.battleToken;
+  const opener=document.querySelector('#pileOpener');opener.focus();
+  show('消耗牌堆',battlePileBodyHTML({cards:[{uid:'a',card}],cardHTML:face,kind:'grave',isBoss:false}).html,true,snapshot);
+  expect(scene.hasAttribute('inert')).toBe(true);
+  expect(restoreCombatScene(UI,snapshot.battleToken)).toBe(true);
+  expect(document.activeElement).toBe(opener);expect(scene.hasAttribute('inert')).toBe(false);
+});

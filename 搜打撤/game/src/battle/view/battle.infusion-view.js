@@ -4,6 +4,7 @@ import { displayCardDescription } from '../../cards/card-description-text.js';
 import { descRich } from '../../cards/cards.view.js';
 import { groupHandCards, orderHandGroups } from '../core/battle.hand.js';
 
+import { isInteractiveBattlePage } from './battle.page-activity.js';
 import { cancelSelection } from './battle.selection-ui.js';
 import { requiresInfusion } from '../effects/battle.infusion.js';
 
@@ -25,16 +26,16 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
   const same = previous?._battleToken === snapshot.battleToken && previous?._sourceUid === infusion.uid;
   const scroll = same ? previous.querySelector('.infusion-materials')?.scrollTop || 0 : 0;
   const sourceExpanded = same && previous.querySelector('.infusion-source-details')?.open;
-  const focused = same && previous.contains(document.activeElement) ? { ...document.activeElement.dataset } : null;
+  const focused = same && previous.contains(document.activeElement) ? { ...document.activeElement.dataset, summary:document.activeElement.tagName === 'SUMMARY' } : null;
   const materialHTML = groups.map((group, i) => {
     const selected = group.uids.filter(uid => picked.includes(uid));
     const available = group.uids.filter(uid => !picked.includes(uid) && !infusionFuelReason(uid));
     const reason = available.length || selected.length ? '' : infusionFuelReason(group.uids[0]);
     const canAdd = available.length > 0 && remaining > 0;
     return `<article class="infusion-material${selected.length ? ' is-selected' : ''}${reason ? ' is-unavailable' : ''}">
-      <div class="infusion-material-heading"><b>${i < 9 ? `<small class="infusion-key">${i + 1}</small> ` : ''}${esc(group.card.name)}</b><button class="infusion-detail" data-act="btInfuseInspect" data-i="${i}">详情</button></div>
-      <div class="infusion-quantity"><button data-act="btInfuseRemove" data-i="${i}" aria-label="减少一张${escAttr(group.card.name)}" ${selected.length ? '' : 'disabled'}>−</button><span><b>${selected.length}</b> / ${group.uids.length}<small>已选 / 持有</small></span><button data-act="btInfuseAdd" data-i="${i}" aria-label="增加一张${escAttr(group.card.name)}" ${canAdd ? '' : 'disabled'}>＋</button></div>
-      <button class="infusion-card-face" aria-pressed="${selected.length > 0}" data-act="btInfuseAdd" data-i="${i}" aria-label="选择一张${escAttr(group.card.name)}作为材料" ${canAdd ? '' : 'disabled'}>${cardHTML(group.card, 'sm')}</button>
+      <div class="infusion-material-heading"><b>${i < 9 ? `<small class="infusion-key">${i + 1}</small> ` : ''}${esc(group.card.name)}</b><button class="infusion-detail" data-act="btInfuseInspect" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}">详情</button></div>
+      <div class="infusion-quantity"><button data-act="btInfuseRemove" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="减少一张${escAttr(group.card.name)}" ${selected.length ? '' : 'disabled'}>−</button><span><b>${selected.length}</b> / ${group.uids.length}<small>已选 / 持有</small></span><button data-act="btInfuseAdd" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="增加一张${escAttr(group.card.name)}" ${canAdd ? '' : 'disabled'}>＋</button></div>
+      <button class="infusion-card-face" aria-pressed="${selected.length > 0}" data-act="btInfuseAdd" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="选择一张${escAttr(group.card.name)}作为材料" ${canAdd ? '' : 'disabled'}>${cardHTML(group.card, 'sm')}</button>
       ${reason ? `<p class="infusion-material-note">${esc(reason)}</p>` : ''}
     </article>`;
   }).join('');
@@ -55,11 +56,18 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
   if (!workspace) return;
   workspace._battleToken = snapshot.battleToken; workspace._sourceUid = infusion.uid;
   workspace.querySelector('.infusion-materials').scrollTop = scroll;
-  if (focused) [...page.querySelectorAll('button')].find(button => button.dataset.act === focused.act && button.dataset.i === focused.i)?.focus({ preventScroll:true });
+  if (focused?.summary) workspace.querySelector('.infusion-source-details summary')?.focus({ preventScroll:true });
+  else if (focused) {
+    const available = [...page.querySelectorAll('button:not(:disabled)')];
+    const sameGroup = button => button.dataset.groupUid === focused.groupUid;
+    const exact = available.find(button => button.dataset.act === focused.act && sameGroup(button));
+    const fallback = focused.groupUid && available.find(button => sameGroup(button) && button.dataset.act === 'btInfuseInspect');
+    (exact || fallback || page.querySelector('[data-act="btInfuseCancel"]'))?.focus({ preventScroll:true });
+  }
   // A snapshot checks all current values; share it only within this synchronous
   // input. Later inputs must see in-place state changes before the next render.
   const current = () => {
-    if (!page.isConnected || UI.el.overlay.hidden || UI.el.ovBody.querySelector('.battle-decision') !== page
+    if (!isInteractiveBattlePage(UI, page) || UI.el.ovBody.querySelector('.battle-decision') !== page
       || document.getElementById('cardZoom')) return null;
     const now = getSnapshot();
     return now.battleToken === snapshot.battleToken && now.infusing?.uid === infusion.uid
@@ -87,8 +95,8 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
   UI.act('btInfuseDirect', () => { if (current() && !required) commands.playDirect(infusion.uid); });
   UI.act('btInfuseGo', () => { const now = current(); if (now && now.infusing.picked.length === now.infusing.need) commands.confirmInfusion(); });
   const onKey = event => {
-    if (event.isComposing || event.keyCode === 229 || event.defaultPrevented) return;
-    const materialKey = /^[1-9]$/.test(event.key) && !/INPUT|TEXTAREA|SELECT/.test(event.target?.tagName || '') && !event.shiftKey;
+    if (event.isComposing || event.keyCode === 229 || event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
+    const materialKey = /^[1-9]$/.test(event.key) && !/INPUT|TEXTAREA|SELECT/.test(event.target?.tagName || '') && !event.target?.closest?.('[contenteditable="true"]') && !event.shiftKey;
     if (event.key !== 'Escape' && !materialKey) return;
     const now = current();
     if (!now) return;

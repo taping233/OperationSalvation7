@@ -71,4 +71,21 @@ describe('公共帮助返回生命周期，真实商店消费者（jsdom合成�
     restoreOverlayReturnState(root,snapshot);
     expect([...root.children].every(element => element.scrollTop === 0)).toBe(true);
   });
+  it('帮助往返保留展开/收起状态，重排也不改变其他说明', () => {
+    const render = () => UI.showOverlay('收纳说明', '<details id="closed" open><summary>原先收起</summary></details><details id="opened"><summary>原先展开</summary></details>'+UI.helpBtn('disclosures'));
+    render(); UI.el.ovBody.querySelector('#closed').open=false; UI.el.ovBody.querySelector('#opened').open=true;
+    UI.registerHelp('disclosures',{title:'帮助',html:'说明',back:render});
+    UI.showHelp('disclosures'); UI._acts.helpBack(); flush();
+    expect(UI.el.ovBody.querySelector('#closed').open).toBe(false);
+    expect(UI.el.ovBody.querySelector('#opened').open).toBe(true);
+    expect(document.activeElement.dataset.page).toBe('disclosures');
+  });
+  it.each(['disabled', 'inert', 'hidden', 'aria-hidden'])('返回时原焦点目标变为%s，保留当前安全焦点', state => {
+    const root=UI.el.ovBody; root.innerHTML='<button id="source">原操作</button><button id="safe">返回</button>';
+    const snapshot=captureOverlayReturnState(root,root.querySelector('#source'));
+    root.querySelector('#source').setAttribute(state,state==='aria-hidden'?'true':'');
+    root.querySelector('#safe').focus(); restoreOverlayReturnState(root,snapshot);
+    expect(document.activeElement.id).toBe('safe');
+  });
+
 });

@@ -1,3 +1,4 @@
+import { bindBattlePageAction } from './battle.page-activity.js';
 import '../../../css/battle-decision.css';
 import { mountCombatOverlay, restoreCombatScene } from './battle.secondary-overlay.js';
 export { restoreCombatScene };
@@ -31,8 +32,8 @@ return function showBattleDecision(title, body, mode, snapshot = getSnapshot()) 
   if (next && localRefresh) {
     next.querySelector('.battle-decision-content').scrollTop = scrollTop;
     if (focused) {
-      const buttons = [...next.querySelectorAll('button[data-act]')];
-      (buttons.find(button => button.dataset.act === focused.act && button.dataset.uid === focused.uid && button.dataset.i === focused.i) || buttons[0])?.focus({ preventScroll:true });
+      const buttons = [...next.querySelectorAll('button[data-act]:not(:disabled)')];
+      (buttons.find(button => button.dataset.act === focused.act && button.dataset.uid === focused.uid && button.dataset.i === focused.i) || buttons.find(button => /Cancel|Back/.test(button.dataset.act)) || buttons[0])?.focus({ preventScroll:true });
     }
   }
 };
@@ -41,8 +42,7 @@ return function showBattleDecision(title, body, mode, snapshot = getSnapshot()) 
 // Read-only details preserve the parent DOM, scroll and the exact triggering control.
 export function bindBattleDecisionInspection({ UI, getSnapshot, cards, snapshot }) {
   const root = UI.el?.ovBody?.querySelector('.battle-decision');
-  UI.act('btDecisionInspect', data => {
-    if (!root?.isConnected || UI.el?.overlay?.hidden || UI.el?.ovBody?.querySelector('.battle-decision') !== root || getSnapshot()?.battleToken !== snapshot.battleToken) return;
+  bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btDecisionInspect', data => {
     const card = cards[+data.i];
     if (card) UI.showCardZoom(card, { returnFocus:root.querySelector(`[data-act="btDecisionInspect"][data-i="${+data.i}"]`) });
   });

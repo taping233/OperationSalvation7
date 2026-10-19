@@ -41,7 +41,7 @@ it('updates one shared strip without replacing an unchanged focused control',()=
   current={snapshot:{...base(),pendingItem:{uid:'p',card:{name:'药水'}}},clickUid:null};const cancel=sync();
   expect(stage.querySelectorAll('[data-selection-prompt]')).toHaveLength(1);expect(stage.textContent).toContain('点击一名敌人');stage.querySelector('button').click();expect(cancel).toHaveBeenCalledTimes(1);
 });
-it.each(['battle','uid','step','hidden','inert','detached','busy'])('rejects stale cancellation after %s changes',change=>{
+it.each(['battle','uid','step','hidden','inert','detached','busy','closing','aria-hidden'])('rejects stale cancellation after %s changes',change=>{
   current.snapshot.pendingTarget={uid:'a',card:{name:'牌'},excludedTargetIndex:0};const cancel=sync();const button=stage.querySelector('button');
   if(change==='battle')current.snapshot.battleToken='two';
   if(change==='uid')current.snapshot.pendingTarget.uid='b';
@@ -49,6 +49,8 @@ it.each(['battle','uid','step','hidden','inert','detached','busy'])('rejects sta
   if(change==='hidden')document.getElementById('overlay').hidden=true;
   if(change==='inert')stage.setAttribute('inert','');
   if(change==='detached')stage.remove();
+  if(change==='closing')document.getElementById('overlay').classList.add('closing');
+  if(change==='aria-hidden')stage.setAttribute('aria-hidden','true');
   if(change==='busy')current.snapshot.busy=true;
   button.click();expect(cancel).not.toHaveBeenCalled();
 });

@@ -18,8 +18,9 @@ function resolve(root, key) {
 
 /** Capture live scroll and a stable focus key before replacing a temporary page. */
 export function captureOverlayReturnState(root, focusTarget) {
-  if (!root) return { scroll: [], focus: null };
+  if (!root) return { scroll: [], disclosures: [], focus: null };
   return {
+    disclosures: [...root.querySelectorAll('details')].map(element => ({ key:identity(element), open:element.open })),
     scroll: [root, ...root.querySelectorAll('*')]
       .filter(element => element.scrollTop || element.scrollLeft)
       .map(element => ({ key: identity(element), top: element.scrollTop, left: element.scrollLeft })),
@@ -28,11 +29,19 @@ export function captureOverlayReturnState(root, focusTarget) {
 }
 
 export function restoreOverlayReturnState(root, snapshot) {
+  // Expand before restoring scroll so layout changes do not displace the saved position.
+  for (const saved of snapshot.disclosures || []) {
+    const element = resolve(root, saved.key);
+    if (element) element.open = saved.open;
+  }
   for (const saved of snapshot.scroll) {
     const element = resolve(root, saved.key);
     if (element) { element.scrollTop = saved.top; element.scrollLeft = saved.left; }
   }
-  resolve(root, snapshot.focus)?.focus({ preventScroll: true });
+  const target = resolve(root, snapshot.focus);
+  if (target && !target.matches(':disabled') && !target.closest('[hidden], [aria-hidden="true"], [inert]')) {
+    target.focus({ preventScroll: true });
+  }
 }
 
 /** Return once, only from the temporary page that created this action.

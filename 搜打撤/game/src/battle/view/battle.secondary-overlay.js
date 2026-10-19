@@ -4,6 +4,7 @@ import '../../../css/battle-secondary-overlay.css';
 // Keep the live battlefield, including its hand/unit/scenery mounts. The
 // transparent input shield belongs to the secondary page, never the engine.
 export function mountCombatOverlay(UI, title, html, mode, scene) {
+  if (scene.contains(document.activeElement)) scene._secondaryReturnFocus = document.activeElement;
   scene.remove();
   UI.showOverlay(title, `<div class="battle-secondary-layer">${html}</div>`, mode);
   scene.setAttribute('inert', '');
@@ -29,6 +30,9 @@ export function restoreCombatScene(UI, token) {
   scene.removeAttribute('inert');
   scene.removeAttribute('aria-hidden');
   UI.el.ovBody.append(scene);
+  const target = scene._secondaryReturnFocus;
+  delete scene._secondaryReturnFocus;
+  if (target?.isConnected && scene.contains(target) && !target.matches(':disabled') && !target.closest('[hidden], [inert], [aria-hidden="true"]')) target.focus({ preventScroll:true });
   UI._hasBattleStage = true;
   return true;
 }

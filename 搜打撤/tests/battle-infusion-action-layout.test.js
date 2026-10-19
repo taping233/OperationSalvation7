@@ -92,6 +92,51 @@ describe('shared infusion action bar', () => {
     expect(snapshot().hand).toContain('infusion');
   });
 
+  it('does not consume browser shortcuts or editable text as material selection', () => {
+    start(); BattleSession.commands.beginInfusion('infusion'); flush();
+    for (const modifier of ['ctrlKey', 'metaKey', 'altKey']) {
+      document.dispatchEvent(new KeyboardEvent('keydown', {key:'1', [modifier]:true, bubbles:true})); flush();
+      expect(snapshot().infusing.picked).toEqual([]);
+    }
+    const editor = document.createElement('div'); editor.contentEditable = 'true'; editor.setAttribute('contenteditable','true');
+    bar().append(editor); editor.dispatchEvent(new KeyboardEvent('keydown', {key:'1', bubbles:true})); flush();
+    expect(snapshot().infusing.picked).toEqual([]);
+    document.dispatchEvent(new KeyboardEvent('keydown', {key:'1', bubbles:true})); flush();
+    expect(snapshot().infusing.picked).toHaveLength(1);
+  });
+
+  it('keeps a usable material focus when adding the last copy disables its button', () => {
+    start(); BattleSession.commands.beginInfusion('infusion'); flush();
+    for (let i = 0; i < 2; i++) {
+      const add = bar().querySelector('.infusion-quantity [data-act="btInfuseAdd"]'); add.focus(); add.click(); flush();
+    }
+    expect(snapshot().infusing.picked).toHaveLength(2);
+    expect(document.activeElement.dataset.act).toBe('btInfuseInspect');
+    expect(document.activeElement.matches(':disabled')).toBe(false);
+    expect(snapshot().energy).toBe(9);
+  });
+
+  it('rejects covered battle actions and closing infusion actions without changing resources', () => {
+    start(); const oldGrave = actions.get('btGrave');
+    BattleSession.commands.beginInfusion('infusion'); flush();
+    oldGrave(); flush(); expect(snapshot().graveOpen).not.toBe(true); expect(bar()).not.toBeNull();
+    UI.el.overlay.classList.add('closing'); actions.get('btInfuseAdd')({i:'0'}); actions.get('btInfuseCancel')(); flush();
+    expect(snapshot().infusing.picked).toEqual([]); expect(snapshot().energy).toBe(9);
+    UI.el.overlay.classList.remove('closing'); actions.get('btInfuseCancel')(); flush();
+    expect(snapshot().infusing).toBeFalsy();
+    BattleSession.commands.beginInfusion('infusion'); flush(); expect(snapshot().infusing.picked).toEqual([]);
+  });
+
+  it('invalidates pile callbacks after returning and reopening the same pile', () => {
+    start(); actions.get('btGrave')(); flush();
+    const oldBack = actions.get('btGraveBack'), oldInspect = actions.get('btInspectPile');
+    oldBack(); flush(); actions.get('btGrave')(); flush();
+    const page = UI.el.ovBody.querySelector('.battle-decision');
+    oldBack(); oldInspect({i:'0'}); flush();
+    expect(UI.el.ovBody.querySelector('.battle-decision')).toBe(page);
+    actions.get('btGraveBack')(); flush(); expect(UI.el.ovBody.querySelector('.battle-decision')).toBeNull();
+  });
+
   it('disables direct play for a required infusion card, retaining selection and resources', () => {
     start({ cardId: 'tt12-raydragon', name: '龙焰射线' });
     BattleSession.commands.beginInfusion('infusion'); flush();

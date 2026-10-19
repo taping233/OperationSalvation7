@@ -2,6 +2,7 @@
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 
+import { bindBattlePageAction, isInteractiveBattlePage } from './battle.page-activity.js';
 import { sdtDefine } from '../../core/sdt-facade.js';
 import { rect as uiRect } from '../../ui/ui-scale.js';
 import { esc, escAttr } from '../../core/shared.js';
@@ -370,7 +371,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     if (choosing) {
       // 2026-09-08 抉择面板：人工 N 选一（复用发现面板的弹层交互）
       showBattleDecision('[[icon:question]] 抉择', battleChoiceBodyHTML(choosing), 'discover', snapshot);
-      UI.act('btChoicePick', (d) => pickChoice(d.i));
+      bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btChoicePick', (d) => pickChoice(d.i));
       UI.refresh(SDT.game);
       return;
     }
@@ -393,8 +394,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       const paymentLabel = isPayment ? `支付代价${paymentName ? `：${esc(paymentName)}` : ''}` : '选择手牌';
       showBattleDecision(`[[icon:cards]] ${paymentLabel}`, battleHandSelectBodyHTML({ pool, handSelecting, cardHTML:(card,size) => SDT.Cards.cardHTML(card,size) }), 'discover', snapshot);
       bindBattleDecisionInspection({ UI, getSnapshot, cards:pool.map(entry => entry.card), snapshot });
-      UI.act('btPickHand', (d) => pickHandSelect(d.uid));
-      if (!handSelecting.mandatory) UI.act('btPickHandSkip', () => skipHandSelect());
+      bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btPickHand', (d) => pickHandSelect(d.uid));
+      if (!handSelecting.mandatory) bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btPickHandSkip', () => skipHandSelect());
       UI.refresh(SDT.game);
       return;
     }
@@ -436,7 +437,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       const page = UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="discover"]');
       const panel = page?.querySelector('[data-battle-discover]');
       const buttons = [...(page?.querySelectorAll('[data-act="btDiscover"]') || [])];
-      const isCurrentPage = () => inputTicket.isCurrent() && !!page?.isConnected && !UI.el?.overlay?.hidden
+      const isCurrentPage = () => inputTicket.isCurrent() && isInteractiveBattlePage(UI, page)
         && UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="discover"]') === page
         && panel?.getAttribute('data-discover-page') === inputTicket.pageToken;
       const progress = page?.querySelector('.battle-discover-progress');
@@ -667,8 +668,8 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
         }
       }, 2600);
     });
-    UI.act('btGrave', openGrave);
-    UI.act('btDeck', openDeckView);
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btGrave', openGrave, '.battle-stage');
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btDeck', openDeckView, '.battle-stage');
     UI.act('btDeckBack', closeDeckView);
     UI.act('btSlam', () => {
       if (Date.now() - aimPlayedAt < 300) return;   // 拖拽松手刚砸完，忽略残留 click（同药水栏口径）

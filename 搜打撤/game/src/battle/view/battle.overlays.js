@@ -1,3 +1,4 @@
+import { bindBattlePageAction } from './battle.page-activity.js';
 import { BATTLE_CONSUMED_LABEL, consumedPileUids } from './battle.piles.view.js';
 /* 由 battle.view.js 拆出（2026-09-22 六文件重构批5）：独立弹层渲染（renderDeckSelection / renderGrave / renderBattleBag + 卡身份键）。
  * 逐字搬迁；本片不 import 壳（壳→片单向）；viewApi 反取已改 battle.core 具名直引。 */
@@ -20,10 +21,10 @@ const showBattleDecision = createBattleDecisionPresenter({ UI, getSnapshot, R })
 
 
 function installPileInspection(stacks) {
-  UI.act('btInspectPile', data => {
+  const root = UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="pile"]');
+  bindBattlePageAction({ UI, getSnapshot, snapshot:getSnapshot() }, 'btInspectPile', data => {
     const index = +data.i;
     const stack = stacks[index];
-    const root = UI.el?.ovBody?.querySelector('.battle-decision[data-decision-kind="pile"]');
     if (!stack || !root) return;
     root.querySelectorAll('.battle-pile-card').forEach(button => {
       const selected = +button.dataset.i === index;
@@ -91,7 +92,7 @@ function installPileInspection(stacks) {
     const cards = consumedPileUids(snapshot).map(findCard).filter(Boolean);
     const { html, stacks } = battlePileBodyHTML({ cards, cardHTML:SDT.Cards.cardHTML, kind:'grave', isBoss:!!snapshot.opts.isBoss });
     showBattleDecision(`[[icon:skull]] ${BATTLE_CONSUMED_LABEL}`, html, true, snapshot);
-    UI.act('btGraveBack', closeGrave);
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btGraveBack', closeGrave);
     installPileInspection(stacks);
     UI.refresh(SDT.game);
   }
@@ -104,7 +105,7 @@ function installPileInspection(stacks) {
     const cards = snapshot.drawPile.map(findCard).filter(Boolean);
     const { html, stacks } = battlePileBodyHTML({ cards, cardHTML:SDT.Cards.cardHTML, kind:'deck', isBoss:!!snapshot.opts.isBoss });
     showBattleDecision('[[icon:cards]] 剩余牌库', html, true, snapshot);
-    UI.act('btDeckBack', closeDeckView);
+    bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btDeckBack', closeDeckView);
     installPileInspection(stacks);
     UI.refresh(SDT.game);
   }

@@ -59,7 +59,7 @@ export function syncSelectionPrompt(stage, snapshot, { clickUid = null, findCard
   button.addEventListener('click', event => {
     event.preventDefault(); event.stopPropagation();
     const current = getCurrent();
-    if (!button.isConnected || !bar.contains(button) || !bar.isConnected || !stage.isConnected || stage.closest('[hidden], [inert]') || current.snapshot.busy
+    if (!button.isConnected || !bar.contains(button) || !bar.isConnected || !stage.isConnected || stage.closest('[hidden], [inert], [aria-hidden="true"], .closing') || current.snapshot.busy
       || !['player', 'targeting'].includes(current.snapshot.phase)
       || current.stage && current.stage !== stage
       || stage._battleToken != null && stage._battleToken !== current.snapshot.battleToken

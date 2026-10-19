@@ -15,3 +15,14 @@ Re-reviewed chests.js against the exact previously reviewed SHA256 dbde483382c45
 Combined run: 203 pass, one asset-presence check initially blocked by two missing recovery-workspace files. Retrieved those two original winter-arrival images from exact GitHub 5edd488, verified Git blob SHA, and reran both asset suites: 28/28 pass. All 204 distinct assertions are now covered successfully across these runs. No test was skipped or weakened. Syntax, eight type checks and lint passed. Logs retained once per combined run.
 
 The recovered workspace is still partial. Native-browser keyboard, scroll geometry and animation remain unverified. No original art is changed or deleted; restored local originals are not part of this commit. Remote main CI and build are checked after publication.
+
+## Build confirmation and shared help return
+Commit 20ee270c build run 39212530677 omitted all 195 reviewed assets and built successfully: package 212.05 MiB (down from 231.44), duplicate bytes 0.13 MiB, entry gzip 335.9 KiB, initial JS gzip 381.6 KiB and CSS gzip 217.5 KiB. The four budgets still fail; the previous 19.4 MiB fallback increase is corrected.
+
+Shared help-return state now restores expanded/collapsed disclosures before scroll layout and refuses to restore focus to disabled/inert/hidden controls. This applies through the existing public help mechanism without per-page patches. Four related suites (118 tests), syntax/types/lint passed; combined-help.log contains the one combined run. Native-browser verification remains outstanding.
+
+## 战斗二级页与公共帮助连续性（2026-10-19）
+
+注能不再将 Ctrl/Alt/Meta+数字及可编辑区域输入当作材料选择；选满后把焦点留在同组详情，折叠摘要刷新保持焦点。选牌、发现、注能、牌堆共用页面活动性检查，旧页回调、覆盖中的战场按钮及关闭动画不再操作当前页；牌堆返回恢复战场入口焦点。公共帮助返回恢复 details 展开/关闭状态，避开隐藏、禁用和 inert 焦点。未修改卡牌成本、选择资格或核心战斗规则。
+
+集中 jsdom/静态回归：17 套中 16 套通过，212 项通过；唯一未完成项为资源存在性检查，本地恢复副本缺少 stage-reset-1015/backdrop.webp 等原始战场图，不能记通过。资源消费指纹检查无警告，原 195 项排除全部保持，无新增资源选择、无预算调整。语法、8 组类型及 lint 通过。真实内置浏览器实页尚未核验；自动 CI 将在准确提交上补全仓库资产与全量测试。详见 combined-battle.log。
