@@ -1,0 +1,30 @@
+{
+  "$schema": "../../node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "mutate": [
+    "game/src/ui/overlay.js:367:0-368:0",
+    "game/src/ui/overlay.js:380:0-381:0",
+    "game/src/ui/overlay.js:431:0-435:0"
+  ],
+  "testRunner": "vitest",
+  "vitest": {
+    "configFile": "tests/tools/overlay-lifecycle.vitest.config.mjs"
+  },
+  "coverageAnalysis": "perTest",
+  "concurrency": 1,
+  "reporters": [
+    "clear-text",
+    "json"
+  ],
+  "jsonReporter": {
+    "fileName": "node_modules/.cache/quality-tools/overlay-focus-mutation.json"
+  },
+  "tempDirName": ".tmp/stryker-overlay-focus",
+  "timeoutMS": 10000,
+  "ignorePatterns": [
+    "/docs",
+    "/game/assets",
+    "/game/data",
+    "/desktop-app",
+    "/.tmp"
+  ]
+}

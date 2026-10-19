@@ -70,3 +70,16 @@ it('optional background, tooltip and zoom handlers may be absent during close', 
   expect(() => UI.hideOverlay({ immediate: true })).not.toThrow();
   expect(UI.el.overlay.hidden).toBe(true);
 });
+
+it('generated focus boundaries keep inert, hidden and disabled controls out of sequential navigation', () => {
+  fc.assert(fc.property(fc.record({ inert: fc.boolean(), hidden: fc.boolean(), ariaHidden: fc.boolean(), disabled: fc.boolean(), fieldsetDisabled: fc.boolean(), tabindex: fc.constantFrom(null, -2, -1, 0, 1) }), state => {
+    vi.clearAllTimers(); setup();
+    UI.showOverlay('选择', `<div ${state.inert ? 'inert' : ''} ${state.hidden ? 'hidden' : ''} ${state.ariaHidden ? 'aria-hidden="true"' : ''}>
+      <fieldset ${state.fieldsetDisabled ? 'disabled' : ''}><button id="probe" ${state.disabled ? 'disabled' : ''} ${state.tabindex === null ? '' : `tabindex="${state.tabindex}"`}>返回候选</button></fieldset></div>
+      <button id="safe">返回当前页</button>`, 'page');
+    const available = !state.inert && !state.hidden && !state.ariaHidden && !state.disabled && !state.fieldsetDisabled;
+    expect(UI._overlayFocusable().some(node => node.id === 'probe')).toBe(available && (state.tabindex === null || state.tabindex >= 0));
+    expect(UI._resolveOverlayInitialFocus('#probe').id).toBe(available ? 'probe' : 'safe');
+    UI.hideOverlay({ immediate: true });
+  }), { seed: 20261020, numRuns: 200 });
+});

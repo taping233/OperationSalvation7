@@ -1,0 +1,106 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ❯ tests/chest-callback-lifecycle-audit.test.js (16 tests | 2 failed) 513ms
+   ✓ 宝箱回调与探索身份审计 > 未领取宝箱不自动开箱，旧领取动作不能跨局发起开箱 132ms
+   ✓ 宝箱回调与探索身份审计 > 领取宝箱双击只启动一次并收币一次，未选前不发卡 36ms
+   ✓ 宝箱回调与探索身份审计 > 搜索等待期间run-token变化后旧揭晓不能覆盖新局 28ms
+   ✓ 宝箱回调与探索身份审计 > 搜索等待期间location变化后旧揭晓不能覆盖新局 20ms
+   ✓ 宝箱回调与探索身份审计 > 搜索等待期间slot变化后旧揭晓不能覆盖新局 21ms
+   ✓ 宝箱回调与探索身份审计 > 已揭晓奖励run-token变化后旧领取不能发奖或写盘 30ms
+   ✓ 宝箱回调与探索身份审计 > 已揭晓奖励location变化后旧领取不能发奖或写盘 26ms
+   ✓ 宝箱回调与探索身份审计 > 已揭晓奖励slot变化后旧领取不能发奖或写盘 22ms
+   ✓ 宝箱回调与探索身份审计 > 已揭晓奖励new-page变化后旧领取不能发奖或写盘 27ms
+   ✓ 宝箱回调与探索身份审计 > 背包合法挂起/恢复不重抽，旧页动作失效且现页逐张领取只发一次 39ms
+   ✓ 宝箱回调与探索身份审计 > 新局不再视旧箱为可恢复，resume不会把旧奖励盖回新页 24ms
+   ✓ 宝箱回调与探索身份审计 > 领取后普通保存失败仍保留当前已领取事实，重试保存不重复发奖 32ms
+   ✓ 固定事件使用独立领取样式，保留来源和既有动作；返回再领不重抽不重领 20ms
+   ✓ 固定事件满包和放弃确认仍由原动作控制，不因展示层改变奖励状态 19ms
+   × 关闭动画期间旧领奖和放弃动作不能改变奖励或重开页面 20ms
+     → expected "spy" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st spy call:
+
+    Array [
+      Object {
+        "id": "reward1",
+        "name": "奖励1",
+        "rarity": "古朴",
+        "type": "法术",
+      },
+      Object {
+        "deferAcquiredCard": [Function deferAcquiredCard],
+        "silent": true,
+      },
+    ]
+
+
+Number of calls: 1
+
+   × 放弃后取消再重选保留横向卡列位置，且不重抽不发奖 16ms
+     → expected +0 to be 240 // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/chest-callback-lifecycle-audit.test.js > 关闭动画期间旧领奖和放弃动作不能改变奖励或重开页面
+AssertionError: expected "spy" to not be called at all, but actually been called 1 times
+
+Received: 
+
+  1st spy call:
+
+    Array [
+      Object {
+        "id": "reward1",
+        "name": "奖励1",
+        "rarity": "古朴",
+        "type": "法术",
+      },
+      Object {
+        "deferAcquiredCard": [Function deferAcquiredCard],
+        "silent": true,
+      },
+    ]
+
+
+Number of calls: 1
+
+ ❯ tests/chest-callback-lifecycle-audit.test.js:144:30
+    142|   UI.el.overlay.classList.add('closing');
+    143|   actions.chestTake1({ i:'0' }); actions.chestSkip(); actions.chestSel…
+    144|   expect(game.grantCard).not.toHaveBeenCalled();
+       |                              ^
+    145|   expect(game.persistSave).toHaveBeenCalledTimes(saves);
+    146|   expect(UI.el.ovBody.innerHTML).toBe(before);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/chest-callback-lifecycle-audit.test.js > 放弃后取消再重选保留横向卡列位置，且不重抽不发奖
+AssertionError: expected +0 to be 240 // Object.is equality
+
+- Expected
++ Received
+
+- 240
++ 0
+
+ ❯ tests/chest-callback-lifecycle-audit.test.js:153:65
+    151|   scroller.scrollLeft = 240; scroller.scrollTop = 37;
+    152|   actions.chestSkip();
+    153|   expect(UI.el.ovBody.querySelector('.loot-scroll').scrollLeft).toBe(2…
+       |                                                                 ^
+    154|   actions.chestStay(); actions.chestSelect({ i:'0' });
+    155|   expect(UI.el.ovBody.querySelector('.loot-scroll').scrollLeft).toBe(2…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 14 passed (16)
+   Start at  15:35:35
+   Duration  1.03s (transform 87ms, setup 0ms, collect 24ms, tests 513ms, environment 304ms, prepare 54ms)
+

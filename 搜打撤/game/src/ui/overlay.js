@@ -364,7 +364,7 @@ export const overlayMethods = {
       'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), ' +
       'select:not([disabled]), textarea:not([disabled]), [contenteditable="true"], ' +
       '[tabindex]:not([tabindex="-1"])'
-    )].filter((el) => !el.closest('[hidden], [aria-hidden="true"]'));
+    )].filter((el) => isAvailableOverlayFocusTarget(el) && !(el.hasAttribute('tabindex') && el.tabIndex < 0));
   },
 
   _resolveOverlayInitialFocus(initialFocus) {
@@ -377,7 +377,7 @@ export const overlayMethods = {
     // HTML 中的 data-initial-focus 是调用方无需接触 DOM 引用的安全显式入口。
     if (!target) target = root.querySelector('[data-initial-focus]');
     if (target && !target.matches('button, input, select, textarea, a[href], [tabindex], [contenteditable="true"]')) target = null;
-    if (target && (target.disabled || target.closest('[hidden], [aria-hidden="true"]'))) target = null;
+    if (target && !isAvailableOverlayFocusTarget(target)) target = null;
     const focusables = this._overlayFocusable();
     if (!target) {
       // 取消/保留/返回优先；同一规则覆盖「确认丢弃」「放弃对局」等危险弹窗。
@@ -425,3 +425,11 @@ export const overlayMethods = {
     for (const el of this._overlayInerted.splice(0)) el.removeAttribute('inert');
   },
 };
+
+// Keep sequential focus and explicit initial focus inside the active dialog surface.
+// Native :disabled preserves the first-legend exception of disabled fieldsets.
+function isAvailableOverlayFocusTarget(element) {
+  return !element.matches(':disabled, input[type="hidden"]') &&
+    !element.closest('[hidden], [aria-hidden="true"], [inert]');
+}
+

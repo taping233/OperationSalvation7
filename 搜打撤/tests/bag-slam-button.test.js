@@ -6,7 +6,7 @@
  *   ③ 五职业分化口径（单源 battle.slam-skill.js）：侠客(刺客) 1 费 2 固定伤 / 战士 2 费攻击一次 /
  *      法师 1 费随机获取 / 降临者 2 费火球 / 牧师 1 费圣疗与惩戒每次使用后交替；
  *      未知职业兜底=战士口径。 */
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
 window.SDT.Icons.TYPE_ART = {};
@@ -226,22 +226,26 @@ describe('背包砸击按钮形态', () => {
     await drain(100);
   });
 
-  it('法师搜刮：不进点选直接随机获得一张卡入手牌，扣 1 能量', async () => {
+  it.each([['tt3sp-shadowbug', false], ['tt3-turnabout-potion', true]])('法师搜刮 %s：普通卡入手、道具进栏，扣1能量且不进点选', async (id, item) => {
+    const got = C.all().find(card => card.id === id);
+    expect(got).toBeTruthy(); expect(C.isRandomObtainable(got)).toBe(true);
     const g = makeGame([], '法师');
     BattleSession.start(g, [foeOf('搜刮靶')], { isBoss: false, name: '按钮测试' });
     await drain();
-    const e0 = snap().energy;
-    const n0 = snap().hand.length;
-
-    commands.bagSlam();
-    expect(snap().slamPending).toBe(false);   // 无目标技能：不进点选直接结算
-    await drain();
-    const e1 = snap().energy;
-    expect([e0 - 1, e0]).toContain(e1);   // 抽到「阿猫的礼物」时 onAcquire 回 1 能量（随机获取链自带）
-    expect(snap().hand.length).toBeGreaterThanOrEqual(n0 + 1);
-    expect(g.logs.some(l => l.includes('搜刮') && l.includes('随机获得'))).toBe(true);
-    BattleSession.commands.flee();
-    await drain(100);
+    const e0 = snap().energy, n0 = snap().hand.length;
+    const pool = vi.spyOn(C, 'all').mockReturnValue([got]);
+    try {
+      commands.bagSlam();
+      expect(snap().slamPending).toBe(false);
+      await drain();
+      expect(snap().energy).toBe(e0 - 1);
+      expect(snap().hand.length).toBe(n0 + (item ? 0 : 1));
+      expect(snap().potionBar.some(entry => entry.name === got.name)).toBe(item);
+      if (!item) expect(handCardNames(snap())).toContain(got.name);
+      expect(g.logs.some(l => l.includes('搜刮') && l.includes(item ? '置入道具栏' : '置入手牌'))).toBe(true);
+    } finally {
+      pool.mockRestore(); BattleSession.commands.flee(); await drain(100);
+    }
   });
 
   it('降临者火球：4 点法伤（+法伤加成 2 = 6），扣 2 能量', async () => {

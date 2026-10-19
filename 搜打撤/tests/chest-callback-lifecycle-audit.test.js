@@ -135,3 +135,25 @@ it('固定事件满包和放弃确认仍由原动作控制，不因展示层改�
   expect(game.grantCard).not.toHaveBeenCalled();
   expect(drawn).not.toHaveBeenCalled();
 });
+
+it('关闭动画期间旧领奖和放弃动作不能改变奖励或重开页面', () => {
+  restoreFixedReceipt();
+  const before = UI.el.ovBody.innerHTML, saves = game.persistSave.mock.calls.length;
+  UI.el.overlay.classList.add('closing');
+  actions.chestTake1({ i:'0' }); actions.chestSkip(); actions.chestSelect({ i:'0' });
+  expect(game.grantCard).not.toHaveBeenCalled();
+  expect(game.persistSave).toHaveBeenCalledTimes(saves);
+  expect(UI.el.ovBody.innerHTML).toBe(before);
+});
+it('放弃后取消再重选保留横向卡列位置，且不重抽不发奖', () => {
+  restoreFixedReceipt();
+  const scroller = UI.el.ovBody.querySelector('.loot-scroll');
+  scroller.scrollLeft = 240; scroller.scrollTop = 37;
+  actions.chestSkip();
+  expect(UI.el.ovBody.querySelector('.loot-scroll').scrollLeft).toBe(240);
+  actions.chestStay(); actions.chestSelect({ i:'0' });
+  expect(UI.el.ovBody.querySelector('.loot-scroll').scrollLeft).toBe(240);
+  expect(UI.el.ovBody.querySelector('.loot-scroll').scrollTop).toBe(37);
+  expect(Chests.serialize(game).current).toMatchObject({ taken:[], lost:[] });
+  expect(game.grantCard).not.toHaveBeenCalled(); expect(drawn).not.toHaveBeenCalled();
+});

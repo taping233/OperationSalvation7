@@ -1,0 +1,28 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ✓ tests/overlay-dialog.test.js (11 tests) 1420ms
+   ✓ overlay dialog accessibility contract > axe validates actual dialog markup after repeated close and reopening  751ms
+ ✓ tests/safe-pearl-access.test.js (13 tests) 2864ms
+ ✓ tests/bag-slam-button.test.js (11 tests) 1594ms
+   ✓ 背包砸击按钮形态 > 取消与无效目标不占次数，成功使用后同回合禁止重复，下回合及新战斗复位  301ms
+ ✓ tests/pearl-storage-interface.test.js (9 tests) 1062ms
+ ✓ tests/bag-page-lifecycle-review.test.js (67 tests) 3977ms
+ ✓ tests/chests-reward-capacity-notice.test.js (21 tests) 596ms
+ ✓ tests/chest-callback-lifecycle-audit.test.js (16 tests) 508ms
+ ✓ tests/chest-multi-queue-regression.test.js (1 test) 166ms
+ ✓ tests/reward-capacity-organizer.test.js (16 tests) 196ms
+ ✓ tests/scavenge-mode-feedback.test.js (5 tests) 37ms
+
+ Test Files  10 passed (10)
+      Tests  170 passed (170)
+   Start at  15:41:45
+   Duration  5.76s (transform 1.93s, setup 0ms, collect 2.22s, tests 12.42s, environment 3.78s, prepare 677ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

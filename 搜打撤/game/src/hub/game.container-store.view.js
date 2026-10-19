@@ -14,7 +14,7 @@ export function containerStoreHTML({ title, icon, prefix, count, cap, stored, av
         <span class="pearl-store-art" aria-hidden="true">${cardHTML(st.card, 'sm')}</span>
         <span class="pearl-store-caption"><span>${action} · ${st.count} 张</span></span></button>
       ${blocked ? `<p class="container-store-blocked">${esc(blocked)}</p>` : ''}
-      <button type="button" class="battle-card-inspect" data-act="${prefix}Inspect" data-i="${i}" aria-label="查看${escAttr(st.card.name)}详情">查看详情</button>
+      <button type="button" class="battle-card-inspect" data-act="${prefix}Inspect" data-i="${i}" data-name="${escAttr(st.card.name)}" aria-label="查看${escAttr(st.card.name)}详情">查看详情</button>
     </div>`;
   }).join('') || `<p class="ov-empty">${take ? `${title}是空的` : `背包里没有${type}卡`}</p>`;
   return `<section class="battle-decision battle-decision-unified pearl-store container-store" data-decision-kind="${prefix}-store">
@@ -29,9 +29,28 @@ export function containerStoreHTML({ title, icon, prefix, count, cap, stored, av
   </section>`;
 }
 
-export function restoreContainerFocus(root, focused, back) {
+export function captureContainerView(root) {
+  if (!root) return null;
+  const active = root.contains(document.activeElement) ? document.activeElement : null;
+  return {
+    focused: active ? { ...active.dataset, summary: active.tagName === 'SUMMARY' } : null,
+    helpOpen: !!root.querySelector('details')?.open,
+    scroll: [root.parentElement, ...root.querySelectorAll('.battle-decision-content, .pearl-store-list')]
+      .map(el => ({ top: el.scrollTop, left: el.scrollLeft })),
+  };
+}
+
+export function restoreContainerFocus(root, state, back) {
   root?.querySelectorAll('.pearl-store-art [tabindex]').forEach(el => el.removeAttribute('tabindex'));
-  if (!focused || !root) return;
+  if (!state || !root) return;
+  const help = root.querySelector('details');
+  if (help) help.open = state.helpOpen;
+  [root.parentElement, ...root.querySelectorAll('.battle-decision-content, .pearl-store-list')].forEach((el, i) => {
+    if (state.scroll[i]) { el.scrollTop = state.scroll[i].top; el.scrollLeft = state.scroll[i].left; }
+  });
+  const focused = state.focused;
+  if (!focused) return;
+  if (focused.summary) { help?.querySelector('summary')?.focus({ preventScroll:true }); return; }
   const buttons = [...root.querySelectorAll('button[data-act]:not(:disabled)')];
   (buttons.find(b => b.dataset.act === focused.act && b.dataset.name === focused.name)
     || buttons.find(b => b.dataset.act === focused.act) || buttons.find(b => b.dataset.act === back))?.focus({ preventScroll: true });

@@ -1,0 +1,32 @@
+[
+  {
+    "area": "ui",
+    "clones": 1,
+    "duplicatedLines": 7,
+    "duplicatedTokens": 75,
+    "lines": 8221,
+    "newClones": 0,
+    "newDuplicatedLines": 0,
+    "percentage": 0.08514779223938694,
+    "percentageTokens": 0.1030729481611786,
+    "sources": 74,
+    "tokens": 72764,
+    "candidates": [
+      {
+        "kind": "exact",
+        "lines": 7,
+        "tokens": 75,
+        "first": {
+          "file": "game/src/ui/page-visual-ready.js",
+          "start": 109,
+          "end": 115
+        },
+        "second": {
+          "file": "game/src/ui/page-visual-ready.js",
+          "start": 154,
+          "end": 161
+        }
+      }
+    ]
+  }
+]

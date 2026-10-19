@@ -1,0 +1,51 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ❯ tests/reward-capacity-organizer.test.js (16 tests | 1 failed) 144ms
+   × 奖励上下文腾位 > 丢弃确认、保留和整理后不重置列表位置 34ms
+     → expected +0 to be 180 // Object.is equality
+   ✓ 奖励上下文腾位 > 返回与未确认丢弃均零写；目标保留 11ms
+   ✓ 奖励上下文腾位 > 仅确认丢弃1张，3→2仍不腾格，回执明确已生效 8ms
+   ✓ 奖励上下文腾位 > 存安全格后再明确领取，不自动领 5ms
+   ✓ 奖励上下文腾位 > 安全格失败保目标/堆，完整背包可继续 4ms
+   ✓ 奖励上下文腾位 > 旧渲染按钮和旧页面回调均不能提交 4ms
+   ✓ 奖励上下文腾位 > 领取前再核容量与当前会话 4ms
+   ✓ 奖励整理连续键盘焦点 > 第二张卡进入丢弃确认时聚焦安全的保留，不自动丢弃 6ms
+   ✓ 奖励整理连续键盘焦点 > 保留后回到原卡丢弃入口，数据不变 12ms
+   ✓ 奖励整理连续键盘焦点 > 确认仅丢弃一张，仍有同叠时焦点留在同卡入口 8ms
+   ✓ 奖励整理连续键盘焦点 > 原卡整叠消失后聚焦相邻卡，不跳回列表头 8ms
+   ✓ 奖励整理连续键盘焦点 > 最后一张丢弃后聚焦返回奖励，不自动离开或领取 7ms
+   ✓ 奖励整理连续键盘焦点 > 移入安全格清空列表后也保留可继续操作的焦点 4ms
+   ✓ 奖励整理连续键盘焦点 > 最后一行移除后退到前一行，焦点恢复不触发页面滚动 13ms
+   ✓ 奖励整理连续键盘焦点 > 安全格失败且新状态禁用时退到同卡非破坏性的操作入口 9ms
+   ✓ 奖励整理连续键盘焦点 > 旧页面按钮不能抢走新页面焦点 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/reward-capacity-organizer.test.js > 奖励上下文腾位 > 丢弃确认、保留和整理后不重置列表位置
+AssertionError: expected +0 to be 180 // Object.is equality
+
+- Expected
++ Received
+
+- 180
++ 0
+
+ ❯ tests/reward-capacity-organizer.test.js:18:68
+     16|     root.querySelector('.reward-organizer-list').scrollTop = 180;
+     17|     click('discard');
+     18|     expect(root.querySelector('.reward-organizer-list').scrollTop).toB…
+       |                                                                    ^
+     19|     click('keep');
+     20|     expect(root.querySelector('.reward-organizer-list').scrollTop).toB…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 15 passed (16)
+   Start at  15:34:08
+   Duration  669ms (transform 34ms, setup 0ms, collect 39ms, tests 144ms, environment 294ms, prepare 56ms)
+

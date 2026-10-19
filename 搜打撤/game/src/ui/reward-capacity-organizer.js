@@ -10,6 +10,8 @@ export function openRewardCapacityOrganizer({ UI, card, readStacks, canReceive, 
   const live = () => current() && root.isConnected && UI.el.ovBody.contains(root)
     && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing');
   function render(focus = null) {
+    const previousList = root.querySelector('.reward-organizer-list');
+    const scrollTop = previousList?.scrollTop || 0, scrollLeft = previousList?.scrollLeft || 0;
     const version = ++revision, stacks = readStacks(), fits = canReceive();
     const safeStates = stacks.map(safeAvailability);
     const canStore = safeStates.some(state => state.ok);
@@ -25,6 +27,8 @@ export function openRewardCapacityOrganizer({ UI, card, readStacks, canReceive, 
       <footer>${rewardReturnHTML({ action:"return", organize:true })}
       <button type="button" data-organize="bag">完整背包</button>
       <button type="button" class="ok" data-organize="claim"${fits ? '' : ' disabled'}>${fits ? '收下此牌' : '还需腾出位置'}</button></footer>`;
+    const list = root.querySelector('.reward-organizer-list');
+    list.scrollTop = scrollTop; list.scrollLeft = scrollLeft;
     root.querySelectorAll('[data-organize]').forEach(button => button.addEventListener('click', () => {
       if (!live() || revision !== version || !root.contains(button) || button.disabled) return;
       const action = button.dataset.organize;

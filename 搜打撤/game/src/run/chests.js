@@ -569,11 +569,12 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const body = overviewMode ? chestRewardFrameHTML({ overview:overviewHTML(), picker, label:cur.isClass ? '职业补给' : K.name }) : picker;
     const currentBody = UI.el?.ovBody;
     if (currentBody?.querySelector('.reward-v14') && !UI.el?.overlay?.hidden) {
-      const scrollTop = currentBody.querySelector('.loot-scroll')?.scrollTop || 0;
+      const previousScroll = currentBody.querySelector('.loot-scroll');
+      const scrollTop = previousScroll?.scrollTop || 0, scrollLeft = previousScroll?.scrollLeft || 0;
       const hadFocus = currentBody.contains(document.activeElement);
       currentBody.innerHTML = SDT.Icons.rich(body);
       const scroll = currentBody.querySelector('.loot-scroll');
-      if (scroll) scroll.scrollTop = scrollTop;
+      if (scroll) { scroll.scrollTop = scrollTop; scroll.scrollLeft = scrollLeft; }
       if (hadFocus) currentBody.querySelector(`[data-act="chestSelect"][data-i="${selected ?? 0}"]`)?.focus({ preventScroll:true });
     } else {
       UI.showOverlay(`[[icon:archive]] ${cur.battleSummary ? '搜刮！战斗胜利 · ' : '收获 · '}${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, body, 'chest');
@@ -582,7 +583,8 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const renderedBox = cur;
     const surface = UI.el?.ovBody?.querySelector('.reward-v14');
     const isLiveReward = () => isCurrentRewardRun() && cur === renderedBox && G.state === 'modal' &&
-      !!surface && UI.el?.ovBody?.querySelector('.reward-v14') === surface && !UI.el?.overlay?.hidden;
+      !!surface && UI.el?.ovBody?.querySelector('.reward-v14') === surface && !UI.el?.overlay?.hidden
+      && !UI.el?.overlay?.classList?.contains('closing');
     UI.act('chestClosePicker', () => { if (overviewMode && isLiveReward()) closePicker(); });
     UI.act('chestTake', () => { if (isLiveReward() && !isPick && !cur.leaveConfirm) takeAll(); });
     UI.act('chestReturn', () => { if (isLiveReward()) return returnToMap(); });

@@ -1,0 +1,91 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ❯ tests/overlay-dialog.test.js (11 tests | 3 failed) 1201ms
+   ✓ overlay dialog accessibility contract > axe validates actual dialog markup after repeated close and reopening  550ms
+   × overlay dialog accessibility contract > picker focus excludes inert background, disabled-fieldset controls and negative tab order 44ms
+     → expected [ 'backgroundReturn', …(4) ] to deeply equal [ 'pickerReturn', 'pickerNext' ]
+   × overlay dialog accessibility contract > invalid explicit focus falls back safely while deliberate negative-tabindex focus remains supported 6ms
+     → expected 'inertFocus' to be 'safeFocus' // Object.is equality
+   × overlay dialog accessibility contract > native disabled-fieldset legend exception remains keyboard reachable 4ms
+     → expected [ 'legendAction', …(2) ] to deeply equal [ 'legendAction', 'safeReturn' ]
+   ✓ overlay dialog accessibility contract > 照相馆卡牌IMG跳过背景样式读取，房间背景仍保留加载检测 4ms
+   ✓ overlay dialog accessibility contract > sets dialog semantics, isolates the background, traps Tab, and restores the opener 267ms
+   ✓ overlay dialog accessibility contract > honors an explicit safe initialFocus selector and closes through Escape 265ms
+   ✓ overlay dialog accessibility contract > 收回大卡后的按键重复不会触发底层奖励离开 43ms
+   ✓ overlay dialog accessibility contract > 显式安全取消优先于猜测文案，并由 Esc 调用原返回操作 4ms
+   ✓ overlay dialog accessibility contract > 强制领取页无取消入口，隐藏或禁用标记及明确禁止按钮都不能被 Esc 跳过 9ms
+   ✓ overlay dialog accessibility contract > closes immediately when reduced motion is enabled 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/overlay-dialog.test.js > overlay dialog accessibility contract > picker focus excludes inert background, disabled-fieldset controls and negative tab order
+AssertionError: expected [ 'backgroundReturn', …(4) ] to deeply equal [ 'pickerReturn', 'pickerNext' ]
+
+- Expected
++ Received
+
+  [
++   "backgroundReturn",
++   "fieldsetDisabled",
++   "programmaticOnly",
+    "pickerReturn",
+    "pickerNext",
+  ]
+
+ ❯ tests/overlay-dialog.test.js:58:57
+     56|       <button id="pickerReturn" data-cancel="true">返回当前奖励</button><but…
+     57|     await waitFrame();
+     58|     expect(UI._overlayFocusable().map(node => node.id)).toEqual(['pick…
+       |                                                         ^
+     59|     expect(document.activeElement.id).toBe('pickerReturn');
+     60|     document.getElementById('pickerNext').focus();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/overlay-dialog.test.js > overlay dialog accessibility contract > invalid explicit focus falls back safely while deliberate negative-tabindex focus remains supported
+AssertionError: expected 'inertFocus' to be 'safeFocus' // Object.is equality
+
+Expected: "safeFocus"
+Received: "inertFocus"
+
+ ❯ tests/overlay-dialog.test.js:72:62
+     70|   it('invalid explicit focus falls back safely while deliberate negati…
+     71|     UI.showOverlay('操作', '<div inert><button id="inertFocus">返回背景</but…
+     72|     expect(UI._resolveOverlayInitialFocus('#inertFocus').id).toBe('saf…
+       |                                                              ^
+     73|     expect(UI._resolveOverlayInitialFocus('#headingFocus').id).toBe('h…
+     74|     UI.hideOverlay({ immediate: true });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/overlay-dialog.test.js > overlay dialog accessibility contract > native disabled-fieldset legend exception remains keyboard reachable
+AssertionError: expected [ 'legendAction', …(2) ] to deeply equal [ 'legendAction', 'safeReturn' ]
+
+- Expected
++ Received
+
+  [
+    "legendAction",
++   "disabledSetting",
+    "safeReturn",
+  ]
+
+ ❯ tests/overlay-dialog.test.js:79:57
+     77|   it('native disabled-fieldset legend exception remains keyboard reach…
+     78|     UI.showOverlay('设置', '<fieldset disabled><legend><button id="legen…
+     79|     expect(UI._overlayFocusable().map(node => node.id)).toEqual(['lege…
+       |                                                         ^
+     80|     UI.hideOverlay({ immediate: true });
+     81|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 8 passed (11)
+   Start at  15:25:50
+   Duration  1.75s (transform 193ms, setup 0ms, collect 23ms, tests 1.20s, environment 309ms, prepare 61ms)
+

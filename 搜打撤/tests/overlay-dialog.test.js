@@ -49,6 +49,38 @@ describe('overlay dialog accessibility contract', () => {
     UI.hideOverlay({ immediate: true });
   });
 
+  it('picker focus excludes inert background, disabled-fieldset controls and negative tab order', async () => {
+    UI.showOverlay('选择奖励', `<div class="cqo-background" inert><button id="backgroundReturn">返回总览</button></div>
+      <fieldset disabled><button id="fieldsetDisabled">取消旧操作</button></fieldset>
+      <button id="programmaticOnly" tabindex="-1">返回定位</button>
+      <button id="pickerReturn" data-cancel="true">返回当前奖励</button><button id="pickerNext">确认</button>`, 'chest');
+    await waitFrame();
+    expect(UI._overlayFocusable().map(node => node.id)).toEqual(['pickerReturn', 'pickerNext']);
+    expect(document.activeElement.id).toBe('pickerReturn');
+    document.getElementById('pickerNext').focus();
+    const forward = new KeyboardEvent('keydown', { key: 'Tab', cancelable: true });
+    UI._trapOverlayFocus(forward);
+    expect(forward.defaultPrevented).toBe(true); expect(document.activeElement.id).toBe('pickerReturn');
+    const backward = new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, cancelable: true });
+    UI._trapOverlayFocus(backward);
+    expect(backward.defaultPrevented).toBe(true); expect(document.activeElement.id).toBe('pickerNext');
+    UI.hideOverlay({ immediate: true });
+  });
+
+  it('invalid explicit focus falls back safely while deliberate negative-tabindex focus remains supported', () => {
+    UI.showOverlay('操作', '<div inert><button id="inertFocus">返回背景</button></div><button id="safeFocus">取消</button><h3 id="headingFocus" tabindex="-1">内容标题</h3><input id="hiddenInput" type="hidden">', 'page');
+    expect(UI._resolveOverlayInitialFocus('#inertFocus').id).toBe('safeFocus');
+    expect(UI._resolveOverlayInitialFocus('#headingFocus').id).toBe('headingFocus');
+    expect(UI._resolveOverlayInitialFocus('#hiddenInput').id).toBe('safeFocus');
+    UI.hideOverlay({ immediate: true });
+  });
+
+  it('native disabled-fieldset legend exception remains keyboard reachable', () => {
+    UI.showOverlay('设置', '<fieldset disabled><legend><button id="legendAction">启用设置</button></legend><button id="disabledSetting">旧设置</button></fieldset><button id="safeReturn">返回</button>', 'page');
+    expect(UI._overlayFocusable().map(node => node.id)).toEqual(['legendAction', 'safeReturn']);
+    UI.hideOverlay({ immediate: true });
+  });
+
   it('照相馆卡牌IMG跳过背景样式读取，房间背景仍保留加载检测', () => {
     const style = vi.spyOn(globalThis, 'getComputedStyle').mockReturnValue({ backgroundImage: 'url("/room.webp")' });
     try {

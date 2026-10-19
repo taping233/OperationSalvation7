@@ -139,6 +139,30 @@ describe('背包旧详情/页面回调与正常返回', () => {
     ui._acts[`${prefix}Put`]({ name: card.name });
     expect(JSON.stringify(H.game.ownedCards)).toBe(before);
   });
+  it.each([['珍珠盒', 'pearl', resource], ['法师锦囊', 'pouch', spell]])('%s连续存取保留滚动、说明展开及安全返回焦点', (name, prefix, card) => {
+    inspect(name); ui._acts[`${prefix}StoreZoom`]();
+    const body = ui.el.ovBody, help = body.querySelector('details');
+    help.open = true; body.scrollTop = 120;
+    body.querySelector('.battle-decision-content').scrollTop = 75;
+    body.querySelector('.pearl-store-list').scrollTop = 35;
+    const put = body.querySelector(`[data-act="${prefix}Put"][data-name="${card.name}"]`); put.focus(); put.click();
+    expect(body.querySelector('details').open).toBe(true);
+    expect(body.scrollTop).toBe(120); expect(body.querySelector('.pearl-store-list').scrollTop).toBe(35);
+    expect(body.querySelector('.battle-decision-content').scrollTop).toBe(75);
+    expect(document.activeElement.dataset.act).toBe(`${prefix}Back`);
+    const take = body.querySelector(`[data-act="${prefix}Take"][data-name="${card.name}"]`); take.focus(); take.click();
+    expect(body.querySelector('details').open).toBe(true);
+    expect(document.activeElement.dataset.act).toBe(`${prefix}Back`);
+  });
+  it.each([['珍珠盒', 'pearl', resource], ['法师锦囊', 'pouch', spell]])('%s重绘后旧详情回调不能打开旧牌', (name, prefix, card) => {
+    inspect(name); ui._acts[`${prefix}StoreZoom`]();
+    const staleInspect = ui._acts[`${prefix}Inspect`];
+    ui._acts[`${prefix}Put`]({ name:card.name });
+    staleInspect({ i:'0' });
+    expect(document.getElementById('cardZoom')).toBeNull();
+    ui._acts[`${prefix}Inspect`]({ i:'0' });
+    expect(document.getElementById('cardZoom')).not.toBeNull();
+  });
   it('正常使用与当前容器连续存取/返回保持可用', () => {
     inspect(); ui._acts.useDetailCard(); expect(H.game.hp).toBe(13);
     inspect('法师锦囊'); ui._acts.pouchStoreZoom(); ui._acts.pouchPut({ name: spell.name }); expect(H.game.ownedCards.find(item => item.card.id === 'spell').stored).toBe(1);

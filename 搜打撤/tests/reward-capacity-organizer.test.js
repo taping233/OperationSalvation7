@@ -12,6 +12,17 @@ beforeEach(() => {
   root=openRewardCapacityOrganizer(options);
 });
 describe('奖励上下文腾位',()=>{
+  it('丢弃确认、保留和整理后不重置列表位置', () => {
+    root.querySelector('.reward-organizer-list').scrollTop = 180;
+    click('discard');
+    expect(root.querySelector('.reward-organizer-list').scrollTop).toBe(180);
+    click('keep');
+    expect(root.querySelector('.reward-organizer-list').scrollTop).toBe(180);
+    click('discard'); click('confirm');
+    expect(root.querySelector('.reward-organizer-list').scrollTop).toBe(180);
+    click('return'); expect(options.onReturn).toHaveBeenCalledOnce();
+  });
+
   it('返回与未确认丢弃均零写；目标保留',()=>{click('discard');expect(root.textContent).toContain('无法取回');click('keep');click('return');expect(options.onReturn).toHaveBeenCalledOnce();expect(options.discardOne).not.toHaveBeenCalled();expect(options.moveToSafe).not.toHaveBeenCalled();expect(options.onClaim).not.toHaveBeenCalled();});
   it('仅确认丢弃1张，3→2仍不腾格，回执明确已生效',()=>{click('discard');click('confirm');expect(options.discardOne).toHaveBeenCalledOnce();expect(stacks[0].count).toBe(2);expect(root.textContent).toContain('已丢弃：长剑 ×1；还需腾出位置');expect(root.querySelector('[data-organize="claim"]').disabled).toBe(true);click('return');expect(options.onReturn).toHaveBeenCalledOnce();});
   it('存安全格后再明确领取，不自动领',()=>{click('safe');expect(options.onClaim).not.toHaveBeenCalled();expect(root.textContent).toContain('已移入安全格：长剑 ×3');click('claim');expect(options.onClaim).toHaveBeenCalledOnce();click('claim');expect(options.onClaim).toHaveBeenCalledOnce();});

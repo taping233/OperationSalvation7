@@ -1,0 +1,167 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ❯ tests/bag-page-lifecycle-review.test.js (67 tests | 4 failed) 2489ms
+   ✓ 背包旧详情/页面回调与正常返回 > 神秘药水地图详情禁用，直接旧回调也不消费/回血/发金币 216ms
+   ✓ 背包旧详情/页面回调与正常返回 > cmtn6bge52qt地图消耗区 2上限/0张时的详情按钮和执行守卫 54ms
+   ✓ 背包旧详情/页面回调与正常返回 > cmtn6bge52qt地图消耗区 2上限/1张时的详情按钮和执行守卫 45ms
+   ✓ 背包旧详情/页面回调与正常返回 > cmtn6bge52qt地图消耗区 2上限/3张时的详情按钮和执行守卫 45ms
+   ✓ 背包旧详情/页面回调与正常返回 > tt-crystal地图消耗区 3上限/0张时的详情按钮和执行守卫 41ms
+   ✓ 背包旧详情/页面回调与正常返回 > tt-crystal地图消耗区 3上限/1张时的详情按钮和执行守卫 39ms
+   ✓ 背包旧详情/页面回调与正常返回 > tt-crystal地图消耗区 3上限/4张时的详情按钮和执行守卫 35ms
+   ✓ 背包旧详情/页面回调与正常返回 > 战斗中的通用背包入口拒绝打开/刷新（刷新=false），不转发旧战斗背包命令 23ms
+   ✓ 背包旧详情/页面回调与正常返回 > 战斗中的通用背包入口拒绝打开/刷新（刷新=true），不转发旧战斗背包命令 22ms
+   ✓ 背包旧详情/页面回调与正常返回 > 战斗已经接管时，旧背包详情和底层丢弃/跨区/排序入口不能变更卡牌 25ms
+   ✓ 背包旧详情/页面回调与正常返回 > slot变化后旧道具详情不能使用新卡或关闭新详情 47ms
+   ✓ 背包旧详情/页面回调与正常返回 > seed变化后旧道具详情不能使用新卡或关闭新详情 37ms
+   ✓ 背包旧详情/页面回调与正常返回 > owned-instance变化后旧道具详情不能使用新卡或关闭新详情 28ms
+   ✓ 背包旧详情/页面回调与正常返回 > same-seed-run变化后旧道具详情不能使用新卡或关闭新详情 23ms
+   ✓ 背包旧详情/页面回调与正常返回 > page变化后旧道具详情不能使用新卡或关闭新详情 25ms
+   ✓ 背包旧详情/页面回调与正常返回 > zoom变化后旧道具详情不能使用新卡或关闭新详情 30ms
+   ✓ 背包旧详情/页面回调与正常返回 > 退出珍珠盒后旧存入和返回不改卡、不抢页面 27ms
+   ✓ 背包旧详情/页面回调与正常返回 > 退出法师锦囊后旧存入和返回不改卡、不抢页面 25ms
+   ✓ 背包旧详情/页面回调与正常返回 > 旧丢弃确认换局后不丢新局同名卡 24ms
+   ✓ 背包旧详情/页面回调与正常返回 > 帮助正常返回有效，离开帮助后旧返回不抢新页面 37ms
+   ✓ 背包旧详情/页面回调与正常返回 > 锦囊使用显式安全取消入口，与珍珠盒一样可由共享 Esc 返回背包 164ms
+   ✓ 背包旧详情/页面回调与正常返回 > 珍珠盒真实入口共用面板，帮助折叠、详情不搬牌 30ms
+   ✓ 背包旧详情/页面回调与正常返回 > 法师锦囊真实入口共用面板，帮助折叠、详情不搬牌 34ms
+   ✓ 背包旧详情/页面回调与正常返回 > 珍珠盒整叠超容量在动作旁显示原因且禁用 24ms
+   ✓ 背包旧详情/页面回调与正常返回 > 法师锦囊整叠超容量在动作旁显示原因且禁用 27ms
+   × 背包旧详情/页面回调与正常返回 > 珍珠盒连续存取保留滚动、说明展开和同牌焦点 45ms
+     → expected false to be true // Object.is equality
+   × 背包旧详情/页面回调与正常返回 > 法师锦囊连续存取保留滚动、说明展开和同牌焦点 43ms
+     → expected false to be true // Object.is equality
+   × 背包旧详情/页面回调与正常返回 > 珍珠盒重绘后旧详情回调不能打开旧牌 37ms
+     → expected <div id="cardZoom" …(2)>…(3)</div> to be null
+   × 背包旧详情/页面回调与正常返回 > 法师锦囊重绘后旧详情回调不能打开旧牌 31ms
+     → expected <div id="cardZoom" …(2)>…(3)</div> to be null
+   ✓ 背包旧详情/页面回调与正常返回 > 正常使用与当前容器连续存取/返回保持可用 44ms
+   ✓ 背包pointer拖动取消/会话身份 > pointercancel释放全部浮影，随后pointerup不会落账 23ms
+   ✓ 背包pointer拖动取消/会话身份 > 别的pointerup不结束当前拖动，原pointer正常落入安全格 35ms
+   ✓ 背包pointer拖动取消/会话身份 > slot变化后拖动释放不改新会话 23ms
+   ✓ 背包pointer拖动取消/会话身份 > owned-instance变化后拖动释放不改新会话 21ms
+   ✓ 背包pointer拖动取消/会话身份 > same-seed-run变化后拖动释放不改新会话 20ms
+   ✓ 背包pointer拖动取消/会话身份 > page变化后拖动释放不改新会话 24ms
+   ✓ 新号背包真实入口反馈 > 招式不混入散装物资，全部保留物资和生物且不单设筛选入口 48ms
+   ✓ 新号背包真实入口反馈 > 安全格和口袋显示真实容量张数与复原角标，伙伴及复原说明保留在帮助 40ms
+   ✓ 新号背包真实入口反馈 > 按钮丢弃确认不误称拖拽，按反馈移除货币栏且排序按钮有名称 39ms
+   ✓ 新号背包真实入口反馈 > 通行证B结构化使用获取传说且保留棱彩与禁随机排除规则 32ms
+   ✓ 新号背包真实入口反馈 > 结晶使用回执保留复原名单与容量剩余，并保留装备可被结晶复原的规则 45ms
+   ✓ 背包键盘查看与分区焦点 > 随身详情接入完整阅读栏并在注册后捕获当前动作，不改卡牌或存档 35ms
+   ✓ 背包键盘查看与分区焦点 > 安全格与消耗区也保留全文阅读，安全格移回按钮与消耗区限制保持原语义 44ms
+   ✓ 背包键盘查看与分区焦点 > Enter 查看详情再关闭返回来源卡格，不重复触发 25ms
+   ✓ 背包键盘查看与分区焦点 >   查看详情再关闭返回来源卡格，不重复触发 31ms
+   ✓ 背包键盘查看与分区焦点 > 分区切换保留当前分区按钮焦点，口袋卡可键盘查看但不能拖动或使用 34ms
+   ✓ 背包键盘查看与分区焦点 > 卡格去掉卡面内部重复Tab停靠，不嵌套焦点控件 23ms
+   ✓ 地图道具角标与详情用途一致 > 神秘药水只描述已有地图用途，查看不消耗 28ms
+   ✓ 地图道具角标与详情用途一致 > 剧毒药水只描述已有地图用途，查看不消耗 34ms
+   ✓ 地图道具角标与详情用途一致 > 治疗药只描述已有地图用途，查看不消耗 41ms
+   ✓ 地图道具角标与详情用途一致 > 复原药只描述已有地图用途，查看不消耗 30ms
+   ✓ 地图道具角标与详情用途一致 > 通行证只描述已有地图用途，查看不消耗 30ms
+   ✓ 地图道具角标与详情用途一致 > 觉醒药只描述已有地图用途，查看不消耗 27ms
+   ✓ 地图道具角标与详情用途一致 > 混合药只描述已有地图用途，查看不消耗 27ms
+   ✓ 地图道具角标与详情用途一致 > 旧文本药只描述已有地图用途，查看不消耗 32ms
+   ✓ 地图道具角标与详情用途一致 > 未知用法只描述已有地图用途，查看不消耗 26ms
+   ✓ 地图道具角标与详情用途一致 > 战斗道具在安全格与消耗区仍优先显示原区域说明 20ms
+   ✓ shared token crafting through live stack zoom > gold recipe allocates and saves exactly once; repeated old callback is inert 33ms
+   ✓ shared token crafting through live stack zoom > fragments recipe allocates and saves exactly once; repeated old callback is inert 32ms
+   ✓ shared token crafting through live stack zoom > gold missing output never consumes, allocates, saves or logs success 26ms
+   ✓ shared token crafting through live stack zoom > fragments missing output never consumes, allocates, saves or logs success 30ms
+   ✓ shared token crafting through live stack zoom > live in-place material removal and fragment depletion are checked after opening 31ms
+   ✓ retained backpack pane across actions > drag to safe retains unaffected cards/scroll and updates source state 25ms
+   ✓ retained backpack pane across actions > drag to pearl retains unaffected cards/scroll and updates source state 26ms
+   ✓ retained backpack pane across actions > repeated retained-grid refresh binds keyboard and pointer once and reads replacement inventory 45ms
+   ✓ retained backpack pane across actions > refresh during drag clears old gesture and later pointerup cannot move inventory 32ms
+   ✓ retained backpack pane across actions > filter and sort refresh preserve control focus and correct visible cards 43ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/bag-page-lifecycle-review.test.js > 背包旧详情/页面回调与正常返回 > 珍珠盒连续存取保留滚动、说明展开和同牌焦点
+ FAIL  tests/bag-page-lifecycle-review.test.js > 背包旧详情/页面回调与正常返回 > 法师锦囊连续存取保留滚动、说明展开和同牌焦点
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/bag-page-lifecycle-review.test.js:148:48
+    146|     body.querySelector('.pearl-store-list').scrollTop = 35;
+    147|     const put = body.querySelector(`[data-act="${prefix}Put"][data-nam…
+    148|     expect(body.querySelector('details').open).toBe(true);
+       |                                                ^
+    149|     expect(body.scrollTop).toBe(120); expect(body.querySelector('.pear…
+    150|     expect(document.activeElement.dataset.act).toBe(`${prefix}Take`);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/bag-page-lifecycle-review.test.js > 背包旧详情/页面回调与正常返回 > 珍珠盒重绘后旧详情回调不能打开旧牌
+ FAIL  tests/bag-page-lifecycle-review.test.js > 背包旧详情/页面回调与正常返回 > 法师锦囊重绘后旧详情回调不能打开旧牌
+AssertionError: expected <div id="cardZoom" …(2)>…(3)</div> to be null
+
+- Expected: 
+null
+
++ Received: 
+<div
+  aria-label="木材卡卡牌详情"
+  class="inventory-zoom"
+  id="cardZoom"
+>
+  <button
+    class="cz-backdrop"
+  />
+  <div
+    class="cz-card"
+  />
+  <article
+    class="inventory-zoom-info"
+  >
+    <button
+      class="cz-close"
+    />
+    <header>
+      <h2>
+        木材卡
+      </h2>
+      <small>
+        资源 · 
+      </small>
+    </header>
+    <section
+      class="inventory-zoom-effect"
+    >
+      <h3>
+        卡牌效果
+      </h3>
+      <div
+        class="inventory-zoom-rules card-rules-copy"
+      />
+    </section>
+    <div
+      class="cz-foot"
+    >
+      undefined
+    </div>
+  </article>
+</div>
+
+ ❯ tests/bag-page-lifecycle-review.test.js:161:49
+    159|     ui._acts[`${prefix}Put`]({ name:card.name });
+    160|     staleInspect({ i:'0' });
+    161|     expect(document.getElementById('cardZoom')).toBeNull();
+       |                                                 ^
+    162|     ui._acts[`${prefix}Inspect`]({ i:'0' });
+    163|     expect(document.getElementById('cardZoom')).not.toBeNull();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 63 passed (67)
+   Start at  15:33:00
+   Duration  3.18s (transform 181ms, setup 0ms, collect 80ms, tests 2.49s, environment 365ms, prepare 66ms)
+

@@ -1,6 +1,6 @@
 import { planBagTokenCraft } from './game.bag.token-craft.js';
 import { patchBackpackPane } from './bag-pane-view.js';
-import { containerStoreHTML, restoreContainerFocus } from './game.container-store.view.js';
+import { containerStoreHTML, captureContainerView, restoreContainerFocus } from './game.container-store.view.js';
 import { stackTransferSlotDelta } from '../core/card-capacity.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
 const UI = window.SDT.UI;
@@ -416,7 +416,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     };
     const bagSpellStacks = () => cardStacks(false).filter(st => st.card.type === '法术' && st.card.id !== POUCH_ID);
     const render = () => {
-      const focused = root?.contains(document.activeElement) ? document.activeElement.dataset : null;
+      const viewState = captureContainerView(root);
       const storedList = storedStacks(), available = bagSpellStacks();
       const stacks = [...storedList, ...available];
       UI.showOverlay('法师锦囊', containerStoreHTML({ title: '法师锦囊', icon: 'cards', prefix: 'pouch',
@@ -425,8 +425,10 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
         help: '战斗中打出锦囊，从囊内选择 1 张法术直接释放；锦囊为空时无效果。',
       }), 'bag');
       root = UI.el.ovBody?.firstElementChild;
-      restoreContainerFocus(root, focused, 'pouchBack');
+      restoreContainerFocus(root, viewState, 'pouchBack');
+      const renderedRoot = root;
       bagAct('pouchInspect', d => {
+        if (root !== renderedRoot) return;
         const card = stacks[+d.i]?.card;
         if (!card) return;
         UI.showCardZoom(card, { returnFocus: root.querySelector(`[data-act="pouchInspect"][data-i="${+d.i}"]`) });
@@ -492,7 +494,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     };
     const bagResStacks = () => cardStacks(false).filter(st => st.card.type === '资源');
     const render = () => {
-      const focused = root?.contains(document.activeElement) ? document.activeElement.dataset : null;
+      const viewState = captureContainerView(root);
       const storedList = storedStacks(), available = bagResStacks();
       const stacks = [...storedList, ...available];
       UI.showOverlay('珍珠盒', containerStoreHTML({ title: '珍珠盒', icon: 'gem', prefix: 'pearl',
@@ -501,8 +503,10 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
         help: `每个珍珠盒可存 9 张资源卡，当前共 ${boxes} 个。把珍珠盒放进安全格，盒中卡牌在撤离失败时也会被抢运回基地。`,
       }), 'bag');
       root = UI.el.ovBody?.firstElementChild;
-      restoreContainerFocus(root, focused, 'pearlBack');
+      restoreContainerFocus(root, viewState, 'pearlBack');
+      const renderedRoot = root;
       bagAct('pearlInspect', d => {
+        if (root !== renderedRoot) return;
         const card = stacks[+d.i]?.card;
         if (!card) return;
         UI.showCardZoom(card, { returnFocus: root.querySelector(`[data-act="pearlInspect"][data-i="${+d.i}"]`) });
