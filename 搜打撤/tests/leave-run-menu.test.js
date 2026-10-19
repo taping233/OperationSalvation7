@@ -79,6 +79,40 @@ describe('离开对局：保存结果与分级确认', () => {
     expect(UI.hideOverlay).toHaveBeenCalledOnce();
   });
 
+  it.each([true, false])('旧保存结果 %s 不关闭或改写替换后的页面', async saved => {
+    let resolveSave;
+    const save = vi.fn(() => new Promise(resolve => { resolveSave = resolve; }));
+    const { actions, game, UI } = mountLeaveMenu({ save });
+    const pending = actions.get('leaveSave')();
+    UI.showOverlay('其他页面', '<section class="replacement">新的内容</section>');
+    game.state = 'replacement';
+    resolveSave(saved);
+    expect(await pending).toBe(false);
+    expect(game.state).toBe('replacement');
+    expect(document.querySelector('.replacement').textContent).toBe('新的内容');
+    expect(UI.hideOverlay).not.toHaveBeenCalled();
+    expect(UI.showScreen).not.toHaveBeenCalled();
+  });
+
+  it.each(['hidden', 'closing'])('面板 %s 后旧保存不退出，新面板仍可保存', async state => {
+    let resolveSave;
+    const save = vi.fn().mockImplementationOnce(() => new Promise(resolve => { resolveSave = resolve; })).mockReturnValue(true);
+    const { actions, game, UI, controller } = mountLeaveMenu({ save });
+    const pending = actions.get('leaveSave')();
+    const overlay = document.getElementById('overlay');
+    if (state === 'hidden') overlay.hidden = true;
+    else overlay.classList.add('closing');
+    game.state = 'idle';
+    resolveSave(true);
+    expect(await pending).toBe(false);
+    expect(game.state).toBe('idle');
+    expect(UI.hideOverlay).not.toHaveBeenCalled();
+    overlay.hidden = false; overlay.classList.remove('closing');
+    controller.openLeaveMenu();
+    expect(await actions.get('leaveSave')()).toBe(true);
+    expect(save).toHaveBeenCalledTimes(2);
+  });
+
   it('未关联档位不能伪装保存成功；undefined也不能触发退出', async () => {
     const temporary = mountLeaveMenu({ slot:null });
     expect(document.querySelector('[data-act="leaveSave"]').disabled).toBe(true);

@@ -654,17 +654,22 @@ export function createGameMenuPages(deps, shell) {
   // 会被宠物运回基地；物资/金币/消耗区全部散失。
   let leaveView = null;
   function leavePanel(title, step, content, initialFocus) {
-    const view = { step, busy:false };
+    const view = { step, busy:false, panel:null };
     leaveView = view;
     UI.showOverlay(title, `<section class="leave-run-panel glass-panel" data-leave-step="${step}">${content}</section>`, 'glass', { initialFocus, motionKey: `leave/${step}` });
+    view.panel = document.querySelector(`[data-leave-step="${step}"]`);
     return view;
   }
+  function leaveViewMounted(view) {
+    const overlay = view.panel?.closest('#overlay');
+    return leaveView === view && view.panel?.isConnected && overlay && !overlay.hidden && !overlay.classList.contains('closing');
+  }
   function leaveViewCurrent(view) {
-    return leaveView === view && !view.busy && !!document.querySelector(`[data-leave-step="${view.step}"]`);
+    return leaveViewMounted(view) && !view.busy;
   }
   function setLeaveBusy(view, busy) {
     view.busy = busy;
-    const panel = document.querySelector('.leave-run-panel');
+    const panel = view.panel;
     panel?.setAttribute('aria-busy', String(busy));
     panel?.querySelectorAll('button').forEach(button => { button.disabled = busy; });
   }
@@ -690,7 +695,8 @@ export function createGameMenuPages(deps, shell) {
       let saved = false;
       try { saved = await saveGame(); }
       catch (error) { console.error('[leave-run] 保存退出失败', error); }
-      if (leaveView !== view) return false;
+      // Saving may finish after another overlay replaces or closes this panel.
+      if (!leaveViewMounted(view)) return false;
       if (saved !== true) {
         game.state = 'modal';
         setLeaveBusy(view, false);

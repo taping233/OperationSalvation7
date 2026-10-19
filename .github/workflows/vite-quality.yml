@@ -43,6 +43,29 @@ jobs:
       - name: Install dependencies
         working-directory: 搜打撤
         run: npm ci
-      - name: Build Vite and enforce performance budget
+      - name: Build Vite
+        id: vite
         working-directory: 搜打撤
-        run: npm run build
+        run: npm run prebuild && npm exec vite build
+      - name: Enforce performance budget
+        id: budget
+        working-directory: 搜打撤
+        run: npm run postbuild
+      - name: Record complete build provenance
+        id: provenance
+        if: ${{ !cancelled() && steps.vite.outcome == 'success' }}
+        working-directory: 搜打撤
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+          WORKFLOW_RUN_ID: ${{ github.run_id }}
+          BUDGET_OUTCOME: ${{ steps.budget.outcome }}
+        run: node scripts/build-artifact-manifest.mjs
+      - name: Preserve private review artifact
+        if: ${{ !cancelled() && steps.provenance.outcome == 'success' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: vite-review-${{ github.sha }}
+          path: 搜打撤/desktop-app/game/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
