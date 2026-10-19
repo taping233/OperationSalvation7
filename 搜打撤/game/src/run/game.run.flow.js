@@ -1,3 +1,4 @@
+import { showRewardCardFeedback } from '../ui/reward-card-feedback.js';
 /* ============================================================
  * game.run.flow.js —— 走格子主流程：移动事务、落脚结算、即时/事件节点（架构批次 4）
  *
@@ -315,6 +316,7 @@ function openResourcePick(done) {
     UI.refresh(game);
     UI.log(`[[icon:gem]] 物资格：带走了【<b>${esc(cards[i].name)}</b>】`, 'loot');
     render();
+    showRewardCardFeedback(UI.el?.ovBody, [cards[i]], { mode:'page', token:record, sceneSelector:'.resource-reward-scene' });
   };
   const render = () => {
   const finished = record.taken !== null;

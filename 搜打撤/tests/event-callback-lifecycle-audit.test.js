@@ -420,6 +420,27 @@ describe('事件等待与回调生命周期审计', () => {
     UI._acts.resSkip();
     expect(H.game.state).toBe('idle');
   });
+  it('资源稀有卡与火堆额外卡复用获得演出，重开不重播', () => {
+    const card = {id:'rare-wood',name:'稀有木材',type:'资源',rarity:'稀有'};
+    H.cards = [card, {id:'wood',name:'木材',type:'资源',rarity:'古朴'}];
+    H.game.layerData[0].logical[1].def.type = 'resource';
+    flow.reenterCell(); UI._acts.resTake({i:'0'});
+    expect(document.querySelector('.bt-card-reveal-caption').textContent).toContain('已入背包');
+    UI._acts.resSkip(); flow.reenterCell();
+    expect(document.querySelector('.bt-card-feedback-layer')).toBeNull();
+    H.game.nodeRewards = {}; H.game.visited = {};
+    const original = window.SDT.Cards.randomClassCard;
+    window.SDT.Cards.randomClassCard = () => card;
+    try {
+      altar.openFireRest(); UI._acts.fireRestGo();
+      expect(document.querySelector('.bt-card-reveal-caption').textContent).toBe('稀有 · 已入背包');
+      const count = H.game.ownedCards.length;
+      vi.advanceTimersByTime(10000);
+      altar.openFireRest();
+      expect(document.querySelector('.bt-card-reveal')).toBeNull();
+      expect(H.game.ownedCards).toHaveLength(count);
+    } finally { window.SDT.Cards.randomClassCard = original; }
+  });
   it('入城补给满包反馈不被特写遮住，整理返回不重放介绍页', () => {
     H.cards = [{ id:'wood', name:'木材', type:'资源', rarity:'古朴' }];
     H.game.entrySupply = {version:1, layerIdx:0, trackPos:1, cardIds:['wood'], taken:[]};

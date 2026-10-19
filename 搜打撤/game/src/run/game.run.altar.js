@@ -124,6 +124,8 @@ export function openFireRest(after = finishInstant) {
     UI.log(`[[icon:fire]] 营火休整：回复 ${hpGain} 点生命，复原 ${restoredIds.length} 张卡牌`, 'ok');
     UI.refresh(game);
     result();
+    const bonus = bonusReceived && SDT.Cards.all().find(card => card.id === classCardId);
+    if (bonus) showRewardCardFeedback(UI.el?.ovBody, [bonus], { mode:'page', token:game.nodeRewards[cellKey], sceneSelector:'.fire-result-layout' });
   });
 }
 
