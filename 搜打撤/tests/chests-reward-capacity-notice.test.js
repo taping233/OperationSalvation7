@@ -235,18 +235,25 @@ describe('满包保留目标的腾位入口', () => {
       readStacks:()=>[],canReceive:()=>H.game.canReceiveCard(options.card),capacity:()=>H.game.bagCapacityText(),
       moveToSafe:()=>false,discardOne:()=>false}));
     H.game.ownedCards=fill(18); H.game.inventory=[]; open({kind});
+    const scroll = H.UI.el.ovBody.querySelector('.loot-scroll');
+    scroll.scrollLeft = 260; scroll.scrollTop = 48;
     acts.chestMakeRoom({i:1});
     const oldClaim=H.UI.el.ovBody.querySelector('[data-organize="claim"]');
     expect(oldClaim.disabled).toBe(true);
     H.UI.el.ovBody.querySelector('[data-organize="return"]').click();
     expect(H.UI.el.ovBody.querySelector('.is-pending-target').textContent).toContain('待领取');
     expect(Chests.serialize(H.game).current.selected).toBe(1);
+    expect(H.UI.el.ovBody.querySelector('.loot-scroll').scrollLeft).toBe(260);
+    expect(H.UI.el.ovBody.querySelector('.loot-scroll').scrollTop).toBe(48);
+    expect(document.activeElement.dataset.i).toBe('1');
     expect(Chests.serialize(H.game).current.taken).toEqual([]);
     expect(Chests.serialize(H.game).current.lost).toEqual([]);
     acts.chestMakeRoom({i:1});
     // A full-backpack visit preserves the target and resumes the original picker.
     H.UI.el.ovBody.querySelector('[data-organize="bag"]').click();
     H.game.ownedCards.pop(); Chests.resume();
+    expect(H.UI.el.ovBody.querySelector('.loot-scroll').scrollLeft).toBe(260);
+    expect(document.activeElement.dataset.i).toBe('1');
     expect(H.UI.el.ovBody.querySelector('.is-pending-target [data-act=chestSelect]').dataset.i).toBe('1');
     acts[kind==='medium'?'chestPick':'chestTake1']({i:1});
     expect(count('spell')).toBe(1);

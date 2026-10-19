@@ -27,6 +27,22 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
   let parked = false;
   let beforeMapReturn = null, returningToMap = false;
   let rewardZoom = null;
+  // Ephemeral presentation only: never serialized into reward/save data.
+  const rewardPositions = new WeakMap();
+  function rememberRewardPosition() {
+    const scroll = UI.el?.ovBody?.querySelector('.reward-v14 .loot-scroll');
+    if (!cur || !scroll) return;
+    rewardPositions.set(cur, { top:scroll.scrollTop, left:scroll.scrollLeft });
+  }
+  function restoreRewardPosition() {
+    const position = cur && rewardPositions.get(cur);
+    const scroll = UI.el?.ovBody?.querySelector('.reward-v14 .loot-scroll');
+    if (!position || !scroll) return;
+    scroll.scrollTop = position.top; scroll.scrollLeft = position.left;
+    if (Number.isInteger(cur.selected)) {
+      UI.el.ovBody.querySelector(`[data-act="chestSelect"][data-i="${cur.selected}"]`)?.focus({ preventScroll:true });
+    }
+  }
   let noticeFailure = null, suspendedBag = null;
   const clearNoticeContext = () => { noticeFailure = null; suspendedBag = null; };
   const closeRewardZoom = () => { rewardZoom?._closeCardZoom?.(true); rewardZoom = null; };
@@ -351,6 +367,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
   }
 
   function closePicker() {
+    rememberRewardPosition();
     closeRewardZoom(); cancelPresentation(); searchSeq++;
     queue[idx - 1].completed = boxResolved(cur);
     cur.leaveConfirm = false;
@@ -569,6 +586,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const body = overviewMode ? chestRewardFrameHTML({ overview:overviewHTML(), picker, label:cur.isClass ? '职业补给' : K.name }) : picker;
     const currentBody = UI.el?.ovBody;
     if (currentBody?.querySelector('.reward-v14') && !UI.el?.overlay?.hidden) {
+      rememberRewardPosition();
       const previousScroll = currentBody.querySelector('.loot-scroll');
       const scrollTop = previousScroll?.scrollTop || 0, scrollLeft = previousScroll?.scrollLeft || 0;
       const hadFocus = currentBody.contains(document.activeElement);
@@ -579,6 +597,8 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     } else {
       UI.showOverlay(`[[icon:archive]] ${cur.battleSummary ? '搜刮！战斗胜利 · ' : '收获 · '}${cur.isClass ? '职业·' : ''}${K.name} · 第 ${idx} / ${queue.length}`, body, 'chest');
     }
+    restoreRewardPosition();
+    if (cur.leaveConfirm) UI.el.ovBody.querySelector('[data-act="chestStay"]')?.focus({ preventScroll:true });
     markChestTier(cur);
     const renderedBox = cur;
     const surface = UI.el?.ovBody?.querySelector('.reward-v14');
@@ -616,6 +636,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
       if (!isLiveReward() || cur.leaveConfirm) return;
       const i = Number(d.i), box = cur;
       if (!box.cards[i] || box.taken.has(i) || box.lost.has(i)) return;
+      rememberRewardPosition();
       closeRewardZoom();
       box.selected = i;
       const current = () => isCurrentRewardRun() && cur === box && G.state === 'modal'
@@ -744,6 +765,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     G.ownedCards.map(o => [o.card.id, o.card.name, o.card.type, !!o.safe, !!o.stored]),
   ]);
   function suspend() {
+    rememberRewardPosition();
     closeRewardZoom();
     cancelPresentation();
     searchSeq++;

@@ -163,6 +163,24 @@ describe('背包旧详情/页面回调与正常返回', () => {
     ui._acts[`${prefix}Inspect`]({ i:'0' });
     expect(document.getElementById('cardZoom')).not.toBeNull();
   });
+  it.each([['珍珠盒','pearl'],['法师锦囊','pouch']])('%s返回背包保留列表位置并定位原容器', (name,prefix) => {
+    const board = document.querySelector('.bag-board'); board.scrollTop = 240;
+    inspect(name); ui._acts[`${prefix}StoreZoom`](); ui._acts[`${prefix}Back`]();
+    expect(document.querySelector('.bag-board').scrollTop).toBe(240);
+    expect(document.activeElement.dataset.stack).toBe(name);
+  });
+  it('丢弃取消返回原卡，确认后返回邻卡且保留背包位置', () => {
+    document.querySelector('.bag-board').scrollTop = 180;
+    inspect(spell.name); ui._acts.detailDiscard(); ui._acts.cancelDragDiscard();
+    expect(document.querySelector('.bag-board').scrollTop).toBe(180);
+    expect(document.activeElement.dataset.stack).toBe(spell.name);
+    expect(H.game.ownedCards.some(x => x.uid === 'spell')).toBe(true);
+    inspect(spell.name); ui._acts.detailDiscard(); ui._acts.confirmDragDiscard();
+    expect(document.querySelector('.bag-board').scrollTop).toBe(180);
+    expect(document.activeElement.matches('.bag-tile')).toBe(true);
+    expect(document.activeElement.dataset.stack).not.toBe(spell.name);
+    expect(H.game.ownedCards.some(x => x.uid === 'spell')).toBe(false);
+  });
   it('正常使用与当前容器连续存取/返回保持可用', () => {
     inspect(); ui._acts.useDetailCard(); expect(H.game.hp).toBe(13);
     inspect('法师锦囊'); ui._acts.pouchStoreZoom(); ui._acts.pouchPut({ name: spell.name }); expect(H.game.ownedCards.find(item => item.card.id === 'spell').stored).toBe(1);

@@ -1,5 +1,5 @@
 import { planBagTokenCraft } from './game.bag.token-craft.js';
-import { patchBackpackPane } from './bag-pane-view.js';
+import { patchBackpackPane, captureBackpackPosition, restoreBackpackPosition } from './bag-pane-view.js';
 import { containerStoreHTML, captureContainerView, restoreContainerFocus } from './game.container-store.view.js';
 import { stackTransferSlotDelta } from '../core/card-capacity.js';
 /* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
@@ -35,6 +35,11 @@ bagSlots.closeBackpack = closeBackpack;
 let requestedBagSection = null;
 let bagZone = 'bag', bagFilter = 'all', bagSortKey = 'rarity';
 let bagReceipt = null;
+let bagReturnPosition = null;
+function rememberBagPosition(name) {
+  const position = captureBackpackPosition(UI.el.ovBody, name);
+  if (position) bagReturnPosition = { position, current:captureBattleContext(game), cards:game.ownedCards };
+}
 function showBackpackSection(section) {
   if (game.battleActive) return;
   requestedBagSection = ['safe', 'pocket'].includes(section) ? section : 'main';
@@ -281,6 +286,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
   }
 
   function closeBackpack() {
+    bagReturnPosition = null;
     backpackOpen = false;
     resetBagDrag();
     UI.hideOverlay();
@@ -321,6 +327,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
   game.discardCard = discardOwnedCard;
 
   function showDiscardConfirm(name, fromSafe) {
+    rememberBagPosition(name);
     backpackOpen = false;
     game.state = 'modal';
     // 2026-09-19 留言 #25：确认页背景透明——走 fx-glass 暗纱 + 中性玻璃面板
@@ -399,6 +406,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
   // —— 法师锦囊 · 存放法术牌（2026-09-16 留言 #4 定版）——
   // 点背包里的锦囊 → 存入/取出法术牌：上限 3 张，战斗中打出锦囊时从里面选 1 张直接释放
   function openPouchStore() {
+    rememberBagPosition('法师锦囊');
     game.state = 'modal';
     let root; const current = captureBagView(() => root);
     const POUCH_ID = 'tt7-stratagem';
@@ -476,6 +484,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
   // 点背包里的珍珠盒 → 存入/取出资源卡：存入的卡不占背包格（容量口径见 game.session.cardStacks
   // 排除 o.stored），盒子容量 = 个数 × 3×3 = 9 张；盒子放进安全格时盒中卡牌同样受宠物保护。
   function openPearlStore() {
+    rememberBagPosition('珍珠盒');
     game.state = 'modal';
     let root; const current = captureBagView(() => root);
     const PEARL_ID = 'tt2-pearlbox';
@@ -721,7 +730,13 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
       supplyN:game.inventory.reduce((n, item) => n + (item.count || 1), 0),
       tiles: bagZoneTiles(bagStacks, safeStacks),
     });
-    if (!patchBackpackPane(UI, SDT, markup, bagZone, refreshOnly)) UI.showOverlay('[[icon:bag]] 背包', markup, 'bagpage');
+    if (!patchBackpackPane(UI, SDT, markup, bagZone, refreshOnly)) {
+      UI.showOverlay('[[icon:bag]] 背包', markup, 'bagpage');
+      if (refreshOnly && bagReturnPosition?.current() && bagReturnPosition.cards === game.ownedCards) {
+        restoreBackpackPosition(UI.el.ovBody, bagReturnPosition.position);
+      }
+      bagReturnPosition = null;
+    }
     // 分区 / 筛选 / 排序 / 点选详情：格子打开独立全文阅读与操作区，
     // inspectStack 契约与原有卡面特写返回路径不变。
     bagAct('bagZone', d => {

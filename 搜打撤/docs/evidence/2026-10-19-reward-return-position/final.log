@@ -1,0 +1,119 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤
+
+ ✓ tests/bag-architecture.test.js (5 tests) 6ms
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > keeps original source files, filters the production art manifest and copy, and retains the rations thumbnail lookup key
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > filters both shadowed card manifests and output, preserves every replacement and source, and restores the whole category
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 165
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 54 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 36 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > fails explicitly if a lazy reference or selector changes after early manifest selection
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+
+stdout | tests/runtime-asset-redundancy-plugin.test.js > reviewed asset omissions through real Vite hooks without a build > restores a selected legacy resource in the next manifests/copy and a redrawn rations image on a reused config
+[assets] reviewed unused production images omitted: 195
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 39 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+[assets] reviewed unused production images omitted: 194
+[assets] cleared generated directory: /workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/desktop-app/game
+[assets] art manifest: 41 images -> game/src/generated/art-manifest.js
+[assets] thumb manifest: 21 images -> game/src/generated/thumb-manifest.js
+[assets] omitted unused development SFX libraries: sfx/alternatives/, sfx/winter-v5/, sfx/winter-v6-ten/
+[assets] font license documents copied verbatim: 0
+[assets] asset URLs versioned: ?v=test
+
+ ✓ tests/runtime-asset-redundancy-plugin.test.js (5 tests) 1746ms
+   ✓ reviewed asset omissions through real Vite hooks without a build > keeps original source files, filters the production art manifest and copy, and retains the rations thumbnail lookup key  472ms
+   ✓ reviewed asset omissions through real Vite hooks without a build > filters both shadowed card manifests and output, preserves every replacement and source, and restores the whole category  522ms
+   ✓ reviewed asset omissions through real Vite hooks without a build > restores a selected legacy resource in the next manifests/copy and a redrawn rations image on a reused config  525ms
+ ✓ tests/safe-pearl-access.test.js (13 tests) 2301ms
+ ❯ tests/runtime-asset-redundancy.test.js (23 tests | 1 failed) 2984ms
+   ✓ keeps reviewed asset decisions identical across Git LF and Windows CRLF sources 9ms
+   × reviewed production-only asset omissions > contains 56 previous paths, 90 retired chest frames, 19 retired scenes and 30 shadowed card files 1554ms
+     → ENOENT: no such file or directory, open '/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/assets/scenes/entry/winter-arrival-1011-v1.webp'
+   ✓ reviewed production-only asset omissions > omits exactly the 15 reviewed shadowed originals and their thumbnails, retaining the four referenced card pairs  1238ms
+   ✓ reviewed production-only asset omissions > retains shadowed card files after override, renderer or data-loader changes and rejects restored lazy references 167ms
+   ✓ reviewed production-only asset omissions > keeps the current safe timeline and restores any referenced or changed retired rig selector 1ms
+   ✓ reviewed production-only asset omissions > omits only unused reviewed files and retains future static or configured references 1ms
+   ✓ reviewed production-only asset omissions > reads all catalog sequence and static fallback names on every decision, including restored legacy frames 1ms
+   ✓ reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: undefined 0ms
+   ✓ reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {} 0ms
+   ✓ reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{}} 0ms
+   ✓ reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":[]}} 0ms
+   ✓ reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":[0]}} 0ms
+   ✓ reviewed production-only asset omissions > retains legacy files for an absent or unknown catalog: {"sequences":{"idle":["sprite-v1/frame-001"]},"staticFallback":1} 0ms
+   ✓ reviewed production-only asset omissions > retains a whole category after a selector changes or disappears 1ms
+   ✓ reviewed production-only asset omissions > retains every candidate for new or changed opaque constructors and syntax/read uncertainty 2ms
+   ✓ reviewed production-only asset omissions > does not treat ordinary static assets or unrelated template strings as opaque 0ms
+   ✓ reviewed production-only asset omissions > checks the complete Rollup graph including async modules and generated manifests 1ms
+   ✓ reviewed production-only asset omissions > rejects a selection change between early manifest generation and final copy 0ms
+   ✓ reviewed production-only asset omissions > accepts only static license URLs and inert raw SVG exports while rejecting restored asset references 2ms
+   ✓ pins indirect URL inputs even when their change has no recognizable asset constructor 1ms
+   ✓ retains all candidates when an explicit path dependency or its owning consumer is missing 1ms
+   ✓ explicit indirect inputs retain normalized CRLF equivalence and invalidate between calls 0ms
+   ✓ keeps the reviewed sample callback and catalog in the explicit sound path dependency set 0ms
+ ✓ tests/pearl-storage-interface.test.js (9 tests) 1017ms
+ ✓ tests/architecture-boundaries.test.js (24 tests) 587ms
+   ✓ 当前源码的架构边界 > 战斗状态访问与独立规则模块遵循允许方向  563ms
+ ✓ tests/bag-page-lifecycle-review.test.js (70 tests) 3789ms
+   ✓ 背包旧详情/页面回调与正常返回 > 神秘药水地图详情禁用，直接旧回调也不消费/回血/发金币  300ms
+ ✓ tests/chests-reward-capacity-notice.test.js (21 tests) 690ms
+ ✓ tests/chest-callback-lifecycle-audit.test.js (16 tests) 534ms
+ ✓ tests/contracts.test.js (17 tests) 643ms
+   ✓ ESM 依赖方向 > src 模块不存在循环依赖  604ms
+ ✓ tests/chest-multi-queue-regression.test.js (1 test) 109ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/runtime-asset-redundancy.test.js > reviewed production-only asset omissions > contains 56 previous paths, 90 retired chest frames, 19 retired scenes and 30 shadowed card files
+Error: ENOENT: no such file or directory, open '/workspace/scratch/b7a53a06c872/recovery-20261019/restored-cd98745f/搜打撤/game/assets/scenes/entry/winter-arrival-1011-v1.webp'
+ ❯ tests/runtime-asset-redundancy.test.js:62:26
+     60|     for (const asset of current.excludedAssets) {
+     61|       expect(asset).not.toMatch(/sprite-v1\/|portraits\/(?:full|battle…
+     62|       expect(readFileSync(new URL(`../game/assets/${asset}`, import.me…
+       |                          ^
+     63|     }
+     64|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 10 passed (11)
+      Tests  1 failed | 203 passed (204)
+   Start at  15:49:24
+   Duration  6.61s (transform 1.26s, setup 0ms, collect 695ms, tests 14.41s, environment 2.84s, prepare 738ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

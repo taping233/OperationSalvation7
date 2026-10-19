@@ -80,3 +80,23 @@ export function patchBackpackPane(UI, SDT, markup, bagZone, refreshOnly) {
   }
   return true;
 }
+
+// A short trip to a container/confirmation should return to the same place.
+export function captureBackpackPosition(body, name) {
+  const board = body?.querySelector('.bag-board'), grid = board?.querySelector('.bag-grid');
+  if (!board || !grid) return null;
+  const tiles = [...grid.children];
+  const target = name ? tiles.find(tile => tile.dataset.stack === name) : document.activeElement;
+  return { top:board.scrollTop, left:board.scrollLeft, zone:grid.dataset.zone,
+    name:target?.dataset.stack, index:tiles.indexOf(target) };
+}
+export function restoreBackpackPosition(body, state) {
+  const board = body?.querySelector('.bag-board'), grid = board?.querySelector('.bag-grid');
+  if (!state || !board || !grid || grid.dataset.zone !== state.zone) return;
+  board.scrollTop = state.top; board.scrollLeft = state.left;
+  const tiles = [...grid.children];
+  const target = tiles.find(tile => state.name && tile.dataset.stack === state.name)
+    || (state.index >= 0 ? tiles[Math.min(state.index, tiles.length - 1)] : null)
+    || body.querySelector(`.bag-rz[data-zone="${state.zone}"]`);
+  target?.focus({ preventScroll:true });
+}

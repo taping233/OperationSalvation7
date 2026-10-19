@@ -150,6 +150,7 @@ it('放弃后取消再重选保留横向卡列位置，且不重抽不发奖', (
   const scroller = UI.el.ovBody.querySelector('.loot-scroll');
   scroller.scrollLeft = 240; scroller.scrollTop = 37;
   actions.chestSkip();
+  expect(document.activeElement.dataset.act).toBe('chestStay');
   expect(UI.el.ovBody.querySelector('.loot-scroll').scrollLeft).toBe(240);
   actions.chestStay(); actions.chestSelect({ i:'0' });
   expect(UI.el.ovBody.querySelector('.loot-scroll').scrollLeft).toBe(240);

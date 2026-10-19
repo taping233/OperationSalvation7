@@ -3,6 +3,7 @@
 // Current consumer reviews: docs/evidence/2026-10-16-WF-integration-ship-1016/asset-contracts.md
 // Retired scenes: docs/evidence/2026-10-16-WF-cloud-retired-scenes/README.md
 // Shadowed card art: docs/evidence/2026-10-16-shadowed-card-audit/README.md
+// 2026-10-19 re-review: chests changes only closing guards and DOM scroll/focus; asset selection unchanged.
 // Retired chest rigs: docs/evidence/2026-10-16-WF-cloud-performance-review/README.md
 export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
   candidates: [
@@ -211,7 +212,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "retired-scenes": {
       "game/data/art-mapping.json": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99",
       "game/src/core/art.js": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
-      "game/src/run/chests.js": "dbde483382c453fe9c716cc72e102a1f2ed438373bcde179e8d61b17d9ee8d18",
+      "game/src/run/chests.js": "7a1b49ccbc6d156087f3363aa4454ec07cf5630fb222c24e7bc52e49c3c2e74c",
       "game/src/run/chest-opening-art.js": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf",
       "game/src/run/game.run.data.js": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8",
       "game/src/run/game.run.scenes.js": "019d6c5b68cb39456b158e8b730f1a2c7495b2bfc3f6d6070a4301f222ecb701",
@@ -221,7 +222,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
       "game/css/scenes.css": "9cfa703fecf0e80eba1c2d4a7ead00f3d851e6f155eaf5b14b7d83ebf0f3d8f6"
     },
     "chests": {
-      "game/src/run/chests.js": "dbde483382c453fe9c716cc72e102a1f2ed438373bcde179e8d61b17d9ee8d18",
+      "game/src/run/chests.js": "7a1b49ccbc6d156087f3363aa4454ec07cf5630fb222c24e7bc52e49c3c2e74c",
       "game/src/run/chest-opening-art.js": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf"
     },
     "frames": {
