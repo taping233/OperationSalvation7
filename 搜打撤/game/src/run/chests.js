@@ -540,12 +540,15 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const isChoice = index => choice && index < choiceCount;
     const isPick = choice && cur.cards.some((_, i) => isChoice(i) && !taken.has(i) && !lost.has(i));
     const selected = Number.isInteger(cur.selected) ? cur.selected : null;
+    const compact = cur.cards.length === 1 && cur.claimMode !== 'one' && (overviewMode || !cur.coins);
+    let compactAction = '';
     const cardsHTML = cur.cards.map((card, i) => {
       const got = taken.has(i), dropped = lost.has(i);
       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
       const action = rewardClaimHTML({ index:i, state:rewardCardState(taken, lost, i), choice:isChoice(i), fits, disabled:cur.leaveConfirm });
+      if (compact) compactAction = action;
       return `<article class="reward-unit${selected === i && !got && !dropped ? ' is-pending-target' : ''}${got ? ' got' : dropped ? ' dropped' : ''}" data-reward-index="${i}" data-reward-card="${escAttr(card.id || card.name)}" data-reward-rarity="${escAttr(rewardRarity(card))}">
-        <button type="button" class="reward-card" data-act="chestSelect" data-i="${i}" aria-label="放大查看${escAttr(card.name || '卡牌')}" title="放大查看">${SDT.Cards.cardHTML(card)}</button>${selected === i && !got && !dropped ? '<span class="reward-target-label">待领取</span>' : ''}${action}</article>`;
+        <button type="button" class="reward-card" data-act="chestSelect" data-i="${i}" aria-label="放大查看${escAttr(card.name || '卡牌')}" title="放大查看">${SDT.Cards.cardHTML(card)}</button>${selected === i && !got && !dropped ? '<span class="reward-target-label">待领取</span>' : ''}${compact ? '' : action}</article>`;
     }).join('');
     // 容量预检（2026-09-09 老板定向）：全部收下放不下时先提示清理背包——
     // 按实际顺序模拟同名分堆/占格；成功收到珍珠盒后，后续资源可使用其扩格。
@@ -575,7 +578,6 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const leaveConfirmation = cur.leaveConfirm
       ? `<div class="reward-leave-confirm"><p>永久放弃剩余 ${rest.length} 张卡牌？离开后无法找回。</p><button type="button" class="reward-secondary" data-act="chestStay">继续领取</button><button type="button" class="reward-secondary danger" data-act="chestLeave">确认放弃</button></div>`
       : '';
-    const compact = cur.cards.length === 1 && cur.claimMode !== 'one' && (overviewMode || !cur.coins);
     const ops = finished && !overviewMode ? rewardExitHTML('chestContinue', '继续探索') : '';
     const bulk = !finished && !isPick && !cur.leaveConfirm && rest.length > 1 && (!noneFit || (!overviewMode && cur.coins && !cur.coinsReceived))
       ? '<button type="button" class="reward-secondary" data-act="chestTake">全部收下</button>' : '';
@@ -596,7 +598,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
         ? '任选1张，其余放弃；附赠另领'
         : '任选1张，其余放弃' : '',
       cards:cardsHTML || (coins ? '' : '<p class="reward-empty">这里没有奖励</p>'),
-      actions:`${ops}${bulk}`, coins, footer, compact, warning:'', details, count:cur.cards.length + (coins ? 1 : 0),
+      actions:`${compactAction}${ops}${bulk}`, coins, footer, compact, warning:'', details, count:cur.cards.length + (coins ? 1 : 0),
       className:`reward-v14${overviewMode ? '' : ' reward-standalone-picker'}${taken.size || lost.size ? ' no-anim' : ''}`,
     });
     const body = overviewMode ? chestRewardFrameHTML({ overview:overviewHTML(), picker, label:cur.isClass ? '职业补给' : K.name }) : picker;

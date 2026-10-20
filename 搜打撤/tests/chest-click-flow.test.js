@@ -94,6 +94,9 @@ describe('宝箱点击链路', () => {
     ovBody.querySelector('[data-eps-search]').click();
     expect(ovBody.querySelector('[data-act="chestSelect"]')).not.toBeNull();
     expect(ovBody.querySelector('.reward-compact')).not.toBeNull();
+    expect(ovBody.querySelector('.reward-stage [data-act="chestTake1"]')).toBeNull();
+    expect(ovBody.querySelectorAll('.reward-foot [data-act="chestTake1"]')).toHaveLength(1);
+    expect(ovBody.querySelector('.reward-foot [data-act="chestOpenBag"]')).not.toBeNull();
     expect(ovBody.querySelector('.reward-foot [data-act="chestReturn"]')).toBeNull();
     expect(ovBody.querySelector('[data-act="chestSkip"]').closest('details').open).toBe(false);
     ovBody.querySelector('[data-act="chestSelect"]').click();

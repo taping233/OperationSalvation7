@@ -730,3 +730,18 @@ body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.rew
 .reward-secondary-options > summary { cursor:pointer; padding:10px; }
 
 body #overlay .card .cqo-frame .cqp-shade:has(.reward-compact) { background:rgba(5,16,21,.68); }
+
+/* Keep toolbar and primary actions outside the card-only scrollport. */
+body #overlay .card .cqo-frame .cqp-dialog:has(.reward-compact) { max-height:100%; flex:none; }
+body #overlay .card .cqo-frame .cqp-dialog .reward-compact { height:0; flex:1 1 0; }
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact { height:min(720px,calc(100% - 64px)); flex:0 1 auto; }
+body #overlay .card .cqo-frame .cqp-dialog .reward-compact .reward-main,
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact .reward-main { padding:8px 20px; }
+body #overlay .card .cqo-frame .cqp-dialog .reward-compact .reward-objects,
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact .reward-objects { align-content:safe center; }
+body #overlay .card .cqo-frame .cqp-dialog .reward-compact .reward-foot,
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact .reward-foot { padding:12px 20px; gap:12px; flex-wrap:wrap; }
+body #overlay .card .cqo-frame .cqp-dialog .reward-compact .loot-actions,
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact .loot-actions { flex:0 0 auto; }
+body #overlay .card .cqo-frame .cqp-dialog .reward-compact .loot-actions .reward-claim,
+body #overlay .card:has(.reward-standalone-picker) .reward-standalone-picker.reward-compact .loot-actions .reward-claim { width:auto; min-width:160px; }
