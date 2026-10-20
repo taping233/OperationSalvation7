@@ -1,4 +1,6 @@
-import { FRAME_LIMITS, QUALITY_PRESETS, getPerformanceSettings, setPerformanceSettings } from '../core/performance-settings.js';
+import { FRAME_LIMITS, QUALITY_PRESETS, getPerformanceSettings, hasUnsavedPerformanceSettings, setPerformanceSettings } from '../core/performance-settings.js';
+
+const UNSAVED_MESSAGE = '本次已生效，但浏览器未能保存；重新加载游戏后可能恢复原设置。';
 
 const QUALITY_HELP = Object.freeze({
   low: '减少装饰光效，降低画面开销，适合省电或运行不流畅时使用。',
@@ -18,7 +20,7 @@ export function performanceSettingsHTML() {
       <p id="setQualityTechnical" class="performance-help">${QUALITY_PRESETS[value.quality].description}</p>
       <p class="performance-help">采样倍率控制画布清晰度与绘制开销，并受屏幕像素密度（DPR）限制。帧率选项只限制这些画布的动画绘制，不限制浏览器全部 CSS 动画或视频；与「减少动态效果」独立。</p>
     </details>
-    <p id="setPerformanceStatus" class="performance-help" role="status" aria-live="polite"></p>
+    <p id="setPerformanceStatus" class="performance-help" role="status" aria-live="polite">${hasUnsavedPerformanceSettings() ? UNSAVED_MESSAGE : ''}</p>
   </div>`;
 }
 export function bindPerformanceSettings(root) {
@@ -30,7 +32,7 @@ export function bindPerformanceSettings(root) {
     const result = setPerformanceSettings({ quality: quality.value, fps: fps.value });
     root.querySelector('#setQualityHelp').textContent = QUALITY_HELP[result.quality];
     root.querySelector('#setQualityTechnical').textContent = QUALITY_PRESETS[result.quality].description;
-    root.querySelector('#setPerformanceStatus').textContent = result.saved ? '已保存，立即生效' : '本次已生效，但浏览器未能保存；重新打开后可能恢复原设置。';
+    root.querySelector('#setPerformanceStatus').textContent = result.saved ? '已保存，立即生效' : UNSAVED_MESSAGE;
   };
   quality.addEventListener('change', change);
   fps.addEventListener('change', change);

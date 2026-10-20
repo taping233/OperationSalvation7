@@ -64,7 +64,9 @@ export function bindCollectionCards({ root, base, cards, ui }) {
     const count = visible.length;
     refreshCardBrowser(browser, { reset, items });
     if (reset) animateBaseRefresh(browser.querySelector('.card-browser-track'));
-    content.querySelector('[data-collection-count]').textContent = `${count} 张已收藏`;
+    content.querySelector('[data-collection-count]').textContent = search || type
+      ? `匹配 ${count} / 已收藏 ${items.length}`
+      : `${items.length} 张已收藏`;
     content.querySelector('.collection-empty').hidden = count > 0;
     content.dataset.empty = String(count === 0);
     const selected = items.find(button => button.classList.contains('on'));

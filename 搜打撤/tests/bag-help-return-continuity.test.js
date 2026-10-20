@@ -91,3 +91,54 @@ describe('真实背包与帮助模块的合成交互连续性（非浏览器实�
     click('[data-act="helpBack"]'); expect(ui.el.ovBody.firstElementChild).toBe(current);
   });
 });
+
+
+describe('背包关闭重开浏览连续性', () => {
+  it.each(['bag', 'safe', 'pocket'])('%s 关闭重开保留列表位置与焦点，延后聚焦不覆盖', zone => {
+    click(`.bag-rz[data-zone="${zone}"]`);
+    if (zone === 'bag') click('[data-act="bagFilter"][data-f="move"]');
+    const board = document.querySelector('.bag-board'); board.scrollTop = 217; board.scrollLeft = 19;
+    const target = document.querySelector(zone === 'bag' ? '[data-stack="法术"]' : '[data-act="openHelp"]');
+    target.focus(); bag.showBackpack(); flushFrames();
+    bag.showBackpack(); flushFrames();
+    expect(document.querySelector('.bag-board').scrollTop).toBe(217);
+    expect(document.querySelector('.bag-board').scrollLeft).toBe(19);
+    expect(document.querySelector('.bag-grid').dataset.zone).toBe(zone);
+    expect(document.activeElement.dataset.act).toBe(target.dataset.act);
+    if (zone === 'bag') {
+      expect(document.activeElement.dataset.stack).toBe('法术');
+      expect(document.querySelector('[data-act="bagFilter"].on').dataset.f).toBe('move');
+    }
+  });
+  it.each(['run', 'cards', 'section'])('%s 变化不恢复旧列表位置', change => {
+    document.querySelector('.bag-board').scrollTop = 217;
+    document.querySelector('[data-stack="法术"]').focus(); bag.showBackpack(); flushFrames();
+    if (change === 'run') H.game.discoveredPairs = new Set();
+    if (change === 'cards') H.game.ownedCards = [...H.game.ownedCards];
+    if (change === 'section') bag.showBackpackSection('pocket'); else bag.showBackpack();
+    flushFrames();
+    expect(document.querySelector('.bag-board').scrollTop).toBe(0);
+    expect(document.activeElement.dataset.stack).not.toBe('法术');
+  });
+});
+
+
+it.each(['safe', 'pocket'])('%s 分区按钮关闭重开仍聚焦原分区按钮', zone => {
+  click(`.bag-rz[data-zone="${zone}"]`);
+  document.querySelector(`.bag-rz[data-zone="${zone}"]`).focus();
+  bag.showBackpack(); flushFrames(); bag.showBackpack(); flushFrames();
+  expect(document.activeElement.dataset.zone).toBe(zone);
+});
+
+it('关闭按钮重开后恢复关闭按钮焦点，关闭返回来源仍只调用一次', () => {
+  const back = vi.fn(() => { H.game.state = 'idle'; });
+  bag.setBagReturnHook(back);
+  document.querySelector('.bag-board').scrollTop = 157;
+  document.querySelector('[data-act="closeBag"]').focus();
+  click('[data-act="closeBag"]'); flushFrames();
+  expect(back).toHaveBeenCalledTimes(1);
+  bag.showBackpack(); flushFrames();
+  expect(document.querySelector('.bag-board').scrollTop).toBe(157);
+  expect(document.activeElement.dataset.act).toBe('closeBag');
+  click('[data-act="closeBag"]'); expect(back).toHaveBeenCalledTimes(1);
+});

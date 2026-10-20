@@ -280,6 +280,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
 
   function closeBackpack() {
     bagReturnPosition = null;
+    rememberBagPosition();
     backpackOpen = false;
     resetBagDrag();
     UI.hideOverlay();
@@ -725,7 +726,7 @@ bagSlots.pocketAdd = pocketAdd;   // 本体函数经桥供 drag/settle 片调用
     });
     if (!patchBackpackPane(UI, SDT, markup, bagZone, refreshOnly)) {
       UI.showOverlay('[[icon:bag]] 背包', markup, 'bagpage');
-      if (refreshOnly && bagReturnPosition?.current() && bagReturnPosition.cards === game.ownedCards) {
+      if (bagReturnPosition?.current() && bagReturnPosition.cards === game.ownedCards) {
         restoreBackpackPosition(UI.el.ovBody, bagReturnPosition.position);
       }
       bagReturnPosition = null;

@@ -53,7 +53,7 @@ export function achievementGalleryHTML({ achievements, base, slot, isUnlocked, b
       <nav class="ag-categories" aria-label="奖章分类">${CATEGORIES.map(category => `<button type="button" data-gallery-category="${category.id}" aria-pressed="${category.id === 'all'}">${category.name}<small>${category.id === 'all' ? entries.length : entries.filter(entry => entry.category.id === category.id).length}</small></button>`).join('')}</nav>
     </div>
     <div class="ag-detail-backdrop" hidden data-gallery-dismiss aria-hidden="true"></div>
-    <section class="ag-detail" hidden role="dialog" aria-modal="true" aria-label="奖章详情" tabindex="-1"><div class="ag-detail-content"></div></section>
+    <section class="ag-detail" hidden role="dialog" aria-modal="true" aria-label="奖章详情" tabindex="-1"><div class="ag-detail-toolbar"><button type="button" class="ag-detail-close" data-gallery-dismiss data-cancel="true" aria-label="关闭奖章详情">收回奖章 <span aria-hidden="true">×</span></button></div><div class="ag-detail-content"></div></section>
   </section>`;
 }
 // Detail content is built only for the selected medal, not for every tile at entry.
@@ -112,6 +112,16 @@ export function bindAchievementGallery(root) {
   };
   input.addEventListener('input', () => refresh('search'));
   detail.addEventListener('keydown', event => {
+    // The shared overlay capture route uses the visible cancel button. Standalone
+    // galleries retain the same top-detail Escape behavior without that host.
+    if (event.key === 'Escape') {
+      if (event.isComposing || event.keyCode === 229) return;
+      if (!detail.hidden) {
+        event.preventDefault(); event.stopPropagation();
+        if (!event.repeat) closeDetail();
+      }
+      return;
+    }
     if (event.key !== 'Tab') return;
     const controls = [...detail.querySelectorAll('button:not(:disabled), a[href], input:not(:disabled), [tabindex="0"]')];
     if (!controls.length) { event.preventDefault(); detail.focus(); return; }

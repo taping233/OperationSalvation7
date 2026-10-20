@@ -48,10 +48,23 @@ it.each([[1,false],[2,false],[1,true]])('铸甲支付剑触发一次标准攻击
  BattleSession.commands.pickHandSelect('runtime-1');await settle();expect(R.foes[0].hp).toBe(7);
  BattleSession.commands.flee();await settle();
 });
-it('沉船宝盒支付仍仅获得两张，不重复触发',async()=>{
- const game=makeGame([canonical('tt2-turtlearmor'),canonical('tt2-wreck')]);BattleSession.start(game,[{id:'foe',name:'靶',hp:12,atk:0}],{isBoss:false});
+it.each([false,true])('沉船宝盒支付基础两张且获取派生独立结算 gift%s',async giftFirst=>{
+ const game=makeGame([canonical('tt2-turtlearmor'),canonical('tt2-wreck')]);
+ const gift=canonical('tt2-apollo'),plain=canonical('tt3-ice-spike');
+ expect([gift,plain].every(card=>C.isRandomObtainable(card))).toBe(true);
+ BattleSession.start(game,[{id:'foe',name:'靶',hp:12,atk:0}],{isBoss:false});
+ // 仅固定随机候选池；支付、获取被动与入手仍走真实生产管线。
+ vi.spyOn(C,'all').mockImplementation(()=>giftFirst&&!R.granted.some(entry=>entry.card.id===gift.id)?[gift]:[plain]);
  BattleSession.commands.playCard('runtime-0','self');await settle();BattleSession.commands.pickHandSelect('runtime-1');await settle();
- expect(R.granted).toHaveLength(2);expect(R.foes[0].hp).toBe(12);expect(R.energy).toBe(98);expect(R.pdef.armor).toBe(10);
+ const expected=giftFirst?[gift.id,plain.id,plain.id]:[plain.id,plain.id];
+ expect(R.granted.map(entry=>entry.card.id)).toEqual(expected);
+ expect(R.granted.every(entry=>R.hand.includes(entry.uid))).toBe(true);
+ expect(R.foes[0].hp).toBe(12);expect(R.energy).toBe(giftFirst?99:98);expect(R.pdef.armor).toBe(10);
+ expect(R.consumed.filter(uid=>uid==='runtime-1')).toHaveLength(1);
+ const granted=R.granted.map(entry=>entry.uid);
+ BattleSession.commands.pickHandSelect('runtime-1');await settle();
+ expect(R.granted.map(entry=>entry.uid)).toEqual(granted);
+ expect(R.energy).toBe(giftFirst?99:98);expect(R.pdef.armor).toBe(10);expect(R.foes[0].hp).toBe(12);
  BattleSession.commands.flee();await settle();
 });
 it('注能消耗剑使用同一触发且不另收费',async()=>{

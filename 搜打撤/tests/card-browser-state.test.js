@@ -98,6 +98,40 @@ describe('retained card browser state', () => {
 });
 
 describe('collection and personnel consumers', () => {
+  it('collection with no owned cards keeps its genuine empty state', () => {
+    const base={slot:++slot,data:{stash:[],collection:{}}};
+    const cards={all:()=>[],cardHTML:()=>''};
+    window.SDT.Base=base;document.body.innerHTML=collectionCardsHTML(base,cards);
+    bindCollectionCards({root:document.body,base,cards,ui});
+    expect(document.querySelector('[data-collection-count]').textContent).toBe('0 张已收藏');
+    expect(document.querySelector('.collection-browse-tools').hidden).toBe(true);
+    expect(document.querySelector('.collection-empty h3').textContent).toBe('尚未收藏卡牌');
+  });
+
+  it('collection distinguishes filtered matches from total ownership and restores totals after reset', () => {
+    const catalog=[{id:'a',name:'火球',type:'法术'},{id:'b',name:'长剑',type:'装备'}];
+    const base={slot:++slot,data:{stash:[],collection:{a:{name:'火球'},b:{name:'长剑'}}}};
+    const cards={all:()=>catalog,cardHTML:card=>`<b>${card.name}</b>`};
+    window.SDT.Base=base; document.body.innerHTML=collectionCardsHTML(base,cards);
+    bindCollectionCards({root:document.body,base,cards,ui});
+    const count=()=>document.querySelector('[data-collection-count]').textContent;
+    const nodes=[...document.querySelectorAll('[data-browser-key]')];
+    const input=document.querySelector('[data-collection-query]');
+    const typeInput=document.querySelector('[data-collection-type]');
+    const search=value=>{input.value=value;input.dispatchEvent(new Event('input'));};
+    expect(count()).toBe('2 张已收藏');
+    search('火');expect(count()).toBe('匹配 1 / 已收藏 2');
+    search('不存在');expect(count()).toBe('匹配 0 / 已收藏 2');
+    expect(document.querySelector('.collection-empty').hidden).toBe(false);
+    ui.acts.collectionReset();expect(count()).toBe('2 张已收藏');
+    typeInput.value='装备';typeInput.dispatchEvent(new Event('change'));
+    expect(count()).toBe('匹配 1 / 已收藏 2');
+    search('火');expect(count()).toBe('匹配 0 / 已收藏 2');
+    ui.acts.collectionReset();search('   ');expect(count()).toBe('2 张已收藏');
+    expect([...document.querySelectorAll('[data-browser-key]')]).toEqual(nodes);
+    expect(document.querySelector('.collection-empty').hidden).toBe(true);
+  });
+
   it('collection repeated selection retains detail controls, resolves only the requested ownership record, and sees in-place changes', () => {
     const catalog=Array.from({length:40},(_,i)=>({id:String(i),name:`卡${i}`,type:'法术',rarity:'古朴'}));
     let reads=0;

@@ -61,9 +61,9 @@ describe('achievement gallery', () => {
     const backdrop = root.querySelector('.ag-detail-backdrop');
     expect(detail.hidden).toBe(false);
     expect(backdrop.hidden).toBe(false);
-    const close = detail;
-    expect(detail.querySelector('[data-gallery-dismiss]')).toBeNull();
-    expect(close.getAttribute('aria-label')).toBe('奖章详情');
+    const close = detail.querySelector('[data-gallery-dismiss]');
+    expect(close.getAttribute('aria-label')).toBe('关闭奖章详情');
+    expect(close.dataset.cancel).toBe('true');
     expect(detail.querySelector('[data-act]')).toBeNull();
     expect(document.activeElement).toBe(detail);
     expect(root.querySelector('.ag-body').inert).toBe(true);

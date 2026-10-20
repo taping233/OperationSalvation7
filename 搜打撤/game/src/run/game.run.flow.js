@@ -865,7 +865,7 @@ function openEventRecode() {
     setBagReturnHook(render);
     nodeShell({
       tone: 'event', asset: 'scene-event-recode', icon: '[[icon:recycle]]', title: '故障重编',
-      sub: `选择 <b>${need}</b> 张招式或装备卡，将其随机变为同稀有度、同类型的卡牌（${selected.size}/${need}）`,
+      sub: `选择 <b>${need}</b> 张招式或装备卡，将其随机变为同稀有度、同类型的卡牌（<span data-recode-count>${selected.size}</span>/${need}）`,
       body: `<div class="bt-hand event-choice-hand">${eligible.map((o, i) => `
         <button type="button" class="bt-card event-choice-card${selected.has(o.uid) ? ' picked' : ''}" data-act="eventRecodePick" data-i="${i}" aria-pressed="${selected.has(o.uid)}">
           ${SDT.Cards.cardHTML(o.card, 'sm')}
@@ -874,13 +874,28 @@ function openEventRecode() {
         <div class="scene-ops"><button class="ov-btn" data-act="eventRecodeLeave">放弃转换</button><button class="ov-btn ok" data-act="eventRecodeGo" ${selected.size !== need ? 'disabled' : ''}>启动重编</button></div>`,
     });
     const active = eventPageBinding('eventRecodePick', current);
+    const page = UI.el.ovBody;
+    const syncSelection = () => {
+      page.querySelectorAll('[data-act="eventRecodePick"]').forEach(button => {
+        const picked = selected.has(eligible[Number(button.dataset.i)]?.uid);
+        button.classList.toggle('picked', picked);
+        button.setAttribute('aria-pressed', String(picked));
+        const mark = button.querySelector('.chest-got-mark');
+        if (picked && !mark) {
+          const label = document.createElement('span');
+          label.className = 'chest-got-mark'; label.textContent = '已选'; button.append(label);
+        } else if (!picked) mark?.remove();
+      });
+      page.querySelector('[data-recode-count]').textContent = String(selected.size);
+      page.querySelector('[data-act="eventRecodeGo"]').disabled = selected.size !== need;
+    };
     UI.act('eventRecodePick', (d) => {
       if (settled || !active()) return;
       const entry = eligible[+d.i];
       if (!entry) return;
       if (selected.has(entry.uid)) selected.delete(entry.uid);
       else if (selected.size < need) selected.add(entry.uid);
-      render();
+      syncSelection();
     });
     UI.act('eventRecodeLeave', () => { if (!settled && active()) { settled = true; finishEventRoll(closeEventFlow); } });
     UI.act('eventRecodeGo', () => {
