@@ -16,12 +16,12 @@
 |---|---|---|---|---|
 | [无](wu.md) | wu | 侠客 | [ref-images/wu.webp](ref-images/wu.webp) | 10-18指定原图补背后黑剑与剑带，交错站姿；性格背景待老板提供 |
 | [常无欲](changwuyu.md) | changwuyu | 降临者 | [ref-images/changwuyu.webp](ref-images/changwuyu.webp) | 10-18恢复重绘前10-13版本；扶镜、黑雾与橙火保留；性格背景待老板提供 |
-| [白塔](baita.md) | baita | 法师 | [ref-images/baita.webp](ref-images/baita.webp) | 10-18恢复重绘前10-13版本；坐姿与身份保留；性格背景待老板提供 |
+| [白塔](baita.md) | baita | 法师 | [ref-images/baita.webp](ref-images/baita.webp) | 10-20接入贝雷帽书卷版；单眼刘海、绿裙坐姿、蛋糕与浮书；性格背景待老板提供 |
 | [黑像](heixiang.md) | heixiang | 战士 | [ref-images/heixiang.webp](ref-images/heixiang.webp) | 10-18恢复重绘前10-13版本；喝咖啡与背剑保留；性格背景待老板提供 |
 | [星月](xingyue.md) | xingyue | 牧师 | [ref-images/xingyue.webp](ref-images/xingyue.webp) | 10-18恢复重绘前10-13版本；胸前祝祷、长辫与星灯保留；性格背景待老板提供 |
 
 ## 参考图说明
 
-`ref-images/` 是五张运行立绘的参考副本。五图于2026-10-18按老板指定10-16参考接入：无使用原图，四人已按老板要求恢复本轮重绘前10-13版本，统一1024×1536，运行图和参考副本逐字节核对一致，见[统一重绘记录](../evidence/2026-10-18-roster-reference-final/README.md)。后续替换仍须重新核对。
+`ref-images/` 是五张运行立绘的参考副本。白塔于2026-10-20更新为1037×1516贝雷帽书卷版，运行图和副本逐字节一致，见[实装记录](../evidence/2026-10-20-roster-nai5-redo/baita-install-receipt.json)。其余四人沿用1024×1536版本，来源见[统一重绘记录](../evidence/2026-10-18-roster-reference-final/README.md)。后续替换仍须重新核对。
 
 无的当前锚点见[无](wu.md)；10-09旧版来源见[历史记录](../evidence/2026-10-09-wu-roster-portrait/README.md)。

@@ -1,7 +1,7 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1468,
+  "count": 1472,
   "assets": [
     {
       "path": "sfx/selected15-r2-1018/close.wav",
@@ -6676,10 +6676,10 @@
     {
       "path": "portraits/full/baita.webp",
       "ext": "webp",
-      "bytes": 327278,
-      "sha256": "ab6ab3c9f5c6e185b2d71ac7b719dd970fd259436f2675d163d2ea4aa849b218",
+      "bytes": 343474,
+      "sha256": "8a82b130be3fa5cc953c060f7c3861144acc5844c255416a65f37e843ed85057",
       "license": "项目自有（老板指定立绘）",
-      "source": "docs/evidence/2026-10-18-roster-reference-final/restored-four.json"
+      "source": "docs/evidence/2026-10-20-roster-nai5-redo/baita-install-receipt.json"
     },
     {
       "path": "portraits/full/changwuyu-drum-room.webp",
@@ -12036,6 +12036,38 @@
       "source": "game/assets/sfx/web-foley-1018/SOURCES.md",
       "bytes": 37705,
       "sha256": "102a5b39a107d053dccde9153a3d694a3dcf395b343486287a0ee6a54941284b"
+    },
+    {
+      "path": "reconstruction/wallpaper-xingyue-piano-1020.webp",
+      "ext": "webp",
+      "bytes": 484368,
+      "sha256": "5819223c5dbbddef6b2a96eed382604f651c8f4829d70fe39f3c6af807a8e393",
+      "license": "项目AI生成素材（老板指定星月钢琴扩图版添加为首页第三张壁纸）",
+      "source": "docs/evidence/2026-10-20-xingyue-piano-wallpaper/receipt.json"
+    },
+    {
+      "path": "reconstruction/wallpaper-wu-bass-1020.webp",
+      "ext": "webp",
+      "bytes": 270978,
+      "sha256": "9e435d8b6e635cc7810fa1ee77f1b5d93c6941f0f7120e54e61d07f4a216892a",
+      "license": "Project AI-generated asset; owner authorized home wallpaper installation.",
+      "source": "docs/evidence/2026-10-20-wu-bass-polish/receipt.json"
+    },
+    {
+      "path": "reconstruction/wallpaper-baita-station-1020.webp",
+      "ext": "webp",
+      "bytes": 429580,
+      "sha256": "a93b0c9c35b3a73536b27d106f0ef6148b6b2dcb09071f2c4d9fc925ed4d261f",
+      "license": "Project AI-generated asset; owner authorized home wallpaper installation.",
+      "source": "docs/evidence/2026-10-20-baita-first-style/install-receipt.json"
+    },
+    {
+      "path": "reconstruction/wallpaper-xingyue-reeds-1020.webp",
+      "ext": "webp",
+      "bytes": 441772,
+      "sha256": "a0a603507f5b11c20fc74a57e34641bf0faf631bac036dd0c8bdb5cd715d53b5",
+      "license": "Project AI-generated asset; owner authorized home wallpaper installation.",
+      "source": "docs/evidence/2026-10-20-xingyue-reeds-light-wallpaper/install-receipt.json"
     }
   ],
   "verified": "2026-10-05"

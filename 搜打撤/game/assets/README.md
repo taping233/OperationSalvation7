@@ -12,7 +12,9 @@
 
 新素材应记录来源与授权；已有字体、音效和卡图的来源说明分别见本目录下的 `fonts/`、`sfx/` 和 `cards/items/`。替换或删除素材前，先检查实际引用、来源记录及对应的视觉回归。
 
-首页当前使用 `reconstruction/wallpaper-snow-road-1016.webp`（老板指定雪原公路图，保持1672×941原尺寸），设置页沿用同图；切换壁纸功能保留，当前列表为1张。原 `wallpaper-wu-1004.webp` 与 `wallpaper-ensemble-1005.webp` 已退出首页选项、保留文件作退役存档。来源与哈希见[接入记录](../../docs/evidence/2026-10-16-home-snow-road/receipt.json)。
+首页壁纸列表为雪原公路、白塔与黑像、星月钢琴、无贝斯、白塔车站、星月芦苇六张；没有有效壁纸偏好时默认展示无贝斯，已有选择继续保留。各图采用独立图层，切换时以0.5秒交叉淡入淡出。无贝斯采用1672×941默认块面厚涂扩图版，来源与哈希见[接入记录](../../docs/evidence/2026-10-20-wu-bass-remix/install-receipt.json)；雪原公路来源见[记录](../../docs/evidence/2026-10-16-home-snow-road/receipt.json)。设置页背景仍用雪原公路。原 `wallpaper-wu-1004.webp` 与 `wallpaper-ensemble-1005.webp` 保留为退役存档。
+
+星月芦苇使用1672×941夕照光影细化扩图版，加入第六张轮换，来源与哈希见[接入记录](../../docs/evidence/2026-10-20-xingyue-reeds-light-wallpaper/install-receipt.json)。
 
 无的“春日·机车”“新春·旗袍”“盛夏·水枪”分别使用 `portraits/full/wu-casual-v14.webp`、`wu-spring-v15.webp`、`wu-beach.webp`，三图均已按当前人物大图容器约1.30:1补绘上下场景并实装；来源、备份和逐图预览见[扩图记录](../../docs/evidence/2026-10-15-wu-skin-fill/README.md)。泳装此前的NAI构图及默认v1.0重绘过程见[泳装来源](../../docs/evidence/2026-10-15-wu-swim-nai/README.md)。
 
@@ -25,3 +27,5 @@
 小型物资箱、密封物资箱、军用保险柜分别使用 `scenes/chests/supply-opening-v6/{small,medium,large}/frame-00.webp` 至 `frame-03.webp`，对应灰绿、烟紫、香槟金黑；总览闭合图与开箱动作同源。`fx/frame-00.webp` 至 `frame-03.webp` 是独立闪光，随解锁、爆光、余辉同步播放，帧内光效保留。职业箱与首脑箱仍使用原 `safe-simple-v7/`。
 
 本轮素材来源、SHA256与接入边界见[实装记录](../../docs/evidence/2026-10-16-WF-chest-install-v6/README.md)。老板明确要求接入后不检测，本轮不宣称测试或游戏内验收通过。
+
+白塔车站使用老板选定的持票手修订版扩图至1672×941，加入第五张轮换，来源与哈希见[接入记录](../../docs/evidence/2026-10-20-baita-station-wallpaper/receipt.json)。

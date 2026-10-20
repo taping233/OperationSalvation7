@@ -1,41 +1,45 @@
-# 游戏默认画风：双图块面厚涂
+# 游戏默认画风：块面厚涂 · 九图融合
 
-2026-10-18老板明确恢复2026-10-16双图块面厚涂为项目默认；保留头发与裙子的结构性块面笔触，只删不合理的碎细节。恢复决定见[修订记录](../../evidence/2026-10-18-roster-unified/revision.md)。本页是项目默认画法的现行来源，沿用原文件路径以保持既有链接有效；旧链接中的 v1.0 名称不代表仍采用历史打包版限制。两张原图、SHA256 与本次决定见[参考与变更记录](../../evidence/2026-10-16-default-art-style/README.md)。人物身份、用途、构图和光色按任务分别指定；技能与工具配方不自动覆盖本页。
+当前默认在2026-10-16双图块面厚涂基础上，融入老板2026-10-20提供的九张插画：加强有轻重的手绘线、随形覆色、冷暖叠色和清透脸眼，继续保留头发与衣褶的结构性块面。九图原件、逐图提取及验证边界见[融合记录](../../evidence/2026-10-20-default-style-fusion/README.md)。本页是项目默认画法的现行来源，沿用原路径以保持既有链接有效；人物身份、用途、构图和光色按任务指定，技能与工具配方不自动覆盖本页。
 
 ## 默认参考
 
-- 图 1：全身图（本地 `reference-full.png`，原件获取与哈希见上述记录）：核对完整轮廓、全身笔触尺度、头发与裙子的明暗组织。
-- 图 2：局部细节图（本地 `reference-detail.png`，原件获取与哈希见上述记录）：核对发束、叠色、衣褶折面、荷叶边与脸眼的细化程度。
+- 图 1：全身图（本地 `reference-full.png`，原件获取与哈希见本节双图记录）：核对完整轮廓、全身笔触尺度、头发与裙子的明暗组织。
+- 图 2：局部细节图（本地 `reference-detail.png`，原件获取与哈希见本节双图记录）：核对发束、叠色、衣褶折面、荷叶边与脸眼的细化程度。
+- 新增九图：按本次发送顺序保存在[融合记录目录](../../evidence/2026-10-20-default-style-fusion/README.md)，主要补充手绘线与色块的结合、彩色灰叠压、人物神态及细节疏密。
 
-后续制作以两图的实际画法为准。图中银发、蓝眼、黑裙、墨镜、白底与站姿属于参考内容，不推广为所有角色的设定；无的身份仍沿现行人设页。既有运行素材按各自接入状态维护。
+旧双图控制块面结构与笔触尺度，新增九图补充线、色与脸眼表现，共同按下方融合画法使用。两张旧图的原件、哈希及恢复决定见[双图记录](../../evidence/2026-10-16-default-art-style/README.md)与[恢复记录](../../evidence/2026-10-18-roster-unified/revision.md)。银发、蓝眼、黑裙、兽耳、角、帽子、光环、飘带、白底与站姿均是参考内容，不推广为所有角色设定；既有运行素材按各自接入状态维护。
 
 ## 画法
 
-- **整体**：日系二次元块面厚涂；不透明色块叠压塑形，硬边明暗为主，保留可见的长短笔触、切面与覆盖痕迹。完整轮廓和主要明暗组清楚，局部块面可以密集，密度随部位变化。
-- **头发**：先读出高马尾与发束的整体流向，再保留宽窄交错的长发束、尖形发梢及局部细发线。灰白与冷灰块面沿发束转折交错，亮暗笔触有长有短、有断有连；保留参考图中的棱角与叠色，不压成少量光滑宽发束。
-- **衣料与裙子**：褶皱受收腰、垂坠和层叠结构支配，以深灰、冷灰和灰白的多级硬边色块表现折面。保留裙身纵向折面、局部短促切笔、荷叶边密集而不规则的明暗层叠及锯齿状轮廓；不把衣褶数量固定为三四组，不抹平细碎但有结构的笔触。
-- **脸眼与皮肤**：二次元五官、清楚睫毛与眼睑、分层虹膜和少量亮形；脸眼细于衣料。鼻口简洁，肤色比头发和裙子柔和，保留颈肩主投影与少量柔和过渡，形成材质区别。
-- **线与边缘**：脸部、发丝及关键结构可保留细线；衣料主要依赖色块边缘塑形。硬边与局部柔边并存，笔触方向跟随发束、褶皱和材质转折。
-- **光色与适配**：综合色组织主体，局部鲜色点睛；具体配色与光源服从任务。非人物题材继承叠色、硬边块面和材质笔触，构图与信息可读性沿用途规范，不凭人物白底推导场景背景。
+- **整体**：日系二次元块面厚涂；不透明色块叠压塑形，硬边明暗为主，保留长短笔触、切面、覆色搭接与少量擦笔。完整轮廓和主要明暗组清楚，大面与局部密集笔触交替；脸眼清楚，其他区域按结构选择性完成。
+- **头发**：按角色实际发型组织宽窄交错的发束、尖形发梢及局部细发线；弧形长笔和短促切笔共同表现流向。中间调、阴影与少量亮色片沿发束叠压，可借环境光加入冷暖色差。保留棱角与叠色，发束之间留连续安静的色域；不把全头压成光滑宽带，也不均匀铺满细亮线。
+- **衣料与裙子**：褶皱受收腰、垂坠、关节张力和层叠结构支配，多级硬边色块表现折面。长条折面、局部短切笔与连续主暗面相接；荷叶边等密集结构保留不规则叠影，宽袖与大衣保留较完整的大色面。笔触密度随服装结构变化，不固定衣褶数量，也不抹平有结构的细碎切面。深色布料用有冷暖倾向的灰层次保持可读。
+- **脸眼与皮肤**：清楚的二次元眼睑、睫毛和分层虹膜，以少量不等大的亮形表现通透，神态由视线、眼型和嘴形共同表达。鼻口简洁，肤色以完整的暖色面为主，比头发与衣料柔和；保留刘海影、颈肩主投影与必要柔边。少量肤色变化服从光色与表情，不给所有角色统一幼态眼型、红晕或亮鼻尖。
+- **线与边缘**：有轻重、断续和色差的手绘线参与造型，重点落在眼睑、发梢、手指、衣领、接缝和遮挡；线可被色块覆盖或融入邻色。衣料仍主要依赖色块塑形，局部轮廓线可加强转折；硬边、柔边与少量失边交替，短排线或擦笔只服务具体材质，不铺满表面。
+- **光色与材质**：灰化综合色铺大面，以少量协调鲜色点睛；阴影和亮部可用邻近的冷暖色叠压，避免只给底色加黑白。参考中的蓝紫、绿橙与红灰均是可选配色关系，实际色板和光源按任务。皮肤柔和、布料偏哑光，金属与玻璃用少量明确反光区分，不统一磨亮。
+- **构图与适配**：可借发梢、衣摆、手势与少量图形组织动势和疏密，主轮廓及重要道具清楚。九图的白底、半身裁切与装饰带不成为默认构图；非人物题材继承叠色、硬边块面及材质笔触，环境与可读性沿用途规范。
 
 ## 验图重点
 
-先看全图的轮廓、明暗与焦点，再按图 2 的尺度核对头发和衣料。头发是否保留长短交错的切笔，裙子是否有可读的折面与层叠，是默认画风的必要检查项。减噪应针对无结构的均匀碎屑、重复高光和滤镜纹理，不删除原图认可的发束与衣褶块面。避免全图磨平、统一矢量平填、塑料质感及与形体无关的随机三角拼贴。
+先看全图轮廓、明暗分组与脸眼焦点，再核对发束和衣料的长短切笔、覆色及层叠。新增检查：线条是否有轻重与断续；冷暖叠色是否服务形体；眼睛是否通透且符合角色；安静大面与密集刻画是否有区别。减噪针对无结构的均匀碎屑、重复高光和滤镜纹理，不删除认可的发束与衣褶块面。避免全图磨平、统一矢量平填、塑料质感及与形体无关的随机三角拼贴。
 
 ## 可复用画风段
 
-以下英文段描述本轮双图的画法；主体、配色、构图和背景另写。支持图片参考时同时提供本页两图，标明它们只控制画法；文字段尚未通过新一轮生图验证。
+以下英文段描述融合画法；主体、配色、构图和背景另写。支持图片参考时，旧双图用于结构和笔触尺度，按本次需要从新增九图选择线色或脸眼参考；标明实际输入顺序及各图只控制画法。原件不可用时说明缺口。文字段尚未通过新一轮生图验证。
 
 ```text
-STYLE REFERENCES: the approved full-body image and close-up detail image supplied on 2026-10-16. The full view anchors silhouette and brush scale; the close-up anchors hair strokes, cloth facets and face rendering. Borrow painting technique only; character identity, costume, pose, palette and background come from the task.
-OVERALL: Japanese anime character painting with opaque layered color blocks, firm light-shadow boundaries and visible angular painterly strokes. Preserve coherent large forms together with locally dense, structured smaller planes. Vary stroke length, width and density by surface.
-HAIR: interleaved broad and narrow flowing locks, tapered tips and selected fine contour strands. Layer cool midtone, shadow and highlight patches along the locks, mixing elongated strokes with short angular cuts and broken overlaps. Keep the reference's faceted brushwork and flowing volume instead of smoothing the hair into a few rounded ribbons.
-CLOTH: readable weight, tension and layered construction. Preserve numerous connected hard-edged fold planes, long vertical strokes, short angular cuts and irregular overlapping ruffle shadows. Dark cloth retains several readable gray values. Match detail density to the references; do not reduce every garment to three or four broad folds.
-FACE AND SKIN: clearly anime eyes with defined upper lids, layered iris colors and selective highlights; economical nose and mouth. Face more resolved than clothing. Skin has calmer shapes and softer transitions than the angular hair and cloth, with clear neck and shoulder cast shadows.
-EDGES AND COLOR: selective fine lines around eyes, hair and important structure; clothing mainly shaped by color boundaries. Muted coherent base colors with concentrated vivid accents, adapted to the requested subject and lighting. Hands and props structurally readable.
-AVOID: uniformly smoothed hair or cloth, flat vector fill, airbrushed glossy plastic, photorealistic face, filter grain used as brushwork, random equal-size triangular confetti unrelated to form, mechanically repeated highlights, copied reference identity on other subjects, text, watermark and UI.
+REFERENCE ROLES: retain the structural hair and cloth facets of the 2026-10-16 base pair, enriched with the selective drawing, chromatic overpainting and expressive anime faces of the nine references supplied on 2026-10-20. When images are attached, label their actual order and roles. Borrow technique only; identity, costume, pose, palette and background come from the task.
+OVERALL: hand-painted Japanese anime illustration, opaque layered color blocks, firm light-shadow boundaries and visible directional strokes. Combine coherent large forms and quiet color fields with locally dense, structured smaller planes. Vary stroke length, width and density; retain selected overlaps and dry-brush marks where they describe form.
+HAIR: interleaved broad and narrow locks following the character's actual hairstyle, tapered tips and selected fine contour strands. Mix curved elongated strokes with short angular cuts and broken overpainting. Layer midtones, colored shadows and a few highlight shapes along the locks, with warm-cool shifts suited to the lighting. Preserve faceted volume and connected quiet areas within locks.
+CLOTH: readable weight, tension and layered construction. Join long fold planes, short angular strokes and continuous main shadow groups. Preserve dense irregular overlap in ruffles and calmer broad planes on spacious sleeves or coats. Dark cloth retains several readable chromatic gray values; density follows garment structure rather than a fixed fold count.
+FACE AND SKIN: expressive anime eyes with defined lids, layered iris colors and a few unequal highlight shapes; gaze and features suit the character. Economical nose and mouth. Face more resolved than clothing, with calm warm skin shapes, selected soft transitions, fringe shadows and clear neck and shoulder cast shadows. Avoid uniform blush and polished nose-tip shine.
+LINES AND EDGES: selective hand-drawn contours vary in weight, color and continuity around eyes, hair tips, fingers, collars, seams and overlaps. Some lines disappear under paint or merge into adjacent colors. Cloth is primarily shaped by color boundaries. Alternate firm edges, a few soft or lost edges, and occasional local hatching suited to the material. Keep hands and props structurally readable.
+COLOR AND MATERIAL: coherent muted or chromatic-gray base colors with concentrated vivid accents; warm and cool overpainting follows form and light rather than only adding black or white. Adapt palette to the task. Skin is softer, cloth mostly matte, metal and glass carry selected distinct reflections. Resolve focal areas and leave secondary surfaces economical.
+COMPOSITION: silhouette, gesture, hair and garment flow guide the eye; decorative shapes appear only when suited to the requested scene. Reference white backgrounds, portrait crops, ribbons, ears, horns, hats and halos are not mandatory content.
+AVOID: uniformly smoothed hair or cloth, evenly distributed tiny highlights or strand networks, flat vector fill, airbrushed glossy plastic, photorealistic face, filter grain used as brushwork, random equal-size triangular confetti unrelated to form, copied reference identity, text, signatures, watermarks and UI.
 ```
 
 ## 来源与适用边界
 
-无的人设以[现行人设页](../../character-bible/wu.md)为准，皮肤服装与构图使用老板当次指定图。旧历史打包版 v1.0 的来源、原文和本次替代关系见[本轮记录](../../evidence/2026-10-16-default-art-style/README.md)，旧版对发束、衣褶数量及角形笔触的限制不覆盖本轮双图。默认更新不自动改变个人技能、NAI 共享配方或替换运行资产。
+无的人设以[现行人设页](../../character-bible/wu.md)为准，皮肤服装与构图使用老板当次指定图。旧历史打包版 v1.0 的来源与替代关系见[双图记录](../../evidence/2026-10-16-default-art-style/README.md)；旧版对发束、衣褶数量及角形笔触的限制不覆盖当前融合画法。默认更新不自动改变个人技能、NAI 共享配方或替换运行资产。本次完成规范融合，未生成新样图，实际融合效果待后续出图核对。
