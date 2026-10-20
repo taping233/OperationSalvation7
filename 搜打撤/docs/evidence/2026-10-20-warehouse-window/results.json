@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-20",
+  "workload": "200 synthetic inventory stacks, production cardHTML, jsdom controlled 720x500 viewport and IntersectionObserver",
+  "comparison": "Same source with eager art construction restored versus neighborhood hydration",
+  "measurements": {
+    "baseline": {
+      "cards": 200,
+      "nodes": 5854,
+      "mountMs": 665.3315360000001,
+      "inputPairMs": 310.14951699999983
+    },
+    "optimized": {
+      "cards": 6,
+      "nodes": 1198,
+      "mountMs": 179.8244539999996,
+      "inputPairMs": 73.63314600000012
+    }
+  },
+  "tests": {
+    "files": 5,
+    "passed": 93,
+    "newBoundaryTests": 9
+  },
+  "browserValidation": "not run; requires integrated native browser",
+  "externalEvidence": [
+    {
+      "path": "/tmp/warehouse-window-final-tests.log",
+      "sha256": "77e6f090cc4cf2bb28368e2b209308c762ae18c8e33e0b106ab27117b8b83e66"
+    },
+    {
+      "path": "/tmp/warehouse-window-static-checks.log",
+      "sha256": "a5c6cdfd16c2af274f079bf1f0f86a9131e4b613bfca6b9cf320ce38e4e5aa73"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/warehouse-window-work/docs/evidence/2026-10-20-warehouse-window/baseline.js.txt",
+      "sha256": "4ec83d978d84c45b79e53ddbf27cc223a2a4a1851ad3966f2cda5cd21cbb3fab"
+    }
+  ]
+}

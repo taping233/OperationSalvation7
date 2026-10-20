@@ -41,13 +41,19 @@ export function gateSweep() {
   const arm = gate.firstElementChild;
   gateBusy = true;
   overlay?.classList.add('gate-live', 'gate-squeeze');
+  let settled = false;
   const settle = () => {
+    if (settled) return;
+    settled = true;
+    clearTimeout(timer);
+    arm.removeEventListener('animationend', settle);
     gate.classList.remove('on');
     overlay?.classList.remove('gate-live', 'gate-squeeze');
     gateBusy = false;
   };
   arm.addEventListener('animationend', settle, { once: true });
-  setTimeout(settle, 700);   // 兜底：animationend 被后台标签页/reduce 竞态吞掉时
+  // Either completion path releases the other; stale work cannot finish a later sweep.
+  const timer = setTimeout(settle, 700);   // 兜底：animationend 被后台标签页/reduce 竞态吞掉时
   gate.classList.add('on');
 }
 

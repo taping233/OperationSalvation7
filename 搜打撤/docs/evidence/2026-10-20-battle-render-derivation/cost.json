@@ -1,0 +1,33 @@
+{
+  "workload": "10 fixed production command boundaries; one synchronous fresh render each; Node/jsdom, not FPS",
+  "effectiveCostCalls": {
+    "before": 188,
+    "after": 103
+  },
+  "effectiveCardCalls": {
+    "before": 174,
+    "after": 89
+  },
+  "grouping99Distinct": {
+    "beforeComparisons": 4851,
+    "afterMapReads": 99
+  },
+  "externalEvidence": [
+    {
+      "path": "/workspace/scratch/b7a53a06c872/battle-render-slice/docs/evidence/2026-10-20-battle-render-derivation/mixed-before.log",
+      "sha256": "2612066160828f33e62f63793940399acac6bf528a59dab1957ecb8d3c1b281f"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/battle-render-slice/docs/evidence/2026-10-20-battle-render-derivation/mixed-after.log",
+      "sha256": "7467dd63d84d6b54d6ab577d930cee26c922c82359fffae2183c5db56bdf2244"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/battle-render-slice/docs/evidence/2026-10-20-battle-render-derivation/target-tests.log",
+      "sha256": "31ad8d7cd477fab94dce34bc489f1ee8b425821ffee8996adcbc5ec495a867f7"
+    },
+    {
+      "path": "/workspace/scratch/b7a53a06c872/battle-render-slice/docs/evidence/2026-10-20-battle-render-derivation/eslint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

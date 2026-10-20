@@ -215,16 +215,16 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   let discoverSrcRect = null;
   const discoverInput = createDiscoverInputGate();
 
-  function combatStateCopy(snapshot) {
-    const { phase = 'player', energy = 0, hand = [], infusing, choosing, handSelecting,
+  function combatStateCopy(snapshot, handCards) {
+    const { phase = 'player', energy = 0, infusing, choosing, handSelecting,
       pendingTarget, pendingItem, slamPending, dartPending, busy } = snapshot;
     if (phase === 'enemy') return { label: '敌方行动', detail: '敌人正在行动', tone: 'foe' };
     if (busy || phase === 'resolving') return { label: '结算中', detail: '正在结算当前动作', tone: 'focus' };
     if (infusing) return { label: '注能选牌', detail: `已选 ${infusing.picked?.length || 0}/${infusing.need} 张`, tone: 'focus' };
     if (choosing || handSelecting) return { label: '选择中', detail: '完成当前选择后继续', tone: 'focus' };
     if (pendingTarget || pendingItem || slamPending || dartPending) return { label: '选择目标', detail: pendingTarget?.hint || '点击高亮目标 · Esc 取消', tone: 'focus' };
-    // Resolve UID entries exactly as the hand renderer does, including per-card cost overrides.
-    const handCards = hand.map(entry => entry && typeof entry === 'object' ? entry : findCard(entry)).filter(Boolean);
+    // Reuse this render's resolved effective hand. The next render resolves it anew.
+    // Eligibility and effective costs still read current rules below.
     const playable = handCards.some(entry => {
       if (unplayableReason(entry.card)) return false;
       return effCostOf(entry.card, entry.uid) <= energy;
@@ -533,7 +533,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const battleAssetKey = opts.isBoss
       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
       : 'battle-normal';
-    const combatState = combatStateCopy(snapshot);
+    const combatState = combatStateCopy(snapshot, cards);
     // 背包技能按钮（2026-10-02 老板：砸击换五职业分化技能）：文案/费用/提示按当前职业与翻面态切换
     const slamSkillInfo = slamSkillOf();
     const skillState = busy || infusingNow ? 'locked' : slamSkillInfo.used ? 'used' : slamPending ? 'targeting' : energy < slamSkillInfo.cost ? 'unaffordable' : 'ready';

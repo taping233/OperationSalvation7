@@ -278,11 +278,12 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     const hits = ctx.playedMovesThisTurn || 0;
     const amount = dynamic ? +(dynamic.amount ?? g.card.dmg ?? 0) : 0;
     let ruleHint = dynamic ? `当前 ${hits} 段 × ${amount} 基础伤害，共 ${hits * amount}；目标防御与加成另计。` : cardRuleHint(g.card, mode);
+    const infN = infuseOf(g.card);
     const tip = infusingNow
       ? (isSelf ? '正在注能的卡牌' : blocked || `点击选择注能材料 · 已选 ${pickedN}/${g.uids.length} 张 · 剩余 ${g.uids.length - pickedN} 张${pickedN && (pickedN === g.uids.length || infusing.picked.length >= infusing.need) ? ' · 再点取消1张' : infusing.picked.length >= infusing.need ? ' · 材料已选满' : ''}`)
       : blockedReason
         ? `无法打出：${blockedReason}`
-        : infuseOf(g.card) > 0
+        : infN > 0
         ? `费用 ${effCost}${costTip} · ${requiresInfusion(g.card) ? '必须先注能；点「注能」按钮选材料' : '点「注能」按钮选材料；也可拖拽使用'}；鼠标按卡面拿起，Esc 取消；聚焦卡面按 Enter 选材料`
         : side === 'enemy'
         ? `费用 ${effCost}${costTip} · 点击选择敌人；也可直接拖到${isAreaEffect(g.card) ? '战场空地或敌人身上' : '敌人身上'}使用`
@@ -296,7 +297,6 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     const baseCost = (g.card._baseCost != null) ? g.card._baseCost : g.card.cost;
     const costDiff = effCost !== baseCost;
     // 注能角标直接进入选材料，不消耗卡牌。
-    const infN = infuseOf(g.card);
     const infChip = (!infusingNow && !blocked && infN > 0)
       ? `<button class="bt-infchip" data-act="btInfuseStart" data-uid="${uid}"
           title="开始注能(${infN})，点击手牌选择材料">[[icon:crystal]] 注能${infN}</button>`
@@ -326,7 +326,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       })
       + cnt + infChip + curseChip;
     const handState = infusingNow ? 'infusing' : targeted || clickSelectedUid === uid ? 'selected' : blockedReason ? 'blocked' : 'ready';
-    return { g, uid, side, cls, tip, inner, ruleHint, handState, blockedReason, pickedN, infusingNow };
+    return { g, uid, side, cls, tip, inner, ruleHint, handState, blockedReason, pickedN, infusingNow, effCost };
   }
   // 挂载：把手牌常驻层接回刚重建的舞台（占位节点 → 常驻节点）。
   // 战斗实例令牌变了 = 上一场战斗已收尾/新战斗开打：清掉旧槽位再开新局。
@@ -430,7 +430,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       setHandAttribute(rec.card, 'data-hand-state', st.handState);
       setHandAttribute(rec.card, 'data-block-reason', st.blockedReason || null);
       rec.__tip = st.tip;
-      rec.__name = `${g.card.name} · ${effCostOf(g.card, st.uid)} 费`;
+      rec.__name = `${g.card.name} · ${st.effCost} 费`;
       setHandAttribute(rec.card, 'role', 'group');
       setHandAttribute(rec.card, 'tabindex', -1);
       setHandAttribute(rec.card, 'aria-label', `${rec.__name}。${st.ruleHint ? st.ruleHint + ' ' : ''}${st.tip || '按回车或空格使用'}`);
