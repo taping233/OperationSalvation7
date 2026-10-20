@@ -1,4 +1,5 @@
-/* Card-cost rules are value-in/value-out; runtime state is collected by battle.engine.js. */
+/* Card-cost rules preserve numeric state inputs; an optional consumed-count reader
+ * defers runtime pocket inspection until that discount wins the priority chain. */
 export function pocketSpellDiscountFor(card) {
   const modifiers = card && card.rules && card.rules.battle && card.rules.battle.costModifiers;
   if (Array.isArray(modifiers)) {
@@ -17,7 +18,7 @@ export function decayEffectiveCardCost(card, amount = 1) {
   return { ...card, cost: nextCost, _baseCost: card._baseCost != null ? card._baseCost : currentCost };
 }
 
-export function calculateEffectiveCardCost(card, uid, state) {
+export function calculateEffectiveCardCost(card, uid, state, readConsumedSpellCount = null) {
   // Infinite Rune applies only to battle-acquired moves and has the highest priority.
   if (state.unlimitedRune && ['武术', '法术'].includes(card.type) && uid && String(uid).startsWith('bts')) {
     return Math.max(0, (+(card.cost || 0)) - 1);
@@ -44,8 +45,9 @@ export function calculateEffectiveCardCost(card, uid, state) {
     }
     if (modifiers.some(item => item.kind === 'armorZeroFree') && state.armor === 0) return 0;
     const consumedDiscount = modifiers.find(item => item.kind === 'consumedSpellDiscount');
-    if (consumedDiscount && state.consumedSpellCount > 0) {
-      return Math.max(0, (+card.cost || 0) - state.consumedSpellCount * (+consumedDiscount.amount || 0));
+    if (consumedDiscount) {
+      const count = readConsumedSpellCount ? readConsumedSpellCount() : state.consumedSpellCount;
+      if (count > 0) return Math.max(0, (+card.cost || 0) - count * (+consumedDiscount.amount || 0));
     }
     return card.cost;
   }
@@ -57,8 +59,9 @@ export function calculateEffectiveCardCost(card, uid, state) {
   }
   if (/护甲为\s*0[.。，,]?\s*本牌变为\s*0\s*费/.test(desc) && state.armor === 0) return 0;
   if (/没有护甲[，,]?\s*该牌变为\s*0\s*费/.test(desc) && state.armor === 0) return 0;
-  if (state.pocketDiscount && state.consumedSpellCount > 0) {
-    return Math.max(0, (+card.cost || 0) - state.consumedSpellCount * state.pocketDiscount);
+  if (state.pocketDiscount) {
+    const count = readConsumedSpellCount ? readConsumedSpellCount() : state.consumedSpellCount;
+    if (count > 0) return Math.max(0, (+card.cost || 0) - count * state.pocketDiscount);
   }
   return card.cost;
 }

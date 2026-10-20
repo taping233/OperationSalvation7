@@ -105,3 +105,64 @@ describe('battle card inspection ports', () => {
     expect(game.log).toHaveBeenCalledTimes(2);
   });
 });
+
+it('reuses one live ownership scan per effective query without stale array or override caches', () => {
+  const { state, inspection, game } = setup();
+  const ownedFind = vi.spyOn(game.ownedCards, 'find');
+  const grantedFind = vi.spyOn(state.granted, 'find');
+  expect(inspection.findEffectiveCard('spell').card.name).toBe('费用探针');
+  expect(ownedFind).toHaveBeenCalledTimes(1);
+  expect(grantedFind).not.toHaveBeenCalled();
+  ownedFind.mockClear();
+  expect(inspection.findEffectiveCard('granted').card.name).toBe('临时牌');
+  expect(ownedFind).toHaveBeenCalledTimes(1);
+  expect(grantedFind).toHaveBeenCalledTimes(1);
+  const replacement = { uid: 'spell', safe: true, card: { name: '替换归属', type: '法术' } };
+  game.ownedCards.splice(1, 1, replacement);
+  expect(inspection.findEffectiveCard('spell')).toBe(replacement);
+  state.cardOverrides.set('spell', { name: '新替身', type: '武术' });
+  expect(inspection.findEffectiveCard('spell')).toMatchObject({ safe: true, card: { name: '新替身' } });
+  state.cardOverrides.delete('spell');
+  game.ownedCards = [];
+  state.granted.push(replacement);
+  expect(inspection.findEffectiveCard('spell')).toBe(replacement);
+});
+
+it.each([
+  ['rune', (state) => { state.unlimitedRune = true; }, 'bts-cost', 3],
+  ['zero fee', (state) => { state.zeroFeeUntil.set('spell', state.turn); }, 'spell', 0],
+  ['cosmos', (state) => { state.pstat.status.cosmosForm = 1; }, 'spell', 1],
+  ['spell fixed', (state) => { state.spellCost1 = true; }, 'spell', 1],
+  ['previous type', (state, card) => { state.lastPlayedType = '武术'; card.rules.battle.costModifiers.unshift({ kind: 'previousCardTypeFree' }); }, 'spell', 0],
+  ['martial count', (state, card) => { state.playedMartialThisTurn = 2; card.rules.battle.costModifiers.unshift({ kind: 'martialPlayedDiscount', amount: 1 }); }, 'spell', 2],
+  ['move count', (state, card) => { state.playedMovesThisTurn = 3; card.rules.battle.costModifiers.unshift({ kind: 'movesPlayedDiscount', amount: 1 }); }, 'spell', 1],
+  ['armor zero', (state, card) => { state.pdef.armor = 0; card.rules.battle.costModifiers.unshift({ kind: 'armorZeroFree' }); }, 'spell', 0],
+])('does not scan consumed UIDs when %s already decides cost', (_name, change, uid, expected) => {
+  const { state, inspection, spell, game } = setup();
+  spell.rules = { battle: { costModifiers: [{ kind: 'consumedSpellDiscount', amount: 1 }] } };
+  change(state, spell);
+  const find = vi.spyOn(game.ownedCards, 'find');
+  expect(inspection.effCostOf(spell, uid)).toBe(expected);
+  expect(find).not.toHaveBeenCalled();
+});
+
+it('counts live consumed spells with duplicates, owned-first precedence, overrides and missing UIDs', () => {
+  const { state, inspection, spell } = setup();
+  state.consumed = ['spell', 'spell', 'legacy', 'missing', 'granted'];
+  state.granted.push({ uid: 'legacy', card: { type: '法术' } });
+  expect(inspection.effCostOf(spell, 'spell')).toBe(2);
+  state.cardOverrides.set('legacy', { type: '法术' });
+  expect(inspection.effCostOf(spell, 'spell')).toBe(1);
+  state.granted[0].card.type = '法术';
+  expect(inspection.effCostOf(spell, 'spell')).toBe(0);
+  state.consumed.splice(0, 4);
+  expect(inspection.effCostOf(spell, 'spell')).toBe(3);
+});
+
+it('retains filter semantics for sparse consumed arrays', () => {
+  const { state, inspection, spell, game } = setup();
+  state.consumed = Array(2);
+  state.consumed[1] = 'spell';
+  game.ownedCards.push({ uid: undefined, card: { type: '法术' } });
+  expect(inspection.effCostOf(spell, 'spell')).toBe(3);
+});

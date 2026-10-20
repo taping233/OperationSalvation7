@@ -89,6 +89,8 @@
 
 固定兼容样本位于 `tests/fixtures/`，由 `tests/save-compat.test.js` 覆盖 RunStorage v1/v2 字段迁移、跨档隔离、未完成对局、基地、职业、成就和卡背。这些 fixture 没有地图版本；原地图恢复另由地图快照测试覆盖。存档格式变更同步更新相应样本与迁移测试。
 
+地图恢复在本次调用内复用完整校验生成的隔离副本，再还原运行时节点；不跨调用缓存校验结果。公开还原入口仍执行完整校验，运行节点、逻辑节点和快照的可变边数组及记录互不共享。已校验的标量记录与双整数边直接复制，避免逐节点 JSON 序列化与解析。
+
 ## 路线快照 v2（routeVersion 分派）
 
 新开的普通远征使用 `generatorVersion: 6`、`layoutVersion: 9`，先运行 `r5-routes-v1` 覆盖，再尝试一次 L2 局部路线 `r5-routes-v2`。第2层补给支路现通往商店，旧快照中的火堆支路仍按原计划恢复。路线协议与生成器版本独立，不反复重抽地图。所有新局保存 `snapshotVersion: 2`、外层 `routeVersion: r5-routes-v2` 及严格 `routePlan`。不满足局部条件时原图保持不变，计划记录 `NO_VALID_FORK`、`DISTANCE_LIMIT`、`PACING_LIMIT` 或 `FINAL_QUALITY_REJECTED`。

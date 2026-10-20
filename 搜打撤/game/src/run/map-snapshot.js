@@ -169,11 +169,18 @@ export function validateMapSnapshot(snapshot, position = null) {
  */
 export function hydrateMapSnapshot(snapshot) {
   const checked=validateMapSnapshot(snapshot); if(!checked.ok)return checked;
-  const value=checked.value;
-  const layerData=value.layers.map(layer=>({id:layer.id,name:layer.name,nameEn:layer.nameEn,color:layer.color,gridBounds:clone(layer.gridBounds),
-    nodes:layer.nodes.map((n,idx)=>({id:n.id,li:0,idx,x:n.x,row:n.row,type:n.def.type,name:n.def.name,next:clone(n.next),extraction:n.def.extraction})),
-    entrances:[...layer.entrances],entranceNames:[...layer.entranceNames],doors:clone(layer.doors),altarEntrances:clone(layer.altarEntrances),exit:layer.exit,
-    logical:layer.nodes.map((n,idx)=>({grid:[],fire:n.def.type==='fire',oldIdx:idx,def:clone(n.def),id:n.id,row:n.row,x:n.x,next:clone(n.next)}))}));
+  return hydrateValidatedMapSnapshot(checked.value);
+}
+
+// 仅接收本次调用内 validateMapSnapshot 产生的隔离副本；不缓存“已校验”标记。
+// 结构已严格限制为标量字段、双整数边和门记录，可直接复制，省去逐节点 JSON 往返。
+/** @param {any} value @returns {{ok:true, value:any}} */
+function hydrateValidatedMapSnapshot(value) {
+  const copyEdges = edges => edges.map(edge => [...edge]);
+  const layerData=value.layers.map(layer=>({id:layer.id,name:layer.name,nameEn:layer.nameEn,color:layer.color,gridBounds:{...layer.gridBounds},
+    nodes:layer.nodes.map((n,idx)=>({id:n.id,li:0,idx,x:n.x,row:n.row,type:n.def.type,name:n.def.name,next:copyEdges(n.next),extraction:n.def.extraction})),
+    entrances:[...layer.entrances],entranceNames:[...layer.entranceNames],doors:layer.doors.map(door=>({...door})),altarEntrances:[],exit:layer.exit,
+    logical:layer.nodes.map((n,idx)=>({grid:[],fire:n.def.type==='fire',oldIdx:idx,def:{...n.def},id:n.id,row:n.row,x:n.x,next:copyEdges(n.next)}))}));
   layerData.forEach((layer,li)=>layer.nodes.forEach(n=>{n.li=li;}));
   return {ok:true,value:{layerData,mapSeed:value.mapSeed,generatorVersion:value.generatorVersion,layoutVersion:value.layoutVersion,snapshot:value,
     routeVersion:value.routeVersion??null,routePlan:value.routePlan??null}};
@@ -186,7 +193,7 @@ export function planMapRestore(run) {
     const checked=validateMapSnapshot(run.mapSnapshot,{layerIdx:run.layerIdx,trackPos:run.trackPos}); if(!checked.ok)return checked;
     const s=checked.value;
     if ((run.mapSeed!==undefined&&run.mapSeed!==s.mapSeed)||(run.generatorVersion!==undefined&&run.generatorVersion!==s.generatorVersion)||(run.layoutVersion!==undefined&&run.layoutVersion!==s.layoutVersion)||(run.routeVersion!==undefined&&run.routeVersion!==(s.routeVersion??null))) return fail('MAP_METADATA_CONFLICT','地图快照与外层元数据冲突');
-    const hydrated=hydrateMapSnapshot(s); return hydrated.ok?{ok:true,value:{source:'snapshot',...hydrated.value}}:hydrated;
+    const hydrated=hydrateValidatedMapSnapshot(s); return hydrated.ok?{ok:true,value:{source:'snapshot',...hydrated.value}}:hydrated;
   }
   const seed=run.mapSeed??run.seed;
   if (!scalarSeed(seed) || run.generatorVersion!==LEGACY_GENERATOR_VERSION || run.layoutVersion!==LEGACY_LAYOUT_VERSION) return fail('UNSUPPORTED_LEGACY_MAP','旧对局缺少可证明的 3/9 地图身份');
@@ -195,5 +202,5 @@ export function planMapRestore(run) {
   catch { return fail('MAP_GENERATION_FAILED','3/9 旧地图无法确定性重建'); }
   const made=createMapSnapshot({mapSeed:seed,generatorVersion:LEGACY_GENERATOR_VERSION,layoutVersion:LEGACY_LAYOUT_VERSION,layerData}); if(!made.ok)return made;
   const positioned=validateMapSnapshot(made.value,{layerIdx:run.layerIdx,trackPos:run.trackPos}); if(!positioned.ok)return positioned;
-  const hydrated=hydrateMapSnapshot(made.value); return hydrated.ok?{ok:true,value:{source:'legacy-3/9',...hydrated.value}}:hydrated;
+  const hydrated=hydrateValidatedMapSnapshot(positioned.value); return hydrated.ok?{ok:true,value:{source:'legacy-3/9',...hydrated.value}}:hydrated;
 }

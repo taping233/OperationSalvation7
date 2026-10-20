@@ -52,7 +52,7 @@
 - `battle.effects.js` + `effect-steps.js`（有序步骤表本体，拆片 `effect-steps.<节>.js` 按原序 concat——顺序即语义）：文本时点解析与效果执行器；执行器只通过显式端口改变战斗状态，不访问 DOM。
 - `battle.deck.js` / `battle.rules.js`：可独立测试的洗牌、回收、目标判定和出牌限制。
 - `battle.card-cost.js` / `battle.intent.js`：显式接收卡牌与战斗状态值的费用、敌方意图纯计算；`battle.engine.js` 保留原接口并收集状态，纯计算模块不读取 `window.SDT` 或 DOM。
-- `battle.card-inspection.js`：卡实例查找、费用上下文、手牌诅咒与费用交换，通过 cards、curseMeta、readState 三个端口访问引擎；保留原 engine 导出，不创建第二份运行态。`hosted-catalog-index.js` 按原来源顺序建立一次索引，保持重复 ID 首项优先。
+- `battle.card-inspection.js`：卡实例查找、费用上下文、手牌诅咒与费用交换，通过 cards、curseMeta、readState 三个端口访问引擎；保留原 engine 导出，不创建第二份运行态。有效卡面查询在单次调用内复用已查得的归属实例；不跨调用缓存，可立即反映替身、归属列表与转换规则变化。消耗区法术计数仅在费用规则实际进入该折扣时读取，保持原有费用优先级。`hosted-catalog-index.js` 按原来源顺序建立一次索引，保持重复 ID 首项优先。
 - `battle.runtime.js` 是五个运行态子模块（session/piles/interaction/effects/presentation）的兼容重导出入口，保留活绑定；修改 reset/restore/finish 必须核对真实属地与会话边界，不能建立第二份状态副本。
 - `battle.engine.js` 装配 `battle.execution-session.js`（取消与代次）、`battle.action-runner.js`（串行动作队列）、`battle.staged-playback.js`（逐拍播放）；旧回调须校验战斗 token 和执行会话 generation。选择、装备、背包、生命周期、出牌执行分别委派给 `battle.selection-flow/equipment/bag/lifecycle/exec-play.js`。
 - `battle.selection-flow.js` 管理战斗内手牌选择、发现和抉择队列；卡库查询、拒绝音效、随机源与取消检查由 `battle.engine.js` 通过窄端口装配。`battle.hand-selection.js` 单源提供选择名称匹配与支付候选规则；`battle.discover-candidates.js` 提供有序目录筛选和单次候选抽取；`battle.discover-state.js` 构造显式、随机及锦囊发现状态，`battle.discover-flow.js` 承载发现队列处理。非自定义发现池在单个面板内构建一次并保留源卡引用，自定义 `job.pred` 每次抽取仍重新查询目录/执行谓词。interaction 用 `getJobs()` 读取当前可替换队列，避免固定捕获旧数组。selection-flow 不捕获 `window.SDT`，也不静态依赖连接 UI 等待的 `battle.staged-playback.js`；战斗状态仍读取 `battle.runtime.js` 活绑定，因此这是浏览器边界解耦，不是纯状态模块。

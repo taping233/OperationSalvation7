@@ -28,14 +28,14 @@ export function createBattleCardInspection({ cards, readState, curseMeta }) {
     return card;
   }
 
-  const findCard = uid => {
-    const state = readState();
+  const findCardInState = (state, uid) => {
     const override = state.cardOverrides.get(uid);
     if (override) return { uid, card: repairLegacyTT7Card(override) };
     const entry = state.game.ownedCards.find(o => o.uid === uid) || state.granted.find(o => o.uid === uid) || null;
     if (entry) repairLegacyTT7Card(entry.card);
     return entry;
   };
+  const findCard = uid => findCardInState(readState(), uid);
 
   // Keep UID/ownership and raw overrides intact: this is a battle-only query view.
   // Match the existing play-time order: per-UID override first, then the latest
@@ -49,12 +49,16 @@ export function createBattleCardInspection({ cards, readState, curseMeta }) {
     const supplied = executionCard && typeof executionCard === 'object' ? executionCard : null;
     const provenance = supplied && effectiveSources.get(supplied);
     const knownSource = provenance?.uid === uid ? provenance : null;
-    const current = findCard(uid);
+    const current = findCardInState(state, uid);
     const liveUid = knownSource ? knownSource.liveUid : !supplied || supplied === current?.card;
     const found = liveUid ? current : { uid, card: knownSource?.card || supplied };
     if (!found?.card) return null;
-    const base = state.game.ownedCards.find(entry => entry.uid === uid)
-      || state.granted.find(entry => entry.uid === uid);
+    // Without an override, current already is the raw owned/granted entry.
+    // Reuse it within this query only; the next query still reads live arrays.
+    const base = state.cardOverrides.get(uid)
+      ? state.game.ownedCards.find(entry => entry.uid === uid)
+        || state.granted.find(entry => entry.uid === uid)
+      : current;
     const entry = base && base !== found ? { ...base, ...found, uid } : found;
     const transform = state.shaTransform;
     let card = entry.card;
@@ -88,14 +92,18 @@ export function createBattleCardInspection({ cards, readState, curseMeta }) {
 
   const effCostOf = (card, uid) => {
     const state = readState();
-    // 仅后备能源类描述需要读取消耗区；常规求费不扫描消耗区。
     const pocketDiscount = pocketSpellDiscountFor(card);
-    const consumedSpellCount = pocketDiscount
-      ? state.consumed.filter(consumedUid => {
-          const entry = findCard(consumedUid);
-          return entry && entry.card.type === '法术';
-        }).length
-      : 0;
+    // Resolve only if the cost rules reach the consumed-spell discount. Higher
+    // priority fixed/free costs never inspect the pocket or allocate a filter.
+    const countConsumedSpells = () => {
+      let count = 0;
+      if (pocketDiscount) for (let i = 0; i < state.consumed.length; i++) {
+        if (!(i in state.consumed)) continue; // Match Array.filter's sparse-array behavior.
+        const entry = findCardInState(state, state.consumed[i]);
+        if (entry && entry.card.type === '法术') count++;
+      }
+      return count;
+    };
     return calculateEffectiveCardCost(card, uid, {
       unlimitedRune: state.unlimitedRune,
       zeroFeeTurn: uid ? state.zeroFeeUntil.get(uid) : undefined,
@@ -108,8 +116,7 @@ export function createBattleCardInspection({ cards, readState, curseMeta }) {
       playedMovesThisTurn: state.playedMovesThisTurn,
       armor: state.pdef ? (state.pdef.armor || 0) : null,
       pocketDiscount,
-      consumedSpellCount,
-    });
+    }, countConsumedSpells);
   };
 
   function curseSpecsOfDesc(desc) {

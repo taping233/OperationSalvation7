@@ -271,7 +271,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/src/battle/view/battle.frames.js": "7cb2dea8e6ae11f567852e3739248dbb76b987ca46a3d0dd436b1bc8348f4abd",
     "game/src/battle/view/battle.layers.js": "91c6774633ae0dcaca7ca162b1188ba64e281ee3e3e8f0c15064ff6f0c660d3c",
     "game/src/battle/view/battle.vfx.js": "0c7f2fb9b96171c5f03c498c8d5004bb1553403f12723bec15e8922604af04cd",
-    "game/src/cards/card-frame-presentation.js": "79ef8241faad2ed89bb1c19b6866f0e352ddd43e9498d1e0842e436335099d9a",
+    "game/src/cards/card-frame-presentation.js": "4a05cb2499db1ffa0b3ee20d18b30493f1d4df58edb58df4f6c632ccbc7dc196",
     "game/src/core/art.js": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
     "game/src/core/icons-bitmap.js": "71e1d0b742254726786fa9a2af57448646bff6881fa04a39b4d15abfd86eed86",
     "game/src/home/home.scene.js": "5315be0ae9feb71523ed8cafea826415341dab33980e4458344e8f169a8edd40",

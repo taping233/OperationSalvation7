@@ -1,0 +1,46 @@
+{
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "vitest": "3.2.7",
+    "environment": "jsdom; JS string generation only; no browser layout, network, decode or FPS measured"
+  },
+  "catalogCards": 281,
+  "cardsPerPass": 1124,
+  "samples": 31,
+  "coldCounts": {
+    "before": {
+      "urlCalls": 2249,
+      "urlParses": 2249,
+      "frameComputations": 1124
+    },
+    "after": {
+      "urlCalls": 1137,
+      "urlParses": 558,
+      "frameComputations": 12
+    }
+  },
+  "warmCounts": {
+    "before": {
+      "urlCalls": 2248,
+      "urlParses": 2248,
+      "frameComputations": 1124
+    },
+    "after": {
+      "urlCalls": 1124,
+      "urlParses": 0,
+      "frameComputations": 0
+    }
+  },
+  "coldPassMs": {
+    "before": 8.046325000000252,
+    "after": 7.47855699999991
+  },
+  "warmThreePassMs": {
+    "before": 36.30369399999995,
+    "after": 24.45602299999996
+  },
+  "identicalHtmlSha256": "8e383a70552dc3efbcfcb11fbd95e1bd274b8a7ba0dd67351df5c3818f2e08e4"
+}
