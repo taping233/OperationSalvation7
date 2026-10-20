@@ -52,10 +52,11 @@ it('multi-chest leave and take actions advance exactly once per box', async () =
     expect(preview.type).toBe('button');
     expect(preview.getAttribute('aria-label')).toMatch(/^放大查看.+/);
   }
-  for (const claim of claims) {
+  for (const [i, claim] of claims.entries()) {
     expect(claim).toBeInstanceOf(HTMLButtonElement);
     expect(claim.type).toBe('button');
-    expect((claim.getAttribute('aria-label') || claim.textContent).trim()).toBe('收下');
+    expect(claim.getAttribute('aria-label')).toBe(`收下：${[card, otherCard][i].name}`);
+    expect(claim.textContent.trim()).toBe('收下');
   }
   expect(ovBody.querySelector('[data-act="chestSkip"]')).not.toBeNull();
   ovBody.querySelector('[data-act="chestSkip"]').click();

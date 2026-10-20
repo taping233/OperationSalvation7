@@ -585,6 +585,11 @@ describe('资源奖励公共领取体验', () => {
   it('详情复用择一提示和动作映射，满包只整理，已领取不再提供领取按钮', () => {
     UI.showCardZoom = vi.fn();
     openResource(); UI._acts.resRead({i:'0'});
+    const name = UI.showCardZoom.mock.lastCall[0].name;
+    expect(UI.el.ovBody.querySelector('[data-act="resTake"][data-i="0"]').getAttribute('aria-label')).toBe(`选择这张：${name}`);
+    const footer = document.createElement('div');
+    footer.innerHTML = UI.showCardZoom.mock.lastCall[1].footer;
+    expect(footer.querySelector('button').getAttribute('aria-label')).toBe(`选择这张：${name}`);
     let options = UI.showCardZoom.mock.lastCall[1];
     expect(options.footer).toContain('其余选项将放弃');
     expect(options.footer).toContain('data-act="resTake"');
@@ -593,6 +598,8 @@ describe('资源奖励公共领取体验', () => {
     options = UI.showCardZoom.mock.lastCall[1];
     expect(options.footer).toContain('其余选项将放弃');
     expect(options.footer).toContain('data-act="resBag"');
+    footer.innerHTML = options.footer;
+    expect(footer.querySelector('button').getAttribute('aria-label')).toBe(`整理背包：${name}`);
     expect(options.footer).not.toContain('data-act="resTake"');
     H.game.canReceiveCard = () => true; UI._acts.resTake({i:'0'}); UI._acts.resRead({i:'1'});
     expect(UI.showCardZoom.mock.lastCall[1].footer).toBe('');

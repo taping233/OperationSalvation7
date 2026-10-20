@@ -545,7 +545,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const cardsHTML = cur.cards.map((card, i) => {
       const got = taken.has(i), dropped = lost.has(i);
       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
-      const action = rewardClaimHTML({ index:i, state:rewardCardState(taken, lost, i), choice:isChoice(i), fits, disabled:cur.leaveConfirm });
+      const action = rewardClaimHTML({ index:i, cardName:card.name, state:rewardCardState(taken, lost, i), choice:isChoice(i), fits, disabled:cur.leaveConfirm });
       if (compact) compactAction = action;
       return `<article class="reward-unit${selected === i && !got && !dropped ? ' is-pending-target' : ''}${got ? ' got' : dropped ? ' dropped' : ''}" data-reward-index="${i}" data-reward-card="${escAttr(card.id || card.name)}" data-reward-rarity="${escAttr(rewardRarity(card))}">
         <button type="button" class="reward-card" data-act="chestSelect" data-i="${i}" aria-label="放大查看${escAttr(card.name || '卡牌')}" title="放大查看">${SDT.Cards.cardHTML(card)}</button>${selected === i && !got && !dropped ? '<span class="reward-target-label">待领取</span>' : ''}${compact ? '' : action}</article>`;
@@ -645,7 +645,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
       const fits = G.canReceiveCard ? G.canReceiveCard(card) : true;
       const source = UI.el.ovBody.querySelector(`[data-act="chestSelect"][data-i="${i}"]`);
       UI.showCardZoom?.(card, { from:source, returnFocus:source, hideNote:true, presentation:'expedition',
-        footer:available ? rewardClaimHTML({ index:i, choice:isChoice(i), fits, disabled:cur.leaveConfirm, zoom:true }) : '' });
+        footer:available ? rewardClaimHTML({ index:i, cardName:card.name, choice:isChoice(i), fits, disabled:cur.leaveConfirm, zoom:true }) : '' });
       rewardZoom = document.getElementById('cardZoom');
     });
     UI.act('chestTake1', d => {

@@ -326,7 +326,7 @@ function openResourcePick(done) {
       if (!card) return '<p>该物资暂不可用</p>';
       const fits = game.canReceiveCard?.(card) !== false;
       const action = finished ? `<span class="reward-unit-state">${record.taken === i ? '已入背包' : '已永久放弃'}</span>`
-        : rewardClaimHTML({ index:i, choice:true, fits, actions:claimActions }) + (!fits ? '<span class="reward-capacity-note">当前放不下</span>' : '');
+        : rewardClaimHTML({ index:i, cardName:card.name, choice:true, fits, actions:claimActions }) + (!fits ? '<span class="reward-capacity-note">当前放不下</span>' : '');
       return `<article class="reward-unit${finished ? record.taken === i ? ' got' : ' dropped' : ''}" data-reward-index="${i}" data-reward-card="${escAttr(card.id || card.name)}" data-reward-rarity="${escAttr(card.rarity)}"><button class="reward-card" data-act="resRead" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button>${action}</article>`;
     }).join(''),
     actions:rewardExitHTML('resSkip', finished ? '继续探索' : '返回地图'), footer:`<button class="reward-bag" data-act="resBag" data-card-receive-anchor="bag">整理背包</button><span class="reward-notice" role="status">${finished ? '领取完成 · 1 张已入背包，其余卡牌已永久放弃' : '两张资源卡中选择一张，其余永久放弃；未领取时保留在此处'}</span>`,
@@ -344,7 +344,7 @@ function openResourcePick(done) {
     const fits = game.canReceiveCard?.(card) !== false;
     const source = UI.el?.ovBody?.querySelector(`[data-act="resRead"][data-i="${i}"]`);
     UI.showCardZoom(card, { from:source, returnFocus:source, hideNote:true, presentation:'expedition',
-      footer:finished ? '' : rewardClaimHTML({ index:i, choice:true, fits, zoom:true, actions:claimActions }) });
+      footer:finished ? '' : rewardClaimHTML({ index:i, cardName:card.name, choice:true, fits, zoom:true, actions:claimActions }) });
   });
   UI.act('resTake', data => take(Number(data.i)));
   UI.act('resBag', () => {

@@ -131,7 +131,7 @@ export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Me
   const selectMedal = data => {
     const row = [...root.querySelectorAll('.av3-medal')].find(item => item.dataset.achievement === data.id);
     const source = row?.querySelector('.av3-detail-source'), detail = root.querySelector('.av3-medal-detail');
-    if (!source || !detail) return;
+    if (!source || !detail || row.hidden) return;
     medalId = data.id;
     root.querySelectorAll('.av3-medal').forEach(item => {
       const selected = item === row;
@@ -140,6 +140,26 @@ export function bindArchiveV3({ ui, base = window.SDT.Base, meta = window.SDT.Me
     });
     detail.innerHTML = source.innerHTML;
   };
+  const reconcileMedalSelection = () => {
+    const detail = root.querySelector('.av3-medal-detail');
+    if (!detail) return;
+    const rows = [...root.querySelectorAll('.av3-medal')];
+    const visible = rows.filter(row => !row.hidden);
+    // Match the collection-card directory: preserve an available selection,
+    // otherwise choose the first result; never leave a hidden item's details.
+    if (visible.some(row => row.dataset.achievement === medalId && row.classList.contains('selected'))) return;
+    if (visible.length) selectMedal({ id: visible[0].dataset.achievement });
+    else {
+      medalId = '';
+      rows.forEach(row => {
+        row.classList.remove('selected');
+        row.querySelector('[data-act="archiveV3Medal"]')?.setAttribute('aria-pressed', 'false');
+      });
+      detail.innerHTML = '<h3>没有匹配的成就</h3><p>调整筛选条件，或查看全部目标。</p>';
+    }
+  };
+  root.addEventListener('archive-filter-change', reconcileMedalSelection);
+  reconcileMedalSelection(); // bindArchive applied retained filters before this view bound.
   ui.act('archiveV3Medal', selectMedal);
   // archiveLocate focuses the real target after changing sections; reveal its details with it.
   root.addEventListener('focusin', event => {

@@ -177,3 +177,71 @@ describe('independent archive room', () => {
     expect(root.textContent).not.toContain('点击');
   });
 });
+
+
+describe('achievement filter/detail selection coordination', () => {
+  const search = (root, query) => {
+    const input = root.querySelector('.archive-search');
+    input.value = query;
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  };
+  const selected = root => root.querySelector('.av3-medal.selected')?.dataset.achievement;
+
+  it('searching away the selected medal immediately shows the first matching detail without moving input focus', () => {
+    const { base, render } = setup(), before = JSON.stringify(base.data);
+    const root = render();
+    const input = root.querySelector('.archive-search');
+    input.focus();
+    search(root, '猎手');
+    expect(selected(root)).toBe('kill10');
+    expect(root.querySelector('.av3-medal-detail').textContent).toContain('累计击败十名敌人');
+    expect(root.querySelector('.av3-medal-detail').textContent).toContain('4 / 10');
+    expect(root.querySelector('.av3-medal-detail [data-act="claimAch"]')).toBeNull();
+    expect(document.activeElement).toBe(input);
+    expect(JSON.stringify(base.data)).toBe(before);
+  });
+
+  it('keeps a still-visible choice and its detail DOM, including across directory visits', () => {
+    const { render } = setup();
+    let root = render();
+    root.querySelector('[data-act="archiveV3Medal"][data-id="kill10"]').click();
+    const heading = root.querySelector('.av3-medal-detail h3');
+    search(root, '');
+    expect(selected(root)).toBe('kill10');
+    expect(root.querySelector('.av3-medal-detail h3')).toBe(heading);
+    render('backs'); root = render('achievements');
+    expect(selected(root)).toBe('kill10');
+  });
+
+  it('uses an empty detail for no results and resets to the first result with matching pressed state', () => {
+    const { render, actions } = setup();
+    const root = render();
+    search(root, '不存在的成就');
+    expect(selected(root)).toBeUndefined();
+    expect(root.querySelectorAll('[data-act="archiveV3Medal"][aria-pressed="true"]')).toHaveLength(0);
+    expect(root.querySelector('.archive-empty').hidden).toBe(false);
+    expect(root.querySelector('.av3-medal-detail').textContent).toContain('没有匹配的成就');
+    expect(root.querySelector('.av3-medal-detail [data-act="claimAch"]')).toBeNull();
+    actions.get('archiveV3Medal')({ id: 'firstExtract' });
+    expect(selected(root)).toBeUndefined(); // Hidden/stale actions cannot restore an excluded detail.
+    actions.get('archiveReset')();
+    expect(selected(root)).toBe('firstExtract');
+    expect(root.querySelector('.av3-medal-detail [data-act="claimAch"]').dataset.id).toBe('firstExtract');
+  });
+
+  it('coordinates status changes, empty status and retained filters on rebuild', () => {
+    const { render, actions } = setup();
+    let root = render();
+    actions.get('archiveStatus')({ status: 'progress' });
+    expect(selected(root)).toBe('kill10');
+    root = render();
+    expect(selected(root)).toBe('kill10');
+    expect(root.querySelector('.av3-medal-detail').textContent).toContain('4 / 10');
+    actions.get('archiveStatus')({ status: 'done' });
+    expect(selected(root)).toBeUndefined();
+    root = render();
+    expect(root.querySelector('.av3-medal-detail').textContent).toContain('没有匹配的成就');
+    actions.get('archiveStatus')({ status: 'claimable' });
+    expect(selected(root)).toBe('firstExtract');
+  });
+});

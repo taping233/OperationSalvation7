@@ -216,7 +216,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "retired-scenes": {
       "game/data/art-mapping.json": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99",
       "game/src/core/art.js": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
-      "game/src/run/chests.js": "d5109de7bb9fef82a93ba3cf482340b7c094241e0a6981c9d50b3e7531c0bebf",
+      "game/src/run/chests.js": "788ae898559cdc29ae22d07bd280d411021e27b87e2c5736d49d7427622b31ac",
       "game/src/run/chest-opening-art.js": "3b4a044da138b9beea05e1520c8da7dd3cf65962c773f325db996b8f3cf3ab09",
       "game/src/run/game.run.data.js": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8",
       "game/src/run/game.run.scenes.js": "601910c257052f30360b8eb9b54d024515dc901ce9c03db778d09744862f38a3",
@@ -226,7 +226,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
       "game/css/scenes.css": "9cfa703fecf0e80eba1c2d4a7ead00f3d851e6f155eaf5b14b7d83ebf0f3d8f6"
     },
     "chests": {
-      "game/src/run/chests.js": "d5109de7bb9fef82a93ba3cf482340b7c094241e0a6981c9d50b3e7531c0bebf",
+      "game/src/run/chests.js": "788ae898559cdc29ae22d07bd280d411021e27b87e2c5736d49d7427622b31ac",
       "game/src/run/chest-opening-art.js": "3b4a044da138b9beea05e1520c8da7dd3cf65962c773f325db996b8f3cf3ab09"
     },
     "frames": {
