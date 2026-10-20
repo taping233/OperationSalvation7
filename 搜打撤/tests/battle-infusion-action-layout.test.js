@@ -80,6 +80,40 @@ afterEach(async () => {
 });
 
 describe('shared infusion action bar', () => {
+  it('keeps the card face usable to reduce a full selection and restores add controls', () => {
+    start(); BattleSession.commands.beginInfusion('infusion'); flush();
+    const before = snapshot();
+    for (let i = 0; i < 2; i++) { bar().querySelector('.infusion-card-face').click(); flush(); }
+    const face = bar().querySelector('.infusion-card-face');
+    expect(snapshot().infusing.picked).toHaveLength(2);
+    expect(face.disabled).toBe(false);
+    expect(face.getAttribute('aria-pressed')).toBe('true');
+    expect(face.getAttribute('aria-label')).toContain('减少一张');
+    expect(bar().querySelector('.infusion-material-note').textContent).toContain('材料已齐');
+    expect(bar().querySelector('.infusion-quantity [data-act="btInfuseAdd"]').title).toContain('材料已齐');
+    face.focus(); face.click(); flush();
+    expect(snapshot().infusing.picked).toHaveLength(1);
+    expect(document.activeElement.dataset.act).toBe('btInfuseAdjust');
+    expect(bar().querySelector('.infusion-quantity [data-act="btInfuseAdd"]').disabled).toBe(false);
+    expect(bar().querySelector('[data-act="btInfuseGo"]').disabled).toBe(true);
+    expect(snapshot().energy).toBe(before.energy);
+    expect(snapshot().hand).toEqual(before.hand);
+    bar().querySelector('.infusion-quantity [data-act="btInfuseRemove"]').click(); flush();
+    expect(bar().querySelector('.infusion-card-face').getAttribute('aria-pressed')).toBe('false');
+    expect(bar().querySelector('.infusion-material').classList.contains('is-selected')).toBe(false);
+  });
+
+  it('uses the same full-selection action for number keys and card faces', () => {
+    start(); BattleSession.commands.beginInfusion('infusion'); flush();
+    for (let i = 0; i < 2; i++) { document.dispatchEvent(new KeyboardEvent('keydown', {key:'1', bubbles:true})); flush(); }
+    bar().querySelector('.infusion-card-face').click(); flush();
+    expect(snapshot().infusing.picked).toHaveLength(1);
+    document.dispatchEvent(new KeyboardEvent('keydown', {key:'1', bubbles:true})); flush();
+    expect(snapshot().infusing.picked).toHaveLength(2);
+    document.dispatchEvent(new KeyboardEvent('keydown', {key:'1', bubbles:true})); flush();
+    expect(snapshot().infusing.picked).toHaveLength(1);
+  });
+
   it.each(['tt7-holyheal', 'tt3sp-bloodstorm'])('describes the actual pointer and keyboard infusion entrances for %s', cardId => {
     start({ cardId });
     const card = stage().querySelector('.bt-card[data-uid="infusion"]');

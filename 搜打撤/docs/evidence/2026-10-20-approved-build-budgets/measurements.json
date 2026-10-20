@@ -1,0 +1,77 @@
+{
+  "referenceCommit": "9b0fe799969b81bd2d6ae7642f36450fd8c1b360",
+  "referenceBaseline": {
+    "packageBytes": 222424745,
+    "duplicateBytes": 134099,
+    "entryGzipBytes": 356092,
+    "initialJsGzipBytes": 404522,
+    "cssGzipBytes": 226967,
+    "initialFiles": [
+      "assets/js/index-C9-XS02t.js",
+      "assets/js/vendor-runtime-Bplpvbef.js",
+      "assets/js/game-card-catalog-D_u1g232.js"
+    ],
+    "css": [
+      {
+        "file": "assets/battle-DHr2oPIw.css",
+        "gzipBytes": 6133
+      },
+      {
+        "file": "assets/game.cardslib-yC5B5_9s.css",
+        "gzipBytes": 13139
+      },
+      {
+        "file": "assets/game.menu-CqSDV0n-.css",
+        "gzipBytes": 10583
+      },
+      {
+        "file": "assets/home-djRd51SW.css",
+        "gzipBytes": 1973
+      },
+      {
+        "file": "assets/home-layers-CGeD3b0U.css",
+        "gzipBytes": 1771
+      },
+      {
+        "file": "assets/home-menu-motion-ChDSp1Xr.css",
+        "gzipBytes": 973
+      },
+      {
+        "file": "assets/home-polish-BIhQrbgT.css",
+        "gzipBytes": 6624
+      },
+      {
+        "file": "assets/index-CBj6ykbl.css",
+        "gzipBytes": 182801
+      },
+      {
+        "file": "assets/interface-motion-DQw23dHp.css",
+        "gzipBytes": 968
+      },
+      {
+        "file": "assets/motion-transitions-BdxbKqrz.css",
+        "gzipBytes": 2002
+      }
+    ],
+    "failures": []
+  },
+  "candidate": "92-file frozen index plus approved budget-only change",
+  "frozenReceiptIndexSha256": "15e5f7dea2e456a5b07981560102032e84937dc10e927f5fd8470623a3688570",
+  "indexListingSha256": "15e5f7dea2e456a5b07981560102032e84937dc10e927f5fd8470623a3688570",
+  "node": "v24.19.0",
+  "current": {
+    "packageBytes": 222440689,
+    "duplicateBytes": 134099,
+    "entryGzipBytes": 356991,
+    "initialJsGzipBytes": 406239,
+    "cssGzipBytes": 226967
+  },
+  "limits": {
+    "entryGzipBytes": 368640,
+    "initialJsGzipBytes": 419840,
+    "cssGzipBytes": 235520,
+    "packageBytes": 230686720
+  },
+  "buildExit": 0,
+  "scope": "Build bytes only; no browser or FPS result"
+}

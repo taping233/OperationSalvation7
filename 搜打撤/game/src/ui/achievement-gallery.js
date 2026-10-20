@@ -37,12 +37,11 @@ export function achievementGalleryHTML({ achievements, base, slot, isUnlocked, b
     ].filter(Boolean).join(' / ') || '远征纪念';
     const state = entry.claimed ? 'claimed' : entry.unlocked ? 'unlocked' : 'locked';
     const label = entry.claimed ? '已领取' : entry.unlocked ? '已获得 · 待领取' : '未获得';
-    return `<button type="button" class="ag-medal ag-${state}" data-gallery-item data-category="${entry.category.id}" data-unlocked="${entry.unlocked}" data-search="${esc(entry.name + ' ' + entry.desc)}" aria-label="${esc(entry.name)}，${label}，查看详情">
+    return `<button type="button" class="ag-medal ag-${state}" data-gallery-item data-medal-id="${esc(entry.id)}" data-number="${entry.number}" data-rewards="${esc(rewards)}" data-category="${entry.category.id}" data-unlocked="${entry.unlocked}" data-search="${esc(entry.name + ' ' + entry.desc)}" aria-label="${esc(entry.name)}，${label}，查看详情">
       <span class="ag-emblem">${achievementMedalHTML(entry.id, 'tile', medalStyle)}</span>
       <span class="ag-medal-copy"><span class="ag-item-heading"><strong>${esc(entry.name)}</strong><span class="ag-state"><i>${entry.unlocked ? '✓' : '◇'}</i>${label}</span></span>
       <span class="ag-description">${esc(entry.desc)}</span>
       <span class="ag-item-footer"><span>${entry.category.name} / NO. ${entry.number}</span><span>查看详情 ↗</span></span></span>
-      <template class="ag-detail-source"><span class="ag-detail-art">${achievementMedalHTML(entry.id, 'detail', medalStyle)}</span><span class="ag-detail-copy"><span class="ag-detail-category">${entry.category.name} / NO. ${entry.number}</span><h3>${esc(entry.name)}</h3><span class="ag-state"><i>${entry.unlocked ? '✓' : '◇'}</i>${label}</span><p class="ag-detail-condition"><b>获得方式</b><span>${esc(entry.desc)}</span></p><p class="ag-detail-reward"><b>达成奖励</b><span>${esc(rewards)}</span></p><p class="ag-detail-note">${entry.claimed ? '奖励已记入该档位的基地档案。' : entry.unlocked ? '请进入该档位的基地领取奖励。' : '完成以上条件后，即可解锁这枚奖章。'}</p></span></template>
     </button>`;
   }).join('');
   return `<section class="achievement-gallery" aria-label="成就陈列室" data-medal-style="${medalStyle}">
@@ -56,6 +55,14 @@ export function achievementGalleryHTML({ achievements, base, slot, isUnlocked, b
     <div class="ag-detail-backdrop" hidden data-gallery-dismiss aria-hidden="true"></div>
     <section class="ag-detail" hidden role="dialog" aria-modal="true" aria-label="奖章详情" tabindex="-1"><div class="ag-detail-content"></div></section>
   </section>`;
+}
+// Detail content is built only for the selected medal, not for every tile at entry.
+function achievementDetailHTML(tile, style) {
+  const claimed = tile.classList.contains('ag-claimed');
+  const unlocked = tile.dataset.unlocked === 'true';
+  const category = CATEGORIES.find(item => item.id === tile.dataset.category) || CATEGORIES[1];
+  const label = claimed ? '已领取' : unlocked ? '已获得 · 待领取' : '未获得';
+  return `<span class="ag-detail-art">${achievementMedalHTML(tile.dataset.medalId, 'detail', style)}</span><span class="ag-detail-copy"><span class="ag-detail-category">${category.name} / NO. ${esc(tile.dataset.number)}</span><h3>${esc(tile.querySelector('.ag-item-heading strong').textContent)}</h3><span class="ag-state"><i>${unlocked ? '✓' : '◇'}</i>${label}</span><p class="ag-detail-condition"><b>获得方式</b><span>${esc(tile.querySelector('.ag-description').textContent)}</span></p><p class="ag-detail-reward"><b>达成奖励</b><span>${esc(tile.dataset.rewards)}</span></p><p class="ag-detail-note">${claimed ? '奖励已记入该档位的基地档案。' : unlocked ? '请进入该档位的基地领取奖励。' : '完成以上条件后，即可解锁这枚奖章。'}</p></span>`;
 }
 export function bindAchievementGallery(root) {
   if (!root) return { closeDetail: () => false };
@@ -154,8 +161,10 @@ export function bindAchievementGallery(root) {
     }
     if (button.hasAttribute('data-gallery-reset')) { selected = 'all'; category = 'all'; input.value = ''; refresh('reset'); input.focus(); }
     if (button.hasAttribute('data-gallery-item')) {
+      if (openedTile !== button) {
+        root.querySelector('.ag-detail-content').innerHTML = achievementDetailHTML(button, root.dataset.medalStyle);
+      }
       openedTile = button;
-      root.querySelector('.ag-detail-content').innerHTML = button.querySelector('.ag-detail-source').innerHTML;
       detail.hidden = false; backdrop.hidden = false; body.inert = true; detail.focus();
       header.inert = true;
       detailClosing = false;

@@ -6,6 +6,7 @@ import { groupHandCards, orderHandGroups } from '../core/battle.hand.js';
 
 import { isInteractiveBattlePage } from './battle.page-activity.js';
 import { cancelSelection } from './battle.selection-ui.js';
+import { infusionMaterialState } from './battle.infusion-material-state.js';
 import { requiresInfusion } from '../effects/battle.infusion.js';
 
 let keyCleanup = null;
@@ -28,15 +29,13 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
   const sourceExpanded = same && previous.querySelector('.infusion-source-details')?.open;
   const focused = same && previous.contains(document.activeElement) ? { ...document.activeElement.dataset, summary:document.activeElement.tagName === 'SUMMARY' } : null;
   const materialHTML = groups.map((group, i) => {
-    const selected = group.uids.filter(uid => picked.includes(uid));
-    const available = group.uids.filter(uid => !picked.includes(uid) && !infusionFuelReason(uid));
-    const reason = available.length || selected.length ? '' : infusionFuelReason(group.uids[0]);
-    const canAdd = available.length > 0 && remaining > 0;
+    const { selected, unavailable:reason, addReason, remove, canAdjust } = infusionMaterialState(group, infusion, snapshot.hand, infusionFuelReason);
+    const note = addReason ? `${addReason}${selected.length ? '；点击卡面或减号减少一张' : ''}` : '';
     return `<article class="infusion-material${selected.length ? ' is-selected' : ''}${reason ? ' is-unavailable' : ''}">
       <div class="infusion-material-heading"><b>${i < 9 ? `<small class="infusion-key">${i + 1}</small> ` : ''}${esc(group.card.name)}</b><button class="infusion-detail" data-act="btInfuseInspect" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}">详情</button></div>
-      <div class="infusion-quantity"><button data-act="btInfuseRemove" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="减少一张${escAttr(group.card.name)}" ${selected.length ? '' : 'disabled'}>−</button><span><b>${selected.length}</b> / ${group.uids.length}<small>已选 / 持有</small></span><button data-act="btInfuseAdd" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="增加一张${escAttr(group.card.name)}" ${canAdd ? '' : 'disabled'}>＋</button></div>
-      <button class="infusion-card-face" aria-pressed="${selected.length > 0}" data-act="btInfuseAdd" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="选择一张${escAttr(group.card.name)}作为材料" ${canAdd ? '' : 'disabled'}>${cardHTML(group.card, 'sm')}</button>
-      ${reason ? `<p class="infusion-material-note">${esc(reason)}</p>` : ''}
+      <div class="infusion-quantity"><button data-act="btInfuseRemove" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="减少一张${escAttr(group.card.name)}" ${selected.length ? '' : 'disabled'}>−</button><span><b>${selected.length}</b> / ${group.uids.length}<small>已选 / 持有</small></span><button data-act="btInfuseAdd" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="增加一张${escAttr(group.card.name)}" ${addReason ? `disabled title="${escAttr(addReason)}"` : ''}>＋</button></div>
+      <button class="infusion-card-face" aria-pressed="${selected.length > 0}" data-act="btInfuseAdjust" data-i="${i}" data-group-uid="${escAttr(group.uids[0])}" aria-label="${remove ? '减少' : '选择'}一张${escAttr(group.card.name)}作为材料，已选${selected.length}张" ${canAdjust ? '' : `disabled title="${escAttr(addReason)}"`}>${cardHTML(group.card, 'sm')}</button>
+      ${note ? `<p class="infusion-material-note">${esc(note)}</p>` : ''}
     </article>`;
   }).join('');
   const chosen = groups.filter(group => group.uids.some(uid => picked.includes(uid))).map(group => `${esc(group.card.name)} ×${group.uids.filter(uid => picked.includes(uid)).length}`).join('、');
@@ -81,7 +80,14 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
       : now.infusing.picked.length < now.infusing.need && group.uids.find(id => now.hand.includes(id) && !now.infusing.picked.includes(id) && !infusionFuelReason(id));
     if (uid) commands.selectInfusion(uid);
   };
+  const adjustFace = (data, now = current()) => {
+    const group = groups[Number(data.i)];
+    if (!now || !group) return;
+    const state = infusionMaterialState(group, now.infusing, now.hand, infusionFuelReason);
+    if (state.canAdjust) adjust(data, state.remove, now);
+  };
   UI.act('btPlay', () => {});
+  UI.act('btInfuseAdjust', data => adjustFace(data));
   UI.act('btInfuseAdd', data => adjust(data, false));
   UI.act('btInfuseRemove', data => adjust(data, true));
   UI.act('btInfuseInspect', data => {
@@ -104,8 +110,7 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
     // Detached hand-layer shortcuts must not select a hidden material.
     if (materialKey) {
       event.preventDefault(); event.stopImmediatePropagation();
-      const i = Number(event.key) - 1, group = groups[i], infusionNow = now.infusing;
-      if (group) adjust({ i }, infusionNow.picked.length >= infusionNow.need || group.uids.every(uid => infusionNow.picked.includes(uid)), now);
+      adjustFace({ i:Number(event.key) - 1 }, now);
     }
   };
   document.addEventListener('keydown', onKey, true);

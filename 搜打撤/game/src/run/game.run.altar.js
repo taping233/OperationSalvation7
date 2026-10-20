@@ -11,7 +11,7 @@ import { installExpeditionFeedback } from '../ui/expedition-feedback.js';
 import { showLayerPassage } from '../ui/map-passage.js';
 import { openClassChoice as requestClassChoicePage } from './game.run.class-choice.js';
 import { showRewardCardFeedback } from '../ui/reward-card-feedback.js';
-import { altarRitualHTML, altarRewardHTML, entrySupplyIntroHTML } from '../ui/node-decision-view.js';
+import { altarRitualHTML, altarRewardHTML } from '../ui/node-decision-view.js';
 import { fireRestDecisionHTML } from '../ui/fire-rest-view.js';
 import { rewardSceneHTML } from '../ui/reward-scene-view.js';
 import { claimEntrySupply, entrySupplyAt, nodeActionBinding } from './node-reward-state.js';
@@ -181,15 +181,8 @@ export function openEntrySupply() {
     showResult();
     showRewardCardFeedback(UI.el?.ovBody, received, { mode:'page', token:supply, sceneSelector:'.entry-supply-strips' });
   };
-  setBagReturnHook(() => { if (isCurrent()) openEntrySupply(); });
-  if (supply.taken.length) { showResult(); return true; }
-  nodeShell({ tone:'entry', asset:'scene-door-bg', icon:'', title:'入城补给',
-    sub:'随行的职业补给已留在城门旁。',
-    body:entrySupplyIntroHTML({ count:supply.cardIds.length, character:characterName(game.myClass), capacity:game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格` }),
-    foot:saveFailed ? '<p class="entry-save-warning">当前进度未保存，请查看存档错误提示。</p>' : '',
-  });
-  const active = nodeActionBinding(game, UI, 'clsEntryReveal');
-  UI.act('clsEntryReveal', () => { if (isCurrent() && active()) showResult(); });
+  // 进入本节点即展示待领卡牌；查看卡面和逐张收下仍由玩家操作。
+  showResult();
   return true;
 }
 // 消耗区复原选牌（picks = 最多复原张数；done = 结束回调）

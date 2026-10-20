@@ -1,4 +1,4 @@
-// Only the current backpack round trip owns this DOM snapshot; it is never saved.
+// Only the current shop round trip owns this DOM snapshot; it is never saved.
 const SCROLLERS = ['.shop-board', '.shop-detail-scroll'];
 const ACTION_KEYS = ['act', 'i', 'uid'];
 
@@ -17,6 +17,7 @@ export function captureShopBrowseState(root, host, detailOpen = false) {
   return {
     root:scrollOf(root), host:scrollOf(host), focus,
     rulesOpen:detailOpen && !!root.querySelector('.shop-detail-rules[open]'),
+    sellRulesOpen:!!root.querySelector('.sell-ledger-rule[open]'),
     scrollers:SCROLLERS.filter(selector => detailOpen || selector !== '.shop-detail-scroll')
       .map(selector => ({ selector, position:scrollOf(root.querySelector(selector)) })),
   };
@@ -37,6 +38,8 @@ export function restoreShopBrowseState(root, host, snapshot) {
   if (!root?.isConnected || !snapshot) return;
   const rules = root.querySelector('.shop-detail-rules');
   if (rules) rules.toggleAttribute('open', snapshot.rulesOpen);
+  const sellRules = root.querySelector('.sell-ledger-rule');
+  if (sellRules) sellRules.toggleAttribute('open', snapshot.sellRulesOpen);
   setScroll(host, snapshot.host);
   setScroll(root, snapshot.root);
   for (const entry of snapshot.scrollers) setScroll(root.querySelector(entry.selector), entry.position);

@@ -438,20 +438,14 @@ it('火堆取消休整保留收益，再进入必须重新确认', async () => {
   expect(st.game.hp).toBe(30);
 });
 
-it('入城补给先阅读再逐张领取，刷新不重领，满包补给保留在实际入口', async () => {
+it('入城补给直接展示待领卡牌，逐张领取与刷新满包规则保持', async () => {
   const game = st.game;
   game.entrySupply = { version:1, layerIdx:0, trackPos:0, cardIds:['lg1','eq1'], taken:[] };
   const { openEntrySupply } = await importAltar();
   expect(openEntrySupply()).toBe(true);
   expect(game.ownedCards).toHaveLength(0);
-  expect(document.querySelector('.ui-facts').textContent).toContain('待领补给2 张');
-  expect(document.querySelector('.ui-decision-note').closest('details')).toBeNull();
-  expect(document.getElementById('body').textContent.match(/全部领取后才能继续探索/g)).toHaveLength(1);
-  expect(document.getElementById('body').textContent).toContain('全部领取后才能继续探索');
-  expect(document.getElementById('body').textContent).not.toContain('可领取最多');
-  const reveal = acts.clsEntryReveal;
-  reveal(); reveal();
-  expect(game.ownedCards).toHaveLength(0);
+  expect(document.querySelector('[data-act="clsEntryReveal"]')).toBeNull();
+  expect(game.entrySupply.taken).toEqual([]);
   expect(document.querySelectorAll('.entry-supply-strips .reward-unit')).toHaveLength(2);
   expect(document.querySelector('.entry-supply-status b').textContent).toBe('0 / 2');
   expect(document.querySelector('.entry-supply-status').getAttribute('aria-live')).toBe('polite');
@@ -509,11 +503,29 @@ it('入城补给先阅读再逐张领取，刷新不重领，满包补给保留�
   expect(document.getElementById('body').textContent).toBe('');
 });
 
+it('零领取存档恢复直接展示卡牌，旧页领取回调失效且重复点击不多领', async () => {
+  st.game.entrySupply = { version:1, layerIdx:0, trackPos:0, cardIds:['lg1','eq1'], taken:[] };
+  const { openEntrySupply } = await importAltar();
+  openEntrySupply();
+  const oldTake = acts.entrySupplyTake;
+  st.game.entrySupply = JSON.parse(JSON.stringify(st.game.entrySupply));
+  openEntrySupply();
+  expect(document.querySelector('[data-act="clsEntryReveal"]')).toBeNull();
+  expect(document.querySelectorAll('.reward-unit')).toHaveLength(2);
+  expect(st.game.ownedCards).toHaveLength(0);
+  oldTake({ i:0 });
+  expect(st.game.entrySupply.taken).toEqual([]);
+  const take = acts.entrySupplyTake;
+  take({ i:0 }); take({ i:0 });
+  expect(st.game.entrySupply.taken).toEqual([0]);
+  expect(st.game.ownedCards).toHaveLength(1);
+  expect(document.querySelectorAll('.reward-unit')).toHaveLength(1);
+});
+
 it.each([0, 1])('入城补给仅有 %i 张时仍按实际总数显示并在全部收下后确认', async total => {
   st.game.entrySupply = { version:1, layerIdx:0, trackPos:0, cardIds:['lg1'].slice(0, total), taken:[] };
   const { openEntrySupply } = await importAltar();
   openEntrySupply();
-  acts.clsEntryReveal();
   expect(document.querySelector('.entry-supply-status b').textContent).toBe(`0 / ${total}`);
   if (total) {
     expect(document.querySelector('[data-act="clsEntryContinue"]')).toBeNull();

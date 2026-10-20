@@ -147,7 +147,7 @@ npm run assets:audit
 
 营火决策使用 `ui/fire-rest-view.js` 的收益三项、容量与一次性风险常显、休整说明默认折叠；营火结果卡面保原尺寸，标明已复原/额外获得，继续按钮不再附重复说明。`ui/ui-disclosure.js` 与 `css/ui-design-system.css` 共用冷灰蓝/纸白token、间距和原生说明折叠；撤离待复原说明接入同组件，容量/丢失风险不折叠。组件只管呈现，不更改营火随机、先额外发牌后复原、容量检查或撤离事务。执行规则见[视觉规范](production/art/VISUAL-BIBLE.md#页面执行规范冬日界面体系)，首批实页复核尚待进行。
 
-祭坛激活/回赠和入城补给说明使用 `ui/node-decision-view.js`：事实区共用 `uiDecisionFacts`，祭坛代价→收益选项共用 `uiDecisionChoice`，解释复用 `uiDisclosure`。碎片不足/道具已用的原因、永久献祭、容量和二选一后果留主层；退出移到既有底部动作区，事件action ID与事务保持。祭坛仍用专属 `altar` 图标；献祭选卡的 `crystal` 另有含义，不在本轮替换。覆盖与待核项维护于[页面矩阵](production/art/UI-PAGE-COVERAGE.md)。
+祭坛激活/回赠使用 `ui/node-decision-view.js`：事实区共用 `uiDecisionFacts`，祭坛代价→收益选项共用 `uiDecisionChoice`，解释复用 `uiDisclosure`。碎片不足/道具已用的原因、永久献祭、容量和二选一后果留主层；退出移到既有底部动作区，事件action ID与事务保持。祭坛仍用专属 `altar` 图标；献祭选卡的 `crystal` 另有含义，不在本轮替换。覆盖与待核项维护于[页面矩阵](production/art/UI-PAGE-COVERAGE.md)。
 
 远征背包三分区显式接入 `bag-design-system.css` 与共享说明组件。标题占格独立于卡牌张数；张数由真实 `cardStacks` 聚合且不随筛选变化，散装物资另计件数，盒内卡继续独立显示。安全格移动后失去保护、丢弃不可取回、消耗区火堆不可复原数量与撤离散失风险在主层，叠放/操作/复原解释默认折叠。卡面宽度、五列网格与水平内距保持，未改存储、跨区移动或复原/销毁命令。三个分区状态为已改未视觉，详见覆盖矩阵；当前生产冻结待合并复核。
 
@@ -164,3 +164,5 @@ npm run assets:audit
 - `/dev/reward-hierarchy-review.html` 固定八种状态，复用真实卡面与 view，无命令/存档/音频；前态开关只重现标题/回执样式差异，不是假称历史截图。picker 卡面先收紧上下留白，再按卡区实际高度保持 2:3 等比缩放，预留领取热区；极矮卡区保留滚动。当前呈现可查[奖励复核夹具](../game/dev/reward-hierarchy-review.html)；可见布局检查复用[布局诊断](../game/dev/visible-layout-check.js)，分别报告当前滚动口外动作与祖先裁切，持续检查外层边界。结构和尺寸预算见[裁切契约测试](../tests/reward-action-clipping.test.js)，不能代替视觉验收。原 `2026-10-17-reward-interface-reference` 与 `2026-10-17-reward-action-clipping` 报告及证据目录缺失，旧 1180×757 三态布局结论缺少可复核原始记录，当前窗口的领取按钮可达性和卡面可读性须另验。
 
 - 手牌拿起会话按原pointer拥有：仍按住时其他设备的primary左键不能接管；原pointer松开后允许新pointer继续点击确认。右键/Escape取消原语义不变。当前逻辑可查[拿起会话](../game/src/battle/view/battle.aim.js)与[手牌输入契约测试](../tests/battle-hand-inspector.test.js)；原 `2026-10-17-hand-input-ownership` 报告及证据目录缺失，历史混合输入和舒适度对照无法复核。鼠标注能hover误触仍待真实CSS命中复核，不归因于此修复。
+
+入城补给入口由 `openEntrySupply` 直接展示既有领奖页，不再插入独立介绍页。卡面仍可放大查看，补给逐张手动收下；全部领齐后确认继续探索。满包整理返回和恢复存档均展示当前待领卡牌，领取守卫、数量和存档字段不变。

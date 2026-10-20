@@ -176,3 +176,98 @@ describe('局内商店事务及旧页面动作', () => {
     onReturn(); expect(host.firstElementChild).toBe(current);
   });
 });
+
+
+describe('商店往返浏览连续性', () => {
+  function visibleButtons() {
+    vi.useFakeTimers();
+    vi.spyOn(HTMLElement.prototype, 'getClientRects').mockReturnValue([{ width:100, height:30 }]);
+  }
+
+  it('收购台返回货架恢复滚动、展开详情和原入口焦点', () => {
+    visibleButtons();
+    const { acts, host, game } = shop();
+    game.shopStock[0].card = { ...card, desc:'商品完整规则。'.repeat(20) };
+    acts.shopInspect({ i:0 });
+    host.querySelector('.shop-detail-rules').open = true;
+    host.querySelector('.shop-board').scrollTop = 175;
+    host.querySelector('.shop-detail-scroll').scrollTop = 65;
+    host.scrollTop = 220;
+    host.querySelector('[data-act="openSell"]').focus();
+    acts.openSell(); acts.backShop(); vi.runOnlyPendingTimers();
+    expect(host.querySelector('.shop-board').scrollTop).toBe(175);
+    expect(host.querySelector('.shop-detail-scroll').scrollTop).toBe(65);
+    expect(host.querySelector('.shop-detail-rules').open).toBe(true);
+    expect(host.scrollTop).toBe(220);
+    expect(document.activeElement.dataset.act).toBe('openSell');
+  });
+
+  it('收购台整理背包后保留收购规则、位置和入口焦点', () => {
+    visibleButtons();
+    const { acts, host } = shop();
+    let onReturn;
+    configureShopRuntime({ openBag: callback => { onReturn = callback; host.innerHTML = '<section class="bag-view">背包</section>'; } });
+    acts.openSell();
+    host.querySelector('.sell-ledger-rule').open = true;
+    host.querySelector('.shop-exchange').scrollTop = 155;
+    host.querySelector('[data-act="shopOpenBag"]').focus();
+    acts.shopOpenBag(); onReturn(); vi.runOnlyPendingTimers();
+    expect(host.querySelector('.sell-ledger-rule').open).toBe(true);
+    expect(host.querySelector('.shop-exchange').scrollTop).toBe(155);
+    expect(document.activeElement.dataset.act).toBe('shopOpenBag');
+  });
+
+  it('返回货架后的延迟恢复不会抢新商店的焦点或滚动', () => {
+    visibleButtons();
+    const { acts, host, controller } = shop();
+    host.querySelector('.shop-board').scrollTop = 175;
+    acts.openSell(); acts.backShop();
+    controller.openShop('two');
+    const current = host.firstElementChild;
+    const button = host.querySelector('[data-act="shopOpenBag"]'); button.focus();
+    vi.runOnlyPendingTimers();
+    expect(host.firstElementChild).toBe(current);
+    expect(host.querySelector('.shop-board').scrollTop).toBe(0);
+    expect(document.activeElement).toBe(button);
+  });
+
+  it('反复往返与出售后仍回原货架，不撤销成交或重放旧入口', () => {
+    visibleButtons();
+    const { acts, host, game } = shop();
+    host.querySelector('.shop-board').scrollTop = 175;
+    host.querySelector('[data-act="openSell"]').focus();
+    acts.openSell(); acts.sellCard({ uid:'coin-owned' }); acts.backShop();
+    vi.runOnlyPendingTimers();
+    expect(game.coins).toBe(23);
+    expect(host.querySelector('.shop-board').scrollTop).toBe(175);
+    host.querySelector('.shop-board').scrollTop = 85;
+    acts.openSell(); acts.backShop(); vi.runOnlyPendingTimers();
+    expect(host.querySelector('.shop-board').scrollTop).toBe(85);
+  });
+
+  it('收购台经背包整理再返回货架，仍使用原货架快照', () => {
+    visibleButtons();
+    const { acts, host } = shop();
+    let onReturn;
+    configureShopRuntime({ openBag: callback => { onReturn = callback; host.innerHTML = '<section class="bag-view">背包</section>'; } });
+    host.querySelector('.shop-board').scrollTop = 175;
+    host.querySelector('[data-act="openSell"]').focus();
+    acts.openSell(); acts.shopOpenBag(); onReturn();
+    acts.backShop(); vi.runOnlyPendingTimers();
+    expect(host.querySelector('.shop-board').scrollTop).toBe(175);
+    expect(document.activeElement.dataset.act).toBe('openSell');
+  });
+
+  it('离店后旧返回动作不重开货架；新店不沿用上次滚动', () => {
+    visibleButtons();
+    const { acts, host, controller } = shop();
+    host.querySelector('.shop-board').scrollTop = 175;
+    acts.openSell(); const oldBack = acts.backShop;
+    acts.closeShop(); const current = host.firstElementChild;
+    oldBack(); vi.runOnlyPendingTimers();
+    expect(host.firstElementChild).toBe(current);
+    controller.openShop('two'); acts.openSell(); acts.backShop(); vi.runOnlyPendingTimers();
+    expect(host.querySelector('.shop-board').scrollTop).toBe(0);
+  });
+
+});

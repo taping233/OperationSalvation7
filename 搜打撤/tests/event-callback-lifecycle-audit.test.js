@@ -445,7 +445,7 @@ describe('事件等待与回调生命周期审计', () => {
     H.cards = [{ id:'wood', name:'木材', type:'资源', rarity:'古朴' }];
     H.game.entrySupply = {version:1, layerIdx:0, trackPos:1, cardIds:['wood'], taken:[]};
     H.game.canReceiveCard = () => false;
-    altar.openEntrySupply(); UI._acts.clsEntryReveal();
+    altar.openEntrySupply();
     const zoom = document.createElement('div'); zoom.id = 'cardZoom';
     zoom._closeCardZoom = vi.fn(() => zoom.remove()); document.body.append(zoom);
     UI._acts.entrySupplyTake({i:'0'});

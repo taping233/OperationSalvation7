@@ -1,0 +1,15 @@
+{
+  "before": {
+    "htmlBytes": 62020,
+    "detailTemplates": 26,
+    "detailElements": 494,
+    "medalSvgs": 53
+  },
+  "after": {
+    "htmlBytes": 36286,
+    "detailTemplates": 0,
+    "detailElements": 0,
+    "medalSvgs": 27
+  },
+  "method": "Same 26 achievements, no save, painted style. Back button omitted identically. Includes inert template descendants."
+}

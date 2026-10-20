@@ -30,6 +30,7 @@ function createShopController({
   let shopSession = null;
   let pageVersion = 0;
   let bagReturn = null;
+  let shelfReturn = null;
   let inspectionClose = null;
   let inspectionMotion = null;
   const currentSession = session => session && session === shopSession && game.state === 'modal'
@@ -127,6 +128,7 @@ function createShopController({
       layerIdx:game.layerIdx, trackPos:game.trackPos };
     bagReturn = null;
     shopNotice = '';
+    shelfReturn = null;
     selectedShopIndex = null;
     shopOnClose = onClose || null;
     const session = shopSession;
@@ -662,11 +664,26 @@ function createShopController({
         if (pageVersion === restoredVersion && currentSession(session) && restoredRoot?.isConnected) restoreShopBrowseState(restoredRoot, UI.el?.ovBody, browseState);
       });
     });
-    register('openSell', renderSellPage);
-    register('backShop', renderShop);
+    register('openSell', () => {
+      shelfReturn = captureShopBrowseState(root, UI.el?.ovBody, selectedShopIndex != null);
+      renderSellPage();
+    });
+    register('backShop', () => {
+      const snapshot = shelfReturn;
+      shelfReturn = null;
+      renderShop();
+      const restoredVersion = pageVersion;
+      const restoredRoot = UI.el?.ovBody?.querySelector('.shop-market');
+      requestAnimationFrame(() => {
+        if (pageVersion !== restoredVersion || !currentSession(session) || !restoredRoot?.isConnected
+          || UI.el?.overlay?.hidden || UI.el?.ovBody?.querySelector('.shop-market') !== restoredRoot) return;
+        restoreShopBrowseState(restoredRoot, UI.el?.ovBody, snapshot);
+      });
+    });
     register('closeShop', () => {
       shopSession = null;
       bagReturn = null;
+      shelfReturn = null;
       pageVersion++;
       cancelInspectionMotion();
       UI.hideOverlay();

@@ -210,8 +210,7 @@ describe('E4 real async entry chains (render/storage ports stubbed)', () => {
       expect(saveGame).toHaveBeenCalledTimes(2);
       const { openEntrySupply } = await import('../game/src/run/game.run.altar.js');
       expect(openEntrySupply()).toBe(true);
-      expect(document.querySelector('[data-act="clsEntryReveal"]')).not.toBeNull();
-      handlers.clsEntryReveal();
+      expect(document.querySelector('[data-act="clsEntryReveal"]')).toBeNull();
       expect(document.querySelector('.entry-reward-scene')).not.toBeNull();
       handlers.clsEntryContinue(); expect(game.state).toBe('modal');
       expect(document.querySelector('[data-act="clsEntryContinue"]')).toBeNull();
