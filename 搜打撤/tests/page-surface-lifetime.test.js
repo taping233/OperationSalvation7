@@ -86,3 +86,39 @@ it('backpack return retains a transparent input guard until the first map frame'
   ready(); await vi.advanceTimersByTimeAsync(300);
   expect(document.querySelector('.page-visual-return')).toBeNull();
 });
+
+it('settings readiness timing retains original input and stays separate from sync mounting', async () => {
+  window.history.replaceState({}, '', '/?runtimeTrace=1');
+  const { installRuntimeTrace } = await import('../game/src/core/runtime-trace.local.js');
+  ui.el.ovBody.innerHTML = '<main class="settings-page"><button>设置</button></main>';
+  const trace = installRuntimeTrace();
+  const button = ui.el.ovBody.querySelector('button');
+  let release; ui._pageBgReady = new Promise(resolve => { release = resolve; });
+  const reveal = vi.fn();
+  try {
+    button.click(); stagePageVisual(ui, reveal);
+    await vi.advanceTimersByTimeAsync(48);
+    expect(trace.read().records.some(row => row.kind === 'stage')).toBe(false);
+    button.click(); release(); await vi.advanceTimersByTimeAsync(32);
+    expect(reveal).toHaveBeenCalledOnce();
+    const rows = trace.read().records.filter(row => row.kind === 'stage');
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ stage:'settings-visual-wait', interaction:1 });
+    expect(rows[0].durationMs).toBeGreaterThanOrEqual(32);
+  } finally { trace.destroy(); window.history.replaceState({}, '', '/'); }
+});
+
+it('cancelled settings readiness settles its measured wait without implying reveal success', async () => {
+  window.history.replaceState({}, '', '/?runtimeTrace=1');
+  const { installRuntimeTrace } = await import('../game/src/core/runtime-trace.local.js');
+  ui.el.ovBody.innerHTML = '<main class="settings-page"><button>设置</button></main>';
+  const trace = installRuntimeTrace(); const reveal = vi.fn();
+  try {
+    ui.el.ovBody.querySelector('button').click(); stagePageVisual(ui, reveal);
+    await vi.advanceTimersByTimeAsync(48); cancelPageVisual(); await vi.runAllTimersAsync();
+    expect(reveal).not.toHaveBeenCalled();
+    expect(trace.read().records.filter(row => row.kind === 'stage')).toEqual([
+      expect.objectContaining({ stage:'settings-visual-wait', interaction:1 }),
+    ]);
+  } finally { trace.destroy(); window.history.replaceState({}, '', '/'); }
+});

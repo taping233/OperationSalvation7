@@ -137,7 +137,7 @@ export function checklistMarkdown(report) {
   return lines.join('\n');
 }
 export function reportHTML(report) {
-  const traceHTML = report.runtimeTrace ? `<section><h2>本地交互时间轴（仅主视频）</h2><p>人工对时标记 ${report.runtimeTrace.marker} = 主视频 ${report.runtimeTrace.videoSeconds}s。长任务API：${escapeHTML(report.runtimeTrace.longTaskSupport)}；已丢弃旧记录：${report.runtimeTrace.dropped ?? '未知'}。DOM更新/双rAF仅表示相关时段，不证明操作成功、实际呈现、FPS或卡顿根因。负时间与采样区外记录仍保留，请核对原片。</p><pre>${escapeHTML(report.runtimeTrace.records.map(row => `${row.videoSeconds.toFixed(3)}s ${row.kind} ${row.action || row.page || ''} interaction=${row.interaction ?? '-'} durationMs=${row.durationMs ?? '-'}`).join('\n'))}</pre></section>` : '';
+  const traceHTML = report.runtimeTrace ? `<section><h2>本地交互时间轴（仅主视频）</h2><p>人工对时标记 ${report.runtimeTrace.marker} = 主视频 ${report.runtimeTrace.videoSeconds}s。长任务API：${escapeHTML(report.runtimeTrace.longTaskSupport)}；已丢弃旧记录：${report.runtimeTrace.dropped ?? '未知'}。DOM更新/双rAF仅表示相关时段，不证明操作成功、实际呈现、FPS或卡顿根因。负时间与采样区外记录仍保留，请核对原片。</p><pre>${escapeHTML(report.runtimeTrace.records.map(row => `${row.videoSeconds.toFixed(3)}s ${row.kind} ${row.stage || row.action || row.page || ''} interaction=${row.interaction ?? '-'} durationMs=${row.durationMs ?? '-'}`).join('\n'))}</pre></section>` : '';
   const labels = { 'dark-screen':'疑似黑屏', 'brightness-flash':'亮度闪变', 'low-change':'低变化片段（可能只是静态界面）' };
   const image = (folder, index) => `${folder}/frame-${String(index+1).padStart(5,'0')}.jpg`;
   const panels = report.videos.map((v, index) => {

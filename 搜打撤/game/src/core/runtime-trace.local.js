@@ -1,7 +1,8 @@
+import { connectRuntimeStages, RUNTIME_STAGES } from './runtime-trace-stages.local.js';
 // Explicit opt-in, local-only evidence. No game state, text, URLs or identifiers collected.
 export const TRACE_LIMIT = 400;
-export const TRACE_REVISION = 'runtime-interactions-20261020-1';
-const KINDS = new Set(['start', 'input', 'dom-update', 'frame-opportunity', 'longtask', 'sync', 'visibility', 'stop']);
+export const TRACE_REVISION = 'runtime-interactions-20261020-2';
+const KINDS = new Set(['start', 'input', 'dom-update', 'frame-opportunity', 'longtask', 'sync', 'visibility', 'stop', 'stage']);
 const ACTIONS = new Set(['card', 'button', 'escape', 'other']);
 const PAGES = new Set(['battle', 'hub', 'departure', 'overlay', 'base']);
 export function sanitizeTraceRow(row) {
@@ -10,6 +11,7 @@ export function sanitizeTraceRow(row) {
     if (Number.isFinite(row?.[key]) && row[key] >= 0) result[key] = Math.round(Math.min(Number.MAX_SAFE_INTEGER, row[key]) * 100) / 100;
   }
   if (['click', 'pointerdown', 'pointerup', 'escape'].includes(row?.trigger)) result.trigger = row.trigger;
+  if (result.kind === 'stage' && RUNTIME_STAGES.includes(row?.stage)) result.stage = row.stage;
   if (ACTIONS.has(row?.action)) result.action = row.action;
   if (PAGES.has(row?.page)) result.page = row.page;
   if (typeof row?.visible === 'boolean') result.visible = row.visible;
@@ -29,6 +31,21 @@ export function installRuntimeTrace({ host = window, doc = document } = {}) {
   const traceStartMs = perf.now();
   let active = true, interaction = 0, marker = 0, lastInput = null, observer = null, cardGesture = false;
   let collectedAfter = traceStartMs;
+  let stageGeneration = 0;
+  const disconnectStages = connectRuntimeStages({
+    capture: () => active && lastInput ? { owner: buffer, generation: stageGeneration, interaction: lastInput.id } : null,
+    begin(stage, context) {
+      if (!active || doc.visibilityState !== 'visible' || !context || context.owner !== buffer || context.generation !== stageGeneration) return;
+      const start = perf.now(), generation = stageGeneration;
+      let finished = false;
+      return () => {
+        if (finished) return;
+        finished = true;
+        if (!active || generation !== stageGeneration || doc.visibilityState !== 'visible') return;
+        record('stage', { stage, tMs: start, durationMs: perf.now() - start, interaction: context.interaction });
+      };
+    },
+  });
   let longTaskSupport = 'unsupported';
   const page = () => {
     const overlay = doc.getElementById('overlay');
@@ -73,7 +90,7 @@ export function installRuntimeTrace({ host = window, doc = document } = {}) {
   const cancelGesture = () => { cardGesture = false; };
   doc.addEventListener('pointercancel', cancelGesture, true);
   const cancelFrames = () => { pending.forEach(token => host.cancelAnimationFrame(token)); pending.clear(); };
-  const visibility = () => { lastInput = null; cardGesture = false; cancelFrames(); record('visibility'); };
+  const visibility = () => { stageGeneration++; lastInput = null; cardGesture = false; cancelFrames(); record('visibility'); };
   doc.addEventListener('visibilitychange', visibility);
   host.addEventListener('pagehide', stop);
   // Only gameplay overlay changes. The panel is outside this subtree.
@@ -102,7 +119,7 @@ export function installRuntimeTrace({ host = window, doc = document } = {}) {
   function stop() {
     if (!active) return;
     if (observer) receive(observer.takeRecords());
-    record('stop'); active = false;
+    record('stop'); active = false; stageGeneration++; disconnectStages();
     observer?.disconnect(); mutations?.disconnect();
     cancelFrames();
     doc.removeEventListener('click', input, true); doc.removeEventListener('keydown', input, true);
@@ -116,7 +133,7 @@ export function installRuntimeTrace({ host = window, doc = document } = {}) {
     const mode = event.target?.closest?.('[data-trace]')?.dataset.trace;
     if (mode === 'sync' && active) { record('sync', { marker: ++marker }); status.textContent = `对时标记 ${marker}`; }
     if (mode === 'stop') stop();
-    if (mode === 'clear') { buffer.clear(); collectedAfter = perf.now(); lastInput = null; cardGesture = false; cancelFrames(); status.textContent = active ? '已清空；继续记录中' : '已清空；已停止'; }
+    if (mode === 'clear') { stageGeneration++; buffer.clear(); collectedAfter = perf.now(); lastInput = null; cardGesture = false; cancelFrames(); status.textContent = active ? '已清空；继续记录中' : '已清空；已停止'; }
     if (mode === 'export') {
       if (observer && active) receive(observer.takeRecords());
       const url = host.URL.createObjectURL(new Blob([JSON.stringify(read(), null, 2)], { type: 'application/json' }));

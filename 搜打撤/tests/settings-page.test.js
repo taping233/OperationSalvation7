@@ -1,3 +1,4 @@
+import { installRuntimeTrace } from '../game/src/core/runtime-trace.local.js';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createGameMenuController } from './helpers/menu-controller.js';
 
@@ -30,6 +31,18 @@ function openSettings() {
 afterEach(() => { document.body.innerHTML = ''; localStorage.clear(); });
 
 describe('settings page layout and controls', () => {
+  it('records actual overlay and navigation boundaries once per open', () => {
+    const { UI } = openSettings();
+    window.history.replaceState({}, '', '/?runtimeTrace=1');
+    const trace = installRuntimeTrace();
+    try {
+      UI.el.ovBody.querySelector('[data-act="closeSettings"]').click();
+      openSettings();
+      expect(trace.read().records.filter(row => row.kind === 'stage').map(row => row.stage))
+        .toEqual(['settings-overlay-sync', 'settings-navigation-sync']);
+    } finally { trace.destroy(); window.history.replaceState({}, '', '/'); }
+  });
+
   it('groups everyday, display, audio, records, credits and dangerous actions while retaining control hooks', () => {
     const { acts, UI } = openSettings();
     const root = UI.el.ovBody.querySelector('.settings-page');

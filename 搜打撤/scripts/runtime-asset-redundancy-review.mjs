@@ -261,7 +261,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
   },
   opaqueConsumers: {
     "game/src/audio/sfx-review.js": "2d7d38a1a9d6248e2cb7a8cffb28b0b118dfda587f4401b1cd019397c938b927",
-    "game/src/ui/game.menu.pages.js": "63142a3f9e1f4e025f7957e4b189c920784f04aec293a66ffb1d340e223e2a60",
+    "game/src/ui/game.menu.pages.js": "011ee8b4f8ffeeda3e35daa4d48c7f8b7a65e0d9deae4f60b3aacd09cb60adbc",
     "game/src/hub/hub.personnel.js": "f363ac2ad34b21fe99a1b650642deb2537e397c918175f58d5325ad4366bbe72",
     "game/src/core/art-preload-plan.js": "1b7cc057cdb5c307a3eea5601a45a1bb8837dcedcec8486eb6d1fc56701f75fe",
     "game/src/hub/game.bag.view2.js": "22d64eb1d194e29b6542bc9d1f4ab63f096c04bc6e92b02ce05ef1da3ff3800d",
@@ -281,7 +281,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/src/rarity-design-lab.js": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775",
     "game/src/run/lab.ending.js": "8a6fe31c4fbef1acbaae9cb06c759fbc5a2e4e16f84c365eb93371232b495ba8",
     "game/src/ui/base-preview-rooms-v7.js": "c68c228942c7aaa41d1d52343c8f34346f4b424327c14619c2e5c5943a4e9fb8",
-    "game/src/ui/game.menu.js": "cea11326c01a46240c7f902d37a667d528589502fe743652145ffe7654573010",
+    "game/src/ui/game.menu.js": "a5ebd60111d4edd1c4ea99f6f051eddce4eb103265406f0021cb1b4144896045",
     "game/src/ui/ui.js": "cff10befcd3e1cfa8618a6fcfddb50555574245e1e48348c2ef89702c2d38adf",
     "game/src/wu-career-frame-preview.js": "2715b703789fef835432d3eb7cbffdedc249f8355a22714e6faff8ef49cfee38"
   },

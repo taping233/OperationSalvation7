@@ -1,3 +1,4 @@
+import { beginRuntimeStage } from '../core/runtime-trace-stages.local.js';
 import { recordRestoreStage, traceRestoreStep } from '../core/flight-recorder.local.js';
 import { performanceSettingsHTML, bindPerformanceSettings } from './performance-settings.js';
 import { cancelPendingPageEntries } from './page-entry-cancellation.js';
@@ -858,7 +859,7 @@ export function createGameMenuPages(deps, shell) {
     cancelPendingPageEntries('menu');
     const prev = game.state;
     game.state = 'modal';
-    UI.showOverlay('', `
+    const settingsHTML = `
       <div class="pg settings-page ui-scale-system">
         <!-- 2026-09-07 留言：右上叉号去掉。2026-09-25 老板：返回键统一 = 主页左上退出键
              （ak-sq ak-exit）同款同位，底部大返回钮取消，Esc 仍可关 -->
@@ -916,8 +917,11 @@ export function createGameMenuPages(deps, shell) {
         <p class="hint">清空后无法恢复。<br>「清空全部存档」会删除五个档位的全部档案。</p>
         </section>
         </div><!-- /.settings -->
-      </div><!-- /.pg -->`, 'page');
-    initSettingsNavigation(UI.el.ovBody.querySelector('.settings-page'));
+      </div><!-- /.pg -->`;
+    const finishOverlay = beginRuntimeStage('settings-overlay-sync');
+    try { UI.showOverlay('', settingsHTML, 'page'); } finally { finishOverlay(); }
+    const finishNavigation = beginRuntimeStage('settings-navigation-sync');
+    try { initSettingsNavigation(UI.el.ovBody.querySelector('.settings-page')); } finally { finishNavigation(); }
     bindPerformanceSettings(UI.el.ovBody);
     const sync = () => {
       if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index;

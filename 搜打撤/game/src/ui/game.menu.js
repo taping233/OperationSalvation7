@@ -1,3 +1,4 @@
+import { beginRuntimeStage, captureRuntimeStageContext, withRuntimeStageContext } from '../core/runtime-trace-stages.local.js';
 import { beginPageEntryCancellation, cancelPendingPageEntries, releasePageEntryCancellation } from './page-entry-cancellation.js';
 import { captureBattleContext, invalidateBattleContext } from '../battle/battle-loader.js';
 import { storeGet, storeSet } from '../core/storage.js';
@@ -32,6 +33,7 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
   const sameArgs = (first, second) => first.length === second.length && first.every((arg, i) => arg === second[i]);
 
   function enterMenuPage(method, args) {
+    const traceContext = method === 'openSettings' ? captureRuntimeStageContext() : null;
     if (currentEntry?.owner === shell && currentEntry.method === method && sameArgs(currentEntry.args, args) && !currentEntry.ready) return currentEntry.promise;
     cancelPendingMenuPageOpen();
     cancelPendingPageEntries();
@@ -65,9 +67,11 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
     const loading = runPageLoading({
       title: '正在打开页面', detail: '正在准备菜单内容', signal: controller.signal,
       open: async () => {
-        const page = await loadPages();
+        const finishModule = method === 'openSettings' ? beginRuntimeStage('settings-module-wait', traceContext) : () => {};
+        let page;
+        try { page = await loadPages(); } finally { finishModule(); }
         if (!isCurrent()) return false;
-        const result = createPages(page.createGameMenuPages)[method](...args);
+        const result = withRuntimeStageContext(traceContext, () => createPages(page.createGameMenuPages)[method](...args));
         entry.ready = true;
         menuPageLoading = false;
         return result;

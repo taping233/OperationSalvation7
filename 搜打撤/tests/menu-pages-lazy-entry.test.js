@@ -46,6 +46,43 @@ async function finish(request) {
 }
 
 describe('菜单真实按需入口', () => {
+  it('诊断冷模块等待保留入口事件，热打开不制造模块等待', async () => {
+    window.history.replaceState({}, '', '/?runtimeTrace=1');
+    const { installRuntimeTrace } = await import('../game/src/core/runtime-trace.local.js');
+    const { beginRuntimeStage } = await import('../game/src/core/runtime-trace-stages.local.js');
+    const trace = installRuntimeTrace();
+    const button = document.createElement('button'); document.body.append(button);
+    h.methods.openSettings.mockImplementation(() => { beginRuntimeStage('settings-overlay-sync')(); });
+    try {
+      button.click(); const request = h.menu.openSettings();
+      await vi.advanceTimersByTimeAsync(32);
+      button.click(); await finish(request);
+      const rows = trace.read().records.filter(row => row.kind === 'stage');
+      expect(rows.map(row => [row.stage, row.interaction])).toEqual([
+        ['settings-module-wait', 1], ['settings-overlay-sync', 1],
+      ]);
+      button.click(); h.menu.openSettings();
+      expect(trace.read().records.filter(row => row.stage === 'settings-module-wait')).toHaveLength(1);
+      expect(trace.read().records.at(-1)).toMatchObject({ stage:'settings-overlay-sync', interaction:3 });
+    } finally { trace.destroy(); window.history.replaceState({}, '', '/'); }
+  });
+
+  it('诊断模块失败只完成等待阶段，不制造页面挂载阶段', async () => {
+    window.history.replaceState({}, '', '/?runtimeTrace=1');
+    const { installRuntimeTrace } = await import('../game/src/core/runtime-trace.local.js');
+    const trace = installRuntimeTrace();
+    const button = document.createElement('button'); document.body.append(button);
+    try {
+      button.click(); const request = h.menu.openSettings(); await vi.advanceTimersByTimeAsync(32);
+      h.gate.reject(new Error('private failure'));
+      await vi.dynamicImportSettled(); await vi.runAllTimersAsync();
+      expect(await request).toBe(false);
+      const rows = trace.read().records.filter(row => row.kind === 'stage');
+      expect(rows).toEqual([expect.objectContaining({ stage:'settings-module-wait', interaction:1 })]);
+      expect(JSON.stringify(trace.read())).not.toContain('private failure');
+    } finally { trace.destroy(); window.history.replaceState({}, '', '/'); }
+  });
+
   it('同步构造/标题与长时间空闲都不提前导入页面', async () => {
     h.menu.showTitle();
     expect(h.game.state).toBe('title'); expect(h.runtime.resize).toHaveBeenCalledOnce();
