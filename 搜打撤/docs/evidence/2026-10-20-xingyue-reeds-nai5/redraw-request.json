@@ -1,0 +1,21 @@
+{
+  "tool": "built-in image_gen",
+  "output": ".tmp\\nai\\xingyue-reeds-nai5-20261020\\redraw-default-style.png",
+  "sha256": "acab09a617bbfefec9e9282a8804b24e2a45271b8ddff458d221913c83cda3dc",
+  "size": [
+    1659,
+    948
+  ],
+  "visual_review": {
+    "matched": [
+      "星月与衣装、构图保留",
+      "头发衣料云层块面叠色",
+      "双手重建为清楚摊掌"
+    ],
+    "remaining": [
+      "发饰仍在观众左侧",
+      "手部细节待老板审阅"
+    ]
+  },
+  "approval": "候选待审阅"
+}
