@@ -1,0 +1,25 @@
+{
+  "game/src/ui/card-browser.js": {
+    "baselineSha256": "a564daa77db82e007a283d0f8b88ceae6301be121a51d62373c6be18f297ad8a",
+    "candidateSha256": "bce746361f49010cfc3fc060f00c9e719ebca0f8b7b4afb95b6e3ae259ab0863"
+  },
+  "game/src/hub/hub.collection-v4.js": {
+    "baselineSha256": "d7dc88c2b6c66bd4d09beae796b7f03f59c6a35f2db1e41dac2ac63f38c89638",
+    "candidateSha256": "9d3be5ce6115276fa0a1ce7355d90b436e9aec18e298f22828f49ec9235504f9"
+  },
+  "game/src/hub/hub.personnel.js": {
+    "baselineSha256": "6d9f771f37aaa2b9f338439a1609e2a5060e75027a72a0fd8c7882682482d9ea",
+    "candidateSha256": "0feead0d3df274cd9b39056c2326946b7bd0f264e64d8b645886f4d538282a1e"
+  },
+  "game/src/cards/cards.js": {
+    "baselineSha256": "55020825352ee9ed3035fad5f43904f4604cf2e8604d2e35f2d080facdf9f2a9",
+    "candidateSha256": "55020825352ee9ed3035fad5f43904f4604cf2e8604d2e35f2d080facdf9f2a9"
+  },
+  "game/src/cards/cards.data.js": {
+    "baselineSha256": "ac94d7dfa15e5ba3e8f30840b49b464a5ae56c333d07bc73e2d63bdc403c2ac6",
+    "candidateSha256": "ac94d7dfa15e5ba3e8f30840b49b464a5ae56c333d07bc73e2d63bdc403c2ac6"
+  },
+  "package-lock.json": {
+    "baselineSha256": "ccc6dcf969aad1ca0d5779932a1bfec3c52f8052957192b9358251505c90d156"
+  }
+}

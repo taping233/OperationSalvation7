@@ -56,7 +56,7 @@ it('金币可先独立领取，未开箱读档保持原卡牌且金币不重领'
   game.canReceiveCard = () => true;
   open();
   expect(body.querySelector('.cqp-dialog .reward-coin-unit')).toBeNull();
-  click('chestTake1'); click('chestFinish');
+  click('chestTake1'); expect(game.state).toBe('idle'); expect(save()).toBeNull();
   expect(game.gainCoins).toHaveBeenCalledTimes(1);
   expect(draw).toHaveBeenCalledTimes(1);
   expect(done).toHaveBeenCalledTimes(1);

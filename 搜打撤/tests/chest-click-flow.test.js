@@ -1,4 +1,3 @@
-import { continueChestRewards } from './helpers/chest-actions.js';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 const card = { id: 'fixture-card', name: '测试补给卡', rarity: '古朴', type: '法术', desc: '测试', cost: 0 };
@@ -10,7 +9,7 @@ describe('宝箱点击链路', () => {
     document.body.innerHTML = '';
   });
 
-  it.each([true, false])('放大阅读可安全关闭，从独立或特写按钮领取后原位保留（特写领取=%s）', async zoomClaim => {
+  it.each([true, false])('放大阅读可安全关闭，从独立或特写按钮领取后单箱直接返回探索（特写领取=%s）', async zoomClaim => {
     vi.resetModules();
     vi.useFakeTimers();
     const acts = {};
@@ -94,6 +93,9 @@ describe('宝箱点击链路', () => {
     expect(ovBody.querySelector('[data-eps-search]')).not.toBeNull();
     ovBody.querySelector('[data-eps-search]').click();
     expect(ovBody.querySelector('[data-act="chestSelect"]')).not.toBeNull();
+    expect(ovBody.querySelector('.reward-compact')).not.toBeNull();
+    expect(ovBody.querySelector('.reward-foot [data-act="chestReturn"]')).toBeNull();
+    expect(ovBody.querySelector('[data-act="chestSkip"]').closest('details').open).toBe(false);
     ovBody.querySelector('[data-act="chestSelect"]').click();
     expect(ownedCards).toHaveLength(0);   // 查看不领取
     expect(UI.showCardZoom).toHaveBeenCalledWith(card, expect.objectContaining({ from:expect.any(HTMLElement), hideNote:true, presentation:'expedition', footer:expect.stringContaining('chestTake1') }));
@@ -112,11 +114,10 @@ describe('宝箱点击链路', () => {
     expect(close).toHaveBeenCalledWith(true);
     expect(document.getElementById('cardZoom')).toBeNull();
     expect(ownedCards).toHaveLength(1);
-    expect(ovBody.querySelector('.cqo-box-complete')).not.toBeNull();
-    expect(ovBody.querySelector('[data-act="chestTake1"]')).toBeNull();
-    expect(ovBody.querySelector('.cqo-receipt-count').textContent).toBe('1 张');
-    expect(ovBody.querySelector('.cqo-notice').textContent).toBe('');
-    continueChestRewards(acts);
+    expect(document.querySelector('.reward-completion-receipt').textContent).toContain('测试补给卡 · 已入背包');
+    expect(document.querySelector('.reward-completion-receipt').getAttribute('role')).toBe('status');
+    acts.chestTake1({ i:0 }); // Old receipt callback cannot re-grant or reopen the completed queue.
+    expect(ownedCards).toHaveLength(1);
     expect(game.state).toBe('idle');
     expect(overlay.hidden).toBe(true);
     expect(window.SDT.Base.recordPetEggChestResult).toHaveBeenCalledTimes(1);

@@ -217,6 +217,25 @@ describe('战后额外传说先持久化待领奖，再原子完成胜利', () =
     expect(window.SDT.Chests.rollDrops).toHaveBeenCalledTimes(1);
   });
 
+  it('战后单箱收下不自动越过额外传说准备边界，继续后原卡只发一次', async () => {
+    await state.game.onBattleEnd({ isBoss:true, foeNames:['首脑'] }, [], true, []);
+    state.actions.chestNext(); state.actions.chestReveal();
+    const before = state.random.mock.calls.length;
+    state.actions.chestTake1({ i:0 });
+    expect(disk().chestReward.current.cards).toEqual([loot]);
+    expect(disk().chestReward.current.taken).toEqual([0]);
+    expect(state.random).toHaveBeenCalledTimes(before);
+    expect(state.commands.commitAttempt).not.toHaveBeenCalled();
+    expect(document.querySelector('.reward-completion-receipt')).toBeNull();
+    continueChestRewards(state.actions);
+    expect(disk().chestReward.current.cards).toEqual([legend]);
+    expect(state.random).toHaveBeenCalledTimes(before + 1);
+    state.actions.chestTake1({ i:0 }); continueChestRewards(state.actions);
+    await expectCommitted();
+    expect(state.game.ownedCards.map(owned => owned.card.id)).toEqual([loot.id, legend.id]);
+    expect(state.random).toHaveBeenCalledTimes(before + 1);
+  });
+
   it('普通箱已领取后刷新，保留普通奖励并只在接续后掷一次首脑额外传说', async () => {
     const opts = { isBoss:true, foeNames:['首脑'] };
     await state.game.onBattleEnd(opts, [], true, []);

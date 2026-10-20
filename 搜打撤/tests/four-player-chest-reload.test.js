@@ -31,7 +31,7 @@ describe('G03 揭晓宝箱持久化',()=>{
     saved.current.lost=[0];expect(restoreChestReward(game,saved)).toBeNull();
     expect(validateRunSave({ ...game, chestReward:saved })).toMatchObject({ok:false,preserveRun:true});
   });
-  it('恢复真实开箱控制器沿用已展示奖励，不重抽或重复领取',async()=>{
+  it('旧单牌中型箱恢复沿用已展示奖励，不重抽或重复领取',async()=>{
     vi.resetModules();vi.useFakeTimers();
     document.body.innerHTML='<div id="overlay"><div class="card"><h2 id="ovTitle"></h2><div id="ovBody"></div></div></div>';
     const body=document.getElementById('ovBody'),overlay=document.getElementById('overlay'),acts={};
@@ -39,13 +39,13 @@ describe('G03 揭晓宝箱持久化',()=>{
     const alternate={...original,id:'b',name:'重抽奖励'};
     const draw=vi.fn(()=>original);
     window.SDT={UI:{el:{overlay,ovBody:body,ovTitle:document.getElementById('ovTitle')},showOverlay(t,h){body.innerHTML=h;overlay.hidden=false;},hideOverlay(){overlay.hidden=true;},act(n,f){acts[n]=f;},refresh(){},log(){}},
-      MAP:{chestKinds:{small:{name:'小宝箱',cards:1,coins:[2,2]}}},Cards:{RARITIES:['古朴','稀有','史诗','传说'],all:()=>[original],randomDropCard:draw,pickOfRarity:()=>original,classPool:()=>[],rarityOf:c=>c.rarity,sellPrice:()=>1,cardHTML:c=>'<div>'+c.name+'</div>'},
+      MAP:{chestKinds:{medium:{name:'旧单牌中型箱',cards:1,coins:[2,2]}}},Cards:{RARITIES:['古朴','稀有','史诗','传说'],all:()=>[original],randomDropCard:draw,pickOfRarity:()=>original,classPool:()=>[],rarityOf:c=>c.rarity,sellPrice:()=>1,cardHTML:c=>'<div>'+c.name+'</div>'},
       Base:{data:{eggPity:0,eggBattles:0},save(){},petEggDropChance:()=>0,recordPetEggChestResult(){},bagCap:()=>16,isSha:()=>false},Sound:{sfx(){}},Icons:{rich:h=>h}};
     await import('../game/src/run/chests.js');
     const Chests=window.SDT.Chests;
     const game={seed:17,layerIdx:0,trackPos:1,state:'idle',ownedCards:[],myClass:'',usedSlots:()=>0,bagCap:()=>16,canReceiveCard:()=>true,
       grantCard:vi.fn(()=>true),gainCoins:vi.fn(),persistSave:vi.fn()};
-    Chests.open(game,[{kind:'small'}],()=>{},{onCell:true,consumeNode:true});
+    Chests.open(game,[{kind:'medium'}],()=>{},{onCell:true,consumeNode:true});
     const saved=JSON.parse(JSON.stringify(Chests.serialize(game)));
     expect(saved.current.rewardStage).toBe('chest');
     expect(saved.current.cards[0].name).toBe('原奖励');expect(game.persistSave).toHaveBeenCalled();
@@ -67,7 +67,7 @@ describe('G03 揭晓宝箱持久化',()=>{
     expect(game.nodeChestRewards['0,1'].current.taken).toEqual([0]);
     const parked=JSON.parse(JSON.stringify(game.nodeChestRewards));
     game.trackPos=3;
-    Chests.open(game,[{kind:'small'}],()=>{},{onCell:true});
+    Chests.open(game,[{kind:'medium'}],()=>{},{onCell:true});
     acts.chestReturn();
     expect(Object.keys(game.nodeChestRewards)).toEqual(['0,1','0,3']);
     expect(game.nodeChestRewards['0,1']).toEqual(parked['0,1']);

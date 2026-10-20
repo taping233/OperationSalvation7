@@ -205,10 +205,12 @@ it('真实箱奖励直接开完整背包，Esc返回无损；存安全格后原g
   UI._acts.zoomMoveToSafe();
   expect(session.usedSlots()).toBe(15);
   UI._acts.closeBag();
-  UI._acts.chestTake1({i:0});
+  const claim = UI._acts.chestTake1;
+  claim({i:0});
   expect(game.ownedCards.filter(o=>o.card.id===reward.id)).toHaveLength(1);
   expect(game.ownedCards.find(o=>o.uid==='full-0').safe).toBe(true);
-  UI._acts.chestTake1({i:0});expect(game.ownedCards.filter(o=>o.card.id===reward.id)).toHaveLength(1);
+  expect(UI._acts.chestTake1).toBeUndefined();
+  claim({i:0});expect(game.ownedCards.filter(o=>o.card.id===reward.id)).toHaveLength(1);
 });
 
 it('奖励腾位安全格已满时不移动卡；存放/锦囊/初始攻击不列作腾位对象', async () => {

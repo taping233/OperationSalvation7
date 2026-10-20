@@ -3,7 +3,7 @@ import { sdtDefine } from '../core/sdt-facade.js';
 import { Random } from '../core/random.js';
 import { previewCardRewards } from '../core/card-capacity.js';
 import { esc, escAttr } from '../core/shared.js';
-import { showRewardCardFeedback } from '../ui/reward-card-feedback.js';
+import { showRewardCardFeedback, showRewardCompletionReceipt } from '../ui/reward-card-feedback.js';
 import { rewardPickerTitle } from '../ui/reward-picker-heading.js';
 import { rewardCardState, rewardProgress, REWARD_RECEIVED } from '../ui/reward-state.js';
 import { rewardSceneHTML, rewardExitHTML, rewardClaimHTML, patchRewardScene, restoreRewardActionFocus } from '../ui/reward-scene-view.js';
@@ -55,7 +55,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     if (!isCurrentRewardRun() || !(saveContext?.onCell || saveContext?.battleSettlement)) return;
     const saved = serializeChestReward(G, queue, idx, cur, saveContext, { screen:rewardScreen });
     if (saved) (G.nodeChestRewards ||= {})[`${G.layerIdx},${G.trackPos}`] = saved;
-    G.persistSave?.();
+    return G.persistSave?.();
   };
   async function returnToMap() {
     if (!isCurrentRewardRun() || !cur || G.state !== 'modal' || returningToMap) return false;
@@ -575,6 +575,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const leaveConfirmation = cur.leaveConfirm
       ? `<div class="reward-leave-confirm"><p>永久放弃剩余 ${rest.length} 张卡牌？离开后无法找回。</p><button type="button" class="reward-secondary" data-act="chestStay">继续领取</button><button type="button" class="reward-secondary danger" data-act="chestLeave">确认放弃</button></div>`
       : '';
+    const compact = cur.cards.length === 1 && cur.claimMode !== 'one' && (overviewMode || !cur.coins);
     const ops = finished && !overviewMode ? rewardExitHTML('chestContinue', '继续探索') : '';
     const bulk = !finished && !isPick && !cur.leaveConfirm && rest.length > 1 && (!noneFit || (!overviewMode && cur.coins && !cur.coinsReceived))
       ? '<button type="button" class="reward-secondary" data-act="chestTake">全部收下</button>' : '';
@@ -583,7 +584,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     const coins = !overviewMode && cur.coins ? `<article class="reward-unit reward-coin-unit${cur.coinsReceived ? ' got' : ''}" aria-label="金币奖励"><div class="reward-coin-art" aria-hidden="true">[[icon:coin]]</div><div class="reward-coin-amount">×${cur.coins}</div>${cur.coinsReceived ? '<span class="reward-unit-state">已获得</span>' : `<button type="button" class="reward-claim" data-act="chestCoins"${cur.leaveConfirm ? ' disabled' : ''}>收下</button>`}</article>` : '';
     const finalNotice = [taken.size ? `${taken.size} 张${REWARD_RECEIVED}` : '', lost.size ? `${lost.size} 张已永久放弃` : '',
       !overviewMode && cur.coins ? cur.coinsReceived ? '金币已入账' : '金币待领取' : ''].filter(Boolean).join(' · ') || '已处理';
-    const footer = `<span class="reward-capacity">[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span>${!finished ? `<button type="button" class="reward-bag${noneFit ? ' is-primary' : ''}" data-act="chestOpenBag">整理背包</button>` : ''}${!boxResolved(cur) && !cur.leaveConfirm ? '<button type="button" class="reward-bag" data-act="chestReturn">返回地图</button>' : ''}${!finished && !cur.leaveConfirm ? '<button type="button" class="reward-bag danger" data-act="chestSkip" data-cancel="false">放弃剩余卡牌</button>' : ''}${capacityNote && !finished && !cur.leaveConfirm ? `<span class="reward-capacity-note" role="status">${esc(capacityNote)}</span>` : ''}${finished ? `<span class="reward-final" role="status">${esc(finalNotice)}</span>` : ''}${leaveConfirmation}`;
+    const footer = `<span class="reward-capacity">[[icon:bag]] ${G.bagCapacityText?.() || `${G.usedSlots()}/${G.bagCap()} 格`}</span>${!finished ? `<button type="button" class="reward-bag${noneFit ? ' is-primary' : ''}" data-act="chestOpenBag">整理背包</button>` : ''}${!boxResolved(cur) && !cur.leaveConfirm && !(compact && overviewMode) ? '<button type="button" class="reward-bag" data-act="chestReturn">返回地图</button>' : ''}${!finished && !cur.leaveConfirm ? `${compact ? '<details class="reward-secondary-options"><summary>其他操作</summary>' : ''}<button type="button" class="reward-bag danger" data-act="chestSkip" data-cancel="false">放弃剩余卡牌</button>${compact ? '</details>' : ''}` : ''}${capacityNote && !finished && !cur.leaveConfirm ? `<span class="reward-capacity-note" role="status">${esc(capacityNote)}</span>` : ''}${finished ? `<span class="reward-final" role="status">${esc(finalNotice)}</span>` : ''}${leaveConfirmation}`;
     const extraCount = Math.max(0, cur.cards.length - (cur.choiceCount ?? cur.cards.length))
       + (cur.claimMode !== 'one' && cur.eggHit ? 1 : 0);
     const countLabel = isPick && extraCount ? `附赠 ${extraCount} 张` : '';
@@ -595,7 +596,7 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
         ? '任选1张，其余放弃；附赠另领'
         : '任选1张，其余放弃' : '',
       cards:cardsHTML || (coins ? '' : '<p class="reward-empty">这里没有奖励</p>'),
-      actions:`${ops}${bulk}`, coins, footer, warning:'', details, count:cur.cards.length + (coins ? 1 : 0),
+      actions:`${ops}${bulk}`, coins, footer, compact, warning:'', details, count:cur.cards.length + (coins ? 1 : 0),
       className:`reward-v14${overviewMode ? '' : ' reward-standalone-picker'}${taken.size || lost.size ? ' no-anim' : ''}`,
     });
     const body = overviewMode ? chestRewardFrameHTML({ overview:overviewHTML(), picker, label:cur.isClass ? '职业补给' : K.name }) : picker;
@@ -703,8 +704,13 @@ import { createChestFrameSets, safeOpeningHTML, SAFE_BURST, SAFE_CLOSED } from '
     }
     cur.taken.add(i);
     if (choice) cur.cards.forEach((_, other) => { if (other < choiceCount && other !== i) cur.lost.add(other); });
-    persistReward();
+    const persisted = persistReward();
     cur.notice = `「${card.name}」已入本次远征背包`;
+    if (persisted !== false && !saveContext?.battleSettlement && overviewMode && queue.length === 1 && cur.kind === 'small' && cur.cards.length === 1 && cur.claimMode !== 'one' && allBoxesResolved()) {
+      finishQueue();
+      showRewardCompletionReceipt([card]);
+      return;
+    }
     if (overviewMode && cur.cards.every((_, j) => cur.taken.has(j) || cur.lost.has(j))) closePicker();
     else render(false, { action:choice ? 'chestPick' : 'chestTake1', index:String(i) });
     showRewardCardFeedback(UI.el?.ovBody, [card], { token:G });

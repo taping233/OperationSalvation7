@@ -223,10 +223,12 @@ describe('真实小/中宝箱的基础候选与附赠边界', () => {
     expect(h.body.querySelectorAll('[data-act="chestPick"]')).toHaveLength(0);
     expect(h.body.querySelectorAll('[data-act="chestTake1"]')).toHaveLength(1);
     const stale = h.acts.chestTake1;
-    h.click('chestTake1', 0); stale({ i:0 }); h.reload(); stale({ i:0 });
+    h.click('chestTake1', 0); stale({ i:0 }); stale({ i:0 });
     expect(h.game.grantCard).toHaveBeenCalledTimes(1);
-    expect(h.saved().current).toMatchObject({ taken:[0], lost:[] });
-    expect(h.body.querySelector('.cqo-receipt').textContent).toContain(isClass ? classCards[0].name : ordinary[0].name);
+    expect(h.saved()).toBeNull();
+    expect(h.done).toHaveBeenCalledTimes(1);
+    expect(h.game.state).toBe('idle');
+    expect(document.querySelector('.reward-completion-receipt').textContent).toContain(isClass ? classCards[0].name : ordinary[0].name);
   });
 
   it.each([false, true])('小箱职业=%s满包保留同一卡，重载整理后只发一次', async isClass => {
@@ -239,9 +241,11 @@ describe('真实小/中宝箱的基础候选与附赠边界', () => {
     const parked = JSON.parse(JSON.stringify(h.game.nodeChestRewards['0,1']));
     expect(h.Chests.restore(h.game, parked, h.done)).toBe(true);
     h.click('chestNext'); h.reload(); h.game.ownedCards.pop(); h.Chests.resume();
-    h.click('chestTake1', 0); h.reload(); h.acts.chestTake1({ i:0 });
+    h.click('chestTake1', 0); h.acts.chestTake1({ i:0 });
     expect(h.game.ownedCards.map(x => x.card)).toEqual(original);
-    expect(h.saved().current).toMatchObject({ taken:[0], lost:[] });
+    expect(h.saved()).toBeNull();
+    expect(h.done).toHaveBeenCalledTimes(1);
+    expect(h.game.nodeChestRewards['0,1']).toBeUndefined();
     expect(h.game.grantCard).toHaveBeenCalledTimes(2); // One refusal, one successful grant.
   });
 

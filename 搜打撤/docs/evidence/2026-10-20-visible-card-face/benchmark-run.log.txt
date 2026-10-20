@@ -1,0 +1,129 @@
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/work-card-browser-lazy-20261020/搜打撤
+
+stdout | tests/card-browser-lazy-benchmark.test.js > measures actual card HTML and actual page binding in the same jsdom process
+{
+  "environment": "Node/Vitest/jsdom; real Cards.cardHTML and Icons.rich; no browser layout, network, image decode or paint; boot-seeded catalogue; synthetic explicit 900/1500px track widths (not measured viewport); minimum220/gap30 from base-rooms-v7.css; warm cardHTML cache; alternating 7 samples after warmup",
+  "catalogCards": 281,
+  "results": {
+    "collection-900": {
+      "before": {
+        "generateMs": 2.7715539999999237,
+        "parseMs": 287.8513969999999,
+        "bindMs": 285.9010959999996,
+        "totalMs": 584.4247930000001,
+        "trackWidth": 900,
+        "visibleCards": 3,
+        "htmlBytes": 517821,
+        "elements": 7995,
+        "cardFaces": 282,
+        "cardHTMLCalls": 282,
+        "identities": 281
+      },
+      "after": {
+        "generateMs": 0.3973809999997684,
+        "parseMs": 50.569070999999894,
+        "bindMs": 30.08822999999984,
+        "totalMs": 77.54695300000003,
+        "trackWidth": 900,
+        "visibleCards": 3,
+        "htmlBytes": 77035,
+        "elements": 970,
+        "cardFaces": 4,
+        "cardHTMLCalls": 4,
+        "identities": 281
+      }
+    },
+    "collection-1500": {
+      "before": {
+        "generateMs": 2.6267440000001443,
+        "parseMs": 288.7401869999994,
+        "bindMs": 246.76563199999964,
+        "totalMs": 552.9489229999999,
+        "trackWidth": 1500,
+        "visibleCards": 6,
+        "htmlBytes": 517821,
+        "elements": 7995,
+        "cardFaces": 282,
+        "cardHTMLCalls": 282,
+        "identities": 281
+      },
+      "after": {
+        "generateMs": 0.45042100000137,
+        "parseMs": 46.34333700000025,
+        "bindMs": 25.534687999999733,
+        "totalMs": 73.28983199999857,
+        "trackWidth": 1500,
+        "visibleCards": 6,
+        "htmlBytes": 77035,
+        "elements": 1025,
+        "cardFaces": 7,
+        "cardHTMLCalls": 7,
+        "identities": 281
+      }
+    },
+    "pool-900": {
+      "before": {
+        "generateMs": 0.3422580000005837,
+        "parseMs": 17.707667999999103,
+        "bindMs": 10.467130000000907,
+        "totalMs": 29.068444999998974,
+        "trackWidth": 900,
+        "visibleCards": 4,
+        "htmlBytes": 36727,
+        "elements": 533,
+        "cardFaces": 17,
+        "cardHTMLCalls": 17,
+        "identities": 17
+      },
+      "after": {
+        "generateMs": 0.18764399999963643,
+        "parseMs": 3.653490000000602,
+        "bindMs": 10.106794999999693,
+        "totalMs": 15.459214999998949,
+        "trackWidth": 900,
+        "visibleCards": 4,
+        "htmlBytes": 8650,
+        "elements": 207,
+        "cardFaces": 4,
+        "cardHTMLCalls": 4,
+        "identities": 17
+      }
+    },
+    "pool-1500": {
+      "before": {
+        "generateMs": 0.29318400000011025,
+        "parseMs": 16.69475500000044,
+        "bindMs": 9.971169000000373,
+        "totalMs": 27.128614999999627,
+        "trackWidth": 1500,
+        "visibleCards": 4,
+        "htmlBytes": 36727,
+        "elements": 533,
+        "cardFaces": 17,
+        "cardHTMLCalls": 17,
+        "identities": 17
+      },
+      "after": {
+        "generateMs": 0.11010600000008708,
+        "parseMs": 3.578536000000895,
+        "bindMs": 8.350687000000107,
+        "totalMs": 12.591746000000057,
+        "trackWidth": 1500,
+        "visibleCards": 4,
+        "htmlBytes": 8650,
+        "elements": 207,
+        "cardFaces": 4,
+        "cardHTMLCalls": 4,
+        "identities": 17
+      }
+    }
+  }
+}
+
+·
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  15:41:02
+   Duration  13.13s (transform 226ms, setup 0ms, collect 453ms, tests 12.03s, environment 282ms, prepare 63ms)
