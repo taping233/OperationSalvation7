@@ -217,7 +217,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
       "game/data/art-mapping.json": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99",
       "game/src/core/art.js": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
       "game/src/run/chests.js": "d5109de7bb9fef82a93ba3cf482340b7c094241e0a6981c9d50b3e7531c0bebf",
-      "game/src/run/chest-opening-art.js": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf",
+      "game/src/run/chest-opening-art.js": "3b4a044da138b9beea05e1520c8da7dd3cf65962c773f325db996b8f3cf3ab09",
       "game/src/run/game.run.data.js": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8",
       "game/src/run/game.run.scenes.js": "601910c257052f30360b8eb9b54d024515dc901ce9c03db778d09744862f38a3",
       "game/src/battle/view/battle.scenery.js": "bcbff054eb7c23c6a7336c868c5f2a0b2b14e6406628a7bd64a9349935b8172f",
@@ -227,7 +227,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     },
     "chests": {
       "game/src/run/chests.js": "d5109de7bb9fef82a93ba3cf482340b7c094241e0a6981c9d50b3e7531c0bebf",
-      "game/src/run/chest-opening-art.js": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf"
+      "game/src/run/chest-opening-art.js": "3b4a044da138b9beea05e1520c8da7dd3cf65962c773f325db996b8f3cf3ab09"
     },
     "frames": {
       "game/src/battle/view/battle.frames.js": "7cb2dea8e6ae11f567852e3739248dbb76b987ca46a3d0dd436b1bc8348f4abd",

@@ -23,3 +23,7 @@ New tests cover actual public overlay focus enumeration, visible header/footer a
 Manual acceptance: inspect a product; Tab and Shift+Tab may visit detail/header/footer but never shaded shelf card checkboxes or merchant actions; Escape/close restores the original slot; repeated reopen, buy, help and bag returns preserve detail availability and correct focus.
 
 Results: 5 files / 81 tests passed; focused ESLint and syntax checks passed. Against the unchanged current main-tree source (including both hideValue shop calls), the new covered-region regression fails because the focus scope still contains the shaded controls. The no-detail sell/bag original-entry restoration tests remain unchanged.
+
+## Replenishment affordability after purchase
+
+When a repeatable item purchase exhausts the remaining coins, its replacement buy button is disabled. If focus was inside that detail, restoration first keeps the same available action; if no purchase/continue/bag action is available, it selects the detail close/back control instead of the inert shelf. Focus already on a visible header/footer stays there. Regression tests cover the 1→0 coin boundary, a still-affordable repeat purchase, and unchanged header focus. This fixes the v16 observed loss of focus; the earlier shade/Escape checks do not establish this new boundary passed in the browser.

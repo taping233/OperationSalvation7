@@ -490,7 +490,9 @@ function createShopController({
       if (scroller) scroller.scrollTop = scrollTop;
       if (detailHadFocus) {
         const sameAction = [...detail.querySelectorAll('button:not(:disabled)')].find(button => button.dataset.act === focusedAction);
-        const nextAction = (focusedSummary ? rules?.querySelector('summary') : sameAction) || detail.querySelector('.shop-detail-buy:not(:disabled), .shop-detail-done, .shop-detail-bag');
+        const nextAction = (focusedSummary ? rules?.querySelector('summary') : sameAction) || detail.querySelector('.shop-detail-buy:not(:disabled), .shop-detail-done, .shop-detail-bag')
+          || detail.querySelector('.shop-detail-close:not(:disabled)')
+          || detail.querySelector('.shop-detail-dismiss:not(:disabled)');
         (nextAction || document.querySelector(`.shop-board-grid .shop-preview[data-i="${selectedShopIndex}"]`))?.focus({ preventScroll:true });
       }
     }

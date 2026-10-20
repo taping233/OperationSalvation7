@@ -143,4 +143,28 @@ describe('shop detail covered-region focus isolation', () => {
     expect(saveGame).toHaveBeenCalledTimes(1);
   });
 
+  it('returns focus to detail close when replenishment becomes unaffordable', () => {
+    const { acts, host, game, SDT } = shop({ coins: 1 });
+    SDT.Motion = { reduceMotion: () => true };
+    acts.shopInspect({ i: 1 });
+    const buy = host.querySelector('.shop-detail-buy'); buy.focus(); buy.click();
+    expect(game.coins).toBe(0);
+    expect(host.querySelector('.shop-detail-buy').disabled).toBe(true);
+    expect(document.activeElement).toBe(host.querySelector('.shop-detail-close'));
+    expect(host.querySelector('.shop-board').hasAttribute('inert')).toBe(true);
+    host.querySelector('.shop-detail-close').click();
+    expect(document.activeElement).toBe(host.querySelector('.shop-preview[data-i="1"]'));
+  });
+
+  it('preserves an available buy action and does not steal visible header focus', () => {
+    const { acts, host, game } = shop({ coins: 3 });
+    acts.shopInspect({ i: 1 });
+    const buy = host.querySelector('.shop-detail-buy'); buy.focus(); buy.click();
+    expect(game.coins).toBe(2);
+    expect(document.activeElement).toBe(host.querySelector('.shop-detail-buy'));
+    const help = host.querySelector('[data-act=help]'); help.focus();
+    acts.buySha({ i: 1 });
+    expect(document.activeElement).toBe(help);
+  });
+
 });

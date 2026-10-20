@@ -61,12 +61,3 @@ body #overlay .safe-opening .ps-tip { color:#b6b4b8; margin:7px 0 0; font:400 13
 @media (prefers-reduced-motion:reduce) {
   .safe-opening .safe-glow,.safe-opening .safe-burst { animation:none !important; opacity:0 !important; }
 }
-
-body #overlay .card:has(.chest-offer-page) .chest-offer { width:min(460px,100%); margin:auto; }
-body #overlay .chest-offer-card { appearance:none; display:flex; flex-direction:column; align-items:center; width:100%; padding:0 12px 18px; border:0; background:none; color:#ede9e4; font:inherit; cursor:pointer; }
-body #overlay .chest-offer-card img { width:min(430px,100%); height:min(430px,52vh); object-fit:contain; filter:drop-shadow(0 16px 18px #0005); transition:transform .2s ease; }
-body #overlay .chest-offer-card strong { margin-top:-8px; font-size:21px; font-weight:500; letter-spacing:.06em; }
-body #overlay .chest-offer-card span { margin-top:9px; color:#a7a4a7; font-size:13px; }
-body #overlay .chest-offer-card:hover img { transform:translateY(-4px); }
-body #overlay .chest-offer-card:focus-visible { outline:2px solid #cf8d7c; outline-offset:3px; }
-body #overlay .card:has(.chest-offer-page) .chest-claim-action { min-height:58px; padding:14px 24px; font-size:22px; }
