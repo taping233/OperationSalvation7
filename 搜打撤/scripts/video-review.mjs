@@ -44,6 +44,32 @@ export function analyzeSamples(bytes, { width = 160, height = 90, fps = 2, freez
   }
   return { samples, candidates: candidates.sort((a, b) => a.start - b.start) };
 }
+// Coverage is a sampling window, not proof that every source frame was reviewed.
+export function sampleCoverage({ durationSeconds, startSeconds = 0, maxSeconds = 300, fps = 2, sampleCount }) {
+  const frameLimit = 600, frameBudgetSeconds = frameLimit / fps;
+  const requestedSeconds = Math.min(durationSeconds - startSeconds, maxSeconds);
+  const plannedSeconds = Math.min(requestedSeconds, frameBudgetSeconds);
+  const sampledSeconds = Math.min(plannedSeconds, sampleCount / fps);
+  const endSeconds = startSeconds + sampledSeconds;
+  const reasons = [];
+  if (startSeconds > 0) reasons.push('start-offset');
+  if (maxSeconds < durationSeconds - startSeconds) reasons.push('max-seconds');
+  if (frameBudgetSeconds < requestedSeconds) reasons.push('frame-limit');
+  if (sampleCount < Math.ceil(plannedSeconds * fps)) reasons.push('decoded-shortfall');
+  const uncoveredRanges = [];
+  if (startSeconds > 0) uncoveredRanges.push({ start: 0, end: startSeconds });
+  if (endSeconds < durationSeconds) uncoveredRanges.push({ start: endSeconds, end: durationSeconds });
+  return { startSeconds, endSeconds, plannedSeconds, sampledSeconds, frameLimit,
+    frameBudgetSeconds, reasons, uncoveredRanges, complete: uncoveredRanges.length === 0,
+    nextStartSeconds: endSeconds < durationSeconds ? endSeconds : null };
+}
+export function coverageSummary(video) {
+  const start = video.sampleStartSeconds || 0, end = start + video.sampledSeconds;
+  const ranges = video.coverage?.uncoveredRanges || [];
+  const rangeText = ranges.map(r => `${r.start.toFixed(2)}–${r.end.toFixed(2)}s`).join('、');
+  return `采样覆盖 ${start.toFixed(2)}–${end.toFixed(2)}s / 源时长 ${Number.isFinite(video.durationSeconds) ? video.durationSeconds.toFixed(2) + 's' : '未知'}` +
+    (video.truncated || ranges.length ? `；警告：仅覆盖部分视频${rangeText ? '，未分析 ' + rangeText : ''}。请用 --start-seconds 和新 --out 目录分段继续；分段边界建议重叠至少 2 秒并回看原片。` : '。');
+}
 async function reviewOne(input, output, options) {
   const source = path.resolve(input);
   if (!(await stat(source)).isFile()) throw new Error('Input must be a local regular video file');
@@ -63,13 +89,19 @@ async function reviewOne(input, output, options) {
     '-map','[gray]','-an','-frames:v',String(maxFrames),'-f','rawvideo',gray]);
   const analysis = analyzeSamples(await readFile(gray), { fps: options.fps });
   if (!analysis.samples.length) throw new Error('No frames decoded');
+  const coverage = sampleCoverage({ durationSeconds: duration, ...options, sampleCount: analysis.samples.length });
   for (const sample of analysis.samples) sample.time += options.startSeconds;
-  for (const candidate of analysis.candidates) { candidate.start += options.startSeconds; candidate.end += options.startSeconds; }
+  // The final sampled interval can extend past a fractional source/selection end.
+  // Keep raw JSON candidates within the same bounds as the review checklist.
+  for (const candidate of analysis.candidates) {
+    candidate.start = Math.max(coverage.startSeconds, candidate.start + options.startSeconds);
+    candidate.end = Math.min(coverage.endSeconds, candidate.end + options.startSeconds);
+  }
   const stride = Math.max(1, Math.ceil(analysis.samples.length / 120));
   const rows = Math.ceil(Math.ceil(analysis.samples.length / stride) / 10);
   await command('ffmpeg', ['-nostdin','-v','error','-framerate',String(options.fps),'-i',frames,'-vf',`select=not(mod(n\\,${stride})),scale=160:90,tile=10x${rows}`,'-frames:v','1','-q:v','3',path.join(output,'contact.jpg')]);
-  return { source: path.basename(source), durationSeconds: duration, sampledSeconds: Math.min(seconds, analysis.samples.length / options.fps),
-    sampleStartSeconds: options.startSeconds, truncated: options.startSeconds > 0 || seconds < duration, sampleFps: options.fps, metadata: { width: video.width, height: video.height, codec: video.codec_name,
+  return { source: path.basename(source), durationSeconds: duration, sampledSeconds: coverage.sampledSeconds, coverage,
+    sampleStartSeconds: options.startSeconds, truncated: !coverage.complete, sampleFps: options.fps, metadata: { width: video.width, height: video.height, codec: video.codec_name,
       reportedFrameRate: video.avg_frame_rate, reportedFrames: video.nb_frames || null }, contactStride: stride, ...analysis };
 }
 const reviewGuidance = {
@@ -94,6 +126,7 @@ export function checklistMarkdown(report) {
     const folder = index ? 'after' : 'before';
     // Keep filenames as plain text even if they contain Markdown syntax/newlines.
     lines.push(`## ${index ? '对比视频' : '主视频'}`, '', `源文件：${escapeHTML(video.source.replace(/[\r\n]/g, ' ')).replace(/[\\`*_{}[\]()#!|]/g, '\\$&')}`, '');
+    lines.push(coverageSummary(video), '');
     const items = reviewChecklist(video, folder);
     if (!items.length) lines.push('未检出候选，不代表没有问题。', '');
     for (const item of items) lines.push(`- [ ] ${item.id} · ${item.title} · ${item.start.toFixed(2)}–${item.end.toFixed(2)}s`,
@@ -109,7 +142,7 @@ export function reportHTML(report) {
     const folder = index ? 'after' : 'before', start = v.sampleStartSeconds || 0;
     const checklist = reviewChecklist(v, folder);
     const counts = Object.entries(labels).map(([kind,label]) => `${label}：${v.candidates.filter(c=>c.kind===kind).length}`).join('；');
-    return `<section data-review-panel data-folder="${folder}" data-fps="${v.sampleFps}" data-start="${start}" data-count="${v.samples.length}"><h2>${index ? '对比视频' : '主视频'}：${escapeHTML(v.source)}</h2><p>源时长 ${v.durationSeconds.toFixed(2)}s；分析 ${start.toFixed(2)}–${(start+v.sampledSeconds).toFixed(2)}s，采样 ${v.sampleFps}/s，共 ${v.samples.length} 帧${v.truncated ? '；只覆盖部分视频' : ''}。源文件声明帧率 ${escapeHTML(v.metadata.reportedFrameRate)}。</p><p>${counts}</p><figure class="preview"><img data-review-preview src="${image(folder,0)}" alt="${start.toFixed(2)}秒采样"><figcaption data-review-time>${start.toFixed(2)}s</figcaption></figure><img class="contact" src="${folder}/contact.jpg" alt="按时间顺序排列的接触表"><p>接触表每 ${v.contactStride / v.sampleFps}s 一格，从左至右、从上至下。时间为采样近似。</p><ul>${checklist.map(c => `<li><a data-candidate data-time="${c.start}" href="#${folder}-${c.frameIndex}">${c.id} · ${labels[c.kind]} ${c.start.toFixed(2)}–${c.end.toFixed(2)}s</a><br>待复核：${c.title}；回看 ${c.contextStart.toFixed(2)}–${c.contextEnd.toFixed(2)}s。${c.check}</li>`).join('') || '<li>未检出候选，不代表没有问题。</li>'}</ul><details><summary>逐帧时间线（${v.samples.length}帧）</summary><div class="frames">${v.samples.map((sample,i)=>`<figure id="${folder}-${i}"><img loading="lazy" src="${image(folder,i)}" alt="${sample.time.toFixed(2)}秒采样"><figcaption>${sample.time.toFixed(2)}s · 亮度${sample.luminance.toFixed(1)} · 差值${sample.difference?.toFixed(2) ?? '—'}</figcaption></figure>`).join('')}</div></details></section>`;
+    return `<section data-review-panel data-folder="${folder}" data-fps="${v.sampleFps}" data-start="${start}" data-count="${v.samples.length}"><h2>${index ? '对比视频' : '主视频'}：${escapeHTML(v.source)}</h2><p>源时长 ${v.durationSeconds.toFixed(2)}s；分析 ${start.toFixed(2)}–${(start+v.sampledSeconds).toFixed(2)}s，采样 ${v.sampleFps}/s，共 ${v.samples.length} 帧${v.truncated ? '；只覆盖部分视频' : ''}。源文件声明帧率 ${escapeHTML(v.metadata.reportedFrameRate)}。</p><p class="coverage">${escapeHTML(coverageSummary(v))}</p><p>${counts}</p><figure class="preview"><img data-review-preview src="${image(folder,0)}" alt="${start.toFixed(2)}秒采样"><figcaption data-review-time>${start.toFixed(2)}s</figcaption></figure><img class="contact" src="${folder}/contact.jpg" alt="按时间顺序排列的接触表"><p>接触表每 ${v.contactStride / v.sampleFps}s 一格，从左至右、从上至下。时间为采样近似。</p><ul>${checklist.map(c => `<li><a data-candidate data-time="${c.start}" href="#${folder}-${c.frameIndex}">${c.id} · ${labels[c.kind]} ${c.start.toFixed(2)}–${c.end.toFixed(2)}s</a><br>待复核：${c.title}；回看 ${c.contextStart.toFixed(2)}–${c.contextEnd.toFixed(2)}s。${c.check}</li>`).join('') || '<li>未检出候选，不代表没有问题。</li>'}</ul><details><summary>逐帧时间线（${v.samples.length}帧）</summary><div class="frames">${v.samples.map((sample,i)=>`<figure id="${folder}-${i}"><img loading="lazy" src="${image(folder,i)}" alt="${sample.time.toFixed(2)}秒采样"><figcaption>${sample.time.toFixed(2)}s · 亮度${sample.luminance.toFixed(1)} · 差值${sample.difference?.toFixed(2) ?? '—'}</figcaption></figure>`).join('')}</div></details></section>`;
   }).join('');
   const start = Math.min(...report.videos.map(v=>v.sampleStartSeconds || 0));
   const end = Math.max(...report.videos.map(v=>v.samples.at(-1)?.time || 0));
@@ -154,11 +187,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   const allowed = new Set(['input','compare','out','sample-fps','max-seconds','start-seconds']);
   try {
     if (args.length === 1 && args[0] === '--help') {
-      console.log('Offline video review (requires ffmpeg and ffprobe).\nUsage: node scripts/video-review.mjs --input FILE --out NEW_DIRECTORY [--compare FILE] [--start-seconds 0] [--max-seconds 300] [--sample-fps 2] [--synthetic-fixture]\nOpen index.html in the output directory; fill review-checklist.md after reviewing candidates. No capture/upload. Sampling is not gameplay FPS; detections require manual review. Existing output directories are never overwritten.');
+      console.log('Offline video review (requires ffmpeg and ffprobe).\nUsage: node scripts/video-review.mjs --input FILE --out NEW_DIRECTORY [--compare FILE] [--start-seconds 0] [--max-seconds 300] [--sample-fps 2] [--synthetic-fixture]\nOpen index.html in the output directory; fill review-checklist.md after reviewing candidates. No capture/upload. Sampling is not gameplay FPS; detections require manual review. Existing output directories are never overwritten.\nCoverage: at most min(max-seconds, 600/sample-fps) seconds per video (default: 300s). A larger --max-seconds does not bypass the 600-frame cap. Partial coverage is reported in CLI/JSON/HTML/checklist.\nLong recordings: use --start-seconds 298 --max-seconds 300 --out NEW_SEGMENT_DIRECTORY after the default first segment; overlap boundaries by at least 2s and review the original video. Repeat until the source end, checking uncovered ranges for each video separately.');
     } else {
     for(let i=0;i<args.length;i++) { const key=args[i].replace(/^--/,''); if(args[i]==='--synthetic-fixture'){values.syntheticFixture=true;continue;} if(!args[i].startsWith('--')||!allowed.has(key)||!args[i+1]||args[i+1].startsWith('--'))throw new Error(`Unknown/incomplete option: ${args[i]}`);values[key]=args[++i]; }
     const result = await reviewVideo({ input:values.input, compare:values.compare, out:values.out, fps:values['sample-fps']===undefined?2:Number(values['sample-fps']), maxSeconds:values['max-seconds']===undefined?300:Number(values['max-seconds']), startSeconds:values['start-seconds']===undefined?0:Number(values['start-seconds']), syntheticFixture:!!values.syntheticFixture });
-    console.log(JSON.stringify({ report:path.resolve(values.out,'index.html'), videos:result.videos.map(v=>({source:v.source,samples:v.samples.length,candidates:v.candidates.length})) }));
+    for (const video of result.videos) if (video.truncated) console.error(`WARNING ${JSON.stringify(video.source)}: ${coverageSummary(video)}`);
+    console.log(JSON.stringify({ report:path.resolve(values.out,'index.html'), videos:result.videos.map(v=>({source:v.source,samples:v.samples.length,candidates:v.candidates.length,truncated:v.truncated,coverage:v.coverage})) }));
     }
   } catch(error) { console.error(error.message); process.exitCode=1; }
 }

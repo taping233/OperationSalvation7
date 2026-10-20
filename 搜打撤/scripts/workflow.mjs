@@ -6,7 +6,7 @@ import path from 'node:path';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const HELP = `项目流程工具（默认只读；ship --apply 需单独提交授权；不推送/启服/build）
-  doctor [--input <报告>] [--json]        只读项目/工具/依赖/hooks/文档/台账轻预检
+  doctor [--staged] [--input <报告>] [--json]        只读项目/工具/依赖/hooks/文档/台账轻预检
   status [--task <编号>] [--paths <逗号分隔路径>] [--details] [--json]
                                           按任务接手，默认短摘要
   task <start|update|close> --task <编号> --owner <负责人> --input <JSON>
@@ -56,7 +56,7 @@ function list(value) {
 async function main() {
   const { values, positionals } = parseArgs({ allowPositionals: true, options: {
     json: { type: 'boolean' }, help: { type: 'boolean' }, history: { type: 'boolean' }, apply: { type: 'boolean' }, details: { type: 'boolean' },
-    full: { type: 'boolean' }, suite: { type: 'boolean' }, plan: { type: 'boolean' }, query: { type: 'string' }, key: { type: 'string' },
+    staged: { type: 'boolean' }, full: { type: 'boolean' }, suite: { type: 'boolean' }, plan: { type: 'boolean' }, query: { type: 'string' }, key: { type: 'string' },
     owner: { type: 'string' }, input: { type: 'string' }, expect: { type: 'string' }, task: { type: 'string' }, message: { type: 'string' },
     tests: { type: 'string' }, paths: { type: 'string' }, date: { type: 'string' }, 'replaced-by': { type: 'string' },
     home: { type: 'string' }, 'codex-home': { type: 'string' }, 'zcode-home': { type: 'string' }, limit: { type: 'string' }, source: { type: 'string' },
@@ -74,7 +74,7 @@ async function main() {
   const date = values.date ?? new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
   if (command === 'doctor') {
     const { doctor } = await import('./workflow-doctor.mjs');
-    result = await doctor(root, { input: values.input, paths: list(values.paths), tests: list(values.tests) });
+    result = await doctor(root, { input: values.input, paths: list(values.paths), tests: list(values.tests), staged: values.staged });
     if (result.ok === false) process.exitCode = 1;
   } else if (command === 'status') {
     const { handoff, formatHandoff } = await import('./workflow-status.mjs');

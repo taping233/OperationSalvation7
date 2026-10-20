@@ -128,7 +128,10 @@ it('BOSS逐UID变形含临时初始牌，卡面/详情/aria/选敌同源且重�
 });
 
 it('不朽斩不能选作注能材料，禁用原因与详情一致，拒绝不扣费不移牌', async () => {
-  const originals = await swordBattle();
+  // 开战剑已消耗；提供独立合法燃料才能打开选材页，不能再依赖剑作燃料。
+  const originals = await swordBattle(true, true, ['tt13-guard']);
+  expect(runtime.consumed).toContain(game.ownedCards[0].uid);
+  expect(runtime.hand).not.toContain(game.ownedCards[0].uid);
   const before = BattleSession.getSnapshot();
   const main = game.ownedCards.find(entry => entry.card.infuse > 0).uid;
   BattleSession.commands.beginInfusion(main); await settle();
@@ -249,7 +252,13 @@ it('真实青龙化身在剑后生效、再穿戴剑覆盖青龙：解析与结�
   expect(runtime.shaTransform).toBe('青龙偃月斩');
   expect(findEffectiveCard(originals[0]).card.name).toBe('青龙偃月斩');
   const sword = game.ownedCards.find(entry => entry.card.id === 'tt3-immortal-blade');
-  BattleSession.commands.playCard(sword.uid, 'self'); await settle();
+  // 已消耗的开战剑不能再打；新获得的第二把剑可占剩余槽并重新登记变形。
+  expect(BattleSession.commands.submitCardPlay(sword.uid, 'self').reason.code).toBe('NOT_IN_HAND');
+  expect(runtime.shaTransform).toBe('青龙偃月斩');
+  runtime.granted.push({ uid: 'fresh-sword', card: canonical('tt3-immortal-blade') });
+  runtime.hand.push('fresh-sword');
+  BattleSession.commands.playCard('fresh-sword', 'self'); await settle();
+  expect(runtime.equipped.map(entry => entry.uid)).toEqual([sword.uid, 'fresh-sword']);
   expect(runtime.shaTransform).toBe('不朽斩');
   expect(findEffectiveCard(originals[0]).card.name).toBe('不朽斩');
 });

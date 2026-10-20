@@ -1,3 +1,4 @@
+import { requestedCardPlayed, requestedInfusion, requestedTargetReason } from '../effects/requested-card-runtime.js';
 import { foeFightTargets, validFoeFightTargets, withFoeFightTargets } from '../effects/battle.foe-fight.js';
 /* battle.exec-play.js —— 出牌结算长流程（自 battle.engine.js 拆出）。
  * queueCardExecution 手牌支付校验与出牌动作入队；execPlay 扣费、注能燃料、结算重放与
@@ -243,6 +244,11 @@ export function createBattleExecPlay({
       requestBattleRender();
       return false;
     }
+    const requestedIssue = requestedTargetReason(card, target, alive());
+    if (requestedIssue) {
+      submission?.reject(requestedIssue.code, requestedIssue.message);
+      G.log(requestedIssue.message, 'warn'); requestBattleRender(); return false;
+    }
     if (!freeCost) set$energy(energy - effCost);
     played.push(uid);
     SDT.Sound.sfx('card');
@@ -258,6 +264,7 @@ export function createBattleExecPlay({
     for (const f of fuelUids) {
       consumed.push(f);
       recordHandInfusion(hand);
+      requestedInfusion();
       // v0.25：被消耗的牌进入墓地——墓地不参与洗回，战胜 BOSS 后可在整理背包放回
       if (mode === 'boss') grave.push(f);
       const o = findCard(f);
@@ -281,6 +288,7 @@ export function createBattleExecPlay({
     // 免注能实例与「招式均已注能」均按已注能结算；材料消耗及累计计数仍只由实际燃料驱动。
     const infusedBase = fuelUids.length > 0 || hasInfusionWaiver(card, allSpellsInfused);
     const aliveBefore = alive().length;
+    const controlledBefore = foes.filter(foe => foe.controlled).length;
     await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
     await takeSurge(signal);   // 法力奔涌：演出未完不结束本次出牌动作；终局会中止余下结算
     // 2026-09-09 老板 #9：装备卡打出即穿戴（角色信息区显示装备与限定技能按钮）
@@ -359,7 +367,7 @@ export function createBattleExecPlay({
       await resolveCardWithFeedback(resolverCard, target, infusedBase, fuelCostSum, uid, signal);
       await takeSurge(signal);
     }
-    applyKillRewards(card, aliveBefore - alive().length);
+    applyKillRewards(card, Math.max(0, aliveBefore - alive().length - (foes.filter(foe => foe.controlled).length - controlledBefore)));
     if (poisonOnSpell && card.type === '法术') poisonRandomFoe();
     // Q8 老板定向：不变应万变——打出武术后，手中所有「不变应万变」变为该武术的 1 费复制
     if (card.type === '武术') applyImitate(card);
@@ -397,6 +405,7 @@ export function createBattleExecPlay({
     }
     sweepDead();
     set$lastPlayedType(card.type);   // 供「上一张牌是武术→0费」类条件费用判定
+    requestedCardPlayed(card);
     // 打出侧计数（结算后自增——「其他招式/其他武术」不含正在打出的本牌）：
     // 招式＝武术+法术（设计者 2026-09-10 定版，2026-09-29 复核维持）连续射击；追斩只数武术
     if (card.type === '武术' || card.type === '法术') set$playedMovesThisTurn(playedMovesThisTurn + 1);

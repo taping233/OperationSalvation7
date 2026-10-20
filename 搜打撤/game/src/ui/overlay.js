@@ -342,14 +342,15 @@ export const overlayMethods = {
 
   // 面板内「取消语义」按钮探测（Esc / 右上角 × / 遮罩点击共用）
   _findCancelBtn() {
+    const styles = new Map();
     const buttons = [...this.el.ovBody.querySelectorAll('button')]
-      .filter(b => b.dataset.cancel !== 'false' && !b.disabled && !b.closest('[hidden], [aria-hidden="true"]'))
+      .filter(b => b.dataset.cancel !== 'false')
       // Card rules can contain 返回/离开; inspection or selection is never an inferred cancel.
       .filter(b => b.dataset.cancel === 'true' || !b.matches('.reward-card, .event-choice-card, .bt-card'));
-    return buttons.find(b => b.dataset.cancel === 'true') || buttons.find(b => (
+    return buttons.find(b => b.dataset.cancel === 'true' && isAvailableOverlayFocusTarget(b, styles)) || buttons.find(b => (
         /跳过|留下|返回|取消|关闭|离开/.test(b.textContent || '') ||
         /^(closeBag|closeCardPage|closeDesigner|pg-close)$/.test(b.dataset.act || '') ||
-        /关闭|返回/.test(b.getAttribute('aria-label') || '') || /关闭|返回/.test(b.getAttribute('title') || '')));
+        /关闭|返回/.test(b.getAttribute('aria-label') || '') || /关闭|返回/.test(b.getAttribute('title') || '')) && isAvailableOverlayFocusTarget(b, styles));
   },
 
   // 当前浮层是否可通过取消类入口关闭（决定右上角 × 的显隐）
@@ -361,12 +362,13 @@ export const overlayMethods = {
   },
 
   _overlayFocusable() {
+    const styles = new Map();
     const root = this.el.ovBody || this.el.overlay;
     return [...root.querySelectorAll(
       'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), ' +
-      'select:not([disabled]), textarea:not([disabled]), [contenteditable="true"], ' +
+      'select:not([disabled]), textarea:not([disabled]), [contenteditable="true"], details > summary:first-of-type, ' +
       '[tabindex]:not([tabindex="-1"])'
-    )].filter((el) => isAvailableOverlayFocusTarget(el) && !(el.hasAttribute('tabindex') && el.tabIndex < 0));
+    )].filter((el) => isAvailableOverlayFocusTarget(el, styles) && !(el.hasAttribute('tabindex') && el.tabIndex < 0));
   },
 
   _resolveOverlayInitialFocus(initialFocus) {
@@ -378,7 +380,7 @@ export const overlayMethods = {
     }
     // HTML 中的 data-initial-focus 是调用方无需接触 DOM 引用的安全显式入口。
     if (!target) target = root.querySelector('[data-initial-focus]');
-    if (target && !target.matches('button, input, select, textarea, a[href], [tabindex], [contenteditable="true"]')) target = null;
+    if (target && !target.matches('button, input, select, textarea, a[href], [tabindex], [contenteditable="true"], details > summary:first-of-type')) target = null;
     if (target && !isAvailableOverlayFocusTarget(target)) target = null;
     const focusables = this._overlayFocusable();
     if (!target) {
@@ -430,8 +432,24 @@ export const overlayMethods = {
 
 // Keep sequential focus and explicit initial focus inside the active dialog surface.
 // Native :disabled preserves the first-legend exception of disabled fieldsets.
-function isAvailableOverlayFocusTarget(element) {
-  return !element.matches(':disabled, input[type="hidden"]') &&
-    !element.closest('[hidden], [aria-hidden="true"], [inert]');
+function isAvailableOverlayFocusTarget(element, styles = new Map()) {
+  if (element.matches(':disabled, input[type="hidden"]') ||
+      element.closest('[hidden], [aria-hidden="true"], [inert]')) return false;
+  const styleOf = node => {
+    if (!styles.has(node)) styles.set(node, getComputedStyle(node));
+    return styles.get(node);
+  };
+  // Visibility is inherited but can be explicitly restored by a descendant.
+  if (['hidden', 'collapse'].includes(styleOf(element).visibility)) return false;
+  for (let node = element; node; node = node.parentElement) {
+    if (styleOf(node).display === 'none') return false;
+    // A closed disclosure exposes only its first direct summary, even when a
+    // nested details is open. The details element itself remains visible.
+    if (node !== element && node.matches('details:not([open])')) {
+      const summary = node.querySelector(':scope > summary');
+      if (!summary?.contains(element)) return false;
+    }
+  }
+  return true;
 }
 

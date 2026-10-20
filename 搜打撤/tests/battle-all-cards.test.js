@@ -109,7 +109,7 @@ function classify(card) {
 }
 
 // 条件卡判定：手牌代价句（与预检/结算同一登记点）在审计环境（无手牌燃料）下必不满足
-const isConditionalCard = (card) => HAND_COST_PATTERNS.some(re => re.test(String(card.desc || '')));
+const isConditionalCard = (card) => card.id === 'tt13-mind-control' || HAND_COST_PATTERNS.some(re => re.test(String(card.desc || '')));
 const ZERO_CONDITIONAL = '零可观测效果（手牌代价卡：审计环境条件必不满足，人工复核）';
 const ZERO_UNCONDITIONAL = '零可观测效果（无前置条件）';
 

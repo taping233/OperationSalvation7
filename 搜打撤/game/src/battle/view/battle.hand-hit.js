@@ -112,8 +112,15 @@ export function createHandHitController(root, { getCards, scale, isAiming, onPoi
   window.addEventListener('resize', reset);
   document.addEventListener('visibilitychange', visibility);
   return {
-    sync(token) {
-      const next = JSON.stringify([token, ...getCards().map(card => card.dataset.uid)]);
+    sync(token, interaction = {}) {
+      // A refused pickup must not become a fresh click when settlement or a
+      // selection ends with the same hand. Energy changes do not end reading.
+      const { phase, turn, busy, infusing, discovering, choosing, handSelecting,
+        pendingTarget, pendingItem, slamPending, dartPending, viewingDeck, viewingGrave, viewingBag } = interaction;
+      const next = JSON.stringify([token, phase, turn,
+        ...[busy, infusing, discovering, choosing, handSelecting, pendingTarget,
+          pendingItem, slamPending, dartPending, viewingDeck, viewingGrave, viewingBag].map(Boolean),
+        ...getCards().map(card => card.dataset.uid)]);
       if (next !== identity) { reset(); identity = next; }
     },
     reset,

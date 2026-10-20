@@ -1,3 +1,4 @@
+import approvedBatch from './fixtures/approved-card-batch-20261020.json';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
@@ -50,7 +51,7 @@ describe('M batch production boot', () => {
     expect(targetIds).toHaveLength(150);
     expect(new Set(targetIds).size).toBe(150);
     expect(excludedIds).toHaveLength(51);
-    expect(first).toHaveLength(268);
+    expect(first).toHaveLength(281);
     const missing = targetIds.filter(id => !RETIRED_1010.has(id) && !first.find(card => card.id === id)?.rules);
     console.info('M missing target rules', JSON.stringify(missing));
     expect(missing).toEqual([]);
@@ -63,9 +64,15 @@ describe('M batch production boot', () => {
 
   it('preserves every original ID and only changes explicitly migrated fields', () => {
     const old = currentBaseline.production.cards.map(row => row.card);
-    expect(first.map(card => card.id).sort()).toEqual(old.map(card => card.id).sort());
+    expect(first.map(card => card.id).sort()).toEqual([...old, ...approvedBatch.additions].map(card => card.id).sort());
+    for (const card of approvedBatch.additions) expect(first.find(current => current.id === card.id)).toEqual(card);
     for (const previous of old) {
       const current = first.find(card => card.id === previous.id);
+      if (previous.id === approvedBatch.flame.id) {
+        expect(current).toEqual(approvedBatch.flame);
+        expect(previous.desc).toBe('本局对战中，法伤+1');
+        continue;
+      }
       if (previous.id === 'tt12-backupcell') {
         expect(isApprovedBackupcellRename(previous, current)).toBe(true);
         continue;

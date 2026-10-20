@@ -2,6 +2,20 @@
 const BATTLE_KEYS = new Set(['target', 'requirements', 'costModifiers', 'keepInHand', 'hosted']);
 // Hosted names are executable integration points bound to stable card identities.
 export const HOSTED_CARD_RULES = Object.freeze({
+  'tt13-spring': 'batch13-spring',
+  'tt13-magazine': 'batch13-magazine',
+  'tt13-snipe': 'batch13-snipe',
+  'tt13-guard': 'batch13-guard',
+  'tt13-bitter-rain': 'batch13-bitter-rain',
+  'tt13-mind-control': 'batch13-mind-control',
+  'tt13-flame-staff': 'batch13-flame-staff',
+  'tt13-scale-armor': 'batch13-scale-armor',
+  'tt13-astrolabe': 'batch13-astrolabe',
+  'tt13-soul-contract': 'batch13-soul-contract',
+  'tt13-stellar-divination': 'batch13-stellar-divination',
+  'tt13-chaos-deck': 'batch13-chaos-deck',
+  'tt13-mercy': 'batch13-mercy',
+  'cmtn1ntxzoc4': 'batch13-flame-form',
   'tt7-imitate': 'imitate', 'cc-mana-surge': 'mana-surge', 'cc-rot-seed': 'rot-seed',
   'cmtn1lbhbqi4': 'charge-fireball', 'tt7-stratagem': 'pouch-container',
   'tt2-pearlbox': 'pearl-container', 'tt2-venomstaff': 'venom-staff',

@@ -77,10 +77,17 @@ const profiles = [
   ] },
 ];
 
+const pageRoots = profiles.map(profile => profile.root).join(', ');
+
 export function pageMotionProfile(content) {
+  // Collect page roots once, then apply the declared priority (not DOM order).
+  // No cache: in-place class changes and nested page replacement stay synchronous.
+  const pages = content?.querySelectorAll(pageRoots);
+  if (!pages?.length) return null;
   for (const profile of profiles) {
-    const page = content?.querySelector(profile.root);
-    if (page) return { ...profile, page };
+    for (const page of pages) {
+      if (page.matches(profile.root)) return { ...profile, page };
+    }
   }
   return null;
 }

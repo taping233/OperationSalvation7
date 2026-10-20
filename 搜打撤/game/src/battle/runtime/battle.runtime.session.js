@@ -69,12 +69,15 @@ export function restoreBattleSession(nextGame, data, defaultMaxEnergy) {
 // 读档·参战者回填（restore 中段逐字搬迁；intentFor 由 engine 注入经 lifecycle 传入，session 不 import 引擎，拒环）。
 export function restoreBattleCombatants(data, intentFor) {
   pdef = { shield: 0, armor: 0, guard: false, ...(data.pdef || {}) };
-  pstat = Combat.ensureStatus({ hp: G.hp, status: { ...(data.pstat?.status || {}) } });
-  foes = data.foes.map(f => {
+  pstat = Combat.ensureStatus({ hp: G.hp, status: { ...(data.pstat?.status || {}) }, requestedCards: data.pstat?.requestedCards ? clone(data.pstat.requestedCards) : undefined });
+  foes = data.foes.map((f, index) => {
     const foe = {
       id: f.id || null, name: f.name, hp: f.hp, maxHp: f.maxHp, atk: f.atk || 2,
       affix: f.affix || null, affixName: f.affixName || null, behavior: f.behavior || null, dead: !!f.dead,
       protected: f.protected || undefined, protects: f.protects || undefined,
+      boss: f.boss,
+      controlBoss: f.controlBoss ?? f.boss ?? (!!opts.isBoss && index === 0 && !opts.nest),
+      controlled: !!f.controlled, soulContractMarked: !!f.soulContractMarked,
       status: { ...(f.status || {}) },
       defense: { shield: 0, armor: 0, guard: false, ...(f.defense || {}) },
       intent: f.intent ? clone(f.intent) : null,

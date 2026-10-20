@@ -15,6 +15,7 @@ export function installSelectionStateMotion(root = document.body) {
   const groups = new Map();
   let frame = 0;
   let disposed = false;
+  let membershipDirty = true;
   const schedule = () => {
     if (!disposed && !frame) frame = requestAnimationFrame(update);
   };
@@ -30,7 +31,44 @@ export function installSelectionStateMotion(root = document.body) {
   function update() {
     frame = 0;
     if (disposed) return;
-    for (const [group, state] of groups) if (!root.contains(group)) release(group, state);
+    if (membershipDirty) refreshMembership();
+    for (const [group, state] of groups) {
+      const { definition } = state;
+      const selected = group.querySelector(definition.selected);
+      const bounds = group.getBoundingClientRect();
+      const rect = selected?.getBoundingClientRect();
+      const visible = rect && rect.width > 0 && rect.height > 0 && bounds.width > 0 && bounds.height > 0;
+      if (!visible) {
+        if (state.signature !== 'hidden') retargetVisual(state.plate, { opacity: 0 });
+        state.signature = 'hidden';
+        state.ready = false;
+        continue;
+      }
+      // Rectangles include ancestor page scaling; animation coordinates belong to the group.
+      const scaleX = group.offsetWidth ? bounds.width / group.offsetWidth : 1;
+      const scaleY = group.offsetHeight ? bounds.height / group.offsetHeight : 1;
+      const computed = getComputedStyle(selected);
+      const tint = definition.kind === 'settings'
+        ? computed.getPropertyValue('--settings-category-tint').trim() || '204,181,139'
+        : '108,155,169';
+      const target = {
+        x: (rect.left - bounds.left) / scaleX + group.scrollLeft - group.clientLeft,
+        y: (rect.top - bounds.top) / scaleY + group.scrollTop - group.clientTop,
+        width: rect.width / scaleX, height: rect.height / scaleY,
+        color: `rgb(${tint})`, opacity: 1,
+      };
+      const signature = JSON.stringify(target);
+      if (state.signature === signature) continue;
+      retargetVisual(state.plate, target, state.ready ? {} : { duration: 0 });
+      state.signature = signature;
+      state.ready = true;
+    }
+  }
+  function refreshMembership() {
+    membershipDirty = false;
+    for (const [group, state] of groups) {
+      if (!root.contains(group) || !group.matches(state.definition.group)) release(group, state);
+    }
     for (const definition of definitions) {
       const candidates = [...root.querySelectorAll(definition.group)];
       if (root.matches?.(definition.group)) candidates.unshift(root);
@@ -50,39 +88,16 @@ export function installSelectionStateMotion(root = document.body) {
         for (const item of state.items) if (!items.has(item)) resize?.unobserve(item);
         for (const item of items) if (!state.items.has(item)) resize?.observe(item);
         state.items = items;
-        const selected = group.querySelector(definition.selected);
-        const bounds = group.getBoundingClientRect();
-        const rect = selected?.getBoundingClientRect();
-        const visible = rect && rect.width > 0 && rect.height > 0 && bounds.width > 0 && bounds.height > 0;
-        if (!visible) {
-          if (state.signature !== 'hidden') retargetVisual(state.plate, { opacity: 0 });
-          state.signature = 'hidden';
-          state.ready = false;
-          continue;
-        }
-        // Rectangles include ancestor page scaling; animation coordinates belong to the group.
-        const scaleX = group.offsetWidth ? bounds.width / group.offsetWidth : 1;
-        const scaleY = group.offsetHeight ? bounds.height / group.offsetHeight : 1;
-        const computed = getComputedStyle(selected);
-        const tint = definition.kind === 'settings'
-          ? computed.getPropertyValue('--settings-category-tint').trim() || '204,181,139'
-          : '108,155,169';
-        const target = {
-          x: (rect.left - bounds.left) / scaleX + group.scrollLeft - group.clientLeft,
-          y: (rect.top - bounds.top) / scaleY + group.scrollTop - group.clientTop,
-          width: rect.width / scaleX, height: rect.height / scaleY,
-          color: `rgb(${tint})`, opacity: 1,
-        };
-        const signature = JSON.stringify(target);
-        if (state.signature === signature) continue;
-        retargetVisual(state.plate, target, state.ready ? {} : { duration: 0 });
-        state.signature = signature;
-        state.ready = true;
       }
     }
   }
   // Ignore animated inline styles: observing them would create a frame feedback loop.
-  const observer = new MutationObserver(schedule);
+  // Scroll and resize change geometry, not membership. Only DOM/class changes
+  // need the root/group scans; selection and visibility still measure next frame.
+  const observer = new MutationObserver(records => {
+    if (records.some(record => record.type === 'childList' || record.attributeName === 'class')) membershipDirty = true;
+    schedule();
+  });
   observer.observe(root, { subtree: true, childList: true, attributes: true,
     attributeFilter: ['class', 'aria-selected', 'aria-pressed', 'hidden'] });
   window.addEventListener('resize', schedule);

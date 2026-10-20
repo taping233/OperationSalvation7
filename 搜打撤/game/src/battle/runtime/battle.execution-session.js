@@ -11,9 +11,9 @@ export function createBattleExecutionSession() {
   let turnEndContinuation = null;
 
   // 回合结束属于整条出牌链：等待动作及其交互全部收口，且只续接一次。
-  function deferTurnEnd(resume, isReady) {
+  function deferTurnEnd(resume, isReady, cancel = () => {}) {
     if (turnEndContinuation) return false;
-    turnEndContinuation = { generation, resume, isReady };
+    turnEndContinuation = { generation, resume, isReady, cancel };
     return true;
   }
 
@@ -29,7 +29,9 @@ export function createBattleExecutionSession() {
   function reset(reason = 'battle replaced') {
     // 先使旧演出的收尾失效，再取消动作，避免跨战斗的 finally 清理新状态。
     generation++;
+    const cancelled = turnEndContinuation;
     turnEndContinuation = null;
+    try { cancelled?.cancel(); } catch (error) { console.error('Battle continuation cancellation failed', error); }
     actionQueue.clear(reason);
     stagedDeathFx.clear();
     handSelectQueue.length = 0;

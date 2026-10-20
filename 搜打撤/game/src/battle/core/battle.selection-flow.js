@@ -16,7 +16,7 @@ import { withBlessingChoices } from '../effects/random-blessings.js';
  */
 export function createBattleSelectionFlow({
   cards, deny, random01, throwIfActionCancelled,
-  session, requestBattleRender, findCard, addTempCard, queueBattleAction,
+  session, requestBattleRender, findCard, addTempCard, addDeckCard, shuffleDeck, queueBattleAction,
   runStagedSteps, applyTextEffects, queueCardExecution, fireConsumeTriggers,
   fireCatGift, swapCardCosts, sweepDead, finish,
 }) {
@@ -29,6 +29,7 @@ export function createBattleSelectionFlow({
       sellPrice: card => cards.sellPrice(card),
       findByUid: uid => findCard(uid),
       addTempCard,
+      addDeckCard,
       queueCardExecution,
       fireCatGift,
       directPlayReason: card => missingInfusionReason(card, 0, allSpellsInfused),
@@ -49,6 +50,7 @@ export function createBattleSelectionFlow({
       finishVictory: () => finish(true),
     },
     effects: {
+      shuffleDeck,
       returnToDeckBottom: uids => drawPile.unshift(...uids),
       addArmor: amount => { pdef.armor += amount; return pdef.armor; },
       setCardOverride: (uid, card) => cardOverrides.set(uid, card),

@@ -141,7 +141,7 @@ function createBattleSnapshot(input) {
     selShaN, sel, selPool, potionBar, pendingItem, slamPending, dartPending,
     equipped,
   } = input;
-  const playerStatus = pstat ? Object.freeze({ ...pstat, status: statusOf(pstat) }) : null;
+  const playerStatus = pstat ? Object.freeze({ ...pstat, requestedCards: cloneCardData(/** @type {BattleCardValue} */ (pstat.requestedCards)), status: statusOf(pstat) }) : null;
   const playerDefense = freezeObject(pdef);
   const readonlyFoes = foes.map((foe, index) => Object.freeze({
     ...foe,

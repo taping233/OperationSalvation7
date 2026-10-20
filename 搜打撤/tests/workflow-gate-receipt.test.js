@@ -41,9 +41,20 @@ function linkOrSkip(context, target, location, type = 'file') {
 function executable(f) {
   mkdirSync(path.join(f.root, 'node_modules/.bin'), { recursive: true });
   mkdirSync(path.join(f.root, 'node_modules/example/bin'), { recursive: true });
+  writeFileSync(path.join(f.root, 'node_modules/example/package.json'), JSON.stringify({ name: 'example', bin: { example: 'bin/cli.js' } }));
   const file = path.join(f.root, 'node_modules/example/bin/cli.js');
   writeFileSync(file, '#!/usr/bin/env node\nconsole.log("fixture");\n');
   return { file, link: path.join(f.root, 'node_modules/.bin/example') };
+}
+function nestedExecutable(f, { container = 'global-prefix/node_modules', pkg = 'which', command = 'which', bin = './bin/which' } = {}) {
+  const modules = path.join(f.root, 'node_modules', container);
+  const packageRoot = path.join(modules, pkg);
+  mkdirSync(path.join(modules, '.bin'), { recursive: true });
+  mkdirSync(path.join(packageRoot, 'bin'), { recursive: true });
+  const manifest = path.join(packageRoot, 'package.json'), file = path.join(packageRoot, 'bin/which');
+  writeFileSync(manifest, JSON.stringify({ name: pkg, version: '1.3.1', bin }));
+  writeFileSync(file, '#!/usr/bin/env node\n');
+  return { modules, packageRoot, manifest, file, link: path.join(modules, '.bin', command), target: '../' + pkg + '/bin/which' };
 }
 afterEach(() => {
   for (const root of roots.splice(0)) {
@@ -84,13 +95,89 @@ describe('冻结 index 成功报告的严格复用', () => {
     writeFileSync(bin.file, 'changed target');
     expect(dependencyBytes(f.root)).not.toBe(before);
   });
+  it('标准 npm 嵌套 which bin 可冻结且复制后摘要一致', context => {
+    const f = fixture();
+    const nested = path.join(f.root, 'node_modules/global-prefix/node_modules');
+    mkdirSync(path.join(nested, '.bin'), { recursive: true });
+    mkdirSync(path.join(nested, 'which/bin'), { recursive: true });
+    writeFileSync(path.join(nested, 'which/package.json'), JSON.stringify({ name: 'which', version: '1.3.1', bin: './bin/which' }));
+    writeFileSync(path.join(nested, 'which/bin/which'), '#!/usr/bin/env node\n');
+    linkOrSkip(context, '../which/bin/which', path.join(nested, '.bin/which'));
+    const copy = path.join(f.repo, 'nested-copy');
+    const before = dependencyBytes(f.root, { destination: path.join(copy, 'node_modules') });
+    expect(readlinkSync(path.join(copy, 'node_modules/global-prefix/node_modules/.bin/which'))).toBe('../which/bin/which');
+    expect(dependencyBytes(copy)).toBe(before);
+    writeFileSync(path.join(nested, 'which/bin/which'), 'changed nested executable');
+    expect(dependencyBytes(f.root)).not.toBe(before);
+  });
+  for (const opts of [
+    { container: '@scope/parent/node_modules', pkg: '@tools/which' },
+    { container: 'parent/node_modules/child/node_modules', pkg: '@tools/which', command: 'lookup', bin: { lookup: './bin/which' } },
+  ]) it('支持 scoped 包及多层 npm bin：' + opts.container, context => {
+    const f = fixture(), bin = nestedExecutable(f, opts);
+    linkOrSkip(context, bin.target, bin.link);
+    expect(dependencyBytes(f.root)).toMatch(/^[a-f0-9]{64}$/);
+  });
+  for (const [kind, target] of [
+    ['根逃逸', '../../../../outside.js'], ['跨本层 node_modules', '../../../example/bin/cli.js'],
+    ['绝对路径', 'absolute'], ['Windows 绝对路径', 'C:\\tools\\which'], ['反斜线', '../which\\bin/which'],
+    ['路径回退', '../which/bin/../bin/which'], ['悬空', '../which/bin/missing'],
+    ['目录', '../which/bin'], ['自循环', '../.bin/which'], ['缓存', '../.cache/which'],
+  ]) it('嵌套 bin 拒绝' + kind, context => {
+    const f = fixture(), bin = nestedExecutable(f);
+    executable(f);
+    writeFileSync(path.join(f.root, 'outside.js'), 'outside');
+    mkdirSync(path.join(bin.modules, '.cache'));
+    writeFileSync(path.join(bin.modules, '.cache/which'), 'cache');
+    linkOrSkip(context, target === 'absolute' ? bin.file : target, bin.link, kind === '目录' ? 'dir' : 'file');
+    expect(() => dependencyBytes(f.root)).toThrow();
+  });
+  for (const binDeclaration of [undefined, { other: 'bin/which' }, { which: 'bin/other' },
+    { which: '../which/bin/which' }, { which: '/bin/which' }, { which: 'C:\\bin\\which' }, { which: 7 }]) {
+    it('嵌套 bin 必须有匹配且安全的包声明：' + JSON.stringify(binDeclaration), context => {
+      const f = fixture(), bin = nestedExecutable(f);
+      writeFileSync(bin.manifest, JSON.stringify({ name: 'which', bin: binDeclaration }));
+      linkOrSkip(context, bin.target, bin.link);
+      expect(() => dependencyBytes(f.root)).toThrow('bin 声明');
+    });
+  }
+  it('字符串 bin 声明不得冒充另一命令', context => {
+    const f = fixture(), bin = nestedExecutable(f, { command: 'spoof' });
+    linkOrSkip(context, bin.target, bin.link);
+    expect(() => dependencyBytes(f.root)).toThrow('bin 声明');
+  });
+  for (const container of ['global-prefix', 'global-prefix/tools/node_modules', 'global-prefix/.cache/node_modules']) {
+    it('拒绝非 npm 层级的伪 .bin：' + container, context => {
+      const f = fixture(), bin = nestedExecutable(f, { container });
+      linkOrSkip(context, bin.target, bin.link);
+      expect(() => dependencyBytes(f.root)).toThrow('非受控');
+    });
+  }
+  it('嵌套 bin 拒绝链式目标、目录中转、manifest 链接与普通包内链接', context => {
+    const f = fixture(), bin = nestedExecutable(f);
+    const alias = path.join(bin.packageRoot, 'bin/alias');
+    linkOrSkip(context, 'which', alias);
+    linkOrSkip(context, '../which/bin/alias', bin.link);
+    expect(() => dependencyBytes(f.root)).toThrow('普通文件');
+    unlinkSync(bin.link);
+    expect(() => dependencyBytes(f.root)).toThrow('非受控');
+    unlinkSync(alias);
+    linkOrSkip(context, 'bin', path.join(bin.packageRoot, 'linked'), 'dir');
+    linkOrSkip(context, '../which/linked/which', bin.link);
+    expect(() => dependencyBytes(f.root)).toThrow('普通文件');
+    unlinkSync(bin.link); unlinkSync(path.join(bin.packageRoot, 'linked'));
+    writeFileSync(path.join(bin.packageRoot, 'manifest.json'), readFileSync(bin.manifest));
+    unlinkSync(bin.manifest);
+    linkOrSkip(context, 'manifest.json', bin.manifest);
+    linkOrSkip(context, bin.target, bin.link);
+    expect(() => dependencyBytes(f.root)).toThrow('包声明必须是普通文件');
+  });
   it('相同目标字节也锁定链接文本，并在 POSIX 锁定执行位', context => {
     const f = fixture(), bin = executable(f);
-    writeFileSync(path.join(f.root, 'node_modules/example/bin/other.js'), readFileSync(bin.file));
     linkOrSkip(context, '../example/bin/cli.js', bin.link);
     const before = dependencyBytes(f.root);
     unlinkSync(bin.link); // Only this test's own temporary link.
-    linkOrSkip(context, '../example/bin/other.js', bin.link);
+    linkOrSkip(context, '../example/bin/./cli.js', bin.link);
     expect(dependencyBytes(f.root)).not.toBe(before);
     if (process.platform !== 'win32') {
       const linked = dependencyBytes(f.root);

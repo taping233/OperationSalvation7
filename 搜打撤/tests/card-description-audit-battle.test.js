@@ -1,4 +1,4 @@
-import { afterAll, describe, expect, it } from 'vitest';
+import { afterAll, afterEach, describe, expect, it, vi } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -20,6 +20,7 @@ const { createBattleDiscoverFlow } = await import('../game/src/battle/effects/ba
 const { parsePoolNoun } = await import('../game/src/battle/effects/effect-steps.ctx.js');
 const { displayCardDescription } = await import('../game/src/cards/card-description-text.js');
 const byId = id => { const c = C.all().filter(c => c.id === id).at(-1); if (!c) throw Error(`缺卡 ${id}`); return c; };
+afterEach(() => vi.restoreAllMocks());
 const observed = [];
 const record = (id, scenario, actual, described) => observed.push({ id, scenario, actual, described });
 const C = window.SDT.Cards;
@@ -192,7 +193,14 @@ describe('全卡描述修复回归：卡面正确结果与待裁定边界', () =
     ['tt3-sapper-bomb', 'damage', 4], ['tt7-arcanescroll', 'acquire', 3],
   ])('%s：临时卡到期消耗触发一次“本牌被消耗时”', async (id, effect, n) => {
     await start([byId('starter-attack')]);
-    const uid = engine.addTempCard(byId(id));
+    const consumedCard = byId(id);
+    const uid = engine.addTempCard(consumedCard);
+    // 固定为无获取派生效果的真实法术，基础张数不混入阿猫的额外奖励。
+    // 法术也满足奥术卷轴的随机法术池；阿猫组合在下方单独严格验证。
+    const plain = byId('tt3-ice-spike');
+    expect(C.isRandomObtainable(plain)).toBe(true);
+    expect(plain.rules?.triggers?.onAcquire?.length || 0).toBe(0);
+    vi.spyOn(C, 'all').mockReturnValue([plain]);
     const beforeGranted = runtime.granted.length;
     runtime.delayed.push({ special: 'consumeTemps', uids: [uid], cardName: '江湖救急-改' });
     await engine.processDelayed(); await drain();
@@ -204,10 +212,42 @@ describe('全卡描述修复回归：卡面正确结果与待裁定边界', () =
     await engine.processDelayed(); await drain();
     const repeated = effect === 'acquire' ? runtime.granted.length - beforeGranted : 1000 - runtime.foes[0].hp;
     expect(repeated).toBe(n);
-    engine.fireConsumeTriggers(byId(id), runtime.foes[0]); await drain();
+    engine.fireConsumeTriggers(consumedCard, runtime.foes[0]); await drain();
     const control = (effect === 'acquire' ? runtime.granted.length - beforeGranted : 1000 - runtime.foes[0].hp) - repeated;
     expect(control).toBe(n);
     record(id, '生产consumeTemps到期消耗且重复到期不重发；随后正常消耗钩作正对照', { expiredEffect: actual, normalConsumeEffect: control }, { expiredEffect: n, normalConsumeEffect: n });
+  });
+  it.each(['到期', '正常'])('沉船宝盒%s消耗：基础2张抽中阿猫，派生额外1张并回复1能量', async mode => {
+    await start([byId('starter-attack')]);
+    const wreck = byId('tt2-wreck'), gift = byId('tt2-apollo'), plain = byId('tt3-ice-spike');
+    expect([gift, plain].every(card => C.isRandomObtainable(card))).toBe(true);
+    const uid = engine.addTempCard(wreck);
+    const beforeGranted = runtime.granted.length, beforeEnergy = runtime.energy;
+    // 首次随机获取必为阿猫；其派生获取及宝盒第二张必为冰刺。
+    // 只约束候选池，保留生产随机获取、onAcquire、入手与消耗管线。
+    vi.spyOn(C, 'all').mockImplementation(() =>
+      runtime.granted.slice(beforeGranted).some(entry => entry.card.id === gift.id) ? [plain] : [gift]);
+    if (mode === '到期') {
+      runtime.delayed.push({ special: 'consumeTemps', uids: [uid], cardName: '阿猫组合回归' });
+      await engine.processDelayed();
+    } else {
+      engine.fireConsumeTriggers(wreck, runtime.foes[0]);
+    }
+    await drain();
+    const acquired = runtime.granted.slice(beforeGranted);
+    expect(acquired.map(entry => entry.card.id)).toEqual([gift.id, plain.id, plain.id]);
+    expect(acquired.every(entry => runtime.hand.includes(entry.uid))).toBe(true);
+    expect(runtime.energy - beforeEnergy).toBe(1);
+    if (mode === '到期') {
+      expect(runtime.consumed).toContain(uid);
+      runtime.delayed.push({ special: 'consumeTemps', uids: [uid], cardName: '阿猫组合重复到期' });
+      await engine.processDelayed(); await drain();
+      expect(runtime.granted.slice(beforeGranted)).toEqual(acquired);
+      expect(runtime.energy - beforeEnergy).toBe(1);
+    }
+    record('tt2-wreck', `${mode}消耗：固定首张阿猫，派生与第二张冰刺`,
+      { cards: acquired.map(entry => entry.card.id), energy: runtime.energy - beforeEnergy },
+      { cards: [gift.id, plain.id, plain.id], energy: 1 });
   });
   it('闪避：真实Combat避开首段固定伤害并消耗闪避', () => {
     const t = Combat.ensureStatus({ hp: 20 }); Combat.addBlessing(t, 'dodge', 1);

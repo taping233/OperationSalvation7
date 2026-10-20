@@ -471,7 +471,9 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       ordered.push(rec);
     });
     handLayoutSlots = ordered;
-    handHit?.sync(handBattleToken);
+    // Background-only rendering masks selection fields; use the live state so
+    // entering and leaving those overlays still invalidates an old gesture.
+    handHit?.sync(handBattleToken, getSnapshot());
     handLayoutWidth = handWidth;
     // —— 顺序校正（DOM 序 = 扇形叠放序）：失序才搬节点 ——
     const current = [...handLayer.querySelectorAll('.bt-slot')];

@@ -1,11 +1,11 @@
 // @vitest-environment node
 import { describe, it, expect } from 'vitest';
-import { execFileSync } from 'node:child_process';
-import { mkdtemp, readFile, rm, mkdir } from 'node:fs/promises';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { mkdtemp, readFile, rm, mkdir, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { JSDOM } from 'jsdom';
-import { analyzeSamples, reviewVideo, reportHTML, reviewChecklist, checklistMarkdown } from '../scripts/video-review.mjs';
+import { analyzeSamples, reviewVideo, reportHTML, reviewChecklist, checklistMarkdown, sampleCoverage, coverageSummary } from '../scripts/video-review.mjs';
 const available = (() => { try { execFileSync('ffmpeg',['-version'],{stdio:'ignore'});execFileSync('ffprobe',['-version'],{stdio:'ignore'});return true;}catch{return false;} })();
 it('detects only candidate ranges and keeps sample times separate from source FPS', () => {
   const a=analyzeSamples(Uint8Array.from([0,0,255,0,90,90,90,90,90]),{width:1,height:1,fps:1});
@@ -47,6 +47,15 @@ describe.skipIf(!available)('offline ffmpeg pipeline (synthetic fixtures only)',
       expect(tail.videos[0].samples[0].time).toBe(4);
       expect(tail.videos[0].samples).toHaveLength(4);
       expect(tail.videos[0].samples.every(s=>s.time>=4&&s.time<6)).toBe(true);
+      expect(tail.videos[0].coverage.uncoveredRanges).toEqual([{start:0,end:4},{start:6,end:7}]);
+      expect(await readFile(path.join(temp,'tail/review-checklist.md'),'utf8')).toContain('未分析 0.00–4.00s、6.00–7.00s');
+      expect(await readFile(path.join(temp,'tail/index.html'),'utf8')).toContain('未分析 0.00–4.00s、6.00–7.00s');
+      const cli = spawnSync(process.execPath,['scripts/video-review.mjs','--input',video,'--out',path.join(temp,'cli'),
+        '--max-seconds','1'],{encoding:'utf8',stdio:['ignore','pipe','pipe']});
+      expect(cli.status).toBe(0);
+      expect(cli.stderr).toContain('WARNING');
+      expect(cli.stderr).toContain('未分析 1.00–7.00s');
+      expect(JSON.parse(cli.stdout).videos[0]).toMatchObject({truncated:true,coverage:{endSeconds:1,complete:false}});
       const existing=path.join(temp,'keep');await mkdir(existing);
       await expect(reviewVideo({input:video,out:existing})).rejects.toThrow();
     } finally { await rm(temp,{recursive:true,force:true}); }
@@ -80,6 +89,7 @@ it('opens candidate timelines and synchronizes sampled previews without silently
 it('prints a useful CLI entry without requiring input or creating a report', () => {
   const text=execFileSync(process.execPath,['scripts/video-review.mjs','--help'],{encoding:'utf8'});
   expect(text).toContain('--start-seconds');expect(text).toContain('ffmpeg and ffprobe');
+  expect(text).toContain('600-frame cap');expect(text).toContain('--start-seconds 298');
 });
 
 it('exports bounded source-time review ranges and keeps static screens unconfirmed', () => {
@@ -95,4 +105,74 @@ it('exports bounded source-time review ranges and keeps static screens unconfirm
   const unsafe=checklistMarkdown({videos:[{...video,source:'![remote](https://example.test/a)\n<script>.mp4'}]});
   expect(unsafe).not.toContain('![remote]');expect(unsafe).toContain('&lt;script&gt;');
   expect(checklistMarkdown({videos:[{...video,candidates:[]}]})).toContain('未检出候选，不代表没有问题');
+});
+
+
+it('reports frame-budget truncation, skipped prefixes, full tails and decoder shortfalls', () => {
+  const coverage = sampleCoverage({ durationSeconds: 900, maxSeconds: 900, sampleCount: 600 });
+  expect(coverage).toMatchObject({ startSeconds: 0, endSeconds: 300, frameLimit: 600,
+    complete: false, reasons: ['frame-limit'], nextStartSeconds: 300,
+    uncoveredRanges: [{start:300,end:900}] });
+  expect(sampleCoverage({durationSeconds:900,sampleCount:600}).reasons).toEqual(['max-seconds']);
+  const highRate = sampleCoverage({durationSeconds:900,maxSeconds:900,fps:10,sampleCount:600});
+  expect(highRate.endSeconds).toBe(60);
+  const tail = sampleCoverage({durationSeconds:900,startSeconds:600,sampleCount:600});
+  expect(tail).toMatchObject({endSeconds:900,nextStartSeconds:null,complete:false,
+    reasons:['start-offset'],uncoveredRanges:[{start:0,end:600}]});
+  expect(sampleCoverage({durationSeconds:3,sampleCount:6}).complete).toBe(true);
+  expect(sampleCoverage({durationSeconds:3.2,sampleCount:7}).endSeconds).toBe(3.2);
+  const short = sampleCoverage({durationSeconds:3,sampleCount:4});
+  expect(short).toMatchObject({endSeconds:2,complete:false,reasons:['decoded-shortfall'],
+    uncoveredRanges:[{start:2,end:3}]});
+  expect(coverageSummary({sampleStartSeconds:0,sampledSeconds:300,durationSeconds:900,truncated:true,coverage}))
+    .toContain('未分析 300.00–900.00s');
+});
+
+
+describe.skipIf(!available)('offline video review boundary regressions', () => {
+  it('bounds raw JSON candidates to fractional source and selected segment ends', async () => {
+    const temp = await mkdtemp(path.join(os.tmpdir(), 'sdt-video-bounds-'));
+    try {
+      const video = path.join(temp, 'black.mp4');
+      execFileSync('ffmpeg', ['-nostdin','-v','error','-f','lavfi','-i',
+        'color=black:size=64x64:rate=10:duration=1.3','-c:v','mpeg4',video], {timeout:30000});
+      for (const [name, options, expectedEnd] of [
+        ['source-tail', {startSeconds:1}, 1.3],
+        ['selected-end', {startSeconds:0.5,maxSeconds:0.3}, 0.8],
+      ]) {
+        const out = path.join(temp, name);
+        const report = await reviewVideo({input:video,out,...options});
+        const result = JSON.parse(await readFile(path.join(out, 'report.json'), 'utf8')).videos[0];
+        expect(result.coverage.endSeconds).toBeCloseTo(expectedEnd);
+        expect(result.candidates).toHaveLength(1);
+        expect(result.candidates[0].end).toBeCloseTo(expectedEnd);
+        expect(result.candidates[0].end).toBe(result.reviewChecklist[0].end);
+        expect(result.candidates[0].start).toBe(options.startSeconds);
+        expect(report.videos[0].candidates).toEqual(result.candidates);
+      }
+    } finally { await rm(temp, {recursive:true,force:true}); }
+  }, 30000);
+
+  it('rejects empty, corrupt, audio-only and out-of-range inputs without success reports', async () => {
+    const temp = await mkdtemp(path.join(os.tmpdir(), 'sdt-video-invalid-'));
+    try {
+      const empty = path.join(temp, 'empty.mp4'), corrupt = path.join(temp, 'corrupt.mp4');
+      await writeFile(empty, ''); await writeFile(corrupt, 'not a video');
+      const audio = path.join(temp, 'audio.mp4'), video = path.join(temp, 'black.mp4');
+      execFileSync('ffmpeg', ['-nostdin','-v','error','-f','lavfi','-i',
+        'anullsrc=r=8000:cl=mono','-t','0.3','-c:a','aac',audio], {timeout:30000});
+      execFileSync('ffmpeg', ['-nostdin','-v','error','-f','lavfi','-i',
+        'color=black:size=64x64:rate=10:duration=0.3','-c:v','mpeg4',video], {timeout:30000});
+      for (const [name, input, options, error] of [
+        ['empty',empty,{},'ffprobe failed'], ['corrupt',corrupt,{},'ffprobe failed'],
+        ['audio',audio,{},'no video stream'],
+        ['end',video,{startSeconds:0.3},'before the end'],
+        ['beyond',video,{startSeconds:10},'before the end'],
+      ]) {
+        const out = path.join(temp, name + '-report');
+        await expect(reviewVideo({input,out,...options})).rejects.toThrow(error);
+        await expect(readFile(path.join(out, 'report.json'))).rejects.toMatchObject({code:'ENOENT'});
+      }
+    } finally { await rm(temp, {recursive:true,force:true}); }
+  }, 30000);
 });

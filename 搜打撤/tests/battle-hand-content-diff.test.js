@@ -129,3 +129,26 @@ it('rebuilds stack counts and discards cached hint state on a new battle',async(
   commands.flee();await settle();await start(['tt3-skewer','tt3-bandage']);
   expect(face('tt3-skewer')).not.toBe(original);expect(wrapper('tt3-skewer').textContent).not.toContain('能量不足');
 });
+
+it.each(['settlement', 'deck overlay'])('does not revive a press begun during %s after the unchanged hand becomes ready',async(mode)=>{
+  await start(['tt3-skewer','tt3-bandage']);
+  Runtime.set$busy(true);render();
+  const kept=wrapper('tt3-skewer');
+  const pointer=(type)=>{
+    const event=new MouseEvent(type,{bubbles:true,cancelable:true,button:0,detail:1});
+    Object.defineProperties(event,{pointerId:{value:1},pointerType:{value:'mouse'},isPrimary:{value:true}});
+    kept.dispatchEvent(event);
+  };
+  pointer('pointerdown');
+  if(mode==='deck overlay'){
+    Runtime.set$viewingDeck(true);render();
+    expect(document.querySelector('.battle-secondary-layer')).not.toBeNull();
+    Runtime.set$viewingDeck(false);
+  }
+  Runtime.set$busy(false);render();
+  expect(wrapper('tt3-skewer')).toBe(kept);
+  pointer('click');
+  const Aim=await import('../game/src/battle/view/battle.aim.js');
+  expect(Aim.clickSelectedUid).toBeNull();
+  expect(BattleSession.getSnapshot().pendingTarget).toBeFalsy();
+});

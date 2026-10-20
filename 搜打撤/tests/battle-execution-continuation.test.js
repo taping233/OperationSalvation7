@@ -80,3 +80,11 @@ describe('battle execution continuation ownership', () => {
     expect(game.persistSave).not.toHaveBeenCalled();
   });
 });
+it('throwing cancellation does not prevent generation cleanup or queue clearing', () => {
+  const session=createBattleExecutionSession(), error=vi.spyOn(console,'error').mockImplementation(()=>{});
+  session.deferTurnEnd(vi.fn(),()=>false,()=>{throw new Error('cancel failed');});
+  session.handSelectQueue.push({}); session.choiceQueue.push({}); session.stagedResolutionDepth=3;
+  session.reset(); expect(session.turnEndPending).toBe(false); expect(session.handSelectQueue).toEqual([]);
+  expect(session.choiceQueue).toEqual([]); expect(session.stagedResolutionDepth).toBe(0); expect(session.generation).toBe(1);
+  expect(error).toHaveBeenCalledOnce(); error.mockRestore();
+});

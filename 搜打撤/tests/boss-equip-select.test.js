@@ -143,11 +143,12 @@ describe('灵符自动装配消耗', () => {
     const available = [...runtime.hand, ...runtime.drawPile, ...runtime.discard];
     BattleSession.commands.flee();
     await drain(20);
-    expect(consumed).toEqual([uid]);
+    expect(consumed).toEqual([uid, eyeUid]);
     expect(grave).toContain(uid);
     expect(available).not.toContain(uid);
-    expect(consumed).not.toContain(eyeUid);
-    expect(ended[3]).toEqual([uid]);
+    expect(grave).toContain(eyeUid);
+    expect(available).not.toContain(eyeUid);
+    expect(ended[3]).toEqual([uid, eyeUid]);
   });
 
   it.each([false, true])('普通战或未选入BOSS时不消耗（BOSS=%s）', async isBoss => {
@@ -200,4 +201,61 @@ describe('灵符自动装配消耗', () => {
     expect(runtime.consumed).toEqual([]);
     expect(runtime.grave).toEqual([]);
   });
+});
+
+it('开战装备超容量时手选拒绝第三件，最低编组数仍可满足', async () => {
+  runtime.set$lastDeckSel([]);
+  const g = makeGame([talisman(), eye(), talisman()]);
+  BattleSession.start(g, [foeDef()], { isBoss: true });
+  expect(snap().deckSelection.need).toBe(2);
+  for (const entry of g.ownedCards) BattleSession.commands.selectDeckCard(entry.uid);
+  expect(snap().deckSelection.selected).toHaveLength(2);
+  BattleSession.commands.confirmDeck(); await drain();
+  expect(snap().deckSelection).toBeFalsy();
+  expect(runtime.equipped).toHaveLength(2);
+  expect(runtime.consumed).toEqual(g.ownedCards.slice(0, 2).map(entry => entry.uid));
+  BattleSession.commands.flee(); await drain(20);
+});
+
+it('直入自动编组跳过超容量开战装备，继续补入后续合法牌', async () => {
+  runtime.set$lastDeckSel([]);
+  const g = makeGame([talisman(), eye(), talisman(), filler()]);
+  BattleSession.start(g, [foeDef()], { isBoss: true, directBossStart: true });
+  await drain();
+  expect(snap().deckSelection).toBeFalsy();
+  expect(runtime.equipped).toHaveLength(2);
+  expect(runtime.sel.has(g.ownedCards[2].uid)).toBe(false);
+  expect(runtime.sel.has(g.ownedCards[3].uid)).toBe(true);
+  BattleSession.commands.flee(); await drain(20);
+});
+
+it('开战效果执行前所有装配UID已退出全部可用牌区，容量外装备不消费', () => {
+  const g = makeGame([talisman(), talisman(), talisman()]);
+  const ids = g.ownedCards.map(entry => entry.uid);
+  runtime.set$G(g); runtime.set$mode('boss'); runtime.set$sel(new Set(ids));
+  runtime.set$equipped([]); runtime.set$consumed([]); runtime.set$grave([]);
+  runtime.set$hand([...ids]); runtime.set$drawPile([...ids]); runtime.set$discard([...ids]);
+  let effects = 0;
+  const api = createBattleEquipment({ triggersM2: { resolveEquipOps() {
+    effects++;
+    expect(runtime.consumed).toEqual(ids.slice(0, 2));
+    for (const pile of [runtime.hand, runtime.drawPile, runtime.discard]) expect(pile).toEqual([ids[2]]);
+  } } });
+  api.applyBattleStartPassives(); api.applyBattleStartPassives();
+  expect(effects).toBe(2); expect(runtime.equipped).toHaveLength(2);
+  expect(runtime.consumed).toEqual(ids.slice(0, 2));
+});
+
+it('合法容量内的不足额BOSS编组重开后仍能开始战斗', async () => {
+  runtime.set$lastDeckSel([]);
+  const g = makeGame([talisman(), eye(), talisman()]);
+  BattleSession.start(g, [foeDef()], { isBoss: true });
+  for (const entry of g.ownedCards.slice(0, 2)) BattleSession.commands.selectDeckCard(entry.uid);
+  BattleSession.commands.confirmDeck(); await drain();
+  const saved = BattleSession.serialize();
+  expect(BattleSession.restore(g, saved)).toBe(true); await drain();
+  expect(snap().deckSelection).toBeFalsy();
+  expect(runtime.equipped).toHaveLength(2);
+  expect(runtime.consumed).toEqual(g.ownedCards.slice(0, 2).map(entry => entry.uid));
+  BattleSession.commands.flee(); await drain(20);
 });

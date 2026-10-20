@@ -511,6 +511,7 @@ export function createBattleBag({
   return {
     restoreConsumed, battleBagItems, itemUsability, useItem, useBattleEffectItem,
     bagSlam, beginDartStrike, resolveDart, resolveSlam, usePotion, openBag, closeBag,
+    restoreHeroSkill: () => { slamUsedTurn = -1; },
     slamSkill,   // 2026-10-02 老板：砸击换五职业分化技能——视图按钮/拖拽读当前职业技能口径
   };
 }

@@ -25,7 +25,7 @@ import { cancelLegacyChainMove, consumeCell, consumeCurrentCell, enterNode, fini
 import { openDoorModal, openFireRest, openAltarRitual, openBossGate, openEmergencyModal, openEntrySupply, resumeNodeRestore } from './game.run.altar.js';
 import { bindNodeEvent, nodeEventAt, claimResourceReward, entrySupplyAt, entrySupplyGate, nodeActionBinding, resourceRewardAt } from './node-reward-state.js';
 import { createEventCardChoiceController } from './event-card-choice.js';
-import { rewardExitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
+import { patchRewardScene, rewardClaimHTML, rewardExitHTML, rewardSceneHTML } from '../ui/reward-scene-view.js';
 import { createSignalPuzzleState, mountEventSignalPuzzle } from '../ui/event-signal-puzzle.js';
 import { nodeChestRewardAt } from './chest-reward-save.js';
 import { recodeEligibleCards } from './event-recode-candidates.js';
@@ -307,6 +307,7 @@ function openResourcePick(done) {
   if (!cards.length) { done(false); return; }
   game.state = 'modal';
   saveGame();
+  const claimActions = { pick:'resTake', organize:'resBag' };
   let active;
   const take = i => {
     if (!active() || !claimResourceReward(record, i, id => grantEventCard(SDT.Cards.all().find(card => card.id === id), { silent:true }))) return;
@@ -320,23 +321,30 @@ function openResourcePick(done) {
   };
   const render = () => {
   const finished = record.taken !== null;
-  UI.showOverlay('', rewardSceneHTML({ className:'reward-v14 resource-reward-scene', title:finished ? '物资已领取' : '选择一份物资', source:'物资投放点', count:cards.length,
+  const body = rewardSceneHTML({ className:`reward-v14 resource-reward-scene${finished ? ' no-anim' : ''}`, title:finished ? '物资已领取' : '选择一份物资', source:'物资投放点', count:cards.length,
     cards:cards.map((card, i) => {
       if (!card) return '<p>该物资暂不可用</p>';
       const fits = game.canReceiveCard?.(card) !== false;
       const action = finished ? `<span class="reward-unit-state">${record.taken === i ? '已入背包' : '已永久放弃'}</span>`
-        : `<button class="reward-claim" data-act="${fits ? 'resTake' : 'resBag'}" data-i="${i}">${fits ? '选择这张' : '整理背包 · 当前放不下'}</button>`;
-      return `<article class="reward-unit${record.taken === i ? ' got' : ''}"><button class="reward-card" data-act="resRead" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button>${action}</article>`;
+        : rewardClaimHTML({ index:i, choice:true, fits, actions:claimActions }) + (!fits ? '<span class="reward-capacity-note">当前放不下</span>' : '');
+      return `<article class="reward-unit${finished ? record.taken === i ? ' got' : ' dropped' : ''}" data-reward-index="${i}" data-reward-card="${escAttr(card.id || card.name)}" data-reward-rarity="${escAttr(card.rarity)}"><button class="reward-card" data-act="resRead" data-i="${i}" aria-label="放大查看${escAttr(card.name)}">${SDT.Cards.cardHTML(card)}</button>${action}</article>`;
     }).join(''),
-    actions:rewardExitHTML('resSkip', finished ? '继续探索' : '返回地图'), footer:`<button class="reward-bag" data-act="resBag">整理背包</button><span class="reward-notice" role="status">${finished ? '领取完成 · 1 张已入背包，其余卡牌已永久放弃' : '两张资源卡中选择一张，其余永久放弃；未领取时保留在此处'}</span>`,
-  }), 'page');
+    actions:rewardExitHTML('resSkip', finished ? '继续探索' : '返回地图'), footer:`<button class="reward-bag" data-act="resBag" data-card-receive-anchor="bag">整理背包</button><span class="reward-notice" role="status">${finished ? '领取完成 · 1 张已入背包，其余卡牌已永久放弃' : '两张资源卡中选择一张，其余永久放弃；未领取时保留在此处'}</span>`,
+  });
+  const currentBody = UI.el?.ovBody;
+  const focused = currentBody?.contains(document.activeElement) ? document.activeElement : null;
+  if (!currentBody?.querySelector('.resource-reward-scene') || UI.el?.overlay?.hidden
+    || !patchRewardScene(currentBody, SDT.Icons.rich(body))) UI.showOverlay('', body, 'page');
+  if (focused && !focused.isConnected) currentBody.querySelector('[data-act="resSkip"]')?.focus({ preventScroll:true });
   active = nodeActionBinding(game, UI, 'resSkip');
   setBagReturnHook(() => openResourcePick(done));
   UI.act('resRead', data => {
     const i = Number(data.i), card = cards[i];
     if (!active() || !card) return;
     const fits = game.canReceiveCard?.(card) !== false;
-    UI.showCardZoom(card, { hideNote:true, presentation:'expedition', footer:finished ? '' : `<button class="ov-btn ok" data-act="${fits ? 'resTake' : 'resBag'}" data-i="${i}">${fits ? '选择这张' : '整理背包 · 当前放不下'}</button>` });
+    const source = UI.el?.ovBody?.querySelector(`[data-act="resRead"][data-i="${i}"]`);
+    UI.showCardZoom(card, { from:source, returnFocus:source, hideNote:true, presentation:'expedition',
+      footer:finished ? '' : rewardClaimHTML({ index:i, choice:true, fits, zoom:true, actions:claimActions }) });
   });
   UI.act('resTake', data => take(Number(data.i)));
   UI.act('resBag', () => {

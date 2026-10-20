@@ -612,13 +612,16 @@ it('two real equipped cards block the next card and ARIA before submission, pres
  game.ownedCards=game.ownedCards.filter(o=>o.uid!=='extra-slot');render();
  expect(stage().querySelector('.sts-hand .bt-card[data-uid="inspect-card"]').dataset.handState).toBe('blocked');
 });
-it('passive gear does not occupy slots and rune capacity remains dynamic', async () => {
+it('legacy passive gear occupies slots and rune capacity remains dynamic', async () => {
  const runtime=await import('../game/src/battle/runtime/battle.runtime.js');
  const canonical=id=>Cards.all().find(c=>c.id===id);
  start(1,canonical('tt3eq-mistbox'));
  runtime.set$equipped([{uid:'a',card:canonical('tt3-grass-armor')},{uid:'passive',card:canonical('tt12-raygun'),passive:true}]);render();
- expect(card().dataset.handState).toBe('ready');
- runtime.equipped.push({uid:'b',card:canonical('tt12-raygun')});render();expect(card().dataset.handState).toBe('blocked');
+ expect(card().dataset.handState).toBe('blocked');
+ const before = BattleSession.getSnapshot();
+ expect(BattleSession.commands.submitCardPlay('inspect-card','self').reason.code).toBe('EQUIPMENT_FULL');
+ expect(BattleSession.getSnapshot().hand).toEqual(before.hand);
+ expect(BattleSession.getSnapshot().energy).toBe(before.energy);
  runtime.set$nestSyn({...runtime.nestSyn,grass1:true});render();expect(card().dataset.handState).toBe('ready');
  runtime.set$nestSyn({...runtime.nestSyn,grass1:false,grass3:true});render();expect(card().dataset.handState).toBe('ready');
  runtime.set$nestSyn({...runtime.nestSyn,grass3:false});render();expect(card().dataset.handState).toBe('blocked');

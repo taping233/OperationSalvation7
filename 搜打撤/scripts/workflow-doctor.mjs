@@ -27,9 +27,10 @@ function defaultProbe({ program, args, cwd }) {
 }
 
 /** Local, read-only readiness report. No tests, dependency byte scans or automatic repairs. */
-export async function doctor(root, { input, paths, tests, probe = defaultProbe } = {}) {
+export async function doctor(root, { input, paths, tests, staged = false, probe = defaultProbe } = {}) {
   if (typeof root !== 'string' || !path.isAbsolute(root)) throw new Error('doctor 必须显式提供绝对项目 root');
   root = path.resolve(root);
+  if (staged && (paths || tests)) throw new Error('doctor --staged 不能与 --paths/--tests 混用');
   const checks = [];
   let project = null, pkg = null, lock = null, repo = null;
   const check = async (id, required, source, run, suggestion) => {
@@ -76,7 +77,10 @@ export async function doctor(root, { input, paths, tests, probe = defaultProbe }
     return { status: 'passed', details: { version: lock.lockfileVersion } };
   }, '核对现有锁文件，安装或修改依赖须沿当前授权');
   await check('dependencies', true, 'node_modules/*/package.json + package-lock.json', () => {
-    const packages = PACKAGES.map(name => {
+    const names = [...new Set([...PACKAGES, ...Object.keys(pkg?.dependencies ?? {}), ...Object.keys(pkg?.devDependencies ?? {})])];
+    const modules = path.join(root, 'node_modules');
+    const linked = lstatSync(modules, { throwIfNoEntry: false })?.isSymbolicLink() ?? false;
+    const packages = names.map(name => {
       const file = path.join(root, 'node_modules', name, 'package.json');
       const installed = existsSync(file) ? jsonFile(file, 128 * 1024) : null;
       return { name, installed: installed?.version ?? null, locked: lock?.packages?.['node_modules/' + name]?.version ?? null,
@@ -84,11 +88,11 @@ export async function doctor(root, { input, paths, tests, probe = defaultProbe }
     });
     const missing = packages.filter(item => !item.installed);
     const mismatched = packages.filter(item => item.installed && item.locked && item.installed !== item.locked);
-    return { status: missing.length ? 'blocked' : mismatched.length ? 'warning' : 'passed', details: { packages,
+    return { status: missing.length ? 'blocked' : mismatched.length ? 'warning' : 'passed', details: { packages, nodeModules: { linked, targetReadable: existsSync(modules) },
       missing: missing.map(item => item.name), mismatched: mismatched.map(item => item.name),
       engines: '仅展示已安装依赖声明；不推断所有版本范围兼容性，不扫描依赖字节' },
       ...(missing.length || mismatched.length ? { suggestion: '核对现有 node_modules 与锁文件；缺失项按任务授权补齐' } : {}) };
-  }, '核对项目内关键依赖文件，不执行安装');
+  }, '核对项目内关键工具及全部直接依赖文件，不执行安装');
   await check('entrypoints', true, 'known local command paths', () => {
     const entries = ENTRIES.map(file => ({ file, present: existsSync(path.join(root, file)) && lstatSync(path.join(root, file)).isFile() }));
     return { status: entries.every(item => item.present) ? 'passed' : 'blocked', details: { entries }, suggestion: '只修复缺失的对应入口；不运行测试或 build' };
@@ -135,6 +139,21 @@ export async function doctor(root, { input, paths, tests, probe = defaultProbe }
       note: '仅记录元数据，未验证日志、当前输入/index、环境或依赖字节；历史通过不等于当前资格' },
       suggestion: '深入资格使用 workflow evidence --input <本报告>；doctor 不生成或承诺证明' };
   });
+  if (staged) await check('staged-readiness', true, 'stagedPlan(root)', async () => {
+    if (!repo) return { status: 'blocked', details: { canRun: false, mode: 'unavailable',
+      executed: false, passed: false, reason: 'Git 仓库不可用；恢复副本不能证明 HEAD/index' },
+      suggestion: '在真实 Git 工作区运行 doctor --staged；不初始化恢复副本来冒充原仓库' };
+    const { stagedPlan } = await import('./workflow-staged.mjs');
+    const plan = stagedPlan(root);
+    return { status: plan.blocked.length ? 'blocked' : 'info', details: {
+      canRun: plan.blocked.length === 0 && plan.changes.length > 0
+        && !checks.some(item => item.required && item.status === 'blocked'), mode: plan.mode,
+      executed: false, passed: false, reusableReceipt: false,
+      blocked: plan.blocked, changedPaths: plan.changes.map(entry => entry.path),
+      dependencyCount: Object.keys(plan.dependencies.versions).length,
+      nextAction: plan.nextAction },
+      suggestion: '冻结预检只核 index/锁依赖；精确测试选择仍由隔离快照中的现有门决定，未运行测试或实页' };
+  }, '修复 Git/index/锁依赖阻塞后重试；不运行完整检查、不自动安装');
   if (paths || tests) await check('selection', true, 'previewCheck(root, options)', async () => {
     const { previewCheck } = await import('./workflow-evidence.mjs');
     const result = previewCheck(root, { paths, tests });
@@ -144,5 +163,5 @@ export async function doctor(root, { input, paths, tests, probe = defaultProbe }
   const summary = Object.fromEntries(['passed', 'warning', 'blocked', 'info', 'not-checked'].map(status => [status, checks.filter(item => item.status === status).length]));
   return { schemaVersion: 1, ok: !checks.some(item => item.required && item.status === 'blocked'), root, project, checks, summary,
     limits: ['只读当前项目管理环境；单项失败隔离，未自动修复或安装', '未运行测试、build、服务或提交，未修改 index/配置/台账',
-      '依赖只核关键版本与入口，不等于全部字节一致或所有 engines 已验证', '未计算整项目指纹；未核当前证明复用资格或远端 CI'] };
+      '默认核关键工具及全部直接依赖版本与入口；--staged 复用冻结锁检查，不等于依赖字节或 engines 已验证', '未计算整项目指纹；未核当前证明复用资格或远端 CI'] };
 }

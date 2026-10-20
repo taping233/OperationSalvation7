@@ -14,7 +14,7 @@ const RUNTIME_SURFACE = new Set([
   'battle/runtime/battle.runtime.interaction.js', 'battle/runtime/battle.runtime.effects.js',
   'battle/runtime/battle.runtime.presentation.js',
 ]);
-const EXECUTION_ADAPTERS = new Set(['battle/effects/effect-steps.m1.js', 'battle/effects/effect-steps.m2.js']);
+const EXECUTION_ADAPTERS = new Set(['battle/effects/requested-card-runtime.js', 'battle/effects/effect-steps.m1.js', 'battle/effects/effect-steps.m2.js']);
 const RUNTIME_INNER = new Set([
   'battle/core/battle.engine.js', 'battle/core/battle.enemy-phase.js', 'battle/core/battle.selection-flow.js',
   'battle/bag/battle.equipment.js', 'battle/bag/battle.bag.js', 'battle/core/battle.lifecycle.js',

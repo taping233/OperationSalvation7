@@ -1,3 +1,6 @@
+import { GUN_POOL_IDS } from '../effects/requested-card-batch.js';
+import { requestedBattleState } from '../effects/requested-card-runtime.js';
+import { turn } from '../runtime/battle.runtime.js';
 /* battle.equipment.js —— 已穿戴装备、主动技能与开战被动（自 battle.engine.js 拆出）。
  * 规则数据经 battle.runtime.js 活绑定直读；引擎侧结算件由 createBattleEquipment 注入。 */
 import { esc } from '../../core/shared.js';
@@ -35,7 +38,8 @@ export function createBattleEquipment({
     card = getHostedExecutionCard(card);
     if (equipped.some(e => e.uid === uid)) return;
     equipped.push({ uid, card, used: false });
-    G.log(`[[icon:tools]] 装配【<b>${esc(card.name)}</b>】（${equipped.filter(e => !e.passive).length}/${equipCap()} 件）${equipSkillText(card) ? '——主动技能已就绪' : ''}`, 'ok');
+    if (card.id === 'tt13-astrolabe') requestedBattleState().astrolabes[uid] = { firstTurn:turn };
+    G.log(`[[icon:tools]] 装配【<b>${esc(card.name)}</b>】（${equipped.length}/${equipCap()} 件）${equipSkillText(card) ? '——主动技能已就绪' : ''}`, 'ok');
     // M2：结构化装备域——rules.equip 键位消费（G5 落地）
     const rules = card.rules && card.rules.equip;
     if (rules) {
@@ -123,6 +127,18 @@ export function createBattleEquipment({
     const structuredSkill = executionCard.rules?.equip?.skill?.ops?.length ? executionCard.rules.equip.skill : null;
     if (!text && !structuredSkill) return;
     if (e.used && structuredSkill?.oncePerBattle !== false) { G.log(`[[icon:cross]] 【${esc(e.card.name)}】的主动技能本场已经用过了`, 'warn'); return; }
+    if (e.card.id === 'tt13-magazine') {
+      clearTargetSession();
+      const pool = window.SDT.Cards.all().filter(card => GUN_POOL_IDS.includes(card.id));
+      if (!pool.length) return;
+      e.used = true;
+      for (let i = 0; i < 2; i++) {
+        const card = randomDiscoverCard(candidate => GUN_POOL_IDS.includes(candidate.id));
+        if (card) addTempCard(card);
+      }
+      requestBattleRender();
+      return;
+    }
     if (structuredSkill) {
       const once = structuredSkill.oncePerBattle !== false;
       if (once && e.used) { G.log(`[[icon:cross]] 【${esc(e.card.name)}】的主动技能本场已经用过了`, 'warn'); return; }
@@ -225,18 +241,18 @@ export function createBattleEquipment({
     if (mode !== 'boss') return;
     const chosen = (G.ownedCards || []).filter(o => o.card && isBattleStartEquip(o.card) && sel.has(o.uid))
       .map(o => ({ ...o, card: getHostedExecutionCard(o.card) }))
-      .filter(o => !(o.card.id === 'tt7-talisman' && o.uid != null && consumed.includes(o.uid)));
-    // 开战被动同样算「已穿戴」——角色信息区一并列出（老板 #9）；
-    // passive=true：不占用 #18 的 2 件装配上限（勾选即生效，未经打出装配）
+      .filter(o => !(o.uid != null && consumed.includes(o.uid)))
+      .slice(0, Math.max(0, equipCap() - equipped.length));
+    // 自动装配与手动穿戴共用装备栏位。
     chosen.forEach(o => {
-      if (!equipped.some(e => e.uid === o.uid)) equipped.push({ uid: o.uid, card: o.card, used: false, passive: true });
+      if (!equipped.some(e => e.uid === o.uid)) equipped.push({ uid: o.uid, card: o.card, used: false });
     });
     if (!chosen.length) return;
     G.log(`[[icon:bolt]] 开战被动：${chosen.map(o => esc(o.card.name)).join('、')} 自动生效`, 'ok');
     chosen.forEach(o => {
-      // 灵符开战触发即消耗；先退出可用牌区，额外抽牌不能再抽到或使用本牌。
+      // 开战装配即消耗；全部先退出可用牌区，避免抽牌效果再次抽到待装配的装备。
       // 旧档缺少 UID 时不写消耗记录，避免结算误删其他缺 UID 卡。
-      if (o.card.id === 'tt7-talisman' && o.uid != null) {
+      if (o.uid != null) {
         consumed.push(o.uid);
         if (!grave.includes(o.uid)) grave.push(o.uid);
         for (const pile of [hand, drawPile, discard]) {
@@ -245,6 +261,8 @@ export function createBattleEquipment({
           }
         }
       }
+    });
+    chosen.forEach(o => {
       // M3 收编：rules.equip.battleStart 单路径（runner 合成卡结算）；仅未迁卡走 desc 文本
       if (o.card.rules?.equip?.battleStart?.length && triggersM2) {
         triggersM2.resolveEquipOps(o.card, o.card.rules.equip.battleStart);

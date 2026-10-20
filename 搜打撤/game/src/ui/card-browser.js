@@ -25,7 +25,13 @@ export function refreshCardBrowser(root, { reset = false, items: suppliedItems =
   const focused = document.activeElement;
   const focusedItem = focused?.closest?.('[data-browser-key]');
   const focusedIndex = visibleIndex.get(focusedItem);
-  if (!reset && state.perPage && state.perPage !== perPage && focusedIndex !== undefined) state.page = Math.floor(focusedIndex / perPage);
+  if (!reset && state.perPage && state.perPage !== perPage) {
+    const first = state.page * state.perPage;
+    const selectedIndex = visible.findIndex((item, index) => index >= first && index < first + state.perPage
+      && (item.classList.contains('on') || item.getAttribute('aria-pressed') === 'true'));
+    const anchor = focusedIndex ?? (selectedIndex >= 0 ? selectedIndex : first);
+    state.page = Math.floor(anchor / perPage);
+  }
   state.perPage = perPage;
   const pages = Math.max(1, Math.ceil(visible.length / perPage));
   state.page = reset ? 0 : Math.min(state.page, pages - 1);
@@ -60,7 +66,38 @@ export function bindCardBrowser(root, { onOpen, onPage } = {}) {
   positions.delete(key); positions.set(key, state);
   while (positions.size > 64) positions.delete(positions.keys().next().value);
   instances.set(root, state);
-  let loadFrame = 0;
+  let loadFrame = 0, disposed = false;
+  const track = root.querySelector('.card-browser-track');
+  let measuredWidth = track.clientWidth;
+  const schedule = () => {
+    if (disposed || !isCardBrowserCurrent(root) || loadFrame || track.clientWidth <= 0) return;
+    loadFrame = requestAnimationFrame(() => {
+      loadFrame = 0;
+      if (!disposed && track.clientWidth > 0) {
+        measuredWidth = track.clientWidth;
+        refreshCardBrowser(root);
+      }
+    });
+  };
+  const resized = () => {
+    const width = track.clientWidth;
+    // Hidden surfaces keep their reading position; height changes from pagination
+    // must not schedule another layout pass.
+    if (width <= 0 || width === measuredWidth) return;
+    schedule();
+  };
+  const resize = typeof ResizeObserver === 'function' ? new ResizeObserver(resized) : null;
+  resize?.observe(track);
+  if (!resize) window.addEventListener('resize', resized);
+  const lifetime = new MutationObserver(() => {
+    if (root.isConnected) return;
+    disposed = true;
+    resize?.disconnect(); lifetime.disconnect();
+    window.removeEventListener('resize', resized);
+    if (loadFrame) cancelAnimationFrame(loadFrame);
+    loadFrame = 0;
+  });
+  lifetime.observe(root.ownerDocument, { childList: true, subtree: true });
   root.addEventListener('click', event => {
     if (!isCardBrowserCurrent(root) || root.closest('[hidden], [inert], [aria-hidden="true"], .closing')) return;
     const paging = event.target.closest('[data-browser-page]');
@@ -77,12 +114,6 @@ export function bindCardBrowser(root, { onOpen, onPage } = {}) {
     const direction = event.key === 'PageDown' ? 'next' : event.key === 'PageUp' ? 'previous' : null;
     if (direction) { event.preventDefault(); root.querySelector(`[data-browser-page="${direction}"]`).click(); }
   });
-  root.addEventListener('load', () => {
-    if (!isCardBrowserCurrent(root) || loadFrame) return;
-    loadFrame = requestAnimationFrame(() => {
-      loadFrame = 0;
-      refreshCardBrowser(root);
-    });
-  }, true);
+  root.addEventListener('load', schedule, true);
   refreshCardBrowser(root);
 }

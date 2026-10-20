@@ -17,13 +17,21 @@ export function dependencyBytes(root, { destination } = {}) {
   function binLink(file, key) {
     const target = readlinkSync(file), resolved = path.resolve(path.dirname(file), target);
     const relative = path.relative(modules, resolved), parts = relative.split(path.sep);
-    // npm's POSIX executable shims are relative .bin -> package file links.
-    // Package/workspace directory links and chained links do not prove installed bytes.
-    if (!key.startsWith('.bin/') || key.slice(5).includes('/') || !slash(target).startsWith('../')
-      || path.isAbsolute(target) || relative === '' || path.isAbsolute(relative) || parts.includes('..')
-      || parts.length < 2 || parts[0].startsWith('.') || DEPENDENCY_CACHES.has(parts[0])) {
+    const name = '[A-Za-z0-9_~-][A-Za-z0-9._~-]*';
+    const packageName = `(?:@${name}/)?${name}`;
+    // Accept only npm's root or recursively nested node_modules/.bin/<command>.
+    // A package's own arbitrary .bin directory is not an executable shim directory.
+    const binPath = new RegExp(`^(?:${packageName}/node_modules/)*\\.bin/${name}$`);
+    const localModules = path.dirname(path.dirname(file));
+    const localTarget = slash(path.relative(localModules, resolved));
+    const packageMatch = new RegExp(`^(${packageName})/(.+)$`).exec(localTarget);
+    if (binPath.exec(key)?.[0] !== key || !target.startsWith('../') || target.includes('\\')
+      || path.isAbsolute(target) || path.win32.isAbsolute(target) || target.slice(3).split('/').includes('..')
+      || relative === '' || path.isAbsolute(relative) || parts.includes('..') || !packageMatch) {
       throw new Error('依赖字节证据不接受非受控 .bin 链接：' + key);
     }
+    // Check every component from the installed dependency root, not just realpath:
+    // workspace/package directory links and chained links cannot prove copied bytes.
     let current = modules;
     for (let index = 0; index < parts.length; index++) {
       current = path.join(current, parts[index]);
@@ -31,6 +39,19 @@ export function dependencyBytes(root, { destination } = {}) {
       if (info.isSymbolicLink() || (index === parts.length - 1 ? !info.isFile() : !info.isDirectory())) {
         throw new Error('依赖 .bin 链接目标必须是无链接路径内的普通文件：' + key);
       }
+    }
+    const packageRoot = path.join(localModules, packageMatch[1]);
+    const manifestFile = path.join(packageRoot, 'package.json');
+    if (!lstatSync(manifestFile).isFile()) throw new Error('依赖 .bin 包声明必须是普通文件：' + key);
+    const manifest = JSON.parse(readFileSync(manifestFile, 'utf8'));
+    const command = key.split('/').at(-1);
+    const declared = typeof manifest.bin === 'string'
+      ? (typeof manifest.name === 'string' && manifest.name.split('/').at(-1) === command ? manifest.bin : undefined)
+      : (manifest.bin && Object.hasOwn(manifest.bin, command) ? manifest.bin[command] : undefined);
+    if (typeof declared !== 'string' || !declared || declared.includes('\\')
+      || path.isAbsolute(declared) || path.win32.isAbsolute(declared) || declared.split('/').includes('..')
+      || path.resolve(packageRoot, declared) !== resolved) {
+      throw new Error('依赖 .bin 链接必须匹配包 bin 声明：' + key);
     }
     return target;
   }

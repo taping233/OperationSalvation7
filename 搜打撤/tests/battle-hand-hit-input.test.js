@@ -109,3 +109,32 @@ it('does not start a new pickup when the existing aim consumes this pointerdown 
   event(cards[0],'pointerdown');
   expect(finish).toHaveBeenCalledOnce();expect(down).not.toHaveBeenCalled();
 });
+
+// A down accepted by the hit controller can still be refused by startAim.
+// Leaving that mode must not revive the stored physical press.
+it.each([
+  ['busy', { busy:true }], ['resolving', { phase:'resolving' }],
+  ['enemy', { phase:'enemy' }], ['infusion', { infusing:{} }],
+  ['discover', { discovering:{} }], ['choice', { choosing:{} }],
+  ['hand selection', { handSelecting:{} }], ['item target', { pendingItem:{} }],
+  ['card target', { pendingTarget:{} }], ['slam target', { slamPending:true }],
+  ['dart target', { dartPending:true }], ['deck', { viewingDeck:true }],
+  ['grave', { viewingGrave:true }], ['bag', { viewingBag:true }],
+])('invalidates a press across %s and ready even with the same UID list',(_label, state)=>{
+  const ready={phase:'player',turn:1};
+  controller.sync(1,ready);
+  event(cards[0],'pointerdown',{x:150});
+  controller.sync(1,{...ready,...state});
+  controller.sync(1,ready);
+  event(cards[1],'click');
+  expect(play).not.toHaveBeenCalled();expect(delegated).not.toHaveBeenCalled();
+  event(cards[0],'pointerdown',{x:150});event(cards[0],'click');
+  expect(play).toHaveBeenCalledExactlyOnceWith('7');
+});
+it('keeps reading and the same press across energy-only or unchanged renders',()=>{
+  controller.sync(1,{phase:'player',energy:9});
+  event(cards[0],'pointerdown',{x:150});
+  controller.sync(1,{phase:'player',energy:0});
+  expect(cards[0].parentElement.classList.contains('hand-reading')).toBe(true);
+  event(cards[1],'click');expect(play).toHaveBeenCalledExactlyOnceWith('7');
+});

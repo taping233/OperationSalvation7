@@ -56,6 +56,8 @@ npm run --silent docs:check -- --json
 
 改动涉及多处时可用 `workflow review --paths <CSV> --json` 汇总现行文档、测试和UI用例候选；加 `--input <verify报告>` 核验已有结果，详见[改动核验清单](CHANGE-REVIEW.md)。无Git恢复副本必须显式给路径，报告标 `snapshot`，不提供HEAD/index/CI证明。
 
+恢复副本、依赖链接变更或冻结交付前，先运行 `npm run workflow -- doctor --staged --json`：沿用冻结计划核对 Git/index 与全部适用锁依赖，输出阻塞、可运行性及待快照选择模式，不执行测试或复制依赖。无 Git、缺包与锁不匹配先修复，空 index 也不表示通过。普通 `doctor` 核关键工具和全部直接依赖，并显示 node_modules 是否为链接；链接可读不代表内容与锁一致。预检不替代既有门禁、依赖字节校验或实页，路径/测试预览与 `--staged` 互斥。
+
 明确测试列表可直接 `verify --tests`；影响面/门级别不明才用 `--plan`，示例不是必跑清单。skip、失败和中断不算通过；相同相关内容与环境复用证据，不相关改动不扩大定向闭包。工作树 verify 结果是复用候选，不能直接免除暂存门。混树提交前先 `npm run check:staged:isolate -- --plan --json` 核对再显式运行；有效报告的 gateReceipt 须精确匹配 index、选择范围、输入、环境与依赖后才可 `GATE_RECEIPT` 复用，任一不符补验，不绕过门禁。
 
 单张皮肤导入、目标素材检查、保留原始退出码的定向检查与当前内置页面取证，见[美术接入工具](art-workflow-tools.md)。目标检查和全局资产门分别报告，不互相替代。

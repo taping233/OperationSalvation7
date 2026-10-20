@@ -10,7 +10,7 @@ import { buildFirstSourceCardIndex } from './hosted-catalog-index.js';
 const SOURCE_CATALOGS = [
   // Source order is part of the contract: the first matching catalog is canonical.
   DATA.cardsSync?.cards,
-  dataSlice.TABLETOP12, dataSlice.TABLETOP11, dataSlice.TABLETOP10,
+  dataSlice.TABLETOP13, dataSlice.TABLETOP12, dataSlice.TABLETOP11, dataSlice.TABLETOP10,
   dataSlice.TABLETOP9, dataSlice.TABLETOP8, dataSlice.TABLETOP7, dataSlice.TABLETOP6,
   dataSlice.TABLETOP5, dataSlice.TABLETOP4, dataSlice.TABLETOP3, dataSlice.TABLETOP2,
   dataSlice.TABLETOP,

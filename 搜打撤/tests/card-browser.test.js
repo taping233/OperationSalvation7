@@ -28,6 +28,7 @@ describe('explicit card browser columns', () => {
       Array.from({ length: 12 }, (_, i) => `<button data-browser-key="${i}"><img alt=""></button>`).join(''),
       { rows: 1, columns: 4 });
     const root = document.querySelector('[data-card-browser]');
+    Object.defineProperty(root.querySelector('.card-browser-track'), 'clientWidth', { value: 900 });
     const items = [...root.querySelectorAll('[data-browser-key]')];
     const shown = () => items.filter(item => !item.hidden).map(item => item.dataset.browserKey);
     bindCardBrowser(root);

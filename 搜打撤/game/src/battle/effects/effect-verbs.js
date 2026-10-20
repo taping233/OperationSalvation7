@@ -33,6 +33,9 @@ const looksLikeEffect = (text) => ACTION_RE.test(String(text || ''));
 
 /* ---------- 1. 已实装的效果动词（检测句式，与结算代码一一对应） ---------- */
 const VERBS = [
+  { id: 'batch13FlameFuel', label: '火焰形态注能成长', impl: 'requested-card-runtime', pattern: /此后每注能2点，法伤额外\+1/ },
+  { id: 'batch13MindControl', label: '受伤小怪转为随从', impl: 'requested-card-runtime', pattern: /选择一名受伤的非BOSS敌人，使其变为己方随从/ },
+  { id: 'batch13ChaosDeck', label: '牌库同类升阶换费弃手牌', impl: 'requested-card-runtime', pattern: /将牌库中的所有招式与装备变为稀有度高1级/ },
   { id: 'attackMod', label: '攻击力增减（攻+N / 攻（-N）/ 获得 N 点攻击力）', impl: 'battle.effects', pattern: /攻\s*[（(]?\s*[+＋\-−]?\s*\d|获得\s*\d+\s*点攻击力|攻击力?\s*\+\s*\d|本回合攻击\s*\+\s*\d|攻击\s*\+\s*\d/ },
   { id: 'damage', label: '造成伤害（N 点攻击/法术/固定/真实伤害 / N 点法伤 / 区间 M-N）', impl: 'battle.effects', pattern: /造成[\s\d一两二三四五六七八九十]*点?(?:攻击|法术|固定|真实)?伤害|造成\s*\d+(?:\s*[-–~至]\s*\d+)?\s*点法(?:术)?伤|\d+\s*点?(?:法术|固定|真实)伤害|造成等同于|伤害\s*\+\s*\d/ },
   { id: 'aoeDamage', label: '对全体/多目标伤害', impl: 'battle.effects', pattern: /对所有敌|对全体敌|攻击全体敌|敌方全体|目标为敌方全体|目标为全体敌人|对随机敌/ },

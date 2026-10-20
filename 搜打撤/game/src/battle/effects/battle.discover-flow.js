@@ -1,5 +1,5 @@
 // @ts-check
-import { esc } from '../../core/shared.js';
+import { clone, esc } from '../../core/shared.js';
 import { buildDiscoverPool, pickRandomDiscoverCandidate } from './battle.discover-candidates.js';
 import {
   buildExplicitDiscoverState,
@@ -27,6 +27,7 @@ import {
  *   sellPrice: (card: DiscoverCard) => number,
  *   findByUid: (uid: string) => DiscoverCardEntry | null,
  *   addTempCard: (card: DiscoverCard, presentation?: { source: 'pouch' | 'discover-cast' }) => string,
+ *   addDeckCard?: (card: DiscoverCard) => string,
  *   queueCardExecution: (uid: string, card: DiscoverCard, fuelUids: string[], target: unknown, freeCost: boolean) => unknown,
  *   directPlayReason?: (card: DiscoverCard) => string,
  *   fireCatGift: (card: DiscoverCard) => void
@@ -34,7 +35,7 @@ import {
  * @property {{ getJobs: () => DiscoverQueueJob[], get: () => DiscoveringState, set: (state: DiscoveringState) => void, requestRender: () => void }} interaction
  * @property {{ next: () => number }} random
  * @property {{ currentClass: () => string | null | undefined, battleActive?: () => boolean, firstAliveTarget: () => unknown, hasAliveFoes: () => boolean, sweepDead: () => void, finishVictory: () => void }} battle
- * @property {{ returnToDeckBottom: (uids: string[]) => void, addArmor: (amount: number) => number, setCardOverride: (uid: string, card: DiscoverCard) => void, enqueueDelayed: (effect: DiscoverDelayedEffect) => void, swapCardCosts: (firstUid: string, secondUid: string) => void, removeOwnedCard?: (uid: string) => void }} effects
+ * @property {{ shuffleDeck?: () => void, returnToDeckBottom: (uids: string[]) => void, addArmor: (amount: number) => number, setCardOverride: (uid: string, card: DiscoverCard) => void, enqueueDelayed: (effect: DiscoverDelayedEffect) => void, swapCardCosts: (firstUid: string, secondUid: string) => void, removeOwnedCard?: (uid: string) => void }} effects
  * @property {{ log: (message: string, kind?: string) => void }} output
  */
 
@@ -217,6 +218,12 @@ export function createBattleDiscoverFlow(ports) {
       const entry = cards.findByUid(uid);
       if (!entry) throw new Error(`Missing discovered card after add: ${uid}`);
       cards.queueCardExecution(uid, entry.card, [], battle.firstAliveTarget(), true);
+    } else if (act === 'stellarCopies') {
+      if (!cards.addDeckCard || !effects.shuffleDeck) throw new Error('Missing stellarCopies deck ports');
+      cards.addTempCard(clone(card));
+      for (let i = 0; i < 2; i++) cards.addDeckCard({ ...clone(card), _castOnDraw: true });
+      effects.shuffleDeck();
+      output.log(`[[icon:question]] 发现：【<b>${esc(card.name)}</b>】置入手牌，将 2 张复制洗入牌库（抽到时免费施放，仍需满足注能和其他使用条件）`, 'loot');
     } else if (act === 'dup') {
       cards.addTempCard(card);
       cards.addTempCard(card);

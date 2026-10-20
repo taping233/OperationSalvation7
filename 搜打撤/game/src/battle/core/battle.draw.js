@@ -7,7 +7,7 @@ import { isQueuedCastSource } from './battle.card-presentation.js';
  */
 import { refillDrawPile } from '../bag/battle.deck.js';
 import { G, mode, hand, granted, drawPile, discard, lastDrawnUids, cardAnims,
-  ashRune, shaTransform, nextTmpSeq, effectiveHandMax,
+  ashRune, shaTransform, nextTmpSeq, effectiveHandMax, handSelecting,
   set$lastDrawnUids } from '../runtime/battle.runtime.js';
 import { splitEffectClauses } from '../effects/battle.effects.js';
 import { esc } from '../../core/shared.js';
@@ -24,6 +24,19 @@ export function createBattleDraw({
   applyTextEffects, resolveCard, fireDrawn, fireAcquire,
   checkSealTransformation, queueCardExecution, requestBattleRender,
 }) {
+function castDrawnCopy(uid, card) {
+    const queued = queueCardExecution(uid, card, [], alive()[0] || null, true);
+    if (queued === false) {
+      // 免费不等于免注能；失败保留实体供补足条件，不制造一次性免注能。
+      if (!hand.includes(uid)) hand.push(uid);
+      lastDrawnUids.push(uid);
+      cardAnims.push({ kind: 'draw', uid, name: card.name });
+      G.log(`[[icon:cards]] 【${esc(card.name)}】尚未满足施放条件，保留在手牌中`, 'warn');
+    } else {
+      G.log(`[[icon:flask]] <b>抽到时施放</b>：【${esc(card.name)}】免费排队施放`, 'sys');
+    }
+    return queued !== false;
+  }
 function drawCards(n) {
     let got = 0;
     let drawnToHand = 0;   // 真正入手张数（抽到即施放/灰烬符文直接释放的不占手牌，不计入）
@@ -41,6 +54,14 @@ function drawCards(n) {
         drawPile.push(uid);
         G.log(`[[icon:cross]] 转换目标「${esc(entry.card._battleTransformMissing)}」缺失，本次未抽取或施放`, 'warn');
         break;
+      }
+      // 星辰占卜副本走正式出牌队列；不占手牌，也不受手牌上限阻挡。
+      // 队列负责移动到已出/弃牌区并处理嵌套发现，不能在此提前弃置导致连抽回收同一张。
+      if (entry?.card?._castOnDraw) {
+        if (!castDrawnCopy(uid, entry.card)) drawnToHand++;
+        got++;
+        if (handSelecting) break; // 先完成本次支付选择，避免后续副本覆盖它。
+        continue;
       }
       const parts = entry ? splitEffectClauses(String(entry.card.desc || '')) : null;
       // 手牌满：灰烬符文「放不下的招式直接释放」（2026-09-16 定版）——直释不占手牌，继续抽；
@@ -138,7 +159,11 @@ function deckDraw({ n, type }) {
       while (drawPile.length && moved < n) {
         const uid = drawPile.pop();
         const o = findCard(uid);
-        if (o && o.card.type === type && hand.length < effectiveHandMax(R().battleHandMax)) {
+        if (o?.card.type === type && o.card._castOnDraw) {
+          castDrawnCopy(uid, o.card);
+          moved++;
+          if (handSelecting) break;
+        } else if (o && o.card.type === type && hand.length < effectiveHandMax(R().battleHandMax)) {
           hand.push(uid);
           moved++;
           lastDrawnUids.push(uid);

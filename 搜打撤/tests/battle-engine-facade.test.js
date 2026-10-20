@@ -11,7 +11,7 @@ import { describe, expect, it } from 'vitest';
 import * as Engine from '../game/src/battle/core/battle.engine.js';
 
 const BASELINE_EXPORTS = [
-  'requestBattleRender', 'interactionOf', 'cloneData', 'cardIdentity', 'R', 'alive',
+  'requestBattleRender', 'interactionOf', 'cloneData', 'cardIdentity', 'R', 'alive', 'awaitTriggeredActions',
   'intentFor', 'drawCards', 'resolveFoeDefeat', 'sweepDead', 'nestPhase', 'grantSha',
   'findCard', 'findEffectiveCard', 'infusionFuelReason', 'infuseOf', 'effCostOf', 'swapCardCosts', 'restore', 'finish',
   'cancelInteraction', 'flee', 'handCurseSpecs', 'getSnapshot', 'snapshotSignature',
@@ -34,7 +34,7 @@ describe('battle.engine 导出面守卫', () => {
     expect(Object.keys(Engine).sort()).toEqual([...BASELINE_EXPORTS].sort());
   });
 
-  it('基线数量 = 76', () => {
-    expect(BASELINE_EXPORTS.length).toBe(76);
+  it('基线数量 = 77', () => {
+    expect(BASELINE_EXPORTS.length).toBe(77);
   });
 });

@@ -40,7 +40,7 @@ quick / full 执行剧情编译、语法、数据、类型、lint、增量资产
 
 A 档三证据：①与幸存正本逐字相同或全库零引用（搜索含 html/md）；②级联/调用关系可静态证明；③加载序靠后的文件没有同名活规则。证据照常落档；删除获批不代表自动提交获批。本矩阵描述人工验收，不改 `acceptance-gate.mjs` 的选择算法或提交钩子；钩子按实际暂存路径运行，冲突先说明，不自行绕过。
 
-工具说明：`check:syntax` 用项目 Acorn 查 `game/src`、`game/tools`、`scripts` 的语法；`npm test` 的 pretest 先编译剧情并校验数据；`npm run build` 保留 prebuild/postbuild 检查；`npm run check:quality` 在可构建的干净工作区按序执行完整质量门（混树时不运行含 build 的组合入口）。混合工作树用 `npm run check:staged:isolate -- --plan` 核对后显式运行隔离验收：冻结实际 index、按对象导出原始字节并复制经锁核对的依赖；依赖不符、index 变化、检查改写快照、失败/中断都拒绝通过；冻结报告的 gateReceipt 精确匹配 index、选定检查、输入和依赖/环境后可复用，工作树 verify 报告只是候选。Git hooksPath 在同一仓库的工作树间共享，隔离工作树检查新钩子直接显式运行该钩子模拟。
+工具说明：`check:syntax` 用项目 Acorn 查 `game/src`、`game/tools`、`scripts` 的语法；`npm test` 的 pretest 先编译剧情并校验数据；`npm run build` 保留 prebuild/postbuild 检查；`npm run check:quality` 在可构建的干净工作区按序执行完整质量门（混树时不运行含 build 的组合入口）。混合工作树用 `npm run check:staged:isolate -- --plan` 核对后显式运行隔离验收：冻结实际 index、按对象导出原始字节并复制经锁核对的依赖；依赖字节证据仅接受 npm 根层或递归 `node_modules/.bin/<命令>` 相对文件链接，目标须在同层包内、匹配包 `bin` 声明，且路径各段均无链接；任意包内链接、越界、悬空和链式链接拒绝。依赖不符、index 变化、检查改写快照、失败/中断都拒绝通过；冻结报告的 gateReceipt 精确匹配 index、选定检查、输入和依赖/环境后可复用，工作树 verify 报告只是候选。Git hooksPath 在同一仓库的工作树间共享，隔离工作树检查新钩子直接显式运行该钩子模拟。
 
 ## 卡牌图鉴生成
 

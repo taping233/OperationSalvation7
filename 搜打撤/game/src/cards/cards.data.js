@@ -576,7 +576,7 @@ export const dataSlice = {
       { id: "cmtn1gfhczzj", cls: "降临者", name: "厄运", cost: 0, rarity: "职业", type: "法术", dmg: 0, desc: "随机获取1张能施加诅咒的招式", value: 2, sellable: false, unrandom: true },
       { id: "cmtn1i64j7y7", cls: "侠客", name: "盗宝", cost: 1, rarity: "职业", type: "武术", dmg: 0, desc: "发现一张装备卡", value: 3, sellable: false, unrandom: true },
       { id: "cmtn1lbhbqi4", cls: "降临者", name: "充能火球", cost: 1, rarity: "职业", type: "法术", dmg: 4, dmgType: "spell", desc: "4‘，回合开始时，本牌伤害+1", value: 3, sellable: false, unrandom: true },
-      { id: "cmtn1ntxzoc4", cls: "降临者", name: "火焰形态", cost: 1, rarity: "职业", type: "法术", dmg: 0, desc: "本局对战中，法伤+1", value: 2, sellable: false, unrandom: true },
+      { id: "cmtn1ntxzoc4", cls: "降临者", name: "火焰形态", cost: 1, rarity: "职业", type: "法术", dmg: 0, desc: "本局对战中法伤+1；此后每注能2点，法伤额外+1。", value: 2, sellable: false, unrandom: true },
       { id: "cmtn1p9vb5au", cls: "法师", name: "千变万化", cost: 2, rarity: "职业", type: "法术", dmg: 0, desc: "发现一种形态并释放", value: 3, sellable: false, unrandom: true },
       { id: "cmtn1r10xnl1", cls: "降临者", name: "黑暗形态", cost: 1, rarity: "职业", type: "法术", dmg: 0, desc: "本局对战中，每当你发现卡牌时，增加1个可选项", value: 2, sellable: false, unrandom: true },
       "cmtn1wnhhym",   // 同名不同效果版本按老板 2026-09-19 规则追加「-改」
@@ -634,5 +634,288 @@ export const dataSlice = {
       { id: 'tt12-backupcell',  name: '后备能源', cost: 6, rarity: '史诗', type: '法术', draw: 2, desc: '抽2张牌并回复所有费用，消耗区中每有一张法术牌，本牌费用-1', rules: { version: 1, battle: { target: { side: null, area: false }, costModifiers: [{ kind: 'consumedSpellDiscount', amount: 1 }] } } },
       { id: 'tt12-freezeray',   name: '冷冻射线', cost: 1, rarity: '稀有', type: '法术', dmg: 4, dmgType: 'spell', desc: '造成4点法伤；若此前其未曾受到过伤害，对其附加冰冻' },
     ],
+
+    // 2026-10-20：新增卡牌定版；装备费用0，枪术主动每战一次。
+    TABLETOP13: [
+  {
+    "id": "tt13-spring",
+    "name": "源头活水",
+    "cost": 0,
+    "rarity": "古朴",
+    "type": "法术",
+    "desc": "复原你的英雄技能并抽1张牌。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        },
+        "hosted": [
+          "batch13-spring"
+        ]
+      }
+    }
+  },
+  {
+    "id": "tt13-magazine",
+    "name": "扩容弹夹",
+    "cost": 0,
+    "rarity": "古朴",
+    "type": "装备",
+    "desc": "主动技能：随机获取两张枪术招式。本局对战只能使用一次。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        },
+        "hosted": [
+          "batch13-magazine"
+        ]
+      }
+    }
+  },
+  {
+    "id": "tt13-snipe",
+    "name": "狙杀",
+    "cost": 2,
+    "rarity": "古朴",
+    "type": "武术",
+    "desc": "造成9点固定伤害，击杀敌人回复1点能量。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        },
+        "hosted": [
+          "batch13-snipe"
+        ]
+      }
+    },
+    "dmg": 9,
+    "dmgType": "fixed"
+  },
+  {
+    "id": "tt13-guard",
+    "name": "护身",
+    "cost": 1,
+    "rarity": "稀有",
+    "type": "武术",
+    "desc": "获得6点护甲，如果你本回合没有造成任何伤害，额外获得4点护甲。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        },
+        "hosted": [
+          "batch13-guard"
+        ]
+      }
+    }
+  },
+  {
+    "id": "tt13-bitter-rain",
+    "name": "苦雨",
+    "cost": 1,
+    "rarity": "稀有",
+    "type": "法术",
+    "desc": "对一名敌人附加2层中毒，如果其已有诅咒，额外附加1项其他诅咒。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        },
+        "hosted": [
+          "batch13-bitter-rain"
+        ]
+      }
+    }
+  },
+  {
+    "id": "tt13-mind-control",
+    "name": "精神控制",
+    "cost": 2,
+    "rarity": "职业",
+    "type": "法术",
+    "desc": "选择一名受伤的非BOSS敌人，使其变为己方随从。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        },
+        "hosted": [
+          "batch13-mind-control"
+        ]
+      }
+    },
+    "cls": "牧师",
+    "unrandom": true
+  },
+  {
+    "id": "tt13-flame-staff",
+    "name": "火焰法杖",
+    "cost": 0,
+    "rarity": "稀有",
+    "type": "装备",
+    "desc": "回合开始时，对所有敌人造成2点法术伤害。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onTurnStart": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "allEnemies"
+          }
+        ],
+        "onPlay": []
+      }
+    },
+    "dmg": 2,
+    "dmgType": "spell"
+  },
+  {
+    "id": "tt13-scale-armor",
+    "name": "逆鳞护甲",
+    "cost": 0,
+    "rarity": "史诗",
+    "type": "装备",
+    "desc": "每次受到伤害后，对随机敌人造成3点固定伤害，并有50%概率抽1张牌。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        },
+        "hosted": [
+          "batch13-scale-armor"
+        ]
+      }
+    }
+  },
+  {
+    "id": "tt13-astrolabe",
+    "name": "双相星盘",
+    "cost": 0,
+    "rarity": "传说",
+    "type": "装备",
+    "desc": "在你本回合打出第一张武术招式后回复1点能量；下回合切换为法术，逐回合交替。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        },
+        "hosted": [
+          "batch13-astrolabe"
+        ]
+      }
+    }
+  },
+  {
+    "id": "tt13-soul-contract",
+    "name": "灵魂契约",
+    "cost": 0,
+    "rarity": "职业",
+    "type": "法术",
+    "desc": "选择1名敌人并标记；其受到伤害后，对随机一名其他敌人造成2点真实伤害。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        },
+        "hosted": [
+          "batch13-soul-contract"
+        ]
+      }
+    },
+    "cls": "降临者",
+    "unrandom": true
+  },
+  {
+    "id": "tt13-stellar-divination",
+    "name": "星辰占卜",
+    "cost": 1,
+    "rarity": "职业",
+    "type": "法术",
+    "desc": "发现1张法术牌，并将其具有抽到时施放的2张复制洗入牌库。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        },
+        "hosted": [
+          "batch13-stellar-divination"
+        ]
+      }
+    },
+    "cls": "牧师",
+    "unrandom": true
+  },
+  {
+    "id": "tt13-chaos-deck",
+    "name": "混乱套牌",
+    "cost": 1,
+    "rarity": "传说",
+    "type": "法术",
+    "desc": "将牌库中的所有招式与装备变为稀有度高1级的同类型卡牌（最高传说），随机交换费用，然后弃掉所有手牌。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        },
+        "hosted": [
+          "batch13-chaos-deck"
+        ]
+      }
+    }
+  },
+  {
+    "id": "tt13-mercy",
+    "name": "手下留情",
+    "cost": 1,
+    "rarity": "稀有",
+    "type": "武术",
+    "desc": "攻（+3），无法致死（至少保留1点生命）。",
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        },
+        "hosted": [
+          "batch13-mercy"
+        ]
+      }
+    },
+    "dmg": 3,
+    "dmgType": "attack"
+  }
+],
 
 };

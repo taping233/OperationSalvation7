@@ -51,9 +51,9 @@ export function visualFrame(signal) {
 }
 
 // Only first-screen representative images are gated; long card lists retain lazy loading.
-export async function waitPageVisual(root, { signal, extraRoots = [], background, timeout = 1500 } = {}) {
+export async function waitPageVisual(root, { signal, extraRoots = [], background, timeout = 1500, frameReady = false } = {}) {
   if (signal?.aborted) return false;
-  await visualFrame(signal);
+  if (!frameReady) await visualFrame(signal);
   if (signal?.aborted || !root?.isConnected) return false;
   const controller = new AbortController();
   let release;
@@ -169,7 +169,9 @@ export function stagePageVisual(ui, reveal, { kind = 'page' } = {}) {
       await visualFrame(controller.signal);
       // Dedicated city cuts own their cover; avoid stacking a second dark veil over them.
       if (body.parentElement.querySelector('.camp-entry-cut')) cover.style.visibility = 'hidden';
-      const ready = await waitPageVisual(body, { signal: controller.signal, background: ui._pageBgReady });
+      // The layout frame above also serves readiness measurement. Do not wait
+      // for it twice; waitPageVisual still owns the final presentation frame.
+      const ready = await waitPageVisual(body, { signal: controller.signal, background: ui._pageBgReady, frameReady: true });
       if (!ready || !current()) return;
       delete overlay.dataset.visualPending;
       reveal();

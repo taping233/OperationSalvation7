@@ -18,7 +18,9 @@ export function createBattleActionRunner({
     const generation = session.generation;
     const queue = session.actionQueue;
     let presentationDeparted = false;
-    setBattleState(transitionBattle(getBattleState(), BATTLE_PHASES.RESOLVING));
+    // Reactive casts belong to the enemy phase; its async owner waits for this queue.
+    if (getBattleState().phase !== BATTLE_PHASES.ENEMY)
+      setBattleState(transitionBattle(getBattleState(), BATTLE_PHASES.RESOLVING));
     setBusy(true);
     render();
 

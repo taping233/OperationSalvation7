@@ -91,7 +91,7 @@ describe('E6 battle-entry rule capability', () => {
     const results = cards.map(card => ({ id: card.id, result: inspectCardRuleCapability(card) }));
     expect(results.filter(entry => !entry.result.ok)).toEqual([]);
     expect({ total: cards.length, structured: results.filter(entry => entry.result.kind === 'supported').length,
-      legacy: results.filter(entry => entry.result.kind === 'legacy').length }).toEqual({ total: 268, structured: 217, legacy: 51 });
+      legacy: results.filter(entry => entry.result.kind === 'legacy').length }).toEqual({ total: 281, structured: 230, legacy: 51 });
     expect(Cards.CARDS_SYNC).toHaveLength(57);
     expect(Cards.CARDS_SYNC.every(card => inspectCardRuleCapability(card).kind ===
       (['cmtn125e1nk0', 'tt2-forestarrow'].includes(card.id) ? 'supported' : 'legacy'))).toBe(true);

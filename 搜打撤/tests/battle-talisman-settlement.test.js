@@ -35,7 +35,8 @@ it('灵符自动装配后战胜结算只入消耗区一次，同类未选卡保�
     for (const uid of ['talisman', 'eye', 'kill']) BattleSession.commands.selectDeckCard(uid);
     BattleSession.commands.confirmDeck();
     await vi.advanceTimersByTimeAsync(1000);
-    expect(R.consumed).toEqual(['talisman']);
+    expect(R.consumed).toEqual(['talisman', 'eye']);
+    for (const uid of ['talisman', 'eye']) expect([...R.hand, ...R.drawPile, ...R.discard]).not.toContain(uid);
     expect(R.hand).toContain('kill');
     // Settlement receives the same UID through both lists only once.
     R.played.push('talisman');
@@ -43,7 +44,9 @@ it('灵符自动装配后战胜结算只入消耗区一次，同类未选卡保�
     await vi.advanceTimersByTimeAsync(3000);
     expect(s.game.battleActive).toBe(false);
     expect(s.game.usedPocket.filter(p => p.card.id === talisman.id)).toMatchObject([{ count: 1 }]);
-    expect(s.game.ownedCards.map(o => o.uid)).toEqual(expect.arrayContaining(['unselected', 'eye']));
+    expect(s.game.ownedCards.map(o => o.uid)).toContain('unselected');
+    expect(s.game.ownedCards.map(o => o.uid)).not.toContain('eye');
+    expect(s.game.usedPocket.filter(p => p.card.id === eye.id)).toMatchObject([{ count: 1 }]);
     expect(s.game.ownedCards.some(o => o.uid === 'talisman')).toBe(false);
   } finally {
     vi.clearAllTimers();

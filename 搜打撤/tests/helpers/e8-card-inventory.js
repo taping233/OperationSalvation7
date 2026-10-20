@@ -1,3 +1,4 @@
+import approvedBatch from '../fixtures/approved-card-batch-20261020.json';
 import { validateCardRules } from '../../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../../game/src/cards/card-rules.capability.js';
 import { isApprovedLampArmorRemoval } from './card-catalog-approved-revisions.js';
@@ -145,7 +146,12 @@ export function compareMigrationInventories(before, after, approvedIds, expected
   const delta = describeStage('E8 approved migration', previous, current);
   delta.changed = delta.changed.filter(({ id }) => !isApprovedBackupcellRename(
     previous.find(card => card.id === id), current.find(card => card.id === id)));
-  if (delta.added.length || delta.removed.length) throw new Error('migration: card IDs changed');
+  const approvedAddedIds = approvedBatch.additions.map(card => card.id).sort();
+  if (!equal(delta.added.slice().sort(), approvedAddedIds) || delta.removed.length) throw new Error('migration: card IDs changed');
+  for (const approved of approvedBatch.additions) {
+    if (!equal(current.find(card => card.id === approved.id), approved))
+      throw new Error(`migration: ${approved.id} differs from approved new card`);
+  }
   if (!equal(delta.changed.map(row => row.id).sort(), [...approvedIds].sort())) {
     const actual = new Set(delta.changed.map(row => row.id));
     const expected = new Set(approvedIds);
@@ -169,7 +175,10 @@ export function compareMigrationInventories(before, after, approvedIds, expected
       && equal(oldCard.rules, { ...expected, triggers: { onPlay: expected.triggers.onPlay.map((op, index) =>
         index === 1 ? { ...op, act: 'zeroCost' } : op) } })
       && equal(nextCard, { ...oldCard, rules: expected });
-    if (id === 'tt7-ironphalanx' ? !ironPhalanxRevision
+    const flameRevision = id === approvedBatch.flame.id
+      && equal(oldCard, { ...approvedBatch.flame, desc:'本局对战中，法伤+1', rules:{ version:1, battle:{ target:{ side:'self', area:false } }, triggers:{ onPlay:[{ op:'blessing', key:'spellUp' }] } } })
+      && equal(nextCard, approvedBatch.flame);
+    if (id === approvedBatch.flame.id ? !flameRevision : id === 'tt7-ironphalanx' ? !ironPhalanxRevision
       : oldCard.rules !== undefined || !equal(fields, expectedFields)
         || (lampRemoval && !isApprovedLampArmorRemoval(oldCard, nextCard))
         || Object.entries(expectedFace).some(([key, value]) => !equal(nextCard[key], value))

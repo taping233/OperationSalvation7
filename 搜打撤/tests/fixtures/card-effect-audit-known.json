@@ -134,6 +134,30 @@
         "kind": "audit_context",
         "detail": "2026-10-18 批准的腐化之种死亡群体真伤由 rot-seed hosted 标记及真实战斗死亡结算负责；逐句即时审计没有被标记者死亡上下文。tests/ember-burst-rot-seed.test.js 覆盖真实出牌附毒、标记目标死亡后按死亡时中毒层数对其余全部敌人造成真实伤害。"
       }
+    },
+    {
+      "id": "cmtn1ntxzoc4",
+      "clause": "此后每注能2点，法伤额外+1",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "requested-card-runtime 的 requestedInfusion 按实际燃料累计；文本逐句审计不驱动真实注能。requested-equipment-effects.test.js 覆盖跨卡累计、奇数余量及跨战斗清空。"
+      }
+    },
+    {
+      "id": "tt13-mind-control",
+      "clause": "选择一名受伤的非BOSS敌人，使其变为己方随从",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "由 hosted 结算调用 requested-card-runtime 转移敌人；文本审计不调用 hosted。requested-card-integration.test.js 覆盖受伤小怪转换、健康目标和 BOSS 拒绝。"
+      }
+    },
+    {
+      "id": "tt13-chaos-deck",
+      "clause": "将牌库中的所有招式与装备变为稀有度高1级的同类型卡牌（最高传说），随机交换费用，然后弃掉所有手牌",
+      "reason": {
+        "kind": "audit_context",
+        "detail": "由 hosted 结算调用 requested-card-runtime 修改当前抽牌堆及弃手牌；文本审计不调用 hosted。requested-card-batch.test.js 与 requested-card-integration.test.js 覆盖类型、顶级、空池、费用排列和范围。"
+      }
     }
   ]
 }

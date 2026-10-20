@@ -458,6 +458,25 @@ function plInstall() {
       || (inShop ? null : find('czClose'))
       || null;
   };
+  // 两种推进共用测量前等待；保留轮询上限、收尾缓冲与 turbo 关闭顺序。
+  async function prepareBattleMeasurement(A) {
+    for (let q = 0; q < 40; q++) {
+      const s = window.SDT.Battle?.getSnapshot?.();
+      if (s && !s.busy && !s.deckSelection) break;
+      await new Promise(r => setTimeout(r, 250));
+    }
+    await new Promise(r => setTimeout(r, 1200));
+    await A.setTurbo(false);
+  }
+  async function redeployFromHub(A, events) {
+    events.push({ redeploy: true });
+    await A.act({ type: 'ui', name: 'hubTab', params: { tab: 'deploy' } });
+    await new Promise(r => setTimeout(r, 500));
+    await A.act({ type: 'ui', name: 'deploy' });
+    await new Promise(r => setTimeout(r, 700));
+    await A.act({ type: 'ui', name: 'confirmDeploy' });
+    await new Promise(r => setTimeout(r, 1500));
+  }
   async function runDrive(opts = {}) {
     // 推进到 targetLayer 层稳态；stopAtBattle 时停在第一场战斗战场稳态（turbo 关）
     const A = Agent();
@@ -483,13 +502,7 @@ function plInstall() {
         const b = A.observe().battle;
         if (opts.stopAtBattle && !b?.deckSelection) {
           // 战场稳态等待后交还外部测量
-          for (let q = 0; q < 40; q++) {
-            const s = window.SDT.Battle?.getSnapshot?.();
-            if (s && !s.busy && !s.deckSelection) break;
-            await new Promise(r => setTimeout(r, 250));
-          }
-          await new Promise(r => setTimeout(r, 1200));
-          await A.setTurbo(false);
+          await prepareBattleMeasurement(A);
           return { ok: true, stoppedAt: 'battle', steps: i, events, battle: battleInfo(), run: runInfo() };
         }
         const fight = await fightWithGreedy(A);
@@ -534,13 +547,7 @@ function plInstall() {
           await A.step(A.policies.greedy(), { commandTimeoutMs: 20000 });
           continue;
         }
-        events.push({ redeploy: true });
-        await A.act({ type: 'ui', name: 'hubTab', params: { tab: 'deploy' } });
-        await new Promise(r => setTimeout(r, 500));
-        await A.act({ type: 'ui', name: 'deploy' });
-        await new Promise(r => setTimeout(r, 700));
-        await A.act({ type: 'ui', name: 'confirmDeploy' });
-        await new Promise(r => setTimeout(r, 1500));
+        await redeployFromHub(A, events);
         continue;
       }
       const r = await A.step(A.policies.greedy(), { commandTimeoutMs: 20000 });
@@ -575,13 +582,7 @@ function plInstall() {
             }
             await new Promise(r => setTimeout(r, 120));
           }
-          for (let q = 0; q < 40; q++) {
-            const s = window.SDT.Battle?.getSnapshot?.();
-            if (s && !s.busy && !s.deckSelection) break;
-            await new Promise(r => setTimeout(r, 250));
-          }
-          await new Promise(r => setTimeout(r, 1200));
-          await A.setTurbo(false);
+          await prepareBattleMeasurement(A);
           return { ok: true, stoppedAt: 'boss-battle', steps: i, events, battle: battleInfo(), run: runInfo() };
         }
         events.push({ note: 'battle-without-deck' });
@@ -599,13 +600,7 @@ function plInstall() {
       }
       if (obs.phase === 'hub' || obs.phase === 'settlement') {
         if (obs.phase === 'settlement') { await A.step(A.policies.greedy(), { commandTimeoutMs: 20000 }); continue; }
-        events.push({ redeploy: true });
-        await A.act({ type: 'ui', name: 'hubTab', params: { tab: 'deploy' } });
-        await new Promise(r => setTimeout(r, 500));
-        await A.act({ type: 'ui', name: 'deploy' });
-        await new Promise(r => setTimeout(r, 700));
-        await A.act({ type: 'ui', name: 'confirmDeploy' });
-        await new Promise(r => setTimeout(r, 1500));
+        await redeployFromHub(A, events);
         continue;
       }
       const r = await A.step(A.policies.greedy(), { commandTimeoutMs: 20000 });

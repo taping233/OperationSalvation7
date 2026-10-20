@@ -490,6 +490,8 @@ function createBattleResolution(ports) {
       assertCardRulesExecutable(card);
     }
 
+    if (ports.resolveRequestedCard && (yield* ports.resolveRequestedCard(card, target, ports))) return;
+
     if (card.id === 'cc-rot-seed') {
       const foe = target && !target.dead && target.hp > 0 ? target : null;
       if (foe) {

@@ -1,0 +1,10 @@
+ DEPRECATED  "environmentMatchGlobs" is deprecated. Use `test.projects` to define different configurations instead.
+
+ RUN  v3.2.7 /workspace/scratch/b7a53a06c872/work-reward-9b0fe79
+
+···················································································································································
+
+ Test Files  10 passed (10)
+      Tests  147 passed (147)
+   Start at  02:51:25
+   Duration  3.73s (transform 795ms, setup 0ms, collect 1.02s, tests 4.23s, environment 3.43s, prepare 630ms)

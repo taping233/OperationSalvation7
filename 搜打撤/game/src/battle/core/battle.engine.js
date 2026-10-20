@@ -1,3 +1,4 @@
+import { recordRequestedDamage, requestedPlayerDamaged, requestedTargetReason, resolveRequestedCard } from '../effects/requested-card-runtime.js';
 import { withBlessingChoices } from '../effects/random-blessings.js';
 import { executeTargetReason } from '../effects/effect-steps.m2.js';
 import { isFoeFightCard, withFoeFightTargets } from '../effects/battle.foe-fight.js';
@@ -40,7 +41,7 @@ import { createBattleExecutionSession } from '../runtime/battle.execution-sessio
 import { createBattleActionRunner } from '../runtime/battle.action-runner.js';
 import { actionCancellationError, createStagedPlayback, throwIfActionCancelled } from '../runtime/battle.staged-playback.js';
 import {
-  BATTLE_PHASES, beginTargeting,
+  BATTLE_PHASES, transitionBattle, beginTargeting,
 } from '../runtime/battle.state.js';
 import { Random } from '../../core/random.js';
 import * as Combat from './combat.js';
@@ -77,6 +78,42 @@ function deferEndTurn(resume) {
     !infusing && !handSelecting && !choosing && !discovering && !interaction &&
     !handSelectQueue.length && !choiceQueue.length && !discoverQueue.length);
   executionSession.resumeTurnEnd();
+}
+// Pause the enemy continuation only at an owned async boundary. Interactive casts
+// temporarily expose player selection controls, with turnEndPending blocking new plays.
+let triggeredActionsWait = null;
+export function awaitTriggeredActions() {
+  const token = battleState.token;
+  if (triggeredActionsWait?.token === token) return triggeredActionsWait.promise;
+  const promise = waitTriggeredActions().finally(() => {
+    if (triggeredActionsWait?.promise === promise) triggeredActionsWait = null;
+  });
+  triggeredActionsWait = { token, promise };
+  return promise;
+}
+async function waitTriggeredActions() {
+  const token = battleState.token;
+  await actionQueue.idle();
+  if (!G?.battleActive || battleState.token !== token || battleState.phase !== BATTLE_PHASES.ENEMY) return;
+  settlePendingSelections();
+  const ready = () => !infusing && !handSelecting && !choosing && !discovering && !interaction &&
+    !handSelectQueue.length && !choiceQueue.length && !discoverQueue.length;
+  if (ready()) return;
+  await new Promise(resolve => {
+    const accepted = executionSession.deferTurnEnd(() => {
+      if (G?.battleActive && battleState.token === token) {
+        set$battleState(transitionBattle(battleState, BATTLE_PHASES.ENEMY));
+        set$busy(true);
+      }
+      resolve();
+    }, ready, resolve);
+    // An existing continuation owns phase transfer; never steal it or leave a waiter pending.
+    if (!accepted) { resolve(); return; }
+    set$battleState(transitionBattle(battleState, BATTLE_PHASES.PLAYER));
+    set$busy(false);
+    requestBattleRender();
+    executionSession.resumeTurnEnd();
+  });
 }
 function warnCardRuleRejection(message) {
   const battleToken = battleState.token;
@@ -164,7 +201,8 @@ const shuffle = shuffleCards;
       G.log(`[[icon:sparkles]] <b>致命一击被挡下！</b>（死亡保险剩余 ${deathSave} 次，本回合无敌）`, 'ok');
       return;
     }
-    G.hp = G.hp - n;   // U18：去钳位，负血保留真实值（展示层统一 max(0,hp)）
+    G.hp = G.hp - n;
+    requestedPlayerDamaged(n, { alive, hitFoe, drawCards });   // U18：去钳位，负血保留真实值（展示层统一 max(0,hp)）
     if (n > 0 && unyieldRune) { const g = drawCards(1); G.log('[[icon:cards]] <b>不屈符文</b>：受到伤害，抽 ' + g + ' 张牌', 'sys'); }
     floats.push({ unit: 'self', text: '-' + n, cls: 'hurt' });
     G.log(`[[icon:blood]] 受到 <b>${n}</b> 点伤害（${Math.max(0, G.hp)}/${G.maxHp}）`, 'warn');
@@ -178,6 +216,16 @@ const shuffle = shuffleCards;
 // combat.js 导出全是函数/常量，快照安全。
 const combatPort = {
   ...Combat,
+  tickPoison(target) {
+    const result = Combat.tickPoison(target);
+    if (foes.includes(target)) recordRequestedDamage(target, result?.dealt || 0, { name:'中毒' }, { alive, hitFoe });
+    return result;
+  },
+  dealDamage(attacker, target, amount, type) {
+    const result = Combat.dealDamage(attacker, target, amount, type);
+    if (foes.includes(target)) recordRequestedDamage(target, result.dealt, { name:'伤害' }, { alive, hitFoe });
+    return result;
+  },
   addCurse(t, key, n) {
     const applied = Combat.addCurse(t, key, n);
     if (t && !t.dead && t !== pstat) {
@@ -233,7 +281,7 @@ const applyTextEffects = createEffectExecutor({
     getPlayerHp: () => G.hp,
     getHandSize: () => hand.length,
     getHandCards: () => hand.map(findCard).filter(Boolean),
-    burstPoison: t => Combat.tickPoison(t),
+    burstPoison: t => combatPort.tickPoison(t),
     deckDraw,
     fleeBattle: () => flee(),
     sweepDead,
@@ -328,7 +376,7 @@ function captureSnapshotInput() {
       handInfuseCounts,
       pdef, pstat, foes, deathFxPending: foes.map(foe => stagedDeathFx.has(foe)), allies, hand, drawPile, discard, grave, consumed, infusing, discovering,
       handSelecting, choosing, pendingTarget: pTgt, pendingHint, viewingGrave, viewingDeck, viewingBag,
-      dreadShown, selectingDeck, deckNeed: R().bossDeckSize, selDeckMax, selShaN, sel, selPool,
+      dreadShown, selectingDeck, deckNeed: Math.min(R().bossDeckSize, selPool.filter(o => !equipment.isBattleStartEquip(o.card)).length + Math.min(equipCap(), selPool.filter(o => equipment.isBattleStartEquip(o.card)).length)), selDeckMax, selShaN, sel, selPool,
       potionBar, pendingItem: pItem, slamPending: !!interactionOf('slam'), dartPending: !!interactionOf('dart'),
       equipped: equipped.map(e => ({
         uid: e.uid, card: e.card, name: e.card.name, desc: String(e.card.desc || ''),
@@ -577,8 +625,10 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
   // 出牌结算（目标：单点卡 = target；群体卡 = 所有存活敌人；infused = 作为注能主卡打出；
   // fuelCost = 注能牺牲品费用合计，供「N 倍于被注能卡牌价格」类效果折算；uid = 成长/容器定位）
   const resolveCard = createBattleResolution({
+    resolveRequestedCard,
     emitRecast,
     readState: () => ({ mode, playedMovesThisTurn, infuseFuels, grave, allSpellsInfused }),
+    restoreHeroSkill: () => bag.restoreHeroSkill(),
     getHandSize: () => hand.length,
     getPlayerStatus: () => pstat,
     esc,
@@ -697,6 +747,7 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
           spellPower: G.spellPower || 0,   // spellUp 由 status 传入只算一次
           status: pstat.status,
         }, t, 4, Combat.TYPES.SPELL);
+        recordRequestedDamage(t, r.dealt, { name:'深渊降焰' }, { alive, hitFoe });
         if (r.dealt > 0) floats.push({ unit: foeIdx(t), text: '-' + r.dealt,
           cls: 'dmg', hpBefore, hpAfter: t.hp, maxHp: t.maxHp });
         G.log(`[[icon:fire]] 深渊降焰：施放 1 次火球 → ${esc(t.name)}：造成 <b>${r.dealt}</b> 点法术伤害`, 'sys');
@@ -957,7 +1008,7 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
   function equipmentPlayLimit(card) {
     if (card?.type !== '装备') return null;
     const cap = equipCap();
-    const worn = equipped.filter(e => !e.passive).length;
+    const worn = equipped.length;
     return worn >= cap ? { card, cap, worn, reason: { code:'EQUIPMENT_FULL', message:`最多同时装配 ${cap} 件装备（已装配 ${worn} 件）——本场无法再穿戴` } } : null;
   }
   function handUnplayableReason(card) {
@@ -1012,7 +1063,7 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
     const needsTarget = need === 'enemy' && (side == null || side === 'self' || !foes[+side] || foes[+side].dead)
       || need === 'self' && side !== 'self';
     const infusionIssue = missingInfusionReason(card, fuel.length, allSpellsInfused);
-    const executeIssue = executeTargetReason(card, side == null || side === 'self' ? null : foes[+side], alive());
+    const executeIssue = requestedTargetReason(card, side == null || side === 'self' ? null : foes[+side], alive()) || executeTargetReason(card, side == null || side === 'self' ? null : foes[+side], alive());
     const reason = executeIssue || (infusionIssue ? { code:'INFUSION_REQUIRED', message:infusionIssue }
       : needsTarget ? null : execPlayFlow.getExecutionAvailability(uid, card, fuel, freeCast.has(uid)));
     return reason ? cardPlayRejected(uid, reason) : Object.freeze({ status:'ready', uid, battleToken:battleState.token });
@@ -1051,7 +1102,7 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
       G.log(`[[icon:cross]] ${esc(infusionIssue)}`, 'warn');
       return submission ? cardPlayRejected(uid, { code:'INFUSION_REQUIRED', message:infusionIssue }) : undefined;
     }
-    const executeIssue = executeTargetReason(card, side == null || side === 'self' ? null : foes[+side], alive());
+    const executeIssue = requestedTargetReason(card, side == null || side === 'self' ? null : foes[+side], alive()) || executeTargetReason(card, side == null || side === 'self' ? null : foes[+side], alive());
     if (executeIssue) {
       G.log(`[[icon:cross]] ${esc(executeIssue.message)}`, 'warn');
       return submission ? cardPlayRejected(uid, executeIssue) : undefined;
@@ -1214,7 +1265,7 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
   const battleLifecycle = createBattleLifecycle({
     session: executionSession, intentFor, cloneData, injectSealCards, applyNestRunes, applyVoidRune,
     drawCards, applyBattleStartPassives: equipment.applyBattleStartPassives,
-    isBattleStartEquip: equipment.isBattleStartEquip, isStarterAttack,
+    isBattleStartEquip: equipment.isBattleStartEquip, equipCap, isStarterAttack,
     requestBattleRender, alive, R, emitBattlePresentation,
     // M2：战斗开始/重开时清空触发器登记（旧战卡对象不得跨战斗泄漏）
     resetTriggers: () => triggersM2.reset(),
@@ -1232,7 +1283,8 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
     random01: () => Random.random('battle'),
     throwIfActionCancelled,
     session: executionSession,
-    requestBattleRender, findCard, addTempCard, queueBattleAction,
+    requestBattleRender, findCard, addTempCard, addDeckCard,
+    shuffleDeck: () => set$drawPile(shuffle(drawPile)), queueBattleAction,
     runStagedSteps, applyTextEffects, queueCardExecution, fireConsumeTriggers,
     fireCatGift, swapCardCosts, sweepDead, finish,
   });
@@ -1348,7 +1400,9 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
         const probe = Combat.dealDamage({ atk: G.atk, spellPower: sp, status: statusForHit }, shadow, amt, type);
         loss = abreakOn ? Math.max(0, probe.dealt) : (probe.dealt >= 8 ? 2 : (probe.dealt >= 1 ? 1 : 0));
       }
+      if (card?.id === 'tt13-mercy') loss = Math.min(loss, Math.max(0, foe.hp - 1));
       foe.hp -= loss;
+      recordRequestedDamage(foe, loss, card, { alive, hitFoe });
       if (loss > 0) floats.push({ unit: foeIdx(foe), text: '-' + loss + '♥', cls: 'dmg', type,
         hpBefore, hpAfter: foe.hp, maxHp: foe.maxHp });
       G.log(`[[icon:play]] <b>${esc(card.name)}</b> → ${esc(foe.name)}：${isTrue || abreakOn ? '真伤/破甲，' : ''}击碎 <b>${loss}</b> 颗心（余 ${Math.max(0, foe.hp)} 心）`, 'sys');
@@ -1358,7 +1412,8 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
     }
     const hpBefore = foe.hp;
     const shieldBefore = foe.defense?.shield || 0;
-    const r = Combat.dealDamage({ atk: G.atk, spellPower: sp, status: statusForHit }, foe, amt, type);
+    const r = Combat.dealDamage({ atk: G.atk, spellPower: sp, status: statusForHit }, foe, amt, type, { nonLethal:card?.id === 'tt13-mercy' });
+    recordRequestedDamage(foe, r.dealt, card, { alive, hitFoe });
     if (r.stealthed) {
       SDT.Sound.sfx('parry');
       floats.push({ unit: foeIdx(foe), text: '未命中', cls: 'block' });
@@ -1573,6 +1628,7 @@ export { settlePendingSelections, requestBattleRender, interactionOf, cloneData,
     G.log(`[[icon:demon]] <b>${esc(foe.name)}</b> 攻击：你受到 <b>${r.dealt}</b> 点攻击伤害（${Math.max(0, G.hp)}/${G.maxHp}）`, 'warn');
     // M2：结构化 onDamaged 触发（登记卡「受到伤害时」）
     if (r.dealt > 0) triggersM2.fireDamaged();
+    requestedPlayerDamaged(r.dealt, { alive, hitFoe, drawCards });
     return r.dealt;
   }
 

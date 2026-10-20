@@ -8,13 +8,15 @@ describe('职业整合数据迁移冒烟', () => {
   beforeAll(() => { localStorage.removeItem('sdt-cards-v1'); Cards.ensureTabletop(); });
   it('职业表 = 5 职业', () =>
     expect(Cards.CLASSES).toEqual(['侠客', '战士', '牧师', '法师', '降临者']));
-  it('每职业 9-12 张职业卡（不含英雄/衍生）', () => {
+  it('原每职业9-12张边界仅增加批准的牧师2张、降临者1张', () => {
     // 2026-09-09 与设计者实机导出对齐后：法师 9 张（仓库收编版「法力补给」cc-manasupply
     // 退役，设计者稿 tt7-maxsupply 无 cls 不进职业池），其余职业 10-11 张
     for (const cls of Cards.CLASSES) {
       const n = Cards.classPool(cls).filter(c => c.rarity === '职业' && !c.hero).length;
       expect(n, cls).toBeGreaterThanOrEqual(9);
-      expect(n, cls).toBeLessThanOrEqual(12);
+      const additions = { '牧师': ['tt13-mind-control','tt13-stellar-divination'], '降临者': ['tt13-soul-contract'] }[cls] || [];
+      expect(Cards.classPool(cls).filter(c => c.id.startsWith('tt13-')).map(c => c.id).sort()).toEqual(additions.slice().sort());
+      expect(n - additions.length, cls).toBeLessThanOrEqual(12);
     }
   });
   it('每职业至少 1 张能力卡，rarityOf 推导棱彩', () => {

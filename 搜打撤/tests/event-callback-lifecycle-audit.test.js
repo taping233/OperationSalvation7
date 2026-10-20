@@ -539,3 +539,89 @@ describe('事件等待与回调生命周期审计', () => {
     expect(document.getElementById('new-run-page')?.textContent).toBe('新局');
   });
 });
+
+describe('资源奖励公共领取体验', () => {
+  function openResource() {
+    H.game.nodeChestRewards = {};
+    H.cards = [{ id:'wood', name:'木材', type:'资源', rarity:'古朴' }, { id:'key', name:'钥匙', type:'资源', rarity:'古朴' }];
+    H.game.layerData[0].logical[1].def.type = 'resource';
+    flow.reenterCell();
+  }
+  it('成功领取保留卡面、滚动容器与位置，只发一份并把焦点交给继续探索', () => {
+    const show = vi.spyOn(UI, 'showOverlay');
+    openResource();
+    const body = UI.el.ovBody, scene = body.querySelector('.resource-reward-scene');
+    const cards = [...body.querySelectorAll('.reward-card')];
+    const row = body.querySelector('.reward-objects'), stage = body.querySelector('.loot-scroll');
+    row.scrollLeft = 72; stage.scrollTop = 44;
+    body.querySelector('[data-act="resTake"]').focus();
+    const take = UI._acts.resTake;
+    take({i:'0'}); take({i:'0'}); take({i:'1'});
+    expect(show).toHaveBeenCalledTimes(1);
+    expect(body.querySelector('.resource-reward-scene')).toBe(scene);
+    expect([...body.querySelectorAll('.reward-card')]).toEqual(cards);
+    expect(body.querySelector('.reward-objects')).toBe(row); expect(row.scrollLeft).toBe(72);
+    expect(body.querySelector('.loot-scroll')).toBe(stage); expect(stage.scrollTop).toBe(44);
+    expect(body.querySelectorAll('.reward-unit.got')).toHaveLength(1);
+    expect(body.querySelectorAll('.reward-unit.dropped')).toHaveLength(1);
+    expect(document.activeElement.dataset.act).toBe('resSkip');
+    expect(H.game.ownedCards).toHaveLength(1);
+    expect(H.saves.at(-1).nodeRewards['0,1'].taken).toBe(0);
+  });
+  it('整理返回使用原候选，不重抽，旧页面回调不可在背包页领取', () => {
+    const random = H.random; H.random = vi.fn(() => 0.9);
+    try {
+      openResource(); const record = H.game.nodeRewards['0,1'];
+      const take = UI._acts.resTake;
+      UI._acts.resBag(); take({i:'0'});
+      expect(H.game.ownedCards).toHaveLength(0);
+      returnFromBag();
+      expect(H.game.nodeRewards['0,1']).toBe(record);
+      expect(H.random).toHaveBeenCalledTimes(4);
+      expect([...UI.el.ovBody.querySelectorAll('[data-reward-card]')].map(e => e.dataset.rewardCard)).toEqual(record.cardIds);
+      expect(document.querySelector('.bt-card-feedback-layer')).toBeNull();
+    } finally { H.random = random; }
+  });
+  it('详情复用择一提示和动作映射，满包只整理，已领取不再提供领取按钮', () => {
+    UI.showCardZoom = vi.fn();
+    openResource(); UI._acts.resRead({i:'0'});
+    let options = UI.showCardZoom.mock.lastCall[1];
+    expect(options.footer).toContain('其余选项将放弃');
+    expect(options.footer).toContain('data-act="resTake"');
+    expect(options.from).toBe(UI.el.ovBody.querySelector('[data-act="resRead"]'));
+    H.game.canReceiveCard = () => false; UI._acts.resRead({i:'0'});
+    options = UI.showCardZoom.mock.lastCall[1];
+    expect(options.footer).toContain('其余选项将放弃');
+    expect(options.footer).toContain('data-act="resBag"');
+    expect(options.footer).not.toContain('data-act="resTake"');
+    H.game.canReceiveCard = () => true; UI._acts.resTake({i:'0'}); UI._acts.resRead({i:'1'});
+    expect(UI.showCardZoom.mock.lastCall[1].footer).toBe('');
+  });
+  it('容量实际拒收不触发飞入，成功后才从稳定卡面飞到背包，重复点击不重播', () => {
+    vi.spyOn(window.SDT.Cards, 'cardHTML').mockImplementation(card => `<div class="hs-card">${card.name}</div>`);
+    vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function () {
+      const left = this.matches?.('[data-card-receive-anchor]') ? 450 : 20;
+      return { left, top:20, width:100, height:120, right:left + 100, bottom:140 };
+    });
+    openResource(); H.game.canReceiveCard = () => false;
+    UI._acts.resTake({i:'0'});
+    expect(H.game.nodeRewards['0,1'].taken).toBeNull();
+    expect(document.querySelector('.reward-acquisition-card,.bt-card-reveal')).toBeNull();
+    H.game.canReceiveCard = () => true; UI._acts.resTake({i:'0'});
+    expect(document.querySelectorAll('.reward-acquisition-card')).toHaveLength(1);
+    expect(UI.el.ovBody.querySelector('[data-card-receive-anchor="bag"]')).not.toBeNull();
+    UI._acts.resTake({i:'0'});
+    expect(document.querySelectorAll('.reward-acquisition-card')).toHaveLength(1);
+    expect(H.game.ownedCards).toHaveLength(1);
+  });
+  it('减弱动效仍给出真实领取回执，不播放飞入', () => {
+    document.body.classList.add('reduce-motion');
+    try {
+      openResource(); UI._acts.resTake({i:'0'});
+      expect(document.querySelector('.reward-acquisition-card')).toBeNull();
+      expect(UI.el.ovBody.querySelector('[role="status"]').textContent).toContain('1 张已入背包');
+      expect(document.querySelector('.bt-card-reveal-caption').textContent).toContain('已入背包');
+      expect(H.game.ownedCards).toHaveLength(1);
+    } finally { document.body.classList.remove('reduce-motion'); }
+  });
+});

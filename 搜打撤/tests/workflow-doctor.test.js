@@ -1,4 +1,5 @@
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { symlinkSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
@@ -116,4 +117,69 @@ describe('只读项目 doctor', () => {
     expect(missing.ok).toBe(false);
     expect(existsSync(path.join(root, 'docs/evidence'))).toBe(false);
   });
+  it('检查新增直接依赖，显示可读 node_modules 链接但不把链接等同锁一致', async () => {
+    const { root, probe } = fixture();
+    const pkg = JSON.parse(readFileSync(path.join(root, 'package.json'), 'utf8'));
+    pkg.devDependencies['new-tool'] = '1.0.0';
+    put(root, 'package.json', JSON.stringify(pkg));
+    const report = await doctor(root, { probe });
+    expect(item(report, 'dependencies')).toMatchObject({ status: 'blocked', details: {
+      missing: ['new-tool'], nodeModules: { linked: false, targetReadable: true } } });
+    const { root: linkedRoot, probe: linkedProbe } = fixture();
+    // Only replace this test's generated dependency directory.
+    rmSync(path.join(linkedRoot, 'node_modules'), { recursive: true });
+    symlinkSync(path.join(root, 'node_modules'), path.join(linkedRoot, 'node_modules'), 'junction');
+    const linked = await doctor(linkedRoot, { probe: linkedProbe });
+    expect(item(linked, 'dependencies').details.nodeModules).toEqual({ linked: true, targetReadable: true });
+  });
+  it('node_modules 缺失仍列出缺包，失效链接标记不可读', async () => {
+    const { root, probe } = fixture();
+    rmSync(path.join(root, 'node_modules'), { recursive: true });
+    const absent = await doctor(root, { probe });
+    expect(item(absent, 'dependencies')).toMatchObject({ status: 'blocked', details: {
+      missing: packages, nodeModules: { linked: false, targetReadable: false } } });
+    symlinkSync(path.join(root, 'missing-modules'), path.join(root, 'node_modules'), 'junction');
+    const broken = await doctor(root, { probe });
+    expect(item(broken, 'dependencies')).toMatchObject({ status: 'blocked', details: {
+      missing: packages, nodeModules: { linked: true, targetReadable: false } } });
+  });
+  it('无 Git 的恢复副本明确不可冻结运行，其他诊断继续', async () => {
+    const { root, probe } = fixture();
+    const report = await doctor(root, { staged: true, probe: request => request.args.includes('--show-toplevel')
+      ? { status: 128 } : probe(request) });
+    expect(report.ok).toBe(false);
+    expect(item(report, 'staged-readiness')).toMatchObject({ status: 'blocked', details: {
+      canRun: false, mode: 'unavailable', executed: false, passed: false } });
+    expect(item(report, 'registry').status).toBe('info');
+  });
+  it('冻结预检复用全部锁依赖检查，缺传递包先阻断且不生成执行证据', async () => {
+    const { root, probe } = fixture();
+    const pkg = JSON.parse(readFileSync(path.join(root, 'package.json'), 'utf8'));
+    const lock = JSON.parse(readFileSync(path.join(root, 'package-lock.json'), 'utf8'));
+    lock.packages[''] = { devDependencies: pkg.devDependencies };
+    lock.packages['node_modules/transitive-tool'] = { version: '1.0.0' };
+    put(root, 'package-lock.json', JSON.stringify(lock));
+    put(root, 'node_modules/.package-lock.json', JSON.stringify(lock));
+    const git = args => execFileSync('git', args, { cwd: root, stdio: 'pipe' });
+    git(['init', '-q']);
+    git(['add', 'package.json']);
+    git(['-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.test', '-c', 'core.hooksPath=' + path.join(root, 'no-hooks'), 'commit', '--allow-empty', '-qm', 'fixture']);
+    git(['add', 'package.json', 'package-lock.json']);
+    const blocked = await doctor(root, { probe, staged: true });
+    expect(item(blocked, 'staged-readiness')).toMatchObject({ status: 'blocked', details: {
+      canRun: false, mode: 'pending-snapshot-selection', executed: false, passed: false,
+      blocked: ['node_modules/transitive-tool 未安装'] } });
+    put(root, 'node_modules/transitive-tool/package.json', '{"version":"1.0.0"}');
+    const ready = await doctor(root, { probe, staged: true });
+    expect(item(ready, 'staged-readiness')).toMatchObject({ status: 'info', details: {
+      canRun: true, executed: false, passed: false, reusableReceipt: false, blocked: [] } });
+    expect(existsSync(path.join(root, 'docs/evidence'))).toBe(false);
+    expect(existsSync(path.join(root, 'dist'))).toBe(false);
+    git(['-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.test', '-c', 'core.hooksPath=' + path.join(root, 'no-hooks'), 'commit', '-qm', 'lock fixture']);
+    const empty = await doctor(root, { probe, staged: true });
+    expect(item(empty, 'staged-readiness')).toMatchObject({ status: 'info', details: {
+      canRun: false, mode: 'skip', executed: false, passed: false, reusableReceipt: false } });
+    await expect(doctor(root, { probe, staged: true, tests: ['tests/a.test.js'] })).rejects.toThrow('不能');
+  });
+
 });

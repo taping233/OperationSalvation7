@@ -38,7 +38,7 @@ const shuffle = shuffleCards;
 
 export function createBattleLifecycle({
   session, intentFor, cloneData, injectSealCards, applyNestRunes, applyVoidRune, drawCards,
-  applyBattleStartPassives, isBattleStartEquip, isStarterAttack, requestBattleRender, alive, R,
+  applyBattleStartPassives, isBattleStartEquip, equipCap, isStarterAttack, requestBattleRender, alive, R,
   resetTriggers, runBattleStartTriggers, triggersM2, emitBattlePresentation,
 }) {
   const { handSelectQueue, choiceQueue } = session;
@@ -80,7 +80,7 @@ export function createBattleLifecycle({
         start(nextGame, cloneData(data.enemyDefs), cloneData(data.opts));
         if (data.opts.isBoss && !data.opts.nest && Array.isArray(data.selectedDeck)) {
           set$sel(new Set(data.selectedDeck.filter(uid => selPool.some(entry => entry.uid === uid))));
-          if (sel.size >= Math.min(R().bossDeckSize, selPool.length)) beginBoss();
+          if (sel.size >= minimumBossDeckSize()) beginBoss();
         }
       } finally {
         set$restoringRestartCheckpoint(false);
@@ -246,6 +246,8 @@ export function createBattleLifecycle({
     set$foes(defs.map(d => {
       const f = {
         id: d.id || null, name: d.name, hp: d.hp, maxHp: d.hp,
+        boss: d.boss,
+        controlBoss: d.boss ?? d.isBoss ?? (!!opts.isBoss && d === defs[0] && !opts.nest),
         // 龙巢敌人扩展标记（心/轮换免疫/阶段/复活/庇护/消耗手牌等）原样透传
         heartsMode: d.heartsMode || undefined, hearts: d.hearts || undefined, rotateImmune: d.rotateImmune || undefined,
         evenAttack: d.evenAttack || undefined, noFirstAttack: d.noFirstAttack || undefined,
@@ -329,15 +331,33 @@ export function createBattleLifecycle({
   }
 
   // ---------- BOSS战：编组牌库 ----------
+  function minimumBossDeckSize() {
+    const available = opts.nest ? selPool.length : selPool.filter(o => !isBattleStartEquip(o.card)).length
+      + Math.min(equipCap(), selPool.filter(o => isBattleStartEquip(o.card)).length);
+    return Math.min(R().bossDeckSize, available);
+  }
+  function selectedStartEquipCount() {
+    return selPool.filter(o => sel.has(o.uid) && isBattleStartEquip(o.card)).length;
+  }
+  function trimStartEquipmentSelection() {
+    let remaining = equipCap();
+    for (const uid of sel) {
+      const entry = selPool.find(o => o.uid === uid);
+      if (entry && isBattleStartEquip(entry.card) && remaining-- <= 0) sel.delete(uid);
+    }
+  }
+
   // 地图首脑直入：沿用有效旧编组，按背包顺序补齐，保持既有卡类与容量规则。
   function prepareAutomaticBossDeck() {
     set$selPool(G.ownedCards.filter(o => !o.stored && !o.pouchOf && !['道具', '资源', '事件', '生物'].includes(o.card.type) && !isStarterAttack(o.card)));
     set$selShaN(R().starterSha);
     set$sel(new Set(lastDeckSel.filter(uid => selPool.some(entry => entry.uid === uid))));
+    trimStartEquipmentSelection();
     const capacity = () => Math.min(selPool.length, R().bossDeckSize + deckCapBonus(sel));
     while (sel.size > capacity()) sel.delete(sel.values().next().value);
     for (const entry of selPool) {
       if (sel.size >= capacity()) break;
+      if (isBattleStartEquip(entry.card) && selectedStartEquipCount() >= equipCap()) continue;
       sel.add(entry.uid);
     }
     set$selDeckMax(R().bossDeckSize + deckCapBonus(sel));
@@ -351,6 +371,8 @@ export function createBattleLifecycle({
     set$selPool(G.ownedCards.filter(o => !o.stored && !o.pouchOf && !['道具', '资源', '事件', '生物'].includes(o.card.type) && !isStarterAttack(o.card)));
     set$selShaN(R().starterSha);
     set$sel(new Set(lastDeckSel.filter(uid => selPool.some(entry => entry.uid === uid))));
+    trimStartEquipmentSelection();
+    set$selDeckMax(R().bossDeckSize + deckCapBonus(sel));
     const cap = Math.min(selDeckMax, selPool.length);
     while (sel.size > cap) sel.delete(sel.values().next().value);
     set$selectingDeck(true);
@@ -360,6 +382,11 @@ export function createBattleLifecycle({
   function toggleDeckCard(uid) {
     if (!selectingDeck || !selPool.some(entry => entry.uid === uid)) return;
     if (!sel.has(uid) && sel.size >= selDeckMax) return;   // 混沌之眼上限之外不可再编入
+    const entry = selPool.find(o => o.uid === uid);
+    if (!sel.has(uid) && isBattleStartEquip(entry.card) && selectedStartEquipCount() >= equipCap()) {
+      G.log(`[[icon:cross]] 开战装备占用装备栏，最多编入 ${equipCap()} 件；请先移出一件开战装备`, 'warn');
+      return;
+    }
     if (sel.has(uid)) sel.delete(uid); else sel.add(uid);
     requestBattleRender();
   }
@@ -371,9 +398,15 @@ export function createBattleLifecycle({
   }
 
   function beginBoss() {
+    if (!opts.nest && selectedStartEquipCount() > equipCap()) {
+      G.log(`[[icon:cross]] 开战装备超过 ${equipCap()} 件，请调整编组后开战`, 'warn');
+      set$selectingDeck(true);
+      requestBattleRender();
+      return;
+    }
     // 2026-09-10 留言 #34：背包可编卡牌不足 15 张时按实际可编数放行（视图侧同口径），
     // 否则「开始战斗」按钮永远灰着、点击也无任何反应
-    if (sel.size < Math.min(R().bossDeckSize, selPool.length)) return;
+    if (sel.size < minimumBossDeckSize()) return;
     const shas = G.ownedCards.filter(o => isStarterAttack(o.card)).slice(0, R().starterSha).map(o => o.uid);
     set$lastDeckSel([...sel]);
     if (battleRestartCheckpoint) battleRestartCheckpoint.selectedDeck = [...sel];
@@ -406,7 +439,7 @@ export function createBattleLifecycle({
       if (triggersM2) triggersM2.fireFreezeDealt(target);
       if (freezeRuneOn && target !== pstat) { const g = drawCards(2); G.log('[[icon:gem]] <b>冰冻符文</b>：冰冻 1 名角色，抽 ' + g + ' 张牌', 'ok'); }
     };
-    applyBattleStartPassives();   // Q1：迷之匣替换/灵符抽牌/骷髅王剑/混沌之眼（持有即生效）
+    applyBattleStartPassives();   // 已编入的开战装备先统一消耗，再按顺序执行开战效果
     if (runBattleStartTriggers) runBattleStartTriggers();   // M2：结构化 onBattleStart（能力卡/迎装规则）
     if (!restoringRestartCheckpoint) emitBattlePresentation?.({ kind: 'player-turn-start', turn });
     requestBattleRender();

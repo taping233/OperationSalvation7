@@ -1,3 +1,4 @@
+import { recordRequestedDamage, requestedPlayerDamaged } from '../effects/requested-card-runtime.js';
 /* battle.enemy-phase.js —— 敌方阶段与回合结束（2026-09-22 六文件重构批6-C 自 battle.core.js 拆出，原行 2480-2797）。
  * 逐字搬迁（flee 因被引擎侧 finish 环调随迁 engine）；状态经 battle.runtime.js；禁 import 壳。 */
 const SDT = window.SDT;
@@ -9,7 +10,7 @@ import { waitForFeedback, waitMs } from '../view/battle.feedback.js';
 import { demoMs } from '../runtime/battle.pace.js';
 import { battleState, G, foes, mode, drawPile, hand, consumed, grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, handSelecting, choosing, interaction, noDrawNext, floats, cardAnims, playedMovesThisTurn, allies, extraTurn, timeRune, holyRune, fireballRuneOn, swiftRune, timeSpaceRune, timeSpaceUsed, set$noDrawNext, set$energy, set$extraTurn, set$interaction, set$turn, set$busy, set$timeSpaceUsed, set$playedMartialThisTurn, set$playedMovesThisTurn, set$lastPersistAt, clearTargetHint, transitionTo, cancelTargetingState } from '../runtime/battle.runtime.js';
 import { recordBattleDamage } from './battle.summary.js';
-import { emitBattlePresentation, settlePendingSelections, processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, findEffectiveCard, effCostOf, finish, fireTurnEndTriggers, fireConsumeTriggers, deferEndTurn, hasPendingEndTurn } from './battle.engine.js';
+import { awaitTriggeredActions, emitBattlePresentation, settlePendingSelections, processDelayed, accrueGrowth, resolveCardWithFeedback, syncCurseCondEquips, applyKillRewards, unplayableReason, queueCardExecution, foeIdx, addPlayerCurse, hitFoe, playerTakeHit, frenzyCurse, elCurse, requestBattleRender, R, alive, intentFor, drawCards, resolveFoeDefeat, sweepDead, nestPhase, grantSha, findCard, findEffectiveCard, effCostOf, finish, fireTurnEndTriggers, fireConsumeTriggers, deferEndTurn, hasPendingEndTurn } from './battle.engine.js';
 import { restoreAtkDown } from '../effects/effect-steps.m2.js';
 
   // 敌方步进演出节拍在 vitest 环境归零（比照 battle.engine.js 的 SURGE_WAVE_MS 先例）：
@@ -118,30 +119,31 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
   async function awaitBattleFeedback(stillEnemyPhase) {
     requestBattleRender();
     await waitForFeedback();
+    await awaitTriggeredActions();
     return stillEnemyPhase();
   }
 
   async function resolvePlayerEndTurn(enemyToken, stillEnemyPhase) {
     // —— 玩家回合结束：中毒结算 ——
     // U18：去钳位，负血保留真实值——tickPoison 内部把 hp 钳 0 并把超出量记入
-    // r.overkill（combat.js 属地不动），此处按 overkill 累计还原；死亡仍由下方既有 hp<=0 检查收口。
+    // r.overkill（combat.js 属地不动），此处逐次还原；死亡仍由下方既有 hp<=0 检查收口。
     const pref = { hp: G.hp, defense: pdef, status: pstat.status };
-    let playerOverkill = 0;
     // 时光符文：回合结束效果触发 2 次（中毒结算双倍）
     const tickPasses = timeRune ? 2 : 1;
     for (let pass = 0; pass < tickPasses; pass++) {
+      pref.hp = G.hp; // A reactive cast may heal or damage the player between poison ticks.
       const p1 = Combat.tickPoison(pref);
       if (p1?.dealt > 0) {
         recordBattleDamage('中毒', p1.dealt, turn);
         G.hp = pref.hp - (p1.overkill || 0);
-        playerOverkill += p1.overkill || 0;
+        requestedPlayerDamaged(p1.dealt, { alive, hitFoe, drawCards });
         floats.push({ unit: 'self', text: '-' + p1.dealt, cls: 'hurt' });
         G.log(`[[icon:skull]] 中毒结算：你受到 <b>${p1.dealt}</b> 点固定伤害（${Math.max(0, G.hp)}/${G.maxHp}）`, 'warn');
         if (!await awaitBattleFeedback(stillEnemyPhase)) return;
       }
     }
     // 计时状态不在玩家阶段递减——共享回合钟统一在每回合结束（afterEnemies 末尾）递减
-    G.hp = pref.hp - playerOverkill;   // U18：还原真实负血（中毒致死走下方既有 finish(false) 检查）
+    // G.hp was committed per tick; never overwrite reactive healing with the old proxy.
     requestBattleRender();
     if (G.hp <= 0) { set$busy(false); finish(false); return; }
     // —— 随从自动攻击（Q4 老板定向：步兵等为你自动战斗；无攻血场面物件不参与）——
@@ -149,6 +151,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
       const t = alive()[0];
       if (!t) break;
       const r = Combat.dealDamage({ atk: a.atk, status: a.status }, t, 0, Combat.TYPES.ATTACK);
+      recordRequestedDamage(t, r.dealt, { name:a.name }, { alive, hitFoe });
       if (r.dealt > 0) floats.push({ unit: foeIdx(t), text: '-' + r.dealt, cls: 'dmg' });
       G.log(`[[icon:swords]] <b>${esc(a.name)}</b> 自动攻击 ${esc(t.name)}：造成 <b>${r.dealt}</b> 点攻击伤害`, 'sys');
       if (!await awaitBattleFeedback(stillEnemyPhase)) return;
@@ -199,6 +202,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
           floats.push({ unit: foes.indexOf(foe), text: '', cls: 'lungefx' });
           requestBattleRender();
           await waitForFeedback();
+          await awaitTriggeredActions();
           if (!stillEnemyPhase()) return;
           await waitMs(demoMs(130));
           if (!stillEnemyPhase()) return;
@@ -218,6 +222,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
             }
             requestBattleRender();
             await waitForFeedback();
+            await awaitTriggeredActions();
             if (!stillEnemyPhase()) return;
             continue;
           }
@@ -257,6 +262,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
           }
           requestBattleRender();
           await waitForFeedback();
+          await awaitTriggeredActions();
           if (!stillEnemyPhase()) return;
         }
       }
@@ -284,6 +290,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
       for (let tp = 0; tp < tickPasses; tp++) {
         const er = Combat.tickPoison(foe);
         if (er?.dealt > 0) {
+          recordRequestedDamage(foe, er.dealt, { name:'中毒' }, { alive, hitFoe });
           floats.push({ unit: foes.indexOf(foe), text: '-' + er.dealt, cls: 'dmg', tintKey: 'poison' });
           G.log(`[[icon:skull]] 中毒结算：<b>${esc(foe.name)}</b> 受到 <b>${er.dealt}</b> 点固定伤害（${Math.max(0, foe.hp)}/${foe.maxHp}）${timeRune ? '（时光×2）' : ''}`, 'sys');
           if (!await awaitBattleFeedback(stillEnemyPhase)) return;
@@ -414,6 +421,7 @@ import { restoreAtkDown } from '../effects/effect-steps.m2.js';
     } else if (mode === 'boss') {
       drawCards(R().battleTurnDraw);
     }
+    await awaitTriggeredActions();
     if (!stillEnemyPhase()) return;
     // 敌人回合结束必须转回玩家阶段：此前 phase 卡在 enemy，
     // 视图的 data-phase="enemy" 规则（手牌下沉/禁点）会吞掉之后每个玩家回合

@@ -1,0 +1,151 @@
+{
+  "before": {
+    "statistics": {
+      "clones": 2,
+      "duplicatedLines": 27,
+      "duplicatedTokens": 298,
+      "lines": 8949,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 0.30170968823332217,
+      "percentageTokens": 0.29972943886223513,
+      "sources": 52,
+      "tokens": 99423
+    },
+    "candidates": [
+      {
+        "firstFile": {
+          "end": 493,
+          "endLoc": {
+            "column": 39,
+            "line": 493,
+            "position": 24205
+          },
+          "name": "perf-ledger-capture.mjs",
+          "start": 486,
+          "startLoc": {
+            "column": 10,
+            "line": 486,
+            "position": 23862
+          }
+        },
+        "format": "javascript",
+        "isNew": false,
+        "kind": "exact",
+        "lines": 8,
+        "secondFile": {
+          "end": 585,
+          "endLoc": {
+            "column": 39,
+            "line": 585,
+            "position": 28456
+          },
+          "name": "perf-ledger-capture.mjs",
+          "start": 578,
+          "startLoc": {
+            "column": 10,
+            "line": 578,
+            "position": 28113
+          }
+        },
+        "tokens": 90
+      },
+      {
+        "firstFile": {
+          "end": 547,
+          "endLoc": {
+            "column": 62,
+            "line": 547,
+            "position": 26830
+          },
+          "name": "perf-ledger-capture.mjs",
+          "start": 529,
+          "startLoc": {
+            "column": 8,
+            "line": 529,
+            "position": 25934
+          }
+        },
+        "format": "javascript",
+        "isNew": false,
+        "kind": "exact",
+        "lines": 19,
+        "secondFile": {
+          "end": 612,
+          "endLoc": {
+            "column": 62,
+            "line": 612,
+            "position": 29887
+          },
+          "name": "perf-ledger-capture.mjs",
+          "start": 598,
+          "startLoc": {
+            "column": 8,
+            "line": 598,
+            "position": 29129
+          }
+        },
+        "tokens": 208
+      }
+    ]
+  },
+  "after": {
+    "statistics": {
+      "clones": 1,
+      "duplicatedLines": 13,
+      "duplicatedTokens": 107,
+      "lines": 8944,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 0.14534883720930233,
+      "percentageTokens": 0.10777815830294729,
+      "sources": 52,
+      "tokens": 99278
+    },
+    "candidates": [
+      {
+        "firstFile": {
+          "end": 554,
+          "endLoc": {
+            "column": 62,
+            "line": 554,
+            "position": 27048
+          },
+          "name": "perf-ledger-capture.mjs",
+          "start": 542,
+          "startLoc": {
+            "column": 8,
+            "line": 542,
+            "position": 26501
+          }
+        },
+        "format": "javascript",
+        "isNew": false,
+        "kind": "exact",
+        "lines": 13,
+        "secondFile": {
+          "end": 607,
+          "endLoc": {
+            "column": 62,
+            "line": 607,
+            "position": 29487
+          },
+          "name": "perf-ledger-capture.mjs",
+          "start": 599,
+          "startLoc": {
+            "column": 8,
+            "line": 599,
+            "position": 29078
+          }
+        },
+        "tokens": 107
+      }
+    ]
+  },
+  "tool": "jscpd 5.4.1",
+  "command": "node node_modules/jscpd/run-jscpd.js scripts --config tests/tools/redundancy-report.json --workers 1 --output <report-dir>",
+  "sha256": {
+    "before": "81971fe328432eb64a1d3cc04096be2761c81f165b29ad1da262bd4baf8f057d",
+    "after": "84e57be9bf83d7619568cb44020406713c51e942ec4ad707253584d5feffa424"
+  }
+}

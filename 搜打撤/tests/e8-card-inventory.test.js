@@ -1,3 +1,4 @@
+import approvedBatch from './fixtures/approved-card-batch-20261020.json';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { assertInventoryComplete, buildCardInventory, compareMigrationInventories, describeStage, isApprovedBackupcellRename, renderCardInventory } from './helpers/e8-card-inventory.js';
 import beforeInventory from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
@@ -18,7 +19,7 @@ const M_BATCH_ONPLAY_IDS = [
 ];
 const ALL_M_BATCH_IDS = [...readFileSync('docs/M-BATCH-MATRIX.md', 'utf8')
   .matchAll(/^\| ([a-z][\w-]+) \|/gm)].map(match => match[1]).filter(id => id !== 'id');
-const APPROVED_IDS = [...MIGRATED_IDS, ...ALL_M_BATCH_IDS, 'tt7-ironphalanx'].filter(id => !RETIRED_1010.has(id));
+const APPROVED_IDS = [...MIGRATED_IDS, ...ALL_M_BATCH_IDS, 'tt7-ironphalanx', 'cmtn1ntxzoc4'].filter(id => !RETIRED_1010.has(id));
 // 2026-10-18 已批准的生产文案/名称修订；固定前后值投影，原 before 与 CARDS_SYNC 不改。
 const APPROVED_PRODUCTION_FACE_REVISIONS = [
   ["cmtn6bge52qt","desc","在背包中才能使用，复原最多两张卡牌","地图背包：从消耗区复原最多2张卡牌；战斗：从本场消耗牌复原最多2张回到手牌。对应消耗区为空时不可使用。"],
@@ -38,6 +39,7 @@ function approvedProductionFaceBaseline(original) {
 }
 const currentBaseline = approvedProductionFaceBaseline(beforeInventory);
 const APPROVED_FACE_BY_ID = {
+  'cmtn1ntxzoc4': { desc: approvedBatch.flame.desc },
   'tt3-noon-duel': { dmg: 2, dmgType: 'fixed' },
   // 现行规则：本道具主动用于战斗，产卡在使用后的下回合兑现。
   'tt3-mystery-potion': { desc: '仅战斗中使用。使用后，下回合开始时：变成1张随机招式卡牌，使其费用为0。' },
@@ -49,6 +51,7 @@ const APPROVED_FACE_BY_ID = {
 const APPROVED_RULES_BY_ID = Object.fromEntries([
   ...MIGRATED_IDS.map(id => [id, HEAL_RULES]),
   ...ALL_M_BATCH_IDS.map(id => [id, null]),
+  ['cmtn1ntxzoc4', approvedBatch.flame.rules],
   ['tt3-mystery-potion', { version:1, battle:{ hosted:['mystery-potion'] } }],
   ['tt7-ironphalanx', { version: 1, battle: { target: { side: 'self', area: false } },
     triggers: { onPlay: [{ op: 'armor', amount: 10 },
@@ -205,6 +208,7 @@ describe('E8 isolated production inventory', () => {
     const approvedIds = APPROVED_IDS;
     expect(M_BATCH_ONPLAY_IDS.every(id => ALL_M_BATCH_IDS.includes(id))).toBe(true);
     const comparison = compareMigrationInventories(currentBaseline, inventory, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID);
+    expect(comparison.addedIds.slice().sort()).toEqual(approvedBatch.additions.map(card => card.id).sort());
     expect(comparison.changedIds.sort()).toEqual([...approvedIds].sort());
     const unexpected = clone(inventory);
     unexpected.production.cards.find(row => row.id === MIGRATED_IDS[0]).card.heal++;
@@ -214,6 +218,39 @@ describe('E8 isolated production inventory', () => {
     changedSync.cardsSync.cards[0].card.desc += 'changed';
     expect(() => compareMigrationInventories(currentBaseline, changedSync, approvedIds, HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID))
       .toThrow('CARDS_SYNC card fields changed');
+  });
+
+  it('本批只允许13个精确新ID，新增卡的任何字段漂移、漏卡和未知新增均拒绝', () => {
+    expect(approvedBatch.additions.map(card => card.id).sort()).toEqual([
+      'tt13-astrolabe','tt13-bitter-rain','tt13-chaos-deck','tt13-flame-staff',
+      'tt13-guard','tt13-magazine','tt13-mercy','tt13-mind-control','tt13-scale-armor',
+      'tt13-snipe','tt13-soul-contract','tt13-spring','tt13-stellar-divination',
+    ]);
+    const compare = changed => compareMigrationInventories(currentBaseline, changed, APPROVED_IDS,
+      HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID);
+    for (const approved of approvedBatch.additions) {
+      for (const mutate of [card => { card.cost++; }, card => { card.desc += '额外效果'; },
+        card => { card.rules = {}; }, card => { card.unknown = true; }]) {
+        const changed = clone(inventory); mutate(changed.production.cards.find(row => row.id === approved.id).card);
+        expect(() => compare(changed)).toThrow(`${approved.id} differs from approved new card`);
+      }
+    }
+    const unknown = clone(inventory); unknown.production.cards.push({ id:'tt13-unknown', card:{ id:'tt13-unknown' } });
+    expect(() => compare(unknown)).toThrow('card IDs changed');
+    const missing = clone(inventory); missing.production.cards = missing.production.cards.filter(row => row.id !== 'tt13-spring');
+    expect(() => compare(missing)).toThrow('card IDs changed');
+  });
+
+  it('火焰形态仅批准精确旧规则到新文案与宿主，数值/规则/额外字段漂移拒绝', () => {
+    for (const mutate of [card => { card.cost++; }, card => { card.desc += '额外效果'; },
+      card => { card.rules.triggers.onPlay[0].amount = 9; }, card => { card.unknown = true; }]) {
+      const changed = clone(inventory); mutate(changed.production.cards.find(row => row.id === approvedBatch.flame.id).card);
+      expect(() => compareMigrationInventories(currentBaseline, changed, APPROVED_IDS,
+        HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID)).toThrow('cmtn1ntxzoc4 changed beyond approved rules addition');
+    }
+    const changedBefore = clone(currentBaseline); changedBefore.production.cards.find(row => row.id === approvedBatch.flame.id).card.cost++;
+    expect(() => compareMigrationInventories(changedBefore, inventory, APPROVED_IDS,
+      HEAL_RULES, APPROVED_RULES_BY_ID, APPROVED_FACE_BY_ID)).toThrow('cmtn1ntxzoc4 changed beyond approved rules addition');
   });
 
   it('铁甲阵仅将洗入牌库的获取动作由费用归零改为费用减1', () => {
