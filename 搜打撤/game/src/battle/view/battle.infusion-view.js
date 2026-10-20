@@ -43,7 +43,7 @@ export function renderInfusionSelection({ UI, snapshot, getSnapshot, findCard, i
     <aside class="infusion-source"><span class="infusion-eyebrow">将要使用</span><h4>${esc(infusion.card.name)}</h4><p class="infusion-cost">消耗 ${effCostOf(infusion.card, infusion.uid)} 点能量 + ${infusion.need} 张材料</p>
       <div class="infusion-rules"><h5>打出效果</h5><p>${descRich(displayCardDescription(infusion.card.desc || '暂无规则描述', infusion.card.id), infusion.card.id)}</p></div>
       <details class="infusion-source-details" ${sourceExpanded ? 'open' : ''}><summary>查看卡面</summary><div class="infusion-source-card">${cardHTML(infusion.card, 'sm')}</div></details>
-      <p class="infusion-destination">材料进入本场消耗牌堆，不再抽回；战后进入消耗区。道具、装备不可在火堆复原。</p>
+      <p class="infusion-destination">材料进入消耗牌堆，不自动洗回，仅由卡牌效果取回；战后进入消耗区。道具、装备不可在火堆复原。</p>
     </aside>
     <section class="infusion-selection"><header><div><h4>选择 ${infusion.need} 张材料</h4></div><strong class="infusion-progress${remaining ? '' : ' is-ready'}" role="status">已选 ${picked.length}/${infusion.need}${remaining ? '' : '<small>材料已齐</small>'}</strong></header>
       <div class="infusion-materials">${materialHTML || '<p>没有可选材料</p>'}</div>

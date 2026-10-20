@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
@@ -58,7 +60,7 @@ describe('M01 基地快照与提交边界', () => {
     localStorage.setItem(key(1), future);
     Base.use(1);
     Base.data.coins = 0;
-    expect(Base.save()).toBe(false);
+    expect((await Base.save())).toBe(false);
     expect(localStorage.getItem(key(1))).toBe(future);
     expect(readBase(1)).toMatchObject({ ok: false, code: 'INVALID_STATE' });
 
@@ -73,7 +75,7 @@ describe('M01 基地快照与提交边界', () => {
     const broken = '{broken';
     localStorage.setItem(key(2), broken);
     Base.use(2);
-    expect(Base.save()).toBe(false);
+    expect((await Base.save())).toBe(false);
     expect(localStorage.getItem(key(2))).toBe(broken);
   });
 
@@ -97,7 +99,7 @@ describe('M01 基地快照与提交边界', () => {
   it('M01-C：写失败时内存与磁盘不变，重试只成功写入一次', async () => {
     Base.use(1);
     Base.data.coins = 50;
-    Base.save();
+    (await Base.save());
     const read = readBase(1);
     const change = changeFor(read, state => {
       state.coins -= 10;
@@ -157,7 +159,7 @@ describe('M01 基地快照与提交边界', () => {
 
     const staleRead = readBase(1);
     Base.data.wood += 1;
-    Base.save(); // 历史直写也推进 revision，并保留已有请求记录
+    (await Base.save()); // 历史直写也推进 revision，并保留已有请求记录
     const staleChange = changeFor(staleRead, state => { state.home.displays.push({ slotId: 'wall-1', ref: { kind: 'collection', refId: 'card-a' } }); });
     expect(await commitBase({ slotId: 1, requestId: 'new-stale-request', expectedRevision: staleRead.revision }, staleChange))
       .toMatchObject({ ok: false, code: 'STALE_REVISION' });

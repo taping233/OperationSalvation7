@@ -20,8 +20,8 @@ beforeAll(async () => {
 describe('A6-ACH-01 成就与收藏领取的失败分支不再静默', () => {
   it('claimAch 消费失败 msg，claimColl 消费 save 失败', () => {
     // meta.claim 的 {ok:false,why:'full'|'save',msg} 回执（meta.js/base-economy.js）必须有消费端
-    expect(hub).toMatch(/claimAch[\s\S]{0,200}?else if \(r && r\.msg\) UI\.log/);
-    expect(hub).toMatch(/claimColl[\s\S]{0,240}?why === 'full'[\s\S]{0,120}?else if \(r && r\.msg\)/);
+    expect(hub).toMatch(/hubWrite\('claimAch',[\s\S]*?await M\.claim\(d\.id\)[\s\S]*?else if \(r && r\.msg\) UI\.log/);
+    expect(hub).toMatch(/hubWrite\('claimColl',[\s\S]*?await M\.claimColl\(d\.id\)[\s\S]*?why === 'full'[\s\S]*?else if \(r && r\.msg\)/);
   });
 });
 

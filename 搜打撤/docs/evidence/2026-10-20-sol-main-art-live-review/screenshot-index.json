@@ -1,0 +1,155 @@
+{
+  "images": [
+    {
+      "name": "00-hub.png",
+      "bytes": 89395,
+      "width": 1280,
+      "height": 720,
+      "mimeType": "image/jpeg",
+      "sha256": "8cb61eb5c54d2cf132860975856d3bd7127afbf1b2cfccddb7765102b2b45433",
+      "source": "Sol subagent, Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "01-preparation.png",
+      "bytes": 91115,
+      "width": 1280,
+      "height": 720,
+      "mimeType": "image/jpeg",
+      "sha256": "0a0bc2d63b60c4b998751b385dedea48c0ec0f513962bf295d170871ad784ae7",
+      "source": "Sol subagent, Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "02-map-entry.png",
+      "bytes": 37569,
+      "width": 1280,
+      "height": 720,
+      "mimeType": "image/jpeg",
+      "sha256": "97693b8888e9fa274e04741d3fe23e42881b7cd398d77e9f6c6de1478d5fbd57",
+      "source": "Sol subagent, Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "03-battle.png",
+      "bytes": 108395,
+      "width": 1280,
+      "height": 720,
+      "mimeType": "image/jpeg",
+      "sha256": "a95b1863c2e7d735f5bafbb16a0d45cf2566fec35463db76932068c9844a751e",
+      "source": "Sol subagent, Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "03b-battle-raised-card.png",
+      "bytes": 98913,
+      "width": 1280,
+      "height": 720,
+      "mimeType": "image/jpeg",
+      "sha256": "d6ee68fee8e24e1b9ca3f7dbb63b16a939503c1d3361e1e4849c56ab176d92a7",
+      "source": "Sol subagent, Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "04-victory-rewards.png",
+      "bytes": 35617,
+      "width": 1280,
+      "height": 720,
+      "mimeType": "image/jpeg",
+      "sha256": "9975e1ec8604913d4d95b710a721185e7fa9b1e48d93cba5db0045810c44e962",
+      "source": "Sol subagent, Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "05-backpack.png",
+      "bytes": 90446,
+      "width": 1280,
+      "height": 720,
+      "mimeType": "image/jpeg",
+      "sha256": "102449a15b0d6657aa136180b648451e4ab0be59b3089dfd764bc67b524b52b6",
+      "source": "Sol subagent, Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "05b-card-detail.png",
+      "bytes": 62186,
+      "width": 1280,
+      "height": 720,
+      "mimeType": "image/jpeg",
+      "sha256": "9d232fc27e0c7d3be61280a5a1e1afb212506d3406a12f4a0fc085b82b7b9394",
+      "source": "Sol subagent, Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "06-layer-gate.png",
+      "bytes": 88623,
+      "width": 1280,
+      "height": 720,
+      "mimeType": "image/jpeg",
+      "sha256": "d38125dd007e215a60516e771173234a7eea2fd871eb0a2dae8d77839da53332",
+      "source": "Sol subagent, Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "06-reward-collected.png",
+      "bytes": 28570,
+      "width": 1001,
+      "height": 956,
+      "mimeType": "image/jpeg",
+      "sha256": "1db8429d2b563da1281ae4cb8386d0ae46b1c0b8b757d5e5dd672787df4b6f3a",
+      "source": "Friday root, current visible Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "07-extraction-entry.png",
+      "bytes": 45124,
+      "width": 1001,
+      "height": 956,
+      "mimeType": "image/jpeg",
+      "sha256": "32bcf9b28f9c812e69c00bb0895e502403c33b652aaaf2691f6bdce6551dec2b",
+      "source": "Friday root, current visible Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "08-extraction-organize.png",
+      "bytes": 39697,
+      "width": 1001,
+      "height": 956,
+      "mimeType": "image/jpeg",
+      "sha256": "d5bce91cbd36a75220046ad447e9bdbae1b4fd3c237adc4cc7b8b30e968506ee",
+      "source": "Friday root, current visible Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "09-extraction-deposited.png",
+      "bytes": 34340,
+      "width": 1001,
+      "height": 956,
+      "mimeType": "image/jpeg",
+      "sha256": "07adc4330f0e61c5a670c50cd17f37870e6e2a8e0622da50bc021b95b7331e98",
+      "source": "Friday root, current visible Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "10-extraction-complete.png",
+      "bytes": 39498,
+      "width": 1001,
+      "height": 956,
+      "mimeType": "image/jpeg",
+      "sha256": "ab0607af0063a37498e36b663140564dcaec9db5f06fbba8a4719a0457883407",
+      "source": "Friday root, current visible Codex IAB",
+      "over1MiB": false
+    },
+    {
+      "name": "11-returned-base.png",
+      "bytes": 66791,
+      "width": 1001,
+      "height": 956,
+      "mimeType": "image/jpeg",
+      "sha256": "655e4e54b6d2d892063b6f310448028e98bb04895c5f6545f29724000a944f42",
+      "source": "Friday root, current visible Codex IAB",
+      "over1MiB": false
+    }
+  ],
+  "note": "Browser screenshot bytes are JPEG; original evidence filenames retain the .png suffix."
+}

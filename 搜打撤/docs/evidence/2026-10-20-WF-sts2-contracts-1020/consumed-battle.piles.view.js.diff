@@ -1,0 +1,23 @@
+diff --git a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/consumed-before-battle.piles.view.js.txt b/game/src/battle/view/battle.piles.view.js
+index 10ad6eb3..5a0e2417 100644
+--- a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/consumed-before-battle.piles.view.js.txt
++++ b/game/src/battle/view/battle.piles.view.js
+@@ -1,5 +1,6 @@
+ export const BATTLE_CONSUMED_LABEL = '本场消耗牌堆';
+-export const consumedPileUids = snapshot => snapshot.mode === 'boss' ? snapshot.grave : (snapshot.consumed || []);
++export const consumedPileUids = snapshot => snapshot.mode === 'boss' ? snapshot.grave
++  : [...new Set([...(snapshot.played || []), ...(snapshot.consumed || [])])];
+ 
+ /* 牌堆视图适配：只负责牌堆徽标 HTML，不参与牌堆逻辑。 */
+ 
+@@ -12,8 +13,8 @@ function renderPileBadge({ className = '', dataAct = '', title = '', count = 0,
+ 
+ function renderCombatPiles({ mode, drawCount, discardCount, graveCount, pileTip, cardBackHTML, escAttr }) {
+   const draw = renderPileBadge({ className:'clickable', dataAct:'btDeck', title:mode === 'boss' ? `牌库：${pileTip(drawCount)}（点击查看）` : `牌库：${drawCount.length} 张（仅抽牌效果取牌，回合开始不抽牌；点击查看）`, count:drawCount.length, cardBackHTML, cap:'牌库' }, escAttr);
+-  // Ordinary battles expose the real per-battle consumed ledger without inventing
+-  // a cycling deck/grave rule. The empty pile remains inspectable from turn one.
++  // Ordinary battles display played and explicitly consumed cards together.
++  // Their runtime ledgers stay separate; restoration and boss cycling rules are unchanged.
+   if (mode !== 'boss') {
+     const grave = renderPileBadge({ className:'clickable', dataAct:'btGrave', title:`${BATTLE_CONSUMED_LABEL}：${pileTip(graveCount)}（点击查看；战后进入消耗区，道具、装备不可在火堆复原）`, count:graveCount.length, cardBackHTML:`<span class="down">${cardBackHTML}</span>`, suffix:'[[icon:skull]] ', cap:'本场消耗' }, escAttr);
+     return { draw, rest:grave };

@@ -47,6 +47,17 @@ function arrange(occupied, bagCopies = 0, storedCopies = 3, withPearl = false) {
 }
 function take() { UI._acts.pouchTake({ name: spell.name }); }
 
+it('锦囊存取读取声明容量和类型，整叠超限不消费卡牌', () => {
+  arrange(4, 3, 0);
+  game.ownedCards[0].card = { ...pouch, rules:{ version:1, equip:{ container:{ slots:2, accepts:'法术' } } } };
+  showBackpack(true);
+  UI._acts.inspectStack({ name:pouch.name, safe:'0' }); UI._acts.pouchStoreZoom();
+  const before = JSON.stringify(game.ownedCards);
+  UI._acts.pouchPut({ name:spell.name });
+  expect(JSON.stringify(game.ownedCards)).toBe(before);
+  expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('0/2'), 'warn');
+});
+
 it.each([0, 3])('满包整叠取出拒绝且锦囊与物资原样保留（已有同名 %i 张）', bagCopies => {
   arrange(16, bagCopies);
   const cards = JSON.stringify(game.ownedCards), items = JSON.stringify(game.inventory);
@@ -205,10 +216,12 @@ it('真实箱奖励直接开完整背包，Esc返回无损；存安全格后原g
   UI._acts.zoomMoveToSafe();
   expect(session.usedSlots()).toBe(15);
   UI._acts.closeBag();
-  UI._acts.chestTake1({i:0});
+  const claim = UI._acts.chestTake1;
+  claim({i:0});
   expect(game.ownedCards.filter(o=>o.card.id===reward.id)).toHaveLength(1);
   expect(game.ownedCards.find(o=>o.uid==='full-0').safe).toBe(true);
-  UI._acts.chestTake1({i:0});expect(game.ownedCards.filter(o=>o.card.id===reward.id)).toHaveLength(1);
+  expect(UI._acts.chestTake1).toBeUndefined();
+  claim({i:0});expect(game.ownedCards.filter(o=>o.card.id===reward.id)).toHaveLength(1);
 });
 
 it('奖励腾位安全格已满时不移动卡；存放/锦囊/初始攻击不列作腾位对象', async () => {

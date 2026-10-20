@@ -1,0 +1,17 @@
+[
+  {
+    "path": "game/src/battle/core/battle.resolution.js",
+    "backup": "docs\\evidence\\2026-10-20-WF-sts2-contracts-1020\\consumed-baseline\\battle.resolution.js.txt",
+    "sha256": "F4A2C9EAD0AD244566FBA8FABB25FC9E6E26B9EF7CA6BB9AE17798214E1821AC"
+  },
+  {
+    "path": "game/src/battle/effects/effect-verbs.js",
+    "backup": "docs\\evidence\\2026-10-20-WF-sts2-contracts-1020\\consumed-baseline\\effect-verbs.js.txt",
+    "sha256": "C1EE176771974D37F9CB3AB284F768991BDCB7083DEA78FD7349ABEF6B140103"
+  },
+  {
+    "path": "game/src/battle/effects/battle.card-inspection.js",
+    "backup": "docs\\evidence\\2026-10-20-WF-sts2-contracts-1020\\consumed-baseline\\battle.card-inspection.js.txt",
+    "sha256": "95DD272931AF2A103B6415F35DE8313C466CACAC655310FB83A260BF46CA6877"
+  }
+]

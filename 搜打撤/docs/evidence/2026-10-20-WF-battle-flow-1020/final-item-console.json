@@ -1,0 +1,18 @@
+{
+  "since": "2026-10-20T16:06:17.902Z",
+  "errors": [],
+  "earlierConstructedScenarioErrors": [
+    {
+      "level": "error",
+      "message": "[battle:settle] 战后结算未完成 Error: 本场结算已完成，但对局已继续变化；请重新载入当前对局\n    at run (http://127.0.0.1:5337/src/hub/game.bag.settle.js?t=1792510229520:86:35)",
+      "timestamp": "2026-10-20T15:48:45.973Z",
+      "url": "http://127.0.0.1:5337/src/core/diagnostics.local.js?t=1792510229327"
+    },
+    {
+      "level": "error",
+      "message": "[battle-loader] 战斗模块加载失败 TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:5337/src/battle/view/battle.view.js?t=1792511488186",
+      "timestamp": "2026-10-20T15:54:45.829Z",
+      "url": "http://127.0.0.1:5337/src/core/diagnostics.local.js?t=1792510229327"
+    }
+  ]
+}

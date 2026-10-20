@@ -62,12 +62,13 @@ it('enemy attacks pause for both discovered choices and resume each enemy exactl
 });
 it('full-hand reactive damage copies resolve before remaining enemies attack', async () => {
   start({count:2}); await play('tt13-scale-armor'); R.set$mode('boss'); fixedRandom(0);
+  R.set$drawPile([]); // Isolate the BOSS reactive draw without the normal-only starter library.
   R.foes[0].atk=1; R.foes[1].atk=2; R.foes[1].hp=2;
   R.set$hand(Array.from({length:30},(_,i)=>`filler-${i}`));
   const uid=grant({...canonical('tt3-ice-spike'),_castOnDraw:true},R.drawPile);
   await next();
   expect(R.hand).toHaveLength(30); expect(R.discard).toContain(uid); expect(R.turn).toBe(2);
-  expect(R.foes[0].hp).toBe(90); // two reflections (6), plus the recycled ice spike twice (4)
+  expect(R.foes[0].hp).toBe(92); // two reflections (6), plus one ice spike (2); consumed cards do not auto-return.
   expect(R.G.hp).toBe(197);
 });
 it('normal next-turn draw casts while enemy continuation is still active', async () => {

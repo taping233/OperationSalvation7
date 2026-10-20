@@ -1,10 +1,11 @@
+import { createBattleRuntime } from '../game/src/battle/runtime/battle.runtime.factory.js';
 import { describe, expect, it } from 'vitest';
 import { createBattleResolution } from '../game/src/battle/core/battle.resolution.js';
 import * as Combat from '../game/src/battle/core/combat.js';
 
 function makeResolver(state) {
   const events = [];
-  const resolver = createBattleResolution({
+  const resolver = createBattleResolution({ runtime: createBattleRuntime(),
     readState: () => state.current,
     getPlayerStatus: () => state.playerStatus || { status: {} },
     esc: value => String(value),
@@ -179,7 +180,7 @@ describe('battle resolution ports', () => {
     expect(events.find(event => event[0] === 'log' && String(event[1]).includes('禁疗中'))?.[1]).toContain('回复 3 点生命无效');
   });
 
-  it('uses boss draw and ordinary grantSha semantics in declared order', () => {
+  it('uses real deck draw in both modes in declared order', () => {
     const resolve = mode => {
       const target = { hp: 20, dead: false, status: {} };
       const { resolver, events } = makeResolver({ current: { mode, playedMovesThisTurn: 0, infuseFuels: 0, grave: [] }, playerStatus: { status: {} }, target, drawnCount: 0 });
@@ -195,8 +196,8 @@ describe('battle resolution ports', () => {
     expect(boss.filter(event => ['armor', 'draw', 'sha'].includes(event[0]))).toEqual([['armor', 5], ['draw', 1]]);
     expect(boss.some(event => event[0] === 'log' && String(event[1]).includes('抽了 0 张牌'))).toBe(true);
     const normal = resolve('normal');
-    expect(normal.filter(event => ['armor', 'draw', 'sha'].includes(event[0]))).toEqual([['armor', 5], ['sha', 1]]);
-    expect(normal.some(event => event[0] === 'log' && String(event[1]).includes('获得 1 张【初始攻击】'))).toBe(true);
+    expect(normal.filter(event => ['armor', 'draw', 'sha'].includes(event[0]))).toEqual([['armor', 5], ['draw', 1]]);
+    expect(normal.some(event => event[0] === 'log' && String(event[1]).includes('抽了 0 张牌'))).toBe(true);
   });
 
   it('suppresses all structured heal, armor, and draw operations under silence', () => {
@@ -778,13 +779,13 @@ describe('A3 第三批（G3 acquire 族）：结构化 onPlay acquire/coins op',
     expect(logTexts(state.events).some(t => t.includes('洗入牌库'))).toBe(true);
   });
 
-  it("dest:'deck' 普通战双口径：无牌库降级为直接置入手牌（deckDraw/grantSha 先例）", () => {
+  it("dest:'deck' 普通战也洗入真实牌库，不直接置入手牌", () => {
     const state = setup({ mode: 'normal', discoverPool: [CARD('流光照影')] });
     state.resolver(acquireCard({ op: 'acquire', n: 1, dest: 'deck', pool: { kind: '流光照影' } }), state.callState.target, false, 0, null);
-    expect(state.events.filter(event => event[0] === 'temp'), '普通战无牌库 → 直接获得').toEqual([['temp', '流光照影']]);
-    expect(state.events.some(event => event[0] === 'deckAdd')).toBe(false);
-    expect(state.events.some(event => event[0] === 'shuffle')).toBe(false);
-    expect(logTexts(state.events).some(t => t.includes('普通战斗无牌库，改为直接获得'))).toBe(true);
+    expect(state.events.filter(event => event[0] === 'temp')).toEqual([]);
+    expect(state.events.filter(event => event[0] === 'deckAdd')).toEqual([['deckAdd', '流光照影']]);
+    expect(state.events.some(event => event[0] === 'shuffle')).toBe(true);
+    expect(logTexts(state.events).some(t => t.includes('洗入牌库'))).toBe(true);
   });
 
   it("pool:{kind:'moves', cost} v1 形状兼容 + 未识别 kind 走通用随机池", () => {
@@ -997,14 +998,14 @@ describe('A3 第三批（B7）：结构化 onPlay blessing 与资源族 op', () 
     expect(silenced.events.some(event => event[0] === 'maxHp')).toBe(false);
   });
 
-  it('deckCap：BOSS 战注明编组阶段生效不追溯（正口径）；普通战注明无牌库（反口径）——均无状态变更', () => {
+  it('deckCap：BOSS 战编组阶段生效不追溯，普通战不用编组上限——均无状态变更', () => {
     const boss = setup();
     boss.resolver(selfCard({ op: 'deckCap', n: 5 }), boss.target, false, 0, null);
     expect(logTexts(boss.events).some(t => t.includes('牌库上限在开战前编组阶段生效') && t.includes('+5 不追溯扩容'))).toBe(true);
 
     const normal = setup({ current: { mode: 'normal', playedMovesThisTurn: 0, infuseFuels: 0, grave: [] } });
     normal.resolver(selfCard({ op: 'deckCap', n: 5 }), normal.target, false, 0, null);
-    expect(logTexts(normal.events).some(t => t.includes('普通战斗没有牌库'))).toBe(true);
+    expect(logTexts(normal.events).some(t => t.includes('普通战斗不使用 BOSS 编组上限'))).toBe(true);
   });
 
   it('damage + blessing 复合：按 onPlay 数组顺序先伤害后增益（循环 1 → 沉默门 → 循环 2）', () => {

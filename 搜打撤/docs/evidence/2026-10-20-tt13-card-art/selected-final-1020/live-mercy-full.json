@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T11:07:07.687Z",
+  "inputKind": "real-input",
+  "detail": "真实搜索并打开收刀白花版；等待非缩略src加载后补取高清证据",
+  "screenshot": {
+    "path": "live-mercy-full.png",
+    "bytes": 60887,
+    "sha256": "85cd5b4754e146727a0b26f408e35517b4ef480e91fb82db402e8da7bc72c2a5"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 948,
+      "src": "http://localhost:5200/assets/cards/martial-tt13-mercy.webp?art=selected-final-20261020&v=0.60.0",
+      "width": 1660
+    }
+  ],
+  "console": []
+}

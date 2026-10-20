@@ -99,10 +99,12 @@ describe('牌效动词注册表', () => {
     expect(isRecognized('向深渊献上敬意')).toBe(false);
   });
 
-  it('识别面冻结：ELSEWHERE 是执行器原「识别补丁」白名单的等价搬家', () => {
+  it('识别面冻结：仅 graveScale 增加已定版的消耗牌堆旧词兼容，其余沿原白名单', () => {
     // 快照由 HEAD 版 battle.effects.js 的识别补丁块机械抽取（见 fixtures 内 provenance），
     // 不是照着现表反抄：现表若被扩大/缩小/改门控，这里就会红。
     const frozen = frozenElsewhere.entries.map(e => `${e.gate || '-'}:${e.source}`);
+    // 统一消耗牌堆仍接受旧卡文；保留原始快照来源，只显式放行这一条变化。
+    frozen[0] = '-:(?:墓地|弃牌堆|消耗牌堆)中每有\\s*1\\s*张(武术|法术|装备|道具|资源)牌';
     const actual = ELSEWHERE.map(v => `${v.gate || '-'}:${v.pattern.source}`);
     expect(actual).toEqual(frozen);
     expect(actual).toHaveLength(frozenElsewhere.entries.length);

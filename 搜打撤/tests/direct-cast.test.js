@@ -11,7 +11,7 @@
  *     （此前卡库无「箭」，两卡从未生效；现由 effect-steps 的 ARROW_TOKEN 虚拟令牌支撑）
  *   9 阿波罗的礼物——穿戴后发现面板出现「直接施放」（discoverCastable），castDiscover 免费打出
  * 判定口径：不崩、不悬挂、关键日志存在、能量账目符合「免费用」语义。 */
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { targetSideFor } from '../game/src/battle/effects/battle.target-rules.js';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
@@ -23,6 +23,7 @@ window.SDT.MAP = {
 };
 await import('../game/src/cards/cards.js');
 const { BattleSession } = await import('../game/src/battle/core/battle.core.js');
+const { findCard } = await import('../game/src/battle/core/battle.engine.js');
 
 const C = window.SDT.Cards;
 
@@ -262,8 +263,11 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
     await playIt(g, g.ownedCards[1].uid, crossbow);
     expect(snap().equipped.length).toBe(2);
     // 结束回合 → 敌方 → 新回合开始：天狼长弓发放「箭」令牌（ARROW_TOKEN，0 费）
-    BattleSession.commands.endTurn();
-    let s = await drain();
+    const arrow = card('tt2-swiftarrow');
+    const pool = vi.spyOn(C, 'all').mockReturnValue([arrow]);
+    let s;
+    try { BattleSession.commands.endTurn(); s = await drain(); }
+    finally { pool.mockRestore(); }
     // 敌人行动后回到玩家回合（hp 99999 扛得住）
     for (let i = 0; i < 20 && s.phase !== 'player'; i++) { BattleSession.commands.endTurn?.(); await tick(); s = snap(); }
     await waitLog(() => logsJoin(g).includes('箭'));
@@ -271,10 +275,22 @@ describe('直接释放 / 直接施放类卡牌专项审计', () => {
     // 连弩限定技能：直接释放手牌中的所有「箭」
     const xbowEntry = snap().equipped.find(e => e.name === '连弩');
     expect(xbowEntry).toBeTruthy();
+    const arrows = s.hand.filter(uid => /箭/.test(findCard(uid)?.card.name || ''));
+    expect(arrows).toHaveLength(1);
+    expect(findCard(arrows[0]).card).toMatchObject({ id: arrow.id, cost: 0 });
+    const before = s;
     BattleSession.commands.useEquipSkill(xbowEntry.uid);
     s = await drain();
-    await waitLog(() => /释放了手牌中 \d+ 张「箭」/.test(logsJoin(g)));
-    expect(logsJoin(g)).toMatch(/释放了手牌中 \d+ 张「箭」/);
+    expect(s.hand).not.toContain(arrows[0]);
+    expect(s.consumedPile.filter(uid => uid === arrows[0])).toHaveLength(1);
+    // 迅疾箭自身抽1张；连弩每次释放再抽1张，均移动本场牌库原UID。
+    expect(s.drawPile).toHaveLength(before.drawPile.length - arrows.length * 2);
+    const gained = s.hand.filter(uid => !before.hand.includes(uid));
+    expect(gained).toHaveLength(2);
+    expect(before.drawPile).toEqual(expect.arrayContaining(gained));
+    expect(s.foes[0].hp).toBeLessThan(before.foes[0].hp);
+    expect(s.energy).toBe(before.energy);
+    expect(s.equipped.find(entry => entry.uid === xbowEntry.uid).used).toBe(true);
     expect(s.busy || s.actionQueueLength > 0).toBe(false);
     endBattle(g);
     expect(takeAsyncError()).toBeNull();

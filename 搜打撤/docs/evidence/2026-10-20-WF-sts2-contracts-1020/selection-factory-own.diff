@@ -1,0 +1,37 @@
+diff --git a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/selection-before-battle.engine.factory.js.txt b/game/src/battle/core/battle.engine.factory.js
+index 114eb451..0f5c987f 100644
+--- a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/selection-before-battle.engine.factory.js.txt
++++ b/game/src/battle/core/battle.engine.factory.js
+@@ -50,7 +50,7 @@ import { createBattleFoeLifecycle } from './battle.foe-lifecycle.js';
+ import { createBattleDraw } from './battle.draw.js';
+ import '../view/battle.feedback.js';
+ import { createBattleSelectionFlow } from './battle.selection-flow.js';
+-import { matchesHandSelectKey as matchHandSelectKey } from './battle.hand-selection.js';
++import { matchesHandSelectKey as matchHandSelectKey, buildHandSelectionContract } from './battle.hand-selection.js';
+ import { createBattleEquipment } from '../bag/battle.equipment.js';
+ import { recordBattleDamage } from './battle.summary.js';
+ import { createBattleBag } from '../bag/battle.bag.js';
+@@ -371,6 +371,12 @@ const isAOE = isAreaEffect;
+ function captureSnapshotInput() {
+     const pTgt = pendingTargetOf();
+     const pItem = pendingItemOf();
++    // Match findCard's override/owned/granted precedence without its legacy card repair writes.
++    const selectionContract = handSelecting ? buildHandSelectionContract(handSelecting, hand.map(uid => {
++      const stored = G?.ownedCards?.find(entry => entry.uid === uid) || granted.find(entry => entry.uid === uid);
++      const card = cardOverrides.get(uid) || stored?.card;
++      return card ? { uid, card: { name: card.name, type: card.type } } : null;
++    })) : null;
+     const curseImmunityReset = delayed.find(q => q.special === 'curseImmuneOff');
+     const potionBar = G && !selectingDeck ? battleBagItems().reduce((acc, o) => {
+         const g = acc.find(p => p.name === o.card.name);
+@@ -392,7 +398,9 @@ function captureSnapshotInput() {
+       player: G ? { hp: G.hp, maxHp: G.maxHp, atk: G.atk, spellPower: G.spellPower || 0, myClass: G.myClass || null, characterId: G.characterId || null } : null,
+       handInfuseCounts,
+       pdef, pstat, foes, deathFxPending: foes.map(foe => stagedDeathFx.has(foe)), allies, hand, drawPile, discard, grave, consumed, infusing, discovering,
+-      handSelecting, choosing, pendingTarget: pTgt, pendingHint, viewingGrave, viewingDeck, viewingBag,
++      handSelecting: handSelecting ? { ...handSelecting,
++        ...selectionContract } : null,
++      choosing, pendingTarget: pTgt, pendingHint, viewingGrave, viewingDeck, viewingBag,
+       dreadShown, selectingDeck, deckNeed: Math.min(R().bossDeckSize, selPool.filter(o => !equipment.isBattleStartEquip(o.card)).length + Math.min(equipCap(), selPool.filter(o => equipment.isBattleStartEquip(o.card)).length)), selDeckMax, selShaN, sel, selPool,
+       potionBar, pendingItem: pItem, slamPending: !!interactionOf('slam'), dartPending: !!interactionOf('dart'),
+       equipped: equipped.map(e => ({

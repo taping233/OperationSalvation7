@@ -163,7 +163,7 @@ describe('宝箱/固定奖励阿猫附赠独立待领', () => {
     expect(Chests.serialize(H.game).current.cards.map(card=>card.id)).toEqual([apollo.id,eventBonus.id]);
     acts.chestTake1({i:1}); expect(count(eventBonus.id)).toBe(1); expect(Chests.serialize(H.game).current.cards).toHaveLength(2);
     H.cards=[apollo]; H.game.ownedCards=[]; open(); acts.chestTake1({i:0});
-    expect(count(apollo.id)).toBe(1); expect(Chests.serialize(H.game).current.cards).toHaveLength(1);
+    expect(count(apollo.id)).toBe(1); expect(Chests.serialize(H.game)).toBeNull(); expect(H.game.state).toBe('idle');
   });
 
   it('明确确认放弃才会丢弃附赠，不能通过继续动作隐式吞奖', () => {

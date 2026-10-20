@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T11:02:11.010Z",
+  "inputKind": "real-input",
+  "detail": "当前窗口真实打开照相馆、搜索星辰占卜并打开大图，核对三张牌最终图与缓存版本；未改视口或写入玩家存档",
+  "screenshot": {
+    "path": "live-stellar-final.png",
+    "bytes": 67075,
+    "sha256": "e06be45948a76326f127193296f6470f1992767d67673ee9900586a95d4be9f7"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 948,
+      "src": "http://localhost:5200/assets/cards/spell-tt13-stellar-divination.webp?art=selected-final-20261020&v=0.60.0",
+      "width": 1659
+    }
+  ],
+  "console": []
+}

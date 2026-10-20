@@ -1,0 +1,127 @@
+{
+  "task": "WF-framework-closeout-1020",
+  "reviewer": "persistence_review",
+  "recordedAt": "2026-10-21T00:55:30+08:00",
+  "scope": "独立只读复核最终全量中 framework-independent-battles.test.js:128 的取消回执失败；仅本文件为新增证据，未修改源码或测试。",
+  "conclusion": {
+    "classification": "测试选择了支付后的暂停屏障，与现行回执合同不符",
+    "sourceDefectConfirmed": false,
+    "reason": "原测试在 waitMs windup 持有动作；该时点源牌已经扣费并移出手牌，committed 回执已经兑现。后续取消实际动作不能改写已发生的提交事实。",
+    "recommendedCoverage": [
+      "支付前在真实 preparePresentation Promise 暂停，保持 A cancelled、B committed、A 未扣费未伤害以及 A 新局状态隔离断言。",
+      "另保留支付后 windup 暂停再取消的用例，确认回执仍 committed，旧 signal 中止且旧效果不污染新局。"
+    ]
+  },
+  "contractReferences": [
+    {
+      "path": "docs/architecture.md",
+      "line": 38,
+      "contract": "源牌扣费并移出手牌后即确认提交，后续效果取消不改写该事实。"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-battle-play-feedback-1016/core-contract.md",
+      "line": 20,
+      "contract": "committed 表示已扣费并移出当前手牌，不等待整段效果、动画或发现流程结束。"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-battle-play-feedback-1016/core-contract.md",
+      "line": 22,
+      "contract": "cancelled 用于动作取消或场次、准备阶段被替换；受只兑现一次的回执约束。"
+    },
+    {
+      "path": "docs/evidence/2026-10-16-WF-battle-play-feedback-1016/core-contract.md",
+      "line": 31,
+      "contract": "扣费和 removeUid(hand, uid) 后发布 committed；之后的击杀终局、异常、取消或旧执行 false 不能改写提交事实。"
+    }
+  ],
+  "implementationReferences": [
+    {
+      "path": "game/src/battle/core/battle.exec-play.domain.js",
+      "line": 261,
+      "observation": "submission.commit() 位于扣能量、记录 played、移出源牌之后，首次 resolveCardWithFeedback 等待之前。"
+    },
+    {
+      "path": "game/src/battle/core/battle.exec-play.domain.js",
+      "line": 93,
+      "observation": "settle 的 completed 守卫使回执只兑现一次，支付后的 error 不覆盖 committed。"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.factory.domain.js",
+      "line": 941,
+      "observation": "生产 preparePresentation 调用真实 instanceRuntime.renderBattle(getSnapshot())，其 Promise 直接进入动作 runner。"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.action-runner.js",
+      "line": 38,
+      "observation": "runner 等待准备 Promise，并在 abort 时拒绝等待；准备完成后重新核对 signal、generation、token 与 battleActive，再执行真实动作。"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.execution-session.js",
+      "line": 31,
+      "observation": "reset 先递增 generation，再清队并 abort 当前动作；finish 与 start 使用同一实例执行会话。"
+    }
+  ],
+  "probe": {
+    "execution": "PowerShell here-string 经 stdin 传给 node --input-type=module；只在内存运行，未写临时脚本。",
+    "entry": "import { createBattleEngineInstance } from './game/src/battle/core/battle.engine.instance.js'",
+    "realPath": [
+      "createBattleEngineInstance",
+      "runtime.bindBattleRenderer",
+      "factory preparePresentation",
+      "createBattleActionRunner",
+      "实例 actionQueue",
+      "真实 execPlay 与结构化 damage"
+    ],
+    "barrier": "两个真实引擎分别绑定 renderer：snapshot.phase === 'resolving' 时返回各自 deferred Promise，其他阶段返回 undefined。没有替换 queue、execute、execPlay、提交、取消或伤害实现。",
+    "fixture": {
+      "instances": 2,
+      "seed": 123,
+      "initialEnergy": 4,
+      "cardUid": "same-uid",
+      "cardCost": 1,
+      "cardType": "武术",
+      "damageType": "fixed",
+      "damageA": 3,
+      "damageB": 7,
+      "initialFoeHp": 30,
+      "rule": { "op": "damage", "amountField": "dmg", "target": "chosenEnemy" },
+      "injectedPorts": "卡库、只读规则、无声音效及无时长呈现端口；renderer 只提供真实生产准备入口可返回的资源 Promise。"
+    },
+    "steps": [
+      "分别真实 submitCardPlay('same-uid', 0)，推进八个 Promise microtask。",
+      "核对两个 settled 均未兑现，两个 renderer 已被调用，A 能量仍为 4、源 UID 仍在手牌、敌 HP 仍为 30。",
+      "从各实例 runtime.activeActionSignal 取得两个真实且不同的 signal。",
+      "A 真实 flee 后用新的 game 对象 start；核对 A 旧 signal aborted、B signal 未 aborted。",
+      "在两个资源 gate 仍未放行时等待 A settled，断言 cancelled。",
+      "放行 B gate 和旧 A gate，等待两实例真实 queue idle。",
+      "核对 B settled committed 且真实敌 HP 为 23；A 新局敌 HP 为 30、能量为 4、源 UID 仍在手牌。",
+      "对两个实例真实 flee 并等待 idle 收尾。"
+    ],
+    "observations": {
+      "beforePayment": {
+        "aSettled": "pending",
+        "bSettled": "pending",
+        "aEnergy": 4,
+        "aSourceUidInHand": true,
+        "aFoeHp": 30,
+        "signalsDistinct": true
+      },
+      "afterAReplaced": {
+        "aOldSignalAborted": true,
+        "bSignalAborted": false,
+        "aSettledBeforeGateRelease": "cancelled"
+      },
+      "afterLateResourceCompletion": {
+        "aSettled": "cancelled",
+        "bSettled": "committed",
+        "aNewBattleEnergy": 4,
+        "aNewBattleSourceUidInHand": true,
+        "aNewBattleFoeHp": 30,
+        "bFoeHp": 23
+      }
+    },
+    "exitCode": 0,
+    "stdout": "{\"barrier\":\"real bindBattleRenderer -> factory preparePresentation -> runner -> queue -> execPlay\",\"renderCalls\":[2,6],\"a\":\"cancelled\",\"b\":\"committed\",\"aEnergy\":4,\"aFoeHp\":30,\"bFoeHp\":23}"
+  },
+  "limits": "本记录证明真实纯引擎支付前准备边界及跨实例取消隔离；未重新运行全量测试，未做浏览器验收，也不宣称支付后的效果具备资源回滚语义。"
+}

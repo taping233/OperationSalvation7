@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T11:05:04.566Z",
+  "inputKind": "real-input",
+  "detail": "真实搜索手下留情并打开大图，核对老板指定收刀白花版",
+  "screenshot": {
+    "path": "live-mercy-final.png",
+    "bytes": 50711,
+    "sha256": "903d8c61e907e7978660f81f4d011ff745cb8590e8f21bc5a23500105516f639"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 256,
+      "src": "http://localhost:5200/assets/thumbs/cards/martial-tt13-mercy.webp?art=selected-final-20261020&v=0.60.0",
+      "width": 448
+    }
+  ],
+  "console": []
+}

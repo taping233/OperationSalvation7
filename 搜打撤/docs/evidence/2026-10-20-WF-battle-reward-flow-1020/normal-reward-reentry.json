@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T06:48:18.045Z",
+  "inputKind": "real-input",
+  "detail": "游戏自带不落档小宝箱测试局；整理背包并关闭、返回地图后原节点继续领奖、取消放弃、双击收下；截图核对实际奖励与金币，不证明自然整局或存档恢复",
+  "screenshot": {
+    "path": "normal-reward-reentry.png",
+    "bytes": 40195,
+    "sha256": "2e2646409ff46fb0cecef24789f31a2293668ea81fd063f28f5dae66f09f9413"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/archive.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 640,
+      "src": "http://127.0.0.1:5200/assets/scenes/chests/supply-opening-v6/small/frame-00.webp",
+      "width": 640
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/bag.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/bag.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://127.0.0.1:5200/assets/cards/spell-tt3-holy-water.webp?art=healing-original-hands-rough-20261010&v=0.60.0",
+      "width": 1441
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/heart.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    }
+  ],
+  "console": []
+}

@@ -1,0 +1,57 @@
+// Local comparison harness; the .before modules are unmodified source snapshots.
+import { expect, it, vi } from 'vitest';
+import fs from 'node:fs';
+vi.mock('../game/src/run/game.session.js', () => ({ MAP:{ rules:{safeStart:2,safeMax:6} } }));
+vi.mock('../game/src/hub/collection.commands.js', () => ({ getCharacter:()=>({selectedSkinId:'default',availableSkinIds:['default']}) }));
+import * as before from '../game/src/hub/hub.collection-v4.before.js';
+import * as after from '../game/src/hub/hub.collection-v4.js';
+import * as poolBefore from '../game/src/hub/hub.personnel.before.js';
+import * as poolAfter from '../game/src/hub/hub.personnel.js';
+import SDT from '../game/src/core/sdt-facade.js';
+await import('../game/src/core/icons-bitmap.js');
+await import('../game/src/cards/cards.js');
+const cards=SDT.Cards;
+for (const name of ['ensureStarters','ensureSha','ensureTabletop','ensureDmgTypes','ensureEffectFields']) cards[name]();
+const catalog=cards.all();
+const rawRender=cards.cardHTML;
+let rendered=0;
+cards.cardHTML=(...args)=>{rendered++;return rawRender(...args);};
+let slot=10000;
+function baseFor() { return {slot:++slot,data:{collection:Object.fromEntries(catalog.map(card=>[card.id,true])),stash:[]},isCollected:()=>true}; }
+const ui={act:()=>{},showCardZoom:()=>{}};
+function run(module, kind, width) {
+ const base=baseFor();SDT.Base=base;window.SDT=SDT;
+ SDT.Meta={classSummary:()=>[{cls:'侠客',lv:1,xp:0,need:50}],perkText:()=>'',isCollectible:()=>true};
+ SDT.Art={listSkins:()=>[],skinUrl:()=>'/portrait.webp',classAvatarArt:()=>'<img src="/avatar.webp" alt="">'};
+ if(kind==='pool'){module.setPersonnelGroup('people');module.setPersonnelSection('pool');}
+ rendered=0;
+ const start=performance.now();
+ const html=kind==='pool'?module.personnelHTML('wu'):module.collectionCardsHTML(base,cards);
+ const generated=performance.now();
+ document.body.innerHTML=`<main id="hubMain">${SDT.Icons.rich(html)}</main>`;
+ const parsed=performance.now();
+ const root=document.querySelector('#hubMain');
+ const track=root.querySelector('.card-browser-track');
+ Object.defineProperty(track,'clientWidth',{value:width});
+ track.style.setProperty('--card-browser-min','220px');track.style.columnGap='30px';
+ if(kind==='pool')module.bindPersonnel({ui,refresh:()=>{},sound:{tick:()=>{}}});
+ else module.bindCollectionCards({root,base,cards,ui});
+ const bound=performance.now();
+ return {generateMs:generated-start,parseMs:parsed-generated,bindMs:bound-parsed,totalMs:bound-start,trackWidth:width,visibleCards:[...root.querySelectorAll('[data-browser-key]')].filter(item=>!item.hidden).length,htmlBytes:Buffer.byteLength(html),elements:root.querySelectorAll('*').length,cardFaces:root.querySelectorAll('.hs-card').length,cardHTMLCalls:rendered,identities:root.querySelectorAll('[data-browser-key]').length};
+}
+it('measures actual card HTML and actual page binding in the same jsdom process',async()=>{
+ vi.stubGlobal('matchMedia',()=>({matches:true}));
+ const result={environment:'Node/Vitest/jsdom; real Cards.cardHTML and Icons.rich; no browser layout, network, image decode or paint; boot-seeded catalogue; synthetic explicit 900/1500px track widths (not measured viewport); minimum220/gap30 from base-rooms-v7.css; warm cardHTML cache; alternating 7 samples after warmup',catalogCards:catalog.length,results:{}};
+ for(const [kind,a,b,width] of [['collection',before,after,900],['collection',before,after,1500],['pool',poolBefore,poolAfter,900],['pool',poolBefore,poolAfter,1500]]) {
+  run(a,kind,width);await Promise.resolve();run(b,kind,width);await Promise.resolve();
+  const samples={before:[],after:[]};
+  for(let i=0;i<7;i++)for(const [label,module] of i%2?[['after',b],['before',a]]:[['before',a],['after',b]]){samples[label].push(run(module,kind,width));await Promise.resolve();}
+  result.results[`${kind}-${width}`]=Object.fromEntries(Object.entries(samples).map(([label,rows])=>[label,Object.fromEntries(Object.keys(rows[0]).map(key=>[key,rows.map(row=>row[key]).sort((x,y)=>x-y)[3]]))]));
+  expect(result.results[`${kind}-${width}`].after.identities).toBe(result.results[`${kind}-${width}`].before.identities);
+  expect(result.results[`${kind}-${width}`].after.cardFaces).toBeLessThan(result.results[`${kind}-${width}`].before.cardFaces);
+ }
+ fs.writeFileSync('docs/evidence/2026-10-20-visible-card-face/benchmark.json',JSON.stringify(result,null,2)+'\n');
+ console.log(JSON.stringify(result,null,2));
+ document.body.replaceChildren();await Promise.resolve();await new Promise(resolve=>setTimeout(resolve,30));
+ vi.unstubAllGlobals();
+},30000);

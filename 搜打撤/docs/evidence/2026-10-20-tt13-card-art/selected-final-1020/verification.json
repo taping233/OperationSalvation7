@@ -1,0 +1,39 @@
+{
+  "status": "complete-uncommitted",
+  "scope": "13 approved card illustrations and 13 thumbnails; art only",
+  "asset_check": {
+    "ok": true,
+    "selected": 26,
+    "report": "asset-check.json",
+    "global": {
+      "ok": false,
+      "errorCount": 95,
+      "historicalWarningCount": 570,
+      "manifestIssues": []
+    },
+    "boundary": "95 existing out-of-scope errors were not changed"
+  },
+  "browser": {
+    "source": "Codex current in-app browser",
+    "url": "http://localhost:5200/",
+    "viewport": "Current window only, no viewport override",
+    "input": "Real photo-studio search inputs for all 13 names, real open/close of selected large photos",
+    "thumbnails": "13/13 complete, natural width448, final revision URLs; see live-all-thumbnails.json",
+    "large_images": [
+      "live-stellar-final.json",
+      "live-soul-full.json",
+      "live-mercy-full.json"
+    ],
+    "initial_placeholders": [
+      "live-soul-final.json",
+      "live-mercy-final.json"
+    ],
+    "console_errors": [],
+    "boundary": "Three representative large-image displays checked; battle interaction was not tested"
+  },
+  "tests": "No test suite rerun: image bytes, provenance metadata and cache revisions only. Prior card-art test results are historical, not a new test run.",
+  "build": false,
+  "commit": false,
+  "push": false,
+  "new_services": []
+}

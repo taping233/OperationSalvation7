@@ -1,0 +1,4774 @@
+{
+  "source": "D:\\素材\\代号柒\\搜打撤",
+  "target": "C:\\Users\\太平\\AppData\\Local\\Temp\\sdt-reward-refresh-1020-XzsHVG",
+  "createdAt": "2026-10-20T09:15:48.247Z",
+  "port": 5308,
+  "files": 792,
+  "changedDuringCopy": [],
+  "runtimeFrozen": true,
+  "hmr": false,
+  "inputs": [
+    {
+      "file": "game/src/agent/agent.battle-stats.js",
+      "size": 3158,
+      "mtimeMs": 1792131521606.7039,
+      "sha256": "ad18c1b9deb1adf637a873e3670a02633997a659414fc891c24eed7b2d4f8e41"
+    },
+    {
+      "file": "game/src/agent/agent.console.js",
+      "size": 8059,
+      "mtimeMs": 1791987697216.77,
+      "sha256": "cf4d8973bddbafb9c669fea26165a443df6f3a25f5992aebcd9ba751af6f10c3"
+    },
+    {
+      "file": "game/src/agent/agent.data.js",
+      "size": 7929,
+      "mtimeMs": 1791012062234.3909,
+      "sha256": "f5b4138c9ef0c6996c53ac811d06f486633293f1c1ff20cb044e88267d0d3c10"
+    },
+    {
+      "file": "game/src/agent/agent.js",
+      "size": 3007,
+      "mtimeMs": 1792131521606.7039,
+      "sha256": "a999da44a09c584db3082c0ccd9dad4bedfcc03ea56236538a75d965c6c23ffc"
+    },
+    {
+      "file": "game/src/agent/agent.llm.js",
+      "size": 8493,
+      "mtimeMs": 1790898335559.1753,
+      "sha256": "963359cf4fa38179fce87f3c47ec44bed4f624a96ca6a1453713d10d090b176b"
+    },
+    {
+      "file": "game/src/agent/agent.policy.js",
+      "size": 55562,
+      "mtimeMs": 1791987697216.77,
+      "sha256": "4c0128ef43e8650fd354bb6c0a5f280fdc04bf252fdbff23f588eec0d4b34dcb"
+    },
+    {
+      "file": "game/src/agent/agent.protocol.js",
+      "size": 5175,
+      "mtimeMs": 1790958772025.0056,
+      "sha256": "8398f0bbe8fc1cccd619b52b96b3c06c4d341673210b790e85bf6f7c796cde84"
+    },
+    {
+      "file": "game/src/agent/agent.recorder.js",
+      "size": 15775,
+      "mtimeMs": 1792131521606.7039,
+      "sha256": "5719f81a13f533e6ec9baa953e6e0171c0bc79a0d31c2e5033e9e44642a5cdc6"
+    },
+    {
+      "file": "game/src/agent/agent.runner.js",
+      "size": 32614,
+      "mtimeMs": 1792131521607.7146,
+      "sha256": "92e97b832fdc6dd86f3f1a944dc905f90785fdd2abf79112ae113af4b49a0db6"
+    },
+    {
+      "file": "game/src/agent/agent.scenes.catalog.js",
+      "size": 973,
+      "mtimeMs": 1791959107680.7844,
+      "sha256": "00982b021d18f18aa93e78b6dd9de4a1f612dd6a05819b05b9e7c79f01c751b9"
+    },
+    {
+      "file": "game/src/agent/agent.scenes.js",
+      "size": 3408,
+      "mtimeMs": 1791959107681.8003,
+      "sha256": "b88a54dffe02cf7010f577e47a924dcb268658c1d2c8491edf81c03e323469c8"
+    },
+    {
+      "file": "game/src/agent/agent.scenes.runtime.js",
+      "size": 24388,
+      "mtimeMs": 1791987697218.1968,
+      "sha256": "f5a9b734f46430b5e586b314ae9bd7bd2d1025d4840ebc8bd4312d9202603d35"
+    },
+    {
+      "file": "game/src/agent/agent.state.js",
+      "size": 19377,
+      "mtimeMs": 1792132862830.909,
+      "sha256": "7b8b83dbeef0ad30d443b40b5c5387b6292e8058c51f33769bbc2bdcd63821c7"
+    },
+    {
+      "file": "game/src/agent/agent.stats.js",
+      "size": 4173,
+      "mtimeMs": 1791011969113.2766,
+      "sha256": "6e0791d7ae899c39d9185a05663922b3c66b76dd4f31de72fe045a362240bdb5"
+    },
+    {
+      "file": "game/src/agent/agent.surface.js",
+      "size": 5908,
+      "mtimeMs": 1790432021595.305,
+      "sha256": "0fd42c1e8b97c71a941895c8a541426eaee990fb54263ba9b7eca2c59357c496"
+    },
+    {
+      "file": "game/src/agent/agent.weights.js",
+      "size": 6702,
+      "mtimeMs": 1790958766303.9812,
+      "sha256": "2a2944dbd969cb05074e5e3fc0c479b05801d868791feb1a8f7ce77bb34b550c"
+    },
+    {
+      "file": "game/src/audio/sfx-audition.js",
+      "size": 16118,
+      "mtimeMs": 1792330971407.2983,
+      "sha256": "0d6dd150075b4a5204d3786d6ce31f4ab124c26ad145f399501796dad8fbc60f"
+    },
+    {
+      "file": "game/src/audio/sfx-review.js",
+      "size": 12705,
+      "mtimeMs": 1792330971406.282,
+      "sha256": "2d7d38a1a9d6248e2cb7a8cffb28b0b118dfda587f4401b1cd019397c938b927"
+    },
+    {
+      "file": "game/src/audio/sfx-review.labels.js",
+      "size": 3107,
+      "mtimeMs": 1792329313305.2773,
+      "sha256": "8b77310ec212085db29fdd016acdd9af1be780fa7f742dc6effc2e53ae389218"
+    },
+    {
+      "file": "game/src/audio/sfx-review.sources.js",
+      "size": 13771,
+      "mtimeMs": 1792331042896.631,
+      "sha256": "b1cca4f0fac5ab496ea314d8a6e08c2ecb7eb8b290a3ee1a4b540d2f5203a30b"
+    },
+    {
+      "file": "game/src/audio/sound.diagnostic-policy.js",
+      "size": 298,
+      "mtimeMs": 1792300879587.8516,
+      "sha256": "f77ae4cefa87828b0c3a2cac5895aecfb97972d328da2fbc2ebe017d44921cb5"
+    },
+    {
+      "file": "game/src/audio/sound.js",
+      "size": 14874,
+      "mtimeMs": 1792404912566.3228,
+      "sha256": "407ba1bbbab63e0c0fedb8f153f2c7514156159621c3c5b8377dc7ab254bcdcf"
+    },
+    {
+      "file": "game/src/audio/sound.music.catalog.js",
+      "size": 1250,
+      "mtimeMs": 1791877806783.156,
+      "sha256": "bb39e957e6f6f82606bb7f125f542dcc6659909f87c0e9f6bbdf979fcf3a45d2"
+    },
+    {
+      "file": "game/src/audio/sound.music.player.js",
+      "size": 8429,
+      "mtimeMs": 1792404912566.3228,
+      "sha256": "8f339c6193d7bc3fc2ed69e483ffce6f18bb775526fdfe2382e8db05f6c21afa"
+    },
+    {
+      "file": "game/src/audio/sound.policy.js",
+      "size": 2487,
+      "mtimeMs": 1790782382777.135,
+      "sha256": "bef908c7cfc155e491104959902607ba776c787b2297e8e05c584d3d7d10c9e1"
+    },
+    {
+      "file": "game/src/audio/sound.samples.catalog.js",
+      "size": 10044,
+      "mtimeMs": 1792331885977.6565,
+      "sha256": "37225368ded0124bb43f50ddf164ca71babe04444439d1573fd374996dc6e850"
+    },
+    {
+      "file": "game/src/audio/sound.samples.player.js",
+      "size": 3569,
+      "mtimeMs": 1792300879639.6228,
+      "sha256": "dccb8a01db9faf97dfb48ad33aaf6b5eb36a77c353053bf203669caffb15e26b"
+    },
+    {
+      "file": "game/src/battle/bag/battle.bag.js",
+      "size": 28940,
+      "mtimeMs": 1792476143246.838,
+      "sha256": "a2f1dd932f0e5bd4112deeb81b30b41832c0eeff2fd76844d25dec61c49e8bb1"
+    },
+    {
+      "file": "game/src/battle/bag/battle.deck.js",
+      "size": 524,
+      "mtimeMs": 1790658119459.0454,
+      "sha256": "6eeef7be98dbf5f244507e9361d4ea1231d2aea5d3fae8b9d0c32440ec23f934"
+    },
+    {
+      "file": "game/src/battle/bag/battle.equipment.js",
+      "size": 15778,
+      "mtimeMs": 1792476143247.8376,
+      "sha256": "826dff492b8fd67d504452cc160181812283df0248f4d9c729aac63cd60a9974"
+    },
+    {
+      "file": "game/src/battle/bag/battle.piles.js",
+      "size": 863,
+      "mtimeMs": 1790658119465.5015,
+      "sha256": "c73f6cdbce9f33ac4e0b975ef12e69edf0b0ebc9749a6097dff48ec6db515067"
+    },
+    {
+      "file": "game/src/battle/bag/battle.slam-skill.js",
+      "size": 2856,
+      "mtimeMs": 1792404912568.3235,
+      "sha256": "ca246ff8b114a9bdeade027e94026b05e57fbcf4a73e0b4673d5371e665dbd86"
+    },
+    {
+      "file": "game/src/battle/battle-loader.js",
+      "size": 4156,
+      "mtimeMs": 1790699159826.5647,
+      "sha256": "5c7259185a6112677098083627dd84d3c4205db75b749d5ebe4d869a1fc0bfc7"
+    },
+    {
+      "file": "game/src/battle/battle.play-submission.types.d.ts",
+      "size": 987,
+      "mtimeMs": 1792148749261.0356,
+      "sha256": "ea763bcf232d21df404f0f70fd434bf92c35dd1f39d1a793a109cf750fbe11ff"
+    },
+    {
+      "file": "game/src/battle/battle.snapshot.types.d.ts",
+      "size": 11912,
+      "mtimeMs": 1792411531101.487,
+      "sha256": "f1e983f82e5246fac77d7582ac8a2eafaf5051c0ba06c0b0535f9c1bd7dd068a"
+    },
+    {
+      "file": "game/src/battle/core/battle.actions.js",
+      "size": 2519,
+      "mtimeMs": 1790658119468.9956,
+      "sha256": "006a741924d4fddb9bd5a1c3fc531a1bc2ffa62df4f44c6a1c0e528f105a02e9"
+    },
+    {
+      "file": "game/src/battle/core/battle.card-presentation.js",
+      "size": 354,
+      "mtimeMs": 1792300879681.9749,
+      "sha256": "1266dc099382cf003a24414a13cb489f2f48ca08066d0e0ebf1f71d591f621d8"
+    },
+    {
+      "file": "game/src/battle/core/battle.core.js",
+      "size": 23243,
+      "mtimeMs": 1792337393277.2808,
+      "sha256": "2d2afb0aa6f9c6287f9bf0e8802d77665ffdbaba14b5d24ae321cb8b46625d3d"
+    },
+    {
+      "file": "game/src/battle/core/battle.draw.js",
+      "size": 11282,
+      "mtimeMs": 1792476143248.8376,
+      "sha256": "7e7f81a5df0855c06c37f28bb165e641d71cde30e694bc5f40a43ab171d034d8"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-intent.js",
+      "size": 1797,
+      "mtimeMs": 1792301367562.7695,
+      "sha256": "c34bd15642947b702ae5e2846731216de081573124d2e2fccc7c3975454c410e"
+    },
+    {
+      "file": "game/src/battle/core/battle.enemy-phase.js",
+      "size": 26170,
+      "mtimeMs": 1792476143248.8376,
+      "sha256": "7daaffea625fec71318feb60e0b516dba5277f35e0f6553b68deab3858bd5dad"
+    },
+    {
+      "file": "game/src/battle/core/battle.engine.js",
+      "size": 98392,
+      "mtimeMs": 1792476143249.838,
+      "sha256": "21291c8e33232268e94801481cee9d60bb4b94f48609ea0a95d9b7b4e5417ae2"
+    },
+    {
+      "file": "game/src/battle/core/battle.exec-play.js",
+      "size": 28458,
+      "mtimeMs": 1792476143249.838,
+      "sha256": "52fa08adc64872b6eef8c93836485cdcbf6da0d4918ac23734261e68756f3ff4"
+    },
+    {
+      "file": "game/src/battle/core/battle.foe-lifecycle.js",
+      "size": 5441,
+      "mtimeMs": 1792337393277.8098,
+      "sha256": "137c679e649e1db570e3b83852c0ea2ed1d4025d1a43846de34ca97515bfd661"
+    },
+    {
+      "file": "game/src/battle/core/battle.hand-selection.js",
+      "size": 2788,
+      "mtimeMs": 1790658119480.484,
+      "sha256": "d6d7edfaa983453f6e073fe79a7af63f7eb32d896dca4c54001364bc0a1e26a9"
+    },
+    {
+      "file": "game/src/battle/core/battle.hand.js",
+      "size": 4937,
+      "mtimeMs": 1792302107770.723,
+      "sha256": "e504d8a3af63313915d00617d1a524ae773953c25270873ed7bfd7f45b63777a"
+    },
+    {
+      "file": "game/src/battle/core/battle.lifecycle.js",
+      "size": 24341,
+      "mtimeMs": 1792476143250.8372,
+      "sha256": "5e8427fa21d97eb5bbfa9c98685c6fbc567af26f918150ef046189b81f2d3e17"
+    },
+    {
+      "file": "game/src/battle/core/battle.presentation-events.js",
+      "size": 764,
+      "mtimeMs": 1792300879747.4824,
+      "sha256": "0ae51dbc7bd64e3cdb1b6e2d395b0606212e47064e183ac0e635bfea29c2e5ec"
+    },
+    {
+      "file": "game/src/battle/core/battle.presentation.js",
+      "size": 293,
+      "mtimeMs": 1791562598451.274,
+      "sha256": "753ca719e0b7f7daf6cc8271256ecef4335f3ae0adac705f53ee2e621a8d68ac"
+    },
+    {
+      "file": "game/src/battle/core/battle.resolution.js",
+      "size": 85575,
+      "mtimeMs": 1792476143251.8374,
+      "sha256": "fbeefdcf3c0caf27c0c8d8a4da57ad88b727e3cd754d80602b9c513e0134c6fc"
+    },
+    {
+      "file": "game/src/battle/core/battle.selection-flow.js",
+      "size": 13631,
+      "mtimeMs": 1792476143251.8374,
+      "sha256": "50450f808ba52f7ec9c3eb86b3b11b0f9a888a5da2bfbe4beac9d64567c29a1b"
+    },
+    {
+      "file": "game/src/battle/core/battle.summary.js",
+      "size": 664,
+      "mtimeMs": 1792301367625.3418,
+      "sha256": "ae62e72ea67c5eda79b1c6d13aa0f09123af4aab33da7e1e0074b09711226e90"
+    },
+    {
+      "file": "game/src/battle/core/battle.target-session.js",
+      "size": 3150,
+      "mtimeMs": 1792300879780.093,
+      "sha256": "156a3c6ecddfa1e11bd2aa4253bc47c99b0cea7fd9b507cac3232eb01387af9b"
+    },
+    {
+      "file": "game/src/battle/core/combat.js",
+      "size": 23287,
+      "mtimeMs": 1792476143251.8374,
+      "sha256": "469334911e44f642fbbcdf931feefa4ed0ac1b2e920fa02cc7eae36a3553f361"
+    },
+    {
+      "file": "game/src/battle/effects/battle.card-cost.js",
+      "size": 3555,
+      "mtimeMs": 1792404912572.3281,
+      "sha256": "383b45db0e8cfb69405cfb092e1e820c3c56a490428af4d27095efa649941cd1"
+    },
+    {
+      "file": "game/src/battle/effects/battle.card-inspection.js",
+      "size": 8222,
+      "mtimeMs": 1792301367374.9966,
+      "sha256": "54921d61a705554d0aa44a3a41c9d19b7ffa0398d46216b5f8d0fc4cc4a97775"
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-candidates.js",
+      "size": 2150,
+      "mtimeMs": 1790658119494.547,
+      "sha256": "0c6d781eb98dcdf9b89af3fbe6b966ae4f9dde84e404ab3be0ec228c0c33320c"
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-flow.js",
+      "size": 15403,
+      "mtimeMs": 1792476143252.9495,
+      "sha256": "5c2e4219c38f38d3f722d46e6724e058615fded8e77c289da9f054380d6d7682"
+    },
+    {
+      "file": "game/src/battle/effects/battle.discover-state.js",
+      "size": 4478,
+      "mtimeMs": 1790785580305.741,
+      "sha256": "455e957d690b0c1c063d7cfd571ab92bebd90cb272ba2727ce828ca834bfb049"
+    },
+    {
+      "file": "game/src/battle/effects/battle.effect-clauses.js",
+      "size": 1754,
+      "mtimeMs": 1792300879791.8108,
+      "sha256": "37e70525644467b437fbf3b7402772fc5a4e9d769b58dcc1651fbf9c2a91987f"
+    },
+    {
+      "file": "game/src/battle/effects/battle.effects.js",
+      "size": 1130,
+      "mtimeMs": 1792300879804.7883,
+      "sha256": "42ca8c54a188c07ca91adc96f3220e4d0660d78305fbab0c83ef474eb35b5522"
+    },
+    {
+      "file": "game/src/battle/effects/battle.foe-fight.js",
+      "size": 648,
+      "mtimeMs": 1792300879806.047,
+      "sha256": "1e1322f4c2a9b07a6b6be6207ddcf189f3a8c0cb75b9751e3aaf32519f19388a"
+    },
+    {
+      "file": "game/src/battle/effects/battle.hosted.js",
+      "size": 1735,
+      "mtimeMs": 1792476143252.9495,
+      "sha256": "d14023c8edee05f6ea1d51b1493495329e8f8c9a1f6bfdfab0337a1c8fc3fa9b"
+    },
+    {
+      "file": "game/src/battle/effects/battle.infusion.js",
+      "size": 2024,
+      "mtimeMs": 1792300879818.0664,
+      "sha256": "26cbfe6fc34c5a5c833e0cee8f20ba1d38944778955de5de7b2dd5e0f85d689f"
+    },
+    {
+      "file": "game/src/battle/effects/battle.rule-guard.js",
+      "size": 1670,
+      "mtimeMs": 1790658119500.6704,
+      "sha256": "6d8de0843c29c63a8e23c24ce2c8adec7acc931183fa229e5e1db6507680ebcb"
+    },
+    {
+      "file": "game/src/battle/effects/battle.target-rules.js",
+      "size": 8188,
+      "mtimeMs": 1792336993895.539,
+      "sha256": "d30d0ec7fbbf1cd04a12a8fcd01b9deb012e25b094e24f3243f948ae931c5b20"
+    },
+    {
+      "file": "game/src/battle/effects/battle.triggers.m2.js",
+      "size": 7075,
+      "mtimeMs": 1790667948458.2573,
+      "sha256": "5d61f2d702f602000a4024c375bb3380f4874002c1ad39b90445fc2538de4180"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.audit.js",
+      "size": 8446,
+      "mtimeMs": 1792300879837.2708,
+      "sha256": "bb5d819d19e4e968379645f4b80c14de34a32be1fe207c15fd6c395d57c7c1fc"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.ctx.js",
+      "size": 6969,
+      "mtimeMs": 1792411632085.9155,
+      "sha256": "cc828c4982abdac8e5a898678c42e9ea535d35cdccbeaa4c9d907fe2f5bf9bd1"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.curse.js",
+      "size": 13218,
+      "mtimeMs": 1792301367358.5393,
+      "sha256": "a3ef73a4e39122f7751a14e74f82e4196483ca412e2b2dd1e9d05ad51facd28e"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.damage.js",
+      "size": 18982,
+      "mtimeMs": 1792411461078.879,
+      "sha256": "5123e62b3c393c1d6bd8d4589acc7dc0342c983abb8abdf5651c1a0c54354d06"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.deck.js",
+      "size": 6581,
+      "mtimeMs": 1792411488946.6353,
+      "sha256": "3d7414cc67864d09c593d00d017a8b6ff0f841f484b1c14f75a12e655188cc9f"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.gates.js",
+      "size": 6527,
+      "mtimeMs": 1792412758052.4836,
+      "sha256": "a67da6a338dd5d006b51f8fb99bb577760e83948969d3249c0eb6a3cdcb8a9ac"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.js",
+      "size": 5520,
+      "mtimeMs": 1791858511318.6455,
+      "sha256": "5faea255b404580bd8bd940c6e069869714a240849f2f124d3099d402dbcffee"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.kills.js",
+      "size": 18637,
+      "mtimeMs": 1792412758207.1055,
+      "sha256": "7674fad5b96ea2b6953564008d4a945acdb3bc6c4b53c599577f8a41a61c0187"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m1.js",
+      "size": 6896,
+      "mtimeMs": 1791987697221.006,
+      "sha256": "73b009ca4c0b4ecedc27ef52020fc581841c4748e82f72b461d2b48d5b2e0933"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.m2.js",
+      "size": 20383,
+      "mtimeMs": 1792411596887.109,
+      "sha256": "1996b86f4b1584e6e201fb190d10154a3b99a984b5a5340f73ebba64fec0e453"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.recovery.js",
+      "size": 9734,
+      "mtimeMs": 1790670277735.6145,
+      "sha256": "e4c8950f2bf2a0ec79209ce455977e572eb774a4b0c1bd7c310168661d42141a"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.rules.js",
+      "size": 5032,
+      "mtimeMs": 1790658119519.1997,
+      "sha256": "d3a65b037ab591f5cf73a5f7d173f29d17c0bee57f5011b779371d48f83ea973"
+    },
+    {
+      "file": "game/src/battle/effects/effect-steps.tail.js",
+      "size": 2186,
+      "mtimeMs": 1790658119520.5066,
+      "sha256": "1c767d3a1c64e37567f46ba789c25fcbc6e82df127c9464281acaadea05ed1d6"
+    },
+    {
+      "file": "game/src/battle/effects/effect-verbs.js",
+      "size": 21920,
+      "mtimeMs": 1792476143253.9514,
+      "sha256": "c1ee176771974d37f9cb3ab284f768991bdcb7083dea78fd7349abef6b140103"
+    },
+    {
+      "file": "game/src/battle/effects/hand-cost-patterns.js",
+      "size": 1347,
+      "mtimeMs": 1790658119523.5923,
+      "sha256": "a7a0a6bee19c9118a3b2f17ecb4b8f2062ee220cbe28deee67b57a512619b4c6"
+    },
+    {
+      "file": "game/src/battle/effects/hosted-catalog-index.js",
+      "size": 421,
+      "mtimeMs": 1790658119524.6436,
+      "sha256": "f09545cf3da650239553f5d30e9855924ce44d393a536d65088febd723c382bb"
+    },
+    {
+      "file": "game/src/battle/effects/random-blessings.js",
+      "size": 2162,
+      "mtimeMs": 1792411460435.9646,
+      "sha256": "5c16d1ce8c608f1890ff440d3c88e16b7242267fbf38798ccd27ed2d09658b61"
+    },
+    {
+      "file": "game/src/battle/effects/requested-card-batch.js",
+      "size": 3729,
+      "mtimeMs": 1792476143254.9514,
+      "sha256": "380293272668791dbcbab127914049e5cd3a71dadecb249c39d60c8666083690"
+    },
+    {
+      "file": "game/src/battle/effects/requested-card-runtime.js",
+      "size": 5687,
+      "mtimeMs": 1792476143254.9514,
+      "sha256": "e99e6a1695dd5d4ac569034f833c21744422280d0f7e0ed48ab6ddff2405d0d6"
+    },
+    {
+      "file": "game/src/battle/runes.js",
+      "size": 6627,
+      "mtimeMs": 1790668314355.23,
+      "sha256": "1f3374f9e5065081f0e289cdf330d708897890975f74629d09b0b1f8b12d4656"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.action-runner.js",
+      "size": 4202,
+      "mtimeMs": 1792476143255.9514,
+      "sha256": "eb7e77fd3aa4ae2262184a65b8523818d7449510c1c5c9c24c22f1893de0d74d"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.clock.js",
+      "size": 3788,
+      "mtimeMs": 1790670705854.3457,
+      "sha256": "4cf28cc500a6eefba06d8aec960f8673e2396760d54d68db7aed2c7db78709a5"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.execution-session.js",
+      "size": 2052,
+      "mtimeMs": 1792476143255.9514,
+      "sha256": "b31f85d90a294802ac90b67249f56b18c1f15fb7bd77b945c69ab343c6101fe1"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.pace.js",
+      "size": 1181,
+      "mtimeMs": 1790658119531.2466,
+      "sha256": "ed4a0471a09561a605dbac9d16f60451ef8b1a3b88ab9594e3cb39d8ab3b3feb"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.player-effects.js",
+      "size": 3142,
+      "mtimeMs": 1792404912573.328,
+      "sha256": "c2379d52da773de9a695df09ffffa10ac10f94ac9d59563dabd1fecb9d252515"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.effects.js",
+      "size": 6411,
+      "mtimeMs": 1792411531100.4873,
+      "sha256": "aabf38f95c4acf73dd46840051de0b044913b15b616215499db7d68d3bfea19b"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "size": 2514,
+      "mtimeMs": 1790658119533.2786,
+      "sha256": "685fdbfb883d7da35d7203a01d1d316a646ef11099932ee86d2c7ea49e37106b"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.js",
+      "size": 521,
+      "mtimeMs": 1790658119534.2747,
+      "sha256": "bed419162b81a2b54a32484e8963e32f7dc7a37fa5283b61eb8d61dd6a539632"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.piles.js",
+      "size": 2152,
+      "mtimeMs": 1790685194715.5344,
+      "sha256": "9d8f61605b27084ffebd2c700184a7304bb6f2a72252e57da92f4c14613cf0bc"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "size": 1130,
+      "mtimeMs": 1790685194716.0388,
+      "sha256": "27aebed4ab68e551e6c3ab09830d837982ba209fdfdcbba7a0099b62edd4e16e"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.runtime.session.js",
+      "size": 5055,
+      "mtimeMs": 1792476143256.9514,
+      "sha256": "20934d130c4bff8ea54bf84ec5060c058773fa6c09e2e7856a0d71d09192da06"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.snapshot.js",
+      "size": 9684,
+      "mtimeMs": 1792476143256.9514,
+      "sha256": "0a96da0e07b6eb5c6a0fa9c7223a00005fc24a8678e5efe30d6623cd20e6a80d"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.staged-playback.js",
+      "size": 4051,
+      "mtimeMs": 1790658119541.414,
+      "sha256": "29134624d1a0203b4f32eba1c0954fa13a5fbded435c85e3fa5d35e9fbbf8995"
+    },
+    {
+      "file": "game/src/battle/runtime/battle.state.js",
+      "size": 2463,
+      "mtimeMs": 1790898220487.416,
+      "sha256": "14c3b2edda788adf278460e9fbd7dcb327c5094eb88938f04331bd1cf7a379d5"
+    },
+    {
+      "file": "game/src/battle/view/battle.aim.js",
+      "size": 48765,
+      "mtimeMs": 1792404912574.3281,
+      "sha256": "c27e19db922c9bb206121eadf938e95b320206f6968ef82c287085349649c055"
+    },
+    {
+      "file": "game/src/battle/view/battle.anim.view.js",
+      "size": 14842,
+      "mtimeMs": 1792300879936.098,
+      "sha256": "1ec5e2eb74d130f1aa8184df298fe1cb629aa0e9932979d8a3ffb95cc63e1e04"
+    },
+    {
+      "file": "game/src/battle/view/battle.attack-cues.js",
+      "size": 1823,
+      "mtimeMs": 1790784048088.102,
+      "sha256": "b47072848f56c56254d2d476d5aff2643fc1a65594f8874725b86386f33b0f01"
+    },
+    {
+      "file": "game/src/battle/view/battle.card-feedback.js",
+      "size": 506,
+      "mtimeMs": 1792300879947.2383,
+      "sha256": "3c2ddf7b9b11757553834f17183aebe8568182027da3f49e3f09db9917a377d4"
+    },
+    {
+      "file": "game/src/battle/view/battle.card-results.js",
+      "size": 2976,
+      "mtimeMs": 1792300879964.623,
+      "sha256": "5fba4d156e072c064d1784bd613eb31f3409cc6de1b3ffc8b4c4a2a21e72c03d"
+    },
+    {
+      "file": "game/src/battle/view/battle.decision-content.js",
+      "size": 6608,
+      "mtimeMs": 1792404912575.3281,
+      "sha256": "e009584074630607558c48d9c207e42f400f08565f3e83d83cafc4eb248992ee"
+    },
+    {
+      "file": "game/src/battle/view/battle.decision-shell.js",
+      "size": 4263,
+      "mtimeMs": 1792404912575.3281,
+      "sha256": "345754cee320f49eb7b8aa370da1ceb0016ca2d7749dcf6ff289c12209eb834b"
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-infusion.js",
+      "size": 601,
+      "mtimeMs": 1792300880009.5942,
+      "sha256": "aebe78417b4f0440597d6814a62ddf2f4bca2581458a6d0bac45abc433b7b116"
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-input.js",
+      "size": 1772,
+      "mtimeMs": 1792148025280.034,
+      "sha256": "f2e7be6119fbbf22e61efd4f2426afea6c0359fd816d96fe77fdaf0eb4b03bda"
+    },
+    {
+      "file": "game/src/battle/view/battle.discover-view.js",
+      "size": 2333,
+      "mtimeMs": 1792300880025.3704,
+      "sha256": "c7d8fa820a4ac04cf9450b874a978fbdb29d2abeac788e0ec041572bc7799447"
+    },
+    {
+      "file": "game/src/battle/view/battle.effect-feedback.js",
+      "size": 9558,
+      "mtimeMs": 1792300880028.1765,
+      "sha256": "2595dfb2074e829e92fa63c41eeb00dd4eaf8d2d36ea57c37cdf03846b95c11a"
+    },
+    {
+      "file": "game/src/battle/view/battle.feedback.js",
+      "size": 4005,
+      "mtimeMs": 1791812548426.546,
+      "sha256": "81057fdaa8daf3b8e8256a4e1880d8435954881fc049028931a466ad2416225b"
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-assets.js",
+      "size": 2985,
+      "mtimeMs": 1792319382295.3574,
+      "sha256": "57771c894feae0623bbb3e0192fcb10dd59bce97062326ea6234949ca86ebaf0"
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-catalog-changwuyu.js",
+      "size": 557,
+      "mtimeMs": 1791569974562.2202,
+      "sha256": "774594287f6417bf0ffba60f77817ffc7dff42d5d78f937f6c13c72973a4a77d"
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-catalog-three-role.js",
+      "size": 865,
+      "mtimeMs": 1791626287602.8523,
+      "sha256": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-catalog.js",
+      "size": 487,
+      "mtimeMs": 1791561101642.918,
+      "sha256": "7396a3a49f206d63e16e5ed8bab02d4d5fbd39e7ef934c354f1dc0fcda756bd0"
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-renderer.js",
+      "size": 363,
+      "mtimeMs": 1791987697222.0757,
+      "sha256": "cb4e7df684da0635e6fb38b11b1dbb366e8f8e2313cb3c0c086963ef336b9196"
+    },
+    {
+      "file": "game/src/battle/view/battle.frame-resolution.js",
+      "size": 1184,
+      "mtimeMs": 1792300880050.1907,
+      "sha256": "2008651e613843ac2dbef5133ddef92c99df7e96afc20de07da6cab517c7208d"
+    },
+    {
+      "file": "game/src/battle/view/battle.frames-diagnostic-policy.js",
+      "size": 1244,
+      "mtimeMs": 1792300880067.4663,
+      "sha256": "4925f024ebc7f313fd3491a7d3faa7d5f9bce4de2aa64216b608dd21ada38200"
+    },
+    {
+      "file": "game/src/battle/view/battle.frames.js",
+      "size": 36577,
+      "mtimeMs": 1792404912576.328,
+      "sha256": "7cb2dea8e6ae11f567852e3739248dbb76b987ca46a3d0dd436b1bc8348f4abd"
+    },
+    {
+      "file": "game/src/battle/view/battle.hand-hit.js",
+      "size": 7748,
+      "mtimeMs": 1792476143257.9514,
+      "sha256": "294f65ee0628931bbdddd42e60ca6b27e122374d407709d9e70b19f6b0daaaa3"
+    },
+    {
+      "file": "game/src/battle/view/battle.hand-inspector.js",
+      "size": 7780,
+      "mtimeMs": 1792131521611.0708,
+      "sha256": "4b7ad2e22a79ae26a9696348d1f8b405756229c5d55837ebcdc57e0485b5453d"
+    },
+    {
+      "file": "game/src/battle/view/battle.hand-layout.js",
+      "size": 804,
+      "mtimeMs": 1792142189021.3823,
+      "sha256": "0dc3d1828946a16113e5410deda60eaf74f70aa31c758ac6d8f8445dea72d795"
+    },
+    {
+      "file": "game/src/battle/view/battle.hover.js",
+      "size": 6067,
+      "mtimeMs": 1792317038811.3516,
+      "sha256": "def25be83801d839aa1ac25614d1eae1bb369f9c84dca9811759faa2dba5e051"
+    },
+    {
+      "file": "game/src/battle/view/battle.infusion-material-state.js",
+      "size": 994,
+      "mtimeMs": 1792476794570.483,
+      "sha256": "3a002f792baaeb59b859ebb6ca3367aa3d189b268f55193c878194da6ce64c6a"
+    },
+    {
+      "file": "game/src/battle/view/battle.infusion-view.js",
+      "size": 10529,
+      "mtimeMs": 1792476794571.4824,
+      "sha256": "90582e1028ff635f7f05a9e819de7796dc0263ec3f2b38148c59e09ba32d0bb9"
+    },
+    {
+      "file": "game/src/battle/view/battle.intent.view.js",
+      "size": 1718,
+      "mtimeMs": 1791803924098.6907,
+      "sha256": "3f398eacc534379deab608e6e284734079076d99c41ee05917d3c2614f3664cb"
+    },
+    {
+      "file": "game/src/battle/view/battle.layers.js",
+      "size": 58621,
+      "mtimeMs": 1792476143257.9514,
+      "sha256": "91c6774633ae0dcaca7ca162b1188ba64e281ee3e3e8f0c15064ff6f0c660d3c"
+    },
+    {
+      "file": "game/src/battle/view/battle.overlays.js",
+      "size": 14343,
+      "mtimeMs": 1792421599507.7722,
+      "sha256": "3e0124eeb808a3ce056509ddd8c3155ce139202b48a6b0c823459a2dbebe7373"
+    },
+    {
+      "file": "game/src/battle/view/battle.page-activity.js",
+      "size": 744,
+      "mtimeMs": 1792404912578.1633,
+      "sha256": "154310603799568c8eb18b4ce0924c0f830bf31e81923cffea5715049faef516"
+    },
+    {
+      "file": "game/src/battle/view/battle.piles.view.js",
+      "size": 2595,
+      "mtimeMs": 1792404912578.1633,
+      "sha256": "79889bc9d8169fff71248ae0d1853bd7f79c390858a70caa2e3a9be7a6d28c9c"
+    },
+    {
+      "file": "game/src/battle/view/battle.presentation-ready.js",
+      "size": 7633,
+      "mtimeMs": 1792162862258.228,
+      "sha256": "9354043cb6fda6cd830183698d0a922602f0f88379fb01c51ebbc3eaeba93abb"
+    },
+    {
+      "file": "game/src/battle/view/battle.preview.js",
+      "size": 14637,
+      "mtimeMs": 1792300880179.3398,
+      "sha256": "a99bd5e8dcc2c8b78d050ba9d6f0dd3d8b197d9a51d600774d62ef1dfd9205c8"
+    },
+    {
+      "file": "game/src/battle/view/battle.scenery.js",
+      "size": 1278,
+      "mtimeMs": 1792137166472.6843,
+      "sha256": "bcbff054eb7c23c6a7336c868c5f2a0b2b14e6406628a7bd64a9349935b8172f"
+    },
+    {
+      "file": "game/src/battle/view/battle.secondary-overlay.js",
+      "size": 1843,
+      "mtimeMs": 1792404912578.1633,
+      "sha256": "125e8a1d5d368f2f7d2da16c5af5705915ade1ee248ff2d5c124f08839018b70"
+    },
+    {
+      "file": "game/src/battle/view/battle.selection-ui.js",
+      "size": 4274,
+      "mtimeMs": 1792404912578.1633,
+      "sha256": "ce775c07b21338017a47c7d39017aa29f7999793491dc089ea9f9824eac89bdf"
+    },
+    {
+      "file": "game/src/battle/view/battle.skill-view.js",
+      "size": 2066,
+      "mtimeMs": 1792142481879.2512,
+      "sha256": "40ec8a918f745571cc01b58cea12925d804d325187387464fd611aa408c2b58b"
+    },
+    {
+      "file": "game/src/battle/view/battle.turn-feedback.js",
+      "size": 4874,
+      "mtimeMs": 1792300880210.6985,
+      "sha256": "05c1e14b28ed54ad0d9724ac8d64d0dacb38ac173861cb6e3c6ede2414464604"
+    },
+    {
+      "file": "game/src/battle/view/battle.turn-forecast.js",
+      "size": 2042,
+      "mtimeMs": 1792301367564.6736,
+      "sha256": "474987b91971e51962219e881952e9b0b17d1079b27a27ff0933f33aa75406cc"
+    },
+    {
+      "file": "game/src/battle/view/battle.vfx.js",
+      "size": 25879,
+      "mtimeMs": 1792487668326.1062,
+      "sha256": "4d54c09987296cc13c96cd8064c2c678accd6e679f2f134d79513ac40ea979ae"
+    },
+    {
+      "file": "game/src/battle/view/battle.victory.js",
+      "size": 2679,
+      "mtimeMs": 1791868613437.4065,
+      "sha256": "7fb4f630a67ce43d1961e391193316f44fd51d1963d942787b798559dafaa0e2"
+    },
+    {
+      "file": "game/src/battle/view/battle.view.js",
+      "size": 58644,
+      "mtimeMs": 1792404912578.1633,
+      "sha256": "18d7c0008091e611976dd88bff003add683109740b5b5acaf89c90b7a397ff03"
+    },
+    {
+      "file": "game/src/boot-order.js",
+      "size": 1512,
+      "mtimeMs": 1791021633267.368,
+      "sha256": "9da98bad5bff080081a82449a19c95935ce02c2dfc0ffbd4982498430b37574a"
+    },
+    {
+      "file": "game/src/cards/card-battle-start-explanation.js",
+      "size": 383,
+      "mtimeMs": 1792131521614.4368,
+      "sha256": "458480cf3935adb995a518a26800e2335ff2c76bbdafd77bb824bcfe3fd1ef71"
+    },
+    {
+      "file": "game/src/cards/card-description-links.js",
+      "size": 4534,
+      "mtimeMs": 1791987697224.2063,
+      "sha256": "ad6ac09f4fc165f62c4883abec3b56931e1139207fe53edc107ec20eb50f582f"
+    },
+    {
+      "file": "game/src/cards/card-description-text.js",
+      "size": 35485,
+      "mtimeMs": 1792336993893.1597,
+      "sha256": "dd3de89a183246a47812c645d5d9088d29f38a278d95211d5700ed37f7d83b99"
+    },
+    {
+      "file": "game/src/cards/card-draw-explanation.js",
+      "size": 444,
+      "mtimeMs": 1791699229200.198,
+      "sha256": "5201ee0193fccc780e88dd4508e13507d9d76a5a70025f70141f1e697a3b713e"
+    },
+    {
+      "file": "game/src/cards/card-frame-presentation.js",
+      "size": 1070,
+      "mtimeMs": 1791996874402.7302,
+      "sha256": "79ef8241faad2ed89bb1c19b6866f0e352ddd43e9498d1e0842e436335099d9a"
+    },
+    {
+      "file": "game/src/cards/card-photo-notes.js",
+      "size": 3288,
+      "mtimeMs": 1791987697224.2063,
+      "sha256": "e5b584cc493c1beebc5918f6920c0434a8cd8711886c4cd4c1c8b22a71a2435d"
+    },
+    {
+      "file": "game/src/cards/card-rarity.js",
+      "size": 1591,
+      "mtimeMs": 1791987697225.276,
+      "sha256": "7df4211548e6e4bcc46fac07d5b7541265f7c04dfcab23b72b899be7637028fe"
+    },
+    {
+      "file": "game/src/cards/card-render-context.js",
+      "size": 857,
+      "mtimeMs": 1790573019500.7957,
+      "sha256": "5520443debdf12b82befc015e04765052642a6b9af99a0a502992c4e3de9ad4b"
+    },
+    {
+      "file": "game/src/cards/card-rules.capability.js",
+      "size": 12467,
+      "mtimeMs": 1792411489125.8274,
+      "sha256": "4613ab1e3da4a0271ac2bc33d7861792209c16c97f45a116b34f23bd2c094744"
+    },
+    {
+      "file": "game/src/cards/card-rules.capability.types.d.ts",
+      "size": 2302,
+      "mtimeMs": 1792411489125.8274,
+      "sha256": "91b025e88f8acb9455e1f2f974a9ccd78a84ea9eda44ad77769d83c6f376108a"
+    },
+    {
+      "file": "game/src/cards/card-rules.schema.js",
+      "size": 71660,
+      "mtimeMs": 1792476143258.952,
+      "sha256": "ad6085f27d3531ed87f9fda803205447f230284ff98d907319bb53b492e50395"
+    },
+    {
+      "file": "game/src/cards/cards.catalog.js",
+      "size": 1750,
+      "mtimeMs": 1790176176336.8577,
+      "sha256": "8be4bec49c82b5e3bb023be7fbe623fcdbb82ace680100ae477cb917b981a823"
+    },
+    {
+      "file": "game/src/cards/cards.consts.js",
+      "size": 6103,
+      "mtimeMs": 1790961174090.4932,
+      "sha256": "93afe56ef8ba05e4ec72a976241973e89f54a1254b5f36178d73d33a265810ad"
+    },
+    {
+      "file": "game/src/cards/cards.data.js",
+      "size": 103878,
+      "mtimeMs": 1792476143259.952,
+      "sha256": "ac94d7dfa15e5ba3e8f30840b49b464a5ae56c333d07bc73e2d63bdc403c2ac6"
+    },
+    {
+      "file": "game/src/cards/cards.js",
+      "size": 19994,
+      "mtimeMs": 1792476143259.952,
+      "sha256": "55020825352ee9ed3035fad5f43904f4604cf2e8604d2e35f2d080facdf9f2a9"
+    },
+    {
+      "file": "game/src/cards/cards.rules.js",
+      "size": 17915,
+      "mtimeMs": 1792302107769.672,
+      "sha256": "613d57098bd70abb98862c9df4ade7bc04b52e8effb7e27e185231642af485ed"
+    },
+    {
+      "file": "game/src/cards/cards.sync.backfiller.js",
+      "size": 8270,
+      "mtimeMs": 1790898318585.446,
+      "sha256": "1b4a8d120a33e9a6cf11580e93115f6bd8549e3fdc8dbbb142ca3227aacda3f8"
+    },
+    {
+      "file": "game/src/cards/cards.sync.face-refresh.js",
+      "size": 2834,
+      "mtimeMs": 1791987697225.276,
+      "sha256": "94a36c67b5caf855106cb63184f561fd72d597852f7e88b079789ad9100a8c38"
+    },
+    {
+      "file": "game/src/cards/cards.sync.js",
+      "size": 60039,
+      "mtimeMs": 1792411489029.3225,
+      "sha256": "c1c0539c2290c7e2c89ae07b95e10f121eeda7d100e2937a1b3d49001b007503"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m1.js",
+      "size": 4083,
+      "mtimeMs": 1790898287870.5967,
+      "sha256": "e05ab9d7484406e4328f2bd8e8c88681e1431f62a9a6b0a2bfd4965c6b75cf8b"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m10.js",
+      "size": 1843,
+      "mtimeMs": 1792411489149.6462,
+      "sha256": "08d4bae0c89973beed5a544c54c7d95092f7447f2eb4750e5986a9f207c6e756"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m11.js",
+      "size": 2157,
+      "mtimeMs": 1791564251336.9558,
+      "sha256": "7bd8a10fde163f5bd54673bf604449659cf3ab50457efb5144056d3938f1cad1"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m2.js",
+      "size": 8367,
+      "mtimeMs": 1790898287873.3906,
+      "sha256": "edb80c7416eb48aacb0769aeb8c7bbdce195770839689855c53119ebffdc6b68"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m3.js",
+      "size": 12436,
+      "mtimeMs": 1792412129609.3857,
+      "sha256": "7f8739b4316533c9b5b34309954cdbae2f32e0e62bd8a76e30a8e0ae1ed1fb42"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m4.js",
+      "size": 5057,
+      "mtimeMs": 1791564548140.9219,
+      "sha256": "13eb6767b010d64ca1db098bffd048e9a9a1f52244f6955c2d39d7055f3ab105"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m5.js",
+      "size": 8936,
+      "mtimeMs": 1790898287874.4888,
+      "sha256": "667a158c413195e7278ba9cd89cc27e2dd14da61ee27276e2f424d3f0227e4e3"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m6.js",
+      "size": 6144,
+      "mtimeMs": 1792411597027.987,
+      "sha256": "e9c39b6adeb0316af4f0956bfac4691bf62804ff33b8c5e821c3408a92225ecc"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m7.js",
+      "size": 4007,
+      "mtimeMs": 1790647261263.548,
+      "sha256": "c3a6e7d6729e176f45e1805b779b86e922649611115d630ff09f867e676b5cb8"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m8.js",
+      "size": 3389,
+      "mtimeMs": 1790898287874.4888,
+      "sha256": "fedeca1fd65cb45d5d93379d7d987d916ee230a2ae088262f5942be007806e3b"
+    },
+    {
+      "file": "game/src/cards/cards.sync.m9.js",
+      "size": 3104,
+      "mtimeMs": 1791219382802.5408,
+      "sha256": "b8041fdaa22993e0cf03605a474aa0238d0e71dee369b3b2e64a5ac6a4cbadc0"
+    },
+    {
+      "file": "game/src/cards/cards.view.js",
+      "size": 12854,
+      "mtimeMs": 1792336841419.7798,
+      "sha256": "00322cf4ad26ab184d0fa23dc57e5aa735581a39672022bddfa9007f7d0eb004"
+    },
+    {
+      "file": "game/src/cards/mech-sentences.js",
+      "size": 4921,
+      "mtimeMs": 1790179291545.6384,
+      "sha256": "fe7cb590cee930fe795de5bcb0e94bfe5d4e76d74f2c0d6ded0d9e1b2fed1061"
+    },
+    {
+      "file": "game/src/cards/rot-seed-revision.js",
+      "size": 909,
+      "mtimeMs": 1792336993888.4963,
+      "sha256": "b4edbaa03d12f4a7c71240c3fa40cc0d7e09c576c8842bc66c2289632e02ae07"
+    },
+    {
+      "file": "game/src/core/art-preload-plan.js",
+      "size": 2241,
+      "mtimeMs": 1792300880310.2227,
+      "sha256": "1b7cc057cdb5c307a3eea5601a45a1bb8837dcedcec8486eb6d1fc56701f75fe"
+    },
+    {
+      "file": "game/src/core/art.js",
+      "size": 32824,
+      "mtimeMs": 1792340395150.76,
+      "sha256": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283"
+    },
+    {
+      "file": "game/src/core/asset-url.js",
+      "size": 1626,
+      "mtimeMs": 1791959107688.3606,
+      "sha256": "5bbfcf5fd3b9a0f7a1a53779710786133c5c749f8f8a20d635f804699b6d207e"
+    },
+    {
+      "file": "game/src/core/camera.js",
+      "size": 10954,
+      "mtimeMs": 1792419236499.1062,
+      "sha256": "50805b547b921248f156741e2baee03dd54dff86bc5b6aac24392051815fddf4"
+    },
+    {
+      "file": "game/src/core/card-capacity.js",
+      "size": 2142,
+      "mtimeMs": 1792301644614.6345,
+      "sha256": "448bdbfadd01a1104359fd56f24ab162a3901087254405cc205bcab14113b0d4"
+    },
+    {
+      "file": "game/src/core/characters.js",
+      "size": 3013,
+      "mtimeMs": 1789864881156.9922,
+      "sha256": "debf1abce843de26a49adbfaab9b2a8190740939c61bd3ae03a0fe6502afdc7c"
+    },
+    {
+      "file": "game/src/core/data-loader.js",
+      "size": 1804,
+      "mtimeMs": 1790176600774.7703,
+      "sha256": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be"
+    },
+    {
+      "file": "game/src/core/diagnostics.local.js",
+      "size": 7556,
+      "mtimeMs": 1790898266216.716,
+      "sha256": "aaaf2af15496b426c6bfd974cbff3ab91a6d1bbaa1736202f143d7bcba0f03da"
+    },
+    {
+      "file": "game/src/core/event-bus.js",
+      "size": 2627,
+      "mtimeMs": 1790161090273.3894,
+      "sha256": "76cc1a8023d1330c386c1e2392525d4d33882b21aad6d7485822660d630c0740"
+    },
+    {
+      "file": "game/src/core/flight-recorder.local.js",
+      "size": 10299,
+      "mtimeMs": 1792300880374.226,
+      "sha256": "91939e2e355c18b5edd84a70915e6ce2d6db2a9ba2194a01f2656fa8b50d1e9b"
+    },
+    {
+      "file": "game/src/core/icon-hydration.js",
+      "size": 1751,
+      "mtimeMs": 1792080712579.0332,
+      "sha256": "e84bb33f03882a86aa971edb1a7b7c3ef223afdcc080fc322cb12e11dad364c6"
+    },
+    {
+      "file": "game/src/core/icons-bitmap.js",
+      "size": 8223,
+      "mtimeMs": 1792300880387.1177,
+      "sha256": "71e1d0b742254726786fa9a2af57448646bff6881fa04a39b4d15abfd86eed86"
+    },
+    {
+      "file": "game/src/core/image-decode.js",
+      "size": 1992,
+      "mtimeMs": 1792080711729.7402,
+      "sha256": "5d2cab3cf14e1a20d04d418f18266d52e8d8aa5c0f5341f1a8c300556258d97d"
+    },
+    {
+      "file": "game/src/core/input.js",
+      "size": 2953,
+      "mtimeMs": 1791987697227.5735,
+      "sha256": "c52d8ce3333038bb231e2953c5a7f209e9f93b1ee52831f66050a77ad97ffa01"
+    },
+    {
+      "file": "game/src/core/map-brush-art.js",
+      "size": 4559,
+      "mtimeMs": 1792151567549.0874,
+      "sha256": "a85d68aa77317fda337da588ae467258c8f964fc9aecffb2b14bee576e87f1f8"
+    },
+    {
+      "file": "game/src/core/map-city-atmosphere.js",
+      "size": 1345,
+      "mtimeMs": 1792011845501.1548,
+      "sha256": "70c7ce669d14bb5c55261a17c412b843a8616e9732b544bb03c18376cbf3a5fb"
+    },
+    {
+      "file": "game/src/core/map-drag-motion.js",
+      "size": 4884,
+      "mtimeMs": 1792418986031.347,
+      "sha256": "ec1fed36d8eb55ac215480d361d0c86b085decee63eddae12bcecf8dc5ebdb09"
+    },
+    {
+      "file": "game/src/core/map-image-ready.js",
+      "size": 1125,
+      "mtimeMs": 1792012304831.4424,
+      "sha256": "77f5a75f98b42c2c567ba9411c1ea29d0583f7db3edd4908e9a4e3d283dce3fb"
+    },
+    {
+      "file": "game/src/core/map-node-art.js",
+      "size": 15082,
+      "mtimeMs": 1792419236271.1746,
+      "sha256": "d84fa6332489b6b7980568bdb8e23953f4f42ddc65fde956fd3e8239d6625f33"
+    },
+    {
+      "file": "game/src/core/map-node-glow.js",
+      "size": 1901,
+      "mtimeMs": 1792404912580.668,
+      "sha256": "41aa314b19f475d695e658d06ebcb858ce6a13d6aa5f8a4ba2a137a933998ba6"
+    },
+    {
+      "file": "game/src/core/map-node-state.js",
+      "size": 4494,
+      "mtimeMs": 1792300880433.6875,
+      "sha256": "aa88c75805aaed02270a37acc070d98edd27da3ebc82def5113a5cd23eaf57ec"
+    },
+    {
+      "file": "game/src/core/map-reveals.js",
+      "size": 1889,
+      "mtimeMs": 1792300880449.5308,
+      "sha256": "6c124920061defc3146402404201bbbe191cacb3d86dd30dddc75e09aa6c3d45"
+    },
+    {
+      "file": "game/src/core/mapData.js",
+      "size": 1269,
+      "mtimeMs": 1792300880458.9849,
+      "sha256": "22845354604f9bf090d1464d41c07a749a6236c7a5d0549e6473d7cbf6dc535d"
+    },
+    {
+      "file": "game/src/core/motion-primitives.js",
+      "size": 3287,
+      "mtimeMs": 1790507419616.3054,
+      "sha256": "ff13e1089b25de9af60b70da0e30d1badae577ac2b85df4c308c8a18ff2240d7"
+    },
+    {
+      "file": "game/src/core/motion.js",
+      "size": 2548,
+      "mtimeMs": 1790898172905.764,
+      "sha256": "d70f9e42c714b60d9d3e01e6762c6c723a8d5b8eec0757f8571aa51aaa320653"
+    },
+    {
+      "file": "game/src/core/node-info.js",
+      "size": 2246,
+      "mtimeMs": 1792307081482.85,
+      "sha256": "1dbd68c4c3f3a7b33941b4ab1820bade37a83939f4be7a03f3ef537b52975a4a"
+    },
+    {
+      "file": "game/src/core/notes.js",
+      "size": 6028,
+      "mtimeMs": 1791987697227.5735,
+      "sha256": "a8d32c5265aa2185901fb1795d25297fa618a2e0aec9a66abf0152b6b75b902d"
+    },
+    {
+      "file": "game/src/core/perf-probe.local.js",
+      "size": 20480,
+      "mtimeMs": 1792300880477.566,
+      "sha256": "a68f3f5e8b9abe757b0177ea08b1efe2b5a688ae880bee0ccdcb815a741c757f"
+    },
+    {
+      "file": "game/src/core/performance-budgets.js",
+      "size": 1508,
+      "mtimeMs": 1792476794572.4827,
+      "sha256": "37ec893151c023dbfa8470f9e05c1052da2da62f2836cd05dcb7a4ba9bf44f17"
+    },
+    {
+      "file": "game/src/core/performance-settings.js",
+      "size": 2405,
+      "mtimeMs": 1792300880492.468,
+      "sha256": "aa6676af0084910d15fecc744fabbb8f043463913707530f40a64b4431c7e607"
+    },
+    {
+      "file": "game/src/core/random-core.js",
+      "size": 1529,
+      "mtimeMs": 1790898266204.5789,
+      "sha256": "177382f86d8e810a76428bc7aaae450a0b0e3811490220e9d8dc1a39db58b174"
+    },
+    {
+      "file": "game/src/core/random.js",
+      "size": 2298,
+      "mtimeMs": 1790568021766.0193,
+      "sha256": "cbc6ade0393a77dc838fea3d5833ae771eb51825f9d3a06644b100a449542923"
+    },
+    {
+      "file": "game/src/core/render-scheduler.js",
+      "size": 2808,
+      "mtimeMs": 1792300880500.778,
+      "sha256": "0cc97ec24921c7e58f877ff6d972578a0863b659c03da2d97fee59bae847ac73"
+    },
+    {
+      "file": "game/src/core/renderer.fx.js",
+      "size": 1523,
+      "mtimeMs": 1790898266166.5159,
+      "sha256": "7682307628f400dcea170457cab7308a0687156696324e7c101573cf7a645a02"
+    },
+    {
+      "file": "game/src/core/renderer.icons.js",
+      "size": 2933,
+      "mtimeMs": 1791813937936.383,
+      "sha256": "d07938a2701004c80616bafda2db13c2d3f075ca85380d2ea5061666682afa07"
+    },
+    {
+      "file": "game/src/core/renderer.js",
+      "size": 30801,
+      "mtimeMs": 1792419236270.121,
+      "sha256": "cd25fc496afb26b3574ab3204d271d66bf49168f02f833a3b011a5fc31e1ba34"
+    },
+    {
+      "file": "game/src/core/renderer.primitives.js",
+      "size": 1563,
+      "mtimeMs": 1790898217721.9492,
+      "sha256": "7860c4e2ad5469ab17a1e4d1800dc69a5914633710b808157d14ef105966fce7"
+    },
+    {
+      "file": "game/src/core/rule-config.js",
+      "size": 5452,
+      "mtimeMs": 1791082625619.6592,
+      "sha256": "7976d367bf8a8313f197f489cf923cd0a014914a33f46111100daf55fd2dbbbe"
+    },
+    {
+      "file": "game/src/core/rules.js",
+      "size": 1351,
+      "mtimeMs": 1790566386446.8853,
+      "sha256": "ab76d311c8428e045a2219ef2c294492ea31c514046744e6c571e37384e611d5"
+    },
+    {
+      "file": "game/src/core/sdt-facade.js",
+      "size": 1092,
+      "mtimeMs": 1790471701815.7498,
+      "sha256": "52c174eb79457cf0f215420b0503e572fa228c4d33c8f34b9b637efd338d433d"
+    },
+    {
+      "file": "game/src/core/shared.js",
+      "size": 2064,
+      "mtimeMs": 1790566760926.9573,
+      "sha256": "2687bcc33d114eab4700663ffdda962e783a8c9125da5c3de29323e8f6f9e9ad"
+    },
+    {
+      "file": "game/src/core/storage.js",
+      "size": 1025,
+      "mtimeMs": 1790270067396.5227,
+      "sha256": "011a7e5d2fc8446f626981322b986d6bae954a4cac709d9d381d3bc6d27a49fc"
+    },
+    {
+      "file": "game/src/core/turbo.js",
+      "size": 1383,
+      "mtimeMs": 1790658119565.4207,
+      "sha256": "576dbe1bd94981696971a4fe65a8b81c3755b128f15be8dc36842b44f9ad25ff"
+    },
+    {
+      "file": "game/src/e2.snapshot.qa.js",
+      "size": 7787,
+      "mtimeMs": 1790658119565.4207,
+      "sha256": "41c569b8df904b2059afe622f07a9f05ddcf61e32baea87118003336fe9813be"
+    },
+    {
+      "file": "game/src/experience/pocket-strip.js",
+      "size": 3619,
+      "mtimeMs": 1791108468969.4348,
+      "sha256": "3923840a81444f1b488a44f3335b880bfa3b8f0010fb4e5029f8647ce8d172d5"
+    },
+    {
+      "file": "game/src/game.boot.js",
+      "size": 43888,
+      "mtimeMs": 1792419236499.5088,
+      "sha256": "407b4e68839a764bc784acc10082e9ff9b05564f4337e1999d21c0a599b91ac9"
+    },
+    {
+      "file": "game/src/generated/art-manifest.js",
+      "size": 43152,
+      "mtimeMs": 1792485930159.7605,
+      "sha256": "200743578e9ef02cfda61c6b6856fca0f624758f330f5b55091c7fc850eed95d"
+    },
+    {
+      "file": "game/src/generated/narrative-events.js",
+      "size": 8031,
+      "mtimeMs": 1792308684115.456,
+      "sha256": "267c6e719f2ecaab3e75f48ed7b9e716a3a9b704ce9d649317964392e110e3e9"
+    },
+    {
+      "file": "game/src/generated/thumb-manifest.js",
+      "size": 12398,
+      "mtimeMs": 1792485930164.2666,
+      "sha256": "f91309a211ac93f0c86f16cb0c7ca7265636cdd7ac367bac8ae0bc7a05ac6464"
+    },
+    {
+      "file": "game/src/home/home.catalog.js",
+      "size": 2536,
+      "mtimeMs": 1789922323422.915,
+      "sha256": "a0722309d6cdcec0e95f3a2c79b8cca3480a4482a468a000f491c75f7171b869"
+    },
+    {
+      "file": "game/src/home/home.commands.js",
+      "size": 10840,
+      "mtimeMs": 1791987697228.693,
+      "sha256": "eb75d1a2444b1082ed5b8c97b5559dc7e480e91cf68bb0074f9c609c0dbe6c82"
+    },
+    {
+      "file": "game/src/home/home.presenter.js",
+      "size": 1577,
+      "mtimeMs": 1790176176452.7903,
+      "sha256": "885923c89a44c237010830dbd037602c5bae1552fec40f65a03d30efc8066b88"
+    },
+    {
+      "file": "game/src/home/home.scene.js",
+      "size": 23458,
+      "mtimeMs": 1792300880547.3284,
+      "sha256": "5315be0ae9feb71523ed8cafea826415341dab33980e4458344e8f169a8edd40"
+    },
+    {
+      "file": "game/src/home/home.visuals.js",
+      "size": 8816,
+      "mtimeMs": 1792131521616.9128,
+      "sha256": "77894ef542f7caa05ab164959f45d45299a1e99b0fa0e8783e47d9abd5576b68"
+    },
+    {
+      "file": "game/src/home/narrative.js",
+      "size": 2775,
+      "mtimeMs": 1790176600780.0723,
+      "sha256": "de497a1dd57cccaeeb7da97af2d27a6c84ea3a6eb11cc435110003e52e9647f2"
+    },
+    {
+      "file": "game/src/home/story.commands.js",
+      "size": 1437,
+      "mtimeMs": 1790176176457.803,
+      "sha256": "7f7e4c8220f85e686eb43a8c929cee3462c866c8584b210009a0cb7fc1fe8022"
+    },
+    {
+      "file": "game/src/home/story.last-lamp.js",
+      "size": 6481,
+      "mtimeMs": 1790898280982.4019,
+      "sha256": "6ce80c708c9c2d760abd0cb08215f4e75de644cbf51c7aa9ff563ae670df1cbc"
+    },
+    {
+      "file": "game/src/hub/bag-pane-view.js",
+      "size": 7308,
+      "mtimeMs": 1792415148738.7776,
+      "sha256": "2f45ee252c9b8984963777b41943920af162d48e78296d0487ce30c3717cbc83"
+    },
+    {
+      "file": "game/src/hub/bag-return-hook.js",
+      "size": 762,
+      "mtimeMs": 1789864627220.8816,
+      "sha256": "855b5c061bbf2c3aa57a4e2ba2f98849da3e2e8d98e7d17afee7c06c0081e9c9"
+    },
+    {
+      "file": "game/src/hub/base-departure.commands.js",
+      "size": 3981,
+      "mtimeMs": 1791987697228.693,
+      "sha256": "12b2efbc86c2ca3e54ef8e588d8b86e357c161cd48feddf2a7d08802fe322cfc"
+    },
+    {
+      "file": "game/src/hub/base-economy.js",
+      "size": 4555,
+      "mtimeMs": 1790567339058.1008,
+      "sha256": "d39b7920f233156b9c036d33e700fc61222e2eb103e83799f76b7c0d0316f21d"
+    },
+    {
+      "file": "game/src/hub/base-elapsed.commands.js",
+      "size": 2044,
+      "mtimeMs": 1790582435961.573,
+      "sha256": "6b47872c47a2ec728025745a0e356dee9ef9e98b6a7a81ca9250b87c1180b514"
+    },
+    {
+      "file": "game/src/hub/base-meta.commands.js",
+      "size": 6780,
+      "mtimeMs": 1790620398164.6277,
+      "sha256": "43c53e3edf5d48dabb979e3c94d36788d17acfd3a5e74fc058ee5d898af0476a"
+    },
+    {
+      "file": "game/src/hub/base-motion-v4.js",
+      "size": 1958,
+      "mtimeMs": 1791798782363.4968,
+      "sha256": "cd0015726f793b27a1f2da04ff15fe57d00121385f21fd10ffa90b085992453d"
+    },
+    {
+      "file": "game/src/hub/base-mutation.js",
+      "size": 1915,
+      "mtimeMs": 1790567109538.0017,
+      "sha256": "88601f7a606e91275a692e929d96697b80ad88512b4ccf53b0a4ced14e6050f6"
+    },
+    {
+      "file": "game/src/hub/base-page-motion-v7.js",
+      "size": 8062,
+      "mtimeMs": 1792035277014.7522,
+      "sha256": "60b95779622f977afdbd6add457ec381582b006d27fc5fc0dad204b941e54575"
+    },
+    {
+      "file": "game/src/hub/base-pet-egg.commands.js",
+      "size": 2407,
+      "mtimeMs": 1791084430359.2883,
+      "sha256": "44066ee38c5d7bd85497486c30fa05633bfde139d406c04b374808fa04b82b79"
+    },
+    {
+      "file": "game/src/hub/base-progression.commands.js",
+      "size": 2327,
+      "mtimeMs": 1790571545486.4873,
+      "sha256": "80c520a6179c650bab60315face2c0f52894a4622e5c92a83100b185ef9e4cbf"
+    },
+    {
+      "file": "game/src/hub/base-state.js",
+      "size": 6728,
+      "mtimeMs": 1792131521616.9128,
+      "sha256": "86e06ab0c856cd195787ff0e2504b11902c3fae5b3547e08dbfde4096c5a5558"
+    },
+    {
+      "file": "game/src/hub/base.commands.js",
+      "size": 6575,
+      "mtimeMs": 1791959107690.2207,
+      "sha256": "a7a56eb20547c8e885c209d9aabe51cf6362dd24d59a5075e17c1dd4eb42b5ab"
+    },
+    {
+      "file": "game/src/hub/base.js",
+      "size": 33811,
+      "mtimeMs": 1792418730403.6643,
+      "sha256": "a7988240b494cbb43aa3d01b5ecabbbf6e8ccc1de8ead02211fad60de3cd771f"
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.js",
+      "size": 16478,
+      "mtimeMs": 1790585333433.8396,
+      "sha256": "7360ebd06f139c8e43510c1cd9d9556471f6532185c265618df8603fa289584e"
+    },
+    {
+      "file": "game/src/hub/battle-settlement.commands.types.d.ts",
+      "size": 5411,
+      "mtimeMs": 1790585321983.104,
+      "sha256": "269bd17f625fb6a47d834a054c1ddc735d681ecc71f87ac0e83117955b299fb2"
+    },
+    {
+      "file": "game/src/hub/battle-victory-progress.js",
+      "size": 2960,
+      "mtimeMs": 1790586311767.8496,
+      "sha256": "042797a9cf64528b6d29b2afbf6e302bf345df6093474899993a066c6b4b1ac9"
+    },
+    {
+      "file": "game/src/hub/collection-conversion-view.js",
+      "size": 1379,
+      "mtimeMs": 1792418703365.232,
+      "sha256": "fab4442d5ce15457c8ed7e113734333c054dfef33d5314a4f1efb600374282e3"
+    },
+    {
+      "file": "game/src/hub/collection-conversion.js",
+      "size": 2981,
+      "mtimeMs": 1792418819693.3484,
+      "sha256": "2cf884eb03b5368b110a5d103f0e4cfc2ca892f80f8c1f0640eb05b966c04681"
+    },
+    {
+      "file": "game/src/hub/collection-protection.js",
+      "size": 259,
+      "mtimeMs": 1792418730167.716,
+      "sha256": "3c1fc2d49c87a920328ce67acd5789aaa0078a04a854a1ffd384342da15213a4"
+    },
+    {
+      "file": "game/src/hub/collection.commands.js",
+      "size": 11655,
+      "mtimeMs": 1792418819493.2703,
+      "sha256": "c36bc51918453cef69d070fbed2eedb1421a7b8c72d0ba2cf8a4e2b69a03f27d"
+    },
+    {
+      "file": "game/src/hub/commands.shared.js",
+      "size": 2782,
+      "mtimeMs": 1790542157895.1318,
+      "sha256": "6100ca4b1f3624e49fd0c27a2b21373baeb462f50d1d84f13a85e3d6438ca88b"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/koi-LICENSE.txt",
+      "size": 1096,
+      "mtimeMs": 1791649155049.645,
+      "sha256": "15a83f8e244e2a44dfa15894abaa92466f8f8b21097b70e8b428ba2ab0b88c2e"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/KoiPond.js",
+      "size": 11388,
+      "mtimeMs": 1791888454161.5952,
+      "sha256": "4bb4380f078ef862649a8668e567e9eaa6d70b48f63091fabca43dc9353ed565"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/rain-LICENSE.txt",
+      "size": 1090,
+      "mtimeMs": 1791649153581.1802,
+      "sha256": "6bdcb699eff100a57a113d22adcc393c80ca6a384efc86479ac13d2752010bde"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainRenderer.js",
+      "size": 14949,
+      "mtimeMs": 1791649328872.586,
+      "sha256": "0cd254b6c2b538d062625d8474db4ac49b679507801453fd49ea7e384ec46acd"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/RainSimulation.js",
+      "size": 17184,
+      "mtimeMs": 1791649328866.3086,
+      "sha256": "c7dfbf5bc6e2cc1de96078909eff39d1198310b68c878e2a7b02be66f55437f5"
+    },
+    {
+      "file": "game/src/hub/courtyard-vendor/SOURCE.md",
+      "size": 1983,
+      "mtimeMs": 1791812540944.4302,
+      "sha256": "e32e37950a2eb35a1e55431caaf07708dcdffee4381e583fa5bbb0c1b8d0810a"
+    },
+    {
+      "file": "game/src/hub/courtyard.rain-tableau.js",
+      "size": 10795,
+      "mtimeMs": 1791801643640.3066,
+      "sha256": "51baef07821ad53def47fe397974da70348aa7bbdb1e80e7c17846dfe697e32b"
+    },
+    {
+      "file": "game/src/hub/departure.drag.js",
+      "size": 3428,
+      "mtimeMs": 1791987697229.6897,
+      "sha256": "ce271515794670e761b766a3884646a3be274244cea466e7cfff17060befe1da"
+    },
+    {
+      "file": "game/src/hub/departure.selection-state.js",
+      "size": 284,
+      "mtimeMs": 1792131521616.9128,
+      "sha256": "c4d0ae39cc850b463bfe3ccc941c4ba0009663a3268e1124fb00e7685aa01db4"
+    },
+    {
+      "file": "game/src/hub/departure.summary.js",
+      "size": 3645,
+      "mtimeMs": 1792413597997.292,
+      "sha256": "c1b61fdfccff515241b8051873341fbfbc123fb0a4ce179a9af22e4c8f5fe490"
+    },
+    {
+      "file": "game/src/hub/departure.view-updates.js",
+      "size": 11738,
+      "mtimeMs": 1792410128467.7588,
+      "sha256": "7ba46944dc051a332139f917a2b430354d9e0339f5008cb4b9c0d4407883eb78"
+    },
+    {
+      "file": "game/src/hub/extraction.commands.js",
+      "size": 26358,
+      "mtimeMs": 1792418839153.6016,
+      "sha256": "e36ef82395c7f39f8c3987a18c2a79bc3aa057d0b104b14684cf07bbe4b598e9"
+    },
+    {
+      "file": "game/src/hub/game.bag.bridge.js",
+      "size": 514,
+      "mtimeMs": 1790070561401.5935,
+      "sha256": "cb117388a75f9e47d9803da31be7912dae443c586abbd6dcec096491061c6cf5"
+    },
+    {
+      "file": "game/src/hub/game.bag.drag.js",
+      "size": 10806,
+      "mtimeMs": 1792409686213.9043,
+      "sha256": "e4388db6dfd85a0047bdc56eea4dd2ce39471e3cc41fbdc02c5bc689a6fc2387"
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "size": 45811,
+      "mtimeMs": 1792479892357.4768,
+      "sha256": "8d1bd3a7cc849e655af7819584bb74520207c1036d0a9b14cea9b2838cc045b1"
+    },
+    {
+      "file": "game/src/hub/game.bag.rules.js",
+      "size": 13390,
+      "mtimeMs": 1792409527440.5852,
+      "sha256": "e59150392b517d9f398d0b1a45c254c5bb00e14425869d97dbf655b8ee0bb0c5"
+    },
+    {
+      "file": "game/src/hub/game.bag.settle.js",
+      "size": 28000,
+      "mtimeMs": 1792404912583.7083,
+      "sha256": "c9f43149cdefaa516ac724f9dba877fe282d0905e9701d63a848d2d535de1681"
+    },
+    {
+      "file": "game/src/hub/game.bag.token-craft.js",
+      "size": 1607,
+      "mtimeMs": 1792404912583.7083,
+      "sha256": "8bc9a03324ae8cdaf447a0c04e461c07559609b027d73cb727934d11472f0f30"
+    },
+    {
+      "file": "game/src/hub/game.bag.view2.js",
+      "size": 11529,
+      "mtimeMs": 1792410043362.769,
+      "sha256": "22d64eb1d194e29b6542bc9d1f4ab63f096c04bc6e92b02ce05ef1da3ff3800d"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.art-warm.js",
+      "size": 4755,
+      "mtimeMs": 1791716846150.7515,
+      "sha256": "0e749cec6b54eeda4feff81fbc317a2a03686bafea8cc4dffaa7b8f1ae1a481e"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.common.js",
+      "size": 2683,
+      "mtimeMs": 1791987697230.6863,
+      "sha256": "b321bbd98f91c76e854e1cd22e6cb9eef4dd3a604fc26271df1967d2b8b374c4"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.designer.js",
+      "size": 22625,
+      "mtimeMs": 1790270415030.424,
+      "sha256": "7991adb7c1a8e3de3266eec87b503491e6d9b65f27ca358685ebbba6f64b8cb5"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.js",
+      "size": 6530,
+      "mtimeMs": 1791987697231.772,
+      "sha256": "744486dda776d5c59f8bf734322a03416339f61f6631939b132c7bfda222fcf1"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.page.js",
+      "size": 66387,
+      "mtimeMs": 1792154375553.1533,
+      "sha256": "68510cb7718dae6b4699c02c1e1fd74822a4c89ff8e0cb22930a9a1cec9d47e8"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-fps.js",
+      "size": 3938,
+      "mtimeMs": 1790270313768.2542,
+      "sha256": "f088d8a2da767bb6491274dc9f2f8b6e6845743887fe1fee5bb1c035a854a500"
+    },
+    {
+      "file": "game/src/hub/game.cardslib.photo-props.js",
+      "size": 3241,
+      "mtimeMs": 1791701501266.6707,
+      "sha256": "d9658c6c529d1f88879d071da692ab92b6742d95a0f46c1ae04d1f32f76b4971"
+    },
+    {
+      "file": "game/src/hub/game.container-store.view.js",
+      "size": 4285,
+      "mtimeMs": 1792409387580.6238,
+      "sha256": "591543fdafc0c0255c5bd52f299e584068c8d2ac96278ffa1fc085a62de8adb2"
+    },
+    {
+      "file": "game/src/hub/game.hub.bridge.js",
+      "size": 619,
+      "mtimeMs": 1791987697231.772,
+      "sha256": "8f0bd3e9a736841bca9623fda2a9e0c4ed8045cbb482523e093c0fe3d7d737e5"
+    },
+    {
+      "file": "game/src/hub/game.hub.depart.js",
+      "size": 29930,
+      "mtimeMs": 1792413439721.9514,
+      "sha256": "110041c2267d8ae2bd46f2e33669a98ac0b0a6c198d6bfc21d3ff8a66fc0715d"
+    },
+    {
+      "file": "game/src/hub/game.hub.home-scene.js",
+      "size": 4179,
+      "mtimeMs": 1791987697232.8206,
+      "sha256": "8074951f9b829a3c3469a3b5eabff2199d1808c7d47a70f25d5f13418c9a5f06"
+    },
+    {
+      "file": "game/src/hub/game.hub.js",
+      "size": 5459,
+      "mtimeMs": 1792131521619.0198,
+      "sha256": "6f2860fbd2a538325fa05863b8fe43b33610f25b449b2c35d3cdae394ce31839"
+    },
+    {
+      "file": "game/src/hub/game.hub.pages.js",
+      "size": 20418,
+      "mtimeMs": 1792419049881.944,
+      "sha256": "4e8772ad4d8b278e73f58439b3507614fa448488c11f79c28afd262e4297c141"
+    },
+    {
+      "file": "game/src/hub/game.hub.preparation-ports.js",
+      "size": 1611,
+      "mtimeMs": 1792413440203.0242,
+      "sha256": "690f08708ab330522a3d309ffe57461c1e2dd83c60f5eeb8eac8fdaaffe86701"
+    },
+    {
+      "file": "game/src/hub/game.hub.preparation.js",
+      "size": 7836,
+      "mtimeMs": 1792413439914.8367,
+      "sha256": "856ae81b93a6c073be468aff40accbd87d48f89dff032c5e29e8ea095ae94c29"
+    },
+    {
+      "file": "game/src/hub/game.hub.runtime.js",
+      "size": 24978,
+      "mtimeMs": 1792420628797.6768,
+      "sha256": "b63619a5a53ca05c9d7f1d88a5422c66588e233bf663353482775b97c377f777"
+    },
+    {
+      "file": "game/src/hub/game.notes.js",
+      "size": 11245,
+      "mtimeMs": 1791987697233.8228,
+      "sha256": "ca9d135d8edf227f4414cc447fc525c7a31363185e67d8958e2e56ebca07b30e"
+    },
+    {
+      "file": "game/src/hub/game.reward-organizer.js",
+      "size": 1721,
+      "mtimeMs": 1792302107768.315,
+      "sha256": "23ddb7addbe503ae82bc30d3510dc481153b9e0f7adcd602859ceeafbbfb132f"
+    },
+    {
+      "file": "game/src/hub/game.storage.js",
+      "size": 15129,
+      "mtimeMs": 1791987697234.8582,
+      "sha256": "129427f83d7e13d51b07cc6baa65568584aac15a6b72ef79a4c37c7a4def001f"
+    },
+    {
+      "file": "game/src/hub/game.store.js",
+      "size": 2939,
+      "mtimeMs": 1792072035752.571,
+      "sha256": "2bd505574e8e03016fbed623063d78c46c64d15766a78f6852309c9ff5033759"
+    },
+    {
+      "file": "game/src/hub/game.store.types.d.ts",
+      "size": 3699,
+      "mtimeMs": 1790471869709.4646,
+      "sha256": "ee02928575bd391b7223c94154bdc98e46c1786bbfad0280dece74930627dad5"
+    },
+    {
+      "file": "game/src/hub/hub.archive-v3.js",
+      "size": 17920,
+      "mtimeMs": 1792045445692.152,
+      "sha256": "848f1eca823675bfe5c89ac6fff4b1b31392102e975790efc5fd840b0a04b10f"
+    },
+    {
+      "file": "game/src/hub/hub.archive.js",
+      "size": 6330,
+      "mtimeMs": 1792045445604.4863,
+      "sha256": "bb4db75bb2c02a828710bdda484b771c85bde59026fcdeeba11b44c94c79957b"
+    },
+    {
+      "file": "game/src/hub/hub.collection-v4.js",
+      "size": 7330,
+      "mtimeMs": 1792404912585.219,
+      "sha256": "a3ff69476b4dd8b6110cda51d33b702d26589cf737f38c4931b5b426fcb75c9f"
+    },
+    {
+      "file": "game/src/hub/hub.courtyard-runtime.js",
+      "size": 12675,
+      "mtimeMs": 1792300880679.4111,
+      "sha256": "b61e185d8b0eb5c5c049f15e0ea7dab1547170c0b1e6838c6936491ee0e51e26"
+    },
+    {
+      "file": "game/src/hub/hub.courtyard-v3.js",
+      "size": 4912,
+      "mtimeMs": 1791959107693.2705,
+      "sha256": "0ed780a3d447e04a25cd60e00f3b1304a718cc3219de555cc86121f859037024"
+    },
+    {
+      "file": "game/src/hub/hub.facilities.js",
+      "size": 4045,
+      "mtimeMs": 1792300880693.1367,
+      "sha256": "affb6d90a8a70a88325a92cdab073221fe992102546ad5d799a909dcfaa80252"
+    },
+    {
+      "file": "game/src/hub/hub.home-icons-v10.js",
+      "size": 1082,
+      "mtimeMs": 1791728383600.2104,
+      "sha256": "1f8a8a58059692d6b89c312e4845dbbac73891839fe577da026b652e13a36dd4"
+    },
+    {
+      "file": "game/src/hub/hub.home-v3.js",
+      "size": 4943,
+      "mtimeMs": 1792131521620.0227,
+      "sha256": "caf31b16d31d566575e7fc7570d928e577097f9b8f58750632eb95ba9bc513a3"
+    },
+    {
+      "file": "game/src/hub/hub.materials.js",
+      "size": 941,
+      "mtimeMs": 1791734256187.011,
+      "sha256": "25d9e187ef7f3e261ad068ccb1e20a6c6980992cc09c14757b102da598a7c5d8"
+    },
+    {
+      "file": "game/src/hub/hub.navigation-v7.js",
+      "size": 1093,
+      "mtimeMs": 1791804046063.3293,
+      "sha256": "9f0f7e7e1f0caed7ab5701dd9b6c382c3a3a2de5ba3ad38ff34c900d99a67bb6"
+    },
+    {
+      "file": "game/src/hub/hub.personnel.js",
+      "size": 21932,
+      "mtimeMs": 1792420628802.677,
+      "sha256": "6d9f771f37aaa2b9f338439a1609e2a5060e75027a72a0fd8c7882682482d9ea"
+    },
+    {
+      "file": "game/src/hub/hub.presentation.js",
+      "size": 22095,
+      "mtimeMs": 1792404912586.6765,
+      "sha256": "52d24bc34fe9b781127723c580183aad5818c82d14a14034db88d261147ab7ce"
+    },
+    {
+      "file": "game/src/hub/hub.reward-feedback.js",
+      "size": 8586,
+      "mtimeMs": 1791808329203.5974,
+      "sha256": "f21f144b61023e3c302861e5ad3a7dd83d211c881e82b5f69870011247a14283"
+    },
+    {
+      "file": "game/src/hub/hub.shop-v3.js",
+      "size": 3720,
+      "mtimeMs": 1791996016640.067,
+      "sha256": "30b22c68212b8ce3e82c02690c1cbb1b7ec837202d70fc44747cc8052e37f38e"
+    },
+    {
+      "file": "game/src/hub/hub.trade-shop-v5.js",
+      "size": 15252,
+      "mtimeMs": 1792418730954.9893,
+      "sha256": "70bf5e8aeb1c549017850bd7003a2da020e772d9091aea0e938fb6a597284022"
+    },
+    {
+      "file": "game/src/hub/hub.visuals.js",
+      "size": 4634,
+      "mtimeMs": 1792045445612.7517,
+      "sha256": "1284b86e61536fb11e6440995a3094711510d2228e6ca4c90705421f783b0e78"
+    },
+    {
+      "file": "game/src/hub/hub.warehouse-categories-v7.js",
+      "size": 543,
+      "mtimeMs": 1791727714175.629,
+      "sha256": "209aebf8e4d64faa0b234614a4725f17d5dcbd2121ff9b4e720f4972065a6b2d"
+    },
+    {
+      "file": "game/src/hub/hub.warehouse.js",
+      "size": 15678,
+      "mtimeMs": 1792418730671.753,
+      "sha256": "4ec83d978d84c45b79e53ddbf27cc223a2a4a1851ad3966f2cda5cd21cbb3fab"
+    },
+    {
+      "file": "game/src/hub/meta-progression.js",
+      "size": 1870,
+      "mtimeMs": 1790586345748.4194,
+      "sha256": "b3033c3466f95142eaa221a2e2c28e2e38695d0a65d82cb15b9c3818d88d0de0"
+    },
+    {
+      "file": "game/src/hub/meta.js",
+      "size": 18013,
+      "mtimeMs": 1792131521621.1145,
+      "sha256": "28e3149cf0c1edfc7f38638b2509bf7604ed309c96e163f30c114ab67764dab6"
+    },
+    {
+      "file": "game/src/hub/nest-settlement.commands.js",
+      "size": 9761,
+      "mtimeMs": 1790586512179.0825,
+      "sha256": "d9f56f2e54d19584d7b1fc713417205f75bf522d3539c1c4a0ea89088857ab63"
+    },
+    {
+      "file": "game/src/hub/photo-studio-catalog-cache.js",
+      "size": 464,
+      "mtimeMs": 1792152852021.6387,
+      "sha256": "45cb473fc2782137374c8c9caa2a16f85c7a5890d0b06d153f3c9281acac82a9"
+    },
+    {
+      "file": "game/src/hub/photo-studio-controls.js",
+      "size": 7676,
+      "mtimeMs": 1791728347593.8318,
+      "sha256": "0096f293b823e517df8b58bf49d9a052ba84beac87014fdf8217925d284fabd5"
+    },
+    {
+      "file": "game/src/hub/photo-studio-navigation.js",
+      "size": 5866,
+      "mtimeMs": 1791993621698.0789,
+      "sha256": "2185879b35000041103ba8adfa3b4986193f6f4a4f31df277bfce7c1b8a66570"
+    },
+    {
+      "file": "game/src/hub/photo-studio-presentation.js",
+      "size": 770,
+      "mtimeMs": 1790139785480.5222,
+      "sha256": "b93af0e7507faa7e70bc0b4b0c13f7b2acee17b9a37620a3135192a228e750a5"
+    },
+    {
+      "file": "game/src/hub/photo-studio-tabs.js",
+      "size": 3261,
+      "mtimeMs": 1791994276824.378,
+      "sha256": "722162bf5802f1140b7bf7694b895b11658674e28909eaf8ac4b41def12c7b22"
+    },
+    {
+      "file": "game/src/hub/preparation.commands.js",
+      "size": 10049,
+      "mtimeMs": 1792413483923.1587,
+      "sha256": "bce7dd63a756ffc82931515b8da9f62b60bdf0c88115ec7252403c586758d381"
+    },
+    {
+      "file": "game/src/hub/preparation.sources.js",
+      "size": 2697,
+      "mtimeMs": 1791032368655.4807,
+      "sha256": "980eeff5ae6b929b751dd60fa2a592726dda26fc21bd59b87bcf32287ea21e80"
+    },
+    {
+      "file": "game/src/hub/preparation.view.js",
+      "size": 8623,
+      "mtimeMs": 1792413810932.938,
+      "sha256": "1f0201abb81f91a45ebf8e081a806945f8f9858f08d9023d644d4f9a4b0457fa"
+    },
+    {
+      "file": "game/src/hub/recoverable-pair.js",
+      "size": 8591,
+      "mtimeMs": 1790526407018.485,
+      "sha256": "b817a01f7961dda2eafb83e65f2fb7cde7836fc96b93a2bd119bc3bbb29bf8fd"
+    },
+    {
+      "file": "game/src/hub/recovery.commands.js",
+      "size": 12035,
+      "mtimeMs": 1790525740532.9265,
+      "sha256": "457ad8aee4756b7f85a31f22dbb7ec7fee24498be629e273b976c687fd327dac"
+    },
+    {
+      "file": "game/src/hub/run-save-validation.js",
+      "size": 5202,
+      "mtimeMs": 1792133481898.2021,
+      "sha256": "6eb3fd36a3a7326092a14d9f4b50d320cd85ac69849ef5117a3cc0e3ca365800"
+    },
+    {
+      "file": "game/src/hub/terminal.commands.js",
+      "size": 7527,
+      "mtimeMs": 1792418494881.5823,
+      "sha256": "37e83c42ff7046cd47814394721e798e7f4a7301f7c11172fd41b3da285e8aea"
+    },
+    {
+      "file": "game/src/hub/versioned-slot-reader.js",
+      "size": 6327,
+      "mtimeMs": 1791987697234.8582,
+      "sha256": "34ff2b2d5c342573ae44f8b75fd944ea6132b09d46787615cf2bf8f2ee65cea1"
+    },
+    {
+      "file": "game/src/main.js",
+      "size": 2108,
+      "mtimeMs": 1791021470286.3047,
+      "sha256": "b27a866ff5152d7222d510289171df213ef09c6d33a3162b579048d85d8c068c"
+    },
+    {
+      "file": "game/src/r7a.qa.js",
+      "size": 4657,
+      "mtimeMs": 1790658119569.3323,
+      "sha256": "a9da6ff51905c298b5d9cb3d06bc43b4f042b86901b38fd2f3f237c567ffb54b"
+    },
+    {
+      "file": "game/src/rarity-design-lab.js",
+      "size": 32933,
+      "mtimeMs": 1791798438031.1501,
+      "sha256": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775"
+    },
+    {
+      "file": "game/src/README.md",
+      "size": 4494,
+      "mtimeMs": 1792131521606.7039,
+      "sha256": "43a9b6b13b358b9ea61f6920b0a0a1c3efb4d0809a8c0e2d5189141d39a2516f"
+    },
+    {
+      "file": "game/src/run/chest-opening-art.js",
+      "size": 4235,
+      "mtimeMs": 1792158721386.3142,
+      "sha256": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf"
+    },
+    {
+      "file": "game/src/run/chest-reward-save.js",
+      "size": 7129,
+      "mtimeMs": 1792154950257.484,
+      "sha256": "035f2dc13caab2176ef2463c6334c9ab308848e1add24766f4a0545242bb345a"
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "size": 46360,
+      "mtimeMs": 1792479304893.4353,
+      "sha256": "6b619405a2dd460c17f1da9baea3b72ec547a698e02c09c17c8d1fc908dc1af8"
+    },
+    {
+      "file": "game/src/run/encounter-meta.js",
+      "size": 1964,
+      "mtimeMs": 1790528871627.471,
+      "sha256": "a94baf84f82704dfe3e99b70e8550e16fc709465e9eb8d3e49835aae4e46ec72"
+    },
+    {
+      "file": "game/src/run/encounter-selector.js",
+      "size": 3591,
+      "mtimeMs": 1790180525073.6465,
+      "sha256": "a7533515ede020fdb82a5dbf488dea9d411224b329239897085d1f45d8855398"
+    },
+    {
+      "file": "game/src/run/event-card-choice.js",
+      "size": 9666,
+      "mtimeMs": 1792300880760.4087,
+      "sha256": "ea3d6fd229c8ce27f796cb331e48dedd3690b0671b942cb7be7a32030ab376b1"
+    },
+    {
+      "file": "game/src/run/event-recode-candidates.js",
+      "size": 985,
+      "mtimeMs": 1792305748598.088,
+      "sha256": "27145bf3515187acb516d03ed8d498a3ef5c874ff41683e843afb054fc2d3c47"
+    },
+    {
+      "file": "game/src/run/expedition.view.js",
+      "size": 15622,
+      "mtimeMs": 1792404912586.6765,
+      "sha256": "47b390efaad8a7db3422537da31c991977b2df2182dc51f49c978f5dc8603d0b"
+    },
+    {
+      "file": "game/src/run/extraction-preview.js",
+      "size": 2427,
+      "mtimeMs": 1790566386686.8135,
+      "sha256": "0e486fdbe0f7e72cdb10e8bdfe763712aa4d879feed9c2cb61779f55ff043441"
+    },
+    {
+      "file": "game/src/run/game.nest.js",
+      "size": 41947,
+      "mtimeMs": 1792409688774.8545,
+      "sha256": "ef0b6b65eb4bc2e5531b969e30f3197de0a5ade816eb8933edf38f41ed6a85c2"
+    },
+    {
+      "file": "game/src/run/game.run.altar.js",
+      "size": 52174,
+      "mtimeMs": 1792476794572.4827,
+      "sha256": "63445fcdb121df4340b470af49d2f047413396d216ab078a622a305312b39cb6"
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.js",
+      "size": 5252,
+      "mtimeMs": 1792009335002.382,
+      "sha256": "a81dfce40a84a2713174bcf918e5901b4401f8b71604691256fa3bc94fb3128b"
+    },
+    {
+      "file": "game/src/run/game.run.class-choice.page.js",
+      "size": 26534,
+      "mtimeMs": 1792410128903.7341,
+      "sha256": "1de41348c313b220d7cfb6541687f1ac6db6cd509d8f6498fc0470f65ae369ce"
+    },
+    {
+      "file": "game/src/run/game.run.data.js",
+      "size": 3142,
+      "mtimeMs": 1792137166712.9336,
+      "sha256": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8"
+    },
+    {
+      "file": "game/src/run/game.run.dev-loader.js",
+      "size": 5051,
+      "mtimeMs": 1791987697237.4214,
+      "sha256": "63bc91f9be199b49531268e4ada83e8a49843c73d0bbe4d72da6a59743ea51ba"
+    },
+    {
+      "file": "game/src/run/game.run.dev.js",
+      "size": 14803,
+      "mtimeMs": 1791987697238.4185,
+      "sha256": "a69123d4e83f67603c27fe25067a15640ddf5c10233f4e6bc97e9435fce4c384"
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "size": 64951,
+      "mtimeMs": 1792476143260.9521,
+      "sha256": "cd567434055fef8a37dc7926f31a42f4a246d75b23f68d9456f3cc66176ada9e"
+    },
+    {
+      "file": "game/src/run/game.run.js",
+      "size": 1231,
+      "mtimeMs": 1792131521623.1167,
+      "sha256": "a0bb9b3b7b4252795ed6f1ba0119c5b44d8311162b9de627006dea5393beb4c7"
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "size": 34626,
+      "mtimeMs": 1792409687785.7502,
+      "sha256": "601910c257052f30360b8eb9b54d024515dc901ce9c03db778d09744862f38a3"
+    },
+    {
+      "file": "game/src/run/game.run.shop.js",
+      "size": 41708,
+      "mtimeMs": 1792476794573.4824,
+      "sha256": "0e9622d8767f9c36f68a67c9e3544434587099cb2ff635982487e9f2b577374a"
+    },
+    {
+      "file": "game/src/run/game.session.bag.js",
+      "size": 6668,
+      "mtimeMs": 1792302107766.6973,
+      "sha256": "5814c365032fe0c0562f588049dc733f5735aac79a320a966db395fd77b57d45"
+    },
+    {
+      "file": "game/src/run/game.session.board.js",
+      "size": 5355,
+      "mtimeMs": 1790507485997.2068,
+      "sha256": "558f0d92456c383e4bcb0834d02185266ff316615a3ec8ef49ad5ee46f5927f9"
+    },
+    {
+      "file": "game/src/run/game.session.browser.js",
+      "size": 540,
+      "mtimeMs": 1790566523473.4463,
+      "sha256": "6990f34b05c0b1fe119723999171b6713c69b868d3fcb58d6b7f10bc57b7d34c"
+    },
+    {
+      "file": "game/src/run/game.session.death.js",
+      "size": 17239,
+      "mtimeMs": 1792301367628.792,
+      "sha256": "7dabbfc0bdc471252cbe19511b4256250a3001cf04f4220670214eeaa3155044"
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "size": 34773,
+      "mtimeMs": 1792300880906.2688,
+      "sha256": "05ce35e529825750a5b5533df9c0a1e36991c11a3a53892b003b9cf9ab7d5771"
+    },
+    {
+      "file": "game/src/run/game.session.kernel.js",
+      "size": 3716,
+      "mtimeMs": 1792131521624.554,
+      "sha256": "6cc5d6206dcf9fe30ecef4e24b6404046296d0195f718e98ca31c4e1c9f4bbf5"
+    },
+    {
+      "file": "game/src/run/game.session.map.js",
+      "size": 5627,
+      "mtimeMs": 1792300880915.434,
+      "sha256": "9f3204211a639f72c935f7b3e3803a4b000582aa2dfcc118c41700399d505f0a"
+    },
+    {
+      "file": "game/src/run/game.session.modes.js",
+      "size": 1591,
+      "mtimeMs": 1790270001754.705,
+      "sha256": "97bdd16eefa10e6b3e9144299f9920f62cafc15ab117ec2c3f55f05da33fb2a7"
+    },
+    {
+      "file": "game/src/run/lab.ending.js",
+      "size": 4706,
+      "mtimeMs": 1792404912593.1548,
+      "sha256": "8a6fe31c4fbef1acbaae9cb06c759fbc5a2e4e16f84c365eb93371232b495ba8"
+    },
+    {
+      "file": "game/src/run/layeredMap.js",
+      "size": 2772,
+      "mtimeMs": 1792300880915.7915,
+      "sha256": "c2a37a78cd6026e7af0fae01b8a102b936eb9c47b682f569b1596bdefd2e6600"
+    },
+    {
+      "file": "game/src/run/map-generation-rules.js",
+      "size": 6297,
+      "mtimeMs": 1792414884726.1187,
+      "sha256": "1f90ec484c147edd2398d14bee7f2ef4356825e57d4a5c693e4407a72f383734"
+    },
+    {
+      "file": "game/src/run/map-generator-v4.js",
+      "size": 9614,
+      "mtimeMs": 1792414884979.1726,
+      "sha256": "0114d9b622b99db238a1c67d97ce881d211514e09665fb324b73275451399775"
+    },
+    {
+      "file": "game/src/run/map-generator.js",
+      "size": 23965,
+      "mtimeMs": 1791812125798.796,
+      "sha256": "41315bf016634efc081e22739b638ada1b1c35b8589dc7d06a1dbea8cb873b41"
+    },
+    {
+      "file": "game/src/run/map-graph.js",
+      "size": 4079,
+      "mtimeMs": 1791987697240.676,
+      "sha256": "c49c551e2244750a91047363dc889ce628c55d4e31c969f80bf191be833d321b"
+    },
+    {
+      "file": "game/src/run/map-route-v2.js",
+      "size": 15393,
+      "mtimeMs": 1792414849676.5215,
+      "sha256": "b9bc0ced62c5e62f142a3300f08d5e37d5dcc1510fc3cfb6c50f6c17fc55d203"
+    },
+    {
+      "file": "game/src/run/map-snapshot.js",
+      "size": 17056,
+      "mtimeMs": 1792414849466.1814,
+      "sha256": "f90c34ed9322e43b31e540c99ce03382bcb4e41d69e2d10f26f81fc5b3d50f85"
+    },
+    {
+      "file": "game/src/run/map-travel-motion.js",
+      "size": 2936,
+      "mtimeMs": 1792011946614.5908,
+      "sha256": "c2184dba1b6afb1f33a8a9cc03b99c95f729e14d546db0659d89f1eb210c5b22"
+    },
+    {
+      "file": "game/src/run/map-travel-path.js",
+      "size": 3851,
+      "mtimeMs": 1792305748236.7468,
+      "sha256": "409ac7761a003388d3328ac692edc74709b5cd3369093af8648742e1fc3a9f8d"
+    },
+    {
+      "file": "game/src/run/node-restore-state.js",
+      "size": 2890,
+      "mtimeMs": 1792151373128.6826,
+      "sha256": "ee362370aba4d198aaa82bfddde1ebc7f900936307af9ac6dafc4d516a93e3f3"
+    },
+    {
+      "file": "game/src/run/node-reward-state.js",
+      "size": 5716,
+      "mtimeMs": 1792133043424.0283,
+      "sha256": "189bdf5df5677f57108353478357d533b755a161cfdb01d151c970016671814b"
+    },
+    {
+      "file": "game/src/run/route-choice-preview.js",
+      "size": 1291,
+      "mtimeMs": 1792301715130.9956,
+      "sha256": "0a05a0af46c7f95be20f9578a1b3caae9d7359fa0a0d0967d20ea4a0c4328583"
+    },
+    {
+      "file": "game/src/run/shop-browse-state.js",
+      "size": 2920,
+      "mtimeMs": 1792476794573.4824,
+      "sha256": "1c97cdb090cb5d0ca316a1720d24022d3d57e00c0202aeb44a5102650a9cafc7"
+    },
+    {
+      "file": "game/src/run/shop-commission.js",
+      "size": 4045,
+      "mtimeMs": 1792308542670.8389,
+      "sha256": "827e517466a341fc56019343412bac36fb6612bb2a7245d8143dfb35a1eab87f"
+    },
+    {
+      "file": "game/src/ui/achievement-gallery.js",
+      "size": 14020,
+      "mtimeMs": 1792476794574.483,
+      "sha256": "075b405b2d99d0e4d7bf810d698abc4e406a853288e9a57ea91ccaeab6902ff5"
+    },
+    {
+      "file": "game/src/ui/achievement-medals.js",
+      "size": 2448,
+      "mtimeMs": 1791565999207.4917,
+      "sha256": "78bbdbf29831ecbe7a158ed62c50aecb983220d7dcc46022e33bb55459f7fb6a"
+    },
+    {
+      "file": "game/src/ui/achievement-motion.js",
+      "size": 9713,
+      "mtimeMs": 1791638001675.0144,
+      "sha256": "e0b4c20e584d6126790e59aebf416b7cf117b8436f2c59ba11107d1189a6750f"
+    },
+    {
+      "file": "game/src/ui/archive-motion.js",
+      "size": 1355,
+      "mtimeMs": 1792331885978.665,
+      "sha256": "ac5d29f524551f9c65787f2f16ae6812b2bb8df31fbd17dde4be6c2b83c96dc0"
+    },
+    {
+      "file": "game/src/ui/base-design-preview-v7.js",
+      "size": 7131,
+      "mtimeMs": 1791734256166.791,
+      "sha256": "7ae565c2cbabd0b76d3b7873382b1d9a2c542172254bd6299f4bb42b8fc793f0"
+    },
+    {
+      "file": "game/src/ui/base-preview-rooms-v7.js",
+      "size": 5755,
+      "mtimeMs": 1791734256166.2888,
+      "sha256": "c68c228942c7aaa41d1d52343c8f34346f4b424327c14619c2e5c5943a4e9fb8"
+    },
+    {
+      "file": "game/src/ui/beginner-guide-diagrams.js",
+      "size": 4450,
+      "mtimeMs": 1792072057997.8413,
+      "sha256": "278132f2823d887837a95cf1b32e15654e635aa3cc943c0ed22dee2e154d7d5b"
+    },
+    {
+      "file": "game/src/ui/beginner-guide.js",
+      "size": 5504,
+      "mtimeMs": 1792072344488.2441,
+      "sha256": "33cfcb52575a5b5083fcdcc1cb1c9aebc360135db492a398503365521f0c7086"
+    },
+    {
+      "file": "game/src/ui/camp-entry.js",
+      "size": 9522,
+      "mtimeMs": 1792404912593.1548,
+      "sha256": "84a03a47534afbe1ca284ede88975597e044e948b76df97921123b47454cb4e0"
+    },
+    {
+      "file": "game/src/ui/card-browser-state.js",
+      "size": 1514,
+      "mtimeMs": 1792404912593.1548,
+      "sha256": "377616b4e2ee84c6062a38cf303dcb8efe5c28d013c4ddf7f877259b14ca2e5e"
+    },
+    {
+      "file": "game/src/ui/card-browser.js",
+      "size": 7115,
+      "mtimeMs": 1792476143261.952,
+      "sha256": "a564daa77db82e007a283d0f8b88ceae6301be121a51d62373c6be18f297ad8a"
+    },
+    {
+      "file": "game/src/ui/card-result-feedback.js",
+      "size": 11221,
+      "mtimeMs": 1792414437941.6028,
+      "sha256": "b17b33826b2ffd3169f5926ee3c63f64872e4c4e5eee19260820241e162d971b"
+    },
+    {
+      "file": "game/src/ui/card-state-motion.js",
+      "size": 5388,
+      "mtimeMs": 1792415513240.709,
+      "sha256": "869f030bec90919eaf1ff0ac649c00266ceb20a032a5938ccca6fd8568e9cfda"
+    },
+    {
+      "file": "game/src/ui/character-idle.js",
+      "size": 2476,
+      "mtimeMs": 1791987697240.676,
+      "sha256": "be6018d0a569e43017abe4b91121c53415a24aa5a3a0f1e9127fc3410e11303c"
+    },
+    {
+      "file": "game/src/ui/character-view-motion.js",
+      "size": 7120,
+      "mtimeMs": 1792331881418.816,
+      "sha256": "ed7f4c017618002925701362d2695b57171c52f506d4418b39e3ecab8a7fbf3a"
+    },
+    {
+      "file": "game/src/ui/chest-reward-overview.js",
+      "size": 5567,
+      "mtimeMs": 1792409136912.4365,
+      "sha256": "af38de50bf073c50d401b14f2ab54e2d252af2c5e4f0f2763108aeb86006a1ae"
+    },
+    {
+      "file": "game/src/ui/cinematics.js",
+      "size": 8608,
+      "mtimeMs": 1792410127969.7363,
+      "sha256": "953a3fb9241759d5307deb15cc36e7b1d3c49f5880feaac1ed0107d875ad1f6c"
+    },
+    {
+      "file": "game/src/ui/comm-feed.js",
+      "size": 7015,
+      "mtimeMs": 1791987697242.0764,
+      "sha256": "57de567954cdb050c2c84f5cb6abbca8aa85fe78c33a1fa5e19b1d1b3806e19e"
+    },
+    {
+      "file": "game/src/ui/cover-context.js",
+      "size": 2753,
+      "mtimeMs": 1791137163736.7888,
+      "sha256": "c16729750acf44c22ee0ecbcbd94a313837283863daa497b68877e9c0cb415b8"
+    },
+    {
+      "file": "game/src/ui/departure-transition.js",
+      "size": 2612,
+      "mtimeMs": 1792012494551.4583,
+      "sha256": "4761e69eaa383cce88675615a9ad14f8cd2cce9fadb80e2c7bbbda770029aaa5"
+    },
+    {
+      "file": "game/src/ui/event-dice.js",
+      "size": 4634,
+      "mtimeMs": 1792308541907.9006,
+      "sha256": "2b4a003b848463dbac4f05484c4d9f2e7b0ccec69289b3ff993ff47ca9885ea3"
+    },
+    {
+      "file": "game/src/ui/event-recode-result.js",
+      "size": 1818,
+      "mtimeMs": 1792336195814.5652,
+      "sha256": "96bb2ee2f7a90f00ccf5037f4e626c554581de849c182392dafee32a26a8cdbd"
+    },
+    {
+      "file": "game/src/ui/event-signal-puzzle.js",
+      "size": 7566,
+      "mtimeMs": 1792300881020.4868,
+      "sha256": "6918e05412df13fa25915704bd12c835fd7d0e25b734cef1fa1082fdb76b8a55"
+    },
+    {
+      "file": "game/src/ui/expedition-feedback.js",
+      "size": 2014,
+      "mtimeMs": 1791719303650.5652,
+      "sha256": "46bf0d0215d265e9b9e33613bed8118b1a0be74f735f38a9b2a91da2516fcd74"
+    },
+    {
+      "file": "game/src/ui/extraction-rewards-view.js",
+      "size": 13851,
+      "mtimeMs": 1792418839376.9004,
+      "sha256": "38aaff884b1539c0bd243b6b295d9f77b120224dde0c48490ef3bd5e47928c03"
+    },
+    {
+      "file": "game/src/ui/feedback-theme.js",
+      "size": 468,
+      "mtimeMs": 1792300881047.5078,
+      "sha256": "926bfbfdbab55743ec18d48bc1837ad3b02ebe58bd936d1d9ad6cb5f97eb43aa"
+    },
+    {
+      "file": "game/src/ui/feedback.local.js",
+      "size": 10300,
+      "mtimeMs": 1791629058999.7625,
+      "sha256": "b85ec6a9165346191a0bae669b2b1774f2e7d51ca3b42c4d3f7ca041a7dc5170"
+    },
+    {
+      "file": "game/src/ui/fire-rest-view.js",
+      "size": 1431,
+      "mtimeMs": 1792300881055.272,
+      "sha256": "5d6f233a25a82a24f90bba79bfe4af9fa86a216c8a06f10700acc9bdb1cf501e"
+    },
+    {
+      "file": "game/src/ui/game.menu.js",
+      "size": 18085,
+      "mtimeMs": 1792131521625.7522,
+      "sha256": "cea11326c01a46240c7f902d37a667d528589502fe743652145ffe7654573010"
+    },
+    {
+      "file": "game/src/ui/game.menu.pages.js",
+      "size": 59434,
+      "mtimeMs": 1792410043364.7693,
+      "sha256": "63142a3f9e1f4e025f7957e4b189c920784f04aec293a66ffb1d340e223e2a60"
+    },
+    {
+      "file": "game/src/ui/general-transition.js",
+      "size": 230,
+      "mtimeMs": 1792162862648.2395,
+      "sha256": "73ba11f673b79f5948056013cb0c1fafd0eca1f5d7ad4034d579a74ca904b6af"
+    },
+    {
+      "file": "game/src/ui/home-fx.js",
+      "size": 9358,
+      "mtimeMs": 1792305614893.328,
+      "sha256": "b9155aa5b673bec8c13c34ee753da35fc5a9250e26ed0217b28dd521ff7ee74c"
+    },
+    {
+      "file": "game/src/ui/home-layers.js",
+      "size": 2534,
+      "mtimeMs": 1791627378999.3057,
+      "sha256": "0c1564abc037f789309d73f812287571b9b65985a9365e47dd57ad19b6b78184"
+    },
+    {
+      "file": "game/src/ui/home-linked-interactions.js",
+      "size": 2903,
+      "mtimeMs": 1792404912596.4775,
+      "sha256": "e1cf77a9776b7609d9c2c6067324dc55bf2f65d9f680c5fef9813d0917f3b836"
+    },
+    {
+      "file": "game/src/ui/home-menu-motion.js",
+      "size": 8925,
+      "mtimeMs": 1791723872469.8154,
+      "sha256": "a9a9ff34070d032790c64288190431037f753d746652cb752fcb435cdc57cf1e"
+    },
+    {
+      "file": "game/src/ui/hud.js",
+      "size": 9154,
+      "mtimeMs": 1792300881080.39,
+      "sha256": "93c01d094c2c984e3f2ba3e9e231227ecbbf0c1968f480e661e1179f65336828"
+    },
+    {
+      "file": "game/src/ui/interface-motion.js",
+      "size": 13913,
+      "mtimeMs": 1792415117804.5476,
+      "sha256": "3c023dc3833cc517629e1c5f9467051b55d0f8c78df1aec65f95c43a31d7f6b3"
+    },
+    {
+      "file": "game/src/ui/inventory-zoom.js",
+      "size": 1646,
+      "mtimeMs": 1792131521625.7522,
+      "sha256": "e27fbd02408735c630ce512a46556cee1e098b4ae1a9d32483849305f13dccb6"
+    },
+    {
+      "file": "game/src/ui/lucide-acquisition-icon.js",
+      "size": 894,
+      "mtimeMs": 1792300881090.156,
+      "sha256": "4e89c6b9d269a7c5138b19f34f53bc984e595d484f871b137cd19c42312bc863"
+    },
+    {
+      "file": "game/src/ui/map-health-hud.js",
+      "size": 4330,
+      "mtimeMs": 1792300881091.1619,
+      "sha256": "ba1baa76a282398592d33be3fd6d5efcebfd51f3afcdb110846630ed7e61219d"
+    },
+    {
+      "file": "game/src/ui/map-passage.js",
+      "size": 3814,
+      "mtimeMs": 1792404912596.9456,
+      "sha256": "920aa52c69516004a5065b4d239553b4826fc311c5d84f81ce549588aa006e8a"
+    },
+    {
+      "file": "game/src/ui/motion-presets.js",
+      "size": 1466,
+      "mtimeMs": 1792415437113.3237,
+      "sha256": "eec1e89d307813c3afeab8e2500f441259d2bbc5d729b41ebe929debf3ff6fe4"
+    },
+    {
+      "file": "game/src/ui/motion-transitions.js",
+      "size": 1083,
+      "mtimeMs": 1791077100904.6084,
+      "sha256": "b9590cb526ddf530644c551f81123328049493f8089fd9c794d207489d6079d1"
+    },
+    {
+      "file": "game/src/ui/navigation-motion.js",
+      "size": 1388,
+      "mtimeMs": 1792407598699.2559,
+      "sha256": "0f2a81d62befd407d9ed21f93af15cd8dbdc32625a251d9a681b3c5c3e25d53f"
+    },
+    {
+      "file": "game/src/ui/node-decision-view.js",
+      "size": 3934,
+      "mtimeMs": 1792409388380.5906,
+      "sha256": "ad586459949b5e9f4dcc262cca6ec1ce814955df9c056101fb0348475a47c9be"
+    },
+    {
+      "file": "game/src/ui/node-scene-view.js",
+      "size": 4876,
+      "mtimeMs": 1792409681108.9258,
+      "sha256": "a2d70d9882e457ab68a5202db36f131eb5858801ac6e30ecbf863cfc5c889640"
+    },
+    {
+      "file": "game/src/ui/overlay-return-state.js",
+      "size": 2727,
+      "mtimeMs": 1792404912596.9456,
+      "sha256": "98664b52db36e4b745b75a23adc181438ff80e88e2c8bfffcf732d81d0337fb6"
+    },
+    {
+      "file": "game/src/ui/overlay.js",
+      "size": 27588,
+      "mtimeMs": 1792476143262.7317,
+      "sha256": "606aa36a40d7cbd44d54ca94595eae06071d867e1d5b875948fa3637054f866e"
+    },
+    {
+      "file": "game/src/ui/page-entry-cancellation.js",
+      "size": 608,
+      "mtimeMs": 1791987697243.0935,
+      "sha256": "a2e1c5d2863ac1d4e368c1b7b13ebc22df81fe61f631594580656977ee87df29"
+    },
+    {
+      "file": "game/src/ui/page-loading.js",
+      "size": 5861,
+      "mtimeMs": 1792404912597.4473,
+      "sha256": "ed7956934b46862065497dd259ba38463119632638be7b3c1dea38c844ecc320"
+    },
+    {
+      "file": "game/src/ui/page-motion-profiles.js",
+      "size": 6336,
+      "mtimeMs": 1792476143263.7344,
+      "sha256": "a1858ab85db986e92e0baa12fdec2eb9f1052a50b067f9ad423b9cea12327c38"
+    },
+    {
+      "file": "game/src/ui/page-surface-lifetime.js",
+      "size": 1330,
+      "mtimeMs": 1792404912597.4473,
+      "sha256": "82a86bfa261992aa48a7f93fc109ea173e3532ff52cefc37a064b4420aa0761d"
+    },
+    {
+      "file": "game/src/ui/page-visual-ready.js",
+      "size": 7598,
+      "mtimeMs": 1792476143263.7344,
+      "sha256": "f83438da1da930258293af42a9de2c4f4b6326c9e8be7b28b74d18d9dd110391"
+    },
+    {
+      "file": "game/src/ui/partner-interaction.js",
+      "size": 2923,
+      "mtimeMs": 1792300881138.7273,
+      "sha256": "bf53ede95899a4c61b8bd925eb360669277ad10d2304585ec56f15f643badeac"
+    },
+    {
+      "file": "game/src/ui/performance-settings.js",
+      "size": 3000,
+      "mtimeMs": 1792300881152.2834,
+      "sha256": "09fa319f4525c4943f3fb365f0d33b3764c56f5d7af5e37952962f708b03f043"
+    },
+    {
+      "file": "game/src/ui/quick-nav.js",
+      "size": 3682,
+      "mtimeMs": 1791987697243.0935,
+      "sha256": "c88ac07011069e2eeb542c1a99315260a551847c00e59f2072c8e11f7c6bd20f"
+    },
+    {
+      "file": "game/src/ui/rarity-reveal.js",
+      "size": 244,
+      "mtimeMs": 1792337065646.537,
+      "sha256": "952191567d461dd42ffdf80534d636c516c40fab2fa2d5386de245d333c001b6"
+    },
+    {
+      "file": "game/src/ui/reward-acquisition-motion.js",
+      "size": 6944,
+      "mtimeMs": 1792415513637.0874,
+      "sha256": "686e3ae3d4d25240bf21b157f575c02fd3612f241595cb1adca76b44be525b6b"
+    },
+    {
+      "file": "game/src/ui/reward-capacity-organizer.js",
+      "size": 5717,
+      "mtimeMs": 1792404912599.0498,
+      "sha256": "3dca2b9a039cc80b4f0734cfbe153880b5461dc7e5ec7d4d16eeab36b2ee126b"
+    },
+    {
+      "file": "game/src/ui/reward-card-feedback.js",
+      "size": 783,
+      "mtimeMs": 1792414324827.6782,
+      "sha256": "3161e576c826ca73aeb4444a34072b8364bd1b6ae72f7cdec860c4c5db82054c"
+    },
+    {
+      "file": "game/src/ui/reward-picker-heading.js",
+      "size": 492,
+      "mtimeMs": 1792409136653.5413,
+      "sha256": "0aafdd9c1ab0cea10e99a32f51a7017ca23548bd6b5eff6fa278a25abc075e94"
+    },
+    {
+      "file": "game/src/ui/reward-scene-view.js",
+      "size": 7771,
+      "mtimeMs": 1792476143264.734,
+      "sha256": "49dca84a117bfd3c11edbe2e6b596e280a2839f20f16fd9ba098be097aada4dc"
+    },
+    {
+      "file": "game/src/ui/reward-state.js",
+      "size": 1600,
+      "mtimeMs": 1792404912600.178,
+      "sha256": "43e6827dc4e737f6f193a478c4745179a59e55fc814a0786bad8da51feb4b315"
+    },
+    {
+      "file": "game/src/ui/route-overlay.js",
+      "size": 8192,
+      "mtimeMs": 1792414849956.5002,
+      "sha256": "1d738d479ccb09f77b60371eb667745790b8029868f1e008aacc8cc8beaa1910"
+    },
+    {
+      "file": "game/src/ui/selection-state-motion.js",
+      "size": 5267,
+      "mtimeMs": 1792476143264.734,
+      "sha256": "dd76f5228df2e32d5087b29322faf9322178aa6157e6be46099170aa1e59374d"
+    },
+    {
+      "file": "game/src/ui/settings-audio.js",
+      "size": 1991,
+      "mtimeMs": 1792404912600.178,
+      "sha256": "5ea440ce602bd9fa5068201e6c8d38fbf934a900acef01593a6927ef407f930f"
+    },
+    {
+      "file": "game/src/ui/settings-navigation.js",
+      "size": 4802,
+      "mtimeMs": 1792300881228.8384,
+      "sha256": "e6638baa9321afde310d68179c1dec4d8559084b497f175e6fe6b6885317caa5"
+    },
+    {
+      "file": "game/src/ui/settings-transition.js",
+      "size": 1013,
+      "mtimeMs": 1792012494551.4583,
+      "sha256": "94f83c8193310e06740516b9480beb07f8d7049bfd7abfee58444df0beeccecb"
+    },
+    {
+      "file": "game/src/ui/slot-emblems.js",
+      "size": 3313,
+      "mtimeMs": 1792034402800.9834,
+      "sha256": "92c305263c9d1be295636540db4286e4b8305a699c34570f9cb0d1562702566a"
+    },
+    {
+      "file": "game/src/ui/startup-transition.js",
+      "size": 3013,
+      "mtimeMs": 1792303839526.7024,
+      "sha256": "7ab3b11a295428de6e8415268cc05f3e8402a20dd313c6e4ee5eb534d7e6dfff"
+    },
+    {
+      "file": "game/src/ui/surface-motion.js",
+      "size": 22992,
+      "mtimeMs": 1792418537916.363,
+      "sha256": "5e1de4e2567ded59f84b61d52958264ce17f0da8c152046e8dd3582cfae792cb"
+    },
+    {
+      "file": "game/src/ui/target-motion.js",
+      "size": 6783,
+      "mtimeMs": 1792415117428.7974,
+      "sha256": "3e24255a2a7b58788ec86e129a27af5c426ebfeed65650574f4e2c9bc87c1206"
+    },
+    {
+      "file": "game/src/ui/term-tips.js",
+      "size": 16792,
+      "mtimeMs": 1792301367644.395,
+      "sha256": "2e1e70c7389773ffdb8d4e4e20d678e8673f6562fa5bfe5e49e38d4c4a28d3a3"
+    },
+    {
+      "file": "game/src/ui/terminal-settlement.js",
+      "size": 5907,
+      "mtimeMs": 1792404912601.178,
+      "sha256": "5278d4b04e7d06e21137f354626a4d641f557dc8ed7a4393d03771b44b896ac6"
+    },
+    {
+      "file": "game/src/ui/title-credits.js",
+      "size": 1458,
+      "mtimeMs": 1791636102090.943,
+      "sha256": "a740aa2164cac21a3c3b03e289514c96f6bb9ccdd879e826537623f10619af8f"
+    },
+    {
+      "file": "game/src/ui/title-wallpaper.js",
+      "size": 1732,
+      "mtimeMs": 1792433601589.4348,
+      "sha256": "da9ec193f4faa78563d4c0a38c8ca8f1408de9bfdac2f6e97785c32421be6fd9"
+    },
+    {
+      "file": "game/src/ui/transition-diagnostic-policy.js",
+      "size": 564,
+      "mtimeMs": 1792300881248.641,
+      "sha256": "d0fb9f2f359bd2336521ee04205e32cf2d3cc15a9fe170e115c035e1f2912f9d"
+    },
+    {
+      "file": "game/src/ui/transition-preparation.js",
+      "size": 880,
+      "mtimeMs": 1792404912601.178,
+      "sha256": "a3e9cff6b8fae17aa9323c9e3a7033ec32f0402467081b59bb51aec6b608ac74"
+    },
+    {
+      "file": "game/src/ui/transitions-director.js",
+      "size": 6107,
+      "mtimeMs": 1792131521627.2576,
+      "sha256": "32274d74704b15cacb146a0ed28e201ad4a932417bcc842601af68ba7e2b416b"
+    },
+    {
+      "file": "game/src/ui/ui-decision.js",
+      "size": 678,
+      "mtimeMs": 1792300881257.997,
+      "sha256": "755c10ff4fc18fefeee21765aa2c42e7cb9eaafa9d7f6aef722c827cb2c99b94"
+    },
+    {
+      "file": "game/src/ui/ui-disclosure.js",
+      "size": 436,
+      "mtimeMs": 1792300881275.5237,
+      "sha256": "e848bee4ff4184196ed094b85ee4c5e4d97fb9a924410de62108006fbed72fbc"
+    },
+    {
+      "file": "game/src/ui/ui-scale.js",
+      "size": 2982,
+      "mtimeMs": 1791727916122.9995,
+      "sha256": "d9f6f5872e0065b4af9875a3f786796adf2d2ad6615871434129aa7607113235"
+    },
+    {
+      "file": "game/src/ui/ui.js",
+      "size": 31800,
+      "mtimeMs": 1792410127836.4414,
+      "sha256": "cff10befcd3e1cfa8618a6fcfddb50555574245e1e48348c2ef89702c2d38adf"
+    },
+    {
+      "file": "game/src/ui/vendor/lucide-1.58.0/layers-plus.svg",
+      "size": 540,
+      "mtimeMs": 1792300881303.6248,
+      "sha256": "96fb0cc0a8ceb75aab8316d42622527d923d3a96658cc2932fe628dc22671530"
+    },
+    {
+      "file": "game/src/ui/vendor/lucide-1.58.0/LICENSE.txt",
+      "size": 3208,
+      "mtimeMs": 1792300881287.107,
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+    },
+    {
+      "file": "game/src/ui/vendor/lucide-1.58.0/README.md",
+      "size": 1511,
+      "mtimeMs": 1792300881293.3447,
+      "sha256": "051cffc993dc7915e6d065d98ad2096453644d37efae9c144dca11b43c657e91"
+    },
+    {
+      "file": "game/src/wu-career-frame-preview.js",
+      "size": 3959,
+      "mtimeMs": 1791798438031.1501,
+      "sha256": "2715b703789fef835432d3eb7cbffdedc249f8355a22714e6faff8ef49cfee38"
+    },
+    {
+      "file": "game/css/ak-skin.css",
+      "size": 18687,
+      "mtimeMs": 1792131521597.4724,
+      "sha256": "28ad1ca82985af7cdc6edc404783dd18da16d6fd4072a67e0f386b6d1333cae2"
+    },
+    {
+      "file": "game/css/archive-back.css",
+      "size": 1990,
+      "mtimeMs": 1791728032780.9568,
+      "sha256": "29e9ff37b078d113073a1e2a8b79a4ab014200ce4a3dc7ab8bd0297756f0dd76"
+    },
+    {
+      "file": "game/css/archive-motion.css",
+      "size": 5692,
+      "mtimeMs": 1791612767598.3098,
+      "sha256": "5fd3a8a99f91579defa7ca26bd314c9dcafd2e8ece886990411932e9d8a76873"
+    },
+    {
+      "file": "game/css/bag-design-system.css",
+      "size": 8451,
+      "mtimeMs": 1792410000219.4265,
+      "sha256": "8d75d4ed108085c24bf84289765b48c7ee113ced81efda06b8198cd83c75bc20"
+    },
+    {
+      "file": "game/css/base-archive-facilities-v12.css",
+      "size": 29387,
+      "mtimeMs": 1792047507024.7476,
+      "sha256": "37054842058ac0b5556295a768e28f5d0f3b763835433807bbf8be1dc85c4a62"
+    },
+    {
+      "file": "game/css/base-archive-v3.css",
+      "size": 17414,
+      "mtimeMs": 1791693651781.4055,
+      "sha256": "a29b4338dcefba350ab4f6150a6529155641cdb13e79a6482b6b3ad46dab80b7"
+    },
+    {
+      "file": "game/css/base-camp-compact.css",
+      "size": 73,
+      "mtimeMs": 1791728032776.1902,
+      "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+    },
+    {
+      "file": "game/css/base-camp-rework.css",
+      "size": 38023,
+      "mtimeMs": 1792131521598.4717,
+      "sha256": "fa45ebd6f155f5ce14b5557a0f6f8093d449166019589ed514ac13da20278694"
+    },
+    {
+      "file": "game/css/base-camp-roster.css",
+      "size": 28442,
+      "mtimeMs": 1791800421541.2563,
+      "sha256": "dec3c50b50c6aa12edf7064dfbcd0d8199c40b89b06d0ca1f4f721bb43213303"
+    },
+    {
+      "file": "game/css/base-camp.css",
+      "size": 36646,
+      "mtimeMs": 1792131521598.4717,
+      "sha256": "10c3294f8f9b02d8be83d8a550dd308d8e9a6955c932d5cf348f3c4de11d218d"
+    },
+    {
+      "file": "game/css/base-cohesion-v5.css",
+      "size": 16207,
+      "mtimeMs": 1792131521598.4717,
+      "sha256": "f84f54252b51ddcbbc2912403a6367c51453de4090ad9be3d14d9b980ffd4926"
+    },
+    {
+      "file": "game/css/base-collection-v4.css",
+      "size": 3290,
+      "mtimeMs": 1791994149575.1875,
+      "sha256": "554cfed37ef35726fa7888bd35f8bb26e92172e2980d5e8bf300e4f3ee4dfe5c"
+    },
+    {
+      "file": "game/css/base-controls-v4.css",
+      "size": 6029,
+      "mtimeMs": 1792131521598.4717,
+      "sha256": "e66c0eafe648742f14c619f07c82b038dfac9bb392a09059f839fe479f234f7a"
+    },
+    {
+      "file": "game/css/base-courtyard-v3.css",
+      "size": 6711,
+      "mtimeMs": 1792047507046.1255,
+      "sha256": "a920e6276c3485f068c351489f7ed90d57c087c3506fa2d785fecf65ae7a1096"
+    },
+    {
+      "file": "game/css/base-framework-v7.css",
+      "size": 8109,
+      "mtimeMs": 1792131521599.5454,
+      "sha256": "f7485b47de5ad5b7332f7201fa0b4da7bab136eef41f6e5833535b97b9ea4ed1"
+    },
+    {
+      "file": "game/css/base-home-v7.css",
+      "size": 8429,
+      "mtimeMs": 1792131521599.5454,
+      "sha256": "2cd68bbcf96bea9721aa911cce4b962aaa821b0f348a3846cde4297e882872b8"
+    },
+    {
+      "file": "game/css/base-logistics-trade-v12.css",
+      "size": 15725,
+      "mtimeMs": 1792410043352.5437,
+      "sha256": "56c06b23db7bebb849f5f136bcd75436ba3ccb6c105e202f4803b97cd3e96355"
+    },
+    {
+      "file": "game/css/base-page-motion-v7.css",
+      "size": 3377,
+      "mtimeMs": 1791797506835.0432,
+      "sha256": "ef0d10c5e05afa9ae27f1879fe23a31ea65240f9b20ec3acfc12ac8f1c451e8c"
+    },
+    {
+      "file": "game/css/base-panel-layout.css",
+      "size": 73,
+      "mtimeMs": 1791728032789.712,
+      "sha256": "b96271698eff3f4c53528c25daa20d864f7f2c7d55aecc06eb0a895e9ee704b9"
+    },
+    {
+      "file": "game/css/base-personnel-v12.css",
+      "size": 32435,
+      "mtimeMs": 1792323736935.896,
+      "sha256": "17fc507e954c5e29769e98e94740555b48de28fed2cf3dbb0dccc23a0b58779b"
+    },
+    {
+      "file": "game/css/base-reward-feedback.css",
+      "size": 1538,
+      "mtimeMs": 1791805964486.917,
+      "sha256": "4cf3949a74c15dab2c9f1d7075cb4e303059bbd15910a1e4b0e9d665d1ff857b"
+    },
+    {
+      "file": "game/css/base-rooms-v7.css",
+      "size": 33335,
+      "mtimeMs": 1792131521600.6123,
+      "sha256": "e19ac60643b3caa944a1700ac56d9571d1e651615e8259b60100057b0984d399"
+    },
+    {
+      "file": "game/css/base-shop-v3.css",
+      "size": 6727,
+      "mtimeMs": 1791996016655.831,
+      "sha256": "b16070d392d6e7b6067c7908d814286a26a9c92541946abb62a821897327ce5d"
+    },
+    {
+      "file": "game/css/base.css",
+      "size": 31857,
+      "mtimeMs": 1792131521600.6123,
+      "sha256": "1499019c0512b90b6cc2387d298bc90967739e074272407eed911d3c853b22e5"
+    },
+    {
+      "file": "game/css/battle-decision.css",
+      "size": 12467,
+      "mtimeMs": 1792300879003.9756,
+      "sha256": "6b734869eac06dd4ae12e4b3259f138bfac5a2d1e1161e4c64baf33463a27394"
+    },
+    {
+      "file": "game/css/battle-discover.css",
+      "size": 6946,
+      "mtimeMs": 1792404912557.8367,
+      "sha256": "3931704685a1e929ebf160924c5a01f00b9eaf832b57c6fdd31c24b8098314b4"
+    },
+    {
+      "file": "game/css/battle-hand-overhaul.css",
+      "size": 13198,
+      "mtimeMs": 1792131521600.6123,
+      "sha256": "1122518fbb52e695b6719106b155756780f5b7cb767fdb4e00ea4e9c334ef580"
+    },
+    {
+      "file": "game/css/battle-infusion.css",
+      "size": 6875,
+      "mtimeMs": 1792336283283.741,
+      "sha256": "3e21dc72c9b03b606f13df6ecb3d7430598499b89a300dcef2922a57aa4aefdc"
+    },
+    {
+      "file": "game/css/battle-secondary-overlay.css",
+      "size": 9504,
+      "mtimeMs": 1792404912557.8367,
+      "sha256": "d9885f94fed74865dcb2f8939de1b87a1ebdd28c2a6ea74de357c232afeb08ea"
+    },
+    {
+      "file": "game/css/battle-stage.css",
+      "size": 30815,
+      "mtimeMs": 1792404912557.8367,
+      "sha256": "7aecb775cc217bfc6a1b3b237d93fba731402346c1e70245695e209af080da7a"
+    },
+    {
+      "file": "game/css/battle.css",
+      "size": 37056,
+      "mtimeMs": 1792301609628.7073,
+      "sha256": "06b6c9381b79b3b0c2599654cd028802ad6258fa664ca109cbfc0fb6dda87e7a"
+    },
+    {
+      "file": "game/css/beginner-guide.css",
+      "size": 7957,
+      "mtimeMs": 1792131521601.725,
+      "sha256": "3dc7ac8cf4b42bd840429cbacc873b78a44c7b20e5e7edc627ae8407fa24943f"
+    },
+    {
+      "file": "game/css/camp-entry.css",
+      "size": 13700,
+      "mtimeMs": 1792163150716.721,
+      "sha256": "dbe20d117eb58295f75eb805ac97be191c6f31c8646a20ef2946e987a78a0cb4"
+    },
+    {
+      "file": "game/css/card-browser.css",
+      "size": 1405,
+      "mtimeMs": 1792404912560.8438,
+      "sha256": "0e02ffab223eebda8009a153ba6169683d545a0a62a992f2537c18359c8285d5"
+    },
+    {
+      "file": "game/css/card-description-links.css",
+      "size": 1441,
+      "mtimeMs": 1791691427920.375,
+      "sha256": "3d4ae7fc35dfd198d14dd12e475c465275b24fecfc3ab26991cf5d0a460f0d25"
+    },
+    {
+      "file": "game/css/card-frames/career/baita.svg",
+      "size": 2412,
+      "mtimeMs": 1791798739990.9314,
+      "sha256": "3d6eafed8d9974b958cffc85d573922371af3468c8303aca4227198262fc6e04"
+    },
+    {
+      "file": "game/css/card-frames/career/changwuyu.svg",
+      "size": 2651,
+      "mtimeMs": 1791798739992.643,
+      "sha256": "fdcab13e06cb4a306aafed85135c51c1b33963d3c387a3725f498aa6042b3b67"
+    },
+    {
+      "file": "game/css/card-frames/career/frames.css",
+      "size": 118,
+      "mtimeMs": 1791998531057.803,
+      "sha256": "85cabfdf2afc4530d170a579bd0b49407002088817751901fdc8e773b4064d5b"
+    },
+    {
+      "file": "game/css/card-frames/career/geometry.json",
+      "size": 379,
+      "mtimeMs": 1791798739993.6567,
+      "sha256": "4189d8e1f0e9cbfb0852512377d4599fd14d87f53dc27f10500d6356971f755f"
+    },
+    {
+      "file": "game/css/card-frames/career/heixiang.svg",
+      "size": 2337,
+      "mtimeMs": 1791798739990.9314,
+      "sha256": "58bb6492339cfed4ffd4f931a9a3a34b4388375924026c938aec67c118013ed6"
+    },
+    {
+      "file": "game/css/card-frames/career/neutral.svg",
+      "size": 1634,
+      "mtimeMs": 1791798739992.643,
+      "sha256": "17cf6ea54b56ac4f054b1a3db87e8ff39a82386ccb34383fc379168929bce3b2"
+    },
+    {
+      "file": "game/css/card-frames/career/wu.svg",
+      "size": 5139,
+      "mtimeMs": 1791798739990.9314,
+      "sha256": "83fc8315b14f0b8e5cff9df01aa593ede1bc0439c70ae37e5d1b24afe5a97053"
+    },
+    {
+      "file": "game/css/card-frames/career/xingyue.svg",
+      "size": 2352,
+      "mtimeMs": 1791798739992.1404,
+      "sha256": "29cc2e5be3f6f1779011b88d2b538367eacc71e26dc6379cc7a726ea2ae7b127"
+    },
+    {
+      "file": "game/css/card-frames/rose/class.svg",
+      "size": 4024,
+      "mtimeMs": 1791693170210.1482,
+      "sha256": "4c5c9d9987b629fac5b462a699f03ad37307f1da198ba4de64b5bb24f0fd4a87"
+    },
+    {
+      "file": "game/css/card-frames/rose/common.svg",
+      "size": 4024,
+      "mtimeMs": 1791693170207.6367,
+      "sha256": "b13fea9b24e20322bf67674ae197bd95593788d44459b8969bc5d9323177ad54"
+    },
+    {
+      "file": "game/css/card-frames/rose/epic.svg",
+      "size": 9444,
+      "mtimeMs": 1791693170207.6367,
+      "sha256": "47f62371b5fa00e7bfcfeca5fd52cca7afe7640632eecd07cede14f257e0eaf6"
+    },
+    {
+      "file": "game/css/card-frames/rose/frames.css",
+      "size": 118,
+      "mtimeMs": 1791998531056.8008,
+      "sha256": "85cabfdf2afc4530d170a579bd0b49407002088817751901fdc8e773b4064d5b"
+    },
+    {
+      "file": "game/css/card-frames/rose/initial.svg",
+      "size": 4024,
+      "mtimeMs": 1791693170206.6401,
+      "sha256": "62e119764f14808d031905c24600063c02c3614122e0e7b6fba26830ce27a1f6"
+    },
+    {
+      "file": "game/css/card-frames/rose/legendary.svg",
+      "size": 11310,
+      "mtimeMs": 1791693170209.1382,
+      "sha256": "c09663fd4136c8bad2dfbcf8fcbdc39a8f2422546e92f06d2a361a64d7356aa2"
+    },
+    {
+      "file": "game/css/card-frames/rose/prism.svg",
+      "size": 11774,
+      "mtimeMs": 1791693170209.1382,
+      "sha256": "dccd2ee0c4a33a54a6210ccdea69eaadad7fa7fb5866e6926f20d4c765d470e3"
+    },
+    {
+      "file": "game/css/card-frames/rose/rare.svg",
+      "size": 5888,
+      "mtimeMs": 1791693170207.6367,
+      "sha256": "4467dffae4d5bc1837d5dfefe4a0ed87e4f0641d23cf2afbff1414d006621164"
+    },
+    {
+      "file": "game/css/card-frames/rose/token.svg",
+      "size": 4024,
+      "mtimeMs": 1791693170210.1482,
+      "sha256": "7667fc5bc3d635c6ea6a0d3c1395dba6b17450e1a1006f97d8edb56787195ee3"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/common-source.png",
+      "size": 488745,
+      "mtimeMs": 1791738133038.3564,
+      "sha256": "4cd91bd6eabefc104c7cfe6dfce92ef5f39cb97a06eab99f46e739f8b94f1ff1"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/common.webp",
+      "size": 274842,
+      "mtimeMs": 1791738160972,
+      "sha256": "7bfa2dc165756e36c4e766dee06fd80fcd8d90e2e599d91d9bdab82a4b818d0c"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/epic-source.png",
+      "size": 694124,
+      "mtimeMs": 1791738485207.0164,
+      "sha256": "16e9856e09c49bf295d0f828b332aed09a9ef6fe8743288543d43120b7489d42"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/epic.webp",
+      "size": 423400,
+      "mtimeMs": 1791738527786,
+      "sha256": "7358996898a5ce5905a09dfb7a1fb19708a6dd556f79fd4a5d22fe9b1885e731"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/geometry.json",
+      "size": 2463,
+      "mtimeMs": 1791738527798.4763,
+      "sha256": "eb458609446a7e8e1637fd07b36307b4b11f52443fdc49561b1c9583a5cc4b40"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/legendary-source.png",
+      "size": 806634,
+      "mtimeMs": 1791738007342.4192,
+      "sha256": "4ef7328588745e89a169be0004e6b844fea333cbde877f07ee5abd503584c9ee"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/legendary.webp",
+      "size": 547886,
+      "mtimeMs": 1791738163383,
+      "sha256": "1ba82f21eb3f8c1296f6c0c3fdca6f74cd2957bab2da0b1325913769eea30545"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/prism-source.png",
+      "size": 929312,
+      "mtimeMs": 1791738046470.858,
+      "sha256": "ec47f3f89fb309e4aeae94b8491767c29609cec13ad36c8ef7dcc7d11f20c2bc"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/prism.webp",
+      "size": 609740,
+      "mtimeMs": 1791738164196,
+      "sha256": "f36abea239f333ab1a5dceb29f36db927976d15410876ed9cebcd139e40bbd58"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/rare-source.png",
+      "size": 576145,
+      "mtimeMs": 1791738464409.462,
+      "sha256": "c942c3038ce73471e9fdbcb8fa4748a54f167f4d3e3d6454a4d7fb4638cb51f3"
+    },
+    {
+      "file": "game/css/card-frames/rose-painterly-1012/rare.webp",
+      "size": 361118,
+      "mtimeMs": 1791738527241,
+      "sha256": "e4ff55556c5f4f488f7c88c00aba609d9413ada3dc25abf56bd7d493c2bdcc91"
+    },
+    {
+      "file": "game/css/card-frames/wu-career-preview/frame.svg",
+      "size": 5139,
+      "mtimeMs": 1791798438029.975,
+      "sha256": "83fc8315b14f0b8e5cff9df01aa593ede1bc0439c70ae37e5d1b24afe5a97053"
+    },
+    {
+      "file": "game/css/card-layout-selected.css",
+      "size": 15453,
+      "mtimeMs": 1792336841424.7004,
+      "sha256": "4254bafac2ab098e8f4a7cebe3bfc318b97cc2624271bd748950f186f329ed93"
+    },
+    {
+      "file": "game/css/card-ornaments/epic.svg",
+      "size": 3050,
+      "mtimeMs": 1791628826452.5623,
+      "sha256": "4161d50de6866f370a2439a9bc71f5f1c87971d99f1d400da427433b009988cf"
+    },
+    {
+      "file": "game/css/card-ornaments/legendary.svg",
+      "size": 3702,
+      "mtimeMs": 1791628826453.6294,
+      "sha256": "8332f5bb82f76d081788e9a92f523f31854e41066bc4e685d7ea36b1eff3fcb7"
+    },
+    {
+      "file": "game/css/card-ornaments/prism.svg",
+      "size": 3931,
+      "mtimeMs": 1791628826453.6294,
+      "sha256": "c6c12a919aab1e973771f29203c3180a02a9fd00bfd75755424d92062c76dc60"
+    },
+    {
+      "file": "game/css/card-ornaments/rare.svg",
+      "size": 2338,
+      "mtimeMs": 1791628826450.3655,
+      "sha256": "18a5e73777730b6b23f6f022460e4b95c458a8699c6c4d50dea2c270b7954e09"
+    },
+    {
+      "file": "game/css/card-rarity-preview.css",
+      "size": 4806,
+      "mtimeMs": 1791571523144.7007,
+      "sha256": "f4eca6d6693644684a7247011ec77ead32d8283fe98a78a706c05659209fea62"
+    },
+    {
+      "file": "game/css/card-state-motion.css",
+      "size": 1202,
+      "mtimeMs": 1792415062222.147,
+      "sha256": "60c1703c56e31fadec5e341b7a9be306c226469d0ca9404608abd9055a175f96"
+    },
+    {
+      "file": "game/css/card-v3.css",
+      "size": 1448,
+      "mtimeMs": 1791994149669.698,
+      "sha256": "032ba33a9cb836febc92c74feb9d758b8d32b187d4947c840979f6b35da413dd"
+    },
+    {
+      "file": "game/css/cards.css",
+      "size": 12017,
+      "mtimeMs": 1791996875591.1526,
+      "sha256": "429bc798bc9c7d0ea2ad933579cc5a5608daa3127a0421dd4a8aa6befcd36567"
+    },
+    {
+      "file": "game/css/character-cover.css",
+      "size": 9972,
+      "mtimeMs": 1791536249617.1704,
+      "sha256": "70220fd482843ed6ada22d0e3bcccf4debd2579d5ce9bae245c7c693cb7797cd"
+    },
+    {
+      "file": "game/css/character-idle.css",
+      "size": 1872,
+      "mtimeMs": 1791522069352.6497,
+      "sha256": "2604a44fbfdc0576e68f6c6a8e532570375132628a83c752fca07df18a41e663"
+    },
+    {
+      "file": "game/css/character-pool-cover.css",
+      "size": 10200,
+      "mtimeMs": 1791994149686.729,
+      "sha256": "337e8d2db02f0779ca3c883d176558a72512490ba596ff65d12681d993c680be"
+    },
+    {
+      "file": "game/css/character-view-motion.css",
+      "size": 3895,
+      "mtimeMs": 1791717334338.6658,
+      "sha256": "6c84b47d758d0399249b3393ace0a6d7ebd127b3abaa49e96c7de861d1c9db2a"
+    },
+    {
+      "file": "game/css/chest-opening.css",
+      "size": 4851,
+      "mtimeMs": 1792158723192.1455,
+      "sha256": "f887f16a33efee6fb01232c28a1931cc85482c89050b75075f03c3967f529a45"
+    },
+    {
+      "file": "game/css/chest-reward-overview.css",
+      "size": 33194,
+      "mtimeMs": 1792410377707.6904,
+      "sha256": "ade2a90ed06f7e87c6c4571b6e5397f78aa314067b149312b8e1eff4bf36f2e7"
+    },
+    {
+      "file": "game/css/combat-feedback.css",
+      "size": 1393,
+      "mtimeMs": 1791805763835.9048,
+      "sha256": "f12f332c9572883fc0f2d626df966341d3596b9724e4ea9089e3364c70e814a8"
+    },
+    {
+      "file": "game/css/container-store.css",
+      "size": 4725,
+      "mtimeMs": 1792404912560.8438,
+      "sha256": "007bd1a95ada36878f4b1689400a8fbe7261e40ae4352a19b6fb205af654225f"
+    },
+    {
+      "file": "game/css/cover-battle-shell.css",
+      "size": 24263,
+      "mtimeMs": 1791536249618.204,
+      "sha256": "7c54b581f28af0fa80697c1135f520145352863343341889b0742d6407e71011"
+    },
+    {
+      "file": "game/css/cover-details.css",
+      "size": 11101,
+      "mtimeMs": 1792009335883.6587,
+      "sha256": "7ba9b532c2b8b97b1ee0de18ab55fbc1c6d6bc1dc63c52f3d0e6ef5547647291"
+    },
+    {
+      "file": "game/css/cover-hub.css",
+      "size": 16093,
+      "mtimeMs": 1791536249619.2063,
+      "sha256": "471d6ec4d4689a1de92979eccf75666c59b171a123be6d27a4db12b3c532759c"
+    },
+    {
+      "file": "game/css/cover-remaining.css",
+      "size": 449,
+      "mtimeMs": 1791198311279.8184,
+      "sha256": "2a9b9b804595b23dd7ade4c02982a4ae870eeccb4d8e8dacd1066f7295100458"
+    },
+    {
+      "file": "game/css/cover-run.css",
+      "size": 31032,
+      "mtimeMs": 1791858785730.1375,
+      "sha256": "00b696739e6069e635462d141d8667795c4e2b7df62f10f3de7bfcc3e6b1d0cc"
+    },
+    {
+      "file": "game/css/cover-secondary.css",
+      "size": 20499,
+      "mtimeMs": 1791536249620.434,
+      "sha256": "a2ef3f622a30786777ed3303c462db5272c0abde19b474fff439d5660d3cfd27"
+    },
+    {
+      "file": "game/css/cover-system.css",
+      "size": 14758,
+      "mtimeMs": 1791536249621.431,
+      "sha256": "a7b690ae27cd6902e7512ec921d340b629d0f3e8bb0c83287de993c65e94e7db"
+    },
+    {
+      "file": "game/css/departure-cover.css",
+      "size": 14725,
+      "mtimeMs": 1791994149711.398,
+      "sha256": "47ff03f8a2dc3097b2535956a7a04d64a067b0c296bd0987170ad4133ca4f894"
+    },
+    {
+      "file": "game/css/departure-selected.css",
+      "size": 10598,
+      "mtimeMs": 1792410043358.0483,
+      "sha256": "ace63c4720dc366e2c3d317d5941632cc0e879e5477bffc7a9de3bb6cc40baf7"
+    },
+    {
+      "file": "game/css/entry-events.css",
+      "size": 25075,
+      "mtimeMs": 1792131521601.725,
+      "sha256": "0d488a1c0174cf7b0c77702e178937ef4a5ba5238b88adf70727f89a7f71185b"
+    },
+    {
+      "file": "game/css/event-choice-feedback.css",
+      "size": 2102,
+      "mtimeMs": 1792334838665.9885,
+      "sha256": "ae02ece0bf5088b268687d71fb2e1cb7a2d28925714afee2afe80aaf8441db0e"
+    },
+    {
+      "file": "game/css/event-dice.css",
+      "size": 1277,
+      "mtimeMs": 1792309154245.0159,
+      "sha256": "41c29ad6927dd61ecc8c512b82333aa3684277ec8b79498ca5c9c2ff18c9a667"
+    },
+    {
+      "file": "game/css/event-recode-result.css",
+      "size": 788,
+      "mtimeMs": 1792336195816.214,
+      "sha256": "4950073c2b3bb49676d03a2bb8b3c6f62db8cb18c29734aeb101f3f0ff3fe02d"
+    },
+    {
+      "file": "game/css/event-signal-puzzle.css",
+      "size": 4716,
+      "mtimeMs": 1792300879052.1257,
+      "sha256": "8eb3a4929dee4df620767d09d48f9e1028ec4c7b07961d3e0c355ddf2972eaf3"
+    },
+    {
+      "file": "game/css/expedition-battle.css",
+      "size": 15391,
+      "mtimeMs": 1792300879058.2327,
+      "sha256": "0c2a18b053ce459938b08f2d5a91852eabe0ca9c0148671a7255dc6294421e4b"
+    },
+    {
+      "file": "game/css/expedition-hub.css",
+      "size": 6824,
+      "mtimeMs": 1792131521601.725,
+      "sha256": "49a67f94098daa023331829f6f45131a9d3c48882483dbbdb4656a0856b3c123"
+    },
+    {
+      "file": "game/css/expedition-inventory.css",
+      "size": 32453,
+      "mtimeMs": 1792404912560.8438,
+      "sha256": "fd079e1fa8e625b6945a359416a10c87cc2e6ae15933211822018208ce891521"
+    },
+    {
+      "file": "game/css/expedition-library.css",
+      "size": 11469,
+      "mtimeMs": 1792009386504.4187,
+      "sha256": "42ce454fb53cdf3a1c65ad980f4af2b54e4467d87da06e459e927a70780fe8d5"
+    },
+    {
+      "file": "game/css/expedition-map.css",
+      "size": 8407,
+      "mtimeMs": 1792300879063.0342,
+      "sha256": "659521668084e502dfa1e16991174e7dadd125ad16f1160e97e4c13c05cd9dc0"
+    },
+    {
+      "file": "game/css/expedition-rewards.css",
+      "size": 40745,
+      "mtimeMs": 1792300879067.0374,
+      "sha256": "59cdc9a3c9ee49b99cb66e7b35a76a3eed390538f5c843d5b32a42d86eaa193d"
+    },
+    {
+      "file": "game/css/expedition-roster.css",
+      "size": 28822,
+      "mtimeMs": 1792080947483.247,
+      "sha256": "9b57efe9e1155680aacaead2c14e30d7864b4a4ca548521d323446f9ad3ef0a1"
+    },
+    {
+      "file": "game/css/expedition-shop.css",
+      "size": 23081,
+      "mtimeMs": 1792410000227.6592,
+      "sha256": "e572266f7d673c519c56eb6389562a924122da6d4a46b074193be1b76741ffde"
+    },
+    {
+      "file": "game/css/expedition-transitions.css",
+      "size": 4380,
+      "mtimeMs": 1792407684261.3418,
+      "sha256": "63d06e13355debbc37c4ee8a250fc9221ab96625566d5062498ea55cfa450b87"
+    },
+    {
+      "file": "game/css/expedition.css",
+      "size": 19421,
+      "mtimeMs": 1792131521603.0432,
+      "sha256": "e01e7dc454882197dd7e69fcb9f3674335366f92de210554e6b521bf3e641b28"
+    },
+    {
+      "file": "game/css/experience-loot.css",
+      "size": 4134,
+      "mtimeMs": 1791535938738.0972,
+      "sha256": "6546a67bd9510552c1c3955566a362e099fbf2eacc506845374285e37dd3aa4c"
+    },
+    {
+      "file": "game/css/extraction-rewards.css",
+      "size": 15599,
+      "mtimeMs": 1792418740398.6418,
+      "sha256": "3a9014e1397eea279a54ccd33cbfdca55adadf183c26104aba656d86512501af"
+    },
+    {
+      "file": "game/css/feedback-1018.css",
+      "size": 5594,
+      "mtimeMs": 1792404912560.8438,
+      "sha256": "c3783ec0dfe127c30cb8d45daf0374b22cce16059d7ab584bd7ed9882b365f3f"
+    },
+    {
+      "file": "game/css/feedback-oct12.css",
+      "size": 4862,
+      "mtimeMs": 1792079739710.8862,
+      "sha256": "656586628f7816777a358ae657e48f7cfae532dc3cab806a56bf8c9adf8f2503"
+    },
+    {
+      "file": "game/css/feedback-theme.css",
+      "size": 2163,
+      "mtimeMs": 1792300879084.801,
+      "sha256": "fca3128dbd349bebaad2dcc7aae55822ec57c9dbc7656dd86705d664dd872dc7"
+    },
+    {
+      "file": "game/css/home-layers.css",
+      "size": 8551,
+      "mtimeMs": 1791796343099.878,
+      "sha256": "42712c197023754dfaa1a63545de7cfae2468ffe95c305152bb96e96587d8144"
+    },
+    {
+      "file": "game/css/home-linked-interactions.css",
+      "size": 6400,
+      "mtimeMs": 1791728032777.8784,
+      "sha256": "b6d70c2d361d93fb65a251948332ee3d06e89161151b64ee43eb646e54f0ddc4"
+    },
+    {
+      "file": "game/css/home-menu-motion.css",
+      "size": 6563,
+      "mtimeMs": 1791723872471.819,
+      "sha256": "eb4d1d680084d761a5c8ad7a2db6dc8ebdbf4551572bfcf7d1655276ef4d61e2"
+    },
+    {
+      "file": "game/css/home-polish.css",
+      "size": 38272,
+      "mtimeMs": 1792331022896.3748,
+      "sha256": "65a04cc72d0545c1d0d3568a35b5fed5b8413fece496a002375b085c108c0bfa"
+    },
+    {
+      "file": "game/css/home-scene.css",
+      "size": 6191,
+      "mtimeMs": 1791728032795.0503,
+      "sha256": "741e523f66723658de5d7f8e936cf6f06442c8ca38fc748bba09cc3c1d6f17c7"
+    },
+    {
+      "file": "game/css/home-ui-tokens.css",
+      "size": 590,
+      "mtimeMs": 1791714220555.6794,
+      "sha256": "cf985b45cf4f28d4f1fef916125797c322ffefd63330743481d7547a5b83d0d0"
+    },
+    {
+      "file": "game/css/hub-arrival.css",
+      "size": 4067,
+      "mtimeMs": 1791536249638.5547,
+      "sha256": "0183f10b98b63d455877999e205b89a1d8913edfc6fb8f9cfeccfea20bb4a906"
+    },
+    {
+      "file": "game/css/hub-cover-collections.css",
+      "size": 10139,
+      "mtimeMs": 1791536249638.5547,
+      "sha256": "96c9e41bab3d2cc0760f0d689c3b875603e1b63ded3c99f58dcebee7d08a1606"
+    },
+    {
+      "file": "game/css/hub-cover-deploy.css",
+      "size": 7320,
+      "mtimeMs": 1791536249638.5547,
+      "sha256": "5134a805cf126466d122c5672677b2fe7afe58ed55571b96e10adca768797923"
+    },
+    {
+      "file": "game/css/hub-cover-motion.css",
+      "size": 2408,
+      "mtimeMs": 1791134268642.9412,
+      "sha256": "f78f22021ca0890cdeb5d40381e36ac4b05a1b11ff1c5c0ea13d9e52c36deecf"
+    },
+    {
+      "file": "game/css/hub-cover.css",
+      "size": 9056,
+      "mtimeMs": 1791536249639.5608,
+      "sha256": "f6a8e7336f0183099f8e00dcf210e0cc55e3d79990e994993fcd49b6cef7e9ed"
+    },
+    {
+      "file": "game/css/hub-personnel-cover.css",
+      "size": 5671,
+      "mtimeMs": 1791536249639.5608,
+      "sha256": "cb0914a69eda1555283263a4aaa3f30d7c745bcd4fbc59f75b9252dd366f6e0f"
+    },
+    {
+      "file": "game/css/hub-stash-cover.css",
+      "size": 8858,
+      "mtimeMs": 1791994149794.3672,
+      "sha256": "fe95acabeb9b8946ec30cd80d10c0bee3cae473b93b8d5ef8609953fa6d16ae2"
+    },
+    {
+      "file": "game/css/hub.css",
+      "size": 22800,
+      "mtimeMs": 1792131521603.0432,
+      "sha256": "15625e19a8d3ceef649cb9f3b337b7d64e49c00592e0c2d84218edb7709af246"
+    },
+    {
+      "file": "game/css/inbox-cover.css",
+      "size": 12723,
+      "mtimeMs": 1791614786038.5017,
+      "sha256": "5b2af3607a4888a950017ff4b3d4a9efd63db5c67b8b2ddbac07d5df76397125"
+    },
+    {
+      "file": "game/css/interface-motion.css",
+      "size": 7183,
+      "mtimeMs": 1792408122144.2903,
+      "sha256": "73802087838d72127edc07064a1defe1f5dacf1416fcac8ec79575bc23bdc745"
+    },
+    {
+      "file": "game/css/inventory-zoom.css",
+      "size": 4908,
+      "mtimeMs": 1792009335881.6492,
+      "sha256": "fb4a2562f42b5f50fcda49d11feb6dee7f3bd84c9f7d5e481fc0570a01a70e20"
+    },
+    {
+      "file": "game/css/lab-ending.css",
+      "size": 5708,
+      "mtimeMs": 1792047507151.8545,
+      "sha256": "0b937142ad367f92ce6a0fc7a9a82695c5eb74c84255da29a841abe5c16bbe78"
+    },
+    {
+      "file": "game/css/leave-run.css",
+      "size": 5387,
+      "mtimeMs": 1791867087291.3467,
+      "sha256": "19ee3bbd94cd4b83d9f8bcf0f8b0adf7d8dbbabf73c8a1bf2582181b50f3ef78"
+    },
+    {
+      "file": "game/css/map-cover.css",
+      "size": 9324,
+      "mtimeMs": 1792080947502.4116,
+      "sha256": "18207169b4f262d12e6e5aa5eb6accb57cdb6a07299d38dcc56330ebe568c09c"
+    },
+    {
+      "file": "game/css/map-edge-light.css",
+      "size": 2709,
+      "mtimeMs": 1792300879089.038,
+      "sha256": "03672ff89af18eeec9af34842ef4468d55684f307e94352cd4fd7438066cc86d"
+    },
+    {
+      "file": "game/css/map-node-status.css",
+      "size": 1298,
+      "mtimeMs": 1792134820939.6985,
+      "sha256": "9efde1e426fb5479f58c966020317d88bf380b4f38b697a071c754f91730d160"
+    },
+    {
+      "file": "game/css/map-passage.css",
+      "size": 1235,
+      "mtimeMs": 1792404912564.2048,
+      "sha256": "a80f33f37cc9ddb539bd3ba8a33aae47d94d48de9b260cad836844b7990c58dc"
+    },
+    {
+      "file": "game/css/motion-transitions.css",
+      "size": 16943,
+      "mtimeMs": 1791728192724.743,
+      "sha256": "e22a1c9391009ed780aca7146137c4329117d27f4a343ce6571bdf232825af97"
+    },
+    {
+      "file": "game/css/navigation-feedback.css",
+      "size": 2095,
+      "mtimeMs": 1791611790389.1973,
+      "sha256": "c5ba8e6e3d19e66b97f03398138b7c6dddd15bbdb25ffb4836b9fa73e1f9f01e"
+    },
+    {
+      "file": "game/css/ordinary-polish.css",
+      "size": 5076,
+      "mtimeMs": 1791536249642.5752,
+      "sha256": "e0353d641a6e7a9b108d94a284b6c9e9704b986238f46d507655ea132d8f58e6"
+    },
+    {
+      "file": "game/css/overlays.css",
+      "size": 41807,
+      "mtimeMs": 1792142306361.5154,
+      "sha256": "8c4054780dabe1c0d5f92e07f000827ebbfd6b8cab8b7b95aa69c31f79e285b9"
+    },
+    {
+      "file": "game/css/page-ach.css",
+      "size": 18399,
+      "mtimeMs": 1792131521604.2412,
+      "sha256": "910ee0b36fd8cb130f3d078f5eac8545e7e2321c2d3a8b009a20d9631b11c78a"
+    },
+    {
+      "file": "game/css/page-battle-ui.css",
+      "size": 10886,
+      "mtimeMs": 1792079739707.8857,
+      "sha256": "2888d269a8997bab9a21ff773b9eb5db605620170037d38ee19616383eef45ea"
+    },
+    {
+      "file": "game/css/page-cardforge.css",
+      "size": 15365,
+      "mtimeMs": 1791535938751.4187,
+      "sha256": "eb7852e1e995bec623451043966681d93917b5cc58fea558c5a9ce2fed359885"
+    },
+    {
+      "file": "game/css/page-classes.css",
+      "size": 11179,
+      "mtimeMs": 1791535938752.4158,
+      "sha256": "ab5341af371c2f7a62ca092493fc98f54facfb6067bd48fb724f9ff212181a1c"
+    },
+    {
+      "file": "game/css/page-datapage.css",
+      "size": 10545,
+      "mtimeMs": 1792047507177.9365,
+      "sha256": "2d03db11e3714e53f3b720298efbc30cebe9e9595ec02d041b4c1cb1e7414d52"
+    },
+    {
+      "file": "game/css/page-deploy.css",
+      "size": 22746,
+      "mtimeMs": 1791542781657.5732,
+      "sha256": "d54a76f8df3e412c8e7256279f4be1e7961bc68e19bf7b2ac38e85c93bb5bacb"
+    },
+    {
+      "file": "game/css/page-events.css",
+      "size": 12891,
+      "mtimeMs": 1792073916234.6606,
+      "sha256": "6b135d0e63facf563b69d2fd9166a3cdd600016455f9edfaf2e0f7c0ff245bac"
+    },
+    {
+      "file": "game/css/page-expedition-hud.css",
+      "size": 32978,
+      "mtimeMs": 1792300879096.4084,
+      "sha256": "3e7194d0a702e1464335040819d20aca07403b337b9631a2f147768a732345bb"
+    },
+    {
+      "file": "game/css/page-hub.css",
+      "size": 21078,
+      "mtimeMs": 1791542781594.036,
+      "sha256": "4d49435258d920ff81fb429b32bf5d5ec2b9f33934b449d6520eee4efae3f20b"
+    },
+    {
+      "file": "game/css/page-loading.css",
+      "size": 2148,
+      "mtimeMs": 1792152690861.6953,
+      "sha256": "b3e558481adb003ad9745579d382e5dea7cc4171df55a26648193c3e03d3b410"
+    },
+    {
+      "file": "game/css/page-rewards-bag-help.css",
+      "size": 32644,
+      "mtimeMs": 1792131521604.2412,
+      "sha256": "5740473109131816d6112b9d2572f874765d48d8325fd41c4d54369f48e732cb"
+    },
+    {
+      "file": "game/css/page-settings.css",
+      "size": 25799,
+      "mtimeMs": 1791728032766.753,
+      "sha256": "5f0d3e1929eb0089bb551ea65a0d7c831a371ed62f276b06d3847cc39e5f2e0a"
+    },
+    {
+      "file": "game/css/page-shop.css",
+      "size": 18875,
+      "mtimeMs": 1791801822656.0742,
+      "sha256": "ad559010709f6cd9e98feb7d82b2904474754ae3a819e83051124318cc2446bb"
+    },
+    {
+      "file": "game/css/page-slot-select.css",
+      "size": 21459,
+      "mtimeMs": 1792047507199.5332,
+      "sha256": "5bd88749d062aa099b34b491be3b105dd099441b7d01a70870cd9461424cba97"
+    },
+    {
+      "file": "game/css/page-stash.css",
+      "size": 19807,
+      "mtimeMs": 1792072036411.8213,
+      "sha256": "7ee2237165f5568914475d7ecd4e39bbf31b64707baacb4f1c5c162c5f93475d"
+    },
+    {
+      "file": "game/css/page-transitions.css",
+      "size": 1906,
+      "mtimeMs": 1792408122141.2898,
+      "sha256": "5f3b292e6d2cd3584351e13c6f0a5299f0efb55340437f9c3b37eb7ecc82623d"
+    },
+    {
+      "file": "game/css/page-upgrade.css",
+      "size": 14898,
+      "mtimeMs": 1791536249654.1885,
+      "sha256": "c29334f34826245b68400baf9db5205fb44d8eccbbc0386c5782d41b3c20b9fb"
+    },
+    {
+      "file": "game/css/page-visual-ready.css",
+      "size": 2063,
+      "mtimeMs": 1792407644584.682,
+      "sha256": "1f45d138d9d3cc1ed4319cebfd3f1bd4d2bffeb01c98a8a93d9ed074e8ce1bb4"
+    },
+    {
+      "file": "game/css/performance-settings.css",
+      "size": 3328,
+      "mtimeMs": 1792300879099.6426,
+      "sha256": "a3bee6843a43cfb6a78fc99cc032e14cd2c81f17fc7892cd28e85305b353d330"
+    },
+    {
+      "file": "game/css/photo-studio-mounts.css",
+      "size": 6850,
+      "mtimeMs": 1791728032781.9668,
+      "sha256": "9c036b4cca8cedc4b2f02724c5f6b396b146855afa580422c30af6ba8c7ff7fe"
+    },
+    {
+      "file": "game/css/photo-studio-room-effects.css",
+      "size": 4681,
+      "mtimeMs": 1791804084776.7305,
+      "sha256": "fa2b6b95bec7472ac5ad4eeb99737f305b82ca79c81427bb49949ccf7bf05630"
+    },
+    {
+      "file": "game/css/photo-studio-unified.css",
+      "size": 66662,
+      "mtimeMs": 1792047507225.753,
+      "sha256": "e7c3c596578c40a4b6bc2b29b5f75bfa2c1c6346c2fbe18ca740834c1a07eb48"
+    },
+    {
+      "file": "game/css/photo-studio-zoom-motion.css",
+      "size": 1565,
+      "mtimeMs": 1791608960037.7922,
+      "sha256": "d4918b1effd88d3add908500ad39c6682f3351def78e7b2feab38177d3481e40"
+    },
+    {
+      "file": "game/css/pocket-strip.css",
+      "size": 4694,
+      "mtimeMs": 1791728032773.0684,
+      "sha256": "f55b012ff49afd8e270115fbb1f6f3b2de7c555b33aff107c98b1da8b2399a78"
+    },
+    {
+      "file": "game/css/preparation.css",
+      "size": 7161,
+      "mtimeMs": 1792413995751.3936,
+      "sha256": "1a62800153caeec783ea23fe0ed7f2658527f44c668fec8ff9a7efdc67a378a5"
+    },
+    {
+      "file": "game/css/rarity-design-lab.css",
+      "size": 13589,
+      "mtimeMs": 1791738237995.4563,
+      "sha256": "a84f1fba1d9dee76670784e2e23ca2e5b23aece1bad5133cf6c8c1127954a29a"
+    },
+    {
+      "file": "game/css/rarity-reveal.css",
+      "size": 2053,
+      "mtimeMs": 1792337065647.764,
+      "sha256": "923d49e4d5a9aa78c736af8957e132b0b8e50f28c9bb9e4bf889f0b7d4f4c464"
+    },
+    {
+      "file": "game/css/roster-departure-v2.css",
+      "size": 7214,
+      "mtimeMs": 1792053460689.1426,
+      "sha256": "4636991b33470ab3bc755b3e9c2b980d142b57379abf1af31ef69c387b4b308d"
+    },
+    {
+      "file": "game/css/roster-reference.css",
+      "size": 3861,
+      "mtimeMs": 1791900115027.1387,
+      "sha256": "cfb7916b04ce89b777a5a42d51770ac87b4d5a0a31318bcbbedf7785a3a8fbe7"
+    },
+    {
+      "file": "game/css/scenes.css",
+      "size": 46705,
+      "mtimeMs": 1792300879106.2095,
+      "sha256": "9cfa703fecf0e80eba1c2d4a7ead00f3d851e6f155eaf5b14b7d83ebf0f3d8f6"
+    },
+    {
+      "file": "game/css/secondary-ui-tokens.css",
+      "size": 1109,
+      "mtimeMs": 1792409999450.682,
+      "sha256": "a0d8478c68e9c54d60ba86d05f540c1dc8a0e20b1319384a25ccdbe78a465257"
+    },
+    {
+      "file": "game/css/selection-state-motion.css",
+      "size": 2332,
+      "mtimeMs": 1792415049981.542,
+      "sha256": "0a13e0c5a3050aaa0ea3e62622f61b8c111c8963cc709130d2a2e39a6fb66c99"
+    },
+    {
+      "file": "game/css/settings-audio.css",
+      "size": 162,
+      "mtimeMs": 1792404912564.2048,
+      "sha256": "4010775a7b5cacae224b4119864a03797c1032c26675a0e78fbf937762461621"
+    },
+    {
+      "file": "game/css/settings-cover.css",
+      "size": 12120,
+      "mtimeMs": 1791536249660.802,
+      "sha256": "35db0837a6cbccb96048d79c60a951719a313c211b83eadc79e1c2a3f5fb0a9f"
+    },
+    {
+      "file": "game/css/settings-navigation.css",
+      "size": 16285,
+      "mtimeMs": 1792410952620.9175,
+      "sha256": "4d9cae57a30709d80a21f254ec1ff6dbffc4a0f0cc11469bf78b2fa3d4255b29"
+    },
+    {
+      "file": "game/css/settings-transition.css",
+      "size": 89,
+      "mtimeMs": 1791716890206.5432,
+      "sha256": "7d46f61a0edced4b0d7e0ef274fc1af1b930e722e198d4edd96ae872354b461a"
+    },
+    {
+      "file": "game/css/sfx-audition.css",
+      "size": 8282,
+      "mtimeMs": 1791536249660.802,
+      "sha256": "dca5290aaa40c9bc84534c161d9b08caea31780fb5495901cff4e83c4cd5ef37"
+    },
+    {
+      "file": "game/css/sfx-review.css",
+      "size": 7330,
+      "mtimeMs": 1792329313304.215,
+      "sha256": "59d39ef31042d1e8285e4e2de7cef5277d099c2de4f1c9b33b9558fb68392faa"
+    },
+    {
+      "file": "game/css/slots-cover.css",
+      "size": 9659,
+      "mtimeMs": 1792034402797.9553,
+      "sha256": "b9a214f2e6ccd50e1d170d85cb4f94fc12f4ef9a4c42d296aba1ee01ef1dd5f5"
+    },
+    {
+      "file": "game/css/startup-transition.css",
+      "size": 529,
+      "mtimeMs": 1792303740943.296,
+      "sha256": "77c728d7b1141be2907cd8612888d74f11dd010c75db6ae40929a8a90882f8ac"
+    },
+    {
+      "file": "game/css/tactical-card-redesign.css",
+      "size": 994,
+      "mtimeMs": 1791994149924.2234,
+      "sha256": "9ebd415d85a1c5d6ff1216abfde3c306ee4dd31c350bf5fd1a00f676aba4bbed"
+    },
+    {
+      "file": "game/css/title-achievements.css",
+      "size": 19373,
+      "mtimeMs": 1791728032778.8806,
+      "sha256": "39bf8169417b6d74aace905e3426fcfe530e50bac1f520c21aa3b813109f7d68"
+    },
+    {
+      "file": "game/css/title-credits.css",
+      "size": 7317,
+      "mtimeMs": 1791715036189.951,
+      "sha256": "9ae4b38a7c3daeedcbca7fd4e8c2e02bb60e0f8c30c77b0fd6570aa876772a62"
+    },
+    {
+      "file": "game/css/title-p0.css",
+      "size": 18299,
+      "mtimeMs": 1792480436034.8271,
+      "sha256": "6841431b54d585bc21511e1538310c9105ddb6988643ba864ab1abb63efc6349"
+    },
+    {
+      "file": "game/css/ui-design-system.css",
+      "size": 7209,
+      "mtimeMs": 1792409999652.378,
+      "sha256": "dff95cc3d8975e9c9f0db4690083d4c3a053c1c4d2d62ec1d02e1be613c3e71c"
+    },
+    {
+      "file": "game/css/ui-scale.css",
+      "size": 421,
+      "mtimeMs": 1791727916123.5044,
+      "sha256": "83705767f816c8aee8e7d463be424881ebf27c714ddc5f29648a97ac7895ebe1"
+    },
+    {
+      "file": "game/css/winter.css",
+      "size": 103763,
+      "mtimeMs": 1792154562410.2988,
+      "sha256": "573b952a5064091c4039706a6e4ea281897af0b43638485c716c0978f03d5120"
+    },
+    {
+      "file": "game/css/wu-career-frame-preview.css",
+      "size": 3959,
+      "mtimeMs": 1791798531149.587,
+      "sha256": "d9c48c97954307db316bd5118f0777f4193cc3002e79f351bd452b3ac357e05b"
+    },
+    {
+      "file": "game/data/achievements.json",
+      "size": 5840,
+      "mtimeMs": 1790181076786.3894,
+      "sha256": "feda8996c2f7827f75d3b14769aff4feb3530acfe113f51a3a6fe8d2246de13c"
+    },
+    {
+      "file": "game/data/art-mapping.json",
+      "size": 22450,
+      "mtimeMs": 1792484482352.095,
+      "sha256": "adf66b658d5d7af8568d62b6c20c59cf046c75ea2e7a97999371e1941e98a17f"
+    },
+    {
+      "file": "game/data/beginner-guide.json",
+      "size": 6611,
+      "mtimeMs": 1792072798414.1821,
+      "sha256": "b42966bb2e29476ca800cb18a869b21c1fef1b1521b1a3e5010044d8cdcb8ba5"
+    },
+    {
+      "file": "game/data/card-frame-layout.json",
+      "size": 2501,
+      "mtimeMs": 1792014031715.355,
+      "sha256": "5a393973bd9975f0956f7e1e5e3b0041376318949bab25f4d597ee7dacb15682"
+    },
+    {
+      "file": "game/data/card-notes.json",
+      "size": 379,
+      "mtimeMs": 1789894233304.198,
+      "sha256": "61019fea1f1a74da04a93772b2aa51430b4a2480f6d1331c6ff3c3064f334df4"
+    },
+    {
+      "file": "game/data/cards-sync.json",
+      "size": 24941,
+      "mtimeMs": 1791618591615.0276,
+      "sha256": "1ae95746a9f5037142737efedb32aa451441ec56fe570c6ab15ec7f4cfb715df"
+    },
+    {
+      "file": "game/data/map.json",
+      "size": 9749,
+      "mtimeMs": 1792306158935.2693,
+      "sha256": "26697f5cd8915023e19ba8444c335a15e4b972a59c5bf2166756218bff31e389"
+    },
+    {
+      "file": "game/data/pets.json",
+      "size": 1086,
+      "mtimeMs": 1792073708074.6255,
+      "sha256": "f0e5ea2a57a9ec16b1f708f0763ed1b4d5704f58619bcf7bc4308b7c43477591"
+    },
+    {
+      "file": "game/data/scenes.json",
+      "size": 11102,
+      "mtimeMs": 1791876186740.1094,
+      "sha256": "bd50f72f5e4fbed923ebea709fc496cd0449a28f4ae1fb92fb779e955ecf083b"
+    },
+    {
+      "file": "game/dev/bag-reward-slice-review.html",
+      "size": 1566,
+      "mtimeMs": 1792407872238.4746,
+      "sha256": "658224f98484bb4f092b65d7fe2b1008b95414de4d9ac7e065296d00b7c0bbc8"
+    },
+    {
+      "file": "game/dev/bag-reward-slice-review.js",
+      "size": 8365,
+      "mtimeMs": 1792414612447.3618,
+      "sha256": "765246db3b93d21aae93e30bdcc955f3b14ccbf37b9c5c158f960a3c0e8150c3"
+    },
+    {
+      "file": "game/dev/battle-decision-review.html",
+      "size": 8474,
+      "mtimeMs": 1792300879117.2283,
+      "sha256": "0cd7e152acf8f7dcbdb51c98bd10be59895f8aa587f388b854df00150b182dec"
+    },
+    {
+      "file": "game/dev/canvas-resource-review.html",
+      "size": 5734,
+      "mtimeMs": 1792300879137.045,
+      "sha256": "4de99bb99f46845c49b455a243683f1185e7070c2fc968ef9aae3d1ad1e90370"
+    },
+    {
+      "file": "game/dev/card-description-fixes-review.html",
+      "size": 501,
+      "mtimeMs": 1792412356267.595,
+      "sha256": "c66ae11ad087ece58d80050e3c9a57a6a2a68658e068c0ea9f7c9fa8b1f8fad9"
+    },
+    {
+      "file": "game/dev/card-description-fixes-review.js",
+      "size": 5564,
+      "mtimeMs": 1792412923741.6692,
+      "sha256": "6284a818338faa35bb09dc352cbf372d5802d9dd354ac8b5654e7be21331443b"
+    },
+    {
+      "file": "game/dev/card-feedback-review.html",
+      "size": 8914,
+      "mtimeMs": 1792300879162.5945,
+      "sha256": "bf5edd284a4d933cab779eab5913575d2edfac05865c1b802dd9c612e7836188"
+    },
+    {
+      "file": "game/dev/chest-no-pity-review.html",
+      "size": 8120,
+      "mtimeMs": 1792306486991.724,
+      "sha256": "d1dbb5440e62c5ff1885a16fc6bd1b4fba7b65d2a9dd79c6ca5270827f65f661"
+    },
+    {
+      "file": "game/dev/combat-overlay-review.html",
+      "size": 12539,
+      "mtimeMs": 1792300879182.8127,
+      "sha256": "d19cf154ea885def0a1c4ab307af0ee60b8518ba793adf8bd492426b27a6010a"
+    },
+    {
+      "file": "game/dev/container-store-review.html",
+      "size": 3796,
+      "mtimeMs": 1792300879201.1338,
+      "sha256": "5e7b368f761ea31cdc61a3aedd7425864b5d178b5a968e458f5d12ef72610f0f"
+    },
+    {
+      "file": "game/dev/defeat-summary-review.html",
+      "size": 1162,
+      "mtimeMs": 1792300879219.577,
+      "sha256": "ec8fd9977c50d4630348591759f2f4fc137d188100750e3d90fa9174612cfb1d"
+    },
+    {
+      "file": "game/dev/defeat-summary-review.js",
+      "size": 4581,
+      "mtimeMs": 1792300879232.737,
+      "sha256": "77ddb6d80cafa71a02cbf198bf6abda345375a31e2a73e428608b3ff97d60bf7"
+    },
+    {
+      "file": "game/dev/event-dice-review.html",
+      "size": 616,
+      "mtimeMs": 1792308862008.8474,
+      "sha256": "9823c87440ae609a600d7277f2e2423b82aef5896adf4f7e83546fc7b5945db9"
+    },
+    {
+      "file": "game/dev/event-dice-review.js",
+      "size": 3380,
+      "mtimeMs": 1792309378791.4424,
+      "sha256": "a07dbd063d788f33488a76be275646912c3c2321303b498009db07dfb0c76b2b"
+    },
+    {
+      "file": "game/dev/extraction-rewards-review.html",
+      "size": 10965,
+      "mtimeMs": 1792418840137.566,
+      "sha256": "535ac9ea349ac7fbe565a2cb6a155d9164aeff8ce7a477a65373ece0245dbd8c"
+    },
+    {
+      "file": "game/dev/feedback-1018-review.html",
+      "size": 466,
+      "mtimeMs": 1792302168076.7366,
+      "sha256": "a95e6cd1509b3cc4040da6a4e7f7afc611570a117870ec92e68520d844503316"
+    },
+    {
+      "file": "game/dev/feedback-1018-review.js",
+      "size": 7067,
+      "mtimeMs": 1792487742931.1816,
+      "sha256": "dbabb51e681535b64efa98216cdbbf77e3ee35913983c8b6ec8e11c3ccf339de"
+    },
+    {
+      "file": "game/dev/flight-review.html",
+      "size": 1594,
+      "mtimeMs": 1792300879249.218,
+      "sha256": "04b567654828e408f63d5751d3df903b2241fecc4a54636a4ab892dffbef81fe"
+    },
+    {
+      "file": "game/dev/hand-draw-review.html",
+      "size": 4076,
+      "mtimeMs": 1792300879258.6973,
+      "sha256": "f341a44bc1347f1cf98a28855776b6494abfba18fc95cd03c77ee6a03543d680"
+    },
+    {
+      "file": "game/dev/hand-draw-review.js",
+      "size": 3615,
+      "mtimeMs": 1792300879274.7815,
+      "sha256": "2c0861480b26d039f26e2dfa1185346cddb58972293f99b457764c197fd63e86"
+    },
+    {
+      "file": "game/dev/hand-fixed-hit.js",
+      "size": 181,
+      "mtimeMs": 1792300879293.6284,
+      "sha256": "52f8d94d207ca5f5521ed756ccb2f215a024767b8718ce07fd5aebbcd3de5b09"
+    },
+    {
+      "file": "game/dev/hand-pointer-log.js",
+      "size": 2867,
+      "mtimeMs": 1792300879307.9695,
+      "sha256": "86329a26023e75b91142043a4c788faf66ac3b1e703b08b33a7f99e3879e2df9"
+    },
+    {
+      "file": "game/dev/hand-pointer-review.html",
+      "size": 4671,
+      "mtimeMs": 1792300879319.2344,
+      "sha256": "5685f9fc28898c9090583d5256615aa48fd338e46faf811ad4934154fe5030ee"
+    },
+    {
+      "file": "game/dev/hand-pointer-review.js",
+      "size": 5690,
+      "mtimeMs": 1792300879326.1372,
+      "sha256": "45e09fae53cda2d833f8f2f6aef7da008e9a0eb283c88ede1fd82f71bcfc78cb"
+    },
+    {
+      "file": "game/dev/infusion-review.html",
+      "size": 6741,
+      "mtimeMs": 1792300879328.7432,
+      "sha256": "72480559675185b8ed686579fd8f8a39c16f24102f998e9d1f1a69c6727d76cf"
+    },
+    {
+      "file": "game/dev/map-health-review.html",
+      "size": 5271,
+      "mtimeMs": 1792300879328.7432,
+      "sha256": "183573521ea43505627e89410c97dca46123e9a4fa4da269acd6fa9be37f85e5"
+    },
+    {
+      "file": "game/dev/map-node-rules-review.html",
+      "size": 3199,
+      "mtimeMs": 1792414968072.1287,
+      "sha256": "5cebb9d5af05bb55bcd2ee2c3f5a6fafb2893bc0b7926b6f6399ca0588ea3e5a"
+    },
+    {
+      "file": "game/dev/map-overview-review.html",
+      "size": 4032,
+      "mtimeMs": 1792300879328.7432,
+      "sha256": "05b25bda4cf4a87d66e129c3fca6067172d076b297eccd11c3b212a6bbfc52e8"
+    },
+    {
+      "file": "game/dev/map-overview-review.js",
+      "size": 3650,
+      "mtimeMs": 1792300879343.8328,
+      "sha256": "ad34bb5554044603c36b5c335273d75e11c6c55f76a43e267860636d3879dabe"
+    },
+    {
+      "file": "game/dev/node-design-review.html",
+      "size": 4083,
+      "mtimeMs": 1792300879356.4958,
+      "sha256": "8083de9eac9d8c00a1399a4c5c440bd584a027988de39eb22d2160a2e64175e7"
+    },
+    {
+      "file": "game/dev/node-design-review.js",
+      "size": 3228,
+      "mtimeMs": 1792300879364.4326,
+      "sha256": "4cf807de8c2514f93b82093812df86350c55be5d430e8e833bf4acf286c2acf8"
+    },
+    {
+      "file": "game/dev/page-performance-review.html",
+      "size": 1667,
+      "mtimeMs": 1792306283704.3364,
+      "sha256": "f20f5a58fa31fdfe5f2736628cc51e29ae6a29aaad5575dfbe9e714012d6d0e4"
+    },
+    {
+      "file": "game/dev/partner-interaction-review.html",
+      "size": 8959,
+      "mtimeMs": 1792300879365.6536,
+      "sha256": "64bae0a04d3532bb974efe3bec177725d5e04f7a8271061db0ed2ad33bbfb871"
+    },
+    {
+      "file": "game/dev/performance-settings-review.html",
+      "size": 2469,
+      "mtimeMs": 1792300879379.1628,
+      "sha256": "89ace737af2ecbf6b83cdfa861b2e1c4f006fbd7564e7a5409ab8fefadbb919b"
+    },
+    {
+      "file": "game/dev/preparation-preset-review.html",
+      "size": 1562,
+      "mtimeMs": 1792413841300.9194,
+      "sha256": "9c7374a4aa79d1fd339ce3f8ce4d529c54e1c61212941c32defc3e9a2ede8322"
+    },
+    {
+      "file": "game/dev/preparation-preset-review.js",
+      "size": 6500,
+      "mtimeMs": 1792413876039.146,
+      "sha256": "a8119db1309924694f43146470e58625ae739b1c7f2b1f632b9f55a5b6ab5b98"
+    },
+    {
+      "file": "game/dev/provoke-instance-review.html",
+      "size": 1306,
+      "mtimeMs": 1792300879391.2131,
+      "sha256": "126304f2db44f279ac52888c86ba45c233cef5e384cba8bd72b46ef1bc24cc8a"
+    },
+    {
+      "file": "game/dev/provoke-instance-review.js",
+      "size": 4485,
+      "mtimeMs": 1792300879391.2131,
+      "sha256": "c29531d6c5a389fb71183b858dbb4bc5f4daefded47dcf6a64cec0c98b462247"
+    },
+    {
+      "file": "game/dev/resource-drop-review.html",
+      "size": 651,
+      "mtimeMs": 1792306715197.1401,
+      "sha256": "92ad575ebf1dc9082306feb67077688d9eadf19dcb57b9acddc20ea85558a3ef"
+    },
+    {
+      "file": "game/dev/resource-drop-review.js",
+      "size": 3483,
+      "mtimeMs": 1792306715546.9663,
+      "sha256": "b2a7b01858f7e887b82e86f07d1c5acba581771df4745d5f6d885a5597a574d0"
+    },
+    {
+      "file": "game/dev/restore-capacity-review.html",
+      "size": 4035,
+      "mtimeMs": 1792300879404.3938,
+      "sha256": "0783cf6d434e014dab5ac5a8f43f3aa21a392e5004c249c462a4ba99fa04b39d"
+    },
+    {
+      "file": "game/dev/review-readiness.js",
+      "size": 1441,
+      "mtimeMs": 1792300879406.6606,
+      "sha256": "b108c76839dafe994618abf86370aa5c2727d47816d9a5639b6d237dc95ef57a"
+    },
+    {
+      "file": "game/dev/reward-card-feedback-review.html",
+      "size": 8956,
+      "mtimeMs": 1792300879417.1704,
+      "sha256": "025c32473a089c6832eb50a48d9b4bde49269152a70ae08c85e8565a684e168b"
+    },
+    {
+      "file": "game/dev/reward-hierarchy-review.html",
+      "size": 4506,
+      "mtimeMs": 1792300879436.7417,
+      "sha256": "4357ed86b363d7b8932cade69df295bb3e29c9d9e52a874e691e4e0bd429478c"
+    },
+    {
+      "file": "game/dev/reward-hierarchy-review.js",
+      "size": 4388,
+      "mtimeMs": 1792300879436.7417,
+      "sha256": "e311d60361e9573f8890b0ad6bf0b19f0c18c3fa7a95190c3e0afa79218f9a27"
+    },
+    {
+      "file": "game/dev/reward-organizer-review.html",
+      "size": 5102,
+      "mtimeMs": 1792300879449.699,
+      "sha256": "817bd190fd093942330ebeb98c981675831104e855f1a8ddceaae92f0b5d2404"
+    },
+    {
+      "file": "game/dev/reward-receipt-review.html",
+      "size": 8335,
+      "mtimeMs": 1792300879462.4768,
+      "sha256": "aee898375ce23fb9c24666301d5a0713f699e0726ef6599f09ecbad72c9e4dd5"
+    },
+    {
+      "file": "game/dev/shop-currency-review.html",
+      "size": 6627,
+      "mtimeMs": 1792300879476.1204,
+      "sha256": "67eaeb01acd0ccdbd97180dfafa2397010788833a05f7fc015430bfbd23582d0"
+    },
+    {
+      "file": "game/dev/signal-puzzle-review.html",
+      "size": 4650,
+      "mtimeMs": 1792300879484.9832,
+      "sha256": "2c2f9198cbd0760049a0a420ed0ac4c1ee9e48bdb25212e73609687a42fc6929"
+    },
+    {
+      "file": "game/dev/small-chest-review.html",
+      "size": 7800,
+      "mtimeMs": 1792300879499.9265,
+      "sha256": "745dc67eef8120caeef23a2996f65dc5f0a27839edc169fdbf41c1ff525b703f"
+    },
+    {
+      "file": "game/dev/startup-transition-preview.html",
+      "size": 2665,
+      "mtimeMs": 1792303800919.6375,
+      "sha256": "16c82dbb3985d351e30513eaaf20fbfedc71ff90dc15d752ec8698858e04045c"
+    },
+    {
+      "file": "game/dev/studio-mount-board.html",
+      "size": 6231,
+      "mtimeMs": 1790143345147.356,
+      "sha256": "cbda50f7b57557721d32c2ca9b5cceca321173d2e037c45a69206567d572ddf9"
+    },
+    {
+      "file": "game/dev/studio-review.html",
+      "size": 1741,
+      "mtimeMs": 1790140055551.3013,
+      "sha256": "a859a73250376d0e0bee89dfcdb321ae50ac36fccbc1d0e10f573a7c579b6778"
+    },
+    {
+      "file": "game/dev/title-resource-review.html",
+      "size": 19567,
+      "mtimeMs": 1792300879515.3782,
+      "sha256": "81bfa52090a6083083b5eba891ba1c07e019e61d0df421e5f2d43dca9316a378"
+    },
+    {
+      "file": "game/dev/title-resource-review.js",
+      "size": 3318,
+      "mtimeMs": 1792300879524.7532,
+      "sha256": "2cbe814b404c3b8a2252673cad56fb54511ecf2c51a651c6d0f4a893c3161e96"
+    },
+    {
+      "file": "game/dev/turn-feedback-review.html",
+      "size": 10016,
+      "mtimeMs": 1792300879536.3882,
+      "sha256": "0f46f669610658b2c887be8392245e89951c75ff4250cf87dd54b6eee98d15a3"
+    },
+    {
+      "file": "game/dev/ui-state-review.html",
+      "size": 2862,
+      "mtimeMs": 1792404912565.323,
+      "sha256": "4ea26d8fdcb2d2080bc82786af30a8315cf200ee12e03072274fbd3ba86e5728"
+    },
+    {
+      "file": "game/dev/ui-state-review.js",
+      "size": 649,
+      "mtimeMs": 1792404912565.323,
+      "sha256": "cf7a4dae548fa763386bf23b0306bb2f9af701acf4fe1086360cd77c833ae023"
+    },
+    {
+      "file": "game/dev/visible-layout-check.js",
+      "size": 2172,
+      "mtimeMs": 1792300879552.6956,
+      "sha256": "0c054e8c5c5c625de5a66b5204f57e5a6a0df91d4f73f5c9da9076d2a6ca52fb"
+    },
+    {
+      "file": "game/tools/agent-batch.mjs",
+      "size": 38243,
+      "mtimeMs": 1791987697244.09,
+      "sha256": "132a3b3f5791e46ad13289cf2dde1b37e78e168569d02986e4a9997eb1cb7454"
+    },
+    {
+      "file": "game/tools/agent-compare-provenance.mjs",
+      "size": 5863,
+      "mtimeMs": 1790604452148.9277,
+      "sha256": "eba5998ac522fcd2616557f3108030579ce5a72cc8c36b639e20fdb605c5f56f"
+    },
+    {
+      "file": "game/tools/agent-compare.mjs",
+      "size": 10257,
+      "mtimeMs": 1790604645223.0017,
+      "sha256": "2816a25a3c39e93cc70bbe209ac877d813ac590623917514acf7a880461aab12"
+    },
+    {
+      "file": "game/tools/agent-evolve.mjs",
+      "size": 19208,
+      "mtimeMs": 1791987697244.09,
+      "sha256": "adfa5803f8d8d44cc3f39577ad2af142cd1e80baed128a0d3b1e18cb70e8fda6"
+    },
+    {
+      "file": "game/tools/agent-ledger.mjs",
+      "size": 6381,
+      "mtimeMs": 1790604696023.0415,
+      "sha256": "7706524eb3e292796153eea7441241561821551cc495b711c6ad8aa86022f076"
+    },
+    {
+      "file": "game/tools/agent-run-provenance.mjs",
+      "size": 5098,
+      "mtimeMs": 1790605204782.608,
+      "sha256": "a55d72e3f9b4eb0bef992f6a6fa388beb32855f82ee7be276b7f025f16159f9a"
+    },
+    {
+      "file": "game/tools/agent-supervise.mjs",
+      "size": 11678,
+      "mtimeMs": 1791987697245.087,
+      "sha256": "8dcf3f1cb34ac5b2292d23b72bef90210bb799169e747168855d32ed3adf39b8"
+    },
+    {
+      "file": "game/tools/bake-card-thumbs.cjs",
+      "size": 7271,
+      "mtimeMs": 1791048517062.6545,
+      "sha256": "fd06f7c20cae1a2a69ced871d1045b2ba2a0e00a5ef290eaeb083417f23e3b9e"
+    },
+    {
+      "file": "game/tools/bake-cutouts.js",
+      "size": 4821,
+      "mtimeMs": 1789865896476.305,
+      "sha256": "e4a6f229bf323297bb8e640df3b311806769768ff72c671ecab7ab361c93c5e6"
+    },
+    {
+      "file": "game/tools/set-desktop-icon.ps1",
+      "size": 739,
+      "mtimeMs": 1788503888000,
+      "sha256": "af82e2dbfc064e6c554f275375689d572b79fe1b11f772ab4c64e4187f8b4063"
+    },
+    {
+      "file": "game/index.html",
+      "size": 25454,
+      "mtimeMs": 1792433601770.4824,
+      "sha256": "17a26ba605bc1462976f7f22d19b2d318655eeab186810c6e472b8caae5bedba"
+    },
+    {
+      "file": "scripts/.zcode/workflow-drafts/.gitignore",
+      "size": 2,
+      "mtimeMs": 1791048242559.01,
+      "sha256": "cdbcae15105d6b781e620813c79c7e868740d4e9cc53ce6f5fcbbc12387adf4b"
+    },
+    {
+      "file": "scripts/.zcode/workflow-drafts/美术UI-P0-实施动效首页排版.dwf.ts",
+      "size": 16542,
+      "mtimeMs": 1791048242561.5205,
+      "sha256": "0e70da4a45071a2f1b6828bb6a96afbcbe45d7c48391023af59f78d0be438005"
+    },
+    {
+      "file": "scripts/acceptance-gate.mjs",
+      "size": 14900,
+      "mtimeMs": 1792048006741.458,
+      "sha256": "f3bd5d6bf16bdb9c80f74f02afcc39a82c8764120eaa3e9a57ff9a0a1eec2cac"
+    },
+    {
+      "file": "scripts/architecture-graph.mjs",
+      "size": 10212,
+      "mtimeMs": 1792476143283.4739,
+      "sha256": "25103242652633a2f8f51f286ff600946092939eedd969ecb2add7d0fa891e23"
+    },
+    {
+      "file": "scripts/asset-audit-lib.cjs",
+      "size": 8273,
+      "mtimeMs": 1792343490554.642,
+      "sha256": "06ed331ed5b29235a068237fe03953217cb48fb9da476e53eec8f7ddb424e69e"
+    },
+    {
+      "file": "scripts/asset-audit.cjs",
+      "size": 5794,
+      "mtimeMs": 1792343968713.725,
+      "sha256": "a1eb24b80aef0bf8973d1311d48bba85d5c2e8bc72fe2c35ac1c2c5985257934"
+    },
+    {
+      "file": "scripts/build-artifact-manifest.mjs",
+      "size": 6655,
+      "mtimeMs": 1792404912602.178,
+      "sha256": "09ab048c5ad7d4cad3b638513ab00cf98a1e8c92ef35c16c4a06e961b1257f26"
+    },
+    {
+      "file": "scripts/build-menu-emblems.py",
+      "size": 2331,
+      "mtimeMs": 1788679302000,
+      "sha256": "e4e25c4af66e5104f596f6a3d271bcc485d8925f8eb671c61fc65394e59d6e6e"
+    },
+    {
+      "file": "scripts/check-syntax.mjs",
+      "size": 2108,
+      "mtimeMs": 1790604998940.1074,
+      "sha256": "e794c2f4406b4ef20ca0e8081e0bbd60f47530f66fce51be0be035c9c61bdaa8"
+    },
+    {
+      "file": "scripts/check-types.mjs",
+      "size": 1761,
+      "mtimeMs": 1790913543259.4692,
+      "sha256": "390547f4f964914dedf4119b5ac1b5f7c7e29632428753068f3ba9166d877ac9"
+    },
+    {
+      "file": "scripts/check-version.cjs",
+      "size": 1114,
+      "mtimeMs": 1789210158722.5117,
+      "sha256": "85bcfe496f0571bb184d80a236edcd7e51bdcc4e2c08c1c471c3a4d0d804ec20"
+    },
+    {
+      "file": "scripts/compile-narrative.mjs",
+      "size": 1121,
+      "mtimeMs": 1790924773903.7534,
+      "sha256": "8745e3759a3b79074758912ff3cfbd15de7fda957e3602a600afde10531482a7"
+    },
+    {
+      "file": "scripts/css-asset-minification.mjs",
+      "size": 2226,
+      "mtimeMs": 1791959107696.8716,
+      "sha256": "aabdb61fd4bb63416e4e0584cac75a918a92e5f0fca67182ec676773196f3217"
+    },
+    {
+      "file": "scripts/css-redundancy-audit.mjs",
+      "size": 2517,
+      "mtimeMs": 1792081516278.6226,
+      "sha256": "43db735953dd1cf2110d8079d593622eb8cd3ee78b6695803f355903bac0187d"
+    },
+    {
+      "file": "scripts/doc-retirement-candidates.mjs",
+      "size": 1900,
+      "mtimeMs": 1790692154143.7825,
+      "sha256": "2be33b6986be9e3ae8f45f710e0306d5d711cd63f443a4427c650cabf44f1166"
+    },
+    {
+      "file": "scripts/electron-gpu-info.cjs",
+      "size": 650,
+      "mtimeMs": 1788578522000,
+      "sha256": "d7d468acc01bff87500572be80f912f73d508d623fdd5372f94c275e39562975"
+    },
+    {
+      "file": "scripts/electron-title-smoke.mjs",
+      "size": 5721,
+      "mtimeMs": 1788845168000,
+      "sha256": "3703d04d0fcfe69fe34555af8c1b3d1fb2832679e7d081482d322b5129a12431"
+    },
+    {
+      "file": "scripts/esm-convert.mjs",
+      "size": 11365,
+      "mtimeMs": 1790924774945.1975,
+      "sha256": "e89607780624d5a7336b5784722f8d18797af1983a1cb34cc4813d82c5aa7fd8"
+    },
+    {
+      "file": "scripts/esm-fix-setters.mjs",
+      "size": 5138,
+      "mtimeMs": 1788679276000,
+      "sha256": "b4e9129fb03ae69b61bcc047506a6dc0d3dea6dc659e58dfa877f5d5a73f0226"
+    },
+    {
+      "file": "scripts/gate-plan.mjs",
+      "size": 17984,
+      "mtimeMs": 1792404912603.178,
+      "sha256": "bfffa3981dceecabe0a46e12d9e181d28e9191361e9ec67bbe501fd6319c9147"
+    },
+    {
+      "file": "scripts/generate-compendium.mjs",
+      "size": 8343,
+      "mtimeMs": 1792301609630.0728,
+      "sha256": "1fdd7bd6fe9e71f0830d4797739881fea2f069662b535c14edfe7d7caea2a2df"
+    },
+    {
+      "file": "scripts/generate_bitmap_art.py",
+      "size": 9664,
+      "mtimeMs": 1788679302000,
+      "sha256": "e48ddb61100861cd5003261e77acd5551b9c09dac03dfdcdddd61f5461000be7"
+    },
+    {
+      "file": "scripts/generate_ui_icons.py",
+      "size": 7035,
+      "mtimeMs": 1788679302000,
+      "sha256": "f80e755d5c749f1bfb7094f2388e4d88a293d1a76d684a699877b05d7cab299f"
+    },
+    {
+      "file": "scripts/handoff-brief.mjs",
+      "size": 1159,
+      "mtimeMs": 1790910165690.532,
+      "sha256": "d2b44214f592082e52fa64b6d572f21cecf2de8e34ad28fe99d4b0bb378235a9"
+    },
+    {
+      "file": "scripts/iab-drive.mjs",
+      "size": 10612,
+      "mtimeMs": 1791987697247.2588,
+      "sha256": "77e713c29f1a3975c497afa3f114cef105596a9329e8c4bdff7b8d659b54c39e"
+    },
+    {
+      "file": "scripts/impact-query.mjs",
+      "size": 9282,
+      "mtimeMs": 1792045445664.5942,
+      "sha256": "a9d3f6e7c4a6509d00c83eb047b54ffe49a19ea844b52845626b586184503435"
+    },
+    {
+      "file": "scripts/index-validation.mjs",
+      "size": 13004,
+      "mtimeMs": 1790910639812.5764,
+      "sha256": "87f22638c641c310a84248dd75d03c00481c11a1bb20c8e2e0e4277ecf5fdb06"
+    },
+    {
+      "file": "scripts/perf-benchmark.cjs",
+      "size": 18775,
+      "mtimeMs": 1790924777382.3923,
+      "sha256": "235c204bfa53f723542344744f73d5cb8083263f6486d1366fb15318e79be2a0"
+    },
+    {
+      "file": "scripts/perf-budget.cjs",
+      "size": 9475,
+      "mtimeMs": 1792404912603.178,
+      "sha256": "bcd06639b760cf9ade1259cdd6da779f071464e8cf295f0a6dc6f94716c9944e"
+    },
+    {
+      "file": "scripts/perf-ledger-capture.mjs",
+      "size": 49981,
+      "mtimeMs": 1792476143291.1162,
+      "sha256": "84e57be9bf83d7619568cb44020406713c51e942ec4ad707253584d5feffa424"
+    },
+    {
+      "file": "scripts/rasterize-winter-icons.py",
+      "size": 1198,
+      "mtimeMs": 1788679302000,
+      "sha256": "911c9c5bce5ef1ec0055f7fa53dcded678fa2ebf42d2ebffa188cbb0b9134f27"
+    },
+    {
+      "file": "scripts/registry-paths.mjs",
+      "size": 5449,
+      "mtimeMs": 1790913518417.2544,
+      "sha256": "0136ea2b0902fde11479ec2bed780c6335b8c66d7b2d1cbd718f9410a29fd9ef"
+    },
+    {
+      "file": "scripts/runtime-asset-aliases.mjs",
+      "size": 2541,
+      "mtimeMs": 1792404912603.178,
+      "sha256": "ec4b5c7b4f1065201937f3a1a1d6c0a2cd9d3eb30a4211336576e58dc01d5ccc"
+    },
+    {
+      "file": "scripts/runtime-asset-publication.mjs",
+      "size": 2925,
+      "mtimeMs": 1792161607445.0996,
+      "sha256": "5358062d9935a4ab1c32c77ddb30075881b0effadb594cbcd5e38be4fee9720d"
+    },
+    {
+      "file": "scripts/runtime-asset-redundancy-review.mjs",
+      "size": 23570,
+      "mtimeMs": 1792479400545.3997,
+      "sha256": "6a49359560708a6c4beb80ae65216df95af3b0c3e2246eae4b3f413f9c3ca2ca"
+    },
+    {
+      "file": "scripts/runtime-asset-redundancy.mjs",
+      "size": 11359,
+      "mtimeMs": 1792310944671.6929,
+      "sha256": "8c84ca869399b79c2261768ce5255df4a7f2b581ff4d4139cd2f16242eece9d4"
+    },
+    {
+      "file": "scripts/setup-commit-gate.mjs",
+      "size": 2734,
+      "mtimeMs": 1791987697248.6643,
+      "sha256": "e128d737c2c2727c2c79eda9471a5e6b799853143f32cd6860d8a31c0ab9fe7e"
+    },
+    {
+      "file": "scripts/sync-cards-from-live.mjs",
+      "size": 16451,
+      "mtimeMs": 1792341999782.8862,
+      "sha256": "9fa8fe5d34de78d973e76bba1cdac48e70d544c3d7d3d69d7e24345a22fd17f9"
+    },
+    {
+      "file": "scripts/validate-data.mjs",
+      "size": 5562,
+      "mtimeMs": 1789137152284.2703,
+      "sha256": "94161eb946f88474bf10800f5265c0b5df77bd1115e5dc7180448f5468c156ab"
+    },
+    {
+      "file": "scripts/vectorize_node_icons.py",
+      "size": 7503,
+      "mtimeMs": 1788528264000,
+      "sha256": "ede949ae24828d034a8e1fb66f92d22203189604cd38b0562484a6a64b1c4bcd"
+    },
+    {
+      "file": "scripts/vectorize_winter_ui.py",
+      "size": 4386,
+      "mtimeMs": 1788529144000,
+      "sha256": "e8fa547c10983d5394d4b22697beb7b46f23790de2113dbcfd615acee949e0fc"
+    },
+    {
+      "file": "scripts/video-review.mjs",
+      "size": 20344,
+      "mtimeMs": 1792476143321.1316,
+      "sha256": "9f3b8f2ce02ca1306e82f79a906d7f3ca9ff340e0dbafc90b5108ec1ed99bde9"
+    },
+    {
+      "file": "scripts/visible-playback.mjs",
+      "size": 15375,
+      "mtimeMs": 1792131521628.4272,
+      "sha256": "fb0d8266997efed30214cd36a4d5fdb9922727514e9d653ddc392b5f44a7b31d"
+    },
+    {
+      "file": "scripts/web-up.mjs",
+      "size": 6217,
+      "mtimeMs": 1790951427862.0503,
+      "sha256": "15136f981263305426e2b81d6a2bade13dfec0fdae39dca07954ee2f562a8963"
+    },
+    {
+      "file": "scripts/workflow-archive.mjs",
+      "size": 4166,
+      "mtimeMs": 1790761114037.2131,
+      "sha256": "abc0de0d012b9020004eab49b3ca0fb0e89c1ad3c274640d2e41e51b1396c632"
+    },
+    {
+      "file": "scripts/workflow-browser.mjs",
+      "size": 13937,
+      "mtimeMs": 1790764085163.2754,
+      "sha256": "329ccf7dbb83ae1862e0858354b8d27d0bf6f66552bfef86cb24776858eacbbc"
+    },
+    {
+      "file": "scripts/workflow-change-advice.mjs",
+      "size": 5454,
+      "mtimeMs": 1792404912604.1785,
+      "sha256": "2d5c6583518d82ea3293aa97c83cac10abd947b2192fe71c41daa8e512e366d5"
+    },
+    {
+      "file": "scripts/workflow-change-review.mjs",
+      "size": 8564,
+      "mtimeMs": 1792404912604.1785,
+      "sha256": "85337ce79f2571b46c33d52bd3982ef348850b2c8b834146d2ab171a9ae0eaf5"
+    },
+    {
+      "file": "scripts/workflow-dependencies.mjs",
+      "size": 10773,
+      "mtimeMs": 1792045445676.3518,
+      "sha256": "e8d73af8dd2b626300e78d8863eef5e5d3e7086bf2b1aca1919e109063eaf4d7"
+    },
+    {
+      "file": "scripts/workflow-doctor.mjs",
+      "size": 13344,
+      "mtimeMs": 1792476143333.2256,
+      "sha256": "1850eaf898933c727652a6d762986ca0d8071cb63071d651bac2aa41009c28dd"
+    },
+    {
+      "file": "scripts/workflow-evidence.mjs",
+      "size": 19051,
+      "mtimeMs": 1792481817941.2656,
+      "sha256": "e7083b3ea3f005d5bf3c1b661b376eca3078eb2108442cdad334e8d0731b5f4f"
+    },
+    {
+      "file": "scripts/workflow-gate-receipt.mjs",
+      "size": 16721,
+      "mtimeMs": 1792476143350.0334,
+      "sha256": "05c732292747494f8c74bc2f76581dc5da4c75a30f4e31a4f13ec290ce6d3f15"
+    },
+    {
+      "file": "scripts/workflow-ledger.mjs",
+      "size": 6542,
+      "mtimeMs": 1792045445689.5603,
+      "sha256": "3769564ecce57cffb2e2318e78f04b70213c996bbf11d0757da4f74c2bee2b12"
+    },
+    {
+      "file": "scripts/workflow-memory.mjs",
+      "size": 18171,
+      "mtimeMs": 1791202667180.3604,
+      "sha256": "aa3bbce19d4c98938676779b1e9e0870c021dde181591c7dfae11881db1886a2"
+    },
+    {
+      "file": "scripts/workflow-ship.mjs",
+      "size": 18618,
+      "mtimeMs": 1791893765477.933,
+      "sha256": "e84b1d3592b4760c7ebfec1a39e0764bfc0e49d30ce9e319c5223db55627c3bc"
+    },
+    {
+      "file": "scripts/workflow-staged.mjs",
+      "size": 20413,
+      "mtimeMs": 1790991574896.6233,
+      "sha256": "0a780402b899299aace87a4f75762ec433fb562d3d433f030b6fa98d7ecab6bc"
+    },
+    {
+      "file": "scripts/workflow-status.mjs",
+      "size": 26298,
+      "mtimeMs": 1790913518418.646,
+      "sha256": "5484e89879cd4c035027d5f70f27e425a2859a225b7506657a7754cad1479a18"
+    },
+    {
+      "file": "scripts/workflow-task-input.mjs",
+      "size": 3474,
+      "mtimeMs": 1790917016997.0964,
+      "sha256": "585e23ceb860779d4e6b5b113c5820357b1668ac293d41bc9ff42a1506e246a9"
+    },
+    {
+      "file": "scripts/workflow-task.mjs",
+      "size": 11720,
+      "mtimeMs": 1791519283984.3809,
+      "sha256": "a179172c6b5c25b8ff20b9663be8da8b63e053c51c8acecff81f5d288f67cf63"
+    },
+    {
+      "file": "scripts/workflow.mjs",
+      "size": 14898,
+      "mtimeMs": 1792476143359.6104,
+      "sha256": "48ffcfb87c6fc5f62d8f81152773df3c7f845209d7ebad4daa29a7f0902cf98d"
+    },
+    {
+      "file": "scripts/__pycache__/generate_bitmap_art.cpython-38.pyc",
+      "size": 9964,
+      "mtimeMs": 1788436064000,
+      "sha256": "dd28e71564710bb6c5edd6cab8529322cdc22a2dfaccb29d1db685dbdc86080f"
+    },
+    {
+      "file": "vite.config.js",
+      "size": 20280,
+      "mtimeMs": 1792161607446.1125,
+      "sha256": "2cb7165c3c125369b8d0078d9a752700e61cde336ca6a0ce107d1afcdf6a14d0"
+    },
+    {
+      "file": "package.json",
+      "size": 3561,
+      "mtimeMs": 1792404912602.178,
+      "sha256": "64c0e6e37863d632fcd052a9b32e31b007081d81e6cfec630a53a6a6cf83775d"
+    },
+    {
+      "file": "package-lock.json",
+      "size": 307484,
+      "mtimeMs": 1792404912602.178,
+      "sha256": "ccc6dcf969aad1ca0d5779932a1bfec3c52f8052957192b9358251505c90d156"
+    }
+  ],
+  "sharedDirectories": [
+    {
+      "path": "node_modules",
+      "usage": "已有锁定依赖；Vite使用默认优化缓存，未安装或修改包配置"
+    },
+    {
+      "path": "game/assets",
+      "usage": "素材只读访问；截图元数据记录实际图片URL"
+    }
+  ]
+}

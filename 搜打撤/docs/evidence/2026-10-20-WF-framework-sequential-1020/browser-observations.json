@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-20T13:06:00.270Z",
+  "platform": "Codex in-app browser",
+  "origin": "http://127.0.0.1:5327",
+  "window": "current window; screenshots 1280x720; no viewport override",
+  "natural": {
+    "inputs": "native clicks and keyboard",
+    "flow": [
+      "new archive 01",
+      "choose Wu",
+      "carry bandage and poison",
+      "depart",
+      "claim both entry supplies",
+      "move to adjacent encounter",
+      "poison target cancellation with Escape",
+      "Sword Form turn-start draw",
+      "bandage heal 27->30 and armor 3",
+      "initial attack defeats first guard",
+      "poison status and extra starter card",
+      "next turn HP29, enemyHP3",
+      "victory",
+      "claim class chest",
+      "return map coins1 HP29 bag3 consumed5",
+      "refresh and resume same visible map state"
+    ],
+    "consoleErrors": []
+  },
+  "fixture": {
+    "url": "/dev/feedback-1018-review.html",
+    "inputs": "fixture buttons construct in-memory scenarios; native clicks thereafter",
+    "shop": [
+      "coins20 capacity2",
+      "block save",
+      "buy spring water for2",
+      "coins18 capacity3 sold and unsaved receipt",
+      "exit blocked until save restored",
+      "restore save and exit retains coins18"
+    ],
+    "event": [
+      "quartermaster pay3",
+      "three dice retained candidates",
+      "claim Element Seal",
+      "return map coins15 capacity1",
+      "relief accept treatment returns map HP30/30; branch flow checked, healing delta not established at full health"
+    ],
+    "consoleErrors": []
+  },
+  "limits": [
+    "shop sale, commission and other event branches covered by automatic regressions only",
+    "no multi-size testing",
+    "no external browser or app-state mutation through evaluation",
+    "test slot retained on independent5327 origin"
+  ]
+}

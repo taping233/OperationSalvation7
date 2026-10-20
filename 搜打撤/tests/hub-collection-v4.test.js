@@ -31,7 +31,13 @@ it('filters existing collection and opens the exact original card from its curre
   const detail=root.querySelector('[data-act="collectionV12Zoom"]');
   ui.act.mock.calls.find(([name])=>name==='collectionV12Zoom')[1]({id:detail.dataset.id});
   expect(ui.showCardZoom).toHaveBeenCalledWith(cards.all()[2],{presentation:'inventory',from:detail});
-  expect(root.querySelector('[data-collection-count]').textContent).toBe('1 张已收藏');
+  expect(root.querySelector('[data-collection-count]').textContent).toBe('匹配 1 / 已收藏 2');
+  input.value='无匹配';input.dispatchEvent(new Event('input'));
+  expect(root.querySelector('[data-collection-count]').textContent).toBe('匹配 0 / 已收藏 2');
+  input.value='';input.dispatchEvent(new Event('input'));
+  expect(root.querySelector('[data-collection-count]').textContent).toBe('2 张已收藏');
+  expect([...root.querySelectorAll('[data-browser-key]')].filter(button=>!button.hidden)).toHaveLength(2);
+  expect(Object.keys(base.data.collection)).toEqual(['owned','normal']);
 });
 it('preserves retired record identity without inventing a working card preview',()=>{
   base.data.collection.retired={name:'旧版永久收藏'};render();

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-sts2-code-learning-1020",
+  "date": "2026-10-20",
+  "owner": "Friday",
+  "goal": "借鉴本地STS2代码，实施表现随机隔离、Agent故障复现与结构化牌效描述的最小接入",
+  "paths": [
+    "game/src/battle/core/battle.foe-lifecycle.js",
+    "game/src/battle/core/battle.core.js",
+    "game/src/agent",
+    "game/src/cards/card-description-text.js",
+    "game/src/cards/card-description-links.js",
+    "game/src/cards/cards.view.js",
+    "game/src/cards/structured-card-description.js",
+    "tests/sts2-random-boundary.test.js",
+    "tests/sts2-agent-replay.test.js",
+    "tests/sts2-structured-description.test.js",
+    "docs/architecture.md",
+    "docs/agent-protocol.md",
+    "docs/evidence/2026-10-20-WF-sts2-code-learning-1020"
+  ],
+  "doneWhen": [
+    "表现随机不消耗规则流，有直接回归",
+    "真实Agent命令可记录和重放，并报告第一处状态分歧",
+    "一组已支持的结构化效果接入现行描述入口，数值同源并保持现行卡文与规则",
+    "定向测试与相关静态检查完成，游戏变更补当前内置浏览器验证并说明边界"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "集中11文件161项通过，独立复核两处问题修复并有负例",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "语法、数据、10组类型、14文件定向lint及自有diff通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "Codex当前1280x720窗口真实样本卡/自然首战/领奖回图通过，error为空，自建5341已停止",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "回放仅可信本地fixture；触发器闭包余量未纳入状态投影，不能证明全引擎内部等价",
+    "未运行整库全量、build或远端CI；同seed旧随机策略/规则轨迹按本次隔离区分"
+  ],
+  "updatedAt": "2026-10-20T14:35:13.544Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

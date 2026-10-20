@@ -44,6 +44,49 @@ describe('rendering preferences', () => {
     fps.value = '60'; fps.dispatchEvent(new Event('change'));
     expect(document.querySelector('#setPerformanceStatus').textContent).toContain('未能保存');
   });
+  it('keeps unsaved feedback when settings are closed and reopened, then clears it after a successful retry', async () => {
+    localStorage.setItem('sdt-performance', JSON.stringify({ quality: 'balanced', fps: 60 }));
+    const ui = await import('../game/src/ui/performance-settings.js');
+    const prefs = await import('../game/src/core/performance-settings.js');
+    const open = () => {
+      document.body.innerHTML = ui.performanceSettingsHTML();
+      ui.bindPerformanceSettings(document.body);
+    };
+    open();
+    const save = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('quota'); });
+    const quality = document.querySelector('#setQuality');
+    quality.value = 'low'; quality.dispatchEvent(new Event('change'));
+    document.body.replaceChildren();
+    open();
+    expect(document.querySelector('#setQuality').value).toBe('low');
+    expect(prefs.getPerformanceSettings()).toEqual({ quality: 'low', fps: 60 });
+    expect(document.querySelector('#setPerformanceStatus').textContent).toContain('未能保存');
+    expect(document.querySelector('#setPerformanceStatus').textContent).toContain('重新加载游戏');
+    expect(JSON.parse(localStorage.getItem('sdt-performance'))).toEqual({ quality: 'balanced', fps: 60 });
+    save.mockRestore();
+    const fps = document.querySelector('#setFrameLimit');
+    fps.value = '30'; fps.dispatchEvent(new Event('change'));
+    expect(document.querySelector('#setPerformanceStatus').textContent).toBe('已保存，立即生效');
+    open();
+    expect(document.querySelector('#setPerformanceStatus').textContent).not.toContain('未能保存');
+    expect(document.querySelector('#setQuality').value).toBe('low');
+    expect(document.querySelector('#setFrameLimit').value).toBe('30');
+    vi.resetModules();
+    const reloaded = await import('../game/src/core/performance-settings.js');
+    expect(reloaded.getPerformanceSettings()).toEqual({ quality: 'low', fps: 30 });
+  });
+  it('restores the last saved values only on reload after a failed write', async () => {
+    localStorage.setItem('sdt-performance', JSON.stringify({ quality: 'high', fps: 120 }));
+    let prefs = await import('../game/src/core/performance-settings.js');
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('quota'); });
+    prefs.setPerformanceSettings({ quality: 'low', fps: 30 });
+    expect(prefs.getPerformanceSettings()).toEqual({ quality: 'low', fps: 30 });
+    vi.resetModules(); prefs = await import('../game/src/core/performance-settings.js');
+    expect(prefs.getPerformanceSettings()).toEqual({ quality: 'high', fps: 120 });
+    const ui = await import('../game/src/ui/performance-settings.js');
+    document.body.innerHTML = ui.performanceSettingsHTML();
+    expect(document.querySelector('#setPerformanceStatus').textContent).not.toContain('未能保存');
+  });
   it('updates the shared scheduler without changing clock or gameplay state', async () => {
     const prefs = await import('../game/src/core/performance-settings.js');
     const { renderScheduler } = await import('../game/src/core/render-scheduler.js');

@@ -33,7 +33,10 @@ describe('sync-cards-from-live 源码有效卡库（六文件沙箱）', () => {
     expect(card.desc).toMatch(/对所有敌人造成.*真实伤害/);
     expect(card.desc).not.toContain('中毒层数转移');
     expect(card.rules.battle.target).toEqual({ side:'enemy', area:false });
-    expect(card.rules.battle.hosted).toContain('rot-seed');
+    expect(card.rules.triggers.onPlay).toEqual([
+      { op: 'curse', curse: 'poison', stacks: 2, target: 'chosenEnemy' },
+      { op: 'markEnemy', event: 'death', status: 'poison', multiplier: 1, dmgType: 'true', dest: 'allEnemies', target: 'chosenEnemy' },
+    ]);
   });
   it('diff 对齐口径：完全一致的输入零差异', () => {
     const lib = sourceCardLibrary();
@@ -80,6 +83,22 @@ describe('buildDoc carried 保留语义（2026-09-25 修正恒空 bug）', () =>
 });
 
 describe('stripModule 拼接剥壳', () => {
+  it('兼容命名 re-export，拼接依赖实现且不另建规则副本', () => {
+    const seen = new Set();
+    const dependency = stripModule('export function executionView(value) { return value; }\n', seen);
+    const compatibility = stripModule(`
+      import { executionView } from './plan.js';
+      export { executionView } from './plan.js';
+      export {
+        executionView
+      } from "./plan.js";
+      export const ruleValue = executionView({ amount:0, once:false });
+    `, seen);
+    expect(compatibility).not.toMatch(/export|import|from/);
+    const run = new Function(`${dependency}\n${compatibility}\nreturn ruleValue;`);
+    expect(run()).toEqual({ amount:0, once:false });
+  });
+
   it('剥 import / export 块 / export 前缀，重复 SDT 声明去重', () => {
     const seen = new Set();
     const a = stripModule('const SDT = window.SDT;   // 注释变体\nimport { X } from "./x.js";\nexport const A = 1;\n', seen);

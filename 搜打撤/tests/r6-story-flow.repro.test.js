@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const harness = globalThis.__r6Flow = {
@@ -44,9 +46,9 @@ beforeAll(async () => {
   ({ runEventDeck } = await import('../game/src/run/game.run.flow.js'));
 });
 
-function seedRun(slot, runId) {
+async function seedRun(slot, runId) {
   harness.activeSlot = slot;
-  Base.use(slot); Base.save();
+  Base.use(slot); (await Base.save());
   localStorage.setItem(RunStorage.key(slot), JSON.stringify({ version: 2, _r2: { runId, revision: 0 } }));
 }
 
@@ -58,13 +60,13 @@ describe('R6-a 真实 flow 迟到动作复现', () => {
   });
 
   it('结果页打开后换局换节点，旧完成按钮不得消费新节点', async () => {
-    seedRun(1, 'run-old');
+    (await seedRun(1, 'run-old'));
     await runEventDeck();
     expect(harness.acts.lastLampChoice).toBeTypeOf('function');
     await harness.acts.lastLampChoice({ i: 0 });
     expect(harness.acts.lastLampFinish).toBeTypeOf('function');
 
-    seedRun(2, 'run-new');
+    (await seedRun(2, 'run-new'));
     harness.game.layerIdx = 3; harness.game.trackPos = 8;
     const pageCount = harness.pages.length;
     takeBagReturnHook()?.();
@@ -74,7 +76,7 @@ describe('R6-a 真实 flow 迟到动作复现', () => {
   });
 
   it('Ink拒绝时回退普通事件并正常结算，不写故事', async () => {
-    seedRun(1, 'run-ink-fail');
+    (await seedRun(1, 'run-ink-fail'));
     harness.narrative = async () => null;
     await runEventDeck();
     expect(harness.consumed).toBe(1);
@@ -82,7 +84,7 @@ describe('R6-a 真实 flow 迟到动作复现', () => {
   });
 
   it('同run换坐标后旧选择与选择页背包返回均不覆盖或提交', async () => {
-    seedRun(1, 'run-same');
+    (await seedRun(1, 'run-same'));
     await runEventDeck();
     const oldChoice = harness.acts.lastLampChoice;
     const oldBag = takeBagReturnHook();
@@ -96,7 +98,7 @@ describe('R6-a 真实 flow 迟到动作复现', () => {
   });
 
   it('Base写失败留在可见重试页且不消费节点', async () => {
-    seedRun(1, 'run-base-fail');
+    (await seedRun(1, 'run-base-fail'));
     await runEventDeck();
     const original = Storage.prototype.setItem;
     Storage.prototype.setItem = function (key, value) {
@@ -118,7 +120,7 @@ describe('R6-a 真实 flow 迟到动作复现', () => {
   });
 
   it('Base成功但run保存失败显示同结果重试，重试后才完成离开', async () => {
-    seedRun(1, 'run-save-retry');
+    (await seedRun(1, 'run-save-retry'));
     await runEventDeck();
     await harness.acts.lastLampChoice({ i: 0 });
     harness.saveResult = false;
@@ -134,12 +136,12 @@ describe('R6-a 真实 flow 迟到动作复现', () => {
   });
 
   it('等待Ink期间切换探索，不得为旧实例登记选择按钮', async () => {
-    seedRun(1, 'run-wait');
+    (await seedRun(1, 'run-wait'));
     let release;
     harness.narrative = () => new Promise(resolve => { release = resolve; });
     const pending = runEventDeck();
     await Promise.resolve();
-    seedRun(2, 'run-after-wait');
+    (await seedRun(2, 'run-after-wait'));
     harness.game.layerIdx = 2; harness.game.trackPos = 7;
     release({ intro: '迟到', choices: [{ label: '继续', detail: '', effect: 'continue', choose: () => '' }] });
     await pending;

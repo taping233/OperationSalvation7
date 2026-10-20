@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T06:54:20.577Z",
+  "inputKind": "real-input",
+  "detail": "从不落档开发测试局的相邻地图节点进入普通遭遇战，真实出牌击败3名联邦射手；战后奖励总览正常出现，未构造胜利回调，不证明玩家档位持久化",
+  "screenshot": {
+    "path": "battle-victory-rewards.png",
+    "bytes": 35576,
+    "sha256": "7739cd2ba958a47655caf2702e90a86296bb34e7bbdbd0af20a03fea82347098"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/archive.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 640,
+      "src": "http://127.0.0.1:5200/assets/scenes/chests/supply-opening-v6/small/frame-00.webp",
+      "width": 640
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/bag.png?v=0.60.0",
+      "width": 128
+    }
+  ],
+  "console": []
+}

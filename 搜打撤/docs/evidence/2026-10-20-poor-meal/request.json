@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "card_id": "tt13-poor-meal",
+      "asset": "cards/equip-tt13-poor-meal.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a15969-f563-7bc0-b6fd-06bf74ddddcd/exec-38c5b79f-b114-4bcd-9dae-58c76f712f2a.png",
+      "revision": "poor-meal-square-20261020",
+      "prompt": "Use case: style-transfer. Create ONE finished square 1:1 card illustration for equipment named 穷鬼套餐. Input image is the NAI composition draft, preserve its humble meal-kit subject and three-quarter overhead view: battered dull gray oval mess tin, half a small coarse dry bread roll on the left, tiny enamel cup with very thin clear soup at upper right, bent simple spoon diagonally across the front rim, frayed cloth under tin. Correct composition: output must be exactly square 1:1, no side bands, no border. Fit the complete compact meal kit and cloth within the central 80% of square canvas; shorten spoon handle so it does not stretch far away from the tin, leave safe margins all around. Bread should clearly be a HALF small dry roll with visible torn interior, not a large round full bun; soup is meager and translucent, no abundant toppings. Background is muted olive gray with two or three freely brushed large quiet shapes, remove the draft's rectangular side panels. No humans, no room, no furniture, no text, no UI or frame. Apply this hand-painted anime illustration style, adapting only the object-related portions: 画风：有明确笔形与取舍的手绘动漫插画，哑光、不透明的色块覆色，选择性的细线融入色面。先用连成大组的综合色铺完整形状，再在少数转折处用钝端短条、宽弧形或长条笔压出体积。大片安静底色与少量较密的重点交替出现；一块大面旁可以只有两三笔，细节不均匀分摊到所有表面。覆盖笔有方向，边缘偶尔轻微错位或搭接，轮廓和结构仍准确。线条：重要遮挡处较清楚，其余轮廓随光影自然减弱、变细、断开或融入邻色。器材内部线采用接近底色的深浅灰，明显弱于主轮廓；近似色面相接时不另加一圈暗边。布料和器材：用大底色、相连主投影和少数宽转折说明材质，小褶皱并入主暗面，次要表面不补碎亮片。金属只在选定位置出现窄亮边，布料偏哑光；大多数表面保持干净。避免逐件黑缝、反复碎高光、统一旧化、摄影虚化和塑料式精修。Muted olive and cool gray masses, warm ochre bread focal accent. Economical brush shapes, selectively clear rims and torn bread edge, quiet material interiors, no all-over grain filter, no photorealistic food styling.",
+      "references": [
+        ".tmp/nai/poor-meal-1020/draft.png"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T11:07:06.626Z",
+  "inputKind": "real-input",
+  "detail": "前一截图为缩略图占位；本次确认高清src已切到assets/cards且自然尺寸1659×948后补取证",
+  "screenshot": {
+    "path": "live-soul-full.png",
+    "bytes": 69774,
+    "sha256": "054ac38fc8c46c167728f5f10e4759dae03e306057e0100d168d9770cf7f0e55"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 948,
+      "src": "http://localhost:5200/assets/cards/spell-tt13-soul-contract.webp?art=selected-final-20261020&v=0.60.0",
+      "width": 1659
+    }
+  ],
+  "console": []
+}

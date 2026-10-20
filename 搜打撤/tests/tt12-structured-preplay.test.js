@@ -97,9 +97,7 @@ describe('TT12 结构化出牌前规则', () => {
       const definition = Cards.TABLETOP12.find(entry => entry.id === card.id);
       expect(card.rules.version).toBe(definition.rules.version);
       expect(card.rules.battle).toEqual(definition.rules.battle);
-      expect(Object.keys(card.rules).sort()).toEqual(card.id === 'tt12-barriermend'
-        ? ['battle', 'triggers', 'version']
-        : ['battle', 'version']);
+      expect(Object.keys(card.rules).sort()).toEqual(['battle', 'triggers', 'version']);
       expect(validateCardRules(card)).toMatchObject({ ok: true, errors: [], pending: [] });
     }
     expect(barrier).toMatchObject({ name: '玩家屏障名', desc: '玩家改写屏障描述', armor: 6, customField: 'keep-barrier' });

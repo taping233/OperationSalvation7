@@ -20,6 +20,31 @@ for (;;) {
 `SDT.Agent.autoRun({ decide, maxSteps })` 连续驱动一局。
 内置策略 `SDT.Agent.policies.greedy()` / `.random()` 返回 decide 函数，可直接用或作参照。
 
+### 战斗命令复现
+
+`SDT.Agent.replay.capture()` 与 `.play()` 用于受控战斗 fixture 的开发复现。两者都要求可信的本地 `prepare(fixture)` 适配器：它负责识别 fixture ID、恢复种子和规则输入，并通过正常入口重建空闲的第 1 回合。调用会重建测试场景，应在隔离测试对局使用；复现包只含数据，不执行其中的脚本，也不直接写回战斗私有状态。
+
+```js
+// fixture、prepare 和 fingerprint 由本地开发宿主提供。
+// fingerprint = { version: '应用版本', code: '本次运行源码的指纹' }。
+const captured = await SDT.Agent.replay.capture({
+  fixture, prepare, fingerprint, decide, maxCommands: 20,
+});
+if (captured.ok) {
+  const result = await SDT.Agent.replay.play(captured.packet, { prepare, fingerprint });
+}
+```
+
+`capture` 走真实 `Agent.step`，仅接受战斗命令，包含待选目标和其他战斗选择。包内记录 fixture 标识与参数、调用方提供的版本/代码指纹、起点诊断、动作、结果、随机状态和逐步规则摘要。指纹标明 `caller-provided`，接口不会自动证明它等于当前源码。附带的入场检查点只作诊断，恢复能力仍由本地适配器决定。
+
+`play` 在准备场景前检查指纹和包格式，重建后比较初态，再逐命令校验前态、完成结果及后态；首处差异返回命令编号、阶段、字段路径和期望/实际值，不继续下一命令。命令失败、异常、未完成或等待超时会停止记录并标为不可重放。该协议不承诺任意中途存档恢复，也不替代整局流程测试。
+
+规则校验包含有序牌堆、状态、待选流程和费用/成长等诊断字段；`battleToken` 等场次身份不参与比较。触发器闭包登记表的剩余次数等状态尚未纳入诊断，只能在后续命令产生可观察差异时发现，不能据此证明全部引擎内部状态等价。
+
+`visual`、`recording`、`agent-policy` 三条流只用于表现、记录和决策，规则随机比较排除它们。自定义 `decide` 若推进其他随机流或改动诊断投影覆盖的规则状态，记录会拒绝该决策；重放只执行已记录命令，不重跑策略或覆盖玩法随机状态。
+
+默认 `.random()` 使用独立 `agent-policy` 流，传入随机函数的接口不变。同种子的默认随机策略动作序列已随隔离变化，历史实验结果须区分实现版本。
+
 ## 二、observe() 状态 JSON
 
 ```jsonc
@@ -80,6 +105,7 @@ for (;;) {
 - `playCard [uid, 敌人下标]`：指向敌人直接结算；`playCard [uid, "self"]` 指向自己
 - `playDirect [uid]`：跳过注能直接打出（注能态的正出口）
 - `endTurn []` / `flee []`；`pickChoice [i]` / `pickDiscover [i]`；`pickHandSelect [uid]` / `skipHandSelect []`
+- `observe().battle.handSelecting` 提供 `candidateUids` 与 `canCancel`，动作面只列这些UID及允许的跳过。派发前以最新快照复检：选择已结束返回 `HAND_SELECTION_STALE`，UID失效返回 `HAND_SELECTION_UNAVAILABLE`，强制选择跳过返回 `HAND_SELECTION_MANDATORY`；这些拒绝不调用领域命令，最终支付仍由领域复检。
 - `selectDeckCard [uid]` / `confirmDeck []` / `cancelDeck []`（BOSS 编组）
 - `usePotion [uid]` / `useItem [uid, 侧]`（侧=敌人下标或 "self"）/ `openBag []` / `cancelPendingTarget []`
 - `openBag` 保留兼容命令名，战斗中返回拒绝；观察动作面不再提供开背包动作。地图背包与 `sys:discardCard` 同样受战斗禁用约束，独立药水与手牌道具仍按原战斗规则执行。

@@ -132,7 +132,7 @@ describe('破釜沉舟 + 毒爆', () => {
     await playOwned(g, poisonBurst(), 0);       // 毒爆：2 次引爆 × 2 层 = 4 点固定
     expect(snap().foes[0].hp).toBe(hp0 - 4);
     expect(snap().foes[0].status.poison).toBe(2);   // 中毒不衰减，层数保留
-    expect(g.logs.some(l => l.includes('毒伤引爆 2 次'))).toBe(true);   // 日志数值带加粗标签，只断言句式
+    expect(g.logs.some(l => l.includes('触发毒伤 4'))).toBe(true);   // 日志数值带加粗标签，只断言句式
     expect(snap().energy).toBe(97);             // 99 - 1(腐化之种) - 1(毒爆)
   });
 });

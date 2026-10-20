@@ -2,8 +2,8 @@
    仅初次进入挂载；刷新/切页移除标记，不重播。 */
 /* 外壳静止是基地的常态，不能随 980ms 的临时标记撤掉，
    否则 animation:none → 旧 pgIn 会在入场结束后再播放一次。关闭仍走原出口。 */
-body.interface-motion #overlay#overlay#overlay:has(#hubMain.base-camp):not([data-ui-closing]),
-body.interface-motion #overlay#overlay#overlay:has(#hubMain.base-camp):not([data-ui-closing]) > .card {
+body.interface-motion #overlay[data-ui-shell="content"]:not([data-ui-closing]),
+body.interface-motion #overlay[data-ui-shell="content"]:not([data-ui-closing]) > .card {
   animation: none !important;
   opacity: 1;
   transform: none;

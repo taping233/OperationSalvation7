@@ -1,0 +1,59 @@
+diff --git a/docs/evidence/2026-10-20-WF-sts2-code-learning-1020/replay-before-battle.core.js.txt b/game/src/battle/core/battle.core.js
+index 5e12f05c..beb90537 100644
+--- a/docs/evidence/2026-10-20-WF-sts2-code-learning-1020/replay-before-battle.core.js.txt
++++ b/game/src/battle/core/battle.core.js
+@@ -6,11 +6,14 @@ import { BATTLE_PHASES } from '../runtime/battle.state.js';
+ import { getHostedExecutionCard } from '../effects/battle.hosted.js';
+ import { hasInfusionWaiver, missingInfusionReason } from '../effects/battle.infusion.js';
+ import * as Combat from './combat.js';
++import * as replayPiles from '../runtime/battle.runtime.piles.js';
++import * as replayEffects from '../runtime/battle.runtime.effects.js';
++import * as replayInteraction from '../runtime/battle.runtime.interaction.js';
+ import {
+   battleState, G, foes, opts, mode, hand, energy, maxEnergy, pstat, busy, infusing,
+   discovering, choosing, stealthStrike, nextSpellTwice, viewingGrave, viewingDeck,
+   shaTransform, growth, nestSyn, arrowRune, allSpellsInfused, freeCast, equipped,
+-  battleRestartCheckpoint, set$energy, set$interaction, set$viewingGrave, set$viewingDeck,
++  battleRestartCheckpoint, tmpSeq, set$energy, set$interaction, set$viewingGrave, set$viewingDeck,
+   set$pendingHint, bindBattleRenderer, showDread, takeBattleFloats, takeBattleCardAnims,
+ } from '../runtime/battle.runtime.js';
+ import { requestBattleRender, interactionOf, cloneData, cardIdentity, R, alive, drawCards, sweepDead, findCard, findEffectiveCard, infusionFuelReason, infuseOf, effCostOf, restore, finish, cancelInteraction, flee, handCurseSpecs, getSnapshot, getBattleLiveness, useEquipSkill, start, toggleDeckCard, cancelDeckSelection, beginBoss, targetSide, handUnplayableReason as unplayableReason, play, toggleInfusePick, cancelInfuse, beginInfuse, confirmInfuse, aegisBlocked, hitFoe, skipHandSelect, pickHandSelect, useItem, bagSlam, resolveDart, resolveSlam, usePotion, openBag, closeBag, pickChoice, pickDiscover, slamSkill } from './battle.engine.js';
+@@ -241,6 +244,29 @@ COMBAT_HOOKS.onBlessing = () => { if (SDT.Sound) SDT.Sound.sfx('buffUp'); };
+     return cloneData(battleRestartCheckpoint);
+   }
+ 
++  // Read-only diagnostics for deterministic command replay. This is not a restorable save state.
++  // Include rule flags and cost overrides absent from the rendering snapshot; callbacks stay inert text.
++  function getReplayState() {
++    const ancestors = new WeakSet();
++    const copy = value => {
++      if (typeof value === 'function') return Object.freeze({ callbackSource: String(value) });
++      if (!value || typeof value !== 'object') return value;
++      if (ancestors.has(value)) throw new TypeError('Replay diagnostics cannot contain cycles');
++      ancestors.add(value);
++      try {
++        if (value instanceof Map) return Object.freeze({ mapEntries: copy([...value]) });
++        if (value instanceof Set) return Object.freeze({ setValues: copy([...value]) });
++        if (Array.isArray(value)) return Object.freeze(value.map(copy));
++        return Object.freeze(Object.fromEntries(Object.entries(value).map(([key, item]) => [key, copy(item)])));
++      } finally { ancestors.delete(value); }
++    };
++    const snapshot = { ...getSnapshot() };
++    delete snapshot.battleToken;
++    const data = module => Object.fromEntries(Object.entries(module).filter(([, value]) => typeof value !== 'function'));
++    return copy({ battle: snapshot, rules: { piles: data(replayPiles), effects: data(replayEffects),
++      interaction: data(replayInteraction), generatedCardSequence: tmpSeq } });
++  }
++
+   
+ 
+   
+@@ -467,7 +493,7 @@ const viewApi = Object.freeze({
+   matchHandSelectKey, handCurseSpecs,
+   getPreviewContext,
+ });
+-const BattleSession = Object.freeze({ start, getSnapshot, commands, serialize, restore });
++const BattleSession = Object.freeze({ start, getSnapshot, getReplayState, commands, serialize, restore });
+ 
+ // 批5 理顺：battle.view 拆片后按名直引（viewApi 原样保留给既有消费方与测试）
+ export { AFFIX_META, Combat, R, aegisBlocked, effCostOf, findCard, findEffectiveCard, infusionFuelReason, infuseOf, markDreadShown, pileTip, refillDrawPile, takeFloats, takeCardAnims, targetSide, unplayableReason, matchHandSelectKey, handCurseSpecs, getPreviewContext };

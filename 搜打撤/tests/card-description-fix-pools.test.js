@@ -1,3 +1,4 @@
+import { createBattleRuntime } from '../game/src/battle/runtime/battle.runtime.factory.js';
 import { describe, expect, it } from 'vitest';
 import { parsePoolNoun, makeHitFoe } from '../game/src/battle/effects/effect-steps.ctx.js';
 import { killsSteps } from '../game/src/battle/effects/effect-steps.kills.js';
@@ -20,7 +21,7 @@ function probe(pool) {
   const added = [], jobs = [];
   const player = Combat.ensureStatus({ hp: 50 });
   const foe = Combat.ensureStatus({ hp: 100, maxHp: 100 });
-  const resolver = createBattleResolution({
+  const resolver = createBattleResolution({ runtime: createBattleRuntime(),
     readState: () => ({ mode: 'boss', grave: [], playedMovesThisTurn: 0 }),
     getPlayerStatus: () => player, esc: String, log() {}, heal() {}, addFloat() {}, addDelayed() {},
     takeDeckBottom: () => [], deckBottomCount: () => 0, startSurge() {}, getAllCards: () => pool,

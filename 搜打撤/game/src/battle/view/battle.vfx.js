@@ -8,9 +8,12 @@ import { demoMs, getPace } from '../runtime/battle.pace.js';
 import { schedulePresentation, schedulePresentationMs, waitHitStop } from '../runtime/battle.clock.js';
 import { FEEDBACK_DELTA_MS, enqueueFeedback, feedbackClass, feedbackDelay, feedbackShakeDuration, waitMs } from './battle.feedback.js';
 import { play as playUnitFrames } from './battle.frames.js';
+import { takeCardAction } from './battle.action-timing.js';
 import { assetUrl } from '../../core/asset-url.js';
 import { storeGet } from '../../core/storage.js';
 import { takeFloats } from '../core/battle.core.js';
+import { impactProfile } from './battle.attack-profiles.js';
+import { playEnemyMotion } from './battle.enemy-motion.js';
 const foeHurtTimers = new WeakMap();
 const shakeAnimations = new WeakMap();
 
@@ -89,6 +92,7 @@ function stageKillBeat() {
   // 敌方攻击前摇（P1）：立绘向玩家方向突进再回弹——敌人面向左，突进=负 X
   function foeLunge(figEl) {
     if (!figEl || !figEl.animate) return;
+    if (playEnemyMotion(figEl, 'attack')) return;
     figEl.animate([
       { transform: 'translateX(0)' },
       { transform: 'translateX(-14px) scale(1.04)', offset: 0.45 },
@@ -242,6 +246,8 @@ function stageKillBeat() {
   }
   function spawnFloats(body, baseDelay = 0) {
     const list = takeFloats();
+    const supportAction = takeCardAction(body, list);
+    if (supportAction) playUnitFrames(supportAction);
     if (!list.length) return;
     const ov = UI.el.overlay;
     const ovR = uiRect(ov);   // 布局口径：飘字/贴图定位
@@ -274,8 +280,8 @@ function stageKillBeat() {
           figEl.classList.add('bt-hit-anticipate');
           schedulePresentation(() => figEl.classList.remove('bt-hit-anticipate'), 130);
           const attackerAction = CUE_ATTACKER_ACTION[f.cue?.attacker];
-          // 首击动作已在卡牌起飞时播；仅后续分段补播，避免同一帧重启动作。
-          if (attackerAction && f.cue?.replayAttacker) playUnitFrames(attackerAction);
+          // A combo can continue the same live action without resetting its frames.
+          if (attackerAction) playUnitFrames(attackerAction, { continueActive: !!f.cue?.replayAttacker });
         }
         return;
       }
@@ -294,12 +300,11 @@ function stageKillBeat() {
       const amt = parseInt(String(f.text).replace(/[^\d-]/g, ''), 10) || 0;
       const heavy = damage && amt >= 10;   // 重击：≥10 点——更大命中贴图 + 更猛抖动 + 顿帧
       const finisher = damage && feedbackClass(f).includes('fx-finisher');
-      // W5-01（2026-09-27 R2）：击败拍——killBoom（engine.js:143 击杀 boom 贴纸浮字=击杀
-      // 唯一标记，实测 feedback.finisher 无人置位）触发舞台震动+亮帧+顿帧 120ms；
-      // finisher（终结一击伤害浮字）顿帧 100→140ms。轻<10 致死经 killBoom 同样吃到。
+      // 击杀保留独立停顿；普通连击不逐击暂停，避免多段伤害被拉长。
       const killBoom = (f.cls || '').includes('sticker-boom');
-      const stopMs = (heavy || finisher) && !reduced ? (finisher ? 140 : 100) : killBoom && !reduced ? 120 : 0;
       const cue = f.cue;
+      const impact = impactProfile(cue, amt, { kill: killBoom, critical: f.critical, reduced });
+      const stopMs = damage || killBoom ? impact.stopMs : 0;
       const elementSound = { fire: 'attackFire', poison: 'attackPoison',
         ice: 'attackIce', lightning: 'attackLightning', arrow: 'attackArrow', blunt: 'attackBlunt',
         pierce: 'attackPierce', psychic: 'attackPsychic' }[f.tintKey || f.type];
@@ -311,13 +316,16 @@ function stageKillBeat() {
       if (f.shieldBreak) SDT.Sound.sfx('shieldBreak');
       if ((finisher || killBoom) && !reduced) stageKillBeat();   // W5-01：击败瞬间舞台震动+亮帧（#68 时刻 Accent）
       // STS2 口径：hurt 骨骼/序列帧动画与抖动互斥——帧播上了就不抖；随从无帧集，不代播玩家动作。
-      // 攻击动作（atk）改在卡牌起飞时播（见 animateBattleTransition），此处不再倒挂重播
+      // The windup owns actor frames; hit feedback never restarts that action.
       const framesPlayed = damage && !reduced && isSelf && playUnitFrames('hurt');
       if (damage && !reduced && !framesPlayed) {
         if (isSelf) stsSelfHit(figEl, heavy ? 1.35 : 1);   // 自己：后仰+红染
         else {
-          if (allyI == null) playFoeHurtFrame(figEl);
-          stsShake(figEl, heavy ? 1.55 : 1, 0, feedbackShakeDuration(damageBeatCounts.get(String(f.unit)) || 1));
+          const enemySample = allyI == null && playEnemyMotion(figEl, 'hurt');
+          if (!enemySample) {
+            if (allyI == null) playFoeHurtFrame(figEl);
+            stsShake(figEl, impact.recoil, 0, feedbackShakeDuration(damageBeatCounts.get(String(f.unit)) || 1));
+          }
         }
       }
       if (!reduced && damage) {
@@ -350,7 +358,7 @@ function stageKillBeat() {
       if (impactCls && !reduced) {
         const imp = document.createElement('div');
         imp.className = 'sts-impact ' + impactCls;
-        const sz = heavy ? 170 : 118, half = sz / 2;
+        const sz = Math.round(132 * impact.impactScale), half = sz / 2;
         imp.style.width = imp.style.height = sz + 'px';
         imp.style.margin = `${-half}px 0 0 ${-half}px`;
         imp.style.left = (r.left - ovR.left + r.width / 2) + 'px';
@@ -416,7 +424,7 @@ function stageKillBeat() {
             ? body.querySelector(`.sts-ally[data-ally-i="${allyI}"] .sts-figure`)
             : body.querySelector(`.sts-foe[data-eidx="${f.unit}"] .sts-figure`);
         const damage = !f.warm && !(f.cls || '').includes('stk') && !(f.cls || '').includes('block') && !(f.cls || '').includes('windupfx');
-        if (fig && damage && !SDT.Motion?.reduceMotion()) {
+        if (fig && damage && !f.cue?.frameSynced && !SDT.Motion?.reduceMotion()) {
           fig.classList.add('bt-hit-anticipate');
           try { await waitMs(demoMs(85), signal); } finally { fig.classList.remove('bt-hit-anticipate'); }
         }

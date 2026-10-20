@@ -1,0 +1,38 @@
+{
+  "status": "generated-preview-unapproved",
+  "purpose": "跨层过场预览，不接入",
+  "workflow": "复用已核实NAI底稿→内置ImageGen重设计与默认画风重绘",
+  "newNaiAttempt": "nai-request.json：HTTP402，未生成，不重试",
+  "references": [
+    {
+      "path": "D:/素材/代号柒/.tmp/nai/general-transition-1016/nai-draft-v2.png",
+      "role": "composition/edit-target",
+      "sha256": "1972ecce8e2f6bd43fbb222637a2f5381537beeb5275503d0ec43730bbcc66ed"
+    },
+    {
+      "path": "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-full.png",
+      "role": "style",
+      "sha256": "0800bceae0d4dc2ef986a3fb4741e1cb1bb3a700f6e7024d29a8d4b39608662d"
+    },
+    {
+      "path": "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-16-default-art-style/reference-detail.png",
+      "role": "style",
+      "sha256": "e65a46495cf6c9b6c562be49b7e6ef9a91a5c1aa2976a7e0b949bfd4fcb5c985"
+    },
+    {
+      "path": "D:/素材/代号柒/搜打撤/docs/evidence/2026-10-20-default-style-fusion/reference-09.jpg",
+      "role": "style",
+      "sha256": "0c2364a8eba47b243864f6a6c2a959de6683060da4539636dc30d7a502e25985"
+    }
+  ],
+  "prompt": "Create ONE finished wide 16:9 environment illustration for the inter-level transition of the game 代号柒. Output landscape around 1672×941, full bleed, no text, no UI, no people.\nINPUT ROLES: Image 1 is the existing NovelAI composition draft, to be substantially redesigned. Borrow its gateway-on-the-right, inviting path into the distance, quiet darker left area, winter air and sense of passage only. Replace its ancient stone arch, mountain wilderness and red cloth with a modern futuristic city passage. Images 2 and 3 are the project's base painting-technique references; Image 4 enriches selective contours, chromatic overpainting and broad expressive strokes. These three are STYLE ONLY: do not paint any of their people, faces, clothes, hats, hair, white background or signatures.\nSCENE: An open sliding transit gate between vertical districts of a future city, seen at eye level from a sheltered elevated passage. The gate occupies the right half, a large rectangular aperture framed by dark blue-gray steel and pale modern composite panels. A broad safe pedestrian walkway leads from the foreground through the gate to a pale sunlit snowy city with layered modern buildings, elevated transit rails and a few distant automated structures. Make the destination feel reachable, spacious and hopeful. Snow lies along the path edges and on roofs; the center of the walkway is clearly walkable. Small amber guide lights provide a concentrated warm accent, with one unmarked orange-red gate panel. The left third is quiet shadowed architecture and softly grouped cold-gray surfaces, with spacious calm midtones suitable for a later title overlay, but still painted architecture rather than an empty black rectangle. No numerals, signs, letters or interface marks. Avoid medieval stonework, gothic arches, war ruins, excessive machinery, dense windows and giant glowing sci-fi rings.\nPAINTING: Translate the reference painting technique into architectural surfaces: Japanese anime environmental illustration, opaque layered pigment, large coherent light and shadow groups, directional broad strokes and a few structured short angular strokes at material turns, selective uneven-weight drawn edges. Muted blue-gray and gray-green base, luminous icy turquoise sky and warm ivory daylight outside. Paint cool and warm gray overlaps following volume, varied hard and soft edges, quieter broad planes alternating with resolved local details. Maintain full readable architectural silhouettes and strong perspective. Steel has a few narrow reflections, glass a soft planar reflection, snow is grouped pale blue/lilac/ivory planes. Controlled local brush texture, not an all-over grain filter. Refined large forms, not photorealistic rendering, flat vector graphics, polished 3D, oversharpened detail, random triangular confetti or line webs. Keep the calm winter atmosphere and a clear transition from shelter into an open city. One cohesive image, no comparison panels, no frames, no watermark.",
+  "output": "D:\\素材\\代号柒\\.tmp\\nai\\transition-art-sample-20261021\\builtin-preview.png",
+  "originalOutput": "C:\\Users\\太平\\.codex\\generated_images\\01a15a22-8b3e-7611-97f9-321deb86583d\\exec-c1c0623f-1c05-4b1b-a298-44416053345a.png",
+  "sha256": "b30d5e91d4096137886f89513fdec1ad739a91cc16cbf4b6e1049a61340307f3",
+  "size": [
+    1672,
+    941
+  ],
+  "observed": "现代矩形闸门、明亮冬日城市、暗左亮右和标题空间已呈现；无人物和文字，局部建筑与雪面仍较细密；尚未游戏实页适配。",
+  "userFeedback": null
+}

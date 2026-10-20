@@ -20,10 +20,12 @@ describe('奖励呈现共享契约', () => {
     [true, false, 'chestMakeRoom', '整理背包'],
   ])('卡下与放大入口共用动作 choice=%s fits=%s', (choice, fits, action, label) => {
     for (const zoom of [false, true]) {
-      document.body.innerHTML = rewardClaimHTML({ index:2, choice, fits, zoom });
+      document.body.innerHTML = rewardClaimHTML({ index:2, cardName:`卡"名'<&>`, choice, fits, zoom });
       const button = document.querySelector('button');
       expect(button.dataset).toMatchObject({ act:action, i:'2', cancel:'false' });
       expect(button.textContent).toBe(label);
+      expect(button.getAttribute('aria-label')).toBe(`${label}：卡"名'<&>`);
+      expect(button.getAttributeNames().sort()).toEqual(['aria-label', 'class', 'data-act', 'data-cancel', 'data-i', 'type']);
       expect(button.className).toBe(zoom ? 'ov-btn ok' : 'reward-claim');
       expect(!!document.querySelector('.reward-choice-warning')).toBe(zoom && choice);
     }

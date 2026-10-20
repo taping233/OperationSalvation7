@@ -3,6 +3,7 @@ window.SDT = { Icons:{ img:()=>'', TYPE_ART:{} }, Sound:{music(){},sfx(){},setDu
   MAP:{rules:{battleEnergy:9,battleHandMax:99,bossDeckSize:1,starterSha:5,battleStartDraw:99,battleTurnDraw:1},items:{rations:{name:'口粮'},wood:{name:'木材'}}} };
 await import('../game/src/cards/cards.js');
 const { BattleSession, findCard, effCostOf } = await import('../game/src/battle/core/battle.core.js');
+const { set$hand } = await import('../game/src/battle/runtime/battle.runtime.js');
 const { set$grave, set$consumed } = await import('../game/src/battle/runtime/battle.runtime.piles.js');
 const { displayCardDescription } = await import('../game/src/cards/card-description-text.js');
 const C = window.SDT.Cards;
@@ -50,7 +51,7 @@ it('G06 长剑确认并释放气功波后目标提示已清除',async()=>{
 });
 it('G12 后备能源可读描述明确限定本场消耗',()=>{
   const c=byId('tt12-backupcell');const text=displayCardDescription(c.desc,c.id);
-  expect(text).toContain('本场战斗');expect(text).toContain('不计之前战斗');
+  expect(text).toContain('消耗牌堆');expect(text).toContain('每有 1 张法术牌');
 });
 it('G12 之前口袋和单独墓地不降费；本场消耗法术降费，下一场清零',()=>{
   const c=byId('tt12-backupcell'),spell=byId('tt3-ice-spike'),g=gameFor([c,spell]);
@@ -59,6 +60,10 @@ it('G12 之前口袋和单独墓地不降费；本场消耗法术降费，下一
   begin();expect(effCostOf(c,'u0')).toBe(6);
   // 受控牌区构造；真实注能链由tt12-structured-battle覆盖。
   set$grave(['u1']);expect(effCostOf(c,'u0')).toBe(6);
+  const { hand } = BattleSession.getSnapshot();
+  expect(hand).toContain('u1');
+  // A UID cannot be both in hand and in the consumed projection.
+  set$hand(hand.filter(uid => uid !== 'u1'));
   set$consumed(['u1']);expect(effCostOf(c,'u0')).toBe(5);
   begin();expect(effCostOf(c,'u0')).toBe(6);
 });

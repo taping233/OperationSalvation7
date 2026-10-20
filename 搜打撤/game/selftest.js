@@ -21,13 +21,15 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 // game.run.* 为架构批次 4 拆出的局内流程模块（scenes→altar→flow），与壳合并扫描；
 // 2026-09-22 六文件重构批1-5 拆出的切片一并并入（effect-steps/cards/hub/bag/battle.view 各片）。
 // 2026-10-01（ROOT-06）：路径按现行域目录更新（src/ 顶层平铺时代已结束）。
-const GAME_PARTS = ['run/game.session.js', 'ui/game.menu.js', 'ui/game.menu.pages.js', 'run/game.run.data.js', 'run/game.run.js', 'run/game.run.scenes.js', 'run/game.run.altar.js', 'run/game.run.flow.js',
+// 事件与资源领取现由独立用例工厂承接，源码契约扫描包含其真实属地。
+const GAME_PARTS = ['run/game.session.js', 'ui/game.menu.js', 'ui/game.menu.pages.js', 'run/game.run.data.js', 'run/game.run.js', 'run/game.run.scenes.js', 'run/game.run.altar.js', 'run/game.run.flow.js', 'run/game.run.events.js', 'run/game.run.resources.js',
   'battle/effects/effect-steps.ctx.js', 'battle/effects/effect-steps.gates.js', 'battle/effects/effect-steps.curse.js', 'battle/effects/effect-steps.damage.js', 'battle/effects/effect-steps.recovery.js', 'battle/effects/effect-steps.kills.js', 'battle/effects/effect-steps.deck.js', 'battle/effects/effect-steps.rules.js', 'battle/effects/effect-steps.audit.js', 'battle/effects/effect-steps.tail.js',
   'cards/cards.consts.js', 'cards/cards.rules.js', 'cards/cards.data.js', 'cards/cards.sync.js',
   'hub/game.hub.js', 'hub/game.hub.depart.js', 'hub/game.hub.pages.js', 'hub/game.hub.bridge.js',
   'hub/game.bag.js', 'hub/game.bag.drag.js', 'hub/game.bag.settle.js', 'hub/game.bag.bridge.js', 'hub/game.bag.view2.js',
   'hub/game.notes.js', 'hub/game.cardslib.js', 'game.boot.js'];
-const BATTLE_PARTS = ['battle/core/battle.core.js', 'battle/runtime/battle.runtime.js', 'battle/core/battle.engine.js', 'battle/core/battle.enemy-phase.js',
+const BATTLE_PARTS = ['battle/core/battle.core.js', 'battle/runtime/battle.runtime.js', 'battle/core/battle.engine.js', 'battle/core/battle.engine.factory.js', 'battle/core/battle.enemy-phase.js',
+  'battle/core/battle.engine.instance.js', 'battle/core/battle.engine.factory.domain.js', 'battle/core/battle.enemy-phase.domain.js', 'battle/runtime/battle.runtime.factory.js',
   'battle/view/battle.view.js', 'battle/view/battle.overlays.js', 'battle/view/battle.layers.js',
   'battle/view/battle.vfx.js', 'battle/view/battle.anim.view.js', 'battle/view/battle.aim.js', 'battle/view/battle.hover.js'];
 const src = (p) => {
@@ -68,7 +70,7 @@ check('场景·10 张事件 sceneId 覆盖', ['timeskip','demondeal','bandits','
 check('场景·标准节点与拾取契约', /scene-battle-bg/.test(gameSource) && /scene-extract-bg/.test(gameSource) && /scene-pickup-key/.test(gameSource), true);
 check('场景·落脚进入全屏房间链', /UI\.beginRoom\(\)/.test(gameSource) && /_roomActive/.test(src('ui/ui.js')), true);
 check('音频·四首原创场景曲使用Howler循环与交叉渐变', /from 'howler'/.test(src('audio/sound.js')) && ['01-title-frostglass-v12.ogg', '02-explore-ashline.ogg', '03-battle-shadowtide-full-v2.ogg', '05-shop-lamplight-deal-v3.ogg'].every(name => src('audio/sound.music.catalog.js').includes(name)) && /new Howl\(\{[^}]*loop:\s*true/s.test(src('audio/sound.js')) && /class SceneMusicPlayer/.test(src('audio/sound.music.player.js')), true);
-check('战斗·意图轮转与 DOM 接线', /function intentFor/.test(src('battle.js')) && /foe\.intent = intentFor\(foe, turn\)/.test(src('battle.js')) && /sts-intent/.test(src('battle.js')), true);
+check('战斗·意图轮转与 DOM 接线', /function intentFor/.test(src('battle.js')) && /foe\.intent = context\.engine\.intentFor\(foe, instanceRuntime\.turn\)/.test(src('battle.js')) && /sts-intent/.test(src('battle.js')), true);
 // 拖牌指向已从静态 data-aim 属性迁移为渲染后写入 dataset.aim；守护真实接线而非旧实现细节。
 check('战斗·拖牌 Pointer Events 接线保留', /pointerdown/.test(src('battle.js')) && /dataset\.aim/.test(src('battle.js')) && /drag-over/.test(src('battle.js')), true);
 // 2026-10-01（ROOT-06）：意图元数据已迁 battle/core/battle.enemy-intent.js 的 INTENT_META

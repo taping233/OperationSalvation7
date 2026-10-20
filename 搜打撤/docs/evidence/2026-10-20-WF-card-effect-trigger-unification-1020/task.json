@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-card-effect-trigger-unification-1020",
+  "date": "2026-10-20",
+  "owner": "Friday",
+  "goal": "整体收拢现有卡牌与状态效果、战斗结算及全部已支持触发时点，代码冻结后集中验收",
+  "paths": [
+    "game/src/battle",
+    "game/src/cards/card-trigger-contract.js",
+    "game/src/cards/card-rules.schema.js",
+    "game/src/cards/card-rules.capability.js",
+    "game/src/cards/card-battle-start-explanation.js",
+    "tests/battle-direct-trigger-source.test.js",
+    "tests/structured-effect-authority.test.js",
+    "tests/battle-trigger-lifecycle-unification.test.js",
+    "tests/battle-structured-authority-unification.test.js",
+    "tests/card-battle-start-explanation.test.js",
+    "tests/battle-effect-damage-boundary.test.js",
+    "tests/combat-status-boundary-unification.test.js",
+    "tests/battle-engine-facade.test.js",
+    "tests/battle-equipment-skill-synthesis.test.js",
+    "game/src/ui/term-tips.js",
+    "scripts/sync-cards-from-live.mjs",
+    "docs/architecture.md",
+    "docs/evidence/2026-10-20-WF-card-effect-trigger-unification-1020"
+  ],
+  "doneWhen": [
+    "全部已支持触发时点共用名称和规则所有权契约，旧文本与结构化路径不重复",
+    "注册持续次数、状态效果、目标、终局取消及跨战边界完成核对并修复现码问题",
+    "效果与装备各入口统一预检，显式0/false/空数组不回落旧描述",
+    "全部实施与独立审查结束后集中自动回归及当前窗口内置浏览器验收，未核范围明确"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-20-WF-card-effect-trigger-unification-1020/2026-10-20T10-40-54.126Z-17af194b.json",
+      "result": "passed",
+      "sha256": "0fec252c00e9bb0dab01e20284480fb09ac33e6448a1e2e3c302077c171cef0d",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "report",
+      "report": "docs/evidence/2026-10-20-WF-card-effect-trigger-unification-1020/2026-10-20T10-41-21.127Z-3445ea7c.json",
+      "result": "failed",
+      "sha256": "27c716bede9bdeb2abcd1a1ee0e4c3637a160bdf87c28d802bf3d548104b77eb",
+      "verification": "recorded-result-only-not-current-freshness"
+    },
+    {
+      "kind": "manual",
+      "description": "语法512文件、数据、8项类型、定向lint及diff检查通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "内置当前窗口真实首战、领奖、回图和档位02恢复通过；页面error为空",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "文档637链接检查通过；独立只读复核通过；5317自建服务已释放",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "全量4项原有美术映射指纹失败保留；37项skip不算通过",
+    "实页仅当前窗口代表流程；未逐卡逐时点实玩，未对混合树build或运行远端CI"
+  ],
+  "updatedAt": "2026-10-20T10:53:02.928Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

@@ -63,6 +63,7 @@ import { ensureCanonicalFaceRefresh } from './cards.sync.face-refresh.js';
 import { ensureM9HostedRules } from './cards.sync.m9.js';
 import { ensureM10HostedEquipmentRules } from './cards.sync.m10.js';
 import { ensureM11HostedRules } from './cards.sync.m11.js';
+import { ensureBuiltinExecutionRules } from './cards.sync.builtin.js';
 import { validateCardRules } from './card-rules.schema.js';
 
 let _cardsCacheRaw = null;
@@ -290,12 +291,8 @@ function assertValidCardRules(cards) {
       ensureM11HostedRules();
       ensureRotSeedRevision(SDT.Cards);
       SDT.Cards.seedBatch(SDT.Cards.TABLETOP13, 'sdt-cards-tt13-v1-seeded', 'tt13');
-      const flame = SDT.Cards.all().find(card => card.id === 'cmtn1ntxzoc4');
-      if (flame && !flame.rules?.battle?.hosted?.includes('batch13-flame-form')) {
-        SDT.Cards.upsert({ ...flame, desc: '本局对战中法伤+1；此后每注能2点，法伤额外+1。',
-          rules: { version:1, battle:{ target:{side:'self',area:false}, hosted:['batch13-flame-form'] },
-            triggers:{ onPlay:[{op:'blessing',key:'spellUp'}] } } });
-      }
+      SDT.Cards.seedBatch(SDT.Cards.TABLETOP13.filter(card => card.id === 'tt13-poor-meal'), 'sdt-cards-poor-meal-v1-seeded', 'poor-meal');
+      ensureBuiltinExecutionRules(SDT.Cards);
     },
 
     // 职业稀有度迁移（设计者 2026-09-04 定版）：老档里第七批职业卡（tt7- 前缀）

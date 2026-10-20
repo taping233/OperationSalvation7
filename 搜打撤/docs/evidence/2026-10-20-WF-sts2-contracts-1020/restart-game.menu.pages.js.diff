@@ -1,0 +1,27 @@
+--- before/game/src/ui/game.menu.pages.js
++++ after/game/src/ui/game.menu.pages.js
+@@ -18,6 +18,7 @@
+ import '../../css/archive-back.css';
+ import '../../css/leave-run.css';
+ import { linkedBackHTML } from './home-linked-interactions.js';
++import { battleRestartHTML, bindBattleRestart } from './settings-battle-restart.js';
+ /* 标题、选档、离开与设置页面流程。只通过注入端口调用会话能力。 */
+ 
+ // 非首屏面板工厂；依赖会话能力与标题回调注入，不静态导入启动/会话模块。
+@@ -892,6 +893,7 @@
+         <label class="chk"><span class="settings-row-copy"> 底部操作提示条 <span class="set-en">HINT BAR</span></span><input type="checkbox" role="switch" id="setHint" ${storeGet('sdt-hintbar') !== '0' ? 'checked' : ''}></label>
+         <label class="chk"><span class="settings-row-copy"> 环层横幅 <span class="set-en">LAYER BANNER</span></span><input type="checkbox" role="switch" id="setBanner" ${storeGet('sdt-banner') !== '0' ? 'checked' : ''}></label>
+         <label class="chk"><span class="settings-row-copy"> 开发者模式（测试工具） <span class="set-en">DEVELOPER</span></span><input type="checkbox" role="switch" id="setDev" ${game.devMode ? 'checked' : ''}></label>
++        ${battleRestartHTML({ SDT, game })}
+         </section>`,
+       display: `<section class="settings-group settings-display">
+         <h3 class="set-h">[[icon:gear]] 画面与反馈 <span class="set-en">DISPLAY &amp; ACCESS</span></h3>
+@@ -950,6 +952,8 @@
+     const finishNavigation = beginRuntimeStage('settings-navigation-sync');
+     try { initSettingsNavigation(UI.el.ovBody.querySelector('.settings-page')); } finally { finishNavigation(); }
+     bindPerformanceSettings(UI.el.ovBody);
++    bindBattleRestart({ SDT, UI, game, isCurrentContext: captureBattleContext(game, getActiveSlot),
++      page: UI.el.ovBody.querySelector('.settings-page') });
+     const sync = () => {
+       if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index;
+       runtime.syncDevVisibility();

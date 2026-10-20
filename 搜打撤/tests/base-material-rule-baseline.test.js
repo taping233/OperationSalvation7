@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { describe, expect, it } from 'vitest';
 
 window.SDT = window.SDT || { Icons: { img: () => '' } };
@@ -7,8 +9,8 @@ await import('../game/src/hub/base.js');
 const Base = window.SDT.Base;
 
 describe('基地材料旧档行为基线', () => {
-  it('旧存档实例按卡名识别材料，并按描述 ×N 折入木材和钥匙', () => {
-    const slot = 8;
+  it('旧存档实例按卡名识别材料，并按描述 ×N 折入木材和钥匙', async () => {
+    const slot = 1;
     localStorage.setItem(Base.SLOT_KEY(slot), JSON.stringify({
       wood: 4,
       rations: 2,
@@ -26,18 +28,18 @@ describe('基地材料旧档行为基线', () => {
     expect(woodStack.card.rules).toBeUndefined();
     expect(Base.materialInfo(woodStack.card).kind).toBe('wood');
     expect(Base.materialAmount(woodStack.card)).toBe(3);
-    expect(Base.useStashMaterial('一捆木材', true)).toMatchObject({ ok: true, qty: 2, total: 6 });
+    expect((await Base.useStashMaterial('一捆木材', true))).toMatchObject({ ok: true, qty: 2, total: 6 });
     expect(Base.data.wood).toBe(10);
 
     expect(Base.keyCount()).toBe(4); // 储备钥匙 1 + 仓库中的钥匙 ×3
-    expect(Base.useStashMaterial('一把钥匙', true)).toMatchObject({ ok: true, qty: 1, total: 3 });
+    expect((await Base.useStashMaterial('一把钥匙', true))).toMatchObject({ ok: true, qty: 1, total: 3 });
     expect(Base.data.keys).toBe(4);
     expect(Base.keyCount()).toBe(4);
     expect(Base.data.stash).toHaveLength(0);
   });
 
   it('描述没有 ×N 时每张按 1 计；使用前仓库钥匙数含整堆数量', () => {
-    const slot = 9;
+    const slot = 2;
     localStorage.setItem(Base.SLOT_KEY(slot), JSON.stringify({
       keys: 2,
       stash: [{ card: { id: 'tt-key', name: '钥匙', type: '资源', desc: '解锁大门。' }, count: 3 }],
@@ -48,8 +50,8 @@ describe('基地材料旧档行为基线', () => {
     expect(Base.keyCount()).toBe(5);
   });
 
-  it('结构化材料类型和数量不受卡名/描述改写影响，keyCount 只读结构化钥匙规则', () => {
-    const slot = 10;
+  it('结构化材料类型和数量不受卡名/描述改写影响，keyCount 只读结构化钥匙规则', async () => {
+    const slot = 3;
     Base.use(slot);
     Base.data.wood = 0;
     Base.data.keys = 2;
@@ -70,7 +72,7 @@ describe('基地材料旧档行为基线', () => {
     expect(Base.materialInfo(woodCard).kind).toBe('wood');
     expect(Base.materialAmount(woodCard)).toBe(4);
     expect(Base.keyCount()).toBe(10); // 储备 2 + 结构化钥匙 3×2 + 旧档钥匙 2×1
-    expect(Base.useStashMaterial('回复药草', true)).toMatchObject({ ok: true, qty: 2, total: 8, label: '木材' });
+    expect((await Base.useStashMaterial('回复药草', true))).toMatchObject({ ok: true, qty: 2, total: 8, label: '木材' });
     expect(Base.data.wood).toBe(8);
 
     const rewrittenWood = { ...woodCard, name: '完全改名', desc: '回复 50 点生命。' };
@@ -83,7 +85,7 @@ describe('基地材料旧档行为基线', () => {
       { card: { id: 'tt-key', name: '旧档钥匙', type: '资源', desc: '钥匙 ×2。' }, count: 1 },
     ];
     expect(Base.keyCount()).toBe(10);
-    expect(Base.useStashMaterial('完全改名', true)).toMatchObject({ ok: true, qty: 2, total: 8, label: '木材' });
+    expect((await Base.useStashMaterial('完全改名', true))).toMatchObject({ ok: true, qty: 2, total: 8, label: '木材' });
     expect(Base.data.wood).toBe(16);
   });
 
@@ -107,7 +109,7 @@ describe('基地材料旧档行为基线', () => {
     };
     expect(() => Base.materialInfo(wrongType)).toThrow(wrongType.id);
 
-    Base.use(11);
+    Base.use(4);
     Base.data.stash = [{ card: wrongType, count: 1 }];
     expect(() => Base.keyCount()).toThrow(wrongType.id);
   });

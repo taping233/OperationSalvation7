@@ -6,7 +6,7 @@ vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({
 }));
 vi.mock('../game/src/battle/view/battle.frames.js', () => ({
   attach: () => Promise.resolve(false), hide() {}, cacheStats: () => ({}),
-  play() {}, setPaused() {}, presentDeath() {}, isLiveBattleFigure: () => false,
+  play() {}, setPaused() {}, presentDeath() {}, isLiveBattleFigure: () => false, actionImpactRemaining: () => null,
 }));
 // Observe one connected button's gesture dispatch without constructing a drag session.
 vi.mock('../game/src/battle/view/battle.aim.js', async importOriginal => ({

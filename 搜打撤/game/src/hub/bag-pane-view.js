@@ -104,14 +104,16 @@ export function patchBackpackPane(UI, SDT, markup, bagZone, refreshOnly) {
   return true;
 }
 
-// A short trip to a container/confirmation should return to the same place.
+// Container, confirmation and close/reopen paths share the same presentation snapshot.
 export function captureBackpackPosition(body, name) {
   const board = body?.querySelector('.bag-board'), grid = board?.querySelector('.bag-grid');
   if (!board || !grid) return null;
   const tiles = [...grid.children];
-  const target = name ? tiles.find(tile => tile.dataset.stack === name) : document.activeElement;
+  const active = body.contains(document.activeElement) ? document.activeElement : null;
+  const target = name ? tiles.find(tile => tile.dataset.stack === name) : active;
   return { top:board.scrollTop, left:board.scrollLeft, zone:grid.dataset.zone,
-    name:target?.dataset.stack, index:tiles.indexOf(target) };
+    name:target?.dataset.stack, index:tiles.indexOf(target),
+    action:target?.dataset.act, filter:target?.dataset.f, page:target?.dataset.page, actionZone:target?.dataset.zone };
 }
 export function restoreBackpackPosition(body, state) {
   const board = body?.querySelector('.bag-board'), grid = board?.querySelector('.bag-grid');
@@ -120,6 +122,9 @@ export function restoreBackpackPosition(body, state) {
   const tiles = [...grid.children];
   const target = tiles.find(tile => state.name && tile.dataset.stack === state.name)
     || (state.index >= 0 ? tiles[Math.min(state.index, tiles.length - 1)] : null)
+    || (state.action && [...body.querySelectorAll('[data-act]')].find(node =>
+      node.dataset.act === state.action && node.dataset.f === state.filter && node.dataset.page === state.page
+      && node.dataset.zone === state.actionZone))
     || body.querySelector(`.bag-rz[data-zone="${state.zone}"]`);
   target?.focus({ preventScroll:true });
 }

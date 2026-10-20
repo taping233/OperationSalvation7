@@ -2,7 +2,9 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createBattleSelectionFlow } from '../game/src/battle/core/battle.selection-flow.js';
 import { createBattleCardInspection } from '../game/src/battle/effects/battle.card-inspection.js';
-import * as runtime from '../game/src/battle/runtime/battle.runtime.js';
+import { targetTurnCostStatus } from '../game/src/battle/effects/battle.cost-modifiers.js';
+import { createBattleRuntime } from '../game/src/battle/runtime/battle.runtime.factory.js';
+const runtime = createBattleRuntime();
 
 function setup() {
   const card = { id: 'test-spell', name: '测试法术', type: '法术', cost: 3, desc: '' };
@@ -20,7 +22,7 @@ function setup() {
     game: runtime.G, granted: [], cardOverrides: runtime.cardOverrides,
     zeroFeeUntil: runtime.zeroFeeUntil, turn: runtime.turn, consumed: runtime.consumed,
   }) });
-  const flow = createBattleSelectionFlow({
+  const flow = createBattleSelectionFlow({ runtime,
     cards, deny: vi.fn(), random01: () => 0, throwIfActionCancelled: vi.fn(),
     session: { handSelectQueue: [], choiceQueue: [] }, requestBattleRender: vi.fn(),
     findCard: inspection.findCard,
@@ -45,7 +47,7 @@ describe('自然法杖：选牌到实例费用查询', () => {
   it('选择当回合不免费，仅指定下一回合免费，过期恢复原费', () => {
     const { select, cost, card } = setup();
     select();
-    expect(runtime.zeroFeeUntil.get('selected')).toBe(3);
+    expect(targetTurnCostStatus(runtime.zeroFeeUntil.get('selected'), 3)).toBe('active');
     expect(runtime.hand).toEqual(['selected', 'same-template']);
     expect(runtime.consumed).toEqual([]);
     expect(cost('selected')).toBe(3);
@@ -63,10 +65,11 @@ describe('自然法杖：选牌到实例费用查询', () => {
     const { select, flow, cost } = setup();
     select();
     select();
-    expect([...runtime.zeroFeeUntil]).toEqual([['selected', 3]]);
+    expect([...runtime.zeroFeeUntil.keys()]).toEqual(['selected']);
+    expect(targetTurnCostStatus(runtime.zeroFeeUntil.get('selected'), 3)).toBe('active');
     runtime.set$turn(3);
     flow.pickHandSelect('selected');
-    expect(runtime.zeroFeeUntil.get('selected')).toBe(3);
+    expect(targetTurnCostStatus(runtime.zeroFeeUntil.get('selected'), 3)).toBe('active');
     expect(cost('selected')).toBe(0);
     runtime.set$turn(4);
     expect(cost('selected')).toBe(3);
@@ -92,6 +95,16 @@ describe('自然法杖：选牌到实例费用查询', () => {
     runtime.set$turn(3);
     expect(cost('selected')).toBe(0);
     runtime.resetCastOverrides();
+    expect(cost('selected')).toBe(3);
+  });
+
+  it('旧数字映射存档仍仅在指定回合免费', () => {
+    const { cost } = setup();
+    runtime.restorePilesBookkeeping(JSON.parse(JSON.stringify({ zeroFeeUntil: [['selected', 3]] })));
+    expect(cost('selected')).toBe(3);
+    runtime.set$turn(3);
+    expect(cost('selected')).toBe(0);
+    runtime.set$turn(4);
     expect(cost('selected')).toBe(3);
   });
 });

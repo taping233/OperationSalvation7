@@ -35,7 +35,10 @@ import { commands, getSnapshot, Combat, getPreviewContext } from '../core/battle
     }
     const result = previewAction({ snapshot, action: { kind: 'play-card', uid: uid || snapshot.pendingTarget?.uid, targetIndex: idx }, cardContext: context });
     let main, sub;
-    if (!result.legal || !result.damage) {
+    if (result.legal && !result.damage && result.knownEffects?.length) {
+      main = '[[icon:question]] 卡牌效果';
+      sub = [`费${result.cost}`, `基础效果：${result.knownEffects.join('；')}`, ...result.unknownEffects].join(' · ');
+    } else if (!result.legal || !result.damage) {
       main = result.legal ? '[[icon:question]] 伤害预览：无法精算' : '[[icon:cross]] 当前无法打出';
       const ruleHint = cardRuleHint(useCard, snapshot.mode);
       sub = [`费${result.cost}`, result.reasons.join(' · ') || '当前效果超出可证明范围', ruleHint].filter(Boolean).join(' · ');

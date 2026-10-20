@@ -1,0 +1,28 @@
+{
+  "stopped": [
+    {
+      "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 8139 --strictPort",
+      "pid": 5692,
+      "port": 8139,
+      "created": "2026-10-20T21:26:53.963453+08:00",
+      "host": "127.0.0.1"
+    },
+    {
+      "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 5337 --strictPort",
+      "pid": 29256,
+      "port": 5337,
+      "created": "2026-10-20T21:31:01.375075+08:00",
+      "host": "127.0.0.1"
+    },
+    {
+      "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js preview --host 127.20.10.20 --port 5338 --strictPort",
+      "pid": 39900,
+      "port": 5338,
+      "created": "2026-10-20T21:32:04.76874+08:00",
+      "host": "127.20.10.20"
+    }
+  ],
+  "remainingListeners": 0,
+  "at": "2026-10-20T13:41:36.9535200Z",
+  "otherServicesUntouched": true
+}

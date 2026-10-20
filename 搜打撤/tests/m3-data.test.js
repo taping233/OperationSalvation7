@@ -83,7 +83,7 @@ const EXPECTED_RULES = {
     version: 1,
     battle: { target: { side: 'self', area: false } },
     triggers: { onPlay: [
-      { op: 'acquire', n: 1, pool: { kind: '牌库底' }, dest: 'discover' },
+      { op: 'acquire', n: 3, pool: { kind: '牌库底' }, dest: 'discover' },
       { op: 'armor', priceOf: 'discovered' },
     ] },
   },

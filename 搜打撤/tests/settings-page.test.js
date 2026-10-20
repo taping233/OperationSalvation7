@@ -1,7 +1,8 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { installRuntimeTrace } from '../game/src/core/runtime-trace.local.js';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createGameMenuController } from './helpers/menu-controller.js';
 
-function openSettings() {
+function openSettings({ mounted = () => {} } = {}) {
   document.body.innerHTML = '<div id="overlay" hidden><h2 id="ovTitle"></h2><div id="ovBody"></div></div>';
   const overlay = document.getElementById('overlay');
   const ovBody = document.getElementById('ovBody');
@@ -9,7 +10,7 @@ function openSettings() {
   const UI = {
     el: { overlay, ovBody, ovTitle: document.getElementById('ovTitle') },
     act: (name, handler) => { acts[name] = handler; },
-    showOverlay(_title, html) { ovBody.innerHTML = html; overlay.hidden = false; },
+    showOverlay(_title, html) { ovBody.innerHTML = html; overlay.hidden = false; mounted(ovBody); },
     hideOverlay() { overlay.hidden = true; },
     log() {},
   };
@@ -19,17 +20,94 @@ function openSettings() {
     sfxMuted: false, sfxVolume: 0.6,
     setMusicMuted() {}, setMusicSource() {}, setSfxMuted() {}, setMusicVolume() {}, setSfxVolume() {}, sfx() {},
   }, Notes: { clearAll() {} }, Cards: { clearAll() {} } };
+  const clearAllSlots = vi.fn();
   const controller = createGameMenuController({
     SDT, UI, game, runtime: { syncDevVisibility() {}, rebuildNotes() {} },
-    clearAllSlots() {}, esc: value => value,
+    clearAllSlots, esc: value => value,
   });
   controller.openSettings();
-  return { acts, game, UI };
+  return { acts, game, UI, SDT, controller, clearAllSlots };
 }
 
-afterEach(() => { document.body.innerHTML = ''; localStorage.clear(); });
+afterEach(() => { document.body.innerHTML = ''; localStorage.clear(); vi.restoreAllMocks(); vi.useRealTimers(); });
 
 describe('settings page layout and controls', () => {
+  it('mounts the final hidden panels and switch wrappers without reparenting controls', () => {
+    let controls, parents, observer;
+    const { UI } = openSettings({ mounted(body) {
+      expect(body.querySelectorAll('.settings-nav [role="tab"]')).toHaveLength(5);
+      expect(body.querySelectorAll('.settings-panel')).toHaveLength(5);
+      expect(body.querySelectorAll('.settings-panel[hidden]')).toHaveLength(4);
+      expect(body.querySelectorAll('.settings-row-copy')).toHaveLength(8);
+      expect(body.querySelectorAll('input[type="checkbox"][role="switch"]')).toHaveLength(8);
+      controls = [...body.querySelectorAll('input, select')]; parents = controls.map(node => node.parentElement);
+      observer = new MutationObserver(() => {}); observer.observe(body, { childList:true, subtree:true });
+    } });
+    expect([...UI.el.ovBody.querySelectorAll('input, select')]).toEqual(controls);
+    expect(controls.map(node => node.parentElement)).toEqual(parents);
+    expect(observer.takeRecords()).toEqual([]); observer.disconnect();
+  });
+
+  it('reopens with fresh persisted, game and audio values and resets danger confirmation', () => {
+    vi.useFakeTimers();
+    const { acts, game, UI, SDT, controller, clearAllSlots } = openSettings();
+    const oldInput = UI.el.ovBody.querySelector('#setHint');
+    oldInput.checked = false; oldInput.dispatchEvent(new Event('change', { bubbles:true }));
+    acts.wipeSave(); expect(clearAllSlots).not.toHaveBeenCalled();
+    expect(UI.el.ovBody.querySelector('[data-act="wipeSave"]').dataset.confirm).toBe('1');
+    acts.closeSettings();
+    localStorage.setItem('sdt-banner','0'); localStorage.setItem('sdt-reduce-shake','1');
+    game.toggles.index = true; game.devMode = true; SDT.Sound.musicMuted = true; SDT.Sound.musicVolume = .25;
+    controller.openSettings();
+    expect(UI.el.ovBody.querySelector('#setHint')).not.toBe(oldInput);
+    for (const id of ['setHint','setBanner','setShake','setMusic']) expect(UI.el.ovBody.querySelector('#'+id).checked).toBe(false);
+    for (const id of ['setIndex','setDev']) expect(UI.el.ovBody.querySelector('#'+id).checked).toBe(true);
+    expect(UI.el.ovBody.querySelector('#setMusicVol').value).toBe('25');
+    expect(UI.el.ovBody.querySelector('[data-act="wipeSave"]').dataset.confirm).toBeUndefined();
+    acts.wipeSave(); expect(clearAllSlots).not.toHaveBeenCalled();
+    acts.wipeSave(); expect(clearAllSlots).toHaveBeenCalledOnce();
+    acts.closeSettings(); expect(game.state).toBe('title');
+  });
+
+  it('keeps Home/End/wrap focus, per-category scroll, and control identity', () => {
+    const { UI } = openSettings(); const body = UI.el.ovBody;
+    const tabs = body.querySelectorAll('[role="tab"]'), content = body.querySelector('.settings-content');
+    const input = body.querySelector('#setIndex'); content.scrollTop = 61;
+    tabs[0].dispatchEvent(new KeyboardEvent('keydown', { key:'End', bubbles:true }));
+    expect(document.activeElement).toBe(tabs[4]); expect(content.scrollTop).toBe(0);
+    content.scrollTop = 23;
+    tabs[4].dispatchEvent(new KeyboardEvent('keydown', { key:'ArrowDown', bubbles:true }));
+    expect(document.activeElement).toBe(tabs[0]); expect(content.scrollTop).toBe(61);
+    tabs[0].dispatchEvent(new KeyboardEvent('keydown', { key:'ArrowUp', bubbles:true }));
+    expect(document.activeElement).toBe(tabs[4]); expect(content.scrollTop).toBe(23);
+    tabs[4].dispatchEvent(new KeyboardEvent('keydown', { key:'Home', bubbles:true }));
+    expect(document.activeElement).toBe(tabs[0]); expect(body.querySelector('#setIndex')).toBe(input);
+  });
+
+  it('reads both marker dimensions before either marker style write', () => {
+    const { UI } = openSettings(); const tab = UI.el.ovBody.querySelector('#settings-tab-display');
+    const order = [];
+    Object.defineProperty(tab, 'offsetTop', { get() { order.push('top'); return 84; } });
+    Object.defineProperty(tab, 'offsetHeight', { get() { order.push('height'); return 74; } });
+    const style = UI.el.ovBody.querySelector('.settings-nav').style;
+    const original = style.setProperty.bind(style);
+    vi.spyOn(style, 'setProperty').mockImplementation((name, ...args) => { order.push(name); return original(name,...args); });
+    tab.click();
+    expect(order).toEqual(['top','height','--settings-marker-top','--settings-marker-height']);
+  });
+
+  it('records actual overlay and navigation boundaries once per open', () => {
+    const { UI } = openSettings();
+    window.history.replaceState({}, '', '/?runtimeTrace=1');
+    const trace = installRuntimeTrace();
+    try {
+      UI.el.ovBody.querySelector('[data-act="closeSettings"]').click();
+      openSettings();
+      expect(trace.read().records.filter(row => row.kind === 'stage').map(row => row.stage))
+        .toEqual(['settings-overlay-sync', 'settings-navigation-sync']);
+    } finally { trace.destroy(); window.history.replaceState({}, '', '/'); }
+  });
+
   it('groups everyday, display, audio, records, credits and dangerous actions while retaining control hooks', () => {
     const { acts, UI } = openSettings();
     const root = UI.el.ovBody.querySelector('.settings-page');

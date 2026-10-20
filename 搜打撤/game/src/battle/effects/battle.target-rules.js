@@ -1,8 +1,14 @@
 import { HAND_COST_PATTERNS, HAND_COST_CN_NUM } from './hand-cost-patterns.js';
+import { ownsBuiltinExecutionDomain } from '../../cards/builtin-card-execution.js';
+import { triggerExecutionPlan } from '../../cards/card-execution-plan.js';
+
+const nativePlayOps = card => {
+  const ops = triggerExecutionPlan(card, 'onPlay').ops;
+  return Array.isArray(ops) ? ops : [];
+};
 
 const AOE_PATTERN = /所有敌人|群体|全体/;
 const SELF_TARGET_PATTERN = /回复\s*\d+\s*(?:点\s*生命|点?血)|净化|获得\s*\d+\s*点?\s*护甲|\+\s*\d+\s*甲|获得\s*\d+\s*点?\s*护盾|所受伤害降为/;
-const DECK_ONLY_PATTERN = /洗入|置入牌库|放入牌库|牌库底|牌库上限/;
 // 「对敌方施加的效果」词条（2026-09-09 老板 #7）：招式里确实作用于敌方的才需要指向敌人
 const ENEMY_EFFECT_PATTERN = new RegExp([
   '造成\\s*\\d+(?:\\s*[-–~至]\\s*\\d+)?\\s*点',
@@ -20,11 +26,12 @@ const ENEMY_EFFECT_PATTERN = new RegExp([
 ].join('|'));
 
 function isAreaEffect(card) {
-  if (card?.id === 'cc-rot-seed') return false;
   const battle = card && card.rules && card.rules.battle;
   if (battle && battle.target && Object.prototype.hasOwnProperty.call(battle.target, 'area')) {
     return !!battle.target.area;
   }
+  if (ownsBuiltinExecutionDomain(card)) return nativePlayOps(card).some(operation => operation.target === 'allEnemies');
+  if (card?.id === 'cc-rot-seed') return false;
   return AOE_PATTERN.test(String(card.desc || ''));
 }
 
@@ -45,12 +52,20 @@ function isPureAreaEffect(card) {
 }
 
 function targetSideFor(card, damageTypes) {
-  if (card?.id === 'cc-rot-seed') return 'enemy';
   const desc = String(card.desc || '');
   const battle = card && card.rules && card.rules.battle;
   if (battle && battle.target && Object.prototype.hasOwnProperty.call(battle.target, 'side')) {
     return battle.target.side ?? null;
   }
+  if (ownsBuiltinExecutionDomain(card)) {
+    if (card.type === '装备') return 'self';
+    const ops = nativePlayOps(card);
+    if (ops.some(operation => ['damage', 'stealAtk', 'execute', 'foeFight', 'recruitEnemy', 'markEnemy'].includes(operation.op)
+      || operation.op === 'curse' && operation.target !== 'self')) return 'enemy';
+    if (ops.some(operation => ['heal', 'armor', 'cleanse'].includes(operation.op))) return 'self';
+    return null;
+  }
+  if (card?.id === 'cc-rot-seed') return 'enemy';
   // 需求 #18（2026-09-09）：未声明结构化目标的旧装备仍指向自己。
   if (card.type === '装备') return 'self';
   const isMove = damageTypes.includes(card.type);
@@ -84,12 +99,13 @@ function unplayableReasonFor(card, mode, ctx) {
   if (card.type === '生物') return '生物卡是敌人图鉴，记录敌人信息，无法打出';
   const battle = card && card.rules && card.rules.battle;
   // 原始复制卡仅在手牌内响应新打出的武术；变形后 findCard 返回被复制卡，自动解除此门。
-  if (card.id === 'tt7-imitate' || battle?.hosted?.includes('imitate')) {
+  if (battle?.handTransform || (!ownsBuiltinExecutionDomain(card) && card.id === 'tt7-imitate') || battle?.hosted?.includes('imitate')) {
     return '先打出一张武术牌，使本牌变形';
   }
   // 封印之牌（受缚之残影/封印肢体1-4/化形后的深渊主宰，2026-09-16 定版）：
   // 抽到无效果也无法打出——集齐 5 张封印之牌后由 battle.core 破封化形
-  const structuredRequirements = battle && Array.isArray(battle.requirements) ? battle.requirements : null;
+  const structuredRequirements = battle && Array.isArray(battle.requirements) ? battle.requirements
+    : ownsBuiltinExecutionDomain(card) ? [] : null;
   if (structuredRequirements
     ? structuredRequirements.some(rule => rule.kind === 'unplayable')
     : /无法打出/.test(String(card.desc || ''))) {
@@ -97,12 +113,7 @@ function unplayableReasonFor(card, mode, ctx) {
   }
   if (mode === 'normal' && card.type === '能力卡') return '能力卡只能在对 BOSS 战时使用（普通战无法使用能力卡）';
   if (mode === 'boss' && card.type === '道具') return '道具卡只能在普通战斗中使用（BOSS 战牌库不含道具）';
-  const deckOnly = structuredRequirements
-    ? structuredRequirements.some(rule => rule.kind === 'deckOnly')
-    : DECK_ONLY_PATTERN.test(String(card.desc || ''));
-  if (mode === 'normal' && deckOnly) {
-    return '「牌库」词条只有对战 BOSS 时生效——普通战斗没有牌库与墓地，无法打出';
-  }
+  // Both battle modes have a real draw pile; deckOnly is satisfied in either.
   // 手牌代价不足（快意恩仇「消耗 2 张初始攻击」等）：整张卡不可打出，避免白消耗一张牌
   if (ctx && ctx.handCards) {
     const structuredCost = structuredRequirements && structuredRequirements.find(rule => rule.kind === 'handCards');

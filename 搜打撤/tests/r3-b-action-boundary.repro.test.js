@@ -107,7 +107,7 @@ describe('R3-b 同 UID 出牌边界', () => {
     leave();
   });
 
-  it('BOSS 弃牌洗回并重抽后，同 UID 可合法再次使用', async () => {
+  it('BOSS 空库回合不自动取回已消耗 UID，不能直接再次打出', async () => {
     const { uid } = setup('starter-attack', 'boss');
     const once = await playAndSettle(uid);
     expect(once.discard).toContain(uid);
@@ -115,10 +115,10 @@ describe('R3-b 同 UID 出牌边界', () => {
     BattleSession.commands.endTurn();
     const redrawn = await settle();
     expect(redrawn.phase).toBe('player');
-    expect(redrawn.hand).toContain(uid);
+    expect(redrawn.hand).not.toContain(uid);
     const twice = await playAndSettle(uid);
-    expect(twice.foes[0].hp).toBe(42);
-    expect(playEvents()[0].receipt).toEqual({ battleToken: twice.battleToken, actionSeq: 2 });
+    expect(twice.foes[0].hp).toBe(46);
+    expect(playEvents()).toHaveLength(0);
     leave();
   });
 

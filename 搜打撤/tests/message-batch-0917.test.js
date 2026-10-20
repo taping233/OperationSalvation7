@@ -119,7 +119,8 @@ describe('血毒双镖两次目标（2026-09-16 留言）', () => {
     expect(s2.dartPending).toBe(false);
     expect((s2.foes[0].status.bleed || 0), '首段应给 0 号附流血').toBeGreaterThan(0);
     expect((s2.foes[1].status.poison || 0), '二段应给 1 号附中毒').toBeGreaterThan(0);
-    expect(g.logs.some(l => l.includes('第二镖'))).toBe(true);
+    expect(s2.foes[0].maxHp - s2.foes[0].hp).toBe(g.atk + bp.dmg);
+    expect(s2.foes[1].maxHp - s2.foes[1].hp).toBe(g.atk + bp.dmg);
     BattleSession.commands.flee();
     await drain(20);
   });

@@ -3,7 +3,7 @@ import { bagSlots } from '../game/src/hub/game.bag.bridge.js';
 import { openRewardCapacityOrganizer } from '../game/src/ui/reward-capacity-organizer.js';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
-const H = vi.hoisted(() => ({ game: {}, cards: [], saves: [], uid: 0, slot: null, narrative: async () => null, random: () => 0.9 }));
+const H = vi.hoisted(() => ({ game: {}, cards: [], saves: [], saveFailure:null, uid: 0, slot: null, narrative: async () => null, random: () => 0.9 }));
 vi.mock('../game/src/core/random.js', async importOriginal => {
   const actual = await importOriginal();
   return { ...actual, Random: { ...actual.Random, random: (...args) => H.random(...args) } };
@@ -11,7 +11,11 @@ vi.mock('../game/src/core/random.js', async importOriginal => {
 vi.mock('../game/src/run/game.session.js', () => ({
   game: H.game, MAP: { rules: { fireHeal:10, fireClassCardChance:1, bossDeckSize:15, starterSha:5, battleStartDraw:5, battleTurnDraw:1, battleHandMax:8 }, monsters:{}, altar:{ bosses:[] } }, MODES: {},
   bagCap: () => 9, usedSlots: () => 0, newUid: () => `u${++H.uid}`, pick: a => a[0],
-  saveGame: () => { H.saves.push(JSON.parse(JSON.stringify(H.game))); return true; },
+  saveGame: () => {
+    if (H.saveFailure === 'throw') throw new Error('isolated resource save failure');
+    if (H.saveFailure === 'false') return false;
+    H.saves.push(JSON.parse(JSON.stringify(H.game))); return true;
+  },
   scaledEnemy: a => a, getActiveSlot: () => H.slot, curLayer: () => H.game.layerData[H.game.layerIdx],
   cellCenter: () => ({}), markSeen() {}, modeCfg: () => ({}), gainCoins: n => H.game.coins += n,
   weighted: a => a[0], enterLayer() {}, exitToTitle() {},
@@ -51,7 +55,7 @@ beforeEach(() => {
     discardOne:() => false,
   });
   bagSlots.showBackpack = () => UI.showOverlay('背包', '<main>背包</main>', 'page');
-  H.saves = []; H.uid = 0; H.slot = null; H.narrative = async () => null;
+  H.saves = []; H.saveFailure = null; H.uid = 0; H.slot = null; H.random = () => 0.9; H.narrative = async () => null;
   Object.assign(H.game, { seed: 7, state: 'idle', layerIdx: 0, trackPos: 1, hp: 1, maxHp: 35, visited: {}, ownedCards: [], usedPocket: [], myClass: '武', runActive: true, coins: 18, fragments: 0,
     altarActivated:false, altarRewardPending:false, altarItemSacrificed:false, nodeRewards:{}, entrySupply:null,
     discoveredPairs: new Set(), layerData: [{ logical: [{ def: { type: 'entrance' } }, { def: { type: 'event' } }] }],
@@ -69,6 +73,35 @@ async function openEvent(id, rewards = []) {
 }
 function returnFromBag() { UI.hideOverlay(); const hook = takeBagReturnHook(); if (hook) hook(); else H.game.state = 'idle'; }
 const potionCards = [1, 2, 3].map(i => ({ id: `p${i}`, name: `药水${i}`, type: '道具', rarity: '古朴' }));
+
+describe('物资格保存失败回执与记录身份', () => {
+  const openResourceCheckpoint = () => {
+    H.random = () => 0;
+    H.cards = [1,2].map(i => ({ id:`resource-checkpoint-${i}`, name:`检查点物资${i}`, type:'资源', rarity:'古朴' }));
+    H.game.layerData[0].logical[1].def.type = 'resource';
+    flow.reenterCell();
+  };
+  it.each(['false','throw'])('保存%s时已领取不重发，退出保留页面，恢复后原位保存再离开', failure => {
+    H.saveFailure = failure; openResourceCheckpoint();
+    const take = UI._acts.resTake;
+    expect(() => take({i:'0'})).not.toThrow();
+    expect(H.game.ownedCards).toHaveLength(1); expect(H.game.nodeRewards['0,1'].taken).toBe(0);
+    expect(UI.el.ovBody.textContent).toContain('尚未保存成功');
+    expect(UI._acts.resSkip()).toBe(false); expect(H.game.state).toBe('modal');
+    expect(UI.el.overlay.hidden).toBe(false);
+    H.saveFailure = null; UI._acts.resRetrySave();
+    expect(H.saves.at(-1).nodeRewards['0,1'].taken).toBe(0);
+    expect(H.saves.at(-1).ownedCards).toHaveLength(1);
+    expect(UI._acts.resSkip()).toBe(true); expect(H.game.state).toBe('idle');
+    take({i:'0'}); expect(H.game.ownedCards).toHaveLength(1);
+  });
+  it('同坐标资源记录替换后，旧页回调不能领取替换记录的候选', () => {
+    openResourceCheckpoint(); const take = UI._acts.resTake;
+    H.game.nodeRewards['0,1'] = { ...H.game.nodeRewards['0,1'] };
+    take({i:'0'}); expect(H.game.ownedCards).toHaveLength(0);
+    expect(H.game.nodeRewards['0,1'].taken).toBeNull();
+  });
+});
 
 it('动力锤委托与领锤互斥，委托随已消费节点保存且旧按钮不重复接受', async () => {
   const hammer={id:'cmtn0xt0zr7',name:'闪金之锤',type:'装备',rarity:'传说'};
@@ -585,6 +618,11 @@ describe('资源奖励公共领取体验', () => {
   it('详情复用择一提示和动作映射，满包只整理，已领取不再提供领取按钮', () => {
     UI.showCardZoom = vi.fn();
     openResource(); UI._acts.resRead({i:'0'});
+    const name = UI.showCardZoom.mock.lastCall[0].name;
+    expect(UI.el.ovBody.querySelector('[data-act="resTake"][data-i="0"]').getAttribute('aria-label')).toBe(`选择这张：${name}`);
+    const footer = document.createElement('div');
+    footer.innerHTML = UI.showCardZoom.mock.lastCall[1].footer;
+    expect(footer.querySelector('button').getAttribute('aria-label')).toBe(`选择这张：${name}`);
     let options = UI.showCardZoom.mock.lastCall[1];
     expect(options.footer).toContain('其余选项将放弃');
     expect(options.footer).toContain('data-act="resTake"');
@@ -593,6 +631,8 @@ describe('资源奖励公共领取体验', () => {
     options = UI.showCardZoom.mock.lastCall[1];
     expect(options.footer).toContain('其余选项将放弃');
     expect(options.footer).toContain('data-act="resBag"');
+    footer.innerHTML = options.footer;
+    expect(footer.querySelector('button').getAttribute('aria-label')).toBe(`整理背包：${name}`);
     expect(options.footer).not.toContain('data-act="resTake"');
     H.game.canReceiveCard = () => true; UI._acts.resTake({i:'0'}); UI._acts.resRead({i:'1'});
     expect(UI.showCardZoom.mock.lastCall[1].footer).toBe('');

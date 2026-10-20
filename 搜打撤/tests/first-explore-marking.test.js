@@ -4,6 +4,10 @@
  *   ③ 步数统计（game.turn）照常累加，保留作展示口径。
  * 台架同 node-retrigger.test.js：全量 boot + reduce-motion 让 moveTo 同步完成。 */
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+import { releaseMainPage, trackMainPagePreparation } from './helpers/main-lifecycle.js';
+
+installImmediateWebLocks();
 
 // 故意恒真：仅给下方 canvas/存储补桩一个块级作用域（lint 静音，不改逻辑）
 // eslint-disable-next-line no-constant-condition
@@ -50,6 +54,7 @@ import { resolve } from 'node:path';
   document.body.innerHTML = body;
 }
 await import('../game/src/main.js');
+trackMainPagePreparation();
 document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 await new Promise(r => setTimeout(r, 0));
 
@@ -102,7 +107,7 @@ describe('moveTo 首探打标（SYS-01 撤离经验锚定首次有效探索）',
     // skipClassChoice：本用例只测移动打标，选角页是干扰项（node-retrigger 同款，防 500ms 迟到定时器假红）
     let found = null;
     for (let reroll = 0; reroll < 6 && !found; reroll++) {
-      newRun(20261003 + reroll, 'standard', { skipClassChoice: true });
+      await newRun(20261003 + reroll, 'standard', { skipClassChoice: true });
       await tick(50);
       game.myClass = '战士';
       game.characterId = 'heixiang';
@@ -120,7 +125,7 @@ describe('moveTo 首探打标（SYS-01 撤离经验锚定首次有效探索）',
   });
 
   // 用例内的预热/加载任务可能排 500ms 级 setTimeout；排水防 teardown 后迟到触发假红（node-retrigger 同款）
-  afterAll(async () => { await tick(700); });
+  afterAll(async () => { await tick(700); await releaseMainPage(); });
 
   it('起点不计首探；前进每格首踏入入账；20 次安全往返不涨；新格仍入账', async () => {
     const { li, chain } = ctx;

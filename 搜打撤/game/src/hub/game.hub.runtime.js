@@ -95,7 +95,10 @@ preparationFeature = createHubPreparationAdapter({
     hubTab = tab === 'home' ? 'deploy' : (tab || 'deploy');
     SDT.Sound.music('base');   // 基地氛围
     SDT.Art.hydrateSelectedSkins(SDT.Base.data.appearance?.selectedSkins);
-    SDT.Meta.checkUnlocks();   // 进基地时补播新解锁的成就
+    const openedBase = SDT.Base, openedSlot = openedBase.slot;
+    Promise.resolve(SDT.Meta.checkUnlocks()).catch(() => {
+      if (SDT.Base === openedBase && openedBase.slot === openedSlot) UI.log('成就进度检查未完成，可重新进入基地重试。', 'warn');
+    });
     renderHub();
   }
 
@@ -167,7 +170,15 @@ preparationFeature = createHubPreparationAdapter({
       if (!currentHub()) return;
       return action(...args);
     });
-    const hubUI = { act: hubAct, showCardZoom: (...args) => UI.showCardZoom(...args), log: (...args) => UI.log(...args) };
+    let writing = false;
+    const hubWrite = (name, action) => hubAct(name, async (...args) => {
+      if (writing) return false;
+      writing = true;
+      try { return await action(...args); }
+      catch { if (currentHub()) UI.log('基地操作未保存，请重试。', 'warn'); return false; }
+      finally { writing = false; }
+    });
+    const hubUI = { act: hubAct, isCurrent: currentHub, showCardZoom: (...args) => UI.showCardZoom(...args), log: (...args) => UI.log(...args) };
     const page = document.querySelector('#hubMain .hub-page');
     if (page) {
       page.scrollTop = hubScroll.get(viewKey) || 0;
@@ -178,12 +189,13 @@ preparationFeature = createHubPreparationAdapter({
     zoomFocusObserver?.disconnect();
     zoomFocusObserver = restoreHubFocus(viewKey, hubFocus);
     // 局外商店购买（2026-09-16 留言「局外商店提供基础卡牌」）：储备币直购，货入卡牌仓库
-    hubAct('shopBuy', (d) => {
+    hubWrite('shopBuy', async (d) => {
       const g = HUB_SHOP_GOODS[+d.i];
       if (!g) return;
       const B = SDT.Base;
       const card = g.material ? null : hubShopGoodsCard(g);
-      const result = B.purchase({ price: g.price, material: g.material, card });
+      const result = await B.purchase({ price: g.price, material: g.material, card });
+      if (!currentHub()) return false;
       if (!result.ok) {
         UI.log(result.why === 'poor' ? '[[icon:coin]] 储备币不足，无法购买'
           : result.why === 'full' ? '[[icon:archive]] 仓库已满，无法入库'
@@ -280,9 +292,10 @@ preparationFeature = createHubPreparationAdapter({
       UI.log(result.value.assetFallback ? '皮肤选择已保存；当前素材缺失，暂用默认立绘。' : '人物皮肤已保存。', result.value.assetFallback ? 'warn' : 'ok');
       renderHub();
     });
-    hubAct('selMode', (d) => {
+    hubWrite('selMode', async (d) => {
       const previousMode = B.data.selMode;
-      const result = B.selectMode(d.mode);
+      const result = await B.selectMode(d.mode);
+      if (!currentHub()) return false;
       if (!result.ok) {
         UI.log(result.code === 'INVALID_MODE' ? '玩法选项无效，未保存。' : '玩法保存失败，请稍后重试。', 'warn');
         renderHub();
@@ -302,25 +315,32 @@ preparationFeature = createHubPreparationAdapter({
         UI.log(`[[icon:key]] 钥匙不足（${n}/${B.KEY_NEEDED || 10}）——在棋盘的钥匙格收集更多钥匙吧`, 'dim');
       }
     });
-    hubAct('upBag', () => {
-      if (!B.upgradeBag()) return;
+    hubWrite('upBag', async () => {
+      const upgraded = await B.upgradeBag();
+      if (!currentHub()) return false;
+      if (!upgraded) { UI.log('背包扩建未保存或材料不足，请重试。', 'warn'); return false; }
       notice(`背包 ${B.bagCap() - 1} → ${B.bagCap()} 格 · 木材 −${MAP.rules.bagUpgradeWood}`);
       Sfx.ding();
       UI.log(`[[icon:bag]] 背包扩建完成：容量 <b>${B.bagCap()}</b> 格（- [[icon:wood]]×${MAP.rules.bagUpgradeWood}）`, 'ok');
-      SDT.Meta.checkUnlocks();
+      await SDT.Meta.checkUnlocks();
+      if (!currentHub()) return false;
       renderHub();
     });
-    hubAct('upPet', d => upgradePetFromPersonnel({ base:SDT.Base, id:d.id, notice, sound:Sfx, ui:UI, meta:SDT.Meta, refresh:renderHub }));
-    hubAct('selPet', (d) => {
-      if (!SDT.Base.setPet(d.id)) return;
+    hubWrite('upPet', d => upgradePetFromPersonnel({ base:SDT.Base, id:d.id, notice, sound:Sfx, ui:UI, meta:SDT.Meta, refresh:renderHub, isCurrent:currentHub }));
+    hubWrite('selPet', async (d) => {
+      const selected = await B.setPet(d.id);
+      if (!currentHub()) return false;
+      if (!selected) { UI.log('伙伴选择未保存，请重试。', 'warn'); return false; }
       const pet = SDT.Base.petById(d.id);
       notice(`已携带${pet.name} · 安全格 ${SDT.Base.safeCap()} 格`);
       Sfx.ding();
       UI.log(`[[icon:paw]] 已携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc)} · 安全格 <b>${SDT.Base.safeCap()}</b> 格`, 'ok');
       renderHub();
     });
-    hubAct('upStash', () => {
-      if (!B.upgradeStash()) return;
+    hubWrite('upStash', async () => {
+      const upgraded = await B.upgradeStash();
+      if (!currentHub()) return false;
+      if (!upgraded) { UI.log('仓库扩建未保存或材料不足，请重试。', 'warn'); return false; }
       notice(`仓库扩建完成 · ${B.stashCap()} 张 · 木材 −${MAP.rules.stashUpgradeWood}`);
       Sfx.ding();
       UI.log(`[[icon:archive]] 仓库扩建完成：容量 <b>${B.stashCap()}</b> 张（- [[icon:wood]]×${MAP.rules.stashUpgradeWood}）`, 'ok');
@@ -328,7 +348,7 @@ preparationFeature = createHubPreparationAdapter({
     });
     hubAct('stashItem', (d) => openStashCardView(+d.i));   // 点卡 = 大卡特写操作台：看牌 + 卖出/收藏/使用/孵化都在页脚（2026-10-06 老板二次改版）
     hubAct('rawItem', (d) => openRawItem(d.kind, { from:document.querySelector(`[data-act="rawItem"][data-kind="${d.kind}"]`) }));
-    hubAct('restoreCard', (d) => {
+    hubWrite('restoreCard', async (d) => {
       const candidates = d.stackKey ? B.data.pocket.filter(stack => stackKeyOf(stack) === d.stackKey)
         : d.name ? B.data.pocket.filter(stack => stack.card.name === d.name) : [B.data.pocket[+d.i]].filter(Boolean);
       if (candidates.length !== 1) { UI.log('消耗区库存已变化，请重新打开详情', 'warn'); return; }
@@ -337,20 +357,23 @@ preparationFeature = createHubPreparationAdapter({
       if (!stack) return;
       if (d.count && Number(d.count) !== (stack.count || 1)) { UI.log('消耗区数量已变化，请重新打开详情', 'warn'); return; }
       document.getElementById('cardZoom')?._closeCardZoom?.(true);
-      const r = B.restore(index);
+      const r = await B.restore(index);
+      if (!currentHub()) return false;
       if (r === true) { Sfx.ding(); UI.log(`[[icon:key]] 消耗 <b>${B.pocketKeyCost(stack)}</b> 把钥匙，卡牌已复原，回到卡牌仓库`, 'ok'); }
       else if (r === 'sha') UI.log('[[icon:cards]] 初始牌「初始攻击」无需入库——每局自动携带，已直接消耗', 'dim');
       else if (r === 'full') UI.log(`[[icon:archive]] 仓库容量不足（${B.stashUsed()}/${B.stashCap()} 张），先卖出或升级仓库`, 'warn');
       else if (r && r.why === 'nokey') UI.log(`[[icon:key]] 钥匙不足：复原这堆卡牌需要 <b>${r.cost}</b> 把钥匙（现有 ${B.keyCount ? B.keyCount() : 0}）——可在仓库把钥匙材料卡「使用」折入储备`, 'warn');
+      else if (!r) UI.log('卡牌复原未保存，请重试。', 'warn');
       if (r) renderHub();
     });
-    hubAct('claimAch', (d) => {
-      const r = M.claim(d.id);
+    hubWrite('claimAch', async (d) => {
+      const r = await M.claim(d.id);
+      if (!currentHub()) return false;
       if (r.ok) { notice('成就奖励已入账'); Sfx.ding(); renderHub(); }
       // meta.claim 失败时带 msg（仓库满/存档写失败）——静默丢弃会让「领取」看起来像坏按钮
       else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');
     });
-    hubAct('selBack', (d) => {
+    hubWrite('selBack', async (d) => {
       const B2 = SDT.Base;
       if (!B2.isBackUnlocked(d.id)) {
         const bd = (SDT.Cards.CARD_BACKS || []).find(b => b.id === d.id);
@@ -358,14 +381,17 @@ preparationFeature = createHubPreparationAdapter({
         return;
       }
       if (B2.backSel() === d.id) return;
-      if (!B2.setBack(d.id)) return;
+      const selected = await B2.setBack(d.id);
+      if (!currentHub()) return false;
+      if (!selected) { UI.log('卡背选择未保存，请重试。', 'warn'); return false; }
       const bd = (SDT.Cards.CARD_BACKS || []).find(b => b.id === d.id);
       Sfx.ding();
       UI.log(`[[icon:cards]] 已装备卡背【<b>${bd ? bd.name : d.id}</b>】——背包翻面与牌库堆即刻生效`, 'ok');
       if (!refreshArchiveBacks({ base:B2, meta:M, cards:SDT.Cards })) renderHub();
     });
-    hubAct('claimColl', (d) => {
-      const r = M.claimColl(d.id);
+    hubWrite('claimColl', async (d) => {
+      const r = await M.claimColl(d.id);
+      if (!currentHub()) return false;
       if (r.ok) { notice('收藏奖励已入账'); Sfx.ding(); renderHub(); }
       else if (r && r.why === 'full') UI.log(`[[icon:archive]] ${r.msg}`, 'warn');
       else if (r && r.msg) UI.log(`[[icon:cross]] ${r.msg}`, 'warn');

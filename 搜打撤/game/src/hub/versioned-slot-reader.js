@@ -23,6 +23,7 @@ export function createVersionedSlotReader({
   rejectArrays,       // 顶层是否拒绝数组
   postMigrate = null, // 迁移后的域内兜底（run: migrateRunCharacter；base 无）
   toPublic = null,    // 出口变换（run/base: 隔离克隆；默认直返供独立消费者选择）
+  backupRaw = null,   // Base injects its asynchronous, slot-locked corrupt-backup writer.
 }) {
   const cache = new Map();                 // index -> { raw, value }
   const corruptBackups = new Map();        // index -> { raw, backedUp }; 仅本次坏档备份结果
@@ -52,7 +53,20 @@ export function createVersionedSlotReader({
       return null;
     }
     let backedUp = false;
-    try { localStorage.setItem(corruptKeyFor(index), raw); backedUp = true; } catch { /* 原键保留 */ }
+    try {
+      if (backupRaw) {
+        const result = backupRaw(index, raw);
+        if (result && typeof result.then === 'function') {
+          corruptBackups.set(index, { raw, backedUp: false });
+          result.then(ok => {
+            if (corruptBackups.get(index)?.raw === raw) corruptBackups.set(index, { raw, backedUp: ok === true });
+          }).catch(() => {});
+          console.warn(`${logTag} 档位 ${index} 存档数据损坏，原档已保留，备份等待存档锁`);
+          return null;
+        }
+        backedUp = result === true;
+      } else { localStorage.setItem(corruptKeyFor(index), raw); backedUp = true; }
+    } catch { /* 原键保留 */ }
     corruptBackups.set(index, { raw, backedUp });
     console.warn(`${logTag} 档位 ${index} 存档数据损坏，${backedUp ? `原串已备份到 ${corruptKeyFor(index)}` : '备份失败，原档已保留'}`);
     return null;

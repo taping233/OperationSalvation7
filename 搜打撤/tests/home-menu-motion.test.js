@@ -45,3 +45,34 @@ it('returns the visible homepage after the base clears its original menu route',
   await vi.runOnlyPendingTimersAsync();
   expect(title.dataset.homePhase).toBe('rest');
 });
+
+it.each([false, true])('a cancelled cold entry permits the next homepage action (observer flushed: %s)', async flushObserver => {
+  vi.useFakeTimers();
+  vi.resetModules();
+  document.body.innerHTML = '<div id="title"><button id="btnCardLib">Library</button><button id="mStart">Start</button></div>'
+    + '<div id="overlay" hidden><div id="ovBody"></div></div>';
+  await import('../game/src/ui/home-menu-motion.js');
+  const title = document.getElementById('title');
+  const cover = document.createElement('section');
+  cover.className = 'page-loading';
+  document.getElementById('btnCardLib').addEventListener('click', () => document.body.appendChild(cover));
+  const start = vi.fn(() => {
+    document.getElementById('overlay').hidden = false;
+    document.getElementById('ovBody').innerHTML = '<section class="slot-page">Slots</section>';
+    document.dispatchEvent(new CustomEvent('sdt-overlay-mode', { detail: 'page' }));
+  });
+  document.getElementById('mStart').addEventListener('click', start);
+  document.getElementById('btnCardLib').click();
+  await Promise.resolve();
+  expect(title.dataset.homePhase).toBe('out');
+  document.getElementById('mStart').click();
+  expect(start).not.toHaveBeenCalled();
+  cover.remove();
+  if (flushObserver) {
+    await Promise.resolve();
+    expect(title.dataset.homePhase).toBe('in');
+  }
+  document.getElementById('mStart').click();
+  expect(start).toHaveBeenCalledOnce();
+  expect(document.querySelector('.slot-page')).not.toBeNull();
+});

@@ -1,0 +1,135 @@
+{
+  "inputs": [
+    {
+      "file": "game/dev/feedback-1018-review.js",
+      "sha256": "dbabb51e681535b64efa98216cdbbf77e3ee35913983c8b6ec8e11c3ccf339de"
+    },
+    {
+      "file": "game/src/run/chests.js",
+      "sha256": "6b619405a2dd460c17f1da9baea3b72ec547a698e02c09c17c8d1fc908dc1af8"
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "sha256": "8d1bd3a7cc849e655af7819584bb74520207c1036d0a9b14cea9b2838cc045b1"
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "sha256": "05ce35e529825750a5b5533df9c0a1e36991c11a3a53892b003b9cf9ab7d5771"
+    },
+    {
+      "file": "game/src/hub/game.storage.js",
+      "sha256": "129427f83d7e13d51b07cc6baa65568584aac15a6b72ef79a4c37c7a4def001f"
+    },
+    {
+      "file": "game/src/run/chest-reward-save.js",
+      "sha256": "035f2dc13caab2176ef2463c6334c9ab308848e1add24766f4a0545242bb345a"
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "sha256": "601910c257052f30360b8eb9b54d024515dc901ce9c03db778d09744862f38a3"
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "sha256": "cd567434055fef8a37dc7926f31a42f4a246d75b23f68d9456f3cc66176ada9e"
+    },
+    {
+      "file": "game/src/hub/game.bag.settle.js",
+      "sha256": "c9f43149cdefaa516ac724f9dba877fe282d0905e9701d63a848d2d535de1681"
+    }
+  ],
+  "servedCopy": "C:\\Users\\太平\\AppData\\Local\\Temp\\sdt-reward-refresh-1020-XzsHVG",
+  "matchesPriorBatch": [
+    {
+      "file": "game/src/run/chests.js",
+      "sha256": "6b619405a2dd460c17f1da9baea3b72ec547a698e02c09c17c8d1fc908dc1af8",
+      "matchesPriorBatch": true
+    },
+    {
+      "file": "game/src/hub/game.bag.js",
+      "sha256": "8d1bd3a7cc849e655af7819584bb74520207c1036d0a9b14cea9b2838cc045b1",
+      "matchesPriorBatch": true
+    },
+    {
+      "file": "game/src/run/game.session.js",
+      "sha256": "05ce35e529825750a5b5533df9c0a1e36991c11a3a53892b003b9cf9ab7d5771",
+      "matchesPriorBatch": true
+    },
+    {
+      "file": "game/src/hub/game.storage.js",
+      "sha256": "129427f83d7e13d51b07cc6baa65568584aac15a6b72ef79a4c37c7a4def001f",
+      "matchesPriorBatch": true
+    },
+    {
+      "file": "game/src/run/chest-reward-save.js",
+      "sha256": "035f2dc13caab2176ef2463c6334c9ab308848e1add24766f4a0545242bb345a",
+      "matchesPriorBatch": true
+    },
+    {
+      "file": "game/src/run/game.run.scenes.js",
+      "sha256": "601910c257052f30360b8eb9b54d024515dc901ce9c03db778d09744862f38a3",
+      "matchesPriorBatch": true
+    },
+    {
+      "file": "game/src/run/game.run.flow.js",
+      "sha256": "cd567434055fef8a37dc7926f31a42f4a246d75b23f68d9456f3cc66176ada9e",
+      "matchesPriorBatch": true
+    },
+    {
+      "file": "game/src/hub/game.bag.settle.js",
+      "sha256": "c9f43149cdefaa516ac724f9dba877fe282d0905e9701d63a848d2d535de1681",
+      "matchesPriorBatch": true
+    }
+  ],
+  "captures": [
+    {
+      "name": "partial-before-refresh",
+      "status": "captured",
+      "consoleErrors": [],
+      "screenshot": {
+        "path": "partial-before-refresh.png",
+        "bytes": 51327,
+        "sha256": "a7bb12aa04b66cbfac07f2f3e11fb0d9f1f054914bde7d83bc00a90c0ccbdf3c"
+      }
+    },
+    {
+      "name": "partial-restored",
+      "status": "captured",
+      "consoleErrors": [],
+      "screenshot": {
+        "path": "partial-restored.png",
+        "bytes": 54003,
+        "sha256": "7a7353f8575cec5e5a8fda63f077fda829a40613a10af80db105fdf0d3ff7c0a"
+      }
+    },
+    {
+      "name": "original-node-pending",
+      "status": "captured",
+      "consoleErrors": [],
+      "screenshot": {
+        "path": "original-node-pending.png",
+        "bytes": 39607,
+        "sha256": "28431a0e80b0fa3a2b3d762f9d9f5cf924ac568aaae29f823ad86d3fc1933f44"
+      }
+    },
+    {
+      "name": "both-claimed",
+      "status": "captured",
+      "consoleErrors": [],
+      "screenshot": {
+        "path": "both-claimed.png",
+        "bytes": 44365,
+        "sha256": "a4c670bedb77d9af9958fd82cc054398acb4bc8fd4698165e2bf400cf06bbc2d"
+      }
+    },
+    {
+      "name": "finished-restored-bag",
+      "status": "captured",
+      "consoleErrors": [],
+      "screenshot": {
+        "path": "finished-restored-bag.png",
+        "bytes": 81862,
+        "sha256": "fcd868f90ad2ec49dab126a3f129ac485aabb3756c2b0c1abd94026a74f0914c"
+      }
+    }
+  ]
+}

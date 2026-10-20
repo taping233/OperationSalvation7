@@ -1,0 +1,1761 @@
+{
+  "tt2-pearlbox": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "container": {
+          "slots": 9,
+          "accepts": "资源"
+        }
+      },
+      "triggers": {}
+    }
+  },
+  "tt2-venomstaff": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [
+          {
+            "op": "registerRule",
+            "rule": "poisonOnSpell"
+          }
+        ]
+      },
+      "triggers": {}
+    }
+  },
+  "tt3-immortal-blade": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "battleStart": [
+          {
+            "op": "transform",
+            "what": "starterAttacks",
+            "into": "不朽斩"
+          }
+        ]
+      },
+      "triggers": {}
+    }
+  },
+  "tt3-azure-sword": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": []
+      },
+      "triggers": {
+        "onConsume": [
+          {
+            "op": "release",
+            "source": "generated",
+            "key": "初始攻击",
+            "max": 1
+          }
+        ]
+      }
+    }
+  },
+  "tt3-fate-wheel": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "skill": {
+          "oncePerBattle": true,
+          "ops": [
+            {
+              "op": "consumeHand",
+              "all": true
+            },
+            {
+              "op": "extraTurn"
+            }
+          ]
+        }
+      },
+      "triggers": {}
+    }
+  },
+  "tt3-crimson-pouch": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "skill": {
+          "oncePerBattle": true,
+          "ops": [
+            {
+              "op": "handSelect",
+              "n": 1,
+              "act": "copy"
+            }
+          ]
+        }
+      },
+      "triggers": {}
+    }
+  },
+  "tt3-wolf-bow": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": []
+      },
+      "triggers": {
+        "onTurnStart": [
+          {
+            "op": "acquire",
+            "n": 1,
+            "pool": {
+              "kind": "ids",
+              "ids": [
+                "tt2-swiftarrow",
+                "tt2-comboarrow",
+                "tt2-piercearrow",
+                "tt2-forestarrow",
+                "tt3-blood-arrow",
+                "tt3-purify-arrow",
+                "tt3-arrow-rain",
+                "tt3-life-arrow",
+                "tt3-venom-arrow",
+                "tt7-meteorrain"
+              ]
+            },
+            "dest": "hand",
+            "act": "zeroCost"
+          }
+        ]
+      }
+    }
+  },
+  "tt3-sapper-bomb": {
+    "fields": {
+      "dmgType": "fixed"
+    },
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": []
+      },
+      "triggers": {
+        "onConsume": [
+          {
+            "op": "damage",
+            "amount": 4,
+            "target": "chosenEnemy"
+          }
+        ]
+      }
+    }
+  },
+  "tt3-element-seal": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "passive": {
+          "infusionUnlock": {
+            "fuel": 3,
+            "spellPower": 2,
+            "draw": 2
+          }
+        }
+      },
+      "triggers": {}
+    }
+  },
+  "tt3-reverse-bow": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "skill": {
+          "oncePerBattle": true,
+          "ops": [
+            {
+              "op": "release",
+              "source": "hand",
+              "key": "箭",
+              "all": true,
+              "eachDraw": 1
+            }
+          ]
+        }
+      },
+      "triggers": {}
+    }
+  },
+  "tt3eq-mistbox": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "skill": {
+          "oncePerBattle": true,
+          "ops": [
+            {
+              "op": "swapDiscoverCosts",
+              "count": 2
+            }
+          ]
+        }
+      },
+      "triggers": {}
+    }
+  },
+  "tt8-demonslay": {
+    "fields": {
+      "dmgType": "attack"
+    },
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": []
+      },
+      "triggers": {
+        "onDraw": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "allEnemies"
+          }
+        ]
+      }
+    }
+  },
+  "tt8-heavensword": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": []
+      },
+      "triggers": {
+        "onDraw": [
+          {
+            "op": "draw",
+            "amountField": "draw"
+          }
+        ]
+      }
+    }
+  },
+  "tt7-naturestaff": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "skill": {
+          "oncePerBattle": true,
+          "ops": [
+            {
+              "op": "handSelect",
+              "n": 1,
+              "act": "zeroNext"
+            }
+          ]
+        }
+      },
+      "triggers": {}
+    }
+  },
+  "tt7-darkfort": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [
+          {
+            "op": "registerRule",
+            "rule": "deathSave",
+            "n": 1
+          }
+        ]
+      },
+      "triggers": {}
+    }
+  },
+  "tt13-poor-meal": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "passive": {
+          "heroSkillCost": {
+            "maxHand": 3,
+            "cost": 0
+          }
+        }
+      },
+      "triggers": {}
+    }
+  },
+  "tt13-magazine": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "skill": {
+          "oncePerBattle": true,
+          "ops": [
+            {
+              "op": "acquire",
+              "n": 2,
+              "pool": {
+                "kind": "ids",
+                "ids": [
+                  "tt2-shoot",
+                  "tt3-noon-duel",
+                  "tt3-double-shot",
+                  "cc-rapid-fire",
+                  "tt13-snipe"
+                ]
+              },
+              "dest": "hand"
+            }
+          ]
+        }
+      },
+      "triggers": {}
+    }
+  },
+  "tt13-scale-armor": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "passive": {
+          "damageResponse": {
+            "damage": 3,
+            "drawChance": 0.5,
+            "draw": 1
+          }
+        }
+      },
+      "triggers": {}
+    }
+  },
+  "tt13-astrolabe": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "passive": {
+          "alternatingRefund": {
+            "types": [
+              "武术",
+              "法术"
+            ],
+            "amount": 1
+          }
+        }
+      },
+      "triggers": {}
+    }
+  },
+  "tt3-magic-lamp": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "choice",
+            "options": [
+              {
+                "label": "发现 1 张牌并将其释放",
+                "ops": [
+                  {
+                    "op": "acquire",
+                    "n": 1,
+                    "pool": {
+                      "kind": "随机"
+                    },
+                    "dest": "discover",
+                    "act": "play"
+                  }
+                ]
+              },
+              {
+                "label": "消灭 1 名受伤敌人（非 BOSS）",
+                "ops": [
+                  {
+                    "op": "execute",
+                    "cap": {
+                      "wounded": true
+                    },
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "label": "冰冻 2 名角色，获得 5 点护甲",
+                "ops": [
+                  {
+                    "op": "freezeFirstEnemies",
+                    "count": 2,
+                    "duration": 1
+                  },
+                  {
+                    "op": "armor",
+                    "amount": 5
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "tt8-hero-summoner": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": null,
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "choice",
+            "otherAfterTurns": 2,
+            "options": [
+              {
+                "label": "打开末日浩劫之门",
+                "repeat": "turnStart",
+                "ops": [
+                  {
+                    "op": "randomCurse",
+                    "target": "allEnemies",
+                    "curses": [
+                      "bleed",
+                      "poison",
+                      "freeze",
+                      "silence",
+                      "abreak",
+                      "healban"
+                    ],
+                    "stacks": 1,
+                    "preferMissing": true
+                  }
+                ]
+              },
+              {
+                "label": "打开天国之门",
+                "repeat": "turnStart",
+                "ops": [
+                  {
+                    "op": "randomBlessing",
+                    "target": "allAllies",
+                    "choices": [
+                      "stealth",
+                      "atkUp",
+                      "spellUp",
+                      "reduce",
+                      "armor",
+                      "purify"
+                    ],
+                    "preferMissing": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "tt3-qi-wave": {
+    "fields": {
+      "dmgType": "fixed"
+    },
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": true
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "draw",
+            "amount": 1
+          },
+          {
+            "op": "damage",
+            "perTargetPrice": true,
+            "target": "allEnemies"
+          }
+        ]
+      }
+    }
+  },
+  "tt7-marchrush": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "draw",
+            "amountField": "draw"
+          },
+          {
+            "op": "armor",
+            "amountField": "armor"
+          }
+        ],
+        "replay": {
+          "on": "lastHand",
+          "times": 1
+        }
+      }
+    }
+  },
+  "tt7-arcanebolt": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy"
+          },
+          {
+            "op": "draw",
+            "amount": 1
+          }
+        ]
+      }
+    }
+  },
+  "tt7-provoke": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "foeFight",
+            "pick": "two"
+          }
+        ]
+      }
+    }
+  },
+  "tt3-chaos-eye": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "battleStart": [
+          {
+            "op": "maxHp",
+            "n": 10
+          },
+          {
+            "op": "deckCap",
+            "n": 5
+          }
+        ]
+      }
+    }
+  },
+  "tt3-silver-runesword": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "passive": {
+          "aura": {
+            "atk": 2
+          }
+        }
+      },
+      "triggers": {
+        "onTurnStart": [
+          {
+            "op": "heal",
+            "selfDamage": 2
+          }
+        ]
+      }
+    }
+  },
+  "tt2-frostsword": {
+    "rules": {
+      "version": 1,
+      "equip": {
+        "onEquip": [],
+        "passive": {
+          "cond": {
+            "vsFreeze": 2
+          }
+        }
+      }
+    }
+  },
+  "tt8-hero-mage": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": null,
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "blessing",
+            "key": "spellUp",
+            "stacks": 1
+          }
+        ],
+        "onTurnStart": [
+          {
+            "op": "acquire",
+            "n": 1,
+            "pool": {
+              "kind": "随机"
+            },
+            "dest": "discover"
+          }
+        ]
+      }
+    }
+  },
+  "tt8-hero-assassin": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "cleanse",
+            "target": "self"
+          },
+          {
+            "op": "blessing",
+            "key": "stealth",
+            "duration": 2
+          },
+          {
+            "op": "registerRule",
+            "rule": "stealthStrike"
+          }
+        ]
+      }
+    }
+  },
+  "tt8-hero-descender": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": null,
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "blessing",
+            "key": "spellUp",
+            "stacks": 1
+          },
+          {
+            "op": "registerRule",
+            "rule": "consumeFireball"
+          }
+        ]
+      }
+    }
+  },
+  "cc-poison-burst": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "adjustCurse",
+            "curse": "poison",
+            "burst": 2,
+            "target": "chosenEnemy"
+          }
+        ]
+      }
+    }
+  },
+  "tt3sp-flowerzhen": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "adjustCurse",
+            "curse": "poison",
+            "multiply": 2,
+            "burst": 1,
+            "target": "chosenEnemy"
+          }
+        ]
+      }
+    }
+  },
+  "tt13-spring": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "restoreHeroSkill"
+          },
+          {
+            "op": "draw",
+            "amount": 1
+          }
+        ]
+      }
+    }
+  },
+  "tt13-mind-control": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "recruitEnemy",
+            "target": "chosenEnemy",
+            "wounded": true,
+            "excludeBoss": true
+          }
+        ]
+      }
+    }
+  },
+  "tt8-hero-ranger": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": null,
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "insertCards",
+            "ids": [
+              "tt8-heavensword",
+              "tt8-demonslay"
+            ],
+            "shuffle": true
+          }
+        ]
+      }
+    }
+  },
+  "tt8-hero-warlock": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": null,
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "insertCards",
+            "ids": [
+              "tt8-curse1",
+              "tt8-curse2",
+              "tt8-curse3",
+              "tt8-curse4"
+            ],
+            "shuffle": true
+          },
+          {
+            "op": "draw",
+            "amount": 2
+          }
+        ]
+      }
+    }
+  },
+  "tt8-hero-priest": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "fillHand",
+            "untilHandN": 6,
+            "perSpellHeal": 3
+          }
+        ]
+      }
+    }
+  },
+  "cc-mana-surge": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": null,
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "castRandomSpells",
+            "count": 4,
+            "infused": true
+          }
+        ]
+      }
+    }
+  },
+  "tt8-hero-guardian": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": null,
+          "area": false
+        },
+        "ownedEquipCapacity": 1
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "energyCap",
+            "n": 1
+          }
+        ]
+      }
+    }
+  },
+  "tt3-frostfall": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy"
+          },
+          {
+            "op": "handSelect",
+            "n": 1,
+            "type": "武术",
+            "act": "play"
+          }
+        ]
+      }
+    }
+  },
+  "tt8-hero-warrior": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": null,
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "transform",
+            "what": "starterAttacks",
+            "into": "青龙偃月斩"
+          }
+        ]
+      }
+    }
+  },
+  "cmtn1lbhbqi4": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy"
+          },
+          {
+            "op": "registerRule",
+            "rule": "growth"
+          }
+        ]
+      }
+    }
+  },
+  "tt8-abyss-sovereign": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "draw",
+            "untilHandN": 6
+          },
+          {
+            "op": "energyCap",
+            "n": 1
+          },
+          {
+            "op": "blessing",
+            "key": "spellUp",
+            "stacks": 1
+          },
+          {
+            "op": "registerRule",
+            "rule": "playerCurseImmune"
+          },
+          {
+            "op": "registerRule",
+            "rule": "allSpellsInfused"
+          },
+          {
+            "op": "summon",
+            "name": "封印肢体",
+            "count": 4,
+            "statless": true
+          }
+        ]
+      }
+    }
+  },
+  "tt3sp-silverthorn": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy",
+            "infuseBonus": 3
+          }
+        ]
+      }
+    }
+  },
+  "tt3sp-bloodstorm": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": true
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "allEnemies",
+            "lifesteal": true
+          },
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "allEnemies",
+            "lifesteal": true,
+            "when": {
+              "infused": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "tt7-holyheal": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        },
+        "requirements": [
+          {
+            "kind": "infused"
+          }
+        ]
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "heal",
+            "perFuelCost": 2,
+            "when": {
+              "infused": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "tt7-meteorstrong": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        },
+        "requirements": [
+          {
+            "kind": "infused"
+          }
+        ]
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "execute",
+            "what": "fireball",
+            "count": 3,
+            "when": {
+              "infused": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "tt12-raydragon": {
+    "fields": {
+      "dmg": 11,
+      "dmgType": "spell"
+    },
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        },
+        "requirements": [
+          {
+            "kind": "infused"
+          }
+        ]
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy",
+            "when": {
+              "infused": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "tt12-felguard": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        },
+        "requirements": [
+          {
+            "kind": "infused"
+          }
+        ]
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "draw",
+            "amount": 3,
+            "when": {
+              "infused": true
+            }
+          },
+          {
+            "op": "blessing",
+            "key": "immune",
+            "duration": 1,
+            "when": {
+              "infused": true
+            }
+          },
+          {
+            "op": "registerRule",
+            "rule": "playerCurseImmune",
+            "duration": 1,
+            "when": {
+              "infused": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "tt3-fatal-pierce": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy",
+            "bonus": {
+              "amount": 2,
+              "if": {
+                "foeStatus": "bleed"
+              }
+            }
+          },
+          {
+            "op": "curse",
+            "curse": "abreak",
+            "duration": 1,
+            "target": "chosenEnemy",
+            "when": {
+              "targetStatus": "bleed"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "tt7-ghostblade": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy",
+            "bonus": {
+              "amount": 2,
+              "if": {
+                "playerStealthed": true
+              }
+            }
+          },
+          {
+            "op": "draw",
+            "amount": 2,
+            "when": {
+              "brokeStealth": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "tt7-bloodpoison": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy"
+          },
+          {
+            "op": "curse",
+            "curse": "bleed",
+            "stacks": 1,
+            "target": "chosenEnemy",
+            "bindTarget": "prevDamage"
+          },
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy",
+            "pick": "new"
+          },
+          {
+            "op": "curse",
+            "curse": "poison",
+            "stacks": 1,
+            "target": "chosenEnemy",
+            "pick": "new"
+          }
+        ]
+      }
+    }
+  },
+  "cmtn233trmeg": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        },
+        "keepInHand": true,
+        "fuelAllowed": false
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy"
+          }
+        ]
+      }
+    }
+  },
+  "cc-rot-seed": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "curse",
+            "curse": "poison",
+            "stacks": 2,
+            "target": "chosenEnemy"
+          },
+          {
+            "op": "markEnemy",
+            "event": "death",
+            "target": "chosenEnemy",
+            "status": "poison",
+            "multiplier": 1,
+            "dmgType": "true",
+            "dest": "allEnemies"
+          }
+        ]
+      }
+    }
+  },
+  "tt12-freezeray": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy"
+          },
+          {
+            "op": "curse",
+            "curse": "freeze",
+            "duration": 1,
+            "target": "chosenEnemy",
+            "when": {
+              "targetUndamagedBeforeCast": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "tt13-snipe": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy",
+            "onKill": {
+              "energy": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "tt13-guard": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "armor",
+            "amount": 6,
+            "bonus": {
+              "amount": 4,
+              "if": "noEnemyDamageThisTurn"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "tt13-bitter-rain": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "curse",
+            "curse": "poison",
+            "stacks": 2,
+            "target": "chosenEnemy",
+            "missingBonusIfCursed": true
+          }
+        ]
+      }
+    }
+  },
+  "tt13-soul-contract": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "markEnemy",
+            "event": "damaged",
+            "target": "chosenEnemy",
+            "amount": 2,
+            "dmgType": "true",
+            "dest": "randomOtherEnemy",
+            "recursive": false
+          }
+        ]
+      }
+    }
+  },
+  "tt13-mercy": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "enemy",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "damage",
+            "amountField": "dmg",
+            "target": "chosenEnemy",
+            "nonLethal": true
+          }
+        ]
+      }
+    }
+  },
+  "tt3-mystery-potion": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": null,
+          "area": false
+        },
+        "ignoresSilence": true
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "schedule",
+            "delay": 1,
+            "ops": [
+              {
+                "op": "acquire",
+                "n": 1,
+                "pool": {
+                  "kind": "types",
+                  "types": [
+                    "武术",
+                    "法术"
+                  ],
+                  "randomEligible": true
+                },
+                "dest": "hand",
+                "act": "zeroCost"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "tt7-stratagem": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": null,
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "castStored",
+            "count": 1
+          }
+        ]
+      },
+      "equip": {
+        "container": {
+          "slots": 3,
+          "accepts": "法术"
+        }
+      }
+    }
+  },
+  "tt8-hero-sword": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": null,
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "draw",
+            "amount": 5
+          },
+          {
+            "op": "castDrawn",
+            "type": "武术"
+          }
+        ]
+      }
+    }
+  },
+  "cmtn1ntxzoc4": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "registerInfusionBonus",
+            "every": 2,
+            "key": "spellUp",
+            "stacks": 1
+          },
+          {
+            "op": "blessing",
+            "key": "spellUp",
+            "stacks": 1
+          }
+        ]
+      }
+    }
+  },
+  "cmtn1wnhhym": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": null,
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "acquire",
+            "n": 3,
+            "pool": {
+              "kind": "随机"
+            },
+            "dest": "hand",
+            "expire": "nextTurnStart"
+          }
+        ]
+      }
+    }
+  },
+  "tt13-chaos-deck": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "transformCards",
+            "source": "drawPile",
+            "raritySteps": 1,
+            "ceiling": "传说",
+            "swapCosts": true
+          },
+          {
+            "op": "consumeHand",
+            "all": true,
+            "trigger": false
+          }
+        ]
+      }
+    }
+  },
+  "tt3-dig-treasure": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "acquire",
+            "n": 3,
+            "pool": {
+              "kind": "牌库底"
+            },
+            "dest": "discover"
+          },
+          {
+            "op": "armor",
+            "priceOf": "discovered"
+          }
+        ]
+      }
+    }
+  },
+  "tt7-imitate": {
+    "rules": {
+      "version": 1,
+      "triggers": {
+        "onPlay": []
+      },
+      "battle": {
+        "handTransform": {
+          "afterType": "武术",
+          "cost": 1
+        }
+      }
+    }
+  },
+  "tt8-hero-sealer": {
+    "rules": {
+      "version": 1,
+      "triggers": {
+        "onPlay": []
+      },
+      "battle": {
+        "requirements": [
+          {
+            "kind": "unplayable"
+          }
+        ],
+        "setup": {
+          "mode": "boss",
+          "injectIds": [
+            "tt8-curseimmune",
+            "tt8-energycap",
+            "tt8-nofocus",
+            "tt8-healplus"
+          ],
+          "collection": {
+            "ids": [
+              "tt8-hero-sealer",
+              "tt8-curseimmune",
+              "tt8-energycap",
+              "tt8-nofocus",
+              "tt8-healplus"
+            ],
+            "into": "tt8-abyss-sovereign"
+          }
+        }
+      }
+    }
+  },
+  "tt13-stellar-divination": {
+    "rules": {
+      "version": 1,
+      "battle": {
+        "target": {
+          "side": "self",
+          "area": false
+        }
+      },
+      "triggers": {
+        "onPlay": [
+          {
+            "op": "discoverCopies",
+            "type": "法术",
+            "count": 1,
+            "copies": 2,
+            "castOnDraw": true
+          }
+        ]
+      }
+    }
+  }
+}

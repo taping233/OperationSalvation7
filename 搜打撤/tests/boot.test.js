@@ -2,13 +2,17 @@
  * 回归目标：ESM 循环导入下模块体在顶层读 game 导致启动崩溃
  *（症状：标题页漏出局内下方控制栏 / 开始游戏·设置按钮无响应）。
  * jsdom 无 canvas/Audio/WebAudio，这里 stub 掉渲染与音频，只验启动接线。 */
-import { describe, it, expect, vi } from 'vitest';
+import { afterAll, describe, it, expect, vi } from 'vitest';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+import { releaseMainPage, trackMainPagePreparation } from './helpers/main-lifecycle.js';
 vi.mock('../game/src/battle/view/battle.presentation-ready.js', () => ({ createBattleEntryGate: () => ({ begin() {}, wait() {}, cancel() {}, dispose() {}, pending: () => false, ready: () => true }), waitForBattleImages: () => ({ promise: Promise.resolve(true), cancel() {} }) }));
 
 // 单跑约 5s：全量并行负载下会越过 vitest 默认 5s 超时形成负载 flake，给足裕量。
 // 60s（2026-10-03 第三次复发）：测试库增长使全量时长 117.6s（10-02 receipt）→134s，全库挤压下
 // hideOverlay 的 210ms 收场 timer（overlay.js）实际延迟可超 15s，旧 20s 顶已不够；仅真卡死才等满。
 vi.setConfig({ testTimeout: 60000, hookTimeout: 60000 });
+
+installImmediateWebLocks();
 
 // ---- 环境补桩（必须在动态 import main.js 之前就位） ----
 // 2D 上下文：所有方法返回可链式/可读的哑值
@@ -52,7 +56,7 @@ window.AudioContext = window.AudioContext || class FakeAudioContext {
 // fetch（boot 顶层拉 version.json，失败会走 .catch 分支，不影响启动）
 globalThis.fetch = window.fetch = () => Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve({ version: '0.51.0' }) });
 
-// 注入真实页面结构：读取 index.html，剥掉 script/link（模块由动态 import 接管）
+// 注入真实页面结构；生产页面的唯一 module 入口在下方由动态 import 接管。
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 {
@@ -66,6 +70,7 @@ import { resolve } from 'node:path';
 // 模块加载（DOMContentLoaded 已在 jsdom 环境建立时派发过，
 // boot.js 的监听随后注册，故下方手动再派发一次触发启动链）
 await import('../game/src/main.js');
+trackMainPagePreparation();
 document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 // fetch .then 与 UI 初始化里的微任务需要清一轮
 await new Promise(r => setTimeout(r, 0));
@@ -78,6 +83,20 @@ const waitFor = async (cond, ms = 3000) => {
   }
   return cond();
 };
+
+async function isolateInputFixtureSettlement() {
+  const [{ default: bus }, { game }] = await Promise.all([
+    import('../game/src/core/event-bus.js'), import('../game/src/run/game.session.js'),
+  ]);
+  // These input scenarios own another game. Keep frame/audio subscribers, while
+  // preventing their end event from settling the main page's different run.
+  const handler = game.onBattleEnd;
+  const registered = bus.listeners().get('battle:end')?.has(handler);
+  if (registered) bus.off('battle:end', handler);
+  return () => { if (registered) bus.on('battle:end', handler); };
+}
+
+afterAll(releaseMainPage);
 
 describe('启动链（DOMContentLoaded → showTitle）', () => {
   it('标题已可用时立即发布桌面就绪状态，不等待被封面跳过的地图循环', () => {
@@ -102,6 +121,33 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     const title = document.getElementById('title');
     expect(title).not.toBeNull();
     expect(title.hidden).toBe(false);
+  });
+
+  it('生产入口安装实际界面控制器，房间页关闭立即解绑动作并等待退场隐藏', async () => {
+    const UI = window.SDT.UI;
+    const overlay = UI.el.overlay;
+    expect(document.body.classList.contains('interface-motion')).toBe(true);
+    expect(document.querySelector('link[data-interface-motion]')).not.toBeNull();
+    const action = vi.fn();
+    try {
+      UI.beginRoom();
+      UI.showOverlay('启动装配验证', '<section class="node-pg"><button data-act="entryAction">继续</button></section>', 'page');
+      UI.act('entryAction', action);
+      expect(await waitFor(() => !document.querySelector('.page-visual-handoff'))).toBe(true);
+      const button = document.querySelector('[data-act="entryAction"]');
+      button.click();
+      expect(action).toHaveBeenCalledOnce();
+      UI.hideOverlay();
+      expect(overlay.hidden).toBe(false);
+      expect(overlay.dataset.uiClosing).toBe('1');
+      expect(UI._acts.entryAction).toBeUndefined();
+      button.click();
+      expect(action).toHaveBeenCalledOnce();
+      expect(await waitFor(() => overlay.hidden)).toBe(true);
+    } finally {
+      UI.hideOverlay({ immediate: true });
+      UI.endRoom();
+    }
   });
 
   it('真实启动接线的 Ctrl+L 在四个控制台页签均可关闭，长按与输入法组合不重复切换', async () => {
@@ -149,6 +195,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     document.getElementById('mStart').click();
     await waitFor(() => document.querySelector('.slot-page'));
     document.querySelector('[data-act="newSlot"][data-slot="5"]').click();
+    for (let step = 0; step < 200 && !hub.baseHubLoading; step++) await Promise.resolve();
     const savedBase = window.SDT.Base.peek(5);
     expect(hub.baseHubLoading).toBe(true);
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
@@ -378,12 +425,15 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     expect(document.getElementById('overlay').hidden).toBe(true);
     window.SDT.Sound.sfx = originalSfx;
   });
-  it('开始游戏 / 设置 / 退出按钮已绑定监听（可点击响应）', () => {
+  it('开始游戏 / 设置 / 退出按钮已绑定监听（可点击响应）', async () => {
     // getEventListeners 不可用，用行为代理：点击 mSettings 应弹出设置 overlay（不再 hidden）
     document.getElementById('mSettings').click();
     const overlay = document.getElementById('overlay');
     expect(overlay.hidden, '点击设置后 overlay 应打开').toBe(false);
-    document.getElementById('settingsBack')?.click();
+    const back = overlay.querySelector('.settings-page [data-act="closeSettings"]');
+    expect(back).not.toBeNull();
+    back.click();
+    expect(await waitFor(() => overlay.hidden)).toBe(true);
   });
   it('跨文件 mixin 已延迟绑定（TDZ 回归点）', () => {
     const g = window.SDT.game;
@@ -618,6 +668,7 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
 
   it('战斗数字键/点选与内层卡面键盘输入共享选中、取消和目标结算', { timeout: 15_000 }, async () => {
     await (await import('../game/src/battle/battle-loader.js')).ensureBattleReady();
+    const restoreSettlement = await isolateInputFixtureSettlement();
     const sha = window.SDT.Cards.all().find(c => c.id === 'starter-attack');
     const game = {
       ownedCards: [{ uid: 'boot-click-sha', card: sha },
@@ -690,15 +741,19 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
       expect(after.energy).toBeLessThan(before.energy);
       expect(after.hand.includes('boot-click-sha')).toBe(false);
     } finally {
+      await waitFor(() => !window.SDT.Battle.getSnapshot().busy && window.SDT.Battle.getSnapshot().actionQueueLength === 0);
       if (game.battleActive) window.SDT.Battle.commands.flee();
+      expect(game.battleActive).toBe(false);
       Element.prototype.animate = oldAnimate;
-      document.getElementById('overlay')?.setAttribute('hidden', '');
+      window.SDT.UI.hideOverlay({ immediate: true });
       game.state = 'title';
+      restoreSettlement();
     }
   });
 
   it('唯一敌人也需确认目标；键盘选中可取消且确认前不扣资源', async () => {
     await (await import('../game/src/battle/battle-loader.js')).ensureBattleReady();
+    const restoreSettlement = await isolateInputFixtureSettlement();
     const sha = window.SDT.Cards.all().find(c => c.id === 'starter-attack');
     const game = {
       ownedCards: [{ uid: 'boot-single-sha', card: sha }], hp: 30, maxHp: 30, atk: 5, spellPower: 0, coins: 0,
@@ -709,10 +764,13 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
     Element.prototype.animate = function () { return { onfinish: null, cancel() {} }; };
     try {
       window.SDT.Battle.start(game, [{ id: 'infantry', name: '唯一敌', hp: 40, maxHp: 40, atk: 1 }], { isBoss: false, name: '单敌输入' });
-      await waitFor(() => document.querySelector('.sts-hand .bt-card.need-target'));
-      const card = document.querySelector('.sts-hand .bt-card.need-target');
+      // The preceding test can leave its old stage mounted until this battle's
+      // scheduled render. Wait for this UID, never that previous card's handlers.
+      await waitFor(() => document.querySelector('.sts-hand .bt-card[data-uid="boot-single-sha"].need-target'));
+      const card = document.querySelector('.sts-hand .bt-card[data-uid="boot-single-sha"].need-target');
       const face = card.querySelector('.hs-card');
       const before = window.SDT.Battle.getSnapshot();
+      expect(card.closest('.battle-stage')._battleToken).toBe(before.battleToken);
       face.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
       expect(face.getAttribute('aria-pressed')).toBe('true');
       expect(window.SDT.Battle.getSnapshot().foes[0].hp).toBe(40);
@@ -730,10 +788,13 @@ describe('启动链（DOMContentLoaded → showTitle）', () => {
       expect(window.SDT.Battle.getSnapshot().energy).toBeLessThan(before.energy);
       expect(window.SDT.Battle.getSnapshot().hand.includes('boot-single-sha')).toBe(false);
     } finally {
+      await waitFor(() => !window.SDT.Battle.getSnapshot().busy && window.SDT.Battle.getSnapshot().actionQueueLength === 0);
       if (game.battleActive) window.SDT.Battle.commands.flee();
+      expect(game.battleActive).toBe(false);
       Element.prototype.animate = oldAnimate;
-      document.getElementById('overlay')?.setAttribute('hidden', '');
+      window.SDT.UI.hideOverlay({ immediate: true });
       game.state = 'title';
+      restoreSettlement();
     }
   });
 

@@ -1,10 +1,11 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createBattleSelectionFlow } from '../game/src/battle/core/battle.selection-flow.js';
-import { discovering, pdef, set$choosing, set$discoverQueue, set$discovering, set$G, set$handSelecting, set$pdef } from '../game/src/battle/runtime/battle.runtime.js';
+import { createBattleRuntime } from '../game/src/battle/runtime/battle.runtime.factory.js';
+const runtime = createBattleRuntime();
 
 function createFlow({ cards, random01 = () => 0, deny = () => {}, requestBattleRender = () => {} }) {
-  return createBattleSelectionFlow({
+  return createBattleSelectionFlow({ runtime,
     cards, random01, deny, throwIfActionCancelled: () => {},
     session: { handSelectQueue: [], choiceQueue: [] },
     requestBattleRender,
@@ -12,12 +13,12 @@ function createFlow({ cards, random01 = () => 0, deny = () => {}, requestBattleR
 }
 
 afterEach(() => {
-  set$discovering(null);
-  set$discoverQueue([]);
-  set$G(null);
-  set$pdef(null);
-  set$handSelecting(null);
-  set$choosing(null);
+  runtime.set$discovering(null);
+  runtime.set$discoverQueue([]);
+  runtime.set$G(null);
+  runtime.set$pdef(null);
+  runtime.set$handSelecting(null);
+  runtime.set$choosing(null);
 });
 
 describe('battle selection flow ports', () => {
@@ -67,13 +68,13 @@ describe('battle selection flow ports', () => {
       .mockReturnValueOnce(0.51) // 乙牌
       .mockReturnValueOnce(0.76); // 丙牌
     const flow = createFlow({ cards: { all, isRandomObtainable, sellPrice: () => 0 }, random01 });
-    set$G({ myClass: '射击', log: vi.fn() });
-    set$discoverQueue([{ n: 1 }]);
+    runtime.set$G({ myClass: '射击', log: vi.fn() });
+    runtime.set$discoverQueue([{ n: 1 }]);
 
     flow.processDiscoverQueue();
 
-    expect(discovering.options).toEqual([catalog[0], catalog[2], catalog[3]]);
-    expect(discovering.options[0]).toBe(catalog[0]);
+    expect(runtime.discovering.options).toEqual([catalog[0], catalog[2], catalog[3]]);
+    expect(runtime.discovering.options[0]).toBe(catalog[0]);
     expect(all).toHaveBeenCalledTimes(1);
     expect(isRandomObtainable).toHaveBeenCalledTimes(catalog.length);
     expect(random01).toHaveBeenCalledTimes(4);
@@ -86,12 +87,12 @@ describe('battle selection flow ports', () => {
     const flow = createFlow({
       cards: { all, isRandomObtainable: () => true, sellPrice: () => 0 }, random01,
     });
-    set$G({ myClass: '射击', log: vi.fn() });
-    set$discoverQueue([{ n: 1, rarity: '稀有' }]);
+    runtime.set$G({ myClass: '射击', log: vi.fn() });
+    runtime.set$discoverQueue([{ n: 1, rarity: '稀有' }]);
 
     flow.processDiscoverQueue();
 
-    expect(discovering.options).toEqual([card]);
+    expect(runtime.discovering.options).toEqual([card]);
     expect(all).toHaveBeenCalledTimes(1);
     // 首张一抽；后两槽各首抽一次并最多重抽 40 次。
     expect(random01).toHaveBeenCalledTimes(83);
@@ -102,14 +103,14 @@ describe('battle selection flow ports', () => {
     const random01 = vi.fn(() => 0.5);
     const log = vi.fn();
     const flow = createFlow({ cards: { all, isRandomObtainable: () => true, sellPrice: () => 0 }, random01 });
-    set$G({ myClass: '射击', log });
-    set$discoverQueue([{ n: 1 }]);
+    runtime.set$G({ myClass: '射击', log });
+    runtime.set$discoverQueue([{ n: 1 }]);
 
     flow.processDiscoverQueue();
 
     expect(all).toHaveBeenCalledTimes(1);
     expect(random01).not.toHaveBeenCalled();
-    expect(discovering).toBeNull();
+    expect(runtime.discovering).toBeNull();
     expect(log).toHaveBeenCalledWith('（没有符合条件的卡牌可发现）', 'dim');
   });
 
@@ -126,15 +127,15 @@ describe('battle selection flow ports', () => {
       .mockReturnValueOnce(0.5)
       .mockReturnValueOnce(0.9);
     const flow = createFlow({ cards: { all, isRandomObtainable: () => true, sellPrice: () => 0 }, random01 });
-    set$G({ myClass: '射击', log: vi.fn() });
-    set$discoverQueue([{ n: 1, pred, rarity: '不存在', pool: { kind: 'moves', cost: 999 } }]);
+    runtime.set$G({ myClass: '射击', log: vi.fn() });
+    runtime.set$discoverQueue([{ n: 1, pred, rarity: '不存在', pool: { kind: 'moves', cost: 999 } }]);
 
     flow.processDiscoverQueue();
 
     expect(all).toHaveBeenCalledTimes(3);
     expect(pred).toHaveBeenCalledTimes(cardsInCatalog.length * 3);
     expect(random01).toHaveBeenCalledTimes(3);
-    expect(discovering.options).toEqual(cardsInCatalog);
+    expect(runtime.discovering.options).toEqual(cardsInCatalog);
   });
 
   it('does not query the catalog or random stream for explicit options', () => {
@@ -142,12 +143,12 @@ describe('battle selection flow ports', () => {
     const random01 = vi.fn(() => 0);
     const explicit = [{ id: 'provided', name: '给定卡', type: '法术' }];
     const flow = createFlow({ cards: { all, isRandomObtainable: () => true, sellPrice: () => 0 }, random01 });
-    set$G({ myClass: '射击', log: vi.fn() });
-    set$discoverQueue([{ n: 1, explicit }]);
+    runtime.set$G({ myClass: '射击', log: vi.fn() });
+    runtime.set$discoverQueue([{ n: 1, explicit }]);
 
     flow.processDiscoverQueue();
 
-    expect(discovering.options).toEqual(explicit);
+    expect(runtime.discovering.options).toEqual(explicit);
     expect(all).not.toHaveBeenCalled();
     expect(random01).not.toHaveBeenCalled();
   });
@@ -163,12 +164,12 @@ describe('battle selection flow ports', () => {
       random01: vi.fn().mockReturnValueOnce(0.1).mockReturnValueOnce(0.5).mockReturnValueOnce(0.9),
     });
     const replacementQueue = [{ n: 1 }];
-    set$G({ myClass: '射击', log: vi.fn() });
-    set$discoverQueue(replacementQueue);
+    runtime.set$G({ myClass: '射击', log: vi.fn() });
+    runtime.set$discoverQueue(replacementQueue);
 
     flow.processDiscoverQueue();
 
-    expect(discovering.options).toEqual(catalog);
+    expect(runtime.discovering.options).toEqual(catalog);
     expect(replacementQueue).toHaveLength(0);
   });
 
@@ -178,7 +179,7 @@ describe('battle selection flow ports', () => {
       cards: { all: () => [], isRandomObtainable: () => true, sellPrice: () => 0 },
       deny,
     });
-    set$handSelecting({ mandatory: true });
+    runtime.set$handSelecting({ mandatory: true });
 
     flow.skipHandSelect();
     expect(deny).toHaveBeenCalledTimes(1);
@@ -187,7 +188,7 @@ describe('battle selection flow ports', () => {
   it('forwards an absent action signal to the injected cancellation check', async () => {
     let queuedAction;
     const throwIfActionCancelled = vi.fn();
-    const flow = createBattleSelectionFlow({
+    const flow = createBattleSelectionFlow({ runtime,
       cards: { all: () => [], isRandomObtainable: () => true, sellPrice: () => 0 },
       deny: vi.fn(), random01: vi.fn(() => 0), throwIfActionCancelled,
       session: { handSelectQueue: [], choiceQueue: [{ cardName: '抉择牌', options: ['继续'] }] },
@@ -197,7 +198,7 @@ describe('battle selection flow ports', () => {
       applyTextEffects: { steps: vi.fn(() => []) },
       sweepDead: vi.fn(), finish: vi.fn(),
     });
-    set$G({ battleActive: true, log: vi.fn() });
+    runtime.set$G({ battleActive: true, log: vi.fn() });
 
     flow.processChoice();
     flow.pickChoice(0);
@@ -211,7 +212,7 @@ describe('battle selection flow ports', () => {
     const card = { id: 'price', name: '挖宝牌', type: '法术', rarity: '稀有' };
     const sellPrice = vi.fn(() => 5);
     const log = vi.fn();
-    const flow = createBattleSelectionFlow({
+    const flow = createBattleSelectionFlow({ runtime,
       cards: { all: () => [], isRandomObtainable: () => true, sellPrice },
       deny: vi.fn(), random01: vi.fn(() => 0),
       throwIfActionCancelled: () => {},
@@ -219,9 +220,9 @@ describe('battle selection flow ports', () => {
       fireCatGift: vi.fn(), addTempCard: () => 'temp-1', sweepDead: vi.fn(), finish: vi.fn(),
       requestBattleRender: vi.fn(),
     });
-    set$G({ battleActive: true, log });   // U7/D-4 守卫接线后 pickDiscover 需要 active 战斗（2026-09-29）
-    set$pdef({ armor: 0 });
-    set$discovering({
+    runtime.set$G({ battleActive: true, log });   // U7/D-4 守卫接线后 pickDiscover 需要 active 战斗（2026-09-29）
+    runtime.set$pdef({ armor: 0 });
+    runtime.set$discovering({
       options: [card], n: 1, rarity: null, pred: null, act: null, priceArmor: true,
       pouchUid: null, consumeTempAtTurn: false, tempUids: [], swapPair: null,
       deckBottom: false, deckBottomUids: [], zeroCost: false, decayEachTurn: false,
@@ -231,7 +232,7 @@ describe('battle selection flow ports', () => {
     flow.pickDiscover(0);
 
     expect(sellPrice).toHaveBeenCalledWith(card);
-    expect(pdef.armor).toBe(5);
+    expect(runtime.pdef.armor).toBe(5);
   });
 
   // —— U7/D-4（2026-09-29）：pickDiscover 终局入口守卫——战斗已结束则静默拒绝落牌 ——
@@ -240,15 +241,15 @@ describe('battle selection flow ports', () => {
     const addTempCard = vi.fn(() => 'temp-late');
     const queueCardExecution = vi.fn();
     const log = vi.fn();
-    const flow = createBattleSelectionFlow({
+    const flow = createBattleSelectionFlow({ runtime,
       cards: { all: () => [], isRandomObtainable: () => true, sellPrice: () => 0 },
       deny: vi.fn(), random01: vi.fn(() => 0), throwIfActionCancelled: () => {},
       session: { handSelectQueue: [], choiceQueue: [] },
       fireCatGift: vi.fn(), addTempCard, queueCardExecution, sweepDead: vi.fn(), finish: vi.fn(),
       requestBattleRender: vi.fn(),
     });
-    set$G({ battleActive: false, log });   // finish() 之后 G.battleActive=false 的实况
-    set$discovering({
+    runtime.set$G({ battleActive: false, log });   // finish() 之后 G.battleActive=false 的实况
+    runtime.set$discovering({
       options: [card], n: 1, rarity: null, pred: null, act: null, priceArmor: false,
       pouchUid: null, consumeTempAtTurn: false, tempUids: [], swapPair: null,
       deckBottom: false, deckBottomUids: [], zeroCost: false, decayEachTurn: false,
@@ -266,15 +267,15 @@ describe('battle selection flow ports', () => {
     const card = { id: 'live', name: '战斗中牌', type: '法术' };
     const addTempCard = vi.fn(() => 'temp-live');
     const finish = vi.fn();
-    const flow = createBattleSelectionFlow({
+    const flow = createBattleSelectionFlow({ runtime,
       cards: { all: () => [], isRandomObtainable: () => true, sellPrice: () => 0 },
       deny: vi.fn(), random01: vi.fn(() => 0), throwIfActionCancelled: () => {},
       session: { handSelectQueue: [], choiceQueue: [] },
       fireCatGift: vi.fn(), addTempCard, sweepDead: vi.fn(), finish,
       requestBattleRender: vi.fn(),
     });
-    set$G({ battleActive: true, log: vi.fn() });
-    set$discovering({
+    runtime.set$G({ battleActive: true, log: vi.fn() });
+    runtime.set$discovering({
       options: [card], n: 1, rarity: null, pred: null, act: null, priceArmor: false,
       pouchUid: null, consumeTempAtTurn: false, tempUids: [], swapPair: null,
       deckBottom: false, deckBottomUids: [], zeroCost: false, decayEachTurn: false,

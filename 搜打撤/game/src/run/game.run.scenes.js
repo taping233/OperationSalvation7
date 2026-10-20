@@ -8,10 +8,12 @@
  * 商店控制器也在此装配（openShop 唯一实例，供 ALTAR/FLOW 复用）。
  * ============================================================ */
 import { esc, escAttr } from '../core/shared.js';
+import { createCardInstance } from '../cards/card-instance.js';
 import { MAP, bagCap, game, newUid, pick, saveGame, scaledEnemy, usedSlots } from './game.session.js';
 import { _set_cardPageOpen, cardHTML } from '../hub/game.cardslib.js';
 import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, WINTER_BATTLE_LAYERS } from './game.run.data.js';
 import { Random } from '../core/random.js';
+import { saveRunCheckpoint } from '../core/run-checkpoint.js';
 import { hashSeed } from '../core/random-core.js';
 import { createShopController } from './game.run.shop.js';
 import { captureBattleContext, ensureBattleReady, startBattle } from '../battle/battle-loader.js';
@@ -439,18 +441,15 @@ export function openBattleCell(def, encounter) {
 export function openChestsOnCell(chests, text, opts) {
   UI.log(`[[icon:archive]] ${text || '回收了' + SDT.Chests.dropText(chests)}`, 'loot');
   SDT.Chests.open(game, chests, () => {
-    if (opts?.consumeNode) consumeCurrentCell();
     game.state = 'idle';
-    saveGame();
     UI.refresh(game);
-  }, { ...opts, onCell:true });
+  }, { ...opts, onCell:true, beforeComplete:() => { if (opts?.consumeNode) consumeCurrentCell(); } });
 }
 
 export function resumeChestsOnCell(saved) {
   return SDT.Chests.restore(game, saved, () => {
-    if (saved.context.consumeNode) consumeCurrentCell();
-    game.state = 'idle'; saveGame(); UI.refresh(game);
-  });
+    game.state = 'idle'; UI.refresh(game);
+  }, { beforeComplete:() => { if (saved.context.consumeNode) consumeCurrentCell(); } });
 }
 
 // 固定奖励复用宝箱的逐张领取与存档恢复，不重新掷卡，也不因容量不足丢失。
@@ -461,7 +460,7 @@ export function openFixedRewardsOnCell(cards, source, { consumeNode = false } = 
       taken:[], lost:[], source, title:'领取奖励' } };
   setBagReturnHook(null);
   const opened = resumeChestsOnCell(saved);
-  if (opened) saveGame();
+  if (opened && typeof game.persistSave !== 'function') saveRunCheckpoint(saveGame);
   return opened;
 }
 
@@ -479,7 +478,7 @@ export function grantEventCard(tpl, opts = {}) {
     UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}${tpl.type !== '资源' ? '；新普通牌需通用空格，同名未满仍可叠放' : ''}），【${esc(tpl.name)}】未领取，请整理背包后重试`, 'warn');
     return false;
   }
-  game.ownedCards.push({ uid: newUid(), card: { ...tpl } });
+  game.ownedCards.push(createCardInstance(tpl, newUid()));
   UI.log(`[[icon:archive]] 获得卡牌【<b>${esc(tpl.name)}</b>】`, 'loot');
   // 2026-09-13 老板：发卡要有奖励动画，不能静默进背包——统一走获得演出
   //（传说卡保留金色光柱 + legend 音效，普通卡中性演出；多张连发自动排队逐张播）
@@ -580,7 +579,7 @@ export function openPocketRestore(picks, done, opts = {}, transaction = null) {
       } else {
         p.count--;
         if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
-        game.ownedCards.push({ uid: newUid(), card: { ...card } });
+        game.ownedCards.push(createCardInstance(card, newUid()));
         txn.left--;
       }
       SDT.Sound.sfx('cardRestore');

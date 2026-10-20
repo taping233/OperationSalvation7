@@ -95,25 +95,25 @@ function open() {
 }
 function clickSecond() { document.querySelectorAll('#depPool .dep-card')[1].click(); }
 describe('出征真实页面选择与扣仓身份', () => {
-  it('预设人物作为选角初值，预设宠物通过正常保存入口应用', () => {
-    expect(departure.setDeployPick({ 'card:second:foil': 1 }, { characterId: 'baita', petId: 'robot' })).not.toBe(false);
+  it('预设人物作为选角初值，预设宠物通过正常保存入口应用', async () => {
+    expect((await departure.setDeployPick({ 'card:second:foil': 1 }, { characterId: 'baita', petId: 'robot' }))).not.toBe(false);
     expect(base.setPet).toHaveBeenCalledExactlyOnceWith('robot');
     departure.openDepartPrep();
     expect(characterFor(ports.choice.mock.lastCall[0].initialCharacter)?.id).toBe('baita');
     expect(departure.deployPick).toEqual({ 'card:second:foil': 1 });
     expect(ports.start).not.toHaveBeenCalled();
   });
-  it('预设宠物保存失败时保留原卡牌选择和人物初值', () => {
-    departure.setDeployPick({ 'card:first': 1 }, { characterId: 'heixiang' });
+  it('预设宠物保存失败时保留原卡牌选择和人物初值', async () => {
+    (await departure.setDeployPick({ 'card:first': 1 }, { characterId: 'heixiang' }));
     base.setPet.mockReturnValueOnce(false);
-    expect(departure.setDeployPick({ 'card:second:foil': 1 }, { characterId: 'baita', petId: 'robot' })).toBe(false);
+    expect((await departure.setDeployPick({ 'card:second:foil': 1 }, { characterId: 'baita', petId: 'robot' }))).toBe(false);
     expect(departure.deployPick).toEqual({ 'card:first': 1 });
     departure.openDepartPrep();
     expect(characterFor(ports.choice.mock.lastCall[0].initialCharacter)?.id).toBe('heixiang');
     expect(ports.start).not.toHaveBeenCalled();
   });
-  it('切换slot后不沿用上一档的预设人物和卡牌', () => {
-    departure.setDeployPick({ 'card:second:foil': 1 }, { characterId: 'baita', petId: 'robot' });
+  it('切换slot后不沿用上一档的预设人物和卡牌', async () => {
+    (await departure.setDeployPick({ 'card:second:foil': 1 }, { characterId: 'baita', petId: 'robot' }));
     base.slot = 2;
     departure.openDepartPrep();
     expect(ports.choice.mock.lastCall[0].initialCharacter).toBeNull();
@@ -156,11 +156,11 @@ describe('出征真实页面选择与扣仓身份', () => {
     const filter = document.querySelector('#depFilterType'); filter.value = '道具'; filter.dispatchEvent(new Event('change'));
     expect([...document.querySelectorAll('#depPool .dep-card')].map(node => node.hidden)).toEqual([false, true]);
   });
-  it('同卡超过一格的预设保持每个格子独立，数量更新不丢节点', () => {
-    base.data.stash = [{ card: first, count: 6 }]; departure.setDeployPick({ 同名牌: 6 }); open();
+  it('同卡超过一格的预设保持每个格子独立，数量更新不丢节点', async () => {
+    base.data.stash = [{ card: first, count: 6 }]; (await departure.setDeployPick({ 同名牌: 6 })); open();
     const before = [...document.querySelectorAll('#depBag [data-name="同名牌"]')];
     expect(before).toHaveLength(2);
-    actions.depPet({ id: 'dog' });
+    (await actions.depPet({ id: 'dog' }));
     const after = [...document.querySelectorAll('#depBag [data-name="同名牌"]')];
     expect(after).toHaveLength(2); expect(new Set(after).size).toBe(2);
   });

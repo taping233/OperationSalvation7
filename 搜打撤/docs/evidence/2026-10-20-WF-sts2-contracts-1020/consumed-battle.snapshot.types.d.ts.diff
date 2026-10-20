@@ -1,0 +1,20 @@
+diff --git a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/consumed-before-battle.snapshot.types.d.ts.txt b/game/src/battle/battle.snapshot.types.d.ts
+index 46c68770..1a0065da 100644
+--- a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/consumed-before-battle.snapshot.types.d.ts.txt
++++ b/game/src/battle/battle.snapshot.types.d.ts
+@@ -111,6 +111,7 @@ export type BattleSnapshotInput = {
+   drawPile: string[];
+   discard: string[];
+   grave: string[];
++  played?: string[];
+   consumed?: string[];
+   handInfuseCounts?: Record<string, number>;
+   infusing: ({ uid: string; card?: BattleCardInput | null; picked: Set<string>; [key: string]: unknown }) | null;
+@@ -195,6 +196,7 @@ export type BattleSnapshot = {
+   readonly drawPile: readonly string[];
+   readonly discard: readonly string[];
+   readonly grave: readonly string[];
++  readonly played?: readonly string[];
+   readonly consumed?: readonly string[];
+   readonly handInfuseCounts?: Readonly<Record<string, number>>;
+   readonly infusing: ({ readonly uid: string; readonly card: SnapshotBattleCard | null | undefined; readonly picked: readonly string[]; readonly [key: string]: unknown }) | null;

@@ -1,3 +1,4 @@
+import { beginRuntimeStage } from '../core/runtime-trace-stages.local.js';
 import { recordRestoreStage, traceRestoreStep } from '../core/flight-recorder.local.js';
 import { performanceSettingsHTML, bindPerformanceSettings } from './performance-settings.js';
 import { cancelPendingPageEntries } from './page-entry-cancellation.js';
@@ -9,7 +10,7 @@ import { achievementGalleryHTML, bindAchievementGallery } from './achievement-ga
 import { beginnerGuideHTML, beginnerGuidePageCount, updateBeginnerGuide } from './beginner-guide.js';
 import { SLOT_EMBLEMS } from './slot-emblems.js';
 import { bindSettingsAudio } from './settings-audio.js';
-import { initSettingsNavigation } from './settings-navigation.js';
+import { initSettingsNavigation, settingsLayoutHTML } from './settings-navigation.js';
 import { enterAchievementCut } from './camp-entry.js';
 import { reduceMotion } from '../core/motion.js';
 import '../../css/title-achievements.css';
@@ -17,12 +18,13 @@ import '../../css/beginner-guide.css';
 import '../../css/archive-back.css';
 import '../../css/leave-run.css';
 import { linkedBackHTML } from './home-linked-interactions.js';
+import { battleRestartHTML, bindBattleRestart } from './settings-battle-restart.js';
 /* 标题、选档、离开与设置页面流程。只通过注入端口调用会话能力。 */
 
 // 非首屏面板工厂；依赖会话能力与标题回调注入，不静态导入启动/会话模块。
 export function createGameMenuPages(deps, shell) {
   const { SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
-    saveGame, clearAllSlots, getActiveSlot, setActiveSlot, preflightRunMap,
+    saveSession, clearAllSlots, getActiveSlot, setActiveSlot, preflightRunMap,
     RunStorage, ensureBattleReady = async () => SDT.Battle, recoverSlotIfPending, terminalCommands, openDataPage } = deps;
   const { showTitle, hideTitle, pickLatestSlot, fmtPlayTime } = shell;
 
@@ -439,6 +441,9 @@ export function createGameMenuPages(deps, shell) {
         <p id="slotRestoreError" class="slot-restore-error" role="alert" aria-live="assertive" hidden></p>
         <div class="slot-deck">${cards.join('')}</div>
       </div>`, 'page');
+    let pickerActive = true;
+    const pickerCurrent = page => pickerActive && !!page && page.isConnected && document.querySelector('.slot-page') === page
+      && !UI.el?.overlay?.hidden && !UI.el?.overlay?.classList.contains('closing');
     // F1 兜底（2026-09-24）：有档位渲染异常时在页面上给出可见提示（不阻塞其余档位）
     if (slotErrors.length) {
       const msg = `档位 ${slotErrors.map(i => '0' + i).join('、')} 存档数据异常，已保留原档未写回`;
@@ -455,9 +460,18 @@ export function createGameMenuPages(deps, shell) {
       UI.clearLog();
       setActiveSlot(slot);
       SDT.Base.use(slot);
+      const pickerPage = keepPicker ? document.querySelector('.slot-page') : null;
+      const current = () => getActiveSlot() === slot && SDT.Base.slot === slot && (!pickerPage || pickerCurrent(pickerPage));
       // 能力卡术语迁移（原「英雄卡」类型，2026-09-08 定版）：仓库/口袋副本同步更名
       // 2026-09-29 收敛：直改 Base.data 后保存的迁移块移入 Base.applyStoredCardRenames
-      SDT.Base.applyStoredCardRenames();
+      let migrated, flushed;
+      try {
+        migrated = await SDT.Base.applyStoredCardRenames();
+        if (!current()) return false;
+        flushed = await SDT.Base.flushWrites?.();
+      } catch { if (current()) return returnToPicker('基地迁移未保存，原档已保留；请重试进入该档位'); return false; }
+      if (!current()) return false;
+      if (migrated?.persisted === false || flushed?.ok === false) return returnToPicker('基地迁移未保存，原档已保留；请重试进入该档位');
       const bi = SDT.Base.issue(slot);
       if (bi === 'corrupt') UI.log('[[icon:cross]] 该档位基地数据损坏（原数据已备份），本次以空档案启动', 'warn');
       else if (bi === 'tooNew') UI.log('[[icon:cross]] 该档位基地数据来自更新版本的游戏，已以空档案启动', 'warn');
@@ -496,7 +510,9 @@ export function createGameMenuPages(deps, shell) {
       try {
         // 初始化先确认落盘；等待页面期间连点不能再次重置档案。
         SDT.Base.use(slot);
-        if (SDT.Base.reset(slot) === false) {
+        const initialized = await SDT.Base.reset(slot);
+        if (!pickerCurrent(picker) || SDT.Base.slot !== slot) return false;
+        if (initialized === false) {
           restoreError('档位初始化未保存，请检查存储空间或档位变化后重试；尚未进入基地');
           return false;
         }
@@ -525,7 +541,7 @@ export function createGameMenuPages(deps, shell) {
           const picker = document.getElementById('slotRestoreError');
           try {
             const recovered = await recoverSlotIfPending(slot);
-            if (!pickerContext() || (picker && !picker.isConnected)) return false;
+            if (!pickerContext() || !pickerCurrent(pickerPage)) return false;
             if (!recovered.ok) {
               restoreError(`${recovered.message || '存档恢复尚未完成'}；原档与恢复记录已保留，请重试进入该档位`);
               return false;
@@ -583,6 +599,9 @@ export function createGameMenuPages(deps, shell) {
                 return returnToPicker(`${loaded.message || '对局存档读取失败'}；原档已保留，请重试进入该档位`);
               }
               const resumedContext = captureBattleContext(game, getActiveSlot);
+              const persisted = await loaded.pendingPersistence;
+              if (!resumedContext()) return false;
+              if (persisted?.ok === false) return returnToPicker(`${persisted.message || '基地迁移未保存'}；原档已保留，请重试进入该档位`);
               if (loaded.classChoiceEntry) {
                 const sourceBody = document.getElementById('ovBody');
                 const sourceRoot = sourceBody?.firstElementChild;
@@ -623,20 +642,32 @@ export function createGameMenuPages(deps, shell) {
         }, !hasSavedRun);
       } finally { enteringSlot = false; }
     });
-    UI.act('overwriteSlot', (d) => {
+    UI.act('overwriteSlot', async (d) => {
       if (enteringSlot) return;
       if (!armConfirm(`[data-act="overwriteSlot"][data-slot="${d.slot}"]`, '确认重开？', '覆盖重开')) return;
-      const cleared = clearSlot(+d.slot);
+      const pickerPage = document.querySelector('.slot-page');
+      enteringSlot = true;
+      let cleared;
+      try { cleared = await clearSlot(+d.slot); }
+      catch { cleared = { ok:false, message:'删除未保存，请重试' }; }
+      finally { enteringSlot = false; }
+      if (!pickerCurrent(pickerPage)) return false;
       if (cleared === false || cleared?.ok === false) {
         restoreError(`档位 ${d.slot} ${cleared?.message || '删除未完成，请重试'}；尚未重开`);
         return false;
       }
       return resetAndLaunch(+d.slot);
     });
-    UI.act('delSlot', (d) => {
+    UI.act('delSlot', async (d) => {
       if (enteringSlot) return;
       if (!armConfirm(`[data-act="delSlot"][data-slot="${d.slot}"]`, '确认删除？', '删除')) return;
-      const cleared = clearSlot(+d.slot);
+      const pickerPage = document.querySelector('.slot-page');
+      enteringSlot = true;
+      let cleared;
+      try { cleared = await clearSlot(+d.slot); }
+      catch { cleared = { ok:false, message:'删除未保存，请重试' }; }
+      finally { enteringSlot = false; }
+      if (!pickerCurrent(pickerPage)) return false;
       if (cleared === false || cleared?.ok === false) {
         restoreError(`档位 ${d.slot} ${cleared?.message || '删除未完成，请重试'}`);
         return false;
@@ -644,7 +675,7 @@ export function createGameMenuPages(deps, shell) {
       UI.log(`[[icon:trash]] 已删除【档位 ${d.slot}】的存档（含基地数据）`, 'warn');
       openSlotPicker();   // 重绘档位列表
     });
-    UI.act('slotBack', () => { UI.hideOverlay(); showTitle(); });
+    UI.act('slotBack', () => { pickerActive = false; UI.hideOverlay(); showTitle(); });
   }
 
   function startNewGame() { openSlotPicker(); }
@@ -692,12 +723,12 @@ export function createGameMenuPages(deps, shell) {
       const button = document.querySelector('[data-act="leaveSave"]');
       if (button) button.textContent = '正在保存…';
       game.state = 'idle';
-      let saved = false;
-      try { saved = await saveGame(); }
+      let saved;
+      try { saved = await saveSession(); }
       catch (error) { console.error('[leave-run] 保存退出失败', error); }
       // Saving may finish after another overlay replaces or closes this panel.
       if (!leaveViewMounted(view)) return false;
-      if (saved !== true) {
+      if (!saved?.ok) {
         game.state = 'modal';
         setLeaveBusy(view, false);
         if (button) button.textContent = '重试保存并退出';
@@ -858,52 +889,47 @@ export function createGameMenuPages(deps, shell) {
     cancelPendingPageEntries('menu');
     const prev = game.state;
     game.state = 'modal';
-    UI.showOverlay('', `
-      <div class="pg settings-page ui-scale-system">
-        <!-- 2026-09-07 留言：右上叉号去掉。2026-09-25 老板：返回键统一 = 主页左上退出键
-             （ak-sq ak-exit）同款同位，底部大返回钮取消，Esc 仍可关 -->
-        ${linkedBackHTML('closeSettings', '返回', 'ak-back-tl')}
-        <header class="pg-head"><h2>设置</h2><span class="pg-spacer"></span></header>
-        <div class="settings settings-layout">
-        <section class="settings-group settings-general">
+    const groups = {
+      general: `<section class="settings-group settings-general">
         <h3 class="set-h">[[icon:gear]] 通用 <span class="set-en">GENERAL</span></h3>
-        <label class="chk"><input type="checkbox" id="setIndex" ${game.toggles.index ? 'checked' : ''}> 结点编号 <span class="set-en">NODE NUMBERS</span></label>
-        <label class="chk"><input type="checkbox" id="setHint" ${storeGet('sdt-hintbar') !== '0' ? 'checked' : ''}> 底部操作提示条 <span class="set-en">HINT BAR</span></label>
-        <label class="chk"><input type="checkbox" id="setBanner" ${storeGet('sdt-banner') !== '0' ? 'checked' : ''}> 环层横幅 <span class="set-en">LAYER BANNER</span></label>
-        <label class="chk"><input type="checkbox" id="setDev" ${game.devMode ? 'checked' : ''}> 开发者模式（测试工具） <span class="set-en">DEVELOPER</span></label>
-        </section>
-        <section class="settings-group settings-display">
+        <label class="chk"><span class="settings-row-copy"> 结点编号 <span class="set-en">NODE NUMBERS</span></span><input type="checkbox" role="switch" id="setIndex" ${game.toggles.index ? 'checked' : ''}></label>
+        <label class="chk"><span class="settings-row-copy"> 底部操作提示条 <span class="set-en">HINT BAR</span></span><input type="checkbox" role="switch" id="setHint" ${storeGet('sdt-hintbar') !== '0' ? 'checked' : ''}></label>
+        <label class="chk"><span class="settings-row-copy"> 环层横幅 <span class="set-en">LAYER BANNER</span></span><input type="checkbox" role="switch" id="setBanner" ${storeGet('sdt-banner') !== '0' ? 'checked' : ''}></label>
+        <label class="chk"><span class="settings-row-copy"> 开发者模式（测试工具） <span class="set-en">DEVELOPER</span></span><input type="checkbox" role="switch" id="setDev" ${game.devMode ? 'checked' : ''}></label>
+        ${battleRestartHTML({ SDT, game })}
+        </section>`,
+      display: `<section class="settings-group settings-display">
         <h3 class="set-h">[[icon:gear]] 画面与反馈 <span class="set-en">DISPLAY &amp; ACCESS</span></h3>
         ${performanceSettingsHTML()}
-        <label class="chk"><input type="checkbox" id="setShake" ${storeGet('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈 <span class="set-en">SCREEN SHAKE</span></label>
-        <label class="chk"><input type="checkbox" id="setReduceMotion" ${storeGet('sdt-reduce-motion') === '1' ? 'checked' : ''}> 减少动态效果 <span class="set-en">REDUCE MOTION</span></label>
-        </section>
-        <section class="settings-group settings-audio">
+        <label class="chk"><span class="settings-row-copy"> 屏幕震动反馈 <span class="set-en">SCREEN SHAKE</span></span><input type="checkbox" role="switch" id="setShake" ${storeGet('sdt-reduce-shake') === '1' ? '' : 'checked'}></label>
+        <label class="chk"><span class="settings-row-copy"> 减少动态效果 <span class="set-en">REDUCE MOTION</span></span><input type="checkbox" role="switch" id="setReduceMotion" ${storeGet('sdt-reduce-motion') === '1' ? 'checked' : ''}></label>
+        </section>`,
+      audio: `<section class="settings-group settings-audio">
         <h3 class="set-h">[[icon:gear]] 音频 <span class="set-en">AUDIO</span></h3>
-        <label class="chk"><input type="checkbox" id="setMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}> 背景音乐 <span class="set-en">MUSIC</span></label>
+        <label class="chk"><span class="settings-row-copy"> 背景音乐 <span class="set-en">MUSIC</span></span><input type="checkbox" role="switch" id="setMusic" ${SDT.Sound.musicMuted ? '' : 'checked'}></label>
         <label class="chk vol"><span>音乐音量 <span class="set-en">MUSIC VOL</span></span><input type="range" id="setMusicVol" min="0" max="100" value="${Math.round(SDT.Sound.musicVolume * 100)}"><b id="setMusicVolVal">${Math.round(SDT.Sound.musicVolume * 100)}</b></label>
         <div class="settings-music-recovery">
           <p class="hint" id="setMusicStatus" role="status" aria-live="polite"></p>
           <button class="mini-btn" type="button" id="setMusicRetry" hidden>重试加载音乐</button>
         </div>
-        <label class="chk"><input type="checkbox" id="setSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效 <span class="set-en">SOUND FX</span></label>
+        <label class="chk"><span class="settings-row-copy"> 音效 <span class="set-en">SOUND FX</span></span><input type="checkbox" role="switch" id="setSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}></label>
         <label class="chk vol"><span>音效音量 <span class="set-en">SFX VOL</span></span><input type="range" id="setSfxVol" min="0" max="100" value="${Math.round(SDT.Sound.sfxVolume * 100)}"><b id="setSfxVolVal">${Math.round(SDT.Sound.sfxVolume * 100)}</b></label>
         <p class="hint">音乐与音效可分别调节，修改自动保存。侧边栏按钮控制全局静音。</p>
-        </section>
-        <section class="settings-group settings-credits">
+        </section>`,
+      credits: `<section class="settings-group settings-credits">
         <h3 class="set-h">[[icon:trophy]] 致谢 <span class="set-en">CREDITS</span></h3>
         <p class="hint"><strong>图标</strong><span>game-icons.net · Lorc、Delapouite、Carl Olsen、Caro Asercion<br><span class="license">CC-BY 3.0</span></span></p>
         <p class="hint"><strong>战斗音效</strong><span>rubberduck、Tinysized、Kenney 等创作者<br><span class="license">CC0</span></span></p>
         <p><a class="ov-btn" href="./assets/sfx/battle/SOURCES.md" target="_blank" rel="noopener">查看音效来源 <span class="settings-external" aria-hidden="true">↗</span></a></p>
-        </section>
-        <section class="settings-group settings-records">
+        </section>`,
+      records: `<section class="settings-group settings-records">
         <h3 class="set-h">[[icon:book]] 留言信箱 <span class="set-en">SUGGESTION BOX</span></h3>
         <div class="btn-row"><button class="mini-btn" data-act="openInbox">查看历史留言</button></div>
         <h3 class="set-h">[[icon:chart]] 跑局数据 <span class="set-en">RUN DATA</span></h3>
         <!-- W1-01：数据页原唯一入口=Alt+9 不可发现，设置页加可见入口 -->
         <div class="btn-row"><button class="mini-btn" data-act="openDataPageUi">查看跑局数据</button></div>
-        </section>
-        <section class="settings-group settings-danger">
+        </section>`,
+      danger: `<section class="settings-group settings-danger">
         <h3 class="set-h">危险区 <span class="set-en">DANGER ZONE</span></h3>
         <!-- W1-08：三枚不可逆钮原同排等权——按危险度分级：低危两枚一排，清档独占一排加重 -->
         <div class="btn-row">
@@ -914,11 +940,23 @@ export function createGameMenuPages(deps, shell) {
           <button class="mini-btn danger danger-max" data-act="wipeSave">清空全部存档</button>
         </div>
         <p class="hint">清空后无法恢复。<br>「清空全部存档」会删除五个档位的全部档案。</p>
-        </section>
-        </div><!-- /.settings -->
-      </div><!-- /.pg -->`, 'page');
-    initSettingsNavigation(UI.el.ovBody.querySelector('.settings-page'));
+        </section>`,
+    };
+    const settingsHTML = `
+      <div class="pg settings-page settings-tabbed ui-scale-system" data-settings-category="general" data-settings-motion="entry">
+        <!-- 2026-09-07 留言：右上叉号去掉。2026-09-25 老板：返回键统一 = 主页左上退出键
+             （ak-sq ak-exit）同款同位，底部大返回钮取消，Esc 仍可关 -->
+        ${linkedBackHTML('closeSettings', '返回', 'ak-back-tl')}
+        <header class="pg-head"><h2>设置</h2><span class="pg-spacer"></span></header>
+        ${settingsLayoutHTML(groups)}
+      </div><!-- /.pg -->`;
+    const finishOverlay = beginRuntimeStage('settings-overlay-sync');
+    try { UI.showOverlay('', settingsHTML, 'page'); } finally { finishOverlay(); }
+    const finishNavigation = beginRuntimeStage('settings-navigation-sync');
+    try { initSettingsNavigation(UI.el.ovBody.querySelector('.settings-page')); } finally { finishNavigation(); }
     bindPerformanceSettings(UI.el.ovBody);
+    bindBattleRestart({ SDT, UI, game, isCurrentContext: captureBattleContext(game, getActiveSlot),
+      page: UI.el.ovBody.querySelector('.settings-page') });
     const sync = () => {
       if (UI.el.tglIndex) UI.el.tglIndex.checked = game.toggles.index;
       runtime.syncDevVisibility();
@@ -946,9 +984,15 @@ export function createGameMenuPages(deps, shell) {
       if (!armDanger('wipeCards', '确认清空？')) return;
       SDT.Cards.clearAll(); UI.log('已清空卡牌库', 'warn');
     });
-    UI.act('wipeSave', () => {
+    let wipingSave = false;
+    UI.act('wipeSave', async () => {
+      if (wipingSave) return false;
       if (!armDanger('wipeSave', '确认清空全部？')) return;
-      const cleared = clearAllSlots();
+      wipingSave = true;
+      let cleared;
+      try { cleared = await clearAllSlots(); }
+      catch { cleared = { ok:false }; }
+      finally { wipingSave = false; }
       if (cleared === false || cleared?.ok === false) {
         const failed = cleared?.results?.filter(result => !result.ok) || [];
         const message = failed.map(result => `档位 ${result.slot} ${result.message}`).join('；');

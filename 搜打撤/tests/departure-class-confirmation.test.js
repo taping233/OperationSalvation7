@@ -71,14 +71,14 @@ describe('选角确认的出征整备守卫', () => {
     expect(document.querySelector('.cls2-skill').textContent).toContain('刺击');
     expect(document.querySelector('.cls2-skill').textContent).toContain('不消耗卡牌');
     expect(document.querySelector('.cls2-supply-rules').open).toBe(true);
-    handlers.pickClass();
+    await handlers.pickClass();
     if (deferred) {
       expect(onSelect).toHaveBeenCalledTimes(1);
       expect(onSelect.mock.calls[0][0]).toBe('侠客');
       expect(beforeConfirm).not.toHaveBeenCalled();
       expect(randomClassCard).not.toHaveBeenCalled();
       expect(game.characterId).toBeNull();
-      onSelect.mock.calls[0][1]();
+      await onSelect.mock.calls[0][1]();
     }
 
     expect(beforeConfirm).toHaveBeenCalledTimes(1);
@@ -97,8 +97,10 @@ describe('选角确认的出征整备守卫', () => {
       beforeConfirm.mockReturnValue(true);
       randomClassCard.mockReturnValueOnce({ id: 'first', name: '实际牌甲' }).mockReturnValueOnce({ id: 'second', name: '实际牌乙' });
       saveGame.mockReturnValue(false);
-      handlers.pickClass();
-      handlers.pickClass();
+      const firstConfirmation = handlers.pickClass();
+      const repeatedConfirmation = handlers.pickClass();
+      await firstConfirmation;
+      await repeatedConfirmation;
       expect(randomClassCard).toHaveBeenCalledTimes(2);
       await transition;
       await Promise.resolve();

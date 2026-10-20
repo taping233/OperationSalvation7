@@ -2,15 +2,13 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createBattleSelectionFlow } from '../game/src/battle/core/battle.selection-flow.js';
 import { createBattleExecutionSession } from '../game/src/battle/runtime/battle.execution-session.js';
-import {
-  hand, consumed, handSelecting, choosing, discovering, zeroFeeUntil, set$G, set$hand, set$consumed,
-  set$foes, cardAnims, set$handSelecting, set$choosing, set$discovering, set$discoverQueue,
-} from '../game/src/battle/runtime/battle.runtime.js';
+import { createBattleRuntime } from '../game/src/battle/runtime/battle.runtime.factory.js';
+const runtime = createBattleRuntime();
 
 afterEach(() => {
-  set$G(null); set$hand([]); set$consumed([]); set$foes([]); cardAnims.length = 0;
-  set$handSelecting(null); set$choosing(null); set$discovering(null); set$discoverQueue([]);
-  zeroFeeUntil.clear();
+  runtime.set$G(null); runtime.set$hand([]); runtime.set$consumed([]); runtime.set$foes([]); runtime.cardAnims.length = 0;
+  runtime.set$handSelecting(null); runtime.set$choosing(null); runtime.set$discovering(null); runtime.set$discoverQueue([]);
+  runtime.zeroFeeUntil.clear();
 });
 
 function fixture(overrides = {}) {
@@ -24,10 +22,10 @@ function fixture(overrides = {}) {
   const fireConsumeTriggers = vi.fn();
   const queueCardExecution = vi.fn();
   const addTempCard = vi.fn(() => 'copy');
-  set$G({ battleActive: true, log: vi.fn() });
-  set$hand(['a', 'b', 'wrong']);
-  set$consumed([]); cardAnims.length = 0; set$foes([{ hp: 100, dead: false }]);
-  const flow = createBattleSelectionFlow({
+  runtime.set$G({ battleActive: true, log: vi.fn() });
+  runtime.set$hand(['a', 'b', 'wrong']);
+  runtime.set$consumed([]); runtime.cardAnims.length = 0; runtime.set$foes([{ hp: 100, dead: false }]);
+  const flow = createBattleSelectionFlow({ runtime,
     session, cards: { all: () => [], isRandomObtainable: () => true, sellPrice: () => 0 },
     deny: vi.fn(), random01: () => 0, throwIfActionCancelled: () => {},
     findCard: uid => entries.get(uid), requestBattleRender: vi.fn(),
@@ -46,25 +44,25 @@ describe('effect-selection live candidate and completion boundaries', () => {
     const resume = vi.fn();
     session.handSelectQueue.push({ n: 2, type: '武术', act: 'consume', mandatory: true, onDone });
     flow.processHandSelect();
-    session.deferTurnEnd(resume, () => !handSelecting && !session.handSelectQueue.length);
+    session.deferTurnEnd(resume, () => !runtime.handSelecting && !session.handSelectQueue.length);
     flow.pickHandSelect('wrong');
     flow.pickHandSelect('stale');
-    expect(handSelecting.n).toBe(2);
-    expect(consumed).toEqual([]);
+    expect(runtime.handSelecting.n).toBe(2);
+    expect(runtime.consumed).toEqual([]);
     flow.pickHandSelect('a');
     flow.pickHandSelect('a');
-    expect(consumed).toEqual(['a']);
-    expect(hand).toEqual(['b', 'wrong']);
-    expect(handSelecting.n).toBe(1);
+    expect(runtime.consumed).toEqual(['a']);
+    expect(runtime.hand).toEqual(['b', 'wrong']);
+    expect(runtime.handSelecting.n).toBe(1);
     expect(fireConsumeTriggers).toHaveBeenCalledOnce();
     expect(onDone).not.toHaveBeenCalled();
     expect(resume).not.toHaveBeenCalled();
     flow.pickHandSelect('b');
     flow.pickHandSelect('b');
-    expect(consumed).toEqual(['a', 'b']);
+    expect(runtime.consumed).toEqual(['a', 'b']);
     expect(fireConsumeTriggers).toHaveBeenCalledTimes(2);
     expect(onDone).toHaveBeenCalledOnce();
-    expect(handSelecting).toBeNull();
+    expect(runtime.handSelecting).toBeNull();
     expect(resume).toHaveBeenCalledOnce();
   });
 
@@ -79,13 +77,13 @@ describe('effect-selection live candidate and completion boundaries', () => {
     const resume = vi.fn();
     session.handSelectQueue.push({ n: 1, type: '武术', act: 'consume' });
     flow.processHandSelect();
-    session.deferTurnEnd(resume, () => !handSelecting && !session.handSelectQueue.length);
+    session.deferTurnEnd(resume, () => !runtime.handSelecting && !session.handSelectQueue.length);
     flow.pickHandSelect('a');
-    expect(handSelecting?.act).toBe('copy');
-    expect(consumed).toEqual(['a']);
+    expect(runtime.handSelecting?.act).toBe('copy');
+    expect(runtime.consumed).toEqual(['a']);
     expect(resume).not.toHaveBeenCalled();
     flow.pickHandSelect('b');
-    expect(handSelecting).toBeNull();
+    expect(runtime.handSelecting).toBeNull();
     expect(resume).toHaveBeenCalledOnce();
   });
 
@@ -95,7 +93,7 @@ describe('effect-selection live candidate and completion boundaries', () => {
     flow.processHandSelect();
     flow.pickHandSelect('wrong'); flow.pickHandSelect('stale');
     expect(queueCardExecution).not.toHaveBeenCalled();
-    expect(handSelecting).not.toBeNull();
+    expect(runtime.handSelecting).not.toBeNull();
     flow.pickHandSelect('a'); flow.pickHandSelect('a');
     expect(queueCardExecution).toHaveBeenCalledOnce();
     expect(queueCardExecution.mock.calls[0][0]).toBe('a');
@@ -104,17 +102,17 @@ describe('effect-selection live candidate and completion boundaries', () => {
   it.each(['zero', 'discover'])('resumes after a %s selection which does not enqueue an action', act => {
     const { flow, session } = fixture();
     const resume = vi.fn();
-    session.deferTurnEnd(resume, () => !handSelecting && !discovering);
+    session.deferTurnEnd(resume, () => !runtime.handSelecting && !runtime.discovering);
     if (act === 'zero') {
       session.handSelectQueue.push({ n: 1, type: '武术', act });
       flow.processHandSelect();
       flow.pickHandSelect('a');
-      expect(zeroFeeUntil.has('a')).toBe(true);
+      expect(runtime.zeroFeeUntil.has('a')).toBe(true);
     } else {
-      set$discoverQueue([{ n: 1, explicit: [{ id: 'discovered', name: '发现牌', type: '武术' }] }]);
+      runtime.set$discoverQueue([{ n: 1, explicit: [{ id: 'discovered', name: '发现牌', type: '武术' }] }]);
       flow.processDiscoverQueue();
       flow.pickDiscover(0);
-      expect(discovering).toBeNull();
+      expect(runtime.discovering).toBeNull();
     }
     expect(resume).toHaveBeenCalledOnce();
   });
@@ -125,26 +123,26 @@ describe('effect-selection live candidate and completion boundaries', () => {
     const resume = vi.fn();
     session.handSelectQueue.push({ n: 1, type: '武术', act: 'play' });
     flow.processHandSelect();
-    session.deferTurnEnd(resume, () => !handSelecting);
+    session.deferTurnEnd(resume, () => !runtime.handSelecting);
     flow.pickHandSelect('a');
     expect(queueCardExecution).toHaveBeenCalledOnce();
-    expect(hand).toContain('a');
+    expect(runtime.hand).toContain('a');
     expect(resume).toHaveBeenCalledOnce();
   });
 
   it('drains empty discovery jobs to the next decision instead of stranding the continuation', () => {
     const { flow, session } = fixture();
     const resume = vi.fn();
-    set$discoverQueue([
+    runtime.set$discoverQueue([
       { n: 1 }, { n: 1 }, { n: 1 },
       { n: 1, explicit: [{ id: 'next', name: '下一张', type: '武术' }] },
     ]);
-    session.deferTurnEnd(resume, () => !discovering);
+    session.deferTurnEnd(resume, () => !runtime.discovering);
     flow.processDiscoverQueue();
-    expect(discovering.options.map(card => card.id)).toEqual(['next']);
+    expect(runtime.discovering.options.map(card => card.id)).toEqual(['next']);
     expect(resume).not.toHaveBeenCalled();
     flow.pickDiscover(0);
-    expect(discovering).toBeNull();
+    expect(runtime.discovering).toBeNull();
     expect(resume).toHaveBeenCalledOnce();
   });
 
@@ -152,16 +150,16 @@ describe('effect-selection live candidate and completion boundaries', () => {
     const { flow, session, queueCardExecution } = fixture();
     session.choiceQueue.push({ cardName: '选择', options: ['继续'] });
     flow.processChoice();
-    const choice = choosing;
+    const choice = runtime.choosing;
     for (const index of [-1, 1, 0.5, NaN]) flow.pickChoice(index);
-    expect(choosing).toBe(choice);
+    expect(runtime.choosing).toBe(choice);
     session.handSelectQueue.push({ n: 1, type: '武术', act: 'play' });
     flow.processHandSelect();
-    const selection = handSelecting;
-    set$G({ battleActive: false, log: vi.fn() });
+    const selection = runtime.handSelecting;
+    runtime.set$G({ battleActive: false, log: vi.fn() });
     flow.pickHandSelect('a'); flow.pickChoice(0);
-    expect(handSelecting).toBe(selection);
-    expect(choosing).toBe(choice);
+    expect(runtime.handSelecting).toBe(selection);
+    expect(runtime.choosing).toBe(choice);
     expect(queueCardExecution).not.toHaveBeenCalled();
   });
 });

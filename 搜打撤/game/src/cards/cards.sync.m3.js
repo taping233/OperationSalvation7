@@ -15,7 +15,7 @@
  *   tt2-jianghu       发现 1 张其它职业卡并直接施放 → acquire n:1 pool{kind:'其它职业'}
  *                     dest:'discover' act:'play'（parsePoolNoun 其它职业池 + 发现面板原生 act）；
  *   tt2-turtlearmor   消耗 1 张装备牌 +10 甲 → armor amount:10 + consumeEquip:true（付不出则无效）；
- *   tt3-dig-treasure  牌库底发现 1 张牌，获等同其价格的护甲 → acquire n:1 pool{kind:'牌库底'} +
+ *   tt3-dig-treasure  牌库底三张中发现 1 张，获等同其价格的护甲 → acquire n:3 pool{kind:'牌库底'} +
  *                     armor priceOf:'discovered'（锚定发现牌价格）；
  *   tt3-fly-arrowhawk 攻（+3），本次攻击流血加成翻倍 → damage（命中入口按本卡处理）；
  *   tt3-purify-arrow  攻（-1），净化自身 → damage（负攻词条需 dmgType attack）+ cleanse self；
@@ -89,8 +89,8 @@ const definitions = new Map([
   ['tt2-turtlearmor', R({ ...SELF, requirements: [{ kind: 'handCards', count: 1, type: '装备' }] },
     [{ op: 'armor', amount: 10 }])],
   ['tt3-dig-treasure', R(SELF, [
-    acquire(1, '牌库底', 'discover'),
-    // 护甲锚定发现牌价格（普通战无牌库时发现池降级随机，执行器既有口径）
+    acquire(3, '牌库底', 'discover'),
+    // n 是真实底库候选数；只发现一次，护甲锚定所选牌价格。
     { op: 'armor', priceOf: 'discovered' },
   ])],
   ['tt3-fly-arrowhawk', R(ENEMY_ONE, [dmgField()])],

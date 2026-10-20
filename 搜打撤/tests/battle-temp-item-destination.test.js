@@ -50,10 +50,12 @@ it.each([
 });
 it('直接施放道具不会在快捷栏留下第二次使用机会', async () => {
   const uid = addTempCard(healItem, { source: 'discover-cast' });
-  expect(bar().some(o => o.uid === uid)).toBe(false);
   queueCardExecution(uid, healItem, [], null, true);
+  expect(bar().some(o => o.uid === uid)).toBe(false);
+  BattleSession.commands.usePotion(uid);
   await vi.advanceTimersByTimeAsync(1000);
-  expect(R.played).toContain(uid);
+  expect(game.hp).toBe(33);
+  expect(R.played.filter(entry => entry === uid)).toHaveLength(1);
   expect(bar().some(o => o.uid === uid)).toBe(false);
   expect(R.hand).not.toContain(uid);
 });

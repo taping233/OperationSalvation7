@@ -2,14 +2,19 @@
 
 function groupHandCards(entries, infusing = null) {
   const groups = [];
+  const byKey = new Map();
   const stackKey = card => card && card.id
     ? `id:${card.id}|${card.cost}|${card.desc || ''}`
     : `legacy:${card?.name || ''}|${card?.type || ''}|${card?.cost || 0}|${card?.desc || ''}`;
   const push = (entry) => {
     const key = stackKey(entry.card);
-    const found = groups.find(group => group.key === key);
+    const found = byKey.get(key);
     if (found) found.uids.push(entry.uid);
-    else groups.push({ key, card: entry.card, uids: [entry.uid], self: false });
+    else {
+      const group = { key, card: entry.card, uids: [entry.uid], self: false };
+      byKey.set(key, group);
+      groups.push(group);
+    }
   };
   if (infusing) {
     entries.forEach(entry => { if (entry.uid !== infusing.uid) push(entry); });

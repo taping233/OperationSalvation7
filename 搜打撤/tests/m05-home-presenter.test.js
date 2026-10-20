@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { describe, expect, it } from 'vitest';
 import { presentHome, homeErrorMessage } from '../game/src/home/home.presenter.js';
 import { readBase } from '../game/src/hub/base.commands.js';
@@ -25,10 +27,10 @@ describe('M05 presenter', () => {
 
   it('消费真实 readBase 的公开修订号后可以购买，不依赖被隐藏的提交元数据', async () => {
     const base = window.SDT.Base;
-    base.wipe(5);
+    (await base.wipe(5));
     base.use(5);
     base.data.coins = 6;
-    expect(base.save()).toBe(true);
+    expect((await base.save())).toBe(true);
     const read = readBase(5);
     expect(read.ok).toBe(true);
     expect(read.value._m01).toBeUndefined();

@@ -110,8 +110,10 @@ const nuid = () => 'nst' + Date.now().toString(36) + (uidSeq++);
 const ri = (n) => Math.floor(Random.random('nest') * n);
 
 /* —— 兼容旧解锁入口（原「一图击败首脑撤离后解锁」）。09-24 定版后保留零钥匙调用语义。 —— */
-export function unlockNest() {
-  const result = B().unlockNestLegacy();
+export async function unlockNest() {
+  const slot = B().slot, seed = game.seed;
+  const result = await B().unlockNestLegacy();
+  if (B().slot !== slot || game.seed !== seed) return false;
   if (!result.ok) {
     UI.log('[[icon:cross]] 研究所解锁未保存，请稍后重试', 'warn');
     return;
@@ -144,9 +146,10 @@ export function openNestPrep() {
         <button class="ov-btn" data-act="labBack">暂不进入</button>
       </div>`, true);
     const active = nestPageBinding();
-    UI.act('labOpen', () => {
+    UI.act('labOpen', async () => {
       if (!active()) return;
-      const result = Bn.unlockNestGate();
+      const result = await Bn.unlockNestGate();
+      if (!active()) return;
       if (!result.ok) {
         if (result.code === 'INSUFFICIENT_KEYS') {
           UI.log(`[[icon:lock]] 钥匙不足：开门需要 <b>${result.need}</b> 把钥匙（现有 ${result.available}）`, 'warn');
@@ -429,11 +432,12 @@ function nestBossRewards() {
   game.nestTargetedBox = (game.nestTargetedBox || 0) + 1;
   UI.log('[[icon:gem]] 战胜所主：BOSS 宝箱 ×2 · 定向大符文箱 ×1', 'loot');
   if (game.nestBoss) {
-    const s = SDT.Base.data.stats;
-    if (!s.nestBossKills) s.nestBossKills = [];
-    if (!s.nestBossKills.includes(game.nestBoss.name)) s.nestBossKills.push(game.nestBoss.name);
-    SDT.Base.save();
-    SDT.Meta.track('nestBoss', { name: game.nestBoss.name });
+    const slot = SDT.Base.slot, seed = game.seed;
+    Promise.resolve(SDT.Base.recordNestBoss(game.nestBoss.name)).then(async result => {
+      if (SDT.Base.slot !== slot || game.seed !== seed) return;
+      if (result.persisted === false && SDT.Base.slot) UI.log('[[icon:cross]] 研究所首脑记录尚未保存，请重试保存', 'warn');
+      await SDT.Meta.checkUnlocks();
+    });
   }
 }
 
@@ -679,7 +683,7 @@ function doNestExtract() {
 
     if (pending.slotId == null) {
       // No selected slot has no durable run identity; preserve the legacy ephemeral-memory path.
-      syncPlayTime();
+      await syncPlayTime();
       game.nestActive = false;
       game.nestEquipped = [];
       const base = B();
@@ -689,7 +693,7 @@ function doNestExtract() {
       stats.labTotalScore = (stats.labTotalScore || 0) + pending.score.total;
       stats.labBestScore = Math.max(stats.labBestScore || 0, pending.score.total);
       stats.labRuns = (stats.labRuns || 0) + 1;
-      base.save();
+      // No selected run slot: this compatibility branch is ephemeral and never writes a loaded Base slot.
       clearSave();
     } else {
       if (!sameNestExtractionView(pending)) return false;
@@ -716,7 +720,7 @@ function doNestExtract() {
     const stats = B().data.stats;
     const settled = { slotId: pending.slotId, runId: pending.runId, seed: pending.seed };
     const settledRunes = game.nestRunes;
-    SDT.Meta.checkUnlocks();
+    await SDT.Meta.checkUnlocks();
     UI.log('[[icon:exit]] <b>研究所撤离成功！</b>符文与战利品已运回基地', 'ok');
     playLabEnding(() => {
       if (getActiveSlot() !== settled.slotId || game.seed !== settled.seed || game.nestActive ||

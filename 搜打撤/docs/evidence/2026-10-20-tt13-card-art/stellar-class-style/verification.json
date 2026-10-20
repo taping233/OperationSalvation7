@@ -1,0 +1,11 @@
+{
+  "asset_check": "asset-check.json",
+  "selected_assets_ok": true,
+  "full_size": [1254, 1254],
+  "thumb_size": [448, 448],
+  "visual_review": "内置输出已实看：保留人物神态和三张星牌，发束、衣褶及背景采用职业卡手绘覆色。",
+  "browser": "Codex内置浏览器，当前窗口，真实打开照相馆并搜索星辰占卜；打开大图阶段原有localhost:5200服务断开，ERR_CONNECTION_REFUSED，未确认新版高清图显示。未改用其他浏览器，未启动或停止他人服务。",
+  "global_existing_errors": 95,
+  "build": false,
+  "commit": false
+}

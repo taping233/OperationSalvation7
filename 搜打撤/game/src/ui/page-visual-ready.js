@@ -1,3 +1,4 @@
+import { beginRuntimeStage, captureRuntimeStageContext } from '../core/runtime-trace-stages.local.js';
 import { mapImageReady } from '../core/map-image-ready.js';
 import { createPageSurfaceLifetime } from './page-surface-lifetime.js';
 import { motionTiming, motionReduced } from './motion-presets.js';
@@ -143,6 +144,8 @@ export function stagePageVisual(ui, reveal, { kind = 'page' } = {}) {
   const overlay = ui.el.overlay;
   const body = ui.el.ovBody;
   const source = body.firstElementChild || body;
+  const traceContext = captureRuntimeStageContext();
+  const settingsTraceContext = traceContext && source.matches?.('.settings-page:not(.sugin-page)') ? traceContext : null;
   const controller = new AbortController();
   const cover = visualCover(kind);
   overlay.dataset.visualPending = kind;
@@ -171,7 +174,10 @@ export function stagePageVisual(ui, reveal, { kind = 'page' } = {}) {
       if (body.parentElement.querySelector('.camp-entry-cut')) cover.style.visibility = 'hidden';
       // The layout frame above also serves readiness measurement. Do not wait
       // for it twice; waitPageVisual still owns the final presentation frame.
-      const ready = await waitPageVisual(body, { signal: controller.signal, background: ui._pageBgReady, frameReady: true });
+      const finishWait = settingsTraceContext ? beginRuntimeStage('settings-visual-wait', settingsTraceContext) : () => {};
+      let ready;
+      try { ready = await waitPageVisual(body, { signal: controller.signal, background: ui._pageBgReady, frameReady: true }); }
+      finally { finishWait(); }
       if (!ready || !current()) return;
       delete overlay.dataset.visualPending;
       reveal();

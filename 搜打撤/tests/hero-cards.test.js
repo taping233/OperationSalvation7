@@ -247,7 +247,7 @@ describe('英雄卡实打 · 牧师', () => {
     BattleSession.commands.playCard(uidOf(g, hero('tt8-hero-warlock')), null);
     await drain();
     expect(seen(g, '洗入牌库'), slice(g)).toBe(true);
-    expect(seen(g, '然后抽') || seen(g, '洗入后抽了 2 张牌'), slice(g)).toBe(true);
+    expect(seen(g, '抽了 2 张牌'), slice(g)).toBe(true);
     // 洗混后立刻抽的 2 张应是禁咒（抽到时施放），而不是洗入前的旧牌
     const castNow = g.logs.filter(l => l.includes('抽到时') && l.includes('禁咒'));
     expect(castNow.length, `洗入后应立即施放且仅施放 2 张禁咒：${slice(g)}`).toBe(2);

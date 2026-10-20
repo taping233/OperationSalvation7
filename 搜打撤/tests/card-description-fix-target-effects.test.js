@@ -108,11 +108,10 @@ describe('卡面修复：目标与当次效果', () => {
     await drain();
     BattleSession.commands.pickChoice(choice);
     await drain();
-    const heaven = runtime.delayed.find(job => job.cardName === '天国之门');
+    const heaven = runtime.delayed.find(job => job.ops?.some(operation => operation.op === 'randomBlessing'));
     expect(heaven).toBeTruthy();
-    expect(heaven.text).toMatch(/潜行/);
-    expect(heaven.text).toMatch(/护甲/);
-    expect(heaven.text).toMatch(/净化/);
+    expect(heaven).toMatchObject({ special: 'choiceOps', repeat: true, ops: [{ op: 'randomBlessing', target: 'allAllies', choices: ['stealth', 'atkUp', 'spellUp', 'reduce', 'armor', 'purify'], preferMissing: true }] });
+    expect(BattleSession.getSnapshot().choosing).toBeNull();
     const isDelayed = !!heaven.notBeforeTurn;
     const before = score(runtime.pstat) + score(living);
     if (isDelayed) {

@@ -19,6 +19,7 @@ function start() {
     heal(n) { this.hp = Math.min(this.maxHp, this.hp + n); }, addItem() {}, onBattleEnd() {} };
   BattleSession.start(game, [{ id: 'foe', name: '靶', hp: 100, atk: 0 }], { isBoss: false });
   R.set$mode('boss');
+  R.set$drawPile([]); // 该文件隔离BOSS发现/抽牌，不混入普通入口的99临时库。
   R.set$energy(0);
   return game;
 }
@@ -65,14 +66,13 @@ it.each([false, true])('drawn copies cast at zero energy and never enter hand, f
   expect(R.discard.filter(value => value === uid)).toHaveLength(1);
 });
 
-it('repeated draws recycle exactly one copy without stale hand or duplicate pile entries', async () => {
-  start(); const uid = put(card());
-  for (let i = 0; i < 3; i++) {
-    expect(drawCards(1)).toBe(1); await settle();
-    expect(R.hand).not.toContain(uid); expect(R.drawPile).not.toContain(uid);
-    expect(R.discard.filter(value => value === uid)).toHaveLength(1);
-  }
-  expect(R.foes[0].hp).toBe(91);
+it('a consumed draw-cast copy is not automatically recycled by later empty draws', async () => {
+  start(); R.set$drawPile([]); const uid = put(card());
+  expect(drawCards(1)).toBe(1); await settle();
+  for (let i = 0; i < 2; i++) expect(drawCards(1)).toBe(0);
+  expect(R.hand).not.toContain(uid); expect(R.drawPile).not.toContain(uid);
+  expect(R.discard.filter(value => value === uid)).toHaveLength(1);
+  expect(R.foes[0].hp).toBe(97);
 });
 
 it('a free draw cast still requires infusion and preserves the uncast copy', async () => {
@@ -102,7 +102,7 @@ it('canonical stellar divination keeps the chosen spell and shuffles two draw-ca
   vi.spyOn(C, 'all').mockReturnValue([option]);
   const uid = put(source, 'stellar-source'); R.drawPile.pop(); R.hand.push(uid); R.set$energy(1);
   BattleSession.commands.playCard(uid, 'self'); await settle();
-  expect(R.discovering.act).toBe('stellarCopies');
+  expect(R.discovering).toMatchObject({ act: 'copyToDeck', copies: 2, castOnDraw: true });
   BattleSession.commands.pickDiscover(0); await settle();
   const generated = R.granted.filter(entry => entry.card.id === option.id);
   expect(generated).toHaveLength(3);

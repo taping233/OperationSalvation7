@@ -1,0 +1,178 @@
+{
+  "actions": [
+    {
+      "detail": "测试档02真实补给后首战；飞刃偷袭选第一敌人，牌库99到98、消耗牌堆1张；打开查看器后进入战斗设置，点击重新开始恢复开战状态。",
+      "type": "real-input"
+    }
+  ],
+  "collector": {
+    "browser": "iab",
+    "platform": "Codex",
+    "surface": "current-window",
+    "transport": "cua"
+  },
+  "console": {
+    "coverage": "collected",
+    "errors": []
+  },
+  "kind": "browser-snapshot",
+  "nodes": [
+    {
+      "attributes": {
+        "data-asset-key": "battle-normal"
+      },
+      "identity": "{\"data-asset-key\":\"battle-normal\"}",
+      "key": "battle",
+      "rect": {
+        "height": 563.625,
+        "width": 1002,
+        "x": 0,
+        "y": 0
+      },
+      "selector": ".battle-stage",
+      "styles": {
+        "background-color": "rgb(16, 22, 27)",
+        "border-radius": "0px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "1080px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "1920px"
+      },
+      "tag": "DIV",
+      "text": "第 1 回合你的行动\n        \n         选项\n          战斗规则\n           撤离（判负）\n           设置\n        \n      \n      \n        35/35甲 0 攻 4\n          \n    \n    \n    1\n    \n    \n  \n          \n        \n        \n        "
+    },
+    {
+      "attributes": {
+        "id": "btSelf"
+      },
+      "identity": "{\"id\":\"btSelf\"}",
+      "key": "self",
+      "rect": {
+        "height": 187.875,
+        "width": 271.375,
+        "x": 73.0625,
+        "y": 140.91250610351562
+      },
+      "selector": "#btSelf",
+      "styles": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "0px",
+        "color": "rgb(237, 242, 243)",
+        "display": "block",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "360px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "0px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "520px"
+      },
+      "tag": "DIV",
+      "text": "35/35甲 0 攻 4\n          \n    \n    \n    1"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"BUTTON\",\"text\":\"0消耗牌堆\",\"class\":\"bt-pile clickable\"}",
+      "key": "consumed-pile",
+      "rect": {
+        "height": 26.637500762939453,
+        "width": 93.2125015258789,
+        "x": 883.7374877929688,
+        "y": 403.7250061035156
+      },
+      "selector": "[data-act=\"btGrave\"]",
+      "styles": {
+        "background-color": "rgba(27, 41, 51, 0.28)",
+        "border-radius": "8px",
+        "color": "rgb(232, 239, 237)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "51.0419px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "7px 9px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "178.611px"
+      },
+      "tag": "BUTTON",
+      "text": "0消耗牌堆"
+    },
+    {
+      "attributes": {},
+      "identity": "{\"tag\":\"BUTTON\",\"text\":\"99牌库\",\"class\":\"bt-pile clickable\"}",
+      "key": "deck",
+      "rect": {
+        "height": 32.900001525878906,
+        "width": 65.0250015258789,
+        "x": 39.41250228881836,
+        "y": 498.3625183105469
+      },
+      "selector": "[data-act=\"btDeck\"]",
+      "styles": {
+        "background-color": "rgba(27, 41, 51, 0.28)",
+        "border-radius": "8px",
+        "color": "rgb(232, 239, 237)",
+        "display": "flex",
+        "font-family": "\"HarmonyOS Sans SC\", \"HarmonyOS Sans\", \"Noto Sans SC Sub\", \"Microsoft YaHei\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "height": "63.0419px",
+        "line-height": "normal",
+        "opacity": "1",
+        "padding": "7px 9px",
+        "pointer-events": "auto",
+        "transform": "none",
+        "visibility": "visible",
+        "width": "124.599px"
+      },
+      "tag": "BUTTON",
+      "text": "99牌库"
+    }
+  ],
+  "observedAt": "2026-10-20T15:54:40.115Z",
+  "page": {
+    "origin": "http://127.0.0.1:5342",
+    "pathname": "/",
+    "viewport": {
+      "devicePixelRatio": 1.25,
+      "height": 956,
+      "width": 1002
+    }
+  },
+  "scene": "真实首战出牌与设置重开",
+  "schemaVersion": 1,
+  "screenshots": [
+    "docs/evidence/2026-10-20-WF-sts2-contracts-1020/after-restart-dom.png"
+  ],
+  "selectors": [
+    {
+      "key": "battle",
+      "selector": ".battle-stage"
+    },
+    {
+      "key": "self",
+      "selector": "#btSelf"
+    },
+    {
+      "key": "consumed-pile",
+      "selector": "[data-act=\"btGrave\"]"
+    },
+    {
+      "key": "deck",
+      "selector": "[data-act=\"btDeck\"]"
+    }
+  ]
+}

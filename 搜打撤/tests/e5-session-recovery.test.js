@@ -1,4 +1,7 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+
+installImmediateWebLocks();
 
 const ctx = new Proxy({}, { get: () => () => ctx, set: () => true });
 window.HTMLCanvasElement.prototype.getContext = () => ctx;
@@ -163,7 +166,7 @@ describe('E5 real session recovery and persistence results', () => {
     const raw = writeRun({ version: undefined, extraFutureMetadata: { untouched: true } });
     const baseSave = vi.spyOn(Base, 'save'), runWrite = trackRunWrites();
     const result = session.loadGame(1);
-    expect(result).toEqual({ ok: true, value: true, persistence: { status: 'not_attempted', attempts: [] } });
+    expect(result).toEqual({ ok: true, value: true, persistence: { status: 'not_attempted', attempts: [] }, pendingPersistence: expect.any(Promise) });
     expect(session.game.ownedCards).toEqual([]);
     expect(session.game.discoveredPairs).toEqual(new Set());
     expect(baseSave).not.toHaveBeenCalled(); expect(runWrite).not.toHaveBeenCalled();
@@ -180,22 +183,27 @@ describe('E5 real session recovery and persistence results', () => {
     expect(JSON.parse(localStorage.getItem(RunStorage.key(1))).mapSnapshot).toBeTruthy();
   });
 
-  it('records the two existing Base saves without adding writes', () => {
+  it('records the two existing Base saves without adding writes', async () => {
     writeRun({ elapsed: 7 });
     vi.spyOn(window.SDT.Cards, 'applyAbilityRename').mockReturnValue(true);
     const baseWrite = trackBaseWrites();
-    expect(session.loadGame(1).persistence).toEqual({ status: 'succeeded', attempts: [
+    const result = session.loadGame(1);
+    expect(result.persistence.status).toBe('pending');
+    expect(await result.pendingPersistence).toMatchObject({ ok: true });
+    expect(result.persistence).toEqual({ status: 'succeeded', attempts: [
       { target: 'base', reason: 'card_rename', ok: true },
       { target: 'base', reason: 'elapsed_migration', ok: true },
     ] });
     expect(baseWrite).toHaveBeenCalledTimes(2);
   });
 
-  it('reports real Base write failure while preserving usable restored gameplay', () => {
+  it('reports real Base write failure while preserving usable restored gameplay', async () => {
     ordinary({ elapsed: 9 });
     blockKey('sdt-base-v2-slot1');
     const result = session.loadGame(1);
     expect(result.ok).toBe(true);
+    expect(result.persistence.status).toBe('pending');
+    expect(await result.pendingPersistence).toMatchObject({ ok: false });
     expect(result.persistence).toEqual({ status: 'failed', attempts: [
       { target: 'base', reason: 'elapsed_migration', ok: false, code: 'BASE_SAVE_FAILED' },
       { target: 'run', reason: 'save_game', ok: true },
@@ -224,11 +232,14 @@ describe('E5 real session recovery and persistence results', () => {
     expect(window.SDT.Battle.restore).toHaveBeenCalledTimes(1);
   });
 
-  it('includes battle-triggered syncPlayTime and run save without duplicate calls', () => {
+  it('includes battle-triggered syncPlayTime and run save without duplicate calls', async () => {
     writeRun({ battle: { legacy: true } });
     window.SDT.Battle.restore.mockImplementation(() => { session.game.elapsed = 4; return true; });
     const baseWrite = trackBaseWrites(), runWrite = trackRunWrites();
-    expect(session.loadGame(1).persistence).toEqual({ status: 'succeeded', attempts: [
+    const result = session.loadGame(1);
+    expect(result.persistence.status).toBe('pending');
+    expect(await result.pendingPersistence).toMatchObject({ ok: true });
+    expect(result.persistence).toEqual({ status: 'succeeded', attempts: [
       { target: 'base', reason: 'play_time_sync', ok: true },
       { target: 'run', reason: 'save_game', ok: true },
     ] });
@@ -376,14 +387,15 @@ describe('E5 real menu with real session entry', () => {
       RunStorage, ensureBattleReady: async () => {} });
   }
 
-  it('retains successful enterSlot credentials and warns on real load persistence failure', async () => {
-    ordinary({ elapsed: 11 });
+  it('returns to the slot picker when the restored run cannot persist its Base migration', async () => {
+    const raw = writeRun({ elapsed: 11 });
     blockKey('sdt-base-v2-slot1');
     menu().startNewGame();
     const result = await handlers.enterSlot({ slot: 1 });
-    expect(result).toMatchObject({ ok: true, commandContext: { slot: 1, runActive: true, nestActive: false } });
-    expect(result.commandContext.runToken).toBe(session.game.discoveredPairs);
-    expect(UI.log.mock.calls.flat().join(' ')).toContain('对局已恢复，但恢复后的部分进度未保存');
+    expect(result).toBe(false);
+    expect(document.getElementById('slotRestoreError').textContent).toContain('原档已保留');
+    expect(localStorage.getItem(RunStorage.key(1))).toBe(raw);
+    expect(session.game.nestActive).toBe(true);
   });
 
   it('preflights the real unsafe run before launch or Base.use', async () => {
@@ -423,7 +435,7 @@ describe('未选角 pending run 的同步恢复契约', () => {
     const choice = vi.fn(() => pending);
     session.configureGameRuntime({ openClassChoice:choice });
     const opening = session.newRun('standard', { 随行卡:1 });
-    expect(opening).toBe(pending); await expect(opening).resolves.toBe(false);
+    expect(opening).toBeInstanceOf(Promise); await expect(opening).resolves.toBe(false);
     expect(choice).toHaveBeenCalledOnce(); expect(Base.data.stash[0].count).toBe(1);
     expect(session.game.runActive).toBe(true); expect(session.game.myClass).toBeNull();
     const saved = JSON.parse(localStorage.getItem(RunStorage.key(1)));

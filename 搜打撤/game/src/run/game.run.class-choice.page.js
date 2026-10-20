@@ -47,6 +47,7 @@ export function openClassChoice(options = {}) {
   const previous = characterFor(options.initialCharacter || game.characterId || game.myClass);
   let sel = previous && picks.includes(previous.rulesetId) ? previous.rulesetId : picks[0];
   let confirmationStarted = false;
+  let confirmationPending = false;
   let entryPresented = false;
   let view = 'select'; // 'select' 主选角页 | 'pool' 二级卡池页
   const poolCount = cl => SDT.Cards.classPool(cl).length;
@@ -374,12 +375,23 @@ export function openClassChoice(options = {}) {
     // immediate 同步关层，淡出窗口竞态在 ui.js 层根治
     exitToTitle();
   });
-  const confirmClass = cl => {
-    if (confirmationStarted || !current()) return false;
+  const confirmClass = async cl => {
+    if (confirmationStarted || confirmationPending || !current()) return false;
     if (onSelect ? options.isConfirmationCurrent && !options.isConfirmationCurrent() : !visible()) return false;
-    if (beforeConfirm && beforeConfirm() === false) return false;
+    const confirmationSlot = getActiveSlot();
+    confirmationPending = true;
+    try {
+      if (beforeConfirm && await beforeConfirm() === false) return false;
+      // beforeConfirm may create a new run and intentionally replace the old battle seed.
+      if (getActiveSlot() !== confirmationSlot || (options.isCurrent && !options.isCurrent())) return false;
+      if (onSelect ? options.isConfirmationCurrent && !options.isConfirmationCurrent() : !choiceRoot?.isConnected) return false;
+    } finally { confirmationPending = false; }
     confirmationStarted = true;
-    if (!SDT.Base?.data?.ammoTaught) SDT.Base?.markAmmoTaught?.();
+    if (!SDT.Base?.data?.ammoTaught) {
+      const marked = await SDT.Base?.markAmmoTaught?.();
+      if (getActiveSlot() !== confirmationSlot || (options.isCurrent && !options.isCurrent())) return false;
+      if (marked === false && confirmationSlot != null) UI.log('[[icon:cross]] 教学标记尚未保存，请重试保存', 'warn');
+    }
     game.myClass = cl;
     game.characterId = characterFor(cl).id;
     game.classCard = null;
@@ -429,7 +441,7 @@ export function openClassChoice(options = {}) {
     if (!sel || characterMotion.busy) return;
     const cl = sel;
     if (onSelect) { onSelect(cl, () => confirmClass(cl)); return; }
-    confirmClass(cl);
+    return confirmClass(cl);
   });
   render();
   return true;

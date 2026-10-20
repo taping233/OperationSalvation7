@@ -7,6 +7,10 @@
  * 场景动态选择收益格与已有动作可确定退出的邻格，不依赖随机事件的选择或确认；
  * enterLayer 落位不触发内容，正好构造「站在目标格」的起点。 */
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+import { releaseMainPage, trackMainPagePreparation } from './helpers/main-lifecycle.js';
+
+installImmediateWebLocks();
 
 // 故意恒真：仅给下方 canvas/存储补桩一个块级作用域（lint 静音，不改逻辑）
 // eslint-disable-next-line no-constant-condition
@@ -53,6 +57,7 @@ import { resolve } from 'node:path';
   document.body.innerHTML = body;
 }
 await import('../game/src/main.js');
+trackMainPagePreparation();
 document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true }));
 await new Promise(r => setTimeout(r, 0));
 
@@ -91,7 +96,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     // setTimeout 是 Node 原生实现（populateGlobal 不拷贝 window.setTimeout），文件结束 teardown
     // 删掉 window 后该定时器仍会迟到触发（window is not defined），在全量串行跑里污染下一个文件。
     // newRun(mode, picks, options) 只有三参，第三参就是 options（原写法传的是空数组）。
-    newRun(20260919, 'standard', { skipClassChoice: true });
+    await newRun(20260919, 'standard', { skipClassChoice: true });
     await tick(50);
     game.myClass = '战士';
     game.characterId = 'heixiang';
@@ -102,7 +107,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
   // teardown 撤掉 jsdom 全局后迟到触发会抛 "Image is not defined" 类 ReferenceError，被 vitest 记为
   // unhandled error：全过却 exit 1 的假红（2026-10-01 全量门 3 连跑复现 1 次）。排水让它们在本文件
   // 环境还活着时触发完，比逐个堵入口通用。
-  afterAll(async () => { await tick(700); });
+  afterAll(async () => { await tick(700); await releaseMainPage(); });
 
   it('收益完成即锁；商店离开才锁；返回均不重复触发', async () => {
     // 层内类型布局按局随机（种子固定但 skipClassChoice/上游随机源演进都会平移消耗序列，
@@ -128,7 +133,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     };
     let target = findTarget();
     for (let reroll = 0; !target && reroll < 5; reroll++) {
-      newRun(20260919 + reroll + 1, 'standard', { skipClassChoice: true });
+      await newRun(20260919 + reroll + 1, 'standard', { skipClassChoice: true });
       await tick(50);
       game.myClass = '战士';
       game.characterId = 'heixiang';
@@ -182,7 +187,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
   });
 
   it('物资格有独立场景层；暂不领取可重进，领取后立即变普通', async () => {
-    newRun(20260920, 'standard', { skipClassChoice: true });   // 同上：跳过选角页防 500ms 迟到 warm 定时器
+    await newRun(20260920, 'standard', { skipClassChoice: true });   // 同上：跳过选角页防 500ms 迟到 warm 定时器
     await tick(30);
     game.myClass = '战士'; game.characterId = 'heixiang'; game.state = 'idle';
     const li = 0;
@@ -212,7 +217,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
   });
 
   it('商店关闭不消耗，离开所在格才变普通', async () => {
-    newRun(20260921, 'standard', { skipClassChoice: true });   // 同上：跳过选角页防 500ms 迟到 warm 定时器
+    await newRun(20260921, 'standard', { skipClassChoice: true });   // 同上：跳过选角页防 500ms 迟到 warm 定时器
     await tick(30);
     game.myClass = '战士'; game.characterId = 'heixiang'; game.state = 'idle';
     const li = 0;
@@ -235,7 +240,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     const { RunStorage } = await import('../game/src/hub/game.storage.js');
     const slot=4; session._set_active_slot(slot);window.SDT.Base.use(slot);
     try {
-      newRun('standard',[],{skipClassChoice:true});game.myClass='武';game.characterId='wu';game.state='idle';
+      await newRun('standard',[],{skipClassChoice:true});game.myClass='武';game.characterId='wu';game.state='idle';
       const idx=game.layerData[0].logical.findIndex(cell=>(cell.next||[]).some(([li])=>li===0));
       const neighbor=game.layerData[0].logical[idx].next.find(([li])=>li===0)[1];
       const originalDef=game.layerData[0].logical[idx].def,originalNeighborDef=game.layerData[0].logical[neighbor].def;
@@ -248,8 +253,10 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
       expect(reenterCell()).toBe(true);
       const key=`0,${idx}`,pending=JSON.parse(JSON.stringify(game.nodeChestRewards[key]));
       game.layerData[0].logical[idx].def=originalDef; // 旧资源入口不是现行地图生成类型；待领记录独立于地图投影。
+      game.layerData[0].logical[neighbor].def=originalNeighborDef; // 返回地图会保存，先恢复完整合法地图。
       expect(pending.current.cards).toHaveLength(1);expect(game.visited[key]).toBeFalsy();
       expect(clickAct('chestReturn')).toBe(true);expect(game.state).toBe('idle');
+      game.layerData[0].logical[neighbor].def={type:'entrance',name:'测试安全位置',extraction:false};
       expect(moveTo(0,neighbor)).toBe(true);await tick(30);
       game.layerData[0].logical[neighbor].def=originalNeighborDef; // 安全落位只供此夹具，不污染持久化地图配额。
       expect(session.saveGame()).toBe(true);
@@ -264,7 +271,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     } finally { session._set_active_slot(null);RunStorage.remove(slot); }
   });
   it('门旁商队关闭重进保留购买记录，穿门后旧店关闭且旧购买动作失效', async () => {
-    newRun('standard',[],{skipClassChoice:true});game.myClass='武';game.characterId='wu';game.state='idle';game.entrySupply=null;game.coins=999;
+    await newRun('standard',[],{skipClassChoice:true});game.myClass='武';game.characterId='wu';game.state='idle';game.entrySupply=null;game.coins=999;
     const door=game.layerData[0].doors[0],idx=door.at,key=`0,${idx}`;
     game.layerData[0].logical[idx].def={...game.layerData[0].logical[idx].def,type:'shop'};
     enterLayer(0,idx);reenterCell();await tick(30);
@@ -291,7 +298,7 @@ describe('节点完成/离开后的消耗时机（2026-09-20 定版）', () => {
     RunStorage.remove(slot);
     session._set_active_slot(slot); window.SDT.Base.use(slot);
     try {
-      expect(newRun('standard', [], { skipClassChoice:true })).not.toBe(false);
+      expect(await newRun('standard', [], { skipClassChoice:true })).not.toBe(false);
       game.myClass = '武'; game.characterId = 'wu'; game.state = 'idle';
       expect(game.encounterRotationVersion).toBe(1);
       const battle = game.layerData[2].logical.findIndex(cell => cell.def.type === 'battle');

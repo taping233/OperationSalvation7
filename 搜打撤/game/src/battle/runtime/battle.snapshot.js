@@ -135,7 +135,7 @@ function createBattleSnapshotSignature(input, renderDependencies) {
 function createBattleSnapshot(input) {
   const {
     battleToken, mode, turn, energy, maxEnergy, busy, phase, actionQueueLength,
-    opts, player, pdef, pstat, foes, deathFxPending, allies, hand, drawPile, discard, grave, consumed = [], handInfuseCounts = {}, playedMovesThisTurn, endTurnContext, playerEffects = [],
+    opts, player, pdef, pstat, foes, deathFxPending, allies, hand, drawPile, discard, grave, played = [], consumed = [], consumedPile, handInfuseCounts = {}, playedMovesThisTurn, endTurnContext, playerEffects = [],
     infusing, discovering, handSelecting, choosing, pendingTarget, pendingHint,
     viewingGrave, viewingDeck, viewingBag, dreadShown, selectingDeck, deckNeed, selDeckMax,
     selShaN, sel, selPool, potionBar, pendingItem, slamPending, dartPending,
@@ -165,6 +165,8 @@ function createBattleSnapshot(input) {
     /** @type {NonNullable<BattleSnapshot['handSelecting']>} */
     const handSelectingCopy = {
       ...handSelecting,
+      candidateUids: Object.freeze([...(handSelecting.candidateUids || [])]),
+      canCancel: handSelecting.canCancel === true,
       ...(Object.hasOwn(handSelecting, 'srcCard')
         ? { srcCard: cloneCardData(handSelecting.srcCard) }
         : {}),
@@ -174,7 +176,8 @@ function createBattleSnapshot(input) {
     };
     readonlyHandSelecting = Object.freeze(handSelectingCopy);
   }
-  const readonlyChoosing = choosing ? Object.freeze({ ...choosing, options: Object.freeze(choosing.options.slice()) }) : null;
+  const readonlyChoosing = choosing ? Object.freeze({ cardName: choosing.cardName,
+    options: Object.freeze(choosing.options.slice()), secondDoor: choosing.secondDoor }) : null;
   const deckSelection = selectingDeck ? Object.freeze({
     need: deckNeed,
     max: selDeckMax,
@@ -197,7 +200,9 @@ function createBattleSnapshot(input) {
     drawPile: Object.freeze(drawPile.slice()),
     discard: Object.freeze(discard.slice()),
     grave: Object.freeze(grave.slice()),
+    played: Object.freeze(played.slice()),
     consumed: Object.freeze(consumed.slice()),
+    consumedPile: consumedPile ? Object.freeze(consumedPile.slice()) : undefined,
     handInfuseCounts: Object.freeze({ ...handInfuseCounts }),
     infusing: readonlyInfusing,
     discovering: readonlyDiscovering,

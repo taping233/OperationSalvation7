@@ -1,0 +1,79 @@
+{
+  "note": "各命令实际退出码由根代理执行编排核对；日志原始字节以SHA256关联。最后一次语法、数据、类型、ESLint、文档检查在最终生产源冻结后运行。",
+  "checks": [
+    {
+      "name": "narrative",
+      "exitCode": 0,
+      "log": {
+        "path": ".tmp/framework-closeout-1020/final-narrative.log",
+        "bytes": 84,
+        "sha256": "37b38f532642f75c38e9b8e45e37d3328fff30542124c1d85d98c62a4658bd8a"
+      }
+    },
+    {
+      "name": "syntax",
+      "exitCode": 0,
+      "log": {
+        "path": ".tmp/framework-closeout-1020/final-syntax.log",
+        "bytes": 42,
+        "sha256": "421cdda56035ce440522105622f1e0d7535b4e6072bd64bf3e0859268cee72c4"
+      }
+    },
+    {
+      "name": "data",
+      "exitCode": 0,
+      "log": {
+        "path": ".tmp/framework-closeout-1020/final-data.log",
+        "bytes": 93,
+        "sha256": "af048258a71ee0122b2d1b15695d10901d08dc076f41f5d77c7809015b0b15b6"
+      }
+    },
+    {
+      "name": "types",
+      "exitCode": 0,
+      "log": {
+        "path": ".tmp/framework-closeout-1020/final-types.log",
+        "bytes": 440,
+        "sha256": "b1ffc6ad1905921d085a589300a8927a8d2d05213a9878485b1e78e18e8e5dc9"
+      }
+    },
+    {
+      "name": "lint",
+      "exitCode": 0,
+      "log": {
+        "path": ".tmp/framework-closeout-1020/final-lint.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "docs",
+      "exitCode": 0,
+      "log": {
+        "path": ".tmp/framework-closeout-1020/final-docs.log",
+        "bytes": 2767,
+        "sha256": "08a4af055addc2115f8844abee2679fe05513c1f57850ac40d24556f6f3a8dd3"
+      }
+    }
+  ],
+  "typeConfigs": [
+    "Type-checking jsconfig.framework-boundaries.json",
+    "Type-checking jsconfig.framework-ports.json",
+    "Type-checking jsconfig.json",
+    "Type-checking jsconfig.battle-settlement.json",
+    "Type-checking jsconfig.battle-snapshot.json",
+    "Type-checking jsconfig.card-rules.json",
+    "Type-checking jsconfig.strict-foundations.json",
+    "Type-checking jsconfig.strict-selection.json",
+    "Type-checking jsconfig.strict-hand-selection.json",
+    "Type-checking jsconfig.strict-ui.json"
+  ],
+  "build": {
+    "status": "not-run",
+    "reason": "共享工作树含其他任务未提交改动，遵守项目禁止混树build约束"
+  },
+  "remoteCI": {
+    "status": "not-verified",
+    "reason": "本任务未提交或推送，无对应提交的远端结果"
+  }
+}

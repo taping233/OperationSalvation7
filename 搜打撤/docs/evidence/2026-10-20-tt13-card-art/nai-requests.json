@@ -1,0 +1,795 @@
+[
+  {
+    "card_id": "tt13-spring",
+    "name": "源头活水",
+    "type": "法术",
+    "desc": "复原你的英雄技能并抽1张牌。",
+    "concept": "A broken circular brass mechanism cradles a tiny spring of living turquoise water. The water curls upward and closes the missing segment of its ring, one luminous droplet suspended above it. Extreme close-up, the restored joint at center, diagonally tilted ring, charcoal teal background, fresh mint light and aged brass.",
+    "payload": {
+      "input": "A broken circular brass mechanism cradles a tiny spring of living turquoise water. The water curls upward and closes the missing segment of its ring, one luminous droplet suspended above it. Extreme close-up, the restored joint at center, diagonally tilted ring, charcoal teal background, fresh mint light and aged brass.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 1978428811,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "A broken circular brass mechanism cradles a tiny spring of living turquoise water. The water curls upward and closes the missing segment of its ring, one luminous droplet suspended above it. Extreme close-up, the restored joint at center, diagonally tilted ring, charcoal teal background, fresh mint light and aged brass.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\spring.png",
+    "status": "generated",
+    "sha256": "55376e75dbc4e1e82d39ea01659cda7bea49fb0ffef35eacc0fe9574f9a8bcf8"
+  },
+  {
+    "card_id": "tt13-magazine",
+    "name": "扩容弹夹",
+    "type": "装备",
+    "desc": "主动技能：随机获取两张枪术招式。本局对战只能使用一次。",
+    "concept": "A single oversized extended rifle magazine splits open like a mechanical seed pod, revealing two luminous cartridges. Low three-quarter macro view, black polymer ribs and copper feed lips, cartridges leaning in opposite directions. Muted slate background cut by one amber loading stripe, strong silhouette, no weapon catalog layout.",
+    "payload": {
+      "input": "A single oversized extended rifle magazine splits open like a mechanical seed pod, revealing two luminous cartridges. Low three-quarter macro view, black polymer ribs and copper feed lips, cartridges leaning in opposite directions. Muted slate background cut by one amber loading stripe, strong silhouette, no weapon catalog layout.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 1680794419,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "A single oversized extended rifle magazine splits open like a mechanical seed pod, revealing two luminous cartridges. Low three-quarter macro view, black polymer ribs and copper feed lips, cartridges leaning in opposite directions. Muted slate background cut by one amber loading stripe, strong silhouette, no weapon catalog layout.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\magazine.png",
+    "status": "generated",
+    "sha256": "b374ab643adfd108c930bec8c6bc0c61dff5c528fa05930b62a60150e819ed9f"
+  },
+  {
+    "card_id": "tt13-snipe",
+    "name": "狙杀",
+    "type": "武术",
+    "desc": "造成9点固定伤害，击杀敌人回复1点能量。",
+    "concept": "Extreme close-up along the top of a precision rifle at the instant of firing. Rifle and gloved firing hand enter from lower left, barrel dramatically recedes toward a tiny distant hostile silhouette at upper right. A single white-hot straight tracer connects muzzle to target. Cropped gun stock, cold blue darkness, tiny orange muzzle flare, clear depth compression.",
+    "payload": {
+      "input": "Extreme close-up along the top of a precision rifle at the instant of firing. Rifle and gloved firing hand enter from lower left, barrel dramatically recedes toward a tiny distant hostile silhouette at upper right. A single white-hot straight tracer connects muzzle to target. Cropped gun stock, cold blue darkness, tiny orange muzzle flare, clear depth compression.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 793137763,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "Extreme close-up along the top of a precision rifle at the instant of firing. Rifle and gloved firing hand enter from lower left, barrel dramatically recedes toward a tiny distant hostile silhouette at upper right. A single white-hot straight tracer connects muzzle to target. Cropped gun stock, cold blue darkness, tiny orange muzzle flare, clear depth compression.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\snipe.png",
+    "status": "generated",
+    "sha256": "94be7b234e1f7b138fd94c7efe09144257e76776f7d4f26c8bfc8f2b47fe2b19"
+  },
+  {
+    "card_id": "tt13-guard",
+    "name": "护身",
+    "type": "武术",
+    "desc": "获得6点护甲，如果你本回合没有造成任何伤害，额外获得4点护甲。",
+    "concept": "Close-up of two crossed armored forearms braced in front of a cropped torso. A blunt incoming strike meets the central crossing and breaks into a small crescent of pale gold light. Arms form a compact protective roof; no face or full body. Slate blue sleeves, warm ivory armor edges, quiet dark background, the contact point brightest.",
+    "payload": {
+      "input": "Close-up of two crossed armored forearms braced in front of a cropped torso. A blunt incoming strike meets the central crossing and breaks into a small crescent of pale gold light. Arms form a compact protective roof; no face or full body. Slate blue sleeves, warm ivory armor edges, quiet dark background, the contact point brightest.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 1880488361,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "Close-up of two crossed armored forearms braced in front of a cropped torso. A blunt incoming strike meets the central crossing and breaks into a small crescent of pale gold light. Arms form a compact protective roof; no face or full body. Slate blue sleeves, warm ivory armor edges, quiet dark background, the contact point brightest.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\guard.png",
+    "status": "generated",
+    "sha256": "292119aef36ce8d450056de3954b5cbacd53cfc807306e126045199375ec76ea"
+  },
+  {
+    "card_id": "tt13-bitter-rain",
+    "name": "苦雨",
+    "type": "法术",
+    "desc": "对一名敌人附加2层中毒，如果其已有诅咒，额外附加1项其他诅咒。",
+    "concept": "Black rain falls upward from a cracked dark umbrella into a suspended acid-green cloud. Beneath the umbrella edge a single hooded hostile silhouette bends under the curse; green droplets cling like thorns to its shoulder. Off-center tilted umbrella occupies most of the image, bitter violet shadows, one sharp lime reflection, graphic supernatural storm.",
+    "payload": {
+      "input": "Black rain falls upward from a cracked dark umbrella into a suspended acid-green cloud. Beneath the umbrella edge a single hooded hostile silhouette bends under the curse; green droplets cling like thorns to its shoulder. Off-center tilted umbrella occupies most of the image, bitter violet shadows, one sharp lime reflection, graphic supernatural storm.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 659963517,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "Black rain falls upward from a cracked dark umbrella into a suspended acid-green cloud. Beneath the umbrella edge a single hooded hostile silhouette bends under the curse; green droplets cling like thorns to its shoulder. Off-center tilted umbrella occupies most of the image, bitter violet shadows, one sharp lime reflection, graphic supernatural storm.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\bitter-rain.png",
+    "status": "generated",
+    "sha256": "262058eb74ad3511819d6a73e07e06f7b47eee8b41b610fc61c8d8491bda75c9"
+  },
+  {
+    "card_id": "tt13-mind-control",
+    "name": "精神控制",
+    "type": "法术",
+    "desc": "选择一名受伤的非BOSS敌人，使其变为己方随从。",
+    "concept": "A damaged faceless combat helmet seen in profile fills the right foreground. A cropped gloved hand at upper left pinches a luminous violet thread drawn from the helmet brow; the helmet turns toward the hand, its formerly red visor becoming pale violet. Thread bends in a deliberate taut curve, minimal black backdrop, psychological tension, no gore.",
+    "payload": {
+      "input": "A damaged faceless combat helmet seen in profile fills the right foreground. A cropped gloved hand at upper left pinches a luminous violet thread drawn from the helmet brow; the helmet turns toward the hand, its formerly red visor becoming pale violet. Thread bends in a deliberate taut curve, minimal black backdrop, psychological tension, no gore.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 204652158,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "A damaged faceless combat helmet seen in profile fills the right foreground. A cropped gloved hand at upper left pinches a luminous violet thread drawn from the helmet brow; the helmet turns toward the hand, its formerly red visor becoming pale violet. Thread bends in a deliberate taut curve, minimal black backdrop, psychological tension, no gore.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\mind-control.png",
+    "status": "generated",
+    "sha256": "fad070aec14e5234622241e205f345f68657c7a0c6292cb48597025e007a2608"
+  },
+  {
+    "card_id": "tt13-flame-staff",
+    "name": "火焰法杖",
+    "type": "装备",
+    "desc": "回合开始时，对所有敌人造成2点法术伤害。",
+    "concept": "A crooked black metal staff head shaped like an open furnace jaw holds a white-orange ember. Viewed from below at close range, staff shaft exits lower right. A single broad flame sweeps horizontally across the top like a clock hand beginning its cycle. Soot blue negative shapes, copper edges and restrained scarlet heat, no person.",
+    "payload": {
+      "input": "A crooked black metal staff head shaped like an open furnace jaw holds a white-orange ember. Viewed from below at close range, staff shaft exits lower right. A single broad flame sweeps horizontally across the top like a clock hand beginning its cycle. Soot blue negative shapes, copper edges and restrained scarlet heat, no person.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 1421749948,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "A crooked black metal staff head shaped like an open furnace jaw holds a white-orange ember. Viewed from below at close range, staff shaft exits lower right. A single broad flame sweeps horizontally across the top like a clock hand beginning its cycle. Soot blue negative shapes, copper edges and restrained scarlet heat, no person.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\flame-staff.png",
+    "status": "generated",
+    "sha256": "547c5c5b4a3f66d501bc1fdf8f5347f7097decf795383112c739b123d0908e4d"
+  },
+  {
+    "card_id": "tt13-scale-armor",
+    "name": "逆鳞护甲",
+    "type": "装备",
+    "desc": "每次受到伤害后，对随机敌人造成3点固定伤害，并有50%概率抽1张牌。",
+    "concept": "Close-up of a curved breastplate built from overlapping dark dragon scales. One reversed crimson scale at its heart springs outward as an incoming impact lands, throwing a red needle of reflected force back toward upper left. Armor fills the frame, cropped edges, impact on right-center, deep petrol blue and oxblood red, readable layered construction.",
+    "payload": {
+      "input": "Close-up of a curved breastplate built from overlapping dark dragon scales. One reversed crimson scale at its heart springs outward as an incoming impact lands, throwing a red needle of reflected force back toward upper left. Armor fills the frame, cropped edges, impact on right-center, deep petrol blue and oxblood red, readable layered construction.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 600953460,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "Close-up of a curved breastplate built from overlapping dark dragon scales. One reversed crimson scale at its heart springs outward as an incoming impact lands, throwing a red needle of reflected force back toward upper left. Armor fills the frame, cropped edges, impact on right-center, deep petrol blue and oxblood red, readable layered construction.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\scale-armor.png",
+    "status": "generated",
+    "sha256": "1320f96892aa1f69d8be2f0a0d504c2c68e4cfc8c6bb3d55e3f6753c3eec1bb6"
+  },
+  {
+    "card_id": "tt13-astrolabe",
+    "name": "双相星盘",
+    "type": "装备",
+    "desc": "在你本回合打出第一张武术招式后回复1点能量；下回合切换为法术，逐回合交替。",
+    "concept": "A suspended double-sided mechanical astrolabe rotates diagonally in close-up. Its left semicircle is warm brass with a small blade-shaped pointer, its right semicircle is indigo glass containing a cold star. One thin tilted orbital ring joins the two halves; a bright spark crosses their central hinge. Two complementary light sources, dark quiet field, asymmetric elegant geometry.",
+    "payload": {
+      "input": "A suspended double-sided mechanical astrolabe rotates diagonally in close-up. Its left semicircle is warm brass with a small blade-shaped pointer, its right semicircle is indigo glass containing a cold star. One thin tilted orbital ring joins the two halves; a bright spark crosses their central hinge. Two complementary light sources, dark quiet field, asymmetric elegant geometry.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 885551894,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "A suspended double-sided mechanical astrolabe rotates diagonally in close-up. Its left semicircle is warm brass with a small blade-shaped pointer, its right semicircle is indigo glass containing a cold star. One thin tilted orbital ring joins the two halves; a bright spark crosses their central hinge. Two complementary light sources, dark quiet field, asymmetric elegant geometry.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\astrolabe.png",
+    "status": "generated",
+    "sha256": "0137af79b9c61c92ca5a2451289f824769446e7b8f811faa4ec4b311deaf05ce"
+  },
+  {
+    "card_id": "tt13-soul-contract",
+    "name": "灵魂契约",
+    "type": "法术",
+    "desc": "选择1名敌人并标记；其受到伤害后，对随机一名其他敌人造成2点真实伤害。",
+    "concept": "Two small faceless shadow effigies hang at different depths, joined through their chests by a taut luminous crimson thread. A white impact spark touches the larger foreground effigy and travels as a red pulse to the smaller background figure. The thread forms a sharp triangular route, pale wax seal at the nearest chest, ink blue backdrop, ominous restrained light, no writing or gore.",
+    "payload": {
+      "input": "Two small faceless shadow effigies hang at different depths, joined through their chests by a taut luminous crimson thread. A white impact spark touches the larger foreground effigy and travels as a red pulse to the smaller background figure. The thread forms a sharp triangular route, pale wax seal at the nearest chest, ink blue backdrop, ominous restrained light, no writing or gore.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 1714246019,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "Two small faceless shadow effigies hang at different depths, joined through their chests by a taut luminous crimson thread. A white impact spark touches the larger foreground effigy and travels as a red pulse to the smaller background figure. The thread forms a sharp triangular route, pale wax seal at the nearest chest, ink blue backdrop, ominous restrained light, no writing or gore.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\soul-contract.png",
+    "status": "generated",
+    "sha256": "a10b74151c7788e39d8242b4fccaf320dd7a8615c2d70ebbd8ca4e413ffd288d"
+  },
+  {
+    "card_id": "tt13-stellar-divination",
+    "name": "星辰占卜",
+    "type": "法术",
+    "desc": "发现1张法术牌，并将其具有抽到时施放的2张复制洗入牌库。",
+    "concept": "Top-down close-up of a gloved palm turning a small glass star above three blank floating dark cards. The star casts two identical luminous echoes into two cards while the third remains open beneath the palm. A diagonal fan of cards, cropped wrist, deep midnight blue, silver cyan starlight, subtle brass constellation arcs, no letters or numbers.",
+    "payload": {
+      "input": "Top-down close-up of a gloved palm turning a small glass star above three blank floating dark cards. The star casts two identical luminous echoes into two cards while the third remains open beneath the palm. A diagonal fan of cards, cropped wrist, deep midnight blue, silver cyan starlight, subtle brass constellation arcs, no letters or numbers.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 1669505172,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "Top-down close-up of a gloved palm turning a small glass star above three blank floating dark cards. The star casts two identical luminous echoes into two cards while the third remains open beneath the palm. A diagonal fan of cards, cropped wrist, deep midnight blue, silver cyan starlight, subtle brass constellation arcs, no letters or numbers.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\stellar-divination.png",
+    "status": "generated",
+    "sha256": "9f17a15e561ba732b55f7fcdfb3f6648e5da90007dfe657cb70ec3fa9a50a26d"
+  },
+  {
+    "card_id": "tt13-chaos-deck",
+    "name": "混乱套牌",
+    "type": "法术",
+    "desc": "将牌库中的所有招式与装备变为稀有度高1级的同类型卡牌（最高传说），随机交换费用，然后弃掉所有手牌。",
+    "concept": "A deck of blank dark cards bursts through an impossible twisted golden ring. On one side blunt iron card edges enter; on the other side refined gold and jewel-colored edges emerge, their colored pips tumbling loose between cards. Corkscrew motion from lower left to upper right, central transformation is the focus, violet and burnt orange, no text or readable suits.",
+    "payload": {
+      "input": "A deck of blank dark cards bursts through an impossible twisted golden ring. On one side blunt iron card edges enter; on the other side refined gold and jewel-colored edges emerge, their colored pips tumbling loose between cards. Corkscrew motion from lower left to upper right, central transformation is the focus, violet and burnt orange, no text or readable suits.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 1469179444,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "A deck of blank dark cards bursts through an impossible twisted golden ring. On one side blunt iron card edges enter; on the other side refined gold and jewel-colored edges emerge, their colored pips tumbling loose between cards. Corkscrew motion from lower left to upper right, central transformation is the focus, violet and burnt orange, no text or readable suits.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\chaos-deck.png",
+    "status": "generated",
+    "sha256": "7ae498d7337adf5aee73002baf2f275c8d928bea97133463e94b8a177cfa9be9"
+  },
+  {
+    "card_id": "tt13-mercy",
+    "name": "手下留情",
+    "type": "武术",
+    "desc": "攻（+3），无法致死（至少保留1点生命）。",
+    "concept": "Extreme close-up of a swordsman gloved hand checking a curved blade just before it touches the side of an opponent neck. Only cropped jaw, neck, hand and blade visible. A tiny intact pale flower is trapped in the narrow gap between edge and skin; blade stops without injury. Tense horizontal composition, steel blue and muted warm skin, one white petal focal point, no blood.",
+    "payload": {
+      "input": "Extreme close-up of a swordsman gloved hand checking a curved blade just before it touches the side of an opponent neck. Only cropped jaw, neck, hand and blade visible. A tiny intact pale flower is trapped in the narrow gap between edge and skin; blade stops without injury. Tense horizontal composition, steel blue and muted warm skin, one white petal focal point, no blood.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+      "model": "nai-diffusion-4-5-full",
+      "action": "generate",
+      "parameters": {
+        "params_version": 3,
+        "width": 1344,
+        "height": 768,
+        "scale": 5.5,
+        "sampler": "k_euler_ancestral",
+        "steps": 28,
+        "variety_plus": false,
+        "n_samples": 1,
+        "ucPresetId": "none",
+        "qualityPresetId": "none",
+        "autoSmea": false,
+        "straight_alpha": false,
+        "dynamic_thresholding": false,
+        "controlnet_strength": 1,
+        "legacy": false,
+        "legacy_v3_extend": false,
+        "legacy_uc": false,
+        "add_original_image": true,
+        "cfg_rescale": 0.0,
+        "noise_schedule": "karras",
+        "use_coords": false,
+        "normalize_reference_strength_multiple": true,
+        "inpaintImg2ImgStrength": 1.0,
+        "seed": 1445349456,
+        "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+        "characterPrompts": [],
+        "v4_prompt": {
+          "caption": {
+            "base_caption": "Extreme close-up of a swordsman gloved hand checking a curved blade just before it touches the side of an opponent neck. Only cropped jaw, neck, hand and blade visible. A tiny intact pale flower is trapped in the narrow gap between edge and skin; blade stops without injury. Tense horizontal composition, steel blue and muted warm skin, one white petal focal point, no blood.\n\nSingle cinematic collectible card illustration, strong thumbnail readability, no border, no lettering.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "v4_negative_prompt": {
+          "caption": {
+            "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo",
+            "char_captions": []
+          },
+          "use_coords": false,
+          "use_order": true
+        },
+        "deliberate_euler_ancestral_bug": false,
+        "prefer_brownian": true
+      }
+    },
+    "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-card-art-20261020\\mercy.png",
+    "status": "generated",
+    "sha256": "866489f2774aab0466c148602702d7c9d853ed5c8f3d7870b1f5f55693b0cb61"
+  }
+]

@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -13,7 +15,7 @@ await import('../game/src/hub/base.js');
 
 const Base = SDT.Base;
 let dispose, media, randomService;
-beforeEach(() => {
+beforeEach(async () => {
   vi.useFakeTimers();
   media = { matches: false };
   vi.stubGlobal('matchMedia', () => media);
@@ -25,7 +27,7 @@ beforeEach(() => {
   Base.data.petSel = 'dog';
   Base.data.coins = 90;
   Base.data.rations = 12;
-  expect(Base.save()).toBe(true);
+  expect((await Base.save())).toBe(true);
   randomService = setRandomService(new SeededRandomService('optional-partner'));
   for (const stream of ['gameplay', 'battle', 'loot', 'shop', 'map']) Random.random(stream);
   setPersonnelGroup('pets');

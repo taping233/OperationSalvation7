@@ -29,6 +29,8 @@
  * @property {string | null} [sourceCardId]
  * @property {string | null} [dest]
  * @property {number} [optionsPlus] 黑暗形态 discoverPlus：随机发现面板候选数在 3 之上追加 N
+ * @property {number} [copies]
+ * @property {boolean} [castOnDraw]
  */
 
 /** @typedef {DiscoverQueueJob & { explicit: DiscoverCard[] }} ExplicitDiscoverQueueJob */
@@ -53,6 +55,8 @@
  * @property {string | null} sourceCardId
  * @property {StructuredDiscoverPool | null} pool
  * @property {number | undefined} optionsPlus
+ * @property {number | undefined} copies
+ * @property {boolean | undefined} castOnDraw
  */
 
 /** @typedef {QueuedDiscoverStateBase & { deckBottom: boolean, deckBottomUids: string[] }} ExplicitDiscoverState */
@@ -79,6 +83,8 @@ function queuedStateFields(job) {
     sourceCardId: job.sourceCardId || null,
     pool: job.pool || null,
     optionsPlus: job.optionsPlus,
+    copies: job.copies,
+    castOnDraw: job.castOnDraw,
   };
 }
 

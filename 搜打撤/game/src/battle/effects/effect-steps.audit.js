@@ -2,7 +2,7 @@
  * 铁律：顺序即语义——本分节在壳 effect-steps.js 的 concat 顺序即旧 if 链物理顺序，勿重排。
  * 共享端口由壳经参数 s 注入（deps 展开 + esc/hitFoe + 模块级常量），本文件零 import。 */
 export function auditSteps(s) {
-  const {combat, getMode, log, drawCards, grantStarterAttack, queueDiscover, queueHandSelect, getHandSize, castStarterAttack, getPriceOfLastDrawn, dealAoeFixed, replaceShaInDeck, summonAlly, setExtraTurn, queuePouchCast, registerGrowthCard, esc, parsePoolNoun} = s;
+  const {combat, log, drawCards, queueDiscover, queueHandSelect, getHandSize, castStarterAttack, getPriceOfLastDrawn, dealAoeFixed, replaceShaInDeck, summonAlly, setExtraTurn, queuePouchCast, registerGrowthCard, esc, parsePoolNoun} = s;
   return [
       /* ============ 2026-09-09 机制审计补实装（Q1-Q8 老板定向批次） ============ */
       {
@@ -11,19 +11,13 @@ export function auditSteps(s) {
         run: (ctx, m) => {
           const want = +m[1];
           let gotN = 0;
-          if (getMode() === 'boss') {
-            let guard = 0;
-            while (getHandSize() < want && guard++ < 30) {
-              const g = drawCards(1);
-              if (!g) break;
-              gotN += g;
-            }
-            log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：抽了 ${gotN} 张牌（手牌 ${getHandSize()} 张）`, 'sys');
-          } else {
-            const lack = Math.max(0, want - getHandSize());
-            grantStarterAttack(lack);
-            log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：获得 ${lack} 张【初始攻击】（普通战斗抽牌效果改为获得初始攻击）`, 'sys');
+          let guard = 0;
+          while (getHandSize() < want && guard++ < 30) {
+            const g = drawCards(1);
+            if (!g) break;
+            gotN += g;
           }
+          log(`[[icon:cards]] <b>${esc(ctx.card.name)}</b>：抽了 ${gotN} 张牌（手牌 ${getHandSize()} 张）`, 'sys');
           ctx.did = true;
         },
       },
@@ -42,7 +36,7 @@ export function auditSteps(s) {
         },
       },
       {
-        id: 'dmg.priceAoe', gate: 'always', label: '对全体造成等同于抽到卡牌价格的固定伤害（气功波）',
+        id: 'dmg.priceAoe', gate: 'always', silenceAllowed: true, label: '对全体造成等同于抽到卡牌价格的固定伤害（气功波）',
         // 注意不判 did：同一句里的「抽 1 张牌」会先置 did，价格伤害是同一效果的后续部分
         when: (ctx) => /造成等同于(?:其|该卡|该牌)价格的固定伤害/.test(ctx.desc) ? true : null,
         run: (ctx) => {

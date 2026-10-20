@@ -46,6 +46,16 @@ afterEach(() => {
 });
 
 describe('珍珠盒可读存取界面', () => {
+  it('真实容量和存入守卫读取结构声明，改写卡文不改变规则', () => {
+    const box = game.ownedCards.find(entry => entry.card.id === pearl.id);
+    box.card = { ...pearl, desc:'任意展示文字', rules:{ version:1, equip:{ container:{ slots:2, accepts:'资源' } } } };
+    open();
+    expect(session.bagCap()).toBe(18);
+    const before = JSON.stringify(game.ownedCards);
+    UI._acts.pearlPut({ name:wood.name });
+    expect(JSON.stringify(game.ownedCards)).toBe(before);
+    expect(UI.log).toHaveBeenLastCalledWith(expect.stringContaining('1/2'), 'warn');
+  });
   it('复用远征决策壳和bag模式，不再继承room全屏居中壳', () => {
     expect(UI._lastMode).toBe('bag');
     expect(UI.el.ovBody.querySelector('.battle-decision.pearl-store')).not.toBeNull();

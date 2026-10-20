@@ -10,19 +10,20 @@ const JS_FILE = /\.(?:js|mjs)$/;
 // 战斗运行时的完整表面：兼容壳 + 各属地状态模块——视图/纯模块一律不得直读。
 const RUNTIME_SURFACE = new Set([
   'battle/runtime/battle.runtime.js',
+  'battle/runtime/battle.runtime.default.js',
   'battle/runtime/battle.runtime.session.js', 'battle/runtime/battle.runtime.piles.js',
   'battle/runtime/battle.runtime.interaction.js', 'battle/runtime/battle.runtime.effects.js',
   'battle/runtime/battle.runtime.presentation.js',
 ]);
 const EXECUTION_ADAPTERS = new Set(['battle/effects/requested-card-runtime.js', 'battle/effects/effect-steps.m1.js', 'battle/effects/effect-steps.m2.js']);
 const RUNTIME_INNER = new Set([
-  'battle/core/battle.engine.js', 'battle/core/battle.enemy-phase.js', 'battle/core/battle.selection-flow.js',
+  'battle/core/battle.engine.js', 'battle/core/battle.engine.factory.js', 'battle/core/battle.enemy-phase.js', 'battle/core/battle.selection-flow.js',
   'battle/bag/battle.equipment.js', 'battle/bag/battle.bag.js', 'battle/core/battle.lifecycle.js',
   'battle/core/battle.exec-play.js', 'battle/core/battle.draw.js', 'battle/core/battle.foe-lifecycle.js',
   // M 批结算适配器拥有牌区操作与已登记触发器；不对视图开放状态访问。
   ...EXECUTION_ADAPTERS, 'battle/effects/battle.triggers.m2.js',
 ]);
-const RUNTIME_OWNERS = new Set(['battle/core/battle.core.js', ...RUNTIME_INNER]);
+const RUNTIME_OWNERS = new Set(['battle/core/battle.core.js', 'battle/core/battle.default-context.js', ...RUNTIME_INNER]);
 const PURE_MODULES = new Set([
   'battle/effects/battle.card-cost.js', 'battle/core/battle.enemy-intent.js', 'battle/core/battle.resolution.js',
   'battle/runtime/battle.snapshot.js', 'cards/cards.catalog.js',
@@ -33,7 +34,45 @@ const PURE_MODULES = new Set([
   'battle/effects/battle.discover-candidates.js', 'battle/effects/hosted-catalog-index.js',
 ]);
 // These feature domains use explicit runtime ports and must stay importable without the browser facade.
-const BROWSER_ISOLATED_MODULES = new Set(['battle/core/battle.selection-flow.js']);
+const BROWSER_ISOLATED_MODULES = new Set(['battle/core/battle.selection-flow.js', 'battle/core/battle.engine.factory.js']);
+const INSTANCE_FACTORIES = new Set([
+  'battle/core/battle.engine.instance.js', 'battle/runtime/battle.runtime.factory.js',
+  'battle/runtime/battle.presentation-ports.js', 'battle/core/battle.summary.factory.js',
+  'battle/core/combat.factory.js', 'battle/bag/battle.deck.factory.js',
+]);
+const isInstanceDomain = name => INSTANCE_FACTORIES.has(name) || name.startsWith('battle/') && name.endsWith('.domain.js');
+const INSTANCE_GLOBAL_SERVICES = new Set([
+  'core/random.js', 'core/sdt-facade.js', 'battle/core/combat.js',
+  'battle/core/battle.summary.js', 'battle/runtime/battle.staged-playback.js',
+  'battle/runtime/battle.feedback.js', 'battle/runtime/battle.clock.js',
+]);
+// Naming conventions protect future modules before they appear in a hand-maintained list.
+const isDomainCommand = name => /(?:\.commands|-commands)\.js$/.test(name);
+const isExecutionPlan = name => /(?:^|\/)[^/]*execution-plan\.js$/.test(name);
+const PORT_FACTORIES = new Set([
+  'battle/core/battle.card-play.js', 'battle/core/battle.turn-continuation.js',
+  'battle/core/battle.turn-start.js', 'battle/core/battle.damage.js',
+  'run/game.run.events.js', 'run/game.run.resources.js',
+]);
+const usesExplicitPorts = name => isDomainCommand(name) || PORT_FACTORIES.has(name);
+// Existing browser adapters remain explicit debt; no new filename inherits these exceptions.
+const LEGACY_COMMAND_IMPORTS = new Map([
+  ['hub/base.commands.js', new Set(['hub/base.js'])],
+  ['hub/recovery.commands.js', new Set(['hub/base.js', 'hub/game.storage.js'])],
+]);
+const LEGACY_COMMAND_GLOBALS = new Map([
+  ['hub/base.commands.js', new Set(['window'])],
+  ['hub/collection.commands.js', new Set(['window', 'globalThis'])],
+  ['hub/extraction.commands.js', new Set(['globalThis'])],
+  ['hub/recovery.commands.js', new Set(['window', 'globalThis'])],
+]);
+// These factories orchestrate existing display adapters through their injected ports.
+const FACTORY_ADAPTER_IMPORTS = new Map([
+  ['run/game.run.events.js', new Set(['run/game.run.data.js', 'ui/event-signal-puzzle.js', 'ui/event-recode-result.js'])],
+  ['run/game.run.resources.js', new Set(['ui/reward-card-feedback.js', 'ui/reward-scene-view.js'])],
+]);
+const isPageDependency = name => name.startsWith('ui/') || name.startsWith('battle/view/')
+  || /(?:^|\/)game\.[^/]+\.js$/.test(name) || /(?:^|\/)base\.js$/.test(name);
 const BROWSER_ISOLATION_FORBIDDEN_IMPORTS = new Map([
   ['battle/core/battle.selection-flow.js', new Set(['battle/runtime/battle.staged-playback.js'])],
 ]);
@@ -59,13 +98,20 @@ const LAZY_PAGE_ENTRIES = new Map([
 export function deadGuardKeys(sources) {
   const dead = [];
   for (const key of [...RUNTIME_OWNERS, ...PURE_MODULES, ...VIEW_MODULES, ...PROTECTED_TARGETS,
-    ...BROWSER_ISOLATED_MODULES, ...LAZY_PAGE_ENTRIES.keys(), ...LAZY_PAGE_ENTRIES.values()]) {
+    ...BROWSER_ISOLATED_MODULES, ...INSTANCE_FACTORIES, ...PORT_FACTORIES, ...LAZY_PAGE_ENTRIES.keys(), ...LAZY_PAGE_ENTRIES.values()]) {
     if (!sources.has(key)) dead.push(key);
   }
   for (const [source, targets] of BROWSER_ISOLATION_FORBIDDEN_IMPORTS) {
     if (!sources.has(source)) dead.push(source);
     for (const target of targets) if (!sources.has(target)) dead.push(target);
   }
+  for (const exceptions of [LEGACY_COMMAND_IMPORTS, FACTORY_ADAPTER_IMPORTS]) {
+    for (const [source, targets] of exceptions) {
+      if (!sources.has(source)) dead.push(source);
+      for (const target of targets) if (!sources.has(target)) dead.push(target);
+    }
+  }
+  for (const source of LEGACY_COMMAND_GLOBALS.keys()) if (!sources.has(source)) dead.push(source);
   for (const prefix of FLOW_PREFIXES) {
     if (![...sources.keys()].some(name => name.startsWith(prefix))) dead.push(prefix);
   }
@@ -92,6 +138,7 @@ export function analyzeModule(source, filename = '<module>') {
   const ast = parse(source, { ecmaVersion: 'latest', sourceType: 'module', locations: true });
   const imports = [];
   const browserGlobals = [];
+  const facadeGlobals = [];
   const add = (node, kind) => {
     const specifier = typeof node.source.value === 'string' ? node.source.value
       : node.source.type === 'TemplateLiteral' && !node.source.expressions.length
@@ -105,12 +152,13 @@ export function analyzeModule(source, filename = '<module>') {
     ExportAllDeclaration: node => add(node, 'reexport'),
     ImportExpression: node => add(node, 'dynamic'),
     Identifier: node => {
+      if (node.name === 'SDT') facadeGlobals.push(`SDT:${node.loc.start.line}`);
       if (['window', 'document', 'globalThis'].includes(node.name)) {
         browserGlobals.push(`${node.name}:${node.loc.start.line}`);
       }
     },
   });
-  return { imports, browserGlobals };
+  return { imports, browserGlobals, facadeGlobals };
 }
 
 export function buildModuleGraph(sources) {
@@ -148,6 +196,21 @@ export function architectureViolations(graph) {
   const violations = [];
   for (const [name, module] of graph) {
     for (const { target, line, kind } of module.dependencies) {
+      if (isInstanceDomain(name) && (INSTANCE_GLOBAL_SERVICES.has(target) || RUNTIME_SURFACE.has(target)
+        || RUNTIME_OWNERS.has(target) || VIEW_MODULES.has(target) || target.startsWith('ui/')
+        || FLOW_PREFIXES.some(prefix => target.startsWith(prefix)))) {
+        violations.push(`${name}:${line}: 独立战斗实例必须通过端口访问共享状态或浏览器 ${target}`);
+      }
+      if (usesExplicitPorts(name) && !LEGACY_COMMAND_IMPORTS.get(name)?.has(target)
+        && !FACTORY_ADAPTER_IMPORTS.get(name)?.has(target) && (target === 'core/sdt-facade.js' || target === SESSION_KERNEL
+        || target === SESSION_BROWSER || RUNTIME_SURFACE.has(target) || RUNTIME_OWNERS.has(target)
+        || target === 'hub/game.store.js' || isPageDependency(target))) {
+        violations.push(`${name}:${line}: 领域命令/端口工厂不得捕获页面或全局状态 ${target}`);
+      }
+      if (isExecutionPlan(name) && (target.startsWith('run/') || target.startsWith('hub/')
+        || target.startsWith('battle/') || target.startsWith('ui/') || target === 'core/sdt-facade.js')) {
+        violations.push(`${name}:${line}: 纯执行计划不得依赖运行态或页面 ${target}`);
+      }
       const lazyEntry = LAZY_PAGE_ENTRIES.get(target);
       if (lazyEntry && (name !== lazyEntry || kind !== 'dynamic')) {
         violations.push(`${name}:${line}: ${target} 只能由 ${lazyEntry} 动态加载`);
@@ -161,7 +224,7 @@ export function architectureViolations(graph) {
       if (RUNTIME_SURFACE.has(target) && !RUNTIME_OWNERS.has(name) && !RUNTIME_SURFACE.has(name)) {
         violations.push(`${name}:${line}: 战斗运行时仅允许 battle.core 与已登记的状态属地、结算适配模块访问`);
       }
-      if (VIEW_MODULES.has(name) && RUNTIME_INNER.has(target)) {
+      if (VIEW_MODULES.has(name) && (RUNTIME_INNER.has(target) || isInstanceDomain(target))) {
         violations.push(`${name}:${line}: 视图须通过 core 命令与快照访问战斗`);
       }
       // resolution 仅可调用两件 M 批命令适配器；其余纯模块仍禁止进入运行态，视图也禁止调用适配器。
@@ -176,6 +239,14 @@ export function architectureViolations(graph) {
       if (BROWSER_ISOLATION_FORBIDDEN_IMPORTS.get(name)?.has(target)) {
         violations.push(`${name}:${line}: 无浏览器选牌域不能依赖 ${target}`);
       }
+    }
+    const forbiddenGlobals = [...module.browserGlobals.filter(reference => !LEGACY_COMMAND_GLOBALS.get(name)?.has(reference.split(':')[0])),
+      ...(module.facadeGlobals || [])];
+    if (isInstanceDomain(name) && forbiddenGlobals.length) {
+      violations.push(`${name}: 独立战斗实例不能读取全局浏览器对象 ${forbiddenGlobals.join(', ')}`);
+    }
+    if ((usesExplicitPorts(name) || isExecutionPlan(name)) && forbiddenGlobals.length) {
+      violations.push(`${name}: 领域命令/端口工厂/纯执行计划不能读取全局浏览器对象 ${forbiddenGlobals.join(', ')}`);
     }
     if (PURE_MODULES.has(name) && module.browserGlobals.length) {
       violations.push(`${name}: 独立规则/快照模块不能读取全局浏览器对象 ${module.browserGlobals.join(', ')}`);

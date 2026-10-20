@@ -1,5 +1,8 @@
 // @ts-check
-import { validateCardRules, HOSTED_BATTLE_RULES, HOSTED_CARD_RULES, BAG_SUPPORTED_OPS } from './card-rules.schema.js';
+import { validateCardRules, createCardRuleExecutionView, HOSTED_BATTLE_RULES, HOSTED_CARD_RULES, BAG_SUPPORTED_OPS } from './card-rules.schema.js';
+import { BATTLE_TRIGGER_POINTS } from './card-trigger-contract.js';
+import { cardRulePreflightView } from './card-execution-plan.js';
+import { SEMANTIC_OPERATION_TARGETS } from './card-semantic-contract.js';
 
 /** @typedef {import('./card-rules.capability.types.js').BattleOperationName} BattleOperationName */
 /** @typedef {import('./card-rules.capability.types.js').OperationTarget} OperationTarget */
@@ -11,11 +14,12 @@ import { validateCardRules, HOSTED_BATTLE_RULES, HOSTED_CARD_RULES, BAG_SUPPORTE
 // the shape authority; these finite types check the actual production capability table.
 /** @type {Readonly<Record<BattleOperationName, readonly OperationTarget[]>>} */
 const OPERATION_TARGETS = {
+  ...SEMANTIC_OPERATION_TARGETS,
   damage: ['chosenEnemy', 'allEnemies', 'randomEnemy'],
   curse: ['chosenEnemy', 'allEnemies', 'randomEnemy', 'self'],
   status: ['allEnemies'],
   heal: [], armor: [], draw: [], discover: [], acquire: [], coins: [],
-  blessing: [], energy: [], energyCap: [], maxHp: [], deckCap: [],
+  blessing: [], energy: [], refillEnergy: [], energyCap: [], maxHp: [], deckCap: [],
   // M1（2026-09-27）：净化——Wave1 仅支持净化自身
   cleanse: ['self'],
   // M2（2026-09-27）：execute/summon/extraTurn/registerRule/transform 键位已定族全量接线；
@@ -32,7 +36,7 @@ const SUPPORTED_HAND_OPS = new Set(['consumeHand', 'dumpHand']);
 const SUPPORTED_ACQUIRE_FILTER_KEYS = new Set(['cost', 'costMax', 'exceptIds']);
 /** @type {Readonly<Record<AcquireDestination, readonly AcquireAction[]>>} */
 const ACQUIRE_ACTIONS = {
-  hand: ['dup', 'noInfuse'],
+  hand: ['dup', 'noInfuse', 'zeroCost'],
   deck: ['dup', 'zeroCost', 'costMinusOne', 'noInfuse'],
   discover: ['play', 'playKeep', 'dup', 'zeroCost', 'decay', 'noInfuse'],
 };
@@ -56,7 +60,7 @@ function isBattleOperation(value) {
 }
 /** @param {unknown} value @returns {value is OperationTarget} */
 function isOperationTarget(value) {
-  return value === 'chosenEnemy' || value === 'allEnemies' || value === 'randomEnemy' || value === 'self';
+  return value === 'chosenEnemy' || value === 'allEnemies' || value === 'randomEnemy' || value === 'self' || value === 'allAllies';
 }
 /** @param {unknown} value @returns {value is AcquireDestination} */
 function isAcquireDestination(value) {
@@ -75,6 +79,7 @@ function isAcquireAction(value) {
  * @returns {import('./card-rules.capability.types.js').CardRuleCapability}
  */
 export function inspectCardRuleCapability(card) {
+  card = cardRulePreflightView(card);
   const cardId = String(field(card, 'id') ?? '<missing id>');
   if (!isObject(card)) {
     return { kind: 'invalid', ok: false, issues: [{ cardId, path: 'card', message: 'expected a card object' }] };
@@ -92,7 +97,8 @@ export function inspectCardRuleCapability(card) {
   // battle.triggers.m2.js 消费；container 容量声明属背包容器域（battle.bag.js），仍拒绝。
   if (isObject(rules) && Object.hasOwn(rules, 'equip')) {
     const equipRules = field(rules, 'equip');
-    if (isObject(equipRules) && Object.hasOwn(equipRules, 'container')) {
+    if (isObject(equipRules) && Object.hasOwn(equipRules, 'container') &&
+      !['资源', '法术'].includes(String(field(field(equipRules, 'container'), 'accepts')))) {
       reject('rules.equip.container', 'Unsupported equipment container: bag container domain is not connected');
     }
   }
@@ -118,60 +124,22 @@ export function inspectCardRuleCapability(card) {
       reject(`rules.battle.hosted[${index}]`, `Unsupported hosted rule '${String(name)}'`);
     }
   }
-  const onPlay = field(triggers, 'onPlay');
-  // Validation above owns array/object shape checks. Still narrow unknown at this consumer.
-  if (isUnknownArray(onPlay)) for (const [index, operation] of onPlay.entries()) {
-    const path = `rules.triggers.onPlay[${index}]`;
-    const op = field(operation, 'op');
-    if (!isBattleOperation(op)) {
-      reject(`${path}.op`, `Unsupported onPlay operation '${String(op)}'`);
-      continue;
-    }
-    if (op === 'transform') {
-      reject(`${path}.op`, "Unsupported onPlay operation 'transform': no battle resolver branch is connected");
-      continue;
-    }
-    const target = field(operation, 'target');
-    if (target !== undefined && (!isOperationTarget(target) || !OPERATION_TARGETS[op].includes(target))) {
-      reject(`${path}.target`, `Unsupported onPlay ${op} target '${String(target)}'`);
-    }
-    // M2：damage 的 graveyard/schedule 均已接线（registerRule/execute/summon 族同步放行）；
-    // draw 的 untilHandN 已接线、handOps 逐 entry 放行（consumeHand/dumpHand），其余待后续批次。
-    if (op === 'draw' && isObject(operation) && 'handOps' in operation) {
-      const handOps = field(operation, 'handOps');
-      const entries = isUnknownArray(handOps) ? handOps : [];
-      for (const [entryIndex, entry] of entries.entries()) {
-        const entryOp = field(entry, 'op');
-        if (typeof entryOp !== 'string' || !SUPPORTED_HAND_OPS.has(entryOp)) {
-          reject(`${path}.handOps[${entryIndex}].op`, `Unsupported onPlay draw handOps op '${String(entryOp)}'`);
-        }
-      }
-    }
-    if (op === 'damage' && field(field(operation, 'hits'), 'perFoe') !== undefined) {
-      reject(`${path}.hits.perFoe`, "Unsupported onPlay damage parameter 'hits.perFoe'");
-    }
-    if (op === 'acquire') {
-      if (isObject(operation) && 'filter' in operation) {
-        const filter = field(operation, 'filter');
-        for (const key of isObject(filter) ? Object.keys(filter) : []) {
-          if (!SUPPORTED_ACQUIRE_FILTER_KEYS.has(key)) {
-            reject(`${path}.filter.${key}`, `Unsupported acquire filter key '${key}'`);
-          }
-        }
-      }
-      const dest = field(operation, 'dest') ?? 'discover';
-      const act = field(operation, 'act');
-      if (act !== undefined && (!isAcquireDestination(dest) || !isAcquireAction(act) || !ACQUIRE_ACTIONS[dest].includes(act))) {
-        reject(`${path}.act`, `Unsupported acquire act '${String(act)}' for dest '${String(dest)}'`);
-      }
-    }
-  }
   // Preflight every executable array before a player can pay its cost. Trigger and
   // equipment runners use the same resolver, so unsupported ops there are just as
   // dangerous as unsupported onPlay ops.
   /** @param {unknown} operations @param {string} path */
   const inspectOperationList = (operations, path) => {
     if (!isUnknownArray(operations)) return;
+    if (path !== 'rules.triggers.onPlay') {
+      // Reject at entry if the isolated batch would fail the resolver's onPlay contract.
+      const view = createCardRuleExecutionView(card, operations);
+      const checked = validateCardRules(view);
+      for (const issue of checked.errors) {
+        if (issue.path.startsWith('rules.triggers.onPlay') || issue.path.startsWith('rules.battle.target')) {
+          reject(issue.path.replace('rules.triggers.onPlay', path), issue.message);
+        }
+      }
+    }
     for (const [index, operation] of operations.entries()) {
       const operationPath = `${path}[${index}]`;
       const op = field(operation, 'op');
@@ -179,7 +147,13 @@ export function inspectCardRuleCapability(card) {
         reject(`${operationPath}.op`, `Unsupported operation '${String(op)}'`);
         continue;
       }
-      if (op === 'transform') {
+      if (op === 'choice') {
+        const options = field(operation, 'options');
+        for (const [optionIndex, option] of (isUnknownArray(options) ? options : []).entries()) {
+          inspectOperationList(field(option, 'ops'), `${operationPath}.options[${optionIndex}].ops`);
+        }
+      } else if (op === 'schedule') inspectOperationList(field(operation, 'ops'), `${operationPath}.ops`);
+      if (op === 'transform' && field(operation, 'what') !== 'starterAttacks') {
         reject(`${operationPath}.op`, "Unsupported operation 'transform': no battle resolver branch is connected");
         continue;
       }
@@ -190,6 +164,12 @@ export function inspectCardRuleCapability(card) {
       if (op === 'damage' && field(field(operation, 'hits'), 'perFoe') !== undefined) {
         reject(`${operationPath}.hits.perFoe`, "Unsupported damage parameter 'hits.perFoe'");
       }
+      if (op === 'curse' && field(operation, 'target') === 'self' && field(operation, 'curse') === 'atkDown') {
+        reject(`${operationPath}.target`, 'Player attack loss and restoration are not connected for self atkDown');
+      }
+      if (op === 'draw' && field(operation, 'untilHandN') !== undefined && field(operation, 'filter') !== undefined) {
+        reject(`${operationPath}.filter`, 'Unsupported filtered draw until hand size: the hand-size resolver does not consume filter');
+      }
       if (op === 'acquire') {
         const filter = field(operation, 'filter');
         for (const key of isObject(filter) ? Object.keys(filter) : []) {
@@ -197,6 +177,9 @@ export function inspectCardRuleCapability(card) {
         }
         const dest = field(operation, 'dest') ?? 'discover';
         const act = field(operation, 'act');
+        if (dest === 'hand' && act === 'zeroCost' && !['ids', 'types'].includes(String(field(field(operation, 'pool'), 'kind')))) {
+          reject(`${operationPath}.act`, 'Direct zero-cost acquisition requires an explicit structured pool');
+        }
         if (act !== undefined && (!isAcquireDestination(dest) || !isAcquireAction(act) || !ACQUIRE_ACTIONS[dest].includes(act))) {
           reject(`${operationPath}.act`, `Unsupported acquire act '${String(act)}' for dest '${String(dest)}'`);
         }
@@ -212,11 +195,20 @@ export function inspectCardRuleCapability(card) {
       }
     }
   };
-  for (const point of ['onTurnStart', 'onTurnEnd', 'onBattleStart', 'onConsume', 'onDraw', 'onKill',
-    'onDamaged', 'onPlayCard', 'onAcquire', 'onFreezeDealt']) {
+  for (const point of BATTLE_TRIGGER_POINTS) {
     inspectOperationList(field(triggers, point), `rules.triggers.${point}`);
   }
   const equip = field(rules, 'equip');
+  const passive = field(equip, 'passive');
+  const condition = field(passive, 'cond');
+  const aura = field(passive, 'aura');
+  if (condition !== undefined && field(aura, 'deckCap') !== undefined) {
+    reject('rules.equip.passive.aura.deckCap', 'Conditional deck capacity has no consumer');
+  }
+  if (field(condition, 'vsFreeze') !== undefined && field(condition, 'hasCurse') !== true &&
+      ['atk', 'spellPower', 'focus'].some(key => field(aura, key) !== undefined)) {
+    reject('rules.equip.passive.aura', 'Target freeze damage bonuses cannot condition player stat or energy auras');
+  }
   for (const point of ['onEquip', 'battleStart']) inspectOperationList(field(equip, point), `rules.equip.${point}`);
   inspectOperationList(field(field(equip, 'skill'), 'ops'), 'rules.equip.skill.ops');
   return issues.length ? { kind: 'unsupported', ok: false, issues } : { kind: 'supported', ok: true };

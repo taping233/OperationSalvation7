@@ -1,0 +1,24 @@
+diff --git a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/selection-before-agent.state.js.txt b/game/src/agent/agent.state.js
+index 680742aa..11e85d35 100644
+--- a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/selection-before-agent.state.js.txt
++++ b/game/src/agent/agent.state.js
+@@ -93,6 +93,8 @@ function battleView(snap) {
+       need: snap.handSelecting.n ?? snap.handSelecting.need ?? null,
+       mandatory: !!snap.handSelecting.mandatory,
+       type: snap.handSelecting.type || snap.handSelecting.act || null,
++      candidateUids: [...(snap.handSelecting.candidateUids || [])],
++      canCancel: snap.handSelecting.canCancel === true,
+     } : null,
+     infusing: snap.infusing ? { uid: snap.infusing.uid, name: snap.infusing.card?.name || '', picked: [...(snap.infusing.picked || [])] } : null,
+     deckSelection: snap.deckSelection ? {
+@@ -150,8 +152,8 @@ function battleActions(snap) {
+     return acts;
+   }
+   if (snap.handSelecting) {
+-    (snap.handSelecting.cards || snap.hand || []).forEach(uid => push('pickHandSelect', [uid]));
+-    push('skipHandSelect', []);
++    (snap.handSelecting.candidateUids || []).forEach(uid => push('pickHandSelect', [uid]));
++    if (snap.handSelecting.canCancel === true) push('skipHandSelect', []);
+     return acts;
+   }
+   if (snap.choosing) {

@@ -1,0 +1,21 @@
+diff --git a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/consumed-before-battle.snapshot.js.txt b/game/src/battle/runtime/battle.snapshot.js
+index a9ab9677..8b78f673 100644
+--- a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/consumed-before-battle.snapshot.js.txt
++++ b/game/src/battle/runtime/battle.snapshot.js
+@@ -135,7 +135,7 @@ function createBattleSnapshotSignature(input, renderDependencies) {
+ function createBattleSnapshot(input) {
+   const {
+     battleToken, mode, turn, energy, maxEnergy, busy, phase, actionQueueLength,
+-    opts, player, pdef, pstat, foes, deathFxPending, allies, hand, drawPile, discard, grave, consumed = [], handInfuseCounts = {}, playedMovesThisTurn, endTurnContext, playerEffects = [],
++    opts, player, pdef, pstat, foes, deathFxPending, allies, hand, drawPile, discard, grave, played = [], consumed = [], handInfuseCounts = {}, playedMovesThisTurn, endTurnContext, playerEffects = [],
+     infusing, discovering, handSelecting, choosing, pendingTarget, pendingHint,
+     viewingGrave, viewingDeck, viewingBag, dreadShown, selectingDeck, deckNeed, selDeckMax,
+     selShaN, sel, selPool, potionBar, pendingItem, slamPending, dartPending,
+@@ -199,6 +199,7 @@ function createBattleSnapshot(input) {
+     drawPile: Object.freeze(drawPile.slice()),
+     discard: Object.freeze(discard.slice()),
+     grave: Object.freeze(grave.slice()),
++    played: Object.freeze(played.slice()),
+     consumed: Object.freeze(consumed.slice()),
+     handInfuseCounts: Object.freeze({ ...handInfuseCounts }),
+     infusing: readonlyInfusing,

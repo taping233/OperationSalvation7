@@ -1,3 +1,6 @@
+// 2026-10-20 portable re-review: 195 approved retired paths remain unreferenced;
+// mapping changes add only tt13 art/revision entries. Full scan and replacement hashes:
+// docs/evidence/2026-10-20-WF-portable-clean-1020/assets/review.json
 // 2026-10-19 background timers: only visibility/cleanup scheduling changed; asset paths and selectors unchanged.
 // Reviewed selectors and opaque dynamic paths; re-audit before changing fingerprints.
 // Approved historical sources were deleted under docs/evidence/2026-10-19-unused-cleanup/.
@@ -8,6 +11,9 @@
 // Retired scenes: docs/evidence/2026-10-16-WF-cloud-retired-scenes/README.md
 // Shadowed card art: docs/evidence/2026-10-16-shadowed-card-audit/README.md
 // 2026-10-19 re-review: chests changes only closing guards and DOM scroll/focus; asset selection unchanged.
+// 2026-10-20 battle re-review: HUD, impact profiles and contact-frame timing do not change
+// dynamic asset constructors, role/catalog inputs or excluded candidates. Evidence:
+// docs/evidence/2026-10-20-WF-battle-flow-1020/effects.md (including the preceding sts-polish patch).
 // Retired chest rigs: docs/evidence/2026-10-16-WF-cloud-performance-review/README.md
 export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
   candidates: [
@@ -211,26 +217,26 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "shadowed-card-art": {
       "game/src/core/art.js": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
       "game/src/core/data-loader.js": "d13b1849abc2351964cd02b2928030790cc4888cbb5ecb90d3263fa19078b6be",
-      "game/data/art-mapping.json": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99"
+      "game/data/art-mapping.json": "a7d5b045fdcc015c8998462fc3f41f4cf2215531826e616d753e7ae68978c530"
     },
     "retired-scenes": {
-      "game/data/art-mapping.json": "7d58a3687c73d138279b086d7697e4c59047c89b735dad77acd06b003acb0f99",
+      "game/data/art-mapping.json": "a7d5b045fdcc015c8998462fc3f41f4cf2215531826e616d753e7ae68978c530",
       "game/src/core/art.js": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
-      "game/src/run/chests.js": "42bb906b3705cc82fad25ff9bb8faeabff47df47943bea4d858f6a968da537b0",
-      "game/src/run/chest-opening-art.js": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf",
+      "game/src/run/chests.js": "dfffd48dd8b1624fb1c6f430b1206e03091224102ea39b47baae09faf29a897e",
+      "game/src/run/chest-opening-art.js": "3b4a044da138b9beea05e1520c8da7dd3cf65962c773f325db996b8f3cf3ab09",
       "game/src/run/game.run.data.js": "3556ddbef7b6913e198762e0237b2bb8c4f378eccb0addbe575f5ad2c7ca5cc8",
-      "game/src/run/game.run.scenes.js": "601910c257052f30360b8eb9b54d024515dc901ce9c03db778d09744862f38a3",
+      "game/src/run/game.run.scenes.js": "c250bdc2fec20371637a60421506697e53162d0e7d06cccdad8f8f9fbf21e5ad",
       "game/src/battle/view/battle.scenery.js": "bcbff054eb7c23c6a7336c868c5f2a0b2b14e6406628a7bd64a9349935b8172f",
-      "game/src/run/game.session.death.js": "7dabbfc0bdc471252cbe19511b4256250a3001cf04f4220670214eeaa3155044",
+      "game/src/run/game.session.death.js": "3f6c1730a96401615a6b19d059a210f2ac8ec9a821bfde85cce6c49c428dcadc",
       "game/css/entry-events.css": "0d488a1c0174cf7b0c77702e178937ef4a5ba5238b88adf70727f89a7f71185b",
       "game/css/scenes.css": "9cfa703fecf0e80eba1c2d4a7ead00f3d851e6f155eaf5b14b7d83ebf0f3d8f6"
     },
     "chests": {
-      "game/src/run/chests.js": "42bb906b3705cc82fad25ff9bb8faeabff47df47943bea4d858f6a968da537b0",
-      "game/src/run/chest-opening-art.js": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf"
+      "game/src/run/chests.js": "dfffd48dd8b1624fb1c6f430b1206e03091224102ea39b47baae09faf29a897e",
+      "game/src/run/chest-opening-art.js": "3b4a044da138b9beea05e1520c8da7dd3cf65962c773f325db996b8f3cf3ab09"
     },
     "frames": {
-      "game/src/battle/view/battle.frames.js": "7cb2dea8e6ae11f567852e3739248dbb76b987ca46a3d0dd436b1bc8348f4abd",
+      "game/src/battle/view/battle.frames.js": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e",
       "game/src/battle/view/battle.frame-catalog.js": "7396a3a49f206d63e16e5ed8bab02d4d5fbd39e7ef934c354f1dc0fcda756bd0",
       "game/src/battle/view/battle.frame-catalog-changwuyu.js": "774594287f6417bf0ffba60f77817ffc7dff42d5d78f937f6c13c72973a4a77d",
       "game/src/battle/view/battle.frame-catalog-three-role.js": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
@@ -261,17 +267,17 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
   },
   opaqueConsumers: {
     "game/src/audio/sfx-review.js": "2d7d38a1a9d6248e2cb7a8cffb28b0b118dfda587f4401b1cd019397c938b927",
-    "game/src/ui/game.menu.pages.js": "63142a3f9e1f4e025f7957e4b189c920784f04aec293a66ffb1d340e223e2a60",
-    "game/src/hub/hub.personnel.js": "f363ac2ad34b21fe99a1b650642deb2537e397c918175f58d5325ad4366bbe72",
+    "game/src/ui/game.menu.pages.js": "b5a1c52bab264651e512b61598b5e63950fc30bdf65e2307d223bdd63e6ed826",
+    "game/src/hub/hub.personnel.js": "0feead0d3df274cd9b39056c2326946b7bd0f264e64d8b645886f4d538282a1e",
     "game/src/core/art-preload-plan.js": "1b7cc057cdb5c307a3eea5601a45a1bb8837dcedcec8486eb6d1fc56701f75fe",
     "game/src/hub/game.bag.view2.js": "22d64eb1d194e29b6542bc9d1f4ab63f096c04bc6e92b02ce05ef1da3ff3800d",
     "game/card-design-options-v2.html": "cead324bf47437043376cfb40dcc7cec7c9fde1e0bda644a4da356e240a5f9ee",
     "game/src/audio/sfx-audition.js": "0d6dd150075b4a5204d3786d6ce31f4ab124c26ad145f399501796dad8fbc60f",
     "game/src/audio/sound.js": "407ba1bbbab63e0c0fedb8f153f2c7514156159621c3c5b8377dc7ab254bcdcf",
-    "game/src/battle/view/battle.frames.js": "7cb2dea8e6ae11f567852e3739248dbb76b987ca46a3d0dd436b1bc8348f4abd",
-    "game/src/battle/view/battle.layers.js": "91c6774633ae0dcaca7ca162b1188ba64e281ee3e3e8f0c15064ff6f0c660d3c",
-    "game/src/battle/view/battle.vfx.js": "0c7f2fb9b96171c5f03c498c8d5004bb1553403f12723bec15e8922604af04cd",
-    "game/src/cards/card-frame-presentation.js": "79ef8241faad2ed89bb1c19b6866f0e352ddd43e9498d1e0842e436335099d9a",
+    "game/src/battle/view/battle.frames.js": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e",
+    "game/src/battle/view/battle.layers.js": "7477064e4630bbdb1909bf0cb482c0a83711ca4a2a6d6c6a58313f10f912c9ee",
+    "game/src/battle/view/battle.vfx.js": "ef99883fdb2659f8e6e4506fed6e31fdd3c9b4355a6f5b6e7e84ab12f9dd6687",
+    "game/src/cards/card-frame-presentation.js": "4a05cb2499db1ffa0b3ee20d18b30493f1d4df58edb58df4f6c632ccbc7dc196",
     "game/src/core/art.js": "165c2ecaeb44d5078f94e392fabdb7e42729050655fb56788184434de2597283",
     "game/src/core/icons-bitmap.js": "71e1d0b742254726786fa9a2af57448646bff6881fa04a39b4d15abfd86eed86",
     "game/src/home/home.scene.js": "5315be0ae9feb71523ed8cafea826415341dab33980e4458344e8f169a8edd40",
@@ -281,7 +287,7 @@ export const RUNTIME_REDUNDANCY_REVIEW = Object.freeze({
     "game/src/rarity-design-lab.js": "7371593bf0382256a8abc15b1470ff81da9f0a01e835fd5329ece73c16cde775",
     "game/src/run/lab.ending.js": "8a6fe31c4fbef1acbaae9cb06c759fbc5a2e4e16f84c365eb93371232b495ba8",
     "game/src/ui/base-preview-rooms-v7.js": "c68c228942c7aaa41d1d52343c8f34346f4b424327c14619c2e5c5943a4e9fb8",
-    "game/src/ui/game.menu.js": "cea11326c01a46240c7f902d37a667d528589502fe743652145ffe7654573010",
+    "game/src/ui/game.menu.js": "a5ebd60111d4edd1c4ea99f6f051eddce4eb103265406f0021cb1b4144896045",
     "game/src/ui/ui.js": "cff10befcd3e1cfa8618a6fcfddb50555574245e1e48348c2ef89702c2d38adf",
     "game/src/wu-career-frame-preview.js": "2715b703789fef835432d3eb7cbffdedc249f8355a22714e6faff8ef49cfee38"
   },

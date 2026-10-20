@@ -1,0 +1,49 @@
+diff --git a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/replay-fixture-before-sts2-agent-replay.test.js.txt b/tests/sts2-agent-replay.test.js
+index a3efb05d..f60d0f0f 100644
+--- a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/replay-fixture-before-sts2-agent-replay.test.js.txt
++++ b/tests/sts2-agent-replay.test.js
+@@ -15,6 +15,7 @@ window.SDT = { Icons: { img: () => '', TYPE_ART: {} },
+ await import('../game/src/cards/cards.js');
+ const { BattleSession, configureBattleRenderer } = await import('../game/src/battle/core/battle.core.js');
+ const { Random } = await import('../game/src/core/random.js');
++const piles = await import('../game/src/battle/runtime/battle.runtime.piles.js');
+ const { setTurbo } = await import('../game/src/core/turbo.js');
+ await import('../game/src/agent/agent.js');
+ const { bustSigCache } = await import('../game/src/agent/agent.state.js');
+@@ -43,6 +44,17 @@ async function prepare(data = descriptor) {
+   Random.reseed(data.params.seed);
+   BattleSession.start(fixture.game, [0, 1].map(i => ({ id: `foe-${i}`, name: `目标${i}`,
+     hp: data.params.enemyHp, atk: 3, behavior: 'strike' })), { isBoss: false, name: '真实命令重放' });
++  // Production starter UIDs contain the live battle token, intentionally separating sessions.
++  // This trusted fixture explicitly rebuilds all 99 entities with its own stable physical IDs;
++  // replay still compares every UID and complete pile contents without normalization or omissions.
++  const stableUids = new Map(piles.granted.filter(entry => entry.uid.startsWith('normal-sha-'))
++    .map((entry, index) => [entry.uid, `normal-sha-fixture-${data.params.seed}-${index}`]));
++  piles.restoreBattlePiles({
++    hand: piles.hand,
++    drawPile: piles.drawPile.map(uid => stableUids.get(uid) || uid),
++    discard: piles.discard, grave: piles.grave, played: piles.played, consumed: piles.consumed,
++    granted: piles.granted.map(entry => ({ ...entry, uid: stableUids.get(entry.uid) || entry.uid })),
++  });
+   bustSigCache();
+   const settled = await Agent.waitSettle(stepOptions);
+   expect(settled.ok).toBe(true);
+@@ -77,6 +89,18 @@ async function record({ policyRandom = false } = {}) {
+ }
+ 
+ describe('battle-entry replay through the real Agent and BattleSession commands', () => {
++  it('rebuilds the fixture with 99 stable unique physical starter IDs and matching granted sources', async () => {
++    const first = BattleSession.getSnapshot();
++    await prepare();
++    const second = BattleSession.getSnapshot();
++    expect(second.battleToken).not.toBe(first.battleToken);
++    expect(first.drawPile).toHaveLength(99);
++    expect(new Set(first.drawPile).size).toBe(99);
++    expect(second.drawPile).toEqual(first.drawPile);
++    expect(second.drawPile.every(uid => piles.granted.some(entry => entry.uid === uid))).toBe(true);
++    expect(fixture.game.ownedCards.map(entry => entry.uid)).toEqual(['hit-a', 'hit-b', 'hit-c']);
++  });
++
+   it('records target selection and an enemy turn, then replays recorded commands without rerunning a policy', async () => {
+     const packet = await record({ policyRandom: true });
+     expect(packet.checkpoint.restartVersion).toBe(1);

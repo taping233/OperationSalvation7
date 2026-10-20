@@ -168,8 +168,12 @@ describe('09-30 深审 BC 组修复回归', () => {
     BattleSession.commands.useItem(uid);
     await waitIdle();
     expect(g.ownedCards.some(o => o.uid === uid)).toBe(false);   // 母本已消耗
-    expect(R.granted).toHaveLength(1);                            // 此前 0——道具白耗
-    expect(R.granted[0].card.rarity).toBe('传说');
+    const rewards = R.granted.filter(entry => entry.card.rarity === '传说' && entry.uid !== uid);
+    expect(rewards).toHaveLength(1);
+    expect(R.granted.filter(entry => entry.uid === uid)).toHaveLength(1);
+    expect(R.played.filter(entry => entry === uid)).toHaveLength(1);
+    BattleSession.commands.useItem(uid); await waitIdle();
+    expect(R.granted.filter(entry => entry.card.rarity === '传说' && entry.uid !== uid)).toEqual(rewards);
     expect(R.discovering).toBeNull();
     expect(R.discoverQueue).toHaveLength(0);                      // 此前残留 1 个无人消费的 job
   });

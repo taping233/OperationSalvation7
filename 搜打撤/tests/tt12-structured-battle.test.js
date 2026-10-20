@@ -112,7 +112,7 @@ describe('TT12 结构化出牌前规则：真实 BattleSession', () => {
     expect(canonical.rules.battle.target).toEqual({ side: null, area: false });
     expect(canonical.rules.battle.costModifiers).toEqual([{ kind: 'consumedSpellDiscount', amount: 1 }]);
     expect(fuel.type).toBe('法术');
-    // 改写描述会影响抽牌/回能旧效果；本用例只验结构化目标、费用预检和成功出牌。
+    // 改写描述后仍按结构化规则抽牌并回满能量，同时保留消耗区折费。
     const backup = { ...canonical, desc: '对敌人造成1点法术伤害' };
     const backupUid = 'tt12-backup-rewritten';
     const dragonUid = 'tt12-raydragon-infuser';
@@ -134,14 +134,16 @@ describe('TT12 结构化出牌前规则：真实 BattleSession', () => {
     BattleSession.commands.confirmInfusion();
     let state = await drain();
     expect(state.energy).toBe(5);
-    expect(viewApi.effCostOf(backup, backupUid)).toBe(5);
+    expect(state.consumedPile).toEqual(expect.arrayContaining([fuelUid, dragonUid]));
+    expect(viewApi.effCostOf(backup, backupUid)).toBe(4);
 
-    // 用 5 点当前能量实打：未计入口袋法术时 6 费无法通过出牌预检。
+    // 注能燃料与刚打出的法术都进入同一消耗牌堆，费用由 6 降为 4。
     BattleSession.commands.playCard(backupUid, null);
     state = await drain();
     expect(state.pendingTarget).toBeNull();
     expect(state.hand).not.toContain(backupUid);
-    expect(state.energy).toBe(0);
+    expect(state.energy).toBe(state.maxEnergy);
+    expect(state.hand.length).toBeGreaterThanOrEqual(2);
     expect(game.logs.some(line => line.includes('能量不足'))).toBe(false);
 
     BattleSession.commands.flee();

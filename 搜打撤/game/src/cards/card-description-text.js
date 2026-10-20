@@ -1,11 +1,13 @@
 import { rotSeedDescription } from './rot-seed-revision.js';
-// 卡牌展示文案。只替换已审阅的 id + 原始描述；旧存档腐化之种沿现行定版。
+import { structuredCardDescription } from './structured-card-description.js';
+// 卡牌展示文案。只替换已审阅的 id + 原始描述；简单结构化句式从规则填数值。
+// 自定义或复杂描述保留原入口行为；旧存档腐化之种沿现行定版。
 // 文案审阅依据：docs/evidence/2026-10-11-card-description-unification/。
 const descriptions = new Map([
   ["starter-emergency-bandage", ["回复12 点生命。", "你回复 12 点生命。"]],
   ["starter-attack", ["攻（+0）：造成等同于攻击力的伤害。", "造成等同于你的攻击力的攻击伤害。"]],
   ["tt-econpack", ["只能在仓库界面点击使用，获得5张随机卡牌", "只能在仓库界面使用；随机获得 5 张卡牌。"]],
-  ["tt-crystal", ["在背包中才能使用，可以复原最多 3 张卡牌。", "地图背包：从消耗区复原最多3张卡牌；战斗：从本场消耗牌复原最多3张回到手牌。对应消耗区为空时不可使用。"]],
+  ["tt-crystal", ["在背包中才能使用，可以复原最多 3 张卡牌。", "地图背包：从消耗区复原最多3张卡牌；战斗：从消耗牌堆复原最多3张回到手牌。对应牌区为空时不可使用。"]],
   ["tt-token-gold", ["随机获取 1 张传说卡（不含棱彩卡）。", "随机获得 1 张传说卡牌（不含棱彩卡牌）。"]],
   ["tt-jinchuangyao", ["回复 20 点生命。", "你回复 20 点生命。"]],
   ["tt2-apollo", ["发现或随机获取该牌时，回复1点能量并获取另1张随机卡牌。", "你发现或随机获得本牌时，回复 1 点能量，并随机获得另 1 张卡牌。"]],
@@ -223,13 +225,23 @@ const descriptions = new Map([
   ["tt12-chargeray", ["造成5点法伤，本牌在你手牌中时每注能过1张卡牌，伤害+2", "造成 5 点法术伤害；本牌在你的手牌中时，你每注能 1 张卡牌，本牌伤害增加 2 点。"]],
   ["tt12-breakthrough", ["随机获取1张0费，一张1费，一张2费招式", "随机获得 0 费、1 费和 2 费招式各 1 张。"]],
   ["tt12-raygun", ["主动技能：发现一张射线牌并直接释放", "主动技能：发现 1 张射线牌，并直接施放。"]],
-  ["tt12-backupcell", ["抽2张牌并回复所有费用，消耗区中每有一张法术牌，本牌费用-1", "抽 2 张牌，并回复你的全部能量；本场战斗消耗牌中每有 1 张法术牌，本牌费用减少 1 点（不计之前战斗的消耗区或普通弃牌；仅进入墓地的牌不计）。"]],
+  ["tt12-backupcell", ["抽2张牌并回复所有费用，消耗区中每有一张法术牌，本牌费用-1", "抽 2 张牌，并回复你的全部能量；消耗牌堆中每有 1 张法术牌，本牌费用减少 1 点。"]],
   ["tt12-freezeray", ["造成4点法伤；若此前其未曾受到过伤害，对其附加冰冻", "造成 4 点法术伤害；若目标在受到本次伤害前未受伤，对目标附加冰冻。"]],
 ]);
 
-export function displayCardDescription(value, id) {
+export function displayCardDescription(value, id, card) {
   value = rotSeedDescription({ id, desc:value });
   const source = String(value || '').replaceAll('消耗口袋', '消耗区');
   const revision = descriptions.get(String(id || ''));
-  return revision && source === revision[0] ? revision[1] : source;
+  const reviewed = revision && source === revision[0] ? revision[1] : source;
+  const approvedSource = revision && (source === revision[0] || source === revision[1]);
+  const approvedCard = card && String(card.id) === String(id) && revision &&
+    (card.desc === revision[0] || card.desc === revision[1]);
+  const text = approvedSource && approvedCard ? structuredCardDescription(card, reviewed) ?? reviewed : reviewed;
+  return text.replace('（不计之前战斗的消耗区或普通弃牌；仅进入墓地的牌不计）', '')
+    .replaceAll('本场战斗消耗牌中', '消耗牌堆中')
+    .replaceAll('从本场消耗牌复原', '从消耗牌堆复原')
+    .replaceAll('对应消耗区为空时', '对应牌区为空时')
+    .replaceAll('弃牌堆', '消耗牌堆').replaceAll('墓地', '消耗牌堆')
+    .replaceAll('消耗牌堆或消耗牌堆', '消耗牌堆');
 }

@@ -1,0 +1,182 @@
+{
+  "capturedAt": "2026-10-20T14:30:43.007Z",
+  "ownership": "Scoped patches over existing mixed worktree; baseline files retained under .tmp/sts-polish-1020.",
+  "entries": [
+    {
+      "path": "game/src/run/game.run.events.js",
+      "bytes": 49594,
+      "sha256": "16da94c40e82bb737e747dd2e0650a78f904abe0fd050ea2869b2a5c843b6ced",
+      "modifiedAt": "2026-10-20T14:05:47.989Z"
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "bytes": 19495,
+      "sha256": "72d66a2a932f526ae6023557e72caeefc439481c4020917ad4b192288663b229",
+      "modifiedAt": "2026-10-20T14:05:47.990Z"
+    },
+    {
+      "path": "game/src/ui/event-option-state.js",
+      "bytes": 2036,
+      "sha256": "1634435977eb2841974f1cc878ac5a98e102a800c677096ad008683b4afc4948",
+      "modifiedAt": "2026-10-20T14:06:44.796Z"
+    },
+    {
+      "path": "game/src/ui/equipment-info.js",
+      "bytes": 1225,
+      "sha256": "3fdc1aae4a4bb36968cfa606240b9d18fb1946bc2f79497c6b4ee9b176d7850e",
+      "modifiedAt": "2026-10-20T14:19:00.935Z"
+    },
+    {
+      "path": "game/src/ui/reward-acquisition-motion.js",
+      "bytes": 7526,
+      "sha256": "3f1812301aef84141f1f692c88cf08671c4f79af7123cce7b667521bc133464e",
+      "modifiedAt": "2026-10-20T14:03:58.408Z"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "bytes": 58095,
+      "sha256": "10e2fdfcff8dbc029ad1fefe5a119ca2d000efda8505ac27805f49ee612b2030",
+      "modifiedAt": "2026-10-20T14:04:34.849Z"
+    },
+    {
+      "path": "game/src/battle/view/battle.attack-cues.js",
+      "bytes": 1943,
+      "sha256": "d403fe88d4b3b20ed4668ced1ec7c21a0742c9b675680295207eccef0d3c6bb2",
+      "modifiedAt": "2026-10-20T14:23:15.641Z"
+    },
+    {
+      "path": "game/src/battle/view/battle.attack-profiles.js",
+      "bytes": 1116,
+      "sha256": "4b30b93f9c7f666b5f7bcb66172ccbc38b9b0aeb319eff900eb7a40874416252",
+      "modifiedAt": "2026-10-20T14:23:15.643Z"
+    },
+    {
+      "path": "game/src/battle/view/battle.enemy-motion.js",
+      "bytes": 2413,
+      "sha256": "4ecc4b8e9e8c28e7f0ad76e44b1f2d92ae55078bce4280634220bb79f6837903",
+      "modifiedAt": "2026-10-20T14:11:12.562Z"
+    },
+    {
+      "path": "game/src/battle/view/battle.vfx.js",
+      "bytes": 25689,
+      "sha256": "140b8ba30216b8f8fab25d7d5bcea27d447ca0bc89f37fde3320a68bbd367b20",
+      "modifiedAt": "2026-10-20T14:23:15.645Z"
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.js",
+      "bytes": 88126,
+      "sha256": "087955d0f1c1d765ed7f375a6619619100222739802ccd17a38137aa8803d10c",
+      "modifiedAt": "2026-10-20T14:12:06.457Z"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.damage.js",
+      "bytes": 19367,
+      "sha256": "4d4c6d9e8f4c029e3ce6e5b517c857d66835002355347900bddd4382a6c1c6aa",
+      "modifiedAt": "2026-10-20T14:06:41.227Z"
+    },
+    {
+      "path": "game/css/battle-attack-profiles.css",
+      "bytes": 809,
+      "sha256": "7b679f96604cee9971c2958827909b7860f85e9c2773569a2666dd0af04aabf8",
+      "modifiedAt": "2026-10-20T14:06:41.230Z"
+    },
+    {
+      "path": "game/css/event-option-state.css",
+      "bytes": 436,
+      "sha256": "e53ded4f4404c9e2c708fbfa22efde626bb5ea6b0262fd72735c71d1c65099e5",
+      "modifiedAt": "2026-10-20T14:07:19.424Z"
+    },
+    {
+      "path": "game/css/card-state-motion.css",
+      "bytes": 2029,
+      "sha256": "edbcd66b05360c20de771b7bffd64f65c3173a7fb30186ddc28143fce56d55fe",
+      "modifiedAt": "2026-10-20T14:03:58.409Z"
+    },
+    {
+      "path": "tests/sts-attack-presentation.test.js",
+      "bytes": 4575,
+      "sha256": "f32660bca02f6cb6ef2fb2f5f273b5151504a5a9812d76ca767f9a2f003e20f4",
+      "modifiedAt": "2026-10-20T14:23:15.645Z"
+    },
+    {
+      "path": "tests/event-option-state.test.js",
+      "bytes": 2041,
+      "sha256": "8877909e629be51380ebad05c10519989f2051a0c807fd45f9d1a8efaad8c15b",
+      "modifiedAt": "2026-10-20T14:06:44.798Z"
+    },
+    {
+      "path": "tests/event-node-binding-cloud.test.js",
+      "bytes": 12708,
+      "sha256": "8dafc65b8d0ff6beefd24a665359fd65277afc9fe5342bcd920bdcf0a11b3e86",
+      "modifiedAt": "2026-10-20T14:05:10.254Z"
+    },
+    {
+      "path": "tests/event-signal-puzzle-integration.test.js",
+      "bytes": 11494,
+      "sha256": "3122d3f8339a6a84ac3c24194156cd63cd894c4ecccef1dd20c9d6dadea59cbf",
+      "modifiedAt": "2026-10-20T14:06:44.799Z"
+    },
+    {
+      "path": "tests/term-tips-lifecycle.test.js",
+      "bytes": 4335,
+      "sha256": "c381f5a064c10b9f70010e7372e6cc519333f981d2e64bcd0764e0cd73de5358",
+      "modifiedAt": "2026-10-20T14:05:10.255Z"
+    },
+    {
+      "path": "tests/reward-acquisition-motion.test.js",
+      "bytes": 11524,
+      "sha256": "0757e6d93186b3ffb740c89e43381e4a663759a56dddba1d1101a29285e6767e",
+      "modifiedAt": "2026-10-20T14:04:25.469Z"
+    },
+    {
+      "path": "game/art-source/sts-polish-1020/battlefield-v1.png",
+      "bytes": 2482639,
+      "sha256": "6d96b5d1a09fd791ca3aa47c3589c04f608ab5a839a00953c6235b1a2ca32415",
+      "modifiedAt": "2026-10-20T14:04:47.084Z"
+    },
+    {
+      "path": "game/art-source/sts-polish-1020/battlefield-v1.prompt.txt",
+      "bytes": 3369,
+      "sha256": "cae3ff3a4e7084b1239fe3e52f00c0cdac88e0032fb3ca20b273068b7a01fb80",
+      "modifiedAt": "2026-10-20T14:04:31.011Z"
+    },
+    {
+      "path": "game/art-source/sts-polish-1020/.gitignore",
+      "bytes": 88,
+      "sha256": "2c64f64ec589363920764345ddc65ae85991e94e6a9adf653610b9996a6a6225",
+      "modifiedAt": "2026-10-20T14:05:52.033Z"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "battle-samples.png",
+      "bytes": 127956,
+      "sha256": "124399c92ee906d879b15f4ccf00a51b2458f5d35a7009bf8753e5e7113b398d"
+    },
+    {
+      "path": "battle-victory.png",
+      "bytes": 48620,
+      "sha256": "fd09cb3bdd74692fc3d0b1815d41df079ea3bcbdb654872a7d3cb4659d4f768c"
+    },
+    {
+      "path": "equipment-tip.png",
+      "bytes": 115580,
+      "sha256": "d0369569f63ed578e41cfbac41f1f01e87446c82a0536a0856f34d3f37958319"
+    },
+    {
+      "path": "equipment-used-tip.png",
+      "bytes": 111459,
+      "sha256": "81829ee45482cb347a038a026a81fb3c3ff5652947ba7e1893e469e51153192e"
+    },
+    {
+      "path": "event-lethal.png",
+      "bytes": 133048,
+      "sha256": "b42d5d559256837e70f266ddbb0f1547f78a97c5d89e74074d1d345a06aa8366"
+    },
+    {
+      "path": "reward-received.png",
+      "bytes": 55316,
+      "sha256": "d588b1bc608b05da308da6b109a4819a0ab106e381e64dea33bbe36eab7b55e8"
+    }
+  ]
+}

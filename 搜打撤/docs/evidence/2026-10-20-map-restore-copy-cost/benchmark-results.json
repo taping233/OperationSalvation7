@@ -1,0 +1,88 @@
+{
+  "runtime": "v24.19.0",
+  "warmup": 25,
+  "iterations": 100,
+  "samples": 7,
+  "scope": "Node/Vitest synthetic repeated restore; not real-device loading latency",
+  "results": [
+    {
+      "name": "legacy-snapshot",
+      "inputSha256": "f71ae2f718a3b733f52a7502fde2a11bbd1a042a49683ba00dda9cbca6e56d74",
+      "snapshotChars": 7160,
+      "nodeCount": 53,
+      "beforeCost": {
+        "stringifyCalls": 175,
+        "stringifyChars": 33366,
+        "parseCalls": 173,
+        "parseChars": 19046
+      },
+      "afterCost": {
+        "stringifyCalls": 2,
+        "stringifyChars": 14320,
+        "parseCalls": 1,
+        "parseChars": 7160
+      },
+      "beforeMedianMs": 0.5895566299999996,
+      "afterMedianMs": 0.2383271000000002
+    },
+    {
+      "name": "current-snapshot",
+      "inputSha256": "c187c7a4208744e5385dfdf9ed6894b308e1cb74982a3ba01345d24b1f6ca470",
+      "snapshotChars": 6784,
+      "nodeCount": 50,
+      "beforeCost": {
+        "stringifyCalls": 166,
+        "stringifyChars": 31539,
+        "parseCalls": 164,
+        "parseChars": 17971
+      },
+      "afterCost": {
+        "stringifyCalls": 2,
+        "stringifyChars": 13568,
+        "parseCalls": 1,
+        "parseChars": 6784
+      },
+      "beforeMedianMs": 0.6728182599999991,
+      "afterMedianMs": 0.29392059000000015
+    },
+    {
+      "name": "current-guarded",
+      "inputSha256": "86c5c480e3025e0a692f89b4b8203a291a890e95926c459be59f16e8f09b4246",
+      "snapshotChars": 7030,
+      "nodeCount": 50,
+      "beforeCost": {
+        "stringifyCalls": 174,
+        "stringifyChars": 79919,
+        "parseCalls": 168,
+        "parseChars": 45593
+      },
+      "afterCost": {
+        "stringifyCalls": 6,
+        "stringifyChars": 37758,
+        "parseCalls": 3,
+        "parseChars": 20595
+      },
+      "beforeMedianMs": 2.1515477299999977,
+      "afterMedianMs": 1.0322746700000016
+    },
+    {
+      "name": "legacy-regeneration",
+      "inputSha256": "2aa32ae9fe225fbb69fd430d4185e9882d46efaa8fb8d07daf32706ccf5fcbff",
+      "snapshotChars": null,
+      "beforeCost": {
+        "stringifyCalls": 242,
+        "stringifyChars": 48876,
+        "parseCalls": 239,
+        "parseChars": 27396
+      },
+      "afterCost": {
+        "stringifyCalls": 69,
+        "stringifyChars": 29830,
+        "parseCalls": 67,
+        "parseChars": 15510
+      },
+      "beforeMedianMs": 1.0702173199999925,
+      "afterMedianMs": 0.6402799700000014
+    }
+  ]
+}

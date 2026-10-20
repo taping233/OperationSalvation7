@@ -56,6 +56,8 @@
 
 战后领奖暂离地图前，沿现有 Base+Run 事务提交胜利进度，同时保留待领奖快照；`context.battleSettlement.progressCommitted` 记录已完成的胜利记账，恢复或领完剩余奖励不重复累计。旧快照缺该字段时沿原事务收尾。活动 `chestReward` 与节点表中同坐标快照须表示相同进度，冲突时拒绝读取并保留原档。
 
+奖励页返回地图时，保存待领奖快照或地图状态失败均保留当前领奖界面、已领索引和剩余候选，显示重试提示；保存成功后才关闭奖励页。提示仅属于本次界面，不新增存档字段，重试不重新发奖或重抽候选。
+
 ## 节点事件的未领候选
 
 `nodeRewards` 按 `层索引,节点索引` 保存节点收益。普通未知事件首次抽取后，使用 `version=1`、`type=event`、`eventId` 绑定本节点的事件卡 ID，并在加载叙事前保存；退出或读档重进直接读取该 ID，不再次抽事件。缺少节点记录的旧档首次进入时补建，原有历史日志不用于推断节点归属。未知或暂不可用的事件 ID 保留原记录，显示返回地图入口，不静默替换事件。该绑定不改变首次抽取的卡池、权重或地图种子。
@@ -89,6 +91,8 @@
 
 固定兼容样本位于 `tests/fixtures/`，由 `tests/save-compat.test.js` 覆盖 RunStorage v1/v2 字段迁移、跨档隔离、未完成对局、基地、职业、成就和卡背。这些 fixture 没有地图版本；原地图恢复另由地图快照测试覆盖。存档格式变更同步更新相应样本与迁移测试。
 
+地图恢复在本次调用内复用完整校验生成的隔离副本，再还原运行时节点；不跨调用缓存校验结果。公开还原入口仍执行完整校验，运行节点、逻辑节点和快照的可变边数组及记录互不共享。已校验的标量记录与双整数边直接复制，避免逐节点 JSON 序列化与解析。
+
 ## 路线快照 v2（routeVersion 分派）
 
 新开的普通远征使用 `generatorVersion: 6`、`layoutVersion: 9`，先运行 `r5-routes-v1` 覆盖，再尝试一次 L2 局部路线 `r5-routes-v2`。第2层补给支路现通往商店，旧快照中的火堆支路仍按原计划恢复。路线协议与生成器版本独立，不反复重抽地图。所有新局保存 `snapshotVersion: 2`、外层 `routeVersion: r5-routes-v2` 及严格 `routePlan`。不满足局部条件时原图保持不变，计划记录 `NO_VALID_FORK`、`DISTANCE_LIMIT`、`PACING_LIMIT` 或 `FINAL_QUALITY_REJECTED`。
@@ -101,7 +105,7 @@ v2 应用计划记录叉口、守卫、物资、休整节点 ID，最多一对�
 
 基地读取仍按原始串指纹缓存解析和迁移结果。`peek`、`use`、内部命令读取与外部刷新在所有权边界取得独立的嵌套副本；预览或当前 `Base.data` 的未保存修改不能污染同一原串的下一次读取。成功保存后缓存代表实际写入的 JSON 原串，与活动运行态独立。
 
-通用基地草稿命令在写入失败时保持原运行态及未变化分支引用。游玩时间、宠物蛋保底、局内成长等已有 checkpoint 命令仍可先推进当前内存并明确报告未持久化；同一活动会话后续成功保存可包含这些值，重新装载则以已落盘快照为准。基地与对局仍分别持久化，不新增跨存储原子保证。
+通用基地草稿命令在写入失败时保持原运行态及未变化分支引用。游玩时间、宠物蛋保底、局内成长等已有 checkpoint 命令仍可先推进当前内存并明确报告未持久化；同一活动会话后续成功保存可包含这些值，重新装载则以已落盘快照为准。基地与对局使用两个存储键；需要跨键提交的流程通过恢复日志推进。出征使用 `departureStart` 日志，在同槽 Web Lock 内保存扣仓后的 Base 与首份 Run；日志中的 runId 同时作为请求身份，首次 Run 修订号为 0。写入中断后，重试或重新选档按原串与日志身份校验完成同一次出征；出现日志前后值之外的新存档时保留现场并拒绝覆盖。日志写入前失败不扣仓，提交未完成时不发布新局，原内存与随机流保持不变。
 
 ## 上一版对局回退的原串保护
 
@@ -129,17 +133,19 @@ v2 应用计划记录叉口、守卫、物资、休整节点 ID，最多一对�
 
 实际装载先取得与读入原串绑定的内部凭据，完成全部纯预检后，才在运行态副作用前采纳该原串为写入基线。采纳时当前串已变则返回 `STALE_SLOT`，读取异常则返回 `STORAGE_READ_FAILED`，原写入基线保持。拒绝坏结构、坏地图或坏撤离记录后，仍在运行的旧局不能因此获准覆盖另一标签的替换档；菜单对替换档的成功预检也不授予这种覆盖权限。实际成功装载最新合法档后，才可基于它继续保存。既有 `readForLoad` 直接消费者保持兼容，生产预检不再用它提前接纳基线。
 
-`loadGame` 的 `ok` 继续表示装载分支是否成功。返回的 `persistence` 单独描述本次同步装载中实际调用的保存，不代表整个档位的事务保证：
+`loadGame` 仍同步返回，`ok` 表示装载分支是否成功。`persistence` 记录这次装载实际发起的保存；异步 Base 写入结束前为 `pending`，调用方等待同一返回对象的 `pendingPersistence` Promise 取得最终 `{ok, code?}`。Promise 不进入游戏状态或存档：
 
 ```js
 {
-  status: 'not_attempted' | 'succeeded' | 'failed',
-  attempts: [{ target: 'base' | 'run', reason: '保存原因', ok: true /* 或 false */, code: '可选失败码' }]
+  status: 'not_attempted' | 'pending' | 'succeeded' | 'failed',
+  attempts: [{ target: 'base' | 'run', reason: '保存原因', ok: true /* 等待时 null，失败时 false */, pending: true /* 仅等待时存在 */, code: '可选失败码' }]
 }
 ```
 
-零次保存调用为 `not_attempted`，所有调用成功为 `succeeded`，任一调用失败为 `failed`；后一次成功不能抹掉先前失败。保存明细包括原有术语迁移、时长迁移、普通地图 `enterLayer` 的保存及战斗恢复回写；不为生成结果增加保存次数。常规保存被运行态守卫提前拦住时不算写入尝试。
+零次保存调用为 `not_attempted`；存在未完成 Base 写入时为 `pending`，全部完成后所有调用成功为 `succeeded`，任一调用失败为 `failed`。后一次成功不能抹掉本次装载较早的失败。明细包含术语迁移、时长迁移、普通地图 `enterLayer` 保存及战斗恢复回写；运行态守卫提前拦住的保存不算写入尝试。
 
-`reason` 为 `card_rename`、`elapsed_migration`、`play_time_sync` 或 `save_game`。基地失败码为 `BASE_SAVE_FAILED`；对局失败码优先采用存储层的 `STALE_SLOT`、`RECOVERY_REQUIRED` 或 `STORAGE`，否则为 `RUN_SAVE_FAILED`。正常返回、预检拒绝和抛错都会释放本次收集上下文，后续保存不再修改已返回的结果。
+`reason` 为 `card_rename`、`elapsed_migration`、`play_time_sync` 或 `save_game`。基地失败码为 `BASE_SAVE_FAILED`；对局失败码优先采用存储层的 `STALE_SLOT`、`RECOVERY_REQUIRED` 或 `STORAGE`，否则为 `RUN_SAVE_FAILED`。收集上下文只登记本次装载发起的调用；已登记异步调用在 `pendingPersistence` 完成前更新对应明细，后续无关保存不加入此回执。
 
-装载成功且可继续时，即使回写失败仍可返回 `ok: true`，同时提示本次部分进度未保存。菜单进入与 Agent `enterSlot` 的成功表示进入完成；持久化结果由 `persistence` 单列。转场归属、战斗加载身份及完成凭据沿现有协议处理。预检拒绝返回 `preserveRun: true`，原 run/base/journal 串保留，且不会先修改随机流、安装地图、调用 `Base.use` 或赋值运行态。
+装载分支成功但回写失败时，原返回对象可保留 `ok: true`，最终 `pendingPersistence` 返回失败。菜单与 Agent `enterSlot` 等待最终结果，失败不宣称进入成功，并保留原档与可重试入口；已经恢复的内存不因此伪装成持久化成功。预检拒绝仍返回 `preserveRun: true`，不先修改随机流、地图、`Base.use` 或运行态。
+
+Base 公开写入均为异步同槽锁操作。`saveGame()` 的同步布尔结果只描述 Run；保存退出使用 `saveSession(): Promise<{ok, code?, message?}>` 等待 Base 与 Run 回执。checkpoint 可立即更新内存，持久失败以 `persisted:false` 报告；重新装载仍以落盘数据为准。准备事务等待期间发生 checkpoint 时，协调器先保存它，再拒绝旧准备版本，重新准备后方可提交。

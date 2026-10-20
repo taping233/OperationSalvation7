@@ -1,0 +1,13 @@
+diff --git a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/selection-before-battle.snapshot.js.txt b/game/src/battle/runtime/battle.snapshot.js
+index 92e95157..a9ab9677 100644
+--- a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/selection-before-battle.snapshot.js.txt
++++ b/game/src/battle/runtime/battle.snapshot.js
+@@ -165,6 +165,8 @@ function createBattleSnapshot(input) {
+     /** @type {NonNullable<BattleSnapshot['handSelecting']>} */
+     const handSelectingCopy = {
+       ...handSelecting,
++      candidateUids: Object.freeze([...(handSelecting.candidateUids || [])]),
++      canCancel: handSelecting.canCancel === true,
+       ...(Object.hasOwn(handSelecting, 'srcCard')
+         ? { srcCard: cloneCardData(handSelecting.srcCard) }
+         : {}),

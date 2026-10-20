@@ -1,0 +1,605 @@
+/* ============================================================
+ * game.run.scenes.js —— 局内场景壳、节点词汇与拾取/开箱页（架构批次 4）
+ *
+ * 由 game.run.js 拆出。层位最底（L0）：只依赖会话/数据/UI 模块，
+ * 不依赖 altar / flow；ALTAR 与 FLOW 反向依赖本文件。
+ * 内容：场景预加载与整页壳（nodeShell/nodeOpt）、
+ *       行军转场、即时节点落定、拾取页、战斗/宝箱格、事件发牌、火堆复原页。
+ * 商店控制器也在此装配（openShop 唯一实例，供 ALTAR/FLOW 复用）。
+ * ============================================================ */
+import { esc, escAttr } from '../core/shared.js';
+import { MAP, bagCap, game, newUid, pick, saveGame, scaledEnemy, usedSlots } from './game.session.js';
+import { _set_cardPageOpen, cardHTML } from '../hub/game.cardslib.js';
+import { IMMEDIATE_SCENES, NODE_BG, PICKUP_BG, PRELOAD_SCENES, SCENES, WINTER_BATTLE_LAYERS } from './game.run.data.js';
+import { Random } from '../core/random.js';
+import { saveRunCheckpoint } from '../core/run-checkpoint.js';
+import { hashSeed } from '../core/random-core.js';
+import { createShopController } from './game.run.shop.js';
+import { captureBattleContext, ensureBattleReady, startBattle } from '../battle/battle-loader.js';
+import { setBagReturnHook } from '../hub/bag-return-hook.js';
+import { bagSlots } from '../hub/game.bag.bridge.js';
+import { nodeActionBinding } from './node-reward-state.js';
+import { claimNodeRestore, finishNodeRestore, nodeRestoreAt } from './node-restore-state.js';
+import { selectEncounterSpec } from './encounter-selector.js';
+import { turboMs } from '../core/turbo.js';
+import { usePlainBattleTransition } from '../ui/transition-diagnostic-policy.js';
+import { reduceMotion } from '../core/motion.js';
+import { createCityCut, cityCutDuration } from '../ui/camp-entry.js';
+import { createPageSurfaceLifetime } from '../ui/page-surface-lifetime.js';
+import { prepareTransition } from '../ui/transition-preparation.js';
+import { motionTiming } from '../ui/motion-presets.js';
+import { eventSceneHTML } from '../ui/node-scene-view.js';
+import '../../css/entry-events.css';
+import '../../css/expedition-transitions.css';
+/* ESM 垫片：window.SDT 命名空间的模块内引用（由 main.js 的加载顺序保证已存在） */
+const SDT = window.SDT;
+const UI = window.SDT.UI;
+
+// ---------- 商店（全流程唯一实例：ALTAR 的层间门与 FLOW 的商店格都通过 import 复用） ----------
+export const { openShop } = createShopController({
+  UI,
+  SDT,
+  game,
+  bagCap,
+  cardHTML,
+  newUid,
+  saveGame,
+  setCardPageOpen: _set_cardPageOpen,
+  usedSlots,
+});
+
+export function cancelLegacyChainMove(reason = '即时事件不再自动跳转') {
+  const steps = Math.max(0, Number(game.chainMove) || 0);
+  if (!steps) return false;
+  game.chainMove = 0;
+  UI.log(`[[icon:map]] ${reason}（原计划前进 ${steps} 格）`, 'sys');
+  return true;
+}
+
+// ---------- 落脚结算 ----------
+// ---------- 场景演出（v0.10：不同格子进入不同场景，少量对话后开启内容） ----------
+let scenePreload = null;
+function preloadScene(name) {
+  if (!name || (scenePreload && scenePreload.name === name)) return;
+  const img = new Image();
+  img.decoding = 'async';
+  img.src = name;
+  scenePreload = { name, img };
+  if (img.decode) img.decode().catch(() => {});
+}
+export function preloadCellScene(layer, idx) {
+  if (!layer?.logical) return;
+  const cell = layer.logical[idx];
+  const cellType = cell && cell.def && cell.def.type;
+  const door = (layer.doors || []).some(d => d.at === idx);
+  const altar = (layer.altarEntrances || []).some(a => a.at === idx);
+  const immediate = IMMEDIATE_SCENES.has(cellType);
+  const type = immediate ? cellType : door ? 'door' : altar ? 'altar' : cellType;
+  if (['battle', 'boss', 'bossGeneral', 'bossOrc', 'bossElement'].includes(type)) {
+    preloadSceneList(WINTER_BATTLE_LAYERS);
+  } else {
+    preloadScene(PRELOAD_SCENES[type]);
+  }
+}
+// 兼容旧调用：只预载最常见的即时节点，不再一次吞入全部事件背景。
+// 其他房间由 preloadCellScene 在路线确认时按目标格预取。
+const _preloaded = new Set();
+function preloadSceneList(urls) {
+  urls.forEach(url => {
+    if (!url || _preloaded.has(url)) return;
+    _preloaded.add(url);
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = url;
+    if (img.decode) img.decode().catch(() => {});
+  });
+}
+export function preloadAllNodeShellBgs() {
+  preloadSceneList(Array.from(IMMEDIATE_SCENES, key => PRELOAD_SCENES[key]).filter(Boolean));
+}
+// 事件选中是阅读状态；真正结算仍交给原有 data-act 回调。
+let eventChoiceSelection = null;
+function wireEventChoiceSelection(root, key) {
+  const options = [...root.querySelectorAll('.node-summary > .evt-opt[data-act]')];
+  if (options.length < 2) { eventChoiceSelection = null; return; }
+  const confirm = root.querySelector('.event-choice-confirm');
+  const clear = root.querySelector('.event-choice-clear');
+  const name = root.querySelector('[data-event-choice-name]');
+  const detail = root.querySelector('[data-event-choice-detail]');
+  if (!confirm || !clear || !name || !detail) return;
+  let selected = eventChoiceSelection?.key === key ? eventChoiceSelection.index : -1;
+  let executing = false;
+  let forwarding = false;
+  const sync = () => {
+    const option = options[selected];
+    options.forEach((item, index) => {
+      item.classList.toggle('is-selected', index === selected);
+      item.setAttribute('aria-pressed', String(index === selected));
+    });
+    name.textContent = option?.querySelector('b')?.textContent || '未选择';
+    detail.textContent = option?.querySelector('span')?.textContent || (option ? '结果未知' : '');
+    confirm.disabled = !option || executing;
+    clear.disabled = !option || executing;
+    confirm.textContent = '确认选择';
+  };
+  const choose = index => {
+    if (executing || options[index]?.disabled) return;
+    selected = index;
+    eventChoiceSelection = { key, index };
+    sync();
+  };
+  root.querySelector('.node-summary').addEventListener('click', event => {
+    const option = event.target.closest('.evt-opt[data-act]');
+    if (!option || forwarding) return;
+    event.preventDefault();
+    event.stopPropagation();
+    choose(options.indexOf(option));
+  });
+  clear.addEventListener('click', () => {
+    if (executing) return;
+    selected = -1;
+    eventChoiceSelection = null;
+    sync();
+    options[0]?.focus({ preventScroll:true });
+  });
+  confirm.addEventListener('click', () => {
+    const option = options[selected];
+    if (!option || executing || option.disabled) return;
+    executing = true;
+    eventChoiceSelection = null;
+    sync();
+    forwarding = true;
+    try { option.click(); } finally { forwarding = false; }
+  });
+  root._clearEventChoice = () => { selected = -1; eventChoiceSelection = null; sync(); };
+  if (selected < 0 || options[selected]?.disabled) selected = -1;
+  sync();
+}
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || event.isComposing || event.keyCode === 229) return;
+  const root = UI.el?.ovBody?.querySelector('.event-scene[data-event-choice-count]');
+  if (!root?.querySelector('.evt-opt.is-selected')) return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  root._clearEventChoice?.();
+}, true);
+// 节点共享场景／叙事与决策两区；只有事件启用原有选择确认机制。
+// o = { tone: 场景分色(sc-*), icon, title, sub, body, foot, asset: 背景图 asset-key（缺省按 tone 映射） }
+export function nodeShell(o) {
+  const bg = o.asset || NODE_BG[o.tone] || '';
+  UI.showOverlay('', eventSceneHTML({ ...o, asset: bg, region: game.layerData?.[game.layerIdx]?.name, layer: game.layerIdx }), 'page');
+  // 事件体系页（事件/入城/火堆/物资点）：左上退出键（IS7 事件整页语言，样式复用地图
+  // #topBtns 按钮族）——事件未消耗可原节点重进；入城退出保留剩余卡，领完才解锁移动。
+  // 金币/攻击由 #resHud 经 CSS 提层常驻，不经页面重画。
+  if (['event', 'entry', 'fire', 'pickup'].includes(o.tone)) {
+    const key = `${game.mapSeed}|${game.turn}|${game.layerIdx},${game.trackPos}|${o.title}|${bg}|${o.sub || ''}`;
+    if (o.tone === 'event') {
+      const root = UI.el?.ovBody?.querySelector('.event-scene');
+      if (root) wireEventChoiceSelection(root, key);
+    }
+    UI.act('eventExit', () => {
+      if (game.state !== 'modal') return;
+      const page = UI.el?.ovBody?.querySelector('.event-scene');
+      if (!page) return;
+      page._clearEventChoice?.();
+      setBagReturnHook(null);
+      UI.hideOverlay();
+      finishInstant();
+    });
+  }
+}
+// 杀戮尖塔式选项条：主标题 + 后果说明（复用事件页 .evt-opt 样式）
+export function nodeOpt(act, label, detail, tone = '', extra = '') {
+  return `<button class="evt-opt ${tone}" data-act="${act}" ${extra}><b>${label}</b>${detail ? `<span>${detail}</span>` : ''}</button>`;
+}
+
+export function consumeCell(layerIdx = game.layerIdx, trackPos = game.trackPos) {
+  game.visited = game.visited || {};
+  game.visited[`${layerIdx},${trackPos}`] = 1;
+}
+
+export function consumeCurrentCell() { consumeCell(); }
+
+// 节点短过场沿原定时与跳过生命周期；战斗入口共用通用远征画面。
+let transitionRequest = 0;
+export function showRunTransition({ tone = 'battle', asset = 'scene-battle-bg', eyebrow = 'AREA ENTERED', title, detail = '', duration = cityCutDuration, presentation = '', holdVisual = false, prepare }) {
+  // 结束时必须恢复状态：战斗/节点流程下游会自行改状态，但「继续对局」路径
+  // 过渡后无人收拾，曾导致 game.state 卡死在 modal、侧栏按钮永久禁用
+  const prevState = game.state;
+  const currentContext = captureBattleContext(game);
+  const request = ++transitionRequest;
+  let lifetime = null, cancelTransition = null;
+  const isCurrent = () => currentContext() && request === transitionRequest && (!holdVisual || !lifetime || lifetime.current());
+  const cityCut = presentation === 'city-cut' && !reduceMotion();
+  const plainCut = usePlainBattleTransition(import.meta.env.DEV, location.search, tone, presentation);
+  // Keep the original transition timer and held-release delay; only replace its visual DOM.
+  let heldSurface = null;
+  game.state = 'modal';
+  const transition = new Promise(resolve => {
+    let done = false;
+    let timer = null;
+    let surface = null;
+    cancelTransition = () => { if (done) return; done = true; clearTimeout(timer); resolve(false); };
+    const finish = () => {
+      if (done) return;
+      done = true;
+      if (timer) clearTimeout(timer);
+      if (!isCurrent()) { lifetime?.dispose(); resolve(false); return; }
+      // 过场只拥有自己挂载的画面；迟到回调不能关掉已打开的背包或新页面。
+      if (surface && (!surface.isConnected || !UI.el.ovBody.contains(surface) || (lifetime && !lifetime.current()))) { lifetime?.dispose(); resolve(false); return; }
+      if (!holdVisual) { lifetime?.dispose(); UI.hideOverlay({ immediate: tone === 'battle' }); }
+      // 战斗 modal 态（Battle.restore 置位）不得降级为 idle，否则战斗界面丢失且移动锁死
+      game.state = (prevState === 'modal' && !game.battleActive) ? 'idle' : prevState;
+      resolve(true);
+    };
+    if (cityCut && !plainCut) {
+      const battleEntry = tone === 'battle';
+      const cut = createCityCut({
+        archive: '远征档案',
+        title: battleEntry ? '旅途继续' : (title || '进入地图'),
+        subtitle: battleEntry ? 'WINTER EXPEDITION / 冬日远征' : (detail || 'EXPEDITION / 开始探索'),
+        edition: battleEntry ? 'WINTER EXPEDITION / VII' : `${eyebrow} / VII`, destination: 'EXPEDITION',
+        watermark: 'FIELD',
+        scene: battleEntry ? 'general' : 'field',
+      });
+      UI.showOverlay('', `<div class="scene flow-transition city-run-transition${holdVisual ? ' resume-hold' : ''} sc-${escAttr(tone)}"
+        data-presentation="city-cut" data-act="flowContinue" role="group"
+        aria-label="${escAttr(`${title || '进入区域'}。${detail}。点击跳过`)}"
+        style="--city-run-duration:${turboMs(duration)}ms">
+        ${cut.outerHTML}<p class="city-run-hint">点击跳过</p>
+      </div>`, 'scene');
+    } else if (presentation === 'node-cut' || plainCut) {
+      UI.showOverlay('', `<div class="scene flow-transition expedition-cut" data-act="flowContinue" role="status" aria-label="${escAttr(title || '进入节点')}"><div class="expedition-cut-rule" aria-hidden="true"></div><h2>${esc(title || '进入节点')}</h2></div>`, 'scene');
+    } else UI.showOverlay('', `
+      <div class="scene flow-transition sc-${escAttr(tone)}" data-asset-key="${escAttr(asset)}" data-presentation="${escAttr(presentation)}" data-act="flowContinue">
+        ${presentation === 'base-arrival' ? '<div class="hub-arrival-card">' : ''}
+        <div class="flow-scan" aria-hidden="true"></div>
+        <p class="flow-eyebrow">${esc(eyebrow)}</p>
+        <h2 class="flow-title">${esc(title || '未知区域')}</h2>
+        ${detail ? `<p class="flow-detail">${esc(detail)}</p>` : ''}
+        <div class="flow-line" aria-hidden="true"><i></i></div>
+        ${presentation === 'base-arrival' ? '</div>' : ''}
+        <p class="flow-hint">点击跳过</p>
+      </div>`, 'scene');
+    UI.act('flowContinue', finish);
+    surface = UI.el.ovBody?.querySelector('.flow-transition');
+    heldSurface = surface;
+    timer = setTimeout(finish, reduceMotion() ? 0 : turboMs(duration));
+    UI.refresh(game);
+  });
+  if (heldSurface && UI.el.overlay) lifetime = createPageSurfaceLifetime(heldSurface, {
+    overlay: UI.el.overlay, onInvalidate: () => cancelTransition?.(),
+  });
+  const preparation = prepareTransition(prepare, { signal: lifetime?.signal, isCurrent });
+  // resolve 与消费者的 then/await 之间仍可能启动新过场；保留该次只读核验。
+  const ownsSurface = () => request === transitionRequest && heldSurface?.isConnected
+    && UI.el.ovBody.contains(heldSurface);
+  const release = async ({ immediate = false } = {}) => {
+    if (!holdVisual || !ownsSurface()) return;
+    if (!immediate && cityCut && !reduceMotion()) {
+      heldSurface.classList.add('resume-reveal');
+      await new Promise(resolve => setTimeout(resolve, 220));
+    }
+    // 恢复战斗/奖励/选角可能已经换页，只收起本次续局自己的过场。
+    if (ownsSurface()) UI.hideOverlay({ immediate: true });
+  };
+  return Object.assign(transition, { isCurrent, release, preparation });
+}
+
+export function enterNode(kind, done) {
+  const transitions = {
+    battle: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'WINTER EXPEDITION', title: '旅途继续', detail: '冬日远征 · 旅途继续', presentation: 'city-cut' },
+    boss: { tone: 'battle', asset: 'scene-battle-bg', eyebrow: 'WINTER EXPEDITION', title: '旅途继续', detail: '冬日远征 · 旅途继续', presentation: 'city-cut' },
+    door: { tone: 'door', asset: 'scene-door-bg', eyebrow: 'GATE SIGNAL', title: '抵达大门', detail: '环层通路正在响应' },
+    altar: { tone: 'altar', asset: 'scene-altar-bg', eyebrow: 'CONTAMINATION DETECTED', title: '污染核心', detail: '高危生命信号逼近' },
+    emergencyExit: { tone: 'exit', asset: 'scene-extract-bg', eyebrow: 'EXTRACTION POINT', title: '紧急撤离点', detail: '撤离信标已经接通' },
+    shop: { tone: 'shop', asset: 'scene-shop-bg', eyebrow: 'CARAVAN SIGNAL', title: '拾荒商队', detail: '交易频道已经开放' },
+    event: { tone: 'event', asset: 'scene-event-custom-a', eyebrow: 'UNKNOWN ENCOUNTER', title: '偶遇见闻', detail: '风雪中的故事正在展开' },
+  };
+  const spec = transitions[kind] || { title: '进入节点' };
+  const combat = kind === 'battle' || kind === 'boss';
+  const transition = showRunTransition(combat
+    ? { ...spec, duration: motionTiming.sceneEnter, holdVisual: true, prepare: ensureBattleReady }
+    : { ...spec, presentation: 'node-cut', duration: motionTiming.sceneEnter });
+  return transition.then(async current => {
+    if (!current || !transition.isCurrent()) return false;
+    if (!combat) return done();
+    // Keep the mounted curtain/input state while module preparation completes.
+    game.state = 'modal';
+    const prepared = await transition.preparation;
+    if (prepared.cancelled || !transition.isCurrent()) return false;
+    // A failed speculative import is not readiness: startBattle retains its retry,
+    // diagnostic and failure state handling, all beneath this same held curtain.
+    try {
+      const result = await done();
+      if (result === false) await transition.release({ immediate: true });
+      return result;
+    } catch (error) {
+      await transition.release({ immediate: true });
+      throw error;
+    }
+  });
+}
+
+// 场景/即时效果结束后的收尾：事件连锁移动优先，否则回待机并存档
+export function finishInstant() {
+  if (game.chainMove) {
+    cancelLegacyChainMove();
+  }
+  game.state = 'idle';
+  saveGame();
+  UI.refresh(game);
+}
+
+// 拾取页：杀戮尖塔式右栏——拾获叙事 + 大字收益 + 继续按钮
+// 搜索物资（2026-09-09 老板 #3）：收获不再直接蹦出来——先演一段搜索（提灯扫过 + 进度条填充），
+// 约 0.95s 后揭晓收获大字与「继续」按钮，给拾取一个过程感
+const PICKUP_SEARCH_MS = 950;
+export function openPickupPage(kind, gain, onDone, skipSearch = false, transaction = null) {
+  const f = SCENES[kind];
+  const txn = transaction || { received:false, page:0, current:captureBattleContext(game) };
+  if (txn.received || !txn.current()) return;
+  const page = ++txn.page;
+  game.state = 'modal';
+  // 来源页恢复（迭代评审 09-20 C-P1）：背包盖开再关后重放本页——搜索动画与揭晓重来，
+  // 但 onDone 只会经 pickupGo 触发一次，奖励不再因关背包被吞（此前发奖仅 pickupGo 一个入口）
+  // 体验线切片5（2026-09-28，评估#9）：重入场景跳过搜索重放——核对背包再回来不该重等 0.95s
+  setBagReturnHook(() => openPickupPage(kind, gain, onDone, true, txn));
+  nodeShell({ tone: 'pickup', asset: PICKUP_BG[kind], icon: f.icon, title: f.title,
+    sub: pick(f.lines),
+    body: `<div class="pick-search">
+        <span class="ps-lantern">[[icon:lantern]]</span>
+        <span class="ps-ground"><i></i></span>
+        <p class="ps-tip">正在搜索物资…</p>
+      </div>` });
+  if (!skipSearch) SDT.Sound.sfx('searchStart');
+  const main = UI.el.ovBody.querySelector('.node-main');
+  const reveal = () => {
+    if (!main || !main.isConnected) return;   // 页面已被换掉/关掉就不再揭晓
+    main.innerHTML = `<div class="node-summary pickup-result"><p class="gain-big">${gain}</p>
+      <button class="evt-opt ok" data-act="pickupGo"><b>获取并离开</b></button></div>`;
+    if (!skipSearch) SDT.Sound.sfx('searchReveal');
+    const go = main.querySelector('[data-act="pickupGo"]');
+    if (go) go.focus({ preventScroll: true });
+    // 注册随揭晓走：closeBackpack 会清空动作表，背包返回的重入路径（skipSearch）此前
+    // 提前 return 不注册，恢复页有按钮无处理器、奖励永远领不出（09-30 深审 WORLD-001）
+    UI.act('pickupGo', () => {
+      if (txn.received || txn.page !== page || !txn.current() || game.state !== 'modal' ||
+          !main.isConnected || UI.el.ovBody.querySelector('.node-main') !== main) return;
+      txn.received = true;
+      setBagReturnHook(null);
+      onDone();
+      if (main.isConnected && UI.el.ovBody.querySelector('.node-main') === main) UI.hideOverlay();
+    });
+  };
+  if (skipSearch) { reveal(); return; }
+  setTimeout(reveal, turboMs(PICKUP_SEARCH_MS));
+}
+
+// ---------- 遭遇组建（设计者 2026-09-02 定版：按环层抽怪，1-3 只，越内层越强） ----------
+export function buildEncounter(layerIdx) {
+  const enc = MAP.encounters[layerIdx] || MAP.encounters[0];
+  let pool, size;
+  const selected=selectEncounterSpec(enc,MAP.monsters,()=>Random.random('enemy'));
+  if(!selected.ok) throw new Error(`遭遇配置无效：${selected.code}`);
+  const spec=selected.value;
+  let strategy=spec.strategy, risk=spec.risk;
+  // 2026-09-10 玩法定版：每层每种敌人有固定数量区间（一律落在 1~3 只，如 2-3 只），
+  // 区间内每个数量等概率生成（MAP.rollCount）；巨兽「荒渊」按层概率刷出（第 3 层 3%、第 4 层 10%），固定单体。
+  pool=spec.enemyIds; size=spec.size;
+  const n=spec.kind==='group'?2:(MAP.rollCount ? MAP.rollCount(size, () => Random.random('enemy')) : size[0] + Math.floor(Random.random('enemy') * (size[1] - size[0] + 1)));
+  const list = [];
+  // 只对新局第三层普通遭遇轮换；独立种子盐不推进地图、掉落或遭遇随机流。
+  // 人数沿原掷数；替代只取该层人数区间允许的普通敌人，精英与旧档完全沿原路径。
+  const cells = game.layerData?.[layerIdx]?.logical || [];
+  const ordinal = cells.map((cell, index) => ({ cell, index })).filter(item => item.cell.def?.type === 'battle')
+    .findIndex(item => item.index === game.trackPos);
+  const alternatives = game.encounterRotationVersion === 1 && layerIdx === 2 && spec.kind === 'entry' && ordinal >= 0
+    ? (enc.entries || []).filter(entry => entry.size?.[0] <= n && entry.size?.[1] >= n &&
+      MAP.monsters[entry.id] && !MAP.monsters[entry.id].elite) : [];
+  const rotation = alternatives.length > 1 ? hashSeed(`${game.mapSeed ?? game.seed}:third-layer-encounters:v1`) + ordinal : null;
+  for (let i = 0; i < n; i++) {
+    const originalId=spec.kind==='group'?pool[i]:pool[Math.floor(Random.random('enemy') * pool.length)];
+    const id=rotation === null ? originalId : alternatives[(rotation + i) % alternatives.length].id;
+    const tpl = MAP.monsters[id];
+    list.push(scaledEnemy({ ...tpl }));
+  }
+  // 元数据不参与战斗结算，仅用于战前预告和战斗内提示；旧敌人对象仍保持原字段。
+  list.risk = risk;
+  list.strategy = strategy;
+  list.encounterId=rotation === null ? spec.encounterId : `rotation:${list.map(enemy => enemy.id).join('+')}`;
+  list.encounterKind=spec.kind; list.rewardKind=spec.rewardKind; list.fallbackReason=spec.fallbackReason;
+  return list;
+}
+
+
+export function openBlankSafePage() {
+  game.state = 'modal';
+  nodeShell({
+    tone: 'safe', icon: '[[icon:check]]', title: '安全地带',
+    sub: '风雪暂歇，前方仍有路可走。',
+    body: `<div class="blank-safe-gain">
+      <p class="gain-big">无事发生</p>
+      <p class="ov-note">没有埋伏或拾获，可整理背包后继续前行。</p>
+    </div>`,
+    foot: `<button class="ov-btn ok fire-done-btn" data-act="blankSafeDone"><svg class="svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>`,
+  });
+  UI.act('blankSafeDone', () => { UI.hideOverlay(); finishInstant(); });
+}
+
+// 战斗格 → 遭遇战（encounter 已在场景前组建好传入，保证场景与战斗一致）
+export function openBattleCell(def, encounter) {
+  game.state = 'modal';
+  const list = encounter || buildEncounter(game.layerIdx);
+  return startBattle(game, list, { isBoss: false, layer: game.layerIdx, name: list[0].name,
+    risk: list.risk, strategy: list.strategy, encounterId:list.encounterId, encounterKind:list.encounterKind,
+    rewardKind:list.rewardKind, fallbackReason:list.fallbackReason });
+}
+
+// 宝箱格 / 事件卡开真宝箱：开完回待机并存档（场景演出后由本函数自行收尾）
+export function openChestsOnCell(chests, text, opts) {
+  UI.log(`[[icon:archive]] ${text || '回收了' + SDT.Chests.dropText(chests)}`, 'loot');
+  SDT.Chests.open(game, chests, () => {
+    game.state = 'idle';
+    UI.refresh(game);
+  }, { ...opts, onCell:true, beforeComplete:() => { if (opts?.consumeNode) consumeCurrentCell(); } });
+}
+
+export function resumeChestsOnCell(saved) {
+  return SDT.Chests.restore(game, saved, () => {
+    game.state = 'idle'; UI.refresh(game);
+  }, { beforeComplete:() => { if (saved.context.consumeNode) consumeCurrentCell(); } });
+}
+
+// 固定奖励复用宝箱的逐张领取与存档恢复，不重新掷卡，也不因容量不足丢失。
+export function openFixedRewardsOnCell(cards, source, { consumeNode = false } = {}) {
+  const saved = { version:1, seed:game.seed, layerIdx:game.layerIdx, trackPos:game.trackPos,
+    queue:[{ kind:'small' }], index:1, context:{ onCell:true, consumeNode },
+    current:{ kind:'small', cards:cards.filter(Boolean), coins:0, coinsReceived:false,
+      taken:[], lost:[], source, title:'领取奖励' } };
+  setBagReturnHook(null);
+  const opened = resumeChestsOnCell(saved);
+  if (opened && typeof game.persistSave !== 'function') saveRunCheckpoint(saveGame);
+  return opened;
+}
+
+// 即时效果（经场景演出后结算）；after = 效果完成后的续流回调
+// 拾取类在场景里用大字标明结算（v0.22：明确告诉玩家发生了什么）
+// opts.silent：跳过获得演出（宝箱/基地等调用方自带卡牌展示界面，2026-09-13）
+export function grantEventCard(tpl, opts = {}) {
+  if (!tpl) return false;
+  const canReceive = game.canReceiveCard
+    ? game.canReceiveCard(tpl)
+    : (game.ownedCards.some(o => o.card.name === tpl.name) || game.canAcceptCard(tpl));
+  if (!canReceive) {
+    // 2026-09-09 老板 #12：收不下要当场给提示（音效+日志，口径同 addItem），不能只默默掉在原地
+    SDT.Sound.sfx('deny');
+    UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}${tpl.type !== '资源' ? '；新普通牌需通用空格，同名未满仍可叠放' : ''}），【${esc(tpl.name)}】未领取，请整理背包后重试`, 'warn');
+    return false;
+  }
+  game.ownedCards.push({ uid: newUid(), card: { ...tpl } });
+  UI.log(`[[icon:archive]] 获得卡牌【<b>${esc(tpl.name)}</b>】`, 'loot');
+  // 2026-09-13 老板：发卡要有奖励动画，不能静默进背包——统一走获得演出
+  //（传说卡保留金色光柱 + legend 音效，普通卡中性演出；多张连发自动排队逐张播）
+  // opts.reason：获得原因文字（2026-09-20 老板：火堆等发牌点要说明"为什么给这张牌"），可省略
+  if (!opts.silent) UI.showCardReward(tpl, opts.reason);
+  // 阿猫的礼物（2026-09-12 实装）：「发现或随机获取该牌时，回复1点能量并获取另1张随机卡牌」
+  // 地图侧没有能量概念，只结算附赠卡；战斗内触发走 battle.core fireCatGift（含能量）
+  if (tpl.id === 'tt2-apollo') {
+    const pool = SDT.Cards.all().filter(c => SDT.Cards.isRandomObtainable(c) && c.id !== 'tt2-apollo');
+    if (pool.length) {
+      const got = pool[Math.floor(Random.random('loot') * pool.length)];
+      UI.log('[[icon:bolt]] <b>阿猫的礼物</b>：随机获取触发，附赠另 1 张随机卡牌', 'loot');
+      // 宝箱可把已掷定附赠保留为独立待领卡；本体与附赠各自记领取状态。
+      if (typeof opts.deferAcquiredCard === 'function') opts.deferAcquiredCard(got);
+      else grantEventCard(got);   // 旧非宝箱入口保留原行为；池内排除自身，无递归风险
+    }
+  }
+  return true;
+}
+// ESM：循环导入下本模块体先于 game.session 执行，顶层读 game 会 TDZ，延迟到 boot 统一绑定
+export const FIRE_RESTORABLE = (card) => card.type !== '道具' && card.type !== '装备';
+// opts = { title, icon, tone, sub }：2026-09-19 留言 #21——复原页不再一律伪装成
+// 「营火休整」（修鞋铺等事件里复原时跳成火堆页观感）；不传 opts 保持火堆口径
+export function openPocketRestore(picks, done, opts = {}, transaction = null) {
+  const record = opts.restoreRecord;
+  if (record && nodeRestoreAt(game) !== record) return false;
+  const txn = transaction || { left: record?.left ?? picks, finished: false, current: captureBattleContext(game) };
+  if (txn.finished || !txn.current()) return;
+  game.state = 'modal';
+  // 背包返回恢复本页并保留剩余复原次数（09-30 深审 WORLD-002）：关闭背包不再兜底回
+  // idle 导致节点未消耗、火堆奖励可被反复重领
+  setBagReturnHook(() => openPocketRestore(picks, done, opts, txn));
+  const restorable = () => game.usedPocket.filter(p => FIRE_RESTORABLE(p.card));
+  let surface;
+  const render = () => {
+    if (txn.finished || !txn.current()) return;
+    const oldButtons = [...(surface?.querySelectorAll('button[data-act="restoreOne"]') || [])];
+    const focused = surface?.contains(document.activeElement) ? document.activeElement : null;
+    const focusedName = focused?.dataset.name;
+    const focusedIndex = oldButtons.indexOf(focused);
+    const scrollTop = surface?.querySelector('.pocket-restore-content')?.scrollTop ?? 0;
+    const left = record?.left ?? txn.left;
+    const list = restorable();
+    const blockedN = game.usedPocket.filter(p => !FIRE_RESTORABLE(p.card)).reduce((sum, p) => sum + p.count, 0);
+    const title = opts.title || '营火休整';
+    const icon = opts.icon || '[[icon:fire]]';
+    const cardsHTML = list.length
+      ? list.map(p => `
+          <button type="button" class="bt-card fire-restore-card${left <= 0 ? ' off' : ''}" data-act="restoreOne" data-cancel="false" data-name="${escAttr(p.card.name)}" ${left <= 0 ? 'disabled' : ''}
+            aria-label="${escAttr(`${p.card.name}，消耗区剩余 ${p.count} 张，复原 1 张回背包`)}" aria-description="${escAttr(p.card.desc || '')}"
+            title="${escAttr(p.card.desc || p.card.name)}">
+            <span class="pocket-restore-art" aria-hidden="true">${SDT.Cards.cardHTML(p.card, 'sm')}</span>
+            <span class="pocket-restore-caption"><b>${esc(p.card.name)}</b><span>复原 1 张 · 剩余 ${p.count} 张</span></span>
+          </button>`).join('')
+      : `<p class="ov-empty">（消耗区里没有可复原的卡牌${blockedN ? `——另有 ${blockedN} 张道具/装备不可在此复原` : ''}）</p>`;
+    UI.showOverlay('', `<section class="battle-decision pocket-restore" data-decision-kind="pocket-restore">
+      <header class="battle-decision-head"><h3>${icon} ${title}</h3><span>消耗区 · ${list.length} 种可复原卡牌</span></header>
+      <div class="battle-decision-summary">
+        <p class="ov-note" role="status" aria-live="polite" aria-atomic="true">还可复原 <b>${left}</b> 张（最多 ${picks} 张）</p>
+        <p class="ov-note">${opts.sub != null ? opts.sub : '<span class="eps-fate">复原=撤离全额带回，否则每张仅 1/3 幸存</span>'}${blockedN ? ` · 道具/装备共 ${blockedN} 张不可复原` : ''}</p>
+      </div>
+      <div class="battle-decision-content pocket-restore-content"><div class="bt-hand fire-restore-hand">${cardsHTML}</div></div>
+      <footer class="battle-decision-actions"><div class="ov-btns">${record ? `<button type="button" class="ov-btn ok" data-act="restoreReturn">返回地图 · 保留 ${left} 次复原</button><button type="button" class="ov-btn" data-act="restoreBag">整理背包</button><button type="button" class="ov-btn fire-done-btn" data-act="fireDone">结束复原${left ? ' · 放弃剩余次数' : ''}</button>` : '<button type="button" class="ov-btn ok fire-done-btn" data-act="fireDone" aria-label="继续旅程，结束复原并返回地图"><svg class="ic svg-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 5.5 18.5 12 12 18.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 继续旅程</button>'}</div></footer>
+      </section>`, 'discover');
+    surface = UI.el?.ovBody?.firstElementChild;
+    surface?.querySelectorAll('.pocket-restore-art [tabindex]').forEach(el => el.removeAttribute('tabindex'));
+    const content = surface?.querySelector('.pocket-restore-content');
+    if (content) content.scrollTop = scrollTop;
+    if (focused) {
+      const buttons = [...surface.querySelectorAll('button[data-act="restoreOne"]')];
+      (buttons.find(button => button.dataset.name === focusedName)
+        || buttons[Math.min(focusedIndex, buttons.length - 1)] || surface.querySelector('[data-act="fireDone"]'))?.focus({ preventScroll:true });
+    }
+    const active = nodeActionBinding(game, UI, 'fireDone');
+    const renderedSurface = surface;
+    const live = () => active() && txn.current() && !txn.finished &&
+      (!record || game.nodeRewards?.[`${game.layerIdx},${game.trackPos}`] === record) &&
+      (!renderedSurface || UI.el?.ovBody?.firstElementChild === renderedSurface);
+    const finish = () => {
+      if (!live()) return;
+      if (record && !finishNodeRestore(game, record)) return;
+      txn.finished = true;
+      setBagReturnHook(null);
+      UI.hideOverlay();
+      if (done) done();
+    };
+    UI.act('restoreOne', (d) => {
+      if (!live()) return;
+      const p = game.usedPocket.find(x => x.card.name === d.name && FIRE_RESTORABLE(x.card));
+      if (!p || (record?.left ?? txn.left) <= 0) return;
+      // 2026-09-06 #18：背包满时不能复原
+      const card = p.card;
+      if (!game.canReceiveCard(card)) { UI.log(`[[icon:bag]] 背包放不下（${game.bagCapacityText?.() || `${usedSlots()}/${bagCap()} 格`}），无法复原`, 'warn'); SDT.Sound.sfx('deny'); return; }
+      if (record) {
+        if (!claimNodeRestore(game, record, { name:d.name, isRestorable:FIRE_RESTORABLE,
+          canReceive:c => game.canReceiveCard(c), newUid })) return;
+        saveGame();
+      } else {
+        p.count--;
+        if (p.count <= 0) game.usedPocket.splice(game.usedPocket.indexOf(p), 1);
+        game.ownedCards.push({ uid: newUid(), card: { ...card } });
+        txn.left--;
+      }
+      SDT.Sound.sfx('cardRestore');
+      UI.log(`[[icon:sparkles]] 【<b>${esc(card.name)}</b>】已复原，回到背包`, 'ok');
+      if ((record?.left ?? txn.left) <= 0) finish(); else render();
+    });
+    UI.act('fireDone', finish);
+    if (record) {
+      UI.act('restoreReturn', () => {
+        if (!live()) return;
+        txn.finished = true;
+        setBagReturnHook(null);
+        UI.hideOverlay();
+        finishInstant();
+      });
+      UI.act('restoreBag', () => { if (live()) bagSlots.showBackpack(); });
+    }
+  };
+  render();
+  return true;
+}
+
+// ---------- 角色选择（开局从全部角色中自由选 1，与 5 张初始攻击一起获得 1 张该角色随机卡） ----------
+// 各角色的背景故事与出发任务（角色选择页展示）

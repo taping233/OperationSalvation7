@@ -191,7 +191,7 @@ describe('shared infusion action bar', () => {
     expect(bar().querySelector('[data-infusion-workspace]')).not.toBeNull();
     expect(bar().textContent).toContain('选择 2 张材料');
     expect(bar().textContent).toContain('已选 0/2');
-    expect(bar().textContent).toContain('材料进入本场消耗牌堆，不再抽回');
+    expect(bar().textContent).toContain('材料进入消耗牌堆，不自动洗回，仅由卡牌效果取回');
     expect(bar().textContent).toContain('道具、装备不可在火堆复原');
     expect(bar().querySelector('.infusion-rules').textContent).toContain('触发 2 次');
     expect([...bar().querySelectorAll('.infusion-footer button')].map(button => button.dataset.act)).toEqual(['btInfuseCancel', 'btInfuseDirect', 'btInfuseGo']);
@@ -226,7 +226,7 @@ describe('shared infusion action bar', () => {
     expect(bar().querySelector('.infusion-progress').textContent).toBe('已选 0/2');
     expect(bar().querySelector('.infusion-progress small')).toBeNull();
     expect(bar().querySelector('[data-act="btInfuseGo"]').textContent).toBe('还需 2 张材料');
-    expect(bar().querySelector('.infusion-destination').textContent).toContain('不再抽回；战后进入消耗区');
+    expect(bar().querySelector('.infusion-destination').textContent).toContain('仅由卡牌效果取回；战后进入消耗区');
     expect(bar().querySelector('.infusion-destination').textContent).toContain('道具、装备不可在火堆复原');
     expect(bar().querySelector('.infusion-footer p').textContent).toBe('下一步选目标，有效打出后才消耗');
     expect(bar().querySelector('[data-act="btInfuseGo"]').disabled).toBe(true);
@@ -370,7 +370,7 @@ describe('shared infusion action bar', () => {
 });
 
 describe('visible forecast uncertainty', () => {
-  it('labels the unchanged damage as an estimate and always shows the excluded actions', () => {
+  it('keeps the damage estimate visible and exposes excluded actions through focused details', () => {
     start();
     const before = snapshot(), expected = forecastEnemyTurn(before);
     expect(before.allies).toHaveLength(0);
@@ -378,9 +378,9 @@ describe('visible forecast uncertainty', () => {
     const forecast = stage().querySelector('.bt-turn-forecast');
     expect(forecast.querySelector('.bt-forecast-damage').textContent).toBe(`估算承伤 ${expected.damage}`);
     expect(forecast.querySelector('.bt-forecast-hp>b').textContent).toBe(String(expected.hpAfter));
-    expect(forecast.querySelector('.bt-forecast-note').textContent).toBe('未计随从攻击与回合末触发');
-    expect(forecast.querySelector('.bt-forecast-note').hidden).toBe(false);
-    expect(forecast.title).toBe(expected.note); expect(forecast.classList.contains('lethal')).toBe(expected.lethal);
+    expect(forecast.querySelector('.bt-forecast-note')).toBeNull();
+    expect(forecast.tabIndex).toBe(0);
+    expect(forecast.dataset.uiTipText).toBe(expected.note); expect(forecast.classList.contains('lethal')).toBe(expected.lethal);
     expect(snapshot()).toEqual(before);
   });
 
@@ -467,7 +467,7 @@ describe('discovery source presentation and restoration copy', () => {
     }
     expect(candidates[0].getAttribute('aria-label')).toContain('随身牌来源');
     expect(candidates[1].getAttribute('aria-label')).toContain('本场临时牌来源');
-    expect(UI.el.ovBody.textContent).toContain('来自当前牌库底 · 选中牌以本场副本入手；使用或消耗后进入消耗区，未用则战后消散');
+    expect(UI.el.ovBody.textContent).toContain('来自当前牌库底 · 选中牌以本场副本入手。使用或消耗后进入消耗牌堆');
     expect(JSON.stringify(options)).toBe(beforeOptions);
     expect(JSON.stringify(game.ownedCards)).toBe(beforeOwned);
     expect(snapshot()).toEqual(before);
@@ -486,7 +486,7 @@ describe('discovery source presentation and restoration copy', () => {
     start();
     render({ ...snapshot(), discovering: { options:[{ ...Cards.SHA }], n:1, act } });
     expect(UI.el.ovBody.textContent).toContain('选择 1 张免费施放');
-    expect(UI.el.ovBody.textContent).toContain('本场生成：使用或消耗后进入消耗区，未用则战后消散');
+    expect(UI.el.ovBody.textContent).toContain('本场生成。使用或消耗后进入消耗牌堆，不自动洗回，仅由卡牌效果取回');
     expect(UI.el.ovBody.textContent).not.toContain('背包原牌随之消耗');
   });
   it('keeps the random-discovery temporary-card copy and supplied faces unchanged', () => {
@@ -495,7 +495,7 @@ describe('discovery source presentation and restoration copy', () => {
     const candidate = UI.el.ovBody.querySelector('[data-act="btDiscover"]');
     expect(candidate.getAttribute('aria-label')).toContain('初始攻击');
     expect(candidate.title).not.toContain('来源');
-    expect(UI.el.ovBody.textContent).toContain('本场生成：使用或消耗后进入消耗区，未用则战后消散');
+    expect(UI.el.ovBody.textContent).toContain('本场生成。使用或消耗后进入消耗牌堆，不自动洗回，仅由卡牌效果取回');
     expect(UI.el.ovBody.textContent).not.toContain('来自当前牌库底');
   });
   it('falls back to the supplied face without inventing ownership for an unresolved source UID', () => {
@@ -509,7 +509,7 @@ describe('discovery source presentation and restoration copy', () => {
     const piles = renderCombatPiles({ mode: 'normal', drawCount: [], discardCount: [], graveCount: ['spent'],
       pileTip: () => '', cardBackHTML: '', escAttr: value => value });
     const host = document.createElement('div'); host.innerHTML = piles.rest;
-    expect(host.querySelector('.bt-pile:last-child').title).toBe('本场消耗牌堆：（点击查看；战后进入消耗区，道具、装备不可在火堆复原）');
+    expect(host.querySelector('.bt-pile:last-child').title).toBe('消耗牌堆：（不自动洗回，仅由卡牌效果取回；点击查看）');
   });
 });
 

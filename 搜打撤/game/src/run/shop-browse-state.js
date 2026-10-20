@@ -49,7 +49,7 @@ export function restoreShopBrowseState(root, host, snapshot) {
     !!element.closest('.shop-detail') === focus.detail
     && Object.entries(focus.keys).every(([key, value]) => element.getAttribute(`data-${key}`) === value)
     && canFocus(element));
-  if (!target && focus?.detail) {
+  if (!target) {
     const detail = root.querySelector('.shop-detail:not([hidden]):not([inert])');
     target = detail && [...detail.querySelectorAll('.shop-detail-buy, .shop-detail-bag, .shop-detail-done, .shop-detail-close')].find(canFocus);
   }

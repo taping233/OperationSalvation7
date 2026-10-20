@@ -1,0 +1,189 @@
+{
+  "status": "preview-only-no-runtime-replacement",
+  "items": [
+    {
+      "card_id": "tt13-soul-contract",
+      "name": "灵魂契约",
+      "status": "generated",
+      "recipe_version": "3.4",
+      "authority": "docs/character-bible/changwuyu.md",
+      "identity_reference": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\changwuyu.webp",
+      "reference_usage": "Identity inspected locally; no image or vibe uploaded to NAI.",
+      "payload": {
+        "input": "1man, upper body, three-quarter view. A calm male occultist occupies the left half, looking toward a floating crimson contract seal held above his open right gloved palm at center. Two dark faceless pawn-shaped soul tokens float at different depths on the right. A taut red thread connects the central seal to both tokens; one bright pulse travels along the thread. The seal and connecting thread are the event center. Keep the face and glasses clearly visible, no objects covering the eyes.\n\nCollectible game card illustration, Japanese anime, clear visual storytelling.\n\nHorizontal card art. The magician is large in the left foreground, tokens smaller in the right background, clear separation between hand, seal and face. Quiet midnight-blue backdrop with no scenery, purple accents and a single focused crimson light. Simplified anime color planes, few coherent shadows, restrained highlights, no ornamental clutter.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1344,
+          "height": 768,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": true,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 474858969,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, staff, short hair, blue eyes, female protagonist, filigree, intricate engraving",
+          "characterPrompts": [
+            {
+              "prompt": "adult man, silver-gray long hair tied into a low bun behind the head, two long sidelocks, yellow eyes, pointed ears, thin round eyeglasses, black wide-brimmed witch hat with a bent pointed crown and purple underside, black high-collar robe with purple lining and simple gold trim, black gloves, white feather and blue sapphire brooch on his left chest, composed faint smile",
+              "uc": "",
+              "center": {
+                "x": 0.3,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1man, upper body, three-quarter view. A calm male occultist occupies the left half, looking toward a floating crimson contract seal held above his open right gloved palm at center. Two dark faceless pawn-shaped soul tokens float at different depths on the right. A taut red thread connects the central seal to both tokens; one bright pulse travels along the thread. The seal and connecting thread are the event center. Keep the face and glasses clearly visible, no objects covering the eyes.\n\nCollectible game card illustration, Japanese anime, clear visual storytelling.\n\nHorizontal card art. The magician is large in the left foreground, tokens smaller in the right background, clear separation between hand, seal and face. Quiet midnight-blue backdrop with no scenery, purple accents and a single focused crimson light. Simplified anime color planes, few coherent shadows, restrained highlights, no ornamental clutter.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "adult man, silver-gray long hair tied into a low bun behind the head, two long sidelocks, yellow eyes, pointed ears, thin round eyeglasses, black wide-brimmed witch hat with a bent pointed crown and purple underside, black high-collar robe with purple lining and simple gold trim, black gloves, white feather and blue sapphire brooch on his left chest, composed faint smile",
+                  "centers": [
+                    {
+                      "x": 0.3,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": true,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, staff, short hair, blue eyes, female protagonist, filigree, intricate engraving",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.3,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": true,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-career-redraw-20261020\\tt13-soul-contract.png",
+      "sha256": "8da86e8bea4ce353bf4d545698553ff8a9a049865b2c7d846544fef3e82214f9"
+    },
+    {
+      "card_id": "tt13-stellar-divination",
+      "name": "星辰占卜",
+      "status": "generated",
+      "recipe_version": "3.4",
+      "authority": "docs/character-bible/xingyue.md",
+      "identity_reference": "D:\\素材\\代号柒\\搜打撤\\game\\assets\\portraits\\full\\xingyue.webp",
+      "reference_usage": "Identity inspected locally; no image or vibe uploaded to NAI.",
+      "payload": {
+        "input": "1woman, upper body, three-quarter view. A serene priestess occupies the left half, looking down at three dark-blue fortune cards floating in a loose fan beside her raised right fingertips at center-right. The nearest card contains one bright white-cyan star, the two rear cards catch two fainter identical star reflections. Her raised hand connects naturally to her sleeve and body. Only the priestess and her own visible hand appear, no arm entering from the opposite edge.\n\nCollectible game card illustration, Japanese anime, clear visual storytelling.\n\nHorizontal card illustration. Face at upper left, fingertips at center, card fan at center-right; clear spaces between face, fingers and cards. Quiet deep-indigo background, soft cool starlight and muted warm skin. Simplified Japanese anime color planes, broad coherent hair locks and principal cloth folds, economical highlights, no detailed environment or dense tiny ornaments.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+        "model": "nai-diffusion-4-5-full",
+        "action": "generate",
+        "parameters": {
+          "params_version": 3,
+          "width": 1344,
+          "height": 768,
+          "scale": 5.5,
+          "sampler": "k_euler_ancestral",
+          "steps": 28,
+          "variety_plus": false,
+          "n_samples": 1,
+          "ucPresetId": "none",
+          "qualityPresetId": "none",
+          "autoSmea": false,
+          "straight_alpha": false,
+          "dynamic_thresholding": false,
+          "controlnet_strength": 1,
+          "legacy": false,
+          "legacy_v3_extend": false,
+          "legacy_uc": false,
+          "add_original_image": true,
+          "cfg_rescale": 0.0,
+          "noise_schedule": "karras",
+          "use_coords": true,
+          "normalize_reference_strength_multiple": true,
+          "inpaintImg2ImgStrength": 1.0,
+          "seed": 1407052527,
+          "negative_prompt": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, lantern, extra people, floating hands, detached arm, silver hair, blue eyes, ornate filigree",
+          "characterPrompts": [
+            {
+              "prompt": "adult woman, pale blonde long hair, straight bangs, a long thick braid descending beside her shoulder, golden eyes, calm restrained expression, white crescent moon hairpin clipped flat into her hair just above the bangs on the viewer-right side, white priestess dress with simple gold edging, deep teal short cape, black wrist cuffs",
+              "uc": "",
+              "center": {
+                "x": 0.3,
+                "y": 0.5
+              },
+              "enabled": true
+            }
+          ],
+          "v4_prompt": {
+            "caption": {
+              "base_caption": "1woman, upper body, three-quarter view. A serene priestess occupies the left half, looking down at three dark-blue fortune cards floating in a loose fan beside her raised right fingertips at center-right. The nearest card contains one bright white-cyan star, the two rear cards catch two fainter identical star reflections. Her raised hand connects naturally to her sleeve and body. Only the priestess and her own visible hand appear, no arm entering from the opposite edge.\n\nCollectible game card illustration, Japanese anime, clear visual storytelling.\n\nHorizontal card illustration. Face at upper left, fingertips at center, card fan at center-right; clear spaces between face, fingers and cards. Quiet deep-indigo background, soft cool starlight and muted warm skin. Simplified Japanese anime color planes, broad coherent hair locks and principal cloth folds, economical highlights, no detailed environment or dense tiny ornaments.\n\n0.9::quasarcake::, 0.5::rella::, 0.4::gomzi::, 0.3::piromizu::\n\narknights, game promotional illustration, painterly anime illustration. Complete, clean silhouettes and carefully resolved facial features and hands. Use clear grouped shadows and angular cloth folds. Keep fine linework selective around the eyes, fingers and accessories. Skin has delicate restrained transitions. Alternate crisp focal edges with softer background edges while keeping contours complete. Rich but controlled color, precise focal detail, quieter background detail.\n\nmasterpiece, best quality, very aesthetic, masterpiece, no text, rating:general",
+              "char_captions": [
+                {
+                  "char_caption": "adult woman, pale blonde long hair, straight bangs, a long thick braid descending beside her shoulder, golden eyes, calm restrained expression, white crescent moon hairpin clipped flat into her hair just above the bangs on the viewer-right side, white priestess dress with simple gold edging, deep teal short cape, black wrist cuffs",
+                  "centers": [
+                    {
+                      "x": 0.3,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": true,
+            "use_order": true
+          },
+          "v4_negative_prompt": {
+            "caption": {
+              "base_caption": "lowres, upscaled, artistic error, film grain, scan artifacts, worst quality, bad quality, jpeg artifacts, very displeasing, chromatic aberration, dithering, halftone, screentone, multiple views, logo, too many watermarks, negative space, blank page, unfinished sketch, fragmented silhouette, bad hands, bad anatomy, extra fingers, missing fingers, fused fingers, extra arms, extra hands, plastic skin, waxy skin, glossy fabric, text, watermark, signature, frame, collage, unfinished, sketch, rough sketch, broken contours, plastic rendering, text logo, lantern, extra people, floating hands, detached arm, silver hair, blue eyes, ornate filigree",
+              "char_captions": [
+                {
+                  "char_caption": "",
+                  "centers": [
+                    {
+                      "x": 0.3,
+                      "y": 0.5
+                    }
+                  ]
+                }
+              ]
+            },
+            "use_coords": true,
+            "use_order": true
+          },
+          "deliberate_euler_ancestral_bug": false,
+          "prefer_brownian": true
+        }
+      },
+      "output": "D:\\素材\\代号柒\\.tmp\\nai\\tt13-career-redraw-20261020\\tt13-stellar-divination.png",
+      "sha256": "cd92342a974854c0469fe918662e20e41c1aa56f7fd60d5d7ce2da226fa97c1a"
+    }
+  ]
+}

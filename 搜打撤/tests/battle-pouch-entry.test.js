@@ -35,7 +35,8 @@ it('存囊法术不进入普通初手，不能绕过锦囊直接释放，锦囊�
   BattleSession.commands.playCard('runtime-0','any'); await settle();
   expect(R.discovering.options.map(c=>c.pouchUid)).toEqual(['runtime-1']);
   BattleSession.commands.pickDiscover(0); await settle();
-  expect(R.foes[0].hp).toBe(993);
+  // 已打出的法师锦囊也是消耗牌堆内法术，雷殛按同一牌堆额外 +1。
+  expect(R.foes[0].hp).toBe(992);
   const stage = document.createElement('div');
   const overlay = document.createElement('div'); overlay.id = 'overlay'; overlay.append(stage);
   showBattleCardResults(stage, R.cardAnims);
@@ -43,7 +44,7 @@ it('存囊法术不进入普通初手，不能绕过锦囊直接释放，锦囊�
   expect(stage.textContent).not.toContain('获得卡牌 · 置入手牌');
   expect(game.ownedCards.some(o=>o.uid==='runtime-1')).toBe(false);
   BattleSession.commands.pickDiscover(0); await settle();
-  expect(R.foes[0].hp).toBe(993);
+  expect(R.foes[0].hp).toBe(992);
 });
 it.each([{stored:1},{pouchOf:'tt7-stratagem'},{stored:1,pouchOf:'tt7-stratagem'}])('容器位置标记%j独立阻止初手；随身同名牌保留', flags => {
   const game=makeGame([canonical('tt7-stratagem'),canonical('tt3-thunderblast'),canonical('tt3-thunderblast')]);

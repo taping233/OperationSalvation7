@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 window.SDT = {
@@ -20,7 +22,7 @@ async function harness(slotId, failAt = null) {
   localStorage.clear();
   RunStorage.remove(slotId);
   Base.use(slotId);
-  Base.reset(slotId);
+  (await Base.reset(slotId));
   RunStorage.write(slotId, { seed: 'terminal-test', hp: 0, maxHp: 30, inventory: [], ownedCards: [], myClass: '侠客' });
   let activeSlot = slotId;
   let shouldFail = !!failAt;
@@ -97,7 +99,7 @@ describe('死亡/放弃两键终局事务', () => {
   it.each(['run.death', 'run.abandon'])('%s 抢运实际入库推进累计20张成就，过滤初攻且重放不重复计数', async command => {
     const h = await harness(5);
     Base.data.stats.stashTotal = 19;
-    expect(Base.save()).toBe(true);
+    expect((await Base.save())).toBe(true);
     const achievement = window.SDT.Meta.achById('stash20');
     expect(window.SDT.Meta.isUnlocked(achievement)).toBe(false);
 
@@ -119,7 +121,7 @@ describe('死亡/放弃两键终局事务', () => {
   it('没有实际抢运入库时不推进累计入库进度', async () => {
     const h = await harness(5);
     Base.data.stats.stashTotal = 19;
-    expect(Base.save()).toBe(true);
+    expect((await Base.save())).toBe(true);
     const created = await h.commands.createAttempt({ slotId: h.slotId, command: 'run.abandon',
       cards: [{ card: window.SDT.Cards.SHA, count: 5 }] });
     expect(created.ok).toBe(true);

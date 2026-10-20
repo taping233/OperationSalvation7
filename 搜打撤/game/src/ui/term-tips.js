@@ -5,7 +5,7 @@
  * 桌面悬停或键盘聚焦显示；触屏按下显示、松手收起。data-ui-tip 提供动态动作说明。
  * 只有 data-term 的 click 被拦截；动态动作说明保留按钮的原始点击与拖动。
  * 讲解文案以机制代码为底稿：诅咒/祝福 = combat.js CURSE_META/BUFF_META；注能 = 出牌结算 fuel 链；
- * 发现 = 三选一置入手牌；消耗 = 墓地不洗回；主动技能 = 装备穿戴后角色信息区按钮发动（每场一次）；
+ * 发现 = 三选一置入手牌；消耗 = 进入消耗牌堆，只能由卡牌效果取回；主动技能 = 装备穿戴后角色信息区按钮发动（每场一次）；
  * 狂乱 = battle.core AFFIX 表。 */
 import SDT from '../core/sdt-facade.js';
 import { BASE_W, BASE_H, scale } from './ui-scale.js';
@@ -36,7 +36,7 @@ const TERM_TIPS = {
   stealth:    { name: '潜行',     icon: 'runner',   text: '无法成为被攻击对象；造成伤害会破除潜行。' },
   immune:     { name: '免疫伤害', icon: 'sparkles', text: '不受到任何伤害。' },
   reduce:     { name: '减伤',     icon: 'plate',    text: '每次受到的伤害 -N（真实伤害除外）。' },
-  dodge:      { name: '闪避',     icon: 'runner',   text: '免疫下一次攻击——完全避开该次攻击的全部伤害，每层避开 1 次；法术与真实伤害不可闪避，回合结束未用完的层数失效。' },
+  dodge:      { name: '闪避',     icon: 'runner',   text: '避开下一段伤害，包括攻击、法术、固定和真实伤害；每段消耗 1 层。未标明持续时间的层数保留至本场战斗结束，限时来源按各自回合数到期。' },
   swordForm:  { name: '剑仙形态', icon: 'sword',    text: '回合开始时额外抽 1 张。形态是开关型祝福，本局对战常驻。' },
   natureForm: { name: '满月形态', icon: 'wood',     text: '回合开始时额外获得 1 点能量。形态是开关型祝福，本局对战常驻。' },
   cosmosForm: { name: '宇宙形态', icon: 'sparkles', text: '本局对战所有卡牌变为 1 费。形态是开关型祝福，本局对战常驻。' },
@@ -47,7 +47,7 @@ const TERM_TIPS = {
   charge:     { name: '充能',     text: '卡面写明「回合开始时，本牌伤害 +N」时，该牌每回合开始累计增加伤害，本场有效。其他充能卡的成长条件以卡面为准。' },
   discover:   { name: '发现',     text: '从三张随机卡牌（可限定卡池）中选择一张并获取。' },
   moves:      { name: '招式',     text: '武术与法术的统称：「所有招式」类效果对两种牌同时生效。' },
-  exhaust:    { name: '消耗',     text: '被消耗的牌进入消耗区；BOSS 战中进入墓地，不参与洗回。消耗本牌还是其他牌，以卡面说明为准。' },
+  exhaust:    { name: '消耗',     text: '被消耗的牌进入消耗牌堆，不自动洗回牌库，只能由卡牌效果取回。消耗本牌还是其他牌，以卡面说明为准。' },
   equipSkill: { name: '主动技能', text: '装备打出即穿戴；技能在角色信息区以按钮发动，每场战斗限一次。' },
   ability:    { name: '能力卡',   text: '只能收藏，普通战不会进入手牌；仅可编入 BOSS 战牌库使用。' },
   // —— 敌方词缀（battle.core AFFIX）——

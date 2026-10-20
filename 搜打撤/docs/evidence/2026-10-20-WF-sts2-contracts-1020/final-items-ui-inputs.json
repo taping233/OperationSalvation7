@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-10-20T16:10:16.248Z",
+  "source": "docs/evidence/2026-10-20-WF-battle-flow-1020/preview-inputs-final.json",
+  "inputs": [
+    {
+      "path": "game/src/battle/bag/battle.bag.domain.js",
+      "testedSha256": "c6a9a8fc19935c37e7c17664f92c29414e56e4fa85ee0cfe0bd39f1ff2065c69",
+      "currentSha256": "c6a9a8fc19935c37e7c17664f92c29414e56e4fa85ee0cfe0bd39f1ff2065c69",
+      "earlierObservedSha256": "18904d737a067c3ca1d19f86361a25a72b205923e97cce5e408fcc1fa21ecd9a"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.factory.domain.js",
+      "testedSha256": "ef0c3a1dcd11766bb278655944be66da47f28ada8764d501d2df2b4b7c60a3b8",
+      "currentSha256": "ef0c3a1dcd11766bb278655944be66da47f28ada8764d501d2df2b4b7c60a3b8",
+      "earlierObservedSha256": "2054d0212122bba87f2c2bcc8033cb00674a23211fa9a1443782674aa63428bb"
+    }
+  ],
+  "note": "Current two-file bytes match the final browser manifest. Earlier observed hashes are preserved; framework continued its scoped integration between captures."
+}

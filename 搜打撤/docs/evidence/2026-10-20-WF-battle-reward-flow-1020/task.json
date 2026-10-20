@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-battle-reward-flow-1020",
+  "date": "2026-10-20",
+  "owner": "Friday",
+  "goal": "核查并修复普通战后领奖、背包整理、返回与恢复流程，复用现有检查并以定向回归和当前内置浏览器验证",
+  "paths": [
+    "game/src/run/chests.js",
+    "game/src/hub/game.bag.js",
+    "tests/chest-callback-lifecycle-audit.test.js",
+    "tests/reward-save-interruptions.test.js",
+    "tests/bag-page-lifecycle-review.test.js",
+    "tests/node-retrigger.test.js",
+    "game/dev/feedback-1018-review.js",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "docs/save-format.md",
+    "docs/roadmap.md",
+    "docs/evidence/2026-10-20-WF-battle-reward-flow-1020"
+  ],
+  "doneWhen": [
+    "当前复现问题已定性并按现行规则修复，正常、满包、取消、重复输入、返回重进与恢复的适用分支有对应证据",
+    "相关检查通过，实页与夹具覆盖分别报告，记录工具复用和实际操作耗时"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "两类新增失败样本修复后通过，7文件143项相关回归通过，资源节点夹具修正后定向补验通过，详见REPORT.md",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "Codex内置当前1280x720窗口验证正常战后奖励、满包腾位返回、保存失败留页、重试与原节点重进；真实写盘失败与恢复由RunStorage回归覆盖",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "隔离语法510文件、类型、ESLint、Vite生产构建及包体预算通过；文档守卫通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "首次隔离全量6889通过10失败37跳过，失败文件主工作区补验62通过2失败；未改动workflow-doctor两项依赖链接测试仍失败",
+      "result": "failed"
+    }
+  ],
+  "unverified": [
+    "不宣称项目级全量通过；原生全量记录、隔离环境限制及未改动工具测试失败保留，见REPORT.md与full-findings-recheck.log",
+    "未做玩家档位实页刷新或新一轮自然整局，沿用既有整局验收；当前实页为不落档测试局与隔离夹具，真实磁盘恢复由回归验证"
+  ],
+  "updatedAt": "2026-10-20T07:21:53.459Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

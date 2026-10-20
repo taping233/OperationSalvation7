@@ -52,7 +52,7 @@ describe('0919 都市污染事件池', () => {
   });
 
   it('九项需求的结算端口均已实装，不是卡面占位描述', () => {
-    const source = readFileSync(path.join(ROOT, 'game', 'src', 'run', 'game.run.flow.js'), 'utf8');
+    const source = readFileSync(path.join(ROOT, 'game', 'src', 'run', 'game.run.events.js'), 'utf8');
     [
       'ev19-vital', 'ev19-pearlbox', 'ev19-fireballs', 'ev19-classchest', 'ev19-recode',
       'ev19-potions', 'ev19-arrows', 'ev19-gamble', 'ev19-quartermaster',
@@ -70,7 +70,7 @@ describe('熔断物资箱标题', () => {
     const card = C.EVENTS_0919.find(c => c.id === 'tt6-chestdraw');
     expect(card.name).toBe('熔断物资箱');
     expect(card.desc).toBe('从大、中、小宝箱中随机抽取 1 个开启。');
-    const source = readFileSync(path.join(ROOT, 'game/src/run/game.run.flow.js'), 'utf8');
+    const source = readFileSync(path.join(ROOT, 'game/src/run/game.run.events.js'), 'utf8');
     expect(source).toContain("{label:'小型物资箱',value:'small'},{label:'密封物资箱',value:'medium'},{label:'军用保险柜',value:'large'}");
     expect(source).toContain("openChestsOnCell([{ kind }], '你投骰选中的物资箱')");
   });

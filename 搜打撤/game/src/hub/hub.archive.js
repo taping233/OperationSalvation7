@@ -8,7 +8,8 @@ export function achievementFiltersHTML(meta) {
   const category = achievement => meta.isClaimed(achievement.id) ? 'done' : meta.isUnlocked(achievement) ? 'claimable' : 'progress';
   return `<div class="archive-toolbar"><nav class="archive-status" aria-label="成就状态">${[['all', '全部'], ['claimable', '可领取'], ['progress', '未达成'], ['done', '已领取']].map(([id, name]) => `<button class="mini-btn${status === id ? ' ok' : ''}" data-act="archiveStatus" data-status="${id}" aria-pressed="${status === id}">${name} <small>${meta.ACHIEVEMENTS.filter(a => id === 'all' || category(a) === id).length}</small></button>`).join('')}</nav><input class="archive-search" aria-label="搜索成就名称与目标" placeholder="搜索成就或目标" value="${escAttr(query)}"></div><div class="archive-empty" role="status" hidden></div>`;
 }
-export function achievementProgressText(id, base) {
+// A presentation snapshot for one synchronous render, never retained between opens.
+export function createAchievementProgressReader(base) {
   const d = base.data, s = d.stats || {}, pets = Object.values(d.pets || {}), max = values => Math.max(0, ...values);
   const targets = {
     firstExtract: [s.extracts || 0, 1], extract3: [s.extracts || 0, 3], kill10: [s.kills || 0, 10],
@@ -19,8 +20,13 @@ export function achievementProgressText(id, base) {
     unlimitedEnergy: [s.turnMovesMax || 0, 10], weaponMaster: [s.battleEquipsMax || 0, 5], runeFan: [new Set((d.runes || []).flatMap(r => r.attrs || [])).size, 5], savior: [(s.nestBossKills || []).length, 2], beautifulVase: [(d.runes || []).some(r => r.attrs?.length >= 2 && r.kind === 'rainbow') ? 1 : 0, 1], excuseMe: [s.reviveKills || 0, 1],
     labScore1: [s.labTotalScore || 0, 500], labScore2: [s.labTotalScore || 0, 1500], labScore3: [s.labTotalScore || 0, 4000]
   };
-  const progress = targets[id];
-  return progress ? `${Math.min(progress[0], progress[1])} / ${progress[1]}` : '';
+  return id => {
+    const progress = targets[id];
+    return progress ? `${Math.min(progress[0], progress[1])} / ${progress[1]}` : '';
+  };
+}
+export function achievementProgressText(id, base) {
+  return createAchievementProgressReader(base)(id);
 }
 export function bindArchive(ui, { openAchievements = () => document.querySelector('#hubMain [data-act="hubCollectionView"][data-view="achievements"]')?.click() } = {}) {
   storyRequest++;
@@ -29,6 +35,8 @@ export function bindArchive(ui, { openAchievements = () => document.querySelecto
     const empty = document.querySelector('#hubMain .archive-empty');
     if (empty) { empty.hidden = [...document.querySelectorAll('#hubMain .ach-row')].some(row => !row.hidden); empty.innerHTML = `<h3>${query.trim() ? '没有匹配的成就' : status === 'claimable' ? '当前没有待领取奖励' : status === 'done' ? '尚未领取成就奖励' : '当前分类没有成就'}</h3><p>${query.trim() ? '调整关键词，或查看全部目标。' : status === 'claimable' ? '完成下方目标后，奖励会出现在这里。' : '可以返回全部目标继续浏览。'}</p><button class="mini-btn" data-act="archiveReset">查看全部目标</button>`; }
     for (const button of document.querySelectorAll('#hubMain [data-act="archiveStatus"]')) { button.classList.toggle('ok', button.dataset.status === status); button.setAttribute('aria-pressed', String(button.dataset.status === status)); }
+    // A local notification lets list/detail views reconcile after every filter path.
+    document.querySelector('#hubMain .archive-toolbar')?.dispatchEvent(new Event('archive-filter-change', { bubbles: true }));
   };
   apply();
   document.querySelector('#hubMain .archive-search')?.addEventListener('input', event => { query = event.target.value; apply(); });

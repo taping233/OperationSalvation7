@@ -1,12 +1,15 @@
 /* ============================================================
  * main.js —— ESM 唯一入口
  *
- * 按原 index.html 的 <script> 顺序导入全部模块，保持初始化顺序。
+ * 装配全部生产页面模块；HTML 与启动集成测试共同加载本入口。
+ * 首页、游戏内核与启动展示沿用原 HTML 的模块求值顺序。
  * 模块间依赖由各文件顶部的 import 显式声明（见 scripts/esm-convert.mjs）。
  * 下面的导入顺序即启动顺序，须与 boot-order.js 的 BOOT_ORDER 一致
  * （tests/contracts.test.js 有守护断言，勿随意调换）。
  * ============================================================ */
-import './ui/ui-scale.js';   // 全局 UI 缩放：须在首帧渲染前挂 zoom，故先于一切模块
+import './ui/title-credits.js';
+import './ui/title-wallpaper.js';
+import './ui/ui-scale.js';   // 全局 UI 缩放：须在游戏首帧渲染前挂 zoom
 import './core/random.js';
 import './core/rules.js';
 import './core/mapData.js';
@@ -44,3 +47,5 @@ import './hub/game.bag.js';
 import './hub/game.notes.js';
 import './hub/game.cardslib.js';
 import './game.boot.js';
+import './ui/startup-transition.js';
+import './ui/cover-context.js';

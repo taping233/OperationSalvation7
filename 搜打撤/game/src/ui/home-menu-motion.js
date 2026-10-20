@@ -20,6 +20,7 @@ const homeRestoreDelays = new Map([
 ]);
 let route = null;
 let routeVersion = 0;
+let navigationObserver = null;
 let settleTimer;
 let returnToken = 0;
 let exitBusy = false;
@@ -109,6 +110,8 @@ export function returnHome() {
 }
 
 function clearRoute() {
+  navigationObserver?.disconnect();
+  navigationObserver = null;
   route = null;
   routeVersion += 1;
   if (overlay) {
@@ -134,8 +137,19 @@ function tapFeedback(button) {
 
 function watchNavigation() {
   const requested = ++routeVersion;
+  navigationObserver?.disconnect();
+  navigationObserver = new MutationObserver(() => {
+    if (routeVersion !== requested || !overlay.hidden) {
+      navigationObserver?.disconnect();
+      navigationObserver = null;
+      return;
+    }
+    // A cancelled cold entry removes its cover without ever opening #overlay.
+    if (!document.querySelector('.page-loading') && !credits?.open) { clearRoute(); returnHome(); }
+  });
+  navigationObserver.observe(document.body, { childList: true });
   setTimeout(() => {
-    if (routeVersion === requested && overlay.hidden && !credits?.open) { clearRoute(); returnHome(); }
+    if (routeVersion === requested && overlay.hidden && !credits?.open && !document.querySelector('.page-loading')) { clearRoute(); returnHome(); }
   }, 1800);
 }
 
@@ -192,9 +206,13 @@ if (title && overlay) {
     if (!button || !title.contains(button) || button.closest('dialog') || button.disabled) return;
     if (button.id === 'btnTitleExit') { animateExit(event, button); return; }
     if (route && title.dataset.homePhase === 'out') {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      return;
+      // The next click can precede the cover-removal observer after Escape.
+      if (overlay.hidden && !document.querySelector('.page-loading')) clearRoute();
+      else {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        return;
+      }
     }
     if (route && !overlay.hidden) return;
     if (routes.has(button.id)) {
@@ -208,6 +226,8 @@ if (title && overlay) {
 
   document.addEventListener('sdt-overlay-mode', event => {
     if (!route) return;
+    navigationObserver?.disconnect();
+    navigationObserver = null;
     const body = document.getElementById('ovBody');
     if (body?.querySelector(homePages)) { leavingHome(); enterPage(); return; }
     if (event.detail === 'battle' || body?.querySelector('#hubMain, #depMain, .flow-transition, .cls2-page')) {

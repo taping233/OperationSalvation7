@@ -1,0 +1,354 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T07:04:35.902Z",
+  "inputKind": "real-input",
+  "detail": "满包隔离测试局，使用正式背包将百炼青虹剑移入安全格，连续两次点击关闭背包仍停留原页；随后已用专测复现大图退场导致动作守卫失效；不读写玩家存档",
+  "screenshot": {
+    "path": "bag-return-failure.png",
+    "bytes": 110153,
+    "sha256": "f39216b7518842d27307673e4ea786e79f82434e28c505e731c729b1eb6009d8"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5200/dev/feedback-1018-review.html",
+  "images": [
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/equip-tt2-apollo.webp?art=original-rough-20261010&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/equip-tt2-pearlbox.webp?art=pearlbox-original-rough-20261005&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/equip-tt2-wreck.webp?art=wreck-box-original-rough-20261005&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/equip-tt2-treasuremap.webp?art=tt2-treasuremap-original-rough-20261010&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/cards.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/equip-tt2-venomstaff.webp?art=tt2-venomstaff-original-rough-20261010&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/studio-expanded/tt2-frostsword.webp?art=studio-square-outpaint-20261011&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/common.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 896,
+      "src": "http://127.0.0.1:5200/assets/cards/equip-tt3-immortal-blade.webp?v=0.60.0",
+      "width": 896
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 896,
+      "src": "http://127.0.0.1:5200/assets/cards/equip-tt3-master-staff.webp?v=0.60.0",
+      "width": 896
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 896,
+      "src": "http://127.0.0.1:5200/assets/cards/equip-tt3-chaos-eye.webp?v=0.60.0",
+      "width": 896
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/legendary.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 896,
+      "src": "http://127.0.0.1:5200/assets/cards/equip-tt3-silver-runesword.webp?v=0.60.0",
+      "width": 896
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/studio-expanded/tt3-fate-wheel.webp?art=studio-square-outpaint-20261011&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/epic.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/equip-tt3-crimson-pouch.webp?art=crimson-pouch-redraw-20261010&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5200/assets/cards/equip-tt3-holy-staff.webp?art=holy-staff-redraw-20261010&v=0.60.0",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/icons/heart.png?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/rare.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://127.0.0.1:5200/assets/cards/expedition-starters/basic-attack.webp?art=basicattack-original-rough-20261010&v=0.60.0",
+      "width": 1441
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://127.0.0.1:5200/assets/cards/expedition-starters/basic-attack.webp?art=basicattack-original-rough-20261010&v=0.60.0",
+      "width": 1441
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5200/assets/ui/card-frames/paper-1015/initial.webp?v=0.60.0",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5200/assets/ui/map-hud-1015/gold-is7-v2.webp?v=0.60.0",
+      "width": 128
+    }
+  ],
+  "console": [
+    {
+      "level": "error",
+      "message": "[SDT.Art] missing asset mapping: card:martial-melee",
+      "timestamp": "2026-10-20T06:57:09.392Z",
+      "url": "http://127.0.0.1:5200/src/core/diagnostics.local.js"
+    }
+  ]
+}

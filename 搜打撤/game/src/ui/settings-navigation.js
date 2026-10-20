@@ -11,64 +11,39 @@ const CATEGORIES = [
   ['about', '关于', 'ABOUT', '创作来源与鸣谢', ['credits']],
 ];
 
-// Move existing controls into panels without replacing their nodes or action hooks.
+// Build the final structure before the overlay mounts: no connected group moves or
+// checkbox reparenting. Callers supply trusted, freshly rendered control HTML.
+export function settingsLayoutHTML(groups) {
+  const tabs = CATEGORIES.map(([key, title, english], index) =>
+    `<button type="button" class="settings-tab" id="settings-tab-${key}" role="tab" aria-controls="settings-panel-${key}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}"><span>${title}</span><small>${english}</small></button>`).join('');
+  const panels = CATEGORIES.map(([key, title, english, description, names], index) =>
+    `<section class="settings-panel" id="settings-panel-${key}" role="tabpanel" aria-labelledby="settings-tab-${key}"${index ? ' hidden' : ''}><header class="settings-panel-head"><small>${english}</small><h3>${title}</h3><p>${description}</p></header>${names.map(name => groups[name]).join('')}</section>`).join('');
+  return `<div class="settings settings-layout"><nav class="settings-nav" role="tablist" aria-label="设置分类" aria-orientation="vertical">${tabs}</nav><div class="settings-content">${panels}</div></div>`;
+}
+
+const initialized = new WeakSet();
 export function initSettingsNavigation(root) {
-  if (!root) return;
+  if (!root || initialized.has(root)) return;
+  initialized.add(root);
   root.dataset.settingsWallpaper = document.getElementById('title')?.dataset.homeWallpaper || 'snow-road';
-  if (root.classList.contains('settings-tabbed')) return;
-  root.classList.add('settings-tabbed');
-  const layout = root.querySelector('.settings-layout');
-  const nav = document.createElement('nav');
-  nav.className = 'settings-nav';
-  nav.setAttribute('role', 'tablist');
-  nav.setAttribute('aria-label', '设置分类');
-  nav.setAttribute('aria-orientation', 'vertical');
-  const content = document.createElement('div');
-  content.className = 'settings-content';
-  const tabs = [];
-  const panels = [];
-  for (const [key, title, english, description, groups] of CATEGORIES) {
-    const tab = document.createElement('button');
-    tab.type = 'button';
-    tab.className = 'settings-tab';
-    tab.id = `settings-tab-${key}`;
-    tab.setAttribute('role', 'tab');
-    tab.setAttribute('aria-controls', `settings-panel-${key}`);
-    tab.innerHTML = `<span>${title}</span><small>${english}</small>`;
-    const panel = document.createElement('section');
-    panel.className = 'settings-panel';
-    panel.id = `settings-panel-${key}`;
-    panel.setAttribute('role', 'tabpanel');
-    panel.setAttribute('aria-labelledby', tab.id);
-    panel.innerHTML = `<header class="settings-panel-head"><small>${english}</small><h3>${title}</h3><p>${description}</p></header>`;
-    for (const name of groups) panel.append(root.querySelector(`.settings-${name}`));
-    nav.append(tab);
-    content.append(panel);
-    tabs.push(tab);
-    panels.push(panel);
-  }
-  layout.replaceChildren(nav, content);
+  const nav = root.querySelector('.settings-nav');
+  const content = root.querySelector('.settings-content');
+  const tabs = [...nav.querySelectorAll('.settings-tab')];
+  const panels = [...content.querySelectorAll('.settings-panel')];
   panels.forEach(panel => {
-    panel.querySelectorAll('.settings-group').forEach(group => {
-      delete group.dataset.surfaceBlock;
-      delete group.dataset.surfaceRole;
-    });
     panel.querySelectorAll('.chk, .btn-row, .hint').forEach((item, index) => {
       item.style.setProperty('--settings-order', String(Math.min(index + 1, 3)));
     });
   });
-  for (const row of root.querySelectorAll('.chk')) {
-    if (row.classList.contains('vol')) continue;
-    const input = row.querySelector('input');
-    const copy = document.createElement('span');
-    copy.className = 'settings-row-copy';
-    for (const node of Array.from(row.childNodes)) if (node !== input) copy.append(node);
-    row.replaceChildren(copy, input);
-    input.setAttribute('role', 'switch');
-  }
-  let selected = -1;
-  root.dataset.settingsMotion = 'entry';
+  // The freshly mounted HTML already selects general and hides the other panels.
+  let selected = 0;
   const readingPositions = new Map();
+  const updateMarker = index => {
+    const markerTop = tabs[index].offsetTop;
+    const markerHeight = tabs[index].offsetHeight;
+    nav.style.setProperty('--settings-marker-top', `${markerTop}px`);
+    nav.style.setProperty('--settings-marker-height', `${markerHeight}px`);
+  };
   const select = (index, focus = false) => {
     if (selected === index) {
       if (focus) tabs[index].focus();
@@ -85,8 +60,7 @@ export function initSettingsNavigation(root) {
       panels[i].hidden = i !== index;
     });
     content.scrollTop = readingPositions.get(index) || 0;
-    nav.style.setProperty('--settings-marker-top', `${tabs[index].offsetTop}px`);
-    nav.style.setProperty('--settings-marker-height', `${tabs[index].offsetHeight}px`);
+    updateMarker(index);
     selected = index;
     if (focus) tabs[index].focus();
   };
@@ -103,8 +77,8 @@ export function initSettingsNavigation(root) {
       select(target, true);
     });
   });
-  select(0);
-  // 分类布局在 showOverlay 的通用入场之后建立，补挂最终布局的信息区。
+  updateMarker(0);
+  // 保留既有设置入场时序；后续资源就绪揭幕仍由通用包装器负责。
   enterSurface(root.closest('#overlay'), { restart: false });
   enterSettingsCut(root);
 }

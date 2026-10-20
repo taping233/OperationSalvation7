@@ -1,4 +1,5 @@
 // @ts-check
+import { ensurePierceArrowRevision } from './pierce-arrow-revision.js';
 /* 通用定版卡面刷新器（2026-09-29）：M 批 marker 一次性回填会把回填时的卡面固化进存档，
  * 之后定版修订（老板改数值/文案）不再跟随。本刷新器按 FACE_REFRESH_BY_ID 注册表，每次启动
  * 幂等把点名卡的字段重刷为 canonical 定版值（沿用 ensureFoeRename 幂等惯例），替代
@@ -8,7 +9,7 @@
  *   - 只刷 FACE_REFRESH_BY_ID 显式点名的 id + 字段，其余任何字段（含玩家在制作坊的改动）不碰；
  *   - 字段值动态取自 canonical 定版表（零重复副本）；
  *   - 缺表/缺卡/隐私模式静默跳过；saveAll 失败保留存储现场，下次启动重试；
- *   - rules 一概不动——结构化 op 用 amountField 等引用卡面时，卡面刷新即生效。
+ *   - 注册表只改卡面字段；破甲箭的独立修订入口另按已知旧卡指纹更新效果规则。
  *
  * 新增一行注册表 = 一次定版修订要刷新旧档卡面；删除行 = 不再刷新。 */
 
@@ -33,6 +34,7 @@ export function ensureCanonicalFaceRefresh(deps = {}) {
     : (typeof window !== 'undefined' ? window.SDT?.Cards : null);
   try {
     if (!library) return;
+    ensurePierceArrowRevision(library);
     const cards = library.all();
     let dirty = false;
     for (const [id, fields] of FACE_REFRESH_BY_ID) {

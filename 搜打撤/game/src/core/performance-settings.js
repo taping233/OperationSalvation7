@@ -21,8 +21,11 @@ function readSettings() {
   catch { return normalizePerformanceSettings(); }
 }
 let settings = readSettings();
+let unsavedSettings = false;
 const listeners = new Set();
 export const getPerformanceSettings = () => settings;
+// Keep failed-write feedback for this session, including closing/reopening settings.
+export const hasUnsavedPerformanceSettings = () => unsavedSettings;
 export const getQualityPreset = () => QUALITY_PRESETS[settings.quality];
 function syncDocument() {
   if (typeof document !== 'undefined' && document.body) document.body.dataset.renderQuality = settings.quality;
@@ -35,6 +38,7 @@ export function onPerformanceSettingsChange(listener) {
 export function setPerformanceSettings(patch) {
   settings = normalizePerformanceSettings({ ...settings, ...patch });
   const saved = storeSet('sdt-performance', JSON.stringify(settings));
+  unsavedSettings = !saved;
   syncDocument();
   for (const listener of listeners) listener(settings);
   return { ...settings, saved };

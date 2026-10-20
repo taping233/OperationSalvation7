@@ -1,3 +1,4 @@
+import { beginRuntimeStage, captureRuntimeStageContext, withRuntimeStageContext } from '../core/runtime-trace-stages.local.js';
 import { beginPageEntryCancellation, cancelPendingPageEntries, releasePageEntryCancellation } from './page-entry-cancellation.js';
 import { captureBattleContext, invalidateBattleContext } from '../battle/battle-loader.js';
 import { storeGet, storeSet } from '../core/storage.js';
@@ -25,13 +26,14 @@ export function cancelPendingMenuPageOpen() {
 }
 
 export function createGameMenuController(deps, { pageFactory = null, loadPages = loadMenuPagesModule } = {}) {
-  const { SDT, UI, game, runtime, SLOT_COUNT, readSlot, saveGame, getActiveSlot = () => null, setActiveSlot } = deps;
+  const { SDT, UI, game, runtime, SLOT_COUNT, readSlot, saveSession, getActiveSlot = () => null, setActiveSlot } = deps;
   let pageController = null;
   const shell = { setLobby, showTitle, hideTitle, pickLatestSlot, fmtPlayTime, describeCurrentPage };
   const createPages = factory => pageController || (pageController = factory(deps, shell));
   const sameArgs = (first, second) => first.length === second.length && first.every((arg, i) => arg === second[i]);
 
   function enterMenuPage(method, args) {
+    const traceContext = method === 'openSettings' ? captureRuntimeStageContext() : null;
     if (currentEntry?.owner === shell && currentEntry.method === method && sameArgs(currentEntry.args, args) && !currentEntry.ready) return currentEntry.promise;
     cancelPendingMenuPageOpen();
     cancelPendingPageEntries();
@@ -65,9 +67,11 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
     const loading = runPageLoading({
       title: '正在打开页面', detail: '正在准备菜单内容', signal: controller.signal,
       open: async () => {
-        const page = await loadPages();
+        const finishModule = method === 'openSettings' ? beginRuntimeStage('settings-module-wait', traceContext) : () => {};
+        let page;
+        try { page = await loadPages(); } finally { finishModule(); }
         if (!isCurrent()) return false;
-        const result = createPages(page.createGameMenuPages)[method](...args);
+        const result = withRuntimeStageContext(traceContext, () => createPages(page.createGameMenuPages)[method](...args));
         entry.ready = true;
         menuPageLoading = false;
         return result;
@@ -305,20 +309,22 @@ export function createGameMenuController(deps, { pageFactory = null, loadPages =
     return h > 0 ? `${h} 小时 ${String(m).padStart(2, '0')} 分` : `${m} 分钟`;
   }
 
-  function exitToTitle() {
+  async function exitToTitle() {
     // 迭代评审 09-20 客户端岗：守卫收窄不删——仅战斗未收尾时直接 return（不做「同步收战斗
     // 再跳」：battle:end 异步续流会在标题页叠层）；触发点已全是脚本流（龙巢撤离/备战返回/选角退出），
     // 人工入口早已改走 openLeaveMenu。immediate 同步关层消除 210ms 淡出窗口竞态（龙巢撤离死锁根因），
     // 详见 ui.js hideOverlay——曾致撤离后卡巢穴图、可无限重刷 BOSS 奖励
     if (game.battleActive) return;
+    const saved = await saveSession();
+    if (!saved.ok) { UI.log(saved.message || '[[icon:cross]] 进度尚未保存，请重试', 'warn'); return false; }
     UI.hideOverlay({ immediate: true });
-    saveGame();   // 内部只在 runActive 时写档
     showTitle();
   }
 
-  function quitGame() {
+  async function quitGame() {
     cancelPendingPageEntries();
-    saveGame();
+    const saved = await saveSession();
+    if (!saved.ok) { UI.log(saved.message || '[[icon:cross]] 进度尚未保存，请重试', 'warn'); return false; }
     if (window.sdtDesktop && window.sdtDesktop.isDesktop) {
       window.sdtDesktop.quit(); // 桌面版：存档已保留，真正退出程序
       return;

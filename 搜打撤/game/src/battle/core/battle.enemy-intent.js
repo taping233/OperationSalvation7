@@ -1,4 +1,5 @@
 /* Enemy-intent projection from an enemy definition, round, and player status values. */
+import { buildEnemyActionPlan } from './battle.enemy-plan.js';
 const INTENT_META = {
   strike: ['[[icon:swords]]', '攻击'], volley: ['[[icon:swords]]', '攻击'], charge: ['[[icon:swords]]', '攻击'],
   guard: ['[[icon:swords]]', '攻击'], curse: ['[[icon:skull]]', '攻击并施加诅咒'],
@@ -7,19 +8,19 @@ const INTENT_META = {
 };
 
 export function calculateEnemyIntent(def, round, playerStatus) {
-  const kind = def.behavior || (def.affix === 'grow' ? 'general' : def.affix === 'frenzy' ? 'orc_boss' : def.affix === 'aegis' ? 'element_boss' : 'strike');
+  const { kind, skip, hits } = buildEnemyActionPlan(def, round);
   const meta = INTENT_META[kind] || INTENT_META.strike;
-  const hits = def.affix === 'frenzy' || kind === 'orc_boss' ? 2 : 1;
   // Even-attack enemies charge on odd rounds, matching the enemy phase.
-  if (def.evenAttack && ((round || 1) % 2 === 1)) {
+  if (skip === 'oddRound' || skip === 'stunned') {
     return { kind, icon: '[[icon:crystal]]', label: '蓄力·下回合行动', damage: null, hits: 1 };
   }
-  // noFirstAttack：首回合蓄力不攻击，与行动判定同源（enemy-phase.js「foe.noFirstAttack && turn === 1」
-  // 的「第一回合蓄力，不会攻击」）——此前意图模型缺此分支，巢穴龙首回合显示攻击预告、实际蓄力不动。
-  if (def.noFirstAttack && (round || 1) === 1) {
+  if (skip === 'firstRound') {
     return { kind, icon: '[[icon:crystal]]', label: '蓄力·首回合不攻击', damage: null, hits: 1 };
+  }
+  if (skip === 'frozen' || skip === 'dead') {
+    return { kind, icon: '[[icon:crystal]]', label: skip === 'frozen' ? '冰冻·无法行动' : '已退场', damage: null, hits: 1 };
   }
   const bleed = (playerStatus && playerStatus.bleed) || 0;
   const atk = Math.max(0, def.atk || 0);
-  return { kind, icon: meta[0], label: meta[1], damage: atk + bleed, hits, bleedBonus: bleed };
+  return { kind, icon: meta[0], label: kind === 'orc_boss' && hits === 1 ? '攻击' : meta[1], damage: atk + bleed, hits, bleedBonus: bleed };
 }

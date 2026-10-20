@@ -1,0 +1,1516 @@
+{
+  "started": "2026-10-20T16:03:57.554Z",
+  "ended": "2026-10-20T16:04:25.230Z",
+  "exitCode": 0,
+  "files": [
+    "tests/normal-starter-deck.test.js",
+    "tests/normal-effects-deck-regression.test.js",
+    "tests/sts2-unified-consumed-pile.test.js",
+    "tests/sts2-consumed-pile.test.js",
+    "tests/battle-action-timing.test.js",
+    "tests/battle-staged-timing.test.js",
+    "tests/sts-attack-presentation.test.js",
+    "tests/battle-trigger-lifecycle-unification.test.js",
+    "tests/battle-victory-presentation.test.js",
+    "tests/battle-victory-progress.test.js",
+    "tests/battle-hud-info.test.js",
+    "tests/battle-pure-rules.test.js",
+    "tests/card-description-text.test.js",
+    "tests/sts2-structured-description.test.js",
+    "tests/term-tip-rule-copy.test.js",
+    "tests/term-tips-lifecycle.test.js",
+    "tests/compendium.test.js",
+    "tests/contracts.test.js",
+    "tests/architecture-boundaries.test.js",
+    "tests/sts2-consumed-items.test.js",
+    "tests/potion-tip-lifecycle.test.js",
+    "tests/potion-tip.test.js",
+    "tests/restoration-potion-observation.test.js",
+    "tests/runtime-asset-redundancy.test.js"
+  ],
+  "before": [
+    {
+      "path": "game/src/battle/bag/battle.bag.domain.js",
+      "sha256": "c6a9a8fc19935c37e7c17664f92c29414e56e4fa85ee0cfe0bd39f1ff2065c69"
+    },
+    {
+      "path": "game/src/battle/bag/battle.bag.js",
+      "sha256": "910698420e2923a01b71460e1c896057127f0b8860ba5ddbef074518daa36d08"
+    },
+    {
+      "path": "game/src/battle/bag/battle.consumed-pile.js",
+      "sha256": "e6289302a4dcd89b466e85662db1697cd0e26821cfbb50dcb4881e82dcf3bc1e"
+    },
+    {
+      "path": "game/src/battle/bag/battle.deck.factory.js",
+      "sha256": "5c169f444c8e14a7f472f30e8af756a45ac172a5a31c427c4d55f1d8f2890f68"
+    },
+    {
+      "path": "game/src/battle/bag/battle.deck.js",
+      "sha256": "01878fb9c9002911ac8b77fa8e7d1d6c63edebc4d9612cfdec21ca19daf9c31a"
+    },
+    {
+      "path": "game/src/battle/bag/battle.equipment.domain.js",
+      "sha256": "ccfb858fa01e1ebd7cc0e472bf55062f69cfa74801c79eedc0b17635741c9b37"
+    },
+    {
+      "path": "game/src/battle/bag/battle.equipment.js",
+      "sha256": "818b1541e2ae491d24d2f2975fb9856acc2aa805779827ce03110e11565db0b9"
+    },
+    {
+      "path": "game/src/battle/bag/battle.piles.js",
+      "sha256": "c73f6cdbce9f33ac4e0b975ef12e69edf0b0ebc9749a6097dff48ec6db515067"
+    },
+    {
+      "path": "game/src/battle/bag/battle.slam-skill.js",
+      "sha256": "ca246ff8b114a9bdeade027e94026b05e57fbcf4a73e0b4673d5371e665dbd86"
+    },
+    {
+      "path": "game/src/battle/battle-loader.js",
+      "sha256": "5c7259185a6112677098083627dd84d3c4205db75b749d5ebe4d869a1fc0bfc7"
+    },
+    {
+      "path": "game/src/battle/battle.play-submission.types.d.ts",
+      "sha256": "ea763bcf232d21df404f0f70fd434bf92c35dd1f39d1a793a109cf750fbe11ff"
+    },
+    {
+      "path": "game/src/battle/battle.snapshot.types.d.ts",
+      "sha256": "dd3b951ff2b7ef8fb270229804c645cb3c2f14bacd24a6639bce77fc3070826c"
+    },
+    {
+      "path": "game/src/battle/core/battle.actions.js",
+      "sha256": "006a741924d4fddb9bd5a1c3fc531a1bc2ffa62df4f44c6a1c0e528f105a02e9"
+    },
+    {
+      "path": "game/src/battle/core/battle.card-play.domain.js",
+      "sha256": "23a3f1f99ac7516143d11ec814a7876a2494dd3c955121e9d597de5dbb747723"
+    },
+    {
+      "path": "game/src/battle/core/battle.card-play.js",
+      "sha256": "64c581835cf175c4a934f8ca25df4f1413c4474f30135f77151cfe4fe591b22c"
+    },
+    {
+      "path": "game/src/battle/core/battle.card-presentation.js",
+      "sha256": "1266dc099382cf003a24414a13cb489f2f48ca08066d0e0ebf1f71d591f621d8"
+    },
+    {
+      "path": "game/src/battle/core/battle.core.js",
+      "sha256": "e10598b5bb102a7e18dfa7a2ec7a1777f3dc1f58ede4b32b5dee7ec9c50079b0"
+    },
+    {
+      "path": "game/src/battle/core/battle.damage.domain.js",
+      "sha256": "c7f5fcb2dc3121509e6a9c42542733ccd4ff86ce25717bcbaaa8fe374aec585e"
+    },
+    {
+      "path": "game/src/battle/core/battle.damage.js",
+      "sha256": "5d9b59804aa11372733192d259f8ca18abb608f79c92b90c1d13f3b916644e73"
+    },
+    {
+      "path": "game/src/battle/core/battle.default-context.js",
+      "sha256": "3ca6a13978eabc2f63925ae4aade992a8c6fc7d469ecc496cc508ab1d94b92ad"
+    },
+    {
+      "path": "game/src/battle/core/battle.draw.domain.js",
+      "sha256": "477c1718fa26f01f995e79b604c896f5eed206f38d9c5286ea17316db1fe2dbe"
+    },
+    {
+      "path": "game/src/battle/core/battle.draw.js",
+      "sha256": "81b1f82ec4f1f39974a6f9bb6617ee70d742c9fb086150633fd5f9bac3b280f1"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-intent.js",
+      "sha256": "50120bbc31490cd54d8274f5b64f191554ff477028ea62ab41c97cccd633d26f"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-phase.domain.js",
+      "sha256": "99ec8b42d9c7cec3796a6e19284e0ab47b7bd3e8b23e9385db39951aebda2fa3"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-phase.js",
+      "sha256": "db517fbf11305db83e61aaff041c5cb9748acac59d9972c86f579011da1fb39b"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-plan.js",
+      "sha256": "e4fdd1eea0c388a9fa02a3773fdd440bf608a3d57a4a2447edf44a5cc18611e5"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.factory.domain.js",
+      "sha256": "ef0c3a1dcd11766bb278655944be66da47f28ada8764d501d2df2b4b7c60a3b8"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.factory.js",
+      "sha256": "62602b448250b3fd7fc2da0f3b0a05260900e437a453e47774c7ae7cfcc2f61c"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.instance.js",
+      "sha256": "f84ddbd78230ff50cdd41ecf492e341da2e3f069e968b4ccd9cee56c9edf0d8e"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "sha256": "f6358359dd670cbf8c0c03c6c2daec35714e0db5dd32410a77f76d8eab36c833"
+    },
+    {
+      "path": "game/src/battle/core/battle.exec-play.domain.js",
+      "sha256": "64a056e4a7223a089bf3aecb6582e44952da5d534360846b10928fc884eec4cf"
+    },
+    {
+      "path": "game/src/battle/core/battle.exec-play.js",
+      "sha256": "1ace48417296584ec86fe349f091f6260e4a8fcb61a73a2d28aa3aff7033a6b4"
+    },
+    {
+      "path": "game/src/battle/core/battle.facts.js",
+      "sha256": "8a5989958c678f79e0d87ad698c88f575fc059e809be1144078a809eee06c1e4"
+    },
+    {
+      "path": "game/src/battle/core/battle.foe-lifecycle.domain.js",
+      "sha256": "235342d9b445a76a0eb8de4f2a8a5c75ef18dd9647a0dde05bb58de6baac0f01"
+    },
+    {
+      "path": "game/src/battle/core/battle.foe-lifecycle.js",
+      "sha256": "f6594436fe8b0f47bdcbc8a3a97df31a2f11fb52f570ef85698cebabc0139a0d"
+    },
+    {
+      "path": "game/src/battle/core/battle.hand-selection.js",
+      "sha256": "09a7d47356c8f34afe73eeb5095310f019037c998e1db53f855ef1c4397bc5e5"
+    },
+    {
+      "path": "game/src/battle/core/battle.hand.js",
+      "sha256": "5068fa6cb4369d1dad82395fe37d5b8818fb6ed849a41f3f2285dae056de40f2"
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.domain.js",
+      "sha256": "a678b97ca2bf25b47fe55a75893d46dacc6a763e25c389c5a109b054d9ce236d"
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.js",
+      "sha256": "b062965fdbfd895d4addddc0a44a050b6c3b41f037ada91121cf452f8ea592d4"
+    },
+    {
+      "path": "game/src/battle/core/battle.presentation-events.js",
+      "sha256": "0ae51dbc7bd64e3cdb1b6e2d395b0606212e47064e183ac0e635bfea29c2e5ec"
+    },
+    {
+      "path": "game/src/battle/core/battle.presentation.js",
+      "sha256": "753ca719e0b7f7daf6cc8271256ecef4335f3ae0adac705f53ee2e621a8d68ac"
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.domain.js",
+      "sha256": "a660b55f6f6b36adf5ae4adc0350559d450b9e3aa80533eb74ddb7e746eb91f9"
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.js",
+      "sha256": "7dbaf7825474870a44427e15f255eb7e7be112b6a9569ce418c97f2c99dcea11"
+    },
+    {
+      "path": "game/src/battle/core/battle.selection-flow.domain.js",
+      "sha256": "5514733cc97427b71ca455a489541b6c5d558ff43298be5d4e6cd2c2a6cd3da0"
+    },
+    {
+      "path": "game/src/battle/core/battle.selection-flow.js",
+      "sha256": "c2176939b267652b2068f27c09ffaf8c19300fed10d36950c6a28c78c10e3c32"
+    },
+    {
+      "path": "game/src/battle/core/battle.summary.factory.js",
+      "sha256": "e69f99ec0c304d229ae2463ca7eea91cdc8a832df14c7913db15538d046c41ad"
+    },
+    {
+      "path": "game/src/battle/core/battle.summary.js",
+      "sha256": "1c1655ef149def65131b76684a46f966ab98de0c12d41ce61d3b5ef93aab6238"
+    },
+    {
+      "path": "game/src/battle/core/battle.target-session.js",
+      "sha256": "156a3c6ecddfa1e11bd2aa4253bc47c99b0cea7fd9b507cac3232eb01387af9b"
+    },
+    {
+      "path": "game/src/battle/core/battle.turn-continuation.js",
+      "sha256": "f7ad35498366e3dca1d93b6e162cd3410ab5809663d4b7302080d0fae80e1408"
+    },
+    {
+      "path": "game/src/battle/core/battle.turn-start.js",
+      "sha256": "f913556f4372c4576259dbb23d1afe9440e0597fa083ead8a917d9008130eaba"
+    },
+    {
+      "path": "game/src/battle/core/combat.factory.js",
+      "sha256": "99f19619170739c3872175ba437772391d993536055cd147dc0639bfac723971"
+    },
+    {
+      "path": "game/src/battle/core/combat.js",
+      "sha256": "9a25d646390821fe1db591261664b3f1264cfc1a54ff927533e31e401da10099"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-cost.js",
+      "sha256": "c52c1a90a8f40aff64194fe40e32efaaef859526f7f3a9dc693e90bceeff266b"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-inspection.domain.js",
+      "sha256": "cf491ecc6dc621d13b2fa0efc4ee015be3d43f20adff2ca100435dc98e6e89ff"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-inspection.js",
+      "sha256": "1d6b3cec3e1efe260cc1c63d1ab37c07dbf0bb34f4769472ac796014d4510dff"
+    },
+    {
+      "path": "game/src/battle/effects/battle.cost-modifiers.js",
+      "sha256": "fee9617c8371713fd4487c96be56d36c6331ceeeb105e6103ac9cedcfb11f420"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-candidates.js",
+      "sha256": "0c6d781eb98dcdf9b89af3fbe6b966ae4f9dde84e404ab3be0ec228c0c33320c"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-flow.js",
+      "sha256": "cbfe819860cdfadd8f16de598209f4dcb85d07becff977cc19c69bff22426e61"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-state.js",
+      "sha256": "03cd6fd3635d72ced2a0eb28ede8b85d069ce60f05a51c687bea216c1c304c89"
+    },
+    {
+      "path": "game/src/battle/effects/battle.effect-clauses.js",
+      "sha256": "37e70525644467b437fbf3b7402772fc5a4e9d769b58dcc1651fbf9c2a91987f"
+    },
+    {
+      "path": "game/src/battle/effects/battle.effects.js",
+      "sha256": "1b61d0ac1fa17f9f1dc7006601d9c80d269c17a752518d89081c4a97b443ed36"
+    },
+    {
+      "path": "game/src/battle/effects/battle.foe-fight.js",
+      "sha256": "ec5182edaff812e611ad8f5df1ebe3220317084a40c8f84a54d1f99cb230f8ce"
+    },
+    {
+      "path": "game/src/battle/effects/battle.hosted.js",
+      "sha256": "d14023c8edee05f6ea1d51b1493495329e8f8c9a1f6bfdfab0337a1c8fc3fa9b"
+    },
+    {
+      "path": "game/src/battle/effects/battle.infusion.domain.js",
+      "sha256": "e518833905085eecc55bd7a3f2243e2466f24e1833a5958a56dfd3a2805e3cde"
+    },
+    {
+      "path": "game/src/battle/effects/battle.infusion.js",
+      "sha256": "e4969a731f63720c1709fc21ead9f248fe0f4849985658785c6f6d247e860b63"
+    },
+    {
+      "path": "game/src/battle/effects/battle.rule-guard.js",
+      "sha256": "eb470d17caec469463148d7fd36924a633e4a91eb35e635aa645fcbd84ebba1c"
+    },
+    {
+      "path": "game/src/battle/effects/battle.target-rules.js",
+      "sha256": "5295566b01fd251a6429ffbad3c2322327a586fa9bbfea10cbb727f872066fea"
+    },
+    {
+      "path": "game/src/battle/effects/battle.trigger-source.js",
+      "sha256": "0b86af28d7616191b003e14d38af3fde037d679c4fd1b89293e224f36256aba5"
+    },
+    {
+      "path": "game/src/battle/effects/battle.triggers.m2.domain.js",
+      "sha256": "0871e494b581b8afa4ce933ba2d768085cf6134dc83f15ff21cb237cd3dca1d2"
+    },
+    {
+      "path": "game/src/battle/effects/battle.triggers.m2.js",
+      "sha256": "56934fbd357c96a89fe790dea432fbea044b3d9a9d0795548bd95644d8dd9e21"
+    },
+    {
+      "path": "game/src/battle/effects/card-semantic-operations.js",
+      "sha256": "1c561c273ea3d725abdab18a774e3f7bbdc0871bf632b94653f533efdaebaa70"
+    },
+    {
+      "path": "game/src/battle/effects/choice-semantic-operations.js",
+      "sha256": "078b81d86a873c191e5acec54cad6493ace83cea640e054be3d59feaa411c909"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.audit.js",
+      "sha256": "6d3a1ff8b2a3b8f84d46a7aafb4ad499871b0d1ae869aabeb9f961a7a9a0b3f4"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.ctx.js",
+      "sha256": "5e2d3354dc30fb32af9c85b798bee43fbd7d451d5aeb9ef79a37730db084f043"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.curse.js",
+      "sha256": "a3ef73a4e39122f7751a14e74f82e4196483ca412e2b2dd1e9d05ad51facd28e"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.damage.js",
+      "sha256": "4d4c6d9e8f4c029e3ce6e5b517c857d66835002355347900bddd4382a6c1c6aa"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.deck.js",
+      "sha256": "3a5cc87894786afd5ecdc294be5363da1d414551019920f1f2987d6e98cd7cc3"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.gates.js",
+      "sha256": "f6f801f0ed33baf49b80ac106e977c098bd5235e0a2ae41701d1d82b5e40756b"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.js",
+      "sha256": "d4a0bc83d4ed36423208c492e99e2fe8e7e44c5e6a0c183a1f478ad485add3f0"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.kills.js",
+      "sha256": "2175f9d1a323c1a479cf40ca4b37be2c46c40e095708634302498bffb2ac9da1"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m1.domain.js",
+      "sha256": "31435c70facd1ed3e2f873d9a8ec8fe30d39b5a8b77fd7a97579baf0a0fa5381"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m1.js",
+      "sha256": "2006a6b87856d008b5f9c436d2c0f523ce466d637007405731665201647d5ee8"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m2.domain.js",
+      "sha256": "fde0407949f5afa7afbb9292e39645fb03ebbd1c1daa4572fb03a40be0e374f6"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m2.js",
+      "sha256": "8a8e515a85d690515221663fa277e02911867b57bd2898f5efe76bcd60fe07d1"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.recovery.js",
+      "sha256": "d393c86629afc2ddbcdfc7895f5e853347b13cc7b499eaca5e20c10745042416"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.rules.js",
+      "sha256": "d3a65b037ab591f5cf73a5f7d173f29d17c0bee57f5011b779371d48f83ea973"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.tail.js",
+      "sha256": "1c767d3a1c64e37567f46ba789c25fcbc6e82df127c9464281acaadea05ed1d6"
+    },
+    {
+      "path": "game/src/battle/effects/effect-verbs.js",
+      "sha256": "29451927929a9da9d8a3d60cca51a5b606b9bea5f978d2a0e4ec8f39698ce27b"
+    },
+    {
+      "path": "game/src/battle/effects/equipment-semantic-operations.js",
+      "sha256": "fb796f8aa2fff965f3c84d9525a201a5fc551b48f27ba250117ee3d9819f7080"
+    },
+    {
+      "path": "game/src/battle/effects/hand-cost-patterns.js",
+      "sha256": "a7a0a6bee19c9118a3b2f17ecb4b8f2062ee220cbe28deee67b57a512619b4c6"
+    },
+    {
+      "path": "game/src/battle/effects/hosted-catalog-index.js",
+      "sha256": "f09545cf3da650239553f5d30e9855924ce44d393a536d65088febd723c382bb"
+    },
+    {
+      "path": "game/src/battle/effects/random-blessings.js",
+      "sha256": "5c16d1ce8c608f1890ff440d3c88e16b7242267fbf38798ccd27ed2d09658b61"
+    },
+    {
+      "path": "game/src/battle/effects/requested-card-batch.js",
+      "sha256": "380293272668791dbcbab127914049e5cd3a71dadecb249c39d60c8666083690"
+    },
+    {
+      "path": "game/src/battle/effects/requested-card-runtime.domain.js",
+      "sha256": "eaec78b0ac8b7cbca14ab960c168d7bb13f74f779a455eae5dc20a4aecc3c2c4"
+    },
+    {
+      "path": "game/src/battle/effects/requested-card-runtime.js",
+      "sha256": "d9faeb6e22f449ef8a361993630f89efc605b51d410b1dd60c1d6450b8a8226e"
+    },
+    {
+      "path": "game/src/battle/runes.js",
+      "sha256": "1f3374f9e5065081f0e289cdf330d708897890975f74629d09b0b1f8b12d4656"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.action-runner.js",
+      "sha256": "f83f9de71fa9792fef5519c88fd91b4bb924f001f2616866549e4bbe8fcf746e"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.browser-presentation.js",
+      "sha256": "3bba6c68691474c30d37e206087a5faf40749358609a26c47424c878e43360ae"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.clock.js",
+      "sha256": "4cf28cc500a6eefba06d8aec960f8673e2396760d54d68db7aed2c7db78709a5"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.execution-session.js",
+      "sha256": "b31f85d90a294802ac90b67249f56b18c1f15fb7bd77b945c69ab343c6101fe1"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.host-scheduling.js",
+      "sha256": "7c00b0ea7c803c52dbef713c52c7b54e71d481fda767fc814d4b0947019f44b7"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.pace.js",
+      "sha256": "ed4a0471a09561a605dbac9d16f60451ef8b1a3b88ab9594e3cb39d8ab3b3feb"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.playback.js",
+      "sha256": "d21cbdefcda0e71da7265ff9d6e827f8eccc16de628f89a2ac1a144af79f1a2c"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.player-effects.js",
+      "sha256": "c2379d52da773de9a695df09ffffa10ac10f94ac9d59563dabd1fecb9d252515"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.presentation-ports.js",
+      "sha256": "650b02d1682575c6912b7799b6f91e62349d75a12a3a3fc677ec801d1751891e"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.default.js",
+      "sha256": "34ac56db1a48ca21f1721e92eb54e45c5942642d84eae19346733fe3db8e6a89"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.effects.js",
+      "sha256": "018d74bfc92116d6c36377a85a9c406abfd19606e93a6d45540edf3b624f3524"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.factory.js",
+      "sha256": "637efeee823c17cae85c58924f58de9a8091de54701c4b7b01661f4ef3150fe6"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "sha256": "83247c6da29c41b063c82e391f1a752f5410f2a61eced8557c4c36e860f2bec7"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.js",
+      "sha256": "bed419162b81a2b54a32484e8963e32f7dc7a37fa5283b61eb8d61dd6a539632"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.piles.js",
+      "sha256": "02322d2e60986e7dce3c50e4fed94f1ad3952092f167cbb932b914e07b6d61cf"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "sha256": "9941e3c54db25af269100dd1d8bc673f2117a229ff074fb8528db16550253aaf"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.session.js",
+      "sha256": "9e75fa70bedf2a64b13b872c9fade3578698130d6e469c02a21caf54bbb1d727"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.snapshot.js",
+      "sha256": "1ee689ddcb297a37a15a8e3bb403bf50105a41710b7e4f71e794becd87c18bb3"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.staged-playback.js",
+      "sha256": "a4081e94583c905a5182e6b9cfc3991e791e66604c004684f386665684b3622b"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.state.js",
+      "sha256": "14c3b2edda788adf278460e9fbd7dcb327c5094eb88938f04331bd1cf7a379d5"
+    },
+    {
+      "path": "game/src/battle/view/battle.action-timing.js",
+      "sha256": "7111c2945f2477def3f1debfdc2db025728b409cb77ae22a32ddf123cfcfe244"
+    },
+    {
+      "path": "game/src/battle/view/battle.aim.js",
+      "sha256": "c27e19db922c9bb206121eadf938e95b320206f6968ef82c287085349649c055"
+    },
+    {
+      "path": "game/src/battle/view/battle.anim.view.js",
+      "sha256": "9fa10ba1fa0217d40610a8452bbdee65803915f917fa540ec99636f3fa1568ff"
+    },
+    {
+      "path": "game/src/battle/view/battle.attack-cues.js",
+      "sha256": "d403fe88d4b3b20ed4668ced1ec7c21a0742c9b675680295207eccef0d3c6bb2"
+    },
+    {
+      "path": "game/src/battle/view/battle.attack-profiles.js",
+      "sha256": "4b30b93f9c7f666b5f7bcb66172ccbc38b9b0aeb319eff900eb7a40874416252"
+    },
+    {
+      "path": "game/src/battle/view/battle.card-feedback.js",
+      "sha256": "3c2ddf7b9b11757553834f17183aebe8568182027da3f49e3f09db9917a377d4"
+    },
+    {
+      "path": "game/src/battle/view/battle.card-results.js",
+      "sha256": "5fba4d156e072c064d1784bd613eb31f3409cc6de1b3ffc8b4c4a2a21e72c03d"
+    },
+    {
+      "path": "game/src/battle/view/battle.decision-content.js",
+      "sha256": "f04a4e1da28531d2a4bec861eb27a37c84d8ff7fa3f2452d6e7b3f17bbf1613c"
+    },
+    {
+      "path": "game/src/battle/view/battle.decision-shell.js",
+      "sha256": "345754cee320f49eb7b8aa370da1ceb0016ca2d7749dcf6ff289c12209eb834b"
+    },
+    {
+      "path": "game/src/battle/view/battle.discover-infusion.js",
+      "sha256": "aebe78417b4f0440597d6814a62ddf2f4bca2581458a6d0bac45abc433b7b116"
+    },
+    {
+      "path": "game/src/battle/view/battle.discover-input.js",
+      "sha256": "f2e7be6119fbbf22e61efd4f2426afea6c0359fd816d96fe77fdaf0eb4b03bda"
+    },
+    {
+      "path": "game/src/battle/view/battle.discover-view.js",
+      "sha256": "c7d8fa820a4ac04cf9450b874a978fbdb29d2abeac788e0ec041572bc7799447"
+    },
+    {
+      "path": "game/src/battle/view/battle.effect-feedback.js",
+      "sha256": "2595dfb2074e829e92fa63c41eeb00dd4eaf8d2d36ea57c37cdf03846b95c11a"
+    },
+    {
+      "path": "game/src/battle/view/battle.enemy-motion.js",
+      "sha256": "4ecc4b8e9e8c28e7f0ad76e44b1f2d92ae55078bce4280634220bb79f6837903"
+    },
+    {
+      "path": "game/src/battle/view/battle.feedback.js",
+      "sha256": "81057fdaa8daf3b8e8256a4e1880d8435954881fc049028931a466ad2416225b"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-assets.js",
+      "sha256": "57771c894feae0623bbb3e0192fcb10dd59bce97062326ea6234949ca86ebaf0"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-catalog-changwuyu.js",
+      "sha256": "774594287f6417bf0ffba60f77817ffc7dff42d5d78f937f6c13c72973a4a77d"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-catalog-three-role.js",
+      "sha256": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-catalog.js",
+      "sha256": "7396a3a49f206d63e16e5ed8bab02d4d5fbd39e7ef934c354f1dc0fcda756bd0"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-renderer.js",
+      "sha256": "cb4e7df684da0635e6fb38b11b1dbb366e8f8e2313cb3c0c086963ef336b9196"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-resolution.js",
+      "sha256": "2008651e613843ac2dbef5133ddef92c99df7e96afc20de07da6cab517c7208d"
+    },
+    {
+      "path": "game/src/battle/view/battle.frames-diagnostic-policy.js",
+      "sha256": "4925f024ebc7f313fd3491a7d3faa7d5f9bce4de2aa64216b608dd21ada38200"
+    },
+    {
+      "path": "game/src/battle/view/battle.frames.js",
+      "sha256": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-hit.js",
+      "sha256": "294f65ee0628931bbdddd42e60ca6b27e122374d407709d9e70b19f6b0daaaa3"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-inspector.js",
+      "sha256": "4b7ad2e22a79ae26a9696348d1f8b405756229c5d55837ebcdc57e0485b5453d"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-layout.js",
+      "sha256": "0dc3d1828946a16113e5410deda60eaf74f70aa31c758ac6d8f8445dea72d795"
+    },
+    {
+      "path": "game/src/battle/view/battle.hover.js",
+      "sha256": "00f93ca719835a11a83529a439655d905774f5a5cc078e06feff43ac7d1e0340"
+    },
+    {
+      "path": "game/src/battle/view/battle.infusion-material-state.js",
+      "sha256": "3a002f792baaeb59b859ebb6ca3367aa3d189b268f55193c878194da6ce64c6a"
+    },
+    {
+      "path": "game/src/battle/view/battle.infusion-view.js",
+      "sha256": "cabdeb5eb55c6b064f3ab1aff8cf96c1925ca4d3087106f6d17015ca13a564a7"
+    },
+    {
+      "path": "game/src/battle/view/battle.intent.view.js",
+      "sha256": "3f398eacc534379deab608e6e284734079076d99c41ee05917d3c2614f3664cb"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "7477064e4630bbdb1909bf0cb482c0a83711ca4a2a6d6c6a58313f10f912c9ee"
+    },
+    {
+      "path": "game/src/battle/view/battle.overlays.js",
+      "sha256": "3e0124eeb808a3ce056509ddd8c3155ce139202b48a6b0c823459a2dbebe7373"
+    },
+    {
+      "path": "game/src/battle/view/battle.page-activity.js",
+      "sha256": "154310603799568c8eb18b4ce0924c0f830bf31e81923cffea5715049faef516"
+    },
+    {
+      "path": "game/src/battle/view/battle.piles.view.js",
+      "sha256": "d4bdaa4a89c0233c597b0718836147d3ba0072532e6ddfaabe3c9028d19bbfa3"
+    },
+    {
+      "path": "game/src/battle/view/battle.presentation-ready.js",
+      "sha256": "9354043cb6fda6cd830183698d0a922602f0f88379fb01c51ebbc3eaeba93abb"
+    },
+    {
+      "path": "game/src/battle/view/battle.preview.js",
+      "sha256": "0a708e8a2adb20cd9ec05336ab948988cbc5d4758ffa14b09858a54cb6fcc08d"
+    },
+    {
+      "path": "game/src/battle/view/battle.scenery.js",
+      "sha256": "bcbff054eb7c23c6a7336c868c5f2a0b2b14e6406628a7bd64a9349935b8172f"
+    },
+    {
+      "path": "game/src/battle/view/battle.secondary-overlay.js",
+      "sha256": "125e8a1d5d368f2f7d2da16c5af5705915ade1ee248ff2d5c124f08839018b70"
+    },
+    {
+      "path": "game/src/battle/view/battle.selection-ui.js",
+      "sha256": "ce775c07b21338017a47c7d39017aa29f7999793491dc089ea9f9824eac89bdf"
+    },
+    {
+      "path": "game/src/battle/view/battle.skill-view.js",
+      "sha256": "40ec8a918f745571cc01b58cea12925d804d325187387464fd611aa408c2b58b"
+    },
+    {
+      "path": "game/src/battle/view/battle.turn-feedback.js",
+      "sha256": "05c1e14b28ed54ad0d9724ac8d64d0dacb38ac173861cb6e3c6ede2414464604"
+    },
+    {
+      "path": "game/src/battle/view/battle.turn-forecast.js",
+      "sha256": "91d86a8288fee2588a422a604fe9d59309acd6ea40672bb5f60c886564e1579d"
+    },
+    {
+      "path": "game/src/battle/view/battle.vfx.js",
+      "sha256": "ef99883fdb2659f8e6e4506fed6e31fdd3c9b4355a6f5b6e7e84ab12f9dd6687"
+    },
+    {
+      "path": "game/src/battle/view/battle.victory.js",
+      "sha256": "9cbda1954939b744d1f8e44c8af4a260a867da898e9501e4e9131ba5c4f52b6a"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "11abf8a89ce5bfba68cffa55cdf896cda7b823eeb35f36eb8fa7fedb975fdfd2"
+    },
+    {
+      "path": "tests/normal-starter-deck.test.js",
+      "sha256": "1ee2d830a9b5f05f5398b49dcad0c250d4fa08f6cb59ab8fa4a9a0989caaca32"
+    },
+    {
+      "path": "tests/normal-effects-deck-regression.test.js",
+      "sha256": "6360a120669826c16bf7357a78efc09e2718bb4123e1ef74258c0f6d2d254154"
+    },
+    {
+      "path": "tests/sts2-unified-consumed-pile.test.js",
+      "sha256": "879b4d9e1198c29d4d374143fbde69c1a6dbbb3fad598726df468d95ed769161"
+    },
+    {
+      "path": "tests/sts2-consumed-pile.test.js",
+      "sha256": "8e247a5a189eaf02f27efc1d29e28cfd379bfed4d9801ba4851c50533baca73a"
+    },
+    {
+      "path": "tests/battle-action-timing.test.js",
+      "sha256": "011033768a9e4089092a81045551626bae5436eded43061e5a17daa5a9f73a8c"
+    },
+    {
+      "path": "tests/battle-staged-timing.test.js",
+      "sha256": "a6a4bffa736dd0c62d4107cb4af49d94bec50963e133cf5dc0e1ab0fde43d856"
+    },
+    {
+      "path": "tests/sts-attack-presentation.test.js",
+      "sha256": "1c8858b9b2e0c5a7cb3ae04d90733769b77977bcb0f60daeeb9db457a1104697"
+    },
+    {
+      "path": "tests/battle-trigger-lifecycle-unification.test.js",
+      "sha256": "be772c695f964aa0fac3b18309ecabc5f5918192cd3d53991fa38c92ab259abe"
+    },
+    {
+      "path": "tests/battle-victory-presentation.test.js",
+      "sha256": "7a9213def73e1478228ceb33628615f1c772a8c61e41543ac12890d1a5472e5f"
+    },
+    {
+      "path": "tests/battle-victory-progress.test.js",
+      "sha256": "957934984a372177ad151c8c3064691a83a9ac50eb86347a396cc76cf9a775ee"
+    },
+    {
+      "path": "tests/battle-hud-info.test.js",
+      "sha256": "538dc560badd1a98b301d68187d5800fb0bf7f88891bf6f4d4f7f444c17ad9d5"
+    },
+    {
+      "path": "tests/battle-pure-rules.test.js",
+      "sha256": "0338ac097261b88c991f9d5d7542b36e8a23d68d803bfd1ad42efec1a540a89e"
+    },
+    {
+      "path": "tests/card-description-text.test.js",
+      "sha256": "23a51ad85d64cec834183c06b4eecc3ff40d30aa3d29f07baff8f3d58a0707ad"
+    },
+    {
+      "path": "tests/sts2-structured-description.test.js",
+      "sha256": "e45fe2db050bf023aae3d01e267a65f2dabe0b8518607091f8b5c5ec2ce17ef3"
+    },
+    {
+      "path": "tests/term-tip-rule-copy.test.js",
+      "sha256": "54c54c124dd3333f272977f75d3f949fd899f6ac3ce8a4617130f21bc7ff9a22"
+    },
+    {
+      "path": "tests/term-tips-lifecycle.test.js",
+      "sha256": "c381f5a064c10b9f70010e7372e6cc519333f981d2e64bcd0764e0cd73de5358"
+    },
+    {
+      "path": "tests/compendium.test.js",
+      "sha256": "69cf404935f6fa862ad508c03f6be3121a2add87273a4a053920385eed6281b1"
+    },
+    {
+      "path": "tests/contracts.test.js",
+      "sha256": "7a11dd78116c5b8332ec4450158134d7490a8c70cc5cf575dbafd93ee1e4a499"
+    },
+    {
+      "path": "tests/architecture-boundaries.test.js",
+      "sha256": "aeec2708919b6aea817da8b0ddb1a7ca7e5d8583b4a6ea0c57f80f1fb1cd02cd"
+    },
+    {
+      "path": "tests/sts2-consumed-items.test.js",
+      "sha256": "e86675e7f1a40ca4a024813b065d087b59d1e3c2ee743f2fd7172a6bcbb5f2ab"
+    },
+    {
+      "path": "tests/potion-tip-lifecycle.test.js",
+      "sha256": "43ee8b8d759789b9157247d0c7ba14ea2301ac6ce5506329b3924d3698d8c728"
+    },
+    {
+      "path": "tests/potion-tip.test.js",
+      "sha256": "2a6a0b853f16977917a12908d6afb5eb099360f5d179f352a30ab5e27106fa92"
+    },
+    {
+      "path": "tests/restoration-potion-observation.test.js",
+      "sha256": "5c75a64e1d9ab493be0b40a51d86074eac63de81d413bb29aa455884919dd87b"
+    },
+    {
+      "path": "tests/runtime-asset-redundancy.test.js",
+      "sha256": "b0372262ac20ff69f2e6aa3d269a9a6a11c8c061ea6b36deb9171ea10603784f"
+    }
+  ],
+  "after": [
+    {
+      "path": "game/src/battle/bag/battle.bag.domain.js",
+      "sha256": "c6a9a8fc19935c37e7c17664f92c29414e56e4fa85ee0cfe0bd39f1ff2065c69"
+    },
+    {
+      "path": "game/src/battle/bag/battle.bag.js",
+      "sha256": "910698420e2923a01b71460e1c896057127f0b8860ba5ddbef074518daa36d08"
+    },
+    {
+      "path": "game/src/battle/bag/battle.consumed-pile.js",
+      "sha256": "e6289302a4dcd89b466e85662db1697cd0e26821cfbb50dcb4881e82dcf3bc1e"
+    },
+    {
+      "path": "game/src/battle/bag/battle.deck.factory.js",
+      "sha256": "5c169f444c8e14a7f472f30e8af756a45ac172a5a31c427c4d55f1d8f2890f68"
+    },
+    {
+      "path": "game/src/battle/bag/battle.deck.js",
+      "sha256": "01878fb9c9002911ac8b77fa8e7d1d6c63edebc4d9612cfdec21ca19daf9c31a"
+    },
+    {
+      "path": "game/src/battle/bag/battle.equipment.domain.js",
+      "sha256": "ccfb858fa01e1ebd7cc0e472bf55062f69cfa74801c79eedc0b17635741c9b37"
+    },
+    {
+      "path": "game/src/battle/bag/battle.equipment.js",
+      "sha256": "818b1541e2ae491d24d2f2975fb9856acc2aa805779827ce03110e11565db0b9"
+    },
+    {
+      "path": "game/src/battle/bag/battle.piles.js",
+      "sha256": "c73f6cdbce9f33ac4e0b975ef12e69edf0b0ebc9749a6097dff48ec6db515067"
+    },
+    {
+      "path": "game/src/battle/bag/battle.slam-skill.js",
+      "sha256": "ca246ff8b114a9bdeade027e94026b05e57fbcf4a73e0b4673d5371e665dbd86"
+    },
+    {
+      "path": "game/src/battle/battle-loader.js",
+      "sha256": "5c7259185a6112677098083627dd84d3c4205db75b749d5ebe4d869a1fc0bfc7"
+    },
+    {
+      "path": "game/src/battle/battle.play-submission.types.d.ts",
+      "sha256": "ea763bcf232d21df404f0f70fd434bf92c35dd1f39d1a793a109cf750fbe11ff"
+    },
+    {
+      "path": "game/src/battle/battle.snapshot.types.d.ts",
+      "sha256": "dd3b951ff2b7ef8fb270229804c645cb3c2f14bacd24a6639bce77fc3070826c"
+    },
+    {
+      "path": "game/src/battle/core/battle.actions.js",
+      "sha256": "006a741924d4fddb9bd5a1c3fc531a1bc2ffa62df4f44c6a1c0e528f105a02e9"
+    },
+    {
+      "path": "game/src/battle/core/battle.card-play.domain.js",
+      "sha256": "23a3f1f99ac7516143d11ec814a7876a2494dd3c955121e9d597de5dbb747723"
+    },
+    {
+      "path": "game/src/battle/core/battle.card-play.js",
+      "sha256": "64c581835cf175c4a934f8ca25df4f1413c4474f30135f77151cfe4fe591b22c"
+    },
+    {
+      "path": "game/src/battle/core/battle.card-presentation.js",
+      "sha256": "1266dc099382cf003a24414a13cb489f2f48ca08066d0e0ebf1f71d591f621d8"
+    },
+    {
+      "path": "game/src/battle/core/battle.core.js",
+      "sha256": "e10598b5bb102a7e18dfa7a2ec7a1777f3dc1f58ede4b32b5dee7ec9c50079b0"
+    },
+    {
+      "path": "game/src/battle/core/battle.damage.domain.js",
+      "sha256": "c7f5fcb2dc3121509e6a9c42542733ccd4ff86ce25717bcbaaa8fe374aec585e"
+    },
+    {
+      "path": "game/src/battle/core/battle.damage.js",
+      "sha256": "5d9b59804aa11372733192d259f8ca18abb608f79c92b90c1d13f3b916644e73"
+    },
+    {
+      "path": "game/src/battle/core/battle.default-context.js",
+      "sha256": "3ca6a13978eabc2f63925ae4aade992a8c6fc7d469ecc496cc508ab1d94b92ad"
+    },
+    {
+      "path": "game/src/battle/core/battle.draw.domain.js",
+      "sha256": "477c1718fa26f01f995e79b604c896f5eed206f38d9c5286ea17316db1fe2dbe"
+    },
+    {
+      "path": "game/src/battle/core/battle.draw.js",
+      "sha256": "81b1f82ec4f1f39974a6f9bb6617ee70d742c9fb086150633fd5f9bac3b280f1"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-intent.js",
+      "sha256": "50120bbc31490cd54d8274f5b64f191554ff477028ea62ab41c97cccd633d26f"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-phase.domain.js",
+      "sha256": "99ec8b42d9c7cec3796a6e19284e0ab47b7bd3e8b23e9385db39951aebda2fa3"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-phase.js",
+      "sha256": "db517fbf11305db83e61aaff041c5cb9748acac59d9972c86f579011da1fb39b"
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-plan.js",
+      "sha256": "e4fdd1eea0c388a9fa02a3773fdd440bf608a3d57a4a2447edf44a5cc18611e5"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.factory.domain.js",
+      "sha256": "ef0c3a1dcd11766bb278655944be66da47f28ada8764d501d2df2b4b7c60a3b8"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.factory.js",
+      "sha256": "62602b448250b3fd7fc2da0f3b0a05260900e437a453e47774c7ae7cfcc2f61c"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.instance.js",
+      "sha256": "f84ddbd78230ff50cdd41ecf492e341da2e3f069e968b4ccd9cee56c9edf0d8e"
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "sha256": "f6358359dd670cbf8c0c03c6c2daec35714e0db5dd32410a77f76d8eab36c833"
+    },
+    {
+      "path": "game/src/battle/core/battle.exec-play.domain.js",
+      "sha256": "64a056e4a7223a089bf3aecb6582e44952da5d534360846b10928fc884eec4cf"
+    },
+    {
+      "path": "game/src/battle/core/battle.exec-play.js",
+      "sha256": "1ace48417296584ec86fe349f091f6260e4a8fcb61a73a2d28aa3aff7033a6b4"
+    },
+    {
+      "path": "game/src/battle/core/battle.facts.js",
+      "sha256": "8a5989958c678f79e0d87ad698c88f575fc059e809be1144078a809eee06c1e4"
+    },
+    {
+      "path": "game/src/battle/core/battle.foe-lifecycle.domain.js",
+      "sha256": "235342d9b445a76a0eb8de4f2a8a5c75ef18dd9647a0dde05bb58de6baac0f01"
+    },
+    {
+      "path": "game/src/battle/core/battle.foe-lifecycle.js",
+      "sha256": "f6594436fe8b0f47bdcbc8a3a97df31a2f11fb52f570ef85698cebabc0139a0d"
+    },
+    {
+      "path": "game/src/battle/core/battle.hand-selection.js",
+      "sha256": "09a7d47356c8f34afe73eeb5095310f019037c998e1db53f855ef1c4397bc5e5"
+    },
+    {
+      "path": "game/src/battle/core/battle.hand.js",
+      "sha256": "5068fa6cb4369d1dad82395fe37d5b8818fb6ed849a41f3f2285dae056de40f2"
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.domain.js",
+      "sha256": "a678b97ca2bf25b47fe55a75893d46dacc6a763e25c389c5a109b054d9ce236d"
+    },
+    {
+      "path": "game/src/battle/core/battle.lifecycle.js",
+      "sha256": "b062965fdbfd895d4addddc0a44a050b6c3b41f037ada91121cf452f8ea592d4"
+    },
+    {
+      "path": "game/src/battle/core/battle.presentation-events.js",
+      "sha256": "0ae51dbc7bd64e3cdb1b6e2d395b0606212e47064e183ac0e635bfea29c2e5ec"
+    },
+    {
+      "path": "game/src/battle/core/battle.presentation.js",
+      "sha256": "753ca719e0b7f7daf6cc8271256ecef4335f3ae0adac705f53ee2e621a8d68ac"
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.domain.js",
+      "sha256": "a660b55f6f6b36adf5ae4adc0350559d450b9e3aa80533eb74ddb7e746eb91f9"
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.js",
+      "sha256": "7dbaf7825474870a44427e15f255eb7e7be112b6a9569ce418c97f2c99dcea11"
+    },
+    {
+      "path": "game/src/battle/core/battle.selection-flow.domain.js",
+      "sha256": "5514733cc97427b71ca455a489541b6c5d558ff43298be5d4e6cd2c2a6cd3da0"
+    },
+    {
+      "path": "game/src/battle/core/battle.selection-flow.js",
+      "sha256": "c2176939b267652b2068f27c09ffaf8c19300fed10d36950c6a28c78c10e3c32"
+    },
+    {
+      "path": "game/src/battle/core/battle.summary.factory.js",
+      "sha256": "e69f99ec0c304d229ae2463ca7eea91cdc8a832df14c7913db15538d046c41ad"
+    },
+    {
+      "path": "game/src/battle/core/battle.summary.js",
+      "sha256": "1c1655ef149def65131b76684a46f966ab98de0c12d41ce61d3b5ef93aab6238"
+    },
+    {
+      "path": "game/src/battle/core/battle.target-session.js",
+      "sha256": "156a3c6ecddfa1e11bd2aa4253bc47c99b0cea7fd9b507cac3232eb01387af9b"
+    },
+    {
+      "path": "game/src/battle/core/battle.turn-continuation.js",
+      "sha256": "f7ad35498366e3dca1d93b6e162cd3410ab5809663d4b7302080d0fae80e1408"
+    },
+    {
+      "path": "game/src/battle/core/battle.turn-start.js",
+      "sha256": "f913556f4372c4576259dbb23d1afe9440e0597fa083ead8a917d9008130eaba"
+    },
+    {
+      "path": "game/src/battle/core/combat.factory.js",
+      "sha256": "99f19619170739c3872175ba437772391d993536055cd147dc0639bfac723971"
+    },
+    {
+      "path": "game/src/battle/core/combat.js",
+      "sha256": "9a25d646390821fe1db591261664b3f1264cfc1a54ff927533e31e401da10099"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-cost.js",
+      "sha256": "c52c1a90a8f40aff64194fe40e32efaaef859526f7f3a9dc693e90bceeff266b"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-inspection.domain.js",
+      "sha256": "cf491ecc6dc621d13b2fa0efc4ee015be3d43f20adff2ca100435dc98e6e89ff"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-inspection.js",
+      "sha256": "1d6b3cec3e1efe260cc1c63d1ab37c07dbf0bb34f4769472ac796014d4510dff"
+    },
+    {
+      "path": "game/src/battle/effects/battle.cost-modifiers.js",
+      "sha256": "fee9617c8371713fd4487c96be56d36c6331ceeeb105e6103ac9cedcfb11f420"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-candidates.js",
+      "sha256": "0c6d781eb98dcdf9b89af3fbe6b966ae4f9dde84e404ab3be0ec228c0c33320c"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-flow.js",
+      "sha256": "cbfe819860cdfadd8f16de598209f4dcb85d07becff977cc19c69bff22426e61"
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-state.js",
+      "sha256": "03cd6fd3635d72ced2a0eb28ede8b85d069ce60f05a51c687bea216c1c304c89"
+    },
+    {
+      "path": "game/src/battle/effects/battle.effect-clauses.js",
+      "sha256": "37e70525644467b437fbf3b7402772fc5a4e9d769b58dcc1651fbf9c2a91987f"
+    },
+    {
+      "path": "game/src/battle/effects/battle.effects.js",
+      "sha256": "1b61d0ac1fa17f9f1dc7006601d9c80d269c17a752518d89081c4a97b443ed36"
+    },
+    {
+      "path": "game/src/battle/effects/battle.foe-fight.js",
+      "sha256": "ec5182edaff812e611ad8f5df1ebe3220317084a40c8f84a54d1f99cb230f8ce"
+    },
+    {
+      "path": "game/src/battle/effects/battle.hosted.js",
+      "sha256": "d14023c8edee05f6ea1d51b1493495329e8f8c9a1f6bfdfab0337a1c8fc3fa9b"
+    },
+    {
+      "path": "game/src/battle/effects/battle.infusion.domain.js",
+      "sha256": "e518833905085eecc55bd7a3f2243e2466f24e1833a5958a56dfd3a2805e3cde"
+    },
+    {
+      "path": "game/src/battle/effects/battle.infusion.js",
+      "sha256": "e4969a731f63720c1709fc21ead9f248fe0f4849985658785c6f6d247e860b63"
+    },
+    {
+      "path": "game/src/battle/effects/battle.rule-guard.js",
+      "sha256": "eb470d17caec469463148d7fd36924a633e4a91eb35e635aa645fcbd84ebba1c"
+    },
+    {
+      "path": "game/src/battle/effects/battle.target-rules.js",
+      "sha256": "5295566b01fd251a6429ffbad3c2322327a586fa9bbfea10cbb727f872066fea"
+    },
+    {
+      "path": "game/src/battle/effects/battle.trigger-source.js",
+      "sha256": "0b86af28d7616191b003e14d38af3fde037d679c4fd1b89293e224f36256aba5"
+    },
+    {
+      "path": "game/src/battle/effects/battle.triggers.m2.domain.js",
+      "sha256": "0871e494b581b8afa4ce933ba2d768085cf6134dc83f15ff21cb237cd3dca1d2"
+    },
+    {
+      "path": "game/src/battle/effects/battle.triggers.m2.js",
+      "sha256": "56934fbd357c96a89fe790dea432fbea044b3d9a9d0795548bd95644d8dd9e21"
+    },
+    {
+      "path": "game/src/battle/effects/card-semantic-operations.js",
+      "sha256": "1c561c273ea3d725abdab18a774e3f7bbdc0871bf632b94653f533efdaebaa70"
+    },
+    {
+      "path": "game/src/battle/effects/choice-semantic-operations.js",
+      "sha256": "078b81d86a873c191e5acec54cad6493ace83cea640e054be3d59feaa411c909"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.audit.js",
+      "sha256": "6d3a1ff8b2a3b8f84d46a7aafb4ad499871b0d1ae869aabeb9f961a7a9a0b3f4"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.ctx.js",
+      "sha256": "5e2d3354dc30fb32af9c85b798bee43fbd7d451d5aeb9ef79a37730db084f043"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.curse.js",
+      "sha256": "a3ef73a4e39122f7751a14e74f82e4196483ca412e2b2dd1e9d05ad51facd28e"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.damage.js",
+      "sha256": "4d4c6d9e8f4c029e3ce6e5b517c857d66835002355347900bddd4382a6c1c6aa"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.deck.js",
+      "sha256": "3a5cc87894786afd5ecdc294be5363da1d414551019920f1f2987d6e98cd7cc3"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.gates.js",
+      "sha256": "f6f801f0ed33baf49b80ac106e977c098bd5235e0a2ae41701d1d82b5e40756b"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.js",
+      "sha256": "d4a0bc83d4ed36423208c492e99e2fe8e7e44c5e6a0c183a1f478ad485add3f0"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.kills.js",
+      "sha256": "2175f9d1a323c1a479cf40ca4b37be2c46c40e095708634302498bffb2ac9da1"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m1.domain.js",
+      "sha256": "31435c70facd1ed3e2f873d9a8ec8fe30d39b5a8b77fd7a97579baf0a0fa5381"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m1.js",
+      "sha256": "2006a6b87856d008b5f9c436d2c0f523ce466d637007405731665201647d5ee8"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m2.domain.js",
+      "sha256": "fde0407949f5afa7afbb9292e39645fb03ebbd1c1daa4572fb03a40be0e374f6"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.m2.js",
+      "sha256": "8a8e515a85d690515221663fa277e02911867b57bd2898f5efe76bcd60fe07d1"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.recovery.js",
+      "sha256": "d393c86629afc2ddbcdfc7895f5e853347b13cc7b499eaca5e20c10745042416"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.rules.js",
+      "sha256": "d3a65b037ab591f5cf73a5f7d173f29d17c0bee57f5011b779371d48f83ea973"
+    },
+    {
+      "path": "game/src/battle/effects/effect-steps.tail.js",
+      "sha256": "1c767d3a1c64e37567f46ba789c25fcbc6e82df127c9464281acaadea05ed1d6"
+    },
+    {
+      "path": "game/src/battle/effects/effect-verbs.js",
+      "sha256": "29451927929a9da9d8a3d60cca51a5b606b9bea5f978d2a0e4ec8f39698ce27b"
+    },
+    {
+      "path": "game/src/battle/effects/equipment-semantic-operations.js",
+      "sha256": "fb796f8aa2fff965f3c84d9525a201a5fc551b48f27ba250117ee3d9819f7080"
+    },
+    {
+      "path": "game/src/battle/effects/hand-cost-patterns.js",
+      "sha256": "a7a0a6bee19c9118a3b2f17ecb4b8f2062ee220cbe28deee67b57a512619b4c6"
+    },
+    {
+      "path": "game/src/battle/effects/hosted-catalog-index.js",
+      "sha256": "f09545cf3da650239553f5d30e9855924ce44d393a536d65088febd723c382bb"
+    },
+    {
+      "path": "game/src/battle/effects/random-blessings.js",
+      "sha256": "5c16d1ce8c608f1890ff440d3c88e16b7242267fbf38798ccd27ed2d09658b61"
+    },
+    {
+      "path": "game/src/battle/effects/requested-card-batch.js",
+      "sha256": "380293272668791dbcbab127914049e5cd3a71dadecb249c39d60c8666083690"
+    },
+    {
+      "path": "game/src/battle/effects/requested-card-runtime.domain.js",
+      "sha256": "eaec78b0ac8b7cbca14ab960c168d7bb13f74f779a455eae5dc20a4aecc3c2c4"
+    },
+    {
+      "path": "game/src/battle/effects/requested-card-runtime.js",
+      "sha256": "d9faeb6e22f449ef8a361993630f89efc605b51d410b1dd60c1d6450b8a8226e"
+    },
+    {
+      "path": "game/src/battle/runes.js",
+      "sha256": "1f3374f9e5065081f0e289cdf330d708897890975f74629d09b0b1f8b12d4656"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.action-runner.js",
+      "sha256": "f83f9de71fa9792fef5519c88fd91b4bb924f001f2616866549e4bbe8fcf746e"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.browser-presentation.js",
+      "sha256": "3bba6c68691474c30d37e206087a5faf40749358609a26c47424c878e43360ae"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.clock.js",
+      "sha256": "4cf28cc500a6eefba06d8aec960f8673e2396760d54d68db7aed2c7db78709a5"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.execution-session.js",
+      "sha256": "b31f85d90a294802ac90b67249f56b18c1f15fb7bd77b945c69ab343c6101fe1"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.host-scheduling.js",
+      "sha256": "7c00b0ea7c803c52dbef713c52c7b54e71d481fda767fc814d4b0947019f44b7"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.pace.js",
+      "sha256": "ed4a0471a09561a605dbac9d16f60451ef8b1a3b88ab9594e3cb39d8ab3b3feb"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.playback.js",
+      "sha256": "d21cbdefcda0e71da7265ff9d6e827f8eccc16de628f89a2ac1a144af79f1a2c"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.player-effects.js",
+      "sha256": "c2379d52da773de9a695df09ffffa10ac10f94ac9d59563dabd1fecb9d252515"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.presentation-ports.js",
+      "sha256": "650b02d1682575c6912b7799b6f91e62349d75a12a3a3fc677ec801d1751891e"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.default.js",
+      "sha256": "34ac56db1a48ca21f1721e92eb54e45c5942642d84eae19346733fe3db8e6a89"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.effects.js",
+      "sha256": "018d74bfc92116d6c36377a85a9c406abfd19606e93a6d45540edf3b624f3524"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.factory.js",
+      "sha256": "637efeee823c17cae85c58924f58de9a8091de54701c4b7b01661f4ef3150fe6"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.interaction.js",
+      "sha256": "83247c6da29c41b063c82e391f1a752f5410f2a61eced8557c4c36e860f2bec7"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.js",
+      "sha256": "bed419162b81a2b54a32484e8963e32f7dc7a37fa5283b61eb8d61dd6a539632"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.piles.js",
+      "sha256": "02322d2e60986e7dce3c50e4fed94f1ad3952092f167cbb932b914e07b6d61cf"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.presentation.js",
+      "sha256": "9941e3c54db25af269100dd1d8bc673f2117a229ff074fb8528db16550253aaf"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.runtime.session.js",
+      "sha256": "9e75fa70bedf2a64b13b872c9fade3578698130d6e469c02a21caf54bbb1d727"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.snapshot.js",
+      "sha256": "1ee689ddcb297a37a15a8e3bb403bf50105a41710b7e4f71e794becd87c18bb3"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.staged-playback.js",
+      "sha256": "a4081e94583c905a5182e6b9cfc3991e791e66604c004684f386665684b3622b"
+    },
+    {
+      "path": "game/src/battle/runtime/battle.state.js",
+      "sha256": "14c3b2edda788adf278460e9fbd7dcb327c5094eb88938f04331bd1cf7a379d5"
+    },
+    {
+      "path": "game/src/battle/view/battle.action-timing.js",
+      "sha256": "7111c2945f2477def3f1debfdc2db025728b409cb77ae22a32ddf123cfcfe244"
+    },
+    {
+      "path": "game/src/battle/view/battle.aim.js",
+      "sha256": "c27e19db922c9bb206121eadf938e95b320206f6968ef82c287085349649c055"
+    },
+    {
+      "path": "game/src/battle/view/battle.anim.view.js",
+      "sha256": "9fa10ba1fa0217d40610a8452bbdee65803915f917fa540ec99636f3fa1568ff"
+    },
+    {
+      "path": "game/src/battle/view/battle.attack-cues.js",
+      "sha256": "d403fe88d4b3b20ed4668ced1ec7c21a0742c9b675680295207eccef0d3c6bb2"
+    },
+    {
+      "path": "game/src/battle/view/battle.attack-profiles.js",
+      "sha256": "4b30b93f9c7f666b5f7bcb66172ccbc38b9b0aeb319eff900eb7a40874416252"
+    },
+    {
+      "path": "game/src/battle/view/battle.card-feedback.js",
+      "sha256": "3c2ddf7b9b11757553834f17183aebe8568182027da3f49e3f09db9917a377d4"
+    },
+    {
+      "path": "game/src/battle/view/battle.card-results.js",
+      "sha256": "5fba4d156e072c064d1784bd613eb31f3409cc6de1b3ffc8b4c4a2a21e72c03d"
+    },
+    {
+      "path": "game/src/battle/view/battle.decision-content.js",
+      "sha256": "f04a4e1da28531d2a4bec861eb27a37c84d8ff7fa3f2452d6e7b3f17bbf1613c"
+    },
+    {
+      "path": "game/src/battle/view/battle.decision-shell.js",
+      "sha256": "345754cee320f49eb7b8aa370da1ceb0016ca2d7749dcf6ff289c12209eb834b"
+    },
+    {
+      "path": "game/src/battle/view/battle.discover-infusion.js",
+      "sha256": "aebe78417b4f0440597d6814a62ddf2f4bca2581458a6d0bac45abc433b7b116"
+    },
+    {
+      "path": "game/src/battle/view/battle.discover-input.js",
+      "sha256": "f2e7be6119fbbf22e61efd4f2426afea6c0359fd816d96fe77fdaf0eb4b03bda"
+    },
+    {
+      "path": "game/src/battle/view/battle.discover-view.js",
+      "sha256": "c7d8fa820a4ac04cf9450b874a978fbdb29d2abeac788e0ec041572bc7799447"
+    },
+    {
+      "path": "game/src/battle/view/battle.effect-feedback.js",
+      "sha256": "2595dfb2074e829e92fa63c41eeb00dd4eaf8d2d36ea57c37cdf03846b95c11a"
+    },
+    {
+      "path": "game/src/battle/view/battle.enemy-motion.js",
+      "sha256": "4ecc4b8e9e8c28e7f0ad76e44b1f2d92ae55078bce4280634220bb79f6837903"
+    },
+    {
+      "path": "game/src/battle/view/battle.feedback.js",
+      "sha256": "81057fdaa8daf3b8e8256a4e1880d8435954881fc049028931a466ad2416225b"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-assets.js",
+      "sha256": "57771c894feae0623bbb3e0192fcb10dd59bce97062326ea6234949ca86ebaf0"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-catalog-changwuyu.js",
+      "sha256": "774594287f6417bf0ffba60f77817ffc7dff42d5d78f937f6c13c72973a4a77d"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-catalog-three-role.js",
+      "sha256": "bc574a322120f650d20de25ec7649a7fa3643202c9cb97e04ef8f35fee60eb98"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-catalog.js",
+      "sha256": "7396a3a49f206d63e16e5ed8bab02d4d5fbd39e7ef934c354f1dc0fcda756bd0"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-renderer.js",
+      "sha256": "cb4e7df684da0635e6fb38b11b1dbb366e8f8e2313cb3c0c086963ef336b9196"
+    },
+    {
+      "path": "game/src/battle/view/battle.frame-resolution.js",
+      "sha256": "2008651e613843ac2dbef5133ddef92c99df7e96afc20de07da6cab517c7208d"
+    },
+    {
+      "path": "game/src/battle/view/battle.frames-diagnostic-policy.js",
+      "sha256": "4925f024ebc7f313fd3491a7d3faa7d5f9bce4de2aa64216b608dd21ada38200"
+    },
+    {
+      "path": "game/src/battle/view/battle.frames.js",
+      "sha256": "53a3174b4255079909149aeca0dbbfd0a52d3e03cde94ca526d5786781d69a4e"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-hit.js",
+      "sha256": "294f65ee0628931bbdddd42e60ca6b27e122374d407709d9e70b19f6b0daaaa3"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-inspector.js",
+      "sha256": "4b7ad2e22a79ae26a9696348d1f8b405756229c5d55837ebcdc57e0485b5453d"
+    },
+    {
+      "path": "game/src/battle/view/battle.hand-layout.js",
+      "sha256": "0dc3d1828946a16113e5410deda60eaf74f70aa31c758ac6d8f8445dea72d795"
+    },
+    {
+      "path": "game/src/battle/view/battle.hover.js",
+      "sha256": "00f93ca719835a11a83529a439655d905774f5a5cc078e06feff43ac7d1e0340"
+    },
+    {
+      "path": "game/src/battle/view/battle.infusion-material-state.js",
+      "sha256": "3a002f792baaeb59b859ebb6ca3367aa3d189b268f55193c878194da6ce64c6a"
+    },
+    {
+      "path": "game/src/battle/view/battle.infusion-view.js",
+      "sha256": "cabdeb5eb55c6b064f3ab1aff8cf96c1925ca4d3087106f6d17015ca13a564a7"
+    },
+    {
+      "path": "game/src/battle/view/battle.intent.view.js",
+      "sha256": "3f398eacc534379deab608e6e284734079076d99c41ee05917d3c2614f3664cb"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "sha256": "7477064e4630bbdb1909bf0cb482c0a83711ca4a2a6d6c6a58313f10f912c9ee"
+    },
+    {
+      "path": "game/src/battle/view/battle.overlays.js",
+      "sha256": "3e0124eeb808a3ce056509ddd8c3155ce139202b48a6b0c823459a2dbebe7373"
+    },
+    {
+      "path": "game/src/battle/view/battle.page-activity.js",
+      "sha256": "154310603799568c8eb18b4ce0924c0f830bf31e81923cffea5715049faef516"
+    },
+    {
+      "path": "game/src/battle/view/battle.piles.view.js",
+      "sha256": "d4bdaa4a89c0233c597b0718836147d3ba0072532e6ddfaabe3c9028d19bbfa3"
+    },
+    {
+      "path": "game/src/battle/view/battle.presentation-ready.js",
+      "sha256": "9354043cb6fda6cd830183698d0a922602f0f88379fb01c51ebbc3eaeba93abb"
+    },
+    {
+      "path": "game/src/battle/view/battle.preview.js",
+      "sha256": "0a708e8a2adb20cd9ec05336ab948988cbc5d4758ffa14b09858a54cb6fcc08d"
+    },
+    {
+      "path": "game/src/battle/view/battle.scenery.js",
+      "sha256": "bcbff054eb7c23c6a7336c868c5f2a0b2b14e6406628a7bd64a9349935b8172f"
+    },
+    {
+      "path": "game/src/battle/view/battle.secondary-overlay.js",
+      "sha256": "125e8a1d5d368f2f7d2da16c5af5705915ade1ee248ff2d5c124f08839018b70"
+    },
+    {
+      "path": "game/src/battle/view/battle.selection-ui.js",
+      "sha256": "ce775c07b21338017a47c7d39017aa29f7999793491dc089ea9f9824eac89bdf"
+    },
+    {
+      "path": "game/src/battle/view/battle.skill-view.js",
+      "sha256": "40ec8a918f745571cc01b58cea12925d804d325187387464fd611aa408c2b58b"
+    },
+    {
+      "path": "game/src/battle/view/battle.turn-feedback.js",
+      "sha256": "05c1e14b28ed54ad0d9724ac8d64d0dacb38ac173861cb6e3c6ede2414464604"
+    },
+    {
+      "path": "game/src/battle/view/battle.turn-forecast.js",
+      "sha256": "91d86a8288fee2588a422a604fe9d59309acd6ea40672bb5f60c886564e1579d"
+    },
+    {
+      "path": "game/src/battle/view/battle.vfx.js",
+      "sha256": "ef99883fdb2659f8e6e4506fed6e31fdd3c9b4355a6f5b6e7e84ab12f9dd6687"
+    },
+    {
+      "path": "game/src/battle/view/battle.victory.js",
+      "sha256": "9cbda1954939b744d1f8e44c8af4a260a867da898e9501e4e9131ba5c4f52b6a"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "sha256": "11abf8a89ce5bfba68cffa55cdf896cda7b823eeb35f36eb8fa7fedb975fdfd2"
+    },
+    {
+      "path": "tests/normal-starter-deck.test.js",
+      "sha256": "1ee2d830a9b5f05f5398b49dcad0c250d4fa08f6cb59ab8fa4a9a0989caaca32"
+    },
+    {
+      "path": "tests/normal-effects-deck-regression.test.js",
+      "sha256": "6360a120669826c16bf7357a78efc09e2718bb4123e1ef74258c0f6d2d254154"
+    },
+    {
+      "path": "tests/sts2-unified-consumed-pile.test.js",
+      "sha256": "879b4d9e1198c29d4d374143fbde69c1a6dbbb3fad598726df468d95ed769161"
+    },
+    {
+      "path": "tests/sts2-consumed-pile.test.js",
+      "sha256": "8e247a5a189eaf02f27efc1d29e28cfd379bfed4d9801ba4851c50533baca73a"
+    },
+    {
+      "path": "tests/battle-action-timing.test.js",
+      "sha256": "011033768a9e4089092a81045551626bae5436eded43061e5a17daa5a9f73a8c"
+    },
+    {
+      "path": "tests/battle-staged-timing.test.js",
+      "sha256": "a6a4bffa736dd0c62d4107cb4af49d94bec50963e133cf5dc0e1ab0fde43d856"
+    },
+    {
+      "path": "tests/sts-attack-presentation.test.js",
+      "sha256": "1c8858b9b2e0c5a7cb3ae04d90733769b77977bcb0f60daeeb9db457a1104697"
+    },
+    {
+      "path": "tests/battle-trigger-lifecycle-unification.test.js",
+      "sha256": "be772c695f964aa0fac3b18309ecabc5f5918192cd3d53991fa38c92ab259abe"
+    },
+    {
+      "path": "tests/battle-victory-presentation.test.js",
+      "sha256": "7a9213def73e1478228ceb33628615f1c772a8c61e41543ac12890d1a5472e5f"
+    },
+    {
+      "path": "tests/battle-victory-progress.test.js",
+      "sha256": "957934984a372177ad151c8c3064691a83a9ac50eb86347a396cc76cf9a775ee"
+    },
+    {
+      "path": "tests/battle-hud-info.test.js",
+      "sha256": "538dc560badd1a98b301d68187d5800fb0bf7f88891bf6f4d4f7f444c17ad9d5"
+    },
+    {
+      "path": "tests/battle-pure-rules.test.js",
+      "sha256": "0338ac097261b88c991f9d5d7542b36e8a23d68d803bfd1ad42efec1a540a89e"
+    },
+    {
+      "path": "tests/card-description-text.test.js",
+      "sha256": "23a51ad85d64cec834183c06b4eecc3ff40d30aa3d29f07baff8f3d58a0707ad"
+    },
+    {
+      "path": "tests/sts2-structured-description.test.js",
+      "sha256": "e45fe2db050bf023aae3d01e267a65f2dabe0b8518607091f8b5c5ec2ce17ef3"
+    },
+    {
+      "path": "tests/term-tip-rule-copy.test.js",
+      "sha256": "54c54c124dd3333f272977f75d3f949fd899f6ac3ce8a4617130f21bc7ff9a22"
+    },
+    {
+      "path": "tests/term-tips-lifecycle.test.js",
+      "sha256": "c381f5a064c10b9f70010e7372e6cc519333f981d2e64bcd0764e0cd73de5358"
+    },
+    {
+      "path": "tests/compendium.test.js",
+      "sha256": "69cf404935f6fa862ad508c03f6be3121a2add87273a4a053920385eed6281b1"
+    },
+    {
+      "path": "tests/contracts.test.js",
+      "sha256": "7a11dd78116c5b8332ec4450158134d7490a8c70cc5cf575dbafd93ee1e4a499"
+    },
+    {
+      "path": "tests/architecture-boundaries.test.js",
+      "sha256": "aeec2708919b6aea817da8b0ddb1a7ca7e5d8583b4a6ea0c57f80f1fb1cd02cd"
+    },
+    {
+      "path": "tests/sts2-consumed-items.test.js",
+      "sha256": "e86675e7f1a40ca4a024813b065d087b59d1e3c2ee743f2fd7172a6bcbb5f2ab"
+    },
+    {
+      "path": "tests/potion-tip-lifecycle.test.js",
+      "sha256": "43ee8b8d759789b9157247d0c7ba14ea2301ac6ce5506329b3924d3698d8c728"
+    },
+    {
+      "path": "tests/potion-tip.test.js",
+      "sha256": "2a6a0b853f16977917a12908d6afb5eb099360f5d179f352a30ab5e27106fa92"
+    },
+    {
+      "path": "tests/restoration-potion-observation.test.js",
+      "sha256": "5c75a64e1d9ab493be0b40a51d86074eac63de81d413bb29aa455884919dd87b"
+    },
+    {
+      "path": "tests/runtime-asset-redundancy.test.js",
+      "sha256": "b0372262ac20ff69f2e6aa3d269a9a6a11c8c061ea6b36deb9171ea10603784f"
+    }
+  ],
+  "changedDuringRun": []
+}

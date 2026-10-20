@@ -114,15 +114,24 @@ describe('寻宝图真实 BattleSession 主动技能', () => {
     expect(after.drawPile).toHaveLength(0);
   });
 
-  it('普通战仍禁止牌库词条，拒绝装备且不消耗手牌或能量', async () => {
+  it('普通战可装备寻宝图，并从本场99张实体牌库抽牌', async () => {
     await start(false);
     const before = BattleSession.getSnapshot();
-    expect(engine.unplayableReason(engine.findCard('equip-0').card)).toContain('牌库');
+    expect(engine.unplayableReason(engine.findCard('equip-0').card)).toBeNull();
     BattleSession.commands.playCard('equip-0', 'self');
+    const worn = await idle();
+    expect(worn.hand).toEqual(before.hand.filter(uid => uid !== 'equip-0'));
+    expect(worn.equipped.map(entry => entry.uid)).toEqual(['equip-0']);
+    BattleSession.commands.useEquipSkill('equip-0');
     const after = await idle();
-    expect(after.hand).toEqual(before.hand);
+    const gained = after.hand.filter(uid => !worn.hand.includes(uid));
+    expect(gained).toHaveLength(1);
+    const box = piles.granted.find(entry => entry.card.id === 'cmtn28jv33wx');
+    expect([...worn.drawPile, box.uid]).toContain(gained[0]);
+    expect(after.drawPile).toHaveLength(worn.drawPile.length);
+    expect(piles.granted.filter(entry => entry.uid.startsWith('normal-sha-'))).toHaveLength(99);
     expect(after.energy).toBe(before.energy);
-    expect(after.equipped).toEqual([]);
+    expect(after.equipped[0].used).toBe(true);
   });
 });
 
@@ -132,22 +141,24 @@ function skillHarness(card, run = async steps => { for (const step of steps) voi
   const synthetic = [];
   let pending;
   const runStagedSteps = vi.fn(run);
+  const queueBattleAction = vi.fn(execute => { pending = Promise.resolve().then(() => execute(new AbortController().signal)); });
   const equipment = createBattleEquipment({
     clearTargetSession() {}, requestBattleRender() {},
-    queueBattleAction(execute) { pending = Promise.resolve().then(() => execute(new AbortController().signal)); },
+    queueBattleAction,
     runStagedSteps, throwIfActionCancelled() {},
     *resolveCardSteps(value) { synthetic.push(value); assertCardRulesExecutable(value); yield value; },
     alive: () => [{ id: 'skill-target', hp: 100 }], sweepDead() {}, finish() {},
     processChoice() {}, processDiscoverQueue() {}, processHandSelect() {},
   });
-  return { worn, synthetic, runStagedSteps, use() { equipment.useEquipSkill(worn.uid); return pending; } };
+  return { worn, synthetic, runStagedSteps, queueBattleAction, use() { equipment.useEquipSkill(worn.uid); return pending; } };
 }
 
 describe('结构化装备主动技能共同合成边界', () => {
   it('全部正式结构化主动装备生成合法onPlay，不修改卡面字段或原规则', async () => {
     await start();
     const cards = Cards.all().filter(card => card.rules?.equip?.skill?.ops?.length);
-    expect(cards.map(card => card.id).sort()).toEqual(['tt2-treasuremap', 'tt3-holy-staff', 'tt3-light-mail', 'tt12-raygun'].sort());
+    expect(cards.map(card => card.id).sort()).toEqual(['tt2-treasuremap', 'tt3-holy-staff', 'tt3-light-mail', 'tt12-raygun',
+      'tt3-fate-wheel', 'tt3-crimson-pouch', 'tt3-reverse-bow', 'tt3eq-mistbox', 'tt7-naturestaff', 'tt13-magazine'].sort());
     for (const source of cards) {
       const card = structuredClone(source);
       const original = JSON.stringify(card);
@@ -179,8 +190,12 @@ describe('结构化装备主动技能共同合成边界', () => {
     const invalid = canonical('tt2-treasuremap');
     invalid.draw = 0;
     const harness = skillHarness(invalid);
-    await expect(harness.use()).rejects.toThrow('Invalid card rules');
+    // 全卡预检已前移到动作入队前；拒绝信息保留具体字段，且不创建失败动作。
+    expect(harness.use()).toBeUndefined();
+    expect(game.logs.some(line => line.includes('规则格式非法') && line.includes('draw'))).toBe(true);
     expect(harness.worn.used).toBe(false);
+    expect(harness.synthetic).toEqual([]);
+    expect(harness.queueBattleAction).not.toHaveBeenCalled();
     expect(harness.runStagedSteps).not.toHaveBeenCalled();
   });
 });

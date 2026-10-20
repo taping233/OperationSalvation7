@@ -17,7 +17,9 @@ import { traceRestoreStep } from '../core/flight-recorder.local.js';
 const SDT = window.SDT;
 const UI = window.SDT.UI;
 import { esc } from '../core/shared.js';
-import { RunStorage, SLOT_COUNT } from '../hub/game.storage.js';
+import { RunStorage, SLOT_COUNT, TX_KEY } from '../hub/game.storage.js';
+import { createDeparturePersistence } from '../hub/departure-persistence.js';
+import { planBaseDeparture } from '../hub/base-departure.commands.js';
 import { validateRunSave } from '../hub/run-save-validation.js';
 import { commitBaseAndRun, readSettlementReceipt, recoverSlot, recoverSlotIfPending } from '../hub/recovery.commands.js';
 import { validatePendingExtraction } from '../hub/extraction.commands.js';
@@ -80,13 +82,15 @@ let lastSaveConflictWarnAt = 0;
 let pendingBattleSettlement = null;
 // 只在同步装载期间收集原有保存调用；包括 enterLayer 间接触发的 saveGame。
 let loadPersistence = null;
+const loadPersistenceTasks = new WeakMap();
 
 function recordLoadPersistence(target, reason, ok, code) {
   if (!loadPersistence) return;
   const attempt = { target, reason, ok: ok === true };
   if (!attempt.ok && code) attempt.code = code;
   loadPersistence.attempts.push(attempt);
-  loadPersistence.status = loadPersistence.attempts.some(a => !a.ok) ? 'failed' : 'succeeded';
+  loadPersistence.status = loadPersistence.attempts.some(a => a.pending) ? 'pending'
+    : loadPersistence.attempts.some(a => !a.ok) ? 'failed' : 'succeeded';
 }
 
 function saveBaseForLoad(reason) {
@@ -94,6 +98,23 @@ function saveBaseForLoad(reason) {
 }
 
 function recordBaseSaveForLoad(reason, ok) {
+  if (ok && typeof ok.then === 'function') {
+    const context = loadPersistence;
+    if (!context) return ok;
+    const attempt = { target: 'base', reason, ok: null, pending: true };
+    context.attempts.push(attempt);
+    context.status = 'pending';
+    const task = Promise.resolve(ok).catch(() => false).then(saved => {
+      attempt.ok = saved === true;
+      delete attempt.pending;
+      if (!attempt.ok) attempt.code = 'BASE_SAVE_FAILED';
+      context.status = context.attempts.some(a => a.pending) ? 'pending'
+        : context.attempts.some(a => !a.ok) ? 'failed' : 'succeeded';
+      return attempt.ok;
+    });
+    loadPersistenceTasks.get(context)?.push(task);
+    return task;
+  }
   recordLoadPersistence('base', reason, ok, 'BASE_SAVE_FAILED');
   return ok;
 }
@@ -137,7 +158,7 @@ function migrateOldSave() {
 
 // 构造当前稳定点的唯一对局 payload。结算 pair 会直接提交它，因此此入口不
 // 同步时长、不调用 Base.save，也不写 RunStorage。
-function createRunSavePayload() {
+function createRunSavePayload({ freshRun = false } = {}) {
   assertZones();
   const identity = activeSlot ? RunStorage.readIdentity(activeSlot) : null;
   let snapshotResult = game.nestActive ? { ok: true, value: null } : createMapSnapshot({
@@ -179,7 +200,7 @@ function createRunSavePayload() {
     chestReward, nodeChestRewards,
     entrySupply: game.entrySupply || null,
     nodeRewards: game.nodeRewards || {},
-    runBattleStats: snapshotRunBattles(identity?.ok ? identity.value.runId : null),
+    runBattleStats: freshRun ? { version: 1, runId: null, fought: 0, won: 0, log: [] } : snapshotRunBattles(identity?.ok ? identity.value.runId : null),
     elapsed: game.elapsed,
     slot: activeSlot, savedAt: Date.now(),
     // 战斗中退出/关窗（beforeunload）：只写战斗入场检查点；读档从本场战斗开头重开
@@ -239,25 +260,41 @@ function saveGame() {
   return ok;
 }
 function syncPlayTime() {
-  if (!activeSlot || !SDT.Base.slot) return;
-  const result = SDT.Base.syncPlayTime(game.elapsed, game.elapsedSynced);
-  if (!result.changed) return;
-  game.elapsedSynced = result.checkpoint;
-  recordBaseSaveForLoad('play_time_sync', result.persisted);
+  if (!activeSlot || SDT.Base.slot !== activeSlot) return Promise.resolve({ changed: false, persisted: true });
+  const now = Math.max(0, Number(game.elapsed) || 0), previous = Math.max(0, Number(game.elapsedSynced) || 0);
+  if (!(now > previous)) return Promise.resolve({ changed: false, persisted: true });
+  // Reserve the checkpoint before waiting for the lock so overlapping saves never count the same seconds twice.
+  game.elapsedSynced = now;
+  const result = Promise.resolve(SDT.Base.syncPlayTime(now, previous));
+  recordBaseSaveForLoad('play_time_sync', result.then(value => !value.changed || value.persisted === true));
+  result.then(value => { if (value.persisted === false) UI.log('[[icon:cross]] 游玩时间尚未保存；本局内存进度保留，请重试保存', 'warn'); });
+  return result;
+}
+
+async function saveSession() {
+  const slot = activeSlot, seed = game.seed;
+  const runSaved = saveGame();
+  const checkpoints = await SDT.Base.flushWrites?.();
+  if (activeSlot !== slot || game.seed !== seed) return { ok: false, code: 'STALE_SLOT', message: '保存期间对局已变化' };
+  const baseSaved = !slot || await SDT.Base.save();
+  if (activeSlot !== slot || game.seed !== seed) return { ok: false, code: 'STALE_SLOT', message: '保存期间对局已变化' };
+  const baseFailed = !baseSaved || (!slot && checkpoints?.ok === false);
+  if (runSaved === false || baseFailed) return { ok: false, code: baseFailed ? 'BASE_SAVE_FAILED' : 'RUN_SAVE_FAILED', message: '部分进度尚未保存，请重试' };
+  return { ok: true };
 }
 
 // 删除仍是分离存储的顺序操作；明确报告部分完成，不回填或宣称跨键原子性。
-function clearSlot(i) {
+async function clearSlot(i) {
   if (!RunStorage.remove(i)) return { ok: false, slot: i, code: 'RUN_DELETE_FAILED',
     message: '对局删除未完整完成，基地数据未删除；请检查存储状态后重试' };
-  if (!SDT.Base.wipe(i)) return { ok: false, slot: i, code: 'BASE_DELETE_FAILED',
+  if (!await SDT.Base.wipe(i)) return { ok: false, slot: i, code: 'BASE_DELETE_FAILED',
     message: '对局已删除，基地数据未能删除；请检查存储状态后重试' };
   return { ok: true, slot: i };
 }
 function clearSave() { if (activeSlot) RunStorage.remove(activeSlot); }
-function clearAllSlots() {
+async function clearAllSlots() {
   const results = [];
-  for (let i = 1; i <= SLOT_COUNT; i++) results.push(clearSlot(i));
+  for (let i = 1; i <= SLOT_COUNT; i++) results.push(await clearSlot(i));
   return { ok: results.every(result => result.ok), results };
 }
 
@@ -290,14 +327,21 @@ function loadGame(slot) {
 
 function loadGameImpl(slot) {
   const persistence = { status: 'not_attempted', attempts: [] };
+  const tasks = [];
+  loadPersistenceTasks.set(persistence, tasks);
   const previous = loadPersistence;
   loadPersistence = persistence;
   try {
     const result = restoreGame(slot);
-    if (persistence.status === 'failed') {
-      UI.log(`[[icon:cross]] ${result.ok ? '对局已恢复，但恢复后的部分进度未保存' : '恢复过程中部分进度未保存'}，请勿将本次进入视为保存成功；请检查存储状态后重试保存`, 'warn');
-    }
-    return { ...result, persistence };
+    const restoredSeed = game.seed;
+    const pendingPersistence = Promise.all(tasks).then(() => {
+      if (persistence.status === 'failed') {
+        if (activeSlot === slot && game.seed === restoredSeed) UI.log(`[[icon:cross]] ${result.ok ? '对局已恢复，但恢复后的部分进度未保存' : '恢复过程中部分进度未保存'}，请勿将本次进入视为保存成功；请检查存储状态后重试保存`, 'warn');
+        return { ok: false, code: persistence.attempts.find(attempt => attempt.ok === false)?.code || 'SAVE_FAILED' };
+      }
+      return { ok: true };
+    });
+    return { ...result, persistence, pendingPersistence };
   } finally {
     loadPersistence = previous;
   }
@@ -379,9 +423,11 @@ function restoreGame(slot) {
   game.altarItemSacrificed = !!s.altarItemSacrificed;   // 祭坛道具献祭一次性锁（旧档无字段 → false）
   game.shopStocks = (s.shopStocks && typeof s.shopStocks === 'object') ? s.shopStocks : {};
   // 旧存档只有本局 elapsed：首次读取时按 max 语义迁入累计游玩时间。
-  const elapsedMigration = SDT.Base.migrateElapsed(game.elapsed);
-  if (elapsedMigration.changed) recordBaseSaveForLoad('elapsed_migration', elapsedMigration.persisted);
-  game.elapsedSynced = elapsedMigration.checkpoint;
+  if ((Number(SDT.Base.data.stats.playSeconds) || 0) < (Number(game.elapsed) || 0)) {
+    const elapsedMigration = Promise.resolve(SDT.Base.migrateElapsed(game.elapsed));
+    recordBaseSaveForLoad('elapsed_migration', elapsedMigration.then(value => !value.changed || value.persisted === true));
+  }
+  game.elapsedSynced = Number(game.elapsed) || 0;
   game.extractionPending = null;
   game.terminalPending = null;
   game.pendingExtraction = s.pendingExtraction || null;
@@ -447,7 +493,7 @@ function restoreGame(slot) {
 const menuController = createGameMenuController({
   SDT, UI, game, runtime, SLOT_COUNT, esc, readSlot, loadGame, clearSlot,
   hasRun, RunStorage, ensureBattleReady, recoverSlotIfPending, terminalCommands,
-  saveGame, syncPlayTime, clearSave, clearAllSlots,
+  saveGame, saveSession, syncPlayTime, clearSave, clearAllSlots,
   getActiveSlot: () => activeSlot, preflightRunMap,
   setActiveSlot: value => { activeSlot = value; },
   openDataPage,
@@ -461,7 +507,7 @@ const newUid = () => 'o' + Date.now().toString(36) +
 // 每局开始：固定携带 5 张初始牌「初始攻击」（同名堆叠）+ 1 张「火球」
 // brought=1：开局带入的卡（放弃对局时无条件丢失，v0.21 规则）
 // 2026-09-09 需求 #4 宠物加成：变形机器人 +2 张杀；火焰精灵把 5 张杀化为 5 张火球
-function grantStarterSha() {
+function grantStarterSha(log = (...args) => UI.log(...args)) {
   const pet = SDT.Base.carriedPet ? SDT.Base.carriedPet() : null;
   const effect = (pet && pet.effect) || {};
   const shaN = MAP.rules.starterSha + (effect.extraSha || 0);
@@ -471,38 +517,121 @@ function grantStarterSha() {
     for (let i = 0; i < shaN; i++) {
       game.ownedCards.push({ uid: newUid(), card: { ...fireball }, brought: 1 });
     }
-    UI.log(`[[icon:fire]] <b>火焰精灵</b>：起始背包中的 ${shaN} 张【初始攻击】化为 <b>${shaN} 张【火球】</b>`, 'ok');
+    log(`[[icon:fire]] <b>火焰精灵</b>：起始背包中的 ${shaN} 张【初始攻击】化为 <b>${shaN} 张【火球】</b>`, 'ok');
   } else {
     for (let i = 0; i < shaN; i++) {
       game.ownedCards.push({ uid: newUid(), card: { ...sha }, brought: 1 });
     }
-    if (effect.extraSha) UI.log(`[[icon:tools]] <b>变形机器人</b>：起始背包额外增加 <b>2 张【初始攻击】</b>（共 ${shaN} 张）`, 'ok');
+    if (effect.extraSha) log(`[[icon:tools]] <b>变形机器人</b>：起始背包额外增加 <b>2 张【初始攻击】</b>（共 ${shaN} 张）`, 'ok');
   }
   // 2026-09-16 留言：初始不发火球（火球改为衍生稀有度）
 }
 
-function newRun(mode, picks, options = {}) {
-  // Base 仓库出征卡与消耗区同属一次出征准备，必须在初始化局内状态或抽随机数前落盘。
-  // run 存档仍沿用既有生命周期；这里不宣称 Base 与 run 两个存储原子提交。
-  const departure = SDT.Base.prepareDeparture(picks);
-  if (!departure?.ok) {
-    UI.log('[[icon:cross]] 基地出征整备未保存，请重试；当前没有开始新局', 'warn');
-    return false;
-  }
+let pendingDeparture = null;
+let departureInFlight = null;
+
+function restoreDepartureState(state, random) {
+  for (const key of Object.keys(game)) if (!Object.hasOwn(state, key)) delete game[key];
+  Object.assign(game, state);
+  Random.restore(random);
+}
+
+function publishDeparture(candidate, options) {
+  restoreDepartureState(candidate.state, candidate.random);
   terminalGeneration++;
   resetRunCounters();
+  applyModeRules();
+  setLobby(false);
+  SDT.Sound.music('board');
+  UI.clearLog();
+  candidate.logs.forEach(args => UI.log(...args));
+  enterLayer(game.layerIdx, game.trackPos, { preserveBossPlan: true, deferSave: true });
+  if (!options.skipClassChoice) return runtime.openClassChoice();
+}
+
+function newRun(mode, picks, options = {}) {
+  const slot = activeSlot;
+  const seed = game.seed;
+  const originState = game.state, originPairs = game.discoveredPairs;
+  const current = () => activeSlot === slot && (slot == null || SDT.Base.slot === slot) && game.seed === seed &&
+    game.state === originState && game.discoveredPairs === originPairs && (!options.isCurrent || options.isCurrent());
+  const request = JSON.stringify([slot, mode, picks, !!options.skipClassChoice]);
+  if (departureInFlight) return departureInFlight.request === request ? departureInFlight.promise : Promise.resolve(false);
+  const persistence = slot ? createDeparturePersistence({
+    storage: globalThis.localStorage, baseApi: SDT.Base, runStore: RunStorage, txKey: TX_KEY,
+  }) : null;
+  const work = () => prepareNewRun(mode, picks, persistence, slot);
+  const promise = (persistence ? persistence.withLock(slot, current, work) : Promise.resolve(current() ? work() : false))
+    .then(result => {
+      if (!current()) return false;
+      if (result?.candidate) return publishDeparture(result.candidate, options);
+      if (result?.ok === false) UI.log(`[[icon:cross]] ${result.message}`, 'warn');
+      return false;
+    }).finally(() => { if (departureInFlight?.promise === promise) departureInFlight = null; });
+  departureInFlight = { request, promise };
+  return promise;
+}
+
+function prepareNewRun(mode, picks, persistence, slot) {
+  if (persistence) {
+    const pending = persistence.pending(slot);
+    if (!pending.ok) { UI.log(`[[icon:cross]] ${pending.message}`, 'warn'); return false; }
+    if (pending.value) {
+      const result = persistence.recover(slot);
+      if (!result.ok) { UI.log('[[icon:cross]] 出征存档尚未完成，请重试或重新进入档位继续恢复', 'warn'); return false; }
+      if (pendingDeparture?.slot === slot && pendingDeparture.runId === pending.value.runId) {
+        const candidate = pendingDeparture;
+        pendingDeparture = null;
+        return { candidate };
+      }
+      UI.log('[[icon:download]] 已恢复上次出征，请返回选档继续原对局', 'warn');
+      return false;
+    }
+  }
+  const prepared = persistence ? persistence.prepare(slot, picks) : null;
+  // Developer/test explorations have no slot: never debit an unrelated loaded Base slot.
+  const departure = persistence ? prepared.ok && prepared.value.departure : planBaseDeparture(SDT.Base.data, picks).departure;
+  if (!departure?.ok) {
+    UI.log(`[[icon:cross]] ${prepared?.message || '基地出征整备未保存，请重试；当前没有开始新局'}`, 'warn');
+    return false;
+  }
+  const before = { ...game }, random = Random.snapshot(), logs = [];
+  let candidate;
+  try {
+    initializeNewRun(mode, departure, (...args) => logs.push(args));
+    const payload = createRunSavePayload({ freshRun: true });
+    if (!payload) throw new Error('路线快照校验失败');
+    candidate = { slot, state: { ...game }, random: Random.snapshot(), logs };
+    restoreDepartureState(before, random);
+    if (persistence) {
+      const committed = persistence.commit(slot, prepared.value, payload);
+      if (!committed.result.ok) {
+        pendingDeparture = { ...candidate, runId: committed.runId };
+        UI.log('[[icon:cross]] 出征存档未完成，请重试；已开始的提交会从原出征继续恢复', 'warn');
+        return false;
+      }
+    }
+  } catch (error) {
+    restoreDepartureState(before, random);
+    UI.log(`[[icon:cross]] 出征未完成：${esc(error.message || '无法准备存档')}，请重试`, 'warn');
+    return false;
+  }
+  pendingDeparture = null;
+  return { candidate };
+}
+
+// Only constructs candidate state. Persistence and all page/audio effects belong to newRun.
+function initializeNewRun(mode, departure, log) {
   game.seed = Random.reseed();
   game.mapSeed = game.seed;
   game.encounterRotationVersion = 1;   // 仅新局启用同层编组轮换；旧档缺省继续原遭遇。
   buildNewRunDerived(game.mapSeed);
   game.mode = MODES[mode] ? mode : 'standard';
-  applyModeRules();
   game.runActive = true;    // v0.21：从这一刻起才写对局存档
   game.pendingExtraction = null;
   game.extractionPending = null;
   game.terminalPending = null;
   game.battleActive = false;   // 新开局必须与旧战斗会话切割（防旧战斗快照混入新档——2026-09-18 实测）
-  setLobby(false);          // 进入棋盘：恢复左侧栏
   game.inventory = [];
   game.ownedCards = [];
   game.shopStocks = {};   // 商店货架按局重置（D-1 防关门重刷）
@@ -535,12 +664,10 @@ function newRun(mode, picks, options = {}) {
   game.visited = {};   // 已结算过的一次性格（防回头路重刷战斗/宝箱/事件）
   game.seen = {};      // 战争迷雾：走过的节点 + 当前相邻节点可见，其余隐藏
   game.explored = {};   // 2026-10-03 老板（SYS-01）：首次踏入过的格（撤离经验只算首探量，防安全往返刷经验）
-  SDT.Sound.music('board');   // 出发：切入行军氛围
-  UI.clearLog();
-  UI.log(`欢迎来到<b>代号7</b>：本次玩法【<b>${modeCfg().name}</b>】——${modeCfg().ckpt}`, 'sys');
-  UI.log('点击相邻节点前进，落脚触发事件；层间闸门通往更深区域，终层可完成撤离', 'sys');
-  grantStarterSha();
-  UI.log(`[[icon:cards]] 随身携带初始牌【<b>初始攻击</b>】×${MAP.rules.starterSha}（不可入库 / 安全格）`, 'sys');   // 2026-09-16 留言「初始不给火球」：欢迎语去掉火球（已不再发放）
+  log(`欢迎来到<b>代号7</b>：本次玩法【<b>${modeCfg().name}</b>】——${modeCfg().ckpt}`, 'sys');
+  log('点击相邻节点前进，落脚触发事件；层间闸门通往更深区域，终层可完成撤离', 'sys');
+  grantStarterSha(log);
+  log(`[[icon:cards]] 随身携带初始牌【<b>初始攻击</b>】×${MAP.rules.starterSha}（不可入库 / 安全格）`, 'sys');   // 2026-09-16 留言「初始不给火球」：欢迎语去掉火球（已不再发放）
   let loaded = 0;
   for (const stack of departure.cards) {
     for (let i = 0; i < stack.count; i++) {
@@ -549,29 +676,28 @@ function newRun(mode, picks, options = {}) {
     loaded += stack.count;
   }
   for (const name of departure.rejectedClassNames) {
-    UI.log(`[[icon:cross]] 职业卡【${esc(name)}】无法带入对局（带出后留在仓库）`, 'warn');
+    log(`[[icon:cross]] 职业卡【${esc(name)}】无法带入对局（带出后留在仓库）`, 'warn');
   }
-  if (loaded) UI.log(`[[icon:archive]] 从基地仓库携带 <b>${loaded}</b> 张卡牌出征`, 'loot');
+  if (loaded) log(`[[icon:archive]] 从基地仓库携带 <b>${loaded}</b> 张卡牌出征`, 'loot');
   // 需求 #1：下一次出发后，基地消耗区清空（未复原的卡牌随之消散）
   if (departure.pocketCleared) {
-    UI.log(`[[icon:pocket]] 出发整理：基地消耗区已清空（${departure.dispersedPocketCount} 张未复原的卡牌消散了）`, 'dim');
+    log(`[[icon:pocket]] 出发整理：基地消耗区已清空（${departure.dispersedPocketCount} 张未复原的卡牌消散了）`, 'dim');
   }
   // 需求 #4：携带宠物「旺财」的生命上限 +5
   const pet = SDT.Base.carriedPet ? SDT.Base.carriedPet() : null;
   if (pet && pet.effect && pet.effect.maxHp) {
     game.maxHp += pet.effect.maxHp;
     game.hp += pet.effect.maxHp;
-    UI.log(`[[icon:paw]] 携带宠物<b>「${esc(pet.name)}」</b>：生命上限 +${pet.effect.maxHp}（${game.maxHp}）`, 'ok');
+    log(`[[icon:paw]] 携带宠物<b>「${esc(pet.name)}」</b>：生命上限 +${pet.effect.maxHp}（${game.maxHp}）`, 'ok');
   } else if (pet) {
-    UI.log(`[[icon:paw]] 携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc.replace(/^携带效果：/, ''))}`, 'ok');
+    log(`[[icon:paw]] 携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc.replace(/^携带效果：/, ''))}`, 'ok');
   }
   // Item 18（2026-09-16 老板定版）：储备币不进局——留在基地用于孵蛋与基地建设，
   // 局内币与基地储备币彻底分开（原「出发时全部随身带走」口径作废）
   // 四层图从第一层的多个入口之一开始；这是起点选择，不消耗行动力。
   const l1 = game.layerData[0];
   const startIdx = l1.entrances[Math.floor(Random.random('gameplay') * l1.entrances.length)] || 0;
-  enterLayer(0, startIdx);
-  if (!options.skipClassChoice) return runtime.openClassChoice();   // 从全部职业中选择 + 1 张随机职业卡（与 5 张初始攻击一起）
+  enterLayer(0, startIdx, { deferSave: true, deferPresentation: true });
 }
 
 // ---------- 进层 ----------
@@ -589,6 +715,7 @@ function enterLayer(li, atIdx, opts = null) {
   game.hop = 0;
   if (!opts?.preserveBossPlan) game.bossPlan = null;   // 真正进层重置；读档保留已恢复的首脑预案。
   game.state = 'idle';
+  if (opts?.deferPresentation) return;
   if (cam) {
     // Focus on the currently available choices; unexplored map bounds no longer shrink them.
     // 取景默认同步落定（开局/读档/测试都依赖同步终态）；穿门换层经 opts.glideCam 走镜头补间
@@ -611,4 +738,4 @@ export { MODES, modeCfg, scaledEnemy } from './game.session.modes.js';
 export { bagCap, cardStacks, safeCap, safeUsed, usedSlots, gainCoins } from './game.session.bag.js';
 export { buildDerived } from './game.session.map.js';
 export { markSeen, renderMiniMap } from './game.session.board.js';
-export { clearBattleSettlementPending, clearSave, createRunSavePayload, enterLayer, doDeath, exitToTitle, hasRun, loadGame, migrateOldSave, newRun, newUid, openDataPageUi, openLeaveMenu, openSettings, openSuggestionInbox, openTitleGuide, preflightRunMap, quitGame, saveGame, setBattleSettlementPending, setLobby, showTitle, startNewGame, syncPlayTime };
+export { clearBattleSettlementPending, clearSave, createRunSavePayload, enterLayer, doDeath, exitToTitle, hasRun, loadGame, migrateOldSave, newRun, newUid, openDataPageUi, openLeaveMenu, openSettings, openSuggestionInbox, openTitleGuide, preflightRunMap, quitGame, saveGame, saveSession, setBattleSettlementPending, setLobby, showTitle, startNewGame, syncPlayTime };

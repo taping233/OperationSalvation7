@@ -1,11 +1,13 @@
 import approvedBatch from './fixtures/approved-card-batch-20261020.json';
+import approvedNativeExecution from './fixtures/builtin-execution-approved-20261020.json';
+const withApprovedExecution = card => ({ ...card, ...approvedNativeExecution[card.id]?.fields, ...(approvedNativeExecution[card.id] ? { rules: approvedNativeExecution[card.id].rules } : {}) });
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { validateCardRules } from '../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
 import before from '../docs/evidence/e8-card-migration-2026-09-27/catalog-before.json';
 import { approvedRevisionBaseline, APPROVED_1018_PRODUCTION_REVISIONS, isApprovedLampArmorRemoval, RETIRED_1010 } from './helpers/card-catalog-approved-revisions.js';
-import { isApprovedBackupcellRename } from './helpers/e8-card-inventory.js';
+import { isApprovedBackupcellRevision } from './helpers/e8-card-inventory.js';
 
 const text = readFileSync('docs/M-BATCH-MATRIX.md', 'utf8');
 const targetIds = [...text.matchAll(/^\| ([a-z][\w-]+) \|/gm)].map(match => match[1]).filter(id => id !== 'id');
@@ -51,7 +53,7 @@ describe('M batch production boot', () => {
     expect(targetIds).toHaveLength(150);
     expect(new Set(targetIds).size).toBe(150);
     expect(excludedIds).toHaveLength(51);
-    expect(first).toHaveLength(281);
+    expect(first).toHaveLength(282);
     const missing = targetIds.filter(id => !RETIRED_1010.has(id) && !first.find(card => card.id === id)?.rules);
     console.info('M missing target rules', JSON.stringify(missing));
     expect(missing).toEqual([]);
@@ -65,28 +67,32 @@ describe('M batch production boot', () => {
   it('preserves every original ID and only changes explicitly migrated fields', () => {
     const old = currentBaseline.production.cards.map(row => row.card);
     expect(first.map(card => card.id).sort()).toEqual([...old, ...approvedBatch.additions].map(card => card.id).sort());
-    for (const card of approvedBatch.additions) expect(first.find(current => current.id === card.id)).toEqual(card);
+    for (const card of approvedBatch.additions) expect(first.find(current => current.id === card.id)).toEqual(withApprovedExecution(card));
     for (const previous of old) {
       const current = first.find(card => card.id === previous.id);
       if (previous.id === approvedBatch.flame.id) {
-        expect(current).toEqual(approvedBatch.flame);
+        expect(current).toEqual(withApprovedExecution(approvedBatch.flame));
         expect(previous.desc).toBe('本局对战中，法伤+1');
         continue;
       }
       if (previous.id === 'tt12-backupcell') {
-        expect(isApprovedBackupcellRename(previous, current)).toBe(true);
+        expect(isApprovedBackupcellRevision(previous, current)).toBe(true);
         continue;
       }
       const fields = Object.keys({ ...previous, ...current }).filter(key =>
         JSON.stringify(previous[key]) !== JSON.stringify(current[key]));
       if (previous.id === 'tt3-magic-lamp') expect(isApprovedLampArmorRemoval(previous, current)).toBe(true);
-      const allowed = previous.id === 'tt3-noon-duel' ? ['rules', 'dmg', 'dmgType']
+      const allowed = previous.id === 'tt3-dig-treasure' ? ['rules', 'desc']
+        : previous.id === 'tt3-noon-duel' ? ['rules', 'dmg', 'dmgType']
         : previous.id === 'tt3-mystery-potion' ? ['rules', 'desc']
         : previous.id === 'tt3-petal' ? ['rules', 'desc', 'heal']
         // 2026-10-02 老板拍板：自然形态→满月形态，转牧师职业卡（id 不变）。
         : previous.id === 'tt3-nature-form' ? ['rules', 'name', 'rarity', 'cls', 'unrandom']
         : previous.id === 'tt3-magic-lamp' ? ['rules', 'armor'] : ['rules'];
-      expect(fields.filter(key => !allowed.includes(key)), previous.id).toEqual([]);
+      const approvedFields = approvedNativeExecution[previous.id]?.fields || {};
+      for (const [key, value] of Object.entries(approvedFields)) expect(current[key], `${previous.id}.${key}`).toEqual(value);
+      expect(fields.filter(key => !allowed.includes(key) && !Object.hasOwn(approvedFields, key)), previous.id).toEqual([]);
+      if (previous.id === 'tt3-dig-treasure') expect(current.desc).toBe('从牌库底三张牌中发现1张牌，并获得等同于其价格的护甲。');
       if (excludedIds.includes(previous.id)) expect(current).toEqual(previous);
     }
   });
@@ -101,17 +107,15 @@ describe('M batch production boot', () => {
     for (const [id, field, , current] of APPROVED_1018_PRODUCTION_REVISIONS) {
       expect(first.find(card => card.id === id)[field], `${id}.${field}`).toBe(current);
     }
-    expect(first.find(card => card.id === 'cc-rot-seed').rules).toEqual({
-      version: 1, battle: { target: { side: 'enemy', area: false }, hosted: ['rot-seed'] },
-    });
+    expect(first.find(card => card.id === 'cc-rot-seed').rules).toEqual(approvedNativeExecution['cc-rot-seed'].rules);
   });
 
-  it('神秘药水文案只同步主动战斗与下回合时点，保留精确 M9 宿主', () => {
+  it('神秘药水文案只同步主动战斗与下回合时点，使用批准的延迟结构声明', () => {
     expect(currentBaseline.production.cards.find(row => row.id === 'tt3-mystery-potion').card.desc)
       .toBe('回合开始时：变成1张随机招式卡牌，使其费用为0。');
     const card = first.find(card => card.id === 'tt3-mystery-potion');
     expect(card.desc).toBe('仅战斗中使用。使用后，下回合开始时：变成1张随机招式卡牌，使其费用为0。');
-    expect(card.rules).toEqual({ version:1, battle:{ hosted:['mystery-potion'] } });
+    expect(card.rules).toEqual(approvedNativeExecution['tt3-mystery-potion'].rules);
   });
 
   it('repeated production initialization preserves every migrated rule', () => {

@@ -116,7 +116,7 @@ export function bindTradeShopV5({ root, ui, base, cards, goods, state, render, n
     notice(result?.msg || reasons[result?.why] || fallback, 'warn');
     redraw();
   };
-  const register = (name, handler) => ui.act(name, data => { if (live() && !busy) handler(data || {}); });
+  const register = (name, handler) => ui.act(name, data => { if (live() && !busy) return handler(data || {}); });
   register('tradeShopMode', data => {
     if (!['buy', 'sell'].includes(data.mode) || state.mode === data.mode) return;
     state.mode = data.mode; sound.tick?.(); redraw();
@@ -135,20 +135,23 @@ export function bindTradeShopV5({ root, ui, base, cards, goods, state, render, n
     state.sellKey = data.key; sound.tick?.(); redraw();
     // Selecting inventory only updates the detail pane.
   });
-  register('tradeShopBuy', () => {
+  register('tradeShopBuy', async () => {
     if (state.mode !== 'buy') return;
     const good = selectedGood(), blocked = purchaseBlock(base, cards, good);
     if (blocked) { failure(null, blocked); return; }
     busy = true;
     const card = good.material ? null : goodCard(cards, good);
-    const result = base.purchase({ price: good.price, material: good.material, card });
-    busy = false;
+    let result;
+    try { result = await base.purchase({ price: good.price, material: good.material, card }); }
+    catch { result = { ok:false, why:'save' }; }
+    finally { busy = false; }
+    if (!live()) return false;
     if (!result.ok) { failure(result, '商品暂不可购买'); return; }
     const name = good.material ? good.name : card.name;
     sound.ding?.(); notice(`购入${name} ×1 · 储备 −${good.price} 币`);
     ui.log?.(`[[icon:coin]] 购入【${esc(name)}】×1`, 'loot'); redraw();
   });
-  const sell = all => {
+  const sell = async all => {
     if (state.mode !== 'sell') return;
     const stack = currentStack();
     if (!stack || !sellableStack(base, stack)) { failure(null, '该卡牌不可出售'); return; }
@@ -169,8 +172,11 @@ export function bindTradeShopV5({ root, ui, base, cards, goods, state, render, n
       timer = setTimeout(disarm, 2600); return;
     }
     disarm(); busy = true;
-    const result = base.sellStashCards(stack.card.name, qty, state.sellKey);
-    busy = false;
+    let result;
+    try { result = await base.sellStashCards(stack.card.name, qty, state.sellKey); }
+    catch { result = { ok:false, why:'save' }; }
+    finally { busy = false; }
+    if (!live()) return false;
     if (!result.ok) { failure(result, '出售未完成'); return; }
     sound.ding?.(); notice(`出售${stack.card.name} ×${result.qty ?? qty} · 储备 +${result.coins ?? price * qty} 币`);
     ui.log?.(`[[icon:coin]] 已售出【${esc(stack.card.name)}】×${result.qty ?? qty}`, 'coin'); redraw();

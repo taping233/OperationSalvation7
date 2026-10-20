@@ -101,7 +101,7 @@ describe('结构化战斗出牌前规则', () => {
     expect(unplayableReasonFor({ ...seal, desc: '没有规则词语' }, 'boss')).toContain('封印之牌');
 
     const deck = { type: '法术', desc: '可以在牌库外打出', rules: { version: 1, battle: { requirements: [{ kind: 'deckOnly' }] } } };
-    expect(unplayableReasonFor(deck, 'normal')).toContain('牌库');
+    expect(unplayableReasonFor(deck, 'normal')).toBe(null);
     expect(unplayableReasonFor(deck, 'boss')).toBe(null);
     expect(unplayableReasonFor({ type: '能力卡', rules: { version: 1, battle: { requirements: [] } } }, 'normal')).toContain('能力卡');
 

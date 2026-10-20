@@ -130,6 +130,7 @@ function install(ui = window.SDT?.UI) {
       markEntry(kindFor(this, mode, currentBody), true);
     }
     overlay.dataset.uiMotion = kindFor(this, mode, currentBody);
+    overlay.dataset.uiShell = pageMotionProfile(currentBody)?.shell || 'surface';
     // Presentation semantics remain independent of the business mode/route.
     overlay.dataset.uiTransition = mode === 'bagpage' ? 'panel'
       : currentBody?.querySelector('.flow-transition') ? 'scene'
@@ -260,12 +261,10 @@ if (overlay) {
   link.dataset.interfaceMotion = '1';
   document.head.appendChild(link);
   document.body.classList.add('interface-motion');
-  // The old navigation gate must not stack another transition or toggle blur mid-reveal.
+  // 旧宿主安装中的闸门只清理一次；后续转场由当前控制器独占。
+  overlay.classList.remove('gate-live', 'gate-squeeze');
   new MutationObserver(() => {
     if (!overlay.dataset.uiMotion) return;
-    if (overlay.classList.contains('gate-live') || overlay.classList.contains('gate-squeeze')) {
-      overlay.classList.remove('gate-live', 'gate-squeeze');
-    }
     if (overlay.hidden) {
       clearArchiveMotion(overlay);
       clearSurface(overlay);
@@ -284,6 +283,7 @@ if (overlay) {
     // The first event can occur inside the original showOverlay before decoration is installed.
     const ui = window.SDT.UI;
     const body = document.getElementById('ovBody');
+    overlay.dataset.uiShell = pageMotionProfile(body)?.shell || 'surface';
     const restart = overlay.hidden || ui._lastMode !== event.detail || event.detail === 'page';
     markEntry(kindFor(ui, event.detail, body), restart);
     enterSurface(overlay, { restart, fast: overlay.dataset.uiMotion === 'fast' });

@@ -1,0 +1,21 @@
+diff --git a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/selection-before-agent.runner.js.txt b/game/src/agent/agent.runner.js
+index a19e19cd..0eace544 100644
+--- a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/selection-before-agent.runner.js.txt
++++ b/game/src/agent/agent.runner.js
+@@ -170,6 +170,16 @@ function dispatch(action, id) {
+       return out.code === 'ACTION_REJECTED' ? { ...out, code: 'MOVE_REJECTED', message: '目标不是合法相邻节点或当前不可移动' } : out;
+     }
+     case 'battle': {
++      if (action.name === 'pickHandSelect' || action.name === 'skipHandSelect') {
++        const selection = window.SDT?.Battle?.getSnapshot?.()?.handSelecting;
++        if (!selection) return { ok: false, id, code: 'HAND_SELECTION_STALE', message: '当前手牌选择已结束' };
++        if (action.name === 'pickHandSelect' && !selection.candidateUids?.includes(action.args[0])) {
++          return { ok: false, id, code: 'HAND_SELECTION_UNAVAILABLE', message: '该牌已不是当前合法候选' };
++        }
++        if (action.name === 'skipHandSelect' && selection.canCancel !== true) {
++          return { ok: false, id, code: 'HAND_SELECTION_MANDATORY', message: '当前手牌选择不能跳过' };
++        }
++      }
+       const cmd = window.SDT?.Battle?.commands?.[action.name];
+       if (typeof cmd !== 'function') return { ok: false, id, code: 'BATTLE_NOT_READY', message: '战斗模块未加载或命令不存在' };
+       const result = cmd(...action.args);

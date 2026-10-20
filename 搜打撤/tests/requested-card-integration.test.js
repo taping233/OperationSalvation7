@@ -71,6 +71,55 @@ afterEach(async () => {
 });
 
 describe('requested cards through real BattleSession', () => {
+  it('已有十三批播种标记的旧卡库也补入穷鬼套餐，重复初始化不增加副本', () => {
+    const original = Cards.all();
+    Cards.saveAll(original.filter(card => card.id !== 'tt13-poor-meal'));
+    localStorage.setItem('sdt-cards-tt13-v1-seeded', '1');
+    localStorage.removeItem('sdt-cards-poor-meal-v1-seeded');
+    Cards.ensureTabletop();
+    Cards.ensureTabletop();
+    const matches = Cards.all().filter(card => card.id === 'tt13-poor-meal');
+    expect(matches).toHaveLength(1);
+    expect(Cards.isRandomObtainable(matches[0])).toBe(true);
+  });
+
+  it('穷鬼套餐只在穿戴且手牌不超过三张时免除技能费用，并保留每回合一次', async () => {
+    await start(['tt13-poor-meal', 'starter-attack', 'starter-attack', 'starter-attack', 'starter-attack']);
+    expect(engine.slamSkill().cost).toBe(1);
+    await play('tt13-poor-meal');
+    expect(runtime.equipped.some(entry => entry.card.id === 'tt13-poor-meal')).toBe(true);
+    expect(runtime.hand.length).toBe(4);
+    expect(engine.slamSkill().cost).toBe(1);
+    const removed = runtime.hand.pop();
+    expect(engine.slamSkill()).toMatchObject({ cost: 0, used: false });
+    expect(engine.slamSkill().hint).toMatch(/^0 费/);
+    runtime.hand.push(removed);
+    expect(engine.slamSkill().cost).toBe(1);
+    runtime.hand.pop();
+    runtime.set$energy(0);
+    BattleSession.commands.beginSlamInteraction();
+    BattleSession.commands.resolveSlamInteraction(0);
+    await idle();
+    expect(runtime.energy).toBe(0);
+    expect(runtime.foes[0].hp).toBe(98);
+    expect(engine.slamSkill().used).toBe(true);
+    BattleSession.commands.beginSlamInteraction();
+    BattleSession.commands.resolveSlamInteraction(0);
+    await idle();
+    expect(runtime.foes[0].hp).toBe(98);
+    runtime.equipped.splice(0);
+    expect(engine.slamSkill().cost).toBe(1);
+  });
+
+  it.each(['侠客', '战士', '法师', '降临者', '牧师'])('穷鬼套餐适用于%s的技能，零手牌也免除费用', async cls => {
+    await start(['tt13-poor-meal']);
+    activeGame.myClass = cls;
+    expect(engine.slamSkill().cost).toBeGreaterThan(0);
+    await play('tt13-poor-meal');
+    expect(runtime.hand).toHaveLength(0);
+    expect(engine.slamSkill().cost).toBe(0);
+  });
+
   it('snipe deals fixed nine without attack or spell bonuses and no refund on survival', async () => {
     await start(['tt13-snipe']);
     activeGame.atk = 50; activeGame.spellPower = 50;

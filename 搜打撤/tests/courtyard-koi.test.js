@@ -138,3 +138,35 @@ describe('锦鲤连续画法与有界模拟', () => {
     expect(h.frames.clears).toBe(cleared); expect(h.frames.fills).toHaveLength(0); expect(h.frames.strokes).toHaveLength(0);
   });
 });
+
+
+describe('锦鲤单帧身体投影复用', () => {
+  it('九条鱼静态绘制的正弦调用从330降到141，绘制路径数保持不变', () => {
+    const h = canvasHarness();
+    const sin = vi.spyOn(Math, 'sin');
+    h.pond.render(0, false);
+    expect(sin).toHaveBeenCalledTimes(141);
+    expect(h.bodies()).toHaveLength(9);
+    expect(h.frames.fills.filter(fill => fill.style === 'rgba(40,66,65,0.16)')).toHaveLength(9);
+  });
+  it('左右轮廓仍等于原逐侧公式；阴影和本体共享当帧形状而不冻结后续姿态', () => {
+    const h = canvasHarness(1000, 600, { random: () => 0.5 });
+    h.pond.render(0, false);
+    const widths = [0.035, 0.087, 0.105, 0.086, 0.052, 0.023, 0.009];
+    const side = sign => widths.map((w, i) => {
+      const t = i / (widths.length - 1);
+      return { x: -t * 0.82, y: Math.sin(Math.PI - t * 2.8) * 0.032 * t * t + w * sign };
+    });
+    const points = [...side(-1), ...side(1).reverse()];
+    const expected = points.map((p, i) => {
+      const next = points[(i + 1) % points.length];
+      return [p.x, p.y, (p.x + next.x) / 2, (p.y + next.y) / 2];
+    });
+    expect(h.bodies()[0].path.filter(p => p.name === 'quadratic').map(p => p.values)).toEqual(expected);
+    const original = h.bodies()[0].path;
+    h.pond.render(0.05, true);
+    expect(h.bodies()[0].path).not.toEqual(original);
+    const shadows = h.frames.fills.filter(fill => fill.style === 'rgba(40,66,65,0.16)');
+    h.bodies().forEach((body, i) => expect(body.path.map(p => p.values)).toEqual(shadows[i].path.map(p => p.values)));
+  });
+});

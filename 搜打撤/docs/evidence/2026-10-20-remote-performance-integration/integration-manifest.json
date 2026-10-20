@@ -1,0 +1,855 @@
+{
+  "head": "6a489a11821bbf74c69bc7c048dff55bd52aecf3",
+  "remote": "edf391ba7a97e5ee7eddc873020bff0b4f9d16df",
+  "base": "ac550a333bb4f49a58e6bb08805327cfd367a12e",
+  "files": [
+    {
+      "path": "docs/achievement-gallery-rendering.md",
+      "status": "remote-only",
+      "inputSha256": "db9260a3ca0b8a23018cd6653099675d1c645d1596c8786eb5dcbe11d34d7ac5",
+      "outputSha256": "8c76225b99fbc5ae4ddd0fdd19f8fe6f8b94717b943f27faa54989099f2896ae"
+    },
+    {
+      "path": "docs/architecture.md",
+      "status": "auto-merged",
+      "inputSha256": "52b780589c0f1bb18e5a065d66fc3681bab43171ba0200901cea52d0a9aaa446",
+      "outputSha256": "e710609ec87184c25a7caeeb4802e242055c7a9b6f292f08faf595175c216bfe"
+    },
+    {
+      "path": "docs/archive-filter-selection.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "64a34d38794173f2ec608b1903753902c90e31461e81cc21b272608bcdc189c5"
+    },
+    {
+      "path": "docs/archive-progress-rendering.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "158126dc5d028bd142a3dd76773b3cbc4ca0db3f9214f10616973d0bab3e5328"
+    },
+    {
+      "path": "docs/card-browser-rendering.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "b22db40603747636501698c0e10212714010ec94d387af577480b7970c37b07b"
+    },
+    {
+      "path": "docs/cards/card-display.md",
+      "status": "remote-only",
+      "inputSha256": "ae74402eb8b618fb7e936dc832ce4a29ae146cbf49d148014e495172a1ebf34f",
+      "outputSha256": "8458854d693619817d6ba3709f19969afed6a5989512391e97ad7f909ce7a352"
+    },
+    {
+      "path": "docs/courtyard-koi-body-projection.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "a80fcbc107c2d6312e125d094c83f0641d1a775f855f79cd54841ba8f114ee39"
+    },
+    {
+      "path": "docs/development.md",
+      "status": "remote-only",
+      "inputSha256": "48e25f1bfcc495aab4a123a011c2278e1f0f860e27429dd0ca62b7cfba428413",
+      "outputSha256": "5c3f1f04cfb9210183a5cee8cf105550fc4db71fb3ca015319f4f87619cd16dc"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-achievement-detail-dismiss/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "96cb1c764d6f39026c58aad64385433c4de54110700ca4a08fc45e58cd2ab6b6"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-battle-query-performance/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "dbeb71aaab54fa248c47a59b8f2e4be2428e9d614f9d1443a14fa89f7a236548"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-battle-render-derivation/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "7bd43d75d1edbac4917a69b0678258347b4d59c5a5e9323939218134f23f8fc5"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-battle-render-derivation/cost.json",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "90a84a2fbf67d999170e715e692eb875f03d763c8239833cf1b536f36aabdf0f"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-candidate-regression-fixtures/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "89ba03bec3b99b36f53886a97b4c7de38cec44642847a84bfe2443019ed1d504"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-inventory-continuity/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "48244130c87f6cf9669e2494f47a793f8bf763f1dd79768f299d049999ed59ef"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-map-restore-copy-cost/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "38cfd26bfb41202f72656d89185041c4c50220788d74b8eb3e1f1e104d37be9c"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-map-restore-copy-cost/benchmark-results.json",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "633c700cff775f56d696e6482e5339552ae3f84ce4b97476a044c053be4948ef"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-map-restore-copy-cost/benchmark.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "ab5d489f5c3c82c8880ad17272e1e72fd624af43b806da4f5c402be4d31194e4"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-resource-presentation-perf/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "da4ff59da255a4cd71e65cc4fb8c267f56a98d1796cddc8fa4770ae6e0b68f53"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-resource-presentation-perf/cost.json",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "ee01bfb2593099eb258b798e5053b0bb2b73d253df84d4b23c9653359990e916"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-runtime-trace/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "d87ecb13cd70141ce5c35b539d6f110fd174de5e801b9ec690a0f02d29c6989e"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-settings-save-feedback/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "51cc07e76e67c452e47883878cf8b98797bef006e671533958124a477df48a89"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-status-preview/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "88a02f38cfc566db3cfaf576349ccaf5aedce8dc6d18ee716aaeb82a94a9a29a"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-transition-gate-lifetime/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "e93d94d0b5ab58599bf4983fbb72fdc79998da2544b18fa5d7937c794c2eb7f5"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-visible-card-face/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "2e91e368d36beadae89712ffe8b90c73299cd20d979fe81cba26a4425e48da62"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-visible-card-face/benchmark-harness.txt",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "f44263ca68912260f0eb3bddb0d5653b1f1d8c8079ab74de270f4d93553cddb0"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-visible-card-face/benchmark-run.log.txt",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "240eb87b9e7a2251cad0870bd50d18917c606a76f9c84ea594a906c7425c1eec"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-visible-card-face/benchmark.json",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "e00ea18e65d4a4d789e948de5b67f24c0fd322fa0fd3c6fac25deefd4081eaa7"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-visible-card-face/collection-before.txt",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "d7dc88c2b6c66bd4d09beae796b7f03f59c6a35f2db1e41dac2ac63f38c89638"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-visible-card-face/input-sha256.json",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "8f971a24329c740a9f7f14d3f7c55b08b47e3478a70570632091af864265b031"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-visible-card-face/personnel-before.txt",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "6d9f771f37aaa2b9f338439a1609e2a5060e75027a72a0fd8c7882682482d9ea"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-warehouse-window/README.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "a8934ecf632387bfb0a9e10f709b317d4c6deca772a67a28b201bd1ea6a33ff6"
+    },
+    {
+      "path": "docs/evidence/2026-10-20-warehouse-window/results.json",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "2b233f627a08ac9e1742ba7ead833aa2425c73aa2f8d4059209fdd30ee11a9ac"
+    },
+    {
+      "path": "docs/modules/R3-A-DELIVERY.md",
+      "status": "remote-only",
+      "inputSha256": "d0326e1a00c1048ce74c4ffdbbd7be676f1b7092ab2e27fc8aed5a0aa10e3984",
+      "outputSha256": "3a0519cf96056b0985ee08838cb10844b33eec16925ba5a802600f57c8f2f3df"
+    },
+    {
+      "path": "docs/performance.md",
+      "status": "remote-only",
+      "inputSha256": "3c4b0c1bf9a0c3cf1d3c8340bb540ab10fd8c7e00ad4a720c96866a86428f776",
+      "outputSha256": "56ebc51731436427e724d731908ae3d42758e67b5442c42a2d214272d4483e03"
+    },
+    {
+      "path": "docs/quality/overlay-mount-cost-20261020.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "f2f04d4c13c91c4aa99fa1102455086d45cc7e6a71826c47d186eaf83cd9360f"
+    },
+    {
+      "path": "docs/rules.md",
+      "status": "auto-merged",
+      "inputSha256": "61367d9cc2c91017283310ee0c92dcdf904c20a55e1ad37c0da30612bcbe0271",
+      "outputSha256": "882e8afc178e18efbc693aa5eaae3c80d09fbbee2d2e54d5e205e164b970d1c9"
+    },
+    {
+      "path": "docs/runtime-trace.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "c9d26b26136cd67581d7ddd9a3b416c49ebcc7440cd9085441408f9b19386c1b"
+    },
+    {
+      "path": "docs/save-format.md",
+      "status": "auto-merged",
+      "inputSha256": "acbaaafdba4973df2f22654b7808080105509322a23bc043d9ff9de8ff175429",
+      "outputSha256": "c5e78682a341dc0106d2070971039fe6b45c5bfe44dd159dd6d5197b37d2086d"
+    },
+    {
+      "path": "docs/settings-entry-stage-trace.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "0f33a3669629ba3056a8b26f6408785c6201c7b1d3cb28de2d3df8f2854be683"
+    },
+    {
+      "path": "docs/settings-mount-structure.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "82eaa72bc5301d4251aefab214792e9013dab032ca671cdbce1368d45822bec5"
+    },
+    {
+      "path": "docs/shop-detail-focus.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "33409264b3ff3e59bce43b1709588e5e5e91dbf017a5ce1b639610b5320390ca"
+    },
+    {
+      "path": "docs/single-reward-flow.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "429aa0101126c2792e6b42d28de5b8f4e5bccccf84399b9f2f674cf2b39ba277"
+    },
+    {
+      "path": "docs/warehouse-rendering.md",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "ebaa92c85bd1151e0996a2984fdc863873786bb16248fa025ebbae0f8b3044e7"
+    },
+    {
+      "path": "game/css/chest-opening.css",
+      "status": "remote-only",
+      "inputSha256": "f887f16a33efee6fb01232c28a1931cc85482c89050b75075f03c3967f529a45",
+      "outputSha256": "c85630875fd682d24b50c13f31803fd0f9ffff9dd6a6f3fb8f6687eb97adda2d"
+    },
+    {
+      "path": "game/css/chest-reward-overview.css",
+      "status": "remote-only",
+      "inputSha256": "ade2a90ed06f7e87c6c4571b6e5397f78aa314067b149312b8e1eff4bf36f2e7",
+      "outputSha256": "6520ed94c6503234b6e51b13703b79cdf86e039deafa6e49b1078baa24a3b52a"
+    },
+    {
+      "path": "game/css/overlays.css",
+      "status": "remote-only",
+      "inputSha256": "8c4054780dabe1c0d5f92e07f000827ebbfd6b8cab8b7b95aa69c31f79e285b9",
+      "outputSha256": "5c39daae42aa53b3d6bd7309896e1bf2181b8d209f38390fa4dd5e5a62dcbee1"
+    },
+    {
+      "path": "game/css/reward-completion-receipt.css",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "6e5ecf1d308f4995b733eda1bd6b0cdcb60395a2925adedb41195db1c521c85b"
+    },
+    {
+      "path": "game/css/title-achievements.css",
+      "status": "remote-only",
+      "inputSha256": "39bf8169417b6d74aace905e3426fcfe530e50bac1f520c21aa3b813109f7d68",
+      "outputSha256": "04872641102ac41d1085c4cf017ca7cc3558d2b250b9234c818efffa2ff6d91b"
+    },
+    {
+      "path": "game/src/battle/core/battle.hand.js",
+      "status": "remote-only",
+      "inputSha256": "e504d8a3af63313915d00617d1a524ae773953c25270873ed7bfd7f45b63777a",
+      "outputSha256": "5068fa6cb4369d1dad82395fe37d5b8818fb6ed849a41f3f2285dae056de40f2"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-cost.js",
+      "status": "remote-only",
+      "inputSha256": "383b45db0e8cfb69405cfb092e1e820c3c56a490428af4d27095efa649941cd1",
+      "outputSha256": "bed255434ce121b8e22a0706eba021eee0c4eed6bcdcf165e97ef08a97d30363"
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-inspection.js",
+      "status": "remote-only",
+      "inputSha256": "54921d61a705554d0aa44a3a41c9d19b7ffa0398d46216b5f8d0fc4cc4a97775",
+      "outputSha256": "e45d995c0437c3d60f60badc36f05721918e53a688f613be2faaddf6b9eb669a"
+    },
+    {
+      "path": "game/src/battle/view/battle.hover.js",
+      "status": "remote-only",
+      "inputSha256": "def25be83801d839aa1ac25614d1eae1bb369f9c84dca9811759faa2dba5e051",
+      "outputSha256": "00f93ca719835a11a83529a439655d905774f5a5cc078e06feff43ac7d1e0340"
+    },
+    {
+      "path": "game/src/battle/view/battle.layers.js",
+      "status": "remote-only",
+      "inputSha256": "91c6774633ae0dcaca7ca162b1188ba64e281ee3e3e8f0c15064ff6f0c660d3c",
+      "outputSha256": "655445b79bf2e4d1780cff3b6e91da05c49ebb0eaa9632e72f2cb7dccd662072"
+    },
+    {
+      "path": "game/src/battle/view/battle.preview.js",
+      "status": "remote-only",
+      "inputSha256": "a99bd5e8dcc2c8b78d050ba9d6f0dd3d8b197d9a51d600774d62ef1dfd9205c8",
+      "outputSha256": "e60a5cd8929b7e34326ed0f1873ad088d3765dce7a430ecf334ce8d9b6e50b41"
+    },
+    {
+      "path": "game/src/battle/view/battle.view.js",
+      "status": "remote-only",
+      "inputSha256": "18d7c0008091e611976dd88bff003add683109740b5b5acaf89c90b7a397ff03",
+      "outputSha256": "4d38852a27c72f200edbd43f21837d48d04b7f26c0ce3d063e107082c539a0ba"
+    },
+    {
+      "path": "game/src/cards/card-frame-presentation.js",
+      "status": "remote-only",
+      "inputSha256": "79ef8241faad2ed89bb1c19b6866f0e352ddd43e9498d1e0842e436335099d9a",
+      "outputSha256": "4a05cb2499db1ffa0b3ee20d18b30493f1d4df58edb58df4f6c632ccbc7dc196"
+    },
+    {
+      "path": "game/src/cards/cards.view.js",
+      "status": "remote-only",
+      "inputSha256": "00322cf4ad26ab184d0fa23dc57e5aa735581a39672022bddfa9007f7d0eb004",
+      "outputSha256": "e5d0e0c83911300b1c9db5a6e3145a589550099a42d8f89d7887792e5fa9c518"
+    },
+    {
+      "path": "game/src/core/asset-url.js",
+      "status": "remote-only",
+      "inputSha256": "5bbfcf5fd3b9a0f7a1a53779710786133c5c749f8f8a20d635f804699b6d207e",
+      "outputSha256": "9b9e28dfa50112e780a39dc66ee2765efab513190139b6b8f16ca185c36b1308"
+    },
+    {
+      "path": "game/src/core/performance-settings.js",
+      "status": "remote-only",
+      "inputSha256": "aa6676af0084910d15fecc744fabbb8f043463913707530f40a64b4431c7e607",
+      "outputSha256": "736b80fce4cac19c7e2e722775da048f175bef7d8dcffd0ce61cc9fafe501432"
+    },
+    {
+      "path": "game/src/core/runtime-trace-stages.local.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "0ba4cd9ef9fdd78b3a05ea33afe6abdaed6611fde37cee3fc09746970306f6ae"
+    },
+    {
+      "path": "game/src/core/runtime-trace.local.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "c347c939e4b6af0e1c67d357295d075f73b6abf6968e63d89ffaca4338d1364a"
+    },
+    {
+      "path": "game/src/game.boot.js",
+      "status": "remote-only",
+      "inputSha256": "407b4e68839a764bc784acc10082e9ff9b05564f4337e1999d21c0a599b91ac9",
+      "outputSha256": "deb55f0b7159aed08faae880c46e7c4c033a32f11a95577bf48c16b4d67da52e"
+    },
+    {
+      "path": "game/src/hub/bag-pane-view.js",
+      "status": "remote-only",
+      "inputSha256": "2f45ee252c9b8984963777b41943920af162d48e78296d0487ce30c3717cbc83",
+      "outputSha256": "a923e9cd089830c02ce828561c0d2857e8bb9ee117febd28327096f1fd4c4fb4"
+    },
+    {
+      "path": "game/src/hub/courtyard-vendor/KoiPond.js",
+      "status": "remote-only",
+      "inputSha256": "4bb4380f078ef862649a8668e567e9eaa6d70b48f63091fabca43dc9353ed565",
+      "outputSha256": "7000f06c716a8fb02df7fec600eb6ed0c746b94b13b57c77285a97c9eecc3267"
+    },
+    {
+      "path": "game/src/hub/game.bag.js",
+      "status": "auto-merged",
+      "inputSha256": "8d1bd3a7cc849e655af7819584bb74520207c1036d0a9b14cea9b2838cc045b1",
+      "outputSha256": "5548b1991bbacc50071f17c80ba92af0d54389389a5ea541e266bc286b0865d0"
+    },
+    {
+      "path": "game/src/hub/hub.archive-v3.js",
+      "status": "remote-only",
+      "inputSha256": "848f1eca823675bfe5c89ac6fff4b1b31392102e975790efc5fd840b0a04b10f",
+      "outputSha256": "d53e7ecf6a453d1a717a3fc9d087e315bdc5b41677a4ed2242dabd62fda4748a"
+    },
+    {
+      "path": "game/src/hub/hub.archive.js",
+      "status": "remote-only",
+      "inputSha256": "bb4db75bb2c02a828710bdda484b771c85bde59026fcdeeba11b44c94c79957b",
+      "outputSha256": "d550d56d71b59e0eefbb374050de915733fb032de83e49d3afe3e43645bf7ed3"
+    },
+    {
+      "path": "game/src/hub/hub.collection-v4.js",
+      "status": "remote-only",
+      "inputSha256": "a3ff69476b4dd8b6110cda51d33b702d26589cf737f38c4931b5b426fcb75c9f",
+      "outputSha256": "9d3be5ce6115276fa0a1ce7355d90b436e9aec18e298f22828f49ec9235504f9"
+    },
+    {
+      "path": "game/src/hub/hub.personnel.js",
+      "status": "remote-only",
+      "inputSha256": "6d9f771f37aaa2b9f338439a1609e2a5060e75027a72a0fd8c7882682482d9ea",
+      "outputSha256": "0feead0d3df274cd9b39056c2326946b7bd0f264e64d8b645886f4d538282a1e"
+    },
+    {
+      "path": "game/src/hub/hub.warehouse.js",
+      "status": "remote-only",
+      "inputSha256": "4ec83d978d84c45b79e53ddbf27cc223a2a4a1851ad3966f2cda5cd21cbb3fab",
+      "outputSha256": "384c6e4a34c1ab08b39bc5e075742a74416a5b09fb47d44cb2a625409baa2e8a"
+    },
+    {
+      "path": "game/src/run/chest-opening-art.js",
+      "status": "remote-only",
+      "inputSha256": "bfaefdc505ac5d57859922378d24019d6ddbd5616c4f63655f819ab2c9c25edf",
+      "outputSha256": "3b4a044da138b9beea05e1520c8da7dd3cf65962c773f325db996b8f3cf3ab09"
+    },
+    {
+      "path": "game/src/run/chests.js",
+      "status": "resolved-with-local-checkpoint-guards",
+      "inputSha256": "1e91d9b014c540708fca01c44dc6b8de2a04fc9e1b7df762ee7f46f08fd29c9d",
+      "outputSha256": "e88718eafbf1ef53ca4e208f4d3fdbec644f28708fde46ca7656dfac82388abc"
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "status": "auto-merged",
+      "inputSha256": "a72bd34fdd7f57381a75413200f8822c7a69e17dbe932d80c274998f4ecd164b",
+      "outputSha256": "9dfb464b5031c5227c526af83a8bcc1ff3adf81471fbbfcfa43239fc43969a80"
+    },
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "status": "resolved-both-additions",
+      "inputSha256": "aca832deebad865c0d66ae8ddecf9535e682e46c8243f87c0eb403c5c5912ec0",
+      "outputSha256": "5e4fd6efa10c451fc4487073e720b6aad13816dcadea3c2821b7e9a1241e7df7"
+    },
+    {
+      "path": "game/src/run/map-snapshot.js",
+      "status": "remote-only",
+      "inputSha256": "f90c34ed9322e43b31e540c99ce03382bcb4e41d69e2d10f26f81fc5b3d50f85",
+      "outputSha256": "21171385b55584f9f28d660f393902dba1b90eff6caa790255d4da02e8ac2877"
+    },
+    {
+      "path": "game/src/run/shop-browse-state.js",
+      "status": "remote-only",
+      "inputSha256": "1c97cdb090cb5d0ca316a1720d24022d3d57e00c0202aeb44a5102650a9cafc7",
+      "outputSha256": "a4f9c30a1aa03e9594500143220a767ac3b24abf5a65c33d150d909303bcf6eb"
+    },
+    {
+      "path": "game/src/ui/achievement-gallery.js",
+      "status": "remote-only",
+      "inputSha256": "075b405b2d99d0e4d7bf810d698abc4e406a853288e9a57ea91ccaeab6902ff5",
+      "outputSha256": "4e4fcddae101fde3eb55fc1c38504343b71edfcf43c18acfea141db71f3b2261"
+    },
+    {
+      "path": "game/src/ui/card-browser.js",
+      "status": "remote-only",
+      "inputSha256": "a564daa77db82e007a283d0f8b88ceae6301be121a51d62373c6be18f297ad8a",
+      "outputSha256": "bce746361f49010cfc3fc060f00c9e719ebca0f8b7b4afb95b6e3ae259ab0863"
+    },
+    {
+      "path": "game/src/ui/game.menu.js",
+      "status": "remote-only",
+      "inputSha256": "cea11326c01a46240c7f902d37a667d528589502fe743652145ffe7654573010",
+      "outputSha256": "a5ebd60111d4edd1c4ea99f6f051eddce4eb103265406f0021cb1b4144896045"
+    },
+    {
+      "path": "game/src/ui/game.menu.pages.js",
+      "status": "remote-only",
+      "inputSha256": "63142a3f9e1f4e025f7957e4b189c920784f04aec293a66ffb1d340e223e2a60",
+      "outputSha256": "b5a1c52bab264651e512b61598b5e63950fc30bdf65e2307d223bdd63e6ed826"
+    },
+    {
+      "path": "game/src/ui/overlay.js",
+      "status": "remote-only",
+      "inputSha256": "606aa36a40d7cbd44d54ca94595eae06071d867e1d5b875948fa3637054f866e",
+      "outputSha256": "24f461fb2a5d4cc21c92a2c3b66c2411b6cda8052be59020d65e538d4a78ce95"
+    },
+    {
+      "path": "game/src/ui/page-visual-ready.js",
+      "status": "remote-only",
+      "inputSha256": "f83438da1da930258293af42a9de2c4f4b6326c9e8be7b28b74d18d9dd110391",
+      "outputSha256": "5111c22e4290773e225ca797c2dfc34cf4227d58b48197ba04222607649e4569"
+    },
+    {
+      "path": "game/src/ui/performance-settings.js",
+      "status": "remote-only",
+      "inputSha256": "09fa319f4525c4943f3fb365f0d33b3764c56f5d7af5e37952962f708b03f043",
+      "outputSha256": "8a0ad30145cbd31ab1aaf72206102b2cfd738d18071092bd86c40e381de037eb"
+    },
+    {
+      "path": "game/src/ui/reward-card-feedback.js",
+      "status": "remote-only",
+      "inputSha256": "3161e576c826ca73aeb4444a34072b8364bd1b6ae72f7cdec860c4c5db82054c",
+      "outputSha256": "09ef4605ba9e811566852c37056ce001fd9b496416129df8a2d1debaf8b80989"
+    },
+    {
+      "path": "game/src/ui/reward-scene-view.js",
+      "status": "remote-only",
+      "inputSha256": "49dca84a117bfd3c11edbe2e6b596e280a2839f20f16fd9ba098be097aada4dc",
+      "outputSha256": "e86a1c36c5cd23766592e0fc0f2b7c294f26ba135f7e530c787204bf55c28b95"
+    },
+    {
+      "path": "game/src/ui/settings-navigation.js",
+      "status": "remote-only",
+      "inputSha256": "e6638baa9321afde310d68179c1dec4d8559084b497f175e6fe6b6885317caa5",
+      "outputSha256": "632d73ca8cc46fcbfecc06e829b202b6e2fe9fca0a9359f2c8f5fba1fda7d714"
+    },
+    {
+      "path": "game/src/ui/transitions-director.js",
+      "status": "remote-only",
+      "inputSha256": "32274d74704b15cacb146a0ed28e201ad4a932417bcc842601af68ba7e2b416b",
+      "outputSha256": "1ca62bc1a89c6f29222959dd05acccad49d8744467a80550de25fbc2a19e733c"
+    },
+    {
+      "path": "scripts/gate-plan.mjs",
+      "status": "remote-only",
+      "inputSha256": "bfffa3981dceecabe0a46e12d9e181d28e9191361e9ec67bbe501fd6319c9147",
+      "outputSha256": "7544d37e38dd4998747694dc4cc529710e9e23135cea6f0199fa4450388b3d32"
+    },
+    {
+      "path": "scripts/runtime-asset-redundancy-review.mjs",
+      "status": "pending-final-fingerprints",
+      "inputSha256": "c161a89cf077f693f10019915dc889bcc646d897c4865969c9a6ffb7db08948a",
+      "outputSha256": "4334bc663e31fb69f73c96b3d11778151c5357c5817b26b832260b81a60d055a"
+    },
+    {
+      "path": "scripts/runtime-trace-alignment.mjs",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "ff241be92fcf28205c858d2d5f70d8ed64a627b25c76dbfb4abf8e3a85155591"
+    },
+    {
+      "path": "scripts/video-review.mjs",
+      "status": "remote-only",
+      "inputSha256": "9f3b8f2ce02ca1306e82f79a906d7f3ca9ff340e0dbafc90b5108ec1ed99bde9",
+      "outputSha256": "b01e77ab77ed063267e19d62a5bc819748cb761b1187b7f077eacfeab9e7ddc4"
+    },
+    {
+      "path": "tests/achievement-gallery-close.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "1dbc72e9d8fa20a14a3c43f0e3ef2d444fad8a6683ccdebe02d2f510498830f2"
+    },
+    {
+      "path": "tests/achievement-gallery.test.js",
+      "status": "remote-only",
+      "inputSha256": "c9a46fe7369988aa000d4f5a740cd7b774f56c010be125d0c67ec82fda913647",
+      "outputSha256": "56634e8327b8aafdadd0ff4c99c73898932ee8ce8a6585c6ea3e98f941048f23"
+    },
+    {
+      "path": "tests/archive-progress-rendering.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "36982bf6fa06aa5d683bd63d4c9fb2201a5fe948f40ca1980faa44d2ad3dcf26"
+    },
+    {
+      "path": "tests/bag-help-return-continuity.test.js",
+      "status": "remote-only",
+      "inputSha256": "925663a081d81257fa4b81600af6e676f49b4538c6f7426d76ab73f2728d2222",
+      "outputSha256": "018b04b6bea59aa67ed53779ce637c06b0be0a5a0ae1e9f05a6c5a058b7e8bd0"
+    },
+    {
+      "path": "tests/bag-pouch-capacity.test.js",
+      "status": "remote-only",
+      "inputSha256": "135b49062a80f6dc032cb90fe864b5fe85d59d62f617f5714a4cbeca9b557b7e",
+      "outputSha256": "5f49623ffce188d78f3ceb26412be17af96a5fd4d492ea28ccea85aa0c34edd8"
+    },
+    {
+      "path": "tests/battle-card-inspection.test.js",
+      "status": "remote-only",
+      "inputSha256": "457c5bc335a5353e60cb2bde4fb457aaa6dc34ab3b0bbbf6eee7196d1d06dcd5",
+      "outputSha256": "496054794f7477afa354d4e5e58d4265cd43dc989a3742243a8b5f4a5ef0c5a6"
+    },
+    {
+      "path": "tests/battle-hand-group-index.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "3c6fbfeb7343e537aaad2c5f1ba53c247770e005f11f9f5d24f68366e747748d"
+    },
+    {
+      "path": "tests/battle-hover-play-availability.test.js",
+      "status": "remote-only",
+      "inputSha256": "6c514ba031e4520e598db7a9cef825708c07cdeeb4ef1b840de362214abdd2bb",
+      "outputSha256": "f3a787abaf94a84c9765ccfdd3ff4d4a7fa1b8e05813d1c832a5f678dad82922"
+    },
+    {
+      "path": "tests/battle-query-cost-benchmark.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "835510aae7021d20516e956d0c30acb6de04091cf86d5b85b830af74a80c69a2"
+    },
+    {
+      "path": "tests/battle-render-derivation.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "07b3304a87dac92071fdf66972336ccbc5b400ff1dea655488eed02646e9cb66"
+    },
+    {
+      "path": "tests/battle-status-preview.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "46da3d0163145f88f402076e362c24550d73b8bf447e00a53bf4a59af1d11855"
+    },
+    {
+      "path": "tests/card-browser-deferred-art.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "cc99ea68d3513a65c1f52eb3d42086d7eab6743d73a8626a5bbd0311f27134f4"
+    },
+    {
+      "path": "tests/card-browser-state.test.js",
+      "status": "remote-only",
+      "inputSha256": "ba2b99fb5170f4e964b71677914221dced0c415da4d597d461baad375c8e6585",
+      "outputSha256": "4b90ea0ab950d94d27a4e3ec31f0dc3297d3cd73ed15baf99e2c27c1bbdc4d97"
+    },
+    {
+      "path": "tests/card-face-presentation.test.js",
+      "status": "remote-only",
+      "inputSha256": "3e7d39975300f713deb230453cf5d20f3540c8d5594c4e9edb3c184898833ee7",
+      "outputSha256": "ad70ada763a52331cc596a8fa8ed0db5be5249d94303c742aa383f2a46cc79e4"
+    },
+    {
+      "path": "tests/chest-acquired-gift-cloud.test.js",
+      "status": "remote-only",
+      "inputSha256": "2ba80fa7fc8fa3495d5f11508515ca4b10991e77af41fafbecbbb6fe2d5b1e5e",
+      "outputSha256": "da6a3f25d7b6aa6b22398d3f312c07c00b7b82167867f2f86428b40031055d82"
+    },
+    {
+      "path": "tests/chest-click-flow.test.js",
+      "status": "remote-only",
+      "inputSha256": "745ea2e2ca74ce166f45cc4f850afd59d2e61df7dc74a7f1a62bfa0ee976ea39",
+      "outputSha256": "95842df30704a2a9fa828fe5b312c3e850e9698040ab10d7f93dc495070f7b44"
+    },
+    {
+      "path": "tests/chest-extra-rewards-choice.test.js",
+      "status": "remote-only",
+      "inputSha256": "aee86fe00fde1532dd06a64f7b4cbc898f00f4f40d8e9f608e42d835492270d0",
+      "outputSha256": "998746e8827e7a7b21b4612164c944dce68d0d62bf6b221accbd612a599bfeec"
+    },
+    {
+      "path": "tests/chest-multi-queue-regression.test.js",
+      "status": "remote-only",
+      "inputSha256": "cdab239a0565fd7fc02df4998798d84f81dd0e8ad70612b66e59ed7744d7e972",
+      "outputSha256": "fc678f35da4dc30037592364c3e39bbf4d7ca1e5f1492c440581fd22c17097fe"
+    },
+    {
+      "path": "tests/compact-reward-layout.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "d6d4324440202df22a6d3b3c3ee4da1fc8a66925d431608f4151ac4d5d6fd6b4"
+    },
+    {
+      "path": "tests/courtyard-koi.test.js",
+      "status": "remote-only",
+      "inputSha256": "5885d9f5f7b7cf44b3d3d254cb58c2b8e3188bce65d0f4616374e736a9b59495",
+      "outputSha256": "b199c7526c4b529fdb255407c45c41c0a9e402756ea8ea48f2c5eafdbf6da8f2"
+    },
+    {
+      "path": "tests/event-callback-lifecycle-audit.test.js",
+      "status": "auto-merged",
+      "inputSha256": "edcea6319505b47db429dd5b5d554c173d3ef18a7ad909f260db9590019f67d9",
+      "outputSha256": "0c1e68856ac2cc56b613cc746653479e9ad30de0051ee3e8e0acb8937b338c73"
+    },
+    {
+      "path": "tests/event-recode-selection-continuity.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "6dbceecc483e7405351fefd216c96418e23fcd518c2714ec1e761df288543310"
+    },
+    {
+      "path": "tests/extra-legend-reward-persistence.test.js",
+      "status": "remote-only",
+      "inputSha256": "b79b7b92806ffb6d65c5c215990d588580ace190af6f085ab2a58578ddca06fb",
+      "outputSha256": "9530b476531e94c5a11b2e3127297329b4b29dab2beef0bedd6bddb259ba814c"
+    },
+    {
+      "path": "tests/four-player-chest-reload.test.js",
+      "status": "remote-only",
+      "inputSha256": "06dde322574a72cb55a6934415ac4ac05559a1aaed6b07259d4583f5a6f2c717",
+      "outputSha256": "a799ec0800f2a2b430c54e330c91c256b168e431711953cf900a71924cc33a3b"
+    },
+    {
+      "path": "tests/hub-archive-v3.test.js",
+      "status": "remote-only",
+      "inputSha256": "43790e41462220c005cba86198018320d7bb17366c4a9e4a5301e2970e0594e1",
+      "outputSha256": "84d2f55c3969a99b0a5e8dd69a21e5440ceaef9075b8df24cefd90057f8a6704"
+    },
+    {
+      "path": "tests/hub-collection-v4.test.js",
+      "status": "remote-only",
+      "inputSha256": "1181e8aae912e026abe0769b4311e573d8434a3d589be89ccc5f8dae1ad0d521",
+      "outputSha256": "a173f245693e8b652105a0b2b032a82b0b7ac610b0abc887ac93dac5e8015482"
+    },
+    {
+      "path": "tests/hub-visible-card-faces.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "483d6c04675cdb23c3b8329d0adb5fa2b9289e933494902d3e79874bb19a1206"
+    },
+    {
+      "path": "tests/map-snapshot-copy-cost.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "efcc6f97a6e280120354cf8a92eb27cf53afab3c5252e218fc1878c2a2ce592c"
+    },
+    {
+      "path": "tests/menu-pages-lazy-entry.test.js",
+      "status": "remote-only",
+      "inputSha256": "6aad38b3eeab4325b15e573d8438d1937e1f7e239712c4ebf116ee13f6f14331",
+      "outputSha256": "3be40342bce3cf8dbc29f718da0d81d6c92a7022bd833940f12ec3aead194e7c"
+    },
+    {
+      "path": "tests/overlay-mount-cost.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "0d2bfa240ce76311b3b06d38914b7c855cdf68c943aad0667aca1965f18b7de6"
+    },
+    {
+      "path": "tests/page-surface-lifetime.test.js",
+      "status": "remote-only",
+      "inputSha256": "e78176b7e35c4cf57be30bb3b177eb687c35f4e3803aec28c9161891e45123ee",
+      "outputSha256": "42b1450dbc3ef5db91c97c25673e57371af8270782f7dd9565e087c57b2ff9bf"
+    },
+    {
+      "path": "tests/performance-settings.test.js",
+      "status": "remote-only",
+      "inputSha256": "1522119e89670b4e38e9da800b33a74cba818bc5273eb51fcb28123ac372f54b",
+      "outputSha256": "99a99cccf8b3d60968abef58750c986ce8346487bc103fb0b5dd3e51fd0865dc"
+    },
+    {
+      "path": "tests/r3-a-preview.test.js",
+      "status": "remote-only",
+      "inputSha256": "ba3d1f943f193666454510600f25dc34705194521dc982668b8752331d567252",
+      "outputSha256": "36fd35086baeddf2025b5db41ae9d8873f82e5fb5a729d1f58fad51b154b6954"
+    },
+    {
+      "path": "tests/resource-presentation-benchmark.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "5261affa4cbd686050f579469e0747859c54f8d8262378c57cdd429bdc9e38a7"
+    },
+    {
+      "path": "tests/resource-presentation-cache.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "06e5fcb38bb63e23d7cd05f33db14727dba3f7270286472779ef8b434cef60d5"
+    },
+    {
+      "path": "tests/reward-coins-overview.test.js",
+      "status": "remote-only",
+      "inputSha256": "bf0053226560c28651b3eef5aca9772b0db446e4aa3a9554bb105194e0f1e2bf",
+      "outputSha256": "455569d8dd29553e16aedf6795293033339199f8d488ba2e6fdd74b1d3787711"
+    },
+    {
+      "path": "tests/reward-completion-receipt.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "3616148a395fee3e5f0c7ba7f9d659867192ddc115f46d22e4ef738aa520e6da"
+    },
+    {
+      "path": "tests/reward-picker-continuity.test.js",
+      "status": "remote-only",
+      "inputSha256": "2de3113afca6c88d6ae1e752dd108234325ba5b163fe5aeed99864503a87bea1",
+      "outputSha256": "d44960d894da440bbf141fac9124e466e66bbbf2007f8d4bdb778960c7eaafad"
+    },
+    {
+      "path": "tests/reward-presentation-contract.test.js",
+      "status": "remote-only",
+      "inputSha256": "cf3fda3ed1c5b1d73ce412f174049757824b08ff311ab6bb33772cae3df611db",
+      "outputSha256": "3e0d0b584eddbe214d60c6bcc16fd032b3b8096fea8cf75cb8d2d08bb78e9a36"
+    },
+    {
+      "path": "tests/reward-save-interruptions.test.js",
+      "status": "resolved-with-local-checkpoint-guards",
+      "inputSha256": "a31355b94ba6527c8843aab6f7b2ca589c98179464bf8ba062b2ec60961250e6",
+      "outputSha256": "58ba21d410b63c124cbc45709127df2e77f109e8c41fe130c64fdc9920bcc6e1"
+    },
+    {
+      "path": "tests/runtime-event-timing.local.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "742e39073e94e28cf4496118748d34aea8683dcf28c89c9ced8cbda79361731f"
+    },
+    {
+      "path": "tests/runtime-trace-alignment.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "9f3ac85caa5525018c04223ca4229fb5f0652c35618d54182aa4af129c04b51b"
+    },
+    {
+      "path": "tests/runtime-trace-stages.local.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "b34b8a426c036b531c0f28e7208689e1ab6c4b61849178cd2393ef6914357eaa"
+    },
+    {
+      "path": "tests/runtime-trace.local.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "d4cdba09109c7a216f23aa72bcb18c9a621bfe926b78d528767e5f3a8b53ed9d"
+    },
+    {
+      "path": "tests/settings-page.test.js",
+      "status": "remote-only",
+      "inputSha256": "1a3fa51e52c6d3bff58a0fbf239c0c99dd08109b3e401c64dce3551ba6e7f899",
+      "outputSha256": "f4a093c0c3bf49508964f5227607590a7e7d3b38a8c14099c9f619a8d32fb415"
+    },
+    {
+      "path": "tests/shop-detail-focus.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "377ab6198b232d384ce079a2fd4ee27d49105af9a3aa2d37c0aee1686a0ec5f4"
+    },
+    {
+      "path": "tests/shop-transaction-lifecycle.test.js",
+      "status": "remote-only",
+      "inputSha256": "9594108803411c1e5b7ebe59da0ddf71cd94e9a681ef9fa9dd9ca9ee024e09a8",
+      "outputSha256": "3cbbf923b6029b10618c0825440126982a1d6ca780df63c0d15cd24c95bfafbd"
+    },
+    {
+      "path": "tests/sword-consume-trigger.test.js",
+      "status": "remote-only",
+      "inputSha256": "2de7e12c1df39b02d029afe2081ffe25c7cd627eef01b765409151571be22f1e",
+      "outputSha256": "ba8f503b1dd6235806acc3d4c25db543fc3247ed8154d84c0bb7c38ec2d0fef0"
+    },
+    {
+      "path": "tests/transition-gate-lifetime.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "86b4ada682589acb6bf77d16cacaf283f9eefe309892db0c8d230d2a7dd8321f"
+    },
+    {
+      "path": "tests/warehouse-art-window.test.js",
+      "status": "remote-only",
+      "inputSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputSha256": "a7ce9f8eb5f501c50f0d476a285c31d5f3f47538480c2acf64abbbc849e5b837"
+    }
+  ],
+  "indexBeforeAfterSha256": "3e95a4fd430371c76610eed3d5e304ec8abbc8f813692cdcf0c27d7683b5502b",
+  "application": "Applied exactly these 141 merged files to master working tree; no stage/commit/push."
+}

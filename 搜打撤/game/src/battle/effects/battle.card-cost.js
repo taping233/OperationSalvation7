@@ -1,4 +1,6 @@
-/* Card-cost rules are value-in/value-out; runtime state is collected by battle.engine.js. */
+/* Card-cost rules preserve numeric state inputs; an optional consumed-count reader
+ * defers runtime pocket inspection until that discount wins the priority chain. */
+import { targetTurnCardCost } from './battle.cost-modifiers.js';
 export function pocketSpellDiscountFor(card) {
   const modifiers = card && card.rules && card.rules.battle && card.rules.battle.costModifiers;
   if (Array.isArray(modifiers)) {
@@ -17,13 +19,22 @@ export function decayEffectiveCardCost(card, amount = 1) {
   return { ...card, cost: nextCost, _baseCost: card._baseCost != null ? card._baseCost : currentCost };
 }
 
-export function calculateEffectiveCardCost(card, uid, state) {
+export function calculateEffectiveCardCost(card, uid, state, readConsumedSpellCount = null) {
   // Infinite Rune applies only to battle-acquired moves and has the highest priority.
   if (state.unlimitedRune && ['武术', '法术'].includes(card.type) && uid && String(uid).startsWith('bts')) {
     return Math.max(0, (+(card.cost || 0)) - 1);
   }
-  // Nature Staff stores one target turn, not an inclusive expiry deadline.
-  if (uid && state.zeroFeeTurn != null && state.zeroFeeTurn === state.turn) return 0;
+  // This slot keeps Nature Staff's existing priority and exact target-turn lifetime.
+  // zeroFeeTurn remains accepted for callers using the earlier numeric contract.
+  const modifier = uid ? state.temporaryCostModifier ?? state.zeroFeeTurn : undefined;
+  const temporaryCost = targetTurnCardCost(card.cost, modifier, state.turn);
+  if (temporaryCost !== null && !modifier?.onlyReduce) return temporaryCost;
+  const cost = calculateConditionalCardCost(card, state, readConsumedSpellCount);
+  // A reduce-only record cannot raise a lower-priority condition's already cheaper result.
+  return targetTurnCardCost(cost, modifier, state.turn) ?? cost;
+}
+
+function calculateConditionalCardCost(card, state, readConsumedSpellCount) {
   if (state.cosmosForm > 0) return 1;
   if (state.spellCost1 && card.type === '法术') return 1;
   if (state.meleeCost1 && card.type === '武术') return 1;
@@ -44,8 +55,9 @@ export function calculateEffectiveCardCost(card, uid, state) {
     }
     if (modifiers.some(item => item.kind === 'armorZeroFree') && state.armor === 0) return 0;
     const consumedDiscount = modifiers.find(item => item.kind === 'consumedSpellDiscount');
-    if (consumedDiscount && state.consumedSpellCount > 0) {
-      return Math.max(0, (+card.cost || 0) - state.consumedSpellCount * (+consumedDiscount.amount || 0));
+    if (consumedDiscount) {
+      const count = readConsumedSpellCount ? readConsumedSpellCount() : state.consumedSpellCount;
+      if (count > 0) return Math.max(0, (+card.cost || 0) - count * (+consumedDiscount.amount || 0));
     }
     return card.cost;
   }
@@ -57,8 +69,9 @@ export function calculateEffectiveCardCost(card, uid, state) {
   }
   if (/护甲为\s*0[.。，,]?\s*本牌变为\s*0\s*费/.test(desc) && state.armor === 0) return 0;
   if (/没有护甲[，,]?\s*该牌变为\s*0\s*费/.test(desc) && state.armor === 0) return 0;
-  if (state.pocketDiscount && state.consumedSpellCount > 0) {
-    return Math.max(0, (+card.cost || 0) - state.consumedSpellCount * state.pocketDiscount);
+  if (state.pocketDiscount) {
+    const count = readConsumedSpellCount ? readConsumedSpellCount() : state.consumedSpellCount;
+    if (count > 0) return Math.max(0, (+card.cost || 0) - count * state.pocketDiscount);
   }
   return card.cost;
 }

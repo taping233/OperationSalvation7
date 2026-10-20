@@ -1,0 +1,442 @@
+--- baseline/game/src/cards/card-execution-plan.js
++++ game/src/cards/card-execution-plan.js
+@@ -0,0 +1,84 @@
++import { hasStructuredTrigger, hasStructuredEquipField, triggerDeclarations, REGISTERED_TRIGGER_POINTS } from './card-trigger-contract.js';
++
++/** Select a trigger's sole authority. Empty declarations still suppress legacy text.
++ * Invalid declarations remain visible to preflight rather than becoming text fallback. */
++export function triggerExecutionPlan(card, point) {
++  const declared = hasStructuredTrigger(card, point);
++  // Migrated equipment retains its existing consume-text suppression contract.
++  const structured = declared || (point === 'onConsume' && card?.rules?.equip != null);
++  return { kind: structured ? 'structured' : 'text',
++    ops: declared ? triggerDeclarations(card)[point] : [] };
++}
++
++/** Equipment actions use the same ownership rule as trigger actions. */
++export function equipmentExecutionPlan(card, point) {
++  const structured = hasStructuredEquipField(card, point);
++  const value = structured ? card.rules.equip[point] : undefined;
++  return { kind: structured ? 'structured' : 'text',
++    ops: structured ? (point === 'skill' ? value?.ops : value) : [] };
++}
++
++/** Pure registration snapshot; direct trigger points never enter the registry. */
++export function registeredExecutionPlan(card) {
++  const points = new Map();
++  for (const point of REGISTERED_TRIGGER_POINTS) {
++    const source = triggerExecutionPlan(card, point);
++    if (source.kind === 'structured' && Array.isArray(source.ops) && source.ops.length) points.set(point, source.ops);
++  }
++  const duration = triggerDeclarations(card)?.duration;
++  return { points, left: Number.isInteger(duration) ? duration : null };
++}
++
++/** Restore declarations stripped by play dispatch before whole-card preflight. */
++export function cardRulePreflightView(card) {
++  return card?._registeredTriggers == null ? card
++    : { ...card, rules: { ...card.rules, triggers: card._registeredTriggers } };
++}
++
++/** The resolver consumes onPlay only; other trigger containers require registration. */
++export function assertPlayExecutionView(card) {
++  for (const point of Object.keys(card?.rules?.triggers ?? {})) {
++    if (point !== 'onPlay' && point !== 'duration') {
++      throw new TypeError(`Trigger '${point}' must be registered via battle.triggers.m2.js before resolution (card ${card.id || '<missing id>'})`);
++    }
++  }
++}
++
++/** Shared immediate-text and numeric-field ownership for a played card. */
++export function cardPlayExecutionPlan(card) {
++  const onPlay = triggerExecutionPlan(card, 'onPlay');
++  const equipment = point => equipmentExecutionPlan(card, point);
++  const ownsField = field => ['onEquip', 'battleStart', 'skill'].some(point => {
++    const { ops } = equipment(point);
++    return Array.isArray(ops) && ops.some(operation => operation.op === field || operation.amountField === field);
++  });
++  const venomStaffPassive = card.id === 'tt2-venomstaff'
++    && card.rules?.battle?.hosted?.includes('venom-staff')
++    && !card.rules?.triggers && !card.rules?.equip && !card.rules?.bag;
++  return { onPlay, equipment, ownsField,
++    suppressImmediateText: onPlay.kind === 'structured' || equipment('onEquip').kind === 'structured' || !!venomStaffPassive };
++}
++
++export function createCardRuleExecutionView(card, operations) {
++  const ops = operations.map(operation => {
++    if (!['heal', 'armor', 'draw'].includes(operation?.op) || operation.amountField === undefined) return operation;
++    const { amountField, ...rest } = operation;
++    return { ...rest, amount: card[amountField] };
++  });
++  const damage = ops.some(operation => operation?.op === 'damage');
++  const enemy = ops.some(operation => operation && (['damage', 'stealAtk', 'execute', 'foeFight'].includes(operation.op) ||
++    ['chosenEnemy', 'randomEnemy', 'allEnemies'].includes(operation.target)));
++  const area = ops.some(operation => operation?.target === 'allEnemies');
++  const noSide = ops.some(operation => operation?.op === 'status' || operation?.op === 'discover');
++  const synthetic = { ...card, desc: '', infuse: 0,
++    type: damage && !['武术', '法术'].includes(card.type) ? '法术' : card.type,
++    dmgType: damage ? card.dmgType || 'fixed' : undefined,
++    rules: { version: 1, battle: { target: { side: noSide ? null : enemy ? 'enemy' : 'self', area } },
++      triggers: { onPlay: ops } } };
++  delete synthetic._registeredTriggers;
++  for (const field of ['dmg', 'heal', 'armor', 'draw']) {
++    if (!ops.some(operation => operation?.amountField === field)) delete synthetic[field];
++  }
++  return synthetic;
++}
++
+--- baseline/game/src/cards/card-rules.schema.js
++++ game/src/cards/card-rules.schema.js
+@@ -772,28 +772,7 @@
+ // v2 —— 装备域（G5）形状校验：键位先行，全部 pending，解释器遇到即 throw
+ /** A trigger or equipment action executes only its own operations and referenced fields.
+  * This pure view is shared by capability preflight and the battle executors. */
+-export function createCardRuleExecutionView(card, operations) {
+-  const ops = operations.map(operation => {
+-    if (!['heal', 'armor', 'draw'].includes(operation?.op) || operation.amountField === undefined) return operation;
+-    const { amountField, ...rest } = operation;
+-    return { ...rest, amount: card[amountField] };
+-  });
+-  const damage = ops.some(operation => operation?.op === 'damage');
+-  const enemy = ops.some(operation => operation && (['damage', 'stealAtk', 'execute', 'foeFight'].includes(operation.op) ||
+-    ['chosenEnemy', 'randomEnemy', 'allEnemies'].includes(operation.target)));
+-  const area = ops.some(operation => operation?.target === 'allEnemies');
+-  const noSide = ops.some(operation => operation?.op === 'status' || operation?.op === 'discover');
+-  const synthetic = { ...card, desc: '', infuse: 0,
+-    type: damage && !['武术', '法术'].includes(card.type) ? '法术' : card.type,
+-    dmgType: damage ? card.dmgType || 'fixed' : undefined,
+-    rules: { version: 1, battle: { target: { side: noSide ? null : enemy ? 'enemy' : 'self', area } },
+-      triggers: { onPlay: ops } } };
+-  delete synthetic._registeredTriggers;
+-  for (const field of ['dmg', 'heal', 'armor', 'draw']) {
+-    if (!ops.some(operation => operation?.amountField === field)) delete synthetic[field];
+-  }
+-  return synthetic;
+-}
++export { createCardRuleExecutionView } from './card-execution-plan.js';
+ 
+ function validateOperationArray(operations, card, path, error) {
+   if (!Array.isArray(operations)) {
+--- baseline/game/src/cards/card-rules.capability.js
++++ game/src/cards/card-rules.capability.js
+@@ -1,6 +1,7 @@
+ // @ts-check
+ import { validateCardRules, createCardRuleExecutionView, HOSTED_BATTLE_RULES, HOSTED_CARD_RULES, BAG_SUPPORTED_OPS } from './card-rules.schema.js';
+ import { BATTLE_TRIGGER_POINTS } from './card-trigger-contract.js';
++import { cardRulePreflightView } from './card-execution-plan.js';
+ 
+ /** @typedef {import('./card-rules.capability.types.js').BattleOperationName} BattleOperationName */
+ /** @typedef {import('./card-rules.capability.types.js').OperationTarget} OperationTarget */
+@@ -76,6 +77,7 @@
+  * @returns {import('./card-rules.capability.types.js').CardRuleCapability}
+  */
+ export function inspectCardRuleCapability(card) {
++  card = cardRulePreflightView(card);
+   const cardId = String(field(card, 'id') ?? '<missing id>');
+   if (!isObject(card)) {
+     return { kind: 'invalid', ok: false, issues: [{ cardId, path: 'card', message: 'expected a card object' }] };
+--- baseline/game/src/battle/core/battle.resolution.js
++++ game/src/battle/core/battle.resolution.js
+@@ -19,7 +19,8 @@
+ import { assertCardRulesExecutable } from '../effects/battle.rule-guard.js';
+ import { getHostedExecutionCard } from '../effects/battle.hosted.js';
+ import { hasInfusionWaiver } from '../effects/battle.infusion.js';
+-import { hasStructuredTrigger, hasStructuredEquipField } from '../../cards/card-trigger-contract.js';
++import { hasStructuredTrigger } from '../../cards/card-trigger-contract.js';
++import { cardPlayExecutionPlan, assertPlayExecutionView } from '../../cards/card-execution-plan.js';
+ 
+ // B5 诅咒日志动词：逐字对齐文本路径 effect-steps.curse.js 的 run 文案（图标不在此表——
+ // 统一取 combat.CURSE_META[kind].icon，保证与 combat.js 枚举单源）。括注部分为卡面语义解释，
+@@ -498,14 +499,9 @@
+     const stealthBreakBonus = card.id === 'tt7-ghostblade'
+       && card.rules?.battle?.hosted?.includes('stealth-break-bonus') === true;
+     let brokeOwnStealth = false;
+-    const registeredTriggers = card?._registeredTriggers;
+-    if (registeredTriggers) {
+-      assertCardRulesExecutable({ ...card, rules: { ...card.rules, triggers: registeredTriggers } });
+-    } else {
+-      assertCardRulesExecutable(card);
+-    }
+-
+-    const ownsOnPlay = hasStructuredTrigger(card, 'onPlay');
++    assertCardRulesExecutable(card);
++    const playPlan = cardPlayExecutionPlan(card);
++    const ownsOnPlay = playPlan.onPlay.kind === 'structured';
+     const hostedPlaySetup = card.rules?.battle?.hosted?.includes('batch13-flame-form');
+     if ((!ownsOnPlay || hostedPlaySetup) && ports.resolveRequestedCard && (yield* ports.resolveRequestedCard(card, target, ports))) return;
+ 
+@@ -550,25 +546,9 @@
+     // 可另选目标或重复选择同一目标
+     let desc = String(card.desc || '');
+     const hasStructuredOnPlay = ownsOnPlay;
+-    const structuredOnPlay = hasStructuredOnPlay ? card.rules.triggers.onPlay : [];
+-    const hasStructuredEquip = hasStructuredEquipField(card, 'onEquip');
+-    // 毒杖的定版 hosted 只有法术监听；装备时不能把被动句作为立即施毒再执行。
+-    // 显式 DSL / 装备规则继续由各自执行器处理，其他装备的即时文本不受影响。
+-    const venomStaffPassive = card.id === 'tt2-venomstaff'
+-      && card.rules?.battle?.hosted?.includes('venom-staff')
+-      && !card.rules?.triggers && !card.rules?.equip && !card.rules?.bag;
+-    const suppressText = hasStructuredOnPlay || hasStructuredEquip || venomStaffPassive;
+-    // M2 守卫（G13 落地后的新口径）：resolver 只消费 onPlay；其余时点容器（onTurnStart/
+-    // onDraw/onConsume…）必须先经 battle.triggers.m2.js runner 登记管线（打出/穿戴时登记、
+-    // 抽到/消耗时直调）。直接喂给 resolver 的卡若携带时点容器＝绕过登记管线＝静默不结算，
+-    // 此处立即抛出（exec-play 打出路径会先登记再剥离后进入；runner 合成卡只带 onPlay）。
+-    if (card.rules?.triggers != null) {
+-      for (const triggerKey of Object.keys(card.rules.triggers)) {
+-        if (triggerKey !== 'onPlay' && triggerKey !== 'duration') {
+-          throw new TypeError(`Trigger '${triggerKey}' must be registered via battle.triggers.m2.js before resolution (card ${card.id || '<missing id>'})`);
+-        }
+-      }
+-    }
++    const structuredOnPlay = playPlan.onPlay.ops;
++    const suppressText = playPlan.suppressImmediateText;
++    assertPlayExecutionView(card);
+     if (!hasStructuredOnPlay && card.id === 'tt7-bloodpoison') desc = '攻（+1），附加流血。';
+     // 江湖救急（2026-09-18 老板定版）：「随机直接给 3 张」才是本意——不走发现面板。
+     // 随机池与发现同口径（isRandomObtainable），置入的临时卡在下个回合开始时消耗。
+@@ -608,13 +588,10 @@
+     const parts = splitClauses(card.id === 'cmtn7err0a7'
+       ? desc.replace(/（[^）]*从这些中随机[^）]*）|祝福包括[^。]*(?:。|$)/g, '') : desc);
+     const equipRules = card.rules?.equip;
+-    const ownsEquipField = field => ['onEquip', 'battleStart', 'skill'].some(point => {
+-      const ops = point === 'skill' ? equipRules?.skill?.ops : equipRules?.[point];
+-      return Array.isArray(ops) && ops.some(operation => operation.op === field || operation.amountField === field);
+-    });
+-    const ownsPassive = hasStructuredEquipField(card, 'passive');
++    const ownsEquipField = playPlan.ownsField;
++    const ownsPassive = playPlan.equipment('passive').kind === 'structured';
+     const legacyImmediate = clause => {
+-      if (hasStructuredEquipField(card, 'battleStart') && /^对战开始时/.test(clause)) return false;
++      if (playPlan.equipment('battleStart').kind === 'structured' && /^对战开始时/.test(clause)) return false;
+       if (ownsPassive && /诅咒状态[下时]|[+＋]\s*\d+\s*(?:攻|法伤)|(?:攻(?:击(?:力)?)?|法伤)\s*[+＋]\s*\d+|(?:攻击力|法伤|法术伤害)(?:增加|提升)\s*\d+|获得\s*\d+\s*点?攻击力|对冰冻[^。]*?伤害\s*\+/.test(clause)) return false;
+       return true;
+     };
+--- baseline/game/src/battle/effects/battle.trigger-source.js
++++ game/src/battle/effects/battle.trigger-source.js
+@@ -1,5 +1,5 @@
+ import { splitEffectClauses } from './battle.effect-clauses.js';
+-import { hasStructuredTrigger, triggerDeclarations } from '../../cards/card-trigger-contract.js';
++import { triggerExecutionPlan } from '../../cards/card-execution-plan.js';
+ export { BATTLE_TRIGGER_POINTS, REGISTERED_TRIGGER_POINTS, DIRECT_TRIGGER_POINTS,
+   hasStructuredTrigger, hasStructuredEquipField, triggerDeclarations } from '../../cards/card-trigger-contract.js';
+ 
+@@ -21,11 +21,8 @@
+  * @param {'onDraw'|'onConsume'|'onAcquire'} point
+  */
+ export function directTriggerSource(card, point) {
+-  const triggers = triggerDeclarations(card);
+-  const ownsPoint = hasStructuredTrigger(card, point);
+-  if (ownsPoint || (point === 'onConsume' && card?.rules?.equip)) {
+-    return { kind: 'structured', ops: ownsPoint ? triggers[point] : [], texts: [] };
+-  }
++  const plan = triggerExecutionPlan(card, point);
++  if (plan.kind === 'structured') return { ...plan, texts: [] };
+   const texts = point === 'onDraw'
+     ? splitEffectClauses(card?.desc).onDraw
+     : point === 'onConsume' ? consumeTriggerTexts(card?.desc) : [];
+--- baseline/game/src/battle/effects/battle.rule-guard.js
++++ game/src/battle/effects/battle.rule-guard.js
+@@ -1,6 +1,6 @@
+ // @ts-check
+ import { inspectCardRuleCapability } from '../../cards/card-rules.capability.js';
+-import { createCardRuleExecutionView } from '../../cards/card-rules.schema.js';
++import { createCardRuleExecutionView } from '../../cards/card-execution-plan.js';
+ 
+ /** @typedef {import('../../cards/card-rules.capability.types.js').CardRuleIssue} CardRuleIssue */
+ /** @typedef {import('../../cards/card-rules.capability.types.js').RuleWarningPort} RuleWarningPort */
+--- baseline/game/src/battle/effects/battle.triggers.m2.js
++++ game/src/battle/effects/battle.triggers.m2.js
+@@ -12,7 +12,7 @@
+  *   - 容器级 duration = 每次触发扣 1，归零移除该卡登记（花瓣法阵「持续 3 回合」）。
+  * ============================================================ */
+ import { equipped } from '../runtime/battle.runtime.piles.js';
+-import { REGISTERED_TRIGGER_POINTS, triggerDeclarations } from '../../cards/card-trigger-contract.js';
++import { registeredExecutionPlan, triggerExecutionPlan } from '../../cards/card-execution-plan.js';
+ import { createCardRuleExecution } from './battle.rule-guard.js';
+ 
+ export function createTriggerRunner({
+@@ -53,14 +53,8 @@
+   function registerCard(card, uid, { battleStarted = false } = {}) {
+     const token = getBattleToken();
+     if (!isCurrent(token)) return false;
+-    const triggers = triggerDeclarations(card);
+-    if (!triggers || typeof triggers !== 'object') return false;
+-    const points = new Map();
+-    for (const point of REGISTERED_TRIGGER_POINTS) {
+-      if (Array.isArray(triggers[point]) && triggers[point].length) points.set(point, triggers[point]);
+-    }
++    const { points, left } = registeredExecutionPlan(card);
+     if (!points.size) return false;
+-    const left = Number.isInteger(triggers.duration) ? triggers.duration : null;
+     const entry = { card, points, left, uid, executing: new Set() };
+     registry.set(uid, entry);
+     if (points.has('onBattleStart') && battleStarted) {
+@@ -122,19 +116,19 @@
+   // M3：我方攻击冰冻敌人后（engine 挂 COMBAT_HOOKS.onFreeze）/ 该卡被发现或随机获取时（addTempCard 钩）
+   function fireFreezeDealt(target) { firePoint('onFreezeDealt', () => target); }
+   function fireAcquire(card, target) {
+-    const ops = triggerDeclarations(card)?.onAcquire;
++    const { ops } = triggerExecutionPlan(card, 'onAcquire');
+     if (Array.isArray(ops) && ops.length) resolveOps(card, ops, target);
+   }
+ 
+   /** 抽到时（onDraw）：不登记即触发——drawCards 抽到该卡时直接结算并保持离手。 */
+   function fireDrawn(card, target) {
+-    const ops = triggerDeclarations(card)?.onDraw;
++    const { ops } = triggerExecutionPlan(card, 'onDraw');
+     if (Array.isArray(ops) && ops.length) resolveOps(card, ops, target);
+   }
+ 
+   /** 消耗时（onConsume）：该卡被消耗/注能牺牲时结算（engine fireConsumeTriggers 挂点）。 */
+   function fireConsume(card, target) {
+-    const ops = triggerDeclarations(card)?.onConsume;
++    const { ops } = triggerExecutionPlan(card, 'onConsume');
+     if (Array.isArray(ops) && ops.length) resolveOps(card, ops, target);
+   }
+ 
+--- baseline/game/src/battle/bag/battle.equipment.js
++++ game/src/battle/bag/battle.equipment.js
+@@ -10,6 +10,7 @@
+ import { getHostedExecutionCard } from '../effects/battle.hosted.js';
+ import { assertCardRulesExecutable, createCardRuleExecution, rejectUnsupportedCard } from '../effects/battle.rule-guard.js';
+ import { hasStructuredEquipField } from '../../cards/card-trigger-contract.js';
++import { equipmentExecutionPlan } from '../../cards/card-execution-plan.js';
+ 
+ export function createBattleEquipment({
+   requestBattleRender, clearTargetSession, queueBattleAction, runStagedSteps,
+@@ -47,12 +48,14 @@
+     const rules = card.rules && card.rules.equip;
+     if (rules) {
+       // onEquip：穿戴时立即结算（草甲「装备时获得 5 点护甲」）
+-      if (Array.isArray(rules.onEquip) && rules.onEquip.length && triggersM2) {
+-        triggersM2.resolveEquipOps(card, rules.onEquip);
++      const onEquip = equipmentExecutionPlan(card, 'onEquip');
++      if (onEquip.ops?.length && triggersM2) {
++        triggersM2.resolveEquipOps(card, onEquip.ops);
+       }
+       // battleStart：战斗中穿戴时立即补发（迎战装备的开战路径走 applyBattleStartPassives 既有通道）
+-      if (Array.isArray(rules.battleStart) && rules.battleStart.length && triggersM2) {
+-        triggersM2.resolveEquipOps(card, rules.battleStart);
++      const battleStart = equipmentExecutionPlan(card, 'battleStart');
++      if (battleStart.ops?.length && triggersM2) {
++        triggersM2.resolveEquipOps(card, battleStart.ops);
+         G.log(`[[icon:sparkles]] 【${esc(card.name)}】开战效果在穿戴时补发（战斗中装配）`, 'sys');
+       }
+       // passive.aura 静态数值光环（atk/spellPower 穿戴即结算；focus 每回合能量由回合管线读 equipped）
+@@ -234,8 +237,9 @@
+   // M3 收编：rules.equip.battleStart 声明同样构成开战装备（结构化单源，desc 判定保留给未迁卡）
+   const isBattleStartEquip = (card) => {
+     card = getHostedExecutionCard(card);
+-    return !!card && card.type === '装备' && (hasStructuredEquipField(card, 'battleStart')
+-      ? Array.isArray(card.rules.equip.battleStart) && card.rules.equip.battleStart.length > 0
++    const source = equipmentExecutionPlan(card, 'battleStart');
++    return !!card && card.type === '装备' && (source.kind === 'structured'
++      ? Array.isArray(source.ops) && source.ops.length > 0
+       : /对战开始时/.test(String(card.desc || '')));
+   };
+   function applyBattleStartPassives() {
+@@ -268,12 +272,14 @@
+     });
+     chosen.forEach(o => {
+       applyStaticAura(o.card);
+-      if (o.card.rules?.equip?.onEquip?.length && triggersM2) {
+-        triggersM2.resolveEquipOps(o.card, o.card.rules.equip.onEquip);
++      const onEquip = equipmentExecutionPlan(o.card, 'onEquip');
++      if (onEquip.ops?.length && triggersM2) {
++        triggersM2.resolveEquipOps(o.card, onEquip.ops);
+       }
+       // M3 收编：rules.equip.battleStart 单路径（runner 合成卡结算）；仅未迁卡走 desc 文本
+-      if (hasStructuredEquipField(o.card, 'battleStart')) {
+-        if (o.card.rules.equip.battleStart.length && triggersM2) triggersM2.resolveEquipOps(o.card, o.card.rules.equip.battleStart);
++      const battleStart = equipmentExecutionPlan(o.card, 'battleStart');
++      if (battleStart.kind === 'structured') {
++        if (battleStart.ops.length && triggersM2) triggersM2.resolveEquipOps(o.card, battleStart.ops);
+         return;
+       }
+       const parts = splitEffectClauses(String(o.card.desc || ''));
+--- baseline/tests/card-execution-plan.test.js
++++ tests/card-execution-plan.test.js
+@@ -0,0 +1,83 @@
++import { describe, expect, it } from 'vitest';
++import {
++  triggerExecutionPlan, equipmentExecutionPlan, registeredExecutionPlan,
++  cardPlayExecutionPlan, cardRulePreflightView, createCardRuleExecutionView,
++} from '../game/src/cards/card-execution-plan.js';
++import { createCardRuleExecutionView as schemaExecutionView } from '../game/src/cards/card-rules.schema.js';
++import { inspectCardRuleCapability } from '../game/src/cards/card-rules.capability.js';
++import { directTriggerSource } from '../game/src/battle/effects/battle.trigger-source.js';
++import { assertCardRulesExecutable } from '../game/src/battle/effects/battle.rule-guard.js';
++
++const card = rules => ({ id: 'plan', name: '规则来源', type: '法术', cost: 0,
++  desc: '抽到时施放：获得 9 点能量。消耗该牌时：获得 8 点能量。', rules: { version: 1, ...rules } });
++
++describe('card execution authority plan', () => {
++  it.each(['onPlay', 'onDraw', 'onConsume', 'onTurnStart'])('an empty %s owns only its declared point', point => {
++    const value = card({ triggers: { [point]: [] } });
++    expect(triggerExecutionPlan(value, point)).toEqual({ kind: 'structured', ops: [] });
++    const other = point === 'onDraw' ? 'onConsume' : 'onDraw';
++    expect(triggerExecutionPlan(value, other).kind).toBe('text');
++    expect(directTriggerSource(value, other).texts).toHaveLength(1);
++  });
++
++  it('uses preserved declarations for both onPlay and registered plans', () => {
++    const draw = [{ op: 'energy', n: 0 }];
++    const value = { ...card({ triggers: {} }), _registeredTriggers: { onPlay: [], onDraw: draw, onTurnStart: draw, duration: 2 } };
++    expect(cardPlayExecutionPlan(value).onPlay).toEqual({ kind: 'structured', ops: [] });
++    expect(triggerExecutionPlan(value, 'onDraw').ops).toBe(draw);
++    expect(registeredExecutionPlan(value)).toEqual({ points: new Map([['onTurnStart', draw]]), left: 2 });
++    expect(cardRulePreflightView(value).rules.triggers).toBe(value._registeredTriggers);
++  });
++
++  it('does not register direct events or empty event containers', () => {
++    const value = card({ triggers: { onDraw: [{ op: 'energy', n: 1 }], onTurnStart: [] } });
++    expect(registeredExecutionPlan(value).points.size).toBe(0);
++  });
++
++  it('rejects hidden unsupported declarations before accepting the isolated play view', () => {
++    const value = { ...card({ triggers: { onPlay: [] } }),
++      _registeredTriggers: { onPlay: [], onDraw: [{ op: 'transform', into: 'anything' }] } };
++    expect(inspectCardRuleCapability(value).ok).toBe(false);
++    expect(() => assertCardRulesExecutable(value)).toThrow();
++  });
++
++  it('retains invalid false declarations for schema rejection rather than falling back to text', () => {
++    const value = card({ triggers: { onDraw: false } });
++    expect(triggerExecutionPlan(value, 'onDraw')).toEqual({ kind: 'structured', ops: false });
++    expect(directTriggerSource(value, 'onDraw').texts).toEqual([]);
++    expect(inspectCardRuleCapability(value).ok).toBe(false);
++  });
++
++  it('keeps zero amounts and false operation flags in the shared execution view', () => {
++    const value = { ...card({}), heal: 0, dmg: 7 };
++    const ops = [{ op: 'heal', amountField: 'heal' }, { op: 'draw', amount: 0, firstFree: false }];
++    const execution = createCardRuleExecutionView(value, ops);
++    expect(execution.rules.triggers.onPlay).toEqual([
++      { op: 'heal', amount: 0 }, { op: 'draw', amount: 0, firstFree: false },
++    ]);
++    expect(execution.dmg).toBeUndefined();
++    expect(value.heal).toBe(0);
++    expect(ops[0]).toEqual({ op: 'heal', amountField: 'heal' });
++    expect(schemaExecutionView).toBe(createCardRuleExecutionView);
++  });
++
++  it('suppresses onEquip text without suppressing an undeclared turnStart point', () => {
++    const value = card({ equip: { onEquip: [], passive: { aura: { atk: 0 } } } });
++    const plan = cardPlayExecutionPlan(value);
++    expect(plan.suppressImmediateText).toBe(true);
++    expect(plan.equipment('passive').kind).toBe('structured');
++    expect(plan.ownsField('heal')).toBe(false);
++    expect(triggerExecutionPlan(value, 'onTurnStart').kind).toBe('text');
++    expect(equipmentExecutionPlan(value, 'battleStart').kind).toBe('text');
++  });
++
++  it('owns numeric fallback fields across onEquip, battleStart, and skill only', () => {
++    const value = card({ equip: { onEquip: [{ op: 'armor', amount: 0 }],
++      skill: { ops: [{ op: 'heal', amountField: 'heal' }] } } });
++    const plan = cardPlayExecutionPlan(value);
++    expect(plan.ownsField('heal')).toBe(true);
++    expect(plan.ownsField('armor')).toBe(true);
++    expect(plan.ownsField('draw')).toBe(false);
++    expect(equipmentExecutionPlan(value, 'skill').ops).toBe(value.rules.equip.skill.ops);
++  });
++});

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-framework-sequential-1020",
+  "date": "2026-10-20",
+  "owner": "Friday",
+  "goal": "按老板授权以Sol中等推理按属地并行收拢局内状态和战斗编排、统一卡牌执行计划，补严格类型和自动架构守卫",
+  "paths": [
+    "docs/architecture.md",
+    "docs/evidence/2026-10-20-WF-framework-sequential-1020",
+    "game/selftest.js",
+    "game/src/battle/bag/battle.equipment.js",
+    "game/src/battle/core/battle.card-play.js",
+    "game/src/battle/core/battle.damage.js",
+    "game/src/battle/core/battle.engine.js",
+    "game/src/battle/core/battle.resolution.js",
+    "game/src/battle/core/battle.turn-continuation.js",
+    "game/src/battle/core/battle.turn-start.js",
+    "game/src/battle/effects/battle.rule-guard.js",
+    "game/src/battle/effects/battle.trigger-source.js",
+    "game/src/battle/effects/battle.triggers.m2.js",
+    "game/src/cards/card-execution-plan.js",
+    "game/src/cards/card-execution-plan.types.d.ts",
+    "game/src/cards/card-rules.capability.js",
+    "game/src/cards/card-rules.schema.js",
+    "game/src/cards/card-trigger-contract.js",
+    "game/src/core/run-checkpoint.js",
+    "game/src/README.md",
+    "game/src/run/event-card-choice.js",
+    "game/src/run/event-commands.js",
+    "game/src/run/event-recode-candidates.js",
+    "game/src/run/game.run.events.js",
+    "game/src/run/game.run.flow.js",
+    "game/src/run/game.run.resources.js",
+    "game/src/run/game.run.shop.js",
+    "game/src/run/run-domain-commands.types.d.ts",
+    "game/src/run/shop-commands.js",
+    "game/src/run/shop-commission.js",
+    "jsconfig.framework-boundaries.json",
+    "jsconfig.framework-ports.json",
+    "scripts/architecture-graph.mjs",
+    "scripts/check-types.mjs",
+    "scripts/sync-cards-from-live.mjs",
+    "tests/architecture-boundaries.test.js",
+    "tests/battle-engine-decomposition.test.js",
+    "tests/card-execution-plan.test.js",
+    "tests/events-0919.test.js",
+    "tests/framework-battle-ports-types.fixture.ts",
+    "tests/framework-boundaries-types.fixture.ts",
+    "tests/message-batch-0920-late.test.js",
+    "tests/pocket-restore-interface.test.js",
+    "tests/r6-story.test.js",
+    "tests/run-domain-commands.test.js",
+    "tests/run-event-controller-ownership.test.js",
+    "tests/sync-cards-from-live.test.js",
+    "tests/workflow-cli-integration.test.js"
+  ],
+  "doneWhen": [
+    "领域写入与用例编排边界明确，规则来源、注册、完整预检和执行视图单源，保留复杂文本兼容",
+    "相关自动回归和类型架构检查通过，当前窗口内置浏览器覆盖受影响流程，未覆盖项明确",
+    "保留开场未提交内容，自有改动与证据完整，不提交推送"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "四片相关回归与集成修复复验、525源码语法、数据、10组类型、全项目及增量lint、645链接、diff和当前内置窗口实页通过，详见任务README",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "全量首轮713文件7341项中14失败38跳过，另有沙箱收集失败；本轮问题已分别修复复验，原始失败证据保留",
+      "result": "failed"
+    }
+  ],
+  "unverified": [
+    "4项素材审查基线失败受控前后对照一致；未重跑最终全量，未混树构建或远端CI；出售委托等仅自动回归；旧全局门面和复杂文本兼容仍保留"
+  ],
+  "updatedAt": "2026-10-20T13:08:51.717Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

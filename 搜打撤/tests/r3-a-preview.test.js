@@ -189,13 +189,15 @@ describe('R3-a 可信伤害预览', () => {
     },
   );
 
-  it('普通战奥术弹按定版 hosted 执行视图预览，直接伤害与真实结算一致', async () => {
+  it('普通战奥术弹按结构化伤害与抽牌声明预览，直接伤害与真实结算一致', async () => {
     const original = Cards.all().find(entry => entry.id === 'tt7-arcanebolt');
-    expect(original.rules.battle.hosted).toEqual(['damage-and-draw']);
+    expect(original.rules.triggers.onPlay).toEqual([
+      { op:'damage', amountField:'dmg', target:'chosenEnemy' }, { op:'draw', amount:1 },
+    ]);
     const { game, uid } = gameWith({ ...original, desc: '玩家展示文本已变化', dmg: 3 }, { spellPower: 2 });
     restore(game, uid, { hp: 20 }, { spellUp: 1 });
     const context = viewApi.getPreviewContext(uid, 0);
-    expect(context).toMatchObject({ mode: 'normal', hostedExecutionVerified: true });
+    expect(context).toMatchObject({ mode: 'normal', hostedExecutionVerified: false });
     const result = preview(uid);
     expect(result).toMatchObject({ confidence: 'exact', cost: 0, damage: { total: 6, hpAfter: 14 } });
     expect(result.unknownEffects.join('')).toContain('后续触发未计入');
@@ -206,7 +208,7 @@ describe('R3-a 可信伤害预览', () => {
     BattleSession.commands.playCard(uid, 0);
     const actual = await settle();
     expect(actual.foes[0].hp).toBe(result.damage.hpAfter);
-    expect(game.logs.some(line => line.includes('获得 1 张【初始攻击】'))).toBe(true);
+    expect(actual.hand).toHaveLength(0); // 本测试从空的真实牌库恢复；抽牌不会凭空创建初始攻击。
     BattleSession.commands.flee();
   });
 
@@ -390,4 +392,21 @@ describe('R3-a 可信伤害预览', () => {
       BattleSession.commands.flee();
     });
   });
+});
+
+it('孢子城墙按有效卡的结构化声明展示中毒与护甲，不虚构直接伤害', () => {
+  const card = Cards.all().find(entry => entry.id === 'tt12-sporewall');
+  expect(card).toBeTruthy();
+  const { game, uid } = gameWith(card);
+  expect(restore(game, uid, { hp: 20 })).toBe(true);
+  const before = BattleSession.getSnapshot();
+  const result = preview(uid);
+  expect(result).toMatchObject({ confidence: 'unknown', damage: null, reasons: [],
+    knownEffects: ['目标附加 2 层中毒', '自己获得 6 点护甲'] });
+  const el = document.createElement('div'); el.className = 'bt-foe'; document.body.append(el);
+  showFoePreview(el, 0, uid, card, 'click');
+  expect(el.textContent).toContain('卡牌效果');
+  expect(el.textContent).not.toContain('无法精算');
+  expect(BattleSession.getSnapshot().foes).toEqual(before.foes);
+  el.remove();
 });

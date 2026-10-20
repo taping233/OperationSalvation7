@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T09:25:09.248Z",
+  "inputKind": "real-input",
+  "detail": "两张奖励领完并继续探索后，再次真实刷新、正式读档，打开背包并筛选招式；冰刺和剑荡妖邪均各1张，安全格2/2。DOM诊断记录21张卡的UID集合与刷新前完全一致、金币0、原节点0,0、待领奖快照已清除；初始局来自受控夹具。",
+  "screenshot": {
+    "path": "finished-restored-bag.png",
+    "bytes": 81862,
+    "sha256": "fcd868f90ad2ec49dab126a3f129ac485aabb3756c2b0c1abd94026a74f0914c"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5308/dev/feedback-1018-review.html?durable=1",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/icons/bag.png?v=dev",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 941,
+      "src": "http://127.0.0.1:5308/assets/scenes/map-nodes/map-atmosphere-is7-1012.webp",
+      "width": 1672
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://127.0.0.1:5308/assets/cards/expedition-starters/basic-attack.webp?art=basicattack-original-rough-20261010&v=dev",
+      "width": 1441
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5308/assets/ui/card-frames/paper-1015/initial.webp?v=dev",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/map-hud-1015/gold-is7-v2.webp?v=dev",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1092,
+      "src": "http://127.0.0.1:5308/assets/cards/expedition-starters/basic-attack.webp?art=basicattack-original-rough-20261010&v=dev",
+      "width": 1441
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5308/assets/ui/card-frames/paper-1015/initial.webp?v=dev",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/map-hud-1015/gold-is7-v2.webp?v=dev",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5308/assets/cards/spell-tt3-ice-spike.webp?art=ice-spike-frozen-gear-20261011&v=dev",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5308/assets/ui/card-frames/paper-1015/common.webp?v=dev",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/icons/sparkles.png?v=dev",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/map-hud-1015/gold-is7-v2.webp?v=dev",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5308/assets/cards/martial-tt3-frostfall.webp?art=tt3-frostfall-cropped-action-builtin-20261010&v=dev",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5308/assets/ui/card-frames/paper-1015/legendary.webp?v=dev",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/icons/swords.png?v=dev",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/map-hud-1015/gold-is7-v2.webp?v=dev",
+      "width": 128
+    }
+  ],
+  "console": []
+}

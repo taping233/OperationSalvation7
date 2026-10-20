@@ -1,4 +1,5 @@
 import * as Combat from '../core/combat.js';
+import { buildEnemyActionPlan } from '../core/battle.enemy-plan.js';
 
 // 只读模拟当前防御；回合末触发与随机效果另有说明，不改变真实状态。
 export function forecastEnemyTurn(snapshot) {
@@ -16,8 +17,9 @@ export function forecastEnemyTurn(snapshot) {
   }
   for (const foe of snapshot.foes || []) {
     if (player.hp <= 0) break;
-    if (foe.dead || foe.stunned || (foe.status?.freeze || 0) > 0 || (foe.evenAttack && snapshot.turn % 2 === 1) || (foe.noFirstAttack && snapshot.turn === 1)) continue;
-    for (let i = 0; i < (foe.affix === 'frenzy' ? 2 : 1); i++) {
+    const plan = buildEnemyActionPlan(foe, snapshot.turn);
+    if (!plan.canAttack) continue;
+    for (let i = 0; i < plan.hits; i++) {
       if (player.hp <= 0) break;
       if (Combat.isStealthed(player)) break;
       const ally = allies.find(a => a.hp > 0);

@@ -50,31 +50,31 @@ it('换档清除上档整备草稿，预设导入仍保留选择', () => {
   departure.setDeployPick({ 甲: 2 }); departure.openDepartPrep();
   expect(departure.deployPick).toEqual({ 甲: 2 });
 });
-it('最终出发只提交一次，提交前浏览不扣卡，保存失败可继续修改', () => {
+it('最终出发只提交一次，提交前浏览不扣卡，保存失败可继续修改', async () => {
   departure.openDepartPrep(); choose(); actions.pickAdd({ name: '甲' });
   ports.start.mockReturnValue(false); actions.confirmDeploy();
   expect(ports.start).not.toHaveBeenCalled();
-  ports.handoff.mock.lastCall[0]();
+  await ports.handoff.mock.lastCall[0]();
   expect(departure.deployPick).toEqual({ 甲: 1 });
   expect(document.querySelector('[data-act="confirmDeploy"]').disabled).toBe(false);
   expect(base.data.stash[0].count).toBe(2);
   ports.start.mockReturnValue(true); actions.confirmDeploy();
-  ports.handoff.mock.lastCall[0](); actions.confirmDeploy();
+  await ports.handoff.mock.lastCall[0](); actions.confirmDeploy();
   expect(ports.start).toHaveBeenCalledTimes(2);
   expect(ports.start.mock.lastCall[1]).toEqual({ 甲: 1 });
   expect(departure.deployPick).toBeNull();
 });
 
-it('整备不显示规则说明，保存失败不标记，成功开局复用已有教学标记', () => {
+it('整备不显示规则说明，保存失败不标记，成功开局复用已有教学标记', async () => {
   base.markAmmoTaught = vi.fn(() => { base.data.ammoTaught = true; });
   departure.openDepartPrep(); choose();
   expect(document.querySelector('.dep-rules')).toBeNull();
   ports.start.mockReturnValue(false); actions.confirmDeploy();
   expect(base.markAmmoTaught).not.toHaveBeenCalled();
-  ports.handoff.mock.lastCall[0]();
+  await ports.handoff.mock.lastCall[0]();
   expect(base.markAmmoTaught).not.toHaveBeenCalled();
   ports.start.mockReturnValue(true); actions.confirmDeploy();
-  ports.handoff.mock.lastCall[0]();
+  await ports.handoff.mock.lastCall[0]();
   expect(base.markAmmoTaught).toHaveBeenCalledTimes(1);
 });
 it('火焰精灵整备显示实际火球且详情可到达', () => {
@@ -119,6 +119,6 @@ it('人物入口失败可从原入口重试，换档后旧onSelect/beforeConfirm
   expect(ports.choice).toHaveBeenCalledTimes(2);
   const old = ports.choice.mock.lastCall[0];
   base.slot = 2; await departure.openDepartPrep();
-  old.onSelect('侠客', vi.fn()); expect(old.beforeConfirm()).toBe(false);
+  old.onSelect('侠客', vi.fn()); expect(await old.beforeConfirm()).toBe(false);
   expect(ports.start).not.toHaveBeenCalled(); expect(departure.deployPick).toEqual({});
 });

@@ -212,7 +212,8 @@ function recordRun(outcome, detail = {}) {
       value: cardValue(e.card),
     }));
   const entry = {
-    id: `run-${Date.now().toString(36)}-${Random.random('gameplay').toString(36).slice(2, 7)}`,
+    // 记录标识只用于统计，不能因记录次数改变下一次规则随机结果。
+    id: `run-${Date.now().toString(36)}-${Random.random('recording').toString(36).slice(2, 7)}`,
     runId: snapshotRunBattles().runId,
     ts: Date.now(),
     driver: driverTag,

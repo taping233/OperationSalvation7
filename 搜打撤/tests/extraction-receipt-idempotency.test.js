@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 /* SYS-02 结算回执·幂等（2026-10-03）：真实两键事务台架（extraction-recovery.test.js 同款）。
  * 钉死：
  *   ① extractFinish 提交在事务写入后中断，重试经收据重放拿回同一份回执——字段不重复累计，
@@ -27,7 +29,7 @@ const card = { id: 'receipt-card', name: '回执测试卡', type: '法术', rari
 async function harness(slot = 2, failpoint = null) {
   localStorage.clear();
   Base.use(slot);
-  Base.reset(slot);
+  (await Base.reset(slot));
   RunStorage.write(slot, { seed: 'receipt-test', rngState: { seed: 'receipt-test', streams: { pocket: 0 } },
     hp: 20, maxHp: 30, inventory: [], ownedCards: [], myClass: 'wu' });
   const game = {

@@ -1,0 +1,149 @@
+[
+  {
+    "path": "game/src/game.boot.js",
+    "line": 792,
+    "method": "migrateLegacy",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/hub/game.bag.settle.js",
+    "line": 204,
+    "method": "recordEggBattle",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/hub/game.hub.depart.js",
+    "line": 53,
+    "method": "setPet",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/hub/game.hub.depart.js",
+    "line": 129,
+    "method": "markAmmoTaught",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/hub/game.hub.depart.js",
+    "line": 346,
+    "method": "setPet",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/hub/game.hub.runtime.js",
+    "line": 315,
+    "method": "setPet",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/hub/hub.personnel.js",
+    "line": 40,
+    "method": "upgradePet",
+    "object": "base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/hub/hub.personnel.js",
+    "line": 180,
+    "method": "hatchPet",
+    "object": "window.SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/hub/hub.trade-shop-v5.js",
+    "line": 144,
+    "method": "purchase",
+    "object": "base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/hub/hub.trade-shop-v5.js",
+    "line": 172,
+    "method": "sellStashCards",
+    "object": "base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/hub/hub.warehouse.js",
+    "line": 204,
+    "method": "useStashMaterial",
+    "object": "base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/run/chests.js",
+    "line": 224,
+    "method": "recordPetEggChestResult",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/run/game.nest.js",
+    "line": 435,
+    "method": "save",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/run/game.nest.js",
+    "line": 692,
+    "method": "save",
+    "object": "base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/run/game.run.class-choice.page.js",
+    "line": 390,
+    "method": "markAmmoTaught",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/run/game.session.js",
+    "line": 95,
+    "method": "save",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/run/game.session.js",
+    "line": 245,
+    "method": "syncPlayTime",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/run/game.session.js",
+    "line": 255,
+    "method": "wipe",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/run/game.session.js",
+    "line": 384,
+    "method": "migrateElapsed",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/ui/game.menu.pages.js",
+    "line": 461,
+    "method": "applyStoredCardRenames",
+    "object": "SDT.Base",
+    "awaited": false
+  },
+  {
+    "path": "game/src/ui/game.menu.pages.js",
+    "line": 500,
+    "method": "reset",
+    "object": "SDT.Base",
+    "awaited": false
+  }
+]

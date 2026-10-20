@@ -28,6 +28,22 @@ beforeEach(async () => {
 afterEach(() => { delete window.SDT; document.body.innerHTML = ''; });
 
 describe('奖励连续领取', () => {
+  it.each([false, true])('领取及择一按钮和放大动作都含实际卡名 choice=%s', choice => {
+    restore({ choice, count:3 });
+    const act = choice ? 'chestPick' : 'chestTake1';
+    const label = choice ? '选择这张' : '收下';
+    for (let i = 0; i < 3; i++) {
+      expect(action(act, i).getAttribute('aria-label')).toBe(`${label}：${cards[i].name}`);
+      expect(action(act, i).textContent).toBe(label);
+    }
+    const zoom = window.SDT.UI.showCardZoom = vi.fn();
+    acts.chestSelect({ i:'1' });
+    const footer = document.createElement('div');
+    footer.innerHTML = zoom.mock.calls[0][1].footer;
+    expect(footer.querySelector('button').getAttribute('aria-label')).toBe(`${label}：${cards[1].name}`);
+    expect(footer.querySelector('button').dataset.act).toBe(act);
+    expect(game.grantCard).not.toHaveBeenCalled();
+  });
   it('领取更新状态时保留所有卡面、图片、横竖滚动容器和位置，并聚焦下一张', () => {
     restore();
     const faces = [...body.querySelectorAll('.reward-card')], images = [...body.querySelectorAll('.reward-card img')];

@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('../game/src/run/lab.ending.js', () => ({ playLabEnding: callback => callback() }));
@@ -38,7 +40,7 @@ beforeAll(() => {
   window.SDT.Cards.ensureStarters();
 });
 
-beforeEach(() => {
+beforeEach(async () => {
   localStorage.clear();
   actions.clear();
   committedFinishes = 0;
@@ -51,7 +53,7 @@ beforeEach(() => {
   Base.data.stats.labBestScore = 80;
   Base.data.stats.labRuns = 2;
   Base.data.stats.playSeconds = 40;
-  expect(Base.save()).toBe(true);
+  expect((await Base.save())).toBe(true);
 
   RunStorage.readForLoad(activeSlot);
   expect(RunStorage.write(activeSlot, {

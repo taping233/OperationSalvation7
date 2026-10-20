@@ -1,0 +1,527 @@
+game/src\r7a.qa.js:7:const UI={el:{overlay,ovBody,ovTitle},_lastMode:'battle',showOverlay(title,html,mode){ovTitle.innerHTML=rich(title||'');ovBody.innerHTML=rich(disableQaActions(html));overlay.hidden=false;this._lastMode=mode;},hideOverlay(){overlay.hidden=true;},hideTooltip(){},showTooltip(){},refresh(){updateState();},log(message){logEl.insertAdjacentHTML('beforeend',`<div>${rich(message)}</div>`);},act(name,fn){actions.set(name,qaDisabledActions.has(name)?()=>UI.log('隔离验收页未接入此功能'):fn);}};
+game/src\r7a.qa.js:9:window.SDT={UI,Icons:{img:()=>'<span aria-hidden="true">◆</span>',rich,TYPE_ART:{}},Sound:{music(){},sfx(){},setDucked(){},setBoss(){},setMusicMuted(){},setSfxMuted(){},musicMuted:false,sfxMuted:false},Art:{has:()=>false,monsterArt:()=>'<span>敌</span>',classArt:()=>'',cutoutFigures(){},decodeIn(){},warm(){},collectCardAssets:()=>[]},Meta:{track(){}},MAP:{rules:{battleEnergy:2,battleHandMax:10,bossDeckSize:10,starterSha:0,battleStartDraw:5,battleTurnDraw:1,diceSides:6},items:{rations:{name:'口粮'},wood:{name:'木材'}}}};
+game/src\ui\camp-entry.js:154:    waitPageVisual(page, { signal: controller.signal, background: window.SDT?.UI?._pageBgReady })])
+game/src\ui\camp-entry.js:199:    waitPageVisual(overlay, { signal: controller.signal, background: window.SDT?.UI?._pageBgReady })])
+game/data\scenes.json:302:    "_note": "待定稿（迭代评审 09-20 B-P3）：本块为旧 11 职业背景死数据，无运行时消费方；现役五职业的「侠客」等条目待老板定稿后按 character-bible 重写，引用前先核对职业整合口径",
+game/src\ui\card-result-feedback.js:131:  const mode = options.mode || 'battle', token = options.token ?? stage?._battleToken;
+game/data\card-notes.json:3:  "_comment": "全量卡牌备注底稿（2026-09-20 老板令清空重来：底稿暂空，备注全靠卡牌库手写层；原 255 条惊悚乐园腔底稿见 git fa949f5 可随时恢复）。id 必须是现役卡库 id；卡牌库内手写（localStorage 优先），改动用卡牌库「导出备注」按钮导出后整文件回填。",
+game/data\map.json:112:    "orc_jav": {
+game/data\map.json:119:    "wolf_rider": {
+game/data\map.json:126:    "orc_axe": {
+game/data\map.json:133:    "fire_el": {
+game/data\map.json:140:    "water_el": {
+game/data\map.json:147:    "esper_crow": {
+game/data\map.json:154:    "esper_candle": {
+game/data\map.json:161:    "grass_el": {
+game/data\map.json:168:    "esper_silence": {
+game/data\map.json:175:    "esper_echo": {
+game/src\ui\cinematics.js:75:  _cardGetQueue: [],
+game/src\ui\cinematics.js:76:  _cardGetShowing: false,
+game/src\ui\cinematics.js:84:    this._cardGetQueue.push({ card, reason, context });
+game/src\ui\cinematics.js:85:    if (this._cardGetShowing) return;
+game/src\ui\cinematics.js:86:    this._cardGetShowing = true;
+game/src\ui\cinematics.js:90:      const next = this._cardGetQueue.shift();
+game/src\ui\cinematics.js:91:      if (!next) { this._cardGetShowing = false; return; }
+game/src\ui\cinematics.js:96:        this._cardGetQueue = this._cardGetQueue.filter(e => sameRewardContext(e.context, current));
+game/src\ui\cinematics.js:97:        if (this._cardGetQueue.length) { showNext(); return; }
+game/src\ui\cinematics.js:98:        this._cardGetShowing = false;
+game/src\ui\cinematics.js:139:    el._scrToken = (el._scrToken || 0) + 1;   // 作废进行中的隐藏计时
+game/src\ui\cinematics.js:140:    el._scrHiding = false;
+game/src\ui\cinematics.js:150:    if (el._scrHiding) return;   // 淡出中防重入
+game/src\ui\cinematics.js:151:    el._scrHiding = true;
+game/src\ui\cinematics.js:152:    el._scrToken = (el._scrToken || 0) + 1;
+game/src\ui\cinematics.js:153:    const token = el._scrToken;
+game/src\ui\cinematics.js:155:      el._scrHiding = false;
+game/src\ui\cinematics.js:163:      if (el._scrToken !== token) return;   // 期间被 showScreen 重新拉起，不能清除新退场锁
+game/src\ui\cinematics.js:166:      el._scrHiding = false;
+game/src\core\camera.js:16:    this._pan = createMapDragMotion(this, {
+game/src\core\camera.js:23:    this._pan.cancel();
+game/src\core\camera.js:43:    if (this._pan.dragging) { this._pan.move(dx, dy); return; }
+game/src\core\camera.js:44:    this._stopGlide();
+game/src\core\camera.js:52:    this._stopGlide();
+game/src\core\camera.js:69:    this._stopGlide(); this.frameMode = 'manual'; this._pan.begin();
+game/src\core\camera.js:71:  Camera.prototype.endPan = function (allowed) { this._pan.release(allowed); };
+game/src\core\camera.js:72:  Camera.prototype.cancelPan = function (clamp = false) { this._pan.cancel(clamp); };
+game/src\core\camera.js:75:    this._stopGlide();
+game/src\core\camera.js:85:  Camera.prototype._stopGlide = function () {
+game/src\core\camera.js:86:    this._pan.cancel();
+game/src\core\camera.js:87:    if (this._glide) { this._glide.dead = true; this._glide = null; }
+game/src\core\camera.js:91:    this._stopGlide();
+game/src\core\camera.js:103:    this._glide = token;
+game/src\core\camera.js:106:      if (token.dead || this._glide !== token) return;
+game/src\core\camera.js:115:      else if (this._glide === token) this._glide = null;
+game/src\core\camera.js:149:    this._stopGlide();
+game/src\core\camera.js:186:    else { this._stopGlide(); this.zoom = zoom; this.cx = cx; this.cy = cy; }
+game/src\core\camera.js:193:    this._stopGlide();
+game/src\ui\departure-transition.js:27:        await waitPageVisual(document.getElementById('viewport'), { background: window.SDT?.UI?._pageBgReady });
+game/src\core\asset-url.js:11:  typeof __RUNTIME_ASSET_ALIASES__ !== 'undefined' ? __RUNTIME_ASSET_ALIASES__ : {};
+game/src\core\asset-url.js:13:  typeof __BUILD_VERSION__ !== 'undefined' ? __BUILD_VERSION__ : 'dev';
+game/src\e2.snapshot.qa.js:22:  el: { overlay, ovBody, ovTitle }, _lastMode: 'battle',
+game/src\e2.snapshot.qa.js:26:    overlay.hidden = false; this._lastMode = mode;
+game/src\e2.snapshot.qa.js:36:sdtDefine('Icons', { img: () => '<span aria-hidden="true">◆</span>', rich, TYPE_ART: {} });
+game/src\e2.snapshot.qa.js:53:  CARD_BACKS: [{ id: 'classic', name: '行囊粗布', icon: 'cards', from: '默认卡背' }] });
+game/src\ui\game.menu.js:228:      const modeName = { page: '全屏页', battle: '战斗弹层', bag: '背包弹层', bagpage: '背包页', chest: '宝箱浮层', scene: '场景弹层', wide: '宽幅弹层' }[UI._lastMode] || '弹层';
+game/src\ui\game.menu.js:229:      return { id: 'mode:' + (UI._lastMode || ''), name: modeName };
+game/src\ui\game.menu.js:234:    if (title && !title.hidden && !title._scrHiding) return { id: 'state:title', name: '标题页' };
+game/src\ui\game.menu.pages.js:52:    const sourceRevision = UI._overlayRevision;
+game/src\ui\game.menu.pages.js:58:      UI._overlayRevision === sourceRevision;
+game/src\ui\game.menu.pages.js:68:    const token = Symbol('suggestion'); layer._openToken = token;
+game/src\ui\game.menu.pages.js:71:      if (layer._openToken !== token) return;
+game/src\ui\game.menu.pages.js:74:      layer._openToken = null;
+game/src\ui\game.menu.pages.js:80:      if (busy || layer._openToken !== token) return;
+game/src\ui\game.menu.pages.js:88:      if (layer._openToken !== token) return;
+game/src\ui\game.menu.pages.js:99:    setTimeout(() => { if (layer._openToken === token) ta.focus(); }, 0);
+game/src\game.boot.js:553:    const battleBehind = !ov.hidden && !!UI._hasBattleStage;
+game/src\game.boot.js:556:       battleBehind || UI._lastMode === 'chest'));
+game/src\ui\hud.js:61:    if (this._lastMode !== 'battle') renderExpeditionPanel($('routePanel'), game, /** @type {(name: string) => string} */ (name => SDT.Icons.img(name)));
+game/src\ui\hud.js:63:    if (game.state === 'idle' && this._roomActive) this.endRoom();
+game/src\ui\hud.js:66:    if (this._lastBannerLayer !== layer) {
+game/src\ui\hud.js:67:      this._lastBannerLayer = layer;
+game/src\ui\hud.js:79:    if (this._lastTurn !== turn) {
+game/src\ui\hud.js:80:      this._lastTurn = turn;
+game/src\ui\hud.js:85:    if (this._lastValue !== valTotal) {
+game/src\ui\hud.js:87:      if (this._lastValue != null) this.popNum(this.el.statValue);
+game/src\ui\hud.js:88:      this._lastValue = valTotal;
+game/src\ui\hud.js:96:    const firstHpSet = this._lastHpKey == null;
+game/src\ui\hud.js:97:    if (this._lastHpKey !== hpKey) {
+game/src\ui\hud.js:99:      this._lastHpKey = hpKey;
+game/src\ui\hud.js:110:      active: game.runActive !== false && this._lastMode !== 'battle'
+game/src\ui\hud.js:113:    if (this._lastCoins !== game.coins) {
+game/src\ui\hud.js:115:      if (this._lastCoins != null) this.popNum(this.el.charCoins);
+game/src\ui\hud.js:116:      this._lastCoins = game.coins;
+game/src\ui\hud.js:118:    if (this._lastAtk !== game.atk) {
+game/src\ui\hud.js:120:      if (this._lastAtk != null) this.popNum(this.el.charAtk);
+game/src\ui\hud.js:121:      this._lastAtk = game.atk;
+game/src\ui\hud.js:125:    if (this._lastHeroCls !== cls) {
+game/src\ui\hud.js:126:      this._lastHeroCls = cls;
+game/src\ui\home-menu-motion.js:45:  if (!title || title.hidden || title._scrHiding) return;
+game/src\ui\home-menu-motion.js:83:  if (!title || title.hidden || title._scrHiding
+game/src\generated\narrative-events.js:2:export default {"inkVersion":21,"root":[[["done",{"#n":"g-0"}],null],"done",{"tt6_goldmine":[["^塌陷的矿井里仍有金属反光，但支撑梁正在呻吟。","\n","ev","str","^收下 3 币@@effect=goldmine_safe@@detail=稳定收益@@tone=ok","/str","/ev",{"*":".^.c-0","flg":20},"ev","str","^冒险挖深@@effect=goldmine_deep@@detail=+6 币，但损失 3 血@@tone=danger","/str","/ev",{"*":".^.c-1","flg":20},{"c-0":["\n","^你只取走入口附近的矿石，在第二次震动前退了出来。","\n","end",{"#f":5}],"c-1":["\n","^更深处确实埋着富矿，代价是被碎石划开的伤口。","\n","end",{"#f":5}]}],null],"tt6_airdrop":[["^空投箱的隔层只能保住一类物资，其余部分已经污染。","\n","ev","str","^木材 ×1@@effect=airdrop_wood@@detail=扩建与仓储路线","/str","/ev",{"*":".^.c-0","flg":20},"ev","str","^口粮 ×1@@effect=airdrop_rations@@detail=为安全格与续航准备","/str","/ev",{"*":".^.c-1","flg":20},"ev","str","^应急处理@@effect=airdrop_heal@@detail=回复 3 血@@tone=ok","/str","/ev",{"*":".^.c-2","flg":20},{"c-0":["\n","^你拆下还能承重的结构件。","\n","end",{"#f":5}],"c-1":["\n","^你留下密封完好的口粮。","\n","end",{"#f":5}],"c-2":["\n","^箱内的医疗模块仍能完成一次快速处理。","\n","end",{"#f":5}]}],null],"tt6_chestdraw":[["^三只物资箱共用同一枚即将熔断的解锁芯片，锁芯最终落向哪一只，不由你决定。","\n","ev","str","^撬开小型物资箱@@effect=chest_small@@detail=低风险：1 张卡 + 1~2 币","/str","/ev",{"*":".^.c-0","flg":20},"ev","str","^赌一把密封物资箱@@effect=chest_medium@@detail=高回报：三选一 + 2~3 币@@tone=ok","/str","/ev",{"*":".^.c-1","flg":20},{"c-0":["\n","^小箱的锁扣应声弹开。","\n","end",{"#f":5}],"c-1":["\n","^密封箱亮起绿色指示灯，内部传来机械展开声。","\n","end",{"#f":5}]}],null],"tt6_timeskip":[["^体育馆地板的裂缝里渗出冷青色的光，尘埃绕开它落下，仿佛那里不属于这间屋子。","\n","ev","str","^踏入裂隙@@effect=timeskip_move@@detail=向前 6 格，落点照常结算@@tone=ok","/str","/ev",{"*":".^.c-0","flg":20},{"c-0":["\n","^耳鸣骤起又骤停——再睁眼时，你已站在数步之外的走廊尽头，身后没有来路。","\n","end",{"#f":5}]}],null],"tt6_demondeal":[["^维修隧道的尽头亮着一盏不该存在的灯。交易台后的影子看不清脸，只把一只手掌摊在你面前，掌心朝上。","\n","ev","str","^以血换物@@effect=demondeal_trade@@detail=-1 血，获得一件传说物品@@tone=danger","/str","/ev",{"*":".^.c-0","flg":20},{"c-0":["\n","^指尖被划开的瞬间，一件冰冷的旧物落进了你的掌心。影子心满意足地退回黑暗里。","\n","end",{"#f":5}]}],null],"tt6_bandits":[["^暴雨把走廊浇成了铁灰色。数道剪影从课桌残骸后站起，撬棍在积水里拖出一串火星。","\n","ev","str","^应 战@@effect=bandits_fight@@detail=反抗组织拾荒者 ×3~5（随层数增加），战胜后密封物资箱 ×2","/str","/ev",{"*":".^.c-0","flg":20},"ev","str","^趁暴雨逃离@@effect=bandits_escape@@detail=不战斗，也不获得物资箱","/str","/ev",{"*":".^.c-1","flg":20},{"c-0":["\n","^你握紧了武器。雨声里，第一击已经到了。","\n","end",{"#f":5}],"c-1":["\n","^你掀翻一排课桌，趁雨幕遮住视线，从侧门钻入了连廊。身后的叫骂渐渐被雨声吞没。","\n","end",{"#f":5}]}],null],"tt6_mystery":[["^半塌的实验准备室里，应急补给柜竟还亮着待机灯。碎片匣与零钱匣共用最后一次供电。屏幕提示：投骰启动，1～3 点弹出通行证A碎片，4～6 点弹出三枚硬币；也可以直接离开。","\n","ev","str","^翻找补给柜@@effect=mystery_supply@@detail=员工通行证A + 2 币","/str","/ev",{"*":".^.c-0","flg":20},{"c-0":["\n","^柜门弹开时滚出两枚旧硬币，压在一张彩虹色的令牌下面。你把两样都收进了口袋。","\n","end",{"#f":5}]}],null],"tt6_goldhammer":[["^校工机房里，一把动力锤还挂在充电架上，电量意外地满。老师傅指了指锤子，又递来一张配送凭据：“锤子可以拿走；要是肯替我把这封信送到下一家商店，那边两格货物就记我的账。选一样吧。”","\n","ev","str","^抡起动力锤@@effect=goldhammer_strike@@detail=先造成 5 点伤害，一击制敌再 +2 币","/str","/ev",{"*":".^.c-0","flg":20},{"c-0":["\n","^锤体轰鸣着撞进黑暗，火花溅了满墙。","\n","end",{"#f":5}]}],null],"tt6_relief":[["^校医室的门歪斜着，屋内的救济台却被整理过：绷带、温水，旁边还放着一匣防身招式。值守的人抬起头：“处理伤口，还是拿一张防身的招式？物资有限，只能选一样。”","\n","ev","str","^接受处理@@effect=relief_heal@@detail=回复 6 血@@tone=ok","/str","/ev",{"*":".^.c-0","flg":20},{"c-0":["\n","^消毒水的气味刺得眼睛发酸。缠好绷带时，你觉得自己又能再走一段了。","\n","end",{"#f":5}]}],null],"tt6_systemsupply":[["^废弃控制室的补给终端还剩最后一点电量，配送无人机挂在充电架上，货舱里躺着最后的库存。","\n","ev","str","^对接终端@@effect=systemsupply_restock@@detail=员工通行证A + 木材 ×1","/str","/ev",{"*":".^.c-0","flg":20},{"c-0":["\n","^无人机咯哒一声松开货舱：一段建材和一张员工通行证A一起滑了出来。","\n","end",{"#f":5}]}],null],"r6_last_lamp_1":[["^教学楼与体育馆之间的连廊破了窗。雪压在一块旧疏散路标上，只露出两层方向相反的箭头：褪色的底层指向实验楼，后来补刷的一层改指体育馆。最下面还有一行铅笔字：「停电后，以亮灯为准。」","\n","ev","str","^擦净路标，记下两层箭头@@effect=continue@@detail=永久记录本段见闻；本局不再推进。无物资变化。","/str","/ev",{"*":".^.c-0","flg":20},{"c-0":["\n","^冰霜化开后，新旧漆面的边缘同时显了出来。这不是画错的箭头，而是某次改道留下的两套路线。","\n","end",{"#f":5}]}],null],"r6_last_lamp_2":[["^校工值班室的抽屉里压着一张改道图和一页停电巡检表。改道图在玻璃连廊上盖着「冬季封闭」的红章；巡检表最后一栏写着：「北门引路灯，停电后切至蓄电。」","\n","ev","str","^对照路标，抄下巡检记录@@effect=continue@@detail=永久记录本段见闻；本局不再推进。无物资变化。","/str","/ev",{"*":".^.c-0","flg":20},{"c-0":["\n","^两层箭头都是真的。一条是平日近路，一条是风雪封路后的公共疏散线；北门那盏灯才是最后的确认标记。","\n","end",{"#f":5}]}],null],"r6_last_lamp_3":[["^北门灯箱仍有微光。灯罩内的反光片卡在半开的转轴上：把它抬高朝外，光束能越过积雪照亮公共疏散标识，远处的人也能循光而来，但这条通道会在黑暗中清楚暴露；把它压低转向墙内，光只会在近处投出室内近路记号，通道保持隐蔽，远处寻找出口的人却看不见它。同一块反光片不能同时朝向两边。","\n","ev","str","^抬高反光片，开放远射照明@@effect=open_beacon@@detail=远处可循光，但通路会暴露。永久记录【北门远灯记录】。无物资变化。@@tone=ok","/str","/ev",{"*":".^.c-0","flg":20},"ev","str","^压低反光片，遮光近照@@effect=shaded_marker@@detail=近路保持隐蔽，但远处找不到。永久记录【遮光近照记录】。无物资变化。","/str","/ev",{"*":".^.c-1","flg":20},{"c-0":["\n","^灯光越过风雪落在体育馆方向，远处也能看清路标；北门通道从此不再藏在暗处。","\n","end",{"#f":5}],"c-1":["\n","^窄光贴着墙面照出旧箭头，近处的路仍可辨认；从风雪深处望来，北门依旧是一片黑暗。","\n","end",{"#f":5}]}],null]}],"listDefs":{}};
+game/src\ui\interface-motion.js:28:  if (mode === 'page' || mode === 'bagpage' || ui._roomActive) return 'page';
+game/src\ui\interface-motion.js:52:  const revision = window.SDT?.UI?._overlayRevision;
+game/src\ui\interface-motion.js:54:    if (!overlay || overlay.hidden || window.SDT?.UI?._overlayRevision !== revision) return;
+game/src\ui\interface-motion.js:88:      const acts = this._acts, input = this._inputHandler, hover = this._hoverHandler;
+game/src\ui\interface-motion.js:90:      this._acts = acts;
+game/src\ui\interface-motion.js:91:      this._inputHandler = input;
+game/src\ui\interface-motion.js:92:      this._hoverHandler = hover;
+game/src\ui\interface-motion.js:107:    const motionKeyChanged = options?.motionKey && options.motionKey !== this._motionKey;
+game/src\ui\interface-motion.js:109:    let contentRefresh = wasOpen && this._lastMode === mode && !motionKeyChanged && !refreshHub
+game/src\ui\interface-motion.js:111:        || this._motionHeading === heading && mode !== 'battle' && oldProfile !== 'base-content');
+game/src\ui\interface-motion.js:112:    this._motionHeading = heading;
+game/src\ui\interface-motion.js:113:    this._motionKey = options?.motionKey || null;
+game/src\ui\interface-motion.js:114:    const restart = !wasOpen || this._lastMode !== mode || motionKeyChanged || (mode === 'page' && !refreshHub);
+game/src\ui\interface-motion.js:179:      && (mode === 'page' || mode === 'bagpage' || (this._roomActive && mode !== 'battle'));
+game/src\ui\interface-motion.js:213:    this._motionExitDuration = exitDuration;
+game/src\ui\interface-motion.js:218:    if (options?.immediate || interfaceReducedMotion() || this._hideTimer || !instantRoom) {
+game/src\ui\interface-motion.js:223:    this._acts = {};
+game/src\ui\interface-motion.js:224:    this._inputHandler = null;
+game/src\ui\interface-motion.js:225:    this._hoverHandler = null;
+game/src\ui\interface-motion.js:236:    if (element && (element.hidden || element._scrHiding)) {
+game/src\ui\interface-motion.js:287:    const restart = overlay.hidden || ui._lastMode !== event.detail || event.detail === 'page';
+game/src\home\story.last-lamp.js:7:  open_beacon: 'last_lamp_open_beacon',
+game/src\home\story.last-lamp.js:8:  shaded_marker: 'last_lamp_shaded_marker',
+game/src\ui\inventory-zoom.js:11:  const acts = window.SDT.UI?._acts || {};
+game/src\ui\inventory-zoom.js:13:  zoom._inventoryActions = Object.fromEntries([...names].map(name => [name, acts[name]]).filter(([, handler]) => typeof handler === 'function'));
+game/src\ui\overlay.js:20:  _overlayReturnFocus: null,
+game/src\ui\overlay.js:21:  _overlayInerted: [],
+game/src\ui\overlay.js:43:      revision: this._overlayRevision, getRevision: () => this._overlayRevision,
+game/src\ui\overlay.js:51:    this._roomActive = true;
+game/src\ui\overlay.js:56:    this._roomActive = false;
+game/src\ui\overlay.js:66:    const revision = this._overlayRevision = (this._overlayRevision || 0) + 1;
+game/src\ui\overlay.js:67:    this._cancelPageBg?.();
+game/src\ui\overlay.js:69:    document.getElementById('cardZoom')?._closeCardZoom?.(true);
+game/src\ui\overlay.js:71:    if (this._hideTimer) { clearTimeout(this._hideTimer); this._hideTimer = null; }
+game/src\ui\overlay.js:72:    this._finishHide = null;
+game/src\ui\overlay.js:78:      this._overlayReturnFocus = active && active !== document.body ? active : null;
+game/src\ui\overlay.js:95:    this._hasBattleStage = bodyHtml.includes('battle-stage');
+game/src\ui\overlay.js:106:    card.classList.toggle('room', this._roomActive && mode !== 'page' && mode !== 'bag' && mode !== 'bagpage' && mode !== 'chest' && mode !== 'discover');
+game/src\ui\overlay.js:110:    this.el.overlay.classList.toggle('room-view', mode === 'battle' || (this._roomActive && mode !== 'chest' && mode !== 'discover'));
+game/src\ui\overlay.js:126:    if (!document.body.classList.contains('interface-motion') && wasOpen && !refreshHub && (this._lastMode !== mode || mode === 'page')) {
+game/src\ui\overlay.js:132:    const prevMode = this._lastMode;
+game/src\ui\overlay.js:133:    this._lastMode = mode;
+game/src\ui\overlay.js:135:    this._isolateOverlayBackground();
+game/src\ui\overlay.js:152:    if (this.el.ovCloseX) this.el.ovCloseX.hidden = !this._canCancelOverlay() || !!this.el.ovBody.querySelector('.card-library-page, .shop-market, .shop-exchange, .reward-replica, .event-scene, .bag-view');
+game/src\ui\overlay.js:172:      if (this.el.overlay.hidden || this._overlayRevision !== revision) return;
+game/src\ui\overlay.js:175:      const target = this._resolveOverlayInitialFocus(options.initialFocus);
+game/src\ui\overlay.js:182:    this._checkPageBg();
+game/src\ui\overlay.js:188:  _bgReady: null,
+game/src\ui\overlay.js:190:    this._cancelPageBg?.();
+game/src\ui\overlay.js:191:    this._pageBgReady = Promise.resolve();
+game/src\ui\overlay.js:201:    if (this._bgReady && this._bgReady.has(url)) return;
+game/src\ui\overlay.js:202:    if (!this._bgReady) this._bgReady = new Set();
+game/src\ui\overlay.js:205:    this._pageBgReady = new Promise(resolve => { resolveReady = resolve; });
+game/src\ui\overlay.js:216:      if (this._cancelPageBg === cancel) this._cancelPageBg = null;
+game/src\ui\overlay.js:220:      if (success) this._bgReady.add(url);
+game/src\ui\overlay.js:230:    this._cancelPageBg = cancel;
+game/src\ui\overlay.js:240:  _bagCloseHook: null,
+game/src\ui\overlay.js:245:    if (!this._hideTimer && this.el.overlay.hidden) return;
+game/src\ui\overlay.js:246:    if (this._hideTimer) {
+game/src\ui\overlay.js:248:        clearTimeout(this._hideTimer);
+game/src\ui\overlay.js:249:        this._finishHide();
+game/src\ui\overlay.js:253:    this._overlayRevision = (this._overlayRevision || 0) + 1;
+game/src\ui\overlay.js:254:    this._cancelPageBg?.();
+game/src\ui\overlay.js:256:    document.getElementById('cardZoom')?._closeCardZoom?.(true);
+game/src\ui\overlay.js:258:    this._lastMode = null;
+game/src\ui\overlay.js:259:    this._acts = {};
+game/src\ui\overlay.js:260:    this._inputHandler = null;
+game/src\ui\overlay.js:261:    this._hoverHandler = null;
+game/src\ui\overlay.js:277:      this._hideTimer = null;
+game/src\ui\overlay.js:278:      this._finishHide = null;
+game/src\ui\overlay.js:297:      this._restoreOverlayBackground();
+game/src\ui\overlay.js:302:      this._hasBattleStage = false;
+game/src\ui\overlay.js:305:      const returnFocus = this._overlayReturnFocus;
+game/src\ui\overlay.js:306:      this._overlayReturnFocus = null;
+game/src\ui\overlay.js:315:    this._finishHide = finish;
+game/src\ui\overlay.js:320:    this._hideTimer = setTimeout(finish, this._motionExitDuration ?? (btFastClose ? 160 : 225));
+game/src\ui\overlay.js:328:    const mode = this._lastMode;
+game/src\ui\overlay.js:342:    const cancelBtn = this._findCancelBtn();
+game/src\ui\overlay.js:346:    if (mode === 'bag' || mode === 'bagpage') { if (this._bagCloseHook) this._bagCloseHook(); else this.hideOverlay(); return true; }
+game/src\ui\overlay.js:365:    if (this.el.overlay.hidden || this._lastMode === 'battle') return false;
+game/src\ui\overlay.js:366:    if (this._findCancelBtn()) return true;
+game/src\ui\overlay.js:367:    const m = this._lastMode;
+game/src\ui\overlay.js:403:    const focusables = this._overlayFocusable();
+game/src\ui\overlay.js:419:    if (this._overlayInerted.length) return;
+game/src\ui\overlay.js:428:        this._overlayInerted.push(sibling);
+game/src\ui\overlay.js:435:    for (const el of this._overlayInerted.splice(0)) el.removeAttribute('inert');
+game/src\home\home.scene.js:340:      PLACEMENT_OUT_OF_BOUNDS: "家具超出可用空间",
+game/src\home\home.scene.js:341:      PLACEMENT_OVERLAP: "家具与现有物件重叠",
+game/src\home\home.scene.js:342:      INVALID_SURFACE: "该家具不能放在这个表面",
+game/src\home\home.scene.js:343:      INVALID_ROTATION: "当前旋转不可用",
+game/src\home\home.scene.js:344:      MISSING_SUPPORT: "桌面摆件需要工作桌支撑",
+game/src\home\home.scene.js:345:      UNOWNED_INSTANCE: "家具库存已变化，请刷新",
+game/src\core\flight-recorder.local.js:99:      const frames = frameSummary(SDT?.Battle?._perf?.frameCacheStats?.());
+game/src\core\icons-bitmap.js:25:  function url(name) { return safe(name) === 'altar' ? ALTAR_ART_URL : safe(name) === 'coin' ? COIN_ART_URL : assetUrl(`${ROOT}${safe(name)}.png`); }
+game/src\ui\page-visual-ready.js:169:  const lifetime = createPageSurfaceLifetime(source, { overlay, getRevision: () => ui._overlayRevision, onInvalidate: cleanup });
+game/src\ui\page-visual-ready.js:179:      try { ready = await waitPageVisual(body, { signal: controller.signal, background: ui._pageBgReady, frameReady: true }); }
+game/src\ui\page-loading.js:88:          ? waitPageVisual(body, { signal: cutController.signal, background: window.SDT?.UI?._pageBgReady })
+game/src\home\home.presenter.js:33:    STALE_REVISION: '基地资料已变化，请刷新后重试。',
+game/src\home\home.presenter.js:34:    SAVE_FAILED: '保存失败，原布局仍然保留。',
+game/src\home\home.presenter.js:35:    INSUFFICIENT_FUNDS: '储备币不足。',
+game/src\home\home.presenter.js:36:    PLACEMENT_OVERLAP: '家具位置重叠。',
+game/src\home\home.presenter.js:37:    PLACEMENT_OUT_OF_BOUNDS: '家具超出房间范围。',
+game/src\ui\performance-settings.js:23:    <p id="setPerformanceStatus" class="performance-help" role="status" aria-live="polite">${hasUnsavedPerformanceSettings() ? UNSAVED_MESSAGE : ''}</p>
+game/src\core\perf-probe.local.js:179:    try { frames = SDT.Battle?._perf?.frameCacheStats?.() ?? { available: false, phase: 'before-entry',
+game/src\ui\reward-state.js:24:    : state === 'forfeited' ? REWARD_FORFEITED : '';
+game/src\ui\route-overlay.js:126:    return fail(original, choices.length?'QUALITY_GATE_REJECTED':'NO_MUTABLE_BRANCH_PAIR');
+game/src\core\renderer.js:140:  const nodeRadius = (n) => n.li === -1 ? (n.def.type === 'altar' ? ALTAR_R : BOSS_R) : NODE_R;
+game/src\core\renderer.fx.js:21:    if (this._stopTimer) return;
+game/src\core\renderer.fx.js:23:    this._stopTimer = setTimeout(() => { this.timeScale = 1; this._stopTimer = null; }, ms);
+game/src\core\runtime-trace.local.js:170:    buildVersion: typeof __BUILD_VERSION__ !== 'undefined' ? __BUILD_VERSION__ : 'dev',
+game/src\run\game.run.events.js:814:      goldmine_safe: settle(() => { narrate(); eventCommands.gainCoins(3); }),
+game/src\run\game.run.events.js:815:      goldmine_deep: settle(() => { narrate(); eventCommands.gainCoins(6); eventCommands.damage(3, '塌方采掘点'); }),
+game/src\run\game.run.events.js:816:      airdrop_wood: () => { narrate(); rewards(getCards().all().find(x => x.id === 'tt-wood')); },   // 需求 #10：物资以卡牌入包
+game/src\run\game.run.events.js:817:      airdrop_rations: () => { narrate(); rewards(getCards().all().find(x => x.id === 'tt-rations')); },
+game/src\run\game.run.events.js:818:      airdrop_heal: settle(() => { narrate(); eventCommands.heal(3); }),
+game/src\run\game.run.events.js:819:      chest_small: () => { narrate(); openChestsOnCell([{ kind: 'small' }], '你选择了稳妥的小型物资箱'); },
+game/src\run\game.run.events.js:820:      chest_medium: () => { narrate(); openChestsOnCell([{ kind: 'medium' }], '你选择了高风险的密封物资箱'); },
+game/src\run\game.run.events.js:823:      relief_heal: settle(() => { narrate(); UI.log('[[icon:heart]] 爱心救济站为你处理了伤口', 'ok'); eventCommands.heal(6); }),
+game/src\run\game.run.events.js:824:      mystery_supply: () => { narrate(); eventCommands.gainCoins(2); rewards(getCards().all().find(c => c.id === 'tt-token-color')); },
+game/src\run\game.run.events.js:825:      systemsupply_restock: () => {
+game/src\run\game.run.events.js:831:      demondeal_trade: settle(() => {
+game/src\run\game.run.events.js:838:      bandits_fight: async () => {   // 战斗与开箱路径自管收尾，不走 settle（同 chest_*）
+game/src\run\game.run.events.js:851:      goldhammer_strike: async () => {
+game/src\hub\base-state.js:45:    _m01: { revision: 0, requests: {} },
+game/src\hub\base-state.js:107:  if (!d._m01 || typeof d._m01 !== 'object') d._m01 = { revision: 0, requests: {} };
+game/src\hub\base-state.js:108:  if (!Number.isInteger(d._m01.revision) || d._m01.revision < 0) d._m01.revision = 0;
+game/src\hub\base-state.js:109:  if (!d._m01.requests || typeof d._m01.requests !== 'object' || Array.isArray(d._m01.requests)) d._m01.requests = {};
+game/src\run\chests.js:51:  const closeRewardZoom = () => { rewardZoom?._closeCardZoom?.(true); rewardZoom = null; };
+game/src\cards\structured-card-description.js:38:      (card.infuse !== undefined && card.infuse !== 0) || card._registeredTriggers !== undefined) return null;
+game/src\run\encounter-selector.js:36:  return {ok:true,value:{kind:'entry',encounterId:`entry:${fallback.id}`,enemyIds:[fallback.id],size:[...fallback.size],risk:enc.risk||'中',strategy:enc.strategy||'',rewardKind:'normal',fallbackReason:choice?.kind==='group'?'INVALID_GROUP':null}};
+game/src\run\game.run.dev.js:103:    title:UI.el.ovTitle?.innerHTML || '', mode:UI._lastMode,
+game/src\run\game.run.dev.js:104:    acts:{ ...UI._acts }, input:UI._inputHandler, hover:UI._hoverHandler,
+game/src\run\game.run.dev.js:105:    roomActive:UI._roomActive, bagClose:UI._bagCloseHook,
+game/src\run\game.run.dev.js:106:    returnFocus:UI._overlayReturnFocus, focus:document.activeElement,
+game/src\run\game.run.dev.js:121:      UI._acts = {}; UI._inputHandler = null; UI._hoverHandler = null;
+game/src\run\game.run.dev.js:126:        UI._roomActive = origin.roomActive;
+game/src\run\game.run.dev.js:130:        UI._acts = origin.acts; UI._inputHandler = origin.input; UI._hoverHandler = origin.hover;
+game/src\run\game.run.dev.js:131:        UI._bagCloseHook = origin.bagClose; UI._overlayReturnFocus = origin.returnFocus;
+game/src\run\game.run.dev.js:232:    UI._acts = {};
+game/src\run\game.run.dev.js:243:    UI._inputHandler = tab === 'debug' ? inputHandler : null;
+game/src\run\game.run.dev.js:244:    UI._hoverHandler = null;
+game/src\run\event-card-choice.js:33:    if (choiceZoomToken !== null && owner?.dataset.choiceView === choiceZoomToken) zoom._closeCardZoom?.(true);
+game/src\run\game.run.altar.js:161:      document.getElementById('cardZoom')?._closeCardZoom?.(true);
+game/src\run\game.run.altar.js:170:      document.getElementById('cardZoom')?._closeCardZoom?.(true);
+game/src\run\game.run.altar.js:177:    document.getElementById('cardZoom')?._closeCardZoom?.(true);
+game/src\cards\rot-seed-revision.js:6:    ? ROT_SEED_DESCRIPTION : card?.desc;
+game/src\run\game.run.class-choice.page.js:304:  UI._hoverHandler = (e) => {
+game/src\run\game.run.dev-loader.js:43:    title:UI.el.ovTitle?.innerHTML || '', mode:UI._lastMode,
+game/src\run\game.run.dev-loader.js:44:    acts:{ ...UI._acts }, input:UI._inputHandler, hover:UI._hoverHandler,
+game/src\run\game.run.dev-loader.js:45:    roomActive:UI._roomActive, bagClose:UI._bagCloseHook,
+game/src\run\game.run.dev-loader.js:46:    returnFocus:UI._overlayReturnFocus, focus:document.activeElement,
+game/src\run\game.run.dev-loader.js:62:    key, overlay, body, root:body.firstElementChild, hidden:overlay.hidden, revision:UI._overlayRevision,
+game/src\run\game.run.dev-loader.js:73:    entry.overlay.hidden === entry.hidden && entry.body.firstElementChild === entry.root && UI._overlayRevision === entry.revision;
+game/src\cards\cards.view.js:122:  const ghostDmg = !showDmg && isDmgType && c._preview;
+game/src\hub\base.commands.js:16:  const state = base._readForCommit(slotId);
+game/src\hub\base.commands.js:20:    return fail(issue === 'tooNew' ? 'INVALID_STATE' : 'SAVE_FAILED',
+game/src\hub\base.commands.js:25:  const revision = snapshot._m01.revision;
+game/src\hub\base.commands.js:26:  delete snapshot._m01;
+game/src\hub\base.commands.js:38:  const current = Base()._readForCommit(context.slotId);
+game/src\hub\base.commands.js:47:  const prior = current._m01.requests[`${identity.command.trim()}:${context.requestId}`];
+game/src\hub\base.commands.js:48:  if (!prior) return { ok: true, value: null, revision: current._m01.revision };
+game/src\hub\base.commands.js:65:  const current = base._readForCommit(context.slotId);
+game/src\hub\base.commands.js:76:  const prior = current._m01.requests[requestKey];
+game/src\hub\base.commands.js:82:  const revision = current._m01.revision;
+game/src\hub\base.commands.js:107:  delete afterState._m01;
+game/src\hub\base.commands.js:108:  afterState._m01 = {
+game/src\hub\base.commands.js:110:    requests: { ...current._m01.requests, [requestKey]: { fingerprint, result } },
+game/src\hub\base.commands.js:114:    base._writeCommitted(context.slotId, afterState);
+game/src\ui\ui.js:40:    _acts: {},   // 弹窗按钮动作表：data-act → 回调
+game/src\ui\ui.js:41:    _baseActs: {},   // 全局基础动作（页面同名动作优先）
+game/src\ui\ui.js:42:    _roomActive: false, // 地图格子的整段结算都保持为全屏房间页
+game/src\ui\ui.js:66:        const fn = this._acts[btn.dataset.act] || this._baseActs[btn.dataset.act];
+game/src\ui\ui.js:77:        if (this._canCancelOverlay()) this.closeTopOverlayByEsc();
+game/src\ui\ui.js:80:      this._baseActs.openHelp = (d) => this.showHelp(d.page);
+game/src\ui\ui.js:83:        if (this._inputHandler) this._inputHandler(e);
+game/src\ui\ui.js:87:        if (this._hoverHandler) this._hoverHandler(e);
+game/src\ui\ui.js:95:          this._trapOverlayFocus(e);
+game/src\ui\ui.js:104:            if (!e.repeat) zoom?._closeCardZoom?.();
+game/src\ui\ui.js:128:    act(name, fn) { this._acts[name] = fn; },
+game/src\ui\ui.js:141:        if (typeof old._closeCardZoom === 'function') old._closeCardZoom(true);
+game/src\ui\ui.js:399:      el._closeCardZoom = close;
+game/src\ui\ui.js:426:          const fn = this._acts[btn.dataset.act];
+game/src\hub\base.js:149:      const revision = ((candidate._m01 && candidate._m01.revision) || 0) + 1;
+game/src\hub\base.js:151:        _m01: { ...(candidate._m01 || {}), revision, requests: { ...((candidate._m01 && candidate._m01.requests) || {}) } } };
+game/src\hub\base.js:157:      data._m01 = next._m01;
+game/src\hub\battle-settlement.commands.js:84:    try { value = getBase()._readForCommit(slotId); }
+game/src\hub\battle-settlement.commands.js:87:    const revision = value._m01?.revision;
+game/src\hub\game.cardslib.designer.js:187:    UI._inputHandler = (e) => {
+game/src\hub\game.cardslib.designer.js:256:    el.innerHTML = cardHTML({ ...draft, name: draft.name.trim(), _preview: true }, 'xl');
+game/src\hub\game.bag.settle.js:30:  UI._bagCloseHook = bagSlots.closeBackpack;
+game/src\hub\game.bag.settle.js:267:        if (settlement.retryAction && UI._acts?.battleSettleRetry === settlement.retryAction) {
+game/src\hub\departure-persistence.js:16:    const stored = afterBase?._m01?.requests?.[`${DEPARTURE_COMMAND}:${journal.requestId}`];
+game/src\hub\departure-persistence.js:20:        (beforeBase?._m01?.revision || 0) !== journal.expectedBaseRevision ||
+game/src\hub\departure-persistence.js:22:        afterRun._r2?.runId !== journal.runId || afterRun._r2?.revision !== 0 ||
+game/src\hub\departure-persistence.js:23:        afterBase._m01?.revision !== journal.expectedBaseRevision + 1 ||
+game/src\hub\departure-persistence.js:26:        receipt.baseRevision !== afterBase._m01.revision || result.revision !== receipt.baseRevision ||
+game/src\hub\departure-persistence.js:39:    onChanged: slotId => { baseApi._refreshExternal(slotId); runStore._invalidate(slotId); },
+game/src\hub\departure-persistence.js:50:    const before = baseApi._readDepartureBaseline(slotId);
+game/src\hub\departure-persistence.js:68:    const revision = (afterBase._m01?.revision || 0) + 1;
+game/src\hub\departure-persistence.js:73:    afterBase._m01 = { revision, requests: { ...(afterBase._m01?.requests || {}), [`${DEPARTURE_COMMAND}:${runId}`]: { fingerprint, result: receipt } } };
+game/src\hub\departure-persistence.js:74:    const afterRun = { ...run, version: runStore.SAVE_VERSION, _r2: { runId, revision: 0 } };
+game/src\hub\game.bag.js:25:  if (typeof zoom?._closeCardZoom === 'function') zoom._closeCardZoom(true);
+game/src\battle\view\battle.view.js:68:  if (!sceneryStage?.isConnected || sceneryStage._battleToken !== sceneryToken || !sceneryWorld || !sceneryConfig) return;
+game/src\battle\view\battle.view.js:102:  if (sceneryFront._maskMarkup !== mask) {
+game/src\battle\view\battle.view.js:104:    sceneryFront._maskMarkup = mask;
+game/src\battle\view\battle.view.js:135:      if (sceneryStage !== stage || sceneryToken !== token || stage._battleToken !== token
+game/src\battle\view\battle.view.js:139:        || (UI._lastMode !== 'battle' && !UI.el.ovBody?.querySelector('.battle-secondary-layer'))
+game/src\battle\view\battle.view.js:183:  if (!SDT.game?.battleActive || !overlay?.isConnected || overlay.hidden || UI._lastMode !== 'battle'
+game/src\battle\view\battle.view.js:184:    || !stage?.isConnected || !overlay.contains(stage) || stage._battleToken !== event?.battleToken
+game/src\battle\view\battle.view.js:277:    const canReuse = !UI.el.overlay.hidden && (UI._lastMode === 'battle' || backgroundOnly)
+game/src\battle\view\battle.view.js:278:      && stage?.matches('.battle-stage.sts') && stage._battleToken === token
+game/src\battle\view\battle.view.js:279:      && stage._battleTemplate && stage.isConnected;
+game/src\battle\view\battle.view.js:285:      fresh._battleToken = token;
+game/src\battle\view\battle.view.js:286:      fresh._battleTemplate = fresh.cloneNode(true);
+game/src\battle\view\battle.view.js:287:      fresh._battleHtml = html;   // F4：模板字符串精确签名（见下方复用路径）
+game/src\battle\view\battle.view.js:295:    if (stage._battleHtml === html) {
+game/src\battle\view\battle.view.js:298:    stage._battleHtml = html;
+game/src\battle\view\battle.view.js:302:    const previous = stage._battleTemplate;
+game/src\battle\view\battle.view.js:309:      fresh._battleToken = token;
+game/src\battle\view\battle.view.js:310:      fresh._battleTemplate = fresh.cloneNode(true);
+game/src\battle\view\battle.view.js:311:      fresh._battleHtml = html;
+game/src\battle\view\battle.view.js:335:    stage._battleTemplate = next;
+game/src\battle\view\battle.view.js:523:      ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
+game/src\battle\view\battle.view.js:817:    _perf: Object.freeze({ frameCacheStats }),
+game/src\battle\view\battle.view.js:818:    _test: Object.freeze({ refillDrawPile }),
+game/src\run\map-snapshot.js:48:    const value = { kind:'normal-map', snapshotVersion:routeVersion ? ROUTE_SNAPSHOT_VERSION : SNAPSHOT_VERSION, mapSeed, generatorVersion, layoutVersion,
+game/src\run\map-snapshot.js:120:  let budgets = current || previousResourceVersion ? MAP_TYPE_BUDGETS : V4_MAP_TYPE_BUDGETS;
+game/src\hub\extraction.commands.js:128:// 随既有事务收据持久化（base._m01.requests 的 output，journal 幂等语义不变，不新增存储机制）；
+game/src\hub\extraction.commands.js:223:      try { beforeRunId = JSON.parse(globalThis.localStorage.getItem(runStore.key(slotId)) || 'null')?._r2?.runId || null; }
+game/src\hub\extraction.commands.js:234:    const base = baseApi._readForCommit(slotId);
+game/src\hub\extraction.commands.js:239:    slotId, context: { slotId, requestId, expectedBaseRevision: current.base._m01.revision, expectedRunRevision: current.identity.revision },
+game/src\hub\extraction.commands.js:254:    const base = baseApi._readForCommit(attempt.slotId);
+game/src\hub\extraction.commands.js:256:    if (identity.value.revision !== attempt.context.expectedRunRevision || base._m01.revision !== attempt.context.expectedBaseRevision) {
+game/src\hub\extraction.commands.js:276:    baseApi._refreshExternal(getActiveSlot());
+game/src\hub\game.cardslib.page.js:578:  const previousCard = _prevSelectedWrap?.isConnected ? _prevSelectedWrap : libCardNodeById.get(previousId);
+game/src\hub\game.cardslib.page.js:654:    if ((e.movementX || e.movementY) && Date.now() >= libHoverBlockedUntil) UI._hoverHandler?.(e);
+game/src\hub\game.cardslib.page.js:966:  UI._inputHandler = session.inputHandler = (e) => {
+game/src\hub\game.cardslib.page.js:989:  UI._hoverHandler = session.hoverHandler = (e) => {
+game/src\hub\game.cardslib.page.js:1092:    if (UI._inputHandler === session.inputHandler) UI._inputHandler = null;
+game/src\hub\game.cardslib.page.js:1093:    if (UI._hoverHandler === session.hoverHandler) UI._hoverHandler = null;
+game/src\hub\game.cardslib.page.js:1095:      if (UI._acts?.[name] === action) delete UI._acts[name];
+game/src\hub\game.hub.runtime.js:136:    const tabChanged = renderHub._lastMotionView !== motionViewKey;
+game/src\hub\game.hub.runtime.js:137:    renderHub._lastMotionView = motionViewKey;
+game/src\hub\game.hub.runtime.js:138:    renderHub._lastView = viewKey;
+game/src\hub\game.hub.runtime.js:139:    renderHub._lastTab = hubTab;
+game/src\hub\game.hub.runtime.js:208:      document.getElementById('cardZoom')?._closeCardZoom?.(true);
+game/src\hub\game.hub.runtime.js:339:      document.getElementById('cardZoom')?._closeCardZoom?.(true);
+game/src\hub\game.hub.runtime.js:415:    const action = back && UI._acts[back.dataset.act];
+game/src\battle\view\battle.victory.js:10:  const token = stage._battleToken;
+game/src\battle\view\battle.victory.js:25:    const current = () => stage.isConnected && overlay.contains(stage) && !overlay.hidden && stage._battleToken === token && isCurrent();
+game/src\battle\view\battle.victory.js:34:      if (stage._battleToken === token) { stage.inert = wasInert; stage.classList.remove('battle-won'); }
+game/src\run\map-route-v2.js:147:  if (!pool.length) return fallback(diagnostics.distanceRejected ? 'DISTANCE_LIMIT' : 'NO_VALID_FORK');
+game/src\run\map-route-v2.js:171:export function validateGuardedRoute(input, plan, previousFacilities = false, budgets = previousFacilities ? PREVIOUS_MAP_TYPE_BUDGETS : MAP_TYPE_BUDGETS, enforceFirePacing = true) {
+game/src\run\game.session.js:272:    return { ok:false, code:issue==='tooNew'?'RUN_TOO_NEW':issue==='readFailed'?'STORAGE_READ_FAILED':'RUN_UNREADABLE', message:RunStorage.loadIssueMessage(slot) || '对局存档无法读取', preserveRun:true };
+game/src\run\game.run.resources.js:46:    dom.getElementById('cardZoom')?._closeCardZoom?.(true);
+game/src\run\game.run.resources.js:85:    dom.getElementById('cardZoom')?._closeCardZoom?.(true);
+game/src\hub\game.storage.js:47:const publicRun = data => { const value = structuredClone(data); delete value._r2; return value; };
+game/src\hub\game.storage.js:182:    const identity = data._r2;
+game/src\hub\game.storage.js:201:        try { currentIdentity = JSON.parse(currentRaw)?._r2 || null; } catch { /* 损坏档保留既有显式恢复路径 */ }
+game/src\hub\game.storage.js:209:      const identity = currentIdentity || value?._r2 || { runId: newRunId(index), revision: -1 };
+game/src\hub\game.storage.js:211:      const nextRaw = JSON.stringify({ ...value, _r2: nextIdentity, version: SAVE_VERSION });
+game/src\hub\game.storage.js:247:      const currentId = raw === null ? null : JSON.parse(raw)?._r2?.runId;
+game/src\hub\game.storage.js:248:      const previousId = previous === null ? null : JSON.parse(previous)?._r2?.runId;
+game/src\run\game.run.scenes.js:155:  root._clearEventChoice = () => { selected = -1; eventChoiceSelection = null; sync(); };
+game/src\run\game.run.scenes.js:165:  root._clearEventChoice?.();
+game/src\run\game.run.scenes.js:185:      page._clearEventChoice?.();
+game/src\battle\view\battle.frames.js:400:  const size = cur.role === 'wu' ? WU_FRAME_SIZE : cur.role === 'changwuyu' ? CHANGWUYU_FRAME_SIZE
+game/src\battle\view\battle.frames.js:401:    : Object.hasOwn(THREE_ROLE_FRAME_SEQUENCES, cur.role) ? THREE_ROLE_FRAME_SIZE : { width: FRAME_W, height: FRAME_H };
+game/src\battle\view\battle.frames.js:520:    if (app._bfHooked) return;
+game/src\battle\view\battle.frames.js:521:    app._bfHooked = true;
+game/src\battle\view\battle.frames.js:570:  const battleToken = fig?.closest('.battle-stage')?._battleToken;
+game/src\battle\view\battle.frames.js:585:  const battleToken = stage?._battleToken;
+game/src\battle\view\battle.frames.js:586:  const isCurrentFigure = () => stage?._battleToken === battleToken && isLiveBattleFigure(body, fig);
+game/src\battle\view\battle.frames.js:715:  if (cur?.deathStage && cur.deathStage._battleToken === cur.battleToken) cur.deathStage.inert = cur.oldInert;
+game/src\battle\view\battle.infusion-view.js:27:  const same = previous?._battleToken === snapshot.battleToken && previous?._sourceUid === infusion.uid;
+game/src\battle\view\battle.infusion-view.js:56:  workspace._battleToken = snapshot.battleToken; workspace._sourceUid = infusion.uid;
+game/src\battle\view\battle.card-results.js:31:  if (!history || history.token !== stage._battleToken) {
+game/src\battle\view\battle.card-results.js:33:    history = { token: stage._battleToken, rows: [] };
+game/src\battle\view\battle.effect-feedback.js:21:function stateFor(stage, token = stage?._battleToken) {
+game/src\battle\view\battle.presentation-ready.js:56:    && !record.overlay.hidden && record.stage._battleToken === record.token;
+game/src\battle\view\battle.presentation-ready.js:134:    return Promise.resolve(!!(completed?.token === token && stage?._battleToken === token
+game/src\battle\view\battle.aim.js:315:    if (snapshot && origin.stage.isConnected && origin.stage._battleToken === origin.token
+game/src\battle\view\battle.aim.js:453:        if (foeEl._misTimer) clearTimeout(foeEl._misTimer);   // 旧 timer 先清：650ms 内重抖不被上一轮腰斩
+game/src\battle\view\battle.aim.js:457:        foeEl._misTimer = setTimeout(() => { foeEl.classList.remove('mis-target'); foeEl._misTimer = 0; }, 650);
+game/src\battle\view\battle.hand-inspector.js:47:    || active.stage._battleToken !== active.token
+game/src\battle\view\battle.hand-inspector.js:72:    || stage._battleToken !== snapshot.battleToken
+game/src\battle\view\battle.hand-inspector.js:86:    <div class="bt-hand-detail-body"><div class="bt-hand-detail-art">${SDT.Cards.cardHTML(card, 'lg', { costOverride: { v: effCostOf(card, uid), base: card._baseCost ?? card.cost } })}</div>
+game/src\battle\view\battle.turn-feedback.js:29:  if (state && state.token !== stage._battleToken) {
+game/src\battle\view\battle.turn-feedback.js:33:    state = { token: stage._battleToken, stage, lastEventId: 0, seen: new WeakSet(), animations: [], pending: [] };
+game/src\battle\view\battle.overlays.js:59:    if (mounted?._battleToken === snapshot.battleToken && mounted._formationPoolKey === poolKey) {
+game/src\battle\view\battle.overlays.js:85:    if (formation) formation._formationPoolKey = poolKey;
+game/src\battle\view\battle.decision-shell.js:10:  const localRefresh = previous?._decisionTitle === title && previous._battleToken === snapshot.battleToken;
+game/src\battle\view\battle.decision-shell.js:26:  const floating = kind !== 'formation' && !!scene && scene._battleToken === snapshot.battleToken;
+game/src\battle\view\battle.decision-shell.js:31:  if (next) { next._battleToken = snapshot.battleToken; next._decisionTitle = title; }
+game/src\hub\hub.presentation.js:94:  ui._acts = { ...(document.getElementById('cardZoom')?._inventoryActions || {}) };
+game/src\cards\cards.rules.js:26:    TYPE_ICON: { '武术': '[[icon:swords]]', '法术': '[[icon:sparkles]]', '生物': '[[icon:paw]]', '道具': '[[icon:flask]]', '装备': '[[icon:shield]]', '事件': '[[icon:question]]', '能力卡': '[[icon:helmet]]', '资源': '[[icon:wood]]' },
+game/src\cards\cards.rules.js:28:    TYPE_ART: { '武术': 'swords', '法术': 'sparkles', '生物': 'paw', '道具': 'flask', '装备': 'shield', '事件': 'dice', '能力卡': 'helmet', '资源': 'wood' },
+game/src\cards\cards.rules.js:30:    DMG_TYPES: ['武术', '法术'],
+game/src\cards\cards.rules.js:34:    NO_COST_TYPES: ['道具', '生物', '资源', '装备', '事件'],
+game/src\cards\cards.rules.js:38:    DMG_TYPE_META: {
+game/src\cards\cards.rules.js:45:    DMG_TYPE_ORDER: ['attack', 'spell', 'fixed', 'true'],
+game/src\cards\cards.rules.js:146:    SHOP_WEIGHTS: { '古朴': 60, '稀有': 28, '史诗': 9, '传说': 3 },
+game/src\cards\cards.rules.js:154:    DROP_WEIGHTS: { '古朴': 60, '稀有': 28, '史诗': 9, '传说': 3 },
+game/src\cards\cards.rules.js:155:    DROP_DISCOUNT_TYPES: ['道具'],
+game/src\cards\cards.rules.js:156:    DROP_ITEM_DISCOUNT: 0.7,
+game/src\cards\cards.rules.js:157:    DROP_EQUIP_DISCOUNT: 0.8,   // 装备爆率下调 20%（2026-09-09 需求 #12）
+game/src\cards\cards.rules.js:158:    DROP_TYPES: ['武术', '法术', '装备', '道具', '资源'],
+game/src\cards\cards.rules.js:199:    SELLABLE_LEGACY_IDS: new Set(['tt-copper', 'tt-gold', 'tt-silver', 'tt3-diamond', 'tt3-garnet-marble']),
+game/src\battle\view\battle.selection-ui.js:42:  if (stage._battleToken != null && stage._battleToken !== snapshot.battleToken
+game/src\battle\view\battle.selection-ui.js:54:  if (bar.dataset.selectionKey === key && bar._selectionHTML === html) return;
+game/src\battle\view\battle.selection-ui.js:56:  bar._selectionHTML = html;
+game/src\battle\view\battle.selection-ui.js:65:      || stage._battleToken != null && stage._battleToken !== current.snapshot.battleToken
+game/src\battle\view\battle.layers.js:299:    const baseCost = (g.card._baseCost != null) ? g.card._baseCost : g.card.cost;
+game/src\cards\cards.js:215:    CARD_BACKS: [
+game/src\cards\cards.js:234:    CARDS_SYNC: DATA.cardsSync.cards,
+game/src\cards\cards.js:235:    RETIRE_CARDS_SYNC: DATA.cardsSync.retire,
+game/src\battle\view\battle.secondary-overlay.js:7:  if (scene.contains(document.activeElement)) scene._secondaryReturnFocus = document.activeElement;
+game/src\battle\view\battle.secondary-overlay.js:14:  UI._hasBattleStage = true;
+game/src\battle\view\battle.secondary-overlay.js:27:  if (!layer || !scene || scene._battleToken !== token) return false;
+game/src\battle\view\battle.secondary-overlay.js:33:  const target = scene._secondaryReturnFocus;
+game/src\battle\view\battle.secondary-overlay.js:34:  delete scene._secondaryReturnFocus;
+game/src\battle\view\battle.secondary-overlay.js:36:  UI._hasBattleStage = true;
+game/src\cards\card-photo-notes.js:80:  return JSON.stringify({ version: notesData.version || 1, _comment: notesData._comment || '', notes: merged }, null, 2);
+game/src\hub\nest-settlement.commands.js:17:/** @typedef {{ getActiveSlot: () => number | null, getBase: () => { _readForCommit: (slotId: number) => NestBaseSnapshot | null }, getRunStorage: () => { readIdentity: (slotId: number) => NestIdentityResult }, getRecovery: () => { recoverSlot: (slotId: number) => Promise<NestRecoveryResult>, readSettlementReceipt: (context: NestContext, identity: { command: string, payload: { runId: string }, runId: string }) => Promise<NestRecoveryResult>, commitBaseAndRun: (context: NestContext, prepared: Omit<NestAttempt, 'context'>) => Promise<NestRecoveryResult> } }} NestSettlementPorts */
+game/src\hub\nest-settlement.commands.js:65:    try { beforeBase = base._readForCommit(slotId); }
+game/src\hub\nest-settlement.commands.js:67:    const beforeRevision = beforeBase?._m01?.revision;
+game/src\hub\nest-settlement.commands.js:82:    try { finalBase = base._readForCommit(slotId); }
+game/src\hub\nest-settlement.commands.js:86:        !finalBase || finalBase._m01?.revision !== context.expectedBaseRevision) {
+game/src\hub\nest-settlement.commands.js:136:    try { base = getBase()._readForCommit(context.slotId); }
+game/src\hub\nest-settlement.commands.js:139:        !base || base._m01?.revision !== context.expectedBaseRevision) {
+game/src\hub\hub.reward-feedback.js:48:    current._closeRewardReceipt?.();
+game/src\hub\hub.reward-feedback.js:86:  if (root.querySelector('.reward-receipt')?._receipt === receipt) return;
+game/src\hub\hub.reward-feedback.js:91:  panel._receipt = receipt;
+game/src\hub\hub.reward-feedback.js:102:  panel._closeRewardReceipt = close;
+game/src\cards\card-execution-plan.js:46:  return source?._registeredTriggers == null ? card
+game/src\cards\card-execution-plan.js:47:    : { ...source, rules: { ...source.rules, triggers: source._registeredTriggers } };
+game/src\hub\preparation.commands.js:76:      missing.push({ card: pick.card, name, requestedCount: pick.count, availableCount, missingCount: pick.count - availableCount, code: availableCount ? 'INSUFFICIENT_CARDS' : 'CARD_NOT_OWNED' });
+game/src\cards\card-trigger-contract.js:11:  return card?._registeredTriggers ?? card?.rules?.triggers;
+game/src\hub\recovery.commands.js:37:    const stored = afterBase.value?._m01?.requests?.[requestKey];
+game/src\hub\recovery.commands.js:44:        afterBase.value?._m01?.revision !== receiptValue.baseRevision || stored?.fingerprint !== journal.fingerprint ||
+game/src\hub\recovery.commands.js:46:    const nextRunIdentity = afterRun.value?._r2;
+game/src\hub\recovery.commands.js:50:    const oldRunIdentity = beforeRun.value?._r2;
+game/src\hub\recovery.commands.js:55:      ? 0 : beforeBase.value._m01?.revision;
+game/src\hub\recovery.commands.js:62:    onChanged: slotId => { baseApi._refreshExternal(slotId); runStore._invalidate(slotId); },
+game/src\hub\recovery.commands.js:106:      try { current = baseApi._readForCommit(context.slotId) || parsed.value; fingerprint = stable({ command: identity.command, payload: identity.payload ?? null, runId: identity.runId ?? null }); }
+game/src\hub\recovery.commands.js:108:      const prior = current?._m01?.requests?.[`${identity.command}:${context.requestId}`];
+game/src\hub\recovery.commands.js:109:      if (!prior) return { ok: true, value: null, revision: current?._m01?.revision || 0 };
+game/src\hub\recovery.commands.js:131:      try { currentBase = baseApi._readForCommit(context.slotId) || baseParsed.value; }
+game/src\hub\recovery.commands.js:133:      if (!currentBase?._m01 || !Number.isInteger(currentBase._m01.revision) || !currentBase._m01.requests) return fail('RECOVERY_BLOCKED', '基地事务元数据无效');
+game/src\hub\recovery.commands.js:138:      const prior = currentBase._m01.requests[requestKey];
+game/src\hub\recovery.commands.js:142:      if (!currentRun._r2) {
+game/src\hub\recovery.commands.js:147:      const baseRevision = currentBase._m01.revision;
+game/src\hub\recovery.commands.js:148:      const runRevision = currentRun._r2.revision;
+game/src\hub\recovery.commands.js:149:      if (context.expectedBaseRevision !== baseRevision || context.expectedRunRevision !== runRevision || prepared.runId !== currentRun._r2.runId) {
+game/src\hub\recovery.commands.js:150:        return fail('STALE_REVISION', '基地或对局状态已变化', false, { baseRevision, runRevision, runId: currentRun._r2.runId });
+game/src\hub\recovery.commands.js:157:      nextBase._m01 = { revision: baseRevision + 1, requests: { ...currentBase._m01.requests, [requestKey]: { fingerprint, result } } };
+game/src\hub\recovery.commands.js:158:      if (nextRun) { nextRun.version = runVersion; nextRun._r2 = { runId: prepared.runId, revision: runRevision + 1 }; }
+game/src\hub\terminal.commands.js:75:    try { afterBase = base._readForCommit(slotId); }
+game/src\hub\terminal.commands.js:77:    if (!afterBase || !Number.isInteger(afterBase._m01?.revision)) return fail('RECOVERY_BLOCKED', '基地事务版本不可用');
+game/src\hub\terminal.commands.js:84:      slotId, requestId, expectedBaseRevision: afterBase._m01.revision,
+game/src\hub\terminal.commands.js:97:    if (receipt.revision !== afterBase._m01.revision) return fail('STALE_REVISION', '基地已变化，请重试终局结算', true);
+game/src\cards\card-rules.schema.js:434:  const allowed = op === 'heal' ? HEAL_ALLOWED_KEYS : op === 'armor' ? ARMOR_ALLOWED_KEYS : DRAW_ALLOWED_KEYS;
+game/src\battle\bag\battle.equipment.js:102:        const had = e._condApplied || { atk: 0, sp: 0 };
+game/src\battle\bag\battle.equipment.js:107:          e._condApplied = want;
+game/src\battle\bag\battle.equipment.js:119:      const had = e._condApplied || { atk: 0, sp: 0 };
+game/src\battle\bag\battle.equipment.js:124:      e._condApplied = want;
+game/src\agent\agent.llm.js:102:      max_tokens: config.maxTokens,
+game/src\agent\agent.weights.js:112:  const over = typeof globalThis !== 'undefined' ? globalThis.__SDT_AGENT_WEIGHTS : null;
+game/src\battle\effects\battle.discover-flow.js:150:    const card = state.act === 'noInfuse' ? { ...candidate, _noInfuse:true } : candidate;
+game/src\battle\effects\battle.discover-flow.js:210:      const pouch = pouchEntry?.card._pouch;
+game/src\battle\effects\battle.discover-flow.js:217:      output.log(`[[icon:question]] <b>法师锦囊</b>：施放其中的【<b>${esc(card.name)}</b>】（锦囊余 ${pouchEntry && Array.isArray(pouchEntry.card._pouch) ? pouchEntry.card._pouch.length : 0} 张）`, 'loot');
+game/src\battle\effects\battle.discover-flow.js:224:      for (let i = 0; i < 2; i++) cards.addDeckCard({ ...clone(card), _castOnDraw: true });
+game/src\battle\effects\battle.discover-flow.js:242:        effects.setCardOverride(uid, { ...card, cost: 0, _baseCost: card.cost });
+game/src\agent\agent.runner.js:5: *   ui     → UI._acts/_baseActs 回调（与点击分发同一张表），夹具退化 el.click()
+game/src\agent\agent.runner.js:159:      const fn = UI?._acts?.[action.name] || UI?._baseActs?.[action.name];
+game/src\battle\effects\battle.infusion.js:6:  return !!card?._noInfuse || !!(allSpellsInfused && ['武术', '法术'].includes(card?.type));
+game/src\agent\agent.surface.js:7: * （UI._acts/_baseActs），不注册包装、不改任何页面代码。
+game/src\battle\effects\battle.hosted.js:29:  return { ...canonical, ...card, desc: card.id === 'cc-rot-seed' ? ROT_SEED_DESCRIPTION : canonical.desc };
+game/src\battle\effects\battle.triggers.m2.js:43:      if (point === 'onKill') synthetic._triggerPoint = point;
+game/src\battle\effects\battle.card-inspection.js:67:      card = template ? { ...template } : { ...card, _battleTransformMissing: transform };
+game/src\battle\effects\battle.card-inspection.js:85:    if (entry.card._battleTransformMissing) return `转换目标「${entry.card._battleTransformMissing}」缺失，暂时无法使用`;
+game/src\battle\effects\effect-steps.m2.js:122:    t._stealRestore = (t._stealRestore || 0) + stolen;
+game/src\battle\effects\effect-steps.m2.js:125:    t._stealRestoreTurn = deps.getTurn() + duration - 2;
+game/src\battle\effects\effect-steps.m2.js:240:  target._atkDownAmount = (target._atkDownAmount || 0) + amount;
+game/src\battle\effects\effect-steps.m2.js:241:  target._atkDownPending = (target._atkDownPending || 0) + cut;   // 实际扣掉的量（到期按此归还）
+game/src\battle\effects\effect-steps.m2.js:246:  if (!foe || foe._atkDownAmount === undefined) return;
+game/src\battle\effects\effect-steps.m2.js:247:  if (!(foe.status?.atkDown > 0) && foe._atkDownAmount > 0) {
+game/src\battle\effects\effect-steps.m2.js:248:    foe.atk = (foe.atk || 0) + (foe._atkDownPending || 0);
+game/src\battle\effects\effect-steps.m2.js:249:    delete foe._atkDownAmount;
+game/src\battle\effects\effect-steps.m2.js:250:    delete foe._atkDownPending;
+game/src\battle\effects\effect-steps.damage.js:196:            addTempCard({ ...c, cost: 0, _baseCost: c.cost || 0 });   // _baseCost：费用角标显示绿色「降费」（需求 #16）
+game/src\battle\effects\effect-steps.damage.js:215:            const c = pool.length ? pool[Math.floor(random01() * pool.length)] : (key === '箭' ? ARROW_TOKEN : null);
+game/src\battle\effects\effect-steps.damage.js:217:            addTempCard({ ...c, cost: 0, _baseCost: c.cost || 0 });
+game/src\battle\effects\battle.card-cost.js:19:  return { ...card, cost: nextCost, _baseCost: card._baseCost != null ? card._baseCost : currentCost };
+game/src\battle\effects\requested-card-runtime.js:37:  const targets = soulContractTargets(foe, alive(), { isMarked: f => f.soulContractMarked, chain: !!card?._soulEcho });
+game/src\battle\effects\requested-card-runtime.js:39:  hitFoe(targets[Math.floor(random() * targets.length)], { name:'灵魂契约', _soulEcho:true }, 2,
+game/src\battle\core\battle.enemy-plan.js:4:  const kind = foe.behavior || (foe.affix === 'grow' ? 'general' : foe.affix === 'frenzy' ? 'orc_boss' : foe.affix === 'aegis' ? 'element_boss' : 'strike');
+game/src\battle\core\combat.js:16:    // 扣减量由战斗层挂诅咒时记在 target._atkDownAmount，到期由回合管线归还（影噬偷取同款）
+game/src\battle\core\battle.resolution.js:376:      if (act === 'noInfuse') return { ...tpl, _noInfuse: true };
+game/src\battle\core\battle.resolution.js:611:    const foesAnnihilated = () => card._triggerPoint !== 'onKill' && getAliveFoes().length === 0;
+game/src\battle\core\battle.exec-play.js:38:    if (!card?._battleTransformMissing) return false;
+game/src\battle\core\battle.exec-play.js:39:    G.log(`[[icon:cross]] 转换目标「${esc(card._battleTransformMissing)}」缺失，本次未施放`, 'warn');
+game/src\battle\core\battle.exec-play.js:46:    if (card?._battleTransformMissing) return fail('MISSING_TRANSFORM', `转换目标「${card._battleTransformMissing}」缺失，暂时无法使用`);
+game/src\battle\core\battle.exec-play.js:48:    if (!capability.ok) return fail(capability.kind === 'invalid' ? 'RULE_INVALID' : 'RULE_UNSUPPORTED', capability.kind === 'invalid' ? '规则格式非法' : '规则尚未支持');
+game/src\battle\core\battle.exec-play.js:108:        settle(cancelled ? 'cancelled' : 'rejected', { code:cancelled ? 'ACTION_CANCELLED' : 'EXECUTION_ERROR', message:cancelled ? '本次出牌已取消' : '本次打出未完成，请重试' });
+game/src\battle\core\battle.exec-play.js:246:      return { ...card, _registeredTriggers: t, rules: { ...card.rules, triggers: stripped } };
+game/src\battle\core\battle.draw.js:63:      if (entry?.card?._battleTransformMissing) {
+game/src\battle\core\battle.draw.js:65:        G.log(`[[icon:cross]] 转换目标「${esc(entry.card._battleTransformMissing)}」缺失，本次未抽取或施放`, 'warn');
+game/src\battle\core\battle.draw.js:70:      if (entry?.card?._castOnDraw) {
+game/src\battle\core\battle.draw.js:176:        if (matches && o.card._castOnDraw) {
+game/src\battle\core\battle.card-play.js:62:    if (card?._battleTransformMissing) return `转换目标「${card._battleTransformMissing}」缺失，暂时无法使用`;
+game/src\battle\core\battle.card-play.js:87:    if (!capability.ok) return fail(capability.kind === 'invalid' ? 'RULE_INVALID' : 'RULE_UNSUPPORTED', capability.kind === 'invalid' ? '规则格式非法' : '规则尚未支持', card);
+game/src\battle\core\battle.enemy-intent.js:7:  orc_boss: ['[[icon:tools]]', '双击并施加诅咒'], element_boss: ['[[icon:crystal]]', '攻击·偶数回合庇幕'],
+game/src\battle\core\battle.enemy-phase.js:334:      if (foe.dead || !foe._stealRestore) return;
+game/src\battle\core\battle.enemy-phase.js:335:      if (turn > (foe._stealRestoreTurn || 0)) {
+game/src\battle\core\battle.enemy-phase.js:336:        foe.atk += foe._stealRestore;
+game/src\battle\core\battle.enemy-phase.js:337:        G.log(`[[icon:arrow]] <b>${esc(foe.name)}</b> 的攻击力恢复 ${foe._stealRestore} 点（现 ${foe.atk}）`, 'sys');
+game/src\battle\core\battle.enemy-phase.js:338:        foe._stealRestore = 0;
+game/src\battle\core\battle.enemy-phase.js:343:      if (!foe.dead || !foe._stealRestore) return;
+game/src\battle\core\battle.enemy-phase.js:344:      foe.atk = (foe.atk || 0) + foe._stealRestore;
+game/src\battle\core\battle.enemy-phase.js:346:      delete foe._stealRestore;
+game/src\battle\core\battle.engine.factory.js:896:    if (!Array.isArray(entry.card._pouch)) entry.card._pouch = [];
+game/src\battle\core\battle.engine.factory.js:897:    entry.card._pouch = (G.ownedCards || [])
+game/src\battle\core\battle.engine.factory.js:900:    if (entry.card._pouch.length) {
+game/src\battle\core\battle.engine.factory.js:901:      G.log(`[[icon:cards]] <b>法师锦囊</b>：从背包 pouch 载入 ${entry.card._pouch.length} 张法术`, 'sys');
+game/src\battle\core\battle.engine.factory.js:902:      set$discovering(buildPouchDiscoverState(entry.card._pouch.slice(), uid));
+game/src\battle\core\battle.engine.factory.js:905:      entry.card._pouch.length = 0;
+game/src\battle\core\combat.factory.js:18:    // 扣减量由战斗层挂诅咒时记在 target._atkDownAmount，到期由回合管线归还（影噬偷取同款）

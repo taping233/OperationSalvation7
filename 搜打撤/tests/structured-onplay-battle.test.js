@@ -215,7 +215,7 @@ describe('structured onPlay in real BattleSession', () => {
     const state = BattleSession.getSnapshot();
     expect(state.pdef.armor).toBe(5);
     expect(game.logs.filter(line => line.includes('获得') && line.includes('护甲'))).toHaveLength(1);
-    expect(game.logs.filter(line => line.includes('获得 1 张【初始攻击】'))).toHaveLength(1);
+    expect(game.logs.filter(line => line.includes('抽了 1 张牌'))).toHaveLength(1);
     expect(game.logs.some(line => line.includes('99 点护甲') || line.includes('99 张牌'))).toBe(false);
   });
 });

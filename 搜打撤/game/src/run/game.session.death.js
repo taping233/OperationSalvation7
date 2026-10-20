@@ -170,7 +170,7 @@ export function createDeathSettlement({
         announceLevelUps(levels);
       } else {
         announceLevelUps(levels);
-        try { SDT.Meta.checkUnlocks(); } catch { /* 提交已完成，成就提示不能回滚终局 */ }
+        try { Promise.resolve(SDT.Meta.checkUnlocks()).catch(() => {}); } catch { /* 提交已完成，成就提示不能回滚终局 */ }
       }
       // A5-DEATH-02（2026-10-03）：抢运张数与死亡回执同口径——token.cards（doDeath 抢运清单，
       // 含珍珠盒中 stored 资源卡，每条 count:1）即 buildDeathReceipt 的 rescuedCards，页面

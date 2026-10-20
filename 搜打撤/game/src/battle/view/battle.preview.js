@@ -61,6 +61,7 @@ function structuredDamageSpec(card) {
   if (sources.length !== 1 || (operation.amountField !== undefined && operation.amountField !== 'dmg')) return { unknown: true };
   const unknownEffects = operations.length > 1 || Object.keys(triggers).some(key => key !== 'onPlay' && key !== 'duration')
     ? ['仅计算直接伤害；附加效果及后续触发未计入'] : [];
+  if (operations.some(item => item.op === 'draw')) unknownEffects.push('敌人全灭时停止余下效果');
   // target 未声明时解释器按「倒下顺延战场首位」结算——预览按 retarget 式逐段转移处理
   const retarget = operation.retarget === 'livingFoes' || operation.target === undefined;
   const countSource = operation.hitCount ?? operation.hits?.count;
@@ -87,16 +88,20 @@ function hostedDamageSpec(card, context) {
       Object.keys(rules.battle || {}).some(key => key !== 'hosted') ||
       !Array.isArray(hosted) || hosted.length !== 1 || hosted[0] !== 'damage-and-draw' ||
       normalizeDesc(card.desc) !== "1',抽1张牌") return { unknown: true };
-  return { hits: 1, amount: card.dmg, unknownEffects: ['仅计算直接伤害；普通战抽牌改为获得初始攻击，后续触发未计入；敌人全灭时停止余下效果'] };
+  return { hits: 1, amount: card.dmg, unknownEffects: ['仅计算直接伤害；后续抽牌与触发未计入；敌人全灭时停止余下效果'] };
 }
 
 /** @param {SnapshotBattleCard | null | undefined} card @param {PreviewActionInput['cardContext']} context @returns {PreviewDamageSpec | null} */
 function semanticMatch(card, context) {
   if (!card) return null;
+  const structured = structuredDamageSpec(card);
+  if (structured && !card.rules?.battle?.hosted) {
+    // 奥术弹的 BOSS 抽牌后续仍沿原有保守预览边界。
+    if (card.id === 'tt7-arcanebolt' && context.mode !== 'normal') return { unknown: true };
+    return structured;
+  }
   const hosted = hostedDamageSpec(card, context);
   if (hosted) return hosted;
-  const structured = structuredDamageSpec(card);
-  if (structured) return structured;
   if (card.rules?.equip || card.rules?.bag || card.rules?.battle?.hosted) return null;
   const spec = card.id ? SEMANTICS[card.id] : undefined;
   if (!spec) return null;
@@ -112,13 +117,48 @@ function cardRuleHint(card, mode) {
   const drawsByType = onPlay
     ? onPlay.some(item => item.op === 'draw' && item.filter)
     : /从牌库中抽取\s*(\d+)\s*张?(初始攻击|装备|法术|武术|杀)牌?/.test(card.desc || '');
-  const drawHint = mode === 'normal' && drawsByType ? '普通战抽牌改为获得初始攻击。' : '';
+  const drawHint = mode === 'normal' && drawsByType ? '从本场牌库抽取符合类型的牌。' : '';
   if (!operation) return drawHint;
   const payment = card.rules?.battle?.requirements?.find(rule => rule.kind === 'handCards');
   const damageHint = payment
     ? `先消耗 ${payment.count} 张${payment.type || '手牌'}；${operation.hitCount} 段，目标倒下后按战场顺序转移。`
     : `${operation.hitCount} 段；目标倒下后按战场顺序转移。`;
   return [drawHint, damageHint].filter(Boolean).join(' ');
+}
+
+const STATUS_TARGET_LABELS = Object.freeze({ chosenEnemy: '目标', allEnemies: '所有敌人', self: '自己' });
+
+// 仅展示结构化声明，不模拟状态施加、免疫、重复结算或后续触发。
+// 未知字段不忽略；不从卡名或自由描述推断效果，更不把无 damage op 当成 0 伤害。
+/** @param {SnapshotBattleCard} card @param {string} [mode] */
+function declaredStatusEffects(card, mode) {
+  const operations = card.rules?.triggers?.onPlay;
+  if (!Array.isArray(operations) || !operations.length || card.rules?.battle?.hosted) return null;
+  const effects = [];
+  for (const operation of operations) {
+    if (!operation) return null;
+    if (operation.op === 'armor' || operation.op === 'draw') {
+      if (Object.keys(operation).some(key => !['op', 'amount'].includes(key)) ||
+          !Number.isInteger(operation.amount) || operation.amount <= 0) return null;
+      effects.push(operation.op === 'armor' ? `自己获得 ${operation.amount} 点护甲`
+        : mode === 'normal' ? `从本场牌库抽 ${operation.amount} 张牌` : `抽 ${operation.amount} 张牌`);
+    } else if (operation.op === 'curse') {
+      if (Object.keys(operation).some(key => !['op', 'curse', 'stacks', 'duration', 'extend', 'target'].includes(key))) return null;
+      if (typeof operation.curse !== 'string' || !Object.hasOwn(Combat.CURSE_META, operation.curse) ||
+          typeof operation.target !== 'string' || !Object.hasOwn(STATUS_TARGET_LABELS, operation.target)) return null;
+      const meta = Combat.CURSE_META[/** @type {keyof typeof Combat.CURSE_META} */ (operation.curse)];
+      const target = STATUS_TARGET_LABELS[/** @type {keyof typeof STATUS_TARGET_LABELS} */ (operation.target)];
+      if (!meta || operation.curse === 'atkDown' || !target) return null;
+      const amount = meta.stack ? operation.stacks : operation.duration;
+      if (!Number.isInteger(amount) || amount <= 0 ||
+          (meta.stack ? operation.duration !== undefined : operation.stacks !== undefined)) return null;
+      if (operation.extend !== undefined) {
+        if (meta.stack || !Number.isInteger(operation.extend) || operation.extend <= 0) return null;
+        effects.push(`${target}已有的${meta.name}延长 ${operation.extend} 回合（未附带时无效）`);
+      } else effects.push(`${target}附加 ${amount} ${meta.stack ? '层' : '回合'}${meta.name}`);
+    } else return null;
+  }
+  return effects;
 }
 
 /** @param {SnapshotFoe} foe */
@@ -154,8 +194,15 @@ function previewAction({ snapshot, action, cardContext }) {
   if (!card || !uid || !foe || foe.dead) return illegal(cost, frozenTargets, '当前目标不可用');
   if (cardContext.legal === false) return illegal(cost, frozenTargets, cardContext.illegalReason || '当前不能打出这张牌');
   if (!targets.includes(targetIndex)) return illegal(cost, frozenTargets, '当前目标不可用');
-  if (cardContext.heartsMode) return unknown(cost, frozenTargets, '心形生命的伤害换算暂不支持预览');
   if (cardContext.shaTransformed) return unknown(cost, frozenTargets, '变形卡按当前效果结算，预览无法精算');
+  const declaredEffects = declaredStatusEffects(card, cardContext.mode);
+  if (declaredEffects) return Object.freeze({
+    legal: true, cost, targetIndexes: frozenTargets, confidence: 'unknown', damage: null,
+    knownEffects: Object.freeze(declaredEffects),
+    unknownEffects: Object.freeze((cardContext.wholeCardRepeats || 1) !== 1 || cardContext.arrowRuneRepeat
+      ? ['本次会重复结算'] : []), reasons: Object.freeze([]),
+  });
+  if (cardContext.heartsMode) return unknown(cost, frozenTargets, '心形生命的伤害换算暂不支持预览');
   if (cardContext.modifiers?.stealthStrike) return unknown(cost, frozenTargets, '破隐一击会改变本次伤害');
   if (cardContext.modifiers?.nestDark1 || cardContext.modifiers?.nestDark3) return unknown(cost, frozenTargets, '黑暗羁绊会逐段改变伤害');
   if (cardContext.modifiers?.bleedAmp || cardContext.modifiers?.vsFreezeBonus) return unknown(cost, frozenTargets, '流血或冰冻增伤尚未纳入直接伤害预览');

@@ -160,7 +160,7 @@ describe('battle architecture foundation', () => {
   });
 
   it('renders combat pile badges without owning pile state', () => {
-    const piles = renderCombatPiles({ mode: 'boss', drawCount: ['a'], discardCount: ['b', 'c'], graveCount: [], pileTip: pile => `${pile.length}张`, cardBackHTML: 'BACK', escAttr: value => value });
+    const piles = renderCombatPiles({ mode: 'boss', drawCount: ['a'], graveCount: ['b', 'c'], pileTip: pile => `${pile.length}张`, cardBackHTML: 'BACK', escAttr: value => value });
     expect(piles.draw).toContain('1张');
     expect(piles.rest).toContain('2张');
     expect(piles.rest).toContain('data-act="btGrave"');

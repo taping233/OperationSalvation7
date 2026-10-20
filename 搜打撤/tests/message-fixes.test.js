@@ -114,7 +114,7 @@ describe('法力奔涌识别兜底（2026-09-10 #37）', () => {
     await drain();
     const uid = g.ownedCards[0].uid;
     expect(snap().hand).toContain(uid);
-    BattleSession.commands.playCard(uid, 'any');
+    BattleSession.commands.playCard(uid, 0);
     await drain(500);
     expect(g.logs.some(l => l.includes('法力奔涌') && l.includes('释放随机法术')),
       `旧描述也应触发随机释放（logs: ${g.logs.join(' | ').slice(0, 300)}）`).toBe(true);

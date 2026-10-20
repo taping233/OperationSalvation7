@@ -109,13 +109,13 @@ describe('warehouse bounded work and live inventory', () => {
     expect(fixture.base.useStashMaterial).not.toHaveBeenCalled();
   });
 
-  it('keeps single-click resource consumption and refreshes only once', () => {
+  it('keeps single-click resource consumption and refreshes only once', async () => {
     const fixture = mountWarehouse(current, 2);
     fixture.stacks[0].card.type = '资源';
     document.querySelector('.stash-cell').click();
     expect(fixture.base.useStashMaterial).toHaveBeenCalledExactlyOnceWith('卡牌0', false);
     expect(fixture.openCard).not.toHaveBeenCalled();
-    expect(fixture.refresh).toHaveBeenCalledTimes(1);
+    await vi.waitFor(() => expect(fixture.refresh).toHaveBeenCalledTimes(1));
     expect(fixture.sound.tick).toHaveBeenCalledTimes(1);
   });
 

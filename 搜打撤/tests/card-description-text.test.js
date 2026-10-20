@@ -25,6 +25,20 @@ const textContent = html => {
 const get = id => cards.find(card => card.id === id);
 
 describe('卡牌展示文案与结算文本隔离', () => {
+  it('所有旧牌堆名称统一展示为消耗牌堆，保留旧结算原文', () => {
+    const card = get('tt3-thunderblast');
+    const original = card.desc;
+    expect(displayCardDescription(original, card.id, card)).toContain('消耗牌堆');
+    expect(displayCardDescription('从弃牌堆或墓地取回一张牌', 'custom')).toBe('从消耗牌堆取回一张牌');
+    expect(card.desc).toBe(original);
+    const backup = get('tt12-backupcell');
+    const text = displayCardDescription(backup.desc, backup.id, backup);
+    expect(text).toContain('消耗牌堆中每有 1 张法术牌');
+    expect(text).not.toMatch(/墓地|普通弃牌|仅进入/);
+    expect(textContent(descRich(original, card.id))).toContain('消耗牌堆');
+    expect(displayCardDescription('战斗：从本场消耗牌复原最多3张回到手牌。对应消耗区为空时不可使用。', 'tt-crystal'))
+      .toBe('战斗：从消耗牌堆复原最多3张回到手牌。对应牌区为空时不可使用。');
+  });
   it('明确护甲损失、费用归属、受伤判断和受益人', () => {
     expect(displayCardDescription(get('tt7-bulwark').desc, 'tt7-bulwark')).toContain('你失去 4 点护甲');
     expect(displayCardDescription(get('tt12-hitechrd').desc, 'tt12-hitechrd')).toContain('所选卡牌的费用减少 1 点');

@@ -1,0 +1,102 @@
+{
+  "at": "2026-10-20T12:26:13.674Z",
+  "baseline": "../.tmp/framework-sequential-1020/baseline",
+  "files": [
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "status": "modified",
+      "baselineLines": 784,
+      "currentLines": 776,
+      "baselineSha256": "5e4fd6efa10c451fc4487073e720b6aad13816dcadea3c2821b7e9a1241e7df7",
+      "sha256": "2e6c985da2200ea004a650ae92b55d1c722e3a3e8e9f230d42ce09aff26d85e2"
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "status": "modified",
+      "baselineLines": 1352,
+      "currentLines": 377,
+      "baselineSha256": "9dfb464b5031c5227c526af83a8bcc1ff3adf81471fbbfcfa43239fc43969a80",
+      "sha256": "bd3a645535fe3a8bc323a30232794345ff1c48a96125803748685932e6b33b6f"
+    },
+    {
+      "path": "game/src/run/game.run.events.js",
+      "status": "added",
+      "baselineLines": 0,
+      "currentLines": 900,
+      "baselineSha256": null,
+      "sha256": "1553e0f73103700bdf1a5a4aee56a40a4ceef2fb091c1016852b812a479156f3"
+    },
+    {
+      "path": "game/src/run/game.run.resources.js",
+      "status": "added",
+      "baselineLines": 0,
+      "currentLines": 102,
+      "baselineSha256": null,
+      "sha256": "dee6f9fada61a4f054ebf470b5cbafb1addc28c8d32625a3f41473741e7a94f2"
+    },
+    {
+      "path": "game/src/run/shop-commission.js",
+      "status": "modified",
+      "baselineLines": 131,
+      "currentLines": 121,
+      "baselineSha256": "4dfb9e104e380bb4c5fe78fe08877f71e56bbc1e43bb8f6aff4bd655fe366377",
+      "sha256": "f0d2b925fb040affc0cd8591699661e706af9781924c24e5461f19cfa92b2ca1"
+    },
+    {
+      "path": "game/src/run/event-card-choice.js",
+      "status": "modified",
+      "baselineLines": 217,
+      "currentLines": 213,
+      "baselineSha256": "91955c1917a1084b4256649f96bb087a5d3dcaff75fc27c98911590b07a9b5f4",
+      "sha256": "60d8008c0dfd997ceeefa01504991adf2f25f432a2a5bc283258515da46af0fe"
+    },
+    {
+      "path": "game/src/run/shop-commands.js",
+      "status": "added",
+      "baselineLines": 0,
+      "currentLines": 98,
+      "baselineSha256": null,
+      "sha256": "d1f5cfc0bccf233a83159d7d1c12e04c2cb13b0df6dab154a6239230655e446b"
+    },
+    {
+      "path": "game/src/run/event-commands.js",
+      "status": "added",
+      "baselineLines": 0,
+      "currentLines": 132,
+      "baselineSha256": null,
+      "sha256": "dfbf880ed4af39e48f6f319208fdf56777d937ead059ba7333734371afd58654"
+    },
+    {
+      "path": "game/src/run/run-domain-commands.types.d.ts",
+      "status": "added",
+      "baselineLines": 0,
+      "currentLines": 47,
+      "baselineSha256": null,
+      "sha256": "4d9a33c4bb93e29ec21a45cf8ec37bbbe8cf26a104377bf0a3803fde43da4197"
+    },
+    {
+      "path": "tests/run-domain-commands.test.js",
+      "status": "added",
+      "baselineLines": 0,
+      "currentLines": 92,
+      "baselineSha256": null,
+      "sha256": "93867b7cd24656abc713478b99688769d775d4ffea601ecc63ee5de138c77923"
+    },
+    {
+      "path": "tests/run-event-controller-ownership.test.js",
+      "status": "added",
+      "baselineLines": 0,
+      "currentLines": 41,
+      "baselineSha256": null,
+      "sha256": "fa844dd9fb0c577dda8172f09650f84913481b7f91f2f47e2c033d741bfde82e"
+    },
+    {
+      "path": "tests/events-0919.test.js",
+      "status": "modified",
+      "baselineLines": 109,
+      "currentLines": 109,
+      "baselineSha256": "c933aedff334333fd2f8bddc805f3d3ea8ff53d7b30df68e52e2311e939b4d50",
+      "sha256": "680385099116366274a60f9aa84bf6d3891885e4ec4e57e679e93d186a1241d7"
+    }
+  ]
+}

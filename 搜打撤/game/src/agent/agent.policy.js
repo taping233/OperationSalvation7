@@ -19,9 +19,9 @@ const TERMINATORS = new Set([
   'nsBack', 'rcBack', 'fireDone', 'depBack', 'backShop',
 ]);
 
-// ---------- 随机策略：合法动作里等概率（冒烟/对照用；随机源走 Random 服务） ----------
+// ---------- 随机策略：合法动作里等概率（冒烟/对照用；决策随机独立于规则流） ----------
 function randomPolicy(seed) {
-  const roll = seed || (() => Random.random('gameplay'));
+  const roll = seed || (() => Random.random('agent-policy'));
   return (obs) => {
     const acts = obs.actions || [];
     if (!acts.length) return { type: 'sys', name: 'noop' };

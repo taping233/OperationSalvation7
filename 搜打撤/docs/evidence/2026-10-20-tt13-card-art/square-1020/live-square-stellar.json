@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T11:47:40.116Z",
+  "inputKind": "real-input",
+  "detail": "当前窗口真实搜索并打开星辰占卜，确认1254×1254高清方图，三张星牌和原人物保留；未改视口",
+  "screenshot": {
+    "path": "live-square-stellar.png",
+    "bytes": 83237,
+    "sha256": "1252987f845203495b73a98d2b537a706a198d742d38b7d20f07a1b9091613ce"
+  },
+  "errors": [],
+  "url": "http://localhost:5200/",
+  "images": [
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 1254,
+      "src": "http://localhost:5200/assets/cards/spell-tt13-stellar-divination.webp?art=square-20261020&v=0.60.0",
+      "width": 1254
+    }
+  ],
+  "console": []
+}

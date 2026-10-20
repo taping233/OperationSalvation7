@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-framework-closeout-1020",
+  "date": "2026-10-20",
+  "owner": "Friday",
+  "goal": "收口Base统一持久写锁、战斗核心无浏览器与实例隔离、现役内置卡结构化执行及最终全量",
+  "paths": [
+    "game/src/hub",
+    "game/src/battle",
+    "game/src/cards",
+    "game/src/run",
+    "game/src/core",
+    "game/src/ui",
+    "game/src/game.boot.js",
+    "game/selftest.js",
+    "tests",
+    "scripts/architecture-graph.mjs",
+    "scripts/sync-cards-from-live.mjs",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "docs/architecture.md",
+    "docs/save-format.md",
+    "game/src/README.md",
+    "docs/evidence/2026-10-20-WF-framework-closeout-1020"
+  ],
+  "doneWhen": [
+    "生产Base写入统一同槽锁与冲突回执，真实调用处理异步失败；故障/重入/多标签竞争回归通过",
+    "战斗核心可无window/document导入运行真实流程，两个独立实例交错及异步取消不串状态",
+    "现役内置卡执行域均有明确结构化所有权，文案不决定效果；自定义及历史未知卡兼容边界明确，等价与迁移回归通过",
+    "冲突属地已交接，静态/最终全量与当前窗口代表实页完成，真实失败和未覆盖范围有证据"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "根代理核对剧情/语法/数据/10组类型/全库lint/docs实际退出0，证据static-checks.json",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "根代理实际运行Vitest全量748文件7654pass/0fail/38skip，3760输入前后相同，证据full-suite.json与full-inputs.json",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "Codex内置浏览器当前窗口真实输入主流程及最终源码恢复、error日志空、服务已停，证据browser-checks.json与service.json",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "共享工作树未build；本任务未提交或推送，远端CI未验证。实页只覆盖当前窗口代表流程，逐卡与故障竞争由自动化测试覆盖。"
+  ],
+  "updatedAt": "2026-10-20T17:11:16.566Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

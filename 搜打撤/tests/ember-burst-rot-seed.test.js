@@ -128,7 +128,7 @@ describe('余烬爆裂 + 腐化之种', () => {
 
     await playOwned(g, rot(), 0);
     expect(snap().foes[0].status.poison).toBe(2);                 // 中毒靶挂 2 层
-    expect(snap().foes[0].rotSeedMarked).toBe(true);
+    expect(snap().foes[0].deathBurst).toEqual({ status: 'poison', multiplier: 1, dmgType: 'true' });
 
     // 同回合补刀，中毒未结算，死亡时按 2 层爆发。
     await playOwned(g, shot(), 0);
@@ -137,7 +137,7 @@ describe('余烬爆裂 + 腐化之种', () => {
       expect(snap().foes[index].hp).toBe(before[index] - 2);
       expect(snap().foes[index].status.poison || 0).toBe(0);
     }
-    expect(g.logs.some(l => l.includes('腐化之种') && l.includes('真实伤害'))).toBe(true);
+    expect(g.logs.some(l => l.includes('真实伤害'))).toBe(true);
   });
 
   it('对照：中毒来自其他卡（毒箭）时，击杀不触发转移', async () => {

@@ -1,0 +1,89 @@
+{
+  "method": "Built-in ImageGen; WebP encoding and existing thumbnail bake",
+  "items": [
+    {
+      "card_id": "tt13-stellar-divination",
+      "generated_source": "C:\\Users\\太平\\.codex\\generated_images\\01a1583a-2bcd-72f3-ae49-301e0181b6e8\\exec-31d74689-86fe-45ad-b7cf-132b6f955200.png",
+      "raw": {
+        "path": ".tmp/imagegen/stellar-class-style/cards-spell-tt13-stellar-divination-source.png",
+        "bytes": 2115183,
+        "sha256": "5113f376ee34386e54dbbc1d49e82a247ab25d56bd9c1b970ab6b52c49f71166"
+      },
+      "backups": [
+        {
+          "path": ".tmp/imagegen/stellar-class-style/cards-spell-tt13-stellar-divination-full-before.webp",
+          "bytes": 164508,
+          "sha256": "fbaff7f54966db5905e862fe9faeaeadb7212ecb8d345b472a056b921e662e77"
+        },
+        {
+          "path": ".tmp/imagegen/stellar-class-style/cards-spell-tt13-stellar-divination-thumb-before.webp",
+          "bytes": 26662,
+          "sha256": "5c79baf0a40e38cd322985d4477e6bfc597432b37dc05d12bf1418fa84028a4d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "game/assets/cards/spell-tt13-stellar-divination.webp",
+          "bytes": 176094,
+          "sha256": "9d9f9d53272cf2bdb5ebc791cd36f8190fde9914222e0932a850c15e6ee7b2c6",
+          "size": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "game/assets/thumbs/cards/spell-tt13-stellar-divination.webp",
+          "bytes": 24288,
+          "sha256": "2006f19e9825cdc0bfe52ec8829631239433dfdaf60672620e3ade59e345de75",
+          "size": [
+            448,
+            448
+          ]
+        }
+      ],
+      "revision_before": "square-20261020",
+      "revision_after": "stellar-class-20261020",
+      "manifest_patches": [
+        {
+          "before": {
+            "path": "cards/spell-tt13-stellar-divination.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 164508,
+            "sha256": "fbaff7f54966db5905e862fe9faeaeadb7212ecb8d345b472a056b921e662e77",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+          },
+          "after": {
+            "path": "cards/spell-tt13-stellar-divination.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 176094,
+            "sha256": "9d9f9d53272cf2bdb5ebc791cd36f8190fde9914222e0932a850c15e6ee7b2c6",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/stellar-class-style/receipt.json"
+          }
+        },
+        {
+          "before": {
+            "path": "thumbs/cards/spell-tt13-stellar-divination.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 26662,
+            "sha256": "5c79baf0a40e38cd322985d4477e6bfc597432b37dc05d12bf1418fa84028a4d",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+          },
+          "after": {
+            "path": "thumbs/cards/spell-tt13-stellar-divination.webp",
+            "ext": "webp",
+            "license": "项目自有（AI 生成）",
+            "bytes": 24288,
+            "sha256": "2006f19e9825cdc0bfe52ec8829631239433dfdaf60672620e3ade59e345de75",
+            "source": "docs/evidence/2026-10-20-tt13-card-art/stellar-class-style/receipt.json"
+          }
+        }
+      ]
+    }
+  ],
+  "verification": "Not run: user requested no tests/audits/browser/build",
+  "manifest_count_before": 1498,
+  "manifest_count_after": 1498
+}

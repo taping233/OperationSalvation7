@@ -93,6 +93,8 @@ function battleView(snap) {
       need: snap.handSelecting.n ?? snap.handSelecting.need ?? null,
       mandatory: !!snap.handSelecting.mandatory,
       type: snap.handSelecting.type || snap.handSelecting.act || null,
+      candidateUids: [...(snap.handSelecting.candidateUids || [])],
+      canCancel: snap.handSelecting.canCancel === true,
     } : null,
     infusing: snap.infusing ? { uid: snap.infusing.uid, name: snap.infusing.card?.name || '', picked: [...(snap.infusing.picked || [])] } : null,
     deckSelection: snap.deckSelection ? {
@@ -150,8 +152,8 @@ function battleActions(snap) {
     return acts;
   }
   if (snap.handSelecting) {
-    (snap.handSelecting.cards || snap.hand || []).forEach(uid => push('pickHandSelect', [uid]));
-    push('skipHandSelect', []);
+    (snap.handSelecting.candidateUids || []).forEach(uid => push('pickHandSelect', [uid]));
+    if (snap.handSelecting.canCancel === true) push('skipHandSelect', []);
     return acts;
   }
   if (snap.choosing) {

@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-20T14:43:59.197Z",
+  "platform": "Codex in-app browser",
+  "origin": "http://127.0.0.1:5327",
+  "snapshot": ".tmp/framework-1020/preview",
+  "viewport": "current window 1280x720, no override",
+  "input": "Real locator and coordinate clicks; read-only DOM/style inspection; no runtime state injection",
+  "testSlot": 5,
+  "existingSlot1": "left untouched",
+  "checks": {
+    "settingsOpenCloseThenSlotEntry": true,
+    "baseRoomNavigation": true,
+    "baseMotion": {
+      "cardAnimation": "none",
+      "gates": 0,
+      "overlayAnimation": "none",
+      "shell": "content"
+    },
+    "broughtCard": "穿刺 ×1",
+    "bagBeforeReload": "6 cards / 3 slots",
+    "bagAfterReload": "6 cards / 3 slots, 穿刺 ×1",
+    "realBattle": "first normal battle; 穿刺 and 初始攻击 target submissions; energy 2→1→0; two foes defeated; victory reward overview; return to map"
+  },
+  "errors": [],
+  "unverified": [
+    "Storage failure/recovery fault injection is covered by module tests, not browser mutation",
+    "New normal-battle 99-card-deck gameplay belongs to WF-battle-flow-1020 and is outside this frozen snapshot",
+    "Remaining legacy text rules and browser adapters are preserved"
+  ]
+}

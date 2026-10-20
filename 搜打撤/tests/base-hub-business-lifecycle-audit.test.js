@@ -112,7 +112,7 @@ describe('伙伴升级回执', () => {
       petById: id => id==='robot'?robot:null, petLevel: () => level, petUpCost: () => 2,
       safeCap: () => 2, upgradePet: vi.fn(() => {level=2;return true;}),
     });
-    harness.runtime.openBaseHub('stash');harness.ui._acts.upPet({id:'robot'});
+    harness.runtime.openBaseHub('stash');(await harness.ui._acts.upPet({id:'robot'}));
     expect(harness.ui.log).toHaveBeenLastCalledWith(expect.stringContaining('携带时安全格 2 → <b>3</b> 格（口粮 −2）'), 'ok');
     expect(harness.host.textContent).toContain('机器人 Lv.1 → Lv.2 · 安全格 2 → 3 · 口粮 −2');
   });
@@ -122,8 +122,8 @@ describe('伙伴升级回执', () => {
       petById: () => ({id:'robot',name:'机器人'}),petLevel: () => 1,petUpCost: () => 2,
       upgradePet: vi.fn(() => false),
     });
-    harness.runtime.openBaseHub('stash');harness.ui._acts.upPet({id:'robot'});
-    expect(harness.ui.log).not.toHaveBeenCalled();
+    harness.runtime.openBaseHub('stash');(await harness.ui._acts.upPet({id:'robot'}));
+    expect(harness.ui.log).toHaveBeenCalledWith('伙伴升级未保存或口粮不足，请重试。', 'warn');
     expect(harness.host.textContent).not.toContain('机器人 Lv.');
   });
 });
@@ -134,19 +134,19 @@ describe('基地恢复、扩建与外观旧动作', () => {
     harness = await createBrowsingHarness(); harness.base.data.pocket = [{ card:pocketCard, count:2 }];
     harness.runtime.openBaseHub('stash'); const previous = harness.ui._acts[action];
     harness.useSlot(2); harness.base.data.pocket = [{ card:pocketCard, count:2 }];
-    previous({ name:pocketCard.name });
+    (await previous({ name:pocketCard.name }));
     expect(harness.base.restore).not.toHaveBeenCalled(); expect(harness.base.upgradeBag).not.toHaveBeenCalled(); expect(harness.base.upgradeStash).not.toHaveBeenCalled();
   });
   it('关基地后旧扩建回调不能再调用命令或重开基地', async () => {
     harness = await createBrowsingHarness(); harness.runtime.openBaseHub('stash'); const previous = harness.ui._acts.upStash;
-    harness.runtime.closeBase(); previous(); expect(harness.base.upgradeStash).not.toHaveBeenCalled(); expect(harness.host.querySelector('#hubMain')).toBeNull();
+    harness.runtime.closeBase(); (await previous()); expect(harness.base.upgradeStash).not.toHaveBeenCalled(); expect(harness.host.querySelector('#hubMain')).toBeNull();
   });
   it('合法复原仍调用真实当前索引；后续旧回调不能重复提交同名新堆', async () => {
     harness = await createBrowsingHarness(); harness.base.pocketKeyCost = stack => stack.count;
     harness.base.data.pocket = [{ card:pocketCard, count:2 }]; harness.runtime.openBaseHub('stash');
-    const previous = harness.ui._acts.restoreCard; previous({ name:pocketCard.name });
+    const previous = harness.ui._acts.restoreCard; (await previous({ name:pocketCard.name }));
     expect(harness.base.restore).toHaveBeenCalledExactlyOnceWith(0);
-    previous({ name:pocketCard.name }); expect(harness.base.restore).toHaveBeenCalledTimes(1);
+    (await previous({ name:pocketCard.name })); expect(harness.base.restore).toHaveBeenCalledTimes(1);
   });
   it.each(['slot', 'room', 'closed'])('外观保存晚到%s之后不能播报旧选择或重绘', async kind => {
     harness = await createBrowsingHarness(); let finish;
@@ -171,18 +171,18 @@ it('复原稳定引用在索引移动之后只提交预览的ID和variant堆', a
   const first={card:{id:'same-id',variantKey:'first',name:'同名'},count:9};
   const second={card:{id:'same-id',variantKey:'second',name:'同名'},count:2};
   harness.base.data.pocket=[first,second]; harness.runtime.openBaseHub('stash');
-  harness.ui._acts.restoreCard({stackKey:'card:same-id:second',count:'2',name:'同名',i:'0'});
+  (await harness.ui._acts.restoreCard({stackKey:'card:same-id:second',count:'2',name:'同名',i:'0'}));
   expect(harness.base.restore).toHaveBeenCalledExactlyOnceWith(1);
 });
 it('预览以后数量改变不会按更新整堆意外扣钥匙', async () => {
   harness=await createBrowsingHarness(); harness.base.data.pocket=[{card:{id:'card',name:'复原'},count:3}]; harness.runtime.openBaseHub('stash');
-  harness.ui._acts.restoreCard({stackKey:'card:card',count:'2',name:'复原',i:'0'});
+  (await harness.ui._acts.restoreCard({stackKey:'card:card',count:'2',name:'复原',i:'0'}));
   expect(harness.base.restore).not.toHaveBeenCalled(); expect(harness.ui.log).toHaveBeenCalledWith('消耗区数量已变化，请重新打开详情','warn');
 });
 it('同页重绘后最新扩建handler仍能正常提交，旧handler已失效', async () => {
   harness=await createBrowsingHarness(); harness.runtime.openBaseHub('stash'); const previous=harness.ui._acts.upStash;
-  previous(); expect(harness.base.upgradeStash).toHaveBeenCalledTimes(1); previous(); expect(harness.base.upgradeStash).toHaveBeenCalledTimes(1);
-  harness.ui._acts.upStash(); expect(harness.base.upgradeStash).toHaveBeenCalledTimes(2);
+  (await previous()); expect(harness.base.upgradeStash).toHaveBeenCalledTimes(1); (await previous()); expect(harness.base.upgradeStash).toHaveBeenCalledTimes(1);
+  (await harness.ui._acts.upStash()); expect(harness.base.upgradeStash).toHaveBeenCalledTimes(2);
 });
 it('合法外观保存抛错给失败反馈并允许重新提交', async () => {
   harness=await createBrowsingHarness(); harness.runtime.openBaseHub('stash'); ports.select.mockRejectedValueOnce(new Error('disk'));
@@ -194,6 +194,6 @@ it('合法外观保存抛错给失败反馈并允许重新提交', async () => {
 
 it('当前返回基地动作仍到出发主页；换档后的旧返回不抢新页', async () => {
   harness=await createBrowsingHarness(); harness.runtime.openBaseHub('stash'); const previous=harness.ui._acts.hubHome;
-  const root=harness.host.querySelector('#hubMain'); harness.useSlot(2); previous(); expect(harness.host.querySelector('#hubMain')).toBe(root);
-  harness.runtime.openBaseHub('stash'); harness.ui._acts.hubHome(); expect(harness.host.querySelector('#hubMain').dataset.page).toBe('deploy');
+  const root=harness.host.querySelector('#hubMain'); harness.useSlot(2); (await previous()); expect(harness.host.querySelector('#hubMain')).toBe(root);
+  harness.runtime.openBaseHub('stash'); (await harness.ui._acts.hubHome()); expect(harness.host.querySelector('#hubMain').dataset.page).toBe('deploy');
 });

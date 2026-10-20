@@ -1,4 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+
+installImmediateWebLocks();
 
 let session, storage, recorder, Base;
 async function boot() {
@@ -62,7 +65,7 @@ describe('本局真实保存/装载链中的战斗统计', () => {
     expect(recorder.snapshotRunBattles()).toMatchObject({runId,fought:0,won:0,log:[]});
   });
 
-  it('切换档位恢复各自计数，新开局不继承上一局', () => {
+  it('切换档位恢复各自计数，新开局不继承上一局', async () => {
     const firstId = seedRun(1);
     recorder.noteBattle(true); expect(session.saveGame()).toBe(true);
     recorder.resetRunCounters();
@@ -75,7 +78,7 @@ describe('本局真实保存/装载链中的战斗统计', () => {
     expect(session.loadGame(2).ok).toBe(true);
     expect(recorder.snapshotRunBattles()).toMatchObject({runId:secondId,fought:1,won:0});
     expect(storage.remove(2)).toBe(true);
-    session.newRun('standard',[],{skipClassChoice:true});
+    await session.newRun('standard',[],{skipClassChoice:true});
     expect(recorder.snapshotRunBattles()).toMatchObject({fought:0,won:0,log:[]});
   });
 

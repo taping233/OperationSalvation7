@@ -15,6 +15,7 @@ import { registerDefeatPresenter } from '../core/battle.presentation.js';
 import { loadFrameRenderer } from './battle.frame-renderer.js';
 import { framesDiagnosticStatic, summarizeFrameTextures } from './battle.frames-diagnostic-policy.js';
 import { frameResolutionFor, resizeFrameSurface } from './battle.frame-resolution.js';
+import { cueAction, frameImpactRemaining } from './battle.action-timing.js';
 
 // ---------- 战斗单位序列帧播放器（批次D：Pixi 材质层） ----------
 // 定调（老板 2026-09-12）：动画路线 = Pixi 材质层 + 序列帧，跳过 Spine；敌人本轮不上序列帧；
@@ -647,9 +648,10 @@ async function attachCurrent(body) {
 }
 
 // 动作触发：'atk' 攻击（起手连命中）/ 'cast' 施法 / 'hurt' 受击
-function play(name) {
+function play(name, { continueActive = false } = {}) {
   if (!cur || !cur.set || cur.dying || document.hidden || stopForReducedMotion()) return false;
   if (!ACT_SEQS[name]) return false;
+  if (continueActive && cur.action === name && cur.play && !cur.play.loop) return true;
   if (fixedFrameRole(cur.role)) {
     cur.resumeAfter = null;
     const played = playSeq(name);
@@ -664,6 +666,13 @@ function play(name) {
   const played = playSeq(name);
   wakeRenderer(900);
   return played;
+}
+
+export function actionImpactRemaining(cue, battleToken) {
+  if (!cur?.play || cur.battleToken !== battleToken || cur.dying || document.hidden
+    || reduceMotion() || cur.action !== cueAction(cue) || !cur.fig?.isConnected) return null;
+  return frameImpactRemaining({ role: cur.role, timeline: cur.play, index: cur.fi,
+    nextAt: cur.tNext, now: pausedAt || performance.now() });
 }
 
 function presentDeath(player) {

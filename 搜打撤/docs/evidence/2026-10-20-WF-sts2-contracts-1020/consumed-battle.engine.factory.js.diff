@@ -1,0 +1,22 @@
+diff --git a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/consumed-before-battle.engine.factory.js.txt b/game/src/battle/core/battle.engine.factory.js
+index 1ec76800..a3b86f1a 100644
+--- a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/consumed-before-battle.engine.factory.js.txt
++++ b/game/src/battle/core/battle.engine.factory.js
+@@ -5,7 +5,7 @@ import { createBattleTurnStart } from './battle.turn-start.js';
+ import { recordRequestedDamage, requestedPlayerDamaged, requestedTargetReason, resolveRequestedCard, recordPlayerDamageFact } from '../effects/requested-card-runtime.js';
+ import { executeTargetReason } from '../effects/effect-steps.m2.js';
+ import {
+-  renderBattle, battleState, G, foes, opts, mode, drawPile, hand, discard, granted, consumed,
++  renderBattle, battleState, G, foes, opts, mode, drawPile, hand, discard, granted, played, consumed,
+   grave, energy, maxEnergy, turn, pdef, pstat, busy, infusing, discovering, discoverQueue,
+   handSelecting, choosing, stealthStrike, nextSpellTwice, interaction, pendingHint, delayed, viewingGrave,
+   viewingDeck, viewingBag, floats, cardAnims, dreadShown, spellCost1, meleeCost1, shaTransform,
+@@ -398,7 +398,7 @@ function captureSnapshotInput() {
+       opts,
+       player: G ? { hp: G.hp, maxHp: G.maxHp, atk: G.atk, spellPower: G.spellPower || 0, myClass: G.myClass || null, characterId: G.characterId || null } : null,
+       handInfuseCounts,
+-      pdef, pstat, foes, deathFxPending: foes.map(foe => stagedDeathFx.has(foe)), allies, hand, drawPile, discard, grave, consumed, infusing, discovering,
++      pdef, pstat, foes, deathFxPending: foes.map(foe => stagedDeathFx.has(foe)), allies, hand, drawPile, discard, grave, played, consumed, infusing, discovering,
+       handSelecting: handSelecting ? { ...handSelecting,
+         ...selectionContract } : null,
+       choosing, pendingTarget: pTgt, pendingHint, viewingGrave, viewingDeck, viewingBag,

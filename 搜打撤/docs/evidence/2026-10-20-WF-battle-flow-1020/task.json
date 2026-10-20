@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "WF-battle-flow-1020",
+  "date": "2026-10-20",
+  "owner": "Friday",
+  "goal": "普通战99张初始攻击实库/无固定抽牌，三种旧牌堆统一消耗牌堆且不自动洗回，仅卡效取回；统一说明与HUD、动作接触及胜利领奖场景",
+  "paths": [
+    "game/src/battle/view",
+    "game/src/battle/runtime/battle.staged-playback.js",
+    "game/css",
+    "game/src/battle/core",
+    "game/src/battle/bag",
+    "game/src/battle/effects",
+    "game/src/cards/cards.view.js",
+    "game/src/hub/game.cardslib.designer.js",
+    "game/data/beginner-guide.json",
+    "docs/rules.md",
+    "docs/requested-card-batch.md",
+    "scripts/runtime-asset-redundancy-review.mjs",
+    "tests",
+    "docs/evidence/2026-10-20-WF-battle-flow-1020",
+    "game/src/cards/card-description-text.js",
+    "game/src/ui/term-tips.js",
+    "game/src/hub/game.bag.js",
+    "scripts/generate-compendium.mjs",
+    "docs/game-compendium.md"
+  ],
+  "doneWhen": [
+    "普通99库实抽无固定抽牌，不污染战后随身；统一消耗牌堆来源/回收和文本有回归及实页证据",
+    "真实角色动作命中、HUD与胜利领奖有定向回归和当前窗口实页证据；无敌人重绘"
+  ],
+  "stage": "complete-uncommitted",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "已核对24文件314项全部通过、运行期间战斗源码与选定测试指纹稳定；integration-regression.log与integration-inputs.json",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "587文件语法、10组类型、目标ESLint、两份CSS Stylelint和655链接文档检查通过",
+      "result": "passed"
+    },
+    {
+      "kind": "manual",
+      "description": "当前1280×720 Codex内置浏览器完成99实抽无固定抽牌、唯一堆同UID取回、永久道具入堆不自取、BOSS无洗回、代表命中/倒地/胜利领奖；快照已导入，最后两段error0；自建服务和临时页已清理",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "未运行生产构建、全量Vitest或远端CI；定向结果不代表整个混合工作树通过",
+    "自然遭遇平衡、多尺寸、音效主观听感未验证；其他聊天后续增量不纳入本轮冻结实页"
+  ],
+  "updatedAt": "2026-10-20T16:18:34.555Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": true,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

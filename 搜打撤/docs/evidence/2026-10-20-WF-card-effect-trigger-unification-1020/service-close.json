@@ -1,0 +1,12 @@
+{
+  "directory": "D:/素材/代号柒/搜打撤",
+  "port": 5317,
+  "pid": 14352,
+  "verifiedCommandLineBeforeStop": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js --host 127.0.0.1 --port 5317 --strictPort",
+  "stopIssued": true,
+  "immediateSocketCheck": "listener was still visible immediately after Stop-Process; no additional process was stopped",
+  "verifiedAt": "2026-10-20T10:50:37.6255830Z",
+  "listenerCountAfterVerification": 0,
+  "originalProcessCountAfterVerification": 0,
+  "untouchedMain5200Owners": [492]
+}

@@ -11,6 +11,7 @@ export function createBattleActionRunner({
   getLastPersistAt, setLastPersistAt,
   render, actionCancellationError, throwIfActionCancelled,
   preparePresentation,
+  deferPersist = write => write(),
   onIdle = () => {},
 }) {
   return function queueBattleAction(execute, label = '战斗动作', onError = null) {
@@ -67,14 +68,7 @@ export function createBattleActionRunner({
             const now = performance.now();
             if (now - getLastPersistAt() >= PERSIST_MIN_MS) {
               setLastPersistAt(now);
-              // F5②（09-30 性能审计）：全量存档序列化可到几十 ms，出牌收尾即写会掉帧——
-              // 挪到 idle 窗口执行，2s 超时兜底；页面隐藏无 idle 调度直接写。
-              // 崩溃安全窗口最多放宽 2s，正常关窗仍由 beforeunload 全量保存兜底。
-              if (typeof requestIdleCallback === 'function' && !document.hidden) {
-                requestIdleCallback(() => { if (game.battleActive) game.persistSave(); }, { timeout: 2000 });
-              } else {
-                game.persistSave();
-              }
+              deferPersist(() => { if (game.battleActive) game.persistSave(); });
             }
           }
         }

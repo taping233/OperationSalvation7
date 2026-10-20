@@ -23,7 +23,9 @@ it('flies the successful source identity to the bag then shows a receipt only af
   const clone = document.querySelector('.reward-acquisition-card');
   expect(clone.textContent).toBe(card.name); expect(clone.querySelector('[id]')).toBeNull();
   expect(document.querySelector('.bt-card-reveal')).toBeNull();
-  expect(motion.retargetVisual.mock.lastCall[1]).toMatchObject({ x: 340, y: -130, scale: .12, opacity: .12 });
+  // Endpoint travel is separate from the face's lift and staged shrink.
+  expect(motion.retargetVisual.mock.lastCall[1]).toMatchObject({ x: 340, y: -130, scale: 1, opacity: 1 });
+  expect(clone.querySelector('.reward-acquisition-body > .hs-card')).not.toBeNull();
   expect(motion.retargetVisual.mock.lastCall[2]).toMatchObject({ easing: motionEasing.travel });
   expect(motion.retargetVisual.mock.lastCall[2].duration).toBeLessThanOrEqual(motionTiming.acquire);
   completions[0](true); await Promise.resolve();
@@ -58,10 +60,13 @@ it('coalesces scroll and resize endpoint changes into one frame and keeps the or
   const remove = vi.spyOn(window, 'removeEventListener');
   const now = vi.spyOn(performance, 'now').mockReturnValue(0);
   showRewardCardFeedback(stage, [card]);
+  const body = document.querySelector('.reward-acquisition-body');
+  expect(body.style.getPropertyValue('--reward-flight-duration')).toBe(`${motionTiming.acquire}ms`);
   now.mockReturnValue(100); target.getBoundingClientRect = () => rect(520, 80, 100, 30);
   target.dispatchEvent(new Event('scroll')); window.dispatchEvent(new Event('resize')); window.dispatchEvent(new Event('scroll'));
   expect(requestAnimationFrame).toHaveBeenCalledTimes(1); expect(motion.retargetVisual).toHaveBeenCalledTimes(1);
   frames[0]();
+  expect(document.querySelector('.reward-acquisition-body')).toBe(body);
   expect(motion.retargetVisual).toHaveBeenCalledTimes(2);
   expect(motion.retargetVisual.mock.lastCall[1]).toMatchObject({ x: 460, y: -80 });
   expect(motion.retargetVisual.mock.lastCall[2].duration).toBe(motionTiming.acquire - 100);
@@ -111,4 +116,35 @@ it('cleans source clones on scene removal or cancellation without an arrival', a
   expect(document.querySelector('.reward-acquisition-card')).toBeNull(); expect(document.querySelector('.reward-acquisition-arrival')).toBeNull();
   showRewardCardFeedback(stage, [card]); stage.replaceChildren(); await Promise.resolve();
   expect(document.querySelector('.reward-acquisition-card')).toBeNull(); expect(vi.getTimerCount()).toBe(0);
+});
+it('keeps repeated cards in one counted flight while independent claims can finish separately', async () => {
+  showRewardCardFeedback(stage, [card, card, card]);
+  expect(document.querySelectorAll('.reward-acquisition-card')).toHaveLength(1);
+  expect(document.querySelector('.reward-acquisition-body .reward-acquisition-count').textContent).toBe('×3');
+  showRewardCardFeedback(stage, [card]);
+  expect(document.querySelectorAll('.reward-acquisition-card')).toHaveLength(2);
+  completions[1](true); await Promise.resolve();
+  expect(document.querySelectorAll('.reward-acquisition-card')).toHaveLength(1);
+  completions[0](true); await Promise.resolve();
+  expect(document.querySelectorAll('.reward-acquisition-card')).toHaveLength(0);
+  expect(document.querySelectorAll('.reward-acquisition-arrival')).toHaveLength(1);
+});
+it('clears an active flight immediately when reduced motion is enabled and ignores late completion', async () => {
+  showRewardCardFeedback(stage, [card]);
+  document.body.classList.add('reduce-motion'); await Promise.resolve();
+  expect(document.querySelector('.reward-acquisition-card')).toBeNull();
+  completions[0](true); await Promise.resolve();
+  expect(document.querySelector('.reward-acquisition-arrival')).toBeNull();
+});
+it('clears an arrival on system reduced motion and releases its media listener', async () => {
+  const media = { matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() };
+  vi.stubGlobal('matchMedia', vi.fn(() => media));
+  showRewardCardFeedback(stage, [card]);
+  completions[0](true); await Promise.resolve();
+  expect(document.querySelector('.reward-acquisition-arrival')).not.toBeNull();
+  media.matches = true; media.addEventListener.mock.calls[0][1]();
+  expect(document.querySelector('.reward-acquisition-arrival')).toBeNull();
+  expect(media.removeEventListener).toHaveBeenCalledWith('change', media.addEventListener.mock.calls[0][1]);
+  completions[1](true); await Promise.resolve();
+  expect(document.querySelector('.reward-acquisition-arrival')).toBeNull();
 });

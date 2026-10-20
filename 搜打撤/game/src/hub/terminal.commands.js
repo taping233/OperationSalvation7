@@ -69,7 +69,8 @@ export function createTerminalCommands({ getBase, getRunStorage, getRecovery, ge
     if (!runIdentity.ok || runIdentity.value.runId !== startingIdentity.value.runId ||
         runIdentity.value.revision !== startingIdentity.value.revision) return fail('STALE_RUN', '对局已变化，旧结算已取消');
     // Keep the legacy elapsed-time checkpoint, after recovery and same-run validation so it cannot write across runs.
-    syncPlayTime();
+    await syncPlayTime();
+    if (!currentSlot(slotId)) return fail('STALE_SLOT', '档位已切换，旧结算已取消');
     const base = getBase();
     let afterBase;
     try { afterBase = base._readForCommit(slotId); }

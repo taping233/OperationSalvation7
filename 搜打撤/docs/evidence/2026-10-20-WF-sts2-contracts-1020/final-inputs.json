@@ -1,0 +1,151 @@
+{
+  "at": "2026-10-20T16:01:11.6444108Z",
+  "ownership": "Shared implementation files include later framework migration; scoped own diffs and reports define ownership, these are observed final bytes only",
+  "inputs": [
+    {
+      "path": "game/src/battle/bag/battle.consumed-pile.js",
+      "sha256": "e6289302a4dcd89b466e85662db1697cd0e26821cfbb50dcb4881e82dcf3bc1e",
+      "length": 1647
+    },
+    {
+      "path": "game/src/battle/bag/battle.bag.domain.js",
+      "sha256": "18904d737a067c3ca1d19f86361a25a72b205923e97cce5e408fcc1fa21ecd9a",
+      "length": 33918
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.factory.domain.js",
+      "sha256": "2054d0212122bba87f2c2bcc8033cb00674a23211fa9a1443782674aa63428bb",
+      "length": 82419
+    },
+    {
+      "path": "game/src/battle/core/battle.facts.js",
+      "sha256": "8a5989958c678f79e0d87ad698c88f575fc059e809be1144078a809eee06c1e4",
+      "length": 1395
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-plan.js",
+      "sha256": "e4fdd1eea0c388a9fa02a3773fdd440bf608a3d57a4a2447edf44a5cc18611e5",
+      "length": 642
+    },
+    {
+      "path": "game/src/battle/core/battle.enemy-intent.js",
+      "sha256": "50120bbc31490cd54d8274f5b64f191554ff477028ea62ab41c97cccd633d26f",
+      "length": 1638
+    },
+    {
+      "path": "game/src/battle/effects/battle.cost-modifiers.js",
+      "sha256": "fee9617c8371713fd4487c96be56d36c6331ceeeb105e6103ac9cedcfb11f420",
+      "length": 2264
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-cost.js",
+      "sha256": "c52c1a90a8f40aff64194fe40e32efaaef859526f7f3a9dc693e90bceeff266b",
+      "length": 4413
+    },
+    {
+      "path": "game/src/battle/effects/battle.card-inspection.domain.js",
+      "sha256": "cf491ecc6dc621d13b2fa0efc4ee015be3d43f20adff2ca100435dc98e6e89ff",
+      "length": 9338
+    },
+    {
+      "path": "game/src/battle/effects/battle.discover-flow.js",
+      "sha256": "cbfe819860cdfadd8f16de598209f4dcb85d07becff977cc19c69bff22426e61",
+      "length": 16026
+    },
+    {
+      "path": "game/src/battle/runtime/battle.snapshot.js",
+      "sha256": "1ee689ddcb297a37a15a8e3bb403bf50105a41710b7e4f71e794becd87c18bb3",
+      "length": 10023
+    },
+    {
+      "path": "game/src/battle/battle.snapshot.types.d.ts",
+      "sha256": "dd3b951ff2b7ef8fb270229804c645cb3c2f14bacd24a6639bce77fc3070826c",
+      "length": 12182
+    },
+    {
+      "path": "game/src/cards/card-instance.js",
+      "sha256": "ccb896a459443513daf3057c8adf647f81b6dce6af23dc132030ad9014f9335e",
+      "length": 1302
+    },
+    {
+      "path": "game/src/cards/card-instance-fields.js",
+      "sha256": "0cb09b2f6266a0a85cdf59a79a36997db110fed18660b1de3cf60c6caa8b622e",
+      "length": 959
+    },
+    {
+      "path": "game/src/agent/agent.state.js",
+      "sha256": "bcb3ad2c2a98f3a89348d8f507a29b91bbbbd44cedaee5d90eaf3244874b00e7",
+      "length": 19541
+    },
+    {
+      "path": "game/src/agent/agent.runner.js",
+      "sha256": "e0b6483c6a1a6cf416cbd90c072b474dcba612686208eaa5718891373a137afe",
+      "length": 33335
+    },
+    {
+      "path": "game/src/ui/settings-battle-restart.js",
+      "sha256": "3ae3df47d48bce4c93fa0dbe3d827cef902845f95145ef74ce993b3538379918",
+      "length": 3176
+    },
+    {
+      "path": "tests/sts2-hand-selection-contract.test.js",
+      "sha256": "1a61542b605a289e3336ff7a88778975fb50cf3a0ebdc14f33cf22e6607fe8bb",
+      "length": 10126
+    },
+    {
+      "path": "tests/sts2-card-instance.test.js",
+      "sha256": "3e7a270c61a3090ec3bbb80c53748923d5e9a44c9177cc5bbfd849edfc0ae6e7",
+      "length": 8828
+    },
+    {
+      "path": "tests/sts2-cost-lifecycle.test.js",
+      "sha256": "2273c075d0035fd61bb58251efe1f17c071b322dbb5f9550c23951d23dd5a1ad",
+      "length": 7350
+    },
+    {
+      "path": "tests/sts2-combat-facts.test.js",
+      "sha256": "3c39240fd6453829d801f7278480697df97145f212ffb651886524e00dc1b2c2",
+      "length": 9772
+    },
+    {
+      "path": "tests/sts2-enemy-plan.test.js",
+      "sha256": "39e676e434598191d6610a659b5aeb1ee43441273028f40b86339bbf2c9eff19",
+      "length": 6380
+    },
+    {
+      "path": "tests/sts2-unified-consumed-pile.test.js",
+      "sha256": "879b4d9e1198c29d4d374143fbde69c1a6dbbb3fad598726df468d95ed769161",
+      "length": 12028
+    },
+    {
+      "path": "tests/sts2-consumed-rules.test.js",
+      "sha256": "71f397354e5037ff0d4c39c559a7cec4861cea2dd26532ec2cd0819e89d7ea67",
+      "length": 13066
+    },
+    {
+      "path": "tests/sts2-battle-settings-restart.test.js",
+      "sha256": "a2ca36e2cc1d1d751e1fac80910b0790b8109ad1f5c2c9040767676f36c2ad35",
+      "length": 10620
+    },
+    {
+      "path": "tests/sts2-consumed-items.test.js",
+      "sha256": "e86675e7f1a40ca4a024813b065d087b59d1e3c2ee743f2fd7172a6bcbb5f2ab",
+      "length": 10059
+    },
+    {
+      "path": "tests/sts2-agent-replay.test.js",
+      "sha256": "77c55d6fc92dcd3413dccc6ec7468828732359543d07b15935fa0ebd0cff9eb1",
+      "length": 12472
+    },
+    {
+      "path": "tests/energy-crystal-restoration.test.js",
+      "sha256": "94f5467a79eeba6e5ac36d754943613de9b36830c85f93c81638539103b60464",
+      "length": 7981
+    },
+    {
+      "path": "tests/restoration-potion-observation.test.js",
+      "sha256": "5c75a64e1d9ab493be0b40a51d86074eac63de81d413bb29aa455884919dd87b",
+      "length": 8389
+    }
+  ]
+}

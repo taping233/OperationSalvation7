@@ -3,6 +3,26 @@ export const PEARL_BOX_ID = 'tt2-pearlbox';
 export const PEARL_BOX_SLOTS = 9;
 export const stackCapOf = card => card?.type === '装备' ? 1 : 3;
 
+export function containerRuleOf(card) {
+  const declared = card?.rules?.equip?.container;
+  if (declared && Number.isInteger(declared.slots) && declared.slots > 0) return declared;
+  if (card?.rules?.equip) return null;
+  // Historical/custom cards without an explicit container domain keep the
+  // existing identity adapter. Native cards declare their capacity directly.
+  if (card?.id === PEARL_BOX_ID) return { slots:PEARL_BOX_SLOTS, accepts:'资源' };
+  if (card?.id === 'tt7-stratagem') return { slots:3, accepts:'法术' };
+  return null;
+}
+export const containerAccepts = (container, card) => {
+  const rule = containerRuleOf(container);
+  return !!rule && (!rule.accepts || card?.type === rule.accepts);
+};
+export const resourceContainerSlots = card => {
+  const rule = containerRuleOf(card);
+  return rule?.accepts === '资源' ? rule.slots : 0;
+};
+export const resourceContainerBonus = ownedCards => ownedCards.reduce((total, entry) => total + resourceContainerSlots(entry.card), 0);
+
 const normalCardCount = (ownedCards, card) => ownedCards.filter(o => !o.safe && !o.stored && o.card.name === card.name).length;
 
 export function canAcceptCardAtCapacity(card, { usedSlots, baseCap, totalCap }) {
@@ -27,7 +47,7 @@ export function previewCardRewards(pendingCards, { ownedCards, usedSlots, baseCa
     if (!canReceiveCardFromBag(card, port)) { blockedIndices.push(index); return; }
     if (normalCardCount(projectedOwned, card) % stackCapOf(card) === 0) usedSlots++;
     projectedOwned.push({ card });
-    if (card.id === PEARL_BOX_ID) totalCap += PEARL_BOX_SLOTS;
+    totalCap += resourceContainerSlots(card);
     acceptedIndices.push(index);
   });
   return { canTake:acceptedIndices.length, cant:blockedIndices.length, acceptedIndices, blockedIndices, usedSlots, totalCap };

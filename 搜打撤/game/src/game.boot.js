@@ -696,7 +696,7 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     root.querySelectorAll('[title]').forEach(el => el.removeAttribute('title'));
     if (root.nodeType === 1 && root.hasAttribute('title')) root.removeAttribute('title');
   }
-  window.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('DOMContentLoaded', async () => {
     stripNativeTitles(document);
     // 整页重建（卡牌库/背包/战斗换槽）一批会塞进数百 addedNodes，此前逐节点即时
     // querySelectorAll；改为收集去重 + rAF 合帧后每根一次性处理（同 icons-bitmap
@@ -789,12 +789,20 @@ startPocketStrip();   // 模块内部自带 DOMContentLoaded/防重入处理，�
     {                     // 旧版全局基地 → 迁入已有对局存档的档位（没有则给档位 1）
       const existing = [];
       for (let i = 1; i <= SLOT_COUNT; i++) if (hasRun(i)) existing.push(i);
-      SDT.Base.migrateLegacy(existing);
+      let migrated;
+      try { migrated = await SDT.Base.migrateLegacy(existing); }
+      catch { migrated = false; }
+      if (migrated === false) UI.log('旧版基地迁移未保存，原数据已保留；请检查存储后重新进入。', 'warn');
     }
     rebuildNotes();
     showTitle();          // 开机进入《代号7》标题界面
     // The title covers the map loop; desktop readiness must not wait for that loop.
     document.body.dataset.state = game.state;
+    if (new URLSearchParams(location.search).get('runtimeTrace') === '1') {
+      import('./core/runtime-trace.local.js')
+        .then(({ installRuntimeTrace }) => installRuntimeTrace())
+        .catch(() => console.warn('[runtime-trace] 本地诊断加载失败'));
+    }
     if (import.meta.env.DEV && new URLSearchParams(location.search).has('perfProbe')) {
       import('./core/perf-probe.local.js')
         .then(({ installPerfProbe }) => installPerfProbe({ SDT, game, canvas, renderScheduler }))

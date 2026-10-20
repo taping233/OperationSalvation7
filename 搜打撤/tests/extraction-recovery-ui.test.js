@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { beforeEach, expect, it, vi } from 'vitest';
 
 const UIState = vi.hoisted(() => ({ game: {}, activeSlot: 2, acts: {}, overlay: '', saveResult: true, failAfterBase: true, saveGame: null }));
@@ -43,7 +45,7 @@ beforeEach(async () => {
   const { createRecoveryCommands } = await import('../game/src/hub/recovery.commands.js');
   const Base = window.SDT.Base;
   Base.use(2);
-  Base.reset(2);
+  (await Base.reset(2));
   RunStorage.write(2, { seed: 'extract-ui', rngState: UIState.game.rngState, hp: 20, maxHp: 30,
     inventory: UIState.game.inventory, ownedCards: UIState.game.ownedCards, usedPocket: [], myClass: 'wu',
     mode: 'normal', bossKilled: false, turn: 3, coins: 5, elapsed: 1 });

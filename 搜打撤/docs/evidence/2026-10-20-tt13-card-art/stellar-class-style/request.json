@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "card_id": "tt13-stellar-divination",
+      "name": "星辰占卜",
+      "asset": "cards/spell-tt13-stellar-divination.webp",
+      "source": "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-31d74689-86fe-45ad-b7cf-132b6f955200.png",
+      "revision": "stellar-class-20261020",
+      "prompt": "重绘第一张星月职业卡插画，以第二、第三张现有职业卡为画法的直接标准。输出正方形1:1单张完整插画，不加文字边框。第一张决定人物身份、漂亮柔和的脸、睁眼神态、姿势、构图和服装：金发金眼少女位于左侧，青绿色披风与白色高领长袖裙，保持现有发辫和月亮发饰的位置，右方抬手施术，手上方恰好三张深蓝色星牌，三张牌清楚分开且都有青色星纹。保留第一张现有画面内容，只改变画法以融入参考职业卡。仔细参考第二、第三张：手绘二次元块面厚涂，克制而自然的不透明概括笔触，头发用宽大的连续发束概括，衣服用清楚的大明暗块和少量结构褶皱，深蓝灰背景、柔和暖金头发和低饱和青绿披风，形体清楚而细节节制。脸部依然柔美、干净、二次元，不增加写实五官；笔触主要留在发束、披风、轮廓和背景，明暗自然衔接。减少第一张的光滑塑料质感、精细勾线、发丝亮线和金属高光。不要满画面碎三角色块、颗粒、划痕，不要复杂装饰或细密花纹。不要继承参考图的闭眼、低头或举手动作、强光束及场景；保持第一张的漂亮脸、原姿势和三张悬浮牌。",
+      "references": [
+        "game/assets/cards/spell-tt13-stellar-divination.webp",
+        "game/assets/cards/spell-tt7-holyglow.webp",
+        "game/assets/cards/spell-tt7-smite.webp"
+      ]
+    }
+  ]
+}

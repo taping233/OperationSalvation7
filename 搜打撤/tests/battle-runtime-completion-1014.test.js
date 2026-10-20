@@ -68,7 +68,7 @@ describe('运行态补审真实入口回归', () => {
     const game = await infuseInBoss([], false);
     useAvailablePotion('runtime-2');
     await settle();
-    expect(R.hand).toEqual(['runtime-1']);
+    expect(R.hand).toEqual(['runtime-1', 'runtime-0']);
     expect(R.grave).toEqual([]);
     const afterFirstUse = BattleSession.getSnapshot();
     useAvailablePotion('runtime-2');
@@ -82,7 +82,7 @@ describe('运行态补审真实入口回归', () => {
     expect(R.hand).toEqual(['runtime-3']);
     useAvailablePotion('runtime-2');
     await settle();
-    expect(R.hand).toEqual(['runtime-3', 'runtime-1']);
+    expect(R.hand).toEqual(['runtime-3', 'runtime-1', 'runtime-0']);
     expect(R.grave).toEqual([]);
     expect(() => assertUniqueZones({ hand: R.hand, drawPile: R.drawPile, discard: R.discard, grave: R.grave })).not.toThrow();
   });
@@ -91,6 +91,7 @@ describe('运行态补审真实入口回归', () => {
     await infuseInBoss([canonical('tt3sp-silverthorn'), canonical('tt-crystal')]);
     useAvailablePotion('runtime-2');
     await settle();
+    const firstCrystal = temporaryItems.get(R.G).get('runtime-2');
     BattleSession.commands.beginInfusion('runtime-3');
     BattleSession.commands.selectInfusion('runtime-1');
     BattleSession.commands.confirmInfusion();
@@ -99,10 +100,12 @@ describe('运行态补审真实入口回归', () => {
     expect(R.grave).toEqual(['runtime-1']);
     useAvailablePotion('runtime-4');
     await settle();
-    expect(R.hand).toEqual(['runtime-1']);
+    expect(R.hand).toEqual(['runtime-0', 'runtime-1', 'runtime-3', firstCrystal]);
     expect(R.consumed).toEqual([]);
     expect(R.grave).toEqual([]);
-    expect(R.discard).toEqual(['runtime-0', 'runtime-3']);
+    expect(R.discard).toEqual([]);
+    expect(new Set(R.hand).size).toBe(R.hand.length);
+    expect(BattleSession.getSnapshot().consumedPile).not.toContain(firstCrystal);
     expect(() => assertUniqueZones({ hand: R.hand, drawPile: R.drawPile, discard: R.discard, grave: R.grave })).not.toThrow();
   });
 
@@ -172,9 +175,9 @@ describe('运行态补审真实入口回归', () => {
     expect(R.grave).toEqual(['runtime-1', 'runtime-2']);
     useAvailablePotion('runtime-3');
     await settle();
-    expect(R.hand).toEqual(['runtime-2', 'runtime-1']);
+    expect(R.hand).toEqual(['runtime-2', 'runtime-1', 'runtime-0']);
     expect(R.grave).toEqual([]);
-    expect(R.discard).toEqual(['runtime-0']);
+    expect(R.discard).toEqual([]);
   });
 
   it('真实元素领主偶数回合元素庇幕挡住猛击，费用与本回合次数仍只消费一次', async () => {

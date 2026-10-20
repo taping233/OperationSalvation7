@@ -49,10 +49,10 @@ const DEV_NODE_LABEL = {
 };
 
 
-function devEnsureRun() {
+async function devEnsureRun() {
   if (game.battleActive) { UI.log('[[icon:lock]] 战斗进行中——先打完或退出战斗再跳节点', 'warn'); return false; }
   if (game.runActive) return true;
-  if (newRun('standard') === false) return false;
+  if (await newRun('standard') === false) return false;
   document.getElementById('title').hidden = true;
   // 节点测试绕过了正常的选人流程；补齐一个真实角色，避免战斗 HUD 落入“未选择人物”。
   game.characterId = 'heixiang';
@@ -61,10 +61,10 @@ function devEnsureRun() {
   return true;
 }
 
-function devJumpNode(kind) {
+async function devJumpNode(kind) {
   const label = DEV_NODE_LABEL[kind];
   if (!label) { UI.log(`[[icon:question]] 未知节点类型：${esc(kind)}`, 'warn'); return; }
-  if (!devEnsureRun()) return;
+  if (!await devEnsureRun()) return;
   if (!UI.el.overlay.hidden) UI.hideOverlay();
   game.state = 'idle';
   UI.beginRoom();

@@ -25,10 +25,11 @@ export function battlePileBodyHTML({ cards, cardHTML, kind, isBoss }) {
   const types = Object.entries(byType).sort((a,b) => b[1]-a[1]).map(([type,count]) => `<span>${esc(type)} <b>${count}</b></span>`).join('');
   const grave = kind === 'grave';
   const list = stacks.map((stack, i) => `<button type="button" class="bt-gy-row battle-pile-card${i === 0 ? ' is-inspected' : ''}" data-act="btInspectPile" data-i="${i}" aria-pressed="${i === 0}" aria-label="查看 ${escAttr(stack.card.name)} 的完整规则，${stack.count} 张">${cardHTML(stack.card, 'sm')}${stack.count > 1 ? `<span class="bt-count">×${stack.count}</span>` : ''}</button>`).join('');
-  const note = isBoss ? grave ? '本场消耗牌堆中的牌不会洗回。打出的牌进入弃牌堆，牌库抽空后参与洗回。' : '牌库抽空后洗回弃牌堆；本场消耗牌堆中的牌不会洗回。' : '普通战不使用循环牌库。消耗去向按本场卡牌规则结算。';
-  return { stacks, html:`<div class="ov-stats battle-pile-summary"><span>${grave ? '本场消耗' : '剩余'} <b>${cards.length}</b> 张</span><div class="battle-pile-types">${types}</div></div>
+  const note = grave ? '打出、弃置或消耗的牌统一进入消耗牌堆；不自动洗回，仅由卡牌效果取回。'
+    : isBoss ? '按首脑战规则抽牌；牌库空后不自动洗回消耗牌堆。' : '开局牌库含 99 张初始攻击；开局及回合开始不自动抽牌，仅抽牌效果取牌，库空不补牌。';
+  return { stacks, html:`<div class="ov-stats battle-pile-summary"><span>${grave ? '消耗牌堆' : '剩余'} <b>${cards.length}</b> 张</span><div class="battle-pile-types">${types}</div></div>
     <div data-decision-content="pile" class="battle-pile-context"><span>${isBoss ? '首脑战' : '遭遇战'} · 按同一卡牌合并展示</span><span>点击卡牌查看完整规则</span></div>
-    ${stacks.length ? `<div class="battle-pile-layout"><div class="bt-gy-list">${list}</div>${pileDetailHTML(stacks[0])}</div>` : `<div class="battle-decision-empty"><b>${grave ? '本场还没有消耗牌' : '牌库已空'}</b><p>${grave ? '本场被消耗的牌会显示在这里。' : isBoss ? '弃牌堆洗回后，这里会补充卡牌。' : '普通战不使用循环牌库。'}</p></div>`}
+    ${stacks.length ? `<div class="battle-pile-layout"><div class="bt-gy-list">${list}</div>${pileDetailHTML(stacks[0])}</div>` : `<div class="battle-decision-empty"><b>${grave ? '消耗牌堆为空' : '牌库已空'}</b><p>${grave ? '本场打出、弃置或消耗的牌会显示在这里。' : '本场牌库已抽空，不会自动补牌。'}</p></div>`}
     <div class="ov-btns"><p class="battle-pile-note">${note}</p><button class="ov-btn ok" data-act="${grave ? 'btGraveBack' : 'btDeckBack'}">返回战斗</button></div>` };
 }
 
@@ -41,6 +42,7 @@ export function battleChoiceBodyHTML(choosing) {
 
 export function battleHandSelectBodyHTML({ pool, handSelecting, cardHTML }) {
   const payment = handSelecting.act === 'payment';
+  const canCancel = handSelecting.canCancel ?? !handSelecting.mandatory;
   const action = {play:'免费打出', copy:'复制，原牌保留', zero:'下回合零费，原牌保留', payment:'作为支付代价消耗'}[handSelecting.act] || '消耗';
   const selected = handSelecting.selectedUids?.length || 0;
   const source = payment ? handSelecting.payment?.card?.name : handSelecting.sourceCardName;
@@ -48,11 +50,11 @@ export function battleHandSelectBodyHTML({ pool, handSelecting, cardHTML }) {
     <section data-decision-content="hand-select">${source ? `<p class="battle-decision-source">来自 <b>${esc(source)}</b>${payment ? ` · ${action}` : ''}</p>` : `<p class="battle-decision-source">从当前手牌中选择${payment ? ` · ${action}` : ''}</p>`}
     <div class="bt-hand battle-select-grid">${pool.map((entry,i) => `<div class="battle-select-slot"><button type="button" class="bt-card" data-act="btPickHand" data-uid="${escAttr(entry.uid)}" data-cancel="false" aria-label="选择 ${escAttr(entry.card.name)}">${cardHTML(entry.card,'lg')}<span class="battle-card-action">选择此牌</span></button><button type="button" class="battle-card-inspect" data-act="btDecisionInspect" data-i="${i}" data-cancel="false" aria-label="查看 ${escAttr(entry.card.name)} 详情">查看详情</button></div>`).join('') || '<p class="ov-empty">手牌中没有符合条件的卡牌</p>'}</div>
     <p class="battle-decision-guidance">${payment ? '已选手牌与本次打出的牌不再显示；选满后支付代价。' : '点击选择，选满指定数量后继续结算。'}</p></section>
-    ${handSelecting.mandatory ? '' : '<p class="ov-note"><button class="ov-btn ghost" data-act="btPickHandSkip">跳过该效果</button></p>'}`;
+    ${canCancel ? '<p class="ov-note"><button class="ov-btn ghost" data-act="btPickHandSkip">跳过该效果</button></p>' : ''}`;
 }
 
-export function battleDiscoverLifecycleNote({ act, isBoss, fromDeckBottom }) {
+export function battleDiscoverLifecycleNote({ act, fromDeckBottom }) {
   if (act === 'pouch') return '取出后立即施放，无需另付该法术费用 · 背包原牌随之消耗';
   const origin = fromDeckBottom ? '来自当前牌库底 · 选中牌以本场副本入手' : '本场生成';
-  return isBoss ? `${origin}。通常打出后进弃牌堆并参与洗回；被消耗时进入本场消耗牌堆，战后按临时牌规则处理。` : `${origin}${fromDeckBottom ? '；' : '：'}使用或消耗后进入消耗区，未用则战后消散`;
+  return `${origin}。使用或消耗后进入消耗牌堆，不自动洗回，仅由卡牌效果取回；战后按临时牌规则处理，未用则战后消散。`;
 }

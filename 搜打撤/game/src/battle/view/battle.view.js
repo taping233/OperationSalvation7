@@ -6,12 +6,14 @@ import { bindBattlePageAction, isInteractiveBattlePage } from './battle.page-act
 import { sdtDefine } from '../../core/sdt-facade.js';
 import { rect as uiRect } from '../../ui/ui-scale.js';
 import { esc, escAttr } from '../../core/shared.js';
+import { displayCardDescription } from '../../cards/card-description-text.js';
 import { storeGet, storeSet } from '../../core/storage.js';
 import { on as onBattleEvent } from '../../core/event-bus.js';
 import { groupHandCards, orderHandGroups, createStableHandSlots } from '../core/battle.hand.js';
 import { getPace, setPace } from '../runtime/battle.pace.js';
 import { schedulePresentationMs } from '../runtime/battle.clock.js';
 import { renderCombatPiles, consumedPileUids } from './battle.piles.view.js';
+import { turnForecastHTML } from '../../ui/battle-hud-info.js';
 import { careerSkillButtonHTML } from './battle.skill-view.js';
 import { renderInfusionSelection } from './battle.infusion-view.js';
 import { discoverInfusionNote } from './battle.discover-infusion.js';
@@ -20,10 +22,10 @@ import { bindBattleDecisionInspection, restoreCombatScene } from './battle.decis
 import { battleChoiceBodyHTML, battleHandSelectBodyHTML, battleDiscoverLifecycleNote } from './battle.decision-content.js';
 import { createDiscoverInputGate } from './battle.discover-input.js';
 import { forecastEnemyTurn } from './battle.turn-forecast.js';
+import { battleRestartHTML, bindBattleRestart } from '../../ui/settings-battle-restart.js';
 import { createBattleSceneryCapture } from './battle.scenery.js';
 import { attach as attachUnitFrames, hide as hideUnitFrames, cacheStats as frameCacheStats } from './battle.frames.js';
-import { isHandPaymentCandidate, matchesHandSelectKey } from '../core/battle.hand-selection.js';
-import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCostOf, infuseOf, findCard as findStoredCard, findEffectiveCard as findCard, markDreadShown, infusionFuelReason, targetSide, pileTip, refillDrawPile, takeCardAnims, unplayableReason } from '../core/battle.core.js';
+import { BattleSession, commands, configureBattleRenderer, getSnapshot, R, effCostOf, infuseOf, findEffectiveCard as findCard, markDreadShown, infusionFuelReason, targetSide, pileTip, refillDrawPile, takeCardAnims, unplayableReason } from '../core/battle.core.js';
 import { renderDeckSelection, renderGrave, renderBattleBag, renderDeckPileView, showBattleDecision } from './battle.overlays.js';
 import { mountHandLayer, updateHand, mountUnitLayer, updateUnits, HAND_PAGE_SIZE, infusionStackUid } from './battle.layers.js';
 import { spawnFloats } from './battle.vfx.js';
@@ -215,16 +217,16 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
   let discoverSrcRect = null;
   const discoverInput = createDiscoverInputGate();
 
-  function combatStateCopy(snapshot) {
-    const { phase = 'player', energy = 0, hand = [], infusing, choosing, handSelecting,
+  function combatStateCopy(snapshot, handCards) {
+    const { phase = 'player', energy = 0, infusing, choosing, handSelecting,
       pendingTarget, pendingItem, slamPending, dartPending, busy } = snapshot;
     if (phase === 'enemy') return { label: '敌方行动', detail: '敌人正在行动', tone: 'foe' };
     if (busy || phase === 'resolving') return { label: '结算中', detail: '正在结算当前动作', tone: 'focus' };
     if (infusing) return { label: '注能选牌', detail: `已选 ${infusing.picked?.length || 0}/${infusing.need} 张`, tone: 'focus' };
     if (choosing || handSelecting) return { label: '选择中', detail: '完成当前选择后继续', tone: 'focus' };
     if (pendingTarget || pendingItem || slamPending || dartPending) return { label: '选择目标', detail: pendingTarget?.hint || '点击高亮目标 · Esc 取消', tone: 'focus' };
-    // Resolve UID entries exactly as the hand renderer does, including per-card cost overrides.
-    const handCards = hand.map(entry => entry && typeof entry === 'object' ? entry : findCard(entry)).filter(Boolean);
+    // Reuse this render's resolved effective hand. The next render resolves it anew.
+    // Eligibility and effective costs still read current rules below.
     const playable = handCards.some(entry => {
       if (unplayableReason(entry.card)) return false;
       return effCostOf(entry.card, entry.uid) <= energy;
@@ -353,7 +355,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     if (snapshot.phase !== 'player' || snapshot.busy || snapshot.pendingItem || snapshot.slamPending || snapshot.dartPending) setClickSelectedUid(null);
     const {
       mode, turn, energy, maxEnergy, busy, phase = 'player', opts, player, pstat,
-      foes, hand, drawPile, discard, infusing, discovering, handSelecting, choosing,
+      foes, hand, drawPile, infusing, discovering, handSelecting, choosing,
       pendingTarget, viewingGrave, viewingBag, dreadShown, deckSelection,
       potionBar, pendingItem, slamPending, dartPending, viewingDeck,
     } = snapshot;
@@ -378,24 +380,13 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     if (handSelecting) {
       // 2026-09-06 #24/#25：从手牌选择卡牌施放/消耗的通用弹层
       const isPayment = handSelecting.act === 'payment';
-      const handUids = isPayment ? new Set(hand) : null;
-      const excludedUids = isPayment ? new Set(handSelecting.excludedUids || []) : null;
-      const selectedUids = isPayment ? new Set(handSelecting.selectedUids || []) : null;
-      // Preserve existing payment/type eligibility; only the rendered face is transformed.
-      const pool = hand.map(findStoredCard).filter(o => {
-        if (!o) return false;
-        if (!isPayment) return matchesHandSelectKey(o.card, handSelecting.type);
-        return isHandPaymentCandidate({
-          uid: o.uid, handUids, card: o.card, type: handSelecting.type,
-          excludedUids, selectedUids,
-        });
-      }).map(entry => findCard(entry.uid) || entry);
+      const pool = handSelecting.candidateUids.map(findCard).filter(Boolean);
       const paymentName = handSelecting.payment?.card?.name;
       const paymentLabel = isPayment ? `支付代价${paymentName ? `：${esc(paymentName)}` : ''}` : '选择手牌';
       showBattleDecision(`[[icon:cards]] ${paymentLabel}`, battleHandSelectBodyHTML({ pool, handSelecting, cardHTML:(card,size) => SDT.Cards.cardHTML(card,size) }), 'discover', snapshot);
       bindBattleDecisionInspection({ UI, getSnapshot, cards:pool.map(entry => entry.card), snapshot });
       bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btPickHand', (d) => pickHandSelect(d.uid));
-      if (!handSelecting.mandatory) bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btPickHandSkip', () => skipHandSelect());
+      if (handSelecting.canCancel) bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btPickHandSkip', () => skipHandSelect());
       UI.refresh(SDT.game);
       return;
     }
@@ -497,7 +488,6 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const pileView = renderCombatPiles({
       mode,
       drawCount: drawPile,
-      discardCount: discard,
       graveCount: consumedPileUids(snapshot),
       pileTip,
       cardBackHTML: SDT.Cards.cardBackHTML(),
@@ -506,14 +496,17 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const drawPileHTML = pileView.draw;
     const pilesHTML = pileView.rest;
     const tip = mode === 'boss'
-      ? `开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 弃牌堆抽空后自动洗回 · 墓地（被消耗的牌）不洗回`
+      ? `开局抽 ${R().battleStartDraw} · 每回合开始抽 ${R().battleTurnDraw} · 消耗牌堆不自动洗回，仅由卡牌效果取回`
       : '点击手牌查看大卡，确认使用后选择目标；也可直接拖拽到敌人、自己或战场空地。数字键与 Enter 同样先查看。';
     // —— 道具栏（2026-09-12 老板定向）：战斗界面上方常驻，点击使用 / 拖到敌人身上 ——
     // 2026-09-09 玩法定版：BOSS 战没有道具栏（背包里的道具无法使用）
     // 09-20 P1-7：空道具时整栏隐藏——顶部不再常驻「背包里没有道具」占位
     // 09-20 老板：药水说明不再挂系统 title（悬停延迟且触屏无效），改为自绘文字栏——
     // 悬停 / 按下药水时在药水栏正下方弹出（data-potion-idx 对应 potions 数组下标）
-    const potions = potionBar || [];
+    const potions = (potionBar || []).map(potion => {
+      const card = findCard(potion.uid);
+      return { ...potion, desc: displayCardDescription(potion.desc, card?.id, card) };
+    });
     const showItemBar = potions.length > 0;
     const potionsHTML = showItemBar ? `
       <div class="bt-potions">
@@ -533,7 +526,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
     const battleAssetKey = opts.isBoss
       ? ({ boss_general: 'battle-boss-general', boss_orc: 'battle-boss-orc', boss_elem: 'battle-boss-element' }[foes[0] && foes[0].id] || 'battle-boss-general')
       : 'battle-normal';
-    const combatState = combatStateCopy(snapshot);
+    const combatState = combatStateCopy(snapshot, cards);
     // 背包技能按钮（2026-10-02 老板：砸击换五职业分化技能）：文案/费用/提示按当前职业与翻面态切换
     const slamSkillInfo = slamSkillOf();
     const skillState = busy || infusingNow ? 'locked' : slamSkillInfo.used ? 'used' : slamPending ? 'targeting' : energy < slamSkillInfo.cost ? 'unaffordable' : 'ready';
@@ -551,7 +544,7 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
           <b>第 ${turn} 回合</b><span class="sts-phase-dot ${escAttr(combatState.tone)}"></span><span>${esc(combatState.label)}</span>
         </div>
         <details class="sts-options"><summary>[[icon:gear]] 选项</summary><div class="sts-options-menu">
-          ${mode === 'boss' ? '<button class="ov-btn ghost" data-act="btBossRules">首脑战规则</button>' : ''}
+          <button class="ov-btn ghost" data-act="btBossRules">战斗规则</button>
           <button class="ov-btn ghost${mode === 'boss' ? ' dis' : ''}" data-act="btFlee" ${busy || infusingNow ? 'disabled' : ''}
             ${mode === 'boss' ? 'title="BOSS 战不可撤离——击败首脑或战败即终局"' : 'title="撤离将视为本局失败"'}>[[icon:runner]] 撤离（判负）</button>
           <button class="ov-btn ghost" data-act="btSettings" title="战斗设置（音频 / 震动）">[[icon:gear]] 设置</button>
@@ -577,10 +570,10 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
           ${handPages > 1 ? `<button class="bt-hand-page has-more" data-act="btHandPage" aria-label="还有另一栏手牌，当前第 ${handPage + 1} 栏，共 ${handPages} 栏"
             title="手牌分栏：每栏最多 ${HAND_PAGE_SIZE} 叠；点击查看下一栏，末栏后回到第一栏">[[icon:cards]] 第 ${handPage + 1}/${handPages} 栏</button>` : ''}
         </div>
-        <div class="sts-hud-r" aria-label="弃牌与消耗">${pilesHTML}</div>
+        <div class="sts-hud-r" aria-label="消耗牌堆">${pilesHTML}</div>
         <div class="bt-hand sts-hand" role="group" aria-label="当前手牌"></div>
         <div class="sts-tactics" aria-label="战术操作">
-          <p class="bt-turn-forecast${turnForecast.lethal ? ' lethal' : ''}" aria-live="polite" title="${escAttr(turnForecast.note)}"><span class="bt-forecast-damage">估算承伤 <b>${turnForecast.damage}</b></span><span class="bt-forecast-hp">余 <b>${turnForecast.hpAfter}</b> 生命</span>${turnForecast.lethal ? '<span class="bt-forecast-warning">可能致死</span>' : ''}<span class="bt-forecast-note">未计随从攻击与回合末触发</span></p>
+          ${turnForecastHTML(turnForecast)}
           <button class="ov-btn ${busy || infusingNow ? '' : 'ok'} sts-end-turn" data-act="btEnd" ${busy || infusingNow ? 'disabled' : ''}>结束回合</button>
         </div>
        </div>`, snapshot.battleToken, backgroundOnly);
@@ -610,7 +603,10 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
       });
     }, '.battle-stage');
     bindBattlePageAction({ UI, getSnapshot, snapshot }, 'btBossRules', () => {
-      showBattleDecision('首脑战 · 循环牌库', `<p class="ov-stats">地图首脑开战前可整理牌库，选择 ${R().bossDeckSize} 张招式、装备或能力卡；不足时全部编入，可沿用上次有效编组。</p><p class="ov-note">另加入 ${R().starterSha} 张初始攻击，缺少的初始攻击为本场临时牌。开局抽 ${R().battleStartDraw} 张，之后每回合抽 ${R().battleTurnDraw} 张，手牌上限 ${R().battleHandMax}。打出的牌进入弃牌，牌库空时洗回；注能等消耗牌进入本场消耗牌堆，不洗回。开战装备计入编组，混沌之眼增加5张上限。普通战直接使用随身可用牌，抽牌改为临时初始攻击。</p><div class="ov-btns"><button class="ov-btn" data-act="btRulesBack">返回战斗</button></div>`, 'settings', getSnapshot());
+      const rules = mode === 'boss'
+        ? `<p class="ov-stats">选择 ${R().bossDeckSize} 张招式、装备或能力卡，另加入 ${R().starterSha} 张初始攻击；不足时按可编数量开战。</p><p class="ov-note">开局抽 ${R().battleStartDraw} 张，每回合抽 ${R().battleTurnDraw} 张，手牌上限 ${R().battleHandMax}。打出、弃置或消耗的牌统一进入消耗牌堆，不自动洗回，仅由卡牌效果取回。开战装备计入编组，混沌之眼增加5张上限。</p>`
+        : '<p class="ov-stats">随身可用牌开局入手，另有 99 张初始攻击组成的本场牌库。</p><p class="ov-note">开局和每回合不自动抽牌，只有抽牌效果从牌库取牌；库空后不补牌。打出、弃置或消耗的牌统一进入消耗牌堆，仅由卡牌效果取回。</p>';
+      showBattleDecision(mode === 'boss' ? '首脑战 · 牌库规则' : '普通战 · 效果抽牌', `${rules}<div class="ov-btns"><button class="ov-btn" data-act="btRulesBack">返回战斗</button></div>`, 'settings', getSnapshot());
       bindBattlePageAction({ UI, getSnapshot, snapshot:getSnapshot() }, 'btRulesBack', () => render());
     }, '.battle-stage');
     // 战斗设置（2026-09-13 留言：战斗界面保留设置键）——轻量浮层，不动 game.state，
@@ -622,12 +618,14 @@ if (import.meta.hot) import.meta.hot.dispose(unsubscribeRuleWarning);
           <label class="chk"><input type="checkbox" id="btSetSfx" ${SDT.Sound.sfxMuted ? '' : 'checked'}> 音效</label>
           <label class="chk"><input type="checkbox" id="btSetShake" ${storeGet('sdt-reduce-shake') === '1' ? '' : 'checked'}> 屏幕震动反馈</label>
           <label class="chk"><input type="checkbox" id="btSetPace" ${getPace() === 2 ? 'checked' : ''}> 2× 战斗节奏（敌方行动加速）</label>
+          ${battleRestartHTML({ SDT, game: SDT.game, buttonClass: 'ov-btn' })}
           <p class="ov-note">完整设置可在基地 / 标题页打开。关闭后回到战斗。</p>
           <div class="ov-btns"><button class="ov-btn ok" data-act="btSettingsBack">[[icon:cross]] 返回战斗</button></div>
         </div>`, true);
       // 迭代评审 09-20：删除无参 setDucked()——它被 setDucked 内部 !!v 强转成 false，
       // 战斗中关音乐会静默解除侧链压低；setMusicMuted 内部已走 syncBgm，无需额外调用
       const settingsPage = UI.el.ovBody.querySelector('.battle-decision');
+      bindBattleRestart({ SDT, UI, game: SDT.game, page: settingsPage });
       const onSetting = handler => event => {
         if (isInteractiveBattlePage(UI, settingsPage) && getSnapshot().battleToken === snapshot.battleToken) handler(event);
       };

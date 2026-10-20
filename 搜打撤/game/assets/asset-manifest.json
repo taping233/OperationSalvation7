@@ -1,8 +1,232 @@
 {
   "_comment": "历史清单；bytes与新增sha256为本地文件观察值，原有license声明未重新核实。增量门拒新债，未变历史债见 docs/asset-audit-debt.json。",
   "generated": "2026-09-08",
-  "count": 1472,
+  "count": 1500,
   "assets": [
+    {
+      "path": "cards/equip-tt13-poor-meal.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 195406,
+      "sha256": "ea824d76589de269432f4f4b77657d6d929586631e845a7525c613c9da2555e5",
+      "source": "docs/evidence/2026-10-20-poor-meal/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt13-poor-meal.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 25204,
+      "sha256": "0843f981f31c0a42652f792e43759677e732fe5d387349e00caeda2d88cedf85",
+      "source": "docs/evidence/2026-10-20-poor-meal/receipt.json"
+    },
+    {
+      "path": "cards/spell-tt13-spring.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 175374,
+      "sha256": "14a89cfd0605b875f848c963cd3bd8444603a4feff682176707ff8d0dd8e8a73",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt13-spring.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 26650,
+      "sha256": "8b952237c167733fb710e9acbe468f6adac9cb8f0b9b375b6e05336250641ba4",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "cards/equip-tt13-magazine.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 162140,
+      "sha256": "28d191b614491e9d380e70b89b2e282a3b82a401cc72f399d9a73a7cc60d6660",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt13-magazine.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 26872,
+      "sha256": "1c4d23055edfb66ba7e56ccb8be0df0e662f8c014551105ab2fdca741d13e2ae",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt13-snipe.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 123798,
+      "sha256": "0afc7db4e4091765b8a360af9c2c7539fd6047107aeff6d3e0effcb99d1c68de",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt13-snipe.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 19828,
+      "sha256": "95f6684917e5b436e64e5833058ba57703f3abbca773d899ff6b2289805458ec",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt13-guard.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 136464,
+      "sha256": "9345c1fe1c77164e31b7f772e540144226b3a9d92c22886c29d6fb6a7a7eaa4c",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt13-guard.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 21952,
+      "sha256": "e11bdf85ceb775a24de6ce1517e9c64377259669f78c8edb50327eb0caffba35",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "cards/spell-tt13-bitter-rain.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 176028,
+      "sha256": "4545df911f78ea526eaa93d14b6eaa806f2a1feccf12a1253ce47f1df0d4fbda",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt13-bitter-rain.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 29604,
+      "sha256": "eb5d66aa73915c73dc884711dfbadbe9802ac55178f60b6e7ff4b2a4ba3cb357",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "cards/spell-tt13-mind-control.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 103658,
+      "sha256": "10c573b11b530c9f062173f8f0b3454b517e6f2bf1bc44664179e12f02175783",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt13-mind-control.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 17486,
+      "sha256": "d3c1811261afefc189bab1511195e58d708aa4cd24dce3ee401fa543aacbded8",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "cards/equip-tt13-flame-staff.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 135542,
+      "sha256": "077c599f82ea83cca214cadcd8ab8a76570cd613d93d0ea06f911c718c44f2f2",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt13-flame-staff.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 21722,
+      "sha256": "31eb206bd335390d9e7109a82170337f5f4ccc37d185ad793406dee89ae0c29b",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "cards/equip-tt13-scale-armor.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 129202,
+      "sha256": "db13aa50dcef0a6f7d50b65db0abe0a0a5c030bd6e79f05d9625785ab5a9c708",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt13-scale-armor.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 21356,
+      "sha256": "3b86654fc81a03e3d53441e2c93b17441923bfb6a0d2162dbf468690e5d04189",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "cards/equip-tt13-astrolabe.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 173242,
+      "sha256": "5bd21f08649acea543f893ce396171b4cf7440056514ea4c57086d473f69f748",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/equip-tt13-astrolabe.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 28500,
+      "sha256": "5e12e3a85e1e6a8c284573d32ec2455415ba6a8733e54c69acf7e5525a8e37e9",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "cards/spell-tt13-soul-contract.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 224676,
+      "sha256": "4e885740f204f663516cfe6b1730cf02b17c3d27dd9e86f5581d010961f82031",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt13-soul-contract.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 32160,
+      "sha256": "d51fc6ba82bffe7e32230abd3c4cac6bbb34a32ab43b96208612e2df288dbca4",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "cards/spell-tt13-stellar-divination.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 176094,
+      "sha256": "9d9f9d53272cf2bdb5ebc791cd36f8190fde9914222e0932a850c15e6ee7b2c6",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/stellar-class-style/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt13-stellar-divination.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 24288,
+      "sha256": "2006f19e9825cdc0bfe52ec8829631239433dfdaf60672620e3ade59e345de75",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/stellar-class-style/receipt.json"
+    },
+    {
+      "path": "cards/spell-tt13-chaos-deck.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 236474,
+      "sha256": "54f69d7792cae1cba8bd0f029aa4810125a2aa2778e611e3e92953ac36512b27",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/spell-tt13-chaos-deck.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 39462,
+      "sha256": "960ea77a0ed136c8302de823e81d450800fd2ad5ecfef69f9cc99cc4f4c43348",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "cards/martial-tt13-mercy.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 142342,
+      "sha256": "5f7115526b9bf2a34e0843a845bd0eddf21af8db81fe3b70d0968caa4d8a1110",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
+    {
+      "path": "thumbs/cards/martial-tt13-mercy.webp",
+      "ext": "webp",
+      "license": "项目自有（AI 生成）",
+      "bytes": 18122,
+      "sha256": "a20c2649539ea27e3e1fe53564df797a8d95625711b21616ab3fb53e5eb1a8c6",
+      "source": "docs/evidence/2026-10-20-tt13-card-art/square-1020/receipt.json"
+    },
     {
       "path": "sfx/selected15-r2-1018/close.wav",
       "ext": "wav",
@@ -12048,10 +12272,10 @@
     {
       "path": "reconstruction/wallpaper-wu-bass-1020.webp",
       "ext": "webp",
-      "bytes": 270978,
-      "sha256": "9e435d8b6e635cc7810fa1ee77f1b5d93c6941f0f7120e54e61d07f4a216892a",
+      "bytes": 359894,
+      "sha256": "a01ec7e5a298f173decbc72b9b83999dda1ba72012f265f949803603de55d9b3",
       "license": "Project AI-generated asset; owner authorized home wallpaper installation.",
-      "source": "docs/evidence/2026-10-20-wu-bass-polish/receipt.json"
+      "source": "docs/evidence/2026-10-20-wu-bass-polish/final-receipt.json"
     },
     {
       "path": "reconstruction/wallpaper-baita-station-1020.webp",

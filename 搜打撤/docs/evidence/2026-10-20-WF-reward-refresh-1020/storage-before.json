@@ -1,0 +1,133 @@
+{
+  "origin": "http://127.0.0.1:5308",
+  "slot": 1,
+  "saved": true,
+  "seed": 2574942447,
+  "node": "0,0",
+  "coins": 0,
+  "owned": [
+    {
+      "uid": "omvggyzsthc6tc",
+      "id": "tt2-apollo",
+      "name": "阿猫的礼物",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzstsvsl",
+      "id": "tt2-pearlbox",
+      "name": "珍珠盒",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzstdvszx",
+      "id": "tt2-wreck",
+      "name": "沉船宝盒",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzstpr8h3",
+      "id": "tt2-treasuremap",
+      "name": "寻宝图",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzst2sydl",
+      "id": "tt2-venomstaff",
+      "name": "毒杖",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsv1e0cc",
+      "id": "tt2-frostsword",
+      "name": "寒冰剑",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsvow864",
+      "id": "tt3-immortal-blade",
+      "name": "骷髅王剑",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsvolfrk",
+      "id": "tt3-master-staff",
+      "name": "大法师之杖",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsvcha5y",
+      "id": "tt3-chaos-eye",
+      "name": "混沌之眼",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsvep8sf",
+      "id": "tt3-silver-runesword",
+      "name": "诅咒之剑",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsvpvc8f",
+      "id": "tt3-azure-sword",
+      "name": "百炼青虹剑",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsvf452r",
+      "id": "tt3-fate-wheel",
+      "name": "命运钟表",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsvt08lq",
+      "id": "tt3-crimson-pouch",
+      "name": "深红丝袋",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsv3hvpy",
+      "id": "tt3-holy-staff",
+      "name": "圣杖",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsv5vk57",
+      "id": "starter-attack",
+      "name": "初始攻击",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsv4c0f4",
+      "id": "starter-attack",
+      "name": "初始攻击",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsvmtqkt",
+      "id": "starter-attack",
+      "name": "初始攻击",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsvnp69z",
+      "id": "starter-attack",
+      "name": "初始攻击",
+      "safe": false
+    },
+    {
+      "uid": "omvggyzsvf903i",
+      "id": "starter-attack",
+      "name": "初始攻击",
+      "safe": false
+    }
+  ],
+  "reward": {
+    "cards": [
+      "tt3-ice-spike",
+      "tt3-frostfall"
+    ],
+    "taken": [],
+    "lost": [],
+    "screen": "cards"
+  }
+}

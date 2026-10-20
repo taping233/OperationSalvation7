@@ -13,7 +13,18 @@ body [data-card-state-motion="true"].bag-tile.card-face:focus-within { outline-w
   margin: 0; padding: 0; border: 0; background: none;
   transform-origin: center; overflow: visible;
 }
-.reward-acquisition-card > .hs-card { width: 100%; height: 100%; max-width: none; }
+.reward-acquisition-body {
+  width: 100%; height: 100%; position: relative; transform-origin: center;
+  animation: rewardAcquisitionLift var(--reward-flight-duration,340ms) linear both;
+}
+.reward-acquisition-body > .hs-card { width: 100%; height: 100%; max-width: none; }
+/* A small lift makes ownership legible; shrink mainly during the approach. */
+@keyframes rewardAcquisitionLift {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  30% { transform: translateY(-22px) scale(.96); opacity: 1; }
+  65% { transform: translateY(-14px) scale(.58); opacity: .9; }
+  100% { transform: translateY(0) scale(.12); opacity: .12; }
+}
 .reward-acquisition-count {
   position: absolute; right: 4px; bottom: 4px; padding: 2px 6px;
   color: #d1e6e2; background: #142d2ded; border: 1px solid #85cfc780; border-radius: 4px;
@@ -22,4 +33,10 @@ body [data-card-state-motion="true"].bag-tile.card-face:focus-within { outline-w
   position: fixed; z-index: 10021; pointer-events: none;
   border: 1px solid #85cfc7; border-radius: 8px;
   box-shadow: 0 0 18px #85cfc738;
+}
+body.reduce-motion .reward-acquisition-card,
+body.reduce-motion .reward-acquisition-arrival { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reward-acquisition-card, .reward-acquisition-arrival { display: none; }
+  .reward-acquisition-body { animation: none; }
 }

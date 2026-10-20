@@ -1,0 +1,20 @@
+[
+  {
+    "path": "game/src/run/shop-commands.js",
+    "bytes": 5927,
+    "sha256": "D1F5CFC0BCCF233A83159D7D1C12E04C2CB13B0DF6DAB154A6239230655E446B",
+    "copiedAs": "instance-baseline/shop-commands.js.txt"
+  },
+  {
+    "path": "game/src/run/game.run.scenes.js",
+    "bytes": 34768,
+    "sha256": "C5F293BE5A78AB8B05BC630B09AC5FE1187344B82E3888629F52DAEF96205532",
+    "copiedAs": "instance-baseline/game.run.scenes.js.txt"
+  },
+  {
+    "path": "game/src/run/game.session.bag.js",
+    "bytes": 6668,
+    "sha256": "5814C365032FE0C0562F588049DC733F5735AAC79A320A966DB395FD77B57D45",
+    "copiedAs": "instance-baseline/game.session.bag.js.txt"
+  }
+]

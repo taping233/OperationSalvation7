@@ -21,7 +21,7 @@ function markCardMigration(markerKey, cards) {
   if (localStorage.getItem(KEY) !== JSON.stringify(cards)) return;
   localStorage.setItem(markerKey, '1');
 }
-function backfillStructuredRuleDefinitions({ markerKey, ids, definitions, domains, extraFieldsById = {}, canonicalFieldsById = {} }) {
+function backfillStructuredRuleDefinitions({ markerKey, ids, definitions, domains, extraFieldsById = {}, canonicalFieldsById = {}, onlyMissingOnPlay = false }) {
   try {
     if (definitions.size !== ids.length) {
       console.error('[cards] Structured rule migration definitions missing:', ids.filter(id => !definitions.has(id)));
@@ -35,6 +35,7 @@ function backfillStructuredRuleDefinitions({ markerKey, ids, definitions, domain
       const definition = definitions.get(card.id);
       if (!definition) return card;
       foundIds.add(card.id);
+      if (onlyMissingOnPlay && Object.hasOwn(card.rules?.triggers || {}, 'onPlay')) return card;
       const nextCard = { ...card };
       const operations = [
         ...(definition.rules?.triggers?.onPlay || []),
@@ -401,7 +402,8 @@ export const syncSlice = {
         const nextCards = cards.map(card => {
           if (card.id !== 'tt3-magic-lamp' || +card.armor !== 5
             || !knownDescriptions.has(normalizedDesc(card))
-            || card.rules?.triggers || card.rules?.equip || card.rules?.bag) return card;
+            || (card.rules?.triggers && !card.rules.triggers.onPlay?.some(operation => operation?.op === 'choice'))
+            || card.rules?.equip || card.rules?.bag) return card;
           const next = { ...card };
           delete next.armor;
           dirty = true;
@@ -658,6 +660,14 @@ export const syncSlice = {
         definitions,
         domains: ['battle', 'triggers'],
         extraFieldsById: { 'tt12-firecracker': ['dmgType'] },
+      });
+      const backupCell = SDT.Cards.TABLETOP12.find(card => card.id === 'tt12-backupcell');
+      backfillStructuredRuleDefinitions({
+        markerKey: 'sdt-cards-tt12-backupcell-onplay-v1-seeded',
+        ids: ['tt12-backupcell'],
+        definitions: new Map(backupCell ? [[backupCell.id, backupCell]] : []),
+        domains: ['battle', 'triggers'],
+        onlyMissingOnPlay: true,
       });
     },
     ensureTT12DiscoverRules() {

@@ -15,8 +15,10 @@ function preview(card = structured(), { status = {}, defense = {}, playerStatus 
   });
 }
 function bolt(extra = {}) {
-  return getHostedExecutionCard({ id: 'tt7-arcanebolt', name: '奥术弹', type: '法术', dmgType: 'spell', dmg: 1, cost: 0,
-    desc: '可编辑展示文本', rules: { version: 1, battle: { hosted: ['damage-and-draw'] } }, ...extra });
+  // Historical execution views exercise their own trust gate without upgrading
+  // the fixture to today's native declaration before the preview is called.
+  return { id: 'tt7-arcanebolt', name: '奥术弹', type: '法术', dmgType: 'spell', dmg: 1, cost: 0,
+    desc: "1'，抽1张牌", rules: { version: 1, battle: { hosted: ['damage-and-draw'] } }, ...extra };
 }
 const normalHosted = { mode: 'normal', hostedExecutionVerified: true };
 
@@ -86,8 +88,18 @@ describe('damage preview trust boundary', () => {
   it('supports only the verified ordinary-battle 奥术弹 identity and direct damage', () => {
     const result = preview(bolt(), { context: normalHosted, spellPower: 2, playerStatus: { spellUp: 1 }, defense: { shield: 1 } });
     expect(result).toMatchObject({ confidence: 'exact', cost: 0, damage: { total: 3, hpAfter: 27 } });
-    expect(result.unknownEffects.join('')).toMatch(/普通战抽牌.*初始攻击.*后续触发未计入.*全灭/);
+    expect(result.unknownEffects.join('')).toMatch(/后续抽牌与触发未计入.*全灭/);
     expect(preview(bolt({ dmg: 3 }), { context: normalHosted })).toMatchObject({ confidence: 'exact', damage: { total: 3 } });
+  });
+
+  it('previews migrated native damage and draw from declarations without a hosted verification flag', () => {
+    const card = getHostedExecutionCard(bolt());
+    expect(card.rules.battle?.hosted).toBeUndefined();
+    const result = preview({ ...card, desc: '展示文案不参与执行', dmg: 3 }, { context: { mode: 'normal' } });
+    expect(result).toMatchObject({ confidence: 'exact', damage: { total: 3 } });
+    expect(result.unknownEffects.join('')).toContain('后续触发未计入');
+    expect(result.unknownEffects.join('')).toContain('敌人全灭时停止余下效果');
+    expect(preview(card, { context: { mode: 'boss' } })).toMatchObject({ confidence: 'unknown', damage: null });
   });
 
   it.each([

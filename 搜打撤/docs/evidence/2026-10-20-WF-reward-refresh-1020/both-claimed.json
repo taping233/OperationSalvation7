@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "status": "captured",
+  "source": "Codex current in-app browser tab",
+  "capturedAt": "2026-10-20T09:22:11.549Z",
+  "inputKind": "real-input",
+  "detail": "刷新、原节点重进后，再将寒冰剑移入安全格并关闭背包，双击收下剑荡妖邪；两张均显示已收下，正式存档taken=[0,1]、奖励各1张。",
+  "screenshot": {
+    "path": "both-claimed.png",
+    "bytes": 44365,
+    "sha256": "a4c670bedb77d9af9958fd82cc054398acb4bc8fd4698165e2bf400cf06bbc2d"
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:5308/dev/feedback-1018-review.html?durable=1",
+  "images": [
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/icons/archive.png?v=dev",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5308/assets/cards/spell-tt3-ice-spike.webp?art=ice-spike-frozen-gear-20261011&v=dev",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5308/assets/ui/card-frames/paper-1015/common.webp?v=dev",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/icons/sparkles.png?v=dev",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/map-hud-1015/gold-is7-v2.webp?v=dev",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "cover",
+      "height": 1254,
+      "src": "http://127.0.0.1:5308/assets/cards/martial-tt3-frostfall.webp?art=tt3-frostfall-cropped-action-builtin-20261010&v=dev",
+      "width": 1254
+    },
+    {
+      "complete": true,
+      "fit": "contain",
+      "height": 768,
+      "src": "http://127.0.0.1:5308/assets/ui/card-frames/paper-1015/legendary.webp?v=dev",
+      "width": 512
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/icons/swords.png?v=dev",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/map-hud-1015/gold-is7-v2.webp?v=dev",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/icons/bag.png?v=dev",
+      "width": 128
+    },
+    {
+      "complete": true,
+      "fit": "fill",
+      "height": 128,
+      "src": "http://127.0.0.1:5308/assets/ui/icons/exit.png?v=dev",
+      "width": 128
+    }
+  ],
+  "console": []
+}

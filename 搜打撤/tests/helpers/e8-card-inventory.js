@@ -1,4 +1,5 @@
 import approvedBatch from '../fixtures/approved-card-batch-20261020.json';
+import approvedExecution from '../fixtures/builtin-execution-approved-20261020.json';
 import { validateCardRules } from '../../game/src/cards/card-rules.schema.js';
 import { inspectCardRuleCapability } from '../../game/src/cards/card-rules.capability.js';
 import { isApprovedLampArmorRemoval } from './card-catalog-approved-revisions.js';
@@ -7,6 +8,8 @@ const clone = value => JSON.parse(JSON.stringify(value));
 const stable = value => Array.isArray(value) ? value.map(stable) : value && typeof value === 'object'
   ? Object.fromEntries(Object.keys(value).sort().map(key => [key, stable(value[key])])) : value;
 const equal = (left, right) => JSON.stringify(stable(left)) === JSON.stringify(stable(right));
+const approvedExecutionCard = card => approvedExecution[card.id]
+  ? { ...card, ...(approvedExecution[card.id].fields || {}), rules: clone(approvedExecution[card.id].rules) } : card;
 const classificationKeys = ['sourceDefinitions', 'consumerStatus', 'textStatus', 'testReferences'];
 
 function indexed(cards, label) {
@@ -132,24 +135,33 @@ export function buildCardInventory({ production, cardsSync, stages, sources, met
   return inventory;
 }
 
-// Boss-approved terminology revision; existing rules and all other fields must remain exact.
-export function isApprovedBackupcellRename(previous, current) {
-  const before = '抽2张牌并回复所有费用，消耗口袋中每有一张法术牌，本牌费用-1';
-  const after = '抽2张牌并回复所有费用，消耗区中每有一张法术牌，本牌费用-1';
-  return previous?.id === 'tt12-backupcell' && previous.desc === before
-    && current?.desc === after && equal({ ...previous, desc: after }, current);
+// Exact terminology revision plus the approved draw/refill migration; no other fields change.
+export function isApprovedBackupcellRevision(previous, current) {
+  const before = {
+    id: 'tt12-backupcell', name: '后备能源', cost: 6, rarity: '史诗', type: '法术', draw: 2,
+    desc: '抽2张牌并回复所有费用，消耗口袋中每有一张法术牌，本牌费用-1',
+    rules: { version: 1, battle: { target: { side: null, area: false },
+      costModifiers: [{ kind: 'consumedSpellDiscount', amount: 1 }] } },
+  };
+  const after = { ...before,
+    desc: '抽2张牌并回复所有费用，消耗区中每有一张法术牌，本牌费用-1',
+    rules: { ...before.rules, triggers: { onPlay: [
+      { op: 'draw', amountField: 'draw' }, { op: 'refillEnergy' },
+    ] } },
+  };
+  return equal(previous, before) && equal(current, after);
 }
 
 export function compareMigrationInventories(before, after, approvedIds, expectedRules, expectedRulesById, expectedFaceById = {}) {
   const previous = before.production.cards.map(row => row.card);
   const current = after.production.cards.map(row => row.card);
   const delta = describeStage('E8 approved migration', previous, current);
-  delta.changed = delta.changed.filter(({ id }) => !isApprovedBackupcellRename(
+  delta.changed = delta.changed.filter(({ id }) => !isApprovedBackupcellRevision(
     previous.find(card => card.id === id), current.find(card => card.id === id)));
   const approvedAddedIds = approvedBatch.additions.map(card => card.id).sort();
   if (!equal(delta.added.slice().sort(), approvedAddedIds) || delta.removed.length) throw new Error('migration: card IDs changed');
   for (const approved of approvedBatch.additions) {
-    if (!equal(current.find(card => card.id === approved.id), approved))
+    if (!equal(current.find(card => card.id === approved.id), approvedExecutionCard(approved)))
       throw new Error(`migration: ${approved.id} differs from approved new card`);
   }
   if (!equal(delta.changed.map(row => row.id).sort(), [...approvedIds].sort())) {
@@ -177,8 +189,11 @@ export function compareMigrationInventories(before, after, approvedIds, expected
       && equal(nextCard, { ...oldCard, rules: expected });
     const flameRevision = id === approvedBatch.flame.id
       && equal(oldCard, { ...approvedBatch.flame, desc:'本局对战中，法伤+1', rules:{ version:1, battle:{ target:{ side:'self', area:false } }, triggers:{ onPlay:[{ op:'blessing', key:'spellUp' }] } } })
-      && equal(nextCard, approvedBatch.flame);
-    if (id === approvedBatch.flame.id ? !flameRevision : id === 'tt7-ironphalanx' ? !ironPhalanxRevision
+      && equal(nextCard, approvedExecutionCard(approvedBatch.flame));
+    const hasExecutionRevision = Object.hasOwn(approvedExecution, id) && !lampRemoval;
+    const executionRevision = hasExecutionRevision
+      && equal(nextCard, approvedExecutionCard({ ...oldCard, ...expectedFace }));
+    if (id === approvedBatch.flame.id ? !flameRevision : hasExecutionRevision ? !executionRevision : id === 'tt7-ironphalanx' ? !ironPhalanxRevision
       : oldCard.rules !== undefined || !equal(fields, expectedFields)
         || (lampRemoval && !isApprovedLampArmorRemoval(oldCard, nextCard))
         || Object.entries(expectedFace).some(([key, value]) => !equal(nextCard[key], value))

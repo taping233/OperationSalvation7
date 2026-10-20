@@ -1,0 +1,62 @@
+[
+  {
+    "path": "game/src/cards/cards.data.js",
+    "bytes": 104568,
+    "sha256": "96bad2defec5694fb3a1282786a749eafc2d43efd32ecb4c5574c2a4759f9a87"
+  },
+  {
+    "path": "game/src/cards/cards.sync.m2.js",
+    "bytes": 8427,
+    "sha256": "415e666451e5d006c748dcf6432775360d9b05ec86f4a9daf200c5ff63c31639"
+  },
+  {
+    "path": "game/src/cards/cards.sync.face-refresh.js",
+    "bytes": 2953,
+    "sha256": "dc6156ad20e5398a9a1932572f9712969e0bf6f0f1262055f61c0595cd529f2d"
+  },
+  {
+    "path": "game/src/cards/pierce-arrow-revision.js",
+    "bytes": 1614,
+    "sha256": "09fe12b26290f3c57605d876f4f9f30184c45c768f560a8bdb571bd2a8d67200"
+  },
+  {
+    "path": "tests/pierce-arrow-revision.test.js",
+    "bytes": 2410,
+    "sha256": "233cbd0b58ed17a2fed5aff3ccb37e28035d546548108b2bc8fba72a99f629e2"
+  },
+  {
+    "path": "tests/m2-data.test.js",
+    "bytes": 13187,
+    "sha256": "7346ad919e39015a9ce9c31e13b00108d4100d88bab0d26bceac30eb47deb707"
+  },
+  {
+    "path": "tests/card-description-audit-battle.test.js",
+    "bytes": 20345,
+    "sha256": "a76a4101caaba803ee4450dbc311eddfdf19cb26568f99e8727dafdc90676cdd"
+  },
+  {
+    "path": "tests/helpers/card-catalog-approved-revisions.js",
+    "bytes": 4650,
+    "sha256": "a108777d16c005f0b457b9f528935322a136466528cd414fb22e6535e849466e"
+  },
+  {
+    "path": "docs/game-compendium.md",
+    "bytes": 39816,
+    "sha256": "2ff6a75db80d1907ecf2eb131977b3c70dba9adec1890bc06ec2731027247bff"
+  },
+  {
+    "path": "docs/M-BATCH-MATRIX.md",
+    "bytes": 52033,
+    "sha256": "cf44c681b279c682d86ae41ec9dbe44ed7e1e0cbfd2b986ac04e8b0d485c0410"
+  },
+  {
+    "path": "docs/evidence/2026-10-20-pierce-arrow/card.png",
+    "bytes": 81938,
+    "sha256": "3e13de4127e6ab4588c191265467291bc7f1f6a73232ff231258e31569215f0e"
+  },
+  {
+    "path": "docs/evidence/2026-10-20-pierce-arrow/card-detail.png",
+    "bytes": 83942,
+    "sha256": "938eb1ca1032eefbe1594ec4179a16640fea2a1ab707c1f1a2dd3df2b2eff8ad"
+  }
+]

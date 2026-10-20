@@ -47,13 +47,18 @@ export function showRewardAcquisition(stage, card, { mode = 'chest', token, coun
   for (const element of [clone, ...clone.querySelectorAll('*')]) {
     element.removeAttribute('id'); element.removeAttribute('tabindex');
   }
-  node.append(clone); document.body.append(node);
+  // The holder keeps its live endpoint; the face plays one short lift/shrink.
+  // Retargeting the holder never restarts the face or extends the grant receipt.
+  const body = document.createElement('div'); body.className = 'reward-acquisition-body';
+  body.style.setProperty('--reward-flight-duration', `${motionTiming.acquire}ms`);
+  body.append(clone); node.append(body); document.body.append(node);
   if (count > 1) {
     const badge = document.createElement('span'); badge.className = 'reward-acquisition-count';
-    badge.textContent = `×${count}`; node.append(badge);
+    badge.textContent = `×${count}`; body.append(badge);
   }
   const nodes = new Set([node]);
   const deadline = performance.now() + motionTiming.acquire;
+  const preference = window.matchMedia?.('(prefers-reduced-motion: reduce)');
   let revision = 0, arrival = null, pendingFrame = null, endKey = '';
   const keyFor = box => [box.left, box.top, box.width, box.height].join(',');
   const flight = { host, stage, token, mode, dispose() {
@@ -62,6 +67,7 @@ export function showRewardAcquisition(stage, card, { mode = 'chest', token, coun
     pendingFrame = null;
     window.removeEventListener('scroll', scheduleGeometry, true);
     window.removeEventListener('resize', scheduleGeometry);
+    preference?.removeEventListener?.('change', refreshGeometry);
     if (receipts.get(host)?.owner === flight) receipts.delete(host);
     observer.disconnect(); for (const item of nodes) { clearVisual(item); item.remove(); }
     nodes.clear(); flights.delete(flight);
@@ -76,7 +82,7 @@ export function showRewardAcquisition(stage, card, { mode = 'chest', token, coun
     const run = retargetVisual(node, {
       x: end.left + end.width / 2 - start.left - start.width / 2,
       y: end.top + end.height / 2 - start.top - start.height / 2,
-      scale: .12, rotate: 0, opacity: .12,
+      scale: 1, rotate: 0, opacity: 1,
     }, { duration: Math.max(0, deadline - performance.now()), easing: motionEasing.travel });
     run.finished.then(completed => {
       if (!flights.has(flight) || revision !== currentRevision) return;
@@ -98,7 +104,7 @@ export function showRewardAcquisition(stage, card, { mode = 'chest', token, coun
   }
   function refreshGeometry() {
     if (!flights.has(flight)) return;
-    if (!stage.isConnected || host.hidden || !host.contains(stage)
+    if (motionReduced() || !stage.isConnected || host.hidden || !host.contains(stage)
       || (sceneSelector && !stage.querySelector(sceneSelector))) { flight.dispose(); return; }
     const replacement = findTarget();
     if (!replacement) return;
@@ -111,8 +117,9 @@ export function showRewardAcquisition(stage, card, { mode = 'chest', token, coun
     pendingFrame = requestAnimationFrame(() => { pendingFrame = null; refreshGeometry(); });
   }
   const observer = new MutationObserver(refreshGeometry);
-  observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['hidden'] });
+  observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['hidden', 'class'] });
   flights.add(flight);
+  preference?.addEventListener?.('change', refreshGeometry);
   window.addEventListener('scroll', scheduleGeometry, { capture: true, passive: true });
   window.addEventListener('resize', scheduleGeometry, { passive: true });
   if (flights.size > 8) [...flights][0].dispose();

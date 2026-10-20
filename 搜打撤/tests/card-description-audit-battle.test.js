@@ -31,7 +31,7 @@ function resolverProbe({ mode = 'boss', pool = [], infuseFuels = 0, playedMovesT
   const events = [], added = [], jobs = [];
   const pstat = Combat.ensureStatus({ hp: 50 });
   const current = { mode, infuseFuels, playedMovesThisTurn, hand: [], grave: [] };
-  const resolver = createBattleResolution({
+  const resolver = createBattleResolution({ runtime,
     readState: () => current, getPlayerStatus: () => pstat, esc: String, log() {},
     heal: n => events.push(['heal', n]), addFloat() {}, addDelayed: q => events.push(['delayed', q]), takeDeckBottom: () => [], deckBottomCount: () => 0,
     startSurge() {}, getAllCards: () => C.all(), isRandomObtainable: () => true, randomBattle: () => 0,
@@ -81,7 +81,7 @@ describe('全卡描述修复回归：卡面正确结果与待裁定边界', () =
     ['starter-attack', [5]], ['cc-chase-slash', [5]], ['cc-cursed-blade', [8]],
     ['cc-double-boom', [5]], ['cc-ember-burst', [4]], ['cc-lava-blast', [11]],
     ['tt2-bloodblade', [7], { heal: 7 }], ['tt2-comboarrow', [4]],
-    ['tt2-forestarrow', [4], { armor: 3 }], ['tt2-piercearrow', [4], { armor: 3 }],
+    ['tt2-forestarrow', [4], { armor: 3 }], ['tt2-piercearrow', [4], { abreak: 2, armor: 0 }],
     ['tt2-shoot', [2]], ['tt2-swiftarrow', [4], { draw: 1 }],
     ['tt3-armor-rush', [9], { bleed: 2 }], ['tt3-arrow-rain', [4]],
     ['tt3-bandage', [], { heal: 3, armor: 3 }], ['tt3-blood-arrow', [4], { bleed: 1 }],
@@ -115,6 +115,18 @@ describe('全卡描述修复回归：卡面正确结果与待裁定边界', () =
       expect(actual, key).toBe(n); actualExtras[key] = actual;
     }
     record(id, '实际结构化执行器：攻击力5/法伤2/目标存活，随机区间取下端', { damage: actualDamage, extras: actualExtras }, { damage, extras });
+  });
+  it('破甲箭：先结算本次伤害，再施加破甲，使后续伤害穿过护甲', () => {
+    const p = resolverProbe({ atk: 5 });
+    p.foe.defense = { armor: 10, shield: 0, guard: false };
+    p.resolver(byId('tt2-piercearrow'), p.foe);
+    expect(p.foe.hp).toBe(50);
+    expect(p.foe.defense.armor).toBe(6);
+    expect(p.foe.status.abreak).toBe(2);
+    expect(p.events.filter(event => event[0] === 'armor')).toEqual([]);
+    p.resolver(byId('starter-attack'), p.foe);
+    expect(p.foe.hp).toBe(45);
+    expect(p.foe.defense.armor).toBe(6);
   });
   it('铁甲阵：真实 acquire 将2费模板减1费成为1费', () => {
     const p = resolverProbe({ pool: [byId('tt3-flame-storm')] });
@@ -202,18 +214,19 @@ describe('全卡描述修复回归：卡面正确结果与待裁定边界', () =
     expect(plain.rules?.triggers?.onAcquire?.length || 0).toBe(0);
     vi.spyOn(C, 'all').mockReturnValue([plain]);
     const beforeGranted = runtime.granted.length;
+    const beforeHand = runtime.hand.length;
     runtime.delayed.push({ special: 'consumeTemps', uids: [uid], cardName: '江湖救急-改' });
     await engine.processDelayed(); await drain();
     expect(runtime.consumed).toContain(uid);
-    const actual = effect === 'acquire' ? runtime.granted.length - beforeGranted : 1000 - runtime.foes[0].hp;
+    const actual = effect === 'acquire' ? id === 'tt7-arcanescroll' ? runtime.hand.length - beforeHand + 1 : runtime.granted.length - beforeGranted : 1000 - runtime.foes[0].hp;
     expect(actual).toBe(n);
     // 重跑到期任务不再触发；正常消耗钩作为相同数值的独立正对照。
     runtime.delayed.push({ special: 'consumeTemps', uids: [uid], cardName: '重复到期回归' });
     await engine.processDelayed(); await drain();
-    const repeated = effect === 'acquire' ? runtime.granted.length - beforeGranted : 1000 - runtime.foes[0].hp;
+    const repeated = effect === 'acquire' ? id === 'tt7-arcanescroll' ? runtime.hand.length - beforeHand + 1 : runtime.granted.length - beforeGranted : 1000 - runtime.foes[0].hp;
     expect(repeated).toBe(n);
     engine.fireConsumeTriggers(consumedCard, runtime.foes[0]); await drain();
-    const control = (effect === 'acquire' ? runtime.granted.length - beforeGranted : 1000 - runtime.foes[0].hp) - repeated;
+    const control = (effect === 'acquire' ? id === 'tt7-arcanescroll' ? runtime.hand.length - beforeHand + 1 : runtime.granted.length - beforeGranted : 1000 - runtime.foes[0].hp) - repeated;
     expect(control).toBe(n);
     record(id, '生产consumeTemps到期消耗且重复到期不重发；随后正常消耗钩作正对照', { expiredEffect: actual, normalConsumeEffect: control }, { expiredEffect: n, normalConsumeEffect: n });
   });

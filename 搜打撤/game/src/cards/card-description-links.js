@@ -79,7 +79,7 @@ export function createCardDescriptionRenderer(cards = []) {
   return {
     getCard: id => byId.get(String(id)) || null,
     render(value, currentId, query = '') {
-      const text = displayCardDescription(value, currentId);
+      const text = displayCardDescription(value, currentId, byId.get(String(currentId)));
       const queryText = query.trim();
       const needle = queryText.toLowerCase();
       const key = JSON.stringify([String(currentId), text, queryText]);

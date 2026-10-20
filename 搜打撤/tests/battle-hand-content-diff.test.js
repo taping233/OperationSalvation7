@@ -5,7 +5,7 @@ vi.mock('../game/src/battle/view/battle.presentation-ready.js',()=>({
   waitForBattleImages:()=>({promise:Promise.resolve(true),cancel(){}}),
 }));
 vi.mock('../game/src/battle/view/battle.frames.js',()=>({
-  attach:()=>Promise.resolve(false),hide(){},cacheStats:()=>({}),play(){},setPaused(){},presentDeath(){},isLiveBattleFigure:()=>false,
+  attach:()=>Promise.resolve(false),hide(){},cacheStats:()=>({}),play(){},setPaused(){},presentDeath(){},isLiveBattleFigure:()=>false,actionImpactRemaining:()=>null,
 }));
 const rich=value=>String(value||'').replace(/\[\[icon:[^\]]+\]\]/g,'');
 const UI={el:{},_lastMode:null,hideTooltip(){},showTooltip(){},refresh(){},log(){},act(){},

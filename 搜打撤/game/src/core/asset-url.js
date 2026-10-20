@@ -12,7 +12,17 @@ const RUNTIME_ASSET_ALIASES =
 const BUILD_VERSION =
   typeof __BUILD_VERSION__ !== 'undefined' ? __BUILD_VERSION__ : 'dev';
 
+// Build defines are immutable for this module lifetime (HMR/reload creates a
+// fresh cache). Cache complete input strings, including art revisions and hashes.
+// Bound both count and string lengths: one-off external/custom URLs cannot grow it
+// without limit. This caches URL calculation only, never fetch/decode outcomes.
+const urlMemo = new Map();
+const URL_MEMO_LIMIT = 1024;
+const URL_MEMO_MAX_LENGTH = 1024;
+
 export function assetUrl(p) {
+  const cached = urlMemo.get(p);
+  if (cached !== undefined) return cached;
   // Source/dev paths remain unchanged. Production aliases are injected only
   // after the build has verified equal bytes; query and public-base prefixes
   // remain attached to the same resource.
@@ -25,5 +35,10 @@ export function assetUrl(p) {
   const match = pathname.match(/^(\.\/|\/)?(assets\/.*)$/);
   const canonical = match && RUNTIME_ASSET_ALIASES[match[2]];
   const published = canonical ? (match[1] || '') + canonical : pathname;
-  return published + query + (queryIndex < 0 ? '?' : '&') + 'v=' + BUILD_VERSION + hash;
+  const result = published + query + (queryIndex < 0 ? '?' : '&') + 'v=' + BUILD_VERSION + hash;
+  if (p.length <= URL_MEMO_MAX_LENGTH && result.length <= URL_MEMO_MAX_LENGTH) {
+    if (urlMemo.size >= URL_MEMO_LIMIT) urlMemo.delete(urlMemo.keys().next().value);
+    urlMemo.set(p, result);
+  }
+  return result;
 }

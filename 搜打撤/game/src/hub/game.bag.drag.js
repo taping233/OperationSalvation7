@@ -8,6 +8,7 @@ import { esc } from '../core/shared.js';
 import { cardStacks, game, saveGame } from '../run/game.session.js';
 import { bagSlots } from './game.bag.bridge.js';
 import { captureBattleContext } from '../battle/battle-loader.js';
+import { containerRuleOf, containerAccepts } from '../core/card-capacity.js';
   // ---------- 背包拖拽（v0.21 → v2 2026-10-15）：堆排序 · 左栏分区钮拖放跨区 · 双击进特写 ----------
   export let bagDrag = null;   // {name, fromSafe, cell, ghost, card3d, sx, sy, lx, ly, vx, vy, moved}
 
@@ -167,14 +168,14 @@ import { captureBattleContext } from '../battle/battle-loader.js';
     if (t.kind === 'stack' && !d.fromSafe && t.name === '珍珠盒') {
       const stack = cardStacks(false).find(st => st.card.name === d.name);
       if (!stack) return;
-      if (stack.card.type !== '资源') {
+      const boxes = game.ownedCards.filter(x => x.card && x.card.id === 'tt2-pearlbox');
+      if (!boxes.some(box => containerAccepts(box.card, stack.card))) {
         UI.log('[[icon:gem]] 珍珠盒只收资源卡（木材/口粮/钥匙/货币等）', 'warn');
         SDT.Sound.sfx('deny');
         bagSlots.showBackpack(true);
         return;
       }
-      const boxes = game.ownedCards.filter(x => x.card && x.card.id === 'tt2-pearlbox').length;
-      const cap = boxes * 9;
+      const cap = boxes.reduce((sum, box) => sum + (containerRuleOf(box.card)?.slots || 0), 0);
       const storedN = game.ownedCards.filter(x => x.stored && !x.pouchOf).length;
       if (storedN + stack.count > cap) {
         UI.log(`[[icon:gem]] 珍珠盒放不下了（${storedN}/${cap} 张）——先取出一些`, 'warn');

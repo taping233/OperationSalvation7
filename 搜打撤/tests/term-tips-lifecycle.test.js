@@ -1,4 +1,5 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { equipmentInfoHTML } from '../game/src/ui/equipment-info.js';
 
 beforeAll(async () => {
   window.SDT ||= {};
@@ -13,6 +14,7 @@ afterEach(() => {
   pointer(document, 'pointerup', 1);
   pointer(document, 'pointercancel', 1);
   document.getElementById('term')?.remove();
+  document.getElementById('equipment-test')?.remove();
   vi.restoreAllMocks();
 });
 
@@ -24,6 +26,34 @@ function pointer(target, type, pointerId = 1) {
 const tip = () => document.querySelector('.term-tip');
 
 describe('term tooltip pointer lifecycle', () => {
+  it.each([false, true])('装备聚焦只查说明，保留主动技能原点击（已使用=%s）', used => {
+    document.body.insertAdjacentHTML('beforeend', `<div id="equipment-test">${equipmentInfoHTML({ name:'护符', desc:'抵挡寒风', skill:'获得护盾', uid:'eq1', used })}</div>`);
+    const host = document.getElementById('equipment-test');
+    const trigger = host.querySelector('[data-ui-tip]');
+    const button = host.querySelector('button');
+    const action = vi.fn();
+    button.addEventListener('click', action);
+    trigger.focus();
+    expect(tip().hidden).toBe(false);
+    expect(tip().textContent).toContain('抵挡寒风');
+    expect(tip().textContent).toContain(used ? '本场已用过' : '点击发动');
+    expect(action).not.toHaveBeenCalled();
+    button.click();
+    expect(action).toHaveBeenCalledTimes(used ? 0 : 1);
+    expect(button.dataset.act).toBe('btEquipSkill');
+    expect(host.querySelector('[title]')).toBeNull();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true }));
+    expect(tip().hidden).toBe(true);
+  });
+
+  it('被动装备可用键盘阅读说明，不生成主动操作', () => {
+    document.body.insertAdjacentHTML('beforeend', `<div id="equipment-test">${equipmentInfoHTML({ name:'靴子', desc:'踏雪无痕' })}</div>`);
+    const trigger = document.querySelector('#equipment-test [data-ui-tip]');
+    trigger.focus();
+    expect(tip().textContent).toContain('踏雪无痕');
+    expect(document.querySelector('#equipment-test [data-act]')).toBeNull();
+  });
+
   it('does not accumulate release listeners across ordinary presses or cancellations', () => {
     const add = vi.spyOn(document, 'addEventListener');
     const term = document.getElementById('term');

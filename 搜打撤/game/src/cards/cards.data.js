@@ -97,7 +97,7 @@ export const dataSlice = {
       { id: 'tt3-qi-wave',       name: '气功波',   cost: 3, rarity: '古朴', type: '武术', desc: '抽 1 张牌，对全体敌人造成等量伤害。' },
       { id: 'tt3-hold-fast',     name: '坚守',     cost: 2, rarity: '初始', type: '武术', desc: '+3 甲，抽 1 张牌。' },
       { id: 'tt3-life-arrow',    name: '生命箭',   cost: 2, rarity: '古朴', type: '武术', dmg: 1, dmgType: 'attack', desc: '攻⁺1，获得 1 张随机卡牌。' },
-      { id: 'tt3-dig-treasure',  name: '挖宝',     cost: 4, rarity: '古朴', type: '武术', desc: '从牌库底发现 1 张牌，并获得等价护甲。' },
+      { id: 'tt3-dig-treasure',  name: '挖宝',     cost: 4, rarity: '古朴', type: '武术', desc: '从牌库底三张牌中发现1张牌，并获得等同于其价格的护甲。' },
       { id: 'tt3-reshot',        name: '重新',     cost: 2, rarity: '古朴', type: '武术', dmg: 2, dmgType: 'attack', desc: '攻⁺2。' },
       { id: 'tt3-venom-arrow',   name: '毒箭',     cost: 2, rarity: '古朴', type: '武术', dmg: 1, dmgType: 'attack', desc: '攻⁺1，附加中毒。' },
       { id: 'tt3-toxin',         name: '毒药',     cost: 0, rarity: '初始', type: '武术', desc: '附加 1 层中毒。' },
@@ -386,7 +386,7 @@ export const dataSlice = {
       { id: 'tt2-swiftarrow', name: '迅疾箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），抽 1 张牌。', dmg: -1, dmgType: 'attack', draw: 1, value: 2 },
       { id: 'tt2-block', name: '格挡', cost: 1, rarity: '古朴', type: '武术', desc: '本回合所受伤害降为 1。', dmg: 0, value: 2 },
       { id: 'tt2-comboarrow', name: '连击箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1）；如果你打出的上一张牌是武术牌，本牌变为0费。', dmg: -1, dmgType: 'attack', value: 2 },
-      { id: 'tt2-piercearrow', name: '破甲箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），获得 3 点护甲。', dmg: -1, dmgType: 'attack', armor: 3, value: 2 },
+      { id: 'tt2-piercearrow', name: '破甲箭', cost: 1, rarity: '古朴', type: '武术', desc: '造成（你的攻击力 - 1）点攻击伤害；对目标附加破甲，持续 2 回合。', dmg: -1, dmgType: 'attack', value: 2, rules: { version: 1, battle: { target: { side: 'enemy', area: false } }, triggers: { onPlay: [{ op: 'damage', amountField: 'dmg', target: 'chosenEnemy' }, { op: 'curse', curse: 'abreak', duration: 2, target: 'chosenEnemy' }] } } },
       { id: 'tt2-shoot', name: '射击', cost: 0, rarity: '古朴', type: '武术', desc: '造成 2 点伤害。', dmg: 2, dmgType: 'fixed', value: 2 },
       { id: 'tt2-turtlearmor', name: '铸甲', cost: 1, rarity: '稀有', type: '武术', desc: '消耗1 张装备牌，+10甲。', dmg: 0, armor: 10, value: 3 },
       { id: 'tt2-bloodblade', name: '嗜血刃', cost: 2, rarity: '史诗', type: '武术', desc: '攻（+2），回复等量生命。', dmg: 2, dmgType: 'attack', value: 4 },
@@ -405,7 +405,7 @@ export const dataSlice = {
       { id: 'tt3-qi-wave', name: '气功波', cost: 1, rarity: '古朴', type: '武术', desc: '抽 1 张牌，对全体敌人造成等同于其价格的固定伤害。', dmg: 0, draw: 1, value: 2 },
       { id: 'tt3-hold-fast', name: '坚守', cost: 1, rarity: '古朴', type: '武术', desc: '+5 甲，抽 1 张牌。', dmg: 0, draw: 1, armor: 5, value: 2, rules: { version: 1, battle: { target: { side: 'self', area: false } }, triggers: { onPlay: [{ op: 'armor', amountField: 'armor' }, { op: 'draw', amountField: 'draw' }] } } },
       { id: 'tt3-life-arrow', name: '生命箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），获得 1 张随机卡牌。', dmg: -1, dmgType: 'attack', value: 2 },
-      { id: 'tt3-dig-treasure', name: '挖宝', cost: 1, rarity: '古朴', type: '武术', desc: '从牌库底发现 1 张牌，并获得等同于其价格的护甲。', dmg: 0, value: 2 },
+      { id: 'tt3-dig-treasure', name: '挖宝', cost: 1, rarity: '古朴', type: '武术', desc: '从牌库底三张牌中发现1张牌，并获得等同于其价格的护甲。', dmg: 0, value: 2 },
       { id: 'tt3-reshot', name: '重斩', cost: 1, rarity: '古朴', type: '武术', desc: '攻（+2）。', dmg: 2, dmgType: 'attack', value: 2 },
       { id: 'tt3-venom-arrow', name: '毒箭', cost: 1, rarity: '古朴', type: '武术', desc: '攻（-1），附加 1层中毒。', dmg: -1, dmgType: 'attack', value: 2 },
       { id: 'tt3-toxin', name: '毒药', cost: 0, rarity: '古朴', type: '法术', desc: '附加 1 层中毒。抽 1 张牌。', dmg: 0, draw: 1, value: 2 },
@@ -631,12 +631,15 @@ export const dataSlice = {
       { id: 'tt12-chargeray',   name: '充能射线', cost: 1, rarity: '稀有', type: '法术', dmg: 5, dmgType: 'spell', desc: '造成5点法伤，本牌在你手牌中时每注能过1张卡牌，伤害+2' },
       { id: 'tt12-breakthrough', name: '突破进展', cost: 1, rarity: '稀有', type: '法术', desc: '随机获取1张0费，一张1费，一张2费招式' },
       { id: 'tt12-raygun',      name: '射线枪', cost: 0, rarity: '古朴', type: '装备', desc: '主动技能：发现一张射线牌并直接释放' },
-      { id: 'tt12-backupcell',  name: '后备能源', cost: 6, rarity: '史诗', type: '法术', draw: 2, desc: '抽2张牌并回复所有费用，消耗区中每有一张法术牌，本牌费用-1', rules: { version: 1, battle: { target: { side: null, area: false }, costModifiers: [{ kind: 'consumedSpellDiscount', amount: 1 }] } } },
+      { id: 'tt12-backupcell',  name: '后备能源', cost: 6, rarity: '史诗', type: '法术', draw: 2, desc: '抽2张牌并回复所有费用，消耗区中每有一张法术牌，本牌费用-1', rules: { version: 1, battle: { target: { side: null, area: false }, costModifiers: [{ kind: 'consumedSpellDiscount', amount: 1 }] }, triggers: { onPlay: [{ op: 'draw', amountField: 'draw' }, { op: 'refillEnergy' }] } } },
       { id: 'tt12-freezeray',   name: '冷冻射线', cost: 1, rarity: '稀有', type: '法术', dmg: 4, dmgType: 'spell', desc: '造成4点法伤；若此前其未曾受到过伤害，对其附加冰冻' },
     ],
 
     // 2026-10-20：新增卡牌定版；装备费用0，枪术主动每战一次。
     TABLETOP13: [
+  { id: 'tt13-poor-meal', name: '穷鬼套餐', cost: 0, rarity: '古朴', type: '装备', value: 2,
+    desc: '如果你的手牌数小于等于3，你的英雄技能变为0费。',
+    rules: { version: 1, battle: { target: { side: 'self', area: false }, hosted: ['batch13-poor-meal'] } } },
   {
     "id": "tt13-spring",
     "name": "源头活水",

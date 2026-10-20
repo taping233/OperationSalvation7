@@ -1,0 +1,1 @@
+.reward-completion-receipt { position:fixed; z-index:180; bottom:96px; left:50%; transform:translateX(-50%); max-width:calc(100vw - 40px); padding:12px 20px; border:1px solid #91c2c647; border-radius:8px; background:#15313a; color:#e3ece8; font:inherit; pointer-events:none; overflow-wrap:anywhere; }

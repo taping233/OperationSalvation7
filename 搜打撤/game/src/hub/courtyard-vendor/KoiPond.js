@@ -97,12 +97,13 @@ export function createKoiPond(canvas, { onProgress = () => {}, random = () => Ra
       return { x: -t * 0.82,
         y: (Math.sin(this.phase - t * 2.8) * 0.032 + this.bend * 0.13) * t * t };
     }
-    bodyPath() {
+    bodyPoints() {
       const widths = [0.035, 0.087, 0.105, 0.086, 0.052, 0.023, 0.009];
-      const side = sign => widths.map((w, i) => {
-        const p = this.spine(i / (widths.length - 1)); return { x: p.x, y: p.y + w * sign };
-      });
-      const points = [...side(-1), ...side(1).reverse()];
+      const spine = widths.map((_, i) => this.spine(i / (widths.length - 1)));
+      const side = sign => widths.map((w, i) => ({ x: spine[i].x, y: spine[i].y + w * sign }));
+      return [...side(-1), ...side(1).reverse()];
+    }
+    bodyPath(points) {
       ctx.beginPath(); ctx.moveTo((points.at(-1).x + points[0].x) / 2, 0);
       for (let i = 0; i < points.length; i++) {
         const p = points[i], next = points[(i + 1) % points.length];
@@ -121,9 +122,11 @@ export function createKoiPond(canvas, { onProgress = () => {}, random = () => Ra
     }
     draw() {
       const length = this.length, fin = this.spine(0.25), tail = this.spine(1);
+      // Shadow and body use the same pose; keep this projection local to this draw.
+      const body = this.bodyPoints();
       ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.angle); ctx.scale(length, length);
       // A shallow blue-grey shadow separates the fish from the painted stone bed.
-      ctx.save(); ctx.translate(0.025, 0.038); this.bodyPath();
+      ctx.save(); ctx.translate(0.025, 0.038); this.bodyPath(body);
       ctx.fillStyle = 'rgba(40,66,65,0.16)'; ctx.fill(); ctx.restore();
       ctx.fillStyle = 'rgba(220,218,189,0.48)';
       for (const side of [-1, 1]) {
@@ -139,7 +142,7 @@ export function createKoiPond(canvas, { onProgress = () => {}, random = () => Ra
       ctx.quadraticCurveTo(-0.98, tail.y + 0.055 + tailSwing, -1, tail.y + 0.11 + tailSwing);
       ctx.quadraticCurveTo(tail.x - 0.035, tail.y + 0.07, tail.x + 0.025, tail.y);
       ctx.fillStyle = 'rgba(219,216,185,0.63)'; ctx.fill();
-      this.bodyPath(); ctx.fillStyle = this.palette[0]; ctx.fill();
+      this.bodyPath(body); ctx.fillStyle = this.palette[0]; ctx.fill();
       ctx.save(); ctx.clip();
       this.patch(0.19, 0.12, this.palette[1], -0.015);
       this.patch(0.54, 0.11, this.palette[1], 0.025);

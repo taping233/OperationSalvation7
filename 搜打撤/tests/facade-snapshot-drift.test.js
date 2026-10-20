@@ -50,11 +50,6 @@ describe('顶层门面快照漂移守卫', () => {
     // 清单失配时打印实际清单（console 可见），便于核对后更新基线
     console.log('[facade-snapshot] actual =', JSON.stringify(found));
     expect(found).toEqual([
-      'battle/bag/battle.bag.js',
-      'battle/core/battle.enemy-phase.js',
-      'battle/core/battle.engine.js',
-      'battle/core/battle.exec-play.js',
-      'battle/core/battle.lifecycle.js',
       'battle/view/battle.aim.js',
       'battle/view/battle.anim.view.js',
       'battle/view/battle.hover.js',
@@ -82,5 +77,13 @@ describe('顶层门面快照漂移守卫', () => {
       'ui/cinematics.js',
       'ui/overlay.js',
     ]);
+  });
+
+  it('战斗兼容门面与新工厂均不再捕获浏览器门面快照', () => {
+    for (const path of ['battle/core/battle.engine.js', 'battle/core/battle.engine.factory.js',
+      'battle/bag/battle.bag.js', 'battle/core/battle.enemy-phase.js',
+      'battle/core/battle.exec-play.js', 'battle/core/battle.lifecycle.js']) {
+      expect(list(path).split('\n').some(isTopLevelSdtDeref), path).toBe(false);
+    }
   });
 });

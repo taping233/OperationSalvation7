@@ -23,7 +23,7 @@ function makeGame(cards) {
 async function settle() { await vi.advanceTimersByTimeAsync(1000); expect(R.busy).toBe(false); }
 
 
-const Hosted = await import('../game/src/battle/effects/battle.hosted.js');
+import { BUILTIN_PREVIOUS_RULES } from '../game/src/cards/builtin-card-previous-rules.js';
 const { previewAction } = await import('../game/src/battle/view/battle.preview.js');
 afterEach(() => vi.restoreAllMocks());
 function start(stealth = false, extra = {}) {
@@ -33,7 +33,7 @@ function start(stealth = false, extra = {}) {
   if (stealth) R.pstat.status.stealth = 1;
   return game;
 }
-const draws = game => game.logs.filter(line => line.includes('获得 2 张【初始攻击】'));
+const draws = game => game.logs.filter(line => line.includes('抽了 2 张牌'));
 async function play(uid = 'runtime-0') { BattleSession.commands.playCard(uid, 0); await settle(); }
 it('无潜行：仅攻+1，无条件文本与draw字段均不得抽牌', async () => {
   const game = start(); await play();
@@ -54,13 +54,10 @@ it.each(['immune', 'stealth', 'armor'])('敌方%s挡住真实伤害：不破自�
   expect(R.foes[0].hp).toBe(1000); expect(R.pstat.status.stealth).toBe(1); expect(draws(game)).toHaveLength(0);
 });
 it('多段边界：首个有效伤害破潜行，后段不再加2，整张只抽2', async () => {
-  const original = Hosted.getHostedExecutionCard;
-  vi.spyOn(Hosted, 'getHostedExecutionCard').mockImplementation(card => {
-    const result = original(card);
-    // Synthetic multi-hit schedule exercises the shared segment loop, not production card data.
-    return card.id === 'tt7-ghostblade' ? { ...result, desc: result.desc + '攻击3次。' } : result;
-  });
-  const game = start(true); await play();
+  const rules = structuredClone(canonical('tt7-ghostblade').rules);
+  rules.triggers.onPlay[0].hits = { count: 3 };
+  // Explicit operation parameters exercise the real shared segment loop.
+  const game = start(true, { rules }); await play();
   expect(R.foes[0].hp).toBe(980); expect(draws(game)).toHaveLength(1); expect(R.hand).toHaveLength(3);
 });
 it('相同ID的显式DSL版本以onPlay为准，不误接hosted破潜行奖励', async () => {
@@ -90,7 +87,7 @@ it.each([false, true])('BOSS模式潜行=%s：条件满足时才从牌库抽2', 
   expect(R.hand).toHaveLength(stealth ? 2 : 0);
   expect(R.drawPile).toHaveLength(stealth ? 0 : 2);
   expect(game.logs.filter(line => line.includes('抽了 2 张牌'))).toHaveLength(stealth ? 1 : 0);
-  expect(draws(game)).toHaveLength(0);
+  expect(draws(game)).toHaveLength(stealth ? 1 : 0);
 });
 it('无自身潜行时，敌方潜行不被当成奖励条件', async () => {
   const game = start(); R.foes[0].status.stealth = 1; await play();
@@ -101,7 +98,7 @@ it('伤害全灭敌人后沿现有终局规则不发后续抽牌', async () => {
   expect(draws(game)).toHaveLength(0);
 });
 it('其他卡伪造hosted标记被规则守卫拒绝，不施伤或发奖励', async () => {
-  const game = start(true, { id:'fake-ghost' }); await play();
+  const game = start(true, { id:'fake-ghost', rules: structuredClone(BUILTIN_PREVIOUS_RULES['tt7-ghostblade']) }); await play();
   expect(R.foes[0].hp).toBe(1000); expect(R.pstat.status.stealth).toBe(1);
   expect(draws(game)).toHaveLength(0); expect(game.logs.join(' ')).toContain('规则');
 });

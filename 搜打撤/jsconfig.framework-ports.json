@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", "module": "ESNext", "moduleResolution": "Bundler",
+    "lib": ["ESNext", "DOM"], "allowJs": true, "checkJs": false,
+    "strict": true, "skipLibCheck": true, "noEmit": true, "types": []
+  },
+  "files": ["tests/framework-battle-ports-types.fixture.ts"]
+}

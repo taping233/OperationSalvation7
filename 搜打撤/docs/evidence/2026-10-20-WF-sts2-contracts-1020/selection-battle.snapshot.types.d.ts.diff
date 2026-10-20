@@ -1,0 +1,22 @@
+diff --git a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/selection-before-battle.snapshot.types.d.ts.txt b/game/src/battle/battle.snapshot.types.d.ts
+index 17ac69f0..46c68770 100644
+--- a/docs/evidence/2026-10-20-WF-sts2-contracts-1020/.tmp/selection-before-battle.snapshot.types.d.ts.txt
++++ b/game/src/battle/battle.snapshot.types.d.ts
+@@ -115,7 +115,7 @@ export type BattleSnapshotInput = {
+   handInfuseCounts?: Record<string, number>;
+   infusing: ({ uid: string; card?: BattleCardInput | null; picked: Set<string>; [key: string]: unknown }) | null;
+   discovering: ({ options: BattleCardInput[]; [key: string]: unknown }) | null;
+-  handSelecting: ({ srcCard?: BattleCardInput | null; payment?: ({ card?: BattleCardInput | null; [key: string]: unknown }) | null; [key: string]: unknown }) | null;
++  handSelecting: ({ candidateUids?: readonly string[]; canCancel?: boolean; srcCard?: BattleCardInput | null; payment?: ({ card?: BattleCardInput | null; [key: string]: unknown }) | null; [key: string]: unknown }) | null;
+   choosing: ({ options: unknown[]; [key: string]: unknown }) | null;
+   pendingTarget: ({ uid: string; card?: BattleCardInput | null; [key: string]: unknown }) | null;
+   pendingHint: string | null;
+@@ -153,6 +153,8 @@ export type SnapshotAlly = {
+   readonly [key: string]: unknown;
+ };
+ export type SnapshotHandSelecting = {
++  readonly candidateUids: readonly string[];
++  readonly canCancel: boolean;
+   readonly srcCard?: SnapshotBattleCard | null;
+   /** The payment wrapper is shallow-cloned but mutable; other nested values keep their references. Its card projection is recursively readonly. */
+   readonly payment?: ({ card?: SnapshotBattleCard | null; [key: string]: unknown }) | null;

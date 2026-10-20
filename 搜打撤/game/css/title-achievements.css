@@ -145,6 +145,10 @@ body .achievement-gallery.ag-ambient-off .ag-ambient-specks i { animation-play-s
 .achievement-gallery .ag-empty button { margin-top: 2px; padding: 12px 20px; background: #484849; border: 0; color: #ffffff; font-size: 15px; }
 .achievement-gallery .ag-detail-backdrop { position: absolute; z-index: 3; inset: 0; background: #17201b2e; }
 .achievement-gallery .ag-detail { position: absolute; z-index: 4; top: 100px; left: 12%; right: 12%; max-height: calc(100% - 145px); overflow-y: auto; overflow-x: hidden; scrollbar-gutter: stable; background: #fafcf8; color: #3c3c3d; box-shadow: 0 20px 50px #282b2e66; border: 1px solid #d7d8d9; }
+/* Keep the dismissal control visible while a long detail scrolls. */
+.achievement-gallery .ag-detail-toolbar { position: sticky; top: 0; z-index: 1; display: flex; justify-content: flex-end; padding: 10px 14px; background: #fafcf8; border-bottom: 1px solid #d7d8d9; }
+.achievement-gallery .ag-detail-close { display: inline-flex; align-items: center; gap: 12px; min-height: 36px; padding: 5px 12px; color: #3c3c3d; background: #eeeae2; border: 1px solid #bcbdbb; cursor: pointer; }
+.achievement-gallery .ag-detail-close:focus-visible { outline: 2px solid #485d4f; outline-offset: 2px; }
 .achievement-gallery .ag-detail-content { display: flex; min-height: 360px; }
 /* 内部动效只由 achievement-motion.js 编排，避免通用 starting-style 再播一层。 */
 body.interface-motion #overlay .achievement-gallery .ag-detail { transition: none; }

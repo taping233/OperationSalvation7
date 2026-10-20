@@ -118,26 +118,26 @@ describe('battle rule audit 2026-10-14', () => {
     expect(deps.calls).toBe(2);
   });
 
-  it('可洗回牌堆全是自动牌时只遍历一轮，后续普通抽牌仍能正常触发', () => {
+  it('自动牌耗尽后停止，后续抽牌不自动取回消耗牌', () => {
     beginDrawDeck([automatic, automatic, automatic]);
     const deps = drawDeps();
     resolveDrawUntilHandN(plain, { untilHandN: 1 }, deps);
     expect(deps.calls).toBe(3);
     expect(R.hand).toEqual([]);
     expect(R.energy).toBe(12);
-    expect(E.drawCards(1)).toBe(1);
-    expect(R.energy).toBe(13);
+    expect(E.drawCards(1)).toBe(0);
+    expect(R.energy).toBe(12);
   });
 
-  it('正常普通牌从弃牌洗回后继续抽至指定手牌数', () => {
+  it('抽至目标手牌数在空库停止，不自动取回消耗牌', () => {
     beginDrawDeck([plain, plain, plain]);
     R.set$drawPile(['audit-0']);
     R.set$discard(['audit-1', 'audit-2']);
     const deps = drawDeps();
     resolveDrawUntilHandN(plain, { untilHandN: 3 }, deps);
-    expect(deps.calls).toBe(3);
-    expect(new Set(R.hand)).toEqual(new Set(['audit-0', 'audit-1', 'audit-2']));
-    expect(R.discard).toEqual([]);
+    expect(deps.calls).toBe(2);
+    expect(R.hand).toEqual(['audit-0']);
+    expect(R.discard).toEqual(['audit-1', 'audit-2']);
   });
 
   it('空牌堆正常停止，旧法术记录不会计入本次抽牌', () => {

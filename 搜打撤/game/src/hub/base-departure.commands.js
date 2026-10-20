@@ -1,4 +1,5 @@
 // @ts-check
+import { clone } from '../core/shared.js';
 /** @typedef {{ id?: string, name: string, rarity?: string, type?: string, [key: string]: unknown }} DepartureCard */
 /** @typedef {{ card: DepartureCard, count: number, stackKey?: string, variantKey?: string }} DepartureStack */
 /** @typedef {{ stash?: DepartureStack[], pocket?: DepartureStack[], [key: string]: unknown }} DepartureState */
@@ -77,4 +78,17 @@ export function createBaseDepartureCommands({ read, mutate }) {
   }
 
   return { prepareDeparture };
+}
+
+/** Plan the existing departure command without publishing or persisting its draft.
+ * @param {DepartureState} state
+ * @param {Record<string, unknown> | null | undefined} picks
+ */
+export function planBaseDeparture(state, picks) {
+  const afterState = clone(state);
+  const commands = createBaseDepartureCommands({
+    read: () => state,
+    mutate: prepare => prepare(afterState),
+  });
+  return { departure: commands.prepareDeparture(picks), afterState };
 }

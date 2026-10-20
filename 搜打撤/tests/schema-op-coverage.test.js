@@ -6,7 +6,9 @@
  * 不可达；一旦两份清单失配，红的就是玩家结算期。本测试把这条防线搬到测试层：
  * 「卡库 schema 实际用到的 op ⊆ resolution 运行时可处理的 op」，差集非空时列出差异 op 与卡 id。
  *
- * 运行时 op 全集摸底结论（2026-09-29，resolution.js 是唯一结构化 op 分派层）：
+ * 运行时入口为 battle.resolution.domain.js；通用卡牌与选择操作分别委派给
+ * card-semantic-operations.js / choice-semantic-operations.js，仍回流同一结算管线。
+ * 早期实现的分派说明（历史定位）：
  * - 循环 1（沉默门前，仅 damage）：battle.resolution.js:585 `op !== 'damage' continue`；
  *   schedule 段转 delayed triggerOps（:590-591）。
  * - 循环 2（沉默门后）：battle.resolution.js:873-996 逐 op if 链（status freeze/discover/curse/
@@ -28,14 +30,14 @@ import { sourceCardLibrary } from '../scripts/sync-cards-from-live.mjs';
 const RESOLUTION_HANDLED_OPS = new Set([
   'damage', 'status', 'discover', 'curse', 'foeFight', 'copyRandom', 'stealAtk',
   'noDrawNext', 'extraTurn', 'execute', 'summon', 'registerRule', 'acquire',
-  'cleanse', 'coins', 'blessing', 'energy', 'energyCap', 'maxHp', 'deckCap',
+  'cleanse', 'coins', 'blessing', 'energy', 'refillEnergy', 'energyCap', 'maxHp', 'deckCap',
   'heal', 'armor', 'draw',
+  'discoverCopies', 'schedule', 'castDrawn', 'castStored', 'registerInfusionBonus',
+  'transformCards', 'markEnemy', 'adjustCurse', 'restoreHeroSkill', 'recruitEnemy',
+  'insertCards', 'fillHand', 'castRandomSpells', 'equipCapacity', 'transform', 'release',
+  'consumeHand', 'handSelect', 'swapDiscoverCosts',
+  'choice', 'freezeFirstEnemies', 'randomCurse', 'randomBlessing',
 ]);
-
-// capability 表含 transform（card-rules.capability.js OPERATION_TARGETS），但被入口显式拒绝
-//（"no battle resolver branch is connected"，capability.js onPlay 与通用清单两处）——
-// 携带它的卡根本打不出，无半结算风险，不参与差集比对。
-const ENTRY_REJECTED_OPS = new Set(['transform']);
 
 // onPlay 直喂（resolution.js:513）+ battle.triggers.m2.js:17 登记型 8 时点（resolveOps 合成回流）。
 const OP_CONTAINERS = ['onPlay', 'onTurnStart', 'onTurnEnd', 'onBattleStart', 'onKill',
@@ -47,6 +49,9 @@ function pushOpList(found, ops, path) {
   ops.forEach((operation, index) => {
     if (operation && typeof operation === 'object' && typeof /** @type {any} */ (operation).op === 'string') {
       found.push({ op: /** @type {any} */ (operation).op, path: `${path}[${index}]` });
+      pushOpList(found, operation.ops, `${path}[${index}].ops`);
+      if (Array.isArray(operation.options)) operation.options.forEach((option, choiceIndex) =>
+        pushOpList(found, option.ops, `${path}[${index}].options[${choiceIndex}].ops`));
     }
   });
 }
@@ -84,8 +89,12 @@ function collectResolverOps(card) {
 describe('schema op 清单 × resolution 运行时清单（D-2 半结算守卫）', () => {
   const library = sourceCardLibrary();
 
-  it('运行时清单自检：RESOLUTION_HANDLED_OPS 每个 op 在 battle.resolution.js 都有真实分支', () => {
-    const source = readFileSync(resolve(process.cwd(), 'game/src/battle/core/battle.resolution.js'), 'utf8');
+  it('运行时清单自检：每个 op 在结算域及其实际委派的执行器中都有真实分支', () => {
+    const domain = readFileSync(resolve(process.cwd(), 'game/src/battle/core/battle.resolution.domain.js'), 'utf8');
+    expect(domain).toContain('choiceSemantics.resolveOperation(card, operation, ports)');
+    expect(domain).toContain('yield* resolveSemanticOperation(card, operation, target, ports,');
+    const source = [domain, ...['card-semantic-operations.js', 'choice-semantic-operations.js'].map(file =>
+      readFileSync(resolve(process.cwd(), `game/src/battle/effects/${file}`), 'utf8'))].join('\n');
     const missing = [...RESOLUTION_HANDLED_OPS].filter(op =>
       !source.includes(`operation.op === '${op}'`) &&
       // damage 的循环 1 入口是 continue 形态（op !== 'damage'）
@@ -102,7 +111,6 @@ describe('schema op 清单 × resolution 运行时清单（D-2 半结算守卫�
     const used = new Map();
     for (const card of library) {
       for (const { op } of collectResolverOps(card)) {
-        if (ENTRY_REJECTED_OPS.has(op)) continue;
         if (!used.has(op)) used.set(op, new Set());
         used.get(op).add(String(card?.id || '<missing id>'));
       }

@@ -20,6 +20,22 @@ const render = (card, options) => {
 const sample = overrides => ({ id: 'shared-face', name: '测试牌', type: '法术', rarity: '古朴', cost: 2, desc: '造成 4 点伤害。', ...overrides });
 
 describe('shared card presentation', () => {
+  it('hides only the optional value badge and keeps default rendering and value rules intact', () => {
+    const resource = sample({ type: '资源', value: 4, desc: '可出售' });
+    const standard = cards.cardHTML(resource, 'sm');
+    expect(cards.sellPrice(resource)).toBe(4);
+    expect(render(resource).querySelector('.hsc-val b').textContent).toBe('4');
+    const hidden = cards.cardHTML(resource, 'sm', { hideValue: true });
+    expect(hidden).toBe(standard.replace(/<div class="hsc-val"[^>]*>.*?<\/div>/, ''));
+    expect(cards.cardHTML(resource, 'sm')).toBe(standard);
+    expect(cards.cardHTML(resource, 'sm', { hideValue: false })).toBe(standard);
+    expect(cards.sellPrice(resource)).toBe(4);
+    const unsellable = sample({ desc: '造成 4 点伤害。' });
+    expect(cards.isSellable(unsellable)).toBe(false);
+    expect(render(unsellable).querySelector('.hsc-val')).not.toBeNull();
+    expect(render(unsellable, { hideValue: true }).querySelector('.hsc-val')).toBeNull();
+    expect(cards.isSellable(unsellable)).toBe(false);
+  });
   it('keeps the cost overlay above the frame and hides resource costs in every mode', () => {
     const root = render(sample());
     const layer = root.querySelector('.hsc-cost-layer');

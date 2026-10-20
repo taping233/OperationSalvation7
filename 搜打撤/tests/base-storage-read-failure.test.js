@@ -1,3 +1,5 @@
+import { installImmediateWebLocks } from './helpers/web-locks.js';
+installImmediateWebLocks();
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { readBase, readBaseReceipt, commitBase } from '../game/src/hub/base.commands.js';
 
@@ -51,7 +53,7 @@ describe('基地存储读取失败边界', () => {
     expect(readBaseReceipt(context, { command: change.command, payload: change.payload })).toMatchObject(failure);
     expect(await commitBase(context, change)).toMatchObject(failure);
     expect(Base.issue(1)).toBe('readFailed');
-    expect(Base.save()).toBe(false);
+    expect((await Base.save())).toBe(false);
     expect(write).not.toHaveBeenCalled();
     expect(publish).not.toHaveBeenCalled();
     expect(Base.data).toEqual(beforeMemory);
@@ -77,7 +79,7 @@ describe('基地存储读取失败边界', () => {
     expect(JSON.parse(localStorage.getItem(key))).toMatchObject({ coins: 140, _m01: { revision: 5 } });
   });
 
-  it('失败装载的兜底运行态不能在健康只读预览后覆盖原档，重新装载才恢复写权限', () => {
+  it('失败装载的兜底运行态不能在健康只读预览后覆盖原档，重新装载才恢复写权限', async () => {
     const beforeDisk = seed();
     const get = failReads();
     Base.use(1);
@@ -88,16 +90,16 @@ describe('基地存储读取失败边界', () => {
     expect(readBase(1)).toMatchObject({ ok: true, value: { coins: 150 } });
     expect(Base.issue(1)).toBeNull();
     Base.data.coins = 2;
-    expect(Base.save()).toBe(false);
+    expect((await Base.save())).toBe(false);
     expect(localStorage.getItem(key)).toBe(beforeDisk);
 
     expect(Base.use(1)).toMatchObject({ coins: 150 });
     Base.data.coins = 140;
-    expect(Base.save()).toBe(true);
+    expect((await Base.save())).toBe(true);
     expect(JSON.parse(localStorage.getItem(key)).coins).toBe(140);
   });
 
-  it('刷新读取失败不授予写权限，健康刷新采纳存档后恢复保存', () => {
+  it('刷新读取失败不授予写权限，健康刷新采纳存档后恢复保存', async () => {
     const beforeDisk = seed();
     const get = failReads();
     expect(Base._refreshExternal(1)).toBeNull();
@@ -106,10 +108,10 @@ describe('基地存储读取失败边界', () => {
 
     expect(Base.peek(1)).toMatchObject({ coins: 150 });
     Base.data.coins = 2;
-    expect(Base.save()).toBe(false);
+    expect((await Base.save())).toBe(false);
     expect(localStorage.getItem(key)).toBe(beforeDisk);
     expect(Base._refreshExternal(1)).toMatchObject({ coins: 150 });
-    expect(Base.save()).toBe(true);
+    expect((await Base.save())).toBe(true);
   });
 
   it('真正缺档的健康读取可清除旧异常并按零修订号初始化提交', async () => {
@@ -128,14 +130,14 @@ describe('基地存储读取失败边界', () => {
     expect(JSON.parse(localStorage.getItem(key)).coins).toBe(2);
   });
 
-  it('显式重开可在健康读取后重置失败装载的档位', () => {
+  it('显式重开可在健康读取后重置失败装载的档位', async () => {
     seed();
     const get = failReads();
     Base.use(1);
-    expect(Base.reset(1)).toBe(false);
+    expect((await Base.reset(1))).toBe(false);
     get.mockRestore();
 
-    expect(Base.reset(1)).toBe(true);
+    expect((await Base.reset(1))).toBe(true);
     expect(Base.issue(1)).toBeNull();
     expect(JSON.parse(localStorage.getItem(key)).coins).toBe(0);
   });

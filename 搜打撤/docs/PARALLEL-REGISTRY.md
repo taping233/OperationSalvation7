@@ -12,7 +12,10 @@
 
 | 会话/来源 | 属地（文件/端口/工作树） | 事项 | 登记时间 | 状态 |
 |---|---|---|---|---|
-| Friday / 默认发束画法融合 WF-hair-style-1020 | `docs/production/art/ART-STYLE-V1.md`头发段及自有`docs/evidence/2026-10-20-wu-bass-polish/hair-*` | 提炼老板粉发参考头发画法并重绘无贝斯候选头发，不替换正式壁纸 | 2026-10-20 | 待验收 |
+| Friday / WF-local-publish-1020 | 当前已完成Vite代码、资源、测试与文档；22项在途暂存和本地配置/缓存保留 | 老板授权整理提交推送；完整本地备份已校验，按冻结index门禁验收，不合入独立云端候选分支 | 2026-10-20 | 编辑中 |
+| Friday / 主线启动 01a159f7 | Vite `D:/素材/代号柒/搜打撤`、5200、PID13008；本会话 `npm run web -- --skip-compile` 创建；`node_modules/.cache/web-up-5200.json` | 老板授权拉起主线；后台隐藏启动，入口及资源响应通过，沿用现有剧情产物；服务保留供试玩 | 2026-10-20 | 已交付 |
+| Friday / WF-battle-flow-1020 | 普通99实库、唯一消耗牌堆无自动洗回、原UID取回与永久道具入堆；HUD/卡文/guide/全书、接触帧与异步渲染提交、胜利/场景；具体归属与跨聊天接线见自有README | 24文件314通过、运行期战斗输入稳定；语法587/类型10组/定向lint/CSS/docs655通过。当前1280×720内置浏览器验证99→98/回合不抽、BOSS空库不洗回、原UID取回与道具不能自取、白塔倒地→胜利→领奖。本会话5337两PID2556/10388均已核身份停止，无监听；临时页已关，741份冻结输入及截图在自有evidence | 2026-10-21 | 完成未提交；编辑释放 |
+| Friday（框架修复优化 WF-framework-1020） | 出征持久化/await调用；main/boot-order/home-menu；engine兼容壳/factory/core装配、backupcell结构化；动效归属/架构守卫/自测；现行说明与测试，72路径见evidence/2026-10-20-WF-framework-1020/changes.json | 三子代理实施、独立出征复核与主会话集成完成；23文件187通过、静态六项通过，当前窗口出征/刷新/首战胜利回图error为空。保留并行呈现线2项素材守卫失败，未最终重跑全量。自建5327两PID已停、无监听；factory两片段交WF-battle-flow，其他源码编辑释放；未提交推送 | 2026-10-20 | 完成未提交 |
 | Friday / 星月芦苇原图画风重绘 01a15548 | 自有`docs/evidence/2026-10-20-xingyue-reeds-nai5/redraw-*`、根`.tmp/nai/xingyue-reeds-nai5-20261020/redraw.png` | 原图画风重绘，月饰移至观众右侧、修双手，单张内置候选 | 2026-10-20 | 待验收 |
 | Friday / 星月壁纸预览 01a15531 | Vite `D:/素材/代号柒/搜打撤`、5200、PID492，本会话`npm run web -- --skip-compile`创建，已核对node/Vite命令 | 源码编辑已释放；服务保留供老板查看新增第三张壁纸 | 2026-10-20 | 已交付 |
 | Friday / 网页启动 01a15472 | Vite `D:/素材/代号柒/搜打撤`，5200，PID18456；`node_modules/.cache/web-up-5200.json` | 老板授权拉起网页版；后台隐藏启动，沿用剧情产物，入口及PNG/WebP响应有效，服务保留供试玩 | 2026-10-19 | 已交付 |
@@ -31,6 +34,111 @@
 
 
 ## 近期已释放
+
+### 2026-10-21 跨层样例NAI4.5试图 / Friday WF-transition-art-v45-1021
+
+单次尝试已结束，编辑释放。老板明确要求NAI4.5；仅改模型为nai-diffusion-4-5-full，沿原词/种子、1344×768/28步/单张，仍HTTP402，未出图、不重试、不转付费。完整请求/错误及脚本在`docs/evidence/2026-10-21-transition-art-sample/`；未改共享模型默认，未触发内置重绘或游戏接入，研究所排除。
+
+### 2026-10-21 跨层过场美术样例 / Friday WF-transition-art-sample-1021
+
+已交付候选，编辑释放。新NAI5免费横版请求HTTP402停止，未生成、不重试；复用10-16已核SHA的NAI过场底稿，经内置ImageGen重设计为冬日城市层间闸门，1672×941。提示词、输入输出SHA与观察见`docs/evidence/2026-10-21-transition-art-sample/`；PNG副本根`.tmp/nai/transition-art-sample-20261021/builtin-preview.png`。待老板反馈；研究所冻结排除，未接入游戏、未测试/build/提交。
+
+### 2026-10-21 尖塔第二轮借鉴与战斗追加 / Friday WF-sts2-contracts-1020
+
+完成未提交、源码与服务释放。六项借鉴落地，追加统一消耗牌堆/原UID取回/费用增伤同源、挖宝底部三选一、两处设置重开；字段/优先级/旧档与99临时牌战后隔离保留。分线增量、当前字节和验证见[实施记录](evidence/2026-10-20-WF-sts2-contracts-1020/README.md)。集中15文件212、最后道具/设置/架构8文件126、冻结近邻7文件70通过（组间重叠），语法/数据/10类型/定向lint与文档守卫通过。Codex真实首战出牌99→98、入堆可查、设置一击重开恢复99/堆0/三敌满血/手牌，error[]；道具末补在battle-flow当前内置窗口复核通过（原UID回手、结晶入堆不自取，来源及SHA见报告）。主线后续多实例/卡牌迁移由framework-closeout接续，不能将本快照冒称覆盖其后续源码。自有5342最后PID35848核身份停止，无进程/监听；预览标签不可用且本会话列表为空，保留本地快照和origin测试档02。未build/提交/推送/清理他人资源。
+
+### Friday / 破甲箭效果 01a159f7（2026-10-21）
+
+完成未提交，编辑释放。属地：`game/src/cards/cards.data.js` 仅破甲箭定版行、`cards.sync.m2.js` 本卡规则、`cards.sync.face-refresh.js` 独立修订接线、新 `pierce-arrow-revision.js`；`tests/pierce-arrow-revision.test.js`、`m2-data.test.js` 本卡、`card-description-audit-battle.test.js` 本卡断言与护甲穿透用例、`helpers/card-catalog-approved-revisions.js` 本卡批准投影；`docs/M-BATCH-MATRIX.md` 与生成全书本卡行、自有 `docs/evidence/2026-10-20-pierce-arrow/`。1费/攻-1不变，自身+3甲改目标破甲2回合；旧卡幂等更新、保留自定义。相关定向231项、目标lint/语法/diff通过；Codex当前窗口主线真实搜索与展开卡文通过，error为空，战斗数值由执行器回归覆盖。扩展回归非本卡9败另记[验证记录](evidence/2026-10-20-pierce-arrow/README.md)，未扩修。无新服务/build/提交/推送，主线5200保留；其他改动未接管。
+
+### 2026-10-20 尖塔描述性能夹具补齐 / Friday WF-sts2-vm-fixture-1020
+
+完成未提交、编辑释放。联合框架全量发现VM截取cardHTML后缺少新增的displayCardDescription依赖，框架会话移交后仅在`tests/page-perf-shared.test.js`导入真实纯描述函数并注入VM，生产实现与性能断言不变。三文件43项、定向lint和diff通过；1024个输出一致、缓存32条及重复命中复用断言保持。日志和输入SHA补在[尖塔实施报告](evidence/2026-10-20-WF-sts2-code-learning-1020/README.md)，结果已回告框架会话继续其联合验收。无游戏变更、服务、build或提交。
+
+### 2026-10-20 尖塔代码借鉴实施 / Friday WF-sts2-code-learning-1020
+
+完成未提交，编辑与服务释放。三子代理分别完成喝彩/记录/策略随机隔离、可信fixture战斗命令复现及core只读诊断、包扎/坚守结构化描述同源与缓存接线；11份运行源码、3份专属测试和2份现行说明的精确归属/指纹见[本轮报告](evidence/2026-10-20-WF-sts2-code-learning-1020/README.md)。集中11文件161项、语法/数据/10组类型/定向lint及diff通过，独立复核的异常续跑/费用隐态漏检已修。Codex当前1280×720内置窗口真实搜索样本卡、空档01出征、三敌首战、领奖回图通过，error为空。回放限可信本地fixture，触发器闭包余量未纳入诊断；默认随机策略和击杀后同seed轨迹会随隔离变化，旧存档结构不变。保留其他框架会话core端口段，未改其启动/持久化/动效；自建5341/PID18600已核身份停止并确认无进程/监听，临时标签关闭，隔离副本`.tmp/sts2-code-learning-preview-1020`和该origin测试档01留本地。未全量/build/提交/推送。
+
+### 2026-10-20 尖塔对照第一批 / Friday WF-sts-polish-1020
+
+完成未提交，编辑与服务释放。事件风险预告/装备说明、奖励轻弧线、四类攻击时序和强盗立绘动作样板已实施；文件属地含`game.run.events.js`/`game.run.flow.js`、UI新模块、`battle.layers.js`装备片段、`battle.attack-cues`/`attack-profiles`/`enemy-motion`/`battle.vfx`、`battle.resolution.js`与`effect-steps.damage.js`的cue参数、三份CSS、自有测试及`game/art-source/sts-polish-1020`。保留他人基线，未提交/推送/build。17文件184项定向回归、语法/类型/目标lint/样式/文档守卫通过；当前1523×956内置隔离实页及合成范围见[交付记录](evidence/2026-10-20-WF-sts-polish-1020/README.md)。美术同屏图仅候选待老板认可，未批量覆盖运行图。自有`.tmp/sts-polish-1020/preview`保留，5336/PID16828已核实身份后停止并复核无监听，内置临时标签页已关闭；主线5200未动。
+
+### 2026-10-20 当前便携无预置存档EXE / Friday WF-portable-clean-1020
+
+已交付、完成未提交，编辑与服务释放。老板明确授权当前EXE封装；交付`desktop-app/dist/代号柒-v0.60.0-便携无存档-20261020.exe`，305825072字节，SHA256 `0f1c6e07ef87d0b81ec1075deb329c9fecace9a6798a69432e806f6f319e6133`。独立快照2904项运行输入无漂移，Electron44.1.0离线封装；唯一新profile未使用，首次五空档且保留正常保存/继续。素材审查两条指纹经独立重审更新，补穷鬼套餐历史夹具与三测试计数；语法/数据/10组类型/lint/自测及构建预算通过；全量首轮11项旧夹具失败，修复后24通过/1原skip，未重跑最终全量。实际EXE双启动隔离、1676资源全SHA与asar字节及图片/协议检查通过；Codex当前窗口生产版自然开局首战、领奖回图、刷新继续通过，零console error，可听音频及原生Electron游戏实窗未验证。自建8139/PID5692、5337/PID29256、回环5338/PID39900均核身份停止并确认无监听，旧档/旧包/其他服务未动。原始大日志留根`.tmp/portable-clean-1020/`，范围与证据见[交付记录](evidence/2026-10-20-WF-portable-clean-1020/README.md)；未提交、推送或外部发布。
+
+### 2026-10-20 穷鬼套餐 / Friday WF-poor-meal-1020
+
+完成未提交，编辑释放。`cards/cards.data.js`、`cards/cards.js`、`cards/card-rules.schema.js`、`battle/bag/battle.bag.js`、`tests/requested-card-integration.test.js`、审计fixture与卡牌README新增古朴装备和≤3手牌技能0费效果；功能5文件118项通过，内置照相馆真实搜索确认卡名/品质/类型/描述。NAI底稿+内置重绘1:1方图已接入`game/assets/cards/equip-tt13-poor-meal.webp`及对应缩略图、art-mapping本卡条目与asset-manifest两条。原图1254×1254，缩略图448×448；美术接入后未追加测试/实页/build。构建生成的预加载与缩略图索引沿既有下次构建生成，当前新图可回退原图加载。自有[证据](evidence/2026-10-20-poor-meal/README.md)；未提交/推送，本会话无服务进程。
+
+### 2026-10-20 框架边界整改 / Friday WF-framework-sequential-1020
+
+完成未提交，编辑与服务释放。四位Sol中等推理子代理分别实施run商店/事件命令及events/resources拆分、战斗engine四项用例、card-execution-plan及解释器接线、类型/架构守卫；主会话维护架构说明、自测/同步沙箱等集成闭包与验收。精确47项源码/配置/测试/现行说明归属以[增量指纹](evidence/2026-10-20-WF-framework-sequential-1020/changes.json)及game/selftest.js扫描集合修订为准，保留开场未提交内容。语法/数据/10组类型/lint/docs/diff及相关回归通过；全量首轮后本轮失败已修复定向复验，4项既有素材审查基线失败保留，未重跑最终全量/混树构建/远端CI。当前内置窗口完成自然开局首战、触发/取消/伤害/领奖回图与刷新读档，夹具构造后真实输入验商店保存失败恢复、军需及救护，零console error；售卖/委托等覆盖边界见[报告](evidence/2026-10-20-WF-framework-sequential-1020/README.md)。自建5327/PID17612/exec82245核身份后停止，端口无监听；其他服务未动，测试origin存档保留，未提交推送。
+
+### 2026-10-20 星月职业卡画风重绘 / Friday WF-stellar-class-style-1020
+
+完成未提交。星辰占卜原图/缩略图已替换，mapping对应revision及manifest两条已同步，保留方图三张牌。两项目标素材检查通过；原有5200服务在内置实页操作中断开，高清显示验收未完成，无新增或停止服务。实际词、备份SHA及验证边界见[记录](evidence/2026-10-20-tt13-card-art/stellar-class-style/verification.json)。
+
+### 2026-10-20 远端性能候选合入 / Friday WF-remote-performance-integration-1020
+
+完成未提交、编辑释放。老板明确要求合入后，将远端`edf391ba`相对`ac550a33`的141文件增量三方整合至本地master工作区；保留本地4独有提交及现行奖励/商店/事件修复，等待其属地释放后校验输入逐文件回写，HEAD/index未变。商店互斥与焦点、领奖保存提示与紧凑布局合并；单卡成功回执受最终保存成功约束，资源消费者重新审查并复算指纹。最终56文件679项通过/1项基准跳过，剩余失败7文件154项补验通过（有重叠），516源码语法/数据/8组类型/定向lint/diff/文档及隔离Vite构建预算通过；首轮全量失败原日志保留，未重跑最终全量。当前1280×720内置窗口通过仓库搜索、设置/成就、真实开局首战、领奖回图及刷新读档，最终零console error；隔离测试档01保留在5331 origin。自建5331/PID37180核身份后停止并确认无进程/监听，原服务未动；隔离副本与原字节备份在根`.tmp/remote-performance-integration-1020/`留本地。未提交/推送/打包EXE，未宣称FPS提升；[清单、冲突处理与验收](evidence/2026-10-20-remote-performance-integration/README.md)。
+
+### 2026-10-20 奖励、商店与事件结算 / Friday WF-reward-shop-event-unification-1020
+
+完成未提交、编辑与服务已释放。主会话 `core/run-checkpoint.js`、`run/chests.js`/`node-reward-state.js`/`game.run.scenes.js`、`game.run.flow.js`资源域、`dev/feedback-1018-review.js`及必要资源指纹；trigger_unification负责`game.run.shop.js`/`shop-commission.js`；structured_semantics负责flow事件域、`event-card-choice.js`/`event-recode-candidates.js`/`ui/event-dice.js`；independent_review只读复核。专属与关联回归、架构说明和证据归本轮增量。奖励完成保存门、重试、防重入、商店成交/离店及事件付费/选择/骰子/中间奖励快照修复完成；保留开场已有领奖/背包改动。统一44文件554项通过，语法513文件、数据、8项类型、定向lint、自有diff及文档检查通过；资源另2文件23通过、4项素材映射旧基线失败保留，无新增chests/scenes指纹警告。Codex当前1280×720窗口完成奖励失败重试、商店购买/失败离店/恢复、军需三选一及救护固定奖励回图，零console error；出售/委托等其他分支只作自动回归。自建5317/PID22668命令与监听身份核对后停止并确认无进程/监听，5200未动；未写玩家档位，PENDING43满牌盒换牌未定义，未跑本轮全库/build/提交/推送。详细归属及证据见[验收记录](evidence/2026-10-20-WF-reward-shop-event-unification-1020/REPORT.md)。远端优化会话可在此完成增量之上整合，另行验证合并结果。
+
+### 2026-10-20 十三张卡面1:1适配接入 / Friday WF-tt13-square-1020
+
+完成未提交、编辑释放。老板要求全部1:1；已以内置图像编辑将13张选定卡面适配正方形并接入，原图均1254×1254、缩略图448×448，更新本批13条revision、清单26条及assets README。原画风/关键主体沿用，星月保留轻绘三牌，武器无手；原横版逐张备份，完整词/来源/哈希见`docs/evidence/2026-10-20-tt13-card-art/square-1020/{request,receipt}.json`。尺寸26项及目标素材检查通过，全局95项既有范围外错误未处理；当前Codex内置窗口真实搜索13张均加载方图缓存，星月高清1:1显示正常、页面error为空，截图和边界见同目录verification.json。未改玩法、未重跑测试套件/验战斗/build/提交，无新增服务。
+
+### 2026-10-20 远端性能候选评估 / Friday WF-remote-performance-review-1020
+
+拉取与审查完成，编辑释放。远端性能候选`edf391ba`新增14提交/141文件；统一行尾的三方预演为133无重叠、6自动合并、2文本冲突。候选与输入指纹在根`.tmp/remote-performance-review-1020/`，仅包含变化文件及未解冲突，不可运行、不提交。当前奖励/商店/事件仍有活跃占用，未覆盖或合入主线源码；fetch及远端diff检查通过，未测试/build/实页/提交/推送。分组路线、冲突处理及验证缺口见[评估记录](evidence/2026-10-20-remote-performance-review/README.md)。
+
+### 2026-10-20 十三张最终卡面接入 / Friday WF-tt13-selected-1020
+
+完成未提交、编辑释放。老板授权“都实装”，13张逐轮选定原图与缩略图已接入，更新art-mapping本批13条revision、素材清单对应26条及assets README。选择包括源头活水/扩容弹夹首轮修订、护身修手、狙杀/火焰法杖去手、灵魂契约默认画风常无欲、星辰占卜轻绘三牌、收刀白花手下留情，其余沿原构图统一版。完整来源/实际词/旧图备份及SHA见`docs/evidence/2026-10-20-tt13-card-art/selected-final-1020/{request,receipt}.json`；26项目标素材检查通过，全局95项范围外错误保留。当前Codex内置窗口13张最终缩略图均加载、三张代表高清图显示及缓存有效、页面error为空，截图及边界见同目录verification.json。未改卡文/玩法/职业字段，未重跑测试套件/验战斗/build/提交，无新增服务。
+
+### 2026-10-20 卡牌状态与战斗时点统一 / Friday WF-card-effect-trigger-unification-1020
+
+完成未提交、编辑与服务已释放。触发契约/runner、engine/draw/lifecycle/enemy-phase（trigger_unification）；resolution/exec-play/equipment、规则schema/capability/guard（structured_semantics）；主会话伤害与文本效果边界、卡牌/状态说明、sync-cards沙箱契约依赖及架构文档，配套新增和契约测试。11个现有时点、结构化域权威、效果顺序、状态及终局边界统一，保留未迁旧句兼容；独立子代理只读复核通过。集中18文件313项通过，最终全量682文件通过、2文件4项原有美术映射指纹失败（7034通过、37跳过），未记全量通过；语法/数据/8项类型/定向lint/diff及文档通过。当前内置1280×720窗口完成真实首战、领奖、回图和测试档02恢复，错误记录为空；已有01/05档未改。自建5317/PID14352身份核对后停止并复核无进程/监听，5200/PID492未动，测试档保留。详细归属、未覆盖范围及失败证据见[验收记录](evidence/2026-10-20-WF-card-effect-trigger-unification-1020/REPORT.md)。其他奖励/背包/美术/流程工具改动保持各自归属；未build/提交/推送。
+
+### 2026-10-20 十三张新增卡面 / Friday WF-tt13-art-1020
+
+第二轮13张候选已展示、编辑释放。按老板追加要求直接以NAI原图为内容依据、现行冷冻射线和飞刃偷袭仅作画法参考，统一概括二次元块面。老板最终明确不替换、仅汇报，第二轮未编码接入或接入验收；完整词/输入/输出见`docs/evidence/2026-10-20-tt13-card-art/original-style/request.json`。首轮此前已接入13张及缩略图、art-mapping本批覆盖/revision、素材清单、两份生成索引和素材README，老板已否定其重构画法，运行文件按最新指示保持现场；本会话未撤换。首轮目标26素材检查通过，全局95项范围外错误；两份现有卡面测试6项通过，首轮仅源头活水实页有效，装备采集为空不算通过。原PNG/首轮备份本地留存，不入Git。未build/提交，无新增服务；状态见自有README。
+
+### 2026-10-20 领奖刷新恢复 / Friday WF-reward-refresh-1020
+
+完成未提交、编辑释放。`game/dev/feedback-1018-review.js`复用入口增加限定5308+durable=1的真实测试档模式，已有档拒绝覆盖；正式保存/读档/领奖/背包/节点实现未改。当前1280×720内置窗口完成关闭与取消、两次真实刷新、部分领奖保留、原节点重进及领完后恢复，21张卡的UID集合保持、两张奖励各1张、待领奖状态清除。2文件18项回归、语法/定向lint/diff通过；九项源码与服务副本哈希一致，八项正式实现与首批相同。六项适用完成标准、路线图同步，证据见[本轮记录](evidence/2026-10-20-WF-reward-refresh-1020/REPORT.md)。自建5308/PID27932身份核对后已停并复核无监听，临时页关闭；副本`C:/Users/太平/AppData/Local/Temp/sdt-reward-refresh-1020-XzsHVG`和独立测试档保留本地，5200未动。未全量/build/提交/推送。
+
+### 2026-10-20 主美实页诊断 / Friday sol-main-art-live-review
+
+诊断完成未提交，编辑与服务释放。Sol中等推理完成前两层与第三层首战；模型容量及子代理标签隔离后，由主会话接续同一测试档05，完成第三层紧急撤离、两把钥匙1张入库、成功结算并返回基地。15张内置浏览器截图及SHA索引、实际路径与优先问题见`docs/evidence/2026-10-20-sol-main-art-live-review/`；首件建议为普通战斗入场至胜利收束。前段后台1280×720、后段当前可见1001×956分别记证据，不声明同窗口整链或多尺寸验收。运行基线为14:48:50冻结副本，另一会话后续领奖代码未覆盖。自有隔离副本`C:/Users/太平/AppData/Local/Temp/sdt-sol-art-1020-144847`保留，5317/PID15568已核实后停止并确认无监听；主线5200未动。未改游戏源码、正式素材或老板原存档，未build/提交/推送。
+
+### 2026-10-20 按老板十三张标准新设计 / Friday WF-move-standard-50-1020
+
+- 完成未提交、编辑释放：`docs/cards/MOVE-STANDARD-50-2026-10-20.md`、卡牌入口及三份自有旧稿的否决标记。新稿独立编号 01—50，武术 17、法术 23、装备 10；旧候选均不作为后续设计参考。
+- 对照现行全书 281 张卡及老板十三张标准，数量、编号、重名、显式设计边界、26 个相对链接、空白检查及 `npm run docs:check` 通过。仅文档，未实装、数值待平衡；来源与逐卡记录见 [review.json](evidence/2026-10-20-move-standard-50/review.json)。
+
+### 2026-10-20 验证工具可靠性 / Friday WF-validation-tools-1020
+
+完成未提交、编辑释放。`tests/workflow-doctor.test.js`直接构造依赖缺失/链接场景，修复目录未实际删除造成的两项失败；`scripts/workflow-evidence.mjs`预检上限15→60秒，补全超时/启动失败/信号中止提示，`tests/workflow-tools.test.js`保留失败和full防降级契约，工作流说明及路线图同步。5文件65项通过，最终提示调整后2文件28项补验通过；原隔离副本full计划与原门一致，16秒人工延迟计划通过，语法/定向lint/diff检查通过。证据见[验收记录](evidence/2026-10-20-WF-validation-tools-1020/REPORT.md)。无游戏行为变更、全量/build/实页或服务操作，未提交/推送；原副本与临时夹具保留本地。
+
+### 2026-10-20 战后领奖与背包返回 / Friday WF-battle-reward-flow-1020
+
+两项修复完成未提交、编辑释放：`game/src/run/chests.js`保存失败保留领奖并可重试；`game/src/hub/game.bag.js`执行卡牌操作前收完旧大图，避免腾位后关闭背包失效。四份相关回归、现有隔离入口、两处资源消费者指纹、`docs/save-format.md`与路线图同步，自有证据在[批次记录](evidence/2026-10-20-WF-battle-reward-flow-1020/REPORT.md)。7文件143项相关回归通过，资源节点夹具修正后补验通过，当前1280×720内置隔离实页通过；独立副本语法510/类型/lint/生产构建及预算通过。首次全量10失败保留，原工作区补验仍有未改动workflow-doctor两项失败，不宣称项目级全量通过。副本`C:/Users/太平/AppData/Local/Temp/sdt-reward-flow-1020-01a157fe/project`及产物留本地，无服务；主线5200/PID492未重启。未覆盖玩家档位，未提交/推送/打包EXE。
+
+### 2026-10-20 无贝斯定稿扩图接入 / Friday WF-wu-bass-final-1020
+
+完成未提交、编辑释放。老板授权扩图后替换首页，内置imagegen以最新颊颌修正版为输入扩至1672×941，补全琴头和房间两侧；替换`game/assets/reconstruction/wallpaper-wu-bass-1020.webp`（359894字节），仅更新对应清单条及`game/css/title-p0.css`贝斯缓存final-face-1020。前运行图和扩图原PNG保留根`.tmp/imagegen/wu-bass-polish-1020/`，来源/提示词/哈希/验证见`docs/evidence/2026-10-20-wu-bass-polish/final-*`。目标资产检查通过；当前Codex内置窗口首页4/6加载新缓存URL、对应图层opacity1，实看显示正常、页面error为空，截图final-home.png。全局95项既有资产问题未处理，未全量/build/提交，无新增服务。
+
+### 2026-10-20 默认发束画法融合及脸部候选 / Friday WF-hair-style-1020
+
+完成未提交、编辑释放。`docs/production/art/ART-STYLE-V1.md`头发中英文段已融入老板粉发贝斯参考的连续大束、成片明暗和少量分束线；其他材质画法继续沿用。内置imagegen完成无贝斯候选头发、现行人设脸部、外部图倒躺透视和下巴圆化修订，最新候选根`.tmp/imagegen/wu-bass-polish-1020/chin-rounded.png`，已实看展示，认可待老板反馈。来源/完整词/边界见`docs/evidence/2026-10-20-wu-bass-polish/hair-study.md`及`face-notes.md`；定向diff检查通过。未替换正式首页，未修改个人技能/NAI共享配方，未测试/build/提交。
+
+### 2026-10-20 下一轮完成标准 / Friday WF-next-cycle-criteria-1020
+
+完成未提交、编辑释放。仅更新`docs/production/management/NEXT-CYCLE-TECH-PLAN.md`与`docs/roadmap.md`：确定下一轮以普通战斗结束、领奖、背包整理、返回地图为样本，写明六项完成条件、相关验收路径及结束条件。沿用10-19老板确认的整局验收；研究所第二地图及未定玩法继续单列，实施与实页结果尚未产生。文档守卫通过、findings为空，自有diff检查通过；报告见[本轮文档检查](evidence/2026-10-20-next-cycle-criteria/docs-check.json)。本轮为标准制定，无游戏源码改动、build、浏览器操作或提交，无新增服务。
 
 ### 2026-10-20 本地完成改动提交 / Friday WF-local-submit-1020
 
@@ -884,6 +992,7 @@ Friday（Codex 地图天气 01a13c12），2026-10-15：game/css/expedition-map.c
 
 | 会话/来源 | 属地 | 事项 | 状态 |
 |---|---|---|---|
+| Friday（框架剩余目标收口 WF-framework-closeout-1020） | Base同槽写锁及UI异步回执；战斗实例runtime/领域工厂和浏览器默认装配；内置卡执行/schema/纯语义；公共容器容量/过滤；架构守卫、素材指纹、现行说明、定向/集成扫描/最终全量/当前窗口实页；证据evidence/2026-10-20-WF-framework-closeout-1020/；实页副本.tmp/framework-closeout-1020/preview，5339/PID624/session95981已停，端口空闲 | 四项目标完成；证据[框架收口](evidence/2026-10-20-WF-framework-closeout-1020/README.md) | 2026-10-21 完成未提交、编辑释放；748文件7654pass/0fail/38skip，3760输入稳定；静态与当前窗口实页通过；5339/PID624已停，端口空闲；未build/提交/推送，远端CI未核实 |
 | Friday（第二批二十张装备 WF-equipment-b20-1019） | docs/cards/EQUIPMENT-CANDIDATES-20-B-2026-10-19.md；上一批仅状态；docs/evidence/2026-10-19-equipment-b20/ | 新增21至40，12战斗8探索；一件一项定位及一句卡文；人工用途对照、名称去重、字段与链接检查及docs:check通过 | 2026-10-19 完成未提交，编辑释放；仅文档，未改运行卡库；数值待实战验证 |
 | Friday（装备二十件文档 WF-equipment-draft20-1019） | docs/cards/EQUIPMENT-DRAFT-20-2026-10-19.md；docs/evidence/2026-10-19-equipment-draft20/ | 二十件装备候选文档完成；20条连续、品质分布、卡名去重、字段及链接核对通过，docs:check通过；仅文档 | 2026-10-19 完成未提交，编辑释放；数值未经实战验证；未修改游戏代码或卡库 |
 | Friday（页面切换统一 WF-page-motion-1019） | game/src/ui/{interface-motion,surface-motion,navigation-motion,motion-presets,page-motion-profiles,page-visual-ready,overlay}.js；game/src/run/game.run.scenes.js；game/css/{interface-motion,page-transitions,page-visual-ready,expedition-transitions}.css；tests/{surface-motion,page-surface-lifetime}.test.js；VISUAL-BIBLE与docs/evidence/2026-10-19-unified-page-motion/ | 实现完成未提交、编辑释放，待老板验收。取消验证前150项定向回归、目标ESLint与语法通过；实页核对基地方向、背包开合、真实战斗入口。老板要求不再验证后停止测试/浏览器；战斗返回链及全页手感未完成验收。自建5321/PID27384/exec64615已停并释放，既有5200保留；事件01a14ddd按老板确认销账。证据见自有README，无build/提交/推送 | 2026-10-19 |

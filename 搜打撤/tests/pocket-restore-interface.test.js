@@ -59,8 +59,8 @@ afterEach(() => {
 
 describe('消耗卡复原公共选择界面', () => {
   it('修鞋铺入口只提供场景句，次数范围与操作由公共界面说明一次', () => {
-    const flow = readFileSync('game/src/run/game.run.flow.js', 'utf8');
-    const sub = flow.match(/title: '修鞋铺 · 修整行装',\s*sub: '([^']+)'/)[1];
+    const events = readFileSync('game/src/run/game.run.events.js', 'utf8');
+    const sub = events.match(/title: '修鞋铺 · 修整行装',\s*sub: '([^']+)'/)[1];
     expect(sub).toBe('老师傅替你修整行装。');
     openPocketRestore(1, vi.fn(), { title:'修鞋铺 · 修整行装', sub });
     expect(remaining()).toContain('还可复原 1 张（最多 1 张）');

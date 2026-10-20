@@ -14,6 +14,8 @@ import { createHandHitController } from './battle.hand-hit.js';
 import { handDisplayLayout as referenceHandLayout } from './battle.hand-layout.js';
 import { calculateEnemyIntent } from '../core/battle.enemy-intent.js';
 import { intentViewModel } from './battle.intent.view.js';
+import { equipmentInfoHTML } from '../../ui/equipment-info.js';
+import { playerCombatStatsHTML } from '../../ui/battle-hud-info.js';
 import { isAreaEffect } from '../effects/battle.target-rules.js';
 import { storeGet, storeSet } from '../../core/storage.js';
 /* W5-03（2026-09-27 R2）：首次意图图例样式（battle.css 冻结 → head 注入，W2-01 同款）。 */
@@ -278,11 +280,12 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     const hits = ctx.playedMovesThisTurn || 0;
     const amount = dynamic ? +(dynamic.amount ?? g.card.dmg ?? 0) : 0;
     let ruleHint = dynamic ? `当前 ${hits} 段 × ${amount} 基础伤害，共 ${hits * amount}；目标防御与加成另计。` : cardRuleHint(g.card, mode);
+    const infN = infuseOf(g.card);
     const tip = infusingNow
       ? (isSelf ? '正在注能的卡牌' : blocked || `点击选择注能材料 · 已选 ${pickedN}/${g.uids.length} 张 · 剩余 ${g.uids.length - pickedN} 张${pickedN && (pickedN === g.uids.length || infusing.picked.length >= infusing.need) ? ' · 再点取消1张' : infusing.picked.length >= infusing.need ? ' · 材料已选满' : ''}`)
       : blockedReason
         ? `无法打出：${blockedReason}`
-        : infuseOf(g.card) > 0
+        : infN > 0
         ? `费用 ${effCost}${costTip} · ${requiresInfusion(g.card) ? '必须先注能；点「注能」按钮选材料' : '点「注能」按钮选材料；也可拖拽使用'}；鼠标按卡面拿起，Esc 取消；聚焦卡面按 Enter 选材料`
         : side === 'enemy'
         ? `费用 ${effCost}${costTip} · 点击选择敌人；也可直接拖到${isAreaEffect(g.card) ? '战场空地或敌人身上' : '敌人身上'}使用`
@@ -296,7 +299,6 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     const baseCost = (g.card._baseCost != null) ? g.card._baseCost : g.card.cost;
     const costDiff = effCost !== baseCost;
     // 注能角标直接进入选材料，不消耗卡牌。
-    const infN = infuseOf(g.card);
     const infChip = (!infusingNow && !blocked && infN > 0)
       ? `<button class="bt-infchip" data-act="btInfuseStart" data-uid="${uid}"
           title="开始注能(${infN})，点击手牌选择材料">[[icon:crystal]] 注能${infN}</button>`
@@ -326,7 +328,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       })
       + cnt + infChip + curseChip;
     const handState = infusingNow ? 'infusing' : targeted || clickSelectedUid === uid ? 'selected' : blockedReason ? 'blocked' : 'ready';
-    return { g, uid, side, cls, tip, inner, ruleHint, handState, blockedReason, pickedN, infusingNow };
+    return { g, uid, side, cls, tip, inner, ruleHint, handState, blockedReason, pickedN, infusingNow, effCost };
   }
   // 挂载：把手牌常驻层接回刚重建的舞台（占位节点 → 常驻节点）。
   // 战斗实例令牌变了 = 上一场战斗已收尾/新战斗开打：清掉旧槽位再开新局。
@@ -430,7 +432,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
       setHandAttribute(rec.card, 'data-hand-state', st.handState);
       setHandAttribute(rec.card, 'data-block-reason', st.blockedReason || null);
       rec.__tip = st.tip;
-      rec.__name = `${g.card.name} · ${effCostOf(g.card, st.uid)} 费`;
+      rec.__name = `${g.card.name} · ${st.effCost} 费`;
       setHandAttribute(rec.card, 'role', 'group');
       setHandAttribute(rec.card, 'tabindex', -1);
       setHandAttribute(rec.card, 'aria-label', `${rec.__name}。${st.ruleHint ? st.ruleHint + ' ' : ''}${st.tip || '按回车或空格使用'}`);
@@ -484,8 +486,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     const emptyHint = handLayer.querySelector('.ov-empty');
     if (!ordered.length) {
       const msg = snapshot.hand.length ? '本栏已空；切换其他栏继续使用手牌。' : extra.mode === 'boss'
-        ? ((snapshot.drawPile.length + snapshot.discard.length) ? '手牌打空了……下回合开始会再抽 1 张' : '牌库与弃牌堆都空了——只能结束回合硬抗，或撤退')
-        : '没有能出的卡了……（打出过的卡本场不可再用）';
+        ? (snapshot.drawPile.length ? '手牌已空，下回合开始从牌库抽牌。' : '手牌与牌库已空；消耗牌堆仅由卡牌效果取回。')
+        : '手牌已空；普通战不自动抽牌，消耗牌堆仅由卡牌效果取回。';
       const hint = emptyHint || handLayer.appendChild(Object.assign(document.createElement('p'), { className: 'ov-empty' }));
       if (hint.dataset.k !== msg) { hint.dataset.k = msg; hint.textContent = msg; }
     } else if (emptyHint) emptyHint.remove();
@@ -715,15 +717,8 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     selfParts.armor.hidden = !(pdef.armor > 0);
     selfParts.armor.textContent = `甲 ${pdef.armor || 0}`;
     selfParts.armor.setAttribute('aria-label', `护甲 ${pdef.armor || 0}`);
-    // 攻击力/法伤含加成显示（2026-09-09 留言 #2：人物图标下要能看到攻/法伤的变化）
-    const atkBuff = pstat.status.atkUp || 0, spBuff = pstat.status.spellUp || 0;
-    const atkShow = (player.atk || 0) + atkBuff;
-    const atkTag = atkBuff ? `<span title="含攻击强化 +${atkBuff}">（含+${atkBuff}）</span>` : '';
-    const spShow = (player.spellPower || 0) + spBuff;
-    const spTag = spShow > 0
-      ? `<span class="sts-stat">[[icon:crystal]] 法伤 ${spShow}${spBuff ? `<span title="含法术强化 +${spBuff}">（含+${spBuff}）</span>` : ''}</span>` : '';
-    setSection(selfParts.stats, sig, 'stats',
-      `<span class="sts-stat">[[icon:swords]] 攻 ${atkShow}${atkTag}</span>${spTag}${pdef.shield ? '<span class="sts-stat">[[icon:shield]] 盾 ' + pdef.shield + '</span>' : ''}${pdef.armor ? '<span class="sts-stat">[[icon:plate]] 甲 ' + pdef.armor + '</span>' : ''}${pdef.guard ? '<span class="sts-stat">格挡中</span>' : ''}`);
+    // 常驻显示合计，强化来源可聚焦查看；护甲已在生命栏旁显示。
+    setSection(selfParts.stats, sig, 'stats', playerCombatStatsHTML(player, pdef, pstat.status));
     setSection(selfParts.chips, sig, 'chips', curseChips(pstat.status) + (snapshot.playerEffects || []).map(effect =>
       `<span class="bt-buff" tabindex="0" data-player-effect="${escAttr(effect.key)}" data-term="${escAttr(effect.key)}" data-ui-tip data-ui-tip-title="${escAttr(effect.name)}" data-ui-tip-text="${escAttr(effect.description)}" data-ui-tip-note="${escAttr(effect.duration)}">[[icon:${escAttr(effect.icon)}]] ${esc(effect.name)} ${esc(effect.duration)}</span>`).join(' '));
     // 状态挂件（P2）：玩家自己被冰冻时同样点亮常驻状态光
@@ -733,10 +728,7 @@ import { updateHandAcquisitionFeedback } from './battle.effect-feedback.js';
     setTargetable(selfUnit, !!((pendingCard && targetSide(pendingCard.card) === 'self') || (clickCard && targetSide(clickCard.card) === 'self')), `${playerName}，自己，按 Enter 确认目标`);
     if (!selfUnit.classList.contains('can-target')) selfUnit.setAttribute('aria-label', `${playerName}，自己`);
     // 已穿戴装备（2026-09-09 老板 #9）：名称 + 说明 tooltip；带限定技能的可点击发动
-    const equipsHTML = (equipped || []).map(e => e.skill
-      ? `<button class="sts-equip has-skill${e.used ? ' used' : ''}" data-act="btEquipSkill" data-uid="${escAttr(e.uid)}" ${snapshot.busy || e.used ? 'disabled' : ''} aria-label="${escAttr(e.name)}主动技能：${escAttr(e.skill)}${e.used ? '，本场已使用' : ''}"
-          title="${escAttr(`【${e.name}】${e.desc}${e.used ? '（主动技能本场已用过）' : '——点击发动主动技能'}`)}">[[icon:tools]] ${esc(e.name)}${e.used ? '' : ' [[icon:bolt]]'}</button>`
-      : `<span class="sts-equip" title="${escAttr(`【${e.name}】${e.desc}`)}">[[icon:tools]] ${esc(e.name)}</span>`).join('');
+    const equipsHTML = (equipped || []).map(e => equipmentInfoHTML(e, snapshot.busy)).join('');
     setSection(selfParts.equips, sig, 'equips', equipsHTML);
     selfParts.equips.style.display = equipsHTML ? '' : 'none';
     sig.init = true;

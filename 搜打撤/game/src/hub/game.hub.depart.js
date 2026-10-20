@@ -47,11 +47,12 @@ function renderDepartureCard(card) {
   // 带入背包的卡牌才能在战斗中使用；「初始攻击」固定携带、不入库也不会出现在这里。
   // 共享选择引用归纯状态模块；本页仍负责规范化和完整整备生命周期。
   let deployPickFresh = false;   // 整备入口刚注入过预设选择（随后打开整备页时保留）
-  function setDeployPick(v, { characterId = null, petId = null } = {}) {
+  async function setDeployPick(v, { characterId = null, petId = null } = {}, isCurrent = () => true) {
     const character = characterId ? characterFor(characterId) : null;
     if (characterId && !character) return false;
-    if (petId && !SDT.Base.setPet(petId)) return false;
-    departureGeneration++;
+    const base = SDT.Base, slot = base.slot, generation = ++departureGeneration;
+    if (petId && !await base.setPet(petId)) return false;
+    if (SDT.Base !== base || base.slot !== slot || generation !== departureGeneration || !isCurrent()) return false;
     replaceDeployPick(v == null ? null : Object.fromEntries(Object.entries(v).map(([key, count]) => {
       const stack = findDepartureStack(SDT.Base.data.stash, key);
       return [stack ? departureStackKey(stack) : key, count];
@@ -111,7 +112,7 @@ function renderDepartureCard(card) {
         renderDepartPrep();
         enterDepartureCut(document.getElementById('depMain'));
       },
-      beforeConfirm: () => {
+      beforeConfirm: async () => {
         const stage = document.getElementById('depMain');
         if (!current() || !deployStart || !stage || UI.el.overlay.hidden || UI.el.overlay.classList.contains('closing')) return false;
         if (Object.entries(deployPick || {}).some(([key, count]) => count > 0 && (!findDepartureStack(SDT.Base.data.stash, key) || findDepartureStack(SDT.Base.data.stash, key).count < count))) {
@@ -122,14 +123,21 @@ function renderDepartureCard(card) {
         }
         const mode = SDT.Base.data.selMode;
         const picks = { ...(deployPick || {}) };
-        const started = newRun(mode, picks, { skipClassChoice: true });
-        if (started !== false && !SDT.Base.data.ammoTaught) SDT.Base.markAmmoTaught?.();
+        const started = await newRun(mode, picks, { skipClassChoice: true,
+          isCurrent: () => current() && stage.isConnected && !UI.el.overlay.hidden && !UI.el.overlay.classList.contains('closing'),
+        });
+        if (!current() || !stage.isConnected) return false;
+        if (started !== false && !SDT.Base.data.ammoTaught) {
+          const taught = await SDT.Base.markAmmoTaught?.();
+          if (!current() || !stage.isConnected) return false;
+          if (taught === false) UI.log('教学记录未保存，远征已保留；下次进入时可重试。', 'warn');
+        }
         if (started === false) {
           deploySubmitting = false;
           document.getElementById('depMain')?.classList.remove('dep-tearing');
           const button = document.querySelector('#depMain [data-act="confirmDeploy"]');
           if (button) button.disabled = false;
-          deployHint = '[[icon:cross]] 基地出征整备未保存，请重试；当前没有开始新局。';
+          deployHint = '[[icon:cross]] 出征存档尚未完成，携带选择已保留；请重试或返回选档继续恢复。';
           renderDepartPrep();
           return false;
         }
@@ -339,8 +347,16 @@ function renderDepartureCard(card) {
     };
     act('pickAdd', (d) => addPick(d.stackKey || d.name));
     // 需求 #4：出发时携带的宠物（即时保存，出发后生效）
-    act('depPet', (d) => {
-      if (!SDT.Base.setPet(d.id)) return;
+    let petSelecting = false;
+    act('depPet', async (d) => {
+      if (petSelecting) return false;
+      petSelecting = true;
+      let selected;
+      try { selected = await B.setPet(d.id); }
+      catch { selected = false; }
+      finally { petSelecting = false; }
+      if (!current()) return false;
+      if (!selected) { UI.log('伙伴选择未保存，请重试。', 'warn'); return false; }
       Sfx.tick();
       const pet = SDT.Base.petById(d.id);
       UI.log(`[[icon:paw]] 本局携带宠物<b>「${esc(pet.name)}」</b>：${esc(pet.desc)}`, 'ok');

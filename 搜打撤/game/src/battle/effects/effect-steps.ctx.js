@@ -72,17 +72,20 @@ const FRESH_RESULT = (did) => ({ did, drawn: false, healed: false, armored: fals
 
 /** 对单个目标结算伤害并冒伤害数字（原 effect-steps.js 117-124，逐字搬迁）。 */
 export function makeHitFoe(deps) {
-  const {combat, pushFloat, foeIndexOf, sweepDead, getFrozenTargetBonus} = deps;
+  const {combat, pushFloat, foeIndexOf, sweepDead, getFrozenTargetBonus, dealEffectDamage} = deps;
     const hitFoe = (ctx, t, n, type, caster = {}, segmentOrder) => {
       const hpBefore = t.hp;
       const shieldBefore = t.defense?.shield || 0;
-      const bonus = typeof getFrozenTargetBonus === 'function' ? getFrozenTargetBonus(t) : 0;
-      const bleedBonus = type === 'attack' && (ctx.card?.id === 'tt3-fly-arrowhawk' || /流血伤害翻倍/.test(String(ctx.card?.desc || '')))
+      const source = caster.source === 'enemy' ? 'enemy' : 'player';
+      const bonus = source === 'player' && typeof getFrozenTargetBonus === 'function' ? getFrozenTargetBonus(t) : 0;
+      const bleedBonus = source === 'player' && type === 'attack' && (ctx.card?.id === 'tt3-fly-arrowhawk' || /流血伤害翻倍/.test(String(ctx.card?.desc || '')))
         ? Math.max(0, +t.status?.bleed || 0) : 0;
-      const r = combat.dealDamage(caster, t, n + bonus + bleedBonus, type);
+      const r = typeof dealEffectDamage === 'function'
+        ? dealEffectDamage({ caster, target: t, amount: n + bonus + bleedBonus, type, card: ctx.card, source })
+        : combat.dealDamage(caster, t, n + bonus + bleedBonus, type);
       const shieldBreak = shieldBefore > 0 && !(t.defense?.shield || 0);
       if (r.dealt > 0 || shieldBreak) pushFloat({ unit: foeIndexOf ? foeIndexOf(t) : 0,
-        text: r.dealt > 0 ? '-' + r.dealt : '护盾破碎', cls: r.dealt > 0 ? 'dmg' : 'block', type,
+        text: r.dealt > 0 ? '-' + r.dealt + (r.hearts ? '♥' : '') : '护盾破碎', cls: r.dealt > 0 ? 'dmg' : 'block', type,
         label: segmentOrder ? `第 ${segmentOrder} 段` : '', sequence: segmentOrder,
         hpBefore, hpAfter: t.hp, maxHp: t.maxHp,
         shieldBreak });   // 文本结算多段也逐段标号

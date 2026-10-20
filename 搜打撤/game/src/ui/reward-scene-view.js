@@ -5,8 +5,8 @@ export function rewardExitHTML(act, label = '继续探索', extraClass = '') {
 }
 
 // Cards contain their own names and rules. This frame adds only acquisition actions.
-export function rewardSceneHTML({ title, source = '', countLabel = '', rule = '', cards, actions, footer = '', coins = '', warning = '', details = '', className = 'reward-v14', count = 0 }) {
-  return `<section class="${escAttr(className)} reward-replica${className.includes('reward-standalone-picker') ? ' ui-design-system' : ''}" data-reward-count="${count}">
+export function rewardSceneHTML({ title, source = '', countLabel = '', rule = '', cards, actions, footer = '', coins = '', warning = '', details = '', className = 'reward-v14', count = 0, compact = false }) {
+  return `<section class="${escAttr(className)}${compact ? ' reward-compact' : ''} reward-replica${className.includes('reward-standalone-picker') ? ' ui-design-system' : ''}" data-reward-count="${count}">
     <header class="reward-head"><div>${source ? `<span class="reward-source">${esc(source)}</span>` : ''}<h3>${esc(title)}</h3>${countLabel ? `<p class="reward-count">${esc(countLabel)}</p>` : ''}${rule ? `<p class="reward-rule">${esc(rule)}</p>` : ''}</div></header>
     <div class="reward-main"><div class="reward-stage loot-scroll"><div class="reward-objects">${coins}${cards}</div>${warning}${details}</div></div>
     ${footer || actions ? `<footer class="reward-foot"><div class="reward-footer-info">${footer}</div><aside class="loot-actions" aria-label="奖励操作">${actions}</aside></footer>` : ''}
@@ -97,11 +97,12 @@ export function restoreRewardActionFocus(host, focus) {
 }
 
 // Both the card face and its zoom use this exact action; no business callbacks live here.
-export function rewardClaimHTML({ index, state = 'pending', choice = false, fits = true, disabled = false, zoom = false, actions = {} }) {
+export function rewardClaimHTML({ index, cardName = '卡牌', state = 'pending', choice = false, fits = true, disabled = false, zoom = false, actions = {} }) {
   if (state !== 'pending') return `<span class="reward-unit-state">${state === 'received' ? choice ? '已选择' : '已收下' : '已放弃'}</span>`;
   const action = fits ? choice ? actions.pick || 'chestPick' : actions.take || 'chestTake1' : actions.organize || 'chestMakeRoom';
   const label = fits ? choice ? '选择这张' : '收下' : '整理背包';
-  return `${zoom && choice ? '<p class="reward-choice-warning">其余选项将放弃</p>' : ''}<button type="button" class="${zoom ? 'ov-btn ok' : 'reward-claim'}" data-act="${escAttr(action)}" data-i="${escAttr(index)}" data-cancel="false"${disabled ? ' disabled' : ''}>${label}</button>`;
+  const accessibleLabel = `${label}：${cardName || '卡牌'}`;
+  return `${zoom && choice ? '<p class="reward-choice-warning">其余选项将放弃</p>' : ''}<button type="button" class="${zoom ? 'ov-btn ok' : 'reward-claim'}" data-act="${escAttr(action)}" data-i="${escAttr(index)}" data-cancel="false" aria-label="${escAttr(accessibleLabel)}"${disabled ? ' disabled' : ''}>${label}</button>`;
 }
 
 // Cancel returns to the owning reward surface; it never means forfeiting rewards.

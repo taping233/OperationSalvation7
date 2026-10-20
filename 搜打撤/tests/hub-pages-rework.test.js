@@ -40,7 +40,7 @@ beforeEach(() => {
     zoom.addEventListener('click', event => {
       if (event.target.classList.contains('cz-backdrop')) { zoom.remove(); options.returnFocus?.focus(); return; }
       const button = event.target.closest('.cz-foot [data-act]');
-      if (button && !button.disabled) ui._acts[button.dataset.act]?.(button.dataset);
+      if (button && !button.disabled) ui.lastAction = ui._acts[button.dataset.act]?.(button.dataset);
     });
     document.body.append(zoom);
   }) };
@@ -71,7 +71,7 @@ describe('仓库双排浏览与原特写事务边界', () => {
   it('无匹配可以清除筛选恢复全部卡牌，浏览不改变库存', async () => {
     await mount(); const before = JSON.stringify(base.data); search('没有');
     expect(document.querySelector('.warehouse-no-results').hidden).toBe(false);
-    ui._acts.warehouseReset();
+    (await ui._acts.warehouseReset());
     expect(document.querySelector('[data-warehouse-filter="query"]').value).toBe('');
     expect(document.querySelector('.warehouse-no-results').hidden).toBe(true);
     expect([...document.querySelectorAll('.stash-cell')].filter(card => !card.hidden)).toHaveLength(2);
@@ -87,7 +87,7 @@ describe('仓库双排浏览与原特写事务边界', () => {
     search('不存在');
     expect(document.querySelector('.warehouse-no-results h3').textContent).toBe('没有匹配的卡牌');
     expect(document.querySelector('.warehouse-no-results').textContent).not.toContain('撤离');
-    ui._acts.warehouseReset();
+    (await ui._acts.warehouseReset());
     expect(document.querySelector('.warehouse-purpose').hidden).toBe(false);
     expect(document.querySelector('[data-name="归档甲"]').hidden).toBe(false);
     expect(document.querySelector('[data-name="甲"]').hidden).toBe(true);
@@ -116,21 +116,21 @@ describe('仓库双排浏览与原特写事务边界', () => {
     const { pages } = await mount(); open('甲');
     expect(footer('stashCollectToggle')).not.toBeNull();
     pages.openStashCardView(1, { from: document.querySelector('[data-name="乙"]') });
-    footer('stashCollectToggle').click();
+    (await clickAction(footer('stashCollectToggle')));
     expect(base.collectToggle).toHaveBeenCalledExactlyOnceWith(rare);
     expect(base.sellStashCards).not.toHaveBeenCalled();
     expect(base.data.stash[0].count).toBe(2);
   });
 
   it('普通卡保护保留原卡堆，不发经验；取消保护保留图鉴收录', async () => {
-    await mount(); open('甲'); footer('stashCollectToggle').click();
+    await mount(); open('甲'); (await clickAction(footer('stashCollectToggle')));
     expect(base.collectToggle).toHaveBeenCalledWith(normal);
     expect(base.data.stash[0].count).toBe(2);
     expect(window.SDT.Meta.onCollect).not.toHaveBeenCalled();
     expect(document.querySelector('#cardZoom .inspect-collection-state').textContent).toBe('图鉴已收录 · 已保护');
     expect(footer('stashCollectToggle').textContent).toBe('取消保护');
     expect(base.sellStashCards).not.toHaveBeenCalled();
-    footer('stashCollectToggle').click();
+    (await clickAction(footer('stashCollectToggle')));
     expect(document.querySelector('#cardZoom .inspect-collection-state').textContent).toBe('图鉴已收录');
     expect(footer('stashCollectToggle').textContent).toBe('保护卡牌');
     expect(base.data.stash[0].count).toBe(2);
@@ -139,7 +139,7 @@ describe('仓库双排浏览与原特写事务边界', () => {
   it('归档培养先确认；保存未完成时重复点击只能提交一次', async () => {
     base.data.stash = [{ card: { ...normal, cls: '侠客', rarity: '职业' }, count: 2 }];
     let finish; ports.convert.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
-    await mount(); open('甲'); footer('stashCollectOne').click();
+    await mount(); open('甲'); (await clickAction(footer('stashCollectOne')));
     expect(ports.convert).not.toHaveBeenCalled();
     footer('stashCollectOne').click(); footer('stashCollectOne').click();
     expect([...document.querySelectorAll('#cardZoom .cz-foot button')].every(button => button.disabled)).toBe(true);
@@ -153,11 +153,11 @@ describe('仓库双排浏览与原特写事务边界', () => {
   it('归档保存失败提示原因、保留库存并允许再次确认重试', async () => {
     base.data.stash = [{ card: { ...normal, cls: '侠客', rarity: '职业' }, count: 2 }];
     ports.convert.mockResolvedValue({ ok: false, message: '写盘失败' });
-    await mount(); open('甲'); footer('stashCollectOne').click(); footer('stashCollectOne').click(); await tick();
+    await mount(); open('甲'); (await clickAction(footer('stashCollectOne'))); (await clickAction(footer('stashCollectOne'))); await tick();
     expect(ui.log).toHaveBeenCalledWith('写盘失败', 'warn');
     expect(base.data.stash[0].count).toBe(2);
     expect(ports.refresh).not.toHaveBeenCalled();
-    footer('stashCollectOne').click(); footer('stashCollectOne').click(); await tick();
+    (await clickAction(footer('stashCollectOne'))); (await clickAction(footer('stashCollectOne'))); await tick();
     expect(ports.convert).toHaveBeenCalledTimes(2);
     expect(base.data.stash[0].count).toBe(2);
   });
@@ -165,7 +165,7 @@ describe('仓库双排浏览与原特写事务边界', () => {
   it('归档响应到达前换档，不重绘新档位、改变新搜索或播报旧档成功', async () => {
     base.data.stash = [{ card: { ...normal, cls: '侠客', rarity: '职业' }, count: 2 }];
     let finish; ports.convert.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
-    await mount(); open('甲'); footer('stashCollectOne').click(); footer('stashCollectOne').click();
+    await mount(); open('甲'); (await clickAction(footer('stashCollectOne'))); footer('stashCollectOne').click();
     base.slot = 2; base.data.stash = [{ card: rare, count: 1 }]; await mount();
     expect(document.querySelector('[data-warehouse-filter="query"]').value).toBe('');
     search('乙'); ui.log.mockClear(); ports.refresh.mockClear();
@@ -180,7 +180,7 @@ describe('仓库双排浏览与原特写事务边界', () => {
   it('归档保存抛错仍给失败反馈、释放禁用态且不改变库存', async () => {
     base.data.stash = [{ card: { ...normal, cls: '侠客', rarity: '职业' }, count: 2 }];
     ports.convert.mockRejectedValue(new Error('disk offline'));
-    await mount(); open('甲'); footer('stashCollectOne').click(); footer('stashCollectOne').click(); await tick();
+    await mount(); open('甲'); (await clickAction(footer('stashCollectOne'))); (await clickAction(footer('stashCollectOne'))); await tick();
     expect(ui.log).toHaveBeenCalledWith('归档未保存，请重试', 'warn');
     expect(footer('stashCollectOne').disabled).toBe(false);
     expect(base.data.stash[0].count).toBe(2);
@@ -215,3 +215,5 @@ it('同一仓库分页或资源更新保留基地壳与资源栏，跳转不同�
   expect(document.getElementById('hubMain').dataset.page).toBe('shop');
   expect(ui.showOverlay).toHaveBeenCalledTimes(2);
 });
+
+function clickAction(element) { ui.lastAction = undefined; element.click(); return ui.lastAction; }

@@ -9,6 +9,8 @@ import { toProjectPath } from './gate-plan.mjs';
 
 const WATCHED = ['game/src', 'game/data', 'game/css', 'game/tools', 'tests', 'scripts', 'narrative'];
 const STATE_FILES = ['docs/PARALLEL-REGISTRY.md', 'docs/PENDING.md', 'docs/STATUS.md'];
+// Cold filesystem scans can exceed 15s; this bounds planning only, never the checks.
+const PLAN_TIMEOUT_MS = 60_000;
 
 function groupForFile(file) {
   const normalized = file.replaceAll('\\', '/');
@@ -163,7 +165,7 @@ export function checkArguments({ tests, paths, full, suite }) {
 }
 
 /** Read-only selection before fingerprints, evidence files or execution. */
-export function previewCheck(root, options) {
+export function previewCheck(root, options, { planProbe = spawnSync } = {}) {
   checkArguments(options);
   const normalized = { ...options };
   for (const key of ['tests', 'paths']) if (options[key]) {
@@ -180,9 +182,16 @@ export function previewCheck(root, options) {
   if (normalized.tests) selection = { mode: 'targeted', paths: [], tests: normalized.tests, reasons: ['显式测试列表'] };
   else if (normalized.suite) selection = { mode: 'suite', paths: [], tests: [], reasons: ['显式完整 Vitest 套件；不包含静态门'] };
   else {
-    const result = spawnSync(process.execPath, [...args.filter(arg => arg !== '--run'), '--plan', '--json'], { cwd: root, encoding: 'utf8', timeout: 15000 });
-    if (result.error) throw result.error;
-    if (result.status !== 0) throw new Error('验证预检失败：' + (result.stderr || result.stdout || `exit ${result.status}`).trim());
+    const result = planProbe(process.execPath, [...args.filter(arg => arg !== '--run'), '--plan', '--json'], {
+      cwd: root, encoding: 'utf8', timeout: PLAN_TIMEOUT_MS, windowsHide: true,
+    });
+    if (result.error) {
+      const message = result.error.code === 'ETIMEDOUT'
+        ? `验证计划生成超时（${PLAN_TIMEOUT_MS / 1000} 秒）；未执行检查。请用原范围参数直接运行 scripts/acceptance-gate.mjs <原范围参数> --plan --json 定位耗时。`
+        : '验证预检无法启动：' + result.error.message;
+      throw Object.assign(new Error(message, { cause: result.error }), { code: result.error.code });
+    }
+    if (result.status !== 0) throw new Error('验证预检失败：' + (result.stderr || result.stdout || `exit ${result.status}, signal ${result.signal ?? 'none'}`).trim());
     selection = JSON.parse(result.stdout);
     if (!['quick', 'full', 'skip'].includes(selection.mode) || !Array.isArray(selection.tests)) throw new Error('验证入口返回无效选择计划');
     if (normalized.full && selection.mode !== 'full') throw new Error('显式完整门预检未返回 full，拒绝降级执行');

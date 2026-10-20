@@ -348,17 +348,16 @@ describe('M1 new semantics in real BattleSession', () => {
     const before = hand.length;
     await playCard(game, card, 'self');
     expect(hand.length).toBe(before - 1 + 2);   // 本牌离手后净增 2
-    // 普通战抽牌口径：改为获得初始攻击（与既有 draw 分支同款日志）
-    expect(game.logs.some(line => line.includes('获得 2 张【初始攻击】'))).toBe(true);
+    expect(game.logs.some(line => line.includes('抽了 2 张牌'))).toBe(true);
   });
 
-  it('draws until the hand reaches N cards in normal battles (grantSha fallback)', async () => {
+  it('draws until the hand reaches N cards from the normal battle pile', async () => {
     const card = { id: 'm1-until-live', name: '法力补给', cost: 0, type: '法术', desc: '抽牌，直到有 6 张手牌',
       ...R(SELF, [{ op: 'draw', untilHandN: 6 }]) };
     const game = await startGame([card, filler()], [foe('until')]);
     await playCard(game, card, 'self');
     expect(hand.length).toBe(6);
-    expect(game.logs.some(line => line.includes('获得 5 张【初始攻击】') && line.includes('补齐到 6 张手牌'))).toBe(true);
+    expect(game.logs.some(line => line.includes('抽了 5 张牌') && line.includes('直到手牌有 6 张'))).toBe(true);
   });
 
   it('consumes the whole hand before the draw resolves (golden-cicada order)', async () => {

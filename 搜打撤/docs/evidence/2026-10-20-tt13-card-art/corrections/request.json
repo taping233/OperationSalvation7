@@ -1,0 +1,87 @@
+{
+  "status": "preview-only-no-runtime-replacement",
+  "selections": [
+    {
+      "card_id": "tt13-spring",
+      "source": "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-3bf13ec2-883a-4e81-bbd8-ff052746177c.png",
+      "reason": "老板指定使用助手首轮修订的水桥版"
+    },
+    {
+      "card_id": "tt13-magazine",
+      "source": "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-c358c9e2-0141-4e7e-8e7a-fdc94e5e7fd0.png",
+      "reason": "老板指定使用助手首轮修订的无手弹夹版"
+    },
+    {
+      "card_id": "tt13-mercy",
+      "source": "C:/Users/太平/AppData/Local/Temp/codex-clipboard-86136ee5-2e08-4dc2-b199-351e7d8d9402.png",
+      "reason": "老板本轮最终指定收刀白花版，见career-nai45/mercy-selection.json"
+    }
+  ],
+  "items": [
+    {
+      "card_id": "tt13-guard",
+      "status": "candidate",
+      "prompt": "局部修正输入卡面《护身》的双手解剖，其余构图、蓝灰袖口、深色背景、中央金光、简洁二次元块面画法保留。两条手臂仍从左右伸入，在手腕附近交叉，双手自然展开成护身姿态；每只手只有四根并拢的长手指和一根位置正确的拇指，指根从同一掌骨长出，长度逐级合理，掌心、手背、腕关节朝向一致。用清楚的前后遮挡分开两只手，不让手指互相穿透，不画额外长指或掌下游离指。前侧手掌朝镜头、后侧手背朝镜头，手腕交叉点在中央暖光后方；只重画手指和必要掌部过渡，不加武器、人物脸或护甲新设计。手部用完整肤色色块、少量主阴影和简单关节线，避免写实皮纹、复杂碎面和精细反光。保持原横版，无字无框水印UI。",
+      "references": [
+        "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-ddddcd48-aef6-448a-a552-72c6fa08b70e.png"
+      ],
+      "output": "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-12f158bf-b57a-4059-a1c3-bda0c865351a.png"
+    },
+    {
+      "card_id": "tt13-snipe",
+      "status": "candidate",
+      "prompt": "局部编辑这张《狙杀》卡面：完全删除左下方握枪的手套、手指、手腕与手臂，用干净的原背景色面补齐；被手挡住的机匣、扳机护圈和枪托连接处补画为结构合理的枪械部件。除此以外保留原图枪的设计、横向位置、大小、镜头、枪口朝右、右侧火光、瞄准镜和垂下背带。画面只出现武器和开火意象，不出现任何人物或身体部位。沿输入画法：简洁二次元手绘块面，少数完整主色与阴影，金属反光概括，原冷蓝背景保持安静。不要重新设计枪、添加场景、密集刻线、写实质感或满屏碎笔。保持原横版，无文字边框水印UI。",
+      "references": [
+        "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-da72c49e-ace5-4fe3-9ad6-2e8a79c41c43.png"
+      ],
+      "output": "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-6992f241-ecfc-4e21-a66c-df6247ae1898.png"
+    },
+    {
+      "card_id": "tt13-flame-staff",
+      "status": "candidate",
+      "prompt": "只局部修改这张《火焰法杖》卡面：完全删除右下方握杖的手、手指、手腕和手臂，以原深蓝背景无缝补齐；原手遮住的黑色杖杆补画连续，一直自然伸出画外。画面只出现法杖与火焰，不出现人物或身体部位。严格保留原杖头、杖身设计、左上到右下的位置角度、向右喷出的原火焰形状与方向、原黑蓝背景和黄橙火光。保持简洁二次元手绘块面、几块主色与主阴影、概括金属反光，其他区域不增加细节、不重新设计。原横版，无文字框水印UI。",
+      "references": [
+        "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-84e874a2-f866-4241-a06e-bb7873996bad.png"
+      ],
+      "output": "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-506b8faa-ee43-439e-a738-8138476db5ba.png"
+    },
+    {
+      "card_id": "tt13-soul-contract",
+      "status": "superseded-by-requested-nai45-redraw",
+      "prompt": "编辑图1《灵魂契约》职业卡。图1控制镜头、前左近处人物/后右远处魂影的布局、红色契约连线和深蓝背景，图2只控制主角常无欲的身份，不能套图2站姿、白底或火球黑雾。将图1前景主角明确替换成图2的成年男性常无欲：银灰长发、脑后低发髻、两缕长鬓发、黄瞳、尖耳、细圆框眼镜、黑色弯尖宽檐魔女帽（紫内衬），黑高领袍、紫色内衬与简洁金边，左胸白羽蓝宝石胸针。镜头仍为胸上近景，脸和眼镜清楚，神态沉静带极轻浅笑。原来悬浮在眼前的大铜圆环移到脸侧少许，不能遮掉眼镜和黄瞳；后方保留一个较小的无脸暗色魂影，胸前印记与红线相接，保留原红色光点位置与联系。不能沿用原前景人物银短发/蓝眼，也不要加入法杖。严格沿图1现有简洁二次元块面卡面画法：合并发束和衣面，少数完整主色与主阴影，脸眼清楚，减少金属纹样、碎褶、碎高光和小颗粒；背景安静概括，不精细概念图、不写实3D。保持横版单张，无文字边框水印UI。",
+      "references": [
+        "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-0b79b1ee-8761-4a39-ad61-63db1d651280.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/changwuyu.webp"
+      ],
+      "output": "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-a8633a95-ed2c-4828-ad96-bcd0f495e751.png"
+    },
+    {
+      "card_id": "tt13-stellar-divination",
+      "status": "superseded-local-hand-repair",
+      "prompt": "把图1《星辰占卜》改为明确有星月出镜的职业卡。图1控制三张占卜牌、中心青白星光和深蓝背景；图2仅提供光牧星月身份，不套白底全身站姿和提灯。保留图1右下手持三张扇形卡牌的基本位置和角度，在画面左侧加入星月的胸上三分之四近景，让手从她身前自然伸向右侧牌组，脸与卡牌都清楚。星月为成年女性，浅金长发、整齐刘海、一条长辫从身侧垂下、金瞳，白色神官服、深青绿披肩、简洁金边。白色新月发饰平贴在刘海上方观众视角右侧发间、斜置，不浮空不成光环。她平静垂眼看牌，轻微抬手持牌，不夸张笑。三张卡仍为深蓝金边，中心一颗青白星最亮，不添加复杂星盘、灯或场景。画法沿图1与现有卡库：简洁二次元手绘块面，头发合并连贯发束、衣服保留少数主要折面，脸眼清楚，少数完整大色块和主阴影，背景纯暗蓝或少量大色面。降低碎高光、雕纹与细线密度，不精细概念图、不写实3D、不颗粒滤镜。单张横版，无文字外框水印UI。",
+      "references": [
+        "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-43696cc3-c589-44bc-a173-750cd1398280.png",
+        "D:/素材/代号柒/搜打撤/game/assets/portraits/full/xingyue.webp"
+      ],
+      "output": "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-bbebac73-fb43-4e0c-b18d-e2ea42755ed3.png"
+    },
+    {
+      "card_id": "tt13-stellar-divination",
+      "status": "superseded-by-requested-nai45-redraw",
+      "prompt": "只修这张图的右下角：完全去掉从画外右下伸入的黑手套、手指、裸手臂，用现有深蓝背景无缝补齐。三张占卜牌保持当前形状、大小、扇形排列、角度与星光，改为悬浮在星月自己的裸手指尖旁，无需任何另一只手托举。星月左侧人物、脸、表情、金瞳、浅金发辫、观众右侧新月发饰、衣服、她自己的手与袖口、背景及画法全保持。只删除多余右下手臂，不重画人物，不增加线条纹理，不增加细节或道具。简洁二次元块面，横版，无文字框水印UI。",
+      "references": [
+        "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-bbebac73-fb43-4e0c-b18d-e2ea42755ed3.png"
+      ],
+      "output": "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-7b8d4e41-6ee8-4e29-ac91-050f801d2c41.png"
+    },
+    {
+      "card_id": "tt13-mercy",
+      "status": "not-selected-user-selected-sheathing-flower-version",
+      "prompt": "局部编辑《手下留情》卡面，只替换右侧人物身份，其他原构图、左侧黑手套与钢刃、指尖白花、两者间距和深蓝背景保持。把当前银长发、蓝眼的少女改成完全不同的普通成年男性NPC：约四十岁，深棕色短寸发、暖棕肤色、棕眼、较宽的鼻梁和结实下颌、少量自然胡茬，穿朴素灰绿拾荒者高领外套。人物仍是原来右侧近景侧脸、目光看向白花与左侧，不戴眼镜不加饰品。发型短而整块，眉眼正常克制，不沿用无的银发蓝眼、长发尖刘海或少女脸型。保留原图白花完好、人物毫发无伤的克制瞬间，不添加血或伤口。沿原简洁二次元块面画法，皮肤完整主色与少数阴影，五官清楚，减少碎发、细皱纹、皮肤纹理和金属反光，背景安静；不要变成写实中年肖像。横版单幅，无字无框水印UI。",
+      "references": [
+        "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-e4df1761-c01c-4175-9dc0-79ed2bae45e6.png"
+      ],
+      "output": "C:/Users/太平/.codex/generated_images/01a1583a-2bcd-72f3-ae49-301e0181b6e8/exec-531f6f6c-1220-4f9b-9067-33daaae90de6.png"
+    }
+  ]
+}

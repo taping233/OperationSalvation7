@@ -1,6 +1,27 @@
 {
   "additions": [
     {
+      "id": "tt13-poor-meal",
+      "name": "穷鬼套餐",
+      "cost": 0,
+      "rarity": "古朴",
+      "type": "装备",
+      "value": 2,
+      "desc": "如果你的手牌数小于等于3，你的英雄技能变为0费。",
+      "rules": {
+        "version": 1,
+        "battle": {
+          "target": {
+            "side": "self",
+            "area": false
+          },
+          "hosted": [
+            "batch13-poor-meal"
+          ]
+        }
+      }
+    },
+    {
       "id": "tt13-spring",
       "name": "源头活水",
       "cost": 0,

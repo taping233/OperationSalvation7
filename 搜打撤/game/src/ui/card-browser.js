@@ -4,10 +4,12 @@ import '../../css/card-browser.css';
 
 const instances = new WeakMap();
 const positions = new Map();
+// Per-mounted-browser callbacks must not enter the cross-page position cache.
+const artRenderers = new WeakMap();
 export function cardBrowserHTML(id, label, itemsHTML, { rows = 2, columns = 0 } = {}) {
   return `<section class="card-browser" data-card-browser="${escAttr(id)}" data-browser-rows="${rows}" data-browser-columns="${columns}" aria-label="${escAttr(label)}"><div class="card-browser-track">${itemsHTML}</div><footer class="card-browser-footer"><div><button type="button" class="card-browser-page" data-browser-page="previous" aria-label="上一页卡牌">←</button><span class="card-browser-position" role="status" aria-live="polite"></span><button type="button" class="card-browser-page" data-browser-page="next" aria-label="下一页卡牌">→</button></div></footer></section>`;
 }
-export function refreshCardBrowser(root, { reset = false, items: suppliedItems = null } = {}) {
+export function refreshCardBrowser(root, { reset = false, items: suppliedItems = null, page: requestedPage = null } = {}) {
   const state = instances.get(root);
   if (!state || !isCardBrowserCurrent(root)) return;
   const track = root.querySelector('.card-browser-track');
@@ -22,6 +24,7 @@ export function refreshCardBrowser(root, { reset = false, items: suppliedItems =
   const fixedColumns = Math.max(0, Number(root.dataset.browserColumns) || 0);
   const columns = fixedColumns || Math.min(fit, Math.max(1, Math.ceil(visible.length / rows)));
   const perPage = columns * rows;
+  let nextPage = requestedPage ?? state.page;
   const focused = document.activeElement;
   const focusedItem = focused?.closest?.('[data-browser-key]');
   const focusedIndex = visibleIndex.get(focusedItem);
@@ -30,18 +33,33 @@ export function refreshCardBrowser(root, { reset = false, items: suppliedItems =
     const selectedIndex = visible.findIndex((item, index) => index >= first && index < first + state.perPage
       && (item.classList.contains('on') || item.getAttribute('aria-pressed') === 'true'));
     const anchor = focusedIndex ?? (selectedIndex >= 0 ? selectedIndex : first);
-    state.page = Math.floor(anchor / perPage);
+    nextPage = Math.floor(anchor / perPage);
+  }
+  const pages = Math.max(1, Math.ceil(visible.length / perPage));
+  nextPage = reset ? 0 : Math.max(0, Math.min(nextPage, pages - 1));
+  const first = nextPage * perPage;
+  const art = artRenderers.get(root);
+  const pendingArt = [];
+  // Prepare every new face before changing the visible page or its saved position.
+  // A genuine renderer error propagates, leaving the previous page usable for retry.
+  if (art) for (const item of visible.slice(first, first + perPage)) {
+    const host = item.querySelector('[data-browser-art]');
+    if (!host || art.rendered.has(host)) continue;
+    const html = art.render(item);
+    if (html != null) pendingArt.push([host, window.SDT?.Icons?.rich?.(html) ?? html]);
   }
   state.perPage = perPage;
-  const pages = Math.max(1, Math.ceil(visible.length / perPage));
-  state.page = reset ? 0 : Math.min(state.page, pages - 1);
+  state.page = nextPage;
   const gridColumns = `repeat(${columns}, minmax(0, ${fixedColumns ? '1fr' : `${minimum}px`}))`;
   if (track.style.gridTemplateColumns !== gridColumns) track.style.gridTemplateColumns = gridColumns;
-  const first = state.page * perPage;
   for (const item of items) {
     const index = visibleIndex.get(item);
     const hidden = index === undefined || index < first || index >= first + perPage;
     if (item.hidden !== hidden) item.hidden = hidden;
+  }
+  for (const [host, html] of pendingArt) {
+    host.innerHTML = html;
+    art.rendered.add(host);
   }
   const empty = String(!visible.length);
   if (root.dataset.empty !== empty) root.dataset.empty = empty;
@@ -59,13 +77,14 @@ export function refreshCardBrowser(root, { reset = false, items: suppliedItems =
     else { root.tabIndex = -1; root.focus({ preventScroll:true }); }
   }
 }
-export function bindCardBrowser(root, { onOpen, onPage } = {}) {
+export function bindCardBrowser(root, { onOpen, onPage, renderArt } = {}) {
   if (!root || instances.has(root)) return;
   const key = `${window.SDT?.Base?.slot || ''}/${root.dataset.cardBrowser}`;
   const state = { ...(positions.get(key) || { page: 0 }) };
   positions.delete(key); positions.set(key, state);
   while (positions.size > 64) positions.delete(positions.keys().next().value);
   instances.set(root, state);
+  if (renderArt) artRenderers.set(root, { render: renderArt, rendered: new WeakSet() });
   let loadFrame = 0, disposed = false;
   const track = root.querySelector('.card-browser-track');
   let measuredWidth = track.clientWidth;
@@ -92,6 +111,7 @@ export function bindCardBrowser(root, { onOpen, onPage } = {}) {
   const lifetime = new MutationObserver(() => {
     if (root.isConnected) return;
     disposed = true;
+    artRenderers.delete(root);
     resize?.disconnect(); lifetime.disconnect();
     window.removeEventListener('resize', resized);
     if (loadFrame) cancelAnimationFrame(loadFrame);
@@ -102,8 +122,8 @@ export function bindCardBrowser(root, { onOpen, onPage } = {}) {
     if (!isCardBrowserCurrent(root) || root.closest('[hidden], [inert], [aria-hidden="true"], .closing')) return;
     const paging = event.target.closest('[data-browser-page]');
     if (paging && root.contains(paging) && !paging.disabled) {
-      state.page += paging.dataset.browserPage === 'next' ? 1 : -1;
-      refreshCardBrowser(root); onPage?.(); return;
+      refreshCardBrowser(root, { page: state.page + (paging.dataset.browserPage === 'next' ? 1 : -1) });
+      onPage?.(); return;
     }
     const item = event.target.closest('[data-browser-key]');
     if (item && root.contains(item) && !item.hidden) onOpen?.(item.dataset.browserKey, item);

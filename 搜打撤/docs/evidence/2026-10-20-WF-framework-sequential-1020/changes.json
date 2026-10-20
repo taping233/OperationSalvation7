@@ -1,0 +1,292 @@
+{
+  "at": "2026-10-20T13:08:42.944Z",
+  "comparison": "initial session file hashes; existing uncommitted changes retained",
+  "files": [
+    {
+      "path": "docs/architecture.md",
+      "before": "e710609ec87184c25a7caeeb4802e242055c7a9b6f292f08faf595175c216bfe",
+      "sha256": "de60163f6c76364aac49d57ca8eddeea178bc93c9f5df5ea0d0fda3fb5202393",
+      "bytes": 31104
+    },
+    {
+      "path": "game/selftest.js",
+      "before": null,
+      "baselineStatus": "not in initial file snapshot; specific Git diff verified as scan-list-only addition",
+      "sha256": "93e8185c5dd358e72c3dc56f9d4c1b0e6e2a087e0595055a9283039b52c57d0f",
+      "bytes": 10520
+    },
+    {
+      "path": "game/src/battle/bag/battle.equipment.js",
+      "before": "c72fe261095c4953880243861376ef3fc0442eb3aa93bf32ea11f741a960d2fb",
+      "sha256": "fd16bdfa46f2cdafebcf020c05445dcfcb75b0e3fdd9cb71679171bff8dbdc0f",
+      "bytes": 16638
+    },
+    {
+      "path": "game/src/battle/core/battle.card-play.js",
+      "before": null,
+      "sha256": "84546746a8acb63f6c5aa44c75e42a98fee7136365208c144bfc420233a25f7a",
+      "bytes": 18573
+    },
+    {
+      "path": "game/src/battle/core/battle.damage.js",
+      "before": null,
+      "sha256": "47ac7205438312d3a49d60a626e46d53405e6ebef2bff4d0ed013fe8564bd418",
+      "bytes": 9712
+    },
+    {
+      "path": "game/src/battle/core/battle.engine.js",
+      "before": "2a0e0c9e5af0cdbfe1b6189cd6ad4b5ffc01a6e79ed4e9af88a4933356e3c635",
+      "sha256": "b13668c8c935a0a82626e89de0dfea75d539dc14879cf6d4017d8e076967b6a1",
+      "bytes": 69746
+    },
+    {
+      "path": "game/src/battle/core/battle.resolution.js",
+      "before": "834967096faca7d7c6be966c182d53409ace4972d75b4a8eec94940f75d58673",
+      "sha256": "7139fb3e0307c38df5cb23060bc3fc76002af7608ede78558f1e02a4c96f91b3",
+      "bytes": 87828
+    },
+    {
+      "path": "game/src/battle/core/battle.turn-continuation.js",
+      "before": null,
+      "sha256": "f7ad35498366e3dca1d93b6e162cd3410ab5809663d4b7302080d0fae80e1408",
+      "bytes": 3199
+    },
+    {
+      "path": "game/src/battle/core/battle.turn-start.js",
+      "before": null,
+      "sha256": "0655be0fc431c385ed63da221349a895c6f433dc7f3e94664e1d9976cef0a632",
+      "bytes": 7292
+    },
+    {
+      "path": "game/src/battle/effects/battle.rule-guard.js",
+      "before": "15361ed22e314210c860efe72d5329ab44fd08ffdb9813c2d761d8257c09351f",
+      "sha256": "eb470d17caec469463148d7fd36924a633e4a91eb35e635aa645fcbd84ebba1c",
+      "bytes": 2138
+    },
+    {
+      "path": "game/src/battle/effects/battle.trigger-source.js",
+      "before": "2f18744419672e8d1518eb9fe8103ec98c828ed7de6d8c7b99837581f9a3c3d9",
+      "sha256": "0b86af28d7616191b003e14d38af3fde037d679c4fd1b89293e224f36256aba5",
+      "bytes": 1477
+    },
+    {
+      "path": "game/src/battle/effects/battle.triggers.m2.js",
+      "before": "222e822b3e3dfd1305c8fde2ada3a4160c002658d491f70b93c9d709d73a687f",
+      "sha256": "5f25a656dbcbcf7d60b4c63ed8e37a5b544a143690f9134098c8600078088ee0",
+      "bytes": 7087
+    },
+    {
+      "path": "game/src/cards/card-execution-plan.js",
+      "before": null,
+      "sha256": "fcdc29773f09b7ab82f3dfd6ede05b6e527ea89dc9944a2a9109876588c120bb",
+      "bytes": 6664
+    },
+    {
+      "path": "game/src/cards/card-execution-plan.types.d.ts",
+      "before": null,
+      "sha256": "9591384cb314f02bbc40f6c0487a3abdc8f5d66a291cff2bf9e13082f7671b3d",
+      "bytes": 1491
+    },
+    {
+      "path": "game/src/cards/card-rules.capability.js",
+      "before": "8e0e8d927231375a9ac3b696d253dc3249dc851461057e6e1d4556bdd671133c",
+      "sha256": "11cbfdf89834fe405e1ae5ed254db222130d1efca0bc905e0e77829e1d37b08e",
+      "bytes": 11627
+    },
+    {
+      "path": "game/src/cards/card-rules.schema.js",
+      "before": "cb45598d70e12a3781603b913eee79c1f57c5c4fefdf014c0bb6cf7ab55e499d",
+      "sha256": "c5414a5025ab1ecc63e751c0d60a62682a9a7cf7d8c8eaf29ebbaab71cddd126",
+      "bytes": 72512
+    },
+    {
+      "path": "game/src/cards/card-trigger-contract.js",
+      "before": "73bdae4896f1290b9891db4aa81aeab60b76e724fe588aa258cfe6924db9eb69",
+      "sha256": "4427c8272703d1ff7067690da1c68392745ef704fe8618fe59c554082eff7611",
+      "bytes": 1552
+    },
+    {
+      "path": "game/src/core/run-checkpoint.js",
+      "before": "c406143684052d8cd2b1f8867cd990e0bdc021cdd748cb6c0ff0b1f2e5ae5112",
+      "sha256": "a05f4d86747546bdd14b869fe92dc7adfb942c59a0615d261a377912361813d6",
+      "bytes": 375
+    },
+    {
+      "path": "game/src/README.md",
+      "before": "43a9b6b13b358b9ea61f6920b0a0a1c3efb4d0809a8c0e2d5189141d39a2516f",
+      "sha256": "0dba46551a6d7960bdb3e4d4174de239c034d0156b6317a1a0778dbce6cd11ed",
+      "bytes": 4979
+    },
+    {
+      "path": "game/src/run/event-card-choice.js",
+      "before": "91955c1917a1084b4256649f96bb087a5d3dcaff75fc27c98911590b07a9b5f4",
+      "sha256": "60d8008c0dfd997ceeefa01504991adf2f25f432a2a5bc283258515da46af0fe",
+      "bytes": 12061
+    },
+    {
+      "path": "game/src/run/event-commands.js",
+      "before": null,
+      "sha256": "dfbf880ed4af39e48f6f319208fdf56777d937ead059ba7333734371afd58654",
+      "bytes": 6792
+    },
+    {
+      "path": "game/src/run/event-recode-candidates.js",
+      "before": "dc9434415a8fac4a7834e128496e4937b27b34e44c7aa2b3400ebef723d5047b",
+      "sha256": "f83df7ff6bc31d822213d7eaea0a7b0ad608b42772228a07907ec1f90e21ab64",
+      "bytes": 2129
+    },
+    {
+      "path": "game/src/run/game.run.events.js",
+      "before": null,
+      "sha256": "1553e0f73103700bdf1a5a4aee56a40a4ceef2fb091c1016852b812a479156f3",
+      "bytes": 49738
+    },
+    {
+      "path": "game/src/run/game.run.flow.js",
+      "before": "9dfb464b5031c5227c526af83a8bcc1ff3adf81471fbbfcfa43239fc43969a80",
+      "sha256": "bd3a645535fe3a8bc323a30232794345ff1c48a96125803748685932e6b33b6f",
+      "bytes": 19411
+    },
+    {
+      "path": "game/src/run/game.run.resources.js",
+      "before": null,
+      "sha256": "dee6f9fada61a4f054ebf470b5cbafb1addc28c8d32625a3f41473741e7a94f2",
+      "bytes": 6176
+    },
+    {
+      "path": "game/src/run/game.run.shop.js",
+      "before": "5e4fd6efa10c451fc4487073e720b6aad13816dcadea3c2821b7e9a1241e7df7",
+      "sha256": "2e6c985da2200ea004a650ae92b55d1c722e3a3e8e9f230d42ce09aff26d85e2",
+      "bytes": 46319
+    },
+    {
+      "path": "game/src/run/run-domain-commands.types.d.ts",
+      "before": null,
+      "sha256": "4d9a33c4bb93e29ec21a45cf8ec37bbbe8cf26a104377bf0a3803fde43da4197",
+      "bytes": 2675
+    },
+    {
+      "path": "game/src/run/shop-commands.js",
+      "before": null,
+      "sha256": "d1f5cfc0bccf233a83159d7d1c12e04c2cb13b0df6dab154a6239230655e446b",
+      "bytes": 5927
+    },
+    {
+      "path": "game/src/run/shop-commission.js",
+      "before": "4dfb9e104e380bb4c5fe78fe08877f71e56bbc1e43bb8f6aff4bd655fe366377",
+      "sha256": "f0d2b925fb040affc0cd8591699661e706af9781924c24e5461f19cfa92b2ca1",
+      "bytes": 7509
+    },
+    {
+      "path": "jsconfig.framework-boundaries.json",
+      "before": null,
+      "sha256": "f6b54464ae8c1282f508af8e24a80cc7387002d7f07c2a608aed9f570a6fdc98",
+      "bytes": 428
+    },
+    {
+      "path": "jsconfig.framework-ports.json",
+      "before": null,
+      "sha256": "c5844c8d47fc98b7b25c10cbb9840fdd37beb9eb240a2fd83dd629446b56478c",
+      "bytes": 303
+    },
+    {
+      "path": "scripts/architecture-graph.mjs",
+      "before": "25103242652633a2f8f51f286ff600946092939eedd969ecb2add7d0fa891e23",
+      "sha256": "1e31225aeb757f57401aca622519408cd7e69e503fa0a3d24c076d1ec160c345",
+      "bytes": 13617
+    },
+    {
+      "path": "scripts/check-types.mjs",
+      "before": "390547f4f964914dedf4119b5ac1b5f7c7e29632428753068f3ba9166d877ac9",
+      "sha256": "b98699174d8a03224dfc6f64c9dbba1846f503a73141a85117a5c6e3869e86ca",
+      "bytes": 1932
+    },
+    {
+      "path": "scripts/sync-cards-from-live.mjs",
+      "before": "7470beaff2a3831d7ba5f53d1322e3f380b8bc537273c39221d169a88398b4cd",
+      "sha256": "35201d3c8228ed32356ef5c0dd85573467dd782f0890055492d3060df380ed54",
+      "bytes": 16659
+    },
+    {
+      "path": "tests/architecture-boundaries.test.js",
+      "before": "d8a7416c80eefd6a6e2341f1b1228d21472ecd926a430e70794c99767fa0ca75",
+      "sha256": "5bd2f0e6986b59d91ba6e3aa8c874c39c231ab6a83592c6de577c488f16ed36d",
+      "bytes": 13491
+    },
+    {
+      "path": "tests/battle-engine-decomposition.test.js",
+      "before": null,
+      "sha256": "e0534126a7678e2e6dede8d2332f30611ed40179d4baaa7adae68729a85a05eb",
+      "bytes": 9262
+    },
+    {
+      "path": "tests/card-execution-plan.test.js",
+      "before": null,
+      "sha256": "022c9615e1ed9bf33faddd5f146c7e27662a962fac3c28ed08547bf2b52e5b18",
+      "bytes": 4706
+    },
+    {
+      "path": "tests/events-0919.test.js",
+      "before": "c933aedff334333fd2f8bddc805f3d3ea8ff53d7b30df68e52e2311e939b4d50",
+      "sha256": "680385099116366274a60f9aa84bf6d3891885e4ec4e57e679e93d186a1241d7",
+      "bytes": 5496
+    },
+    {
+      "path": "tests/framework-battle-ports-types.fixture.ts",
+      "before": null,
+      "sha256": "c4d82d3084a0f4b162a870ed05e954954e0ac8dc01b12daaf8784d7168d4788b",
+      "bytes": 2128
+    },
+    {
+      "path": "tests/framework-boundaries-types.fixture.ts",
+      "before": null,
+      "sha256": "55719287ec08affade3852bcee4312137c5b16f71f78fa645ba427efca628874",
+      "bytes": 4632
+    },
+    {
+      "path": "tests/message-batch-0920-late.test.js",
+      "before": "d5f7fc80135a245b19711ba0e8ea992d77d9a556dc5ef288b6a1fa91497bcc67",
+      "sha256": "a865fd16be6df5d704ba82f9116d3f9e6fe0bfeace90cc1d46bea5a79ecf9b1f",
+      "bytes": 5489
+    },
+    {
+      "path": "tests/pocket-restore-interface.test.js",
+      "before": "df6daaa7faea0da92c444588eba78157423584db79e62a96218306e29c71bfcc",
+      "sha256": "769ec913656f2252bea5c828bf81aecb254a95738dac3035d3aeb794edbcf8b7",
+      "bytes": 15100
+    },
+    {
+      "path": "tests/r6-story.test.js",
+      "before": "253549f4028f8196adea96579ea5e684ae30a0c6a6093243755c788800f0fe0f",
+      "sha256": "1f5c5f20ee62e8733e178552217d8d6b1419f9a2bb643b69b4d0b57dff3a0244",
+      "bytes": 8948
+    },
+    {
+      "path": "tests/run-domain-commands.test.js",
+      "before": null,
+      "sha256": "93867b7cd24656abc713478b99688769d775d4ffea601ecc63ee5de138c77923",
+      "bytes": 5058
+    },
+    {
+      "path": "tests/run-event-controller-ownership.test.js",
+      "before": null,
+      "sha256": "fa844dd9fb0c577dda8172f09650f84913481b7f91f2f47e2c033d741bfde82e",
+      "bytes": 2028
+    },
+    {
+      "path": "tests/sync-cards-from-live.test.js",
+      "before": "0adb633ba78daddd43621379ba3897d520242981f1e0edaecd7b506420aecce2",
+      "sha256": "76e3de4a66199196677d2bebbd94f0c22e75b03358cb3a84b6bca9456a66339c",
+      "bytes": 5868
+    },
+    {
+      "path": "tests/workflow-cli-integration.test.js",
+      "before": "68005527571cc0cd89e71aa1661aaa0a711375451d54e643d441676a876432e8",
+      "sha256": "53ad11c389147b1bb9de21648fcb4df98cfb14dfb815572717b5859d2a9147a9",
+      "bytes": 13095
+    }
+  ],
+  "additionalUncapturedBaseline": [
+    "game/selftest.js (see baselineStatus on entry)"
+  ]
+}

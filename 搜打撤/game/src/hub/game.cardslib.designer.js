@@ -142,7 +142,7 @@ export function createCardDesigner(deps) {
                 <button class="hs-btn round" data-act="dmgAdj" data-v="1" title="增加">＋</button>
                 <span class="dmg-hint">显示为卡牌左下角的<span class="dmg-num">红色伤害宝石</span></span>
               </div></div>
-            <div class="cdes-row"><label>抽卡 <span class="row-tip">BOSS 战从牌库抽 N 张 · 普通战斗改为获得 N 张初始攻击</span></label>
+            <div class="cdes-row"><label>抽卡 <span class="row-tip">从本场牌库抽 N 张牌</span></label>
               <div class="dmg-ctl">
                 ${[0, 1, 2, 3, 4, 5].map(v =>
                   `<button class="cost-gem${draft.draw === v ? ' on' : ''}" data-act="pickDraw" data-v="${v}">${v}</button>`).join('')}

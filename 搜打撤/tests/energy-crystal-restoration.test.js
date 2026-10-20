@@ -48,11 +48,12 @@ it.each([['usePotion', false], ['usePotion', true], ['useItem', false], ['useIte
   expect(R.consumed).toEqual([]);
   expect(JSON.stringify(game.usedPocket)).toBe(mapPocket);
   if (nonempty) {
+    expect(R.hand).toContain('runtime-0');
     expect(R.hand).toContain('runtime-1');
-    expect(game.logs.some(log => log.includes('复原 1 张消耗卡'))).toBe(true);
+    expect(game.logs.some(log => log.includes('复原 2 张消耗牌'))).toBe(true);
   } else {
     expect(R.hand).toEqual(handBefore);
-    expect(game.logs.some(log => log.includes('消耗堆是空的'))).toBe(true);
+    expect(game.logs.some(log => log.includes('消耗牌堆是空的'))).toBe(true);
   }
 });
 
@@ -92,7 +93,7 @@ it('能源结晶入队后本场消耗堆被清空，执行前复检保留药水�
   expect(JSON.stringify(game.usedPocket)).toBe(mapBefore);
   expect(R.hand).toEqual([]);
   expect(R.consumed).toEqual([]);
-  expect(game.logs.some(log => log.includes('本场消耗堆是空的') && log.includes('道具未消耗'))).toBe(true);
+  expect(game.logs.some(log => log.includes('本场消耗牌堆是空的') && log.includes('道具未消耗'))).toBe(true);
 });
 
 

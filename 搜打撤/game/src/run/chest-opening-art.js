@@ -1,4 +1,4 @@
-import { esc, escAttr } from '../core/shared.js';
+import { escAttr } from '../core/shared.js';
 import '../../css/chest-opening.css';
 
 const SAFE_FRAMES = [
@@ -59,10 +59,4 @@ export function safeOpeningHTML({ kind, src, animated, effect = SAFE_BURST, effe
     </span>
     <span class="safe-caption">封存物资</span><span class="ps-tip">正在解除锁定 · 点击跳过</span>
   </button>`;
-}
-
-export function chestOfferHTML({ name, src }) {
-  return `<article class="chest-offer"><button type="button" class="chest-offer-card" data-act="chestClaim" aria-label="领取${escAttr(name)}">
-    <img src="${escAttr(src)}" alt="" draggable="false"><strong>${esc(name)}</strong><span>领取后开启</span>
-  </button></article>`;
 }

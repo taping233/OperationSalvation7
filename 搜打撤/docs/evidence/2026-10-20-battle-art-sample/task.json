@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "battle-art-sample",
+  "date": "2026-10-20",
+  "owner": "Friday",
+  "goal": "完成普通战斗美术/UI/动效首件并固化可复用接入约定",
+  "paths": [
+    "game/css/battle-stage.css",
+    "game/css/card-layout-selected.css",
+    "game/src/battle/view",
+    "game/assets/enemies/battle-sample-1020",
+    "tests",
+    "docs/evidence/2026-10-20-battle-art-sample",
+    "docs/production/art/VISUAL-BIBLE.md"
+  ],
+  "doneWhen": [
+    "无与一组第一层敌人、现有雪景形成统一样板，保留角色身份与卡牌稀有度",
+    "当前窗口手牌费用、名称、规则与详情入口可读，目标与命中反馈连续，减少动态和离场不破坏终态",
+    "相关定向检查与当前窗口内置浏览器真实交互有证据，素材来源和接入约定可复用，服务收官"
+  ],
+  "stage": "partial",
+  "checks": [
+    {
+      "kind": "manual",
+      "description": "本轮两处源码diff为空，四个新增资源源码测试已移出运行目录留档，5317自建服务停止并复核无监听",
+      "result": "passed"
+    }
+  ],
+  "unverified": [
+    "UI动效首件未完成；本轮方向被老板否定，全部运行改动已撤回，旧测试结果仅保留为历史"
+  ],
+  "updatedAt": "2026-10-20T09:37:56.131Z",
+  "closure": {
+    "kind": "manual",
+    "doneWhenConfirmed": false,
+    "statement": "负责人按 doneWhen 判断；检查结果不自动证明作品完成"
+  }
+}

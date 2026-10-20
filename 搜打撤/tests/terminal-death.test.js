@@ -1,4 +1,5 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { installImmediateWebLocks } from './helpers/web-locks.js';
 
 const canvasCtx = new Proxy({}, { get: () => () => canvasCtx, set: () => true });
 window.HTMLCanvasElement.prototype.getContext = () => canvasCtx;
@@ -15,7 +16,7 @@ await import('../game/src/cards/cards.js');
 await import('../game/src/ui/ui.js');
 await import('../game/src/hub/base.js');
 await import('../game/src/hub/meta.js');
-Object.defineProperty(navigator, 'locks', { configurable: true, value: { request: (_name, _options, callback) => callback() } });
+installImmediateWebLocks();
 const { RunStorage } = await import('../game/src/hub/game.storage.js');
 const session = await import('../game/src/run/game.session.js');
 const { game, doDeath } = session;
@@ -32,12 +33,12 @@ beforeAll(() => {
 });
 
 describe('死亡终局幂等', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     window.localStorage.clear();
     window.SDT.Base.use(2);
-    window.SDT.Base.reset(2);
+    (await window.SDT.Base.reset(2));
     window.SDT.Base.data.characters = { wu: { lv: 1, xp: 47 } };
-    window.SDT.Base.save();
+    (await window.SDT.Base.save());
     session._set_active_slot(2);
     RunStorage.write(2, { seed: 'terminal-death', hp: 0, maxHp: 30, inventory: [], ownedCards: [], myClass: '侠客' });
     game.runActive = true;
@@ -104,7 +105,7 @@ describe('死亡终局幂等', () => {
     expect(doDeath()).toBe(false);
     expect(window.SDT.Base.data.stash.find(x => x.card.id === card.id)?.count).toBe(1);
 
-    session.newRun('standard', [], { skipClassChoice: true });
+    await session.newRun('standard', [], { skipClassChoice: true });
     const identity = RunStorage.readIdentity(2);
     expect(identity.ok).toBe(true);
     game.myClass = '侠客';
