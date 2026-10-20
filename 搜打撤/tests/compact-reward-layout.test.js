@@ -9,8 +9,11 @@ const declarations = (file, selector) => {
   });
   return result;
 };
-it('the game viewport clips without becoming a focus-scroll container', () => {
-  expect(declarations('game/css/overlays.css', '#viewport').overflow).toBe('clip');
+it('map and reward share a shrinkable viewport that reserves the expedition toolbar without focus scrolling', () => {
+  expect(declarations('game/css/base.css', '#app')).toMatchObject({ display:'flex', 'flex-direction':'column', height:'100%' });
+  // Non-scrollable overflow no longer zeroes the flex automatic minimum size.
+  // An explicit floor lets the canvas shrink above the sidebar in both states.
+  expect(declarations('game/css/overlays.css', '#viewport')).toMatchObject({ flex:'1', 'min-height':'0', overflow:'clip' });
 });
 it('compact picker reserves toolbar and footer while its card region can shrink and scroll', () => {
   const file = 'game/css/chest-reward-overview.css';
