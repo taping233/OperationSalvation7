@@ -1,3 +1,4 @@
+import { createPageSurfaceLifetime } from '../ui/page-surface-lifetime.js';
 import { uiDisclosure } from '../ui/ui-disclosure.js';
 import { Random } from '../core/random.js';
 import { esc } from '../core/shared.js';
@@ -33,6 +34,32 @@ function createShopController({
   let shelfReturn = null;
   let inspectionClose = null;
   let inspectionMotion = null;
+  // The detail shade covers only these siblings, not the visible header/footer.
+  const inspectionBackground = new WeakMap();
+  let inspectionSurface = null;
+  function setInspectionBackground(root, blocked) {
+    if (blocked && root && inspectionSurface?.root !== root) {
+      if (inspectionSurface) setInspectionBackground(inspectionSurface.root, false);
+      const surface = { root, lifetime:null };
+      inspectionSurface = surface;
+      surface.lifetime = createPageSurfaceLifetime(root, {
+        overlay:UI.el?.overlay || root.closest("#overlay") || root.parentElement,
+        onInvalidate: () => { if (inspectionSurface === surface) cancelInspectionMotion(); },
+      });
+    } else if (!blocked && inspectionSurface?.root === root) {
+      inspectionSurface.lifetime?.dispose();
+      inspectionSurface = null;
+    }
+    root?.querySelectorAll('.shop-layout > .shop-board, .shop-layout > .shop-merchant').forEach(node => {
+      if (blocked) {
+        if (!inspectionBackground.has(node)) inspectionBackground.set(node, node.hasAttribute('inert'));
+        node.setAttribute('inert', '');
+      } else if (inspectionBackground.has(node)) {
+        if (!inspectionBackground.get(node)) node.removeAttribute('inert');
+        inspectionBackground.delete(node);
+      }
+    });
+  }
   const currentSession = session => session && session === shopSession && game.state === 'modal'
     && game.shopStock === session.stock && game.ownedCards === session.ownedCards
     && game.layerIdx === session.layerIdx && game.trackPos === session.trackPos
@@ -41,6 +68,7 @@ function createShopController({
     if (inspectionClose) clearTimeout(inspectionClose.timer);
     inspectionClose = null;
     watchInspectionMotion(null);
+    if (inspectionSurface) setInspectionBackground(inspectionSurface.root, false);
   }
   function watchInspectionMotion(detail, handler = null) {
     if (inspectionMotion) inspectionMotion.detail.removeEventListener('animationend', inspectionMotion.handler);
@@ -360,6 +388,7 @@ function createShopController({
         <footer class="shop-market-footer"><span class="shop-live" id="shopLive" aria-live="polite">${esc(shopNotice)}</span><button class="shop-back" data-act="closeShop">[[icon:arrow]] 返回地图</button></footer>
       </div>`, 'page');
     const shopRoot = document.querySelector('.shop-replica');
+    setInspectionBackground(shopRoot, selectedShopIndex != null);
     registerShopActs(shopRoot);
     shopRoot?.addEventListener('sdt-dev-console-return', () => {
       const grid = shopRoot.querySelector('.shop-board-grid');
@@ -495,6 +524,7 @@ function createShopController({
       inspectionClose = null;
       if (detail) {
         detail.hidden = true; detail.innerHTML = ''; detail.inert = false;
+        setInspectionBackground(detail.closest('.shop-market'), false);
         watchInspectionMotion(detail);
         delete detail.dataset.shopMotion;
       }
@@ -536,6 +566,7 @@ function createShopController({
         watchInspectionMotion(detail);
         detail.inert = false;
         detail.hidden = false;
+        setInspectionBackground(root, true);
         detail.innerHTML = SDT.Icons?.rich?.(shopDetailHTML()) || shopDetailHTML();
         if (reducedInspectionMotion()) delete detail.dataset.shopMotion;
         else {

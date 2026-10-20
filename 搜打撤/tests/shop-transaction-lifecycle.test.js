@@ -202,7 +202,7 @@ describe('商店往返浏览连续性', () => {
     vi.spyOn(HTMLElement.prototype, 'getClientRects').mockReturnValue([{ width:100, height:30 }]);
   }
 
-  it('收购台返回货架恢复滚动、展开详情和原入口焦点', () => {
+  it('收购台返回已展开详情时恢复滚动并避开被遮住的原入口焦点', () => {
     visibleButtons();
     const { acts, host, game } = shop();
     game.shopStock[0].card = { ...card, desc:'商品完整规则。'.repeat(20) };
@@ -211,13 +211,16 @@ describe('商店往返浏览连续性', () => {
     host.querySelector('.shop-board').scrollTop = 175;
     host.querySelector('.shop-detail-scroll').scrollTop = 65;
     host.scrollTop = 220;
+    // Deliberately invoke a stale/programmatic entry behind the detail shade.
+    // A user cannot focus it while inert; restoration must still choose a visible target.
     host.querySelector('[data-act="openSell"]').focus();
     acts.openSell(); acts.backShop(); vi.runOnlyPendingTimers();
     expect(host.querySelector('.shop-board').scrollTop).toBe(175);
     expect(host.querySelector('.shop-detail-scroll').scrollTop).toBe(65);
     expect(host.querySelector('.shop-detail-rules').open).toBe(true);
     expect(host.scrollTop).toBe(220);
-    expect(document.activeElement.dataset.act).toBe('openSell');
+    expect(document.activeElement.closest('.shop-detail')).toBe(host.querySelector('.shop-detail'));
+    expect(document.activeElement.closest('[inert]')).toBeNull();
   });
 
   it('收购台整理背包后保留收购规则、位置和入口焦点', () => {
