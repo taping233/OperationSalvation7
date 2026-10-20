@@ -26,3 +26,15 @@ node scripts/video-review.mjs --input recording.webm --out new-review --trace sd
 - 采集器运行会增加少量观察和读DOM开销，因此比较应使用相同开关。它用于定位交互时段，再结合浏览器性能工具核因，不替代真实帧率或完整性能剖析。
 
 JSON文件是本地数据；只有明确执行下载才产生文件。离线复核仅接受本地小于1MiB的诊断JSON，再次白名单过滤。视频分析和对时不产生外部请求。
+
+## 比较两次真实阶段采样
+
+无需视频或人工对时锚点，可复用同一脚本离线比较：
+
+```sh
+node scripts/runtime-trace-alignment.mjs --before before.json --after after.json > stage-comparison.json
+```
+
+输入各限本地1MiB、400行；输出只保留白名单阶段的样本数、中位数、范围，以及每个interaction唯一overlay-sync与navigation-sync的同步合计。重复或不完整边界不强行配对；module/visual异步等待不加入同步合计。仅统计visible=true且字段有效的完成记录，另报排除量和dropped。按是否观察到module-wait拆分样本，未观察到不等于已证明热加载。可用同一工具复查设置前后采样，而不把不同会话的interaction编号强行逐个配对。
+
+长任务只报告可见记录数和与阶段区间重叠的记录数，同一长任务不重复计数；不同会话观察时长不一，不能按总数推导改善。API不可用、零记录、丢弃或取消会影响解释。少量样本只描述本次观察，不证明因果、统计显著性、实际呈现或FPS；实际部署身份和浏览器条件须另核对。JSON中的limitations随结果保留。

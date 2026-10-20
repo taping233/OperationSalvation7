@@ -165,7 +165,7 @@ function createShopController({
     const title = slot.mystery && !slot.sold ? '神秘货箱' : slot.card?.name || slot.label || '商品';
     const image = slot.mystery && !slot.sold
       ? '<div class="shop-card-mystery">[[icon:dice]]<b>？</b><span>随机卡牌</span></div>'
-      : slot.card ? cardHTML(slot.card) : '<div class="shop-empty">已售出</div>';
+      : slot.card ? cardHTML(slot.card, undefined, { hideValue: true }) : '<div class="shop-empty">已售出</div>';
     const owned = game.ownedCards.filter(item => item.card.name === slot.card?.name).length;
     const status = exhausted ? (slot.shaReplenish != null ? '本站已补满' : slot.mystery ? '已购入 · 已揭晓' : '')
       : slot.shaReplenish != null ? `持有 ${owned} · 余 ${slot.shaReplenish}` : slot.mystery ? '购买后揭晓' : owned > 0 ? `已持有 ${owned}` : '';
@@ -190,7 +190,7 @@ function createShopController({
     const hasLongRules = String(slot.card?.desc || '').replace(/<[^>]*>/g, '').length > 80;
     return `<button type="button" class="shop-detail-dismiss" data-act="shopCloseInspect" aria-label="返回商品货架"></button>
       <button type="button" class="shop-detail-close" data-act="shopCloseInspect" aria-label="收起商品详情">×</button>
-      <div class="shop-detail-scroll"><div class="shop-detail-art">${slot.mystery && !slot.sold ? '<div class="shop-card-mystery">[[icon:dice]]<b>？</b><span>神秘货箱</span><small>购买后随机揭晓一张卡</small></div>' : slot.card ? cardHTML(slot.card) : ''}</div>
+      <div class="shop-detail-scroll"><div class="shop-detail-art">${slot.mystery && !slot.sold ? '<div class="shop-card-mystery">[[icon:dice]]<b>？</b><span>神秘货箱</span><small>购买后随机揭晓一张卡</small></div>' : slot.card ? cardHTML(slot.card, undefined, { hideValue: true }) : ''}</div>
       ${hasLongRules && (!slot.mystery || slot.sold) ? `<details class="shop-detail-rules"><summary>完整规则</summary><p>${rules}</p></details>` : ''}</div>
       <div class="shop-detail-actions">
       <div class="shop-detail-account"><span>可用金币<strong>${moneyHTML(game.coins)}</strong></span>${!exhausted && hasMoney && fits ? `<span>购买后<strong>${moneyHTML(game.coins - slot.price)}</strong></span>` : ''}</div>

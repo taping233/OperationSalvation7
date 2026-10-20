@@ -6,7 +6,7 @@ const card = { id: 'shop-test', name: '商店测试卡', type: '法术', rarity:
 const coin = { id: 'shop-coin', name: '铜币', type: '资源', sellable: true, value: 3 };
 const sha = { id: 'sha', name: '初始攻击', type: '武术', rarity: '初始' };
 
-function shop({ save = () => true, stored = false, coins = 20, canReceive = () => true } = {}) {
+function shop({ save = () => true, stored = false, coins = 20, canReceive = () => true, renderCard = () => '' } = {}) {
   const acts = {};
   const owned = { uid: 'coin-owned', card: coin, safe: true, stored };
   const game = { state: 'idle', coins, ownedCards: [owned], canReceiveCard: canReceive,
@@ -25,7 +25,7 @@ function shop({ save = () => true, stored = false, coins = 20, canReceive = () =
   const saveGame = vi.fn(save);
   let uid = 0;
   const controller = createShopController({ UI, SDT, game, saveGame, bagCap: () => 16,
-    cardHTML: () => '', newUid: () => `new-${uid++}`, usedSlots: () => game.ownedCards.length, setCardPageOpen: vi.fn() });
+    cardHTML: renderCard, newUid: () => `new-${uid++}`, usedSlots: () => game.ownedCards.length, setCardPageOpen: vi.fn() });
   controller.openShop('one');
   return { acts, game, owned, host, UI, SDT, saveGame, controller };
 }
@@ -33,6 +33,24 @@ function shop({ save = () => true, stored = false, coins = 20, canReceive = () =
 afterEach(() => { document.body.replaceChildren(); vi.useRealTimers(); vi.restoreAllMocks(); configureShopRuntime({ openBag: undefined }); });
 
 describe('局内商店事务及旧页面动作', () => {
+  it('hides card value in both purchase views but keeps sale card value and purchase pricing', () => {
+    const renderCard = vi.fn((item, _size, options) => `<div class="hs-card">${options?.hideValue ? '' : '<span class="hsc-val">4</span>'}</div>`);
+    const { acts, host, game } = shop({ renderCard });
+    expect(host.querySelector('.shop-item-art .hsc-val')).toBeNull();
+    expect(renderCard).toHaveBeenCalledWith(card, undefined, { hideValue: true });
+    expect(host.querySelector('.shop-v14-price').textContent).toContain('5');
+    acts.shopInspect({ i: 0 });
+    expect(host.querySelector('.shop-detail-art .hs-card')).not.toBeNull();
+    expect(host.querySelector('.shop-detail-art .hsc-val')).toBeNull();
+    expect(host.querySelector('.shop-buy-price').textContent).toContain('5 币');
+    acts.buyCard({ i: 0 });
+    expect(game.coins).toBe(15);
+    expect(game.shopStock[0].price).toBe(5);
+    acts.openSell();
+    expect(host.querySelector('.sell-item .hsc-val')).not.toBeNull();
+    expect(renderCard).toHaveBeenCalledWith(coin, 'sm');
+    expect(host.querySelector('.sell-item-offer').textContent).toContain('+3 币');
+  });
   it('玩家已离开商店坐标时，仍连接着的旧购买动作也不能扣币或成交', () => {
     const { acts, game, saveGame } = shop();
     const buy = acts.buyCard, before = JSON.stringify(game.ownedCards);

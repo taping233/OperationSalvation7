@@ -1,7 +1,7 @@
 import { bindRewardFeedback } from './hub.reward-feedback.js';
 import { esc, escAttr } from '../core/shared.js';
 import { achievementMedalHTML } from '../ui/achievement-medals.js';
-import { achievementFiltersHTML, achievementProgressText } from './hub.archive.js';
+import { achievementFiltersHTML, createAchievementProgressReader } from './hub.archive.js';
 import { validateLastLampState } from '../home/story.last-lamp.js';
 import { collectionCardsHTML, bindCollectionCards } from './hub.collection-v4.js';
 
@@ -22,9 +22,9 @@ function rewardHTML(achievement, cardById, backById) {
   return [reward.wood ? `[[icon:wood]] 木材 ×${reward.wood}` : '', reward.rations ? `[[icon:bread]] 口粮 ×${reward.rations}` : '', reward.keys ? `[[icon:key]] 钥匙 ×${reward.keys}` : '', reward.card ? `[[icon:cards]] ${esc(card?.name || '稀有卡牌')}` : '', back ? `[[icon:cards]] 卡背 · ${esc(back.name)}` : ''].filter(Boolean).map(item => `<span>${item}</span>`).join('') || '<span>成就纪念</span>';
 }
 
-function medalDetailHTML(achievement, base, meta, cardById, backById) {
+function medalDetailHTML(achievement, progressText, meta, cardById, backById) {
   const unlocked = meta.isUnlocked(achievement), claimed = meta.isClaimed(achievement.id);
-  const progress = achievementProgressText(achievement.id, base);
+  const progress = progressText(achievement.id);
   return `<div class="av3-medal-art">${achievementMedalHTML(achievement.id, 'detail', 'painted')}</div><div class="av3-detail-copy"><span class="av3-eyebrow">${stateLabel(unlocked, claimed)}</span><h3>${esc(achievement.name)}</h3><p class="av3-condition">${esc(achievement.desc)}</p>${progress ? `<p class="av3-detail-progress"><span>当前进度</span><strong>${progress}</strong></p>` : ''}<div class="av3-detail-rewards"><span>奖励预览</span>${rewardHTML(achievement, cardById, backById)}</div>${claimed ? '<span class="av3-seal">[[icon:check]] 已领取</span>' : unlocked ? `<button type="button" class="mini-btn ok base-command base-command-primary av3-primary" data-act="claimAch" data-id="${escAttr(achievement.id)}">领取奖励</button>` : '<span class="av3-seal pending">待完成</span>'}</div>`;
 }
 
@@ -43,13 +43,14 @@ function achievementsHTML(base, meta, cards) {
   const cardById = new Map(cards.all().map(card => [card.id, card]));
   const backById = new Map((cards.CARD_BACKS || []).map(back => [back.id, back]));
   const entries = [...meta.ACHIEVEMENTS].sort((a, b) => rank(a) - rank(b));
+  const progressText = entries.length ? createAchievementProgressReader(base) : () => '';
   const selected = entries.find(item => item.id === medalId) || entries[0];
   medalId = selected?.id || '';
   const pendingN = entries.filter(item => meta.isUnlocked(item) && !meta.isClaimed(item.id)).length;
   return `${pendingN ? `<div class="av3-honours-heading"><span class="av3-pending-count">${pendingN} 项待领取</span></div>` : ''}<div class="av3-honours-layout"><section class="av3-cabinet">${achievementFiltersHTML(meta)}<div class="av3-medals">${entries.map(achievement => {
     const unlocked = meta.isUnlocked(achievement), claimed = meta.isClaimed(achievement.id);
-    return `<article class="ach-row av3-medal${unlocked ? ' done' : ''}${unlocked && !claimed ? ' claimable' : ''}${medalId === achievement.id ? ' selected' : ''}" data-status="${claimed ? 'done' : unlocked ? 'claimable' : 'progress'}" data-achievement="${escAttr(achievement.id)}" tabindex="-1"><button type="button" data-act="archiveV3Medal" data-id="${escAttr(achievement.id)}" aria-pressed="${medalId === achievement.id}" aria-label="${escAttr(achievement.name)}，${stateLabel(unlocked, claimed)}"><span class="av3-medal-thumb">${achievementMedalHTML(achievement.id, 'tile', 'painted')}</span><span class="av3-medal-label"><b>${esc(achievement.name)}</b><small>${achievementProgressText(achievement.id, base)}</small></span><span class="av3-medal-state">${stateLabel(unlocked, claimed)}</span></button><template class="av3-detail-source">${medalDetailHTML(achievement, base, meta, cardById, backById)}</template></article>`;
-  }).join('')}</div></section><aside class="av3-medal-detail" aria-live="polite">${selected ? medalDetailHTML(selected, base, meta, cardById, backById) : '<h3>暂无成就档案</h3>'}</aside></div>`;
+    return `<article class="ach-row av3-medal${unlocked ? ' done' : ''}${unlocked && !claimed ? ' claimable' : ''}${medalId === achievement.id ? ' selected' : ''}" data-status="${claimed ? 'done' : unlocked ? 'claimable' : 'progress'}" data-achievement="${escAttr(achievement.id)}" tabindex="-1"><button type="button" data-act="archiveV3Medal" data-id="${escAttr(achievement.id)}" aria-pressed="${medalId === achievement.id}" aria-label="${escAttr(achievement.name)}，${stateLabel(unlocked, claimed)}"><span class="av3-medal-thumb">${achievementMedalHTML(achievement.id, 'tile', 'painted')}</span><span class="av3-medal-label"><b>${esc(achievement.name)}</b><small>${progressText(achievement.id)}</small></span><span class="av3-medal-state">${stateLabel(unlocked, claimed)}</span></button><template class="av3-detail-source">${medalDetailHTML(achievement, progressText, meta, cardById, backById)}</template></article>`;
+  }).join('')}</div></section><aside class="av3-medal-detail" aria-live="polite">${selected ? medalDetailHTML(selected, progressText, meta, cardById, backById) : '<h3>暂无成就档案</h3>'}</aside></div>`;
 }
 
 function collectionHTML(meta) {
